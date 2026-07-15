@@ -18,6 +18,7 @@ DATABASE_URL = os.getenv("DATABASE_URL", "")
 CRAWL_UA = os.getenv("CRAWL_USER_AGENT", "NexusManuelBot/1.0")
 CRAWL_DELAY = float(os.getenv("CRAWL_DELAY_SECONDS", "2"))
 EMBEDDING_DIM = int(os.getenv("EMBEDDING_DIM", "1024"))
+STORAGE_MODE = os.getenv("MANUEL_STORAGE_MODE", "postgres").lower()
 
 
 def load_registry(active_only: bool = True) -> list[dict]:

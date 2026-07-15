@@ -1,5 +1,14 @@
 # LOT 0 — Contrat du chapitre 1SPE-SUITES
 
+## Reprise autonome — 15 juillet 2026
+
+- Schéma du contrat : PASS.
+- Gate SymPy : 102/102 objets vérifiés.
+- Gate de similarité : PASS en `MANUEL_STORAGE_MODE=fichiers` (aucun chunk source, production ex nihilo).
+- Couverture : complète ; PDF chapitre recompilé avec succès.
+- Correctif de fondation : le gate de similarité lit désormais les chunks JSON en mode fichiers et ne dépend plus de PostgreSQL.
+- Écart R4 corrigé : 11 métadonnées d'exercices utilisent maintenant les six codes de compétences autorisés par le schéma.
+
 ## Verdicts
 - Schema `contrat_chapitre.schema.json` : PASS
 - 7 capacites (C1-C7) alignees sur le referentiel
