@@ -1,0 +1,37 @@
+% META: {"id": "1NSI-TC-M4", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "methode", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M4}{Chercher dans un dictionnaire sans erreur}
+\textbf{Quand l'utiliser ?} Quand tu veux accéder à une valeur dans un dictionnaire sans risquer une \lstinline{KeyError} si la clé est absente.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item \textbf{Méthode 1 — tester avec \lstinline{in}} : vérifie si la clé existe avant d'y accéder.
+  \item \textbf{Méthode 2 — utiliser \lstinline{.get()}} : appelle \lstinline{dico.get(cle, valeur_par_defaut)} qui renvoie la valeur par défaut si la clé est absente (au lieu de provoquer une erreur).
+  \item Choisis la méthode adaptée : \lstinline{in} quand tu dois exécuter un bloc particulier selon la présence de la clé ; \lstinline{.get()} quand tu veux simplement récupérer une valeur avec un repli.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+inventaire = {"pommes": 5, "bananes": 3}
+
+# Methode 1 : tester avec in
+if "cerises" in inventaire:
+    print(inventaire["cerises"])
+else:
+    print("Pas de cerises en stock")
+
+# Methode 2 : utiliser .get()
+qte = inventaire.get("cerises", 0)
+print(qte)  # 0 (valeur par defaut)
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Accéder directement avec \lstinline{dico[cle]} sans vérification : si la clé est absente, Python lève une \lstinline{KeyError}.
+  \item Oublier le second argument de \lstinline{.get()} : sans valeur par défaut, \lstinline{.get()} renvoie \lstinline{None} (pas une erreur, mais potentiellement inattendu).
+  \item Confondre \lstinline{in} sur un dictionnaire (cherche parmi les \emph{clés}) et \lstinline{in} sur une liste (cherche parmi les \emph{éléments}).
+\end{itemize}
+
+\textbf{Vérifier :} teste ton code avec une clé présente \emph{et} une clé absente pour confirmer qu'aucune erreur ne se produit.
+
+\textbf{S'entraîner :} exercices C4.
+\end{fichemethode}

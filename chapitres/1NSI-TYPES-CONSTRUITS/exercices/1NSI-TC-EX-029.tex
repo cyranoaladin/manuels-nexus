@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TC-EX-029", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "parcours": 2, "competences": ["programmer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def maximum_grille(grille):
+%     maxi = grille[0][0]
+%     ligne_max = 0
+%     col_max = 0
+%     for i in range(len(grille)):
+%         for j in range(len(grille[i])):
+%             if grille[i][j] > maxi:
+%                 maxi = grille[i][j]
+%                 ligne_max = i
+%                 col_max = j
+%     return (ligne_max, col_max, maxi)
+% assert maximum_grille([[1, 5], [9, 3]]) == (1, 0, 9)
+% assert maximum_grille([[7]]) == (0, 0, 7)
+% assert maximum_grille([[1, 2, 3], [4, 5, 6]]) == (1, 2, 6)
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-029}{2}{10}
+On représente une carte de températures par une grille (liste de listes).
+
+Écrire une fonction \lstinline{maximum_grille(grille)} qui renvoie un tuple
+\lstinline{(ligne, colonne, valeur)} correspondant à la position et la valeur du
+maximum dans la grille.
+
+\textbf{Exemple :}
+\begin{console}
+>>> maximum_grille([[1, 5], [9, 3]])
+(1, 0, 9)
+\end{console}
+\end{exercice}

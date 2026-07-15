@@ -1,0 +1,42 @@
+% META: {"id": "1NSI-TC-M5", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "methode", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M5}{Copier une liste sans alias}
+\textbf{Quand l'utiliser ?} Quand tu veux créer une copie indépendante d'une liste, de sorte que modifier la copie ne modifie pas l'original.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Identifie le problème : \lstinline{copie = originale} ne crée \textbf{pas} une copie, mais un \textbf{alias} (les deux noms désignent le même objet en mémoire).
+  \item Pour obtenir une vraie copie, utilise l'une de ces méthodes :
+    \begin{itemize}
+      \item \lstinline{copie = list(originale)}
+      \item \lstinline{copie = originale[:]} (tranche complète)
+    \end{itemize}
+  \item Vérifie que les deux listes sont bien distinctes en modifiant la copie et en affichant l'original.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+originale = [1, 2, 3]
+
+# Alias : les deux variables pointent vers le meme objet
+alias = originale
+alias.append(4)
+print(originale)  # [1, 2, 3, 4] -- modifiee aussi !
+
+# Copie independante
+originale = [1, 2, 3]
+copie = list(originale)
+copie.append(4)
+print(originale)  # [1, 2, 3] -- inchangee
+print(copie)      # [1, 2, 3, 4]
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Croire que \lstinline{=} copie une liste : c'est l'erreur la plus fréquente. L'affectation crée un alias, pas une copie.
+  \item Attention aux listes imbriquées : \lstinline{list()} et \lstinline{[:]} ne font qu'une copie \emph{superficielle}. Si la liste contient d'autres listes, les sous-listes restent partagées.
+\end{itemize}
+
+\textbf{Vérifier :} après la copie, teste \lstinline{copie is originale}. Si le résultat est \lstinline{False}, tu as bien deux objets distincts.
+
+\textbf{S'entraîner :} exercices C5.
+\end{fichemethode}

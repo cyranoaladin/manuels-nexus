@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TC-EX-048", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "parcours": 1, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% def ajouter(tab, val):
+%     tab.append(val)
+% scores = [10, 20]
+% ajouter(scores, 30)
+% print(scores)
+% EXPECTED
+% [10, 20, 30]
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-048}{1}{8}
+On considère le programme suivant :
+\begin{python}
+def ajouter(tab, val):
+    tab.append(val)
+
+scores = [10, 20]
+ajouter(scores, 30)
+print(scores)
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, l'affichage produit.
+  \item La fonction \lstinline{ajouter} ne contient pas de \lstinline{return}.
+        Comment se fait-il que la liste \lstinline{scores} soit modifiée ?
+  \item On parle d'\textbf{effet de bord}. Expliquer ce terme.
+\end{enumerate}
+\end{exercice}

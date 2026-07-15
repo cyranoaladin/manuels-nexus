@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-TC-EX-002", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "parcours": 1, "competences": ["analyser"], "duree_min": 5, "mode_creation": "transposition", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_td_types_construits.md"], "status": "needs_review"}
+% BEGIN-TRACE
+% station = ("Tunis", 36.8, 10.2)
+% print(type(station))
+% print(station[0])
+% print(len(station))
+% EXPECTED
+% <class 'tuple'>
+% Tunis
+% 3
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-002}{1}{5}
+On donne le tuple suivant :
+\begin{python}
+station = ("Tunis", 36.8, 10.2)
+\end{python}
+\begin{enumerate}
+  \item Donner le type de \lstinline{station} et le nombre de ses éléments.
+  \item Donner la valeur de \lstinline{station[0]} et de \lstinline{station[2]}.
+  \item Peut-on écrire \lstinline{station[1] = 37.0} ? Justifier.
+\end{enumerate}
+\end{exercice}

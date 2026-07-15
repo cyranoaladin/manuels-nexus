@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-TC-EX-035", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 1, "competences": ["analyser"], "duree_min": 5, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% eleve = {"nom": "Alice", "classe": "1NSI", "moyenne": 14.5}
+% print(eleve["nom"])
+% print(eleve["moyenne"])
+% print(len(eleve))
+% EXPECTED
+% Alice
+% 14.5
+% 3
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-035}{1}{5}
+On donne le dictionnaire suivant :
+\begin{python}
+eleve = {"nom": "Alice", "classe": "1NSI", "moyenne": 14.5}
+print(eleve["nom"])
+print(eleve["moyenne"])
+print(len(eleve))
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, les trois affichages.
+  \item Quelles sont les clés de ce dictionnaire ? Quelles sont les valeurs ?
+  \item Écrire l'instruction qui ajoute la clé \lstinline{"email"} avec la valeur
+        \lstinline{"alice@lycee.fr"}.
+\end{enumerate}
+\end{exercice}

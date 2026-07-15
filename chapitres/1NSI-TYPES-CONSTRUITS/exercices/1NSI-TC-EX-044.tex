@@ -1,0 +1,36 @@
+% META: {"id": "1NSI-TC-EX-044", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 3, "competences": ["programmer", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def classement_tournoi(matchs):
+%     points = {}
+%     for equipe1, score1, equipe2, score2 in matchs:
+%         if equipe1 not in points:
+%             points[equipe1] = 0
+%         if equipe2 not in points:
+%             points[equipe2] = 0
+%         if score1 > score2:
+%             points[equipe1] = points[equipe1] + 3
+%         elif score1 < score2:
+%             points[equipe2] = points[equipe2] + 3
+%         else:
+%             points[equipe1] = points[equipe1] + 1
+%             points[equipe2] = points[equipe2] + 1
+%     return points
+% matchs = [("A", 2, "B", 1), ("A", 0, "C", 0), ("B", 3, "C", 1)]
+% p = classement_tournoi(matchs)
+% assert p == {"A": 4, "B": 3, "C": 1}
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-044}{3}{15}
+On modélise un tournoi d'e-sport par une liste de tuples
+\lstinline{(equipe1, score1, equipe2, score2)}.
+
+Écrire une fonction \lstinline{classement_tournoi(matchs)} qui renvoie un
+dictionnaire associant à chaque équipe son total de points : 3 points pour une
+victoire, 1 point pour un match nul, 0 pour une défaite.
+
+\textbf{Exemple :}
+\begin{console}
+>>> matchs = [("A", 2, "B", 1), ("A", 0, "C", 0), ("B", 3, "C", 1)]
+>>> classement_tournoi(matchs)
+{'A': 4, 'B': 3, 'C': 1}
+\end{console}
+\end{exercice}

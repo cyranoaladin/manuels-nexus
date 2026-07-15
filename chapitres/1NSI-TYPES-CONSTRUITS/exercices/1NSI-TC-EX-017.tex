@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-TC-EX-017", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "parcours": 1, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% notes = [12, 8, 15, 6, 14, 9]
+% tab = [n for n in notes if n >= 10]
+% print(tab)
+% doubles = [n * 2 for n in [1, 2, 3]]
+% print(doubles)
+% EXPECTED
+% [12, 15, 14]
+% [2, 4, 6]
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-017}{1}{8}
+On considère le programme suivant :
+\begin{python}
+notes = [12, 8, 15, 6, 14, 9]
+tab = [n for n in notes if n >= 10]
+print(tab)
+doubles = [n * 2 for n in [1, 2, 3]]
+print(doubles)
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, les deux affichages.
+  \item Réécrire la construction de \lstinline{tab} en utilisant une boucle
+        \lstinline{for} et \lstinline{append} (sans compréhension de liste).
+\end{enumerate}
+\end{exercice}

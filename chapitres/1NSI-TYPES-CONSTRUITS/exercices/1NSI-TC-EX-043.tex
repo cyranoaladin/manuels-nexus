@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-TC-EX-043", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 2, "competences": ["programmer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def inverser_dico(d):
+%     resultat = {}
+%     for cle, valeur in d.items():
+%         resultat[valeur] = cle
+%     return resultat
+% assert inverser_dico({"a": 1, "b": 2, "c": 3}) == {1: "a", 2: "b", 3: "c"}
+% assert inverser_dico({}) == {}
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-043}{2}{12}
+Écrire une fonction \lstinline{inverser_dico(d)} qui prend un dictionnaire et
+renvoie un nouveau dictionnaire où les clés et les valeurs sont échangées.
+
+On suppose que toutes les valeurs du dictionnaire d'entrée sont distinctes et
+peuvent servir de clés.
+
+\textbf{Exemple :}
+\begin{console}
+>>> inverser_dico({"a": 1, "b": 2, "c": 3})
+{1: 'a', 2: 'b', 3: 'c'}
+\end{console}
+\end{exercice}

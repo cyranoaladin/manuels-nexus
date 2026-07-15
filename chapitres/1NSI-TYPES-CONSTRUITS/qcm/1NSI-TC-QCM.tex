@@ -1,0 +1,175 @@
+% META: {"id": "1NSI-TC-QCM", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "qcm", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C3", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\section*{QCM --- Types construits}
+\textit{Pour chaque question, une seule réponse est correcte.
+Si tu hésites, relis la fiche méthode indiquée.}
+
+\bigskip
+
+% --- C1 : TUPLES ---
+
+\textbf{Q1.} (C1) Que renvoie \lstinline{type((3, 5))} ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{<class 'list'>}
+        \quad\textit{Si tu as répondu A : tu confonds tuple (parenthèses) et liste (crochets) $\to$ M1.}
+  \item \lstinline{<class 'tuple'>} \quad $\checkmark$
+  \item \lstinline{<class 'int'>}
+        \quad\textit{Si tu as répondu C : les parenthèses ne changent pas le type d'un entier seul,
+        mais ici il y a une virgule $\to$ relis D1.}
+\end{enumerate}
+
+\textbf{Q2.} (C1) Que se passe-t-il si on exécute \lstinline{t = (1, 2); t[0] = 5} ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{t} vaut \lstinline{(5, 2)}
+        \quad\textit{Si A : tu traites le tuple comme une liste. Un tuple est non mutable $\to$ EF1.}
+  \item Une erreur \lstinline{TypeError} \quad $\checkmark$
+  \item \lstinline{t} vaut \lstinline{(1, 2, 5)}
+        \quad\textit{Si C : \lstinline{t[0] = 5} ne fait pas un ajout $\to$ relis D1.}
+\end{enumerate}
+
+\textbf{Q3.} (C1) \lstinline{a, b = (10, 20)}. Quelle est la valeur de \lstinline{b} ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{10}
+        \quad\textit{Si A : le déballage associe le premier élément à \lstinline{a} $\to$ D3.}
+  \item \lstinline{(10, 20)}
+        \quad\textit{Si B : le déballage sépare les éléments, il ne copie pas le tuple $\to$ D3.}
+  \item \lstinline{20} \quad $\checkmark$
+\end{enumerate}
+
+% --- C2 : TABLEAUX ---
+
+\textbf{Q4.} (C2) \lstinline{t = [3, 1, 4]; t.append(1); print(len(t))}. Qu'affiche ce programme ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{3}
+        \quad\textit{Si A : \lstinline{append} ajoute un élément, la longueur augmente $\to$ D5.}
+  \item \lstinline{4} \quad $\checkmark$
+  \item \lstinline{5}
+        \quad\textit{Si C : un seul élément est ajouté $\to$ relis D5.}
+\end{enumerate}
+
+\textbf{Q5.} (C2) Quelle expression construit la liste \lstinline{[0, 2, 4, 6, 8]} ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[x for x in range(10) if x % 2 == 0]} \quad $\checkmark$
+  \item \lstinline{[x * 2 for x in range(10)]}
+        \quad\textit{Si B : cette expression produit 10 éléments, pas 5 $\to$ D6.}
+  \item \lstinline{[x for x in range(8)]}
+        \quad\textit{Si C : aucun filtre pair, et 8 est exclu $\to$ D6.}
+\end{enumerate}
+
+\textbf{Q6.} (C2) \lstinline{t = [10, 20, 30]; print(t[3])}. Qu'obtient-on ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{30}
+        \quad\textit{Si A : l'indice 3 n'existe pas dans un tableau de 3 éléments (indices 0, 1, 2) $\to$ EF indice.}
+  \item \lstinline{IndexError} \quad $\checkmark$
+  \item \lstinline{None}
+        \quad\textit{Si C : Python ne renvoie pas None pour un indice invalide, il lève une exception.}
+\end{enumerate}
+
+% --- C3 : GRILLES ---
+
+\textbf{Q7.} (C3) \lstinline{g = [[1, 2], [3, 4]]; print(g[1][0])}. Qu'affiche ce programme ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{2}
+        \quad\textit{Si A : tu confonds ligne et colonne. \lstinline{g[1]} est la 2e ligne $\to$ D7.}
+  \item \lstinline{3} \quad $\checkmark$
+  \item \lstinline{1}
+        \quad\textit{Si C : \lstinline{g[1]} est \lstinline{[3, 4]}, pas \lstinline{[1, 2]} $\to$ D7.}
+\end{enumerate}
+
+\textbf{Q8.} (C3) Quelle expression crée une grille 3$\times$2 de zéros sans alias ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[[0, 0]] * 3}
+        \quad\textit{Si A : l'opérateur \lstinline{*} crée des alias de la même ligne $\to$ D8.}
+  \item \lstinline{[[0] * 2 for _ in range(3)]} \quad $\checkmark$
+  \item \lstinline{[[0 for _ in range(3)] for _ in range(2)]}
+        \quad\textit{Si C : cette expression crée une grille 2$\times$3, pas 3$\times$2.}
+\end{enumerate}
+
+\textbf{Q9.} (C3) Combien de lignes et de colonnes a la grille
+\lstinline{g = [[5, 6, 7], [8, 9, 10]]} ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item 3 lignes, 2 colonnes
+        \quad\textit{Si A : chaque sous-liste est une ligne. Il y en a 2 $\to$ D7.}
+  \item 2 lignes, 3 colonnes \quad $\checkmark$
+  \item 6 lignes, 1 colonne
+\end{enumerate}
+
+% --- C4 : DICTIONNAIRES ---
+
+\textbf{Q10.} (C4) \lstinline|d = {"a": 1, "b": 2}; print(d["c"])|. Qu'obtient-on ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{None}
+        \quad\textit{Si A : Python ne renvoie pas None mais lève une exception $\to$ EF3, D10.}
+  \item \lstinline{0}
+  \item \lstinline{KeyError} \quad $\checkmark$
+\end{enumerate}
+
+\textbf{Q11.} (C4) Comment ajouter la clé \lstinline{"c"} avec la valeur 3 à un
+dictionnaire \lstinline{d} ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{d.append("c", 3)}
+        \quad\textit{Si A : \lstinline{append} est une méthode de liste, pas de dictionnaire $\to$ D10.}
+  \item \lstinline|d["c"] = 3| \quad $\checkmark$
+  \item \lstinline{d.add("c": 3)}
+\end{enumerate}
+
+\textbf{Q12.} (C4) Quelle boucle parcourt les clés ET les valeurs d'un dictionnaire \lstinline{d} ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{for k in d:}
+        \quad\textit{Si A : cette boucle ne donne que les clés $\to$ codereference section 4.}
+  \item \lstinline{for k, v in d.items():} \quad $\checkmark$
+  \item \lstinline{for v in d.values():}
+        \quad\textit{Si C : cette boucle ne donne que les valeurs.}
+\end{enumerate}
+
+% --- C5 : MUTABILITE ---
+
+\textbf{Q13.} (C5) \lstinline{a = [1, 2]; b = a; b.append(3); print(a)}. Qu'affiche ce programme ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[1, 2]}
+        \quad\textit{Si A : \lstinline{b = a} crée un alias, pas une copie $\to$ D11, EF copie.}
+  \item \lstinline{[1, 2, 3]} \quad $\checkmark$
+  \item Une erreur
+\end{enumerate}
+
+\textbf{Q14.} (C5) Comment obtenir une copie indépendante d'une liste \lstinline{t} ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{copie = t}
+        \quad\textit{Si A : ceci crée un alias, pas une copie $\to$ D11, D12.}
+  \item \lstinline{copie = list(t)} \quad $\checkmark$
+  \item \lstinline{copie = t * 1}
+        \quad\textit{Si C : ceci crée bien une copie superficielle, mais \lstinline{list(t)} est plus explicite.}
+\end{enumerate}
+
+\textbf{Q15.} (C5) \lstinline{g = [[1], [2]]; h = list(g); h[0].append(9); print(g[0])}.
+Qu'affiche ce programme ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[1]}
+        \quad\textit{Si A : la copie superficielle ne copie pas les sous-listes $\to$ EF4.}
+  \item \lstinline{[1, 9]} \quad $\checkmark$
+  \item Une erreur
+\end{enumerate}
+
+\textbf{Q16.} (C5) Parmi ces types, lesquels sont mutables ?
+
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{tuple} et \lstinline{str}
+        \quad\textit{Si A : tuple et str sont non mutables $\to$ D11.}
+  \item \lstinline{list} et \lstinline{dict} \quad $\checkmark$
+  \item \lstinline{int} et \lstinline{list}
+        \quad\textit{Si C : \lstinline{int} est non mutable $\to$ D11.}
+\end{enumerate}

@@ -1,0 +1,19 @@
+% META: {"id": "1NSI-TC-EX-003", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "transposition", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_tp_types_construits.md"], "status": "needs_review"}
+% BEGIN-VERIFY
+% def distance(a, b):
+%     return ((a[0]-b[0])**2 + (a[1]-b[1])**2) ** 0.5
+% assert abs(distance((0,0), (3,4)) - 5.0) < 1e-9
+% assert distance((1,1), (1,1)) == 0.0
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-003}{1}{8}
+Écrire une fonction \lstinline{distance(a, b)} qui prend deux tuples de coordonnées
+\lstinline{(x, y)} et renvoie la distance euclidienne entre les deux points.
+
+\textbf{Exemples :}
+\begin{console}
+>>> distance((0, 0), (3, 4))
+5.0
+>>> distance((1, 1), (1, 1))
+0.0
+\end{console}
+\end{exercice}

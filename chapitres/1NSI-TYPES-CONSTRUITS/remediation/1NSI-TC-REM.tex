@@ -1,0 +1,77 @@
+% META: {"id": "1NSI-TC-REM", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "remediation", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C3", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "transposition", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_remediation_types_construits.md"], "status": "needs_review"}
+\section*{Remédiation --- Types construits}
+
+\subsection*{R1 --- Je confonds tuple et liste (C1)}
+
+\textbf{Rappel :} un tuple est entouré de parenthèses \lstinline{()} et est non mutable ;
+une liste est entourée de crochets \lstinline{[]} et est mutable.
+
+\begin{exercice}{1NSI-TC-REM-R1}{1}{5}
+Pour chaque ligne, indique si la variable est un tuple ou une liste, et si on peut modifier
+son contenu :
+\begin{python}
+a = (1, 2, 3)
+b = [1, 2, 3]
+c = ("hello",)
+d = []
+\end{python}
+\end{exercice}
+
+\subsection*{R2 --- Je ne sais pas parcourir un tableau (C2)}
+
+\textbf{Rappel :} pour parcourir les éléments, écris \lstinline{for element in tableau}.
+Pour parcourir les indices, écris \lstinline{for i in range(len(tableau))}.
+
+\begin{exercice}{1NSI-TC-REM-R2}{1}{8}
+Écris une fonction \lstinline{somme(tableau)} qui calcule la somme des éléments d'un
+tableau de nombres, \textbf{sans utiliser la fonction \lstinline{sum}}.
+\begin{console}
+>>> somme([3, 7, 2])
+12
+\end{console}
+\end{exercice}
+
+\subsection*{R3 --- Je confonds lignes et colonnes dans une grille (C3)}
+
+\textbf{Rappel :} dans \lstinline{grille[i][j]}, \lstinline{i} est le numéro de ligne
+et \lstinline{j} le numéro de colonne.
+
+\begin{exercice}{1NSI-TC-REM-R3}{1}{5}
+On donne \lstinline{g = [[10, 20, 30], [40, 50, 60]]}. Donne la valeur de :
+\begin{enumerate}
+  \item \lstinline{g[0][2]}
+  \item \lstinline{g[1][0]}
+  \item \lstinline{len(g)} et \lstinline{len(g[0])}
+\end{enumerate}
+\end{exercice}
+
+\subsection*{R4 --- J'obtiens KeyError avec un dictionnaire (C4)}
+
+\textbf{Rappel :} avant d'accéder à une clé, vérifie sa présence avec \lstinline{if cle in dico}
+ou utilise \lstinline{dico.get(cle, valeur_par_defaut)}.
+
+\begin{exercice}{1NSI-TC-REM-R4}{1}{5}
+Corrige le programme suivant pour qu'il ne provoque pas d'erreur si la clé
+\lstinline{"age"} est absente :
+\begin{python}
+personne = {"nom": "Ali"}
+print(personne["age"])
+\end{python}
+\end{exercice}
+
+\subsection*{R5 --- Je ne comprends pas pourquoi ma liste originale est modifiée (C5)}
+
+\textbf{Rappel :} \lstinline{b = a} crée un alias (même objet en mémoire).
+Pour une copie indépendante, utilise \lstinline{b = list(a)}.
+
+\begin{exercice}{1NSI-TC-REM-R5}{1}{8}
+Le programme ci-dessous doit trier une copie sans modifier l'original. Corrige-le :
+\begin{python}
+original = [5, 2, 8, 1]
+copie = original
+copie.sort()
+print("Original :", original)
+print("Trie :", copie)
+\end{python}
+\textit{Résultat attendu :} l'original reste \lstinline{[5, 2, 8, 1]}.
+\end{exercice}

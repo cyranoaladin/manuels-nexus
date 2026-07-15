@@ -1,0 +1,142 @@
+% META: {"id": "1NSI-TC-EVAL-A", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "evaluation", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C3", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "adaptation", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md"], "duree_min": 55, "status": "needs_review"}
+\section*{Évaluation A --- Types construits}
+\textit{Durée : 55 minutes. Calculatrice interdite. Documents interdits.}
+
+\baremeIndicatif{Ex. 1 : 4 pts (analyser) ; Ex. 2 : 6 pts (programmer) ;
+Ex. 3 : 5 pts (analyser, programmer) ; Ex. 4 : 5 pts (programmer)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Lecture de programme} \hfill (4 points)
+
+On considère le programme suivant :
+\begin{python}
+joueurs = [
+    {"pseudo": "Ace", "score": 150},
+    {"pseudo": "Bob", "score": 200},
+    {"pseudo": "Cat", "score": 180},
+]
+meilleur = joueurs[0]
+for j in joueurs:
+    if j["score"] > meilleur["score"]:
+        meilleur = j
+print(meilleur["pseudo"])
+print(meilleur["score"])
+\end{python}
+
+% BEGIN-TRACE
+% joueurs = [{"pseudo": "Ace", "score": 150}, {"pseudo": "Bob", "score": 200}, {"pseudo": "Cat", "score": 180}]
+% meilleur = joueurs[0]
+% for j in joueurs:
+%     if j["score"] > meilleur["score"]:
+%         meilleur = j
+% print(meilleur["pseudo"])
+% print(meilleur["score"])
+% EXPECTED
+% Bob
+% 200
+% END-TRACE
+
+\begin{enumerate}
+  \item Donner, sans exécuter le programme, les deux valeurs affichées.
+  \item Expliquer en une phrase le rôle de ce programme.
+  \item Si on ajoute \lstinline{meilleur["score"] = 0} après la boucle,
+        quelle est la valeur de \lstinline{joueurs[1]["score"]} ? Justifier.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Programmation avec des tableaux} \hfill (6 points)
+
+Un tournoi de e-sport enregistre les scores de chaque manche dans un tableau :
+
+\begin{python}
+scores = [150, 200, 180, 210, 170]
+\end{python}
+
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{au_dessus(scores, seuil)} qui renvoie le tableau
+        des scores strictement supérieurs au seuil.
+  \item Écrire une fonction \lstinline{moyenne(scores)} qui renvoie la moyenne des scores.
+        La fonction doit lever \lstinline{ValueError} si le tableau est vide.
+  \item Écrire une fonction \lstinline{classement(scores)} qui renvoie le tableau des
+        tuples \lstinline{(rang, score)} triés par score décroissant.
+        Exemple : \lstinline{classement([150, 200, 180])} renvoie
+        \lstinline{[(1, 200), (2, 180), (3, 150)]}.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def au_dessus(scores, seuil):
+%     return [s for s in scores if s > seuil]
+% assert au_dessus([150, 200, 180], 170) == [200, 180]
+% assert au_dessus([100], 200) == []
+% def moyenne(scores):
+%     if not scores: raise ValueError
+%     return sum(scores) / len(scores)
+% assert moyenne([150, 200, 180]) == 510 / 3
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 3} --- \textit{Grille et pixels} \hfill (5 points)
+
+On représente une image en niveaux de gris par une grille (tableau de tableaux) :
+\begin{python}
+image = [
+    [100, 200, 100],
+    [200, 50,  200],
+    [100, 200, 100],
+]
+\end{python}
+
+\begin{enumerate}
+  \item Combien de lignes et de colonnes contient cette image ?
+  \item Quelle est la valeur du pixel central ? Donner l'expression Python.
+  \item Écrire une fonction \lstinline{nb_sombres(image, seuil)} qui compte le nombre
+        de pixels dont la valeur est inférieure ou égale au seuil.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def nb_sombres(image, seuil):
+%     c = 0
+%     for ligne in image:
+%         for pixel in ligne:
+%             if pixel <= seuil:
+%                 c += 1
+%     return c
+% image = [[100, 200, 100], [200, 50, 200], [100, 200, 100]]
+% assert nb_sombres(image, 100) == 5
+% assert nb_sombres(image, 50) == 1
+% assert nb_sombres(image, 0) == 0
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 4} --- \textit{Dictionnaire et mutabilité} \hfill (5 points)
+
+On gère un carnet de contacts :
+\begin{python}
+contacts = {"Ali": "55123456", "Sara": "55234567"}
+\end{python}
+
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{chercher(contacts, nom)} qui renvoie le numéro
+        du contact ou \lstinline{"Inconnu"} si le nom n'est pas dans le carnet.
+  \item Écrire une fonction \lstinline{ajouter(contacts, nom, numero)} qui ajoute un
+        contact au carnet. Préciser : cette fonction modifie-t-elle le dictionnaire
+        passé en argument ?
+  \item On exécute :
+\begin{python}
+carnet1 = {"Ali": "55123456"}
+carnet2 = carnet1
+carnet2["Sara"] = "55234567"
+\end{python}
+        Quelle est la valeur de \lstinline{carnet1} après ces trois lignes ? Justifier.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def chercher(contacts, nom):
+%     return contacts.get(nom, "Inconnu")
+% assert chercher({"Ali": "55123456"}, "Ali") == "55123456"
+% assert chercher({"Ali": "55123456"}, "Bob") == "Inconnu"
+% END-VERIFY

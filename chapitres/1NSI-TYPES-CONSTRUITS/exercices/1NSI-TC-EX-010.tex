@@ -1,0 +1,35 @@
+% META: {"id": "1NSI-TC-EX-010", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% def swap(t):
+%     return (t[1], t[0])
+% a = (3, 7)
+% b = swap(a)
+% print(a)
+% print(b)
+% c = (1, 2, 3)
+% print(swap(c))
+% EXPECTED
+% (3, 7)
+% (7, 3)
+% (2, 1)
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-010}{2}{8}
+On considère le programme suivant :
+\begin{python}
+def swap(t):
+    return (t[1], t[0])
+
+a = (3, 7)
+b = swap(a)
+print(a)
+print(b)
+c = (1, 2, 3)
+print(swap(c))
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, les trois affichages produits.
+  \item Le tuple \lstinline{a} est-il modifié par l'appel \lstinline{swap(a)} ? Justifier.
+  \item Que se passe-t-il si on appelle \lstinline{swap(c)} avec \lstinline{c = (1, 2, 3)} ?
+        Le troisième élément est-il perdu ?
+\end{enumerate}
+\end{exercice}

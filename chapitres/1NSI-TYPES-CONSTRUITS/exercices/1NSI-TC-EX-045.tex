@@ -1,0 +1,37 @@
+% META: {"id": "1NSI-TC-EX-045", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 3, "competences": ["programmer", "modeliser"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def stations_par_region(stations):
+%     regions = {}
+%     for s in stations:
+%         r = s["region"]
+%         if r not in regions:
+%             regions[r] = []
+%         regions[r].append(s["nom"])
+%     return regions
+% stations = [{"nom": "Lyon", "region": "ARA", "temp": 30},
+%              {"nom": "Paris", "region": "IDF", "temp": 28},
+%              {"nom": "Grenoble", "region": "ARA", "temp": 27}]
+% res = stations_par_region(stations)
+% assert res == {"ARA": ["Lyon", "Grenoble"], "IDF": ["Paris"]}
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-045}{3}{20}
+On dispose d'une liste de dictionnaires représentant des stations météo, chacun
+ayant les clés \lstinline{"nom"}, \lstinline{"region"} et \lstinline{"temp"}.
+
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{stations_par_region(stations)} qui renvoie un
+        dictionnaire dont les clés sont les régions et les valeurs sont les listes
+        des noms de stations dans chaque région.
+  \item Compléter par une fonction \lstinline{region_la_plus_chaude(stations)} qui
+        renvoie le nom de la région ayant la température moyenne la plus élevée.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{console}
+>>> stations = [{"nom": "Lyon", "region": "ARA", "temp": 30},
+...             {"nom": "Paris", "region": "IDF", "temp": 28},
+...             {"nom": "Grenoble", "region": "ARA", "temp": 27}]
+>>> stations_par_region(stations)
+{'ARA': ['Lyon', 'Grenoble'], 'IDF': ['Paris']}
+\end{console}
+\end{exercice}

@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-TC-EX-005", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "parcours": 1, "competences": ["analyser"], "duree_min": 5, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% releves = [("Paris", 32.5), ("Lyon", 35.1), ("Lille", 28.7)]
+% for ville, temp in releves:
+%     if temp > 30:
+%         print(ville)
+% EXPECTED
+% Paris
+% Lyon
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-005}{1}{5}
+On donne la liste de tuples suivante, contenant des relevés de température :
+\begin{python}
+releves = [("Paris", 32.5), ("Lyon", 35.1), ("Lille", 28.7)]
+for ville, temp in releves:
+    if temp > 30:
+        print(ville)
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter le programme, ce qu'affiche ce code.
+  \item Quel est le type de chaque élément de la liste \lstinline{releves} ?
+  \item Donner la valeur de \lstinline{releves[1][0]}.
+\end{enumerate}
+\end{exercice}

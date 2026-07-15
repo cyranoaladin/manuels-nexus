@@ -204,9 +204,9 @@
 \newenvironment{exercice}[3]{%
   \refstepcounter{exo}\par\medskip\noindent
   \textbf{\textcolor{nxBleu}{Exercice \theexo}}\quad
-  \ifnum#2=1\parcoursUn\fi
-  \ifnum#2=2\parcoursDeux\fi
-  \ifnum#2=3\parcoursTrois\fi
+  \ifnum#2=1\relax\parcoursUn\fi
+  \ifnum#2=2\relax\parcoursDeux\fi
+  \ifnum#2=3\relax\parcoursTrois\fi
   \quad{\footnotesize\texttt{#1} --- #3~min}\par\nopagebreak\smallskip
 }{\par\medskip}
 

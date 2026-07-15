@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-TC-EX-049", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "parcours": 1, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% t = (1, 2, 3)
+% try:
+%     t[0] = 10
+% except TypeError:
+%     print("erreur")
+% print(t)
+% EXPECTED
+% erreur
+% (1, 2, 3)
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-049}{1}{8}
+On considère le programme suivant :
+\begin{python}
+t = (1, 2, 3)
+t[0] = 10
+print(t)
+\end{python}
+\begin{enumerate}
+  \item Que se passe-t-il lorsqu'on exécute ce programme ? Quelle erreur obtient-on ?
+  \item Expliquer pourquoi on dit qu'un tuple est \textbf{immuable} (non mutable).
+  \item Donner un avantage d'utiliser un tuple plutôt qu'une liste quand on
+        ne souhaite pas modifier les données.
+\end{enumerate}
+\end{exercice}

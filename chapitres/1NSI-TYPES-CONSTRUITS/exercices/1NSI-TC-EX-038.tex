@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-TC-EX-038", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 1, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% station = {"nom": "Paris", "temp": 25, "vent": 10}
+% for cle in station:
+%     print(cle, ":", station[cle])
+% EXPECTED
+% nom : Paris
+% temp : 25
+% vent : 10
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-038}{1}{8}
+On considère le programme suivant :
+\begin{python}
+station = {"nom": "Paris", "temp": 25, "vent": 10}
+for cle in station:
+    print(cle, ":", station[cle])
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, les affichages produits.
+  \item Que parcourt la boucle \lstinline{for cle in station} : les clés, les valeurs,
+        ou les deux ?
+  \item Réécrire la boucle en utilisant \lstinline{station.items()}.
+\end{enumerate}
+\end{exercice}

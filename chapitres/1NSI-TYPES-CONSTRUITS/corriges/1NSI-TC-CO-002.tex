@@ -1,0 +1,15 @@
+% META: {"id": "1NSI-TC-CO-002", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-TC-EX-002}
+\begin{enumerate}
+  \item \lstinline{type(station)} renvoie \lstinline{<class 'tuple'>}.
+        Le tuple contient 3 éléments, donc \lstinline{len(station)} vaut \lstinline{3}.
+
+  \item \lstinline{station[0]} vaut \lstinline{"Tunis"} (premier élément, indice 0).
+        \lstinline{station[2]} vaut \lstinline{10.2} (troisième élément, indice 2).
+
+  \item Non. Un tuple est non mutable : toute tentative de modification provoque
+        \lstinline{TypeError: 'tuple' object does not support item assignment}.
+        Si l'on a besoin de modifier une valeur, il faut construire un nouveau tuple
+        ou utiliser une liste.
+\end{enumerate}
+\end{corrige}

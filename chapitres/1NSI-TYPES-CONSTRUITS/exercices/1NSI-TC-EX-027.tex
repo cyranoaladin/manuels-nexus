@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TC-EX-027", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def creer_grille(n, p, valeur):
+%     grille = []
+%     for i in range(n):
+%         ligne = []
+%         for j in range(p):
+%             ligne.append(valeur)
+%         grille.append(ligne)
+%     return grille
+% g = creer_grille(2, 3, 0)
+% assert g == [[0, 0, 0], [0, 0, 0]]
+% assert len(g) == 2
+% assert len(g[0]) == 3
+% g[0][0] = 5
+% assert g[1][0] == 0
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-027}{1}{8}
+Écrire une fonction \lstinline{creer_grille(n, p, valeur)} qui renvoie une grille
+de \lstinline{n} lignes et \lstinline{p} colonnes, où chaque case contient
+\lstinline{valeur}.
+
+\textbf{Exemple :}
+\begin{console}
+>>> creer_grille(2, 3, 0)
+[[0, 0, 0], [0, 0, 0]]
+\end{console}
+
+\textit{Attention :} ne pas écrire \lstinline{[[valeur] * p] * n}. Pourquoi ?
+\end{exercice}
