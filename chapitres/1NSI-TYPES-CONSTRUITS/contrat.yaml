@@ -1,0 +1,26 @@
+chapitre: 1NSI-TYPES-CONSTRUITS
+niveau: 1NSI
+theme: TYPES-CONSTRUITS
+titre: "Types construits : p-uplets, tableaux, dictionnaires"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: 1NSI-TYPES-CONSTRUITS-C1, libelle_eleve: "Je sais utiliser des p-uplets et écrire une fonction qui renvoie plusieurs valeurs." }
+  - { code: C2, ref_capacite: 1NSI-TYPES-CONSTRUITS-C2, libelle_eleve: "Je sais lire, modifier et construire des tableaux, y compris en compréhension." }
+  - { code: C3, ref_capacite: 1NSI-TYPES-CONSTRUITS-C3, libelle_eleve: "Je sais représenter et parcourir une grille avec un tableau de tableaux." }
+  - { code: C4, ref_capacite: 1NSI-TYPES-CONSTRUITS-C4, libelle_eleve: "Je sais créer, modifier et parcourir un dictionnaire." }
+  - { code: C5, ref_capacite: 1NSI-TYPES-CONSTRUITS-C5, libelle_eleve: "Je sais prévoir l'effet d'une affectation sur un objet mutable." }
+
+prerequis:
+  - { code: R1, libelle: "Variables, affectation, types de base (int, float, bool, str)", chapitre_origine: "1NSI-TYPES-BASE" }
+  - { code: R2, libelle: "Boucles for et while, instruction range", chapitre_origine: "SNT/1NSI-LANGAGE" }
+  - { code: R3, libelle: "Définir et appeler une fonction avec paramètres et return", chapitre_origine: "1NSI-LANGAGE" }
+  - { code: R4, libelle: "Chaînes de caractères : indexation, longueur", chapitre_origine: "1NSI-TYPES-BASE" }
+
+situation_accroche: >
+  Construire le classement d'un tournoi de e-sport : chaque joueur a un pseudo, un score
+  et une équipe. Quelle structure choisir pour stocker, mettre à jour et interroger ces
+  données efficacement ? Le choix p-uplet / tableau / dictionnaire est le fil rouge du
+  chapitre et se résout au TD final avec un mini-moteur de classement.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 9 }

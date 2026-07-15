@@ -1,0 +1,27 @@
+% nexus-code.tex — Extensions NSI de la charte : code, console, code de référence.
+% Chargé par la classe après nexus-manuel.cls. Ne modifie pas le tronc commun.
+
+% Console : distinction visuelle STRICTE avec le code (erreur classique des manuels NSI).
+\lstnewenvironment{console}{\lstset{basicstyle=\ttfamily\small,backgroundcolor=\color{nxGris!8},
+  frame=none,xleftmargin=1em,literate={>>>}{{\textcolor{nxBleu}{\bfseries >>>~}}}3}}{}
+
+% Code de référence : implémentation commentée ligne à ligne (strate cours).
+% \begin{codereference}{titre} ... \end{codereference}
+\newtcolorbox{crbox}[1]{colback=nxBleu!3,colframe=nxBleu,boxrule=0pt,leftrule=1.2pt,
+  title={\textsc{Code de référence} --- #1},fonttitle=\sffamily\bfseries,enhanced,breakable}
+\newenvironment{codereference}[1]{\begin{crbox}{#1}}{\end{crbox}}
+
+% Rubrique « À la machine » : ce que l'élève reproduit dans son éditeur.
+\newcommand{\alamachine}[1]{\par\medskip\noindent
+  {\sffamily\bfseries\color{nxVert}\pictoPython~À la machine.}\ #1\par\medskip}
+
+% Mini-projet (Temps 7-projet, obligation programme ~25% mode projet)
+\newtcolorbox{mpbox}[1]{colback=nxOr!5,colframe=nxOr!85!black,boxrule=0pt,leftrule=1.6pt,
+  title={\textsc{Mini-projet} --- #1},fonttitle=\sffamily\bfseries,enhanced,breakable}
+\newenvironment{miniprojet}[1]{\begin{mpbox}{#1}}{\end{mpbox}}
+\newcommand{\jalon}[2]{\par\noindent{\sffamily\bfseries Jalon #1.}\ #2\par}
+\newcommand{\criteresValidation}[1]{\par\noindent{\small\itshape Critères de validation (testables) : #1}\par}
+
+% Épreuve pratique (Terminale)
+\newenvironment{sujetECE}[2]{\par\bigskip\noindent
+  \textbf{\textcolor{nxBleu}{\large Épreuve pratique \texttt{#1}}}\quad{\footnotesize #2}\par\nopagebreak\medskip}{\par\bigskip}

@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-TC-CO-001", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "exercice_id": "1NSI-TC-EX-001", "status": "generated"}
+% BEGIN-VERIFY
+% notes = [12, 15, 9]
+% copie = list(notes)
+% copie.append(18)
+% assert notes == [12, 15, 9]
+% assert copie == [12, 15, 9, 18]
+% assert notes is not copie
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-001}
+\textbf{1.} Le programme affiche \texttt{[12, 15, 9, 18]} puis \texttt{4}.
+\commentaireMarge{Sortie vérifiée par exécution.}
+
+\textbf{2.} L'affectation \texttt{copie = notes} ne crée pas une nouvelle liste : elle fait
+pointer le nom \texttt{copie} vers \emph{le même objet} que \texttt{notes} (deux références
+vers une seule liste en mémoire). L'appel \texttt{copie.append(18)} modifie cet objet
+partagé ; \texttt{notes} et \texttt{copie} désignant la même liste, les deux « voient »
+la modification. C'est un effet de bord caractéristique des objets \emph{mutables}.
+
+\textbf{3.} Il faut créer une vraie copie de la liste, par exemple
+\texttt{copie = list(notes)} (ou \texttt{copie = notes[:]}). Après \texttt{copie.append(18)},
+on a alors \texttt{notes == [12, 15, 9]} et \texttt{copie == [12, 15, 9, 18]} : les deux
+noms désignent des objets distincts.
+\end{corrige}

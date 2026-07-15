@@ -1,0 +1,71 @@
+# Registre des sources — manuels NSI. usage_policy pilote la réutilisation en aval.
+sources:
+  - id: SRC-0000
+    name: "Corpus NSI Nexus (cyranoaladin/NSI, submodule corpus_nsi/)"
+    tier: T0
+    license: "propriétaire Nexus Réussite"
+    usage_policy: verbatim
+    active: true
+    notes: "Substance certifiée 114/114 ; statuts needs_review hérités jusqu'à revue humaine (F08). Exempté du gate de similarité."
+
+  - id: SRC-0001
+    name: "Eduscol — NSI"
+    url: "https://eduscol.education.fr/2068/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g"
+    tier: T1
+    license: "information publique"
+    usage_policy: adaptation_attribution
+    crawl: { method: page_links, frequency: quarterly, scope: "pdf" }
+    active: true
+
+  - id: SRC-0002
+    name: "Banque des sujets — épreuve pratique NSI (officielle)"
+    tier: T1
+    license: "sujets officiels"
+    usage_policy: adaptation_attribution
+    crawl: { method: manual, frequency: yearly }
+    active: true
+    notes: "URL à confirmer au LOT 0 Terminale (R7) ; alimente les formats ECE."
+
+  - id: SRC-0010
+    name: "Sujets écrits bac NSI (annales officielles)"
+    tier: T1
+    license: "sujets officiels"
+    usage_policy: adaptation_attribution
+    crawl: { method: manual, frequency: yearly }
+    active: true
+
+  - id: SRC-0020
+    name: "pixees.fr / SIF ressources NSI"
+    url: "https://pixees.fr"
+    tier: T2
+    license: "variable"
+    usage_policy: inspiration_reformulation
+    crawl: { method: manual, frequency: quarterly }
+    active: true
+
+  - id: SRC-0030
+    name: "Cours de T. Balabonski (NSI)"
+    tier: T4
+    license: "tous droits réservés"
+    usage_policy: inspiration_reformulation
+    crawl: { method: manual, frequency: quarterly }
+    active: false
+    notes: "URL et périmètre à confirmer avant activation."
+
+  - id: SRC-0031
+    name: "infoforall.fr"
+    url: "https://www.infoforall.fr"
+    tier: T4
+    license: "tous droits réservés"
+    usage_policy: inspiration_reformulation
+    crawl: { method: page_links, frequency: quarterly }
+    active: true
+
+  - id: SRC-0032
+    name: "fabricenativel.github.io (NSI)"
+    url: "https://fabricenativel.github.io"
+    tier: T4
+    license: "vérifier licence"
+    usage_policy: inspiration_reformulation
+    crawl: { method: page_links, frequency: quarterly }
+    active: true
