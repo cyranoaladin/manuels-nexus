@@ -67,6 +67,7 @@ Python ≥ 3.11, pandoc (filtre Lua), texlive-full, ruff, pytest ; PostgreSQL+pg
 - [ ] Version aménagée (F11) : extrait généré et joint au PDF pilote pour validation.
 - [ ] Distinction visuelle code/console respectée partout.
 - [ ] Erreurs fréquentes NSI : ≥ 4 par chapitre, issues du corpus ou documentées.
+- [ ] `make gates-corpus-strict CHAP=...` passe sans erreur (LOT 4 et LOT 7).
 - [ ] Aucun objet `ready` hérité d'une séquence `needs_review` sans revue tracée.
 
 ## 7. Critères d'acceptation du pilote

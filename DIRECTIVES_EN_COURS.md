@@ -38,3 +38,11 @@ RAPPORT_FINAL.md. Cocher ici chaque directive exécutée avec le hash du commit.
 - Accents français partout dans les libellés imprimés (R10).
 - ◆◆ = format examen contextualisé 2-3 questions ; ◆◆◆ = prise d'initiative réelle ;
   corrigés ◆◆/◆◆◆ : 10-20 lignes, calculs/raisonnements intermédiaires, conclusion.
+- Principe anti-assouplissement : un gate ne peut être assoupli que si (a) le faux positif
+  est démontré dans le rapport (extrait à l'appui), (b) un test de régression fige le
+  comportement voulu dans tests/test_gates_corpus.py. Tout assouplissement sans test = revert.
+
+## Taches differees (Terminale)
+
+- [ ] Adapter check_sql_query_result_consistency au LOT 3 de TNSI-BDD-SQL.
+- [ ] Adapter check_boyer_moore_trace_consistency au LOT 3 de TNSI-PROG-DYNAMIQUE-TEXTE.

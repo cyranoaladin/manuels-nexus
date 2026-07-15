@@ -19,6 +19,7 @@ MIN_QUESTIONS = 15
 
 def main() -> int:
     chap_arg = None
+    strict = "--strict" in sys.argv
     for i, a in enumerate(sys.argv):
         if a == "--chap" and i + 1 < len(sys.argv):
             chap_arg = sys.argv[i + 1]
@@ -49,6 +50,17 @@ def main() -> int:
             errors.append(f"{chap_name}: {n} questions QCM (minimum {MIN_QUESTIONS})")
 
         caps = {c for _, c in questions}
+        # En strict, verifier la couverture des capacites du contrat
+        if strict:
+            contrat_path = chap_dir / "contrat.yaml"
+            if contrat_path.exists():
+                import yaml
+                contrat = yaml.safe_load(contrat_path.read_text(encoding="utf-8"))
+                expected_caps = {c["code"] for c in contrat.get("capacites", [])}
+                missing_caps = expected_caps - {f"C{c}" for c in caps}
+                if missing_caps:
+                    errors.append(f"{chap_name}: capacites non couvertes par le QCM: {sorted(missing_caps)}")
+
         print(f"{chap_name}: {n} questions QCM, capacites couvertes: {sorted(caps)}")
 
     if errors:
@@ -56,6 +68,8 @@ def main() -> int:
         for e in errors:
             print(f"  {e}")
 
+    if strict and errors:
+        return 1
     return 0
 
 

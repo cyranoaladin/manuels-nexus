@@ -1,4 +1,4 @@
-.PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter test gates-corpus
+.PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter test gates-corpus gates-corpus-strict
 
 PY := .venv/bin/python
 CHAP ?= 1NSI-TYPES-CONSTRUITS
@@ -43,6 +43,15 @@ gates-corpus:
 	$(PY) scripts/gates_corpus/check_no_placeholders.py
 	$(PY) scripts/gates_corpus/check_differentiation_quality.py --chap $(CHAP)
 	$(PY) scripts/gates_corpus/check_qcm_schema.py --chap $(CHAP)
+	$(PY) scripts/gates_corpus/check_sql_query_result_consistency.py
+	$(PY) scripts/gates_corpus/check_boyer_moore_trace_consistency.py
+
+gates-corpus-strict:
+	$(PY) scripts/gates_corpus/check_eleve_no_corrige.py
+	$(PY) scripts/gates_corpus/check_td_corrige_alignment.py --chap $(CHAP) --strict
+	$(PY) scripts/gates_corpus/check_no_placeholders.py
+	$(PY) scripts/gates_corpus/check_differentiation_quality.py --chap $(CHAP)
+	$(PY) scripts/gates_corpus/check_qcm_schema.py --chap $(CHAP) --strict
 	$(PY) scripts/gates_corpus/check_sql_query_result_consistency.py
 	$(PY) scripts/gates_corpus/check_boyer_moore_trace_consistency.py
 

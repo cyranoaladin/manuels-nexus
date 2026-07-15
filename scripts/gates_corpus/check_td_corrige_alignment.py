@@ -18,6 +18,7 @@ CO_ID_RE = re.compile(r"\\begin\{corrige\}\{([^}]+)\}")
 
 def main() -> int:
     chap_arg = None
+    strict = "--strict" in sys.argv
     for i, a in enumerate(sys.argv):
         if a == "--chap" and i + 1 < len(sys.argv):
             chap_arg = sys.argv[i + 1]
@@ -64,7 +65,9 @@ def main() -> int:
     else:
         print(f"VERT -- {total_co}/{total_ex} exercices ont un corrige.")
 
-    return 0  # warning, pas bloquant
+    if strict and missing_all:
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
