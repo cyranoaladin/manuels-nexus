@@ -12,7 +12,7 @@ from common import ROOT
 
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
-    ("cours", "1*"), ("methodes", "*"), ("exercices", "*"),
+    ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
     ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
 ]
 
