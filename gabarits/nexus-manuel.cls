@@ -1,8 +1,8 @@
-% nexus-manuel.cls — Classe du manuel Nexus Reussite
-% Implemente le systeme visuel defini dans docs/06_charte_graphique.md :
-% grille A4, marge pedagogique, 3 strates, parcours, pictogrammes, encadres.
+% nexus-manuel.cls — Classe du manuel Nexus Réussite
+% Implémente le système visuel défini dans docs/06_charte_graphique.md :
+% grille A4, marge pédagogique, 3 strates, parcours, pictogrammes, encadrés.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nexus-manuel}[2026/07/15 v2.0 Manuel differencie Nexus Reussite]
+\ProvidesClass{nexus-manuel}[2026/07/15 v2.1 Manuel differencie Nexus Reussite]
 \LoadClass[a4paper,11pt,twoside]{book}
 
 % ===========================================================================
@@ -17,7 +17,7 @@
 %  TYPOGRAPHIE PROFESSIONNELLE
 % ===========================================================================
 \RequirePackage{libertine}           % Libertine (corps) + Biolinum (sans-serif)
-\RequirePackage[libertine]{newtxmath}% Maths assorties a Libertine
+\RequirePackage[libertine]{newtxmath}% Maths assorties à Libertine
 \RequirePackage{microtype}           % Protrusion + expansion
 \RequirePackage[table]{xcolor}
 \RequirePackage[most]{tcolorbox}
@@ -53,9 +53,9 @@
 \definecolor{nxVert}{HTML}{2E6E4E}
 
 % ===========================================================================
-%  HIERARCHIE TYPOGRAPHIQUE
+%  HIÉRARCHIE TYPOGRAPHIQUE
 % ===========================================================================
-% H1 — section-capacite (15/19 pt, gras sans emp., bleu)
+% H1 — section-capacité (15/19 pt, gras sans emp., bleu)
 \titleformat{\section}%
   {\sffamily\bfseries\color{nxBleu}\fontsize{15}{19}\selectfont}%
   {\thesection}{0.8em}{}
@@ -73,13 +73,13 @@
   {\thesubsubsection}{0.6em}{}
 \titlespacing*{\subsubsection}{0pt}{1.2ex plus .2ex}{.5ex}
 
-% Section-capacite avec rappel en marge
+% Section-capacité avec rappel en marge
 \newcommand{\sectionCapacite}[2]{%
-  \section{#1}\margeAppui{\textbf{Je sais...} #2}%
+  \section{#1}\margeAppui{\textbf{Je sais\ldots} #2}%
 }
 
 % ===========================================================================
-%  SOMMAIRE STYLE
+%  SOMMAIRE STYLÉ
 % ===========================================================================
 \titlecontents{chapter}[0em]%
   {\addvspace{1.2em}\sffamily\bfseries\color{nxBleu}}%
@@ -104,26 +104,26 @@
 \newcommand{\pictoPython}{\textcolor{nxBleu}{\texttt{>\!\!>~Python}}}
 
 % ===========================================================================
-%  STRATE 1 : ENCADRES DU COURS
+%  STRATE 1 : ENCADRÉS DU COURS
 % ===========================================================================
 \newtcolorbox{nxdef}[1][]{%
   colback=nxBleu!4,colframe=nxBleu,%
   boxrule=0pt,leftrule=1.2pt,%
-  title=\textsc{Definition}~#1,%
+  title=\textsc{Définition}~#1,%
   fonttitle=\sffamily\bfseries,%
   enhanced,breakable%
 }
 \newtcolorbox{nxthm}[1][]{%
   colback=nxBleu!5,colframe=nxBleu!80!black,%
   boxrule=0pt,leftrule=1.2pt,%
-  title=\textsc{Theoreme}~#1,%
+  title=\textsc{Théorème}~#1,%
   fonttitle=\sffamily\bfseries,%
   enhanced,breakable%
 }
 \newtcolorbox{nxprop}[1][]{%
   colback=nxGris!6,colframe=nxGris,%
   boxrule=0pt,leftrule=1.2pt,%
-  title=\textsc{Propriete}~#1,%
+  title=\textsc{Propriété}~#1,%
   fonttitle=\sffamily\bfseries,%
   enhanced,breakable%
 }
@@ -147,7 +147,7 @@
 \newtcolorbox{nxerr}{%
   colback=nxRouge!6,colframe=nxRouge,%
   boxrule=0pt,leftrule=1.2pt,%
-  title={\ding{115}~\textsc{Erreur frequente}},%
+  title={\ding{115}~\textsc{Erreur fréquente}},%
   fonttitle=\sffamily\bfseries,%
   enhanced,breakable%
 }
@@ -166,28 +166,28 @@
 \newcommand{\approfondissement}[1]{\begin{nxstar}#1\end{nxstar}}
 
 % ===========================================================================
-%  FICHES METHODES
+%  FICHES MÉTHODES
 % ===========================================================================
 \newtcolorbox{fmbox}[2]{%
   colback=nxOr!6,colframe=nxOr!80!black,%
   boxrule=0pt,leftrule=1.2pt,%
-  title={\textsc{Methode #1} --- #2},%
+  title={\textsc{Méthode #1} --- #2},%
   fonttitle=\sffamily\bfseries,%
   enhanced,breakable%
 }
 \newenvironment{fichemethode}[2]{\begin{fmbox}{#1}{#2}}{\end{fmbox}}
 \newcommand{\quandUtiliser}[1]{\paragraph{Quand l'utiliser.}#1}
-\newcommand{\pasApas}[1]{\paragraph{La methode pas a pas.}#1}
-\newcommand{\exempleRedige}[1]{\paragraph{Exemple redige.}#1}
-\newcommand{\pieges}[1]{\paragraph{Les pieges.}#1}
-\newcommand{\verifier}[1]{\paragraph{Verifier son resultat.}#1}
-\newcommand{\sEntrainer}[1]{\paragraph{S'entrainer.}#1}
-\newcommand{\refExos}[1]{\textit{(renvois exercices #1 : completes a l'assemblage)}}
+\newcommand{\pasApas}[1]{\paragraph{La méthode pas à pas.}#1}
+\newcommand{\exempleRedige}[1]{\paragraph{Exemple rédigé.}#1}
+\newcommand{\pieges}[1]{\paragraph{Les pièges.}#1}
+\newcommand{\verifier}[1]{\paragraph{Vérifier son résultat.}#1}
+\newcommand{\sEntrainer}[1]{\paragraph{S'entraîner.}#1}
+\newcommand{\refExos}[1]{\textit{(renvois exercices #1 : complétés à l'assemblage)}}
 
 % ===========================================================================
-%  EXERCICES / CORRIGES
+%  EXERCICES / CORRIGÉS
 % ===========================================================================
-% \begin{exercice}{ID}{parcours(1|2|3)}{duree min}
+% \begin{exercice}{ID}{parcours(1|2|3)}{durée min}
 \newcounter{exo}
 \newenvironment{exercice}[3]{%
   \refstepcounter{exo}\par\medskip\noindent
@@ -200,22 +200,22 @@
 
 \newenvironment{corrige}[1]{%
   \par\medskip\noindent
-  \textbf{\textcolor{nxVert}{Corrige de \texttt{#1}}}\par\nopagebreak\smallskip
+  \textbf{\textcolor{nxVert}{Corrigé de \texttt{#1}}}\par\nopagebreak\smallskip
 }{\par\medskip}
 
 \newcommand{\baremeIndicatif}[1]{%
-  \par\noindent{\footnotesize\textit{Bareme indicatif : #1}}\par
+  \par\noindent{\footnotesize\textit{Barème indicatif : #1}}\par
 }
 \newcommand{\coupDePouce}[2]{%
   \par\noindent{\small\textbf{Coup de pouce #1.} #2}\par
 }
 
 % ===========================================================================
-%  EVALUATIONS
+%  ÉVALUATIONS
 % ===========================================================================
 \newenvironment{evaluation}[2]{%
   \par\bigskip\noindent
-  \textbf{\textcolor{nxBleu}{\large Evaluation \texttt{#1}}}\quad
+  \textbf{\textcolor{nxBleu}{\large Évaluation \texttt{#1}}}\quad
   {\footnotesize #2~min}\par\nopagebreak\medskip
 }{\par\bigskip}
 
@@ -235,14 +235,14 @@
 \lstnewenvironment{python}{\lstset{style=nxpy}}{}
 
 % ===========================================================================
-%  EN-TETES / PIEDS PROFESSIONNELS
+%  EN-TÊTES / PIEDS PROFESSIONNELS
 % ===========================================================================
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[LE]{\small\scshape\color{nxGris}\leftmark}
-\fancyhead[RO]{\small\scshape\color{nxGris}Nexus Reussite}
+\fancyhead[RO]{\small\scshape\color{nxGris}Nexus Réussite}
 \fancyfoot[C]{\small\thepage}
 
 % ===========================================================================
@@ -270,6 +270,6 @@
     #3%
   \end{tcolorbox}%
   \vspace{0.4cm}%
-  \noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimes :} #4%
+  \noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimés :} #4%
   \par\vfill
 }
