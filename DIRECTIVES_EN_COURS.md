@@ -10,6 +10,10 @@ RAPPORT_FINAL.md. Cocher ici chaque directive exécutée avec le hash du commit.
 - [x] Phase B : synchronisation charte (4 gabarits + 2 docs depuis maths, InputIfFileExists, fix doublons)
 - [x] Phase C : adaptation pipeline (harvest reecrit, convert_programme_yaml adapte, F11, mapping docs/09)
 - [x] Phase D : smoke tests (referentiel 114 caps, harvest P04 21 fichiers, tests Python OK, accents OK, compilation OK)
+- [x] Addendum C.6 : gates corpus transposes (7 scripts dans gates_corpus/, make gates-corpus, tous verts)
+- [x] Addendum R7 hors ligne : referentiel confronte aux textes officiels (94 contenus, 1 ecart mineur)
+- [x] Addendum scrapers : inventaire + repli documente sur crawl.py (docs/10)
+- [x] Addendum MCP-corpus RAG : joignable mais cle absente, mode fichiers retenu
 
 ## Check-list active
 

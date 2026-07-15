@@ -59,3 +59,40 @@ Date : 2026-07-15
 | `make accents` | OK |
 | `make test` | 8 passed |
 | Compilation standalone (classe + exercice pilote) | PDF genere sans erreur |
+
+## 5. Gates corpus transposes (Addendum C.6)
+
+| Script source | Gate manuel | Statut |
+|---|---|---|
+| check_eleve_no_corrige.py | gates_corpus/check_eleve_no_corrige.py | adapte — patterns affines pour LaTeX |
+| check_td_corrige_alignment.py | gates_corpus/check_td_corrige_alignment.py | adapte — compare exercices/*.tex vs corriges/*.tex |
+| check_no_placeholders.py | gates_corpus/check_no_placeholders.py | adapte — scan production (excl docs/prompts) |
+| check_differentiation_quality.py | gates_corpus/check_differentiation_quality.py | adapte — ratio parcours 40/40/20 |
+| check_qcm_schema.py | gates_corpus/check_qcm_schema.py | adapte — compte questions, verifie couverture capacites |
+| check_sql_query_result_consistency.py | gates_corpus/check_sql_query_result_consistency.py | differe (Terminale BDD-SQL) |
+| check_boyer_moore_trace_consistency.py | gates_corpus/check_boyer_moore_trace_consistency.py | differe (Terminale PROG-DYNAMIQUE-TEXTE) |
+| check_no_teacher_content_in_student_export.py | (integre dans check_eleve_no_corrige) | adapte |
+
+Cible Makefile : `make gates-corpus CHAP=...`
+
+## 6. Verification R7 hors ligne (Addendum Point 2)
+
+- 94 contenus du referentiel confrontes aux textes officiels par mots-cles
+- 1 ecart significatif (paraphrase YAML, pas erreur de programme)
+- Consigne dans referentiel/_a_verifier.json
+- Verification web du BO reste due quand le reseau repond
+
+## 7. Scrapers corpus (Addendum Point 3)
+
+- Scrapers identifies : scraper_eduscol.py, scraper_nsi_v2.py + netpolicy/provenance
+- Import direct impossible (couplage fort avec le depot source)
+- Repli documente sur scripts/crawl.py (generique)
+- Reference : docs/10_scrapers_corpus.md
+
+## 8. MCP-corpus RAG (Addendum Point 4)
+
+- RAG corpus joignable (rag-api.nexusreussite.academy repond 405 GET)
+- Cle API absente : mode RAG distant non configurable
+- PostgreSQL/pgvector non installe : mode DB locale non disponible
+- **Mode retenu : MODE FICHIERS** (recherche directe dans corpus_nsi/ via scripts)
+- Le RAG reste configurable via .env si la cle devient disponible
