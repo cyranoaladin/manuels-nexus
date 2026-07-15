@@ -1,0 +1,315 @@
+% META: {"id": "1SPE-SUITES-EV-B-corrige", "chapitre": "1SPE-SUITES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-SUITES-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "sources_inspiration": [], "parametres_sympy": {"u0_arith": 5, "r_arith": 3, "u0_geo": 4, "q_geo": 2, "capital": 1000, "taux_annuel": 4, "seuil": 1500}, "fichier_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify, log as symlog
+% import math
+% n = symbols('n', integer=True, nonnegative=True)
+%
+% # ---- Exercice 1 ----
+% u0_arith = 5
+% r_arith  = 3
+% u_arith  = u0_arith + r_arith * n
+% # Q1 : premiers termes
+% assert u_arith.subs(n, 0) == 5
+% assert u_arith.subs(n, 1) == 8
+% assert u_arith.subs(n, 2) == 11
+% assert u_arith.subs(n, 3) == 14
+% # Q2 : difference constante
+% diff_arith = u_arith.subs(n, n+1) - u_arith
+% assert simplify(diff_arith) == 3
+% # Q3 : formule terme general
+% assert u_arith.subs(n, 0) == u0_arith
+% # Q4 : r=3>0 => croissante
+% assert r_arith > 0
+%
+% # ---- Exercice 2 ----
+% u0_geo = 4
+% q_geo  = 2
+% u_geo  = u0_geo * q_geo**n
+% # Q1
+% assert u_geo.subs(n, 0) == 4
+% assert u_geo.subs(n, 1) == 8
+% assert u_geo.subs(n, 2) == 16
+% # Q2 : quotient
+% quot = u_geo.subs(n, n+1) / u_geo
+% assert simplify(quot - q_geo) == 0
+% # Q3 : somme S = u0*(q^5-1)/(q-1)
+% S5 = u0_geo * (q_geo**5 - 1) // (q_geo - 1)
+% assert S5 == 124
+% assert sum(u0_geo * q_geo**k for k in range(5)) == 124
+%
+% # ---- Exercice 3 ----
+% capital  = 1000
+% q_place  = Rational(104, 100)
+% seuil    = 1500
+% u_place  = capital * q_place**n
+% # Q2
+% assert u_place.subs(n, 0) == 1000
+% # Q3
+% assert u_place.subs(n, 1) == 1040
+% assert int(float(u_place.subs(n, 2))) == 1081   # 1081.6 => 1082 arrondi a l'euro
+% # Q4b : seuil
+% n_seuil = math.ceil(math.log(seuil/capital) / math.log(float(q_place)))
+% assert n_seuil == 11
+% assert float(u_place.subs(n, 10)) < seuil
+% assert float(u_place.subs(n, 11)) >= seuil
+% # verifications numeriques u_10 et u_11
+% assert round(float(u_place.subs(n, 10)), 2) < 1500
+% assert round(float(u_place.subs(n, 11)), 2) >= 1500
+%
+% # ---- Exercice 4 ----
+% v = 5 + 2*n
+% assert v.subs(n, 0) == 5
+% assert v.subs(n, 1) == 7
+% diff_v = v.subs(n, n+1) - v
+% assert simplify(diff_v) == 2
+% # Formule S_n = (n+1)(n+5)
+% S_v = lambda m: (m+1)*(m+5)
+% assert S_v(0) == 5
+% assert S_v(1) == 12
+% assert S_v(4) == 45
+% for m in range(8):
+%     assert sum(5 + 2*k for k in range(m+1)) == S_v(m)
+% # Seuil : S_n > 200
+% assert S_v(11) == 192
+% assert S_v(12) == 221
+% assert S_v(11) <= 200
+% assert S_v(12) >  200
+% END-VERIFY
+
+%---------------------------------------------------------------
+% CORRIGE — Évaluation B (55 min) — Suites numériques
+% Barème total : 20 points
+% Standard copie modèle : rédaction complète, théorèmes cités,
+% hypothèses vérifiées.
+%---------------------------------------------------------------
+
+\begin{corrige}{1SPE-SUITES-EV-B}
+
+%===============================================================
+\section*{Exercice 1 \hfill (6 points) — C1, C2, C5}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt (calculer) ; Q2 : 2 pts (raisonner, communiquer) ; Q3 : 1 pt (calculer) ; Q4 : 2 pts (raisonner, communiquer)}
+
+\bigskip
+\textbf{Question 1 — Calcul des premiers termes.}
+
+\commentaireMarge{Appliquer la relation de récurrence $u_{n+1} = u_n + 3$ en partant de $u_0 = 5$.}
+
+On applique la relation de récurrence $u_{n+1} = u_n + 3$ :
+\[
+  u_1 = u_0 + 3 = 5 + 3 = 8, \qquad
+  u_2 = u_1 + 3 = 8 + 3 = 11, \qquad
+  u_3 = u_2 + 3 = 11 + 3 = 14.
+\]
+
+\medskip
+\textbf{Question 2 — Démonstration de la nature arithmétique.}
+
+\commentaireMarge{Définition : une suite est arithmétique si la différence $u_{n+1} - u_n$ est constante.}
+
+Pour tout entier naturel $n$, on calcule la différence entre deux termes consécutifs :
+\[
+  u_{n+1} - u_n = (u_n + 3) - u_n = 3.
+\]
+La différence $u_{n+1} - u_n$ est constante, égale à $3$, pour tout $n \in \mathbb{N}$.
+
+\textbf{Conclusion :} La suite $(u_n)$ est une suite arithmétique de raison $r = 3$ et de premier terme $u_0 = 5$.
+
+\medskip
+\textbf{Question 3 — Expression de $u_n$ en fonction de $n$.}
+
+\commentaireMarge{Formule du terme général : $u_n = u_0 + n \times r$.}
+
+Par la formule du terme général d'une suite arithmétique :
+\[
+  \boxed{u_n = 5 + 3n} \quad \text{pour tout } n \in \mathbb{N}.
+\]
+
+\medskip
+\textbf{Question 4 — Étude des variations.}
+
+\commentaireMarge{Pour étudier les variations, on signe $u_{n+1} - u_n$.}
+
+Pour tout $n \in \mathbb{N}$ :
+\[
+  u_{n+1} - u_n = 3 > 0.
+\]
+La différence est strictement positive pour tout $n \in \mathbb{N}$.
+
+\textbf{Conclusion :} La suite $(u_n)$ est \textbf{strictement croissante}.
+
+\textit{Remarque : on peut aussi argumenter que la raison $r = 3 > 0$, ce qui suffit pour conclure qu'une suite arithmétique est strictement croissante.}
+
+%===============================================================
+\section*{Exercice 2 \hfill (5 points) — C3, C4}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt (calculer) ; Q2 : 2 pts (raisonner, communiquer) ; Q3 : 2 pts (calculer)}
+
+\bigskip
+\textbf{Question 1 — Calcul des premiers termes.}
+
+\commentaireMarge{Substituer $n = 0$, $n = 1$, $n = 2$ dans la formule $u_n = 4 \times 2^n$.}
+
+\[
+  u_0 = 4 \times 2^0 = 4 \times 1 = 4, \qquad
+  u_1 = 4 \times 2^1 = 8, \qquad
+  u_2 = 4 \times 2^2 = 4 \times 4 = 16.
+\]
+
+\medskip
+\textbf{Question 2 — Démonstration de la nature géométrique.}
+
+\commentaireMarge{Définition : une suite est géométrique si le quotient $u_{n+1}/u_n$ est constant et non nul.}
+
+Pour tout entier naturel $n$, $u_n = 4 \times 2^n > 0$, donc le quotient est bien défini. On calcule :
+\[
+  \frac{u_{n+1}}{u_n} = \frac{4 \times 2^{n+1}}{4 \times 2^n} = 2^{n+1-n} = 2.
+\]
+Le quotient est constant, égal à $2$, et non nul.
+
+\textbf{Conclusion :} La suite $(u_n)$ est une suite géométrique de raison $q = 2$ et de premier terme $u_0 = 4$.
+
+\medskip
+\textbf{Question 3 — Calcul de la somme $S = u_0 + u_1 + u_2 + u_3 + u_4$.}
+
+\commentaireMarge{Formule de la somme de termes consécutifs d'une suite géométrique : $S = u_0 \times \dfrac{q^{n+1}-1}{q-1}$.}
+
+On somme les termes de rang $k = 0$ à $k = 4$, soit $5$ termes. En appliquant la formule avec $u_0 = 4$, $q = 2$ et $n = 4$ :
+\[
+  S = u_0 \times \frac{q^5 - 1}{q - 1} = 4 \times \frac{2^5 - 1}{2 - 1} = 4 \times \frac{32 - 1}{1} = 4 \times 31 = 124.
+\]
+
+\[
+  \boxed{S = 124.}
+\]
+
+\textit{Vérification :} $u_0 + u_1 + u_2 + u_3 + u_4 = 4 + 8 + 16 + 32 + 64 = 124$. \checkmark
+
+%===============================================================
+\section*{Exercice 3 \hfill (5 points) — C6, C7}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt (modéliser) ; Q2 : 1 pt (calculer) ; Q3 : 1 pt (calculer) ; Q4a : 1 pt (communiquer) ; Q4b : 1 pt (chercher)}
+
+\bigskip
+\textbf{Question 1 — Modélisation.}
+
+\commentaireMarge{Chaque année, le capital est multiplié par le coefficient $1 + \text{taux} = 1{,}04$.}
+
+Au bout de $n$ années, le capital vaut $u_n$. Durant l'année suivante, il produit des intérêts à hauteur de $4\,\% \times u_n = 0{,}04\,u_n$. Le capital au bout de $(n+1)$ années est donc :
+\[
+  u_{n+1} = u_n + 0{,}04\,u_n = (1 + 0{,}04)\,u_n = 1{,}04\,u_n.
+\]
+
+\medskip
+\textbf{Question 2 — Nature de la suite et expression de $u_n$.}
+
+\commentaireMarge{La relation $u_{n+1} = q \cdot u_n$ définit une suite géométrique de raison $q$.}
+
+La relation $u_{n+1} = 1{,}04\,u_n$ montre que $(u_n)$ est une suite géométrique de raison $q = 1{,}04$ et de premier terme $u_0 = 1\,000$.
+
+Par la formule du terme général d'une suite géométrique :
+\[
+  \boxed{u_n = 1\,000 \times 1{,}04^n} \quad \text{pour tout } n \in \mathbb{N}.
+\]
+
+\medskip
+\textbf{Question 3 — Calcul de $u_1$ et $u_2$.}
+
+\[
+  u_1 = 1\,000 \times 1{,}04 = 1\,040 \text{ €}, \qquad
+  u_2 = 1\,000 \times 1{,}04^2 = 1\,000 \times 1{,}0816 \approx 1\,082 \text{ €}.
+\]
+
+\medskip
+\textbf{Question 4 — Algorithme Python.}
+
+\textbf{4a. Explication de la boucle.}
+
+\commentaireMarge{La boucle \texttt{while} répète le corps tant que la condition est vraie.}
+
+\begin{itemize}
+  \item \texttt{u = 1000} et \texttt{n = 0} initialisent le capital et le compteur d'années.
+  \item La condition \texttt{while u < 1500} : tant que le capital n'a pas atteint $1\,500$\,€, on continue.
+  \item \texttt{u = 1.04 * u} : on applique la relation de récurrence (le capital est multiplié par $1{,}04$).
+  \item \texttt{n = n + 1} : on incrémente le compteur d'années.
+  \item Quand la boucle se termine, \texttt{n} contient le nombre d'années nécessaires.
+\end{itemize}
+
+\textbf{4b. Valeur affichée et vérification.}
+
+\commentaireMarge{On cherche le plus petit $n$ tel que $1\,000 \times 1{,}04^n \geq 1\,500$.}
+
+Le programme affiche $\mathbf{n = 11}$.
+
+\textit{Vérification algébrique :} On résout $1\,000 \times 1{,}04^n \geq 1\,500$, soit $1{,}04^n \geq \dfrac{1\,500}{1\,000} = 1{,}5$.
+
+\begin{center}
+\begin{tabular}{c|c|c}
+$n$ & $1\,000 \times 1{,}04^n$ (arrondi à l'euro) & $\geq 1\,500$\,? \\
+\hline
+9  & $1\,423$ & non \\
+10 & $1\,480$ & non \\
+11 & $1\,539$ & \textbf{oui} \\
+\end{tabular}
+\end{center}
+
+Le capital dépasse $1\,500$\,€ pour la première fois après $\boxed{11}$ années. \checkmark
+
+%===============================================================
+\section*{Exercice 4 \hfill (4 points) — C4, C5}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt (raisonner) ; Q2 : 2 pts (calculer, raisonner) ; Q3 : 1 pt (chercher)}
+
+\bigskip
+\textbf{Question 1 — Nature de $(v_n)$.}
+
+\commentaireMarge{Calculer $v_{n+1} - v_n$ et vérifier que le résultat est une constante.}
+
+Pour tout entier naturel $n$, on calcule :
+\[
+  v_{n+1} - v_n = \bigl[2(n+1)+5\bigr] - (2n+5) = 2n + 2 + 5 - 2n - 5 = 2.
+\]
+La différence $v_{n+1} - v_n = 2$ est constante pour tout $n \in \mathbb{N}$.
+
+\textbf{Conclusion :} $(v_n)$ est une suite arithmétique de raison $r = 2$ et de premier terme $v_0 = 2 \times 0 + 5 = 5$.
+
+\medskip
+\textbf{Question 2 — Expression de $S_n$.}
+
+\commentaireMarge{Pour une suite arithmétique, la somme de $(n+1)$ termes vaut $\dfrac{(n+1)(v_0 + v_n)}{2}$.}
+
+$S_n$ est la somme des $(n+1)$ termes $v_0, v_1, \ldots, v_n$ de la suite arithmétique $(v_n)$.
+
+Le premier terme est $v_0 = 5$ et le dernier terme est $v_n = 2n + 5$. En appliquant la formule :
+\[
+  S_n = \frac{(n+1)(v_0 + v_n)}{2} = \frac{(n+1)(5 + 2n + 5)}{2} = \frac{(n+1)(2n+10)}{2} = \frac{(n+1) \times 2(n+5)}{2}.
+\]
+\[
+  \boxed{S_n = (n+1)(n+5)} \quad \text{pour tout } n \in \mathbb{N}.
+\]
+
+\textit{Vérification pour $n = 1$ :} $S_1 = v_0 + v_1 = 5 + 7 = 12$ et $(1+1)(1+5) = 2 \times 6 = 12$. \checkmark
+
+\medskip
+\textbf{Question 3 — Plus petit entier $n$ tel que $S_n > 200$.}
+
+\commentaireMarge{On résout l'inégalité $(n+1)(n+5) > 200$ en testant des valeurs entières.}
+
+On cherche le plus petit entier naturel $n$ vérifiant $(n+1)(n+5) > 200$.
+
+La fonction $(n+1)(n+5) = n^2 + 6n + 5$ est croissante pour $n \geq 0$. On cherche par encadrement :
+
+\[
+  n = 11 \;:\; S_{11} = 12 \times 16 = 192 \leq 200.
+\]
+\[
+  n = 12 \;:\; S_{12} = 13 \times 17 = 221 > 200.
+\]
+
+\textbf{Conclusion :} Le plus petit entier naturel $n$ tel que $S_n > 200$ est $\boxed{n = 12}$.
+
+\end{corrige}

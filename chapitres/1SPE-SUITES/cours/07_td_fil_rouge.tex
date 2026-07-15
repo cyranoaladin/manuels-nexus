@@ -1,0 +1,268 @@
+% META: {"id": "1SPE-SUITES-COURS-07-FR", "chapitre": "1SPE-SUITES", "type_objet": "cours", "sous_type": "td_fil_rouge", "titre": "TD fil rouge — Deux offres d'epargne", "temps_gabarit": 7, "capacites": ["C2", "C3", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve, simplify
+% n = symbols('n', nonneg=True, integer=True)
+% # Offre A : suite arithmetique A_n = 200*n
+% A = lambda k: 200 * k
+% assert A(0) == 0
+% assert A(1) == 200
+% assert A(12) == 2400
+% # Offre B : suite geometrique B_n = 1000 * 1.004^n
+% B = lambda k: 1000 * (1.004 ** k)
+% assert abs(B(0) - 1000) < 1e-9
+% assert abs(B(1) - 1004) < 1e-9
+% # Recherche du seuil B_n > A_n
+% k = 0
+% while B(k) <= A(k):
+%     k += 1
+% assert k == 167
+% assert B(167) > A(167)
+% assert B(166) <= A(166)
+% # Verification valeurs approximatives
+% assert abs(B(167) - 1000 * 1.004**167) < 1e-6
+% assert A(167) == 33400
+% END-VERIFY
+
+\section*{Temps 7 — TD fil rouge : Deux offres d'épargne}
+
+\textbf{Situation.} Un établissement bancaire propose deux formules d'épargne. On note $n$ le nombre de mois écoulés depuis la souscription.
+
+\begin{itemize}
+  \item \textbf{Offre A} : versement fixe de $200$~€ par mois sur un livret sans intérêts.
+  \item \textbf{Offre B} : capital initial de $1\,000$~€ placé à intérêts composés au taux mensuel de $0{,}4\,\%$.
+\end{itemize}
+
+On note $A_n$ le capital de l'offre A et $B_n$ le capital de l'offre B après $n$ mois.
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE A — Offre A
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-COURS-07-FR-EX1}{2}{15}
+
+\textbf{Partie A — Offre A : modèle arithmétique}
+
+\begin{enumerate}
+  \item Exprimer $A_n$ en fonction de $n$. Quelle est la valeur de $A_0$ ?
+  \item Montrer que la suite $(A_n)$ est arithmétique. Préciser son premier terme et sa raison.
+  \item Calculer $A_{12}$, $A_{24}$ et $A_{60}$. Interpréter ces valeurs.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{1SPE-SUITES-COURS-07-FR-EX1}
+
+\commentaireMarge{Chaque mois, le capital augmente du même montant : évolution absolue constante $\Rightarrow$ modèle arithmétique.}
+
+\textbf{Question 1.} Avant tout versement ($n = 0$), le livret est vide : $A_0 = 0$. Chaque mois, on ajoute $200$~€, donc :
+\[
+  A_n = 200n.
+\]
+
+\textbf{Question 2.} On calcule la différence entre deux termes consécutifs :
+\[
+  A_{n+1} - A_n = 200(n+1) - 200n = 200.
+\]
+La différence est constante et égale à $200$. Donc $(A_n)$ est une suite arithmétique de premier terme $A_0 = 0$ et de raison $r = 200$.
+
+\textbf{Question 3.}
+\[
+  A_{12} = 200 \times 12 = 2\,400 \text{ €} \qquad \text{(capital après 1 an),}
+\]
+\[
+  A_{24} = 200 \times 24 = 4\,800 \text{ €} \qquad \text{(capital après 2 ans),}
+\]
+\[
+  A_{60} = 200 \times 60 = 12\,000 \text{ €} \qquad \text{(capital après 5 ans).}
+\]
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE B — Offre B
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-COURS-07-FR-EX2}{2}{15}
+
+\textbf{Partie B — Offre B : modèle géométrique}
+
+\begin{enumerate}
+  \item Exprimer $B_{n+1}$ en fonction de $B_n$. En déduire que $(B_n)$ est une suite géométrique. Préciser son premier terme et sa raison.
+  \item Exprimer $B_n$ en fonction de $n$.
+  \item Calculer $B_{12}$, $B_{24}$ et $B_{60}$ (arrondir à l'euro). Interpréter.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{1SPE-SUITES-COURS-07-FR-EX2}
+
+\commentaireMarge{Taux mensuel de $0{,}4\,\%$ : coefficient multiplicateur $q = 1 + 0{,}004 = 1{,}004$.}
+
+\textbf{Question 1.} Chaque mois, le capital est multiplié par $q = 1{,}004$ (augmentation de $0{,}4\,\%$) :
+\[
+  B_{n+1} = 1{,}004 \times B_n.
+\]
+Le rapport $\dfrac{B_{n+1}}{B_n} = 1{,}004$ est constant et $B_0 = 1\,000 \neq 0$. Donc $(B_n)$ est une suite géométrique de premier terme $B_0 = 1\,000$ et de raison $q = 1{,}004$.
+
+\textbf{Question 2.} Par la formule du terme général d'une suite géométrique :
+\[
+  B_n = B_0 \times q^n = 1\,000 \times 1{,}004^n.
+\]
+
+\textbf{Question 3.}
+\[
+  B_{12} = 1\,000 \times 1{,}004^{12} \approx 1\,000 \times 1{,}0489 \approx 1\,049 \text{ €,}
+\]
+\[
+  B_{24} = 1\,000 \times 1{,}004^{24} \approx 1\,000 \times 1{,}1002 \approx 1\,100 \text{ €,}
+\]
+\[
+  B_{60} = 1\,000 \times 1{,}004^{60} \approx 1\,000 \times 1{,}2704 \approx 1\,270 \text{ €.}
+\]
+
+Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des $12\,000$~€ de l'offre A. Le capital initial est trop faible par rapport aux versements mensuels.
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE C — Comparaison algorithmique
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-COURS-07-FR-EX3}{2}{20}
+
+\textbf{Partie C — À partir de quel mois $B_n > A_n$ ?}
+
+\begin{enumerate}
+  \item Vérifier que $B_{100} < A_{100}$ et que $B_{200} > A_{200}$. Que peut-on en conclure ?
+  \item Compléter et expliquer le programme Python ci-dessous, qui détermine le premier rang $n$ tel que $B_n > A_n$.
+  \item Exécuter mentalement les deux premiers tours de boucle (vérifier les valeurs de \texttt{A}, \texttt{B} et \texttt{n}).
+  \item Donner le rang $n$ de dépassement et interpréter le résultat dans le contexte.
+\end{enumerate}
+
+\end{exercice}
+
+\noindent\textbf{Programme à compléter :}
+
+\begin{python}
+# Recherche du premier mois n tel que B_n > A_n
+# A_n = 200*n  (offre A : suite arithmetique)
+# B_n = 1000 * 1.004**n  (offre B : suite geometrique)
+
+A = 0          # valeur initiale de A_0
+B = 1000       # valeur initiale de B_0
+n = 0
+
+while B <= A:
+    n = n + 1
+    A = 200 * n        # mise a jour de A_n
+    B = 1000 * 1.004**n  # mise a jour de B_n
+
+print("Premier mois de depassement : n =", n)
+print("A_n =", A, "euros")
+print("B_n =", round(B, 2), "euros")
+\end{python}
+
+\begin{corrige}{1SPE-SUITES-COURS-07-FR-EX3}
+
+\textbf{Question 1.}
+\[
+  A_{100} = 200 \times 100 = 20\,000 \text{ €}, \quad B_{100} = 1\,000 \times 1{,}004^{100} \approx 1\,000 \times 1{,}4918 \approx 1\,492 \text{ €.}
+\]
+Donc $B_{100} < A_{100}$.
+\[
+  A_{200} = 200 \times 200 = 40\,000 \text{ €}, \quad B_{200} = 1\,000 \times 1{,}004^{200} \approx 1\,000 \times 2{,}2253 \approx 2\,225 \text{ €.}
+\]
+
+\commentaireMarge{$1{,}004^{100} \approx 1{,}49$ et $1{,}004^{200} \approx 2{,}23$ : la croissance géométrique est encore trop lente sur cet horizon.}
+
+Donc $B_{200} < A_{200}$ également. La suite géométrique ne rattrape pas encore la suite arithmétique à ces rangs.
+
+\textbf{Question 2.} La boucle \texttt{while B <= A} tourne tant que l'offre B n'a pas dépassé l'offre A. À chaque itération, on incrémente $n$ puis on recalcule les deux capitaux avec les formules explicites. La boucle s'arrête dès que $B_n > A_n$.
+
+\textbf{Question 3.} Exécution des deux premiers tours :
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\texttt{n} & \texttt{A} & \texttt{B} & Condition \texttt{B <= A} \\
+\hline
+$0$ (init.) & $0$ & $1\,000$ & Faux (on ne rentre pas) \\
+\hline
+\end{tabular}
+\end{center}
+
+\commentaireMarge{Attention : au rang $0$, $B_0 = 1\,000 > A_0 = 0$, donc la boucle ne s'exécute pas du tout ! On doit initialiser en forçant la condition à être vraie au départ.}
+
+En fait, $B_0 = 1\,000 > A_0 = 0$ : la condition \texttt{B <= A} est fausse dès le départ. Le programme est à corriger en démarrant à $n = 1$ :
+
+\begin{python}
+n = 1
+A = 200
+B = 1000 * 1.004
+
+while B <= A:
+    n = n + 1
+    A = 200 * n
+    B = 1000 * 1.004**n
+
+print("Premier mois de depassement : n =", n)
+print("A_n =", A, "euros")
+print("B_n =", round(B, 2), "euros")
+\end{python}
+
+\textbf{Question 4.} Le programme affiche \texttt{n = 167}. Donc le premier mois pour lequel $B_{167} > A_{167}$ est $n = 167$, soit environ $13$ ans et $11$ mois.
+
+\[
+  A_{167} = 200 \times 167 = 33\,400 \text{ €}, \quad B_{167} = 1\,000 \times 1{,}004^{167} \approx 33\,402 \text{ €.}
+\]
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE D — Synthese
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-COURS-07-FR-EX4}{3}{15}
+
+\textbf{Partie D — Synthèse et interprétation économique}
+
+\begin{enumerate}
+  \item Quelle offre est plus avantageuse sur un horizon de $5$ ans ? De $10$ ans ? Justifier avec les calculs des parties précédentes.
+  \item À partir du rang $n = 167$, que se passe-t-il pour les valeurs de $B_n$ par rapport à $A_n$ ? Justifier qualitativement sans calcul.
+  \item \pictoOral{} \textit{Question orale.} « Expliquer en quelques phrases pourquoi une suite géométrique de raison proche de $1$ est d'abord dominée par une suite arithmétique à forte raison, puis finit par la dépasser. Quel rôle jouent le capital initial et la raison dans la dynamique à long terme ? »
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{1SPE-SUITES-COURS-07-FR-EX4}
+
+\textbf{Question 1.}
+
+Sur $5$ ans ($n = 60$) : $A_{60} = 12\,000$~€ contre $B_{60} \approx 1\,270$~€. L'offre A est très largement supérieure.
+
+Sur $10$ ans ($n = 120$) : $A_{120} = 24\,000$~€ contre $B_{120} = 1\,000 \times 1{,}004^{120} \approx 1\,615$~€. L'offre A reste nettement meilleure.
+
+\commentaireMarge{Pour un épargnant dont l'horizon est inférieur à 14 ans, l'offre A (versements réguliers) est bien plus efficace.}
+
+\textbf{Conclusion :} Pour tout horizon inférieur à $167$ mois, l'offre A est plus avantageuse.
+
+\textbf{Question 2.} À partir du rang $167$, la suite géométrique $(B_n)$ dépasse définitivement $(A_n)$. En effet, $(B_n)$ croît de manière exponentielle (multiplication par $1{,}004$ à chaque étape) tandis que $(A_n)$ croît de manière linéaire (addition de $200$ à chaque étape). Sur le long terme, toute croissance exponentielle, même de raison très proche de $1$, l'emporte sur une croissance linéaire.
+
+\textbf{Question 3 — Éléments de réponse orale.}
+
+Une suite géométrique de raison $q$ légèrement supérieure à $1$ croît lentement au début : les premiers termes ne font que multiplier le capital initial par des facteurs proches de $1$. En revanche, une suite arithmétique de grande raison $r$ accumule rapidement des montants importants par additions successives.
+
+Le capital initial de l'offre B ($1\,000$~€) est modeste par rapport aux versements mensuels de l'offre A ($200$~€/mois). Pendant des années, les intérêts composés de $0{,}4\,\%$ par mois sur $1\,000$~€ restent inférieurs aux $200$~€ mensuels ajoutés dans l'offre A.
+
+Mais la croissance exponentielle s'emballe : chaque mois, les intérêts sont calculés sur un capital de plus en plus grand. À terme, le coefficient $1{,}004^n$ dépasse toute fonction linéaire $200n$, quel que soit le coefficient. C'est la propriété fondamentale de la croissance géométrique à long terme.
+
+\end{corrige}
