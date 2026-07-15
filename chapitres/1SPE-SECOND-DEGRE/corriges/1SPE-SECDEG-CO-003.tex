@@ -1,0 +1,63 @@
+% META: {"id": "1SPE-SECDEG-CO-003", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-003", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, Rational
+% x = symbols('x')
+% # 1a. p(x) = 4x^2 - x + 7 : trinome, a=4, b=-1, c=7
+% p = 4*x**2 - x + 7
+% assert p.coeff(x,2) == 4
+% # q(x) = 3x - 2 : pas trinome (degre 1)
+% # r(x) = -x^2 + 5 : trinome, a=-1, b=0, c=5
+% r = -x**2 + 5
+% assert r.coeff(x,2) == -1
+% # 1b. f(x) = 2*(x-1/2)*(x-3)
+% f = 2*(x - Rational(1,2))*(x - 3)
+% f_dev = expand(f)
+% assert f_dev == 2*x**2 - 7*x + 3
+% # sommet
+% alpha = Rational(7, 4)
+% beta = f_dev.subs(x, alpha)
+% assert beta == Rational(-25, 8)
+% assert simplify(f_dev - (2*(x - Rational(7,4))**2 - Rational(25,8))) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-003}
+
+\textbf{1. Identification des trinômes du second degré.}
+
+\commentaireMarge{Un trinôme du 2\textsuperscript{nd} degré vérifie $a \neq 0$.}
+
+\begin{itemize}
+  \item $p(x) = 4x^2 - x + 7$ : \textbf{oui}, c'est un trinôme du second degré. On a $a = 4$, $b = -1$, $c = 7$.
+  \item $q(x) = 3x - 2$ : \textbf{non}, c'est un polynôme de degré 1 (pas de terme en $x^2$).
+  \item $r(x) = -x^2 + 5$ : \textbf{oui}, c'est un trinôme du second degré. On a $a = -1$, $b = 0$, $c = 5$.
+\end{itemize}
+
+\medskip
+\textbf{2a. Développement de $f(x) = 2\!\left(x - \dfrac{1}{2}\right)\!(x - 3)$.}
+
+\commentaireMarge{Distribuer le produit, puis multiplier par $2$.}
+
+\[\left(x - \frac{1}{2}\right)(x - 3) = x^2 - 3x - \frac{x}{2} + \frac{3}{2} = x^2 - \frac{7}{2}x + \frac{3}{2}.\]
+
+\[f(x) = 2\!\left(x^2 - \frac{7}{2}x + \frac{3}{2}\right) = 2x^2 - 7x + 3.\]
+
+\[\boxed{f(x) = 2x^2 - 7x + 3.}\]
+
+\medskip
+\textbf{2b. Coordonnées du sommet.}
+
+On lit $a = 2$, $b = -7$. L'abscisse du sommet est :
+\[\alpha = -\frac{b}{2a} = -\frac{-7}{4} = \frac{7}{4}.\]
+
+L'ordonnée du sommet est :
+\[\beta = f\!\left(\frac{7}{4}\right) = 2\times\frac{49}{16} - 7\times\frac{7}{4} + 3 = \frac{49}{8} - \frac{49}{4} + 3 = \frac{49}{8} - \frac{98}{8} + \frac{24}{8} = -\frac{25}{8}.\]
+
+Le sommet est $S\!\left(\dfrac{7}{4}\,;\,-\dfrac{25}{8}\right)$.
+
+\medskip
+\textbf{2c. Forme canonique.}
+
+\commentaireMarge{$f(x) = a(x-\alpha)^2 + \beta$.}
+
+\[\boxed{f(x) = 2\left(x - \frac{7}{4}\right)^2 - \frac{25}{8}.}\]
+
+\end{corrige}

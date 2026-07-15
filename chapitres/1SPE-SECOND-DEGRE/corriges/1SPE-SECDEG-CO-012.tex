@@ -1,0 +1,66 @@
+% META: {"id": "1SPE-SECDEG-CO-012", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-012", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, simplify
+% x = symbols('x')
+% g = -2*x**2 + 2*x + 12
+% delta = 2**2 - 4*(-2)*12
+% assert delta == 100
+% sols = sorted(solve(g, x))
+% assert sols == [-2, 3]
+% assert simplify(g - (-2*(x+2)*(x-3))) == 0
+% assert g.subs(x, 0) > 0
+% assert g.subs(x, 4) < 0
+% assert g.subs(x, -3) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-012}
+
+\textbf{1. Calcul de $\Delta$ et racines de $g$.}
+
+\commentaireMarge{$a = -2$, $b = 2$, $c = 12$.}
+
+$\Delta = 2^2 - 4 \times (-2) \times 12 = 4 + 96 = 100 > 0$.
+
+\[\sqrt{\Delta} = 10.\]
+
+\[x_1 = \frac{-2 - 10}{2 \times (-2)} = \frac{-12}{-4} = 3, \qquad x_2 = \frac{-2 + 10}{2 \times (-2)} = \frac{8}{-4} = -2.\]
+
+Les racines sont $x_1 = -2$ et $x_2 = 3$ (rangées dans l'ordre croissant).
+
+\medskip
+\textbf{2. Factorisation de $g(x)$.}
+
+\commentaireMarge{$g(x) = a(x - x_1)(x - x_2)$ avec $a = -2$.}
+
+\[\boxed{g(x) = -2(x + 2)(x - 3).}\]
+
+\textit{Vérification :} $-2(x+2)(x-3) = -2(x^2 - x - 6) = -2x^2 + 2x + 12 = g(x)$. \hfill $\checkmark$
+
+\medskip
+\textbf{3. Tableau de signes.}
+
+\commentaireMarge{$a = -2 < 0$ : $g > 0$ \emph{entre} les racines.}
+
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -2 & & 3 & & +\infty \\
+\hline
+-2 & & - & - & - & - & - & \\
+x+2 & & - & 0 & + & & + & \\
+x-3 & & - & & - & 0 & + & \\
+\hline
+g(x) & & - & 0 & + & 0 & - & \\
+\hline
+\end{array}
+\]
+
+(Le facteur $-2$ est négatif, il inverse le signe du produit $(x+2)(x-3)$.)
+
+\medskip
+\textbf{4. Résolution de $g(x) \leqslant 0$.}
+
+D'après le tableau de signes, $g(x) \leqslant 0$ pour $x \leqslant -2$ ou $x \geqslant 3$.
+
+\[\boxed{\mathcal{S} = \left]-\infty\,;\,-2\right] \cup \left[3\,;\,+\infty\right[.}\]
+
+\end{corrige}

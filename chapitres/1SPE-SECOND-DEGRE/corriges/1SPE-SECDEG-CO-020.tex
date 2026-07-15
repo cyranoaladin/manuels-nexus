@@ -1,0 +1,79 @@
+% META: {"id": "1SPE-SECDEG-CO-020", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-020", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% x = symbols('x')
+% f = -2*(x+3)**2 + 8
+% f_dev = expand(f)
+% assert f_dev == -2*x**2 - 12*x - 10
+% assert f.subs(x, -3) == 8
+% assert f.subs(x, -1) == 0
+% assert f.subs(x, -5) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-020}
+
+\baremeIndicatif{Q1 : 3 pts — Q2 : 3 pts — Q3 : 4 pts — Q4 : 5 pts — Q5 : 5 pts}
+
+\medskip
+\textbf{1. (C1) Forme développée.}
+
+\commentaireMarge{$(x+3)^2 = x^2 + 6x + 9$.}
+
+\[f(x) = -2(x+3)^2 + 8 = -2(x^2 + 6x + 9) + 8 = -2x^2 - 12x - 18 + 8.\]
+
+\[\boxed{f(x) = -2x^2 - 12x - 10.}\]
+
+On lit $a = -2$, $b = -12$, $c = -10$.
+
+\medskip
+\textbf{2. (C2) Sommet — maximum ou minimum.}
+
+\commentaireMarge{Lire $\alpha$ et $\beta$ dans $a(x-\alpha)^2+\beta$.}
+
+$f(x) = -2(x - (-3))^2 + 8$, donc le sommet est $S(-3\,;\,8)$.
+
+Puisque $a = -2 < 0$, la parabole est tournée vers le bas : $f$ admet un \textbf{maximum} égal à $8$, atteint en $x = -3$.
+
+\medskip
+\textbf{3. (C2) Tableau de variations.}
+
+\commentaireMarge{$a < 0$ : croissant jusqu'au sommet, puis décroissant.}
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & -3 & & +\infty \\
+\hline
+f(x) & & \nearrow & 8 & \searrow & \\
+ & -\infty & & & & -\infty \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{4. (C1) Résolution de $f(x) = 0$.}
+
+\commentaireMarge{Utiliser la forme canonique : $(x+3)^2 = 4$.}
+
+\[-2(x+3)^2 + 8 = 0 \iff (x+3)^2 = 4 \iff x + 3 = \pm 2.\]
+
+\[x + 3 = 2 \Rightarrow x = -1, \qquad x + 3 = -2 \Rightarrow x = -5.\]
+
+\[\boxed{\mathcal{S} = \{-5\,;\,-1\}.}\]
+
+\textit{Interprétation géométrique :} les points d'abscisses $-5$ et $-1$ sont les points d'intersection de la parabole avec l'axe des abscisses.
+
+\medskip
+\textbf{5. Comparaison des deux formes.}
+
+La \textbf{forme canonique} $-2(x+3)^2 + 8$ est plus pratique pour :
+\begin{itemize}
+  \item lire directement le sommet $S(-3\,;\,8)$ (questions 2 et 3),
+  \item résoudre $f(x) = k$ en isolant le carré (question 4).
+\end{itemize}
+
+La \textbf{forme développée} $-2x^2 - 12x - 10$ est plus pratique pour :
+\begin{itemize}
+  \item identifier les coefficients $a$, $b$, $c$ en vue d'appliquer la formule de $\Delta$.
+\end{itemize}
+
+\end{corrige}

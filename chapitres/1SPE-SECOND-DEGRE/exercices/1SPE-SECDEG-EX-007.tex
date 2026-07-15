@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-SECDEG-EX-007", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-007.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, Rational, solve, simplify
+% x = symbols('x')
+% # a) x^2 - 5x + 6 = 0  => delta = 25-24 = 1
+% f1 = x**2 - 5*x + 6
+% delta1 = 25 - 24
+% assert delta1 == 1
+% sols1 = solve(f1, x)
+% assert sorted(sols1) == [2, 3]
+% # b) 2x^2 + 3x - 2 = 0  => delta = 9+16 = 25
+% f2 = 2*x**2 + 3*x - 2
+% delta2 = 9 + 16
+% assert delta2 == 25
+% sols2 = solve(f2, x)
+% assert sorted(sols2) == [Rational(-2,1), Rational(1,2)]
+% # c) x^2 - 2x + 5 = 0  => delta = 4 - 20 = -16 < 0, pas de solution reelle
+% f3 = x**2 - 2*x + 5
+% delta3 = 4 - 20
+% assert delta3 == -16
+% assert all(not s.is_real for s in solve(f3, x))  # pas de solution reelle
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-007}{1}{10}
+Résoudre dans $\mathbb{R}$ les équations suivantes en calculant le discriminant $\Delta$.
+
+\begin{enumerate}
+  \item $x^2 - 5x + 6 = 0$
+  \item $2x^2 + 3x - 2 = 0$
+  \item $x^2 - 2x + 5 = 0$
+\end{enumerate}
+\end{exercice}

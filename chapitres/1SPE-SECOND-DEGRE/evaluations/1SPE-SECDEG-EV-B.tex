@@ -1,0 +1,153 @@
+% META: {"id": "1SPE-SECDEG-EV-B", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": 3, "b": -12, "c": 9, "a2": -2, "b2": 8, "c2": -6}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, expand, solve
+% x = symbols('x')
+%
+% # ---- Exercice 1 : f(x) = 3x^2 - 12x + 9 ----
+% f = 3*x**2 - 12*x + 9
+% a, b, c = 3, -12, 9
+% alpha = Rational(-b, 2*a)
+% assert alpha == 2
+% beta = f.subs(x, alpha)
+% assert beta == -3
+% canon = 3*(x - 2)**2 - 3
+% assert expand(canon) == f
+% Delta = b**2 - 4*a*c
+% assert Delta == 36
+% x1 = Rational(12 - 6, 6)
+% x2 = Rational(12 + 6, 6)
+% assert x1 == 1
+% assert x2 == 3
+% assert f.subs(x, x1) == 0
+% assert f.subs(x, x2) == 0
+% fac = 3*(x - 1)*(x - 3)
+% assert expand(fac) == f
+%
+% # ---- Exercice 2 : g(x) = -2x^2 + 8x - 6 ----
+% g = -2*x**2 + 8*x - 6
+% alpha_g = Rational(8, 4)
+% assert alpha_g == 2
+% beta_g = g.subs(x, 2)
+% assert beta_g == 2
+% canon_g = -2*(x - 2)**2 + 2
+% assert expand(canon_g) == g
+%
+% # ---- Exercice 3 : signe de f ----
+% assert f.subs(x, Rational(3,2)) < 0
+% assert f.subs(x, 0) > 0
+% assert f.subs(x, 4) > 0
+%
+% # ---- Exercice 4 : boite, memes dimensions ----
+% V = x*(30 - 2*x)*(20 - 2*x)
+% assert V.subs(x, 4) == 4*22*12
+% assert V.subs(x, 4) == 1056
+% assert V.subs(x, 6) == 6*18*8
+% assert V.subs(x, 6) == 864
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+% Toute reponse doit etre justifiee ; les resultats seuls ne sont pas acceptes.
+% La qualite de la redaction sera prise en compte.
+%---------------------------------------------------------------
+
+\begin{evaluation}{1SPE-SECDEG-EV-B}{55}
+
+%===============================================================
+\section*{Exercice 1 \hfill (7 points) \hfill Capacites C1, C3, C4}
+%===============================================================
+
+\textit{Competences evaluees : calculer, raisonner, communiquer.}
+
+\medskip
+On considere le polynome du second degre :
+\[
+  f(x) = 3x^2 - 12x + 9.
+\]
+
+\begin{enumerate}
+  \item Identifier les coefficients $a$, $b$ et $c$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Calculer l'abscisse $\alpha$ et l'ordonnee $\beta$ du sommet de la parabole representant $f$.
+  Ecrire la forme canonique de $f$.
+  \hfill\textit{(2 pts — calculer, communiquer)}
+
+  \item Calculer le discriminant $\Delta$ de $f$. En deduire les racines $x_1$ et $x_2$ de $f$ (avec $x_1 < x_2$).
+  \hfill\textit{(2 pts — calculer)}
+
+  \item Ecrire la forme factorisee de $f(x)$.
+  Verifier en developpant.
+  \hfill\textit{(2 pts — calculer, communiquer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 2 \hfill (5 points) \hfill Capacites C2}
+%===============================================================
+
+\textit{Competences evaluees : representer, calculer, raisonner.}
+
+\medskip
+On considere $g(x) = -2x^2 + 8x - 6$.
+
+\begin{enumerate}
+  \item Montrer que la forme canonique de $g$ est $g(x) = -2(x-2)^2 + 2$.
+  \hfill\textit{(2 pts — calculer, communiquer)}
+
+  \item En deduire les coordonnees du sommet $S$ de la parabole.
+  Preciser si $g$ admet un maximum ou un minimum, et donner sa valeur.
+  \hfill\textit{(1 pt — raisonner)}
+
+  \item Dresser le tableau de variations de $g$ sur $\mathbb{R}$.
+  \hfill\textit{(1 pt — representer)}
+
+  \item Ecrire l'equation de l'axe de symetrie de la parabole.
+  \hfill\textit{(1 pt — calculer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 3 \hfill (4 points) \hfill Capacites C4, C5}
+%===============================================================
+
+\textit{Competences evaluees : calculer, raisonner, chercher.}
+
+\medskip
+On rappelle que les racines de $f(x) = 3x^2 - 12x + 9$ sont $x_1 = 1$ et $x_2 = 3$.
+
+\begin{enumerate}
+  \item Dresser le tableau de signes de $f(x)$ sur $\mathbb{R}$.
+  \hfill\textit{(2 pts — calculer, representer)}
+
+  \item Resoudre $f(x) \leq 0$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Resoudre $3x^2 - 12x + 9 > 0$.
+  \hfill\textit{(1 pt — calculer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 4 \hfill (4 points) \hfill Capacites C6}
+%===============================================================
+
+\textit{Competences evaluees : modeliser, chercher, calculer.}
+
+\medskip
+Un artisan decoupe des carres de cote $x$~cm aux quatre coins d'une feuille de carton rectangulaire mesurant $30$~cm sur $20$~cm, puis replie les bords pour former une boite ouverte.
+
+\begin{enumerate}
+  \item Exprimer, en fonction de $x$, la longueur, la largeur et la hauteur de la boite.
+  \hfill\textit{(1 pt — modeliser)}
+
+  \item Montrer que le volume de la boite est $V(x) = x(30-2x)(20-2x)$.
+  Donner le domaine de validite de $x$.
+  \hfill\textit{(1 pt — modeliser)}
+
+  \item Calculer $V(4)$ et $V(6)$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item En observant les valeurs calculees, quelle valeur de $x$ (parmi $4$ et $6$) donne le plus grand volume ?
+  Justifier par le calcul pourquoi on ne peut pas conclure definitivement sans etude complete.
+  \hfill\textit{(1 pt — chercher)}
+\end{enumerate}
+
+\end{evaluation}

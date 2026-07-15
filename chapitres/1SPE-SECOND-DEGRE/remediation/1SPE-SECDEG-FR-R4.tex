@@ -1,0 +1,207 @@
+% META: {"id": "1SPE-SECDEG-FR-R4", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R4 : Fonctions de reference — carre, inverse
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Fonctions de reference}
+
+\textbf{Fonction carre} : $f(x) = x^2$, definie sur $\mathbb{R}$.
+\begin{itemize}
+  \item Decroissante sur $]-\infty\,;\,0]$, croissante sur $[0\,;\,+\infty[$.
+  \item Minimum en $x = 0$ : $f(0) = 0$.
+  \item Parabole symetrique par rapport a l'axe $Oy$.
+\end{itemize}
+
+\textbf{Translations} : la courbe de $f(x-\alpha) + \beta$ est obtenue en translatant celle de $f$ de vecteur $(\alpha\,;\,\beta)$.
+
+Donc $y = (x-\alpha)^2 + \beta$ est une parabole de sommet $(\alpha\,;\,\beta)$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R4-EX1}{1}{5}
+Pour $f(x) = x^2$ :
+\begin{enumerate}
+  \item Completer le tableau : $x \in \{-3, -2, -1, 0, 1, 2, 3\}$, calculer $f(x)$.
+  \item Verifier que $f(-x) = f(x)$ pour tout $x$ (symetrie).
+  \item Montrer que $f$ est decroissante sur $]-\infty\,;\,0]$ en calculant $f(a) - f(b)$ pour $a < b \leq 0$.
+  \item Tracer l'allure de la courbe (parabole en U de sommet $O$).
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% f = x**2
+% vals = {v: f.subs(x, v) for v in [-3,-2,-1,0,1,2,3]}
+% assert vals == {-3: 9, -2: 4, -1: 1, 0: 0, 1: 1, 2: 4, 3: 9}
+% # Symetrie
+% a, b = symbols('a b')
+% from sympy import expand
+% assert expand((-x)**2 - x**2) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R4-EX1}
+
+\textbf{Question 1.}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $-3$ & $-2$ & $-1$ & $0$ & $1$ & $2$ & $3$ \\
+\hline
+$x^2$ & $9$ & $4$ & $1$ & $0$ & $1$ & $4$ & $9$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 2.} $f(-x) = (-x)^2 = x^2 = f(x)$ pour tout $x \in \mathbb{R}$ : la courbe est symetrique par rapport a l'axe $Oy$.
+
+\textbf{Question 3.} Soient $a < b \leq 0$. Alors :
+\[
+f(b) - f(a) = b^2 - a^2 = (b-a)(b+a).
+\]
+On a $b - a > 0$ (car $b > a$) et $b + a \leq 0$ (car $a < b \leq 0$, donc $a + b < 0$). Donc $(b-a)(b+a) \leq 0$, i.e. $f(b) \leq f(a)$ : $f$ est decroissante sur $]-\infty\,;\,0]$.
+
+\textbf{Question 4.} (Trace libre — parabole en U, sommet $O(0\,;\,0)$, passant par $(\pm 1\,;\,1)$, $(\pm 2\,;\,4)$.)
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R4-EX2}{1}{5}
+Decrire les transformations et identifier le sommet des courbes suivantes.
+\begin{enumerate}
+  \item $g(x) = x^2 + 3$
+  \item $h(x) = (x-2)^2$
+  \item $k(x) = (x+1)^2 - 4$
+  \item $m(x) = -(x-3)^2 + 5$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% # Verifier les sommets
+% # g(x) = x^2 + 3 : sommet (0;3)
+% g = x**2 + 3
+% assert g.subs(x, 0) == 3
+% # h(x) = (x-2)^2 : sommet (2;0)
+% h = (x-2)**2
+% assert h.subs(x, 2) == 0
+% # k(x) = (x+1)^2 - 4 : sommet (-1;-4)
+% k = (x+1)**2 - 4
+% assert k.subs(x, -1) == -4
+% # m(x) = -(x-3)^2 + 5 : sommet (3;5)
+% m = -(x-3)**2 + 5
+% assert m.subs(x, 3) == 5
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R4-EX2}
+
+\commentaireMarge{La forme $a(x-\alpha)^2 + \beta$ donne directement le sommet $(\alpha\,;\,\beta)$.}
+
+\textbf{Question 1.} $g(x) = x^2 + 3$ : translation verticale de $+3$ ; sommet $S(0\,;\,3)$.
+
+\textbf{Question 2.} $h(x) = (x-2)^2$ : translation horizontale de $+2$ ; sommet $S(2\,;\,0)$.
+
+\textbf{Question 3.} $k(x) = (x+1)^2 - 4 = (x-(-1))^2 + (-4)$ ; sommet $S(-1\,;\,-4)$.
+
+\textbf{Question 4.} $m(x) = -(x-3)^2 + 5$ : $a = -1 < 0$ (parabole en $\cap$) ; sommet $S(3\,;\,5)$ (maximum).
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R4-EX3}{1}{6}
+Passer de la forme developpee a la forme canonique.
+\begin{enumerate}
+  \item $f(x) = x^2 - 4x + 7$. Calculer $\alpha = -b/(2a)$, puis $\beta = f(\alpha)$.
+  \item $g(x) = x^2 + 6x + 11$. Meme methode.
+  \item $h(x) = 2x^2 - 12x + 20$. Factoriser d'abord par $a = 2$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, factor, expand
+% x = symbols('x')
+% # f
+% f = x**2 - 4*x + 7
+% alpha_f = 2  # -(-4)/(2*1)
+% beta_f = f.subs(x, alpha_f)
+% assert beta_f == 3
+% canon_f = (x - 2)**2 + 3
+% assert expand(canon_f) == f
+% # g
+% g = x**2 + 6*x + 11
+% alpha_g = -3  # -(6)/(2*1)
+% beta_g = g.subs(x, alpha_g)
+% assert beta_g == 2
+% canon_g = (x + 3)**2 + 2
+% assert expand(canon_g) == g
+% # h
+% h = 2*x**2 - 12*x + 20
+% alpha_h = 3  # -(-12)/(2*2)
+% beta_h = h.subs(x, alpha_h)
+% assert beta_h == 2
+% canon_h = 2*(x - 3)**2 + 2
+% assert expand(canon_h) == h
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R4-EX3}
+
+\textbf{Question 1.} $a = 1$, $b = -4$, $c = 7$.
+$\alpha = -(-4)/(2 \times 1) = 2$.
+$\beta = f(2) = 4 - 8 + 7 = 3$.
+Forme canonique : $f(x) = (x-2)^2 + 3$.
+
+\textbf{Question 2.} $a = 1$, $b = 6$, $c = 11$.
+$\alpha = -6/2 = -3$.
+$\beta = g(-3) = 9 - 18 + 11 = 2$.
+Forme canonique : $g(x) = (x+3)^2 + 2$.
+
+\commentaireMarge{On factorise par $a = 2$ avant de completer le carre.}
+
+\textbf{Question 3.} $h(x) = 2(x^2 - 6x + 10)$.
+Dans $x^2 - 6x + 10$ : $\alpha = 3$, $\beta = 9 - 18 + 20 = 11$... Retour : $\alpha = -(-6)/(2 \times 1) = 3$, $f_{\text{int}}(3) = 9 - 18 + 10 = 1$, donc $x^2 - 6x + 10 = (x-3)^2 + 1$.
+Ainsi : $h(x) = 2\bigl[(x-3)^2 + 1\bigr] = 2(x-3)^2 + 2$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R4-EX4}{1}{6}
+Utiliser la forme canonique pour repondre aux questions suivantes.
+\begin{enumerate}
+  \item Montrer que $f(x) = x^2 - 6x + 10 \geq 1$ pour tout $x \in \mathbb{R}$.
+  \item Trouver la valeur de $x$ qui minimise $g(x) = (x-1)^2 + 4$, et preciser la valeur minimale.
+  \item Montrer que $h(x) = -3(x+2)^2 + 1 \leq 1$ pour tout $x$, et preciser quand l'egalite a lieu.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% f = x**2 - 6*x + 10
+% # forme canonique = (x-3)^2 + 1
+% from sympy import expand
+% assert expand((x-3)**2 + 1) == f
+% # minimum = 1 en x = 3
+% assert f.subs(x, 3) == 1
+% # g minimum en x=1, valeur 4
+% g = (x-1)**2 + 4
+% assert g.subs(x, 1) == 4
+% # h <= 1 : h = -3(x+2)^2 + 1, le terme -3(x+2)^2 <= 0
+% h = -3*(x+2)**2 + 1
+% assert h.subs(x, -2) == 1  # egalite en x = -2
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R4-EX4}
+
+\textbf{Question 1.} $f(x) = x^2 - 6x + 10 = (x-3)^2 + 1$. Comme $(x-3)^2 \geq 0$, on a $f(x) \geq 1$ pour tout $x \in \mathbb{R}$. L'egalite a lieu pour $x = 3$ : $f(3) = 1$.
+
+\textbf{Question 2.} $g(x) = (x-1)^2 + 4 \geq 4$ pour tout $x$ (car $(x-1)^2 \geq 0$). Le minimum est $g(1) = 4$, atteint en $x = 1$.
+
+\textbf{Question 3.} $h(x) = -3(x+2)^2 + 1$. Comme $(x+2)^2 \geq 0$, on a $-3(x+2)^2 \leq 0$, donc $h(x) \leq 1$ pour tout $x$. L'egalite $h(x) = 1$ a lieu quand $(x+2)^2 = 0$, c'est-a-dire pour $x = -2$.
+
+\end{corrige}

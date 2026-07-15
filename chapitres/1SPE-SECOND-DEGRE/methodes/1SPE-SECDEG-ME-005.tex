@@ -1,0 +1,87 @@
+% META: {"id": "1SPE-SECDEG-ME-005", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M5}{Résoudre une inéquation du second degré}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « résoudre l'inéquation »
+  $ax^2 + bx + c \leq 0$ (ou $\geq 0$, $< 0$, $> 0$), de « déterminer l'ensemble des solutions »,
+  ou de « trouver les valeurs de $x$ pour lesquelles $f(x) \geq k$ ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Je ramène l'inéquation à la forme $ax^2 + bx + c \leq 0$ (ou $\geq 0$) en développant
+      et en passant tous les termes d'un même côté.
+    \item Je calcule $\Delta = b^2 - 4ac$ et les racines éventuelles $x_1 \leq x_2$.
+    \item Je dresse le tableau de signes du trinôme (méthode M4).
+    \item Je lis l'ensemble solution dans le tableau en tenant compte de l'inégalité demandée :
+      \begin{itemize}
+        \item Les valeurs aux racines sont incluses si l'inégalité est large ($\leq$ ou $\geq$).
+        \item Les valeurs aux racines sont exclues si l'inégalité est stricte ($<$ ou $>$).
+      \end{itemize}
+    \item J'écris l'ensemble solution $S$ en utilisant la notation d'intervalle.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Résoudre dans $\mathbb{R}$ l'inéquation $x^2 - 4x + 3 \geq 0$.
+
+  \medskip
+  \commentaireMarge{L'expression est déjà ramenée à 0 ; identifier $a = 1$, $b = -4$, $c = 3$.}%
+  On a $a = 1 > 0$, $b = -4$, $c = 3$.
+
+  \commentaireMarge{Calculer $\Delta$.}%
+  \[
+    \Delta = (-4)^2 - 4 \times 1 \times 3 = 16 - 12 = 4 > 0.
+  \]
+
+  \commentaireMarge{Calculer les deux racines.}%
+  \[
+    x_1 = \frac{4 - \sqrt{4}}{2} = \frac{4 - 2}{2} = 1,
+    \qquad
+    x_2 = \frac{4 + \sqrt{4}}{2} = \frac{4 + 2}{2} = 3.
+  \]
+
+  \commentaireMarge{Tableau de signes : $a > 0$, le trinôme est positif hors des racines.}%
+  \[
+  \begin{array}{c|ccccccc}
+    x & -\infty & & 1 & & 3 & & +\infty \\
+    \hline
+    x^2 - 4x + 3 & & + & 0 & - & 0 & + & \\
+  \end{array}
+  \]
+
+  \commentaireMarge{Lire les solutions de $x^2 - 4x + 3 \geq 0$.}%
+  Le trinôme est positif ou nul sur $\left]-\infty\,;\,1\right]$ et sur $\left[3\,;\,+\infty\right[$.
+
+  \medskip
+  \textbf{Conclusion :}
+  \[
+    S = \left]-\infty\,;\,1\right] \cup \left[3\,;\,+\infty\right[.
+  \]
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Oublier de ramener l'inéquation à zéro avant d'appliquer le tableau de
+      signes. Par exemple, $x^2 - 4x \geq -3$ doit d'abord s'écrire $x^2 - 4x + 3 \geq 0$.
+    \item \textbf{Piège 2.} Confondre bornes ouvertes et fermées. Si l'inégalité est large ($\geq$
+      ou $\leq$), les racines sont \emph{incluses} dans l'ensemble solution (crochets fermés).
+      Si elle est stricte ($>$ ou $<$), elles sont \emph{exclues} (crochets ouverts).
+    \item \textbf{Piège 3.} Lire le tableau « à l'envers » : pour $ax^2 + bx + c \geq 0$ avec $a > 0$,
+      la solution est l'extérieur de l'intervalle formé par les racines, et non l'intérieur.
+  \end{itemize}
+}
+
+\verifier{%
+  Tester un point de chaque intervalle dans l'inégalité de départ :
+  \begin{itemize}
+    \item $x = 0 \in S$ : $0 - 0 + 3 = 3 \geq 0$ \checkmark
+    \item $x = 2 \notin S$ : $4 - 8 + 3 = -1 < 0$ \checkmark (pas solution, comme attendu)
+    \item $x = 4 \in S$ : $16 - 16 + 3 = 3 \geq 0$ \checkmark
+    \item Aux bornes : $x = 1$ et $x = 3$ donnent $0 \geq 0$ \checkmark (bornes incluses).
+  \end{itemize}
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

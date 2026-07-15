@@ -1,0 +1,66 @@
+% META: {"id": "1SPE-SECDEG-CO-004", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-004", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify
+% x = symbols('x')
+% f = -x**2 + 4*x + 1
+% alpha = Rational(4, 2)   # -b/(2a) = -4/(2*(-1)) = 2
+% assert alpha == 2
+% beta = f.subs(x, alpha)
+% assert beta == 5
+% assert f.subs(x, 0) == 1
+% assert f.subs(x, 4) == 1
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-004}
+
+\textbf{1. Signe de $a$ et sens d'ouverture.}
+
+\commentaireMarge{$a < 0 \Rightarrow$ parabole tournée vers le bas.}
+
+On a $a = -1 < 0$, donc la parabole est tournée vers le \textbf{bas} (concavité vers le bas). La fonction admet un \textbf{maximum}.
+
+\medskip
+\textbf{2. Coordonnées du sommet $S$.}
+
+\commentaireMarge{$\alpha = -\dfrac{b}{2a}$.}
+
+\[\alpha = -\frac{b}{2a} = -\frac{4}{2 \times (-1)} = -\frac{4}{-2} = 2.\]
+
+\[\beta = f(2) = -(2)^2 + 4 \times 2 + 1 = -4 + 8 + 1 = 5.\]
+
+Le sommet est $S(2\,;\,5)$.
+
+\medskip
+\textbf{3. Axe de symétrie.}
+
+\commentaireMarge{L'axe de symétrie passe par le sommet.}
+
+L'axe de symétrie de la parabole a pour équation :
+\[\boxed{x = 2.}\]
+
+\medskip
+\textbf{4. Tableau de variations.}
+
+Puisque $a = -1 < 0$, $f$ est \textbf{croissante} sur $\left]-\infty\,;\,2\right]$ puis \textbf{décroissante} sur $\left[2\,;\,+\infty\right[$.
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & 2 & & +\infty \\
+\hline
+f(x) & & \nearrow & 5 & \searrow & \\
+ & -\infty & & & & -\infty \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{5. Calcul de $f(0)$ et $f(4)$.}
+
+\commentaireMarge{Symétrie par rapport à l'axe $x = 2$.}
+
+\[f(0) = -(0)^2 + 4\times 0 + 1 = 1.\]
+\[f(4) = -(4)^2 + 4\times 4 + 1 = -16 + 16 + 1 = 1.\]
+
+On remarque que $f(0) = f(4) = 1$. Cela s'explique par la symétrie de la parabole par rapport à l'axe $x = 2$ : les points d'abscisse $0$ et $4$ sont symétriques par rapport à cet axe ($0$ et $4$ sont à égale distance de $2$), donc ils ont la même image.
+
+\end{corrige}

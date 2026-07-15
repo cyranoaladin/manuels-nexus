@@ -1,0 +1,148 @@
+% META: {"id": "1SPE-SECDEG-CO-038", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-038", "capacites_codes": ["C1", "C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, m = symbols('x m', real=True)
+% f = x**2 - 2*m*x + (m**2 - m - 2)
+% Delta = (2*m)**2 - 4*(m**2 - m - 2)
+% Delta_simplified = expand(Delta)
+% assert Delta_simplified == 4*m + 8
+% # Delta > 0 : m > -2 ; Delta = 0 : m = -2 ; Delta < 0 : m < -2
+% # m = 0 : Delta = 8, racines = (0 +/- sqrt(8))/2 = +/- sqrt(2)
+% f_m0 = f.subs(m, 0)
+% assert f_m0 == x**2 - 2
+% sols_m0 = sorted(solve(f_m0, x))
+% assert sols_m0 == [-sqrt(2), sqrt(2)]
+% # m = -2 : Delta = 0, racine double alpha = m = -2
+% f_m2 = f.subs(m, -2)
+% Delta_m2 = Delta_simplified.subs(m, -2)
+% assert Delta_m2 == 0
+% x0_m2 = Rational(-2*(-2), 2)
+% assert x0_m2 == 2
+% # Correction : sommet = 2m/2 = m => x0 = m = -2
+% alpha_m2 = -(-2)  # = -b/(2a) = 2m/2 = m
+% assert f_m2.subs(x, -2) == 0
+% # m = 2 : Delta = 16, racines = (4 +/- 4)/2 = 0 ou 4
+% f_m2p = f.subs(m, 2)
+% Delta_m2p = Delta_simplified.subs(m, 2)
+% assert Delta_m2p == 16
+% r1 = Rational(4 - 4, 2)
+% r2 = Rational(4 + 4, 2)
+% assert r1 == 0
+% assert r2 == 4
+% assert f_m2p.subs(x, 0) == 0
+% assert f_m2p.subs(x, 4) == 0
+% # Q3 : forme canonique : f_m = (x - m)^2 + (- m - 2)
+% f_canon = (x - m)**2 + (-m - 2)
+% assert expand(f_canon) == expand(f)
+% # Q4 : 0 racine de f_m : f(0) = m^2 - m - 2 = 0 => m = -1 ou m = 2
+% sols_m = sorted(solve(m**2 - m - 2, m))
+% assert sols_m == [-1, 2]
+% # Pour m = -1 : f(x) = x^2 + 2x = x(x+2)
+% f_m1 = f.subs(m, -1)
+% assert f_m1 == x**2 + 2*x
+% assert simplify(f_m1 - x*(x+2)) == 0
+% # Pour m = 2 : f(x) = x^2 - 4x = x(x-4)
+% f_m2v = f.subs(m, 2)
+% assert simplify(f_m2v - x*(x-4)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-038}
+
+\textbf{1. Discriminant en fonction de $m$.}
+
+\textit{a) Calcul de $\Delta(m)$.}
+
+\commentaireMarge{$\Delta = b^2 - 4ac$ avec $b = -2m$, $c = m^2 - m - 2$.}
+
+\[\Delta(m) = (-2m)^2 - 4 \times 1 \times (m^2 - m - 2) = 4m^2 - 4m^2 + 4m + 8 = 4m + 8.\]
+
+\textit{b) Signe de $\Delta(m)$ et nombre de racines.}
+
+\commentaireMarge{Étudier le signe de $4m + 8 = 4(m+2)$.}
+
+$\Delta(m) = 4(m + 2)$.
+\begin{itemize}
+  \item Si $m < -2$ : $\Delta < 0$, pas de racine réelle.
+  \item Si $m = -2$ : $\Delta = 0$, une racine double.
+  \item Si $m > -2$ : $\Delta > 0$, deux racines réelles distinctes.
+\end{itemize}
+
+\medskip
+\textbf{2. Cas particuliers.}
+
+\textit{a) Pour $m = 0$.}
+
+\commentaireMarge{$f_0(x) = x^2 - 2$.}
+
+$f_0(x) = x^2 - 2$ : $\Delta = 8$, donc $x_{1,2} = \pm\sqrt{2}$.
+
+\textit{b) Pour $m = -2$.}
+
+\commentaireMarge{$\Delta(-2) = 0$ : racine double.}
+
+$f_{-2}(x) = x^2 + 4x + (4 + 2 - 2) = x^2 + 4x + 4 = (x+2)^2$.
+
+Racine double : $x_0 = -2$. On vérifie : $f_{-2}(-2) = 0$. \hfill $\square$
+
+\textit{c) Pour $m = 2$.}
+
+$f_2(x) = x^2 - 4x + (4 - 2 - 2) = x^2 - 4x$. $\Delta = 16$, racines :
+
+\[x_1 = \frac{4 - 4}{2} = 0 \qquad \text{et} \qquad x_2 = \frac{4 + 4}{2} = 4.\]
+
+La racine $x_1 = 0$ est remarquable.
+
+\medskip
+\textbf{3. Forme canonique.}
+
+\textit{a) Forme canonique de $f_m$.}
+
+\commentaireMarge{$\alpha = \dfrac{2m}{2} = m$.}
+
+\[\alpha = m, \qquad \beta = f_m(m) = m^2 - 2m^2 + m^2 - m - 2 = -m - 2.\]
+
+\[f_m(x) = (x - m)^2 - (m + 2).\]
+
+\textit{b) Sommet en fonction de $m$.}
+
+Le sommet est $S(m\,;\,-m-2)$ : ses coordonnées dépendent toutes deux de $m$. Lorsque $m$ varie, le sommet se déplace le long de la droite d'équation $\beta = -\alpha - 2$.
+
+\medskip
+\textbf{4. Valeurs de $m$ pour lesquelles $0$ est racine.}
+
+\textit{a) Condition.}
+
+\commentaireMarge{$f_m(0) = 0 \iff m^2 - m - 2 = 0$.}
+
+$f_m(0) = m^2 - m - 2 = 0$.
+
+$\Delta_m = 1 + 8 = 9$, donc $m = \dfrac{1 \pm 3}{2}$, c'est-à-dire $m = -1$ ou $m = 2$.
+
+\textit{b) Factorisation pour ces valeurs.}
+
+Pour $m = -1$ : $f_{-1}(x) = x^2 + 2x + 0 = x(x + 2)$.
+
+Pour $m = 2$ : $f_2(x) = x^2 - 4x + 0 = x(x - 4)$.
+
+\medskip
+\textbf{5. Question ouverte : deux racines strictement positives.}
+
+\commentaireMarge{Conditions : $\Delta > 0$, somme des racines $> 0$ et produit des racines $> 0$.}
+
+Pour $f_m(x) = x^2 - 2mx + (m^2 - m - 2)$, les relations coefficients-racines donnent :
+\[x_1 + x_2 = 2m \quad \text{et} \quad x_1 \cdot x_2 = m^2 - m - 2.\]
+
+Conditions pour deux racines strictement positives :
+\begin{enumerate}
+  \item $\Delta(m) > 0 \iff m > -2$.
+  \item $x_1 + x_2 > 0 \iff 2m > 0 \iff m > 0$.
+  \item $x_1 \cdot x_2 > 0 \iff m^2 - m - 2 > 0 \iff (m-2)(m+1) > 0 \iff m < -1$ ou $m > 2$.
+\end{enumerate}
+
+L'intersection des trois conditions : $m > -2$ et $m > 0$ et ($m < -1$ ou $m > 2$).
+
+La condition $m > 0$ exclut $m < -1$, donc : $m > 0$ et $m > 2$, soit $m > 2$.
+
+$f_m$ admet deux racines strictement positives si et seulement si $m > 2$.
+
+\baremeIndicatif{Q1 : 3 pts (calculer, raisonner) ; Q2 : 3 pts (calculer) ; Q3 : 2 pts (calculer, communiquer) ; Q4 : 2 pts (calculer) ; Q5 : 4 pts (chercher, raisonner, communiquer)}
+\end{corrige}

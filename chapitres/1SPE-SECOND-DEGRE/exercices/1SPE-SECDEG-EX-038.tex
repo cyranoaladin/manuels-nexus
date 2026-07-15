@@ -1,0 +1,72 @@
+% META: {"id": "1SPE-SECDEG-EX-038", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECDEG-C1", "1SPE-SECDEG-C3", "1SPE-SECDEG-C4"], "capacites_codes": ["C1", "C3", "C4"], "methodes": ["M1", "M3", "M4"], "parcours": 3, "competences": ["chercher", "raisonner", "calculer", "communiquer"], "duree_min": 40, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-038.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-038.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, m = symbols('x m', real=True)
+% # f_m(x) = x^2 - 2mx + (m^2 - m - 2)
+% f = x**2 - 2*m*x + (m**2 - m - 2)
+% # Discriminant : Delta = (2m)^2 - 4*(m^2 - m - 2) = 4m^2 - 4m^2 + 4m + 8 = 4m + 8
+% Delta = (2*m)**2 - 4*(m**2 - m - 2)
+% Delta_simplified = expand(Delta)
+% assert Delta_simplified == 4*m + 8
+% # Delta > 0 : 4m + 8 > 0 => m > -2
+% # Delta = 0 : m = -2
+% # Delta < 0 : m < -2
+% # Pour m=0 : Delta=8 > 0, racines x = (2*0 +/- sqrt(8))/2 = +/- sqrt(2)
+% f_m0 = f.subs(m, 0)
+% assert f_m0 == x**2 - 2
+% # Pour m=-2 : Delta=0, racine double x0 = 2*(-2)/2 = -2
+% f_m2 = f.subs(m, -2)
+% Delta_m2 = Delta_simplified.subs(m, -2)
+% assert Delta_m2 == 0
+% x0 = -(-2*(-2)) / 2  # = -2*m/(2) avec m=-2
+% assert x0 == -2
+% assert f_m2.subs(x, x0) == 0
+% # Pour m=2 : Delta = 4*2+8=16, racines (4+/-4)/2 = 4 ou 0
+% f_m2p = f.subs(m, 2)
+% Delta_m2p = Delta_simplified.subs(m, 2)
+% assert Delta_m2p == 16
+% r1 = Rational(4 - 4, 2)
+% r2 = Rational(4 + 4, 2)
+% assert r1 == 0
+% assert r2 == 4
+% assert f_m2p.subs(x, r1) == 0
+% assert f_m2p.subs(x, r2) == 0
+% # Valeur de m pour que f admet 0 comme racine : f(0) = m^2 - m - 2 = 0
+% sols = solve(m**2 - m - 2, m)
+% assert set(sols) == {-1, 2}
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-038}{3}{40}
+Pour tout réel $m$, on considère le trinôme :
+\[
+  f_m(x) = x^2 - 2mx + (m^2 - m - 2).
+\]
+
+\begin{enumerate}
+  \item \textbf{Discriminant en fonction de $m$.}
+  \begin{enumerate}
+    \item Calculer le discriminant $\Delta(m)$ de $f_m$ en fonction de $m$. Simplifier l'expression obtenue.
+    \item Discuter le signe de $\Delta(m)$ selon les valeurs de $m$ et en déduire le nombre de racines réelles de $f_m$.
+  \end{enumerate}
+
+  \item \textbf{Cas particuliers.}
+  \begin{enumerate}
+    \item Pour $m = 0$ : calculer les racines de $f_0$ (on acceptera des réponses sous forme de radicaux).
+    \item Pour $m = -2$ : montrer que $f_{-2}$ admet une racine double et la calculer.
+    \item Pour $m = 2$ : calculer les deux racines de $f_2$. L'une d'elles est-elle remarquable ?
+  \end{enumerate}
+
+  \item \textbf{Forme canonique.}
+  \begin{enumerate}
+    \item Écrire la forme canonique de $f_m$ en fonction de $m$.
+    \item Les coordonnées du sommet de la parabole dépendent-elles de $m$ ? Commenter.
+  \end{enumerate}
+
+  \item \textbf{Valeurs particulières de $m$.}
+  \begin{enumerate}
+    \item Déterminer la (ou les) valeur(s) de $m$ pour lesquelles $0$ est racine de $f_m$.
+    \item Pour ces valeurs, factoriser complètement $f_m(x)$.
+  \end{enumerate}
+
+  \item \textbf{Question ouverte.} On cherche les valeurs de $m$ pour lesquelles $f_m$ a deux racines strictement positives. Formuler des conditions sur les racines (à l'aide des relations entre coefficients et racines d'un trinôme) et résoudre le problème. Justifier chaque étape.
+\end{enumerate}
+\end{exercice}

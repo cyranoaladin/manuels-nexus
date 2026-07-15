@@ -1,0 +1,74 @@
+% META: {"id": "1SPE-SECDEG-CO-006", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-006", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify
+% x = symbols('x')
+% g = -3*x**2 + 12*x - 5
+% alpha = Rational(12, 6)   # -b/(2a) = -12/(2*(-3)) = 2
+% assert alpha == 2
+% beta = g.subs(x, alpha)
+% assert beta == 7
+% assert simplify(g - (-3*(x-2)**2 + 7)) == 0
+% assert g.subs(x, 0) == -5
+% # g(4) : x=4 est symetrique de x=0 par rapport a x=2, donc g(4)=g(0)=-5 < 0
+% assert g.subs(x, 4) == -5
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-006}
+
+\textbf{1. Coordonnées du sommet.}
+
+\commentaireMarge{$\alpha = -\dfrac{b}{2a}$, ici $a=-3$, $b=12$.}
+
+\[\alpha = -\frac{b}{2a} = -\frac{12}{2 \times (-3)} = -\frac{12}{-6} = 2.\]
+
+\[\beta = g(2) = -3 \times 4 + 12 \times 2 - 5 = -12 + 24 - 5 = 7.\]
+
+Le sommet est $S(2\,;\,7)$.
+
+\medskip
+\textbf{2. Forme canonique.}
+
+\commentaireMarge{$g(x) = a(x-\alpha)^2+\beta$.}
+
+\[\boxed{g(x) = -3(x-2)^2 + 7.}\]
+
+\textit{Vérification :} $-3(x-2)^2 + 7 = -3(x^2-4x+4)+7 = -3x^2+12x-12+7 = -3x^2+12x-5$. \hfill $\square$
+
+\medskip
+\textbf{3. Tableau de variations, maximum.}
+
+\commentaireMarge{$a = -3 < 0$ : maximum en $\alpha = 2$.}
+
+Puisque $a = -3 < 0$, $g$ est \textbf{croissante} sur $\left]-\infty\,;\,2\right]$ puis \textbf{décroissante} sur $\left[2\,;\,+\infty\right[$.
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & 2 & & +\infty \\
+\hline
+g(x) & & \nearrow & 7 & \searrow & \\
+ & -\infty & & & & -\infty \\
+\hline
+\end{array}
+\]
+
+La valeur maximale de $g$ est $\mathbf{7}$, atteinte en $x = 2$.
+
+\medskip
+\textbf{4. Calcul et interprétation de $g(0)$.}
+
+\[g(0) = -3 \times 0 + 12 \times 0 - 5 = -5.\]
+
+\commentaireMarge{$g(0)$ est l'ordonnée à l'origine de la parabole.}
+
+$g(0) = -5$ est l'ordonnée à l'origine de la parabole (c'est-à-dire la valeur en laquelle la parabole coupe l'axe des ordonnées).
+
+\medskip
+\textbf{5. Signe de $g(4)$ par symétrie.}
+
+\commentaireMarge{$0$ et $4$ sont symétriques par rapport à l'axe $x=2$.}
+
+L'axe de symétrie de la parabole est $x = 2$. Les abscisses $0$ et $4$ sont symétriques par rapport à cet axe (car $\dfrac{0+4}{2} = 2$), donc $g(4) = g(0) = -5 < 0$.
+
+Ainsi, $g(4) < 0$.
+
+\end{corrige}

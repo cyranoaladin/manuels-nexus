@@ -1,0 +1,135 @@
+% META: {"id": "1SPE-SECDEG-CO-041", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-041", "capacites_codes": ["C3", "C4", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% X = symbols('X', real=True)
+% x = symbols('x', real=True)
+% P = X**2 - 5*X + 4
+% Delta = 25 - 16
+% assert Delta == 9
+% X1 = Rational(5 - 3, 2)
+% X2 = Rational(5 + 3, 2)
+% assert X1 == 1
+% assert X2 == 4
+% assert P.subs(X, X1) == 0
+% assert P.subs(X, X2) == 0
+% # x^2 = 1 => x = +/-1 ; x^2 = 4 => x = +/-2
+% sols = [-2, -1, 1, 2]
+% P_x = x**4 - 5*x**2 + 4
+% for s in sols:
+%     assert P_x.subs(x, s) == 0
+% # Factorisation
+% fact = (x**2 - 1)*(x**2 - 4)
+% assert expand(fact) == P_x
+% fact_full = (x-1)*(x+1)*(x-2)*(x+2)
+% assert expand(fact_full) == P_x
+% # Tableau de signes
+% test_vals = [(-3, 1), (Rational(-3,2), -1), (0, 1), (Rational(3,2), -1), (3, 1)]
+% for val, expected_sign in test_vals:
+%     val_sign = 1 if P_x.subs(x, val) > 0 else -1
+%     assert val_sign == expected_sign
+% # P_x >= 0 : ]-inf,-2] U [-1,1] U [2,+inf[
+% # P_x <= 0 : [-2,-1] U [1,2]
+% assert P_x.subs(x, -3) > 0
+% assert P_x.subs(x, Rational(-3,2)) < 0
+% assert P_x.subs(x, 0) > 0
+% assert P_x.subs(x, Rational(3,2)) < 0
+% assert P_x.subs(x, 3) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-041}
+
+\textbf{1. Substitution $X = x^2$.}
+
+\textit{a) Équation en $X$.}
+
+\commentaireMarge{$x^4 = (x^2)^2 = X^2$.}
+
+En posant $X = x^2$, l'équation $x^4 - 5x^2 + 4 = 0$ devient :
+\[X^2 - 5X + 4 = 0.\]
+
+\textit{b) Résolution de l'équation en $X$.}
+
+$\Delta = 25 - 16 = 9$.
+
+\[X_1 = \frac{5 - 3}{2} = 1 \qquad \text{et} \qquad X_2 = \frac{5 + 3}{2} = 4.\]
+
+\textit{c) Compatibilité avec $X \geqslant 0$.}
+
+$X_1 = 1 \geqslant 0$ et $X_2 = 4 \geqslant 0$ : les deux valeurs sont compatibles.
+
+\medskip
+\textbf{2. Solutions de l'équation initiale.}
+
+\textit{a) Résolution de $x^2 = X$.}
+
+\commentaireMarge{$x^2 = k \geqslant 0 \implies x = \pm\sqrt{k}$.}
+
+Pour $X_1 = 1$ : $x^2 = 1 \implies x = -1$ ou $x = 1$.
+
+Pour $X_2 = 4$ : $x^2 = 4 \implies x = -2$ ou $x = 2$.
+
+L'ensemble des solutions est $\mathcal{S} = \{-2\,;\,-1\,;\,1\,;\,2\}$.
+
+\textit{b) Vérification.}
+
+Pour $x = \pm 1$ : $(\pm 1)^4 - 5(\pm 1)^2 + 4 = 1 - 5 + 4 = 0$. \hfill $\square$
+
+Pour $x = \pm 2$ : $(\pm 2)^4 - 5(\pm 2)^2 + 4 = 16 - 20 + 4 = 0$. \hfill $\square$
+
+\medskip
+\textbf{3. Factorisation.}
+
+\textit{a) Produit de deux trinômes du second degré.}
+
+\commentaireMarge{$x^4 - 5x^2 + 4 = (x^2 - X_1)(x^2 - X_2)$.}
+
+\[x^4 - 5x^2 + 4 = (x^2 - 1)(x^2 - 4).\]
+
+\textit{b) Factorisation complète.}
+
+\[(x^2 - 1)(x^2 - 4) = (x-1)(x+1)(x-2)(x+2).\]
+
+\medskip
+\textbf{4. Tableau de signes.}
+
+\textit{a) Tableau de signes de $(x-2)(x-1)(x+1)(x+2)$.}
+
+\commentaireMarge{Quatre racines : $-2$, $-1$, $1$, $2$. Le polynôme est de degré $4$ à coefficients positifs : positif pour $|x|$ grand.}
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccccccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ & & $-1$ & & $1$ & & $2$ & & $+\infty$ \\
+\hline
+$P(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textit{b) Inéquation $x^4 - 5x^2 + 4 \leqslant 0$.}
+
+D'après le tableau, $P(x) \leqslant 0$ sur $\mathcal{S} = \left[-2\,;\,-1\right] \cup \left[1\,;\,2\right]$.
+
+\textit{c) Inéquation $x^4 - 5x^2 + 4 \geqslant 0$.}
+
+$P(x) \geqslant 0$ sur $\mathcal{S} = \left]-\infty\,;\,-2\right] \cup \left[-1\,;\,1\right] \cup \left[2\,;\,+\infty\right[$.
+
+\medskip
+\textbf{5. Question ouverte : $x^4 - 5x^2 + k = 0$.}
+
+\commentaireMarge{On pose $X = x^2 \geqslant 0$ : équation $X^2 - 5X + k = 0$.}
+
+En posant $X = x^2$, on obtient $X^2 - 5X + k = 0$, de discriminant $\Delta_k = 25 - 4k$.
+
+\textbf{Cas 1 : $k > \dfrac{25}{4}$ ($\Delta_k < 0$).} Aucune solution réelle en $X$, donc aucune solution réelle en $x$.
+
+\textbf{Cas 2 : $k = \dfrac{25}{4}$ ($\Delta_k = 0$).} Une racine double $X_0 = \dfrac{5}{2} > 0$, donnant $x = \pm\sqrt{\frac{5}{2}}$ : deux solutions réelles.
+
+\textbf{Cas 3 : $0 < k < \dfrac{25}{4}$ ($\Delta_k > 0$).} Deux racines $X_{1,2} = \dfrac{5 \pm \sqrt{25-4k}}{2}$, toutes deux positives (car $X_1 X_2 = k > 0$ et $X_1 + X_2 = 5 > 0$). Chacune donne deux racines en $x$ : quatre solutions réelles.
+
+\textbf{Cas 4 : $k = 0$.} $X_1 = 0$ et $X_2 = 5$ : $X_1 = 0$ donne $x = 0$, $X_2 = 5$ donne $x = \pm\sqrt{5}$. Trois solutions réelles ($0$ est de multiplicité $2$ mais compté une fois).
+
+\textbf{Cas 5 : $k < 0$.} $X_1 < 0$ et $X_2 > 0$ (car $X_1 X_2 = k < 0$). Seul $X_2 > 0$ convient, donnant deux solutions réelles $x = \pm\sqrt{X_2}$.
+
+\baremeIndicatif{Q1 : 2 pts (calculer) ; Q2 : 2 pts (calculer, raisonner) ; Q3 : 2 pts (calculer) ; Q4 : 4 pts (raisonner) ; Q5 : 4 pts (chercher, raisonner, communiquer)}
+\end{corrige}

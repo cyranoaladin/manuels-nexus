@@ -1,0 +1,35 @@
+% META: {"id": "1SPE-SECDEG-EX-032", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C1", "1SPE-SECOND-DEGRE-C4"], "capacites_codes": ["C1", "C4"], "methodes": ["M1", "M4"], "parcours": 2, "competences": ["calculer", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-032.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-032.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor, simplify, Rational, solve
+% x = symbols('x')
+% # Probleme : trouver a, b, c sachant que parabole passe par A(0;-3), B(1;0), C(-3;0)
+% # => c = -3 (point A)
+% # => a + b + c = 0 => a + b = 3
+% # => 9a - 3b + c = 0 => 9a - 3b = 3 => 3a - b = 1
+% # Systeme : a+b=3 et 3a-b=1 => 4a=4 => a=1, b=2
+% a, b, c = 1, 2, -3
+% f = a*x**2 + b*x + c
+% assert f.subs(x, 0) == -3    # passe par A
+% assert f.subs(x, 1) == 0     # passe par B
+% assert f.subs(x, -3) == 0    # passe par C
+% # forme canonique : (x+1)^2 - 4
+% alpha = Rational(-2, 2)
+% assert alpha == -1
+% beta = f.subs(x, alpha)
+% assert beta == -4
+% assert simplify(f - ((x+1)**2 - 4)) == 0
+% # factorisation : (x-1)(x+3)
+% assert factor(f) == (x - 1)*(x + 3)
+% # signe : a>0, negatif entre -3 et 1
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-032}{2}{20}
+La représentation graphique d'une fonction $f(x) = ax^2 + bx + c$ passe par les points $A(0\,;\,-3)$, $B(1\,;\,0)$ et $C(-3\,;\,0)$.
+
+\begin{enumerate}
+  \item \textbf{(C1)} En utilisant les coordonnées de chaque point, écrire un système d'équations en $a$, $b$, $c$.
+  \item Résoudre ce système et en déduire l'expression de $f(x)$.
+  \item \textbf{(C1)} Écrire $f$ sous forme canonique.
+  \item \textbf{(C4)} Factoriser $f(x)$ et vérifier que $B$ et $C$ sont bien les points d'intersection avec l'axe des abscisses.
+  \item \textbf{(C4)} Dresser le tableau de signes de $f$ sur $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}

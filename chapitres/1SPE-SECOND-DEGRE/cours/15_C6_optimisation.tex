@@ -1,0 +1,89 @@
+% META: {"id": "1SPE-SECDEG-CR-015", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+
+\section{Modélisation et optimisation}
+
+% ============================================================
+% STRATE 1 — Le sommet comme extremum, méthode
+% ============================================================
+
+\propriete[5 — Extremum d'un polynôme du second degré]{
+Soit $f(x) = ax^2 + bx + c$ ($a \neq 0$) un polynôme du second degré de sommet $S(\alpha\,;\,\beta)$ avec $\alpha = -\dfrac{b}{2a}$ et $\beta = f(\alpha)$.
+
+\begin{itemize}
+  \item Si $a > 0$, $f$ admet un \textbf{minimum global} égal à $\beta$, atteint en $x = \alpha$.
+  \item Si $a < 0$, $f$ admet un \textbf{maximum global} égal à $\beta$, atteint en $x = \alpha$.
+\end{itemize}
+
+Si le problème impose un \textbf{domaine de validité} $[x_{\min}\,;\,x_{\max}]$, on doit vérifier si $\alpha$ appartient à ce domaine.
+\begin{itemize}
+  \item Si $\alpha \in [x_{\min}\,;\,x_{\max}]$ : l'extremum global est $\beta$.
+  \item Sinon : l'extremum sur le domaine est atteint à l'une des bornes ; on compare $f(x_{\min})$ et $f(x_{\max})$.
+\end{itemize}
+}
+
+\propriete[6 — Méthode de résolution d'un problème d'optimisation]{
+\begin{enumerate}
+  \item \textbf{Définir la variable} et préciser son domaine de validité.
+  \item \textbf{Exprimer la quantité à optimiser} en fonction de cette variable : obtenir $f(x) = ax^2 + bx + c$.
+  \item \textbf{Calculer $\alpha = -\dfrac{b}{2a}$} et vérifier que $\alpha$ appartient au domaine.
+  \item \textbf{Calculer $\beta = f(\alpha)$} : c'est la valeur optimale.
+  \item \textbf{Conclure} en précisant la valeur de $x$ et la valeur optimale atteinte.
+\end{enumerate}
+}
+
+\exemple{
+Un agriculteur dispose de $120$~m de clôture pour délimiter un enclos rectangulaire le long d'un mur (qui sert de quatrième côté). On note $x$ la longueur du côté perpendiculaire au mur (en m).
+
+\textbf{Étape 1.} Les deux côtés perpendiculaires mesurent $x$ et le côté parallèle mesure $120 - 2x$. Domaine : $x > 0$ et $120 - 2x > 0$, soit $x \in ]0\,;\,60[$.
+
+\textbf{Étape 2.} Aire : $A(x) = x(120 - 2x) = -2x^2 + 120x$.
+
+\textbf{Étape 3.} $a = -2 < 0$ (maximum), $\alpha = -\dfrac{120}{-4} = 30 \in ]0\,;\,60[$. \checkmark
+
+\textbf{Étape 4.} $\beta = A(30) = -2 \times 900 + 120 \times 30 = -1800 + 3600 = 1800$.
+
+\textbf{Étape 5.} L'aire maximale est $\mathbf{1\,800~m^2}$, obtenue pour $x = 30$~m (côtés perpendiculaires de $30$~m et côté parallèle de $60$~m).
+}
+
+\exemple{
+Une entreprise vend $q$ articles au prix unitaire de $p(q) = -0{,}5q + 100$ (en euros), pour $q \in [0\,;\,200]$.
+
+Recette : $R(q) = q \times p(q) = -0{,}5q^2 + 100q$.
+
+$a = -0{,}5 < 0$ (maximum), $\alpha = -\dfrac{100}{-1} = 100 \in [0\,;\,200]$.
+
+$R(100) = -0{,}5 \times 10\,000 + 100 \times 100 = -5\,000 + 10\,000 = 5\,000$~€.
+
+La recette maximale est $5\,000$~€, atteinte pour $q = 100$ articles.
+}
+
+\margeAppui{%
+\textbf{Résumé de la méthode :}\newline
+1. Variable + domaine.\newline
+2. Exprimer $f(x) = ax^2 + bx + c$.\newline
+3. $\alpha = -b/(2a)$ : $\alpha$ dans le domaine ?\newline
+4. $\beta = f(\alpha)$ : valeur optimale.\newline
+5. Conclusion claire.%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de vérifier le domaine de validité.}
+
+Si $\alpha$ n'appartient pas au domaine admissible $[x_{\min}\,;\,x_{\max}]$, l'extremum global de $f$ sur $\mathbb{R}$ n'est pas atteint sur le domaine. Il faut alors comparer $f(x_{\min})$ et $f(x_{\max})$ pour trouver le maximum ou le minimum sur le domaine restreint.
+
+\textbf{Exemple.} Si $a < 0$ et $\alpha > x_{\max}$, alors $f$ est croissante sur $[x_{\min}\,;\,x_{\max}]$ et le maximum est $f(x_{\max})$.
+}
+
+\erreurFrequente{
+\textbf{Confondre « la valeur de $x$ qui optimise » et « la valeur optimale de $f$.}
+
+La question « Pour quelle valeur de $x$ le bénéfice est-il maximal ? » attend $x = \alpha$.
+
+La question « Quel est le bénéfice maximal ? » attend $\beta = f(\alpha)$.
+
+Ces deux réponses sont distinctes et doivent toutes les deux figurer dans la conclusion.
+}

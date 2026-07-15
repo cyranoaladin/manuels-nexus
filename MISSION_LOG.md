@@ -8,3 +8,4 @@
 | 2026-07-15 | 1SPE-SUITES | LOT 5 | QCM 21 questions + 12 fiches remediation, couverture F01 complete | ex nihilo | [LOT-5] |
 | 2026-07-15 | 1SPE-SUITES | LOT 6 | Eval A+B + 2 TD, SymPy 102/102 OK | ex nihilo | [LOT-6] |
 | 2026-07-15 | 1SPE-SUITES | LOT 7 | PDF 82 pages OK, check-list 7/8, cout ~19.5$ | ex nihilo | [LOT-7] |
+| 2026-07-15 | 1SPE-SECOND-DEGRE | LOT 0-7 | 42 ex + 42 co + QCM 18q + 11 remed + eval A/B + 2 TD. SymPy 88/88 OK. PDF 64p. | ex nihilo | [LOT-7] |

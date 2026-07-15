@@ -1,0 +1,230 @@
+% META: {"id": "1SPE-SECDEG-EV-A-corrige", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-SECDEG-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "sources_inspiration": [], "parametres_sympy": {"a": 2, "b": -8, "c": 6, "a2": -1, "b2": 4, "c2": -3}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-A-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, expand, solve
+% x = symbols('x')
+% f = 2*x**2 - 8*x + 6
+% # Ex 1
+% a, b, c = 2, -8, 6
+% alpha = Rational(-b, 2*a)
+% assert alpha == 2
+% beta = f.subs(x, alpha)
+% assert beta == -2
+% assert expand(2*(x-2)**2 - 2) == f
+% Delta = b**2 - 4*a*c
+% assert Delta == 16
+% x1 = Rational(8-4, 4)
+% x2 = Rational(8+4, 4)
+% assert x1 == 1
+% assert x2 == 3
+% assert expand(2*(x-1)*(x-3)) == f
+% # Ex 2
+% g = -x**2 + 4*x - 3
+% assert expand(-(x-2)**2 + 1) == g
+% assert g.subs(x, 2) == 1
+% # Ex 3
+% assert f.subs(x, Rational(3,2)) < 0
+% assert f.subs(x, 0) > 0
+% assert f.subs(x, 4) > 0
+% # Ex 4
+% V = x*(30 - 2*x)*(20 - 2*x)
+% assert V.subs(x, 3) == 1008
+% assert V.subs(x, 5) == 1000
+% END-VERIFY
+
+%---------------------------------------------------------------
+% CORRIGE — Evaluation A (55 min) — Second degre
+% Bareme total : 20 points
+% Standard copie modele : redaction complete, theoremes cites,
+% hypotheses verifiees.
+%---------------------------------------------------------------
+
+\begin{corrige}{1SPE-SECDEG-EV-A}
+
+%===============================================================
+\section*{Exercice 1 \hfill (7 points) — C1, C3, C4}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt (calculer) ; Q2 : 2 pts (calculer, communiquer) ; Q3 : 2 pts (calculer) ; Q4 : 2 pts (calculer, communiquer)}
+
+\bigskip
+\textbf{Question 1 — Identification des coefficients.}
+
+\commentaireMarge{Dans $ax^2 + bx + c$ : $a$ est le coefficient de $x^2$, $b$ le coefficient de $x$, $c$ le terme constant.}
+
+Pour $f(x) = 2x^2 - 8x + 6$ : $a = 2$, $b = -8$, $c = 6$.
+
+\medskip
+\textbf{Question 2 — Forme canonique.}
+
+\commentaireMarge{Formule du sommet : $\alpha = -b/(2a)$, $\beta = f(\alpha)$.}
+
+On calcule :
+\[
+\alpha = \frac{-(-8)}{2 \times 2} = \frac{8}{4} = 2, \qquad
+\beta = f(2) = 2 \times 4 - 8 \times 2 + 6 = 8 - 16 + 6 = -2.
+\]
+
+\[
+\boxed{f(x) = 2(x-2)^2 - 2.}
+\]
+
+\medskip
+\textbf{Question 3 — Discriminant et racines.}
+
+\commentaireMarge{$\Delta = b^2 - 4ac = (-8)^2 - 4 \times 2 \times 6$.}
+
+\[
+\Delta = 64 - 48 = 16 > 0. \quad \sqrt{\Delta} = 4.
+\]
+
+Deux racines reelles distinctes :
+\[
+x_1 = \frac{8 - 4}{4} = 1, \qquad x_2 = \frac{8 + 4}{4} = 3.
+\]
+
+\medskip
+\textbf{Question 4 — Forme factorisee.}
+
+\commentaireMarge{$f(x) = a(x - x_1)(x - x_2)$ avec $a = 2$, $x_1 = 1$, $x_2 = 3$.}
+
+\[
+\boxed{f(x) = 2(x-1)(x-3).}
+\]
+
+Verification : $2(x-1)(x-3) = 2(x^2 - 4x + 3) = 2x^2 - 8x + 6 = f(x)$. \checkmark
+
+%===============================================================
+\section*{Exercice 2 \hfill (5 points) — C2}
+%===============================================================
+
+\baremeIndicatif{Q1 : 2 pts (calculer, communiquer) ; Q2 : 1 pt (raisonner) ; Q3 : 1 pt (representer) ; Q4 : 1 pt (calculer)}
+
+\bigskip
+\textbf{Question 1 — Forme canonique de $g$.}
+
+\commentaireMarge{On developpe la forme canonique et on verifie l'egalite.}
+
+On developpe $-(x-2)^2 + 1$ :
+\[
+-(x-2)^2 + 1 = -(x^2 - 4x + 4) + 1 = -x^2 + 4x - 4 + 1 = -x^2 + 4x - 3 = g(x). \quad \checkmark
+\]
+
+Donc $g(x) = -(x-2)^2 + 1$ est bien la forme canonique de $g$.
+
+\medskip
+\textbf{Question 2 — Sommet et extremum.}
+
+\commentaireMarge{$a = -1 < 0$ : parabole en $\cap$, le sommet est un maximum.}
+
+Le sommet est $S(2\,;\,1)$. Comme $a = -1 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 1$, atteint en $x = 2$.
+
+\medskip
+\textbf{Question 3 — Tableau de variations.}
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $2$ & & $+\infty$ \\
+\hline
+$g(x)$ & $-\infty$ & $\nearrow$ & $1$ & $\searrow$ & $-\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Question 4 — Axe de symetrie.}
+
+L'axe de symetrie de la parabole a pour equation $x = \alpha = 2$.
+
+%===============================================================
+\section*{Exercice 3 \hfill (4 points) — C4, C5}
+%===============================================================
+
+\baremeIndicatif{Q1 : 2 pts (calculer, representer) ; Q2 : 1 pt (calculer) ; Q3 : 1 pt (calculer)}
+
+\bigskip
+\textbf{Question 1 — Tableau de signes.}
+
+\commentaireMarge{On utilise la forme factorisee $f(x) = 2(x-1)(x-3)$ pour dresser le tableau de signes.}
+
+$f(x) = 2(x-1)(x-3)$.
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $3$ & & $+\infty$ \\
+\hline
+$x - 1$ & & $-$ & $0$ & $+$ & $+$ & $+$ & \\
+$x - 3$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+$2$ & & $+$ & $+$ & $+$ & $+$ & $+$ & \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Question 2 — Resolution de $f(x) \leq 0$.}
+
+D'apres le tableau de signes, $f(x) \leq 0$ sur $[1\,;\,3]$.
+
+\[
+\boxed{\mathcal{S} = [1\,;\,3].}
+\]
+
+\medskip
+\textbf{Question 3 — Resolution de $f(x) > 0$.}
+
+$f(x) > 0$ sur $]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[$.
+
+\[
+\boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[.}
+\]
+
+%===============================================================
+\section*{Exercice 4 \hfill (4 points) — C6}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt (modeliser) ; Q2 : 1 pt (modeliser) ; Q3 : 1 pt (calculer) ; Q4 : 1 pt (chercher)}
+
+\bigskip
+\textbf{Question 1 — Dimensions de la boite.}
+
+\commentaireMarge{Les decoupes de cote $x$ reduisent chaque dimension de $2x$.}
+
+Apres decoupe et pliage :
+\begin{itemize}
+  \item Hauteur : $x$~cm.
+  \item Longueur : $30 - 2x$~cm.
+  \item Largeur : $20 - 2x$~cm.
+\end{itemize}
+
+\medskip
+\textbf{Question 2 — Volume et domaine.}
+
+\[
+V(x) = x \times (30-2x) \times (20-2x).
+\]
+
+Domaine : $x > 0$, $30 - 2x > 0$ et $20 - 2x > 0$, soit $x \in \,]0\,;\,10[$.
+
+\medskip
+\textbf{Question 3 — Calcul de $V(3)$ et $V(5)$.}
+
+\commentaireMarge{On substitue directement les valeurs dans la formule.}
+
+\[
+V(3) = 3 \times (30-6) \times (20-6) = 3 \times 24 \times 14 = 1\,008 \text{ cm}^3.
+\]
+\[
+V(5) = 5 \times (30-10) \times (20-10) = 5 \times 20 \times 10 = 1\,000 \text{ cm}^3.
+\]
+
+\medskip
+\textbf{Question 4 — Comparaison et limites de la conclusion.}
+
+$V(3) = 1\,008 > 1\,000 = V(5)$ : pour $x = 3$, le volume est plus grand.
+
+Cependant, on ne peut pas conclure que $x = 3$ est le maximum global : ces deux points ne suffisent pas a prouver qu'il n'existe pas une valeur $x^* \in \,]0\,;\,10[$ donnant un volume encore plus grand. Une etude complete de $V$ (derivee ou tableau de variations) est necessaire pour trouver le maximum absolu.
+
+\end{corrige}

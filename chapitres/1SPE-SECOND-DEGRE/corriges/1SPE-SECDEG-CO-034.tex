@@ -1,0 +1,95 @@
+% META: {"id": "1SPE-SECDEG-CO-034", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-034", "capacites_codes": ["C5", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational, expand, sqrt
+% x = symbols('x')
+% A = Rational(1,2)*(-x**2 + 2*x + 24)
+% assert expand(A) == -x**2/2 + x + 12
+% # Maximum : alpha = 1, A(1) = 25/2
+% alpha = Rational(-2, 2*(-1))
+% assert alpha == 1
+% beta = Rational(-1 + 2 + 24, 2)
+% assert beta == Rational(25, 2)
+% # A(x) > 10 => -x^2 + 2x + 4 > 0
+% B = -x**2 + 2*x + 4
+% delta_B = 4 + 16
+% assert delta_B == 20
+% sols_B = sorted(solve(B, x))
+% assert sols_B[0] == 1 - sqrt(5)
+% assert sols_B[1] == 1 + sqrt(5)
+% # Sur ]0;6[ : 0 < x < 1 + sqrt(5)
+% import math
+% assert math.isclose(float(1 + 5**0.5), 3.236, abs_tol=0.001)
+% # A(x) >= 8 => -x^2 + 2x + 8 >= 0 => (x+2)(x-4) <= 0 => racines -2 et 4
+% C = -x**2 + 2*x + 8
+% sols_C = sorted(solve(C, x))
+% assert sols_C == [-2, 4]
+% # Sur ]0;6[ : 0 < x <= 4
+% assert C.subs(x, 3) > 0
+% assert C.subs(x, 5) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-034}
+
+\textbf{1. Expression de l'aire $A(x)$.}
+
+\commentaireMarge{Aire = $\dfrac{1}{2} \times \text{base} \times \text{hauteur}$.}
+
+Les deux côtés de l'angle droit ont pour longueurs $(x+4)$ et $(6-x)$.
+
+\[A(x) = \frac{1}{2}(x+4)(6-x) = \frac{1}{2}(6x - x^2 + 24 - 4x) = \frac{1}{2}(-x^2 + 2x + 24).\]
+
+Donc $A(x) = -\dfrac{1}{2}x^2 + x + 12$. \hfill $\square$
+
+\medskip
+\textbf{2. Valeur de $x$ maximisant l'aire.}
+
+\commentaireMarge{Sommet du trinôme $-x^2 + 2x + 24$ : $\alpha = -\dfrac{2}{2 \times (-1)} = 1$.}
+
+On étudie $A(x) = \dfrac{1}{2}(-x^2 + 2x + 24)$. Le sommet de $-x^2 + 2x + 24$ est en :
+\[\alpha = -\frac{2}{2 \times (-1)} = 1.\]
+
+Comme $\alpha = 1 \in ]0\,;\,6[$, le maximum de $A$ est atteint en $x = 1$ :
+\[A(1) = \frac{1}{2}(-1 + 2 + 24) = \frac{25}{2} = 12{,}5\,\text{cm}^2.\]
+
+\medskip
+\textbf{3. Inéquation $A(x) > 10$.}
+
+\textit{a) Reformulation.}
+
+\commentaireMarge{$A(x) > 10 \iff -x^2 + 2x + 4 > 0$.}
+
+$A(x) > 10 \iff \dfrac{1}{2}(-x^2 + 2x + 24) > 10 \iff -x^2 + 2x + 24 > 20 \iff -x^2 + 2x + 4 > 0$. \hfill $\square$
+
+\textit{b) Résolution de $-x^2 + 2x + 4 > 0$.}
+
+$a = -1$, $b = 2$, $c = 4$.
+\[\Delta = 4 - 4 \times (-1) \times 4 = 4 + 16 = 20.\]
+
+\[x_{1,2} = \frac{-2 \pm \sqrt{20}}{-2} = 1 \mp \sqrt{5}.\]
+
+Donc $x_1 = 1 - \sqrt{5}$ et $x_2 = 1 + \sqrt{5}$.
+
+Comme $a = -1 < 0$, l'inéquation est satisfaite pour $x \in \left]1 - \sqrt{5}\,;\,1 + \sqrt{5}\right[$.
+
+\textit{c) Intersection avec $]0\,;\,6[$.}
+
+$1 - \sqrt{5} \approx -1{,}24 < 0$ et $1 + \sqrt{5} \approx 3{,}24 < 6$.
+
+L'ensemble des valeurs acceptables est $x \in \left]0\,;\,1 + \sqrt{5}\right[$.
+
+\medskip
+\textbf{4. Résolution de $A(x) \geqslant 8$ dans $]0\,;\,6[$.}
+
+\commentaireMarge{Ramener à $-x^2 + 2x + 8 \geqslant 0$.}
+
+$A(x) \geqslant 8 \iff -x^2 + 2x + 24 \geqslant 16 \iff -x^2 + 2x + 8 \geqslant 0$.
+
+On résout $-x^2 + 2x + 8 = 0$ : $a = -1$, $b = 2$, $c = 8$.
+\[\Delta = 4 + 32 = 36.\]
+\[x_1 = \frac{-2 - 6}{-2} = 4 \qquad \text{et} \qquad x_2 = \frac{-2 + 6}{-2} = -2.\]
+
+Comme $a = -1 < 0$, $-x^2 + 2x + 8 \geqslant 0$ pour $x \in [-2\,;\,4]$.
+
+En intersectant avec $]0\,;\,6[$, l'ensemble des solutions est $\mathcal{S} = \left]0\,;\,4\right]$.
+
+\baremeIndicatif{Q1 : 1 pt (modeliser, calculer) ; Q2 : 2 pts (calculer) ; Q3a : 1 pt (calculer) ; Q3b : 2 pts (calculer) ; Q3c : 1 pt (raisonner) ; Q4 : 2 pts (calculer, raisonner)}
+\end{corrige}

@@ -1,0 +1,65 @@
+% META: {"id": "1SPE-SECDEG-CO-010", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-010", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, factor, Rational
+% x = symbols('x')
+% # a) x^2 - 9 = (x-3)(x+3)
+% f1 = x**2 - 9
+% assert factor(f1) == (x - 3)*(x + 3)
+% # b) 2x^2 - 8x = 2x(x - 4)
+% f2 = 2*x**2 - 8*x
+% assert factor(f2) == 2*x*(x - 4)
+% # c) x^2 - x - 6 : delta = 1+24=25, x1=3, x2=-2
+% f3 = x**2 - x - 6
+% assert factor(f3) == (x - 3)*(x + 2)
+% # d) 3x^2 - 12x + 12 = 3*(x-2)^2
+% f4 = 3*x**2 - 12*x + 12
+% assert factor(f4) == 3*(x - 2)**2
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-010}
+
+\textbf{a) $x^2 - 9$.}
+
+\commentaireMarge{Identité remarquable : $a^2 - b^2 = (a-b)(a+b)$.}
+
+On reconnaît une différence de deux carrés : $x^2 - 9 = x^2 - 3^2$.
+
+\[\boxed{x^2 - 9 = (x-3)(x+3).}\]
+
+\medskip
+\textbf{b) $2x^2 - 8x$.}
+
+\commentaireMarge{Mettre $2x$ en facteur commun.}
+
+On met $2x$ en facteur :
+\[2x^2 - 8x = 2x \cdot x - 2x \cdot 4.\]
+
+\[\boxed{2x^2 - 8x = 2x(x - 4).}\]
+
+\medskip
+\textbf{c) $x^2 - x - 6$.}
+
+\commentaireMarge{Utiliser le discriminant pour trouver les racines.}
+
+Méthode par le discriminant : $a = 1$, $b = -1$, $c = -6$.
+
+$\Delta = (-1)^2 - 4 \times 1 \times (-6) = 1 + 24 = 25 > 0$, $\sqrt{\Delta} = 5$.
+
+\[x_1 = \frac{1 - 5}{2} = -2, \qquad x_2 = \frac{1 + 5}{2} = 3.\]
+
+D'après le théorème de factorisation : $f(x) = a(x - x_1)(x - x_2)$.
+
+\[\boxed{x^2 - x - 6 = (x + 2)(x - 3).}\]
+
+\medskip
+\textbf{d) $3x^2 - 12x + 12$.}
+
+\commentaireMarge{Mettre $3$ en facteur, puis identifier un carré parfait.}
+
+On factorise d'abord par $3$ :
+\[3x^2 - 12x + 12 = 3(x^2 - 4x + 4).\]
+
+On reconnaît ensuite $x^2 - 4x + 4 = (x-2)^2$ (carré parfait).
+
+\[\boxed{3x^2 - 12x + 12 = 3(x-2)^2.}\]
+
+\end{corrige}

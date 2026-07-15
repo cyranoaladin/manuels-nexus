@@ -1,0 +1,96 @@
+% META: {"id": "1SPE-SECDEG-CO-025", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-025", "capacites_codes": ["C4", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, simplify, Rational
+% x = symbols('x')
+% f = x**2 - 3*x - 10
+% sols = sorted(solve(f, x))
+% assert sols == [-2, 5]
+% assert simplify(f - (x-5)*(x+2)) == 0
+% assert f.subs(x, 0) < 0
+% assert f.subs(x, 6) > 0
+% assert f.subs(x, -3) > 0
+% # inequation f < 0 : ]-2 ; 5[
+% # inequation f >= 0 : ]-inf;-2] U [5;+inf[
+% g = -x**2 + 2*x + 8
+% sols_g = sorted(solve(g, x))
+% assert sols_g == [-2, 4]
+% assert simplify(g - (-(x-4)*(x+2))) == 0
+% assert g.subs(x, 0) > 0
+% assert g.subs(x, 5) < 0
+% assert g.subs(x, -3) < 0
+% # g > 0 sur ]-2 ; 4[
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-025}
+
+\textbf{1. Factorisation et tableau de signes de $f(x) = x^2 - 3x - 10$.}
+
+\commentaireMarge{Calculer $\Delta$, trouver les racines, puis factoriser.}
+
+On a $a = 1$, $b = -3$, $c = -10$.
+\[\Delta = (-3)^2 - 4 \times 1 \times (-10) = 9 + 40 = 49.\]
+
+Les racines sont :
+\[x_1 = \frac{3 - 7}{2} = -2 \qquad \text{et} \qquad x_2 = \frac{3 + 7}{2} = 5.\]
+
+Donc $f(x) = (x + 2)(x - 5)$.
+
+Tableau de signes ($a = 1 > 0$, parabole vers le haut) :
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ & & $5$ & & $+\infty$ \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{2. Résolution des inéquations.}
+
+\commentaireMarge{Lire les intervalles de signe dans le tableau.}
+
+\textit{a)} $x^2 - 3x - 10 < 0$ : d'après le tableau, $f(x) < 0$ sur $\mathcal{S} = \left]-2\,;\,5\right[$.
+
+\textit{b)} $x^2 - 3x - 10 \geqslant 0$ : d'après le tableau, $f(x) \geqslant 0$ sur $\mathcal{S} = \left]-\infty\,;\,-2\right] \cup \left[5\,;\,+\infty\right[$.
+
+\medskip
+\textbf{3. Factorisation et tableau de signes de $g(x) = -x^2 + 2x + 8$.}
+
+\commentaireMarge{$a = -1 < 0$ : parabole vers le bas, positif entre les racines.}
+
+$a = -1$, $b = 2$, $c = 8$.
+\[\Delta = 4 - 4 \times (-1) \times 8 = 4 + 32 = 36.\]
+
+Les racines sont :
+\[x_1 = \frac{-2 - 6}{-2} = -2 \qquad \text{et} \qquad x_2 = \frac{-2 + 6}{-2} = -2.\]
+
+On calcule directement :
+\[x_1 = \frac{-2 - \sqrt{36}}{2 \times (-1)} = \frac{-2 - 6}{-2} = 4 \qquad \text{et} \qquad x_2 = \frac{-2 + 6}{-2} = -2.\]
+
+Donc $x_1 = -2$ et $x_2 = 4$, et $g(x) = -(x + 2)(x - 4)$.
+
+Tableau de signes ($a = -1 < 0$) :
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ & & $4$ & & $+\infty$ \\
+\hline
+$g(x)$ & & $-$ & $0$ & $+$ & $0$ & $-$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{4. Résolution de $-x^2 + 2x + 8 > 0$.}
+
+\commentaireMarge{Lire dans le tableau : $g > 0$ entre les racines.}
+
+D'après le tableau, $g(x) > 0$ sur $\mathcal{S} = \left]-2\,;\,4\right[$.
+
+\baremeIndicatif{Q1 : 2 pts (calculer, raisonner) ; Q2a : 1 pt (raisonner) ; Q2b : 1 pt (raisonner) ; Q3 : 2 pts (calculer, raisonner) ; Q4 : 1 pt (raisonner)}
+\end{corrige}

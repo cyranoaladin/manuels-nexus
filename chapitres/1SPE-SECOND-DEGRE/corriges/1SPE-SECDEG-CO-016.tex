@@ -1,0 +1,62 @@
+% META: {"id": "1SPE-SECDEG-CO-016", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-016", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, Rational
+% x = symbols('x')
+% # Longueur = 10 - x (perimetre 2*(x + L) = 20)
+% L = 10 - x
+% A = x * L
+% A_dev = expand(A)
+% assert A_dev == -x**2 + 10*x
+% # Sommet : alpha = -10 / (2*(-1)) = 5
+% alpha = Rational(10, 2)
+% assert alpha == 5
+% A_max = A_dev.subs(x, alpha)
+% assert A_max == 25
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-016}
+
+\textbf{1. Longueur de l'enclos en fonction de $x$.}
+
+\commentaireMarge{Périmètre : $2(\text{largeur} + \text{longueur}) = 20$.}
+
+Le périmètre vaut $20$~m, donc $2(x + L) = 20$, soit $x + L = 10$.
+
+La longueur est $L = 10 - x$.
+
+\medskip
+\textbf{2. Expression de l'aire.}
+
+\commentaireMarge{$A = \text{largeur} \times \text{longueur}$.}
+
+\[A(x) = x \times (10 - x) = 10x - x^2.\]
+
+\[\boxed{A(x) = -x^2 + 10x.}\]
+
+\medskip
+\textbf{3. Coordonnées du sommet.}
+
+\commentaireMarge{$a = -1 < 0$ : maximum.}
+
+On a $a = -1$, $b = 10$.
+
+\[\alpha = -\frac{b}{2a} = -\frac{10}{-2} = 5.\]
+
+\[A(5) = -(5)^2 + 10 \times 5 = -25 + 50 = 25.\]
+
+Le sommet est $S(5\,;\,25)$.
+
+\medskip
+\textbf{4. Valeur maximale de l'aire.}
+
+\commentaireMarge{Le maximum de $A$ est atteint en $\alpha = 5$.}
+
+L'aire est maximale pour $x = 5$~m. L'aire maximale est $A(5) = \mathbf{25}$~m$^2$.
+
+\medskip
+\textbf{5. Forme de l'enclos d'aire maximale.}
+
+Pour $x = 5$ : largeur $= 5$~m et longueur $= 10 - 5 = 5$~m.
+
+L'enclos d'aire maximale est un \textbf{carré} de côté $5$~m.
+
+\end{corrige}

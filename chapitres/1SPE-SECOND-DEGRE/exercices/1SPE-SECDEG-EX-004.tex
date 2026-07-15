@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-SECDEG-EX-004", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer", "communiquer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-004.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify
+% x = symbols('x')
+% f = -x**2 + 4*x + 1
+% # sommet
+% alpha = Rational(-4, 2*(-1))   # -b/(2a) = 2
+% beta = f.subs(x, alpha)
+% assert alpha == 2
+% assert beta == 5
+% # axe de symetrie x = 2
+% # variations : croissante sur (-inf, 2], decroissante sur [2, +inf)
+% # signe de a : a = -1 < 0 => parabole tournee vers le bas, maximum en 2
+% assert f.subs(x, 0) == 1   # ordonnee a l'origine
+% assert f.subs(x, 4) == 1   # symetrique de x=0 par rapport a x=2
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-004}{1}{10}
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = -x^2 + 4x + 1$.
+
+\begin{enumerate}
+  \item Préciser le coefficient $a$ et en déduire le sens d'ouverture de la parabole représentative de $f$.
+  \item Calculer les coordonnées du sommet $S$ de cette parabole.
+  \item Écrire l'équation de l'axe de symétrie de la parabole.
+  \item Dresser le tableau de variations de $f$ sur $\mathbb{R}$.
+  \item Calculer $f(0)$ et $f(4)$. Que remarque-t-on ? Expliquer.
+\end{enumerate}
+\end{exercice}

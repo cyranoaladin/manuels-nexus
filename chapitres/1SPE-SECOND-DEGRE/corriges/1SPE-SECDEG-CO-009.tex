@@ -1,0 +1,59 @@
+% META: {"id": "1SPE-SECDEG-CO-009", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-009", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational
+% x = symbols('x')
+% # a) (x+1)(x-3) = -3  =>  x^2 - 2x - 3 + 3 = 0  =>  x^2 - 2x = 0
+% f = x**2 - 2*x
+% sols = sorted(solve(f, x))
+% assert sols == [0, 2]
+% assert (0+1)*(0-3) == -3
+% assert (2+1)*(2-3) == -3
+% # b) 2x^2 - 5x = 3  =>  2x^2 - 5x - 3 = 0
+% g = 2*x**2 - 5*x - 3
+% delta_g = (-5)**2 - 4*2*(-3)
+% assert delta_g == 49
+% sols_g = sorted(solve(g, x))
+% assert sols_g == [Rational(-1,2), 3]
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-009}
+
+\textbf{a) $(x+1)(x-3) = -3$.}
+
+\commentaireMarge{Développer puis ramener à $ax^2+bx+c=0$.}
+
+On développe le membre de gauche :
+\[(x+1)(x-3) = x^2 - 3x + x - 3 = x^2 - 2x - 3.\]
+
+L'équation devient :
+\[x^2 - 2x - 3 = -3 \iff x^2 - 2x - 3 + 3 = 0 \iff x^2 - 2x = 0.\]
+
+On factorise par $x$ :
+\[x(x - 2) = 0.\]
+
+\commentaireMarge{Produit nul : $A \times B = 0 \iff A=0$ ou $B=0$.}
+
+$x = 0$ ou $x - 2 = 0$, soit $x = 2$.
+
+\[\boxed{\mathcal{S} = \{0\,;\,2\}.}\]
+
+\textit{Vérification :} $(0+1)(0-3) = -3$ \checkmark\; ; \; $(2+1)(2-3) = 3\times(-1) = -3$ \checkmark.
+
+\medskip
+\textbf{b) $2x^2 - 5x = 3$.}
+
+\commentaireMarge{Passer tous les termes à gauche.}
+
+On réécrit :
+\[2x^2 - 5x - 3 = 0.\]
+
+$a = 2$, $b = -5$, $c = -3$.
+
+$\Delta = (-5)^2 - 4 \times 2 \times (-3) = 25 + 24 = 49 > 0$.
+
+\[\sqrt{\Delta} = 7.\]
+
+\[x_1 = \frac{5 - 7}{4} = \frac{-2}{4} = -\frac{1}{2}, \qquad x_2 = \frac{5 + 7}{4} = \frac{12}{4} = 3.\]
+
+\[\boxed{\mathcal{S} = \left\{-\frac{1}{2}\,;\,3\right\}.}\]
+
+\end{corrige}

@@ -1,0 +1,40 @@
+% META: {"id": "1SPE-SECDEG-EX-026", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C4", "1SPE-SECOND-DEGRE-C5"], "capacites_codes": ["C4", "C5"], "methodes": ["M4", "M5"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-026.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-026.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, simplify, Rational
+% x = symbols('x')
+% # Condition : aire rectangle > aire carre
+% # Rectangle : (x+3)*(x-1), carre : x^2
+% # (x+3)(x-1) > x^2
+% # x^2 + 2x - 3 > x^2 => 2x - 3 > 0 => x > 3/2
+% # mais verif avec trinome : passer par inegalite quadratique si present
+% # f(x) = (x+3)(x-1) - x^2 = x^2+2x-3 - x^2 = 2x-3
+% f = (x+3)*(x-1) - x**2
+% from sympy import expand
+% assert expand(f) == 2*x - 3
+% assert solve(2*x - 3 > 0, x)  # x > 3/2
+% # Contexte geometrique : x > 0 et x - 1 > 0 => x > 1
+% # Solution : x > 3/2
+% # Inequation du second degre separee :
+% # 3x^2 - 5x - 2 < 0, delta = 25+24 = 49, x1 = -1/3, x2 = 2
+% g = 3*x**2 - 5*x - 2
+% delta_g = 25 + 24
+% assert delta_g == 49
+% sols_g = sorted(solve(g, x))
+% assert sols_g == [Rational(-1, 3), 2]
+% assert g.subs(x, 0) < 0   # entre -1/3 et 2
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-026}{2}{20}
+\begin{enumerate}
+  \item \textbf{(C4)} Factoriser et étudier le signe de $g(x) = 3x^2 - 5x - 2$.
+  \item \textbf{(C5)} Résoudre dans $\mathbb{R}$ l'inéquation $3x^2 - 5x - 2 < 0$.
+
+  \item Un jardinier dispose de deux parcelles :
+  \begin{itemize}
+    \item un carré de côté $x$ mètres ($x > 1$) ;
+    \item un rectangle de dimensions $(x+3)$~m et $(x-1)$~m.
+  \end{itemize}
+  \textbf{(C5)} Pour quelles valeurs de $x$ le rectangle a-t-il une aire strictement supérieure à celle du carré ?
+
+  \textit{Montrer que l'inéquation se simplifie et n'est pas du second degré.}
+\end{enumerate}
+\end{exercice}

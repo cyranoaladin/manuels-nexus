@@ -1,0 +1,132 @@
+% META: {"id": "1SPE-SECDEG-CO-039", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-039", "capacites_codes": ["C3", "C5", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True, nonneg=True)
+% R = 15*x - x**2 / 10
+% C = 200 + 5*x
+% B = R - C
+% B_simplified = expand(B)
+% assert B_simplified == -x**2/10 + 10*x - 200
+% alpha = 50
+% beta = B_simplified.subs(x, alpha)
+% assert beta == 50
+% assert beta == 50
+% # Seuil B(x) > 0 : -x^2/10 + 10x - 200 > 0 => x^2 - 100x + 2000 < 0
+% B_eq = x**2 - 100*x + 2000
+% Delta = 100**2 - 4*2000
+% assert Delta == 2000
+% r1 = (100 - sqrt(2000)) / 2
+% r2 = (100 + sqrt(2000)) / 2
+% assert simplify(r1 - (50 - 10*sqrt(5))) == 0
+% assert simplify(r2 - (50 + 10*sqrt(5))) == 0
+% import math
+% assert abs(float(r1) - 27.64) < 0.1
+% assert abs(float(r2) - 72.36) < 0.1
+% # Q4 : B(x) = 32 => -x^2/10 + 10x - 200 = 32 => x^2 - 100x + 2320 = 0
+% B_32 = x**2 - 100*x + 2320
+% Delta_32 = 10000 - 4*2320
+% assert Delta_32 == 720
+% sols_32 = sorted(solve(B_32, x))
+% assert simplify(sols_32[0] - (50 - 6*sqrt(5))) == 0
+% assert simplify(sols_32[1] - (50 + 6*sqrt(5))) == 0
+% # Q5 : B'(x) = -x^2/5 + 10x - 200, alpha = 25, beta = B'(25)
+% B2 = -x**2/5 + 10*x - 200
+% alpha2 = 25
+% beta2 = B2.subs(x, alpha2)
+% assert float(beta2) == float(-625/5 + 250 - 200)
+% assert beta2 == -75
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-039}
+
+\textbf{1. Recettes et bénéfice.}
+
+\textit{a) Recette $R(x)$.}
+
+\commentaireMarge{Recette = prix unitaire $\times$ quantité.}
+
+$R(x) = x \cdot p(x) = x\!\left(15 - \dfrac{x}{10}\right) = 15x - \dfrac{x^2}{10}$.
+
+\textit{b) Bénéfice $B(x) = R(x) - C(x)$.}
+
+\[B(x) = 15x - \frac{x^2}{10} - (200 + 5x) = -\frac{x^2}{10} + 10x - 200.\] \hfill $\square$
+
+\medskip
+\textbf{2. Optimum de production.}
+
+\textit{a) Forme canonique.}
+
+\commentaireMarge{$a = -\frac{1}{10}$, $b = 10$ : $\alpha = -\dfrac{10}{2 \times (-\frac{1}{10})} = 50$.}
+
+\[\alpha = -\frac{b}{2a} = -\frac{10}{2 \times (-\frac{1}{10})} = -\frac{10}{-\frac{1}{5}} = 50.\]
+
+\[\beta = B(50) = -\frac{2500}{10} + 500 - 200 = -250 + 500 - 200 = 50.\]
+
+\[B(x) = -\frac{1}{10}(x - 50)^2 + 50.\]
+
+\textit{b) Maximum.}
+
+Pour $x = 50$ unités, le bénéfice est maximal : $B_{\max} = \mathbf{50}$~\euro.
+
+\textit{c) Compatibilité.}
+
+$0 \leqslant 50 \leqslant 100$ : la contrainte est satisfaite.
+
+\medskip
+\textbf{3. Seuil de rentabilité.}
+
+\textit{a) Reformulation.}
+
+\commentaireMarge{Multiplier par $-10$ (et inverser le sens de l'inégalité).}
+
+$B(x) > 0 \iff -\dfrac{x^2}{10} + 10x - 200 > 0 \iff x^2 - 100x + 2000 < 0$. \hfill $\square$
+
+\textit{b) Discriminant et racines.}
+
+$\Delta = 100^2 - 4 \times 2000 = 10000 - 8000 = 2000$.
+
+\[\sqrt{2000} = \sqrt{400 \times 5} = 20\sqrt{5}.\]
+
+\[x_{1,2} = \frac{100 \pm 20\sqrt{5}}{2} = 50 \pm 10\sqrt{5}.\]
+
+\textit{c) Intervalle de rentabilité.}
+
+$10\sqrt{5} \approx 22{,}4$, donc $x_1 \approx 27{,}6$ et $x_2 \approx 72{,}4$.
+
+L'entreprise est bénéficiaire pour $x \in \left]28\,;\,72\right[$ (valeurs arrondies à l'unité).
+
+\medskip
+\textbf{4. Équation de seuil $B(x) = 32$.}
+
+\textit{a) Équation à résoudre.}
+
+\commentaireMarge{$B(x) = 32 \iff -\frac{x^2}{10} + 10x - 200 = 32$.}
+
+$-\dfrac{x^2}{10} + 10x - 232 = 0 \iff x^2 - 100x + 2320 = 0$.
+
+\textit{b) Résolution.}
+
+$\Delta = 10000 - 9280 = 720 = 144 \times 5$, donc $\sqrt{\Delta} = 12\sqrt{5}$.
+
+\[x_{1,2} = \frac{100 \pm 12\sqrt{5}}{2} = 50 \pm 6\sqrt{5}.\]
+
+Il y a deux solutions : $x_1 = 50 - 6\sqrt{5} \approx 36{,}6$ et $x_2 = 50 + 6\sqrt{5} \approx 63{,}4$.
+
+\textit{Interprétation :} un bénéfice de $32$~\euro{} est atteint pour deux niveaux de production différents, l'un inférieur à l'optimal ($50$~unités) et l'autre supérieur.
+
+\medskip
+\textbf{5. Question ouverte : nouveau tarif $p'(x) = 20 - \dfrac{x}{5}$.}
+
+\commentaireMarge{Nouveau bénéfice : $B'(x) = R'(x) - C(x)$.}
+
+$R'(x) = x\!\left(20 - \dfrac{x}{5}\right) = 20x - \dfrac{x^2}{5}$.
+
+$B'(x) = 20x - \dfrac{x^2}{5} - 200 - 5x = -\dfrac{x^2}{5} + 15x - 200$.
+
+Sommet : $\alpha' = -\dfrac{15}{2 \times (-\frac{1}{5})} = \dfrac{15}{\frac{2}{5}} = \dfrac{15 \times 5}{2} = \dfrac{75}{2} = 37{,}5$.
+
+Mais $37{,}5 \leqslant 100$, donc $B'_{\max} = B'(37{,}5) = -\dfrac{37{,}5^2}{5} + 15 \times 37{,}5 - 200 = -281{,}25 + 562{,}5 - 200 = 81{,}25$~\euro.
+
+Comparaison : $B'_{\max} = 81{,}25 > 50 = B_{\max}$. Le tarif dégressif plus élevé $p'$ est préférable pour les faibles volumes ($x \leqslant 37{,}5$), mais impose un prix de vente plus élevé qui limite la demande. Il faut choisir $p'$ si on peut vendre $38$~unités ou moins, car le bénéfice par unité y est plus favorable.
+
+\baremeIndicatif{Q1 : 2 pts (modeliser, calculer) ; Q2 : 3 pts (calculer, raisonner) ; Q3 : 3 pts (calculer, raisonner, communiquer) ; Q4 : 2 pts (calculer, communiquer) ; Q5 : 4 pts (chercher, modeliser, communiquer)}
+\end{corrige}

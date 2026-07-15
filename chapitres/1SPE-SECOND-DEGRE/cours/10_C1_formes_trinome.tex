@@ -1,0 +1,148 @@
+% META: {"id": "1SPE-SECDEG-CR-010", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Les trois formes d'un polynôme du second degré}
+
+% ============================================================
+% STRATE 1 — Définitions et propriétés fondamentales
+% ============================================================
+
+\definition[1]{
+Un \textbf{polynôme du second degré} (ou \textbf{trinôme du second degré}) est une fonction $f$ définie sur $\mathbb{R}$ par
+\[
+  f(x) = ax^2 + bx + c,
+\]
+où $a$, $b$, $c$ sont des réels avec $\mathbf{a \neq 0}$.
+
+Cette écriture s'appelle la \textbf{forme développée} (ou \textbf{forme standard}).
+}
+
+\exemple{
+$f(x) = 2x^2 - 5x + 3$ est un polynôme du second degré avec $a = 2$, $b = -5$, $c = 3$.
+
+On calcule : $f(0) = 3$, $f(1) = 2 - 5 + 3 = 0$, $f(2) = 8 - 10 + 3 = 1$.
+}
+
+\contreexemple{
+$g(x) = 3x + 7$ n'est pas un polynôme du second degré : le coefficient de $x^2$ est nul ($a = 0$).
+
+$h(x) = x^3 - 2x^2 + 1$ n'est pas du second degré : le degré est 3.
+}
+
+\definition[2]{
+La \textbf{forme canonique} d'un polynôme du second degré $f(x) = ax^2 + bx + c$ est
+\[
+  f(x) = a(x - \alpha)^2 + \beta,
+\]
+où
+\[
+  \alpha = -\frac{b}{2a} \qquad \text{et} \qquad \beta = f(\alpha) = -\frac{\Delta}{4a},
+\]
+avec $\Delta = b^2 - 4ac$.
+
+Le point $S(\alpha\,;\,\beta)$ est le \textbf{sommet} de la parabole représentant $f$.
+}
+
+\exemple{
+Soit $f(x) = 2x^2 - 8x + 5$.
+
+On a $a = 2$, $b = -8$, $c = 5$, donc $\alpha = -\dfrac{-8}{2 \times 2} = 2$.
+
+$\beta = f(2) = 2 \times 4 - 8 \times 2 + 5 = 8 - 16 + 5 = -3$.
+
+Forme canonique : $f(x) = 2(x - 2)^2 - 3$.
+
+Le sommet est $S(2\,;\,-3)$.
+}
+
+\definition[3]{
+Lorsque $\Delta > 0$, le polynôme $f(x) = ax^2 + bx + c$ admet deux racines réelles distinctes $x_1$ et $x_2$ (voir C3) et peut s'écrire sous \textbf{forme factorisée} :
+\[
+  f(x) = a(x - x_1)(x - x_2).
+\]
+Lorsque $\Delta = 0$, il admet une racine double $x_0$ et $f(x) = a(x - x_0)^2$.
+
+Lorsque $\Delta < 0$, il n'existe pas de forme factorisée dans $\mathbb{R}$.
+}
+
+\exemple{
+Soit $f(x) = 2x^2 - 6x + 4$.
+
+On calcule $\Delta = 36 - 32 = 4 > 0$, donc $x_1 = \dfrac{6 - 2}{4} = 1$ et $x_2 = \dfrac{6 + 2}{4} = 2$.
+
+Forme factorisée : $f(x) = 2(x - 1)(x - 2)$.
+
+Vérification : $2(x-1)(x-2) = 2(x^2 - 3x + 2) = 2x^2 - 6x + 4$. \checkmark
+}
+
+\contreexemple{
+$f(x) = x^2 + x + 1$ : on calcule $\Delta = 1 - 4 = -3 < 0$. Ce trinôme n'admet pas de forme factorisée réelle.
+}
+
+\margeAppui{%
+\textbf{Résumé des trois formes :}\newline
+\textbf{Développée :} $ax^2 + bx + c$ — lecture directe de $a$, $b$, $c$.\newline
+\textbf{Canonique :} $a(x-\alpha)^2+\beta$ — lecture du sommet $S(\alpha;\beta)$.\newline
+\textbf{Factorisée :} $a(x-x_1)(x-x_2)$ — lecture des racines (si $\Delta>0$).%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes et passage entre les formes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oubli du coefficient directeur $a$ dans la forme canonique ou factorisée.}
+
+On écrit souvent $f(x) = (x - \alpha)^2 + \beta$ en oubliant le facteur $a$ devant. La forme correcte est $f(x) = a(x - \alpha)^2 + \beta$. De même, la forme factorisée est $a(x-x_1)(x-x_2)$, pas $(x-x_1)(x-x_2)$.
+
+\textbf{Vérification rapide :} développer la forme canonique ou factorisée et vérifier qu'on retrouve $ax^2 + bx + c$.
+}
+
+\erreurFrequente{
+\textbf{Confusion entre $\alpha$ (coordonnée du sommet) et les racines $x_1$, $x_2$.}
+
+$\alpha = -\dfrac{b}{2a}$ est l'abscisse du sommet. Les racines $x_1$ et $x_2$ sont les solutions de $f(x) = 0$. Ces trois valeurs sont en général différentes. Seule coïncidence possible : si $\Delta = 0$, alors $x_0 = \alpha$ (la racine double est l'abscisse du sommet).
+}
+
+\margeAppui{%
+\textbf{Passage développée $\to$ canonique :}\newline
+1. Calculer $\alpha = -b/(2a)$.\newline
+2. Calculer $\beta = f(\alpha)$.\newline
+3. Écrire $a(x-\alpha)^2+\beta$.%
+}
+
+\margeAppui{%
+\textbf{Passage canonique $\to$ développée :}\newline
+Développer $a(x-\alpha)^2+\beta$.\newline
+$= a(x^2 - 2\alpha x + \alpha^2)+\beta$\newline
+$= ax^2 - 2a\alpha x + a\alpha^2 + \beta$.%
+}
+
+% ============================================================
+% STRATE 3 — Complétion du carré (technique détaillée)
+% ============================================================
+
+\approfondissement{
+\textbf{Obtenir la forme canonique par complétion du carré.}
+
+On part de $f(x) = ax^2 + bx + c$. On met $a$ en facteur sur les deux premiers termes :
+\[
+  f(x) = a\!\left(x^2 + \frac{b}{a}\,x\right) + c.
+\]
+On complète le carré à l'intérieur de la parenthèse en ajoutant et soustrayant $\left(\dfrac{b}{2a}\right)^2$ :
+\[
+  f(x) = a\!\left[\left(x + \frac{b}{2a}\right)^2 - \frac{b^2}{4a^2}\right] + c
+       = a\left(x + \frac{b}{2a}\right)^2 - \frac{b^2}{4a} + c.
+\]
+Comme $\alpha = -\dfrac{b}{2a}$, on a $x + \dfrac{b}{2a} = x - \alpha$, et
+\[
+  \beta = c - \frac{b^2}{4a} = \frac{4ac - b^2}{4a} = -\frac{\Delta}{4a}.
+\]
+On retrouve bien $f(x) = a(x - \alpha)^2 + \beta$.
+
+\medskip
+\textbf{Application numérique.} $f(x) = 3x^2 + 6x - 1$.
+\[
+  f(x) = 3(x^2 + 2x) - 1 = 3\bigl[(x+1)^2 - 1\bigr] - 1 = 3(x+1)^2 - 3 - 1 = 3(x+1)^2 - 4.
+\]
+Sommet : $S(-1\,;\,-4)$.
+}

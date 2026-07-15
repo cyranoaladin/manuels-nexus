@@ -1,0 +1,92 @@
+% META: {"id": "1SPE-SECDEG-ME-004", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Factoriser et étudier le signe d'un trinôme}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « factoriser un trinôme »,
+  d'« étudier le signe de $f(x)$ », de « dresser un tableau de signes »,
+  ou de déterminer pour quelles valeurs de $x$ une expression polynôme du second degré
+  est positive ou négative.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie $a$, $b$, $c$ et je calcule $\Delta = b^2 - 4ac$.
+    \item Selon le signe de $\Delta$ :
+      \begin{itemize}
+        \item \textbf{Si $\Delta > 0$ :} il existe deux racines $x_1 < x_2$ et
+          $f(x) = a(x - x_1)(x - x_2)$.
+        \item \textbf{Si $\Delta = 0$ :} il existe une racine double $x_0$ et
+          $f(x) = a(x - x_0)^2$.
+        \item \textbf{Si $\Delta < 0$ :} pas de factorisation sur $\mathbb{R}$ ;
+          $f(x)$ est du signe de $a$ pour tout $x \in \mathbb{R}$.
+      \end{itemize}
+    \item Je dresse le tableau de signes en utilisant la règle :
+      \textbf{$f(x)$ est du signe de $a$ à l'extérieur des racines, et du signe opposé entre les racines.}
+    \item Je conclus sur l'ensemble où $f(x) > 0$ (ou $< 0$) selon la question.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Soit $f(x) = -2x^2 + 6x - 4$. Factoriser $f$ et dresser son tableau de signes.
+
+  \medskip
+  \commentaireMarge{Identifier $a = -2$, $b = 6$, $c = -4$.}%
+  On a $a = -2$, $b = 6$, $c = -4$.
+
+  \commentaireMarge{Calculer $\Delta$.}%
+  \[
+    \Delta = 6^2 - 4 \times (-2) \times (-4) = 36 - 32 = 4 > 0.
+  \]
+
+  \commentaireMarge{Calculer les deux racines.}%
+  \[
+    x_1 = \frac{-6 - \sqrt{4}}{2 \times (-2)} = \frac{-6 - 2}{-4} = \frac{-8}{-4} = 2,
+  \]
+  \[
+    x_2 = \frac{-6 + \sqrt{4}}{2 \times (-2)} = \frac{-6 + 2}{-4} = \frac{-4}{-4} = 1.
+  \]
+
+  \commentaireMarge{Ordonner les racines : $x_1' = 1 < x_2' = 2$.}%
+  On a $x_1' = 1$ et $x_2' = 2$, donc $f(x) = -2(x - 1)(x - 2)$.
+
+  \commentaireMarge{Tableau de signes : $a = -2 < 0$, signe positif entre les racines.}%
+
+  \[
+  \begin{array}{c|ccccccc}
+    x & -\infty & & 1 & & 2 & & +\infty \\
+    \hline
+    (x-1) & & - & 0 & + & & + & \\
+    (x-2) & & - & & - & 0 & + & \\
+    \hline
+    f(x) = -2(x-1)(x-2) & & - & 0 & + & 0 & - & \\
+  \end{array}
+  \]
+
+  $f(x) > 0$ sur $\left]1\,;\,2\right[$ \quad et \quad $f(x) < 0$ sur $\left]-\infty\,;\,1\right[ \cup \left]2\,;\,+\infty\right[$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Oublier le facteur $a$ dans la factorisation : écrire $f(x) = (x-1)(x-2)$
+      au lieu de $f(x) = -2(x-1)(x-2)$. Le signe de $a$ est essentiel pour le tableau de signes.
+    \item \textbf{Piège 2.} Se tromper sur le signe entre les racines : quand $a < 0$, $f$ est positive
+      \emph{entre} les racines (et non à l'extérieur). Retenir la règle : « du signe de $a$ sauf entre
+      les racines ».
+    \item \textbf{Piège 3.} Dans les calculs de $x_1$ et $x_2$, faire attention aux doubles changements
+      de signe quand $a < 0$ : le dénominateur $2a$ est négatif, ce qui modifie le sens des inégalités
+      lors d'une éventuelle simplification.
+  \end{itemize}
+}
+
+\verifier{%
+  Développer la forme factorisée et vérifier qu'on retrouve $f(x) = -2x^2 + 6x - 4$ :
+  \[
+    -2(x-1)(x-2) = -2(x^2 - 3x + 2) = -2x^2 + 6x - 4 \checkmark.
+  \]
+  Vérifier aussi le signe en un point : $f(1{,}5) = -2 \times (0{,}5) \times (-0{,}5) = +0{,}5 > 0$,
+  ce qui correspond bien à « $f$ positive entre $1$ et $2$ » \checkmark.
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

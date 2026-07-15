@@ -1,0 +1,60 @@
+% META: {"id": "1SPE-SECDEG-CO-017", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-017", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, expand
+% x = symbols('x')
+% # x = (50 - p) / 2  =>  p = 50 - 2x
+% p = 50 - 2*x
+% R = x * p
+% R_dev = expand(R)
+% assert R_dev == -2*x**2 + 50*x
+% # Sommet : alpha = -50 / (2*(-2)) = 25/2
+% alpha = Rational(50, 4)
+% assert alpha == Rational(25, 2)
+% R_max = R_dev.subs(x, alpha)
+% assert R_max == Rational(625, 2)
+% p_opt = 50 - 2*alpha
+% assert p_opt == 25
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-017}
+
+\textbf{1. Expression de $p$ en fonction de $x$.}
+
+\commentaireMarge{Inverser la relation $x = \dfrac{50 - p}{2}$.}
+
+On a $x = \dfrac{50 - p}{2}$, donc $2x = 50 - p$, soit :
+\[p = 50 - 2x.\]
+
+\medskip
+\textbf{2. Expression de la recette.}
+
+\commentaireMarge{Recette $=$ prix unitaire $\times$ quantité.}
+
+\[R(x) = p \times x = (50 - 2x) \times x = 50x - 2x^2.\]
+
+\[\boxed{R(x) = -2x^2 + 50x.}\]
+
+\medskip
+\textbf{3. Nombre d'articles pour maximiser la recette.}
+
+\commentaireMarge{$a = -2 < 0$ : maximum au sommet.}
+
+On a $a = -2$, $b = 50$.
+
+\[\alpha = -\frac{b}{2a} = -\frac{50}{-4} = \frac{25}{2} = 12{,}5.\]
+
+La recette est maximale pour $x = \dfrac{25}{2}$ articles.
+
+\medskip
+\textbf{4. Prix optimal et recette maximale.}
+
+\commentaireMarge{Substituer $x = \frac{25}{2}$ dans $p$ et $R$.}
+
+Prix unitaire optimal :
+\[p = 50 - 2 \times \frac{25}{2} = 50 - 25 = 25 \text{ euros}.\]
+
+Recette maximale :
+\[R\!\left(\frac{25}{2}\right) = -2 \times \left(\frac{25}{2}\right)^2 + 50 \times \frac{25}{2} = -2 \times \frac{625}{4} + 625 = -\frac{625}{2} + \frac{1250}{2} = \frac{625}{2} = 312{,}5 \text{ euros}.\]
+
+Le prix unitaire optimal est $\mathbf{25}$~euros et la recette maximale est $\mathbf{312{,}5}$~euros.
+
+\end{corrige}

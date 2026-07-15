@@ -1,0 +1,90 @@
+% META: {"id": "1SPE-SECDEG-EX-040", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECDEG-C1", "1SPE-SECDEG-C2", "1SPE-SECDEG-C6"], "capacites_codes": ["C1", "C2", "C6"], "methodes": ["M1", "M2", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser", "communiquer"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"g": 10, "v0": 20, "theta": 45, "h0": 0}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-040.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% t = symbols('t', real=True, nonneg=True)
+% x_sym = symbols('x', real=True, nonneg=True)
+% # Projectile : angle 45 deg, v0 = 20 m/s, g = 10 m/s^2, h0 = 2 m
+% # x(t) = v0*cos(45)*t = 20*(sqrt(2)/2)*t = 10*sqrt(2)*t
+% # y(t) = h0 + v0*sin(45)*t - g/2*t^2 = 2 + 10*sqrt(2)*t - 5t^2
+% v0 = 20
+% theta_rad = pi/4
+% g_val = 10
+% h0 = 2
+% vx = v0*cos(theta_rad)
+% vy = v0*sin(theta_rad)
+% assert simplify(vx - 10*sqrt(2)) == 0
+% assert simplify(vy - 10*sqrt(2)) == 0
+% y_t = h0 + vy*t - Rational(g_val,2)*t**2
+% y_t = 2 + 10*sqrt(2)*t - 5*t**2
+% # Hauteur max : dy/dt = 10*sqrt(2) - 10t = 0 => t* = sqrt(2)
+% t_star = sqrt(2)
+% y_max = y_t.subs(t, t_star)
+% y_max_simplified = simplify(y_max)
+% assert y_max_simplified == 12  # 2 + 10*sqrt(2)*sqrt(2) - 5*2 = 2 + 20 - 10 = 12
+% # x a t*: x* = 10*sqrt(2)*sqrt(2) = 20
+% x_star = 10*sqrt(2)*t_star
+% assert simplify(x_star) == 20
+% # Portee : y(t) = 0 => 5t^2 - 10*sqrt(2)*t - 2 = 0
+% # discriminant : (10*sqrt(2))^2 + 4*5*2 = 200 + 40 = 240
+% Delta_t = (10*sqrt(2))**2 + 4*5*2
+% assert Delta_t == 240
+% t_sol = (10*sqrt(2) + sqrt(240)) / 10
+% t_sol_simplified = simplify(t_sol)
+% # 5t^2 - 10sqrt(2)t - 2 = 0 => t = (10sqrt(2) + sqrt(240))/10
+% # sqrt(240) = 4*sqrt(15)
+% assert simplify(sqrt(240) - 4*sqrt(15)) == 0
+% # Portee en x : X = 10*sqrt(2)*t_sol
+% # Trajectoire y en fonction de x : t = x/(10*sqrt(2))
+% # y(x) = 2 + 10*sqrt(2)*(x/(10*sqrt(2))) - 5*(x/(10*sqrt(2)))^2
+% # y(x) = 2 + x - x^2/40
+% y_x = 2 + x_sym - x_sym**2 / 40
+% # Verification : y(0) = 2 = h0
+% assert y_x.subs(x_sym, 0) == 2
+% # y(20) = 2 + 20 - 400/40 = 2 + 20 - 10 = 12 = hauteur max
+% assert y_x.subs(x_sym, 20) == 12
+% # Hauteur max de y_x : alpha = 20, beta = 12
+% alpha_x = 20
+% beta_x = y_x.subs(x_sym, alpha_x)
+% assert beta_x == 12
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-040}{3}{35}
+Un ballon est lancé depuis le sol (hauteur initiale $h_0 = 2$ m) avec une vitesse initiale $v_0 = 20$ m/s à un angle de $45°$ par rapport à l'horizontale. On prend $g = 10$ m/s².
+
+On rappelle que $\cos(45°) = \sin(45°) = \dfrac{\sqrt{2}}{2}$.
+
+Les équations du mouvement sont :
+\[
+  x(t) = v_0 \cos(45°) \cdot t \qquad \text{et} \qquad y(t) = h_0 + v_0 \sin(45°) \cdot t - \frac{g}{2}t^2,
+\]
+où $x$ est la distance horizontale (en m) et $y$ la hauteur (en m), $t$ le temps en secondes.
+
+\begin{enumerate}
+  \item \textbf{Mise en équation.}
+  \begin{enumerate}
+    \item Calculer $v_0 \cos(45°)$ et $v_0 \sin(45°)$.
+    \item Écrire explicitement $x(t)$ et $y(t)$ en simplifiant les expressions.
+  \end{enumerate}
+
+  \item \textbf{Hauteur maximale.}
+  \begin{enumerate}
+    \item Reconnaître que $y(t)$ est un trinôme du second degré en $t$. Identifier les coefficients $a$, $b$, $c$.
+    \item Mettre $y(t)$ sous forme canonique et en déduire la hauteur maximale atteinte par le ballon.
+    \item À quel instant $t^*$ cette hauteur est-elle atteinte ? Quelle est alors la position horizontale du ballon ?
+  \end{enumerate}
+
+  \item \textbf{Équation de la trajectoire.} On cherche à exprimer $y$ en fonction de $x$ (et non de $t$).
+  \begin{enumerate}
+    \item Exprimer $t$ en fonction de $x$ à partir de l'équation de $x(t)$.
+    \item Substituer dans $y(t)$ pour obtenir $y(x) = -\dfrac{x^2}{40} + x + 2$.
+    \item Interpréter : pourquoi la trajectoire est-elle une parabole ?
+  \end{enumerate}
+
+  \item \textbf{Portée.} La portée est la valeur de $x$ pour laquelle le ballon touche le sol (i.e. $y = 0$).
+  \begin{enumerate}
+    \item Écrire l'équation $y(x) = 0$ et calculer son discriminant.
+    \item Déterminer la portée (valeur positive de $x$). Donner une valeur approchée à $0{,}1$ m près.
+  \end{enumerate}
+
+  \item \textbf{Question ouverte.} Un obstacle vertical de hauteur $3$ m se trouve à $30$ m du point de lancer. Le ballon passe-t-il au-dessus de l'obstacle ? Justifier par le calcul, puis proposer un angle de lancer différent qui permettrait de passer au-dessus en maintenant la même vitesse initiale (raisonnement qualitatif accepté).
+\end{enumerate}
+\end{exercice}

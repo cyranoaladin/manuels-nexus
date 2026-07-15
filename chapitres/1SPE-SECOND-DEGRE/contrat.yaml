@@ -1,0 +1,27 @@
+chapitre: 1SPE-SECOND-DEGRE
+niveau: 1SPE
+theme: SECOND-DEGRE
+titre: "Fonctions polynomes du second degre"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-SECOND-DEGRE-C1, libelle_eleve: "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre." }
+  - { code: C2, ref_capacite: 1SPE-SECOND-DEGRE-C2, libelle_eleve: "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations." }
+  - { code: C3, ref_capacite: 1SPE-SECOND-DEGRE-C3, libelle_eleve: "Je sais calculer le discriminant et resoudre une equation du second degre." }
+  - { code: C4, ref_capacite: 1SPE-SECOND-DEGRE-C4, libelle_eleve: "Je sais factoriser un trinome et etudier son signe." }
+  - { code: C5, ref_capacite: 1SPE-SECOND-DEGRE-C5, libelle_eleve: "Je sais resoudre une inequation du second degre." }
+  - { code: C6, ref_capacite: 1SPE-SECOND-DEGRE-C6, libelle_eleve: "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum." }
+
+prerequis:
+  - { code: R1, libelle: "Calcul litteral : developper, factoriser, identites remarquables", chapitre_origine: "2GT" }
+  - { code: R2, libelle: "Equations du premier degre et produit nul", chapitre_origine: "2GT" }
+  - { code: R3, libelle: "Fonctions : image, antecedent, courbe representative", chapitre_origine: "2GT" }
+  - { code: R4, libelle: "Fonctions de reference : carre, inverse", chapitre_origine: "2GT" }
+  - { code: R5, libelle: "Inegalites : regles de calcul, tableau de signes", chapitre_origine: "2GT" }
+
+situation_accroche: >
+  Un artisan fabrique des boites en carton en decoupant des carres aux coins d'une feuille rectangulaire.
+  Quel cote de carre maximise le volume de la boite ? Un probleme d'optimisation
+  qui se ramene a l'etude d'un polynome du second degre.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

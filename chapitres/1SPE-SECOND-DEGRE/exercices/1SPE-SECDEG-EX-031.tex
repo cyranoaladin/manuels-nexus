@@ -1,0 +1,38 @@
+% META: {"id": "1SPE-SECDEG-EX-031", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C1", "1SPE-SECOND-DEGRE-C4"], "capacites_codes": ["C1", "C4"], "methodes": ["M1", "M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-031.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-031.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor, simplify, Rational
+% x = symbols('x')
+% # f(x) = (x - 3/2)^2 - 25/4 => forme developpee : x^2 - 3x + 9/4 - 25/4 = x^2 - 3x - 4
+% f_can = (x - Rational(3,2))**2 - Rational(25,4)
+% f_dev = expand(f_can)
+% assert f_dev == x**2 - 3*x - 4
+% # factorisation : (x-4)(x+1)
+% assert factor(f_dev) == (x - 4)*(x + 1)
+% # signe : a>0, negatif entre -1 et 4
+% assert f_dev.subs(x, 0) < 0
+% assert f_dev.subs(x, 5) > 0
+% # g(x) = 4*(x + 1/2)^2 - 9 = 4x^2 + 4x + 1 - 9 = 4x^2 + 4x - 8 = 4(x^2+x-2) = 4(x+2)(x-1)
+% g_can = 4*(x + Rational(1,2))**2 - 9
+% g_dev = expand(g_can)
+% assert g_dev == 4*x**2 + 4*x - 8
+% assert simplify(factor(g_dev) - 4*(x - 1)*(x + 2)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-031}{2}{20}
+\begin{enumerate}
+  \item \textbf{(C1)} On donne $f(x) = \left(x - \dfrac{3}{2}\right)^{\!2} - \dfrac{25}{4}$.
+  \begin{enumerate}
+    \item Développer $f(x)$ pour obtenir la forme $ax^2 + bx + c$.
+    \item \textbf{(C4)} Factoriser $f(x)$ en utilisant les racines lues sur la forme canonique.
+
+    \textit{La forme canonique $a(x-\alpha)^2 + \beta$ permet de lire $x_{1,2} = \alpha \pm \sqrt{-\beta/a}$ quand $\beta < 0$.}
+
+    \item Dresser le tableau de signes de $f$.
+  \end{enumerate}
+
+  \item \textbf{(C1)} On donne $g(x) = 4\!\left(x + \dfrac{1}{2}\right)^{\!2} - 9$.
+  \begin{enumerate}
+    \item Développer $g(x)$.
+    \item \textbf{(C4)} Factoriser $g(x)$ et dresser son tableau de signes.
+  \end{enumerate}
+\end{enumerate}
+\end{exercice}

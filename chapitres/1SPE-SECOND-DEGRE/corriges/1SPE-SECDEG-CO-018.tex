@@ -1,0 +1,62 @@
+% META: {"id": "1SPE-SECDEG-CO-018", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-018", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve, sqrt
+% t = symbols('t')
+% h = -5*t**2 + 20*t + 1
+% assert h.subs(t, 0) == 1
+% tmax = Rational(20, 10)
+% assert tmax == 2
+% assert h.subs(t, tmax) == 21
+% sols = solve(h, t)
+% t_pos = [s for s in sols if s > 0]
+% assert len(t_pos) == 1
+% # valeur approx
+% import sympy
+% t_val = float(t_pos[0])
+% assert abs(t_val - 4.05) < 0.01
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-018}
+
+\textbf{1. Hauteur initiale.}
+
+\commentaireMarge{À $t = 0$, le ballon est à la hauteur de départ.}
+
+\[h(0) = -5 \times 0 + 20 \times 0 + 1 = 1 \text{ mètre}.\]
+
+Le ballon est lancé depuis une hauteur de \textbf{1~m}.
+
+\medskip
+\textbf{2. Hauteur maximale et instant correspondant.}
+
+\commentaireMarge{$a = -5 < 0$ : maximum au sommet.}
+
+On a $a = -5$, $b = 20$.
+
+\[t_{\max} = -\frac{b}{2a} = -\frac{20}{-10} = 2 \text{ secondes}.\]
+
+\[h(2) = -5 \times 4 + 20 \times 2 + 1 = -20 + 40 + 1 = 21 \text{ mètres}.\]
+
+Le ballon atteint sa hauteur maximale de \textbf{21~m} au bout de \textbf{2~s}.
+
+\medskip
+\textbf{3. Instant où le ballon touche le sol.}
+
+\commentaireMarge{Résoudre $h(t) = 0$ et retenir $t > 0$.}
+
+$h(t) = 0 \iff -5t^2 + 20t + 1 = 0$.
+
+$a = -5$, $b = 20$, $c = 1$.
+
+$\Delta = 20^2 - 4 \times (-5) \times 1 = 400 + 20 = 420 > 0$.
+
+$\sqrt{\Delta} = \sqrt{420} = 2\sqrt{105}$.
+
+\[t = \frac{-20 \pm 2\sqrt{105}}{-10} = \frac{20 \mp 2\sqrt{105}}{10} = 2 \mp \frac{\sqrt{105}}{5}.\]
+
+\[t_1 = 2 - \frac{\sqrt{105}}{5} \approx 2 - 2{,}049 \approx -0{,}05 < 0 \quad \text{(rejeté, hors contexte).}\]
+
+\[t_2 = 2 + \frac{\sqrt{105}}{5} \approx 2 + 2{,}049 \approx 4{,}05 > 0.\]
+
+Le ballon touche le sol après environ $\mathbf{4{,}05}$~secondes.
+
+\end{corrige}

@@ -1,0 +1,236 @@
+% META: {"id": "1SPE-SECDEG-FR-R1", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R1 : Calcul litteral
+% Developper, factoriser, identites remarquables
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Calcul litteral et identites remarquables}
+
+\textbf{Developper} : supprimer les parentheses en distribuant la multiplication.
+
+Identites remarquables :
+\[
+  (a+b)^2 = a^2 + 2ab + b^2 \qquad (a-b)^2 = a^2 - 2ab + b^2 \qquad (a+b)(a-b) = a^2 - b^2
+\]
+
+\textbf{Factoriser} : mettre en evidence un facteur commun ou reconnaitre une identite remarquable.
+
+Ces formules apparaissent constamment dans l'etude des polynomes du second degre (passage en forme canonique, factorisation).
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R1-EX1}{1}{5}
+Developper et reduire chaque expression.
+\begin{enumerate}
+  \item $A = (x + 3)^2$
+  \item $B = (x - 5)^2$
+  \item $C = (2x + 1)^2$
+  \item $D = (x + 4)(x - 4)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% x = symbols('x')
+% A = (x + 3)**2
+% assert expand(A) == x**2 + 6*x + 9
+% B = (x - 5)**2
+% assert expand(B) == x**2 - 10*x + 25
+% C = (2*x + 1)**2
+% assert expand(C) == 4*x**2 + 4*x + 1
+% D = (x + 4)*(x - 4)
+% assert expand(D) == x**2 - 16
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R1-EX1}
+
+\commentaireMarge{On applique $(a+b)^2 = a^2 + 2ab + b^2$ avec $a = x$ et $b = 3$.}
+
+\textbf{Question 1.}
+\[
+A = (x + 3)^2 = x^2 + 2 \times x \times 3 + 3^2 = x^2 + 6x + 9.
+\]
+
+\commentaireMarge{On applique $(a-b)^2 = a^2 - 2ab + b^2$ avec $a = x$ et $b = 5$.}
+
+\textbf{Question 2.}
+\[
+B = (x - 5)^2 = x^2 - 2 \times x \times 5 + 5^2 = x^2 - 10x + 25.
+\]
+
+\commentaireMarge{On applique $(a+b)^2$ avec $a = 2x$ et $b = 1$ : attention a $(2x)^2 = 4x^2$.}
+
+\textbf{Question 3.}
+\[
+C = (2x + 1)^2 = (2x)^2 + 2 \times 2x \times 1 + 1^2 = 4x^2 + 4x + 1.
+\]
+
+\commentaireMarge{On applique $(a+b)(a-b) = a^2 - b^2$ avec $a = x$ et $b = 4$.}
+
+\textbf{Question 4.}
+\[
+D = (x + 4)(x - 4) = x^2 - 4^2 = x^2 - 16.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R1-EX2}{1}{5}
+Developper et reduire les expressions suivantes (double distributivite).
+\begin{enumerate}
+  \item $E = (x + 2)(x + 7)$
+  \item $F = (3x - 1)(x + 4)$
+  \item $G = (x - 3)(2x + 5)$
+  \item $H = (x + 1)^2 - (x - 1)^2$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% x = symbols('x')
+% E = (x + 2)*(x + 7)
+% assert expand(E) == x**2 + 9*x + 14
+% F = (3*x - 1)*(x + 4)
+% assert expand(F) == 3*x**2 + 11*x - 4
+% G = (x - 3)*(2*x + 5)
+% assert expand(G) == 2*x**2 - x - 15
+% H = (x + 1)**2 - (x - 1)**2
+% assert expand(H) == 4*x
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R1-EX2}
+
+\commentaireMarge{$(a+b)(c+d) = ac + ad + bc + bd$. Ici $a=x$, $b=2$, $c=x$, $d=7$.}
+
+\textbf{Question 1.}
+\[
+E = x^2 + 7x + 2x + 14 = x^2 + 9x + 14.
+\]
+
+\textbf{Question 2.}
+\[
+F = 3x \times x + 3x \times 4 + (-1) \times x + (-1) \times 4 = 3x^2 + 12x - x - 4 = 3x^2 + 11x - 4.
+\]
+
+\textbf{Question 3.}
+\[
+G = x \times 2x + x \times 5 + (-3) \times 2x + (-3) \times 5 = 2x^2 + 5x - 6x - 15 = 2x^2 - x - 15.
+\]
+
+\commentaireMarge{On peut utiliser $(a+b)^2 - (a-b)^2 = 4ab$ avec $a=x$, $b=1$.}
+
+\textbf{Question 4.}
+\[
+H = (x^2 + 2x + 1) - (x^2 - 2x + 1) = 4x.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R1-EX3}{1}{6}
+Factoriser les expressions suivantes.
+\begin{enumerate}
+  \item $P = x^2 - 9$
+  \item $Q = x^2 + 8x + 16$
+  \item $R = x^2 - 4x + 4$
+  \item $S = 2x^2 + 6x$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, factor, simplify
+% x = symbols('x')
+% P = x**2 - 9
+% assert factor(P) == (x - 3)*(x + 3)
+% Q = x**2 + 8*x + 16
+% assert factor(Q) == (x + 4)**2
+% R = x**2 - 4*x + 4
+% assert factor(R) == (x - 2)**2
+% S = 2*x**2 + 6*x
+% assert factor(S) == 2*x*(x + 3)
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R1-EX3}
+
+\commentaireMarge{$a^2 - b^2 = (a-b)(a+b)$ avec $a=x$, $b=3$.}
+
+\textbf{Question 1.}
+\[
+P = x^2 - 9 = x^2 - 3^2 = (x-3)(x+3).
+\]
+
+\commentaireMarge{On reconnait $(x+a)^2 = x^2 + 2ax + a^2$ avec $2a = 8$, donc $a = 4$.}
+
+\textbf{Question 2.}
+\[
+Q = x^2 + 8x + 16 = (x + 4)^2.
+\]
+
+\commentaireMarge{On reconnait $(x-a)^2 = x^2 - 2ax + a^2$ avec $2a = 4$, donc $a = 2$.}
+
+\textbf{Question 3.}
+\[
+R = x^2 - 4x + 4 = (x - 2)^2.
+\]
+
+\commentaireMarge{Facteur commun $2x$ aux deux termes.}
+
+\textbf{Question 4.}
+\[
+S = 2x^2 + 6x = 2x(x + 3).
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R1-EX4}{1}{6}
+En developpant et en reduisant, montrer que les deux expressions suivantes sont egales.
+\begin{enumerate}
+  \item $2(x-3)^2 + 5 = 2x^2 - 12x + 23$
+  \item $(x+1)^2 - (x+1) - 2 = x^2 + x - 2$
+  \item Factoriser $x^2 + x - 2$ (aide : chercher deux entiers de somme $1$ et de produit $-2$).
+  \item Deduire les solutions de $x^2 + x - 2 = 0$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor, solve
+% x = symbols('x')
+% expr1_gauche = 2*(x-3)**2 + 5
+% expr1_droite = 2*x**2 - 12*x + 23
+% assert expand(expr1_gauche) == expr1_droite
+% expr2_gauche = (x+1)**2 - (x+1) - 2
+% expr2_droite = x**2 + x - 2
+% assert expand(expr2_gauche) == expr2_droite
+% fac = factor(x**2 + x - 2)
+% assert fac == (x - 1)*(x + 2)
+% sols = solve(x**2 + x - 2, x)
+% assert sorted(sols) == [-2, 1]
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R1-EX4}
+
+\textbf{Question 1.}
+\[
+2(x-3)^2 + 5 = 2(x^2 - 6x + 9) + 5 = 2x^2 - 12x + 18 + 5 = 2x^2 - 12x + 23. \quad \checkmark
+\]
+
+\textbf{Question 2.}
+\[
+(x+1)^2 - (x+1) - 2 = x^2 + 2x + 1 - x - 1 - 2 = x^2 + x - 2. \quad \checkmark
+\]
+
+\textbf{Question 3.} On cherche deux entiers $p$ et $q$ tels que $p + q = 1$ et $p \times q = -2$ : on trouve $p = -1$ et $q = 2$... ou $p = 2$ et $q = -1$. Donc :
+\[
+x^2 + x - 2 = (x - 1)(x + 2).
+\]
+
+\textbf{Question 4.} $x^2 + x - 2 = 0 \Leftrightarrow (x-1)(x+2) = 0 \Leftrightarrow x = 1$ ou $x = -2$.
+
+L'ensemble des solutions est $\{-2\,;\,1\}$.
+
+\end{corrige}

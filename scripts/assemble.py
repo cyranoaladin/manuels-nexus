@@ -51,7 +51,7 @@ def main(chap: str, variant: str) -> int:
         proc = subprocess.run(
             ["pdflatex", "-interaction=nonstopmode", "-halt-on-error",
              f"-output-directory={build}", str(tex_path)],
-            capture_output=True, text=True, cwd=ROOT)
+            capture_output=True, text=True, cwd=ROOT, errors="replace")
     if proc.returncode != 0:
         print(proc.stdout[-3000:])
         return 1

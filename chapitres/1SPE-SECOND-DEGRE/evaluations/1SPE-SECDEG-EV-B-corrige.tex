@@ -1,0 +1,202 @@
+% META: {"id": "1SPE-SECDEG-EV-B-corrige", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-SECDEG-EV-B", "version": "B", "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "sources_inspiration": [], "parametres_sympy": {"a": 3, "b": -12, "c": 9, "a2": -2, "b2": 8, "c2": -6}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/evaluations/1SPE-SECDEG-EV-B-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, expand, solve
+% x = symbols('x')
+% f = 3*x**2 - 12*x + 9
+% a, b, c = 3, -12, 9
+% alpha = Rational(-b, 2*a)
+% assert alpha == 2
+% beta = f.subs(x, alpha)
+% assert beta == -3
+% assert expand(3*(x-2)**2 - 3) == f
+% Delta = b**2 - 4*a*c
+% assert Delta == 36
+% x1 = Rational(12-6, 6)
+% x2 = Rational(12+6, 6)
+% assert x1 == 1
+% assert x2 == 3
+% assert expand(3*(x-1)*(x-3)) == f
+% g = -2*x**2 + 8*x - 6
+% assert expand(-2*(x-2)**2 + 2) == g
+% assert g.subs(x, 2) == 2
+% V = x*(30 - 2*x)*(20 - 2*x)
+% assert V.subs(x, 4) == 1056
+% assert V.subs(x, 6) == 864
+% END-VERIFY
+
+%---------------------------------------------------------------
+% CORRIGE — Evaluation B (55 min) — Second degre
+% Bareme total : 20 points
+%---------------------------------------------------------------
+
+\begin{corrige}{1SPE-SECDEG-EV-B}
+
+%===============================================================
+\section*{Exercice 1 \hfill (7 points) — C1, C3, C4}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt (calculer) ; Q2 : 2 pts (calculer, communiquer) ; Q3 : 2 pts (calculer) ; Q4 : 2 pts (calculer, communiquer)}
+
+\bigskip
+\textbf{Question 1 — Identification des coefficients.}
+
+\commentaireMarge{Dans $ax^2 + bx + c$ : $a$ est le coefficient de $x^2$, $b$ le coefficient de $x$, $c$ le terme constant.}
+
+Pour $f(x) = 3x^2 - 12x + 9$ : $a = 3$, $b = -12$, $c = 9$.
+
+\medskip
+\textbf{Question 2 — Forme canonique.}
+
+\commentaireMarge{Formule du sommet : $\alpha = -b/(2a)$, $\beta = f(\alpha)$.}
+
+\[
+\alpha = \frac{-(-12)}{2 \times 3} = \frac{12}{6} = 2, \qquad
+\beta = f(2) = 3 \times 4 - 12 \times 2 + 9 = 12 - 24 + 9 = -3.
+\]
+
+\[
+\boxed{f(x) = 3(x-2)^2 - 3.}
+\]
+
+\medskip
+\textbf{Question 3 — Discriminant et racines.}
+
+\commentaireMarge{$\Delta = (-12)^2 - 4 \times 3 \times 9 = 144 - 108$.}
+
+\[
+\Delta = 144 - 108 = 36 > 0. \quad \sqrt{\Delta} = 6.
+\]
+
+\[
+x_1 = \frac{12 - 6}{6} = 1, \qquad x_2 = \frac{12 + 6}{6} = 3.
+\]
+
+\medskip
+\textbf{Question 4 — Forme factorisee.}
+
+\commentaireMarge{$f(x) = a(x - x_1)(x - x_2)$ avec $a = 3$, $x_1 = 1$, $x_2 = 3$.}
+
+\[
+\boxed{f(x) = 3(x-1)(x-3).}
+\]
+
+Verification : $3(x-1)(x-3) = 3(x^2 - 4x + 3) = 3x^2 - 12x + 9 = f(x)$. \checkmark
+
+%===============================================================
+\section*{Exercice 2 \hfill (5 points) — C2}
+%===============================================================
+
+\baremeIndicatif{Q1 : 2 pts (calculer, communiquer) ; Q2 : 1 pt (raisonner) ; Q3 : 1 pt (representer) ; Q4 : 1 pt (calculer)}
+
+\bigskip
+\textbf{Question 1 — Forme canonique de $g$.}
+
+\commentaireMarge{On developpe la forme canonique proposee et on verifie.}
+
+On developpe $-2(x-2)^2 + 2$ :
+\[
+-2(x-2)^2 + 2 = -2(x^2 - 4x + 4) + 2 = -2x^2 + 8x - 8 + 2 = -2x^2 + 8x - 6 = g(x). \quad \checkmark
+\]
+
+Donc $g(x) = -2(x-2)^2 + 2$ est bien la forme canonique de $g$.
+
+\medskip
+\textbf{Question 2 — Sommet et extremum.}
+
+\commentaireMarge{$a = -2 < 0$ : parabole en $\cap$, le sommet est un maximum.}
+
+Le sommet est $S(2\,;\,2)$. Comme $a = -2 < 0$, la parabole est tournee vers le bas : $g$ admet un \textbf{maximum} de valeur $g(2) = 2$, atteint en $x = 2$.
+
+\medskip
+\textbf{Question 3 — Tableau de variations.}
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $2$ & & $+\infty$ \\
+\hline
+$g(x)$ & $-\infty$ & $\nearrow$ & $2$ & $\searrow$ & $-\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Question 4 — Axe de symetrie.}
+
+L'axe de symetrie de la parabole a pour equation $x = \alpha = 2$.
+
+%===============================================================
+\section*{Exercice 3 \hfill (4 points) — C4, C5}
+%===============================================================
+
+\baremeIndicatif{Q1 : 2 pts (calculer, representer) ; Q2 : 1 pt (calculer) ; Q3 : 1 pt (calculer)}
+
+\bigskip
+\textbf{Question 1 — Tableau de signes.}
+
+\commentaireMarge{On utilise la forme factorisee $f(x) = 3(x-1)(x-3)$.}
+
+$f(x) = 3(x-1)(x-3)$.
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $3$ & & $+\infty$ \\
+\hline
+$x - 1$ & & $-$ & $0$ & $+$ & $+$ & $+$ & \\
+$x - 3$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+$3$ & & $+$ & $+$ & $+$ & $+$ & $+$ & \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{Question 2 — Resolution de $f(x) \leq 0$.}
+
+D'apres le tableau de signes : $\boxed{\mathcal{S} = [1\,;\,3]}$.
+
+\medskip
+\textbf{Question 3 — Resolution de $f(x) > 0$.}
+
+$\boxed{\mathcal{S} = \,]-\infty\,;\,1[ \cup \,]3\,;\,+\infty[}$.
+
+%===============================================================
+\section*{Exercice 4 \hfill (4 points) — C6}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt (modeliser) ; Q2 : 1 pt (modeliser) ; Q3 : 1 pt (calculer) ; Q4 : 1 pt (chercher)}
+
+\bigskip
+\textbf{Question 1 — Dimensions.}
+
+\commentaireMarge{Hauteur $= x$, longueur $= 30 - 2x$, largeur $= 20 - 2x$.}
+
+Apres decoupe et pliage : hauteur $x$~cm, longueur $30-2x$~cm, largeur $20-2x$~cm.
+
+\medskip
+\textbf{Question 2 — Volume et domaine.}
+
+$V(x) = x(30-2x)(20-2x)$. Domaine : $x > 0$, $30-2x > 0$ et $20-2x > 0$, d'ou $x \in \,]0\,;\,10[$.
+
+\medskip
+\textbf{Question 3 — Calcul de $V(4)$ et $V(6)$.}
+
+\commentaireMarge{On substitue directement.}
+
+\[
+V(4) = 4 \times (30-8) \times (20-8) = 4 \times 22 \times 12 = 1\,056 \text{ cm}^3.
+\]
+\[
+V(6) = 6 \times (30-12) \times (20-12) = 6 \times 18 \times 8 = 864 \text{ cm}^3.
+\]
+
+\medskip
+\textbf{Question 4 — Comparaison.}
+
+$V(4) = 1\,056 > 864 = V(6)$ : pour $x = 4$, le volume est plus grand.
+
+Cependant, ces deux valeurs ne permettent pas de conclure que $x = 4$ est le maximum global. Il existe peut-etre un $x^* \in \,]0\,;\,10[$ donnant un volume superieur. Une etude complete de $V$ est necessaire.
+
+\end{corrige}

@@ -1,0 +1,99 @@
+% META: {"id": "1SPE-SECDEG-CO-024", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-024", "capacites_codes": ["C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, simplify, Rational
+% x = symbols('x')
+% # Q1 : (x^2 - 4)(x - 3) = 0
+% f = (x**2 - 4)*(x - 3)
+% sols = sorted(solve(f, x))
+% assert sols == [-2, 2, 3]
+% # Q2 : signe de g(x) = x^2 - 4 = (x-2)(x+2)
+% g = x**2 - 4
+% assert g.subs(x, 0) < 0
+% assert g.subs(x, 3) > 0
+% assert g.subs(x, -3) > 0
+% # Q3 : h(x) = 2x^2 + 3x - 5
+% h = 2*x**2 + 3*x - 5
+% delta_h = 3**2 - 4*2*(-5)
+% assert delta_h == 49
+% sols_h = sorted(solve(h, x))
+% assert sols_h == [Rational(-5, 2), 1]
+% assert simplify(h - (2*x + 5)*(x - 1)) == 0
+% # Q4 : h >= 0 sur ]-inf ; -5/2] U [1 ; +inf[
+% assert h.subs(x, 0) < 0
+% assert h.subs(x, 2) > 0
+% assert h.subs(x, -3) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-024}
+
+\textbf{1. Résolution de $(x^2 - 4)(x - 3) = 0$.}
+
+\commentaireMarge{Règle du produit nul : $AB = 0 \iff A = 0$ ou $B = 0$.}
+
+On factorise $x^2 - 4 = (x-2)(x+2)$, donc :
+\[(x-2)(x+2)(x-3) = 0.\]
+
+Par la règle du produit nul :
+\[x - 2 = 0 \text{ ou } x + 2 = 0 \text{ ou } x - 3 = 0,\]
+ce qui donne $x = 2$, $x = -2$ ou $x = 3$.
+
+L'ensemble des solutions est $\mathcal{S} = \{-2\,;\,2\,;\,3\}$.
+
+\medskip
+\textbf{2. Tableau de signes de $g(x) = x^2 - 4$.}
+
+\commentaireMarge{$g(x) = (x-2)(x+2)$, racines $-2$ et $2$, $a = 1 > 0$.}
+
+$g(x) = x^2 - 4 = (x-2)(x+2)$. Les racines sont $-2$ et $2$.
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ & & $2$ & & $+\infty$ \\
+\hline
+$g(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{3. Étude de $h(x) = 2x^2 + 3x - 5$.}
+
+\commentaireMarge{$a=2$, $b=3$, $c=-5$.}
+
+\textit{a) Discriminant et racines.}
+
+\[\Delta = 3^2 - 4 \times 2 \times (-5) = 9 + 40 = 49.\]
+
+\[x_1 = \frac{-3 - 7}{4} = \frac{-10}{4} = -\frac{5}{2} \qquad \text{et} \qquad x_2 = \frac{-3 + 7}{4} = \frac{4}{4} = 1.\]
+
+\textit{b) Factorisation.}
+
+\[h(x) = 2\!\left(x + \frac{5}{2}\right)\!(x - 1) = (2x + 5)(x - 1).\]
+
+\textit{Vérification :} $(2x+5)(x-1) = 2x^2 - 2x + 5x - 5 = 2x^2 + 3x - 5$. \hfill $\square$
+
+\textit{c) Tableau de signes de $h$.}
+
+\commentaireMarge{$a = 2 > 0$ : signe $+$ à l'extérieur des racines.}
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-\dfrac{5}{2}$ & & $1$ & & $+\infty$ \\
+\hline
+$h(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{4. Solutions de $2x^2 + 3x - 5 \geqslant 0$.}
+
+\commentaireMarge{Lire les intervalles où $h \geqslant 0$ dans le tableau.}
+
+D'après le tableau de signes, $h(x) \geqslant 0$ sur $\left]-\infty\,;\,-\dfrac{5}{2}\right] \cup \left[1\,;\,+\infty\right[$.
+
+\baremeIndicatif{Q1 : 2 pts (calculer, raisonner) ; Q2 : 2 pts (raisonner) ; Q3a-b : 2 pts (calculer) ; Q3c : 1 pt (raisonner) ; Q4 : 1 pt (raisonner)}
+\end{corrige}

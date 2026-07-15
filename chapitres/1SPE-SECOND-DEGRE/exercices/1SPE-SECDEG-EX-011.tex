@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-SECDEG-EX-011", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-011.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-011.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% x = symbols('x')
+% # f(x) = (x-2)(x+5)
+% # signe : positif si x < -5 ou x > 2, negatif si -5 < x < 2, nul en -5 et 2
+% f = (x - 2)*(x + 5)
+% assert f.subs(x, -6) > 0    # x < -5
+% assert f.subs(x, 0) < 0     # -5 < x < 2
+% assert f.subs(x, 3) > 0     # x > 2
+% assert f.subs(x, -5) == 0
+% assert f.subs(x, 2) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-011}{1}{12}
+On considère le trinôme $f(x) = (x-2)(x+5)$.
+
+\begin{enumerate}
+  \item Identifier les racines de $f$ (les valeurs de $x$ pour lesquelles $f(x) = 0$).
+  \item Dresser le tableau de signes de $f$ sur $\mathbb{R}$.
+  \item En déduire les ensembles de solutions des inéquations suivantes :
+  \begin{enumerate}
+    \item $f(x) \geqslant 0$
+    \item $f(x) < 0$
+  \end{enumerate}
+  \item Développer $f(x)$ et vérifier que $\Delta = 49$.
+\end{enumerate}
+\end{exercice}
