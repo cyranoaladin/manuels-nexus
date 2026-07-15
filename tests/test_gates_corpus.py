@@ -71,6 +71,21 @@ La réponse est 42.
         hits = _scan_content(text)
         assert len(hits) > 0, "'Réponse attendue' doit etre detecte"
 
+    def test_qcm_diagnostic_adjacent_fails(self):
+        """Diagnostic adjacent a une option QCM = ROUGE (revele la reponse)."""
+        from gates_corpus.check_eleve_no_corrige import QCM_DIAG_RE
+        text = r"""\item \lstinline{<class 'list'>}
+        \quad\textit{Si tu as répondu A : tu confonds tuple et liste.}"""
+        assert QCM_DIAG_RE.search(text) is not None
+
+    def test_qcm_clean_options_pass(self):
+        """Options QCM propres (sans diagnostic) = VERT."""
+        from gates_corpus.check_eleve_no_corrige import QCM_DIAG_RE
+        text = r"""\item \lstinline{<class 'list'>}
+  \item \lstinline{<class 'tuple'>}
+  \item \lstinline{<class 'int'>}"""
+        assert QCM_DIAG_RE.search(text) is None
+
 
 # --- check_no_placeholders patterns ---
 

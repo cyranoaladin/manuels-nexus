@@ -1,0 +1,96 @@
+% META: {"id": "1NSI-TC-QCM-DIAG", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "qcm_diagnostics", "status": "needs_review"}
+\section*{Diagnostics du QCM --- Types construits}
+\textit{Compare tes réponses et lis le diagnostic correspondant.}
+
+\bigskip
+
+\textbf{Q1.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : tu confonds tuple (parenthèses) et liste (crochets) $\to$ M1.
+  \item Si C : la virgule crée un tuple, pas un entier $\to$ D1.
+\end{itemize}
+
+\textbf{Q2.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : un tuple est non mutable, on ne peut pas modifier ses éléments $\to$ EF1.
+  \item Si C : \lstinline{t[0] = 5} n'ajoute pas, il tente une modification interdite $\to$ D1.
+\end{itemize}
+
+\textbf{Q3.} Réponse : C.
+\begin{itemize}[nosep]
+  \item Si A : le déballage associe le premier élément à \lstinline{a} $\to$ D3.
+  \item Si B : le déballage sépare les éléments, il ne copie pas le tuple $\to$ D3.
+\end{itemize}
+
+\textbf{Q4.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : \lstinline{append} ajoute un élément, la longueur augmente de 1 $\to$ D5.
+  \item Si C : un seul élément est ajouté par \lstinline{append} $\to$ D5.
+\end{itemize}
+
+\textbf{Q5.} Réponse : A.
+\begin{itemize}[nosep]
+  \item Si B : cette expression produit 10 éléments (0 à 18), pas 5 $\to$ D6.
+  \item Si C : aucun filtre pair, et 8 est exclu de \lstinline{range(8)} $\to$ D6.
+\end{itemize}
+
+\textbf{Q6.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : l'indice 3 n'existe pas dans un tableau de 3 éléments (indices 0--2).
+  \item Si C : Python ne renvoie pas \lstinline{None} pour un indice invalide.
+\end{itemize}
+
+\textbf{Q7.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : tu confonds ligne et colonne. \lstinline{g[1]} est \lstinline{[3, 4]} $\to$ D7.
+  \item Si C : \lstinline{g[1]} n'est pas \lstinline{[1, 2]} $\to$ D7.
+\end{itemize}
+
+\textbf{Q8.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : \lstinline{*} crée des alias de la même ligne $\to$ D8.
+  \item Si C : cette expression crée une grille 2$\times$3, pas 3$\times$2.
+\end{itemize}
+
+\textbf{Q9.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : chaque sous-liste est une ligne, il y en a 2 $\to$ D7.
+\end{itemize}
+
+\textbf{Q10.} Réponse : C.
+\begin{itemize}[nosep]
+  \item Si A : Python ne renvoie pas \lstinline{None} mais lève une exception $\to$ EF3, D10.
+\end{itemize}
+
+\textbf{Q11.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : \lstinline{append} est une méthode de liste, pas de dictionnaire $\to$ D10.
+\end{itemize}
+
+\textbf{Q12.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : cette boucle ne donne que les clés.
+  \item Si C : cette boucle ne donne que les valeurs.
+\end{itemize}
+
+\textbf{Q13.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : \lstinline{b = a} crée un alias, pas une copie $\to$ D11.
+\end{itemize}
+
+\textbf{Q14.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : ceci crée un alias, pas une copie $\to$ D11, D12.
+  \item Si C : \lstinline{t * 1} crée une copie superficielle, mais \lstinline{list(t)} est plus explicite.
+\end{itemize}
+
+\textbf{Q15.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : la copie superficielle ne copie pas les sous-listes $\to$ EF4.
+\end{itemize}
+
+\textbf{Q16.} Réponse : B.
+\begin{itemize}[nosep]
+  \item Si A : \lstinline{tuple} et \lstinline{str} sont non mutables $\to$ D11.
+  \item Si C : \lstinline{int} est non mutable $\to$ D11.
+\end{itemize}

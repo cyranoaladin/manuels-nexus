@@ -1,27 +1,42 @@
-% nexus-code.tex — Extensions NSI de la charte : code, console, code de référence.
-% Chargé par la classe après nexus-manuel.cls. Ne modifie pas le tronc commun.
+% nexus-code.tex v3.1 — Extensions NSI : code, console, codereference, QCM, projet.
+% Charge par la classe apres nexus-manuel.cls. Ne modifie pas le tronc commun.
 
-% Console : distinction visuelle STRICTE avec le code (erreur classique des manuels NSI).
-\lstnewenvironment{console}{\lstset{basicstyle=\ttfamily\small,backgroundcolor=\color{nxGris!8},
-  frame=none,xleftmargin=1em,literate={>>>}{{\textcolor{nxBleu}{\bfseries >>>~}}}3}}{}
+% Console : fond gris, coins arrondis, chevrons nxBleu.
+% Distinction visuelle STRICTE avec le code.
+\lstnewenvironment{console}{\lstset{
+  basicstyle=\ttfamily\fontsize{8.5}{11}\selectfont,
+  backgroundcolor=\color{nxGris!8},
+  frame=none, xleftmargin=1em,
+  aboveskip=9pt, belowskip=9pt,
+  literate={>>>}{{\textcolor{nxBleu}{\bfseries>>>~}}}3
+    {é}{{\'{e}}}1 {è}{{\`{e}}}1 {ê}{{\^{e}}}1
+    {à}{{\`{a}}}1 {ù}{{\`{u}}}1 {ç}{{\c{c}}}1,
+}}{}
 
-% Code de référence : implémentation commentée ligne à ligne (strate cours).
-% \begin{codereference}{titre} ... \end{codereference}
-\newtcolorbox{crbox}[1]{colback=nxBleu!3,colframe=nxBleu,boxrule=0pt,leftrule=1.2pt,
-  title={\textsc{Code de référence} --- #1},fonttitle=\sffamily\bfseries,enhanced,breakable}
+% Code de reference : boite a barre de titre bleue pleine
+\newtcolorbox{crbox}[1]{enhanced, breakable,
+  colback=nxBleu!3, colframe=nxBleu,
+  boxrule=0pt, leftrule=0pt, toprule=0pt,
+  sharp corners,
+  title={\color{white}\sffamily\bfseries\fontsize{8.5}{11}\selectfont
+    \addfontfeatures{LetterSpace=4}\textsc{Code de référence} --- #1},
+  coltitle=white, colbacktitle=nxBleu,
+  before skip=9pt, after skip=9pt,
+  left=8pt, right=8pt, top=4pt, bottom=4pt}
 \newenvironment{codereference}[1]{\begin{crbox}{#1}}{\end{crbox}}
 
-% Rubrique « À la machine » : ce que l'élève reproduit dans son éditeur.
+% Rubrique « A la machine »
 \newcommand{\alamachine}[1]{\par\medskip\noindent
   {\sffamily\bfseries\color{nxVert}\pictoPython~À la machine.}\ #1\par\medskip}
 
-% Mini-projet (Temps 7-projet, obligation programme ~25% mode projet)
-\newtcolorbox{mpbox}[1]{colback=nxOr!5,colframe=nxOr!85!black,boxrule=0pt,leftrule=1.6pt,
-  title={\textsc{Mini-projet} --- #1},fonttitle=\sffamily\bfseries,enhanced,breakable}
+% Mini-projet (boite nxOr, detach title comme nxbase)
+\newtcolorbox{mpbox}[1]{nxbase, colframe=nxOr!85!black, colback=nxOr!5,
+  title={\textsc{Mini-projet} --- #1}}
 \newenvironment{miniprojet}[1]{\begin{mpbox}{#1}}{\end{mpbox}}
 \newcommand{\jalon}[2]{\par\noindent{\sffamily\bfseries Jalon #1.}\ #2\par}
 \newcommand{\criteresValidation}[1]{\par\noindent{\small\itshape Critères de validation (testables) : #1}\par}
 
-% Épreuve pratique (Terminale)
+% Epreuve pratique (Terminale)
 \newenvironment{sujetECE}[2]{\par\bigskip\noindent
-  \textbf{\textcolor{nxBleu}{\large Épreuve pratique \texttt{#1}}}\quad{\footnotesize #2}\par\nopagebreak\medskip}{\par\bigskip}
+  \textbf{\textcolor{nxBleu}{\large\sffamily Épreuve pratique \texttt{#1}}}\quad
+  {\sffamily\fontsize{8}{10}\selectfont #2}\par\nopagebreak\medskip}{\par\bigskip}

@@ -19,6 +19,9 @@ FORBIDDEN = [
     re.compile(r"corrige_professeur", re.IGNORECASE),
 ]
 
+# QCM : diagnostic adjacent a une option = fuite de reponse
+QCM_DIAG_RE = re.compile(r"\\item\s.*?\\quad\s*\\textit\{Si", re.IGNORECASE | re.DOTALL)
+
 # Fichiers qui DOIVENT contenir des corriges (exclus du scan)
 ALLOWED_DIRS = {"corriges", "coups_de_pouce", "_harvest"}
 ALLOWED_SUFFIXES = {"corrige", "corrigé", "CO-", "CDP", "professeur"}
@@ -47,6 +50,11 @@ def main() -> int:
                 if matches:
                     rel = path.relative_to(ROOT)
                     violations.append(f"  {rel}: found '{matches[0]}'")
+            # QCM : diagnostic adjacent a une option
+            qcm_hits = QCM_DIAG_RE.findall(content)
+            if qcm_hits and "qcm" in str(path).lower():
+                rel = path.relative_to(ROOT)
+                violations.append(f"  {rel}: QCM diagnostic adjacent a une option (revele la reponse)")
 
     if violations:
         print("ROUGE -- contenu corrige detecte dans des fichiers eleve :")
