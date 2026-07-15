@@ -6,6 +6,28 @@
 \propriete[Interprétation géométrique]{Si $f'(a)$ existe, il est le coefficient directeur de la tangente à la courbe de $f$ au point d'abscisse $a$.}
 \exemple{Si $f'(3)=-2$, la tangente descend de $2$ unités quand on avance d'une unité : sa pente est négative.}
 \contreexemple{Une pente négative ne signifie pas que toutes les images de $f$ sont négatives ; elle indique seulement un comportement local de la courbe.}
+\begin{nxfigure}{Sécantes convergeant vers la tangente}
+\begin{tikzpicture}
+\begin{axis}[nexus,
+  xmin=-0.5, xmax=5, ymin=-0.5, ymax=10,
+  xlabel=$x$, ylabel=$y$,
+  xtick={0,1,2,3,4}, ytick={0,2,4,6,8}]
+  \addplot[courbe,domain=0:4.5,samples=60] {0.5*x^2};
+  % Sécantes depuis a=2
+  \addplot[secante,domain=0.5:4.5] {0.5*(x-2)*(2+4) + 2};  % h=2, pente=3
+  \addplot[secante,domain=0.5:4.5] {2.5*(x-2) + 2};        % h=1, pente=2.5
+  \addplot[secante,domain=0.5:4.5,nxOr!80] {2.25*(x-2) + 2}; % h=0.5
+  % Tangente
+  \addplot[tangente,domain=0.5:4] {2*(x-2) + 2};
+  % Point de contact
+  \addplot[point] coordinates {(2,2)};
+  \node[anchor=north west,font=\footnotesize,nxBleu] at (axis cs:2,2) {$A(a;f(a))$};
+  \node[anchor=south,font=\footnotesize,nxOr] at (axis cs:3.8,5.6) {\small tangente};
+\end{axis}
+\end{tikzpicture}
+\nxcaption{Les sécantes (pointillés) convergent vers la tangente (trait plein or) lorsque $h\to 0$.}
+\end{nxfigure}
+
 \margeAppui{On passe des sécantes à la tangente : les sécantes utilisent deux points, la tangente décrit la direction de la courbe en un seul point.}
 \margeAppui{En cinématique, une vitesse moyenne se calcule sur un intervalle ; une vitesse instantanée est interprétée à un instant précis.}
 \erreurFrequente{\textbf{Copie fautive :} « $f'(a)=f(a)$. » \textbf{Correction :} $f(a)$ est l'ordonnée du point de la courbe ; $f'(a)$ est la pente de la tangente en ce point.}

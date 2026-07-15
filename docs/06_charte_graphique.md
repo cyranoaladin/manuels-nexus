@@ -184,3 +184,49 @@ L'entrée est ajoutée automatiquement au sommaire. Le style de page est `plain`
 - Les pictogrammes sont doublés d'un libellé textuel.
 - Les contrastes texte/fond respectent un ratio ≥ 4,5:1 (WCAG AA).
 - Les liens internes (renvois exercices ↔ corrigés) sont cliquables en PDF mais ne dépendent pas de la couleur seule.
+
+---
+
+## 10. Identité visuelle Nexus Réussite
+
+### 10.1 Icônes propriétaires TikZ
+
+Définies dans `gabarits/nexus-icons.tex`. Trait 0,8 pt uniforme, boîte 1 em, monochromes. Les dingbats pifont sont interdits dans le rendu final.
+
+| Commande | Objet | Usage |
+|---|---|---|
+| `\nxLosange` | Losange or plein, contour nxBleu 0,4 pt | Parcours (remplace \ding{117}) |
+| `\icnObjectif` | Cible | « Je sais… » |
+| `\icnMethode` | Boussole | Fiches méthodes |
+| `\icnErreur` | Triangle arrondi + ! | Erreurs fréquentes |
+| `\icnCle` | Clé | Coups de pouce |
+| `\icnCheck` | Coche | Corrigés |
+| `\icnOral` | Bulle de parole | Exercices oraux |
+| `\icnPython` | Chevrons ››› | Exercices algorithmiques |
+| `\icnChrono` | Cadran | Durées |
+| `\icnEtoile` | Étoile 4 branches fines | Approfondissement |
+| `\icnCarte` | Nœuds reliés | Carte du chapitre |
+
+### 10.2 Signature de chapitre
+
+Définie dans `gabarits/nexus-signatures.tex`.
+
+- **Bandeau d'ouverture** : bande verticale nxBleu!12 sur le bord extérieur de la page d'ouverture, avec motif génératif propre au thème (Suites : points en progression, Dérivation : faisceau de sécantes, Second degré : famille de paraboles, Probabilités : arbre).
+- **Onglet de tranche** : rectangle nxBleu plein (0,6 cm × 1,5 cm) en bord extérieur des pages impaires, position verticale décalée par chapitre (navigation livre fermé).
+- **Mini-losange en-tête** : losange nxBleu!30 dans l'en-tête de chaque page, identification discrète du chapitre.
+
+### 10.3 Figures mathématiques
+
+Style normalisé dans `gabarits/nexus-figures.tex`.
+
+| Élément | Style |
+|---|---|
+| Axes | nxGris 0,5 pt, flèches Stealth 4 pt |
+| Grille | nxGris!20, 0,3 pt |
+| Courbes | nxBleu 1,1 pt |
+| Tangentes | nxOr 1,1 pt |
+| Sécantes | nxOr!60, 0,8 pt, pointillées |
+| Points | disques 1,6 pt nxBleu, étiquetés |
+| Aires | nxVert!15, sans contour |
+
+**Règle permanente** : toute capacité graphique implique ≥ 2 figures dans le cours et ≥ 1 dans les exercices. Chapitre d'analyse ≥ 6 figures, géométrie ≥ 10.

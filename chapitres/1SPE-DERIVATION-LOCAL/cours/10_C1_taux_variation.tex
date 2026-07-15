@@ -30,6 +30,22 @@ Dans un repère, la droite passant par les points $A(a;f(a))$ et $B(b;f(b))$ de 
 Les points $A(1;1)$ et $B(3;9)$ de la courbe de la fonction carré déterminent une sécante de coefficient directeur $4$.
 }
 
+\begin{nxfigure}{Sécante à la courbe de la fonction carré}
+\begin{tikzpicture}
+\begin{axis}[nexus,
+  xmin=-0.5, xmax=4.2, ymin=-0.5, ymax=10.5,
+  xlabel=$x$, ylabel=$y$,
+  xtick={0,1,2,3,4}, ytick={0,2,4,6,8,10}]
+  \addplot[courbe,domain=0:4,samples=60] {x^2};
+  \addplot[secante,domain=0:4] {4*x - 3};
+  \addplot[point] coordinates {(1,1) (3,9)};
+  \node[anchor=south east,font=\footnotesize,nxBleu] at (axis cs:1,1) {$A(1;1)$};
+  \node[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:3,9) {$B(3;9)$};
+\end{axis}
+\end{tikzpicture}
+\nxcaption{La sécante $(AB)$ a pour pente le taux de variation $\frac{f(3)-f(1)}{3-1}=4$.}
+\end{nxfigure}
+
 \contreexemple{
 La droite verticale passant par $A$ n'est pas la sécante $AB$ : elle ne passe pas en général par $B$ et n'a pas de coefficient directeur.
 }

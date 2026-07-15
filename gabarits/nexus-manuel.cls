@@ -95,13 +95,25 @@
   {\titlerule*[0.6pc]{.}\contentspage}
 
 % ===========================================================================
-%  PICTOGRAMMES / PARCOURS
+%  PICTOGRAMMES / PARCOURS (icônes TikZ propriétaires)
 % ===========================================================================
-\newcommand{\parcoursUn}{\textcolor{nxOr}{\ding{117}}}
-\newcommand{\parcoursDeux}{\textcolor{nxOr}{\ding{117}\ding{117}}}
-\newcommand{\parcoursTrois}{\textcolor{nxOr}{\ding{117}\ding{117}\ding{117}}}
-\newcommand{\pictoOral}{\textcolor{nxBleu}{\ding{110}~Oral}}
-\newcommand{\pictoPython}{\textcolor{nxBleu}{\texttt{>\!\!>~Python}}}
+% Définitions initiales (écrasées par nexus-icons.tex)
+\newcommand{\parcoursUn}{}
+\newcommand{\parcoursDeux}{}
+\newcommand{\parcoursTrois}{}
+\newcommand{\pictoOral}{}
+\newcommand{\pictoPython}{}
+\input{gabarits/nexus-icons.tex}
+
+% ===========================================================================
+%  SIGNATURES DE CHAPITRE (bandeaux, onglets, motifs)
+% ===========================================================================
+\input{gabarits/nexus-signatures.tex}
+
+% ===========================================================================
+%  FIGURES MATHÉMATIQUES (style pgfplots normalisé)
+% ===========================================================================
+\input{gabarits/nexus-figures.tex}
 
 % ===========================================================================
 %  STRATE 1 : ENCADRÉS DU COURS
@@ -147,7 +159,7 @@
 \newtcolorbox{nxerr}{%
   colback=nxRouge!6,colframe=nxRouge,%
   boxrule=0pt,leftrule=1.2pt,%
-  title={\ding{115}~\textsc{Erreur fréquente}},%
+  title={\icnErreur~\textsc{Erreur fréquente}},%
   fonttitle=\sffamily\bfseries,%
   enhanced,breakable%
 }
@@ -159,7 +171,7 @@
 \newtcolorbox{nxstar}{%
   colback=nxBleu!5,colframe=nxBleu,%
   boxrule=0.4pt,%
-  title={$\bigstar$~\textsc{Pour aller plus loin}},%
+  title={\icnEtoile~\textsc{Pour aller plus loin}},%
   fonttitle=\sffamily\bfseries,%
   enhanced,breakable%
 }
@@ -241,22 +253,27 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
-\fancyhead[LE]{\small\scshape\color{nxGris}\leftmark}
-\fancyhead[RO]{\small\scshape\color{nxGris}Nexus Réussite}
+\fancyhead[LE]{\small\nxMiniMotif~\scshape\color{nxGris}\leftmark}
+\fancyhead[RO]{\small\scshape\color{nxGris}Nexus Réussite~\nxMiniMotif}
 \fancyfoot[C]{\small\thepage}
+% Onglet sur pages impaires
+\fancyfoot[RO]{\nxOnglet}
 
 % ===========================================================================
 %  PAGE D'OUVERTURE DE CHAPITRE
 % ===========================================================================
-\newcommand{\ouverturechapitre}[4]{%
+% Usage : \ouverturechapitre[motifSuites]{Titre}{capacités}{carte}{temps}
+\newcommand{\ouverturechapitre}[5][motifGenerique]{%
+  \stepcounter{nxChapNum}%
   \thispagestyle{plain}%
+  \nxBandeauOuverture[#1]%
   \vspace*{1.2cm}%
-  \chapter*{\color{nxBleu}\fontsize{26}{32}\selectfont\sffamily #1}%
-  \addcontentsline{toc}{chapter}{#1}%
+  \chapter*{\color{nxBleu}\fontsize{26}{32}\selectfont\sffamily #2}%
+  \addcontentsline{toc}{chapter}{#2}%
   \vspace{0.8cm}%
   \noindent\textcolor{nxBleu}{\large\sffamily\bfseries Ce que je vais savoir faire}\par
   \vspace{0.3cm}%
-  #2%
+  #3%
   \vspace{0.6cm}%
   \begin{tcolorbox}[%
     colback=nxGris!6,%
@@ -267,9 +284,9 @@
     fonttitle=\sffamily\bfseries,%
     enhanced,breakable%
   ]%
-    #3%
+    #4%
   \end{tcolorbox}%
   \vspace{0.4cm}%
-  \noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimés :} #4%
+  \noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimés :} #5%
   \par\vfill
 }

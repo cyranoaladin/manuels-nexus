@@ -11,10 +11,10 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
 ## Check-list
 
 - [x] **0. PERSISTANCE** — Créer ce fichier + modifier CLAUDE.md. Commit [META].
-  - Commit : _(à remplir)_
+  - Commit : ffc3d26
 
-- [ ] **1. HOTFIX ACCENTS** — Restaurer tous les accents dans nexus-manuel.cls et docs/06_charte_graphique.md. Recompiler 3 chapitres, vérifier accents sur PNG. Commit [CHARTE][HOTFIX] accents.
-  - Commit : _
+- [x] **1. HOTFIX ACCENTS** — Restaurer tous les accents dans nexus-manuel.cls et docs/06_charte_graphique.md. Recompiler 3 chapitres, vérifier accents sur PNG. Commit [CHARTE][HOTFIX] accents.
+  - Commit : 7d9e7a7
 
 - [ ] **2. LOT 3ter — IDENTITÉ VISUELLE NEXUS RÉUSSITE**
   - [ ] 2a. Icônes propriétaires TikZ (gabarits/nexus-icons.tex), remplacement des \ding partout.
