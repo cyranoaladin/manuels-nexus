@@ -1,0 +1,167 @@
+% META: {"id": "1SPE-SUITES-RE-C4", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C4
+% Somme des premiers entiers et somme d'une suite géométrique
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrigé pas à pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C4-EX1}{1}{10}
+On rappelle que $1 + 2 + 3 + \cdots + n = \dfrac{n(n+1)}{2}$ pour tout $n \geq 1$.
+\begin{enumerate}
+  \item Vérifier cette formule pour $n = 5$ en calculant la somme directement et en appliquant la formule.
+  \item Calculer $1 + 2 + 3 + \cdots + 20$.
+  \item Calculer $6 + 7 + 8 + \cdots + 15$. (Indication : exprimer cette somme comme différence de deux sommes.)
+  \item Une suite arithmétique a pour premier terme $u_0 = 3$ et raison $r = 2$. Calculer $u_0 + u_1 + \cdots + u_9$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # Formule pour n=5
+% S5_direct = 1+2+3+4+5
+% assert S5_direct == 15
+% S5_formule = 5*6//2
+% assert S5_formule == 15
+% # n=20
+% S20 = 20*21//2
+% assert S20 == 210
+% # 6+7+...+15 = (1+...+15) - (1+...+5)
+% S15 = 15*16//2
+% S5 = 5*6//2
+% assert S15 - S5 == 105
+% # Suite arithmetique u_k = 3 + 2k, somme k=0 a 9
+% S_arith = sum(3 + 2*k for k in range(10))
+% assert S_arith == 120
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C4-EX1}
+
+\commentaireMarge{On calcule les deux membres et on compare.}
+
+\textbf{Question 1.} Somme directe : $1+2+3+4+5 = 15$.
+Formule : $\dfrac{5 \times 6}{2} = \dfrac{30}{2} = 15$. \checkmark
+
+\textbf{Question 2.}
+\[
+1 + 2 + \cdots + 20 = \frac{20 \times 21}{2} = \frac{420}{2} = 210.
+\]
+
+\commentaireMarge{$6 + 7 + \cdots + 15 = (1 + \cdots + 15) - (1 + \cdots + 5)$.}
+
+\textbf{Question 3.}
+\[
+6 + 7 + \cdots + 15 = \frac{15 \times 16}{2} - \frac{5 \times 6}{2} = 120 - 15 = 105.
+\]
+
+\commentaireMarge{On peut utiliser la formule somme d'une suite arithmétique : $S = \frac{(\text{premier} + \text{dernier}) \times \text{nombre de termes}}{2}$.}
+
+\textbf{Question 4.} Les termes sont $u_k = 3 + 2k$ pour $k = 0, 1, \ldots, 9$. Il y a $10$ termes, $u_0 = 3$ et $u_9 = 3 + 18 = 21$.
+\[
+u_0 + u_1 + \cdots + u_9 = \frac{(u_0 + u_9) \times 10}{2} = \frac{(3 + 21) \times 10}{2} = \frac{240}{2} = 120.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C4-EX2}{1}{10}
+On rappelle que pour une suite géométrique de raison $q \neq 1$ et de premier terme $u_0$ :
+\[
+u_0 + u_1 + \cdots + u_n = u_0 \times \frac{1 - q^{n+1}}{1 - q}.
+\]
+Soit la suite $(v_n)$ définie par $v_n = 3^n$ pour tout $n \in \mathbb{N}$.
+\begin{enumerate}
+  \item Vérifier que $(v_n)$ est géométrique. Donner $v_0$ et la raison $q$.
+  \item Calculer $v_0 + v_1 + v_2 + v_3$ directement.
+  \item Appliquer la formule pour $n = 3$ et vérifier que l'on obtient le même résultat.
+  \item Calculer $v_0 + v_1 + \cdots + v_9$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour la question 3, on a $u_0 = v_0 = 1$, $q = 3$, $n = 3$. La formule donne $1 \times \dfrac{1 - 3^{3+1}}{1 - 3} = \dfrac{1 - 81}{-2}$. Calculer cette expression.}
+
+% BEGIN-VERIFY
+% v = lambda n: 3**n
+% assert v(0) == 1
+% # Somme directe n=3
+% S3_direct = v(0)+v(1)+v(2)+v(3)
+% assert S3_direct == 1+3+9+27
+% assert S3_direct == 40
+% # Formule
+% S3_formule = 1 * (1 - 3**4) / (1 - 3)
+% assert abs(S3_formule - 40) < 1e-9
+% # Somme n=9
+% S9 = 1 * (1 - 3**10) / (1 - 3)
+% assert abs(S9 - (3**10 - 1)/2) < 1e-9
+% assert int(S9) == 29524
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C4-EX2}
+
+\commentaireMarge{$v_{n+1}/v_n = 3^{n+1}/3^n = 3$ : quotient constant.}
+
+\textbf{Question 1.} $\dfrac{v_{n+1}}{v_n} = \dfrac{3^{n+1}}{3^n} = 3$. Le quotient est constant : $(v_n)$ est géométrique de premier terme $v_0 = 3^0 = 1$ et de raison $q = 3$.
+
+\textbf{Question 2.}
+\[
+v_0 + v_1 + v_2 + v_3 = 1 + 3 + 9 + 27 = 40.
+\]
+
+\commentaireMarge{On applique la formule avec $u_0 = 1$, $q = 3$, $n = 3$.}
+
+\textbf{Question 3.}
+\[
+1 \times \frac{1 - 3^4}{1 - 3} = \frac{1 - 81}{-2} = \frac{-80}{-2} = 40.
+\]
+On retrouve le même résultat. \checkmark
+
+\textbf{Question 4.}
+\[
+v_0 + v_1 + \cdots + v_9 = 1 \times \frac{1 - 3^{10}}{1 - 3} = \frac{1 - 59049}{-2} = \frac{-59048}{-2} = 29\,524.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C4-EX3}{1}{12}
+Un épargnant place $100$~€ par mois sur un livret. Au bout du $1^{\text{er}}$ mois, le livret contient $100$~€. Au bout du $2^{\text{e}}$ mois : $200$~€. Etc. On note $S_n = 100n$ la somme après $n$ mois.
+
+En réalité, le livret offre $0{,}5\,\%$ d'intérêts par mois. Ainsi le $1^{\text{er}}$ versement de $100$~€ vaut au bout de $n$ mois : $100 \times 1{,}005^{n-1}$. Le $k^{\text{e}}$ versement (effectué au début du mois $k$) vaut au bout du $n^{\text{e}}$ mois : $100 \times 1{,}005^{n-k}$.
+\begin{enumerate}
+  \item Exprimer la somme totale $T_n$ après $n$ mois comme une somme géométrique.
+  \item La raison de cette suite géométrique est $q = 1{,}005$. Combien de termes y a-t-il dans $T_n$ ?
+  \item Calculer $T_{12}$ (arrondir à l'euro près).
+  \item Comparer $T_{12}$ à $1\,200$~€ (versements sans intérêts).
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # T_12 = 100 * (1 - 1.005**12)/(1-1.005)
+% q = 1.005
+% T12 = 100 * (1 - q**12)/(1 - q)
+% assert abs(T12 - 1233.56) < 1.0
+% assert T12 > 1200
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C4-EX3}
+
+\textbf{Question 1.} $T_n = 100 \times 1{,}005^{n-1} + 100 \times 1{,}005^{n-2} + \cdots + 100 \times 1{,}005^0 = 100 \bigl(1 + 1{,}005 + \cdots + 1{,}005^{n-1}\bigr)$.
+
+\textbf{Question 2.} Il y a $n$ termes (du rang $0$ au rang $n-1$).
+
+\textbf{Question 3.}
+\[
+T_{12} = 100 \times \frac{1 - 1{,}005^{12}}{1 - 1{,}005} \approx 100 \times \frac{1 - 1{,}0617}{-0{,}005} \approx 100 \times \frac{-0{,}0617}{-0{,}005} \approx 100 \times 12{,}336 \approx 1\,234 \text{ €.}
+\]
+
+\textbf{Question 4.} $T_{12} \approx 1\,234$~€ $> 1\,200$~€. Les intérêts composés rapportent environ $34$~€ de plus sur $12$ mois.
+
+\end{corrige}

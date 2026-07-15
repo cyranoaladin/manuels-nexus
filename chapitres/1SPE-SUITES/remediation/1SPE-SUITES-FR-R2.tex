@@ -1,0 +1,225 @@
+% META: {"id": "1SPE-SUITES-FR-R2", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R2 : Pourcentages
+% Coefficient multiplicateur, évolutions successives
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Pourcentages et coefficient multiplicateur}
+
+\textbf{Coefficient multiplicateur (CM) :}
+
+Appliquer une évolution de $t\,\%$ revient à multiplier par le coefficient multiplicateur :
+\[
+  CM = 1 + \frac{t}{100} \quad \text{(hausse)} \qquad CM = 1 - \frac{t}{100} \quad \text{(baisse)}.
+\]
+
+\textbf{Évolutions successives :} les coefficients multiplicateurs se \emph{multiplient}.
+
+Si on applique successivement des évolutions de CM $q_1$, $q_2$, \ldots, $q_k$, le coefficient global est $q_1 \times q_2 \times \cdots \times q_k$.
+
+\textbf{Lien avec les suites géométriques :} si une grandeur évolue de $t\,\%$ à chaque étape, elle suit une suite géométrique de raison $CM = 1 + \dfrac{t}{100}$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R2-EX1}{1}{5}
+Pour chaque situation, donner le coefficient multiplicateur correspondant.
+\begin{enumerate}
+  \item Une augmentation de $8\,\%$.
+  \item Une réduction de $15\,\%$.
+  \item Une augmentation de $0{,}5\,\%$.
+  \item Une réduction de $100\,\%$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # Verification des coefficients multiplicateurs
+% CM1 = 1 + 8/100
+% assert abs(CM1 - 1.08) < 1e-9
+% CM2 = 1 - 15/100
+% assert abs(CM2 - 0.85) < 1e-9
+% CM3 = 1 + 0.5/100
+% assert abs(CM3 - 1.005) < 1e-9
+% CM4 = 1 - 100/100
+% assert abs(CM4 - 0) < 1e-9
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R2-EX1}
+
+\commentaireMarge{Une hausse de $t\,\%$ donne $CM = 1 + t/100$.}
+
+\textbf{Question 1.} Augmentation de $8\,\%$ : $CM = 1 + \dfrac{8}{100} = 1{,}08$.
+
+\commentaireMarge{Une baisse de $t\,\%$ donne $CM = 1 - t/100$.}
+
+\textbf{Question 2.} Réduction de $15\,\%$ : $CM = 1 - \dfrac{15}{100} = 0{,}85$.
+
+\textbf{Question 3.} Augmentation de $0{,}5\,\%$ : $CM = 1 + \dfrac{0{,}5}{100} = 1{,}005$.
+
+\textbf{Question 4.} Réduction de $100\,\%$ : $CM = 1 - \dfrac{100}{100} = 0$. La grandeur est annulée.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R2-EX2}{1}{6}
+Un capital de $2\,000$~€ est placé sur un livret qui rapporte $3\,\%$ d'intérêts par an.
+\begin{enumerate}
+  \item Quel est le coefficient multiplicateur annuel ?
+  \item Quel est le capital après $1$~an ? Après $2$~ans ?
+  \item Exprimer le capital $C_n$ après $n$ années en fonction de $n$.
+  \item Calculer le capital après $10$~ans (arrondir à l'euro).
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # Capital apres n annees
+% C0 = 2000
+% q = 1.03
+% C1 = C0 * q
+% assert abs(C1 - 2060) < 1e-6
+% C2 = C0 * q**2
+% assert abs(C2 - 2121.80) < 0.01
+% C10 = C0 * q**10
+% assert abs(C10 - 2687.0) < 1.0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R2-EX2}
+
+\commentaireMarge{$+3\,\%$ par an correspond à multiplier par $1{,}03$ chaque année.}
+
+\textbf{Question 1.} $CM = 1 + \dfrac{3}{100} = 1{,}03$.
+
+\textbf{Question 2.}
+\[
+C_1 = 2\,000 \times 1{,}03 = 2\,060 \text{ €.}
+\]
+\[
+C_2 = C_1 \times 1{,}03 = 2\,060 \times 1{,}03 = 2\,121{,}80 \text{ €.}
+\]
+
+\commentaireMarge{On applique $n$ fois le CM à partir de $C_0$ : formule d'une suite géométrique.}
+
+\textbf{Question 3.} À chaque année, le capital est multiplié par $1{,}03$. Donc :
+\[
+C_n = 2\,000 \times 1{,}03^n.
+\]
+La suite $(C_n)$ est une suite géométrique de premier terme $C_0 = 2\,000$ et de raison $q = 1{,}03$.
+
+\textbf{Question 4.}
+\[
+C_{10} = 2\,000 \times 1{,}03^{10} \approx 2\,000 \times 1{,}3439 \approx 2\,688 \text{ €.}
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R2-EX3}{1}{6}
+Un article vaut $500$~€. Son prix augmente de $10\,\%$ la première année, puis diminue de $10\,\%$ la deuxième année.
+\begin{enumerate}
+  \item Calculer le prix après la première année.
+  \item Calculer le prix après la deuxième année.
+  \item Le prix est-il revenu à $500$~€ ? Justifier à l'aide des coefficients multiplicateurs.
+  \item Quel taux global d'évolution (en \%) cela représente-t-il sur les deux ans ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% P0 = 500
+% P1 = P0 * 1.10
+% assert abs(P1 - 550) < 1e-9
+% P2 = P1 * 0.90
+% assert abs(P2 - 495) < 1e-9
+% CM_global = 1.10 * 0.90
+% assert abs(CM_global - 0.99) < 1e-9
+% taux_global = (CM_global - 1) * 100
+% assert abs(taux_global - (-1)) < 1e-9
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R2-EX3}
+
+\textbf{Question 1.}
+\[
+P_1 = 500 \times 1{,}10 = 550 \text{ €.}
+\]
+
+\textbf{Question 2.}
+\[
+P_2 = 550 \times 0{,}90 = 495 \text{ €.}
+\]
+
+\commentaireMarge{Les évolutions successives se composent en multipliant les CM, pas en additionnant les taux.}
+
+\textbf{Question 3.} Non. Le coefficient multiplicateur global est $1{,}10 \times 0{,}90 = 0{,}99 \neq 1$. Une hausse de $10\,\%$ suivie d'une baisse de $10\,\%$ ne se compensent pas exactement.
+
+\textbf{Question 4.} $CM_{global} = 0{,}99$, donc le taux global est :
+\[
+t = (0{,}99 - 1) \times 100 = -1\,\%.
+\]
+Sur deux ans, le prix a diminué de $1\,\%$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R2-EX4}{1}{7}
+Un bactérie se multiplie : la population double toutes les heures. Au départ, on compte $500$ bactéries.
+\begin{enumerate}
+  \item Quel est le taux d'augmentation horaire ? Le coefficient multiplicateur ?
+  \item Donner l'expression de la population $P_n$ après $n$ heures.
+  \item Après combien d'heures la population dépasse-t-elle $10\,000$ bactéries ?\\
+  (On pourra essayer les valeurs $n = 1, 2, 3, 4, 5$.)
+  \item Quel serait le coefficient multiplicateur si la population triplait chaque heure ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% P0 = 500
+% q = 2
+% # Population apres n heures
+% Pn = lambda n: P0 * q**n
+% assert Pn(0) == 500
+% assert Pn(1) == 1000
+% assert Pn(4) == 8000
+% assert Pn(5) == 16000
+% # Seuil 10000 : n=5 car P4=8000 < 10000 <= 16000=P5
+% assert Pn(4) < 10000 and Pn(5) >= 10000
+% # Tripler : CM = 3
+% CM_triple = 3
+% assert CM_triple == 3
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R2-EX4}
+
+\commentaireMarge{Doubler signifie multiplier par $2$, soit une augmentation de $100\,\%$.}
+
+\textbf{Question 1.} La population double : le taux est $+100\,\%$ et le coefficient multiplicateur est $CM = 2$.
+
+\textbf{Question 2.}
+\[
+P_n = 500 \times 2^n.
+\]
+
+\textbf{Question 3.} On calcule les premières valeurs :
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$n$ & $P_n$ \\
+\hline
+$0$ & $500$ \\
+$1$ & $1\,000$ \\
+$2$ & $2\,000$ \\
+$3$ & $4\,000$ \\
+$4$ & $8\,000$ \\
+$5$ & $16\,000$ \\
+\hline
+\end{tabular}
+\end{center}
+
+La population dépasse $10\,000$ à partir de $n = 5$, c'est-à-dire après $5$~heures.
+
+\textbf{Question 4.} Si la population triplait, $CM = 3$ (augmentation de $200\,\%$).
+
+\end{corrige}

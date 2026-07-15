@@ -1,0 +1,162 @@
+% META: {"id": "1SPE-SUITES-RE-C5", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C5
+% Sens de variation d'une suite
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrigé pas à pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C5-EX1}{1}{10}
+Étudier le sens de variation de la suite $(u_n)$ définie par $u_n = -3n + 8$ pour tout $n \in \mathbb{N}$, par la méthode de la différence.
+\begin{enumerate}
+  \item Calculer $u_{n+1} - u_n$ et simplifier.
+  \item Quel est le signe de $u_{n+1} - u_n$ ?
+  \item Conclure sur le sens de variation de $(u_n)$.
+  \item Calculer $u_0$, $u_1$, $u_2$ et vérifier la cohérence.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% n = symbols('n', integer=True, nonneg=True)
+% u = -3*n + 8
+% diff = expand(u.subs(n, n+1) - u)
+% assert diff == -3
+% assert u.subs(n, 0) == 8
+% assert u.subs(n, 1) == 5
+% assert u.subs(n, 2) == 2
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C5-EX1}
+
+\commentaireMarge{Méthode de la différence : on calcule $u_{n+1} - u_n$ et on étudie son signe.}
+
+\textbf{Question 1.}
+\begin{align*}
+u_{n+1} - u_n &= [-3(n+1) + 8] - [-3n + 8] \\
+               &= -3n - 3 + 8 + 3n - 8 \\
+               &= -3.
+\end{align*}
+
+\textbf{Question 2.} $u_{n+1} - u_n = -3 < 0$ pour tout $n \in \mathbb{N}$.
+
+\commentaireMarge{Si $u_{n+1} - u_n < 0$ pour tout $n$, la suite est strictement décroissante.}
+
+\textbf{Question 3.} La différence est strictement négative pour tout $n$. Donc la suite $(u_n)$ est strictement décroissante.
+
+\textbf{Question 4.}
+\[
+u_0 = 8. \quad u_1 = 5. \quad u_2 = 2.
+\]
+On a bien $8 > 5 > 2$ : la suite est décroissante. \checkmark
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C5-EX2}{1}{12}
+Soit la suite $(v_n)$ définie par $v_0 = 10$ et $v_{n+1} = \dfrac{v_n}{2} + 3$ pour tout $n \in \mathbb{N}$.
+\begin{enumerate}
+  \item Calculer $v_1$, $v_2$, $v_3$.
+  \item Calculer $v_{n+1} - v_n$ en fonction de $v_n$, et simplifier.
+  \item On admet que $v_n > 6$ pour tout $n \in \mathbb{N}$. En déduire le signe de $v_{n+1} - v_n$, puis le sens de variation de $(v_n)$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour la question 2, écrire $v_{n+1} - v_n = \dfrac{v_n}{2} + 3 - v_n$ et regrouper les termes en $v_n$.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% v = [10]
+% for k in range(3):
+%     v.append(v[-1]/2 + 3)
+% assert abs(v[1] - 8) < 1e-9
+% assert abs(v[2] - 7) < 1e-9
+% assert abs(v[3] - 6.5) < 1e-9
+% # diff = v_{n+1} - v_n = vn/2 + 3 - vn = 3 - vn/2 = (6 - vn)/2
+% # si vn > 6 => 6 - vn < 0 => diff < 0 => decroissante
+% vn = 7
+% diff = (6 - vn)/2
+% assert diff < 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C5-EX2}
+
+\textbf{Question 1.}
+\[
+v_1 = \frac{10}{2} + 3 = 5 + 3 = 8.
+\]
+\[
+v_2 = \frac{8}{2} + 3 = 4 + 3 = 7.
+\]
+\[
+v_3 = \frac{7}{2} + 3 = 3{,}5 + 3 = 6{,}5.
+\]
+
+\commentaireMarge{On exprime $v_{n+1}$ grâce à la relation de récurrence, puis on soustrait $v_n$.}
+
+\textbf{Question 2.}
+\[
+v_{n+1} - v_n = \left(\frac{v_n}{2} + 3\right) - v_n = 3 - \frac{v_n}{2} = \frac{6 - v_n}{2}.
+\]
+
+\commentaireMarge{Si $v_n > 6$, alors $6 - v_n < 0$, donc $\frac{6-v_n}{2} < 0$.}
+
+\textbf{Question 3.} On admet $v_n > 6$ pour tout $n$. Alors $6 - v_n < 0$, donc :
+\[
+v_{n+1} - v_n = \frac{6 - v_n}{2} < 0.
+\]
+La suite $(v_n)$ est strictement décroissante. (Cela est cohérent : $10 > 8 > 7 > 6{,}5 > \ldots$)
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C5-EX3}{1}{12}
+Soit la suite $(w_n)$ définie pour tout $n \in \mathbb{N}$ par $w_n = \dfrac{1}{2} \times \left(\dfrac{3}{4}\right)^n$.
+\begin{enumerate}
+  \item Calculer $w_0$, $w_1$, $w_2$.
+  \item Calculer le quotient $\dfrac{w_{n+1}}{w_n}$ pour tout $n$.
+  \item En déduire le sens de variation de $(w_n)$, en justifiant à partir du quotient.
+  \item La suite est-elle minorée ? Majorée ? Par quelle(s) valeur(s) ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify
+% n = symbols('n', integer=True, nonneg=True)
+% w = Rational(1,2) * Rational(3,4)**n
+% assert w.subs(n,0) == Rational(1,2)
+% assert w.subs(n,1) == Rational(3,8)
+% assert w.subs(n,2) == Rational(9,32)
+% q = simplify(w.subs(n,n+1)/w)
+% assert q == Rational(3,4)
+% # 0 < 3/4 < 1 => suite decroissante et positive
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C5-EX3}
+
+\textbf{Question 1.}
+\[
+w_0 = \frac{1}{2} \times 1 = \frac{1}{2}. \quad
+w_1 = \frac{1}{2} \times \frac{3}{4} = \frac{3}{8}. \quad
+w_2 = \frac{1}{2} \times \left(\frac{3}{4}\right)^2 = \frac{1}{2} \times \frac{9}{16} = \frac{9}{32}.
+\]
+
+\textbf{Question 2.} Pour tout $n \in \mathbb{N}$, $w_n = \dfrac{1}{2} \times \left(\dfrac{3}{4}\right)^n > 0$. Le quotient :
+\[
+\frac{w_{n+1}}{w_n} = \frac{\frac{1}{2} \times \left(\frac{3}{4}\right)^{n+1}}{\frac{1}{2} \times \left(\frac{3}{4}\right)^n} = \frac{3}{4}.
+\]
+
+\textbf{Question 3.} Le quotient $\dfrac{w_{n+1}}{w_n} = \dfrac{3}{4}$ satisfait $0 < \dfrac{3}{4} < 1$. Comme les termes sont positifs et le quotient est compris entre $0$ et $1$, chaque terme est plus petit que le précédent : la suite est strictement décroissante.
+
+\textbf{Question 4.} Tous les termes sont strictement positifs ($w_n > 0$) : la suite est minorée par $0$. Le terme maximum est $w_0 = \dfrac{1}{2}$ : la suite est majorée par $\dfrac{1}{2}$.
+
+\end{corrige}

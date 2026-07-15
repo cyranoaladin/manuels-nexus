@@ -1,0 +1,309 @@
+% META: {"id": "1SPE-SUITES-FR-R5", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R5 : Python
+% Variables, boucle for, boucle while
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Python : variables, boucles}
+
+\textbf{Variable :} une case mémoire nommée qui stocke une valeur.
+\verb|x = 5| affecte la valeur $5$ à la variable \verb|x|.
+
+\textbf{Boucle \texttt{for} :} répète un bloc un nombre \emph{connu} de fois.
+
+\verb|for k in range(n):| exécute le bloc pour \verb|k| $= 0, 1, 2, \ldots, n-1$ ($n$ itérations).
+
+\textbf{Boucle \texttt{while} :} répète un bloc tant qu'une \emph{condition} est vraie.
+
+\verb|while condition:| — attention à toujours modifier les variables de la condition pour éviter une boucle infinie.
+
+\textbf{Affichage :} \verb|print(valeur)| affiche la valeur dans la console.
+
+\textbf{Opérations courantes :} \verb|+|, \verb|-|, \verb|*|, \verb|/| (division), \verb|//| (quotient entier), \verb|**| (puissance).
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R5-EX1}{1}{6}
+Lire et compléter.
+
+On considère le programme suivant (ne pas chercher à l'exécuter, lire ligne par ligne) :
+
+\medskip
+\verb|u = 3|
+
+\verb|for k in range(4):|
+
+\verb|    u = u + 2|
+
+\verb|    print(u)|
+
+\begin{enumerate}
+  \item Combien de fois la boucle s'exécute-t-elle ? Quelles sont les valeurs de \verb|k| ?
+  \item Recopier et compléter le tableau de trace d'exécution :
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Tour & \verb|k| & \verb|u| (après \verb|u = u + 2|) \\
+\hline
+1 & 0 & \ldots \\
+2 & 1 & \ldots \\
+3 & 2 & \ldots \\
+4 & 3 & \ldots \\
+\hline
+\end{tabular}
+\end{center}
+
+  \item Quelle suite mathématique ce programme calcule-t-il ?
+  \item Que faudrait-il modifier pour calculer les $10$ premiers termes ?
+\end{enumerate}
+\end{exercice}
+
+\begin{corrige}{1SPE-SUITES-FR-R5-EX1}
+
+\commentaireMarge{\texttt{range(4)} génère $0, 1, 2, 3$ : $4$ valeurs, donc $4$ itérations.}
+
+\textbf{Question 1.} La boucle s'exécute $4$ fois. Les valeurs de \verb|k| sont $0, 1, 2, 3$.
+
+\textbf{Question 2.} Tableau de trace :
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Tour & \verb|k| & \verb|u| \\
+\hline
+1 & 0 & $3 + 2 = 5$ \\
+2 & 1 & $5 + 2 = 7$ \\
+3 & 2 & $7 + 2 = 9$ \\
+4 & 3 & $9 + 2 = 11$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\commentaireMarge{La valeur initiale est $u_0 = 3$ et on ajoute $2$ à chaque étape : c'est une suite arithmétique de raison $2$.}
+
+\textbf{Question 3.} Ce programme calcule les termes de la suite arithmétique $(u_n)$ de premier terme $u_0 = 3$ et de raison $r = 2$. La formule explicite est $u_n = 3 + 2n$.
+
+\textbf{Question 4.} Il suffit de remplacer \verb|range(4)| par \verb|range(10)| pour obtenir $10$ valeurs ($u_1$ à $u_{10}$).
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R5-EX2}{1}{7}
+Écrire et analyser des programmes Python (en pseudo-code ou en décrivant les instructions).
+
+\begin{enumerate}
+  \item Décrire ce que fait le programme suivant :
+
+\medskip
+\verb|u = 1|
+
+\verb|for k in range(5):|
+
+\verb|    u = 3 * u|
+
+\verb|print(u)|
+
+  \item Quelle valeur affiche-t-il ? Justifier sans calculer terme à terme.
+  \item Écrire un programme similaire qui calcule et affiche le terme $u_8$ de la suite géométrique de premier terme $u_0 = 2$ et de raison $q = 5$.
+  \item Qu'afficherait ce programme si on remplaçait \texttt{range(5)} par \texttt{range(0)} ?
+\end{enumerate}
+\end{exercice}
+
+\begin{corrige}{1SPE-SUITES-FR-R5-EX2}
+
+\commentaireMarge{On part de $u = 1$ (qui est $u_0$) et on multiplie par $3$ à chaque tour.}
+
+\textbf{Question 1.} Le programme calcule les termes successifs d'une suite géométrique de premier terme $u_0 = 1$ et de raison $3$. Après $5$ itérations, il affiche $u_5$.
+
+\textbf{Question 2.} La formule explicite est $u_n = 1 \times 3^n = 3^n$. Donc $u_5 = 3^5 = 243$. Le programme affiche \verb|243|.
+
+\textbf{Question 3.} Programme pour $u_8$ avec $u_0 = 2$ et $q = 5$ :
+
+\medskip
+\verb|u = 2|
+
+\verb|for k in range(8):|
+
+\verb|    u = 5 * u|
+
+\verb|print(u)|
+
+\medskip
+On vérifie : $u_8 = 2 \times 5^8 = 2 \times 390625 = 781250$.
+
+\commentaireMarge{\texttt{range(0)} est vide : la boucle ne s'exécute pas du tout.}
+
+\textbf{Question 4.} Avec \verb|range(0)|, la boucle ne s'exécute pas. On affiche la valeur initiale $u = 1$, ce qui correspond à $u_0$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R5-EX3}{1}{7}
+On souhaite trouver le plus petit entier $n$ tel que $2^n > 1000$.
+
+\begin{enumerate}
+  \item Lire le programme suivant et expliquer le rôle de chaque ligne :
+
+\medskip
+\verb|u = 1|
+
+\verb|n = 0|
+
+\verb|while u <= 1000:|
+
+\verb|    u = 2 * u|
+
+\verb|    n = n + 1|
+
+\verb|print(n, u)|
+
+  \item Donner un tableau de trace des $4$ premiers tours de boucle.
+  \item Quelle valeur de $n$ le programme affiche-t-il ? Vérifier que $2^9 \leq 1000$ et $2^{10} > 1000$.
+  \item Que se passerait-il si on oubliait la ligne \texttt{n = n + 1} ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% u = 1
+% n = 0
+% while u <= 1000:
+%     u = 2 * u
+%     n = n + 1
+% assert n == 10
+% assert u == 1024
+% assert 2**9 <= 1000 and 2**10 > 1000
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R5-EX3}
+
+\commentaireMarge{On initialise les variables avant la boucle, puis on met à jour les deux à chaque tour.}
+
+\textbf{Question 1.}
+\begin{itemize}
+  \item \verb|u = 1| : initialise $u$ à $u_0 = 1 = 2^0$.
+  \item \verb|n = 0| : initialise le compteur d'indice.
+  \item \verb|while u <= 1000:| : la boucle tourne tant que $u$ ne dépasse pas $1000$.
+  \item \verb|    u = 2 * u| : calcule le terme suivant ($u_{n+1} = 2u_n$).
+  \item \verb|    n = n + 1| : avance l'indice.
+  \item \verb|print(n, u)| : affiche le premier rang $n$ et la valeur $u$ dépassant $1000$.
+\end{itemize}
+
+\textbf{Question 2.} Tableau des $4$ premiers tours :
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Tour & \verb|n| & \verb|u| \\
+\hline
+1 & 1 & $2$ \\
+2 & 2 & $4$ \\
+3 & 3 & $8$ \\
+4 & 4 & $16$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.} Le programme affiche $n = 10$ et $u = 1024$. Vérification : $2^9 = 512 \leq 1000$ et $2^{10} = 1024 > 1000$. \checkmark
+
+\commentaireMarge{Sans mise à jour de \texttt{n}, la variable de condition \texttt{u} est bien modifiée, mais on ne saurait pas quel rang a été atteint. Si on oubliait \texttt{u = 2*u}, la boucle serait infinie.}
+
+\textbf{Question 4.} Si on oublie \verb|n = n + 1|, la variable \verb|u| continue d'être mise à jour (la boucle se termine), mais \verb|n| reste à $0$ à la fin : on afficherait le mauvais rang.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R5-EX4}{1}{7}
+On considère la suite $(s_n)$ définie par $s_n = 1 + 2 + 3 + \cdots + n$ (somme des $n$ premiers entiers).
+
+\begin{enumerate}
+  \item Calculer à la main $s_1$, $s_2$, $s_3$, $s_4$.
+  \item Expliquer pourquoi le programme ci-dessous calcule $s_n$ pour $n$ donné :
+
+\medskip
+\verb|n = 10|
+
+\verb|S = 0|
+
+\verb|for k in range(1, n+1):|
+
+\verb|    S = S + k|
+
+\verb|print(S)|
+
+  \item Que vaut \texttt{range(1, n+1)} pour $n = 4$ ? Dérouler la boucle manuellement pour $n = 4$.
+  \item Modifier le programme pour calculer la somme $1^2 + 2^2 + 3^2 + \cdots + n^2$ (somme des carrés).
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # s_1 a s_4
+% assert 1 == 1
+% assert 1+2 == 3
+% assert 1+2+3 == 6
+% assert 1+2+3+4 == 10
+% # Verification du programme pour n=10
+% S = 0
+% for k in range(1, 11):
+%     S = S + k
+% assert S == 55
+% # Verification n=4
+% S4 = 0
+% for k in range(1, 5):
+%     S4 = S4 + k
+% assert S4 == 10
+% # Somme des carres n=5
+% SC = 0
+% for k in range(1, 6):
+%     SC = SC + k**2
+% assert SC == 55
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R5-EX4}
+
+\textbf{Question 1.}
+\[
+s_1 = 1. \quad s_2 = 1+2 = 3. \quad s_3 = 1+2+3 = 6. \quad s_4 = 1+2+3+4 = 10.
+\]
+
+\commentaireMarge{\texttt{S} joue le rôle d'un accumulateur : on lui ajoute chaque entier successif.}
+
+\textbf{Question 2.} \verb|S = 0| initialise la somme à $0$. La boucle \verb|for k in range(1, n+1):| fait parcourir \verb|k| les valeurs $1, 2, \ldots, n$. À chaque étape, on ajoute \verb|k| à l'accumulateur \verb|S|. En fin de boucle, \verb|S| vaut $1 + 2 + \cdots + n = s_n$.
+
+\textbf{Question 3.} \verb|range(1, 5)| génère $1, 2, 3, 4$ pour $n = 4$. Trace pour $n = 4$ :
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Tour & \verb|k| & \verb|S| \\
+\hline
+1 & 1 & $0+1=1$ \\
+2 & 2 & $1+2=3$ \\
+3 & 3 & $3+3=6$ \\
+4 & 4 & $6+4=10$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\verb|print(S)| affiche $10$, ce qui correspond bien à $s_4 = 10$. \checkmark
+
+\commentaireMarge{Il suffit de remplacer \texttt{k} par \texttt{k**2} dans l'accumulateur.}
+
+\textbf{Question 4.} Programme pour la somme des carrés :
+
+\medskip
+\verb|n = 10|
+
+\verb|S = 0|
+
+\verb|for k in range(1, n+1):|
+
+\verb|    S = S + k**2|
+
+\verb|print(S)|
+
+\end{corrige}

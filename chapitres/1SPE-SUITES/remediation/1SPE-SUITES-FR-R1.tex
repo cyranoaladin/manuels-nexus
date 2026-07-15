@@ -1,0 +1,248 @@
+% META: {"id": "1SPE-SUITES-FR-R1", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R1 : Calcul littéral
+% Développer, factoriser, réduire
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Calcul littéral}
+
+\textbf{Développer} : supprimer les parenthèses en distribuant la multiplication.
+
+Règles de base :
+\[
+  a(b + c) = ab + ac \qquad (a+b)(c+d) = ac + ad + bc + bd
+\]
+
+Identités remarquables :
+\[
+  (a+b)^2 = a^2 + 2ab + b^2 \qquad (a-b)^2 = a^2 - 2ab + b^2 \qquad (a+b)(a-b) = a^2 - b^2
+\]
+
+\textbf{Factoriser} : mettre en évidence un facteur commun ou reconnaître une identité remarquable.
+
+\textbf{Réduire} : regrouper les termes de même degré (mêmes puissances de la variable).
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R1-EX1}{1}{5}
+Développer et réduire chaque expression.
+\begin{enumerate}
+  \item $A = 3(2n + 5)$
+  \item $B = (n+1)^2 - n^2$
+  \item $C = (2n-1)(n+3)$
+  \item $D = n(n+1) - n(n-1)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% n = symbols('n')
+% A = 3*(2*n + 5)
+% assert expand(A) == 6*n + 15
+% B = (n+1)**2 - n**2
+% assert expand(B) == 2*n + 1
+% C = (2*n - 1)*(n + 3)
+% assert expand(C) == 2*n**2 + 5*n - 3
+% D = n*(n+1) - n*(n-1)
+% assert expand(D) == 2*n
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R1-EX1}
+
+\commentaireMarge{On distribue le facteur $3$ sur chaque terme de la parenthèse.}
+
+\textbf{Question 1.}
+\[
+A = 3(2n + 5) = 3 \times 2n + 3 \times 5 = 6n + 15.
+\]
+
+\commentaireMarge{On développe $(n+1)^2$ avec l'identité $(a+b)^2 = a^2+2ab+b^2$, puis on simplifie.}
+
+\textbf{Question 2.}
+\[
+B = (n+1)^2 - n^2 = n^2 + 2n + 1 - n^2 = 2n + 1.
+\]
+
+\commentaireMarge{On utilise la double distributivité : $(2n-1)(n+3)$.}
+
+\textbf{Question 3.}
+\[
+C = (2n-1)(n+3) = 2n \times n + 2n \times 3 + (-1) \times n + (-1) \times 3
+    = 2n^2 + 6n - n - 3 = 2n^2 + 5n - 3.
+\]
+
+\commentaireMarge{On factorise d'abord le facteur $n$ commun aux deux termes, puis on réduit.}
+
+\textbf{Question 4.}
+\[
+D = n(n+1) - n(n-1) = n\bigl[(n+1)-(n-1)\bigr] = n \times 2 = 2n.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R1-EX2}{1}{5}
+Factoriser chaque expression.
+\begin{enumerate}
+  \item $E = 6n^2 + 9n$
+  \item $F = (n+2)^2 - 9$
+  \item $G = n^2 - 4n + 4$
+  \item $H = 5n(n-3) + 2(n-3)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, factor, simplify
+% n = symbols('n')
+% E = 6*n**2 + 9*n
+% assert factor(E) == 3*n*(2*n + 3)
+% F = (n+2)**2 - 9
+% assert factor(F) == (n-1)*(n+5)
+% G = n**2 - 4*n + 4
+% assert factor(G) == (n-2)**2
+% H = 5*n*(n-3) + 2*(n-3)
+% assert factor(H) == (n-3)*(5*n+2)
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R1-EX2}
+
+\commentaireMarge{Facteur commun $3n$ aux deux termes.}
+
+\textbf{Question 1.}
+\[
+E = 6n^2 + 9n = 3n(2n + 3).
+\]
+
+\commentaireMarge{On reconnaît la forme $a^2 - b^2 = (a-b)(a+b)$ avec $a = n+2$ et $b = 3$.}
+
+\textbf{Question 2.}
+\[
+F = (n+2)^2 - 9 = (n+2)^2 - 3^2 = \bigl[(n+2)-3\bigr]\bigl[(n+2)+3\bigr] = (n-1)(n+5).
+\]
+
+\commentaireMarge{On reconnaît le carré d'un binôme $(a-b)^2$ avec $a=n$, $b=2$.}
+
+\textbf{Question 3.}
+\[
+G = n^2 - 4n + 4 = (n-2)^2.
+\]
+
+\commentaireMarge{Le facteur $(n-3)$ est commun aux deux termes : on le met en évidence.}
+
+\textbf{Question 4.}
+\[
+H = 5n(n-3) + 2(n-3) = (n-3)(5n+2).
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R1-EX3}{1}{6}
+Dans le cadre des suites, on rencontre souvent des expressions du type $u_{n+1} - u_n$. Développer et réduire les expressions suivantes, où $n$ est un entier naturel.
+\begin{enumerate}
+  \item $P = (n+1)^2 + 3(n+1) - (n^2 + 3n)$
+  \item $Q = 2(n+1) + 5 - (2n + 5)$
+  \item $R = 3(n+1)^2 - 1 - (3n^2 - 1)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% n = symbols('n')
+% P = (n+1)**2 + 3*(n+1) - (n**2 + 3*n)
+% assert expand(P) == 2*n + 4
+% Q = 2*(n+1) + 5 - (2*n + 5)
+% assert expand(Q) == 2
+% R = 3*(n+1)**2 - 1 - (3*n**2 - 1)
+% assert expand(R) == 6*n + 3
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R1-EX3}
+
+\commentaireMarge{On développe $(n+1)^2 = n^2+2n+1$ et $3(n+1) = 3n+3$, puis on simplifie.}
+
+\textbf{Question 1.}
+\begin{align*}
+P &= (n^2 + 2n + 1) + (3n + 3) - n^2 - 3n \\
+  &= n^2 + 2n + 1 + 3n + 3 - n^2 - 3n \\
+  &= 2n + 4.
+\end{align*}
+
+\commentaireMarge{On distribue et on simplifie terme à terme.}
+
+\textbf{Question 2.}
+\[
+Q = 2n + 2 + 5 - 2n - 5 = 2.
+\]
+La différence est constante, égale à $2$, indépendante de $n$ : c'est la raison d'une suite arithmétique !
+
+\commentaireMarge{On développe $3(n+1)^2 = 3(n^2+2n+1) = 3n^2+6n+3$.}
+
+\textbf{Question 3.}
+\begin{align*}
+R &= 3n^2 + 6n + 3 - 1 - 3n^2 + 1 \\
+  &= 6n + 3.
+\end{align*}
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R1-EX4}{1}{6}
+Simplifier les expressions suivantes (fractions algébriques), en supposant que les dénominateurs sont non nuls.
+\begin{enumerate}
+  \item $\dfrac{6n^2 + 4n}{2n}$
+  \item $\dfrac{(n+1)(n+2)}{n+2}$
+  \item $\dfrac{n^2 - 1}{n - 1}$
+  \item Montrer que $\dfrac{(n+1)^2 - n^2}{2n+1} = 1$ pour tout $n \in \mathbb{N}$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, factor
+% n = symbols('n')
+% expr1 = (6*n**2 + 4*n) / (2*n)
+% assert simplify(expr1) == 3*n + 2
+% expr2 = (n+1)*(n+2) / (n+2)
+% assert simplify(expr2) == n+1
+% expr3 = (n**2 - 1) / (n - 1)
+% assert simplify(expr3) == n+1
+% expr4 = ((n+1)**2 - n**2) / (2*n+1)
+% assert simplify(expr4) == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R1-EX4}
+
+\commentaireMarge{On factorise le numérateur : $6n^2+4n = 2n(3n+2)$, puis on simplifie par $2n$.}
+
+\textbf{Question 1.}
+\[
+\frac{6n^2 + 4n}{2n} = \frac{2n(3n+2)}{2n} = 3n + 2.
+\]
+
+\commentaireMarge{Le facteur $(n+2)$ est commun au numérateur et au dénominateur.}
+
+\textbf{Question 2.}
+\[
+\frac{(n+1)(n+2)}{n+2} = n+1.
+\]
+
+\commentaireMarge{On factorise $n^2-1 = (n-1)(n+1)$, puis on simplifie par $(n-1)$.}
+
+\textbf{Question 3.}
+\[
+\frac{n^2-1}{n-1} = \frac{(n-1)(n+1)}{n-1} = n+1.
+\]
+
+\commentaireMarge{On développe le numérateur, on factorise, puis on simplifie.}
+
+\textbf{Question 4.} On a vu en exercice 1, question 2, que $(n+1)^2 - n^2 = 2n+1$. Donc :
+\[
+\frac{(n+1)^2 - n^2}{2n+1} = \frac{2n+1}{2n+1} = 1.
+\]
+Ce résultat est valable pour tout $n \in \mathbb{N}$ (avec $2n+1 \neq 0$, ce qui est toujours vrai). \qed
+
+\end{corrige}

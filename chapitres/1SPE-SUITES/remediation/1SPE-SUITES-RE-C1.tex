@@ -1,0 +1,172 @@
+% META: {"id": "1SPE-SUITES-RE-C1", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C1
+% Calculer les termes d'une suite (explicite / récurrence)
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrigé pas à pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C1-EX1}{1}{8}
+Soit la suite $(u_n)$ définie pour tout $n \in \mathbb{N}$ par $u_n = n^2 - 2n + 3$.
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$, $u_2$ et $u_3$.
+  \item Calculer $u_{10}$.
+  \item Calculer $u_{n+1}$ (on développera et simplifiera).
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% n = symbols('n')
+% u = n**2 - 2*n + 3
+% assert u.subs(n, 0) == 3
+% assert u.subs(n, 1) == 2
+% assert u.subs(n, 2) == 3
+% assert u.subs(n, 3) == 6
+% assert u.subs(n, 10) == 83
+% u_next = expand(u.subs(n, n+1))
+% assert u_next == n**2 + 2
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C1-EX1}
+
+\commentaireMarge{Pour une formule explicite, on substitue directement la valeur de $n$.}
+
+\textbf{Question 1.} On remplace $n$ par $0, 1, 2, 3$ :
+\[
+u_0 = 0^2 - 2 \times 0 + 3 = 3.
+\]
+\[
+u_1 = 1^2 - 2 \times 1 + 3 = 1 - 2 + 3 = 2.
+\]
+\[
+u_2 = 2^2 - 2 \times 2 + 3 = 4 - 4 + 3 = 3.
+\]
+\[
+u_3 = 3^2 - 2 \times 3 + 3 = 9 - 6 + 3 = 6.
+\]
+
+\commentaireMarge{Pour $n = 10$, on substitue directement : pas besoin de calculer $u_9$ avant.}
+
+\textbf{Question 2.}
+\[
+u_{10} = 10^2 - 2 \times 10 + 3 = 100 - 20 + 3 = 83.
+\]
+
+\commentaireMarge{Pour calculer $u_{n+1}$, on remplace $n$ par $n+1$ partout dans la formule.}
+
+\textbf{Question 3.}
+\begin{align*}
+u_{n+1} &= (n+1)^2 - 2(n+1) + 3 \\
+         &= n^2 + 2n + 1 - 2n - 2 + 3 \\
+         &= n^2 + 2.
+\end{align*}
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C1-EX2}{1}{8}
+Soit la suite $(v_n)$ définie par $v_0 = 5$ et, pour tout $n \in \mathbb{N}$, $v_{n+1} = 3v_n - 4$.
+\begin{enumerate}
+  \item Calculer $v_1$, $v_2$ et $v_3$.
+  \item Calculer $v_4$.
+  \item Sans calculer tous les termes intermédiaires : si on vous dit que $v_{10} = 5$, que vaut $v_{11}$ ?
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour calculer $v_1$, remplacer $n$ par $0$ dans la relation $v_{n+1} = 3v_n - 4$ : on obtient $v_1 = 3v_0 - 4$. Utiliser $v_0 = 5$.}
+
+% BEGIN-VERIFY
+% v = [5]
+% for k in range(4):
+%     v.append(3*v[-1] - 4)
+% assert v[1] == 11
+% assert v[2] == 29
+% assert v[3] == 83
+% assert v[4] == 245
+% v10 = 5
+% v11 = 3*v10 - 4
+% assert v11 == 11
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C1-EX2}
+
+\commentaireMarge{Pour une suite par récurrence, on calcule terme après terme en appliquant la relation.}
+
+\textbf{Question 1.} On applique $v_{n+1} = 3v_n - 4$ avec les valeurs successives :
+\[
+v_1 = 3v_0 - 4 = 3 \times 5 - 4 = 15 - 4 = 11.
+\]
+\[
+v_2 = 3v_1 - 4 = 3 \times 11 - 4 = 33 - 4 = 29.
+\]
+\[
+v_3 = 3v_2 - 4 = 3 \times 29 - 4 = 87 - 4 = 83.
+\]
+
+\textbf{Question 2.}
+\[
+v_4 = 3v_3 - 4 = 3 \times 83 - 4 = 249 - 4 = 245.
+\]
+
+\commentaireMarge{La relation de récurrence s'applique pour tout $n$, quelle que soit la valeur de $v_n$.}
+
+\textbf{Question 3.} La relation est $v_{n+1} = 3v_n - 4$. Avec $v_{10} = 5$ :
+\[
+v_{11} = 3 \times 5 - 4 = 11.
+\]
+On retrouve la valeur de $v_1$ : la suite a un comportement particulier !
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C1-EX3}{1}{10}
+Soit la suite $(w_n)$ définie pour tout $n \in \mathbb{N}$ par $w_n = \dfrac{2n + 1}{n + 2}$.
+\begin{enumerate}
+  \item Calculer $w_0$, $w_1$, $w_2$ et $w_5$.
+  \item Calculer $w_{n+1}$ et simplifier.
+  \item Vérifier numériquement que votre formule pour $w_{n+1}$ donne bien $w_1$ pour $n = 0$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% n = symbols('n')
+% w = (2*n + 1) / (n + 2)
+% assert w.subs(n, 0) == Rational(1, 2)
+% assert w.subs(n, 1) == 1
+% assert w.subs(n, 2) == Rational(5, 4)
+% assert w.subs(n, 5) == Rational(11, 7)
+% w_next = (2*(n+1)+1)/((n+1)+2)
+% assert simplify(w_next - (2*n+3)/(n+3)) == 0
+% # Verification n=0
+% assert w_next.subs(n, 0) == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C1-EX3}
+
+\textbf{Question 1.}
+\[
+w_0 = \frac{2 \times 0 + 1}{0 + 2} = \frac{1}{2}. \quad
+w_1 = \frac{2 \times 1 + 1}{1 + 2} = \frac{3}{3} = 1. \quad
+w_2 = \frac{2 \times 2 + 1}{2 + 2} = \frac{5}{4}. \quad
+w_5 = \frac{2 \times 5 + 1}{5 + 2} = \frac{11}{7}.
+\]
+
+\textbf{Question 2.} On remplace $n$ par $n+1$ :
+\[
+w_{n+1} = \frac{2(n+1)+1}{(n+1)+2} = \frac{2n+3}{n+3}.
+\]
+
+\textbf{Question 3.} Pour $n = 0$ : $w_{0+1} = w_1 = \dfrac{2 \times 0 + 3}{0 + 3} = \dfrac{3}{3} = 1$. On retrouve bien $w_1 = 1$. \checkmark
+
+\end{corrige}

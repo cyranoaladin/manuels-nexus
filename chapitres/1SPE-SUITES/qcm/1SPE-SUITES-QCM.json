@@ -1,0 +1,552 @@
+{
+  "chapitre": "1SPE-SUITES",
+  "titre": "Suites numeriques — QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Soit $(u_n)$ la suite definie pour tout $n \\in \\mathbb{N}$ par $u_n = 2n^2 - 3n + 1$. Quelle est la valeur de $u_3$ ?",
+      "options": {
+        "A": "$10$",
+        "B": "$19$",
+        "C": "$8$",
+        "D": "$7$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a calcule $2 \\times 3^2 - 3 \\times 3 + 1 = 18 - 9 + 1$ mais a oublie le coefficient 2 dans $2 \\times 9 = 18$ et a pose $2 \\times 3 + 1 = 10$. Erreur de calcul partiel.",
+          "renvoi": "M1, etape 2"
+        },
+        "B": {
+          "erreur": "L'eleve a remplace $n$ par $4$ au lieu de $3$ (decalage d'indice : confusion entre 'le 3e terme' et $u_3$).",
+          "renvoi": "M1, etape 1"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule $2 \\times 3 - 3 + 1 = 4$ ou a confondu $n^2$ avec $n$ dans la formule, obtenant $2 \\times 3 - 3 + 1 = 4$ ou une variante. Erreur sur l'evaluation de $n^2$.",
+          "renvoi": "M1, etape 2"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Soit $(v_n)$ la suite definie par $v_0 = 4$ et $v_{n+1} = 3v_n - 2$ pour tout $n \\in \\mathbb{N}$. Quelle est la valeur de $v_2$ ?",
+      "options": {
+        "A": "$10$",
+        "B": "$28$",
+        "C": "$34$",
+        "D": "$22$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a calcule $v_1$ uniquement : $v_1 = 3 \\times 4 - 2 = 10$, et a confondu $v_1$ avec $v_2$. Arret premature d'une iteration.",
+          "renvoi": "M1, etape 3"
+        },
+        "C": {
+          "erreur": "L'eleve a remplace $n$ par $2$ directement dans la relation : $v_3 = 3 \\times 2 - 2 = 4$, ou a calcule $3 \\times v_2 - 2$ avec $v_2 = 12$. Confusion entre l'indice $n$ et la valeur $v_n$.",
+          "renvoi": "M1, etape 3"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule $v_1 = 3 \\times 4 - 2 = 10$ puis $v_2 = 3 \\times 10 - 2 = 28$ mais a commis une erreur arithmetique ($3 \\times 8 - 2 = 22$) en utilisant $v_1 = 8$ (probable confusion avec $2 \\times 4 = 8$).",
+          "renvoi": "M1, etape 3"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "Parmi les assertions suivantes, laquelle est exacte concernant une suite definie par recurrence ?",
+      "options": {
+        "A": "On peut calculer $u_{10}$ directement en substituant $n = 10$ dans la relation $u_{n+1} = f(u_n)$.",
+        "B": "Pour calculer $u_1$, on substitue $n = 0$ dans la relation $u_{n+1} = f(u_n)$.",
+        "C": "Une suite definie par formule explicite necessite de connaitre le terme precedent.",
+        "D": "La notation $u(n)$ avec des parentheses est la notation mathematique standard pour une suite."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Confusion entre formule explicite et recurrence : en recurrence, on ne peut pas substituer directement $n = 10$, il faut calculer tous les termes intermediaires $u_1, \\ldots, u_9$.",
+          "renvoi": "M1, etape 1"
+        },
+        "C": {
+          "erreur": "Definition inversee : c'est la suite par RECURRENCE qui necessite le terme precedent. La formule explicite donne $u_n$ directement en fonction de $n$.",
+          "renvoi": "M1, etape 1"
+        },
+        "D": {
+          "erreur": "La notation $u(n)$ est la notation algorithmique/fonctionnelle ; la notation mathematique standard d'une suite est $u_n$ (indice en bas).",
+          "renvoi": "R5"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Soit $(u_n)$ la suite definie pour tout $n \\in \\mathbb{N}$ par $u_n = 4n - 7$. Quelle est la raison de cette suite arithmetique ?",
+      "options": {
+        "A": "$-7$",
+        "B": "$4n$",
+        "C": "$4$",
+        "D": "$-3$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a identifie le terme constant $-7$ de la formule comme la raison, alors que $-7 = u_0$ est le premier terme.",
+          "renvoi": "M2, etape 4"
+        },
+        "B": {
+          "erreur": "L'eleve a donne une expression dependant de $n$ comme raison. La raison d'une suite arithmetique est un reel constant, pas une expression variable.",
+          "renvoi": "M2, etape 3"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule $u_0 = 4 \\times 0 - 7 = -3$ et a confondu le premier terme avec la raison. $u_0 = -3$ est le premier terme, la raison est $r = u_1 - u_0 = -3 - (-3) = ...$. Confusion premier terme / raison.",
+          "renvoi": "M2, etape 3"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C2",
+      "enonce": "Soit $(u_n)$ une suite arithmetique de raison $r = -3$ et de premier terme $u_1 = 8$. Quelle est la valeur de $u_6$ ?",
+      "options": {
+        "A": "$-7$",
+        "B": "$-22$",
+        "C": "$-10$",
+        "D": "$u_6 = 8 + 6 \\times (-3) = -10$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve a applique la formule $u_n = u_0 + nr$ avec $u_0 = 8$ et $n = 6$ en confondant $u_1$ et $u_0$ : $8 + 6 \\times (-5) = -22$. Erreur sur le terme de depart de la formule.",
+          "renvoi": "M2, etape 4"
+        },
+        "C": {
+          "erreur": "L'eleve a utilise $u_n = u_0 + nr$ avec $u_0 = 8$ en oubliant que le premier terme donne est $u_1$ et non $u_0$ : calcul $8 + 6 \\times (-3) = -10$ au lieu de $8 + 5 \\times (-3) = -7$.",
+          "renvoi": "M2, etape 4"
+        },
+        "D": {
+          "erreur": "Meme erreur que C : formule $u_n = u_1 + n \\times r$ au lieu de $u_n = u_1 + (n-1) \\times r$. L'option D presente le calcul errone de facon explicite.",
+          "renvoi": "M2, etape 4"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C2",
+      "enonce": "Parmi les suites suivantes, laquelle est arithmetique ?",
+      "options": {
+        "A": "$u_n = 3^n$",
+        "B": "$u_n = n^2 + 2$",
+        "C": "$u_n = 5n - 1$",
+        "D": "$u_n = \\dfrac{1}{n+1}$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "La suite $u_n = 3^n$ est geometrique (raison $q = 3$), pas arithmetique. L'eleve confond suite geometrique et suite arithmetique.",
+          "renvoi": "M2, etape 1 ; M3"
+        },
+        "B": {
+          "erreur": "La suite $u_n = n^2 + 2$ n'est pas arithmetique : $u_{n+1} - u_n = (n+1)^2 - n^2 = 2n+1$, qui depend de $n$. L'eleve n'a pas verifie la constance de la difference.",
+          "renvoi": "M2, etapes 1-3"
+        },
+        "D": {
+          "erreur": "La suite $u_n = 1/(n+1)$ n'est pas arithmetique : $u_1 - u_0 = 1/2 - 1 = -1/2$ mais $u_2 - u_1 = 1/3 - 1/2 = -1/6$. L'eleve n'a pas verifie la constance de la difference.",
+          "renvoi": "M2, etapes 1-3"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C3",
+      "enonce": "Soit $(u_n)$ la suite geometrique de raison $q = 2$ et de premier terme $u_0 = 3$. Quelle est la formule explicite de $u_n$ ?",
+      "options": {
+        "A": "$u_n = 3 + 2n$",
+        "B": "$u_n = 3 \\times 2^{n-1}$",
+        "C": "$u_n = 2 \\times 3^n$",
+        "D": "$u_n = 3 \\times 2^n$"
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a applique la formule arithmetique $u_n = u_0 + nr$ au lieu de la formule geometrique $u_n = u_0 \\times q^n$. Confusion suite arithmetique / geometrique.",
+          "renvoi": "M3, etape 5"
+        },
+        "B": {
+          "erreur": "L'eleve a utilise $u_n = u_1 \\times q^{n-1}$ au lieu de $u_n = u_0 \\times q^n$. Decalage d'indice : confusion entre premier terme $u_0$ et premier terme $u_1$.",
+          "renvoi": "M3, etape 5"
+        },
+        "C": {
+          "erreur": "L'eleve a inverse les roles du premier terme et de la raison : il a ecrit $u_0 = 2$ et $q = 3$ au lieu de $u_0 = 3$ et $q = 2$.",
+          "renvoi": "M3, etape 5"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C3",
+      "enonce": "La suite $(v_n)$ est definie par $v_0 = 6$ et $v_{n+1} = \\dfrac{v_n}{3}$ pour tout $n \\in \\mathbb{N}$. Quelle est la raison de cette suite ?",
+      "options": {
+        "A": "$3$",
+        "B": "$-3$",
+        "C": "$\\dfrac{1}{3}$",
+        "D": "$2$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a lu le denominateur $3$ comme la raison, en oubliant que la division par $3$ correspond a une multiplication par $1/3$. Confusion division / multiplication.",
+          "renvoi": "M3, etape 2"
+        },
+        "B": {
+          "erreur": "L'eleve a pris l'oppose $-3$ au lieu de l'inverse $1/3$. Probable confusion entre signe et valeur de la raison.",
+          "renvoi": "M3, etape 2"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule $v_1 = 6/3 = 2$ et a confondu la valeur du premier terme calculee avec la raison.",
+          "renvoi": "M3, etape 4"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C3",
+      "enonce": "Parmi les assertions suivantes, laquelle est exacte pour identifier une suite geometrique ?",
+      "options": {
+        "A": "Il suffit de verifier que $u_1/u_0 = u_2/u_1$ pour conclure que la suite est geometrique.",
+        "B": "Une suite geometrique peut comporter un terme nul.",
+        "C": "Pour montrer qu'une suite est geometrique, il faut calculer $u_{n+1}/u_n$ et verifier que ce quotient est constant pour tout $n$.",
+        "D": "La raison d'une suite geometrique est toujours un entier positif."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Preuve insuffisante : verifier deux egalites de quotients consecutifs ne prouve pas la constance pour tout $n$. Il faut un raisonnement general valable pour tout $n \\in \\mathbb{N}$.",
+          "renvoi": "M3, etape 4"
+        },
+        "B": {
+          "erreur": "Une suite geometrique ne peut pas avoir de terme nul (le quotient $u_{n+1}/u_n$ serait une division par zero). C'est une condition necessaire : $u_n \\neq 0$ pour tout $n$.",
+          "renvoi": "M3, etape 1"
+        },
+        "D": {
+          "erreur": "La raison peut etre n'importe quel reel non nul : elle peut etre negative (ex. $q = -2$), fractionnaire (ex. $q = 1/3$) ou irrationnelle.",
+          "renvoi": "M3"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C4",
+      "enonce": "Quelle est la valeur de la somme $1 + 2 + 3 + \\cdots + 20$ ?",
+      "options": {
+        "A": "$200$",
+        "B": "$210$",
+        "C": "$190$",
+        "D": "$420$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a calcule $20 \\times 10 = 200$ (moyenne $\\times$ dernier terme au lieu de moyenne $\\times$ nombre de termes). Erreur sur la formule de Gauss.",
+          "renvoi": "M4, cas 1"
+        },
+        "C": {
+          "erreur": "L'eleve a utilise la formule avec $n = 19$ au lieu de $n = 20$ : $19 \\times 20/2 = 190$. Erreur sur le nombre de termes (confusion entre $n$ et $n+1$ termes).",
+          "renvoi": "M4, etape 1"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule $20 \\times 21 = 420$ en oubliant de diviser par $2$ dans la formule $n(n+1)/2$.",
+          "renvoi": "M4, cas 1"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C4",
+      "enonce": "Soit la suite geometrique $(u_n)$ de premier terme $u_0 = 1$ et de raison $q = 3$. Quelle est la valeur de $S = u_0 + u_1 + u_2 + u_3 + u_4$ ?",
+      "options": {
+        "A": "$40$",
+        "B": "$121$",
+        "C": "$242$",
+        "D": "$15$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a calcule $1 + 3 + 9 + 27 = 40$ en sommant seulement 4 termes ($u_0$ a $u_3$) au lieu de 5 termes ($u_0$ a $u_4$). Erreur sur le nombre de termes.",
+          "renvoi": "M4, etape 1"
+        },
+        "C": {
+          "erreur": "L'eleve a applique la formule avec $n+1 = 5$ mais a ecrit $1 \\times (1 - 3^6)/(1-3) = (1-729)/(-2) = 364$... ou a confondu l'exposant : $1 \\times (1-3^5)/(1-3) = -242/(-2) = 121$ est correct, mais $3^6$ a la place de $3^5$ donne $242$. Erreur sur l'exposant dans la formule geometrique.",
+          "renvoi": "M4, etape 3"
+        },
+        "D": {
+          "erreur": "L'eleve a additionne les indices au lieu des termes : $0 + 1 + 2 + 3 + 4 = 10$, ou a utilise $u_k = k$ au lieu de $u_k = 3^k$.",
+          "renvoi": "M4, cas 2"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C4",
+      "enonce": "On calcule la somme $u_0 + u_1 + \\cdots + u_{14}$ des termes d'une suite arithmetique. Combien y a-t-il de termes dans cette somme ?",
+      "options": {
+        "A": "$14$",
+        "B": "$13$",
+        "C": "$15$",
+        "D": "$16$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a compte $14$ termes en confondant le nombre de termes avec l'indice maximal. De $u_0$ a $u_{14}$, les indices sont $0, 1, 2, \\ldots, 14$ : il y a bien $14 - 0 + 1 = 15$ termes.",
+          "renvoi": "M4, etape 1"
+        },
+        "B": {
+          "erreur": "L'eleve a soustrait $1$ au lieu d'ajouter $1$ : $14 - 1 = 13$. Confusion sur la formule 'nombre de termes = $n_{\\max} - n_{\\min} + 1$'.",
+          "renvoi": "M4, etape 1"
+        },
+        "D": {
+          "erreur": "L'eleve a ajoute $2$ a l'indice maximal : $14 + 2 = 16$. Erreur probable due a une confusion avec la formule $n+1$ appliquee a partir de $n=15$.",
+          "renvoi": "M4, etape 1"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C5",
+      "enonce": "Soit $(u_n)$ la suite arithmetique de raison $r = -4$ et de premier terme $u_0 = 10$. Quel est le sens de variation de cette suite ?",
+      "options": {
+        "A": "Croissante",
+        "B": "Constante",
+        "C": "Strictement decroissante",
+        "D": "D'abord croissante, puis decroissante"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a confondu le signe de la raison : une raison negative $r = -4$ implique $u_{n+1} - u_n = -4 < 0$, donc la suite est decroissante.",
+          "renvoi": "M5, Methode A"
+        },
+        "B": {
+          "erreur": "L'eleve n'a pas utilise la raison pour determiner la monotonie. Une suite arithmetique est constante seulement si $r = 0$.",
+          "renvoi": "M5, Methode A"
+        },
+        "D": {
+          "erreur": "L'eleve applique un raisonnement valable pour une suite quadratique mais pas pour une suite arithmetique. Une suite arithmetique de raison non nulle est strictement monotone sur $\\mathbb{N}$ tout entier.",
+          "renvoi": "M5, Methode A"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C5",
+      "enonce": "Pour etudier le sens de variation de la suite $(u_n)$ definie par $u_n = 5 \\times (0{,}8)^n$ (avec $u_n > 0$ pour tout $n$), quelle est la methode la plus efficace ?",
+      "options": {
+        "A": "Methode A : calculer le signe de $u_{n+1} - u_n$.",
+        "B": "Methode B : comparer le quotient $u_{n+1}/u_n$ a $1$.",
+        "C": "Methode C : etudier la derivee de la fonction $f(x) = 5 \\times (0{,}8)^x$.",
+        "D": "Calculer les 5 premiers termes et observer la tendance."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La methode A fonctionne mais est moins efficace ici : $u_{n+1} - u_n = 5 \\times (0{,}8)^n \\times (0{,}8 - 1) = -1 \\times 5 \\times (0{,}8)^n$ donne un signe, mais la methode B est directe car le quotient $u_{n+1}/u_n = 0{,}8$ est immediatement visible.",
+          "renvoi": "M5, arbre de decision"
+        },
+        "C": {
+          "erreur": "La methode C necessite de connaitre la derivee de $x \\mapsto (0{,}8)^x = e^{x \\ln(0{,}8)}$, hors programme de premiere. La methode B est la voie adaptee pour les suites geometriques a termes positifs.",
+          "renvoi": "M5, arbre de decision"
+        },
+        "D": {
+          "erreur": "Observer quelques valeurs ne constitue pas une preuve. Il faut un raisonnement valide pour tout $n \\in \\mathbb{N}$, pas seulement pour $n = 0, 1, 2, 3, 4$.",
+          "renvoi": "M5, Piege 1"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C5",
+      "enonce": "Soit $(u_n)$ la suite definie par $u_n = n^2 - 6n + 5$. A partir de quel rang cette suite est-elle strictement croissante ?",
+      "options": {
+        "A": "Pour tout $n \\in \\mathbb{N}$",
+        "B": "A partir de $n = 3$",
+        "C": "A partir de $n = 2$",
+        "D": "A partir de $n = 6$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve n'a pas etudie le signe de $u_{n+1} - u_n$ pour tout $n$ : $u_{n+1} - u_n = 2n - 5$, qui est negatif pour $n \\leq 2$. La suite n'est pas monotone sur $\\mathbb{N}$ tout entier.",
+          "renvoi": "M5, Methode A"
+        },
+        "C": {
+          "erreur": "L'eleve a pose $2n - 5 > 0 \\Rightarrow n > 2{,}5$ et a conclu $n \\geq 2$. Mais pour $n = 2$ : $u_3 - u_2 = 2 \\times 2 - 5 = -1 < 0$. Il faut $n \\geq 3$ (car $2 \\times 3 - 5 = 1 > 0$).",
+          "renvoi": "M5, Methode A"
+        },
+        "D": {
+          "erreur": "L'eleve a confondu la valeur annulant $u_n = 0$ (les racines $n = 1$ et $n = 5$) avec le rang de changement de monotonie. La monotonie depend du signe de $u_{n+1} - u_n = 2n - 5$, pas du signe de $u_n$.",
+          "renvoi": "M5, Methode A ; R3"
+        }
+      }
+    },
+    {
+      "id": "Q16",
+      "capacite": "C6",
+      "enonce": "Un capital de $2\\,000$ euros est place a un taux annuel de $4\\,\\%$. Quel est le coefficient multiplicateur applicable chaque annee ?",
+      "options": {
+        "A": "$0{,}04$",
+        "B": "$1{,}4$",
+        "C": "$1{,}04$",
+        "D": "$4$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a confondu le taux $t = 0{,}04$ avec le coefficient multiplicateur $q = 1 + t = 1{,}04$. Le coefficient $0{,}04$ donnerait une quasi-suppression du capital, pas une augmentation de $4\\,\\%$.",
+          "renvoi": "M6, etape 4"
+        },
+        "B": {
+          "erreur": "L'eleve a calcule $1 + 40\\,\\% = 1{,}4$, en lisant $4$ comme $40\\,\\%$. Erreur de conversion du pourcentage en valeur decimale.",
+          "renvoi": "M6, etape 4 ; R2"
+        },
+        "D": {
+          "erreur": "L'eleve a utilise le taux en pourcentage ($4$) directement comme coefficient multiplicateur. Un coefficient $q = 4$ signifierait quadrupler le capital chaque annee.",
+          "renvoi": "M6, etape 4 ; R2"
+        }
+      }
+    },
+    {
+      "id": "Q17",
+      "capacite": "C6",
+      "enonce": "Une ville compte $50\\,000$ habitants et perd $300$ habitants par an. Quel modele est le plus adapte pour representer l'evolution de sa population ?",
+      "options": {
+        "A": "Une suite geometrique, car la population diminue.",
+        "B": "Une suite arithmetique, car la variation absolue annuelle est constante ($-300$).",
+        "C": "Une suite geometrique, car on multiplie chaque annee par un coefficient.",
+        "D": "Ni une suite arithmetique ni une suite geometrique."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Confusion entre le sens de variation (diminution) et le type de modele. Une suite geometrique modelise une variation RELATIVE constante (pourcentage fixe), pas une variation absolue constante.",
+          "renvoi": "M6, etape 3"
+        },
+        "C": {
+          "erreur": "On multiplie par un coefficient constant uniquement si la variation est relative (pourcentage). Ici, $-300$ habitants par an est une variation absolue constante $\\Rightarrow$ modele arithmetique.",
+          "renvoi": "M6, etape 3"
+        },
+        "D": {
+          "erreur": "La situation correspond bien a un modele arithmetique (variation absolue constante de $-300$). L'eleve n'a pas applique le critere de distinction variation absolue / relative.",
+          "renvoi": "M6, etape 3"
+        }
+      }
+    },
+    {
+      "id": "Q18",
+      "capacite": "C6",
+      "enonce": "Un placement diminue de $5\\,\\%$ par an. Si le capital initial est $u_0 = 10\\,000$ euros, quelle est l'expression de $u_n$ (capital apres $n$ annees) ?",
+      "options": {
+        "A": "$u_n = 10\\,000 - 500n$",
+        "B": "$u_n = 10\\,000 \\times 1{,}05^n$",
+        "C": "$u_n = 10\\,000 \\times 0{,}95^n$",
+        "D": "$u_n = 10\\,000 \\times 0{,}05^n$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a utilise un modele arithmetique (soustraction de $500 = 5\\,\\% \\times 10\\,000$ chaque annee) alors que la variation est relative (pourcentage). Le modele arithmetique ne tient pas compte de l'effet compose.",
+          "renvoi": "M6, etape 3"
+        },
+        "B": {
+          "erreur": "L'eleve a utilise le coefficient $1{,}05$ (correspondant a une AUGMENTATION de $5\\,\\%$) au lieu de $0{,}95$ (diminution de $5\\,\\%$). Erreur sur le coefficient multiplicateur lors d'une diminution.",
+          "renvoi": "M6, etape 4"
+        },
+        "D": {
+          "erreur": "L'eleve a utilise $0{,}05$ (le taux lui-meme) au lieu du coefficient multiplicateur $1 - 0{,}05 = 0{,}95$. Confusion entre taux et coefficient multiplicateur.",
+          "renvoi": "M6, etape 4 ; R2"
+        }
+      }
+    },
+    {
+      "id": "Q19",
+      "capacite": "C7",
+      "enonce": "On considere le programme Python suivant :\\n\\ndef terme(n):\\n    u = 2\\n    for k in range(n):\\n        u = 3 * u + 1\\n    return u\\n\\nQuelle valeur renvoie l'appel terme(3) ?",
+      "options": {
+        "A": "$7$",
+        "B": "$21$",
+        "C": "$64$",
+        "D": "$22$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a execute une seule iteration au lieu de trois : apres $k = 0$, $u = 3 \\times 2 + 1 = 7$. Il a confondu range(3) avec une seule iteration.",
+          "renvoi": "M7, Modele A"
+        },
+        "B": {
+          "erreur": "L'eleve a execute deux iterations : $u_1 = 7$, $u_2 = 3 \\times 7 + 1 = 22$... mais a renvoye 21 par une erreur de calcul ($3 \\times 7 = 21$ en oubliant $+1$). Erreur arithmetique lors de la simulation.",
+          "renvoi": "M7, Modele A"
+        },
+        "D": {
+          "erreur": "L'eleve a execute deux iterations correctement ($u_1 = 7$, $u_2 = 22$) mais a arrete apres deux tours. Il a confondu range(3) = $\\{0, 1, 2\\}$ (3 iterations) avec 2 iterations.",
+          "renvoi": "M7, Piege 3"
+        }
+      }
+    },
+    {
+      "id": "Q20",
+      "capacite": "C7",
+      "enonce": "On cherche le plus petit entier $n$ tel que $u_n > 100$, ou $u_0 = 1$ et $u_{n+1} = 2u_n$. Parmi les codes suivants, lequel est correct ?",
+      "options": {
+        "A": "u = 1\\nn = 0\\nwhile u > 100:\\n    u = 2 * u\\n    n = n + 1",
+        "B": "u = 1\\nn = 0\\nwhile u <= 100:\\n    u = 2 * u\\n    n = n + 1",
+        "C": "u = 1\\nn = 0\\nfor k in range(100):\\n    u = 2 * u\\n    n = n + 1",
+        "D": "u = 0\\nn = 0\\nwhile u <= 100:\\n    u = 2 * u\\n    n = n + 1"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La condition `while u > 100` est la negation inverse : la boucle s'execute tant que $u > 100$, donc elle ne tourne jamais car $u = 1 \\leq 100$ initialement. L'eleve a oublie de prendre la NEGATION du seuil cherche.",
+          "renvoi": "M7, Modele C, etape 2"
+        },
+        "C": {
+          "erreur": "Une boucle `for` sur un nombre fixe d'iterations ne permet pas de rechercher un seuil inconnu a l'avance. Si le seuil est atteint avant ou apres 100 iterations, le resultat est faux. Il faut une boucle `while`.",
+          "renvoi": "M7, Modele C"
+        },
+        "D": {
+          "erreur": "L'initialisation `u = 0` est erronnee : $2 \\times 0 = 0$ pour toutes les iterations, la boucle est infinie. Il faut initialiser $u$ a la valeur du PREMIER TERME $u_0 = 1$.",
+          "renvoi": "M7, Piege 1"
+        }
+      }
+    },
+    {
+      "id": "Q21",
+      "capacite": "C7",
+      "enonce": "On veut calculer $S = u_0 + u_1 + \\cdots + u_5$ ou $u_k = 2^k$. Un eleve ecrit :\\n\\nS = 0\\nfor k in range(5):\\n    S = S + 2**k\\n\\nQuelle erreur contient ce code ?",
+      "options": {
+        "A": "L'accumulateur devrait etre initialise a $1$.",
+        "B": "range(5) produit les indices $0, 1, 2, 3, 4$ : le terme $u_5 = 2^5$ est omis. Il faudrait range(6).",
+        "C": "Il faut ecrire $2^k$ et non $2**k$ en Python.",
+        "D": "Il faut une boucle while et non for pour calculer une somme."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Initialiser $S = 0$ est correct pour un accumulateur de somme (on ajoute le premier terme des la premiere iteration $k = 0$). L'initialisation a $1$ donnerait $S = 1 + u_0 + \\cdots$, ce qui est faux.",
+          "renvoi": "M7, Modele B, etape 1"
+        },
+        "C": {
+          "erreur": "En Python, `2**k` est la syntaxe correcte pour calculer $2^k$. L'operateur `^` est le OU exclusif bit a bit, pas la puissance. Cette assertion est fausse.",
+          "renvoi": "R5"
+        },
+        "D": {
+          "erreur": "Une boucle `for` est parfaitement adaptee au calcul d'une somme avec un nombre connu d'iterations. La boucle `while` est reservee a la recherche de seuil (nombre d'iterations inconnu). Cette assertion est fausse.",
+          "renvoi": "M7, Modele B"
+        }
+      }
+    }
+  ]
+}

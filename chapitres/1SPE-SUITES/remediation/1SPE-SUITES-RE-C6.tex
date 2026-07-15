@@ -1,0 +1,180 @@
+% META: {"id": "1SPE-SUITES-RE-C6", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["C6"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C6
+% Modéliser une situation concrète par une suite
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrigé pas à pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C6-EX1}{1}{10}
+Un particulier dépose $500$~€ sur un livret d'épargne qui rapporte $2\,\%$ d'intérêts par an. On note $C_n$ le capital (en euros) après $n$ années.
+\begin{enumerate}
+  \item Exprimer $C_{n+1}$ en fonction de $C_n$.
+  \item Montrer que $(C_n)$ est une suite géométrique et préciser sa raison et son premier terme.
+  \item Exprimer $C_n$ en fonction de $n$.
+  \item Calculer le capital après $5$ ans et après $10$ ans (arrondir à l'euro).
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% C0 = 500
+% q = 1.02
+% Cn = lambda n: C0 * q**n
+% assert abs(Cn(0) - 500) < 1e-9
+% assert abs(Cn(1) - 510) < 1e-9
+% assert abs(Cn(5) - 552.04) < 0.1
+% assert abs(Cn(10) - 609.50) < 0.1
+% # Recurrence
+% assert abs(Cn(1) - 1.02*Cn(0)) < 1e-9
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C6-EX1}
+
+\commentaireMarge{Chaque année, le capital est multiplié par le coefficient multiplicateur associé à $+2\,\%$.}
+
+\textbf{Question 1.} Chaque année, le capital est augmenté de $2\,\%$ :
+\[
+C_{n+1} = C_n + 0{,}02 \times C_n = C_n(1 + 0{,}02) = 1{,}02 \times C_n.
+\]
+
+\commentaireMarge{Le quotient $C_{n+1}/C_n = 1{,}02$ est constant : suite géométrique.}
+
+\textbf{Question 2.} Le rapport $\dfrac{C_{n+1}}{C_n} = 1{,}02$ est constant et les termes sont positifs. Donc $(C_n)$ est une suite géométrique de raison $q = 1{,}02$ et de premier terme $C_0 = 500$.
+
+\textbf{Question 3.} $C_n = C_0 \times q^n = 500 \times 1{,}02^n$.
+
+\textbf{Question 4.}
+\[
+C_5 = 500 \times 1{,}02^5 \approx 500 \times 1{,}1041 \approx 552 \text{ €.}
+\]
+\[
+C_{10} = 500 \times 1{,}02^{10} \approx 500 \times 1{,}2190 \approx 610 \text{ €.}
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C6-EX2}{1}{12}
+Une ville comptait $20\,000$ habitants en 2020. Sa population diminue de $1{,}5\,\%$ chaque année. On note $P_n$ la population $n$ années après 2020.
+\begin{enumerate}
+  \item Quel est le coefficient multiplicateur annuel ?
+  \item Exprimer $P_n$ en fonction de $n$.
+  \item Calculer $P_5$ (arrondir à l'entier).
+  \item À partir de quel rang $n$ la population passe-t-elle sous $18\,000$ habitants ? (Essayer les valeurs $n = 5, 6, 7, 8$.)
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Une diminution de $1{,}5\,\%$ correspond à un coefficient multiplicateur $CM = 1 - \dfrac{1{,}5}{100} = 0{,}985$. Donc $P_{n+1} = 0{,}985 \times P_n$.}
+
+% BEGIN-VERIFY
+% P0 = 20000
+% q = 0.985
+% Pn = lambda n: P0 * q**n
+% assert abs(Pn(5) - 18528) < 10
+% # Seuil 18000
+% assert Pn(7) > 18000
+% assert Pn(8) < 18000
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C6-EX2}
+
+\textbf{Question 1.} $CM = 1 - \dfrac{1{,}5}{100} = 0{,}985$.
+
+\textbf{Question 2.} $(P_n)$ est géométrique : $P_n = 20\,000 \times 0{,}985^n$.
+
+\textbf{Question 3.}
+\[
+P_5 = 20\,000 \times 0{,}985^5 \approx 20\,000 \times 0{,}9264 \approx 18\,528 \text{ habitants.}
+\]
+
+\commentaireMarge{On calcule les valeurs successives jusqu'à passer sous le seuil de $18\,000$.}
+
+\textbf{Question 4.}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$n$ & $P_n$ (arrondi) \\
+\hline
+$5$ & $18\,528$ \\
+$6$ & $18\,250$ \\
+$7$ & $17\,976$ \\
+\hline
+\end{tabular}
+\end{center}
+
+$P_7 \approx 17\,976 < 18\,000$ et $P_6 \approx 18\,250 > 18\,000$.
+
+La population passe sous $18\,000$ à partir de $n = 7$, c'est-à-dire en 2027.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C6-EX3}{1}{12}
+Une entreprise verse à un employé un salaire mensuel de $1\,500$~€ la première année. Chaque année, le salaire augmente de $3\,\%$.
+
+Par ailleurs, un concurrent propose $1\,600$~€ par mois la première année, avec une augmentation fixe de $30$~€ par an.
+
+On note $A_n$ le salaire annuel (mensuel) chez l'entreprise A après $n$ années ($n = 0$ : première année), et $B_n$ le salaire chez l'entreprise B.
+\begin{enumerate}
+  \item Exprimer $A_n$ et $B_n$ en fonction de $n$.
+  \item Calculer $A_0$, $A_1$, $A_5$ et $B_0$, $B_1$, $B_5$.
+  \item À partir de quelle année $n$ l'entreprise A devient-elle plus avantageuse que B ? (Essayer $n = 3, 4, 5, 6, 7$.)
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% A = lambda n: 1500 * 1.03**n
+% B = lambda n: 1600 + 30*n
+% assert A(0) == 1500
+% assert abs(A(1) - 1545) < 1
+% assert abs(A(5) - 1738.91) < 1
+% assert B(0) == 1600
+% assert B(1) == 1630
+% assert B(5) == 1750
+% # A depasse B vers n=7
+% assert A(6) < B(6)
+% assert A(7) > B(7)
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C6-EX3}
+
+\textbf{Question 1.} $(A_n)$ est géométrique (augmentation de $3\,\%$) : $A_n = 1\,500 \times 1{,}03^n$.
+
+$(B_n)$ est arithmétique (augmentation fixe de $30$~€) : $B_n = 1\,600 + 30n$.
+
+\textbf{Question 2.}
+\[
+A_0 = 1\,500. \quad A_1 \approx 1\,545. \quad A_5 \approx 1\,739.
+\]
+\[
+B_0 = 1\,600. \quad B_1 = 1\,630. \quad B_5 = 1\,750.
+\]
+
+\textbf{Question 3.}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$n$ & $A_n$ (arrondi) & $B_n$ & Meilleure offre \\
+\hline
+$3$ & $1\,637$ & $1\,690$ & B \\
+$4$ & $1\,686$ & $1\,720$ & B \\
+$5$ & $1\,739$ & $1\,750$ & B \\
+$6$ & $1\,791$ & $1\,780$ & A \\
+$7$ & $1\,845$ & $1\,810$ & A \\
+\hline
+\end{tabular}
+\end{center}
+
+À partir de $n = 6$ (la $7^{\text{e}}$ année), l'entreprise A devient plus avantageuse.
+
+\end{corrige}

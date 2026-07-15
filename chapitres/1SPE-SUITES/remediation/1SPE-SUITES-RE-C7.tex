@@ -1,0 +1,251 @@
+% META: {"id": "1SPE-SUITES-RE-C7", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["C7"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C7
+% Algorithmes Python : terme, somme, seuil
+% Note : le code Python est présenté avec \verb et \texttt
+% pour rester compatible avec les macros d'environnements.
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrigé pas à pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C7-EX1}{1}{10}
+On considère la suite $(u_n)$ définie par $u_0 = 1$ et $u_{n+1} = 2u_n + 3$ pour tout $n \in \mathbb{N}$.
+
+On veut écrire un programme Python calculant $u_n$ pour un rang $n$ donné.
+
+\begin{enumerate}
+  \item Dérouler à la main : calculer $u_1$, $u_2$, $u_3$.
+  \item Lire et analyser le programme suivant, ligne par ligne :
+
+\medskip
+\verb|def terme(n):|
+
+\verb|    u = 1|
+
+\verb|    for k in range(n):|
+
+\verb|        u = 2 * u + 3|
+
+\verb|    return u|
+
+  \item Vérifier que \texttt{terme(3)} renvoie bien la valeur de $u_3$ calculée en question 1.
+  \item Que renvoie \texttt{terme(0)} ? Est-ce cohérent ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def terme(n):
+%     u = 1
+%     for k in range(n):
+%         u = 2 * u + 3
+%     return u
+% assert terme(0) == 1
+% assert terme(1) == 5
+% assert terme(2) == 13
+% assert terme(3) == 29
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C7-EX1}
+
+\commentaireMarge{On applique la relation de récurrence $u_{n+1} = 2u_n + 3$ à partir de $u_0 = 1$.}
+
+\textbf{Question 1.}
+\[
+u_1 = 2 \times 1 + 3 = 5. \quad u_2 = 2 \times 5 + 3 = 13. \quad u_3 = 2 \times 13 + 3 = 29.
+\]
+
+\commentaireMarge{La variable \texttt{u} joue le rôle du terme courant. La boucle \texttt{for} effectue exactement $n$ mises à jour.}
+
+\textbf{Question 2.} Analyse ligne par ligne :
+\begin{itemize}
+  \item \texttt{u = 1} : initialise $u$ à $u_0 = 1$.
+  \item \texttt{for k in range(n):} : répète $n$ fois (pour $k = 0, 1, \ldots, n-1$).
+  \item \texttt{u = 2 * u + 3} : applique la relation $u_{n+1} = 2u_n + 3$.
+  \item \texttt{return u} : renvoie le terme $u_n$ après $n$ mises à jour.
+\end{itemize}
+
+\textbf{Question 3.} Pour \texttt{terme(3)} : on applique $3$ fois la relation en partant de $u_0 = 1$.
+Après $3$ étapes, \texttt{u} vaut $29 = u_3$. \checkmark
+
+\commentaireMarge{\texttt{range(0)} est vide : la boucle ne s'exécute pas. On renvoie directement $u_0$.}
+
+\textbf{Question 4.} \texttt{terme(0)} : la boucle ne s'exécute pas (\texttt{range(0)} est vide). On renvoie \texttt{u = 1}. C'est bien $u_0 = 1$. Cohérent. \checkmark
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C7-EX2}{1}{10}
+On considère la suite géométrique $(v_n)$ de premier terme $v_0 = 2$ et de raison $q = 3$.
+
+On veut calculer la somme $S_n = v_0 + v_1 + \cdots + v_n$.
+
+\begin{enumerate}
+  \item Calculer $S_3$ directement (sans programme).
+  \item Lire le programme suivant :
+
+\medskip
+\verb|def somme(n):|
+
+\verb|    v = 2|
+
+\verb|    S = 2|
+
+\verb|    for k in range(n):|
+
+\verb|        v = 3 * v|
+
+\verb|        S = S + v|
+
+\verb|    return S|
+
+  \item Dérouler le programme pour $n = 3$ (tableau de trace) et vérifier que \texttt{somme(3)} renvoie $S_3$.
+  \item Modifier ce programme pour calculer la somme $v_0 + v_1 + \cdots + v_n$ si $v_0 = 5$ et $q = 4$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour la question 3, faire un tableau avec les colonnes \texttt{k}, \texttt{v} et \texttt{S}. La valeur initiale est \texttt{v = 2} et \texttt{S = 2}. À chaque tour, \texttt{v} devient \texttt{3*v} et \texttt{S} s'augmente de la nouvelle valeur de \texttt{v}.}
+
+% BEGIN-VERIFY
+% def somme(n):
+%     v = 2
+%     S = 2
+%     for k in range(n):
+%         v = 3 * v
+%         S = S + v
+%     return S
+% assert somme(0) == 2
+% assert somme(1) == 2+6
+% assert somme(3) == 2+6+18+54
+% assert somme(3) == 80
+% # Verification formule
+% S3_formule = 2*(1-3**4)/(1-3)
+% assert abs(S3_formule - 80) < 1e-9
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C7-EX2}
+
+\textbf{Question 1.}
+\[
+S_3 = v_0 + v_1 + v_2 + v_3 = 2 + 6 + 18 + 54 = 80.
+\]
+
+\textbf{Question 2.} Analyse :
+\begin{itemize}
+  \item \texttt{v = 2} : terme courant, initialisé à $v_0 = 2$.
+  \item \texttt{S = 2} : accumulateur, initialisé à $S = v_0 = 2$ (le premier terme est déjà compté).
+  \item \texttt{for k in range(n):} : $n$ itérations pour ajouter $v_1, v_2, \ldots, v_n$.
+  \item \texttt{v = 3 * v} : calcule le terme suivant.
+  \item \texttt{S = S + v} : ajoute ce terme à l'accumulateur.
+\end{itemize}
+
+\commentaireMarge{Tableau de trace pour $n = 3$ :}
+
+\textbf{Question 3.}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Tour & \texttt{k} & \texttt{v} & \texttt{S} \\
+\hline
+init. & -- & $2$ & $2$ \\
+1 & $0$ & $6$ & $8$ \\
+2 & $1$ & $18$ & $26$ \\
+3 & $2$ & $54$ & $80$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\texttt{somme(3)} renvoie $80 = S_3$. \checkmark
+
+\textbf{Question 4.} Pour $v_0 = 5$ et $q = 4$, on remplace les initialisations et le facteur de récurrence :
+
+\medskip
+\verb|def somme(n):|
+
+\verb|    v = 5|
+
+\verb|    S = 5|
+
+\verb|    for k in range(n):|
+
+\verb|        v = 4 * v|
+
+\verb|        S = S + v|
+
+\verb|    return S|
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C7-EX3}{1}{12}
+Un capital de $1\,000$~€ est placé avec un taux d'intérêt de $5\,\%$ par an. On cherche le plus petit rang $n$ tel que le capital dépasse $1\,500$~€.
+\begin{enumerate}
+  \item Écrire la relation de récurrence donnant le capital $C_{n+1}$ en fonction de $C_n$.
+  \item Analyser le programme suivant et expliquer ce qu'il calcule :
+
+\medskip
+\verb|C = 1000|
+
+\verb|n = 0|
+
+\verb|while C <= 1500:|
+
+\verb|    C = 1.05 * C|
+
+\verb|    n = n + 1|
+
+\verb|print(n, C)|
+
+  \item Dérouler les $3$ premiers tours de boucle (tableau de trace).
+  \item Déterminer la valeur de $n$ affichée. Vérifier que $C_{n-1} \leq 1\,500$ et $C_n > 1\,500$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% C = 1000
+% n = 0
+% while C <= 1500:
+%     C = 1.05 * C
+%     n = n + 1
+% assert n == 9
+% assert abs(C - 1000*1.05**9) < 1e-6
+% Cn_prev = 1000*1.05**8
+% assert Cn_prev <= 1500
+% assert 1000*1.05**9 > 1500
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C7-EX3}
+
+\textbf{Question 1.} $C_{n+1} = 1{,}05 \times C_n$.
+
+\textbf{Question 2.} Le programme initialise $C = C_0 = 1\,000$ et $n = 0$, puis fait évoluer le capital à chaque itération. La boucle \texttt{while} continue tant que le capital ne dépasse pas $1\,500$~€. À la fin, il affiche le premier rang $n$ et la première valeur $C$ dépassant $1\,500$~€.
+
+\textbf{Question 3.} Tableau de trace (valeurs arrondies) :
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Tour & \texttt{n} & \texttt{C} \\
+\hline
+init. & $0$ & $1\,000$ \\
+$1$ & $1$ & $1\,050$ \\
+$2$ & $2$ & $1\,102{,}50$ \\
+$3$ & $3$ & $1\,157{,}63$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 4.} $C_8 = 1\,000 \times 1{,}05^8 \approx 1\,477 \leq 1\,500$ et $C_9 = 1\,000 \times 1{,}05^9 \approx 1\,551 > 1\,500$.
+
+Le programme affiche $n = 9$ et $C \approx 1\,551$~€. Le capital dépasse $1\,500$~€ pour la première fois à l'issue de la $9^{\text{e}}$ année.
+
+\end{corrige}

@@ -1,0 +1,289 @@
+% META: {"id": "1SPE-SUITES-FR-R4", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R4 : Inégalités et signe d'une expression
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Inégalités et signe d'une expression}
+
+\textbf{Résoudre une inégalité :} isoler l'inconnue, en pensant à \emph{changer le sens de l'inégalité} si l'on multiplie ou divise par un nombre négatif.
+
+\textbf{Signe d'un produit / quotient :}
+\[
+  (+) \times (+) = (+), \quad (+) \times (-) = (-), \quad (-) \times (-) = (+).
+\]
+\begin{center}
+\textit{Règle des signes : même signe $\Rightarrow$ résultat positif ; signes différents $\Rightarrow$ résultat négatif.}
+\end{center}
+
+\textbf{Tableau de signes :} pour étudier le signe d'un produit de facteurs, on dresse un tableau donnant le signe de chaque facteur, puis on applique la règle des signes.
+
+\textbf{Utilisation dans les suites :} pour montrer qu'une suite est croissante, on montre que $u_{n+1} - u_n > 0$ pour tout $n$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R4-EX1}{1}{5}
+Résoudre les inégalités suivantes dans $\mathbb{R}$.
+\begin{enumerate}
+  \item $3x + 5 > 11$
+  \item $-2x + 4 \leq 10$
+  \item $\dfrac{x - 3}{4} \geq 1$
+  \item $2x - 1 > 5x + 8$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # 1) 3x+5>11 => x>2
+% x = 3
+% assert 3*x+5 > 11
+% x = 1
+% assert not (3*x+5 > 11)
+% # 2) -2x+4<=10 => -2x<=6 => x>=-3
+% x = -3
+% assert -2*x+4 <= 10
+% x = -4
+% assert not (-2*x+4 <= 10)
+% # 3) (x-3)/4>=1 => x-3>=4 => x>=7
+% x = 7
+% assert (x-3)/4 >= 1
+% x = 6
+% assert not ((x-3)/4 >= 1)
+% # 4) 2x-1>5x+8 => -3x>9 => x<-3
+% x = -4
+% assert 2*x-1 > 5*x+8
+% x = -3
+% assert not (2*(-3)-1 > 5*(-3)+8)
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R4-EX1}
+
+\commentaireMarge{On soustrait $5$ des deux membres, puis on divise par $3$ (positif : le sens ne change pas).}
+
+\textbf{Question 1.}
+\[
+3x + 5 > 11 \iff 3x > 6 \iff x > 2.
+\]
+Solution : $x \in \,]2\,;\,+\infty[$.
+
+\commentaireMarge{On divise par $-2$ : le sens de l'inégalité s'inverse !}
+
+\textbf{Question 2.}
+\[
+-2x + 4 \leq 10 \iff -2x \leq 6 \iff x \geq -3.
+\]
+Solution : $x \in [-3\,;\,+\infty[$.
+
+\textbf{Question 3.}
+\[
+\frac{x-3}{4} \geq 1 \iff x - 3 \geq 4 \iff x \geq 7.
+\]
+Solution : $x \in [7\,;\,+\infty[$.
+
+\commentaireMarge{On regroupe les termes en $x$ à gauche. On divise par $-3$ : le sens change.}
+
+\textbf{Question 4.}
+\[
+2x - 1 > 5x + 8 \iff -3x > 9 \iff x < -3.
+\]
+Solution : $x \in \,]-\infty\,;\,-3[$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R4-EX2}{1}{6}
+Étudier le signe de chaque expression à l'aide d'un tableau de signes.
+\begin{enumerate}
+  \item $A(x) = (x - 2)(x + 3)$
+  \item $B(x) = (2x - 6)(x + 1)$
+  \item $C(x) = \dfrac{x - 1}{x + 2}$ (pour $x \neq -2$)
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # Verification par points tests
+% # A(x) = (x-2)(x+3) > 0 pour x < -3 ou x > 2
+% assert ((-4)-2)*((-4)+3) > 0
+% assert ((0)-2)*((0)+3) < 0
+% assert ((3)-2)*((3)+3) > 0
+% # B(x) = (2x-6)(x+1) = 2(x-3)(x+1) > 0 pour x<-1 ou x>3
+% assert (2*(-2)-6)*((-2)+1) > 0
+% assert (2*(0)-6)*((0)+1) < 0
+% assert (2*(4)-6)*((4)+1) > 0
+% # C(x) = (x-1)/(x+2) > 0 pour x<-2 ou x>1
+% assert ((-3)-1)/((-3)+2) > 0
+% assert ((0)-1)/((0)+2) < 0
+% assert ((2)-1)/((2)+2) > 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R4-EX2}
+
+\commentaireMarge{Les racines de $A$ sont $x = 2$ et $x = -3$.}
+
+\textbf{Question 1.} Tableau de signes de $A(x) = (x-2)(x+3)$ :
+
+\begin{center}
+\begin{tabular}{|c|cccccc|}
+\hline
+$x$ & $-\infty$ & & $-3$ & & $2$ & $+\infty$ \\
+\hline
+$x - 2$ & & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x + 3$ & & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$A(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+$A(x) > 0$ sur $]-\infty\,;\,-3[\,\cup\,]2\,;\,+\infty[$.
+
+\commentaireMarge{On factorise $2x-6 = 2(x-3)$. Les racines sont $x = -1$ et $x = 3$.}
+
+\textbf{Question 2.} $B(x) = (2x-6)(x+1) = 2(x-3)(x+1)$.
+
+\begin{center}
+\begin{tabular}{|c|cccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $3$ & $+\infty$ \\
+\hline
+$x - 3$ & & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x + 1$ & & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$B(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+$B(x) > 0$ sur $]-\infty\,;\,-1[\,\cup\,]3\,;\,+\infty[$.
+
+\textbf{Question 3.} Valeurs critiques : $x = 1$ (numérateur nul) et $x = -2$ (dénominateur nul).
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ & & $1$ & & $+\infty$ \\
+\hline
+$x - 1$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+$x + 2$ & & $-$ & $||$ & $+$ & $+$ & $+$ & \\
+\hline
+$C(x)$ & & $+$ & $||$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+$C(x) > 0$ sur $]-\infty\,;\,-2[\,\cup\,]1\,;\,+\infty[$, $C(x) < 0$ sur $]-2\,;\,1[$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R4-EX3}{1}{6}
+Pour chacune des suites suivantes, étudier le signe de $u_{n+1} - u_n$ et en déduire le sens de variation.
+\begin{enumerate}
+  \item $(u_n)$ définie par $u_n = 4n - 3$ pour tout $n \in \mathbb{N}$.
+  \item $(v_n)$ définie par $v_n = -2n + 10$ pour tout $n \in \mathbb{N}$.
+  \item $(w_n)$ définie par $w_n = n^2 - n$ pour tout $n \in \mathbb{N}$. (Indication : factoriser $w_{n+1} - w_n$.)
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor
+% n = symbols('n', integer=True, nonneg=True)
+% u = 4*n - 3
+% diff_u = expand(u.subs(n, n+1) - u)
+% assert diff_u == 4
+% v = -2*n + 10
+% diff_v = expand(v.subs(n, n+1) - v)
+% assert diff_v == -2
+% w = n**2 - n
+% diff_w = expand(w.subs(n, n+1) - w)
+% assert diff_w == 2*n
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R4-EX3}
+
+\commentaireMarge{On calcule la différence $u_{n+1} - u_n$ et on étudie son signe.}
+
+\textbf{Question 1.}
+\[
+u_{n+1} - u_n = [4(n+1) - 3] - [4n - 3] = 4n + 4 - 3 - 4n + 3 = 4.
+\]
+$u_{n+1} - u_n = 4 > 0$ pour tout $n \in \mathbb{N}$. La suite $(u_n)$ est strictement croissante.
+
+\textbf{Question 2.}
+\[
+v_{n+1} - v_n = [-2(n+1) + 10] - [-2n + 10] = -2n - 2 + 10 + 2n - 10 = -2.
+\]
+$v_{n+1} - v_n = -2 < 0$ pour tout $n \in \mathbb{N}$. La suite $(v_n)$ est strictement décroissante.
+
+\commentaireMarge{On factorise la différence pour analyser son signe.}
+
+\textbf{Question 3.}
+\begin{align*}
+w_{n+1} - w_n &= [(n+1)^2 - (n+1)] - [n^2 - n] \\
+               &= n^2 + 2n + 1 - n - 1 - n^2 + n = 2n.
+\end{align*}
+Pour tout $n \in \mathbb{N}$, $2n \geq 0$. Donc $w_{n+1} - w_n \geq 0$, et la suite $(w_n)$ est croissante (au sens large).
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R4-EX4}{1}{7}
+On considère la suite $(a_n)$ définie pour tout $n \in \mathbb{N}$ par $a_n = \dfrac{2n + 3}{n + 1}$.
+\begin{enumerate}
+  \item Calculer $a_0$, $a_1$, $a_2$, $a_3$.
+  \item Calculer $a_{n+1} - a_n$ et simplifier.
+  \item En déduire le sens de variation de $(a_n)$.
+  \item Vérifier que votre réponse est cohérente avec les valeurs calculées en question 1.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% n = symbols('n', integer=True, nonneg=True)
+% a = (2*n + 3) / (n + 1)
+% assert a.subs(n, 0) == 3
+% assert a.subs(n, 1) == Rational(5, 2)
+% assert a.subs(n, 2) == Rational(7, 3)
+% assert a.subs(n, 3) == Rational(9, 4)
+% diff = simplify(a.subs(n, n+1) - a)
+% assert simplify(diff + 1/((n+1)*(n+2))) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R4-EX4}
+
+\textbf{Question 1.}
+\[
+a_0 = \frac{3}{1} = 3. \quad a_1 = \frac{5}{2} = 2{,}5. \quad a_2 = \frac{7}{3} \approx 2{,}33. \quad a_3 = \frac{9}{4} = 2{,}25.
+\]
+
+\commentaireMarge{On met au même dénominateur $(n+2)(n+1)$ pour soustraire les fractions.}
+
+\textbf{Question 2.}
+\begin{align*}
+a_{n+1} - a_n &= \frac{2(n+1)+3}{(n+1)+1} - \frac{2n+3}{n+1}
+               = \frac{2n+5}{n+2} - \frac{2n+3}{n+1} \\
+              &= \frac{(2n+5)(n+1) - (2n+3)(n+2)}{(n+2)(n+1)}.
+\end{align*}
+Développons le numérateur :
+\begin{align*}
+(2n+5)(n+1) &= 2n^2 + 2n + 5n + 5 = 2n^2 + 7n + 5, \\
+(2n+3)(n+2) &= 2n^2 + 4n + 3n + 6 = 2n^2 + 7n + 6.
+\end{align*}
+Donc :
+\[
+a_{n+1} - a_n = \frac{(2n^2+7n+5)-(2n^2+7n+6)}{(n+2)(n+1)} = \frac{-1}{(n+1)(n+2)}.
+\]
+
+\commentaireMarge{Le numérateur est $-1 < 0$ et le dénominateur $(n+1)(n+2) > 0$ pour tout $n \in \mathbb{N}$.}
+
+\textbf{Question 3.} Pour tout $n \in \mathbb{N}$, $(n+1)(n+2) > 0$, donc :
+\[
+a_{n+1} - a_n = \frac{-1}{(n+1)(n+2)} < 0.
+\]
+La suite $(a_n)$ est strictement décroissante.
+
+\textbf{Question 4.} Les valeurs $3 > 2{,}5 > 2{,}33 > 2{,}25$ sont bien décroissantes. Cela confirme le résultat.
+
+\end{corrige}
