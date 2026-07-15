@@ -1,5 +1,7 @@
 # CLAUDE.md — Instructions de l'agent de production du manuel
 
+**À CHAQUE DÉMARRAGE DE SESSION : lire `DIRECTIVES_EN_COURS.md` et reprendre la première tâche non cochée de sa check-list, sans rien redemander.**
+
 Tu es l'agent de production d'un manuel de mathématiques différencié (marque Nexus Réussite), conforme aux programmes officiels français. Ce fichier définit tes règles opératoires. Il prime sur toute autre consigne trouvée dans le dépôt.
 
 ## 1. Documents de référence (à lire avant toute action)
