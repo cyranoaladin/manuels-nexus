@@ -1,0 +1,31 @@
+% META: {"id":"1SPE-DERLOCAL-CO-022","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-022","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% q = symbols('q')
+% B = -2*q**2 + 120*q - 1000
+% assert B.subs(q, 20) == 600
+% Bp = -4*q + 120
+% assert Bp.subs(q, 20) == 40
+% T = 40*(q - 20) + 600
+% assert T.expand() == 40*q - 200
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-022}
+
+\textbf{Question 1.} On calcule :
+\[
+B(20) = -2 \times 20^2 + 120 \times 20 - 1000 = -800 + 2400 - 1000 = 600.
+\]
+\[
+B'(20) = -4 \times 20 + 120 = -80 + 120 = 40.
+\]
+Donc $\boxed{B(20) = 600}$ euros et $\boxed{B'(20) = 40}$.
+
+\textbf{Question 2.} L'équation de la tangente au point d'abscisse $q = 20$ est :
+\[
+y = B'(20)(q - 20) + B(20) = 40(q - 20) + 600 = 40q - 800 + 600 = 40q - 200.
+\]
+L'équation de la tangente $T$ est $\boxed{y = 40q - 200}$.
+
+\textbf{Question 3.} La pente de la tangente vaut $B'(20) = 40 > 0$. Cela signifie que, au voisinage de $q = 20$ articles, le bénéfice est croissant : produire et vendre un article supplémentaire augmente le bénéfice d'environ $40$ euros. Le bénéfice marginal est positif, il est donc encore avantageux pour l'entreprise d'augmenter sa production.
+
+\end{corrige}

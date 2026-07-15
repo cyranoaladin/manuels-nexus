@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-DERLOCAL-EX-023","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":3,"competences":["chercher","raisonner","calculer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-023.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-023.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve
+% a, x = symbols('a x')
+% # f(x) = x^2, f'(a) = 2a
+% # Tangente en a : y = 2a(x - a) + a^2 = 2ax - a^2
+% # Passe par (0, 0) : 0 = 2a*0 - a^2 = -a^2
+% # -a^2 = 0 => a = 0
+% T_at_0 = 2*a*0 - a**2
+% sol = solve(Eq(T_at_0, 0), a)
+% assert sol == [0]
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-023}{3}{20}
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2$. On admet que $f'(a) = 2a$ pour tout réel $a$.
+
+\begin{enumerate}
+  \item Écrire l'équation de la tangente $T_a$ à la courbe de $f$ au point d'abscisse $a$.
+  \item Déterminer la ou les valeurs de $a$ pour lesquelles la tangente $T_a$ passe par l'origine $O(0\,;\,0)$.
+  \item Écrire l'équation de la ou des tangentes trouvées.
+\end{enumerate}
+\end{exercice}

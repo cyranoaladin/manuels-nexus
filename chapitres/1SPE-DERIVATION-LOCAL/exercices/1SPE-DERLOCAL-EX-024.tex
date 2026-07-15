@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-DERLOCAL-EX-024","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":3,"competences":["chercher","raisonner","calculer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-024.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-024.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve
+% a = symbols('a')
+% # f(x) = x^2 - 2x + 3, f'(x) = 2x - 2
+% # Tangente horizontale : f'(a) = 0 => 2a - 2 = 0 => a = 1
+% sol1 = solve(Eq(2*a - 2, 0), a)
+% assert sol1 == [1]
+% # Parallele a y = 4x : f'(a) = 4 => 2a - 2 = 4 => a = 3
+% sol2 = solve(Eq(2*a - 2, 4), a)
+% assert sol2 == [3]
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-024}{3}{20}
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2 - 2x + 3$. On admet que $f'(x) = 2x - 2$.
+
+\begin{enumerate}
+  \item Pour quelle valeur de $a$ la tangente à la courbe de $f$ au point d'abscisse $a$ est-elle horizontale ? Écrire l'équation de cette tangente.
+  \item Pour quelle valeur de $a$ la tangente à la courbe de $f$ au point d'abscisse $a$ est-elle parallèle à la droite $\mathcal{D}$ d'équation $y = 4x$ ? Écrire l'équation de cette tangente.
+\end{enumerate}
+\end{exercice}
