@@ -1,6 +1,26 @@
-# Charte graphique — Manuel Nexus Réussite
+# Charte graphique — Manuel Nexus Réussite v3
 
-Version 2.1 — Juillet 2026. Ce document est la spécification de référence pour la mise en page du manuel. Toute production PDF doit s'y conformer. La classe `gabarits/nexus-manuel.cls` implémente ces règles.
+Version 3.0 — Juillet 2026. Édition professionnelle. Moteur LuaLaTeX, KOMA-Script scrbook,
+polices Libertinus/Montserrat/JetBrains Mono embarquées. Ce document est la spécification
+de référence pour la mise en page. La classe `gabarits/nexus-manuel.cls` v3 implémente ces règles.
+
+## Pile technique
+
+| Composant | Choix v3 | Raison |
+|---|---|---|
+| Moteur | LuaLaTeX | fontspec + unicode-math + microtype plein |
+| Base | KOMA-Script scrbook 9.5pt twoside | en-tetes/titres/espacements configurables |
+| Texte | Libertinus Serif 9.5/13.5pt (OFL) | qualite editoriale, accord parfait avec math |
+| Maths | Libertinus Math | meme famille que le texte |
+| Titres | Montserrat SemiBold/Medium (OFL) | contraste sans-serif, petites capitales espacees |
+| Code | JetBrains Mono 8.5pt (OFL) | ligatures off, chiffres tabulaires |
+| Microtype | protrusion + expansion | gris typographique professionnel |
+| Grille | 118mm texte + 46mm marge pedagogique | colonne de marge = objet de design |
+| Encadres | tcolorbox filet gauche 2pt | plus aeré que cadres complets |
+| Listes | enumitem compact (1pt itemsep) | densite sans surcharge |
+| Tables | booktabs | pas de filets verticaux |
+| Espacements | multiples de 4.5pt (tiers de ligne) | rythme vertical strict |
+| Polices | embarquees dans gabarits/fonts/ | reproductibilite totale |
 
 ---
 
