@@ -147,7 +147,9 @@
 \RequirePackage[automark]{scrlayer-scrpage}
 \clearpairofpagestyles
 \ohead{\sffamily\fontsize{7.5}{10}\selectfont\color{nxGris}\headmark}
-\cfoot{\sffamily\fontsize{8}{10}\selectfont\thepage}
+% Pied : numéro dans pavé nxBleu coin extérieur, Nexus Réussite côté intérieur
+\ofoot{\colorbox{nxBleu}{\color{white}\sffamily\bfseries\fontsize{7.5}{10}\selectfont~\thepage~}}
+\ifoot{\sffamily\fontsize{6.5}{8}\selectfont\color{nxGris}\addfontfeatures{LetterSpace=6}\textsc{Nexus Réussite}}
 
 % ===========================================================================
 %  LISTES (enumitem global)
@@ -163,27 +165,30 @@
 \RequirePackage[most,skins]{tcolorbox}
 \RequirePackage{pifont}
 
-% Style de base : filet gauche + fond léger + titre petites capitales Montserrat
+% Style de base v3.1 : filet gauche, pas de barre de titre, titre detache
+% en petites capitales de la couleur du filet, pose sur le fond
 \tcbset{
   nxbase/.style={
     enhanced, breakable,
     boxrule=0pt, leftrule=2pt, sharp corners,
+    detach title,
+    before upper={\sffamily\bfseries\fontsize{8.5}{11}\selectfont
+      \addfontfeatures{LetterSpace=6}\textcolor{tcbcolframe}{\tcbtitle}\par
+      \smallskip\rmfamily\mdseries\fontsize{9.5}{13.5}\selectfont
+      \setlength{\parskip}{0.35em}},
     before skip=9pt, after skip=9pt,
-    fonttitle=\sffamily\bfseries\fontsize{9}{12}\selectfont,
-    before upper={\setlength{\parskip}{0.35em}},
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
   },
-  nxbleu/.style={nxbase, colframe=nxBleu, colback=nxBleu!4,
-    title={\addfontfeatures{LetterSpace=4}\textsc{#1}}},
 }
 
 % Définitions / Théorèmes (filet nxBleu, fond nxBleu!4)
 \newcounter{nxDefNum}[chapter]
 \newtcolorbox{nxdef}[1][]{nxbase, colframe=nxBleu, colback=nxBleu!4,
-  title={\addfontfeatures{LetterSpace=4}\textsc{Définition}~#1}}
+  title={\textsc{Définition}~#1}}
 \newtcolorbox{nxthm}[1][]{nxbase, colframe=nxBleu!80!black, colback=nxBleu!5,
-  title={\addfontfeatures{LetterSpace=4}\textsc{Théorème}~#1}}
+  title={\textsc{Théorème}~#1}}
 \newtcolorbox{nxprop}[1][]{nxbase, colframe=nxGris, colback=nxGris!6,
-  title={\addfontfeatures{LetterSpace=4}\textsc{Propriété}~#1}}
+  title={\textsc{Propriété}~#1}}
 
 % Raccourcis
 \newcommand{\definition}[2][]{\begin{nxdef}[#1]#2\end{nxdef}}
@@ -195,22 +200,27 @@
 % Erreur fréquente (filet nxRouge)
 \RequirePackage[normalem]{ulem}
 \newtcolorbox{nxerr}{nxbase, colframe=nxRouge, colback=nxRouge!6,
-  title={\addfontfeatures{LetterSpace=4}\textsc{Erreur fréquente}}}
+  title={\textsc{Erreur fréquente}}}
 \newcommand{\erreurFrequente}[1]{\begin{nxerr}#1\end{nxerr}}
 
-% Approfondissement ★ (fond nxBleu!6, PAS de filet)
+% Approfondissement ★ (fond nxBleu!6, PAS de filet, titre nxBleu)
 \newtcolorbox{nxstar}{enhanced, breakable, boxrule=0pt, sharp corners,
-  colback=nxBleu!6, colframe=nxBleu!6,
+  colback=nxBleu!6, colframe=nxBleu,
+  detach title,
+  before upper={\sffamily\bfseries\fontsize{8.5}{11}\selectfont
+    \addfontfeatures{LetterSpace=6}\textcolor{nxBleu}{\tcbtitle}\par
+    \smallskip\rmfamily\mdseries\fontsize{9.5}{13.5}\selectfont
+    \setlength{\parskip}{0.35em}},
   before skip=9pt, after skip=9pt,
-  title={\addfontfeatures{LetterSpace=4}\textsc{Pour aller plus loin}},
-  fonttitle=\sffamily\bfseries\fontsize{9}{12}\selectfont}
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  title={\textsc{Pour aller plus loin}}}
 \newcommand{\approfondissement}[1]{\begin{nxstar}#1\end{nxstar}}
 
 % ===========================================================================
 %  FICHES MÉTHODES (filet nxOr, 6 rubriques)
 % ===========================================================================
 \newtcolorbox{fmbox}[2]{nxbase, colframe=nxOr!80!black, colback=nxOr!6,
-  title={\addfontfeatures{LetterSpace=4}\textsc{Méthode #1} --- #2}}
+  title={\textsc{Méthode #1} --- #2}}
 \newenvironment{fichemethode}[2]{\begin{fmbox}{#1}{#2}}{\end{fmbox}}
 \newcommand{\quandUtiliser}[1]{\paragraph{Quand l'utiliser.}#1}
 \newcommand{\pasApas}[1]{\paragraph{La méthode pas à pas.}#1}
@@ -240,14 +250,14 @@
   \ifnum#2=1\relax\parcoursUn\fi
   \ifnum#2=2\relax\parcoursDeux\fi
   \ifnum#2=3\relax\parcoursTrois\fi
-  \quad{\sffamily\fontsize{7.5}{10}\selectfont\color{nxGris}\texttt{#1} --- #3~min}%
+  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{nxGris}\texttt{#1}\\\icnChrono~#3~min}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
 \newenvironment{corrige}[1]{%
   \par\medskip\noindent
   \colorbox{nxVert!85!black}{\color{white}\sffamily\bfseries\small~Corrigé~}%
-  \quad{\sffamily\fontsize{7.5}{10}\selectfont\color{nxGris}\texttt{#1}}%
+  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{nxGris}\texttt{#1}}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
@@ -272,6 +282,21 @@
 % ===========================================================================
 \RequirePackage{listings}
 
+% Réglages globaux listings (columns flexible, upquote, breaklines)
+\lstset{
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=4,
+  literate=%
+    {é}{{\'{e}}}1 {è}{{\`{e}}}1 {ê}{{\^{e}}}1 {ë}{{\"{e}}}1
+    {à}{{\`{a}}}1 {â}{{\^{a}}}1 {ù}{{\`{u}}}1 {û}{{\^{u}}}1
+    {î}{{\^{i}}}1 {ô}{{\^{o}}}1 {ç}{{\c{c}}}1
+    {É}{{\'{E}}}1 {È}{{\`{E}}}1 {À}{{\`{A}}}1
+    {—}{{---}}1,
+}
+
 \lstdefinestyle{nxpy}{%
   language=Python,
   basicstyle=\ttfamily\fontsize{8.5}{11}\selectfont,
@@ -288,16 +313,12 @@
   xleftmargin=18pt,
   aboveskip=9pt,
   belowskip=9pt,
-  showstringspaces=false,
-  tabsize=4,
-  literate=%
-    {é}{{\'{e}}}1 {è}{{\`{e}}}1 {ê}{{\^{e}}}1 {ë}{{\"{e}}}1
-    {à}{{\`{a}}}1 {â}{{\^{a}}}1 {ù}{{\`{u}}}1 {û}{{\^{u}}}1
-    {î}{{\^{i}}}1 {ô}{{\^{o}}}1 {ç}{{\c{c}}}1
-    {É}{{\'{E}}}1 {È}{{\`{E}}}1 {À}{{\`{A}}}1
-    {—}{{---}}1,
 }
 \lstnewenvironment{python}{\lstset{style=nxpy}}{}
+
+% Protection de \lstinline contre babel-french (NoAutoSpacing)
+\let\nxOrigLstinline\lstinline
+\renewcommand{\lstinline}{\NoAutoSpacing\nxOrigLstinline}
 
 % ===========================================================================
 %  TABLES (booktabs)
@@ -312,28 +333,51 @@
 \usetikzlibrary{arrows.meta,positioning,calc}
 
 % ===========================================================================
-%  OUVERTURE DE CHAPITRE (simplifié v3 — enrichi par nexus-signatures.tex)
+%  OUVERTURE DE CHAPITRE v3.1 — pleine page visuelle + page contrat
 % ===========================================================================
 % nxChapNum est defini dans nexus-signatures.tex
+\usetikzlibrary{backgrounds}
 
+% Usage : \ouverturechapitre[motif]{Titre}{capacites}{carte}{temps}
+% arg 6 optionnel = accroche
 \newcommand{\ouverturechapitre}[5][motifGenerique]{%
   \stepcounter{nxChapNum}%
-  \thispagestyle{plain}%
-  \vspace*{1.2cm}%
-  \chapter*{\color{nxBleu}\fontsize{26}{32}\selectfont\sffamily #2}%
+  \refstepcounter{chapter}%
+  \chaptermark{#2}%
   \addcontentsline{toc}{chapter}{#2}%
-  \vspace{0.8cm}%
-  \noindent\textcolor{nxBleu}{\large\sffamily\bfseries Ce que je vais savoir faire}\par
-  \vspace{0.3cm}%
+  % --- PAGE VISUELLE (recto, fond nxBleu plein) ---
+  \thispagestyle{empty}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[nxBleu] (current page.south west) rectangle (current page.north east);
+    % Numéro de chapitre Montserrat Thin 90pt blanc
+    \node[anchor=north east, text=white, font=\sffamily\fontseries{thin}\fontsize{90}{90}\selectfont]
+      at ([xshift=-20mm, yshift=-25mm]current page.north east) {\thechapter};
+    % Titre 26pt blanc
+    \node[anchor=south west, text=white, font=\sffamily\bfseries\fontsize{26}{32}\selectfont,
+      text width=140mm]
+      at ([xshift=20mm, yshift=40mm]current page.south west) {#2};
+    % Sous-titre Nexus
+    \node[anchor=south west, text=white!70, font=\sffamily\fontsize{10}{14}\selectfont]
+      at ([xshift=20mm, yshift=28mm]current page.south west)
+      {\addfontfeatures{LetterSpace=8}\textsc{Nexus Réussite}};
+  \end{tikzpicture}%
+  \clearpage
+  % --- PAGE CONTRAT (verso) ---
+  \thispagestyle{plain}%
+  \vspace*{0.5cm}%
+  \noindent{\sffamily\bfseries\fontsize{13}{17}\selectfont\color{nxBleu}%
+    Ce que je vais savoir faire}\par
+  \vspace{0.4cm}%
   #3%
   \vspace{0.6cm}%
   \begin{tcolorbox}[nxbase, colframe=nxGris, colback=nxGris!6,
-    title={\addfontfeatures{LetterSpace=4}\textsc{Carte du chapitre}}]%
+    title={\textsc{Carte du chapitre}}]%
     #4%
   \end{tcolorbox}%
   \vspace{0.4cm}%
   \noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimés :} #5%
   \par\vfill
+  \clearpage
 }
 
 % ===========================================================================
