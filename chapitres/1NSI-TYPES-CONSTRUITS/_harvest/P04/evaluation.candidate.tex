@@ -1,0 +1,327 @@
+\section{P04 - Évaluation courte - Types construits}
+
+\subsection{Objectifs spécifiques}
+
+\begin{itemize}
+\tightlist
+\item
+  Objectif O1 - Identifier précisément la représentation ou la structure
+  en jeu.
+\item
+  Objectif O2 - Appliquer une méthode disciplinaire complète.
+\item
+  Objectif O3 - Justifier le résultat sur un cas différent.
+\item
+  Objectif O4 - Contrôler un cas limite et corriger une erreur observée.
+\end{itemize}
+
+\subsection{Capacités officielles atomiques}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-02A
+\item
+  P-DATA-CONSTR-02D
+\end{itemize}
+
+\subsection{Prérequis}
+
+\begin{itemize}
+\tightlist
+\item
+  Reconnaître une consigne liée à tuple.
+\item
+  Distinguer donnée, méthode et conclusion dans le thème Tuples, listes,
+  dictionnaires.
+\item
+  Rédiger une justification courte en utilisant le vocabulaire du
+  programme.
+\item
+  Contrôler une réponse par un cas limite ou un contre-exemple
+  explicite.
+\end{itemize}
+
+\subsection{Séance(s) correspondante(s)}
+
+\begin{itemize}
+\tightlist
+\item
+  P04-S1 à P04-S7 : support rattaché aux séances prêtes de la
+  progression.
+\end{itemize}
+
+\subsection{Situation-problème concrète}
+
+Une station météo stocke des coordonnées fixes, des relevés horaires
+modifiables et des mesures accessibles par nom.
+
+\subsection{Activité d’entrée}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identifier ce qui doit rester immuable dans un tuple.
+\item
+  Modifier une liste de températures.
+\item
+  Lire une clé dans un dictionnaire de station.
+\item
+  Décrire ce qui se passe avec une liste vide.
+\end{enumerate}
+
+\subsection{Questions}
+
+\subsubsection{Question 1}
+
+\begin{itemize}
+\tightlist
+\item
+  Objectif évalué : O1.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé : résoudre tuple de coordonnées avec \texttt{(36.8,\ 10.2)}.
+\item
+  Réponse attendue : coordonnées conservées.
+\item
+  Critère de réussite : méthode visible, résultat correct et contrôle «
+  tentative de modification interdite ». \#\#\# Question 2
+\item
+  Objectif évalué : O2.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A, P-DATA-CONSTR-02D.
+\item
+  Énoncé : on dispose de \texttt{releves\ =\ {[}18,\ 20,\ 19{]}}. Écrire
+  une boucle \texttt{for\ valeur\ in\ releves} qui calcule la moyenne
+  des relevés. Donner la trace (élément courant et cumul à chaque tour).
+\item
+  Réponse attendue : \texttt{19} (moyenne = (18 + 20 + 19) / 3).
+\item
+  Critère de réussite : boucle \texttt{for} sur les valeurs (pas les
+  indices), résultat correct et contrôle « liste vide ». \#\#\# Question
+  3
+\item
+  Objectif évalué : O3.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé : comparer dictionnaire avec
+  \texttt{\{"temperature":\ 21,\ "vent":\ 12\}}.
+\item
+  Réponse attendue : \texttt{21} pour \texttt{temperature}.
+\item
+  Critère de réussite : méthode visible, résultat correct et contrôle «
+  clé absente ». \#\#\# Question 4
+\item
+  Objectif évalué : O4.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé : corriger copie de liste pour
+  \texttt{{[}{[}1{]},\ {[}2{]}{]}}.
+\item
+  Réponse attendue : modification locale contrôlée.
+\item
+  Critère de réussite : méthode visible, résultat correct et contrôle «
+  liste imbriquée ». \#\# Barème
+\item
+  Question 1 : 2 points méthode, 1 point résultat, 1 point justification
+  liée à tentative de modification interdite.
+\item
+  Question 2 : 2 points méthode, 1 point résultat, 1 point justification
+  liée à liste vide.
+\item
+  Question 3 : 2 points méthode, 1 point résultat, 1 point justification
+  liée à clé absente.
+\item
+  Question 4 : 2 points méthode, 1 point résultat, 1 point justification
+  liée à liste imbriquée.
+\item
+  Question 5 : 1 point rôle du tuple, 1 point rôle du dictionnaire, 1
+  point rôle de la liste, 1 point calcul du milieu \texttt{(3.0,\ 7.0)}.
+  \#\# Erreurs fréquentes
+\item
+  Erreur fréquente EF1 - Modifier un tuple comme une liste.
+\item
+  Erreur fréquente EF2 - Parcourir les indices quand les valeurs
+  suffisent.
+\item
+  Erreur fréquente EF3 - Accéder à une clé sans vérifier sa présence.
+\item
+  Erreur fréquente EF4 - Copier une liste imbriquée seulement au premier
+  niveau.
+\end{itemize}
+
+\subsection{Remédiation ciblée}
+
+\begin{itemize}
+\tightlist
+\item
+  Activité corrective EF1 : Identifier mutabilité et usage avant
+  d'écrire une affectation.
+\item
+  Activité corrective EF2 : Écrire deux boucles, avec indices puis avec
+  valeurs, et comparer.
+\item
+  Activité corrective EF3 : Tester \texttt{cle\ in\ dictionnaire} avant
+  la lecture.
+\item
+  Activité corrective EF4 : Modifier une sous-liste et observer l'effet
+  sur la copie.
+\end{itemize}
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : traiter \texttt{(36.8,\ 10.2)} avec une fiche méthode fournie.
+\item
+  Standard : traiter \texttt{{[}18,\ 20,\ 19{]}} en rédigeant la
+  justification complète.
+\item
+  Expert : inventer un cas limite lié à « clé absente » et expliquer le
+  comportement attendu.
+\end{itemize}
+
+\subsection{Critères de réussite}
+
+\begin{itemize}
+\tightlist
+\item
+  La capacité officielle est citée dans la copie.
+\item
+  La méthode contient au moins une étape vérifiable par un pair.
+\item
+  Le cas limite est discuté avec une donnée concrète.
+\item
+  La correction explique quelle erreur fréquente est évitée.
+\end{itemize}
+
+\subsection{Question complémentaire - structures combinées}
+
+\subsubsection{Question 5}
+
+\begin{itemize}
+\tightlist
+\item
+  Données :
+  \texttt{stations\ =\ {[}\{"nom":\ "A",\ "coord":\ (0,\ 4),\ "temperature":\ 21\},\ \{"nom":\ "B",\ "coord":\ (6,\ 10),\ "temperature":\ 18\}{]}}.
+\item
+  Travail : expliquer le rôle du tuple, de la liste et du dictionnaire
+  dans cette donnée, puis calculer le milieu des deux coordonnées.
+\end{itemize}
+
+\subsubsection{Corrigé question 5}
+
+\begin{itemize}
+\tightlist
+\item
+  Tuple : chaque \texttt{coord} est un couple immuable.
+\item
+  Dictionnaire : chaque station associe les clés \texttt{nom},
+  \texttt{coord}, \texttt{temperature} à des valeurs.
+\item
+  Liste : \texttt{stations} rassemble plusieurs dictionnaires et se
+  parcourt.
+\item
+  Résultat attendu : le milieu est
+  \texttt{((0+6)/2,\ (4+10)/2)\ =\ (3.0,\ 7.0)}.
+\item
+  Contrôle : le résultat est un tuple numérique de deux coordonnées.
+\end{itemize}
+
+\subsection{Exercices numérotés}
+
+\begin{itemize}
+\tightlist
+\item
+  Exercice 1 : reprendre question 1 en explicitant donnée, méthode,
+  résultat et contrôle pour P04.
+\item
+  Exercice 2 : reprendre question 2 en explicitant donnée, méthode,
+  résultat et contrôle pour P04.
+\item
+  Exercice 3 : reprendre question 3 en explicitant donnée, méthode,
+  résultat et contrôle pour P04.
+\item
+  Exercice 4 : reprendre question 4 en explicitant donnée, méthode,
+  résultat et contrôle pour P04.
+\end{itemize}
+
+\subsection{Corrigé}
+
+\subsubsection{Corrigé question 1}
+
+\begin{itemize}
+\tightlist
+\item
+  Résultat attendu : coordonnées conservées.
+\item
+  Méthode exigée : reprendre la démarche du cours puis vérifier le cas
+  limite de la question 1.
+\item
+  Critère de validation : méthode visible, résultat correct et contrôle
+  « tentative de modification interdite ». \#\#\# Corrigé question 2
+\item
+  Résultat attendu : \texttt{19}.
+\item
+  Méthode exigée : reprendre la démarche du cours puis vérifier le cas
+  limite de la question 2.
+\item
+  Critère de validation : méthode visible, résultat correct et contrôle
+  « liste vide ». \#\#\# Corrigé question 3
+\item
+  Résultat attendu : \texttt{21} pour \texttt{temperature}.
+\item
+  Méthode exigée : reprendre la démarche du cours puis vérifier le cas
+  limite de la question 3.
+\item
+  Critère de validation : méthode visible, résultat correct et contrôle
+  « clé absente ». \#\#\# Corrigé question 4
+\item
+  Résultat attendu : modification locale contrôlée.
+\item
+  Méthode exigée : reprendre la démarche du cours puis vérifier le cas
+  limite de la question 4.
+\item
+  Critère de validation : méthode visible, résultat correct et contrôle
+  « liste imbriquée ».
+\end{itemize}
+
+\subsection{Modalités de passation}
+
+\begin{itemize}
+\tightlist
+\item
+  Durée : 25 minutes.
+\item
+  Matériel autorisé : fiche types construits, sans corrigé distribué ni
+  navigation externe.
+\item
+  Capacités évaluées :
+\item
+  P-DATA-CONSTR-02A
+\item
+  P-DATA-CONSTR-02D
+\end{itemize}
+
+\subsection{Fiche liée et aménagement}
+
+\begin{itemize}
+\tightlist
+\item
+  Fiche liée : fiche de cours opérationnelle de la séquence P04, statut
+  \texttt{needs\_review}.
+\item
+  Séance liée : \texttt{P04-S1}, avec question centrée sur tuples,
+  listes et dictionnaires.
+\item
+  Version aménagée : données tuples, listes et dictionnaires surlignées
+  et tableau réponse en trois zones.
+\item
+  Remédiation : corriger une mutation de liste sur un exemple à trois
+  éléments, puis verbaliser la méthode en binôme.
+\end{itemize}

@@ -1,19 +1,153 @@
-% nexus-icons.tex — Jeu d'icônes propriétaire Nexus (TikZ, trait 0.8pt, boîte 1em,
-% monochromes : héritent de la couleur courante). Tronc commun de la collection —
-% synchronisé avec manuel-maths, ne modifier que là-bas.
+% nexus-icons.tex — Jeu d'icônes propriétaires TikZ pour le manuel Nexus Réussite
+% Trait 0.8pt uniforme, boîte 1em, monochromes (couleur du contexte).
+% Remplace tous les \ding de pifont.
+
 \RequirePackage{tikz}
-\newcommand{\nxicon}[1]{\tikz[baseline=-0.55ex,line width=0.8pt,line cap=round,line join=round]{#1}}
+\usetikzlibrary{calc}
 
-\newcommand{\icnObjectif}{\nxicon{\draw (0,0) circle (0.42em) circle (0.2em);\fill (0,0) circle (0.06em);}}
-\newcommand{\icnMethode}{\nxicon{\draw (0,0) circle (0.42em);\draw (-0.18em,-0.18em)--(0.18em,0.18em);\fill (0.18em,0.18em) circle (0.07em);}}
-\newcommand{\icnErreur}{\nxicon{\draw[rounded corners=0.08em] (-0.42em,-0.32em)--(0.42em,-0.32em)--(0,0.42em)--cycle;\draw (0,0.18em)--(0,-0.06em);\fill (0,-0.2em) circle (0.05em);}}
-\newcommand{\icnCle}{\nxicon{\draw (-0.32em,0) circle (0.17em);\draw (-0.15em,0)--(0.42em,0);\draw (0.28em,0)--(0.28em,-0.14em);\draw (0.42em,0)--(0.42em,-0.14em);}}
-\newcommand{\icnCheck}{\nxicon{\draw (-0.32em,0.02em)--(-0.08em,-0.24em)--(0.4em,0.3em);}}
-\newcommand{\icnOral}{\nxicon{\draw[rounded corners=0.12em] (-0.42em,-0.1em) rectangle (0.42em,0.4em);\draw (-0.1em,-0.1em)--(-0.2em,-0.34em)--(0.08em,-0.1em);}}
-\newcommand{\icnPython}{\nxicon{\draw (-0.4em,-0.25em)--(-0.1em,0.05em)--(-0.4em,0.35em);\draw (-0.05em,-0.25em)--(0.25em,0.05em)--(-0.05em,0.35em);\draw (0.3em,-0.25em)--(0.44em,-0.25em);}}
-\newcommand{\icnChrono}{\nxicon{\draw (0,0) circle (0.4em);\draw (0,0)--(0,0.26em);\draw (0,0)--(0.17em,-0.05em);\draw (-0.1em,0.48em)--(0.1em,0.48em);}}
-\newcommand{\icnEtoile}{\nxicon{\draw (0,0.42em)--(0.08em,0.08em)--(0.42em,0)--(0.08em,-0.08em)--(0,-0.42em)--(-0.08em,-0.08em)--(-0.42em,0)--(-0.08em,0.08em)--cycle;}}
-\newcommand{\icnCarte}{\nxicon{\fill (-0.3em,0.25em) circle (0.07em);\fill (0.3em,0.25em) circle (0.07em);\fill (0,-0.28em) circle (0.07em);\draw (-0.3em,0.25em)--(0,-0.28em)--(0.3em,0.25em);\draw (-0.3em,0.25em)--(0.3em,0.25em);}}
+% --- Dimensions communes ---
+\newlength{\nxIconSize}
+\setlength{\nxIconSize}{1em}
 
-% Losange de parcours redessiné (net à l'impression)
-\newcommand{\nxlosange}{\nxicon{\fill[nxOr] (0,0.32em)--(0.24em,0)--(0,-0.32em)--(-0.24em,0)--cycle;\draw[nxBleu,line width=0.4pt] (0,0.32em)--(0.24em,0)--(0,-0.32em)--(-0.24em,0)--cycle;}}
+% ============================================================
+%  LOSANGE DE PARCOURS (remplace \ding{117})
+% ============================================================
+\newcommand{\nxLosange}[1][nxOr]{%
+  \tikz[baseline=-0.15em]{%
+    \fill[#1] (0,0) -- (0.3em,0.45em) -- (0.6em,0) -- (0.3em,-0.45em) -- cycle;
+    \draw[nxBleu,line width=0.4pt] (0,0) -- (0.3em,0.45em) -- (0.6em,0) -- (0.3em,-0.45em) -- cycle;
+  }%
+}
+
+% Parcours redessinés
+\renewcommand{\parcoursUn}{\nxLosange}
+\renewcommand{\parcoursDeux}{\nxLosange\kern0.15em\nxLosange}
+\renewcommand{\parcoursTrois}{\nxLosange\kern0.15em\nxLosange\kern0.15em\nxLosange}
+
+% ============================================================
+%  \icnObjectif — cible (« je sais… »)
+% ============================================================
+\newcommand{\icnObjectif}[1][nxBleu]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (0,0) circle (0.45em);
+    \draw[#1,line width=0.8pt] (0,0) circle (0.25em);
+    \fill[#1] (0,0) circle (0.08em);
+  }%
+}
+
+% ============================================================
+%  \icnMethode — boussole
+% ============================================================
+\newcommand{\icnMethode}[1][nxOr]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (0,0) circle (0.45em);
+    \draw[#1,line width=0.8pt] (0,-0.35em) -- (0.12em,0.05em) -- (0,0.35em) -- (-0.12em,0.05em) -- cycle;
+    \fill[#1] (0,0.05em) -- (0.12em,0.05em) -- (0,0.35em) -- cycle;
+  }%
+}
+
+% ============================================================
+%  \icnErreur — triangle arrondi + !
+% ============================================================
+\newcommand{\icnErreur}[1][nxRouge]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt,rounded corners=0.8pt]
+      (-0.4em,-0.35em) -- (0,0.45em) -- (0.4em,-0.35em) -- cycle;
+    \draw[#1,line width=0.8pt] (0,-0.05em) -- (0,0.2em);
+    \fill[#1] (0,-0.2em) circle (0.05em);
+  }%
+}
+
+% ============================================================
+%  \icnCle — clé (coups de pouce)
+% ============================================================
+\newcommand{\icnCle}[1][nxGris]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (0.15em,0) circle (0.22em);
+    \draw[#1,line width=0.8pt] (-0.07em,0) -- (-0.5em,0);
+    \draw[#1,line width=0.8pt] (-0.35em,0) -- (-0.35em,-0.15em);
+    \draw[#1,line width=0.8pt] (-0.5em,0) -- (-0.5em,-0.15em);
+  }%
+}
+
+% ============================================================
+%  \icnCheck — coche (corrigés)
+% ============================================================
+\newcommand{\icnCheck}[1][nxVert]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt,line cap=round]
+      (-0.3em,0) -- (-0.1em,-0.3em) -- (0.35em,0.3em);
+  }%
+}
+
+% ============================================================
+%  \icnOral — bulle de parole
+% ============================================================
+\newcommand{\icnOral}[1][nxBleu]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt,rounded corners=1.5pt]
+      (-0.4em,-0.15em) rectangle (0.4em,0.35em);
+    \draw[#1,line width=0.8pt]
+      (-0.1em,-0.15em) -- (-0.15em,-0.35em) -- (0.1em,-0.15em);
+  }%
+}
+
+% ============================================================
+%  \icnPython — chevrons ›››
+% ============================================================
+\newcommand{\icnPython}[1][nxBleu]{%
+  \tikz[baseline=-0.15em]{%
+    \foreach \x in {0,0.22em,0.44em} {
+      \draw[#1,line width=0.8pt] (\x,-0.25em) -- (\x+0.15em,0) -- (\x,0.25em);
+    }
+  }%
+}
+
+% ============================================================
+%  \icnChrono — cadran (durées)
+% ============================================================
+\newcommand{\icnChrono}[1][nxGris]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (0,0) circle (0.4em);
+    \draw[#1,line width=0.8pt] (0,0) -- (0,0.25em);
+    \draw[#1,line width=0.8pt] (0,0) -- (0.2em,0.1em);
+    \draw[#1,line width=0.8pt] (-0.05em,0.45em) -- (0.05em,0.45em);
+  }%
+}
+
+% ============================================================
+%  \icnEtoile — étoile 4 branches fines (★)
+% ============================================================
+\newcommand{\icnEtoile}[1][nxBleu]{%
+  \tikz[baseline=-0.15em]{%
+    \foreach \a in {0,90,180,270} {
+      \draw[#1,line width=0.8pt] (0,0) -- (\a:0.4em);
+    }
+    \foreach \a in {45,135,225,315} {
+      \draw[#1,line width=0.8pt] (0,0) -- (\a:0.2em);
+    }
+  }%
+}
+
+% ============================================================
+%  \icnCarte — nœuds reliés (carte du chapitre)
+% ============================================================
+\newcommand{\icnCarte}[1][nxGris]{%
+  \tikz[baseline=-0.15em]{%
+    \fill[#1] (-0.3em,0.2em) circle (0.07em);
+    \fill[#1] (0,0.35em) circle (0.07em);
+    \fill[#1] (0.3em,0.2em) circle (0.07em);
+    \fill[#1] (-0.15em,-0.2em) circle (0.07em);
+    \fill[#1] (0.15em,-0.2em) circle (0.07em);
+    \draw[#1,line width=0.8pt] (-0.3em,0.2em) -- (0,0.35em) -- (0.3em,0.2em);
+    \draw[#1,line width=0.8pt] (0,0.35em) -- (-0.15em,-0.2em);
+    \draw[#1,line width=0.8pt] (0,0.35em) -- (0.15em,-0.2em);
+    \draw[#1,line width=0.8pt] (-0.15em,-0.2em) -- (0.15em,-0.2em);
+  }%
+}
+
+% ============================================================
+%  Mise à jour des commandes Oral et Python
+% ============================================================
+\renewcommand{\pictoOral}{\icnOral~\textcolor{nxBleu}{Oral}}
+\renewcommand{\pictoPython}{\icnPython~\textcolor{nxBleu}{\texttt{Python}}}

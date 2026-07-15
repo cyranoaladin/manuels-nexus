@@ -4,10 +4,16 @@ Règle de flux permanente : aucun arrêt volontaire, aucun « dois-je continuer 
 terminé par un résumé. Rapport de LOT + commit + tâche suivante, en continu, jusqu'à
 RAPPORT_FINAL.md. Cocher ici chaque directive exécutée avec le hash du commit.
 
+## Check-list INSTALLATION (PROMPT_INSTALLATION_NSI.md)
+
+- [x] Phase A : connexion corpus (lien symbolique, .env, scripts patches, gitignore, test readonly)
+- [x] Phase B : synchronisation charte (4 gabarits + 2 docs depuis maths, InputIfFileExists, fix doublons)
+- [x] Phase C : adaptation pipeline (harvest reecrit, convert_programme_yaml adapte, F11, mapping docs/09)
+- [x] Phase D : smoke tests (referentiel 114 caps, harvest P04 21 fichiers, tests Python OK, accents OK, compilation OK)
+
 ## Check-list active
 
-- [ ] PHASE 0 : bootstrap (voir PROMPT_MISSION_AUTONOME.md §1) — env, submodule corpus_nsi,
-      référentiels générés, vérification R7 du programme en ligne, git init/commit.
+- [x] PHASE 0 : bootstrap — env, connexion corpus, referentiels generes, git init/commit.
 - [ ] PILOTE 1NSI-TYPES-CONSTRUITS : LOT 0 → 1 → R → 2 → 3 → 4 → 5 → 6 → 7.
 - [ ] PAUSE UNIQUE AUTORISÉE : validation humaine du pilote (CDC §7.3) — produire le PDF,
       lister les points de jugement (figures mémoire, densité codereference, équilibre

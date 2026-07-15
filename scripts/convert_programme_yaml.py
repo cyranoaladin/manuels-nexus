@@ -1,22 +1,22 @@
-"""Génère referentiel/*.json depuis corpus_nsi/00_programmes_officiels/programme_nsi_2019.yaml.
+"""Genere referentiel/*.json depuis corpus_nsi/00_programmes_officiels/programme_nsi_2019.yaml.
 
-Le YAML du dépôt NSI est la source de vérité (R7 : le mettre à jour LÀ-BAS si le
-programme a évolué, puis relancer ce script). Tolérant sur la structure : cherche
-des listes de capacités/notions sous les clés usuelles ; tout item non résolu part
-dans referentiel/_a_verifier.json plutôt que d'être inventé.
+Le YAML du depot NSI est la source de verite (R7 : le mettre a jour LA-BAS si le
+programme a evolue, puis relancer ce script). Tolerant sur la structure : tout item
+non resolu part dans referentiel/_a_verifier.json plutot que d'etre invente.
 """
 import json
 import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 import yaml
 
-from common import ROOT
+from common import CORPUS_NSI, ROOT
 
 SRC_CANDIDATES = [
-    ROOT / "corpus_nsi" / "00_programmes_officiels" / "programme_nsi_2019.yaml",
-    ROOT / "corpus_nsi" / "00_programmes_officiels" / "programme_nsi.yaml",
+    CORPUS_NSI / "00_programmes_officiels" / "programme_nsi_2019.yaml",
+    CORPUS_NSI / "00_programmes_officiels" / "programme_nsi.yaml",
 ]
 NIVEAU_MAP = {"premiere": "1NSI", "première": "1NSI", "terminale": "TNSI"}
 
@@ -29,45 +29,69 @@ def slug(text: str) -> str:
 def main() -> int:
     src = next((p for p in SRC_CANDIDATES if p.exists()), None)
     if src is None:
-        print("Programme YAML introuvable dans corpus_nsi/ — initialiser le submodule d'abord.")
+        print("Programme YAML introuvable dans corpus_nsi/ -- initialiser le lien d'abord.")
         return 1
     data = yaml.safe_load(src.read_text(encoding="utf-8"))
     unresolved, count = [], 0
-    # Structure attendue (souple) : {niveau: {domaine/theme: [{contenu, capacites: [...]}]}}
-    for niveau_key, domaines in (data.items() if isinstance(data, dict) else []):
+    ref_dir = ROOT / "referentiel"
+    ref_dir.mkdir(exist_ok=True)
+
+    # Structure reelle : programmes: {premiere: [{id, rubrique, contenu, capacite_attendue: [...]}], terminale: [...]}
+    programmes = data.get("programmes", data)
+
+    for niveau_key, items in programmes.items():
         niveau = NIVEAU_MAP.get(str(niveau_key).lower())
-        if niveau is None or not isinstance(domaines, dict):
-            unresolved.append({niveau_key: type(domaines).__name__})
+        if niveau is None:
+            if niveau_key not in ("sources", "preuves_minimales"):
+                unresolved.append({str(niveau_key): "niveau non reconnu"})
             continue
-        for dom, items in domaines.items():
-            theme = slug(str(dom))
+        if not isinstance(items, list):
+            unresolved.append({str(niveau_key): f"attendu list, recu {type(items).__name__}"})
+            continue
+
+        # Regrouper par rubrique (theme)
+        by_rubrique: dict[str, list[dict]] = defaultdict(list)
+        for item in items:
+            if not isinstance(item, dict):
+                unresolved.append({f"{niveau_key}": str(item)[:120]})
+                continue
+            rubrique = item.get("rubrique", "inconnu")
+            by_rubrique[rubrique].append(item)
+
+        for rubrique, entries in by_rubrique.items():
+            theme = slug(rubrique)
             caps = []
-            for i, item in enumerate(items if isinstance(items, list) else [items]):
-                if isinstance(item, dict):
-                    libs = item.get("capacites") or item.get("capacités") or []
-                    contenu = item.get("contenu") or item.get("notion") or ""
-                    for j, lib in enumerate(libs if isinstance(libs, list) else [libs]):
-                        caps.append({
-                            "id": f"{niveau}-{theme}-C{len(caps)+1}",
-                            "contenu_bo": str(contenu),
-                            "libelle_bo": str(lib),
-                            "libelle_eleve": "",  # complété par l'agent au LOT 0 (langage élève)
-                            "demonstration_exigible": False,
-                        })
-                else:
-                    unresolved.append({f"{niveau}/{dom}": str(item)[:120]})
+            for entry in entries:
+                cap_id = entry.get("id", "")
+                contenu = entry.get("contenu", "")
+                cap_list = entry.get("capacite_attendue") or entry.get("capacites") or []
+                if isinstance(cap_list, str):
+                    cap_list = [cap_list]
+                commentaire = entry.get("commentaire_officiel", "")
+                for lib in cap_list:
+                    caps.append({
+                        "id": cap_id if cap_id else f"{niveau}-{theme}-C{len(caps)+1}",
+                        "contenu_bo": str(contenu),
+                        "libelle_bo": str(lib),
+                        "libelle_eleve": "",
+                        "commentaire_officiel": str(commentaire),
+                        "demonstration_exigible": False,
+                    })
+
             if caps:
-                out = ROOT / "referentiel" / f"capacites_{niveau}_{theme}.json"
+                out = ref_dir / f"capacites_{niveau}_{theme}.json"
                 out.write_text(json.dumps({
                     "niveau": niveau, "theme": theme,
-                    "bo_reference": "Programme NSI, BO spécial n°1 du 22 janvier 2019 — à re-vérifier contre le B.O. en vigueur (R7)",
-                    "source_yaml": str(src.relative_to(ROOT)),
-                    "capacites": caps}, ensure_ascii=False, indent=2), encoding="utf-8")
+                    "bo_reference": "Programme NSI, BO special n1 du 22 janvier 2019 -- a re-verifier contre le B.O. en vigueur (R7)",
+                    "source_yaml": str(src),
+                    "capacites": caps,
+                }, ensure_ascii=False, indent=2), encoding="utf-8")
                 count += len(caps)
+
     if unresolved:
-        (ROOT / "referentiel" / "_a_verifier.json").write_text(
+        (ref_dir / "_a_verifier.json").write_text(
             json.dumps(unresolved, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"{count} capacités générées ; {len(unresolved)} items non résolus (referentiel/_a_verifier.json).")
+    print(f"{count} capacites generees ; {len(unresolved)} items non resolus (referentiel/_a_verifier.json).")
     return 0
 
 

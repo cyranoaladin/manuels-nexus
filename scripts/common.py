@@ -12,6 +12,7 @@ load_dotenv()
 ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "raw"
 CORPUS_DIR = ROOT / "corpus"
+CORPUS_NSI = Path(os.getenv("NSI_CORPUS_ROOT", ROOT / "corpus_nsi")).expanduser()
 REGISTRY_PATH = ROOT / "sources" / "registry.yaml"
 
 DATABASE_URL = os.getenv("DATABASE_URL", "")

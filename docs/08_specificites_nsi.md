@@ -80,23 +80,27 @@ Conséquences : le gate anti-similarité ne s'applique PAS aux chunks T0 (c'est 
 
 Script `scripts/harvest_nsi.py` : pour un chapitre donné, identifie dans le dépôt NSI les séquences couvrant ses capacités (via `manifest.csv` + matrices de programme), extrait les 11 fichiers types de chaque séquence, les convertit en objets candidats avec métadonnées héritées (capacités, statut de revue, chemin source pour traçabilité). Conversion Markdown → macros Nexus via pandoc + filtre Lua dédié (`scripts/md2nexus.lua`) : titres → sections, blocs code → `\begin{python}`, admonitions → encadrés Nexus.
 
-## 3.2 Table de transposition (le cœur du système)
+## 3.2 Table de transposition (le coeur du systeme) — structure reelle du corpus
 
-| Fichier séquence NSI | Objet(s) manuel | Transformation |
+La structure reelle du corpus utilise `{ID}_{type}_{slug}.md` (pas le canon a 11 fichiers).
+Chaque sequence peut avoir un slug principal et un slug `_complement`.
+
+| Source reelle | Objet(s) manuel | Transformation |
 |---|---|---|
-| `cours_eleve.md` + `trace_ecrite.md` | Cours strate 1 + strate 2 | Fusion : trace écrite = l'essentiel (strate 1), cours élève = développements et exemples (strate 2) ; ajout contre-exemples et ⚠ manquants |
-| `fiche_methode.md` | Fiches Mn | Reformater aux 6 rubriques du gabarit (quand/pas-à-pas/exemple/pièges/vérifier/s'entraîner) |
-| `td.md` | Exercices ◆◆ majoritairement | Découpage en exercices atomiques, métadonnées, gradation |
-| `tp.md` | Exercices ⌨ + **Mini-projet** | Les TP guidés → exercices Python ◆/◆◆ ; les TP ouverts → rubrique Mini-projet (§4.3) |
-| `aides_progressives.md` | **Coups de pouce** | Mapping quasi direct — le concept existe déjà, re-normer en 3 niveaux, fichiers {ID}-CDP.tex |
-| `corrige.md` | Corrigés copie-modèle | Enrichir au standard (code commenté ligne à ligne, complexité justifiée, conclusion) |
-| `evaluation.md` | Base du sujet A | Re-barémer par compétences ; compléter aux formats bac (§4.4) |
-| `qcm.json` | QCM diagnostique | **Enrichissement obligatoire** : chaque distracteur reçoit son diagnostic (« si tu as répondu B, tu as confondu mutation et réaffectation → M3 ») |
-| `python/` + `tests/` | **Blocs VERIFY** | Les 445 tests existants deviennent les vérifications exécutables des exercices (§4.1) — actif le plus précieux du dépôt |
-| `guide_professeur.md` | Déclinaison « livret professeur » | Hors manuel élève ; nouvelle déclinaison F06 assemblée à part |
-| `projet_associe.md` | Mini-projet de chapitre | §4.3 |
+| `{ID}_cours_*.md` + `{ID}_trace_*.md` + `fiches_cours/{ID}/*` | Cours strates 1-2 | trace = essentiel (strate 1), cours = developpements (strate 2), fiches cours = syntheses par notion |
+| `{ID}_td_*.md` | Exercices ◆◆ majoritairement | Decoupage en exercices atomiques, metadonnees, gradation |
+| `{ID}_tp_*.md` | Exercices ⌨ ◆/◆◆ + matiere du Mini-projet | Les TP guides → exercices Python ; les TP ouverts → rubrique Mini-projet (§4.3) |
+| `{ID}_remediation_*.md` | Remediation | Mapping direct vers fiches de remediation |
+| `{ID}_evaluation_*.md` + `{ID}_bareme_*.md` | Evaluation A + bareme par competences | Re-baremer ; completer aux formats bac (§4.4) |
+| `{ID}_version_amenagee_*.md` | **Declinaison version amenagee (F11)** | Enonces alleges, consignes sequencees, mise en page aeree |
+| `{ID}_corrige_*.md` | Corriges copie-modele | Enrichir au standard (code commente, complexite justifiee, conclusion) |
+| `code/{ID}_tests_attendus_*.py` | **Blocs VERIFY** | Import direct des asserts — actif le plus precieux |
+| `code/{ID}_corrige_professeur_*.py` | `\codereference` du cours + corriges | Code de reference commente |
+| `code/{ID}_starter_*.py` | Squelettes des sujets ECE | exercice 2 : code a completer |
+| `{ID}_contract.yml` + substance_review + human_review_register | Metadonnees, tracabilite, statuts herites | F08 : propagation des statuts `needs_review` |
+| Sequences canon s01 (`aides_progressives.md`, `qcm.json`, `projet_associe.md`, `guide_professeur.md`) | Coups de pouce / QCM / Mini-projet / livret professeur | Sources supplementaires (2 sequences seulement) |
 
-Ce qui reste à générer ex nihilo par chapitre : le contrat en langage élève (léger : traduit du YAML), le diagnostic d'entrée + fiches R, les contre-exemples, la gradation ◆◆◆ (prise d'initiative), les distracteurs diagnostiques, la remédiation, les figures.
+Ce qui reste a generer ex nihilo par chapitre : le contrat en langage eleve (leger : traduit du YAML), le diagnostic d'entree + fiches R, les contre-exemples, la gradation ◆◆◆ (prise d'initiative), les distracteurs diagnostiques, les figures.
 
 ---
 

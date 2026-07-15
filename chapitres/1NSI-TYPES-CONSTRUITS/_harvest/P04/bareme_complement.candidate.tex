@@ -1,0 +1,230 @@
+\section{P04 - Barème - Types construits complément}
+
+\subsection{Objectifs}
+
+\begin{itemize}
+\tightlist
+\item
+  Vérifier la maîtrise des p-uplets (tuples) et de leur immutabilité.
+\item
+  Évaluer la capacité à utiliser les listes en compréhension et les
+  matrices.
+\item
+  Contrôler la construction et l'itération sur les dictionnaires.
+\end{itemize}
+
+\subsection{Capacités officielles}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-01 : Utiliser les p-uplets (tuples) pour représenter des
+  données composites.
+\item
+  P-DATA-CONSTR-02B : Construire une liste par compréhension.
+\item
+  P-DATA-CONSTR-02C : Utiliser des listes de listes pour représenter des
+  matrices.
+\item
+  P-DATA-CONSTR-03A : Construire un dictionnaire par ajout de
+  clés-valeurs.
+\item
+  P-DATA-CONSTR-03B : Itérer sur les clés, les valeurs ou les items d'un
+  dictionnaire.
+\item
+  P-DATA-CONSTR-03C : Utiliser des dictionnaires pour structurer des
+  données hétérogènes.
+\end{itemize}
+
+\subsection{Prérequis}
+
+\begin{itemize}
+\tightlist
+\item
+  Connaître la syntaxe des tuples, listes et dictionnaires en Python.
+\item
+  Savoir utiliser les boucles for et les indices.
+\item
+  Comprendre la différence entre type mutable et immutable.
+\end{itemize}
+
+\subsection{Situation-problème}
+
+Un enseignant gère les résultats d'une classe sous forme de structures
+Python. Il utilise des tuples pour les coordonnées d'élèves, des listes
+en compréhension pour filtrer les notes, des matrices pour les emplois
+du temps et des dictionnaires pour associer noms et moyennes. Le barème
+guide l'évaluation de ces compétences.
+
+\subsection{Activité d’entrée}
+
+Créer un tuple contenant le nom, le prénom et la moyenne d'un élève,
+puis tenter de modifier la moyenne pour constater l'erreur TypeError.
+
+\subsection{Exemple}
+
+Tuple : eleve = (``Dupont'', ``Alice'', 15.5). Liste en compréhension :
+{[}n for n in notes if n \textgreater= 10{]}. Matrice 2×3 : {[}{[}1, 2,
+3{]}, {[}4, 5, 6{]}{]}. Dictionnaire : \{``Alice'': 15.5, ``Bob'':
+12.0\}.
+
+\subsection{Barème question par question}
+
+\subsubsection{Barème question 1 — Tuples (P-DATA-CONSTR-01) — 4 points}
+
+\begin{itemize}
+\tightlist
+\item
+  1.a) Création de tuples : 1 point (syntaxe correcte avec parenthèses
+  ou sans, éléments hétérogènes acceptés).
+\item
+  1.b) Accès par index : 1 point (accès correct aux éléments par indice,
+  y compris indices négatifs).
+\item
+  1.c) Immutabilité : 1 point (explication que l'affectation t{[}i{]} =
+  v lève TypeError, avec justification).
+\item
+  1.d) Déballage (unpacking) : 1 point (affectation multiple nom,
+  prenom, moy = eleve correcte et expliquée).
+\end{itemize}
+
+\subsubsection{Barème question 2 — Listes et compréhension (P-DATA-CONSTR-02B) — 4 points}
+
+\begin{itemize}
+\tightlist
+\item
+  2.a) Liste en compréhension simple : 1 point (syntaxe {[}expr for x in
+  iterable{]} correcte avec résultat exact).
+\item
+  2.b) Compréhension avec filtre : 1 point (syntaxe {[}expr for x in
+  iterable if cond{]} correcte).
+\item
+  2.c) Compréhension imbriquée : 1 point (double boucle for correcte
+  avec résultat attendu).
+\item
+  2.d) Équivalence boucle / compréhension : 1 point (réécriture correcte
+  d'une boucle for classique en compréhension).
+\end{itemize}
+
+\subsubsection{Barème question 3 — Matrices (P-DATA-CONSTR-02C) — 4 points}
+
+\begin{itemize}
+\tightlist
+\item
+  3.a) Création d'une matrice : 1 point (liste de listes avec dimensions
+  correctes, initialisation cohérente).
+\item
+  3.b) Accès à un élément : 1 point (syntaxe matrice{[}i{]}{[}j{]}
+  correcte, indices ligne puis colonne).
+\item
+  3.c) Parcours d'une matrice : 1 point (double boucle for pour
+  parcourir toutes les cellules sans erreur d'indice).
+\item
+  3.d) Piège de la copie : 1 point (explication que {[}{[}0{]}*3{]}*2
+  crée des références partagées, avec alternative correcte).
+\end{itemize}
+
+\subsubsection{Barème question 4 — Dictionnaires construction (P-DATA-CONSTR-03A) — 4 points}
+
+\begin{itemize}
+\tightlist
+\item
+  4.a) Création par accolades : 1 point (syntaxe \{``cle'': valeur\}
+  correcte avec au moins 3 entrées).
+\item
+  4.b) Ajout de clés : 1 point (ajout par affectation d{[}cle{]} =
+  valeur, y compris clé déjà existante pour mise à jour).
+\item
+  4.c) Compréhension de dictionnaire : 1 point (syntaxe \{k: v for k, v
+  in \ldots\} correcte avec résultat attendu).
+\item
+  4.d) Clés valides : 1 point (explication que les clés doivent être
+  hashables : str, int, tuple mais pas list).
+\end{itemize}
+
+\subsubsection{Barème question 5 — Dictionnaires itération (P-DATA-CONSTR-03B, P-DATA-CONSTR-03C) — 4 points}
+
+\begin{itemize}
+\tightlist
+\item
+  5.a) Itération sur les clés : 1 point (boucle for k in d ou for k in
+  d.keys() correcte).
+\item
+  5.b) Itération sur les valeurs : 1 point (boucle for v in d.values()
+  correcte avec résultat attendu).
+\item
+  5.c) Itération sur les items : 1 point (boucle for k, v in d.items()
+  correcte avec utilisation des deux variables).
+\item
+  5.d) Structure hétérogène : 1 point (dictionnaire imbriqué ou mixte
+  tuple/dictionnaire utilisé pour modéliser un enregistrement complexe).
+\end{itemize}
+
+\subsection{Total : 20 points}
+
+\subsection{Critères de réussite observables}
+
+\begin{itemize}
+\tightlist
+\item
+  La syntaxe Python est correcte et exécutable pour chaque réponse.
+\item
+  Les types choisis sont justifiés (tuple pour l'immutabilité,
+  dictionnaire pour l'accès par clé).
+\item
+  Au moins un piège classique (copie de matrice, clé non hashable) est
+  identifié.
+\end{itemize}
+
+\subsection{Erreurs fréquentes}
+
+\begin{itemize}
+\tightlist
+\item
+  Confondre tuple et liste (utiliser des crochets au lieu de parenthèses
+  ou inversement).
+\item
+  Oublier la condition if dans une compréhension avec filtre.
+\item
+  Accéder à une matrice avec matrice{[}j{]}{[}i{]} au lieu de
+  matrice{[}i{]}{[}j{]} (inversion ligne/colonne).
+\item
+  Utiliser une liste comme clé de dictionnaire (TypeError: unhashable
+  type).
+\item
+  Confondre d.keys(), d.values() et d.items().
+\end{itemize}
+
+\subsection{Exercices}
+
+Les exercices évalués sont les questions 1 à 5 de l'évaluation types
+construits complément P04.
+
+\subsection{Corrigé}
+
+Les réponses détaillées se trouvent dans
+P04\_corrige\_types\_construits\_complement.md.
+
+\subsection{Remédiation}
+
+En cas de score inférieur à 10/20, reprendre les exercices sur un seul
+type construit (tuple ou liste) avant de combiner plusieurs structures.
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : questions 1 et 2a-2b (tuples et compréhensions simples).
+\item
+  Standard : questions 3 et 4 (matrices et construction de
+  dictionnaires).
+\item
+  Expert : questions 2c, 3d et 5d (compréhension imbriquée, piège copie,
+  structure hétérogène).
+\end{itemize}
+
+\subsection{Séance(s) correspondante(s)}
+
+Séance dédiée aux types construits : tuples, listes, dictionnaires
+(complément).

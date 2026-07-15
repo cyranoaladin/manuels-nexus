@@ -1,7 +1,7 @@
 """Assemblage (R5/F06) : génère le .tex maître d'un chapitre depuis les objets,
 dans l'ordre des 9 temps du gabarit, puis compile (pdflatex ×2).
 
-Déclinaisons : --variant complet|methodes|parcours1|remediation
+Déclinaisons : --variant complet|methodes|parcours1|remediation|amenagee
 """
 import argparse
 import subprocess
@@ -22,6 +22,11 @@ def collect(chap_dir: Path, variant: str) -> list[Path]:
         return sorted((chap_dir / "methodes").glob("*.tex"))
     if variant == "remediation":
         return sorted((chap_dir / "remediation").glob("*.tex"))
+    if variant == "amenagee":
+        amenagee_dir = chap_dir / "amenagee"
+        if amenagee_dir.exists():
+            return sorted(amenagee_dir.glob("*.tex"))
+        return []
     files = []
     for sub, pat in ORDER:
         files += sorted((chap_dir / sub).glob(f"{pat}.tex" if not pat.endswith("*") else pat + ".tex"))
@@ -63,6 +68,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--chap", required=True)
     ap.add_argument("--variant", default="complet",
-                    choices=["complet", "methodes", "parcours1", "remediation", "professeur"])
+                    choices=["complet", "methodes", "parcours1", "remediation", "professeur", "amenagee"])
     args = ap.parse_args()
     sys.exit(main(args.chap, args.variant))

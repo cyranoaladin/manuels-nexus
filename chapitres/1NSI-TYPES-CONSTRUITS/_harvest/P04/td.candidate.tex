@@ -1,0 +1,604 @@
+\section{P04 - TD - Types construits}
+
+\subsection{Objectifs spécifiques}
+
+\begin{itemize}
+\tightlist
+\item
+  Objectif O1 - Identifier précisément la représentation ou la structure
+  en jeu.
+\item
+  Objectif O2 - Appliquer une méthode disciplinaire complète.
+\item
+  Objectif O3 - Justifier le résultat sur un cas différent.
+\item
+  Objectif O4 - Contrôler un cas limite et corriger une erreur observée.
+\end{itemize}
+
+\subsection{Capacités officielles atomiques}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-02A
+\item
+  P-DATA-CONSTR-02D
+\end{itemize}
+
+\subsection{Prérequis}
+
+\begin{itemize}
+\tightlist
+\item
+  Reconnaître une consigne liée à tuple.
+\item
+  Distinguer donnée, méthode et conclusion dans le thème Tuples, listes,
+  dictionnaires.
+\item
+  Rédiger une justification courte en utilisant le vocabulaire du
+  programme.
+\item
+  Contrôler une réponse par un cas limite ou un contre-exemple
+  explicite.
+\end{itemize}
+
+\subsection{Séance(s) correspondante(s)}
+
+\begin{itemize}
+\tightlist
+\item
+  P04-S1 à P04-S7 : support rattaché aux séances prêtes de la
+  progression.
+\end{itemize}
+
+\subsection{Situation-problème concrète}
+
+Une station météo stocke des coordonnées fixes, des relevés horaires
+modifiables et des mesures accessibles par nom.
+
+\subsection{Activité d’entrée}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identifier ce qui doit rester immuable dans un tuple.
+\item
+  Modifier une liste de températures.
+\item
+  Lire une clé dans un dictionnaire de station.
+\item
+  Décrire ce qui se passe avec une liste vide.
+\end{enumerate}
+
+\subsection{Exemples corrigés précis}
+
+\subsubsection{Exemple corrigé 1 - tuple de coordonnées}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : \texttt{(36.8,\ 10.2)}.
+\item
+  Méthode : lire sans modifier et nommer latitude puis longitude.
+\item
+  Résultat obtenu : coordonnées conservées.
+\item
+  Contrôle : le cas limite « tentative de modification interdite » est
+  vérifié séparément. \#\#\# Exemple corrigé 2 - liste de relevés
+\item
+  Donnée étudiée : \texttt{{[}18,\ 20,\ 19{]}}.
+\item
+  Méthode : parcourir les valeurs et calculer une moyenne.
+\item
+  Résultat obtenu : \texttt{19}.
+\item
+  Contrôle : le cas limite « liste vide » est vérifié séparément. \#\#\#
+  Exemple corrigé 3 - dictionnaire
+\item
+  Donnée étudiée : \texttt{\{"temperature":\ 21,\ "vent":\ 12\}}.
+\item
+  Méthode : tester la présence de la clé avant lecture.
+\item
+  Résultat obtenu : \texttt{21} pour \texttt{temperature}.
+\item
+  Contrôle : le cas limite « clé absente » est vérifié séparément.
+  \#\#\# Exemple corrigé 4 - copie de liste
+\item
+  Donnée étudiée : \texttt{{[}{[}1{]},\ {[}2{]}{]}}.
+\item
+  Méthode : distinguer copie superficielle et copie indépendante.
+\item
+  Résultat obtenu : modification locale contrôlée.
+\item
+  Contrôle : le cas limite « liste imbriquée » est vérifié séparément.
+  \#\# Exercices numérotés \#\#\# Exercice 1
+\item
+  Objectif travaillé : O1.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé disciplinaire : résoudre tuple de coordonnées avec
+  \texttt{(36.8,\ 10.2)}.
+\item
+  Production attendue : coordonnées conservées.
+\item
+  Contrainte de contrôle : faire apparaître le contrôle « tentative de
+  modification interdite ».
+\item
+  Critère local : la réponse contient une donnée, une méthode, un
+  résultat et une vérification. \#\#\# Exercice 2
+\item
+  Objectif travaillé : O2.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A, P-DATA-CONSTR-02D.
+\item
+  Énoncé disciplinaire : on dispose de la liste
+  \texttt{releves\ =\ {[}18,\ 20,\ 19{]}}. Écrire une boucle
+  \texttt{for} qui parcourt les éléments de \texttt{releves} et calcule
+  leur moyenne. Donner la trace d'exécution : à chaque tour de boucle,
+  indiquer la valeur de l'élément courant et le cumul partiel.
+\item
+  Production attendue : \texttt{19} (moyenne = (18 + 20 + 19) / 3).
+\item
+  Contrainte de contrôle : utiliser \texttt{for\ valeur\ in\ releves}
+  (itération sur les valeurs, pas sur les indices) ; traiter le cas
+  \texttt{releves\ =\ {[}{]}}.
+\item
+  Critère local : la réponse contient une donnée, une méthode, un
+  résultat et une vérification. \#\#\# Exercice 3
+\item
+  Objectif travaillé : O3.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé disciplinaire : comparer dictionnaire avec
+  \texttt{\{"temperature":\ 21,\ "vent":\ 12\}}.
+\item
+  Production attendue : \texttt{21} pour \texttt{temperature}.
+\item
+  Contrainte de contrôle : comparer avec le cas « clé absente ».
+\item
+  Critère local : la réponse contient une donnée, une méthode, un
+  résultat et une vérification. \#\#\# Exercice 4
+\item
+  Objectif travaillé : O4.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé disciplinaire : corriger copie de liste pour
+  \texttt{{[}{[}1{]},\ {[}2{]}{]}}.
+\item
+  Production attendue : modification locale contrôlée.
+\item
+  Contrainte de contrôle : corriger l'erreur « Copier une liste
+  imbriquée seulement au premier niveau. ».
+\item
+  Critère local : la réponse contient une donnée, une méthode, un
+  résultat et une vérification. \#\#\# Exercice 5
+\item
+  Objectif travaillé : O1.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé disciplinaire : tester un cas limite lié à tentative de
+  modification interdite.
+\item
+  Production attendue : le comportement de tuple de coordonnées est
+  contrôlé.
+\item
+  Contrainte de contrôle : nommer la donnée minimale et la conclusion.
+\item
+  Critère local : la réponse contient une donnée, une méthode, un
+  résultat et une vérification. \#\#\# Exercice 6
+\item
+  Objectif travaillé : O2.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé disciplinaire : classer deux méthodes possibles pour liste de
+  relevés.
+\item
+  Production attendue : la méthode robuste est choisie et justifiée.
+\item
+  Contrainte de contrôle : identifier pourquoi « Parcourir les indices
+  quand les valeurs suffisent. » est une erreur.
+\item
+  Critère local : la réponse contient une donnée, une méthode, un
+  résultat et une vérification. \#\#\# Exercice 7
+\item
+  Objectif travaillé : O3.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé disciplinaire : justifier un transfert qui utilise dictionnaire
+  avec une donnée nouvelle.
+\item
+  Production attendue : la justification reste valable sur le nouveau
+  cas.
+\item
+  Contrainte de contrôle : inclure une étape calculable par un pair.
+\item
+  Critère local : la réponse contient une donnée, une méthode, un
+  résultat et une vérification. \#\#\# Exercice 8
+\item
+  Objectif travaillé : O4.
+\item
+  Capacité officielle : P-DATA-CONSTR-02A.
+\item
+  Énoncé disciplinaire : étendre un énoncé volontairement erroné sur
+  copie de liste.
+\item
+  Production attendue : l'erreur est localisée puis réparée.
+\item
+  Contrainte de contrôle : proposer une activité corrective inspirée de
+  « Modifier une sous-liste et observer l'effet sur la copie. ».
+\item
+  Critère local : la réponse contient une donnée, une méthode, un
+  résultat et une vérification. \#\# Corrigé \#\#\# Corrigé exercice 1
+\item
+  Résultat : coordonnées conservées.
+\item
+  Contrôle : faire apparaître le contrôle « tentative de modification
+  interdite ».
+\item
+  Erreur traitée : EF1 - Modifier un tuple comme une liste.
+\item
+  Donnée utilisée alpha dans P04 td types construits : cas alpha de l
+  exercice 1 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode alpha dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_alpha:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat alpha dans P04 td types construits : sortie vérifiable de l
+  exercice 1, reliée à la capacité officielle du bloc.
+\item
+  Contrôle alpha dans P04 td types construits : le cas limite annoncé
+  est décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 2
+\item
+  Résultat : \texttt{19}.
+\item
+  Contrôle : rédiger la méthode avant le résultat.
+\item
+  Erreur traitée : EF2 - Parcourir les indices quand les valeurs
+  suffisent.
+\item
+  Donnée utilisée beta dans P04 td types construits : cas beta de l
+  exercice 2 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode beta dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_beta:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat beta dans P04 td types construits : sortie vérifiable de l
+  exercice 2, reliée à la capacité officielle du bloc.
+\item
+  Contrôle beta dans P04 td types construits : le cas limite annoncé est
+  décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 3
+\item
+  Résultat : \texttt{21} pour \texttt{temperature}.
+\item
+  Contrôle : comparer avec le cas « clé absente ».
+\item
+  Erreur traitée : EF3 - Accéder à une clé sans vérifier sa présence.
+\item
+  Donnée utilisée gamma dans P04 td types construits : cas gamma de l
+  exercice 3 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode gamma dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_gamma:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat gamma dans P04 td types construits : sortie vérifiable de l
+  exercice 3, reliée à la capacité officielle du bloc.
+\item
+  Contrôle gamma dans P04 td types construits : le cas limite annoncé
+  est décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 4
+\item
+  Résultat : modification locale contrôlée.
+\item
+  Contrôle : corriger l'erreur « Copier une liste imbriquée seulement au
+  premier niveau. ».
+\item
+  Erreur traitée : EF4 - Copier une liste imbriquée seulement au premier
+  niveau.
+\item
+  Donnée utilisée delta dans P04 td types construits : cas delta de l
+  exercice 4 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode delta dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_delta:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat delta dans P04 td types construits : sortie vérifiable de l
+  exercice 4, reliée à la capacité officielle du bloc.
+\item
+  Contrôle delta dans P04 td types construits : le cas limite annoncé
+  est décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 5
+\item
+  Résultat : le comportement de tuple de coordonnées est contrôlé.
+\item
+  Contrôle : nommer la donnée minimale et la conclusion.
+\item
+  Erreur traitée : EF1 - Modifier un tuple comme une liste.
+\item
+  Donnée utilisée epsilon dans P04 td types construits : cas epsilon de
+  l exercice 5 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode epsilon dans P04 td types construits : trace courte,
+  pseudo-code local
+  \texttt{if\ cas\_epsilon:\ décider\ else:\ calculer}, invariant nommé
+  et complexité \texttt{O(n)}.
+\item
+  Résultat epsilon dans P04 td types construits : sortie vérifiable de l
+  exercice 5, reliée à la capacité officielle du bloc.
+\item
+  Contrôle epsilon dans P04 td types construits : le cas limite annoncé
+  est décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 6
+\item
+  Résultat : la méthode robuste est choisie et justifiée.
+\item
+  Contrôle : identifier pourquoi « Parcourir les indices quand les
+  valeurs suffisent. » est une erreur.
+\item
+  Erreur traitée : EF2 - Parcourir les indices quand les valeurs
+  suffisent.
+\item
+  Donnée utilisée zeta dans P04 td types construits : cas zeta de l
+  exercice 6 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode zeta dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_zeta:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat zeta dans P04 td types construits : sortie vérifiable de l
+  exercice 6, reliée à la capacité officielle du bloc.
+\item
+  Contrôle zeta dans P04 td types construits : le cas limite annoncé est
+  décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 7
+\item
+  Résultat : la justification reste valable sur le nouveau cas.
+\item
+  Contrôle : inclure une étape calculable par un pair.
+\item
+  Erreur traitée : EF3 - Accéder à une clé sans vérifier sa présence.
+\item
+  Donnée utilisée eta dans P04 td types construits : cas eta de l
+  exercice 7 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode eta dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_eta:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat eta dans P04 td types construits : sortie vérifiable de l
+  exercice 7, reliée à la capacité officielle du bloc.
+\item
+  Contrôle eta dans P04 td types construits : le cas limite annoncé est
+  décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 8
+\item
+  Résultat : l'erreur est localisée puis réparée.
+\item
+  Contrôle : proposer une activité corrective inspirée de « Modifier une
+  sous-liste et observer l'effet sur la copie. ».
+\item
+  Erreur traitée : EF4 - Copier une liste imbriquée seulement au premier
+  niveau.
+\item
+  Donnée utilisée theta dans P04 td types construits : cas theta de l
+  exercice 8 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode theta dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_theta:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat theta dans P04 td types construits : sortie vérifiable de l
+  exercice 8, reliée à la capacité officielle du bloc.
+\item
+  Contrôle theta dans P04 td types construits : le cas limite annoncé
+  est décidé explicitement et une réponse sans trace est refusée.
+\end{itemize}
+
+\subsection{Erreurs fréquentes}
+
+\begin{itemize}
+\tightlist
+\item
+  Erreur fréquente EF1 - Modifier un tuple comme une liste.
+\item
+  Erreur fréquente EF2 - Parcourir les indices quand les valeurs
+  suffisent.
+\item
+  Erreur fréquente EF3 - Accéder à une clé sans vérifier sa présence.
+\item
+  Erreur fréquente EF4 - Copier une liste imbriquée seulement au premier
+  niveau.
+\end{itemize}
+
+\subsection{Remédiation ciblée}
+
+\begin{itemize}
+\tightlist
+\item
+  Activité corrective EF1 : Identifier mutabilité et usage avant
+  d'écrire une affectation.
+\item
+  Activité corrective EF2 : Écrire deux boucles, avec indices puis avec
+  valeurs, et comparer.
+\item
+  Activité corrective EF3 : Tester \texttt{cle\ in\ dictionnaire} avant
+  la lecture.
+\item
+  Activité corrective EF4 : Modifier une sous-liste et observer l'effet
+  sur la copie.
+\end{itemize}
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : traiter \texttt{(36.8,\ 10.2)} avec une fiche méthode fournie.
+\item
+  Standard : traiter \texttt{{[}18,\ 20,\ 19{]}} en rédigeant la
+  justification complète.
+\item
+  Expert : inventer un cas limite lié à « clé absente » et expliquer le
+  comportement attendu.
+\end{itemize}
+
+\subsection{Critères de réussite}
+
+\begin{itemize}
+\tightlist
+\item
+  La capacité officielle est citée dans la copie.
+\item
+  La méthode contient au moins une étape vérifiable par un pair.
+\item
+  Le cas limite est discuté avec une donnée concrète.
+\item
+  La correction explique quelle erreur fréquente est évitée.
+\end{itemize}
+
+\subsection{Complément d’exercices corrigés - types construits}
+
+\subsubsection{Exercice 9 - Milieu de deux coordonnées}
+
+\begin{itemize}
+\tightlist
+\item
+  Données : \texttt{A\ =\ (0,\ 4)}, \texttt{B\ =\ (6,\ 10)}. ;
+  jeu\_exercice=alpha
+\item
+  Consigne : écrire la formule du milieu et préciser pourquoi un tuple
+  convient.
+\end{itemize}
+
+\subsubsection{Exercice 10 - Liste mutable}
+
+\begin{itemize}
+\tightlist
+\item
+  Données : \texttt{notes\ =\ {[}8,\ 12,\ 10{]}}. ; jeu\_exercice=beta
+\item
+  Consigne : remplacer la deuxième note par \texttt{14}, puis donner la
+  liste.
+\end{itemize}
+
+\subsubsection{Exercice 11 - Liste de dictionnaires}
+
+\begin{itemize}
+\tightlist
+\item
+  Données :
+  \texttt{stations\ =\ {[}\{"nom":\ "A",\ "temperature":\ 21\},\ \{"nom":\ "B",\ "temperature":\ 18\},\ \{"nom":\ "C",\ "temperature":\ 23\}{]}}.
+  ; jeu\_exercice=gamma
+\item
+  Consigne : extraire les noms des stations dont la température est au
+  moins \texttt{20}.
+\end{itemize}
+
+\subsubsection{Exercice 12 - Cas limites}
+
+\begin{itemize}
+\tightlist
+\item
+  Données : \texttt{point\ =\ (2,)},
+  \texttt{station\ =\ \{"temperature":\ 21\}},
+  \texttt{notes\ =\ {[}{]}}. ; jeu\_exercice=delta
+\item
+  Consigne : associer chaque donnée à l'erreur possible.
+\end{itemize}
+
+\subsubsection{Corrigé exercice 9}
+
+\begin{itemize}
+\tightlist
+\item
+  Résultat attendu : le milieu vaut
+  \texttt{((0+6)/2,\ (4+10)/2)\ =\ (3.0,\ 7.0)}.
+\item
+  Contrôle : le résultat est un tuple de taille 2, adapté à une
+  coordonnée fixe.
+\item
+  Donnée utilisée alpha dans P04 td types construits : cas alpha de l
+  exercice 9 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode alpha dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_alpha:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat alpha dans P04 td types construits : sortie vérifiable de l
+  exercice 9, reliée à la capacité officielle du bloc.
+\item
+  Contrôle alpha dans P04 td types construits : le cas limite annoncé
+  est décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 10
+\item
+  Résultat attendu : après \texttt{notes{[}1{]}\ =\ 14}, la liste vaut
+  \texttt{{[}8,\ 14,\ 10{]}}.
+\item
+  Contrôle : la longueur reste \texttt{3}, seule la valeur de rang 2
+  change.
+\item
+  Donnée utilisée beta dans P04 td types construits : cas beta de l
+  exercice 10 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode beta dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_beta:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat beta dans P04 td types construits : sortie vérifiable de l
+  exercice 10, reliée à la capacité officielle du bloc.
+\item
+  Contrôle beta dans P04 td types construits : le cas limite annoncé est
+  décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 11
+\item
+  Résultat attendu : les noms extraits sont \texttt{{[}"A",\ "C"{]}}.
+\item
+  Contrôle : la station \texttt{"B"} est exclue car
+  \texttt{18\ \textless{}\ 20}.
+\item
+  Donnée utilisée gamma dans P04 td types construits : cas gamma de l
+  exercice 11 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode gamma dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_gamma:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat gamma dans P04 td types construits : sortie vérifiable de l
+  exercice 11, reliée à la capacité officielle du bloc.
+\item
+  Contrôle gamma dans P04 td types construits : le cas limite annoncé
+  est décidé explicitement et une réponse sans trace est refusée. \#\#\#
+  Corrigé exercice 12
+\item
+  Résultat attendu : \texttt{point} a une mauvaise taille pour une
+  coordonnée 2D ; \texttt{station{[}"pression"{]}} provoquerait une clé
+  absente ; \texttt{notes} ne permet pas de moyenne sans convention.
+\item
+  Contrôle : chaque erreur est liée à un type différent : tuple,
+  dictionnaire, liste.
+\item
+  Donnée utilisée delta dans P04 td types construits : cas delta de l
+  exercice 12 avec les valeurs indiquées dans l énoncé.
+\item
+  Méthode delta dans P04 td types construits : trace courte, pseudo-code
+  local \texttt{if\ cas\_delta:\ décider\ else:\ calculer}, invariant
+  nommé et complexité \texttt{O(n)}.
+\item
+  Résultat delta dans P04 td types construits : sortie vérifiable de l
+  exercice 12, reliée à la capacité officielle du bloc.
+\item
+  Contrôle delta dans P04 td types construits : le cas limite annoncé
+  est décidé explicitement et une réponse sans trace est refusée.
+\end{itemize}

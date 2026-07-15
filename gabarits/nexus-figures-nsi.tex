@@ -13,13 +13,7 @@
   nxref/.style={draw=nxRouge,line width=0.8pt,-{Stealth[length=5pt]},dashed},
 }
 
-% Environnement figure normalisé et numéroté
-\newcounter{nxfig}
-\newenvironment{nxfigure}[2][0.9\linewidth]{%
-  \refstepcounter{nxfig}\par\medskip\begin{center}\begin{minipage}{#1}\centering
-  \def\nxfigcaption{#2}}{%
-  \par\smallskip{\footnotesize\sffamily\color{nxGris}Figure \thenxfig\ --- \nxfigcaption}
-  \end{minipage}\end{center}\medskip}
+% nxfigure et nxfig sont definis dans nexus-figures.tex (tronc commun)
 
 % Tableau mémoire : \memtable{v1,v2,v3,...}{indice de départ}
 \newcommand{\memtable}[2]{%

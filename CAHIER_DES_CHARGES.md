@@ -38,6 +38,7 @@ E1–E8 identiques au manuel maths (contrat, diagnostic+fiches R, cours 3 strate
 | F08 | Héritage des statuts : objet issu d'une séquence `needs_review` → flag dans `A_VALIDER_HUMAIN.md` | Must |
 | F09 | Mini-projet par chapitre avec jalons testables ; 2 projets fil rouge par manuel | Must |
 | F10 | Terminale : formats officiels écrit (3 exercices) et ECE respectés (vérifiés en ligne, R7) | Must |
+| F11 | Déclinaison version aménagée par chapitre : énoncés allégés, consignes séquencées, mise en page aérée, générée depuis les mêmes objets avec les sources `version_amenagee` transposées | Should |
 
 ## 4. Exigences non fonctionnelles
 
@@ -63,6 +64,7 @@ Python ≥ 3.11, pandoc (filtre Lua), texlive-full, ruff, pytest ; PostgreSQL+pg
 - [ ] Rubrique « À la machine » présente dans chaque section.
 - [ ] Mini-projet jalonné avec tests fournis et exécutés.
 - [ ] Terminale : ≥ 2 sujets ECE au format officiel, corrigés validés contre les tests.
+- [ ] Version aménagée (F11) : extrait généré et joint au PDF pilote pour validation.
 - [ ] Distinction visuelle code/console respectée partout.
 - [ ] Erreurs fréquentes NSI : ≥ 4 par chapitre, issues du corpus ou documentées.
 - [ ] Aucun objet `ready` hérité d'une séquence `needs_review` sans revue tracée.

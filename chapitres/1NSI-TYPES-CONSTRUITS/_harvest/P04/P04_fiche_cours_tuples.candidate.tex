@@ -1,0 +1,192 @@
+\section{P04 - Fiche cours - Tuples et p-uplets}
+
+\subsection{À savoir}
+
+\begin{itemize}
+\tightlist
+\item
+  types construits se travaille dans le contexte ``tuples, listes et
+  dictionnaires'' avec des données vérifiables.
+\item
+  La fiche distingue vocabulaire, méthode, exemple corrigé et contrôle
+  pour tuples.
+\item
+  Les capacités P-DATA-CONSTR-01 sont rappelées ici sans être déclarées
+  couvertes.
+\item
+  L'élève doit pouvoir refaire un exemple de types construits avec une
+  valeur, une table ou un code différent.
+\item
+  Ressource locale adaptée :
+  \texttt{Documents\_DRIVE/2\_NSI/Cours/Première\ NSI\ Pierrot\ caillabet/2\_2020-2021/Bloc\ 3\_Types\ construits-Traitement\ données\ en\ tables/types\_construits\_python-v2.pdf}.
+\end{itemize}
+
+\subsection{Méthodes}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Capacités explicitement travaillées dans les méthodes et exercices :
+  P-DATA-CONSTR-01.
+\item
+  P-DATA-CONSTR-01 : choisir une structure selon l'accès attendu.
+\item
+  Identifier les données d'entrée de tuples puis écrire le résultat
+  attendu avant de conclure.
+\item
+  Contrôler tuples par un cas limite explicite et une vérification
+  courte.
+\item
+  Relier la réponse à un support de séance P04 sans confondre fiche de
+  révision et preuve de couverture.
+\end{enumerate}
+
+\subsection{Exemples corrigés}
+
+\subsubsection{Exemple corrigé 1 - Exemple principal}
+
+Le tuple \texttt{point\ =\ (3,\ 5)} regroupe deux coordonnées liées. La
+fonction \texttt{milieu((1,\ 2),\ (5,\ 8))} renvoie
+\texttt{((1+5)/2,\ (2+8)/2)}, donc \texttt{(3.0,\ 5.0)}. On ne modifie
+pas directement \texttt{point{[}0{]}} : si une nouvelle coordonnée est
+nécessaire, on construit un nouveau tuple. \#\#\# Exemple corrigé 2 -
+Contrôle ou contre-exemple La liste
+\texttt{temperatures\ =\ {[}18,\ 20,\ 19{]}} accepte
+\texttt{temperatures{[}1{]}\ =\ 21}, car elle est mutable. Le tuple
+\texttt{coord\ =\ (18,\ 20)} refuserait \texttt{coord{[}1{]}\ =\ 21}. Le
+choix de structure dépend donc de l'opération attendue : modifier une
+série ou figer un couple de valeurs.
+
+\subsection{Erreurs fréquentes}
+
+\begin{itemize}
+\tightlist
+\item
+  Confondre le vocabulaire de tuples avec une simple récitation :
+  corriger par un exemple calculé ou exécuté.
+\item
+  Oublier une hypothèse de tuples, listes et dictionnaires : corriger en
+  l'écrivant avant la méthode.
+\item
+  Conclure sans contrôle sur types construits : corriger par un cas
+  limite ou une vérification inverse.
+\end{itemize}
+
+\subsection{Cas limites}
+
+\begin{itemize}
+\tightlist
+\item
+  Cas de départ vide ou nul pour tuples, à traiter selon la convention
+  du chapitre P04.
+\item
+  Donnée invalide dans tuples, listes et dictionnaires, par exemple
+  symbole interdit, clé absente ou requête trop large selon la fiche.
+\item
+  Cas frontière de types construits où une seule valeur change la
+  méthode ou le résultat attendu.
+\end{itemize}
+
+\subsection{Mini-exercices}
+
+\subsubsection{Mini-exercice 1}
+
+P-DATA-CONSTR-01 : appliquer la méthode de tuples à un exemple court
+choisi dans le chapitre P04. \#\#\# Mini-exercice 2 Repérer l'erreur
+dans une réponse qui oublie une hypothèse de tuples, listes et
+dictionnaires. \#\#\# Mini-exercice 3 Proposer un cas limite pertinent
+pour types construits et expliquer le résultat attendu. \#\#\#
+Mini-exercice 4 Écrire une phrase de contrôle qui vérifie la conclusion
+obtenue pour tuples.
+
+\subsection{Réponses rapides}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  La méthode attendue pour tuples commence par les données puis applique
+  l'opération du chapitre P04.
+\item
+  L'erreur vient de l'hypothèse manquante ; elle se corrige en testant
+  le cas mentionné dans tuples, listes et dictionnaires.
+\item
+  Le cas limite doit donner un résultat explicite, par exemple 0, vide,
+  absent ou hors plage selon types construits.
+\item
+  Le contrôle compare le résultat avec la définition ou avec une
+  opération inverse de tuples.
+\end{enumerate}
+
+\subsection{À retenir}
+
+\begin{itemize}
+\tightlist
+\item
+  P04 : tuples se révise avec une définition, une méthode et un exemple
+  corrigé.
+\item
+  Les capacités P-DATA-CONSTR-01 restent en travail tant que TD, TP,
+  évaluation, barème et revues humaines manquent.
+\item
+  Un exemple de types construits doit changer autre chose qu'une simple
+  valeur pour tester la compréhension.
+\item
+  Pour P04, le tableau de liens distingue les supports existants et les
+  supports inscrits au registre.
+\item
+  La fiche P04 sur tuples reste needs\_review et ne déclenche ni
+  publication ni couverture.
+\end{itemize}
+
+\subsection{Lien avec la progression}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Élément
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Fichier
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Statut
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Remarque
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Séance & P04-S1 & prête & séance présente dans la progression \\
+TD &
+03\_progressions/supports/premiere/P04/P04\_td\_types\_construits.md &
+existant & support associé existant dans 03\_progressions/supports \\
+TP &
+03\_progressions/supports/premiere/P04/P04\_tp\_types\_construits.md &
+existant & support associé existant dans 03\_progressions/supports \\
+Évaluation &
+03\_progressions/supports/premiere/P04/P04\_evaluation\_types\_construits.md
+& existant & support associé existant dans 03\_progressions/supports \\
+\end{longtable}
+
+\subsection{Auto-évaluation}
+
+\begin{itemize}
+\tightlist
+\item
+  Je peux expliquer tuples avec un exemple différent de ceux de la fiche
+  P04.
+\item
+  Je peux citer au moins une capacité parmi P-DATA-CONSTR-01 et dire où
+  elle est travaillée dans la fiche.
+\item
+  Je peux dire quel support lié à P04 existe déjà ou reste inscrit au
+  registre.
+\item
+  Je peux identifier un cas limite de types construits sans transformer
+  la fiche en corrigé complet.
+\end{itemize}

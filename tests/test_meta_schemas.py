@@ -10,7 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 EX_SCHEMA = json.loads((ROOT / "schemas" / "exercice.schema.json").read_text(encoding="utf-8"))
 META = re.compile(r"% META: (\{.*\})")
 
-tex_files = sorted((ROOT / "chapitres").rglob("*.tex"))
+tex_files = sorted(
+    f for f in (ROOT / "chapitres").rglob("*.tex")
+    if "_harvest" not in f.parts and not f.name.endswith(".candidate.tex")
+)
 
 
 @pytest.mark.parametrize("tex", tex_files, ids=lambda p: str(p.relative_to(ROOT)))
