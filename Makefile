@@ -1,4 +1,4 @@
-.PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter test gates-corpus gates-corpus-strict
+.PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter test gates-corpus gates-corpus-strict lot-gates
 
 PY := .venv/bin/python
 CHAP ?= 1NSI-TYPES-CONSTRUITS
@@ -45,6 +45,24 @@ gates-corpus:
 	$(PY) scripts/gates_corpus/check_qcm_schema.py --chap $(CHAP)
 	$(PY) scripts/gates_corpus/check_sql_query_result_consistency.py
 	$(PY) scripts/gates_corpus/check_boyer_moore_trace_consistency.py
+
+lot-gates:
+	@echo "=== make verify ==="
+	$(PY) scripts/verify_python.py --chap $(CHAP)
+	@echo "=== make accents ==="
+	@! grep -rnE '\\\\(textsc|title=)\{[^}]*(Definition|Theoreme|Propriete|Methode|Bareme|Evaluation|Corrige de|frequente|estimes|Reussite)' gabarits chapitres --include='*.tex' --include='*.cls' \
+	  || (echo 'FAIL R10 : libellés sans accents détectés' && exit 1)
+	@echo "accents OK"
+	@echo "=== gates-corpus-strict ==="
+	$(PY) scripts/gates_corpus/check_eleve_no_corrige.py
+	$(PY) scripts/gates_corpus/check_td_corrige_alignment.py --chap $(CHAP) --strict
+	$(PY) scripts/gates_corpus/check_no_placeholders.py
+	$(PY) scripts/gates_corpus/check_differentiation_quality.py --chap $(CHAP)
+	$(PY) scripts/gates_corpus/check_qcm_schema.py --chap $(CHAP) --strict
+	$(PY) scripts/gates_corpus/check_sql_query_result_consistency.py
+	$(PY) scripts/gates_corpus/check_boyer_moore_trace_consistency.py
+	$(PY) scripts/gates_corpus/check_console_trace.py --chap $(CHAP)
+	@echo "=== ALL LOT GATES PASSED ==="
 
 gates-corpus-strict:
 	$(PY) scripts/gates_corpus/check_eleve_no_corrige.py

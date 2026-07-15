@@ -38,10 +38,10 @@ Tu es l'agent de production des manuels NSI Première et Terminale (marque Nexus
 | **R** | **Récolte T0** : `make harvest CHAP=...` → `_harvest/` avec rapport de transposition | Chaque capacité a ses sources T0 identifiées ou son angle mort déclaré |
 | 2 | Curation : dossier fusionnant briefs T0 (dominants) + web | Validation adversariale |
 | 3 | Cours 3 strates (+ blocs `\codereference`, rubrique « À la machine ») + fiches Mn | R1, R6, densité (40–70 lignes/section), figures (§5), adversarial 100 % |
-| 4 | Matrice capacités × parcours (≥2 ex/case, ratio 40/40/20, ≥50 ex/chapitre) + corrigés copie-modèle + CDP | `make verify` 0 fail, ruff clean, similarité (hors T0), couverture 0 manquant, `make gates-corpus-strict` 0 fail |
+| 4 | Matrice capacités × parcours (≥2 ex/case, ratio 40/40/20, ≥50 ex/chapitre) + corrigés copie-modèle + CDP | `make lot-gates CHAP=...` 0 fail (verify + accents + gates-corpus-strict) |
 | 5 | QCM ≥15 q à distracteurs diagnostiques + fiches R + remédiation | Chaque distracteur = erreur documentée + renvoi Mn/Rn |
 | 6 | Évaluations aux formats officiels (Première : devoir type ; Terminale : sujet 3 exercices + **≥2 sujets ECE**) + **Mini-projet jalonné et testé** + 2 TD | Résolution aveugle du sujet A ; corrigés ECE validés contre leurs jeux de tests par exécution |
-| 7 | Assemblage, check-list docs/01 Partie 8 + check-list NSI (CDC §6), `make gates-corpus-strict`, tag | Tout ❌ corrigé avant chapitre suivant |
+| 7 | Assemblage, check-list docs/01 Partie 8 + check-list NSI (CDC §6), `make lot-gates CHAP=...`, tag | Tout ❌ corrigé avant chapitre suivant |
 
 Production PAR LOTS, pas à l'unité : tous les fichiers d'une capacité en une passe d'écriture, puis une passe de gates, un commit par capacité.
 

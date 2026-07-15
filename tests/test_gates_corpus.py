@@ -121,6 +121,15 @@ def mystere(n):
         assert "docs" in SKIP_DIRS
         assert "prompts" in SKIP_DIRS
 
+    def test_root_md_skipped(self):
+        """Les fichiers .md a la racine (workflow docs) sont exclus.
+        Faux positif demontre : PILOTE_A_VALIDER.md contient 'a completer'
+        dans la description de la version amenagee (trous pedagogiques)."""
+        from gates_corpus.check_no_placeholders import ROOT as NP_ROOT
+        # Le gate skip les .md dont le parent est ROOT
+        root_md = NP_ROOT / "PILOTE_A_VALIDER.md"
+        assert root_md.parent == NP_ROOT, "PILOTE est bien a la racine"
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

@@ -1,10 +1,12 @@
 % META: {"id": "1NSI-TC-EX-042", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
-% BEGIN-TRACE
+% BEGIN-VERIFY
 % joueur = {"nom": "Bob", "elo": 1800}
-% print(joueur["rang"])
-% EXPECTED
-% KeyError: 'rang'
-% END-TRACE
+% try:
+%     joueur["rang"]
+%     assert False, "KeyError attendu"
+% except KeyError:
+%     pass
+% END-VERIFY
 \begin{exercice}{1NSI-TC-EX-042}{2}{8}
 On considère le code suivant :
 \begin{python}

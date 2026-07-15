@@ -26,6 +26,9 @@ def main() -> int:
             continue
         if SKIP_DIRS & set(path.parts):
             continue
+        # Skip workflow/report files at root level
+        if path.parent == ROOT and path.suffix == ".md":
+            continue
         text = path.read_text(encoding="utf-8", errors="replace")
         matches = PLACEHOLDER_RE.findall(text)
         if matches:

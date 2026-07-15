@@ -85,7 +85,7 @@ stations = [
     {"nom": "Sud", "temperature": 24},
     {"nom": "Est", "temperature": 20},
 ]
-print(stations_chaudes(stations, 20))  # ["Sud", "Est"]
+print(stations_chaudes(stations, 17))  # ["Nord", "Sud", "Est"]
 \end{python}
 \end{codereference}
 
@@ -97,7 +97,7 @@ print(stations_chaudes(stations, 20))  # ["Sud", "Est"]
 %             resultat.append(s["nom"])
 %     return resultat
 % stations = [{"nom": "Nord", "temperature": 18}, {"nom": "Sud", "temperature": 24}, {"nom": "Est", "temperature": 20}]
-% assert stations_chaudes(stations, 20) == ["Sud", "Est"]
+% assert stations_chaudes(stations, 20) == ["Sud"]
 % assert stations_chaudes(stations, 30) == []
 % assert stations_chaudes(stations, 17) == ["Nord", "Sud", "Est"]
 % END-VERIFY
