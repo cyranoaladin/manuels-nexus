@@ -57,7 +57,7 @@ def main(chap: str, variant: str) -> int:
     env["TEXINPUTS"] = f"./gabarits/:{env.get('TEXINPUTS', '')}"
     for _ in range(2):
         proc = subprocess.run(
-            ["pdflatex", "-interaction=nonstopmode",
+            ["lualatex", "-interaction=nonstopmode",
              f"-output-directory={build}", str(tex_path)],
             capture_output=True, cwd=ROOT, env=env)
     pdf_path = build / (tex_path.stem + ".pdf")
