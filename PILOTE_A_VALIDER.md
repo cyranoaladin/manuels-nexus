@@ -1,67 +1,81 @@
-# PILOTE A VALIDER — 1NSI-TYPES-CONSTRUITS
+# PILOTE A VALIDER --- 1NSI-TYPES-CONSTRUITS
 
-PDF : `build/1NSI-TYPES-CONSTRUITS/1NSI-TYPES-CONSTRUITS_complet.pdf` (32 pages, 607 Ko)
+PDF : `build/1NSI-TYPES-CONSTRUITS/1NSI-TYPES-CONSTRUITS_complet.pdf` (641 Ko)
 
-## Contenu du chapitre pilote
+## Contenu du chapitre pilote (complet)
 
 | Composant | Quantite | Status |
 |---|---|---|
-| Cours 3 strates (C1-C5) | 5 sections | needs_review |
-| Fiches methodes (M1-M5) | 5 | needs_review |
-| Exercices (3 parcours) | 54 | needs_review |
-| Corriges | 3 (pilotes) | needs_review |
-| Coups de pouce | 3 (pilotes) | needs_review |
-| QCM diagnostique | 16 questions | needs_review |
-| Remediation | 5 fiches R1-R5 | needs_review |
-| Evaluation A | 4 exercices, 55 min | needs_review |
-| Mini-projet | 4 jalons + extensions | needs_review |
-| Version amenagee | Source recoltee, a transposer | pending |
+| Cours 3 strates (C1-C5) | 5 sections, 40-70 lignes chacune | needs_review |
+| Fiches methodes (M1-M5) | 5 (6 rubriques chacune) | needs_review |
+| Exercices (3 parcours) | 55 (P1=24, P2=21, P3=10 -- ratio 44/38/18) | needs_review |
+| Corriges copie-modele | 55/55 (100%) | needs_review |
+| Coups de pouce | 24 (tous les P1) | needs_review |
+| QCM diagnostique | 16 questions, C1-C5 couverts, 27 diagnostics | needs_review |
+| Remediation | 5 fiches R1-R5 (1 par capacite) | needs_review |
+| Evaluation A | 4 exercices, 55 min, contexte e-sport | needs_review |
+| Evaluation B | 4 exercices, 55 min, inventaire/morpion/carnet | needs_review |
+| TD 1 | Station meteo, 5 exercices, 50 min (C1/C2/C4) | needs_review |
+| TD 2 | Classement tournoi, 5 exercices, 50 min (C2/C3/C4/C5) | needs_review |
+| Mini-projet | E-sport, 4 jalons + extensions | needs_review |
+| Version amenagee (F11) | Extrait 3 exercices (C1/C2/C5), format trous | needs_review |
+
+## Gates passes (tous VERT en mode strict)
+
+- `make accents` : OK
+- `make test` : 165 passed
+- `make gates-corpus-strict` :
+  - eleve-no-corrige : 73 fichiers, 0 fuite
+  - td-corrige alignment : 55/55
+  - no placeholders : 0
+  - differentiation : P1=44% P2=38% P3=18%
+  - QCM : 16 questions, C1-C5
 
 ## Sources T0 utilisees
 
-- Sequence P04 (tuples/listes/dictionnaires) : 21 fichiers recoltes
+- Sequence P04 : 21 fichiers recoltes, 19 conversions pandoc
 - 3 fiches de cours (tuples, listes, dictionnaires)
-- Code executable : starter + corrige_professeur + tests_attendus (3/3 OK)
+- Code : starter + corrige_professeur + tests_attendus (3/3 OK)
 - Contrat P04_contract.yml
 - Verdict substance P-DATA-CONSTR-02A : needs_review (human_review_required)
 
 ## Points de jugement humain
 
-1. **Figures memoire (C5)** : les schemas TikZ alias/copie sont-ils clairs et corrects ?
-   Faut-il plus de figures (ex: representation memoire des dictionnaires) ?
+1. **Figures memoire (C3, C5)** : schemas TikZ alias/copie/grille. Clairs ?
+   Faut-il plus de figures (representation memoire des dictionnaires) ?
 
-2. **Densite des `\codereference`** : chaque section a un bloc de code de reference commente.
-   Le niveau de detail des commentaires est-il adapte a la Premiere ?
+2. **Densite des `\codereference`** : un bloc par section de cours, commente.
+   Niveau de detail adapte a la Premiere ?
 
-3. **Equilibre transposition/reecriture** : le cours est une transposition enrichie du T0
-   (ajout de contre-exemples, erreurs frequentes, figures, rubriques "A la machine").
-   Le ton et la progressivite sont-ils adaptes au public cible ?
+3. **Equilibre transposition/reecriture** : cours transpose du T0 avec
+   enrichissement (contre-exemples, EF1-4, figures, "A la machine").
+   Ton et progressivite adaptes ?
 
-4. **Distinction code/console** : les environnements `python` (code) et `console` (session
-   interactive) sont visuellement distincts. Est-ce suffisamment clair ?
+4. **Distinction code/console** : `python` (fond blanc, filet, numeros) vs
+   `console` (fond gris, chevrons >>>). Visuellement suffisant ?
 
-5. **QCM distracteurs** : chaque mauvaise reponse pointe vers l'erreur commise et renvoie
-   a la definition/methode/erreur frequente correspondante. Le format est-il utile ?
+5. **QCM distracteurs** : chaque mauvaise reponse = diagnostic + renvoi
+   Mn/Dn/EFn. Format utile ?
 
-6. **Couverture des 5 capacites** : C1 (tuples), C2 (tableaux), C3 (grilles),
-   C4 (dictionnaires), C5 (mutabilite). Des lacunes ?
+6. **Version amenagee** : extrait avec consignes sequencees, trous a completer,
+   tableaux a remplir, mise en page aeree. Format adapte aux eleves
+   a besoins particuliers ?
 
-7. **Evaluation** : le sujet A couvre les 5 capacites en 55 min avec contexte e-sport.
-   Le niveau est-il calibre pour la Premiere ?
+7. **Evaluations A/B** : deux sujets de 55 min, 4 exercices chacun, 5 capacites
+   croisees. Niveau calibre ? Contextes varies (e-sport/inventaire/morpion) ?
 
-8. **Mini-projet** : 4 jalons progressifs (donnees, calcul, tri, affichage) avec criteres
-   testables. Les extensions ◆◆◆ sont-elles realistes ?
+8. **TD thematiques** : station meteo (C1/C2/C4) et classement tournoi
+   (C2/C3/C4/C5). Pertinence et difficulte ?
 
-## Statuts herites
+9. **Mini-projet** : 4 jalons progressifs avec criteres testables.
+   Extensions ◆◆◆ realistes ?
 
-- P-DATA-CONSTR-02A : needs_review (human_review_required) — propagation F08
-- Tous les objets portent le statut `needs_review` herite du corpus
+## Statuts herites (F08)
 
-## Prochaines etapes apres validation
+- P-DATA-CONSTR-02A : needs_review (human_review_required)
+- Tous les objets : needs_review (herite du corpus)
 
-- Completer les corriges pour les 54 exercices
-- Completer les coups de pouce (au moins 1 par exercice ◆/◆◆)
-- Transposer la version amenagee (F11)
-- Produire l'evaluation B
-- Harmoniser les renvois entre exercices, methodes et cours
-- Enchainer sur les 9 chapitres restants de Premiere
+## Apres validation
+
+Appliquer les retours, puis enchainer sans arret sur :
+Premiere ch. 2-10, Terminale ch. 1-12 + blocs ECE/ecrit, lots finaux.

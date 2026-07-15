@@ -18,10 +18,11 @@ RAPPORT_FINAL.md. Cocher ici chaque directive exécutée avec le hash du commit.
 ## Check-list active
 
 - [x] PHASE 0 : bootstrap — env, connexion corpus, referentiels generes, git init/commit.
-- [x] PILOTE 1NSI-TYPES-CONSTRUITS : LOT 0 → R → 2 → 3 → 4 → 5 → 6 → 7 (a6cdcd8, 050557e, LOT-7).
-- [ ] PAUSE UNIQUE AUTORISÉE : validation humaine du pilote (CDC §7.3) — produire le PDF,
-      lister les points de jugement (figures mémoire, densité codereference, équilibre
-      transposition/réécriture) dans PILOTE_A_VALIDER.md, puis attendre.
+- [x] PILOTE 1NSI-TYPES-CONSTRUITS : LOT 0→R→2→3→4→5→6→7 complet (55 ex, 55 corriges,
+      24 CDP, 16 QCM, 5 rem, 2 eval, 2 TD, 1 projet, 1 extrait amenagee).
+      Gates strict VERT, 165 tests, PDF 641 Ko.
+- [ ] PAUSE UNIQUE AUTORISÉE : validation humaine du pilote — PILOTE_A_VALIDER.md
+      avec 9 points de jugement, PDF joint, extrait version amenagee.
 - [ ] Après validation : Première chapitres 1, 3–10 (boucle complète chacun, sans arrêt).
 - [ ] Terminale chapitres 1–12 + blocs ECE/écrit.
 - [ ] LOTs FINAUX des deux manuels (blocs transversaux, assemblages, déclinaisons dont

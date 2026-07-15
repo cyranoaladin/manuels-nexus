@@ -1,0 +1,104 @@
+% META: {"id": "1NSI-TC-AM-EXTRAIT", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "amenagee", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "adaptation", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md"], "status": "needs_review"}
+\section*{Version aménagée --- Extrait Types construits}
+\textit{Consignes séquencées, mise en page aérée, énoncés allégés.}
+
+\bigskip
+
+\subsection*{Exercice 1 --- Reconnaître un tuple (C1)}
+
+Observe le programme ci-dessous :
+
+\begin{python}
+station = ("Tunis", 36.8, 10.2)
+\end{python}
+
+\bigskip
+
+\textbf{Étape 1.} Complète le tableau :
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Expression} & \textbf{Type} & \textbf{Valeur} \\
+\hline
+\lstinline{station[0]} & \dotfill & \dotfill \\
+\hline
+\lstinline{station[1]} & \dotfill & \dotfill \\
+\hline
+\lstinline{len(station)} & \dotfill & \dotfill \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+\textbf{Étape 2.} Essaie dans la console : \lstinline{station[1] = 37.0}
+
+\medskip
+Que se passe-t-il ? \dotfill
+
+\medskip
+Pourquoi ? Un tuple est \dotfill (mutable / non mutable).
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 2 --- Créer une liste (C2)}
+
+\textbf{Étape 1.} Crée un tableau de 4 prénoms :
+
+\begin{python}
+prenoms = [______, ______, ______, ______]
+\end{python}
+
+\textbf{Étape 2.} Ajoute un cinquième prénom :
+
+\begin{python}
+prenoms.______("Sami")
+\end{python}
+
+\textbf{Étape 3.} Combien d'éléments contient \lstinline{prenoms} maintenant ?
+
+\medskip
+\lstinline{len(prenoms)} = \dotfill
+
+\bigskip
+\bigskip
+
+\subsection*{Exercice 3 --- Copier sans erreur (C5)}
+
+\textbf{Lis} le programme ci-dessous, puis \textbf{entoure} la bonne réponse.
+
+\begin{python}
+notes = [12, 15, 9]
+copie = notes
+copie.append(18)
+\end{python}
+
+\bigskip
+
+Que vaut \lstinline{notes} après ces trois lignes ?
+
+\bigskip
+
+\begin{center}
+\fbox{\lstinline{[12, 15, 9]}} \qquad ou \qquad
+\fbox{\lstinline{[12, 15, 9, 18]}}
+\end{center}
+
+\bigskip
+
+Explique en une phrase : \dotfill
+
+\medskip
+\dotfill
+
+\bigskip
+
+\textbf{Corrige} la ligne 2 pour que \lstinline{notes} ne soit pas modifiée :
+
+\begin{python}
+copie = ______(notes)
+\end{python}
