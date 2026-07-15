@@ -52,15 +52,19 @@ def main(chap: str, variant: str) -> int:
     master = master.replace("%%CONTENT%%", inputs).replace("%%CHAP%%", chap)
     tex_path = build / f"{chap}_{variant}.tex"
     tex_path.write_text(master, encoding="utf-8")
+    import os
+    env = os.environ.copy()
+    env["TEXINPUTS"] = f"./gabarits/:{env.get('TEXINPUTS', '')}"
     for _ in range(2):
         proc = subprocess.run(
-            ["pdflatex", "-interaction=nonstopmode", "-halt-on-error",
+            ["pdflatex", "-interaction=nonstopmode",
              f"-output-directory={build}", str(tex_path)],
-            capture_output=True, text=True, cwd=ROOT)
-    if proc.returncode != 0:
-        print(proc.stdout[-3000:])
+            capture_output=True, cwd=ROOT, env=env)
+    pdf_path = build / (tex_path.stem + ".pdf")
+    if not pdf_path.exists():
+        print(proc.stdout.decode("utf-8", errors="replace")[-3000:])
         return 1
-    print(f"PDF : {build / (tex_path.stem + '.pdf')}")
+    print(f"PDF : {pdf_path} ({pdf_path.stat().st_size // 1024} Ko)")
     return 0
 
 

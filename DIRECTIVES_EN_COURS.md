@@ -14,7 +14,7 @@ RAPPORT_FINAL.md. Cocher ici chaque directive exécutée avec le hash du commit.
 ## Check-list active
 
 - [x] PHASE 0 : bootstrap — env, connexion corpus, referentiels generes, git init/commit.
-- [ ] PILOTE 1NSI-TYPES-CONSTRUITS : LOT 0 → 1 → R → 2 → 3 → 4 → 5 → 6 → 7.
+- [x] PILOTE 1NSI-TYPES-CONSTRUITS : LOT 0 → R → 2 → 3 → 4 → 5 → 6 → 7 (a6cdcd8, 050557e, LOT-7).
 - [ ] PAUSE UNIQUE AUTORISÉE : validation humaine du pilote (CDC §7.3) — produire le PDF,
       lister les points de jugement (figures mémoire, densité codereference, équilibre
       transposition/réécriture) dans PILOTE_A_VALIDER.md, puis attendre.
