@@ -146,5 +146,169 @@ def mystere(n):
         assert root_md.parent == NP_ROOT, "PILOTE est bien a la racine"
 
 
+# --- check_accents_contenu patterns ---
+
+from gates_corpus.check_accents_contenu import find_violations
+
+
+class TestAccentsContenu:
+    def test_unaccented_pedagogical_word_fails(self):
+        """Un mot pedagogique sans accent dans le prose doit etre ROUGE."""
+        violations = find_violations("Cette sequence contient un element important.")
+
+        assert [(hit.word, hit.replacement) for hit in violations] == [
+            ("sequence", "séquence"),
+            ("element", "élément"),
+        ]
+
+    def test_code_environments_and_lstinline_are_ignored(self):
+        """Les identifiants Python et les listings inline ne sont pas du prose."""
+        text = r"""
+\begin{python}
+donnees = ["un element"]
+\end{python}
+\begin{console}
+>>> print("methode")
+\end{console}
+\begin{codereference}
+def cree_element():
+    return donnees
+\end{codereference}
+\lstinline|reponse = donnees[0]|
+\lstinline{resultat = eleves[0]}
+\label{sec:mutabilite} Voir \ref{sec:mutabilite}.
+Le résultat est correct. % sequence en commentaire
+"""
+
+        assert find_violations(text) == []
+
+    def test_visible_texttt_is_checked(self):
+        """Une commande \texttt visible reste du texte imprime controle."""
+        assert [hit.word for hit in find_violations(r"\texttt{eleve}")] == ["eleve"]
+
+    def test_commented_environment_cannot_mask_visible_prose(self):
+        """Un faux environnement en commentaire ne doit pas neutraliser le prose."""
+        text = "% \\begin{python}\nCette sequence reste visible.\n% \\end{python}"
+
+        assert [hit.word for hit in find_violations(text)] == ["sequence"]
+
+    def test_lstinline_environment_marker_cannot_mask_visible_prose(self):
+        r"""Un marqueur dans \lstinline ne doit pas ouvrir un faux environnement."""
+        text = r"\lstinline|\begin{python}| Une sequence visible.\end{python}"
+
+        assert [hit.word for hit in find_violations(text)] == ["sequence"]
+
+    def test_definition_is_only_forbidden_at_sentence_start(self):
+        """Le nom commun « definition » est controle au debut d'une phrase."""
+        assert [hit.word for hit in find_violations("Definition : une suite ordonnée.")] == [
+            "Definition"
+        ]
+        assert [hit.word for hit in find_violations("definition formelle.")] == [
+            "definition"
+        ]
+        assert [hit.word for hit in find_violations("Texte.Definition : une suite.")] == [
+            "Definition"
+        ]
+        assert [hit.word for hit in find_violations(r"\textbf{Definition} : une suite.")] == [
+            "Definition"
+        ]
+        assert [hit.word for hit in find_violations(r"\par Definition : une suite.")] == [
+            "Definition"
+        ]
+        assert [hit.word for hit in find_violations(r"\item Definition : une suite.")] == [
+            "Definition"
+        ]
+        assert find_violations("Une phrase se poursuit\nDefinition sans ponctuation.") == []
+        assert find_violations("Une definition formelle est fournie.") == []
+
+
+# --- check_ascii_code patterns ---
+
+from gates_corpus.check_ascii_code import FORBIDDEN_CHARACTERS, find_violations as find_ascii_violations
+
+
+@pytest.mark.parametrize("character", FORBIDDEN_CHARACTERS)
+@pytest.mark.parametrize(
+    "context, source",
+    [
+        ("python", "\\begin{python}\nvaleur = '{character}'\n\\end{python}"),
+        ("console", "\\begin{console}\n>>> print('{character}')\n\\end{console}"),
+        ("codereference", "\\begin{codereference}\nvaleur = '{character}'\n\\end{codereference}"),
+        ("lstinline", "\\lstinline|valeur = '{character}'|"),
+    ],
+)
+def test_ascii_code_forbidden_character_fails_in_every_code_context(context, source, character):
+    """Chaque caractere typographique interdit rend le gate ROUGE dans le code."""
+    violations = find_ascii_violations(source.replace("{character}", character))
+
+    assert [(hit.context, hit.character) for hit in violations] == [(context, character)]
+
+
+def test_ascii_code_typographic_characters_are_allowed_in_prose():
+    """La typographie française hors code ne relève pas de ce gate."""
+    prose = "Voici ‘un’ « exemple » — avec des guillemets typographiques."
+
+    assert find_ascii_violations(prose) == []
+
+
+def test_ascii_code_codereference_title_is_not_scanned_as_code():
+    """L'argument-titre de codereference est du prose, pas du code."""
+    text = r"""\begin{codereference}{Titre « visible »}
+valeur = "ASCII"
+\end{codereference}"""
+
+    assert find_ascii_violations(text) == []
+
+
+def test_ascii_code_ignores_commented_fake_code_markers():
+    """Les marqueurs de code commentés ne constituent pas des blocs exécutables."""
+    text = "% \\begin{python}\n% valeur = \"«\"\n% \\end{python}"
+
+    assert find_ascii_violations(text) == []
+
+
+def test_ascii_code_ignores_commented_lstinline_marker():
+    """Un lstinline LaTeX commenté n'est pas du code affiché."""
+    assert find_ascii_violations(r"% \lstinline {valeur = \"«\"}") == []
+
+
+def test_ascii_code_detects_lstinline_with_whitespace_before_braces():
+    """Un espace optionnel après lstinline ne désactive pas le contrôle."""
+    violations = find_ascii_violations(r"\lstinline {valeur = \"«\"}")
+
+    assert [(hit.context, hit.character) for hit in violations] == [("lstinline", "«")]
+
+
+def test_ascii_code_lstinline_marker_cannot_open_a_fake_environment():
+    """Un begin dans un lstinline ne transforme pas le prose suivant en code."""
+    text = r"\lstinline|\begin{python}| Texte « visible ».\end{python}"
+
+    assert find_ascii_violations(text) == []
+
+
+@pytest.mark.parametrize(
+    "context, source",
+    [
+        ("python", "\\begin{python}\nreste = 10 % 3; valeur = \"«\"\n\\end{python}"),
+        ("console", "\\begin{console}\n>>> 10 % 3; print(\"«\")\n\\end{console}"),
+        ("lstinline", "\\lstinline|reste = 10 % 3; valeur = \"«\"|"),
+    ],
+)
+def test_ascii_code_percent_is_literal_inside_real_code(context, source):
+    """Un pourcent dans le code ne doit pas masquer la ponctuation interdite."""
+    violations = find_ascii_violations(source)
+
+    assert [(hit.context, hit.character) for hit in violations] == [(context, "«")]
+
+
+def test_ascii_code_codereference_nested_title_is_not_scanned_as_code():
+    """Le titre codereference accepte les accolades TeX imbriquées."""
+    text = r"""\begin{codereference}{Titre \texttt{« visible »}}
+valeur = "ASCII"
+\end{codereference}"""
+
+    assert find_ascii_violations(text) == []
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

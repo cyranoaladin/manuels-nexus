@@ -94,7 +94,7 @@ la ligne \texttt{i}. Donner le résultat pour la ligne 0 de
 \subsection{Question 4 - P-DATA-CONSTR-03A (4 points)}
 
 \textbf{4a.} (2 pts) Compléter le code suivant pour construire un
-dictionnaire \texttt{eleve} avec les entrées \texttt{"nom"} (valeur
+dictionnaire \lstinline|eleve| avec les entrées \lstinline|"nom"| (valeur
 \texttt{"Martin"}), \texttt{"prenom"} (valeur \texttt{"Léa"}),
 \texttt{"age"} (valeur \texttt{16}) et \texttt{"classe"} (valeur
 \texttt{"1NSI"}).
@@ -108,8 +108,8 @@ eleve[_____] = _____
 \end{python}
 
 \textbf{4b.} (1 pt) Que se passe-t-il si on exécute ensuite
-\texttt{eleve{[}"age"{]}\ =\ 17} ? Quelle est la nouvelle valeur de
-\texttt{eleve{[}"age"{]}} ?
+\lstinline|eleve["age"] = 17| ? Quelle est la nouvelle valeur de
+\lstinline|eleve["age"]| ?
 
 \textbf{4c.} (1 pt) Pourquoi l'instruction
 \texttt{d{[}{[}1,\ 2{]}{]}\ =\ "valeur"} provoque-t-elle une erreur ?
@@ -151,8 +151,7 @@ choisir et comment organiser les accès ?
 \subsection{Activité d’entrée}
 
 Écrire une fonction Python qui reçoit deux nombres et renvoie à la fois
-leur somme et leur produit. Tester avec print(resultat{[}0{]},
-resultat{[}1{]}).
+leur somme et leur produit. Tester avec \lstinline|print(resultat[0], resultat[1])|.
 
 \subsection{Exemple}
 

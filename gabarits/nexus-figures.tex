@@ -1,6 +1,8 @@
 % nexus-figures.tex — Style pgfplots normalisé et environnement pour figures Nexus Réussite
 % Règle : capacité graphique ⇒ ≥2 figures cours, ≥1 exercices ;
 %         chapitre analyse ≥6 figures, géométrie ≥10.
+% Étiquettes : courbe en fin, à droite ; tangente sous la droite ; point de
+% contact seul (disque bleu 1.6 pt) ; grille nxGris!15 ; graduations utiles.
 
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=1.18}
@@ -14,14 +16,14 @@
     axis lines=middle,
     axis line style={nxGris,line width=0.5pt,-{Stealth[length=4pt]}},
     grid=major,
-    grid style={nxGris!20,line width=0.3pt},
+    grid style={nxGris!15,line width=0.3pt},
     tick style={nxGris,line width=0.4pt},
     tick label style={font=\footnotesize,color=nxGris},
     label style={font=\small},
     every axis plot/.append style={line width=1.1pt},
     % Styles nommés pour les objets courants
     courbe/.style={nxBleu,line width=1.1pt},
-    tangente/.style={nxOr,line width=1.1pt},
+    tangente/.style={nxOr!75!black,line width=1.1pt},
     secante/.style={nxOr!60,line width=0.8pt,dashed},
     point/.style={only marks,mark=*,mark size=1.6pt,nxBleu},
     aire/.style={fill=nxVert!15,draw=none},
@@ -30,6 +32,9 @@
     height=0.5\linewidth,
   }
 }
+
+% À employer avec \node[right,nxBleu] en fin de courbe et
+% \node[below,nxOr!75!black] sous une tangente : aucun label sur le tracé.
 
 % ============================================================
 %  ENVIRONNEMENT NUMÉROTÉ

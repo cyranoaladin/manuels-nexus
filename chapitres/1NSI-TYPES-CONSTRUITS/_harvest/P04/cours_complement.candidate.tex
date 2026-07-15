@@ -91,7 +91,7 @@ x, y = nom_fonction(arguments)
 
 \begin{python}
 def min_max(tableau):
-    """Renvoie le minimum et le maximum d’un tableau non vide."""
+    """Renvoie le minimum et le maximum d'un tableau non vide."""
     mini = tableau[0]
     maxi = tableau[0]
     for val in tableau:
@@ -152,7 +152,7 @@ def milieu(xa, ya, xb, yb):
 
 \subsubsection{Définition}
 
-Un \textbf{tableau par compréhension} (list comprehension) permet de
+Un \textbf{tableau par compréhension} (\lstinline|list comprehension|) permet de
 construire une liste en une seule expression lisible. On se limite aux
 formes simples et lisibles.
 
@@ -595,7 +595,7 @@ d = {"x": 1, "y": 2}
 vue = d.keys()
 print(list(vue))  # ['x', 'y']
 d["z"] = 3
-print(list(vue))  # ['x', 'y', 'z']  — la vue reflète l'ajout
+print(list(vue))  # ['x', 'y', 'z']; la vue reflète l'ajout
 \end{python}
 
 \begin{itemize}
@@ -657,8 +657,7 @@ choisir et comment organiser les accès ?
 \subsection{Activité d’entrée}
 
 Écrire une fonction Python qui reçoit deux nombres et renvoie à la fois
-leur somme et leur produit. Tester avec print(resultat{[}0{]},
-resultat{[}1{]}).
+leur somme et leur produit. Tester avec \lstinline|print(resultat[0], resultat[1])|.
 
 \subsection{Exercices}
 

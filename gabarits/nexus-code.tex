@@ -19,7 +19,7 @@
   boxrule=0pt, leftrule=0pt, toprule=0pt,
   sharp corners,
   title={\color{white}\sffamily\bfseries\fontsize{8.5}{11}\selectfont
-    \addfontfeatures{LetterSpace=4}\textsc{Code de référence} --- #1},
+    \addfontfeatures{LetterSpace=4}\MakeUppercase{Code de référence} --- #1},
   coltitle=white, colbacktitle=nxBleu,
   before skip=9pt, after skip=9pt,
   left=8pt, right=8pt, top=4pt, bottom=4pt}
@@ -29,9 +29,9 @@
 \newcommand{\alamachine}[1]{\par\medskip\noindent
   {\sffamily\bfseries\color{nxVert}\pictoPython~À la machine.}\ #1\par\medskip}
 
-% Mini-projet (boite nxOr, detach title comme nxbase)
-\newtcolorbox{mpbox}[1]{nxbase, colframe=nxOr!85!black, colback=nxOr!5,
-  title={\textsc{Mini-projet} --- #1}}
+% Mini-projet : même titre déterministe que les autres encadrés.
+\newtcolorbox{mpbox}[1]{nxbase, colframe=nxOr!75!black, colback=nxOr!5,
+  title={\nxboxtitle{nxOr!75!black}{Mini-projet --- #1}}}
 \newenvironment{miniprojet}[1]{\begin{mpbox}{#1}}{\end{mpbox}}
 \newcommand{\jalon}[2]{\par\noindent{\sffamily\bfseries Jalon #1.}\ #2\par}
 \newcommand{\criteresValidation}[1]{\par\noindent{\small\itshape Critères de validation (testables) : #1}\par}

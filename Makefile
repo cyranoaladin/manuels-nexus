@@ -32,6 +32,7 @@ coverage:
 accents:
 	@! grep -rnE '\\\\(textsc|title=)\{[^}]*(Definition|Theoreme|Propriete|Methode|Bareme|Evaluation|Corrige de|frequente|estimes|Reussite)' gabarits chapitres --include='*.tex' --include='*.cls' \
 	  || (echo 'FAIL R10 : libellés sans accents détectés' && exit 1)
+	$(PY) scripts/gates_corpus/check_accents_contenu.py
 	@echo "accents OK"
 
 chapter:
@@ -39,6 +40,7 @@ chapter:
 
 gates-corpus:
 	$(PY) scripts/gates_corpus/check_eleve_no_corrige.py
+	$(PY) scripts/gates_corpus/check_ascii_code.py
 	$(PY) scripts/gates_corpus/check_td_corrige_alignment.py --chap $(CHAP)
 	$(PY) scripts/gates_corpus/check_no_placeholders.py
 	$(PY) scripts/gates_corpus/check_differentiation_quality.py --chap $(CHAP)
@@ -52,6 +54,8 @@ lot-gates:
 	@echo "=== make accents ==="
 	@! grep -rnE '\\\\(textsc|title=)\{[^}]*(Definition|Theoreme|Propriete|Methode|Bareme|Evaluation|Corrige de|frequente|estimes|Reussite)' gabarits chapitres --include='*.tex' --include='*.cls' \
 	  || (echo 'FAIL R10 : libellés sans accents détectés' && exit 1)
+	$(PY) scripts/gates_corpus/check_accents_contenu.py
+	$(PY) scripts/gates_corpus/check_ascii_code.py
 	@echo "accents OK"
 	@echo "=== gates-corpus-strict ==="
 	$(PY) scripts/gates_corpus/check_eleve_no_corrige.py
@@ -66,6 +70,7 @@ lot-gates:
 
 gates-corpus-strict:
 	$(PY) scripts/gates_corpus/check_eleve_no_corrige.py
+	$(PY) scripts/gates_corpus/check_ascii_code.py
 	$(PY) scripts/gates_corpus/check_td_corrige_alignment.py --chap $(CHAP) --strict
 	$(PY) scripts/gates_corpus/check_no_placeholders.py
 	$(PY) scripts/gates_corpus/check_differentiation_quality.py --chap $(CHAP)

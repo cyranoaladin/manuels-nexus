@@ -110,8 +110,8 @@ matrice = [
 zeros = [[0 for j in range(colonnes)] for i in range(lignes)]
 \end{python}
 
-\textbf{Erreur a eviter} : \texttt{{[}{[}0{]}*p{]}*n} partage les memes
-lignes en memoire.
+\textbf{Erreur à éviter} : \texttt{{[}{[}0{]}*p{]}*n} partage les mêmes
+lignes en mémoire.
 
 \textbf{Exemple clé - parcours} :
 
@@ -161,7 +161,7 @@ def compter(texte):
     return freq
 \end{python}
 
-\textbf{A retenir} : les clés doivent etre immuables (str, int, tuple).
+\textbf{À retenir} : les clés doivent être immuables (str, int, tuple).
 Les listes ne sont pas des clés valides.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -229,8 +229,7 @@ choisir et comment organiser les accès ?
 \subsection{Activité d’entrée}
 
 Écrire une fonction Python qui reçoit deux nombres et renvoie à la fois
-leur somme et leur produit. Tester avec print(resultat{[}0{]},
-resultat{[}1{]}).
+leur somme et leur produit. Tester avec \lstinline|print(resultat[0], resultat[1])|.
 
 \subsection{Exercices}
 
