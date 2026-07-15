@@ -10,8 +10,14 @@
 \RequirePackage{amsmath,amssymb,amsthm}
 \RequirePackage[table]{xcolor}
 \RequirePackage[most]{tcolorbox}
-\RequirePackage{marginnote,geometry,graphicx,enumitem,pifont,listings,fancyhdr,eurosym}
+\RequirePackage{marginnote,geometry,graphicx,enumitem,pifont,listings,fancyhdr,eurosym,microtype,titlesec}
+\RequirePackage{libertine}
 \geometry{a4paper,inner=2cm,outer=4.5cm,top=2.2cm,bottom=2.2cm,marginparwidth=3.6cm,marginparsep=0.5cm}
+\raggedbottom
+\widowpenalty=10000 \clubpenalty=10000
+\renewcommand{\familydefault}{\rmdefault}
+\setlength{\parskip}{0.45em}
+\setlist{itemsep=0.25em,topsep=0.35em}
 
 % ---- Palette Nexus ----
 \definecolor{nxBleu}{HTML}{1B3A5C}
@@ -19,6 +25,13 @@
 \definecolor{nxGris}{HTML}{5A6472}
 \definecolor{nxRouge}{HTML}{B0413E}
 \definecolor{nxVert}{HTML}{2E6E4E}
+
+% Hiérarchie : titre d'ouverture, section-capacité, sous-partie.
+\titleformat{\section}{\sffamily\bfseries\color{nxBleu}\fontsize{15}{19}\selectfont}{\thesection}{0.8em}{}
+\titlespacing*{\section}{0pt}{2.1ex plus .4ex}{1.0ex}
+\titleformat{\subsection}{\sffamily\bfseries\color{nxBleu!85!black}\fontsize{12}{15}\selectfont}{\thesubsection}{0.7em}{}
+\titlespacing*{\subsection}{0pt}{1.6ex plus .3ex}{.7ex}
+\newcommand{\sectionCapacite}[2]{\section{#1}\margeAppui{\textbf{Je sais...} #2}}
 
 % ---- Pictogrammes / parcours ----
 \newcommand{\parcoursUn}{\textcolor{nxOr}{\ding{117}}}
@@ -28,9 +41,9 @@
 \newcommand{\pictoPython}{\textcolor{nxBleu}{\texttt{>\!\!>~Python}}}
 
 % ---- Strate 1 : encadrés du cours ----
-\newtcolorbox{nxdef}[1][]{colback=white,colframe=nxBleu,title=Définition~#1,fonttitle=\bfseries,enhanced,breakable}
-\newtcolorbox{nxthm}[1][]{colback=white,colframe=nxBleu!80!black,title=Théorème~#1,fonttitle=\bfseries,enhanced,breakable}
-\newtcolorbox{nxprop}[1][]{colback=white,colframe=nxGris,title=Propriété~#1,fonttitle=\bfseries,enhanced,breakable}
+\newtcolorbox{nxdef}[1][]{colback=nxBleu!4,colframe=nxBleu,boxrule=0pt,leftrule=1.2pt,title=\textsc{Définition}~#1,fonttitle=\sffamily\bfseries,enhanced,breakable}
+\newtcolorbox{nxthm}[1][]{colback=nxBleu!5,colframe=nxBleu!80!black,boxrule=0pt,leftrule=1.2pt,title=\textsc{Théorème}~#1,fonttitle=\sffamily\bfseries,enhanced,breakable}
+\newtcolorbox{nxprop}[1][]{colback=nxGris!6,colframe=nxGris,boxrule=0pt,leftrule=1.2pt,title=\textsc{Propriété}~#1,fonttitle=\sffamily\bfseries,enhanced,breakable}
 \newcommand{\definition}[2][]{\begin{nxdef}[#1]#2\end{nxdef}}
 \newcommand{\theoreme}[2][]{\begin{nxthm}[#1]#2\end{nxthm}}
 \newcommand{\propriete}[2][]{\begin{nxprop}[#1]#2\end{nxprop}}
@@ -40,15 +53,15 @@
 % ---- Strate 2 : marge d'appui et erreurs ----
 \newcommand{\margeAppui}[1]{\marginnote{\footnotesize\color{nxGris}\itshape #1}}
 \newcommand{\commentaireMarge}[1]{\marginnote{\footnotesize\color{nxBleu}#1}}
-\newtcolorbox{nxerr}{colback=nxRouge!6,colframe=nxRouge,title={\ding{115}~Erreur fréquente},fonttitle=\bfseries,breakable}
+\newtcolorbox{nxerr}{colback=nxRouge!6,colframe=nxRouge,boxrule=0pt,leftrule=1.2pt,title={\ding{115}~\textsc{Erreur fréquente}},fonttitle=\sffamily\bfseries,breakable}
 \newcommand{\erreurFrequente}[1]{\begin{nxerr}#1\end{nxerr}}
 
 % ---- Strate 3 : approfondissement ----
-\newtcolorbox{nxstar}{colback=nxBleu!5,colframe=nxBleu,title={$\bigstar$~Pour aller plus loin},fonttitle=\bfseries,breakable}
+\newtcolorbox{nxstar}{colback=nxBleu!5,colframe=nxBleu,boxrule=0.4pt,title={$\bigstar$~\textsc{Pour aller plus loin}},fonttitle=\sffamily\bfseries,breakable}
 \newcommand{\approfondissement}[1]{\begin{nxstar}#1\end{nxstar}}
 
 % ---- Fiches méthodes ----
-\newtcolorbox{fmbox}[2]{colback=nxOr!6,colframe=nxOr!80!black,title={Méthode #1 — #2},fonttitle=\bfseries,enhanced,breakable}
+\newtcolorbox{fmbox}[2]{colback=nxOr!6,colframe=nxOr!80!black,boxrule=0pt,leftrule=1.2pt,title={\textsc{Méthode #1} — #2},fonttitle=\sffamily\bfseries,enhanced,breakable}
 \newenvironment{fichemethode}[2]{\begin{fmbox}{#1}{#2}}{\end{fmbox}}
 \newcommand{\quandUtiliser}[1]{\paragraph{Quand l'utiliser.}#1}
 \newcommand{\pasApas}[1]{\paragraph{La méthode pas à pas.}#1}
@@ -86,3 +99,4 @@
 \pagestyle{fancy}\fancyhf{}
 \fancyhead[LE]{\small\leftmark}\fancyhead[RO]{\small Nexus Réussite}
 \fancyfoot[C]{\thepage}
+\newcommand{\ouverturechapitre}[4]{\thispagestyle{plain}\vspace*{1.2cm}\chapter*{\color{nxBleu}#1}\addcontentsline{toc}{chapter}{#1}\noindent\textcolor{nxBleu}{\large\sffamily\bfseries Ce que je vais savoir faire}\par#2\medskip\begin{tcolorbox}[colback=nxGris!6,colframe=nxGris,boxrule=0pt,leftrule=1.2pt,title=\textsc{Carte du chapitre},fonttitle=\sffamily\bfseries]#3\end{tcolorbox}\noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimés :} #4\par\vfill}

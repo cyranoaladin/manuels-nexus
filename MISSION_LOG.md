@@ -14,3 +14,4 @@
 | 2026-07-15 | 1SPE-DERIVATION-LOCAL | LOT 1 | Crawl Éduscol 0 document, ingestion 0 chunk ; angle mort déclaré, génération ex nihilo. | MODE FICHIERS | [1SPE-DERIVATION-LOCAL][LOT-1] |
 | 2026-07-15 | 1SPE-DERIVATION-LOCAL | LOT 2 | Curation synthétique C1–C5, revue adversariale : PASS. | MODE FICHIERS / ex nihilo | [1SPE-DERIVATION-LOCAL][LOT-2] |
 | 2026-07-15 | 1SPE-DERIVATION-LOCAL | LOT 3 | Cours C1–C5, méthodes M1–M5, compilation, similarité et revues adversariales : PASS. | MODE FICHIERS / ex nihilo | [1SPE-DERIVATION-LOCAL][LOT-3] |
+| 2026-07-15 | Charte transverse | LOT 3bis | Charte, ouverture automatique, contrôle visuel Suites et régression compilation de 3 chapitres : PASS. Coût 0 $. | MODE FICHIERS | [CHARTE][LOT-3bis] |

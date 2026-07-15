@@ -8,11 +8,13 @@ import subprocess
 import sys
 from pathlib import Path
 
+import yaml
+
 from common import ROOT
 
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
-    ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
+    ("cours", "1*"), ("methodes", "*"), ("exercices", "*"),
     ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
 ]
 
@@ -24,7 +26,12 @@ def collect(chap_dir: Path, variant: str) -> list[Path]:
         return sorted((chap_dir / "remediation").glob("*.tex"))
     files = []
     for sub, pat in ORDER:
-        files += sorted((chap_dir / sub).glob(f"{pat}.tex" if not pat.endswith("*") else pat + ".tex"))
+        candidats = sorted((chap_dir / sub).glob(f"{pat}.tex" if not pat.endswith("*") else pat + ".tex"))
+        if sub == "exercices":
+            files += [f for f in candidats if not f.name.endswith("-CDP.tex")]
+            files += [f for f in candidats if f.name.endswith("-CDP.tex")]
+        else:
+            files += candidats
     # dédoublonner en conservant l'ordre
     seen, out = set(), []
     for f in files:
@@ -32,6 +39,26 @@ def collect(chap_dir: Path, variant: str) -> list[Path]:
             seen.add(f)
             out.append(f)
     return out
+
+
+def ouverture_depuis_contrat(chap_dir: Path) -> str:
+    """Construit l'ouverture normalisée à partir du contrat du chapitre."""
+    contrat = yaml.safe_load((chap_dir / "contrat.yaml").read_text(encoding="utf-8"))
+    capacites = "\n".join(
+        f"\\item \\textbf{{{capacite['code']}}} — {capacite['libelle_eleve']}"
+        for capacite in contrat["capacites"]
+    )
+    temps = contrat.get("temps_estime_h", {})
+    temps_tex = (
+        f"\\parcoursUn~{temps.get('parcours1', '—')} h \\quad "
+        f"\\parcoursDeux~{temps.get('parcours2', '—')} h \\quad "
+        f"\\parcoursTrois~{temps.get('parcours3', '—')} h"
+    )
+    accroche = contrat.get("situation_accroche", "Situation d'accroche à découvrir dans le TD fil rouge.")
+    return (
+        f"\\ouverturechapitre{{{contrat['titre']}}}{{\\begin{{itemize}}\n{capacites}\n\\end{{itemize}}}}"
+        f"{{{accroche}}}{{{temps_tex}}}\n\\clearpage"
+    )
 
 
 def main(chap: str, variant: str) -> int:
@@ -43,8 +70,11 @@ def main(chap: str, variant: str) -> int:
         print("Aucun objet à assembler.")
         return 1
     inputs = "\n".join(f"\\input{{{f.relative_to(ROOT)}}}" for f in files)
+    ouverture = ouverture_depuis_contrat(chap_dir) if variant == "complet" else ""
     master = (ROOT / "gabarits" / "chapitre_master.tex").read_text(encoding="utf-8")
-    master = master.replace("%%CONTENT%%", inputs).replace("%%CHAP%%", chap)
+    master = (master.replace("%%CONTENT%%", inputs)
+                    .replace("%%OPENING%%", ouverture)
+                    .replace("%%CHAP%%", chap))
     tex_path = build / f"{chap}_{variant}.tex"
     tex_path.write_text(master, encoding="utf-8")
     for _ in range(2):

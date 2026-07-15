@@ -1,0 +1,47 @@
+{
+  "id": "CHARTE-LOT-3bis-VISUEL-001",
+  "created_at": "2026-07-15T12:51:17+00:00",
+  "chapitre": "1SPE-SUITES",
+  "outil": "pdflatex x2 puis pdftoppm -r 140 ; inspection visuelle directe des PNG",
+  "pages": [
+    {
+      "pdf_page": 3,
+      "role": "ouverture",
+      "png": "build/1SPE-SUITES/charte_preview/ouverture-03.png",
+      "controles": [
+        "Titre Suites numériques lisible, capacités C1 à C7 et temps ◆/◆◆/◆◆◆ présents.",
+        "Carte du chapitre complète, sans débordement ni cadre coupé.",
+        "Aucun chevauchement : la page d'ouverture reste aérée."
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "pdf_page": 8,
+      "role": "cours avec marge",
+      "png": "build/1SPE-SUITES/charte_preview/cours-08.png",
+      "controles": [
+        "Les trois définitions, exemples et contre-exemples sont lisibles dans la colonne principale.",
+        "Les deux marges d'appui sont entièrement dans la colonne extérieure ; pas de collision avec l'encadré rouge.",
+        "Encadrés à règle gauche et fonds clairs : aucune rupture à la limite de page."
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "pdf_page": 29,
+      "role": "exercices",
+      "png": "build/1SPE-SUITES/charte_preview/exercices-29.png",
+      "controles": [
+        "Numéros, diamant de parcours, identifiants et durées restent visuellement distincts.",
+        "Les énoncés 8 à 13 ne débordent ni dans la marge ni dans le pied.",
+        "La hiérarchie verticale permet de distinguer chaque exercice sans cadre lourd."
+      ],
+      "verdict": "PASS"
+    }
+  ],
+  "regression_compilation": {
+    "1SPE-SUITES": "PASS",
+    "1SPE-SECOND-DEGRE": "PASS",
+    "1SPE-DERIVATION-LOCAL": "PASS"
+  },
+  "verdict": "PASS"
+}

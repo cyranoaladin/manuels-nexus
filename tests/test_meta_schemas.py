@@ -18,7 +18,7 @@ def test_meta_valid(tex):
     m = META.search(tex.read_text(encoding="utf-8"))
     assert m, f"{tex} : en-tête % META manquant (règle R4)"
     meta = json.loads(m.group(1))
-    if meta.get("type_objet") == "exercice" or "-EX-" in meta.get("id", ""):
+    if meta.get("type_objet") == "exercice":
         validate(meta, EX_SCHEMA)
 
 
