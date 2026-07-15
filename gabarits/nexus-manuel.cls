@@ -1,0 +1,82 @@
+% nexus-manuel.cls — Classe du manuel Nexus Réussite
+% Implémente le système visuel du gabarit : 3 strates, parcours ◆, pictogrammes, encadrés.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{nexus-manuel}[2026/07/15 v0.1 Manuel differencie Nexus Reussite]
+\LoadClass[a4paper,11pt,twoside]{book}
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[french]{babel}
+\RequirePackage{amsmath,amssymb,amsthm}
+\RequirePackage[table]{xcolor}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{marginnote,geometry,graphicx,enumitem,pifont,listings,fancyhdr}
+\geometry{a4paper,inner=2cm,outer=4.5cm,top=2.2cm,bottom=2.2cm,marginparwidth=3.6cm,marginparsep=0.5cm}
+
+% ---- Palette Nexus ----
+\definecolor{nxBleu}{HTML}{1B3A5C}
+\definecolor{nxOr}{HTML}{C9A227}
+\definecolor{nxGris}{HTML}{5A6472}
+\definecolor{nxRouge}{HTML}{B0413E}
+\definecolor{nxVert}{HTML}{2E6E4E}
+
+% ---- Pictogrammes / parcours ----
+\newcommand{\parcoursUn}{\textcolor{nxOr}{\ding{117}}}
+\newcommand{\parcoursDeux}{\textcolor{nxOr}{\ding{117}\ding{117}}}
+\newcommand{\parcoursTrois}{\textcolor{nxOr}{\ding{117}\ding{117}\ding{117}}}
+\newcommand{\pictoOral}{\textcolor{nxBleu}{\ding{110}~Oral}}
+\newcommand{\pictoPython}{\textcolor{nxBleu}{\texttt{>\!\!>~Python}}}
+
+% ---- Strate 1 : encadrés du cours ----
+\newtcolorbox{nxdef}[1][]{colback=white,colframe=nxBleu,title=Définition~#1,fonttitle=\bfseries,enhanced,breakable}
+\newtcolorbox{nxthm}[1][]{colback=white,colframe=nxBleu!80!black,title=Théorème~#1,fonttitle=\bfseries,enhanced,breakable}
+\newtcolorbox{nxprop}[1][]{colback=white,colframe=nxGris,title=Propriété~#1,fonttitle=\bfseries,enhanced,breakable}
+\newcommand{\definition}[2][]{\begin{nxdef}[#1]#2\end{nxdef}}
+\newcommand{\theoreme}[2][]{\begin{nxthm}[#1]#2\end{nxthm}}
+\newcommand{\propriete}[2][]{\begin{nxprop}[#1]#2\end{nxprop}}
+\newcommand{\exemple}[1]{\par\noindent\textbf{\textcolor{nxVert}{Exemple.}} #1\par}
+\newcommand{\contreexemple}[1]{\par\noindent\textbf{\textcolor{nxRouge}{Contre-exemple.}} #1\par}
+
+% ---- Strate 2 : marge d'appui et erreurs ----
+\newcommand{\margeAppui}[1]{\marginnote{\footnotesize\color{nxGris}\textit{#1}}}
+\newcommand{\commentaireMarge}[1]{\marginnote{\footnotesize\color{nxBleu}#1}}
+\newtcolorbox{nxerr}{colback=nxRouge!6,colframe=nxRouge,title={\ding{115}~Erreur fréquente},fonttitle=\bfseries,breakable}
+\newcommand{\erreurFrequente}[1]{\begin{nxerr}#1\end{nxerr}}
+
+% ---- Strate 3 : approfondissement ----
+\newtcolorbox{nxstar}{colback=nxBleu!5,colframe=nxBleu,title={$\bigstar$~Pour aller plus loin},fonttitle=\bfseries,breakable}
+\newcommand{\approfondissement}[1]{\begin{nxstar}#1\end{nxstar}}
+
+% ---- Fiches méthodes ----
+\newtcolorbox{fmbox}[2]{colback=nxOr!6,colframe=nxOr!80!black,title={Méthode #1 — #2},fonttitle=\bfseries,enhanced,breakable}
+\newenvironment{fichemethode}[2]{\begin{fmbox}{#1}{#2}}{\end{fmbox}}
+\newcommand{\quandUtiliser}[1]{\paragraph{Quand l'utiliser.}#1}
+\newcommand{\pasApas}[1]{\paragraph{La méthode pas à pas.}#1}
+\newcommand{\exempleRedige}[1]{\paragraph{Exemple rédigé.}#1}
+\newcommand{\pieges}[1]{\paragraph{Les pièges.}#1}
+\newcommand{\verifier}[1]{\paragraph{Vérifier son résultat.}#1}
+\newcommand{\sEntrainer}[1]{\paragraph{S'entraîner.}#1}
+\newcommand{\refExos}[1]{\textit{(renvois exercices #1 : complétés à l'assemblage)}}
+
+% ---- Exercices / corrigés ----
+% \begin{exercice}{ID}{parcours(1|2|3)}{durée min}
+\newcounter{exo}
+\newenvironment{exercice}[3]{%
+  \refstepcounter{exo}\par\medskip\noindent
+  \textbf{\textcolor{nxBleu}{Exercice \theexo}}\quad
+  \ifnum#2=1\parcoursUn\fi\ifnum#2=2\parcoursDeux\fi\ifnum#2=3\parcoursTrois\fi
+  \quad{\footnotesize\texttt{#1} — #3~min}\par\nopagebreak\smallskip
+}{\par\medskip}
+\newenvironment{corrige}[1]{\par\medskip\noindent\textbf{\textcolor{nxVert}{Corrigé de \texttt{#1}}}\par\nopagebreak\smallskip}{\par\medskip}
+\newcommand{\baremeIndicatif}[1]{\par\noindent{\footnotesize\textit{Barème indicatif : #1}}\par}
+\newcommand{\coupDePouce}[2]{\par\noindent{\small\textbf{Coup de pouce #1.} #2}\par}
+
+% ---- Python ----
+\lstdefinestyle{nxpy}{language=Python,basicstyle=\ttfamily\small,keywordstyle=\color{nxBleu}\bfseries,
+  commentstyle=\color{nxGris},frame=single,rulecolor=\color{nxGris},numbers=left,numberstyle=\tiny}
+\lstnewenvironment{python}{\lstset{style=nxpy}}{}
+
+% ---- En-têtes ----
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[LE]{\small\leftmark}\fancyhead[RO]{\small Nexus Réussite}
+\fancyfoot[C]{\thepage}

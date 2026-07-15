@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chunk.schema.json",
+  "title": "Chunk normalisé du corpus",
+  "type": "object",
+  "required": ["source_id", "doc_url", "doc_hash", "chunk_type", "usage_policy", "tier", "content_md"],
+  "properties": {
+    "source_id": { "type": "string", "pattern": "^SRC-[0-9]{4}$" },
+    "doc_url": { "type": "string", "format": "uri" },
+    "doc_hash": { "type": "string" },
+    "chunk_type": { "enum": ["cours", "methode", "exercice", "corrige", "activite", "evaluation", "erreur_type", "autre"] },
+    "niveau": { "type": ["string", "null"] },
+    "theme": { "type": ["string", "null"] },
+    "capacites": { "type": "array", "items": { "type": "string" } },
+    "difficulte": { "type": ["integer", "null"], "minimum": 1, "maximum": 3 },
+    "usage_policy": { "enum": ["verbatim", "adaptation_attribution", "inspiration_reformulation"] },
+    "tier": { "enum": ["T1", "T2", "T3", "T4", "T5"] },
+    "content_md": { "type": "string", "minLength": 40 }
+  }
+}
