@@ -1,0 +1,73 @@
+% META: {"id": "1SPE-SUITES-CO-020", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-020", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% # Simulation de l'algorithme : u0=2, u_{n+1} = 2*u_n + 3
+% u = 2
+% for k in range(5):
+%     u = 2*u + 3
+% # u apres 5 iterations = u_5
+% assert u == 157
+% # Verification pas a pas
+% vals = [2]
+% for k in range(5):
+%     vals.append(2*vals[-1] + 3)
+% assert vals == [2, 7, 17, 37, 77, 157]
+% # Pour calculer u_10 : remplacer range(5) par range(10)
+% u10 = 2
+% for k in range(10):
+%     u10 = 2*u10 + 3
+% assert u10 == 5117
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-020}
+
+\commentaireMarge{On simule l'algorithme à la main : à chaque itération $k$, on applique la relation $u \leftarrow 2u + 3$. La variable \texttt{u} contient successivement $u_1, u_2, \ldots, u_5$.}
+
+\textbf{Question 1.} On simule l'algorithme étape par étape à partir de $u = u_0 = 2$ :
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Itération $k$ & Valeur de \texttt{u} après l'instruction \texttt{u = 2*u + 3} \\
+\hline
+$k = 0$ & $u = 2 \times 2 + 3 = 7$ (c'est $u_1$) \\
+\hline
+$k = 1$ & $u = 2 \times 7 + 3 = 17$ (c'est $u_2$) \\
+\hline
+$k = 2$ & $u = 2 \times 17 + 3 = 37$ (c'est $u_3$) \\
+\hline
+$k = 3$ & $u = 2 \times 37 + 3 = 77$ (c'est $u_4$) \\
+\hline
+$k = 4$ & $u = 2 \times 77 + 3 = 157$ (c'est $u_5$) \\
+\hline
+\end{tabular}
+\end{center}
+\medskip
+
+Tableau de valeurs :
+
+\medskip
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$n$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ \\
+\hline
+$u_n$ & $2$ & $7$ & $17$ & $37$ & $77$ & $157$ \\
+\hline
+\end{tabular}
+\medskip
+
+\commentaireMarge{L'instruction \texttt{print(u)} affiche la valeur finale de \texttt{u} après la boucle, soit $u_5$.}
+
+\textbf{Question 2.} À la fin de l'algorithme, la variable \texttt{u} contient $u_5 = 157$. L'instruction \texttt{print(u)} affiche donc \textbf{157}.
+
+\commentaireMarge{Pour calculer $u_{10}$, il suffit d'effectuer $10$ itérations au lieu de $5$ : on remplace \texttt{range(5)} par \texttt{range(10)}.}
+
+\textbf{Question 3.} Pour calculer $u_{10}$ à la place de $u_5$, il faut remplacer \texttt{range(5)} par \texttt{range(10)} dans le code :
+
+\begin{center}
+\texttt{u = 2}\\
+\texttt{for k in range(10):}\\
+\texttt{\quad\quad u = 2*u + 3}\\
+\texttt{print(u)}
+\end{center}
+
+\end{corrige}

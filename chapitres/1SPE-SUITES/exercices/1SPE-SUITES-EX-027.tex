@@ -1,0 +1,35 @@
+% META: {"id": "1SPE-SUITES-EX-027", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4"], "capacites_codes": ["C3", "C4"], "methodes": ["M3", "M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 100, "max": 500}, "q": {"domaine": "rationnel", "contrainte": "0<q<1"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-027.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-027.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 256
+% q = Rational(1, 2)
+% u = u0 * q**n
+% assert u.subs(n, 0) == 256
+% assert u.subs(n, 1) == 128
+% assert u.subs(n, 2) == 64
+% ratio = simplify(u.subs(n, n+1) / u)
+% assert ratio == Rational(1, 2)
+% # Somme u0 + ... + u7 : 8 termes
+% S = u0 * (1 - q**8) / (1 - q)
+% assert S == 510
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-027}{2}{20}
+Soit $(u_n)$ la suite géométrique de premier terme $u_0 = 256$ et de raison $q = \dfrac{1}{2}$.
+
+\begin{enumerate}
+  \item Vérifier que $u_n \neq 0$ pour tout $n \in \mathbb{N}$, puis calculer $\dfrac{u_{n+1}}{u_n}$ et conclure.
+
+  \item Exprimer $u_n$ en fonction de $n$.
+
+  \item Calculer $u_3$ et $u_7$.
+
+  \item Calculer la somme $S = u_0 + u_1 + \cdots + u_7$. En déduire la somme $T = u_1 + u_2 + \cdots + u_7$.
+
+  \item Montrer que pour tout entier $n \geq 1$ :
+  \[
+    u_0 + u_1 + \cdots + u_n = 512\left(1 - \left(\frac{1}{2}\right)^{n+1}\right).
+  \]
+  Que se passe-t-il quand $n$ devient très grand ?
+\end{enumerate}
+\end{exercice}

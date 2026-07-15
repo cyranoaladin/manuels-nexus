@@ -1,0 +1,91 @@
+% META: {"id": "1SPE-SUITES-CO-036", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-036", "capacites_codes": ["C1", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u = n**2 - 5*n + 8
+% assert u.subs(n, 0) == 8
+% assert u.subs(n, 1) == 4
+% assert u.subs(n, 2) == 2
+% assert u.subs(n, 3) == 2
+% assert u.subs(n, 4) == 4
+% diff = u.subs(n, n+1) - u
+% diff_simplified = simplify(diff)
+% assert diff_simplified == 2*n - 4
+% # diff < 0 pour n < 2, diff = 0 pour n = 2, diff > 0 pour n > 2
+% # Donc décroissante pour n in {0,1}, minimum en n=2 et n=3, croissante pour n >= 3
+% # f'(x) = 2x - 5 = 0 => x = 5/2 = 2.5
+% from sympy import diff as sdiff, Symbol
+% x = Symbol('x', real=True)
+% f = x**2 - 5*x + 8
+% fp = sdiff(f, x)
+% assert fp == 2*x - 5
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-036}
+
+\textbf{Question 1 — Calcul de $u_0$, $u_1$, $u_2$, $u_3$ et $u_4$.}
+
+\begin{align*}
+  u_0 &= 0^2 - 5 \times 0 + 8 = 8, \\
+  u_1 &= 1^2 - 5 \times 1 + 8 = 1 - 5 + 8 = 4, \\
+  u_2 &= 2^2 - 5 \times 2 + 8 = 4 - 10 + 8 = 2, \\
+  u_3 &= 3^2 - 5 \times 3 + 8 = 9 - 15 + 8 = 2, \\
+  u_4 &= 4^2 - 5 \times 4 + 8 = 16 - 20 + 8 = 4.
+\end{align*}
+
+\medskip
+\textbf{Question 2 — Formule explicite ou récurrence ?}
+
+La suite est définie par une \textbf{formule explicite} : $u_n = n^2 - 5n + 8$ exprime directement $u_n$ en fonction de $n$, sans faire intervenir les termes précédents. Il n'est pas nécessaire de calculer $u_{n-1}$ pour obtenir $u_n$.
+
+\medskip
+\textbf{Question 3 — Étude de $u_{n+1} - u_n$.}
+
+\[
+  u_{n+1} - u_n = \bigl((n+1)^2 - 5(n+1) + 8\bigr) - (n^2 - 5n + 8).
+\]
+
+En développant :
+\[
+  u_{n+1} - u_n = n^2 + 2n + 1 - 5n - 5 + 8 - n^2 + 5n - 8 = 2n - 4.
+\]
+
+\commentaireMarge{On obtient $u_{n+1} - u_n = 2n - 4$, dont le signe dépend de $n$.}
+
+Donc $u_{n+1} - u_n = 2n - 4 = 2(n - 2)$.
+
+Étude du signe :
+\begin{itemize}
+  \item Si $n < 2$ (c'est-à-dire $n \in \{0, 1\}$) : $2(n-2) < 0$, donc $u_{n+1} < u_n$ : la suite est \textbf{décroissante}.
+  \item Si $n = 2$ : $2(n-2) = 0$, donc $u_3 = u_2 = 2$.
+  \item Si $n > 2$ (c'est-à-dire $n \geq 3$) : $2(n-2) > 0$, donc $u_{n+1} > u_n$ : la suite est \textbf{croissante}.
+\end{itemize}
+
+\medskip
+\textbf{Question 4 — Conclusion sur les variations et terme(s) minimal/minimaux.}
+
+\commentaireMarge{La suite décroît pour $n \in \{0, 1, 2\}$, est « plate » entre $n = 2$ et $n = 3$, puis croît pour $n \geq 3$.}
+
+La suite $(u_n)$ est :
+\begin{itemize}
+  \item \textbf{strictement décroissante} pour $n \in \{0, 1\}$ : $u_0 = 8 > u_1 = 4 > u_2 = 2$ ;
+  \item les termes $u_2 = u_3 = 2$ sont égaux : la suite est « stationnaire » entre $n = 2$ et $n = 3$ ;
+  \item \textbf{strictement croissante} pour $n \geq 3$ : $u_3 = 2 < u_4 = 4 < \cdots$
+\end{itemize}
+
+Le \textbf{minimum} est atteint pour $n = 2$ et $n = 3$ : $u_2 = u_3 = 2$.
+
+\medskip
+\textbf{Question 5 — Comparaison avec la fonction $f(x) = x^2 - 5x + 8$.}
+
+La dérivée est $f'(x) = 2x - 5$.
+
+$f'(x) = 0 \iff x = \dfrac{5}{2} = 2{,}5$.
+
+\commentaireMarge{$f'(x) < 0$ pour $x < 2{,}5$ (décroissance) et $f'(x) > 0$ pour $x > 2{,}5$ (croissance) : minimum en $x = 2{,}5$.}
+
+$f$ est décroissante sur $[0;\, 2{,}5]$ et croissante sur $[2{,}5;\, +\infty[$, avec un minimum en $x = 2{,}5$.
+
+La suite $(u_n)$, qui correspond à $f$ restreinte aux entiers, suit la même tendance : décroissante pour $n \leq 2$, croissante pour $n \geq 3$. Le minimum continu de $f$ est en $x = 2{,}5$, et les deux entiers encadrant ce point ($n = 2$ et $n = 3$) donnent la même valeur minimale $u_2 = u_3 = 2$.
+
+\baremeIndicatif{Q1 : 1 pt (calculer : cinq termes) ; Q2 : 1 pt (raisonner, communiquer : identification formule explicite) ; Q3 : 3 pts (calculer, raisonner : développement 1 pt + simplification 1 pt + étude du signe 1 pt) ; Q4 : 2 pts (raisonner, communiquer : tableau de variations 1 pt + identification des minimums 1 pt) ; Q5 : 1 pt (calculer, communiquer : calcul de $f'$ et comparaison)}
+\end{corrige}

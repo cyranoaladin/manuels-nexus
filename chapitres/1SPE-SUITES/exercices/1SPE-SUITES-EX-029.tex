@@ -1,0 +1,37 @@
+% META: {"id": "1SPE-SUITES-EX-029", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C5"], "capacites_codes": ["C2", "C5"], "methodes": ["M2", "M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": {"domaine": "entier", "min": 1, "max": 4}, "b": {"domaine": "entier", "min": 1, "max": 6}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-029.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-029.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% # v_n = 2n^2 - 6n + 1 (pas une suite arithmetique)
+% # w_n = u_n - v_n avec u_n = 3n + 2 suite arithmetique
+% # Etude de la difference w_{n+1} - w_n
+% u = 3*n + 2
+% diff = u.subs(n, n+1) - u
+% assert simplify(diff) == 3
+% # u0=2, u5=17
+% assert u.subs(n, 0) == 2
+% assert u.subs(n, 5) == 17
+% # Suite croissante car r=3>0
+% # Comparaison u_n a 50: 3n+2 > 50 => n > 16
+% assert u.subs(n, 16) == 50
+% assert u.subs(n, 17) == 53
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-029}{2}{22}
+Soit $(u_n)$ la suite arithmétique de premier terme $u_0 = 2$ et de raison $r = 3$.
+
+\begin{enumerate}
+  \item Exprimer $u_n$ en fonction de $n$, puis calculer $u_5$ et $u_{16}$.
+
+  \item Étudier le sens de variation de $(u_n)$. Rédiger la démonstration en utilisant le signe de $u_{n+1} - u_n$.
+
+  \item Comparer $u_n$ et $u_{n+1}$ pour tout $n \in \mathbb{N}$. En déduire que $(u_n)$ est strictement croissante.
+
+  \item On pose $v_n = u_n - 3n$ pour tout $n \in \mathbb{N}$. Montrer que $(v_n)$ est constante. Quelle est cette constante ?
+
+  \item Soit $(w_n)$ définie par $w_n = \dfrac{1}{u_n}$ pour tout $n \in \mathbb{N}$.
+  \begin{enumerate}
+    \item Calculer $w_0$, $w_1$, $w_2$.
+    \item Montrer que $(w_n)$ est strictement décroissante.
+  \end{enumerate}
+\end{enumerate}
+\end{exercice}

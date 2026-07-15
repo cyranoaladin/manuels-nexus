@@ -1,0 +1,127 @@
+% META: {"id": "1SPE-SUITES-CO-047", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-047", "capacites_codes": ["C2", "C5", "C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonneg=True)
+% m = symbols('m')
+% # Suite u_n = n^2 + n + 1
+% u = lambda k: k**2 + k + 1
+% assert u(0) == 1
+% assert u(1) == 3
+% assert u(2) == 7
+% assert u(3) == 13
+% assert u(4) == 21
+% # Pas arithmetique : differences non constantes
+% assert u(1) - u(0) == 2
+% assert u(2) - u(1) == 4
+% assert u(3) - u(2) == 6
+% # Pas geometrique : ratios non constants
+% assert Rational(u(1), u(0)) != Rational(u(2), u(1))
+% # d_n = u(n+1) - u(n)
+% d = lambda k: u(k+1) - u(k)
+% assert d(0) == 2
+% assert d(1) == 4
+% assert d(2) == 6
+% assert d(3) == 8
+% # Expression symbolique de d_n
+% d_sym = expand((m+1)**2 + (m+1) + 1 - (m**2 + m + 1))
+% assert d_sym == 2*m + 2
+% # d est arithmetique de raison 2
+% d_expr = 2*m + 2
+% d_expr_next = 2*(m+1) + 2
+% assert expand(d_expr_next - d_expr) == 2
+% assert d(1) - d(0) == 2
+% assert d(2) - d(1) == 2
+% assert d(3) - d(2) == 2
+% # Croissance de u_n : d_n > 0 pour tout n >= 0
+% # d_n = 2n+2 = 2(n+1) >= 2 > 0
+% for k in range(10):
+%     assert d(k) > 0
+% # Somme S_5
+% S5 = sum(u(k) for k in range(6))
+% assert S5 == 1 + 3 + 7 + 13 + 21 + 31
+% assert S5 == 76
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-047}
+
+\textbf{1. Calcul des premiers termes.}
+
+\[
+u_0 = 0^2 + 0 + 1 = 1, \quad u_1 = 1 + 1 + 1 = 3, \quad u_2 = 4 + 2 + 1 = 7, \quad u_3 = 9 + 3 + 1 = 13, \quad u_4 = 16 + 4 + 1 = 21.
+\]
+
+\textbf{2. Nature de la suite $(u_n)$.}
+
+\commentaireMarge{Pour montrer qu'une suite n'est ni arithmétique ni géométrique, il suffit d'exhiber deux différences (ou deux ratios) successives non égales.}
+
+\textit{Arithmétique ?} On calcule $u_1 - u_0 = 3 - 1 = 2$ et $u_2 - u_1 = 7 - 3 = 4$. Ces différences sont inégales, donc $(u_n)$ \textbf{n'est pas arithmétique}.
+
+\textit{Géométrique ?} On calcule $\dfrac{u_1}{u_0} = \dfrac{3}{1} = 3$ et $\dfrac{u_2}{u_1} = \dfrac{7}{3}$. Ces rapports sont inégaux, donc $(u_n)$ \textbf{n'est pas géométrique}.
+
+\textbf{3. Calcul des $d_n$ et conjecture.}
+
+\[
+d_0 = u_1 - u_0 = 3 - 1 = 2, \quad d_1 = u_2 - u_1 = 7 - 3 = 4, \quad d_2 = u_3 - u_2 = 13 - 7 = 6, \quad d_3 = u_4 - u_3 = 21 - 13 = 8.
+\]
+
+On observe que $d_0 = 2$, $d_1 = 4$, $d_2 = 6$, $d_3 = 8$ : les $d_n$ augmentent de $2$ à chaque fois.
+
+\textbf{Conjecture :} $(d_n)$ est une suite arithmétique de raison $2$ et de premier terme $d_0 = 2$.
+
+\textbf{4. Démonstration.}
+
+\commentaireMarge{On calcule $d_n$ comme expression en $n$, puis on vérifie que $d_{n+1} - d_n$ est constant.}
+
+\textit{Calcul de $d_n$ en fonction de $n$ :}
+\begin{align*}
+d_n = u_{n+1} - u_n &= \left[(n+1)^2 + (n+1) + 1\right] - \left[n^2 + n + 1\right] \\
+&= n^2 + 2n + 1 + n + 1 + 1 - n^2 - n - 1 \\
+&= 2n + 2.
+\end{align*}
+
+\textit{Calcul de $d_{n+1} - d_n$ :}
+\[
+d_{n+1} - d_n = \bigl[2(n+1) + 2\bigr] - [2n + 2] = 2n + 2 + 2 - 2n - 2 = 2.
+\]
+
+Pour tout $n \in \mathbb{N}$, $d_{n+1} - d_n = 2$ (constante). La suite $(d_n)$ est donc \textbf{arithmétique de raison $r = 2$ et de premier terme $d_0 = 2$}.
+
+\textit{On retrouve bien :} $d_n = d_0 + n \times 2 = 2 + 2n = 2(n+1)$, ce qui est cohérent avec le calcul direct.
+
+\textbf{5. Sens de variation de $(u_n)$.}
+
+Pour tout $n \in \mathbb{N}$, $d_n = u_{n+1} - u_n = 2n + 2 = 2(n+1)$.
+
+Comme $n \geq 0$, on a $n + 1 \geq 1 > 0$, donc $d_n = 2(n+1) > 0$.
+
+Ainsi, pour tout $n \in \mathbb{N}$, $u_{n+1} > u_n$ : la suite $(u_n)$ est \textbf{strictement croissante}.
+
+\textbf{6. Programme Python.}
+
+\begin{lstlisting}[language=Python]
+for n in range(21):
+    u_n = n**2 + n + 1
+    d_n = 2*n + 2
+    print(f"n={n:2d} : u_n={u_n:4d}, d_n={d_n:2d}")
+\end{lstlisting}
+
+Ce programme affiche pour chaque entier $n$ de $0$ à $20$ les valeurs de $u_n$ et $d_n$. On observe que les valeurs de $d_n$ sont $2, 4, 6, \ldots, 42$ (progression arithmétique de raison $2$) et que les $u_n$ sont strictement croissants.
+
+\textit{Extrait des premières lignes attendues :}
+\begin{center}
+\begin{tabular}{|c|r|r|}
+\hline
+$n$ & $u_n$ & $d_n$ \\
+\hline
+$0$ & $1$ & $2$ \\
+$1$ & $3$ & $4$ \\
+$2$ & $7$ & $6$ \\
+$3$ & $13$ & $8$ \\
+$4$ & $21$ & $10$ \\
+$5$ & $31$ & $12$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Ces valeurs confirment les résultats des questions précédentes : différences successives $d_n$ forment une progression arithmétique, et $u_n$ est strictement croissant.
+
+\end{corrige}

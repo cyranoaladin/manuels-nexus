@@ -1,0 +1,54 @@
+% META: {"id": "1SPE-SUITES-EX-045", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C1", "1SPE-SUITES-C2", "1SPE-SUITES-C5"], "capacites_codes": ["C1", "C2", "C5"], "methodes": ["M1", "M2", "M5"], "parcours": 3, "competences": ["chercher", "raisonner", "calculer"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": 3, "b": 2, "u0": 5}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-045.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-045.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # Suite : u_{n+1} = (1/2)*u_n + 3, u_0 = 5
+% # Point fixe : L = (1/2)*L + 3 => (1/2)*L = 3 => L = 6
+% L = Rational(6)
+% assert Rational(1,2)*L + 3 == L
+% # v_n = u_n - L => v_{n+1} = (1/2)*v_n => geometrique raison 1/2
+% u0 = Rational(5)
+% v0 = u0 - L
+% assert v0 == -1
+% q = Rational(1, 2)
+% # v_n = -1*(1/2)^n
+% # u_n = 6 - (1/2)^n
+% u_n = L + v0 * q**n
+% assert u_n.subs(n, 0) == 5
+% assert u_n.subs(n, 1) == Rational(1,2)*5 + 3
+% assert u_n.subs(n, 1) == Rational(11, 2)
+% assert u_n.subs(n, 2) == Rational(23, 4)
+% # Croissance : u_{n+1} - u_n = -(1/2)^{n+1} + (1/2)^n = (1/2)^n*(1 - 1/2) = (1/2)^{n+1} > 0
+% assert u_n.subs(n,1) > u_n.subs(n,0)
+% assert u_n.subs(n,2) > u_n.subs(n,1)
+% # Limite
+% assert limit(u_n, n, oo) == 6
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-045}{3}{35}
+On considère la suite $(u_n)$ définie par $u_0 = 5$ et, pour tout entier naturel $n$ :
+\[
+  u_{n+1} = \frac{1}{2}\,u_n + 3.
+\]
+
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ (valeurs exactes). Ces valeurs semblent-elles converger ?
+
+  \item \textbf{Point fixe.} On cherche un réel $\ell$ tel que $\dfrac{1}{2}\,\ell + 3 = \ell$.
+  \begin{enumerate}
+    \item Résoudre cette équation.
+    \item On pose $v_n = u_n - \ell$. Montrer que $(v_n)$ est géométrique, préciser sa raison et son premier terme.
+  \end{enumerate}
+
+  \item Exprimer $v_n$ puis $u_n$ en fonction de $n$.
+
+  \item \textbf{Variations.}
+  \begin{enumerate}
+    \item Calculer $u_{n+1} - u_n$ en fonction de $n$.
+    \item En déduire le sens de variation de $(u_n)$.
+  \end{enumerate}
+
+  \item \textbf{Encadrement.} Montrer par récurrence que, pour tout entier naturel $n$ : $5 \leq u_n < 6$.
+
+  \item \textbf{Généralisation.} On remplace $u_0 = 5$ par $u_0 = 8$. Sans refaire tous les calculs, donner la nouvelle expression de $u_n$ et le nouveau sens de variation. Justifier.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,100 @@
+% META: {"id": "1SPE-SUITES-CO-038", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-038", "capacites_codes": ["C3", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% V0 = 18000
+% q = Rational(88, 100)
+% V = V0 * q**n
+% assert V.subs(n, 0) == 18000
+% ratio = simplify(V.subs(n, n+1) / V)
+% assert ratio == Rational(88, 100)
+% assert ratio < 1
+% # V_3 = 18000 * 0.88^3
+% V3 = float(V0 * (0.88)**3)
+% assert abs(V3 - 12266.50) < 0.1
+% # Seuil V_n < 9000 : 0.88^n < 0.5
+% # log10(0.5)/log10(0.88) = -0.301 / -0.0555 ~ 5.42 => n >= 6 => V_6 < 9000
+% import math
+% n_seuil = math.ceil(math.log(0.5)/math.log(0.88))
+% assert n_seuil == 6
+% assert 18000 * (0.88**5) > 9000
+% assert 18000 * (0.88**6) < 9000
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-038}
+
+\textbf{Question 1 — Valeur initiale et relation de récurrence.}
+
+À l'achat ($n = 0$), la valeur du véhicule est son prix d'achat : $V_0 = 18\,000$~\euro{}.
+
+Chaque année, le véhicule perd $12\,\%$ de sa valeur, donc il conserve $100\,\% - 12\,\% = 88\,\%$ de sa valeur :
+\[
+  V_{n+1} = 0{,}88 \times V_n.
+\]
+
+\medskip
+\textbf{Question 2 — Nature géométrique.}
+
+Pour tout $n \in \mathbb{N}$, $V_n = 18\,000 \times 0{,}88^n > 0$, donc $V_n \neq 0$ et le quotient est calculable :
+\[
+  \frac{V_{n+1}}{V_n} = \frac{0{,}88 \times V_n}{V_n} = 0{,}88.
+\]
+
+\commentaireMarge{Le quotient $\dfrac{V_{n+1}}{V_n} = 0{,}88$ est constant : $(V_n)$ est géométrique de raison $q = 0{,}88$ et de premier terme $V_0 = 18\,000$.}
+
+Ce quotient est constant, donc $(V_n)$ est une suite géométrique de raison $q = 0{,}88$ et de premier terme $V_0 = 18\,000$.
+
+\medskip
+\textbf{Question 3 — Expression de $V_n$ en fonction de $n$.}
+
+\[
+  V_n = V_0 \times q^n = 18\,000 \times 0{,}88^n.
+\]
+
+\medskip
+\textbf{Question 4 — Calcul de $V_3$.}
+
+\[
+  V_3 = 18\,000 \times 0{,}88^3 = 18\,000 \times 0{,}681\,472 \approx 12\,266 \text{ \euro{}}.
+\]
+
+Après $3$ ans, le véhicule de Théo vaut environ $12\,266$~\euro{}, soit une perte de $5\,734$~\euro{} par rapport au prix d'achat.
+
+\medskip
+\textbf{Question 5 — Seuil de revente à $9\,000$~\euro{}.}
+
+\textit{a) Inéquation.}
+
+On cherche $n$ tel que $V_n < 9\,000$ :
+\[
+  18\,000 \times 0{,}88^n < 9\,000 \iff 0{,}88^n < \frac{9\,000}{18\,000} = 0{,}5.
+\]
+
+\textit{b) Résolution.}
+
+On applique $\log_{10}$ aux deux membres. Comme $\log_{10}(0{,}88) < 0$, le sens de l'inégalité s'inverse :
+\[
+  n \times \log_{10}(0{,}88) < \log_{10}(0{,}5) \iff n > \frac{\log_{10}(0{,}5)}{\log_{10}(0{,}88)} \approx \frac{-0{,}301}{-0{,}0555} \approx 5{,}42.
+\]
+
+\commentaireMarge{Division par un nombre négatif : le sens de l'inégalité s'inverse.}
+
+Le plus petit entier satisfaisant $n > 5{,}42$ est $n = 6$.
+
+\textit{Vérification par essais successifs :}
+\[
+  V_5 = 18\,000 \times 0{,}88^5 \approx 18\,000 \times 0{,}5277 \approx 9\,498 > 9\,000.
+\]
+\[
+  V_6 = 18\,000 \times 0{,}88^6 \approx 18\,000 \times 0{,}4644 \approx 8\,358 < 9\,000. \checkmark
+\]
+
+La valeur passe en dessous de $9\,000$~\euro{} lors de la $7^e$ année ($n = 6$ correspond à la $7^e$ année écoulée).
+
+\textit{c) Conclusion.}
+
+\commentaireMarge{Pour $n = 5$ ($6^e$ année), $V_5 > 9\,000$ : Théo peut encore attendre. Pour $n = 6$ ($7^e$ année), $V_6 < 9\,000$ : il est trop tard.}
+
+Théo doit revendre son véhicule \textbf{au plus tard au bout de $6$ ans} (avant l'entrée en $7^e$ année), c'est-à-dire au plus tard à la fin de la $6^e$ année, alors que $V_5 \approx 9\,498$~\euro{} est encore supérieure à $9\,000$~\euro{}.
+
+\baremeIndicatif{Q1 : 1 pt (modeliser : relation de récurrence) ; Q2 : 2 pts (raisonner : $V_n > 0$ justifié 1 pt + calcul du quotient et identification 1 pt) ; Q3 : 1 pt (calculer : terme général) ; Q4 : 1 pt (calculer : $V_3$ arrondi et interprétation) ; Q5a : 1 pt (raisonner : mise en inéquation) ; Q5b : 2 pts (calculer, raisonner : passage au $\log$ avec signe 1 pt + essais successifs 1 pt) ; Q5c : 1 pt (communiquer : conclusion dans le contexte)}
+\end{corrige}

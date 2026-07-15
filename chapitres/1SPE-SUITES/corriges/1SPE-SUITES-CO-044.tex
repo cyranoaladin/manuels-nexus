@@ -1,0 +1,83 @@
+% META: {"id": "1SPE-SUITES-CO-044", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-044", "capacites_codes": ["C3", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% t = Rational(1, 200)
+% m = 800
+% C0 = 120000
+% L = m / t
+% assert L == 160000
+% q = 1 + t
+% v0 = C0 - L
+% assert v0 == -40000
+% C_n = lambda n: L + v0 * q**n
+% assert C_n(0) == C0
+% assert C_n(1) == Rational(201,200)*120000 - 800
+% assert C_n(1) == 119800
+% assert C_n(2) == Rational(201,200)*119800 - 800
+% n_min = math.ceil(math.log(4)/math.log(201/200))
+% assert n_min == 278
+% assert float((Rational(201,200))**278) > 4
+% assert float((Rational(201,200))**277) < 4
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-044}
+
+\textbf{1. Mise en équation.}
+
+Au début du mois $n$, le capital dû est $C_n$. Les intérêts du mois s'élèvent à $0{,}5\,\% \times C_n = 0{,}005\,C_n$. Après paiement de la mensualité de $800$\,€ :
+\[
+C_{n+1} = C_n + 0{,}005\,C_n - 800 = 1{,}005\,C_n - 800.
+\]
+
+\textbf{2. Calcul de $C_1$ et $C_2$.}
+
+\[
+C_1 = 1{,}005 \times 120\,000 - 800 = 120\,600 - 800 = 119\,800 \text{ €}.
+\]
+\[
+C_2 = 1{,}005 \times 119\,800 - 800 = 120\,399 - 800 = 119\,599 \text{ €}.
+\]
+
+\textbf{3. Résolution.}
+
+\commentaireMarge{La méthode du point fixe permet de ramener la suite affine à une suite géométrique.}
+
+\textbf{a)} $1{,}005\,L - 800 = L \Rightarrow 0{,}005\,L = 800 \Rightarrow L = 160\,000$.
+
+\textbf{b)} On pose $v_n = C_n - 160\,000$. Alors :
+\[
+v_{n+1} = C_{n+1} - 160\,000 = (1{,}005\,C_n - 800) - 160\,000 = 1{,}005\,(C_n - 160\,000) = 1{,}005\,v_n.
+\]
+$(v_n)$ est géométrique de raison $q = 1{,}005$ et de premier terme $v_0 = 120\,000 - 160\,000 = -40\,000$.
+
+\textbf{c)} $v_n = -40\,000 \times 1{,}005^n$, donc :
+\[
+\boxed{C_n = 160\,000 - 40\,000 \times 1{,}005^n}.
+\]
+
+\textbf{4. Durée de remboursement.}
+
+\commentaireMarge{Résoudre $C_n \leq 0$ revient à résoudre une inégalité sur une exponentielle.}
+
+$C_n \leq 0 \Leftrightarrow 160\,000 - 40\,000 \times 1{,}005^n \leq 0 \Leftrightarrow 1{,}005^n \geq 4$.
+
+En passant au logarithme (fonction croissante) :
+\[
+n \geq \frac{\ln 4}{\ln 1{,}005}.
+\]
+
+Calcul numérique : $\dfrac{\ln 4}{\ln 1{,}005} = \dfrac{2\ln 2}{\ln 1{,}005} \approx \dfrac{2 \times 0{,}6931}{0{,}004988} \approx 277{,}9$.
+
+Le plus petit entier vérifiant cette inégalité est $n = 278$.
+
+Le ménage rembourse l'emprunt en \textbf{278 mensualités}, soit environ 23 ans et 2 mois.
+
+\textbf{Vérification :} $1{,}005^{278} \approx 4{,}001 > 4$ et $1{,}005^{277} \approx 3{,}981 < 4$. \checkmark
+
+\textbf{5. Script Python.}
+
+Le code est déjà complet. Il simule le remboursement mois par mois, en appliquant $C \leftarrow 1{,}005 \times C - 800$ et en incrémentant $n$ tant que $C > 0$.
+
+À la fin de l'exécution, la variable \texttt{n} affiche $\mathbf{278}$, confirmant le calcul algébrique.
+
+\end{corrige}

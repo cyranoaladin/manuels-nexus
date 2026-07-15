@@ -1,0 +1,52 @@
+% META: {"id": "1SPE-SUITES-EX-046", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4", "1SPE-SUITES-C6"], "capacites_codes": ["C3", "C4", "C6"], "methodes": ["M3", "M4", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modéliser"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"q": "0.9", "u0": 10000, "n0": 20}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-046.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-046.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n, k = symbols('n k', integer=True, nonnegative=True)
+% q = Rational(9, 10)
+% u0 = 10000
+% # u_n = 10000 * (9/10)^n
+% u_n = u0 * q**n
+% assert u_n.subs(n, 0) == 10000
+% assert u_n.subs(n, 1) == 9000
+% assert u_n.subs(n, 2) == 8100
+% # Somme S_n = sum_{k=0}^{n} u_k = u0 * (1 - q^{n+1})/(1-q) = 100000*(1 - (9/10)^{n+1})
+% S = lambda m: sum(u_n.subs(n, j) for j in range(m+1))
+% assert S(0) == 10000
+% assert S(1) == 19000
+% assert S(2) == Rational(27100)
+% # Formule : S_n = 10000*(1-(9/10)^{n+1})/(1-9/10) = 100000*(1-(9/10)^{n+1})
+% def S_formula(m):
+%     return 100000 * (1 - q**(m+1))
+% for m in [0,1,2,3,5]:
+%     assert S(m) == S_formula(m)
+% # Limite de S_n quand n->inf = 100000
+% assert limit(100000*(1 - q**n), n, oo) == 100000
+% # Rang n tel que S_n > 90000 : 1-(9/10)^{n+1} > 0.9 => (9/10)^{n+1} < 0.1
+% import math
+% n_min = math.ceil(math.log(0.1)/math.log(0.9)) - 1
+% assert n_min == 21  # verifie : (0.9)^22 < 0.1
+% assert float(q**22) < 0.1
+% assert float(q**21) > 0.1
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-046}{3}{35}
+Une usine produit $10\,000$ pièces lors de sa première année de fonctionnement. Chaque année suivante, la production diminue de $10\,\%$ par rapport à l'année précédente (usure des machines).
+
+On note $u_n$ la production de l'année $n$ (avec $u_0 = 10\,000$ pour la première année).
+
+\begin{enumerate}
+  \item Exprimer $u_{n+1}$ en fonction de $u_n$. Quelle est la nature de la suite $(u_n)$ ? Préciser premier terme et raison.
+
+  \item Exprimer $u_n$ en fonction de $n$. Calculer $u_5$ et $u_{10}$ (valeurs arrondies à l'unité).
+
+  \item \textbf{Production cumulée.} On note $S_n = \displaystyle\sum_{k=0}^{n} u_k$ la production totale cumulée sur les $(n+1)$ premières années.
+  \begin{enumerate}
+    \item Montrer que $S_n = 100\,000 \times \left(1 - \left(\dfrac{9}{10}\right)^{n+1}\right)$.
+    \item Calculer $S_4$ et $S_{19}$ (arrondir à l'unité).
+    \item Interpréter la valeur vers laquelle $S_n$ tend quand $n$ devient très grand. Est-ce cohérent avec le contexte industriel ?
+  \end{enumerate}
+
+  \item \textbf{Seuil.} Déterminer le plus petit entier $n$ tel que la production cumulée $S_n$ dépasse $90\,000$ pièces. On justifiera la démarche par un calcul exact, puis on vérifiera numériquement.
+
+  \item \textbf{Comparaison.} Une usine concurrente maintient une production constante de $5\,000$ pièces par an. À partir de quel rang la production cumulée de cette usine dépasse-t-elle celle de la première usine ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,58 @@
+% META: {"id": "1SPE-SUITES-EX-041", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C3", "1SPE-SUITES-C4"], "capacites_codes": ["C2", "C3", "C4"], "methodes": ["M2", "M3", "M4"], "parcours": 3, "competences": ["chercher", "raisonner", "calculer"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": 2, "r": 3, "n0": 10}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-041.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-041.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n, k = symbols('n k', integer=True, nonnegative=True)
+% # Suite arithmetique : a_n = 2 + 3n, a_0=2, raison 3
+% a = lambda m: 2 + 3*m
+% assert a(0) == 2
+% assert a(1) == 5
+% assert a(10) == 32
+% # Suite geometrique : b_n = 2 * 3^n, b_0=2, raison 3
+% b = lambda m: 2 * 3**m
+% assert b(0) == 2
+% assert b(1) == 6
+% assert b(10) == 2 * 3**10
+% # Somme arithmetique S_A = sum_{k=0}^{9} a_k = 10*(a_0+a_9)/2
+% SA = sum(a(k) for k in range(10))
+% assert SA == 10 * (a(0) + a(9)) // 2
+% assert SA == 155
+% # Somme geometrique S_G = sum_{k=0}^{9} b_k = 2*(3^10 - 1)/(3-1)
+% SG = sum(b(k) for k in range(10))
+% assert SG == 2*(3**10 - 1)//2
+% assert SG == 3**10 - 1
+% assert SG == 59048
+% # Rang n tel que b_n > a_n : 2*3^n > 2+3n
+% # n=1 : 6>5 oui, n=0 : 2>2 non
+% assert b(0) == a(0)  # egalite en 0
+% assert b(1) > a(1)
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-041}{3}{35}
+On considère deux suites $(a_n)$ et $(b_n)$ définies pour tout entier naturel $n$ par :
+\[
+  a_n = 3n + 2 \qquad \text{et} \qquad b_n = 2 \times 3^n.
+\]
+
+\begin{enumerate}
+  \item \textbf{Nature des suites.}
+  \begin{enumerate}
+    \item Montrer que $(a_n)$ est arithmétique. Préciser son premier terme et sa raison.
+    \item Montrer que $(b_n)$ est géométrique. Préciser son premier terme et sa raison.
+    \item Comparer $a_0$ et $b_0$.
+  \end{enumerate}
+
+  \item \textbf{Comparaison terme à terme.} On cherche à déterminer les entiers $n$ pour lesquels $b_n > a_n$.
+  \begin{enumerate}
+    \item Vérifier que $b_1 > a_1$.
+    \item Montrer que, pour tout entier $n \geq 1$, on a $b_n > a_n$. \textit{On pourra raisonner par récurrence.}
+  \end{enumerate}
+
+  \item \textbf{Sommes.}
+  \begin{enumerate}
+    \item Calculer $S_A = \displaystyle\sum_{k=0}^{9} a_k$.
+    \item Calculer $S_G = \displaystyle\sum_{k=0}^{9} b_k$.
+    \item Calculer $S_G - S_A$ et interpréter ce résultat.
+  \end{enumerate}
+
+  \item \textbf{Question ouverte.} Trouver la plus petite valeur de $n$ pour laquelle $S_G^{(n)} > 100 \times S_A^{(n)}$, où $S_A^{(n)} = \displaystyle\sum_{k=0}^{n} a_k$ et $S_G^{(n)} = \displaystyle\sum_{k=0}^{n} b_k$. Justifier la démarche.
+\end{enumerate}
+\end{exercice}

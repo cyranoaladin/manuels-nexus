@@ -1,0 +1,93 @@
+% META: {"id": "1SPE-SUITES-CO-027", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-027", "capacites_codes": ["C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 256
+% q = Rational(1, 2)
+% u = u0 * q**n
+% assert u.subs(n, 0) == 256
+% assert u.subs(n, 1) == 128
+% assert u.subs(n, 2) == 64
+% ratio = simplify(u.subs(n, n+1) / u)
+% assert ratio == Rational(1, 2)
+% assert u.subs(n, 3) == 32
+% assert u.subs(n, 7) == 2
+% # Somme S = u0 + ... + u7 : 8 termes
+% S = 256 * (1 - q**8) / (1 - q)
+% assert S == 510
+% # T = S - u0 = 510 - 256 = 254
+% T = 510 - 256
+% assert T == 254
+% # Formule somme : u0*(1-q^(n+1))/(1-q) = 256*(1-(1/2)^(n+1))/(1/2) = 512*(1-(1/2)^(n+1))
+% from sympy import Eq
+% expr = u0 * (1 - q**(n+1)) / (1 - q)
+% simplified = simplify(expr - 512*(1 - (Rational(1,2))**(n+1)))
+% assert simplified == 0
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-027}
+
+\textbf{Question 1 — Vérification que $u_n \neq 0$ et calcul du quotient.}
+
+Pour tout $n \in \mathbb{N}$, $u_n = 256 \times \left(\dfrac{1}{2}\right)^n$. Or $256 > 0$ et $\left(\dfrac{1}{2}\right)^n > 0$, donc $u_n > 0$ pour tout $n \in \mathbb{N}$, en particulier $u_n \neq 0$.
+
+On peut donc calculer :
+\[
+  \frac{u_{n+1}}{u_n} = \frac{256 \times \left(\dfrac{1}{2}\right)^{n+1}}{256 \times \left(\dfrac{1}{2}\right)^n} = \left(\frac{1}{2}\right)^{n+1-n} = \frac{1}{2}.
+\]
+
+\commentaireMarge{Le quotient est constant et égal à $\dfrac{1}{2}$ : $(u_n)$ est bien géométrique de raison $q = \dfrac{1}{2}$.}
+
+Ce quotient est constant, ce qui confirme que $(u_n)$ est une suite géométrique de raison $q = \dfrac{1}{2}$.
+
+\medskip
+\textbf{Question 2 — Expression de $u_n$ en fonction de $n$.}
+
+\[
+  u_n = u_0 \times q^n = 256 \times \left(\frac{1}{2}\right)^n = \frac{256}{2^n}.
+\]
+
+\medskip
+\textbf{Question 3 — Calcul de $u_3$ et $u_7$.}
+
+\[
+  u_3 = \frac{256}{2^3} = \frac{256}{8} = 32.
+\]
+\[
+  u_7 = \frac{256}{2^7} = \frac{256}{128} = 2.
+\]
+
+\medskip
+\textbf{Question 4 — Calcul de $S$ et de $T$.}
+
+La somme $S = u_0 + u_1 + \cdots + u_7$ porte sur $8$ termes d'une suite géométrique de raison $q = \dfrac{1}{2} \neq 1$ :
+
+\commentaireMarge{Formule : $S_N = u_0 \dfrac{1 - q^{N+1}}{1 - q}$ (avec $N+1$ termes, de rang $0$ à $N$).}
+
+\[
+  S = u_0 \, \frac{1 - q^{8}}{1 - q} = 256 \times \frac{1 - \left(\dfrac{1}{2}\right)^8}{1 - \dfrac{1}{2}} = 256 \times \frac{1 - \dfrac{1}{256}}{\dfrac{1}{2}} = 256 \times 2 \times \frac{255}{256} = 2 \times 255 = 510.
+\]
+
+\[
+  T = u_1 + u_2 + \cdots + u_7 = S - u_0 = 510 - 256 = 254.
+\]
+
+\medskip
+\textbf{Question 5 — Formule de la somme et comportement pour $n$ grand.}
+
+Pour tout entier $n \geq 1$, la somme $u_0 + u_1 + \cdots + u_n$ porte sur $n+1$ termes :
+\[
+  u_0 + u_1 + \cdots + u_n = u_0 \cdot \frac{1 - q^{n+1}}{1 - q} = 256 \cdot \frac{1 - \left(\dfrac{1}{2}\right)^{n+1}}{\dfrac{1}{2}} = 512 \left(1 - \left(\frac{1}{2}\right)^{n+1}\right).
+\]
+
+\commentaireMarge{On retrouve exactement la formule annoncée, ce qui achève la démonstration.}
+
+C'est bien la formule annoncée.
+
+\textit{Comportement quand $n \to +\infty$ :} Comme $0 < \dfrac{1}{2} < 1$, on a $\left(\dfrac{1}{2}\right)^{n+1} \to 0$ quand $n \to +\infty$.
+
+Donc $u_0 + u_1 + \cdots + u_n \to 512$ quand $n \to +\infty$.
+
+La somme de tous les termes de la suite converge vers $512$ (la suite des sommes partielles est croissante et majorée par $512$).
+
+\baremeIndicatif{Q1 : 2 pts (raisonner : $u_n > 0$ 1 pt + calcul du quotient 1 pt) ; Q2 : 1 pt (calculer : terme général) ; Q3 : 1 pt (calculer : $u_3$ et $u_7$) ; Q4 : 2 pts (calculer : $S$ et $T$) ; Q5 : 2 pts (raisonner, communiquer : démonstration de la formule 1 pt + comportement asymptotique 1 pt)}
+\end{corrige}

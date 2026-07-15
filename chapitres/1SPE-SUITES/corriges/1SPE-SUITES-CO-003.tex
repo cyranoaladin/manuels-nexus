@@ -1,0 +1,42 @@
+% META: {"id": "1SPE-SUITES-CO-003", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-003", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Suite definie par recurrence : u0 = 5, u_{n+1} = 3*u_n - 2
+% # Calcul pas a pas
+% u0 = 5
+% u1 = 3*u0 - 2
+% assert u1 == 13
+% u2 = 3*u1 - 2
+% assert u2 == 37
+% u3 = 3*u2 - 2
+% assert u3 == 109
+% # Suite par recurrence : chaque terme depend du precedent
+% # Pour calculer u5, il faut u4 (et donc u3, u2, u1, u0)
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-003}
+
+\commentaireMarge{Pour une suite définie par récurrence, on calcule chaque terme à partir du précédent, en appliquant la relation de proche en proche.}
+
+\textbf{Question 1.} On applique la relation $u_{n+1} = 3u_n - 2$ de proche en proche, en partant de $u_0 = 5$.
+
+\[
+u_1 = 3u_0 - 2 = 3 \times 5 - 2 = 15 - 2 = 13.
+\]
+\[
+u_2 = 3u_1 - 2 = 3 \times 13 - 2 = 39 - 2 = 37.
+\]
+\[
+u_3 = 3u_2 - 2 = 3 \times 37 - 2 = 111 - 2 = 109.
+\]
+
+Donc $u_1 = 13$, $u_2 = 37$ et $u_3 = 109$.
+
+\commentaireMarge{Une suite est définie par récurrence si chaque terme est exprimé en fonction du (ou des) terme(s) précédent(s), et non directement en fonction de l'indice $n$.}
+
+\textbf{Question 2.} Cette suite est définie par \textbf{récurrence}, car chaque terme $u_{n+1}$ est calculé à partir du terme précédent $u_n$ via la relation $u_{n+1} = 3u_n - 2$ : on ne dispose pas d'une formule exprimant $u_n$ directement en fonction de $n$.
+
+\commentaireMarge{Le calcul d'un terme d'une suite récurrente nécessite impérativement la connaissance du terme précédent.}
+
+\textbf{Question 3.} Oui, pour calculer $u_5$, il faut impérativement connaître $u_4$, car la relation de récurrence donne $u_5 = 3u_4 - 2$ : on ne peut pas calculer $u_5$ directement à partir de $n = 5$ sans connaître $u_4$ au préalable.
+
+\end{corrige}

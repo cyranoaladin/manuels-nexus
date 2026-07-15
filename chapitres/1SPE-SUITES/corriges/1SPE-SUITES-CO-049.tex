@@ -1,0 +1,188 @@
+% META: {"id": "1SPE-SUITES-CO-049", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-049", "capacites_codes": ["C4", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% # Modele 1 : croissance geometrique u_{n+1} = 1.05 * u_n, u_0 = 100
+% r = Rational(21, 20)  # 1.05
+% u0 = 100
+% u_n = lambda n: u0 * r**n
+% assert u_n(0) == 100
+% assert u_n(1) == 105
+% assert u_n(2) == Rational(2205, 20)
+% # Somme S_9 = u_0*(1 - r^10)/(1 - r) = 100*(r^10 - 1)/(r - 1)
+% S9 = sum(u_n(k) for k in range(10))
+% S9_formula = u0 * (r**10 - 1) / (r - 1)
+% assert S9 == S9_formula
+% S9_float = float(S9)
+% assert abs(S9_float - 1257.789) < 1
+% # Seuil u_n > 500 : 100*(1.05)^n > 500 => (1.05)^n > 5
+% n_seuil = math.ceil(math.log(5)/math.log(1.05))
+% assert n_seuil == 33
+% assert float(r**33) > 5
+% assert float(r**32) < 5
+% # Modele 2 : croissance logistique
+% K = 500
+% alpha = Rational(1, 20)  # 0.05
+% v = [Rational(100)]
+% for i in range(5):
+%     vn = v[-1]
+%     v.append(vn + alpha * vn * (1 - vn / K))
+% assert v[0] == 100
+% assert v[1] == 104
+% assert v[2] == 104 + alpha * 104 * (1 - Rational(104, 500))
+% v2_expected = Rational(104) + Rational(1,20) * Rational(104) * (1 - Rational(104,500))
+% assert v[2] == v2_expected
+% # Bornes : si 0 < v_n < 500
+% # v_{n+1} = v_n + 0.05*v_n*(1 - v_n/500)
+% # si 0 < v_n < 500, alors 1 - v_n/500 > 0, donc v_{n+1} > v_n > 0
+% # v_{n+1} = v_n*(1 + 0.05*(1 - v_n/500)) < 500 ?
+% # v_{n+1} - 500 = v_n - 500 + 0.05*v_n*(1 - v_n/500)
+% #               = (v_n - 500)*(1 - 0.05*v_n/500)
+% # si 0 < v_n < 500 => v_n - 500 < 0 et 1 - 0.05*v_n/500 = 1 - v_n/10000 > 0
+% # donc v_{n+1} - 500 < 0 => v_{n+1} < 500
+% for val in v:
+%     assert val < 500
+%     assert val > 0
+% # Croissance : v_{n+1} - v_n = 0.05*v_n*(1 - v_n/500) > 0 si 0 < v_n < 500
+% for i in range(len(v)-1):
+%     assert v[i+1] > v[i]
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-049}
+
+\textbf{1. Modèle 1 — Croissance géométrique.}
+
+\textbf{a) Relation de récurrence.}
+
+La population augmente de $5\,\%$ par génération :
+\[
+u_{n+1} = u_n + 0{,}05\,u_n = 1{,}05\,u_n.
+\]
+
+\commentaireMarge{Une augmentation de $5\,\%$ revient à multiplier par $1{,}05 = \dfrac{21}{20}$.}
+
+\textbf{b) Nature de $(u_n)$ et expression explicite.}
+
+Pour tout $n \in \mathbb{N}$, $\dfrac{u_{n+1}}{u_n} = 1{,}05$ (constant). La suite $(u_n)$ est \textbf{géométrique} de premier terme $u_0 = 100$ et de raison $q = 1{,}05$.
+
+\[
+\boxed{u_n = 100 \times (1{,}05)^n.}
+\]
+
+\textbf{c) Somme $\displaystyle\sum_{k=0}^{9} u_k$.}
+
+La suite géométrique a $10$ termes (de $k = 0$ à $k = 9$), de premier terme $u_0 = 100$ et de raison $q = 1{,}05 \neq 1$ :
+
+\[
+\sum_{k=0}^{9} u_k = u_0 \times \frac{q^{10} - 1}{q - 1} = 100 \times \frac{(1{,}05)^{10} - 1}{0{,}05}.
+\]
+
+Numériquement : $(1{,}05)^{10} \approx 1{,}6289$, donc :
+\[
+\sum_{k=0}^{9} u_k \approx 100 \times \frac{0{,}6289}{0{,}05} \approx 100 \times 12{,}578 \approx 1\,257{,}8 \text{ individus.}
+\]
+
+La population cumulée sur $10$ générations est d'environ $\mathbf{1\,258}$ individus.
+
+\textbf{d) Seuil : $u_n > 500$.}
+
+\commentaireMarge{On passe au logarithme pour résoudre une inégalité sur une exponentielle.}
+
+\[
+u_n > 500 \iff 100 \times (1{,}05)^n > 500 \iff (1{,}05)^n > 5.
+\]
+
+En passant au logarithme (fonction croissante, $\ln(1{,}05) > 0$) :
+\[
+n > \frac{\ln 5}{\ln 1{,}05} \approx \frac{1{,}6094}{0{,}04879} \approx 32{,}99.
+\]
+
+Le plus petit entier vérifiant cette inégalité est $n = 33$.
+
+\textit{Vérification :} $(1{,}05)^{33} \approx 5{,}003 > 5$ \checkmark \quad et \quad $(1{,}05)^{32} \approx 4{,}765 < 5$.
+
+La population dépasse $500$ individus à partir de la \textbf{génération $n = 33$}.
+
+\textbf{2. Modèle 2 — Croissance logistique.}
+
+\textbf{a) Calcul de $v_1$ et $v_2$.}
+
+\[
+v_1 = v_0 + 0{,}05 \times v_0 \times \left(1 - \frac{v_0}{500}\right) = 100 + 0{,}05 \times 100 \times \left(1 - \frac{100}{500}\right) = 100 + 5 \times \frac{4}{5} = 100 + 4 = 104.
+\]
+
+\[
+v_2 = 104 + 0{,}05 \times 104 \times \left(1 - \frac{104}{500}\right) = 104 + 5{,}2 \times \frac{396}{500} = 104 + 5{,}2 \times 0{,}792 = 104 + 4{,}118 \approx 108{,}1.
+\]
+
+\textbf{b) Invariance de l'encadrement $0 < v_n < 500$ par récurrence.}
+
+\commentaireMarge{La structure de la fonction logistique garantit que la population reste toujours entre $0$ et $500$.}
+
+\textit{Initialisation :} $v_0 = 100$, donc $0 < v_0 = 100 < 500$. \checkmark
+
+\textit{Hérédité :} Supposons $0 < v_n < 500$ pour un certain $n \in \mathbb{N}$.
+
+On a $v_{n+1} = v_n + 0{,}05\,v_n\!\left(1 - \dfrac{v_n}{500}\right)$.
+
+\textit{Minoration :} Comme $0 < v_n < 500$, on a $1 - \dfrac{v_n}{500} > 0$, donc $0{,}05\,v_n\!\left(1 - \dfrac{v_n}{500}\right) > 0$, d'où $v_{n+1} > v_n > 0$.
+
+\textit{Majoration :} On calcule :
+\begin{align*}
+v_{n+1} - 500 &= v_n - 500 + 0{,}05\,v_n\left(1 - \frac{v_n}{500}\right) \\
+&= (v_n - 500) + \frac{0{,}05\,v_n(500 - v_n)}{500} \\
+&= (v_n - 500)\left[1 - \frac{0{,}05\,v_n}{500}\right] \\
+&= (v_n - 500)\left(1 - \frac{v_n}{10\,000}\right).
+\end{align*}
+
+Comme $0 < v_n < 500$, on a :
+\begin{itemize}
+  \item $v_n - 500 < 0$,
+  \item $1 - \dfrac{v_n}{10\,000} > 1 - \dfrac{500}{10\,000} = \dfrac{19}{20} > 0$.
+\end{itemize}
+
+Donc $v_{n+1} - 500 = (v_n - 500)\!\left(1 - \dfrac{v_n}{10\,000}\right) < 0$, ce qui donne $v_{n+1} < 500$. \checkmark
+
+\textit{Conclusion :} Par le principe de récurrence, $0 < v_n < 500$ pour tout $n \in \mathbb{N}$.
+
+\textbf{c) Sens de variation de $(v_n)$.}
+
+Pour tout $n \in \mathbb{N}$ :
+\[
+v_{n+1} - v_n = 0{,}05\,v_n\left(1 - \frac{v_n}{500}\right).
+\]
+
+D'après la question b), $v_n > 0$ et $1 - \dfrac{v_n}{500} > 0$ (car $v_n < 500$).
+
+Donc $v_{n+1} - v_n > 0$ : la suite $(v_n)$ est \textbf{strictement croissante}.
+
+\textbf{3. Comparaison et analyse du script Python.}
+
+Le script simule les deux modèles sur 20 générations. Les valeurs affichées sont :
+
+\begin{center}
+\begin{tabular}{|c|r|r|}
+\hline
+$n$ & $u_n$ (géométrique) & $v_n$ (logistique) \\
+\hline
+$5$  & $127{,}6$ & $122{,}0$ \\
+$10$ & $162{,}9$ & $144{,}5$ \\
+$20$ & $265{,}3$ & $196{,}4$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textit{(Valeurs approximatives, calculées par le script.)}
+
+\textbf{Comportements à long terme :}
+
+\begin{itemize}
+  \item \textbf{Modèle 1 $(u_n)$} : la suite est géométrique de raison $1{,}05 > 1$, donc $u_n \to +\infty$. La population croît indéfiniment, sans limite. Ce modèle est irréaliste car il ignore les contraintes de ressources.
+
+  \item \textbf{Modèle 2 $(v_n)$} : la suite est croissante et majorée par $500$, donc elle converge. On peut montrer que la limite est $500$ (la capacité d'accueil $K$). La population croît mais se stabilise en dessous de la capacité maximale. Ce modèle est plus réaliste biologiquement.
+\end{itemize}
+
+\commentaireMarge{Le modèle logistique est fondamental en biologie des populations : il intègre la compétition pour les ressources via le terme $(1 - v_n/K)$.}
+
+Les deux populations se comportent de façon similaire au début (faibles effectifs, le terme logistique est proche de $1$), mais divergent à moyen et long terme : le modèle géométrique explose tandis que le modèle logistique sature autour de $K = 500$.
+
+\end{corrige}

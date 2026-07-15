@@ -1,0 +1,95 @@
+% META: {"id": "1SPE-SUITES-CO-034", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-034", "capacites_codes": ["C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols
+% n = symbols('n', integer=True, nonneg=True)
+% K0 = 2000
+% q = Rational(105, 100)
+% K = K0 * q**n
+% assert K.subs(n, 0) == 2000
+% assert K.subs(n, 1) == 2100
+% # K_5
+% K5 = float(K0 * (1.05)**5)
+% assert abs(K5 - 2552.56) < 0.01
+% # Seuil : K_n >= 3000 => 2000 * 1.05^n >= 3000 => 1.05^n >= 1.5
+% import math
+% n_seuil = math.ceil(math.log(1.5) / math.log(1.05))
+% assert n_seuil == 9
+% # Verif : 1.05^8 ~ 1.4775, 1.05^9 ~ 1.5513
+% assert 2000 * (1.05**8) < 3000
+% assert 2000 * (1.05**9) >= 3000
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-034}
+
+\textbf{Question 1 — Modélisation, nature géométrique et terme général.}
+
+Chaque année, le capital est multiplié par $(1 + 0{,}05) = 1{,}05$. Donc :
+\[
+  K_{n+1} = 1{,}05 \times K_n, \quad K_0 = 2\,000.
+\]
+
+Pour tout $n \in \mathbb{N}$, $K_n > 0$, ce qui autorise le calcul du quotient :
+\[
+  \frac{K_{n+1}}{K_n} = 1{,}05.
+\]
+
+\commentaireMarge{Le quotient est constant : $(K_n)$ est géométrique de raison $q = 1{,}05$ et de premier terme $K_0 = 2\,000$.}
+
+$(K_n)$ est une suite géométrique de raison $q = 1{,}05$ et de premier terme $K_0 = 2\,000$, d'où :
+\[
+  K_n = 2\,000 \times 1{,}05^n.
+\]
+
+\medskip
+\textbf{Question 2 — Calcul de $K_5$.}
+
+\[
+  K_5 = 2\,000 \times 1{,}05^5 \approx 2\,000 \times 1{,}27628 \approx 2\,552{,}56 \text{ \euro{}}.
+\]
+
+Après $5$ ans, Kévin dispose d'environ $2\,552{,}56$~\euro{}, soit un gain de $552{,}56$~\euro{}.
+
+\medskip
+\textbf{Question 3 — Détermination du plus petit $n$ tel que $K_n \geq 3\,000$.}
+
+\textit{a) Inéquation.}
+
+\[
+  K_n \geq 3\,000 \iff 2\,000 \times 1{,}05^n \geq 3\,000 \iff 1{,}05^n \geq 1{,}5.
+\]
+
+\textit{b) Programme Python.}
+
+\medskip
+\texttt{K = 2000}\\
+\texttt{n = 0}\\
+\texttt{while K < 3000:}\\
+\hspace*{1.5em}\texttt{K = K * 1.05} \quad \textit{\# On multiplie le capital par 1,05 (gain de 5\%)}\\
+\hspace*{1.5em}\texttt{n = n + 1} \quad \textit{\# On incrémente le compteur d'années}\\
+\texttt{print(n, K)} \quad \textit{\# On affiche l'année et le capital atteint}
+
+\medskip
+
+\commentaireMarge{La boucle \texttt{while} répète les instructions tant que $K < 3\,000$ : elle s'arrête au premier rang où $K \geq 3\,000$.}
+
+La boucle simule l'évolution du capital année par année. Elle s'arrête dès que \texttt{K} atteint ou dépasse $3\,000$.
+
+\textit{c) Trois premiers tours de boucle.}
+
+\begin{itemize}
+  \item Tour 1 : \texttt{K = 2000 * 1.05 = 2100}, \texttt{n = 1}. Condition : $2\,100 < 3\,000$ \checkmark, on continue.
+  \item Tour 2 : \texttt{K = 2100 * 1.05 = 2205}, \texttt{n = 2}. Condition : $2\,205 < 3\,000$ \checkmark, on continue.
+  \item Tour 3 : \texttt{K = 2205 * 1.05 = 2315,25}, \texttt{n = 3}. Condition : $2\,315{,}25 < 3\,000$ \checkmark, on continue.
+\end{itemize}
+
+\textit{d) Résultat affiché.}
+
+Par essais successifs : $1{,}05^8 \approx 1{,}4775$ ($K_8 \approx 2\,955{,}00 < 3\,000$) et $1{,}05^9 \approx 1{,}5513$ ($K_9 \approx 3\,102{,}66 \geq 3\,000$).
+
+\commentaireMarge{$n = 9$ est le plus petit rang pour lequel $K_n \geq 3\,000$.}
+
+Le programme affiche \texttt{9 3102.66...}
+
+Il faut donc \textbf{9 ans} pour que le capital de Kévin dépasse $3\,000$~\euro{}.
+
+\baremeIndicatif{Q1 : 2 pts (modeliser, raisonner : relation de récurrence 1 pt + terme général 1 pt) ; Q2 : 1 pt (calculer : $K_5$ arrondi) ; Q3a : 1 pt (raisonner : mise en inéquation) ; Q3b : 2 pts (programmer, communiquer : complétion et explication du programme) ; Q3c : 1 pt (calculer : trois tours de boucle) ; Q3d : 1 pt (calculer : résultat et interprétation)}
+\end{corrige}

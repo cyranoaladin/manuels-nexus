@@ -1,0 +1,84 @@
+% META: {"id": "1SPE-SUITES-CO-043", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-043", "capacites_codes": ["C5", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% p = Rational(4, 5)
+% c = 200
+% u0 = 600
+% L = c / (1 - p)
+% assert L == 1000
+% v0 = u0 - L
+% assert v0 == -400
+% u_n = L + v0 * p**n
+% assert u_n.subs(n, 0) == 600
+% assert u_n.subs(n, 1) == 680
+% assert u_n.subs(n, 2) == Rational(3720, 5)
+% assert u_n.subs(n, 3) == Rational(3976, 5)
+% for k in range(5):
+%     assert float(u_n.subs(n, k)) < float(u_n.subs(n, k+1))
+% assert limit(u_n, n, oo) == 1000
+% # Optimisation
+% from sympy import symbols as sym
+% c_var = sym('c', positive=True)
+% L_c = c_var / (1 - p)
+% assert L_c == 5*c_var
+% assert solve(5*c_var - 1500, c_var)[0] == 300
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-043}
+
+\textbf{1. Calcul des premiers termes.}
+
+\[
+u_1 = 0{,}8 \times 600 + 200 = 480 + 200 = 680 \quad;\quad u_2 = 0{,}8 \times 680 + 200 = 744 \quad;\quad u_3 = 0{,}8 \times 744 + 200 = 795{,}2.
+\]
+
+La population \textbf{croît} et semble se stabiliser autour de $1\,000$ individus.
+
+\textbf{2. Point d'équilibre.}
+
+\commentaireMarge{Le point fixe $\ell$ est la population qui se reproduit à l'identique d'une année sur l'autre.}
+
+\textbf{a)} $0{,}8\,\ell + 200 = \ell \Rightarrow 200 = 0{,}2\,\ell \Rightarrow \ell = 1\,000$.
+
+\textbf{b)} Si la population atteint $1\,000$ individus, les $200$ réintroductions compensent exactement les $20\,\%$ de disparitions ($0{,}2 \times 1\,000 = 200$). La population est alors stable.
+
+\textbf{3. Suite auxiliaire.}
+
+\textbf{a)} On pose $v_n = u_n - 1\,000$. Alors :
+\[
+v_{n+1} = u_{n+1} - 1\,000 = (0{,}8\,u_n + 200) - 1\,000 = 0{,}8\,u_n - 800 = 0{,}8(u_n - 1\,000) = 0{,}8\,v_n.
+\]
+$(v_n)$ est géométrique de premier terme $v_0 = u_0 - 1\,000 = 600 - 1\,000 = -400$ et de raison $q = 0{,}8 = \dfrac{4}{5}$.
+
+\textbf{b)}
+\[
+v_n = -400 \times \left(\frac{4}{5}\right)^n \qquad \text{d'où} \qquad \boxed{u_n = 1\,000 - 400 \times \left(\frac{4}{5}\right)^n}.
+\]
+
+\textbf{4. Monotonie et comportement à long terme.}
+
+\commentaireMarge{La monotonie découle directement du signe de $u_{n+1} - u_n$.}
+
+$u_{n+1} - u_n = 0{,}8\,u_n + 200 - u_n = 200 - 0{,}2\,u_n$.
+
+Montrons par récurrence que $u_n < 1\,000$ pour tout $n \in \mathbb{N}$ :
+\begin{itemize}
+  \item $u_0 = 600 < 1\,000$. \checkmark
+  \item Si $u_n < 1\,000$, alors $u_{n+1} = 0{,}8\,u_n + 200 < 0{,}8 \times 1\,000 + 200 = 1\,000$. \checkmark
+\end{itemize}
+
+Donc $u_n < 1\,000$ pour tout $n$, ce qui entraîne $u_{n+1} - u_n = 200 - 0{,}2\,u_n > 200 - 0{,}2 \times 1\,000 = 0$.
+
+La suite $(u_n)$ est donc \textbf{strictement croissante} et \textbf{majorée par $1\,000$}.
+
+Comportement à long terme : $\left(\dfrac{4}{5}\right)^n \to 0$ quand $n \to +\infty$, donc $u_n \to 1\,000$. La population se stabilise à long terme autour de $\mathbf{1\,000}$ individus.
+
+\textbf{5. Problème d'optimisation.}
+
+\textbf{a)} Avec un apport de $c$ individus par an, le point fixe vérifie $0{,}8\,\ell(c) + c = \ell(c)$, soit $0{,}2\,\ell(c) = c$, d'où $\ell(c) = 5c$.
+
+\textbf{b)} On veut $\ell(c) \geq 1\,500$, soit $5c \geq 1\,500$, donc $c \geq 300$.
+
+La valeur minimale de réintroduction est $\boxed{c = 300}$ individus par an.
+
+\end{corrige}

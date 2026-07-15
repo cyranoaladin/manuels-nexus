@@ -1,0 +1,94 @@
+% META: {"id": "1SPE-SUITES-CO-028", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-028", "capacites_codes": ["C2", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u = -4*n + 30
+% assert u.subs(n, 0) == 30
+% assert u.subs(n, 1) == 26
+% assert u.subs(n, 2) == 22
+% diff = u.subs(n, n+1) - u
+% assert simplify(diff) == -4
+% # Suite decroissante car r = -4 < 0
+% # u_n > 0 => -4n + 30 > 0 => n < 7.5 => n <= 7
+% assert u.subs(n, 7) == 2
+% assert u.subs(n, 8) == -2
+% # v_n = u_n^2
+% v = u**2
+% assert v.subs(n, 0) == 900
+% assert v.subs(n, 1) == 676
+% assert v.subs(n, 2) == 484
+% # v_0 > v_1 > v_2 : décroissant au debut, mais v_7 = 4, v_8 = 4, v_9 = 36
+% assert v.subs(n, 7) == 4
+% assert v.subs(n, 8) == 4
+% assert v.subs(n, 9) == 36
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-028}
+
+\textbf{Question 1 — Calcul de $u_0$, $u_1$ et $u_2$.}
+
+\[
+  u_0 = -4 \times 0 + 30 = 30, \quad u_1 = -4 \times 1 + 30 = 26, \quad u_2 = -4 \times 2 + 30 = 22.
+\]
+
+\medskip
+\textbf{Question 2 — Démonstration que $(u_n)$ est arithmétique.}
+
+Pour tout entier naturel $n$, on calcule la différence :
+\[
+  u_{n+1} - u_n = \bigl(-4(n+1) + 30\bigr) - (-4n + 30) = -4n - 4 + 30 + 4n - 30 = -4.
+\]
+
+\commentaireMarge{La différence $u_{n+1} - u_n$ est constante : c'est la définition d'une suite arithmétique.}
+
+La différence $u_{n+1} - u_n = -4$ est constante pour tout $n \in \mathbb{N}$.
+
+Donc $(u_n)$ est une suite arithmétique de raison $r = -4$ et de premier terme $u_0 = 30$.
+
+\medskip
+\textbf{Question 3 — Sens de variation.}
+
+La raison de $(u_n)$ est $r = -4 < 0$.
+
+\commentaireMarge{Une suite arithmétique est strictement décroissante si et seulement si sa raison est strictement négative.}
+
+Puisque $r < 0$, pour tout $n \in \mathbb{N}$ on a $u_{n+1} - u_n = -4 < 0$, donc $u_{n+1} < u_n$.
+
+La suite $(u_n)$ est \textbf{strictement décroissante}.
+
+\medskip
+\textbf{Question 4 — Valeurs de $n$ telles que $u_n > 0$ et $u_n \leq 0$.}
+
+On résout $u_n > 0$ :
+\[
+  -4n + 30 > 0 \iff -4n > -30 \iff n < \frac{30}{4} = 7{,}5.
+\]
+
+Comme $n$ est un entier naturel, $u_n > 0 \iff n \leq 7$.
+
+\textit{Vérification :} $u_7 = -28 + 30 = 2 > 0$ et $u_8 = -32 + 30 = -2 < 0$. \checkmark
+
+De même, $u_n \leq 0 \iff n \geq 8$.
+
+\commentaireMarge{$u_n > 0$ pour $n \in \{0, 1, \ldots, 7\}$ et $u_n \leq 0$ pour tout entier $n \geq 8$.}
+
+\medskip
+\textbf{Question 5 — Étude de $(v_n)$ avec $v_n = u_n^2$.}
+
+On calcule les premiers termes :
+\[
+  v_0 = 30^2 = 900, \quad v_1 = 26^2 = 676, \quad v_2 = 22^2 = 484.
+\]
+
+Ces trois valeurs sont dans l'ordre décroissant ($v_0 > v_1 > v_2$).
+
+Cependant, $(v_n)$ \textbf{n'est pas monotone} : en effet, $u_n$ devient négatif à partir de $n = 8$, et $|u_n|$ commence à croître. Par exemple :
+\[
+  v_7 = 2^2 = 4, \quad v_8 = (-2)^2 = 4, \quad v_9 = (-6)^2 = 36.
+\]
+
+\commentaireMarge{On observe que $v_7 = v_8 = 4$ puis $v_9 = 36 > v_8$ : la suite cesse d'être décroissante. Le carré d'une fonction décroissante n'est pas monotone en général.}
+
+La suite $(v_n)$ est décroissante tant que $u_n$ est positive (pour $n \leq 7$), puis elle reprend une croissance lorsque $|u_n|$ augmente (pour $n \geq 8$). Elle n'est donc pas monotone.
+
+\baremeIndicatif{Q1 : 1 pt (calculer : trois termes) ; Q2 : 2 pts (raisonner : calcul de la différence 1 pt + conclusion 1 pt) ; Q3 : 1 pt (raisonner : signe de $r$) ; Q4 : 2 pts (calculer, raisonner : résolution de l'inéquation 1 pt + vérification 1 pt) ; Q5 : 2 pts (raisonner, communiquer : calculs de $v_0$, $v_1$, $v_2$ 1 pt + explication de la non-monotonicité 1 pt)}
+\end{corrige}

@@ -1,0 +1,55 @@
+% META: {"id": "1SPE-SUITES-CO-011", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-011", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Suite arithmetique u0=2, r=3 : u_k = 2 + 3k
+% termes = [2 + 3*k for k in range(6)]
+% assert termes == [2, 5, 8, 11, 14, 17]
+% S = sum(termes)
+% assert S == 57
+% # Formule : (n+1) * (u0 + un) / 2 avec n=5
+% # nombre de termes = 6, u0=2, u5=17
+% S_formule = 6 * (2 + 17) // 2
+% assert S_formule == 57
+% # Verification addition directe
+% assert 2 + 5 + 8 + 11 + 14 + 17 == 57
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-011}
+
+\commentaireMarge{On calcule les termes par la formule $u_k = u_0 + kr$.}
+
+\textbf{Question 1.} La formule du terme général est $u_k = 2 + 3k$. On calcule :
+
+\medskip
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+$k$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ \\
+\hline
+$u_k$ & $2$ & $5$ & $8$ & $11$ & $14$ & $17$ \\
+\hline
+\end{tabular}
+\medskip
+
+En détail :
+\[
+u_0 = 2, \quad u_1 = 2+3 = 5, \quad u_2 = 2+6 = 8, \quad u_3 = 2+9 = 11, \quad u_4 = 2+12 = 14, \quad u_5 = 2+15 = 17.
+\]
+
+\commentaireMarge{La formule de somme d'une suite arithmétique : $S = \text{(nombre de termes)} \times \dfrac{\text{premier terme} + \text{dernier terme}}{2}$.}
+
+\textbf{Question 2.} La somme $S = u_0 + u_1 + \cdots + u_5$ contient $n + 1 = 5 + 1 = 6$ termes. On applique la formule :
+\[
+S = (n+1) \times \frac{u_0 + u_n}{2} = 6 \times \frac{u_0 + u_5}{2} = 6 \times \frac{2 + 17}{2} = 6 \times \frac{19}{2} = 6 \times 9{,}5 = 57.
+\]
+
+Donc $S = 57$.
+
+\commentaireMarge{Vérification par addition directe des six termes.}
+
+\textbf{Question 3.} On additionne directement les six termes :
+\[
+S = 2 + 5 + 8 + 11 + 14 + 17 = (2 + 5) + (8 + 11) + (14 + 17) = 7 + 19 + 31 = 57.
+\]
+
+On retrouve bien $S = 57$. \checkmark
+
+\end{corrige}

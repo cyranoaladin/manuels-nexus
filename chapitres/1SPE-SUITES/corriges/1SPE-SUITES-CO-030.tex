@@ -1,0 +1,87 @@
+% META: {"id": "1SPE-SUITES-CO-030", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-030", "capacites_codes": ["C3", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 5
+% q = Rational(3, 4)
+% u = u0 * q**n
+% assert u.subs(n, 0) == 5
+% assert u.subs(n, 1) == Rational(15, 4)
+% assert u.subs(n, 2) == Rational(45, 16)
+% assert u.subs(n, 3) == Rational(135, 64)
+% ratio = simplify(u.subs(n, n+1) / u)
+% assert ratio == Rational(3, 4)
+% assert ratio < 1
+% # v_n = u_{n+1}/u_n - 1 = 3/4 - 1 = -1/4
+% v = Rational(3, 4) - 1
+% assert v == Rational(-1, 4)
+% # w_n = 1/u_n = 1/(5*(3/4)^n) = (4/3)^n / 5
+% # w_{n+1}/w_n = (4/3)
+% w_ratio = Rational(4, 3)
+% assert w_ratio > 1
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-030}
+
+\textbf{Question 1 — Calcul de $u_1$, $u_2$ et $u_3$.}
+
+\[
+  u_1 = 5 \times \frac{3}{4} = \frac{15}{4}, \quad u_2 = \frac{15}{4} \times \frac{3}{4} = \frac{45}{16}, \quad u_3 = \frac{45}{16} \times \frac{3}{4} = \frac{135}{64}.
+\]
+
+\medskip
+\textbf{Question 2 — Démonstration de la décroissance stricte (méthode du quotient).}
+
+Pour tout $n \in \mathbb{N}$, on a $u_n = 5 \times \left(\dfrac{3}{4}\right)^n > 0$ car $5 > 0$ et $\left(\dfrac{3}{4}\right)^n > 0$.
+
+En particulier, $u_n \neq 0$, ce qui autorise le calcul du quotient :
+\[
+  \frac{u_{n+1}}{u_n} = \frac{5 \times \left(\dfrac{3}{4}\right)^{n+1}}{5 \times \left(\dfrac{3}{4}\right)^n} = \frac{3}{4}.
+\]
+
+\commentaireMarge{Le quotient $\dfrac{u_{n+1}}{u_n} = \dfrac{3}{4} < 1$ pour tout $n$ : la suite est strictement décroissante.}
+
+Comme $\dfrac{u_{n+1}}{u_n} = \dfrac{3}{4} < 1$ et $u_n > 0$, on a $u_{n+1} < u_n$ pour tout $n \in \mathbb{N}$.
+
+La suite $(u_n)$ est \textbf{strictement décroissante}.
+
+\medskip
+\textbf{Question 3 — Expression de $u_n$ en fonction de $n$.}
+
+Il s'agit d'une suite géométrique de premier terme $u_0 = 5$ et de raison $q = \dfrac{3}{4}$, donc :
+\[
+  u_n = u_0 \times q^n = 5 \times \left(\frac{3}{4}\right)^n.
+\]
+
+\medskip
+\textbf{Question 4 — Étude de $v_n = \dfrac{u_{n+1}}{u_n} - 1$.}
+
+\textit{a) Calcul de $v_n$.}
+
+\[
+  v_n = \frac{u_{n+1}}{u_n} - 1 = \frac{3}{4} - 1 = -\frac{1}{4}.
+\]
+
+La suite $(v_n)$ est constante, de valeur $-\dfrac{1}{4}$.
+
+\textit{b) Interprétation du signe.}
+
+$v_n = -\dfrac{1}{4} < 0$ pour tout $n \in \mathbb{N}$.
+
+\commentaireMarge{$v_n < 0 \iff \dfrac{u_{n+1}}{u_n} < 1$ (avec $u_n > 0$) $\iff u_{n+1} < u_n$ : cela confirme la décroissance stricte.}
+
+Comme $v_n < 0$, on a $\dfrac{u_{n+1}}{u_n} < 1$, ce qui, combiné à $u_n > 0$, donne $u_{n+1} < u_n$. Cela confirme que $(u_n)$ est strictement décroissante.
+
+\medskip
+\textbf{Question 5 — Nature de $(w_n)$ avec $w_n = \dfrac{1}{u_n}$.}
+
+Pour tout $n \in \mathbb{N}$, $u_n > 0$ donc $w_n$ est bien défini. Calculons le quotient :
+\[
+  \frac{w_{n+1}}{w_n} = \frac{1/u_{n+1}}{1/u_n} = \frac{u_n}{u_{n+1}} = \frac{1}{q} = \frac{1}{\dfrac{3}{4}} = \frac{4}{3}.
+\]
+
+\commentaireMarge{Le quotient $\dfrac{w_{n+1}}{w_n} = \dfrac{4}{3}$ est constant : $(w_n)$ est géométrique de raison $\dfrac{4}{3}$.}
+
+Ce quotient est constant. Donc $(w_n)$ est une suite géométrique de raison $\dfrac{4}{3}$ et de premier terme $w_0 = \dfrac{1}{5}$.
+
+\baremeIndicatif{Q1 : 1 pt (calculer : trois termes en fractions) ; Q2 : 2 pts (raisonner : $u_n > 0$ justifié 1 pt + calcul du quotient et conclusion 1 pt) ; Q3 : 1 pt (calculer : formule terme général) ; Q4 : 2 pts (calculer : valeur de $v_n$ 1 pt + interprétation du signe 1 pt) ; Q5 : 2 pts (raisonner : calcul du quotient de $(w_n)$ 1 pt + identification et raison 1 pt)}
+\end{corrige}

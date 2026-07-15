@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-SUITES-EX-015", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": 5, "q_num": 3, "q_den": 4}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-015.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-015.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 5 * Rational(3, 4)**n
+% ratio = u.subs(n, n+1) / u
+% assert simplify(ratio - Rational(3, 4)) == 0
+% # u_n > 0 for all n (u0=5>0, q=3/4>0)
+% # ratio = 3/4 < 1 => suite decroissante
+% assert Rational(3, 4) < 1
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-015}{1}{10}
+On considère la suite $(u_n)$ définie par $u_0 = 5$ et $u_{n+1} = \dfrac{3}{4} u_n$ pour tout entier naturel $n$.
+\begin{enumerate}
+  \item Calculer $\dfrac{u_{n+1}}{u_n}$.
+  \item Tous les termes $u_n$ sont-ils positifs ? Justifier.
+  \item En comparant le quotient $\dfrac{u_{n+1}}{u_n}$ à $1$, déterminer si la suite est croissante ou décroissante.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,34 @@
+% META: {"id": "1SPE-SUITES-EX-022", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C1", "1SPE-SUITES-C2"], "capacites_codes": ["C1", "C2"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 5, "max": 20}, "r": {"domaine": "entier", "min": 2, "max": 8}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-022.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-022.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 7
+% r = 5
+% # Suite arithmetique : u_n = u0 + n*r
+% u = u0 + r * n
+% assert u.subs(n, 0) == 7
+% assert u.subs(n, 1) == 12
+% assert u.subs(n, 2) == 17
+% # Verification arithmetique : difference constante
+% diff = u.subs(n, n+1) - u
+% from sympy import simplify
+% assert simplify(diff) == 5
+% # u_10
+% assert u.subs(n, 10) == 57
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-022}{2}{20}
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par la relation de récurrence :
+\[
+  u_0 = 7 \quad \text{et} \quad u_{n+1} = u_n + 5.
+\]
+
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$. Conjecturer la nature de la suite $(u_n)$.
+
+  \item Démontrer que la suite $(u_n)$ est arithmétique. Préciser sa raison et son premier terme.
+
+  \item Exprimer $u_n$ en fonction de $n$ pour tout $n \in \mathbb{N}$.
+
+  \item Calculer $u_{10}$, puis déterminer le plus petit entier $n$ tel que $u_n > 100$.
+\end{enumerate}
+\end{exercice}

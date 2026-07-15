@@ -1,0 +1,89 @@
+% META: {"id": "1SPE-SUITES-CO-029", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-029", "capacites_codes": ["C2", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 3*n + 2
+% assert u.subs(n, 0) == 2
+% assert u.subs(n, 5) == 17
+% assert u.subs(n, 16) == 50
+% assert u.subs(n, 17) == 53
+% diff = u.subs(n, n+1) - u
+% assert simplify(diff) == 3
+% # v_n = u_n - 3n = 2 (constante)
+% v = u - 3*n
+% assert simplify(v) == 2
+% # w_n = 1/u_n = 1/(3n+2)
+% # w_0 = 1/2, w_1 = 1/5, w_2 = 1/8
+% assert Rational(1, 2) > Rational(1, 5)
+% assert Rational(1, 5) > Rational(1, 8)
+% # w_{n+1} - w_n = 1/(3(n+1)+2) - 1/(3n+2) = 1/(3n+5) - 1/(3n+2)
+% # = (3n+2 - 3n - 5) / ((3n+5)(3n+2)) = -3 / ((3n+5)(3n+2)) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-029}
+
+\textbf{Question 1 — Expression de $u_n$, calcul de $u_5$ et $u_{16}$.}
+
+Par la formule du terme général d'une suite arithmétique de premier terme $u_0 = 2$ et de raison $r = 3$ :
+\[
+  u_n = u_0 + n \times r = 2 + 3n.
+\]
+
+\[
+  u_5 = 2 + 3 \times 5 = 2 + 15 = 17. \qquad u_{16} = 2 + 3 \times 16 = 2 + 48 = 50.
+\]
+
+\medskip
+\textbf{Question 2 — Sens de variation par l'étude de $u_{n+1} - u_n$.}
+
+Pour tout $n \in \mathbb{N}$ :
+\[
+  u_{n+1} - u_n = \bigl(2 + 3(n+1)\bigr) - (2 + 3n) = 3n + 5 - 3n - 2 = 3.
+\]
+
+\commentaireMarge{$u_{n+1} - u_n = 3 > 0$ pour tout $n \in \mathbb{N}$ : la suite est strictement croissante.}
+
+Comme $u_{n+1} - u_n = 3 > 0$ pour tout $n \in \mathbb{N}$, la suite $(u_n)$ est \textbf{strictement croissante}.
+
+\medskip
+\textbf{Question 3 — Comparaison de $u_n$ et $u_{n+1}$.}
+
+D'après la question précédente, $u_{n+1} - u_n = 3 > 0$, donc $u_{n+1} > u_n$ pour tout $n \in \mathbb{N}$.
+
+Cela signifie que chaque terme est strictement supérieur au précédent : $(u_n)$ est donc \textbf{strictement croissante}.
+
+\medskip
+\textbf{Question 4 — Étude de $(v_n)$ avec $v_n = u_n - 3n$.}
+
+Pour tout $n \in \mathbb{N}$ :
+\[
+  v_n = u_n - 3n = (2 + 3n) - 3n = 2.
+\]
+
+\commentaireMarge{$v_n = 2$ est indépendant de $n$ : la suite $(v_n)$ est constante, de valeur $2$.}
+
+La suite $(v_n)$ est \textbf{constante}, de valeur $2$.
+
+\medskip
+\textbf{Question 5 — Étude de $(w_n)$ avec $w_n = \dfrac{1}{u_n}$.}
+
+\textit{a) Calcul de $w_0$, $w_1$, $w_2$.}
+
+\[
+  w_0 = \frac{1}{u_0} = \frac{1}{2}, \quad w_1 = \frac{1}{u_1} = \frac{1}{5}, \quad w_2 = \frac{1}{u_2} = \frac{1}{8}.
+\]
+
+\textit{b) Démonstration que $(w_n)$ est strictement décroissante.}
+
+Pour tout $n \in \mathbb{N}$, on a $u_n = 2 + 3n \geq 2 > 0$, donc $w_n$ est bien défini. On calcule :
+\[
+  w_{n+1} - w_n = \frac{1}{u_{n+1}} - \frac{1}{u_n} = \frac{1}{3n+5} - \frac{1}{3n+2} = \frac{(3n+2) - (3n+5)}{(3n+5)(3n+2)} = \frac{-3}{(3n+5)(3n+2)}.
+\]
+
+\commentaireMarge{Le numérateur est $-3 < 0$ et le dénominateur est strictement positif : la différence est négative.}
+
+Comme $(3n+5)(3n+2) > 0$ pour tout $n \in \mathbb{N}$, on a $w_{n+1} - w_n < 0$, donc $w_{n+1} < w_n$.
+
+La suite $(w_n)$ est \textbf{strictement décroissante}.
+
+\baremeIndicatif{Q1 : 2 pts (calculer : formule terme général 1 pt + $u_5$ et $u_{16}$ 1 pt) ; Q2 : 2 pts (raisonner : calcul de la différence 1 pt + conclusion 1 pt) ; Q3 : 1 pt (raisonner : reformulation équivalente) ; Q4 : 1 pt (calculer : simplification algébrique) ; Q5 : 2 pts (calculer : $w_0, w_1, w_2$ 1 pt + démonstration de la décroissance 1 pt)}
+\end{corrige}

@@ -1,0 +1,32 @@
+% META: {"id": "1SPE-SUITES-EX-026", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C4"], "capacites_codes": ["C3", "C4"], "methodes": ["M3", "M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 2, "max": 10}, "q": {"domaine": "rationnel", "contrainte": "q>1"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-026.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-026.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 3
+% q = Rational(2, 1)
+% u = u0 * q**n
+% assert u.subs(n, 0) == 3
+% assert u.subs(n, 1) == 6
+% assert u.subs(n, 2) == 12
+% # Verification suite geometrique
+% ratio = simplify(u.subs(n, n+1) / u)
+% assert ratio == 2
+% # Somme u0 + ... + u7 : 8 termes, q=2
+% S = u0 * (1 - q**8) / (1 - q)
+% assert S == 765
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-026}{2}{22}
+Une culture bactérienne contient $3$ millions de bactéries à l'instant initial ($n = 0$). Toutes les heures, la population double.
+
+On note $u_n$ le nombre de millions de bactéries après $n$ heures.
+
+\begin{enumerate}
+  \item Écrire la relation de récurrence vérifiée par $(u_n)$, puis démontrer que $(u_n)$ est une suite géométrique. Préciser sa raison et son premier terme.
+
+  \item Exprimer $u_n$ en fonction de $n$.
+
+  \item Calculer la somme $S = u_0 + u_1 + \cdots + u_7$, qui représente le nombre total (en millions) de bactéries accumulées sur les $8$ premières heures.
+
+  \item Déterminer à partir de quelle heure la population dépasse $100$ millions de bactéries. (On pourra utiliser $\log_{10}(2) \approx 0{,}301$.)
+\end{enumerate}
+\end{exercice}

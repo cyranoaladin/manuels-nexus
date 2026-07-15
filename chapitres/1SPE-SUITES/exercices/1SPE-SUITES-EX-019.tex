@@ -1,0 +1,23 @@
+% META: {"id": "1SPE-SUITES-EX-019", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C6"], "capacites_codes": ["C6"], "methodes": ["M6"], "parcours": 1, "competences": ["calculer", "modéliser"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"N0": 1200, "taux_annuel": 0.02}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-019.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-019.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% N = 1200 * Rational(102, 100)**n
+% assert N.subs(n, 0) == 1200
+% assert N.subs(n, 1) == 1224
+% # n=2 : 1200*1.02^2 = 1200*1.0404 = 1248.48
+% assert N.subs(n, 2) == Rational(31212, 25)
+% # Modele geometrique, raison q=1.02, taux t=0.02
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-019}{1}{10}
+Une colonie de bactéries compte $1\,200$ individus à l'instant initial.
+Elle croît de $2\,\%$ par heure.
+
+On note $N_n$ le nombre de bactéries après $n$ heures.
+\begin{enumerate}
+  \item Quel modèle (arithmétique ou géométrique) convient-il d'utiliser ? Justifier.
+  \item Exprimer $N_n$ en fonction de $n$.
+  \item Calculer $N_1$ et $N_2$.
+  \item Quel est le taux d'évolution horaire ? Quel est le coefficient multiplicateur horaire ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,43 @@
+% META: {"id": "1SPE-SUITES-CO-002", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-002", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 3*n + 2
+% assert u.subs(n, 0) == 2
+% assert u.subs(n, 1) == 5
+% assert u.subs(n, 2) == 8
+% assert u.subs(n, 10) == 32
+% # Suite definie par formule explicite : u_n exprime directement en fonction de n
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-002}
+
+\commentaireMarge{Calcul direct par substitution de la valeur de $n$ dans la formule explicite.}
+
+\textbf{Question 1.} On substitue $n = 0$, $n = 1$ et $n = 2$ dans $u_n = 3n + 2$.
+
+\[
+u_0 = 3 \times 0 + 2 = 0 + 2 = 2.
+\]
+\[
+u_1 = 3 \times 1 + 2 = 3 + 2 = 5.
+\]
+\[
+u_2 = 3 \times 2 + 2 = 6 + 2 = 8.
+\]
+
+Donc $u_0 = 2$, $u_1 = 5$ et $u_2 = 8$.
+
+\commentaireMarge{L'avantage d'une formule explicite est de pouvoir calculer n'importe quel terme directement.}
+
+\textbf{Question 2.} On substitue $n = 10$ dans la formule :
+\[
+u_{10} = 3 \times 10 + 2 = 30 + 2 = 32.
+\]
+
+Donc $u_{10} = 32$.
+
+\commentaireMarge{Une suite est définie par formule explicite si $u_n$ s'exprime directement en fonction de $n$, sans faire intervenir les termes précédents.}
+
+\textbf{Question 3.} La suite $(u_n)$ est définie par \textbf{formule explicite}, car chaque terme $u_n = 3n + 2$ s'exprime directement en fonction de l'indice $n$, sans avoir besoin de connaître les termes précédents de la suite.
+
+\end{corrige}

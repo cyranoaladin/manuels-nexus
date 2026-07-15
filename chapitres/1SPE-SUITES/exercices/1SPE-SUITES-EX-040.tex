@@ -1,0 +1,45 @@
+% META: {"id": "1SPE-SUITES-EX-040", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C1", "1SPE-SUITES-C5"], "capacites_codes": ["C1", "C5"], "methodes": ["M1", "M5"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 30, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": 3, "u0": 1}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-040.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-040.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # Suite definie par u0=1, u_{n+1} = (u_n^2 + 3) / (2*u_n)
+% # Premiers termes
+% u0 = Rational(1, 1)
+% u1 = (u0**2 + 3) / (2*u0)
+% u2 = (u1**2 + 3) / (2*u1)
+% u3 = (u2**2 + 3) / (2*u2)
+% assert u0 == 1
+% assert u1 == 2
+% assert u2 == Rational(7, 4)
+% assert u3 == Rational(97, 56)
+% # Verifier que sqrt(3) est point fixe : f(sqrt(3)) = (3+3)/(2*sqrt(3)) = sqrt(3)
+% x = symbols('x', positive=True)
+% f = (x**2 + 3) / (2*x)
+% assert simplify(f.subs(x, sqrt(3)) - sqrt(3)) == 0
+% # v_n = u_n - sqrt(3) : u1 - sqrt(3) > 0 car u1 = 2 > sqrt(3)
+% assert float(u1) > float(sqrt(3))
+% assert float(u2) > float(sqrt(3))
+% # u_n est decroissante pour n >= 1 : u2 < u1
+% assert u2 < u1
+% assert u3 < u2
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-040}{3}{30}
+On considère la suite $(u_n)$ définie par $u_0 = 1$ et, pour tout entier naturel $n$ :
+\[
+  u_{n+1} = \frac{u_n^2 + 3}{2u_n}.
+\]
+
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ (on donnera des valeurs exactes sous forme de fractions).
+
+  \item \textbf{Conjecture.} À partir des valeurs calculées, émettre une conjecture sur le comportement de la suite $(u_n)$ pour $n \geq 1$ : la suite semble-t-elle monotone ? Vers quelle valeur semble-t-elle converger ?
+
+  \item On pose $\ell$ un réel vérifiant $\ell = \dfrac{\ell^2 + 3}{2\ell}$. Résoudre cette équation pour $\ell > 0$ et interpréter géométriquement le résultat.
+
+  \item On admet que $u_n > 0$ pour tout $n \in \mathbb{N}$. Étudier le signe de $u_{n+1} - \sqrt{3}$ en fonction du signe de $u_n - \sqrt{3}$. En déduire que, pour tout entier $n \geq 1$, on a $u_n \geq \sqrt{3}$.
+
+  \item Montrer que, pour tout entier $n \geq 1$, la suite $(u_n)$ est décroissante.
+
+  \item \textbf{Conclusion.} Justifier rigoureusement la conjecture émise à la question 2.
+\end{enumerate}
+\end{exercice}

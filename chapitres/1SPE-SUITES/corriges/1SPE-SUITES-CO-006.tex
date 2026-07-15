@@ -1,0 +1,55 @@
+% META: {"id": "1SPE-SUITES-CO-006", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-006", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u0_val = 7
+% r = 4
+% u = u0_val + n*r
+% assert u.subs(n, 0) == 7
+% assert u.subs(n, 1) == 11
+% assert u.subs(n, 2) == 15
+% assert u.subs(n, 10) == 47
+% # Verification : u_{n+1} - u_n = constante = 4
+% diff_u = u.subs(n, n+1) - u
+% assert diff_u.simplify() == 4
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-006}
+
+\commentaireMarge{Calcul direct par substitution dans la formule $u_n = 7 + 4n$.}
+
+\textbf{Question 1.} On substitue $n = 0$, $n = 1$ et $n = 2$ dans $u_n = 7 + 4n$.
+
+\[
+u_0 = 7 + 4 \times 0 = 7 + 0 = 7.
+\]
+\[
+u_1 = 7 + 4 \times 1 = 7 + 4 = 11.
+\]
+\[
+u_2 = 7 + 4 \times 2 = 7 + 8 = 15.
+\]
+
+Donc $u_0 = 7$, $u_1 = 11$ et $u_2 = 15$.
+
+\commentaireMarge{Pour montrer qu'une suite est arithmétique, on calcule $u_{n+1} - u_n$ et on vérifie que cette différence est constante.}
+
+\textbf{Question 2.} Pour tout entier naturel $n$, calculons la différence $u_{n+1} - u_n$ :
+
+\[
+u_{n+1} - u_n = \bigl(7 + 4(n+1)\bigr) - (7 + 4n) = 7 + 4n + 4 - 7 - 4n = 4.
+\]
+
+Cette différence est constante, égale à $4$, indépendante de $n$.
+
+Donc la suite $(u_n)$ est une suite \textbf{arithmétique} de raison $r = 4$ et de premier terme $u_0 = 7$.
+
+\commentaireMarge{La formule du terme général d'une suite arithmétique de premier terme $u_0$ et de raison $r$ est $u_n = u_0 + nr$.}
+
+\textbf{Question 3.} On applique la formule du terme général $u_n = u_0 + nr = 7 + 4n$ pour $n = 10$ :
+\[
+u_{10} = 7 + 4 \times 10 = 7 + 40 = 47.
+\]
+
+Donc $u_{10} = 47$.
+
+\end{corrige}

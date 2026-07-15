@@ -1,0 +1,92 @@
+% META: {"id": "1SPE-SUITES-CO-022", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-022", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 7
+% r = 5
+% u = u0 + r * n
+% assert u.subs(n, 0) == 7
+% assert u.subs(n, 1) == 12
+% assert u.subs(n, 2) == 17
+% assert u.subs(n, 3) == 22
+% diff = u.subs(n, n+1) - u
+% assert simplify(diff) == 5
+% assert u.subs(n, 10) == 57
+% # Plus petit n tel que u_n > 100 : 7 + 5n > 100 => n > 93/5 = 18.6 => n = 19
+% assert u.subs(n, 18) == 97
+% assert u.subs(n, 19) == 102
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-022}
+
+\textbf{Question 1 — Calcul des premiers termes et conjecture.}
+
+On utilise la relation de récurrence $u_{n+1} = u_n + 5$.
+
+\[
+  u_1 = u_0 + 5 = 7 + 5 = 12.
+\]
+\[
+  u_2 = u_1 + 5 = 12 + 5 = 17.
+\]
+\[
+  u_3 = u_2 + 5 = 17 + 5 = 22.
+\]
+
+\commentaireMarge{Différence constante entre termes consécutifs : $+5$ à chaque étape.}
+
+La différence entre deux termes consécutifs est constante et égale à $5$. On conjecture que $(u_n)$ est une suite arithmétique de raison $5$.
+
+\medskip
+\textbf{Question 2 — Démonstration de la nature arithmétique.}
+
+Pour tout entier naturel $n$, on calcule :
+\[
+  u_{n+1} - u_n = (u_n + 5) - u_n = 5.
+\]
+
+\commentaireMarge{Définition d'une suite arithmétique : différence $u_{n+1} - u_n$ constante.}
+
+La différence $u_{n+1} - u_n$ est constante et égale à $5$ pour tout $n \in \mathbb{N}$.
+
+\textbf{Conclusion :} $(u_n)$ est une suite arithmétique de raison $r = 5$ et de premier terme $u_0 = 7$.
+
+\medskip
+\textbf{Question 3 — Expression de $u_n$ en fonction de $n$.}
+
+Par la formule du terme général d'une suite arithmétique :
+\[
+  u_n = u_0 + n \times r = 7 + 5n.
+\]
+
+\commentaireMarge{Formule : $u_n = u_0 + nr$ pour une suite arithmétique.}
+
+Ainsi, pour tout $n \in \mathbb{N}$ : $\boxed{u_n = 5n + 7}$.
+
+\medskip
+\textbf{Question 4 — Calcul de $u_{10}$ et détermination du premier rang tel que $u_n > 100$.}
+
+\textit{Calcul de $u_{10}$ :}
+\[
+  u_{10} = 5 \times 10 + 7 = 50 + 7 = 57.
+\]
+
+\textit{Plus petit entier $n$ tel que $u_n > 100$ :}
+
+On résout l'inéquation $u_n > 100$ :
+\[
+  5n + 7 > 100 \iff 5n > 93 \iff n > \frac{93}{5} = 18{,}6.
+\]
+
+\commentaireMarge{$n$ est un entier, donc on prend le plus petit entier strictement supérieur à $18{,}6$.}
+
+Le plus petit entier vérifiant $n > 18{,}6$ est $n = 19$.
+
+\textit{Vérification :}
+\[
+  u_{18} = 5 \times 18 + 7 = 97 \leq 100, \quad u_{19} = 5 \times 19 + 7 = 102 > 100. \checkmark
+\]
+
+Le plus petit entier $n$ tel que $u_n > 100$ est $\boxed{n = 19}$.
+
+\baremeIndicatif{Q1 : 1 pt (calculer $u_1, u_2, u_3$ et conjecturer) ; Q2 : 3 pts (raisonner, communiquer : démonstration complète avec la définition) ; Q3 : 2 pts (calculer : formule du terme général) ; Q4 : 2 pts (calculer $u_{10}$ : 1 pt ; résoudre l'inéquation et conclure : 1 pt)}
+\end{corrige}

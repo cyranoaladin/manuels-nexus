@@ -1,0 +1,23 @@
+% META: {"id": "1SPE-SUITES-EX-006", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": 7, "r": 4}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-006.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 7
+% r = 4
+% u = u0 + n*r
+% assert u.subs(n, 0) == 7
+% assert u.subs(n, 1) == 11
+% assert u.subs(n, 2) == 15
+% assert u.subs(n, 10) == 47
+% # Verification de la difference
+% assert (u.subs(n, n+1) - u).simplify() == 4
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-006}{1}{10}
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par
+$u_n = 7 + 4n$.
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$ et $u_2$.
+  \item Montrer que la suite $(u_n)$ est arithmétique et préciser sa raison $r$ et son premier terme $u_0$.
+  \item Calculer $u_{10}$ à l'aide de la formule du terme général.
+\end{enumerate}
+\end{exercice}

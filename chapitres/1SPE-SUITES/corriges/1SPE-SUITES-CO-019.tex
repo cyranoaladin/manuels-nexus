@@ -1,0 +1,46 @@
+% META: {"id": "1SPE-SUITES-CO-019", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-019", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% N = 1200 * Rational(102, 100)**n
+% assert N.subs(n, 0) == 1200
+% assert N.subs(n, 1) == 1224
+% # n=2 : 1200*1.02^2 = 1200*1.0404 = 1248.48
+% assert N.subs(n, 2) == Rational(31212, 25)
+% # Modele geometrique, raison q=1.02, taux t=0.02
+% ratio = N.subs(n, n+1) / N
+% assert simplify(ratio - Rational(102, 100)) == 0
+% # taux horaire = 2%, coefficient multiplicateur = 1.02
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-019}
+
+\commentaireMarge{Une croissance de $t\,\%$ par période correspond à un coefficient multiplicateur $1 + \frac{t}{100}$ appliqué à chaque période : cela produit une suite géométrique.}
+
+\textbf{Question 1.} La population croît de $2\,\%$ par heure, ce qui signifie que d'une heure à l'autre, le nombre de bactéries est multiplié par un coefficient constant $1{,}02$. Le quotient $\dfrac{N_{n+1}}{N_n}$ est donc constant. Il convient d'utiliser un \textbf{modèle géométrique}.
+
+\commentaireMarge{La formule du terme général d'une suite géométrique de premier terme $N_0$ et de raison $q$ est $N_n = N_0 \times q^n$.}
+
+\textbf{Question 2.} La suite $(N_n)$ est géométrique de premier terme $N_0 = 1200$ et de raison $q = 1{,}02$. Sa formule générale est :
+\[
+N_n = 1200 \times (1{,}02)^n.
+\]
+
+\textbf{Question 3.} On calcule $N_1$ et $N_2$ :
+\[
+N_1 = 1200 \times 1{,}02 = 1224.
+\]
+\[
+N_2 = 1200 \times (1{,}02)^2 = 1200 \times 1{,}0404 = 1248{,}48.
+\]
+
+Après $1$ heure, la colonie compte $1224$ bactéries ; après $2$ heures, elle en compte $1248{,}48$ (soit environ $1248$).
+
+\commentaireMarge{Le taux d'évolution et le coefficient multiplicateur se lisent directement dans la définition de la suite géométrique.}
+
+\textbf{Question 4.}
+\begin{itemize}
+  \item Le \textbf{taux d'évolution horaire} est $t = 2\,\% = 0{,}02$.
+  \item Le \textbf{coefficient multiplicateur horaire} est $q = 1 + 0{,}02 = 1{,}02$.
+\end{itemize}
+
+\end{corrige}

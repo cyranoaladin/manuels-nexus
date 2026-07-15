@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-SUITES-EX-028", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C5"], "capacites_codes": ["C2", "C5"], "methodes": ["M2", "M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": {"domaine": "entier", "min": 1, "max": 5}, "b": {"domaine": "entier", "min": 1, "max": 20}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-028.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-028.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% # u_n = -4n + 30, r = -4, u0 = 30
+% u = -4*n + 30
+% assert u.subs(n, 0) == 30
+% assert u.subs(n, 1) == 26
+% diff = u.subs(n, n+1) - u
+% assert simplify(diff) == -4
+% # Suite decroissante car r = -4 < 0
+% # u_n > 0 => -4n + 30 > 0 => n < 7.5 => n <= 7
+% assert u.subs(n, 7) == 2
+% assert u.subs(n, 8) == -2
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-028}{2}{20}
+Soit $(u_n)$ la suite définie pour tout entier naturel $n$ par :
+\[
+  u_n = -4n + 30.
+\]
+
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$ et $u_2$.
+
+  \item Démontrer que $(u_n)$ est une suite arithmétique. Préciser sa raison et son premier terme.
+
+  \item Étudier le sens de variation de $(u_n)$ en utilisant la raison. Justifier rigoureusement.
+
+  \item Déterminer les valeurs de $n$ pour lesquelles $u_n > 0$, puis celles pour lesquelles $u_n \leq 0$.
+
+  \item Soit la suite $(v_n)$ définie par $v_n = u_n^2$. Les termes $v_0$, $v_1$, $v_2$ sont-ils dans le même ordre croissant ou décroissant ? Expliquer pourquoi $(v_n)$ n'est pas monotone.
+\end{enumerate}
+\end{exercice}

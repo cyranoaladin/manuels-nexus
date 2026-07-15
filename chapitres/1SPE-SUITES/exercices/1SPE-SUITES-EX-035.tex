@@ -1,0 +1,47 @@
+% META: {"id": "1SPE-SUITES-EX-035", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C6", "C7"], "methodes": ["M6", "M7"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser", "programmer"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"N0": {"domaine": "entier", "min": 500, "max": 2000}, "r": {"domaine": "entier", "min": 30, "max": 100}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-035.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-035.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% n = symbols('n', integer=True, nonneg=True)
+% N0 = 1200
+% r = 50
+% # Suite arithmetique : N_n = 1200 + 50n
+% N = N0 + r * n
+% assert N.subs(n, 0) == 1200
+% assert N.subs(n, 1) == 1250
+% # Somme S = N0 + N1 + ... + N11 : 12 termes
+% N11 = int(N.subs(n, 11))
+% S = 12 * (N0 + N11) // 2
+% assert N11 == 1750
+% assert S == 17700
+% # Seuil : N_n >= 2000 => 1200 + 50n >= 2000 => n >= 16
+% assert int(N.subs(n, 16)) == 2000
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-035}{2}{25}
+Une ville comptait $1\,200$ habitants au début de l'année 2020 ($n = 0$). Sa population augmente de $50$ habitants par an. On note $N_n$ le nombre d'habitants au début de l'année $2020 + n$.
+
+\begin{enumerate}
+  \item Modéliser la situation. Montrer que $(N_n)$ est une suite arithmétique et exprimer $N_n$ en fonction de $n$.
+
+  \item Calculer la population au début de l'année 2031.
+
+  \item On souhaite calculer la population totale cumulée sur les années 2020 à 2031 (soit $n = 0$ à $n = 11$). Calculer $S = N_0 + N_1 + \cdots + N_{11}$.
+
+  \item On cherche à partir de quelle année la population dépasse $2\,000$ habitants. Analyser le programme Python suivant :
+
+\medskip
+\texttt{N = 1200}\\
+\texttt{n = 0}\\
+\texttt{while N < 2000:}\\
+\hspace*{1.5em}\texttt{N = N + 50}\\
+\hspace*{1.5em}\texttt{n = n + 1}\\
+\texttt{print("Annee :", 2020 + n)}\\
+\texttt{print("Population :", N)}
+
+\medskip
+  \begin{enumerate}
+    \item Expliquer ce que fait chaque ligne du programme.
+    \item Donner le résultat affiché sans exécuter le programme, en justifiant par un calcul algébrique.
+    \item Vérifier en calculant $N_{15}$ et $N_{16}$.
+  \end{enumerate}
+\end{enumerate}
+\end{exercice}

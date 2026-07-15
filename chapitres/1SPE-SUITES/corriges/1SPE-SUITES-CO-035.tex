@@ -1,0 +1,99 @@
+% META: {"id": "1SPE-SUITES-CO-035", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-035", "capacites_codes": ["C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% n = symbols('n', integer=True, nonneg=True)
+% N0 = 1200
+% r = 50
+% N = N0 + r * n
+% assert N.subs(n, 0) == 1200
+% assert N.subs(n, 1) == 1250
+% diff = N.subs(n, n+1) - N
+% assert diff == 50
+% # Population en 2031 : n = 11
+% assert int(N.subs(n, 11)) == 1750
+% # Somme S = N0 + N1 + ... + N11 : 12 termes, premier=1200, dernier=1750
+% S = 12 * (1200 + 1750) // 2
+% assert S == 17700
+% # Seuil N_n >= 2000 : 1200 + 50n >= 2000 => n >= 16
+% assert int(N.subs(n, 15)) == 1950
+% assert int(N.subs(n, 16)) == 2000
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-035}
+
+\textbf{Question 1 — Modélisation et nature arithmétique.}
+
+La population augmente de $50$ habitants par an, donc :
+\[
+  N_{n+1} = N_n + 50, \quad N_0 = 1\,200.
+\]
+
+Pour tout $n \in \mathbb{N}$, $N_{n+1} - N_n = 50$.
+
+\commentaireMarge{La différence est constante : $(N_n)$ est arithmétique de raison $r = 50$ et de premier terme $N_0 = 1\,200$.}
+
+$(N_n)$ est une suite arithmétique de raison $r = 50$ et de premier terme $N_0 = 1\,200$, d'où :
+\[
+  N_n = 1\,200 + 50n.
+\]
+
+\medskip
+\textbf{Question 2 — Population au début de l'année 2031.}
+
+L'année 2031 correspond à $n = 2031 - 2020 = 11$.
+\[
+  N_{11} = 1\,200 + 50 \times 11 = 1\,200 + 550 = 1\,750 \text{ habitants}.
+\]
+
+\medskip
+\textbf{Question 3 — Calcul de $S = N_0 + N_1 + \cdots + N_{11}$.}
+
+La somme porte sur $12$ termes (de rang $0$ à $11$), de premier terme $N_0 = 1\,200$ et de dernier terme $N_{11} = 1\,750$.
+
+\commentaireMarge{Formule : somme de $p$ termes en progression arithmétique $= \dfrac{p \times (\text{premier} + \text{dernier})}{2}$.}
+
+\[
+  S = \frac{12 \times (N_0 + N_{11})}{2} = \frac{12 \times (1\,200 + 1\,750)}{2} = \frac{12 \times 2\,950}{2} = 6 \times 2\,950 = 17\,700.
+\]
+
+La population cumulée sur les années 2020 à 2031 est de $17\,700$ habitants.
+
+\medskip
+\textbf{Question 4 — Analyse du programme Python.}
+
+\textit{a) Explication ligne par ligne.}
+
+\begin{itemize}
+  \item \texttt{N = 1200} : initialisation de la population à $1\,200$ (valeur de $N_0$).
+  \item \texttt{n = 0} : initialisation du compteur d'années à $0$.
+  \item \texttt{while N < 2000:} : on répète la boucle tant que la population est strictement inférieure à $2\,000$.
+  \item \texttt{N = N + 50} : on augmente la population de $50$ (passage à l'année suivante).
+  \item \texttt{n = n + 1} : on incrémente le compteur d'années.
+  \item \texttt{print("Annee :", 2020 + n)} : on affiche l'année calendaire.
+  \item \texttt{print("Population :", N)} : on affiche la population atteinte.
+\end{itemize}
+
+\textit{b) Résultat sans exécution.}
+
+On cherche le plus petit entier $n$ tel que $N_n \geq 2\,000$ :
+\[
+  1\,200 + 50n \geq 2\,000 \iff 50n \geq 800 \iff n \geq 16.
+\]
+
+\commentaireMarge{Le plus petit entier $n$ est $n = 16$ : le programme s'arrête à $n = 16$ et affiche l'année $2020 + 16 = 2036$.}
+
+Le plus petit entier $n$ vérifiant cette condition est $n = 16$.
+
+Le programme affiche : \texttt{Annee : 2036} et \texttt{Population : 2000}.
+
+\textit{c) Vérification.}
+\[
+  N_{15} = 1\,200 + 50 \times 15 = 1\,200 + 750 = 1\,950 < 2\,000 \quad \text{(boucle continue)}.
+\]
+\[
+  N_{16} = 1\,200 + 50 \times 16 = 1\,200 + 800 = 2\,000 \geq 2\,000 \quad \text{(boucle s'arrête)}. \checkmark
+\]
+
+La ville atteindra $2\,000$ habitants au début de l'année 2036.
+
+\baremeIndicatif{Q1 : 2 pts (modeliser, raisonner : relation de récurrence 1 pt + terme général 1 pt) ; Q2 : 1 pt (calculer : $N_{11}$ avec identification du rang) ; Q3 : 2 pts (calculer : application formule somme arithmétique) ; Q4a : 2 pts (programmer, communiquer : explication ligne par ligne) ; Q4b : 2 pts (raisonner, calculer : résolution algébrique et résultat) ; Q4c : 1 pt (calculer : vérification $N_{15}$ et $N_{16}$)}
+\end{corrige}

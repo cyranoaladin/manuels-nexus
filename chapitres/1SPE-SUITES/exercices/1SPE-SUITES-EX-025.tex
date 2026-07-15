@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-SUITES-EX-025", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C4"], "capacites_codes": ["C2", "C4"], "methodes": ["M2", "M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u1": {"domaine": "entier", "min": 5, "max": 15}, "r": {"domaine": "entier", "min": 3, "max": 7}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-025.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-025.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Integer
+% n = symbols('n', integer=True, nonneg=True)
+% # Suite arithmetique : u1 = 8, u5 = 20 => r = (20-8)/4 = 3, u0 = 5
+% u1_val = 8
+% u5_val = 20
+% r_val = (u5_val - u1_val) // 4
+% assert r_val == 3
+% u0_val = u1_val - r_val
+% assert u0_val == 5
+% # u_n = 5 + 3n
+% u = u0_val + r_val * n
+% assert u.subs(n, 1) == 8
+% assert u.subs(n, 5) == 20
+% # Somme de u_1 a u_10 : 10 termes, u(1)=8, u(10)=35
+% from sympy import Rational
+% S = Rational(10, 1) * (u.subs(n, 1) + u.subs(n, 10)) / 2
+% assert S == 215
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-025}{2}{22}
+Soit $(u_n)$ une suite arithmétique telle que $u_1 = 8$ et $u_5 = 20$.
+
+\begin{enumerate}
+  \item Déterminer la raison $r$ et le premier terme $u_0$ de la suite $(u_n)$.
+
+  \item Exprimer $u_n$ en fonction de $n$ pour tout $n \in \mathbb{N}$.
+
+  \item Calculer la somme $S = u_1 + u_2 + \cdots + u_{10}$.
+
+  \item On pose $T_n = u_1 + u_2 + \cdots + u_n$ pour tout entier $n \geq 1$. Exprimer $T_n$ en fonction de $n$, puis déterminer le plus petit entier $n$ tel que $T_n > 500$.
+\end{enumerate}
+\end{exercice}

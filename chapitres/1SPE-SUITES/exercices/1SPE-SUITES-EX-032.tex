@@ -1,0 +1,29 @@
+% META: {"id": "1SPE-SUITES-EX-032", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C5", "1SPE-SUITES-C6"], "capacites_codes": ["C5", "C6"], "methodes": ["M5", "M6"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"C0": {"domaine": "entier", "min": 500, "max": 2000}, "t": {"domaine": "rationnel", "contrainte": "0<t<0.1"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-032.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-032.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% C0 = 800
+% q = Rational(103, 100)  # taux 3%
+% C = C0 * q**n
+% assert C.subs(n, 0) == 800
+% ratio = simplify(C.subs(n, n+1) / C)
+% assert ratio == Rational(103, 100)
+% # Suite croissante car q = 1.03 > 1
+% assert ratio > 1
+% # C_n > C0 pour n >= 1
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-032}{2}{22}
+Yasmine place $800$~\euro{} sur un livret d'épargne rémunéré à $3\,\%$ par an. On note $C_n$ le capital (en euros) disponible après $n$ années.
+
+\begin{enumerate}
+  \item Exprimer $C_{n+1}$ en fonction de $C_n$, puis montrer que $(C_n)$ est une suite géométrique. Préciser sa raison et son premier terme.
+
+  \item Exprimer $C_n$ en fonction de $n$.
+
+  \item Étudier le sens de variation de $(C_n)$ en justifiant rigoureusement. Interpréter le résultat dans le contexte du problème.
+
+  \item Calculer $C_5$ (arrondi au centime). Interpréter.
+
+  \item Yasmine souhaite que son capital dépasse $1\,200$~\euro{}. Déterminer graphiquement ou par essais successifs le plus petit entier $n$ pour lequel $C_n \geq 1\,200$. (On admet que $1{,}03^{14} \approx 1{,}513$ et $1{,}03^{13} \approx 1{,}469$.)
+\end{enumerate}
+\end{exercice}

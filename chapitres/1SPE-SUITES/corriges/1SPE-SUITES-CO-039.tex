@@ -1,0 +1,129 @@
+% META: {"id": "1SPE-SUITES-CO-039", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-039", "capacites_codes": ["C3", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% A0 = 3000
+% qA = Rational(107, 100)
+% A = A0 * qA**n
+% assert A.subs(n, 0) == 3000
+% ratio = simplify(A.subs(n, n+1) / A)
+% assert ratio == Rational(107, 100)
+% # A_5
+% A5 = float(3000 * (1.07)**5)
+% assert abs(A5 - 4207.66) < 0.01
+% # B_n : suite arithmetique r=210
+% B0 = 3000
+% rB = 210
+% B = B0 + rB * n
+% assert B.subs(n, 0) == 3000
+% diff_B = B.subs(n, n+1) - B
+% assert diff_B == 210
+% B5 = int(B.subs(n, 5))
+% assert B5 == 4050
+% # Comparaison a n=10
+% A10 = float(3000 * (1.07)**10)
+% B10 = int(B.subs(n, 10))
+% assert abs(A10 - 5901.45) < 0.01
+% assert B10 == 5100
+% assert A10 > B10
+% # n=1 et n=2
+% A1 = float(3000 * 1.07)
+% B1 = int(B.subs(n, 1))
+% A2 = float(3000 * (1.07)**2)
+% B2 = int(B.subs(n, 2))
+% assert abs(A1 - 3210) < 0.01
+% assert B1 == 3210
+% assert abs(A2 - 3434.70) < 0.01
+% assert B2 == 3420
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-039}
+
+\textbf{Question 1 — Offre A.}
+
+\textit{a) Nature géométrique et terme général.}
+
+Chaque année, le capital est multiplié par $(1 + 0{,}07) = 1{,}07$, donc $A_{n+1} = 1{,}07 \times A_n$ avec $A_0 = 3\,000$.
+
+Pour tout $n \in \mathbb{N}$, $A_n > 0$, donc :
+\[
+  \frac{A_{n+1}}{A_n} = 1{,}07.
+\]
+
+\commentaireMarge{Le quotient est constant : $(A_n)$ est géométrique de raison $q = 1{,}07$ et de premier terme $A_0 = 3\,000$.}
+
+$(A_n)$ est une suite géométrique de raison $q = 1{,}07$ et de premier terme $A_0 = 3\,000$, d'où :
+\[
+  A_n = 3\,000 \times 1{,}07^n.
+\]
+
+\textit{b) Calcul de $A_5$.}
+
+\[
+  A_5 = 3\,000 \times 1{,}07^5 \approx 3\,000 \times 1{,}40255 \approx 4\,207{,}66 \text{ \euro{}}.
+\]
+
+\medskip
+\textbf{Question 2 — Offre B.}
+
+\textit{a) Nature arithmétique et terme général.}
+
+Chaque année, le capital augmente de $210$~\euro{} (intérêts fixes), donc $B_{n+1} = B_n + 210$ avec $B_0 = 3\,000$.
+
+Pour tout $n \in \mathbb{N}$ :
+\[
+  B_{n+1} - B_n = 210.
+\]
+
+\commentaireMarge{La différence est constante : $(B_n)$ est arithmétique de raison $r = 210$ et de premier terme $B_0 = 3\,000$.}
+
+$(B_n)$ est une suite arithmétique de raison $r = 210$ et de premier terme $B_0 = 3\,000$, d'où :
+\[
+  B_n = 3\,000 + 210n.
+\]
+
+\textit{b) Calcul de $B_5$.}
+
+\[
+  B_5 = 3\,000 + 210 \times 5 = 3\,000 + 1\,050 = 4\,050 \text{ \euro{}}.
+\]
+
+\medskip
+\textbf{Question 3 — Comparaison.}
+
+\textit{a) À $n = 10$.}
+
+\[
+  A_{10} = 3\,000 \times 1{,}07^{10} \approx 3\,000 \times 1{,}96715 \approx 5\,901{,}45 \text{ \euro{}}.
+\]
+\[
+  B_{10} = 3\,000 + 210 \times 10 = 3\,000 + 2\,100 = 5\,100 \text{ \euro{}}.
+\]
+
+Comme $5\,901{,}45 > 5\,100$, l'offre A est plus avantageuse après $10$ ans.
+
+\textit{b) Pour $n = 1$ et $n = 2$.}
+
+\[
+  A_1 = 3\,000 \times 1{,}07 = 3\,210 \text{ \euro{}}, \quad B_1 = 3\,000 + 210 = 3\,210 \text{ \euro{}}.
+\]
+
+Pour $n = 1$, $A_1 = B_1 = 3\,210$~\euro{} : les deux offres sont \textbf{équivalentes}.
+
+\[
+  A_2 = 3\,000 \times 1{,}07^2 \approx 3\,434{,}70 \text{ \euro{}}, \quad B_2 = 3\,000 + 420 = 3\,420 \text{ \euro{}}.
+\]
+
+\commentaireMarge{Pour $n = 2$, $A_2 \approx 3\,434{,}70 > B_2 = 3\,420$ : l'offre A prend l'avantage dès la $2^e$ année.}
+
+Pour $n = 2$, $A_2 > B_2$ : l'offre A devient plus avantageuse. On conjecture que l'offre A est plus avantageuse pour tout $n \geq 2$.
+
+\textit{c) Justification qualitative.}
+
+Une croissance \textbf{géométrique} (intérêts composés) est exponentielle : les intérêts sont recalculés chaque année sur un capital de plus en plus élevé. Une croissance \textbf{arithmétique} (intérêts simples) est linéaire : les intérêts sont toujours calculés sur le même capital initial.
+
+\commentaireMarge{À long terme, toute suite géométrique de raison $q > 1$ croît plus vite que toute suite arithmétique de raison $r > 0$ : l'exponentielle domine le linéaire.}
+
+À long terme, la croissance exponentielle de l'offre A dépasse inévitablement la croissance linéaire de l'offre B, même si les premières années peuvent être comparables. C'est la propriété fondamentale qui distingue les intérêts composés des intérêts simples.
+
+\baremeIndicatif{Q1a : 2 pts (raisonner, calculer : démonstration géométrique 1 pt + terme général 1 pt) ; Q1b : 1 pt (calculer : $A_5$) ; Q2a : 2 pts (raisonner, calculer : démonstration arithmétique 1 pt + terme général 1 pt) ; Q2b : 1 pt (calculer : $B_5$) ; Q3a : 2 pts (calculer, communiquer : $A_{10}$ et $B_{10}$ 1 pt + comparaison et conclusion 1 pt) ; Q3b : 2 pts (calculer : $A_1$, $B_1$, $A_2$, $B_2$ 1 pt + conjecture 1 pt) ; Q3c : 1 pt (communiquer : justification qualitative)}
+\end{corrige}

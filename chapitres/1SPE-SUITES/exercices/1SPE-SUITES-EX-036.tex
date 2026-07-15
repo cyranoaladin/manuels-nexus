@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-SUITES-EX-036", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C1", "1SPE-SUITES-C5"], "capacites_codes": ["C1", "C5"], "methodes": ["M1", "M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": {"domaine": "entier", "min": 1, "max": 4}, "b": {"domaine": "entier", "min": 1, "max": 10}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-036.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-036.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, sqrt
+% n = symbols('n', integer=True, nonnegative=True)
+% # u_n = n^2 - 5n + 8
+% u = n**2 - 5*n + 8
+% assert u.subs(n, 0) == 8
+% assert u.subs(n, 1) == 4
+% assert u.subs(n, 2) == 2
+% assert u.subs(n, 3) == 2
+% assert u.subs(n, 4) == 4
+% # Etude variations : u_{n+1} - u_n
+% diff = u.subs(n, n+1) - u
+% diff_simplified = simplify(diff)
+% assert diff_simplified == 2*n - 4
+% # diff < 0 pour n <= 1, diff = 0 pour n=2, diff > 0 pour n >= 3
+% # Minimum en n=2 et n=3 : u_2 = u_3 = 2
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-036}{2}{22}
+Soit $(u_n)$ la suite définie pour tout entier naturel $n$ par :
+\[
+  u_n = n^2 - 5n + 8.
+\]
+
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$, $u_2$, $u_3$ et $u_4$.
+
+  \item La suite $(u_n)$ est-elle définie par une formule explicite ou par une relation de récurrence ? Justifier.
+
+  \item Étudier le sens de variation de $(u_n)$ en calculant $u_{n+1} - u_n$ et en étudiant son signe.
+
+  \item En déduire pour quels entiers $n$ la suite est décroissante, puis croissante. Préciser le(s) terme(s) minimal/minimaux.
+
+  \item On pose $f(x) = x^2 - 5x + 8$ pour tout réel $x \geq 0$. Calculer la dérivée $f'(x)$, étudier son signe, et comparer les variations de $f$ avec celles de $(u_n)$.
+\end{enumerate}
+\end{exercice}

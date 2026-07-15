@@ -1,0 +1,61 @@
+% META: {"id": "1SPE-SUITES-EX-043", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C5", "1SPE-SUITES-C6"], "capacites_codes": ["C5", "C6"], "methodes": ["M5", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modéliser"], "duree_min": 40, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"p": "0.8", "u0": 1000}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-043.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-043.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% p = Rational(4, 5)   # taux de retention 0.8
+% c = 200              # apport mensuel
+% u0 = 1000
+% # Suite : u_{n+1} = p * u_n + c
+% # Point fixe : L = p*L + c => L*(1-p) = c => L = c/(1-p) = 200/(1/5) = 1000
+% L = c / (1 - p)
+% assert L == 1000
+% # v_n = u_n - L => v_{n+1} = p*v_n => v_n = v_0 * p^n = (u0 - L)*p^n = 0
+% # donc u_n = L = 1000 pour tout n (point fixe initial)
+% # Changeons u0 = 600 pour avoir un cas non trivial
+% u0b = 600
+% v0 = u0b - L
+% assert v0 == -400
+% # v_n = -400 * (4/5)^n => u_n = 1000 - 400*(4/5)^n
+% u_n = L + v0 * p**n
+% assert u_n.subs(n, 0) == 600
+% assert u_n.subs(n, 1) == p*600 + c
+% assert u_n.subs(n, 1) == 680
+% # Monotonie : u_{n+1} - u_n = p*u_n + c - u_n = -(1-p)*u_n + c = c - (1-p)*u_n
+% # Si u_n < L : u_{n+1} - u_n > 0 (croissante)
+% # Verifier que 1000 - 400*(4/5)^n est croissante vers 1000
+% for k in range(5):
+%     assert u_n.subs(n, k) < u_n.subs(n, k+1)
+% assert limit(u_n, n, oo) == 1000
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-043}{3}{40}
+Une réserve naturelle contient initialement $600$ individus d'une espèce protégée. Chaque année, $20\,\%$ de la population disparaît (mortalité et migrations) et $200$ individus sont réintroduits par les gestionnaires.
+
+On note $u_n$ le nombre d'individus au début de l'année $n$ (avec $n = 0$ pour l'année initiale), de sorte que :
+\[
+  u_0 = 600 \qquad \text{et} \qquad u_{n+1} = 0{,}8\, u_n + 200.
+\]
+
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$. La population semble-t-elle croître, décroître, se stabiliser ?
+
+  \item \textbf{Point d'équilibre.} On cherche un réel $\ell$ tel que, si $u_n = \ell$, alors $u_{n+1} = \ell$.
+  \begin{enumerate}
+    \item Résoudre l'équation $0{,}8\,\ell + 200 = \ell$.
+    \item Interpréter biologiquement la valeur $\ell$ trouvée.
+  \end{enumerate}
+
+  \item \textbf{Suite auxiliaire.} On pose $v_n = u_n - \ell$ pour tout $n \in \mathbb{N}$.
+  \begin{enumerate}
+    \item Montrer que $(v_n)$ est une suite géométrique. Préciser son premier terme et sa raison.
+    \item Exprimer $v_n$ en fonction de $n$, puis $u_n$ en fonction de $n$.
+  \end{enumerate}
+
+  \item \textbf{Monotonie.} Montrer que la suite $(u_n)$ est croissante et majorée par $\ell$. Conclure sur le comportement à long terme de la population.
+
+  \item \textbf{Problème d'optimisation.} Les gestionnaires envisagent de modifier le taux de réintroduction de $200$ à $c$ individus par an (le taux de disparition restant $20\,\%$).
+  \begin{enumerate}
+    \item Déterminer, en fonction de $c$, la population d'équilibre $\ell(c)$.
+    \item Quelle valeur minimale de $c$ garantit un équilibre d'au moins $1\,500$ individus ?
+  \end{enumerate}
+\end{enumerate}
+\end{exercice}

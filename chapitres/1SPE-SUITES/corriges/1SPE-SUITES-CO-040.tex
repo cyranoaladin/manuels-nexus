@@ -1,0 +1,89 @@
+% META: {"id": "1SPE-SUITES-CO-040", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-040", "capacites_codes": ["C1", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% u0 = Rational(1, 1)
+% def f(x): return (x**2 + 3) / (2*x)
+% u1 = f(u0)
+% u2 = f(u1)
+% u3 = f(u2)
+% assert u0 == 1
+% assert u1 == 2
+% assert u2 == Rational(7, 4)
+% assert u3 == Rational(97, 56)
+% # Point fixe
+% x = symbols('x', positive=True)
+% g = (x**2 + 3) / (2*x)
+% assert simplify(g.subs(x, sqrt(3)) - sqrt(3)) == 0
+% # u_{n+1} - sqrt(3) = (u_n - sqrt(3))^2 / (2*u_n) >= 0
+% expr = g - sqrt(3)
+% assert simplify(expr - (x - sqrt(3))**2 / (2*x)) == 0
+% # u_n decroissante pour n>=1 : u_{n+1} - u_n = -(u_n^2-3)/(2*u_n) < 0 si u_n > sqrt(3)
+% diff_expr = g - x
+% assert simplify(diff_expr - (-(x**2 - 3)/(2*x))) == 0
+% assert float(u2) < float(u1)
+% assert float(u3) < float(u2)
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-040}
+
+\textbf{1. Calcul des premiers termes.}
+
+\commentaireMarge{Appliquer la relation de récurrence en partant de $u_0 = 1$.}
+
+On applique la relation $u_{n+1} = \dfrac{u_n^2 + 3}{2u_n}$ :
+
+\[
+u_1 = \frac{1^2 + 3}{2 \times 1} = \frac{4}{2} = 2 \qquad ; \qquad
+u_2 = \frac{2^2 + 3}{2 \times 2} = \frac{7}{4} \qquad ; \qquad
+u_3 = \frac{\left(\frac{7}{4}\right)^2 + 3}{2 \times \frac{7}{4}} = \frac{\frac{49}{16} + 3}{\frac{7}{2}} = \frac{\frac{97}{16}}{\frac{7}{2}} = \frac{97}{56}.
+\]
+
+\textbf{2. Conjecture.}
+
+On observe : $u_1 = 2 \approx 2{,}000$, $u_2 = 1{,}750$, $u_3 \approx 1{,}732$. La suite semble \textbf{décroissante} pour $n \geq 1$ et paraît converger vers $\sqrt{3} \approx 1{,}732$.
+
+\textbf{3. Point fixe et interprétation géométrique.}
+
+\commentaireMarge{Le point fixe est la solution de $f(x)=x$ où $f(x)=\frac{x^2+3}{2x}$.}
+
+L'équation $\ell = \dfrac{\ell^2 + 3}{2\ell}$ (avec $\ell > 0$) donne $2\ell^2 = \ell^2 + 3$, soit $\ell^2 = 3$, donc $\ell = \sqrt{3}$.
+
+\textit{Interprétation.} La fonction $f(x) = \dfrac{x^2+3}{2x}$ est la moyenne arithmétique de $x$ et $\dfrac{3}{x}$, qui est la méthode de Héron pour approcher $\sqrt{3}$. La suite converge vers le point fixe $\sqrt{3}$ de $f$.
+
+\textbf{4. Signe de $u_{n+1} - \sqrt{3}$.}
+
+\commentaireMarge{Factoriser $u_{n+1} - \sqrt{3}$ comme un carré sur $2u_n$.}
+
+Pour $u_n > 0$ :
+\[
+u_{n+1} - \sqrt{3} = \frac{u_n^2 + 3}{2u_n} - \sqrt{3} = \frac{u_n^2 + 3 - 2\sqrt{3}\,u_n}{2u_n} = \frac{(u_n - \sqrt{3})^2}{2u_n}.
+\]
+Ce quotient est un carré divisé par $2u_n > 0$, donc $u_{n+1} - \sqrt{3} \geq 0$, avec égalité ssi $u_n = \sqrt{3}$.
+
+\medskip
+Initialisation pour $n = 1$ : $u_1 = 2 > \sqrt{3}$ donc $u_1 \geq \sqrt{3}$.
+
+Pour $n \geq 1$, par récurrence immédiate : $u_n > 0$ et le calcul ci-dessus montre $u_{n+1} \geq \sqrt{3}$.
+
+Donc \textbf{pour tout entier $n \geq 1$, $u_n \geq \sqrt{3}$}.
+
+\textbf{5. Décroissance pour $n \geq 1$.}
+
+Pour $n \geq 1$, on a $u_n \geq \sqrt{3} > 0$ d'après la question 4, donc $u_n^2 \geq 3$ :
+\[
+u_{n+1} - u_n = \frac{u_n^2 + 3}{2u_n} - u_n = \frac{u_n^2 + 3 - 2u_n^2}{2u_n} = \frac{3 - u_n^2}{2u_n} \leq 0.
+\]
+Donc $(u_n)_{n \geq 1}$ est décroissante.
+
+\textbf{6. Conclusion.}
+
+\commentaireMarge{Utiliser le théorème des suites monotones bornées.}
+
+La suite $(u_n)_{n \geq 1}$ est décroissante et minorée par $\sqrt{3}$ (question 4). D'après le théorème de convergence des suites monotones bornées, elle converge vers une limite $\ell \geq \sqrt{3}$.
+
+Si $(u_n)$ converge vers $\ell$, alors par passage à la limite dans la relation de récurrence :
+\[
+\ell = \frac{\ell^2 + 3}{2\ell} \implies \ell = \sqrt{3} \quad (\ell > 0).
+\]
+La conjecture est donc justifiée : $(u_n)$ converge vers $\sqrt{3}$.
+
+\end{corrige}

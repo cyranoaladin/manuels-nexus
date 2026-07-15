@@ -1,0 +1,87 @@
+% META: {"id": "1SPE-SUITES-CO-032", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-032", "capacites_codes": ["C5", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% C0 = 800
+% q = Rational(103, 100)
+% C = C0 * q**n
+% assert C.subs(n, 0) == 800
+% ratio = simplify(C.subs(n, n+1) / C)
+% assert ratio == Rational(103, 100)
+% assert ratio > 1
+% # C_5
+% C5 = float(C0 * (1.03)**5)
+% assert abs(C5 - 927.42) < 0.01
+% # Seuil C_n >= 1200 : 800 * 1.03^n >= 1200 => 1.03^n >= 1.5
+% # 1.03^13 ~ 1.469 < 1.5, 1.03^14 ~ 1.513 >= 1.5 => n = 14
+% assert 800 * 1.469 < 1200
+% assert 800 * 1.513 >= 1200
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-032}
+
+\textbf{Question 1 — Relation de récurrence et nature géométrique.}
+
+Chaque année, le capital est multiplié par $(1 + 0{,}03) = 1{,}03$. Donc :
+\[
+  C_{n+1} = 1{,}03 \times C_n, \quad C_0 = 800.
+\]
+
+\textit{Démonstration :} Pour tout $n \in \mathbb{N}$, $C_n = 800 \times 1{,}03^n > 0$, donc $C_n \neq 0$ et on peut calculer le quotient :
+\[
+  \frac{C_{n+1}}{C_n} = \frac{1{,}03 \times C_n}{C_n} = 1{,}03.
+\]
+
+\commentaireMarge{Le quotient $\dfrac{C_{n+1}}{C_n} = 1{,}03$ est constant : $(C_n)$ est géométrique de raison $q = 1{,}03$ et de premier terme $C_0 = 800$.}
+
+Ce quotient est constant, donc $(C_n)$ est une suite géométrique de raison $q = 1{,}03$ et de premier terme $C_0 = 800$.
+
+\medskip
+\textbf{Question 2 — Expression de $C_n$ en fonction de $n$.}
+
+Par la formule du terme général d'une suite géométrique :
+\[
+  C_n = C_0 \times q^n = 800 \times 1{,}03^n.
+\]
+
+\medskip
+\textbf{Question 3 — Sens de variation.}
+
+La raison est $q = 1{,}03 > 1$ et $C_n > 0$ pour tout $n \in \mathbb{N}$. Donc $C_{n+1} = 1{,}03 \times C_n > C_n$.
+
+\commentaireMarge{$q > 1$ et termes positifs $\Rightarrow$ suite strictement croissante : le capital augmente chaque année.}
+
+La suite $(C_n)$ est \textbf{strictement croissante} : le capital augmente chaque année. C'est cohérent avec le fait que les intérêts s'ajoutent au capital (intérêts composés).
+
+\medskip
+\textbf{Question 4 — Calcul de $C_5$.}
+
+\[
+  C_5 = 800 \times 1{,}03^5 \approx 800 \times 1{,}15927 \approx 927{,}42 \text{ \euro{}}.
+\]
+
+Après $5$ ans, Yasmine dispose d'environ $927{,}42$~\euro{}, soit un gain de $127{,}42$~\euro{} par rapport au capital initial.
+
+\medskip
+\textbf{Question 5 — Détermination du plus petit $n$ tel que $C_n \geq 1\,200$.}
+
+On cherche le plus petit entier $n$ tel que :
+\[
+  800 \times 1{,}03^n \geq 1\,200 \iff 1{,}03^n \geq \frac{1\,200}{800} = 1{,}5.
+\]
+
+\commentaireMarge{On utilise les valeurs approchées données : $1{,}03^{13} \approx 1{,}469$ et $1{,}03^{14} \approx 1{,}513$.}
+
+Par essais successifs, en utilisant les valeurs données :
+\[
+  1{,}03^{13} \approx 1{,}469 < 1{,}5 \implies C_{13} \approx 800 \times 1{,}469 = 1\,175{,}20 < 1\,200.
+\]
+\[
+  1{,}03^{14} \approx 1{,}513 > 1{,}5 \implies C_{14} \approx 800 \times 1{,}513 = 1\,210{,}40 \geq 1\,200. \checkmark
+\]
+
+Le plus petit entier $n$ tel que $C_n \geq 1\,200$ est $\boxed{n = 14}$.
+
+Yasmine doit attendre $14$ ans pour que son capital dépasse $1\,200$~\euro{}.
+
+\baremeIndicatif{Q1 : 2 pts (modeliser, raisonner : relation de récurrence 1 pt + démonstration géométrique 1 pt) ; Q2 : 1 pt (calculer : terme général) ; Q3 : 2 pts (raisonner, communiquer : conclusion sur $q$ 1 pt + interprétation 1 pt) ; Q4 : 1 pt (calculer : $C_5$ arrondi) ; Q5 : 2 pts (raisonner, calculer : inéquation 1 pt + résolution par essais et conclusion 1 pt)}
+\end{corrige}

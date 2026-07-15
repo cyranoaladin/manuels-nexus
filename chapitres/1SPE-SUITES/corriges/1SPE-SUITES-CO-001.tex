@@ -1,0 +1,62 @@
+% META: {"id": "1SPE-SUITES-CO-001", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-001", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 4 * Rational(3, 2)**n
+% # Q1 : les trois premiers termes
+% assert u.subs(n, 0) == 4
+% assert u.subs(n, 1) == 6
+% assert u.subs(n, 2) == 9
+% # Q2 : quotient u_{n+1}/u_n
+% quotient = u.subs(n, n+1) / u
+% assert simplify(quotient - Rational(3, 2)) == 0
+% # Q2 : le quotient est constant = 3/2, independant de n
+% # Q3 : u_{n+1} = (3/2)*u_n
+% assert simplify(u.subs(n, n+1) - Rational(3, 2)*u) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-001}
+
+\commentaireMarge{Calcul direct des premiers termes par substitution.}
+
+\textbf{Question 1.} On calcule les trois premiers termes en substituant $n = 0$, $n = 1$ et $n = 2$ dans la formule $u_n = 4 \times \left(\dfrac{3}{2}\right)^n$.
+
+\[
+u_0 = 4 \times \left(\frac{3}{2}\right)^0 = 4 \times 1 = 4.
+\]
+\[
+u_1 = 4 \times \left(\frac{3}{2}\right)^1 = 4 \times \frac{3}{2} = \frac{12}{2} = 6.
+\]
+\[
+u_2 = 4 \times \left(\frac{3}{2}\right)^2 = 4 \times \frac{9}{4} = \frac{36}{4} = 9.
+\]
+
+Donc $u_0 = 4$, $u_1 = 6$ et $u_2 = 9$.
+
+\commentaireMarge{Pour montrer qu'une suite est géométrique, on calcule le quotient de deux termes consécutifs et on vérifie qu'il est constant.}
+
+\textbf{Question 2.} Pour tout entier naturel $n$, calculons le quotient $\dfrac{u_{n+1}}{u_n}$.
+
+On a :
+\[
+u_{n+1} = 4 \times \left(\frac{3}{2}\right)^{n+1}
+\quad \text{et} \quad
+u_n = 4 \times \left(\frac{3}{2}\right)^n.
+\]
+
+Puisque $u_n = 4 \times \left(\dfrac{3}{2}\right)^n > 0$ pour tout $n \in \mathbb{N}$, le quotient est bien défini et vaut :
+\[
+\frac{u_{n+1}}{u_n} = \frac{4 \times \left(\dfrac{3}{2}\right)^{n+1}}{4 \times \left(\dfrac{3}{2}\right)^n} = \left(\frac{3}{2}\right)^{n+1-n} = \frac{3}{2}.
+\]
+
+Ce quotient est constant, égal à $\dfrac{3}{2}$, indépendant de $n$.
+
+Donc la suite $(u_n)$ est une suite géométrique de raison $q = \dfrac{3}{2}$.
+
+\commentaireMarge{La relation de récurrence s'obtient directement à partir de la définition de suite géométrique.}
+
+\textbf{Question 3.} D'après la définition d'une suite géométrique, on a pour tout $n \in \mathbb{N}$ :
+\[
+\boxed{u_{n+1} = \frac{3}{2} \times u_n.}
+\]
+
+\end{corrige}

@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-SUITES-EX-030", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C5"], "capacites_codes": ["C3", "C5"], "methodes": ["M3", "M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 2, "max": 10}, "q": {"domaine": "rationnel", "contrainte": "0<q<1"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-030.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-030.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 5
+% q = Rational(3, 4)
+% u = u0 * q**n
+% assert u.subs(n, 0) == 5
+% # u_n > 0 car u0>0 et q>0
+% ratio = simplify(u.subs(n, n+1) / u)
+% assert ratio == Rational(3, 4)
+% # 0 < q < 1 => suite decroissante
+% assert ratio < 1
+% # u_4
+% from sympy import Rational as R
+% assert u.subs(n, 4) == 5 * R(3,4)**4
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-030}{2}{22}
+Soit $(u_n)$ la suite géométrique de premier terme $u_0 = 5$ et de raison $q = \dfrac{3}{4}$.
+
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ (en fractions).
+
+  \item Démontrer que la suite $(u_n)$ est strictement décroissante en utilisant la méthode du quotient. Justifier que $u_n > 0$ pour tout $n \in \mathbb{N}$.
+
+  \item Exprimer $u_n$ en fonction de $n$.
+
+  \item On pose $v_n = \dfrac{u_{n+1}}{u_n} - 1$ pour tout $n \in \mathbb{N}$.
+  \begin{enumerate}
+    \item Calculer $v_n$.
+    \item Interpréter le signe de $v_n$ au regard du sens de variation de $(u_n)$.
+  \end{enumerate}
+
+  \item On considère la suite $(w_n)$ définie par $w_n = \dfrac{1}{u_n}$ pour tout $n \in \mathbb{N}$. Montrer que $(w_n)$ est une suite géométrique et préciser sa raison.
+\end{enumerate}
+\end{exercice}
