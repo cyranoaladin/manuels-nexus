@@ -12,3 +12,4 @@
 | 2026-07-15 | 1SPE-SUITES | LOT 0 reprise | Schéma contrat, SymPy 102/102, similarité mode fichiers, couverture et PDF : OK ; R4 corrigée. | MODE FICHIERS (port PostgreSQL 5432 occupé) | [1SPE-SUITES][LOT-0] |
 | 2026-07-15 | 1SPE-DERIVATION-LOCAL | LOT 0 | Référentiel BO 2026, contrat 5 capacités, schéma et revue adversariale : PASS. | MODE FICHIERS | [1SPE-DERIVATION-LOCAL][LOT-0] |
 | 2026-07-15 | 1SPE-DERIVATION-LOCAL | LOT 1 | Crawl Éduscol 0 document, ingestion 0 chunk ; angle mort déclaré, génération ex nihilo. | MODE FICHIERS | [1SPE-DERIVATION-LOCAL][LOT-1] |
+| 2026-07-15 | 1SPE-DERIVATION-LOCAL | LOT 2 | Curation synthétique C1–C5, revue adversariale : PASS. | MODE FICHIERS / ex nihilo | [1SPE-DERIVATION-LOCAL][LOT-2] |
