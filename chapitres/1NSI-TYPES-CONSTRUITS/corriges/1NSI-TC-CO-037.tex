@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-TC-CO-037", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def creer_joueur(nom, elo, rang):
+%     return {"nom": nom, "elo": elo, "rang": rang}
+% j = creer_joueur("Alice", 2400, "diamant")
+% assert j["nom"] == "Alice"
+% assert j["elo"] == 2400
+% assert j["rang"] == "diamant"
+% assert creer_joueur("Bob", 1800, "or") == {"nom": "Bob", "elo": 1800, "rang": "or"}
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-037}
+On construit et renvoie directement le dictionnaire :
+
+\begin{python}
+def creer_joueur(nom, elo, rang):
+    return {"nom": nom, "elo": elo, "rang": rang}
+\end{python}
+
+\begin{console}
+>>> creer_joueur("Alice", 2400, "diamant")
+{'nom': 'Alice', 'elo': 2400, 'rang': 'diamant'}
+\end{console}
+\end{corrige}

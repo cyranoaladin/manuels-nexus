@@ -1,0 +1,50 @@
+% META: {"id": "1NSI-TC-CO-041", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def moyenne_par_classe(eleves):
+%     totaux = {}
+%     effectifs = {}
+%     for e in eleves:
+%         c = e["classe"]
+%         if c not in totaux:
+%             totaux[c] = 0
+%             effectifs[c] = 0
+%         totaux[c] = totaux[c] + e["note"]
+%         effectifs[c] = effectifs[c] + 1
+%     moyennes = {}
+%     for c in totaux:
+%         moyennes[c] = totaux[c] / effectifs[c]
+%     return moyennes
+% eleves = [{"nom": "A", "classe": "1A", "note": 12},
+%            {"nom": "B", "classe": "1B", "note": 15},
+%            {"nom": "C", "classe": "1A", "note": 14}]
+% m = moyenne_par_classe(eleves)
+% assert m == {"1A": 13.0, "1B": 15.0}
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-041}
+On utilise deux dictionnaires auxiliaires : \lstinline{totaux} pour la somme des notes et \lstinline{effectifs} pour le nombre d'élèves par classe. On calcule ensuite chaque moyenne.
+
+\begin{python}
+def moyenne_par_classe(eleves):
+    totaux = {}
+    effectifs = {}
+    for e in eleves:
+        c = e["classe"]
+        if c not in totaux:
+            totaux[c] = 0
+            effectifs[c] = 0
+        totaux[c] = totaux[c] + e["note"]
+        effectifs[c] = effectifs[c] + 1
+    moyennes = {}
+    for c in totaux:
+        moyennes[c] = totaux[c] / effectifs[c]
+    return moyennes
+\end{python}
+
+\textbf{Vérification :}
+\begin{console}
+>>> moyenne_par_classe(eleves)
+{'1A': 13.0, '1B': 15.0}
+\end{console}
+
+Pour la classe \lstinline{"1A"}, la somme vaut $12 + 14 = 26$ et l'effectif vaut 2, d'où une moyenne de $26 / 2 = 13{,}0$.
+\end{corrige}

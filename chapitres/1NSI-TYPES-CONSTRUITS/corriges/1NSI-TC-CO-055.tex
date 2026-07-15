@@ -1,0 +1,75 @@
+% META: {"id": "1NSI-TC-CO-055", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def historique_scores(equipes, resultats):
+%     """Renvoie une nouvelle liste d'equipes avec les scores ajoutes.
+%
+%     Precondition: equipes est une liste de dicos avec cles "nom" et "scores".
+%     Precondition: resultats est une liste de tuples (nom, score).
+%     Ne modifie pas la liste d'origine.
+%     """
+%     copie = []
+%     for e in equipes:
+%         copie.append({"nom": e["nom"], "scores": list(e["scores"])})
+%     for nom, score in resultats:
+%         for e in copie:
+%             if e["nom"] == nom:
+%                 e["scores"].append(score)
+%     return copie
+% equipes = [{"nom": "A", "scores": [10, 20]},
+%             {"nom": "B", "scores": [15]}]
+% nouvelles = historique_scores(equipes, [("A", 30), ("B", 25)])
+% assert equipes[0]["scores"] == [10, 20]
+% assert nouvelles[0]["scores"] == [10, 20, 30]
+% assert equipes[1]["scores"] == [15]
+% assert nouvelles[1]["scores"] == [15, 25]
+% # Verifier que les objets sont distincts
+% assert equipes[0] is not nouvelles[0]
+% assert equipes[0]["scores"] is not nouvelles[0]["scores"]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-055}
+\begin{enumerate}
+  \item Voici la fonction :
+\begin{python}
+def historique_scores(equipes, resultats):
+    """Renvoie une nouvelle liste d'equipes avec les
+    scores ajoutes.
+
+    Precondition: equipes est une liste de dicos avec
+    cles "nom" et "scores".
+    Precondition: resultats est une liste de tuples
+    (nom, score).
+    Ne modifie pas la liste d'origine.
+    """
+    copie = []
+    for e in equipes:
+        copie.append({
+            "nom": e["nom"],
+            "scores": list(e["scores"])
+        })
+    for nom, score in resultats:
+        for e in copie:
+            if e["nom"] == nom:
+                e["scores"].append(score)
+    return copie
+\end{python}
+
+  \item Test :
+\begin{python}
+equipes = [{"nom": "A", "scores": [10, 20]},
+            {"nom": "B", "scores": [15]}]
+nouvelles = historique_scores(
+    equipes, [("A", 30), ("B", 25)]
+)
+print(equipes[0]["scores"])   # [10, 20]
+print(nouvelles[0]["scores"]) # [10, 20, 30]
+\end{python}
+La liste d'origine n'est pas modifiée.
+
+  \item Il faut copier \textbf{à la fois} les dictionnaires et les listes de scores car les deux sont des objets mutables :
+  \begin{itemize}
+    \item Si on ne copie pas les dictionnaires (par exemple \lstinline{copie = list(equipes)}), modifier une clé dans \lstinline{copie[0]} modifie aussi \lstinline{equipes[0]} (même dictionnaire).
+    \item Si on copie les dictionnaires mais pas les listes de scores (par exemple \lstinline{copie.append(dict(e))}), la clé \lstinline{"scores"} du nouveau dictionnaire pointe vers la \textbf{même liste} que dans l'original. Un \lstinline{append} sur cette liste affecte les deux.
+  \end{itemize}
+  Il faut donc créer un nouveau dictionnaire \textbf{et} une nouvelle liste de scores avec \lstinline{list(e["scores"])} pour garantir l'absence d'effet de bord.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,29 @@
+% META: {"id": "1NSI-TC-CO-020", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def temperatures_anormales(releves, seuil_bas, seuil_haut):
+%     anormales = []
+%     for i in range(len(releves)):
+%         if releves[i] < seuil_bas or releves[i] > seuil_haut:
+%             anormales.append((i, releves[i]))
+%     return anormales
+% assert temperatures_anormales([15, 42, 18, -3, 22], 0, 40) == [(1, 42), (3, -3)]
+% assert temperatures_anormales([20, 25, 30], 0, 40) == []
+% assert temperatures_anormales([], 0, 40) == []
+% assert temperatures_anormales([50, -10], 0, 40) == [(0, 50), (1, -10)]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-020}
+\begin{python}
+def temperatures_anormales(releves, seuil_bas, seuil_haut):
+    # Tableau des anomalies (indice, valeur)
+    anormales = []
+    for i in range(len(releves)):
+        # Hors intervalle [seuil_bas, seuil_haut]
+        if releves[i] < seuil_bas or releves[i] > seuil_haut:
+            anormales.append((i, releves[i]))
+    return anormales
+\end{python}
+
+\textbf{Principe :} on parcourt le tableau par indice avec \lstinline{range(len(releves))} car on a besoin à la fois de l'indice \lstinline{i} et de la valeur \lstinline{releves[i]}. Pour chaque relevé hors de l'intervalle autorisé, on ajoute le tuple \lstinline{(i, releves[i])} au résultat.
+
+Vérification : \lstinline{temperatures_anormales([15, 42, 18, -3, 22], 0, 40)} renvoie \lstinline{[(1, 42), (3, -3)]}. Résultat confirmé par exécution.
+\end{corrige}

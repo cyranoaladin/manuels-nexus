@@ -1,0 +1,48 @@
+% META: {"id": "1NSI-TC-CO-013", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def top_joueurs(joueurs, n):
+%     classement = list(joueurs)
+%     for i in range(len(classement)):
+%         idx_max = i
+%         for j in range(i + 1, len(classement)):
+%             if classement[j][1] > classement[idx_max][1]:
+%                 idx_max = j
+%         classement[i], classement[idx_max] = classement[idx_max], classement[i]
+%     resultat = []
+%     for k in range(min(n, len(classement))):
+%         resultat.append(classement[k][0])
+%     return tuple(resultat)
+% joueurs = [("Alice", 2400), ("Bob", 1800), ("Clara", 2600), ("Dan", 2100)]
+% assert top_joueurs(joueurs, 2) == ("Clara", "Alice")
+% assert top_joueurs(joueurs, 1) == ("Clara",)
+% assert top_joueurs(joueurs, 4) == ("Clara", "Alice", "Dan", "Bob")
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-013}
+On utilise un tri par sélection en ordre décroissant sur le score Elo, puis on extrait les \lstinline{n} premiers noms :
+
+\begin{python}
+def top_joueurs(joueurs, n):
+    # Copie pour ne pas modifier la liste originale
+    classement = list(joueurs)
+    # Tri par selection (Elo decroissant)
+    for i in range(len(classement)):
+        idx_max = i
+        for j in range(i + 1, len(classement)):
+            if classement[j][1] > classement[idx_max][1]:
+                idx_max = j
+        classement[i], classement[idx_max] = (
+            classement[idx_max], classement[i]
+        )
+    # Extraction des n premiers noms
+    resultat = []
+    for k in range(min(n, len(classement))):
+        resultat.append(classement[k][0])
+    return tuple(resultat)
+\end{python}
+
+\textbf{Raisonnement :} on copie la liste d'entrée avec \lstinline{list(joueurs)} pour ne pas modifier l'original. Le tri par sélection cherche à chaque étape le tuple ayant le plus grand Elo parmi les éléments restants (\lstinline{classement[j][1]} accède au score Elo du $j$-ème tuple) et le place en position \lstinline{i}. Enfin, on construit le tuple résultat en ne conservant que les noms (\lstinline{classement[k][0]}).
+
+\textbf{Complexité :} le tri par sélection est en $O(n^2)$ où $n$ est le nombre de joueurs. L'extraction finale est en $O(n)$.
+
+Vérification : \lstinline{top_joueurs(joueurs, 2)} renvoie bien \lstinline{("Clara", "Alice")}.
+\end{corrige}

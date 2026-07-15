@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TC-CO-047", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% a = [1, 2, 3]
+% b = list(a)
+% b.append(4)
+% assert a == [1, 2, 3]
+% assert b == [1, 2, 3, 4]
+% assert a is not b
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-047}
+\begin{enumerate}
+  \item Le programme affiche :
+\begin{console}
+[1, 2, 3]
+[1, 2, 3, 4]
+False
+\end{console}
+
+  \item Avec \lstinline{b = a}, les deux noms désignent le même objet (alias). Avec \lstinline{b = list(a)}, on crée une \textbf{nouvelle liste} contenant les mêmes éléments : \lstinline{a} et \lstinline{b} sont deux objets distincts. Modifier \lstinline{b} ne modifie donc pas \lstinline{a}.
+
+  \item Deux autres façons de créer une copie superficielle d'une liste :
+  \begin{itemize}
+    \item \lstinline{b = a[:]} (tranche complète) ;
+    \item \lstinline{b = a.copy()} (méthode \lstinline{copy}).
+  \end{itemize}
+\end{enumerate}
+\end{corrige}

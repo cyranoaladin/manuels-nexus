@@ -1,0 +1,32 @@
+% META: {"id": "1NSI-TC-CO-050", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% grille = [[0, 0]] * 3
+% grille[0][0] = 1
+% assert grille == [[1, 0], [1, 0], [1, 0]]
+% assert grille[0] is grille[1]
+% assert grille[1] is grille[2]
+% # Construction correcte
+% grille2 = [[0, 0] for _ in range(3)]
+% grille2[0][0] = 1
+% assert grille2 == [[1, 0], [0, 0], [0, 0]]
+% assert grille2[0] is not grille2[1]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-050}
+\begin{enumerate}
+  \item Le programme affiche :
+\begin{console}
+[1, 0]
+[1, 0]
+[1, 0]
+\end{console}
+Ce n'est pas le résultat attendu : on voulait modifier uniquement la première ligne, mais les trois lignes sont identiques.
+
+  \item L'opérateur \lstinline{*} appliqué à une liste ne crée pas trois sous-listes indépendantes : il duplique trois fois \textbf{la même référence} vers l'unique sous-liste \lstinline{[0, 0]}. Les trois éléments de \lstinline{grille} sont des alias du même objet. Modifier \lstinline{grille[0][0]} modifie cet objet unique, ce qui se répercute sur les trois positions.
+
+  \item On construit la grille avec une liste en compréhension, qui crée une nouvelle sous-liste à chaque itération :
+\begin{python}
+grille = [[0, 0] for _ in range(3)]
+\end{python}
+Ainsi, chaque ligne est un objet distinct et modifier \lstinline{grille[0][0]} n'affecte que la première ligne.
+\end{enumerate}
+\end{corrige}

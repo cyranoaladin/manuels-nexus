@@ -1,0 +1,75 @@
+% META: {"id": "1NSI-TC-CO-033", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def zone_chaude(carte, seuil):
+%     n = len(carte)
+%     p = len(carte[0])
+%     zone = []
+%     for i in range(n):
+%         ligne = []
+%         for j in range(p):
+%             if carte[i][j] >= seuil:
+%                 ligne.append(1)
+%             else:
+%                 ligne.append(0)
+%         zone.append(ligne)
+%     return zone
+% def compter_cases(grille):
+%     compteur = 0
+%     for ligne in grille:
+%         for val in ligne:
+%             if val == 1:
+%                 compteur = compteur + 1
+%     return compteur
+% assert zone_chaude([[30, 25], [35, 28]], 30) == [[1, 0], [1, 0]]
+% assert zone_chaude([[10, 20], [30, 40]], 25) == [[0, 0], [1, 1]]
+% carte = [[30, 25, 32], [28, 35, 31], [22, 19, 27]]
+% z = zone_chaude(carte, 30)
+% assert z == [[1, 0, 1], [0, 1, 1], [0, 0, 0]]
+% assert compter_cases(z) == 4
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-033}
+\textbf{1.} On construit une nouvelle grille de même taille en comparant chaque valeur au seuil :
+
+\begin{python}
+def zone_chaude(carte, seuil):
+    n = len(carte)
+    p = len(carte[0])
+    zone = []
+    for i in range(n):
+        ligne = []
+        for j in range(p):
+            if carte[i][j] >= seuil:
+                ligne.append(1)
+            else:
+                ligne.append(0)
+        zone.append(ligne)
+    return zone
+\end{python}
+
+\textbf{2.} Avec la carte donnée et un seuil de 30 :
+
+\begin{console}
+>>> carte = [[30, 25, 32], [28, 35, 31], [22, 19, 27]]
+>>> zone_chaude(carte, 30)
+[[1, 0, 1], [0, 1, 1], [0, 0, 0]]
+\end{console}
+
+Les cases à 30, 32, 35 et 31 sont marquées 1, les autres 0.
+
+\textbf{3.} Fonction comptant les cases à 1 :
+
+\begin{python}
+def compter_cases(grille):
+    compteur = 0
+    for ligne in grille:
+        for val in ligne:
+            if val == 1:
+                compteur = compteur + 1
+    return compteur
+\end{python}
+
+\begin{console}
+>>> compter_cases([[1, 0, 1], [0, 1, 1], [0, 0, 0]])
+4
+\end{console}
+\end{corrige}

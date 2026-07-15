@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TC-CO-021", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def decaler(tab):
+%     dernier = tab[-1]
+%     for i in range(len(tab) - 1, 0, -1):
+%         tab[i] = tab[i - 1]
+%     tab[0] = dernier
+% scores = [10, 20, 30, 40]
+% decaler(scores)
+% assert scores == [40, 10, 20, 30]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-021}
+\begin{enumerate}
+  \item Le programme affiche \lstinline{[40, 10, 20, 30]}.
+
+  Détail des itérations (on sauvegarde d'abord \lstinline{dernier = 40}) :
+  \begin{itemize}
+    \item $i=3$ : \lstinline{tab[3] = tab[2]} $\to$ \lstinline{[10, 20, 30, 30]}
+    \item $i=2$ : \lstinline{tab[2] = tab[1]} $\to$ \lstinline{[10, 20, 20, 30]}
+    \item $i=1$ : \lstinline{tab[1] = tab[0]} $\to$ \lstinline{[10, 10, 20, 30]}
+  \end{itemize}
+  Puis \lstinline{tab[0] = dernier} $\to$ \lstinline{[40, 10, 20, 30]}.
+
+  \item La fonction effectue une \textbf{rotation droite} du tableau : le dernier élément passe en première position et tous les autres sont décalés d'une position vers la droite.
+
+  \item La fonction ne renvoie rien (pas de \lstinline{return}) : elle renvoie implicitement \lstinline{None}. Le tableau est modifié \textbf{en place} (mutation) car les listes sont des objets mutables. C'est pourquoi \lstinline{scores} est modifié après l'appel, sans avoir besoin de récupérer une valeur de retour.
+\end{enumerate}
+
+Vérification : les résultats ont été confirmés par exécution.
+\end{corrige}

@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-TC-CO-014", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% temperatures = [15, 22, 18, 30, 25]
+% assert temperatures[0] == 15
+% assert temperatures[-1] == 25
+% assert len(temperatures) == 5
+% temperatures[2] = 20
+% assert temperatures == [15, 22, 20, 30, 25]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-014}
+\begin{enumerate}
+  \item Les quatre affichages sont :
+  \begin{itemize}
+    \item \lstinline{temperatures[0]} vaut \lstinline{15} (premier élément, indice 0).
+    \item \lstinline{temperatures[-1]} vaut \lstinline{25} (dernier élément, indice $-1$).
+    \item \lstinline{len(temperatures)} vaut \lstinline{5} (le tableau contient 5 éléments).
+    \item Après \lstinline{temperatures[2] = 20}, le tableau vaut \lstinline{[15, 22, 20, 30, 25]}.
+  \end{itemize}
+
+  \item On peut écrire \lstinline{temperatures[2] = 20} car une liste est \textbf{mutable} : on peut modifier ses éléments après sa création. Un tuple est \textbf{non mutable} (immuable) : toute tentative de modification déclenche une erreur \lstinline{TypeError}.
+\end{enumerate}
+
+Vérification : les résultats ont été confirmés par exécution.
+\end{corrige}

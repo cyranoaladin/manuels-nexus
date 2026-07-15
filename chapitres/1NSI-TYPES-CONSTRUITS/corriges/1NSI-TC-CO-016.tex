@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-TC-CO-016", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def moyenne(tab):
+%     somme = 0
+%     for val in tab:
+%         somme = somme + val
+%     return somme / len(tab)
+% assert moyenne([10, 20, 30]) == 20.0
+% assert moyenne([15]) == 15.0
+% assert abs(moyenne([12, 8, 15, 3, 20]) - 11.6) < 1e-9
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-016}
+\begin{python}
+def moyenne(tab):
+    somme = 0
+    for val in tab:
+        somme = somme + val
+    return somme / len(tab)
+\end{python}
+
+On parcourt le tableau pour accumuler la somme des éléments, puis on divise par le nombre d'éléments (\lstinline{len(tab)}). La division \lstinline{/} renvoie un flottant.
+
+Vérification : \lstinline{moyenne([10, 20, 30])} renvoie \lstinline{20.0} et \lstinline{moyenne([12, 8, 15, 3, 20])} renvoie \lstinline{11.6}. Résultats confirmés par exécution.
+\end{corrige}

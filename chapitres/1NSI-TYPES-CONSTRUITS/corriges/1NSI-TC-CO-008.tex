@@ -1,0 +1,31 @@
+% META: {"id": "1NSI-TC-CO-008", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def station_la_plus_chaude(stations):
+%     meilleure = stations[0]
+%     for station in stations:
+%         if station[1] > meilleure[1]:
+%             meilleure = station
+%     return meilleure[0]
+% assert station_la_plus_chaude([("Paris", 32), ("Lyon", 35), ("Lille", 28)]) == "Lyon"
+% assert station_la_plus_chaude([("Tunis", 40)]) == "Tunis"
+% assert station_la_plus_chaude([("A", 20), ("B", 20)]) == "A"
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-008}
+On parcourt la liste en retenant le tuple ayant la plus grande température :
+
+\begin{python}
+def station_la_plus_chaude(stations):
+    # On initialise avec la premiere station
+    meilleure = stations[0]
+    for station in stations:
+        # On compare les temperatures (indice 1)
+        if station[1] > meilleure[1]:
+            meilleure = station
+    # On renvoie uniquement le nom (indice 0)
+    return meilleure[0]
+\end{python}
+
+La variable \lstinline{meilleure} stocke le tuple complet de la station candidate. À chaque itération, si la température courante dépasse le maximum connu, on met à jour \lstinline{meilleure}. En fin de boucle, \lstinline{meilleure[0]} donne le nom recherché.
+
+Vérification : \lstinline{station_la_plus_chaude([("Paris", 32), ("Lyon", 35), ("Lille", 28)])} renvoie bien \lstinline{"Lyon"}.
+\end{corrige}

@@ -1,0 +1,47 @@
+% META: {"id": "1NSI-TC-CO-031", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def compter_voisins(grille, lig, col):
+%     compteur = 0
+%     for di in [-1, 0, 1]:
+%         for dj in [-1, 0, 1]:
+%             if di == 0 and dj == 0:
+%                 continue
+%             ni = lig + di
+%             nj = col + dj
+%             if 0 <= ni < len(grille) and 0 <= nj < len(grille[0]):
+%                 if grille[ni][nj] == 1:
+%                     compteur = compteur + 1
+%     return compteur
+% g = [[0, 1, 0], [1, 1, 0], [0, 0, 1]]
+% assert compter_voisins(g, 1, 1) == 3
+% assert compter_voisins(g, 0, 0) == 3
+% assert compter_voisins(g, 2, 2) == 1
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-031}
+On explore les 8 cases adjacentes en combinant les décalages $-1$, $0$ et $1$ sur les deux axes, en excluant le décalage $(0, 0)$ qui correspond à la case elle-même. On vérifie que les indices restent dans les bornes de la grille :
+
+\begin{python}
+def compter_voisins(grille, lig, col):
+    compteur = 0
+    for di in [-1, 0, 1]:
+        for dj in [-1, 0, 1]:
+            if di == 0 and dj == 0:
+                continue
+            ni = lig + di
+            nj = col + dj
+            if 0 <= ni < len(grille) and 0 <= nj < len(grille[0]):
+                if grille[ni][nj] == 1:
+                    compteur = compteur + 1
+    return compteur
+\end{python}
+
+\begin{console}
+>>> g = [[0, 1, 0], [1, 1, 0], [0, 0, 1]]
+>>> compter_voisins(g, 1, 1)
+3
+>>> compter_voisins(g, 0, 0)
+3
+\end{console}
+
+La case $(1, 1)$ a 8 voisins potentiels ; trois d'entre eux valent 1 : $(0, 1)$, $(1, 0)$ et $(2, 2)$, d'où le résultat 3. La case $(0, 0)$ est un coin : elle n'a que 3 voisins ($(0, 1)$, $(1, 0)$ et $(1, 1)$), qui valent tous 1, d'où le résultat 3.
+\end{corrige}

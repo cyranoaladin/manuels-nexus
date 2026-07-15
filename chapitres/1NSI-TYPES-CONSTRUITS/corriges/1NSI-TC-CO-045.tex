@@ -1,0 +1,76 @@
+% META: {"id": "1NSI-TC-CO-045", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def stations_par_region(stations):
+%     regions = {}
+%     for s in stations:
+%         r = s["region"]
+%         if r not in regions:
+%             regions[r] = []
+%         regions[r].append(s["nom"])
+%     return regions
+% def region_la_plus_chaude(stations):
+%     totaux = {}
+%     effectifs = {}
+%     for s in stations:
+%         r = s["region"]
+%         if r not in totaux:
+%             totaux[r] = 0
+%             effectifs[r] = 0
+%         totaux[r] = totaux[r] + s["temp"]
+%         effectifs[r] = effectifs[r] + 1
+%     meilleure = None
+%     meilleure_moy = -1
+%     for r in totaux:
+%         moy = totaux[r] / effectifs[r]
+%         if moy > meilleure_moy:
+%             meilleure_moy = moy
+%             meilleure = r
+%     return meilleure
+% stations = [{"nom": "Lyon", "region": "ARA", "temp": 30},
+%              {"nom": "Paris", "region": "IDF", "temp": 28},
+%              {"nom": "Grenoble", "region": "ARA", "temp": 27}]
+% res = stations_par_region(stations)
+% assert res == {"ARA": ["Lyon", "Grenoble"], "IDF": ["Paris"]}
+% assert region_la_plus_chaude(stations) == "ARA"
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-045}
+\textbf{1.} On regroupe les noms de stations par région dans un dictionnaire dont les valeurs sont des listes :
+
+\begin{python}
+def stations_par_region(stations):
+    regions = {}
+    for s in stations:
+        r = s["region"]
+        if r not in regions:
+            regions[r] = []
+        regions[r].append(s["nom"])
+    return regions
+\end{python}
+
+Le point clé est l'initialisation : quand une région apparaît pour la première fois, on crée une liste vide avant d'y ajouter le nom de la station.
+
+\textbf{2.} On calcule la température moyenne par région, puis on cherche le maximum :
+
+\begin{python}
+def region_la_plus_chaude(stations):
+    totaux = {}
+    effectifs = {}
+    for s in stations:
+        r = s["region"]
+        if r not in totaux:
+            totaux[r] = 0
+            effectifs[r] = 0
+        totaux[r] = totaux[r] + s["temp"]
+        effectifs[r] = effectifs[r] + 1
+    meilleure = None
+    meilleure_moy = -1
+    for r in totaux:
+        moy = totaux[r] / effectifs[r]
+        if moy > meilleure_moy:
+            meilleure_moy = moy
+            meilleure = r
+    return meilleure
+\end{python}
+
+Sur l'exemple : la moyenne ARA vaut $(30 + 27) / 2 = 28{,}5$ et la moyenne IDF vaut $28 / 1 = 28$. La région la plus chaude est donc \lstinline{"ARA"}.
+\end{corrige}

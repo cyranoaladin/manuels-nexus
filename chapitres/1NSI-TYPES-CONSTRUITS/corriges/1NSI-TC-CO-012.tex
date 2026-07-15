@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-TC-CO-012", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def enveloppe_convexe_1d(points):
+%     if len(points) == 0:
+%         return None
+%     x_min = points[0][0]
+%     x_max = points[0][0]
+%     y_min = points[0][1]
+%     y_max = points[0][1]
+%     for x, y in points:
+%         if x < x_min:
+%             x_min = x
+%         if x > x_max:
+%             x_max = x
+%         if y < y_min:
+%             y_min = y
+%         if y > y_max:
+%             y_max = y
+%     return ((x_min, y_min), (x_max, y_max))
+% assert enveloppe_convexe_1d([(1, 2), (3, 0), (-1, 5)]) == ((-1, 0), (3, 5))
+% assert enveloppe_convexe_1d([(0, 0)]) == ((0, 0), (0, 0))
+% assert enveloppe_convexe_1d([(4, 1), (2, 3)]) == ((2, 1), (4, 3))
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-012}
+On cherche indépendamment les minimum et maximum de chaque coordonnée en parcourant tous les points une seule fois :
+
+\begin{python}
+def enveloppe_convexe_1d(points):
+    if len(points) == 0:
+        return None
+    # Initialisation avec le premier point
+    x_min = points[0][0]
+    x_max = points[0][0]
+    y_min = points[0][1]
+    y_max = points[0][1]
+    # Parcours de tous les points
+    for x, y in points:
+        if x < x_min:
+            x_min = x
+        if x > x_max:
+            x_max = x
+        if y < y_min:
+            y_min = y
+        if y > y_max:
+            y_max = y
+    return ((x_min, y_min), (x_max, y_max))
+\end{python}
+
+\textbf{Raisonnement :} le rectangle englobant est défini par quatre valeurs extrêmes. On initialise chaque extremum avec le premier point, puis on met à jour au fil du parcours. Les comparaisons sur $x$ et $y$ sont indépendantes : le coin inférieur gauche \lstinline{(x_min, y_min)} et le coin supérieur droit \lstinline{(x_max, y_max)} peuvent provenir de points différents.
+
+\textbf{Complexité :} un seul parcours de la liste, donc $O(n)$ où $n$ est le nombre de points.
+
+Vérification : \lstinline{enveloppe_convexe_1d([(1, 2), (3, 0), (-1, 5)])} renvoie bien \lstinline{((-1, 0), (3, 5))}.
+\end{corrige}

@@ -1,0 +1,4 @@
+% META: {"id": "1NSI-TC-EX-027-CDP", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "coup_de_pouce", "exercice_ref": "1NSI-TC-EX-027", "status": "needs_review"}
+\coupDePouce{1}{On te demande d'écrire une fonction qui construit une grille de \lstinline{n} lignes et \lstinline{p} colonnes remplie d'une même valeur.}
+\coupDePouce{2}{Utilise deux boucles imbriquées : la boucle externe crée chaque ligne, la boucle interne remplit la ligne avec \lstinline{append}. Ajoute chaque ligne terminée à la grille.}
+\coupDePouce{3}{\lstinline{[[valeur] * p] * n} crée \lstinline{n} références vers la \emph{même} ligne : modifier une case les modifie toutes. C'est pourquoi il faut créer une nouvelle ligne à chaque itération.}

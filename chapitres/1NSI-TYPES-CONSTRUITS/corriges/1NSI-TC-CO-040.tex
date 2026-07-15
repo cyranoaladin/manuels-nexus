@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TC-CO-040", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def fusionner_dicos(d1, d2):
+%     resultat = {}
+%     for cle in d1:
+%         resultat[cle] = d1[cle]
+%     for cle in d2:
+%         resultat[cle] = d2[cle]
+%     return resultat
+% a = {"x": 1, "y": 2}
+% b = {"y": 10, "z": 3}
+% assert fusionner_dicos(a, b) == {"x": 1, "y": 10, "z": 3}
+% assert a == {"x": 1, "y": 2}
+% assert b == {"y": 10, "z": 3}
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-040}
+\begin{enumerate}
+  \item Le programme affiche :
+\begin{console}
+{'x': 1, 'y': 10, 'z': 3}
+\end{console}
+
+  \item Lorsqu'une clé est présente dans les deux dictionnaires (ici \lstinline{"y"}), la valeur du second dictionnaire \lstinline{d2} écrase celle du premier. En effet, la seconde boucle exécute \lstinline{resultat["y"] = d2["y"]}, soit \lstinline{resultat["y"] = 10}, qui remplace la valeur 2 précédemment copiée depuis \lstinline{d1}.
+
+  \item Non, les dictionnaires \lstinline{a} et \lstinline{b} ne sont pas modifiés. La fonction crée un nouveau dictionnaire \lstinline{resultat} et n'écrit jamais dans \lstinline{d1} ni \lstinline{d2}. Après l'appel, \lstinline{a == \{"x": 1, "y": 2\}} et \lstinline{b == \{"y": 10, "z": 3\}}.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,31 @@
+% META: {"id": "1NSI-TC-CO-042", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% joueur = {"nom": "Bob", "elo": 1800}
+% assert "rang" not in joueur
+% assert joueur.get("rang", "inconnu") == "inconnu"
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-042}
+\begin{enumerate}
+  \item Le programme produit une erreur \lstinline{KeyError: 'rang'}. La clé \lstinline{"rang"} n'existe pas dans le dictionnaire \lstinline{joueur} (qui ne contient que \lstinline{"nom"} et \lstinline{"elo"}). Accéder à une clé inexistante avec la notation \lstinline{dico[cle]} provoque cette erreur.
+
+  \item Deux façons d'éviter l'erreur :
+
+  \textbf{Méthode 1 --- tester l'existence avec \lstinline{in} :}
+\begin{python}
+if "rang" in joueur:
+    print(joueur["rang"])
+\end{python}
+
+  \textbf{Méthode 2 --- utiliser \lstinline{get} :}
+\begin{python}
+print(joueur.get("rang"))
+\end{python}
+  La méthode \lstinline{get} renvoie \lstinline{None} si la clé n'existe pas, sans provoquer d'erreur.
+
+  \item Pour afficher \lstinline{"inconnu"} par défaut :
+\begin{python}
+print(joueur.get("rang", "inconnu"))
+\end{python}
+  Le second argument de \lstinline{get} est la valeur renvoyée si la clé est absente.
+\end{enumerate}
+\end{corrige}

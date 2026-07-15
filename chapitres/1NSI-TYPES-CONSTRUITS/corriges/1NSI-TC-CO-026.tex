@@ -1,0 +1,35 @@
+% META: {"id": "1NSI-TC-CO-026", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% carte = [[20, 22, 19],
+%           [25, 28, 23],
+%           [18, 17, 21]]
+% total = 0
+% for ligne in carte:
+%     for val in ligne:
+%         total = total + val
+% assert total == 193
+% nb = sum(len(ligne) for ligne in carte)
+% assert total / nb == 193 / 9
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-026}
+\begin{enumerate}
+  \item Le programme affiche \lstinline{193}.
+
+  En effet, la double boucle parcourt toutes les valeurs de la grille et les accumule dans \lstinline{total} : $20+22+19+25+28+23+18+17+21 = 193$.
+
+  \item Pour afficher la moyenne, on divise le total par le nombre de cases. La grille contient $3 \times 3 = 9$ valeurs :
+\begin{python}
+carte = [[20, 22, 19],
+         [25, 28, 23],
+         [18, 17, 21]]
+total = 0
+nb = 0
+for ligne in carte:
+    for val in ligne:
+        total = total + val
+        nb = nb + 1
+print(total / nb)
+\end{python}
+  L'affichage est \lstinline{21.444444444444443}.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,36 @@
+% META: {"id": "1NSI-TC-CO-051", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def supprimer_negatifs_v1(tab):
+%     for val in tab:
+%         if val < 0:
+%             tab.remove(val)
+%     return tab
+% # v1 est buggee : elle saute -3
+% r1 = supprimer_negatifs_v1([5, -2, -3, 8])
+% assert r1 == [5, -3, 8]  # -3 n'est pas supprime
+% def supprimer_negatifs(tab):
+%     resultat = []
+%     for val in tab:
+%         if val >= 0:
+%             resultat.append(val)
+%     return resultat
+% temperatures = [5, -2, 8, -1, 3]
+% propres = supprimer_negatifs(temperatures)
+% assert temperatures == [5, -2, 8, -1, 3]
+% assert propres == [5, 8, 3]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-051}
+\begin{enumerate}
+  \item Avec l'appel \lstinline{supprimer_negatifs_v1([5, -2, -3, 8])} :
+  \begin{itemize}
+    \item Itération sur l'index 0 : \lstinline{val = 5}, positif, rien ne se passe.
+    \item Index 1 : \lstinline{val = -2}, négatif, \lstinline{tab.remove(-2)} supprime \lstinline{-2}. La liste devient \lstinline{[5, -3, 8]}.
+    \item Index 2 : l'itérateur passe à l'index 2, qui vaut maintenant \lstinline{8}. La valeur \lstinline{-3} (à l'index 1) est \textbf{sautée}.
+  \end{itemize}
+  Le résultat est \lstinline{[5, -3, 8]} : incorrect, car \lstinline{-3} n'a pas été supprimé.
+
+  Le problème : on modifie une liste \emph{pendant} qu'on itère dessus. La suppression décale les éléments, et l'itérateur saute l'élément suivant.
+
+  \item La version corrigée crée une \textbf{nouvelle liste} \lstinline{resultat} et y ajoute uniquement les valeurs positives ou nulles. Elle n'itère pas sur la liste qu'elle modifie, ce qui évite le problème de décalage d'indices. De plus, le tableau d'origine \lstinline{temperatures} n'est \textbf{pas modifié} : la fonction est sans effet de bord.
+\end{enumerate}
+\end{corrige}

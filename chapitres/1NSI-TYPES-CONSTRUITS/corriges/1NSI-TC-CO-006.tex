@@ -1,0 +1,19 @@
+% META: {"id": "1NSI-TC-CO-006", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def coordonnees_milieu(a, b):
+%     return ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+% assert coordonnees_milieu((0, 0), (4, 6)) == (2.0, 3.0)
+% assert coordonnees_milieu((1, 1), (1, 1)) == (1.0, 1.0)
+% assert coordonnees_milieu((-2, 3), (2, -3)) == (0.0, 0.0)
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-006}
+\begin{python}
+def coordonnees_milieu(a, b):
+    # a et b sont des tuples (x, y)
+    return ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+\end{python}
+
+La fonction accède aux coordonnées par indexation (\lstinline{a[0]} pour $x_A$, \lstinline{a[1]} pour $y_A$) et renvoie un nouveau tuple contenant les moyennes.
+
+Vérification : \lstinline{coordonnees_milieu((0, 0), (4, 6))} renvoie bien \lstinline{(2.0, 3.0)}.
+\end{corrige}

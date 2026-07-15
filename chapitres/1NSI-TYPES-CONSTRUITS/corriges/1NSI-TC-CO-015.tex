@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-TC-CO-015", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% scores = [12, 8, 15, 3, 20]
+% resultat = []
+% for s in scores:
+%     if s >= 10:
+%         resultat.append(s)
+% assert resultat == [12, 15, 20]
+% assert len(resultat) == 3
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-015}
+\begin{enumerate}
+  \item Les deux affichages sont :
+  \begin{itemize}
+    \item \lstinline{[12, 15, 20]} : seuls les scores supérieurs ou égaux à 10 sont conservés.
+    \item \lstinline{3} : le tableau \lstinline{resultat} contient 3 éléments.
+  \end{itemize}
+
+  \item Ce programme \textbf{filtre} le tableau \lstinline{scores} en ne conservant que les valeurs supérieures ou égales à 10. Il construit un nouveau tableau \lstinline{resultat} contenant uniquement ces valeurs.
+\end{enumerate}
+
+Vérification : les résultats ont été confirmés par exécution.
+\end{corrige}

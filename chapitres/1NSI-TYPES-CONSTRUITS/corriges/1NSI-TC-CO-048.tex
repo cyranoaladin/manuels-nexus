@@ -1,0 +1,20 @@
+% META: {"id": "1NSI-TC-CO-048", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def ajouter(tab, val):
+%     tab.append(val)
+% scores = [10, 20]
+% ajouter(scores, 30)
+% assert scores == [10, 20, 30]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-048}
+\begin{enumerate}
+  \item Le programme affiche :
+\begin{console}
+[10, 20, 30]
+\end{console}
+
+  \item Lorsqu'on passe une liste à une fonction, le paramètre \lstinline{tab} reçoit une \textbf{référence} vers le même objet que \lstinline{scores}. L'appel \lstinline{tab.append(val)} modifie donc directement la liste d'origine, sans qu'un \lstinline{return} soit nécessaire.
+
+  \item Un \textbf{effet de bord} est une modification d'un état extérieur à la fonction (ici la liste \lstinline{scores}) produite par l'exécution de la fonction. La fonction ne se contente pas de calculer une valeur : elle modifie un objet mutable partagé. Les effets de bord rendent le code plus difficile à comprendre car le résultat ne dépend pas uniquement de la valeur de retour.
+\end{enumerate}
+\end{corrige}

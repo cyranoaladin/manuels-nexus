@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-TC-CO-054", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def copie_profonde_grille(grille):
+%     """Renvoie une copie profonde d'une grille (liste de listes).
+%
+%     Precondition: grille est une liste de listes.
+%     """
+%     resultat = []
+%     for ligne in grille:
+%         resultat.append(list(ligne))
+%     return resultat
+% g = [[1, 2], [3, 4]]
+% c = copie_profonde_grille(g)
+% c[0][0] = 99
+% assert g[0][0] == 1
+% assert c[0][0] == 99
+% c[1] = [10, 20]
+% assert g[1] == [3, 4]
+% # Test grille vide
+% assert copie_profonde_grille([]) == []
+% # Test independance des references
+% g2 = [[0, 0], [0, 0]]
+% c2 = copie_profonde_grille(g2)
+% assert c2[0] is not g2[0]
+% assert c2[1] is not g2[1]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-054}
+\begin{enumerate}
+  \item Voici la fonction :
+\begin{python}
+def copie_profonde_grille(grille):
+    """Renvoie une copie profonde d'une grille (liste de listes).
+
+    Precondition: grille est une liste de listes.
+    """
+    resultat = []
+    for ligne in grille:
+        resultat.append(list(ligne))
+    return resultat
+\end{python}
+On parcourt chaque ligne de la grille et on en crée une copie avec \lstinline{list(ligne)} avant de l'ajouter au résultat.
+
+  \item Vérification :
+\begin{python}
+g = [[1, 2], [3, 4]]
+c = copie_profonde_grille(g)
+c[0][0] = 99
+print(g[0][0])  # affiche 1
+\end{python}
+La modification de \lstinline{c} n'affecte pas \lstinline{g} : la copie est bien profonde.
+
+  \item \lstinline{list(grille)} crée une nouvelle liste externe, mais chaque élément (chaque ligne) reste une \textbf{référence} vers la même sous-liste. C'est une copie superficielle. Pour que la copie soit profonde, il faut aussi copier chaque sous-liste individuellement, ce que fait \lstinline{list(ligne)} dans la boucle.
+\end{enumerate}
+\end{corrige}

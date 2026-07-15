@@ -1,0 +1,53 @@
+% META: {"id": "1NSI-TC-CO-044", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def classement_tournoi(matchs):
+%     points = {}
+%     for equipe1, score1, equipe2, score2 in matchs:
+%         if equipe1 not in points:
+%             points[equipe1] = 0
+%         if equipe2 not in points:
+%             points[equipe2] = 0
+%         if score1 > score2:
+%             points[equipe1] = points[equipe1] + 3
+%         elif score1 < score2:
+%             points[equipe2] = points[equipe2] + 3
+%         else:
+%             points[equipe1] = points[equipe1] + 1
+%             points[equipe2] = points[equipe2] + 1
+%     return points
+% matchs = [("A", 2, "B", 1), ("A", 0, "C", 0), ("B", 3, "C", 1)]
+% p = classement_tournoi(matchs)
+% assert p == {"A": 4, "B": 3, "C": 1}
+% assert classement_tournoi([]) == {}
+% assert classement_tournoi([("X", 1, "Y", 1)]) == {"X": 1, "Y": 1}
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-044}
+On parcourt chaque match en déballant le tuple. Pour chaque équipe rencontrée pour la première fois, on initialise son compteur à 0. Puis on attribue les points selon le résultat.
+
+\begin{python}
+def classement_tournoi(matchs):
+    points = {}
+    for equipe1, score1, equipe2, score2 in matchs:
+        if equipe1 not in points:
+            points[equipe1] = 0
+        if equipe2 not in points:
+            points[equipe2] = 0
+        if score1 > score2:
+            points[equipe1] = points[equipe1] + 3
+        elif score1 < score2:
+            points[equipe2] = points[equipe2] + 3
+        else:
+            points[equipe1] = points[equipe1] + 1
+            points[equipe2] = points[equipe2] + 1
+    return points
+\end{python}
+
+\textbf{Déroulement sur l'exemple :}
+\begin{itemize}
+  \item \lstinline{("A", 2, "B", 1)} : A gagne ($2 > 1$) $\to$ A reçoit 3 points.
+  \item \lstinline{("A", 0, "C", 0)} : match nul $\to$ A et C reçoivent chacun 1 point.
+  \item \lstinline{("B", 3, "C", 1)} : B gagne ($3 > 1$) $\to$ B reçoit 3 points.
+\end{itemize}
+
+Résultat : \lstinline{{"A": 4, "B": 3, "C": 1}}.
+\end{corrige}
