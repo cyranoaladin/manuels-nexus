@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-DERLOCAL-EX-006","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":3,"competences":["raisonner","chercher","communiquer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-006.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-006.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% # f(x) = x^2, g(x) = 2x between 1 and 1+h, h=1
+% tau_f = Rational((2**2 - 1**2), (2-1)); assert tau_f == 3
+% tau_g = Rational((4-2), (2-1)); assert tau_g == 2
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-006}{3}{20}
+On pose $f(x)=x^2$ et $g(x)=2x$. On fixe $a=1$.
+
+\begin{enumerate}
+  \item Pour $h=1$, $h=0{,}5$ et $h=0{,}1$, calculer le taux de variation de $f$ entre $a$ et $a+h$, puis celui de $g$ entre $a$ et $a+h$.
+  \item Que semble-t-il se passer lorsque $h$ se rapproche de $0$ ? Formuler une conjecture.
+  \item Exprimer, pour tout $h\ne 0$, le taux de variation de $f$ entre $1$ et $1+h$ en fonction de $h$.
+  \item Justifier que ces taux se rapprochent de $2$ lorsque $h$ se rapproche de $0$. Comparer avec le résultat obtenu pour $g$.
+  \item Interpréter géométriquement : que peut-on dire de la tangente à la courbe de $f$ au point d'abscisse $1$ et de la droite représentant $g$ ?
+\end{enumerate}
+\end{exercice}
