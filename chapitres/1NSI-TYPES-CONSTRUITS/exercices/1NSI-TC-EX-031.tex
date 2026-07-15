@@ -13,8 +13,8 @@
 %                     compteur = compteur + 1
 %     return compteur
 % g = [[0, 1, 0], [1, 1, 0], [0, 0, 1]]
-% assert compter_voisins(g, 1, 1) == 2
-% assert compter_voisins(g, 0, 0) == 2
+% assert compter_voisins(g, 1, 1) == 3
+% assert compter_voisins(g, 0, 0) == 3
 % assert compter_voisins(g, 2, 2) == 1
 % END-VERIFY
 \begin{exercice}{1NSI-TC-EX-031}{2}{12}
@@ -29,9 +29,9 @@ valeur 1, sans compter la case elle-même.
 \begin{console}
 >>> g = [[0, 1, 0], [1, 1, 0], [0, 0, 1]]
 >>> compter_voisins(g, 1, 1)
-2
+3
 >>> compter_voisins(g, 0, 0)
-2
+3
 \end{console}
 
 \textit{Attention :} gérer les bords de la grille.
