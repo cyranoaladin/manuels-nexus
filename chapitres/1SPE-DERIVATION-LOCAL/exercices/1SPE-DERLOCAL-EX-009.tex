@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-DERLOCAL-EX-009","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":2,"competences":["calculer","modeliser","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-009.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-009.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% t = symbols('t')
+% # d(t) = 5t^2, d'(t) = 10t, d'(3) = 30
+% h = symbols('h', nonzero=True)
+% taux = simplify((5*(3+h)**2 - 5*9)/h)
+% assert taux == 5*h + 30
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-009}{2}{15}
+Un objet en chute libre a parcouru une distance $d(t)=5t^2$ mètres après $t$ secondes.
+
+\begin{enumerate}
+  \item Calculer $d(3)$ et $d(3{,}1)$. En déduire le taux de variation de $d$ entre $3$ et $3{,}1$.
+  \item Exprimer $\dfrac{d(3+h)-d(3)}{h}$ en fonction de $h$ pour $h\ne 0$.
+  \item En déduire $d'(3)$.
+  \item Interpréter $d'(3)$ dans le contexte de la chute libre. Préciser l'unité.
+\end{enumerate}
+\end{exercice}

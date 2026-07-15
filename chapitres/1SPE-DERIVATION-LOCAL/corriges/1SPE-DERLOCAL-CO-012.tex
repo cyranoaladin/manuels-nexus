@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERLOCAL-CO-012","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-012","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% h = symbols('h', nonzero=True)
+% taux = simplify((1/(1+h) - 1)/h)
+% assert simplify(taux + 1/(1+h)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-012}
+\textbf{1.} $f(1+h)-f(1)=\dfrac{1}{1+h}-1=\dfrac{1-(1+h)}{1+h}=\dfrac{-h}{1+h}$.
+
+Donc $\dfrac{f(1+h)-f(1)}{h}=\dfrac{-h}{h(1+h)}=\dfrac{-1}{1+h}$.
+
+L'égalité est bien vérifiée pour $h\ne 0$ et $1+h>0$.
+
+\textbf{2.} Lorsque $h$ se rapproche de $0$, $\dfrac{-1}{1+h}$ se rapproche de $\dfrac{-1}{1}=-1$. Donc $f'(1)=-1$.
+
+\textbf{3.} La tangente au point d'abscisse $1$ a pour équation
+\[
+y=f(1)+f'(1)(x-1)=1+(-1)(x-1)=1-x+1=2-x.
+\]
+
+\textbf{4.} La tangente coupe l'axe des abscisses lorsque $y=0$, soit $2-x=0$, c'est-à-dire $x=2$. La tangente coupe l'axe des abscisses au point $(2\,;\,0)$.
+\end{corrige}

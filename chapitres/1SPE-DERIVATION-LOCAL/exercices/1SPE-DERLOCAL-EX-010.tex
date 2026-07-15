@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-DERLOCAL-EX-010","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":2,"competences":["calculer","raisonner"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-010.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-010.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% h = symbols('h', nonzero=True)
+% # f(x) = x^3, f(1+h) = (1+h)^3 = 1+3h+3h^2+h^3
+% taux = simplify(((1+h)**3 - 1)/h)
+% assert taux == h**2 + 3*h + 3
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-010}{2}{12}
+Soit $f(x)=x^3$.
+\begin{enumerate}
+  \item Développer $(1+h)^3$.
+  \item En déduire l'expression de $\dfrac{f(1+h)-f(1)}{h}$ en fonction de $h$ pour $h\ne 0$.
+  \item Déterminer $f'(1)$.
+  \item La tangente à la courbe de $f$ au point d'abscisse $1$ est-elle croissante ou décroissante ? Justifier.
+\end{enumerate}
+\end{exercice}

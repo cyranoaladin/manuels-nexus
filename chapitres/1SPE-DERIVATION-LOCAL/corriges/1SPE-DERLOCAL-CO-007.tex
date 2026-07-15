@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-DERLOCAL-CO-007","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-007","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% h = symbols('h', nonzero=True)
+% f = lambda x: x**2 + 2*x
+% taux = simplify((f(3+h) - f(3))/h)
+% assert taux == h + 8
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-007}
+\textbf{1.} On a $f(3)=9+6=15$.
+\begin{itemize}
+  \item $h=1$ : $\frac{f(4)-f(3)}{1}=\frac{24-15}{1}=9$.
+  \item $h=0{,}1$ : $\frac{f(3{,}1)-f(3)}{0{,}1}=\frac{15{,}81-15}{0{,}1}=8{,}1$.
+  \item $h=0{,}01$ : $\frac{f(3{,}01)-f(3)}{0{,}01}=\frac{15{,}0801-15}{0{,}01}=8{,}01$.
+\end{itemize}
+
+\textbf{2.} Les taux de variation $9$, $8{,}1$, $8{,}01$ semblent tendre vers $8$ lorsque $h$ se rapproche de $0$.
+
+\textbf{3.} Par définition, $f'(3)$ est la valeur vers laquelle tendent les taux de variation. Donc $f'(3)=8$.
+
+\textit{Vérification :} $\frac{f(3+h)-f(3)}{h}=\frac{(3+h)^2+2(3+h)-15}{h}=\frac{h^2+8h}{h}=h+8$. Lorsque $h\to 0$, on obtient bien $8$.
+\end{corrige}
