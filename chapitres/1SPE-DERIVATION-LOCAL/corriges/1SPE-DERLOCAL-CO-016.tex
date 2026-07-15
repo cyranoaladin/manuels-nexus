@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-DERLOCAL-CO-016","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-016","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve, Rational
+% x = symbols('x')
+% T1 = -1*(x - 1) + 2
+% T2 = 2*(x - 3) + 4
+% sol = solve(Eq(T1, T2), x)
+% assert sol[0] == Rational(5, 3)
+% assert T1.subs(x, Rational(5, 3)) == Rational(4, 3)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-016}
+
+\textbf{Question 1.} L'équation de la tangente au point d'abscisse $1$ est $y = f'(1)(x - 1) + f(1)$.
+
+Avec $f(1) = 2$ et $f'(1) = -1$ :
+\[
+y = -1 \times (x - 1) + 2 = -x + 1 + 2 = -x + 3.
+\]
+L'équation de $T_1$ est $\boxed{y = -x + 3}$.
+
+\textbf{Question 2.} L'équation de la tangente au point d'abscisse $3$ est $y = f'(3)(x - 3) + f(3)$.
+
+Avec $f(3) = 4$ et $f'(3) = 2$ :
+\[
+y = 2(x - 3) + 4 = 2x - 6 + 4 = 2x - 2.
+\]
+L'équation de $T_2$ est $\boxed{y = 2x - 2}$.
+
+\textbf{Question 3.} Les droites $T_1$ et $T_2$ ont pour coefficients directeurs respectifs $-1$ et $2$. Ces coefficients sont distincts, donc les droites ne sont pas parallèles : elles sont sécantes.
+
+Pour trouver leur point d'intersection, on résout $-x + 3 = 2x - 2$ :
+\[
+-x + 3 = 2x - 2 \iff 3 + 2 = 2x + x \iff 5 = 3x \iff x = \dfrac{5}{3}.
+\]
+On calcule l'ordonnée : $y = -\dfrac{5}{3} + 3 = -\dfrac{5}{3} + \dfrac{9}{3} = \dfrac{4}{3}$.
+
+\textbf{Vérification :} $y = 2 \times \dfrac{5}{3} - 2 = \dfrac{10}{3} - \dfrac{6}{3} = \dfrac{4}{3}$. \checkmark
+
+Les tangentes $T_1$ et $T_2$ se coupent au point de coordonnées $\boxed{\left(\dfrac{5}{3}\,;\,\dfrac{4}{3}\right)}$.
+
+\end{corrige}

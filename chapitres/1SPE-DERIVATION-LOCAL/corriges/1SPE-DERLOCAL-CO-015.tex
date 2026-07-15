@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-DERLOCAL-CO-015","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-015","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% pente = Rational(14 - 18, 10 - 6)
+% assert pente == -1
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-015}
+
+\textbf{Question 1.} Le point de tangence a pour abscisse $t = 6$. Il se situe à la fois sur la courbe et sur la tangente, donc son ordonnée est $T(6)$.
+
+La tangente passe par le point $(6\,;\,18)$, donc $\boxed{T(6) = 18}$.
+
+\textbf{Interprétation :} à $6$ heures du matin, la température dans le local technique est de $18$ \degres C.
+
+\textbf{Question 2.} La tangente passe par les points $(6\,;\,18)$ et $(10\,;\,14)$. Son coefficient directeur est :
+\[
+m = \dfrac{14 - 18}{10 - 6} = \dfrac{-4}{4} = -1.
+\]
+
+\textbf{Question 3.} Le coefficient directeur de la tangente à la courbe de $T$ au point d'abscisse $t = 6$ est égal à $T'(6)$. Donc $\boxed{T'(6) = -1}$.
+
+\textbf{Question 4.} On a $T'(6) = -1 < 0$. Le nombre dérivé est négatif, ce qui signifie que la fonction $T$ est localement décroissante au voisinage de $t = 6$.
+
+\textbf{Interprétation :} à $6$ heures du matin, la température dans le local diminue au rythme instantané de $1$ \degres C par heure.
+
+\end{corrige}

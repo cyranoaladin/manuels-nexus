@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-DERLOCAL-EX-018","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":3,"competences":["chercher","raisonner","calculer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-018.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-018.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve
+% a = symbols('a')
+% # f(x) = x^2, f'(a) = 2a
+% # Tangente en a a pour pente 2a
+% # Parallele a y = 6x - 1 => pente = 6
+% # 2a = 6 => a = 3
+% sol = solve(Eq(2*a, 6), a)
+% assert sol == [3]
+% # Point : (3, 9)
+% assert 3**2 == 9
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-018}{3}{20}
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = x^2$ et la droite $\mathcal{D}$ d'équation $y = 6x - 1$.
+
+\begin{enumerate}
+  \item Soit $a$ un réel. Écrire l'équation de la tangente $T_a$ à la courbe de $f$ au point d'abscisse $a$, puis préciser son coefficient directeur.
+  \item Existe-t-il un point de la courbe de $f$ en lequel la tangente est parallèle à $\mathcal{D}$ ? Justifier.
+  \item Si oui, déterminer les coordonnées de ce point et écrire l'équation de la tangente correspondante.
+\end{enumerate}
+\end{exercice}

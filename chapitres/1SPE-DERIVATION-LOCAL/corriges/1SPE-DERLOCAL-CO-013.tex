@@ -1,0 +1,33 @@
+% META: {"id":"1SPE-DERLOCAL-CO-013","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-013","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% x = symbols('x')
+% T = 3*(x - 2) + 5
+% assert T.expand() == 3*x - 1
+% assert T.subs(x, 2) == 5
+% assert T.subs(x, 3) == 8
+% assert T.subs(x, 4) == 11
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-013}
+
+\textbf{Question 1.} L'équation de la tangente à la courbe de $f$ au point d'abscisse $a$ est :
+\[
+y = f'(a)(x - a) + f(a).
+\]
+Ici $a = 2$, $f(2) = 5$ et $f'(2) = 3$. On obtient :
+\[
+y = 3(x - 2) + 5 = 3x - 6 + 5 = 3x - 1.
+\]
+L'équation de la tangente $T$ est donc $\boxed{y = 3x - 1}$.
+
+\textbf{Question 2.} La tangente passe par $A(2\,;\,5)$. Puisque la pente vaut $3$, en augmentant l'abscisse de $1$, l'ordonnée augmente de $3$. On obtient le point $B(3\,;\,8)$.
+
+\textbf{Vérification :} $y = 3 \times 3 - 1 = 8$. Le point $B(3\,;\,8)$ est bien sur la tangente.
+
+\textbf{Question 3.} Pour $x = 4$ :
+\[
+y = 3 \times 4 - 1 = 12 - 1 = 11.
+\]
+L'ordonnée du point de la tangente d'abscisse $4$ est $\boxed{11}$.
+
+\end{corrige}

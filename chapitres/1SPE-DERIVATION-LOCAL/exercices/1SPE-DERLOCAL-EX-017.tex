@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERLOCAL-EX-017","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":3,"competences":["chercher","raisonner","calculer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-017.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-017.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve
+% a = symbols('a')
+% # f(x) = x^2, f'(a) = 2a
+% # Tangente en a : y = 2a(x - a) + a^2 = 2a*x - a^2
+% # Passe par P(0, -1) : -1 = 2a*0 - a^2 => a^2 = 1 => a = 1 ou a = -1
+% sol = solve(Eq(-a**2, -1), a)
+% assert set(sol) == {1, -1}
+% # Points : (1, 1) et (-1, 1)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-017}{3}{20}
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = x^2$ et sa courbe représentative $\mathcal{P}$ (la parabole).
+
+Soit $P$ le point de coordonnées $(0\,;\,-1)$.
+
+\begin{enumerate}
+  \item Vérifier que le point $P$ n'appartient pas à la courbe $\mathcal{P}$.
+  \item Soit $a$ un réel. Écrire l'équation de la tangente $T_a$ à $\mathcal{P}$ au point d'abscisse $a$.
+  \item Déterminer les valeurs de $a$ pour lesquelles la tangente $T_a$ passe par le point $P$.
+  \item En déduire les coordonnées des points de $\mathcal{P}$ où la tangente passe par $P$.
+\end{enumerate}
+\end{exercice}
