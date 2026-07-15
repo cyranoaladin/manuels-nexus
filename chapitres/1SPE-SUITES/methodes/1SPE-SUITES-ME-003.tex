@@ -1,0 +1,73 @@
+% META: {"id": "1SPE-SUITES-ME-003", "chapitre": "1SPE-SUITES", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Montrer qu'une suite est géométrique}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « montrer que la suite est géométrique »,
+  « démontrer que $(u_n)$ est une suite géométrique », ou « déterminer la raison d'une suite géométrique ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Je vérifie que $u_n \neq 0$ pour tout $n \in \mathbb{N}$ (condition indispensable pour former le quotient).
+    \item Je calcule le quotient $\dfrac{u_{n+1}}{u_n}$ en remplaçant $n$ par $n+1$ dans l'expression de $u_n$.
+    \item Je simplifie l'expression obtenue.
+    \item Je vérifie que le résultat est une constante $q$ (indépendante de $n$).
+    \item Je conclus : « La suite $(u_n)$ est géométrique de raison $q = \ldots$ et de premier terme $u_0 = \ldots$ »
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Soit $(u_n)$ la suite définie pour tout $n \in \mathbb{N}$ par $u_n = 7 \times 3^n$.
+  Montrer que $(u_n)$ est une suite géométrique et préciser sa raison et son premier terme.
+
+  \medskip
+  \commentaireMarge{Vérifier que $u_n \neq 0$ pour tout $n$.}%
+  Pour tout $n \in \mathbb{N}$, $3^n > 0$, donc $u_n = 7 \times 3^n > 0$.
+  En particulier, $u_n \neq 0$ pour tout $n \in \mathbb{N}$.
+
+  \commentaireMarge{Exprimer $u_{n+1}$ en remplaçant $n$ par $n+1$.}%
+  Pour tout $n \in \mathbb{N}$ :
+  \[
+    u_{n+1} = 7 \times 3^{n+1}.
+  \]
+
+  \commentaireMarge{Calculer le quotient $u_{n+1}/u_n$ et simplifier.}%
+  Donc :
+  \[
+    \frac{u_{n+1}}{u_n} = \frac{7 \times 3^{n+1}}{7 \times 3^n} = \frac{3^{n+1}}{3^n} = 3^{n+1-n} = 3.
+  \]
+
+  \commentaireMarge{Le résultat est une constante : c'est la raison.}%
+  Le quotient $\dfrac{u_{n+1}}{u_n} = 3$ est constant, indépendant de $n$.
+
+  \commentaireMarge{Calculer $u_0$ pour le premier terme.}%
+  De plus, $u_0 = 7 \times 3^0 = 7$.
+
+  \medskip
+  \textbf{Conclusion :} La suite $(u_n)$ est géométrique de raison $q = 3$ et de premier terme $u_0 = 7$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Oublier de vérifier que $u_n \neq 0$ avant de former le quotient.
+      Si $u_n = 0$ pour un certain rang, le quotient $u_{n+1}/u_n$ est une division par zéro : la démonstration est invalide.
+    \item \textbf{Piège 2.} Conclure à partir d'exemples numériques sans preuve générale.
+      Vérifier $u_1/u_0 = u_2/u_1 = 3$ ne suffit pas ; le calcul doit être mené pour tout $n \in \mathbb{N}$.
+    \item \textbf{Piège 3.} Lors du calcul de $3^{n+1}/3^n$, écrire $3^{n+1-n} = 3^1 = 3$ est correct,
+      mais certains élèves écrivent par erreur $3^{(n+1)/n}$, ce qui est faux. La soustraction des exposants
+      s'applique à une division de puissances de même base, pas à leurs indices.
+  \end{itemize}
+}
+
+\verifier{%
+  On peut contrôler le résultat avec la formule $u_n = u_0 \times q^n$ :
+  \begin{itemize}
+    \item $n = 0$ : $u_0 = 7 \times 3^0 = 7$ \checkmark
+    \item $n = 1$ : $u_1 = 7 \times 3^1 = 21$ ; vérification directe : $7 \times 3^1 = 21$ \checkmark
+    \item $n = 2$ : $u_2 = 7 \times 3^2 = 63$ ; vérification directe : $7 \times 3^2 = 63$ \checkmark
+  \end{itemize}
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

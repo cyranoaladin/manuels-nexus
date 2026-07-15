@@ -1,0 +1,114 @@
+% META: {"id": "1SPE-SUITES-ME-005", "chapitre": "1SPE-SUITES", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+
+\begin{fichemethode}{M5}{Étudier le sens de variation d'une suite}
+
+\quandUtiliser{
+Utiliser cette méthode lorsque l'énoncé demande de :
+\begin{itemize}
+  \item « montrer que la suite $(u_n)$ est croissante / décroissante » ;
+  \item « étudier les variations de la suite $(u_n)$ » ;
+  \item « montrer que $(u_n)$ est monotone à partir d'un certain rang ».
+\end{itemize}
+
+\medskip
+\textbf{Arbre de décision — quelle méthode choisir ?}
+\begin{itemize}
+  \item Suite géométrique à termes positifs ou expression avec un quotient naturel $\rightarrow$ \textbf{Méthode B} (quotient).
+  \item Suite définie par une expression de $n$ (polynomiale, rationnelle, etc.) $\rightarrow$ \textbf{Méthode A} (différence) ou \textbf{Méthode C} (fonction associée).
+  \item Suite définie par récurrence $u_{n+1} = f(u_n)$ $\rightarrow$ \textbf{Méthode A} (différence).
+\end{itemize}
+}
+
+\pasApas{
+\textbf{Méthode A — Signe de $u_{n+1} - u_n$}
+\begin{enumerate}
+  \item Je calcule $u_{n+1} - u_n$ en développant et simplifiant.
+  \item J'étudie le signe de cette expression pour tout $n \in \mathbb{N}$ (ou pour tout $n$ à partir d'un certain rang).
+  \item Je conclus : si $u_{n+1} - u_n \geq 0$ pour tout $n$, alors $(u_n)$ est croissante ; si $u_{n+1} - u_n \leq 0$, alors $(u_n)$ est décroissante.
+\end{enumerate}
+
+\medskip
+\textbf{Méthode B — Comparaison du quotient $\dfrac{u_{n+1}}{u_n}$ à $1$}
+\begin{enumerate}
+  \item Je vérifie que $u_n > 0$ pour tout $n \in \mathbb{N}$ (condition indispensable).
+  \item Je calcule $\dfrac{u_{n+1}}{u_n}$ et je simplifie.
+  \item Je compare ce quotient à $1$ pour tout $n \in \mathbb{N}$.
+  \item Je conclus : si $\dfrac{u_{n+1}}{u_n} \geq 1$, alors $(u_n)$ est croissante ; si $\dfrac{u_{n+1}}{u_n} \leq 1$, alors $(u_n)$ est décroissante.
+\end{enumerate}
+
+\medskip
+\textbf{Méthode C — Étude de la fonction associée}
+\begin{enumerate}
+  \item J'écris $u_n = f(n)$ où $f$ est une fonction définie sur $[0\,;\,+\infty[$.
+  \item Je calcule la dérivée $f'$ et j'étudie son signe sur $[0\,;\,+\infty[$.
+  \item Je conclus sur la monotonie de $(u_n)$ selon le signe de $f'$.
+\end{enumerate}
+}
+
+\exempleRedige{
+\textbf{Énoncé.} Soit $(u_n)$ la suite définie pour tout $n \in \mathbb{N}$ par $u_n = n^2 - 4n + 7$. Étudier les variations de $(u_n)$.
+
+\medskip
+On choisit la \textbf{méthode A} (expression polynomiale de $n$).
+
+\medskip
+\commentaireMarge{Calculer $u_{n+1} - u_n$ en substituant $n+1$ à $n$.}
+Pour tout $n \in \mathbb{N}$ :
+\[
+  u_{n+1} = (n+1)^2 - 4(n+1) + 7 = n^2 + 2n + 1 - 4n - 4 + 7 = n^2 - 2n + 4.
+\]
+
+\commentaireMarge{Développer, puis simplifier pour faire apparaître une expression dont on peut étudier le signe.}
+Donc :
+\[
+  u_{n+1} - u_n = (n^2 - 2n + 4) - (n^2 - 4n + 7) = 2n - 3.
+\]
+
+\commentaireMarge{Étudier le signe selon les valeurs de $n$. Ne pas oublier le quantificateur « pour tout $n$ ».}
+On étudie le signe de $2n - 3$ :
+\begin{itemize}
+  \item Si $n \geq 2$, alors $2n \geq 4 > 3$, donc $2n - 3 > 0$, soit $u_{n+1} - u_n > 0$.
+  \item Si $n = 0$, alors $u_1 - u_0 = -3 < 0$.
+  \item Si $n = 1$, alors $u_2 - u_1 = -1 < 0$.
+\end{itemize}
+
+\commentaireMarge{Rédiger une conclusion précise, en distinguant les différents cas.}
+\textbf{Conclusion.} La suite $(u_n)$ est \textbf{décroissante} pour $n \in \{0\,;\,1\}$ et \textbf{strictement croissante} pour tout entier $n \geq 2$. Elle n'est pas monotone sur $\mathbb{N}$ tout entier.
+
+\medskip
+\textit{Vérification numérique :} $u_0 = 7$, $u_1 = 4$, $u_2 = 3$, $u_3 = 4$, $u_4 = 7$. On constate bien $u_0 > u_1 > u_2$ puis $u_2 < u_3 < u_4$, ce qui est cohérent.
+}
+
+\pieges{
+\textbf{Piège 1 — Oublier le quantificateur universel.}
+
+\textit{Erreur :} « $u_1 - u_0 = 5 > 0$, donc la suite est croissante. »
+
+\textit{Correction :} Vérifier $u_{n+1} - u_n \geq 0$ \textbf{pour tout} $n \in \mathbb{N}$. Un seul exemple ne constitue pas une preuve ; il faut un raisonnement général.
+
+\medskip
+\textbf{Piège 2 — Utiliser le quotient sans vérifier la positivité.}
+
+\textit{Erreur :} Calculer $\dfrac{u_{n+1}}{u_n}$ alors que $u_n$ peut être nul ou négatif.
+
+\textit{Correction :} La méthode B (quotient) n'est valide que si $u_n > 0$ \textbf{pour tout} $n \in \mathbb{N}$. Dans le cas contraire, utiliser la méthode A ou C.
+
+\medskip
+\textbf{Piège 3 — Conclure que la suite n'est pas monotone sans préciser les intervalles.}
+
+\textit{Erreur :} « La suite n'est pas monotone. »
+
+\textit{Correction :} Préciser les rangs : « La suite est décroissante pour $n \leq n_0$ et croissante pour $n \geq n_0$. »
+}
+
+\verifier{
+\begin{itemize}
+  \item Calculer les trois ou quatre premiers termes de la suite et vérifier qu'ils sont bien dans l'ordre annoncé (croissant ou décroissant).
+  \item Si l'on a conclu à la croissance à partir du rang $n_0$, vérifier explicitement que $u_{n_0} \leq u_{n_0+1}$ par le calcul.
+  \item Pour la méthode C : vérifier que $f$ est bien dérivable sur $[0\,;\,+\infty[$ avant de conclure.
+\end{itemize}
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

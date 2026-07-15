@@ -1,0 +1,126 @@
+% META: {"id": "1SPE-SUITES-CR-016", "chapitre": "1SPE-SUITES", "type_objet": "cours", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+
+%---------------------------------------------------------------
+% STRATE 1 — Savoirs fondamentaux
+%---------------------------------------------------------------
+
+\propriete[1 — Calcul du $n$-ième terme (boucle \texttt{for})]{
+Pour calculer $u_n$ lorsque la suite est définie par récurrence ($u_{n+1} = f(u_n)$), on initialise $u$ à $u_0$ puis on applique $n$ fois la relation de récurrence.
+}
+
+\begin{python}
+# Calcul du n-ieme terme d'une suite definie par recurrence
+# Exemple : u_0 = 3, u_{n+1} = 2*u_n + 1
+
+def terme(u0, n):
+    u = u0          # initialisation au premier terme
+    for k in range(n):   # n iterations : k = 0, 1, ..., n-1
+        u = 2 * u + 1    # relation de recurrence
+    return u
+
+print(terme(3, 5))  # affiche u_5
+\end{python}
+
+\propriete[2 — Calcul d'une somme (boucle \texttt{for} avec accumulateur)]{
+Pour calculer $S = u_0 + u_1 + \cdots + u_n$, on utilise une variable accumulateur initialisée à $0$, à laquelle on ajoute chaque terme.
+}
+
+\begin{python}
+# Calcul de la somme u_0 + u_1 + ... + u_n
+# Exemple : suite geometrique u_k = 2 * 3**k
+
+def somme(u0, q, n):
+    u = u0      # terme courant
+    S = u0      # accumulateur initialise au premier terme
+    for k in range(n):   # n iterations pour aller jusqu'a u_n
+        u = q * u        # terme suivant
+        S = S + u        # ajout a l'accumulateur
+    return S
+
+print(somme(2, 3, 4))  # calcule u_0 + ... + u_4
+\end{python}
+
+\propriete[3 — Recherche de seuil (boucle \texttt{while})]{
+Pour trouver le plus petit entier $n$ tel que $u_n > S$ (ou $u_n < s$), on utilise une boucle \texttt{while} dont la condition est la négation du seuil recherché.
+}
+
+\begin{python}
+# Recherche du plus petit n tel que u_n > seuil
+# Exemple : u_0 = 1, u_{n+1} = 1.05 * u_n, seuil = 2
+
+def recherche_seuil(u0, q, seuil):
+    u = u0      # terme courant
+    n = 0       # indice courant
+    while u <= seuil:    # tant que le seuil n'est pas depasse
+        u = q * u        # calcul du terme suivant
+        n = n + 1        # mise a jour de l'indice
+    return n, u          # retourne l'indice et la valeur
+
+n, val = recherche_seuil(1, 1.05, 2)
+print(f"n = {n}, u_n = {val:.4f}")
+\end{python}
+
+\exemple{
+Avec $u_0 = 1$ et $q = 1{,}05$, le programme renvoie le premier rang $n$ à partir duquel le capital dépasse $2$~€ (doublement du capital à $5\,\%$ par an).
+}
+
+%---------------------------------------------------------------
+% STRATE 2 — Appui et erreurs fréquentes
+%---------------------------------------------------------------
+
+\erreurFrequente{
+\textbf{Confusion indice / valeur dans la boucle.}
+La variable de boucle \texttt{k} dans \texttt{range(n)} est un \emph{indice} (compteur d'itérations), pas la valeur du terme.
+On ne confondra pas \texttt{k} (indice) avec \texttt{u} (valeur courante du terme).
+
+\medskip
+\textbf{Oubli de mise à jour dans \texttt{while}.}
+Si on oublie d'actualiser \texttt{u} ou \texttt{n} dans le corps de la boucle \texttt{while}, la condition reste identique et la boucle tourne indéfiniment (boucle infinie).
+Vérifier systématiquement que les variables de la condition sont bien modifiées à chaque itération.
+
+\medskip
+\textbf{Décalage d'un dans \texttt{range()}.}
+\texttt{range(n)} génère les entiers $0, 1, \ldots, n-1$ : il y a exactement $n$ itérations.
+Pour itérer $n+1$ fois (de $u_0$ à $u_n$ compris), il faut \texttt{range(n+1)}.
+Bien distinguer ce que l'on cherche : le rang $n$-ième ou les $n$ premiers termes.
+}
+
+\margeAppui{\texttt{range(n)} : $n$ itérations, indices $0$ à $n-1$.}
+
+\margeAppui{\texttt{while} : toujours vérifier que la condition finit par devenir fausse.}
+
+\margeAppui{Accumulateur : initialiser avant la boucle.}
+
+%---------------------------------------------------------------
+% STRATE 3 — Approfondissement
+%---------------------------------------------------------------
+
+\approfondissement{
+\textbf{Complexité algorithmique et comparaison itératif / formule close.}
+
+\medskip
+Les algorithmes par boucle présentés ici ont une \textbf{complexité linéaire} : le nombre d'opérations est proportionnel à $n$.
+On note $O(n)$ cette complexité (lecture : \og ordre $n$ \fg).
+
+\medskip
+Lorsqu'une \textbf{formule close} (formule explicite) existe, le calcul du $n$-ième terme ne nécessite qu'un nombre constant d'opérations : complexité $O(1)$.
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+ & Approche itérative & Formule close \\
+\hline
+Coût de calcul & $O(n)$ & $O(1)$ \\
+Applicable si & toujours & formule connue \\
+Exemple & boucle \texttt{for} & $u_n = u_0 \cdot q^n$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+En pratique, pour une suite géométrique, la formule close $u_n = u_0 \cdot q^n$ est préférable.
+En revanche, pour une suite définie par une relation de récurrence complexe (ex. suite de Fibonacci), seule l'approche itérative est directement accessible.
+
+\medskip
+\textit{Remarque.} L'exponentiation rapide permet de calculer $q^n$ en $O(\log n)$ opérations, mais ceci dépasse le programme de première.
+}

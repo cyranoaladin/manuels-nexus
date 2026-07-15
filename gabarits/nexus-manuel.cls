@@ -10,7 +10,7 @@
 \RequirePackage{amsmath,amssymb,amsthm}
 \RequirePackage[table]{xcolor}
 \RequirePackage[most]{tcolorbox}
-\RequirePackage{marginnote,geometry,graphicx,enumitem,pifont,listings,fancyhdr}
+\RequirePackage{marginnote,geometry,graphicx,enumitem,pifont,listings,fancyhdr,eurosym}
 \geometry{a4paper,inner=2cm,outer=4.5cm,top=2.2cm,bottom=2.2cm,marginparwidth=3.6cm,marginparsep=0.5cm}
 
 % ---- Palette Nexus ----
@@ -38,7 +38,7 @@
 \newcommand{\contreexemple}[1]{\par\noindent\textbf{\textcolor{nxRouge}{Contre-exemple.}} #1\par}
 
 % ---- Strate 2 : marge d'appui et erreurs ----
-\newcommand{\margeAppui}[1]{\marginnote{\footnotesize\color{nxGris}\textit{#1}}}
+\newcommand{\margeAppui}[1]{\marginnote{\footnotesize\color{nxGris}\itshape #1}}
 \newcommand{\commentaireMarge}[1]{\marginnote{\footnotesize\color{nxBleu}#1}}
 \newtcolorbox{nxerr}{colback=nxRouge!6,colframe=nxRouge,title={\ding{115}~Erreur fréquente},fonttitle=\bfseries,breakable}
 \newcommand{\erreurFrequente}[1]{\begin{nxerr}#1\end{nxerr}}

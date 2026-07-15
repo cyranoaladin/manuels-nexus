@@ -1,0 +1,113 @@
+% META: {"id": "1SPE-SUITES-ME-007", "chapitre": "1SPE-SUITES", "type_objet": "methode", "capacites_codes": ["C7"], "methodes": ["M7"], "sources_inspiration": [], "status": "generated"}
+
+\begin{fichemethode}{M7}{\'Ecrire un programme Python de calcul de terme, somme ou seuil}
+
+\quandUtiliser{
+Utiliser cette m\'ethode lorsque l'\'enonc\'e demande de :
+\begin{itemize}
+  \item \og \'ecrire un programme (ou un algorithme) calculant le $n$-i\`eme terme de la suite \fg ;
+  \item \og \'ecrire un programme calculant la somme $u_0 + u_1 + \cdots + u_n$ \fg ;
+  \item \og d\'eterminer le plus petit entier $n$ tel que $u_n > S$ \fg ;
+  \item \og \`a l'aide d'un algorithme, d\'eterminer le rang \`a partir duquel\ldots \fg.
+\end{itemize}
+}
+
+\pasApas{
+\textbf{Mod\`ele A --- Calcul du $n$-i\`eme terme (boucle \texttt{for})}
+\begin{enumerate}
+  \item Initialiser la variable \texttt{u} \`a $u_0$.
+  \item \'Ecrire une boucle \texttt{for k in range(n)} : \`a chaque it\'eration, mettre \`a jour \texttt{u} par la relation de r\'ecurrence.
+  \item Apr\`es la boucle, \texttt{u} contient $u_n$.
+\end{enumerate}
+
+\medskip
+\textbf{Mod\`ele B --- Calcul d'une somme (boucle \texttt{for} avec accumulateur)}
+\begin{enumerate}
+  \item Initialiser \texttt{u} \`a $u_0$ et l'accumulateur \texttt{S} \`a $u_0$.
+  \item Boucle \texttt{for k in range(1, n+1)} : mettre \`a jour \texttt{u} puis \texttt{S = S + u}.
+  \item Apr\`es la boucle, \texttt{S} contient $u_0 + u_1 + \cdots + u_n$.
+\end{enumerate}
+
+\medskip
+\textbf{Mod\`ele C --- Recherche de seuil (boucle \texttt{while})}
+\begin{enumerate}
+  \item Initialiser \texttt{u} \`a $u_0$ et le compteur \texttt{n} \`a $0$.
+  \item \'Ecrire une boucle \texttt{while} dont la condition est la \textbf{n\'egation} du seuil cherch\'e.
+  \item Dans le corps : mettre \`a jour \texttt{u} par la r\'ecurrence, puis \texttt{n = n + 1}.
+  \item Apr\`es la boucle, \texttt{n} est le rang cherch\'e.
+\end{enumerate}
+}
+
+\end{fichemethode}
+
+% Exemple rédigé hors de la tcolorbox pour permettre les blocs python (lstlisting)
+\paragraph{Exemple r\'edig\'e (M7).}
+
+\textbf{\'Enonc\'e.} On place un capital initial de $1\,500$~\euro{} sur un livret r\'emun\'er\'e \`a $4\,\%$ par an. On note $u_n$ le capital (en euros) apr\`es $n$ ann\'ees.
+
+\begin{enumerate}
+  \item \'Ecrire un programme Python qui calcule $u_n$ pour un entier $n$ donn\'e.
+  \item \'Ecrire un programme Python qui d\'etermine le plus petit entier $n$ tel que $u_n \geq 3\,000$.
+\end{enumerate}
+
+\medskip
+\textbf{1.} La suite $(u_n)$ est g\'eom\'etrique de premier terme $u_0 = 1500$ et de raison $q = 1{,}04$.
+
+\commentaireMarge{Mod\`ele A : boucle \texttt{for}, on applique $n$ fois la relation $u_{n+1} = 1{,}04 \times u_n$.}
+
+\begin{python}
+def capital(n):
+    u = 1500
+    for k in range(n):
+        u = 1.04 * u
+    return u
+
+print(capital(10))
+\end{python}
+
+Ainsi, $u_{10} = 1500 \times 1{,}04^{10} \approx 2\,220{,}37$~\euro.
+
+\medskip
+\textbf{2.} On cherche le plus petit entier $n$ tel que $u_n \geq 3\,000$.
+
+\commentaireMarge{Mod\`ele C : boucle \texttt{while}. Ne pas oublier \texttt{n = n + 1}.}
+
+\begin{python}
+u = 1500
+n = 0
+while u < 3000:
+    u = 1.04 * u
+    n = n + 1
+
+print("Rang :", n)
+print("Capital :", round(u, 2))
+\end{python}
+
+Le programme affiche \texttt{Rang : 18} et \texttt{Capital : 3040.49}.
+
+\textbf{Conclusion.} Le plus petit entier $n$ tel que $u_n \geq 3\,000$ est $n = 18$. Le capital d\'epasse $3\,000$~\euro{} pour la premi\`ere fois apr\`es $\mathbf{18}$ ann\'ees.
+
+\medskip
+\textit{V\'erification :} $u_{17} = 1500 \times 1{,}04^{17} \approx 2\,923{,}55 < 3\,000$ et $u_{18} \approx 3\,040{,}49 > 3\,000$. Coh\'erent.
+
+\paragraph{Les pi\`eges (M7).}
+
+\textbf{Pi\`ege 1 --- Initialiser \texttt{u} \`a $0$ au lieu de $u_0$.}
+Si \texttt{u = 0}, tous les termes resteront nuls (multiplication par $0$). Toujours initialiser \`a la valeur du premier terme : \texttt{u = 1500}.
+
+\medskip
+\textbf{Pi\`ege 2 --- Oublier \texttt{n = n + 1} dans la boucle \texttt{while}.}
+Sans incr\'ementation du compteur, le programme tourne ind\'efiniment (boucle infinie). Toujours mettre \`a jour \textbf{toutes} les variables qui apparaissent dans la condition.
+
+\medskip
+\textbf{Pi\`ege 3 --- Confusion sur \texttt{range(n)}.}
+\texttt{range(n)} produit les entiers $0, 1, \ldots, n-1$ : exactement $n$ it\'erations. Pour calculer $u_n$ \`a partir de $u_0$, il faut bien \texttt{range(n)} ($n$ applications de la r\'ecurrence). Pour la somme $u_0 + \cdots + u_n$, utiliser \texttt{range(1, n+1)}.
+
+\paragraph{V\'erifier son r\'esultat (M7).}
+\begin{itemize}
+  \item Ex\'ecuter mentalement les deux premiers tours de boucle et comparer aux termes calcul\'es \`a la main.
+  \item Pour le mod\`ele A : v\'erifier que \texttt{capital(0)} retourne $u_0$ (la boucle \texttt{range(0)} est vide).
+  \item Pour le mod\`ele C : v\'erifier que $u_{n-1}$ ne satisfait pas le seuil et que $u_n$ le satisfait.
+\end{itemize}
+
+\paragraph{S'entra\^iner (M7).} \refExos{M7}

@@ -1,0 +1,42 @@
+{
+  "chapitre": "1SPE-SUITES",
+  "mode": "ex_nihilo",
+  "note": "Dossier constitue sans corpus indexe. Syntheses basees sur les connaissances du programme officiel, rapports de jurys et erreurs types classiques.",
+  "capacites": {
+    "C1": {
+      "chunks_retenus": [],
+      "brief": "Calculer les termes d'une suite definie explicitement ou par recurrence. Trois registres : langue naturelle, algebrique, fonctionnel. Approches d'introduction : suites de nombres (Fibonacci en accroche), suite de prix, suite de populations. Erreurs types documentees dans les rapports de jurys : (1) confusion entre u(n) et f(n) — la suite est une fonction de N dans R mais l'eleve confond avec la fonction reelle associee ; (2) erreur d'indice : calculer u(n+1) en remplacant n par n+1 dans la formule explicite au lieu d'appliquer la relation de recurrence ; (3) oubli du rang initial (u_0 vs u_1) ; (4) en Python, confusion entre indice et valeur. Formats d'exercices recurrents : calcul des premiers termes, representation graphique (nuage de points vs courbe de la fonction), ecriture de la relation de recurrence a partir d'un contexte.",
+      "angles_morts": ["Exercices de passage entre les trois registres (naturel/algebrique/graphique)"]
+    },
+    "C2": {
+      "chunks_retenus": [],
+      "brief": "Reconnaitre et exploiter une suite arithmetique. Methode : calculer u(n+1)-u(n) et montrer que c'est constant. Formule explicite u_n = u_0 + nr (ou u_p + (n-p)r). Erreurs types : (1) confusion entre la raison r et le premier terme u_0 ; (2) confusion u(n+1) = u(n) + r (relation de recurrence) avec u(n) = u(0) + nr (formule explicite) — l'eleve ecrit u(n) = u(n) + nr ou u(n) = u(0) + n*r en oubliant que r est fixe ; (3) erreur de signe sur la raison (ne pas reconnaitre une suite decroissante comme arithmetique) ; (4) oubli de conclure proprement (ne pas citer la definition). Formats bac : contexte d'evolution lineaire (loyer, salaire, production), demonstration que la suite est arithmetique.",
+      "angles_morts": ["Exercices de comparaison suite arithmetique vs geometrique dans un meme contexte"]
+    },
+    "C3": {
+      "chunks_retenus": [],
+      "brief": "Reconnaitre et exploiter une suite geometrique. Methode : calculer u(n+1)/u(n) et montrer que c'est constant (condition prealable : u(n) != 0 pour tout n). Formule explicite u_n = u_0 * q^n. Erreurs types : (1) oubli de verifier que les termes sont non nuls avant de calculer le quotient ; (2) confusion raison/premier terme ; (3) erreur dans la puissance : ecrire u_n = u_0 * q^(n-1) au lieu de u_0 * q^n quand le rang initial est 0 ; (4) confusion multiplication/addition (appliquer les formules de la suite arithmetique). Formats bac : evolution en pourcentage constant, placement a interets composes, decroissance radioactive.",
+      "angles_morts": []
+    },
+    "C4": {
+      "chunks_retenus": [],
+      "brief": "Calculer la somme des n premiers entiers (1+2+...+n = n(n+1)/2) et la somme des premiers termes d'une suite geometrique (1+q+...+q^n = (1-q^(n+1))/(1-q) pour q != 1). Demonstrations exigibles au programme. Demonstration de la somme des entiers : methode de Gauss (appariement des termes) ou recurrence. Demonstration de la somme geometrique : multiplication par q et telescopage. Erreurs types : (1) erreur sur les bornes de sommation (somme de u_0 a u_n = n+1 termes, pas n) ; (2) formule de la somme geometrique appliquee avec q=1 ; (3) confusion entre la somme des termes d'une suite geometrique et la formule 1+q+...+q^n (oubli de multiplier par u_0) ; (4) erreur d'exposant dans (1-q^(n+1)).",
+      "angles_morts": ["Exercices de calcul de sommes avec changement d'indice"]
+    },
+    "C5": {
+      "chunks_retenus": [],
+      "brief": "Etudier le sens de variation d'une suite. Trois methodes : (1) signe de u(n+1)-u(n), (2) quotient u(n+1)/u(n) compare a 1 (pour suites a termes strictement positifs), (3) etude des variations de la fonction associee f telle que u(n)=f(n). Erreurs types : (1) etudier f'(x) au lieu de f'(n) — confondre derivee et difference ; (2) utiliser le quotient sans verifier la stricte positivite des termes ; (3) conclure 'la suite est croissante car u(n+1) > u(n)' sans quantificateur universel (pour tout n) ; (4) erreur de factorisation dans u(n+1)-u(n). Formats bac : etude de variation pour prouver une inegalite, pour encadrer un seuil.",
+      "angles_morts": ["Exercices combinant variation et borne (suite majoree/minoree)"]
+    },
+    "C6": {
+      "chunks_retenus": [],
+      "brief": "Modeliser un phenomene discret par une suite. Le programme insiste sur les suites arithmetiques comme modeles lineaires discrets et les suites geometriques comme modeles exponentiels discrets. Contextes classiques : evolution de populations, placements financiers, doses medicamenteuses, depreciation d'un bien, evolution de loyers. Erreurs types : (1) confondre evolution absolue et relative — utiliser une suite arithmetique pour un pourcentage fixe ; (2) ne pas identifier le bon modele (lineaire vs exponentiel) ; (3) erreur sur le coefficient multiplicateur (augmentation de 5% -> q=1.05 et non q=0.05). Formats bac : mise en equation a partir d'un texte, prediction, comparaison de modeles.",
+      "angles_morts": []
+    },
+    "C7": {
+      "chunks_retenus": [],
+      "brief": "Ecrire et interpreter un programme Python calculant un terme, une somme ou un seuil. Le B.O. attend : boucle for pour terme et somme, boucle while pour seuil. Erreurs types : (1) confusion entre la variable d'indice et la variable de valeur dans la boucle ; (2) mauvaise initialisation (commencer a 0 ou 1) ; (3) oubli de la mise a jour de la variable dans le while (boucle infinie) ; (4) erreur off-by-one dans le range() ; (5) confusion print a chaque tour vs print a la fin. Formats bac : completer un script, expliquer ce que fait un programme, modifier pour une nouvelle consigne.",
+      "angles_morts": ["Exercices de lecture de code avec erreur a identifier"]
+    }
+  }
+}

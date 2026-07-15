@@ -1,0 +1,123 @@
+% META: {"id": "1SPE-SUITES-ME-006", "chapitre": "1SPE-SUITES", "type_objet": "methode", "capacites_codes": ["C6"], "methodes": ["M6"], "sources_inspiration": [], "status": "generated"}
+
+\begin{fichemethode}{M6}{Modéliser une situation par une suite}
+
+\quandUtiliser{
+Utiliser cette méthode lorsque l'énoncé décrit une grandeur qui évolue de façon régulière et demande de :
+\begin{itemize}
+  \item « exprimer le montant / la population / la quantité en fonction de $n$ » ;
+  \item « on augmente chaque année de $X$ euros », « on diminue de $Y\,\%$ chaque mois » ;
+  \item « écrire la relation entre deux termes consécutifs » ;
+  \item « calculer la valeur après $n$ années / mois / étapes ».
+\end{itemize}
+}
+
+\pasApas{
+\begin{enumerate}
+  \item \textbf{Définir la suite.} Identifier la grandeur qui évolue et poser $u_n$ en précisant \textbf{ce que représente $n$} (année, mois, étape, etc.) et \textbf{ce que représente $u_n$} (montant en euros, nombre d'individus, etc.).
+  \item \textbf{Déterminer $u_0$.} Identifier la valeur initiale (situation au départ, à $n = 0$).
+  \item \textbf{Identifier le type d'évolution.}
+    \begin{itemize}
+      \item Variation \textbf{absolue} constante (on ajoute ou retire le même montant) $\Rightarrow$ suite \textbf{arithmétique} : $u_{n+1} = u_n + r$.
+      \item Variation \textbf{relative} constante (on multiplie par le même coefficient) $\Rightarrow$ suite \textbf{géométrique} : $u_{n+1} = q \cdot u_n$.
+    \end{itemize}
+  \item \textbf{Calculer $r$ ou $q$.}
+    \begin{itemize}
+      \item Suite arithmétique : $r$ est la variation absolue par pas.
+      \item Suite géométrique : augmentation de $t\,\%$ $\Rightarrow$ $q = 1 + \dfrac{t}{100}$ ; diminution de $t\,\%$ $\Rightarrow$ $q = 1 - \dfrac{t}{100}$.
+    \end{itemize}
+  \item \textbf{Écrire la formule explicite.}
+    \begin{itemize}
+      \item Suite arithmétique : $u_n = u_0 + nr$.
+      \item Suite géométrique : $u_n = u_0 \times q^n$.
+    \end{itemize}
+  \item \textbf{Répondre à la question posée} en substituant la valeur de $n$ demandée, en précisant l'unité.
+\end{enumerate}
+}
+
+\exempleRedige{
+\textbf{Énoncé.} Une association comptait $480$ adhérents au $1^{\text{er}}$ janvier 2020. Elle perd chaque année $6\,\%$ de ses adhérents. On note $u_n$ le nombre d'adhérents au $1^{\text{er}}$ janvier de l'année $2020 + n$.
+
+\begin{enumerate}
+  \item Exprimer $u_{n+1}$ en fonction de $u_n$, puis $u_n$ en fonction de $n$.
+  \item Calculer le nombre d'adhérents au $1^{\text{er}}$ janvier 2025.
+\end{enumerate}
+
+\medskip
+\textbf{1.}
+
+\commentaireMarge{Préciser ce que représentent $n$ et $u_n$, puis identifier $u_0$.}
+$n$ désigne le nombre d'années écoulées depuis 2020, et $u_n$ désigne le nombre d'adhérents au $1^{\text{er}}$ janvier de l'année $2020 + n$.
+
+La valeur initiale est $u_0 = 480$.
+
+\commentaireMarge{Identifier le type d'évolution : « perd $6\,\%$ chaque année » indique une variation relative constante $\Rightarrow$ suite géométrique.}
+Chaque année, le nombre d'adhérents est multiplié par $q = 1 - \dfrac{6}{100} = 0{,}94$.
+
+Donc, pour tout $n \in \mathbb{N}$ :
+\[
+  u_{n+1} = 0{,}94 \times u_n.
+\]
+
+\commentaireMarge{Appliquer la formule explicite d'une suite géométrique : $u_n = u_0 \times q^n$.}
+La suite $(u_n)$ est géométrique de premier terme $u_0 = 480$ et de raison $q = 0{,}94$. Son terme général est :
+\[
+  u_n = 480 \times 0{,}94^n.
+\]
+
+\medskip
+\textbf{2.}
+
+\commentaireMarge{Identifier le rang correspondant à 2025 : $2025 = 2020 + 5$, donc $n = 5$.}
+Au $1^{\text{er}}$ janvier 2025, on a $n = 5$, donc :
+\[
+  u_5 = 480 \times 0{,}94^5 \approx 480 \times 0{,}7339 \approx 352{,}3.
+\]
+
+\commentaireMarge{Arrondir au sens du problème : un nombre d'adhérents est un entier.}
+Au $1^{\text{er}}$ janvier 2025, l'association compte environ $\mathbf{352}$ adhérents.
+
+\medskip
+\textit{Vérification :} $u_1 = 480 \times 0{,}94 = 451{,}2 \approx 451$. En 2021, l'association a perdu environ $480 - 451 = 29$ adhérents, soit $29/480 \approx 6\,\%$. Cohérent.
+}
+
+\pieges{
+\textbf{Piège 1 — Confondre variation absolue et variation relative.}
+
+\textit{Erreur :} Face à « la population augmente de $200$ individus par an », écrire $u_{n+1} = 1{,}2 \times u_n$.
+
+\textit{Correction :} Une variation \textbf{absolue} constante ($+200$ par an) $\Rightarrow$ suite \textbf{arithmétique} : $u_{n+1} = u_n + 200$.
+
+Une variation \textbf{relative} constante ($+20\,\%$ par an) $\Rightarrow$ suite \textbf{géométrique} : $u_{n+1} = 1{,}2 \times u_n$.
+
+\medskip
+\textbf{Piège 2 — Erreur sur le coefficient multiplicateur.}
+
+\textit{Erreur :} « Une diminution de $8\,\%$ donne $q = 0{,}08$ » ou « $q = 1{,}08$ ».
+
+\textit{Correction :}
+\begin{itemize}
+  \item Augmentation de $t\,\%$ $\Rightarrow$ $q = 1 + \dfrac{t}{100}$.
+  \item Diminution de $t\,\%$ $\Rightarrow$ $q = 1 - \dfrac{t}{100}$.
+\end{itemize}
+Diminution de $8\,\%$ $\Rightarrow$ $q = 1 - 0{,}08 = 0{,}92$.
+
+\medskip
+\textbf{Piège 3 — Ne pas préciser ce que représente $u_n$ ni l'unité.}
+
+\textit{Erreur :} « $u_n = 480 \times 0{,}94^n$ » sans préciser que $u_n$ est un nombre d'adhérents et que $n$ est le nombre d'années écoulées depuis 2020.
+
+\textit{Correction :} Toujours définir explicitement $u_n$ et $n$ en début de résolution.
+}
+
+\verifier{
+\begin{itemize}
+  \item Calculer $u_0$ avec la formule explicite et vérifier qu'on retrouve bien la valeur initiale du problème.
+  \item Calculer $u_1$ avec la formule explicite et avec la relation de récurrence, et vérifier que les deux résultats coïncident.
+  \item Vérifier la cohérence de l'ordre de grandeur : un nombre d'adhérents doit être positif et raisonnable ; un capital placé doit augmenter si $q > 1$.
+\end{itemize}
+}
+
+\sEntrainer{\refExos{M6}}
+
+\end{fichemethode}

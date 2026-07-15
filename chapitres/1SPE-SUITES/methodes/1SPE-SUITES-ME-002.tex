@@ -1,0 +1,69 @@
+% META: {"id": "1SPE-SUITES-ME-002", "chapitre": "1SPE-SUITES", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Montrer qu'une suite est arithmétique}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « montrer que la suite est arithmétique »,
+  « démontrer que $(u_n)$ est une suite arithmétique », ou « déterminer la raison d'une suite arithmétique ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Je calcule $u_{n+1} - u_n$ en remplaçant $n$ par $n+1$ dans l'expression de $u_n$.
+    \item Je développe et je simplifie l'expression obtenue.
+    \item Je vérifie que le résultat est une constante $r$ (indépendante de $n$).
+    \item Je conclus : « La suite $(u_n)$ est arithmétique de raison $r = \ldots$ et de premier terme $u_0 = \ldots$ »
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Soit $(u_n)$ la suite définie pour tout $n \in \mathbb{N}$ par $u_n = 5n - 3$.
+  Montrer que $(u_n)$ est une suite arithmétique et préciser sa raison et son premier terme.
+
+  \medskip
+  \commentaireMarge{Exprimer $u_{n+1}$ en remplaçant $n$ par $n+1$.}%
+  Pour tout $n \in \mathbb{N}$, on a :
+  \[
+    u_{n+1} = 5(n+1) - 3 = 5n + 5 - 3 = 5n + 2.
+  \]
+
+  \commentaireMarge{Calculer la différence $u_{n+1} - u_n$.}%
+  Donc :
+  \[
+    u_{n+1} - u_n = (5n + 2) - (5n - 3) = 5n + 2 - 5n + 3 = 5.
+  \]
+
+  \commentaireMarge{Le résultat est une constante : c'est la raison.}%
+  La différence $u_{n+1} - u_n = 5$ est constante, indépendante de $n$.
+
+  \commentaireMarge{Calculer $u_0$ pour le premier terme.}%
+  De plus, $u_0 = 5 \times 0 - 3 = -3$.
+
+  \medskip
+  \textbf{Conclusion :} La suite $(u_n)$ est arithmétique de raison $r = 5$ et de premier terme $u_0 = -3$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Conclure à partir d'exemples numériques sans preuve générale est insuffisant.
+      Vérifier que $u_1 - u_0 = u_2 - u_1 = 5$ ne prouve pas que \emph{tous} les termes consécutifs
+      ont la même différence. Il faut un calcul général en $n$.
+    \item \textbf{Piège 2.} Oublier de citer la définition dans la conclusion. Une suite est arithmétique
+      si et seulement si la différence $u_{n+1} - u_n$ est \emph{constante} pour tout $n$. La constante
+      doit être identifiée explicitement.
+    \item \textbf{Piège 3.} Lors du calcul de $u_{n+1}$, oublier d'ajouter $1$ à \emph{tous} les $n$ :
+      écrire $u_{n+1} = 5n+1 - 3$ au lieu de $5(n+1) - 3$ est une erreur fréquente.
+  \end{itemize}
+}
+
+\verifier{%
+  On peut contrôler le résultat avec la formule $u_n = u_0 + n \times r$ :
+  \begin{itemize}
+    \item $n = 0$ : $u_0 = -3 + 0 \times 5 = -3$ \checkmark
+    \item $n = 1$ : $u_1 = -3 + 1 \times 5 = 2$ ; vérification directe : $5 \times 1 - 3 = 2$ \checkmark
+    \item $n = 2$ : $u_2 = -3 + 2 \times 5 = 7$ ; vérification directe : $5 \times 2 - 3 = 7$ \checkmark
+  \end{itemize}
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

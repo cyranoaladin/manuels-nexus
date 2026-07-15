@@ -1,0 +1,76 @@
+% META: {"id": "1SPE-SUITES-ME-001", "chapitre": "1SPE-SUITES", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Calculer les termes d'une suite}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « calculer $u_0$, $u_1$, $u_2$ »,
+  « déterminer les premiers termes de la suite », ou « donner la valeur de $u_n$ pour $n = 0, 1, 2, 3$ ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie le mode de définition de la suite :
+      \begin{itemize}
+        \item \textbf{Formule explicite} : $u_n$ est exprimé directement en fonction de $n$.
+        \item \textbf{Relation de récurrence} : $u_{n+1}$ est exprimé en fonction de $u_n$ (et éventuellement de $n$), avec un terme initial $u_0$ (ou $u_1$) donné.
+      \end{itemize}
+    \item \textbf{Si formule explicite :} je remplace $n$ par la valeur souhaitée ($0$, $1$, $2$, \ldots) dans la formule et je calcule.
+    \item \textbf{Si relation de récurrence :} je pars du terme initial, puis j'applique la relation une fois pour obtenir le terme suivant, et ainsi de suite pas à pas.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple 1 — Formule explicite.}
+  Soit $(u_n)$ la suite définie pour tout $n \in \mathbb{N}$ par $u_n = 3n^2 - 2n + 1$.
+  Calculer $u_0$, $u_1$, $u_2$, $u_3$.
+
+  \medskip
+  \commentaireMarge{Remplacer $n$ par $0$ dans la formule.}%
+  $u_0 = 3 \times 0^2 - 2 \times 0 + 1 = 1$.
+
+  \commentaireMarge{Remplacer $n$ par $1$.}%
+  $u_1 = 3 \times 1^2 - 2 \times 1 + 1 = 3 - 2 + 1 = 2$.
+
+  \commentaireMarge{Remplacer $n$ par $2$.}%
+  $u_2 = 3 \times 2^2 - 2 \times 2 + 1 = 12 - 4 + 1 = 9$.
+
+  \commentaireMarge{Remplacer $n$ par $3$.}%
+  $u_3 = 3 \times 3^2 - 2 \times 3 + 1 = 27 - 6 + 1 = 22$.
+
+  \bigskip
+  \textbf{Exemple 2 — Relation de récurrence.}
+  Soit $(v_n)$ la suite définie par $v_0 = 5$ et, pour tout $n \in \mathbb{N}$, $v_{n+1} = 2v_n - 3$.
+  Calculer $v_1$, $v_2$, $v_3$.
+
+  \medskip
+  \commentaireMarge{Appliquer la relation avec $n = 0$ : on utilise $v_0$.}%
+  $v_1 = 2v_0 - 3 = 2 \times 5 - 3 = 7$.
+
+  \commentaireMarge{Appliquer la relation avec $n = 1$ : on utilise $v_1$.}%
+  $v_2 = 2v_1 - 3 = 2 \times 7 - 3 = 11$.
+
+  \commentaireMarge{Appliquer la relation avec $n = 2$ : on utilise $v_2$.}%
+  $v_3 = 2v_2 - 3 = 2 \times 11 - 3 = 19$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} En récurrence, certains élèves remplacent $n$ par $n+1$ directement dans la formule
+      au lieu d'utiliser la valeur du terme précédent. Par exemple, avec $v_{n+1} = 2v_n - 3$ et $v_0 = 5$,
+      écrire $v_1 = 2(0+1) - 3 = -1$ est faux. Il faut écrire $v_1 = 2v_0 - 3 = 7$.
+    \item \textbf{Piège 2.} Oublier le rang initial : si la suite est définie à partir de $n = 1$ (et non $n = 0$),
+      $u_0$ n'existe pas. Vérifier toujours l'ensemble de définition.
+    \item \textbf{Piège 3.} Pour une formule explicite, confondre $u_{n+1}$ (on remplace $n$ par $n+1$)
+      et $u_n + 1$ (on ajoute $1$ au terme). Ces deux expressions sont différentes en général.
+  \end{itemize}
+}
+
+\verifier{%
+  Pour une formule explicite, vérifier que $u_0$ s'obtient bien en posant $n = 0$.
+  Par exemple, $u_0 = 3 \times 0^2 - 2 \times 0 + 1 = 1$ : résultat cohérent, pas de signe oublié.
+
+  Pour une récurrence, relire le calcul à rebours : si $v_3 = 19$, alors $2 \times 11 - 3 = 19$ \checkmark.
+}
+
+\sEntrainer{\refExos{M1}}
+
+\end{fichemethode}

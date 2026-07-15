@@ -1,0 +1,131 @@
+% META: {"id": "1SPE-SUITES-CR-013", "chapitre": "1SPE-SUITES", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+
+%---------------------------------------------------------------
+% STRATE 1 — Savoirs fondamentaux
+%---------------------------------------------------------------
+
+\theoreme[1 — Somme des $n$ premiers entiers]{
+Soit $n \in \mathbb{N}^*$. On a :
+\[
+  1 + 2 + \cdots + n = \frac{n(n+1)}{2}.
+\]
+}
+
+\theoreme[2 — Somme géométrique]{
+Soit $n \in \mathbb{N}$ et $q \in \mathbb{R}$.
+\begin{itemize}
+  \item Si $q \neq 1$ :
+        \[
+          1 + q + q^2 + \cdots + q^n = \frac{1 - q^{n+1}}{1 - q}.
+        \]
+  \item Si $q = 1$ :
+        \[
+          1 + 1 + \cdots + 1 \;(\text{$n+1$ fois}) = n + 1.
+        \]
+\end{itemize}
+}
+
+\propriete[1 — Somme des termes d'une suite arithmétique]{
+Soit $(u_n)$ une suite arithmétique de premier terme $u_0$ et de raison $r$.
+La somme des $(n+1)$ premiers termes (de $u_0$ à $u_n$) vaut :
+\[
+  u_0 + u_1 + \cdots + u_n
+  = (n+1) \times \frac{u_0 + u_n}{2}.
+\]
+\textit{Formule mnémotechnique : nombre de termes $\times$ moyenne du premier et du dernier terme.}
+}
+
+\propriete[2 — Somme des termes d'une suite géométrique]{
+Soit $(u_n)$ une suite géométrique de premier terme $u_0 \neq 0$ et de raison $q$.
+\begin{itemize}
+  \item Si $q \neq 1$ :
+        \[
+          u_0 + u_1 + \cdots + u_n
+          = u_0 \times \frac{1 - q^{n+1}}{1 - q}.
+        \]
+  \item Si $q = 1$ : $u_0 + u_1 + \cdots + u_n = (n+1)\,u_0$.
+\end{itemize}
+}
+
+\exemple{
+\textbf{Suite arithmétique.} La suite $(u_n)$ définie par $u_0 = 3$ et $r = 2$ donne
+$u_0 = 3$, $u_5 = 13$.
+Somme : $u_0 + \cdots + u_5 = 6 \times \dfrac{3 + 13}{2} = 48$.
+}
+
+\exemple{
+\textbf{Suite géométrique.} La suite $(v_n)$ définie par $v_0 = 2$ et $q = 3$ donne :
+$v_0 + v_1 + \cdots + v_4 = 2 \times \dfrac{1 - 3^5}{1 - 3} = 2 \times \dfrac{-242}{-2} = 242$.
+}
+
+\contreexemple{
+La suite $(u_n)$ définie par $u_n = (-1)^n$ n'est ni arithmétique ni géométrique (le rapport $u_{n+1}/u_n = -1$ est constant, mais on vérifie $q = -1 \neq 1$, donc la formule géométrique s'applique bien avec $q = -1$).
+En revanche, la suite $u_n = n^2$ n'est pas géométrique et aucune des deux formules ci-dessus ne s'applique directement.
+}
+
+%---------------------------------------------------------------
+% STRATE 2 — Appui et erreurs fréquentes
+%---------------------------------------------------------------
+
+\erreurFrequente{
+\textbf{Erreur sur le nombre de termes.}
+De $u_0$ à $u_n$, il y a \textbf{$n+1$ termes}, pas $n$.
+Exemple : de $u_0$ à $u_4$, il y a $5$ termes ($0, 1, 2, 3, 4$).
+
+\medskip
+\textbf{Confusion $q = 1$.}
+Si $q = 1$, la formule $\dfrac{1-q^{n+1}}{1-q}$ est une division par zéro : elle ne s'applique pas.
+Il faut utiliser le cas $q = 1$ séparément : la somme vaut simplement $n+1$.
+
+\medskip
+\textbf{Astuce mnémotechnique pour les suites arithmétiques.}
+\og Nombre de termes $\times$ demi-somme des extrêmes \fg{} — penser à une moyenne pondérée.
+Pour les suites géométriques, retenir $u_0 \times \dfrac{1-q^{n+1}}{1-q}$ : le numérateur fait apparaître le terme d'indice $n+1$.
+}
+
+\margeAppui{Compter les termes : $u_0, u_1, \ldots, u_n$ $\Rightarrow$ $n+1$ termes.}
+
+\margeAppui{$q = 1$ : somme $= (n+1)u_0$.}
+
+%---------------------------------------------------------------
+% STRATE 3 — Approfondissement (démonstrations exigibles)
+%---------------------------------------------------------------
+
+\approfondissement{
+\textbf{Démonstrations exigibles.}
+
+\medskip
+\textbf{(a) Somme des $n$ premiers entiers — méthode de Gauss.}
+
+Posons $S = 1 + 2 + \cdots + (n-1) + n$.
+
+On écrit la même somme à l'envers :
+\[
+  S = n + (n-1) + \cdots + 2 + 1.
+\]
+
+En additionnant membre à membre ces deux lignes, chaque colonne donne $1 + n = n + 1$, et il y a $n$ colonnes :
+\[
+  2S = \underbrace{(n+1) + (n+1) + \cdots + (n+1)}_{n \text{ fois}} = n(n+1).
+\]
+
+Donc $S = \dfrac{n(n+1)}{2}$. \hfill$\square$
+
+\medskip
+\textbf{(b) Somme géométrique — multiplication par $q$ et télescopage.}
+
+Supposons $q \neq 1$. Posons $S = 1 + q + q^2 + \cdots + q^n$.
+
+On multiplie par $q$ :
+\[
+  qS = q + q^2 + q^3 + \cdots + q^{n+1}.
+\]
+
+On soustrait :
+\[
+  S - qS = 1 - q^{n+1},
+\]
+car tous les termes intermédiaires se simplifient (effet télescopique).
+
+Donc $S(1 - q) = 1 - q^{n+1}$, soit $S = \dfrac{1-q^{n+1}}{1-q}$ puisque $q \neq 1$. \hfill$\square$
+}
