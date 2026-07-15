@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-DERLOCAL-EX-027","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":2,"competences":["calculer","raisonner"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-027.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-027.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, Rational, Abs
+% # f(x) = sqrt(x), f'(9) = 1/(2*sqrt(9)) = 1/6
+% approx = 3 + Rational(1, 6) * Rational(1, 10)
+% assert approx == Rational(181, 60)
+% # Valeur exacte
+% exact = sqrt(Rational(91, 10))
+% # Erreur : |approx - exact| petit
+% assert Abs(approx - exact) < Rational(1, 1000)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-027}{2}{12}
+On considère la fonction $f$ définie sur $]0\,;\,+\infty[$ par $f(x) = \sqrt{x}$. On admet que $f'(9) = \dfrac{1}{6}$.
+
+\begin{enumerate}
+  \item Rappeler la valeur de $f(9)$.
+  \item En utilisant l'approximation linéaire au voisinage de $9$, donner une valeur approchée de $\sqrt{9{,}1}$ sous forme de fraction.
+  \item À l'aide de la calculatrice, donner la valeur de $\sqrt{9{,}1}$ arrondie au dix-millième, puis calculer l'erreur commise par l'approximation.
+\end{enumerate}
+\end{exercice}

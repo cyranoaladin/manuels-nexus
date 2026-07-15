@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-DERLOCAL-EX-026","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":1,"competences":["calculer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-026.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-026.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # f(x) = x^2, f'(a) = 2a, a = 3
+% # f(3) = 9, f'(3) = 6
+% approx_302 = 9 + 6 * Rational(2, 100)
+% assert approx_302 == Rational(912, 100)
+% approx_298 = 9 + 6 * Rational(-2, 100)
+% assert approx_298 == Rational(888, 100)
+% # Valeurs exactes
+% assert Rational(302, 100)**2 == Rational(91204, 10000)
+% assert Rational(298, 100)**2 == Rational(88804, 10000)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-026}{1}{8}
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2$. On admet que $f'(a) = 2a$ pour tout réel $a$.
+
+\begin{enumerate}
+  \item En utilisant l'approximation linéaire au voisinage de $a = 3$, donner une valeur approchée de $f(3{,}02)$.
+  \item De la même manière, approcher $f(2{,}98)$.
+  \item Calculer les valeurs exactes de $3{,}02^2$ et $2{,}98^2$, puis comparer avec les approximations.
+\end{enumerate}
+\end{exercice}

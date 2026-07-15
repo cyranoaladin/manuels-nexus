@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-DERLOCAL-EX-025","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":1,"competences":["calculer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-025.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-025.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # f(4) = 5, f'(4) = -2, h = 0.03
+% approx = 5 + (-2) * Rational(3, 100)
+% assert approx == Rational(247, 50)
+% # Vérification avec f(x) = 21 - 4x
+% exact = 21 - 4 * Rational(403, 100)
+% assert exact == Rational(247, 50)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-025}{1}{8}
+Soit $f$ une fonction définie et dérivable sur $\mathbb{R}$. On sait que $f(4) = 5$ et $f'(4) = -2$.
+
+\begin{enumerate}
+  \item En utilisant l'approximation linéaire, donner une valeur approchée de $f(4{,}03)$.
+  \item On admet que $f(x) = 21 - 4x$. Calculer la valeur exacte de $f(4{,}03)$ et comparer avec l'approximation obtenue à la question précédente.
+\end{enumerate}
+\end{exercice}

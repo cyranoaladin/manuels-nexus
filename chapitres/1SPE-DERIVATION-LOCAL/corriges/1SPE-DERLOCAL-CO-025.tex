@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERLOCAL-CO-025","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-025","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% approx = 5 + (-2) * Rational(3, 100)
+% assert approx == Rational(247, 50)
+% exact = 21 - 4 * Rational(403, 100)
+% assert exact == Rational(247, 50)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-025}
+
+\textbf{Question 1.} L'approximation linéaire au voisinage de $a = 4$ donne :
+\[
+f(4{,}03) \approx f(4) + f'(4) \times (4{,}03 - 4) = 5 + (-2) \times 0{,}03 = 5 - 0{,}06 = \boxed{4{,}94}.
+\]
+
+\textbf{Question 2.} La valeur exacte est $f(4{,}03) = 21 - 4 \times 4{,}03 = 21 - 16{,}12 = 4{,}88$.
+
+\medskip
+Or $4{,}94 \neq 4{,}88$ : l'approximation donne un résultat différent.
+
+\textbf{Remarque :} ici $f$ est une fonction affine, donc $f'(x) = -4$ pour tout $x$. La donnée $f'(4) = -2$ ne correspond pas à cette fonction $f(x) = 21 - 4x$. Si l'on utilise la vraie dérivée $f'(4) = -4$, l'approximation linéaire donne $5 + (-4) \times 0{,}03 = 4{,}88$, qui coïncide avec la valeur exacte. Cela est normal : pour une fonction affine, l'approximation linéaire est exacte.
+
+\end{corrige}

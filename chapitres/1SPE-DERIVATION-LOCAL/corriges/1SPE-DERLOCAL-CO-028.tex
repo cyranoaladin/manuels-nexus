@@ -1,0 +1,25 @@
+% META: {"id":"1SPE-DERLOCAL-CO-028","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-028","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_105 = 25000 + 800 * Rational(1, 2)
+% assert P_105 == 25400
+% P_12 = 25000 + 800 * 2
+% assert P_12 == 26600
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-028}
+
+\textbf{Question 1.} La valeur $P'(10) = 800$ signifie qu'à l'instant $t = 10$ ans, la population de la ville croît à un rythme instantané de $800$ habitants par an.
+
+\textbf{Question 2.} L'approximation linéaire au voisinage de $t = 10$ donne :
+\[
+P(10{,}5) \approx P(10) + P'(10) \times (10{,}5 - 10) = 25\,000 + 800 \times 0{,}5 = \boxed{25\,400 \text{ habitants}}.
+\]
+
+\textbf{Question 3.} De même :
+\[
+P(12) \approx P(10) + P'(10) \times (12 - 10) = 25\,000 + 800 \times 2 = \boxed{26\,600 \text{ habitants}}.
+\]
+
+\textbf{Question 4.} L'estimation de $P(10{,}5)$ est plus fiable que celle de $P(12)$. En effet, l'approximation linéaire $f(a+h) \approx f(a) + f'(a) \times h$ n'est valable que lorsque $h$ est proche de $0$. Ici, $h = 0{,}5$ pour la première estimation et $h = 2$ pour la seconde. Plus $h$ est grand, plus on s'éloigne du point de tangence et plus l'écart entre la courbe et sa tangente risque de se creuser. L'estimation de $P(12)$ est donc moins fiable.
+
+\end{corrige}

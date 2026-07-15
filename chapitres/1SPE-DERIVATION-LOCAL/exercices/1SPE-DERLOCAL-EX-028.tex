@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-DERLOCAL-EX-028","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":2,"competences":["calculer","raisonner","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-028.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-028.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # P(10) = 25000, P'(10) = 800
+% P_105 = 25000 + 800 * Rational(1, 2)
+% assert P_105 == 25400
+% P_12 = 25000 + 800 * 2
+% assert P_12 == 26600
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-028}{2}{15}
+La population $P(t)$ d'une ville est modélisée par une fonction dérivable du temps $t$ (en années). On sait que $P(10) = 25\,000$ habitants et $P'(10) = 800$ habitants par an.
+
+\begin{enumerate}
+  \item Interpréter la valeur de $P'(10)$ dans le contexte de l'exercice.
+  \item En utilisant l'approximation linéaire, estimer $P(10{,}5)$.
+  \item De la même manière, estimer $P(12)$.
+  \item Laquelle de ces deux estimations est la plus fiable ? Justifier.
+\end{enumerate}
+\end{exercice}

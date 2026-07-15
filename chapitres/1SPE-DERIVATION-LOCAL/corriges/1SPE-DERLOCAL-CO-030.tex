@@ -1,0 +1,42 @@
+% META: {"id":"1SPE-DERLOCAL-CO-030","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-030","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, Abs
+% approx1 = 1 + 3 * Rational(2, 100)
+% assert approx1 == Rational(53, 50)
+% exact1 = Rational(102, 100)**3
+% err1 = Abs(exact1 - approx1)
+% approx2 = 8 + 12 * Rational(1, 100)
+% assert approx2 == Rational(812, 100)
+% exact2 = Rational(201, 100)**3
+% err2 = Abs(exact2 - approx2)
+% assert err2 > err1
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-030}
+
+\textbf{Question 1.} Au voisinage de $a = 1$ : $f(1) = 1$ et $f'(1) = 3$.
+
+Avec $h = 0{,}02$ :
+\[
+1{,}02^3 \approx 1 + 3 \times 0{,}02 = \boxed{1{,}06}.
+\]
+Valeur exacte : $1{,}02^3 = 1{,}061208$. L'erreur est $|1{,}061208 - 1{,}06| = 0{,}001208$.
+
+\textbf{Question 2.} Au voisinage de $a = 2$ : $f(2) = 8$ et $f'(2) = 12$.
+
+Avec $h = 0{,}01$ :
+\[
+2{,}01^3 \approx 8 + 12 \times 0{,}01 = \boxed{8{,}12}.
+\]
+Valeur exacte : $2{,}01^3 = 8{,}120601$. L'erreur est $|8{,}120601 - 8{,}12| = 0{,}000601$.
+
+\textbf{Question 3.} L'erreur au voisinage de $a = 1$ avec $h = 0{,}02$ est $\approx 0{,}0012$, tandis que l'erreur au voisinage de $a = 2$ avec $h = 0{,}01$ est $\approx 0{,}0006$.
+
+En valeur absolue, l'erreur au voisinage de $1$ est ici plus grande car $h = 0{,}02 > 0{,}01$. Cependant, en erreur \emph{relative} (rapportée à la valeur de $f(a)$) :
+\begin{itemize}
+  \item au voisinage de $1$ : $\dfrac{0{,}0012}{1} = 0{,}12\,\%$ ;
+  \item au voisinage de $2$ : $\dfrac{0{,}0006}{8} = 0{,}0075\,\%$.
+\end{itemize}
+
+Plus fondamentalement, l'erreur de l'approximation linéaire dépend de la courbure de la fonction (liée à $f''$). On a $f''(x) = 6x$, donc $f''(2) = 12 > f''(1) = 6$ : la courbe se courbe davantage au voisinage de $2$, ce qui rend l'approximation par la tangente moins bonne, à $h$ égal, au voisinage de $2$.
+
+\end{corrige}
