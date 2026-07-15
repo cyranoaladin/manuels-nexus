@@ -1,0 +1,114 @@
+% META: {"id": "1NSI-TC-COURS-C4", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "cours", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "transposition", "sources_inspiration": ["corpus_nsi/03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_dictionnaires.md", "corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits.md"], "status": "needs_review"}
+\section{Les dictionnaires}
+\label{sec:dictionnaires}
+
+\margeAppui{Un dictionnaire associe des \emph{clés} à des \emph{valeurs}.
+Contrairement à un tableau, on n'accède pas aux éléments par un indice numérique
+mais par une clé (souvent une chaîne de caractères).}
+
+\begin{nxdef}[D9]
+  Un \textbf{dictionnaire} est une collection non ordonnée de paires \emph{clé~: valeur},
+  délimitée par des accolades. Les clés sont uniques et non mutables (chaîne, entier, tuple).
+  Les valeurs peuvent être de n'importe quel type. Un dictionnaire est \textbf{mutable}.
+\end{nxdef}
+
+\exemple{Un dictionnaire de mesures météorologiques :}
+
+\begin{python}
+mesures = {"temperature": 21, "vent": 12, "humidite": 65}
+print(mesures["temperature"])  # 21
+\end{python}
+
+% BEGIN-TRACE
+% mesures = {"temperature": 21, "vent": 12, "humidite": 65}
+% print(mesures["temperature"])
+% EXPECTED
+% 21
+% END-TRACE
+
+\contreexemple{Accéder à une clé inexistante provoque une erreur :}
+
+\begin{console}
+>>> mesures["pression"]
+KeyError: 'pression'
+\end{console}
+
+\erreurFrequente{Accéder à une clé sans vérifier sa présence (EF3). Toujours tester
+avec \lstinline{if cle in dico} ou utiliser \lstinline{dico.get(cle, defaut)} qui renvoie
+la valeur par défaut si la clé est absente.}
+
+\begin{nxdef}[D10]
+  Opérations principales sur un dictionnaire \lstinline{d} :
+  \begin{itemize}
+    \item \lstinline{d[cle] = valeur} : ajoute ou modifie une entrée.
+    \item \lstinline{del d[cle]} : supprime une entrée.
+    \item \lstinline{cle in d} : teste la présence d'une clé.
+    \item \lstinline{len(d)} : nombre de paires.
+    \item \lstinline{d.get(cle, defaut)} : accès sécurisé.
+  \end{itemize}
+\end{nxdef}
+
+\begin{codereference}{Parcours d'un dictionnaire}
+\begin{python}
+mesures = {"temperature": 21, "vent": 12, "humidite": 65}
+
+# Parcours des clés
+for cle in mesures:
+    print(cle, ":", mesures[cle])
+
+# Parcours des paires clé-valeur (préféré)
+for cle, valeur in mesures.items():
+    print(f"{cle} = {valeur}")
+\end{python}
+\end{codereference}
+
+\margeAppui{Le parcours par \lstinline{.items()} est plus lisible et plus efficace
+que d'accéder à \lstinline{dico[cle]} dans la boucle.}
+
+\begin{codereference}{Construire un dictionnaire depuis des données}
+\begin{python}
+def stations_chaudes(stations, seuil):
+    """Renvoie les noms des stations dont la température
+    dépasse le seuil.
+
+    Précondition : stations est une liste de dictionnaires
+    avec les clés 'nom' et 'temperature'.
+    """
+    resultat = []
+    for s in stations:
+        if s["temperature"] > seuil:
+            resultat.append(s["nom"])
+    return resultat
+
+stations = [
+    {"nom": "Nord", "temperature": 18},
+    {"nom": "Sud", "temperature": 24},
+    {"nom": "Est", "temperature": 20},
+]
+print(stations_chaudes(stations, 20))  # ["Sud", "Est"]
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def stations_chaudes(stations, seuil):
+%     resultat = []
+%     for s in stations:
+%         if s["temperature"] > seuil:
+%             resultat.append(s["nom"])
+%     return resultat
+% stations = [{"nom": "Nord", "temperature": 18}, {"nom": "Sud", "temperature": 24}, {"nom": "Est", "temperature": 20}]
+% assert stations_chaudes(stations, 20) == ["Sud", "Est"]
+% assert stations_chaudes(stations, 30) == []
+% assert stations_chaudes(stations, 17) == ["Nord", "Sud", "Est"]
+% END-VERIFY
+
+\approfondissement{Un dictionnaire en compréhension s'écrit
+\lstinline|\{cle: valeur for cle, valeur in iterable\}|.
+Par exemple, \lstinline|\{s["nom"]: s["temperature"] for s in stations\}|
+produit \lstinline|\{"Nord": 18, "Sud": 24, "Est": 20\}|.}
+
+\alamachine{Crée un dictionnaire \lstinline{eleve} contenant les clés
+\lstinline{"nom"}, \lstinline{"classe"} et \lstinline{"notes"} (cette dernière
+étant un tableau de nombres). Ajoute une clé \lstinline{"moyenne"} calculée
+à partir des notes. Affiche toutes les informations avec une boucle
+sur \lstinline{.items()}.}

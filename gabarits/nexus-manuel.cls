@@ -239,10 +239,17 @@
   basicstyle=\ttfamily\small,%
   keywordstyle=\color{nxBleu}\bfseries,%
   commentstyle=\color{nxGris},%
+  stringstyle=\color{nxVert!70!black},%
   frame=single,%
   rulecolor=\color{nxGris},%
   numbers=left,%
-  numberstyle=\tiny%
+  numberstyle=\tiny,%
+  literate=%
+    {é}{{\'e}}1 {è}{{\`e}}1 {ê}{{\^e}}1 {ë}{{\"e}}1
+    {à}{{\`a}}1 {â}{{\^a}}1 {ù}{{\`u}}1 {û}{{\^u}}1
+    {î}{{\^i}}1 {ô}{{\^o}}1 {ç}{{\c{c}}}1
+    {É}{{\'E}}1 {È}{{\`E}}1 {À}{{\`A}}1
+    {—}{{---}}1 {…}{{\\ldots}}1%
 }
 \lstnewenvironment{python}{\lstset{style=nxpy}}{}
 

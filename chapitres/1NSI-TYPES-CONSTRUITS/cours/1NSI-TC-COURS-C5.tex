@@ -1,0 +1,160 @@
+% META: {"id": "1NSI-TC-COURS-C5", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "cours", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "transposition", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits.md"], "status": "needs_review"}
+\section{Mutabilité et références}
+\label{sec:mutabilite}
+
+\margeAppui{Comprendre la mutabilité est essentiel pour éviter des bugs subtils.
+Un objet \emph{mutable} (liste, dictionnaire) peut être modifié en place ;
+un objet \emph{non mutable} (tuple, chaîne, entier) ne le peut pas.}
+
+\begin{nxdef}[D11]
+  Lorsqu'on écrit \lstinline{b = a} pour un objet mutable, \lstinline{b} ne contient
+  pas une copie de \lstinline{a} : les deux variables désignent \textbf{le même objet}
+  en mémoire. On dit que \lstinline{b} est un \textbf{alias} de \lstinline{a}.
+  Toute modification via l'une des variables est visible via l'autre.
+\end{nxdef}
+
+\exemple{L'affectation crée un alias, pas une copie :}
+
+\begin{python}
+notes = [12, 15, 9]
+copie = notes          # alias : même objet
+copie.append(18)
+print(notes)           # [12, 15, 9, 18]
+print(len(copie))      # 4
+\end{python}
+
+% BEGIN-TRACE
+% notes = [12, 15, 9]
+% copie = notes
+% copie.append(18)
+% print(notes)
+% print(len(copie))
+% EXPECTED
+% [12, 15, 9, 18]
+% 4
+% END-TRACE
+
+\begin{nxfigure}{Alias : deux noms pour le même objet}
+\begin{tikzpicture}
+  \node[font=\sffamily\small,anchor=east] (vn) at (0, 0) {\lstinline{notes}};
+  \node[font=\sffamily\small,anchor=east] (vc) at (0, -1.2em) {\lstinline{copie}};
+  \node[nxcell] (c0) at (4em, -0.6em) {12};
+  \node[nxcell] (c1) at (6.2em, -0.6em) {15};
+  \node[nxcell] (c2) at (8.4em, -0.6em) {9};
+  \node[nxcell,fill=nxOr!20] (c3) at (10.6em, -0.6em) {18};
+  \draw[nxref] (vn.east) -- (c0.west);
+  \draw[nxref] (vc.east) -- (c0.west);
+\end{tikzpicture}
+\end{nxfigure}
+
+\erreurFrequente{Croire que \lstinline{copie = notes} crée une copie indépendante.
+C'est l'erreur la plus fréquente en NSI sur les types mutables.}
+
+\begin{nxdef}[D12]
+  Pour obtenir une \textbf{copie indépendante} d'une liste, on utilise :
+  \begin{itemize}
+    \item \lstinline{copie = list(original)} ou \lstinline{copie = original[:]}
+      (copie \emph{superficielle}).
+    \item \lstinline{copie = [list(ligne) for ligne in original]} pour une grille
+      (copie de chaque sous-liste).
+  \end{itemize}
+\end{nxdef}
+
+\exemple{Copie indépendante :}
+
+\begin{python}
+notes = [12, 15, 9]
+copie = list(notes)    # copie indépendante
+copie.append(18)
+print(notes)           # [12, 15, 9] (inchangé)
+print(copie)           # [12, 15, 9, 18]
+\end{python}
+
+% BEGIN-TRACE
+% notes = [12, 15, 9]
+% copie = list(notes)
+% copie.append(18)
+% print(notes)
+% print(copie)
+% EXPECTED
+% [12, 15, 9]
+% [12, 15, 9, 18]
+% END-TRACE
+
+\begin{nxfigure}{Copie indépendante : deux objets distincts}
+\begin{tikzpicture}
+  \node[font=\sffamily\small,anchor=east] (vn) at (0, 0) {\lstinline{notes}};
+  \node[font=\sffamily\small,anchor=east] (vc) at (0, -2.4em) {\lstinline{copie}};
+  \node[nxcell] (a0) at (4em, 0) {12};
+  \node[nxcell] (a1) at (6.2em, 0) {15};
+  \node[nxcell] (a2) at (8.4em, 0) {9};
+  \node[nxcell] (b0) at (4em, -2.4em) {12};
+  \node[nxcell] (b1) at (6.2em, -2.4em) {15};
+  \node[nxcell] (b2) at (8.4em, -2.4em) {9};
+  \node[nxcell,fill=nxOr!20] (b3) at (10.6em, -2.4em) {18};
+  \draw[nxarrow] (vn.east) -- (a0.west);
+  \draw[nxarrow] (vc.east) -- (b0.west);
+\end{tikzpicture}
+\end{nxfigure}
+
+\contreexemple{Copie superficielle insuffisante pour les listes imbriquées :}
+
+\begin{python}
+grille = [[1, 2], [3, 4]]
+copie = list(grille)       # copie superficielle
+copie[0][0] = 99
+print(grille)              # [[99, 2], [3, 4]] — modifié !
+\end{python}
+
+% BEGIN-TRACE
+% grille = [[1, 2], [3, 4]]
+% copie = list(grille)
+% copie[0][0] = 99
+% print(grille)
+% EXPECTED
+% [[99, 2], [3, 4]]
+% END-TRACE
+
+\erreurFrequente{Copier une liste imbriquée seulement au premier niveau (EF4).
+Avec \lstinline{list(grille)}, les sous-listes restent partagées.
+Pour une copie profonde, copier chaque sous-liste :
+\lstinline{[list(ligne) for ligne in grille]}.}
+
+\begin{codereference}{Effet de bord dans une fonction}
+\begin{python}
+def ajouter_note(bulletin, note):
+    """Ajoute une note au bulletin.
+
+    ATTENTION : modifie le bulletin passé en argument
+    (effet de bord).
+    """
+    bulletin.append(note)
+
+notes_ali = [12, 15]
+ajouter_note(notes_ali, 18)
+print(notes_ali)  # [12, 15, 18]
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def ajouter_note(b, n):
+%     b.append(n)
+% notes = [12, 15]
+% ajouter_note(notes, 18)
+% assert notes == [12, 15, 18]
+% END-VERIFY
+
+\margeAppui{Quand une fonction modifie un argument mutable, on parle d'\emph{effet de bord}.
+C'est parfois voulu, mais il faut le documenter clairement dans la docstring.}
+
+\approfondissement{L'opérateur \lstinline{is} teste si deux variables désignent le
+\emph{même objet} (même adresse mémoire), tandis que \lstinline{==} teste l'égalité
+des \emph{valeurs}. Après \lstinline{b = a}, on a \lstinline{b is a} qui vaut
+\lstinline{True}. Après \lstinline{b = list(a)}, on a \lstinline{b is a} qui vaut
+\lstinline{False} mais \lstinline{b == a} qui vaut \lstinline{True}.}
+
+\alamachine{Crée une liste \lstinline{original = [1, 2, 3]}. Fais un alias
+\lstinline{alias = original} et une copie \lstinline{copie = list(original)}.
+Modifie \lstinline{alias[0] = 99}. Affiche les trois variables et vérifie :
+\lstinline{original} est modifié, \lstinline{copie} ne l'est pas.
+Teste \lstinline{alias is original} et \lstinline{copie is original}.}
