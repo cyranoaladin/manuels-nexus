@@ -71,6 +71,12 @@
 \newcommand{\baremeIndicatif}[1]{\par\noindent{\footnotesize\textit{Barème indicatif : #1}}\par}
 \newcommand{\coupDePouce}[2]{\par\noindent{\small\textbf{Coup de pouce #1.} #2}\par}
 
+% ---- Évaluations ----
+\newenvironment{evaluation}[2]{%
+  \par\bigskip\noindent
+  \textbf{\textcolor{nxBleu}{\large Évaluation \texttt{#1}}}\quad{\footnotesize #2~min}\par\nopagebreak\medskip
+}{\par\bigskip}
+
 % ---- Python ----
 \lstdefinestyle{nxpy}{language=Python,basicstyle=\ttfamily\small,keywordstyle=\color{nxBleu}\bfseries,
   commentstyle=\color{nxGris},frame=single,rulecolor=\color{nxGris},numbers=left,numberstyle=\tiny}

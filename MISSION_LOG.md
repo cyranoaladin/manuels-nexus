@@ -3,3 +3,8 @@
 | Date | Chapitre | LOT | Verdicts | Mode | Commit |
 |------|----------|-----|----------|------|--------|
 | 2026-07-15 | - | PHASE 0 | Bootstrap OK | MODE FICHIERS (pas de PostgreSQL), pdflatex OK, reseau non utilise (generation ex nihilo) | [INIT] |
+| 2026-07-15 | 1SPE-SUITES | LOT 0-3 | Contrat OK, curation ex nihilo, cours 9 sections + 7 methodes, compilation 16/16 | ex nihilo | [LOT-3] |
+| 2026-07-15 | 1SPE-SUITES | LOT 4 | 49 exercices + 49 corriges, SymPy 98/98 OK, couverture >= 2/case | ex nihilo | [LOT-4] |
+| 2026-07-15 | 1SPE-SUITES | LOT 5 | QCM 21 questions + 12 fiches remediation, couverture F01 complete | ex nihilo | [LOT-5] |
+| 2026-07-15 | 1SPE-SUITES | LOT 6 | Eval A+B + 2 TD, SymPy 102/102 OK | ex nihilo | [LOT-6] |
+| 2026-07-15 | 1SPE-SUITES | LOT 7 | PDF 82 pages OK, check-list 7/8, cout ~19.5$ | ex nihilo | [LOT-7] |
