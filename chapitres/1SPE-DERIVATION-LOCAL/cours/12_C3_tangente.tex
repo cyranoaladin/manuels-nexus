@@ -1,7 +1,13 @@
 % META: {"id":"1SPE-DERIVATION-LOCAL-CR-012","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"cours","capacites_codes":["C3"],"sources_inspiration":[],"status":"generated"}
-\section{Tangente et lecture graphique}
-\definition[Tangente]{Lorsque $f$ admet un nombre dérivé en $a$, la \textbf{tangente} à sa courbe au point $A(a;f(a))$ est la droite passant par $A$ et de coefficient directeur $f'(a)$.}
+\section{Lire et construire une tangente}
+\definition[Tangente]{Lorsque $f$ admet un nombre dérivé en $a$, la \textbf{tangente} à sa courbe au point $A(a;f(a))$ est la droite qui passe par $A$ et dont le coefficient directeur est $f'(a)$.}
 \exemple{Si $A(2;5)$ appartient à la courbe et si $f'(2)=-3$, la tangente passe par $A$ et descend de $3$ unités lorsque l'on avance d'une unité.}
-\contreexemple{Une droite qui coupe la courbe en deux points distincts est une sécante ; elle n'est pas nécessairement une tangente.}
-\margeAppui{Pour lire une pente, choisir deux points bien lisibles sur la droite tangente, pas deux points de la courbe.}
-\approfondissement{Une tangente peut traverser la courbe ; « tangente » ne signifie pas nécessairement « droite qui reste d'un seul côté de la courbe ».}
+\contreexemple{Une droite coupant la courbe en deux points distincts est une sécante ; elle n'est pas nécessairement la tangente au premier point.}
+\propriete[Lecture sur un quadrillage]{Pour déterminer graphiquement $f'(a)$, on choisit deux points lisibles sur la \emph{droite tangente}, puis on calcule « déplacement vertical / déplacement horizontal ».}
+\exemple{Une tangente passe par les intersections $(1;2)$ et $(3;3)$. Sa pente vaut $\frac{3-2}{3-1}=\frac12$.}
+\contreexemple{Prendre deux points de la courbe au lieu de deux points de la tangente donne la pente d'une sécante, pas le nombre dérivé demandé.}
+\margeAppui{Pour éviter une lecture imprécise, prolonger légèrement la tangente et choisir deux intersections du quadrillage éloignées l'une de l'autre.}
+\margeAppui{Pour construire une pente $\frac pq$, avancer de $q$ carreaux et monter de $p$ carreaux ; si $p$ est négatif, descendre.}
+\erreurFrequente{\textbf{Copie fautive :} lecture de l'ordonnée de $A$ comme nombre dérivé. \textbf{Correction :} l'ordonnée est $f(a)$ ; le nombre dérivé est la pente de la droite tangente.}
+\erreurFrequente{\textbf{Copie fautive :} droite « à peu près parallèle » ne passant pas par $A$. \textbf{Correction :} une tangente doit passer exactement par son point de contact.}
+\approfondissement{Procédé graphique complet : 1. repérer le point de contact ; 2. tracer ou identifier la tangente ; 3. choisir deux intersections nettes de cette droite avec le quadrillage ; 4. calculer le rapport des déplacements en conservant leur signe ; 5. pour la construction, placer depuis $A$ un second point par le même déplacement, puis relier les deux points.}

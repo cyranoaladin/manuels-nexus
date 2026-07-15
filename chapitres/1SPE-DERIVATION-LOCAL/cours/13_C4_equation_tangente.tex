@@ -1,8 +1,17 @@
 % META: {"id":"1SPE-DERIVATION-LOCAL-CR-013","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"cours","capacites_codes":["C4"],"sources_inspiration":[],"status":"generated"}
-\section{Équation d'une tangente}
+\section{Équation de la tangente}
 \theoreme[Équation de la tangente]{Si $f$ admet un nombre dérivé en $a$, la tangente à la courbe de $f$ au point d'abscisse $a$ a pour équation
-\[y=f(a)+f'(a)(x-a).\]
-L'hypothèse « $f$ admet un nombre dérivé en $a$ » est nécessaire : sans pente définie, cette équation ne décrit pas une tangente.}
-\exemple{Si $f(1)=3$ et $f'(1)=2$, la tangente est $y=3+2(x-1)=2x+1$.}
-\contreexemple{Écrire $y=f'(a)x$ oublie en général le passage par $(a;f(a))$ ; ici cela donnerait $y=2x$, qui ne passe pas par $(1;3)$.}
-\approfondissement{\textbf{Démonstration exigible.} Une droite de coefficient directeur $m$ passant par $A(a;f(a))$ vérifie $y-f(a)=m(x-a)$. Pour la tangente, $m=f'(a)$. Donc $y=f(a)+f'(a)(x-a)$. Réciproquement, cette équation définit une droite qui passe par $A$ et dont le coefficient directeur est $f'(a)$ : c'est bien la tangente.}
+\[
+y=f(a)+f'(a)(x-a).
+\]
+L'hypothèse de dérivabilité en $a$ est nécessaire : elle garantit que la pente $f'(a)$ existe.}
+\exemple{Si $f(1)=3$ et $f'(1)=2$, la tangente a pour équation $y=3+2(x-1)$, soit $y=2x+1$.}
+\contreexemple{L'équation $y=f'(a)x$ oublie en général l'ordonnée $f(a)$ : avec les données précédentes, $y=2x$ ne passe pas par $(1;3)$.}
+\propriete[Vérification]{Dans l'équation de la tangente, remplacer $x$ par $a$ donne $y=f(a)$. La droite passe donc par le point de contact.}
+\exemple{Pour $y=3+2(x-1)$, remplacer $x$ par $1$ donne $y=3$.}
+\contreexemple{Une droite de pente $2$ passant par $(0;3)$, d'équation $y=2x+3$, n'est pas la tangente précédente : elle ne passe pas par $(1;3)$.}
+\margeAppui{Retenir les trois informations séparées : l'abscisse $a$, l'ordonnée $f(a)$ et la pente $f'(a)$.}
+\margeAppui{La forme $y-f(a)=f'(a)(x-a)$ est la forme « point-pente » d'une droite ; on peut ensuite développer si nécessaire.}
+\erreurFrequente{\textbf{Copie fautive :} $y=f(a)+f'(a)(x+a)$. \textbf{Correction :} l'écart horizontal se mesure par $x-a$, donc le signe est négatif.}
+\erreurFrequente{\textbf{Copie fautive :} $y=f(a)+f'(x)(x-a)$. \textbf{Correction :} on cherche une droite : sa pente est le nombre fixe $f'(a)$, non une quantité dépendant de $x$.}
+\approfondissement{\textbf{Démonstration exigible.} Toute droite de coefficient directeur $m$ passant par $A(a;f(a))$ vérifie $y-f(a)=m(x-a)$. En effet, pour tout point $M(x;y)$ de la droite distinct de $A$, son coefficient directeur est $\frac{y-f(a)}{x-a}=m$, d'où l'égalité ; elle reste vraie pour $x=a$. La tangente possède le coefficient directeur $m=f'(a)$. On obtient donc $y=f(a)+f'(a)(x-a)$. Réciproquement, la droite ainsi définie passe par $A$ et possède la pente $f'(a)$ : elle est bien la tangente.}
