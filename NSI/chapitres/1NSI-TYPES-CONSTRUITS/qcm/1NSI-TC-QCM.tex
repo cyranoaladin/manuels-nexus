@@ -1,0 +1,121 @@
+% META: {"id": "1NSI-TC-QCM", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "qcm", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C3", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\section*{QCM --- Types construits}
+\textit{Pour chaque question, une seule réponse est correcte.}
+
+\bigskip
+
+\textbf{Q1.} (C1) Que renvoie \lstinline{type((3, 5))} ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{<class 'list'>}
+  \item \lstinline{<class 'tuple'>}
+  \item \lstinline{<class 'int'>}
+\end{enumerate}
+
+\textbf{Q2.} (C1) Que se passe-t-il si on exécute ce code ?
+\begin{python}
+t = (1, 2)
+t[0] = 5
+\end{python}
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{t} vaut \lstinline{(5, 2)}
+  \item Une erreur \lstinline{TypeError}
+  \item \lstinline{t} vaut \lstinline{(1, 2, 5)}
+\end{enumerate}
+
+\textbf{Q3.} (C1) \lstinline{a, b = (10, 20)}. Quelle est la valeur de \lstinline{b} ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{10}
+  \item \lstinline{(10, 20)}
+  \item \lstinline{20}
+\end{enumerate}
+
+\textbf{Q4.} (C2) \lstinline{t = [3, 1, 4]; t.append(1); print(len(t))}. Qu'affiche ce programme ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{3}
+  \item \lstinline{4}
+  \item \lstinline{5}
+\end{enumerate}
+
+\textbf{Q5.} (C2) Quelle expression construit la liste \lstinline{[0, 2, 4, 6, 8]} ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[x for x in range(10) if x % 2 == 0]}
+  \item \lstinline{[x * 2 for x in range(10)]}
+  \item \lstinline{[x for x in range(8)]}
+\end{enumerate}
+
+\textbf{Q6.} (C2) \lstinline{t = [10, 20, 30]; print(t[3])}. Qu'obtient-on ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{30}
+  \item \lstinline{IndexError}
+  \item \lstinline{None}
+\end{enumerate}
+
+\textbf{Q7.} (C3) \lstinline{g = [[1, 2], [3, 4]]; print(g[1][0])}. Qu'affiche ce programme ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{2}
+  \item \lstinline{3}
+  \item \lstinline{1}
+\end{enumerate}
+
+\textbf{Q8.} (C3) Quelle expression crée une grille 3$\times$2 de zéros sans alias ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[[0, 0]] * 3}
+  \item \lstinline{[[0] * 2 for _ in range(3)]}
+  \item \lstinline{[[0 for _ in range(3)] for _ in range(2)]}
+\end{enumerate}
+
+\textbf{Q9.} (C3) Combien de lignes et de colonnes a \lstinline{g = [[5, 6, 7], [8, 9, 10]]} ?
+\begin{enumerate}[label=\Alph*.]
+  \item 3 lignes, 2 colonnes
+  \item 2 lignes, 3 colonnes
+  \item 6 lignes, 1 colonne
+\end{enumerate}
+
+\textbf{Q10.} (C4) \lstinline|d = {"a": 1, "b": 2}; print(d["c"])|. Qu'obtient-on ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{None}
+  \item \lstinline{0}
+  \item \lstinline{KeyError}
+\end{enumerate}
+
+\textbf{Q11.} (C4) Comment ajouter la clé \lstinline{"c"} avec la valeur 3 à \lstinline{d} ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{d.append("c", 3)}
+  \item \lstinline|d["c"] = 3|
+  \item \lstinline{d.add("c": 3)}
+\end{enumerate}
+
+\textbf{Q12.} (C4) Quelle boucle parcourt clés ET valeurs d'un dictionnaire \lstinline{d} ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{for k in d:}
+  \item \lstinline{for k, v in d.items():}
+  \item \lstinline{for v in d.values():}
+\end{enumerate}
+
+\textbf{Q13.} (C5) \lstinline{a = [1, 2]; b = a; b.append(3); print(a)}. Qu'affiche-t-il ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[1, 2]}
+  \item \lstinline{[1, 2, 3]}
+  \item Une erreur
+\end{enumerate}
+
+\textbf{Q14.} (C5) Comment obtenir une copie indépendante d'une liste \lstinline{t} ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{copie = t}
+  \item \lstinline{copie = list(t)}
+  \item \lstinline{copie = t * 1}
+\end{enumerate}
+
+\textbf{Q15.} (C5) \lstinline{g = [[1], [2]]; h = list(g); h[0].append(9); print(g[0])}.
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[1]}
+  \item \lstinline{[1, 9]}
+  \item Une erreur
+\end{enumerate}
+
+\textbf{Q16.} (C5) Parmi ces types, lesquels sont mutables ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{tuple} et \lstinline{str}
+  \item \lstinline{list} et \lstinline{dict}
+  \item \lstinline{int} et \lstinline{list}
+\end{enumerate}

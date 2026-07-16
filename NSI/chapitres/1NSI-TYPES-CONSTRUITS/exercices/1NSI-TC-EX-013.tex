@@ -1,0 +1,35 @@
+% META: {"id": "1NSI-TC-EX-013", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "parcours": 3, "competences": ["programmer", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def top_joueurs(joueurs, n):
+%     # tri par selection sur des tuples (nom, elo)
+%     classement = list(joueurs)
+%     for i in range(len(classement)):
+%         idx_max = i
+%         for j in range(i + 1, len(classement)):
+%             if classement[j][1] > classement[idx_max][1]:
+%                 idx_max = j
+%         classement[i], classement[idx_max] = classement[idx_max], classement[i]
+%     resultat = []
+%     for k in range(min(n, len(classement))):
+%         resultat.append(classement[k][0])
+%     return tuple(resultat)
+% joueurs = [("Alice", 2400), ("Bob", 1800), ("Clara", 2600), ("Dan", 2100)]
+% assert top_joueurs(joueurs, 2) == ("Clara", "Alice")
+% assert top_joueurs(joueurs, 1) == ("Clara",)
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-013}{3}{15}
+On représente un classement e-sport par une liste de tuples \lstinline{(nom, elo)}.
+
+Écrire une fonction \lstinline{top_joueurs(joueurs, n)} qui renvoie un tuple contenant
+les noms des \lstinline{n} meilleurs joueurs, classés par score Elo décroissant.
+
+Tu peux utiliser un tri par sélection ou tout autre algorithme de tri vu en cours.
+
+\textbf{Exemple :}
+\begin{console}
+>>> joueurs = [("Alice", 2400), ("Bob", 1800),
+...            ("Clara", 2600), ("Dan", 2100)]
+>>> top_joueurs(joueurs, 2)
+('Clara', 'Alice')
+\end{console}
+\end{exercice}

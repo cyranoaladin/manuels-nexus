@@ -1,0 +1,460 @@
+\section{P04 - Cours - Types construits}
+
+\subsection{Objectifs spécifiques}
+
+\begin{itemize}
+\tightlist
+\item
+  Objectif O1 - Identifier précisément la représentation ou la structure
+  en jeu.
+\item
+  Objectif O2 - Appliquer une méthode disciplinaire complète.
+\item
+  Objectif O3 - Justifier le résultat sur un cas différent.
+\item
+  Objectif O4 - Contrôler un cas limite et corriger une erreur observée.
+\end{itemize}
+
+\subsection{Capacités officielles atomiques}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-02A
+\item
+  P-DATA-CONSTR-02D
+\end{itemize}
+
+\subsection{Prérequis}
+
+\begin{itemize}
+\tightlist
+\item
+  Reconnaître une consigne liée à tuple.
+\item
+  Distinguer donnée, méthode et conclusion dans le thème Tuples, listes,
+  dictionnaires.
+\item
+  Rédiger une justification courte en utilisant le vocabulaire du
+  programme.
+\item
+  Contrôler une réponse par un cas limite ou un contre-exemple
+  explicite.
+\end{itemize}
+
+\subsection{Séance(s) correspondante(s)}
+
+\begin{itemize}
+\tightlist
+\item
+  P04-S1 à P04-S7 : support rattaché aux séances prêtes de la
+  progression.
+\end{itemize}
+
+\subsection{Situation-problème concrète}
+
+Une station météo stocke des coordonnées fixes, des relevés horaires
+modifiables et des mesures accessibles par nom.
+
+\subsection{Activité d’entrée}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identifier ce qui doit rester immuable dans un tuple.
+\item
+  Modifier une liste de températures.
+\item
+  Lire une clé dans un dictionnaire de station.
+\item
+  Décrire ce qui se passe avec une liste vide.
+\end{enumerate}
+
+\subsection{Définitions et formalisation}
+
+\begin{itemize}
+\tightlist
+\item
+  Définition D1 : tuple est utilisé dans Tuples, listes, dictionnaires
+  avec une donnée, une règle et un contrôle.
+\item
+  Définition D2 : liste est utilisé dans Tuples, listes, dictionnaires
+  avec une donnée, une règle et un contrôle.
+\item
+  Définition D3 : dictionnaire est utilisé dans Tuples, listes,
+  dictionnaires avec une donnée, une règle et un contrôle.
+\item
+  Définition D4 : mutabilité est utilisé dans Tuples, listes,
+  dictionnaires avec une donnée, une règle et un contrôle.
+\item
+  Cas limite principal : tentative de modification interdite.
+\end{itemize}
+
+\subsection{Exemples corrigés précis}
+
+\subsubsection{Exemple corrigé 1 - tuple de coordonnées}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : \texttt{(36.8,\ 10.2)}.
+\item
+  Méthode : lire sans modifier et nommer latitude puis longitude.
+\item
+  Résultat obtenu : coordonnées conservées.
+\item
+  Contrôle : le cas limite « tentative de modification interdite » est
+  vérifié séparément. \#\#\# Exemple corrigé 2 - liste de relevés
+\item
+  Donnée étudiée : \texttt{{[}18,\ 20,\ 19{]}}.
+\item
+  Méthode : parcourir les valeurs et calculer une moyenne.
+\item
+  Résultat obtenu : \texttt{19}.
+\item
+  Contrôle : le cas limite « liste vide » est vérifié séparément. \#\#\#
+  Exemple corrigé 3 - dictionnaire
+\item
+  Donnée étudiée : \texttt{\{"temperature":\ 21,\ "vent":\ 12\}}.
+\item
+  Méthode : tester la présence de la clé avant lecture.
+\item
+  Résultat obtenu : \texttt{21} pour \texttt{temperature}.
+\item
+  Contrôle : le cas limite « clé absente » est vérifié séparément.
+  \#\#\# Exemple corrigé 4 - copie de liste
+\item
+  Donnée étudiée : \texttt{{[}{[}1{]},\ {[}2{]}{]}}.
+\item
+  Méthode : distinguer copie superficielle et copie indépendante.
+\item
+  Résultat obtenu : modification locale contrôlée.
+\item
+  Contrôle : le cas limite « liste imbriquée » est vérifié séparément.
+  \#\# Objectif O1 - Identifier précisément la représentation ou la
+  structure en jeu
+\item
+  Capacité mobilisée : P-DATA-CONSTR-02A.
+\item
+  Point de départ : \texttt{(36.8,\ 10.2)}.
+\item
+  Angle disciplinaire : repérage initial autour de tuple de coordonnées.
+\item
+  Démarche attendue : lire sans modifier et nommer latitude puis
+  longitude.
+\item
+  Exemple associé : coordonnées conservées.
+\item
+  Point de vigilance : Modifier un tuple comme une liste.
+\item
+  Activité de reprise associée : Identifier mutabilité et usage avant
+  d'écrire une affectation.
+\item
+  Mini-production : produire un court diagnostic de la donnée et du
+  vocabulaire. \#\# Objectif O2 - Appliquer une méthode disciplinaire
+  complète
+\item
+  Capacité mobilisée : P-DATA-CONSTR-02A.
+\item
+  Point de départ : \texttt{{[}18,\ 20,\ 19{]}}.
+\item
+  Angle disciplinaire : méthode guidée autour de liste de relevés.
+\item
+  Démarche attendue : parcourir les valeurs et calculer une moyenne.
+\item
+  Exemple associé : \texttt{19}.
+\item
+  Point de vigilance : Parcourir les indices quand les valeurs
+  suffisent.
+\item
+  Activité de reprise associée : Écrire deux boucles, avec indices puis
+  avec valeurs, et comparer.
+\item
+  Mini-production : produire une procédure numérotée avec contrôle
+  intermédiaire. \#\# Objectif O3 - Justifier le résultat sur un cas
+  différent
+\item
+  Capacité mobilisée : P-DATA-CONSTR-02A.
+\item
+  Point de départ : \texttt{\{"temperature":\ 21,\ "vent":\ 12\}}.
+\item
+  Angle disciplinaire : transfert argumenté autour de dictionnaire.
+\item
+  Démarche attendue : tester la présence de la clé avant lecture.
+\item
+  Exemple associé : \texttt{21} pour \texttt{temperature}.
+\item
+  Point de vigilance : Accéder à une clé sans vérifier sa présence.
+\item
+  Activité de reprise associée : Tester \texttt{cle\ in\ dictionnaire}
+  avant la lecture.
+\item
+  Mini-production : produire une justification qui compare deux cas
+  distincts. \#\# Objectif O4 - Contrôler un cas limite et corriger une
+  erreur observée
+\item
+  Capacité mobilisée : P-DATA-CONSTR-02A.
+\item
+  Point de départ : \texttt{{[}{[}1{]},\ {[}2{]}{]}}.
+\item
+  Angle disciplinaire : vérification critique autour de copie de liste.
+\item
+  Démarche attendue : distinguer copie superficielle et copie
+  indépendante.
+\item
+  Exemple associé : modification locale contrôlée.
+\item
+  Point de vigilance : Copier une liste imbriquée seulement au premier
+  niveau.
+\item
+  Activité de reprise associée : Modifier une sous-liste et observer
+  l'effet sur la copie.
+\item
+  Mini-production : produire une correction d'erreur avec un nouveau
+  test. \#\# Exercices numérotés
+\item
+  Exercice 1 : résoudre tuple de coordonnées avec \texttt{(36.8,\ 10.2)}
+  ; attendu : coordonnées conservées.
+\item
+  Exercice 2 : expliquer liste de relevés à partir de
+  \texttt{{[}18,\ 20,\ 19{]}} ; attendu : \texttt{19}.
+\item
+  Exercice 3 : comparer dictionnaire avec
+  \texttt{\{"temperature":\ 21,\ "vent":\ 12\}} ; attendu : \texttt{21}
+  pour \texttt{temperature}.
+\item
+  Exercice 4 : corriger copie de liste pour
+  \texttt{{[}{[}1{]},\ {[}2{]}{]}} ; attendu : modification locale
+  contrôlée.
+\item
+  Exercice 5 : tester un cas limite lié à tentative de modification
+  interdite ; attendu : le comportement de tuple de coordonnées est
+  contrôlé.
+\item
+  Exercice 6 : classer deux méthodes possibles pour liste de relevés ;
+  attendu : la méthode robuste est choisie et justifiée.
+\item
+  Exercice 7 : justifier un transfert qui utilise dictionnaire avec une
+  donnée nouvelle ; attendu : la justification reste valable sur le
+  nouveau cas.
+\item
+  Exercice 8 : étendre un énoncé volontairement erroné sur copie de
+  liste ; attendu : l'erreur est localisée puis réparée. \#\# Corrigés
+  complets des exercices du cours
+\item
+  Corrigé exercice 1 : méthode : identifier \texttt{(36.8,\ 10.2)},
+  appliquer la méthode « lire sans modifier et nommer latitude puis
+  longitude », puis écrire coordonnées conservées ; résultat :
+  coordonnées conservées ; contrôle : faire apparaître le contrôle «
+  tentative de modification interdite ».
+\item
+  Corrigé exercice 2 : méthode : expliciter chaque étape de parcourir
+  les valeurs et calculer une moyenne avant de conclure par \texttt{19}
+  ; résultat : \texttt{19} ; contrôle : rédiger la méthode avant le
+  résultat.
+\item
+  Corrigé exercice 3 : méthode : comparer la donnée avec le cas limite «
+  clé absente » et valider \texttt{21} pour \texttt{temperature} ;
+  résultat : \texttt{21} pour \texttt{temperature} ; contrôle : comparer
+  avec le cas « clé absente ».
+\item
+  Corrigé exercice 4 : méthode : isoler l'erreur fréquente « Copier une
+  liste imbriquée seulement au premier niveau. » puis reprendre la
+  procédure correcte ; résultat : modification locale contrôlée ;
+  contrôle : corriger l'erreur « Copier une liste imbriquée seulement au
+  premier niveau. ».
+\item
+  Corrigé exercice 5 : méthode : identifier \texttt{(36.8,\ 10.2)},
+  appliquer la méthode « lire sans modifier et nommer latitude puis
+  longitude », puis écrire coordonnées conservées ; résultat : le
+  comportement de tuple de coordonnées est contrôlé ; contrôle : nommer
+  la donnée minimale et la conclusion.
+\item
+  Corrigé exercice 6 : méthode : expliciter chaque étape de parcourir
+  les valeurs et calculer une moyenne avant de conclure par \texttt{19}
+  ; résultat : la méthode robuste est choisie et justifiée ; contrôle :
+  identifier pourquoi « Parcourir les indices quand les valeurs
+  suffisent. » est une erreur.
+\item
+  Corrigé exercice 7 : méthode : comparer la donnée avec le cas limite «
+  clé absente » et valider \texttt{21} pour \texttt{temperature} ;
+  résultat : la justification reste valable sur le nouveau cas ;
+  contrôle : inclure une étape calculable par un pair.
+\item
+  Corrigé exercice 8 : méthode : isoler l'erreur fréquente « Copier une
+  liste imbriquée seulement au premier niveau. » puis reprendre la
+  procédure correcte ; résultat : l'erreur est localisée puis réparée ;
+  contrôle : proposer une activité corrective inspirée de « Modifier une
+  sous-liste et observer l'effet sur la copie. ». \#\# Erreurs
+  fréquentes
+\item
+  Erreur fréquente EF1 - Modifier un tuple comme une liste.
+\item
+  Erreur fréquente EF2 - Parcourir les indices quand les valeurs
+  suffisent.
+\item
+  Erreur fréquente EF3 - Accéder à une clé sans vérifier sa présence.
+\item
+  Erreur fréquente EF4 - Copier une liste imbriquée seulement au premier
+  niveau.
+\end{itemize}
+
+\subsection{Remédiation ciblée}
+
+\begin{itemize}
+\tightlist
+\item
+  Activité corrective EF1 : Identifier mutabilité et usage avant
+  d'écrire une affectation.
+\item
+  Activité corrective EF2 : Écrire deux boucles, avec indices puis avec
+  valeurs, et comparer.
+\item
+  Activité corrective EF3 : Tester \texttt{cle\ in\ dictionnaire} avant
+  la lecture.
+\item
+  Activité corrective EF4 : Modifier une sous-liste et observer l'effet
+  sur la copie.
+\end{itemize}
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : traiter \texttt{(36.8,\ 10.2)} avec une fiche méthode fournie.
+\item
+  Standard : traiter \texttt{{[}18,\ 20,\ 19{]}} en rédigeant la
+  justification complète.
+\item
+  Expert : inventer un cas limite lié à « clé absente » et expliquer le
+  comportement attendu.
+\end{itemize}
+
+\subsection{Critères de réussite}
+
+\begin{itemize}
+\tightlist
+\item
+  La capacité officielle est citée dans la copie.
+\item
+  La méthode contient au moins une étape vérifiable par un pair.
+\item
+  Le cas limite est discuté avec une donnée concrète.
+\item
+  La correction explique quelle erreur fréquente est évitée. \#\# Banque
+  de situations complémentaires
+\item
+  Situation complémentaire 1 : reprendre tuple de coordonnées avec une
+  donnée construite par un binôme.
+\item
+  Question orale 1 : expliquer pourquoi le cas limite « tentative de
+  modification interdite » change ou ne change pas la méthode.
+\item
+  Trace attendue 1 : une phrase de méthode, une ligne de calcul et une
+  vérification indépendante.
+\item
+  Situation complémentaire 2 : reprendre liste de relevés avec une
+  donnée construite par un binôme.
+\item
+  Question orale 2 : expliquer pourquoi le cas limite « liste vide »
+  change ou ne change pas la méthode.
+\item
+  Trace attendue 2 : une phrase de méthode, une ligne de calcul et une
+  vérification indépendante.
+\item
+  Situation complémentaire 3 : reprendre dictionnaire avec une donnée
+  construite par un binôme.
+\item
+  Question orale 3 : expliquer pourquoi le cas limite « clé absente »
+  change ou ne change pas la méthode.
+\item
+  Trace attendue 3 : une phrase de méthode, une ligne de calcul et une
+  vérification indépendante.
+\item
+  Situation complémentaire 4 : reprendre copie de liste avec une donnée
+  construite par un binôme.
+\item
+  Question orale 4 : expliquer pourquoi le cas limite « liste imbriquée
+  » change ou ne change pas la méthode.
+\item
+  Trace attendue 4 : une phrase de méthode, une ligne de calcul et une
+  vérification indépendante. \#\# Atelier de synthèse
+\item
+  Synthèse 1 : relier tuple de coordonnées à une erreur fréquente et à
+  une remédiation ciblée.
+\item
+  Synthèse 2 : relier liste de relevés à une erreur fréquente et à une
+  remédiation ciblée.
+\item
+  Synthèse 3 : relier dictionnaire à une erreur fréquente et à une
+  remédiation ciblée.
+\item
+  Synthèse 4 : relier copie de liste à une erreur fréquente et à une
+  remédiation ciblée. \#\# Lexique actif
+\item
+  tuple : terme à employer dans une justification écrite de la séquence.
+\item
+  liste : terme à employer dans une justification écrite de la séquence.
+\item
+  dictionnaire : terme à employer dans une justification écrite de la
+  séquence.
+\item
+  mutabilité : terme à employer dans une justification écrite de la
+  séquence.
+\end{itemize}
+
+\subsection{Analyse de variantes disciplinaires}
+
+\begin{itemize}
+\tightlist
+\item
+  Variante P04-A : modifier la donnée du premier exemple de P04 - Cours
+  - Types construits et conserver exactement la même méthode.
+\item
+  Variante P04-B : changer le cas limite et expliquer quelle étape de
+  contrôle devient obligatoire.
+\item
+  Variante P04-C : demander à un pair de retrouver l'erreur fréquente
+  avant de lire la correction.
+\item
+  Variante P04-D : produire une trace écrite qui sépare définition,
+  calcul et justification.
+\item
+  Variante P04-E : comparer deux solutions d'élèves et isoler celle qui
+  cite la capacité officielle.
+\item
+  Variante P04-F : construire une donnée minimale qui force une décision
+  de méthode.
+\item
+  Variante P04-G : transformer un exemple corrigé en question
+  d'évaluation courte.
+\item
+  Variante P04-H : écrire un contre-exemple qui invalide une réponse
+  seulement déclarative.
+\item
+  Variante P04-I : relier une erreur fréquente à une activité corrective
+  précise.
+\item
+  Variante P04-J : rédiger un critère de réussite observable pour une
+  copie réelle.
+\item
+  Variante P04-K : vérifier que le vocabulaire utilisé correspond au
+  thème de la séquence.
+\item
+  Variante P04-L : préparer une question orale de trente secondes avec
+  réponse vérifiable.
+\item
+  Variante P04-M : isoler la donnée, l'algorithme mental et le résultat
+  final dans trois lignes.
+\item
+  Variante P04-N : expliquer ce que le TP apporte que le TD ne permet
+  pas de tester.
+\item
+  Variante P04-O : compléter la trace écrite par une mise en garde liée
+  au cas limite.
+\item
+  Variante P04-P : vérifier la cohérence entre exercice, corrigé, barème
+  et remédiation.
+\end{itemize}

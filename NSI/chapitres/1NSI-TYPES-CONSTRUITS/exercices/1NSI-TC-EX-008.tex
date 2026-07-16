@@ -1,0 +1,24 @@
+% META: {"id": "1NSI-TC-EX-008", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "parcours": 2, "competences": ["programmer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def station_la_plus_chaude(stations):
+%     meilleure = stations[0]
+%     for station in stations:
+%         if station[1] > meilleure[1]:
+%             meilleure = station
+%     return meilleure[0]
+% assert station_la_plus_chaude([("Paris", 32), ("Lyon", 35), ("Lille", 28)]) == "Lyon"
+% assert station_la_plus_chaude([("Tunis", 40)]) == "Tunis"
+% assert station_la_plus_chaude([("A", 20), ("B", 20)]) == "A"
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-008}{2}{10}
+On représente une station météo par un tuple \lstinline{(nom, temperature)}.
+
+Écrire une fonction \lstinline{station_la_plus_chaude(stations)} qui prend une liste
+non vide de tuples et renvoie le nom de la station ayant la température la plus élevée.
+
+\textbf{Exemple :}
+\begin{console}
+>>> station_la_plus_chaude([("Paris", 32), ("Lyon", 35), ("Lille", 28)])
+'Lyon'
+\end{console}
+\end{exercice}

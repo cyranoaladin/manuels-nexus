@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TC-EX-025", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "parcours": 1, "competences": ["analyser"], "duree_min": 5, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% grille = [[1, 2, 3],
+%            [4, 5, 6]]
+% print(grille[0][1])
+% print(grille[1][2])
+% print(len(grille))
+% print(len(grille[0]))
+% EXPECTED
+% 2
+% 6
+% 2
+% 3
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-025}{1}{5}
+On donne la grille suivante :
+\begin{python}
+grille = [[1, 2, 3],
+           [4, 5, 6]]
+print(grille[0][1])
+print(grille[1][2])
+print(len(grille))
+print(len(grille[0]))
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, les quatre affichages.
+  \item Combien de lignes et de colonnes possède cette grille ?
+  \item Donner l'expression permettant d'accéder à la valeur \lstinline{4}.
+\end{enumerate}
+\end{exercice}

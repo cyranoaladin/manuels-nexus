@@ -1,0 +1,40 @@
+% META: {"id": "1NSI-TC-PROJET", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "projet", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "transposition", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_tp_types_construits.md"], "status": "needs_review"}
+\begin{miniprojet}{Classement d'un tournoi de e-sport}
+
+Un tournoi de e-sport oppose 8 joueurs sur 5 manches. Chaque joueur est représenté par un
+dictionnaire contenant son pseudo, son équipe et ses scores (un tableau d'entiers).
+L'objectif est de construire un programme complet qui gère le classement.
+
+\jalon{1}{Représenter les données.
+Définis un tableau \lstinline{joueurs} contenant 8 dictionnaires avec les clés
+\lstinline{"pseudo"}, \lstinline{"equipe"} et \lstinline{"scores"} (tableau de 5 entiers).
+Vérifie que tu peux accéder au 3e score du 2e joueur.}
+
+\jalon{2}{Calculer les totaux.
+Écris une fonction \lstinline{total(joueur)} qui renvoie la somme des scores d'un joueur.
+Ajoute une clé \lstinline{"total"} à chaque joueur.}
+
+\jalon{3}{Trier le classement.
+Écris une fonction \lstinline{classement(joueurs)} qui renvoie un nouveau tableau
+(pas un alias !) des joueurs triés par total décroissant.
+Indice : utilise \lstinline{sorted} avec le paramètre \lstinline{key}.}
+
+\jalon{4}{Afficher les résultats.
+Écris une fonction \lstinline{afficher_classement(joueurs)} qui affiche le classement
+sous la forme : \lstinline{1. Ace (TeamA) - 850 pts}.}
+
+\criteresValidation{Jalon 1 : accès \lstinline{joueurs[1]["scores"][2]} renvoie un entier ;
+Jalon 2 : \lstinline{total(joueurs[0])} == somme des 5 scores ;
+Jalon 3 : le premier du classement a le total le plus élevé ET \lstinline{joueurs}
+n'est pas modifié (copie, pas alias) ;
+Jalon 4 : l'affichage montre rang, pseudo, équipe et total.}
+
+\bigskip
+\textbf{Extensions ◆◆◆ :}
+\begin{itemize}
+  \item Ajouter le classement par équipe (somme des totaux des joueurs de chaque équipe).
+  \item Gérer les ex aequo (même total → départage par le meilleur score individuel).
+  \item Exporter le classement dans un fichier texte.
+\end{itemize}
+
+\end{miniprojet}

@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TC-CO-038", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% station = {"nom": "Paris", "temp": 25, "vent": 10}
+% cles = list(station.keys())
+% assert cles == ["nom", "temp", "vent"]
+% paires = list(station.items())
+% assert paires == [("nom", "Paris"), ("temp", 25), ("vent", 10)]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-038}
+\begin{enumerate}
+  \item Le programme affiche :
+\begin{console}
+nom : Paris
+temp : 25
+vent : 10
+\end{console}
+
+  \item La boucle \lstinline{for cle in station} parcourt uniquement les \textbf{clés} du dictionnaire. Pour accéder aux valeurs, on utilise \lstinline{station[cle]}.
+
+  \item Avec \lstinline{station.items()}, on obtient directement les paires (clé, valeur) :
+\begin{python}
+for cle, valeur in station.items():
+    print(cle, ":", valeur)
+\end{python}
+L'affichage produit est identique.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TC-EX-004", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "parcours": 1, "competences": ["analyser"], "duree_min": 5, "mode_creation": "transposition", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% joueur = ("Fatou", 2350, "diamant")
+% nom, elo, rang = joueur
+% print(nom)
+% print(elo > 2000)
+% print(joueur[2])
+% EXPECTED
+% Fatou
+% True
+% diamant
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-004}{1}{5}
+On donne le tuple suivant, qui représente un joueur d'e-sport :
+\begin{python}
+joueur = ("Fatou", 2350, "diamant")
+nom, elo, rang = joueur
+print(nom)
+print(elo > 2000)
+print(joueur[2])
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter le programme, ce qu'affichent les trois instructions \lstinline{print}.
+  \item Quel mécanisme Python permet d'écrire \lstinline{nom, elo, rang = joueur} ?
+  \item Peut-on écrire \lstinline{joueur[1] = 2400} ? Justifier.
+\end{enumerate}
+\end{exercice}

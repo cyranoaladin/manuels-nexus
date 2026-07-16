@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-TC-EX-011", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "parcours": 2, "competences": ["programmer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def classer_matchs(matchs):
+%     victoires = []
+%     defaites = []
+%     nuls = []
+%     for equipe, score_pour, score_contre in matchs:
+%         if score_pour > score_contre:
+%             victoires.append(equipe)
+%         elif score_pour < score_contre:
+%             defaites.append(equipe)
+%         else:
+%             nuls.append(equipe)
+%     return (victoires, defaites, nuls)
+% matchs = [("A", 3, 1), ("B", 0, 2), ("C", 1, 1)]
+% v, d, n = classer_matchs(matchs)
+% assert v == ["A"]
+% assert d == ["B"]
+% assert n == ["C"]
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-011}{2}{12}
+On modélise les résultats d'un tournoi par une liste de tuples
+\lstinline{(equipe, score_pour, score_contre)}.
+
+Écrire une fonction \lstinline{classer_matchs(matchs)} qui renvoie un tuple de trois
+listes : les équipes victorieuses, les équipes perdantes et les matchs nuls.
+
+\textbf{Exemple :}
+\begin{console}
+>>> classer_matchs([("A", 3, 1), ("B", 0, 2), ("C", 1, 1)])
+(['A'], ['B'], ['C'])
+\end{console}
+\end{exercice}

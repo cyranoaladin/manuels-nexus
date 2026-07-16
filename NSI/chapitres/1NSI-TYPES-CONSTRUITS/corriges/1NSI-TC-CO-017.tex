@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-TC-CO-017", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% notes = [12, 8, 15, 6, 14, 9]
+% tab = [n for n in notes if n >= 10]
+% assert tab == [12, 15, 14]
+% doubles = [n * 2 for n in [1, 2, 3]]
+% assert doubles == [2, 4, 6]
+% # Version avec boucle
+% tab2 = []
+% for n in notes:
+%     if n >= 10:
+%         tab2.append(n)
+% assert tab2 == [12, 15, 14]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-017}
+\begin{enumerate}
+  \item Les deux affichages sont :
+  \begin{itemize}
+    \item \lstinline{[12, 15, 14]} : la compréhension de liste ne garde que les notes $\geq 10$.
+    \item \lstinline{[2, 4, 6]} : chaque élément de \lstinline{[1, 2, 3]} est multiplié par 2.
+  \end{itemize}
+
+  \item Construction de \lstinline{tab} avec une boucle \lstinline{for} et \lstinline{append} :
+\begin{python}
+tab = []
+for n in notes:
+    if n >= 10:
+        tab.append(n)
+\end{python}
+\end{enumerate}
+
+Vérification : les résultats ont été confirmés par exécution.
+\end{corrige}

@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-TC-CO-022", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% eleves = ["Alice", "Bob", "Clara"]
+% notes = [14, 8, 17]
+% resultats = []
+% for i in range(len(eleves)):
+%     if notes[i] >= 10:
+%         resultats.append((eleves[i], notes[i]))
+% assert resultats == [("Alice", 14), ("Clara", 17)]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-022}
+\begin{enumerate}
+  \item Les affichages produits sont :
+  \begin{itemize}
+    \item \lstinline{Alice : 14} (car $14 \geq 10$).
+    \item \lstinline{Clara : 17} (car $17 \geq 10$).
+  \end{itemize}
+  Bob n'apparaît pas car sa note ($8$) est inférieure à 10.
+
+  \item Les deux tableaux sont des \textbf{tableaux parallèles} : l'élément d'indice \lstinline{i} dans \lstinline{eleves} correspond à l'élément de même indice dans \lstinline{notes}. Par exemple, \lstinline{eleves[0]} (\lstinline{"Alice"}) a pour note \lstinline{notes[0]} (\lstinline{14}).
+
+  \item On utilise \lstinline{range(len(eleves))} car on a besoin de l'indice \lstinline{i} pour accéder simultanément à \lstinline{eleves[i]} et \lstinline{notes[i]}. Avec \lstinline{for e in eleves}, on obtiendrait les noms mais on ne pourrait pas accéder à la note correspondante dans \lstinline{notes}.
+\end{enumerate}
+
+Vérification : les résultats ont été confirmés par exécution.
+\end{corrige}

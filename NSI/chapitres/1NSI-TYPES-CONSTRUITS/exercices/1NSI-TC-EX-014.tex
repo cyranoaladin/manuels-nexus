@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TC-EX-014", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "parcours": 1, "competences": ["analyser"], "duree_min": 5, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% temperatures = [15, 22, 18, 30, 25]
+% print(temperatures[0])
+% print(temperatures[-1])
+% print(len(temperatures))
+% temperatures[2] = 20
+% print(temperatures)
+% EXPECTED
+% 15
+% 25
+% 5
+% [15, 22, 20, 30, 25]
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-014}{1}{5}
+On donne le tableau suivant :
+\begin{python}
+temperatures = [15, 22, 18, 30, 25]
+print(temperatures[0])
+print(temperatures[-1])
+print(len(temperatures))
+temperatures[2] = 20
+print(temperatures)
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter le programme, ce qu'affichent les quatre \lstinline{print}.
+  \item Pourquoi peut-on écrire \lstinline{temperatures[2] = 20} alors qu'on ne
+        pourrait pas le faire avec un tuple ?
+\end{enumerate}
+\end{exercice}

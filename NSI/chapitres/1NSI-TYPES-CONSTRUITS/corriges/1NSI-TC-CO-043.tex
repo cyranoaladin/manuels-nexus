@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-TC-CO-043", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def inverser_dico(d):
+%     resultat = {}
+%     for cle, valeur in d.items():
+%         resultat[valeur] = cle
+%     return resultat
+% assert inverser_dico({"a": 1, "b": 2, "c": 3}) == {1: "a", 2: "b", 3: "c"}
+% assert inverser_dico({}) == {}
+% assert inverser_dico({"x": 10}) == {10: "x"}
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-043}
+On parcourt les paires (clé, valeur) avec \lstinline{d.items()} et on construit un nouveau dictionnaire en inversant les rôles :
+
+\begin{python}
+def inverser_dico(d):
+    resultat = {}
+    for cle, valeur in d.items():
+        resultat[valeur] = cle
+    return resultat
+\end{python}
+
+\textbf{Déroulement sur l'exemple} \lstinline{{"a": 1, "b": 2, "c": 3}} :
+\begin{itemize}
+  \item \lstinline{cle = "a"}, \lstinline{valeur = 1} $\to$ \lstinline{resultat[1] = "a"}
+  \item \lstinline{cle = "b"}, \lstinline{valeur = 2} $\to$ \lstinline{resultat[2] = "b"}
+  \item \lstinline{cle = "c"}, \lstinline{valeur = 3} $\to$ \lstinline{resultat[3] = "c"}
+\end{itemize}
+
+Résultat : \lstinline{{1: "a", 2: "b", 3: "c"}}.
+
+\textbf{Remarque :} cette méthode suppose que les valeurs sont toutes distinctes. Si deux clés avaient la même valeur, seule la dernière serait conservée dans le dictionnaire inversé.
+\end{corrige}

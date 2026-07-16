@@ -1,0 +1,29 @@
+% META: {"id": "1NSI-TC-CO-018", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def indice_maximum(tab):
+%     idx = 0
+%     for i in range(1, len(tab)):
+%         if tab[i] > tab[idx]:
+%             idx = i
+%     return idx
+% assert indice_maximum([3, 7, 2, 9, 1]) == 3
+% assert indice_maximum([10]) == 0
+% assert indice_maximum([5, 5, 5]) == 0
+% assert indice_maximum([1, 9, 9]) == 1
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-018}
+\begin{python}
+def indice_maximum(tab):
+    # On suppose que l'indice du max est 0
+    idx = 0
+    # On parcourt les indices a partir de 1
+    for i in range(1, len(tab)):
+        if tab[i] > tab[idx]:
+            idx = i
+    return idx
+\end{python}
+
+\textbf{Principe :} on initialise \lstinline{idx} à 0, puis on parcourt le tableau à partir de l'indice 1. Si l'élément courant est \emph{strictement} supérieur à \lstinline{tab[idx]}, on met à jour \lstinline{idx}. Le test strict \lstinline{>} (et non \lstinline{>=}) garantit qu'en cas d'égalité, on conserve le plus petit indice.
+
+Vérification : \lstinline{indice_maximum([3, 7, 2, 9, 1])} renvoie \lstinline{3} et \lstinline{indice_maximum([5, 5, 5])} renvoie \lstinline{0}. Résultats confirmés par exécution.
+\end{corrige}

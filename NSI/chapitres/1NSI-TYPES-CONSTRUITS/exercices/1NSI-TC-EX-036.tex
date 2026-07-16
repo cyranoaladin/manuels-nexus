@@ -1,0 +1,29 @@
+% META: {"id": "1NSI-TC-EX-036", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 1, "competences": ["analyser"], "duree_min": 5, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% meteo = {"ville": "Lyon", "temp": 28, "vent": 15}
+% meteo["temp"] = 30
+% meteo["humidite"] = 65
+% print(meteo["temp"])
+% print("humidite" in meteo)
+% print("pluie" in meteo)
+% EXPECTED
+% 30
+% True
+% False
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-036}{1}{5}
+On considère le programme suivant :
+\begin{python}
+meteo = {"ville": "Lyon", "temp": 28, "vent": 15}
+meteo["temp"] = 30
+meteo["humidite"] = 65
+print(meteo["temp"])
+print("humidite" in meteo)
+print("pluie" in meteo)
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, les trois affichages.
+  \item Quelle est la différence entre modifier une clé existante et ajouter
+        une nouvelle clé ?
+\end{enumerate}
+\end{exercice}

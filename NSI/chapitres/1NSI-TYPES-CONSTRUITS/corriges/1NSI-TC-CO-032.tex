@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-TC-CO-032", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% scores = [[10, 8, 12],
+%            [15, 11, 9],
+%            [7, 14, 13]]
+% moyennes = []
+% for ligne in scores:
+%     s = 0
+%     for v in ligne:
+%         s = s + v
+%     moyennes.append(s / len(ligne))
+% assert moyennes[0] == 10.0
+% assert moyennes[1] == 35 / 3
+% assert moyennes[2] == 34 / 3
+% assert max(moyennes) == 35 / 3
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-032}
+\begin{enumerate}
+  \item Le programme calcule la moyenne de chaque ligne :
+  \begin{itemize}
+    \item Ligne 0 : $(10 + 8 + 12) / 3 = 10{,}0$
+    \item Ligne 1 : $(15 + 11 + 9) / 3 \approx 11{,}67$
+    \item Ligne 2 : $(7 + 14 + 13) / 3 \approx 11{,}33$
+  \end{itemize}
+  L'affichage est : \lstinline{[10.0, 11.666666666666666, 11.333333333333334]}.
+
+  \item Pour n'afficher que la moyenne la plus élevée, on remplace la dernière ligne par :
+\begin{python}
+print(max(moyennes))
+\end{python}
+  L'affichage est alors \lstinline{11.666666666666666} (l'équipe 2, d'indice 1).
+\end{enumerate}
+\end{corrige}

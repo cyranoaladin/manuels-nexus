@@ -1,0 +1,569 @@
+{
+  "chapitre": "1NSI-TYPES-CONSTRUITS",
+  "sequences": [
+    {
+      "seq_id": "P04",
+      "path": "03_progressions/supports/premiere/P04",
+      "contract": "Tuples, listes, dictionnaires",
+      "capacites_officielles": [
+        "P-DATA-CONSTR-02A"
+      ],
+      "fichiers": [
+        {
+          "original": "P04_bareme_types_construits.md",
+          "renamed": "bareme.md",
+          "converted": true
+        },
+        {
+          "original": "P04_bareme_types_construits_complement.md",
+          "renamed": "bareme_complement.md",
+          "converted": true
+        },
+        {
+          "original": "P04_corrige_types_construits.md",
+          "renamed": "corrige.md",
+          "converted": true
+        },
+        {
+          "original": "P04_corrige_types_construits_complement.md",
+          "renamed": "corrige_complement.md",
+          "converted": true
+        },
+        {
+          "original": "P04_cours_types_construits.md",
+          "renamed": "cours.md",
+          "converted": true
+        },
+        {
+          "original": "P04_cours_types_construits_complement.md",
+          "renamed": "cours_complement.md",
+          "converted": true
+        },
+        {
+          "original": "P04_evaluation_types_construits.md",
+          "renamed": "evaluation.md",
+          "converted": true
+        },
+        {
+          "original": "P04_evaluation_types_construits_complement.md",
+          "renamed": "evaluation_complement.md",
+          "converted": true
+        },
+        {
+          "original": "P04_remediation_types_construits.md",
+          "renamed": "remediation.md",
+          "converted": true
+        },
+        {
+          "original": "P04_td_types_construits.md",
+          "renamed": "td.md",
+          "converted": true
+        },
+        {
+          "original": "P04_td_types_construits_complement.md",
+          "renamed": "td_complement.md",
+          "converted": true
+        },
+        {
+          "original": "P04_tp_types_construits.md",
+          "renamed": "tp.md",
+          "converted": true
+        },
+        {
+          "original": "P04_tp_types_construits_complement.md",
+          "renamed": "tp_complement.md",
+          "converted": true
+        },
+        {
+          "original": "P04_trace_types_construits.md",
+          "renamed": "trace.md",
+          "converted": true
+        },
+        {
+          "original": "P04_trace_types_construits_complement.md",
+          "renamed": "trace_complement.md",
+          "converted": true
+        },
+        {
+          "original": "P04_version_amenagee_types_construits.md",
+          "renamed": "version_amenagee.md",
+          "converted": true
+        },
+        {
+          "original": "code/",
+          "renamed": "code/",
+          "converted": null
+        },
+        {
+          "original": "fiches_cours/P04_fiche_cours_dictionnaires.md",
+          "renamed": "P04_fiche_cours_dictionnaires.md",
+          "converted": true
+        },
+        {
+          "original": "fiches_cours/P04_fiche_cours_listes.md",
+          "renamed": "P04_fiche_cours_listes.md",
+          "converted": true
+        },
+        {
+          "original": "fiches_cours/P04_fiche_cours_tuples.md",
+          "renamed": "P04_fiche_cours_tuples.md",
+          "converted": true
+        },
+        {
+          "original": "P04_contract.yml",
+          "renamed": "P04_contract.yml",
+          "converted": null
+        }
+      ],
+      "verdicts_substance": {
+        "P-DATA-CONSTR-02A": {
+          "verdict": "needs_review",
+          "justification": "La capacité P-DATA-CONSTR-02A porte sur la lecture et modification des éléments d'un tableau via leurs index. Les fichiers traitent principalement l'itération sur les valeurs d'une liste (boucle for valeur in releves) et la gestion de tuples/listes dans un contexte météo. L'accès par index est mentionné indirectement (ex: notes[0] dans le complément), mais le cœur des preuves porte sur le parcours de listes et la mutabilité, ce qui correspond partiellement à la capacité. La trace enseigne le parcours, l'évaluation fait pratiquer la boucle sur les valeurs, et le corrigé fournit la réponse at...",
+          "scientific_flags": [
+            "human_review_required"
+          ]
+        }
+      },
+      "human_review": [
+        {
+          "ressource": "03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_dictionnaires.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "dictionnaires",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_listes.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "listes",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_tuples.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuples",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/contracts/P04_contract.yml",
+          "niveau": "interne",
+          "sequence": "",
+          "notion": "",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_bareme_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_corrige_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_cours_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_remediation_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_td_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_tp_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_trace_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "tuple, liste, dictionnaire, mutabilité",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/code/P04_corrige_professeur_types_construits.py",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/code/P04_starter_types_construits.py",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/code/P04_tests_attendus_types_construits.py",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md",
+          "niveau": "premiere",
+          "sequence": "P04",
+          "notion": "types construits",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md",
+          "niveau": "premiere",
+          "sequence": "P04",
+          "notion": "types construits",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_evaluation_types_construits_complement.md",
+          "niveau": "premiere",
+          "sequence": "P04",
+          "notion": "types construits",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md",
+          "niveau": "premiere",
+          "sequence": "P04",
+          "notion": "types construits",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_tp_types_construits_complement.md",
+          "niveau": "premiere",
+          "sequence": "P04",
+          "notion": "types construits",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_trace_types_construits_complement.md",
+          "niveau": "premiere",
+          "sequence": "P04",
+          "notion": "types construits",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        },
+        {
+          "ressource": "03_progressions/supports/premiere/P04/P04_bareme_types_construits_complement.md",
+          "niveau": "premiere",
+          "sequence": "",
+          "notion": "p-uplet compréhension matrice dictionnaire itération",
+          "reviewer": "",
+          "date": "",
+          "science_status": "pending",
+          "pedagogy_status": "pending",
+          "accessibility_status": "pending",
+          "technical_status": "pending",
+          "decision": "pending",
+          "blockers": "revue humaine non réalisée"
+        }
+      ]
+    }
+  ],
+  "capacites": {
+    "C1": {
+      "libelle": "Je sais utiliser des p-uplets et écrire une fonction qui renvoie plusieurs valeurs.",
+      "sources_T0": [
+        {
+          "seq_id": "P04",
+          "fichiers_count": 21,
+          "capacites_officielles": [
+            "P-DATA-CONSTR-02A"
+          ],
+          "verdicts": {
+            "P-DATA-CONSTR-02A": {
+              "verdict": "needs_review",
+              "justification": "La capacité P-DATA-CONSTR-02A porte sur la lecture et modification des éléments d'un tableau via leurs index. Les fichiers traitent principalement l'itération sur les valeurs d'une liste (boucle for valeur in releves) et la gestion de tuples/listes dans un contexte météo. L'accès par index est mentionné indirectement (ex: notes[0] dans le complément), mais le cœur des preuves porte sur le parcours de listes et la mutabilité, ce qui correspond partiellement à la capacité. La trace enseigne le parcours, l'évaluation fait pratiquer la boucle sur les valeurs, et le corrigé fournit la réponse at...",
+              "scientific_flags": [
+                "human_review_required"
+              ]
+            }
+          }
+        }
+      ],
+      "angle_mort": null
+    },
+    "C2": {
+      "libelle": "Je sais lire, modifier et construire des tableaux, y compris en compréhension.",
+      "sources_T0": [
+        {
+          "seq_id": "P04",
+          "fichiers_count": 21,
+          "capacites_officielles": [
+            "P-DATA-CONSTR-02A"
+          ],
+          "verdicts": {
+            "P-DATA-CONSTR-02A": {
+              "verdict": "needs_review",
+              "justification": "La capacité P-DATA-CONSTR-02A porte sur la lecture et modification des éléments d'un tableau via leurs index. Les fichiers traitent principalement l'itération sur les valeurs d'une liste (boucle for valeur in releves) et la gestion de tuples/listes dans un contexte météo. L'accès par index est mentionné indirectement (ex: notes[0] dans le complément), mais le cœur des preuves porte sur le parcours de listes et la mutabilité, ce qui correspond partiellement à la capacité. La trace enseigne le parcours, l'évaluation fait pratiquer la boucle sur les valeurs, et le corrigé fournit la réponse at...",
+              "scientific_flags": [
+                "human_review_required"
+              ]
+            }
+          }
+        }
+      ],
+      "angle_mort": null
+    },
+    "C3": {
+      "libelle": "Je sais représenter et parcourir une grille avec un tableau de tableaux.",
+      "sources_T0": [
+        {
+          "seq_id": "P04",
+          "fichiers_count": 21,
+          "capacites_officielles": [
+            "P-DATA-CONSTR-02A"
+          ],
+          "verdicts": {
+            "P-DATA-CONSTR-02A": {
+              "verdict": "needs_review",
+              "justification": "La capacité P-DATA-CONSTR-02A porte sur la lecture et modification des éléments d'un tableau via leurs index. Les fichiers traitent principalement l'itération sur les valeurs d'une liste (boucle for valeur in releves) et la gestion de tuples/listes dans un contexte météo. L'accès par index est mentionné indirectement (ex: notes[0] dans le complément), mais le cœur des preuves porte sur le parcours de listes et la mutabilité, ce qui correspond partiellement à la capacité. La trace enseigne le parcours, l'évaluation fait pratiquer la boucle sur les valeurs, et le corrigé fournit la réponse at...",
+              "scientific_flags": [
+                "human_review_required"
+              ]
+            }
+          }
+        }
+      ],
+      "angle_mort": null
+    },
+    "C4": {
+      "libelle": "Je sais créer, modifier et parcourir un dictionnaire.",
+      "sources_T0": [
+        {
+          "seq_id": "P04",
+          "fichiers_count": 21,
+          "capacites_officielles": [
+            "P-DATA-CONSTR-02A"
+          ],
+          "verdicts": {
+            "P-DATA-CONSTR-02A": {
+              "verdict": "needs_review",
+              "justification": "La capacité P-DATA-CONSTR-02A porte sur la lecture et modification des éléments d'un tableau via leurs index. Les fichiers traitent principalement l'itération sur les valeurs d'une liste (boucle for valeur in releves) et la gestion de tuples/listes dans un contexte météo. L'accès par index est mentionné indirectement (ex: notes[0] dans le complément), mais le cœur des preuves porte sur le parcours de listes et la mutabilité, ce qui correspond partiellement à la capacité. La trace enseigne le parcours, l'évaluation fait pratiquer la boucle sur les valeurs, et le corrigé fournit la réponse at...",
+              "scientific_flags": [
+                "human_review_required"
+              ]
+            }
+          }
+        }
+      ],
+      "angle_mort": null
+    },
+    "C5": {
+      "libelle": "Je sais prévoir l'effet d'une affectation sur un objet mutable.",
+      "sources_T0": [
+        {
+          "seq_id": "P04",
+          "fichiers_count": 21,
+          "capacites_officielles": [
+            "P-DATA-CONSTR-02A"
+          ],
+          "verdicts": {
+            "P-DATA-CONSTR-02A": {
+              "verdict": "needs_review",
+              "justification": "La capacité P-DATA-CONSTR-02A porte sur la lecture et modification des éléments d'un tableau via leurs index. Les fichiers traitent principalement l'itération sur les valeurs d'une liste (boucle for valeur in releves) et la gestion de tuples/listes dans un contexte météo. L'accès par index est mentionné indirectement (ex: notes[0] dans le complément), mais le cœur des preuves porte sur le parcours de listes et la mutabilité, ce qui correspond partiellement à la capacité. La trace enseigne le parcours, l'évaluation fait pratiquer la boucle sur les valeurs, et le corrigé fournit la réponse at...",
+              "scientific_flags": [
+                "human_review_required"
+              ]
+            }
+          }
+        }
+      ],
+      "angle_mort": null
+    }
+  },
+  "conversion": {
+    "ok": 19,
+    "echecs": 0
+  }
+}

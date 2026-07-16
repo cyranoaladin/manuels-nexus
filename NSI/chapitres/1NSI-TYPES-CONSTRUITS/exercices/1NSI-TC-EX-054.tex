@@ -1,0 +1,32 @@
+% META: {"id": "1NSI-TC-EX-054", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "parcours": 3, "competences": ["programmer", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def copie_profonde_grille(grille):
+%     resultat = []
+%     for ligne in grille:
+%         resultat.append(list(ligne))
+%     return resultat
+% g = [[1, 2], [3, 4]]
+% c = copie_profonde_grille(g)
+% c[0][0] = 99
+% assert g[0][0] == 1
+% assert c[0][0] == 99
+% c[1] = [10, 20]
+% assert g[1] == [3, 4]
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-054}{3}{15}
+On veut créer une fonction qui copie entièrement une grille (liste de listes)
+sans qu'aucune modification de la copie n'affecte l'original.
+
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{copie_profonde_grille(grille)} qui renvoie
+        une copie profonde de la grille.
+  \item Vérifier que la modification de la copie ne modifie pas l'original :
+\begin{python}
+g = [[1, 2], [3, 4]]
+c = copie_profonde_grille(g)
+c[0][0] = 99
+print(g[0][0])  # doit afficher 1
+\end{python}
+  \item Expliquer pourquoi \lstinline{list(grille)} ne suffit pas.
+\end{enumerate}
+\end{exercice}

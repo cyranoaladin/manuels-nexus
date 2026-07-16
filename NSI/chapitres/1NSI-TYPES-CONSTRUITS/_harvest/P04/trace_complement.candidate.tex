@@ -1,0 +1,292 @@
+\section{P04 - Trace écrite - Types construits complément}
+
+\subsection{Capacités officielles atomiques}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-01 : Écrire une fonction renvoyant un p-uplet de valeurs
+\item
+  P-DATA-CONSTR-02B : Construire un tableau par compréhension
+\item
+  P-DATA-CONSTR-02C : Utiliser des tableaux de tableaux pour représenter
+  des matrices
+\item
+  P-DATA-CONSTR-03A : Construire une entrée de dictionnaire
+\item
+  P-DATA-CONSTR-03B : Itérer sur les éléments d'un dictionnaire
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Méthode 1 - Écrire une fonction renvoyant un p-uplet (P-DATA-CONSTR-01)}
+
+\textbf{Principe} : une fonction peut renvoyer plusieurs valeurs en les
+séparant par des virgules après \texttt{return}. Python crée
+automatiquement un tuple.
+
+\textbf{Modèle} :
+
+\begin{python}
+def statistiques(tableau):
+    somme = sum(tableau)
+    moyenne = somme / len(tableau)
+    return somme, moyenne
+\end{python}
+
+\textbf{Déballage du résultat} :
+
+\begin{python}
+s, m = statistiques([10, 20, 30])
+# s vaut 60, m vaut 20.0
+\end{python}
+
+\textbf{Exemple clé} :
+
+\begin{python}
+def division_euclidienne(a, b):
+    return a // b, a % b
+
+q, r = division_euclidienne(17, 5)
+# q vaut 3, r vaut 2
+\end{python}
+
+\textbf{A retenir} : \texttt{return\ a,\ b} est identique a
+\texttt{return\ (a,\ b)}. Le tuple est immuable.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Méthode 2 - Construire un tableau par compréhension (P-DATA-CONSTR-02B)}
+
+\textbf{Principe} : une liste par compréhension construit un nouveau
+tableau en une ligne lisible.
+
+\textbf{Modèle} :
+
+\begin{python}
+resultat = [expression for variable in iterable]
+resultat = [expression for variable in iterable if condition]
+\end{python}
+
+\textbf{Exemples clés} :
+
+\begin{python}
+carres = [x ** 2 for x in range(10)]
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+mots = ["nsi", "python", "algo"]
+majuscules = [m.upper() for m in mots]
+# ["NSI", "PYTHON", "ALGO"]
+
+positifs = [x for x in [-3, 5, -1, 8] if x > 0]
+# [5, 8]
+\end{python}
+
+\textbf{A retenir} : rester sur des formes simples et lisibles. Si
+l'expression est complexe, utiliser une boucle classique.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Méthode 3 - Utiliser des tableaux de tableaux pour les matrices (P-DATA-CONSTR-02C)}
+
+\textbf{Principe} : une matrice est une liste de listes. Pas de NumPy.
+Accès par \texttt{matrice{[}i{]}{[}j{]}} (ligne i, colonne j).
+
+\textbf{Modèle} :
+
+\begin{python}
+matrice = [
+    [1, 2, 3],
+    [4, 5, 6],
+]
+# matrice[0][2] vaut 3 (ligne 0, colonne 2)
+# len(matrice) donne le nombre de lignes : 2
+# len(matrice[0]) donne le nombre de colonnes : 3
+\end{python}
+
+\textbf{Initialisation correcte} :
+
+\begin{python}
+zeros = [[0 for j in range(colonnes)] for i in range(lignes)]
+\end{python}
+
+\textbf{Erreur à éviter} : \texttt{{[}{[}0{]}*p{]}*n} partage les mêmes
+lignes en mémoire.
+
+\textbf{Exemple clé - parcours} :
+
+\begin{python}
+for i in range(len(matrice)):
+    for j in range(len(matrice[i])):
+        print(matrice[i][j], end=" ")
+    print()
+\end{python}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Méthode 4 - Construire une entrée de dictionnaire (P-DATA-CONSTR-03A)}
+
+\textbf{Principe} : un dictionnaire associe des clés (immuables) a des
+valeurs. On ajoute ou modifie une entrée avec
+\texttt{d{[}cle{]}\ =\ valeur}.
+
+\textbf{Modèle} :
+
+\begin{python}
+d = {}
+d["nom"] = "valeur"     # ajout
+d["nom"] = "autre"      # modification (la clé existait déjà)
+\end{python}
+
+\textbf{Exemple clé - métadonnées EXIF fictives} :
+
+\begin{python}
+exif = {}
+exif["appareil"] = "Canon EOS"
+exif["date"] = "2025-03-20"
+exif["resolution"] = (4000, 3000)
+exif["iso"] = 200
+\end{python}
+
+\textbf{Exemple clé - comptage} :
+
+\begin{python}
+def compter(texte):
+    freq = {}
+    for c in texte:
+        if c in freq:
+            freq[c] = freq[c] + 1
+        else:
+            freq[c] = 1
+    return freq
+\end{python}
+
+\textbf{À retenir} : les clés doivent être immuables (str, int, tuple).
+Les listes ne sont pas des clés valides.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Méthode 5 - Itérer sur les éléments d’un dictionnaire (P-DATA-CONSTR-03B)}
+
+\textbf{Principe} : on peut parcourir les clés, les valeurs ou les
+couples (clé, valeur).
+
+\textbf{Modèle} :
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Code & Parcourt \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{for\ k\ in\ d} & les clés \\
+\texttt{for\ k\ in\ d.keys()} & les clés (explicite) \\
+\texttt{for\ v\ in\ d.values()} & les valeurs \\
+\texttt{for\ k,\ v\ in\ d.items()} & les couples (clé, valeur) \\
+\end{longtable}
+
+\textbf{Exemple clé} :
+
+\begin{python}
+exif = {"appareil": "Canon EOS", "date": "2025-03-20", "iso": 200}
+
+for cle, valeur in exif.items():
+    print(f"{cle} -> {valeur}")
+\end{python}
+
+\textbf{A retenir} : ne pas modifier un dictionnaire pendant qu'on itère
+dessus. Itération sur dictionnaire vide : la boucle ne s'exécute pas.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tableau récapitulatif}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Capacité & Structure & Syntaxe essentielle \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+P-DATA-CONSTR-01 & Tuple & \texttt{return\ a,\ b} \\
+P-DATA-CONSTR-02B & Liste & \texttt{{[}expr\ for\ x\ in\ iterable{]}} \\
+P-DATA-CONSTR-02C & Liste de listes & \texttt{m{[}i{]}{[}j{]}} \\
+P-DATA-CONSTR-03A & Dictionnaire & \texttt{d{[}cle{]}\ =\ valeur} \\
+P-DATA-CONSTR-03B & Dictionnaire & \texttt{for\ k,\ v\ in\ d.items()} \\
+\end{longtable}
+
+\subsection{Objectifs}
+
+\subsection{Prérequis}
+
+\subsection{Situation-problème}
+
+Un programme de gestion de notes doit stocker, pour chaque élève, son
+nom et ses notes dans différentes matières. Quelle structure de données
+choisir et comment organiser les accès ?
+
+\subsection{Activité d’entrée}
+
+Écrire une fonction Python qui reçoit deux nombres et renvoie à la fois
+leur somme et leur produit. Tester avec \lstinline|print(resultat[0], resultat[1])|.
+
+\subsection{Exercices}
+
+Exercices de manipulation de tuples, listes en compréhension, matrices
+et dictionnaires.
+
+\subsection{Corrigé}
+
+Les corrigés détaillés sont dans
+P04\_corrige\_types\_construits\_complement.md.
+
+\subsection{Erreurs fréquentes}
+
+\begin{itemize}
+\tightlist
+\item
+  EF1 : confondre tuple (immutable) et liste (mutable) lors du retour de
+  fonction.
+\item
+  EF2 : oublier les crochets dans une compréhension de liste.
+\item
+  EF3 : accéder à une clé inexistante d'un dictionnaire sans utiliser
+  get().
+\end{itemize}
+
+\subsection{Remédiation}
+
+Exercice de remédiation : écrire une fonction min\_max qui renvoie le
+minimum et le maximum d'une liste sous forme de tuple.
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : exercices de base.
+\item
+  Standard : exercices complets.
+\item
+  Expert : exercice d'approfondissement.
+\end{itemize}
+
+\subsection{Critères de réussite}
+
+\begin{itemize}
+\tightlist
+\item
+  Critère de réussite : la fonction renvoie un tuple vérifiable par
+  déstructuration.
+\item
+  Critère de validation : la compréhension de liste produit le résultat
+  attendu.
+\item
+  Observable : le dictionnaire est itéré avec keys(), values() et
+  items() correctement.
+\end{itemize}
+
+\subsection{Séance(s) correspondante(s)}
+
+Séance dédiée.

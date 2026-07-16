@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-TC-EX-031", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "parcours": 2, "competences": ["analyser", "programmer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def compter_voisins(grille, lig, col):
+%     compteur = 0
+%     for di in [-1, 0, 1]:
+%         for dj in [-1, 0, 1]:
+%             if di == 0 and dj == 0:
+%                 continue
+%             ni = lig + di
+%             nj = col + dj
+%             if 0 <= ni < len(grille) and 0 <= nj < len(grille[0]):
+%                 if grille[ni][nj] == 1:
+%                     compteur = compteur + 1
+%     return compteur
+% g = [[0, 1, 0], [1, 1, 0], [0, 0, 1]]
+% assert compter_voisins(g, 1, 1) == 3
+% assert compter_voisins(g, 0, 0) == 3
+% assert compter_voisins(g, 2, 2) == 1
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-031}{2}{12}
+Dans une grille binaire (contenant des 0 et des 1), on veut compter les voisins
+d'une case.
+
+Écrire une fonction \lstinline{compter_voisins(grille, lig, col)} qui renvoie le
+nombre de cases voisines (horizontales, verticales et diagonales) contenant la
+valeur 1, sans compter la case elle-même.
+
+\textbf{Exemple :}
+\begin{console}
+>>> g = [[0, 1, 0], [1, 1, 0], [0, 0, 1]]
+>>> compter_voisins(g, 1, 1)
+3
+>>> compter_voisins(g, 0, 0)
+3
+\end{console}
+
+\textit{Attention :} gérer les bords de la grille.
+\end{exercice}

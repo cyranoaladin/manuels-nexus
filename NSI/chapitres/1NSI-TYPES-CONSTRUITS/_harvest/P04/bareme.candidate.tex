@@ -1,0 +1,288 @@
+\section{P04 - Barème - Types construits}
+
+\subsection{Objectifs spécifiques}
+
+\begin{itemize}
+\tightlist
+\item
+  Objectif O1 - Identifier précisément la représentation ou la structure
+  en jeu.
+\item
+  Objectif O2 - Appliquer une méthode disciplinaire complète.
+\item
+  Objectif O3 - Justifier le résultat sur un cas différent.
+\item
+  Objectif O4 - Contrôler un cas limite et corriger une erreur observée.
+\end{itemize}
+
+\subsection{Capacités officielles atomiques}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-02A
+\end{itemize}
+
+\subsection{Prérequis}
+
+\begin{itemize}
+\tightlist
+\item
+  Reconnaître une consigne liée à tuple.
+\item
+  Distinguer donnée, méthode et conclusion dans le thème Tuples, listes,
+  dictionnaires.
+\item
+  Rédiger une justification courte en utilisant le vocabulaire du
+  programme.
+\item
+  Contrôler une réponse par un cas limite ou un contre-exemple
+  explicite.
+\end{itemize}
+
+\subsection{Séance(s) correspondante(s)}
+
+\begin{itemize}
+\tightlist
+\item
+  P04-S1 à P04-S7 : support rattaché aux séances prêtes de la
+  progression.
+\end{itemize}
+
+\subsection{Situation-problème concrète}
+
+Une station météo stocke des coordonnées fixes, des relevés horaires
+modifiables et des mesures accessibles par nom.
+
+\subsection{Activité d’entrée}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Identifier ce qui doit rester immuable dans un tuple.
+\item
+  Modifier une liste de températures.
+\item
+  Lire une clé dans un dictionnaire de station.
+\item
+  Décrire ce qui se passe avec une liste vide.
+\end{enumerate}
+
+\subsubsection{Barème question 1}
+
+\begin{itemize}
+\tightlist
+\item
+  1 point : identifier correctement tuple de coordonnées et la donnée
+  \texttt{(36.8,\ 10.2)}.
+\item
+  1 point : appliquer la méthode « lire sans modifier et nommer latitude
+  puis longitude ».
+\item
+  1 point : obtenir coordonnées conservées.
+\item
+  1 point : contrôler le cas limite « tentative de modification
+  interdite » ou expliquer pourquoi il ne s'applique pas.
+\item
+  Retrait possible : confusion avec l'erreur fréquente EF1 - Modifier un
+  tuple comme une liste. \#\#\# Barème question 2
+\item
+  1 point : identifier correctement liste de relevés et la donnée
+  \texttt{{[}18,\ 20,\ 19{]}}.
+\item
+  1 point : appliquer la méthode « parcourir les valeurs et calculer une
+  moyenne ».
+\item
+  1 point : obtenir \texttt{19}.
+\item
+  1 point : contrôler le cas limite « liste vide » ou expliquer pourquoi
+  il ne s'applique pas.
+\item
+  Retrait possible : confusion avec l'erreur fréquente EF2 - Parcourir
+  les indices quand les valeurs suffisent. \#\#\# Barème question 3
+\item
+  1 point : identifier correctement dictionnaire et la donnée
+  \texttt{\{"temperature":\ 21,\ "vent":\ 12\}}.
+\item
+  1 point : appliquer la méthode « tester la présence de la clé avant
+  lecture ».
+\item
+  1 point : obtenir \texttt{21} pour \texttt{temperature}.
+\item
+  1 point : contrôler le cas limite « clé absente » ou expliquer
+  pourquoi il ne s'applique pas.
+\item
+  Retrait possible : confusion avec l'erreur fréquente EF3 - Accéder à
+  une clé sans vérifier sa présence. \#\#\# Barème question 4
+\item
+  1 point : identifier correctement copie de liste et la donnée
+  \texttt{{[}{[}1{]},\ {[}2{]}{]}}.
+\item
+  1 point : appliquer la méthode « distinguer copie superficielle et
+  copie indépendante ».
+\item
+  1 point : obtenir modification locale contrôlée.
+\item
+  1 point : contrôler le cas limite « liste imbriquée » ou expliquer
+  pourquoi il ne s'applique pas.
+\item
+  Retrait possible : confusion avec l'erreur fréquente EF4 - Copier une
+  liste imbriquée seulement au premier niveau. \#\# Exercices numérotés
+\item
+  Exercice 1 : résoudre tuple de coordonnées avec \texttt{(36.8,\ 10.2)}
+  ; attendu : coordonnées conservées.
+\item
+  Exercice 2 : expliquer liste de relevés à partir de
+  \texttt{{[}18,\ 20,\ 19{]}} ; attendu : \texttt{19}.
+\item
+  Exercice 3 : comparer dictionnaire avec
+  \texttt{\{"temperature":\ 21,\ "vent":\ 12\}} ; attendu : \texttt{21}
+  pour \texttt{temperature}.
+\item
+  Exercice 4 : corriger copie de liste pour
+  \texttt{{[}{[}1{]},\ {[}2{]}{]}} ; attendu : modification locale
+  contrôlée.
+\item
+  Exercice 5 : tester un cas limite lié à tentative de modification
+  interdite ; attendu : le comportement de tuple de coordonnées est
+  contrôlé.
+\item
+  Exercice 6 : classer deux méthodes possibles pour liste de relevés ;
+  attendu : la méthode robuste est choisie et justifiée.
+\item
+  Exercice 7 : justifier un transfert qui utilise dictionnaire avec une
+  donnée nouvelle ; attendu : la justification reste valable sur le
+  nouveau cas.
+\item
+  Exercice 8 : étendre un énoncé volontairement erroné sur copie de
+  liste ; attendu : l'erreur est localisée puis réparée.
+\end{itemize}
+
+\subsection{Corrigés complets des exercices du cours}
+
+\begin{itemize}
+\tightlist
+\item
+  Corrigé exercice 1 : méthode : identifier \texttt{(36.8,\ 10.2)},
+  appliquer la méthode « lire sans modifier et nommer latitude puis
+  longitude », puis écrire coordonnées conservées ; résultat :
+  coordonnées conservées ; contrôle : faire apparaître le contrôle «
+  tentative de modification interdite ».
+\item
+  Corrigé exercice 2 : méthode : expliciter chaque étape de parcourir
+  les valeurs et calculer une moyenne avant de conclure par \texttt{19}
+  ; résultat : \texttt{19} ; contrôle : rédiger la méthode avant le
+  résultat.
+\item
+  Corrigé exercice 3 : méthode : comparer la donnée avec le cas limite «
+  clé absente » et valider \texttt{21} pour \texttt{temperature} ;
+  résultat : \texttt{21} pour \texttt{temperature} ; contrôle : comparer
+  avec le cas « clé absente ».
+\item
+  Corrigé exercice 4 : méthode : isoler l'erreur fréquente « Copier une
+  liste imbriquée seulement au premier niveau. » puis reprendre la
+  procédure correcte ; résultat : modification locale contrôlée ;
+  contrôle : corriger l'erreur « Copier une liste imbriquée seulement au
+  premier niveau. ».
+\item
+  Corrigé exercice 5 : méthode : identifier \texttt{(36.8,\ 10.2)},
+  appliquer la méthode « lire sans modifier et nommer latitude puis
+  longitude », puis écrire coordonnées conservées ; résultat : le
+  comportement de tuple de coordonnées est contrôlé ; contrôle : nommer
+  la donnée minimale et la conclusion.
+\item
+  Corrigé exercice 6 : méthode : expliciter chaque étape de parcourir
+  les valeurs et calculer une moyenne avant de conclure par \texttt{19}
+  ; résultat : la méthode robuste est choisie et justifiée ; contrôle :
+  identifier pourquoi « Parcourir les indices quand les valeurs
+  suffisent. » est une erreur.
+\item
+  Corrigé exercice 7 : méthode : comparer la donnée avec le cas limite «
+  clé absente » et valider \texttt{21} pour \texttt{temperature} ;
+  résultat : la justification reste valable sur le nouveau cas ;
+  contrôle : inclure une étape calculable par un pair.
+\item
+  Corrigé exercice 8 : méthode : isoler l'erreur fréquente « Copier une
+  liste imbriquée seulement au premier niveau. » puis reprendre la
+  procédure correcte ; résultat : l'erreur est localisée puis réparée ;
+  contrôle : proposer une activité corrective inspirée de « Modifier une
+  sous-liste et observer l'effet sur la copie. ».
+\end{itemize}
+
+\subsection{Erreurs fréquentes}
+
+\begin{itemize}
+\tightlist
+\item
+  Erreur fréquente EF1 - Modifier un tuple comme une liste.
+\item
+  Erreur fréquente EF2 - Parcourir les indices quand les valeurs
+  suffisent.
+\item
+  Erreur fréquente EF3 - Accéder à une clé sans vérifier sa présence.
+\item
+  Erreur fréquente EF4 - Copier une liste imbriquée seulement au premier
+  niveau.
+\end{itemize}
+
+\subsection{Remédiation ciblée}
+
+\begin{itemize}
+\tightlist
+\item
+  Activité corrective EF1 : Identifier mutabilité et usage avant
+  d'écrire une affectation.
+\item
+  Activité corrective EF2 : Écrire deux boucles, avec indices puis avec
+  valeurs, et comparer.
+\item
+  Activité corrective EF3 : Tester \texttt{cle\ in\ dictionnaire} avant
+  la lecture.
+\item
+  Activité corrective EF4 : Modifier une sous-liste et observer l'effet
+  sur la copie.
+\end{itemize}
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : traiter \texttt{(36.8,\ 10.2)} avec une fiche méthode fournie.
+\item
+  Standard : traiter \texttt{{[}18,\ 20,\ 19{]}} en rédigeant la
+  justification complète.
+\item
+  Expert : inventer un cas limite lié à « clé absente » et expliquer le
+  comportement attendu.
+\end{itemize}
+
+\subsection{Critères de réussite}
+
+\begin{itemize}
+\tightlist
+\item
+  La capacité officielle est citée dans la copie.
+\item
+  La méthode contient au moins une étape vérifiable par un pair.
+\item
+  Le cas limite est discuté avec une donnée concrète.
+\item
+  La correction explique quelle erreur fréquente est évitée.
+\end{itemize}
+
+\subsubsection{Barème question 5}
+
+\begin{itemize}
+\tightlist
+\item
+  1 point : identifier le tuple comme coordonnée immuable.
+\item
+  1 point : identifier le dictionnaire comme accès par clé.
+\item
+  1 point : identifier la liste comme collection parcourable.
+\item
+  1 point : calculer le milieu \texttt{(3.0,\ 7.0)} avec formule
+  correcte.
+\end{itemize}

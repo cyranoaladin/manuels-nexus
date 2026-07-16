@@ -1,0 +1,19 @@
+% META: {"id": "1NSI-TC-EX-037", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def creer_joueur(nom, elo, rang):
+%     return {"nom": nom, "elo": elo, "rang": rang}
+% j = creer_joueur("Alice", 2400, "diamant")
+% assert j["nom"] == "Alice"
+% assert j["elo"] == 2400
+% assert j["rang"] == "diamant"
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-037}{1}{8}
+Écrire une fonction \lstinline{creer_joueur(nom, elo, rang)} qui renvoie un
+dictionnaire avec les clés \lstinline{"nom"}, \lstinline{"elo"} et \lstinline{"rang"}.
+
+\textbf{Exemple :}
+\begin{console}
+>>> creer_joueur("Alice", 2400, "diamant")
+{'nom': 'Alice', 'elo': 2400, 'rang': 'diamant'}
+\end{console}
+\end{exercice}

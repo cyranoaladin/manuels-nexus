@@ -1,0 +1,35 @@
+% META: {"id": "1NSI-TC-M2", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "methode", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M2}{Construire un tableau en compréhension}
+\textbf{Quand l'utiliser ?} Quand tu veux créer une liste à partir d'une règle de calcul ou d'un filtre, en une seule ligne.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Identifie la \textbf{source} : sur quoi itères-tu ? (un \lstinline{range}, une liste existante, etc.)
+  \item Identifie l'\textbf{expression} : que calcules-tu pour chaque élément ?
+  \item (Optionnel) Identifie la \textbf{condition} : quels éléments gardes-tu ?
+  \item Écris la compréhension selon le patron : \lstinline{[expr for var in source if cond]}.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+# Carres des entiers de 0 a 9
+carres = [x**2 for x in range(10)]
+# [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# Garder uniquement les nombres pairs d'une liste
+nombres = [3, 8, 12, 5, 20, 7]
+pairs = [n for n in nombres if n % 2 == 0]
+# [8, 12, 20]
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Oublier les crochets \lstinline{[...]} : sans eux, tu obtiens un générateur, pas une liste.
+  \item Placer le \lstinline{if} avant le \lstinline{for} : la condition de filtrage se place \emph{après} le \lstinline{for}.
+  \item Écrire une compréhension trop complexe : si tu as besoin de plus de deux lignes de logique, préfère une boucle classique.
+\end{itemize}
+
+\textbf{Vérifier :} affiche la liste obtenue avec \lstinline{print} et contrôle sa longueur avec \lstinline{len}.
+
+\textbf{S'entraîner :} exercices C2.
+\end{fichemethode}

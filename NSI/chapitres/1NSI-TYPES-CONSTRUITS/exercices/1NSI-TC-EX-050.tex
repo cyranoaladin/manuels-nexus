@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TC-EX-050", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "parcours": 2, "competences": ["analyser"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% grille = [[0, 0]] * 3
+% grille[0][0] = 1
+% for ligne in grille:
+%     print(ligne)
+% EXPECTED
+% [1, 0]
+% [1, 0]
+% [1, 0]
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-050}{2}{10}
+On considère le programme suivant :
+\begin{python}
+grille = [[0, 0]] * 3
+grille[0][0] = 1
+for ligne in grille:
+    print(ligne)
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, les trois affichages. Le résultat est-il celui
+        attendu ?
+  \item Expliquer pourquoi toutes les lignes sont modifiées alors qu'on n'a changé
+        que \lstinline{grille[0][0]}.
+  \item Proposer une construction correcte de la grille qui évite ce piège.
+\end{enumerate}
+\end{exercice}

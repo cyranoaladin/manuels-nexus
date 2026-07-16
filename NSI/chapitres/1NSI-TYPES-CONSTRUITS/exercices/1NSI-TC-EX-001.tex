@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TC-EX-001", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 1, "competences": ["analyser", "programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-001.tex", "corrige_tex": "chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex", "status": "generated"}
+% BEGIN-TRACE
+% notes = [12, 15, 9]
+% copie = notes
+% copie.append(18)
+% print(notes)
+% print(len(copie))
+% EXPECTED
+% [12, 15, 9, 18]
+% 4
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-001}{1}{8}
+On considère le programme suivant :
+\begin{python}
+notes = [12, 15, 9]
+copie = notes
+copie.append(18)
+print(notes)
+print(len(copie))
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter le programme, ce qu'affichent les deux instructions \texttt{print}.
+  \item Expliquer pourquoi la liste \texttt{notes} est modifiée alors que l'on n'a
+        appelé \texttt{append} que sur \texttt{copie}.
+  \item Modifier la ligne 2 pour que \texttt{notes} ne soit pas modifiée.
+\end{enumerate}
+\end{exercice}

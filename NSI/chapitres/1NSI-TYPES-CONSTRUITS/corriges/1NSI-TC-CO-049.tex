@@ -1,0 +1,10 @@
+% META: {"id": "1NSI-TC-CO-049", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-TC-EX-049}
+\begin{enumerate}
+  \item L'exécution provoque une erreur \lstinline{TypeError: 'tuple' object does not support item assignment}. La ligne \lstinline{t[0] = 10} échoue et le \lstinline{print(t)} n'est jamais atteint.
+
+  \item Un tuple est \textbf{immuable} (non mutable) : une fois créé, on ne peut ni modifier, ni ajouter, ni supprimer ses éléments. Les opérations d'affectation par index (\lstinline{t[i] = ...}), \lstinline{append}, \lstinline{remove}, etc., ne sont pas définies pour les tuples.
+
+  \item Utiliser un tuple garantit que les données ne seront pas modifiées par erreur (ni par un alias, ni par un effet de bord dans une fonction). Cela rend le code plus sûr et exprime clairement l'intention du programmeur : ces données sont fixes.
+\end{enumerate}
+\end{corrige}

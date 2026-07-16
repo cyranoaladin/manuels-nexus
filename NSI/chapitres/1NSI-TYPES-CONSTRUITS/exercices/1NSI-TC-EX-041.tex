@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-TC-EX-041", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 2, "competences": ["programmer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def moyenne_par_classe(eleves):
+%     totaux = {}
+%     effectifs = {}
+%     for e in eleves:
+%         c = e["classe"]
+%         if c not in totaux:
+%             totaux[c] = 0
+%             effectifs[c] = 0
+%         totaux[c] = totaux[c] + e["note"]
+%         effectifs[c] = effectifs[c] + 1
+%     moyennes = {}
+%     for c in totaux:
+%         moyennes[c] = totaux[c] / effectifs[c]
+%     return moyennes
+% eleves = [{"nom": "A", "classe": "1A", "note": 12},
+%            {"nom": "B", "classe": "1B", "note": 15},
+%            {"nom": "C", "classe": "1A", "note": 14}]
+% m = moyenne_par_classe(eleves)
+% assert m == {"1A": 13.0, "1B": 15.0}
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-041}{2}{12}
+On dispose d'une liste de dictionnaires représentant des élèves, chacun ayant
+les clés \lstinline{"nom"}, \lstinline{"classe"} et \lstinline{"note"}.
+
+Écrire une fonction \lstinline{moyenne_par_classe(eleves)} qui renvoie un
+dictionnaire associant à chaque classe la moyenne des notes de ses élèves.
+
+\textbf{Exemple :}
+\begin{console}
+>>> eleves = [{"nom": "A", "classe": "1A", "note": 12},
+...           {"nom": "B", "classe": "1B", "note": 15},
+...           {"nom": "C", "classe": "1A", "note": 14}]
+>>> moyenne_par_classe(eleves)
+{'1A': 13.0, '1B': 15.0}
+\end{console}
+\end{exercice}

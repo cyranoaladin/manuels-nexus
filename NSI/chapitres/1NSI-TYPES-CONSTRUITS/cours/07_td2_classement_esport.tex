@@ -1,0 +1,90 @@
+% META: {"id": "1NSI-TC-TD2", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "td", "capacites": ["1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C3", "1NSI-TYPES-CONSTRUITS-C4", "1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "duree_min": 50, "status": "needs_review"}
+\section*{TD 2 --- Classement d'un tournoi}
+\textit{Durée : 50 minutes. Objectif : croiser tableaux, dictionnaires et mutabilité
+dans un projet de classement.}
+
+\bigskip
+
+Un tournoi oppose 6 joueurs sur 4 manches. Les résultats sont stockés dans une
+grille (tableau de tableaux) : chaque ligne est un joueur, chaque colonne une manche.
+
+\begin{python}
+pseudos = ["Ace", "Bob", "Cat", "Dan", "Eve", "Fox"]
+scores = [
+    [120, 150, 130, 140],
+    [180, 160, 170, 190],
+    [110, 140, 120, 100],
+    [200, 180, 210, 190],
+    [90,  110, 100, 120],
+    [160, 170, 150, 180],
+]
+\end{python}
+
+\textbf{Partie A --- Lecture de la grille (C3)}
+
+\begin{exercice}{1NSI-TC-TD2-A1}{1}{5}
+\begin{enumerate}
+  \item Combien de lignes et de colonnes a la grille \lstinline{scores} ?
+  \item Donner l'expression Python pour obtenir le score de Cat à la manche 3.
+  \item Écrire une fonction \lstinline{total_joueur(scores, i)} qui renvoie
+        la somme des scores du joueur d'indice \lstinline{i}.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% scores = [[120,150,130,140],[180,160,170,190],[200,180,210,190]]
+% def total_joueur(scores, i):
+%     return sum(scores[i])
+% assert total_joueur(scores, 0) == 540
+% assert total_joueur(scores, 2) == 780
+% END-VERIFY
+
+\textbf{Partie B --- Construction du classement (C2, C4)}
+
+\begin{exercice}{1NSI-TC-TD2-B1}{2}{10}
+Écrire une fonction \lstinline{classement(pseudos, scores)} qui renvoie un
+tableau de dictionnaires triés par total décroissant. Chaque dictionnaire
+contient les clés \lstinline{"pseudo"}, \lstinline{"total"} et
+\lstinline{"rang"}.
+
+Exemple de sortie (premier élément) :
+\begin{python}
+{"pseudo": "Dan", "total": 780, "rang": 1}
+\end{python}
+\end{exercice}
+
+\begin{exercice}{1NSI-TC-TD2-B2}{2}{8}
+Écrire une fonction \lstinline{meilleur_manche(scores, j)} qui renvoie
+l'indice du joueur ayant le meilleur score à la manche \lstinline{j}.
+\end{exercice}
+
+\textbf{Partie C --- Mutabilité et copies (C5)}
+
+\begin{exercice}{1NSI-TC-TD2-C1}{2}{10}
+On veut simuler un bonus : ajouter 10 points à chaque score de la manche 1,
+\textbf{sans modifier la grille originale}.
+
+\begin{enumerate}
+  \item Un élève écrit :
+\begin{python}
+copie = list(scores)
+for i in range(len(copie)):
+    copie[i][0] += 10
+\end{python}
+        Expliquer pourquoi la grille originale est aussi modifiée.
+  \item Corriger le code pour que la grille originale reste intacte.
+  \item Vérifier en affichant \lstinline{scores[0][0]} avant et après.
+\end{enumerate}
+\end{exercice}
+
+\textbf{Partie D --- Synthèse (C2, C3, C4)}
+
+\begin{exercice}{1NSI-TC-TD2-D1}{3}{15}
+Écrire un programme complet qui :
+\begin{enumerate}
+  \item Affiche le classement complet.
+  \item Identifie le MVP (joueur avec la meilleure moyenne par manche).
+  \item Crée un dictionnaire \lstinline{equipes} regroupant les 6 joueurs
+        en 2 équipes de 3 (indices 0--2 et 3--5), avec le total par équipe.
+\end{enumerate}
+\end{exercice}

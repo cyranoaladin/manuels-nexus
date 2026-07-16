@@ -1,0 +1,26 @@
+% META: {"id": "1NSI-TC-EX-042", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "parcours": 2, "competences": ["analyser"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% joueur = {"nom": "Bob", "elo": 1800}
+% try:
+%     joueur["rang"]
+%     assert False, "KeyError attendu"
+% except KeyError:
+%     pass
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-042}{2}{8}
+On considère le code suivant :
+\begin{python}
+joueur = {"nom": "Bob", "elo": 1800}
+print(joueur["rang"])
+\end{python}
+\begin{enumerate}
+  \item Quelle erreur ce programme produit-il ? Pourquoi ?
+  \item Proposer deux façons différentes d'éviter cette erreur :
+        \begin{itemize}
+          \item en testant l'existence de la clé avant l'accès ;
+          \item en utilisant la méthode \lstinline{get}.
+        \end{itemize}
+  \item Réécrire le code pour qu'il affiche \lstinline{"inconnu"} si la clé
+        \lstinline{"rang"} n'existe pas.
+\end{enumerate}
+\end{exercice}

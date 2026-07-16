@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-TC-M1", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "methode", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M1}{Choisir entre tuple et liste}
+\textbf{Quand l'utiliser ?} Quand tu dois stocker plusieurs valeurs ensemble et que tu hésites entre un tuple et une liste.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Demande-toi si les données seront modifiées après création (ajout, suppression, remplacement).
+  \item Si \textbf{non} (données fixes) : utilise un \textbf{tuple}. Exemples : coordonnées d'un point, date de naissance, résultat renvoyé par une fonction.
+  \item Si \textbf{oui} (données évolutives) : utilise une \textbf{liste}. Exemples : liste de scores en cours de partie, panier d'achats.
+  \item En cas de doute, pose-toi la question : « cette collection va-t-elle grandir ou changer ? »
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+# Donnees fixes : on choisit un tuple
+position = (3, 7)
+couleur_rgb = (255, 128, 0)
+
+# Donnees evolutives : on choisit une liste
+scores = [12, 8, 15]
+scores.append(20)  # on ajoute un score
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Utiliser une liste pour des données qui ne changent jamais : cela fonctionne, mais un tuple exprime mieux l'intention et protège contre les modifications accidentelles.
+  \item Tenter de modifier un tuple avec \lstinline{t[0] = 5} provoque une \lstinline{TypeError}.
+\end{itemize}
+
+\textbf{Vérifier :} ton choix est cohérent si tu n'as jamais besoin de \lstinline{append}, \lstinline{remove} ou d'affectation par indice sur un tuple.
+
+\textbf{S'entraîner :} exercices C1.
+\end{fichemethode}

@@ -1,0 +1,153 @@
+% nexus-signatures.tex — Bandeaux et onglets de chapitre Nexus Réussite
+% Chaque chapitre a un motif génératif propre et un onglet de tranche.
+
+\RequirePackage{tikz}
+\usetikzlibrary{calc,decorations.markings}
+
+% ============================================================
+%  ONGLET DE TRANCHE
+% ============================================================
+% Position verticale de l'onglet (décalée par chapitre)
+\newcounter{nxChapNum}
+\setcounter{nxChapNum}{0}
+
+\newcommand{\nxOngletHauteur}{1.5cm}
+\newcommand{\nxOngletLargeur}{0.6cm}
+
+% Dessine l'onglet sur les pages impaires (bord extérieur)
+\newcommand{\nxOnglet}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[nxBleu]
+      (current page.north east)
+      ++(-\nxOngletLargeur, -2cm - \value{nxChapNum}*\nxOngletHauteur - \value{nxChapNum}*0.3cm)
+      rectangle
+      +(\nxOngletLargeur, -\nxOngletHauteur);
+  \end{tikzpicture}%
+}
+
+% ============================================================
+%  MOTIFS GÉNÉRATIFS PAR THÈME
+% ============================================================
+
+% --- Suites : points en progression géométrique ---
+\newcommand{\motifSuites}{%
+  \begin{tikzpicture}[overlay,remember picture,opacity=0.08]
+    \foreach \i in {0,...,12} {
+      \pgfmathsetmacro{\ypos}{0.3*\i}
+      \pgfmathsetmacro{\rad}{0.08 + 0.015*\i}
+      \fill[nxBleu] (current page.south west) ++(1.2cm + 0.35*\i, 2cm + \ypos cm) circle (\rad cm);
+    }
+    \foreach \i in {0,...,8} {
+      \pgfmathsetmacro{\ypos}{0.4*\i}
+      \pgfmathsetmacro{\rad}{0.06 + 0.012*\i}
+      \fill[nxBleu] (current page.south west) ++(2.5cm + 0.25*\i, 4cm + \ypos cm) circle (\rad cm);
+    }
+  \end{tikzpicture}%
+}
+
+% --- Dérivation : faisceau de sécantes vers la tangente ---
+\newcommand{\motifDerivation}{%
+  \begin{tikzpicture}[overlay,remember picture,opacity=0.08]
+    \coordinate (P) at ($(current page.south west) + (3cm,5cm)$);
+    % Courbe
+    \draw[nxBleu,line width=1.5pt] ($(P)+(-2.5,0.8)$) .. controls ($(P)+(-1,-0.5)$) and ($(P)+(1,0.5)$) .. ($(P)+(2.5,1.5)$);
+    % Sécantes convergeant
+    \foreach \d in {2.0,1.5,1.0,0.5} {
+      \draw[nxOr,line width=0.6pt] ($(P)+(-\d,-0.3*\d)$) -- ($(P)+(\d,0.4*\d)$);
+    }
+    % Tangente
+    \draw[nxOr,line width=1.2pt] ($(P)+(-2,0.15)$) -- ($(P)+(2,0.15)$);
+    \fill[nxBleu] (P) circle (2pt);
+  \end{tikzpicture}%
+}
+
+% --- Second degré : famille de paraboles ---
+\newcommand{\motifSecondDegre}{%
+  \begin{tikzpicture}[overlay,remember picture,opacity=0.08]
+    \coordinate (O) at ($(current page.south west) + (3cm,5cm)$);
+    \foreach \a/\c in {0.15/nxBleu,0.2/nxOr,0.3/nxBleu,0.45/nxOr} {
+      \draw[\c,line width=0.8pt,domain=-3:3,samples=40]
+        plot ({(\x)+3},{(\a*\x*\x)+5});
+    }
+  \end{tikzpicture}%
+}
+
+% --- Probabilités : arbre ---
+\newcommand{\motifProbabilites}{%
+  \begin{tikzpicture}[overlay,remember picture,opacity=0.08]
+    \coordinate (R) at ($(current page.south west) + (2cm,6cm)$);
+    \draw[nxBleu,line width=0.8pt] (R) -- ++(1.5,1) node[circle,fill=nxBleu,inner sep=1.5pt]{};
+    \draw[nxBleu,line width=0.8pt] (R) -- ++(1.5,-1) node[circle,fill=nxBleu,inner sep=1.5pt]{};
+    \draw[nxBleu,line width=0.8pt] ($(R)+(1.5,1)$) -- ++(1.5,0.5) node[circle,fill=nxBleu,inner sep=1.5pt]{};
+    \draw[nxBleu,line width=0.8pt] ($(R)+(1.5,1)$) -- ++(1.5,-0.5) node[circle,fill=nxBleu,inner sep=1.5pt]{};
+    \draw[nxBleu,line width=0.8pt] ($(R)+(1.5,-1)$) -- ++(1.5,0.5) node[circle,fill=nxBleu,inner sep=1.5pt]{};
+    \draw[nxBleu,line width=0.8pt] ($(R)+(1.5,-1)$) -- ++(1.5,-0.5) node[circle,fill=nxBleu,inner sep=1.5pt]{};
+    \fill[nxBleu] (R) circle (2pt);
+  \end{tikzpicture}%
+}
+
+% --- Générique (fallback) ---
+\newcommand{\motifGenerique}{%
+  \begin{tikzpicture}[overlay,remember picture,opacity=0.06]
+    \foreach \i in {0,...,5} {
+      \draw[nxBleu,line width=0.8pt] ($(current page.south west) + (1.5cm + \i*0.6cm, 3cm)$)
+        -- ++(0,4cm);
+    }
+  \end{tikzpicture}%
+}
+
+% --- Types construits : mémoire 6 x 4, valeurs et références ---
+\newcommand{\motifTypesConstruits}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (nxmemoireorigine) at ([xshift=-28mm,yshift=31mm]current page.south east);
+    \foreach \r in {0,...,3}{%
+      \foreach \c in {0,...,5}{%
+        \node[draw=nxBleu!35,line width=.55pt,rounded corners=1.4pt,
+          minimum width=13mm,minimum height=11mm,inner sep=0pt]
+          (nxmem-\r-\c) at ($(nxmemoireorigine)+(-\c*16mm,\r*15mm)$) {};%
+      }%
+    }%
+    \foreach \r/\c in {0/0,0/3,1/2,2/4,3/1}{%
+      \fill[nxOr!60,rounded corners=1.1pt]
+        ($(nxmem-\r-\c.center)+(-5.5mm,-4mm)$) rectangle ++(11mm,8mm);%
+    }%
+    \foreach \r/\a/\b in {0/0/1,0/2/3,1/1/2,2/3/4,3/0/1}{%
+      \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
+        (nxmem-\r-\a.east) -- (nxmem-\r-\b.west);%
+    }%
+    \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
+      (nxmem-0-3.south) -- (nxmem-1-2.north);
+    \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
+      (nxmem-1-2.south) -- (nxmem-2-4.north);
+  \end{tikzpicture}%
+}
+
+% ============================================================
+%  BANDEAU D'OUVERTURE
+% ============================================================
+% Bande verticale bleu pâle sur la page d'ouverture (bord extérieur)
+\newcommand{\nxBandeauOuverture}[1][motifGenerique]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    % Bande sur le bord extérieur (droite pour pages impaires, gauche pour paires)
+    \ifodd\value{page}%
+      \fill[nxBleu!12]
+        (current page.north east) rectangle
+        ($(current page.south east) + (-1.8cm,0)$);
+    \else
+      \fill[nxBleu!12]
+        (current page.north west) rectangle
+        ($(current page.south west) + (1.8cm,0)$);
+    \fi
+  \end{tikzpicture}%
+  % Motif par-dessus
+  \csname #1\endcsname%
+}
+
+% ============================================================
+%  MINIATURE EN-TÊTE (petit motif dans le header)
+% ============================================================
+\newcommand{\nxMiniMotif}{%
+  \tikz[baseline=-0.1em]{%
+    \fill[nxBleu!30] (0,0) -- (0.15em,0.25em) -- (0.3em,0) -- (0.15em,-0.25em) -- cycle;
+  }%
+}

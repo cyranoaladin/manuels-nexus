@@ -1,0 +1,92 @@
+% META: {"id": "1NSI-TC-TD1", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "td", "capacites": ["1NSI-TYPES-CONSTRUITS-C1", "1NSI-TYPES-CONSTRUITS-C2", "1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "transposition", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_td_types_construits.md"], "duree_min": 50, "status": "needs_review"}
+\section*{TD 1 --- Station météo connectée}
+\textit{Durée : 50 minutes. Objectif : manipuler tuples, tableaux et dictionnaires
+dans un contexte réaliste.}
+
+\bigskip
+
+Une station météo enregistre des mesures toutes les heures. Chaque mesure est un
+tuple \lstinline{(heure, temperature, humidite)}. L'ensemble des mesures d'une
+journée est stocké dans un tableau.
+
+\begin{python}
+mesures = [
+    (0, 15.2, 82), (1, 14.8, 85), (2, 14.1, 88),
+    (6, 13.5, 90), (7, 14.0, 87), (8, 15.5, 80),
+    (12, 22.3, 55), (13, 23.1, 52), (14, 23.8, 50),
+    (18, 20.1, 60), (19, 18.5, 65), (20, 17.2, 70),
+]
+\end{python}
+
+\textbf{Partie A --- Exploration (C1, C2)}
+
+\begin{exercice}{1NSI-TC-TD1-A1}{1}{5}
+\begin{enumerate}
+  \item Donner le type de \lstinline{mesures[0]} et la valeur de
+        \lstinline{mesures[0][1]}.
+  \item Écrire une fonction \lstinline{temperature_max(mesures)}
+        qui renvoie un tuple \lstinline{(heure, temp)}
+        correspondant à la température la plus élevée.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% mesures = [(0,15.2,82),(1,14.8,85),(2,14.1,88),(6,13.5,90),(7,14.0,87),(8,15.5,80),(12,22.3,55),(13,23.1,52),(14,23.8,50),(18,20.1,60),(19,18.5,65),(20,17.2,70)]
+% def temperature_max(mesures):
+%     best = mesures[0]
+%     for m in mesures:
+%         if m[1] > best[1]:
+%             best = m
+%     return (best[0], best[1])
+% assert temperature_max(mesures) == (14, 23.8)
+% END-VERIFY
+
+\begin{exercice}{1NSI-TC-TD1-A2}{1}{8}
+Écrire une fonction \lstinline{temperatures(mesures)} qui renvoie le tableau
+des températures extraites de chaque mesure, en compréhension de liste.
+\end{exercice}
+
+\textbf{Partie B --- Analyse (C4)}
+
+\begin{exercice}{1NSI-TC-TD1-B1}{2}{10}
+On veut regrouper les mesures par tranche horaire dans un dictionnaire :
+\lstinline{"nuit"} (0h--6h), \lstinline{"matin"} (7h--12h),
+\lstinline{"apres-midi"} (13h--18h), \lstinline{"soir"} (19h--23h).
+
+Écrire une fonction \lstinline{par_tranche(mesures)} qui renvoie un
+dictionnaire dont les clés sont les tranches et les valeurs sont les
+tableaux de mesures correspondantes.
+\end{exercice}
+
+\begin{exercice}{1NSI-TC-TD1-B2}{2}{12}
+Écrire une fonction \lstinline{resume(mesures)} qui renvoie un dictionnaire
+de la forme :
+\begin{python}
+{"temp_min": 13.5, "temp_max": 23.8,
+ "hum_moy": 72.0, "nb_mesures": 12}
+\end{python}
+\end{exercice}
+
+% BEGIN-VERIFY
+% mesures = [(0,15.2,82),(6,13.5,90),(14,23.8,50)]
+% def resume(mesures):
+%     temps = [m[1] for m in mesures]
+%     hums = [m[2] for m in mesures]
+%     return {"temp_min": min(temps), "temp_max": max(temps),
+%             "hum_moy": sum(hums)/len(hums), "nb_mesures": len(mesures)}
+% r = resume(mesures)
+% assert r["temp_min"] == 13.5
+% assert r["temp_max"] == 23.8
+% assert r["nb_mesures"] == 3
+% END-VERIFY
+
+\textbf{Partie C --- Synthèse (C1, C2, C4)}
+
+\begin{exercice}{1NSI-TC-TD1-C1}{2}{15}
+Écrire un programme complet qui :
+\begin{enumerate}
+  \item Calcule le résumé de la journée.
+  \item Affiche les mesures de la tranche \lstinline{"apres-midi"}.
+  \item Identifie l'heure la plus humide.
+\end{enumerate}
+\end{exercice}

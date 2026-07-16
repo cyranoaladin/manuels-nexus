@@ -1,0 +1,31 @@
+% META: {"id": "1NSI-TC-EX-053", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "parcours": 2, "competences": ["analyser"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% grille = [[1, 2], [3, 4]]
+% copie = list(grille)
+% copie[0][0] = 99
+% print(grille[0][0])
+% copie[0] = [10, 20]
+% print(grille[0])
+% EXPECTED
+% 99
+% [99, 2]
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-053}{2}{12}
+On considère le programme suivant :
+\begin{python}
+grille = [[1, 2], [3, 4]]
+copie = list(grille)
+copie[0][0] = 99
+print(grille[0][0])
+copie[0] = [10, 20]
+print(grille[0])
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, les deux affichages.
+  \item Expliquer pourquoi \lstinline{grille[0][0]} vaut \lstinline{99} alors qu'on
+        a modifié \lstinline{copie}.
+  \item On parle de \textbf{copie superficielle}. Qu'est-ce que cela signifie ?
+  \item Proposer une façon de créer une copie profonde de la grille (sans utiliser
+        le module \lstinline{copy}).
+\end{enumerate}
+\end{exercice}

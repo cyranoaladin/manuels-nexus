@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-TC-CO-028", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% grille = [[0, 0, 0],
+%            [0, 0, 0],
+%            [0, 0, 0]]
+% for i in range(3):
+%     grille[i][i] = 1
+% assert grille == [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-028}
+\begin{enumerate}
+  \item Les trois affichages sont :
+\begin{console}
+[1, 0, 0]
+[0, 1, 0]
+[0, 0, 1]
+\end{console}
+  La boucle \lstinline{for i in range(3)} place un \lstinline{1} à la position \lstinline{grille[i][i]}, c'est-à-dire sur la diagonale principale.
+
+  \item Cette grille représente la \textbf{matrice identité} d'ordre 3 (notée $I_3$), avec des 1 sur la diagonale principale et des 0 partout ailleurs.
+\end{enumerate}
+\end{corrige}

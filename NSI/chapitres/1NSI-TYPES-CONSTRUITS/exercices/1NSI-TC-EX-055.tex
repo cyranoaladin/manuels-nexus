@@ -1,0 +1,48 @@
+% META: {"id": "1NSI-TC-EX-055", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "parcours": 3, "competences": ["programmer", "modeliser"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def historique_scores(equipes, resultats):
+%     # equipes est une liste de dicos avec cle "nom" et "scores" (liste)
+%     # resultats est une liste de tuples (nom, score)
+%     # on ajoute chaque score a la bonne equipe, sans effet de bord
+%     copie = []
+%     for e in equipes:
+%         copie.append({"nom": e["nom"], "scores": list(e["scores"])})
+%     for nom, score in resultats:
+%         for e in copie:
+%             if e["nom"] == nom:
+%                 e["scores"].append(score)
+%     return copie
+% equipes = [{"nom": "A", "scores": [10, 20]},
+%             {"nom": "B", "scores": [15]}]
+% nouvelles = historique_scores(equipes, [("A", 30), ("B", 25)])
+% assert equipes[0]["scores"] == [10, 20]
+% assert nouvelles[0]["scores"] == [10, 20, 30]
+% assert equipes[1]["scores"] == [15]
+% assert nouvelles[1]["scores"] == [15, 25]
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-055}{3}{20}
+On représente des équipes d'e-sport par une liste de dictionnaires ayant les clés
+\lstinline{"nom"} et \lstinline{"scores"} (une liste d'entiers).
+
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{historique_scores(equipes, resultats)} qui :
+        \begin{itemize}
+          \item prend la liste des équipes et une liste de tuples
+                \lstinline{(nom, score)} ;
+          \item renvoie une \textbf{nouvelle} liste d'équipes où les scores ont été
+                ajoutés ;
+          \item \textbf{ne modifie pas} la liste d'origine (ni les dictionnaires,
+                ni les listes de scores qu'ils contiennent).
+        \end{itemize}
+  \item Tester avec :
+\begin{python}
+equipes = [{"nom": "A", "scores": [10, 20]},
+            {"nom": "B", "scores": [15]}]
+nouvelles = historique_scores(equipes, [("A", 30), ("B", 25)])
+print(equipes[0]["scores"])   # [10, 20]
+print(nouvelles[0]["scores"]) # [10, 20, 30]
+\end{python}
+  \item Expliquer pourquoi il faut copier à la fois les dictionnaires et les listes
+        de scores.
+\end{enumerate}
+\end{exercice}

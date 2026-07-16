@@ -1,0 +1,17 @@
+% META: {"id": "1NSI-TC-CO-010", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{corrige}{1NSI-TC-EX-010}
+\begin{enumerate}
+  \item Les trois affichages sont :
+  \begin{itemize}
+    \item \lstinline{(3, 7)} --- le tuple \lstinline{a} n'est pas modifié (les tuples sont non mutables, et \lstinline{swap} renvoie un \emph{nouveau} tuple).
+    \item \lstinline{(7, 3)} --- \lstinline{b} contient le tuple renvoyé par \lstinline{swap(a)}, dont les deux premiers éléments sont inversés.
+    \item \lstinline{(2, 1)} --- \lstinline{swap(c)} échange les éléments d'indices 0 et 1 de \lstinline{c}.
+  \end{itemize}
+
+  \item Non, \lstinline{a} n'est pas modifié. Un tuple est non mutable : la fonction \lstinline{swap} construit et renvoie un nouveau tuple sans toucher à l'original. Après l'appel, \lstinline{a} vaut toujours \lstinline{(3, 7)}.
+
+  \item La fonction \lstinline{swap(c)} renvoie \lstinline{(2, 1)} : elle ne considère que les indices 0 et 1. Le troisième élément (la valeur 3) n'apparaît pas dans le résultat, mais il n'est pas « perdu » : le tuple \lstinline{c} vaut toujours \lstinline{(1, 2, 3)} puisqu'il est non mutable.
+\end{enumerate}
+
+Vérification : les résultats ont été confirmés par exécution.
+\end{corrige}

@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-TC-EX-016", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "parcours": 1, "competences": ["programmer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def moyenne(tab):
+%     somme = 0
+%     for val in tab:
+%         somme = somme + val
+%     return somme / len(tab)
+% assert moyenne([10, 20, 30]) == 20.0
+% assert moyenne([15]) == 15.0
+% assert abs(moyenne([12, 8, 15, 3, 20]) - 11.6) < 1e-9
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-016}{1}{8}
+Écrire une fonction \lstinline{moyenne(tab)} qui prend un tableau non vide d'entiers
+et renvoie la moyenne de ses éléments.
+
+\textbf{Exemples :}
+\begin{console}
+>>> moyenne([10, 20, 30])
+20.0
+>>> moyenne([12, 8, 15, 3, 20])
+11.6
+\end{console}
+\end{exercice}

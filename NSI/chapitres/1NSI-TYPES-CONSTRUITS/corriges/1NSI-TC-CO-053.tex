@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-TC-CO-053", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% grille = [[1, 2], [3, 4]]
+% copie = list(grille)
+% copie[0][0] = 99
+% assert grille[0][0] == 99
+% copie[0] = [10, 20]
+% assert grille[0] == [99, 2]
+% # Copie profonde sans module copy
+% grille2 = [[1, 2], [3, 4]]
+% copie_profonde = [list(ligne) for ligne in grille2]
+% copie_profonde[0][0] = 99
+% assert grille2[0][0] == 1
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-053}
+\begin{enumerate}
+  \item Le programme affiche :
+\begin{console}
+99
+[99, 2]
+\end{console}
+
+  \item \lstinline{list(grille)} crée une nouvelle liste, mais ses éléments (les sous-listes) restent les \textbf{mêmes objets} que dans \lstinline{grille}. Ainsi, \lstinline{copie[0]} et \lstinline{grille[0]} pointent vers la même sous-liste. Quand on exécute \lstinline{copie[0][0] = 99}, on modifie cette sous-liste partagée, donc \lstinline{grille[0][0]} vaut aussi \lstinline{99}.
+
+  \item Une \textbf{copie superficielle} duplique la structure de premier niveau (la liste externe) mais pas les objets contenus. Les sous-listes ne sont pas copiées : elles restent partagées entre l'original et la copie. La ligne \lstinline{copie[0] = [10, 20]} remplace la référence dans \lstinline{copie} sans toucher \lstinline{grille}, mais une modification \emph{à l'intérieur} d'une sous-liste partagée affecte les deux.
+
+  \item On peut créer une copie profonde avec une liste en compréhension :
+\begin{python}
+copie_profonde = [list(ligne) for ligne in grille]
+\end{python}
+Chaque sous-liste est copiée individuellement, donc aucune modification de \lstinline{copie_profonde} n'affecte \lstinline{grille}.
+\end{enumerate}
+\end{corrige}

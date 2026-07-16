@@ -1,0 +1,40 @@
+% META: {"id": "1NSI-TC-M3", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "methode", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+\begin{fichemethode}{M3}{Parcourir une grille ligne par ligne}
+\textbf{Quand l'utiliser ?} Quand tu travailles avec un tableau de tableaux (grille, image, plateau de jeu) et que tu dois accéder à chaque case.
+
+\textbf{Pas à pas :}
+\begin{enumerate}
+  \item Repère le nombre de lignes : \lstinline{nb_lignes = len(grille)}.
+  \item Repère le nombre de colonnes : \lstinline{nb_colonnes = len(grille[0])}.
+  \item Écris une première boucle \lstinline{for i in range(nb_lignes)} pour parcourir les lignes.
+  \item Écris une seconde boucle imbriquée \lstinline{for j in range(nb_colonnes)} pour parcourir les colonnes.
+  \item Accède à la case courante avec \lstinline{grille[i][j]}.
+\end{enumerate}
+
+\textbf{Exemple :}
+\begin{python}
+grille = [
+    [1, 2, 3],
+    [4, 5, 6],
+]
+
+for i in range(len(grille)):
+    for j in range(len(grille[0])):
+        print(grille[i][j], end=" ")
+    print()  # retour a la ligne apres chaque ligne
+# Affiche :
+# 1 2 3
+# 4 5 6
+\end{python}
+
+\textbf{Pièges :}
+\begin{itemize}
+  \item Confondre lignes et colonnes : \lstinline{grille[i]} est la ligne \lstinline{i} ; \lstinline{grille[i][j]} est la case à la ligne \lstinline{i}, colonne \lstinline{j}.
+  \item Inverser les indices : \lstinline{grille[j][i]} au lieu de \lstinline{grille[i][j]} donne un résultat faux (et parfois une erreur d'indice).
+  \item Supposer que toutes les lignes ont la même longueur sans le vérifier.
+\end{itemize}
+
+\textbf{Vérifier :} affiche \lstinline{i, j, grille[i][j]} dans la boucle pour contrôler que chaque case est bien visitée.
+
+\textbf{S'entraîner :} exercices C3.
+\end{fichemethode}

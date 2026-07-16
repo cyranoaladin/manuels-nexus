@@ -1,0 +1,234 @@
+\section{P04 - Évaluation - Types construits complément}
+
+\textbf{Durée : 20 minutes \textbar{} Sans ordinateur \textbar{}
+Documents interdits}
+
+\subsection{Capacités officielles atomiques}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-01 : Écrire une fonction renvoyant un p-uplet de valeurs
+\item
+  P-DATA-CONSTR-02B : Construire un tableau par compréhension
+\item
+  P-DATA-CONSTR-02C : Utiliser des tableaux de tableaux pour représenter
+  des matrices
+\item
+  P-DATA-CONSTR-03A : Construire une entrée de dictionnaire
+\item
+  P-DATA-CONSTR-03B : Itérer sur les éléments d'un dictionnaire
+\item
+  P-DATA-CONSTR-03C : Utiliser les méthodes keys, values et items
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Question 1 - P-DATA-CONSTR-01 (4 points)}
+
+On considère la fonction suivante :
+
+\begin{python}
+def encadrer(n):
+    return n - 1, n + 1
+\end{python}
+
+\textbf{1a.} (1 pt) Quel est le type de la valeur renvoyée par
+\texttt{encadrer(5)} ?
+
+\textbf{1b.} (1 pt) Donner les valeurs de \texttt{a} et \texttt{b} après
+l'exécution de :
+
+\begin{python}
+a, b = encadrer(10)
+\end{python}
+
+\textbf{1c.} (2 pts) Écrire une fonction
+\texttt{aire\_perimetre(longueur,\ largeur)} qui renvoie un tuple
+contenant l'aire et le périmètre d'un rectangle. Donner le résultat pour
+\texttt{longueur\ =\ 5} et \texttt{largeur\ =\ 3}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Question 2 - P-DATA-CONSTR-02B (4 points)}
+
+\textbf{2a.} (2 pts) Déterminer le contenu des listes suivantes :
+
+\begin{python}
+L1 = [x ** 2 for x in range(10)]
+L2 = [n for n in range(1, 16) if n % 5 == 0]
+\end{python}
+
+\textbf{2b.} (2 pts) Écrire une compréhension de liste qui, a partir
+d'une liste \texttt{notes}, produit la liste des notes supérieures ou
+égales a 10. Appliquer avec
+\texttt{notes\ =\ {[}8,\ 12,\ 5,\ 16,\ 10,\ 3{]}}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Question 3 - P-DATA-CONSTR-02C (4 points)}
+
+On donne :
+
+\begin{python}
+grille = [
+    [2, 7, 1],
+    [8, 3, 5],
+    [4, 9, 6],
+]
+\end{python}
+
+\textbf{3a.} (1 pt) Donner la valeur de \texttt{grille{[}1{]}{[}2{]}} et
+\texttt{grille{[}2{]}{[}0{]}}.
+
+\textbf{3b.} (1 pt) Écrire les expressions Python qui donnent le nombre
+de lignes et le nombre de colonnes.
+
+\textbf{3c.} (2 pts) Écrire une fonction
+\texttt{somme\_ligne(matrice,\ i)} qui renvoie la somme des éléments de
+la ligne \texttt{i}. Donner le résultat pour la ligne 0 de
+\texttt{grille}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Question 4 - P-DATA-CONSTR-03A (4 points)}
+
+\textbf{4a.} (2 pts) Compléter le code suivant pour construire un
+dictionnaire \lstinline|eleve| avec les entrées \lstinline|"nom"| (valeur
+\texttt{"Martin"}), \texttt{"prenom"} (valeur \texttt{"Léa"}),
+\texttt{"age"} (valeur \texttt{16}) et \texttt{"classe"} (valeur
+\texttt{"1NSI"}).
+
+\begin{python}
+eleve = {}
+eleve[_____] = _____
+eleve[_____] = _____
+eleve[_____] = _____
+eleve[_____] = _____
+\end{python}
+
+\textbf{4b.} (1 pt) Que se passe-t-il si on exécute ensuite
+\lstinline|eleve["age"] = 17| ? Quelle est la nouvelle valeur de
+\lstinline|eleve["age"]| ?
+
+\textbf{4c.} (1 pt) Pourquoi l'instruction
+\texttt{d{[}{[}1,\ 2{]}{]}\ =\ "valeur"} provoque-t-elle une erreur ?
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Question 5 - P-DATA-CONSTR-03B, P-DATA-CONSTR-03C (4 points)}
+
+On donne :
+
+\begin{python}
+scores = {"Alice": 85, "Bob": 72, "Clara": 91}
+\end{python}
+
+\textbf{5a.} (1 pt) Écrire ce qu'affiche le code suivant :
+
+\begin{python}
+for nom in scores:
+    print(nom)
+\end{python}
+
+\textbf{5b.} (1 pt) Écrire une boucle qui affiche chaque entrée sous la
+forme \texttt{"Alice\ a\ obtenu\ 85"}, en utilisant \texttt{.items()}.
+
+\textbf{5c.} (2 pts) Écrire une fonction \texttt{meilleur\_score(d)} qui
+prend un dictionnaire \texttt{\{nom:\ score\}} et renvoie le tuple
+\texttt{(nom,\ score)} correspondant au score le plus élevé.
+
+\subsection{Objectifs}
+
+\subsection{Prérequis}
+
+\subsection{Situation-problème}
+
+Un programme de gestion de notes doit stocker, pour chaque élève, son
+nom et ses notes dans différentes matières. Quelle structure de données
+choisir et comment organiser les accès ?
+
+\subsection{Activité d’entrée}
+
+Écrire une fonction Python qui reçoit deux nombres et renvoie à la fois
+leur somme et leur produit. Tester avec \lstinline|print(resultat[0], resultat[1])|.
+
+\subsection{Exemple}
+
+Écriture collective d'une fonction coordonnees() renvoyant un tuple (x,
+y) et d'une compréhension {[}i**2 for i in range(5){]}.
+
+\subsection{Exercices}
+
+Exercices de manipulation de tuples, listes en compréhension, matrices
+et dictionnaires.
+
+\subsection{Corrigé}
+
+Les corrigés détaillés sont dans
+P04\_corrige\_types\_construits\_complement.md.
+
+\subsection{Erreurs fréquentes}
+
+\begin{itemize}
+\tightlist
+\item
+  EF1 : confondre tuple (immutable) et liste (mutable) lors du retour de
+  fonction.
+\item
+  EF2 : oublier les crochets dans une compréhension de liste.
+\item
+  EF3 : accéder à une clé inexistante d'un dictionnaire sans utiliser
+  get().
+\end{itemize}
+
+\subsection{Remédiation}
+
+Exercice de remédiation : écrire une fonction min\_max qui renvoie le
+minimum et le maximum d'une liste sous forme de tuple.
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : exercices de base.
+\item
+  Standard : exercices complets.
+\item
+  Expert : exercice d'approfondissement.
+\end{itemize}
+
+\subsection{Barème}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Question & Points \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Question 1 & 4 \\
+Question 2 & 4 \\
+Question 3 & 4 \\
+Question 4 & 4 \\
+Question 5 & 4 \\
+\textbf{Total} & \textbf{20} \\
+\end{longtable}
+
+\subsection{Critères de réussite}
+
+Fonction renvoyant un tuple vérifiée. Compréhension de liste correcte.
+Matrice accessible par double index. Dictionnaire itéré avec
+keys/values/items.
+
+\subsection{Séance(s) correspondante(s)}
+
+Séance dédiée.
+
+Cas limite : tuple vide renvoyé. Cas limite : compréhension sur une
+liste vide. Cas limite : dictionnaire vide itéré. Cas limite : clé
+absente dans le dictionnaire.
+
+Critère de validation : chaque réponse est vérifiable par un contrôle
+explicite.

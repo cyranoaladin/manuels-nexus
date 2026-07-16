@@ -1,0 +1,25 @@
+% META: {"id": "1NSI-TC-CO-025", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% grille = [[1, 2, 3],
+%            [4, 5, 6]]
+% assert grille[0][1] == 2
+% assert grille[1][2] == 6
+% assert len(grille) == 2
+% assert len(grille[0]) == 3
+% assert grille[1][0] == 4
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-025}
+\begin{enumerate}
+  \item Les quatre affichages sont :
+  \begin{itemize}
+    \item \lstinline{grille[0][1]} vaut \lstinline{2} (ligne 0, colonne 1).
+    \item \lstinline{grille[1][2]} vaut \lstinline{6} (ligne 1, colonne 2).
+    \item \lstinline{len(grille)} vaut \lstinline{2} (nombre de lignes).
+    \item \lstinline{len(grille[0])} vaut \lstinline{3} (nombre de colonnes).
+  \end{itemize}
+
+  \item La grille possède 2 lignes et 3 colonnes.
+
+  \item L'expression \lstinline{grille[1][0]} permet d'accéder à la valeur \lstinline{4} (ligne d'indice 1, colonne d'indice 0).
+\end{enumerate}
+\end{corrige}

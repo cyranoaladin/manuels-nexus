@@ -1,0 +1,45 @@
+% META: {"id": "1NSI-TC-CO-011", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def classer_matchs(matchs):
+%     victoires = []
+%     defaites = []
+%     nuls = []
+%     for equipe, score_pour, score_contre in matchs:
+%         if score_pour > score_contre:
+%             victoires.append(equipe)
+%         elif score_pour < score_contre:
+%             defaites.append(equipe)
+%         else:
+%             nuls.append(equipe)
+%     return (victoires, defaites, nuls)
+% matchs = [("A", 3, 1), ("B", 0, 2), ("C", 1, 1)]
+% v, d, n = classer_matchs(matchs)
+% assert v == ["A"]
+% assert d == ["B"]
+% assert n == ["C"]
+% matchs2 = [("X", 2, 2), ("Y", 2, 2)]
+% v2, d2, n2 = classer_matchs(matchs2)
+% assert v2 == [] and d2 == [] and n2 == ["X", "Y"]
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-011}
+On crée trois listes accumulatrices et on classe chaque équipe selon la comparaison des scores :
+
+\begin{python}
+def classer_matchs(matchs):
+    victoires = []
+    defaites = []
+    nuls = []
+    for equipe, score_pour, score_contre in matchs:
+        if score_pour > score_contre:
+            victoires.append(equipe)
+        elif score_pour < score_contre:
+            defaites.append(equipe)
+        else:
+            nuls.append(equipe)
+    return (victoires, defaites, nuls)
+\end{python}
+
+Le déballage \lstinline{for equipe, score_pour, score_contre in matchs} extrait directement les trois composantes de chaque tuple. La structure conditionnelle \lstinline{if / elif / else} couvre les trois cas possibles (victoire, défaite, match nul). La fonction renvoie un tuple de trois listes.
+
+Vérification : \lstinline{classer_matchs([("A", 3, 1), ("B", 0, 2), ("C", 1, 1)])} renvoie bien \lstinline{(["A"], ["B"], ["C"])}.
+\end{corrige}

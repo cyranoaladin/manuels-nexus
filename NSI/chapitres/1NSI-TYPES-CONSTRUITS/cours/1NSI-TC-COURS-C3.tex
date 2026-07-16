@@ -1,0 +1,115 @@
+% META: {"id": "1NSI-TC-COURS-C3", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "cours", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "adaptation", "sources_inspiration": ["corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md"], "status": "needs_review"}
+\section{Les grilles : tableaux de tableaux}
+\label{sec:grilles}
+
+\margeAppui{Une grille (ou matrice) se représente en Python par un tableau dont chaque
+élément est lui-même un tableau. On parle de \emph{tableau à deux dimensions}.}
+
+\begin{nxdef}[D7]
+  Une \textbf{grille} est un tableau de tableaux où chaque sous-tableau représente une ligne.
+  On accède à l'élément de la ligne \lstinline{i} et de la colonne \lstinline{j}
+  par \lstinline{grille[i][j]}.
+\end{nxdef}
+
+\exemple{Une grille de pixels en niveaux de gris (0 = noir, 255 = blanc) :}
+
+\begin{python}
+image = [
+    [0,   0,   0],
+    [0, 255,   0],
+    [0,   0,   0],
+]
+print(image[1][1])  # 255 (pixel central)
+\end{python}
+
+% BEGIN-TRACE
+% image = [[0, 0, 0], [0, 255, 0], [0, 0, 0]]
+% print(image[1][1])
+% EXPECTED
+% 255
+% END-TRACE
+
+\begin{nxfigure}{Accès à un élément d'une grille 3$\times$3}
+\begin{tikzpicture}
+  \foreach \i/\v in {0/0, 1/0, 2/0}{
+    \node[nxcell] at ({\i*2.2em}, 0) {\v};
+    \node[font=\tiny\sffamily,color=nxGris] at ({\i*2.2em}, 0.9em) {\i};}
+  \foreach \i/\v in {0/0, 1/255, 2/0}{
+    \node[nxcell,fill=nxOr!20] at ({\i*2.2em}, -1.8em) {\v};
+    \node[font=\tiny\sffamily,color=nxGris] at ({\i*2.2em}, -0.9em) {\i};}
+  \foreach \i/\v in {0/0, 1/0, 2/0}{
+    \node[nxcell] at ({\i*2.2em}, -3.6em) {\v};}
+  \node[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, 0) {ligne 0};
+  \node[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, -1.8em) {ligne 1};
+  \node[font=\tiny\sffamily,color=nxGris,anchor=east] at (-1em, -3.6em) {ligne 2};
+  \draw[nxarrow,nxOr] (3.5em, -3em) -- (2.2em, -1.8em)
+    node[midway,right,font=\footnotesize\sffamily] {\lstinline{image[1][1]}};
+\end{tikzpicture}
+\end{nxfigure}
+
+\begin{codereference}{Parcours d'une grille}
+\begin{python}
+def afficher_grille(grille):
+    """Affiche une grille ligne par ligne."""
+    for ligne in grille:
+        for valeur in ligne:
+            print(f"{valeur:4d}", end="")
+        print()
+
+def nb_lignes(grille):
+    """Renvoie le nombre de lignes."""
+    return len(grille)
+
+def nb_colonnes(grille):
+    """Renvoie le nombre de colonnes (suppose grille non vide)."""
+    return len(grille[0])
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def nb_lignes(g): return len(g)
+% def nb_colonnes(g): return len(g[0])
+% g = [[1, 2, 3], [4, 5, 6]]
+% assert nb_lignes(g) == 2
+% assert nb_colonnes(g) == 3
+% END-VERIFY
+
+\erreurFrequente{Confondre lignes et colonnes. Dans \lstinline{grille[i][j]},
+\lstinline{i} est le numéro de \emph{ligne} et \lstinline{j} le numéro de \emph{colonne}.}
+
+\begin{nxdef}[D8]
+  Pour construire une grille $n \times m$ remplie de zéros, on utilise une
+  \textbf{compréhension imbriquée} :
+  \lstinline{[[0 for j in range(m)] for i in range(n)]}.
+\end{nxdef}
+
+\contreexemple{Ne jamais écrire \lstinline{[[0] * m] * n} : toutes les lignes
+seraient des \emph{alias} du même objet (voir section~\ref{sec:mutabilite}).}
+
+\begin{python}
+# CORRECT : chaque ligne est un objet distinct
+grille = [[0 for j in range(3)] for i in range(3)]
+grille[0][0] = 1
+print(grille)  # [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
+
+# INCORRECT : alias dangereux
+mauvaise = [[0] * 3] * 3
+mauvaise[0][0] = 1
+print(mauvaise)  # [[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+\end{python}
+
+% BEGIN-TRACE
+% grille = [[0 for j in range(3)] for i in range(3)]
+% grille[0][0] = 1
+% print(grille)
+% mauvaise = [[0] * 3] * 3
+% mauvaise[0][0] = 1
+% print(mauvaise)
+% EXPECTED
+% [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
+% [[1, 0, 0], [1, 0, 0], [1, 0, 0]]
+% END-TRACE
+
+\alamachine{Construis une grille 4$\times$4 de zéros en compréhension. Place un 1 sur
+la diagonale (\lstinline{grille[i][i] = 1} pour chaque \lstinline{i}). Affiche le résultat
+et vérifie que tu obtiens la matrice identité.}

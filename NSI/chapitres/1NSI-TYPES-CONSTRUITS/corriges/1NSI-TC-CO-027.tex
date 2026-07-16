@@ -1,0 +1,31 @@
+% META: {"id": "1NSI-TC-CO-027", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def creer_grille(n, p, valeur):
+%     grille = []
+%     for i in range(n):
+%         ligne = []
+%         for j in range(p):
+%             ligne.append(valeur)
+%         grille.append(ligne)
+%     return grille
+% g = creer_grille(2, 3, 0)
+% assert g == [[0, 0, 0], [0, 0, 0]]
+% assert len(g) == 2
+% assert len(g[0]) == 3
+% g[0][0] = 5
+% assert g[1][0] == 0
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-027}
+\begin{python}
+def creer_grille(n, p, valeur):
+    grille = []
+    for i in range(n):
+        ligne = []
+        for j in range(p):
+            ligne.append(valeur)
+        grille.append(ligne)
+    return grille
+\end{python}
+
+L'écriture \lstinline{[[valeur] * p] * n} est incorrecte car l'opérateur \lstinline{*} sur une liste crée \lstinline{n} références vers \emph{la même} sous-liste. Modifier une case d'une ligne modifierait toutes les lignes (effet de bord dû à l'aliasing).
+\end{corrige}

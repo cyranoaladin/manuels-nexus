@@ -1,0 +1,37 @@
+% META: {"id": "1NSI-TC-EX-033", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "parcours": 3, "competences": ["programmer", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def zone_chaude(carte, seuil):
+%     n = len(carte)
+%     p = len(carte[0])
+%     zone = []
+%     for i in range(n):
+%         ligne = []
+%         for j in range(p):
+%             if carte[i][j] >= seuil:
+%                 ligne.append(1)
+%             else:
+%                 ligne.append(0)
+%         zone.append(ligne)
+%     return zone
+% assert zone_chaude([[30, 25], [35, 28]], 30) == [[1, 0], [1, 0]]
+% assert zone_chaude([[10, 20], [30, 40]], 25) == [[0, 0], [1, 1]]
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-033}{3}{15}
+On dispose d'une carte de températures sous forme de grille. On veut créer une
+\textbf{carte binaire} identifiant les zones de chaleur.
+
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{zone_chaude(carte, seuil)} qui renvoie une
+        nouvelle grille de même taille contenant \lstinline{1} si la température est
+        supérieure ou égale au seuil, et \lstinline{0} sinon.
+  \item Tester avec la carte :
+\begin{python}
+carte = [[30, 25, 32],
+          [28, 35, 31],
+          [22, 19, 27]]
+\end{python}
+        et un seuil de 30.
+  \item Proposer une fonction qui compte le nombre de cases à 1 dans la grille
+        résultat.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TC-EX-019", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "parcours": 2, "competences": ["analyser", "programmer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% def mystere(tab):
+%     resultat = []
+%     for i in range(len(tab)):
+%         if tab[i] not in resultat:
+%             resultat.append(tab[i])
+%     return resultat
+% print(mystere([3, 1, 3, 2, 1, 3]))
+% EXPECTED
+% [3, 1, 2]
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-019}{2}{10}
+On considère la fonction suivante :
+\begin{python}
+def mystere(tab):
+    resultat = []
+    for i in range(len(tab)):
+        if tab[i] not in resultat:
+            resultat.append(tab[i])
+    return resultat
+print(mystere([3, 1, 3, 2, 1, 3]))
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, l'affichage produit.
+  \item Décrire en une phrase le rôle de cette fonction.
+  \item Réécrire le corps de la fonction en parcourant directement les éléments
+        (sans utiliser les indices).
+\end{enumerate}
+\end{exercice}

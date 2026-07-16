@@ -1,0 +1,710 @@
+\section{P04 - Cours - Types construits complément}
+
+\subsection{Objectifs spécifiques}
+
+\begin{itemize}
+\tightlist
+\item
+  Objectif O1 - Identifier précisément la représentation ou la structure
+  en jeu.
+\item
+  Objectif O2 - Appliquer une méthode disciplinaire complète.
+\item
+  Objectif O3 - Justifier le résultat sur un cas différent.
+\item
+  Objectif O4 - Contrôler un cas limite et corriger une erreur observée.
+\end{itemize}
+
+\subsection{Capacités officielles atomiques}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-01 : Écrire une fonction renvoyant un p-uplet de valeurs
+\item
+  P-DATA-CONSTR-02B : Construire un tableau par compréhension
+\item
+  P-DATA-CONSTR-02C : Utiliser des tableaux de tableaux pour représenter
+  des matrices
+\item
+  P-DATA-CONSTR-03A : Construire une entrée de dictionnaire
+\item
+  P-DATA-CONSTR-03B : Itérer sur les éléments d'un dictionnaire
+\item
+  P-DATA-CONSTR-03C : Utiliser les méthodes keys, values et items
+\end{itemize}
+
+\subsection{Prérequis}
+
+\begin{itemize}
+\tightlist
+\item
+  Connaître les types de base en Python (int, float, str, bool).
+\item
+  Savoir définir et appeler une fonction avec \texttt{def} et
+  \texttt{return}.
+\item
+  Connaître la syntaxe de base des tuples, listes et dictionnaires
+  (séquence P04 initiale).
+\item
+  Maîtriser les boucles \texttt{for} et \texttt{while}.
+\end{itemize}
+
+\subsection{Séance(s) correspondante(s)}
+
+\begin{itemize}
+\tightlist
+\item
+  P04-S1 à P04-S7 : support rattaché aux séances prêtes de la
+  progression.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. P-DATA-CONSTR-01 : Écrire une fonction renvoyant un p-uplet de valeurs}
+
+\subsubsection{Définition}
+
+Un \textbf{p-uplet} (tuple) est une collection ordonnée et
+\textbf{immuable} de valeurs. Une fonction peut renvoyer plusieurs
+valeurs simultanément en les regroupant dans un p-uplet grâce à
+l'instruction \texttt{return}.
+
+La syntaxe \texttt{return\ a,\ b} est équivalente à
+\texttt{return\ (a,\ b)}. Python construit automatiquement un tuple.
+
+\subsubsection{Formalisation}
+
+\begin{python}
+def nom_fonction(parametres):
+    # calculs
+    return valeur1, valeur2  # renvoie un tuple (valeur1, valeur2)
+\end{python}
+
+Le tuple renvoyé peut être déballé lors de l'appel :
+
+\begin{python}
+x, y = nom_fonction(arguments)
+\end{python}
+
+\subsubsection{Exemple corrigé 1 - Fonction renvoyant min et max}
+
+\begin{python}
+def min_max(tableau):
+    """Renvoie le minimum et le maximum d'un tableau non vide."""
+    mini = tableau[0]
+    maxi = tableau[0]
+    for val in tableau:
+        if val < mini:
+            mini = val
+        if val > maxi:
+            maxi = val
+    return mini, maxi
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : \texttt{{[}7,\ 2,\ 9,\ 4,\ 1{]}}.
+\item
+  Méthode : parcours complet pour trouver les deux extrema.
+\item
+  Résultat obtenu : \texttt{(1,\ 9)}.
+\item
+  Déballage :
+  \texttt{plus\_petit,\ plus\_grand\ =\ min\_max({[}7,\ 2,\ 9,\ 4,\ 1{]})}.
+\end{itemize}
+
+\subsubsection{Exemple corrigé 2 - Coordonnées d’un point milieu}
+
+\begin{python}
+def milieu(xa, ya, xb, yb):
+    """Renvoie les coordonnées du milieu de [AB]."""
+    mx = (xa + xb) / 2
+    my = (ya + yb) / 2
+    return mx, my
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : \texttt{A(0,\ 0)} et \texttt{B(6,\ 4)}.
+\item
+  Résultat obtenu : \texttt{(3.0,\ 2.0)}.
+\end{itemize}
+
+\subsubsection{Cas limites}
+
+\begin{itemize}
+\tightlist
+\item
+  Tableau d'un seul élément pour \texttt{min\_max} : renvoie
+  \texttt{(e,\ e)} avec le même élément en min et max.
+\item
+  Tableau vide : provoque une erreur \texttt{IndexError} car
+  \texttt{tableau{[}0{]}} est impossible. Il convient de documenter la
+  précondition ou de lever une exception explicite.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. P-DATA-CONSTR-02B : Construire un tableau par compréhension}
+
+\subsubsection{Définition}
+
+Un \textbf{tableau par compréhension} (\lstinline|list comprehension|) permet de
+construire une liste en une seule expression lisible. On se limite aux
+formes simples et lisibles.
+
+\subsubsection{Formalisation}
+
+\begin{python}
+nouveau_tableau = [expression for variable in iterable]
+\end{python}
+
+Avec filtre optionnel :
+
+\begin{python}
+nouveau_tableau = [expression for variable in iterable if condition]
+\end{python}
+
+\subsubsection{Exemple corrigé 1 - Carrés des entiers}
+
+\begin{python}
+carres = [x ** 2 for x in range(10)]
+# Résultat : [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : les entiers de 0 à 9.
+\item
+  Méthode : appliquer l'opération \texttt{x\ **\ 2} à chaque entier.
+\item
+  Résultat obtenu : liste de 10 carrés parfaits.
+\end{itemize}
+
+\subsubsection{Exemple corrigé 2 - Filtrer les valeurs paires}
+
+\begin{python}
+pairs = [n for n in range(20) if n % 2 == 0]
+# Résultat : [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+\end{python}
+
+\subsubsection{Exemple corrigé 3 - Conversion de températures}
+
+\begin{python}
+celsius = [0, 10, 20, 30, 40]
+fahrenheit = [c * 9 / 5 + 32 for c in celsius]
+# Résultat : [32.0, 50.0, 68.0, 86.0, 104.0]
+\end{python}
+
+\subsubsection{Cas limites}
+
+\begin{itemize}
+\tightlist
+\item
+  Compréhension sur un itérable vide :
+  \texttt{{[}x\ for\ x\ in\ {[}{]}{]}} produit \texttt{{[}{]}}.
+\item
+  Expression constante : \texttt{{[}0\ for\ \_\ in\ range(5){]}} produit
+  \texttt{{[}0,\ 0,\ 0,\ 0,\ 0{]}}, utile pour initialiser un tableau.
+\end{itemize}
+
+\subsubsection{Remarque importante}
+
+On ne demande pas d'écrire des compréhensions imbriquées complexes. La
+lisibilité prime : si l'expression devient difficile à lire, on préfère
+une boucle classique.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. P-DATA-CONSTR-02C : Utiliser des tableaux de tableaux pour représenter des matrices}
+
+\subsubsection{Définition}
+
+Une \textbf{matrice} est représentée en Python par une \textbf{liste de
+listes} (tableau de tableaux). Chaque sous-liste représente une ligne.
+L'accès à l'élément en ligne \texttt{i}, colonne \texttt{j} se fait par
+\texttt{matrice{[}i{]}{[}j{]}}. On n'utilise pas de bibliothèque externe
+(pas de NumPy).
+
+\subsubsection{Formalisation}
+
+Une matrice de \texttt{n} lignes et \texttt{p} colonnes :
+
+\begin{python}
+matrice = [
+    [a00, a01, a02],  # ligne 0
+    [a10, a11, a12],  # ligne 1
+    [a20, a21, a22],  # ligne 2
+]
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{matrice{[}i{]}} donne la ligne \texttt{i} (une liste).
+\item
+  \texttt{matrice{[}i{]}{[}j{]}} donne l'élément en ligne \texttt{i},
+  colonne \texttt{j}.
+\item
+  \texttt{len(matrice)} donne le nombre de lignes.
+\item
+  \texttt{len(matrice{[}0{]})} donne le nombre de colonnes.
+\end{itemize}
+
+\subsubsection{Exemple corrigé 1 - Création et accès}
+
+\begin{python}
+notes = [
+    [12, 15, 8],
+    [14, 10, 16],
+    [9, 11, 13],
+]
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{notes{[}0{]}{[}1{]}} vaut \texttt{15} (ligne 0, colonne 1).
+\item
+  \texttt{notes{[}2{]}{[}2{]}} vaut \texttt{13} (ligne 2, colonne 2).
+\end{itemize}
+
+\subsubsection{Exemple corrigé 2 - Parcours complet d’une matrice}
+
+\begin{python}
+def somme_matrice(matrice):
+    """Renvoie la somme de tous les éléments de la matrice."""
+    total = 0
+    for i in range(len(matrice)):
+        for j in range(len(matrice[i])):
+            total = total + matrice[i][j]
+    return total
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : la matrice \texttt{notes} ci-dessus.
+\item
+  Résultat obtenu :
+  \texttt{12\ +\ 15\ +\ 8\ +\ 14\ +\ 10\ +\ 16\ +\ 9\ +\ 11\ +\ 13\ =\ 108}.
+\end{itemize}
+
+\subsubsection{Exemple corrigé 3 - Initialisation par compréhension}
+
+\begin{python}
+zeros = [[0 for j in range(4)] for i in range(3)]
+# Résultat : [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+\end{python}
+
+\subsubsection{Cas limites et erreur fréquente}
+
+\textbf{Erreur classique} : initialiser avec la multiplication.
+
+\begin{python}
+# INCORRECT : les 3 lignes partagent le même objet en mémoire
+mauvais = [[0] * 4] * 3
+mauvais[0][0] = 1
+# mauvais vaut [[1, 0, 0, 0], [1, 0, 0, 0], [1, 0, 0, 0]]
+\end{python}
+
+La bonne méthode est d'utiliser la compréhension
+\texttt{{[}{[}0{]}*4\ for\ \_\ in\ range(3){]}}.
+
+\begin{itemize}
+\tightlist
+\item
+  Matrice 1x1 : \texttt{{[}{[}5{]}{]}}, accès
+  \texttt{matrice{[}0{]}{[}0{]}}.
+\item
+  Indice hors limites : \texttt{matrice{[}3{]}{[}0{]}} sur une matrice
+  3x3 lève \texttt{IndexError}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. P-DATA-CONSTR-03A : Construire une entrée de dictionnaire}
+
+\subsubsection{Définition}
+
+Un \textbf{dictionnaire} associe des \textbf{clés} à des
+\textbf{valeurs}. Construire une entrée consiste à ajouter ou modifier
+une association \texttt{clé:\ valeur} dans un dictionnaire existant,
+avec la syntaxe \texttt{d{[}cle{]}\ =\ valeur}.
+
+\subsubsection{Formalisation}
+
+\begin{python}
+d = {}              # dictionnaire vide
+d[cle] = valeur     # ajoute ou met à jour l'entrée
+\end{python}
+
+Les clés doivent être de type immuable (str, int, tuple). Les valeurs
+peuvent être de tout type.
+
+\subsubsection{Exemple corrigé 1 - Métadonnées EXIF d’une photo}
+
+\begin{python}
+exif = {}
+exif["appareil"] = "Nikon D3500"
+exif["date"] = "2025-06-15"
+exif["resolution"] = (6000, 4000)
+exif["iso"] = 400
+exif["flash"] = False
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : les métadonnées fictives d'un fichier photo.
+\item
+  Méthode : chaque affectation \texttt{exif{[}cle{]}\ =\ valeur} crée
+  une entrée.
+\item
+  Résultat obtenu :
+  \texttt{\{"appareil":\ "Nikon\ D3500",\ "date":\ "2025-06-15",\ "resolution":\ (6000,\ 4000),\ "iso":\ 400,\ "flash":\ False\}}.
+\end{itemize}
+
+\subsubsection{Exemple corrigé 2 - Mise à jour d’une entrée existante}
+
+\begin{python}
+exif["iso"] = 800  # modification de la valeur associée à la clé "iso"
+\end{python}
+
+Si la clé existe déjà, la valeur est remplacée. Il n'y a pas de doublon
+de clé dans un dictionnaire.
+
+\subsubsection{Exemple corrigé 3 - Construction à partir de données}
+
+\begin{python}
+def compter_occurrences(texte):
+    """Construit un dictionnaire des occurrences de chaque caractère."""
+    compteur = {}
+    for c in texte:
+        if c in compteur:
+            compteur[c] = compteur[c] + 1
+        else:
+            compteur[c] = 1
+    return compteur
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : \texttt{"abracadabra"}.
+\item
+  Résultat obtenu :
+  \texttt{\{\textquotesingle{}a\textquotesingle{}:\ 5,\ \textquotesingle{}b\textquotesingle{}:\ 2,\ \textquotesingle{}r\textquotesingle{}:\ 2,\ \textquotesingle{}c\textquotesingle{}:\ 1,\ \textquotesingle{}d\textquotesingle{}:\ 1\}}.
+\end{itemize}
+
+\subsubsection{Cas limites}
+
+\begin{itemize}
+\tightlist
+\item
+  Clé de type mutable (liste) : \texttt{d{[}{[}1,\ 2{]}{]}\ =\ "x"} lève
+  \texttt{TypeError:\ unhashable\ type:\ \textquotesingle{}list\textquotesingle{}}.
+\item
+  Dictionnaire vide : \texttt{len(\{\})} vaut \texttt{0}, aucune clé
+  n'existe.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{5. P-DATA-CONSTR-03B : Itérer sur les éléments d’un dictionnaire}
+
+\subsubsection{Définition}
+
+Itérer sur un dictionnaire signifie parcourir ses éléments à l'aide
+d'une boucle \texttt{for}. Python offre plusieurs méthodes pour choisir
+ce que l'on parcourt.
+
+\subsubsection{Formalisation}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Syntaxe & Ce qui est parcouru \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{for\ k\ in\ d} & les clés \\
+\texttt{for\ k\ in\ d.keys()} & les clés (explicite) \\
+\texttt{for\ v\ in\ d.values()} & les valeurs \\
+\texttt{for\ k,\ v\ in\ d.items()} & les couples (clé, valeur) \\
+\end{longtable}
+
+\subsubsection{Exemple corrigé 1 - Parcours des clés}
+
+\begin{python}
+exif = {"appareil": "Nikon D3500", "date": "2025-06-15", "iso": 400}
+
+for cle in exif:
+    print(cle)
+# Affiche : appareil, date, iso (un par ligne)
+\end{python}
+
+\subsubsection{Exemple corrigé 2 - Parcours des valeurs}
+
+\begin{python}
+for valeur in exif.values():
+    print(valeur)
+# Affiche : Nikon D3500, 2025-06-15, 400
+\end{python}
+
+\subsubsection{Exemple corrigé 3 - Parcours des couples (clé, valeur)}
+
+\begin{python}
+for cle, valeur in exif.items():
+    print(f"{cle} : {valeur}")
+# Affiche :
+# appareil : Nikon D3500
+# date : 2025-06-15
+# iso : 400
+\end{python}
+
+\subsubsection{Exemple corrigé 4 - Recherche d’une valeur}
+
+\begin{python}
+def trouver_cle(d, valeur_cherchee):
+    """Renvoie la première clé associée à la valeur cherchée, ou None."""
+    for cle, valeur in d.items():
+        if valeur == valeur_cherchee:
+            return cle
+    return None
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : \texttt{exif}, recherche de \texttt{400}.
+\item
+  Résultat obtenu : \texttt{"iso"}.
+\end{itemize}
+
+\subsubsection{Cas limites}
+
+\begin{itemize}
+\tightlist
+\item
+  Itération sur un dictionnaire vide : la boucle ne s'exécute pas.
+\item
+  Modification du dictionnaire pendant l'itération : provoque une erreur
+  \texttt{RuntimeError}. Il faut itérer sur une copie des clés si on
+  veut modifier le dictionnaire.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{6. P-DATA-CONSTR-03C : Utiliser les méthodes keys, values et items}
+
+\subsubsection{Définition}
+
+Les méthodes \texttt{keys()}, \texttt{values()} et \texttt{items()} d'un
+dictionnaire renvoient des objets vue (\emph{view objects}) qui
+reflètent dynamiquement le contenu du dictionnaire. Contrairement à une
+liste, une vue n'est pas une copie : elle se met à jour automatiquement
+si le dictionnaire est modifié en dehors d'une itération.
+
+\subsubsection{Formalisation}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Méthode & Type renvoyé & Contenu \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{d.keys()} & \texttt{dict\_keys} & toutes les clés \\
+\texttt{d.values()} & \texttt{dict\_values} & toutes les valeurs \\
+\texttt{d.items()} & \texttt{dict\_items} & tous les couples
+\texttt{(clé,\ valeur)} \\
+\end{longtable}
+
+Ces objets sont itérables et supportent le test d'appartenance avec
+\texttt{in}, mais ne sont \textbf{pas indexables} :
+\texttt{d.keys(){[}0{]}} provoque une \texttt{TypeError}. Pour obtenir
+une liste, on écrit \texttt{list(d.keys())}.
+
+\subsubsection{Exemple corrigé 1 — Extraire les clés d’un dictionnaire}
+
+\begin{python}
+notes = {"Alice": 16, "Bob": 12, "Clara": 18}
+cles = notes.keys()
+print(cles)          # dict_keys(['Alice', 'Bob', 'Clara'])
+print("Alice" in cles)  # True
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : \texttt{notes}, trois entrées.
+\item
+  Résultat obtenu : un objet \texttt{dict\_keys} contenant les trois
+  prénoms.
+\end{itemize}
+
+\subsubsection{Exemple corrigé 2 — Calculer une moyenne avec values}
+
+\begin{python}
+notes = {"Alice": 16, "Bob": 12, "Clara": 18}
+total = sum(notes.values())
+moyenne = total / len(notes)
+print(moyenne)  # 15.333333333333334
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : \texttt{notes.values()} renvoie
+  \texttt{dict\_values({[}16,\ 12,\ 18{]})}.
+\item
+  Résultat obtenu : la somme vaut 46, la moyenne vaut environ 15.33.
+\end{itemize}
+
+\subsubsection{Exemple corrigé 3 — Trouver le maximum avec items}
+
+\begin{python}
+notes = {"Alice": 16, "Bob": 12, "Clara": 18}
+meilleur_nom = ""
+meilleure_note = -1
+for nom, note in notes.items():
+    if note > meilleure_note:
+        meilleure_note = note
+        meilleur_nom = nom
+print(f"{meilleur_nom} : {meilleure_note}")  # Clara : 18
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Donnée étudiée : les couples \texttt{(nom,\ note)} via
+  \texttt{items()}.
+\item
+  Résultat obtenu : Clara avec 18.
+\end{itemize}
+
+\subsubsection{Exemple corrigé 4 — Vue dynamique}
+
+\begin{python}
+d = {"x": 1, "y": 2}
+vue = d.keys()
+print(list(vue))  # ['x', 'y']
+d["z"] = 3
+print(list(vue))  # ['x', 'y', 'z']; la vue reflète l'ajout
+\end{python}
+
+\begin{itemize}
+\tightlist
+\item
+  Point clé : \texttt{vue} n'est pas une copie figée ; elle suit le
+  dictionnaire.
+\end{itemize}
+
+\subsubsection{Cas limites}
+
+\begin{itemize}
+\tightlist
+\item
+  Sur un dictionnaire vide, \texttt{d.keys()}, \texttt{d.values()} et
+  \texttt{d.items()} renvoient des vues vides (itérables, longueur 0).
+\item
+  Modifier le dictionnaire \textbf{pendant} une itération sur une vue
+  provoque \texttt{RuntimeError}. Solution : itérer sur
+  \texttt{list(d.keys())} si des modifications sont nécessaires.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Synthèse}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2778}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3056}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4167}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Capacité
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Structure
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Opération clé
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+P-DATA-CONSTR-01 & Tuple & \texttt{return\ a,\ b} \\
+P-DATA-CONSTR-02B & Liste &
+\texttt{{[}expr\ for\ var\ in\ iterable{]}} \\
+P-DATA-CONSTR-02C & Liste de listes & \texttt{matrice{[}i{]}{[}j{]}} \\
+P-DATA-CONSTR-03A & Dictionnaire & \texttt{d{[}cle{]}\ =\ valeur} \\
+P-DATA-CONSTR-03B & Dictionnaire & \texttt{for\ k,\ v\ in\ d.items()} \\
+P-DATA-CONSTR-03C & Dictionnaire & \texttt{d.keys()},
+\texttt{d.values()}, \texttt{d.items()} \\
+\end{longtable}
+
+\subsection{Situation-problème}
+
+Un programme de gestion de notes doit stocker, pour chaque élève, son
+nom et ses notes dans différentes matières. Quelle structure de données
+choisir et comment organiser les accès ?
+
+\subsection{Activité d’entrée}
+
+Écrire une fonction Python qui reçoit deux nombres et renvoie à la fois
+leur somme et leur produit. Tester avec \lstinline|print(resultat[0], resultat[1])|.
+
+\subsection{Exercices}
+
+Exercices de manipulation de tuples, listes en compréhension, matrices
+et dictionnaires.
+
+\subsection{Corrigé}
+
+Les corrigés détaillés sont dans
+P04\_corrige\_types\_construits\_complement.md.
+
+\subsection{Erreurs fréquentes}
+
+\begin{itemize}
+\tightlist
+\item
+  EF1 : confondre tuple (immutable) et liste (mutable) lors du retour de
+  fonction.
+\item
+  EF2 : oublier les crochets dans une compréhension de liste.
+\item
+  EF3 : accéder à une clé inexistante d'un dictionnaire sans utiliser
+  get().
+\end{itemize}
+
+\subsection{Remédiation}
+
+Exercice de remédiation : écrire une fonction min\_max qui renvoie le
+minimum et le maximum d'une liste sous forme de tuple.
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : exercices de base.
+\item
+  Standard : exercices complets.
+\item
+  Expert : exercice d'approfondissement.
+\end{itemize}
+
+\subsection{Critères de réussite}
+
+Fonction renvoyant un tuple vérifiée. Compréhension de liste correcte.
+Matrice accessible par double index. Dictionnaire itéré avec
+keys/values/items.
+
+Critère de validation : chaque réponse est vérifiable par un contrôle
+explicite.

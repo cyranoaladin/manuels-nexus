@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-TC-CO-009", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def filtrer_par_rang(joueurs, rang_min):
+%     resultat = []
+%     for nom, elo, rang in joueurs:
+%         if elo >= rang_min:
+%             resultat.append((nom, elo, rang))
+%     return resultat
+% joueurs = [("Alice", 2400, "diamant"), ("Bob", 1800, "or"), ("Clara", 2100, "platine")]
+% assert filtrer_par_rang(joueurs, 2000) == [("Alice", 2400, "diamant"), ("Clara", 2100, "platine")]
+% assert filtrer_par_rang(joueurs, 3000) == []
+% assert filtrer_par_rang(joueurs, 1800) == joueurs
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-009}
+\textbf{1.} On parcourt la liste en déballant chaque tuple et on conserve ceux dont le score Elo atteint le seuil :
+
+\begin{python}
+def filtrer_par_rang(joueurs, rang_min):
+    resultat = []
+    for nom, elo, rang in joueurs:
+        # On compare le score Elo au seuil
+        if elo >= rang_min:
+            resultat.append((nom, elo, rang))
+    return resultat
+\end{python}
+
+Le déballage \lstinline{for nom, elo, rang in joueurs} affecte directement les trois composantes de chaque tuple aux variables \lstinline{nom}, \lstinline{elo} et \lstinline{rang}, ce qui rend le code lisible.
+
+\textbf{2.} Test avec la liste donnée :
+\begin{console}
+>>> filtrer_par_rang(joueurs, 2000)
+[('Alice', 2400, 'diamant'), ('Clara', 2100, 'platine')]
+\end{console}
+
+Bob (Elo 1800) est exclu car $1800 < 2000$.
+
+Vérification : les résultats ont été confirmés par exécution.
+\end{corrige}

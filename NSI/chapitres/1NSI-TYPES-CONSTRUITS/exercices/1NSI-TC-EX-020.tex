@@ -1,0 +1,25 @@
+% META: {"id": "1NSI-TC-EX-020", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "parcours": 2, "competences": ["programmer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def temperatures_anormales(releves, seuil_bas, seuil_haut):
+%     anormales = []
+%     for i in range(len(releves)):
+%         if releves[i] < seuil_bas or releves[i] > seuil_haut:
+%             anormales.append((i, releves[i]))
+%     return anormales
+% assert temperatures_anormales([15, 42, 18, -3, 22], 0, 40) == [(1, 42), (3, -3)]
+% assert temperatures_anormales([20, 25, 30], 0, 40) == []
+% END-VERIFY
+\begin{exercice}{1NSI-TC-EX-020}{2}{12}
+Une station météo enregistre des températures horaires dans un tableau. On veut
+détecter les valeurs anormales.
+
+Écrire une fonction \lstinline{temperatures_anormales(releves, seuil_bas, seuil_haut)}
+qui renvoie la liste des tuples \lstinline{(indice, valeur)} pour chaque relevé en
+dehors de l'intervalle \lstinline{[seuil_bas, seuil_haut]}.
+
+\textbf{Exemple :}
+\begin{console}
+>>> temperatures_anormales([15, 42, 18, -3, 22], 0, 40)
+[(1, 42), (3, -3)]
+\end{console}
+\end{exercice}

@@ -1,0 +1,21 @@
+% META: {"id": "1NSI-TC-CO-036", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% meteo = {"ville": "Lyon", "temp": 28, "vent": 15}
+% meteo["temp"] = 30
+% meteo["humidite"] = 65
+% assert meteo["temp"] == 30
+% assert ("humidite" in meteo) == True
+% assert ("pluie" in meteo) == False
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-036}
+\begin{enumerate}
+  \item Les trois affichages sont :
+  \begin{itemize}
+    \item \lstinline{30} --- la clé \lstinline{"temp"} existait déjà ; sa valeur a été remplacée par 30.
+    \item \lstinline{True} --- la clé \lstinline{"humidite"} a été ajoutée, elle est bien présente.
+    \item \lstinline{False} --- la clé \lstinline{"pluie"} n'existe pas dans le dictionnaire.
+  \end{itemize}
+
+  \item La syntaxe est identique : \lstinline{dico[cle] = valeur}. Si la clé existe déjà, la valeur est remplacée (modification). Si la clé n'existe pas, une nouvelle paire clé-valeur est créée (ajout). Python ne distingue pas les deux cas syntaxiquement.
+\end{enumerate}
+\end{corrige}

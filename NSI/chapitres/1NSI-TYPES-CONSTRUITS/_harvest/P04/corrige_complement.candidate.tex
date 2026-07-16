@@ -1,0 +1,670 @@
+\section{P04 - Corrigé - Types construits complément}
+
+\subsection{Capacités officielles atomiques}
+
+\begin{itemize}
+\tightlist
+\item
+  P-DATA-CONSTR-01 : Écrire une fonction renvoyant un p-uplet de valeurs
+\item
+  P-DATA-CONSTR-02B : Construire un tableau par compréhension
+\item
+  P-DATA-CONSTR-02C : Utiliser des tableaux de tableaux pour représenter
+  des matrices
+\item
+  P-DATA-CONSTR-03A : Construire une entrée de dictionnaire
+\item
+  P-DATA-CONSTR-03B : Itérer sur les éléments d'un dictionnaire
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Corrigé du TD}
+
+\subsubsection{Exercice 1 - Fonction renvoyant un p-uplet (P-DATA-CONSTR-01)}
+
+\textbf{1a.} La valeur renvoyée est de type \texttt{tuple}. Plus
+précisément, c'est un tuple de trois éléments :
+\texttt{(8,\ 15,\ 11.25)}.
+
+\textbf{1b.}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{a\ =\ 8} (minimum)
+\item
+  \texttt{b\ =\ 15} (maximum)
+\item
+  \texttt{c\ =\ 11.25} (moyenne : (12 + 8 + 15 + 10) / 4 = 45 / 4 =
+  11.25)
+\end{itemize}
+
+\textbf{1c.}
+
+\begin{python}
+def extremes(a, b):
+    if a <= b:
+        return a, b
+    else:
+        return b, a
+\end{python}
+
+\textbf{1d.} L'appel \texttt{analyser\_notes({[}{]})} provoque une
+erreur \texttt{IndexError} sur la ligne \texttt{mini\ =\ notes{[}0{]}}
+car le tableau est vide et l'indice 0 n'existe pas. De plus,
+\texttt{len(notes)} vaut 0, ce qui provoquerait une division par zéro.
+La précondition est : le tableau doit être non vide.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Exercice 2 - Tableau par compréhension (P-DATA-CONSTR-02B)}
+
+\textbf{2a.}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{L1\ =\ {[}0,\ 1,\ 4,\ 9,\ 16,\ 25,\ 36,\ 49,\ 64,\ 81{]}}
+\item
+  \texttt{L2\ =\ {[}3,\ 6,\ 9,\ 12,\ 15{]}}
+\item
+  \texttt{L3\ =\ {[}\textquotesingle{}P\textquotesingle{},\ \textquotesingle{}Y\textquotesingle{},\ \textquotesingle{}T\textquotesingle{},\ \textquotesingle{}H\textquotesingle{},\ \textquotesingle{}O\textquotesingle{},\ \textquotesingle{}N\textquotesingle{}{]}}
+\end{itemize}
+
+\textbf{2b.}
+
+\texttt{L4\ =\ {[}3,\ 6,\ 9,\ 12,\ 15,\ 18{]}} (les multiples de 3 entre
+1 et 20).
+
+\textbf{2c.}
+
+\begin{python}
+cubes = [x ** 3 for x in range(1, 9)]
+\end{python}
+
+\textbf{2d.}
+
+\begin{python}
+positives = [t for t in temperatures if t > 0]
+# Résultat : [15.5, 22.0, 18.3, 30.2]
+\end{python}
+
+\textbf{2e.} \texttt{{[}0\ for\ \_\ in\ range(0){]}} produit
+\texttt{{[}{]}} (liste vide). \texttt{range(0)} génère une séquence
+vide, donc la compréhension n'itère sur aucun élément.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Exercice 3 - Matrices (P-DATA-CONSTR-02C)}
+
+\textbf{3a.}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{M{[}0{]}{[}2{]}\ =\ 8} (ligne 0, colonne 2)
+\item
+  \texttt{M{[}1{]}{[}1{]}\ =\ 7} (ligne 1, colonne 1)
+\item
+  \texttt{M{[}2{]}{[}0{]}\ =\ 9} (ligne 2, colonne 0)
+\end{itemize}
+
+\textbf{3b.} \texttt{M} possède 3 lignes et 3 colonnes.
+
+\begin{itemize}
+\tightlist
+\item
+  Nombre de lignes : \texttt{len(M)} qui vaut \texttt{3}.
+\item
+  Nombre de colonnes : \texttt{len(M{[}0{]})} qui vaut \texttt{3}.
+\end{itemize}
+
+\textbf{3c.} Trace d'exécution de \texttt{somme\_diagonale(M)} :
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Étape & \texttt{i} & \texttt{matrice{[}i{]}{[}i{]}} & \texttt{total} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Init & - & - & 0 \\
+1 & 0 & 5 & 5 \\
+2 & 1 & 7 & 12 \\
+3 & 2 & 6 & 18 \\
+\end{longtable}
+
+Résultat renvoyé : \texttt{18}.
+
+\textbf{3d.} Le code \texttt{grille\ =\ {[}{[}0{]}\ *\ 3{]}\ *\ 3} crée
+une liste contenant 3 fois la \textbf{même} sous-liste (même objet en
+mémoire). Modifier \texttt{grille{[}0{]}{[}0{]}} modifie donc les trois
+lignes simultanément.
+
+Affichage :
+\texttt{{[}{[}1,\ 0,\ 0{]},\ {[}1,\ 0,\ 0{]},\ {[}1,\ 0,\ 0{]}{]}}.
+
+Correction :
+
+\begin{python}
+grille = [[0 for j in range(3)] for i in range(3)]
+grille[0][0] = 1
+# Résultat correct : [[1, 0, 0], [0, 0, 0], [0, 0, 0]]
+\end{python}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Exercice 4 - Construire une entrée de dictionnaire (P-DATA-CONSTR-03A)}
+
+\textbf{4a.}
+
+\begin{python}
+photo = {}
+photo["marque"] = "Sony"
+photo["modele"] = "A7III"
+photo["date_prise"] = "2025-07-01"
+photo["taille"] = (6000, 4000)
+\end{python}
+
+\textbf{4b.} \texttt{photo{[}"taille"{]}} affiche
+\texttt{(6000,\ 4000)}. C'est un \texttt{tuple} de deux entiers.
+
+\textbf{4c.} Après \texttt{photo{[}"iso"{]}\ =\ 100} puis
+\texttt{photo{[}"iso"{]}\ =\ 200}, la clé \texttt{"iso"} est associée à
+\texttt{200}. La seconde affectation remplace la valeur précédente. Un
+dictionnaire ne peut pas contenir deux entrées avec la même clé.
+
+\textbf{4d.} L'instruction \texttt{d{[}{[}1,\ 2{]}{]}\ =\ "coordonnees"}
+provoque
+\texttt{TypeError:\ unhashable\ type:\ \textquotesingle{}list\textquotesingle{}}.
+Les clés d'un dictionnaire doivent être de type immuable (hashable). Une
+liste est mutable et ne peut donc pas servir de clé. On pourrait
+utiliser un tuple a la place :
+\texttt{d{[}(1,\ 2){]}\ =\ "coordonnees"}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Exercice 5 - Itérer sur un dictionnaire (P-DATA-CONSTR-03B)}
+
+\textbf{5a.}
+
+Bloc A affiche (une par ligne) :
+
+\begin{python}
+temperature
+humidite
+vent
+pression
+\end{python}
+
+Bloc B affiche :
+
+\begin{python}
+22
+65
+15
+1013
+\end{python}
+
+Bloc C affiche :
+
+\begin{python}
+temperature = 22
+humidite = 65
+vent = 15
+pression = 1013
+\end{python}
+
+\textbf{5b.}
+
+\begin{python}
+total = 0
+for val in meteo.values():
+    total = total + val
+# total vaut 22 + 65 + 15 + 1013 = 1115
+\end{python}
+
+\textbf{5c.}
+
+\begin{python}
+def cles_superieures(d, seuil):
+    resultat = []
+    for cle, valeur in d.items():
+        if valeur > seuil:
+            resultat.append(cle)
+    return resultat
+\end{python}
+
+Exemple : \texttt{cles\_superieures(meteo,\ 20)} renvoie
+\texttt{{[}"temperature",\ "humidite",\ "pression"{]}}.
+
+\textbf{5d.} Itérer sur un dictionnaire vide \texttt{\{\}} ne provoque
+pas d'erreur. La boucle \texttt{for} ne s'exécute simplement pas car il
+n'y a aucun élément à parcourir.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Corrigé de l’évaluation}
+
+\subsubsection{Question 1 - P-DATA-CONSTR-01 (4 points)}
+
+\textbf{1a.} (1 pt) La valeur renvoyée par \texttt{encadrer(5)} est de
+type \texttt{tuple}. C'est le tuple \texttt{(4,\ 6)}.
+
+\textbf{1b.} (1 pt) \texttt{a\ =\ 9}, \texttt{b\ =\ 11}.
+
+\textbf{1c.} (2 pts)
+
+\begin{python}
+def aire_perimetre(longueur, largeur):
+    aire = longueur * largeur
+    perimetre = 2 * (longueur + largeur)
+    return aire, perimetre
+\end{python}
+
+Pour \texttt{longueur\ =\ 5} et \texttt{largeur\ =\ 3} :
+\texttt{aire\_perimetre(5,\ 3)} renvoie \texttt{(15,\ 16)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Question 2 - P-DATA-CONSTR-02B (4 points)}
+
+\textbf{2a.} (2 pts)
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{L1\ =\ {[}0,\ 1,\ 4,\ 9,\ 16,\ 25,\ 36,\ 49,\ 64,\ 81{]}}
+\item
+  \texttt{L2\ =\ {[}5,\ 10,\ 15{]}}
+\end{itemize}
+
+\textbf{2b.} (2 pts)
+
+\begin{python}
+notes = [8, 12, 5, 16, 10, 3]
+reussies = [n for n in notes if n >= 10]
+# Résultat : [12, 16, 10]
+\end{python}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Question 3 - P-DATA-CONSTR-02C (4 points)}
+
+\textbf{3a.} (1 pt) \texttt{grille{[}1{]}{[}2{]}\ =\ 5},
+\texttt{grille{[}2{]}{[}0{]}\ =\ 4}.
+
+\textbf{3b.} (1 pt) Nombre de lignes : \texttt{len(grille)} (vaut 3).
+Nombre de colonnes : \texttt{len(grille{[}0{]})} (vaut 3).
+
+\textbf{3c.} (2 pts)
+
+\begin{python}
+def somme_ligne(matrice, i):
+    total = 0
+    for j in range(len(matrice[i])):
+        total = total + matrice[i][j]
+    return total
+\end{python}
+
+Pour la ligne 0 de \texttt{grille} : \texttt{somme\_ligne(grille,\ 0)}
+renvoie \texttt{2\ +\ 7\ +\ 1\ =\ 10}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Question 4 - P-DATA-CONSTR-03A (4 points)}
+
+\textbf{4a.} (2 pts)
+
+\begin{python}
+eleve = {}
+eleve["nom"] = "Martin"
+eleve["prenom"] = "Léa"
+eleve["age"] = 16
+eleve["classe"] = "1NSI"
+\end{python}
+
+\textbf{4b.} (1 pt) L'instruction \lstinline|eleve["age"] = 17|
+remplace la valeur 16 par 17. La nouvelle valeur de
+\lstinline|eleve["age"]| est \lstinline|17|.
+
+\textbf{4c.} (1 pt) Une liste est un type mutable et ne peut pas être
+utilisée comme clé de dictionnaire. Python exige des clés hashables
+(immuables). L'erreur levée est
+\texttt{TypeError:\ unhashable\ type:\ \textquotesingle{}list\textquotesingle{}}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Question 5 - P-DATA-CONSTR-03B (4 points)}
+
+\textbf{5a.} (1 pt) Le code affiche :
+
+\begin{python}
+Alice
+Bob
+Clara
+\end{python}
+
+\textbf{5b.} (1 pt)
+
+\begin{python}
+for nom, score in scores.items():
+    print(f"{nom} a obtenu {score}")
+\end{python}
+
+\textbf{5c.} (2 pts)
+
+\begin{python}
+def meilleur_score(d):
+    meilleur_nom = None
+    meilleur_val = None
+    for nom, score in d.items():
+        if meilleur_val is None or score > meilleur_val:
+            meilleur_nom = nom
+            meilleur_val = score
+    return meilleur_nom, meilleur_val
+\end{python}
+
+Avec \texttt{scores} : \texttt{meilleur\_score(scores)} renvoie
+\texttt{("Clara",\ 91)}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Corrigé du TP}
+
+\subsubsection{Exercice 1}
+
+\textbf{1a.}
+
+\begin{python}
+def statistiques(tableau):
+    mini = tableau[0]
+    maxi = tableau[0]
+    somme = 0
+    for val in tableau:
+        if val < mini:
+            mini = val
+        if val > maxi:
+            maxi = val
+        somme = somme + val
+    moyenne = somme / len(tableau)
+    return mini, maxi, moyenne
+\end{python}
+
+\textbf{1b.}
+
+\begin{python}
+def secondes_vers_hms(total_secondes):
+    heures = total_secondes // 3600
+    reste = total_secondes % 3600
+    minutes = reste // 60
+    secondes = reste % 60
+    return heures, minutes, secondes
+\end{python}
+
+\textbf{1c.} \texttt{statistiques({[}{]})} provoque \texttt{IndexError}
+car \texttt{tableau{[}0{]}} est inaccessible sur un tableau vide.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Exercice 2}
+
+\textbf{2a.}
+
+\begin{python}
+carres = [x ** 2 for x in range(10)]
+multiples_7 = [k for k in range(0, 51) if k % 7 == 0]
+longueurs = [len(m) for m in mots]
+\end{python}
+
+\textbf{2b.}
+
+\begin{python}
+pairs_carres = [n ** 2 for n in nombres if n % 2 == 0]
+\end{python}
+
+\textbf{2c.}
+
+\begin{python}
+def initiales(prenoms):
+    return [p[0].upper() for p in prenoms]
+\end{python}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Exercice 3}
+
+\textbf{3a.}
+
+\begin{python}
+identite = [[1 if i == j else 0 for j in range(3)] for i in range(3)]
+\end{python}
+
+\textbf{3b.}
+
+\begin{python}
+def transposer(matrice):
+    nb_lignes = len(matrice)
+    nb_colonnes = len(matrice[0])
+    resultat = [[0 for j in range(nb_lignes)] for i in range(nb_colonnes)]
+    for i in range(nb_lignes):
+        for j in range(nb_colonnes):
+            resultat[j][i] = matrice[i][j]
+    return resultat
+\end{python}
+
+\textbf{3c.}
+
+\begin{python}
+def rechercher(matrice, valeur):
+    for i in range(len(matrice)):
+        for j in range(len(matrice[i])):
+            if matrice[i][j] == valeur:
+                return (i, j)
+    return None
+\end{python}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Exercice 4}
+
+\textbf{4a.}
+
+\begin{python}
+film = {}
+film["titre"] = "Interstellar"
+film["realisateur"] = "Christopher Nolan"
+film["annee"] = 2014
+film["duree_min"] = 169
+film["genres"] = ["science-fiction", "drame"]
+\end{python}
+
+\textbf{4b.}
+
+\begin{python}
+def compter_mots(phrase):
+    mots = phrase.split()
+    compteur = {}
+    for mot in mots:
+        if mot in compteur:
+            compteur[mot] = compteur[mot] + 1
+        else:
+            compteur[mot] = 1
+    return compteur
+\end{python}
+
+\textbf{4c.}
+
+\begin{python}
+def creer_exif(appareil, date, largeur, hauteur, iso):
+    exif = {}
+    exif["appareil"] = appareil
+    exif["date"] = date
+    exif["resolution"] = (largeur, hauteur)
+    exif["iso"] = iso
+    return exif
+\end{python}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Exercice 5}
+
+\textbf{5a.}
+
+\begin{python}
+def afficher_fiche(d):
+    for cle, valeur in d.items():
+        print(f"{cle} : {valeur}")
+\end{python}
+
+\textbf{5b.}
+
+\begin{python}
+def filtrer_valeurs(d, seuil):
+    resultat = {}
+    for cle, valeur in d.items():
+        if valeur >= seuil:
+            resultat[cle] = valeur
+    return resultat
+\end{python}
+
+\textbf{5c.}
+
+\begin{python}
+def inverser_dict(d):
+    resultat = {}
+    for cle, valeur in d.items():
+        resultat[valeur] = cle
+    return resultat
+\end{python}
+
+\subsection{Objectifs}
+
+\subsection{Prérequis}
+
+\subsection{Situation-problème}
+
+Un programme de gestion de notes doit stocker, pour chaque élève, son
+nom et ses notes dans différentes matières. Quelle structure de données
+choisir et comment organiser les accès ?
+
+\subsection{Activité d’entrée}
+
+Écrire une fonction Python qui reçoit deux nombres et renvoie à la fois
+leur somme et leur produit. Tester avec \lstinline|print(resultat[0], resultat[1])|.
+
+\subsection{Exercices}
+
+Exercices de manipulation de tuples, listes en compréhension, matrices
+et dictionnaires.
+
+\subsection{Erreurs fréquentes}
+
+\begin{itemize}
+\tightlist
+\item
+  EF1 : confondre tuple (immutable) et liste (mutable) lors du retour de
+  fonction.
+\item
+  EF2 : oublier les crochets dans une compréhension de liste.
+\item
+  EF3 : accéder à une clé inexistante d'un dictionnaire sans utiliser
+  get().
+\end{itemize}
+
+\subsection{Remédiation}
+
+Exercice de remédiation : écrire une fonction min\_max qui renvoie le
+minimum et le maximum d'une liste sous forme de tuple.
+
+\subsection{Différenciation}
+
+\begin{itemize}
+\tightlist
+\item
+  Socle : exercices de base.
+\item
+  Standard : exercices complets.
+\item
+  Expert : exercice d'approfondissement.
+\end{itemize}
+
+\subsection{Critères de réussite}
+
+\begin{itemize}
+\tightlist
+\item
+  Critère de réussite : la fonction renvoie un tuple vérifiable par
+  déstructuration.
+\item
+  Critère de validation : la compréhension de liste produit le résultat
+  attendu.
+\item
+  Observable : le dictionnaire est itéré avec keys(), values() et
+  items() correctement.
+\end{itemize}
+
+\subsection{Séance(s) correspondante(s)}
+
+Séance dédiée.
+
+\subsubsection{Corrigé exercice 1}
+
+\textbf{Méthode} : on écrit une fonction qui renvoie un tuple contenant
+les deux valeurs calculées. La fonction \texttt{min\_max(lst)} renvoie
+\texttt{(1,\ 9)} pour la liste \texttt{{[}3,\ 1,\ 9,\ 5{]}}. Le résultat
+vaut \texttt{(min,\ max)} sous forme de tuple Python.
+
+\subsubsection{Corrigé exercice 2}
+
+Réponse détaillée avec justification.
+
+La compréhension donne
+\texttt{{[}0,\ 1,\ 4,\ 9,\ 16,\ 25,\ 36,\ 49,\ 64,\ 81{]}} pour les
+carrés de 0 à 9.
+
+\subsubsection{Corrigé exercice 3}
+
+Réponse détaillée avec justification.
+
+L'élément \texttt{matrice{[}1{]}{[}2{]}} vaut \texttt{5} et
+\texttt{somme\_diagonale} renvoie \texttt{18}.
+
+\subsubsection{Corrigé exercice 4}
+
+Réponse détaillée avec justification.
+
+Le dictionnaire donne
+\texttt{\{\textquotesingle{}titre\textquotesingle{}:\ \textquotesingle{}Interstellar\textquotesingle{},\ \textquotesingle{}realisateur\textquotesingle{}:\ \textquotesingle{}Christopher\ Nolan\textquotesingle{},\ \textquotesingle{}annee\textquotesingle{}:\ 2014\}}.
+
+\subsubsection{Corrigé exercice 5}
+
+Réponse détaillée avec justification.
+
+\texttt{d.keys()} renvoie
+\texttt{dict\_keys({[}\textquotesingle{}temperature\textquotesingle{},\ \textquotesingle{}humidite\textquotesingle{},\ \textquotesingle{}vent\textquotesingle{},\ \textquotesingle{}pression\textquotesingle{}{]})}
+(une vue, pas une liste) pour le dictionnaire météo.
+
+\subsubsection{Corrigé exercice 6}
+
+Réponse détaillée avec justification.
+
+La fonction renvoie \texttt{(8,\ 15,\ 11.25)} pour la liste
+\texttt{{[}12,\ 8,\ 15,\ 10{]}}.
+
+\subsubsection{Corrigé exercice 7}
+
+Réponse détaillée avec justification.
+
+La compréhension filtrée donne \texttt{{[}12,\ 16,\ 10{]}} pour les
+notes supérieures ou égales à 10.
+
+\subsubsection{Corrigé exercice 8}
+
+Réponse détaillée avec justification.
+
+La fonction \texttt{inverser\_dict} renvoie
+\texttt{\{\textquotesingle{}a\textquotesingle{}:\ 1,\ \textquotesingle{}b\textquotesingle{}:\ 2\}}
+pour l'entrée
+\texttt{\{1:\ \textquotesingle{}a\textquotesingle{},\ 2:\ \textquotesingle{}b\textquotesingle{}\}}.

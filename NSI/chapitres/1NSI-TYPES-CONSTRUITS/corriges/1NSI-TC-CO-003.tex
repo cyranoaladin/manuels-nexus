@@ -1,0 +1,28 @@
+% META: {"id": "1NSI-TC-CO-003", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C1"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def distance(a, b):
+%     return ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5
+% assert abs(distance((0, 0), (3, 4)) - 5.0) < 1e-9
+% assert distance((1, 1), (1, 1)) == 0.0
+% assert abs(distance((0, 0), (1, 1)) - 2**0.5) < 1e-9
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-003}
+On applique la formule de distance euclidienne $d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$.
+Chaque point est un tuple de deux coordonnées.
+
+\begin{python}
+def distance(a, b):
+    return ((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2) ** 0.5
+\end{python}
+
+\textbf{Vérification :}
+\begin{console}
+>>> distance((0, 0), (3, 4))
+5.0
+>>> distance((1, 1), (1, 1))
+0.0
+\end{console}
+
+Le résultat est cohérent : la distance de $(0,0)$ à $(3,4)$
+est $\sqrt{9+16} = 5$, et la distance d'un point à lui-même est 0.
+\end{corrige}

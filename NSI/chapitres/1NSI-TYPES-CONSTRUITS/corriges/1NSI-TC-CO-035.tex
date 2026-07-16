@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-TC-CO-035", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% eleve = {"nom": "Alice", "classe": "1NSI", "moyenne": 14.5}
+% assert eleve["nom"] == "Alice"
+% assert eleve["moyenne"] == 14.5
+% assert len(eleve) == 3
+% eleve["email"] = "alice@lycee.fr"
+% assert eleve["email"] == "alice@lycee.fr"
+% assert len(eleve) == 4
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-035}
+\begin{enumerate}
+  \item Les trois affichages sont :
+  \begin{itemize}
+    \item \lstinline{Alice} --- valeur associée à la clé \lstinline{"nom"}.
+    \item \lstinline{14.5} --- valeur associée à la clé \lstinline{"moyenne"}.
+    \item \lstinline{3} --- le dictionnaire contient trois paires clé-valeur.
+  \end{itemize}
+
+  \item Les clés sont \lstinline{"nom"}, \lstinline{"classe"} et \lstinline{"moyenne"}. Les valeurs correspondantes sont \lstinline{"Alice"}, \lstinline{"1NSI"} et \lstinline{14.5}.
+
+  \item Pour ajouter une nouvelle paire clé-valeur :
+\begin{python}
+eleve["email"] = "alice@lycee.fr"
+\end{python}
+\end{enumerate}
+\end{corrige}

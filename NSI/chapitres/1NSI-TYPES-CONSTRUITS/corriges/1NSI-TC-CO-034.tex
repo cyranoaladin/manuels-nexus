@@ -1,0 +1,74 @@
+% META: {"id": "1NSI-TC-CO-034", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% def rotation_90(grille):
+%     n = len(grille)
+%     p = len(grille[0])
+%     resultat = []
+%     for j in range(p):
+%         ligne = []
+%         for i in range(n - 1, -1, -1):
+%             ligne.append(grille[i][j])
+%         resultat.append(ligne)
+%     return resultat
+% assert rotation_90([[1, 2], [3, 4]]) == [[3, 1], [4, 2]]
+% assert rotation_90([[1, 2, 3]]) == [[1], [2], [3]]
+% # Verification : 4 rotations redonnent la grille initiale
+% g = [[1, 2, 3], [4, 5, 6]]
+% r = g
+% for _ in range(4):
+%     r = rotation_90(r)
+% assert r == g
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-034}
+\textbf{1.} Grille initiale et après rotation de 90 degrés dans le sens horaire :
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+1 & 2 \\
+\hline
+3 & 4 \\
+\hline
+\end{tabular}
+\quad$\xrightarrow{\text{rotation 90°}}$\quad
+\begin{tabular}{|c|c|}
+\hline
+3 & 1 \\
+\hline
+4 & 2 \\
+\hline
+\end{tabular}
+\end{center}
+
+La colonne $j$ de la grille d'origine, lue de bas en haut, devient la ligne $j$ de la grille résultat.
+
+\textbf{2.} Fonction de rotation :
+
+\begin{python}
+def rotation_90(grille):
+    n = len(grille)
+    p = len(grille[0])
+    resultat = []
+    for j in range(p):
+        ligne = []
+        for i in range(n - 1, -1, -1):
+            ligne.append(grille[i][j])
+        resultat.append(ligne)
+    return resultat
+\end{python}
+
+\begin{console}
+>>> rotation_90([[1, 2], [3, 4]])
+[[3, 1], [4, 2]]
+\end{console}
+
+\textbf{3.} Vérification : quatre rotations successives redonnent la grille initiale.
+
+\begin{python}
+g = [[1, 2, 3], [4, 5, 6]]
+r = g
+for _ in range(4):
+    r = rotation_90(r)
+assert r == g  # True
+\end{python}
+\end{corrige}

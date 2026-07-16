@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-TC-EX-021", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C2"], "parcours": 2, "competences": ["analyser", "programmer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-TRACE
+% def decaler(tab):
+%     dernier = tab[-1]
+%     for i in range(len(tab) - 1, 0, -1):
+%         tab[i] = tab[i - 1]
+%     tab[0] = dernier
+% scores = [10, 20, 30, 40]
+% decaler(scores)
+% print(scores)
+% EXPECTED
+% [40, 10, 20, 30]
+% END-TRACE
+\begin{exercice}{1NSI-TC-EX-021}{2}{10}
+On considère la fonction suivante :
+\begin{python}
+def decaler(tab):
+    dernier = tab[-1]
+    for i in range(len(tab) - 1, 0, -1):
+        tab[i] = tab[i - 1]
+    tab[0] = dernier
+
+scores = [10, 20, 30, 40]
+decaler(scores)
+print(scores)
+\end{python}
+\begin{enumerate}
+  \item Donner, sans exécuter, l'affichage produit. Détailler l'état du tableau
+        après chaque itération de la boucle.
+  \item Décrire en une phrase le rôle de cette fonction.
+  \item La fonction renvoie-t-elle une valeur ? Comment le tableau est-il modifié ?
+\end{enumerate}
+\end{exercice}

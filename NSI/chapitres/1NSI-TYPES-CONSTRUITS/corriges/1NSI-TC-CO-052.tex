@@ -1,0 +1,36 @@
+% META: {"id": "1NSI-TC-CO-052", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "corrige", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
+% BEGIN-VERIFY
+% equipe = {"nom": "Phoenix", "score": 100}
+% copie = equipe
+% copie["score"] = 200
+% assert equipe["score"] == 200
+% assert equipe is copie
+% # Version avec vraie copie
+% equipe2 = {"nom": "Phoenix", "score": 100}
+% copie2 = dict(equipe2)
+% copie2["score"] = 200
+% assert equipe2["score"] == 100
+% assert copie2["score"] == 200
+% assert equipe2 is not copie2
+% END-VERIFY
+\begin{corrige}{1NSI-TC-EX-052}
+\begin{enumerate}
+  \item Le programme affiche :
+\begin{console}
+200
+True
+\end{console}
+
+  \item Oui, les dictionnaires sont \textbf{mutables}. On peut ajouter, modifier ou supprimer des paires clé-valeur après la création. Ici, \lstinline{copie["score"] = 200} modifie le dictionnaire en place. Comme \lstinline{copie = equipe} crée un alias (même objet), la modification est visible via \lstinline{equipe} aussi.
+
+  \item Pour obtenir une copie indépendante, on utilise \lstinline{dict()} :
+\begin{python}
+equipe = {"nom": "Phoenix", "score": 100}
+copie = dict(equipe)
+copie["score"] = 200
+print(equipe["score"])  # 100
+print(copie["score"])   # 200
+\end{python}
+Après cette modification, \lstinline{equipe["score"]} vaut toujours \lstinline{100} car \lstinline{copie} est un objet distinct.
+\end{enumerate}
+\end{corrige}

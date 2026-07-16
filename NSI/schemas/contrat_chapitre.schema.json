@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "contrat_chapitre.schema.json",
+  "title": "Contrat d'un chapitre",
+  "type": "object",
+  "required": ["chapitre", "niveau", "theme", "titre", "capacites", "prerequis", "temps_estime_h"],
+  "properties": {
+    "chapitre": { "type": "string" },
+    "niveau": { "type": "string" },
+    "theme": { "type": "string" },
+    "titre": { "type": "string" },
+    "capacites": {
+      "type": "array", "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["code", "ref_capacite", "libelle_eleve"],
+        "properties": {
+          "code": { "type": "string", "pattern": "^C[0-9]+$" },
+          "ref_capacite": { "type": "string", "description": "id dans referentiel/" },
+          "libelle_eleve": { "type": "string" }
+        }
+      }
+    },
+    "prerequis": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "libelle"],
+        "properties": {
+          "code": { "type": "string", "pattern": "^R[0-9]+$" },
+          "libelle": { "type": "string" },
+          "chapitre_origine": { "type": "string" }
+        }
+      }
+    },
+    "situation_accroche": { "type": "string" },
+    "temps_estime_h": {
+      "type": "object",
+      "required": ["parcours1", "parcours2", "parcours3"],
+      "properties": {
+        "parcours1": { "type": "number" }, "parcours2": { "type": "number" }, "parcours3": { "type": "number" }
+      }
+    }
+  }
+}
