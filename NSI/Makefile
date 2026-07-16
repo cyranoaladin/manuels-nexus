@@ -1,6 +1,6 @@
 .PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter test gates-corpus gates-corpus-strict lot-gates
 
-PY := .venv/bin/python
+PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 CHAP ?= 1NSI-TYPES-CONSTRUITS
 
 setup:

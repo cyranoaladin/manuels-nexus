@@ -1,6 +1,6 @@
 .PHONY: setup db crawl ingest index verify similarity coverage chapter check-latex specimen test
 
-PY := .venv/bin/python
+PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 CHAP ?= 1SPE-SUITES
 SRC ?=
 
