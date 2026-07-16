@@ -1,2 +1,108 @@
 % META: {"id":"1SPE-DERIVATION-LOCAL-RE-C1","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"remediation","capacites_codes":["C1"],"status":"generated"}
-\section*{Remédiation C1} Calculer les taux de variation de $x^2$ entre $1$ et $3$, puis de $2x+1$ entre $0$ et $4$. \coupDePouce{1}{Calcule les deux images avant de diviser.} Vérifie que le dénominateur est non nul.
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C1 : Taux de variation et pente de sécante
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C1-EX1}{1}{8}
+Soit $f(x) = x^2 - 2x$. Calculer le taux de variation de $f$ :
+\begin{enumerate}
+  \item entre $x = 1$ et $x = 4$ ;
+  \item entre $x = 2$ et $x = 2+h$ (pour $h \neq 0$), puis simplifier.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Le taux de variation entre $a$ et $b$ est $\dfrac{f(b)-f(a)}{b-a}$. Calcule d'abord $f(1)$ et $f(4)$.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel, Rational
+% x, h = symbols('x h')
+% f = x**2 - 2*x
+% assert f.subs(x, 1) == -1
+% assert f.subs(x, 4) == 8
+% tv1 = Rational(8 - (-1), 4 - 1)
+% assert tv1 == 3
+% f2h = expand(f.subs(x, 2+h))
+% f2 = f.subs(x, 2)
+% assert f2 == 0
+% tv2 = cancel((f2h - f2)/h)
+% assert tv2 == h + 2
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C1-EX1}
+
+\commentaireMarge{On calcule les images, puis on forme le quotient.}
+
+\textbf{Question 1.}
+$f(1) = 1 - 2 = -1$ et $f(4) = 16 - 8 = 8$.
+\[
+\tau = \frac{f(4)-f(1)}{4-1} = \frac{8-(-1)}{3} = \frac{9}{3} = 3.
+\]
+
+\textbf{Question 2.}
+$f(2) = 4 - 4 = 0$ et $f(2+h) = (2+h)^2 - 2(2+h) = 4+4h+h^2-4-2h = h^2+2h$.
+\[
+\tau = \frac{f(2+h)-f(2)}{h} = \frac{h^2+2h}{h} = h+2.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C1-EX2}{1}{8}
+Un véhicule a pour position $d(t) = 3t^2$ mètres à l'instant $t$ (en secondes).
+\begin{enumerate}
+  \item Quelle est la distance parcourue entre $t=0$ et $t=5$ ?
+  \item Calculer le taux de variation de $d$ entre $t=2$ et $t=5$. Que représente-t-il ?
+  \item Calculer le taux de variation entre $t=2$ et $t=2{,}1$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% d = lambda t: 3*t**2
+% assert d(5) - d(0) == 75
+% tv1 = (d(5)-d(2))/(5-2)
+% assert tv1 == 21
+% from sympy import Rational
+% tv2 = (d(Rational(21,10)) - d(2)) / Rational(1,10)
+% assert tv2 == Rational(123, 10)
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C1-EX2}
+
+\textbf{Question 1.}
+$d(5) - d(0) = 75 - 0 = 75$ m.
+
+\commentaireMarge{Le taux de variation de la position par rapport au temps est une vitesse moyenne.}
+
+\textbf{Question 2.}
+$\tau = \dfrac{d(5)-d(2)}{5-2} = \dfrac{75-12}{3} = \dfrac{63}{3} = 21$ m/s. C'est la vitesse moyenne entre $t=2$ et $t=5$.
+
+\textbf{Question 3.}
+$\tau = \dfrac{d(2{,}1)-d(2)}{0{,}1} = \dfrac{13{,}23-12}{0{,}1} = \dfrac{1{,}23}{0{,}1} = 12{,}3$ m/s.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C1-EX3}{1}{8}
+Soit $f(x) = \dfrac{1}{x}$ pour $x > 0$. Calculer le taux de variation de $f$ entre $1$ et $1+h$ (pour $h \neq 0$ et $1+h > 0$), puis simplifier.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% h = symbols('h')
+% f = lambda t: 1/t
+% tv = (f(1+h) - f(1))/h
+% assert simplify(tv + 1/(1+h)) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C1-EX3}
+
+$f(1) = 1$ et $f(1+h) = \dfrac{1}{1+h}$.
+
+\begin{align*}
+\tau &= \frac{f(1+h)-f(1)}{h} = \frac{\dfrac{1}{1+h} - 1}{h} = \frac{\dfrac{1-(1+h)}{1+h}}{h} = \frac{\dfrac{-h}{1+h}}{h} = \frac{-1}{1+h}.
+\end{align*}
+
+\end{corrige}

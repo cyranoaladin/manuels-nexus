@@ -1,2 +1,103 @@
 % META: {"id":"1SPE-DERIVATION-LOCAL-RE-C2","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"remediation","capacites_codes":["C2"],"status":"generated"}
-\section*{Remédiation C2} Interprète $f'(2)=5$ comme pente puis comme vitesse instantanée dans un contexte adapté. \coupDePouce{1}{Le nombre dérivé est une variation locale.}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C2 : Nombre dérivé, pente et vitesse instantanée
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C2-EX1}{1}{8}
+Soit $f(x) = x^2 + x$. On calcule le taux de variation entre $a$ et $a+h$.
+\begin{enumerate}
+  \item Développer $f(a+h)$.
+  \item Calculer $\dfrac{f(a+h)-f(a)}{h}$ et simplifier.
+  \item En déduire $f'(a)$ en faisant tendre $h$ vers $0$.
+  \item Calculer $f'(1)$ et $f'(-2)$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$f(a+h) = (a+h)^2 + (a+h)$. Développe puis soustrais $f(a)$.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel
+% a, h = symbols('a h')
+% f = a**2 + a
+% fah = expand((a+h)**2 + (a+h))
+% assert fah == a**2 + 2*a*h + h**2 + a + h
+% tv = cancel((fah - f)/h)
+% assert tv == 2*a + h + 1
+% fprime = tv.subs(h, 0)
+% assert fprime == 2*a + 1
+% assert fprime.subs(a, 1) == 3
+% assert fprime.subs(a, -2) == -3
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C2-EX1}
+
+\textbf{Question 1.}
+$f(a+h) = (a+h)^2 + (a+h) = a^2 + 2ah + h^2 + a + h.$
+
+\commentaireMarge{On soustrait $f(a) = a^2+a$ puis on divise par $h$.}
+
+\textbf{Question 2.}
+\[
+\frac{f(a+h)-f(a)}{h} = \frac{2ah+h^2+h}{h} = 2a + h + 1.
+\]
+
+\textbf{Question 3.}
+Quand $h \to 0$ : $2a+h+1 \to 2a+1$. Donc $f'(a) = 2a+1$.
+
+\textbf{Question 4.}
+$f'(1) = 2 \times 1 + 1 = 3$ et $f'(-2) = 2 \times (-2) + 1 = -3$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C2-EX2}{1}{7}
+On donne $f'(2) = 5$.
+\begin{enumerate}
+  \item Interpréter $f'(2)$ en termes de pente.
+  \item Si $f$ représente la distance (en km) parcourue par un véhicule en $t$ heures, interpréter $f'(2)$ comme vitesse.
+\end{enumerate}
+\end{exercice}
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C2-EX2}
+
+\textbf{Question 1.}
+$f'(2) = 5$ signifie que la tangente à la courbe de $f$ au point d'abscisse $2$ a pour pente $5$ : la courbe « monte » localement avec un coefficient directeur de $5$.
+
+\textbf{Question 2.}
+Dans ce contexte, $f'(2) = 5$ signifie que la vitesse instantanée du véhicule à l'instant $t=2$ h est $5$ km/h.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C2-EX3}{1}{8}
+Soit $f(x) = 3x^2$. Calculer $f'(a)$ par la méthode du taux de variation, puis vérifier pour $a=1$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel
+% a, h = symbols('a h')
+% f = 3*a**2
+% fah = expand(3*(a+h)**2)
+% tv = cancel((fah - f)/h)
+% assert tv == 6*a + 3*h
+% assert tv.subs(h, 0) == 6*a
+% assert (6*a).subs(a, 1) == 6
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C2-EX3}
+
+$f(a) = 3a^2$ et $f(a+h) = 3(a+h)^2 = 3a^2 + 6ah + 3h^2$.
+
+\[
+\frac{f(a+h)-f(a)}{h} = \frac{6ah + 3h^2}{h} = 6a + 3h \xrightarrow[h \to 0]{} 6a.
+\]
+
+Donc $f'(a) = 6a$.
+
+\textbf{Vérification} : $f'(1) = 6$. Le taux de variation entre $1$ et $1{,}01$ :
+$\dfrac{f(1{,}01)-f(1)}{0{,}01} = \dfrac{3{,}0603 - 3}{0{,}01} = 6{,}03 \approx 6$. \checkmark
+
+\end{corrige}

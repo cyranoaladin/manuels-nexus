@@ -1,0 +1,98 @@
+% META: {"id":"1SPE-DERLOCAL-TD-CONTEXTE","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"td","capacites_codes":["C1","C2","C4","C5"],"status":"generated"}
+
+%---------------------------------------------------------------
+% TD CONTEXTUALISÉ — Le freinage d'un véhicule
+% Capacités : C1, C2, C4, C5
+%---------------------------------------------------------------
+
+\section*{TD — Le freinage d'un véhicule}
+
+\textit{Durée estimée : 50 minutes.}
+
+\bigskip
+
+Un véhicule roule à $90$ km/h (soit $25$ m/s) et freine à partir de l'instant $t=0$.
+Sa distance de freinage (en mètres) est modélisée par :
+\[
+  d(t) = 25t - 2{,}5\,t^2 \quad \text{pour } t \in [0\,;\,5].
+\]
+
+%---------------------------------------------------------------
+\subsection*{Partie A — Analyse de la distance (C1)}
+
+\begin{enumerate}
+  \item Calculer $d(0)$, $d(1)$, $d(3)$ et $d(5)$.
+  \item Calculer la distance parcourue entre $t=0$ et $t=2$, puis la vitesse moyenne sur cet intervalle.
+  \item Calculer la vitesse moyenne entre $t=3$ et $t=5$. Comparer avec la précédente. Que constatez-vous ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% d = lambda t: 25*t - 2.5*t**2
+% assert d(0) == 0
+% assert d(1) == 22.5
+% assert d(3) == 52.5
+% assert d(5) == 62.5
+% v02 = (d(2)-d(0))/(2-0)
+% assert v02 == 20.0
+% v35 = (d(5)-d(3))/(5-3)
+% assert v35 == 5.0
+% END-VERIFY
+
+%---------------------------------------------------------------
+\subsection*{Partie B — Vitesse instantanée (C2)}
+
+\begin{enumerate}[resume]
+  \item Calculer $\dfrac{d(1+h)-d(1)}{h}$ pour $h \neq 0$ et simplifier.
+  \item En déduire la vitesse instantanée $d'(1)$. Exprimer-la en m/s puis en km/h.
+  \item Calculer de même $d'(3)$. Le véhicule a-t-il beaucoup ralenti entre $t=1$ et $t=3$ ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel
+% t, h = symbols('t h')
+% d_sym = 25*t - 5*t**2/2
+% d1 = d_sym.subs(t, 1)
+% d1h = expand(d_sym.subs(t, 1+h))
+% tv = cancel((d1h - d1)/h)
+% assert tv == -5*h/2 + 20
+% assert tv.subs(h, 0) == 20
+% d3 = d_sym.subs(t, 3)
+% d3h = expand(d_sym.subs(t, 3+h))
+% tv3 = cancel((d3h - d3)/h)
+% assert tv3.subs(h, 0) == 10
+% END-VERIFY
+
+%---------------------------------------------------------------
+\subsection*{Partie C — Tangente et approximation (C4, C5)}
+
+\begin{enumerate}[resume]
+  \item Écrire l'équation de la tangente à la courbe de $d$ au point d'abscisse $t=1$.
+  \item Approcher $d(1{,}1)$ à l'aide de cette tangente. Comparer avec la valeur exacte.
+  \item À quel instant le véhicule s'arrête-t-il ? (On cherche $t$ tel que $d'(t) = 0$.)
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, Rational, solve
+% t = symbols('t')
+% d_sym = 25*t - Rational(5,2)*t**2
+% # Tangente en t=1: y = d'(1)(t-1)+d(1) = 20(t-1)+22.5
+% T = expand(20*(t-1) + Rational(45,2))
+% assert T == 20*t + Rational(5,2)
+% # d(1.1) exact
+% d11 = d_sym.subs(t, Rational(11,10))
+% assert d11 == Rational(979, 40)
+% # Approximation: 20*1.1 + 2.5 = 24.5
+% approx = T.subs(t, Rational(11,10))
+% assert approx == Rational(245, 10)
+% # d'(t) = 25 - 5t = 0 => t=5
+% dp = 25 - 5*t
+% assert solve(dp, t) == [5]
+% END-VERIFY
+
+%---------------------------------------------------------------
+\subsection*{Partie D — Synthèse (question ouverte / oral)}
+
+\begin{enumerate}[resume]
+  \item Le modèle $d(t) = 25t - 2{,}5\,t^2$ est-il réaliste pour $t > 5$ ? Justifier.
+  \item Expliquer en quelques phrases la différence entre vitesse moyenne et vitesse instantanée dans le contexte du freinage.
+\end{enumerate}

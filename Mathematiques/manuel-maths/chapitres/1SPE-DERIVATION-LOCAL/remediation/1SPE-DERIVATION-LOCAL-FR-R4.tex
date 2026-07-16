@@ -1,0 +1,131 @@
+% META: {"id":"1SPE-DERIVATION-LOCAL-FR-R4","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"remediation","capacites_codes":["R4"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R4 : Fonctions carré et inverse
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Fonctions de référence}
+
+\textbf{Fonction carré} : $f(x) = x^2$, définie sur $\mathbb{R}$, décroissante sur $]-\infty;0]$, croissante sur $[0;+\infty[$.
+
+\textbf{Fonction inverse} : $g(x) = \dfrac{1}{x}$, définie sur $\mathbb{R}^*$, strictement décroissante sur $]-\infty;0[$ et sur $]0;+\infty[$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-FR-R4-EX1}{1}{5}
+Soit $f(x) = x^2$.
+\begin{enumerate}
+  \item Calculer $f(3)$, $f(-3)$, $f(0{,}5)$.
+  \item Calculer $f(a+h) - f(a)$ en développant.
+  \item Que vaut $\dfrac{f(a+h)-f(a)}{h}$ pour $h \neq 0$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel
+% a, h = symbols('a h')
+% f = lambda t: t**2
+% assert f(3) == 9
+% assert f(-3) == 9
+% from sympy import Rational
+% assert f(Rational(1,2)) == Rational(1,4)
+% diff = expand(f(a+h) - f(a))
+% assert diff == 2*a*h + h**2
+% assert cancel(diff/h) == 2*a + h
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-FR-R4-EX1}
+
+\textbf{Question 1.}
+$f(3) = 9$, \quad $f(-3) = 9$, \quad $f(0{,}5) = 0{,}25$.
+
+\commentaireMarge{On développe $(a+h)^2 = a^2 + 2ah + h^2$ puis on simplifie.}
+
+\textbf{Question 2.}
+$f(a+h) - f(a) = (a+h)^2 - a^2 = a^2 + 2ah + h^2 - a^2 = 2ah + h^2.$
+
+\textbf{Question 3.}
+$\dfrac{f(a+h)-f(a)}{h} = \dfrac{2ah + h^2}{h} = 2a + h.$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-FR-R4-EX2}{1}{5}
+Soit $g(x) = \dfrac{1}{x}$ pour $x \neq 0$.
+\begin{enumerate}
+  \item Calculer $g(2)$, $g(4)$, $g(-1)$.
+  \item Montrer que $g(a+h) - g(a) = \dfrac{-h}{a(a+h)}$ pour $a \neq 0$, $a+h \neq 0$.
+  \item En déduire $\dfrac{g(a+h)-g(a)}{h}$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% a, h = symbols('a h')
+% assert Rational(1,2) == Rational(1,2)
+% assert Rational(1,4) == Rational(1,4)
+% diff = 1/(a+h) - 1/a
+% assert simplify(diff + h/(a*(a+h))) == 0
+% quot = diff/h
+% assert simplify(quot + 1/(a*(a+h))) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-FR-R4-EX2}
+
+\textbf{Question 1.}
+$g(2) = \dfrac{1}{2}$, \quad $g(4) = \dfrac{1}{4}$, \quad $g(-1) = -1$.
+
+\commentaireMarge{On réduit au même dénominateur $a(a+h)$.}
+
+\textbf{Question 2.}
+\[
+g(a+h) - g(a) = \frac{1}{a+h} - \frac{1}{a} = \frac{a - (a+h)}{a(a+h)} = \frac{-h}{a(a+h)}.
+\]
+
+\textbf{Question 3.}
+\[
+\frac{g(a+h) - g(a)}{h} = \frac{-h}{a(a+h)} \times \frac{1}{h} = \frac{-1}{a(a+h)}.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-FR-R4-EX3}{1}{6}
+Soit $f(x) = x^2 + 3x$.
+\begin{enumerate}
+  \item Calculer $f(1)$ et $f(1+h)$ en développant.
+  \item Calculer le taux de variation $\dfrac{f(1+h)-f(1)}{h}$.
+  \item Que se passe-t-il quand $h$ se rapproche de $0$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel
+% h = symbols('h')
+% f = lambda t: t**2 + 3*t
+% assert f(1) == 4
+% f1h = expand(f(1+h))
+% assert f1h == h**2 + 5*h + 4
+% assert cancel((f1h - 4)/h) == h + 5
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-FR-R4-EX3}
+
+\textbf{Question 1.}
+$f(1) = 1 + 3 = 4$.
+\[
+f(1+h) = (1+h)^2 + 3(1+h) = 1+2h+h^2+3+3h = h^2 + 5h + 4.
+\]
+
+\textbf{Question 2.}
+\[
+\frac{f(1+h)-f(1)}{h} = \frac{h^2+5h+4-4}{h} = \frac{h^2+5h}{h} = h + 5.
+\]
+
+\commentaireMarge{Quand $h \to 0$, le taux de variation tend vers $5$ : c'est le nombre dérivé $f'(1)$.}
+
+\textbf{Question 3.} Quand $h$ se rapproche de $0$, $h+5$ se rapproche de $5$. On obtient $f'(1) = 5$.
+
+\end{corrige}

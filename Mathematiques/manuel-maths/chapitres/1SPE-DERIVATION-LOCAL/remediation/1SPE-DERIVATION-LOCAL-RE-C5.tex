@@ -1,2 +1,115 @@
 % META: {"id":"1SPE-DERIVATION-LOCAL-RE-C5","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"remediation","capacites_codes":["C5"],"status":"generated"}
-\section*{Remédiation C5} Si $f(3)=10$ et $f'(3)=4$, approche $f(3{,}02)$ puis explique pourquoi il s'agit d'une approximation. \coupDePouce{1}{Prends $h=0{,}02$.}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C5 : Approximation linéaire
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C5-EX1}{1}{7}
+On donne $f(3) = 10$ et $f'(3) = 4$.
+\begin{enumerate}
+  \item Approcher $f(3{,}02)$ à l'aide de l'approximation linéaire.
+  \item Approcher $f(2{,}95)$.
+  \item Le symbole utilisé est-il $=$ ou $\approx$ ? Pourquoi ?
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$f(a+h) \approx f(a) + f'(a) \cdot h$. Identifie $a$ et $h$ dans chaque cas.}
+
+% BEGIN-VERIFY
+% # f(3.02) ≈ 10 + 4*0.02 = 10.08
+% from sympy import Rational
+% approx1 = 10 + 4*Rational(2,100)
+% assert approx1 == Rational(1008, 100)
+% # f(2.95) ≈ 10 + 4*(-0.05) = 9.8
+% approx2 = 10 + 4*Rational(-5,100)
+% assert approx2 == Rational(98, 10)
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C5-EX1}
+
+\commentaireMarge{Formule : $f(a+h) \approx f(a) + f'(a) \cdot h$.}
+
+\textbf{Question 1.}
+$a = 3$, $h = 0{,}02$. $f(3{,}02) \approx 10 + 4 \times 0{,}02 = 10{,}08.$
+
+\textbf{Question 2.}
+$a = 3$, $h = -0{,}05$. $f(2{,}95) \approx 10 + 4 \times (-0{,}05) = 10 - 0{,}2 = 9{,}8.$
+
+\textbf{Question 3.}
+On utilise $\approx$ car c'est une approximation, pas une valeur exacte. Elle est d'autant meilleure que $|h|$ est petit.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C5-EX2}{1}{8}
+On admet que la dérivée de $f(x) = \sqrt{x}$ en $x = a > 0$ est $f'(a) = \dfrac{1}{2\sqrt{a}}$.
+\begin{enumerate}
+  \item Calculer $f(9)$ et $f'(9)$.
+  \item En déduire une approximation de $\sqrt{9{,}03}$.
+  \item Comparer avec la valeur exacte à la calculatrice.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import sqrt, Rational
+% assert sqrt(9) == 3
+% fp9 = Rational(1, 2*3)
+% assert fp9 == Rational(1, 6)
+% # sqrt(9.03) ≈ 3 + (1/6)*0.03 = 3 + 0.005 = 3.005
+% approx = 3 + Rational(1,6) * Rational(3,100)
+% assert approx == Rational(601, 200)
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C5-EX2}
+
+\textbf{Question 1.}
+$f(9) = \sqrt{9} = 3$ et $f'(9) = \dfrac{1}{2\sqrt{9}} = \dfrac{1}{6}$.
+
+\commentaireMarge{$h = 0{,}03$, donc $f(9{,}03) \approx f(9) + f'(9) \times 0{,}03$.}
+
+\textbf{Question 2.}
+$\sqrt{9{,}03} \approx 3 + \dfrac{1}{6} \times 0{,}03 = 3 + 0{,}005 = 3{,}005.$
+
+\textbf{Question 3.}
+Calculatrice : $\sqrt{9{,}03} \approx 3{,}00500\ldots$ L'approximation est excellente car $h = 0{,}03$ est très petit devant $a = 9$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C5-EX3}{1}{8}
+Soit $f(x) = x^3$. On admet $f'(a) = 3a^2$.
+\begin{enumerate}
+  \item Calculer $f(2)$ et $f'(2)$.
+  \item Approcher $f(2{,}01) = (2{,}01)^3$ par l'approximation linéaire.
+  \item Calculer l'erreur relative : $\dfrac{|f(2{,}01) - \text{approximation}|}{f(2{,}01)} \times 100$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational, Abs
+% f2 = 8
+% fp2 = 12
+% approx = 8 + 12*Rational(1,100)
+% assert approx == Rational(812, 100)
+% exact = Rational(201,100)**3
+% assert exact == Rational(8120601, 1000000)
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C5-EX3}
+
+\textbf{Question 1.}
+$f(2) = 8$ et $f'(2) = 3 \times 4 = 12$.
+
+\textbf{Question 2.}
+$f(2{,}01) \approx 8 + 12 \times 0{,}01 = 8{,}12.$
+
+\textbf{Question 3.}
+Valeur exacte : $(2{,}01)^3 = 8{,}120\,601$. Erreur relative :
+\[
+\frac{|8{,}120\,601 - 8{,}12|}{8{,}120\,601} \times 100 \approx 0{,}007\,\%.
+\]
+L'approximation est très précise.
+
+\end{corrige}

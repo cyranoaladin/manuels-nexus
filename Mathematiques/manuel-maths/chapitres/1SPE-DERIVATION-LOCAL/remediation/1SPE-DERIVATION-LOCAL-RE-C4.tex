@@ -1,2 +1,116 @@
 % META: {"id":"1SPE-DERIVATION-LOCAL-RE-C4","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"remediation","capacites_codes":["C4"],"status":"generated"}
-\section*{Remédiation C4} Écris la tangente en $a=2$ lorsque $f(2)=7$ et $f'(2)=-3$, puis vérifie qu'elle passe par $(2;7)$. \coupDePouce{1}{Utilise $y=f'(a)(x-a)+f(a)$.}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C4 : Équation de la tangente
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C4-EX1}{1}{7}
+Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $a$ dans chaque cas.
+\begin{enumerate}
+  \item $f(1) = 3$ et $f'(1) = 2$.
+  \item $f(0) = -1$ et $f'(0) = 4$.
+  \item $f(5) = 10$ et $f'(5) = 0$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{La formule est $y = f'(a)(x-a) + f(a)$. Remplace $a$, $f(a)$ et $f'(a)$ par les valeurs données.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% x = symbols('x')
+% y1 = expand(2*(x-1) + 3)
+% assert y1 == 2*x + 1
+% y2 = expand(4*(x-0) + (-1))
+% assert y2 == 4*x - 1
+% y3 = expand(0*(x-5) + 10)
+% assert y3 == 10
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C4-EX1}
+
+\commentaireMarge{Formule : $y = f'(a)(x-a)+f(a)$.}
+
+\textbf{Question 1.}
+$y = 2(x-1) + 3 = 2x - 2 + 3 = 2x + 1.$
+
+\textbf{Question 2.}
+$y = 4(x-0) + (-1) = 4x - 1.$
+
+\textbf{Question 3.}
+$y = 0 \times (x-5) + 10 = 10.$ La tangente est horizontale.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C4-EX2}{1}{8}
+Soit $f(x) = x^2$. On admet que $f'(a) = 2a$.
+\begin{enumerate}
+  \item Écrire l'équation de la tangente en $a = 3$.
+  \item Écrire l'équation de la tangente en $a = -1$.
+  \item Vérifier que chaque tangente passe bien par son point de contact.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% x = symbols('x')
+% # a=3: f(3)=9, f'(3)=6
+% y1 = expand(6*(x-3) + 9)
+% assert y1 == 6*x - 9
+% assert y1.subs(x, 3) == 9
+% # a=-1: f(-1)=1, f'(-1)=-2
+% y2 = expand(-2*(x-(-1)) + 1)
+% assert y2 == -2*x - 1
+% assert y2.subs(x, -1) == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C4-EX2}
+
+\textbf{Question 1.}
+$f(3)=9$, $f'(3)=6$. Tangente : $y = 6(x-3)+9 = 6x - 18 + 9 = 6x - 9$.
+
+\textbf{Question 2.}
+$f(-1)=1$, $f'(-1)=-2$. Tangente : $y = -2(x+1)+1 = -2x - 2 + 1 = -2x - 1$.
+
+\commentaireMarge{On vérifie en substituant $x=a$ dans l'équation de la tangente.}
+
+\textbf{Question 3.}
+Pour $x=3$ : $y = 6 \times 3 - 9 = 9 = f(3)$. \checkmark \\
+Pour $x=-1$ : $y = -2 \times (-1) - 1 = 1 = f(-1)$. \checkmark
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-RE-C4-EX3}{1}{8}
+On donne $f(2) = 7$ et $f'(2) = -3$.
+\begin{enumerate}
+  \item Écrire l'équation de la tangente $T$ en $a=2$.
+  \item Calculer $T(0)$, $T(1)$ et $T(4)$.
+  \item La tangente passe-t-elle par le point $(4;1)$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% x = symbols('x')
+% T = expand(-3*(x-2) + 7)
+% assert T == -3*x + 13
+% assert T.subs(x, 0) == 13
+% assert T.subs(x, 1) == 10
+% assert T.subs(x, 4) == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-RE-C4-EX3}
+
+\textbf{Question 1.}
+$T : y = -3(x-2)+7 = -3x + 6 + 7 = -3x + 13.$
+
+\textbf{Question 2.}
+$T(0) = 13$, \quad $T(1) = 10$, \quad $T(4) = -12+13 = 1$.
+
+\textbf{Question 3.}
+$T(4) = 1$ : oui, le point $(4;1)$ est sur la tangente. \checkmark
+
+\end{corrige}

@@ -1,0 +1,123 @@
+% META: {"id":"1SPE-DERLOCAL-EV-A","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":55,"points":20,"status":"generated","sympy_params":{"f_ex1":"x**2 - 4*x + 5","a_ex1":3,"f_ex2":"x**3","a_ex2":1,"f_ex3_a":2,"f_ex3_fa":7,"f_ex3_fpa":-3,"f_ex4":"1/x","a_ex4":2}}
+
+\section*{Évaluation A — Dérivation locale}
+
+\textit{Durée : 55 minutes — 20 points — Calculatrice autorisée.}
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 1} \hfill \textit{6 points — C1, C2}
+%---------------------------------------------------------------
+
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2 - 4x + 5$.
+
+\begin{enumerate}
+  \item Calculer le taux de variation de $f$ entre $x = 1$ et $x = 4$. \hfill \textit{(1,5 pt)}
+  \item Calculer $\dfrac{f(3+h)-f(3)}{h}$ pour $h \neq 0$. Simplifier. \hfill \textit{(2 pt)}
+  \item En déduire le nombre dérivé $f'(3)$. \hfill \textit{(1 pt)}
+  \item Interpréter $f'(3)$ graphiquement. \hfill \textit{(1,5 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel, Rational
+% x, h = symbols('x h')
+% f = x**2 - 4*x + 5
+% assert f.subs(x, 1) == 2
+% assert f.subs(x, 4) == 5
+% tv14 = Rational(5-2, 4-1)
+% assert tv14 == 1
+% f3 = f.subs(x, 3)
+% assert f3 == 2
+% f3h = expand(f.subs(x, 3+h))
+% assert f3h == h**2 + 2*h + 2
+% tv = cancel((f3h - f3)/h)
+% assert tv == h + 2
+% fp3 = tv.subs(h, 0)
+% assert fp3 == 2
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 2} \hfill \textit{5 points — C2, C4}
+%---------------------------------------------------------------
+
+Soit $g$ la fonction définie sur $\mathbb{R}$ par $g(x) = x^3$. On admet que $g'(a) = 3a^2$ pour tout $a \in \mathbb{R}$.
+
+\begin{enumerate}
+  \item Calculer $g'(1)$. \hfill \textit{(1 pt)}
+  \item Écrire l'équation de la tangente $T_1$ à la courbe de $g$ au point d'abscisse $1$. \hfill \textit{(2 pt)}
+  \item Vérifier que $T_1$ passe par le point $(0;-2)$. \hfill \textit{(1 pt)}
+  \item Déterminer l'abscisse du point de la courbe où la tangente est horizontale. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% x = symbols('x')
+% g = x**3
+% gp = 3*x**2
+% assert gp.subs(x, 1) == 3
+% assert g.subs(x, 1) == 1
+% T1 = expand(3*(x-1) + 1)
+% assert T1 == 3*x - 2
+% assert T1.subs(x, 0) == -2
+% # tangente horizontale : g'(a) = 0 => 3a^2 = 0 => a = 0
+% from sympy import solve
+% assert solve(gp, x) == [0]
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 3} \hfill \textit{5 points — C3, C4, C5}
+%---------------------------------------------------------------
+
+On lit sur un graphique que la courbe de $f$ passe par le point $A(2;7)$ et que la tangente en $A$ a pour pente $-3$.
+
+\begin{enumerate}
+  \item Donner les valeurs de $f(2)$ et $f'(2)$. \hfill \textit{(1 pt)}
+  \item Écrire l'équation de la tangente en $A$. \hfill \textit{(1,5 pt)}
+  \item Approcher $f(2{,}04)$ à l'aide de l'approximation linéaire. \hfill \textit{(1,5 pt)}
+  \item Ce résultat est-il une valeur exacte ou approchée ? Justifier. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% # f(2)=7, f'(2)=-3
+% # Tangente: y = -3(x-2)+7 = -3x+13
+% from sympy import symbols, expand
+% x = symbols('x')
+% T = expand(-3*(x-2) + 7)
+% assert T == -3*x + 13
+% # f(2.04) ≈ 7 + (-3)*0.04 = 7 - 0.12 = 6.88
+% approx = 7 + (-3)*Rational(4,100)
+% assert approx == Rational(688, 100)
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 4} \hfill \textit{4 points — C1, C5}
+%---------------------------------------------------------------
+
+Soit $h$ la fonction définie sur $]0;+\infty[$ par $h(x) = \dfrac{1}{x}$. On admet que $h'(a) = -\dfrac{1}{a^2}$ pour tout $a > 0$.
+
+\begin{enumerate}
+  \item Calculer le taux de variation de $h$ entre $x=2$ et $x=3$. \hfill \textit{(1,5 pt)}
+  \item Approcher $h(2{,}05) = \dfrac{1}{2{,}05}$ à l'aide de l'approximation linéaire en $a=2$. \hfill \textit{(1,5 pt)}
+  \item Comparer avec la valeur exacte $\dfrac{1}{2{,}05}$ (arrondir au millième). \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% h2 = Rational(1,2)
+% h3 = Rational(1,3)
+% tv = (h3-h2)/(3-2)
+% assert tv == Rational(-1,6)
+% hp2 = Rational(-1,4)
+% approx = h2 + hp2*Rational(5,100)
+% assert approx == Rational(39, 80)
+% exact = Rational(1, Rational(205,100))
+% assert exact == Rational(20, 41)
+% END-VERIFY

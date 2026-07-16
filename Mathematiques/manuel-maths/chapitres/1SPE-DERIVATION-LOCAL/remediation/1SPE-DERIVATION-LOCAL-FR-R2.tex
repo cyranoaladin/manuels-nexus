@@ -1,0 +1,124 @@
+% META: {"id":"1SPE-DERIVATION-LOCAL-FR-R2","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"remediation","capacites_codes":["R2"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R2 : Calcul littéral
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Développer, factoriser, simplifier}
+
+\textbf{Développer} : $a(b+c) = ab + ac$ et $(a+b)^2 = a^2 + 2ab + b^2$.
+
+\textbf{Simplifier une fraction} : factoriser numérateur et dénominateur, puis simplifier le facteur commun.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-FR-R2-EX1}{1}{5}
+Développer et réduire chaque expression.
+\begin{enumerate}
+  \item $A = (a+h)^2 - a^2$
+  \item $B = 3(a+h)^2 - 3a^2$
+  \item $C = (a+h)^3 - a^3$ \quad (on développera $(a+h)^3$)
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% a, h = symbols('a h')
+% A = (a+h)**2 - a**2
+% assert expand(A) == 2*a*h + h**2
+% B = 3*(a+h)**2 - 3*a**2
+% assert expand(B) == 6*a*h + 3*h**2
+% C = (a+h)**3 - a**3
+% assert expand(C) == 3*a**2*h + 3*a*h**2 + h**3
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-FR-R2-EX1}
+
+\commentaireMarge{On développe $(a+h)^2 = a^2+2ah+h^2$.}
+
+\textbf{Question 1.}
+\[
+A = a^2 + 2ah + h^2 - a^2 = 2ah + h^2.
+\]
+
+\textbf{Question 2.}
+\[
+B = 3(a^2 + 2ah + h^2) - 3a^2 = 3a^2 + 6ah + 3h^2 - 3a^2 = 6ah + 3h^2.
+\]
+
+\commentaireMarge{$(a+h)^3 = a^3 + 3a^2h + 3ah^2 + h^3$ (formule du binôme).}
+
+\textbf{Question 3.}
+\[
+C = a^3 + 3a^2h + 3ah^2 + h^3 - a^3 = 3a^2h + 3ah^2 + h^3.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-FR-R2-EX2}{1}{5}
+Simplifier les fractions suivantes ($h \neq 0$).
+\begin{enumerate}
+  \item $\dfrac{2ah + h^2}{h}$
+  \item $\dfrac{6ah + 3h^2}{h}$
+  \item $\dfrac{3a^2h + 3ah^2 + h^3}{h}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, cancel
+% a, h = symbols('a h')
+% assert cancel((2*a*h + h**2)/h) == 2*a + h
+% assert cancel((6*a*h + 3*h**2)/h) == 6*a + 3*h
+% assert cancel((3*a**2*h + 3*a*h**2 + h**3)/h) == 3*a**2 + 3*a*h + h**2
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-FR-R2-EX2}
+
+\commentaireMarge{On factorise $h$ au numérateur, puis on simplifie par $h$.}
+
+\textbf{Question 1.}
+\[
+\frac{2ah + h^2}{h} = \frac{h(2a + h)}{h} = 2a + h.
+\]
+
+\textbf{Question 2.}
+\[
+\frac{6ah + 3h^2}{h} = \frac{h(6a + 3h)}{h} = 6a + 3h.
+\]
+
+\textbf{Question 3.}
+\[
+\frac{3a^2h + 3ah^2 + h^3}{h} = \frac{h(3a^2 + 3ah + h^2)}{h} = 3a^2 + 3ah + h^2.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERLOCAL-FR-R2-EX3}{1}{6}
+Soit $f(x) = \dfrac{1}{x}$ pour $x \neq 0$. Simplifier $\dfrac{f(a+h) - f(a)}{h}$ pour $a \neq 0$ et $h \neq 0$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, cancel
+% a, h = symbols('a h')
+% expr = (1/(a+h) - 1/a) / h
+% assert simplify(expr + 1/(a*(a+h))) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERLOCAL-FR-R2-EX3}
+
+\commentaireMarge{On réduit $f(a+h) - f(a)$ au même dénominateur, puis on divise par $h$.}
+
+\begin{align*}
+\frac{f(a+h) - f(a)}{h}
+  &= \frac{\dfrac{1}{a+h} - \dfrac{1}{a}}{h}
+   = \frac{\dfrac{a - (a+h)}{a(a+h)}}{h}
+   = \frac{\dfrac{-h}{a(a+h)}}{h} \\
+  &= \frac{-h}{a(a+h)} \times \frac{1}{h}
+   = \frac{-1}{a(a+h)}.
+\end{align*}
+
+\end{corrige}

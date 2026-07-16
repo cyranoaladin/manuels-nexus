@@ -1,0 +1,92 @@
+% META: {"id":"1SPE-DERLOCAL-TD-FILROUGE","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"td","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+
+%---------------------------------------------------------------
+% TD FIL ROUGE — Du capteur de vitesse au nombre dérivé
+% Résolution de la situation d'accroche
+% Capacités : C1, C2, C3, C4, C5
+%---------------------------------------------------------------
+
+\section*{TD fil rouge — Du capteur de vitesse au nombre dérivé}
+
+\textit{Durée estimée : 50 minutes. Ce TD résout la situation d'accroche du chapitre.}
+
+\bigskip
+
+Un vélo est équipé d'un capteur qui enregistre la distance parcourue $d(t)$ (en mètres) en fonction du temps $t$ (en secondes). Sur un tronçon de $30$ secondes, le modèle est :
+\[
+  d(t) = 0{,}05\,t^3 - 0{,}5\,t^2 + 6t \quad \text{pour } t \in [0\,;\,30].
+\]
+
+%---------------------------------------------------------------
+\subsection*{Partie A — Vitesses moyennes (C1)}
+
+\begin{enumerate}
+  \item Calculer $d(10)$, $d(12)$ et $d(14)$.
+  \item Calculer la vitesse moyenne entre $t=10$ et $t=14$.
+  \item Calculer la vitesse moyenne entre $t=10$ et $t=12$, puis entre $t=12$ et $t=14$.
+  \item Peut-on connaître la vitesse exacte à $t=12$ s avec ces seules informations ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% d = lambda t: Rational(5,100)*t**3 - Rational(5,10)*t**2 + 6*t
+% assert d(10) == 60 - 50 + 50
+% assert d(10) == 60
+% d12 = d(12)
+% assert d12 == Rational(5,100)*1728 - Rational(5,10)*144 + 72
+% assert d12 == Rational(8640,100) - 72 + 72
+% assert d12 == Rational(8640,100)
+% d14 = d(14)
+% v_10_14 = (d(14)-d(10))/(14-10)
+% v_10_12 = (d(12)-d(10))/(12-10)
+% END-VERIFY
+
+%---------------------------------------------------------------
+\subsection*{Partie B — Vers la vitesse instantanée (C2)}
+
+\begin{enumerate}[resume]
+  \item Calculer la vitesse moyenne entre $t=12$ et $t=12{,}1$.
+  \item Calculer la vitesse moyenne entre $t=12$ et $t=12{,}01$.
+  \item Conjecturer la valeur de la vitesse instantanée à $t=12$.
+  \item Calculer $\dfrac{d(12+h)-d(12)}{h}$ en développant, puis faire tendre $h$ vers $0$ pour confirmer.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel, Rational
+% t, h = symbols('t h')
+% d_sym = Rational(5,100)*t**3 - Rational(1,2)*t**2 + 6*t
+% d12 = d_sym.subs(t, 12)
+% d12h = expand(d_sym.subs(t, 12+h))
+% tv = cancel((d12h - d12)/h)
+% dp12 = tv.subs(h, 0)
+% # d'(t) = 0.15t^2 - t + 6
+% # d'(12) = 0.15*144 - 12 + 6 = 21.6 - 12 + 6 = 15.6
+% assert dp12 == Rational(78, 5)
+% END-VERIFY
+
+%---------------------------------------------------------------
+\subsection*{Partie C — Tangente et prédiction (C3, C4, C5)}
+
+\begin{enumerate}[resume]
+  \item Tracer la courbe de $d$ sur $[0\,;\,30]$ à la calculatrice ou sur un grapheur.
+  \item Tracer la tangente au point d'abscisse $12$. Retrouver graphiquement que sa pente est cohérente avec la valeur de $d'(12)$.
+  \item Écrire l'équation de cette tangente.
+  \item Utiliser l'approximation linéaire pour prédire $d(12{,}5)$. Comparer avec la valeur exacte.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, Rational
+% t = symbols('t')
+% d12 = Rational(8640,100)
+% dp12 = Rational(78, 5)
+% T = expand(dp12*(t-12) + d12)
+% approx = T.subs(t, Rational(25,2))
+% END-VERIFY
+
+%---------------------------------------------------------------
+\subsection*{Partie D — Synthèse}
+
+\begin{enumerate}[resume]
+  \item Répondre à la question d'accroche : comment déterminer la vitesse exacte à $t=12$ s à partir du modèle $d(t)$ ?
+  \item Expliquer pourquoi le taux de variation entre deux instants proches est une bonne approximation de la vitesse instantanée.
+\end{enumerate}
