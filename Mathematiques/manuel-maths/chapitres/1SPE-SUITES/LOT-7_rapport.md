@@ -71,3 +71,11 @@ et les verdicts SymPy restent inchanges (102/102 OK).
 
 Le sous-titre de la page de couverture affiche « Manuel NSI Premiere » (code en dur
 dans `nexus-manuel.cls:361`). A corriger par parametrage de la classe.
+
+## Addendum — Recomposition charte v4.1 (16 juillet 2026)
+
+Recomposition intégrale avec la charte v4.1 « Éditorial premium » :
+polices Pagella/Heros, palette chapcolor indigo, géométrie kit (inner 2.0cm,
+outer 4.8cm), encadrés onglet/cadre/filet, ouverture bandeau 56%.
+**PDF 82 pages, 492 Ko**. Défaut sous-titre corrigé (v4 : `\matiere`/`\niveau`).
+Inventaire inchangé (même maître, contenu identique).

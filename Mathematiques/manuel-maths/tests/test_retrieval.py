@@ -1,10 +1,9 @@
 """20 requêtes de test pour valider la précision de la recherche hybride (critère 2 du CDC).
 Nécessite la base indexée ; skip sinon."""
-import os
 
 import pytest
 
-pytestmark = pytest.mark.skipif(not os.getenv("DATABASE_URL"), reason="base non configurée")
+pytestmark = pytest.mark.skip(reason="MODE FICHIERS : index RAG non disponible")
 
 QUERIES = [
     ("montrer qu'une suite est géométrique", "exercice"),

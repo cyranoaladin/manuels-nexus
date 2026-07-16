@@ -98,3 +98,9 @@ répertoires ne comptait ni les TD stockés sous `cours/07_td*.tex` ni `projet/`
 L'inventaire est identique. `pdffonts` confirme des polices embarquées et en
 sous-ensembles (`emb=yes`, `sub=yes`) ; cette sous-division explique
 probablement la baisse 641 Ko → 213 Ko en l'absence de l'ancien PDF comparé.
+
+### Addendum — Recomposition charte v4.1 (16 juillet 2026)
+
+Recomposition avec la charte v4.1 « Éditorial premium » (polices Pagella/Heros,
+palette chapcolor émeraude, géométrie 2.0/4.8cm, encadrés kit, ouverture bandeau).
+**PDF 36 pages, 231 Ko**. Inventaire inchangé.

@@ -40,3 +40,11 @@ Aucun objet de contenu n'a ete ajoute ni supprime. Verdicts SymPy : 88/88 OK.
 ### Defaut constate
 
 Meme defaut de sous-titre « Manuel NSI Premiere » que SUITES (cls:361).
+
+## Addendum — Recomposition charte v4.1 (16 juillet 2026)
+
+Recomposition intégrale avec la charte v4.1 « Éditorial premium » :
+polices Pagella/Heros, palette chapcolor indigo, géométrie kit (inner 2.0cm,
+outer 4.8cm), encadrés onglet/cadre/filet, ouverture bandeau 56%.
+**PDF 65 pages, 369 Ko**. Défaut sous-titre corrigé (v4 : `\matiere`/`\niveau`).
+Inventaire inchangé (même maître, contenu identique).

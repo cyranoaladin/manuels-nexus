@@ -44,9 +44,6 @@
 
 \defaultfontfeatures{Ligatures=TeX}
 
-% Chemin pour les polices embarquées (JetBrains Mono)
-\newcommand{\nxFontPath}{gabarits/fonts/}
-
 % Corps : TeX Gyre Pagella (= Palatino libre), interligne 1.06
 \setmainfont{TeX Gyre Pagella}
 \linespread{1.06}
@@ -58,18 +55,9 @@
 % Raccourci « famille titre » : toujours sans-serif gras.
 \newcommand{\titrefont}{\sffamily\bfseries}
 
-% Code : JetBrains Mono (embarqué, conservé du v3)
-\setmonofont{JetBrainsMono}[
-  Path=\nxFontPath,
-  Extension=.otf,
-  UprightFont=*-Regular,
-  BoldFont=*-Bold,
-  ItalicFont=*-Italic,
-  BoldItalicFont=*-BoldItalic,
-  Scale=0.89,
-  Ligatures=NoCommon,
-  Numbers=Monospaced,
-]
+% Code : JetBrains Mono (installé dans le système ou ~/.local/share/fonts/)
+% Les fichiers .otf sources sont conservés dans gabarits/fonts/ pour la CI.
+\setmonofont{JetBrains Mono}[Scale=0.89]
 
 % ===========================================================================
 %  TYPOGRAPHIE PROFESSIONNELLE

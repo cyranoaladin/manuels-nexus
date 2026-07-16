@@ -35,8 +35,10 @@ jobs:
         run: python scripts/check_charte_sync.py
       - name: Dépendances (gates légers, sans embeddings)
         run: pip install sympy pyyaml jsonschema pytest python-dotenv
-      - name: Installation TeX
-        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-lang-french texlive-fonts-recommended poppler-utils
+      - name: Installation TeX + polices
+        run: |
+          sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-lang-french texlive-fonts-recommended texlive-fonts-extra texlive-science poppler-utils
+          mkdir -p ~/.local/share/fonts && cp Mathematiques/manuel-maths/gabarits/fonts/JetBrainsMono*.otf ~/.local/share/fonts/ && fc-cache -f ~/.local/share/fonts
       - name: Schémas des métadonnées
         working-directory: Mathematiques/manuel-maths
         run: python -m pytest tests/test_meta_schemas.py -q
