@@ -1,0 +1,31 @@
+{
+  "chapitre": "1SPE-DERIVATION-GLOBAL",
+  "mode": "ex_nihilo",
+  "capacites": {
+    "C1": {
+      "approche": "Tableau des dérivées de référence (x^n, 1/x, sqrt(x)) construit progressivement. Chaque formule est démontrée par passage à la limite du taux de variation pour n=2,3 puis admise pour n général.",
+      "erreurs_types": ["Oubli de l'exposant dans la dérivée de x^n", "Signe de la dérivée de 1/x", "Domaine de dérivabilité de sqrt(x) (x>0, pas x>=0)"],
+      "format_examen": "Calcul direct de dérivées, QCM sur les formules"
+    },
+    "C2": {
+      "approche": "Règles opératoires : somme, produit par un réel (démontrées), produit (démontrée ou admise selon le BO), quotient (admise). Application systématique sur des fonctions polynômes et rationnelles.",
+      "erreurs_types": ["Oubli de la règle du produit (dériver chaque facteur séparément)", "Erreur de signe au numérateur du quotient (u'v - uv' et non u'v + uv')", "Confusion produit/quotient"],
+      "format_examen": "Calcul de dérivée d'une expression, mise en forme avant étude de signe"
+    },
+    "C3": {
+      "approche": "Théorème central : f croissante sur I ssi f'>=0 sur I. Méthode en 4 étapes : calculer f', résoudre f'(x)=0, dresser le tableau de signes de f', conclure sur les variations. Exemples complets sur polynômes de degré 2 et 3.",
+      "erreurs_types": ["Confondre f'(x)=0 et f'(x)>0 dans le tableau", "Oublier les bornes du domaine", "Conclure sur le signe de f au lieu du signe de f'"],
+      "format_examen": "Étude complète de variations avec tableau"
+    },
+    "C4": {
+      "approche": "Extremum local en a ssi f'(a)=0 et changement de signe de f'. Distinction minimum/maximum par le signe. Application aux polynômes de degré 3 (au plus 2 extremums).",
+      "erreurs_types": ["f'(a)=0 n'implique pas extremum (contre-exemple x^3)", "Confondre extremum local et global", "Oublier de vérifier le changement de signe"],
+      "format_examen": "Déterminer les extremums, justifier par le tableau de variations"
+    },
+    "C5": {
+      "approche": "Méthode complète : modéliser par une fonction, dériver, trouver les points critiques, vérifier que c'est un extremum, conclure dans le contexte. Problèmes classiques : aire maximale, coût minimal, distance minimale.",
+      "erreurs_types": ["Oublier de vérifier que le point critique est dans le domaine", "Ne pas revenir au contexte (unités, sens physique)", "Confondre la variable et la fonction à optimiser"],
+      "format_examen": "Problème contextualisé en 4-5 questions progressives"
+    }
+  }
+}

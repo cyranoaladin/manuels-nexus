@@ -1,0 +1,26 @@
+chapitre: 1SPE-DERIVATION-GLOBAL
+niveau: 1SPE
+theme: DERIVATION-GLOBAL
+titre: "Dérivation : applications aux variations"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-DERIVATION-GLOBAL-C1, libelle_eleve: "Je sais dériver les fonctions de référence (puissances, inverse, racine carrée)." }
+  - { code: C2, ref_capacite: 1SPE-DERIVATION-GLOBAL-C2, libelle_eleve: "Je sais utiliser les règles de dérivation (somme, produit, quotient)." }
+  - { code: C3, ref_capacite: 1SPE-DERIVATION-GLOBAL-C3, libelle_eleve: "Je sais utiliser le signe de la dérivée pour dresser le tableau de variations." }
+  - { code: C4, ref_capacite: 1SPE-DERIVATION-GLOBAL-C4, libelle_eleve: "Je sais trouver les extremums d'une fonction en annulant sa dérivée." }
+  - { code: C5, ref_capacite: 1SPE-DERIVATION-GLOBAL-C5, libelle_eleve: "Je sais modéliser et résoudre un problème d'optimisation à l'aide de la dérivation." }
+
+prerequis:
+  - { code: R1, libelle: "Taux de variation et nombre dérivé", chapitre_origine: "1SPE-DERIVATION-LOCAL" }
+  - { code: R2, libelle: "Équation de la tangente", chapitre_origine: "1SPE-DERIVATION-LOCAL" }
+  - { code: R3, libelle: "Calcul littéral (développer, factoriser, signe d'un produit/quotient)", chapitre_origine: "2GT" }
+  - { code: R4, libelle: "Fonctions polynômes du second degré (racines, signe, tableau de signes)", chapitre_origine: "1SPE-SECOND-DEGRE" }
+  - { code: R5, libelle: "Sens de variation d'une fonction (définition, croissante/décroissante)", chapitre_origine: "2GT" }
+
+situation_accroche: >
+  Un fabricant de boîtes de conserve veut minimiser la quantité de métal utilisée
+  pour un volume donné de 500 mL. Quelles dimensions de la boîte cylindrique
+  choisir ? La dérivation permet de répondre à ce problème d'optimisation.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }
