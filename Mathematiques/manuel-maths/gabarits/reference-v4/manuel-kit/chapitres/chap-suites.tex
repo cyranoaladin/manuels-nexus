@@ -1,0 +1,195 @@
+%% ============================================================
+%% Chapitre 1 — Suites numériques et récurrence (matière : maths)
+%% Vitrine complète de la charte v2 : ouverture pleine page,
+%% tous les encadrés pédagogiques, code Python, figure pgfplots.
+%% ============================================================
+\matiere{maths}
+\niveau{Terminale spécialité}
+
+%% -- Décor TikZ de l'ouverture : rectangles d'or + spirale --
+%% Dessiné dans le repère de la page (nœud current page), moitié
+%% droite du bandeau. Passé en argument optionnel à \ouverturechapitre.
+\newcommand{\decorFibonacci}{%
+  \begin{scope}[shift={([shift={(-10cm,-6.9cm)}]current page.north east)},
+                scale=0.68, line join=round]
+    \draw[white, opacity=0.55, line width=1.4pt] (0,0) rectangle (13,8);
+    \draw[white, opacity=0.55, line width=1.4pt]
+      (8,0) -- (8,8)  (8,3) -- (13,3)  (11,0) -- (11,3)
+      (11,2) -- (13,2)  (12,1) -- (12,2)  (12,1) -- (13,1);
+    % spirale d'or (spirale logarithmique, croissance = nombre d'or)
+    \draw[coulEtoile, line width=2pt]
+      plot[domain=0:4.4*pi, samples=170, variable=\t]
+      ({8 - 0.10*exp(0.306*\t)*cos(\t r)},
+       {4 + 0.10*exp(0.306*\t)*sin(\t r)});
+  \end{scope}}
+
+\chapter{Suites numériques et récurrence}
+
+\begin{ouverture}[\decorFibonacci]{Suites numériques\\ et récurrence}
+  \item Démontrer une propriété par récurrence.
+  \item Étudier le sens de variation et la limite d'une suite.
+  \item Programmer en Python le calcul des termes d'une suite.
+\end{ouverture}
+
+\section{Le raisonnement par récurrence}
+
+Le raisonnement par \vocab{récurrence}{Du latin \emph{recurrere},
+« courir en arrière ». Mode de démonstration propre aux entiers
+naturels.} permet d'établir qu'une propriété $P(n)$ est vraie pour
+tout entier naturel $n \geq n_0$.
+
+\begin{definition}[Principe de récurrence]
+Soit $P(n)$ une propriété dépendant d'un entier naturel $n$ et
+$n_0 \in \mathbb{N}$. Si :
+\begin{itemize}
+  \item \textbf{Initialisation} : $P(n_0)$ est vraie ;
+  \item \textbf{Hérédité} : pour tout $k \geq n_0$,
+        $P(k) \implies P(k+1)$ ;
+\end{itemize}
+alors $P(n)$ est vraie pour tout entier $n \geq n_0$.
+\index{récurrence}
+\end{definition}
+
+\begin{remarque}
+L'hérédité seule ne suffit pas : sans initialisation, on peut
+« hériter » d'une propriété fausse. Les deux étapes sont
+indispensables.
+\end{remarque}
+
+\begin{methode}[Rédiger une récurrence]
+\begin{enumerate}
+  \item Énoncer clairement la propriété $P(n)$.
+  \item \textbf{Initialisation} : vérifier $P(n_0)$.
+  \item \textbf{Hérédité} : supposer $P(k)$ vraie pour un entier
+        $k \geq n_0$ fixé, puis démontrer $P(k+1)$.
+  \item \textbf{Conclusion} : citer le principe de récurrence.
+\end{enumerate}
+\end{methode}
+
+\begin{exemple}
+Montrons que pour tout $n \in \mathbb{N}$ :
+$\displaystyle\sum_{i=0}^{n} i = \frac{n(n+1)}{2}$.
+
+\emph{Initialisation.} Pour $n=0$ : la somme vaut $0$ et
+$\frac{0 \times 1}{2} = 0$. La propriété est vraie au rang $0$.
+
+\emph{Hérédité.} Soit $k \in \mathbb{N}$ tel que
+$\sum_{i=0}^{k} i = \frac{k(k+1)}{2}$. Alors
+\[
+\sum_{i=0}^{k+1} i = \frac{k(k+1)}{2} + (k+1)
+= \frac{(k+1)(k+2)}{2}.
+\]
+La propriété est héréditaire, donc vraie pour tout $n$.
+\end{exemple}
+
+\section{Limite d'une suite géométrique}
+
+\begin{theoreme}[Limite de $q^n$]\label{thm:qn}
+Soit $q$ un réel.
+\begin{itemize}
+  \item Si $q > 1$, alors $\lim\limits_{n \to +\infty} q^n = +\infty$.
+  \item Si $-1 < q < 1$, alors $\lim\limits_{n \to +\infty} q^n = 0$.
+  \item Si $q \leq -1$, la suite $(q^n)$ n'a pas de limite.
+\end{itemize}
+\index{suite géométrique!limite}
+\end{theoreme}
+
+\begin{demonstration}
+Cas $q>1$ : on pose $q = 1 + a$ avec $a > 0$. L'inégalité de
+Bernoulli, démontrée par récurrence, donne $q^n \geq 1 + na$ pour
+tout $n$. Comme $\lim (1+na) = +\infty$, le théorème de comparaison
+permet de conclure. Les autres cas s'en déduisent.
+\end{demonstration}
+
+\begin{propriete}
+Toute suite croissante et majorée converge ; toute suite décroissante
+et minorée converge.
+\end{propriete}
+
+\begin{retenir}
+Pour lever une indétermination sur une suite du type
+$u_n = a\,q^n + b$, on isole le terme dominant : le comportement de
+$(u_n)$ est dicté par celui de $(q^n)$ (\cref{thm:qn}).
+\end{retenir}
+
+\begin{histoire}[Fibonacci et les lapins (1202)]
+Dans son \emph{Liber abaci}, Léonard de Pise — dit Fibonacci —
+modélise la croissance d'une population de lapins par la suite
+définie par $F_0 = 0$, $F_1 = 1$ et $F_{n+2} = F_{n+1} + F_n$. Le
+quotient $F_{n+1}/F_n$ converge vers le nombre d'or
+$\varphi = \frac{1+\sqrt{5}}{2}$.
+\end{histoire}
+
+\section{Suites et Python}
+
+\begin{activite}[Seuil d'une suite géométrique]
+Une culture bactérienne triple chaque heure à partir de
+$u_0 = 200$ individus. On cherche au bout de combien d'heures la
+population dépasse $10^6$ individus.
+\begin{enumerate}
+  \item Exprimer $u_n$ en fonction de $n$.
+  \item Compléter puis exécuter le programme ci-dessous.
+  \item Retrouver le résultat par le calcul avec le logarithme.
+\end{enumerate}
+\end{activite}
+
+\begin{python}[recherche de seuil]
+def seuil(u0: float, q: float, M: float) -> int:
+    """Plus petit n tel que u0 * q**n > M."""
+    n, u = 0, u0
+    while u <= M:
+        u = u * q      # relation de récurrence
+        n = n + 1
+    return n
+
+print(seuil(200, 3, 1e6))   # affiche 8
+\end{python}
+
+La fonction \code{seuil} illustre le lien entre boucle
+\code{while} et convergence : la boucle termine car la suite tend
+vers $+\infty$ (\cref{thm:qn}).
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=10cm, height=6cm,
+  xlabel={$n$}, ylabel={$u_n$},
+  ymode=log, grid=major,
+  title={Croissance de $u_n = 200 \times 3^n$}]
+\addplot[only marks, mark=*, mark size=2pt, color=chapcolor]
+  coordinates {(0,200)(1,600)(2,1800)(3,5400)(4,16200)
+               (5,48600)(6,145800)(7,437400)(8,1312200)};
+\addplot[dashed, color=coulRetenir, domain=0:8] {1e6}
+  node[above, pos=0.15, font=\small\sffamily, text=coulRetenir]{seuil $10^6$};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\section*{Exercices}
+\addcontentsline{toc}{section}{Exercices}
+
+\begin{multicols}{2}
+
+\exercice[1]{Premiers termes}
+Soit $(u_n)$ définie par $u_0 = 5$ et $u_{n+1} = 2u_n - 3$.
+Calculer $u_1$, $u_2$ et $u_3$.
+
+\exercice[2]{Récurrence}
+Montrer que pour tout $n \in \mathbb{N}$ :
+$4^n - 1$ est divisible par $3$.
+
+\exercice[2]{Étude complète}
+Soit $(v_n)$ définie par $v_n = \dfrac{3n-1}{n+2}$.
+\begin{enumerate}
+  \item Étudier le sens de variation de $(v_n)$.
+  \item Déterminer sa limite.
+\end{enumerate}
+
+\exercice[3]{Suite arithmético-géométrique}
+Soit $u_0 = 1$ et $u_{n+1} = \frac{1}{2}u_n + 3$.
+\begin{enumerate}
+  \item Montrer que $(u_n - 6)$ est géométrique.
+  \item En déduire $u_n$ puis $\lim u_n$.
+  \item Écrire une fonction Python \code{u(n)} renvoyant $u_n$.
+\end{enumerate}
+
+\end{multicols}

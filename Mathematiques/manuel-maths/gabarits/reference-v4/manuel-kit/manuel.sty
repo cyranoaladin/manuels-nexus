@@ -1,0 +1,406 @@
+%% ============================================================
+%% manuel.sty  —  v2.0  «Éditorial premium»
+%% Feuille de style pour manuel scolaire (lycée : maths / NSI / physique)
+%% Charte : accent chapitre unique + 2 couleurs sémantiques,
+%%          hiérarchie par la FORME et la TYPO (pas par la couleur).
+%% Classe support : scrbook (KOMA-Script)
+%% Moteur : pdflatex (2 passes) — compatible lualatex/xelatex.
+%% Licence : usage libre — Nexus Réussite / A. Ben Rhouma
+%% ------------------------------------------------------------
+%% Principe directeur
+%%   Un manuel «jeune, vif et haut de gamme» ne multiplie PAS les
+%%   couleurs : il fixe UNE couleur d'accent par chapitre/matière,
+%%   deux couleurs sémantiques stables (corail = à retenir,
+%%   sépia = histoire), et distingue les blocs pédagogiques par
+%%   leur GRAMMAIRE VISUELLE :
+%%     • Définition   → onglet plein  + fond teinté   (le socle)
+%%     • Théorème     → cadre contour + bandeau plein (l'énoncé fort)
+%%     • Propriété    → filet gauche  + label en ligne (le rappel)
+%%     • Méthode      → cadre fin + onglet contour + liste numérotée
+%%     • Exemple      → filet fin + label capitales    (l'illustration)
+%%     • Activité     → cadre en tirets                (la tâche)
+%%     • À retenir    → corail, forte saillance        (l'essentiel)
+%%     • Histoire     → sépia, italique                (le récit)
+%%     • Démonstration→ filet + amorce italique + ∎
+%% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{manuel}[2026/07/16 v2.0 Manuel scolaire — editorial premium]
+
+%% ---------- Options -----------------------------------------
+%% [palatino] : corps Palatino (défaut, chaleureux)
+%% [moderne]  : corps Latin Modern
+\newif\ifmanuel@palatino \manuel@palatinotrue
+\DeclareOption{palatino}{\manuel@palatinotrue}
+\DeclareOption{moderne}{\manuel@palatinofalse}
+\ProcessOptions\relax
+
+%% ---------- Encodage, langue, micro-typographie -------------
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{etoolbox}
+\IfFileExists{french.ldf}{%
+  \RequirePackage[french]{babel}%
+  \frenchsetup{StandardLists=true}%
+}{}
+\RequirePackage{microtype}
+
+%% ---------- Polices ------------------------------------------
+%% Corps : Palatino (mathpazo). Titres/labels : Helvetica (helvet).
+%% Le contraste serif/sans-serif structure toute la page.
+\ifmanuel@palatino
+  \RequirePackage[sc]{mathpazo}
+  \linespread{1.06}
+\else
+  \RequirePackage{lmodern}
+\fi
+\RequirePackage[scaled=0.94]{helvet}
+%% Raccourci « famille titre » : toujours sans-serif gras.
+\newcommand{\titrefont}{\sffamily\bfseries}
+
+%% ---------- Couleurs : la charte -----------------------------
+\RequirePackage[dvipsnames,svgnames]{xcolor}
+%% -- Structure (fixe) --
+\definecolor{encre}{HTML}{16233B}       % bleu nuit — texte structurel
+\definecolor{grisdoux}{HTML}{F2F1EC}    % fonds neutres chauds
+\definecolor{filetgris}{HTML}{E2E0D8}   % hairlines
+%% -- Accents de matière (vifs, contrastés) --
+\definecolor{mathsAccent}{HTML}{3A2BD4}    % indigo électrique — maths
+\definecolor{nsiAccent}{HTML}{0E9E6E}      % émeraude — NSI
+\definecolor{physiqueAccent}{HTML}{E4572E} % terracotta vif — physique
+%% -- Sémantique stable (2 seules couleurs, rôles fixes) --
+\definecolor{coulRetenir}{HTML}{F5484B}  % corail    — à retenir / alerte
+\definecolor{coulHistoire}{HTML}{8A6D3B} % sépia     — histoire des sciences
+%% -- Utilitaires --
+\definecolor{coulCode}{HTML}{1E293B}     % ardoise   — code informatique
+\definecolor{coulEtoile}{HTML}{E07A1F}   % ambre     — étoiles de difficulté
+
+%% Couleur d'accent du chapitre (pilotée par \matiere ou \couleurchapitre)
+\colorlet{chapcolor}{mathsAccent}
+\newcommand{\couleurchapitre}[1]{\colorlet{chapcolor}{#1}}
+
+%% Étiquette de matière / niveau affichée sur l'ouverture et les en-têtes
+\newcommand{\manuel@matiere}{Mathématiques}
+\newcommand{\manuel@niveau}{Terminale spécialité}
+\newcommand{\niveau}[1]{\renewcommand{\manuel@niveau}{#1}}
+%% \matiere{maths|nsi|physique}  — fixe accent + étiquette d'un coup.
+\newcommand{\matiere}[1]{%
+  \ifstrequal{#1}{maths}{\colorlet{chapcolor}{mathsAccent}%
+     \renewcommand{\manuel@matiere}{Mathématiques}}{%
+  \ifstrequal{#1}{nsi}{\colorlet{chapcolor}{nsiAccent}%
+     \renewcommand{\manuel@matiere}{Sciences numériques}}{%
+  \ifstrequal{#1}{physique}{\colorlet{chapcolor}{physiqueAccent}%
+     \renewcommand{\manuel@matiere}{Physique-Chimie}}{%
+  \colorlet{chapcolor}{mathsAccent}\renewcommand{\manuel@matiere}{#1}}}}}
+
+%% ---------- Géométrie de page --------------------------------
+%% Marge extérieure large : colonne de notes marginales,
+%% signature visuelle du manuel scolaire.
+\RequirePackage[a4paper,
+  top=2.4cm, bottom=2.6cm,
+  inner=2.0cm, outer=4.8cm,
+  marginparwidth=3.5cm, marginparsep=0.6cm,
+  headsep=0.7cm]{geometry}
+\RequirePackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize\sffamily\color{encre}}
+
+%% ---------- TikZ / graphiques --------------------------------
+\RequirePackage{tikz}
+\usetikzlibrary{calc,positioning,arrows.meta,decorations.pathmorphing,backgrounds}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18,
+  every axis/.append style={
+    axis line style={color=encre!75, line width=0.6pt},
+    tick label style={font=\footnotesize\sffamily},
+    label style={font=\small\sffamily},
+    title style={font=\sffamily\bfseries\small, color=encre},
+    grid style={filetgris},
+    every axis plot/.append style={line width=1pt}}}
+
+%% ---------- tcolorbox : cœur du système d'encadrés -----------
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{skins,breakable,theorems,listings}
+
+%% Base commune (géométrie et rythme partagés) ----------------
+\tcbset{manuelbase/.style={
+    enhanced, breakable,
+    boxrule=0pt, arc=2pt,
+    left=10pt, right=10pt, top=8pt, bottom=9pt,
+    fonttitle=\titrefont, coltitle=white,
+    before skip=15pt, after skip=15pt}}
+
+%% Onglet flottant PLEIN (Définition, Activité, À retenir…) ----
+\tcbset{ongletplein/.style={
+    attach boxed title to top left={yshift=-2.4mm, xshift=6pt},
+    boxed title style={boxrule=0pt, arc=2pt,
+      left=8pt, right=8pt, top=3pt, bottom=3pt},
+    top=11pt}}
+%% Onglet flottant CONTOUR (Méthode) --------------------------
+\tcbset{ongletcontour/.style={
+    coltitle=chapcolor,
+    attach boxed title to top left={yshift=-2.4mm, xshift=6pt},
+    boxed title style={boxrule=1pt, colframe=chapcolor,
+      colback=white, arc=2pt, left=8pt, right=8pt, top=3pt, bottom=3pt},
+    top=11pt}}
+
+%% ---- 1. DÉFINITION : onglet plein + barre + fond teinté -----
+\newtcolorbox[auto counter, number within=chapter]{definition}[1][]{%
+  manuelbase, ongletplein,
+  colback=chapcolor!7,
+  borderline west={3pt}{0pt}{chapcolor},
+  colbacktitle=chapcolor,
+  title={Définition~\thetcbcounter\if\relax\detokenize{#1}\relax\else\ ---\ #1\fi}}
+
+%% ---- 2. THÉORÈME : cadre contour + bandeau plein ------------
+\newtcolorbox[auto counter, number within=chapter]{theoreme}[1][]{%
+  manuelbase,
+  colback=white, colframe=chapcolor, boxrule=1.2pt,
+  colbacktitle=chapcolor, coltitle=white,
+  title={Théorème~\thetcbcounter\if\relax\detokenize{#1}\relax\else\ ---\ #1\fi},
+  top=6pt, toptitle=3pt, bottomtitle=3pt, lefttitle=10pt}
+
+%% ---- 3. PROPRIÉTÉ : filet gauche + label en ligne -----------
+\newtcolorbox[auto counter, number within=chapter]{propriete}[1][]{%
+  manuelbase,
+  colback=white,
+  borderline west={2.5pt}{0pt}{chapcolor},
+  left=12pt,
+  before upper={\textcolor{chapcolor}{\titrefont Propriété~\thetcbcounter%
+    \if\relax\detokenize{#1}\relax\else\ ---\ #1\fi.}\ }}
+
+%% ---- 4. MÉTHODE : cadre fin + onglet contour + n° -----------
+\newtcolorbox[auto counter, number within=chapter]{methode}[1][]{%
+  manuelbase, ongletcontour,
+  colback=white, colframe=filetgris, boxrule=1.2pt,
+  colbacktitle=white,
+  title={\raisebox{-0.3pt}{\tikz\draw[chapcolor,line width=1pt,rounded corners=1pt]
+     (0,0) rectangle (1.6mm,1.6mm);}\hspace{4pt}%
+     Méthode~\thetcbcounter\if\relax\detokenize{#1}\relax\else\ ---\ #1\fi}}
+
+%% ---- 5. EXEMPLE : filet fin + label capitales ---------------
+\newtcolorbox[auto counter, number within=chapter]{exemple}[1][]{%
+  manuelbase,
+  colback=white,
+  borderline west={2pt}{0pt}{chapcolor!45},
+  left=14pt, top=4pt, bottom=6pt,
+  before upper={\textcolor{chapcolor}{\sffamily\bfseries\footnotesize
+    \MakeUppercase{Exemple~\thetcbcounter}%
+    \if\relax\detokenize{#1}\relax\else\ ---\ \MakeUppercase{#1}\fi}\par
+    \vspace{3pt}}}
+
+%% ---- 6. ACTIVITÉ : cadre en tirets --------------------------
+\newtcolorbox[auto counter, number within=chapter]{activite}[1][]{%
+  manuelbase, ongletplein,
+  colback=white,
+  borderline={1pt}{0pt}{chapcolor, dashed},
+  colbacktitle=chapcolor,
+  title={Activité~\thetcbcounter\if\relax\detokenize{#1}\relax\else\ ---\ #1\fi}}
+
+%% ---- 7. À RETENIR : corail, forte saillance -----------------
+\providecommand{\picto@ampoule}{%
+  \raisebox{-0.6pt}{\tikz{\fill[white] (0,0) circle (2.4pt);
+    \fill[coulRetenir] (0,0) circle (2.4pt) node[font=\tiny\sffamily\bfseries]{!};}}\,}
+\newtcolorbox{retenir}[1][À retenir]{%
+  manuelbase, ongletplein,
+  colback=coulRetenir!8, colframe=coulRetenir, boxrule=1.2pt,
+  colbacktitle=coulRetenir,
+  title={\picto@ampoule #1}}
+
+%% ---- 8. HISTOIRE : sépia, italique --------------------------
+\newtcolorbox{histoire}[1][Un peu d'histoire]{%
+  manuelbase, ongletplein,
+  colback=coulHistoire!8,
+  borderline west={3pt}{0pt}{coulHistoire},
+  colbacktitle=coulHistoire,
+  fontupper=\small\itshape,
+  title={#1}}
+
+%% ---- 9. DÉMONSTRATION : filet + amorce + ∎ ------------------
+\newtcolorbox{demonstration}{%
+  blanker, breakable,
+  before skip=11pt, after skip=14pt,
+  left=12pt, borderline west={1pt}{0pt}{chapcolor!55},
+  before upper={\textcolor{chapcolor}{\sffamily\itshape\bfseries
+    Démonstration.}\ \small},
+  after upper={\nobreak\hfill\textcolor{chapcolor}{$\blacksquare$}}}
+
+%% ---- 10. REMARQUE : gris neutre -----------------------------
+\newtcolorbox{remarque}{%
+  manuelbase,
+  colback=grisdoux, arc=2pt,
+  borderline west={2.5pt}{0pt}{encre!35},
+  top=6pt, bottom=6pt, fontupper=\small,
+  before upper={\textcolor{encre}{\titrefont Remarque.}\ }}
+
+%% ---- Objectifs (utilisé sur l'ouverture) --------------------
+\newtcolorbox{objectifs}{%
+  enhanced, frame hidden, boxrule=0pt, arc=3pt,
+  colback=chapcolor!7,
+  borderline west={3pt}{0pt}{chapcolor},
+  left=12pt, right=12pt, top=10pt, bottom=10pt,
+  before upper={\textcolor{chapcolor}{\titrefont\large
+    Objectifs — Capacités attendues}\par\vspace{5pt}}}
+
+%% ---------- Vocabulaire en marge -----------------------------
+\newcommand{\vocab}[2]{%
+  \textcolor{chapcolor}{\textbf{#1}}%
+  \marginnote{\textcolor{chapcolor}{\rule{2.6cm}{2pt}}\\[2pt]
+    {\titrefont\color{chapcolor}#1}\\[2pt]\itshape\small #2}}
+
+%% ---------- Code informatique (listings + tcolorbox) ---------
+\RequirePackage{listings}
+\lstdefinestyle{manuelpython}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{chapcolor}\bfseries,
+  stringstyle=\color{coulHistoire},
+  commentstyle=\color{encre!55}\itshape,
+  numbers=left, numberstyle=\tiny\color{encre!45}, numbersep=9pt,
+  showstringspaces=false, tabsize=4, columns=fullflexible,
+  literate={é}{{\'e}}1 {è}{{\`e}}1 {à}{{\`a}}1 {ê}{{\^e}}1
+           {û}{{\^u}}1 {ç}{{\c c}}1 {É}{{\'E}}1 {î}{{\^\i}}1 {ô}{{\^o}}1}
+
+\newtcblisting{python}[1][]{%
+  enhanced, breakable, arc=2pt, boxrule=0pt, frame hidden,
+  colback=grisdoux,
+  borderline west={3pt}{0pt}{coulCode},
+  listing only, listing options={style=manuelpython},
+  attach boxed title to top left={yshift=-2.4mm, xshift=6pt},
+  boxed title style={colback=coulCode, arc=2pt, boxrule=0pt,
+    left=8pt, right=8pt, top=3pt, bottom=3pt},
+  fonttitle=\titrefont\small, coltitle=white,
+  title={Python\if\relax\detokenize{#1}\relax\else\ ---\ #1\fi},
+  top=11pt, before skip=15pt, after skip=15pt}
+
+\newcommand{\code}[1]{{\ttfamily\color{coulCode}#1}}
+
+%% ---------- Exercices ----------------------------------------
+\RequirePackage{enumitem}
+\RequirePackage{multicol}
+\setlist[enumerate,1]{label=\textcolor{chapcolor}{\textbf{\arabic*.}},
+  leftmargin=*, itemsep=3pt, topsep=4pt}
+\setlist[itemize,1]{label=\textcolor{chapcolor}{\small$\blacktriangleright$},
+  leftmargin=*, itemsep=3pt, topsep=4pt}
+
+\newcounter{exo}[chapter]
+\newcommand{\etoiles}[1]{{\small%
+  \foreach \i in {1,2,3}{%
+    \ifnum\i>#1\textcolor{filetgris!60!gray}{$\bigstar$}\else
+    \textcolor{coulEtoile}{$\bigstar$}\fi}}}
+%% \exercice[difficulté 1-3]{Titre}
+\newcommand{\exercice}[2][1]{%
+  \par\addvspace{15pt}\refstepcounter{exo}%
+  \noindent
+  {\titrefont
+   \tikz[baseline=(n.base)]\node[fill=chapcolor, text=white,
+     rounded corners=2pt, inner xsep=7pt, inner ysep=3.5pt](n)
+     {Exercice \thechapter.\theexo};%
+   \enskip\color{encre} #2\hfill\etoiles{#1}}%
+  \par\nobreak\addvspace{6pt}}
+
+%% ---------- Titres : sections, sous-sections -----------------
+\RequirePackage{scrlayer-scrpage}
+\addtokomafont{disposition}{\color{encre}}
+\addtokomafont{section}{\titrefont\Large}
+\addtokomafont{subsection}{\titrefont\large}
+\setkomafont{section}{\normalfont\titrefont\Large\color{encre}}
+
+%% Section : pastille numérotée pleine
+\renewcommand{\sectionformat}{%
+  \tikz[baseline=(n.base)]\node[fill=chapcolor, text=white,
+    rounded corners=3pt, inner xsep=8pt, inner ysep=4pt,
+    font=\titrefont](n){\thesection};\enskip}
+\renewcommand{\subsectionformat}{%
+  \textcolor{chapcolor}{\titrefont\thesubsection}\enskip}
+
+%% ---------- OUVERTURE DE CHAPITRE (pleine page) --------------
+%% Le visuel de \chapter est neutralisé : c'est \ouverturechapitre
+%% qui peint toute la page (bandeau couleur + n° géant + titre +
+%% décor TikZ) puis dépose les objectifs, et termine par \clearpage.
+%%
+%% Usage :
+%%   \matiere{maths}\niveau{Terminale spécialité}
+%%   \chapter{Suites numériques et récurrence}
+%%   \ouverturechapitre[<code TikZ de décor>]{%
+%%      \item Objectif 1 …
+%%      \item Objectif 2 …}
+%%
+%% Le décor TikZ est dessiné dans le repère de la page
+%% (nœud `current page`), typiquement dans la moitié droite
+%% du bandeau. Voir la démo pour l'exemple Fibonacci.
+%% ------------------------------------------------------------
+\newlength{\manuel@band}
+\setlength{\manuel@band}{0.56\paperheight}
+%% neutralise le titre par défaut de \chapter (on garde n°, TOC, marques)
+\renewcommand*{\chapterformat}{}
+\renewcommand\chapterlinesformat[3]{}
+\RedeclareSectionCommand[beforeskip=0pt, afterskip=0pt,
+  innerskip=0pt]{chapter}
+
+\newcommand{\ouverturechapitre}[2][]{%
+  \thispagestyle{empty}%
+  \noindent\begin{tikzpicture}[remember picture, overlay]
+    % --- bandeau couleur plein cadre (haut de page) ---
+    \fill[chapcolor] (current page.north west)
+      rectangle ([yshift=-\manuel@band]current page.north east);
+    % --- décor TikZ fourni par l'utilisateur (repère page) ---
+    #1
+    % --- étiquette matière · niveau ---
+    \node[anchor=north west, text=white, opacity=0.9,
+          font=\sffamily\bfseries\small, inner sep=0pt]
+      at ([shift={(20mm,-17mm)}]current page.north west)
+      {\MakeUppercase{\manuel@matiere}\ \ $\cdot$\ \ \manuel@niveau};
+    % --- numéro géant fantôme ---
+    \node[anchor=south west, text=white, opacity=0.15, inner sep=0pt,
+          font=\sffamily\bfseries\fontsize{210}{210}\selectfont]
+      at ([shift={(16mm,-\manuel@band+2mm)}]current page.north west)
+      {\ifnum\value{chapter}>0 \thechapter\fi};
+    % --- « Chapitre N » + titre ---
+    \node[anchor=south west, text=white, align=left, inner sep=0pt,
+          font=\sffamily\bfseries]
+      at ([shift={(20mm,-\manuel@band+24mm)}]current page.north west)
+      {\fontsize{15}{15}\selectfont\MakeUppercase{Chapitre~\thechapter}};
+    \node[anchor=south west, text=white, align=left, inner sep=0pt,
+          text width=0.66\paperwidth,
+          font=\sffamily\bfseries\fontsize{34}{40}\selectfont]
+      at ([shift={(20mm,-\manuel@band+13mm)}]current page.north west)
+      {#2 \par};
+  \end{tikzpicture}\par
+  % --- espace pour passer sous le bandeau, puis objectifs ---
+  \vspace*{\dimexpr\manuel@band-\topskip-1.4cm\relax}%
+}
+%% Environnement compagnon : \begin{ouverture}[decor]{titre} … \end{ouverture}
+%% déclare titre + décor puis ouvre directement une liste d'objectifs.
+\newenvironment{ouverture}[2][]{%
+  \ouverturechapitre[#1]{#2}%
+  \begin{objectifs}\begin{itemize}%
+}{%
+  \end{itemize}\end{objectifs}\clearpage}
+
+%% ---------- En-têtes / pieds de page -------------------------
+\pagestyle{scrheadings}
+\clearpairofpagestyles
+\renewcommand*{\chaptermarkformat}{Chapitre \thechapter\ --\ }
+\lehead{\sffamily\small\color{encre}\leftmark}
+\rohead{\sffamily\small\color{encre}\rightmark}
+\lefoot*{\tikz\node[fill=chapcolor, text=white, circle,
+  inner sep=3.6pt, font=\titrefont\small]{\pagemark};}
+\rofoot*{\tikz\node[fill=chapcolor, text=white, circle,
+  inner sep=3.6pt, font=\titrefont\small]{\pagemark};}
+\KOMAoptions{headsepline=0.6pt}
+\setkomafont{headsepline}{\color{chapcolor}}
+
+%% ---------- Mathématiques, unités, index ---------------------
+\RequirePackage{amsmath, amssymb}
+\RequirePackage{siunitx}
+\sisetup{locale=FR, per-mode=symbol}
+\RequirePackage{imakeidx}
+\makeindex[intoc, title=Index]
+
+%% ---------- Hyperliens et références croisées ----------------
+\RequirePackage[colorlinks=true, linkcolor=chapcolor,
+  citecolor=coulHistoire, urlcolor=chapcolor]{hyperref}
+\IfFileExists{french.ldf}{%
+  \RequirePackage[french]{cleveref}}{%
+  \RequirePackage{cleveref}}
+
+\endinput

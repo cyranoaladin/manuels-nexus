@@ -2,6 +2,11 @@
 
 Version 3.2 — Juillet 2026. Ce document est la spécification de référence pour la mise en page du manuel. Toute production PDF doit s'y conformer. La classe `gabarits/nexus-manuel.cls` implémente ces règles.
 
+## Référence de conception v4
+
+Le kit éditorial v2 est archivé en lecture seule dans `gabarits/reference-v4/manuel-kit/`.
+Il sert de référence de conception pour la charte v4 ; il n'est jamais chargé par la classe Nexus.
+
 ---
 
 ## 1. Grille de page

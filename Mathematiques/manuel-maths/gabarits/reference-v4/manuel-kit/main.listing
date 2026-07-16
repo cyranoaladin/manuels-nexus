@@ -1,0 +1,9 @@
+def seuil(u0: float, q: float, M: float) -> int:
+    """Plus petit n tel que u0 * q**n > M."""
+    n, u = 0, u0
+    while u <= M:
+        u = u * q      # relation de récurrence
+        n = n + 1
+    return n
+
+print(seuil(200, 3, 1e6))   # affiche 8

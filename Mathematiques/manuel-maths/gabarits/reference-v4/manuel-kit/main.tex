@@ -1,0 +1,59 @@
+%% ============================================================
+%% main.tex — Manuel scolaire (démonstration de la charte v2)
+%% Compilation :  pdflatex main  →  makeindex main  →  pdflatex main
+%% (Overleaf : moteur pdfLaTeX, rien à configurer.)
+%% ============================================================
+\documentclass[a4paper, 11pt, twoside, numbers=noenddot,
+               chapterprefix=false, open=right]{scrbook}
+
+\usepackage[palatino]{manuel}   % [moderne] pour Latin Modern
+
+\title{Mathématiques — Terminale}
+\author{Nexus Réussite}
+
+\begin{document}
+
+%% ---------- Couverture pleine page (bandeau + géométrie) ----------
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[mathsAccent] (current page.north west) rectangle (current page.south east);
+  % trame géométrique discrète
+  \begin{scope}
+    \clip (current page.north west) rectangle (current page.south east);
+    \foreach \i in {0,...,14}{
+      \draw[white, opacity=0.06, line width=1pt]
+        ([xshift=\i cm]current page.west) -- ([xshift=\i cm, yshift=6cm]current page.west);}
+    \draw[white, opacity=0.14, line width=2pt]
+      ([shift={(-1cm,3cm)}]current page.east) circle (5.5cm);
+    \draw[white, opacity=0.14, line width=2pt]
+      ([shift={(-1cm,3cm)}]current page.east) circle (3.4cm);
+  \end{scope}
+  \node[anchor=north west, text=white, font=\sffamily\bfseries, opacity=0.9]
+    at ([shift={(2.2cm,-2.6cm)}]current page.north west)
+    {\fontsize{16}{16}\selectfont NEXUS RÉUSSITE};
+  \node[anchor=west, text=white, align=left, font=\sffamily\bfseries]
+    at ([shift={(2.2cm,1.5cm)}]current page.west)
+    {\fontsize{72}{74}\selectfont Mathématiques};
+  \node[anchor=west, text=white, align=left, font=\sffamily, opacity=0.92]
+    at ([shift={(2.3cm,-0.6cm)}]current page.west)
+    {\fontsize{26}{28}\selectfont Terminale — Enseignement de spécialité};
+  \node[anchor=south west, text=white, font=\sffamily, opacity=0.85]
+    at ([shift={(2.2cm,2.4cm)}]current page.south west)
+    {\large Programme 2020 · Réseau AEFE};
+\end{tikzpicture}
+\end{titlepage}
+
+\frontmatter
+\tableofcontents
+
+%% ---------- Chapitres ----------
+\mainmatter
+\input{chapitres/chap-suites}
+\input{chapitres/chap-physique}
+\input{chapitres/chap-nsi}
+
+\backmatter
+\printindex
+
+\end{document}

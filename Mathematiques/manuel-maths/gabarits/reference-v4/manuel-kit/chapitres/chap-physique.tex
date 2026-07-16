@@ -1,0 +1,53 @@
+%% ============================================================
+%% Chapitre 2 — Ondes mécaniques (matière : physique-chimie)
+%% Chapitre court : montre l'accent terracotta et les encadrés
+%% dans un autre contexte disciplinaire.
+%% ============================================================
+\matiere{physique}
+\niveau{Terminale spécialité}
+
+\newcommand{\decorOndes}{%
+  \begin{scope}[shift={([shift={(-9cm,-8.3cm)}]current page.north east)}]
+    \foreach \r in {1.2,2.1,3.0,3.9,4.8}{
+      \draw[white, opacity=0.5, line width=1.4pt] (0,0) circle (\r);}
+    \draw[coulEtoile, line width=2pt, domain=-4.8:4.8, samples=120]
+      plot (\x, {0.9*sin(deg(\x*1.7))*exp(-abs(\x)/4)});
+  \end{scope}}
+
+\chapter{Ondes mécaniques progressives}
+
+\begin{ouverture}[\decorOndes]{Ondes mécaniques\\ progressives}
+  \item Définir une onde progressive et sa célérité.
+  \item Relier période, longueur d'onde et célérité.
+  \item Exploiter un enregistrement expérimental.
+\end{ouverture}
+
+\section{Onde et célérité}
+
+\begin{definition}[Onde progressive]
+Une \emph{onde mécanique progressive} est la propagation d'une
+perturbation dans un milieu matériel, sans transport de matière mais
+avec transport d'énergie.
+\end{definition}
+
+\begin{propriete}
+Pour une onde périodique, la longueur d'onde $\lambda$, la période
+$T$ et la célérité $v$ vérifient $\lambda = v\,T = \dfrac{v}{f}$.
+\end{propriete}
+
+\begin{retenir}
+La célérité dépend du \emph{milieu}, pas de la source : changer la
+fréquence modifie $\lambda$, jamais $v$.
+\end{retenir}
+
+\begin{exemple}
+Un son de fréquence \SI{440}{\hertz} se propage à
+\SI{340}{\meter\per\second} : $\lambda = \frac{340}{440}
+\approx \SI{0.77}{\meter}$.
+\end{exemple}
+
+\begin{histoire}[Doppler et les étoiles (1842)]
+Christian Doppler relie le décalage de fréquence perçu au mouvement
+de la source ; l'effet, d'abord contesté, fonde aujourd'hui la mesure
+des vitesses en astronomie.
+\end{histoire}

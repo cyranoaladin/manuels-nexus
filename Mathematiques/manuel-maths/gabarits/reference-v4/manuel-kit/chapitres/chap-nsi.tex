@@ -1,0 +1,56 @@
+%% ============================================================
+%% Chapitre 3 — Programmation dynamique (matière : NSI)
+%% Chapitre court : montre l'accent émeraude et l'encadré code.
+%% ============================================================
+\matiere{nsi}
+\niveau{Terminale spécialité}
+
+\newcommand{\decorGrille}{%
+  \begin{scope}[shift={([shift={(-9.5cm,-9.5cm)}]current page.north east)}]
+    \foreach \i in {0,...,6}{\foreach \j in {0,...,5}{
+      \fill[white, opacity={0.15+0.09*mod(\i+\j,3)}]
+        (\i*1.15,\j*1.15) circle (2.6mm);}}
+    \draw[coulEtoile, line width=2pt, rounded corners=2pt]
+      (0,0) -- (1.15,1.15) -- (2.3,1.15) -- (3.45,2.3)
+      -- (4.6,2.3) -- (5.75,3.45) -- (6.9,4.6);
+  \end{scope}}
+
+\chapter{Programmation dynamique}
+
+\begin{ouverture}[\decorGrille]{Programmation\\ dynamique}
+  \item Reconnaître les sous-problèmes qui se recouvrent.
+  \item Mémoïser pour éviter les recalculs.
+  \item Comparer coûts récursif et dynamique.
+\end{ouverture}
+
+\section{Mémoïsation}
+
+\begin{definition}[Mémoïsation]
+La \emph{mémoïsation} consiste à stocker les résultats déjà calculés
+d'une fonction pour les réutiliser, transformant un calcul
+exponentiel en calcul linéaire.
+\end{definition}
+
+\begin{methode}[Rendre une fonction dynamique]
+\begin{enumerate}
+  \item Identifier la relation de récurrence.
+  \item Choisir une structure de mémoire (tableau, dictionnaire).
+  \item Remplir la mémoire des cas de base vers le cas cherché.
+\end{enumerate}
+\end{methode}
+
+\begin{python}[Fibonacci mémoïsé]
+def fib(n: int, memo: dict = {}) -> int:
+    if n < 2:
+        return n
+    if n not in memo:
+        memo[n] = fib(n - 1) + fib(n - 2)   # sous-problèmes
+    return memo[n]
+
+print(fib(50))   # instantané : 12586269025
+\end{python}
+
+\begin{retenir}
+Sans mémoïsation, \code{fib} effectue $O(\varphi^{\,n})$ appels ;
+avec, $O(n)$. Le gain est spectaculaire dès $n \geq 40$.
+\end{retenir}
