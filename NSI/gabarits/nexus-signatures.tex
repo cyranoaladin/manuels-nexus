@@ -1,5 +1,6 @@
-% nexus-signatures.tex — Bandeaux et onglets de chapitre Nexus Réussite
-% Chaque chapitre a un motif génératif propre et un onglet de tranche.
+% nexus-signatures.tex — Décors d'ouverture et onglets de chapitre Nexus Réussite
+% Chaque chapitre a un décor TikZ géométrique dans la moitié droite du bandeau.
+% Kit v4.1 : décors 100% géométriques, dessinés dans le repère `current page`.
 
 \RequirePackage{tikz}
 \usetikzlibrary{calc,decorations.markings}
@@ -7,17 +8,15 @@
 % ============================================================
 %  ONGLET DE TRANCHE
 % ============================================================
-% Position verticale de l'onglet (décalée par chapitre)
 \newcounter{nxChapNum}
 \setcounter{nxChapNum}{0}
 
 \newcommand{\nxOngletHauteur}{1.5cm}
 \newcommand{\nxOngletLargeur}{0.6cm}
 
-% Dessine l'onglet sur les pages impaires (bord extérieur)
 \newcommand{\nxOnglet}{%
   \begin{tikzpicture}[remember picture,overlay]
-    \fill[nxBleu]
+    \fill[chapcolor]
       (current page.north east)
       ++(-\nxOngletLargeur, -2cm - \value{nxChapNum}*\nxOngletHauteur - \value{nxChapNum}*0.3cm)
       rectangle
@@ -26,121 +25,100 @@
 }
 
 % ============================================================
-%  MOTIFS GÉNÉRATIFS PAR THÈME
+%  DÉCORS PAR CHAPITRE (dans le bandeau d'ouverture)
 % ============================================================
+% Convention : chaque décor est dessiné dans la moitié droite du bandeau
+% en utilisant le repère `current page` (remember picture, overlay).
+% Les couleurs utilisent chapcolor et white.
 
-% --- Suites : points en progression géométrique ---
+% --- Suites : spirale d'or (rectangles d'or + spirale logarithmique) ---
 \newcommand{\motifSuites}{%
-  \begin{tikzpicture}[overlay,remember picture,opacity=0.08]
-    \foreach \i in {0,...,12} {
-      \pgfmathsetmacro{\ypos}{0.3*\i}
-      \pgfmathsetmacro{\rad}{0.08 + 0.015*\i}
-      \fill[nxBleu] (current page.south west) ++(1.2cm + 0.35*\i, 2cm + \ypos cm) circle (\rad cm);
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (Spi) at ([xshift=-55mm,yshift=-90mm]current page.north east);
+    % Rectangles d'or concentriques
+    \foreach \s/\o in {55/0.12, 34/0.15, 21/0.18, 13/0.22, 8/0.28} {
+      \draw[white,line width=0.6pt,opacity=\o]
+        ($(Spi)+(-\s mm,-\s*0.618 mm)$) rectangle ($(Spi)+(\s mm,\s*0.618 mm)$);
     }
-    \foreach \i in {0,...,8} {
-      \pgfmathsetmacro{\ypos}{0.4*\i}
-      \pgfmathsetmacro{\rad}{0.06 + 0.012*\i}
-      \fill[nxBleu] (current page.south west) ++(2.5cm + 0.25*\i, 4cm + \ypos cm) circle (\rad cm);
-    }
+    % Spirale approchée par arcs
+    \draw[white,line width=1.2pt,opacity=0.25]
+      ($(Spi)+(0,0)$)
+      arc[start angle=0,end angle=90,radius=5mm]
+      arc[start angle=90,end angle=180,radius=8mm]
+      arc[start angle=180,end angle=270,radius=13mm]
+      arc[start angle=270,end angle=360,radius=21mm];
   \end{tikzpicture}%
 }
 
-% --- Dérivation : faisceau de sécantes vers la tangente ---
-\newcommand{\motifDerivation}{%
-  \begin{tikzpicture}[overlay,remember picture,opacity=0.08]
-    \coordinate (P) at ($(current page.south west) + (3cm,5cm)$);
-    % Courbe
-    \draw[nxBleu,line width=1.5pt] ($(P)+(-2.5,0.8)$) .. controls ($(P)+(-1,-0.5)$) and ($(P)+(1,0.5)$) .. ($(P)+(2.5,1.5)$);
-    % Sécantes convergeant
-    \foreach \d in {2.0,1.5,1.0,0.5} {
-      \draw[nxOr,line width=0.6pt] ($(P)+(-\d,-0.3*\d)$) -- ($(P)+(\d,0.4*\d)$);
-    }
-    % Tangente
-    \draw[nxOr,line width=1.2pt] ($(P)+(-2,0.15)$) -- ($(P)+(2,0.15)$);
-    \fill[nxBleu] (P) circle (2pt);
-  \end{tikzpicture}%
-}
-
-% --- Second degré : famille de paraboles ---
+% --- Second degré : famille de paraboles ouvertes ---
 \newcommand{\motifSecondDegre}{%
-  \begin{tikzpicture}[overlay,remember picture,opacity=0.08]
-    \coordinate (O) at ($(current page.south west) + (3cm,5cm)$);
-    \foreach \a/\c in {0.15/nxBleu,0.2/nxOr,0.3/nxBleu,0.45/nxOr} {
-      \draw[\c,line width=0.8pt,domain=-3:3,samples=40]
-        plot ({(\x)+3},{(\a*\x*\x)+5});
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (Par) at ([xshift=-50mm,yshift=-80mm]current page.north east);
+    \foreach \a/\op in {0.008/0.12, 0.012/0.16, 0.018/0.20, 0.028/0.25} {
+      \draw[white,line width=0.8pt,opacity=\op,domain=-60:60,samples=50]
+        plot ({\x+\pgfplotmarksize},{\a*\x*\x});
     }
+    % Axe de symétrie
+    \draw[white,line width=0.5pt,opacity=0.15,dashed] ($(Par)+(0,-30mm)$) -- ($(Par)+(0,50mm)$);
+    % Sommet
+    \fill[white,opacity=0.3] (Par) circle (2pt);
   \end{tikzpicture}%
 }
 
-% --- Probabilités : arbre ---
-\newcommand{\motifProbabilites}{%
-  \begin{tikzpicture}[overlay,remember picture,opacity=0.08]
-    \coordinate (R) at ($(current page.south west) + (2cm,6cm)$);
-    \draw[nxBleu,line width=0.8pt] (R) -- ++(1.5,1) node[circle,fill=nxBleu,inner sep=1.5pt]{};
-    \draw[nxBleu,line width=0.8pt] (R) -- ++(1.5,-1) node[circle,fill=nxBleu,inner sep=1.5pt]{};
-    \draw[nxBleu,line width=0.8pt] ($(R)+(1.5,1)$) -- ++(1.5,0.5) node[circle,fill=nxBleu,inner sep=1.5pt]{};
-    \draw[nxBleu,line width=0.8pt] ($(R)+(1.5,1)$) -- ++(1.5,-0.5) node[circle,fill=nxBleu,inner sep=1.5pt]{};
-    \draw[nxBleu,line width=0.8pt] ($(R)+(1.5,-1)$) -- ++(1.5,0.5) node[circle,fill=nxBleu,inner sep=1.5pt]{};
-    \draw[nxBleu,line width=0.8pt] ($(R)+(1.5,-1)$) -- ++(1.5,-0.5) node[circle,fill=nxBleu,inner sep=1.5pt]{};
-    \fill[nxBleu] (R) circle (2pt);
+% --- Dérivation locale : faisceau de sécantes convergeant vers la tangente ---
+\newcommand{\motifDerivation}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (Tan) at ([xshift=-55mm,yshift=-85mm]current page.north east);
+    % Courbe
+    \draw[white,line width=1.2pt,opacity=0.25,domain=-40:40,samples=50]
+      plot ({\x},{\x*\x/500});
+    % Sécantes (de plus en plus proches)
+    \foreach \d/\op in {35/0.10, 25/0.14, 15/0.18, 8/0.22} {
+      \draw[white,line width=0.6pt,opacity=\op]
+        ($(Tan)+(-\d mm,-\d*\d/500 mm)$) -- ($(Tan)+(\d mm,\d*\d/500 mm)$);
+    }
+    % Tangente (horizontale au sommet)
+    \draw[white,line width=1.4pt,opacity=0.35]
+      ($(Tan)+(-40mm,0)$) -- ($(Tan)+(40mm,0)$);
+    % Point de contact
+    \fill[white,opacity=0.5] (Tan) circle (2.5pt);
+  \end{tikzpicture}%
+}
+
+% --- Types construits (NSI) : grille binaire avec flèches de référence ---
+\newcommand{\motifTypesConstruits}{%
+  \begin{tikzpicture}[overlay,remember picture]
+    \coordinate (Grid) at ([xshift=-50mm,yshift=-80mm]current page.north east);
+    % Grille 6×4
+    \foreach \r in {0,...,3}{%
+      \foreach \c in {0,...,5}{%
+        \node[draw=white,line width=0.4pt,opacity=0.15,rounded corners=1.4pt,
+          minimum width=11mm,minimum height=9mm,inner sep=0pt]
+          (cell-\r-\c) at ($(Grid)+(\c*14mm-35mm,\r*13mm-20mm)$) {};%
+      }%
+    }%
+    % Cellules mises en valeur
+    \foreach \r/\c in {0/0,0/3,1/2,2/4,3/1}{%
+      \fill[white,opacity=0.12,rounded corners=1.1pt]
+        ($(cell-\r-\c.center)+(-4.5mm,-3.5mm)$) rectangle ++(9mm,7mm);%
+    }%
+    % Flèches de référence
+    \foreach \r/\a/\b in {0/0/1,0/2/3,1/1/2,2/3/4,3/0/1}{%
+      \draw[white,line width=0.4pt,opacity=0.2,-{Stealth[length=2.5pt]}]
+        (cell-\r-\a.east) -- (cell-\r-\b.west);%
+    }%
   \end{tikzpicture}%
 }
 
 % --- Générique (fallback) ---
 \newcommand{\motifGenerique}{%
-  \begin{tikzpicture}[overlay,remember picture,opacity=0.06]
-    \foreach \i in {0,...,5} {
-      \draw[nxBleu,line width=0.8pt] ($(current page.south west) + (1.5cm + \i*0.6cm, 3cm)$)
-        -- ++(0,4cm);
+  \begin{tikzpicture}[overlay,remember picture]
+    \foreach \i in {0,...,7} {
+      \draw[white,line width=0.6pt,opacity=0.08]
+        ([xshift={-20mm-\i*8mm},yshift=-30mm]current page.north east)
+        -- ++(0,-120mm);
     }
   \end{tikzpicture}%
-}
-
-% --- Types construits : mémoire 6 x 4, valeurs et références ---
-\newcommand{\motifTypesConstruits}{%
-  \begin{tikzpicture}[overlay,remember picture]
-    \coordinate (nxmemoireorigine) at ([xshift=-28mm,yshift=31mm]current page.south east);
-    \foreach \r in {0,...,3}{%
-      \foreach \c in {0,...,5}{%
-        \node[draw=nxBleu!35,line width=.55pt,rounded corners=1.4pt,
-          minimum width=13mm,minimum height=11mm,inner sep=0pt]
-          (nxmem-\r-\c) at ($(nxmemoireorigine)+(-\c*16mm,\r*15mm)$) {};%
-      }%
-    }%
-    \foreach \r/\c in {0/0,0/3,1/2,2/4,3/1}{%
-      \fill[nxOr!60,rounded corners=1.1pt]
-        ($(nxmem-\r-\c.center)+(-5.5mm,-4mm)$) rectangle ++(11mm,8mm);%
-    }%
-    \foreach \r/\a/\b in {0/0/1,0/2/3,1/1/2,2/3/4,3/0/1}{%
-      \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
-        (nxmem-\r-\a.east) -- (nxmem-\r-\b.west);%
-    }%
-    \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
-      (nxmem-0-3.south) -- (nxmem-1-2.north);
-    \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
-      (nxmem-1-2.south) -- (nxmem-2-4.north);
-  \end{tikzpicture}%
-}
-
-% ============================================================
-%  BANDEAU D'OUVERTURE
-% ============================================================
-% Bande verticale bleu pâle sur la page d'ouverture (bord extérieur)
-\newcommand{\nxBandeauOuverture}[1][motifGenerique]{%
-  \begin{tikzpicture}[remember picture,overlay]
-    % Bande sur le bord extérieur (droite pour pages impaires, gauche pour paires)
-    \ifodd\value{page}%
-      \fill[nxBleu!12]
-        (current page.north east) rectangle
-        ($(current page.south east) + (-1.8cm,0)$);
-    \else
-      \fill[nxBleu!12]
-        (current page.north west) rectangle
-        ($(current page.south west) + (1.8cm,0)$);
-    \fi
-  \end{tikzpicture}%
-  % Motif par-dessus
-  \csname #1\endcsname%
 }
 
 % ============================================================
@@ -148,6 +126,6 @@
 % ============================================================
 \newcommand{\nxMiniMotif}{%
   \tikz[baseline=-0.1em]{%
-    \fill[nxBleu!30] (0,0) -- (0.15em,0.25em) -- (0.3em,0) -- (0.15em,-0.25em) -- cycle;
+    \fill[chapcolor!30] (0,0) -- (0.15em,0.25em) -- (0.3em,0) -- (0.15em,-0.25em) -- cycle;
   }%
 }

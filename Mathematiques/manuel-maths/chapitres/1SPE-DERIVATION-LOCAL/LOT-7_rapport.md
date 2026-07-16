@@ -69,3 +69,11 @@ Check-list 8/8 (le point « temps vérifiés sur élèves réels » reste
 A_VALIDER_HUMAIN, identique à Suites et Second degré).
 
 Tag : `chap/1SPE-DERIVATION-LOCAL-v1`.
+
+## Addendum — Recomposition charte v4.1 (16 juillet 2026)
+
+Recomposition intégrale avec la charte v4.1 « Éditorial premium » :
+polices Pagella/Heros, palette chapcolor, géométrie kit (inner 2.0cm,
+outer 4.8cm), encadrés onglet/cadre/filet, ouverture bandeau 56%.
+**PDF 39 pages, 253 Ko** (précédemment 37 pages / 245 Ko sous v3.2).
+Inventaire inchangé (même maître, même hash de contenu `ae1679c`).

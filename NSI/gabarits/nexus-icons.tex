@@ -12,10 +12,10 @@
 % ============================================================
 %  LOSANGE DE PARCOURS (remplace \ding{117})
 % ============================================================
-\newcommand{\nxLosange}[1][nxOr]{%
+\newcommand{\nxLosange}[1][chapcolor]{%
   \tikz[baseline=-0.15em]{%
     \fill[#1] (0,0) -- (0.3em,0.45em) -- (0.6em,0) -- (0.3em,-0.45em) -- cycle;
-    \draw[nxBleu,line width=0.4pt] (0,0) -- (0.3em,0.45em) -- (0.6em,0) -- (0.3em,-0.45em) -- cycle;
+    \draw[encre,line width=0.4pt,opacity=0.3] (0,0) -- (0.3em,0.45em) -- (0.6em,0) -- (0.3em,-0.45em) -- cycle;
   }%
 }
 
@@ -149,5 +149,5 @@
 % ============================================================
 %  Mise à jour des commandes Oral et Python
 % ============================================================
-\renewcommand{\pictoOral}{\icnOral~\textcolor{nxBleu}{Oral}}
-\renewcommand{\pictoPython}{\icnPython~\textcolor{nxBleu}{\texttt{Python}}}
+\renewcommand{\pictoOral}{\icnOral[chapcolor]~\textcolor{chapcolor}{Oral}}
+\renewcommand{\pictoPython}{\icnPython[chapcolor]~\textcolor{chapcolor}{\texttt{Python}}}

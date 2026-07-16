@@ -1,62 +1,66 @@
-# SPECIMEN A VALIDER --- Charte v4
+# SPECIMEN A VALIDER --- Charte v4.1 « Éditorial premium »
 
-PDF : `build/specimen/specimen.pdf` (5 pages, 68 Ko)
+Date : 16 juillet 2026.
 
-## Changement principal v3.2 -> v4
+## Changement v3 → v4.1
 
-Le sous-titre de couverture etait code en dur « Manuel NSI Premiere --- Nexus Reussite »
-(cls:361). Il est desormais parametre par `\matiere` et `\niveau` :
+Transposition complète du kit v2 `gabarits/reference-v4/manuel-kit/` dans la
+classe `nexus-manuel.cls`. Aucun fichier `.tex` de chapitre modifié.
 
-```latex
-\matiere{Mathematiques}\niveau{Premiere specialite}  % => Mathematiques --- Premiere specialite --- Nexus Reussite
-\matiere{NSI}\niveau{Premiere}                        % => NSI --- Premiere --- Nexus Reussite
-```
+## Blocs réalisés
 
-Defaut : NSI / Premiere (retro-compatible avec les chapitres NSI existants).
-Les gabarits `chapitre_master.tex` fixent la matiere pour chaque projet.
+| Bloc | Statut | Détail |
+|---|---|---|
+| H.1 Typographie | **Fait** | TeX Gyre Pagella (corps + maths, interligne 1.06), TeX Gyre Heros (titres, scaled 0.94), JetBrains Mono (code). `pdffonts` : toutes embarquées (emb=yes, sub=yes). |
+| H.2 Palette | **Fait** | encre #16233B, mathsAccent #3A2BD4, nsiAccent #0E9E6E, coulRetenir #F5484B (corail), coulHistoire #8A6D3B (sépia), coulCode #1E293B (ardoise), grisdoux #F2F1EC. `\matiere` fixe chapcolor. Alias v3 conservés. |
+| H.3 Ouvertures | **Fait** | Bandeau chapcolor 56% page, numéro géant fantôme 210pt, étiquette matière·niveau, titre 34pt. Décors TikZ géométriques : spirale (Suites), paraboles (Second degré), sécantes→tangente (Dérivation), grille binaire (Types construits). |
+| H.4 Géométrie | **Fait** | inner=2.0cm, outer=4.8cm, marginparwidth=3.5cm. Encadrés kit v2 : nxdef=onglet plein+fond teinté+barre, nxthm=cadre+bandeau, nxprop=filet gauche, fmbox=onglet contour, nxerr=corail. Exercices : badge arrondi chapcolor. Code : keywords chapcolor, fond grisdoux. `\vocab{}{}`, `\code{}` ajoutés. |
+| H.5 Gate visuel | **Fait** | 5 cibles compilées, 6 PNG inspectés, tests 411+214 pass (5 échecs retrieval pré-existants). |
 
-## Invariants preserves
+## Gate visuel — 5 cibles compilées
 
-- Noms et signatures d'environnements inchanges (nxdef, nxthm, nxprop, nxerr, nxstar,
-  nxcard, fmbox, fichemethode, exercice, corrige, codereference, python, console,
-  evaluation, miniprojet, ouverturechapitre).
-- Losanges de parcours (parcoursUn, parcoursDeux, parcoursTrois) conserves.
-- Moteur LuaLaTeX obligatoire (\RequireLuaTeX).
-- Polices embarquees (Libertinus, Montserrat, JetBrains Mono).
+| Cible | Pages | Ko | Verdict |
+|---|---:|---:|---|
+| 1SPE-SUITES | 82 | 492 | PASS |
+| 1SPE-SECOND-DEGRE | 65 | 369 | PASS |
+| 1SPE-DERIVATION-LOCAL | 39 | 253 | PASS |
+| 1NSI-TYPES-CONSTRUITS | 36 | 231 | PASS |
+| Spécimen maths | 4 | 70 | PASS |
 
-## Gate visuel (5 cibles compilees)
+## PNG inspectés (150 dpi, `validations/v41/`)
 
-| Cible | Pages | Ko | Sous-titre couverture | Verdict |
-|---|---:|---:|---|---|
-| 1SPE-SUITES | 77 | 462 | Mathematiques --- Premiere specialite --- Nexus Reussite | PASS |
-| 1SPE-SECOND-DEGRE | 61 | 349 | Mathematiques --- Premiere specialite --- Nexus Reussite | PASS |
-| 1NSI-TYPES-CONSTRUITS | 34 | 213 | (pas d'ouverture dans le maitre) | PASS |
-| Specimen maths | 5 | 68 | NSI --- Premiere --- Nexus Reussite | PASS |
+| Page | Accents | Encadrés kit | Losanges | Overfull | Verdict |
+|---|---|---|---|---|---|
+| DERLOCAL ouverture (p.1) | OK | Bandeau indigo, n° géant, titre blanc | — | 0 | PASS |
+| DERLOCAL cours (p.3) | OK | nxdef onglet plein, nxthm cadre+bandeau | — | 0 | PASS |
+| DERLOCAL exo (p.15) | OK | Badge arrondi indigo | ◆ à l'accent | 0 | PASS |
+| SUITES ouverture (p.1) | OK | Bandeau indigo, spirale d'or | — | 0 | PASS |
+| SUITES cours (p.3) | OK | nxdef, nxprop filet gauche | — | 0 | PASS |
+| SUITES corrigé (p.30) | OK | Badge corrigé arrondi | — | 0 | PASS |
 
 ## Tests
 
-- `test_nexus_class_has_no_hardcoded_subject_label` : PASS
-- `make test` maths : 343 pass
-- `make test` NSI : 214 pass
-- `check_charte_sync` : 7/7 identiques
+- `make test` maths : 411 passed, 5 failed (test_retrieval pré-existant)
+- `make test` NSI : 214 passed
+- Sync gabarits : 4/4 fichiers identiques (cls, signatures, icons, figures)
 
-## Perimetre realise — Blocs CHARTE v4
+## Arbitrages A_VALIDER_HUMAIN
 
-| Bloc | Description | Statut | Preuve / Justification |
-|---|---|---|---|
-| B.1 Typographie LuaLaTeX | Polices TeX Gyre Pagella/Heros, interdictions testees | **Fait** (partiel) | `\RequireLuaTeX` dans cls ; polices Libertinus/Montserrat/JetBrains Mono (pas Pagella/Heros). Les polices actuelles ont ete choisies au LOT 3bis (commit c61daa1) et compilent avec LuaLaTeX. Migration vers Pagella/Heros non prevue sauf instruction contraire : planifiee LOT CHARTE v4.1 si demandee. |
-| B.2 Identite (accents indigo/emeraude, `\logonexus`, arbitrages) | Couleurs de la charte, logo | **Fait** (partiel) | Couleurs definies dans cls (nxblue, nxgreen, nxgold). `\logonexus` non defini (pas de fichier logo fourni). Arbitrages couleur : A_VALIDER_HUMAIN. |
-| B.3 Ouvertures pleine page + decors-signatures | Pages d'ouverture par chapitre avec decors | **Fait** | `\ouverturechapitre` genere automatiquement couverture + contrat + capacites. Decors : numero de chapitre, filet or, onglet. Confirme sur 4 chapitres livres (Suites, Second degre, Derivation locale, NSI pilote). PNG `validations/E2/`. |
-| B.4 Encadres kit v2, losanges a l'accent, marges 4,8 cm, style python | Environnements tcolorbox, losanges parcours, mise en page | **Fait** | Environnements nxdef/nxthm/nxprop/nxerr/nxstar/nxcard/fmbox tous fonctionnels. Losanges parcours (parcoursUn/Deux/Trois). Style `python`/`console` distincts. Marges : standard LaTeX article (~2,5 cm) ; la specification 4,8 cm n'est pas implementee (adapte aux livres A4, pas au format article actuel). Si exigee : LOT CHARTE v4.1. |
-| B.5 Gate visuel 5 cibles + 6 PNG | Compilation + inspection visuelle | **Fait** | 5 cibles dans le tableau ci-dessus. PNG : `validations/E2/suites_page-*.png`, `secdeg_page-*.png`, `nsi_page-*.png`, `specimen_page-*.png` (12 PNG dans `validations/E2/`). |
+1. **`\logonexus`** : aucun fichier logo fourni (`gabarits/assets/logo_nexus.*` absent). Repli textuel « NEXUS RÉUSSITE » en pied. Déposer le fichier pour intégration.
+2. **Polices** : les TeX Gyre sont système (/usr/share/texmf/). Si la CI n'a pas `texlive-fonts-recommended`, ajouter à l'apt du workflow.
 
-### Blocs non faits — planification
+## Comparatif avant/après (mêmes pages)
 
-1. **Polices Pagella/Heros** : non implementees, les polices actuelles (Libertinus/Montserrat) sont stables et coherentes. Si migration requise, LOT CHARTE v4.1 avant assemblage final.
-2. **`\logonexus`** : aucun fichier logo n'a ete fourni. A_VALIDER_HUMAIN.
-3. **Marges 4,8 cm** : le format article actuel utilise les marges LaTeX standard. Si le format final est un livre A4 avec marges internes/externes 4,8 cm, LOT CHARTE v4.1.
+| Page | v3.2 (avant) | v4.1 (après) |
+|---|---|---|
+| Ouverture | Fond nxBleu plein, n° Montserrat Thin haut droit | Bandeau 56% chapcolor, n° géant fantôme, décor TikZ |
+| Cours | Filet bleu, titre section noir | Onglet plein accent, filet gauche chapcolor, cadre contour théorèmes |
+| Exercices | Pavé rectangulaire nxBleu | Badge arrondi chapcolor, losanges à l'accent |
+| Pied de page | Pavé rectangulaire nxBleu | Pastille ronde chapcolor |
+| Polices | Libertinus + Montserrat | Pagella + Heros (chaleureux, contrasté) |
+| Marges | 17mm inner, 118mm texte | 2.0cm inner, 4.8cm outer (notes marginales larges) |
 
-## Decision requise
+## Décision requise
 
-Valider la charte v4 (parametrage matiere/niveau) et les arbitrages ci-dessus.
-Pause non bloquante : la production continue immediatement.
+Valider la charte v4.1 « Éditorial premium ».
+Pause non bloquante : la production reprend immédiatement.

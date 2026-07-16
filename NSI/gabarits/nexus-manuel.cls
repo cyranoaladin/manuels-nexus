@@ -1,9 +1,9 @@
-% nexus-manuel.cls v3 — Classe du manuel Nexus Réussite (édition professionnelle)
+% nexus-manuel.cls v4.1 — Classe du manuel Nexus Réussite (édition premium)
 % Moteur : LuaLaTeX obligatoire. Base : KOMA-Script scrbook.
-% Polices : Libertinus Serif/Math + Montserrat + JetBrains Mono (OFL, embarquées).
-% Charte graphique : docs/06_charte_graphique.md v3.
+% Polices : TeX Gyre Pagella (corps + maths) + TeX Gyre Heros (titres) + JetBrains Mono (code).
+% Charte graphique : kit v2 « Éditorial premium » transposé.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nexus-manuel}[2026/07/16 v4.0 Manuel Nexus Reussite - edition professionnelle]
+\ProvidesClass{nexus-manuel}[2026/07/16 v4.1 Manuel Nexus Reussite - editorial premium]
 
 % ===========================================================================
 %  BASE KOMA-SCRIPT
@@ -27,42 +27,38 @@
 % ===========================================================================
 \newcommand{\nexus@matiere}{NSI}
 \newcommand{\nexus@niveau}{Première}
-\newcommand{\matiere}[1]{\renewcommand{\nexus@matiere}{#1}}
+\RequirePackage{etoolbox}
+\newcommand{\matiere}[1]{%
+  \renewcommand{\nexus@matiere}{#1}%
+  \ifstrequal{#1}{Mathématiques}{\colorlet{chapcolor}{mathsAccent}}{%
+  \ifstrequal{#1}{NSI}{\colorlet{chapcolor}{nsiAccent}}{%
+  \colorlet{chapcolor}{mathsAccent}}}%
+}
 \newcommand{\niveau}[1]{\renewcommand{\nexus@niveau}{#1}}
 
 % ===========================================================================
-%  POLICES (fontspec + unicode-math, embarquées via Path=)
+%  POLICES — Kit v2 : Pagella (corps+maths), Heros (titres), JetBrains Mono (code)
 % ===========================================================================
 \RequirePackage{fontspec}
 \RequirePackage{unicode-math}
 
 \defaultfontfeatures{Ligatures=TeX}
 
-% Détection du chemin des fontes (gabarits/fonts/ depuis le répertoire de travail)
+% Chemin pour les polices embarquées (JetBrains Mono)
 \newcommand{\nxFontPath}{gabarits/fonts/}
 
-\setmainfont{LibertinusSerif}[
-  Path=\nxFontPath,
-  Extension=.otf,
-  UprightFont=*-Regular,
-  BoldFont=*-Bold,
-  ItalicFont=*-Italic,
-  BoldItalicFont=*-BoldItalic,
-]
-\setmathfont{LibertinusMath-Regular.otf}[Path=\nxFontPath]
+% Corps : TeX Gyre Pagella (= Palatino libre), interligne 1.06
+\setmainfont{TeX Gyre Pagella}
+\linespread{1.06}
+% Mathématiques : TeX Gyre Pagella Math
+\setmathfont{TeX Gyre Pagella Math}
 
-\setsansfont{Montserrat}[
-  Path=\nxFontPath,
-  Extension=.otf,
-  UprightFont=*-Regular,
-  BoldFont=*-SemiBold,
-  ItalicFont=*-Italic,
-  BoldItalicFont=*-SemiBoldItalic,
-  FontFace={m}{n}{*-Medium},
-  FontFace={m}{it}{*-MediumItalic},
-  FontFace={thin}{n}{*-Thin},
-]
+% Titres, labels, en-têtes, folio : TeX Gyre Heros (= Helvetica libre)
+\setsansfont{TeX Gyre Heros}[Scale=0.94]
+% Raccourci « famille titre » : toujours sans-serif gras.
+\newcommand{\titrefont}{\sffamily\bfseries}
 
+% Code : JetBrains Mono (embarqué, conservé du v3)
 \setmonofont{JetBrainsMono}[
   Path=\nxFontPath,
   Extension=.otf,
@@ -86,31 +82,45 @@
 \setlength{\parskip}{0.45em}
 
 % ===========================================================================
-%  COULEURS
+%  COULEURS — Kit v2 « Éditorial premium »
 % ===========================================================================
 \RequirePackage[table]{xcolor}
-\definecolor{nxBleu}{HTML}{1B3A5C}
-\definecolor{nxOr}{HTML}{C9A227}
-\definecolor{nxGris}{HTML}{5A6472}
-\definecolor{nxRouge}{HTML}{B0413E}
-\definecolor{nxVert}{HTML}{2E6E4E}
+
+% -- Structure (fixe) --
+\definecolor{encre}{HTML}{16233B}       % bleu nuit — texte structurel
+\definecolor{grisdoux}{HTML}{F2F1EC}    % fonds neutres chauds
+\definecolor{filetgris}{HTML}{E2E0D8}   % hairlines
+
+% -- Accents de matière --
+\definecolor{mathsAccent}{HTML}{3A2BD4}   % indigo — maths
+\definecolor{nsiAccent}{HTML}{0E9E6E}     % émeraude — NSI
+
+% -- Sémantique stable --
+\definecolor{coulRetenir}{HTML}{F5484B}   % corail — à retenir / alerte
+\definecolor{coulHistoire}{HTML}{8A6D3B}  % sépia — histoire des sciences
+\definecolor{coulCode}{HTML}{1E293B}      % ardoise — code informatique
+
+% -- Couleur d'accent du chapitre (pilotée par \matiere) --
+\colorlet{chapcolor}{mathsAccent}
+
+% -- Alias v3 (rétro-compatibilité fichiers existants, dépréciés) --
+\colorlet{nxBleu}{encre}
+\colorlet{nxOr}{coulHistoire}
+\colorlet{nxGris}{encre!50}
+\colorlet{nxRouge}{coulRetenir}
+\colorlet{nxVert}{nsiAccent}
 
 % ===========================================================================
-%  GRILLE DE PAGE (colonne texte 118mm + marge pédagogique 46mm)
+%  GRILLE DE PAGE — Kit v2 : marge ext. large pour notes marginales
 % ===========================================================================
 \RequirePackage{geometry}
 \geometry{%
   a4paper,
-  inner=17mm,
-  textwidth=118mm,
-  marginparsep=6mm,
-  marginparwidth=46mm,
-  top=20mm,
-  bottom=18mm,
-  headsep=10mm,
-  footskip=12mm,
+  top=2.4cm, bottom=2.6cm,
+  inner=2.0cm, outer=4.8cm,
+  marginparwidth=3.5cm, marginparsep=0.6cm,
+  headsep=0.7cm,
 }
-% Marge extérieure calculée : 210 - 17 - 118 - 6 - 46 = 23mm (dont 15mm après marge)
 
 % ===========================================================================
 %  MARGE PÉDAGOGIQUE (colonne de design)
@@ -121,20 +131,25 @@
 \renewcommand*{\raggedrightmarginnote}{\raggedright}
 
 \newcommand{\margeAppui}[1]{%
-  \marginnote{\sffamily\fontseries{m}\fontshape{n}\fontsize{7.5}{10}\selectfont
-    \color{nxGris}\rule[-0.5ex]{0.4pt}{2.5ex}\kern4pt #1}%
+  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont
+    \color{encre!50}\rule[-0.5ex]{0.4pt}{2.5ex}\kern4pt #1}%
 }
 \newcommand{\commentaireMarge}[1]{%
-  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont\color{nxBleu}#1}%
+  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont\color{chapcolor}#1}%
 }
+% Vocabulaire en marge (kit v2)
+\newcommand{\vocab}[2]{%
+  \textcolor{chapcolor}{\textbf{#1}}%
+  \marginnote{\textcolor{chapcolor}{\rule{2.6cm}{2pt}}\\[2pt]
+    {\titrefont\color{chapcolor}#1}\\[2pt]\itshape\small #2}}
 
 % ===========================================================================
 %  HIÉRARCHIE TYPOGRAPHIQUE (KOMA-Script RedeclareSectionCommand)
 % ===========================================================================
-\addtokomafont{chapter}{\sffamily\bfseries\color{nxBleu}\fontsize{22}{27}\selectfont}
-\addtokomafont{section}{\sffamily\bfseries\color{nxBleu}\fontsize{13}{17}\selectfont}
-\addtokomafont{subsection}{\sffamily\bfseries\color{nxBleu!85!black}\fontsize{11}{14}\selectfont}
-\addtokomafont{subsubsection}{\sffamily\bfseries\color{nxBleu!70!black}\fontsize{10}{13}\selectfont}
+\addtokomafont{chapter}{\titrefont\color{encre}\fontsize{22}{27}\selectfont}
+\addtokomafont{section}{\titrefont\color{encre}\fontsize{13}{17}\selectfont}
+\addtokomafont{subsection}{\titrefont\color{encre!85!black}\fontsize{11}{14}\selectfont}
+\addtokomafont{subsubsection}{\titrefont\color{encre!70!black}\fontsize{10}{13}\selectfont}
 
 % Espacement multiples de 4.5pt (tiers de ligne)
 \RedeclareSectionCommand[
@@ -156,72 +171,112 @@
 % ===========================================================================
 \RequirePackage[automark]{scrlayer-scrpage}
 \clearpairofpagestyles
-\ohead{\ifodd\value{page}\nxOnglet\fi\nxMiniMotif\kern0.7em\sffamily\fontsize{7.5}{10}\selectfont\color{nxGris}\headmark}
-% Pied : numéro dans pavé nxBleu coin extérieur, Nexus Réussite côté intérieur
-\ofoot{\colorbox{nxBleu}{\color{white}\sffamily\bfseries\fontsize{7.5}{10}\selectfont~\thepage~}}
-\ifoot{\sffamily\fontsize{6.5}{8}\selectfont\color{nxGris}\addfontfeatures{LetterSpace=6}\MakeUppercase{Nexus Réussite}}
+\ohead{\ifodd\value{page}\nxOnglet\fi\nxMiniMotif\kern0.7em\sffamily\fontsize{7.5}{10}\selectfont\color{encre}\headmark}
+% Pied : numéro dans pastille chapcolor coin extérieur, Nexus Réussite côté intérieur
+\ofoot{\tikz\node[fill=chapcolor, text=white, circle,
+  inner sep=3.6pt, font=\titrefont\small]{\thepage};}
+\ifoot{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\addfontfeatures{LetterSpace=6}\MakeUppercase{Nexus Réussite}}
 
 % ===========================================================================
 %  LISTES (enumitem global)
 % ===========================================================================
 \RequirePackage{enumitem}
 \setlist{itemsep=1pt, topsep=3pt, parsep=0pt, leftmargin=1.5em}
-\setlist[enumerate,1]{label=\textcolor{nxBleu}{\arabic*.}}
-\setlist[itemize,1]{label=\textcolor{nxBleu}{\textbullet}}
+\setlist[enumerate,1]{label=\textcolor{chapcolor}{\textbf{\arabic*.}}}
+\setlist[itemize,1]{label=\textcolor{chapcolor}{\small$\blacktriangleright$}}
 
 % ===========================================================================
-%  ENCADRÉS v3 (tcolorbox enhanced+skins, styles centralisés)
+%  ENCADRÉS v4.1 — Kit « Éditorial premium » (tcolorbox, signatures visuelles)
 % ===========================================================================
 \RequirePackage[most,skins]{tcolorbox}
 \RequirePackage{pifont}
+\RequirePackage[normalem]{ulem}
 
-% Style de base v3.2 : la couleur du titre est cuite dans son contenu.
-% tcbcolframe n'est jamais lu par le titre detache, ce qui rend le contraste
-% identique dans tous les encadres et ne depend pas de petites capitales absentes.
-\newcommand{\nxboxtitle}[2]{{\sffamily\bfseries\fontsize{8}{11}\selectfont
+% Label de titre commun
+\newcommand{\nxboxtitle}[2]{{\titrefont\fontsize{8}{11}\selectfont
   \addfontfeatures{LetterSpace=8}\textcolor{#1}{\MakeUppercase{#2}}}}
+
+% Base commune (géométrie et rythme partagés)
 \tcbset{
-  nxbase/.style={
-    enhanced, breakable, sharp corners, boxrule=0pt, leftrule=2pt,
-    left=8pt, right=8pt, top=7pt, bottom=7pt, before skip=9pt, after skip=9pt,
-    detach title, before upper={\tcbtitle\par\smallskip}
-  },
+  manuelbase/.style={
+    enhanced, breakable, arc=2pt, boxrule=0pt,
+    left=10pt, right=10pt, top=8pt, bottom=9pt,
+    fonttitle=\titrefont, coltitle=white,
+    before skip=15pt, after skip=15pt},
+  ongletplein/.style={
+    attach boxed title to top left={yshift=-2.4mm, xshift=6pt},
+    boxed title style={boxrule=0pt, arc=2pt,
+      left=8pt, right=8pt, top=3pt, bottom=3pt},
+    top=11pt},
+  ongletcontour/.style={
+    coltitle=chapcolor,
+    attach boxed title to top left={yshift=-2.4mm, xshift=6pt},
+    boxed title style={boxrule=1pt, colframe=chapcolor,
+      colback=white, arc=2pt, left=8pt, right=8pt, top=3pt, bottom=3pt},
+    top=11pt},
 }
 
-% Définitions / Théorèmes (filet nxBleu, fond nxBleu!4)
+% Alias v3 pour compatibilité
+\tcbset{nxbase/.style={manuelbase, ongletplein}}
+
+% ---- 1. DÉFINITION : onglet plein + fond teinté + barre gauche ----
 \newcounter{nxDefNum}[chapter]
-\newtcolorbox{nxdef}[1][]{nxbase, colframe=nxBleu, colback=nxBleu!4,
-  title={\nxboxtitle{nxBleu}{Définition~#1}}}
-\newtcolorbox{nxthm}[1][]{nxbase, colframe=nxBleu!80!black, colback=nxBleu!5,
-  title={\nxboxtitle{nxBleu!80!black}{Théorème~#1}}}
-\newtcolorbox{nxprop}[1][]{nxbase, colframe=nxGris!80!black, colback=nxGris!6,
-  title={\nxboxtitle{nxGris!80!black}{Propriété~#1}}}
-\newtcolorbox{nxcard}[1][]{nxbase, colframe=nxGris!80!black, colback=nxGris!6,
-  title={\nxboxtitle{nxGris!80!black}{Carte~#1}}}
+\newtcolorbox{nxdef}[1][]{manuelbase, ongletplein,
+  colback=chapcolor!7,
+  borderline west={3pt}{0pt}{chapcolor},
+  colbacktitle=chapcolor,
+  title={\nxboxtitle{white}{Définition~#1}}}
+
+% ---- 2. THÉORÈME : cadre contour + bandeau plein ----
+\newtcolorbox{nxthm}[1][]{manuelbase,
+  colback=white, colframe=chapcolor, boxrule=1.2pt,
+  colbacktitle=chapcolor, coltitle=white,
+  title={\nxboxtitle{white}{Théorème~#1}},
+  top=6pt, toptitle=3pt, bottomtitle=3pt, lefttitle=10pt}
+
+% ---- 3. PROPRIÉTÉ : filet gauche + label en ligne ----
+\newtcolorbox{nxprop}[1][]{manuelbase,
+  colback=white,
+  borderline west={2.5pt}{0pt}{chapcolor},
+  left=12pt,
+  before upper={\textcolor{chapcolor}{\titrefont Propriété~#1.}\ }}
+
+% ---- CARTE (objectifs, contrat) ----
+\newtcolorbox{nxcard}[1][]{manuelbase,
+  colback=chapcolor!7,
+  borderline west={3pt}{0pt}{chapcolor},
+  left=12pt,
+  before upper={\textcolor{chapcolor}{\titrefont #1}\ }}
 
 % Raccourcis
 \newcommand{\definition}[2][]{\begin{nxdef}[#1]#2\end{nxdef}}
 \newcommand{\theoreme}[2][]{\begin{nxthm}[#1]#2\end{nxthm}}
 \newcommand{\propriete}[2][]{\begin{nxprop}[#1]#2\end{nxprop}}
-\newcommand{\exemple}[1]{\par\noindent\textbf{\textcolor{nxVert}{Exemple.}} #1\par}
-\newcommand{\contreexemple}[1]{\par\noindent\textbf{\textcolor{nxRouge}{Contre-exemple.}} #1\par}
+\newcommand{\exemple}[1]{\par\noindent\textbf{\textcolor{chapcolor}{Exemple.}} #1\par}
+\newcommand{\contreexemple}[1]{\par\noindent\textbf{\textcolor{coulRetenir}{Contre-exemple.}} #1\par}
 
-% Erreur fréquente (filet nxRouge)
-\RequirePackage[normalem]{ulem}
-\newtcolorbox{nxerr}{nxbase, colframe=nxRouge, colback=nxRouge!6,
-  title={\nxboxtitle{nxRouge}{Erreur fréquente}}}
+% ---- ERREUR FRÉQUENTE : corail ----
+\newtcolorbox{nxerr}{manuelbase, ongletplein,
+  colback=coulRetenir!8, colframe=coulRetenir, boxrule=1.2pt,
+  colbacktitle=coulRetenir,
+  title={\nxboxtitle{white}{Erreur fréquente}}}
 \newcommand{\erreurFrequente}[1]{\begin{nxerr}#1\end{nxerr}}
 
-% Approfondissement ★ : fond seul, sans filet.
-\newtcolorbox{nxstar}{nxbase, leftrule=0pt, colback=nxBleu!6, colframe=nxBleu,
-  title={\icnEtoile[nxBleu]\kern0.35em\nxboxtitle{nxBleu}{Pour aller plus loin}}}
+% ---- APPROFONDISSEMENT ★ : filet chapcolor, fond léger ----
+\newtcolorbox{nxstar}{manuelbase, ongletplein,
+  colback=chapcolor!6,
+  borderline west={2.5pt}{0pt}{chapcolor!45},
+  colbacktitle=chapcolor,
+  title={\nxboxtitle{white}{Pour aller plus loin}}}
 \newcommand{\approfondissement}[1]{\begin{nxstar}#1\end{nxstar}}
 
 % ===========================================================================
 %  FICHES MÉTHODES (filet nxOr, 6 rubriques)
 % ===========================================================================
-\newtcolorbox{fmbox}[2]{nxbase, colframe=nxOr!75!black, colback=nxOr!6,
-  title={\nxboxtitle{nxOr!75!black}{Méthode #1 --- #2}}}
+\newtcolorbox{fmbox}[2]{manuelbase, ongletcontour,
+  colback=white, colframe=filetgris, boxrule=1.2pt,
+  colbacktitle=white,
+  title={\nxboxtitle{chapcolor}{Méthode #1 --- #2}}}
 \newenvironment{fichemethode}[2]{\begin{fmbox}{#1}{#2}}{\end{fmbox}}
 \newcommand{\quandUtiliser}[1]{\paragraph{Quand l'utiliser.}#1}
 \newcommand{\pasApas}[1]{\paragraph{La méthode pas à pas.}#1}
@@ -246,19 +301,23 @@
 
 \newenvironment{exercice}[3]{%
   \refstepcounter{exo}\par\medskip\noindent
-  \colorbox{nxBleu}{\color{white}\sffamily\bfseries\small~Exercice \theexo~}%
-  \quad
+  \tikz[baseline=(n.base)]\node[fill=chapcolor, text=white,
+    rounded corners=2pt, inner xsep=7pt, inner ysep=3.5pt](n)
+    {\titrefont\small Exercice \theexo};%
+  \enskip
   \ifnum#2=1\relax\parcoursUn\fi
   \ifnum#2=2\relax\parcoursDeux\fi
   \ifnum#2=3\relax\parcoursTrois\fi
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{nxGris}\texttt{#1}\\\icnChrono~#3~min}%
+  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}\\\icnChrono~#3~min}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
 \newenvironment{corrige}[1]{%
   \par\medskip\noindent
-  \colorbox{nxVert!85!black}{\color{white}\sffamily\bfseries\small~Corrigé~}%
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{nxGris}\texttt{#1}}%
+  \tikz[baseline=(n.base)]\node[fill=chapcolor!70!black, text=white,
+    rounded corners=2pt, inner xsep=7pt, inner ysep=3.5pt](n)
+    {\titrefont\small Corrigé};%
+  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
@@ -274,7 +333,7 @@
 % ===========================================================================
 \newenvironment{evaluation}[2]{%
   \par\bigskip\noindent
-  \textbf{\textcolor{nxBleu}{\large\sffamily Évaluation \texttt{#1}}}\quad
+  \textbf{\textcolor{chapcolor}{\large\sffamily Évaluation \texttt{#1}}}\quad
   {\sffamily\fontsize{8}{10}\selectfont #2~min}\par\nopagebreak\medskip
 }{\par\bigskip}
 
@@ -301,21 +360,24 @@
 \lstdefinestyle{nxpy}{%
   language=Python,
   basicstyle=\ttfamily\fontsize{8.5}{11}\selectfont,
-  keywordstyle=\color{nxBleu}\bfseries,
-  commentstyle=\color{nxGris}\itshape,
-  stringstyle=\color{nxVert!70!black},
+  keywordstyle=\color{chapcolor}\bfseries,
+  commentstyle=\color{encre!55}\itshape,
+  stringstyle=\color{coulHistoire},
   frame=l,
   framerule=1pt,
-  rulecolor=\color{nxBleu!30},
-  backgroundcolor=\color{white},
+  rulecolor=\color{coulCode!30},
+  backgroundcolor=\color{grisdoux},
   numbers=left,
-  numberstyle=\ttfamily\fontsize{6}{8}\selectfont\color{nxGris!60},
+  numberstyle=\ttfamily\fontsize{6}{8}\selectfont\color{encre!45},
   numbersep=8pt,
   xleftmargin=18pt,
   aboveskip=9pt,
   belowskip=9pt,
 }
 \lstnewenvironment{python}{\lstset{style=nxpy}}{}
+
+% Code en ligne
+\newcommand{\code}[1]{{\ttfamily\color{coulCode}#1}}
 
 % Protection de \lstinline contre babel-french (NoAutoSpacing)
 \let\nxOrigLstinline\lstinline
@@ -334,54 +396,67 @@
 \usetikzlibrary{arrows.meta,positioning,calc}
 
 % ===========================================================================
-%  OUVERTURE DE CHAPITRE v3.2 — pleine page identitaire + page contrat
+%  OUVERTURE DE CHAPITRE v4.1 — Bandeau accent + numéro géant + décor TikZ
 % ===========================================================================
-% nxChapNum est defini dans nexus-signatures.tex
+% nxChapNum est défini dans nexus-signatures.tex
 \usetikzlibrary{backgrounds}
 
-% Usage : \ouverturechapitre[motif]{Titre}{capacites}{carte}{temps}
-% arg 6 optionnel = accroche
+\newlength{\nxBandHeight}
+\setlength{\nxBandHeight}{0.56\paperheight}
+
+% Usage : \ouverturechapitre[motif]{Titre}{capacites}{accroche}{temps}
 \newcommand{\ouverturechapitre}[5][motifGenerique]{%
   \stepcounter{nxChapNum}%
   \refstepcounter{chapter}%
   \chaptermark{#2}%
   \addcontentsline{toc}{chapter}{#2}%
-  % --- PAGE VISUELLE (recto, fond nxBleu plein) ---
+  % --- PAGE VISUELLE (recto, bandeau accent haut 56%) ---
   \thispagestyle{empty}%
-  \begin{tikzpicture}[remember picture, overlay]
-    \fill[nxBleu] (current page.south west) rectangle (current page.north east);
-    % Numéro Montserrat Thin, haut droit, volontairement aérien.
-    \node[anchor=north east, text=white, text opacity=.85,
-      font=\sffamily\fontseries{thin}\fontsize{110}{110}\selectfont]
-      at ([xshift=-20mm, yshift=-25mm]current page.north east) {\thechapter};
-    % Motif propre au chapitre, dans la moitié inférieure droite.
+  \noindent\begin{tikzpicture}[remember picture, overlay]
+    % Bandeau plein accent (haut de page)
+    \fill[chapcolor] (current page.north west)
+      rectangle ([yshift=-\nxBandHeight]current page.north east);
+    % Décor TikZ du chapitre (dans le bandeau, moitié droite)
     \csname #1\endcsname
-    % Filet or au-dessus du bloc de titre.
-    \draw[nxOr,line width=1.2pt]
-      ([xshift=20mm,yshift=83mm]current page.south west) -- ++(30mm,0);
-    % Titre 26pt blanc
-    \node[anchor=south west, text=white, font=\sffamily\bfseries\fontsize{26}{32}\selectfont,
-      text width=140mm]
-      at ([xshift=20mm, yshift=50mm]current page.south west) {#2};
-    \node[anchor=south west, text=white!80,
-      font=\sffamily\fontseries{m}\fontsize{8.5}{11}\selectfont]
-      at ([xshift=20mm, yshift=36mm]current page.south west)
-      {\nexus@matiere\ --- \nexus@niveau\ --- Nexus Réussite};
-  \end{tikzpicture}%
-  \clearpage
-  % --- PAGE CONTRAT (verso) ---
-  \thispagestyle{plain}%
-  \vspace*{0.5cm}%
-  \noindent{\sffamily\bfseries\fontsize{13}{17}\selectfont\color{nxBleu}%
-    Ce que je vais savoir faire}\par
+    % Étiquette matière · niveau
+    \node[anchor=north west, text=white, opacity=0.9,
+          font=\titrefont\small, inner sep=0pt]
+      at ([shift={(20mm,-17mm)}]current page.north west)
+      {\MakeUppercase{\nexus@matiere}\ \ $\cdot$\ \ \nexus@niveau};
+    % Numéro géant fantôme
+    \node[anchor=south west, text=white, opacity=0.15, inner sep=0pt,
+          font=\titrefont\fontsize{210}{210}\selectfont]
+      at ([shift={(16mm,-\nxBandHeight+2mm)}]current page.north west)
+      {\ifnum\value{chapter}>0 \thechapter\fi};
+    % « Chapitre N »
+    \node[anchor=south west, text=white, align=left, inner sep=0pt,
+          font=\titrefont]
+      at ([shift={(20mm,-\nxBandHeight+24mm)}]current page.north west)
+      {\fontsize{15}{15}\selectfont\MakeUppercase{Chapitre~\thechapter}};
+    % Titre géant
+    \node[anchor=south west, text=white, align=left, inner sep=0pt,
+          text width=0.66\paperwidth,
+          font=\titrefont\fontsize{34}{40}\selectfont]
+      at ([shift={(20mm,-\nxBandHeight+13mm)}]current page.north west)
+      {#2\par};
+  \end{tikzpicture}\par
+  % Espace sous le bandeau
+  \vspace*{\dimexpr\nxBandHeight-\topskip-1.4cm\relax}%
+  % Objectifs / capacités sous le bandeau
+  \begin{tcolorbox}[enhanced, frame hidden, boxrule=0pt, arc=3pt,
+    colback=chapcolor!7,
+    borderline west={3pt}{0pt}{chapcolor},
+    left=12pt, right=12pt, top=10pt, bottom=10pt,
+    before upper={\textcolor{chapcolor}{\titrefont\large
+      Objectifs --- Capacités attendues}\par\vspace{5pt}}]
+    #3%
+  \end{tcolorbox}%
   \vspace{0.4cm}%
-  #3%
-  \vspace{0.6cm}%
   \begin{nxcard}%
     #4%
   \end{nxcard}%
-  \vspace{0.4cm}%
-  \noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimés :} #5%
+  \vspace{0.3cm}%
+  \noindent\textcolor{chapcolor}{\titrefont Temps estimés :} #5%
   \par\vfill
   \clearpage
 }
