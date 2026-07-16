@@ -7,7 +7,7 @@
 % fp_num = simplify(fp * (x - 1)**2)
 % assert simplify(fp_num - (x**2 - 2*x - 2)) == 0
 % # Discriminant = 4 + 8 = 12
-% from sympy import sqrt
+% from sympy import sqrt, simplify
 % r1 = 1 - sqrt(3)
 % r2 = 1 + sqrt(3)
 % assert simplify(fp_num.subs(x, r1)) == 0

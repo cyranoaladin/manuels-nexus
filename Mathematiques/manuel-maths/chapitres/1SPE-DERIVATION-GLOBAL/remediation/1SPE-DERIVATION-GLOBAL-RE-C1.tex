@@ -1,0 +1,121 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-RE-C1","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["C1"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C1 : Dérivées des fonctions de référence
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C1-EX1}{1}{8}
+Calculer la dérivée de chaque fonction en appliquant directement les formules de référence.
+\begin{enumerate}
+  \item $f(x) = x^5$
+  \item $g(x) = \sqrt{x}$ \quad ($x > 0$)
+  \item $h(x) = \dfrac{1}{x}$ \quad ($x \neq 0$)
+  \item $k(x) = 7$ \quad (fonction constante)
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour $f(x) = x^n$, la dérivée est $f'(x) = nx^{n-1}$. Pour $\sqrt{x}$, utiliser le tableau des dérivées de référence.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, diff
+% x = symbols('x', positive=True)
+% assert diff(x**5, x) == 5*x**4
+% assert diff(sqrt(x), x) == 1/(2*sqrt(x))
+% assert diff(1/x, x) == -1/x**2
+% assert diff(7, x) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C1-EX1}
+
+\commentaireMarge{Tableau de référence : $(x^n)' = nx^{n-1}$, $(\sqrt{x})' = \frac{1}{2\sqrt{x}}$, $\left(\frac{1}{x}\right)' = -\frac{1}{x^2}$, $(k)' = 0$.}
+
+\textbf{Question 1.} $f'(x) = 5x^4.$
+
+\textbf{Question 2.} $g'(x) = \dfrac{1}{2\sqrt{x}}.$
+
+\textbf{Question 3.} $h'(x) = -\dfrac{1}{x^2}.$
+
+\textbf{Question 4.} $k'(x) = 0$ (la dérivée d'une constante est nulle).
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C1-EX2}{1}{8}
+Calculer $f'(x)$, puis calculer la valeur numérique demandée.
+\begin{enumerate}
+  \item $f(x) = x^3$. Calculer $f'(2)$.
+  \item $g(x) = \sqrt{x}$. Calculer $g'(9)$.
+  \item $h(x) = \dfrac{1}{x}$. Calculer $h'(5)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, Rational
+% x = symbols('x', positive=True)
+% fp = 3*x**2
+% assert fp.subs(x, 2) == 12
+% gp = 1/(2*sqrt(x))
+% assert gp.subs(x, 9) == Rational(1, 6)
+% hp = -1/x**2
+% assert hp.subs(x, 5) == Rational(-1, 25)
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C1-EX2}
+
+\textbf{Question 1.} $f'(x) = 3x^2$, donc $f'(2) = 3 \times 4 = 12.$
+
+\textbf{Question 2.} $g'(x) = \dfrac{1}{2\sqrt{x}}$, donc $g'(9) = \dfrac{1}{2\sqrt{9}} = \dfrac{1}{2 \times 3} = \dfrac{1}{6}.$
+
+\textbf{Question 3.} $h'(x) = -\dfrac{1}{x^2}$, donc $h'(5) = -\dfrac{1}{25}.$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C1-EX3}{1}{8}
+Associer chaque fonction à sa dérivée.
+
+\medskip
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Fonctions} & \textbf{Dérivées} \\
+(a) $f(x) = x^6$ & (1) $-\dfrac{1}{x^2}$ \\[6pt]
+(b) $g(x) = \dfrac{1}{x}$ & (2) $6x^5$ \\[6pt]
+(c) $h(x) = \sqrt{x}$ & (3) $0$ \\[6pt]
+(d) $k(x) = \pi$ & (4) $\dfrac{1}{2\sqrt{x}}$ \\[6pt]
+(e) $\ell(x) = x$ & (5) $1$ \\
+\end{tabular}
+\end{center}
+
+Puis donner un exemple de fonction $m$ non listée ci-dessus dont la dérivée est $m'(x) = 4x^3$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, diff, pi as sym_pi
+% x = symbols('x', positive=True)
+% assert diff(x**6, x) == 6*x**5
+% assert diff(1/x, x) == -1/x**2
+% assert diff(sqrt(x), x) == 1/(2*sqrt(x))
+% assert diff(sym_pi, x) == 0
+% assert diff(x, x) == 1
+% assert diff(x**4, x) == 4*x**3
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C1-EX3}
+
+\begin{itemize}
+  \item (a) $\leftrightarrow$ (2) : $(x^6)' = 6x^5$.
+  \item (b) $\leftrightarrow$ (1) : $\left(\dfrac{1}{x}\right)' = -\dfrac{1}{x^2}$.
+  \item (c) $\leftrightarrow$ (4) : $(\sqrt{x})' = \dfrac{1}{2\sqrt{x}}$.
+  \item (d) $\leftrightarrow$ (3) : $(\pi)' = 0$ (constante).
+  \item (e) $\leftrightarrow$ (5) : $(x)' = 1$.
+\end{itemize}
+
+\medskip
+
+\commentaireMarge{$(x^n)' = nx^{n-1}$ avec $n = 4$ donne $4x^3$.}
+
+Exemple : $m(x) = x^4$, car $(x^4)' = 4x^3$.
+
+\end{corrige}

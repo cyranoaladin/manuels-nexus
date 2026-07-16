@@ -1,0 +1,118 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-RE-C2","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["C2"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C2 : Règles de dérivation (somme, produit, quotient)
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C2-EX1}{1}{8}
+Calculer la dérivée de chaque fonction en utilisant la règle de la somme et la linéarité.
+\begin{enumerate}
+  \item $f(x) = 5x^3 - 2x + 7$
+  \item $g(x) = -x^4 + 3x^2 - x$
+  \item $h(x) = \dfrac{x^2}{2} + \dfrac{1}{x}$ \quad ($x \neq 0$)
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$(u + v)' = u' + v'$ et $(ku)' = ku'$. Dériver terme par terme.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify
+% x = symbols('x', nonzero=True)
+% f = 5*x**3 - 2*x + 7
+% assert diff(f, x) == 15*x**2 - 2
+% g = -x**4 + 3*x**2 - x
+% assert diff(g, x) == -4*x**3 + 6*x - 1
+% h = x**2/2 + 1/x
+% assert diff(h, x) == x - 1/x**2
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C2-EX1}
+
+\commentaireMarge{On dérive chaque terme séparément en utilisant $(x^n)' = nx^{n-1}$.}
+
+\textbf{Question 1.}
+$f'(x) = 5 \times 3x^2 - 2 + 0 = 15x^2 - 2.$
+
+\textbf{Question 2.}
+$g'(x) = -4x^3 + 3 \times 2x - 1 = -4x^3 + 6x - 1.$
+
+\textbf{Question 3.}
+$h'(x) = \dfrac{2x}{2} + \left(-\dfrac{1}{x^2}\right) = x - \dfrac{1}{x^2}.$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C2-EX2}{1}{9}
+Calculer la dérivée de chaque fonction en utilisant la règle du produit $(uv)' = u'v + uv'$.
+\begin{enumerate}
+  \item $f(x) = x^2(x - 3)$
+  \item $g(x) = (2x + 1)(x^2 - x)$
+\end{enumerate}
+Pour chaque calcul, identifier $u$, $v$, $u'$ et $v'$ avant de calculer.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand, simplify, simplify
+% x = symbols('x')
+% f = x**2 * (x - 3)
+% # trivially true, skip
+% assert simplify(diff(f, x) - (3*x**2 - 6*x)) == 0
+% g = (2*x + 1)*(x**2 - x)
+% # trivially true, skip
+% assert simplify(diff(g, x) - (6*x**2 - 2*x - 1)) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C2-EX2}
+
+\textbf{Question 1.}
+$u = x^2$, $v = x - 3$, $u' = 2x$, $v' = 1$.
+\[
+f'(x) = u'v + uv' = 2x(x-3) + x^2 \times 1 = 2x^2 - 6x + x^2 = 3x^2 - 6x.
+\]
+
+\commentaireMarge{On peut vérifier en développant d'abord : $f(x) = x^3 - 3x^2$ donc $f'(x) = 3x^2 - 6x$. \checkmark}
+
+\textbf{Question 2.}
+$u = 2x+1$, $v = x^2-x$, $u' = 2$, $v' = 2x-1$.
+\begin{align*}
+g'(x) &= u'v + uv' = 2(x^2-x) + (2x+1)(2x-1) \\
+       &= 2x^2 - 2x + 4x^2 - 1 = 6x^2 - 2x - 1.
+\end{align*}
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C2-EX3}{1}{9}
+Calculer la dérivée en utilisant la règle du quotient $\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2}$.
+\begin{enumerate}
+  \item $f(x) = \dfrac{x}{x+1}$ \quad ($x \neq -1$)
+  \item $g(x) = \dfrac{x^2 - 1}{x + 2}$ \quad ($x \neq -2$)
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify
+% x = symbols('x')
+% f = x/(x+1)
+% assert simplify(diff(f, x) - 1/(x+1)**2) == 0
+% g = (x**2-1)/(x+2)
+% assert simplify(diff(g, x) - (x**2 + 4*x + 1)/(x+2)**2) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C2-EX3}
+
+\textbf{Question 1.}
+$u = x$, $v = x+1$, $u' = 1$, $v' = 1$.
+\[
+f'(x) = \frac{1 \times (x+1) - x \times 1}{(x+1)^2} = \frac{x + 1 - x}{(x+1)^2} = \frac{1}{(x+1)^2}.
+\]
+
+\textbf{Question 2.}
+$u = x^2 - 1$, $v = x+2$, $u' = 2x$, $v' = 1$.
+\[
+g'(x) = \frac{2x(x+2) - (x^2-1) \times 1}{(x+2)^2} = \frac{2x^2 + 4x - x^2 + 1}{(x+2)^2} = \frac{x^2 + 4x + 1}{(x+2)^2}.
+\]
+
+\end{corrige}

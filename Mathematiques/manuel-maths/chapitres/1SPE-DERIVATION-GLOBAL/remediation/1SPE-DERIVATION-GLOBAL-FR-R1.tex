@@ -1,0 +1,133 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-FR-R1","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["R1"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R1 : Taux de variation et nombre dérivé
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Taux de variation et nombre dérivé}
+
+\textbf{Taux de variation} de $f$ entre $a$ et $b$ ($a \neq b$) :
+\[
+  \tau = \frac{f(b) - f(a)}{b - a}.
+\]
+
+\textbf{Nombre dérivé} $f'(a)$ : c'est la limite du taux de variation $\dfrac{f(a+h)-f(a)}{h}$ quand $h \to 0$. Géométriquement, $f'(a)$ est la pente de la tangente à la courbe de $f$ au point d'abscisse $a$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R1-EX1}{1}{6}
+Soit $f(x) = 2x^2 - x$.
+\begin{enumerate}
+  \item Calculer le taux de variation de $f$ entre $x = 1$ et $x = 3$.
+  \item Calculer $\dfrac{f(2+h)-f(2)}{h}$ pour $h \neq 0$. Développer et simplifier.
+  \item En déduire $f'(2)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, cancel, simplify
+% x, h = symbols('x h')
+% f = 2*x**2 - x
+% assert f.subs(x, 1) == 1
+% assert f.subs(x, 3) == 15
+% tv13 = (15 - 1) / (3 - 1)
+% assert tv13 == 7
+% f2 = f.subs(x, 2)
+% assert f2 == 6
+% f2h = expand(f.subs(x, 2+h))
+% assert f2h == 2*h**2 + 7*h + 6
+% tv = cancel((f2h - f2)/h)
+% assert tv == 2*h + 7
+% assert tv.subs(h, 0) == 7
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R1-EX1}
+
+\commentaireMarge{On calcule les images puis on forme le quotient $(f(b)-f(a))/(b-a)$.}
+
+\textbf{Question 1.}
+$f(1) = 2 - 1 = 1$ et $f(3) = 18 - 3 = 15$.
+\[
+\tau = \frac{f(3) - f(1)}{3 - 1} = \frac{15 - 1}{2} = \frac{14}{2} = 7.
+\]
+
+\textbf{Question 2.}
+$f(2) = 8 - 2 = 6$ et $f(2+h) = 2(2+h)^2 - (2+h) = 2(4 + 4h + h^2) - 2 - h = 2h^2 + 7h + 6$.
+\[
+\frac{f(2+h) - f(2)}{h} = \frac{2h^2 + 7h + 6 - 6}{h} = \frac{2h^2 + 7h}{h} = 2h + 7.
+\]
+
+\commentaireMarge{$f'(2)$ est la limite du taux de variation quand $h \to 0$.}
+
+\textbf{Question 3.}
+$f'(2) = \lim_{h \to 0}(2h + 7) = 7.$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R1-EX2}{1}{5}
+On sait que $f'(4) = -3$. Interpréter ce nombre dérivé :
+\begin{enumerate}
+  \item Graphiquement (donner la pente de la tangente).
+  \item En termes de sens de variation de $f$ au voisinage de $x = 4$.
+  \item Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $4$, sachant que $f(4) = 5$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% x = symbols('x')
+% # Tangente en a=4 : y = f'(4)(x-4) + f(4) = -3(x-4)+5 = -3x+17
+% T = expand(-3*(x-4) + 5)
+% assert simplify(T - (-3*x + 17)) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R1-EX2}
+
+\textbf{Question 1.}
+La tangente à la courbe de $f$ au point d'abscisse $4$ a pour pente $f'(4) = -3$.
+
+\textbf{Question 2.}
+Comme $f'(4) = -3 < 0$, la fonction $f$ est localement décroissante au voisinage de $x = 4$.
+
+\textbf{Question 3.}
+$T : y = f'(4)(x - 4) + f(4) = -3(x - 4) + 5 = -3x + 12 + 5 = -3x + 17.$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R1-EX3}{1}{6}
+Soit $f(x) = x^3$. On admet que $f'(x) = 3x^2$.
+\begin{enumerate}
+  \item Calculer $f'(0)$, $f'(1)$ et $f'(-2)$.
+  \item Pour quelle(s) valeur(s) de $x$ la tangente à la courbe de $f$ est-elle horizontale ?
+  \item La pente de la tangente en $x = 2$ est-elle plus grande ou plus petite qu'en $x = 1$ ? Que peut-on en déduire sur la « courbure » de $f$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, simplify
+% x = symbols('x')
+% fp = 3*x**2
+% assert fp.subs(x, 0) == 0
+% assert fp.subs(x, 1) == 3
+% assert fp.subs(x, -2) == 12
+% assert solve(fp, x) == [0]
+% assert fp.subs(x, 2) > fp.subs(x, 1)
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R1-EX3}
+
+\textbf{Question 1.}
+$f'(0) = 3 \times 0^2 = 0$, $\quad f'(1) = 3 \times 1 = 3$, $\quad f'(-2) = 3 \times 4 = 12$.
+
+\textbf{Question 2.}
+Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 3x^2 = 0 \Leftrightarrow x = 0$.
+La tangente est horizontale uniquement en $x = 0$.
+
+\textbf{Question 3.}
+$f'(1) = 3$ et $f'(2) = 12$ : la pente en $x = 2$ est bien plus grande. Cela signifie que la courbe $f(x) = x^3$ est de plus en plus « raide » (sa pente croît) pour $x > 0$.
+
+\end{corrige}

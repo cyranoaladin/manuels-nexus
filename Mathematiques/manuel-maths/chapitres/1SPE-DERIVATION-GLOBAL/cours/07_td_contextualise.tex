@@ -1,0 +1,137 @@
+% META: {"id":"1SPE-DERGLOBAL-TD-CONTEXTUALISE","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"td","capacites_codes":["C3","C4","C5"],"duree_min":50,"status":"generated"}
+
+% ============================================================
+% TD CONTEXTUALISÉ — Optimisation du profit d'une entreprise
+% Nexus Réussite — 1re Spécialité
+% Durée : 50 min — 4 parties
+% ============================================================
+
+\section*{TD — Optimisation du profit d'une entreprise}
+
+\textit{Durée : 50 minutes.}
+
+\bigskip
+
+\begin{center}
+\textbf{Situation}
+
+\medskip
+\parbox{0.9\textwidth}{Une petite entreprise fabrique et vend des stylos personnalisés. Le responsable dispose des informations suivantes :
+\begin{itemize}
+  \item le coût total de production de $x$ stylos (en centaines) est $C(x) = x^3 - 9x^2 + 30x + 5$ (en centaines d'euros) ;
+  \item le prix de vente unitaire est $p(x) = 45 - 6x$ euros par cent stylos (avec $0 < x \leqslant 6$).
+\end{itemize}
+L'entreprise cherche à déterminer la quantité $x$ qui maximise son profit.}
+\end{center}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie A — Modélisation (10 min)}
+%---------------------------------------------------------------
+
+\begin{enumerate}
+  \item Vérifier que l'expression du chiffre d'affaires est $R(x) = 45x - 6x^2$.
+  \item Exprimer le profit $P(x) = R(x) - C(x)$ en fonction de $x$. Développer et réduire.
+  \item Quel est le domaine d'étude pertinent ? Justifier en tenant compte des contraintes économiques.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% x = symbols('x')
+% C = x**3 - 9*x**2 + 30*x + 5
+% R = (45 - 6*x)*x
+% assert expand(R) == 45*x - 6*x**2
+% P = R - C
+% Pexp = expand(P)
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie B — Étude des variations du profit (15 min)}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Calculer $P'(x)$.
+  \item Factoriser $P'(x)$. \textit{(On admet que $x = 5$ est une racine de $P'$.)}
+  \item Dresser le tableau de signes de $P'(x)$ sur $]0\,;\,6]$.
+  \item En déduire le tableau de variations de $P$ sur $]0\,;\,6]$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, factor, solve, simplify, Rational
+% x = symbols('x')
+% P = -x**3 + 3*x**2 + 15*x - 5
+% Pp = diff(P, x)
+% # roots of x^2 - 2x - 5 : discriminant = 4+20 = 24
+% from sympy import sqrt
+% roots = solve(Pp, x)
+% # roots are 1 ± sqrt(6)
+% r1 = 1 - sqrt(6)
+% r2 = 1 + sqrt(6)
+% from sympy import simplify; assert simplify(Pp.subs(x, r2)) == 0
+% # on ]0,6]: only r2 = 1+sqrt(6) ~ 3.449 is in the interval
+% import sympy
+% assert sympy.N(r2) > 0 and sympy.N(r2) < 6
+% assert sympy.N(r1) < 0
+% assert Pp.subs(x, 1) > 0   # between 0 and r2
+% assert Pp.subs(x, 5) < 0   # after r2
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie C — Optimisation et interprétation (15 min)}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Déterminer la valeur de $x$ (arrondie au centième) qui maximise le profit. Quelle quantité de stylos cela représente-t-il ?
+  \item Calculer le profit maximal (arrondi à l'euro). \textit{(Utiliser la valeur exacte $x = 1 + \sqrt{6}$.)}
+  \item Comparer les profits aux bornes : $P(0)$ (non défini économiquement — utiliser $\lim_{x \to 0^+}$) et $P(6)$. Conclure sur l'utilité de l'étude par dérivation.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, N, Rational
+% x = symbols('x')
+% P = -x**3 + 3*x**2 + 15*x - 5
+% xopt = 1 + sqrt(6)
+% Pmax = P.subs(x, xopt)
+% # Pmax = -(1+sqrt6)^3 + 3(1+sqrt6)^2 + 15(1+sqrt6) - 5
+% from sympy import expand, simplify
+% Pmax_simplified = simplify(Pmax)
+% # numerical value
+% Pmax_num = N(Pmax_simplified)
+% assert Pmax_num > 18  # sanity check
+% assert P.subs(x, 6) == -216 + 108 + 90 - 5
+% assert P.subs(x, 6) == -23
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie D — Synthèse et retour critique (10 min)}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Le modèle suppose que $p(x) = 45 - 6x > 0$. Pour quelles valeurs de $x$ cette condition est-elle satisfaite ? Est-elle compatible avec le domaine d'étude ?
+  \item En pratique, $x$ est un entier (nombre de centaines). Parmi $x = 3$ et $x = 4$, lequel donne le plus grand profit ? Comparer avec la valeur optimale théorique $x^* = 1 + \sqrt{6}$.
+  \item Rédiger une conclusion de 3 à 5 lignes : que peut-on dire de l'apport de la dérivation dans ce problème d'optimisation économique ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% x = symbols('x')
+% P = -x**3 + 3*x**2 + 15*x - 5
+% # p(x) > 0 iff 45-6x > 0 iff x < 7.5
+% # 6 < 7.5, so condition satisfied on ]0,6]
+% assert 45 - 6*6 == 9  # p(6) = 9 > 0
+% assert P.subs(x, 3) == -27 + 27 + 45 - 5
+% assert P.subs(x, 3) == 40
+% assert P.subs(x, 4) == -64 + 48 + 60 - 5
+% assert P.subs(x, 4) == 39
+% END-VERIFY

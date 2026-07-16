@@ -1,0 +1,131 @@
+% META: {"id":"1SPE-DERGLOBAL-EV-B-corrige","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+
+\section*{Corrigé — Évaluation B — Dérivation : applications aux variations}
+
+%---------------------------------------------------------------
+\subsection*{Exercice 1 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$f(x) = 2x^2 + 3x - 4$, donc $f'(x) = 4x + 3.$
+
+\textbf{Question 2.}
+$f'(1) = 4 + 3 = 7.$
+
+Interprétation géométrique : la tangente à la courbe de $f$ au point d'abscisse $1$ a pour coefficient directeur $7$. La courbe monte localement avec une pente de $7$ en ce point.
+
+\textbf{Question 3.}
+$f(1) = 2 + 3 - 4 = 1.$
+
+Équation de la tangente :
+\[
+T : y = f'(1)(x - 1) + f(1) = 7(x-1) + 1 = 7x - 7 + 1 = 7x - 6.
+\]
+
+Vérification : $T(1) = 7 - 6 = 1 = f(1)$. \checkmark
+
+\textbf{Question 4.}
+Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 4x + 3 = 0 \Leftrightarrow x = -\dfrac{3}{4}.$
+
+%---------------------------------------------------------------
+\subsection*{Exercice 2 — 6 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$g(x) = 2x^3 - 9x^2 + 12x$, donc $g'(x) = 6x^2 - 18x + 12 = 6(x^2 - 3x + 2) = 6(x-1)(x-2).$
+
+\textbf{Question 2.}
+$g'(x) = 0 \Leftrightarrow x = 1$ ou $x = 2.$
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $2$ & & $+\infty$ \\
+\hline
+$6$ & $+$ & $+$ & $+$ & $+$ & $+$ & $+$ & $+$ \\
+$x-1$ & $-$ & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ \\
+$x-2$ & $-$ & $-$ & $-$ & $-$ & $0$ & $+$ & $+$ \\
+$g'(x)$ & $+$ & $+$ & $0$ & $-$ & $0$ & $+$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.}
+$g(1) = 2 - 9 + 12 = 5$ et $g(2) = 16 - 36 + 24 = 4.$
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $2$ & & $+\infty$ \\
+\hline
+$g(x)$ & $-\infty$ & $\nearrow$ & $5$ & $\searrow$ & $4$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 4.}
+$g$ admet un \textbf{maximum local} de $5$ en $x = 1$.
+$g$ admet un \textbf{minimum local} de $4$ en $x = 2$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 3 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$x^2 - 4 = (x-2)(x+2)$, donc pour $x \neq -2$ :
+\[
+h(x) = \frac{(x-2)(x+2)}{x+2} = x - 2.
+\]
+
+\textbf{Question 2.}
+$h(x) = x - 2$ (pour $x \neq -2$), donc $h'(x) = 1$.
+
+\textbf{Question 3.}
+$h'(x) = 1 > 0$ pour tout $x \neq -2$ : il n'y a pas de solution à $h'(x) = 0$.
+
+$h$ est strictement croissante sur $]-\infty\,;\,-2[$.
+
+\begin{center}
+\begin{tabular}{|c|ccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ \\
+\hline
+$h'(x)$ & $+$ & $+$ & $/\!/$ \\
+\hline
+$h(x)$ & $-\infty$ & $\nearrow$ & $-4$ \\
+\hline
+\end{tabular}
+\end{center}
+
+($h(-2)$ n'est pas défini, mais la limite à gauche est $-2 - 2 = -4$.)
+
+%---------------------------------------------------------------
+\subsection*{Exercice 4 — 4 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$R(x) = x \times (30 - 2x) = 30x - 2x^2.$
+
+\textbf{Question 2.}
+$R'(x) = 30 - 4x.$
+
+$R'(x) = 0 \Leftrightarrow x = \dfrac{30}{4} = \dfrac{15}{2} = 7{,}5.$
+
+$R'(x) > 0$ pour $x < 7{,}5$ et $R'(x) < 0$ pour $x > 7{,}5$ : $R$ est maximale en $x = 7{,}5$.
+
+Tableau de variations de $R$ sur $[0\,;\,15]$ :
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $7{,}5$ & & $15$ \\
+\hline
+$R(x)$ & $0$ & $\nearrow$ & $112{,}5$ & $\searrow$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.}
+$R\!\left(\dfrac{15}{2}\right) = 30 \times \dfrac{15}{2} - 2 \times \left(\dfrac{15}{2}\right)^2 = 225 - 2 \times \dfrac{225}{4} = 225 - \dfrac{225}{2} = \dfrac{225}{2} = 112{,}5$ euros.
+
+Le producteur maximise son chiffre d'affaires en vendant $7{,}5$ litres au prix de $30 - 2 \times 7{,}5 = 15$ euros/L, pour un chiffre d'affaires de $\mathbf{112{,}5}$ euros.

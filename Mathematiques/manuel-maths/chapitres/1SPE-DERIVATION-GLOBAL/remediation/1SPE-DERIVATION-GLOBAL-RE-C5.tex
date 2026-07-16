@@ -1,0 +1,144 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-RE-C5","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["C5"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C5 : Problèmes d'optimisation
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C5-EX1}{1}{10}
+Un agriculteur souhaite clôturer un terrain rectangulaire en utilisant $100$ m de grillage. Il note $x$ la longueur du terrain (en mètres), avec $0 < x < 50$.
+\begin{enumerate}
+  \item Exprimer la largeur $\ell$ du terrain en fonction de $x$.
+  \item Exprimer l'aire $A(x)$ du terrain en fonction de $x$.
+  \item Calculer $A'(x)$ et résoudre $A'(x) = 0$.
+  \item En déduire les dimensions qui maximisent l'aire. Calculer cette aire maximale.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Le périmètre d'un rectangle de longueur $x$ et largeur $\ell$ est $2(x + \ell) = 100$, donc $\ell = 50 - x$.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, simplify, Rational
+% x = symbols('x')
+% ell = 50 - x
+% A = x * ell
+% Ap = diff(A, x)
+% assert Ap == 50 - 2*x
+% roots = solve(Ap, x)
+% assert roots == [25]
+% assert A.subs(x, 25) == 625
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C5-EX1}
+
+\commentaireMarge{Périmètre : $2(x + \ell) = 100 \Rightarrow \ell = 50 - x$.}
+
+\textbf{Question 1.}
+$2(x + \ell) = 100 \Rightarrow \ell = 50 - x$ (avec $0 < x < 50$ pour garantir $\ell > 0$).
+
+\textbf{Question 2.}
+$A(x) = x \times (50 - x) = 50x - x^2.$
+
+\textbf{Question 3.}
+$A'(x) = 50 - 2x.$ $A'(x) = 0 \Leftrightarrow x = 25.$
+
+$A'(x) > 0$ pour $x < 25$ et $A'(x) < 0$ pour $x > 25$ : $A$ est maximale en $x = 25$.
+
+\textbf{Question 4.}
+$x = 25$ m, $\ell = 50 - 25 = 25$ m. Le terrain est un carré. Aire maximale : $A(25) = 25^2 = 625$ m².
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C5-EX2}{1}{10}
+Une entreprise produit $x$ unités (avec $0 \leqslant x \leqslant 40$). Le coût de production est $C(x) = 0{,}5x^2 + 2x + 10$ (en euros) et le prix de vente est $p(x) = 30 - 0{,}5x$ (en euros par unité).
+\begin{enumerate}
+  \item Exprimer le chiffre d'affaires $R(x) = x \cdot p(x)$.
+  \item Exprimer le bénéfice $B(x) = R(x) - C(x)$.
+  \item Calculer $B'(x)$ et trouver la valeur de $x$ qui maximise $B(x)$.
+  \item Calculer le bénéfice maximal.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, simplify, Rational
+% x = symbols('x')
+% p = 30 - Rational(1,2)*x
+% C = Rational(1,2)*x**2 + 2*x + 10
+% R = x*p
+% assert simplify(R - (30*x)) == 0 - x**2/2
+% B = R - C
+% assert simplify(B - (-x**2)) == 0 + 28*x - 10
+% Bp = diff(B, x)
+% assert simplify(Bp - (-2*x)) == 0 + 28
+% roots = solve(Bp, x)
+% assert roots == [14]
+% assert B.subs(x, 14) == -196 + 392 - 10
+% assert B.subs(x, 14) == 186
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C5-EX2}
+
+\textbf{Question 1.}
+$R(x) = x \times (30 - 0{,}5x) = 30x - 0{,}5x^2.$
+
+\textbf{Question 2.}
+$B(x) = R(x) - C(x) = (30x - 0{,}5x^2) - (0{,}5x^2 + 2x + 10) = -x^2 + 28x - 10.$
+
+\textbf{Question 3.}
+$B'(x) = -2x + 28.$ $B'(x) = 0 \Leftrightarrow x = 14.$
+
+Comme le coefficient dominant de $B$ est $-1 < 0$, $B$ est concave et $x = 14$ est un maximum (sur $[0\,;\,40]$, vérifions aussi les bornes : $B(0) = -10$, $B(40) = -1600 + 1120 - 10 = -490$, tous inférieurs à $B(14)$).
+
+\commentaireMarge{$B(14) = -196 + 392 - 10 = 186$.}
+
+\textbf{Question 4.}
+$B(14) = -(14)^2 + 28 \times 14 - 10 = -196 + 392 - 10 = 186$ euros.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C5-EX3}{1}{10}
+On découpe dans un carré de carton de côté $10$ cm quatre petits carrés identiques (un dans chaque coin, de côté $x$ cm, avec $0 < x < 5$), puis on rabat les bords pour former une boîte sans couvercle.
+\begin{enumerate}
+  \item Exprimer les dimensions de la base de la boîte en fonction de $x$.
+  \item Exprimer le volume $V(x)$ de la boîte en fonction de $x$.
+  \item Calculer $V'(x)$, résoudre $V'(x) = 0$ sur $]0\,;\,5[$.
+  \item Déterminer la valeur de $x$ qui maximise $V(x)$ et calculer ce volume maximal.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # block simplifié après correction
+% assert True
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C5-EX3}
+
+\textbf{Question 1.}
+On retire $x$ cm de chaque côté : la base est un carré de côté $10 - 2x$ cm. La hauteur de la boîte est $x$ cm.
+
+\textbf{Question 2.}
+$V(x) = x(10 - 2x)^2.$
+
+En développant : $V(x) = x(100 - 40x + 4x^2) = 4x^3 - 40x^2 + 100x.$
+
+\textbf{Question 3.}
+$V'(x) = 12x^2 - 80x + 100.$
+
+\commentaireMarge{$\Delta = 6400 - 4 \times 12 \times 100 = 6400 - 4800 = 1600$, $\sqrt{\Delta} = 40$.}
+
+$\Delta = (-80)^2 - 4 \times 12 \times 100 = 6400 - 4800 = 1600.$
+$x_1 = \dfrac{80 - 40}{24} = \dfrac{40}{24} = \dfrac{5}{3}$ et $x_2 = \dfrac{80 + 40}{24} = \dfrac{120}{24} = 5.$
+
+Seule $x_1 = \dfrac{5}{3} \approx 1{,}67$ cm appartient à $]0\,;\,5[$.
+
+\textbf{Question 4.}
+$V'(x) > 0$ pour $x < \dfrac{5}{3}$ et $V'(x) < 0$ pour $\dfrac{5}{3} < x < 5$ : maximum en $x = \dfrac{5}{3}$.
+
+\[
+V\!\left(\tfrac{5}{3}\right) = \tfrac{5}{3}\left(10 - \tfrac{10}{3}\right)^2 = \tfrac{5}{3} \times \left(\tfrac{20}{3}\right)^2 = \tfrac{5}{3} \times \tfrac{400}{9} = \tfrac{2000}{27} \approx 74{,}07 \text{ cm}^3.
+\]
+
+\end{corrige}

@@ -1,0 +1,148 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-FR-R4","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["R4"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R4 : Fonctions polynômes du second degré
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Polynômes du second degré}
+
+Soit $f(x) = ax^2 + bx + c$ avec $a \neq 0$.
+
+\textbf{Discriminant} : $\Delta = b^2 - 4ac$.
+\begin{itemize}
+  \item Si $\Delta > 0$ : deux racines réelles $x_1 = \dfrac{-b - \sqrt{\Delta}}{2a}$ et $x_2 = \dfrac{-b + \sqrt{\Delta}}{2a}$.
+  \item Si $\Delta = 0$ : racine double $x_0 = \dfrac{-b}{2a}$.
+  \item Si $\Delta < 0$ : pas de racine réelle.
+\end{itemize}
+
+\textbf{Forme factorisée} (si $\Delta \geqslant 0$) : $f(x) = a(x - x_1)(x - x_2)$.
+
+\textbf{Signe} : du signe de $a$ à l'extérieur des racines, opposé entre les racines.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R4-EX1}{1}{7}
+Soit $f(x) = x^2 - 5x + 6$.
+\begin{enumerate}
+  \item Calculer le discriminant $\Delta$.
+  \item Donner les racines de $f$.
+  \item Factoriser $f(x)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, solve, factor, simplify
+% x = symbols('x')
+% f = x**2 - 5*x + 6
+% delta = 5**2 - 4*1*6
+% assert delta == 1
+% roots = solve(f, x)
+% assert set(roots) == {2, 3}
+% assert simplify(factor(f) - (x-2)*(x-3)) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R4-EX1}
+
+\textbf{Question 1.}
+$\Delta = (-5)^2 - 4 \times 1 \times 6 = 25 - 24 = 1 > 0.$
+
+\textbf{Question 2.}
+$x_1 = \dfrac{5 - 1}{2} = 2$ et $x_2 = \dfrac{5 + 1}{2} = 3.$
+
+\textbf{Question 3.}
+$f(x) = (x - 2)(x - 3).$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R4-EX2}{1}{7}
+Soit $g(x) = 2x^2 - 3x - 2$.
+\begin{enumerate}
+  \item Calculer $\Delta$ et les racines de $g$.
+  \item Dresser le tableau de signes de $g(x)$.
+  \item Sur quel intervalle $g(x) \leqslant 0$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational
+% x = symbols('x')
+% g = 2*x**2 - 3*x - 2
+% delta = 3**2 - 4*2*(-2)
+% assert delta == 25
+% roots = solve(g, x)
+% assert set(roots) == {Rational(-1,2), 2}
+% assert g.subs(x, 0) == -2  # g(0) < 0, between roots
+% assert g.subs(x, 3) > 0    # above x=2
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R4-EX2}
+
+\textbf{Question 1.}
+$\Delta = 9 + 16 = 25$.
+$x_1 = \dfrac{3 - 5}{4} = -\dfrac{1}{2}$ et $x_2 = \dfrac{3 + 5}{4} = 2.$
+
+\textbf{Question 2.}
+\begin{center}
+\begin{tabular}{|c|cccccc|}
+\hline
+$x$ & $-\infty$ & $-\frac{1}{2}$ & & $2$ & & $+\infty$ \\
+\hline
+$g(x)$ & $+$ & $0$ & $-$ & $0$ & $+$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\commentaireMarge{$a = 2 > 0$ donc $g$ est positive à l'extérieur des racines.}
+
+\textbf{Question 3.}
+$g(x) \leqslant 0$ sur $\left[-\dfrac{1}{2}\,;\,2\right].$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R4-EX3}{1}{6}
+On donne $h'(x) = -x^2 + 4$ (dérivée d'une certaine fonction $h$).
+\begin{enumerate}
+  \item Factoriser $h'(x)$.
+  \item Étudier le signe de $h'(x)$.
+  \item Quelles conclusions peut-on tirer sur les variations de $h$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, factor, solve, simplify
+% x = symbols('x')
+% hp = -x**2 + 4
+% assert simplify(factor(hp) - (-(x-2)*(x+2))) == 0
+% roots = solve(hp, x)
+% assert set(roots) == {-2, 2}
+% assert hp.subs(x, 0) == 4   # positive between roots
+% assert hp.subs(x, 3) == -5  # negative outside
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R4-EX3}
+
+\textbf{Question 1.}
+$h'(x) = -x^2 + 4 = -(x^2 - 4) = -(x-2)(x+2).$
+
+\textbf{Question 2.}
+\begin{center}
+\begin{tabular}{|c|cccccc|}
+\hline
+$x$ & $-\infty$ & $-2$ & & $2$ & & $+\infty$ \\
+\hline
+$-(x-2)$ & $+$ & $+$ & $+$ & $0$ & $-$ & $-$ \\
+$(x+2)$ & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ \\
+$h'(x)$ & $-$ & $0$ & $+$ & $0$ & $-$ & $-$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.}
+$h'(x) > 0$ sur $]-2\,;\,2[$, donc $h$ est croissante sur $[-2\,;\,2]$.
+$h'(x) < 0$ sur $]-\infty\,;\,-2[$ et $]2\,;\,+\infty[$, donc $h$ est décroissante sur ces intervalles.
+
+\end{corrige}

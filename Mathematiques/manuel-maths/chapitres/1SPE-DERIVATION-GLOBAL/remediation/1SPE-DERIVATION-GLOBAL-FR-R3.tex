@@ -1,0 +1,146 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-FR-R3","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["R3"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R3 : Calcul littéral (développer, factoriser, signe d'un produit)
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Calcul littéral}
+
+\textbf{Développer} : $(a+b)^2 = a^2 + 2ab + b^2$, $(a-b)(a+b) = a^2 - b^2$.
+
+\textbf{Factoriser} : extraire le facteur commun, identifier une forme remarquable.
+
+\textbf{Signe d'un produit} : $A \times B > 0 \Leftrightarrow (A>0 \text{ et } B>0)$ ou $(A<0 \text{ et } B<0)$.
+
+\textbf{Signe d'un quotient} : $\dfrac{A}{B} > 0 \Leftrightarrow A$ et $B$ ont le même signe ($B \neq 0$).
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R3-EX1}{1}{6}
+Développer et réduire chaque expression.
+\begin{enumerate}
+  \item $(x+3)(x-3)$
+  \item $(2x-1)^2$
+  \item $x(x-4) + 3(x^2 - 1)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% x = symbols('x')
+% assert expand((x+3)*(x-3)) == x**2 - 9
+% assert expand((2*x-1)**2) == 4*x**2 - 4*x + 1
+% assert expand(x*(x-4) + 3*(x**2-1)) == 4*x**2 - 4*x - 3
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R3-EX1}
+
+\textbf{Question 1.}
+$(x+3)(x-3) = x^2 - 3^2 = x^2 - 9.$
+
+\commentaireMarge{Identité : $(a-b)(a+b) = a^2 - b^2$.}
+
+\textbf{Question 2.}
+$(2x-1)^2 = 4x^2 - 2 \times 2x \times 1 + 1 = 4x^2 - 4x + 1.$
+
+\textbf{Question 3.}
+$x(x-4) + 3(x^2-1) = x^2 - 4x + 3x^2 - 3 = 4x^2 - 4x - 3.$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R3-EX2}{1}{6}
+Factoriser chaque expression.
+\begin{enumerate}
+  \item $6x^2 - 4x$
+  \item $x^2 - 9$
+  \item $2x^2 - 8$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, factor, simplify
+% x = symbols('x')
+% assert simplify(factor(6*x**2 - 4*x) - (2*x*(3*x - 2))) == 0
+% assert simplify(factor(x**2 - 9) - ((x-3)*(x+3))) == 0
+% assert simplify(factor(2*x**2 - 8) - (2*(x-2)*(x+2))) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R3-EX2}
+
+\textbf{Question 1.}
+$6x^2 - 4x = 2x(3x - 2).$
+
+\textbf{Question 2.}
+$x^2 - 9 = (x-3)(x+3).$
+
+\textbf{Question 3.}
+$2x^2 - 8 = 2(x^2 - 4) = 2(x-2)(x+2).$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R3-EX3}{1}{7}
+Étudier le signe des expressions suivantes.
+\begin{enumerate}
+  \item $f'(x) = (x-2)(x+1)$
+  \item $g'(x) = -3(x-1)$
+  \item $h'(x) = \dfrac{x+3}{x-1}$ pour $x \neq 1$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x', real=True)
+% fp = (x-2)*(x+1)
+% gp = -3*(x-1)
+% hp = (x+3)/(x-1)
+% # spot checks
+% assert fp.subs(x, 0) < 0   # between -1 and 2
+% assert fp.subs(x, 3) > 0   # above 2
+% assert gp.subs(x, 0) > 0   # x<1
+% assert gp.subs(x, 2) < 0   # x>1
+% assert hp.subs(x, 0) < 0   # -3<x<1
+% assert hp.subs(x, 2) > 0   # x>1
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R3-EX3}
+
+\textbf{Question 1.} $(x-2)(x+1) = 0$ pour $x = -1$ ou $x = 2$.
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & $-1$ & & $2$ & $+\infty$ \\
+\hline
+$x+1$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x-2$ & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$f'(x)$ & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+\textbf{Question 2.} $-3(x-1) = 0$ pour $x = 1$. Puisque $-3 < 0$, le signe de $g'(x)$ est opposé au signe de $(x-1)$ : $g'(x) > 0$ sur $]-\infty\,;\,1[$ et $g'(x) < 0$ sur $]1\,;\,+\infty[$.
+
+\textbf{Question 3.}
+
+\commentaireMarge{$x+3=0$ en $x=-3$ ; $x-1=0$ en $x=1$ (valeur interdite).}
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & $-3$ & & $1$ & & & $+\infty$ \\
+\hline
+$x+3$ & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ & $+$ \\
+$x-1$ & $-$ & $-$ & $-$ & $||$ & $+$ & $+$ & $+$ \\
+$h'(x)$ & $+$ & $0$ & $-$ & $||$ & $+$ & $+$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{corrige}

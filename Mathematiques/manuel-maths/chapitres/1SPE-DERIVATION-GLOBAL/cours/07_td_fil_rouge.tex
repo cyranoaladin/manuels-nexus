@@ -1,0 +1,144 @@
+% META: {"id":"1SPE-DERGLOBAL-TD-FIL-ROUGE","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"td","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":50,"status":"generated"}
+
+% ============================================================
+% TD FIL ROUGE — Optimisation de la boîte cylindrique
+% Nexus Réussite — 1re Spécialité
+% Durée : 50 min — Situation accroche du chapitre
+% ============================================================
+
+\section*{TD fil rouge — La boîte de conserve optimale}
+
+\textit{Durée : 50 minutes — Toutes les capacités C1 à C5 sont mobilisées.}
+
+\bigskip
+
+\begin{center}
+\textbf{Accroche}
+
+\medskip
+\parbox{0.9\textwidth}{Un fabricant de boîtes de conserve veut concevoir une boîte cylindrique de volume $V = 500$ mL $= 500$ cm³. Il souhaite \textbf{minimiser la quantité de métal utilisée}, c'est-à-dire minimiser l'aire totale de la surface de la boîte. Quelles dimensions choisir ?}
+\end{center}
+
+\bigskip
+
+\textit{Rappels :} pour un cylindre droit de rayon $r$ et de hauteur $h$ :
+\[
+  \text{Volume} : V = \pi r^2 h \qquad \text{Aire totale} : S = 2\pi r^2 + 2\pi r h.
+\]
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie A — Mise en équation (C3, C5) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}
+  \item La contrainte de volume est $\pi r^2 h = 500$. Exprimer $h$ en fonction de $r$.
+  \item Substituer dans l'expression de $S$ pour obtenir $S$ en fonction de $r$ seul. Simplifier.
+  \item Quel est le domaine de variation pertinent pour $r$ ? Justifier.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, pi, simplify
+% r = symbols('r', positive=True)
+% h = 500/(pi*r**2)
+% S = 2*pi*r**2 + 2*pi*r*h
+% S_simplified = simplify(S)
+% from sympy import Rational, simplify
+% # S = 2*pi*r^2 + 1000/r
+% assert simplify(S_simplified - (2*pi*r**2 + 1000/r)) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie B — Dérivation (C1, C2) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item On pose $S(r) = 2\pi r^2 + \dfrac{1000}{r}$ pour $r > 0$. Identifier les fonctions de référence utilisées.
+  \item Calculer $S'(r)$ en appliquant les règles de dérivation. Exprimer sous la forme d'un seul quotient.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, pi, diff, simplify
+% r = symbols('r', positive=True)
+% S = 2*pi*r**2 + 1000/r
+% Sp = diff(S, r)
+% assert simplify(Sp - (4*pi*r - 1000/r**2)) == 0
+% # as single fraction:
+% Sp_frac = (4*pi*r**3 - 1000)/r**2
+% assert simplify(Sp - Sp_frac) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie C — Étude du signe et variations (C3, C4) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Résoudre $S'(r) = 0$ pour $r > 0$. Exprimer la solution exacte $r^*$.
+  \item Dresser le tableau de signes de $S'(r)$ sur $]0\,;\,+\infty[$.
+  \item Dresser le tableau de variations de $S(r)$ sur $]0\,;\,+\infty[$.
+  \item Conclure : $r^*$ correspond-il à un minimum ou un maximum de $S$ ? Pourquoi ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, pi, solve, cbrt, simplify, N
+% r = symbols('r', positive=True)
+% S = 2*pi*r**2 + 1000/r
+% Sp = (4*pi*r**3 - 1000)/r**2
+% # Sp = 0 <=> 4*pi*r^3 = 1000 <=> r^3 = 250/pi <=> r = (250/pi)^(1/3)
+% from sympy import Rational as R; rstar = (250/pi)**R(1,3)
+% from sympy import Rational
+% rstar2 = solve(4*pi*r**3 - 1000, r)
+% assert len(rstar2) == 1
+% rstar_val = rstar2[0]
+% assert simplify(rstar_val**3 - 250/pi) == 0
+% # Sp < 0 for r < rstar, Sp > 0 for r > rstar
+% r_test_small = rstar_val / 2
+% r_test_large = rstar_val * 2
+% assert Sp.subs(r, r_test_small) < 0
+% assert Sp.subs(r, r_test_large) > 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie D — Résolution et interprétation (C5) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Calculer la valeur numérique $r^* \approx \ldots$ cm (arrondir au millième).
+  \item En déduire la hauteur optimale $h^* = \dfrac{500}{\pi (r^*)^2}$ (arrondir au millième).
+  \item Vérifier que $h^* = 2r^*$ (relation remarquable entre hauteur et diamètre).
+  \item Calculer l'aire minimale $S(r^*)$ (arrondie au cm² près).
+  \item Rédiger une conclusion répondant à la question initiale : quelles dimensions minimisent la quantité de métal ? Comparer avec une boîte standard $r = 3$ cm, $h = 17{,}68$ cm.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, pi, solve, simplify, N, Rational
+% r = symbols('r', positive=True)
+% rstar = solve(4*pi*r**3 - 1000, r)[0]
+% hstar = 500/(pi*rstar**2)
+% # Verify h* = 2r*
+% assert simplify(hstar - 2*rstar) == 0
+% S = 2*pi*r**2 + 1000/r
+% Smin = S.subs(r, rstar)
+% Smin_simplified = simplify(Smin)
+% # Numerical values
+% r_num = float(N(rstar))
+% h_num = float(N(hstar))
+% S_num = float(N(Smin_simplified))
+% assert abs(r_num - 4.301) < 0.01
+% assert abs(h_num - 8.603) < 0.01
+% assert S_num < 350  # sanity check: Smin ~ 348.7 cm^2
+% # Standard can: r=3, h=17.68
+% S_standard = 2*pi*9 + 2*pi*3*17.68
+% assert float(N(S_standard)) > S_num  # standard uses more metal
+% END-VERIFY

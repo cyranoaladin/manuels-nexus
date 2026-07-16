@@ -1,0 +1,125 @@
+% META: {"id":"1SPE-DERGLOBAL-EV-A","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":55,"points":20,"status":"generated","sympy_params":{"f_ex1":"3*x**2 - 2*x + 1","a_ex1":2,"f_ex2":"x**3 - 6*x","f_ex3":"(x**2+2)/(x-1)","f_ex4":"x*(20-x)"}}
+
+\section*{Évaluation A — Dérivation : applications aux variations}
+
+\textit{Durée : 55 minutes — 20 points — Calculatrice autorisée.}
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 1} \hfill \textit{5 points — C1, C2}
+%---------------------------------------------------------------
+
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = 3x^2 - 2x + 1$.
+
+\begin{enumerate}
+  \item Calculer $f'(x)$. \hfill \textit{(1 pt)}
+  \item Calculer $f'(2)$ et interpréter géométriquement ce résultat. \hfill \textit{(1,5 pt)}
+  \item Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $2$. \hfill \textit{(1,5 pt)}
+  \item Déterminer pour quelle valeur de $x$ la tangente à la courbe de $f$ est horizontale. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand, solve, simplify
+% x = symbols('x')
+% f = 3*x**2 - 2*x + 1
+% fp = diff(f, x)
+% assert fp == 6*x - 2
+% assert fp.subs(x, 2) == 10
+% assert f.subs(x, 2) == 9
+% T = expand(10*(x-2) + 9)
+% assert simplify(T - (10*x - 11)) == 0
+% assert T.subs(x, 2) == 9
+% horiz = solve(fp, x)
+% assert len(horiz) >= 1
+% from sympy import Rational
+% assert solve(fp, x) == [Rational(1,3)]
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 2} \hfill \textit{6 points — C3, C4}
+%---------------------------------------------------------------
+
+Soit $g$ la fonction définie sur $\mathbb{R}$ par $g(x) = x^3 - 6x$.
+
+\begin{enumerate}
+  \item Calculer $g'(x)$ et factoriser. \hfill \textit{(1,5 pt)}
+  \item Résoudre $g'(x) = 0$ et dresser le tableau de signes de $g'$. \hfill \textit{(1,5 pt)}
+  \item Dresser le tableau de variations complet de $g$ sur $\mathbb{R}$. Préciser les valeurs de $g$ aux points remarquables. \hfill \textit{(2 pt)}
+  \item Donner les valeurs des extremums locaux de $g$ et préciser leur nature (maximum ou minimum). \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, factor, solve, simplify, Rational
+% x = symbols('x')
+% g = x**3 - 6*x
+% gp = diff(g, x)
+% assert simplify(gp - (3*x**2)) == 0 - 6
+% assert simplify(factor(gp) - (3*(x**2 - 2))) == 0
+% from sympy import sqrt
+% roots = solve(gp, x)
+% assert set(roots) == {-sqrt(2), sqrt(2)}
+% assert gp.subs(x, 0) == -6   # negative between roots
+% assert gp.subs(x, 2) == 6    # positive after sqrt(2)
+% assert g.subs(x, -sqrt(2)) == 4*sqrt(2)
+% assert g.subs(x, sqrt(2)) == -4*sqrt(2)
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 3} \hfill \textit{5 points — C2, C3, C4}
+%---------------------------------------------------------------
+
+Soit $h$ la fonction définie sur $]-\infty\,;\,1[\,\cup\,]1\,;\,+\infty[$ par $h(x) = \dfrac{x^2+2}{x-1}$.
+
+\begin{enumerate}
+  \item Calculer $h'(x)$ à l'aide de la règle du quotient. \hfill \textit{(2 pt)}
+  \item Factoriser le numérateur de $h'(x)$ et résoudre $h'(x) = 0$. \hfill \textit{(1,5 pt)}
+  \item Dresser le tableau de variations de $h$ sur $]1\,;\,+\infty[$. \hfill \textit{(1,5 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, factor, solve, simplify, sqrt
+% x = symbols('x')
+% h = (x**2 + 2)/(x - 1)
+% hp = diff(h, x)
+% hp_num = x**2 - 2*x - 2
+% assert simplify(hp - hp_num/(x-1)**2) == 0
+% roots = solve(hp_num, x)
+% assert set(roots) == {1 - sqrt(3), 1 + sqrt(3)}
+% # On ]1,+inf[: only root is 1+sqrt(3) ~ 2.732
+% xstar = 1 + sqrt(3)
+% assert hp.subs(x, 2) < 0      # between 1 and 1+sqrt(3)
+% assert hp.subs(x, 4) > 0      # after 1+sqrt(3)
+% assert simplify(h.subs(x, xstar) - (2 + 2*sqrt(3))) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 4} \hfill \textit{4 points — C5}
+%---------------------------------------------------------------
+
+Un maraîcher vend des tomates à un marché. Il estime que s'il vend $x$ kg (avec $0 \leqslant x \leqslant 20$), le prix en euros par kilogramme sera $p(x) = 20 - x$. Le coût de production est nul pour simplifier.
+
+\begin{enumerate}
+  \item Exprimer le chiffre d'affaires $R(x) = x \cdot p(x)$. \hfill \textit{(1 pt)}
+  \item Calculer $R'(x)$ et trouver la valeur de $x$ qui maximise $R(x)$. \hfill \textit{(2 pt)}
+  \item Calculer le chiffre d'affaires maximal. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, simplify, Rational
+% x = symbols('x')
+% p = 20 - x
+% R = x*p
+% assert simplify(R - (x*(20-x))) == 0
+% Rp = diff(R, x)
+% assert Rp == 20 - 2*x
+% xopt = solve(Rp, x)
+% assert xopt == [10]
+% assert R.subs(x, 10) == 100
+% END-VERIFY

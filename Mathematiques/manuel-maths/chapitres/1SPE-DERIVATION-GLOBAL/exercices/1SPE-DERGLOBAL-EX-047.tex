@@ -4,7 +4,7 @@
 % x = symbols('x', positive=True)
 % f = (x**2 - 3) / sqrt(x)
 % # Rewrite as x^(3/2) - 3*x^(-1/2)
-% from sympy import Rational
+% from sympy import Rational, simplify
 % g = x**Rational(3,2) - 3*x**Rational(-1,2)
 % assert simplify(f - g) == 0
 % gp = diff(g, x)

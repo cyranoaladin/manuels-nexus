@@ -1,0 +1,121 @@
+% META: {"id":"1SPE-DERGLOBAL-EV-B","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":55,"points":20,"status":"generated","sympy_params":{"f_ex1":"2*x**2 + 3*x - 4","a_ex1":1,"f_ex2":"2*x**3 - 9*x**2 + 12*x","f_ex3":"(x**2-4)/(x+2)","f_ex4":"x*(30-2*x)"}}
+
+\section*{Évaluation B — Dérivation : applications aux variations}
+
+\textit{Durée : 55 minutes — 20 points — Calculatrice autorisée.}
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 1} \hfill \textit{5 points — C1, C2}
+%---------------------------------------------------------------
+
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = 2x^2 + 3x - 4$.
+
+\begin{enumerate}
+  \item Calculer $f'(x)$. \hfill \textit{(1 pt)}
+  \item Calculer $f'(1)$ et interpréter géométriquement ce résultat. \hfill \textit{(1,5 pt)}
+  \item Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $1$. \hfill \textit{(1,5 pt)}
+  \item Déterminer pour quelle valeur de $x$ la tangente à la courbe de $f$ est horizontale. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand, solve, Rational, simplify
+% x = symbols('x')
+% f = 2*x**2 + 3*x - 4
+% fp = diff(f, x)
+% assert fp == 4*x + 3
+% assert fp.subs(x, 1) == 7
+% assert f.subs(x, 1) == 1
+% T = expand(7*(x-1) + 1)
+% assert T == 7*x - 6
+% assert T.subs(x, 1) == 1
+% horiz = solve(fp, x)
+% assert horiz == [Rational(-3,4)]
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 2} \hfill \textit{6 points — C3, C4}
+%---------------------------------------------------------------
+
+Soit $g$ la fonction définie sur $\mathbb{R}$ par $g(x) = 2x^3 - 9x^2 + 12x$.
+
+\begin{enumerate}
+  \item Calculer $g'(x)$ et factoriser. \hfill \textit{(1,5 pt)}
+  \item Résoudre $g'(x) = 0$ et dresser le tableau de signes de $g'$. \hfill \textit{(1,5 pt)}
+  \item Dresser le tableau de variations complet de $g$ sur $\mathbb{R}$. Préciser les valeurs de $g$ aux points remarquables. \hfill \textit{(2 pt)}
+  \item Donner les valeurs des extremums locaux de $g$ et préciser leur nature. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, factor, solve, simplify, Rational
+% x = symbols('x')
+% g = 2*x**3 - 9*x**2 + 12*x
+% gp = diff(g, x)
+% assert simplify(gp - (6*x**2)) == 0 - 18*x + 12
+% assert simplify(factor(gp) - (6*(x-2)*(x-1))) == 0
+% roots = solve(gp, x)
+% assert set(roots) == {1, 2}
+% assert gp.subs(x, 0) == 12   # positive before x=1
+% assert float(gp.subs(x, Rational(3,2))) < 0  # negative between 1 and 2
+% assert gp.subs(x, 3) == 12   # positive after x=2
+% assert g.subs(x, 1) == 5
+% assert g.subs(x, 2) == 4
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 3} \hfill \textit{5 points — C2, C3, C4}
+%---------------------------------------------------------------
+
+Soit $h$ la fonction définie sur $]-\infty\,;\,-2[\,\cup\,]-2\,;\,+\infty[$ par $h(x) = \dfrac{x^2 - 4}{x + 2}$.
+
+\begin{enumerate}
+  \item Simplifier $h(x)$ en factorisant le numérateur. \hfill \textit{(1 pt)}
+  \item En déduire $h'(x)$ sans utiliser la règle du quotient. \hfill \textit{(1,5 pt)}
+  \item Résoudre $h'(x) = 0$ et dresser le tableau de variations de $h$ sur $]-\infty\,;\,-2[$. \hfill \textit{(2,5 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, solve, factor
+% x = symbols('x')
+% h = (x**2 - 4)/(x + 2)
+% # Simplification: x^2-4 = (x-2)(x+2), so h(x) = x-2 for x != -2
+% h_simp = x - 2
+% assert simplify(h - h_simp) == 0
+% hp = diff(h_simp, x)
+% assert hp == 1
+% # h'(x) = 1 > 0 always, so h is always increasing
+% # No zeros of h'
+% assert solve(hp, x) == []
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 4} \hfill \textit{4 points — C5}
+%---------------------------------------------------------------
+
+Un producteur de jus de fruits fixe son prix de vente à $p(x) = 30 - 2x$ euros par litre, où $x$ est la quantité vendue en litres (avec $0 \leqslant x \leqslant 15$). Le coût de production est nul pour simplifier.
+
+\begin{enumerate}
+  \item Exprimer le chiffre d'affaires $R(x) = x \cdot p(x)$. \hfill \textit{(1 pt)}
+  \item Calculer $R'(x)$ et trouver la valeur de $x$ qui maximise $R(x)$. \hfill \textit{(2 pt)}
+  \item Calculer le chiffre d'affaires maximal. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, simplify, Rational
+% x = symbols('x')
+% p = 30 - 2*x
+% R = x*p
+% assert simplify(R - (x*(30-2*x))) == 0
+% Rp = diff(R, x)
+% assert Rp == 30 - 4*x
+% xopt = solve(Rp, x)
+% assert abs(float(xopt[0]) - 7.5) < 0.01
+% assert R.subs(x, Rational(15,2)) == Rational(225,2)
+% END-VERIFY

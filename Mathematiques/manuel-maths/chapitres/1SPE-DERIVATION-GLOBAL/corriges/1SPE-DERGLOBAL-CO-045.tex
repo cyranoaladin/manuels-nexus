@@ -13,7 +13,7 @@
 % # x^2 = 25/2, x = 5/sqrt(2)
 % xopt = [s for s in xopt_sq if s.is_real and s > 0]
 % assert len(xopt) == 1
-% from sympy import Rational
+% from sympy import Rational, simplify
 % xval = xopt[0]
 % assert simplify(xval**2 - Rational(25,2)) == 0
 % Amax = A.subs(x, xval)

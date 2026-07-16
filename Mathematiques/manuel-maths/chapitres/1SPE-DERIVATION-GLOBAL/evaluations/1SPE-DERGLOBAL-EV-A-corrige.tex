@@ -1,0 +1,132 @@
+% META: {"id":"1SPE-DERGLOBAL-EV-A-corrige","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+
+\section*{Corrigé — Évaluation A — Dérivation : applications aux variations}
+
+%---------------------------------------------------------------
+\subsection*{Exercice 1 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$f(x) = 3x^2 - 2x + 1$, donc $f'(x) = 6x - 2.$
+
+\textbf{Question 2.}
+$f'(2) = 6 \times 2 - 2 = 12 - 2 = 10.$
+
+Interprétation géométrique : la tangente à la courbe de $f$ au point d'abscisse $2$ a pour coefficient directeur $10$. La courbe « monte » localement avec une pente de $10$ en ce point.
+
+\textbf{Question 3.}
+$f(2) = 3 \times 4 - 2 \times 2 + 1 = 12 - 4 + 1 = 9.$
+
+Équation de la tangente :
+\[
+T : y = f'(2)(x - 2) + f(2) = 10(x-2) + 9 = 10x - 20 + 9 = 10x - 11.
+\]
+
+\textbf{Question 4.}
+Tangente horizontale $\Leftrightarrow f'(x) = 0 \Leftrightarrow 6x - 2 = 0 \Leftrightarrow x = \dfrac{1}{3}.$
+
+%---------------------------------------------------------------
+\subsection*{Exercice 2 — 6 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$g(x) = x^3 - 6x$, donc $g'(x) = 3x^2 - 6 = 3(x^2 - 2) = 3(x - \sqrt{2})(x + \sqrt{2}).$
+
+\textbf{Question 2.}
+$g'(x) = 0 \Leftrightarrow x = -\sqrt{2}$ ou $x = \sqrt{2}$ \quad ($\sqrt{2} \approx 1{,}41$).
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-\sqrt{2}$ & & $\sqrt{2}$ & & $+\infty$ \\
+\hline
+$g'(x)$ & $+$ & $+$ & $0$ & $-$ & $0$ & $+$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.}
+$g(-\sqrt{2}) = -(\sqrt{2})^3 + 6\sqrt{2} = -2\sqrt{2} + 6\sqrt{2} = 4\sqrt{2}.$
+$g(\sqrt{2}) = (\sqrt{2})^3 - 6\sqrt{2} = 2\sqrt{2} - 6\sqrt{2} = -4\sqrt{2}.$
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-\sqrt{2}$ & & $\sqrt{2}$ & & $+\infty$ \\
+\hline
+$g(x)$ & $-\infty$ & $\nearrow$ & $4\sqrt{2}$ & $\searrow$ & $-4\sqrt{2}$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 4.}
+$g$ admet un \textbf{maximum local} de $4\sqrt{2} \approx 5{,}66$ en $x = -\sqrt{2}$.
+$g$ admet un \textbf{minimum local} de $-4\sqrt{2} \approx -5{,}66$ en $x = \sqrt{2}$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 3 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$u = x^2 + 2$, $v = x-1$, $u' = 2x$, $v' = 1$.
+\[
+h'(x) = \frac{u'v - uv'}{v^2} = \frac{2x(x-1) - (x^2+2)}{(x-1)^2} = \frac{2x^2 - 2x - x^2 - 2}{(x-1)^2} = \frac{x^2 - 2x - 2}{(x-1)^2}.
+\]
+
+\textbf{Question 2.}
+$\Delta = (-2)^2 - 4(1)(-2) = 4 + 8 = 12.$
+
+$x = \dfrac{2 \pm \sqrt{12}}{2} = 1 \pm \sqrt{3}.$
+
+Sur $]1\,;\,+\infty[$, seule la racine $x^* = 1 + \sqrt{3} \approx 2{,}73$ appartient au domaine.
+
+\textbf{Question 3.}
+Sur $]1\,;\,+\infty[$ : $(x-1)^2 > 0$ toujours. Le signe de $h'$ est celui du numérateur $x^2-2x-2$ :
+$h'(x) < 0$ pour $1 < x < 1+\sqrt{3}$ et $h'(x) > 0$ pour $x > 1+\sqrt{3}$.
+
+$h(1+\sqrt{3}) = \dfrac{(1+\sqrt{3})^2 + 2}{(1+\sqrt{3})-1} = \dfrac{1 + 2\sqrt{3} + 3 + 2}{\sqrt{3}} = \dfrac{6 + 2\sqrt{3}}{\sqrt{3}} = \dfrac{6}{\sqrt{3}} + 2 = 2\sqrt{3} + 2.$
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $1$ & & $1+\sqrt{3}$ & & $+\infty$ \\
+\hline
+$h'(x)$ & $-$ & $-$ & $0$ & $+$ & $+$ \\
+\hline
+$h(x)$ & $+\infty$ & $\searrow$ & $2+2\sqrt{3}$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+$h$ admet un minimum de $2+2\sqrt{3} \approx 5{,}46$ en $x = 1+\sqrt{3}$ sur $]1\,;\,+\infty[$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 4 — 4 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$R(x) = x \times (20 - x) = 20x - x^2.$
+
+\textbf{Question 2.}
+$R'(x) = 20 - 2x.$
+
+$R'(x) = 0 \Leftrightarrow x = 10.$
+
+$R'(x) > 0$ pour $x < 10$ et $R'(x) < 0$ pour $x > 10$ : $R$ est maximale en $x = 10$.
+
+Tableau de variations de $R$ sur $[0\,;\,20]$ :
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $10$ & & $20$ \\
+\hline
+$R(x)$ & $0$ & $\nearrow$ & $100$ & $\searrow$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.}
+$R(10) = 10 \times (20 - 10) = 10 \times 10 = 100$ euros.
+
+Le maraîcher maximise son chiffre d'affaires en vendant $10$ kg de tomates au prix de $10$ euros/kg, pour un chiffre d'affaires de $\mathbf{100}$ euros.

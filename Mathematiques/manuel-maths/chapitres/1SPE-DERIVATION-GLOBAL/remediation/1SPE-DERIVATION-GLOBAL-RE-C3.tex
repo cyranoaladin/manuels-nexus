@@ -1,0 +1,181 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-RE-C3","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["C3"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C3 : Signe de la dérivée et tableau de variations
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C3-EX1}{1}{9}
+Soit $f(x) = x^2 - 6x + 5$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$.
+  \item Résoudre $f'(x) = 0$ et dresser le tableau de signes de $f'$.
+  \item En déduire le tableau de variations de $f$. Préciser les valeurs de $f$ aux points remarquables.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$f'(x) = 2x - 6$. Résoudre $2x - 6 = 0$, puis étudier le signe de $2x - 6$ en fonction de la position de $x$ par rapport à la racine.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, simplify, Rational
+% x = symbols('x')
+% f = x**2 - 6*x + 5
+% fp = diff(f, x)
+% assert fp == 2*x - 6
+% roots = solve(fp, x)
+% assert roots == [3]
+% assert fp.subs(x, 0) == -6   # negative before root
+% assert fp.subs(x, 4) == 2    # positive after root
+% assert f.subs(x, 3) == -4    # minimum value
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C3-EX1}
+
+\textbf{Question 1.}
+$f'(x) = 2x - 6.$
+
+\textbf{Question 2.}
+$f'(x) = 0 \Leftrightarrow 2x - 6 = 0 \Leftrightarrow x = 3.$
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $3$ & & $+\infty$ \\
+\hline
+$f'(x)$ & $-$ & $-$ & $0$ & $+$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\commentaireMarge{$f'(x) < 0$ pour $x < 3$ (on prend $x=0$ : $f'(0) = -6 < 0$) et $f'(x) > 0$ pour $x > 3$.}
+
+\textbf{Question 3.}
+$f(3) = 9 - 18 + 5 = -4.$
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $3$ & & $+\infty$ \\
+\hline
+$f(x)$ & $+\infty$ & $\searrow$ & $-4$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+$f$ admet un minimum global de $-4$ en $x = 3$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C3-EX2}{1}{9}
+Soit $g(x) = -2x^3 + 6x$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $g'(x)$ et le factoriser.
+  \item Dresser le tableau de signes de $g'(x)$.
+  \item En déduire le tableau de variations de $g$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, factor, solve, simplify, simplify
+% x = symbols('x')
+% g = -2*x**3 + 6*x
+% gp = diff(g, x)
+% assert simplify(gp - (-6*x**2)) == 0 + 6
+% assert simplify(factor(gp) - (-6*(x-1)*(x+1))) == 0
+% roots = solve(gp, x)
+% assert set(roots) == {-1, 1}
+% assert gp.subs(x, 0) == 6    # positive between roots
+% assert gp.subs(x, 2) == -18  # negative after x=1
+% assert g.subs(x, 1) == 4     # local max
+% assert g.subs(x, -1) == -4   # local min
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C3-EX2}
+
+\textbf{Question 1.}
+$g'(x) = -6x^2 + 6 = -6(x^2 - 1) = -6(x-1)(x+1).$
+
+\textbf{Question 2.}
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & $-1$ & & $1$ & & & $+\infty$ \\
+\hline
+$-6$ & $-$ & $-$ & $-$ & $-$ & $-$ & $-$ & $-$ \\
+$x-1$ & $-$ & $-$ & $-$ & $0$ & $+$ & $+$ & $+$ \\
+$x+1$ & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ & $+$ \\
+$g'(x)$ & $-$ & $0$ & $+$ & $0$ & $-$ & $-$ & $-$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.}
+$g(-1) = 2 - 6 = -4$ et $g(1) = -2 + 6 = 4.$
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $1$ & & $+\infty$ \\
+\hline
+$g(x)$ & $+\infty$ & $\searrow$ & $-4$ & $\nearrow$ & $4$ & $\searrow$ & $-\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C3-EX3}{1}{9}
+Soit $h(x) = \dfrac{x^2 + 1}{x}$ pour $x > 0$.
+\begin{enumerate}
+  \item Simplifier l'expression de $h(x)$ en séparant le quotient.
+  \item Calculer $h'(x)$.
+  \item Étudier le signe de $h'(x)$ sur $]0\,;\,+\infty[$ et dresser le tableau de variations de $h$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, solve, Rational
+% x = symbols('x', positive=True)
+% h = (x**2 + 1)/x
+% h2 = x + 1/x
+% assert simplify(h - h2) == 0
+% hp = diff(h2, x)
+% assert hp == 1 - 1/x**2
+% # h'(x) = 0 when x=1 (x>0)
+% assert simplify(hp.subs(x, 1)) == 0
+% assert hp.subs(x, 2) > 0
+% assert hp.subs(x, x/2).subs(x, 1) < 0  # at x=0.5
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C3-EX3}
+
+\textbf{Question 1.}
+$h(x) = \dfrac{x^2 + 1}{x} = \dfrac{x^2}{x} + \dfrac{1}{x} = x + \dfrac{1}{x}.$
+
+\textbf{Question 2.}
+$h'(x) = 1 - \dfrac{1}{x^2} = \dfrac{x^2 - 1}{x^2}.$
+
+\commentaireMarge{$x^2 > 0$ pour $x > 0$, donc le signe de $h'$ est celui du numérateur $x^2-1$.}
+
+\textbf{Question 3.}
+Pour $x > 0$ : $h'(x) = 0 \Leftrightarrow x^2 - 1 = 0 \Leftrightarrow x = 1$ (racine positive).
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $1$ & & $+\infty$ \\
+\hline
+$h'(x)$ & $-$ & $-$ & $0$ & $+$ & $+$ \\
+\hline
+$h(x)$ & $+\infty$ & $\searrow$ & $2$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+$h(1) = 1 + 1 = 2$ est le minimum de $h$ sur $]0\,;\,+\infty[$.
+
+\end{corrige}

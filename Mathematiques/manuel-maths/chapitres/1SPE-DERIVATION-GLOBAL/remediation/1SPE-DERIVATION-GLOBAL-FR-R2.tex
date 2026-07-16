@@ -1,0 +1,124 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-FR-R2","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["R2"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R2 : Équation de la tangente
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Équation de la tangente}
+
+La tangente à la courbe de $f$ au point d'abscisse $a$ a pour équation :
+\[
+  y = f'(a)(x - a) + f(a).
+\]
+Elle passe par le point $(a\,;\,f(a))$ et a pour coefficient directeur $f'(a)$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R2-EX1}{1}{6}
+On sait que $f(2) = 3$ et $f'(2) = 5$.
+\begin{enumerate}
+  \item Écrire l'équation de la tangente $T$ à la courbe de $f$ au point d'abscisse $2$.
+  \item Calculer $T(2)$ et vérifier que le point $(2\,;\,3)$ est bien sur $T$.
+  \item Calculer $T(3)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% x = symbols('x')
+% T = expand(5*(x-2) + 3)
+% assert T == 5*x - 7
+% assert T.subs(x, 2) == 3
+% assert T.subs(x, 3) == 8
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R2-EX1}
+
+\commentaireMarge{On applique la formule $y = f'(a)(x-a)+f(a)$ avec $a=2$, $f(2)=3$, $f'(2)=5$.}
+
+\textbf{Question 1.}
+$T : y = 5(x - 2) + 3 = 5x - 10 + 3 = 5x - 7.$
+
+\textbf{Question 2.}
+$T(2) = 5 \times 2 - 7 = 10 - 7 = 3 = f(2).$ \checkmark Le point $(2\,;\,3)$ est bien sur $T$.
+
+\textbf{Question 3.}
+$T(3) = 5 \times 3 - 7 = 15 - 7 = 8.$
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R2-EX2}{1}{6}
+Soit $f(x) = x^2$. On admet que $f'(x) = 2x$.
+\begin{enumerate}
+  \item Calculer $f(-1)$ et $f'(-1)$.
+  \item Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $-1$.
+  \item Vérifier que la tangente coupe l'axe des ordonnées en $(0\,;\,-1)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% x = symbols('x')
+% f = x**2
+% fp = 2*x
+% assert f.subs(x, -1) == 1
+% assert fp.subs(x, -1) == -2
+% T = expand(fp.subs(x,-1)*(x-(-1)) + f.subs(x,-1))
+% assert simplify(T - (-2*x - 1)) == 0
+% assert T.subs(x, 0) == -1
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R2-EX2}
+
+\textbf{Question 1.}
+$f(-1) = (-1)^2 = 1$ et $f'(-1) = 2 \times (-1) = -2$.
+
+\textbf{Question 2.}
+$T : y = f'(-1)(x - (-1)) + f(-1) = -2(x + 1) + 1 = -2x - 2 + 1 = -2x - 1.$
+
+\textbf{Question 3.}
+$T(0) = -2 \times 0 - 1 = -1.$ La tangente coupe bien l'axe des ordonnées en $(0\,;\,-1)$. \checkmark
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-FR-R2-EX3}{1}{7}
+On donne la courbe $\mathcal{C}_f$. On lit que $f(1) = 4$ et que la tangente en $(1\,;\,4)$ passe par le point $(3\,;\,0)$.
+\begin{enumerate}
+  \item Calculer la pente de la tangente.
+  \item En déduire $f'(1)$.
+  \item Écrire l'équation de la tangente.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, expand, simplify
+% x = symbols('x')
+% # pente = (0-4)/(3-1) = -2
+% pente = Rational(0-4, 3-1)
+% assert pente == -2
+% T = expand(-2*(x-1) + 4)
+% assert simplify(T - (-2*x + 6)) == 0
+% assert T.subs(x, 1) == 4
+% assert T.subs(x, 3) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-FR-R2-EX3}
+
+\commentaireMarge{La pente d'une droite passant par $(x_1;y_1)$ et $(x_2;y_2)$ est $\frac{y_2-y_1}{x_2-x_1}$.}
+
+\textbf{Question 1.}
+$\text{pente} = \dfrac{0 - 4}{3 - 1} = \dfrac{-4}{2} = -2.$
+
+\textbf{Question 2.}
+$f'(1) = -2$ (la pente de la tangente est le nombre dérivé).
+
+\textbf{Question 3.}
+$T : y = -2(x - 1) + 4 = -2x + 2 + 4 = -2x + 6.$
+
+Vérification : $T(3) = -6 + 6 = 0$ \checkmark et $T(1) = -2 + 6 = 4 = f(1)$ \checkmark.
+
+\end{corrige}

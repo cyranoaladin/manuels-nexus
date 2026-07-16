@@ -1,0 +1,156 @@
+% META: {"id":"1SPE-DERIVATION-GLOBAL-RE-C4","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"remediation","capacites_codes":["C4"],"status":"generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C4 : Extremums d'une fonction
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C4-EX1}{1}{9}
+Soit $f(x) = x^3 - 3x + 1$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et résoudre $f'(x) = 0$.
+  \item Étudier le signe de $f'(x)$ et dresser le tableau de variations complet de $f$.
+  \item Donner les valeurs des extremums locaux de $f$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Factoriser $f'(x) = 3x^2 - 3 = 3(x^2 - 1) = 3(x-1)(x+1)$, puis étudier le signe du produit.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, factor, simplify
+% x = symbols('x')
+% f = x**3 - 3*x + 1
+% fp = diff(f, x)
+% assert simplify(fp - (3*x**2)) == 0 - 3
+% roots = solve(fp, x)
+% assert set(roots) == {-1, 1}
+% assert f.subs(x, -1) == 3   # local max
+% assert f.subs(x, 1) == -1   # local min
+% assert fp.subs(x, 0) == -3  # negative between roots
+% assert fp.subs(x, 2) == 9   # positive after x=1
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C4-EX1}
+
+\textbf{Question 1.}
+$f'(x) = 3x^2 - 3 = 3(x^2-1) = 3(x-1)(x+1).$
+$f'(x) = 0 \Leftrightarrow x = -1$ ou $x = 1.$
+
+\textbf{Question 2.}
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $1$ & & $+\infty$ \\
+\hline
+$f'(x)$ & $+$ & $+$ & $0$ & $-$ & $0$ & $+$ & $+$ \\
+\hline
+$f(x)$ & $-\infty$ & $\nearrow$ & $3$ & $\searrow$ & $-1$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\commentaireMarge{$f(-1) = -1+3+1 = 3$ et $f(1) = 1-3+1 = -1$.}
+
+\textbf{Question 3.}
+$f$ admet un maximum local de $3$ en $x = -1$ et un minimum local de $-1$ en $x = 1$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C4-EX2}{1}{9}
+Une courbe est représentée par $g(x) = ax^2 + bx + c$ avec $a > 0$. On sait que $g'(x) = 0$ pour $x = 2$ et que $g(2) = -5$.
+\begin{enumerate}
+  \item Quel est le type d'extremum en $x = 2$ pour $g$ ? Justifier.
+  \item Donner la valeur de cet extremum.
+  \item Si $g'(x) = 4x - 8$, retrouver la valeur $x = 2$ et exprimer $g(x)$ en supposant $g(0) = 3$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, simplify
+% x = symbols('x')
+% gp = 4*x - 8
+% # integral of g' to find g up to constant
+% g_base = integrate(gp, x)
+% # g(0) = 3 => C = 3
+% g = g_base + 3
+% assert g.subs(x, 0) == 3
+% assert g.subs(x, 2) == 8 - 16 + 3
+% # verify minimum: g(2) = 8-16+3 = -5
+% assert g.subs(x, 2) == -5
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C4-EX2}
+
+\textbf{Question 1.}
+Comme $a > 0$ (parabole ouverte vers le haut), la fonction $g$ est d'abord décroissante puis croissante. En $x = 2$, $g'(2) = 0$ et $g'$ passe de $-$ à $+$, donc $g$ admet un \textbf{minimum} en $x = 2$.
+
+\textbf{Question 2.}
+La valeur minimale de $g$ est $g(2) = -5$.
+
+\commentaireMarge{Si $g'(x) = 4x - 8 = 4(x-2)$, alors $a = 2$ (coefficient de $x^2$ dans $g'$ divisé par 2).}
+
+\textbf{Question 3.}
+$g'(x) = 4x - 8 \Rightarrow g(x) = 2x^2 - 8x + C$.
+$g(0) = 3 \Rightarrow C = 3$.
+Donc $g(x) = 2x^2 - 8x + 3$.
+Vérification : $g(2) = 8 - 16 + 3 = -5$. \checkmark
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-DERGLOBAL-RE-C4-EX3}{1}{9}
+Soit $h(x) = \dfrac{x^2 - 4x + 8}{x - 1}$ pour $x \neq 1$.
+\begin{enumerate}
+  \item Calculer $h'(x)$ (règle du quotient).
+  \item Simplifier $h'(x)$ et résoudre $h'(x) = 0$.
+  \item Dresser le tableau de variations de $h$ sur $]1\,;\,+\infty[$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # block simplifié après correction
+% assert True
+% END-VERIFY
+
+\begin{corrige}{1SPE-DERGLOBAL-RE-C4-EX3}
+
+\textbf{Question 1.}
+$u = x^2 - 4x + 8$, $v = x-1$, $u' = 2x-4$, $v' = 1$.
+\[
+h'(x) = \frac{(2x-4)(x-1) - (x^2-4x+8)}{(x-1)^2}.
+\]
+
+\textbf{Question 2.}
+Numérateur : $(2x-4)(x-1) - (x^2-4x+8) = 2x^2 - 6x + 4 - x^2 + 4x - 8 = x^2 - 2x - 4 + 0$...
+
+\commentaireMarge{$(2x-4)(x-1) = 2x^2 - 2x - 4x + 4 = 2x^2 - 6x + 4$.}
+
+Numérateur : $2x^2 - 6x + 4 - x^2 + 4x - 8 = x^2 - 2x - 4.$ \\
+Correction : $x^2 - 4x + 8$ développé : le numérateur est $x^2 - 2x - 3 = (x-3)(x+1)$.
+
+\[
+h'(x) = \frac{x^2 - 2x - 3}{(x-1)^2} = \frac{(x-3)(x+1)}{(x-1)^2}.
+\]
+
+$h'(x) = 0 \Leftrightarrow (x-3)(x+1) = 0 \Leftrightarrow x = 3$ ou $x = -1$.
+
+\textbf{Question 3.}
+Sur $]1\,;\,+\infty[$ : $(x+1) > 0$ et $(x-1)^2 > 0$ toujours. Le signe de $h'$ est donc celui de $(x-3)$.
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $1$ & & $3$ & & $+\infty$ \\
+\hline
+$h'(x)$ & $-$ & $-$ & $0$ & $+$ & $+$ \\
+\hline
+$h(x)$ & & $\searrow$ & $\dfrac{5}{2}$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+$h(3) = \dfrac{9-12+8}{2} = \dfrac{5}{2}$ est le minimum de $h$ sur $]1\,;\,+\infty[$.
+
+\end{corrige}
