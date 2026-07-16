@@ -398,54 +398,67 @@
 \usetikzlibrary{arrows.meta,positioning,calc}
 
 % ===========================================================================
-%  OUVERTURE DE CHAPITRE v3.2 — pleine page identitaire + page contrat
+%  OUVERTURE DE CHAPITRE v4.1 — Bandeau accent + numéro géant + décor TikZ
 % ===========================================================================
-% nxChapNum est defini dans nexus-signatures.tex
+% nxChapNum est défini dans nexus-signatures.tex
 \usetikzlibrary{backgrounds}
 
-% Usage : \ouverturechapitre[motif]{Titre}{capacites}{carte}{temps}
-% arg 6 optionnel = accroche
+\newlength{\nxBandHeight}
+\setlength{\nxBandHeight}{0.56\paperheight}
+
+% Usage : \ouverturechapitre[motif]{Titre}{capacites}{accroche}{temps}
 \newcommand{\ouverturechapitre}[5][motifGenerique]{%
   \stepcounter{nxChapNum}%
   \refstepcounter{chapter}%
   \chaptermark{#2}%
   \addcontentsline{toc}{chapter}{#2}%
-  % --- PAGE VISUELLE (recto, fond nxBleu plein) ---
+  % --- PAGE VISUELLE (recto, bandeau accent haut 56%) ---
   \thispagestyle{empty}%
-  \begin{tikzpicture}[remember picture, overlay]
-    \fill[nxBleu] (current page.south west) rectangle (current page.north east);
-    % Numéro Montserrat Thin, haut droit, volontairement aérien.
-    \node[anchor=north east, text=white, text opacity=.85,
-      font=\sffamily\fontseries{thin}\fontsize{110}{110}\selectfont]
-      at ([xshift=-20mm, yshift=-25mm]current page.north east) {\thechapter};
-    % Motif propre au chapitre, dans la moitié inférieure droite.
+  \noindent\begin{tikzpicture}[remember picture, overlay]
+    % Bandeau plein accent (haut de page)
+    \fill[chapcolor] (current page.north west)
+      rectangle ([yshift=-\nxBandHeight]current page.north east);
+    % Décor TikZ du chapitre (dans le bandeau, moitié droite)
     \csname #1\endcsname
-    % Filet or au-dessus du bloc de titre.
-    \draw[nxOr,line width=1.2pt]
-      ([xshift=20mm,yshift=83mm]current page.south west) -- ++(30mm,0);
-    % Titre 26pt blanc
-    \node[anchor=south west, text=white, font=\sffamily\bfseries\fontsize{26}{32}\selectfont,
-      text width=140mm]
-      at ([xshift=20mm, yshift=50mm]current page.south west) {#2};
-    \node[anchor=south west, text=white!80,
-      font=\sffamily\fontseries{m}\fontsize{8.5}{11}\selectfont]
-      at ([xshift=20mm, yshift=36mm]current page.south west)
-      {\nexus@matiere\ --- \nexus@niveau\ --- Nexus Réussite};
-  \end{tikzpicture}%
-  \clearpage
-  % --- PAGE CONTRAT (verso) ---
-  \thispagestyle{plain}%
-  \vspace*{0.5cm}%
-  \noindent{\sffamily\bfseries\fontsize{13}{17}\selectfont\color{nxBleu}%
-    Ce que je vais savoir faire}\par
+    % Étiquette matière · niveau
+    \node[anchor=north west, text=white, opacity=0.9,
+          font=\titrefont\small, inner sep=0pt]
+      at ([shift={(20mm,-17mm)}]current page.north west)
+      {\MakeUppercase{\nexus@matiere}\ \ $\cdot$\ \ \nexus@niveau};
+    % Numéro géant fantôme
+    \node[anchor=south west, text=white, opacity=0.15, inner sep=0pt,
+          font=\titrefont\fontsize{210}{210}\selectfont]
+      at ([shift={(16mm,-\nxBandHeight+2mm)}]current page.north west)
+      {\ifnum\value{chapter}>0 \thechapter\fi};
+    % « Chapitre N »
+    \node[anchor=south west, text=white, align=left, inner sep=0pt,
+          font=\titrefont]
+      at ([shift={(20mm,-\nxBandHeight+24mm)}]current page.north west)
+      {\fontsize{15}{15}\selectfont\MakeUppercase{Chapitre~\thechapter}};
+    % Titre géant
+    \node[anchor=south west, text=white, align=left, inner sep=0pt,
+          text width=0.66\paperwidth,
+          font=\titrefont\fontsize{34}{40}\selectfont]
+      at ([shift={(20mm,-\nxBandHeight+13mm)}]current page.north west)
+      {#2\par};
+  \end{tikzpicture}\par
+  % Espace sous le bandeau
+  \vspace*{\dimexpr\nxBandHeight-\topskip-1.4cm\relax}%
+  % Objectifs / capacités sous le bandeau
+  \begin{tcolorbox}[enhanced, frame hidden, boxrule=0pt, arc=3pt,
+    colback=chapcolor!7,
+    borderline west={3pt}{0pt}{chapcolor},
+    left=12pt, right=12pt, top=10pt, bottom=10pt,
+    before upper={\textcolor{chapcolor}{\titrefont\large
+      Objectifs --- Capacités attendues}\par\vspace{5pt}}]
+    #3%
+  \end{tcolorbox}%
   \vspace{0.4cm}%
-  #3%
-  \vspace{0.6cm}%
   \begin{nxcard}%
     #4%
   \end{nxcard}%
-  \vspace{0.4cm}%
-  \noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimés :} #5%
+  \vspace{0.3cm}%
+  \noindent\textcolor{chapcolor}{\titrefont Temps estimés :} #5%
   \par\vfill
   \clearpage
 }
