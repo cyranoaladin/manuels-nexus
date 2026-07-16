@@ -1,0 +1,26 @@
+chapitre: 1SPE-EXPONENTIELLE
+niveau: 1SPE
+theme: EXPONENTIELLE
+titre: "Fonction exponentielle"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-EXPONENTIELLE-C1, libelle_eleve: "Je sais que la fonction exponentielle est l'unique fonction égale à sa dérivée valant 1 en 0." }
+  - { code: C2, ref_capacite: 1SPE-EXPONENTIELLE-C2, libelle_eleve: "Je sais utiliser les propriétés algébriques de l'exponentielle (somme, produit, puissance)." }
+  - { code: C3, ref_capacite: 1SPE-EXPONENTIELLE-C3, libelle_eleve: "Je sais que l'exponentielle est strictement croissante sur R et connaître ses limites." }
+  - { code: C4, ref_capacite: 1SPE-EXPONENTIELLE-C4, libelle_eleve: "Je sais dériver une fonction de la forme e^{u(x)}." }
+  - { code: C5, ref_capacite: 1SPE-EXPONENTIELLE-C5, libelle_eleve: "Je sais résoudre des équations et inéquations avec l'exponentielle." }
+
+prerequis:
+  - { code: R1, libelle: "Dérivée d'une somme, d'un produit, d'un quotient", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
+  - { code: R2, libelle: "Signe de la dérivée et sens de variation", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
+  - { code: R3, libelle: "Résolution d'équations et d'inéquations du second degré", chapitre_origine: "1SPE-SECOND-DEGRE" }
+  - { code: R4, libelle: "Puissances entières et règles de calcul", chapitre_origine: "2GT" }
+  - { code: R5, libelle: "Suites géométriques et coefficient multiplicateur", chapitre_origine: "1SPE-SUITES" }
+
+situation_accroche: >
+  La population d'une culture bactérienne double toutes les 20 minutes.
+  Combien de bactéries y aura-t-il après 3 heures si l'on part de 1000 ?
+  Comment modéliser cette croissance exponentielle ?
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }
