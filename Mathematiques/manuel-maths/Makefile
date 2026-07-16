@@ -34,9 +34,7 @@ coverage:
 	$(PY) scripts/coverage_report.py --chap $(CHAP)
 
 check-latex:
-	@for f in $$(git diff --name-only --cached -- '*.tex' 2>/dev/null || find chapitres -name '*.tex'); do \
-	  echo "compile $$f"; $(PY) -c "import sys;sys.path.insert(0,'scripts')" ; done
-	$(PY) scripts/assemble.py --chap $(CHAP) --variant complet || true
+	$(PY) scripts/check_latex.py
 
 chapter:
 	$(PY) scripts/assemble.py --chap $(CHAP) --variant complet
