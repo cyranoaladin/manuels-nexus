@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-DERGLOBAL-ME-001","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"methode","capacites_codes":["C1"],"status":"generated"}
+\begin{fichemethode}{M1}{Dériver une fonction de référence}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de calculer la dérivée d'une fonction de base : puissance $x^n$, inverse $\dfrac{1}{x}$, racine $\sqrt{x}$.}
+\pasApas{\begin{enumerate}
+  \item J'identifie le type de la fonction : puissance, inverse ou racine carrée.
+  \item J'applique la formule de dérivation correspondante :
+    \begin{itemize}
+      \item $\left(x^n\right)'= n x^{n-1}$ pour tout entier $n \geq 1$ ;
+      \item $\left(\dfrac{1}{x}\right)' = -\dfrac{1}{x^2}$ pour $x \neq 0$ ;
+      \item $\left(\sqrt{x}\right)' = \dfrac{1}{2\sqrt{x}}$ pour $x > 0$.
+    \end{itemize}
+  \item Je simplifie l'expression obtenue si possible.
+\end{enumerate}}
+\exempleRedige{Calculons la dérivée de $f(x)=x^4$. \commentaireMarge{Fonction puissance : $n=4$.} On applique $\left(x^n\right)'=nx^{n-1}$ avec $n=4$ :
+\[f'(x)=4x^3.\]
+La dérivée de $f$ est donc $f'(x)=4x^3$.}
+\pieges{\begin{itemize}
+  \item Écrire $\left(x^4\right)'=4x^4$ : oublier de diminuer l'exposant de 1.
+  \item Écrire $\left(\sqrt{x}\right)'=\dfrac{1}{\sqrt{x}}$ : oublier le facteur $\dfrac{1}{2}$.
+  \item Confondre $\left(\dfrac{1}{x}\right)'$ avec $\dfrac{1}{x}$ : le signe moins est indispensable.
+\end{itemize}}
+\verifier{Je vérifie la cohérence de l'exposant : $\left(x^n\right)'$ est de degré $n-1$, donc strictement inférieur à celui de la fonction de départ.}
+\sEntrainer{\refExos{M1}}
+\end{fichemethode}

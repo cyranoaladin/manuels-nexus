@@ -1,0 +1,104 @@
+% META: {"id":"1SPE-DERGLOBAL-COURS-C2","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"cours","capacites_codes":["C2"],"status":"generated"}
+
+\section{Règles de dérivation}
+
+\margeAppui{Ces trois règles permettent de dériver toute combinaison de fonctions de référence. Les connaître réduit toute dérivation à un enchaînement mécanique.}
+
+\propriete[Règle de la somme et de la multiplication par un scalaire]{
+Soient $u$ et $v$ deux fonctions dérivables sur un intervalle $I$, et $\lambda \in \mathbb{R}$. Alors $u + v$ et $\lambda u$ sont dérivables sur $I$ et :
+\[
+(u + v)' = u' + v', \qquad (\lambda u)' = \lambda u'.
+\]
+}
+
+\exemple{
+Soit $f(x) = 3x^4 - 5x^2 + 7x - 2$. On dérive terme à terme :
+\[
+f'(x) = 3 \times 4x^3 - 5 \times 2x + 7 \times 1 - 0 = 12x^3 - 10x + 7.
+\]
+}
+
+\exemple{
+Soit $g(x) = \dfrac{2}{\sqrt{x}} - \dfrac{1}{x} + 4$ pour $x > 0$.
+
+On réécrit $\dfrac{2}{\sqrt{x}} = 2\varphi(x)$ avec $\varphi'(x) = \dfrac{1}{2\sqrt{x}}$, et $\dfrac{1}{x} = h(x)$ avec $h'(x) = -\dfrac{1}{x^2}$. Ainsi :
+\[
+g'(x) = 2 \times \frac{1}{2\sqrt{x}} - \left(-\frac{1}{x^2}\right) + 0 = \frac{1}{\sqrt{x}} + \frac{1}{x^2}.
+\]
+}
+
+\approfondissement{
+\textbf{Esquisse de preuve de la règle de la somme.} On calcule le taux de variation de $u + v$ :
+\[
+\frac{(u+v)(x+h) - (u+v)(x)}{h} = \frac{u(x+h) - u(x)}{h} + \frac{v(x+h) - v(x)}{h}.
+\]
+Lorsque $h \to 0$, chaque fraction tend respectivement vers $u'(x)$ et $v'(x)$. On en déduit $(u+v)'(x) = u'(x) + v'(x)$.
+}
+
+\propriete[Règle du produit]{
+Soient $u$ et $v$ deux fonctions dérivables sur un intervalle $I$. Alors $u \times v$ est dérivable sur $I$ et :
+\[
+(uv)' = u'v + uv'.
+\]
+}
+
+\exemple{
+Soit $f(x) = (2x + 1)(x^3 - 3)$. On pose $u = 2x+1$ et $v = x^3-3$, d'où $u' = 2$ et $v' = 3x^2$. Alors :
+\[
+f'(x) = u'v + uv' = 2(x^3 - 3) + (2x+1)(3x^2).
+\]
+On développe pour simplifier :
+\[
+f'(x) = 2x^3 - 6 + 6x^3 + 3x^2 = 8x^3 + 3x^2 - 6.
+\]
+}
+
+\exemple{
+Soit $g(x) = x^2 \sqrt{x}$ pour $x > 0$. On pose $u = x^2$ et $v = \sqrt{x}$, d'où $u' = 2x$ et $v' = \dfrac{1}{2\sqrt{x}}$. Alors :
+\[
+g'(x) = 2x \cdot \sqrt{x} + x^2 \cdot \frac{1}{2\sqrt{x}} = 2x\sqrt{x} + \frac{x^2}{2\sqrt{x}} = 2x\sqrt{x} + \frac{x\sqrt{x}}{2} = \frac{5x\sqrt{x}}{2}.
+\]
+}
+
+\contreexemple{
+$(uv)' \neq u' \times v'$. Par exemple, pour $u = x$ et $v = x^2$, le produit est $x^3$ de dérivée $3x^2$, mais $u' \times v' = 1 \times 2x = 2x \neq 3x^2$.
+}
+
+\erreurFrequente{
+Oublier l'un des deux termes de la règle du produit : $(uv)' = u'v + uv'$ contient \emph{deux} termes. Ne pas écrire seulement $u'v'$.
+}
+
+\propriete[Règle du quotient]{
+Soient $u$ et $v$ deux fonctions dérivables sur un intervalle $I$, avec $v(x) \neq 0$ sur $I$. Alors $\dfrac{u}{v}$ est dérivable sur $I$ et :
+\[
+\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}.
+\]
+}
+
+\exemple{
+Soit $f(x) = \dfrac{3x - 1}{x^2 + 1}$. On pose $u = 3x - 1$ et $v = x^2 + 1$, d'où $u' = 3$ et $v' = 2x$. Le dénominateur $v = x^2 + 1 > 0$ pour tout $x \in \mathbb{R}$. Alors :
+\[
+f'(x) = \frac{3(x^2+1) - (3x-1)(2x)}{(x^2+1)^2} = \frac{3x^2 + 3 - 6x^2 + 2x}{(x^2+1)^2} = \frac{-3x^2 + 2x + 3}{(x^2+1)^2}.
+\]
+}
+
+\exemple{
+Soit $g(x) = \dfrac{\sqrt{x}}{x+1}$ pour $x > 0$. On pose $u = \sqrt{x}$ et $v = x + 1$, d'où $u' = \dfrac{1}{2\sqrt{x}}$ et $v' = 1$. Alors :
+\[
+g'(x) = \frac{\dfrac{1}{2\sqrt{x}}(x+1) - \sqrt{x} \cdot 1}{(x+1)^2} = \frac{\dfrac{x+1}{2\sqrt{x}} - \sqrt{x}}{(x+1)^2}.
+\]
+En réduisant au même dénominateur $2\sqrt{x}$ au numérateur :
+\[
+g'(x) = \frac{x + 1 - 2x}{2\sqrt{x}\,(x+1)^2} = \frac{1-x}{2\sqrt{x}\,(x+1)^2}.
+\]
+}
+
+\contreexemple{
+$\left(\dfrac{u}{v}\right)' \neq \dfrac{u'}{v'}$. Pour $\dfrac{x^2}{x} = x$, la dérivée est $1$, mais $\dfrac{(x^2)'}{(x)'} = \dfrac{2x}{1} = 2x \neq 1$.
+}
+
+\erreurFrequente{
+Inverser l'ordre au numérateur de la règle du quotient : c'est $u'v - uv'$ (avec le signe moins), et non $uv' - u'v$. Une inversion de signe change tous les résultats.
+}
+
+\margeAppui{Mémo de la règle du quotient : « dérivée du haut fois le bas, moins le haut fois la dérivée du bas, le tout sur le bas au carré ».}

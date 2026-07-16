@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-DERGLOBAL-ME-005","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"methode","capacites_codes":["C5"],"status":"generated"}
+\begin{fichemethode}{M5}{Résoudre un problème d'optimisation}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de maximiser ou minimiser une grandeur (aire, volume, coût, bénéfice\ldots) soumise à une contrainte.}
+\pasApas{\begin{enumerate}
+  \item Je modélise : j'exprime la grandeur à optimiser sous la forme d'une fonction $f(x)$ d'une seule variable.
+  \item Je détermine le domaine d'étude $I$ en tenant compte des contraintes du problème.
+  \item Je calcule $f'(x)$ et je résous $f'(x)=0$ sur $I$.
+  \item Je vérifie la nature du point critique (changement de signe de $f'$) et je calcule $f(x_0)$.
+  \item Je conclus en répondant à la question posée avec les unités adaptées.
+\end{enumerate}}
+\exempleRedige{On cherche à inscrire dans un triangle rectangle d'hypoténuse $10$ cm un rectangle de largeur $x$ ayant l'aire maximale. \commentaireMarge{Étape 1 : modéliser.} Par thalès, la hauteur du rectangle est $10-x$, donc $f(x)=x(10-x)=10x-x^2$. \commentaireMarge{Étape 2 : domaine.} $x \in \left]0;10\right[$. \commentaireMarge{Étape 3 : dériver.} $f'(x)=10-2x$. \commentaireMarge{$f'(x)=0$.} $f'(x)=0 \Leftrightarrow x=5$. \commentaireMarge{Étape 4 : vérifier.} $f'>0$ sur $]0;5[$ et $f'<0$ sur $]5;10[$ : maximum en $x=5$. \commentaireMarge{Étape 5 : conclure.} L'aire maximale est $f(5)=25$ cm².}
+\pieges{\begin{itemize}
+  \item Oublier de vérifier que le point critique appartient bien au domaine $I$.
+  \item Ne pas justifier la nature du point critique par le signe de $f'$.
+  \item Confondre la valeur optimale de $x$ avec la valeur optimale de la grandeur $f(x)$.
+\end{itemize}}
+\verifier{Je m'assure que la réponse est cohérente avec le contexte : une aire ou une longueur ne peut pas être négative.}
+\sEntrainer{\refExos{M5}}
+\end{fichemethode}

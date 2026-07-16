@@ -1,0 +1,27 @@
+% META: {"id":"1SPE-DERGLOBAL-ME-003","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"methode","capacites_codes":["C3"],"status":"generated"}
+\begin{fichemethode}{M3}{Dresser le tableau de variations}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande d'étudier les variations d'une fonction dérivable sur un intervalle, ou de tracer son tableau de variations.}
+\pasApas{\begin{enumerate}
+  \item Je calcule $f'(x)$.
+  \item Je résous $f'(x)=0$ et j'identifie le signe de $f'$ sur chaque sous-intervalle.
+  \item Je dresse le tableau de signes de $f'$.
+  \item Je complète le tableau de variations : $f$ est croissante là où $f'>0$, décroissante là où $f'<0$.
+\end{enumerate}}
+\exempleRedige{Étudions les variations de $f(x)=x^3-3x+1$ sur $\mathbb{R}$. \commentaireMarge{Étape 1 : dériver.} $f'(x)=3x^2-3=3(x^2-1)=3(x-1)(x+1)$. \commentaireMarge{Étape 2 : résoudre $f'(x)=0$.} $f'(x)=0 \Leftrightarrow x=-1$ ou $x=1$. \commentaireMarge{Étape 3 : signe de $f'$.} $f'(x)>0$ sur $\left]-\infty;-1\right[$ et $\left]1;+\infty\right[$, $f'(x)<0$ sur $\left]-1;1\right[$. \commentaireMarge{Étape 4 : variations.} $f(-1)=3$ et $f(1)=-1$.
+\[\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -1 & & 1 & & +\infty \\
+\hline
+f'(x) & & + & 0 & - & 0 & + & \\
+\hline
+f & \nearrow & & 3 & & -1 & & \nearrow \\
+\hline
+\end{array}\]}
+\pieges{\begin{itemize}
+  \item Oublier de calculer les valeurs $f(-1)$ et $f(1)$ aux bornes du tableau.
+  \item Inverser le sens des flèches selon le signe de $f'$.
+  \item Ne pas factoriser $f'$ correctement et se tromper dans les valeurs annulatrices.
+\end{itemize}}
+\verifier{Je contrôle que les flèches du tableau sont cohérentes avec quelques valeurs numériques de $f$.}
+\sEntrainer{\refExos{M3}}
+\end{fichemethode}

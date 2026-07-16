@@ -1,0 +1,191 @@
+% META: {"id":"1SPE-DERGLOBAL-COURS-C5","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"cours","capacites_codes":["C5"],"status":"generated"}
+
+\sectionCapacite{Optimisation par la dérivation}{Je sais modéliser et résoudre un problème d'optimisation à l'aide de la dérivation.}
+
+% ── Méthode générale ─────────────────────────────────────────────────────────
+
+\begin{nxprop}[Méthode d'optimisation en six étapes]
+Pour trouver le maximum ou le minimum d'une quantité dans un problème concret :
+
+\begin{enumerate}
+  \item \textbf{Modéliser.} Identifier la quantité à optimiser et introduire une
+        variable $x$ représentant le paramètre ajustable.
+  \item \textbf{Établir le domaine.} Déterminer l'intervalle $I$ des valeurs
+        admissibles de $x$ (contraintes géométriques, physiques, etc.).
+  \item \textbf{Exprimer la quantité.} Écrire la fonction $f(x)$ à optimiser en
+        fonction de $x$ uniquement (éliminer les autres variables).
+  \item \textbf{Dériver.} Calculer $f'(x)$.
+  \item \textbf{Trouver les points critiques.} Résoudre $f'(x)=0$ sur $I$ et
+        dresser le tableau de variations.
+  \item \textbf{Conclure dans le contexte.} Exprimer la réponse avec les unités
+        adaptées et vérifier qu'elle correspond bien à un maximum ou à un
+        minimum global sur $I$.
+\end{enumerate}
+\end{nxprop}
+
+\margeAppui{L'étape 3 est souvent la plus délicate : s'il reste deux variables,
+utiliser la contrainte (périmètre, volume, budget\ldots) pour en éliminer une.}
+
+\erreurFrequente{Oublier de vérifier que le point critique appartient au domaine
+$I$. Une valeur de $x$ négative ou supérieure à la contrainte n'a pas de sens
+dans le contexte.}
+
+% ── Exemple 1 : rectangle de périmètre fixé ──────────────────────────────────
+
+\exemple{
+\textbf{Maximiser l'aire d'un rectangle de périmètre $20$ cm.}
+
+\textbf{Étape 1 — Modéliser.} On note $x$ (en cm) la longueur du rectangle.
+La quantité à maximiser est l'aire $A$.
+
+\textbf{Étape 2 — Domaine.} Le périmètre impose $2x + 2\ell = 20$, donc
+$\ell = 10 - x$. Pour que le rectangle soit non dégénéré : $x > 0$ et
+$\ell > 0$, soit $10 - x > 0$, donc $x \in \left]0\,;\,10\right[$.
+
+\textbf{Étape 3 — Exprimer $A$.}
+\[
+  A(x) = x \cdot \ell = x(10 - x) = 10x - x^2.
+\]
+
+\textbf{Étape 4 — Dériver.}
+\[
+  A'(x) = 10 - 2x.
+\]
+
+\textbf{Étape 5 — Points critiques.}
+\[
+  A'(x) = 0 \Leftrightarrow x = 5.
+\]
+Tableau de variations sur $\left]0\,;\,10\right[$ :
+
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x    & 0 & & 5 & & 10 \\
+\hline
+A'(x) &   & + & 0 & - & \\
+\hline
+A(x)  & 0 & \nearrow & 25 & \searrow & 0 \\
+\hline
+\end{array}
+\]
+
+\textbf{Étape 6 — Conclusion.} $A'$ change de signe de $+$ à $-$ en $x=5$ :
+$A(5)=25$ est le maximum global sur $\left]0\,;\,10\right[$.
+
+La largeur est alors $\ell = 10 - 5 = 5$ cm. \textbf{Le rectangle d'aire
+maximale est le carré de côté $5$ cm, d'aire $25$ cm².}
+}
+
+\margeAppui{Résultat classique : parmi tous les rectangles de périmètre fixé,
+le carré maximise l'aire. Ce résultat se généralise (inégalité
+arithmético-géométrique), mais la dérivation permet de le retrouver facilement.}
+
+% ── Figure : parabole de l'aire ───────────────────────────────────────────────
+
+\begin{nxfigure}{Aire $A(x)=x(10-x)$ en fonction de la longueur $x$}
+\begin{tikzpicture}
+\begin{axis}[nexus,
+  xmin=0, xmax=10.5, ymin=0, ymax=28,
+  xlabel={$x$ (cm)}, ylabel={$A$ (cm²)},
+  xtick={0,2,4,6,8,10}, ytick={0,5,10,15,20,25}]
+  \addplot[courbe,domain=0:10,samples=60] {10*x - x^2};
+  \addplot[point] coordinates {(5,25)};
+  \draw[dashed,nxGris] (axis cs:5,0) -- (axis cs:5,25)
+                        (axis cs:0,25) -- (axis cs:5,25);
+  \node[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:5,25)
+        {$(5\,;\,25)$};
+  \node[anchor=north,font=\footnotesize,nxGris] at (axis cs:5,0) {$5$};
+\end{axis}
+\end{tikzpicture}
+\nxcaption{La parabole atteint son sommet en $x=5$ : l'aire maximale est $25$ cm².}
+\end{nxfigure}
+
+% ── Exemple 2 : boîte de conserve cylindrique ────────────────────────────────
+
+\exemple{
+\textbf{Situation d'accroche — Boîte cylindrique de volume $500$ mL.}
+
+Un fabricant souhaite construire une boîte cylindrique fermée de volume
+$500$ cm³ en utilisant le moins de métal possible. Quelles dimensions
+(rayon $r$ et hauteur $h$) choisir ?
+
+\textbf{Étape 1 — Modéliser.} On note $r$ (en cm) le rayon de la base.
+La surface totale de métal (deux disques $+$ enveloppe latérale) est
+\[
+  S = 2\pi r^2 + 2\pi r h.
+\]
+C'est la quantité à \textbf{minimiser}.
+
+\textbf{Étape 2 — Domaine.} $r > 0$ (le rayon est strictement positif).
+
+\textbf{Étape 3 — Exprimer $S$ en fonction de $r$ seul.}
+
+La contrainte de volume donne :
+\[
+  \pi r^2 h = 500 \implies h = \frac{500}{\pi r^2}.
+\]
+On substitue :
+\[
+  S(r) = 2\pi r^2 + 2\pi r \cdot \frac{500}{\pi r^2}
+        = 2\pi r^2 + \frac{1000}{r}.
+\]
+
+\textbf{Étape 4 — Dériver.}
+\[
+  S'(r) = 4\pi r - \frac{1000}{r^2}.
+\]
+
+\textbf{Étape 5 — Points critiques.}
+\[
+  S'(r) = 0 \Leftrightarrow 4\pi r = \frac{1000}{r^2}
+  \Leftrightarrow r^3 = \frac{1000}{4\pi} = \frac{250}{\pi}
+  \Leftrightarrow r = \sqrt[3]{\frac{250}{\pi}} \approx 4{,}30 \text{ cm}.
+\]
+
+Tableau de variations sur $\left]0\,;\,+\infty\right[$ :
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+r      & 0 & & r_0 \approx 4{,}30 & & +\infty \\
+\hline
+S'(r)  &   & - & 0 & + & \\
+\hline
+S(r)   & +\infty & \searrow & S_{\min} & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+\textbf{Étape 6 — Conclusion.} $S'$ change de signe de $-$ à $+$ en $r_0$ :
+$S(r_0)$ est le \textbf{minimum global} de $S$ sur $\left]0\,;\,+\infty\right[$.
+
+La hauteur optimale est :
+\[
+  h = \frac{500}{\pi r_0^2} = \frac{500}{\pi \left(\frac{250}{\pi}\right)^{2/3}}
+    = 2r_0 \approx 8{,}60 \text{ cm}.
+\]
+
+\textbf{La boîte optimale a $r \approx 4{,}30$ cm et $h \approx 8{,}60$ cm.
+La hauteur est égale au diamètre : la boîte est un cylindre équilatéral.}
+}
+
+\margeAppui{La relation $h = 2r$ (hauteur $=$ diamètre) est le résultat optimal
+pour un cylindre fermé à volume fixé. On peut le vérifier en substituant
+$r_0 = \sqrt[3]{250/\pi}$ dans l'expression de $h$.}
+
+\erreurFrequente{Négliger l'un des deux disques dans l'expression de $S$ et
+écrire $S = \pi r^2 + 2\pi r h$ (un seul disque). La surface totale d'un
+cylindre \emph{fermé} comporte deux disques.}
+
+\erreurFrequente{Conserver deux variables ($r$ et $h$) dans la fonction à
+dériver. La contrainte (ici le volume) doit être utilisée pour exprimer $h$ en
+fonction de $r$ avant de dériver.}
+
+\approfondissement{
+La condition $h = 2r$ peut aussi se retrouver par une inégalité classique.
+En posant $u = r^3$ et en appliquant l'inégalité arithmético-géométrique à
+$r^2 + r^2 + h$ (volume fixé), on obtient le même résultat sans dérivation.
+Les deux approches sont complémentaires : la dérivation donne la valeur exacte
+du minimum et prouve son unicité.
+}

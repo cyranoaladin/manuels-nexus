@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-DERGLOBAL-ME-004","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"methode","capacites_codes":["C4"],"status":"generated"}
+\begin{fichemethode}{M4}{Déterminer les extremums d'une fonction}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de trouver un maximum ou un minimum local (ou global sur un intervalle) d'une fonction dérivable.}
+\pasApas{\begin{enumerate}
+  \item Je calcule $f'(x)$.
+  \item Je résous $f'(x)=0$ pour trouver les candidats.
+  \item J'étudie le changement de signe de $f'$ autour de chaque candidat.
+  \item Je détermine la nature de l'extremum et je calcule la valeur de $f$ en ce point.
+\end{enumerate}}
+\exempleRedige{Déterminons les extremums de $f(x)=-x^3+3x^2-1$ sur $\mathbb{R}$. \commentaireMarge{Étape 1 : dériver.} $f'(x)=-3x^2+6x=-3x(x-2)$. \commentaireMarge{Étape 2 : annulateurs.} $f'(x)=0 \Leftrightarrow x=0$ ou $x=2$. \commentaireMarge{Étape 3 : signe de $f'$.} $f'(x)<0$ sur $\left]-\infty;0\right[$, $f'(x)>0$ sur $\left]0;2\right[$, $f'(x)<0$ sur $\left]2;+\infty\right[$. \commentaireMarge{Étape 4 : nature.} $f'$ change de $-$ à $+$ en $0$ : minimum local $f(0)=-1$. $f'$ change de $+$ à $-$ en $2$ : maximum local $f(2)=-8+12-1=3$.}
+\pieges{\begin{itemize}
+  \item Conclure qu'il y a un extremum en un point sans vérifier le changement de signe de $f'$.
+  \item Confondre maximum et minimum en lisant mal le tableau de variations.
+  \item Oublier de calculer la valeur $f(x_0)$ qui définit l'extremum.
+\end{itemize}}
+\verifier{Si $f'$ ne change pas de signe en un zéro, il n'y a pas d'extremum mais un point d'inflexion.}
+\sEntrainer{\refExos{M4}}
+\end{fichemethode}

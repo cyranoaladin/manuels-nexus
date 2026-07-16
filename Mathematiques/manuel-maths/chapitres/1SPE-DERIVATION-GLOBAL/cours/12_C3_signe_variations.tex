@@ -1,0 +1,116 @@
+% META: {"id":"1SPE-DERGLOBAL-COURS-C3","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"cours","capacites_codes":["C3"],"status":"generated"}
+
+\section{Signe de la dérivée et sens de variation}
+
+\theoreme[Lien entre signe de $f'$ et variations de $f$]{
+Soit $f$ une fonction dérivable sur un intervalle $I$.
+\begin{itemize}
+  \item Si $f'(x) > 0$ pour tout $x \in I$, alors $f$ est \textbf{strictement croissante} sur $I$.
+  \item Si $f'(x) < 0$ pour tout $x \in I$, alors $f$ est \textbf{strictement décroissante} sur $I$.
+  \item Si $f'(x) = 0$ pour tout $x \in I$, alors $f$ est \textbf{constante} sur $I$.
+\end{itemize}
+}
+
+\margeAppui{Ce théorème est le pont entre le calcul (signe de $f'$) et la géométrie (sens de la courbe). Il centralise toute l'étude de variations.}
+
+\definition[Extremum local]{
+On dit que $f$ admet un \textbf{maximum local} en $x_0$ si $f(x_0) \geqslant f(x)$ pour tout $x$ au voisinage de $x_0$. De même, $f$ admet un \textbf{minimum local} en $x_0$ si $f(x_0) \leqslant f(x)$ au voisinage de $x_0$.
+}
+
+\propriete[Condition nécessaire d'extremum]{
+Si $f$ est dérivable en $x_0$ et admet un extremum local en $x_0$, alors $f'(x_0) = 0$.
+
+\emph{Conséquence pratique :} les extremums d'une fonction dérivable sont à chercher parmi les solutions de $f'(x) = 0$.
+}
+
+\contreexemple{
+La réciproque est fausse : $f'(x_0) = 0$ n'implique pas nécessairement un extremum. Pour $f(x) = x^3$, on a $f'(0) = 3 \times 0^2 = 0$, mais $f$ est strictement croissante sur $\mathbb{R}$ : il n'y a pas d'extremum en $0$.
+}
+
+\margeAppui{Quatre étapes à suivre systématiquement pour dresser un tableau de variations. Les appliquer dans l'ordre évite les oublis.}
+
+\propriete[Méthode en quatre étapes]{
+Pour étudier les variations d'une fonction $f$ dérivable :
+\begin{enumerate}
+  \item \textbf{Calculer $f'(x)$} en utilisant les règles de dérivation.
+  \item \textbf{Résoudre $f'(x) = 0$} pour trouver les éventuels points critiques.
+  \item \textbf{Dresser le tableau de signes de $f'$} en testant le signe de $f'$ sur chaque intervalle séparé par les racines.
+  \item \textbf{Conclure sur les variations de $f$} : là où $f' > 0$, $f$ croît ; là où $f' < 0$, $f$ décroît.
+\end{enumerate}
+}
+
+\exemple{
+Étude complète de $f(x) = x^3 - 3x^2 - 9x + 2$ sur $\mathbb{R}$.
+
+\textbf{Étape 1 — Calcul de $f'$.}
+\[
+f'(x) = 3x^2 - 6x - 9.
+\]
+
+\textbf{Étape 2 — Résolution de $f'(x) = 0$.}
+\[
+3x^2 - 6x - 9 = 0 \iff x^2 - 2x - 3 = 0 \iff (x-3)(x+1) = 0.
+\]
+Les racines sont $x = -1$ et $x = 3$.
+
+\textbf{Étape 3 — Tableau de signes de $f'$.}
+
+On factorise : $f'(x) = 3(x+1)(x-3)$. On dresse le tableau de signes :
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -1 & & 3 & & +\infty \\
+\hline
+x+1 & & - & 0 & + & & + & \\
+x-3 & & - & & - & 0 & + & \\
+\hline
+f'(x) = 3(x+1)(x-3) & & + & 0 & - & 0 & + & \\
+\hline
+\end{array}
+\]
+
+\textbf{Étape 4 — Tableau de variations de $f$.}
+
+On calcule les images aux points critiques :
+\[
+f(-1) = (-1)^3 - 3(-1)^2 - 9(-1) + 2 = -1 - 3 + 9 + 2 = 7.
+\]
+\[
+f(3) = 27 - 27 - 27 + 2 = -25.
+\]
+
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -1 & & 3 & & +\infty \\
+\hline
+f'(x) & & + & 0 & - & 0 & + & \\
+\hline
+ & & \nearrow & & \searrow & & \nearrow & \\
+f(x) & & & 7 & & -25 & & \\
+\hline
+\end{array}
+\]
+
+\textbf{Conclusion :} $f$ est croissante sur $]-\infty\,;\,-1]$, décroissante sur $[-1\,;\,3]$, croissante sur $[3\,;\,+\infty[$. Elle admet un maximum local de $7$ en $x = -1$ et un minimum local de $-25$ en $x = 3$.
+}
+
+\erreurFrequente{
+Conclure les variations uniquement d'après le signe de $f'$ en un seul point, sans vérifier l'ensemble de l'intervalle. Il faut s'assurer que le signe ne change pas entre deux points critiques consécutifs.
+}
+
+\erreurFrequente{
+Oublier de calculer les images $f(x_0)$ aux points critiques et laisser le tableau de variations sans valeurs remarquables. Ces valeurs sont indispensables pour conclure sur les extremums.
+}
+
+\erreurFrequente{
+Confondre « $f'(x_0) = 0$ » et « $f(x_0) = 0$ ». La première condition porte sur la dérivée (extremum potentiel) ; la seconde sur la fonction (racine de $f$). Ce sont deux objets différents.
+}
+
+\contreexemple{
+Pour $f(x) = x^2$, l'équation $f'(x) = 2x = 0$ donne $x = 0$. Mais $f(0) = 0$ est ici aussi une racine de $f$. Ce n'est pas toujours le cas : pour $g(x) = x^2 + 1$, on a $g'(x) = 2x$ donc $x = 0$ est un point critique, mais $g(0) = 1 \neq 0$ : le point critique n'est pas une racine de $g$.
+}
+
+\approfondissement{
+\textbf{Preuve (sens direct).} Supposons $f'(x) > 0$ sur $I$ et soient $a < b$ deux réels de $I$. D'après le théorème des accroissements finis (hors programme), il existe $c \in ]a\,;\,b[$ tel que $f(b) - f(a) = f'(c)(b-a)$. Comme $f'(c) > 0$ et $b - a > 0$, on obtient $f(b) - f(a) > 0$, soit $f(b) > f(a)$ : $f$ est bien strictement croissante.
+}

@@ -1,0 +1,85 @@
+% META: {"id":"1SPE-DERGLOBAL-COURS-C1","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"cours","capacites_codes":["C1"],"status":"generated"}
+
+\section{Dérivées des fonctions de référence}
+
+\margeAppui{Ce tableau est à connaître par cœur : il constitue la « boîte à outils » de toute la dérivation.}
+
+\definition[Fonction dérivée]{Soit $f$ une fonction dérivable sur un intervalle $I$. La \textbf{fonction dérivée} de $f$, notée $f'$, est la fonction qui, à tout $x$ de $I$, associe le nombre dérivé $f'(x)$.}
+
+\propriete[Tableau des dérivées de référence]{
+Les fonctions suivantes sont dérivables sur leur domaine de définition et leur dérivée est :
+\[
+\begin{array}{|c|c|c|}
+\hline
+\textbf{Fonction } f & \textbf{Domaine} & \textbf{Dérivée } f' \\
+\hline
+f(x) = k \quad (k \in \mathbb{R}) & \mathbb{R} & f'(x) = 0 \\
+\hline
+f(x) = x & \mathbb{R} & f'(x) = 1 \\
+\hline
+f(x) = x^n \quad (n \in \mathbb{N},\, n \geqslant 2) & \mathbb{R} & f'(x) = nx^{n-1} \\
+\hline
+f(x) = \dfrac{1}{x} & \mathbb{R} \setminus \{0\} & f'(x) = -\dfrac{1}{x^2} \\[6pt]
+\hline
+f(x) = \sqrt{x} & [0\,;\,+\infty[ & f'(x) = \dfrac{1}{2\sqrt{x}} \quad (x > 0) \\[6pt]
+\hline
+\end{array}
+\]
+}
+
+\exemple{
+Pour $f(x) = x^5$, on identifie $n = 5$. La formule $f'(x) = nx^{n-1}$ donne :
+\[
+f'(x) = 5x^4.
+\]
+}
+
+\exemple{
+Pour $g(x) = x^3$, on a $n = 3$, donc :
+\[
+g'(x) = 3x^2.
+\]
+Par exemple, $g'(2) = 3 \times 4 = 12$. La tangente à la courbe de $g$ au point d'abscisse $2$ a pour pente $12$.
+}
+
+\exemple{
+Pour $h(x) = \dfrac{1}{x}$, définie sur $\mathbb{R} \setminus \{0\}$ :
+\[
+h'(x) = -\frac{1}{x^2}.
+\]
+La dérivée est toujours \emph{strictement négative}, ce qui s'interprétera comme une décroissance de $h$ sur chacun de ses intervalles de définition.
+}
+
+\exemple{
+Pour $\varphi(x) = \sqrt{x}$, définie sur $[0\,;\,+\infty[$ et dérivable sur $]0\,;\,+\infty[$ :
+\[
+\varphi'(x) = \frac{1}{2\sqrt{x}}.
+\]
+En $x = 4$ : $\varphi'(4) = \dfrac{1}{2\sqrt{4}} = \dfrac{1}{4}$.
+}
+
+\contreexemple{
+La fonction $\sqrt{x}$ n'est pas dérivable en $0$ : $\varphi'(x) = \dfrac{1}{2\sqrt{x}}$ tend vers $+\infty$ quand $x \to 0^+$. La tangente à la courbe en $(0;0)$ est verticale, ce qui correspond à une pente infinie — donc un nombre dérivé qui n'existe pas.
+}
+
+\erreurFrequente{
+Écrire $(x^n)' = nx^n$ en oubliant de diminuer l'exposant d'une unité. La bonne formule est $(x^n)' = nx^{n-1}$ : on multiplie par l'exposant et on soustrait $1$.
+}
+
+\erreurFrequente{
+Écrire $\left(\dfrac{1}{x}\right)' = \dfrac{1}{x^2}$ en oubliant le signe moins. La dérivée de $\dfrac{1}{x}$ est $-\dfrac{1}{x^2}$.
+}
+
+\erreurFrequente{
+Confondre $\sqrt{x}$ et $x^{1/2}$ dans le calcul : $(\sqrt{x})' = \dfrac{1}{2\sqrt{x}}$. On ne dérive pas $\sqrt{x}$ comme si c'était $\dfrac{1}{2}x$.
+}
+
+\margeAppui{La formule $x^n \mapsto nx^{n-1}$ fonctionne aussi pour $n=1$ : $(x)' = 1 \cdot x^0 = 1$. Et pour $n=0$ : $(1)' = 0 \cdot x^{-1} = 0$. Tout est cohérent.}
+
+\approfondissement{
+On peut retrouver la formule $(x^n)' = nx^{n-1}$ à partir de la définition du nombre dérivé. Le taux de variation de $f(x) = x^n$ entre $a$ et $a+h$ est :
+\[
+\frac{(a+h)^n - a^n}{h}.
+\]
+En développant $(a+h)^n$ par le binôme de Newton, le seul terme en $h^0$ après simplification est $na^{n-1}$. Ainsi $f'(a) = na^{n-1}$, ce qui donne bien $f'(x) = nx^{n-1}$.
+}
