@@ -40,6 +40,8 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
 
 ## Exigences métier permanentes
 
+**Règle de complétude** : un point de directive n'est réputé traité que si son livrable existe et est cité avec son chemin exact dans le rapport. Un tour ne se termine jamais sur une liste de restes : tant qu'il reste un point exécutable sans validation humaine, il est exécuté dans le même tour. Les seules fins de tour admises restent : rapport final, pause pilote non bloquante (avec bascule immédiate), ou ARRET_MISSION.md documenté.
+
 - E5/F01 : ≥ 50 exercices par chapitre, ≥ 2 exercices par case capacité × parcours, ratio 40/40/20.
 - Tout objet autonome : corrigé copie-modèle 10-20 lignes, méthode illustrée, diagnostic QCM, CDP séparés.
 - Parcours ◆ = coups de pouce, ◆◆ = format examen contextualisé, ◆◆◆ = prise d'initiative/recherche.

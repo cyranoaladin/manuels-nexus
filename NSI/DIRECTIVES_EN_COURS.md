@@ -31,6 +31,8 @@ RAPPORT_FINAL.md. Cocher ici chaque directive exécutée avec le hash du commit.
 
 ## Directives qualité permanentes (héritées du run maths — ne pas ré-apprendre ces leçons)
 
+**Règle de complétude** : un point de directive n'est réputé traité que si son livrable existe et est cité avec son chemin exact dans le rapport. Un tour ne se termine jamais sur une liste de restes : tant qu'il reste un point exécutable sans validation humaine, il est exécuté dans le même tour. Les seules fins de tour admises restent : rapport final, pause pilote non bloquante (avec bascule immédiate), ou ARRET_MISSION.md documenté.
+
 - Sections de cours : 40–70 lignes de .tex, jamais moins. Exemple + contre-exemple après
   chaque définition. Erreurs fréquentes réparties par section, format « copie fautive + correction ».
 - Coups de pouce : fichiers séparés {ID}-CDP.tex, jamais dans l'énoncé (R9).
