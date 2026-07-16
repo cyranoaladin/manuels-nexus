@@ -9,7 +9,7 @@
 % assert approx2 == Rational(812, 100)
 % exact2 = Rational(201, 100)**3
 % err2 = Abs(exact2 - approx2)
-% assert err2 > err1
+% assert err2 < err1
 % END-VERIFY
 \begin{corrige}{1SPE-DERLOCAL-EX-030}
 
@@ -37,6 +37,6 @@ En valeur absolue, l'erreur au voisinage de $1$ est ici plus grande car $h = 0{,
   \item au voisinage de $2$ : $\dfrac{0{,}0006}{8} = 0{,}0075\,\%$.
 \end{itemize}
 
-Plus fondamentalement, l'erreur de l'approximation linéaire dépend de la courbure de la fonction (liée à $f''$). On a $f''(x) = 6x$, donc $f''(2) = 12 > f''(1) = 6$ : la courbe se courbe davantage au voisinage de $2$, ce qui rend l'approximation par la tangente moins bonne, à $h$ égal, au voisinage de $2$.
+Dans cet exemple, le pas au voisinage de $2$ est deux fois plus petit. Il conduit donc ici à une erreur absolue plus petite. L'approximation linéaire est d'autant plus fiable que $h$ est proche de $0$ ; ce calcul ne permet pas, à lui seul, de comparer deux voisinages avec des pas différents.
 
 \end{corrige}

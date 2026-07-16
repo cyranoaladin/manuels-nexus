@@ -14,8 +14,8 @@
 % exact2 = Rational(201, 100)**3
 % assert exact2 == Rational(8120601, 1000000)
 % err2 = Abs(exact2 - approx2)
-% # err2 > err1
-% assert err2 > err1
+% # Avec les pas choisis, l'erreur au voisinage de 2 est plus petite.
+% assert err2 < err1
 % END-VERIFY
 \begin{exercice}{1SPE-DERLOCAL-EX-030}{3}{20}
 Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^3$. On admet que $f'(a) = 3a^2$ pour tout réel $a$.
@@ -23,6 +23,6 @@ Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^3$. On admet que $f
 \begin{enumerate}
   \item En utilisant l'approximation linéaire au voisinage de $a = 1$, donner une valeur approchée de $1{,}02^3$. Calculer la valeur exacte et l'erreur commise.
   \item En utilisant l'approximation linéaire au voisinage de $a = 2$, donner une valeur approchée de $2{,}01^3$. Calculer la valeur exacte et l'erreur commise.
-  \item Comparer les erreurs des deux questions précédentes. Expliquer pourquoi l'approximation est moins bonne au voisinage de $2$ qu'au voisinage de $1$, alors que $h$ est même plus petit.
+  \item Comparer les erreurs des deux questions précédentes. Expliquer le rôle de la taille de $h$ dans cette comparaison.
 \end{enumerate}
 \end{exercice}

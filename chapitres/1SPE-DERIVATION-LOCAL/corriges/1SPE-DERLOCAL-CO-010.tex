@@ -3,7 +3,7 @@
 % from sympy import symbols, simplify, expand
 % h = symbols('h', nonzero=True)
 % taux = simplify(((1+h)**3 - 1)/h)
-% assert taux == h**2 + 3*h + 3
+% assert simplify(taux - (h**2 + 3*h + 3)) == 0
 % END-VERIFY
 \begin{corrige}{1SPE-DERLOCAL-EX-010}
 \textbf{1.} $(1+h)^3=1+3h+3h^2+h^3$.

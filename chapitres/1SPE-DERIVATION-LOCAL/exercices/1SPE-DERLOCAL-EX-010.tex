@@ -4,7 +4,7 @@
 % h = symbols('h', nonzero=True)
 % # f(x) = x^3, f(1+h) = (1+h)^3 = 1+3h+3h^2+h^3
 % taux = simplify(((1+h)**3 - 1)/h)
-% assert taux == h**2 + 3*h + 3
+% assert simplify(taux - (h**2 + 3*h + 3)) == 0
 % END-VERIFY
 \begin{exercice}{1SPE-DERLOCAL-EX-010}{2}{12}
 Soit $f(x)=x^3$.
