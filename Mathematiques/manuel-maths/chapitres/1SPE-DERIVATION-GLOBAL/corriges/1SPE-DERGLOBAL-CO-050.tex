@@ -1,0 +1,62 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-050","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-050","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, factor
+% t = symbols('t')
+% s = t**3/3 - 4*t**2 + 12*t
+% v = diff(s, t)
+% assert v == t**2 - 8*t + 12
+% assert factor(v) == (t - 2)*(t - 6)
+% roots = solve(v, t)
+% assert set(roots) == {2, 6}
+% assert s.subs(t, 0) == 0
+% assert s.subs(t, 2) == Rational(32,3)
+% assert s.subs(t, 6) == 72 - 144 + 72
+% assert s.subs(t, 6) == 0
+% assert v.subs(t, 1) > 0
+% assert v.subs(t, 4) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-050}
+\textbf{1.} On dérive terme à terme :
+\[
+v(t) = s'(t) = \frac{3t^2}{3} - 4 \times 2t + 12 = t^2 - 8t + 12.
+\]
+
+\textbf{2.} On factorise $v(t) = t^2 - 8t + 12$.
+Le discriminant est $\Delta = 64 - 48 = 16$, d'où :
+\[
+t = \frac{8 \pm 4}{2}, \quad \text{soit } t_1 = 2 \text{ et } t_2 = 6.
+\]
+Donc $v(t) = (t-2)(t-6)$.
+
+Les solutions de $v(t) = 0$ sur $\left[0\,;\,6\right]$ sont $t = 2$ et $t = 6$.
+
+\textbf{3.} Signe de $v(t) = (t-2)(t-6)$ :
+\begin{itemize}
+  \item $v(t) > 0$ pour $0 \leq t < 2$ (le mobile avance).
+  \item $v(t) < 0$ pour $2 < t < 6$ (le mobile recule).
+  \item $v(6) = 0$ (le mobile est instantanément arrêté).
+\end{itemize}
+
+Tableau de variations de $s$ sur $\left[0\,;\,6\right]$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+t     & 0 & & 2 & & 6 \\
+\hline
+v(t)  &   & + & 0 & - & \\
+\hline
+s(t)  & 0 & \nearrow & \dfrac{32}{3} & \searrow & 0 \\
+\hline
+\end{array}
+\]
+
+\textbf{4.} $s(0) = 0$, $\displaystyle s(2) = \frac{8}{3} - 16 + 24 = \frac{8}{3} + 8 = \frac{32}{3} \approx 10{,}67$ m,
+$s(6) = \dfrac{216}{3} - 144 + 72 = 72 - 144 + 72 = 0$ m.
+
+La position maximale est $\boxed{\dfrac{32}{3} \approx 10{,}7 \text{ m}}$, atteinte à $t = \boxed{2}$ s.
+
+\textbf{5.} Oui, le mobile revient à son point de départ.
+En $t = 6$ s, on a $s(6) = 0 = s(0)$ : le mobile est revenu exactement à sa position initiale.
+Le tableau de variations confirme que $s$ est décroissante sur $\left[2\,;\,6\right]$,
+passant de $\frac{32}{3}$ à $0$ : le mobile revient bien à l'origine avant $t = 6$ s (et exactement en $t = 6$ s).
+\end{corrige}

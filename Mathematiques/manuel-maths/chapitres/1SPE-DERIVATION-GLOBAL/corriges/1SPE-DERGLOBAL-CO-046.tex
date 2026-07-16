@@ -1,0 +1,58 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-046","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-046","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, pi, Rational, simplify
+% x = symbols('x', positive=True)
+% V = pi * x**2 * (9 - Rational(3,2)*x)
+% Vp = diff(V, x)
+% assert simplify(Vp - pi*(18*x - Rational(9,2)*x**2)) == 0
+% xopt = solve(Vp, x)
+% valid = [s for s in xopt if s.is_real and 0 < s < 6]
+% assert valid == [4]
+% assert simplify(V.subs(x, 4) - 48*pi) == 0
+% Vpp = diff(Vp, x)
+% assert Vpp.subs(x, 4) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-046}
+\textbf{1.} Par similitude, le triangle axial du cône (hauteur $9$, rayon $6$)
+et celui du cylindre (hauteur $h$, rayon $6 - x$... non, rayon $x$) donnent par Thalès :
+la section du cône à la hauteur $h$ a un rayon $r_h = 6\!\left(1 - \dfrac{h}{9}\right)$.
+Comme le bord du cylindre touche le cône : $x = 6\!\left(1 - \dfrac{h}{9}\right)$, d'où
+\[
+1 - \frac{h}{9} = \frac{x}{6} \implies h = 9\!\left(1 - \frac{x}{6}\right) = 9 - \frac{3x}{2}.
+\]
+
+\textbf{2.} Le volume du cylindre est $V = \pi x^2 h$ :
+\[
+V(x) = \pi x^2\!\left(9 - \frac{3x}{2}\right) = \pi\!\left(9x^2 - \frac{3x^3}{2}\right).
+\]
+
+\textbf{3.} On dérive :
+\[
+V'(x) = \pi\!\left(18x - \frac{9x^2}{2}\right) = \frac{9\pi x}{2}(4 - x).
+\]
+On résout $V'(x) = 0$ sur $\left]0\,;\,6\right[$ : $\dfrac{9\pi x}{2}(4 - x) = 0$.
+$x = 0$ est hors du domaine ouvert, donc la seule solution est $x = 4$.
+
+\textbf{4.} $V'(x) > 0$ pour $0 < x < 4$ et $V'(x) < 0$ pour $4 < x < 6$.
+
+Tableau de variations de $V$ sur $\left]0\,;\,6\right[$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x     & 0 & & 4 & & 6 \\
+\hline
+V'(x) &   & + & 0 & - & \\
+\hline
+V(x)  & 0 & \nearrow & 48\pi & \searrow & 0 \\
+\hline
+\end{array}
+\]
+
+\textbf{5.} $V'$ change de signe de $+$ à $-$ en $x = 4$ : c'est un maximum global sur $\left]0\,;\,6\right[$.
+
+La hauteur optimale est $h = 9 - \dfrac{3 \times 4}{2} = 9 - 6 = 3$ cm.
+
+Le volume maximal est $V(4) = \pi \times 16 \times 3 = \boxed{48\pi \approx 150{,}8 \text{ cm}^3}$.
+
+On confirme avec $V''(4) = \pi(18 - 9 \times 4) = \pi(18 - 36) = -18\pi < 0$ : c'est bien un maximum.
+\end{corrige}

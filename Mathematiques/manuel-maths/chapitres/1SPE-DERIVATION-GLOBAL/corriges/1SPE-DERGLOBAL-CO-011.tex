@@ -1,0 +1,30 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-011","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-011","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand
+% x = symbols('x')
+% f = (2*x + 1)*(x**2 - 3)
+% g = (x**3 - x)*(x + 2)
+% assert expand(diff(f, x)) == 6*x**2 + 2*x - 6
+% assert expand(diff(g, x)) == 4*x**3 + 6*x**2 - 2*x - 2
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-011}
+On applique la règle du produit $(uv)' = u'v + uv'$.
+
+\textbf{1.} On pose $u = 2x+1$ et $v = x^2-3$, donc $u' = 2$ et $v' = 2x$.
+\[
+f'(x) = 2(x^2-3) + (2x+1)(2x) = 2x^2 - 6 + 4x^2 + 2x = \boxed{6x^2 + 2x - 6}.
+\]
+
+\textbf{2.} On pose $u = x^3-x$ et $v = x+2$, donc $u' = 3x^2-1$ et $v' = 1$.
+\[
+g'(x) = (3x^2-1)(x+2) + (x^3-x)(1).
+\]
+On développe :
+\[
+(3x^2-1)(x+2) = 3x^3 + 6x^2 - x - 2.
+\]
+Donc :
+\[
+g'(x) = 3x^3 + 6x^2 - x - 2 + x^3 - x = \boxed{4x^3 + 6x^2 - 2x - 2}.
+\]
+\end{corrige}

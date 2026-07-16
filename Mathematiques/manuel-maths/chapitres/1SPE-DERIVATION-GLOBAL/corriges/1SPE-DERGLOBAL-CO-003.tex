@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-003","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-003","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, sqrt
+% x = symbols('x', positive=True)
+% assert diff(3*x**2, x) == 6*x
+% assert diff(5*sqrt(x), x) == 5/(2*sqrt(x))
+% assert diff(-2/x, x) == 2/x**2
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-003}
+On applique la règle $(af)' = af'$ pour une constante $a$.
+
+\textbf{1.} $f'(x) = 3 \times 2x = 6x$.
+
+\textbf{2.} $g'(x) = 5 \times \dfrac{1}{2\sqrt{x}} = \dfrac{5}{2\sqrt{x}}$.
+
+\textbf{3.} $h'(x) = -2 \times \left(-\dfrac{1}{x^2}\right) = \dfrac{2}{x^2}$.
+\end{corrige}

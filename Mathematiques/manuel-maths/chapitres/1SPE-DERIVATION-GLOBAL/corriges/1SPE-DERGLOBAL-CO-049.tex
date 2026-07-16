@@ -1,0 +1,58 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-049","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-049","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% x = symbols('x')
+% P = -Rational(5,4)*x**2 + 45*x - 20
+% Pp = diff(P, x)
+% assert Pp == -Rational(5,2)*x + 45
+% xopt = solve(Pp, x)
+% assert xopt == [18]
+% assert P.subs(x, 18) == 385
+% Ppp = diff(Pp, x)
+% assert Ppp == -Rational(5,2)
+% assert Ppp < 0
+% # Check sign of Pp
+% assert Pp.subs(x, 10) > 0
+% assert Pp.subs(x, 20) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-049}
+\textbf{1.} La recette est $R(x) = x \cdot p(x) = x(50 - x) = 50x - x^2$.
+
+\textbf{2.} Le profit vaut :
+\begin{align*}
+P(x) &= R(x) - C(x) = 50x - x^2 - \frac{x^2}{4} - 5x - 20 \\
+     &= -x^2 - \frac{x^2}{4} + 45x - 20 = -\frac{5x^2}{4} + 45x - 20.
+\end{align*}
+
+\textbf{3.} On dérive :
+\[
+P'(x) = -\frac{5}{2}x + 45.
+\]
+$P'(x) = 0 \iff x = \dfrac{45 \times 2}{5} = 18$.
+
+$P'(x) > 0$ pour $x < 18$ et $P'(x) < 0$ pour $x > 18$.
+
+\textbf{4.} Tableau de variations de $P$ sur $\left[0\,;\,40\right]$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x     & 0  &  & 18  &  & 40 \\
+\hline
+P'(x) &    & + & 0  & - & \\
+\hline
+P(x)  & -20 & \nearrow & 385 & \searrow & -300 \\
+\hline
+\end{array}
+\]
+($P(0) = -20$, $P(40) = -\frac{5 \times 1600}{4} + 45 \times 40 - 20 = -2000 + 1800 - 20 = -220$.)
+
+\textbf{5.} Le profit est maximal pour $x^* = \boxed{18}$ unités.
+
+Le profit maximal est :
+\[
+P(18) = -\frac{5 \times 324}{4} + 45 \times 18 - 20 = -405 + 810 - 20 = \boxed{385 \text{ euros}}.
+\]
+
+On vérifie : $P''(x) = -\dfrac{5}{2} < 0$ pour tout $x$, donc en particulier en $x^* = 18$,
+ce qui confirme que c'est bien un maximum (la parabole est tournée vers le bas).
+\end{corrige}

@@ -1,0 +1,31 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-005","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-005","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, sqrt, Rational
+% x = symbols('x')
+% f = 2*x**3 - 3*x + 1
+% fp = diff(f, x)
+% assert fp == 6*x**2 - 3
+% assert fp.subs(x, 1) == 3
+% assert fp.subs(x, -1) == 3
+% sols = solve(fp, x)
+% assert set(sols) == {-sqrt(2)/2, sqrt(2)/2}
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-005}
+
+\textbf{Question 1.} Par linéarité et en appliquant $(x^n)' = nx^{n-1}$ :
+\[
+f'(x) = 2 \times 3x^2 - 3 \times 1 + 0 = \boxed{6x^2 - 3}.
+\]
+
+\textbf{Question 2.} On calcule :
+\[
+f'(1) = 6 \times 1 - 3 = 3 \qquad \text{et} \qquad f'(-1) = 6 \times 1 - 3 = 3.
+\]
+On remarque que $f'(1) = f'(-1) = 3$. Cela s'explique par le fait que $f'(x) = 6x^2 - 3$ est une fonction paire (ne dépend que de $x^2$), donc $f'(-x) = f'(x)$.
+
+\textbf{Question 3.} On résout $6x^2 - 3 = 0$ :
+\[
+6x^2 = 3 \implies x^2 = \frac{1}{2} \implies x = \pm\frac{\sqrt{2}}{2} = \pm\frac{1}{\sqrt{2}}.
+\]
+Les solutions sont $\boxed{x = -\dfrac{\sqrt{2}}{2}}$ et $\boxed{x = \dfrac{\sqrt{2}}{2}}$.
+\end{corrige}

@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-042","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-042","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = 2*x**2 - 8*x + 3
+% fp = diff(f, x)
+% assert fp == 4*x - 8
+% xopt = solve(fp, x)
+% assert xopt == [2]
+% assert f.subs(x, 2) == -5
+% assert fp.subs(x, 1) < 0
+% assert fp.subs(x, 3) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-042}
+\textbf{1.} On dérive terme à terme :
+\[
+f'(x) = 4x - 8.
+\]
+
+\textbf{2.} On résout $f'(x) = 0$ :
+\[
+4x - 8 = 0 \iff x = 2.
+\]
+$f'(x) < 0$ pour $x < 2$ et $f'(x) > 0$ pour $x > 2$.
+
+Tableau de variations de $f$ sur $\mathbb{R}$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x     & -\infty & & 2 & & +\infty \\
+\hline
+f'(x) &         & - & 0 & + & \\
+\hline
+f(x)  & +\infty & \searrow & -5 & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+\textbf{3.} $f'$ change de signe de $-$ à $+$ en $x = 2$, donc $f$ admet un \textbf{minimum} en $x = 2$.
+Ce minimum vaut $f(2) = 2 \times 4 - 8 \times 2 + 3 = 8 - 16 + 3 = \boxed{-5}$.
+\end{corrige}

@@ -1,0 +1,25 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-029","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":3,"competences":["calculer","raisonner","communiquer"],"duree_min":18,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-029.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, simplify, factor
+% x, a = symbols('x a', real=True)
+% f = x**3 - 3*a*x
+% fp = diff(f, x)
+% assert fp == 3*x**2 - 3*a
+% racines_pos = solve(fp, x)
+% from sympy import sqrt
+% assert set(racines_pos) == {-sqrt(a), sqrt(a)}
+% f_mono = x**3
+% fp_mono = diff(f_mono, x)
+% assert fp_mono == 3*x**2
+% assert fp_mono.subs(x, 0) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-029}{3}{18}
+Soit $f_a(x) = x^3 - 3ax$ où $a$ est un réel paramètre.
+
+\begin{enumerate}
+\item Calculer $f_a'(x)$.
+\item \textbf{Cas $a \leqslant 0$.} Montrer que $f_a'(x) \geqslant 0$ pour tout $x \in \mathbb{R}$. En déduire que $f_a$ est croissante sur $\mathbb{R}$.
+\item \textbf{Cas $a > 0$.} Résoudre $f_a'(x) = 0$ en fonction de $a$. Dresser le tableau de variations de $f_a$ sur $\mathbb{R}$ (les bornes du tableau feront intervenir $\sqrt{a}$).
+\item \textbf{Cas particulier $a = 3$.} Calculer les valeurs aux points stationnaires et dresser le tableau de variations de $f_3$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-050","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C1","1SPE-DERIVATION-GLOBAL-C2","1SPE-DERIVATION-GLOBAL-C5"],"capacites_codes":["C1","C2","C5"],"methodes":["M1","M2","M5"],"parcours":3,"competences":["calculer","modeliser","raisonner"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-050.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-050.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, sqrt, Rational, simplify
+% t = symbols('t', positive=True)
+% # Position : s(t) = t^3/3 - 4t^2 + 12t, t in [0, 6]
+% s = t**3/3 - 4*t**2 + 12*t
+% v = diff(s, t)
+% assert v == t**2 - 8*t + 12
+% # Roots of v
+% roots = solve(v, t)
+% assert set(roots) == {2, 6}
+% # v(t) = (t-2)(t-6)
+% from sympy import factor
+% assert factor(v) == (t - 6)*(t - 2)
+% # s(0)=0, s(2)=8/3-16+24=8/3+8=32/3, s(6)=72-144+72=0
+% assert s.subs(t, 0) == 0
+% assert s.subs(t, 2) == Rational(32,3)
+% assert s.subs(t, 6) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-050}{3}{20}
+\textbf{Synthèse C1 + C2 + C5} — Modélisation du mouvement d'un mobile
+
+La position (en mètres) d'un mobile sur un axe, à l'instant $t$ (en secondes,
+$t \in \left[0\,;\,6\right]$), est donnée par :
+\[
+  s(t) = \frac{t^3}{3} - 4t^2 + 12t.
+\]
+
+\begin{enumerate}
+  \item Calculer la vitesse $v(t) = s'(t)$ en utilisant les règles de dérivation
+        des fonctions de référence.
+  \item Factoriser $v(t)$ sous la forme $(t - a)(t - b)$ et résoudre $v(t) = 0$
+        sur $\left[0\,;\,6\right]$.
+  \item Étudier le signe de $v(t)$ sur $\left[0\,;\,6\right]$ et dresser le tableau
+        de variations de $s$.
+  \item Calculer $s(0)$, $s(2)$ et $s(6)$. En déduire la position maximale du mobile
+        et l'instant auquel elle est atteinte.
+  \item Le mobile revient-il à son point de départ avant $t = 6$ s ?
+        Justifier en utilisant le tableau de variations.
+\end{enumerate}
+\end{exercice}

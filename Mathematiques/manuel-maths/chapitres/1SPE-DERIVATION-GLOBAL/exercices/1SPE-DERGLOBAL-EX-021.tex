@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-021","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-021.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-021.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = x**2 - 4*x + 3
+% fp = diff(f, x)
+% assert fp == 2*x - 4
+% racine = solve(fp, x)
+% assert racine == [2]
+% assert fp.subs(x, 1) < 0
+% assert fp.subs(x, 3) > 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-021}{1}{5}
+Soit $f(x) = x^2 - 4x + 3$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+\item Calculer $f'(x)$.
+\item Résoudre $f'(x) = 0$.
+\item En déduire le signe de $f'(x)$ sur $\mathbb{R}$ et dresser le tableau de variations de $f$.
+\end{enumerate}
+\end{exercice}

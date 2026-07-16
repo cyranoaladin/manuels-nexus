@@ -1,0 +1,32 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-046","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":3,"competences":["calculer","modeliser","raisonner"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-046.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-046.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, pi
+% x = symbols('x', positive=True)
+% # Cylindre inscrit dans cone de rayon R=6, hauteur H=9
+% R, H = 6, 9
+% # Rayon cylindre = x, hauteur cylindre = H*(1 - x/R) = 9*(1 - x/6)
+% h_cyl = H * (1 - x / R)
+% V = pi * x**2 * h_cyl
+% Vp = diff(V, x)
+% xopt = solve(Vp, x)
+% valid = [s for s in xopt if s.is_real and 0 < s < R]
+% assert len(valid) == 1
+% assert valid[0] == 4
+% Vmax = V.subs(x, 4)
+% assert Vmax == 48*pi
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-046}{3}{20}
+Un cône de révolution a un rayon de base $R = 6$ cm et une hauteur $H = 9$ cm.
+On inscrit dans ce cône un cylindre de révolution de rayon $x$ cm ($0 < x < 6$)
+dont la base est dans le plan de la base du cône.
+
+\begin{enumerate}
+  \item Par un argument de similitude de triangles, exprimer la hauteur $h$ du cylindre
+        en fonction de $x$.
+  \item En déduire que le volume du cylindre vaut $V(x) = \pi x^2\!\left(9 - \dfrac{3x}{2}\right)$.
+  \item Calculer $V'(x)$ et résoudre $V'(x) = 0$ sur $\left]0\,;\,6\right[$.
+  \item Dresser le tableau de variations de $V$ sur $\left]0\,;\,6\right[$.
+  \item Déterminer le rayon et la hauteur du cylindre de volume maximal inscrit dans ce cône,
+        puis calculer ce volume maximal. Prouver que c'est bien un maximum global.
+\end{enumerate}
+\end{exercice}

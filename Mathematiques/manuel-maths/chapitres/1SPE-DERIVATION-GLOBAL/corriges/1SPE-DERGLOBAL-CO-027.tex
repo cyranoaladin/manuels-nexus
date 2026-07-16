@@ -1,0 +1,51 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-027","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-027","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% t = symbols('t')
+% h = -5*t**2 + 20*t + 1
+% hp = diff(h, t)
+% assert hp == -10*t + 20
+% racine = solve(hp, t)
+% assert racine == [2]
+% assert hp.subs(t, 1) > 0
+% assert hp.subs(t, 3) < 0
+% assert h.subs(t, 2) == 21
+% assert h.subs(t, 0) == 1
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-027}
+\textbf{1.} La hauteur initiale est $h(0) = -5 \times 0 + 20 \times 0 + 1 = \boxed{1\,\text{m}}$.
+
+\textbf{2.} On dérive $h(t) = -5t^2 + 20t + 1$ :
+\[
+h'(t) = -10t + 20
+\]
+On résout $h'(t) = 0$ sur $[0\,;\,4]$ :
+\[
+-10t + 20 = 0 \iff t = 2
+\]
+Ainsi $t_0 = 2 \in [0\,;\,4]$.
+
+\textbf{3.} Signe de $h'(t) = -10(t - 2)$ :
+\begin{itemize}
+\item Pour $0 \leqslant t < 2$ : $h'(t) > 0$, l'objet monte.
+\item Pour $2 < t \leqslant 4$ : $h'(t) < 0$, l'objet redescend.
+\end{itemize}
+
+Tableau de variations de $h$ sur $[0\,;\,4]$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+t & 0 & & 2 & & 4 \\
+\hline
+h'(t) & & + & 0 & - & \\
+\hline
+h & 1 & \nearrow & 21 & \searrow & 1 \\
+\hline
+\end{array}
+\]
+
+\textbf{4.} L'objet atteint sa hauteur maximale à $t = 2$ secondes. Cette hauteur vaut :
+\[
+h(2) = -5 \times 4 + 20 \times 2 + 1 = -20 + 40 + 1 = \boxed{21\,\text{m}}
+\]
+\end{corrige}

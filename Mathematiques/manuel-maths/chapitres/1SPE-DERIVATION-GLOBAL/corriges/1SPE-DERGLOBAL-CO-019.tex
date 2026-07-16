@@ -1,0 +1,43 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-019","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-019","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand, factor, solve
+% x = symbols('x')
+% f = (x**2 - 1)**2
+% fp = diff(f, x)
+% assert expand(fp) == 4*x**3 - 4*x
+% assert factor(fp) == 4*x*(x - 1)*(x + 1)
+% sols = solve(fp, x)
+% assert set(sols) == {-1, 0, 1}
+% assert f.subs(x, -1) == 0
+% assert f.subs(x, 0) == 1
+% assert f.subs(x, 1) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-019}
+
+\textbf{Question 1.} On écrit $f = u \cdot u$ avec $u = x^2-1$ et $u' = 2x$. Par la règle du produit :
+\[
+f'(x) = u'u + uu' = 2u \cdot u' = 2(x^2-1)(2x) = 4x(x^2-1).
+\]
+On développe : $f'(x) = 4x^3-4x$.
+
+\textbf{Question 2.} On factorise :
+\[
+f'(x) = 4x(x^2-1) = 4x(x-1)(x+1).
+\]
+
+\textbf{Question 3.} Tableau de variations de $f$ :
+
+\begin{center}
+\begin{tabular}{|c|ccccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $0$ & & $1$ & & $+\infty$ \\
+\hline
+$f'(x)$ & & $-$ & $0$ & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+$f(x)$ & $+\infty$ & $\searrow$ & $0$ & $\nearrow$ & $1$ & $\searrow$ & $0$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 4.} L'élève confond le signe de $x^2-1$ avec le sens de variation de $f$. Or, d'après le tableau, $f$ est \emph{décroissante} sur $[0\,;\,1]$ (et croissante sur $[-1\,;\,0]$). Le signe d'une fonction et son sens de variation sont deux notions distinctes : c'est le \emph{signe de la dérivée} $f'$, et non celui de $f$, qui détermine les variations de $f$.
+\end{corrige}

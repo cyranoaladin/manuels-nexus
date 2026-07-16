@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-044","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-044.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-044.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% x = symbols('x', positive=True)
+% # Base carree de cote x, hauteur h. Volume = x^2 * h = 32, h = 32/x^2
+% # Surface = x^2 + 4*x*h = x^2 + 4*x*32/x^2 = x^2 + 128/x
+% S = x**2 + 128/x
+% Sp = diff(S, x)
+% assert Sp == 2*x - 128/x**2
+% xopt = solve(Sp, x)
+% assert len(xopt) == 1
+% xval = xopt[0]
+% assert xval == 4
+% assert S.subs(x, 4) == 48
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-044}{2}{15}
+On fabrique une boîte sans couvercle à base carrée de côté $x$ cm et de hauteur $h$ cm,
+avec un volume de $32$ cm³.
+
+\begin{enumerate}
+  \item Exprimer $h$ en fonction de $x$, pour $x > 0$.
+  \item Montrer que la surface totale de la boîte (base + 4 faces latérales) vaut
+        $S(x) = x^2 + \dfrac{128}{x}$.
+  \item Calculer $S'(x)$ et résoudre $S'(x) = 0$ sur $\left]0\,;\,+\infty\right[$.
+  \item Dresser le tableau de variations de $S$ et déterminer les dimensions de la boîte
+        minimisant la surface.
+\end{enumerate}
+\end{exercice}

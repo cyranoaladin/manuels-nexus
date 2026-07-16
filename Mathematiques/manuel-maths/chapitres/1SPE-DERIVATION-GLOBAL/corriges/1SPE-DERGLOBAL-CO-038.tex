@@ -1,0 +1,54 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-038","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-038","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% P = -x**3 + 9*x**2 - 15*x - 1
+% Pp = diff(P, x)
+% assert Pp == -3*x**2 + 18*x - 15
+% x0s = solve(Pp, x)
+% assert set(x0s) == {1, 5}
+% assert Pp.subs(x, 0) < 0
+% assert Pp.subs(x, 3) > 0
+% assert Pp.subs(x, 6) < 0
+% assert P.subs(x, 1) == -8
+% assert P.subs(x, 5) == 24
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-038}
+\textbf{1.} On dérive $B(x) = -x^3 + 9x^2 - 15x - 1$ :
+\[
+B'(x) = -3x^2 + 18x - 15 = -3(x^2 - 6x + 5) = -3(x-1)(x-5)
+\]
+Vérification : $(x-1)(x-5) = x^2 - 6x + 5$, donc $-3(x-1)(x-5) = -3x^2 + 18x - 15$ ✓.
+
+\textbf{2.} Signe de $B'(x) = -3(x-1)(x-5)$ sur $[0\,;\,7]$ :
+\begin{itemize}
+\item $0 \leqslant x < 1$ : $(x-1) < 0$, $(x-5) < 0$, donc $B'(x) < 0$ (décroissant).
+\item $1 < x < 5$ : $(x-1) > 0$, $(x-5) < 0$, donc $B'(x) > 0$ (croissant).
+\item $5 < x \leqslant 7$ : $(x-1) > 0$, $(x-5) > 0$, donc $B'(x) < 0$ (décroissant).
+\end{itemize}
+
+Tableau de variations de $B$ sur $[0\,;\,7]$ :
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & 0 & & 1 & & 5 & & 7 \\
+\hline
+B'(x) & & - & 0 & + & 0 & - & \\
+\hline
+B & -1 & \searrow & -8 & \nearrow & 24 & \searrow & 10 \\
+\hline
+\end{array}
+\]
+
+avec $B(0) = -1$, $B(1) = -1 + 9 - 15 - 1 = -8$, $B(5) = -125 + 225 - 75 - 1 = 24$, $B(7) = -343 + 441 - 105 - 1 = -8$.
+
+Correction : $B(7) = -343 + 441 - 105 - 1 = -8$.
+
+\textbf{3.} Les extremums locaux sont :
+\begin{itemize}
+\item \textbf{Minimum local} en $x = 1$ : $B(1) = \boxed{-8}$ (milliers d'euros).
+\item \textbf{Maximum local} en $x = 5$ : $B(5) = \boxed{24}$ (milliers d'euros).
+\end{itemize}
+
+\textbf{4.} Le bénéfice est maximal pour une surface de $5$ hectares cultivés. Le bénéfice maximal est de $24\,000\,\text{€}$.
+\end{corrige}

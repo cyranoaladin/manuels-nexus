@@ -1,0 +1,37 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-031","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-031","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = x**2 - 6*x + 8
+% fp = diff(f, x)
+% assert fp == 2*x - 6
+% x0 = solve(fp, x)
+% assert x0 == [3]
+% assert fp.subs(x, 2) < 0
+% assert fp.subs(x, 4) > 0
+% assert f.subs(x, 3) == -1
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-031}
+\textbf{1.} On calcule la dérivée de $f(x) = x^2 - 6x + 8$ :
+\[
+f'(x) = 2x - 6
+\]
+On résout $f'(x) = 0$ :
+\[
+2x - 6 = 0 \iff x = 3
+\]
+
+\textbf{2.} On vérifie le changement de signe de $f'(x) = 2(x - 3)$ :
+\begin{itemize}
+\item Pour $x < 3$ : $x - 3 < 0$, donc $f'(x) < 0$.
+\item Pour $x > 3$ : $x - 3 > 0$, donc $f'(x) > 0$.
+\end{itemize}
+La dérivée change de signe de $-$ à $+$ en $x = 3$.
+
+\textbf{3.} Puisque $f'$ passe de négative à positive en $x = 3$, $f$ admet un \textbf{minimum} en $x = 3$.
+
+La valeur minimale est :
+\[
+f(3) = 9 - 18 + 8 = \boxed{-1}
+\]
+\end{corrige}

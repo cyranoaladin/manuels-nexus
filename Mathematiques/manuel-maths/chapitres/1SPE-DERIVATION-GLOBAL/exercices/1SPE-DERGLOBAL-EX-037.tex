@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-037","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-037.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-037.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% x = symbols('x')
+% V = x * (8 - 2*x)**2
+% Vp = diff(V, x)
+% x0s = solve(Vp, x)
+% x0_val = Rational(4, 3)
+% assert x0_val in x0s
+% assert Vp.subs(x, 1) > 0
+% assert Vp.subs(x, 2) < 0
+% V_max = V.subs(x, x0_val)
+% assert V_max == Rational(1024, 27)
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-037}{2}{15}
+On découpe dans un carton carré de côté $8\,\text{cm}$ quatre petits carrés de côté $x$ (avec $x \in ]0\,;\,4[$) aux quatre coins, puis on rabat les bords pour former une boîte ouverte.
+
+Le volume de cette boîte est :
+\[
+V(x) = x(8 - 2x)^2
+\]
+
+\begin{enumerate}
+\item Développer $V(x)$.
+\item Calculer $V'(x)$ et résoudre $V'(x) = 0$ sur $]0\,;\,4[$.
+\item Dresser le tableau de variations de $V$ et déterminer la valeur de $x$ qui maximise le volume.
+\item Calculer le volume maximal (on donnera une valeur exacte).
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-036","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-036.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-036.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% A = x * (10 - x)
+% A_expand = A.expand()
+% assert A_expand == -x**2 + 10*x
+% Ap = diff(A_expand, x)
+% assert Ap == -2*x + 10
+% x0 = solve(Ap, x)
+% assert x0 == [5]
+% assert A_expand.subs(x, 5) == 25
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-036}{2}{12}
+On dispose d'une corde de $20\,\text{m}$ que l'on veut couper en deux morceaux. Le premier morceau, de longueur $x$ (avec $x \in [0\,;\,10]$), sert à délimiter un carré ; le second ($10 - x$) forme un rectangle de largeur $1\,\text{m}$.
+
+L'aire totale des deux figures est :
+\[
+A(x) = x(10 - x)
+\]
+
+\begin{enumerate}
+\item Développer $A(x)$ et calculer $A'(x)$.
+\item Résoudre $A'(x) = 0$ et vérifier que $A'$ change de signe (de $+$ à $-$).
+\item En déduire la longueur $x$ qui maximise l'aire totale.
+\item Calculer l'aire maximale obtenue.
+\end{enumerate}
+\end{exercice}

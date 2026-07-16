@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-022","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-022.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-022.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = -x**2 + 6*x - 5
+% fp = diff(f, x)
+% assert fp == -2*x + 6
+% racine = solve(fp, x)
+% assert racine == [3]
+% assert fp.subs(x, 0) > 0
+% assert fp.subs(x, 5) < 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-022}{1}{5}
+Soit $g(x) = -x^2 + 6x - 5$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+\item Calculer $g'(x)$.
+\item Résoudre $g'(x) = 0$.
+\item Dresser le tableau de variations de $g$ sur $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}

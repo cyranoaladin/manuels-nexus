@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-002","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-002.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, sqrt
+% x = symbols('x', positive=True)
+% f = 1/x
+% g = sqrt(x)
+% assert diff(f, x) == -1/x**2
+% assert diff(g, x) == 1/(2*sqrt(x))
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-002}{1}{5}
+Dériver chacune des fonctions suivantes sur leur domaine de définition :
+\begin{enumerate}
+  \item $f(x) = \dfrac{1}{x}$
+  \item $g(x) = \sqrt{x}$
+  \item $h(x) = x^4$
+  \item $k(x) = x^2$
+\end{enumerate}
+\end{exercice}

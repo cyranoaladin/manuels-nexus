@@ -1,0 +1,56 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-030","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-030","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, sqrt
+% x = symbols('x', real=True)
+% f = 2*x**3 - 3*x**2 - 12*x + 4
+% fp = diff(f, x)
+% assert fp == 6*x**2 - 6*x - 12
+% racines = solve(fp, x)
+% assert set(racines) == {-1, 2}
+% assert fp.subs(x, -2) > 0
+% assert fp.subs(x, 0) < 0
+% assert fp.subs(x, 3) > 0
+% assert f.subs(x, -1) == 11
+% assert f.subs(x, 2) == -16
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-030}
+\textbf{1.} On dérive $f(x) = 2x^3 - 3x^2 - 12x + 4$ :
+\[
+f'(x) = 6x^2 - 6x - 12 = 6(x^2 - x - 2) = 6(x+1)(x-2)
+\]
+On vérifie : $(x+1)(x-2) = x^2 - x - 2$ ✓.
+
+\textbf{2.} Signe de $f'(x) = 6(x+1)(x-2)$ :
+\begin{itemize}
+\item $x < -1$ : $(x+1) < 0$, $(x-2) < 0$, donc $f'(x) > 0$ ($f$ croissante).
+\item $-1 < x < 2$ : $(x+1) > 0$, $(x-2) < 0$, donc $f'(x) < 0$ ($f$ décroissante).
+\item $x > 2$ : $(x+1) > 0$, $(x-2) > 0$, donc $f'(x) > 0$ ($f$ croissante).
+\end{itemize}
+
+Tableau de variations de $f$ sur $\mathbb{R}$ :
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -1 & & 2 & & +\infty \\
+\hline
+f'(x) & & + & 0 & - & 0 & + & \\
+\hline
+f & -\infty & \nearrow & 11 & \searrow & -16 & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+avec $f(-1) = -2 - 3 + 12 + 4 = 11$ et $f(2) = 16 - 12 - 24 + 4 = -16$.
+
+\textbf{3. Preuve de décroissance sur $[-1\,;\,2]$.}
+
+Soient $x_1, x_2 \in [-1\,;\,2]$ avec $x_1 < x_2$.
+
+D'après le tableau de variations, $f'(x) \leqslant 0$ pour tout $x \in [-1\,;\,2]$ (avec $f'(x) = 0$ seulement aux bornes $-1$ et $2$). Le théorème fondamental — si $f'$ est négative sur un intervalle alors $f$ est décroissante sur cet intervalle — conclut directement que $f(x_1) > f(x_2)$ : $f$ est strictement décroissante sur $[-1\,;\,2]$.
+
+\textbf{4.} L'inéquation $f'(x) \geqslant 0$ équivaut à $6(x+1)(x-2) \geqslant 0$, soit :
+\[
+x \leqslant -1 \quad \text{ou} \quad x \geqslant 2
+\]
+L'ensemble solution est $\left]-\infty\,;\,-1\right] \cup \left[2\,;\,+\infty\right[$.
+\end{corrige}

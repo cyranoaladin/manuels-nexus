@@ -1,0 +1,38 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-032","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-032","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = -x**2 + 4*x + 1
+% fp = diff(f, x)
+% assert fp == -2*x + 4
+% x0 = solve(fp, x)
+% assert x0 == [2]
+% assert fp.subs(x, 1) > 0
+% assert fp.subs(x, 3) < 0
+% assert f.subs(x, 2) == 5
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-032}
+\textbf{1.} On calcule la dérivée de $g(x) = -x^2 + 4x + 1$ :
+\[
+g'(x) = -2x + 4
+\]
+On résout $g'(x) = 0$ :
+\[
+-2x + 4 = 0 \iff x = 2
+\]
+Le point stationnaire de $g$ est $x = 2$.
+
+\textbf{2.} Signe de $g'(x) = -2(x - 2)$ :
+\begin{itemize}
+\item Pour $x < 2$ : $-(x-2) > 0$, donc $g'(x) > 0$.
+\item Pour $x > 2$ : $-(x-2) < 0$, donc $g'(x) < 0$.
+\end{itemize}
+La dérivée change de signe de $+$ à $-$ en $x = 2$.
+
+\textbf{3.} Puisque $g'$ passe de positive à négative en $x = 2$, $g$ admet un \textbf{maximum} en $x = 2$.
+
+La valeur maximale est :
+\[
+g(2) = -4 + 8 + 1 = \boxed{5}
+\]
+\end{corrige}

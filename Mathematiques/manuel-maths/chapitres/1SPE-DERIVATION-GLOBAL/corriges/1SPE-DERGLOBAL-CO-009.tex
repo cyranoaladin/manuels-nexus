@@ -1,0 +1,51 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-009","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-009","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, factor
+% x = symbols('x', positive=True)
+% f = x**2 - x + 1/x
+% fp = diff(f, x)
+% assert fp == 2*x - 1 - 1/x**2
+% p = 2*x**3 - x**2 - 1
+% assert p.subs(x, 1) == 0
+% assert factor(p) == (x - 1)*(2*x**2 + x + 1)
+% disc = 1 - 4*2*1
+% assert disc == -7
+% assert disc < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-009}
+
+\textbf{Question 1.} On dérive terme à terme :
+\[
+f'(x) = 2x - 1 + \left(-\frac{1}{x^2}\right) = 2x - 1 - \frac{1}{x^2}.
+\]
+En mettant au même dénominateur $x^2 > 0$ :
+\[
+f'(x) = \frac{2x \cdot x^2 - x^2 - 1}{x^2} = \frac{2x^3 - x^2 - 1}{x^2}.
+\]
+
+\textbf{Question 2.} On calcule $p(1) = 2 \times 1 - 1 - 1 = 0$. Donc $x = 1$ est bien racine de $p(x) = 2x^3 - x^2 - 1$.
+
+\textbf{Question 3.} On effectue la division euclidienne de $2x^3 - x^2 - 1$ par $(x - 1)$ :
+\[
+2x^3 - x^2 - 1 = (x-1)(2x^2 + x + 1).
+\]
+\textit{Vérification :} $(x-1)(2x^2 + x + 1) = 2x^3 + x^2 + x - 2x^2 - x - 1 = 2x^3 - x^2 - 1.$ \checkmark
+
+Le discriminant de $2x^2 + x + 1$ vaut $\Delta = 1 - 4 \times 2 \times 1 = -7 < 0$. Donc $2x^2 + x + 1 > 0$ pour tout $x$ réel (coefficient dominant positif).
+
+\textbf{Question 4.} Sur $]0\,;\,+\infty[$, on a $x^2 > 0$ et $2x^2 + x + 1 > 0$, donc le signe de $f'(x)$ est celui de $(x-1)$.
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $1$ & & $+\infty$ \\
+\hline
+$f'(x)$ & & $-$ & $0$ & $+$ & \\
+\hline
+$f(x)$ & & $\searrow$ & $1$ & $\nearrow$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+La fonction $f$ admet un minimum en $x = 1$ valant $f(1) = 1 - 1 + 1 = 1$.
+\end{corrige}

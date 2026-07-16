@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-006","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-006","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, sqrt, Rational, simplify
+% x = symbols('x', positive=True)
+% f = 4*sqrt(x) - 2/x
+% fp = diff(f, x)
+% assert simplify(fp - (2/sqrt(x) + 2/x**2)) == 0
+% assert simplify(fp.subs(x, 4) - Rational(9, 8)) == 0
+% assert fp.subs(x, 1) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-006}
+
+\textbf{Question 1.} On dérive terme à terme :
+\[
+f'(x) = 4 \times \frac{1}{2\sqrt{x}} - 2 \times \left(-\frac{1}{x^2}\right) = \frac{2}{\sqrt{x}} + \frac{2}{x^2}.
+\]
+
+\textbf{Question 2.} On remplace $x = 4$ :
+\[
+f'(4) = \frac{2}{\sqrt{4}} + \frac{2}{4^2} = \frac{2}{2} + \frac{2}{16} = 1 + \frac{1}{8} = \boxed{\frac{9}{8}}.
+\]
+
+\textbf{Question 3.} Sur $]0\,;\,+\infty[$, les deux termes $\dfrac{2}{\sqrt{x}}$ et $\dfrac{2}{x^2}$ sont strictement positifs. Donc $f'(x) > 0$ pour tout $x \in ]0\,;\,+\infty[$. La fonction $f$ est donc strictement croissante sur $]0\,;\,+\infty[$.
+\end{corrige}

@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-040","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":3,"competences":["calculer","raisonner","communiquer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-040.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-040.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x', positive=True)
+% S = x**2 + 2000/x
+% Sp = diff(S, x)
+% assert Sp == 2*x - 2000/x**2
+% x0s = solve(Sp, x)
+% assert x0s == [10]
+% assert Sp.subs(x, 8) < 0
+% assert Sp.subs(x, 12) > 0
+% assert S.subs(x, 10) == 300
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-040}{3}{20}
+On fabrique une boîte sans couvercle à base carrée de côté $x$ (en cm, $x > 0$) et de hauteur $h$. Le volume de la boîte doit être de $500\,\text{cm}^3$.
+
+\begin{enumerate}
+\item Exprimer $h$ en fonction de $x$ à partir de la contrainte de volume $x^2 h = 500$.
+\item Montrer que la surface totale (base + 4 faces latérales) est :
+\[
+S(x) = x^2 + \frac{2000}{x}
+\]
+\textit{Indication : la surface de la base vaut $x^2$, et chaque face latérale a pour aire $xh$.}
+\item Calculer $S'(x)$ et résoudre $S'(x) = 0$ sur $]0\,;\,+\infty[$.
+\item Dresser le tableau de variations de $S$ et en déduire que $S$ admet un minimum. Calculer les dimensions de la boîte correspondante et la surface minimale.
+\item \textbf{Preuve.} Vérifier que $S''(x) = 2 + \dfrac{4000}{x^3} > 0$ pour tout $x > 0$, ce qui confirme que le point stationnaire est bien un minimum. (On admet que la dérivée de $\dfrac{1}{x}$ est $-\dfrac{1}{x^2}$.)
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,45 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-021","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-021","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = x**2 - 4*x + 3
+% fp = diff(f, x)
+% assert fp == 2*x - 4
+% racine = solve(fp, x)
+% assert racine == [2]
+% assert fp.subs(x, 1) < 0
+% assert fp.subs(x, 3) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-021}
+\textbf{1.} On dérive $f(x) = x^2 - 4x + 3$ :
+\[
+f'(x) = 2x - 4
+\]
+
+\textbf{2.} On résout $f'(x) = 0$ :
+\[
+2x - 4 = 0 \iff x = 2
+\]
+
+\textbf{3.} On étudie le signe de $f'(x) = 2(x - 2)$ :
+\begin{itemize}
+\item Si $x < 2$ : $x - 2 < 0$, donc $f'(x) < 0$ : $f$ est décroissante.
+\item Si $x > 2$ : $x - 2 > 0$, donc $f'(x) > 0$ : $f$ est croissante.
+\end{itemize}
+
+Tableau de variations de $f$ :
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & 2 & & +\infty \\
+\hline
+f'(x) & & - & 0 & + & \\
+\hline
+f & +\infty & \searrow & -1 & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+$f$ admet un \textbf{minimum} en $x = 2$, avec $f(2) = 4 - 8 + 3 = \boxed{-1}$.
+\end{corrige}

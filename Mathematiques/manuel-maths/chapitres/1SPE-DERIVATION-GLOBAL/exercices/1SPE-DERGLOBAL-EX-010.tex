@@ -1,0 +1,30 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-010","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":3,"competences":["calculer","raisonner","critiquer"],"duree_min":18,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-010.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-010.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, sqrt, Rational
+% x = symbols('x', positive=True)
+% f = sqrt(x) - 1/x
+% fp = diff(f, x)
+% assert fp == 1/(2*sqrt(x)) + 1/x**2
+% # fp > 0 always
+% assert fp.subs(x, 1) > 0
+% # At x=9: f'(9) = 1/6 + 1/81 = 27/162 + 2/162 = 29/162
+% val = Rational(1,6) + Rational(1,81)
+% assert val == Rational(29, 162)
+% # Erreur de l'eleve : il ecrit f'(x) = 1/(2sqrt(x)) - 1/x^2 (signe faux)
+% # On verifie que ce n'est pas la bonne derivee
+% wrong_fp = 1/(2*sqrt(x)) - 1/x**2
+% from sympy import simplify
+% assert simplify(fp - wrong_fp) != 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-010}{3}{18}
+Soit $f(x) = \sqrt{x} - \dfrac{1}{x}$ définie sur $]0\,;\,+\infty[$.
+
+Un élève calcule $f'(x) = \dfrac{1}{2\sqrt{x}} - \dfrac{1}{x^2}$.
+
+\begin{enumerate}
+  \item Identifier et corriger l'erreur commise par l'élève. Donner le calcul détaillé de $f'(x)$.
+  \item Calculer $f'(9)$.
+  \item Montrer que $f'(x) > 0$ pour tout $x \in ]0\,;\,+\infty[$. En déduire les variations de $f$.
+  \item En utilisant le résultat de la question 3, comparer $f(4)$ et $f(9)$ sans calculer ces valeurs.
+\end{enumerate}
+\end{exercice}

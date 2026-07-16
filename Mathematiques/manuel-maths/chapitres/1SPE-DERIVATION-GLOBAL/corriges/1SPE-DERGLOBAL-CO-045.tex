@@ -1,0 +1,63 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-045","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-045","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, sqrt, simplify, Rational
+% x = symbols('x', positive=True)
+% A = x * sqrt(25 - x**2)
+% Ap = diff(A, x)
+% Ap_simplified = simplify(Ap)
+% # Ap = sqrt(25-x^2) + x*(-x/sqrt(25-x^2)) = (25-2x^2)/sqrt(25-x^2)
+% num = 25 - 2*x**2
+% denom = sqrt(25 - x**2)
+% assert simplify(Ap - num/denom) == 0
+% xopt_sq = solve(num, x)
+% # x^2 = 25/2, x = 5/sqrt(2)
+% xopt = [s for s in xopt_sq if s.is_real and s > 0]
+% assert len(xopt) == 1
+% from sympy import Rational
+% xval = xopt[0]
+% assert simplify(xval**2 - Rational(25,2)) == 0
+% Amax = A.subs(x, xval)
+% assert simplify(Amax - Rational(25,2)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-045}
+\textbf{1.} Le triangle a sa base sur un diamètre (longueur $2x$) et son sommet $S$ sur le demi-cercle.
+L'angle inscrit dans un demi-cercle étant droit, l'angle en $S$ est droit.
+Par Pythagore dans le triangle rectangle en $S$ :
+\[
+(2x)^2 = (x + OS)^2 + h^2 \quad \text{[non recommandé]}
+\]
+Plus simplement : le sommet est à distance $\sqrt{R^2 - x^2} = \sqrt{25 - x^2}$ du diamètre,
+donc la hauteur du triangle vaut $h = \sqrt{25 - x^2}$.
+
+\textbf{2.} L'aire du triangle (base $= 2x$, hauteur $= h$) est :
+\[
+A(x) = \frac{1}{2} \times 2x \times \sqrt{25 - x^2} = x\sqrt{25 - x^2}.
+\]
+
+\textbf{3.} On pose $u = 25 - x^2$, donc $u' = -2x$. Avec la règle de dérivation :
+\[
+A'(x) = \sqrt{25 - x^2} + x \cdot \frac{-2x}{2\sqrt{25 - x^2}}
+       = \sqrt{25 - x^2} - \frac{x^2}{\sqrt{25 - x^2}}
+       = \frac{25 - x^2 - x^2}{\sqrt{25 - x^2}}
+       = \frac{25 - 2x^2}{\sqrt{25 - x^2}}.
+\]
+
+\textbf{4.} Sur $\left]0\,;\,5\right[$, le dénominateur $\sqrt{25 - x^2} > 0$.
+On résout $25 - 2x^2 = 0$ :
+\[
+x^2 = \frac{25}{2} \implies x = \frac{5}{\sqrt{2}} = \frac{5\sqrt{2}}{2} \approx 3{,}54.
+\]
+$A'(x) > 0$ pour $x < \dfrac{5\sqrt{2}}{2}$ et $A'(x) < 0$ pour $x > \dfrac{5\sqrt{2}}{2}$ :
+c'est bien un maximum.
+
+\textbf{5.} La demi-base optimale est $x^* = \dfrac{5\sqrt{2}}{2}$, donc la base vaut $2x^* = 5\sqrt{2}$ cm.
+La hauteur est $h^* = \sqrt{25 - \frac{25}{2}} = \sqrt{\frac{25}{2}} = \frac{5\sqrt{2}}{2}$ cm.
+
+Comme $h^* = x^*$, les deux côtés perpendiculaires du triangle rectangle sont égaux :
+\textbf{le triangle est isocèle rectangle.}
+
+L'aire maximale est :
+\[
+A\!\left(\frac{5\sqrt{2}}{2}\right) = \frac{5\sqrt{2}}{2} \times \frac{5\sqrt{2}}{2} = \frac{25 \times 2}{4} = \boxed{\frac{25}{2} = 12{,}5 \text{ cm}^2}.
+\]
+\end{corrige}

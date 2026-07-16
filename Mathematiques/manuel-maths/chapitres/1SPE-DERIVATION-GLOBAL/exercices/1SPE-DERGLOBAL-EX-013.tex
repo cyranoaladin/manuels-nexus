@@ -1,0 +1,16 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-013","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-013.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-013.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand
+% x = symbols('x')
+% f = (x**2 - 2*x + 3)*(x + 1)
+% g = x*(x - 1)*(x + 1)
+% assert expand(diff(f, x)) == 3*x**2 - 2*x + 1
+% assert expand(diff(g, x)) == 3*x**2 - 1
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-013}{1}{5}
+Dériver chacune des fonctions suivantes en appliquant la règle du produit :
+\begin{enumerate}
+  \item $f(x) = (x^2 - 2x + 3)(x+1)$
+  \item $g(x) = x(x-1)(x+1)$\quad\textit{(dériver d'abord $x(x-1)$, puis multiplier par $(x+1)$)}
+\end{enumerate}
+\end{exercice}

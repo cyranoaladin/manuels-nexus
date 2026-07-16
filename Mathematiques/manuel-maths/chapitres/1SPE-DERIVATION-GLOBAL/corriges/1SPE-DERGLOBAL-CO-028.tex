@@ -1,0 +1,52 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-028","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-028","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, factor
+% x = symbols('x')
+% C = x**3 - 6*x**2 + 9*x + 2
+% Cp = diff(C, x)
+% assert Cp == 3*x**2 - 12*x + 9
+% racines = solve(Cp, x)
+% assert set(racines) == {1, 3}
+% assert Cp.subs(x, 0) > 0
+% assert Cp.subs(x, 2) < 0
+% assert Cp.subs(x, 4) > 0
+% assert C.subs(x, 1) == 6
+% assert C.subs(x, 3) == 2
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-028}
+\textbf{1.} On dérive $C(x) = x^3 - 6x^2 + 9x + 2$ :
+\[
+C'(x) = 3x^2 - 12x + 9
+\]
+On résout $C'(x) = 0$ : discriminant $\Delta = 144 - 108 = 36$, donc :
+\[
+x_1 = \frac{12 - 6}{6} = 1 \qquad \text{et} \qquad x_2 = \frac{12 + 6}{6} = 3
+\]
+D'où $C'(x) = 3(x-1)(x-3)$.
+
+\textbf{2.} Signe de $C'(x) = 3(x-1)(x-3)$ sur $[0\,;\,5]$ :
+\begin{itemize}
+\item $0 \leqslant x < 1$ : $C'(x) > 0$ (croissant).
+\item $1 < x < 3$ : $C'(x) < 0$ (décroissant).
+\item $3 < x \leqslant 5$ : $C'(x) > 0$ (croissant).
+\end{itemize}
+
+Tableau de variations de $C$ sur $[0\,;\,5]$ :
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & 0 & & 1 & & 3 & & 5 \\
+\hline
+C'(x) & & + & 0 & - & 0 & + & \\
+\hline
+C & 2 & \nearrow & 6 & \searrow & 2 & \nearrow & 12 \\
+\hline
+\end{array}
+\]
+
+\textbf{3.} $C(1) = 1 - 6 + 9 + 2 = 6$ (maximum local) et $C(3) = 27 - 54 + 27 + 2 = 2$ (minimum local).
+
+En contexte : pour $1$ lot fabriqué, le coût est maximal localement à $600\,\text{€}$ ; pour $3$ lots, il atteint son minimum local à $200\,\text{€}$.
+
+\textbf{4.} Le coût de production est décroissant sur $[1\,;\,3]$ : augmenter la production de $1$ à $3$ lots réduit le coût grâce aux économies d'échelle.
+\end{corrige}

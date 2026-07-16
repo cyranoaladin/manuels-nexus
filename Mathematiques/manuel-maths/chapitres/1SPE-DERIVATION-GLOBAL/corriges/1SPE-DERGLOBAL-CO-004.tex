@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-004","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-004","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, sqrt
+% x = symbols('x', positive=True)
+% assert diff(x**3 + x**2, x) == 3*x**2 + 2*x
+% assert diff(x**4 - 1/x, x) == 4*x**3 + 1/x**2
+% assert diff(sqrt(x) + x, x) == 1 + 1/(2*sqrt(x))
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-004}
+On applique la linéarité de la dérivation $(f+g)' = f' + g'$.
+
+\textbf{1.} $f'(x) = 3x^2 + 2x$.
+
+\textbf{2.} $g'(x) = 4x^3 - \left(-\dfrac{1}{x^2}\right) = 4x^3 + \dfrac{1}{x^2}$.
+
+\textbf{3.} $h'(x) = \dfrac{1}{2\sqrt{x}} + 1$.
+\end{corrige}

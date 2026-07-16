@@ -1,0 +1,48 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-024","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-024","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% x = symbols('x')
+% f = 2*x**3 - 9*x**2 + 12*x
+% fp = diff(f, x)
+% assert fp == 6*x**2 - 18*x + 12
+% racines = solve(fp, x)
+% assert set(racines) == {1, 2}
+% assert fp.subs(x, 0) > 0
+% assert fp.subs(x, 3) > 0
+% assert fp.subs(x, Rational(3,2)) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-024}
+\textbf{1.} On dérive $k(x) = 2x^3 - 9x^2 + 12x$ :
+\[
+k'(x) = 6x^2 - 18x + 12
+\]
+
+\textbf{2.} On résout $k'(x) = 0$, c'est-à-dire $6x^2 - 18x + 12 = 0$, soit $x^2 - 3x + 2 = 0$ (en divisant par $6$).
+
+Discriminant : $\Delta = 9 - 8 = 1 > 0$, donc :
+\[
+x_1 = \frac{3 - 1}{2} = 1 \qquad \text{et} \qquad x_2 = \frac{3 + 1}{2} = 2
+\]
+
+\textbf{3.} Signe de $k'(x) = 6(x-1)(x-2)$ :
+\begin{itemize}
+\item $x < 1$ : $k'(x) > 0$ ($k$ croissante).
+\item $1 < x < 2$ : $k'(x) < 0$ ($k$ décroissante).
+\item $x > 2$ : $k'(x) > 0$ ($k$ croissante).
+\end{itemize}
+
+Tableau de variations de $k$ :
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & 1 & & 2 & & +\infty \\
+\hline
+k'(x) & & + & 0 & - & 0 & + & \\
+\hline
+k & -\infty & \nearrow & 5 & \searrow & 4 & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+avec $k(1) = 2 - 9 + 12 = 5$ et $k(2) = 16 - 36 + 24 = 4$.
+\end{corrige}

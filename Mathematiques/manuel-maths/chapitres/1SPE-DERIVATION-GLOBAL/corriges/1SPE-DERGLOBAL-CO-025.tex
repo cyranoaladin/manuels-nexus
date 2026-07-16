@@ -1,0 +1,50 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-025","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-025","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% t = symbols('t')
+% T = -t**2 + 8*t + 5
+% Tp = diff(T, t)
+% assert Tp == -2*t + 8
+% racine = solve(Tp, t)
+% assert racine == [4]
+% assert Tp.subs(t, 2) > 0
+% assert Tp.subs(t, 6) < 0
+% assert T.subs(t, 4) == 21
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-025}
+\textbf{1.} On dérive $T(t) = -t^2 + 8t + 5$ :
+\[
+T'(t) = -2t + 8
+\]
+On résout $T'(t) = 0$ :
+\[
+-2t + 8 = 0 \iff t = 4
+\]
+Ainsi $t_0 = 4 \in [0\,;\,10]$.
+
+\textbf{2.} Signe de $T'(t) = -2(t - 4)$ :
+\begin{itemize}
+\item Pour $t < 4$ : $T'(t) > 0$, la température est en hausse.
+\item Pour $t > 4$ : $T'(t) < 0$, la température est en baisse.
+\end{itemize}
+
+Tableau de variations de $T$ sur $[0\,;\,10]$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+t & 0 & & 4 & & 10 \\
+\hline
+T'(t) & & + & 0 & - & \\
+\hline
+T & 5 & \nearrow & 21 & \searrow & -15 \\
+\hline
+\end{array}
+\]
+
+\textbf{3.} Le maximum est atteint en $t = 4$, c'est-à-dire à $6\,\text{h} + 4\,\text{h} = 10\,\text{h}$ du matin. La température maximale est :
+\[
+T(4) = -16 + 32 + 5 = \boxed{21\,^\circ\text{C}}
+\]
+
+\textbf{4.} La température est en hausse sur $[0\,;\,4]$, c'est-à-dire de $6\,\text{h}$ à $10\,\text{h}$. Elle est en baisse sur $[4\,;\,10]$, c'est-à-dire de $10\,\text{h}$ à $16\,\text{h}$.
+\end{corrige}

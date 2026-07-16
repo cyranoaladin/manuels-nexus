@@ -1,0 +1,67 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-040","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-040","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x', positive=True)
+% S = x**2 + 2000/x
+% Sp = diff(S, x)
+% assert Sp == 2*x - 2000/x**2
+% x0s = solve(Sp, x)
+% assert x0s == [10]
+% assert Sp.subs(x, 8) < 0
+% assert Sp.subs(x, 12) > 0
+% assert S.subs(x, 10) == 300
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-040}
+\textbf{1.} De $x^2 h = 500$, on tire :
+\[
+h = \frac{500}{x^2}
+\]
+
+\textbf{2.} La surface totale comprend la base ($x^2$) et quatre faces latérales (chacune de dimensions $x \times h$) :
+\[
+S(x) = x^2 + 4 \times x \times h = x^2 + 4x \times \frac{500}{x^2} = x^2 + \frac{2000}{x}
+\]
+
+\textbf{3.} On dérive (en utilisant le fait que la dérivée de $\frac{1}{x}$ est $-\frac{1}{x^2}$) :
+\[
+S'(x) = 2x - \frac{2000}{x^2}
+\]
+On résout $S'(x) = 0$ sur $]0\,;\,+\infty[$ :
+\[
+2x = \frac{2000}{x^2} \iff 2x^3 = 2000 \iff x^3 = 1000 \iff x = 10
+\]
+
+\textbf{4.} Signe de $S'(x) = \dfrac{2x^3 - 2000}{x^2} = \dfrac{2(x^3 - 1000)}{x^2}$ :
+\begin{itemize}
+\item Pour $0 < x < 10$ : $x^3 < 1000$, donc $S'(x) < 0$ ($S$ décroissante).
+\item Pour $x > 10$ : $x^3 > 1000$, donc $S'(x) > 0$ ($S$ croissante).
+\end{itemize}
+
+Tableau de variations de $S$ sur $]0\,;\,+\infty[$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & 0 & & 10 & & +\infty \\
+\hline
+S'(x) & & - & 0 & + & \\
+\hline
+S & +\infty & \searrow & 300 & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+$S$ admet un \textbf{minimum} en $x = 10$. Les dimensions optimales sont :
+\[
+x = 10\,\text{cm}, \quad h = \frac{500}{100} = 5\,\text{cm}
+\]
+La surface minimale est :
+\[
+S(10) = 100 + \frac{2000}{10} = 100 + 200 = \boxed{300\,\text{cm}^2}
+\]
+
+\textbf{5.} On calcule la dérivée seconde. On a $S'(x) = 2x - 2000x^{-1}$, donc :
+\[
+S''(x) = 2 + \frac{4000}{x^3}
+\]
+Pour tout $x > 0$, les deux termes sont strictement positifs, donc $S''(x) > 0$. Cela confirme que le point stationnaire $x = 10$ est bien un minimum.
+\end{corrige}

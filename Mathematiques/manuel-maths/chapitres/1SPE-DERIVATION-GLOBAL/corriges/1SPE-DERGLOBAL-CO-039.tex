@@ -1,0 +1,60 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-039","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-039","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, simplify
+% x, k = symbols('x k', real=True)
+% f = x**2 - 2*k*x + k
+% fp = diff(f, x)
+% assert fp == 2*x - 2*k
+% x0 = solve(fp, x)
+% assert x0 == [k]
+% f_at_x0 = f.subs(x, k)
+% assert simplify(f_at_x0 - (k - k**2)) == 0
+% assert f_at_x0.subs(k, 0) == 0
+% assert f_at_x0.subs(k, 1) == 0
+% assert f_at_x0.subs(k, Rational(1,2)) == Rational(1,4)
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-039}
+\textbf{1.} On dérive $f_k(x) = x^2 - 2kx + k$ par rapport à $x$ ($k$ est une constante) :
+\[
+f_k'(x) = 2x - 2k
+\]
+On résout $f_k'(x) = 0$ :
+\[
+2x - 2k = 0 \iff x = k
+\]
+Le point stationnaire est $x_0(k) = k$.
+
+\textbf{2.} On étudie le signe de $f_k'(x) = 2(x - k)$ :
+\begin{itemize}
+\item Pour $x < k$ : $f_k'(x) < 0$ (décroissant).
+\item Pour $x > k$ : $f_k'(x) > 0$ (croissant).
+\end{itemize}
+La dérivée change de signe de $-$ à $+$ en $x = k$ : $f_k$ admet bien un \textbf{minimum} en $x_0(k) = k$.
+
+\textbf{3.} La valeur minimale est :
+\[
+m(k) = f_k(k) = k^2 - 2k \cdot k + k = k^2 - 2k^2 + k = -k^2 + k
+\]
+
+\textbf{4.} On étudie $m(k) = -k^2 + k$ en tant que fonction de $k$ :
+\[
+m'(k) = -2k + 1
+\]
+On résout $m'(k) = 0$ :
+\[
+-2k + 1 = 0 \iff k = \frac{1}{2}
+\]
+
+Signe de $m'(k)$ :
+\begin{itemize}
+\item Pour $k < \frac{1}{2}$ : $m'(k) > 0$ ($m$ croissante).
+\item Pour $k > \frac{1}{2}$ : $m'(k) < 0$ ($m$ décroissante).
+\end{itemize}
+
+La valeur minimale $m(k)$ est \textbf{maximale} pour $k = \dfrac{1}{2}$ :
+\[
+m\!\left(\frac{1}{2}\right) = -\frac{1}{4} + \frac{1}{2} = \boxed{\frac{1}{4}}
+\]
+
+C'est pour $k = \frac{1}{2}$ que le minimum de $f_k$ est le plus grand possible, avec un minimum valant $\frac{1}{4}$.
+\end{corrige}

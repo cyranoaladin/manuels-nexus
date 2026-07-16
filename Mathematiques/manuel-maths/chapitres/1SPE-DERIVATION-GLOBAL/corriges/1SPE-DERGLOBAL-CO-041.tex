@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-041","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-041","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = -x**2 + 6*x - 5
+% fp = diff(f, x)
+% assert fp == -2*x + 6
+% xopt = solve(fp, x)
+% assert xopt == [3]
+% assert f.subs(x, 3) == 4
+% assert fp.subs(x, 2) > 0
+% assert fp.subs(x, 4) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-041}
+\textbf{1.} On dérive terme à terme :
+\[
+f'(x) = -2x + 6.
+\]
+
+\textbf{2.} On résout $f'(x) = 0$ :
+\[
+-2x + 6 = 0 \iff x = 3.
+\]
+$f'(x) > 0$ pour $x < 3$ et $f'(x) < 0$ pour $x > 3$.
+
+Tableau de variations de $f$ sur $\mathbb{R}$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x     & -\infty & & 3 & & +\infty \\
+\hline
+f'(x) &         & + & 0 & - & \\
+\hline
+f(x)  & -\infty & \nearrow & 4 & \searrow & -\infty \\
+\hline
+\end{array}
+\]
+
+\textbf{3.} $f'$ change de signe de $+$ à $-$ en $x = 3$, donc $f$ admet un \textbf{maximum} en $x = 3$.
+Ce maximum vaut $f(3) = -9 + 18 - 5 = \boxed{4}$.
+\end{corrige}

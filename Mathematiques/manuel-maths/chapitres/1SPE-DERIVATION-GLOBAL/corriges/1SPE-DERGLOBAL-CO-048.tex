@@ -1,0 +1,73 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-048","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-048","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, sqrt, simplify, Rational
+% x = symbols('x')
+% f = (x**2 - 2*x + 4) / (x - 1)
+% fp = diff(f, x)
+% fp_num = simplify(fp * (x - 1)**2)
+% assert simplify(fp_num - (x**2 - 2*x - 2)) == 0
+% # Discriminant = 4 + 8 = 12
+% from sympy import sqrt
+% r1 = 1 - sqrt(3)
+% r2 = 1 + sqrt(3)
+% assert simplify(fp_num.subs(x, r1)) == 0
+% assert simplify(fp_num.subs(x, r2)) == 0
+% # f(r1) and f(r2)
+% val1 = simplify(f.subs(x, r1))
+% val2 = simplify(f.subs(x, r2))
+% assert simplify(val1 - (-2*sqrt(3))) == 0
+% assert simplify(val2 - 2*sqrt(3)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-048}
+\textbf{1.} On pose $u = x^2 - 2x + 4$ et $v = x - 1$, d'où $u' = 2x - 2$ et $v' = 1$.
+La règle du quotient donne :
+\[
+f'(x) = \frac{u'v - uv'}{v^2} = \frac{(2x-2)(x-1) - (x^2-2x+4)}{(x-1)^2}.
+\]
+On développe le numérateur :
+\[
+(2x-2)(x-1) - (x^2-2x+4) = 2x^2 - 4x + 2 - x^2 + 2x - 4 = x^2 - 2x - 2.
+\]
+Donc $f'(x) = \dfrac{x^2 - 2x - 2}{(x-1)^2}$.
+
+\textbf{2.} On résout $x^2 - 2x - 2 = 0$ : $\Delta = 4 + 8 = 12$.
+\[
+x = \frac{2 \pm \sqrt{12}}{2} = 1 \pm \sqrt{3}.
+\]
+Les deux racines sont $x_1 = 1 - \sqrt{3} \approx -0{,}73$ et $x_2 = 1 + \sqrt{3} \approx 2{,}73$.
+
+\textbf{3.} Le dénominateur $(x-1)^2 > 0$ pour $x \neq 1$.
+Le numérateur $x^2 - 2x - 2 = (x - x_1)(x - x_2)$ est :
+\begin{itemize}
+  \item positif sur $\left]-\infty\,;\,x_1\right[$ et sur $\left]x_2\,;\,+\infty\right[$,
+  \item négatif sur $\left]x_1\,;\,1\right[$ et sur $\left]1\,;\,x_2\right[$.
+\end{itemize}
+
+\textbf{4.} Tableau de variations de $f$ sur $\mathbb{R} \setminus \{1\}$ :
+\[
+\begin{array}{|c|ccccccccc|}
+\hline
+x     & -\infty && x_1 && 1 && x_2 && +\infty \\
+\hline
+f'(x) &         & + & 0 & - & \| & - & 0 & + & \\
+\hline
+f(x)  & -\infty & \nearrow & f(x_1) & \searrow & -\infty \;\|\; +\infty & \searrow & f(x_2) & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+\textbf{5.} $f$ admet un \textbf{maximum local} en $x_1 = 1 - \sqrt{3}$ :
+\[
+f(x_1) = \frac{(1-\sqrt{3})^2 - 2(1-\sqrt{3}) + 4}{-\sqrt{3}}
+= \frac{1 - 2\sqrt{3} + 3 - 2 + 2\sqrt{3} + 4}{-\sqrt{3}}
+= \frac{6}{-\sqrt{3}} = -2\sqrt{3}.
+\]
+
+$f$ admet un \textbf{minimum local} en $x_2 = 1 + \sqrt{3}$ :
+\[
+f(x_2) = \frac{(1+\sqrt{3})^2 - 2(1+\sqrt{3}) + 4}{\sqrt{3}}
+= \frac{6}{\sqrt{3}} = 2\sqrt{3}.
+\]
+
+Les extremums locaux valent $\boxed{f(x_1) = -2\sqrt{3}}$ (maximum local) et $\boxed{f(x_2) = 2\sqrt{3}}$ (minimum local).
+\end{corrige}

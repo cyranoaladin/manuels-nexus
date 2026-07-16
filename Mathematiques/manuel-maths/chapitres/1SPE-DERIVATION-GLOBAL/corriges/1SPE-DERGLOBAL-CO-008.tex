@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-008","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-008","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational
+% x = symbols('x', positive=True)
+% f = x**3 - 3/x
+% fp = diff(f, x)
+% assert fp == 3*x**2 + 3/x**2
+% assert fp.subs(x, 2) == Rational(51, 4)
+% assert fp.subs(x, 1) == 6
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-008}
+
+\textbf{Question 1.} On dérive :
+\[
+f'(x) = 3x^2 - 3 \times \left(-\frac{1}{x^2}\right) = \boxed{3x^2 + \frac{3}{x^2}}.
+\]
+
+\textbf{Question 2.}
+\[
+f'(2) = 3 \times 4 + \frac{3}{4} = 12 + \frac{3}{4} = \frac{51}{4}.
+\]
+
+\textbf{Question 3.} Sur $]0\,;\,+\infty[$, on a $x^2 > 0$ et $\dfrac{1}{x^2} > 0$, donc :
+\[
+f'(x) = 3x^2 + \frac{3}{x^2} > 0.
+\]
+Puisque $f'(x) > 0$ pour tout $x \in ]0\,;\,+\infty[$, la fonction $f$ est strictement croissante sur $]0\,;\,+\infty[$.
+\end{corrige}

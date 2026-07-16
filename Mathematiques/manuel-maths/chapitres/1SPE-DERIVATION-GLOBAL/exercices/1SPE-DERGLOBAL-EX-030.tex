@@ -1,0 +1,27 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-030","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":3,"competences":["calculer","raisonner","communiquer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-030.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-030.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, sqrt
+% x = symbols('x', real=True)
+% f = 2*x**3 - 3*x**2 - 12*x + 4
+% fp = diff(f, x)
+% assert fp == 6*x**2 - 6*x - 12
+% racines = solve(fp, x)
+% assert set(racines) == {-1, 2}
+% assert fp.subs(x, -2) > 0
+% assert fp.subs(x, 0) < 0
+% assert fp.subs(x, 3) > 0
+% assert f.subs(x, -1) == 11
+% assert f.subs(x, 2) == -16
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-030}{3}{20}
+Soit $f(x) = 2x^3 - 3x^2 - 12x + 4$ définie sur $\mathbb{R}$.
+
+\begin{enumerate}
+\item Calculer $f'(x)$ et montrer que $f'(x) = 6(x+1)(x-2)$.
+\item Dresser le tableau de signes de $f'(x)$ puis le tableau de variations complet de $f$ sur $\mathbb{R}$.
+\item \textbf{Preuve de monotonie.} Démontrer que $f$ est strictement décroissante sur $[-1\,;\,2]$ en utilisant la définition : pour tous $x_1, x_2 \in [-1\,;\,2]$ avec $x_1 < x_2$, montrer que $f(x_1) > f(x_2)$.
+
+\textit{Indication : on pourra utiliser le théorème liant signe de la dérivée et sens de variation.}
+\item Résoudre graphiquement (ou par calcul) l'inéquation $f'(x) \geqslant 0$.
+\end{enumerate}
+\end{exercice}

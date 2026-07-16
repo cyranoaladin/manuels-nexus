@@ -1,0 +1,56 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-037","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-037","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% x = symbols('x')
+% V = x * (8 - 2*x)**2
+% Vp = diff(V, x)
+% x0s = solve(Vp, x)
+% x0_val = Rational(4, 3)
+% assert x0_val in x0s
+% assert Vp.subs(x, 1) > 0
+% assert Vp.subs(x, 2) < 0
+% V_max = V.subs(x, x0_val)
+% assert V_max == Rational(1024, 27)
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-037}
+\textbf{1.} On développe $V(x) = x(8 - 2x)^2$ :
+\[
+V(x) = x(64 - 32x + 4x^2) = 4x^3 - 32x^2 + 64x
+\]
+
+\textbf{2.} On dérive :
+\[
+V'(x) = 12x^2 - 64x + 64 = 4(3x^2 - 16x + 16)
+\]
+On résout $3x^2 - 16x + 16 = 0$ (discriminant $\Delta = 256 - 192 = 64$) :
+\[
+x = \frac{16 - 8}{6} = \frac{4}{3} \qquad \text{ou} \qquad x = \frac{16 + 8}{6} = 4
+\]
+Sur $]0\,;\,4[$, la seule solution est $x = \dfrac{4}{3}$.
+
+\textbf{3.} Signe de $V'(x) = 4(3x - 4)(x - 4)$ sur $]0\,;\,4[$ :
+\begin{itemize}
+\item Pour $0 < x < \frac{4}{3}$ : $(3x-4) < 0$, $(x-4) < 0$, donc $V'(x) > 0$ (croissant).
+\item Pour $\frac{4}{3} < x < 4$ : $(3x-4) > 0$, $(x-4) < 0$, donc $V'(x) < 0$ (décroissant).
+\end{itemize}
+
+Tableau de variations de $V$ sur $]0\,;\,4[$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & 0 & & \frac{4}{3} & & 4 \\
+\hline
+V'(x) & & + & 0 & - & \\
+\hline
+V & 0 & \nearrow & \frac{1024}{27} & \searrow & 0 \\
+\hline
+\end{array}
+\]
+
+$V$ est maximale pour $x = \dfrac{4}{3}\,\text{cm}$.
+
+\textbf{4.} Le volume maximal est :
+\[
+V\!\left(\frac{4}{3}\right) = \frac{4}{3}\left(8 - \frac{8}{3}\right)^2 = \frac{4}{3} \times \left(\frac{16}{3}\right)^2 = \frac{4}{3} \times \frac{256}{9} = \boxed{\frac{1024}{27} \approx 37{,}9\,\text{cm}^3}
+\]
+\end{corrige}

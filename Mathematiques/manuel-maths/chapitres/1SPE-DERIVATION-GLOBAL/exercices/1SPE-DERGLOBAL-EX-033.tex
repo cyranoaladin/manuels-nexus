@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-033","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-033.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-033.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = x**3 - 3*x**2
+% fp = diff(f, x)
+% assert fp == 3*x**2 - 6*x
+% x0s = solve(fp, x)
+% assert set(x0s) == {0, 2}
+% assert fp.subs(x, -1) > 0
+% assert fp.subs(x, 1) < 0
+% assert fp.subs(x, 3) > 0
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 2) == -4
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-033}{1}{5}
+Soit $f(x) = x^3 - 3x^2$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+\item Calculer $f'(x)$ et factoriser (on mettra $3x$ en facteur).
+\item Résoudre $f'(x) = 0$ et étudier le signe de $f'$.
+\item Dresser le tableau de variations de $f$ et indiquer la nature (maximum local ou minimum local) de chaque extremum, en précisant sa valeur.
+\end{enumerate}
+\end{exercice}

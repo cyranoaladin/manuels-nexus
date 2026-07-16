@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-036","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-036","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% A = x * (10 - x)
+% A_expand = A.expand()
+% assert A_expand == -x**2 + 10*x
+% Ap = diff(A_expand, x)
+% assert Ap == -2*x + 10
+% x0 = solve(Ap, x)
+% assert x0 == [5]
+% assert A_expand.subs(x, 5) == 25
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-036}
+\textbf{1.} On développe $A(x) = x(10 - x)$ :
+\[
+A(x) = -x^2 + 10x
+\]
+On dérive :
+\[
+A'(x) = -2x + 10
+\]
+
+\textbf{2.} On résout $A'(x) = 0$ :
+\[
+-2x + 10 = 0 \iff x = 5
+\]
+Signe de $A'(x) = -2(x - 5)$ :
+\begin{itemize}
+\item Pour $x < 5$ : $A'(x) > 0$ (croissant).
+\item Pour $x > 5$ : $A'(x) < 0$ (décroissant).
+\end{itemize}
+La dérivée change bien de signe de $+$ à $-$ en $x = 5$.
+
+\textbf{3.} Puisque $A'$ passe de $+$ à $-$ en $x = 5$, $A$ est \textbf{maximale pour $x = 5$}. La longueur du premier morceau doit être de $5\,\text{m}$ (et le second fait $10 - 5 = 5\,\text{m}$).
+
+\textbf{4.} L'aire maximale est :
+\[
+A(5) = 5 \times (10 - 5) = 5 \times 5 = \boxed{25\,\text{m}^2}
+\]
+\end{corrige}

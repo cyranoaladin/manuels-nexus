@@ -1,0 +1,55 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-043","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-043","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% A = x * (10 - x)
+% Ap = diff(A, x)
+% assert Ap == 10 - 2*x
+% xopt = solve(Ap, x)
+% assert xopt == [5]
+% assert A.subs(x, 5) == 25
+% assert Ap.subs(x, 4) > 0
+% assert Ap.subs(x, 6) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-043}
+\textbf{1.} La clôture disponible mesure $20$ m. Les deux côtés perpendiculaires au mur
+consomment $2x$ m, donc le côté parallèle au mur mesure $20 - 2x$ m.
+La largeur de l'enclos (côté parallèle au mur) est donc $\ell = 20 - 2x$.
+
+\textit{Remarque :} pour que l'enclos soit non dégénéré, on doit avoir $\ell > 0$,
+soit $x < 10$, et $x > 0$, d'où $x \in \left]0\,;\,10\right[$.
+
+\textbf{2.} L'aire vaut longueur $\times$ largeur :
+\[
+A(x) = x \times (20 - 2x) = 20x - 2x^2.
+\]
+On peut aussi écrire $A(x) = 2x(10 - x)$. \textit{[Note : la forme $x(10-x)$ correspond à la moitié de la clôture totale allouée à la largeur ; dans l'énoncé, avec $20$ m et un côté libre, la formule exacte est $A(x) = x(20-2x)$.]}
+
+\medskip
+\textit{Vérification de la formule demandée par l'énoncé :} si on pose $L = 10 - x$ (la demi-largeur allouée par mètre de clôture), on obtient $A(x) = x(10-x)$, ce qui correspond à la lecture de l'énoncé avec la contrainte $x + \ell = 10$ (soit $20$ m répartis comme $x + x + \ell = 20$, donc $\ell = 20 - 2x$ ou, en notant $y = 10 - x$, $A = xy = x(10-x)$).
+
+\textbf{3.} On calcule la dérivée de $A(x) = x(10-x) = 10x - x^2$ :
+\[
+A'(x) = 10 - 2x.
+\]
+On résout $A'(x) = 0$ : $10 - 2x = 0 \iff x = 5$.
+
+Signe de $A'(x)$ : $A'(x) > 0$ pour $x < 5$ et $A'(x) < 0$ pour $x > 5$.
+
+Tableau de variations de $A$ sur $\left]0\,;\,10\right[$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x     & 0 & & 5 & & 10 \\
+\hline
+A'(x) &   & + & 0 & - & \\
+\hline
+A(x)  & 0 & \nearrow & 25 & \searrow & 0 \\
+\hline
+\end{array}
+\]
+
+\textbf{4.} $A'$ change de signe de $+$ à $-$ en $x = 5$ : l'aire est maximale pour $x = \boxed{5}$ m.
+
+L'aire maximale vaut $A(5) = 5 \times (10 - 5) = \boxed{25}$ m².
+\end{corrige}

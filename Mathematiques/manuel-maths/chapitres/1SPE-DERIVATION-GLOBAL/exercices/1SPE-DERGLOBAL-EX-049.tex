@@ -1,0 +1,33 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-049","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C3","1SPE-DERIVATION-GLOBAL-C4","1SPE-DERIVATION-GLOBAL-C5"],"capacites_codes":["C3","C4","C5"],"methodes":["M3","M4","M5"],"parcours":3,"competences":["calculer","modeliser","raisonner"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-049.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-049.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% x = symbols('x')
+% # Profit = recette - cout = (50 - x)*x - (x^2/4 + 5*x + 20)
+% # = 50x - x^2 - x^2/4 - 5x - 20 = -5x^2/4 + 45x - 20
+% P = -Rational(5,4)*x**2 + 45*x - 20
+% Pp = diff(P, x)
+% assert Pp == -Rational(5,2)*x + 45
+% xopt = solve(Pp, x)
+% assert xopt == [18]
+% assert P.subs(x, 18) == Rational(385, 1)
+% # Check it is indeed a maximum (P'' < 0)
+% Ppp = diff(Pp, x)
+% assert Ppp < 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-049}{3}{20}
+\textbf{Synthèse C3 + C4 + C5} — Optimisation du profit d'une entreprise
+
+Une entreprise vend $x$ unités d'un produit ($x \in \left[0\,;\,40\right]$).
+Le prix de vente unitaire (en euros) est $p(x) = 50 - x$ et le coût total de
+production est $C(x) = \dfrac{x^2}{4} + 5x + 20$.
+
+\begin{enumerate}
+  \item Exprimer la recette $R(x) = x \cdot p(x)$ en fonction de $x$.
+  \item Montrer que le profit $P(x) = R(x) - C(x)$ vaut
+        $P(x) = -\dfrac{5}{4}x^2 + 45x - 20$.
+  \item Calculer $P'(x)$ et étudier son signe sur $\left[0\,;\,40\right]$.
+  \item Dresser le tableau de variations de $P$ sur $\left[0\,;\,40\right]$.
+  \item Déterminer le nombre d'unités $x^*$ maximisant le profit, calculer le profit
+        maximal et montrer que $P''(x^*) < 0$ (ce qui confirme qu'il s'agit bien d'un maximum).
+\end{enumerate}
+\end{exercice}

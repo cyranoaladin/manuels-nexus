@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-035","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-035.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-035.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% R = -3*x**2 + 60*x
+% Rp = diff(R, x)
+% assert Rp == -6*x + 60
+% x0 = solve(Rp, x)
+% assert x0 == [10]
+% assert Rp.subs(x, 5) > 0
+% assert Rp.subs(x, 15) < 0
+% assert R.subs(x, 10) == 300
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-035}{2}{12}
+Un commerçant vend des articles. Son chiffre d'affaires (en euros) en fonction du prix unitaire $x$ (en euros, $x \in [0\,;\,20]$) est modélisé par :
+\[
+R(x) = -3x^2 + 60x
+\]
+
+\begin{enumerate}
+\item Calculer $R'(x)$ et déterminer le prix $x_0$ qui annule $R'(x)$.
+\item Vérifier que $R'$ change de signe en $x_0$ (de $+$ à $-$).
+\item En déduire que $R$ admet un maximum en $x_0$. Quel est le chiffre d'affaires maximal ?
+\item Quel prix le commerçant doit-il fixer pour maximiser son chiffre d'affaires ?
+\end{enumerate}
+\end{exercice}

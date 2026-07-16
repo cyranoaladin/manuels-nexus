@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-024","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-024.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-024.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% x = symbols('x')
+% f = 2*x**3 - 9*x**2 + 12*x
+% fp = diff(f, x)
+% assert fp == 6*x**2 - 18*x + 12
+% racines = solve(fp, x)
+% assert set(racines) == {1, 2}
+% assert fp.subs(x, 0) > 0
+% assert fp.subs(x, 3) > 0
+% assert fp.subs(x, Rational(3,2)) < 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-024}{1}{5}
+Soit $k(x) = 2x^3 - 9x^2 + 12x$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+\item Calculer $k'(x)$.
+\item Résoudre $k'(x) = 0$ (on pourra utiliser le discriminant).
+\item Dresser le tableau de variations de $k$ sur $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}

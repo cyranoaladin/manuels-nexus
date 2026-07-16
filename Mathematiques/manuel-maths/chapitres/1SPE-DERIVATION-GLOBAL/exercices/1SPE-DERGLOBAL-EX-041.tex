@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-041","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":1,"competences":["calculer","modeliser"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-041.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-041.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = -x**2 + 6*x - 5
+% fp = diff(f, x)
+% assert fp == -2*x + 6
+% xopt = solve(fp, x)
+% assert xopt == [3]
+% assert f.subs(x, 3) == 4
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-041}{1}{5}
+Soit $f(x) = -x^2 + 6x - 5$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$.
+  \item Résoudre $f'(x) = 0$ et dresser le tableau de variations de $f$.
+  \item En déduire le maximum de $f$ sur $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}

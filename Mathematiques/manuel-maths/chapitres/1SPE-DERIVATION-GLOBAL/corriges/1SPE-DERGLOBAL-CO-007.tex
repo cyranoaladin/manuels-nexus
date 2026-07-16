@@ -1,0 +1,43 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-007","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-007","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, sqrt, solve
+% x = symbols('x', positive=True)
+% f = x**2 - 4*sqrt(x)
+% fp = diff(f, x)
+% assert fp == 2*x - 2/sqrt(x)
+% sol = solve(fp, x)
+% assert sol == [1]
+% assert fp.subs(x, 4) > 0
+% assert fp.subs(x, x.subs(x, 1)/2).subs(x, 1) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-007}
+
+\textbf{Question 1.} On dérive :
+\[
+f'(x) = 2x - 4 \times \frac{1}{2\sqrt{x}} = \boxed{2x - \frac{2}{\sqrt{x}}}.
+\]
+
+\textbf{Question 2.} On résout $f'(x) = 0$ :
+\[
+2x - \frac{2}{\sqrt{x}} = 0 \implies 2x = \frac{2}{\sqrt{x}} \implies x\sqrt{x} = 1 \implies x^{3/2} = 1 \implies x = 1.
+\]
+
+\textbf{Question 3.} On étudie le signe de $f'(x) = \dfrac{2x\sqrt{x} - 2}{\sqrt{x}} = \dfrac{2(x^{3/2}-1)}{\sqrt{x}}$.
+
+Le dénominateur $\sqrt{x} > 0$ sur $]0\,;\,+\infty[$. Le numérateur $2(x^{3/2}-1)$ est négatif si $x < 1$ et positif si $x > 1$.
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $1$ & & $+\infty$ \\
+\hline
+$f'(x)$ & & $-$ & $0$ & $+$ & \\
+\hline
+$f(x)$ & & $\searrow$ & $-3$ & $\nearrow$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+La fonction $f$ est décroissante sur $]0\,;\,1]$ et croissante sur $[1\,;\,+\infty[$. Elle admet un minimum en $x = 1$ valant $f(1) = 1 - 4 = -3$.
+\end{corrige}

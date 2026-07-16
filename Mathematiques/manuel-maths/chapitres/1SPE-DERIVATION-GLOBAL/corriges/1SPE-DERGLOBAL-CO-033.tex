@@ -1,0 +1,50 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-033","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-033","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = x**3 - 3*x**2
+% fp = diff(f, x)
+% assert fp == 3*x**2 - 6*x
+% x0s = solve(fp, x)
+% assert set(x0s) == {0, 2}
+% assert fp.subs(x, -1) > 0
+% assert fp.subs(x, 1) < 0
+% assert fp.subs(x, 3) > 0
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 2) == -4
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-033}
+\textbf{1.} On dérive $f(x) = x^3 - 3x^2$ :
+\[
+f'(x) = 3x^2 - 6x = 3x(x - 2)
+\]
+
+\textbf{2.} On résout $f'(x) = 0$ :
+\[
+3x(x-2) = 0 \iff x = 0 \text{ ou } x = 2
+\]
+
+Signe de $f'(x) = 3x(x-2)$ :
+\begin{itemize}
+\item $x < 0$ : $x < 0$ et $x - 2 < 0$, donc $f'(x) > 0$.
+\item $0 < x < 2$ : $x > 0$ et $x - 2 < 0$, donc $f'(x) < 0$.
+\item $x > 2$ : $x > 0$ et $x - 2 > 0$, donc $f'(x) > 0$.
+\end{itemize}
+
+\textbf{3.} Tableau de variations de $f$ :
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & 0 & & 2 & & +\infty \\
+\hline
+f'(x) & & + & 0 & - & 0 & + & \\
+\hline
+f & -\infty & \nearrow & 0 & \searrow & -4 & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+$f$ admet un \textbf{maximum local} en $x = 0$ de valeur $f(0) = \boxed{0}$.
+
+$f$ admet un \textbf{minimum local} en $x = 2$ de valeur $f(2) = 8 - 12 = \boxed{-4}$.
+\end{corrige}

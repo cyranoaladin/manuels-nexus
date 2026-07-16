@@ -1,0 +1,36 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-045","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":3,"competences":["calculer","modeliser","raisonner"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-045.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-045.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, sqrt, Rational
+% x = symbols('x', positive=True)
+% # Triangle rectangle isocele inscrit dans cercle de rayon R=5
+% # Demi-base = x, hauteur = 5 + sqrt(25 - x^2) (diametre vertical)
+% # Aire = x*(5 + sqrt(25 - x^2))
+% from sympy import sqrt
+% R = 5
+% A = x * (R + sqrt(R**2 - x**2))
+% Ap = diff(A, x)
+% # Verifier que Ap(x) = 0 admet une solution dans (0,5)
+% sols = solve(Ap, x)
+% # Filtrer la solution positive dans (0,5)
+% valid = [s for s in sols if s.is_real and 0 < s < R]
+% assert len(valid) == 1
+% xopt = valid[0]
+% from sympy import simplify
+% assert simplify(Ap.subs(x, xopt)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-045}{3}{20}
+On inscrit un triangle dans un demi-disque de rayon $R = 5$ cm : la base du triangle
+est un diamètre du demi-disque et le sommet opposé est un point du demi-cercle.
+On note $x$ ($0 < x < 5$) la demi-longueur de la base du triangle.
+
+\begin{enumerate}
+  \item Exprimer la hauteur $h$ du triangle en fonction de $x$ (on rappelle que
+        tout angle inscrit dans un demi-cercle est droit).
+  \item En déduire que l'aire du triangle vaut $A(x) = x\sqrt{25 - x^2}$.
+  \item Calculer $A'(x)$ (on pourra poser $u = 25 - x^2$).
+  \item Résoudre $A'(x) = 0$ sur $\left]0\,;\,5\right[$ et montrer que la valeur
+        trouvée correspond bien à un maximum.
+  \item En déduire les dimensions du triangle d'aire maximale et calculer cette aire.
+        Quelle est la nature de ce triangle ?
+\end{enumerate}
+\end{exercice}

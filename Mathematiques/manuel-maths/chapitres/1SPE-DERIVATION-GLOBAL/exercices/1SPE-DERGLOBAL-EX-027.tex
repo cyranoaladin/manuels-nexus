@@ -1,0 +1,27 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-027","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-027.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% t = symbols('t')
+% h = -5*t**2 + 20*t + 1
+% hp = diff(h, t)
+% assert hp == -10*t + 20
+% racine = solve(hp, t)
+% assert racine == [2]
+% assert hp.subs(t, 1) > 0
+% assert hp.subs(t, 3) < 0
+% assert h.subs(t, 2) == 21
+% assert h.subs(t, 0) == 1
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-027}{2}{12}
+Un objet est lancé verticalement vers le haut. Sa hauteur (en mètres) au bout de $t$ secondes ($t \in [0\,;\,4]$) est modélisée par :
+\[
+h(t) = -5t^2 + 20t + 1
+\]
+
+\begin{enumerate}
+\item Quelle est la hauteur initiale de l'objet ($t = 0$) ?
+\item Calculer $h'(t)$ et résoudre $h'(t) = 0$ sur $[0\,;\,4]$.
+\item Dresser le tableau de variations de $h$ sur $[0\,;\,4]$.
+\item À quel instant l'objet atteint-il sa hauteur maximale ? Quelle est cette hauteur ?
+\end{enumerate}
+\end{exercice}

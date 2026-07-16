@@ -1,0 +1,45 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-022","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-022","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = -x**2 + 6*x - 5
+% fp = diff(f, x)
+% assert fp == -2*x + 6
+% racine = solve(fp, x)
+% assert racine == [3]
+% assert fp.subs(x, 0) > 0
+% assert fp.subs(x, 5) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-022}
+\textbf{1.} On dérive $g(x) = -x^2 + 6x - 5$ :
+\[
+g'(x) = -2x + 6
+\]
+
+\textbf{2.} On résout $g'(x) = 0$ :
+\[
+-2x + 6 = 0 \iff x = 3
+\]
+
+\textbf{3.} On étudie le signe de $g'(x) = -2(x - 3)$ :
+\begin{itemize}
+\item Si $x < 3$ : $-(x-3) > 0$, donc $g'(x) > 0$ : $g$ est croissante.
+\item Si $x > 3$ : $-(x-3) < 0$, donc $g'(x) < 0$ : $g$ est décroissante.
+\end{itemize}
+
+Tableau de variations de $g$ :
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & 3 & & +\infty \\
+\hline
+g'(x) & & + & 0 & - & \\
+\hline
+g & -\infty & \nearrow & 4 & \searrow & -\infty \\
+\hline
+\end{array}
+\]
+
+$g$ admet un \textbf{maximum} en $x = 3$, avec $g(3) = -9 + 18 - 5 = \boxed{4}$.
+\end{corrige}

@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-015","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":2,"competences":["calculer"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-015.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-015.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand, factor, solve
+% x = symbols('x')
+% f = (x**2 - 3)*(x**2 + 1)
+% fp = diff(f, x)
+% assert expand(fp) == 4*x**3 - 4*x
+% assert factor(fp) == 4*x*(x - 1)*(x + 1)
+% sols = solve(fp, x)
+% assert set(sols) == {-1, 0, 1}
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-015}{2}{12}
+Soit $f(x) = (x^2-3)(x^2+1)$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ en appliquant la règle du produit, puis factoriser le résultat.
+  \item Résoudre $f'(x) = 0$.
+  \item Dresser le tableau de variations de $f$.
+\end{enumerate}
+\end{exercice}

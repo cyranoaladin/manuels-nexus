@@ -1,0 +1,32 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-018","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-018","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, solve, sqrt, Rational
+% x = symbols('x')
+% f = (2*x + 3)/(x**2 - 1)
+% fp = diff(f, x)
+% assert simplify(fp - (-2*x**2 - 6*x - 2)/(x**2-1)**2) == 0
+% sols = solve(fp, x)
+% assert set(sols) == {Rational(-3,2) - sqrt(5)/2, Rational(-3,2) + sqrt(5)/2}
+% # sign on ]-inf, -1[: x=-2, numerator = -2*4-6*(-2)-2 = -8+12-2=2 > 0
+% num_at_m2 = -2*(-2)**2 - 6*(-2) - 2
+% assert num_at_m2 == 2
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-018}
+
+\textbf{Question 1.} On pose $u = 2x+3$, $v = x^2-1$, donc $u' = 2$, $v' = 2x$.
+\[
+f'(x) = \frac{2(x^2-1) - (2x+3)(2x)}{(x^2-1)^2} = \frac{2x^2-2 - 4x^2-6x}{(x^2-1)^2} = \frac{-2x^2-6x-2}{(x^2-1)^2} = \frac{-2(x^2+3x+1)}{(x^2-1)^2}.
+\]
+
+\textbf{Question 2.} $f'(x) = 0 \iff x^2+3x+1=0$. Discriminant : $\Delta = 9-4 = 5$.
+\[
+x = \frac{-3 \pm \sqrt{5}}{2}.
+\]
+On a $x_1 = \dfrac{-3-\sqrt{5}}{2} \approx -2{,}618$ et $x_2 = \dfrac{-3+\sqrt{5}}{2} \approx -0{,}382$.
+
+\textbf{Question 3.} Sur $]-\infty\,;\,-1[$, le dénominateur $(x^2-1)^2 > 0$. On évalue le numérateur $-2(x^2+3x+1)$ en $x = -2$ :
+\[
+-2(4-6+1) = -2(-1) = 2 > 0.
+\]
+Comme $x_1 \approx -2{,}618 < -1$, le numérateur change de signe en $x_1$ dans $]-\infty\,;\,-1[$. Ainsi $f'(x) > 0$ sur $]-\infty\,;\,x_1[$ et $f'(x) < 0$ sur $]x_1\,;\,-1[$.
+\end{corrige}

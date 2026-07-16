@@ -1,0 +1,67 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-029","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-029","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, sqrt, simplify
+% x, a = symbols('x a', real=True)
+% f = x**3 - 3*a*x
+% fp = diff(f, x)
+% assert fp == 3*x**2 - 3*a
+% racines_pos = solve(fp, x)
+% assert set(racines_pos) == {-sqrt(a), sqrt(a)}
+% f_mono = x**3
+% fp_mono = diff(f_mono, x)
+% assert fp_mono == 3*x**2
+% assert fp_mono.subs(x, 0) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-029}
+\textbf{1.} On dérive $f_a(x) = x^3 - 3ax$ :
+\[
+f_a'(x) = 3x^2 - 3a
+\]
+
+\textbf{2. Cas $a \leqslant 0$.}
+
+On a $-3a \geqslant 0$, donc $f_a'(x) = 3x^2 - 3a = 3x^2 + 3|a| \geqslant 0$ pour tout $x \in \mathbb{R}$.
+
+La dérivée est positive (ou nulle) sur $\mathbb{R}$ : d'après le théorème liant signe de la dérivée et sens de variation, $f_a$ est \textbf{croissante} sur $\mathbb{R}$.
+
+\textbf{3. Cas $a > 0$.}
+
+On résout $f_a'(x) = 0$, c'est-à-dire $3x^2 = 3a$, soit $x^2 = a$, d'où :
+\[
+x = -\sqrt{a} \quad \text{ou} \quad x = \sqrt{a}
+\]
+
+Signe de $f_a'(x) = 3(x - \sqrt{a})(x + \sqrt{a})$ :
+
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -\sqrt{a} & & \sqrt{a} & & +\infty \\
+\hline
+f_a'(x) & & + & 0 & - & 0 & + & \\
+\hline
+f_a & -\infty & \nearrow & 2a\sqrt{a} & \searrow & -2a\sqrt{a} & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+avec $f_a(-\sqrt{a}) = -a\sqrt{a} + 3a\sqrt{a} = 2a\sqrt{a}$ et $f_a(\sqrt{a}) = a\sqrt{a} - 3a\sqrt{a} = -2a\sqrt{a}$.
+
+\textbf{4. Cas particulier $a = 3$.}
+
+$\sqrt{3} \approx 1{,}73$. Les points stationnaires sont $x = -\sqrt{3}$ et $x = \sqrt{3}$.
+
+$f_3(-\sqrt{3}) = 2 \times 3\sqrt{3} = 6\sqrt{3}$ et $f_3(\sqrt{3}) = -6\sqrt{3}$.
+
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -\sqrt{3} & & \sqrt{3} & & +\infty \\
+\hline
+f_3'(x) & & + & 0 & - & 0 & + & \\
+\hline
+f_3 & -\infty & \nearrow & 6\sqrt{3} & \searrow & -6\sqrt{3} & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+\end{corrige}

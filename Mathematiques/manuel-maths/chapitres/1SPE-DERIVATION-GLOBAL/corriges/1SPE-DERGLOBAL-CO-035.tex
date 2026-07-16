@@ -1,0 +1,40 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-035","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-035","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% R = -3*x**2 + 60*x
+% Rp = diff(R, x)
+% assert Rp == -6*x + 60
+% x0 = solve(Rp, x)
+% assert x0 == [10]
+% assert Rp.subs(x, 5) > 0
+% assert Rp.subs(x, 15) < 0
+% assert R.subs(x, 10) == 300
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-035}
+\textbf{1.} On dérive $R(x) = -3x^2 + 60x$ :
+\[
+R'(x) = -6x + 60
+\]
+On résout $R'(x) = 0$ :
+\[
+-6x + 60 = 0 \iff x = 10
+\]
+Le prix $x_0 = 10\,\text{€}$ annule $R'$.
+
+\textbf{2.} Signe de $R'(x) = -6(x - 10)$ :
+\begin{itemize}
+\item Pour $x < 10$ : $R'(x) > 0$ (le chiffre d'affaires augmente avec le prix).
+\item Pour $x > 10$ : $R'(x) < 0$ (le chiffre d'affaires diminue si le prix est trop élevé).
+\end{itemize}
+La dérivée change de signe de $+$ à $-$ en $x_0 = 10$ : changement de signe vérifié.
+
+\textbf{3.} Puisque $R'$ passe de $+$ à $-$ en $x_0 = 10$, $R$ admet un \textbf{maximum} en $x = 10$.
+
+Le chiffre d'affaires maximal est :
+\[
+R(10) = -3 \times 100 + 600 = -300 + 600 = \boxed{300\,\text{€}}
+\]
+
+\textbf{4.} Le commerçant doit fixer le prix unitaire à $\boxed{10\,\text{€}}$ pour maximiser son chiffre d'affaires, qui atteint alors $300\,\text{€}$.
+\end{corrige}

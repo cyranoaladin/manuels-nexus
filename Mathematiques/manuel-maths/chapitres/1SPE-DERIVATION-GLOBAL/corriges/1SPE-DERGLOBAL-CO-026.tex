@@ -1,0 +1,50 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-026","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-026","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% B = -2*x**2 + 20*x - 18
+% Bp = diff(B, x)
+% assert Bp == -4*x + 20
+% racine = solve(Bp, x)
+% assert racine == [5]
+% assert Bp.subs(x, 3) > 0
+% assert Bp.subs(x, 7) < 0
+% assert B.subs(x, 5) == 32
+% assert B.subs(x, 1) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-026}
+\textbf{1.} On dérive $B(x) = -2x^2 + 20x - 18$ :
+\[
+B'(x) = -4x + 20
+\]
+On résout $B'(x) = 0$ :
+\[
+-4x + 20 = 0 \iff x = 5
+\]
+
+\textbf{2.} Signe de $B'(x) = -4(x - 5)$ :
+\begin{itemize}
+\item Pour $x < 5$ : $B'(x) > 0$, le bénéfice croît.
+\item Pour $x > 5$ : $B'(x) < 0$, le bénéfice décroît.
+\end{itemize}
+
+Tableau de variations de $B$ sur $[1\,;\,9]$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & 1 & & 5 & & 9 \\
+\hline
+B'(x) & & + & 0 & - & \\
+\hline
+B & 0 & \nearrow & 32 & \searrow & 0 \\
+\hline
+\end{array}
+\]
+
+\textbf{3.} Pour une production de $500$ unités ($x = 5$), le bénéfice est maximal :
+\[
+B(5) = -2 \times 25 + 100 - 18 = -50 + 100 - 18 = \boxed{32\,000\,\text{€}}
+\]
+
+\textbf{4.} $B(1) = -2 + 20 - 18 = 0$. Cela signifie qu'avec une production de $100$ unités, le bénéfice est nul : l'entreprise est à l'équilibre (ni bénéfice, ni perte). De même $B(9) = 0$.
+\end{corrige}

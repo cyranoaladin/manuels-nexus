@@ -1,0 +1,54 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-034","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-034","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = x**3 - 12*x + 5
+% fp = diff(f, x)
+% assert fp == 3*x**2 - 12
+% x0s = solve(fp, x)
+% assert set(x0s) == {-2, 2}
+% assert fp.subs(x, -3) > 0
+% assert fp.subs(x, 0) < 0
+% assert fp.subs(x, 3) > 0
+% assert f.subs(x, -2) == 21
+% assert f.subs(x, 2) == -11
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-034}
+\textbf{1.} On dérive $p(x) = x^3 - 12x + 5$ :
+\[
+p'(x) = 3x^2 - 12 = 3(x^2 - 4) = 3(x-2)(x+2)
+\]
+On résout $p'(x) = 0$ :
+\[
+3(x-2)(x+2) = 0 \iff x = -2 \text{ ou } x = 2
+\]
+
+\textbf{2.} Signe de $p'(x) = 3(x+2)(x-2)$ :
+\begin{itemize}
+\item $x < -2$ : $(x+2) < 0$, $(x-2) < 0$, donc $p'(x) > 0$ (croissant).
+\item $-2 < x < 2$ : $(x+2) > 0$, $(x-2) < 0$, donc $p'(x) < 0$ (décroissant).
+\item $x > 2$ : $(x+2) > 0$, $(x-2) > 0$, donc $p'(x) > 0$ (croissant).
+\end{itemize}
+
+Tableau de variations de $p$ :
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -2 & & 2 & & +\infty \\
+\hline
+p'(x) & & + & 0 & - & 0 & + & \\
+\hline
+p & -\infty & \nearrow & 21 & \searrow & -11 & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+\textbf{3.} $p$ admet un \textbf{maximum local} en $x = -2$ de valeur :
+\[
+p(-2) = -8 + 24 + 5 = \boxed{21}
+\]
+$p$ admet un \textbf{minimum local} en $x = 2$ de valeur :
+\[
+p(2) = 8 - 24 + 5 = \boxed{-11}
+\]
+\end{corrige}

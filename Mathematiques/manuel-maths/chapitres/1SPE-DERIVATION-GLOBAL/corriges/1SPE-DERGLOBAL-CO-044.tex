@@ -1,0 +1,56 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-044","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-044","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, cbrt
+% x = symbols('x', positive=True)
+% S = x**2 + 128/x
+% Sp = diff(S, x)
+% assert Sp == 2*x - 128/x**2
+% xopt = solve(Sp, x)
+% assert len(xopt) == 1
+% assert xopt[0] == 4
+% assert S.subs(x, 4) == 48
+% assert Sp.subs(x, 2) < 0
+% assert Sp.subs(x, 8) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-044}
+\textbf{1.} La contrainte de volume donne $x^2 h = 32$, d'où :
+\[
+h = \frac{32}{x^2} \qquad (x > 0).
+\]
+
+\textbf{2.} La surface totale comprend la base carrée ($x^2$) et les $4$ faces latérales
+(chacune de dimensions $x \times h$) :
+\[
+S(x) = x^2 + 4xh = x^2 + 4x \cdot \frac{32}{x^2} = x^2 + \frac{128}{x}.
+\]
+
+\textbf{3.} On dérive :
+\[
+S'(x) = 2x - \frac{128}{x^2}.
+\]
+On résout $S'(x) = 0$ :
+\[
+2x = \frac{128}{x^2} \iff 2x^3 = 128 \iff x^3 = 64 \iff x = 4.
+\]
+
+\textbf{4.} Signe de $S'(x)$ : $S'(x) < 0$ pour $0 < x < 4$ et $S'(x) > 0$ pour $x > 4$.
+
+Tableau de variations de $S$ sur $\left]0\,;\,+\infty\right[$ :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x     & 0 & & 4 & & +\infty \\
+\hline
+S'(x) &   & - & 0 & + & \\
+\hline
+S(x)  & +\infty & \searrow & 48 & \nearrow & +\infty \\
+\hline
+\end{array}
+\]
+
+$S'$ change de signe de $-$ à $+$ en $x = 4$ : la surface est minimale pour $x = \boxed{4}$ cm.
+
+La hauteur optimale est $h = \dfrac{32}{16} = \boxed{2}$ cm.
+
+La surface minimale vaut $S(4) = 16 + 32 = \boxed{48}$ cm².
+\end{corrige}

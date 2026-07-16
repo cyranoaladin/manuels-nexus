@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-034","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-034.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-034.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = x**3 - 12*x + 5
+% fp = diff(f, x)
+% assert fp == 3*x**2 - 12
+% x0s = solve(fp, x)
+% assert set(x0s) == {-2, 2}
+% assert fp.subs(x, -3) > 0
+% assert fp.subs(x, 0) < 0
+% assert fp.subs(x, 3) > 0
+% assert f.subs(x, -2) == 21
+% assert f.subs(x, 2) == -11
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-034}{1}{5}
+Soit $p(x) = x^3 - 12x + 5$ définie sur $\mathbb{R}$.
+\begin{enumerate}
+\item Calculer $p'(x)$ et résoudre $p'(x) = 0$.
+\item Établir le signe de $p'(x)$ et dresser le tableau de variations de $p$.
+\item Identifier le maximum local et le minimum local de $p$ et donner leurs valeurs.
+\end{enumerate}
+\end{exercice}

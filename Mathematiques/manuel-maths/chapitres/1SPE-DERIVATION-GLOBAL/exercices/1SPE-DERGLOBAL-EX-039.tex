@@ -1,0 +1,25 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-039","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":3,"competences":["calculer","raisonner","communiquer"],"duree_min":18,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-039.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-039.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, simplify
+% x, k = symbols('x k', real=True)
+% f = x**2 - 2*k*x + k
+% fp = diff(f, x)
+% assert fp == 2*x - 2*k
+% x0 = solve(fp, x)
+% assert x0 == [k]
+% f_at_x0 = f.subs(x, k)
+% assert simplify(f_at_x0 - (k - k**2)) == 0
+% assert f_at_x0.subs(k, 0) == 0
+% assert f_at_x0.subs(k, 1) == 0
+% assert f_at_x0.subs(k, Rational(1,2)) == Rational(1,4)
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-039}{3}{18}
+Soit $f_k(x) = x^2 - 2kx + k$ où $k$ est un réel paramètre.
+
+\begin{enumerate}
+\item Calculer $f_k'(x)$ et déterminer en fonction de $k$ l'abscisse du point stationnaire $x_0(k)$.
+\item Montrer que $f_k$ admet un minimum en $x_0(k)$ (préciser la nature du signe de $f_k'$).
+\item Calculer la valeur minimale $m(k) = f_k(x_0(k))$ en fonction de $k$.
+\item Étudier les variations de la fonction $m : k \mapsto m(k)$ pour $k \in \mathbb{R}$ (on calculera $m'(k)$). Pour quelle valeur de $k$ le minimum de $f_k$ est-il le plus grand possible ?
+\end{enumerate}
+\end{exercice}

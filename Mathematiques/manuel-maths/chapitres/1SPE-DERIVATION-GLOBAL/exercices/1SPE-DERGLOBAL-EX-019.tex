@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-019","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":3,"competences":["calculer","raisonner","prouver"],"duree_min":18,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-019.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-019.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, factor, expand
+% x = symbols('x')
+% f = (x**2 - 1)**2
+% fp = diff(f, x)
+% assert expand(fp) == 4*x**3 - 4*x
+% assert factor(fp) == 4*x*(x - 1)*(x + 1)
+% # Verification par regle du produit: f = u*u, u=x^2-1, u'=2x
+% u = x**2 - 1
+% up = 2*x
+% assert expand(up*u + u*up) == expand(fp)
+% from sympy import solve
+% sols = solve(fp, x)
+% assert set(sols) == {-1, 0, 1}
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-019}{3}{18}
+Soit $f(x) = (x^2-1)^2$ définie sur $\mathbb{R}$.
+
+\begin{enumerate}
+  \item Calculer $f'(x)$ en écrivant $f(x) = (x^2-1)(x^2-1)$ et en appliquant la règle du produit.
+  \item Factoriser complètement $f'(x)$.
+  \item En déduire le tableau de variations de $f$ sur $\mathbb{R}$.
+  \item Un élève affirme que $f$ est croissante sur $[-1\,;\,1]$ car la parabole $x^2-1$ est positive sur cet intervalle. Réfuter cette affirmation en vous appuyant sur le tableau de variations.
+\end{enumerate}
+\end{exercice}
