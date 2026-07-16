@@ -1,0 +1,53 @@
+% META: {"id":"1SPE-DERLOCAL-CO-049","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-049","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% a, x = symbols('a x')
+% # Tangente : y = 2a(x-a) + a^2 + 1 = 2a*x - 2a^2 + a^2 + 1 = 2a*x - a^2 + 1
+% tang = 2*a*x - a**2 + 1
+% # Passe par O : x=0, y=0 => -a^2 + 1 = 0 => a = +-1
+% assert tang.subs(x, 0) == -a**2 + 1
+% # a=1 : T = 2x - 1 + 1 = 2x
+% assert tang.subs(a, 1) == 2*x
+% # a=-1 : T = -2x - 1 + 1 = -2x
+% assert tang.subs(a, -1) == -2*x
+% # Points de tangence
+% assert 1**2 + 1 == 2
+% assert (-1)**2 + 1 == 2
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-049}
+
+\textbf{Question 1.} L'équation de la tangente au point d'abscisse $a$ est :
+\[
+T_a : \quad y = f'(a)(x - a) + f(a) = 2a(x - a) + a^2 + 1.
+\]
+En développant : $y = 2ax - 2a^2 + a^2 + 1$, soit $\boxed{T_a : \; y = 2ax - a^2 + 1}$.
+
+\textbf{Question 2.} La tangente $T_a$ passe par $O(0\,;\,0)$ si et seulement si :
+\[
+0 = 2a \times 0 - a^2 + 1 = -a^2 + 1.
+\]
+On résout $a^2 = 1$, d'où $\boxed{a = 1 \text{ ou } a = -1}$.
+
+\textbf{Question 3.}
+\begin{itemize}
+  \item Pour $a = 1$ : $T_1 : \; y = 2 \times 1 \times x - 1 + 1$, soit $\boxed{T_1 : \; y = 2x}$.
+  \item Pour $a = -1$ : $T_{-1} : \; y = 2 \times (-1) \times x - 1 + 1$, soit $\boxed{T_{-1} : \; y = -2x}$.
+\end{itemize}
+
+\textbf{Question 4.} Les points de tangence sont les points de la courbe d'abscisse $a = 1$ et $a = -1$ :
+\begin{itemize}
+  \item $f(1) = 1 + 1 = 2$ : le point de tangence est bien $(1\,;\,2)$ ;
+  \item $f(-1) = 1 + 1 = 2$ : le point de tangence est bien $(-1\,;\,2)$.
+\end{itemize}
+
+\textbf{Question 5.} Étudions la position relative de la courbe et de la tangente $T_1$. On calcule :
+\[
+f(x) - (2x) = x^2 + 1 - 2x = (x - 1)^2 \geqslant 0.
+\]
+Ce carré est toujours positif ou nul, donc la courbe est \emph{au-dessus} de $T_1$ pour tout $x$, avec égalité uniquement en $x = 1$.
+
+De même : $f(x) - (-2x) = x^2 + 2x + 1 = (x + 1)^2 \geqslant 0$.
+
+La parabole est au-dessus de chacune des deux tangentes. Cela traduit la convexité de la fonction $f$.
+
+\end{corrige}

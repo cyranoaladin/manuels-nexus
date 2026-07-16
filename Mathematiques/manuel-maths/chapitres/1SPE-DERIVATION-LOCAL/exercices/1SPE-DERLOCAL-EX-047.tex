@@ -1,0 +1,32 @@
+% META: {"id":"1SPE-DERLOCAL-EX-047","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C1","1SPE-DERIVATION-LOCAL-C2","1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C1","C2","C4"],"methodes":["M1","M2","M4"],"parcours":3,"competences":["raisonner","chercher","communiquer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-047.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-047.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% a, h = symbols('a h')
+% f = a**2 - 4*a + 5
+% f_ah = (a+h)**2 - 4*(a+h) + 5
+% taux = simplify((f_ah - f) / h)
+% assert taux == 2*a - 4 + h
+% fprime = 2*a - 4
+% assert fprime.subs(a, 2) == 0
+% assert f.subs(a, 2) == 1
+% assert fprime.subs(a, 1) == -2
+% assert f.subs(a, 1) == 2
+% # Tangente en a=0 : y = f'(0)(x-0) + f(0) = -4x + 5
+% assert fprime.subs(a, 0) == -4
+% assert f.subs(a, 0) == 5
+% # Croise l'axe des abscisses en x = 5/4
+% assert Rational(5, 4) == Rational(5, 4)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-047}{3}{20}
+\textbf{Étude complète de la tangente.}
+
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2 - 4x + 5$.
+
+\begin{enumerate}
+  \item Calculer le taux de variation de $f$ entre $a$ et $a + h$ (avec $h \neq 0$). Simplifier le résultat.
+  \item En déduire $f'(a)$ pour tout réel $a$.
+  \item Pour quelle valeur de $a$ la tangente à la courbe de $f$ est-elle horizontale ? Calculer $f(a)$ pour cette valeur.
+  \item Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $0$.
+  \item La tangente au point d'abscisse $0$ coupe-t-elle l'axe des abscisses ? Si oui, déterminer les coordonnées du point d'intersection.
+\end{enumerate}
+\end{exercice}

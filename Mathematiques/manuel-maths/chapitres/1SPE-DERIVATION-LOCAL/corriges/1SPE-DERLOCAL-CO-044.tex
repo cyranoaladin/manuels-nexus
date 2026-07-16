@@ -1,0 +1,42 @@
+% META: {"id":"1SPE-DERLOCAL-CO-044","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-044","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, factor, expand
+% x = symbols('x')
+% f = x**3 - 3*x + 1
+% assert f.subs(x, 1) == -1
+% fp = f.diff(x)
+% assert fp.subs(x, 1) == 0
+% diff = f - (-1)
+% assert factor(diff) == (x - 1)**2 * (x + 2)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-044}
+\textbf{1.} On calcule $f(1)$ :
+\[
+f(1) = 1^3 - 3 \times 1 + 1 = 1 - 3 + 1 = -1
+\]
+On calcule $f'(1)$ :
+\[
+f'(1) = 3 \times 1^2 - 3 = 3 - 3 = 0
+\]
+
+\textbf{2.} La tangente $T$ au point d'abscisse $1$ a pour équation :
+\[
+T : y = f'(1)(x - 1) + f(1) = 0 \times (x - 1) + (-1)
+\]
+\[
+\boxed{T : y = -1}
+\]
+
+\textbf{3.} On calcule $f(x) - T(x)$ où $T(x) = -1$ :
+\[
+f(x) - (-1) = x^3 - 3x + 1 + 1 = x^3 - 3x + 2
+\]
+On remarque que $x = 1$ est racine : $1 - 3 + 2 = 0$. On factorise par $(x - 1)$ :
+\[
+x^3 - 3x + 2 = (x - 1)(x^2 + x - 2) = (x - 1)(x - 1)(x + 2) = (x-1)^2(x+2)
+\]
+
+\textbf{4.} Au voisinage de $x = 1$, le facteur $(x-1)^2$ est toujours positif ou nul, et le facteur $(x+2)$ est strictement positif (car $x$ est proche de $1$, donc $x + 2 > 0$).
+
+Ainsi $f(x) - T(x) = (x-1)^2(x+2) \geqslant 0$ au voisinage de $x = 1$, ce qui signifie que la courbe est \textbf{au-dessus} de sa tangente au voisinage de $x = 1$.
+\end{corrige}

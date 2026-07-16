@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-DERLOCAL-EX-040","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-040.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-040.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% t = symbols('t')
+% T = 100 - 2*t**2
+% assert T.subs(t, 0) == 100
+% assert T.subs(t, 5) == 50
+% taux = Rational(T.subs(t, 5) - T.subs(t, 0), 5 - 0)
+% assert taux == -10
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-040}{2}{12}
+On modélise la température d'un four, en degrés Celsius, après extinction par la fonction :
+\[
+T(t) = 100 - 2t^2
+\]
+où $t$ est le temps écoulé en minutes, avec $0 \leqslant t \leqslant 7$.
+\begin{enumerate}
+\item Calculer $T(0)$ et $T(5)$.
+\item Calculer le taux de variation de $T$ entre $t = 0$ et $t = 5$.
+\item Interpréter le signe de ce taux de variation dans le contexte du problème.
+\end{enumerate}
+\end{exercice}

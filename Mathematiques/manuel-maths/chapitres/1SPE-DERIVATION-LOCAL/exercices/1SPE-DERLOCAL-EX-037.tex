@@ -1,0 +1,14 @@
+% META: {"id":"1SPE-DERLOCAL-EX-037","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C4"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-037.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-037.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% f = x**2
+% assert f.subs(x, 3) == 9
+% fp = 2*x
+% assert fp.subs(x, 3) == 6
+% tangente = 6*(x - 3) + 9
+% assert tangente.expand() == 6*x - 9
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-037}{1}{5}
+Soit $f(x)=x^2$. Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $3$.
+\end{exercice}

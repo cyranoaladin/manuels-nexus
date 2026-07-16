@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-DERLOCAL-EX-039","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-039.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-039.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols
+% q = symbols('q')
+% C = Rational(1,2)*q**2 + 3*q + 100
+% assert C.subs(q, 10) == 180
+% assert C.subs(q, 12) == 208
+% taux = Rational(C.subs(q, 12) - C.subs(q, 10), 12 - 10)
+% assert taux == 14
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-039}{2}{12}
+Une entreprise fabrique $q$ pièces par jour. Le coût de production, en euros, est modélisé par la fonction :
+\[
+C(q) = 0{,}5\,q^2 + 3q + 100
+\]
+\begin{enumerate}
+\item Calculer $C(10)$ et $C(12)$.
+\item Calculer le taux de variation de $C$ entre $q = 10$ et $q = 12$.
+\item Interpréter ce résultat en termes de coût marginal moyen.
+\end{enumerate}
+\end{exercice}

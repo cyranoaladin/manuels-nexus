@@ -1,0 +1,37 @@
+% META: {"id":"1SPE-DERLOCAL-CO-041","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-041","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, limit, expand
+% t, h = symbols('t h')
+% P = 500 + 100*t + 5*t**2
+% assert P.subs(t, 4) == 980
+% P4h = P.subs(t, 4+h)
+% taux = expand((P4h - 980) / h)
+% assert taux == 140 + 5*h
+% assert limit(taux, h, 0) == 140
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-041}
+\textbf{1.} On calcule $P(4)$ :
+\[
+P(4) = 500 + 100 \times 4 + 5 \times 4^2 = 500 + 400 + 80 = 980
+\]
+On exprime $P(4+h)$ :
+\[
+P(4+h) = 500 + 100(4+h) + 5(4+h)^2 = 500 + 400 + 100h + 5(16 + 8h + h^2)
+\]
+\[
+P(4+h) = 980 + 100h + 40h + 5h^2 = 980 + 140h + 5h^2
+\]
+
+\textbf{2.} Le taux de variation est :
+\[
+\frac{P(4+h) - P(4)}{h} = \frac{980 + 140h + 5h^2 - 980}{h} = \frac{140h + 5h^2}{h} = \frac{h(140 + 5h)}{h} = 140 + 5h
+\]
+
+\textbf{3.} Lorsque $h$ tend vers $0$ :
+\[
+\lim_{h \to 0} (140 + 5h) = 140
+\]
+Ce nombre est le nombre dérivé de $P$ en $t = 4$, c'est-à-dire $P'(4) = 140$.
+
+\textbf{4.} En 2014 ($t = 4$), la population de la ville croît à un rythme instantané de $\boxed{140}$ milliers d'habitants par an, soit 140\,000 habitants par an. Ce nombre dérivé mesure la vitesse de croissance de la population à cet instant précis.
+\end{corrige}

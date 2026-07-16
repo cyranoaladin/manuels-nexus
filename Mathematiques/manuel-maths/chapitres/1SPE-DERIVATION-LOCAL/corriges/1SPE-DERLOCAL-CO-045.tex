@@ -1,0 +1,33 @@
+% META: {"id":"1SPE-DERLOCAL-CO-045","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-045","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% x = symbols('x')
+% f = (1 + x)**5
+% assert f.subs(x, 0) == 1
+% fp = f.diff(x)
+% assert fp.subs(x, 0) == 5
+% approx = 1 + 5*Rational(2, 100)
+% assert approx == Rational(11, 10)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-045}
+\textbf{1.} On calcule :
+\[
+f(0) = (1 + 0)^5 = 1
+\]
+On admet $f'(x) = 5(1+x)^4$, donc :
+\[
+f'(0) = 5 \times (1+0)^4 = 5
+\]
+
+\textbf{2.} L'approximation affine de $f$ au voisinage de $x = 0$ s'écrit :
+\[
+f(x) \approx f(0) + f'(0) \cdot x = 1 + 5x
+\]
+
+\textbf{3.} On remarque que $(1{,}02)^5 = f(0{,}02)$. En appliquant l'approximation affine avec $x = 0{,}02$ :
+\[
+f(0{,}02) \approx 1 + 5 \times 0{,}02 = 1 + 0{,}1 = \boxed{1{,}1}
+\]
+
+\textbf{4.} La valeur exacte est $(1{,}02)^5 \approx 1{,}104\,1$. L'approximation affine donne $1{,}1$, soit une erreur d'environ $0{,}004$, c'est-à-dire moins de $0{,}4\,\%$ en erreur relative. L'approximation est très précise car $x = 0{,}02$ est proche de $0$.
+\end{corrige}

@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-DERLOCAL-CO-043","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-043","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% f = -(x - 2)**2 + 5
+% fp = f.diff(x)
+% assert fp.subs(x, 0) == 4
+% assert fp.subs(x, 2) == 0
+% assert fp.subs(x, 4) == -4
+% assert f.subs(x, 2) == 5
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-043}
+\textbf{1.} On calcule les nombres dérivés :
+\[
+f'(0) = -2 \times 0 + 4 = 4 \qquad f'(2) = -2 \times 2 + 4 = 0 \qquad f'(4) = -2 \times 4 + 4 = -4
+\]
+
+\textbf{2.} Le nombre $f'(2) = 0$ signifie que la tangente à la courbe $\mathcal{C}_f$ au point $B(2\,;\,5)$ est horizontale. Le coefficient directeur de cette tangente est nul.
+
+\textbf{3.} L'équation de la tangente à $\mathcal{C}_f$ au point $B(2\,;\,5)$ est :
+\[
+T : y = f'(2)(x - 2) + f(2) = 0 \times (x - 2) + 5
+\]
+\[
+\boxed{T : y = 5}
+\]
+
+\textbf{4.} On observe que $f'(x) = -2x + 4$ est positive pour $x < 2$ (par exemple $f'(0) = 4 > 0$) et négative pour $x > 2$ (par exemple $f'(4) = -4 < 0$). La fonction $f$ est donc croissante avant $x = 2$ et décroissante après $x = 2$. Le point $B(2\,;\,5)$ correspond bien à un maximum local de $f$, de valeur $f(2) = 5$.
+\end{corrige}

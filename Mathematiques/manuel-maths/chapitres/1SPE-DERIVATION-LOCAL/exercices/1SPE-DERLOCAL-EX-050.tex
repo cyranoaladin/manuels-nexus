@@ -1,0 +1,27 @@
+% META: {"id":"1SPE-DERLOCAL-EX-050","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C2","1SPE-DERIVATION-LOCAL-C3","1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C2","C3","C4"],"methodes":["M2","M3","M4"],"parcours":3,"competences":["raisonner","chercher","communiquer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-050.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-050.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% h = symbols('h')
+% # f(x) = 1/x, f(2) = 1/2
+% # taux = (1/(2+h) - 1/2) / h = (2 - (2+h)) / (2*(2+h)*h) = -h / (2*(2+h)*h) = -1/(2*(2+h))
+% taux = Rational(-1, 1) / (2*(2+h))
+% assert simplify(taux.subs(h, 0)) == Rational(-1, 4)
+% # f'(2) = -1/4, not -1/2 as Karim claims
+% assert Rational(-1, 4) != Rational(-1, 2)
+% # Tangente en 2 : y = -1/4 (x - 2) + 1/2 = -x/4 + 1/2 + 1/2 = -x/4 + 1
+% # y = -x/4 + 1
+% assert Rational(-1, 4) * 2 + 1 == Rational(1, 2)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-050}{3}{20}
+\textbf{Analyse d'erreur.}
+
+Karim affirme : \og Si $f(x) = \dfrac{1}{x}$, alors $f'(2) = -\dfrac{1}{2}$ \fg.
+
+\begin{enumerate}
+  \item Calculer le taux de variation $\dfrac{f(2+h) - f(2)}{h}$ pour $h \neq 0$ et simplifier.
+  \item Karim s'est-il trompé ? Déterminer la valeur correcte de $f'(2)$.
+  \item Écrire l'équation de la tangente à la courbe de $f$ au point d'abscisse $2$.
+  \item Tracer la courbe de $f$ et la tangente sur un même repère pour $x \in [0{,}5\,;\,5]$.
+  \item Conjecturer graphiquement si la courbe est au-dessus ou en dessous de la tangente au voisinage de $x = 2$. Justifier.
+\end{enumerate}
+\end{exercice}

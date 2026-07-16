@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-DERLOCAL-CO-031","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-031","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% x = symbols('x')
+% f = 3*x - x**2
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 2) == 2
+% taux = Rational(f.subs(x, 2) - f.subs(x, 0), 2 - 0)
+% assert taux == 1
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-031}
+On calcule les images de $0$ et de $2$ par $f$ :
+\[
+f(0) = 3 \times 0 - 0^2 = 0
+\]
+\[
+f(2) = 3 \times 2 - 2^2 = 6 - 4 = 2
+\]
+
+Le taux de variation de $f$ entre $0$ et $2$ est :
+\[
+\tau = \frac{f(2) - f(0)}{2 - 0} = \frac{2 - 0}{2} = 1
+\]
+
+Le taux de variation de $f$ entre $0$ et $2$ vaut $\boxed{1}$.
+\end{corrige}

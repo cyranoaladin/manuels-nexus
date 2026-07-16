@@ -1,0 +1,31 @@
+% META: {"id":"1SPE-DERLOCAL-EX-048","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C2","1SPE-DERIVATION-LOCAL-C3","1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C2","C3","C5"],"methodes":["M2","M3","M5"],"parcours":3,"competences":["raisonner","chercher","communiquer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-048.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-048.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, Rational, symbols
+% x = symbols('x')
+% f3 = sqrt(3 + 1)
+% assert f3 == 2
+% # f'(x) = 1/(2*sqrt(x+1)), f'(3) = 1/(2*sqrt(4)) = 1/4
+% fprime3 = Rational(1, 4)
+% assert fprime3 == Rational(1, 4)
+% # Tangente : y = (1/4)(x - 3) + 2 = x/4 + 5/4
+% # Approx sqrt(3.96) = f(2.96) ~ (2.96 + 5)/4 = 7.96/4 = 1.99
+% approx1 = Rational(796, 400)
+% assert approx1 == Rational(199, 100)
+% # Approx sqrt(4.04) = f(3.04) ~ (3.04 + 5)/4 = 8.04/4 = 2.01
+% approx2 = Rational(804, 400)
+% assert approx2 == Rational(201, 100)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-048}{3}{20}
+\textbf{Approximation et erreur graphique.}
+
+Soit $f$ la fonction définie sur $[-1\,;+\infty[$ par $f(x) = \sqrt{x + 1}$. On note $A$ le point de la courbe de $f$ d'abscisse $3$.
+
+\begin{enumerate}
+  \item Calculer $f(3)$ et montrer que $f'(3) = \dfrac{1}{4}$.
+
+  \emph{Indication : calculer $\dfrac{f(3+h) - f(3)}{h}$ en multipliant numérateur et dénominateur par le conjugué.}
+  \item Écrire l'équation de la tangente à la courbe de $f$ au point $A$.
+  \item En utilisant cette tangente, donner une valeur approchée de $\sqrt{3{,}96}$ et de $\sqrt{4{,}04}$.
+  \item Comparer avec les valeurs exactes (calculatrice autorisée). L'approximation est-elle meilleure lorsque $h > 0$ ou lorsque $h < 0$ ?
+\end{enumerate}
+\end{exercice}

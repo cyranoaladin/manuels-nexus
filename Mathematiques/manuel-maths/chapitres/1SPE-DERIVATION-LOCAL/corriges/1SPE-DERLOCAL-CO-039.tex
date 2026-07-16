@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-DERLOCAL-CO-039","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-039","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols
+% q = symbols('q')
+% C = Rational(1,2)*q**2 + 3*q + 100
+% assert C.subs(q, 10) == 180
+% assert C.subs(q, 12) == 208
+% taux = Rational(C.subs(q, 12) - C.subs(q, 10), 12 - 10)
+% assert taux == 14
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-039}
+\textbf{1.} On calcule les coûts de production pour $q = 10$ et $q = 12$ :
+\[
+C(10) = 0{,}5 \times 10^2 + 3 \times 10 + 100 = 50 + 30 + 100 = 180
+\]
+\[
+C(12) = 0{,}5 \times 12^2 + 3 \times 12 + 100 = 72 + 36 + 100 = 208
+\]
+
+\textbf{2.} Le taux de variation de $C$ entre $q = 10$ et $q = 12$ est :
+\[
+\tau = \frac{C(12) - C(10)}{12 - 10} = \frac{208 - 180}{2} = \frac{28}{2} = 14
+\]
+
+\textbf{3.} Ce taux de variation représente le coût marginal moyen entre la 10\ieme{} et la 12\ieme{} pièce produite. En moyenne, chaque pièce supplémentaire coûte $\boxed{14}$ euros lorsque la production passe de 10 à 12 pièces par jour.
+\end{corrige}

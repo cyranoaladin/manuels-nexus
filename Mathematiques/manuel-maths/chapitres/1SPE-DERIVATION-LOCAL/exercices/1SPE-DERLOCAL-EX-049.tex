@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-DERLOCAL-EX-049","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C1","1SPE-DERIVATION-LOCAL-C4","1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C1","C4","C5"],"methodes":["M1","M4","M5"],"parcours":3,"competences":["raisonner","chercher","communiquer"],"duree_min":25,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-049.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-049.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% a, x = symbols('a x')
+% # f(x) = x^2 + 1, f'(x) = 2x
+% # Tangente en a : y = 2a(x - a) + a^2 + 1 = 2a*x - a^2 + 1
+% # Passe par O(0,0) : 0 = -a^2 + 1, donc a^2 = 1, a = 1 ou a = -1
+% assert (-1)**2 == 1
+% assert 1**2 == 1
+% # T_1 : y = 2*1*x - 1 + 1 = 2x
+% # T_{-1} : y = 2*(-1)*x - 1 + 1 = -2x
+% # Points de tangence : (1, f(1)) = (1, 2) et (-1, f(-1)) = (-1, 2)
+% assert 1**2 + 1 == 2
+% assert (-1)**2 + 1 == 2
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-049}{3}{25}
+\textbf{Tangentes passant par l'origine.}
+
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2 + 1$. On admet que $f'(a) = 2a$ pour tout réel $a$.
+
+\begin{enumerate}
+  \item Écrire l'équation de la tangente $T_a$ à la courbe de $f$ au point d'abscisse $a$.
+  \item À quelle condition sur $a$ la tangente $T_a$ passe-t-elle par l'origine $O(0\,;\,0)$ ?
+  \item Écrire les équations des deux tangentes à la courbe de $f$ passant par $O$.
+  \item Vérifier par le calcul que les points de tangence sont $(1\,;\,2)$ et $(-1\,;\,2)$.
+  \item Interpréter géométriquement : la parabole est-elle au-dessus ou en dessous de chacune de ces tangentes au voisinage du point de tangence ? Justifier.
+\end{enumerate}
+\end{exercice}

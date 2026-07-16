@@ -1,0 +1,44 @@
+% META: {"id":"1SPE-DERLOCAL-CO-050","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-050","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% h, x = symbols('h x')
+% # taux = -1/(2(2+h))
+% taux = -1 / (2*(2+h))
+% assert simplify(taux.subs(h, 0)) == Rational(-1, 4)
+% # Tangente : y = -x/4 + 1
+% tang = Rational(-1, 4)*x + 1
+% assert tang.subs(x, 2) == Rational(1, 2)
+% # Position relative : f(x) - tang = 1/x + x/4 - 1
+% # = (x^2 - 4x + 4)/(4x) = (x-2)^2/(4x) >= 0 pour x > 0
+% pos = (x - 2)**2 / (4*x)
+% assert simplify(1/x - tang - pos) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-050}
+
+\textbf{Question 1.} On calcule pour $h \neq 0$ :
+\[
+\frac{f(2+h) - f(2)}{h} = \frac{\dfrac{1}{2+h} - \dfrac{1}{2}}{h} = \frac{2 - (2+h)}{2(2+h) \cdot h} = \frac{-h}{2(2+h)h} = \boxed{\frac{-1}{2(2+h)}}.
+\]
+
+\textbf{Question 2.} Lorsque $h \to 0$ :
+\[
+\frac{-1}{2(2+h)} \to \frac{-1}{2 \times 2} = -\frac{1}{4}.
+\]
+Karim s'est trompé : $\boxed{f'(2) = -\dfrac{1}{4}}$, et non $-\dfrac{1}{2}$. Il a vraisemblablement confondu avec $-\dfrac{1}{2}$ en oubliant de mettre $2$ au carré au dénominateur (la formule est $f'(a) = -\dfrac{1}{a^2}$).
+
+\textbf{Question 3.} L'équation de la tangente au point d'abscisse $2$ est :
+\[
+y = f'(2)(x - 2) + f(2) = -\frac{1}{4}(x - 2) + \frac{1}{2} = -\frac{x}{4} + \frac{1}{2} + \frac{1}{2}, \quad \text{soit } \boxed{y = -\frac{x}{4} + 1}.
+\]
+
+\textbf{Question 4.} \emph{Le graphique est à réaliser par l'élève.} On trace l'hyperbole $y = \dfrac{1}{x}$ et la droite $y = -\dfrac{x}{4} + 1$ sur $[0{,}5\,;\,5]$. La droite est tangente à la courbe en $(2\,;\,0{,}5)$.
+
+\textbf{Question 5.} On observe graphiquement que la courbe est \emph{au-dessus} de la tangente au voisinage de $x = 2$.
+
+Pour le justifier, on calcule :
+\[
+f(x) - \left(-\frac{x}{4} + 1\right) = \frac{1}{x} + \frac{x}{4} - 1 = \frac{4 + x^2 - 4x}{4x} = \frac{(x-2)^2}{4x}.
+\]
+Pour $x > 0$, $(x-2)^2 \geqslant 0$ et $4x > 0$, donc $f(x) \geqslant -\dfrac{x}{4} + 1$ avec égalité en $x = 2$ uniquement. La courbe de $\dfrac{1}{x}$ est bien au-dessus de sa tangente : la fonction est convexe sur $]0\,;+\infty[$.
+
+\end{corrige}

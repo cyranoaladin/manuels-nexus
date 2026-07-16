@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-DERLOCAL-EX-046","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C5"],"methodes":["M1"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-046.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-046.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, pi, Rational, expand
+% r = symbols('r')
+% A = pi * r**2
+% Ap = A.diff(r)
+% assert A.subs(r, 10) == 100*pi
+% assert Ap.subs(r, 10) == 20*pi
+% approx = 100*pi + 20*pi * Rational(1,10)
+% assert approx == 102*pi
+% exact = pi * Rational(101, 10)**2
+% assert exact == Rational(10201, 100)*pi
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-046}{2}{15}
+L'aire d'un disque de rayon $r$ (en cm) est $A(r) = \pi r^2$ (en cm$^2$).
+
+On admet que $A'(r) = 2\pi r$.
+\begin{enumerate}
+\item Calculer $A(10)$ et $A'(10)$.
+\item En utilisant l'approximation affine, donner une valeur approchée de $A(10{,}1)$.
+\item Calculer la valeur exacte de $A(10{,}1)$ et en déduire l'erreur commise.
+\item Un technicien mesure le rayon d'un disque avec une erreur de $1\,\%$. Quelle est l'erreur relative approximative sur l'aire ? Interpréter.
+\end{enumerate}
+\end{exercice}

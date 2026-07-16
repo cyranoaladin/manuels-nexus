@@ -1,0 +1,10 @@
+% META: {"id":"1SPE-DERLOCAL-EX-033","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C2"],"capacites_codes":["C2"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-033.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-033.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, limit, Rational
+% h = symbols('h')
+% taux = ((1 + h)**3 - 1) / h
+% assert limit(taux, h, 0) == 3
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-033}{1}{8}
+Soit $f(x)=x^3$. Calculer $f'(1)$ en calculant le taux de variation $\dfrac{f(1+h)-f(1)}{h}$, puis en faisant tendre $h$ vers $0$.
+\end{exercice}

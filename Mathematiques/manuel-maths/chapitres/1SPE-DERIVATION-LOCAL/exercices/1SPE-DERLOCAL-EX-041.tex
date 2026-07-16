@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERLOCAL-EX-041","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C2"],"capacites_codes":["C2"],"methodes":["M1"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-041.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-041.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, limit, expand, simplify
+% t, h = symbols('t h')
+% P = 500 + 100*t + 5*t**2
+% assert P.subs(t, 4) == 980
+% taux = (P.subs(t, 4+h) - P.subs(t, 4)) / h
+% taux_expanded = expand(taux)
+% assert limit(taux, h, 0) == 140
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-041}{2}{15}
+La population d'une ville est modélisée par la fonction :
+\[
+P(t) = 500 + 100t + 5t^2
+\]
+où $t$ est le nombre d'années écoulées depuis 2010 et $P(t)$ est exprimé en milliers d'habitants.
+\begin{enumerate}
+\item Calculer $P(4)$ et exprimer $P(4+h)$ en fonction de $h$.
+\item En déduire le taux de variation $\dfrac{P(4+h) - P(4)}{h}$ et le simplifier.
+\item Calculer la limite de ce taux lorsque $h$ tend vers $0$. Que représente ce nombre ?
+\item Interpréter le résultat dans le contexte démographique.
+\end{enumerate}
+\end{exercice}

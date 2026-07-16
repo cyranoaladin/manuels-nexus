@@ -1,0 +1,48 @@
+% META: {"id":"1SPE-DERLOCAL-CO-046","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-046","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, pi, Rational
+% r = symbols('r')
+% A = pi * r**2
+% Ap = A.diff(r)
+% assert A.subs(r, 10) == 100*pi
+% assert Ap.subs(r, 10) == 20*pi
+% approx = 100*pi + 20*pi * Rational(1, 10)
+% assert approx == 102*pi
+% exact = pi * Rational(101, 10)**2
+% assert exact == Rational(10201, 100)*pi
+% erreur = exact - approx
+% assert erreur == Rational(1, 100)*pi
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-046}
+\textbf{1.} On calcule :
+\[
+A(10) = \pi \times 10^2 = 100\pi \quad \text{cm}^2
+\]
+\[
+A'(10) = 2\pi \times 10 = 20\pi \quad \text{cm}^2/\text{cm}
+\]
+
+\textbf{2.} L'approximation affine de $A$ au voisinage de $r = 10$ donne :
+\[
+A(10{,}1) \approx A(10) + A'(10) \times (10{,}1 - 10) = 100\pi + 20\pi \times 0{,}1 = 100\pi + 2\pi = 102\pi
+\]
+
+\textbf{3.} La valeur exacte est :
+\[
+A(10{,}1) = \pi \times (10{,}1)^2 = 102{,}01\,\pi
+\]
+L'erreur commise est :
+\[
+102{,}01\,\pi - 102\pi = 0{,}01\,\pi \approx 0{,}031 \quad \text{cm}^2
+\]
+
+\textbf{4.} Si le rayon est mesuré avec une erreur relative de $1\,\%$, on a $\Delta r = 0{,}01 \times r$. L'erreur sur l'aire est approximativement :
+\[
+\Delta A \approx A'(r) \times \Delta r = 2\pi r \times 0{,}01\,r = 0{,}02\,\pi r^2
+\]
+L'erreur relative sur l'aire est donc :
+\[
+\frac{\Delta A}{A} \approx \frac{0{,}02\,\pi r^2}{\pi r^2} = 0{,}02 = \boxed{2\,\%}
+\]
+Une erreur de $1\,\%$ sur le rayon entraîne une erreur d'environ $2\,\%$ sur l'aire : l'erreur relative est doublée.
+\end{corrige}

@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERLOCAL-EX-044","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C4"],"methodes":["M1"],"parcours":2,"competences":["calculer","raisonner"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-044.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-044.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, factor, expand
+% x = symbols('x')
+% f = x**3 - 3*x + 1
+% assert f.subs(x, 1) == -1
+% fp = f.diff(x)
+% assert fp.subs(x, 1) == 0
+% T_y = -1
+% diff = f - T_y
+% assert factor(diff) == (x - 1)**2 * (x + 2)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-044}{2}{15}
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^3 - 3x + 1$.
+
+On admet que $f$ est dérivable sur $\mathbb{R}$ et que $f'(x) = 3x^2 - 3$.
+\begin{enumerate}
+\item Vérifier que $f(1) = -1$ et calculer $f'(1)$.
+\item Écrire l'équation de la tangente $T$ à la courbe de $f$ au point d'abscisse $1$.
+\item Calculer $f(x) - T(x)$ et factoriser l'expression obtenue.
+\item En déduire la position de la courbe par rapport à sa tangente au voisinage de $x = 1$.
+\end{enumerate}
+\end{exercice}

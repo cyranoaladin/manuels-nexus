@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-DERLOCAL-EX-043","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C3"],"capacites_codes":["C3"],"methodes":["M1"],"parcours":2,"competences":["calculer","representer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-043.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-043.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% f = -(x - 2)**2 + 5
+% fp = f.diff(x)
+% assert f.subs(x, 0) == 1
+% assert fp.subs(x, 0) == 4
+% assert f.subs(x, 2) == 5
+% assert fp.subs(x, 2) == 0
+% assert f.subs(x, 4) == 1
+% assert fp.subs(x, 4) == -4
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-043}{2}{15}
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = -(x-2)^2 + 5$.
+
+On admet que $f$ est dérivable sur $\mathbb{R}$ et que $f'(x) = -2x + 4$.
+
+La courbe $\mathcal{C}_f$ passe par les points $A(0\,;\,1)$, $B(2\,;\,5)$ et $C(4\,;\,1)$.
+\begin{enumerate}
+\item Calculer $f'(0)$, $f'(2)$ et $f'(4)$.
+\item Que représente géométriquement le nombre $f'(2) = 0$ pour la courbe $\mathcal{C}_f$ ?
+\item En déduire l'équation de la tangente à $\mathcal{C}_f$ au point $B$.
+\item Le point $B$ est-il un maximum local de $f$ ? Justifier à l'aide du signe de $f'$.
+\end{enumerate}
+\end{exercice}

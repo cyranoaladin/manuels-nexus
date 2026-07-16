@@ -1,0 +1,33 @@
+% META: {"id":"1SPE-DERLOCAL-CO-033","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-033","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, limit, expand
+% h = symbols('h')
+% taux = ((1 + h)**3 - 1) / h
+% assert expand(taux) == 3 + 3*h + h**2
+% assert limit(taux, h, 0) == 3
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-033}
+On calcule $f(1+h)$ :
+\[
+f(1+h) = (1+h)^3 = 1 + 3h + 3h^2 + h^3
+\]
+
+On calcule $f(1)$ :
+\[
+f(1) = 1^3 = 1
+\]
+
+Le taux de variation est :
+\[
+\frac{f(1+h) - f(1)}{h} = \frac{1 + 3h + 3h^2 + h^3 - 1}{h} = \frac{3h + 3h^2 + h^3}{h}
+\]
+
+On factorise par $h$ au numérateur :
+\[
+\frac{h(3 + 3h + h^2)}{h} = 3 + 3h + h^2
+\]
+
+Lorsque $h$ tend vers $0$, l'expression $3 + 3h + h^2$ tend vers $3$.
+
+Donc $\boxed{f'(1) = 3}$.
+\end{corrige}

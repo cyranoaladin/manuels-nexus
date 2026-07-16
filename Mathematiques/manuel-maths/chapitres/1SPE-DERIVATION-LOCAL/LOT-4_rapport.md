@@ -35,8 +35,27 @@ Ratio à ajuster avec les 20 exercices supplémentaires (E5 : ≥50 total) : ajo
 - SymPy : 30/30 verified.
 - Figures dans les cours : 5 figures ajoutées (C1–C5).
 
+## Complément EX-031→050 (16 juillet 2026)
+
+20 exercices + 20 corrigés ajoutés : 8◆ + 8◆◆ + 4◆◆◆.
+
+| | ◆ | ◆◆ | ◆◆◆ | Total |
+|---|---|---|---|---|
+| C1 | EX-031, EX-032 | EX-039, EX-040 | — | +4 |
+| C2 | EX-033, EX-034 | EX-041, EX-042 | — | +4 |
+| C3 | EX-035, EX-036 | EX-043 | — | +3 |
+| C4 | EX-037 | EX-044 | — | +2 |
+| C5 | EX-038 | EX-045, EX-046 | — | +3 |
+| Multi | — | — | EX-047 (C1+C2+C4), EX-048 (C2+C3+C5), EX-049 (C1+C4+C5), EX-050 (C2+C3+C4) | +4 |
+| **Sous-total** | **8** | **8** | **4** | **20** |
+
+**Total chapitre : 50 exercices + 50 corrigés. Seuil E5 atteint.**
+
+Ratio final : 18◆ (36%) + 18◆◆ (36%) + 14◆◆◆ (28%).
+
+SymPy : **100/100 OK**.
+
 ## Points ouverts
 
-- 20 exercices supplémentaires pour atteindre 50 (E5).
 - CDP à créer pour les exercices ◆ de C2–C5.
-- Exercices de synthèse multi-capacités.
+- LOT 5 (QCM + remédiation), LOT 6 (évaluations), LOT 7 (assemblage).

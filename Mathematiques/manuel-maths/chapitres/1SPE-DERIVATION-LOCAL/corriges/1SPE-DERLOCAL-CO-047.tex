@@ -1,0 +1,49 @@
+% META: {"id":"1SPE-DERLOCAL-CO-047","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-047","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% a, h = symbols('a h')
+% f = a**2 - 4*a + 5
+% f_ah = (a+h)**2 - 4*(a+h) + 5
+% taux = simplify((f_ah - f) / h)
+% assert taux == 2*a - 4 + h
+% fprime = 2*a - 4
+% assert fprime.subs(a, 2) == 0
+% assert f.subs(a, 2) == 1
+% assert fprime.subs(a, 0) == -4
+% assert f.subs(a, 0) == 5
+% assert Rational(5, 4) == Rational(5, 4)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-047}
+
+\textbf{Question 1.} On calcule $\dfrac{f(a+h) - f(a)}{h}$ pour $h \neq 0$ :
+\[
+f(a+h) = (a+h)^2 - 4(a+h) + 5 = a^2 + 2ah + h^2 - 4a - 4h + 5.
+\]
+Donc :
+\[
+\frac{f(a+h) - f(a)}{h} = \frac{2ah + h^2 - 4h}{h} = \boxed{2a + h - 4}.
+\]
+
+\textbf{Question 2.} Lorsque $h \to 0$, le taux de variation tend vers $2a - 4$. On en déduit :
+\[
+\boxed{f'(a) = 2a - 4}.
+\]
+
+\textbf{Question 3.} La tangente est horizontale lorsque $f'(a) = 0$, soit $2a - 4 = 0$, d'où $a = 2$.
+
+On a $f(2) = 4 - 8 + 5 = 1$. La tangente est horizontale au point $\boxed{(2\,;\,1)}$.
+
+\textbf{Question 4.} Au point d'abscisse $0$ : $f(0) = 5$ et $f'(0) = -4$.
+
+L'équation de la tangente est :
+\[
+y = f'(0)(x - 0) + f(0) = -4x + 5, \quad \text{soit } \boxed{y = -4x + 5}.
+\]
+
+\textbf{Question 5.} La tangente coupe l'axe des abscisses lorsque $y = 0$ :
+\[
+-4x + 5 = 0 \iff x = \frac{5}{4}.
+\]
+La tangente coupe l'axe des abscisses au point $\boxed{\left(\dfrac{5}{4}\,;\,0\right)}$.
+
+\end{corrige}

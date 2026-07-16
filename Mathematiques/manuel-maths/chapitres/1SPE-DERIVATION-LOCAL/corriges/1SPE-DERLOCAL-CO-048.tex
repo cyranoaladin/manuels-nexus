@@ -1,0 +1,51 @@
+% META: {"id":"1SPE-DERLOCAL-CO-048","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-048","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, Rational, Abs
+% f3 = sqrt(4)
+% assert f3 == 2
+% fprime3 = Rational(1, 4)
+% # Tangente : y = (x + 5)/4
+% # sqrt(3.96) = f(2.96) ~ (2.96+5)/4 = 1.99
+% approx1 = Rational(796, 400)
+% assert approx1 == Rational(199, 100)
+% # sqrt(4.04) = f(3.04) ~ (3.04+5)/4 = 2.01
+% approx2 = Rational(804, 400)
+% assert approx2 == Rational(201, 100)
+% # Valeurs exactes
+% exact1 = sqrt(Rational(396, 100))
+% exact2 = sqrt(Rational(404, 100))
+% err1 = Abs(exact1 - approx1)
+% err2 = Abs(exact2 - approx2)
+% # Les deux erreurs sont très petites, quasi symétriques
+% assert err1 < Rational(1, 1000)
+% assert err2 < Rational(1, 1000)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-048}
+
+\textbf{Question 1.} $f(3) = \sqrt{3 + 1} = \sqrt{4} = 2$.
+
+On calcule le taux de variation :
+\[
+\frac{f(3+h) - f(3)}{h} = \frac{\sqrt{4+h} - 2}{h} = \frac{(\sqrt{4+h} - 2)(\sqrt{4+h} + 2)}{h(\sqrt{4+h} + 2)} = \frac{4+h-4}{h(\sqrt{4+h} + 2)} = \frac{1}{\sqrt{4+h} + 2}.
+\]
+Lorsque $h \to 0$ : $\dfrac{1}{\sqrt{4} + 2} = \dfrac{1}{4}$. Donc $\boxed{f'(3) = \dfrac{1}{4}}$.
+
+\textbf{Question 2.} L'équation de la tangente en $A(3\,;\,2)$ est :
+\[
+y = f'(3)(x - 3) + f(3) = \frac{1}{4}(x - 3) + 2 = \frac{x - 3 + 8}{4} = \boxed{\frac{x + 5}{4}}.
+\]
+
+\textbf{Question 3.} On utilise l'approximation $f(3 + h) \approx f(3) + h \cdot f'(3)$.
+
+$\bullet$ $\sqrt{3{,}96} = f(2{,}96)$ : ici $h = -0{,}04$, donc $\sqrt{3{,}96} \approx \dfrac{2{,}96 + 5}{4} = \dfrac{7{,}96}{4} = \boxed{1{,}99}$.
+
+$\bullet$ $\sqrt{4{,}04} = f(3{,}04)$ : ici $h = 0{,}04$, donc $\sqrt{4{,}04} \approx \dfrac{3{,}04 + 5}{4} = \dfrac{8{,}04}{4} = \boxed{2{,}01}$.
+
+\textbf{Question 4.} Valeurs exactes à la calculatrice :
+\begin{itemize}
+  \item $\sqrt{3{,}96} \approx 1{,}989\,97$ ; erreur $\approx 0{,}000\,03$ ;
+  \item $\sqrt{4{,}04} \approx 2{,}009\,98$ ; erreur $\approx 0{,}000\,02$.
+\end{itemize}
+Les deux erreurs sont très faibles (de l'ordre de $10^{-5}$). L'approximation est légèrement meilleure lorsque $h > 0$ dans cet exemple, car la courbe de $f$ est concave et la tangente est au-dessus de la courbe : l'écart est un peu plus petit du côté $h > 0$. Les deux approximations restent néanmoins excellentes pour $|h|$ aussi petit.
+
+\end{corrige}

@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-DERLOCAL-EX-045","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C5"],"methodes":["M1"],"parcours":2,"competences":["calculer","modeliser"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-045.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-045.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, Abs
+% x = symbols('x')
+% f = (1 + x)**5
+% assert f.subs(x, 0) == 1
+% fp = f.diff(x)
+% assert fp.subs(x, 0) == 5
+% approx = 1 + 5*Rational(2, 100)
+% assert approx == Rational(11, 10)
+% exact = Rational(102, 100)**5
+% assert exact == Rational(11040808032, 10000000000)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-045}{2}{12}
+On souhaite obtenir une valeur approchée de $(1{,}02)^5$ sans calculatrice, en utilisant l'approximation affine.
+
+On pose $f(x) = (1+x)^5$.
+\begin{enumerate}
+\item Calculer $f(0)$ et $f'(0)$. On admet que $f'(x) = 5(1+x)^4$.
+\item Écrire l'approximation affine de $f$ au voisinage de $x = 0$ : $f(x) \approx f(0) + f'(0) \cdot x$.
+\item En déduire une valeur approchée de $(1{,}02)^5$ en prenant $x = 0{,}02$.
+\item Comparer avec la valeur exacte $(1{,}02)^5 = 1{,}104\,080\,8\ldots$ Commenter la précision.
+\end{enumerate}
+\end{exercice}

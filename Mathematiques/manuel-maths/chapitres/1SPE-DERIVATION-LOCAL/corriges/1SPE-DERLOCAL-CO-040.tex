@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-DERLOCAL-CO-040","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-040","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% t = symbols('t')
+% T = 100 - 2*t**2
+% assert T.subs(t, 0) == 100
+% assert T.subs(t, 5) == 50
+% taux = Rational(T.subs(t, 5) - T.subs(t, 0), 5 - 0)
+% assert taux == -10
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-040}
+\textbf{1.} On calcule les températures aux instants $t = 0$ et $t = 5$ :
+\[
+T(0) = 100 - 2 \times 0^2 = 100
+\]
+\[
+T(5) = 100 - 2 \times 5^2 = 100 - 50 = 50
+\]
+
+\textbf{2.} Le taux de variation de $T$ entre $t = 0$ et $t = 5$ est :
+\[
+\tau = \frac{T(5) - T(0)}{5 - 0} = \frac{50 - 100}{5} = \frac{-50}{5} = -10
+\]
+
+\textbf{3.} Le taux de variation est négatif ($\tau = -10$), ce qui signifie que la température du four diminue après extinction. En moyenne, la température baisse de $\boxed{10}$ degrés Celsius par minute entre les instants $t = 0$ et $t = 5$. Le signe négatif traduit le refroidissement du four.
+\end{corrige}

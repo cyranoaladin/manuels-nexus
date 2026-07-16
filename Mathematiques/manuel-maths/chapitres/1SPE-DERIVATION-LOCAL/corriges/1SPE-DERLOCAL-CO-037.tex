@@ -1,0 +1,36 @@
+% META: {"id":"1SPE-DERLOCAL-CO-037","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-037","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% f = x**2
+% assert f.subs(x, 3) == 9
+% fp = 2*x
+% assert fp.subs(x, 3) == 6
+% tangente = 6*(x - 3) + 9
+% assert tangente.expand() == 6*x - 9
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-037}
+On rappelle que l'équation de la tangente à la courbe de $f$ au point d'abscisse $a$ est :
+\[
+y = f'(a)(x - a) + f(a)
+\]
+
+On calcule $f(3)$ :
+\[
+f(3) = 3^2 = 9
+\]
+
+On admet que $f'(x) = 2x$ (dérivée de $x^2$), donc :
+\[
+f'(3) = 2 \times 3 = 6
+\]
+
+L'équation de la tangente au point d'abscisse $3$ est :
+\[
+y = 6(x - 3) + 9 = 6x - 18 + 9
+\]
+
+\[
+\boxed{y = 6x - 9}
+\]
+\end{corrige}
