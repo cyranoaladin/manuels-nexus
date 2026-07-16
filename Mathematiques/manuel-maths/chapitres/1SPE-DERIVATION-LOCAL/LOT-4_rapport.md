@@ -55,7 +55,32 @@ Ratio final : 18◆ (36%) + 18◆◆ (36%) + 14◆◆◆ (28%).
 
 SymPy : **100/100 OK**.
 
-## Points ouverts
+## Matrice consolidée (50 exercices)
 
-- CDP à créer pour les exercices ◆ de C2–C5.
-- LOT 5 (QCM + remédiation), LOT 6 (évaluations), LOT 7 (assemblage).
+| | ◆ | ◆◆ | ◆◆◆ | Total |
+|---|---|---|---|---|
+| C1 | EX-001, EX-002, EX-031, EX-032 | EX-003, EX-004, EX-039, EX-040 | EX-005, EX-006 | 10 |
+| C2 | EX-007, EX-008, EX-033, EX-034 | EX-009, EX-010, EX-041, EX-042 | EX-011, EX-012 | 10 |
+| C3 | EX-013, EX-014, EX-035, EX-036 | EX-015, EX-016, EX-043 | EX-017, EX-018 | 9 |
+| C4 | EX-019, EX-020, EX-037 | EX-021, EX-022, EX-044 | EX-023, EX-024 | 7 |
+| C5 | EX-025, EX-026, EX-038 | EX-027, EX-028, EX-045, EX-046 | EX-029, EX-030 | 7 |
+| Multi | — | — | EX-047 (C1+C2+C4), EX-048 (C2+C3+C5), EX-049 (C1+C4+C5), EX-050 (C2+C3+C4) | 4 |
+| **Total** | **18** | **18** | **14** | **50** |
+
+Cases vides : **0**. Minimum F01 (≥2/case) : **rempli** (C4◆ = 3 ≥ 2, C5◆ = 3 ≥ 2, etc.).
+
+## Coups de pouce (CDP)
+
+18 fichiers CDP créés pour tous les exercices ◆ :
+- C1 : EX-001-CDP, EX-002-CDP, EX-031-CDP, EX-032-CDP
+- C2 : EX-007-CDP, EX-008-CDP, EX-033-CDP, EX-034-CDP
+- C3 : EX-013-CDP, EX-014-CDP, EX-035-CDP, EX-036-CDP
+- C4 : EX-019-CDP, EX-020-CDP, EX-037-CDP
+- C5 : EX-025-CDP, EX-026-CDP, EX-038-CDP
+
+## Verdicts finaux
+
+- SymPy : **100/100 OK** (50 exercices + 50 corrigés).
+- `make verify` global (incluant LOT 5-7) : **143/143 OK**.
+- Compilation : PASS.
+- CDP : 18/18 (tous les ◆).

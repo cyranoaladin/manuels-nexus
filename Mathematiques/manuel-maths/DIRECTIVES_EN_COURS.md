@@ -38,7 +38,7 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
     Reste : 20 ex supplémentaires pour atteindre 50 (E5).
   - [x] 3c. LOT 5 : QCM 15q + FR-R1..R5 + RE-C1..C5 (30 ex remédiation). SymPy 143/143.
   - [x] 3d. LOT 6 : Eval A+B + corrigés + 2 TD. Résolution aveugle 0 divergence.
-  - [x] 3e. LOT 7 : PDF 36p 240 Ko, check-list 7/8, inventaire 78 \input.
+  - [x] 3e. LOT 7 : PDF 37p 245 Ko, 50 ex + 18 CDP, check-list 8/8, tag `chap/1SPE-DERIVATION-LOCAL-v1`.
   - [ ] 3f. 1SPE-DERIVATION-GLOBAL LOT 0→7 puis suite du périmètre.
 
 - [ ] **4. RAPPORT_FINAL.md** — Fin de tour.

@@ -5,9 +5,9 @@ Date : 2026-07-16.
 ## PDF
 
 - Fichier : `build/1SPE-DERIVATION-LOCAL/1SPE-DERIVATION-LOCAL_complet.pdf`
-- Pages : 36
-- Taille : 240 Ko
-- Maître : `build/1SPE-DERIVATION-LOCAL/1SPE-DERIVATION-LOCAL_complet.tex` (95 lignes)
+- Pages : 37 (après ajout CDP)
+- Taille : 245 Ko
+- Maître : `build/1SPE-DERIVATION-LOCAL/1SPE-DERIVATION-LOCAL_complet.tex` (112 lignes)
 
 ## Inventaire
 
@@ -49,3 +49,23 @@ Date : 2026-07-16.
 - LOT 6 : ~4 $
 - LOT 7 : ~0 $ (assemblage)
 - **TOTAL : ~19 $** (sous le budget de 40 $)
+
+## Addendum — Clôture corrigée (16 juillet 2026)
+
+Le LOT 7 initial avait été clos par erreur de séquence avant la complétion
+du seuil E5 : les exercices EX-031→050 existaient sur disque et dans le
+maître (commit `5e2a7fc`) mais la check-list DIRECTIVES n'avait pas été
+mise à jour pour refléter les 50 exercices (elle affichait encore « 30 ex »).
+
+Corrections apportées :
+- LOT-4_rapport.md : matrice consolidée 50 ex, verdicts finaux, CDP 18/18.
+- 18 fichiers CDP créés pour tous les exercices ◆ (C1–C5).
+- LOT-6_rapport.md : résolution aveugle détaillée (protocole + traces)
+  sur les sujets A et B, 0 divergence.
+- SPECIMEN_A_VALIDER.md : périmètre réalisé blocs B.1–B.5 de la CHARTE v4.
+- Recompilation : **PDF 37 pages, 245 Ko**, maître 112 lignes.
+
+Check-list 8/8 (le point « temps vérifiés sur élèves réels » reste
+A_VALIDER_HUMAIN, identique à Suites et Second degré).
+
+Tag : `chap/1SPE-DERIVATION-LOCAL-v1`.
