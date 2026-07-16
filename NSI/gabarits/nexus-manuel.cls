@@ -381,8 +381,8 @@
 % ===========================================================================
 %  EXTENSIONS (chargées si présentes, silencieuses sinon)
 % ===========================================================================
-\InputIfFileExists{gabarits/nexus-icons.tex}{}{}
-\InputIfFileExists{gabarits/nexus-figures.tex}{}{%
+\InputIfFileExists{gabarits/nexus-icons.tex}{}{\ClassWarning{nexus-manuel}{Nexus asset missing: icons}}
+\InputIfFileExists{gabarits/nexus-figures.tex}{}{\ClassWarning{nexus-manuel}{Nexus asset missing: figures}%
   \newcounter{nxfig}[chapter]
   \newenvironment{nxfigure}[2][0.9\linewidth]{%
     \refstepcounter{nxfig}\par\medskip\begin{center}\begin{minipage}{##1}\centering
@@ -391,6 +391,6 @@
       \textbf{Figure \thenxfig} --- \nxfigcaption}%
     \end{minipage}\end{center}\medskip}
 }
-\InputIfFileExists{gabarits/nexus-signatures.tex}{}{\newcounter{nxChapNum}}
+\InputIfFileExists{gabarits/nexus-signatures.tex}{}{\ClassWarning{nexus-manuel}{Nexus asset missing: signatures}\newcounter{nxChapNum}}
 \InputIfFileExists{gabarits/nexus-code.tex}{}{}
 \InputIfFileExists{gabarits/nexus-figures-nsi.tex}{}{}

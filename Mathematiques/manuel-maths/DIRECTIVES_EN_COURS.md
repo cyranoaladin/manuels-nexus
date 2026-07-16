@@ -27,6 +27,11 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
 - [x] **2f. INTÉGRITÉ — Ré-attestation PDF et restauration des correctifs v3.2.**
   - Commit : 410007f
 
+- [x] **2g. INTÉGRITÉ E.2-E.4 — Rapprochements, chaîne complète, clôture.**
+  - E.2 : 5 rapprochements nominatifs (0 écart objet), diff visuel, addendums LOT-7.
+  - E.3 : test bout-en-bout, verify_pdf NSI, make specimen CI.
+  - E.4 : PNG 150 dpi x4, tout vert, défaut ouvert cls:361.
+
 - [ ] **3. PRODUCTION SANS ARRÊT**
   - [x] 3a/3b. C1-C5 complets, 30 ex (6/capacité, 2/case), coverage 0 manquant.
     C1:fca6a93, C2:973a268, C3:b3e4057, C4:87ce22e, C5:0a29108.

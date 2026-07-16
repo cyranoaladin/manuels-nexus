@@ -28,6 +28,7 @@ def test_assemble_uses_lualatex_for_the_nexus_v3_class(tmp_path, monkeypatch):
     monkeypatch.setattr(assemble, "ROOT", tmp_path)
     monkeypatch.setattr(assemble, "collect", lambda *_: [source])
     monkeypatch.setattr(assemble.subprocess, "run", successful_runner)
+    monkeypatch.setattr(assemble, "verify_pdf", lambda *_: 0)
 
     assert assemble.main("CHAP", "complet") == 0
     assert calls[0][0][0] == "lualatex"

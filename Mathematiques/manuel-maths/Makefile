@@ -1,4 +1,4 @@
-.PHONY: setup db crawl ingest index verify similarity coverage chapter check-latex test
+.PHONY: setup db crawl ingest index verify similarity coverage chapter check-latex specimen test
 
 PY := .venv/bin/python
 CHAP ?= 1SPE-SUITES
@@ -38,6 +38,11 @@ check-latex:
 
 chapter:
 	$(PY) scripts/assemble.py --chap $(CHAP) --variant complet
+
+specimen:
+	mkdir -p build/specimen
+	TEXINPUTS=gabarits: lualatex -interaction=nonstopmode -halt-on-error -output-directory=build/specimen gabarits/specimen.tex
+	PYTHONPATH=scripts $(PY) -c "from pathlib import Path; from pdf_integrity import verify_pdf; raise SystemExit(verify_pdf(Path('build/specimen/specimen.pdf'), Path('build/specimen/specimen.log')))"
 
 test:
 	$(PY) -m pytest tests/ -q

@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 
 from common import ROOT
+from pdf_integrity import verify_pdf
 
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
@@ -63,6 +64,9 @@ def main(chap: str, variant: str) -> int:
     pdf_path = build / (tex_path.stem + ".pdf")
     if not pdf_path.exists():
         print(proc.stdout.decode("utf-8", errors="replace")[-3000:])
+        return 1
+    log_path = build / (tex_path.stem + ".log")
+    if verify_pdf(pdf_path, log_path):
         return 1
     print(f"PDF : {pdf_path} ({pdf_path.stat().st_size // 1024} Ko)")
     return 0

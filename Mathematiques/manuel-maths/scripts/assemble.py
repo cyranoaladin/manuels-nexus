@@ -11,6 +11,7 @@ from pathlib import Path
 import yaml
 
 from common import ROOT
+from pdf_integrity import verify_pdf
 
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
@@ -85,7 +86,10 @@ def main(chap: str, variant: str) -> int:
     if proc.returncode != 0:
         print(proc.stdout[-3000:])
         return 1
-    print(f"PDF : {build / (tex_path.stem + '.pdf')}")
+    pdf_path = build / (tex_path.stem + '.pdf')
+    if verify_pdf(pdf_path, build / (tex_path.stem + '.log')):
+        return 1
+    print(f"PDF : {pdf_path}")
     return 0
 
 

@@ -36,7 +36,7 @@ jobs:
       - name: Dépendances
         run: pip install pyyaml jsonschema pytest ruff python-dotenv
       - name: Installation TeX
-        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-lang-french texlive-pictures pandoc
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-lang-french texlive-pictures pandoc poppler-utils
       - name: Tests noyau + schémas META
         working-directory: NSI
         run: python -m pytest tests/ -q

@@ -79,3 +79,22 @@ PDF : `build/1NSI-TYPES-CONSTRUITS/1NSI-TYPES-CONSTRUITS_complet.pdf` (641 Ko)
 
 Appliquer les retours, puis enchainer sans arret sur :
 Premiere ch. 2-10, Terminale ch. 1-12 + blocs ECE/ecrit, lots finaux.
+
+## Addendum — Ré-attestation du 16/07/2026
+
+PDF recompilé : 34 pages, 213 Ko (précédemment 641 Ko). Le maître
+`build/1NSI-TYPES-CONSTRUITS/1NSI-TYPES-CONSTRUITS_complet.tex` est décompté par
+occurrences de `\input` et `\include`, sans dépendre de l'indentation.
+
+| Objet | Attendu | Constaté | Preuve |
+|---|---:|---:|---|
+| Exercices / corrigés / CDP | 55 / 55 / 24 | 55 / 55 / 24 | `exercices/`, `corriges/`, `coups_de_pouce/` |
+| QCM / remédiations | 16 / 5 | 16 / 5 | `qcm/`, `remediation/` |
+| Évaluations | 2 | 2 | `evaluations/` |
+| TD / projet | 2 / 1 | 2 / 1 | maître lignes 94–96 ; `cours/07_td1_station_meteo.tex`, `cours/07_td2_classement_esport.tex`, `projet/1NSI-TC-PROJET.tex` |
+
+Le précédent total « td 0 / projets 0 » était un artefact : son parcours de
+répertoires ne comptait ni les TD stockés sous `cours/07_td*.tex` ni `projet/`.
+L'inventaire est identique. `pdffonts` confirme des polices embarquées et en
+sous-ensembles (`emb=yes`, `sub=yes`) ; cette sous-division explique
+probablement la baisse 641 Ko → 213 Ko en l'absence de l'ancien PDF comparé.

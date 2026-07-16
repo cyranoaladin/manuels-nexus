@@ -36,7 +36,7 @@ jobs:
       - name: Dépendances (gates légers, sans embeddings)
         run: pip install sympy pyyaml jsonschema pytest python-dotenv
       - name: Installation TeX
-        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-lang-french texlive-fonts-recommended
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-lang-french texlive-fonts-recommended poppler-utils
       - name: Schémas des métadonnées
         working-directory: Mathematiques/manuel-maths
         run: python -m pytest tests/test_meta_schemas.py -q
@@ -54,6 +54,9 @@ jobs:
           for chap in $(git diff --name-only "$base" "$GITHUB_SHA" -- chapitres | cut -d/ -f2 | sort -u); do
             python scripts/coverage_report.py --chap "$chap"
           done
+      - name: Compilation specimen (gate charte)
+        working-directory: Mathematiques/manuel-maths
+        run: make specimen
       - name: Compilation chapitres modifiés
         working-directory: Mathematiques/manuel-maths
         run: |
