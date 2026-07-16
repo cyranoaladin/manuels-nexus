@@ -1,0 +1,162 @@
+% META: {"id": "1SPE-SECDEG-CO-036", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-036", "capacites_codes": ["C3", "C4", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% f = x**2 - 5*x + 4
+% Delta_f = 25 - 16
+% assert Delta_f == 9
+% r1_f = Rational(5 - 3, 2)
+% r2_f = Rational(5 + 3, 2)
+% assert r1_f == 1
+% assert r2_f == 4
+% assert f.subs(x, r1_f) == 0
+% assert f.subs(x, r2_f) == 0
+% assert f.subs(x, 2) < 0
+% assert f.subs(x, 0) > 0
+% g = -x**2 + 3*x + 4
+% Delta_g = 9 + 16
+% assert Delta_g == 25
+% r1_g = -1
+% r2_g = 4
+% assert g.subs(x, r1_g) == 0
+% assert g.subs(x, r2_g) == 0
+% assert g.subs(x, 0) > 0
+% assert g.subs(x, -2) < 0
+% # Q3 : f < 0 AND g > 0 : intersection ]1,4[ et ]-1,4[ = ]1,4[
+% assert f.subs(x, 2) < 0 and g.subs(x, 2) > 0
+% # Q4 : f*g <= 0
+% prod = f * g
+% assert prod.subs(x, 0) > 0    # f>0 et g>0 => produit > 0
+% assert prod.subs(x, 2) < 0    # f<0 et g>0 => produit < 0
+% assert prod.subs(x, 5) < 0    # f>0 et g<0 => produit < 0
+% assert prod.subs(x, -2) < 0   # f>0 et g<0 => produit < 0
+% # Q5 : h(x) = f(x) + g(x) = -2x + 8 = -2(x-4)
+% h = f + g
+% assert expand(h) == -2*x + 8
+% assert solve(h, x) == [4]
+% # h <= 0 : -2x + 8 <= 0 => x >= 4
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-036}
+
+\textbf{1. Étude de $f(x) = x^2 - 5x + 4$.}
+
+\textit{a) Discriminant et racines.}
+
+\commentaireMarge{$a=1$, $b=-5$, $c=4$.}
+
+\[\Delta_f = (-5)^2 - 4 \times 1 \times 4 = 25 - 16 = 9.\]
+
+\[x_1 = \frac{5-3}{2} = 1 \qquad \text{et} \qquad x_2 = \frac{5+3}{2} = 4.\]
+
+\textit{b) Tableau de signes de $f$.}
+
+\commentaireMarge{$a = 1 > 0$ : positif à l'extérieur des racines.}
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $4$ & & $+\infty$ \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{2. Étude de $g(x) = -x^2 + 3x + 4$.}
+
+\textit{a) Discriminant et racines.}
+
+\commentaireMarge{$a=-1$, $b=3$, $c=4$.}
+
+\[\Delta_g = 3^2 - 4 \times (-1) \times 4 = 9 + 16 = 25.\]
+
+\[x_1 = \frac{-3 - 5}{-2} = -1 \qquad \text{et} \qquad x_2 = \frac{-3 + 5}{-2} = -1.\]
+
+On calcule directement : $x_1 = \dfrac{-3-5}{2 \times (-1)} = 4$ et $x_2 = \dfrac{-3+5}{2\times(-1)} = -1$.
+
+Donc les racines sont $-1$ et $4$.
+
+\textit{b) Tableau de signes de $g$.}
+
+\commentaireMarge{$a = -1 < 0$ : positif entre les racines.}
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $4$ & & $+\infty$ \\
+\hline
+$g(x)$ & & $-$ & $0$ & $+$ & $0$ & $-$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textit{c) Racine commune.}
+
+$f$ et $g$ ont toutes deux $4$ comme racine : les deux paraboles se coupent sur l'axe des abscisses au point $(4\,;\,0)$.
+
+\medskip
+\textbf{3. Système $f(x) < 0$ et $g(x) > 0$.}
+
+\commentaireMarge{Croiser les deux tableaux de signes.}
+
+D'après les tableaux :
+\begin{itemize}
+  \item $f(x) < 0$ sur $]1\,;\,4[$,
+  \item $g(x) > 0$ sur $]-1\,;\,4[$.
+\end{itemize}
+
+L'intersection est $]1\,;\,4[ \cap ]-1\,;\,4[ = ]1\,;\,4[$.
+
+L'ensemble des solutions est $\mathcal{S} = \left]1\,;\,4\right[$.
+
+\medskip
+\textbf{4. Inéquation produit $f(x) \times g(x) \leqslant 0$.}
+
+\textit{a) Tableau de signes du produit.}
+
+\commentaireMarge{Les racines du produit sont $-1$, $1$, $4$ (racine double).}
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $1$ & & $4$ & & $+\infty$ \\
+\hline
+$f(x)$ & & $+$ & $+$ & $0$ & $-$ & $0$ & $+$ & $+$ & \\
+$g(x)$ & & $-$ & $0$ & $+$ & $+$ & $+$ & $0$ & $-$ & \\
+\hline
+$f \times g$ & & $-$ & $0$ & $+$ & $-$ & $0$ & $0$ & $-$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textit{b) Solutions.}
+
+$f(x) \times g(x) \leqslant 0$ sur $\left]-\infty\,;\,-1\right] \cup \left[1\,;\,4\right] \cup \left[4\,;\,+\infty\right[$.
+
+En simplifiant : $\mathcal{S} = \left]-\infty\,;\,-1\right] \cup \left[1\,;\,+\infty\right[$.
+
+\medskip
+\textbf{5. Inéquation $f(x) + g(x) \leqslant 0$.}
+
+\textit{a) Calcul de $h(x) = f(x) + g(x)$.}
+
+\commentaireMarge{La somme des deux trinômes peut être plus simple.}
+
+$h(x) = (x^2 - 5x + 4) + (-x^2 + 3x + 4) = -2x + 8$.
+
+$h$ est une fonction affine, non un trinôme.
+
+\textit{b) Résolution de $h(x) \leqslant 0$.}
+
+$-2x + 8 \leqslant 0 \iff x \geqslant 4$. Donc $\mathcal{S} = [4\,;\,+\infty[$.
+
+\textit{c) Remarque.}
+
+La solution de la question 3 était $]1\,;\,4[$ et celle de $h \leqslant 0$ est $[4\,;\,+\infty[$. Ce sont des ensembles différents : la condition $f + g \leqslant 0$ est plus restrictive que la condition $f < 0$ et $g > 0$ simultanément.
+
+\baremeIndicatif{Q1 : 2 pts (calculer, raisonner) ; Q2 : 3 pts (calculer, raisonner, communiquer) ; Q3 : 2 pts (raisonner) ; Q4 : 3 pts (raisonner, calculer) ; Q5 : 3 pts (chercher, calculer, communiquer)}
+\end{corrige}

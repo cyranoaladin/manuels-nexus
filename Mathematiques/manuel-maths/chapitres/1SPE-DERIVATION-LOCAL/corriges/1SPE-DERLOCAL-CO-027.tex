@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-DERLOCAL-CO-027","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-027","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, Rational, Abs
+% approx = 3 + Rational(1, 6) * Rational(1, 10)
+% assert approx == Rational(181, 60)
+% exact = sqrt(Rational(91, 10))
+% assert Abs(approx - exact) < Rational(1, 1000)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-027}
+
+\textbf{Question 1.} On a $f(9) = \sqrt{9} = 3$.
+
+\textbf{Question 2.} L'approximation linéaire au voisinage de $a = 9$ donne :
+\[
+\sqrt{9{,}1} \approx f(9) + f'(9) \times (9{,}1 - 9) = 3 + \dfrac{1}{6} \times 0{,}1 = 3 + \dfrac{1}{60} = \boxed{\dfrac{181}{60}}.
+\]
+
+En écriture décimale : $\dfrac{181}{60} \approx 3{,}0167$.
+
+\textbf{Question 3.} La calculatrice donne $\sqrt{9{,}1} \approx 3{,}0166$.
+
+L'erreur est d'environ $0{,}0001$, soit un dix-millième. L'approximation linéaire est donc très précise au voisinage de $9$.
+
+\end{corrige}

@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-SUITES-EX-014", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": 3, "r": 5}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-014.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-014.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u0, r = 3, 5
+% u = u0 + n*r
+% diff = u.subs(n, n+1) - u
+% assert diff.simplify() == 5
+% # diff > 0 => suite croissante
+% assert diff > 0
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-014}{1}{10}
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par $u_n = 3 + 5n$.
+\begin{enumerate}
+  \item Calculer $u_{n+1} - u_n$ et simplifier.
+  \item En déduire le signe de $u_{n+1} - u_n$ pour tout $n \in \mathbb{N}$.
+  \item Conclure sur le sens de variation de la suite $(u_n)$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,51 @@
+% META: {"id": "1SPE-SUITES-CO-007", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-007", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 100
+% r = -3
+% u = u0 + n*r
+% assert u.subs(n, 0) == 100
+% assert u.subs(n, 1) == 97
+% assert u.subs(n, 2) == 94
+% assert u.subs(n, 20) == 40
+% # r = -3 < 0 => suite decroissante
+% assert r < 0
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-007}
+
+\commentaireMarge{La formule du terme général d'une suite arithmétique de premier terme $u_0$ et de raison $r$ est $u_n = u_0 + nr$.}
+
+\textbf{Question 1.} La suite $(u_n)$ est arithmétique de premier terme $u_0 = 100$ et de raison $r = -3$. Sa formule du terme général est :
+\[
+u_n = u_0 + n \times r = 100 + n \times (-3) = 100 - 3n.
+\]
+
+\commentaireMarge{On substitue les valeurs de $n$ dans la formule.}
+
+\textbf{Question 2.} On calcule $u_1$ et $u_2$ :
+\[
+u_1 = 100 - 3 \times 1 = 100 - 3 = 97.
+\]
+\[
+u_2 = 100 - 3 \times 2 = 100 - 6 = 94.
+\]
+
+Donc $u_1 = 97$ et $u_2 = 94$.
+
+\textbf{Question 3.} On applique la formule pour $n = 20$ :
+\[
+u_{20} = 100 - 3 \times 20 = 100 - 60 = 40.
+\]
+
+Donc $u_{20} = 40$.
+
+\commentaireMarge{Le signe de la raison détermine le sens de variation d'une suite arithmétique.}
+
+\textbf{Question 4.} La raison de la suite est $r = -3 < 0$.
+
+Pour toute suite arithmétique, la différence $u_{n+1} - u_n = r$ est constante. Ici, $r = -3 < 0$, donc $u_{n+1} < u_n$ pour tout $n \in \mathbb{N}$.
+
+La suite $(u_n)$ est donc \textbf{strictement décroissante}.
+
+\end{corrige}

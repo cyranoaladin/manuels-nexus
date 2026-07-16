@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERLOCAL-CO-003","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-003","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(80-0, 2-0) == 40
+% assert Rational(275-80, 5-2) == 65
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-003}
+\textbf{1.} On calcule le taux de variation de $d$ entre $0$ et $2$ :
+\[
+\frac{d(2)-d(0)}{2-0}=\frac{80-0}{2}=40.
+\]
+Ce résultat signifie que le véhicule a parcouru en moyenne $40$~km par heure sur les deux premières heures. L'unité est le kilomètre par heure (km/h).
+
+\textbf{2.} Entre $2$ et $5$ :
+\[
+\frac{d(5)-d(2)}{5-2}=\frac{275-80}{3}=65.
+\]
+Sur les trois heures suivantes, la vitesse moyenne est de $65$~km/h.
+
+\textbf{3.} On compare les deux taux de variation : $65>40$. Le véhicule a roulé plus vite en moyenne sur l'intervalle $[2\,;\,5]$ que sur $[0\,;\,2]$.
+
+\textit{Vérification :} les deux taux sont positifs, ce qui est cohérent car la distance ne peut que croître.
+\end{corrige}

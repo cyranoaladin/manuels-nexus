@@ -1,0 +1,86 @@
+% META: {"id": "1SPE-SECDEG-ME-002", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Étudier une parabole}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « dresser le tableau de variations »,
+  « tracer la courbe représentative », « déterminer le maximum ou le minimum »,
+  ou « préciser le sommet de la parabole ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie les coefficients $a$, $b$, $c$ de $f(x) = ax^2 + bx + c$.
+    \item Je calcule les coordonnées du sommet :
+      \[
+        \alpha = -\frac{b}{2a}, \qquad \beta = f(\alpha).
+      \]
+    \item Je détermine le sens de la parabole selon le signe de $a$ :
+      \begin{itemize}
+        \item Si $a > 0$ : parabole tournée vers le haut, $f$ est décroissante sur $\left]-\infty\,;\,\alpha\right]$
+          puis croissante sur $\left[\alpha\,;\,+\infty\right[$, et $\beta$ est le \textbf{minimum} de $f$.
+        \item Si $a < 0$ : parabole tournée vers le bas, $f$ est croissante sur $\left]-\infty\,;\,\alpha\right]$
+          puis décroissante sur $\left[\alpha\,;\,+\infty\right[$, et $\beta$ est le \textbf{maximum} de $f$.
+      \end{itemize}
+    \item Je dresse le tableau de variations en indiquant $\alpha$, $\beta$ et les flèches.
+    \item Pour le tracé, je place le sommet $S(\alpha\,;\,\beta)$, l'axe de symétrie $x = \alpha$,
+      quelques points supplémentaires et les intersections avec les axes si elles existent.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Soit $f(x) = -3x^2 + 6x + 1$. Dresser le tableau de variations de $f$ et préciser son extremum.
+
+  \medskip
+  \commentaireMarge{Identifier $a = -3 < 0$, $b = 6$, $c = 1$.}%
+  On a $a = -3$, $b = 6$, $c = 1$.
+
+  \commentaireMarge{Calculer l'abscisse du sommet.}%
+  \[
+    \alpha = -\frac{6}{2 \times (-3)} = -\frac{6}{-6} = 1.
+  \]
+
+  \commentaireMarge{Calculer l'ordonnée du sommet.}%
+  \[
+    \beta = f(1) = -3 \times 1^2 + 6 \times 1 + 1 = -3 + 6 + 1 = 4.
+  \]
+
+  \commentaireMarge{$a < 0$ : maximum au sommet.}%
+  Puisque $a = -3 < 0$, la fonction $f$ admet un \textbf{maximum} égal à $4$, atteint en $x = 1$.
+
+  \medskip
+  \textbf{Tableau de variations :}
+
+  \[
+  \begin{array}{c|ccccc}
+    x & -\infty & & 1 & & +\infty \\
+    \hline
+    f(x) & & \nearrow & 4 & \searrow & \\
+    & -\infty & & & & -\infty
+  \end{array}
+  \]
+
+  Le sommet de la parabole est $S(1\,;\,4)$ et l'axe de symétrie est la droite $x = 1$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Inverser le sens de variation : quand $a < 0$, la fonction est d'abord
+      \emph{croissante} (les valeurs montent vers le sommet), puis \emph{décroissante}. Ne pas
+      appliquer mécaniquement le schéma d'une parabole en $a > 0$.
+    \item \textbf{Piège 2.} Confondre le sommet et les racines. $\alpha$ est l'abscisse du sommet,
+      pas une racine. Avoir $f(\alpha) = 0$ serait une coïncidence particulière.
+    \item \textbf{Piège 3.} Oublier que les flèches du tableau de variations indiquent $f \to -\infty$
+      aux deux extrémités quand $a < 0$ (et $f \to +\infty$ quand $a > 0$).
+  \end{itemize}
+}
+
+\verifier{%
+  Calculer $f(\alpha - 1)$ et $f(\alpha + 1)$ : ces deux valeurs doivent être égales
+  (symétrie de la parabole par rapport à l'axe $x = \alpha$) et inférieures à $\beta$ si $a > 0$
+  (ou supérieures à $\beta$ si $a < 0$, ce qui est impossible pour un maximum).
+  Ici, $f(0) = 1$ et $f(2) = -3 \times 4 + 12 + 1 = 1$ \checkmark : symétrie vérifiée, et $1 < 4$ \checkmark.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

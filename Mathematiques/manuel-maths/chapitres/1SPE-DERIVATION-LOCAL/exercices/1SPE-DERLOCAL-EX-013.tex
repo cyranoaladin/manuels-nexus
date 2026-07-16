@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-DERLOCAL-EX-013","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":1,"competences":["representer","calculer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-013.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-013.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% x = symbols('x')
+% # Tangente en a=2 : y = f'(2)(x-2) + f(2) = 3(x-2) + 5 = 3x - 1
+% T = 3*(x - 2) + 5
+% assert T.subs(x, 2) == 5
+% assert T.subs(x, 4) == 11
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-013}{1}{8}
+Soit $f$ une fonction définie sur $\mathbb{R}$ telle que $f(2) = 5$ et $f'(2) = 3$.
+
+\begin{enumerate}
+  \item Écrire l'équation de la tangente $T$ à la courbe de $f$ au point d'abscisse $2$.
+  \item On souhaite tracer cette tangente sur un quadrillage. La tangente passe par le point $A(2\,;\,5)$ avec une pente de $3$ : lorsque l'abscisse augmente de $1$, l'ordonnée augmente de $3$. Donner les coordonnées d'un deuxième point $B$ de la tangente.
+  \item Lire l'ordonnée du point de la tangente d'abscisse $4$.
+\end{enumerate}
+\end{exercice}

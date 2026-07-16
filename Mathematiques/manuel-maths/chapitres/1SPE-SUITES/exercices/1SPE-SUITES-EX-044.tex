@@ -1,0 +1,64 @@
+% META: {"id": "1SPE-SUITES-EX-044", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C3", "C6", "C7"], "methodes": ["M3", "M6", "M7"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser"], "duree_min": 40, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"taux": "0.005", "mensualite": 800, "capital": 120000}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-044.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-044.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% t = Rational(1, 200)   # taux mensuel 0.5% = 1/200
+% m = 800                # mensualite
+% C0 = 120000            # capital initial
+% # Recurrence : C_{n+1} = (1+t)*C_n - m
+% # Point fixe : L = (1+t)*L - m => -t*L = -m => L = m/t
+% L = m / t
+% assert L == 160000
+% # v_n = C_n - L => v_{n+1} = (1+t)*v_n => geometrique de raison (1+t)
+% q = 1 + t
+% v0 = C0 - L
+% assert v0 == -40000
+% # C_n = L + v0*(1+t)^n = 160000 - 40000*(201/200)^n
+% C_n = L + v0 * q**n
+% assert C_n.subs(n, 0) == C0
+% assert C_n.subs(n, 1) == q*C0 - m
+% assert C_n.subs(n, 1) == Rational(201,200)*120000 - 800
+% assert C_n.subs(n, 1) == 120000 + 600 - 800
+% assert C_n.subs(n, 1) == 119800
+% # Nombre de mensualites pour C_n <= 0 : 160000 - 40000*(201/200)^n <= 0
+% # (201/200)^n >= 4 => n >= log(4)/log(201/200)
+% import math
+% n_min = math.ceil(math.log(4)/math.log(201/200))
+% assert n_min == 278  # environ 278 mois soit 23 ans et 2 mois
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-044}{3}{40}
+Un ménage contracte un emprunt immobilier de $120\,000$\,€ auprès d'une banque. Le taux d'intérêt mensuel est de $0{,}5\,\%$. Le ménage rembourse $800$\,€ par mois.
+
+On note $C_n$ le capital restant dû au début du mois $n$ (avec $C_0 = 120\,000$).
+
+\begin{enumerate}
+  \item \textbf{Mise en équation.} Justifier que, pour tout entier naturel $n$ :
+  \[
+    C_{n+1} = 1{,}005\, C_n - 800.
+  \]
+
+  \item Calculer $C_1$ et $C_2$ (arrondir à l'euro si nécessaire).
+
+  \item \textbf{Résolution.}
+  \begin{enumerate}
+    \item Trouver le réel $L$ tel que $1{,}005\,L - 800 = L$.
+    \item En posant $v_n = C_n - L$, montrer que $(v_n)$ est géométrique et préciser sa raison.
+    \item Exprimer $C_n$ en fonction de $n$.
+  \end{enumerate}
+
+  \item \textbf{Durée de remboursement.} Déterminer le nombre de mensualités nécessaires pour solder l'emprunt, c'est-à-dire le plus petit entier $n$ tel que $C_n \leq 0$.
+
+  \item \textbf{Script Python.} Le code suivant simule le remboursement. Recopier et compléter les lignes manquantes, puis indiquer ce qu'affiche la variable \texttt{n} à la fin de l'exécution.
+\end{enumerate}
+\end{exercice}
+
+\begin{lstlisting}[language=Python]
+C = 120000
+t = 0.005
+m = 800
+n = 0
+while C > 0:
+    C = (1 + t) * C - m   # ligne a completer si necessaire
+    n = n + 1
+print(n)
+\end{lstlisting}

@@ -1,0 +1,121 @@
+% META: {"id": "1SPE-SECDEG-CO-037", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-037", "capacites_codes": ["C2", "C5", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True, positive=True)
+% # y = 10 - x (contrainte perimetre 2(x+y)=20)
+% y_expr = 10 - x
+% A = -x**2 + 10*x
+% alpha = Rational(10, 2)
+% assert alpha == 5
+% beta = A.subs(x, alpha)
+% assert beta == 25
+% A_canon = -(x - 5)**2 + 25
+% assert expand(A_canon) == A
+% # Contrainte 3 <= x <= 8 : alpha=5 dans [3,8] => max A(5)=25
+% assert 3 <= 5 <= 8
+% # Si x <= 4 : pas pertinent ici, alpha=5 est dans [3,8]
+% # Inegalite A >= 21 : x^2 - 10x + 21 <= 0
+% P = x**2 - 10*x + 21
+% Delta = 100 - 84
+% assert Delta == 16
+% r1 = Rational(10 - 4, 2)
+% r2 = Rational(10 + 4, 2)
+% assert r1 == 3
+% assert r2 == 7
+% assert P.subs(x, 5) < 0
+% assert P.subs(x, 2) > 0
+% assert P.subs(x, 8) > 0
+% # Q5 : mur existant, cloture pour 3 cotes : x + 2y = 20 => y = (20-x)/2 = 10 - x/2
+% # Aire B(x) = x*(10 - x/2) = 10x - x^2/2
+% # alpha_B = 10, B(10) = 100 - 50 = 50
+% y2 = 10 - x/2
+% B = x * y2
+% B_exp = expand(B)
+% assert B_exp == -x**2/2 + 10*x
+% alpha_B = Rational(10, 1)
+% assert B_exp.subs(x, alpha_B) == 50
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-037}
+
+\textbf{1. Modélisation.}
+
+\textit{a) Expression de $y$.}
+
+\commentaireMarge{Périmètre = $2(x+y) = 20$ m.}
+
+$2(x + y) = 20 \implies y = 10 - x$.
+
+\textit{b) Aire $A(x)$.}
+
+\[A(x) = x \cdot y = x(10 - x) = -x^2 + 10x.\]
+
+\medskip
+\textbf{2. Étude de la fonction aire.}
+
+\textit{a) Forme canonique.}
+
+\commentaireMarge{$\alpha = -\dfrac{b}{2a} = \dfrac{10}{2} = 5$.}
+
+\[A(x) = -(x^2 - 10x) = -(x^2 - 10x + 25) + 25 = -(x-5)^2 + 25.\]
+
+\textit{b) Maximum.}
+
+Comme $a = -1 < 0$, la parabole est tournée vers le bas et le maximum est atteint en $x = \alpha = 5$.
+
+\[A_{\max} = A(5) = -(5-5)^2 + 25 = 25\,\text{m}^2.\]
+
+L'aire maximale est $\mathbf{25}$~m$^2$, atteinte pour $x = 5$~m.
+
+\textit{c) Nature géométrique.}
+
+Si $x = 5$~m, alors $y = 10 - 5 = 5$~m. L'enclos est un \textbf{carré} de côté $5$~m. Le carré maximise l'aire à périmètre fixé.
+
+\medskip
+\textbf{3. Contrainte $3 \leqslant x \leqslant 8$.}
+
+\textit{a) Compatibilité.}
+
+\commentaireMarge{Vérifier si $\alpha = 5 \in [3\,;\,8]$.}
+
+$3 \leqslant 5 \leqslant 8$ : oui, la valeur optimale $x = 5$ est compatible avec la contrainte.
+
+\textit{b) Aire maximale.}
+
+L'aire maximale réalisable sous cette contrainte est donc $A(5) = 25$~m$^2$, inchangée.
+
+\medskip
+\textbf{4. Inéquation $A(x) \geqslant 21$.}
+
+\textit{a) Reformulation.}
+
+\commentaireMarge{$A(x) \geqslant 21 \iff -x^2 + 10x \geqslant 21$.}
+
+$-x^2 + 10x \geqslant 21 \iff 0 \geqslant x^2 - 10x + 21 \iff x^2 - 10x + 21 \leqslant 0$. \hfill $\square$
+
+\textit{b) Résolution.}
+
+$a = 1$, $b = -10$, $c = 21$ : $\Delta = 100 - 84 = 16$.
+
+\[x_1 = \frac{10 - 4}{2} = 3 \qquad \text{et} \qquad x_2 = \frac{10 + 4}{2} = 7.\]
+
+Comme $a = 1 > 0$, $x^2 - 10x + 21 \leqslant 0$ pour $x \in [3\,;\,7]$.
+
+Les valeurs de $x$ compatibles avec $A(x) \geqslant 21$ sont $x \in [3\,;\,7]$.
+
+\medskip
+\textbf{5. Question ouverte : avec un mur existant.}
+
+\commentaireMarge{Un côté (contre le mur) n'utilise pas de clôture.}
+
+Avec un mur comme l'un des côtés de longueur $x$, la clôture ne couvre que trois côtés :
+\[x + 2y = 20 \implies y = \frac{20 - x}{2} = 10 - \frac{x}{2}.\]
+
+L'aire devient :
+\[B(x) = x \cdot y = x\!\left(10 - \frac{x}{2}\right) = 10x - \frac{x^2}{2}.\]
+
+Le sommet est en $\alpha = -\dfrac{10}{2 \times (-\frac{1}{2})} = 10$, avec $B(10) = 100 - 50 = 50$~m$^2$.
+
+La longueur optimale du côté parallèle au mur est $x = 10$~m, donnant une aire maximale de $50$~m$^2$, soit le double de $25$~m$^2$.
+
+\baremeIndicatif{Q1 : 2 pts (modeliser) ; Q2 : 3 pts (calculer, raisonner, communiquer) ; Q3 : 2 pts (raisonner) ; Q4 : 3 pts (calculer, raisonner) ; Q5 : 3 pts (chercher, modeliser, communiquer)}
+\end{corrige}

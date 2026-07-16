@@ -1,0 +1,222 @@
+% META: {"id": "1SPE-SUITES-FR-R3", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["R3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R3 : Fonctions
+% Image, antécédent, sens de variation
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Fonctions : image, antécédent, variations}
+
+Soit $f$ une fonction définie sur un intervalle $I$.
+
+\textbf{Image :} $f(a)$ est l'\emph{image} de $a$ par $f$ (on calcule en substituant $x = a$).
+
+\textbf{Antécédent :} $a$ est un \emph{antécédent} de $b$ par $f$ si $f(a) = b$ (on résout l'équation $f(x) = b$).
+
+\textbf{Sens de variation :}
+\begin{itemize}
+  \item $f$ est \textbf{croissante} sur $I$ si, pour tous $x_1 < x_2$ dans $I$, $f(x_1) \leq f(x_2)$.
+  \item $f$ est \textbf{décroissante} sur $I$ si, pour tous $x_1 < x_2$ dans $I$, $f(x_1) \geq f(x_2)$.
+\end{itemize}
+
+\textbf{Lien avec les suites :} une suite $(u_n)$ définie par $u_n = f(n)$ hérite des variations de $f$ sur $\mathbb{N}$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R3-EX1}{1}{5}
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = 2x^2 - 3x + 1$.
+\begin{enumerate}
+  \item Calculer $f(0)$, $f(1)$, $f(2)$ et $f(3)$.
+  \item Vérifier que $1$ est un antécédent de $0$ par $f$.
+  \item Trouver tous les antécédents de $0$ par $f$.
+  \item La suite $(u_n)$ définie par $u_n = f(n)$ pour $n \geq 2$ est-elle croissante ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, factor
+% x = symbols('x')
+% f = 2*x**2 - 3*x + 1
+% assert f.subs(x, 0) == 1
+% assert f.subs(x, 1) == 0
+% assert f.subs(x, 2) == 3
+% assert f.subs(x, 3) == 10
+% sols = solve(f, x)
+% assert set(sols) == {1, 1/2} or set(sols) == {1, 0.5}
+% # Pour n >= 2, f est croissante (sommet en x=3/4 < 2)
+% assert f.subs(x, 2) < f.subs(x, 3)
+% assert f.subs(x, 3) < f.subs(x, 4)
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R3-EX1}
+
+\commentaireMarge{On substitue les valeurs de $n$ dans la formule de $f$.}
+
+\textbf{Question 1.}
+\[
+f(0) = 2 \times 0 - 3 \times 0 + 1 = 1.
+\]
+\[
+f(1) = 2 \times 1 - 3 \times 1 + 1 = 2 - 3 + 1 = 0.
+\]
+\[
+f(2) = 2 \times 4 - 3 \times 2 + 1 = 8 - 6 + 1 = 3.
+\]
+\[
+f(3) = 2 \times 9 - 3 \times 3 + 1 = 18 - 9 + 1 = 10.
+\]
+
+\commentaireMarge{Vérifier qu'un nombre est un antécédent revient à calculer son image et vérifier qu'elle vaut la valeur cible.}
+
+\textbf{Question 2.} On calcule $f(1) = 0$ (voir question 1). Donc $f(1) = 0$ : $1$ est bien un antécédent de $0$.
+
+\commentaireMarge{Trouver tous les antécédents revient à résoudre $f(x) = 0$.}
+
+\textbf{Question 3.} On résout $2x^2 - 3x + 1 = 0$. On factorise :
+\[
+2x^2 - 3x + 1 = (2x - 1)(x - 1) = 0.
+\]
+Donc $x = \dfrac{1}{2}$ ou $x = 1$. Les antécédents de $0$ sont $\dfrac{1}{2}$ et $1$.
+
+\commentaireMarge{$f$ est un trinôme de coefficient dominant positif, croissant à droite de son sommet $x_s = 3/4 < 2$.}
+
+\textbf{Question 4.} Le sommet de la parabole est en $x_s = \dfrac{3}{2 \times 2} = \dfrac{3}{4}$. Pour $n \geq 2 > \dfrac{3}{4}$, la fonction $f$ est croissante, donc la suite $(u_n)_{n \geq 2}$ est croissante.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R3-EX2}{1}{5}
+On considère la fonction $g$ définie sur $\mathbb{R}^+$ par $g(x) = \dfrac{x + 4}{x + 1}$.
+\begin{enumerate}
+  \item Calculer $g(0)$, $g(1)$, $g(3)$ et $g(9)$.
+  \item Montrer que, pour tout $x \geq 0$, $g(x) - 1 = \dfrac{3}{x+1}$.
+  \item En déduire le sens de variation de $g$ sur $[0\,;+\infty[$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational
+% x = symbols('x', nonneg=True)
+% g = (x + 4) / (x + 1)
+% assert g.subs(x, 0) == 4
+% assert g.subs(x, 1) == Rational(5, 2)
+% assert g.subs(x, 3) == Rational(7, 4)
+% assert g.subs(x, 9) == Rational(13, 10)
+% diff = simplify(g - 1 - 3/(x+1))
+% assert diff == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R3-EX2}
+
+\textbf{Question 1.}
+\[
+g(0) = \frac{0+4}{0+1} = 4. \quad g(1) = \frac{1+4}{1+1} = \frac{5}{2} = 2{,}5.
+\]
+\[
+g(3) = \frac{3+4}{3+1} = \frac{7}{4} = 1{,}75. \quad g(9) = \frac{9+4}{9+1} = \frac{13}{10} = 1{,}3.
+\]
+
+\commentaireMarge{On met au même dénominateur en écrivant $1 = \frac{x+1}{x+1}$.}
+
+\textbf{Question 2.}
+\[
+g(x) - 1 = \frac{x+4}{x+1} - 1 = \frac{x+4}{x+1} - \frac{x+1}{x+1} = \frac{(x+4)-(x+1)}{x+1} = \frac{3}{x+1}.
+\]
+
+\commentaireMarge{Sur $[0\,;+\infty[$, quand $x$ augmente, $x+1$ augmente, donc $\frac{3}{x+1}$ diminue, donc $g(x) = 1 + \frac{3}{x+1}$ diminue.}
+
+\textbf{Question 3.} Pour $x \geq 0$, $x+1 \geq 1 > 0$ et est croissant, donc $\dfrac{3}{x+1}$ est décroissant. Ainsi $g(x) = 1 + \dfrac{3}{x+1}$ est décroissante sur $[0\,;+\infty[$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R3-EX3}{1}{5}
+On considère la suite $(v_n)$ définie pour tout $n \in \mathbb{N}$ par $v_n = 3n - 7$.
+\begin{enumerate}
+  \item Calculer $v_0$, $v_1$, $v_2$, $v_5$.
+  \item À quel rang $n$ a-t-on $v_n = 0$ ?
+  \item À partir de quel rang $n$ a-t-on $v_n > 0$ ?
+  \item La suite $(v_n)$ est-elle croissante ? Justifier brièvement.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% n = symbols('n')
+% v = 3*n - 7
+% assert v.subs(n, 0) == -7
+% assert v.subs(n, 1) == -4
+% assert v.subs(n, 2) == -1
+% assert v.subs(n, 5) == 8
+% sol = solve(v, n)
+% assert sol == [7/3]
+% # v_n > 0 iff n > 7/3 iff n >= 3
+% assert v.subs(n, 3) > 0
+% assert v.subs(n, 2) < 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R3-EX3}
+
+\textbf{Question 1.}
+\[
+v_0 = 3 \times 0 - 7 = -7. \quad v_1 = 3 \times 1 - 7 = -4. \quad v_2 = 3 \times 2 - 7 = -1. \quad v_5 = 3 \times 5 - 7 = 8.
+\]
+
+\textbf{Question 2.} On résout $v_n = 0$ :
+\[
+3n - 7 = 0 \implies n = \frac{7}{3} \approx 2{,}33.
+\]
+Mais $n$ doit être un entier naturel : $\dfrac{7}{3}$ n'est pas entier, donc il n'existe pas de rang $n \in \mathbb{N}$ tel que $v_n = 0$.
+
+\commentaireMarge{$n > 7/3$ et $n$ entier signifie $n \geq 3$.}
+
+\textbf{Question 3.} $v_n > 0 \iff 3n - 7 > 0 \iff n > \dfrac{7}{3}$. Le plus petit entier vérifiant cette condition est $n = 3$. Pour tout $n \geq 3$, $v_n > 0$.
+
+\textbf{Question 4.} $v_{n+1} - v_n = [3(n+1) - 7] - [3n - 7] = 3 > 0$. La suite est croissante.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-FR-R3-EX4}{1}{6}
+On considère la fonction $h$ définie sur $\mathbb{R}$ par $h(x) = 2^x$.
+\begin{enumerate}
+  \item Calculer $h(0)$, $h(1)$, $h(2)$, $h(-1)$.
+  \item La suite $(w_n)$ définie par $w_n = 2^n$ est-elle croissante ? Décroissante ? Justifier.
+  \item Résoudre $h(x) = 8$.
+  \item Pour quelle valeur de $n$ entier a-t-on $w_n = 32$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% # Calculs numeriques
+% assert 2**0 == 1
+% assert 2**1 == 2
+% assert 2**2 == 4
+% assert 2**(-1) == 0.5
+% # wn croissante : w_{n+1}/w_n = 2 > 1
+% assert 2**(1) / 2**(0) == 2
+% # h(x) = 8 => x = 3
+% assert 2**3 == 8
+% # w_n = 32 => n = 5
+% assert 2**5 == 32
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-FR-R3-EX4}
+
+\textbf{Question 1.}
+\[
+h(0) = 2^0 = 1. \quad h(1) = 2^1 = 2. \quad h(2) = 2^2 = 4. \quad h(-1) = 2^{-1} = \frac{1}{2}.
+\]
+
+\commentaireMarge{On calcule le quotient $w_{n+1}/w_n = 2^{n+1}/2^n = 2 > 1$ : tous les termes sont positifs et le rapport est $> 1$, donc la suite est croissante.}
+
+\textbf{Question 2.} Pour tout $n \in \mathbb{N}$, $w_{n+1} = 2^{n+1} = 2 \times 2^n = 2 w_n$. Comme $w_n = 2^n > 0$ et $w_{n+1} = 2w_n > w_n$, la suite est strictement croissante.
+
+\textbf{Question 3.} $h(x) = 8 \iff 2^x = 8 = 2^3 \iff x = 3$.
+
+\textbf{Question 4.} $w_n = 32 = 2^5$. Donc $2^n = 2^5$, soit $n = 5$.
+
+\end{corrige}

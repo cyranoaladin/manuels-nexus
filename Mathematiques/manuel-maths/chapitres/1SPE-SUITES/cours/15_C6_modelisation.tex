@@ -1,0 +1,105 @@
+% META: {"id": "1SPE-SUITES-CR-015", "chapitre": "1SPE-SUITES", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+
+%---------------------------------------------------------------
+% STRATE 1 — Savoirs fondamentaux
+%---------------------------------------------------------------
+
+\propriete[1 — Suite arithmétique comme modèle linéaire discret]{
+Une suite arithmétique de raison $r$ modélise une évolution où la \textbf{variation absolue} est constante :
+\[
+  u_{n+1} = u_n + r \quad \text{pour tout } n \in \mathbb{N}.
+\]
+C'est l'analogue discret d'une fonction affine $f(x) = ax + b$ : la suite croît (ou décroît) du même montant $r$ à chaque pas.
+}
+
+\propriete[2 — Suite géométrique comme modèle exponentiel discret]{
+Une suite géométrique de raison $q$ modélise une évolution où le \textbf{taux de variation} est constant :
+\[
+  u_{n+1} = q \cdot u_n \quad \text{pour tout } n \in \mathbb{N}.
+\]
+C'est l'analogue discret d'une fonction exponentielle.
+Le coefficient multiplicateur $q$ est lié au taux d'évolution $t$ (exprimé en valeur décimale) par :
+\[
+  q = 1 + t.
+\]
+}
+
+\exemple{
+\textbf{Modèle arithmétique.} Un abonnement coûte $10$~€ à l'inscription puis $5$~€ par mois.
+Le coût total après $n$ mois est $u_n = 10 + 5n$, qui est une suite arithmétique de raison $5$ et de premier terme $u_0 = 10$.
+}
+
+\exemple{
+\textbf{Modèle géométrique.} Un capital de $1\,000$~€ est placé à un taux annuel de $3\,\%$.
+Chaque année, le capital est multiplié par $q = 1{,}03$.
+Après $n$ années : $u_n = 1\,000 \times 1{,}03^n$.
+}
+
+\exemple{
+\textbf{Lien taux / coefficient multiplicateur.} Une population augmente de $2\,\%$ par an.
+Taux $t = 0{,}02$, donc $q = 1 + 0{,}02 = 1{,}02$.
+Une diminution de $5\,\%$ donne $q = 1 - 0{,}05 = 0{,}95$.
+}
+
+%---------------------------------------------------------------
+% STRATE 2 — Appui et erreurs fréquentes
+%---------------------------------------------------------------
+
+\erreurFrequente{
+\textbf{Confondre évolution absolue et évolution relative.}
+\og La valeur augmente de $20$ \fg{} $\rightarrow$ modèle arithmétique (variation absolue constante).
+\og La valeur augmente de $20\,\%$ \fg{} $\rightarrow$ modèle géométrique (variation relative constante).
+
+\medskip
+\textbf{Erreur sur le coefficient multiplicateur.}
+Une augmentation de $5\,\%$ donne $q = 1{,}05$, pas $q = 0{,}05$ (qui serait une quasi-suppression).
+Une diminution de $5\,\%$ donne $q = 0{,}95$, pas $q = 1{,}05$ ni $q = -0{,}05$.
+
+\medskip
+\textbf{Tableau récapitulatif.}
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+ & Suite arithmétique & Suite géométrique \\
+\hline
+Relation & $u_{n+1} = u_n + r$ & $u_{n+1} = q \cdot u_n$ \\
+Terme général & $u_n = u_0 + nr$ & $u_n = u_0 \cdot q^n$ \\
+Modèle & linéaire discret & exponentiel discret \\
+Évolution & absolue constante ($r$) & relative constante ($q$) \\
+Taux et $q$ & — & $q = 1 + t$ \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\margeAppui{Variation absolue constante $\Rightarrow$ arithmétique.}
+
+\margeAppui{Variation relative constante $\Rightarrow$ géométrique.}
+
+\margeAppui{Augmentation de $p\,\%$ : $q = 1 + \dfrac{p}{100}$.}
+
+%---------------------------------------------------------------
+% STRATE 3 — Approfondissement
+%---------------------------------------------------------------
+
+\approfondissement{
+\textbf{Limites des modèles et aperçu des suites arithmético-géométriques.}
+
+\medskip
+Les modèles arithmétiques et géométriques supposent une évolution parfaitement régulière, ce qui est rarement vérifié en pratique sur le long terme.
+En particulier :
+\begin{itemize}
+  \item un modèle géométrique de croissance ($q > 1$) implique une croissance non bornée, irréaliste pour une population soumise à des ressources limitées ;
+  \item un modèle arithmétique peut donner des valeurs négatives si $r < 0$ et $u_0$ fini.
+\end{itemize}
+
+\medskip
+\textbf{Suites arithmético-géométriques (aperçu).}
+Certains phénomènes combinent les deux effets :
+\[
+  u_{n+1} = q \cdot u_n + r \quad (q \neq 1,\; r \neq 0).
+\]
+On montre (hors programme de première) qu'en posant $\ell = \dfrac{r}{1-q}$, la suite $(v_n)$ définie par $v_n = u_n - \ell$ est géométrique de raison $q$.
+Ce type de suite modélise par exemple le remboursement d'un emprunt à taux fixe.
+}

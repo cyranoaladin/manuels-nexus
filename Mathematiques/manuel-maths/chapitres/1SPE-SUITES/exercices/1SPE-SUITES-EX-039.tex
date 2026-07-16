@@ -1,0 +1,52 @@
+% META: {"id": "1SPE-SUITES-EX-039", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C6"], "capacites_codes": ["C3", "C6"], "methodes": ["M3", "M6"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"A0": {"domaine": "entier", "min": 1000, "max": 5000}, "taux": {"domaine": "rationnel", "contrainte": "0.03<=taux<=0.10"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-039.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% A0 = 3000
+% q = Rational(107, 100)  # taux 7% par an
+% A = A0 * q**n
+% assert A.subs(n, 0) == 3000
+% ratio = simplify(A.subs(n, n+1) / A)
+% assert ratio == Rational(107, 100)
+% # A_5
+% A5 = 3000 * (1.07)**5
+% assert abs(A5 - 4207.66) < 0.01
+% # Comparaison deux offres :
+% # Offre A : suite geometrique q=1.07, A_n = 3000 * 1.07^n
+% # Offre B : suite arithmetique r=210, B_n = 3000 + 210*n
+% # A_10 vs B_10
+% A10 = 3000 * (1.07)**10
+% B10 = 3000 + 210 * 10
+% assert abs(A10 - 5901.45) < 0.01
+% assert B10 == 5100
+% # Offre A > Offre B pour n=10
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-039}{2}{25}
+Lucie hérite de $3\,000$~\euro{} et souhaite les placer. Deux offres s'offrent à elle :
+
+\begin{itemize}
+  \item \textbf{Offre A} : placement à intérêts composés au taux annuel de $7\,\%$. On note $A_n$ le capital après $n$ années.
+  \item \textbf{Offre B} : placement à intérêts simples : Lucie reçoit chaque année $210$~\euro{} d'intérêts (indépendamment du capital accumulé). On note $B_n$ le capital après $n$ années.
+\end{itemize}
+
+\begin{enumerate}
+  \item \textbf{Offre A.}
+  \begin{enumerate}
+    \item Montrer que $(A_n)$ est une suite géométrique. Préciser sa raison et exprimer $A_n$ en fonction de $n$.
+    \item Calculer $A_5$ (arrondi au centime).
+  \end{enumerate}
+
+  \item \textbf{Offre B.}
+  \begin{enumerate}
+    \item Montrer que $(B_n)$ est une suite arithmétique. Préciser sa raison et exprimer $B_n$ en fonction de $n$.
+    \item Calculer $B_5$.
+  \end{enumerate}
+
+  \item \textbf{Comparaison.}
+  \begin{enumerate}
+    \item Calculer $A_{10}$ (arrondi au centime) et $B_{10}$. Quelle offre est plus avantageuse après $10$ ans ?
+    \item Pour $n = 1$ et $n = 2$, comparer $A_n$ et $B_n$. Conjecturer à partir de quel rang l'offre A devient plus avantageuse.
+    \item Justifier qualitativement pourquoi, à long terme, une croissance géométrique dépasse toujours une croissance arithmétique.
+  \end{enumerate}
+\end{enumerate}
+\end{exercice}

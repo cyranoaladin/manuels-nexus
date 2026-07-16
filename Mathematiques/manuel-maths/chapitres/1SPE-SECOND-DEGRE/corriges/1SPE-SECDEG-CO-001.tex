@@ -1,0 +1,62 @@
+% META: {"id": "1SPE-SECDEG-CO-001", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor, simplify, Rational
+% x = symbols('x')
+% f = 2*x**2 - 3*x - 5
+% # 1. Coefficients
+% assert f.coeff(x, 2) == 2   # a = 2
+% assert f.coeff(x, 1) == -3  # b = -3
+% assert f.coeff(x, 0) == -5  # c = -5
+% # 2. Sommet
+% xs = Rational(-(-3), 2*2)   # -b/(2a) = 3/4
+% assert xs == Rational(3, 4)
+% beta = f.subs(x, xs)
+% assert beta == Rational(-49, 8)
+% # 3. Forme canonique
+% assert simplify(f - (2*(x - Rational(3,4))**2 - Rational(49,8))) == 0
+% # 4. Forme factorisee
+% assert simplify(f - 2*(x + 1)*(x - Rational(5,2))) == 0
+% from sympy import expand as ex
+% assert ex(2*(x + 1)*(x - Rational(5,2))) == 2*x**2 - 3*x - 5
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-001}
+
+\textbf{1. Identification des coefficients.}
+
+\commentaireMarge{Lire $a$, $b$, $c$ dans $ax^2+bx+c$.}
+
+Le trinôme $f(x) = 2x^2 - 3x - 5$ est de la forme $ax^2 + bx + c$ avec :
+\[a = 2, \quad b = -3, \quad c = -5.\]
+
+\medskip
+\textbf{2. Coordonnées du sommet.}
+
+\commentaireMarge{Formule du sommet : $\alpha = -\dfrac{b}{2a}$.}
+
+L'abscisse du sommet est :
+\[\alpha = -\frac{b}{2a} = -\frac{-3}{2 \times 2} = \frac{3}{4}.\]
+
+L'ordonnée du sommet est :
+\[\beta = f\!\left(\frac{3}{4}\right) = 2\times\left(\frac{3}{4}\right)^2 - 3\times\frac{3}{4} - 5 = 2\times\frac{9}{16} - \frac{9}{4} - 5 = \frac{9}{8} - \frac{18}{8} - \frac{40}{8} = -\frac{49}{8}.\]
+
+Le sommet est $S\!\left(\dfrac{3}{4}\,;\,-\dfrac{49}{8}\right)$.
+
+\medskip
+\textbf{3. Forme canonique.}
+
+\commentaireMarge{$f(x)=a(x-\alpha)^2+\beta$.}
+
+On a $a = 2$, $\alpha = \dfrac{3}{4}$, $\beta = -\dfrac{49}{8}$, donc :
+\[f(x) = 2\left(x - \frac{3}{4}\right)^2 - \frac{49}{8}.\]
+
+\medskip
+\textbf{4. Vérification de la forme factorisée.}
+
+\commentaireMarge{Développer et simplifier pour vérifier.}
+
+On développe $2\!\left(x+1\right)\!\left(x - \dfrac{5}{2}\right)$ :
+\[2\!\left(x+1\right)\!\left(x - \frac{5}{2}\right) = 2\!\left(x^2 - \frac{5}{2}x + x - \frac{5}{2}\right) = 2\!\left(x^2 - \frac{3}{2}x - \frac{5}{2}\right) = 2x^2 - 3x - 5.\]
+
+On retrouve bien $f(x)$. \hfill $\square$
+
+\end{corrige}

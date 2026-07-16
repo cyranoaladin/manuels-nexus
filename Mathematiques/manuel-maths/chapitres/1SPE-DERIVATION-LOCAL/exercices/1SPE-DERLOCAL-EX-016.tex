@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-DERLOCAL-EX-016","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":2,"competences":["calculer","raisonner","representer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-016.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-016.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve, Rational
+% x = symbols('x')
+% # T1 en x=1 : y = f'(1)(x-1) + f(1) = -1(x-1) + 2 = -x + 3
+% T1 = -1*(x - 1) + 2
+% # T2 en x=3 : y = f'(3)(x-3) + f(3) = 2(x-3) + 4 = 2x - 2
+% T2 = 2*(x - 3) + 4
+% # Intersection : -x+3 = 2x-2 => 3x=5 => x=5/3
+% sol = solve(Eq(T1, T2), x)
+% assert sol[0] == Rational(5, 3)
+% y_inter = T1.subs(x, Rational(5, 3))
+% assert y_inter == Rational(4, 3)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-016}{2}{15}
+Soit $f$ une fonction définie et dérivable sur $\mathbb{R}$. On donne :
+\[
+f(1) = 2, \quad f'(1) = -1, \quad f(3) = 4, \quad f'(3) = 2.
+\]
+
+\begin{enumerate}
+  \item Déterminer l'équation de la tangente $T_1$ à la courbe de $f$ au point d'abscisse $1$.
+  \item Déterminer l'équation de la tangente $T_2$ à la courbe de $f$ au point d'abscisse $3$.
+  \item Les droites $T_1$ et $T_2$ sont-elles sécantes ? Si oui, déterminer les coordonnées de leur point d'intersection.
+\end{enumerate}
+\end{exercice}

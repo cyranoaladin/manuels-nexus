@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-SUITES-EX-016", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-016.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-016.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonneg=True)
+% f = n**2 - 4*n + 7
+% fp = diff(f, n)
+% # fp = 2n - 4, nulle en n=2, negative pour n<2, positive pour n>2
+% assert fp == 2*n - 4
+% # Sur N : f(0)=7, f(1)=4, f(2)=3 (minimum), f(3)=4, f(4)=7
+% assert f.subs(n, 0) == 7
+% assert f.subs(n, 1) == 4
+% assert f.subs(n, 2) == 3
+% assert f.subs(n, 3) == 4
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-016}{1}{10}
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par $u_n = n^2 - 4n + 7$.
+
+On pose $f(x) = x^2 - 4x + 7$ pour $x \in [0\,;\,+\infty[$.
+\begin{enumerate}
+  \item Calculer $f'(x)$.
+  \item Étudier le signe de $f'(x)$ sur $[0\,;\,+\infty[$ et dresser le tableau de variations de $f$.
+  \item En déduire les variations de la suite $(u_n)$ sur $\mathbb{N}$ (on calculera $u_0$, $u_1$, $u_2$, $u_3$).
+\end{enumerate}
+\end{exercice}

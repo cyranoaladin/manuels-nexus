@@ -1,0 +1,474 @@
+{
+  "chapitre": "1SPE-SECOND-DEGRE",
+  "titre": "Fonctions polynomes du second degre — QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Parmi les expressions suivantes, laquelle est un polynome du second degre ?",
+      "options": {
+        "A": "$f(x) = 3x + 7$",
+        "B": "$f(x) = 2x^2 - 5x + 1$",
+        "C": "$f(x) = x^3 - 2x + 4$",
+        "D": "$f(x) = \\dfrac{1}{x^2} + 3$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a confondu polynome du premier degre et du second degre. $3x+7$ est de degre 1 car le coefficient de $x^2$ est nul ($a = 0$).",
+          "renvoi": "C1, definition"
+        },
+        "C": {
+          "erreur": "L'eleve a retenu $x^3 - 2x + 4$ comme polynome du second degre alors que le terme dominant est $x^3$ : c'est un polynome du troisieme degre.",
+          "renvoi": "C1, definition"
+        },
+        "D": {
+          "erreur": "L'eleve a confondu $\\frac{1}{x^2} = x^{-2}$ (puissance negative) avec $x^2$ (second degre). Un polynome n'admet que des puissances entieres positives.",
+          "renvoi": "C1, definition"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Soit $f(x) = 2x^2 - 8x + 6$. Quelle est la forme canonique de $f$ ?",
+      "options": {
+        "A": "$f(x) = 2(x - 2)^2 - 2$",
+        "B": "$f(x) = 2(x - 4)^2 - 10$",
+        "C": "$f(x) = 2(x - 2)^2 + 2$",
+        "D": "$f(x) = (x - 2)^2 - 2$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve a calcule $\\alpha = -b/(2a) = 8/2 = 4$ au lieu de $\\alpha = 8/4 = 2$ (oubli du facteur $2a$ au denominateur, pas seulement $2$).",
+          "renvoi": "C1, forme canonique"
+        },
+        "C": {
+          "erreur": "L'eleve a trouve $\\alpha = 2$ correctement mais a calcule $\\beta = f(2) = 2(4) - 8(2) + 6 = 8 - 16 + 6 = -2$ et a ecrit $+2$ au lieu de $-2$. Erreur de signe sur $\\beta$.",
+          "renvoi": "C1, forme canonique"
+        },
+        "D": {
+          "erreur": "L'eleve a oublie le facteur $a = 2$ devant la forme canonique : $f(x) = a(x-\\alpha)^2 + \\beta$ avec $a = 2$.",
+          "renvoi": "C1, forme canonique"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "On developpe $3(x-1)^2 + 5$. Quel resultat obtient-on ?",
+      "options": {
+        "A": "$3x^2 - 6x + 8$",
+        "B": "$3x^2 - 6x + 3$",
+        "C": "$3x^2 - 3x + 8$",
+        "D": "$3x^2 + 8$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve a developpe $3(x-1)^2 = 3x^2 - 6x + 3$ mais a oublie d'ajouter le $+5$ : le terme constant est $3 + 5 = 8$, pas $3$.",
+          "renvoi": "R1, identites remarquables"
+        },
+        "C": {
+          "erreur": "L'eleve a calcule $3(x-1)^2 = 3(x^2 - x + 1)$ au lieu de $3(x^2 - 2x + 1)$ : erreur sur le terme en $x$ de l'identite $(x-1)^2 = x^2 - 2x + 1$ (oubli du coefficient 2).",
+          "renvoi": "R1, identites remarquables"
+        },
+        "D": {
+          "erreur": "L'eleve a confondu $(x-1)^2$ avec $x^2 - 1$ (difference de carres au lieu du carre d'un binome) : $3(x^2 - 1) + 5 = 3x^2 + 2$. Double erreur de formule.",
+          "renvoi": "R1, identites remarquables"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Soit $f(x) = -x^2 + 4x - 3$. Quelle est l'abscisse du sommet de la parabole representant $f$ ?",
+      "options": {
+        "A": "$x = -2$",
+        "B": "$x = 2$",
+        "C": "$x = -4$",
+        "D": "$x = 4$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a applique $\\alpha = -b/(2a)$ mais a oublie de tenir compte du signe de $a = -1$ : $\\alpha = -4/(2 \\times (-1)) = -4/(-2) = 2$, et non $-2$. Erreur de signe sur $a$.",
+          "renvoi": "C2, sommet"
+        },
+        "C": {
+          "erreur": "L'eleve a calcule $\\alpha = b/(2a) = 4/(2 \\times (-1)) = -2$, confondant la formule $\\alpha = -b/(2a)$ avec $b/(2a)$ (oubli du signe moins devant $b$).",
+          "renvoi": "C2, sommet"
+        },
+        "D": {
+          "erreur": "L'eleve a utilise directement $b = 4$ comme abscisse du sommet, sans appliquer la formule $\\alpha = -b/(2a)$.",
+          "renvoi": "C2, sommet"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C2",
+      "enonce": "Soit $f(x) = x^2 - 6x + 5$. Sur quel intervalle $f$ est-elle decroissante ?",
+      "options": {
+        "A": "$[3\\,;\\,+\\infty[$",
+        "B": "$]-\\infty\\,;\\,3]$",
+        "C": "$]-\\infty\\,;\\,5]$",
+        "D": "$[5\\,;\\,+\\infty[$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a confondu l'intervalle de decroissance avec l'intervalle de croissance. Comme $a = 1 > 0$, la parabole est en forme de U : $f$ est decroissante sur $]-\\infty\\,;\\,\\alpha]$ et croissante sur $[\\alpha\\,;\\,+\\infty[$.",
+          "renvoi": "C2, tableau de variations"
+        },
+        "C": {
+          "erreur": "L'eleve a confondu l'ordonnee $f(\\alpha) = -4$ ou la valeur $c = 5$ avec l'abscisse du sommet $\\alpha = 3$.",
+          "renvoi": "C2, sommet"
+        },
+        "D": {
+          "erreur": "L'eleve a utilise $c = 5$ comme abscisse de changement de monotonie au lieu de $\\alpha = -b/(2a) = 6/2 = 3$.",
+          "renvoi": "C2, sommet"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C2",
+      "enonce": "Parmi les assertions suivantes concernant $f(x) = 2x^2 - 4x + 7$, laquelle est vraie ?",
+      "options": {
+        "A": "Le minimum de $f$ vaut $7$.",
+        "B": "La parabole est tournee vers le bas (coefficient directeur negatif).",
+        "C": "Le minimum de $f$ vaut $5$.",
+        "D": "La fonction $f$ n'admet pas de minimum."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a confondu le minimum $f(\\alpha)$ avec le terme constant $c = 7$. Le minimum est $f(1) = 2 - 4 + 7 = 5$, pas $7$.",
+          "renvoi": "C2, sommet"
+        },
+        "B": {
+          "erreur": "L'eleve a dit que $a = 2 < 0$ alors que $a = 2 > 0$. La parabole est tournee vers le haut (U) et $f$ admet un minimum.",
+          "renvoi": "C2, orientation de la parabole"
+        },
+        "D": {
+          "erreur": "L'eleve a conclu que $f$ n'admet pas de minimum, peut-etre en confondant avec le cas $a < 0$ (maximum) ou en ne reconnaissant pas que $a > 0$ implique un minimum.",
+          "renvoi": "C2, tableau de variations"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C3",
+      "enonce": "On considere $f(x) = x^2 - 5x + 6$. Quelle est la valeur du discriminant $\\Delta$ ?",
+      "options": {
+        "A": "$\\Delta = 1$",
+        "B": "$\\Delta = 49$",
+        "C": "$\\Delta = -11$",
+        "D": "$\\Delta = 25$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve a calcule $\\Delta = b^2 + 4ac = 25 + 24 = 49$ au lieu de $\\Delta = b^2 - 4ac = 25 - 24 = 1$ : erreur de signe dans la formule (addition au lieu de soustraction).",
+          "renvoi": "C3, discriminant"
+        },
+        "C": {
+          "erreur": "L'eleve a utilise $\\Delta = -b^2 + 4ac = -25 + 24 = -1$... ou a calcule $\\Delta = b^2 - 4ac$ avec $b = -5$ et $c = 1$, $a = 6$ (permutation des coefficients). Erreur d'identification de $a$, $b$, $c$.",
+          "renvoi": "C3, discriminant"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule $\\Delta = b^2 = (-5)^2 = 25$, oubliant le terme $-4ac = -4 \\times 1 \\times 6 = -24$ dans la formule.",
+          "renvoi": "C3, discriminant"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C3",
+      "enonce": "L'equation $2x^2 - 4x + 2 = 0$ admet :",
+      "options": {
+        "A": "Deux racines reelles distinctes.",
+        "B": "Une racine double, egale a $1$.",
+        "C": "Aucune racine reelle.",
+        "D": "Une racine double, egale a $2$."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a conclu $\\Delta > 0$ sans calculer : $\\Delta = (-4)^2 - 4 \\times 2 \\times 2 = 16 - 16 = 0$. Un discriminant nul donne une racine double, pas deux racines distinctes.",
+          "renvoi": "C3, cas du discriminant"
+        },
+        "C": {
+          "erreur": "L'eleve a conclu $\\Delta < 0$ par erreur. Le calcul donne $\\Delta = 16 - 16 = 0 \\geq 0$, donc il existe au moins une solution reelle.",
+          "renvoi": "C3, cas du discriminant"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule la racine double $x_0 = -b/(2a) = 4/4 = 1$, mais a ecrit $2$ au lieu de $1$. Erreur arithmetique dans le calcul de $x_0$.",
+          "renvoi": "C3, racine double"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C3",
+      "enonce": "Resoudre $x^2 - 3x - 4 = 0$. Les solutions sont :",
+      "options": {
+        "A": "$x_1 = -1$ et $x_2 = 4$",
+        "B": "$x_1 = 1$ et $x_2 = -4$",
+        "C": "$x_1 = -1$ et $x_2 = -4$",
+        "D": "$x_1 = 1$ et $x_2 = 4$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve a applique les formules avec un signe erronne : $x = (-b \\pm \\sqrt{\\Delta})/(2a)$ avec $b = 3$ mais a oublie que $b = -3$. Les formules donnent $x = (3 \\pm 5)/2$, soit $x_1 = -1$ et $x_2 = 4$.",
+          "renvoi": "C3, formule des racines"
+        },
+        "C": {
+          "erreur": "L'eleve a trouve les bonnes valeurs en module mais a attribue les mauvais signes aux deux racines. $\\Delta = 9 + 16 = 25$, $x_1 = (3-5)/2 = -1$ et $x_2 = (3+5)/2 = 4$.",
+          "renvoi": "C3, formule des racines"
+        },
+        "D": {
+          "erreur": "L'eleve a peut-etre factorise par inspection en cherchant deux entiers de somme $-3$ et produit $-4$ : il faut $(-1) \\times 4 = -4$ et $(-1) + 4 = 3 \\neq -3$. Confusion des signes.",
+          "renvoi": "C3, formule des racines"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C4",
+      "enonce": "Soit $f(x) = 2x^2 - 8x + 6$. Les racines de $f$ sont $x_1 = 1$ et $x_2 = 3$. Quelle est la forme factorisee de $f(x)$ ?",
+      "options": {
+        "A": "$f(x) = (x - 1)(x - 3)$",
+        "B": "$f(x) = 2(x - 1)(x - 3)$",
+        "C": "$f(x) = 2(x + 1)(x + 3)$",
+        "D": "$f(x) = (2x - 1)(2x - 3)$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a oublie le facteur $a = 2$ dans la forme factorisee $f(x) = a(x - x_1)(x - x_2)$. La formule impose de conserver le coefficient dominant.",
+          "renvoi": "C4, factorisation"
+        },
+        "C": {
+          "erreur": "L'eleve a utilise $+x_1$ et $+x_2$ au lieu de $-x_1$ et $-x_2$ : la forme factorisee est $a(x - x_1)(x - x_2)$, pas $a(x + x_1)(x + x_2)$.",
+          "renvoi": "C4, factorisation"
+        },
+        "D": {
+          "erreur": "L'eleve a reparti le coefficient $a = 2$ sur chacun des deux facteurs : $(2x - x_1)(2x - x_2)$ n'est pas la forme correcte, car $2 \\times 2 = 4 \\neq a = 2$.",
+          "renvoi": "C4, factorisation"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C4",
+      "enonce": "On sait que $f(x) = (x-2)(x-5)$. Sur quel intervalle $f(x)$ est-il negatif ou nul ?",
+      "options": {
+        "A": "$]-\\infty\\,;\\,2] \\cup [5\\,;\\,+\\infty[$",
+        "B": "$[2\\,;\\,5]$",
+        "C": "$]-\\infty\\,;\\,2]$",
+        "D": "$[5\\,;\\,+\\infty[$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a confondu l'intervalle ou $f$ est negatif avec l'intervalle ou $f$ est positif. Le produit $(x-2)(x-5)$ est negatif entre les deux racines ($a > 0$ : parabole en U).",
+          "renvoi": "C4, tableau de signes"
+        },
+        "C": {
+          "erreur": "L'eleve n'a pris en compte que l'une des deux racines : $f(x) \\leq 0 \\Leftrightarrow 2 \\leq x \\leq 5$, pas seulement $x \\leq 2$.",
+          "renvoi": "C4, tableau de signes"
+        },
+        "D": {
+          "erreur": "L'eleve a identifie le mauvais intervalle : $f(x) \\geq 0$ pour $x \\geq 5$, mais on cherche $f(x) \\leq 0$.",
+          "renvoi": "C4, tableau de signes"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C4",
+      "enonce": "Le trinome $f(x) = x^2 + 2x + 5$ de discriminant $\\Delta = -16 < 0$ admet quel signe ?",
+      "options": {
+        "A": "Il est positif pour $x > 0$ et negatif pour $x < 0$.",
+        "B": "Il est negatif pour tout $x \\in \\mathbb{R}$.",
+        "C": "Il est positif pour tout $x \\in \\mathbb{R}$.",
+        "D": "Il change de signe en $x = -1$."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a applique le signe de $c = 5 > 0$ uniquement sur $]0\\,;\\,+\\infty[$. Quand $\\Delta < 0$ et $a > 0$, le trinome est positif sur $\\mathbb{R}$ tout entier.",
+          "renvoi": "C4, signe quand Delta < 0"
+        },
+        "B": {
+          "erreur": "L'eleve a confondu $\\Delta < 0$ avec «le trinome est negatif». La regle est : si $\\Delta < 0$ et $a > 0$, le trinome est strictement positif partout.",
+          "renvoi": "C4, signe quand Delta < 0"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule le sommet $\\alpha = -b/(2a) = -1$ et a cru que c'etait une racine (changement de signe). Quand $\\Delta < 0$, il n'y a pas de racine reelle et pas de changement de signe.",
+          "renvoi": "C4, signe quand Delta < 0"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C5",
+      "enonce": "Resoudre $x^2 - x - 6 \\leq 0$ (les racines de $x^2 - x - 6$ sont $-2$ et $3$).",
+      "options": {
+        "A": "$x \\in [-2\\,;\\,3]$",
+        "B": "$x \\in ]-\\infty\\,;\\,-2] \\cup [3\\,;\\,+\\infty[$",
+        "C": "$x \\in [-2\\,;\\,0]$",
+        "D": "$x \\in [0\\,;\\,3]$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve a ecrit l'ensemble de solutions de l'inequation $\\geq 0$ au lieu de $\\leq 0$. Le trinome $x^2 - x - 6$ est negatif entre ses racines ($a = 1 > 0$, parabole en U).",
+          "renvoi": "C5, resolution inequation"
+        },
+        "C": {
+          "erreur": "L'eleve n'a pris qu'une moitie de l'intervalle solution, en arrondissant a $[x_1\\,;\\,0]$ au lieu de $[x_1\\,;\\,x_2]$.",
+          "renvoi": "C5, resolution inequation"
+        },
+        "D": {
+          "erreur": "L'eleve a pris $[0\\,;\\,x_2]$ au lieu de $[x_1\\,;\\,x_2] = [-2\\,;\\,3]$. Il a omis la racine $x_1 = -2$.",
+          "renvoi": "C5, resolution inequation"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C5",
+      "enonce": "L'inequation $-x^2 + 4x - 3 \\geq 0$ a pour ensemble de solutions :",
+      "options": {
+        "A": "$]-\\infty\\,;\\,1] \\cup [3\\,;\\,+\\infty[$",
+        "B": "$[1\\,;\\,3]$",
+        "C": "$]-\\infty\\,;\\,-1] \\cup [3\\,;\\,+\\infty[$",
+        "D": "$[-1\\,;\\,3]$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a confondu les intervalles de signe positif et negatif pour $a < 0$. Quand $a = -1 < 0$, la parabole est en $\\cap$ : le trinome est positif entre ses racines.",
+          "renvoi": "C5, cas a < 0"
+        },
+        "C": {
+          "erreur": "L'eleve a utilise $-x_1 = -1$ au lieu de $x_1 = 1$ (oubli du signe des racines). Les racines de $-x^2+4x-3 = 0$ sont $x = 1$ et $x = 3$.",
+          "renvoi": "C5, calcul des racines"
+        },
+        "D": {
+          "erreur": "L'eleve a utilise $-x_1 = -1$ au lieu de $x_1 = 1$ pour la borne inferieure. Les racines sont $1$ et $3$, pas $-1$ et $3$.",
+          "renvoi": "C5, calcul des racines"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C5",
+      "enonce": "Pour quelle valeur de $k$ l'equation $x^2 - 2x + k = 0$ admet-elle exactement une solution reelle ?",
+      "options": {
+        "A": "$k = 0$",
+        "B": "$k = 2$",
+        "C": "$k = 1$",
+        "D": "$k = -1$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a pose $k = 0$ en pensant que le terme constant nul donne une racine double. Le discriminant $\\Delta = 4 - 4k = 0 \\Leftrightarrow k = 1$, pas $k = 0$.",
+          "renvoi": "C5, discriminant nul"
+        },
+        "B": {
+          "erreur": "L'eleve a confondu $k$ avec $b = -2$ ou avec $b^2/4 = 1$... il a peut-etre pose $\\Delta = b - 4k = 0$. Le discriminant est $\\Delta = b^2 - 4ac = 4 - 4k$.",
+          "renvoi": "C5, discriminant nul"
+        },
+        "D": {
+          "erreur": "L'eleve a pose $\\Delta = 4 - 4k = 0$ et a resolu $k = 4/4 = 1$ mais a donne $-1$ par erreur de signe.",
+          "renvoi": "C5, discriminant nul"
+        }
+      }
+    },
+    {
+      "id": "Q16",
+      "capacite": "C6",
+      "enonce": "On decoupe des carres de cote $x$ aux coins d'une feuille $30 \\times 20$ pour former une boite. Le volume est $V(x) = x(30-2x)(20-2x)$. Quelle est la valeur de $x$ pour $x = 4$ ?",
+      "options": {
+        "A": "$V(4) = 1344$",
+        "B": "$V(4) = 1280$",
+        "C": "$V(4) = 2640$",
+        "D": "$V(4) = 1056$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve a calcule $V(4) = 4 \\times (30-4) \\times (20-4) = 4 \\times 26 \\times 16 = 1664$... ou a substitue $2x = 4$ au lieu de $x = 4$ dans un facteur : $V(4) = 4 \\times 22 \\times 12 = 1056$. Erreur sur $30 - 2 \\times 4 = 22$ et $20 - 2 \\times 4 = 12$.",
+          "renvoi": "C6, evaluation d'une expression"
+        },
+        "C": {
+          "erreur": "L'eleve a calcule $4 \\times 30 \\times 20 = 2400$ ou a omis le $-2x$ dans les facteurs. Il n'a pas tenu compte des decoupes.",
+          "renvoi": "C6, mise en equation"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule $V(4) = 4 \\times (30 - 4) \\times (20 - 4) = 4 \\times 26 \\times ... $  ou $4 \\times 22 \\times 12 = 1056$ (confusion $30 - x$ et $30 - 2x$).",
+          "renvoi": "C6, mise en equation"
+        }
+      }
+    },
+    {
+      "id": "Q17",
+      "capacite": "C6",
+      "enonce": "On cherche a maximiser $f(x) = -2x^2 + 8x + 3$ sur $\\mathbb{R}$. Quelle est la valeur du maximum ?",
+      "options": {
+        "A": "$f_{\\max} = 3$",
+        "B": "$f_{\\max} = 11$",
+        "C": "$f_{\\max} = 8$",
+        "D": "$f_{\\max} = 2$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a pris $f(0) = c = 3$ comme maximum. Or $c = f(0)$ est uniquement la valeur en $x = 0$, pas le maximum global (qui se situe au sommet $\\alpha = 2$).",
+          "renvoi": "C6, optimisation"
+        },
+        "C": {
+          "erreur": "L'eleve a lu $b = 8$ comme la valeur maximale. Le maximum est $f(\\alpha) = f(2) = -8 + 16 + 3 = 11$.",
+          "renvoi": "C6, sommet et maximum"
+        },
+        "D": {
+          "erreur": "L'eleve a donne $\\alpha = -b/(2a) = -8/(2 \\times (-2)) = 2$ comme le maximum (en confondant abscisse et valeur du maximum).",
+          "renvoi": "C6, sommet et maximum"
+        }
+      }
+    },
+    {
+      "id": "Q18",
+      "capacite": "C6",
+      "enonce": "Un balle est lancee verticalement. Sa hauteur est $h(t) = -5t^2 + 20t$ (en metres, $t$ en secondes). A quel instant atteint-elle sa hauteur maximale ?",
+      "options": {
+        "A": "$t = 4$ s",
+        "B": "$t = 1$ s",
+        "C": "$t = 2$ s",
+        "D": "$t = 20$ s"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a trouve l'instant ou la balle retombe au sol : $h(t) = 0 \\Leftrightarrow -5t(t-4) = 0$, donc $t = 4$ s est la portee, pas l'instant du maximum.",
+          "renvoi": "C6, distinction sommet / racines"
+        },
+        "B": {
+          "erreur": "L'eleve a divise $b = 20$ par $2a = -10$ sans le signe moins : $\\alpha = -b/(2a) = -20/(2 \\times (-5)) = 2$, pas $1$. Erreur dans l'application de la formule.",
+          "renvoi": "C6, abscisse du sommet"
+        },
+        "D": {
+          "erreur": "L'eleve a confondu $b = 20$ avec l'instant du maximum. L'abscisse du sommet est $\\alpha = -b/(2a) = -20/(-10) = 2$ s.",
+          "renvoi": "C6, abscisse du sommet"
+        }
+      }
+    }
+  ]
+}

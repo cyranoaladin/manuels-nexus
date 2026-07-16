@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-DERLOCAL-EX-015","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":2,"competences":["representer","communiquer","modeliser"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-015.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-015.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Tangente en t=6 passe par (6, 18) et (10, 14)
+% # Pente : (14-18)/(10-6) = -4/4 = -1
+% pente = Rational(14 - 18, 10 - 6)
+% assert pente == -1
+% # T(6) = 18, T'(6) = -1
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-015}{2}{12}
+La température $T$ (en \degres C) dans un local technique est modélisée par une fonction du temps $t$ (en heures), pour $t \in [0\,;\,24]$. On dispose de la courbe de la fonction $T$ sur cet intervalle.
+
+On a tracé la tangente à la courbe au point d'abscisse $t = 6$. Cette tangente passe par les points de coordonnées $(6\,;\,18)$ et $(10\,;\,14)$.
+
+\begin{enumerate}
+  \item Déterminer la valeur de $T(6)$. Interpréter ce résultat dans le contexte.
+  \item Calculer le coefficient directeur de la tangente à la courbe au point d'abscisse $6$.
+  \item En déduire la valeur de $T'(6)$.
+  \item Interpréter le signe de $T'(6)$ dans le contexte de l'exercice. Rédiger une phrase utilisant les unités appropriées.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,31 @@
+% META: {"id":"1SPE-DERLOCAL-EX-029","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":3,"competences":["chercher","raisonner","calculer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-029.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-029.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify
+% h = symbols('h')
+% a = 2
+% # f(x) = 1/x, f'(a) = -1/a^2 = -1/4
+% approx = Rational(1, 2) + Rational(-1, 4) * Rational(1, 100)
+% assert approx == Rational(199, 400)
+% # Valeur exacte de 1/2.01
+% exact = Rational(1, Rational(201, 100))
+% assert exact == Rational(100, 201)
+% # Erreur = exact - approx = 100/201 - 199/400
+% erreur_expr = Rational(100, 201) - Rational(199, 400)
+% # Simplification : h^2 / (a^2*(a+h))
+% # Avec a=2, h=0.01 : 0.0001/(4*2.01) = 0.01^2/(4*2.01)
+% erreur_formule = Rational(1, 100)**2 / (4 * Rational(201, 100))
+% assert simplify(erreur_expr - erreur_formule) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-029}{3}{20}
+Soit $f$ la fonction définie sur $]0\,;\,+\infty[$ par $f(x) = \dfrac{1}{x}$. On admet que $f'(a) = -\dfrac{1}{a^2}$ pour tout $a > 0$.
+
+\begin{enumerate}
+  \item En utilisant l'approximation linéaire au voisinage de $a = 2$, donner une valeur approchée de $\dfrac{1}{2{,}01}$.
+  \item Calculer la valeur exacte de $\dfrac{1}{2{,}01}$ sous forme de fraction.
+  \item On pose $h = x - a$. Montrer que l'erreur commise par l'approximation linéaire est :
+  \[
+  E(h) = f(a+h) - \bigl[f(a) + f'(a) \cdot h\bigr] = \dfrac{h^2}{a^2(a+h)}.
+  \]
+  \item Vérifier cette formule avec les valeurs de la question \textbf{1}.
+\end{enumerate}
+\end{exercice}

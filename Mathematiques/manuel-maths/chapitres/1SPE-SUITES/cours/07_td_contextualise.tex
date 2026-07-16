@@ -1,0 +1,292 @@
+% META: {"id": "1SPE-SUITES-COURS-07-TC", "chapitre": "1SPE-SUITES", "type_objet": "cours", "sous_type": "td_contextualise", "titre": "TD contextualise — Decroissance radioactive", "temps_gabarit": 7, "capacites": ["C3", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import Rational, log, ln, N
+% import math
+% # Modelisation : M_n = 100 * 0.9879^n
+% q = 0.9879
+% M = lambda n: 100 * q**n
+% assert abs(M(0) - 100) < 1e-9
+% assert abs(M(1) - 98.79) < 1e-9
+% # Demi-vie : M_n <= 50 <=> 0.9879^n <= 0.5
+% # n >= ln(0.5) / ln(0.9879)
+% demi_vie_exacte = math.log(0.5) / math.log(q)
+% assert abs(demi_vie_exacte - 57.23) < 0.1
+% # Verification par algorithme
+% n = 0
+% m = 100.0
+% while m > 50:
+%     m = q * m
+%     n += 1
+% assert n == 58
+% assert M(57) > 50
+% assert M(58) <= 50
+% # Variations : q < 1 donc suite strictement decroissante
+% assert q < 1
+% assert M(1) < M(0)
+% # Quelques valeurs
+% assert abs(M(10) - 100 * q**10) < 1e-9
+% assert abs(M(100) - 100 * q**100) < 1e-9
+% END-VERIFY
+
+\section*{Temps 7 — TD contextualisé : Décroissance radioactive}
+
+\textbf{Contexte.} Le carbone-14 est un isotope radioactif utilisé en archéologie pour dater des matières organiques. Un échantillon de $100$~g de carbone-14 perd $1{,}21\,\%$ de sa masse chaque siècle. On note $M_n$ la masse (en grammes) de l'échantillon après $n$ siècles.
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE A — Modelisation
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-COURS-07-TC-EX1}{2}{15}
+
+\textbf{Partie A — Modélisation par une suite géométrique}
+
+\begin{enumerate}
+  \item Quel est le coefficient multiplicateur correspondant à une perte de $1{,}21\,\%$ ? En déduire la relation $M_{n+1}$ en fonction de $M_n$.
+  \item Montrer que $(M_n)$ est une suite géométrique. Préciser son premier terme $M_0$ et sa raison $q$.
+  \item Exprimer $M_n$ en fonction de $n$.
+  \item Calculer $M_1$, $M_{10}$ et $M_{100}$ (arrondir à deux décimales). Interpréter $M_{100}$.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{1SPE-SUITES-COURS-07-TC-EX1}
+
+\commentaireMarge{Perte de $1{,}21\,\%$ : coefficient multiplicateur $q = 1 - 0{,}0121 = 0{,}9879$.}
+
+\textbf{Question 1.} Une perte de $1{,}21\,\%$ correspond au coefficient multiplicateur :
+\[
+  q = 1 - \frac{1{,}21}{100} = 1 - 0{,}0121 = 0{,}9879.
+\]
+D'où la relation de récurrence :
+\[
+  M_{n+1} = 0{,}9879 \times M_n.
+\]
+
+\textbf{Question 2.} Le rapport $\dfrac{M_{n+1}}{M_n} = 0{,}9879$ est constant, et $M_0 = 100 \neq 0$. Donc $(M_n)$ est une suite géométrique de premier terme $M_0 = 100$ (en grammes) et de raison $q = 0{,}9879$.
+
+\textbf{Question 3.} Par la formule du terme général d'une suite géométrique :
+\[
+  M_n = M_0 \times q^n = 100 \times 0{,}9879^n.
+\]
+
+\textbf{Question 4.}
+\[
+  M_1 = 100 \times 0{,}9879 = 98{,}79 \text{ g},
+\]
+\[
+  M_{10} = 100 \times 0{,}9879^{10} \approx 100 \times 0{,}8845 \approx 88{,}45 \text{ g},
+\]
+\[
+  M_{100} = 100 \times 0{,}9879^{100} \approx 100 \times 0{,}2980 \approx 29{,}80 \text{ g.}
+\]
+
+\commentaireMarge{Après 100 siècles (10 000 ans), l'échantillon a perdu environ 70\,\% de sa masse initiale.}
+
+Après $100$ siècles (soit $10\,000$ ans), il ne reste plus qu'environ $29{,}80$~g sur les $100$~g initiaux.
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE B — Etude de la demi-vie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-COURS-07-TC-EX2}{2}{20}
+
+\textbf{Partie B — Demi-vie et sens de variation}
+
+\begin{enumerate}
+  \item Montrer que la suite $(M_n)$ est strictement décroissante. Justifier à partir de la valeur de la raison.
+  \item La \textbf{demi-vie} est le rang $n$ à partir duquel la masse est inférieure ou égale à la moitié de la masse initiale. Formuler l'inégalité à résoudre : $M_n \leq 50$.
+  \item Compléter le tableau de valeurs ci-dessous pour $n \in \{50, 55, 57, 58, 60\}$.
+  \item En déduire la demi-vie du carbone-14 exprimée en siècles, puis en années.
+\end{enumerate}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$n$ & $50$ & $55$ & $57$ & $58$ & $60$ \\
+\hline
+$M_n$ (arrondi à 0,01 g) & \phantom{xxx} & \phantom{xxx} & \phantom{xxx} & \phantom{xxx} & \phantom{xxx} \\
+\hline
+$M_n \leq 50$ ? & \phantom{oui/non} & \phantom{oui/non} & \phantom{oui/non} & \phantom{oui/non} & \phantom{oui/non} \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{exercice}
+
+\begin{corrige}{1SPE-SUITES-COURS-07-TC-EX2}
+
+\textbf{Question 1.} La raison est $q = 0{,}9879$, qui vérifie $0 < q < 1$. Tous les termes $M_n$ sont strictement positifs (car $M_0 = 100 > 0$ et $q > 0$). Or :
+\[
+  M_{n+1} - M_n = 0{,}9879 \, M_n - M_n = (0{,}9879 - 1) M_n = -0{,}0121 \, M_n < 0
+\]
+puisque $M_n > 0$. Donc $M_{n+1} < M_n$ pour tout $n \in \mathbb{N}$ : la suite est strictement décroissante.
+
+\commentaireMarge{Suite géométrique à termes positifs : $0 < q < 1 \Rightarrow$ décroissante.}
+
+\textbf{Question 2.} La demi-vie est le plus petit entier $n$ tel que :
+\[
+  M_n \leq 50, \quad \text{soit} \quad 100 \times 0{,}9879^n \leq 50, \quad \text{soit} \quad 0{,}9879^n \leq 0{,}5.
+\]
+
+\textbf{Question 3.} Tableau de valeurs :
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$n$ & $50$ & $55$ & $57$ & $58$ & $60$ \\
+\hline
+$M_n$ (g) & $54{,}57$ & $51{,}32$ & $50{,}08$ & $49{,}47$ & $48{,}29$ \\
+\hline
+$M_n \leq 50$ ? & Non & Non & Non & Oui & Oui \\
+\hline
+\end{tabular}
+\end{center}
+
+\textit{Détail :} $M_{57} = 100 \times 0{,}9879^{57} \approx 50{,}08$~g et $M_{58} = 100 \times 0{,}9879^{58} \approx 49{,}47$~g.
+
+\textbf{Question 4.} Le plus petit entier $n$ tel que $M_n \leq 50$ est $n = 58$. La demi-vie est donc de $\mathbf{58}$ siècles, soit $\mathbf{5\,800}$ ans.
+
+\commentaireMarge{La demi-vie réelle du carbone-14 est de 5 730 ans. Notre modèle avec $q = 0{,}9879$ donne 5 800 ans, ce qui est une très bonne approximation.}
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE C — Programme Python de simulation
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-COURS-07-TC-EX3}{2}{20}
+
+\textbf{Partie C — Simulation en Python}
+
+\begin{enumerate}
+  \item Écrire un programme Python qui affiche les valeurs de $M_n$ pour $n$ allant de $0$ à $100$ (par pas de $10$).
+  \item Écrire un programme Python qui détermine automatiquement la demi-vie, c'est-à-dire le plus petit entier $n$ tel que $M_n \leq 50$.
+  \item Lire le programme ci-dessous et indiquer ce qu'il affiche, sans l'exécuter.
+\end{enumerate}
+
+\end{exercice}
+
+\noindent\textbf{Programme à lire (question 3) :}
+
+\begin{python}
+q = 0.9879
+M = 100
+n = 0
+while M > 50:
+    M = q * M
+    n = n + 1
+print("Demi-vie :", n, "siecles")
+print("Masse :", round(M, 2), "g")
+\end{python}
+
+\begin{corrige}{1SPE-SUITES-COURS-07-TC-EX3}
+
+\textbf{Question 1.} Programme d'affichage des valeurs de $M_n$ pour $n \in \{0, 10, 20, \ldots, 100\}$ :
+
+\begin{python}
+# Affichage de M_n pour n = 0, 10, 20, ..., 100
+q = 0.9879
+for n in range(0, 101, 10):
+    M_n = 100 * q**n
+    print(f"n = {n} siecles : M_n = {round(M_n, 2)} g")
+\end{python}
+
+\commentaireMarge{On utilise la formule explicite $M_n = 100 \times 0{,}9879^n$ pour calculer directement chaque valeur sans boucle de récurrence.}
+
+\textbf{Question 2.} Programme de recherche de la demi-vie (boucle \texttt{while}) :
+
+\begin{python}
+# Recherche du premier n tel que M_n <= 50
+q = 0.9879
+M = 100.0   # M_0
+n = 0
+
+while M > 50:
+    M = q * M   # M_{n+1} = q * M_n
+    n = n + 1   # mise a jour de l'indice
+
+print("Demi-vie :", n, "siecles, soit", n * 100, "ans")
+print("Masse atteinte :", round(M, 2), "g")
+\end{python}
+
+Le programme affiche :
+\begin{itemize}
+  \item \texttt{Demi-vie : 58 siecles, soit 5800 ans}
+  \item \texttt{Masse atteinte : 49.47 g}
+\end{itemize}
+
+\textbf{Question 3.} Analyse du programme donné :
+
+La variable \texttt{M} est initialisée à $100$ (valeur de $M_0$) et \texttt{n} à $0$. La boucle \texttt{while M > 50} applique à chaque itération la relation $M \leftarrow 0{,}9879 \times M$ et incrémente \texttt{n}. La boucle s'arrête dès que \texttt{M <= 50}.
+
+D'après les résultats de la partie B, cela se produit pour $n = 58$.
+
+Le programme affiche :
+
+\begin{center}
+\texttt{Demi-vie : 58 siecles}\\
+\texttt{Masse : 49.47 g}
+\end{center}
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE D — Question orale
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-COURS-07-TC-EX4}{2}{10}
+
+\textbf{Partie D — Synthèse}
+
+\begin{enumerate}
+  \item Pourquoi dit-on que le carbone-14 perd « toujours la même proportion » de sa masse, et non « toujours la même quantité » ? Quel type de suite cela induit-il ?
+  \item \pictoOral{} \textit{Question orale.} « Expliquer la différence entre une évolution absolue constante et une évolution relative constante. Donner un exemple concret de chaque, puis préciser quel type de suite modélise chacune des deux situations. »
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{1SPE-SUITES-COURS-07-TC-EX4}
+
+\textbf{Question 1.} Le carbone-14 perd chaque siècle $1{,}21\,\%$ de sa masse \textit{courante}, et non une quantité fixe en grammes. Par exemple :
+
+\begin{itemize}
+  \item Au rang $0$ : la perte est $100 \times 0{,}0121 = 1{,}21$~g.
+  \item Au rang $50$ : la perte est environ $54{,}57 \times 0{,}0121 \approx 0{,}66$~g.
+\end{itemize}
+
+La quantité perdue diminue au fil du temps car elle est proportionnelle à la masse restante. C'est une \textbf{évolution relative constante} (taux constant de $-1{,}21\,\%$), ce qui caractérise une \textbf{suite géométrique}.
+
+\textbf{Question 2 — Éléments de réponse orale.}
+
+\textbf{Évolution absolue constante :} la quantité ajoutée (ou retranchée) à chaque étape est la même, quelle que soit la valeur courante. Exemple : un épargnant qui verse $200$~€ par mois sur un livret sans intérêts. Le capital augmente de $200$~€ chaque mois, qu'il dispose de $1\,000$~€ ou de $10\,000$~€. Ce modèle est une \textbf{suite arithmétique} ($u_{n+1} = u_n + r$, raison $r$ constante).
+
+\textbf{Évolution relative constante :} la quantité ajoutée (ou retranchée) est un pourcentage fixe de la valeur courante. Elle varie donc en valeur absolue d'un terme à l'autre. Exemple : un échantillon radioactif qui perd $1{,}21\,\%$ de sa masse chaque siècle, ou un capital placé à intérêts composés à $4\,\%$ par an. Ce modèle est une \textbf{suite géométrique} ($u_{n+1} = q \cdot u_n$, raison $q = 1 + t$ constante).
+
+\commentaireMarge{Retenir : variation absolue constante $\Rightarrow$ arithmétique ; variation relative constante $\Rightarrow$ géométrique.}
+
+En résumé :
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+ & Suite arithmétique & Suite géométrique \\
+\hline
+Ce qui est constant & la différence $u_{n+1} - u_n = r$ & le rapport $\dfrac{u_{n+1}}{u_n} = q$ \\
+Évolution & absolue & relative \\
+Exemple concret & versements mensuels fixes & intérêts composés, radioactivité \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{corrige}

@@ -1,0 +1,156 @@
+% META: {"id": "1SPE-SUITES-RE-C2", "chapitre": "1SPE-SUITES", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C2
+% Suites arithmétiques : caractérisation et terme général
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrigé pas à pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C2-EX1}{1}{10}
+On considère la suite $(u_n)$ définie pour tout $n \in \mathbb{N}$ par $u_n = 5n - 3$.
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$, $u_2$, $u_3$.
+  \item Calculer $u_{n+1} - u_n$ et simplifier.
+  \item En déduire que la suite $(u_n)$ est arithmétique et préciser sa raison $r$ et son premier terme $u_0$.
+  \item Retrouver $u_0$ et $r$ directement depuis la formule $u_n = 5n - 3$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand
+% n = symbols('n')
+% u = 5*n - 3
+% assert u.subs(n, 0) == -3
+% assert u.subs(n, 1) == 2
+% assert u.subs(n, 2) == 7
+% assert u.subs(n, 3) == 12
+% diff = expand(u.subs(n, n+1) - u)
+% assert diff == 5
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C2-EX1}
+
+\textbf{Question 1.}
+\[
+u_0 = 5 \times 0 - 3 = -3. \quad u_1 = 5 - 3 = 2. \quad u_2 = 10 - 3 = 7. \quad u_3 = 15 - 3 = 12.
+\]
+
+\commentaireMarge{On calcule $u_{n+1} - u_n$ en remplaçant $n$ par $n+1$ dans la formule.}
+
+\textbf{Question 2.}
+\[
+u_{n+1} - u_n = [5(n+1) - 3] - [5n - 3] = 5n + 5 - 3 - 5n + 3 = 5.
+\]
+
+\commentaireMarge{Une suite est arithmétique si et seulement si la différence $u_{n+1} - u_n$ est constante.}
+
+\textbf{Question 3.} La différence $u_{n+1} - u_n = 5$ est constante (indépendante de $n$). Donc la suite $(u_n)$ est arithmétique de raison $r = 5$ et de premier terme $u_0 = -3$.
+
+\commentaireMarge{Pour une suite arithmétique, $u_n = u_0 + rn$. On identifie : coefficient de $n$ = raison, terme constant = premier terme.}
+
+\textbf{Question 4.} La formule $u_n = 5n - 3$ est de la forme $u_0 + rn$. On lit directement : $u_0 = -3$ et $r = 5$. Cela confirme le résultat précédent.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C2-EX2}{1}{10}
+On donne les premiers termes d'une suite : $v_0 = 7$, $v_1 = 4$, $v_2 = 1$, $v_3 = -2$.
+\begin{enumerate}
+  \item Calculer $v_1 - v_0$, $v_2 - v_1$, $v_3 - v_2$.
+  \item La suite $(v_n)$ est-elle arithmétique ? Si oui, préciser sa raison.
+  \item Exprimer le terme général $v_n$ en fonction de $n$.
+  \item Calculer $v_{20}$ et $v_{100}$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour vérifier qu'une suite est arithmétique, il suffit de vérifier que toutes les différences consécutives $v_{n+1} - v_n$ sont égales à la même constante $r$. Ici, calculer les trois différences demandées.}
+
+% BEGIN-VERIFY
+% v = lambda n: 7 - 3*n
+% assert v(0) == 7
+% assert v(1) == 4
+% assert v(2) == 1
+% assert v(3) == -2
+% assert v(1) - v(0) == -3
+% assert v(2) - v(1) == -3
+% assert v(3) - v(2) == -3
+% assert v(20) == 7 - 3*20
+% assert v(100) == 7 - 3*100
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C2-EX2}
+
+\textbf{Question 1.}
+\[
+v_1 - v_0 = 4 - 7 = -3. \quad v_2 - v_1 = 1 - 4 = -3. \quad v_3 - v_2 = -2 - 1 = -3.
+\]
+
+\commentaireMarge{Les trois différences sont toutes égales à $-3$ : c'est la caractérisation d'une suite arithmétique.}
+
+\textbf{Question 2.} Les différences consécutives sont toutes égales à $-3$. La suite $(v_n)$ est arithmétique de raison $r = -3$.
+
+\commentaireMarge{Formule du terme général d'une suite arithmétique : $v_n = v_0 + r \times n$.}
+
+\textbf{Question 3.} $v_n = v_0 + rn = 7 + (-3)n = 7 - 3n$.
+
+\textbf{Question 4.}
+\[
+v_{20} = 7 - 3 \times 20 = 7 - 60 = -53.
+\]
+\[
+v_{100} = 7 - 3 \times 100 = 7 - 300 = -293.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SUITES-RE-C2-EX3}{1}{12}
+Une suite arithmétique $(w_n)$ vérifie $w_3 = 11$ et $w_7 = 23$.
+\begin{enumerate}
+  \item Montrer que la raison $r$ vérifie $w_7 = w_3 + 4r$, puis calculer $r$.
+  \item Calculer $w_0$.
+  \item Exprimer $w_n$ en fonction de $n$.
+  \item À quel rang $n$ a-t-on $w_n = 50$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational
+% n = symbols('n')
+% # w_7 = w_3 + 4r => r = (23-11)/4 = 3
+% r = (23 - 11) / 4
+% assert r == 3
+% w0 = 11 - 3*3
+% assert w0 == 2
+% wn = lambda n: 2 + 3*n
+% assert wn(3) == 11
+% assert wn(7) == 23
+% # w_n = 50 => 2+3n=50 => n=16
+% assert wn(16) == 50
+% END-VERIFY
+
+\begin{corrige}{1SPE-SUITES-RE-C2-EX3}
+
+\commentaireMarge{Pour une suite arithmétique, $w_7 = w_3 + (7-3) \times r$.}
+
+\textbf{Question 1.} $w_7 = w_3 + 4r$ car on passe de $w_3$ à $w_7$ en ajoutant $4$ fois la raison.
+\[
+23 = 11 + 4r \implies 4r = 12 \implies r = 3.
+\]
+
+\textbf{Question 2.} $w_3 = w_0 + 3r$, donc $w_0 = w_3 - 3r = 11 - 9 = 2$.
+
+\textbf{Question 3.} $w_n = w_0 + rn = 2 + 3n$.
+
+\textbf{Question 4.} $w_n = 50 \iff 2 + 3n = 50 \iff 3n = 48 \iff n = 16$.
+
+\end{corrige}

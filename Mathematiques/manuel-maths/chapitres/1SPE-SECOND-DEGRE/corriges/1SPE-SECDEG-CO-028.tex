@@ -1,0 +1,74 @@
+% META: {"id": "1SPE-SECDEG-CO-028", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-028", "capacites_codes": ["C2", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve
+% x = symbols('x')
+% B = -2*x**2 + 80*x - 600
+% # Sommet
+% alpha = Rational(80, 4)
+% assert alpha == 20
+% beta = B.subs(x, alpha)
+% assert beta == 200
+% # Seuils de rentabilite
+% seuils = sorted(solve(B, x))
+% assert seuils == [10, 30]
+% # Verification : B > 0 sur ]10 ; 30[
+% assert B.subs(x, 20) > 0
+% assert B.subs(x, 5) < 0
+% assert B.subs(x, 35) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-028}
+
+\textbf{1. Coordonnées du sommet.}
+
+\commentaireMarge{$\alpha = -\dfrac{b}{2a}$ avec $a=-2$, $b=80$.}
+
+$B(x) = -2x^2 + 80x - 600$ : on a $a = -2$, $b = 80$, $c = -600$.
+
+\[\alpha = -\frac{80}{2 \times (-2)} = \frac{80}{4} = 20.\]
+
+\[\beta = B(20) = -2(400) + 80(20) - 600 = -800 + 1600 - 600 = 200.\]
+
+Le sommet est $S(20\,;\,200)$.
+
+\medskip
+\textbf{2. Tableau de variations de $B$ sur $[0\,;\,40]$.}
+
+\commentaireMarge{$a = -2 < 0$ : parabole vers le bas, maximum en $\alpha = 20$.}
+
+La fonction $B$ est croissante sur $[0\,;\,20]$ puis décroissante sur $[20\,;\,40]$.
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $0$ & & $20$ & & $40$ \\
+\hline
+$B(x)$ & $-600$ & $\nearrow$ & $200$ & $\searrow$ & $-600$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{3. Maximisation du bénéfice.}
+
+\commentaireMarge{Le maximum est atteint au sommet de la parabole.}
+
+Le bénéfice est maximal pour $x = 20$ unités produits par semaine.
+
+Le bénéfice maximal est $B(20) = \mathbf{200}$~\euro.
+
+\medskip
+\textbf{4. Intervalle de rentabilité.}
+
+\commentaireMarge{Résoudre $B(x) = 0$, puis lire le signe.}
+
+$B(x) = 0 \iff -2x^2 + 80x - 600 = 0 \iff x^2 - 40x + 300 = 0$.
+
+\[\Delta = 1600 - 1200 = 400.\]
+
+\[x_1 = \frac{40 - 20}{2} = 10 \qquad \text{et} \qquad x_2 = \frac{40 + 20}{2} = 30.\]
+
+Comme $a = -2 < 0$, $B(x) > 0$ entre les racines : l'entreprise est rentable pour $x \in \left]10\,;\,30\right[$.
+
+\baremeIndicatif{Q1 : 2 pts (calculer) ; Q2 : 2 pts (raisonner, communiquer) ; Q3 : 1 pt (raisonner) ; Q4 : 3 pts (calculer, raisonner)}
+\end{corrige}

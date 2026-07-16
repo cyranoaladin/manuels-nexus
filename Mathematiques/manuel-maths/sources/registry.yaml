@@ -1,0 +1,108 @@
+# Registre des sources — pilote les crawlers et impose la politique de réutilisation.
+# usage_policy : verbatim | adaptation_attribution | inspiration_reformulation
+# Toute nouvelle source est proposée par l'agent Scout puis validée par un humain avant activation.
+
+sources:
+  # ---------- T1 : Officiel ----------
+  - id: SRC-0001
+    name: "Eduscol — Mathématiques lycée"
+    url: "https://eduscol.education.fr/1723/programmes-et-ressources-en-mathematiques-voie-gt"
+    tier: T1
+    license: "information publique"
+    usage_policy: adaptation_attribution
+    crawl: { method: page_links, frequency: monthly, scope: "pdf" }
+    active: true
+    notes: "Programmes, documents d'accompagnement, exemples d'activités. Source de vérité des attendus."
+
+  - id: SRC-0002
+    name: "Bulletin officiel — programmes de mathématiques"
+    url: "https://www.education.gouv.fr/pid285/bulletin_officiel.html"
+    tier: T1
+    license: "information publique"
+    usage_policy: adaptation_attribution
+    crawl: { method: manual, frequency: yearly }
+    active: true
+    notes: "Extraction manuelle vers referentiel/*.json ; ne pas crawler en masse."
+
+  # ---------- T3 : Associatif ----------
+  - id: SRC-0010
+    name: "APMEP — annales bac"
+    url: "https://www.apmep.fr/-Annales-Bac-Brevet-BTS-"
+    tier: T3
+    license: "diffusion libre des sujets ; corrigés APMEP : usage pédagogique"
+    usage_policy: adaptation_attribution
+    crawl: { method: page_links, frequency: quarterly, scope: "pdf" }
+    active: true
+    notes: "Sujets officiels (réutilisables) + corrigés associatifs (adapter, attribuer)."
+
+  - id: SRC-0011
+    name: "Sésamath — manuels"
+    url: "https://manuel.sesamath.net"
+    tier: T3
+    license: "CC-BY-SA"
+    usage_policy: adaptation_attribution
+    crawl: { method: sitemap, frequency: quarterly }
+    active: true
+    notes: "Licence virale : adaptation substantielle obligatoire avant intégration commerciale. Attribution requise."
+
+  # ---------- T2 : Académique (échantillon initial, à étendre) ----------
+  - id: SRC-0020
+    name: "Académie de Versailles — maths"
+    url: "https://maths.ac-versailles.fr"
+    tier: T2
+    license: "tous droits réservés (usage pédagogique toléré)"
+    usage_policy: inspiration_reformulation
+    crawl: { method: sitemap, frequency: quarterly }
+    active: true
+
+  - id: SRC-0021
+    name: "Portail des IREM / Publimath"
+    url: "https://www.univ-irem.fr"
+    tier: T2
+    license: "variable selon publication"
+    usage_policy: inspiration_reformulation
+    crawl: { method: page_links, frequency: quarterly }
+    active: true
+    notes: "Riche en activités de recherche et en analyses didactiques des erreurs."
+
+  # ---------- T4 : Pages personnelles ----------
+  - id: SRC-0030
+    name: "Maths et tiques (Y. Monka)"
+    url: "https://www.maths-et-tiques.fr"
+    tier: T4
+    license: "tous droits réservés"
+    usage_policy: inspiration_reformulation
+    crawl: { method: page_links, frequency: monthly, scope: "/cours/lycee" }
+    active: true
+    quality_score: 4
+
+  - id: SRC-0031
+    name: "Chingatome"
+    url: "https://chingatome.fr"
+    tier: T4
+    license: "tous droits réservés"
+    usage_policy: inspiration_reformulation
+    crawl: { method: page_links, frequency: quarterly }
+    active: true
+    notes: "Grande banque d'exercices classés par notion : utile pour typologie et calibrage de difficulté."
+
+  - id: SRC-0032
+    name: "XMaths"
+    url: "https://xmaths.free.fr"
+    tier: T4
+    license: "tous droits réservés"
+    usage_policy: inspiration_reformulation
+    crawl: { method: page_links, frequency: quarterly }
+    active: false
+    notes: "À activer après vérification de la couverture des programmes en vigueur."
+
+  # ---------- T5 : Complémentaire ----------
+  - id: SRC-0040
+    name: "NRICH (Cambridge)"
+    url: "https://nrich.maths.org"
+    tier: T5
+    license: "tous droits réservés"
+    usage_policy: inspiration_reformulation
+    crawl: { method: manual, frequency: quarterly }
+    active: false
+    notes: "Problèmes ouverts pour parcours ◆◆◆ ; traduction/adaptation nécessaire."

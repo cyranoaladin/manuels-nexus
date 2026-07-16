@@ -1,0 +1,78 @@
+{
+  "id": "CHARTE-LOT-3ter-VISUEL-003",
+  "created_at": "2026-07-15T15:30:00+00:00",
+  "version": "v3.0 — identité visuelle Nexus Réussite",
+  "chapitre_principal": "1SPE-DERIVATION-LOCAL",
+  "outil": "pdflatex x1 puis pdftoppm -r 140 ; inspection visuelle directe des PNG",
+  "ameliorations_v3": [
+    "Icônes TikZ propriétaires (nexus-icons.tex) : losanges, triangle erreur, étoile, cible, boussole, clé, coche, bulle, chevrons, chrono, carte",
+    "Bandeaux de chapitre (nexus-signatures.tex) : bande verticale nxBleu!12 + motifs génératifs (Suites, Dérivation, Second degré, Probabilités)",
+    "Onglets de tranche nxBleu plein, position décalée par chapitre",
+    "Mini-losange dans les en-têtes de page",
+    "Figures pgfplots normalisées (nexus-figures.tex) : style nexus, courbe/tangente/sécante/point/aire, environnement nxfigure numéroté",
+    "5 figures ajoutées à Dérivation locale (C1 sécante, C2 sécantes→tangente, C3 lecture pente, C4 tangente+point, C5 zoom local)",
+    "Ligne éditoriale (docs/07_ligne_editoriale.md)"
+  ],
+  "pages_inspectees": [
+    {
+      "fichier": "build/1SPE-DERIVATION-LOCAL/charte_preview/ouverture-03.png",
+      "role": "ouverture avec motif+onglet",
+      "controles": [
+        "Titre Dérivation locale en 26pt bleu Biolinum, 5 capacités C1-C5 listées.",
+        "Losanges TikZ or avec contour bleu pour les 3 parcours.",
+        "Carte du chapitre en encadré gris, pas de débordement.",
+        "Temps estimés avec losanges TikZ."
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "fichier": "build/1SPE-DERIVATION-LOCAL/charte_preview/cours_fig-04.png",
+      "role": "cours avec figure pgfplots",
+      "controles": [
+        "Figure 1 : courbe nxBleu 1.1pt, sécante nxOr pointillée, points A et B labellisés.",
+        "Axes nxGris 0.5pt fléchés, grille nxGris!20.",
+        "Légende Figure 1 en italique gris sous la figure.",
+        "Encadrés Définition et Propriété avec accents corrects.",
+        "Icône triangle TikZ pour Erreur fréquente."
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "fichier": "build/1SPE-DERIVATION-LOCAL/charte_preview/cours_zoom-08.png",
+      "role": "cours avec figure zoom local C5",
+      "controles": [
+        "Figure 5 zoom : domaine restreint, courbe et tangente proches.",
+        "Écart rouge annoté entre f(a+h) et approximation.",
+        "Labels verts (f(a+h)) et or (f(a)+f'(a)h) distincts."
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "fichier": "build/1SPE-DERIVATION-LOCAL/charte_preview/methode-09.png",
+      "role": "fiche méthode avec icônes",
+      "controles": [
+        "Encadré Méthode M1 : fond or pastel, règle gauche, titre petites capitales.",
+        "6 rubriques complètes : quand, pas à pas, exemple rédigé, pièges, vérifier, s'entraîner.",
+        "Accents corrects : Méthode, pièges, Vérifier, S'entraîner, complétés.",
+        "En-tête Nexus Réussite avec mini-losange."
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "fichier": "build/1SPE-DERIVATION-LOCAL/charte_preview/exercices-11.png",
+      "role": "exercices et coups de pouce",
+      "controles": [
+        "Exercices avec losanges TikZ or, numéros bleus, IDs monospace.",
+        "Coups de pouce séparés en fin de section.",
+        "Aucun débordement de marge."
+      ],
+      "verdict": "PASS"
+    }
+  ],
+  "regression_compilation": {
+    "1SPE-DERIVATION-LOCAL": "PASS (11 pages, 437682 bytes)",
+    "1SPE-SUITES": "PASS (6 pages, 499221 bytes)",
+    "1SPE-SECOND-DEGRE": "PASS (5 pages, 483000 bytes)"
+  },
+  "verdict": "PASS"
+}

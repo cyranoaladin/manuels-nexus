@@ -1,0 +1,53 @@
+% META: {"id": "1SPE-SUITES-CO-018", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-018", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% P = 2000 * Rational(105, 100)**n
+% assert P.subs(n, 0) == 2000
+% assert P.subs(n, 1) == 2100
+% # n=3 : 2000 * 1.05^3 = 2000 * 1.157625 = 2315.25
+% val3 = 2000 * Rational(105, 100)**3
+% assert val3 == Rational(9261, 4)   # 2315.25
+% # Suite geometrique de raison q = 1.05, P0 = 2000
+% ratio = P.subs(n, n+1) / P
+% assert simplify(ratio - Rational(105, 100)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-018}
+
+\commentaireMarge{Un taux d'intérêt annuel de $5\,\%$ signifie que le capital est multiplié par $1{,}05$ chaque année : c'est le coefficient multiplicateur.}
+
+\textbf{Question 1.} Un taux annuel de $5\,\%$ correspond au coefficient multiplicateur :
+\[
+1 + \frac{5}{100} = 1{,}05.
+\]
+
+\commentaireMarge{La relation de récurrence $P_{n+1} = q \times P_n$ caractérise une suite géométrique de raison $q$.}
+
+\textbf{Question 2.} Chaque année, le capital est multiplié par $1{,}05$, donc :
+\[
+P_{n+1} = 1{,}05 \times P_n.
+\]
+
+Par application répétée à partir de $P_0 = 2000$ :
+\[
+P_n = P_0 \times (1{,}05)^n = 2000 \times (1{,}05)^n.
+\]
+
+\textbf{Question 3.} La suite $(P_n)$ est \textbf{géométrique} car $\dfrac{P_{n+1}}{P_n} = 1{,}05$ est constant pour tout $n \in \mathbb{N}$.
+
+Elle a pour :
+\begin{itemize}
+  \item premier terme $P_0 = 2000$~€ ;
+  \item raison $q = 1{,}05$.
+\end{itemize}
+
+\commentaireMarge{On applique la formule $P_n = P_0 \times q^n$ avec $n = 3$. On arrondit au centime.}
+
+\textbf{Question 4.} On calcule $P_3$ :
+\[
+P_3 = 2000 \times (1{,}05)^3 = 2000 \times 1{,}157625 = 2315{,}25.
+\]
+
+Après $3$ ans, le capital est de $\mathbf{2\,315{,}25}$~\textbf{€}.
+
+\end{corrige}

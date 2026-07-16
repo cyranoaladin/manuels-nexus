@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-SUITES-EX-001", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 2, "max": 9}, "q": {"domaine": "rationnel", "contrainte": "0<q, q!=1"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-001.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 4 * Rational(3, 2)**n
+% # Q1 : les trois premiers termes
+% assert u.subs(n, 0) == 4
+% assert u.subs(n, 1) == 6
+% assert u.subs(n, 2) == 9
+% # Q2 : quotient constant (suite geometrique de raison 3/2)
+% assert simplify(u.subs(n, n+1)/u - Rational(3, 2)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-001}{1}{10}
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par
+$u_n = 4 \times \left(\dfrac{3}{2}\right)^{n}$.
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$ et $u_2$.
+  \item Démontrer que la suite $(u_n)$ est géométrique et préciser sa raison.
+  \item Exprimer $u_{n+1}$ en fonction de $u_n$.
+\end{enumerate}
+\end{exercice}

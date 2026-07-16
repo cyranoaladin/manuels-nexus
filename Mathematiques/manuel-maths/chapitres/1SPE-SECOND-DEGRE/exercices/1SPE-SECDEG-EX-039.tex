@@ -1,0 +1,81 @@
+% META: {"id": "1SPE-SECDEG-EX-039", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECDEG-C3", "1SPE-SECDEG-C5", "1SPE-SECDEG-C6"], "capacites_codes": ["C3", "C5", "C6"], "methodes": ["M3", "M5", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser", "calculer"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"cout_fixe": 200, "cout_unit": 5, "prix_unit": 15, "demande_max": 100}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True, nonneg=True)
+% # Recettes : prix = 15 - x/10 euros par unite (tarif degressif), quantite = x
+% # R(x) = x*(15 - x/10) = 15x - x^2/10
+% R = 15*x - x**2 / 10
+% # Couts : C(x) = 200 + 5x
+% C = 200 + 5*x
+% # Benefice : B(x) = R(x) - C(x) = -x^2/10 + 10x - 200
+% B = R - C
+% B_simplified = expand(B)
+% assert B_simplified == -x**2/10 + 10*x - 200
+% # Forme canonique : alpha = 50, beta = B(50)
+% alpha = Rational(50)
+% assert alpha == 50
+% beta = B_simplified.subs(x, 50)
+% assert beta == Rational(-2500, 10) + 500 - 200
+% assert beta == 50
+% assert beta == 50
+% # Discriminant de B(x) = 0 : -x^2/10 + 10x - 200 = 0 => x^2 - 100x + 2000 = 0
+% B_eq = x**2 - 100*x + 2000
+% Delta = 100**2 - 4*2000
+% assert Delta == 2000
+% # Delta > 0 => deux racines
+% r1 = (100 - sqrt(2000)) / 2
+% r2 = (100 + sqrt(2000)) / 2
+% assert simplify(r1 - (50 - 10*sqrt(5))) == 0
+% assert simplify(r2 - (50 + 10*sqrt(5))) == 0
+% # Valeurs approchees
+% r1_approx = float(r1)
+% r2_approx = float(r2)
+% assert abs(r1_approx - 27.64) < 0.1
+% assert abs(r2_approx - 72.36) < 0.1
+% # B(x) > 0 sur ]r1, r2[
+% assert float(B_simplified.subs(x, 50)) > 0
+% assert float(B_simplified.subs(x, 10)) < 0
+% assert float(B_simplified.subs(x, 90)) < 0
+% # Maximum benefice : 50 unites, benefice 50 euros
+% assert B_simplified.subs(x, 50) == 50
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-039}{3}{35}
+Une entreprise fabrique et vend $x$ unités d'un produit par semaine, avec $0 \leq x \leq 100$.
+
+Le prix de vente unitaire (en euros) est $p(x) = 15 - \dfrac{x}{10}$ (tarif dégressif en fonction de la quantité produite).
+
+Les charges hebdomadaires totales sont $C(x) = 200 + 5x$ euros.
+
+\begin{enumerate}
+  \item \textbf{Recettes et bénéfice.}
+  \begin{enumerate}
+    \item Exprimer la recette $R(x)$ (en euros) en fonction de $x$.
+    \item Montrer que le bénéfice $B(x) = R(x) - C(x)$ s'écrit :
+    \[
+      B(x) = -\frac{x^2}{10} + 10x - 200.
+    \]
+  \end{enumerate}
+
+  \item \textbf{Optimum de production.}
+  \begin{enumerate}
+    \item Mettre $B(x)$ sous forme canonique.
+    \item Déterminer le nombre d'unités à produire pour maximiser le bénéfice. Quel est ce bénéfice maximum ?
+    \item Ce résultat est-il compatible avec la contrainte $0 \leq x \leq 100$ ?
+  \end{enumerate}
+
+  \item \textbf{Seuil de rentabilité.} On cherche les valeurs de $x$ pour lesquelles l'entreprise est bénéficiaire, c'est-à-dire $B(x) > 0$.
+  \begin{enumerate}
+    \item Montrer que $B(x) > 0$ équivaut à résoudre $x^2 - 100x + 2000 < 0$.
+    \item Calculer le discriminant de ce trinôme et exprimer les racines sous la forme $a \pm b\sqrt{5}$.
+    \item En déduire l'intervalle de rentabilité (on donnera des valeurs approchées à l'unité près).
+  \end{enumerate}
+
+  \item \textbf{Équation de seuil.} On souhaite que le bénéfice soit exactement $B(x) = 32$ euros.
+  \begin{enumerate}
+    \item Écrire l'équation à résoudre.
+    \item Résoudre cette équation. Combien y a-t-il de solutions ? Les interpréter.
+  \end{enumerate}
+
+  \item \textbf{Question ouverte.} Un concurrent propose un tarif $p'(x) = 20 - \dfrac{x}{5}$ avec les mêmes charges. Déterminer le nouveau bénéfice $B'(x)$, son maximum et comparer les deux stratégies de prix. Quelle stratégie est préférable selon le volume de production envisagé ?
+\end{enumerate}
+\end{exercice}

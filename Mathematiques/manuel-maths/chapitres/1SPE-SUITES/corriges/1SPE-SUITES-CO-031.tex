@@ -1,0 +1,87 @@
+% META: {"id": "1SPE-SUITES-CO-031", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-031", "capacites_codes": ["C3", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols, log, ln
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 2
+% q = Rational(5, 3)
+% u = u0 * q**n
+% assert u.subs(n, 0) == 2
+% assert u.subs(n, 1) == Rational(10, 3)
+% ratio = simplify(u.subs(n, n+1) / u)
+% assert ratio == Rational(5, 3)
+% assert ratio > 1
+% # Difference u_{n+1} - u_n = 2*(5/3)^n * (5/3 - 1) = 2*(5/3)^n * 2/3 > 0
+% diff = u.subs(n, n+1) - u
+% diff_factored = simplify(diff)
+% # v_n = ln(u_n) = ln(2) + n*ln(5/3)
+% # v_{n+1} - v_n = ln(5/3) = constante > 0
+% from sympy import ln as Ln
+% v_diff = Ln(Rational(5,3))
+% assert float(v_diff) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-031}
+
+\textbf{Question 1 — Nature géométrique de $(u_n)$.}
+
+On a $u_n = 2 \times \left(\dfrac{5}{3}\right)^n$. Vérifions que c'est une suite géométrique en calculant le quotient de deux termes consécutifs.
+
+Pour tout $n \in \mathbb{N}$, $u_n = 2 \times \left(\dfrac{5}{3}\right)^n > 0$, donc $u_n \neq 0$ et le quotient est calculable :
+\[
+  \frac{u_{n+1}}{u_n} = \frac{2 \times \left(\dfrac{5}{3}\right)^{n+1}}{2 \times \left(\dfrac{5}{3}\right)^n} = \frac{5}{3}.
+\]
+
+\commentaireMarge{Le quotient est constant et égal à $\dfrac{5}{3}$ : $(u_n)$ est géométrique de raison $q = \dfrac{5}{3}$ et de premier terme $u_0 = 2$.}
+
+Ce quotient est constant. Donc $(u_n)$ est une suite géométrique de raison $q = \dfrac{5}{3}$ et de premier terme $u_0 = 2$.
+
+\medskip
+\textbf{Question 2 — Sens de variation.}
+
+\textit{a) Par le quotient.}
+
+$\dfrac{u_{n+1}}{u_n} = \dfrac{5}{3} > 1$ et $u_n > 0$, donc $u_{n+1} > u_n$ pour tout $n \in \mathbb{N}$ : la suite est strictement croissante.
+
+\textit{b) Par la différence.}
+
+\[
+  u_{n+1} - u_n = 2 \times \left(\frac{5}{3}\right)^{n+1} - 2 \times \left(\frac{5}{3}\right)^n = 2 \times \left(\frac{5}{3}\right)^n \times \left(\frac{5}{3} - 1\right) = 2 \times \left(\frac{5}{3}\right)^n \times \frac{2}{3}.
+\]
+
+\commentaireMarge{On factorise par $u_n = 2 \times \left(\dfrac{5}{3}\right)^n$ pour faire apparaître $q - 1 = \dfrac{2}{3} > 0$.}
+
+Comme $2 > 0$, $\left(\dfrac{5}{3}\right)^n > 0$ et $\dfrac{2}{3} > 0$, on a $u_{n+1} - u_n > 0$, donc $u_{n+1} > u_n$.
+
+Les deux méthodes donnent la même conclusion : $(u_n)$ est \textbf{strictement croissante}.
+
+\medskip
+\textbf{Question 3 — Démonstration que $(v_n)$ est arithmétique.}
+
+Pour tout $n \in \mathbb{N}$, $u_n = 2 \times \left(\dfrac{5}{3}\right)^n > 0$, donc $v_n = \ln(u_n)$ est bien défini.
+
+En utilisant les propriétés du logarithme :
+\[
+  v_n = \ln(u_n) = \ln\!\left(2 \times \left(\frac{5}{3}\right)^n\right) = \ln(2) + \ln\!\left(\left(\frac{5}{3}\right)^n\right) = \ln(2) + n\,\ln\!\left(\frac{5}{3}\right).
+\]
+
+On calcule la différence :
+\[
+  v_{n+1} - v_n = \bigl(\ln(2) + (n+1)\ln\!\left(\tfrac{5}{3}\right)\bigr) - \bigl(\ln(2) + n\,\ln\!\left(\tfrac{5}{3}\right)\bigr) = \ln\!\left(\frac{5}{3}\right).
+\]
+
+\commentaireMarge{La différence $v_{n+1} - v_n = \ln\!\left(\dfrac{5}{3}\right)$ est constante : $(v_n)$ est arithmétique de raison $\ln\!\left(\dfrac{5}{3}\right)$.}
+
+Cette différence est constante, donc $(v_n)$ est une suite arithmétique de raison $r = \ln\!\left(\dfrac{5}{3}\right)$ et de premier terme $v_0 = \ln(2)$.
+
+\medskip
+\textbf{Question 4 — Sens de variation de $(v_n)$ sans calcul supplémentaire.}
+
+La raison de $(v_n)$ est $r = \ln\!\left(\dfrac{5}{3}\right)$.
+
+Comme $\dfrac{5}{3} > 1$, on a $\ln\!\left(\dfrac{5}{3}\right) > 0$, donc $r > 0$.
+
+\commentaireMarge{Une suite arithmétique de raison strictement positive est strictement croissante.}
+
+En déduisant directement du résultat de la question 3 : $(v_n)$ est \textbf{strictement croissante}.
+
+\baremeIndicatif{Q1 : 2 pts (raisonner : $u_n > 0$ 1 pt + calcul du quotient et identification 1 pt) ; Q2 : 2 pts (calculer, raisonner : méthode quotient 1 pt + méthode différence avec factorisation 1 pt) ; Q3 : 3 pts (raisonner, communiquer : utilisation des propriétés du $\ln$ 1 pt + calcul de $v_n$ 1 pt + calcul de la différence et conclusion 1 pt) ; Q4 : 1 pt (raisonner : signe de la raison sans calcul)}
+\end{corrige}

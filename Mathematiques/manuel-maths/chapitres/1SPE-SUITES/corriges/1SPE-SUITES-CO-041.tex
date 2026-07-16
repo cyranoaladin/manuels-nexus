@@ -1,0 +1,98 @@
+% META: {"id": "1SPE-SUITES-CO-041", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-041", "capacites_codes": ["C2", "C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Suite arithmetique
+% a = lambda m: 3*m + 2
+% assert a(0) == 2
+% assert a(1) == 5
+% assert a(1) - a(0) == 3
+% # Suite geometrique
+% b = lambda m: 2 * 3**m
+% assert b(0) == 2
+% assert b(1) == 6
+% assert b(1) / b(0) == 3
+% # Egalite en 0
+% assert a(0) == b(0)
+% # b_1 > a_1
+% assert b(1) > a(1)
+% # Sommes
+% SA = sum(a(k) for k in range(10))
+% assert SA == 155
+% SG = sum(b(k) for k in range(10))
+% assert SG == 59048
+% assert SG - SA == 58893
+% # Question ouverte
+% def SA_n(n): return (n+1)*(3*n+4)//2
+% def SG_n(n): return 3**(n+1) - 1
+% assert SG_n(8) > 100 * SA_n(8)
+% assert not (SG_n(7) > 100 * SA_n(7))
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-041}
+
+\textbf{1. Nature des suites.}
+
+\textbf{a)} Pour tout $n \in \mathbb{N}$ : $a_{n+1} - a_n = [3(n+1)+2] - [3n+2] = 3$. La différence est constante, donc $(a_n)$ est \textbf{arithmétique} de premier terme $a_0 = 2$ et de raison $r = 3$.
+
+\textbf{b)} Pour tout $n \in \mathbb{N}$ : $\dfrac{b_{n+1}}{b_n} = \dfrac{2 \times 3^{n+1}}{2 \times 3^n} = 3$. Le rapport est constant (non nul), donc $(b_n)$ est \textbf{géométrique} de premier terme $b_0 = 2$ et de raison $q = 3$.
+
+\textbf{c)} $a_0 = 3 \times 0 + 2 = 2$ et $b_0 = 2 \times 3^0 = 2$. On a $a_0 = b_0 = 2$.
+
+\textbf{2. Comparaison terme à terme.}
+
+\commentaireMarge{Pour la récurrence, écrire $b_{n+1} - a_{n+1}$ en fonction de $b_n - a_n$.}
+
+\textbf{a)} $b_1 = 2 \times 3 = 6$ et $a_1 = 3 + 2 = 5$. Donc $b_1 = 6 > 5 = a_1$. \checkmark
+
+\textbf{b)} Montrons par récurrence que $\mathcal{P}(n)$ : « $b_n > a_n$ » est vraie pour tout $n \geq 1$.
+
+\textit{Initialisation :} $\mathcal{P}(1)$ vérifiée ci-dessus.
+
+\textit{Hérédité :} Supposons $b_n > a_n$ pour un certain $n \geq 1$.
+\[
+b_{n+1} - a_{n+1} = 3b_n - (3n+5) = 3b_n - a_n - 3 > 3a_n - a_n - 3 = 2a_n - 3 = 2(3n+2) - 3 = 6n+1 > 0
+\]
+car $n \geq 1 \geq 0$. Donc $b_{n+1} > a_{n+1}$.
+
+\textit{Conclusion :} Pour tout entier $n \geq 1$, $b_n > a_n$.
+
+\textbf{3. Sommes.}
+
+\textbf{a)} $(a_n)$ est arithmétique à $10$ termes ($k = 0$ à $9$), de premier terme $a_0 = 2$ et de dernier terme $a_9 = 3 \times 9 + 2 = 29$ :
+\[
+S_A = \sum_{k=0}^{9} a_k = \frac{10 \times (a_0 + a_9)}{2} = \frac{10 \times (2+29)}{2} = 5 \times 31 = 155.
+\]
+
+\textbf{b)} $(b_k)$ est géométrique de raison $3$, premier terme $2$, $10$ termes :
+\[
+S_G = \sum_{k=0}^{9} b_k = 2 \times \frac{3^{10} - 1}{3-1} = 3^{10} - 1 = 59\,049 - 1 = 59\,048.
+\]
+
+\textbf{c)} $S_G - S_A = 59\,048 - 155 = 58\,893$.
+
+La somme cumulée de la suite géométrique dépasse de loin celle de la suite arithmétique, illustrant la croissance bien plus rapide des progressions géométriques.
+
+\textbf{4. Question ouverte.}
+
+\commentaireMarge{Exprimer $S_A^{(n)}$ et $S_G^{(n)}$ en formules closes, puis résoudre l'inégalité.}
+
+Pour tout $n \in \mathbb{N}$ :
+\[
+S_A^{(n)} = \sum_{k=0}^{n} (3k+2) = \frac{(n+1)(3n+4)}{2} \qquad \text{et} \qquad S_G^{(n)} = \sum_{k=0}^{n} 2 \times 3^k = 3^{n+1} - 1.
+\]
+
+On cherche le plus petit $n$ tel que $3^{n+1} - 1 > 100 \times \dfrac{(n+1)(3n+4)}{2}$.
+
+Vérification numérique (obtenue par la relation algébrique ou un algorithme) :
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$n$ & $S_G^{(n)}$ & $100 \times S_A^{(n)}$ & $S_G^{(n)} > 100 \times S_A^{(n)}$ \\
+\hline
+7 & 6\,560 & 10\,000 & non \\
+8 & 19\,682 & 12\,600 & \textbf{oui} \\
+\end{tabular}
+\end{center}
+
+La plus petite valeur est $\boxed{n = 8}$.
+
+\end{corrige}

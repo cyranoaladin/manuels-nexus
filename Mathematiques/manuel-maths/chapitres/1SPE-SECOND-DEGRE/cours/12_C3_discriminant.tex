@@ -1,0 +1,123 @@
+% META: {"id": "1SPE-SECDEG-CR-012", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+
+\section{Discriminant et équations du second degré}
+
+% ============================================================
+% STRATE 1 — Définitions et théorème fondamental
+% ============================================================
+
+\definition[4]{
+Soit $f(x) = ax^2 + bx + c$ un polynôme du second degré ($a \neq 0$). On appelle \textbf{discriminant} de $f$ le réel
+\[
+  \Delta = b^2 - 4ac.
+\]
+}
+
+\theoreme[1]{
+Soit $f(x) = ax^2 + bx + c$ ($a \neq 0$) de discriminant $\Delta = b^2 - 4ac$.
+
+\begin{itemize}
+  \item Si $\Delta > 0$ : l'équation $f(x) = 0$ admet \textbf{deux racines réelles distinctes}
+  \[
+    x_1 = \frac{-b - \sqrt{\Delta}}{2a} \qquad \text{et} \qquad x_2 = \frac{-b + \sqrt{\Delta}}{2a}.
+  \]
+  \item Si $\Delta = 0$ : l'équation $f(x) = 0$ admet \textbf{une racine double}
+  \[
+    x_0 = \frac{-b}{2a} = \alpha.
+  \]
+  \item Si $\Delta < 0$ : l'équation $f(x) = 0$ n'admet \textbf{aucune racine réelle}.
+\end{itemize}
+}
+
+\exemple{
+Résoudre $2x^2 - 5x + 2 = 0$.
+
+$a = 2$, $b = -5$, $c = 2$ ; $\Delta = 25 - 16 = 9 > 0$, donc $\sqrt{\Delta} = 3$.
+
+$x_1 = \dfrac{5 - 3}{4} = \dfrac{1}{2}$ et $x_2 = \dfrac{5 + 3}{4} = 2$.
+
+L'ensemble des solutions est $\left\{\dfrac{1}{2}\,;\,2\right\}$.
+}
+
+\exemple{
+Résoudre $x^2 - 4x + 4 = 0$.
+
+$\Delta = 16 - 16 = 0$, donc racine double : $x_0 = \dfrac{4}{2} = 2$.
+
+L'ensemble des solutions est $\{2\}$.
+}
+
+\exemple{
+Résoudre $x^2 + x + 1 = 0$.
+
+$\Delta = 1 - 4 = -3 < 0$ : l'équation n'a pas de solution réelle.
+}
+
+\margeAppui{%
+\textbf{Calculer $\Delta$ en trois étapes :}\newline
+1. Identifier $a$, $b$, $c$.\newline
+2. Calculer $b^2$, puis $4ac$.\newline
+3. $\Delta = b^2 - 4ac$.%
+}
+
+\margeAppui{%
+\textbf{Formules des racines :}\newline
+$x_{1,2} = \dfrac{-b \pm \sqrt{\Delta}}{2a}$\newline
+(valable uniquement si $\Delta \geq 0$).%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier le signe $-b$ dans la formule des racines.}
+
+La formule est $x = \dfrac{-b \pm \sqrt{\Delta}}{2a}$. Si $b = -5$, alors $-b = +5$. Ne pas écrire $\dfrac{b \pm \sqrt{\Delta}}{2a}$ : cela donne des racines fausses.
+
+\textbf{Vérification :} remplacer $x_1$ et $x_2$ dans $f(x)$ pour s'assurer qu'on obtient bien $0$.
+}
+
+\erreurFrequente{
+\textbf{Diviser uniquement le numérateur partiel par $2a$.}
+
+On écrit parfois $\dfrac{-b + \sqrt{\Delta}}{2} \times a$ ou $\dfrac{-b}{2a} + \sqrt{\Delta}$, ce qui est incorrect. Toute l'expression $-b \pm \sqrt{\Delta}$ doit être divisée par $2a$.
+}
+
+% ============================================================
+% STRATE 3 — Démonstration exigible
+% ============================================================
+
+\approfondissement{
+\textbf{Démonstration exigible : déduction des formules des racines par mise sous forme canonique.}
+
+Soit $f(x) = ax^2 + bx + c$ avec $a \neq 0$. On met $f$ sous forme canonique (voir C1) :
+\[
+  f(x) = a\!\left(x + \frac{b}{2a}\right)^{\!2} - \frac{b^2}{4a} + c
+       = a\!\left(x + \frac{b}{2a}\right)^{\!2} - \frac{b^2 - 4ac}{4a}
+       = a\!\left(x + \frac{b}{2a}\right)^{\!2} - \frac{\Delta}{4a}.
+\]
+
+\medskip
+Résoudre $f(x) = 0$ revient à résoudre :
+\[
+  a\!\left(x + \frac{b}{2a}\right)^{\!2} = \frac{\Delta}{4a}.
+\]
+
+\medskip
+\textbf{Cas 1 : $\Delta < 0$.} Le membre gauche est $\geq 0$ (carré), le membre droit $\dfrac{\Delta}{4a}$ et $a$ ont signes opposés si $a > 0$ (car $\Delta < 0$). Plus précisément, $\dfrac{\Delta}{4a} < 0$ si $a > 0$. L'équation est impossible : pas de solution réelle.
+
+\medskip
+\textbf{Cas 2 : $\Delta = 0$.} On obtient $\left(x + \dfrac{b}{2a}\right)^2 = 0$, soit $x = -\dfrac{b}{2a} = \alpha$. Racine double.
+
+\medskip
+\textbf{Cas 3 : $\Delta > 0$.} On divise par $a$ :
+\[
+  \left(x + \frac{b}{2a}\right)^2 = \frac{\Delta}{4a^2}.
+\]
+En prenant la racine carrée (en tenant compte des deux signes) :
+\[
+  x + \frac{b}{2a} = \pm\frac{\sqrt{\Delta}}{2a}.
+\]
+D'où $x = \dfrac{-b \pm \sqrt{\Delta}}{2a}$, ce qui donne les deux racines $x_1$ et $x_2$. \hfill $\square$
+}

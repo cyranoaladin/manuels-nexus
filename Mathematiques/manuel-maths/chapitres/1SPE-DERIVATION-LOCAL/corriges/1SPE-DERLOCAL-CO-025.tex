@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-DERLOCAL-CO-025","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-025","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # f(x) = -x^2+6x-3, f(4)=5, f'(4)=-2
+% approx = 5 + (-2) * Rational(3, 100)
+% assert approx == Rational(494, 100)
+% exact = -(Rational(403,100))**2 + 6*Rational(403,100) - 3
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-025}
+
+\textbf{1.} $f(4)=-16+24-3=5$ et $f'(4)=-2\times 4+6=-2$.
+
+\textbf{2.} L'approximation linéaire au voisinage de $a=4$ avec $h=0{,}03$ donne :
+\[
+f(4{,}03)\approx f(4)+f'(4)\times 0{,}03=5+(-2)\times 0{,}03=5-0{,}06=4{,}94.
+\]
+
+\textbf{3.} La valeur exacte est $f(4{,}03)=-(4{,}03)^2+6\times 4{,}03-3=-16{,}2409+24{,}18-3=4{,}9391$.
+
+L'approximation $4{,}94$ est proche de la valeur exacte $4{,}9391$ : l'écart est de $0{,}0009$, ce qui confirme que l'approximation linéaire est pertinente pour un petit incrément $h=0{,}03$.
+\end{corrige}

@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-DERLOCAL-CO-004","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-004","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(1500-850, 200-100) == Rational(13,2)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-004}
+\textbf{1.} Le taux de variation de $C$ entre $100$ et $200$ vaut
+\[
+\frac{C(200)-C(100)}{200-100}=\frac{1500-850}{100}=\frac{650}{100}=6{,}5.
+\]
+
+\textbf{2.} Ce taux de variation est le coût moyen par pièce supplémentaire : entre la $100^{\text{e}}$ et la $200^{\text{e}}$ pièce, chaque pièce supplémentaire coûte en moyenne $6{,}50$~euros à produire.
+
+\textbf{3.} La sécante passe par $A(100\,;\,850)$ et $B(200\,;\,1500)$. Son coefficient directeur est le taux de variation calculé à la question~1, soit $6{,}5$. Comme $6{,}5>0$, le coefficient directeur est positif.
+
+On pouvait aussi observer que $C(200)>C(100)$ : le coût total augmente quand la production augmente, ce qui est cohérent avec un coefficient directeur positif.
+\end{corrige}

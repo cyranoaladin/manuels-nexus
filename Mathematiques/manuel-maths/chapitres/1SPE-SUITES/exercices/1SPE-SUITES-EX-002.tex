@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-SUITES-EX-002", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"a": 3, "b": 2}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-002.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 3*n + 2
+% assert u.subs(n, 0) == 2
+% assert u.subs(n, 1) == 5
+% assert u.subs(n, 2) == 8
+% assert u.subs(n, 10) == 32
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-002}{1}{10}
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par
+$u_n = 3n + 2$.
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$ et $u_2$.
+  \item Calculer $u_{10}$.
+  \item Cette suite est-elle définie par formule explicite ou par récurrence ? Justifier.
+\end{enumerate}
+\end{exercice}

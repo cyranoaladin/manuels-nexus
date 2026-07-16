@@ -1,0 +1,205 @@
+% META: {"id": "1SPE-SUITES-EV-A", "chapitre": "1SPE-SUITES", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "competences": ["chercher", "modeliser", "representer", "calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0_arith": 3, "r_arith": 4, "u0_geo": 2, "q_geo": 3, "capital": 800, "taux_annuel": 5, "seuil": 1200}, "fichier_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A.tex", "corrige_tex": "chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify, log
+% n = symbols('n', integer=True, nonnegative=True)
+%
+% # ---- Exercice 1 : suite arithmetique ----
+% u0_arith = 3
+% r_arith  = 4
+% u_arith  = u0_arith + r_arith * n
+% assert u_arith.subs(n, 0) == 3
+% assert u_arith.subs(n, 1) == 7
+% assert u_arith.subs(n, 2) == 11
+% assert u_arith.subs(n, 3) == 15
+% # Difference constante
+% diff_arith = u_arith.subs(n, n+1) - u_arith
+% assert simplify(diff_arith) == 4
+% # Variations : r > 0 => suite croissante
+% assert r_arith > 0
+%
+% # ---- Exercice 2 : suite geometrique ----
+% u0_geo = 2
+% q_geo  = 3
+% u_geo  = u0_geo * q_geo**n
+% assert u_geo.subs(n, 0) == 2
+% assert u_geo.subs(n, 1) == 6
+% assert u_geo.subs(n, 2) == 18
+% # Quotient constant
+% quot = u_geo.subs(n, n+1) / u_geo
+% assert simplify(quot - q_geo) == 0
+% # Somme des 5 premiers termes (k=0 a 4) : u0*(q^5 - 1)/(q-1)
+% S5_geo = sum(u0_geo * q_geo**k for k in range(5))
+% assert S5_geo == 2*(3**5 - 1)//(3-1)
+% assert S5_geo == 242
+%
+% # ---- Exercice 3 : placement a interets composes ----
+% capital = 800       # placement initial en euros
+% taux_annuel = 5     # taux annuel en %
+% q_place = Rational(105, 100)   # 1 + 5/100
+% u_place = capital * q_place**n
+% assert u_place.subs(n, 0) == 800
+% assert u_place.subs(n, 1) == 840
+% assert u_place.subs(n, 2) == 882
+% seuil = 1200
+% # Plus petit n tel que u_n >= seuil : 800 * 1.05^n >= 1200 => 1.05^n >= 1.5
+% import math
+% n_seuil = math.ceil(math.log(seuil/capital) / math.log(float(q_place)))
+% assert n_seuil == 9
+% assert float(u_place.subs(n, 8)) < seuil
+% assert float(u_place.subs(n, 9)) >= seuil
+%
+% # ---- Exercice 4 : somme et variation ----
+% # Suite arithmetique v_n = 2n + 5, somme S_n = sum_{k=0}^{n} v_k
+% v = 5 + 2*n
+% assert v.subs(n, 0) == 5
+% assert v.subs(n, 1) == 7
+% # Somme de (n+1) termes arithmetiques de premier terme 5 et dernier terme 2n+5
+% # S_n = (n+1)*(5 + 2n+5)/2 = (n+1)*(2n+10)/2 = (n+1)*(n+5)
+% S_v = lambda m: (m+1)*(m+5)
+% assert S_v(0) == 5
+% assert S_v(1) == 12
+% assert S_v(4) == 45
+% # Verifier que S_4 = v0+v1+v2+v3+v4
+% assert sum(5 + 2*k for k in range(5)) == S_v(4)
+% # Plus petit n tel que S_n > 200 : (n+1)(n+5) > 200
+% # n=12 : 13*17=221>200; n=11 : 12*16=192<=200
+% assert S_v(11) == 192
+% assert S_v(12) == 221
+% assert S_v(11) <= 200
+% assert S_v(12) > 200
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Durée : 55 minutes — Barème : 20 points
+% Toute réponse doit être justifiée ; les résultats seuls ne sont pas acceptés.
+% La qualité de la rédaction sera prise en compte.
+%---------------------------------------------------------------
+
+\begin{evaluation}{1SPE-SUITES-EV-A}{55}
+
+%===============================================================
+\section*{Exercice 1 \hfill (6 points) \hfill Capacités C1, C2, C5}
+%===============================================================
+
+\textit{Compétences évaluées : calculer, raisonner, communiquer.}
+
+\medskip
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par :
+\[
+  u_0 = 3 \qquad \text{et} \qquad u_{n+1} = u_n + 4.
+\]
+
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Démontrer que la suite $(u_n)$ est arithmétique. Préciser sa raison $r$ et son premier terme $u_0$.
+  \hfill\textit{(2 pts — raisonner, communiquer)}
+
+  \item Exprimer $u_n$ en fonction de $n$ pour tout entier naturel $n$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Étudier les variations de la suite $(u_n)$. Justifier rigoureusement.
+  \hfill\textit{(2 pts — raisonner, communiquer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 2 \hfill (5 points) \hfill Capacités C3, C4}
+%===============================================================
+
+\textit{Compétences évaluées : calculer, raisonner, communiquer.}
+
+\medskip
+On considère la suite $(u_n)$ définie pour tout entier naturel $n$ par :
+\[
+  u_n = 2 \times 3^n.
+\]
+
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$ et $u_2$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Démontrer que la suite $(u_n)$ est géométrique. Préciser sa raison $q$ et son premier terme $u_0$.
+  \hfill\textit{(2 pts — raisonner, communiquer)}
+
+  \item Calculer la somme $S = u_0 + u_1 + u_2 + u_3 + u_4$.
+
+  On rappelle que, pour une suite géométrique de raison $q \neq 1$, on a :
+  \[
+    \sum_{k=0}^{n} u_k = u_0 \times \frac{q^{n+1} - 1}{q - 1}.
+  \]
+  \hfill\textit{(2 pts — calculer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 3 \hfill (5 points) \hfill Capacités C6, C7}
+%===============================================================
+
+\textit{Compétences évaluées : modéliser, chercher, communiquer.}
+
+\medskip
+Léa place $800$\,€ sur un livret d'épargne qui rapporte $5\,\%$ d'intérêts par an. On note $u_n$ le capital disponible (en euros) au bout de $n$ années entières (avec $u_0 = 800$).
+
+\begin{enumerate}
+  \item Justifier que, pour tout entier naturel $n$ :
+  \[
+    u_{n+1} = 1{,}05 \times u_n.
+  \]
+  \hfill\textit{(1 pt — modéliser)}
+
+  \item En déduire que $(u_n)$ est une suite géométrique. Exprimer $u_n$ en fonction de $n$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Calculer $u_1$ et $u_2$ (valeurs exactes, ou arrondies à l'euro si nécessaire).
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Le programme Python suivant a pour objectif de déterminer le plus petit entier $n$ tel que $u_n \geq 1\,200$.
+
+\begin{python}
+u = 800
+n = 0
+while u < 1200:
+    u = 1.05 * u
+    n = n + 1
+print(n)
+\end{python}
+
+  \begin{enumerate}
+    \item Expliquer, ligne par ligne, le rôle de la boucle \texttt{while}.
+    \hfill\textit{(1 pt — communiquer)}
+    \item Indiquer la valeur affichée par \texttt{print(n)} et vérifier par le calcul que cette valeur est cohérente.
+    \hfill\textit{(1 pt — chercher)}
+  \end{enumerate}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 4 \hfill (4 points) \hfill Capacités C4, C5}
+%===============================================================
+
+\textit{Compétences évaluées : calculer, raisonner, chercher.}
+
+\medskip
+On considère la suite $(v_n)$ définie pour tout entier naturel $n$ par :
+\[
+  v_n = 2n + 5.
+\]
+
+Pour tout entier naturel $n$, on pose :
+\[
+  S_n = v_0 + v_1 + v_2 + \cdots + v_n = \sum_{k=0}^{n} v_k.
+\]
+
+\begin{enumerate}
+  \item Montrer que $(v_n)$ est une suite arithmétique de raison $2$ et de premier terme $v_0 = 5$.
+  \hfill\textit{(1 pt — raisonner)}
+
+  \item Établir que $S_n = (n+1)(n+5)$ pour tout entier naturel $n$.
+
+  \textit{On rappelle que la somme de $(n+1)$ termes d'une suite arithmétique de premier terme $a$ et de dernier terme $b$ vaut $\dfrac{(n+1)(a+b)}{2}$.}
+  \hfill\textit{(2 pts — calculer, raisonner)}
+
+  \item Déterminer le plus petit entier naturel $n$ tel que $S_n > 200$.
+  \hfill\textit{(1 pt — chercher)}
+\end{enumerate}
+
+\end{evaluation}

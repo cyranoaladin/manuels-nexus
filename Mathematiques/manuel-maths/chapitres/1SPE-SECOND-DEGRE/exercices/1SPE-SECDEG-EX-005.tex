@@ -1,0 +1,29 @@
+% META: {"id": "1SPE-SECDEG-EX-005", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-005.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify
+% x = symbols('x')
+% # f(x) = 2*(x-1)^2 - 8  forme canonique
+% f = 2*(x - 1)**2 - 8
+% # sommet S(1 ; -8)
+% assert f.subs(x, 1) == -8
+% # variations : decroissante sur (-inf, 1], croissante sur [1, +inf)
+% # a = 2 > 0 => minimum
+% # minimum vaut -8 en x = 1
+% from sympy import expand
+% f_dev = expand(f)
+% assert f_dev == 2*x**2 - 4*x - 6
+% # antecedents de 0 : 2*(x-1)^2 = 8 => (x-1)^2 = 4 => x-1 = +-2 => x=3 ou x=-1
+% assert f.subs(x, 3) == 0
+% assert f.subs(x, -1) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-005}{1}{10}
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = 2(x-1)^2 - 8$.
+
+\begin{enumerate}
+  \item Identifier la forme canonique et en lire directement les coordonnées du sommet $S$.
+  \item La parabole est-elle tournée vers le haut ou vers le bas ? Justifier.
+  \item Dresser le tableau de variations de $f$ sur $\mathbb{R}$ et préciser le minimum de $f$.
+  \item Développer $f(x)$ pour obtenir la forme développée $f(x) = ax^2 + bx + c$.
+  \item Vérifier par le calcul que $f(3) = 0$ et $f(-1) = 0$.
+\end{enumerate}
+\end{exercice}

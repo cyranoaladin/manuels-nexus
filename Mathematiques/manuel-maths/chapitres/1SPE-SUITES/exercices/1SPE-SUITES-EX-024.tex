@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-SUITES-EX-024", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C2", "1SPE-SUITES-C4"], "capacites_codes": ["C2", "C4"], "methodes": ["M2", "M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 10, "max": 50}, "r": {"domaine": "entier", "min": 3, "max": 10}, "N": {"domaine": "entier", "min": 15, "max": 30}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-024.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-024.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 20
+% r = 6
+% N = 19
+% # u_n = 20 + 6n
+% u = u0 + r * n
+% assert u.subs(n, 0) == 20
+% assert u.subs(n, 1) == 26
+% # u_N
+% assert u.subs(n, N) == 134
+% # Somme S = u0 + u1 + ... + uN = (N+1)*(u0 + uN)/2
+% uN = u.subs(n, N)
+% S = (N + 1) * (u0 + uN) // 2
+% assert S == 1540
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-024}{2}{22}
+Une entreprise de livraison traite $20$ colis lors de sa première journée d'activité ($n = 0$), puis augmente sa capacité de $6$ colis supplémentaires chaque jour.
+
+On note $u_n$ le nombre de colis traités le jour de rang $n$.
+
+\begin{enumerate}
+  \item Écrire la relation de récurrence vérifiée par $(u_n)$, puis démontrer que $(u_n)$ est une suite arithmétique. Préciser sa raison et son premier terme.
+
+  \item Exprimer $u_n$ en fonction de $n$, puis calculer $u_{19}$.
+
+  \item Calculer la somme $S = u_0 + u_1 + \cdots + u_{19}$, qui représente le nombre total de colis traités durant les $20$ premiers jours d'activité.
+
+  \item Au bout de combien de jours l'entreprise aura-t-elle traité en tout au moins $3\,000$ colis ? (On pourra poser une inéquation et la résoudre.)
+\end{enumerate}
+\end{exercice}

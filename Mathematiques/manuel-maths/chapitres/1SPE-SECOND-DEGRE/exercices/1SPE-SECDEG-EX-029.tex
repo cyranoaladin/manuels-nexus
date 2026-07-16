@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-SECDEG-EX-029", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C3", "1SPE-SECOND-DEGRE-C5"], "capacites_codes": ["C3", "C5"], "methodes": ["M3", "M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-029.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-029.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational, sqrt
+% x = symbols('x')
+% # Equation : x^2 - 5x + 3 = 0, delta = 25 - 12 = 13
+% f = x**2 - 5*x + 3
+% delta_f = 25 - 12
+% assert delta_f == 13
+% sols_f = sorted(solve(f, x))
+% assert sols_f == [(5 - sqrt(13))/2, (5 + sqrt(13))/2]
+% # Inequation 1 : x^2 - 5x + 3 <= 0
+% # solutions : [(5-sqrt(13))/2 ; (5+sqrt(13))/2]
+% # Inequation 2 : x^2 + 4x + 5 > 0
+% g = x**2 + 4*x + 5
+% delta_g = 16 - 20
+% assert delta_g == -4  # delta < 0, a > 0 => toujours positif
+% assert g.subs(x, 0) > 0
+% assert g.subs(x, -2) > 0
+% # solution : R tout entier
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-029}{2}{20}
+\begin{enumerate}
+  \item \textbf{(C3)} Résoudre dans $\mathbb{R}$ l'équation $x^2 - 5x + 3 = 0$. Donner les solutions sous forme exacte.
+  \item \textbf{(C5)} En déduire la solution de l'inéquation $x^2 - 5x + 3 \leqslant 0$.
+
+  \textit{On pourra noter $x_1 = \dfrac{5 - \sqrt{13}}{2}$ et $x_2 = \dfrac{5 + \sqrt{13}}{2}$.}
+
+  \item \textbf{(C3)} Calculer le discriminant de $g(x) = x^2 + 4x + 5$.
+  \item \textbf{(C5)} En déduire, sans résoudre d'équation, le signe de $g(x)$ sur $\mathbb{R}$ et la solution de $g(x) > 0$.
+\end{enumerate}
+\end{exercice}

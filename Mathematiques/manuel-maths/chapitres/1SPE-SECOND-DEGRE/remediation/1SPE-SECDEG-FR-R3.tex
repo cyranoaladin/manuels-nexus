@@ -1,0 +1,192 @@
+% META: {"id": "1SPE-SECDEG-FR-R3", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["R3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R3 : Fonctions — image, antecedent, courbe
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Fonctions : image, antecedent, courbe representative}
+
+Soit $f$ une fonction definie sur $\mathbb{R}$.
+
+\begin{itemize}
+  \item \textbf{Image} : $f(a)$ est l'image de $a$ par $f$. Calculer $f(a)$ revient a substituer $x = a$ dans la formule.
+  \item \textbf{Antecedent} : $a$ est un antecedent de $b$ par $f$ si $f(a) = b$ (on resout l'equation $f(x) = b$).
+  \item \textbf{Courbe} : le graphe de $f$ est l'ensemble des points $(x\,;\,f(x))$.
+  Un point $A(x_0\,;\,y_0)$ appartient a la courbe si et seulement si $y_0 = f(x_0)$.
+\end{itemize}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R3-EX1}{1}{5}
+Soit $f(x) = x^2 - 3x + 2$.
+\begin{enumerate}
+  \item Calculer $f(0)$, $f(1)$, $f(2)$, $f(-1)$.
+  \item Verifier que le point $A(3\,;\,2)$ appartient a la courbe de $f$.
+  \item Le point $B(0\,;\,3)$ appartient-il a la courbe de $f$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% f = x**2 - 3*x + 2
+% assert f.subs(x, 0) == 2
+% assert f.subs(x, 1) == 0
+% assert f.subs(x, 2) == 0
+% assert f.subs(x, -1) == 6
+% assert f.subs(x, 3) == 2  # A(3;2) est sur la courbe
+% assert f.subs(x, 0) != 3  # B(0;3) n'est pas sur la courbe
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R3-EX1}
+
+\commentaireMarge{Pour calculer une image, on substitue la valeur dans la formule de $f$.}
+
+\textbf{Question 1.}
+\[
+f(0) = 0 - 0 + 2 = 2, \quad f(1) = 1 - 3 + 2 = 0, \quad f(2) = 4 - 6 + 2 = 0, \quad f(-1) = 1 + 3 + 2 = 6.
+\]
+
+\commentaireMarge{$A(3\,;\,2)$ est sur la courbe si $f(3) = 2$.}
+
+\textbf{Question 2.} $f(3) = 9 - 9 + 2 = 2$. Donc $A(3\,;\,2)$ appartient bien a la courbe. \checkmark
+
+\textbf{Question 3.} $f(0) = 2 \neq 3$. Donc $B(0\,;\,3)$ n'appartient pas a la courbe.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R3-EX2}{1}{5}
+Soit $g(x) = 2x^2 - x - 3$.
+\begin{enumerate}
+  \item Calculer $g(-1)$, $g(0)$, $g(1)$ et $g(2)$.
+  \item Resoudre $g(x) = 0$ (aide : trouver les racines par inspection ou discriminant).
+  \item Resoudre $g(x) = -3$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% x = symbols('x')
+% g = 2*x**2 - x - 3
+% assert g.subs(x, -1) == 0
+% assert g.subs(x, 0) == -3
+% assert g.subs(x, 1) == -2
+% assert g.subs(x, 2) == 3
+% # g(x) = 0
+% sols0 = sorted(solve(g, x))
+% assert sols0 == [-1, 3/2]
+% # g(x) = -3 <=> 2x^2 - x = 0 <=> x(2x-1) = 0
+% from sympy import Rational
+% sols3 = sorted(solve(g + 3, x))
+% assert sols3 == [0, Rational(1,2)]
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R3-EX2}
+
+\textbf{Question 1.}
+\[
+g(-1) = 2 + 1 - 3 = 0, \quad g(0) = -3, \quad g(1) = 2 - 1 - 3 = -2, \quad g(2) = 8 - 2 - 3 = 3.
+\]
+
+\commentaireMarge{$g(-1) = 0$ : $-1$ est une racine. On effectue la division ou on utilise $\Delta$.}
+
+\textbf{Question 2.} $\Delta = (-1)^2 - 4 \times 2 \times (-3) = 1 + 24 = 25 > 0$.
+\[
+x_1 = \frac{1 - 5}{4} = -1 \qquad \text{et} \qquad x_2 = \frac{1 + 5}{4} = \frac{3}{2}.
+\]
+
+\textbf{Question 3.} $g(x) = -3 \Leftrightarrow 2x^2 - x - 3 = -3 \Leftrightarrow 2x^2 - x = 0 \Leftrightarrow x(2x-1) = 0$.
+
+Donc $x = 0$ ou $x = \dfrac{1}{2}$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R3-EX3}{1}{6}
+Soit $h(x) = x^2 - 4$.
+\begin{enumerate}
+  \item Dresser un tableau de valeurs pour $x \in \{-3, -2, -1, 0, 1, 2, 3\}$.
+  \item Determiner les antecedents de $0$ par $h$.
+  \item Determiner les antecedents de $5$ par $h$.
+  \item La courbe de $h$ passe-t-elle par $C(1\,;\,-3)$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, sqrt
+% x = symbols('x')
+% h = x**2 - 4
+% vals = {v: h.subs(x, v) for v in [-3,-2,-1,0,1,2,3]}
+% assert vals[-3] == 5
+% assert vals[-2] == 0
+% assert vals[0] == -4
+% assert vals[2] == 0
+% # antecedents de 0 : racines
+% assert sorted(solve(h, x)) == [-2, 2]
+% # antecedents de 5 : x^2 = 9
+% assert sorted(solve(h - 5, x)) == [-3, 3]
+% # C(1;-3) : h(1) = -3 ?
+% assert h.subs(x, 1) == -3
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R3-EX3}
+
+\textbf{Question 1.}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$x$ & $-3$ & $-2$ & $-1$ & $0$ & $1$ & $2$ & $3$ \\
+\hline
+$h(x)$ & $5$ & $0$ & $-3$ & $-4$ & $-3$ & $0$ & $5$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 2.} $h(x) = 0 \Leftrightarrow x^2 = 4 \Leftrightarrow x = -2$ ou $x = 2$. Les antecedents de $0$ sont $-2$ et $2$.
+
+\textbf{Question 3.} $h(x) = 5 \Leftrightarrow x^2 = 9 \Leftrightarrow x = -3$ ou $x = 3$. Les antecedents de $5$ sont $-3$ et $3$.
+
+\textbf{Question 4.} $h(1) = 1 - 4 = -3$. Oui, $C(1\,;\,-3)$ est sur la courbe. \checkmark
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R3-EX4}{1}{6}
+Soit $p(x) = -x^2 + 6x - 5$.
+\begin{enumerate}
+  \item Calculer $p(0)$, $p(1)$, $p(3)$, $p(5)$.
+  \item Trouver les antecedents de $0$ (on se contentera de verifier $p(1)$ et $p(5)$).
+  \item Sur quel intervalle la courbe de $p$ est-elle au-dessus de l'axe des abscisses (i.e. $p(x) > 0$) ?
+    \textit{Indication : utiliser les valeurs calculees.}
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% x = symbols('x')
+% p = -x**2 + 6*x - 5
+% assert p.subs(x, 0) == -5
+% assert p.subs(x, 1) == 0
+% assert p.subs(x, 3) == 4
+% assert p.subs(x, 5) == 0
+% sols = sorted(solve(p, x))
+% assert sols == [1, 5]
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R3-EX4}
+
+\textbf{Question 1.}
+\[
+p(0) = -5, \quad p(1) = -1 + 6 - 5 = 0, \quad p(3) = -9 + 18 - 5 = 4, \quad p(5) = -25 + 30 - 5 = 0.
+\]
+
+\textbf{Question 2.} $p(1) = 0$ et $p(5) = 0$ : les antecedents de $0$ sont $1$ et $5$.
+
+\textbf{Question 3.} Comme $a = -1 < 0$, la parabole est en $\cap$ : $p(x) > 0$ entre les deux racines, soit pour $x \in \,]1\,;\,5[$. La courbe est au-dessus de l'axe des abscisses sur $]1\,;\,5[$.
+
+\end{corrige}

@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-DERLOCAL-CO-009","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-009","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% h = symbols('h', nonzero=True)
+% taux = simplify((5*(3+h)**2 - 45)/h)
+% assert taux == 5*h + 30
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-009}
+\textbf{1.} $d(3)=5\times 9=45$ m et $d(3{,}1)=5\times 3{,}1^2=5\times 9{,}61=48{,}05$ m.
+
+Taux de variation : $\dfrac{48{,}05-45}{0{,}1}=30{,}5$ m/s.
+
+\textbf{2.} $d(3+h)=5(3+h)^2=5(9+6h+h^2)=45+30h+5h^2$.
+
+$\dfrac{d(3+h)-d(3)}{h}=\dfrac{30h+5h^2}{h}=30+5h$.
+
+\textbf{3.} Lorsque $h$ se rapproche de $0$, $30+5h$ se rapproche de $30$. Donc $d'(3)=30$.
+
+\textbf{4.} Le nombre $d'(3)=30$ est la vitesse instantanée de l'objet à $t=3$~s. L'objet se déplace à $30$ mètres par seconde (m/s) à cet instant.
+\end{corrige}

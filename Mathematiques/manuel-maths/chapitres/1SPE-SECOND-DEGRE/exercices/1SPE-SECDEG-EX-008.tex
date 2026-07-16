@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-SECDEG-EX-008", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-008.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational, sqrt
+% x = symbols('x')
+% # a) 4x^2 - 12x + 9 = 0  => delta = 144 - 144 = 0  => x = 3/2 (double)
+% f1 = 4*x**2 - 12*x + 9
+% delta1 = 144 - 144
+% assert delta1 == 0
+% sols1 = solve(f1, x)
+% assert sols1 == [Rational(3, 2)]
+% # b) x^2 - 7 = 0  => delta = 28  => x = +-sqrt(7)
+% f2 = x**2 - 7
+% sols2 = solve(f2, x)
+% assert sorted(sols2) == [-sqrt(7), sqrt(7)]
+% # c) 3x^2 + x + 1 = 0  => delta = 1 - 12 = -11 < 0
+% f3 = 3*x**2 + x + 1
+% delta3 = 1 - 12
+% assert delta3 == -11
+% assert all(not s.is_real for s in solve(f3, x))
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-008}{1}{10}
+Pour chacune des équations suivantes, calculer $\Delta$ et discuter le nombre de solutions dans $\mathbb{R}$.
+
+\begin{enumerate}
+  \item $4x^2 - 12x + 9 = 0$
+  \item $x^2 - 7 = 0$
+  \item $3x^2 + x + 1 = 0$
+\end{enumerate}
+
+Donner les solutions exactes (sous forme de radicaux si nécessaire).
+\end{exercice}

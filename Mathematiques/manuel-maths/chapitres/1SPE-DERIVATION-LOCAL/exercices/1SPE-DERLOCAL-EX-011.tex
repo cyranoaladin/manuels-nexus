@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-DERLOCAL-EX-011","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":3,"competences":["raisonner","chercher"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-011.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-011.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% a, h = symbols('a h', nonzero=True)
+% taux = simplify(((a+h)**2 - a**2)/h)
+% assert taux == 2*a + h
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-011}{3}{20}
+On veut déterminer $f'(a)$ pour la fonction carré $f(x)=x^2$, où $a$ est un réel quelconque.
+\begin{enumerate}
+  \item Développer $(a+h)^2$ et en déduire $f(a+h)-f(a)$.
+  \item Exprimer $\dfrac{f(a+h)-f(a)}{h}$ pour $h\ne 0$ et simplifier.
+  \item En déduire $f'(a)$ pour tout réel $a$.
+  \item Que vaut $f'(0)$ ? $f'(-1)$ ? $f'(5)$ ?
+  \item Pour quelle valeur de $a$ a-t-on $f'(a)=0$ ? Interpréter géométriquement.
+\end{enumerate}
+\end{exercice}

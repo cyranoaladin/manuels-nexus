@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-DERLOCAL-CO-005","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-005","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, factor
+% a, b = symbols('a b')
+% expr = (b**2 - a**2)/(b - a)
+% assert simplify(expr - (a + b)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-005}
+\textbf{1.} On calcule :
+\begin{itemize}
+  \item Entre $1$ et $3$ : $\dfrac{3^2-1^2}{3-1}=\dfrac{8}{2}=4$.
+  \item Entre $2$ et $4$ : $\dfrac{4^2-2^2}{4-2}=\dfrac{12}{2}=6$.
+  \item Entre $0$ et $5$ : $\dfrac{5^2-0^2}{5-0}=\dfrac{25}{5}=5$.
+\end{itemize}
+
+\textbf{2.} On observe : $4=1+3$, $6=2+4$, $5=0+5$. Conjecture : le taux de variation de $f$ entre $a$ et $b$ vaut $a+b$.
+
+\textbf{3.} Pour $a\ne b$, on écrit
+\[
+\frac{f(b)-f(a)}{b-a}=\frac{b^2-a^2}{b-a}.
+\]
+On factorise le numérateur par l'identité remarquable $b^2-a^2=(b-a)(b+a)$. Comme $b\ne a$, on simplifie :
+\[
+\frac{(b-a)(b+a)}{b-a}=b+a=a+b.
+\]
+La conjecture est démontrée.
+
+\textbf{4.} La sécante à la parabole passant par les points d'abscisses $a$ et $b$ a pour coefficient directeur le taux de variation de $f$ entre $a$ et $b$, soit $a+b$.
+\end{corrige}

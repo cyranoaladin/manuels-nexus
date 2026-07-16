@@ -1,0 +1,62 @@
+% META: {"id": "1SPE-SECDEG-CO-008", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-008", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational, sqrt
+% x = symbols('x')
+% # a) 4x^2 - 12x + 9 = 0
+% f1 = 4*x**2 - 12*x + 9
+% delta1 = (-12)**2 - 4*4*9
+% assert delta1 == 0
+% sols1 = solve(f1, x)
+% assert sols1 == [Rational(3, 2)]
+% # b) x^2 - 7 = 0
+% f2 = x**2 - 7
+% delta2 = 0 - 4*1*(-7)
+% assert delta2 == 28
+% sols2 = sorted(solve(f2, x))
+% assert sols2 == [-sqrt(7), sqrt(7)]
+% # c) 3x^2 + x + 1 = 0
+% f3 = 3*x**2 + x + 1
+% delta3 = 1**2 - 4*3*1
+% assert delta3 == -11
+% assert all(not s.is_real for s in solve(f3, x))
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-008}
+
+\textbf{a) $4x^2 - 12x + 9 = 0$.}
+
+\commentaireMarge{$a=4$, $b=-12$, $c=9$.}
+
+$\Delta = (-12)^2 - 4 \times 4 \times 9 = 144 - 144 = 0$.
+
+Puisque $\Delta = 0$, l'équation admet une \textbf{racine double} :
+\[x_0 = \frac{-b}{2a} = \frac{12}{8} = \frac{3}{2}.\]
+
+\[\boxed{\mathcal{S} = \left\{\frac{3}{2}\right\}.}\]
+
+\textit{Remarque :} on reconnaît l'identité remarquable $4x^2 - 12x + 9 = (2x-3)^2$, ce qui confirme la racine double $x = \dfrac{3}{2}$.
+
+\medskip
+\textbf{b) $x^2 - 7 = 0$.}
+
+\commentaireMarge{$a=1$, $b=0$, $c=-7$.}
+
+$\Delta = 0^2 - 4 \times 1 \times (-7) = 28 > 0$.
+
+\[\sqrt{\Delta} = \sqrt{28} = 2\sqrt{7}.\]
+
+\[x_1 = \frac{0 - 2\sqrt{7}}{2} = -\sqrt{7}, \qquad x_2 = \frac{0 + 2\sqrt{7}}{2} = \sqrt{7}.\]
+
+\[\boxed{\mathcal{S} = \left\{-\sqrt{7}\,;\,\sqrt{7}\right\}.}\]
+
+\medskip
+\textbf{c) $3x^2 + x + 1 = 0$.}
+
+\commentaireMarge{$a=3$, $b=1$, $c=1$.}
+
+$\Delta = 1^2 - 4 \times 3 \times 1 = 1 - 12 = -11 < 0$.
+
+Puisque $\Delta < 0$, l'équation n'admet \textbf{aucune solution réelle}.
+
+\[\boxed{\mathcal{S} = \emptyset.}\]
+
+\end{corrige}

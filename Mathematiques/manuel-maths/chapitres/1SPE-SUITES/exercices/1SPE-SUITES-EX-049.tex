@@ -1,0 +1,74 @@
+% META: {"id": "1SPE-SUITES-EX-049", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C4", "1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C4", "C6", "C7"], "methodes": ["M4", "M6", "M7"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser"], "duree_min": 40, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"N0": 100, "r": "1.05", "K": 500}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-049.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-049.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Modele 1 : croissance geometrique u_{n+1} = 1.05 * u_n, u_0 = 100
+% r = Rational(21, 20)  # 1.05
+% u0 = 100
+% u_n = lambda n: u0 * r**n
+% assert u_n(0) == 100
+% assert u_n(1) == 105
+% assert u_n(2) == Rational(2205, 20)
+% # Modele 2 : croissance limitee v_{n+1} = v_n + 0.05*v_n*(1 - v_n/500)
+% # v_0 = 100, K = 500
+% K = 500
+% alpha = Rational(1, 20)  # 0.05
+% v = [Rational(100)]
+% for i in range(5):
+%     vn = v[-1]
+%     v.append(vn + alpha * vn * (1 - vn / K))
+% assert v[0] == 100
+% # v[1] = 100 + 0.05*100*(1-100/500) = 100 + 5*0.8 = 100 + 4 = 104
+% assert v[1] == 104
+% # v[2] = 104 + 0.05*104*(1 - 104/500) = 104 + 5.2*(396/500)
+% assert v[2] == 104 + alpha*104*(1 - Rational(104,500))
+% # Seuil : u_n > 500 quand ? r^n > 5 => n > log(5)/log(1.05)
+% import math
+% n_geo = math.ceil(math.log(5)/math.log(1.05))
+% assert n_geo == 33  # environ 33 ans
+% assert float(r**33) > 5
+% assert float(r**32) < 5
+% # Modele limite : v_n reste toujours en dessous de 500
+% for val in v:
+%     assert val < 500
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-049}{3}{40}
+On étudie l'évolution d'une population de bactéries dans deux modèles différents. La population initiale est de $100$ individus.
+
+\textbf{Modèle 1 — Croissance géométrique.}
+On suppose que la population augmente de $5\,\%$ par génération. On note $u_n$ le nombre d'individus à la génération $n$.
+
+\textbf{Modèle 2 — Croissance logistique.}
+La population est limitée par les ressources disponibles (capacité maximale : $K = 500$ individus). On note $v_n$ le nombre d'individus à la génération $n$, avec la relation de récurrence :
+\[
+  v_{n+1} = v_n + 0{,}05\, v_n \left(1 - \frac{v_n}{500}\right), \quad v_0 = 100.
+\]
+
+\begin{enumerate}
+  \item \textbf{Modèle 1.}
+  \begin{enumerate}
+    \item Écrire la relation de récurrence vérifiée par $(u_n)$.
+    \item Montrer que $(u_n)$ est géométrique et exprimer $u_n$ en fonction de $n$.
+    \item Calculer $\displaystyle\sum_{k=0}^{9} u_k$ (production cumulée sur 10 générations).
+    \item À partir de quelle génération la population dépasse-t-elle $500$ individus ?
+  \end{enumerate}
+
+  \item \textbf{Modèle 2.}
+  \begin{enumerate}
+    \item Calculer $v_1$ et $v_2$.
+    \item Montrer que, si $0 < v_n < 500$, alors $0 < v_{n+1} < 500$. En déduire par récurrence que $0 < v_n < 500$ pour tout $n \in \mathbb{N}$.
+    \item Comparer $v_{n+1}$ et $v_n$ lorsque $0 < v_n < 500$. Conclure sur le sens de variation de $(v_n)$.
+  \end{enumerate}
+
+  \item \textbf{Comparaison et Python.} Le script suivant simule les deux modèles. Indiquer ce qu'affiche ce script, puis expliquer pourquoi les deux populations se comportent très différemment à long terme.
+\end{enumerate}
+\end{exercice}
+
+\begin{lstlisting}[language=Python]
+u = 100
+v = 100
+for n in range(1, 21):
+    u = 1.05 * u
+    v = v + 0.05 * v * (1 - v / 500)
+    if n in [5, 10, 20]:
+        print(f"n={n} : u={u:.1f}, v={v:.1f}")
+\end{lstlisting}

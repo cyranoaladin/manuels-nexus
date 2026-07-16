@@ -1,0 +1,55 @@
+% META: {"id": "1SPE-SUITES-CO-009", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-009", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 6 * 2**n
+% assert u.subs(n, 0) == 6
+% assert u.subs(n, 1) == 12
+% assert u.subs(n, 2) == 24
+% assert u.subs(n, 3) == 48
+% # Quotient u_{n+1}/u_n
+% quotient = u.subs(n, n+1) / u
+% assert simplify(quotient - 2) == 0
+% # u_{n+1} = 2*u_n
+% assert simplify(u.subs(n, n+1) - 2*u) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-009}
+
+\commentaireMarge{Calcul direct des premiers termes par substitution dans $u_n = 6 \times 2^n$.}
+
+\textbf{Question 1.} On substitue $n = 0$, $1$, $2$, $3$ dans $u_n = 6 \times 2^n$ :
+
+\[
+u_0 = 6 \times 2^0 = 6 \times 1 = 6.
+\]
+\[
+u_1 = 6 \times 2^1 = 6 \times 2 = 12.
+\]
+\[
+u_2 = 6 \times 2^2 = 6 \times 4 = 24.
+\]
+\[
+u_3 = 6 \times 2^3 = 6 \times 8 = 48.
+\]
+
+Donc $u_0 = 6$, $u_1 = 12$, $u_2 = 24$ et $u_3 = 48$.
+
+\commentaireMarge{Pour montrer qu'une suite est géométrique, on calcule le quotient de deux termes consécutifs et on vérifie qu'il est constant.}
+
+\textbf{Question 2.} Puisque $u_n = 6 \times 2^n > 0$ pour tout $n \in \mathbb{N}$, le quotient $\dfrac{u_{n+1}}{u_n}$ est bien défini. On calcule :
+\[
+\frac{u_{n+1}}{u_n} = \frac{6 \times 2^{n+1}}{6 \times 2^n} = 2^{n+1-n} = 2.
+\]
+
+Ce quotient est constant, égal à $2$, pour tout $n \in \mathbb{N}$.
+
+Donc la suite $(u_n)$ est une suite \textbf{géométrique} de raison $q = 2$.
+
+\commentaireMarge{La relation de récurrence d'une suite géométrique est $u_{n+1} = q \cdot u_n$.}
+
+\textbf{Question 3.} Pour tout $n \in \mathbb{N}$ :
+\[
+\boxed{u_{n+1} = 2 \times u_n.}
+\]
+
+\end{corrige}

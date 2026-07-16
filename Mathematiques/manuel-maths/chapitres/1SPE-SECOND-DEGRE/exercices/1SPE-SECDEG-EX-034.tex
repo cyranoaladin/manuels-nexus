@@ -1,0 +1,50 @@
+% META: {"id": "1SPE-SECDEG-EX-034", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C5", "1SPE-SECOND-DEGRE-C6"], "capacites_codes": ["C5", "C6"], "methodes": ["M5", "M6"], "parcours": 2, "competences": ["calculer", "modeliser", "raisonner", "communiquer"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-034.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-034.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational, expand, simplify
+% x = symbols('x')
+% # Aire d'un triangle rectangle en fonction de x :
+% # base = x + 4, hauteur = 6 - x, x in ]0 ; 6[
+% # A(x) = (1/2)*(x+4)*(6-x) = (1/2)*(-x^2 + 2x + 24)
+% A = Rational(1,2)*(-x**2 + 2*x + 24)
+% assert expand(A) == -x**2/2 + x + 12
+% # C6 : maximum : sommet de -x^2 + 2x + 24
+% # alpha = -2/(2*(-1)) = 1, A(1) = (-1+2+24)/2 = 25/2
+% alpha = Rational(-2, -2)
+% assert alpha == 1
+% A_inner = -x**2 + 2*x + 24
+% assert A_inner.subs(x, alpha) == 25
+% assert A.subs(x, alpha) == Rational(25, 2)
+% # C5 : A(x) > 10 => (-x^2 + 2x + 24)/2 > 10 => -x^2 + 2x + 4 > 0
+% B = -x**2 + 2*x + 4
+% delta_B = 4 + 16
+% assert delta_B == 20
+% from sympy import sqrt
+% sols_B = sorted(solve(B, x))
+% # x = (2 +- sqrt(20))/2 = 1 +- sqrt(5)
+% assert sols_B[0] == 1 - sqrt(5)
+% assert sols_B[1] == 1 + sqrt(5)
+% # sur ]0;6[ : 0 < x < 1 + sqrt(5) (~3.24)
+% # C5 : A(x) >= 8 => (-x^2 + 2x + 24)/2 >= 8 => -x^2 + 2x + 8 >= 0
+% C = -x**2 + 2*x + 8
+% sols_C = sorted(solve(C, x))
+% assert sols_C == [-2, 4]
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-034}{2}{25}
+On considère un triangle rectangle dont les deux côtés de l'angle droit ont pour longueurs $(x+4)$~cm et $(6-x)$~cm, avec $0 < x < 6$.
+
+\begin{enumerate}
+  \item \textbf{(C6)} Exprimer l'aire $A(x)$ du triangle en fonction de $x$ et montrer que :
+  \[A(x) = -\dfrac{1}{2}x^2 + x + 12.\]
+
+  \item \textbf{(C6)} Déterminer la valeur de $x$ qui maximise l'aire du triangle et calculer cette aire maximale.
+
+  \item \textbf{(C5)} On souhaite que l'aire du triangle soit strictement supérieure à $10$~cm$^2$.
+  \begin{enumerate}
+    \item Montrer que cela revient à résoudre $-x^2 + 2x + 4 > 0$.
+    \item Résoudre cette inéquation et donner les solutions exactes.
+    \item En tenant compte du domaine $0 < x < 6$, écrire l'ensemble des valeurs de $x$ acceptables.
+  \end{enumerate}
+
+  \item \textbf{(C5)} Résoudre dans $]0\,;\,6[$ l'inéquation $A(x) \geqslant 8$.
+\end{enumerate}
+\end{exercice}

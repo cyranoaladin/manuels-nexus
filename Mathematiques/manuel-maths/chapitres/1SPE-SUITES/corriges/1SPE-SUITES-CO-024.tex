@@ -1,0 +1,111 @@
+% META: {"id": "1SPE-SUITES-CO-024", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-024", "capacites_codes": ["C2", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, solve, ceiling
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 20
+% r = 6
+% u = u0 + r * n
+% assert u.subs(n, 0) == 20
+% assert u.subs(n, 1) == 26
+% assert u.subs(n, 19) == 134
+% diff = u.subs(n, n+1) - u
+% assert simplify(diff) == 6
+% # Somme S = u0 + ... + u19 : 20 termes, premier=20, dernier=134
+% S = 20 * (20 + 134) // 2
+% assert S == 1540
+% # Somme cumulee Sn = (n+1)*(20 + 20+6n)/2 = (n+1)*(40+6n)/2 = (n+1)*(20+3n)
+% # Sn >= 3000 : (n+1)(20+3n) >= 3000
+% # 3n^2 + 23n + 20 >= 3000 => 3n^2 + 23n - 2980 >= 0
+% # discriminant = 23^2 + 4*3*2980 = 529 + 35760 = 36289
+% import math
+% disc = 23**2 + 4*3*2980
+% assert disc == 36289
+% n_sol = (-23 + math.sqrt(disc)) / 6
+% # n_sol ~ (-23 + 190.5) / 6 ~ 167.5/6 ~ 27.9
+% assert abs(n_sol - 27.9) < 0.2
+% # Verif : S_27 et S_28
+% S27 = (27+1)*(20 + 3*27)
+% S28 = (28+1)*(20 + 3*28)
+% assert S27 == 28*101 == 2828
+% assert S28 == 29*104 == 3016
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-024}
+
+\textbf{Question 1 — Relation de récurrence et nature arithmétique.}
+
+L'entreprise traite $6$ colis de plus chaque jour, donc :
+\[
+  u_{n+1} = u_n + 6, \quad u_0 = 20.
+\]
+
+\textit{Démonstration :} Pour tout $n \in \mathbb{N}$ :
+\[
+  u_{n+1} - u_n = (u_n + 6) - u_n = 6.
+\]
+
+\commentaireMarge{La différence entre deux termes consécutifs est constante : c'est la définition d'une suite arithmétique.}
+
+La différence $u_{n+1} - u_n = 6$ est constante. Donc $(u_n)$ est une suite arithmétique de raison $r = 6$ et de premier terme $u_0 = 20$.
+
+\medskip
+\textbf{Question 2 — Terme général et calcul de $u_{19}$.}
+
+Par la formule du terme général d'une suite arithmétique :
+\[
+  u_n = u_0 + n \times r = 20 + 6n.
+\]
+
+\[
+  u_{19} = 20 + 6 \times 19 = 20 + 114 = 134.
+\]
+
+L'entreprise traite $134$ colis lors du $20^e$ jour.
+
+\medskip
+\textbf{Question 3 — Somme $S = u_0 + u_1 + \cdots + u_{19}$.}
+
+\commentaireMarge{Formule de la somme des termes d'une suite arithmétique : $S = \dfrac{\text{nb de termes} \times (\text{1er terme} + \text{dernier terme})}{2}$.}
+
+La somme porte sur $20$ termes (de $n = 0$ à $n = 19$), de premier terme $u_0 = 20$ et de dernier terme $u_{19} = 134$ :
+\[
+  S = \frac{20 \times (u_0 + u_{19})}{2} = \frac{20 \times (20 + 134)}{2} = \frac{20 \times 154}{2} = 10 \times 154 = 1540.
+\]
+
+L'entreprise traite $\boxed{1\,540}$ colis au total durant les $20$ premiers jours.
+
+\medskip
+\textbf{Question 4 — Nombre de jours pour atteindre $3\,000$ colis au total.}
+
+La somme cumulée des $n+1$ premiers termes (de $u_0$ à $u_n$) vaut :
+\[
+  S_n = \frac{(n+1)(u_0 + u_n)}{2} = \frac{(n+1)(20 + 20 + 6n)}{2} = \frac{(n+1)(40 + 6n)}{2} = (n+1)(20 + 3n).
+\]
+
+On cherche le plus petit entier $n$ tel que $S_n \geq 3\,000$ :
+\[
+  (n+1)(3n + 20) \geq 3000 \iff 3n^2 + 23n + 20 \geq 3000 \iff 3n^2 + 23n - 2980 \geq 0.
+\]
+
+\commentaireMarge{On résout l'inéquation du second degré : discriminant $\Delta = 23^2 + 4 \times 3 \times 2980 = 529 + 35760 = 36289 \approx 190{,}5^2$.}
+
+Le discriminant est $\Delta = 529 + 35760 = 36289$, donc $\sqrt{\Delta} \approx 190{,}5$.
+
+La racine positive est :
+\[
+  n = \frac{-23 + \sqrt{36289}}{6} \approx \frac{-23 + 190{,}5}{6} \approx \frac{167{,}5}{6} \approx 27{,}9.
+\]
+
+L'inéquation est vérifiée pour $n \geq 28$ (entier).
+
+\textit{Vérification :}
+\[
+  S_{27} = 28 \times (20 + 3 \times 27) = 28 \times 101 = 2828 < 3000.
+\]
+\[
+  S_{28} = 29 \times (20 + 3 \times 28) = 29 \times 104 = 3016 \geq 3000. \checkmark
+\]
+
+L'entreprise aura traité au moins $3\,000$ colis au total après $\boxed{29}$ jours (à partir du rang $n = 28$, c'est-à-dire à la fin du $29^e$ jour).
+
+\baremeIndicatif{Q1 : 2 pts (raisonner : relation de récurrence 1 pt + démonstration arithmétique 1 pt) ; Q2 : 2 pts (calculer : formule 1 pt + $u_{19}$ 1 pt) ; Q3 : 2 pts (calculer : application formule somme) ; Q4 : 2 pts (raisonner : mise en équation et résolution)}
+\end{corrige}

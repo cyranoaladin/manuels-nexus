@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-DERLOCAL-EX-020","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":1,"competences":["calculer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-020.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-020.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% # f(x) = x^2 + 1, f'(x) = 2x
+% # a = -1, f(-1) = 1 + 1 = 2, f'(-1) = -2
+% # Tangente : y = -2(x - (-1)) + 2 = -2(x + 1) + 2 = -2x
+% T = -2*(x + 1) + 2
+% assert T.expand() == -2*x
+% assert T.subs(x, -1) == 2
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-020}{1}{8}
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2 + 1$. On admet que $f'(a) = 2a$ pour tout réel $a$.
+
+\begin{enumerate}
+  \item Calculer $f(-1)$ et $f'(-1)$.
+  \item En déduire l'équation de la tangente à la courbe de $f$ au point d'abscisse $-1$.
+\end{enumerate}
+\end{exercice}

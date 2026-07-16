@@ -1,0 +1,112 @@
+% META: {"id": "1SPE-SUITES-CO-025", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-025", "capacites_codes": ["C2", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve, ceiling
+% n = symbols('n', integer=True, nonneg=True)
+% u1_val = 8
+% u5_val = 20
+% r_val = (u5_val - u1_val) // 4
+% assert r_val == 3
+% u0_val = u1_val - r_val
+% assert u0_val == 5
+% u = u0_val + r_val * n
+% assert u.subs(n, 0) == 5
+% assert u.subs(n, 1) == 8
+% assert u.subs(n, 5) == 20
+% assert u.subs(n, 10) == 35
+% # Somme S = u1 + ... + u10 : 10 termes, premier=8, dernier=35
+% S = 10 * (8 + 35) // 2
+% assert S == 215
+% # T_n = u1 + ... + u_n = n*(u1 + u_n)/2 = n*(8 + 5+3n)/2 = n*(13+3n)/2
+% # T_n > 500 : n*(3n+13)/2 > 500 => 3n^2 + 13n > 1000 => 3n^2 + 13n - 1000 > 0
+% # discriminant = 169 + 12000 = 12169 = 110.3...^2
+% import math
+% disc = 13**2 + 4*3*1000
+% assert disc == 12169
+% n_sol = (-13 + math.sqrt(disc)) / 6
+% # n_sol ~ (-13 + 110.3)/6 ~ 97.3/6 ~ 16.2
+% assert abs(n_sol - 16.2) < 0.2
+% # T_16 et T_17
+% T16 = 16 * (13 + 3*16) // 2
+% T17 = 17 * (13 + 3*17) // 2
+% assert T16 == 16*61//2 == 488
+% assert T17 == 17*64//2 == 544
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-025}
+
+\textbf{Question 1 — Détermination de la raison et du premier terme.}
+
+$(u_n)$ est une suite arithmétique de raison $r$. On a donc $u_n = u_1 + (n-1)r$ pour tout $n \geq 1$.
+
+En particulier :
+\[
+  u_5 = u_1 + 4r \implies 20 = 8 + 4r \implies 4r = 12 \implies r = 3.
+\]
+
+\commentaireMarge{On utilise $u_5 - u_1 = 4r$ car il y a $4$ « pas » entre $u_1$ et $u_5$.}
+
+Le premier terme :
+\[
+  u_0 = u_1 - r = 8 - 3 = 5.
+\]
+
+La raison est $r = 3$ et le premier terme est $u_0 = 5$.
+
+\medskip
+\textbf{Question 2 — Expression de $u_n$ en fonction de $n$.}
+
+Par la formule du terme général :
+\[
+  u_n = u_0 + n \times r = 5 + 3n.
+\]
+
+\textit{Vérification :} $u_1 = 5 + 3 = 8$ \checkmark \quad $u_5 = 5 + 15 = 20$ \checkmark.
+
+\medskip
+\textbf{Question 3 — Calcul de $S = u_1 + u_2 + \cdots + u_{10}$.}
+
+La somme porte sur $10$ termes, de premier terme $u_1 = 8$ et de dernier terme $u_{10} = 5 + 30 = 35$.
+
+\commentaireMarge{Formule : somme de $n$ termes en progression arithmétique $= \dfrac{n \times (\text{1er} + \text{dernier})}{2}$.}
+
+\[
+  S = \frac{10 \times (u_1 + u_{10})}{2} = \frac{10 \times (8 + 35)}{2} = \frac{10 \times 43}{2} = 5 \times 43 = 215.
+\]
+
+\medskip
+\textbf{Question 4 — Expression de $T_n$ et détermination du premier rang tel que $T_n > 500$.}
+
+\textit{Expression de $T_n$ :} $T_n = u_1 + u_2 + \cdots + u_n$ est la somme de $n$ termes de la suite arithmétique, de premier terme $u_1 = 8$ et de dernier terme $u_n = 3n + 5$.
+
+\[
+  T_n = \frac{n(u_1 + u_n)}{2} = \frac{n(8 + 3n + 5)}{2} = \frac{n(3n + 13)}{2}.
+\]
+
+\textit{Résolution de $T_n > 500$ :}
+\[
+  \frac{n(3n + 13)}{2} > 500 \iff 3n^2 + 13n - 1000 > 0.
+\]
+
+Le discriminant est $\Delta = 13^2 + 4 \times 3 \times 1000 = 169 + 12000 = 12169$.
+
+On calcule $\sqrt{12169} \approx 110{,}3$.
+
+\commentaireMarge{On ne retient que la racine positive car $n \geq 1$.}
+
+\[
+  n > \frac{-13 + 110{,}3}{6} \approx \frac{97{,}3}{6} \approx 16{,}2.
+\]
+
+Le plus petit entier $n$ satisfaisant l'inéquation est donc $n = 17$.
+
+\textit{Vérification :}
+\[
+  T_{16} = \frac{16 \times (3 \times 16 + 13)}{2} = \frac{16 \times 61}{2} = 8 \times 61 = 488 \leq 500.
+\]
+\[
+  T_{17} = \frac{17 \times (3 \times 17 + 13)}{2} = \frac{17 \times 64}{2} = 17 \times 32 = 544 > 500. \checkmark
+\]
+
+Le plus petit entier $n$ tel que $T_n > 500$ est $\boxed{n = 17}$.
+
+\baremeIndicatif{Q1 : 2 pts (raisonner : relation entre $u_1$, $u_5$ et $r$ ; calcul de $u_0$) ; Q2 : 1 pt (calculer : formule terme général) ; Q3 : 2 pts (calculer : application formule somme) ; Q4 : 3 pts (raisonner, calculer : expression de $T_n$ 1 pt + résolution inéquation 1 pt + vérification 1 pt)}
+\end{corrige}

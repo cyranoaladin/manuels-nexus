@@ -1,0 +1,100 @@
+% META: {"id": "1SPE-SECDEG-CR-013", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+
+\section{Factorisation et signe d'un trinôme}
+
+% ============================================================
+% STRATE 1 — Factorisation et théorème du signe
+% ============================================================
+
+\propriete[3 — Factorisation selon le signe de $\Delta$]{
+Soit $f(x) = ax^2 + bx + c$ ($a \neq 0$) de discriminant $\Delta = b^2 - 4ac$.
+
+\begin{itemize}
+  \item Si $\Delta > 0$, alors $f$ possède deux racines réelles $x_1 < x_2$ et
+  \[
+    f(x) = a(x - x_1)(x - x_2).
+  \]
+  \item Si $\Delta = 0$, alors $f$ possède une racine double $x_0$ et
+  \[
+    f(x) = a(x - x_0)^2.
+  \]
+  \item Si $\Delta < 0$, alors $f$ ne se factorise pas dans $\mathbb{R}$.
+\end{itemize}
+}
+
+\theoreme[2 — Signe du trinôme]{
+Soit $f(x) = ax^2 + bx + c$ ($a \neq 0$) de discriminant $\Delta$.
+
+\begin{itemize}
+  \item Si $\Delta < 0$ : $f(x)$ est du \textbf{signe de $a$} pour tout $x \in \mathbb{R}$ (toujours positif si $a > 0$, toujours négatif si $a < 0$).
+  \item Si $\Delta = 0$, de racine double $x_0$ : $f(x_0) = 0$ et $f(x)$ est du \textbf{signe de $a$} pour tout $x \neq x_0$.
+  \item Si $\Delta > 0$, de racines $x_1 < x_2$ :
+  \begin{itemize}
+    \item $f(x)$ est du \textbf{signe de $a$} pour $x \in ]-\infty\,;\,x_1[ \cup ]x_2\,;\,+\infty[$.
+    \item $f(x)$ est du \textbf{signe opposé à $a$} pour $x \in ]x_1\,;\,x_2[$.
+    \item $f(x_1) = f(x_2) = 0$.
+  \end{itemize}
+\end{itemize}
+
+En résumé : \textbf{$f(x)$ est du signe de $a$, sauf entre les racines où il est de signe opposé à $a$}.
+}
+
+\exemple{
+Étudier le signe de $f(x) = 2x^2 - 6x + 4$.
+
+$a = 2$, $\Delta = 36 - 32 = 4 > 0$, $x_1 = 1$, $x_2 = 2$.
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $2$ & & $+\infty$ \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+$f(x) > 0$ sur $]-\infty\,;\,1[ \cup ]2\,;\,+\infty[$ ; $f(x) < 0$ sur $]1\,;\,2[$.
+}
+
+\exemple{
+Étudier le signe de $g(x) = -x^2 + 2x - 5$.
+
+$a = -1$, $\Delta = 4 - 20 = -16 < 0$.
+
+$g(x)$ est du signe de $a = -1$ pour tout $x$ : $g(x) < 0$ pour tout $x \in \mathbb{R}$.
+}
+
+\exemple{
+Étudier le signe de $h(x) = x^2 - 6x + 9$.
+
+$a = 1$, $\Delta = 36 - 36 = 0$, $x_0 = 3$.
+
+$h(x) = (x-3)^2 \geq 0$ pour tout $x$ ; $h(x) = 0$ seulement en $x = 3$.
+}
+
+\margeAppui{%
+\textbf{Règle clé :}\newline
+Signe de $f(x)$ = signe de $a$\newline
+\textbf{sauf} entre $x_1$ et $x_2$\newline
+où c'est le signe opposé à $a$.%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier le facteur $a$ dans la forme factorisée.}
+
+On écrit parfois $(x - x_1)(x - x_2)$ en oubliant le coefficient $a$ devant. Or $f(x) = a(x - x_1)(x - x_2)$. Pour s'en souvenir, on peut vérifier que le coefficient de $x^2$ dans la forme développée redonne bien $a$.
+}
+
+\erreurFrequente{
+\textbf{Se tromper de signe entre les racines.}
+
+Entre $x_1$ et $x_2$, le signe de $f(x)$ est \emph{opposé} au signe de $a$. C'est là que beaucoup d'élèves se trompent en écrivant le signe de $a$ partout.
+
+\textbf{Test rapide :} calculer $f\!\left(\dfrac{x_1+x_2}{2}\right)$ (valeur entre les racines) et vérifier son signe. Si $a > 0$ et que ce test donne un résultat négatif, c'est cohérent.
+}

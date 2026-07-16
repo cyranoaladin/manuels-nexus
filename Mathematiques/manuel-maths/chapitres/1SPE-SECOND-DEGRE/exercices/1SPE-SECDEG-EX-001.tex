@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-SECDEG-EX-001", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-001.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor, simplify
+% x = symbols('x')
+% f = 2*x**2 - 3*x - 5
+% # forme developpee
+% assert expand(f) == 2*x**2 - 3*x - 5
+% # forme factorisee : 2*(x+1)*(x - 5/2)
+% from sympy import Rational
+% assert simplify(f - 2*(x + 1)*(x - Rational(5,2))) == 0
+% # sommet : x_s = 3/4, f(x_s) = -49/8
+% xs = Rational(3, 4)
+% assert simplify(f.subs(x, xs) - Rational(-49, 8)) == 0
+% # forme canonique : 2*(x - 3/4)^2 - 49/8
+% assert simplify(f - (2*(x - Rational(3,4))**2 - Rational(49,8))) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-001}{1}{10}
+On considère le trinôme $f(x) = 2x^2 - 3x - 5$.
+
+\begin{enumerate}
+  \item Identifier les coefficients $a$, $b$ et $c$ de ce trinôme.
+  \item Calculer les coordonnées du sommet de la parabole représentative de $f$.
+  \item Écrire $f$ sous forme canonique $f(x) = a(x - \alpha)^2 + \beta$.
+  \item Vérifier que $f(x) = 2\left(x + 1\right)\!\left(x - \dfrac{5}{2}\right)$ en développant le membre de droite.
+\end{enumerate}
+\end{exercice}

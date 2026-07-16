@@ -1,0 +1,128 @@
+% META: {"id": "1SPE-SECDEG-CR-001", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "cours", "sous_type": "diagnostic", "titre": "Diagnostic d'entree", "temps_gabarit": 2, "duree_min": 20, "prerequis_testes": ["R1", "R2", "R3", "R4", "R5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor, solve, Symbol, Rational
+% x = symbols('x')
+% # Q1 : développer (x+3)^2
+% expr_q1 = expand((x+3)**2)
+% assert expr_q1 == x**2 + 6*x + 9
+% # Q2 : développer (2x-1)^2
+% expr_q2 = expand((2*x - 1)**2)
+% assert expr_q2 == 4*x**2 - 4*x + 1
+% # Q3 : factoriser x^2 - 25
+% expr_q3 = factor(x**2 - 25)
+% assert expr_q3 == (x - 5)*(x + 5)
+% # Q4 : résoudre 3x - 6 = 0
+% sol_q4 = solve(3*x - 6, x)
+% assert sol_q4 == [2]
+% # Q5 : résoudre (x-1)(x+4) = 0
+% sol_q5 = solve((x - 1)*(x + 4), x)
+% assert set(sol_q5) == {1, -4}
+% # Q6 : image de -2 par f(x) = x^2 - 3x + 1
+% def f(val): return val**2 - 3*val + 1
+% assert f(-2) == 4 + 6 + 1
+% # Q7 : antécédent de 9 par g(x) = x^2 (x >= 0)
+% # sqrt(9) = 3
+% import sympy as sp
+% assert sp.sqrt(9) == 3
+% # Q8 : signe de (x-2)(x+3), pour x=0
+% val_q8 = (0 - 2)*(0 + 3)
+% assert val_q8 < 0
+% # Q9 : signe de -x+5 pour x=7
+% val_q9 = -7 + 5
+% assert val_q9 < 0
+% # Q10 : tableau de signes de (x-1)(x-4), racines 1 et 4
+% val_left = (0 - 1)*(0 - 4)
+% val_mid  = (2 - 1)*(2 - 4)
+% val_right = (5 - 1)*(5 - 4)
+% assert val_left > 0
+% assert val_mid < 0
+% assert val_right > 0
+% END-VERIFY
+
+\section*{Temps 2 — Diagnostic d'entrée \hfill \normalfont\small(15–20 min, sans calculatrice)}
+
+Réponds à chaque question sur ta copie. Ne cherche pas à aller vite : l'objectif est de repérer ce que tu maîtrises, pas de tout réussir.
+
+\bigskip
+
+\subsection*{R1 — Identités remarquables}
+
+\begin{enumerate}
+
+  \item Développe et réduis $(x + 3)^2$.
+
+  \item Développe et réduis $(2x - 1)^2$.
+
+  \item Factorise $x^2 - 25$.
+
+\end{enumerate}
+
+\subsection*{R2 — Équations du premier degré}
+
+\begin{enumerate}
+  \setcounter{enumi}{3}
+
+  \item Résous l'équation $3x - 6 = 0$.
+
+\end{enumerate}
+
+\subsection*{R3 — Produit nul}
+
+\begin{enumerate}
+  \setcounter{enumi}{4}
+
+  \item Résous l'équation $(x - 1)(x + 4) = 0$.
+
+\end{enumerate}
+
+\subsection*{R4 — Images, antécédents et fonction carré}
+
+\begin{enumerate}
+  \setcounter{enumi}{5}
+
+  \item Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2 - 3x + 1$. Calcule $f(-2)$.
+
+  \item La fonction carré $g$ est définie par $g(x) = x^2$ pour $x \geq 0$. Quel est l'antécédent de $9$ par $g$ ?
+
+\end{enumerate}
+
+\subsection*{R5 — Tableaux de signes}
+
+\begin{enumerate}
+  \setcounter{enumi}{7}
+
+  \item Étudie le signe de $(x - 2)(x + 3)$ pour $x = 0$, $x = -4$ et $x = 3$.
+
+  \item Pour quelles valeurs de $x$ a-t-on $-x + 5 < 0$ ?
+
+  \item Dresse le tableau de signes complet de $(x - 1)(x - 4)$ sur $\mathbb{R}$.
+
+\end{enumerate}
+
+\bigskip
+
+\subsection*{Grille de décodage}
+
+Reporte tes résultats dans ce tableau, puis suis les conseils de remédiation avant de commencer le cours.
+
+\begin{center}
+\begin{tabular}{|c|c|l|l|}
+\hline
+\textbf{Questions} & \textbf{Prérequis testé} & \textbf{Si tu as échoué\ldots} & \textbf{Fiche à lire} \\
+\hline
+1, 2 et 3 & R1 — Identités remarquables & \ldots avant de commencer C1, C3 & Fiche R1 \\
+\hline
+4 & R2 — Équations du premier degré & \ldots avant de commencer C3, C5 & Fiche R2 \\
+\hline
+5 & R3 — Produit nul & \ldots avant de commencer C3, C4 & Fiche R3 \\
+\hline
+6 et 7 & R4 — Fonctions et fonction carré & \ldots avant de commencer C1, C2 & Fiche R4 \\
+\hline
+8, 9 et 10 & R5 — Tableaux de signes & \ldots avant de commencer C4, C5 & Fiche R5 \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+Si tu as réussi toutes les questions sans difficulté, tu peux démarrer directement le Temps~3.

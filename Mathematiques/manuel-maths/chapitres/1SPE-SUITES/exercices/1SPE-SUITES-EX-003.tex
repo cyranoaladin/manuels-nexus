@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-SUITES-EX-003", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": 5, "coeff": 3}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-003.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # Suite definie par recurrence : u0 = 5, u_{n+1} = 3*u_n - 2
+% # Premiers termes : u0=5, u1=13, u2=37, u3=109
+% assert 3*5 - 2 == 13
+% assert 3*13 - 2 == 37
+% assert 3*37 - 2 == 109
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-003}{1}{10}
+On considère la suite $(u_n)$ définie par $u_0 = 5$ et, pour tout entier naturel $n$ :
+\[
+  u_{n+1} = 3u_n - 2.
+\]
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$.
+  \item Cette suite est-elle définie par formule explicite ou par récurrence ? Justifier en une phrase.
+  \item Pour calculer $u_5$, faut-il connaître $u_4$ ? Expliquer.
+\end{enumerate}
+\end{exercice}

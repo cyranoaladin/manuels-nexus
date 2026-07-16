@@ -1,0 +1,69 @@
+% META: {"id": "1SPE-DERIVATION-LOCAL-CR-010", "chapitre": "1SPE-DERIVATION-LOCAL", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Taux de variation et sécantes}
+
+\definition[Taux de variation]{
+Soit $f$ une fonction définie en deux réels distincts $a$ et $b$. Le \textbf{taux de variation} de $f$ entre $a$ et $b$ est le nombre
+\[
+\frac{f(b)-f(a)}{b-a}.
+\]
+Il mesure la variation moyenne de $f$ lorsque la variable passe de $a$ à $b$.
+}
+
+\exemple{
+Pour $f(x)=x^2$, entre $1$ et $3$, le taux de variation vaut
+\[
+\frac{f(3)-f(1)}{3-1}=\frac{9-1}{2}=4.
+\]
+En moyenne, l'image augmente de $4$ lorsque $x$ augmente de $1$ sur cet intervalle.
+}
+
+\contreexemple{
+L'expression $\dfrac{f(a)-f(a)}{a-a}$ n'est pas un taux de variation : le dénominateur est nul. Il faut deux abscisses distinctes.
+}
+
+\propriete[Pente de la sécante]{
+Dans un repère, la droite passant par les points $A(a;f(a))$ et $B(b;f(b))$ de la courbe de $f$ est une \textbf{sécante}. Son coefficient directeur est le taux de variation de $f$ entre $a$ et $b$.
+}
+
+\exemple{
+Les points $A(1;1)$ et $B(3;9)$ de la courbe de la fonction carré déterminent une sécante de coefficient directeur $4$.
+}
+
+\begin{nxfigure}{Sécante à la courbe de la fonction carré}
+\begin{tikzpicture}
+\begin{axis}[nexus,
+  xmin=-0.5, xmax=4.2, ymin=-0.5, ymax=10.5,
+  xlabel=$x$, ylabel=$y$,
+  xtick={0,1,2,3,4}, ytick={0,2,4,6,8,10}]
+  \addplot[courbe,domain=0:4,samples=60] {x^2};
+  \addplot[secante,domain=0:4] {4*x - 3};
+  \addplot[point] coordinates {(1,1) (3,9)};
+  \node[anchor=south east,font=\footnotesize,nxBleu] at (axis cs:1,1) {$A(1;1)$};
+  \node[anchor=south west,font=\footnotesize,nxBleu] at (axis cs:3,9) {$B(3;9)$};
+\end{axis}
+\end{tikzpicture}
+\nxcaption{La sécante $(AB)$ a pour pente le taux de variation $\frac{f(3)-f(1)}{3-1}=4$.}
+\end{nxfigure}
+
+\contreexemple{
+La droite verticale passant par $A$ n'est pas la sécante $AB$ : elle ne passe pas en général par $B$ et n'a pas de coefficient directeur.
+}
+
+\margeAppui{Toujours conserver le même ordre : « arrivée moins départ » au numérateur et au dénominateur. Les deux signes se correspondent.}
+
+\erreurFrequente{
+Écrire $\dfrac{f(b)-f(a)}{b}$ oublie la distance horizontale entre les deux abscisses. Il faut diviser par $b-a$, et non par $b$.
+}
+
+\erreurFrequente{
+Inverser une seule différence, par exemple $\dfrac{f(b)-f(a)}{a-b}$, change le signe du résultat. On fixe l'ordre $a$ puis $b$ dans les deux lignes.
+}
+
+\erreurFrequente{
+Confondre le taux de variation avec $f(b)-f(a)$. Cette dernière quantité est une variation d'image ; le taux de variation compare aussi cette variation à celle de $x$.
+}
+
+\approfondissement{
+Pour une position $d(t)$ exprimée en mètres, le taux de variation entre deux instants est $\dfrac{d(t_2)-d(t_1)}{t_2-t_1}$, une vitesse moyenne en mètres par seconde. Lorsque l'intervalle de temps se resserre autour d'un instant, ces vitesses moyennes préparent la notion de vitesse instantanée étudiée dans la section suivante.
+}

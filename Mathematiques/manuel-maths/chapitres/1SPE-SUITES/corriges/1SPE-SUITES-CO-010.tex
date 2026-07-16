@@ -1,0 +1,56 @@
+% META: {"id": "1SPE-SUITES-CO-010", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-010", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 81 * Rational(1, 3)**n
+% assert u.subs(n, 0) == 81
+% assert u.subs(n, 1) == 27
+% assert u.subs(n, 2) == 9
+% assert u.subs(n, 3) == 3
+% assert u.subs(n, 4) == 1
+% # quotient constant = 1/3
+% assert simplify(u.subs(n, n+1)/u - Rational(1, 3)) == 0
+% # 0 < q = 1/3 < 1 et u0 > 0 => suite decroissante
+% assert Rational(1, 3) < 1
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-010}
+
+\commentaireMarge{Pour une suite géométrique, on applique la relation $u_{n+1} = q \times u_n$ de proche en proche.}
+
+\textbf{Question 1.} La suite $(u_n)$ est géométrique de premier terme $u_0 = 81$ et de raison $q = \dfrac{1}{3}$. On calcule :
+\[
+u_1 = u_0 \times q = 81 \times \frac{1}{3} = 27.
+\]
+\[
+u_2 = u_1 \times q = 27 \times \frac{1}{3} = 9.
+\]
+\[
+u_3 = u_2 \times q = 9 \times \frac{1}{3} = 3.
+\]
+\[
+u_4 = u_3 \times q = 3 \times \frac{1}{3} = 1.
+\]
+
+Donc $u_1 = 27$, $u_2 = 9$, $u_3 = 3$ et $u_4 = 1$.
+
+\commentaireMarge{La formule du terme général d'une suite géométrique est $u_n = u_0 \times q^n$.}
+
+\textbf{Question 2.} La formule du terme général est :
+\[
+u_n = u_0 \times q^n = 81 \times \left(\frac{1}{3}\right)^n.
+\]
+
+On peut aussi l'écrire $u_n = 3^4 \times 3^{-n} = 3^{4-n}$.
+
+\commentaireMarge{Le sens de variation d'une suite géométrique à termes positifs dépend de la comparaison de la raison $q$ à $1$.}
+
+\textbf{Question 3.} Tous les termes sont positifs ($u_0 = 81 > 0$ et $q = \dfrac{1}{3} > 0$, donc $u_n = 81 \times \left(\dfrac{1}{3}\right)^n > 0$ pour tout $n$).
+
+De plus, $0 < q = \dfrac{1}{3} < 1$, donc pour tout $n \in \mathbb{N}$ :
+\[
+u_{n+1} = \frac{1}{3} \times u_n < u_n.
+\]
+
+La suite $(u_n)$ est donc \textbf{strictement décroissante}.
+
+\end{corrige}

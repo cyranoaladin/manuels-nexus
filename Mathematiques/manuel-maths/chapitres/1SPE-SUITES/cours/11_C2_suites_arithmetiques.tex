@@ -1,0 +1,107 @@
+% META: {"id": "1SPE-SUITES-CR-011", "chapitre": "1SPE-SUITES", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+
+\section{Suites arithmétiques}
+
+% ============================================================
+% STRATE 1 — Définitions et propriétés fondamentales
+% ============================================================
+
+\definition[4]{
+Une suite $(u_n)$ est dite \textbf{arithmétique} s'il existe un réel $r$, appelé \textbf{raison}, tel que
+\[
+  u_{n+1} = u_n + r \quad \text{pour tout } n \in \mathbb{N}.
+\]
+Autrement dit, on passe d'un terme au suivant en ajoutant toujours le même réel $r$.
+}
+
+\exemple{
+La suite $(u_n)$ définie par $u_0 = 2$ et $u_{n+1} = u_n + 5$ est arithmétique de raison $r = 5$.
+
+On calcule : $u_0 = 2$, $u_1 = 7$, $u_2 = 12$, $u_3 = 17$.
+
+On vérifie bien que $u_{n+1} - u_n = 5$ pour chaque terme calculé.
+}
+
+\contreexemple{
+La suite $(v_n)$ définie par $v_0 = 1$ et $v_{n+1} = 2v_n$ n'est \emph{pas} arithmétique :
+$v_1 - v_0 = 2 - 1 = 1$ mais $v_2 - v_1 = 4 - 2 = 2$.
+La différence entre deux termes consécutifs n'est pas constante.
+}
+
+\propriete[1]{
+Si $(u_n)$ est une suite arithmétique de premier terme $u_0$ et de raison $r$, alors pour tout entier naturel $n$ :
+\[
+  u_n = u_0 + n \cdot r.
+\]
+Plus généralement, pour tous entiers naturels $n$ et $p$ :
+\[
+  u_n = u_p + (n - p) \cdot r.
+\]
+Cette formule s'appelle la \textbf{formule explicite} (ou terme général) de la suite arithmétique.
+}
+
+\exemple{
+Soit $(u_n)$ arithmétique de raison $r = 3$ et de premier terme $u_0 = -4$.
+
+Formule explicite : $u_n = -4 + 3n$.
+
+On calcule directement : $u_{10} = -4 + 3 \times 10 = 26$, sans passer par les termes intermédiaires.
+
+Si on connaît $u_3 = 5$ et $r = 3$, on peut aussi écrire $u_n = 5 + (n - 3) \times 3 = 3n - 4$, ce qui donne bien le même résultat.
+}
+
+\contreexemple{
+La suite $(w_n)$ définie par $w_n = n^2$ n'est pas arithmétique : $w_2 - w_1 = 3$ mais $w_3 - w_2 = 5$.
+Bien que $w_n$ soit une formule explicite, la différence de deux termes consécutifs n'est pas constante.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs fréquentes
+% ============================================================
+
+\margeAppui{
+\textbf{Tableau comparatif suites arithmétiques / géométriques (aperçu) :}
+
+\smallskip
+\begin{tabular}{@{}lll@{}}
+\hline
+ & \textbf{Arithmétique} & \textbf{Géométrique} \\
+\hline
+Passage d'un terme & $+\, r$ & $\times\, q$ \\
+Terme général & $u_0 + nr$ & $u_0 \times q^n$ \\
+Graphe & Points alignés & Courbe exponentielle \\
+\hline
+\end{tabular}
+}
+
+\erreurFrequente{
+\textbf{Confusion entre relation de récurrence et formule explicite.}
+
+La relation $u_{n+1} = u_n + r$ est la \emph{définition par récurrence} : elle dit comment passer d'un terme au suivant.
+
+La formule $u_n = u_0 + nr$ est la \emph{formule explicite} : elle donne directement $u_n$ en fonction de $n$.
+
+Ces deux relations ne jouent pas le même rôle. En particulier, pour calculer $u_{100}$, on utilise $u_{100} = u_0 + 100r$ (formule explicite), et \emph{non} en appliquant cent fois la récurrence.
+}
+
+\erreurFrequente{
+\textbf{Représentation graphique : les points ne sont pas reliés.}
+
+Les termes d'une suite arithmétique, représentés dans le repère par les points de coordonnées $(n\,;\,u_n)$, sont alignés (ils appartiennent tous à la droite d'équation $y = rn + u_0$). Cependant, ces points sont \emph{isolés} : on ne trace \emph{pas} la droite continue, car une suite n'est définie que sur $\mathbb{N}$, pas sur $\mathbb{R}$.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+\textbf{Modèle linéaire discret.}
+
+Une suite arithmétique de raison $r$ et de premier terme $u_0$ peut être vue comme la version \emph{discrète} de la fonction affine $f(x) = rx + u_0$.
+
+En effet, si on pose $f(n) = u_0 + nr$, les valeurs prises par $f$ sur $\mathbb{N}$ coïncident exactement avec les termes de la suite.
+
+La différence entre les deux : la fonction affine est définie sur $\mathbb{R}$ (on peut calculer $f(1{,}5)$), tandis que la suite n'est définie que pour des entiers naturels.
+
+Ce parallèle est utile en modélisation : un capital qui augmente d'une somme fixe chaque mois est modélisé par une suite arithmétique, dont le terme général est une fonction affine de $n$ (voir situation d'accroche du chapitre — Offre A).
+}

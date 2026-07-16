@@ -1,0 +1,40 @@
+% META: {"id": "1SPE-SUITES-CO-015", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-015", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 5 * Rational(3, 4)**n
+% ratio = u.subs(n, n+1) / u
+% assert simplify(ratio - Rational(3, 4)) == 0
+% # u_n > 0 pour tout n : u0=5>0, q=3/4>0
+% assert u.subs(n, 0) == 5
+% assert u.subs(n, 1) == Rational(15, 4)
+% # 0 < q = 3/4 < 1 et u_n > 0 => suite strictement decroissante
+% assert Rational(3, 4) < 1
+% assert Rational(3, 4) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-015}
+
+\commentaireMarge{Pour une suite géométrique à termes positifs, le quotient $\dfrac{u_{n+1}}{u_n}$ est constant et égal à la raison $q$. On le compare à $1$ pour déterminer le sens de variation.}
+
+\textbf{Question 1.} On calcule le quotient $\dfrac{u_{n+1}}{u_n}$.
+
+La suite est définie par $u_{n+1} = \dfrac{3}{4} u_n$, donc pour tout $n \in \mathbb{N}$ tel que $u_n \neq 0$ :
+\[
+\frac{u_{n+1}}{u_n} = \frac{\dfrac{3}{4} u_n}{u_n} = \frac{3}{4}.
+\]
+
+\textbf{Question 2.} On vérifie que tous les termes $u_n$ sont positifs.
+
+Par récurrence : $u_0 = 5 > 0$, et si $u_n > 0$ alors $u_{n+1} = \dfrac{3}{4} u_n > 0$ (produit de deux nombres positifs). Donc $u_n > 0$ pour tout $n \in \mathbb{N}$.
+
+\commentaireMarge{Théorème : si $(u_n)$ est une suite géométrique à termes strictement positifs, alors : $q > 1 \Rightarrow$ suite croissante ; $0 < q < 1 \Rightarrow$ suite décroissante.}
+
+\textbf{Question 3.} Puisque tous les termes sont strictement positifs et que :
+\[
+\frac{u_{n+1}}{u_n} = \frac{3}{4} < 1,
+\]
+on a $u_{n+1} < u_n$ pour tout $n \in \mathbb{N}$.
+
+La suite $(u_n)$ est donc \textbf{strictement décroissante}.
+
+\end{corrige}

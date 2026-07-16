@@ -1,0 +1,72 @@
+% META: {"id": "1SPE-SECDEG-EX-037", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECDEG-C2", "1SPE-SECDEG-C5", "1SPE-SECDEG-C6"], "capacites_codes": ["C2", "C5", "C6"], "methodes": ["M2", "M5", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser", "communiquer"], "duree_min": 35, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"perimetre": 20}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-037.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-037.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True, positive=True)
+% # Rectangle de perimetre 20 : 2(x + y) = 20 => y = 10 - x
+% # Aire A(x) = x*(10-x) = -x^2 + 10x
+% A = -x**2 + 10*x
+% # Forme canonique : alpha = 5, beta = 25
+% alpha = Rational(10, 2)
+% assert alpha == 5
+% beta = A.subs(x, alpha)
+% assert beta == 25
+% A_canon = -(x - alpha)**2 + beta
+% assert expand(A_canon) == A
+% # Contrainte : 0 < x < 10
+% assert A.subs(x, 1) == 9
+% assert A.subs(x, 5) == 25
+% assert A.subs(x, 9) == 9
+% # A(x) > 0 sur ]0, 10[
+% assert A.subs(x, Rational(1,2)) > 0
+% # Maximum en x=5, A_max = 25
+% # Contrainte supplementaire : x >= 3
+% # Maximum sous contrainte : toujours en x=5 car 5 >= 3
+% assert 5 >= 3
+% # Si contrainte x <= 4 : max en x=4, A(4) = 24
+% assert A.subs(x, 4) == 24
+% # Inegalite A(x) >= 21 : -x^2 + 10x >= 21 => x^2 - 10x + 21 <= 0
+% ineq = x**2 - 10*x + 21
+% Delta = 100 - 84
+% assert Delta == 16
+% r1 = Rational(10 - 4, 2)
+% r2 = Rational(10 + 4, 2)
+% assert r1 == 3
+% assert r2 == 7
+% assert ineq.subs(x, r1) == 0
+% assert ineq.subs(x, r2) == 0
+% # solution : 3 <= x <= 7
+% assert ineq.subs(x, 5) < 0
+% assert ineq.subs(x, 2) > 0
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-037}{3}{35}
+On dispose de $20$ mètres de clôture pour délimiter un enclos rectangulaire. On note $x$ la longueur (en mètres) de l'un des côtés de l'enclos, avec $0 < x < 10$.
+
+\begin{enumerate}
+  \item \textbf{Modélisation.}
+  \begin{enumerate}
+    \item Exprimer la largeur $y$ de l'enclos en fonction de $x$, à partir de la contrainte de périmètre.
+    \item Montrer que l'aire $A(x)$ (en m²) de l'enclos s'écrit $A(x) = -x^2 + 10x$.
+  \end{enumerate}
+
+  \item \textbf{Étude de la fonction aire.}
+  \begin{enumerate}
+    \item Mettre $A(x)$ sous forme canonique.
+    \item En déduire la valeur de $x$ qui maximise l'aire. Quelle est cette aire maximale ?
+    \item Quelle est la nature géométrique de l'enclos qui maximise l'aire ? Justifier.
+  \end{enumerate}
+
+  \item \textbf{Contrainte supplémentaire.} On exige maintenant que la longueur $x$ soit comprise entre $3$ m et $8$ m.
+  \begin{enumerate}
+    \item La valeur optimale trouvée à la question 2 est-elle compatible avec cette contrainte ?
+    \item Déterminer l'aire maximale réalisable sous cette contrainte.
+  \end{enumerate}
+
+  \item \textbf{Inéquation.} On souhaite que l'aire soit supérieure ou égale à $21$ m².
+  \begin{enumerate}
+    \item Montrer que cela revient à résoudre $x^2 - 10x + 21 \leq 0$.
+    \item Résoudre cette inéquation et en déduire les valeurs de $x$ compatibles.
+  \end{enumerate}
+
+  \item \textbf{Question ouverte.} Si on pouvait utiliser un mur existant comme l'un des côtés de l'enclos (ce côté n'utilise donc pas de clôture), proposer une nouvelle modélisation et déterminer la longueur maximale réalisable pour ce côté afin de maximiser l'aire. Comparer avec le résultat de la question 2.
+\end{enumerate}
+\end{exercice}

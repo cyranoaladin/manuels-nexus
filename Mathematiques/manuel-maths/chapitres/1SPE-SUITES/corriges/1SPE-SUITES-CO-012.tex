@@ -1,0 +1,49 @@
+% META: {"id": "1SPE-SUITES-CO-012", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-012", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Suite geometrique u0=1, q=2 : u_k = 2**k
+% termes = [2**k for k in range(8)]
+% assert termes == [1, 2, 4, 8, 16, 32, 64, 128]
+% S = sum(termes)
+% assert S == 255
+% # Formule : u0*(1-q**(n+1))/(1-q) avec u0=1, q=2, n=7
+% S_formule = 1 * (1 - 2**8) // (1 - 2)
+% assert S_formule == 255
+% # Addition directe
+% assert 1+2+4+8+16+32+64+128 == 255
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-012}
+
+\commentaireMarge{La formule du terme général d'une suite géométrique est $u_n = u_0 \times q^n$.}
+
+\textbf{Question 1.} La suite $(u_n)$ est géométrique de premier terme $u_0 = 1$ et de raison $q = 2$. La formule du terme général est :
+\[
+u_n = u_0 \times q^n = 1 \times 2^n = 2^n.
+\]
+
+\commentaireMarge{On applique la formule de somme géométrique avec $u_0 = 1$, $q = 2$ et $n = 7$ (8 termes de $u_0$ à $u_7$).}
+
+\textbf{Question 2.} On calcule $S = u_0 + u_1 + \cdots + u_7$ avec la formule $S = u_0 \times \dfrac{1 - q^{n+1}}{1 - q}$, où $n = 7$, $u_0 = 1$ et $q = 2$.
+
+Puisque $q = 2 \neq 1$, la formule s'applique :
+\[
+S = 1 \times \frac{1 - 2^{7+1}}{1 - 2} = \frac{1 - 2^8}{1 - 2} = \frac{1 - 256}{-1} = \frac{-255}{-1} = 255.
+\]
+
+Donc $S = 255$.
+
+\commentaireMarge{Vérification par calcul direct des huit termes.}
+
+\textbf{Question 3.} On liste les termes $u_k = 2^k$ pour $k$ de $0$ à $7$ :
+\[
+u_0 = 1,\quad u_1 = 2,\quad u_2 = 4,\quad u_3 = 8,\quad u_4 = 16,\quad u_5 = 32,\quad u_6 = 64,\quad u_7 = 128.
+\]
+
+On additionne :
+\[
+S = 1 + 2 + 4 + 8 + 16 + 32 + 64 + 128 = 255.
+\]
+
+On retrouve bien $S = 255$. \checkmark
+
+\end{corrige}

@@ -1,0 +1,92 @@
+% META: {"id": "1SPE-SECDEG-CO-031", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-031", "capacites_codes": ["C1", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor, simplify, Rational
+% x = symbols('x')
+% f_can = (x - Rational(3,2))**2 - Rational(25,4)
+% f_dev = expand(f_can)
+% assert f_dev == x**2 - 3*x - 4
+% assert factor(f_dev) == (x - 4)*(x + 1)
+% assert f_dev.subs(x, 0) < 0
+% assert f_dev.subs(x, 5) > 0
+% assert f_dev.subs(x, -2) > 0
+% g_can = 4*(x + Rational(1,2))**2 - 9
+% g_dev = expand(g_can)
+% assert g_dev == 4*x**2 + 4*x - 8
+% assert simplify(factor(g_dev) - 4*(x - 1)*(x + 2)) == 0
+% assert g_dev.subs(x, 0) < 0
+% assert g_dev.subs(x, 2) > 0
+% assert g_dev.subs(x, -3) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-031}
+
+\textbf{1. Étude de $f(x) = \left(x - \dfrac{3}{2}\right)^2 - \dfrac{25}{4}$.}
+
+\textit{a) Développement.}
+
+\commentaireMarge{Développer le carré, puis regrouper.}
+
+\[f(x) = \left(x - \frac{3}{2}\right)^2 - \frac{25}{4} = x^2 - 3x + \frac{9}{4} - \frac{25}{4} = x^2 - 3x - \frac{16}{4} = x^2 - 3x - 4.\]
+
+\textit{b) Factorisation.}
+
+\commentaireMarge{Depuis la forme canonique : $x_{1,2} = \alpha \pm \sqrt{-\beta/a}$.}
+
+La forme canonique est $f(x) = (x - \alpha)^2 + \beta$ avec $\alpha = \dfrac{3}{2}$ et $\beta = -\dfrac{25}{4}$.
+
+Comme $a = 1$ et $\beta = -\dfrac{25}{4} < 0$, les racines sont :
+\[x_{1,2} = \alpha \pm \sqrt{-\frac{\beta}{a}} = \frac{3}{2} \pm \sqrt{\frac{25}{4}} = \frac{3}{2} \pm \frac{5}{2}.\]
+
+\[x_1 = \frac{3}{2} - \frac{5}{2} = -1 \qquad \text{et} \qquad x_2 = \frac{3}{2} + \frac{5}{2} = 4.\]
+
+Donc $f(x) = (x + 1)(x - 4)$.
+
+\textit{c) Tableau de signes.}
+
+\commentaireMarge{$a = 1 > 0$ : positif à l'extérieur des racines.}
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $4$ & & $+\infty$ \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{2. Étude de $g(x) = 4\!\left(x + \dfrac{1}{2}\right)^2 - 9$.}
+
+\textit{a) Développement.}
+
+\commentaireMarge{Développer le carré $\left(x + \frac{1}{2}\right)^2 = x^2 + x + \frac{1}{4}$.}
+
+\[g(x) = 4\!\left(x^2 + x + \frac{1}{4}\right) - 9 = 4x^2 + 4x + 1 - 9 = 4x^2 + 4x - 8.\]
+
+\textit{b) Factorisation et tableau de signes.}
+
+\commentaireMarge{Mettre $4$ en facteur, puis trouver les racines.}
+
+$g(x) = 4(x^2 + x - 2)$.
+
+On cherche les racines de $x^2 + x - 2 = 0$ :
+\[\Delta = 1 + 8 = 9, \qquad x_1 = \frac{-1 - 3}{2} = -2, \qquad x_2 = \frac{-1 + 3}{2} = 1.\]
+
+Donc $g(x) = 4(x + 2)(x - 1)$.
+
+Tableau de signes ($a = 4 > 0$) :
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ & & $1$ & & $+\infty$ \\
+\hline
+$g(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\baremeIndicatif{Q1a : 1 pt (calculer) ; Q1b : 2 pts (raisonner) ; Q1c : 1 pt (raisonner) ; Q2a : 1 pt (calculer) ; Q2b : 2 pts (calculer, raisonner)}
+\end{corrige}

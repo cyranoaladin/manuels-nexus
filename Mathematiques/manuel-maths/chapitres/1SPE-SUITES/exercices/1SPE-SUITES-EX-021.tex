@@ -1,0 +1,49 @@
+% META: {"id": "1SPE-SUITES-EX-021", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C7"], "capacites_codes": ["C7"], "methodes": ["M7"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": 3, "q": 2, "n_cible": 4}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-021.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-021.tex", "status": "generated"}
+% BEGIN-VERIFY
+% # Suite geometrique u0=3, q=2 : somme S = u0 + ... + u_n
+% # Simulation : n=4, donc S = 3+6+12+24+48 = 93
+% u = 3
+% S = 3
+% for k in range(4):
+%     u = 2*u
+%     S = S + u
+% assert u == 48
+% assert S == 93
+% # Verification par formule : 3*(1-2**5)/(1-2) = 3*31 = 93
+% assert 3*(1 - 2**5)//(1 - 2) == 93
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-021}{1}{10}
+On considère la suite géométrique $(u_n)$ définie par $u_0 = 3$ et $u_{n+1} = 2u_n$.
+
+On souhaite calculer la somme $S = u_0 + u_1 + u_2 + u_3 + u_4$ à l'aide d'un algorithme avec accumulateur.
+
+Voici le code Python :
+
+\begin{center}
+\texttt{u = 3}\\
+\texttt{S = 3}\\
+\texttt{for k in range(4):}\\
+\texttt{\quad\quad u = 2*u}\\
+\texttt{\quad\quad S = S + u}\\
+\texttt{print(S)}
+\end{center}
+
+\begin{enumerate}
+  \item Simuler l'algorithme à la main en complétant le tableau :
+
+  \medskip
+  \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    Valeur de \texttt{k} & $0$ & $1$ & $2$ & $3$ & fin \\
+    \hline
+    Valeur de \texttt{u} après la boucle & \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    Valeur de \texttt{S} après la boucle & \dots & \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabular}
+  \medskip
+
+  \item Quelle valeur \texttt{print(S)} affiche-t-il ?
+  \item Vérifier ce résultat en utilisant la formule de somme géométrique.
+\end{enumerate}
+\end{exercice}

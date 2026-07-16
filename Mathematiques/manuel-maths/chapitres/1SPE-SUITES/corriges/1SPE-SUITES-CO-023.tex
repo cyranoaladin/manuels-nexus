@@ -1,0 +1,75 @@
+% META: {"id": "1SPE-SUITES-CO-023", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-023", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 3*n + 4
+% assert u.subs(n, 0) == 4
+% assert u.subs(n, 1) == 7
+% assert u.subs(n, 2) == 10
+% assert u.subs(n, 3) == 13
+% diff = u.subs(n, n+1) - u
+% assert simplify(diff) == 3
+% # Suite croissante car r=3>0
+% # u_n > 40 : 3n+4 > 40 => n > 12 => n = 13
+% assert u.subs(n, 12) == 40
+% assert u.subs(n, 13) == 43
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-023}
+
+\textbf{Question 1 — Calcul des premiers termes.}
+
+On substitue les valeurs de $n$ dans la formule $u_n = 3n + 4$ :
+\[
+  u_0 = 3 \times 0 + 4 = 4, \quad
+  u_1 = 3 \times 1 + 4 = 7, \quad
+  u_2 = 3 \times 2 + 4 = 10, \quad
+  u_3 = 3 \times 3 + 4 = 13.
+\]
+
+\medskip
+\textbf{Question 2 — Calcul de $u_{n+1} - u_n$ et nature de la suite.}
+
+Pour tout $n \in \mathbb{N}$ :
+\[
+  u_{n+1} - u_n = \bigl(3(n+1) + 4\bigr) - (3n + 4) = 3n + 3 + 4 - 3n - 4 = 3.
+\]
+
+\commentaireMarge{La différence $u_{n+1} - u_n = 3$ est constante, ce qui caractérise une suite arithmétique.}
+
+La différence $u_{n+1} - u_n$ est constante et égale à $3$ pour tout $n \in \mathbb{N}$.
+
+\textbf{Conclusion :} $(u_n)$ est une suite arithmétique de raison $r = 3$.
+
+\medskip
+\textbf{Question 3 — Critique de l'argument de l'élève et justification rigoureuse.}
+
+\textit{Insuffisance de l'argument :} vérifier que $u_0 < u_1 < u_2$ ne prouve la croissance que pour les trois premiers termes ; cela ne dit rien sur les termes suivants. Une suite peut être croissante sur ses premiers termes puis décroissante.
+
+\textit{Justification rigoureuse :} On a montré à la question 2 que, pour \emph{tout} $n \in \mathbb{N}$ :
+\[
+  u_{n+1} - u_n = 3 > 0.
+\]
+
+\commentaireMarge{Une suite est strictement croissante si et seulement si $u_{n+1} - u_n > 0$ pour tout $n$.}
+
+Donc $u_{n+1} > u_n$ pour tout $n \in \mathbb{N}$, ce qui prouve que $(u_n)$ est \textbf{strictement croissante}.
+
+\medskip
+\textbf{Question 4 — Rang à partir duquel $u_n > 40$.}
+
+On résout l'inéquation $u_n > 40$ :
+\[
+  3n + 4 > 40 \iff 3n > 36 \iff n > 12.
+\]
+
+\commentaireMarge{Le plus petit entier strictement supérieur à $12$ est $13$.}
+
+Le plus petit entier $n$ tel que $u_n > 40$ est $n = 13$.
+
+\textit{Vérification :}
+\[
+  u_{12} = 3 \times 12 + 4 = 40 \not> 40, \quad u_{13} = 3 \times 13 + 4 = 43 > 40. \checkmark
+\]
+
+\baremeIndicatif{Q1 : 1 pt (calculer les quatre termes) ; Q2 : 3 pts (raisonner, communiquer : calcul de la différence et conclusion) ; Q3 : 3 pts (raisonner, communiquer : critique fondée et démonstration rigoureuse) ; Q4 : 1 pt (calculer : résolution de l'inéquation)}
+\end{corrige}

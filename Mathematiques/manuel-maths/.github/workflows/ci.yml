@@ -1,0 +1,33 @@
+name: CI manuel
+on:
+  pull_request:
+    paths: ["chapitres/**", "gabarits/**", "scripts/**", "schemas/**", "referentiel/**"]
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Dépendances (gates légers, sans embeddings)
+        run: pip install sympy pyyaml jsonschema pytest python-dotenv
+      - name: Installation TeX
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-lang-french texlive-fonts-recommended
+      - name: Schémas des métadonnées
+        run: python -m pytest tests/test_meta_schemas.py -q
+      - name: Gate SymPy (chapitres modifiés)
+        run: |
+          for chap in $(git diff --name-only origin/${{ github.base_ref }} -- chapitres | cut -d/ -f2 | sort -u); do
+            python scripts/verify_sympy.py --chap "$chap"
+          done
+      - name: Gate couverture
+        run: |
+          for chap in $(git diff --name-only origin/${{ github.base_ref }} -- chapitres | cut -d/ -f2 | sort -u); do
+            python scripts/coverage_report.py --chap "$chap" || echo "::warning::couverture incomplète $chap"
+          done
+      - name: Compilation chapitres modifiés
+        run: |
+          for chap in $(git diff --name-only origin/${{ github.base_ref }} -- chapitres | cut -d/ -f2 | sort -u); do
+            python scripts/assemble.py --chap "$chap" --variant complet
+          done

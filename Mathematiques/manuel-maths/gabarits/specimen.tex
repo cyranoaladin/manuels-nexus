@@ -1,0 +1,245 @@
+% specimen.tex v3.1 — 10 pages representatives, charte edition professionnelle
+% Compile : cd manuel-maths && TEXINPUTS=./gabarits/: lualatex gabarits/specimen.tex
+\documentclass{nexus-manuel}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\begin{document}
+
+% ===================== PAGES 1-2 : OUVERTURE ================================
+\ouverturechapitre{Types construits : p-uplets, tableaux, dictionnaires}{%
+  \begin{itemize}
+    \item C1 --- Je sais utiliser des p-uplets et ecrire une fonction qui renvoie plusieurs valeurs.
+    \item C2 --- Je sais lire, modifier et construire des tableaux, y compris en comprehension.
+    \item C3 --- Je sais representer et parcourir une grille avec un tableau de tableaux.
+    \item C4 --- Je sais creer, modifier et parcourir un dictionnaire.
+    \item C5 --- Je sais prevoir l'effet d'une affectation sur un objet mutable.
+  \end{itemize}
+}{%
+  Prerequis : variables, boucles, fonctions, chaines. Ce chapitre mene au mini-projet : classement d'un tournoi de e-sport.
+}{%
+  \textsf{◆}~12h \quad \textsf{◆◆}~10h \quad \textsf{◆◆◆}~9h
+}
+
+% ===================== PAGES 3-4 : COURS (definition+theoreme+erreur+figure+marge) ===
+\section{Les p-uplets (tuples)}
+
+\margeAppui{Un p-uplet est une collection \emph{ordonnee} et \emph{non modifiable} de valeurs. En Python, on utilise le mot anglais \emph{tuple}.}
+
+\begin{nxdef}[D1]
+  Un \textbf{p-uplet} (ou \emph{tuple}) est une sequence ordonnee de $p$ elements,
+  eventuellement de types differents, separes par des virgules et entoures de parentheses.
+  Un p-uplet est \textbf{non mutable} : une fois cree, on ne peut ni ajouter, ni retirer,
+  ni modifier ses elements.
+\end{nxdef}
+
+\exemple{Le tuple \lstinline{station = ("Tunis", 36.8, 10.2)} contient trois elements.}
+
+\begin{python}
+station = ("Tunis-Carthage", 36.8, 10.2)
+nom = station[0]        # "Tunis-Carthage"
+latitude = station[1]   # 36.8
+\end{python}
+
+\contreexemple{Toute tentative de modification provoque une erreur \lstinline{TypeError}.}
+
+\begin{nxthm}[Deballage]
+  Une fonction peut renvoyer un tuple pour communiquer \emph{plusieurs resultats} a la fois.
+  On parle de \textbf{deballage} (\emph{unpacking}) lorsqu'on affecte chaque element du tuple
+  a une variable distincte : \lstinline{x, y = f(a, b)}.
+\end{nxthm}
+
+\margeAppui{Le deballage est tres utilise en Python. On ecrit
+\lstinline{x, y = milieu(a, b)} plutot que
+\lstinline{r = milieu(a, b)} puis \lstinline{x = r[0]}.}
+
+\erreurFrequente{Modifier un tuple comme une liste (EF1).
+Un tuple est immuable par conception.
+\par\textcolor{nxGris}{\sout{Copie fautive : \lstinline{station[1] = 37.0}}}
+\par\textcolor{nxVert}{Correction : creer un nouveau tuple ou utiliser une liste.}}
+
+% Figure pgfplots (courbe + tangente)
+\begin{nxfigure}{Representation graphique d'une fonction et de sa tangente}
+\begin{tikzpicture}
+\begin{axis}[
+  nexus/.try,
+  width=0.85\linewidth, height=5cm,
+  xlabel={$x$}, ylabel={$f(x)$},
+  xmin=-1, xmax=5, ymin=-1, ymax=10,
+  domain=-0.5:4.5, samples=80,
+]
+\addplot[nxBleu, line width=1pt] {x^2/3 + 1};
+\addplot[nxOr, dashed, line width=0.8pt, domain=0.5:3.5] {4/3*(x-2) + 7/3};
+\node[font=\footnotesize\sffamily, color=nxBleu] at (axis cs:4, 6.5) {$f(x)$};
+\node[font=\footnotesize\sffamily, color=nxOr] at (axis cs:3.3, 4.5) {tangente};
+\end{axis}
+\end{tikzpicture}
+\end{nxfigure}
+
+\approfondissement{Un tuple de longueur 1 s'ecrit \lstinline{(42,)} avec une virgule
+obligatoire. Sans virgule, \lstinline{(42)} est simplement l'entier 42 entre parentheses.
+Le tuple vide s'ecrit \lstinline{()}.}
+
+% ===================== PAGE 5 : FICHE METHODE ===============================
+\begin{fichemethode}{M1}{Choisir entre tuple et liste}
+
+\quandUtiliser{Tu hesites entre un tuple et une liste pour stocker tes donnees.}
+
+\pasApas{%
+\begin{enumerate}
+  \item Les donnees doivent-elles rester fixes apres creation ? $\to$ \textbf{tuple}.
+  \item Faut-il ajouter, supprimer ou modifier des elements ? $\to$ \textbf{liste}.
+  \item Les elements sont-ils de types differents (nom + age) ? $\to$ \textbf{tuple}.
+  \item S'agit-il d'une collection homogene (scores) ? $\to$ \textbf{liste}.
+\end{enumerate}}
+
+\exempleRedige{%
+Coordonnees GPS : \lstinline{("Tunis", 36.8, 10.2)} $\to$ tuple.
+Releves horaires : \lstinline{[18, 20, 19]} $\to$ liste.}
+
+\pieges{%
+\begin{itemize}
+  \item Ne pas oublier la virgule pour un tuple d'un seul element.
+\end{itemize}}
+
+\verifier{Si tu as choisi un tuple, verifie que tu ne tentes jamais de le modifier.}
+
+\sEntrainer{Exercices 2, 4, 8.}
+
+\end{fichemethode}
+
+% ===================== PAGE 6 : EXERCICES 3 PARCOURS =======================
+\section*{Exercices}
+
+\begin{exercice}{SPEC-EX-001}{1}{5}
+On donne \lstinline{station = ("Tunis", 36.8, 10.2)}.
+\begin{enumerate}
+  \item Donner le type et le nombre d'elements.
+  \item Donner \lstinline{station[0]} et \lstinline{station[2]}.
+  \item Peut-on ecrire \lstinline{station[1] = 37.0} ?
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{SPEC-EX-002}{2}{12}
+Ecrire une fonction \lstinline{au_dessus(scores, seuil)}
+renvoyant le tableau des scores strictement superieurs.
+
+Ecrire une fonction \lstinline{moyenne(scores)} renvoyant
+la moyenne. Lever \lstinline{ValueError} si le tableau est vide.
+\end{exercice}
+
+\begin{exercice}{SPEC-EX-003}{3}{20}
+Ecrire \texttt{historique\_scores(equipes, resultats)}
+qui met a jour les scores \textbf{sans modifier} l'original.
+Justifier le choix de copie et analyser la complexite.
+\end{exercice}
+
+% ===================== PAGE 7 : CORRIGES ===================================
+\begin{corrige}{SPEC-EX-001}
+\begin{enumerate}
+  \item \lstinline{type(station)} renvoie \lstinline{<class 'tuple'>}.
+        Le tuple contient 3 elements.
+
+  \item \lstinline{station[0]} vaut \lstinline{"Tunis"},
+        \lstinline{station[2]} vaut \lstinline{10.2}.
+
+  \item Non : un tuple est non mutable.
+\end{enumerate}
+\end{corrige}
+
+\commentaireMarge{La question 3 teste la comprehension de la non-mutabilite (C1/C5).}
+
+% ===================== PAGE 8 : CODE NSI ====================================
+\section*{Code de reference}
+
+\begin{codereference}{Fonction renvoyant un tuple}
+\begin{python}
+def milieu(a, b):
+    """Renvoie le milieu de deux points."""
+    mx = (a[0] + b[0]) / 2
+    my = (a[1] + b[1]) / 2
+    return (mx, my)
+
+x, y = milieu((1, 2), (5, 8))
+print(x, y)  # 3.0 5.0
+\end{python}
+\end{codereference}
+
+\begin{console}
+>>> milieu((0, 0), (6, 8))
+(3.0, 4.0)
+>>> type(milieu((0, 0), (6, 8)))
+<class 'tuple'>
+\end{console}
+
+% Tableau memoire (nexus-figures-nsi)
+\begin{nxfigure}{Alias : deux noms pour le meme objet}
+\begin{tikzpicture}
+  \node[font=\sffamily\small,anchor=east] (vn) at (0, 0) {\lstinline{notes}};
+  \node[font=\sffamily\small,anchor=east] (vc) at (0, -1.2em) {\lstinline{copie}};
+  \node[nxcell] (c0) at (4em, -0.6em) {12};
+  \node[nxcell] (c1) at (6.2em, -0.6em) {15};
+  \node[nxcell] (c2) at (8.4em, -0.6em) {9};
+  \node[nxcell,fill=nxOr!20] (c3) at (10.6em, -0.6em) {18};
+  \draw[nxref] (vn.east) -- (c0.west);
+  \draw[nxref] (vc.east) -- (c0.west);
+\end{tikzpicture}
+\end{nxfigure}
+
+% Arbre binaire TikZ
+\begin{nxfigure}{Arbre binaire de recherche}
+\begin{tikzpicture}[level distance=1.4em, sibling distance=2.5em,
+  every node/.style={nxnode}]
+  \node {8}
+    child { node {3}
+      child { node {1} }
+      child { node {6} }
+    }
+    child { node {10}
+      child[missing] {}
+      child { node {14} }
+    };
+\end{tikzpicture}
+\end{nxfigure}
+
+% ===================== PAGE 9 : MINI-PROJET ================================
+\begin{miniprojet}{Classement d'un tournoi de e-sport}
+
+Un tournoi oppose 8 joueurs sur 5 manches. Chaque joueur est un dictionnaire
+avec les cles \lstinline{"pseudo"}, \lstinline{"equipe"} et
+\lstinline{"scores"}.
+
+\jalon{1}{Representer les donnees : tableau de 8 dictionnaires.}
+\jalon{2}{Calculer les totaux avec \lstinline{total(joueur)}.}
+\jalon{3}{Trier le classement par total decroissant (copie, pas alias).}
+\jalon{4}{Afficher le classement formate.}
+
+\criteresValidation{Jalon 1 : acces aux donnees OK ; Jalon 2 : totaux corrects ;
+Jalon 3 : original non modifie ; Jalon 4 : affichage complet.}
+
+\end{miniprojet}
+
+% ===================== PAGE 10 : QCM nouvelle formule ======================
+\section*{QCM --- Types construits}
+\textit{Pour chaque question, une seule reponse est correcte.}
+
+\bigskip
+
+\textbf{Q1.} (C1) Que renvoie \lstinline{type((3, 5))} ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{<class 'list'>}
+  \item \lstinline{<class 'tuple'>}
+  \item \lstinline{<class 'int'>}
+\end{enumerate}
+
+\textbf{Q2.} (C5) \lstinline{a = [1, 2]; b = a; b.append(3)}.
+Que vaut \lstinline{a} ?
+\begin{enumerate}[label=\Alph*.]
+  \item \lstinline{[1, 2]}
+  \item \lstinline{[1, 2, 3]}
+  \item Une erreur
+\end{enumerate}
+
+\bigskip
+\textit{Diagnostics : voir la section Diagnostics du QCM en fin de chapitre.}
+
+\end{document}

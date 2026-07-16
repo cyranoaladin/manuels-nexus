@@ -1,0 +1,14 @@
+% META: {"id":"1SPE-DERLOCAL-EX-004","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["calculer","modeliser","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"parametres_sympy":{"C100":850,"C200":1500},"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-004.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-004.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(1500-850, 200-100) == Rational(13,2)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-004}{2}{15}
+Une entreprise fabrique des pièces mécaniques. Le coût total de production, en euros, pour $q$ pièces fabriquées est modélisé par la fonction $C$ définie sur $[0\,;\,500]$. On sait que $C(100)=850$ et $C(200)=\nombre{1500}$.
+
+\begin{enumerate}
+  \item Calculer le taux de variation de $C$ entre $100$ et $200$.
+  \item Ce taux de variation s'appelle le \textbf{coût moyen par pièce supplémentaire} sur cet intervalle. Interpréter la valeur obtenue par une phrase.
+  \item La sécante à la courbe de $C$ passant par les points d'abscisses $100$ et $200$ a-t-elle un coefficient directeur positif ou négatif ? Justifier sans tracer la courbe.
+\end{enumerate}
+\end{exercice}

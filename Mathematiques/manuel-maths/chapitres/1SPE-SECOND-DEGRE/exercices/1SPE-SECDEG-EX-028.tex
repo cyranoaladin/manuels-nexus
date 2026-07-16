@@ -1,0 +1,29 @@
+% META: {"id": "1SPE-SECDEG-EX-028", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C2", "1SPE-SECOND-DEGRE-C6"], "capacites_codes": ["C2", "C6"], "methodes": ["M2", "M6"], "parcours": 2, "competences": ["calculer", "modeliser", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-028.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-028.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, diff, solve, simplify
+% x = symbols('x')
+% # Benefice : B(x) = -2x^2 + 80x - 600, x in [0 ; 40]
+% B = -2*x**2 + 80*x - 600
+% # sommet : x = -80/(2*(-2)) = 20, B(20) = -800 + 1600 - 600 = 200
+% alpha = Rational(-80, -4)
+% assert alpha == 20
+% beta = B.subs(x, alpha)
+% assert beta == 200
+% # variations : a=-2<0, croissante sur [0,20], decroissante sur [20,40]
+% # maximum = 200 en x = 20
+% # seuil de rentabilite : B(x) = 0 => -2x^2 + 80x - 600 = 0 => x^2 - 40x + 300 = 0
+% # delta = 1600 - 1200 = 400, x1 = (40-20)/2 = 10, x2 = (40+20)/2 = 30
+% seuils = sorted(solve(B, x))
+% assert seuils == [10, 30]
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-028}{2}{20}
+Une entreprise produit $x$ unités d'un article par semaine ($0 \leqslant x \leqslant 40$). Le bénéfice hebdomadaire (en euros) est modélisé par :
+\[B(x) = -2x^2 + 80x - 600.\]
+
+\begin{enumerate}
+  \item \textbf{(C2)} Calculer les coordonnées du sommet de la parabole représentant $B$.
+  \item \textbf{(C2)} Dresser le tableau de variations de $B$ sur $[0\,;\,40]$.
+  \item \textbf{(C6)} Quel nombre d'unités faut-il produire pour maximiser le bénéfice ? Quel est ce bénéfice maximal ?
+  \item \textbf{(C6)} L'entreprise est rentable quand $B(x) > 0$. Résoudre $B(x) = 0$ et en déduire l'intervalle de rentabilité.
+\end{enumerate}
+\end{exercice}

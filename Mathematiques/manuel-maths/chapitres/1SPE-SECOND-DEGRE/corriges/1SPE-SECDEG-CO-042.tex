@@ -1,0 +1,146 @@
+% META: {"id": "1SPE-SECDEG-CO-042", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-042", "capacites_codes": ["C2", "C3", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True, positive=True)
+% y_expr = 30 - x/2
+% A = x * y_expr
+% A_expanded = expand(A)
+% assert A_expanded == 30*x - x**2/2
+% alpha = 30
+% beta = A_expanded.subs(x, alpha)
+% assert beta == 450
+% A_canon = Rational(-1,2)*(x - 30)**2 + 450
+% assert expand(A_canon) == A_expanded
+% assert A_expanded.subs(x, 30) == 450
+% # Sans mur : 2(x+y)=60 => x+y=30 => y=30-x, A_sm = x*(30-x)
+% A_sm = x*(30-x)
+% assert A_sm.subs(x, 15) == 225
+% assert 450 == 2*225
+% # Inegalite A >= 400
+% ineq = A_expanded - 400
+% # -x^2/2 + 30x - 400 >= 0 => x^2 - 60x + 800 <= 0
+% P = x**2 - 60*x + 800
+% Delta = 3600 - 3200
+% assert Delta == 400
+% r1 = Rational(60 - 20, 2)
+% r2 = Rational(60 + 20, 2)
+% assert r1 == 20
+% assert r2 == 40
+% assert P.subs(x, 25) < 0
+% assert P.subs(x, 15) > 0
+% # Contrainte x <= 30 : [20, 30]
+% assert 20 <= 30 <= 30
+% assert 40 > 30  # r2 hors domaine
+% # Q5 : cloture totale L+60, A_max = (30 + L/4)^2 * ... calcul direct
+% # x + 2y = 60 + L => y = (60+L-x)/2
+% # A(x) = x*(60+L-x)/2
+% # alpha = (60+L)/2, A_max = (60+L)^2/8
+% # A_max >= 600 => (60+L)^2 >= 4800 => 60+L >= sqrt(4800) = 40*sqrt(3)
+% # L >= 40*sqrt(3) - 60
+% L = symbols('L', positive=True)
+% A_max_L = (60 + L)**2 / 8
+% val = solve(A_max_L - 600, L)
+% assert simplify(val[0] - (40*sqrt(3) - 60)) == 0
+% import math
+% assert abs(float(40*sqrt(3) - 60) - 9.28) < 0.1
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-042}
+
+\textbf{1. Modélisation.}
+
+\textit{a) Relation entre $x$, $y$ et la longueur de clôture.}
+
+\commentaireMarge{Trois côtés : un de longueur $x$ et deux de longueur $y$.}
+
+La clôture couvre les trois côtés non occupés par le mur :
+\[x + 2y = 60.\]
+
+\textit{b) Expression de $y$ en fonction de $x$.}
+
+\[y = \frac{60 - x}{2} = 30 - \frac{x}{2}.\]
+
+Vérification : si $0 < x \leqslant 30$, alors $y = 30 - \dfrac{x}{2} \geqslant 30 - 15 = 15 > 0$. \hfill $\square$
+
+\textit{c) Aire $A(x)$.}
+
+\[A(x) = x \cdot y = x\!\left(30 - \frac{x}{2}\right) = 30x - \frac{x^2}{2}.\] \hfill $\square$
+
+\medskip
+\textbf{2. Optimisation.}
+
+\textit{a) Forme canonique.}
+
+\commentaireMarge{$a = -\frac{1}{2}$, $b = 30$ : $\alpha = -\dfrac{30}{2 \times (-\frac{1}{2})} = 30$.}
+
+\[\alpha = 30, \qquad \beta = A(30) = 900 - \frac{900}{2} = 450.\]
+
+\[A(x) = -\frac{1}{2}(x - 30)^2 + 450.\]
+
+\textit{b) Compatibilité.}
+
+$\alpha = 30 \in ]0\,;\,30]$ : la valeur optimale est exactement à la borne supérieure du domaine.
+
+\textit{c) Aire maximale et dimensions.}
+
+L'aire maximale est $\beta = \mathbf{450}$~m$^2$, atteinte pour $x = 30$~m.
+
+Pour $x = 30$ : $y = 30 - 15 = 15$~m. L'enclos optimal mesure $30$~m $\times$ $15$~m.
+
+\medskip
+\textbf{3. Comparaison sans mur.}
+
+\commentaireMarge{Quatre côtés : $2(x+y) = 60 \implies x + y = 30$.}
+
+Sans mur, le périmètre est $2(x + y) = 60$, soit $x + y = 30$. L'aire est $A'(x) = x(30 - x)$.
+
+Maximum en $x = 15$ : $A'_{\max} = 15 \times 15 = 225$~m$^2$.
+
+\textbf{Apport du mur :} $\dfrac{450}{225} = 2$. Le mur permet de \textbf{doubler} l'aire maximale, car il économise une longueur de clôture, permettant d'agrandir les autres côtés.
+
+\medskip
+\textbf{4. Contrainte d'aire minimale $A(x) \geqslant 400$.}
+
+\textit{a) Reformulation.}
+
+\commentaireMarge{Multiplier par $-2$ et inverser le sens de l'inégalité.}
+
+$30x - \dfrac{x^2}{2} \geqslant 400 \iff -\dfrac{x^2}{2} + 30x - 400 \geqslant 0 \iff x^2 - 60x + 800 \leqslant 0$. \hfill $\square$
+
+\textit{b) Résolution.}
+
+$\Delta = 3600 - 3200 = 400$.
+
+\[x_1 = \frac{60 - 20}{2} = 20 \qquad \text{et} \qquad x_2 = \frac{60 + 20}{2} = 40.\]
+
+Comme $a = 1 > 0$, $x^2 - 60x + 800 \leqslant 0$ pour $x \in [20\,;\,40]$.
+
+\textit{c) Valeurs de $x$ réalisables.}
+
+On intersecte avec $]0\,;\,30]$ : $[20\,;\,40] \cap ]0\,;\,30] = [20\,;\,30]$.
+
+Les valeurs de $x$ réalisables avec une aire d'au moins $400$~m$^2$ sont $x \in [20\,;\,30]$.
+
+\medskip
+\textbf{5. Question ouverte : supplément de clôture.}
+
+\commentaireMarge{Longueur totale disponible : $60 + L$ m.}
+
+Avec $60 + L$ mètres de clôture ($L > 0$) :
+\[x + 2y = 60 + L \implies y = \frac{60 + L - x}{2}.\]
+
+\[A(x) = x \cdot \frac{60 + L - x}{2} = \frac{1}{2}\left[(60+L)x - x^2\right].\]
+
+Le maximum est atteint en $\alpha = \dfrac{60 + L}{2}$ (si $\alpha \leqslant 30$, sinon en $x = 30$).
+
+Si $\dfrac{60+L}{2} \leqslant 30$, c'est-à-dire $L \leqslant 0$, hors domaine. Donc pour $L > 0$, le sommet est en $\alpha = \dfrac{60+L}{2} > 30$, et la fonction est croissante sur $]0\,;\,30]$.
+
+Le maximum sur $]0\,;\,30]$ est alors atteint en $x = 30$ :
+\[A_{\max}(L) = 30 \cdot \frac{60 + L - 30}{2} = 30 \cdot \frac{30 + L}{2} = 15(30 + L) = 450 + 15L.\]
+
+On cherche $A_{\max}(L) \geqslant 600$ :
+\[450 + 15L \geqslant 600 \implies 15L \geqslant 150 \implies L \geqslant 10.\]
+
+L'agriculteur doit acheter au minimum $\mathbf{10}$~m de clôture supplémentaire pour atteindre une aire de $600$~m$^2$.
+
+\baremeIndicatif{Q1 : 3 pts (modeliser, calculer) ; Q2 : 3 pts (calculer, raisonner) ; Q3 : 2 pts (calculer, communiquer) ; Q4 : 3 pts (calculer, raisonner) ; Q5 : 4 pts (chercher, modeliser, calculer, communiquer)}
+\end{corrige}

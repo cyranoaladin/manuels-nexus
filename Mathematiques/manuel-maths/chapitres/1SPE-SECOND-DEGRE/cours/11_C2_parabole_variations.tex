@@ -1,0 +1,129 @@
+% META: {"id": "1SPE-SECDEG-CR-011", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+
+\section{Parabole et variations}
+
+% ============================================================
+% STRATE 1 — Définitions et propriétés fondamentales
+% ============================================================
+
+\propriete[1]{
+Soit $f(x) = a(x - \alpha)^2 + \beta$ ($a \neq 0$) un polynôme du second degré écrit sous forme canonique.
+
+La courbe représentative de $f$ est une \textbf{parabole} d'axe de symétrie la droite d'équation $x = \alpha$ et de \textbf{sommet} $S(\alpha\,;\,\beta)$.
+
+\begin{itemize}
+  \item Si $a > 0$, la parabole est \textbf{tournée vers le haut} (« sourit ») ; $f$ admet un \textbf{minimum} en $\alpha$, égal à $\beta$.
+  \item Si $a < 0$, la parabole est \textbf{tournée vers le bas} (« pleure ») ; $f$ admet un \textbf{maximum} en $\alpha$, égal à $\beta$.
+\end{itemize}
+}
+
+\propriete[2 — Tableau de variations]{
+Soit $f(x) = ax^2 + bx + c$ ($a \neq 0$) de sommet $S(\alpha\,;\,\beta)$ avec $\alpha = -\dfrac{b}{2a}$.
+
+\medskip
+\textbf{Si $a > 0$ :}
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & \alpha & & +\infty \\
+\hline
+f(x) & & \searrow & \beta & \nearrow & \\
+\hline
+\end{array}
+\]
+
+$f$ est décroissante sur $]-\infty\,;\,\alpha]$ puis croissante sur $[\alpha\,;\,+\infty[$.
+
+\medskip
+\textbf{Si $a < 0$ :}
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & \alpha & & +\infty \\
+\hline
+f(x) & & \nearrow & \beta & \searrow & \\
+\hline
+\end{array}
+\]
+
+$f$ est croissante sur $]-\infty\,;\,\alpha]$ puis décroissante sur $[\alpha\,;\,+\infty[$.
+}
+
+\exemple{
+Soit $f(x) = 2x^2 - 8x + 3$.
+
+$a = 2 > 0$, $\alpha = -\dfrac{-8}{4} = 2$, $\beta = f(2) = 8 - 16 + 3 = -5$.
+
+La parabole est tournée vers le haut, de sommet $S(2\,;\,-5)$. $f$ admet un minimum de $-5$ en $x = 2$.
+
+Tableau de variations :
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & 2 & & +\infty \\
+\hline
+f(x) & & \searrow & -5 & \nearrow & \\
+\hline
+\end{array}
+\]
+}
+
+\exemple{
+Soit $g(x) = -x^2 + 4x + 1$.
+
+$a = -1 < 0$, $\alpha = -\dfrac{4}{-2} = 2$, $\beta = g(2) = -4 + 8 + 1 = 5$.
+
+La parabole est tournée vers le bas, de sommet $S(2\,;\,5)$. $g$ admet un maximum de $5$ en $x = 2$.
+}
+
+\margeAppui{%
+\textbf{Moyen mnémotechnique :}\newline
+$a > 0$ : parabole en U $\Rightarrow$ minimum au sommet.\newline
+$a < 0$ : parabole en $\cap$ $\Rightarrow$ maximum au sommet.\newline
+L'axe de symétrie a pour équation $x = \alpha$.%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Inverser le sens de variation quand $a < 0$.}
+
+Lorsque $a < 0$, $f$ est croissante avant le sommet et décroissante après. De nombreux élèves recopient le tableau de variations du cas $a > 0$ sans tenir compte du signe de $a$.
+
+\textbf{Méthode de contrôle :} calculer $f$ en un point à gauche et à droite du sommet et vérifier l'ordre des valeurs. Par exemple, pour $g(x) = -x^2 + 4x + 1$ : $g(0) = 1 < g(2) = 5$ (croissant avant le sommet), $g(2) = 5 > g(3) = -9 + 12 + 1 = 4$ (décroissant après le sommet). Les flèches du tableau doivent le refléter.
+}
+
+\erreurFrequente{
+\textbf{Confondre abscisse du sommet et valeur du minimum/maximum.}
+
+Le minimum (ou maximum) est $\beta = f(\alpha)$, c'est une valeur de $f$. L'abscisse du sommet est $\alpha$. On dit « $f$ admet un minimum égal à $\beta$ atteint en $x = \alpha$ », pas « le minimum est $\alpha$ ».
+}
+
+% ============================================================
+% STRATE 3 — Position relative de deux paraboles
+% ============================================================
+
+\approfondissement{
+\textbf{Position relative de deux paraboles.}
+
+Étudier la position relative des paraboles représentant $f$ et $g$ revient à étudier le signe de $h = f - g$.
+
+Si $f(x) = a_1 x^2 + b_1 x + c_1$ et $g(x) = a_2 x^2 + b_2 x + c_2$, alors
+\[
+  h(x) = f(x) - g(x) = (a_1 - a_2)x^2 + (b_1 - b_2)x + (c_1 - c_2).
+\]
+On distingue plusieurs cas selon le degré de $h$ (si $a_1 = a_2$, $h$ est de degré 1 ou constant) et selon le signe de $\Delta_h$.
+
+\medskip
+\textbf{Exemple.} $f(x) = x^2 - 2x + 3$ et $g(x) = -x^2 + 4$.
+
+$h(x) = 2x^2 - 2x - 1$. $\Delta_h = 4 + 8 = 12 > 0$.
+
+Les racines sont $x_1 = \dfrac{2 - 2\sqrt{3}}{4} = \dfrac{1 - \sqrt{3}}{2}$ et $x_2 = \dfrac{1 + \sqrt{3}}{2}$.
+
+Sur $]x_1\,;\,x_2[$, $h(x) < 0$ donc $f(x) < g(x)$ : la parabole de $f$ est en dessous de celle de $g$.
+}

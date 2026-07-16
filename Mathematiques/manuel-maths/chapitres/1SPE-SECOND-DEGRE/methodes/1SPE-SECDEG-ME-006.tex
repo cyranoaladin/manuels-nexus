@@ -1,0 +1,96 @@
+% META: {"id": "1SPE-SECDEG-ME-006", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "methode", "capacites_codes": ["C6"], "methodes": ["M6"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M6}{Résoudre un problème d'optimisation}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « maximiser » ou « minimiser »
+  une quantité (aire, volume, bénéfice, périmètre\ldots), de « trouver les dimensions
+  qui optimisent », ou de « déterminer la valeur de $x$ pour laquelle la quantité est maximale
+  (ou minimale) ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Définir la variable} : je choisis une variable $x$ représentant la quantité qui varie
+      et je précise son domaine de définition (les valeurs physiquement admissibles).
+    \item \textbf{Exprimer la quantité à optimiser} en fonction de $x$ : j'obtiens une fonction $f(x)$.
+    \item \textbf{Identifier le trinôme} : je vérifie que $f$ est un polynôme du second degré
+      $f(x) = ax^2 + bx + c$ et je note le signe de $a$.
+    \item \textbf{Trouver le sommet} : je calcule $\alpha = -\dfrac{b}{2a}$ et $\beta = f(\alpha)$.
+    \item \textbf{Vérifier le domaine} : je contrôle que $\alpha$ appartient bien au domaine de
+      définition établi à l'étape 1. Sinon, l'extremum est atteint à la borne la plus proche.
+    \item \textbf{Conclure} en distinguant :
+      \begin{itemize}
+        \item ce qu'est la \textbf{valeur optimale} : $\beta = f(\alpha)$ (l'aire maximale, le bénéfice
+          maximal\ldots),
+        \item ce qu'est la \textbf{variable optimale} : $\alpha$ (la longueur, le prix\ldots qui réalise
+          l'optimum).
+      \end{itemize}
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Un rectangle a son côté inférieur sur l'axe des abscisses et ses deux sommets supérieurs
+  sur la droite d'équation $y = -2x + 8$ (pour $0 \leq x \leq 4$).
+  Déterminer les dimensions du rectangle d'aire maximale.
+
+  \medskip
+  \commentaireMarge{Définir la variable et le domaine.}%
+  Soit $x$ la demi-largeur du rectangle ($0 < x < 4$).
+  La largeur est $2x$ et la hauteur est $y = -2x + 8$.
+
+  \commentaireMarge{Exprimer l'aire en fonction de $x$.}%
+  \[
+    A(x) = 2x \times (-2x + 8) = -4x^2 + 16x.
+  \]
+
+  \commentaireMarge{Identifier le trinôme : $a = -4 < 0$, donc maximum au sommet.}%
+  $A$ est un trinôme avec $a = -4 < 0$, $b = 16$, $c = 0$.
+
+  \commentaireMarge{Calculer les coordonnées du sommet.}%
+  \[
+    \alpha = -\frac{16}{2 \times (-4)} = -\frac{16}{-8} = 2.
+  \]
+  \[
+    \beta = A(2) = -4 \times 4 + 16 \times 2 = -16 + 32 = 16.
+  \]
+
+  \commentaireMarge{Vérifier que $\alpha = 2 \in \left]0\,;\,4\right[$ : oui.}%
+  $\alpha = 2 \in \left]0\,;\,4\right[$ : le sommet est bien dans le domaine.
+
+  \commentaireMarge{Conclure en distinguant variable et valeur optimale.}%
+  L'aire est maximale pour $x = 2$, c'est-à-dire une largeur de $2 \times 2 = 4$ et une hauteur
+  de $-2 \times 2 + 8 = 4$.
+
+  \medskip
+  \textbf{Conclusion :} Le rectangle d'aire maximale a pour dimensions $4 \times 4$,
+  et son aire maximale est $A(2) = 16$ unités d'aire.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Oublier de vérifier le domaine de validité. Si $\alpha$ est hors du
+      domaine, l'extremum de la fonction sur le domaine est atteint en une borne, pas au sommet
+      de la parabole.
+    \item \textbf{Piège 2.} Confondre la valeur optimale $\beta = f(\alpha)$ et la variable
+      optimale $\alpha$. La question « pour quelle longueur ? » demande $\alpha$ ;
+      la question « quelle aire maximale ? » demande $\beta$.
+    \item \textbf{Piège 3.} Ne pas définir clairement la variable $x$ avec son domaine dès le début :
+      on risque d'obtenir des solutions négatives ou incohérentes avec la situation physique.
+  \end{itemize}
+}
+
+\verifier{%
+  \begin{itemize}
+    \item Calculer $A(\alpha - 0{,}5)$ et $A(\alpha + 0{,}5)$ et vérifier qu'ils sont inférieurs
+      à $\beta$ (pour un maximum). Ici : $A(1{,}5) = -4 \times 2{,}25 + 24 = 15 < 16$ \checkmark
+      et $A(2{,}5) = -4 \times 6{,}25 + 40 = 15 < 16$ \checkmark.
+    \item Contrôler que les dimensions trouvées correspondent bien au contexte géométrique
+      (largeur et hauteur positives, dans le domaine).
+    \item Vérifier les unités de la valeur optimale (aire en unités d'aire, longueur en unités
+      de longueur, etc.).
+  \end{itemize}
+}
+
+\sEntrainer{\refExos{M6}}
+
+\end{fichemethode}

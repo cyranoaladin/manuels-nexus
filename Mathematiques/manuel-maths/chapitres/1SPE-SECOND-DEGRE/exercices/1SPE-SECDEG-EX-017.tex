@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-SECDEG-EX-017", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C6"], "capacites_codes": ["C6"], "methodes": ["M6"], "parcours": 1, "competences": ["modeliser", "calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-017.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-017.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve, diff
+% x = symbols('x')
+% # Prix unitaire : p = 50 - 2x, quantite vendue : x, x in [0 ; 25]
+% # Recette : R(x) = x*(50 - 2*x) = -2x^2 + 50x
+% R = -2*x**2 + 50*x
+% # Sommet : x = -50/(2*(-2)) = 50/4 = 25/2
+% xmax = Rational(50, 4)
+% assert xmax == Rational(25, 2)
+% assert R.subs(x, xmax) == Rational(625, 2)
+% # Prix optimal : p = 50 - 2*(25/2) = 50 - 25 = 25
+% p_opt = 50 - 2*xmax
+% assert p_opt == 25
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-017}{1}{12}
+Un commerçant vend des articles. Des études montrent que si le prix unitaire est $p$ euros, il vend $x = \dfrac{50 - p}{2}$ articles, avec $0 \leqslant p \leqslant 50$.
+
+\begin{enumerate}
+  \item Exprimer $p$ en fonction de $x$.
+  \item Montrer que la recette $R(x)$ (en euros) s'écrit $R(x) = -2x^2 + 50x$.
+  \item Déterminer le nombre d'articles $x$ à vendre pour maximiser la recette.
+  \item En déduire le prix unitaire optimal et la recette maximale correspondante.
+\end{enumerate}
+\end{exercice}

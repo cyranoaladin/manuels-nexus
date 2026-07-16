@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "validation.schema.json",
+  "title": "Verdict d'un gate de validation",
+  "type": "object",
+  "required": ["objet_id", "gate", "verdict", "created_at"],
+  "properties": {
+    "objet_id": { "type": "string" },
+    "gate": { "enum": ["sympy", "similarity", "conformite", "compilation", "adversarial", "revue_humaine"] },
+    "verdict": { "enum": ["pass", "fail", "warning", "manual_review"] },
+    "details": { "type": "object" },
+    "reviewer": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}

@@ -1,0 +1,96 @@
+% META: {"id": "1SPE-SECDEG-CO-027", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-027", "capacites_codes": ["C2", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, expand, simplify
+% x = symbols('x')
+% # A(x) = (16-2x)*(10-2x) = 4x^2 - 52x + 160
+% A = (16 - 2*x)*(10 - 2*x)
+% A_exp = expand(A)
+% assert A_exp == 4*x**2 - 52*x + 160
+% # Sommet de A : alpha = 52/8 = 13/2
+% alpha_A = Rational(52, 8)
+% assert alpha_A == Rational(13, 2)
+% # Sur ]0;5[, A est decroissante car sommet en 13/2 > 5
+% assert float(alpha_A) > 5
+% # V(x) = x*(16-2x)*(10-2x)
+% V_2 = A_exp.subs(x, 2) * 2
+% assert V_2 == expand(4*2**2 - 52*2 + 160) * 2
+% V2_val = (4*4 - 52*2 + 160) * 2
+% assert V2_val == 144
+% V3_val = (4*9 - 52*3 + 160) * 3
+% assert V3_val == 120
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-027}
+
+\textbf{1. Dimensions de la base en fonction de $x$.}
+
+\commentaireMarge{On retire $x$ de chaque côté aux deux extrémités.}
+
+Lorsqu'on découpe des carrés de côté $x$ aux quatre coins d'une feuille $16\,\text{cm} \times 10\,\text{cm}$ :
+\begin{itemize}
+  \item longueur de la base : $16 - 2x$ cm,
+  \item largeur de la base : $10 - 2x$ cm.
+\end{itemize}
+
+\medskip
+\textbf{2. Expression de $V(x)$.}
+
+\commentaireMarge{Volume = base $\times$ hauteur, hauteur = $x$.}
+
+La hauteur de la boîte est $x$. Donc :
+\[V(x) = x(16 - 2x)(10 - 2x).\]
+
+On développe :
+\[(16 - 2x)(10 - 2x) = 160 - 32x - 20x + 4x^2 = 4x^2 - 52x + 160.\]
+
+Donc $V(x) = x(4x^2 - 52x + 160) = 4x^3 - 52x^2 + 160x$. \hfill $\square$
+
+\medskip
+\textbf{3. Étude de l'aire de la base $A(x) = (16-2x)(10-2x)$.}
+
+\textit{a) Développement.}
+
+\commentaireMarge{$A(x) = 4x^2 - 52x + 160$ est un trinôme du second degré.}
+
+\[A(x) = 4x^2 - 52x + 160.\]
+
+C'est un trinôme du second degré avec $a = 4 > 0$.
+
+\textit{b) Sommet.}
+
+L'abscisse du sommet est :
+\[\alpha = -\frac{-52}{2 \times 4} = \frac{52}{8} = \frac{13}{2} = 6{,}5.\]
+
+Or $6{,}5 \notin ]0\,;\,5[$, donc le sommet est en dehors du domaine d'étude.
+
+\textit{c) Tableau de variations de $A$ sur $]0\,;\,5[$.}
+
+\commentaireMarge{Comme $a > 0$ et le sommet est en $x = 6{,}5 > 5$, $A$ est décroissante sur $]0\,;\,5[$.}
+
+Sur $]0\,;\,5[$, $A$ est strictement décroissante : plus on découpe un grand carré, plus la base devient petite.
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccc|}
+\hline
+$x$ & $0$ & $\rightarrow$ & $5$ \\
+\hline
+$A(x)$ & $160$ & $\searrow$ & $40$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textit{Interprétation :} l'aire de la base diminue lorsqu'on augmente la taille des carrés découpés.
+
+\medskip
+\textbf{4. Comparaison de $V(2)$ et $V(3)$.}
+
+\commentaireMarge{Substituer $x = 2$ et $x = 3$ dans $V(x)$.}
+
+\[V(2) = 2 \times (16 - 4)(10 - 4) = 2 \times 12 \times 6 = 144\,\text{cm}^3.\]
+
+\[V(3) = 3 \times (16 - 6)(10 - 6) = 3 \times 10 \times 4 = 120\,\text{cm}^3.\]
+
+On a $V(2) = 144 > 120 = V(3)$, donc le découpage avec $x = 2$~cm donne le plus grand volume.
+
+\baremeIndicatif{Q1 : 1 pt (modeliser) ; Q2 : 2 pts (calculer, communiquer) ; Q3 : 3 pts (calculer, raisonner) ; Q4 : 2 pts (calculer, raisonner)}
+\end{corrige}

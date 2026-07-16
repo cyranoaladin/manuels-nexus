@@ -1,0 +1,60 @@
+% META: {"id": "1SPE-SUITES-COURS-00", "chapitre": "1SPE-SUITES", "type_objet": "cours", "sous_type": "ouverture", "titre": "Suites numeriques", "temps_gabarit": 1, "parcours_duree": {"P1": "14h", "P2": "11h", "P3": "10h"}, "prerequis": ["R1", "R2", "R3", "R4", "R5"], "capacites": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\chapter{Suites numériques}
+
+\section*{Contrat du chapitre}
+
+\subsection*{Ce que tu vas savoir faire}
+
+À la fin de ce chapitre, tu seras capable de :
+
+\begin{itemize}
+  \item[\textbf{C1}] Calculer les termes d'une suite définie par une formule explicite ou par récurrence, à la main et en Python.
+  \item[\textbf{C2}] Montrer qu'une suite est arithmétique et exprimer son terme général $u_n$ en fonction de $n$.
+  \item[\textbf{C3}] Montrer qu'une suite est géométrique et exprimer son terme général $u_n$ en fonction de $n$.
+  \item[\textbf{C4}] Calculer la somme des $n$ premiers entiers et la somme de termes consécutifs d'une suite géométrique.
+  \item[\textbf{C5}] Étudier le sens de variation d'une suite en choisissant la méthode adaptée (signe de $u_{n+1} - u_n$, rapport $\dfrac{u_{n+1}}{u_n}$, comparaison à une fonction).
+  \item[\textbf{C6}] Modéliser une situation concrète par une suite arithmétique ou géométrique et répondre à des questions de la vie courante.
+  \item[\textbf{C7}] Écrire et lire un programme Python calculant un terme, une somme ou un seuil de dépassement.
+\end{itemize}
+
+\subsection*{Ce dont tu as besoin avant de commencer}
+
+Ce chapitre s'appuie sur cinq familles de prérequis. Le diagnostic de la page suivante te dira lesquels tu maîtrises déjà.
+
+\begin{itemize}
+  \item[\textbf{R1}] \textbf{Calcul littéral} — développer, factoriser, réduire des expressions algébriques.
+  \item[\textbf{R2}] \textbf{Pourcentages} — coefficient multiplicateur, évolutions successives, taux global.
+  \item[\textbf{R3}] \textbf{Fonctions} — calculer une image, chercher un antécédent, lire un tableau de valeurs.
+  \item[\textbf{R4}] \textbf{Inégalités} — signe d'une expression, résolution d'inégalités simples.
+  \item[\textbf{R5}] \textbf{Python} — variable, boucle \texttt{for}, affichage d'un résultat.
+\end{itemize}
+
+Si une fiche R te concerne, lis-la avant d'aborder le cours : chaque notion manquante sera un obstacle au moment où tu en auras le plus besoin.
+
+\subsection*{Temps de travail estimé}
+
+\begin{itemize}
+  \item Parcours~$\blacklozenge$ (Consolidation) : environ \textbf{14~h}.
+  \item Parcours~$\blacklozenge\blacklozenge$ (Maîtrise) : environ \textbf{11~h}.
+  \item Parcours~$\blacklozenge\blacklozenge\blacklozenge$ (Approfondissement) : environ \textbf{10~h}.
+\end{itemize}
+
+\subsection*{Situation d'accroche — Deux offres d'épargne}
+
+Un établissement bancaire propose deux formules d'épargne pour placer \nombre{1000}~€ :
+
+\begin{itemize}
+  \item \textbf{Offre A (versement fixe)} : le capital augmente de \nombre{50}~€ chaque mois.
+  \item \textbf{Offre B (intérêts composés)} : le capital est multiplié par $1{,}04$ chaque mois (soit $+4$~\% par mois).
+\end{itemize}
+
+Les deux offres partent du même capital initial de \nombre{1000}~€.
+
+\begin{itemize}
+  \item Calcule les capitaux obtenus après 1, 2, 3 et 4 mois pour chaque offre.
+  \item À partir de quel mois l'offre B dépasse-t-elle l'offre A ?
+  \item Peux-tu répondre à cette question sans tout calculer un à un ?
+\end{itemize}
+
+Cette situation sera entièrement résolue au Temps~7 (TD fil rouge), avec les outils du chapitre et un programme Python calculant le seuil de dépassement.

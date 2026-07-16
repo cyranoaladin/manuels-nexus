@@ -1,0 +1,93 @@
+% META: {"id": "1SPE-SUITES-CO-033", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-033", "capacites_codes": ["C5", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% P0 = 2400
+% a = 80
+% P = P0 - a * n
+% assert P.subs(n, 0) == 2400
+% assert P.subs(n, 1) == 2320
+% diff = P.subs(n, n+1) - P
+% assert simplify(diff) == -80
+% # Suite decroissante car r = -80 < 0
+% # P_n > 0 => 2400 - 80n > 0 => n < 30
+% assert P.subs(n, 29) == 80
+% assert P.subs(n, 30) == 0
+% # Forêt épuisée : P_n = 0 => n = 30
+% # Limite < 1000 : 2400 - 80n < 1000 => 80n > 1400 => n > 17.5 => n >= 18
+% assert P.subs(n, 17) == 2400 - 80*17
+% assert P.subs(n, 18) == 2400 - 80*18
+% assert int(P.subs(n, 17)) == 1040
+% assert int(P.subs(n, 18)) == 960
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-033}
+
+\textbf{Question 1 — Modélisation et nature arithmétique.}
+
+Chaque année, l'exploitant prélève $80$ arbres. Donc :
+\[
+  P_{n+1} = P_n - 80, \quad P_0 = 2\,400.
+\]
+
+\textit{Démonstration :} Pour tout $n \in \mathbb{N}$ :
+\[
+  P_{n+1} - P_n = (P_n - 80) - P_n = -80.
+\]
+
+\commentaireMarge{La différence $P_{n+1} - P_n = -80$ est constante : $(P_n)$ est arithmétique de raison $r = -80$ et de premier terme $P_0 = 2\,400$.}
+
+Cette différence est constante, donc $(P_n)$ est une suite arithmétique de raison $r = -80$ et de premier terme $P_0 = 2\,400$.
+
+\medskip
+\textbf{Question 2 — Expression de $P_n$ en fonction de $n$.}
+
+Par la formule du terme général d'une suite arithmétique :
+\[
+  P_n = P_0 + n \times r = 2\,400 - 80n.
+\]
+
+\textit{Vérification :} $P_1 = 2\,400 - 80 = 2\,320$ \checkmark.
+
+\medskip
+\textbf{Question 3 — Sens de variation.}
+
+La raison est $r = -80 < 0$, donc pour tout $n \in \mathbb{N}$, $P_{n+1} - P_n = -80 < 0$, ce qui signifie $P_{n+1} < P_n$.
+
+\commentaireMarge{La forêt perd $80$ arbres par an : le nombre d'arbres diminue strictement chaque année.}
+
+La suite $(P_n)$ est \textbf{strictement décroissante} : la forêt perd des arbres chaque année, ce qui est cohérent avec l'exploitation sans replantation.
+
+\medskip
+\textbf{Question 4 — Valeurs de $n$ pour lesquelles $P_n > 0$ ; épuisement de la forêt.}
+
+On résout $P_n > 0$ :
+\[
+  2\,400 - 80n > 0 \iff 80n < 2\,400 \iff n < 30.
+\]
+
+Donc $P_n > 0$ pour $n \in \{0, 1, \ldots, 29\}$.
+
+\textit{Vérification :} $P_{29} = 2\,400 - 80 \times 29 = 2\,400 - 2\,320 = 80 > 0$ et $P_{30} = 2\,400 - 2\,400 = 0$. \checkmark
+
+\commentaireMarge{$P_{30} = 0$ : la forêt est complètement épuisée au bout de $30$ ans.}
+
+La forêt est complètement épuisée à l'année $n = 30$, soit $30$ ans après le début de l'exploitation.
+
+\medskip
+\textbf{Question 5 — Année à partir de laquelle la limite de $1\,000$ arbres est franchie.}
+
+On cherche le plus petit entier $n$ tel que $P_n < 1\,000$ :
+\[
+  2\,400 - 80n < 1\,000 \iff -80n < -1\,400 \iff n > \frac{1\,400}{80} = 17{,}5.
+\]
+
+Le plus petit entier satisfaisant cette condition est $n = 18$.
+
+\textit{Vérification :} $P_{17} = 2\,400 - 80 \times 17 = 2\,400 - 1\,360 = 1\,040 \geq 1\,000$ et $P_{18} = 2\,400 - 80 \times 18 = 2\,400 - 1\,440 = 960 < 1\,000$. \checkmark
+
+\commentaireMarge{La limite de $1\,000$ arbres est franchie à la $18^e$ année (à partir de 2020, cela correspond à l'année 2038).}
+
+À partir de l'année $n = 18$, le nombre d'arbres est inférieur à $1\,000$. Le biologiste recommanderait d'arrêter l'exploitation avant cette date.
+
+\baremeIndicatif{Q1 : 2 pts (modeliser, raisonner : relation de récurrence 1 pt + démonstration arithmétique 1 pt) ; Q2 : 1 pt (calculer : terme général) ; Q3 : 2 pts (raisonner, communiquer : signe de $r$ 1 pt + interprétation 1 pt) ; Q4 : 2 pts (calculer, raisonner : résolution de l'inéquation 1 pt + vérification et conclusion 1 pt) ; Q5 : 1 pt (calculer : résolution et vérification)}
+\end{corrige}

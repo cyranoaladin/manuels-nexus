@@ -1,0 +1,114 @@
+% META: {"id": "1SPE-SUITES-CR-014", "chapitre": "1SPE-SUITES", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+
+%---------------------------------------------------------------
+% STRATE 1 — Savoirs fondamentaux
+%---------------------------------------------------------------
+
+\definition[1 — Suite monotone]{
+Soit $(u_n)$ une suite définie sur $\mathbb{N}$.
+\begin{itemize}
+  \item $(u_n)$ est \textbf{croissante} si pour tout $n \in \mathbb{N}$, $u_{n+1} \geq u_n$.
+  \item $(u_n)$ est \textbf{strictement croissante} si pour tout $n \in \mathbb{N}$, $u_{n+1} > u_n$.
+  \item $(u_n)$ est \textbf{décroissante} si pour tout $n \in \mathbb{N}$, $u_{n+1} \leq u_n$.
+  \item $(u_n)$ est \textbf{strictement décroissante} si pour tout $n \in \mathbb{N}$, $u_{n+1} < u_n$.
+  \item $(u_n)$ est \textbf{constante} si pour tout $n \in \mathbb{N}$, $u_{n+1} = u_n$.
+\end{itemize}
+}
+
+\propriete[1 — Trois méthodes pour étudier la monotonie]{
+Pour étudier le sens de variation de $(u_n)$, on dispose de trois méthodes :
+
+\medskip
+\textbf{Méthode 1 — Signe de $u_{n+1} - u_n$.}
+\begin{itemize}
+  \item Si $u_{n+1} - u_n \geq 0$ pour tout $n \in \mathbb{N}$, alors $(u_n)$ est croissante.
+  \item Si $u_{n+1} - u_n \leq 0$ pour tout $n \in \mathbb{N}$, alors $(u_n)$ est décroissante.
+\end{itemize}
+
+\medskip
+\textbf{Méthode 2 — Comparaison du quotient $\dfrac{u_{n+1}}{u_n}$ à $1$}
+(uniquement si $u_n > 0$ pour tout $n$).
+\begin{itemize}
+  \item Si $\dfrac{u_{n+1}}{u_n} \geq 1$ pour tout $n \in \mathbb{N}$, alors $(u_n)$ est croissante.
+  \item Si $\dfrac{u_{n+1}}{u_n} \leq 1$ pour tout $n \in \mathbb{N}$, alors $(u_n)$ est décroissante.
+\end{itemize}
+
+\medskip
+\textbf{Méthode 3 — Étude de la fonction associée.}
+Si $u_n = f(n)$ où $f$ est définie et dérivable sur $[0\,;\,+\infty[$, alors :
+\begin{itemize}
+  \item $f' \geq 0$ sur $[0\,;\,+\infty[$ implique que $(u_n)$ est croissante.
+  \item $f' \leq 0$ sur $[0\,;\,+\infty[$ implique que $(u_n)$ est décroissante.
+\end{itemize}
+}
+
+\exemple{
+\textbf{Méthode 1.} $(u_n)$ définie par $u_n = 3n + 1$.
+$u_{n+1} - u_n = 3(n+1) + 1 - (3n+1) = 3 > 0$ pour tout $n \in \mathbb{N}$.
+Donc $(u_n)$ est strictement croissante.
+}
+
+\exemple{
+\textbf{Méthode 2.} $(v_n)$ définie par $v_n = 5 \times \left(\dfrac{1}{2}\right)^n > 0$ pour tout $n$.
+$\dfrac{v_{n+1}}{v_n} = \dfrac{1}{2} < 1$ pour tout $n \in \mathbb{N}$.
+Donc $(v_n)$ est strictement décroissante.
+}
+
+\exemple{
+\textbf{Méthode 3.} $(w_n)$ définie par $w_n = n^2 - 4n + 1$.
+$f(x) = x^2 - 4x + 1$, $f'(x) = 2x - 4$.
+$f'(x) \geq 0$ pour $x \geq 2$, donc $(w_n)$ est croissante pour $n \geq 2$, décroissante pour $n \leq 2$.
+}
+
+%---------------------------------------------------------------
+% STRATE 2 — Appui et erreurs fréquentes
+%---------------------------------------------------------------
+
+\erreurFrequente{
+\textbf{Utiliser le quotient sans vérifier la stricte positivité.}
+La méthode 2 (quotient) n'est valide que si $u_n > 0$ pour tout $n$.
+Si $(u_n)$ peut prendre des valeurs négatives ou nulles, le signe du quotient ne renseigne pas sur la monotonie.
+
+\medskip
+\textbf{Oubli du quantificateur universel.}
+Il faut vérifier la condition \textbf{pour tout} $n \in \mathbb{N}$, pas seulement pour quelques valeurs.
+Montrer que $u_1 > u_0$ ne suffit pas à conclure que la suite est croissante.
+
+\medskip
+\textbf{Arbre de décision — quelle méthode choisir ?}
+
+\begin{itemize}
+  \item Expression de $u_n$ simple (affine, polynomiale) $\rightarrow$ Méthode 1 (différence).
+  \item Suite géométrique ou expression exponentielle avec termes positifs $\rightarrow$ Méthode 2 (quotient).
+  \item $u_n = f(n)$ avec $f$ dérivable et la dérivée facile à étudier $\rightarrow$ Méthode 3 (fonction).
+\end{itemize}
+}
+
+\margeAppui{Méthode 1 : signe de $u_{n+1}-u_n$.}
+
+\margeAppui{Méthode 2 : quotient (si $u_n > 0$).}
+
+\margeAppui{Méthode 3 : dérivée de $f$ telle que $u_n = f(n)$.}
+
+%---------------------------------------------------------------
+% STRATE 3 — Approfondissement
+%---------------------------------------------------------------
+
+\approfondissement{
+\textbf{Suite majorée, minorée, bornée (aperçu terminale).}
+
+\medskip
+Une suite $(u_n)$ est :
+\begin{itemize}
+  \item \textbf{majorée} s'il existe $M \in \mathbb{R}$ tel que $u_n \leq M$ pour tout $n \in \mathbb{N}$ ;
+  \item \textbf{minorée} s'il existe $m \in \mathbb{R}$ tel que $u_n \geq m$ pour tout $n \in \mathbb{N}$ ;
+  \item \textbf{bornée} si elle est à la fois majorée et minorée.
+\end{itemize}
+
+Ces notions seront essentielles en terminale pour l'étude des limites :
+une suite croissante et majorée converge (théorème de la limite monotone, hors programme de première).
+
+\medskip
+\textit{Exemple d'aperçu.} La suite $u_n = \dfrac{n}{n+1}$ est croissante (vérifiable par la méthode 1), majorée par $1$ et minorée par $0$.
+On admettra qu'elle converge vers $1$.
+}

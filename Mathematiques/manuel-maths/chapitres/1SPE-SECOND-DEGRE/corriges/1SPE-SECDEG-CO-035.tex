@@ -1,0 +1,131 @@
+% META: {"id": "1SPE-SECDEG-CO-035", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-035", "capacites_codes": ["C1", "C2", "C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% f = x**2 - 4*x + 3
+% assert f.coeff(x, 2) == 1
+% assert f.coeff(x, 1) == -4
+% assert f.subs(x, 0) == 3
+% alpha = Rational(4, 2)
+% assert alpha == 2
+% beta = f.subs(x, alpha)
+% assert beta == -1
+% f_canon = (x - alpha)**2 + beta
+% assert expand(f_canon) == f
+% Delta = (-4)**2 - 4*1*3
+% assert Delta == 4
+% x1 = (4 - sqrt(Delta)) / 2
+% x2 = (4 + sqrt(Delta)) / 2
+% assert x1 == 1
+% assert x2 == 3
+% f_fact = (x - x1)*(x - x2)
+% assert expand(f_fact) == f
+% assert f.subs(x, 2) == -1
+% assert f.subs(x, 0) == 3
+% assert f.subs(x, 4) == 3
+% # Q4 : intersection avec y = x - 1 : x^2 - 4x + 3 = x - 1 => x^2 - 5x + 4 = 0
+% g = x**2 - 5*x + 4
+% assert expand(f - (x - 1)) == g
+% sols_g = sorted(solve(g, x))
+% assert sols_g == [1, 4]
+% Delta_g = 25 - 16
+% assert Delta_g == 9
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-035}
+
+\textbf{1. Formes du trinôme.}
+
+\textit{a) Coefficients.}
+
+\commentaireMarge{Identifier $a$, $b$, $c$ dans $ax^2 + bx + c$.}
+
+$f(x) = x^2 - 4x + 3$ : $a = 1$, $b = -4$, $c = 3$.
+
+\textit{b) Forme canonique et sommet.}
+
+\commentaireMarge{$\alpha = -\dfrac{b}{2a}$, $\beta = f(\alpha)$.}
+
+\[\alpha = -\frac{-4}{2} = 2, \qquad \beta = f(2) = 4 - 8 + 3 = -1.\]
+
+Forme canonique : $f(x) = (x - 2)^2 - 1$.
+
+Le sommet est $S(2\,;\,-1)$.
+
+\textit{c) Discriminant et racines.}
+
+\[\Delta = (-4)^2 - 4 \times 1 \times 3 = 16 - 12 = 4.\]
+
+\[x_1 = \frac{4 - 2}{2} = 1 \qquad \text{et} \qquad x_2 = \frac{4 + 2}{2} = 3.\]
+
+\textit{d) Forme factorisée.}
+
+\[f(x) = (x - 1)(x - 3).\]
+
+\medskip
+\textbf{2. Représentation graphique.}
+
+\textit{a) Orientation.}
+
+\commentaireMarge{$a = 1 > 0$ : parabole tournée vers le haut.}
+
+Comme $a = 1 > 0$, la parabole est tournée vers le haut (concave vers le bas).
+
+\textit{b) Allure.} On place le sommet $S(2\,;\,-1)$, les racines $x_1 = 1$ et $x_2 = 3$, et l'ordonnée à l'origine $f(0) = 3$.
+
+\textit{c) Axe de symétrie.}
+
+L'axe de symétrie est la droite verticale $x = \alpha = 2$.
+
+On vérifie : $\dfrac{x_1 + x_2}{2} = \dfrac{1 + 3}{2} = 2$. Les racines sont symétriques par rapport à $x = 2$. \hfill $\square$
+
+\medskip
+\textbf{3. Tableau de signes et position relative.}
+
+\textit{a) Tableau de signes.}
+
+\commentaireMarge{$a > 0$ : positif à l'extérieur des racines $1$ et $3$.}
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $3$ & & $+\infty$ \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textit{b) Inéquation $f(x) < 0$.}
+
+$\mathcal{S} = \left]1\,;\,3\right[$.
+
+\textit{c) Courbe sous l'axe des abscisses.}
+
+La courbe est au-dessous de l'axe pour $x \in \left]1\,;\,3\right[$.
+
+\medskip
+\textbf{4. Intersection avec la droite $d : y = x - 1$.}
+
+\textit{a) Équation d'intersection.}
+
+\commentaireMarge{Égaliser les ordonnées : $f(x) = x - 1$.}
+
+$f(x) = x - 1 \iff x^2 - 4x + 3 = x - 1 \iff x^2 - 5x + 4 = 0$. \hfill $\square$
+
+\textit{b) Résolution.}
+
+$\Delta = 25 - 16 = 9$, donc $x_1 = \dfrac{5-3}{2} = 1$ et $x_2 = \dfrac{5+3}{2} = 4$.
+
+Les points d'intersection ont pour abscisses $x = 1$ et $x = 4$.
+
+Pour $x = 1$ : $y = 1 - 1 = 0$, point $I_1(1\,;\,0)$.
+
+Pour $x = 4$ : $y = 4 - 1 = 3$, point $I_2(4\,;\,3)$.
+
+\textit{c) Conclusion.}
+
+La droite $d$ est \textbf{sécante} à la parabole (deux points d'intersection distincts, car $\Delta = 9 > 0$).
+
+\baremeIndicatif{Q1 : 4 pts (calculer, communiquer) ; Q2 : 3 pts (raisonner, communiquer) ; Q3 : 3 pts (raisonner) ; Q4 : 4 pts (chercher, calculer, communiquer)}
+\end{corrige}

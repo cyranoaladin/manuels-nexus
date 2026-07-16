@@ -1,0 +1,59 @@
+% META: {"id": "1SPE-SUITES-CO-021", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-021", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% # Suite geometrique u0=3, q=2 : somme S = u0 + ... + u4
+% u = 3
+% S = 3
+% for k in range(4):
+%     u = 2*u
+%     S = S + u
+% assert u == 48
+% assert S == 93
+% # Verification par formule : u0*(1-q**(n+1))/(1-q) avec u0=3, q=2, n=4 (5 termes)
+% # S = 3*(1-2**5)/(1-2) = 3*(1-32)/(-1) = 3*31 = 93
+% assert 3*(1 - 2**5)//(1 - 2) == 93
+% # Verification directe : 3+6+12+24+48 = 93
+% assert 3 + 6 + 12 + 24 + 48 == 93
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-021}
+
+\commentaireMarge{On simule l'algorithme à la main : la variable \texttt{u} stocke le terme courant $u_k$, et \texttt{S} accumule la somme au fur et à mesure.}
+
+\textbf{Question 1.} On simule l'algorithme étape par étape. Avant la boucle : \texttt{u = 3} (c'est $u_0$) et \texttt{S = 3}. À chaque itération, on calcule le terme suivant puis on l'ajoute à \texttt{S} :
+
+\medskip
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Valeur de \texttt{k} & Valeur de \texttt{u} après la boucle & Valeur de \texttt{S} après la boucle \\
+\hline
+$0$ & $2 \times 3 = 6$ ($= u_1$) & $3 + 6 = 9$ \\
+\hline
+$1$ & $2 \times 6 = 12$ ($= u_2$) & $9 + 12 = 21$ \\
+\hline
+$2$ & $2 \times 12 = 24$ ($= u_3$) & $21 + 24 = 45$ \\
+\hline
+$3$ & $2 \times 24 = 48$ ($= u_4$) & $45 + 48 = 93$ \\
+\hline
+fin & $48$ & $93$ \\
+\hline
+\end{tabular}
+\end{center}
+\medskip
+
+\commentaireMarge{L'instruction \texttt{print(S)} affiche la valeur finale de l'accumulateur \texttt{S}, qui contient $u_0 + u_1 + u_2 + u_3 + u_4$.}
+
+\textbf{Question 2.} À la fin de l'algorithme, \texttt{S} contient $93$. L'instruction \texttt{print(S)} affiche donc \textbf{93}.
+
+\commentaireMarge{La formule de la somme des termes d'une suite géométrique est $S = u_0 \times \dfrac{1 - q^{n+1}}{1 - q}$ pour $q \neq 1$, où $n+1$ est le nombre de termes.}
+
+\textbf{Question 3.} La suite $(u_n)$ est géométrique de premier terme $u_0 = 3$ et de raison $q = 2$. On calcule $S = u_0 + u_1 + u_2 + u_3 + u_4$ (cinq termes, de $u_0$ à $u_4$, donc $n = 4$) :
+\[
+S = u_0 \times \frac{1 - q^{n+1}}{1 - q} = 3 \times \frac{1 - 2^{4+1}}{1 - 2} = 3 \times \frac{1 - 32}{-1} = 3 \times \frac{-31}{-1} = 3 \times 31 = 93.
+\]
+
+On retrouve bien $S = 93$. \checkmark
+
+\medskip
+\textit{Vérification par calcul direct :} $u_0 + u_1 + u_2 + u_3 + u_4 = 3 + 6 + 12 + 24 + 48 = 93$. \checkmark
+
+\end{corrige}

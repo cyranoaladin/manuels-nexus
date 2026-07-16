@@ -1,0 +1,32 @@
+% META: {"id":"1SPE-DERLOCAL-CO-023","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-023","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve
+% a = symbols('a')
+% # Tangente en a : y = 2ax - a^2
+% # Passe par (0,0) : 0 = -a^2, donc a = 0
+% sol = solve(Eq(-a**2, 0), a)
+% assert sol == [0]
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-023}
+
+\textbf{Question 1.} On a $f(a) = a^2$ et $f'(a) = 2a$. L'équation de la tangente $T_a$ au point d'abscisse $a$ est :
+\[
+y = f'(a)(x - a) + f(a) = 2a(x - a) + a^2 = 2ax - 2a^2 + a^2.
+\]
+D'où $\boxed{T_a : y = 2ax - a^2}$.
+
+\textbf{Question 2.} La tangente $T_a$ passe par $O(0\,;\,0)$ si et seulement si, en remplaçant $x$ par $0$ et $y$ par $0$ dans l'équation de $T_a$ :
+\[
+0 = 2a \times 0 - a^2 \iff 0 = -a^2 \iff a^2 = 0 \iff a = 0.
+\]
+La seule valeur est $\boxed{a = 0}$.
+
+\textbf{Question 3.} Pour $a = 0$ : $f(0) = 0$ et $f'(0) = 0$. L'équation de la tangente $T_0$ est :
+\[
+y = 2 \times 0 \times x - 0^2 = 0.
+\]
+La tangente est la droite d'équation $\boxed{y = 0}$, c'est-à-dire l'axe des abscisses.
+
+\textbf{Remarque :} ce résultat est cohérent car la courbe de $f(x) = x^2$ admet un minimum en $x = 0$ et la tangente en ce point est horizontale.
+
+\end{corrige}

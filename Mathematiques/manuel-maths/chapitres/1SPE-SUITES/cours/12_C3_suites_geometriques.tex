@@ -1,0 +1,129 @@
+% META: {"id": "1SPE-SUITES-CR-012", "chapitre": "1SPE-SUITES", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+
+\section{Suites géométriques}
+
+% ============================================================
+% STRATE 1 — Définitions et propriétés fondamentales
+% ============================================================
+
+\definition[5]{
+Une suite $(u_n)$ est dite \textbf{géométrique} s'il existe un réel $q \neq 0$, appelé \textbf{raison}, tel que
+\[
+  u_{n+1} = q \cdot u_n \quad \text{pour tout } n \in \mathbb{N}.
+\]
+Autrement dit, on passe d'un terme au suivant en multipliant toujours par le même réel non nul $q$.
+
+\textbf{Remarque.} On suppose de plus $u_0 \neq 0$ (et donc $u_n \neq 0$ pour tout $n$) afin que la raison soit bien définie comme le quotient $\dfrac{u_{n+1}}{u_n}$.
+}
+
+\exemple{
+La suite $(u_n)$ définie par $u_0 = 2$ et $u_{n+1} = 3 u_n$ est géométrique de raison $q = 3$.
+
+On calcule : $u_0 = 2$, $u_1 = 6$, $u_2 = 18$, $u_3 = 54$.
+
+On vérifie : $\dfrac{u_1}{u_0} = 3$, $\dfrac{u_2}{u_1} = 3$, $\dfrac{u_3}{u_2} = 3$.
+}
+
+\contreexemple{
+La suite $(v_n)$ définie par $v_0 = 1$, $v_1 = 2$, $v_2 = 6$, $v_3 = 24$ n'est \emph{pas} géométrique :
+$\dfrac{v_1}{v_0} = 2$ mais $\dfrac{v_2}{v_1} = 3$.
+Le quotient de deux termes consécutifs n'est pas constant.
+}
+
+\propriete[2]{
+Si $(u_n)$ est une suite géométrique de premier terme $u_0 \neq 0$ et de raison $q \neq 0$, alors pour tout entier naturel $n$ :
+\[
+  u_n = u_0 \times q^n.
+\]
+Plus généralement, pour tous entiers naturels $n$ et $p$ :
+\[
+  u_n = u_p \times q^{n-p}.
+\]
+Cette formule s'appelle la \textbf{formule explicite} (ou terme général) de la suite géométrique.
+}
+
+\exemple{
+Soit $(u_n)$ géométrique de raison $q = \dfrac{1}{2}$ et de premier terme $u_0 = 16$.
+
+Formule explicite : $u_n = 16 \times \left(\dfrac{1}{2}\right)^n$.
+
+On calcule directement : $u_4 = 16 \times \left(\dfrac{1}{2}\right)^4 = 16 \times \dfrac{1}{16} = 1$.
+
+Si on connaît $u_2 = 4$ et $q = \dfrac{1}{2}$, on peut aussi écrire $u_n = 4 \times \left(\dfrac{1}{2}\right)^{n-2}$, ce qui donne le même résultat.
+}
+
+\contreexemple{
+La suite $(w_n)$ définie par $w_n = 2^n + 1$ n'est pas géométrique :
+$\dfrac{w_1}{w_0} = \dfrac{3}{2}$ mais $\dfrac{w_2}{w_1} = \dfrac{5}{3}$.
+Le quotient n'est pas constant, même si $w_n$ contient une puissance de $2$.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs fréquentes
+% ============================================================
+
+\margeAppui{
+\textbf{Rappel du tableau comparatif :}
+
+\smallskip
+\begin{tabular}{@{}lll@{}}
+\hline
+ & \textbf{Arithmétique} & \textbf{Géométrique} \\
+\hline
+Passage & $+\, r$ & $\times\, q$ \\
+Terme général & $u_0 + nr$ & $u_0 \times q^n$ \\
+Graphe & Points alignés & Courbe en $q^n$ \\
+Lien continu & Fonction affine & Fonction exponentielle \\
+\hline
+\end{tabular}
+}
+
+\erreurFrequente{
+\textbf{Oubli de vérifier que les termes sont non nuls avant de calculer le quotient.}
+
+Pour montrer qu'une suite est géométrique, on calcule $\dfrac{u_{n+1}}{u_n}$. Ce quotient n'a de sens que si $u_n \neq 0$.
+
+Si l'énoncé ne précise pas $u_0 \neq 0$, il faut commencer par vérifier (ou supposer) que tous les termes sont non nuls. En particulier, une suite géométrique ne peut pas avoir de terme nul.
+}
+
+\erreurFrequente{
+\textbf{Confusion entre $q^n$ et $q^{n-1}$ dans la formule explicite.}
+
+La formule est $u_n = u_0 \times q^n$ (exposant $n$, indice du terme), \emph{pas} $u_0 \times q^{n-1}$.
+
+L'exposant $n-1$ apparaît uniquement si on prend $u_1$ comme terme initial : $u_n = u_1 \times q^{n-1}$.
+
+\textbf{Moyen de ne pas confondre :} vérifier le cas $n = 0$ — on doit obtenir $u_0 \times q^0 = u_0$. Si le résultat ne coïncide pas avec le terme initial, la formule est fausse.
+}
+
+\erreurFrequente{
+\textbf{Représentation graphique : ne pas relier les points.}
+
+Les termes d'une suite géométrique représentés par les points $(n\,;\,u_n)$ suivent une courbe en exponentielle, mais restent des points \emph{isolés} (la suite n'est définie que sur $\mathbb{N}$). On ne trace jamais de courbe continue pour représenter une suite.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+\textbf{Modèle exponentiel discret.}
+
+Une suite géométrique de raison $q > 0$ et de premier terme $u_0 > 0$ peut être vue comme la version \emph{discrète} de la fonction exponentielle $f(x) = u_0 \times q^x$.
+
+En effet, si on pose $f(n) = u_0 \times q^n$, les valeurs prises sur $\mathbb{N}$ coïncident avec les termes de la suite.
+
+La différence fondamentale : la fonction exponentielle est définie sur $\mathbb{R}$ (on peut calculer $f(1{,}5)$), tandis que la suite n'est définie que pour des entiers naturels.
+
+Ce lien est central en modélisation :
+\begin{itemize}
+  \item Un capital placé à intérêts composés à un taux $t$ par période évolue selon la suite géométrique de raison $q = 1 + t$ (voir Offre B de la situation d'accroche).
+  \item Une population dont l'effectif est multiplié par $q$ chaque année suit le même modèle.
+\end{itemize}
+
+Lorsque $0 < q < 1$, la suite décroît vers $0$ : on parle de \emph{décroissance exponentielle discrète} (exemple : décroissance radioactive modélisée par période).
+
+Lorsque $q > 1$, la suite croît vers $+\infty$ : on parle de \emph{croissance exponentielle discrète}.
+
+Ces comportements à long terme seront étudiés rigoureusement dans le cadre de la notion de limite de suite (capacité C8, programme de terminale).
+}

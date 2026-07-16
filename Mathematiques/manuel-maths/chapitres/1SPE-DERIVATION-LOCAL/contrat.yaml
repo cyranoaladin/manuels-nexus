@@ -1,0 +1,26 @@
+chapitre: 1SPE-DERIVATION-LOCAL
+niveau: 1SPE
+theme: DERIVATION-LOCAL
+titre: "Dérivation : point de vue local"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-DERIVATION-LOCAL-C1, libelle_eleve: "Je sais calculer et interpréter un taux de variation et la pente d'une sécante." }
+  - { code: C2, ref_capacite: 1SPE-DERIVATION-LOCAL-C2, libelle_eleve: "Je sais interpréter un nombre dérivé comme une pente ou une vitesse instantanée." }
+  - { code: C3, ref_capacite: 1SPE-DERIVATION-LOCAL-C3, libelle_eleve: "Je sais lire un nombre dérivé sur un graphique et construire la tangente correspondante." }
+  - { code: C4, ref_capacite: 1SPE-DERIVATION-LOCAL-C4, libelle_eleve: "Je sais écrire l'équation d'une tangente à partir de l'abscisse, de l'image et du nombre dérivé." }
+  - { code: C5, ref_capacite: 1SPE-DERIVATION-LOCAL-C5, libelle_eleve: "Je sais approcher f(a+h) avec l'approximation linéaire au voisinage de a." }
+
+prerequis:
+  - { code: R1, libelle: "Calculer une image et lire une image sur une courbe", chapitre_origine: "2GT" }
+  - { code: R2, libelle: "Calcul littéral : développer, factoriser et simplifier une fraction", chapitre_origine: "2GT" }
+  - { code: R3, libelle: "Coefficient directeur et équation d'une droite", chapitre_origine: "2GT" }
+  - { code: R4, libelle: "Fonctions carré et inverse", chapitre_origine: "2GT" }
+  - { code: R5, libelle: "Calculer une vitesse moyenne à partir d'une distance et d'une durée", chapitre_origine: "2GT" }
+
+situation_accroche: >
+  Un vélo équipé d'un capteur fournit la distance parcourue en fonction du temps.
+  Comment déterminer sa vitesse exacte à l'instant t = 12 s, alors que les mesures
+  disponibles donnent seulement des vitesses moyennes sur de courts intervalles ?
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 7 }

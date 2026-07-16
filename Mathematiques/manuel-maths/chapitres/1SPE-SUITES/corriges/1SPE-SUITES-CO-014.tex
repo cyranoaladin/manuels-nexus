@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-SUITES-CO-014", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-014", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u0, r = 3, 5
+% u = u0 + n*r
+% diff = u.subs(n, n+1) - u
+% assert diff.simplify() == 5
+% # diff > 0 pour tout n => suite strictement croissante
+% assert diff > 0
+% # Verification sur quelques valeurs
+% assert u.subs(n, 0) == 3
+% assert u.subs(n, 1) == 8
+% assert u.subs(n, 2) == 13
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-014}
+
+\commentaireMarge{Pour étudier les variations d'une suite définie par une expression explicite, on calcule $u_{n+1} - u_n$ et on étudie son signe.}
+
+\textbf{Question 1.} On calcule $u_{n+1} - u_n$ :
+\[
+u_{n+1} - u_n = \bigl(3 + 5(n+1)\bigr) - (3 + 5n) = 3 + 5n + 5 - 3 - 5n = 5.
+\]
+
+Donc $u_{n+1} - u_n = 5$ pour tout $n \in \mathbb{N}$.
+
+\textbf{Question 2.} Puisque $u_{n+1} - u_n = 5 > 0$ pour tout $n \in \mathbb{N}$, la différence est strictement positive.
+
+\commentaireMarge{Si $u_{n+1} - u_n > 0$ pour tout $n$, alors $u_{n+1} > u_n$ pour tout $n$, ce qui signifie que la suite est strictement croissante.}
+
+\textbf{Question 3.} Comme $u_{n+1} - u_n = 5 > 0$ pour tout $n \in \mathbb{N}$, on conclut que la suite $(u_n)$ est \textbf{strictement croissante}.
+
+\medskip
+\textit{Remarque.} On peut aussi le voir directement : $u_n = 3 + 5n$ est une fonction affine croissante de $n$ (coefficient directeur $5 > 0$). La suite est d'ailleurs arithmétique de premier terme $u_0 = 3$ et de raison $r = 5 > 0$.
+
+\end{corrige}

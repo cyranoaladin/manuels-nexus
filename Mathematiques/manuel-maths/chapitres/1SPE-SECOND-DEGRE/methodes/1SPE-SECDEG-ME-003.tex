@@ -1,0 +1,78 @@
+% META: {"id": "1SPE-SECDEG-ME-003", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Résoudre une équation du second degré}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « résoudre » une équation de la forme
+  $ax^2 + bx + c = 0$, de « déterminer les racines » d'un trinôme, ou de « trouver les
+  antécédents d'une valeur » par une fonction polynôme du second degré.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Je mets l'équation sous la forme $ax^2 + bx + c = 0$ (avec $a \neq 0$) en développant
+      et en ramenant tout d'un même côté si nécessaire.
+    \item J'identifie les coefficients $a$, $b$, $c$.
+    \item Je calcule le discriminant : $\Delta = b^2 - 4ac$.
+    \item Je conclus selon le signe de $\Delta$ :
+      \begin{itemize}
+        \item \textbf{Si $\Delta < 0$ :} l'équation n'a \textbf{pas de solution réelle}.
+        \item \textbf{Si $\Delta = 0$ :} l'équation a \textbf{une solution (double)} :
+          $x_0 = -\dfrac{b}{2a}$.
+        \item \textbf{Si $\Delta > 0$ :} l'équation a \textbf{deux solutions distinctes} :
+          $x_1 = \dfrac{-b - \sqrt{\Delta}}{2a}$ \quad et \quad $x_2 = \dfrac{-b + \sqrt{\Delta}}{2a}$.
+      \end{itemize}
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Résoudre dans $\mathbb{R}$ l'équation $3x^2 - 5x + 2 = 0$.
+
+  \medskip
+  \commentaireMarge{Identifier $a$, $b$, $c$.}%
+  On a $a = 3$, $b = -5$, $c = 2$.
+
+  \commentaireMarge{Calculer $\Delta = b^2 - 4ac$.}%
+  \[
+    \Delta = (-5)^2 - 4 \times 3 \times 2 = 25 - 24 = 1.
+  \]
+
+  \commentaireMarge{$\Delta = 1 > 0$ : deux solutions distinctes.}%
+  Comme $\Delta > 0$, l'équation admet deux solutions :
+  \[
+    x_1 = \frac{-(-5) - \sqrt{1}}{2 \times 3} = \frac{5 - 1}{6} = \frac{4}{6} = \frac{2}{3},
+  \]
+  \[
+    x_2 = \frac{-(-5) + \sqrt{1}}{2 \times 3} = \frac{5 + 1}{6} = \frac{6}{6} = 1.
+  \]
+
+  \commentaireMarge{Conclure.}%
+  L'ensemble des solutions est $S = \left\{\dfrac{2}{3}\,;\,1\right\}$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Se tromper de signe dans $-b$ : si $b = -5$, alors $-b = +5$.
+      Écrire $-b = -5$ dans la formule est une erreur fréquente.
+    \item \textbf{Piège 2.} Diviser par $2a$ au lieu de $2 \times a$ : ne pas oublier que
+      le dénominateur est $2a$ (et non $2 + a$ ni $a$ seul).
+    \item \textbf{Piège 3.} Conclure à l'absence de solution dès que le discriminant est négatif,
+      mais oublier de préciser « dans $\mathbb{R}$ ». Si le contexte porte sur les réels, écrire
+      $S = \varnothing$ et ne pas calculer de racines imaginaires.
+  \end{itemize}
+}
+
+\verifier{%
+  Substituer chaque solution trouvée dans l'équation de départ et vérifier que l'égalité est
+  bien satisfaite.
+  Ici :
+  \begin{itemize}
+    \item $x_1 = \dfrac{2}{3}$ : $3 \times \dfrac{4}{9} - 5 \times \dfrac{2}{3} + 2 = \dfrac{4}{3} - \dfrac{10}{3} + \dfrac{6}{3} = 0$ \checkmark
+    \item $x_2 = 1$ : $3 \times 1 - 5 \times 1 + 2 = 0$ \checkmark
+  \end{itemize}
+  On peut aussi vérifier les relations de Viète : $x_1 + x_2 = \dfrac{2}{3} + 1 = \dfrac{5}{3} = -\dfrac{b}{a}$ \checkmark
+  et $x_1 \times x_2 = \dfrac{2}{3} = \dfrac{c}{a}$ \checkmark.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

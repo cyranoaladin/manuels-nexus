@@ -1,0 +1,38 @@
+% META: {"id": "1SPE-SUITES-EX-038", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C6"], "capacites_codes": ["C3", "C6"], "methodes": ["M3", "M6"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 22, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"V0": {"domaine": "entier", "min": 10000, "max": 50000}, "taux": {"domaine": "rationnel", "contrainte": "0.05<=taux<=0.20"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-038.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-038.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% V0 = 18000
+% q = Rational(88, 100)  # depreciation 12% par an
+% V = V0 * q**n
+% assert V.subs(n, 0) == 18000
+% ratio = simplify(V.subs(n, n+1) / V)
+% assert ratio == Rational(88, 100)
+% # V_3 = 18000 * 0.88^3 = 18000 * 0.681472 = 12266.496
+% V3 = float(V0 * q**3)
+% assert abs(V3 - 12266.496) < 0.01
+% # Seuil V_n <= 9000 : 0.88^n <= 0.5 => n >= log(0.5)/log(0.88)
+% import math
+% n_seuil = math.ceil(math.log(0.5)/math.log(0.88))
+% assert n_seuil == 6
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-038}{2}{22}
+Théo achète un véhicule d'occasion à $18\,000$~\euro{}. Ce véhicule perd $12\,\%$ de sa valeur chaque année. On note $V_n$ la valeur du véhicule (en euros) après $n$ années.
+
+\begin{enumerate}
+  \item Expliquer pourquoi $V_0 = 18\,000$, puis exprimer $V_{n+1}$ en fonction de $V_n$.
+
+  \item Montrer que $(V_n)$ est une suite géométrique. Préciser sa raison $q$ et son premier terme.
+
+  \item Exprimer $V_n$ en fonction de $n$.
+
+  \item Calculer $V_3$ (arrondi à l'euro). Interpréter dans le contexte du problème.
+
+  \item Théo souhaite revendre son véhicule avant que sa valeur ne tombe en dessous de $9\,000$~\euro{}.
+  \begin{enumerate}
+    \item Écrire une inéquation traduisant cette condition.
+    \item Montrer par essais successifs (ou en utilisant $\log_{10}(0{,}88) \approx -0{,}0555$ et $\log_{10}(0{,}5) \approx -0{,}301$) que la valeur passe en dessous de $9\,000$~\euro{} lors de la $7^e$ année.
+    \item Conclure : au bout de combien d'années Théo doit-il vendre au plus tard son véhicule ?
+  \end{enumerate}
+\end{enumerate}
+\end{exercice}

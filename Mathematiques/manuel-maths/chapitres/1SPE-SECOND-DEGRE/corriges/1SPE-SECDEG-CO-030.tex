@@ -1,0 +1,82 @@
+% META: {"id": "1SPE-SECDEG-CO-030", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-030", "capacites_codes": ["C3", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, sqrt
+% t = symbols('t')
+% h = -t**2 + 6*t + 7
+% # h(0)
+% assert h.subs(t, 0) == 7
+% # h(t) = 0 : delta = 36 + 28 = 64
+% delta_h = 6**2 - 4*(-1)*7
+% assert delta_h == 64
+% sols_h = sorted(solve(h, t))
+% assert sols_h == [-1, 7]
+% # h > 3 => -t^2 + 6t + 4 > 0
+% g = -t**2 + 6*t + 4
+% delta_g = 36 + 16
+% assert delta_g == 52
+% sols_g = sorted(solve(g, t))
+% t1 = 3 - sqrt(13)
+% t2 = 3 + sqrt(13)
+% assert sols_g[0] == t1
+% assert sols_g[1] == t2
+% # Sur [0;7] : ]3-sqrt(13) ; 3+sqrt(13)[ inter [0;7]
+% # 3 - sqrt(13) ~ -0.61 < 0 et 3 + sqrt(13) ~ 6.61 < 7
+% import math
+% assert math.isclose(float(t1), -0.606, abs_tol=0.01)
+% assert math.isclose(float(t2), 6.606, abs_tol=0.01)
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-030}
+
+\textbf{1. Résolution de $h(t) = 0$.}
+
+\commentaireMarge{$a=-1$, $b=6$, $c=7$ ; calculer $\Delta$.}
+
+$h(t) = -t^2 + 6t + 7$ : on a $a = -1$, $b = 6$, $c = 7$.
+\[\Delta = 6^2 - 4 \times (-1) \times 7 = 36 + 28 = 64.\]
+
+\[t_1 = \frac{-6 - 8}{-2} = \frac{-14}{-2} = 7 \qquad \text{et} \qquad t_2 = \frac{-6 + 8}{-2} = \frac{2}{-2} = -1.\]
+
+Les deux solutions sont $t = -1$ et $t = 7$. Comme $t \geqslant 0$, seule la solution $t = 7$ est physiquement valide : l'objet retouche le sol après $\mathbf{7}$ secondes.
+
+\medskip
+\textbf{2. Calcul de $h(0)$ et interprétation.}
+
+\commentaireMarge{$h(0)$ est la hauteur initiale.}
+
+\[h(0) = -(0)^2 + 6(0) + 7 = 7.\]
+
+À $t = 0$, l'objet se trouve à $7$~m de hauteur. C'est la hauteur de lancement.
+
+\medskip
+\textbf{3. Résolution de $h(t) > 3$.}
+
+\commentaireMarge{Ramener à $-t^2 + 6t + 4 > 0$.}
+
+$h(t) > 3 \iff -t^2 + 6t + 7 > 3 \iff -t^2 + 6t + 4 > 0$.
+
+On pose $g(t) = -t^2 + 6t + 4$, avec $a = -1$, $b = 6$, $c = 4$.
+\[\Delta = 36 - 4 \times (-1) \times 4 = 36 + 16 = 52.\]
+
+\[t_1 = \frac{-6 - \sqrt{52}}{-2} = 3 - \sqrt{13} \qquad \text{et} \qquad t_2 = \frac{-6 + \sqrt{52}}{-2} = 3 + \sqrt{13}.\]
+
+(On utilise $\sqrt{52} = 2\sqrt{13}$.)
+
+Comme $a = -1 < 0$, $g(t) > 0$ entre ses racines : $t \in \left]3 - \sqrt{13}\,;\,3 + \sqrt{13}\right[$.
+
+\medskip
+\textbf{4. Ensemble de solutions sur $[0\,;\,7]$.}
+
+\commentaireMarge{Intersection de l'intervalle solution avec le domaine physique.}
+
+On calcule les valeurs approchées : $3 - \sqrt{13} \approx -0{,}61$ et $3 + \sqrt{13} \approx 6{,}61$.
+
+En intersectant avec $[0\,;\,7]$ :
+
+$3 - \sqrt{13} < 0$ donc la borne inférieure devient $0$.
+
+$3 + \sqrt{13} \approx 6{,}61 < 7$ donc la borne supérieure reste $3 + \sqrt{13}$.
+
+L'objet se trouve à plus de $3$~m du sol pour $t \in \left[0\,;\,3 + \sqrt{13}\right[$.
+
+\baremeIndicatif{Q1 : 2 pts (calculer, raisonner) ; Q2 : 1 pt (calculer, modeliser) ; Q3 : 3 pts (calculer) ; Q4 : 2 pts (raisonner, communiquer)}
+\end{corrige}

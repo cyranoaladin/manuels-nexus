@@ -1,0 +1,36 @@
+% META: {"id":"1SPE-DERLOCAL-CO-017","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-017","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve
+% a = symbols('a')
+% # Tangente en a : y = 2a(x-a) + a^2 = 2ax - a^2
+% # Passe par (0,-1) : -1 = -a^2 => a^2 = 1
+% sol = solve(Eq(-a**2, -1), a)
+% assert set(sol) == {1, -1}
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-017}
+
+\textbf{Question 1.} On a $f(0) = 0^2 = 0 \neq -1$, donc le point $P(0\,;\,-1)$ n'appartient pas à la courbe $\mathcal{P}$.
+
+\textbf{Question 2.} On a $f(a) = a^2$ et $f'(a) = 2a$. L'équation de la tangente $T_a$ au point d'abscisse $a$ est :
+\[
+y = f'(a)(x - a) + f(a) = 2a(x - a) + a^2 = 2ax - 2a^2 + a^2.
+\]
+D'où $\boxed{T_a : y = 2ax - a^2}$.
+
+\textbf{Question 3.} La tangente $T_a$ passe par $P(0\,;\,-1)$ si et seulement si les coordonnées de $P$ vérifient l'équation de $T_a$ :
+\[
+-1 = 2a \times 0 - a^2 \iff -1 = -a^2 \iff a^2 = 1.
+\]
+On obtient $a = 1$ ou $a = -1$.
+
+\textbf{Question 4.} Les deux points de la parabole où la tangente passe par $P$ sont :
+\begin{itemize}
+  \item pour $a = 1$ : le point de coordonnées $(1\,;\,f(1)) = (1\,;\,1)$, avec la tangente $y = 2x - 1$ ;
+  \item pour $a = -1$ : le point de coordonnées $(-1\,;\,f(-1)) = (-1\,;\,1)$, avec la tangente $y = -2x - 1$.
+\end{itemize}
+
+\textbf{Vérification :} $2 \times 0 - 1 = -1$ et $-2 \times 0 - 1 = -1$. Les deux tangentes passent bien par $P(0\,;\,-1)$. \checkmark
+
+Les points cherchés sont $\boxed{(1\,;\,1)}$ et $\boxed{(-1\,;\,1)}$.
+
+\end{corrige}

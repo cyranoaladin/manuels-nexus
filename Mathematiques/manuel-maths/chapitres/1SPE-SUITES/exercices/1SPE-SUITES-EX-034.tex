@@ -1,0 +1,42 @@
+% META: {"id": "1SPE-SUITES-EX-034", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C6", "1SPE-SUITES-C7"], "capacites_codes": ["C6", "C7"], "methodes": ["M6", "M7"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"K0": {"domaine": "entier", "min": 1000, "max": 5000}, "taux": {"domaine": "rationnel", "contrainte": "0.02<=taux<=0.08"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-034.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-034.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols
+% n = symbols('n', integer=True, nonneg=True)
+% K0 = 2000
+% q = Rational(105, 100)
+% K = K0 * q**n
+% assert K.subs(n, 0) == 2000
+% assert K.subs(n, 1) == 2100
+% # Seuil : K_n >= 3000 => 2000 * 1.05^n >= 3000 => 1.05^n >= 1.5
+% # log(1.5)/log(1.05) ~ 8.31 => n = 9
+% import math
+% n_seuil = math.ceil(math.log(1.5) / math.log(1.05))
+% assert n_seuil == 9
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-034}{2}{25}
+Kévin place $2\,000$~\euro{} sur un compte d'épargne rémunéré au taux annuel de $5\,\%$. On note $K_n$ le capital disponible (en euros) après $n$ années.
+
+\begin{enumerate}
+  \item Modéliser la situation. Montrer que $(K_n)$ est une suite géométrique et exprimer $K_n$ en fonction de $n$.
+
+  \item Calculer $K_5$ (arrondi au centime). Interpréter.
+
+  \item On souhaite déterminer le plus petit entier $n$ tel que $K_n \geq 3\,000$.
+  \begin{enumerate}
+    \item Traduire cette condition sous la forme d'une inéquation faisant intervenir $n$.
+    \item Compléter et expliquer le programme Python suivant, qui utilise une boucle \texttt{while} pour trouver ce rang :
+
+\medskip
+\texttt{K = 2000}\\
+\texttt{n = 0}\\
+\texttt{while K < 3000:}\\
+\hspace*{1.5em}\texttt{K = \ldots}\\
+\hspace*{1.5em}\texttt{n = n + 1}\\
+\texttt{print(n, K)}
+
+\medskip
+    \item Exécuter mentalement les trois premiers tours de boucle pour vérifier le fonctionnement du programme.
+    \item Donner le résultat affiché et l'interpréter.
+  \end{enumerate}
+\end{enumerate}
+\end{exercice}

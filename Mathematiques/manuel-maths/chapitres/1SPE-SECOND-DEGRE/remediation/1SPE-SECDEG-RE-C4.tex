@@ -1,0 +1,208 @@
+% META: {"id": "1SPE-SECDEG-RE-C4", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4
+% Factoriser un trinome et etudier son signe
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrige pas a pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C4-EX1}{1}{8}
+Soit $f(x) = 2x^2 - 2x - 12$.
+\begin{enumerate}
+  \item Calculer $\Delta$ et les racines $x_1$, $x_2$.
+  \item Ecrire la forme factorisee $f(x) = a(x - x_1)(x - x_2)$.
+  \item Dresser le tableau de signes de $f$.
+  \item Resoudre $f(x) \leq 0$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, expand, factor
+% x = symbols('x')
+% f = 2*x**2 - 2*x - 12
+% Delta = (-2)**2 - 4*2*(-12)
+% assert Delta == 100
+% from sympy import sqrt as Sqrt
+% x1 = Rational(2 - 10, 4)
+% x2 = Rational(2 + 10, 4)
+% assert x1 == -2
+% assert x2 == 3
+% assert f.subs(x, x1) == 0
+% assert f.subs(x, x2) == 0
+% fac = 2*(x - (-2))*(x - 3)
+% assert expand(fac) == f
+% # signe : f <= 0 sur [-2;3]
+% assert f.subs(x, 0) < 0   # dans [-2;3]
+% assert f.subs(x, 4) > 0   # hors de [-2;3]
+% assert f.subs(x, -3) > 0  # hors de [-2;3]
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C4-EX1}
+
+\textbf{Question 1.} $a = 2$, $b = -2$, $c = -12$.
+\[
+\Delta = 4 + 96 = 100. \quad \sqrt{\Delta} = 10.
+\]
+\[
+x_1 = \frac{2 - 10}{4} = -2, \qquad x_2 = \frac{2 + 10}{4} = 3.
+\]
+
+\commentaireMarge{Forme factorisee : $f(x) = a(x - x_1)(x - x_2)$. Ne pas oublier $a = 2$.}
+
+\textbf{Question 2.}
+\[
+f(x) = 2(x - (-2))(x - 3) = 2(x + 2)(x - 3).
+\]
+Verification : $2(x+2)(x-3) = 2(x^2 - x - 6) = 2x^2 - 2x - 12$. \checkmark
+
+\textbf{Question 3. Tableau de signes :}
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ & & $3$ & & $+\infty$ \\
+\hline
+$x+2$ & & $-$ & $0$ & $+$ & $+$ & $+$ & \\
+$x-3$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+$2$ & & $+$ & $+$ & $+$ & $+$ & $+$ & \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 4.} $f(x) \leq 0$ sur $[-2\,;\,3]$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C4-EX2}{1}{8}
+Soit $g(x) = x^2 + 2x + 5$.
+\begin{enumerate}
+  \item Calculer $\Delta$.
+  \item Que conclure sur le signe de $g(x)$ ?
+  \item Resoudre $g(x) > 0$.
+  \item Justifier que $g(x) + 1 > 0$ pour tout $x \in \mathbb{R}$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$\Delta = 4 - 20 = -16 < 0$ et $a = 1 > 0$. Rappel : si $\Delta < 0$ et $a > 0$, le trinome est du meme signe que $a$ partout.}
+
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% g = x**2 + 2*x + 5
+% Delta = 2**2 - 4*1*5
+% assert Delta == -16
+% assert Delta < 0
+% # g positif partout : verifier quelques valeurs
+% assert g.subs(x, 0) == 5   # > 0
+% assert g.subs(x, -1) == 4  # > 0
+% assert g.subs(x, 10) == 115 # > 0
+% # g + 1 positif
+% assert (g + 1).subs(x, 0) == 6 > 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C4-EX2}
+
+\textbf{Question 1.} $a = 1$, $b = 2$, $c = 5$. $\Delta = 4 - 20 = -16 < 0$.
+
+\commentaireMarge{Regle : $\Delta < 0$ et $a > 0$ $\Rightarrow$ $f(x) > 0$ pour tout $x \in \mathbb{R}$.}
+
+\textbf{Question 2.} Comme $\Delta < 0$ et $a = 1 > 0$, le trinome $g(x)$ est strictement positif pour tout $x \in \mathbb{R}$.
+
+\textbf{Question 3.} $g(x) > 0$ pour tout $x \in \mathbb{R}$, donc l'ensemble solution est $\mathbb{R}$.
+
+\textbf{Question 4.} Comme $g(x) > 0$ pour tout $x$, on a $g(x) + 1 > 0 + 1 = 1 > 0$ pour tout $x$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C4-EX3}{1}{10}
+\begin{enumerate}
+  \item Factoriser $h(x) = x^2 - 7x + 10$ et dresser son tableau de signes.
+  \item Resoudre $h(x) \geq 0$ et $h(x) < 0$.
+  \item Factoriser $k(x) = -2x^2 + 6x - 4$ et dresser son tableau de signes.
+  \item Resoudre $k(x) \geq 0$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, expand
+% x = symbols('x')
+% h = x**2 - 7*x + 10
+% Delta_h = 49 - 40
+% assert Delta_h == 9
+% x1_h, x2_h = 2, 5
+% assert h.subs(x, x1_h) == 0
+% assert h.subs(x, x2_h) == 0
+% fac_h = (x - 2)*(x - 5)
+% assert expand(fac_h) == h
+% # h >= 0 : exterieur des racines
+% assert h.subs(x, 3) < 0  # entre 2 et 5
+% assert h.subs(x, 0) > 0  # avant 2
+% assert h.subs(x, 6) > 0  # apres 5
+% k = -2*x**2 + 6*x - 4
+% Delta_k = 36 - 32
+% assert Delta_k == 4
+% x1_k = 1
+% x2_k = 2
+% assert k.subs(x, x1_k) == 0
+% assert k.subs(x, x2_k) == 0
+% fac_k = -2*(x - 1)*(x - 2)
+% assert expand(fac_k) == k
+% # k >= 0 : entre 1 et 2 (a < 0)
+% assert k.subs(x, 1.5) > 0
+% assert k.subs(x, 0) < 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C4-EX3}
+
+\textbf{Question 1.} $\Delta = 49 - 40 = 9$. $x_1 = (7-3)/2 = 2$, $x_2 = (7+3)/2 = 5$.
+$h(x) = (x-2)(x-5)$.
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $2$ & & $5$ & & $+\infty$ \\
+\hline
+$x-2$ & & $-$ & $0$ & $+$ & $+$ & $+$ & \\
+$x-5$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+\hline
+$h(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 2.} $h(x) \geq 0$ sur $]-\infty\,;\,2] \cup [5\,;\,+\infty[$. \quad $h(x) < 0$ sur $]2\,;\,5[$.
+
+\textbf{Question 3.} $k(x) = -2x^2 + 6x - 4$ : $a = -2$, $\Delta = 36 - 32 = 4$.
+$x_1 = (6-2)/(2 \times 2) = 1$, $x_2 = (6+2)/4 = 2$.
+$k(x) = -2(x-1)(x-2)$.
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $2$ & & $+\infty$ \\
+\hline
+$-2$ & & $-$ & $-$ & $-$ & $-$ & $-$ & \\
+$x-1$ & & $-$ & $0$ & $+$ & $+$ & $+$ & \\
+$x-2$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+\hline
+$k(x)$ & & $-$ & $0$ & $+$ & $0$ & $-$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 4.} $k(x) \geq 0$ sur $[1\,;\,2]$.
+
+\end{corrige}

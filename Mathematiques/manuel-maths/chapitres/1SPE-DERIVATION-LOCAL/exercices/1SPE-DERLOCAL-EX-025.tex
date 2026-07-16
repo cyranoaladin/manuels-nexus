@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-DERLOCAL-EX-025","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":1,"competences":["calculer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-025.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-025.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # f(x) = -x^2 + 6x - 3, f(4) = -16+24-3 = 5, f'(x) = -2x+6, f'(4) = -2
+% approx = 5 + (-2) * Rational(3, 100)
+% assert approx == Rational(494, 100)
+% exact = -(Rational(403,100))**2 + 6*Rational(403,100) - 3
+% assert abs(exact - approx) < Rational(1, 100)
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-025}{1}{8}
+Soit $f(x)=-x^2+6x-3$. On admet que $f'(x)=-2x+6$.
+
+\begin{enumerate}
+  \item Calculer $f(4)$ et $f'(4)$.
+  \item En utilisant l'approximation linéaire, donner une valeur approchée de $f(4{,}03)$.
+  \item Calculer la valeur exacte de $f(4{,}03)$ et comparer.
+\end{enumerate}
+\end{exercice}

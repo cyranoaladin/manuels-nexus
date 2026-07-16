@@ -1,0 +1,130 @@
+% META: {"id": "1SPE-SECDEG-CO-040", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-040", "capacites_codes": ["C1", "C2", "C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% t = symbols('t', real=True, nonneg=True)
+% x_sym = symbols('x', real=True, nonneg=True)
+% v0 = 20
+% theta = pi/4
+% g_val = 10
+% h0 = 2
+% vx = v0 * cos(theta)
+% vy = v0 * sin(theta)
+% assert simplify(vx - 10*sqrt(2)) == 0
+% assert simplify(vy - 10*sqrt(2)) == 0
+% y_t = h0 + vy*t - Rational(g_val, 2)*t**2
+% y_t = 2 + 10*sqrt(2)*t - 5*t**2
+% t_star = sqrt(2)
+% y_max = y_t.subs(t, t_star)
+% assert simplify(y_max - 12) == 0
+% x_at_tstar = 10*sqrt(2)*t_star
+% assert simplify(x_at_tstar - 20) == 0
+% y_x = 2 + x_sym - x_sym**2 / 40
+% assert y_x.subs(x_sym, 0) == 2
+% assert y_x.subs(x_sym, 20) == 12
+% # Portee : y(x) = 0 => -x^2/40 + x + 2 = 0 => x^2 - 40x - 80 = 0
+% portee_eq = x_sym**2 - 40*x_sym - 80
+% Delta_p = 1600 + 320
+% assert Delta_p == 1920
+% # sqrt(1920) = sqrt(64*30) = 8*sqrt(30)
+% assert simplify(sqrt(1920) - 8*sqrt(30)) == 0
+% r_pos = (40 + 8*sqrt(30)) / 2
+% assert simplify(r_pos - (20 + 4*sqrt(30))) == 0
+% import math
+% assert abs(float(r_pos) - 41.9) < 0.2
+% # Q5 : obstacle a x=30, h=3 : y(30) = 2 + 30 - 900/40 = 32 - 22.5 = 9.5
+% y_30 = 2 + 30 - 30**2/40
+% assert abs(y_30 - 9.5) < 0.01
+% assert y_30 > 3  # passe au-dessus
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-040}
+
+\textbf{1. Mise en équation.}
+
+\textit{a) Calcul des composantes de la vitesse initiale.}
+
+\commentaireMarge{$\cos(45°) = \sin(45°) = \dfrac{\sqrt{2}}{2}$.}
+
+\[v_0 \cos(45°) = 20 \times \frac{\sqrt{2}}{2} = 10\sqrt{2}\,\text{m/s}.\]
+
+\[v_0 \sin(45°) = 10\sqrt{2}\,\text{m/s}.\]
+
+\textit{b) Expressions de $x(t)$ et $y(t)$.}
+
+\[x(t) = 10\sqrt{2}\,t \qquad \text{et} \qquad y(t) = 2 + 10\sqrt{2}\,t - 5t^2.\]
+
+\medskip
+\textbf{2. Hauteur maximale.}
+
+\textit{a) Identification des coefficients.}
+
+\commentaireMarge{$y(t) = -5t^2 + 10\sqrt{2}\,t + 2$ : trinôme du second degré en $t$.}
+
+$y(t) = -5t^2 + 10\sqrt{2}\,t + 2$ : $a = -5$, $b = 10\sqrt{2}$, $c = 2$.
+
+\textit{b) Forme canonique.}
+
+\[\alpha = -\frac{10\sqrt{2}}{2 \times (-5)} = \frac{10\sqrt{2}}{10} = \sqrt{2}.\]
+
+\[\beta = y(\sqrt{2}) = 2 + 10\sqrt{2} \cdot \sqrt{2} - 5 \times 2 = 2 + 20 - 10 = 12.\]
+
+\[y(t) = -5(t - \sqrt{2})^2 + 12.\]
+
+La hauteur maximale est $\beta = \mathbf{12}$~m.
+
+\textit{c) Instant et position horizontale.}
+
+\commentaireMarge{Maximum en $t^* = \sqrt{2} \approx 1{,}41$~s.}
+
+Le maximum est atteint à $t^* = \sqrt{2}$~s.
+
+Position horizontale : $x(t^*) = 10\sqrt{2} \times \sqrt{2} = 20$~m.
+
+\medskip
+\textbf{3. Équation de la trajectoire.}
+
+\textit{a) Exprimer $t$ en fonction de $x$.}
+
+\commentaireMarge{$x = 10\sqrt{2}\,t \implies t = \dfrac{x}{10\sqrt{2}}$.}
+
+De $x(t) = 10\sqrt{2}\,t$ : $t = \dfrac{x}{10\sqrt{2}}$.
+
+\textit{b) Substitution dans $y(t)$.}
+
+\[y = 2 + 10\sqrt{2} \cdot \frac{x}{10\sqrt{2}} - 5 \times \left(\frac{x}{10\sqrt{2}}\right)^2 = 2 + x - 5 \times \frac{x^2}{200} = 2 + x - \frac{x^2}{40}.\]
+
+Donc $y(x) = -\dfrac{x^2}{40} + x + 2$. \hfill $\square$
+
+\textit{c) Interprétation.}
+
+La trajectoire est une parabole car $y$ est une fonction polynomiale de degré $2$ en $x$ (coefficient de $x^2$ non nul).
+
+\medskip
+\textbf{4. Portée.}
+
+\textit{a) Équation $y(x) = 0$.}
+
+\commentaireMarge{Multiplier par $-40$ pour obtenir une équation à coefficients entiers.}
+
+$-\dfrac{x^2}{40} + x + 2 = 0 \iff x^2 - 40x - 80 = 0$.
+
+$\Delta = 1600 + 320 = 1920 = 64 \times 30$, donc $\sqrt{\Delta} = 8\sqrt{30}$.
+
+\textit{b) Portée (valeur positive).}
+
+\[x = \frac{40 + 8\sqrt{30}}{2} = 20 + 4\sqrt{30}.\]
+
+$4\sqrt{30} \approx 4 \times 5{,}477 \approx 21{,}9$, donc la portée est $\approx 41{,}9$~m.
+
+\medskip
+\textbf{5. Question ouverte : obstacle à $x = 30$~m.}
+
+\commentaireMarge{Calculer $y(30)$ et comparer à $3$~m.}
+
+$y(30) = -\dfrac{900}{40} + 30 + 2 = -22{,}5 + 32 = 9{,}5$~m.
+
+Comme $9{,}5 > 3$, le ballon passe \textbf{bien au-dessus} de l'obstacle.
+
+Avec un angle plus faible (ex. $30°$), la trajectoire serait moins haute mais plus longue, ce qui pourrait permettre ou non de passer l'obstacle selon les valeurs — un raisonnement qualitatif indique qu'un angle plus faible réduirait la hauteur à $x = 30$~m et risquerait de faire percuter l'obstacle.
+
+\baremeIndicatif{Q1 : 2 pts (calculer) ; Q2 : 3 pts (calculer, raisonner) ; Q3 : 3 pts (chercher, calculer, communiquer) ; Q4 : 3 pts (calculer) ; Q5 : 3 pts (chercher, raisonner, communiquer)}
+\end{corrige}

@@ -1,0 +1,167 @@
+% META: {"id": "1SPE-SECDEG-RE-C3", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3
+% Calculer le discriminant et resoudre une equation du second degre
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrige pas a pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C3-EX1}{1}{8}
+Resoudre l'equation $2x^2 - 7x + 3 = 0$.
+\begin{enumerate}
+  \item Identifier $a$, $b$, $c$.
+  \item Calculer $\Delta = b^2 - 4ac$.
+  \item Determiner le nombre de solutions et les calculer si elles existent.
+  \item Verifier en substituant les solutions dans l'equation.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, Rational, solve
+% x = symbols('x')
+% f = 2*x**2 - 7*x + 3
+% Delta = (-7)**2 - 4*2*3
+% assert Delta == 25
+% x1 = Rational(7 - 5, 4)
+% x2 = Rational(7 + 5, 4)
+% assert x1 == Rational(1, 2)
+% assert x2 == 3
+% assert f.subs(x, x1) == 0
+% assert f.subs(x, x2) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C3-EX1}
+
+\commentaireMarge{Identifier $a$, $b$, $c$ dans $ax^2 + bx + c$.}
+
+\textbf{Question 1.} $a = 2$, $b = -7$, $c = 3$.
+
+\commentaireMarge{Formule : $\Delta = b^2 - 4ac = (-7)^2 - 4 \times 2 \times 3$.}
+
+\textbf{Question 2.}
+\[
+\Delta = (-7)^2 - 4 \times 2 \times 3 = 49 - 24 = 25.
+\]
+
+\commentaireMarge{$\Delta = 25 > 0$ : deux racines reelles distinctes. $\sqrt{25} = 5$.}
+
+\textbf{Question 3.} $\Delta = 25 > 0$, donc deux racines :
+\[
+x_1 = \frac{7 - 5}{4} = \frac{2}{4} = \frac{1}{2}, \qquad
+x_2 = \frac{7 + 5}{4} = \frac{12}{4} = 3.
+\]
+
+\textbf{Question 4.} Verification :
+\[
+f\!\left(\tfrac{1}{2}\right) = 2 \times \tfrac{1}{4} - 7 \times \tfrac{1}{2} + 3 = \tfrac{1}{2} - \tfrac{7}{2} + 3 = -3 + 3 = 0. \checkmark
+\]
+\[
+f(3) = 2 \times 9 - 7 \times 3 + 3 = 18 - 21 + 3 = 0. \checkmark
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C3-EX2}{1}{8}
+Pour chacune des equations suivantes, calculer $\Delta$ et resoudre.
+\begin{enumerate}
+  \item $x^2 - 6x + 9 = 0$
+  \item $x^2 + x + 1 = 0$
+  \item $3x^2 - 5x - 2 = 0$
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour l'equation (1) : $\Delta = (-6)^2 - 4 \times 1 \times 9 = 36 - 36 = 0$. Qu'est-ce que $\Delta = 0$ implique pour le nombre de solutions ?}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve
+% x = symbols('x')
+% # Eq 1
+% Delta1 = (-6)**2 - 4*1*9
+% assert Delta1 == 0
+% sol1 = solve(x**2 - 6*x + 9, x)
+% assert sol1 == [3]  # racine double
+% # Eq 2
+% Delta2 = 1**2 - 4*1*1
+% assert Delta2 == -3
+% # pas de racine reelle
+% assert len(solve(x**2 + x + 1, x)) == 0 or not all(s.is_real for s in solve(x**2 + x + 1, x))
+% # Eq 3
+% Delta3 = (-5)**2 - 4*3*(-2)
+% assert Delta3 == 49
+% x1 = Rational(5-7, 6)
+% x2 = Rational(5+7, 6)
+% assert x1 == Rational(-1, 3)
+% assert x2 == 2
+% f3 = 3*x**2 - 5*x - 2
+% assert f3.subs(x, x1) == 0
+% assert f3.subs(x, x2) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C3-EX2}
+
+\commentaireMarge{Trois cas : $\Delta > 0$ (deux racines), $\Delta = 0$ (une racine double), $\Delta < 0$ (pas de racine reelle).}
+
+\textbf{Question 1.} $a = 1$, $b = -6$, $c = 9$. $\Delta = 36 - 36 = 0$.
+Racine double : $x_0 = \dfrac{6}{2} = 3$. L'ensemble des solutions est $\{3\}$.
+
+\textbf{Question 2.} $a = 1$, $b = 1$, $c = 1$. $\Delta = 1 - 4 = -3 < 0$.
+Aucune racine reelle. L'ensemble des solutions est $\emptyset$.
+
+\textbf{Question 3.} $a = 3$, $b = -5$, $c = -2$. $\Delta = 25 + 24 = 49 > 0$. $\sqrt{49} = 7$.
+\[
+x_1 = \frac{5 - 7}{6} = \frac{-2}{6} = -\frac{1}{3}, \qquad
+x_2 = \frac{5 + 7}{6} = \frac{12}{6} = 2.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C3-EX3}{1}{10}
+\begin{enumerate}
+  \item Resoudre $x^2 - 5x + 4 = 0$.
+  \item Resoudre $2x^2 + 4x + 2 = 0$.
+  \item Determiner les valeurs de $k$ pour lesquelles $x^2 - 4x + k = 0$ admet deux racines distinctes.
+  \item Application : un rectangle a un perimetre de $14$ cm. Si on note $x$ la longueur, l'equation de l'aire $A = 21$ s'ecrit $x(7-x) = 21$. Montrer que cela conduit a $x^2 - 7x + 21 = 0$ et conclure sur l'existence de solutions.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational
+% x, k = symbols('x k')
+% # Q1
+% sols1 = sorted(solve(x**2 - 5*x + 4, x))
+% assert sols1 == [1, 4]
+% # Q2 : Delta = 16-16=0, racine double x=-1
+% Delta2 = 4**2 - 4*2*2
+% assert Delta2 == 0
+% sols2 = solve(2*x**2 + 4*x + 2, x)
+% assert sols2 == [-1]
+% # Q3 : Delta = 16 - 4k > 0 => k < 4
+% # Q4 : x^2 - 7x + 21 = 0, Delta = 49 - 84 = -35 < 0
+% Delta4 = 49 - 4*1*21
+% assert Delta4 == -35
+% assert Delta4 < 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C3-EX3}
+
+\textbf{Question 1.} $\Delta = 25 - 16 = 9 > 0$. $x_1 = (5-3)/2 = 1$, $x_2 = (5+3)/2 = 4$.
+
+\textbf{Question 2.} $2x^2 + 4x + 2 = 2(x^2 + 2x + 1) = 2(x+1)^2$. On peut aussi calculer $\Delta = 16 - 16 = 0$, racine double $x_0 = -4/4 = -1$.
+
+\textbf{Question 3.} $\Delta = (-4)^2 - 4 \times 1 \times k = 16 - 4k$. Deux racines distinctes $\Leftrightarrow \Delta > 0 \Leftrightarrow 16 - 4k > 0 \Leftrightarrow k < 4$.
+
+\textbf{Question 4.} $x(7-x) = 21 \Leftrightarrow 7x - x^2 = 21 \Leftrightarrow x^2 - 7x + 21 = 0$.
+$\Delta = 49 - 84 = -35 < 0$ : pas de solution reelle. Un tel rectangle n'existe pas.
+
+\end{corrige}

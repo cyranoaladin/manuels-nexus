@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-DERIVATION-LOCAL-CR-014","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"cours","capacites_codes":["C5"],"sources_inspiration":[],"status":"generated"}
+\section{Approximation linéaire}
+\definition[Approximation linéaire]{Si $f$ admet un nombre dérivé en $a$ et si $h$ est proche de $0$, la valeur $f(a+h)$ peut être approchée par
+\[
+f(a+h)\approx f(a)+f'(a)h.
+\]
+Cette approximation utilise l'ordonnée de la tangente au voisinage de $a$.}
+\exemple{Pour $f(x)=x^2$, au voisinage de $3$, $f(3{,}02)\approx9+6\times0{,}02=9{,}12$.}
+\contreexemple{Ce n'est pas une égalité : $3{,}02^2=9{,}1204$, différent de $9{,}12$.}
+\propriete[Choix de $h$]{L'approximation est conçue pour un incrément $h$ petit. Elle est d'autant plus pertinente que $a+h$ est proche de $a$.}
+\exemple{Pour approcher $f(4{,}03)$ au voisinage de $4$, on choisit $h=0{,}03$.}
+\contreexemple{Approcher $f(10)$ au voisinage de $4$ avec $h=6$ ne relève plus d'une approximation locale fiable.}
+\begin{nxfigure}{Zoom local : courbe et tangente au voisinage de $a$}
+\begin{tikzpicture}
+\begin{axis}[nexus,
+  xmin=1.5, xmax=2.8, ymin=1.8, ymax=3.2,
+  xlabel=$x$, ylabel=$y$,
+  xtick={1.6,1.8,2,2.2,2.4,2.6}, ytick={2,2.2,...,3},
+  tick label style={font=\scriptsize}]
+  % Courbe f(x) = 0.5*x^2 + 0.5
+  \addplot[courbe,domain=1.4:2.8,samples=60] {0.5*x^2 + 0.5};
+  % Tangente en a=2 : f(2)=2.5, f'(2)=2
+  \addplot[tangente,domain=1.5:2.7] {2*(x-2) + 2.5};
+  \addplot[point] coordinates {(2,2.5)};
+  % Montrer l'écart en a+h = 2.3
+  \addplot[point,nxVert] coordinates {(2.3, {0.5*2.3^2+0.5})};
+  \addplot[point,nxOr] coordinates {(2.3, {2*(2.3-2)+2.5})};
+  \draw[nxRouge,line width=0.5pt,<->] (axis cs:2.35,{0.5*2.3^2+0.5}) -- node[right,font=\scriptsize] {écart} (axis cs:2.35,{2*(2.3-2)+2.5});
+  \node[anchor=north east,font=\scriptsize,nxBleu] at (axis cs:2,2.5) {$a$};
+  \node[anchor=south west,font=\scriptsize,nxGris] at (axis cs:2.3,{2*(2.3-2)+2.5}) {$f(a)+f'(a)h$};
+  \node[anchor=north west,font=\scriptsize,nxVert] at (axis cs:2.3,{0.5*2.3^2+0.5}) {$f(a+h)$};
+\end{axis}
+\end{tikzpicture}
+\nxcaption{Au voisinage de $a$, la tangente approxime la courbe : l'écart est petit quand $h$ est petit.}
+\end{nxfigure}
+
+\margeAppui{La formule est l'équation de la tangente évaluée en $a+h$ : remplacer $x$ par $a+h$ donne immédiatement $f(a)+f'(a)h$.}
+\margeAppui{Avant de calculer, écrire explicitement $a+h$ : cela évite d'oublier le facteur $h$.}
+\erreurFrequente{\textbf{Copie fautive :} $f(a+h)=f(a)+f'(a)h$. \textbf{Correction :} écrire $\approx$ ; l'écart exact n'est pas étudié dans ce chapitre.}
+\erreurFrequente{\textbf{Copie fautive :} $f(a+h)\approx f(a)+f'(a)$. \textbf{Correction :} la variation dépend de $h$ ; il faut multiplier la pente par l'écart horizontal.}
+\approfondissement{Sur la courbe de $f$, le point d'abscisse $a+h$ est proche du point de la tangente d'abscisse $a+h$. Cette lecture géométrique explique le signe : si $f'(a)<0$ et $h>0$, l'estimation est inférieure à $f(a)$.}

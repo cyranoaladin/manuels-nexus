@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-DERLOCAL-EX-012","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":3,"competences":["raisonner","chercher","communiquer"],"duree_min":20,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-012.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-012.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, sqrt
+% h = symbols('h', nonzero=True, positive=True)
+% # f(x) = 1/x, f'(1) = -1
+% taux = simplify((1/(1+h) - 1)/h)
+% assert simplify(taux + 1/(1+h)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-012}{3}{20}
+Soit $f(x)=\dfrac{1}{x}$ définie sur $]0\,;\,+\infty[$.
+\begin{enumerate}
+  \item Vérifier que, pour $h\ne 0$ et $1+h>0$ :
+  \[
+  \frac{f(1+h)-f(1)}{h}=\frac{-1}{1+h}.
+  \]
+  \item En déduire $f'(1)$.
+  \item Déterminer l'équation de la tangente à la courbe de $f$ au point d'abscisse $1$.
+  \item Cette tangente coupe-t-elle l'axe des abscisses ? Si oui, en quel point ?
+\end{enumerate}
+\end{exercice}

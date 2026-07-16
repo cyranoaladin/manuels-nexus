@@ -1,0 +1,30 @@
+% META: {"id": "1SPE-SECDEG-EX-018", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C6"], "capacites_codes": ["C6"], "methodes": ["M6"], "parcours": 1, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-018.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-018.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve
+% t = symbols('t')
+% # Trajectoire d'un ballon : h(t) = -5t^2 + 20t + 1, t >= 0
+% h = -5*t**2 + 20*t + 1
+% # Hauteur initiale : h(0) = 1
+% assert h.subs(t, 0) == 1
+% # Hauteur maximale : sommet t = -20/(2*(-5)) = 2, h(2) = -20 + 40 + 1 = 21
+% tmax = Rational(-20, 2*(-5))
+% assert tmax == 2
+% assert h.subs(t, tmax) == 21
+% # Quand retombe au sol : h(t) = 0
+% sols = solve(h, t)
+% # t = (20 +- sqrt(400+20)) / (-10) ... on garde t > 0
+% import sympy
+% t_pos = [s for s in sols if s > 0]
+% assert len(t_pos) == 1
+% # valeur approx : t ~ 4.05
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-018}{1}{15}
+Un ballon est lancé verticalement. Sa hauteur $h$ (en mètres) au bout de $t$ secondes est modélisée par :
+\[h(t) = -5t^2 + 20t + 1 \quad (t \geqslant 0).\]
+
+\begin{enumerate}
+  \item Quelle est la hauteur initiale du ballon (à $t = 0$) ?
+  \item Calculer les coordonnées du sommet de la parabole. En déduire la hauteur maximale atteinte et l'instant auquel elle est atteinte.
+  \item Résoudre $h(t) = 0$ dans $\mathbb{R}$. En retenant la solution positive, donner (valeur arrondie au centième) l'instant auquel le ballon touche le sol.
+\end{enumerate}
+\end{exercice}

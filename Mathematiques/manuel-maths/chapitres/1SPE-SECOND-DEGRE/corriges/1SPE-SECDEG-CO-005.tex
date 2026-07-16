@@ -1,0 +1,65 @@
+% META: {"id": "1SPE-SECDEG-CO-005", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-005", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, Rational
+% x = symbols('x')
+% f = 2*(x - 1)**2 - 8
+% assert f.subs(x, 1) == -8
+% assert f.subs(x, 3) == 0
+% assert f.subs(x, -1) == 0
+% f_dev = expand(f)
+% assert f_dev == 2*x**2 - 4*x - 6
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-005}
+
+\textbf{1. Lecture des coordonnées du sommet.}
+
+\commentaireMarge{La forme $a(x-\alpha)^2+\beta$ donne directement $S(\alpha\,;\,\beta)$.}
+
+$f(x) = 2(x-1)^2 - 8$ est déjà sous forme canonique avec $\alpha = 1$ et $\beta = -8$.
+
+Le sommet est $S(1\,;\,-8)$.
+
+\medskip
+\textbf{2. Sens d'ouverture.}
+
+\commentaireMarge{$a > 0 \Rightarrow$ parabole tournée vers le haut.}
+
+On a $a = 2 > 0$, donc la parabole est tournée vers le \textbf{haut}. La fonction admet un \textbf{minimum}.
+
+\medskip
+\textbf{3. Tableau de variations et minimum.}
+
+Puisque $a = 2 > 0$, $f$ est \textbf{décroissante} sur $\left]-\infty\,;\,1\right]$ puis \textbf{croissante} sur $\left[1\,;\,+\infty\right[$.
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & 1 & & +\infty \\
+\hline
+f(x) & & \searrow & -8 & \nearrow & \\
+ & +\infty & & & & +\infty \\
+\hline
+\end{array}
+\]
+
+Le minimum de $f$ est $\mathbf{-8}$, atteint en $x = 1$.
+
+\medskip
+\textbf{4. Forme développée.}
+
+\commentaireMarge{$(x-1)^2 = x^2 - 2x + 1$.}
+
+\[f(x) = 2(x-1)^2 - 8 = 2(x^2 - 2x + 1) - 8 = 2x^2 - 4x + 2 - 8.\]
+
+\[\boxed{f(x) = 2x^2 - 4x - 6.}\]
+
+\medskip
+\textbf{5. Vérification de $f(3) = 0$ et $f(-1) = 0$.}
+
+\commentaireMarge{Substitution directe dans la forme canonique.}
+
+\[f(3) = 2(3-1)^2 - 8 = 2 \times 4 - 8 = 8 - 8 = 0. \quad \checkmark\]
+
+\[f(-1) = 2(-1-1)^2 - 8 = 2 \times 4 - 8 = 8 - 8 = 0. \quad \checkmark\]
+
+\end{corrige}

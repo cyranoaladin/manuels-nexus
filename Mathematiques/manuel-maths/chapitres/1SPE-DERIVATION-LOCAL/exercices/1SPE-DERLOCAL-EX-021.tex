@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERLOCAL-EX-021","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":2,"competences":["calculer","raisonner"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-021.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-021.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve, Rational
+% x = symbols('x')
+% # f(x) = x^2 - 4x + 5, f'(x) = 2x - 4
+% # a = 3 : f(3) = 9 - 12 + 5 = 2, f'(3) = 6 - 4 = 2
+% # Tangente : y = 2(x - 3) + 2 = 2x - 4
+% T = 2*(x - 3) + 2
+% assert T.expand() == 2*x - 4
+% assert T.subs(x, 3) == 2
+% # Coupe Ox : 2x - 4 = 0 => x = 2
+% sol = solve(Eq(T, 0), x)
+% assert sol == [2]
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-021}{2}{12}
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = x^2 - 4x + 5$. On admet que $f'(x) = 2x - 4$.
+
+\begin{enumerate}
+  \item Calculer $f(3)$ et $f'(3)$.
+  \item Écrire l'équation de la tangente $T$ à la courbe de $f$ au point d'abscisse $3$.
+  \item La tangente $T$ coupe-t-elle l'axe des abscisses ? Si oui, déterminer les coordonnées du point d'intersection.
+\end{enumerate}
+\end{exercice}

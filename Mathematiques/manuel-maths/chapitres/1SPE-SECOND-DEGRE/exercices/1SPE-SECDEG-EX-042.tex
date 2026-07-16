@@ -1,0 +1,81 @@
+% META: {"id": "1SPE-SECDEG-EX-042", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECDEG-C2", "1SPE-SECDEG-C3", "1SPE-SECDEG-C6"], "capacites_codes": ["C2", "C3", "C6"], "methodes": ["M2", "M3", "M6"], "parcours": 3, "competences": ["chercher", "raisonner", "modeliser", "communiquer"], "duree_min": 40, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"L_mur": 30, "longueur_cloture": 60}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-042.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-042.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True, positive=True)
+% # Enclos rectangulaire adossé à un mur de longueur 30 m
+% # Un côté de longueur x (parallele au mur, x <= 30)
+% # Deux côtés de longueur y (perpendiculaires au mur)
+% # Cloture disponible : x + 2y = 60 => y = (60 - x)/2 = 30 - x/2
+% # Contrainte : 0 < x <= 30 et y > 0 => x < 60
+% # Donc : 0 < x <= 30
+% y_expr = 30 - x/2
+% # Aire : A(x) = x * y = x*(30 - x/2) = 30x - x^2/2
+% A = x * y_expr
+% A_expanded = expand(A)
+% assert A_expanded == 30*x - x**2/2
+% # Forme canonique : A(x) = -1/2*(x^2 - 60x) = -1/2*(x-30)^2 + 450
+% alpha = 30
+% beta = A_expanded.subs(x, alpha)
+% assert beta == 450
+% A_canon = Rational(-1,2)*(x - 30)**2 + 450
+% assert expand(A_canon) == A_expanded
+% # Maximum : x = 30 m, A_max = 450 m^2
+% # Mais x=30 est la limite de la contrainte (longueur du mur)
+% # Verifier A(30) = 30*30 - 900/2 = 900 - 450 = 450
+% assert A_expanded.subs(x, 30) == 450
+% # Si le mur n'etait pas limite : alpha = 30 qui est exactement la borne => cas limite
+% # Scenario 2 : mur de longueur infinie, meme cloture => x peut aller jusqu'a 60
+% # alors alpha = 30 est interieur, A_max = 450 aussi
+% # Comparaison sans mur : A_rect(x) = x*(30-x) sur ]0,30[ (perimetre 60 sans mur)
+% # Max en x=15, A=225 < 450 => mur double l'aire max
+% A_sans_mur = x*(30-x)
+% assert A_sans_mur.subs(x, 15) == 225
+% assert 450 == 2 * 225
+% # Inegalite A(x) >= 400
+% ineq = A_expanded - 400
+% # -x^2/2 + 30x - 400 >= 0 => x^2 - 60x + 800 <= 0
+% P = x**2 - 60*x + 800
+% Delta = 3600 - 3200
+% assert Delta == 400
+% r1 = Rational(60 - 20, 2)
+% r2 = Rational(60 + 20, 2)
+% assert r1 == 20
+% assert r2 == 40
+% # Contrainte x <= 30 : solution effective [20, 30]
+% assert P.subs(x, 25) < 0  # dans [20, 40]
+% assert P.subs(x, 15) > 0  # hors
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-042}{3}{40}
+\textbf{Problème ouvert : enclos optimal avec mur existant.}
+
+Un agriculteur souhaite clôturer un enclos rectangulaire en utilisant un mur existant de longueur $30$ m comme l'un des côtés. Il dispose de $60$ m de clôture pour les trois autres côtés.
+
+On note $x$ la longueur (en mètres) du côté parallèle au mur, avec $0 < x \leq 30$, et $y$ la longueur des deux côtés perpendiculaires au mur.
+
+\begin{enumerate}
+  \item \textbf{Modélisation.}
+  \begin{enumerate}
+    \item Écrire la relation entre $x$, $y$ et la longueur totale de clôture disponible.
+    \item Exprimer $y$ en fonction de $x$. Vérifier que la contrainte $0 < x \leq 30$ implique $y > 0$.
+    \item Montrer que l'aire de l'enclos est $A(x) = 30x - \dfrac{x^2}{2}$.
+  \end{enumerate}
+
+  \item \textbf{Optimisation.}
+  \begin{enumerate}
+    \item Mettre $A(x)$ sous forme canonique $A(x) = a(x - \alpha)^2 + \beta$.
+    \item La valeur $\alpha$ est-elle dans l'intervalle $]0 ; 30]$ ?
+    \item En déduire l'aire maximale et les dimensions de l'enclos optimal.
+  \end{enumerate}
+
+  \item \textbf{Comparaison sans mur.} Si l'agriculteur n'avait pas de mur et utilisait les $60$ m de clôture pour un enclos rectangulaire complet (quatre côtés), montrer que l'aire maximale serait de $225$ m². Comparer avec le résultat précédent et commenter l'apport du mur.
+
+  \item \textbf{Contrainte d'aire minimale.} On exige que l'enclos ait une aire d'au moins $400$ m².
+  \begin{enumerate}
+    \item Montrer que cela revient à résoudre $x^2 - 60x + 800 \leq 0$.
+    \item Calculer le discriminant et résoudre cette inéquation.
+    \item En tenant compte de la contrainte $0 < x \leq 30$, déterminer les valeurs de $x$ réalisables.
+  \end{enumerate}
+
+  \item \textbf{Question ouverte.} L'agriculteur envisage d'agrandir l'enclos en achetant un supplément de clôture. Il dispose d'un budget permettant d'acheter $L$ mètres supplémentaires (longueur totale disponible : $60 + L$, avec $L > 0$). Exprimer la nouvelle aire maximale en fonction de $L$ et déterminer la valeur minimale de $L$ permettant d'atteindre une aire de $600$ m². Justifier chaque étape de la démarche.
+\end{enumerate}
+\end{exercice}

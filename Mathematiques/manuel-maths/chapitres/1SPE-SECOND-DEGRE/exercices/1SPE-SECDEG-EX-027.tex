@@ -1,0 +1,44 @@
+% META: {"id": "1SPE-SECDEG-EX-027", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C2", "1SPE-SECOND-DEGRE-C6"], "capacites_codes": ["C2", "C6"], "methodes": ["M2", "M6"], "parcours": 2, "competences": ["calculer", "raisonner", "modeliser"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-027.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-027.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve, diff, simplify
+% x = symbols('x')
+% # Volume boite : feuille 16x10, carres de cote x coupes aux coins
+% # V(x) = (16-2x)(10-2x)*x = 4x^3 - 52x^2 + 160x, x in ]0 ; 5[
+% # On etudie seulement la fonction quadratique de la base :
+% # A(x) = (16-2x)*(10-2x) = 4x^2 - 52x + 160
+% A = 4*x**2 - 52*x + 160
+% # Minimum de A (sommet) : x = 52/8 = 6.5, hors domaine ]0;5[
+% # Sur ]0;5[, A est decroissante (a>0, sommet en 6.5 > 5)
+% alpha_A = Rational(52, 8)
+% assert alpha_A == Rational(13, 2)
+% # V(x) = x * A(x), maximum numerique en x ~ 2.06
+% # Pour le maximum de V, on utilise dV/dx = 0
+% # V = 4x^3 - 52x^2 + 160x
+% V = 4*x**3 - 52*x**2 + 160*x
+% dV = diff(V, x)
+% # dV = 12x^2 - 104x + 160 = 4(3x^2 - 26x + 40)
+% sols_dV = solve(dV, x)
+% # x = (26 +- sqrt(676 - 480)) / 6 = (26 +- 14) / 6 => x=40/6 (hors domaine) ou x=2
+% assert Rational(2, 1) in sols_dV
+% assert V.subs(x, 2) == 144
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-027}{2}{20}
+On découpe des carrés de côté $x$~cm aux quatre coins d'une feuille rectangulaire de $16$~cm sur $10$~cm, puis on relève les bords pour former une boîte ouverte.
+
+On note $V(x)$ le volume (en cm$^3$) de la boîte, avec $0 < x < 5$.
+
+\begin{enumerate}
+  \item \textbf{(C6)} Exprimer les dimensions de la base de la boîte en fonction de $x$.
+  \item \textbf{(C6)} Montrer que $V(x) = 4x^3 - 52x^2 + 160x$.
+
+  \textit{On admet ici que $V$ n'est pas un polynôme du second degré. On s'intéresse à la \textbf{base} de la boîte.}
+
+  \item \textbf{(C2)} Soit $A(x) = (16-2x)(10-2x)$ l'aire de la base.
+  \begin{enumerate}
+    \item Développer $A(x)$ et identifier la forme obtenue.
+    \item Calculer les coordonnées du sommet de la parabole représentant $A$.
+    \item Dresser le tableau de variations de $A$ sur $]0\,;\,5[$ et interpréter.
+  \end{enumerate}
+  \item \textbf{(C6)} Calculer $V(2)$ et $V(3)$. Quel découpage donne le plus grand volume ?
+\end{enumerate}
+\end{exercice}

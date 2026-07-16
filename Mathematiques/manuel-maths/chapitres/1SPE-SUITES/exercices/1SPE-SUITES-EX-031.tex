@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-SUITES-EX-031", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C3", "1SPE-SUITES-C5"], "capacites_codes": ["C3", "C5"], "methodes": ["M3", "M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {"u0": {"domaine": "entier", "min": 1, "max": 5}, "q": {"domaine": "rationnel", "contrainte": "q>1"}}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-031.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-031.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify, symbols
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 2
+% q = Rational(5, 3)
+% u = u0 * q**n
+% assert u.subs(n, 0) == 2
+% assert u.subs(n, 1) == Rational(10, 3)
+% ratio = simplify(u.subs(n, n+1) / u)
+% assert ratio == Rational(5, 3)
+% # q > 1 => suite croissante
+% assert ratio > 1
+% # u_n croissante : u_{n+1}/u_n = 5/3 > 1
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-031}{2}{20}
+Soit $(u_n)$ la suite définie pour tout entier naturel $n$ par $u_n = 2 \times \left(\dfrac{5}{3}\right)^n$.
+
+\begin{enumerate}
+  \item Montrer que $(u_n)$ est une suite géométrique. Préciser sa raison et son premier terme.
+
+  \item Étudier le sens de variation de $(u_n)$ :
+  \begin{enumerate}
+    \item en calculant et étudiant le quotient $\dfrac{u_{n+1}}{u_n}$ ;
+    \item en calculant et étudiant la différence $u_{n+1} - u_n$ (en factorisant le résultat).
+  \end{enumerate}
+  Vérifier que les deux méthodes donnent la même conclusion.
+
+  \item Montrer que la suite $(v_n)$ définie par $v_n = \ln(u_n)$ est une suite arithmétique. (On rappelle que $\ln(ab) = \ln a + \ln b$ et $\ln(a^n) = n\ln a$.)
+
+  \item En déduire le sens de variation de $(v_n)$ sans nouveau calcul.
+\end{enumerate}
+\end{exercice}

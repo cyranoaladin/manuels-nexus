@@ -1,0 +1,46 @@
+% META: {"id":"1SPE-DERLOCAL-CO-029","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-029","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify
+% h = symbols('h', nonzero=True, positive=True)
+% a = symbols('a', positive=True)
+% # Erreur = 1/(a+h) - (1/a - h/a**2)
+% erreur = 1/(a+h) - (1/a - h/a**2)
+% assert simplify(erreur - h**2/(a**2*(a+h))) == 0
+% # Vérification numérique a=2, h=0.01
+% approx = Rational(1, 2) + Rational(-1, 4) * Rational(1, 100)
+% assert approx == Rational(199, 400)
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-029}
+
+\textbf{Question 1.} On a $f(2) = \dfrac{1}{2}$ et $f'(2) = -\dfrac{1}{4}$. L'approximation linéaire donne :
+\[
+\dfrac{1}{2{,}01} \approx f(2) + f'(2) \times 0{,}01 = \dfrac{1}{2} + \left(-\dfrac{1}{4}\right) \times 0{,}01 = 0{,}5 - 0{,}0025 = \boxed{0{,}4975}.
+\]
+
+\textbf{Question 2.} La valeur exacte est $\dfrac{1}{2{,}01} = \dfrac{100}{201} \approx 0{,}49751$.
+
+\textbf{Question 3.} On calcule l'erreur :
+\[
+E(h) = f(a+h) - f(a) - f'(a) \cdot h = \dfrac{1}{a+h} - \dfrac{1}{a} - \left(-\dfrac{1}{a^2}\right)h = \dfrac{1}{a+h} - \dfrac{1}{a} + \dfrac{h}{a^2}.
+\]
+
+On réduit au même dénominateur $a^2(a+h)$ :
+\[
+E(h) = \dfrac{a^2}{a^2(a+h)} - \dfrac{a(a+h)}{a^2(a+h)} + \dfrac{h(a+h)}{a^2(a+h)}.
+\]
+
+Le numérateur est :
+\[
+a^2 - a(a+h) + h(a+h) = a^2 - a^2 - ah + ah + h^2 = h^2.
+\]
+
+D'où $\boxed{E(h) = \dfrac{h^2}{a^2(a+h)}}$.
+
+\textbf{Question 4.} Avec $a = 2$ et $h = 0{,}01$ :
+\[
+E(0{,}01) = \dfrac{(0{,}01)^2}{4 \times 2{,}01} = \dfrac{0{,}0001}{8{,}04} \approx 0{,}0000124.
+\]
+
+Vérifions : $\dfrac{100}{201} - 0{,}4975 = 0{,}49751\ldots - 0{,}4975 = 0{,}00001\ldots$ \checkmark
+
+\end{corrige}

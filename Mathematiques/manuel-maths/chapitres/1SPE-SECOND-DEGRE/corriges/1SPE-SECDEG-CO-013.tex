@@ -1,0 +1,86 @@
+% META: {"id": "1SPE-SECDEG-CO-013", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-013", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% x = symbols('x')
+% # a) x^2 - x - 6 > 0
+% f = x**2 - x - 6
+% delta_f = (-1)**2 - 4*1*(-6)
+% assert delta_f == 25
+% racines_f = sorted(solve(f, x))
+% assert racines_f == [-2, 3]
+% assert f.subs(x, -3) > 0
+% assert f.subs(x, 0) < 0
+% assert f.subs(x, 4) > 0
+% # b) -x^2 + 4 >= 0
+% g = -x**2 + 4
+% delta_g = 0 - 4*(-1)*4
+% assert delta_g == 16
+% racines_g = sorted(solve(g, x))
+% assert racines_g == [-2, 2]
+% assert g.subs(x, 0) > 0
+% assert g.subs(x, 3) < 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-013}
+
+\textbf{a) $x^2 - x - 6 > 0$.}
+
+\textit{Étape 1 : calcul de $\Delta$.}
+
+\commentaireMarge{$a=1$, $b=-1$, $c=-6$.}
+
+$\Delta = (-1)^2 - 4 \times 1 \times (-6) = 1 + 24 = 25 > 0$.
+
+$\sqrt{\Delta} = 5$.
+
+$x_1 = \dfrac{1 - 5}{2} = -2$, $\quad x_2 = \dfrac{1 + 5}{2} = 3$.
+
+\textit{Étape 2 : tableau de signes.}
+
+\commentaireMarge{$a=1>0$ : $f>0$ à l'extérieur des racines.}
+
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -2 & & 3 & & +\infty \\
+\hline
+f(x) & & + & 0 & - & 0 & + & \\
+\hline
+\end{array}
+\]
+
+\textit{Conclusion :}
+\[\boxed{\mathcal{S} = \left]-\infty\,;\,-2\right[ \cup \left]3\,;\,+\infty\right[.}\]
+
+\medskip
+\textbf{b) $-x^2 + 4 \geqslant 0$.}
+
+\textit{Étape 1 : calcul de $\Delta$.}
+
+\commentaireMarge{$a=-1$, $b=0$, $c=4$.}
+
+$\Delta = 0^2 - 4 \times (-1) \times 4 = 16 > 0$.
+
+$\sqrt{\Delta} = 4$.
+
+$x_1 = \dfrac{0 - 4}{-2} = 2$, $\quad x_2 = \dfrac{0 + 4}{-2} = -2$.
+
+Donc les racines (ordre croissant) sont $-2$ et $2$.
+
+\textit{Étape 2 : tableau de signes.}
+
+\commentaireMarge{$a = -1 < 0$ : $g \geqslant 0$ \emph{entre} les racines.}
+
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & -2 & & 2 & & +\infty \\
+\hline
+g(x) & & - & 0 & + & 0 & - & \\
+\hline
+\end{array}
+\]
+
+\textit{Conclusion :}
+\[\boxed{\mathcal{S} = \left[-2\,;\,2\right].}\]
+
+\end{corrige}

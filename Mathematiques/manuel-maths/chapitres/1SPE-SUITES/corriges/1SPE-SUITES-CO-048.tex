@@ -1,0 +1,153 @@
+% META: {"id": "1SPE-SUITES-CO-048", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-048", "capacites_codes": ["C1", "C3", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% n = symbols('n', integer=True, nonnegative=True)
+% q = Rational(1, 3)
+% u0 = Rational(2)
+% u_n = u0 * q**n
+% assert u_n.subs(n, 0) == 2
+% assert u_n.subs(n, 1) == Rational(2, 3)
+% assert u_n.subs(n, 2) == Rational(2, 9)
+% assert u_n.subs(n, 3) == Rational(2, 27)
+% # Geometrique de raison 1/3
+% ratio = simplify(u_n.subs(n, n+1) / u_n)
+% assert ratio == q
+% # Positivite par recurrence
+% assert u_n.subs(n, 0) > 0
+% # Si u_n > 0, u_{n+1} = u_n/3 > 0
+% # Decroissance : u_{n+1} = u_n/3 < u_n (car 1/3 < 1 et u_n > 0)
+% assert u_n.subs(n, 1) < u_n.subs(n, 0)
+% assert u_n.subs(n, 2) < u_n.subs(n, 1)
+% # Minoration par 0 : u_n = 2*(1/3)^n > 0 pour tout n
+% for k in range(10):
+%     assert u_n.subs(n, k) > 0
+% # Limite
+% assert limit(u_n, n, oo) == 0
+% # Seuil u_n < 10^{-3}
+% # 2*(1/3)^n < 10^{-3} => (1/3)^n < 5*10^{-4}
+% # n*ln(1/3) < ln(5*10^{-4}) => -n*ln(3) < ln(5) + ln(10^{-4})
+% # n > (ln(5) + 4*ln(10)) / ln(3)
+% n_min = math.ceil(math.log(5e-4) / math.log(1/3))
+% assert n_min >= 1
+% assert float(u_n.subs(n, n_min)) < 0.001
+% assert float(u_n.subs(n, n_min - 1)) >= 0.001
+% # ln(2) = 0.693, ln(3) = 1.099
+% # 2*(1/3)^n < 10^{-3} => n > ln(2000)/ln(3)
+% val = math.log(2000) / math.log(3)
+% assert val > 6.8
+% assert n_min == 7
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-048}
+
+\textbf{1. Calcul des premiers termes.}
+
+\[
+u_1 = \frac{u_0}{3} = \frac{2}{3}, \quad u_2 = \frac{u_1}{3} = \frac{2}{9}, \quad u_3 = \frac{u_2}{3} = \frac{2}{27}.
+\]
+
+\textbf{2. Nature de la suite.}
+
+\commentaireMarge{Pour montrer qu'une suite est géométrique, on vérifie que le rapport $\frac{u_{n+1}}{u_n}$ est constant.}
+
+Pour tout entier naturel $n$, $u_{n+1} = \dfrac{u_n}{3}$, donc :
+\[
+\frac{u_{n+1}}{u_n} = \frac{1}{3} \quad \text{(constant, indépendant de } n\text{)}.
+\]
+
+La suite $(u_n)$ est donc \textbf{géométrique} de premier terme $u_0 = 2$ et de raison $q = \dfrac{1}{3}$.
+
+\[
+\boxed{u_n = 2 \times \left(\frac{1}{3}\right)^n.}
+\]
+
+\textit{Vérification :} $u_0 = 2 \times 1 = 2$ \checkmark \quad $u_1 = 2 \times \dfrac{1}{3} = \dfrac{2}{3}$ \checkmark
+
+\textbf{3. Variations.}
+
+\textbf{a) Positivité par récurrence.}
+
+\textit{Initialisation :} $u_0 = 2 > 0$. \checkmark
+
+\textit{Hérédité :} Supposons $u_n > 0$ pour un certain $n \in \mathbb{N}$. Alors :
+\[
+u_{n+1} = \frac{u_n}{3} > 0 \quad \text{(quotient de deux réels positifs).}
+\]
+\checkmark
+
+\textit{Conclusion :} Par le principe de récurrence, $u_n > 0$ pour tout $n \in \mathbb{N}$.
+
+\textbf{b) Décroissance.}
+
+Pour tout $n \in \mathbb{N}$, d'après la question précédente, $u_n > 0$. On a :
+\[
+u_{n+1} = \frac{u_n}{3} < u_n \quad \text{car } \frac{1}{3} < 1 \text{ et } u_n > 0.
+\]
+
+Donc $u_{n+1} < u_n$ pour tout $n \in \mathbb{N}$ : la suite $(u_n)$ est \textbf{strictement décroissante}.
+
+\textbf{4. Convergence.}
+
+\textbf{a) Minoration.}
+
+D'après la question 3a, $u_n > 0$ pour tout $n \in \mathbb{N}$. La suite $(u_n)$ est donc minorée par $0$.
+
+\textbf{b) Limite.}
+
+$(u_n)$ est décroissante et minorée, donc elle converge. Or $u_n = 2 \times \left(\dfrac{1}{3}\right)^n$.
+
+Comme $0 < \dfrac{1}{3} < 1$, on sait que $\left(\dfrac{1}{3}\right)^n \to 0$ quand $n \to +\infty$.
+
+Donc $u_n = 2 \times \left(\dfrac{1}{3}\right)^n \to 2 \times 0 = 0$.
+
+\[
+\lim_{n \to +\infty} u_n = 0.
+\]
+
+\textbf{5. Seuil : $u_n < 10^{-3}$.}
+
+\commentaireMarge{On résout $u_n < 10^{-3}$ en passant au logarithme, en veillant au signe de $\ln(1/3) < 0$.}
+
+\[
+u_n < 10^{-3} \iff 2 \times \left(\frac{1}{3}\right)^n < \frac{1}{1000} \iff \left(\frac{1}{3}\right)^n < \frac{1}{2000}.
+\]
+
+En passant au logarithme (fonction croissante) :
+\[
+n \ln\!\left(\frac{1}{3}\right) < \ln\!\left(\frac{1}{2000}\right) \iff -n\ln 3 < -\ln 2000.
+\]
+
+Comme $\ln 3 > 0$, on divise par $-\ln 3$ en changeant le sens de l'inégalité :
+\[
+n > \frac{\ln 2000}{\ln 3} = \frac{\ln 2 + 3\ln 10}{\ln 3}.
+\]
+
+Calcul numérique avec $\ln 2 \approx 0{,}693$ et $\ln 3 \approx 1{,}099$ (et $\ln 10 \approx 2{,}303$) :
+\[
+\frac{\ln 2000}{\ln 3} \approx \frac{0{,}693 + 3 \times 2{,}303}{1{,}099} = \frac{0{,}693 + 6{,}909}{1{,}099} \approx \frac{7{,}602}{1{,}099} \approx 6{,}92.
+\]
+
+Donc $n > 6{,}92$, d'où $n \geq 7$.
+
+\textit{Vérification :}
+\begin{itemize}
+  \item $u_7 = 2 \times \left(\dfrac{1}{3}\right)^7 = \dfrac{2}{2187} \approx 9{,}15 \times 10^{-4} < 10^{-3}$. \checkmark
+  \item $u_6 = 2 \times \left(\dfrac{1}{3}\right)^6 = \dfrac{2}{729} \approx 2{,}74 \times 10^{-3} > 10^{-3}$. ✗
+\end{itemize}
+
+Le plus petit entier $n$ tel que $u_n < 10^{-3}$ est $\boxed{n = 7}$.
+
+\textbf{6. Généralisation.}
+
+\commentaireMarge{La condition de convergence vers $0$ repose sur le fait que $|r|^n \to 0$ si et seulement si $|r| < 1$.}
+
+Si $u_{n+1} = r\,u_n$ avec $u_0 \neq 0$, alors $u_n = u_0 \times r^n$.
+
+\begin{itemize}
+  \item Si $|r| < 1$ (c'est-à-dire $-1 < r < 1$), alors $r^n \to 0$ quand $n \to +\infty$, donc $u_n \to 0$.
+  \item Si $|r| \geq 1$, la suite $(u_n)$ ne tend pas vers $0$ (elle diverge ou reste constante).
+\end{itemize}
+
+La suite $(u_n)$ converge vers $0$ si et seulement si $\mathbf{-1 < r < 1}$.
+
+\end{corrige}

@@ -1,0 +1,74 @@
+% META: {"id": "1SPE-SECDEG-ME-001", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Passer d'une forme à une autre}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « mettre sous forme canonique »,
+  « développer », « factoriser » un trinôme du second degré, ou lorsqu'on a besoin
+  de la forme canonique pour lire le sommet d'une parabole ou trouver un extremum.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie les coefficients $a$, $b$, $c$ de $f(x) = ax^2 + bx + c$ (avec $a \neq 0$).
+    \item Je calcule l'abscisse du sommet : $\alpha = -\dfrac{b}{2a}$.
+    \item Je calcule l'ordonnée du sommet par l'une des deux méthodes au choix :
+      \begin{itemize}
+        \item \textbf{Méthode directe :} $\beta = f(\alpha)$ (je remplace $x$ par $\alpha$ dans $f$).
+        \item \textbf{Méthode par le discriminant :} $\beta = -\dfrac{\Delta}{4a}$ où $\Delta = b^2 - 4ac$.
+      \end{itemize}
+    \item J'écris la forme canonique : $f(x) = a(x - \alpha)^2 + \beta$.
+    \item \textbf{Pour développer :} je développe $(x - \alpha)^2 = x^2 - 2\alpha x + \alpha^2$
+      puis je multiplie par $a$ et j'ajoute $\beta$.
+    \item \textbf{Pour factoriser :} je calcule $\Delta$, et si $\Delta > 0$, je pose $x_1$ et $x_2$
+      les deux racines, puis $f(x) = a(x - x_1)(x - x_2)$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Soit $f(x) = 2x^2 - 12x + 22$. Mettre $f$ sous forme canonique.
+
+  \medskip
+  \commentaireMarge{Identifier $a$, $b$, $c$.}%
+  On a $a = 2$, $b = -12$, $c = 22$.
+
+  \commentaireMarge{Calculer $\alpha = -\frac{b}{2a}$.}%
+  \[
+    \alpha = -\frac{-12}{2 \times 2} = \frac{12}{4} = 3.
+  \]
+
+  \commentaireMarge{Calculer $\beta = f(\alpha) = f(3)$.}%
+  \[
+    \beta = f(3) = 2 \times 3^2 - 12 \times 3 + 22 = 18 - 36 + 22 = 4.
+  \]
+
+  \commentaireMarge{Écrire la forme canonique.}%
+  \[
+    f(x) = 2(x - 3)^2 + 4.
+  \]
+
+  \medskip
+  \textbf{Vérification par développement :}
+  $2(x-3)^2 + 4 = 2(x^2 - 6x + 9) + 4 = 2x^2 - 12x + 18 + 4 = 2x^2 - 12x + 22$ \checkmark
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Oublier le facteur $a$ dans la forme canonique. On écrit parfois
+      $(x - \alpha)^2 + \beta$ sans le $a$ devant : c'est faux dès que $a \neq 1$.
+    \item \textbf{Piège 2.} Se tromper de signe sur $\alpha$. La formule est $\alpha = -\dfrac{b}{2a}$ :
+      si $b = -12$, alors $\alpha = -\dfrac{-12}{4} = +3$ et non $-3$.
+    \item \textbf{Piège 3.} Lors du calcul de $\beta$ par $f(\alpha)$, oublier d'appliquer la valeur
+      à \emph{tous} les termes de $f$, notamment le terme constant $c$.
+  \end{itemize}
+}
+
+\verifier{%
+  Développer la forme canonique obtenue et vérifier qu'on retrouve la forme développée initiale.
+  Si $f(x) = a(x - \alpha)^2 + \beta$, alors le développement doit donner $ax^2 + bx + c$
+  avec les mêmes coefficients que ceux de départ.
+  De plus, vérifier que $f(\alpha) = \beta$ est bien satisfait.
+}
+
+\sEntrainer{\refExos{M1}}
+
+\end{fichemethode}

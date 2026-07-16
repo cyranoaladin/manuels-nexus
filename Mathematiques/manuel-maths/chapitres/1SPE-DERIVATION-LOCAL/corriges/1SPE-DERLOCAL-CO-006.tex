@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-DERLOCAL-CO-006","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-006","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% h = symbols('h', nonzero=True)
+% taux_f = simplify(((1+h)**2 - 1)/h)
+% assert taux_f == h + 2
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-006}
+\textbf{1.} Pour $f(x)=x^2$ et $g(x)=2x$, avec $a=1$ :
+
+\begin{center}
+\begin{tabular}{c|ccc}
+$h$ & $1$ & $0{,}5$ & $0{,}1$ \\\hline
+$\frac{f(1+h)-f(1)}{h}$ & $\frac{4-1}{1}=3$ & $\frac{2{,}25-1}{0{,}5}=2{,}5$ & $\frac{1{,}21-1}{0{,}1}=2{,}1$ \\[6pt]
+$\frac{g(1+h)-g(1)}{h}$ & $\frac{4-2}{1}=2$ & $\frac{3-2}{0{,}5}=2$ & $\frac{2{,}2-2}{0{,}1}=2$
+\end{tabular}
+\end{center}
+
+\textbf{2.} Le taux de variation de $g$ vaut toujours $2$, quel que soit $h$. Celui de $f$ semble se rapprocher de $2$ lorsque $h$ se rapproche de $0$. Conjecture : les deux taux tendent vers la même valeur $2$.
+
+\textbf{3.} Pour tout $h\ne 0$ :
+\[
+\frac{f(1+h)-f(1)}{h}=\frac{(1+h)^2-1}{h}=\frac{1+2h+h^2-1}{h}=\frac{2h+h^2}{h}=2+h.
+\]
+
+\textbf{4.} Lorsque $h$ se rapproche de $0$, $2+h$ se rapproche de $2$. Le taux de variation de $f$ entre $1$ et $1+h$ tend vers $2$, qui est aussi le taux de variation constant de $g$. Les deux fonctions ont le même comportement local en $a=1$.
+
+\textbf{5.} La tangente à la courbe de $f$ en $a=1$ a pour coefficient directeur $2$. La droite représentant $g$ a aussi pour coefficient directeur $2$ et passe par le point $(1\,;\,2)=(1\,;\,f(1))$. La tangente à la parabole au point d'abscisse $1$ est donc la droite $y=2x$, qui est la droite représentant $g$.
+\end{corrige}

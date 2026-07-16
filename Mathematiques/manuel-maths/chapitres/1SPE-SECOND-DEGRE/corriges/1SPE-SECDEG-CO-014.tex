@@ -1,0 +1,61 @@
+% META: {"id": "1SPE-SECDEG-CO-014", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-014", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational
+% x = symbols('x')
+% # a) 2x^2 - 5x + 2 <= 0
+% f = 2*x**2 - 5*x + 2
+% delta = (-5)**2 - 4*2*2
+% assert delta == 9
+% racines = sorted(solve(f, x))
+% assert racines == [Rational(1,2), 2]
+% assert f.subs(x, 1) < 0
+% assert f.subs(x, 0) > 0
+% assert f.subs(x, 3) > 0
+% # b) x^2 + 1 < 0 : delta = -4 < 0, a > 0 => jamais negatif
+% g = x**2 + 1
+% delta_g = 0 - 4*1*1
+% assert delta_g == -4
+% assert g.subs(x, 0) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-014}
+
+\textbf{a) $2x^2 - 5x + 2 \leqslant 0$.}
+
+\commentaireMarge{$a=2$, $b=-5$, $c=2$.}
+
+$\Delta = (-5)^2 - 4 \times 2 \times 2 = 25 - 16 = 9 > 0$, $\sqrt{\Delta} = 3$.
+
+\[x_1 = \frac{5 - 3}{4} = \frac{1}{2}, \qquad x_2 = \frac{5 + 3}{4} = 2.\]
+
+\textit{Tableau de signes :}
+
+\commentaireMarge{$a=2>0$ : $f \leqslant 0$ entre les racines.}
+
+\[
+\begin{array}{|c|ccccccc|}
+\hline
+x & -\infty & & \tfrac{1}{2} & & 2 & & +\infty \\
+\hline
+f(x) & & + & 0 & - & 0 & + & \\
+\hline
+\end{array}
+\]
+
+\[\boxed{\mathcal{S} = \left[\frac{1}{2}\,;\,2\right].}\]
+
+\medskip
+\textbf{b) $x^2 + 1 < 0$.}
+
+\commentaireMarge{$a=1>0$, $\Delta < 0$ : $f$ est toujours positive.}
+
+$a = 1$, $b = 0$, $c = 1$.
+
+$\Delta = 0 - 4 \times 1 \times 1 = -4 < 0$.
+
+Puisque $\Delta < 0$ et $a = 1 > 0$, le trinôme $x^2 + 1$ n'a \textbf{aucune racine réelle} et est \textbf{strictement positif} pour tout $x \in \mathbb{R}$ (il vaut au minimum $1$ en $x = 0$).
+
+La condition $x^2 + 1 < 0$ n'est donc jamais satisfaite.
+
+\[\boxed{\mathcal{S} = \emptyset.}\]
+
+\end{corrige}

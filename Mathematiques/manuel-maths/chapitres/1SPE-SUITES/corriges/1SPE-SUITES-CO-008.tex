@@ -1,0 +1,44 @@
+% META: {"id": "1SPE-SUITES-CO-008", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-008", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u_5 = 23, r = 4
+% # u_n = u_p + (n-p)*r  =>  u_0 = u_5 + (0-5)*r = 23 + (-5)*4 = 23 - 20 = 3
+% u5 = 23
+% r = 4
+% u0 = u5 + (0 - 5)*r
+% assert u0 == 3
+% n = symbols('n', integer=True, nonnegative=True)
+% u = u0 + n*r
+% assert u.subs(n, 5) == 23
+% assert u.subs(n, 8) == 35
+% # Verification : u_8 = 3 + 8*4 = 3 + 32 = 35
+% assert 3 + 8*4 == 35
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-008}
+
+\commentaireMarge{La relation générale $u_n = u_p + (n-p) \times r$ permet de relier n'importe quel terme au terme de rang $p$.}
+
+\textbf{Question 1.} On applique la relation $u_n = u_p + (n-p) \times r$ avec $p = 5$, $n = 0$, $u_5 = 23$ et $r = 4$ :
+\[
+u_0 = u_5 + (0 - 5) \times r = 23 + (-5) \times 4 = 23 - 20 = 3.
+\]
+
+Donc $u_0 = 3$.
+
+\commentaireMarge{Une fois $u_0$ et $r$ connus, la formule du terme général est immédiate.}
+
+\textbf{Question 2.} La suite $(u_n)$ est arithmétique de premier terme $u_0 = 3$ et de raison $r = 4$. Sa formule du terme général est :
+\[
+u_n = u_0 + n \times r = 3 + 4n.
+\]
+
+\textit{Vérification :} $u_5 = 3 + 4 \times 5 = 3 + 20 = 23$. \checkmark
+
+\textbf{Question 3.} On applique la formule pour $n = 8$ :
+\[
+u_8 = 3 + 4 \times 8 = 3 + 32 = 35.
+\]
+
+Donc $u_8 = 35$.
+
+\end{corrige}

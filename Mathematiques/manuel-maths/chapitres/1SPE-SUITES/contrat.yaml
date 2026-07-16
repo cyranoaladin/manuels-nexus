@@ -1,0 +1,28 @@
+chapitre: 1SPE-SUITES
+niveau: 1SPE
+theme: SUITES
+titre: "Suites numériques"
+statut: draft   # draft -> valide (validation humaine LOT 0)
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-SUITES-C1, libelle_eleve: "Je sais calculer les termes d'une suite (explicite/récurrence), à la main et en Python." }
+  - { code: C2, ref_capacite: 1SPE-SUITES-C2, libelle_eleve: "Je sais montrer qu'une suite est arithmétique et exprimer son terme général." }
+  - { code: C3, ref_capacite: 1SPE-SUITES-C3, libelle_eleve: "Je sais montrer qu'une suite est géométrique et exprimer son terme général." }
+  - { code: C4, ref_capacite: 1SPE-SUITES-C4, libelle_eleve: "Je sais calculer la somme des premiers entiers et d'une suite géométrique." }
+  - { code: C5, ref_capacite: 1SPE-SUITES-C5, libelle_eleve: "Je sais étudier le sens de variation d'une suite par la méthode adaptée." }
+  - { code: C6, ref_capacite: 1SPE-SUITES-C6, libelle_eleve: "Je sais modéliser une situation concrète par une suite." }
+  - { code: C7, ref_capacite: 1SPE-SUITES-C7, libelle_eleve: "Je sais écrire et lire un programme Python (terme, somme, seuil)." }
+
+prerequis:
+  - { code: R1, libelle: "Calcul littéral : développer, factoriser, réduire", chapitre_origine: "2GT" }
+  - { code: R2, libelle: "Pourcentages : coefficient multiplicateur, évolutions successives", chapitre_origine: "2GT" }
+  - { code: R3, libelle: "Fonctions : image, antécédent, sens de variation", chapitre_origine: "2GT" }
+  - { code: R4, libelle: "Inégalités et signe d'une expression", chapitre_origine: "2GT" }
+  - { code: R5, libelle: "Python : variables, boucle for, boucle while (SNT)", chapitre_origine: "SNT" }
+
+situation_accroche: >
+  Deux offres d'épargne : versement fixe mensuel (modèle linéaire) contre intérêts composés
+  (modèle exponentiel). À partir de quand la seconde dépasse-t-elle la première ?
+  Résolue au TD fil rouge avec les outils du chapitre (C2, C3, C6, C7).
+
+temps_estime_h: { parcours1: 14, parcours2: 11, parcours3: 10 }

@@ -1,0 +1,125 @@
+% META: {"id": "1SPE-SUITES-CO-045", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-045", "capacites_codes": ["C1", "C2", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # Suite : u_{n+1} = (1/2)*u_n + 3, u_0 = 5
+% L = Rational(6)
+% assert Rational(1,2)*L + 3 == L
+% u0 = Rational(5)
+% v0 = u0 - L
+% assert v0 == -1
+% q = Rational(1, 2)
+% u_n = L + v0 * q**n
+% assert u_n.subs(n, 0) == 5
+% assert u_n.subs(n, 1) == Rational(11, 2)
+% assert u_n.subs(n, 2) == Rational(23, 4)
+% assert u_n.subs(n, 3) == Rational(47, 8)
+% # Croissance : u_{n+1} - u_n = (1/2)^{n+1} > 0
+% # Croissance verifiee numeriquement
+% for k in range(10):
+%     dk = float(u_n.subs(n, k+1) - u_n.subs(n, k))
+%     assert dk > 0
+%     assert abs(dk - float(q**(k+1))) < 1e-12
+% # Encadrement par recurrence
+% assert u_n.subs(n, 0) >= 5
+% assert u_n.subs(n, 0) < 6
+% assert limit(u_n, n, oo) == 6
+% # Generalisation u0=8
+% v0_new = Rational(8) - L
+% assert v0_new == 2
+% u_n_new = L + v0_new * q**n
+% assert u_n_new.subs(n, 0) == 8
+% assert u_n_new.subs(n, 1) == 7
+% assert u_n_new.subs(n, 2) == Rational(13, 2)
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-045}
+
+\textbf{1. Calcul des premiers termes.}
+
+\[
+u_1 = \frac{1}{2} \times 5 + 3 = \frac{5}{2} + 3 = \frac{11}{2} = 5{,}5.
+\]
+\[
+u_2 = \frac{1}{2} \times \frac{11}{2} + 3 = \frac{11}{4} + 3 = \frac{23}{4} = 5{,}75.
+\]
+\[
+u_3 = \frac{1}{2} \times \frac{23}{4} + 3 = \frac{23}{8} + 3 = \frac{47}{8} = 5{,}875.
+\]
+
+Les valeurs $5 ; 5{,}5 ; 5{,}75 ; 5{,}875$ semblent croître et se rapprocher de $6$. La suite paraît converger vers $6$.
+
+\textbf{2. Point fixe.}
+
+\commentaireMarge{La méthode du point fixe : on cherche $\ell$ tel que $f(\ell) = \ell$, ce qui permet de transformer la suite affine en suite géométrique.}
+
+\textbf{a)} On résout $\dfrac{1}{2}\,\ell + 3 = \ell$ :
+\[
+3 = \ell - \frac{1}{2}\,\ell = \frac{1}{2}\,\ell \implies \ell = 6.
+\]
+
+\textbf{b)} On pose $v_n = u_n - 6$. Calculons $v_{n+1}$ :
+\[
+v_{n+1} = u_{n+1} - 6 = \left(\frac{1}{2}\,u_n + 3\right) - 6 = \frac{1}{2}\,u_n - 3 = \frac{1}{2}(u_n - 6) = \frac{1}{2}\,v_n.
+\]
+
+Pour tout $n \in \mathbb{N}$, $v_{n+1} = \dfrac{1}{2}\,v_n$.
+
+La suite $(v_n)$ est donc \textbf{géométrique} de raison $q = \dfrac{1}{2}$ et de premier terme $v_0 = u_0 - 6 = 5 - 6 = -1$.
+
+\textbf{3. Expression explicite.}
+
+\[
+v_n = v_0 \times q^n = -1 \times \left(\frac{1}{2}\right)^n = -\left(\frac{1}{2}\right)^n.
+\]
+
+Donc :
+\[
+\boxed{u_n = 6 - \left(\frac{1}{2}\right)^n}.
+\]
+
+\textit{Vérification :} $u_0 = 6 - 1 = 5$ \checkmark \quad $u_1 = 6 - \dfrac{1}{2} = \dfrac{11}{2}$ \checkmark
+
+\textbf{4. Variations.}
+
+\textbf{a)} On calcule $u_{n+1} - u_n$ :
+\[
+u_{n+1} - u_n = \left[6 - \left(\frac{1}{2}\right)^{n+1}\right] - \left[6 - \left(\frac{1}{2}\right)^n\right] = \left(\frac{1}{2}\right)^n - \left(\frac{1}{2}\right)^{n+1} = \left(\frac{1}{2}\right)^n \left(1 - \frac{1}{2}\right) = \left(\frac{1}{2}\right)^{n+1}.
+\]
+
+\textbf{b)} Pour tout $n \in \mathbb{N}$, $\left(\dfrac{1}{2}\right)^{n+1} > 0$, donc $u_{n+1} - u_n > 0$.
+
+La suite $(u_n)$ est \textbf{strictement croissante}.
+
+\textbf{5. Encadrement par récurrence.}
+
+\commentaireMarge{La récurrence démontre rigoureusement ce que les calculs numériques laissaient pressentir.}
+
+On montre que $5 \leq u_n < 6$ pour tout $n \in \mathbb{N}$.
+
+\textit{Initialisation :} $u_0 = 5$, donc $5 \leq u_0 = 5 < 6$. \checkmark
+
+\textit{Hérédité :} Supposons $5 \leq u_n < 6$ pour un certain $n \in \mathbb{N}$.
+
+\begin{itemize}
+  \item Minoration : $u_n \geq 5 \implies \dfrac{1}{2}\,u_n \geq \dfrac{5}{2} \implies u_{n+1} = \dfrac{1}{2}\,u_n + 3 \geq \dfrac{5}{2} + 3 = \dfrac{11}{2} > 5$. Donc $u_{n+1} \geq 5$. \checkmark
+  \item Majoration : $u_n < 6 \implies \dfrac{1}{2}\,u_n < 3 \implies u_{n+1} = \dfrac{1}{2}\,u_n + 3 < 3 + 3 = 6$. \checkmark
+\end{itemize}
+
+\textit{Conclusion :} Par le principe de récurrence, pour tout $n \in \mathbb{N}$, $5 \leq u_n < 6$.
+
+\textbf{6. Généralisation avec $u_0 = 8$.}
+
+\commentaireMarge{Le point fixe $\ell = 6$ ne dépend pas de $u_0$ : seul le premier terme de la suite auxiliaire change.}
+
+Le point fixe reste $\ell = 6$. En posant $w_n = u_n - 6$, on obtient de même $w_{n+1} = \dfrac{1}{2}\,w_n$, donc $(w_n)$ est géométrique de raison $\dfrac{1}{2}$ et de premier terme $w_0 = 8 - 6 = 2$.
+
+Ainsi :
+\[
+u_n = 6 + 2 \times \left(\frac{1}{2}\right)^n = 6 + \left(\frac{1}{2}\right)^{n-1}.
+\]
+
+\textit{Variations :} $u_{n+1} - u_n = -\left(\dfrac{1}{2}\right)^{n+1} < 0$ pour tout $n \in \mathbb{N}$.
+
+La suite est \textbf{strictement décroissante} (car $w_0 = 2 > 0$, donc $u_n > 6$ et la suite décroît vers $6$).
+
+\end{corrige}

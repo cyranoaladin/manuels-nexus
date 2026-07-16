@@ -1,0 +1,53 @@
+% META: {"id": "1SPE-SUITES-CO-005", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Suite de Fibonacci : v0=1, v1=1, v_{n+2}=v_{n+1}+v_n
+% v = [1, 1]
+% for k in range(6):
+%     v.append(v[-1] + v[-2])
+% assert v[0] == 1
+% assert v[1] == 1
+% assert v[2] == 2
+% assert v[3] == 3
+% assert v[4] == 5
+% assert v[5] == 8
+% # Suite par recurrence : v_{n+2} depend de v_{n+1} et v_n
+% # Pour v6, il faut v5 et v4
+% assert v[4] == 5
+% assert v[5] == 8
+% assert v[6] == 13
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-005}
+
+\commentaireMarge{Chaque terme est la somme des deux précédents ; on applique la relation de proche en proche.}
+
+\textbf{Question 1.} On applique la relation $v_{n+2} = v_{n+1} + v_n$ en partant de $v_0 = 1$ et $v_1 = 1$.
+
+\[
+v_2 = v_1 + v_0 = 1 + 1 = 2.
+\]
+\[
+v_3 = v_2 + v_1 = 2 + 1 = 3.
+\]
+\[
+v_4 = v_3 + v_2 = 3 + 2 = 5.
+\]
+\[
+v_5 = v_4 + v_3 = 5 + 3 = 8.
+\]
+
+Donc $v_2 = 2$, $v_3 = 3$, $v_4 = 5$ et $v_5 = 8$.
+
+\commentaireMarge{Une suite est définie par récurrence si chaque terme s'exprime en fonction de termes précédents, et non directement en fonction de l'indice.}
+
+\textbf{Question 2.} Cette suite est définie par \textbf{récurrence}, car chaque terme $v_{n+2}$ est exprimé en fonction des deux termes précédents $v_{n+1}$ et $v_n$ : aucune formule ne permet de calculer $v_n$ directement à partir de $n$.
+
+\commentaireMarge{La relation fait intervenir les deux termes précédents, donc les deux sont nécessaires.}
+
+\textbf{Question 3.} Pour calculer $v_6$, on applique la relation avec $n = 4$ :
+\[
+v_6 = v_5 + v_4.
+\]
+Il faut donc connaître \textbf{$v_5$ et $v_4$} (soit $v_5 = 8$ et $v_4 = 5$), ce qui donne $v_6 = 8 + 5 = 13$.
+
+\end{corrige}

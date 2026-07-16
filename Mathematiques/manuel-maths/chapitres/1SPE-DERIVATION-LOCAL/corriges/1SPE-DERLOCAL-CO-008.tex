@@ -1,0 +1,14 @@
+% META: {"id":"1SPE-DERLOCAL-CO-008","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-008","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% h = symbols('h', nonzero=True)
+% taux = simplify((3*(2+h)**2 - 12)/h)
+% assert taux == 3*h + 12
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-008}
+\textbf{1.} On a $f(2)=3\times 4=12$ et $f(2+h)=3(2+h)^2=3(4+4h+h^2)=12+12h+3h^2$.
+
+Donc $\dfrac{f(2+h)-f(2)}{h}=\dfrac{12+12h+3h^2-12}{h}=\dfrac{12h+3h^2}{h}=12+3h$.
+
+\textbf{2.} Lorsque $h$ se rapproche de $0$, $12+3h$ se rapproche de $12$. Donc $f'(2)=12$.
+\end{corrige}

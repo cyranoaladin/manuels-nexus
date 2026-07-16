@@ -1,0 +1,94 @@
+% META: {"id": "1SPE-SUITES-CO-037", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-037", "capacites_codes": ["C1", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% u0 = 20
+% u_vals = [Rational(u0)]
+% for i in range(4):
+%     u_vals.append(u_vals[-1] / 2 + 3)
+% assert u_vals[0] == 20
+% assert u_vals[1] == 13
+% assert u_vals[2] == Rational(19, 2)
+% assert u_vals[3] == Rational(31, 4)
+% # differences: u1-u0 = -7, u2-u1 = -7/2 : pas arithmetique
+% assert u_vals[1] - u_vals[0] == -7
+% assert u_vals[2] - u_vals[1] == Rational(-7, 2)
+% assert u_vals[1] - u_vals[0] != u_vals[2] - u_vals[1]
+% # ratios: u1/u0 = 13/20, u2/u1 = 19/26 : pas geometrique
+% assert u_vals[1] / u_vals[0] == Rational(13, 20)
+% assert u_vals[2] / u_vals[1] == Rational(19, 26)
+% assert u_vals[1] / u_vals[0] != u_vals[2] / u_vals[1]
+% # u_{n+1} - u_n = u_n/2 + 3 - u_n = 3 - u_n/2
+% # < 0 ssi u_n > 6; tous les termes > 6
+% # Point fixe : L = L/2 + 3 => L/2 = 3 => L = 6
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-037}
+
+\textbf{Question 1 — Calcul de $u_1$, $u_2$, $u_3$ et $u_4$.}
+
+\[
+  u_1 = \frac{u_0}{2} + 3 = \frac{20}{2} + 3 = 10 + 3 = 13.
+\]
+\[
+  u_2 = \frac{u_1}{2} + 3 = \frac{13}{2} + 3 = \frac{13}{2} + \frac{6}{2} = \frac{19}{2}.
+\]
+\[
+  u_3 = \frac{u_2}{2} + 3 = \frac{19}{4} + 3 = \frac{19}{4} + \frac{12}{4} = \frac{31}{4}.
+\]
+\[
+  u_4 = \frac{u_3}{2} + 3 = \frac{31}{8} + 3 = \frac{31}{8} + \frac{24}{8} = \frac{55}{8}.
+\]
+
+\medskip
+\textbf{Question 2 — La suite est-elle arithmétique ? Géométrique ?}
+
+\textit{Différences :}
+\[
+  u_1 - u_0 = 13 - 20 = -7, \quad u_2 - u_1 = \frac{19}{2} - 13 = \frac{19 - 26}{2} = -\frac{7}{2}.
+\]
+
+Les deux différences sont différentes ($-7 \neq -\dfrac{7}{2}$) : $(u_n)$ \textbf{n'est pas arithmétique}.
+
+\textit{Quotients :}
+\[
+  \frac{u_1}{u_0} = \frac{13}{20}, \quad \frac{u_2}{u_1} = \frac{19/2}{13} = \frac{19}{26}.
+\]
+
+Les deux quotients sont différents ($\dfrac{13}{20} \neq \dfrac{19}{26}$) : $(u_n)$ \textbf{n'est pas géométrique}.
+
+\commentaireMarge{La relation $u_{n+1} = \dfrac{u_n}{2} + 3$ mélange une dilatation ($\times \frac{1}{2}$) et une translation ($+ 3$) : ce n'est pas une suite standard.}
+
+\medskip
+\textbf{Question 3 — Expression de $u_{n+1} - u_n$ ; déduction.}
+
+\[
+  u_{n+1} - u_n = \left(\frac{u_n}{2} + 3\right) - u_n = 3 - \frac{u_n}{2} = \frac{6 - u_n}{2}.
+\]
+
+Si $u_n > 6$, alors $6 - u_n < 0$, donc $u_{n+1} - u_n = \dfrac{6 - u_n}{2} < 0$, ce qui signifie $u_{n+1} < u_n$.
+
+\commentaireMarge{Tant que $u_n > 6$, chaque terme est strictement inférieur au précédent : la suite descend vers $6$.}
+
+\medskip
+\textbf{Question 4 — Décroissance stricte de $(u_n)$.}
+
+On admet que $u_n > 6$ pour tout $n \in \mathbb{N}$.
+
+D'après la question précédente, pour tout $n \in \mathbb{N}$, $u_n > 6 \implies u_{n+1} - u_n < 0 \implies u_{n+1} < u_n$.
+
+Donc la suite $(u_n)$ est \textbf{strictement décroissante}.
+
+\medskip
+\textbf{Question 5 — Vérification de la limite conjecturée $L = 6$.}
+
+On résout l'équation du point fixe $L = \dfrac{L}{2} + 3$ :
+\[
+  L - \frac{L}{2} = 3 \iff \frac{L}{2} = 3 \iff L = 6.
+\]
+
+\commentaireMarge{Un point fixe $L$ de la relation de récurrence satisfait $L = f(L)$. Si la suite converge, sa limite est nécessairement un point fixe.}
+
+La valeur $L = 6$ est l'unique solution. \textbf{Interprétation :} si la suite $(u_n)$ converge vers une limite $L$, alors en passant à la limite dans la relation $u_{n+1} = \dfrac{u_n}{2} + 3$, on obtient $L = \dfrac{L}{2} + 3$, soit $L = 6$. La conjecture $u_n \to 6$ est donc cohérente avec cette équation.
+
+\baremeIndicatif{Q1 : 2 pts (calculer : quatre termes exacts en fractions) ; Q2 : 2 pts (raisonner : calcul des différences 1 pt + calcul des quotients 1 pt) ; Q3 : 2 pts (calculer, raisonner : calcul de $u_{n+1} - u_n$ 1 pt + déduction avec $u_n > 6$ 1 pt) ; Q4 : 1 pt (raisonner : conclusion par hypothèse admise) ; Q5 : 1 pt (calculer, communiquer : résolution et interprétation)}
+\end{corrige}

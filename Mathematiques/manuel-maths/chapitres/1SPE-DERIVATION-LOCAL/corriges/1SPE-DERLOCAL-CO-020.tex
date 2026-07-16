@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-DERLOCAL-CO-020","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-020","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% T = -2*(x + 1) + 2
+% assert T.expand() == -2*x
+% assert T.subs(x, -1) == 2
+% f = x**2 + 1
+% assert f.subs(x, -1) == 2
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-020}
+
+\textbf{Question 1.} On calcule :
+\[
+f(-1) = (-1)^2 + 1 = 1 + 1 = 2 \qquad \text{et} \qquad f'(-1) = 2 \times (-1) = -2.
+\]
+Donc $\boxed{f(-1) = 2}$ et $\boxed{f'(-1) = -2}$.
+
+\textbf{Question 2.} L'équation de la tangente au point d'abscisse $a = -1$ est :
+\[
+y = f'(-1)\bigl(x - (-1)\bigr) + f(-1) = -2(x + 1) + 2.
+\]
+On développe :
+\[
+y = -2x - 2 + 2 = -2x.
+\]
+L'équation de la tangente est donc $\boxed{y = -2x}$.
+
+\end{corrige}

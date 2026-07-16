@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-DERLOCAL-EX-022","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-LOCAL-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":2,"competences":["calculer","raisonner","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-022.tex","corrige_tex":"chapitres/1SPE-DERIVATION-LOCAL/corriges/1SPE-DERLOCAL-CO-022.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% q = symbols('q')
+% # B(q) = -2q^2 + 120q - 1000
+% # B'(q) = -4q + 120
+% # q = 20 : B(20) = -2*400 + 120*20 - 1000 = -800 + 2400 - 1000 = 600
+% # B'(20) = -4*20 + 120 = -80 + 120 = 40
+% B = -2*q**2 + 120*q - 1000
+% assert B.subs(q, 20) == 600
+% Bp = -4*q + 120
+% assert Bp.subs(q, 20) == 40
+% # Tangente : y = 40(q - 20) + 600 = 40q - 200
+% T = 40*(q - 20) + 600
+% assert T.expand() == 40*q - 200
+% END-VERIFY
+\begin{exercice}{1SPE-DERLOCAL-EX-022}{2}{15}
+Une entreprise fabrique et vend $q$ articles par jour ($q \geqslant 0$). Son bénéfice, en euros, est modélisé par la fonction $B$ définie par :
+\[
+B(q) = -2q^2 + 120q - 1000.
+\]
+On admet que $B'(q) = -4q + 120$.
+
+\begin{enumerate}
+  \item Calculer $B(20)$ et $B'(20)$.
+  \item Écrire l'équation de la tangente $T$ à la courbe de $B$ au point d'abscisse $q = 20$.
+  \item Interpréter le signe de la pente de cette tangente dans le contexte économique (bénéfice marginal).
+\end{enumerate}
+\end{exercice}

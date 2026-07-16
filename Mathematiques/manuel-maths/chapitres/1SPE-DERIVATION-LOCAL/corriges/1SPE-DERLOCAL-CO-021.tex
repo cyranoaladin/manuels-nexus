@@ -1,0 +1,33 @@
+% META: {"id":"1SPE-DERLOCAL-CO-021","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-021","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve
+% x = symbols('x')
+% T = 2*(x - 3) + 2
+% assert T.expand() == 2*x - 4
+% assert T.subs(x, 3) == 2
+% sol = solve(Eq(T, 0), x)
+% assert sol == [2]
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-021}
+
+\textbf{Question 1.} On calcule :
+\[
+f(3) = 3^2 - 4 \times 3 + 5 = 9 - 12 + 5 = 2 \qquad \text{et} \qquad f'(3) = 2 \times 3 - 4 = 2.
+\]
+Donc $\boxed{f(3) = 2}$ et $\boxed{f'(3) = 2}$.
+
+\textbf{Question 2.} L'équation de la tangente au point d'abscisse $a = 3$ est :
+\[
+y = f'(3)(x - 3) + f(3) = 2(x - 3) + 2 = 2x - 6 + 2 = 2x - 4.
+\]
+L'équation de la tangente $T$ est $\boxed{y = 2x - 4}$.
+
+\textbf{Question 3.} L'axe des abscisses a pour équation $y = 0$. On résout :
+\[
+2x - 4 = 0 \iff 2x = 4 \iff x = 2.
+\]
+La tangente $T$ coupe l'axe des abscisses au point de coordonnées $\boxed{(2\,;\,0)}$.
+
+\textbf{Vérification :} $y = 2 \times 2 - 4 = 0$. \checkmark
+
+\end{corrige}

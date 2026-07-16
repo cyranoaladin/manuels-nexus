@@ -1,0 +1,175 @@
+% META: {"id": "1SPE-SECDEG-RE-C5", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5
+% Resoudre une inequation du second degre
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrige pas a pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C5-EX1}{1}{8}
+Resoudre $x^2 - 5x + 6 \leq 0$.
+\begin{enumerate}
+  \item Identifier $a$ et calculer $\Delta$.
+  \item Trouver les racines $x_1$ et $x_2$.
+  \item Dresser le tableau de signes de $f(x) = x^2 - 5x + 6$.
+  \item Lire la solution de $f(x) \leq 0$ dans le tableau.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% x = symbols('x')
+% f = x**2 - 5*x + 6
+% Delta = 25 - 24
+% assert Delta == 1
+% x1, x2 = 2, 3
+% assert f.subs(x, x1) == 0
+% assert f.subs(x, x2) == 0
+% # f <= 0 sur [2;3]
+% assert f.subs(x, 2.5) < 0
+% assert f.subs(x, 0) > 0
+% assert f.subs(x, 4) > 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C5-EX1}
+
+\commentaireMarge{$a = 1 > 0$ : le trinome est positif a l'exterieur des racines et negatif entre elles.}
+
+\textbf{Question 1.} $a = 1$, $b = -5$, $c = 6$. $\Delta = 25 - 24 = 1 > 0$.
+
+\textbf{Question 2.} $\sqrt{\Delta} = 1$.
+\[
+x_1 = \frac{5 - 1}{2} = 2, \qquad x_2 = \frac{5 + 1}{2} = 3.
+\]
+
+\textbf{Question 3. Tableau de signes :}
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $2$ & & $3$ & & $+\infty$ \\
+\hline
+$x-2$ & & $-$ & $0$ & $+$ & $+$ & $+$ & \\
+$x-3$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+\hline
+$f(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\commentaireMarge{La solution de $f(x) \leq 0$ correspond aux colonnes ou $f(x) \leq 0$ dans le tableau.}
+
+\textbf{Question 4.} $f(x) \leq 0$ sur $[2\,;\,3]$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C5-EX2}{1}{8}
+Resoudre les inequations suivantes.
+\begin{enumerate}
+  \item $-x^2 + 3x - 2 \geq 0$
+  \item $x^2 + 4x + 4 > 0$
+  \item $x^2 + 1 \leq 0$
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour (1), les racines de $-x^2 + 3x - 2 = 0$ sont $x = 1$ et $x = 2$. Comme $a = -1 < 0$, le trinome est positif \textit{entre} les racines.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% x = symbols('x')
+% # (1) -x^2 + 3x - 2 >= 0 => solution [1;2]
+% f1 = -x**2 + 3*x - 2
+% assert f1.subs(x, 1) == 0
+% assert f1.subs(x, 2) == 0
+% assert f1.subs(x, 1.5) > 0
+% assert f1.subs(x, 0) < 0
+% # (2) x^2 + 4x + 4 = (x+2)^2 > 0 => x != -2
+% f2 = x**2 + 4*x + 4
+% from sympy import Rational
+% assert f2 == (x+2)**2
+% assert f2.subs(x, -2) == 0  # egalite en x = -2
+% assert f2.subs(x, 0) > 0
+% # (3) x^2 + 1 <= 0 => pas de solution (toujours > 0)
+% f3 = x**2 + 1
+% assert f3.subs(x, 0) == 1 > 0  # jamais <= 0
+% Delta3 = 0 - 4*1*1
+% assert Delta3 == -4 < 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C5-EX2}
+
+\textbf{Question 1.} $f(x) = -x^2 + 3x - 2$, $a = -1$. $\Delta = 9 - 8 = 1$. Racines : $x_1 = 1$, $x_2 = 2$.
+
+Comme $a < 0$ : le trinome est positif entre les racines. Solution : $x \in [1\,;\,2]$.
+
+\commentaireMarge{$f(x) = (x+2)^2 \geq 0$, egalite seulement en $x = -2$.}
+
+\textbf{Question 2.} $x^2 + 4x + 4 = (x+2)^2$. Ce carre est nul en $x = -2$ et strictement positif partout ailleurs.
+
+Donc $f(x) > 0 \Leftrightarrow x \neq -2$. Solution : $x \in \mathbb{R} \setminus \{-2\} = \,]-\infty\,;\,-2[ \cup \,]-2\,;\,+\infty[$.
+
+\commentaireMarge{$\Delta = -4 < 0$ et $a = 1 > 0$ : le trinome est toujours positif, jamais $\leq 0$.}
+
+\textbf{Question 3.} $x^2 + 1 \geq 1 > 0$ pour tout $x$ (somme d'un carre et de $1$). L'inequation $x^2 + 1 \leq 0$ n'a \textbf{aucune solution}.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C5-EX3}{1}{10}
+\begin{enumerate}
+  \item Resoudre $2x^2 - x - 3 > 0$ (aide : racines $x = -1$ et $x = \frac{3}{2}$).
+  \item Resoudre $3x^2 - 12 \leq 0$.
+  \item Un commercant realise un benefice $B(p) = -p^2 + 10p - 16$ (en centaines d'euros) en fonction de son prix $p$ (en euros). Pour quelles valeurs de $p$ le benefice est-il positif ? (Racines de $B$ : $p = 2$ et $p = 8$.)
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational
+% x, p = symbols('x p')
+% # Q1 : 2x^2 - x - 3 > 0, racines -1 et 3/2
+% f1 = 2*x**2 - x - 3
+% assert f1.subs(x, -1) == 0
+% assert f1.subs(x, Rational(3,2)) == 0
+% # a=2>0 : f1 > 0 hors des racines
+% assert f1.subs(x, 0) < 0      # entre les racines
+% assert f1.subs(x, 2) > 0      # apres x=3/2
+% assert f1.subs(x, -2) > 0     # avant x=-1
+% # Q2 : 3x^2 - 12 <= 0 <=> x^2 <= 4 <=> -2 <= x <= 2
+% f2 = 3*x**2 - 12
+% assert f2.subs(x, 0) < 0   # dans [-2;2]
+% assert f2.subs(x, 3) > 0   # hors
+% x1_2, x2_2 = -2, 2
+% assert f2.subs(x, x1_2) == 0
+% assert f2.subs(x, x2_2) == 0
+% # Q3 : B(p) = -p^2 + 10p - 16 >= 0 sur [2;8]
+% B = -p**2 + 10*p - 16
+% assert B.subs(p, 2) == 0
+% assert B.subs(p, 8) == 0
+% assert B.subs(p, 5) > 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C5-EX3}
+
+\textbf{Question 1.} $f(x) = 2x^2 - x - 3$, $a = 2 > 0$. Racines $x_1 = -1$ et $x_2 = \frac{3}{2}$.
+
+Comme $a > 0$ : $f(x) > 0$ a l'exterieur des racines. Solution : $x \in \,]-\infty\,;\,-1[ \cup \,]\frac{3}{2}\,;\,+\infty[$.
+
+\textbf{Question 2.} $3x^2 - 12 \leq 0 \Leftrightarrow 3(x^2 - 4) \leq 0 \Leftrightarrow x^2 - 4 \leq 0 \Leftrightarrow (x-2)(x+2) \leq 0$.
+
+Racines : $x = -2$ et $x = 2$. Avec $a = 1 > 0$ : Solution $x \in [-2\,;\,2]$.
+
+\textbf{Question 3.} $B(p) = -p^2 + 10p - 16$, $a = -1 < 0$. Racines $p = 2$ et $p = 8$.
+
+Comme $a < 0$ : $B(p) \geq 0$ entre les racines. Le benefice est positif pour $p \in [2\,;\,8]$.
+
+\end{corrige}

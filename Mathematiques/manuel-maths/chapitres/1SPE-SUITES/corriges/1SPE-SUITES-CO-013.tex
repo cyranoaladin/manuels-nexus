@@ -1,0 +1,39 @@
+% META: {"id": "1SPE-SUITES-CO-013", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-013", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Somme 1 + 2 + 3 + ... + 50
+% S = sum(range(1, 51))
+% assert S == 1275
+% # Formule : n*(n+1)/2 avec n=50
+% assert 50*51//2 == 1275
+% # Methode des paires : 25 paires valant chacune 51
+% assert 25 * 51 == 1275
+% # Verification : nombre de paires = 50/2 = 25
+% assert 50 // 2 == 25
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-013}
+
+\commentaireMarge{La formule $1 + 2 + \cdots + n = \dfrac{n(n+1)}{2}$ est la formule de la somme des $n$ premiers entiers.}
+
+\textbf{Question 1.} On applique la formule avec $n = 50$ :
+\[
+S = 1 + 2 + 3 + \cdots + 50 = \frac{50 \times (50 + 1)}{2} = \frac{50 \times 51}{2} = \frac{2550}{2} = 1275.
+\]
+
+Donc $S = 1275$.
+
+\commentaireMarge{La méthode des paires consiste à regrouper le premier terme avec le dernier, le deuxième avec l'avant-dernier, etc. Chaque paire a la même somme.}
+
+\textbf{Question 2.} On regroupe les termes en paires :
+\[
+(1 + 50),\ (2 + 49),\ (3 + 48),\ \ldots,\ (25 + 26).
+\]
+
+Chaque paire vaut $51$. Il y a $\dfrac{50}{2} = 25$ paires. Donc :
+\[
+S = 25 \times 51 = 1275.
+\]
+
+On retrouve bien $S = 1275$. \checkmark
+
+\end{corrige}

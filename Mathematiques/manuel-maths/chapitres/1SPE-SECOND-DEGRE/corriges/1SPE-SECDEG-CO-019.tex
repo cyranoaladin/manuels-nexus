@@ -1,0 +1,93 @@
+% META: {"id": "1SPE-SECDEG-CO-019", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-019", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify, Rational, factor
+% x = symbols('x')
+% f = 3*x**2 - 6*x - 24
+% # 1. coefficients et forme canonique
+% alpha = Rational(6, 6)
+% assert alpha == 1
+% beta = f.subs(x, alpha)
+% assert beta == -27
+% assert simplify(f - (3*(x-1)**2 - 27)) == 0
+% # 2. Variations
+% assert f.subs(x, 0) > f.subs(x, 1)    # croissant vers droite de 1
+% # 3. Factorisation
+% delta = (-6)**2 - 4*3*(-24)
+% assert delta == 324
+% from sympy import sqrt
+% assert sqrt(delta) == 18
+% racines = sorted([Rational(6-18, 6), Rational(6+18, 6)])
+% assert racines == [-2, 4]
+% assert simplify(factor(f) - 3*(x - 4)*(x + 2)) == 0
+% # 5. f(x)=-27 : minimum est -27, donc une unique solution x=1
+% assert f.subs(x, 1) == -27
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-019}
+
+\baremeIndicatif{Q1 : 3 pts — Q2 : 4 pts — Q3 : 4 pts — Q4 : 4 pts — Q5 : 5 pts}
+
+\medskip
+\textbf{1. (C1) Coefficients et forme canonique.}
+
+\commentaireMarge{$\alpha = -\dfrac{b}{2a}$, $\beta = f(\alpha)$.}
+
+On a $f(x) = 3x^2 - 6x - 24$, donc $a = 3$, $b = -6$, $c = -24$.
+
+\[\alpha = -\frac{b}{2a} = -\frac{-6}{6} = 1.\]
+
+\[\beta = f(1) = 3 - 6 - 24 = -27.\]
+
+\[\boxed{f(x) = 3(x-1)^2 - 27.}\]
+
+\textit{Vérification :} $3(x-1)^2 - 27 = 3(x^2-2x+1)-27 = 3x^2-6x+3-27 = 3x^2-6x-24$. \hfill $\checkmark$
+
+\medskip
+\textbf{2. (C2) Sommet et tableau de variations.}
+
+\commentaireMarge{$a = 3 > 0$ : minimum en $\alpha = 1$.}
+
+Le sommet est $S(1\,;\,-27)$. Puisque $a > 0$, $f$ est décroissante sur $\left]-\infty\,;\,1\right]$ et croissante sur $\left[1\,;\,+\infty\right[$.
+
+\[
+\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & 1 & & +\infty \\
+\hline
+f(x) & & \searrow & -27 & \nearrow & \\
+ & +\infty & & & & +\infty \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{3. (C1) Calcul de $\Delta$ et factorisation.}
+
+\commentaireMarge{$\Delta = b^2 - 4ac$.}
+
+$\Delta = (-6)^2 - 4 \times 3 \times (-24) = 36 + 288 = 324$, $\sqrt{\Delta} = 18$.
+
+\[x_1 = \frac{6 - 18}{6} = -2, \qquad x_2 = \frac{6 + 18}{6} = 4.\]
+
+\[\boxed{f(x) = 3(x + 2)(x - 4).}\]
+
+\medskip
+\textbf{4. (C2) Abscisses des intersections avec l'axe des abscisses.}
+
+\commentaireMarge{Intersections avec $(Ox)$ $\iff$ $f(x) = 0$.}
+
+La parabole coupe l'axe des abscisses en $x = -2$ et $x = 4$ (les racines de $f$).
+
+\textit{Vérification algébrique :} $f(-2) = 3\times 4 - 6\times(-2) - 24 = 12 + 12 - 24 = 0$ \checkmark ; $f(4) = 48 - 24 - 24 = 0$ \checkmark.
+
+\medskip
+\textbf{5. L'équation $f(x) = -27$.}
+
+\commentaireMarge{Le minimum de $f$ vaut $-27$ : atteint une seule fois.}
+
+D'après le tableau de variations, le minimum de $f$ est $-27$, atteint uniquement en $x = 1$.
+
+L'équation $f(x) = -27$ admet donc \textbf{une unique solution} : $x = 1$.
+
+\textit{Justification :} $3(x-1)^2 - 27 = -27 \iff 3(x-1)^2 = 0 \iff x = 1$.
+
+\end{corrige}

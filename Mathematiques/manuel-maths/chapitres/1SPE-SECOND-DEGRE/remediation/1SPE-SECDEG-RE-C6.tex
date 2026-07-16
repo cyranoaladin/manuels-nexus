@@ -1,0 +1,183 @@
+% META: {"id": "1SPE-SECDEG-RE-C6", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["C6"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C6
+% Modeliser un probleme concret par un polynome du second degre et trouver un optimum
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrige pas a pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C6-EX1}{1}{8}
+Un agriculteur dispose de $60$~m de cloture pour fermer un enclos rectangulaire (un cote est un mur, il n'a donc besoin de cloture que pour $3$ cotes). On note $x$ la longueur des cotes perpendiculaires au mur.
+\begin{enumerate}
+  \item Exprimer la longueur du cote parallele au mur en fonction de $x$.
+  \item Exprimer l'aire $A(x)$ en fonction de $x$.
+  \item Determiner la valeur de $x$ qui maximise $A(x)$.
+  \item Calculer l'aire maximale.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% x = symbols('x')
+% # Le cote parallele = 60 - 2x
+% parallel = 60 - 2*x
+% A = x * (60 - 2*x)
+% from sympy import expand
+% assert expand(A) == -2*x**2 + 60*x
+% # Sommet : alpha = -60/(2*(-2)) = 15
+% alpha = Rational(60, 4)
+% assert alpha == 15
+% A_max = A.subs(x, 15)
+% assert A_max == 450
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C6-EX1}
+
+\commentaireMarge{Contrainte : $x + x + \text{cote parallele} = 60$, donc le cote parallele vaut $60 - 2x$.}
+
+\textbf{Question 1.} Le cote parallele au mur mesure $60 - 2x$ metres.
+
+\textbf{Question 2.} $A(x) = x(60 - 2x) = -2x^2 + 60x$.
+
+\commentaireMarge{$a = -2 < 0$ : la parabole est en $\cap$, le sommet est un maximum.}
+
+\textbf{Question 3.} $a = -2$, $b = 60$. Abscisse du sommet :
+\[
+\alpha = \frac{-60}{2 \times (-2)} = \frac{-60}{-4} = 15.
+\]
+L'aire est maximale pour $x = 15$~m.
+
+\textbf{Question 4.}
+\[
+A(15) = -2 \times 225 + 60 \times 15 = -450 + 900 = 450 \text{ m}^2.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C6-EX2}{1}{8}
+Un projectile est lance. Sa hauteur (en metres) au bout de $t$ secondes est $h(t) = -5t^2 + 30t + 2$.
+\begin{enumerate}
+  \item Quelle est la hauteur initiale (a $t = 0$) ?
+  \item A quel instant le projectile atteint-il sa hauteur maximale ?
+  \item Quelle est cette hauteur maximale ?
+  \item A quel instant (aproximativement) le projectile touche-t-il le sol ($h = 0$) ? Calculer $\Delta$ et donner les racines.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour trouver l'instant du maximum : $\alpha = -b/(2a) = -30/(2 \times (-5))$. Calculer soigneusement.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, sqrt as Sqrt, solve
+% t = symbols('t')
+% h = -5*t**2 + 30*t + 2
+% assert h.subs(t, 0) == 2
+% alpha = Rational(30, 10)
+% assert alpha == 3
+% h_max = h.subs(t, 3)
+% assert h_max == 47
+% Delta = 30**2 - 4*(-5)*2
+% assert Delta == 940
+% import math
+% t1 = (-30 - math.sqrt(940)) / (2*(-5))
+% t2 = (-30 + math.sqrt(940)) / (2*(-5))
+% # t2 < 0 (avant le lancer), t1 > 0
+% assert round(t1, 2) > 0
+% # verify h(t1) approx 0
+% assert abs(float(h.subs(t, t1))) < 0.01
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C6-EX2}
+
+\textbf{Question 1.} $h(0) = 2$~m. Le projectile est lance depuis une hauteur de $2$~m.
+
+\commentaireMarge{$a = -5 < 0$ : maximum au sommet.}
+
+\textbf{Question 2.} $a = -5$, $b = 30$.
+\[
+\alpha = \frac{-30}{2 \times (-5)} = \frac{-30}{-10} = 3 \text{ s}.
+\]
+
+\textbf{Question 3.}
+\[
+h(3) = -5 \times 9 + 30 \times 3 + 2 = -45 + 90 + 2 = 47 \text{ m}.
+\]
+
+\textbf{Question 4.} $h(t) = 0$ : $\Delta = 900 + 40 = 940 > 0$.
+\[
+t = \frac{-30 \pm \sqrt{940}}{-10}.
+\]
+$\sqrt{940} \approx 30{,}66$. La racine positive est $t \approx \dfrac{-30 - 30{,}66}{-10} \approx 6{,}07$~s.
+
+Le projectile touche le sol apres environ $6{,}1$~secondes.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-RE-C6-EX3}{1}{10}
+Un artisan fabrique des objets et les vend $p$ euros l'unite. Ses etudes montrent que la demande est $q(p) = 100 - 2p$ unites et son chiffre d'affaires est $CA(p) = p \times q(p)$.
+\begin{enumerate}
+  \item Montrer que $CA(p) = -2p^2 + 100p$.
+  \item Pour quelles valeurs de $p$ la demande est-elle positive ?
+  \item Determiner le prix $p^*$ qui maximise le chiffre d'affaires.
+  \item Calculer le chiffre d'affaires maximal.
+  \item Le cout de production est $C = 500$~euros. Pour quelles valeurs de $p$ le benefice $B(p) = CA(p) - 500$ est-il positif ? (On calculera $\Delta$ de $CA(p) = 500$.)
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational, sqrt as Sqrt
+% p = symbols('p')
+% q = 100 - 2*p
+% CA = p * q
+% from sympy import expand
+% assert expand(CA) == -2*p**2 + 100*p
+% # demande positive : 100 - 2p > 0 => p < 50
+% # p* maximise CA : alpha = -100/(2*(-2)) = 25
+% alpha = Rational(100, 4)
+% assert alpha == 25
+% CA_max = CA.subs(p, 25)
+% assert CA_max == 1250
+% # B(p) = CA(p) - 500 >= 0 <=> -2p^2 + 100p - 500 >= 0
+% B = CA - 500
+% Delta_B = 100**2 - 4*(-2)*(-500)
+% assert Delta_B == 6000
+% import math
+% p1 = (100 - math.sqrt(6000)) / (2*2)
+% p2 = (100 + math.sqrt(6000)) / (2*2)
+% assert round(p1, 1) > 0
+% assert round(p2, 1) < 50
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-RE-C6-EX3}
+
+\textbf{Question 1.} $CA(p) = p(100 - 2p) = 100p - 2p^2 = -2p^2 + 100p$.
+
+\textbf{Question 2.} $q(p) = 100 - 2p > 0 \Leftrightarrow p < 50$. La demande est positive pour $p \in \,]0\,;\,50[$.
+
+\textbf{Question 3.} $CA(p) = -2p^2 + 100p$, $a = -2 < 0$ (maximum).
+\[
+p^* = \frac{-100}{2 \times (-2)} = \frac{-100}{-4} = 25 \text{ euros}.
+\]
+
+\textbf{Question 4.} $CA(25) = -2 \times 625 + 100 \times 25 = -1250 + 2500 = 1250$ euros.
+
+\textbf{Question 5.} $B(p) \geq 0 \Leftrightarrow -2p^2 + 100p - 500 \geq 0$.
+$\Delta = 10000 - 4000 = 6000$. $\sqrt{6000} = 10\sqrt{60} \approx 77{,}5$.
+\[
+p_{1,2} = \frac{-100 \pm 77{,}5}{-4}.
+\]
+$p_1 \approx \frac{-100 + 77{,}5}{-4} \approx 5{,}6$ et $p_2 \approx \frac{-100 - 77{,}5}{-4} \approx 44{,}4$.
+
+Comme $a = -2 < 0$, le benefice est positif entre les racines : $B(p) \geq 0$ pour $p \in [5{,}6\,;\,44{,}4]$ environ.
+
+\end{corrige}

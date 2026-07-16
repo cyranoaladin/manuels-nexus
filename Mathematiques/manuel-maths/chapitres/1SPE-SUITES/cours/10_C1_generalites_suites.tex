@@ -1,0 +1,106 @@
+% META: {"id": "1SPE-SUITES-CR-010", "chapitre": "1SPE-SUITES", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Généralités sur les suites}
+
+% ============================================================
+% STRATE 1 — Définitions et exemples fondamentaux
+% ============================================================
+
+\definition[1]{
+Une \textbf{suite numérique} est une fonction définie sur $\mathbb{N}$ (ou sur une partie de $\mathbb{N}$) à valeurs dans $\mathbb{R}$.
+
+On note $(u_n)_{n \in \mathbb{N}}$ la suite, et $u_n$ le terme de rang $n$ (aussi appelé terme d'indice $n$).
+}
+
+\exemple{
+La suite $(u_n)_{n \in \mathbb{N}}$ définie par $u_n = 2n + 1$ associe à chaque entier naturel $n$ un réel.
+On calcule : $u_0 = 1$, $u_1 = 3$, $u_2 = 5$, $u_3 = 7$.
+Il s'agit bien d'une suite numérique.
+}
+
+\contreexemple{
+L'expression $u_n = \sqrt{-n}$ ne définit pas une suite numérique sur $\mathbb{N}$, car $\sqrt{-n}$ n'est pas un réel pour $n \geq 1$.
+}
+
+\definition[2]{
+Une suite $(u_n)$ est définie par \textbf{formule explicite} (ou \textbf{terme général}) lorsqu'il existe une fonction $f$ telle que
+\[
+  u_n = f(n) \quad \text{pour tout } n \in \mathbb{N}.
+\]
+On obtient directement $u_n$ à partir de $n$, sans calculer les termes précédents.
+}
+
+\exemple{
+La suite $(v_n)$ définie par $v_n = n^2 - 3n + 2$ est donnée par formule explicite.
+On calcule : $v_0 = 2$, $v_1 = 0$, $v_2 = 0$, $v_5 = 12$.
+Aucun terme précédent n'est nécessaire pour calculer $v_5$.
+}
+
+\contreexemple{
+La suite définie par $u_0 = 1$ et $u_{n+1} = 2u_n$ \emph{n'est pas} donnée par formule explicite :
+pour calculer $u_3$, on doit d'abord connaître $u_2$, puis $u_1$, puis $u_0$.
+}
+
+\definition[3]{
+Une suite $(u_n)$ est définie par \textbf{relation de récurrence} lorsqu'on dispose :
+\begin{itemize}
+  \item d'un (ou plusieurs) terme(s) initial/initiaux, par exemple $u_0$,
+  \item d'une relation de la forme $u_{n+1} = f(u_n)$ permettant de calculer chaque terme à partir du précédent.
+\end{itemize}
+}
+
+\exemple{
+Soit la suite $(w_n)$ définie par $w_0 = 3$ et $w_{n+1} = \dfrac{w_n}{2} + 1$ pour tout $n \in \mathbb{N}$.
+
+On calcule : $w_1 = \dfrac{3}{2} + 1 = \dfrac{5}{2}$, puis $w_2 = \dfrac{5/2}{2} + 1 = \dfrac{9}{4}$.
+
+Chaque terme dépend du précédent ; on ne peut pas calculer $w_{10}$ sans passer par $w_1, \ldots, w_9$.
+}
+
+\contreexemple{
+La suite $u_n = 3 \times 2^n$ est donnée par formule explicite. Bien qu'on puisse écrire $u_{n+1} = 2 u_n$, ce n'est \emph{pas} sa définition première : elle n'a pas besoin d'un terme initial séparé car la formule $3 \times 2^n$ suffit à calculer directement tout terme.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs fréquentes
+% ============================================================
+
+\margeAppui{
+\textbf{Formule explicite :} $u_n = f(n)$ — on branche $n$ directement dans la formule. Rapide, mais pas toujours disponible.
+
+\textbf{Récurrence :} $u_{n+1} = f(u_n)$, $u_0$ donné — on calcule terme après terme. Toujours disponible, mais plus lent pour les grands rangs.
+}
+
+\erreurFrequente{
+\textbf{Confusion notation algorithmique / notation mathématique.}
+
+En Python, on écrit souvent \texttt{u = f(n)} avec \texttt{n} comme variable de boucle. Cela correspond bien à $u_n = f(n)$, mais la notation \texttt{u(n)} avec des parenthèses n'est \emph{pas} la notation mathématique d'une suite : on écrit $u_n$ (indice en bas), jamais $u(n)$ dans une copie de mathématiques.
+}
+
+\erreurFrequente{
+\textbf{Erreur d'indice : confondre formule explicite et récurrence.}
+
+Si $(u_n)$ est définie par récurrence par $u_{n+1} = 2u_n + 3$ et $u_0 = 1$, certains élèves calculent $u_1$ en remplaçant $n$ par $1$ dans la relation, ce qui donne $u_2 = 2u_1 + 3$, et non $u_1$.
+
+\textbf{Méthode correcte :} pour obtenir $u_1$, on remplace $n$ par $\mathbf{0}$ dans $u_{n+1} = 2u_n + 3$, ce qui donne $u_1 = 2u_0 + 3 = 2 \times 1 + 3 = 5$.
+
+Pour obtenir $u_2$, on remplace $n$ par $1$ : $u_2 = 2u_1 + 3 = 13$.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+\textbf{Suites définies par plusieurs relations.}
+
+Certaines suites utilisent deux relations de récurrence selon la parité de l'indice. Par exemple :
+\[
+  u_0 = 1, \quad u_{n+1} = \begin{cases} \dfrac{u_n}{2} & \text{si } u_n \text{ est pair,} \\ 3u_n + 1 & \text{si } u_n \text{ est impair.} \end{cases}
+\]
+Cette suite est connue sous le nom de \emph{suite de Syracuse}. Son comportement à long terme reste un problème ouvert en mathématiques (conjecture de Collatz).
+
+\textbf{Suites définies implicitement.}
+
+Il est parfois impossible de trouver une formule explicite pour une suite définie par récurrence. On peut seulement en étudier les propriétés (monotonie, convergence, limite) sans jamais écrire $u_n = f(n)$ de façon close. L'étude de ces suites relève des classes préparatoires, mais l'idée d'une suite dont on ne connaît pas la formule explicite est déjà présente dans ce chapitre.
+}

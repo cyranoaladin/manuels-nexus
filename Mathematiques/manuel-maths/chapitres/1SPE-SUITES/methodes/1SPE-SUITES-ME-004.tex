@@ -1,0 +1,94 @@
+% META: {"id": "1SPE-SUITES-ME-004", "chapitre": "1SPE-SUITES", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Calculer une somme de termes}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « calculer la somme des $n$ premiers termes »,
+  « déterminer $S_n = u_0 + u_1 + \cdots + u_n$ », ou « calculer $1 + 2 + \cdots + 2^k$ »
+  (somme d'une suite arithmétique ou géométrique).
+}
+
+\pasApas{%
+  \textbf{Cas 1 — Suite arithmétique (raison $r$) :}
+  \begin{enumerate}
+    \item J'identifie le premier terme $u_0$, le dernier terme $u_n$ et le nombre de termes
+      (de $u_0$ à $u_n$, il y a $n+1$ termes).
+    \item J'applique la formule :
+      \[
+        S = \text{nombre de termes} \times \frac{\text{premier terme} + \text{dernier terme}}{2}.
+      \]
+  \end{enumerate}
+
+  \textbf{Cas 2 — Suite géométrique (raison $q$) :}
+  \begin{enumerate}
+    \item J'identifie le premier terme $u_0$, la raison $q$ et le nombre de termes
+      (de $u_0$ à $u_n$, il y a $n+1$ termes).
+    \item Je vérifie que $q \neq 1$.
+    \item J'applique la formule :
+      \[
+        S = u_0 \times \frac{1 - q^{n+1}}{1 - q}.
+      \]
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple 1 — Suite arithmétique.}
+  Soit $(u_n)$ la suite arithmétique de raison $r = 3$ et de premier terme $u_0 = 1$,
+  définie par $u_n = 3n + 1$.
+  Calculer $S = u_0 + u_1 + \cdots + u_{19}$.
+
+  \medskip
+  \commentaireMarge{Identifier le nombre de termes : de $u_0$ à $u_{19}$, il y a $20$ termes.}%
+  On somme les termes $u_0, u_1, \ldots, u_{19}$ : il y a $20$ termes.
+
+  \commentaireMarge{Calculer le premier et le dernier terme.}%
+  $u_0 = 3 \times 0 + 1 = 1$ \quad et \quad $u_{19} = 3 \times 19 + 1 = 58$.
+
+  \commentaireMarge{Appliquer la formule de la somme arithmétique.}%
+  \[
+    S = 20 \times \frac{u_0 + u_{19}}{2} = 20 \times \frac{1 + 58}{2} = 20 \times \frac{59}{2} = 590.
+  \]
+
+  \bigskip
+  \textbf{Exemple 2 — Suite géométrique.}
+  Calculer $S = 1 + 2 + 4 + \cdots + 2^9$.
+
+  \medskip
+  \commentaireMarge{Identifier la suite : $u_k = 2^k$, de raison $q = 2$, premier terme $u_0 = 1$.}%
+  On reconnaît la suite géométrique de terme général $u_k = 2^k$,
+  de raison $q = 2$ et de premier terme $u_0 = 1$.
+  On somme de $k = 0$ à $k = 9$ : il y a $10$ termes.
+
+  \commentaireMarge{Vérifier $q \neq 1$ : ici $q = 2 \neq 1$.}%
+  Comme $q = 2 \neq 1$, on peut appliquer la formule.
+
+  \commentaireMarge{Appliquer la formule de la somme géométrique avec $n+1 = 10$.}%
+  \[
+    S = 1 \times \frac{1 - 2^{10}}{1 - 2} = \frac{1 - 1024}{-1} = \frac{-1023}{-1} = 1023.
+  \]
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Erreur sur le nombre de termes : de $u_0$ à $u_n$, il y a $n+1$ termes
+      (et non $n$). Par exemple, de $u_0$ à $u_9$ il y a $10$ termes. Compter soigneusement.
+    \item \textbf{Piège 2.} Oublier de vérifier $q \neq 1$ avant d'appliquer la formule géométrique.
+      Si $q = 1$, la suite est constante et la somme vaut simplement $(n+1) \times u_0$.
+    \item \textbf{Piège 3.} Confondre $1 - q^n$ et $1 - q^{n+1}$ dans la formule géométrique.
+      Lorsqu'on somme $n+1$ termes (de $u_0$ à $u_n$), l'exposant est $n+1$, pas $n$.
+  \end{itemize}
+}
+
+\verifier{%
+  \begin{itemize}
+    \item \textbf{Somme arithmétique :} calculer à la main $u_0 + u_1 + u_2 = 1 + 4 + 7 = 12$,
+      puis vérifier avec la formule : $3 \times (1 + 7)/2 = 12$ \checkmark.
+    \item \textbf{Somme géométrique :} calculer $1 + 2 + 4 = 7$ (3 premiers termes),
+      puis vérifier : $1 \times (1 - 2^3)/(1 - 2) = (1 - 8)/(-1) = 7$ \checkmark.
+    \item Vérifier l'ordre de grandeur : la somme doit être cohérente avec le nombre de termes
+      multiplié par la valeur « moyenne » des termes.
+  \end{itemize}
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

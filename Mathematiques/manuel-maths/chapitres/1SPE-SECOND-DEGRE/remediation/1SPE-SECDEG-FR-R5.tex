@@ -1,0 +1,274 @@
+% META: {"id": "1SPE-SECDEG-FR-R5", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R5 : Inegalites — regles de calcul, tableau de signes
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Inegalites et tableau de signes}
+
+\textbf{Regles de calcul sur les inegalites} :
+\begin{itemize}
+  \item On peut additionner/soustraire le meme reel des deux membres sans changer le sens.
+  \item On peut multiplier/diviser par un reel \textbf{strictement positif} sans changer le sens.
+  \item On \textbf{inverse le sens} si on multiplie/divise par un reel \textbf{strictement negatif}.
+\end{itemize}
+
+\textbf{Tableau de signes d'un produit} : le signe du produit $A \times B$ se determine colonne par colonne.
+
+\[
+\text{Signe de } AB : \quad
+\begin{array}{|c|ccc|}
+\hline
+ & A < 0 & A = 0 & A > 0 \\
+\hline
+B > 0 & - & 0 & + \\
+B = 0 & 0 & 0 & 0 \\
+B < 0 & + & 0 & - \\
+\hline
+\end{array}
+\]
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R5-EX1}{1}{5}
+Resoudre les inegalites du premier degre suivantes.
+\begin{enumerate}
+  \item $3x - 6 > 0$
+  \item $-2x + 4 \geq 0$
+  \item $5x + 10 \leq 0$
+  \item $-x + 3 > 1$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% x = symbols('x')
+% from sympy import S
+% sol1 = solve(3*x - 6 > 0, x)
+% assert sol1 == (2 < x)
+% sol2 = solve(-2*x + 4 >= 0, x)
+% assert sol2 == (x <= 2)
+% sol3 = solve(5*x + 10 <= 0, x)
+% assert sol3 == (x <= -2)
+% sol4 = solve(-x + 3 > 1, x)
+% assert sol4 == (x < 2)
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R5-EX1}
+
+\commentaireMarge{On isole $x$ en appliquant les memes operations aux deux membres.}
+
+\textbf{Question 1.} $3x > 6 \Leftrightarrow x > 2$. Solution : $x \in \,]2\,;\,+\infty[$.
+
+\commentaireMarge{Diviser par $-2$ : sens inverse !}
+
+\textbf{Question 2.} $-2x \geq -4 \Leftrightarrow x \leq 2$ (on divise par $-2$, on inverse). Solution : $x \in \,]-\infty\,;\,2]$.
+
+\textbf{Question 3.} $5x \leq -10 \Leftrightarrow x \leq -2$. Solution : $x \in \,]-\infty\,;\,-2]$.
+
+\textbf{Question 4.} $-x > 1 - 3 = -2 \Leftrightarrow x < 2$ (on divise par $-1$, on inverse). Solution : $x \in \,]-\infty\,;\,2[$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R5-EX2}{1}{5}
+Dresser le tableau de signes de chaque expression et determiner l'ensemble de solutions.
+\begin{enumerate}
+  \item $(x - 2)(x + 3) \geq 0$
+  \item $(x + 1)(x - 4) < 0$
+  \item $-3(x - 1)(x + 2) \leq 0$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% x = symbols('x')
+% sol1 = solve((x-2)*(x+3) >= 0, x)
+% # (-inf,-3] U [2,+inf)
+% from sympy import S, oo, Union, Interval
+% sol2 = solve((x+1)*(x-4) < 0, x)
+% sol3 = solve(-3*(x-1)*(x+2) <= 0, x)
+% # Verifications numeriques
+% # (x-2)(x+3) >= 0 : x=-4 => (-6)(-1)=6>0 OK ; x=0 => (-2)(3)=-6<0 non ; x=3 => (1)(6)>0 OK
+% assert (-4-2)*(-4+3) == 6  # positif
+% assert (0-2)*(0+3) == -6   # negatif
+% assert (3-2)*(3+3) == 6    # positif
+% # (x+1)(x-4) < 0 : x=0 => (1)(-4)<0 OK ; x=-2 => (-1)(-6)>0 non ; x=5 => (6)(1)>0 non
+% assert (0+1)*(0-4) == -4   # negatif : dans la solution
+% assert (-2+1)*(-2-4) == 6  # positif : pas dans la solution
+% # -3(x-1)(x+2) <= 0 : valeurs test
+% f3 = lambda v: -3*(v-1)*(v+2)
+% assert f3(0) == 6   # 6 > 0, pas <= 0
+% assert f3(2) == -12 # <= 0, dans la solution
+% assert f3(-3) == -12 # <= 0, dans la solution
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R5-EX2}
+
+\commentaireMarge{Tableau de signes : on etudie le signe de chaque facteur puis on compose.}
+
+\textbf{Question 1.} Racines : $x = -3$ et $x = 2$.
+
+\begin{center}
+\begin{tabular}{|c|cccccc|}
+\hline
+$x$ & $-\infty$ & & $-3$ & & $2$ & $+\infty$ \\
+\hline
+$x - 2$ & & $-$ & $-$ & $-$ & $0$ & $+$ \\
+$x + 3$ & & $-$ & $0$ & $+$ & $+$ & $+$ \\
+\hline
+$(x-2)(x+3)$ & & $+$ & $0$ & $-$ & $0$ & $+$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Solution de $\geq 0$ : $x \in \,]-\infty\,;\,-3] \cup [2\,;\,+\infty[$.
+
+\textbf{Question 2.} Racines : $x = -1$ et $x = 4$. Le produit est negatif strictement entre les racines.
+
+Solution de $< 0$ : $x \in \,]-1\,;\,4[$.
+
+\textbf{Question 3.} Racines de $(x-1)(x+2)$ : $x = -2$ et $x = 1$. Le facteur $-3 < 0$ inverse le signe.
+
+$(x-1)(x+2) \geq 0$ sur $]-\infty\,;\,-2] \cup [1\,;\,+\infty[$, donc $-3(x-1)(x+2) \leq 0$ sur le meme ensemble.
+
+Solution : $x \in \,]-\infty\,;\,-2] \cup [1\,;\,+\infty[$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R5-EX3}{1}{6}
+Etudier le signe des expressions suivantes a l'aide d'un tableau.
+\begin{enumerate}
+  \item $A(x) = (2x - 4)(x + 1)$
+  \item $B(x) = \dfrac{x - 3}{x + 2}$ (avec $x \neq -2$)
+  \item $C(x) = (x^2 - 1)(x - 2)$ (aide : factoriser $x^2 - 1$)
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% A = (2*x - 4)*(x + 1)
+% # Racines : x = 2 et x = -1
+% assert A.subs(x, -1) == 0
+% assert A.subs(x, 2) == 0
+% # Test points
+% assert A.subs(x, 0) == -4   # negatif entre -1 et 2
+% assert A.subs(x, 3) == 8    # positif apres 2
+% assert A.subs(x, -2) == 8   # positif avant -1
+% # B : signe
+% B_num = x - 3
+% B_den = x + 2
+% # x = 0 : (-3)/(2) < 0
+% assert float(B_num.subs(x,0)/B_den.subs(x,0)) < 0
+% # x = 4 : (1)/(6) > 0
+% assert float(B_num.subs(x,4)/B_den.subs(x,4)) > 0
+% # C
+% C = (x**2 - 1)*(x - 2)
+% from sympy import factor
+% assert factor(x**2 - 1) == (x-1)*(x+1)
+% assert C.subs(x, 0) == 2    # positif ((-1)(1)(-2) = 2)
+% assert C.subs(x, 3) == 16   # positif
+% assert C.subs(x, 1.5) < 0  # negatif entre 1 et 2
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R5-EX3}
+
+\textbf{Question 1.} Racines : $2x - 4 = 0 \Rightarrow x = 2$ ; $x + 1 = 0 \Rightarrow x = -1$.
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $2$ & & $+\infty$ \\
+\hline
+$2x-4$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+$x+1$ & & $-$ & $0$ & $+$ & $+$ & $+$ & \\
+\hline
+$A(x)$ & & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 2.} Changement de signe en $x = 3$ (numerateur) et $x = -2$ (denominateur, exclu).
+
+\begin{center}
+\begin{tabular}{|c|ccccccc|}
+\hline
+$x$ & $-\infty$ & & $-2$ & & $3$ & & $+\infty$ \\
+\hline
+$x - 3$ & & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+$x + 2$ & & $-$ & $||$ & $+$ & $+$ & $+$ & \\
+\hline
+$B(x)$ & & $+$ & $||$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.} $x^2 - 1 = (x-1)(x+1)$, donc $C(x) = (x+1)(x-1)(x-2)$. Racines : $-1$, $1$, $2$.
+
+\begin{center}
+\begin{tabular}{|c|ccccccccc|}
+\hline
+$x$ & $-\infty$ & & $-1$ & & $1$ & & $2$ & & $+\infty$ \\
+\hline
+$x+1$ & & $-$ & $0$ & $+$ & $+$ & $+$ & $+$ & $+$ & \\
+$x-1$ & & $-$ & $-$ & $-$ & $0$ & $+$ & $+$ & $+$ & \\
+$x-2$ & & $-$ & $-$ & $-$ & $-$ & $-$ & $0$ & $+$ & \\
+\hline
+$C(x)$ & & $-$ & $0$ & $+$ & $0$ & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-SECDEG-FR-R5-EX4}{1}{6}
+Resoudre les inequations suivantes.
+\begin{enumerate}
+  \item $(x-1)(x+5) \leq 0$
+  \item $x^2 - 4 > 0$
+  \item $x^2 - 3x \geq 0$
+  \item $(x-2)^2 > 0$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve
+% x = symbols('x')
+% s1 = solve((x-1)*(x+5) <= 0, x)
+% s2 = solve(x**2 - 4 > 0, x)
+% s3 = solve(x**2 - 3*x >= 0, x)
+% s4 = solve((x-2)**2 > 0, x)
+% # Verifications
+% assert (0-1)*(0+5) == -5  # <=0 : 0 dans sol1
+% assert (2-1)*(2+5) == 7   # >0 : 2 pas dans sol1
+% assert 0**2 - 4 == -4     # pas >0 : 0 pas dans sol2
+% assert 3**2 - 4 == 5      # >0 : 3 dans sol2
+% assert 0**2 - 3*0 == 0    # =0 : 0 dans sol3
+% assert 4**2 - 3*4 == 4    # >=0 : 4 dans sol3
+% assert (2-2)**2 == 0      # pas >0 : 2 pas dans sol4
+% assert (3-2)**2 == 1      # >0 : 3 dans sol4
+% END-VERIFY
+
+\begin{corrige}{1SPE-SECDEG-FR-R5-EX4}
+
+\textbf{Question 1.} Racines de $(x-1)(x+5)$ : $x = -5$ et $x = 1$. Le produit est negatif entre les racines.
+Solution : $x \in \,[-5\,;\,1]$.
+
+\textbf{Question 2.} $x^2 - 4 = (x-2)(x+2) > 0$ : le produit est positif a l'exterieur des racines.
+Solution : $x \in \,]-\infty\,;\,-2[ \cup \,]2\,;\,+\infty[$.
+
+\textbf{Question 3.} $x^2 - 3x = x(x-3) \geq 0$ : racines $0$ et $3$. Le produit est positif a l'exterieur.
+Solution : $x \in \,]-\infty\,;\,0] \cup [3\,;\,+\infty[$.
+
+\commentaireMarge{$(x-2)^2 \geq 0$ pour tout $x$, avec egalite uniquement en $x = 2$.}
+
+\textbf{Question 4.} $(x-2)^2 > 0$ est vrai pour tout $x \neq 2$ (le carre est toujours $\geq 0$, et nul seulement en $x = 2$).
+Solution : $x \in \mathbb{R} \setminus \{2\} = \,]-\infty\,;\,2[ \cup \,]2\,;\,+\infty[$.
+
+\end{corrige}

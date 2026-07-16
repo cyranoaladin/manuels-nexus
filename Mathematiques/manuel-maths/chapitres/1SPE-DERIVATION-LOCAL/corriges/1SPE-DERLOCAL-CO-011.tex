@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERLOCAL-CO-011","chapitre":"1SPE-DERIVATION-LOCAL","type_objet":"corrige","exercice_id":"1SPE-DERLOCAL-EX-011","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% a, h = symbols('a h')
+% taux = simplify(((a+h)**2 - a**2)/h)
+% assert taux == 2*a + h
+% END-VERIFY
+\begin{corrige}{1SPE-DERLOCAL-EX-011}
+\textbf{1.} $(a+h)^2=a^2+2ah+h^2$. Donc $f(a+h)-f(a)=a^2+2ah+h^2-a^2=2ah+h^2$.
+
+\textbf{2.} $\dfrac{f(a+h)-f(a)}{h}=\dfrac{2ah+h^2}{h}=2a+h$.
+
+\textbf{3.} Lorsque $h$ se rapproche de $0$, $2a+h$ se rapproche de $2a$. Donc $f'(a)=2a$ pour tout réel $a$.
+
+\textbf{4.}
+\begin{itemize}
+  \item $f'(0)=0$ : la tangente au sommet de la parabole est horizontale.
+  \item $f'(-1)=-2$ : la tangente descend.
+  \item $f'(5)=10$ : la tangente monte.
+\end{itemize}
+
+\textbf{5.} $f'(a)=0$ équivaut à $2a=0$, soit $a=0$. La tangente à la parabole au point d'abscisse $0$ est horizontale : c'est le sommet de la parabole, où la courbe change de sens de variation.
+\end{corrige}

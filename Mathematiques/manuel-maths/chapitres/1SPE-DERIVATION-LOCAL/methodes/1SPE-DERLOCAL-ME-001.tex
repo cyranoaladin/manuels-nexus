@@ -1,0 +1,11 @@
+% META: {"id": "1SPE-DERLOCAL-ME-001", "chapitre": "1SPE-DERIVATION-LOCAL", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Calculer un taux de variation}
+\quandUtiliser{Je l'utilise lorsque l'énoncé demande un taux de variation, une variation moyenne, une pente de sécante ou une vitesse moyenne entre deux instants.}
+\pasApas{\begin{enumerate}\item Je repère les deux abscisses distinctes $a$ et $b$. \item Je calcule séparément $f(a)$ et $f(b)$. \item J'écris $\dfrac{f(b)-f(a)}{b-a}$ sans changer l'ordre. \item Je simplifie et j'indique l'unité si le contexte en fournit une.\end{enumerate}}
+\exempleRedige{Pour $g(x)=2x^2-1$, calculons le taux de variation entre $1$ et $4$. \commentaireMarge{Je calcule les deux images.} $g(1)=1$ et $g(4)=31$. \commentaireMarge{Je conserve l'ordre 1 puis 4.} Ainsi
+\[\frac{g(4)-g(1)}{4-1}=\frac{31-1}{3}=10.\]
+Le taux de variation de $g$ entre $1$ et $4$ est $10$.}
+\pieges{\begin{itemize}\item Écrire $\frac{31-1}{4}$ : il manque $-1$ au dénominateur.\item Écrire $\frac{1-31}{4-1}$ : les deux différences ne suivent plus le même ordre.\item Écrire seulement $31-1=30$ : c'est la variation d'image, pas le taux de variation.\end{itemize}}
+\verifier{Je vérifie que le signe est cohérent avec le sens de variation observé. Ici $g$ augmente sur $[1;4]$ et le résultat $10$ est positif.}
+\sEntrainer{\refExos{M1}}
+\end{fichemethode}
