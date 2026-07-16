@@ -13,6 +13,7 @@ COMMON_FILES = (
     Path("gabarits/nexus-signatures.tex"),
     Path("docs/06_charte_graphique.md"),
     Path("docs/07_ligne_editoriale.md"),
+    Path("scripts/pdf_integrity.py"),
 )
 
 
@@ -35,7 +36,7 @@ def main() -> int:
     root = Path(__file__).resolve().parents[1]
     mismatches = find_mismatches(root / "Mathematiques/manuel-maths", root / "NSI")
     if not mismatches:
-        print("Charte Nexus synchronisée : 6/6 fichiers identiques.")
+        print(f"Charte Nexus synchronisée : {len(COMMON_FILES)}/{len(COMMON_FILES)} fichiers identiques.")
         return 0
     print("Dérive de charte détectée :")
     for relative in mismatches:

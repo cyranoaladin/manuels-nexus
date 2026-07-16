@@ -1,0 +1,73 @@
+name: CI manuel mathématiques
+
+on:
+  pull_request:
+    paths:
+      - "Mathematiques/manuel-maths/**"
+      - "NSI/gabarits/nexus-manuel.cls"
+      - "NSI/gabarits/nexus-icons.tex"
+      - "NSI/gabarits/nexus-figures.tex"
+      - "NSI/gabarits/nexus-signatures.tex"
+      - "NSI/docs/06_charte_graphique.md"
+      - "NSI/docs/07_ligne_editoriale.md"
+      - "scripts/check_charte_sync.py"
+  push:
+    branches: [main]
+    paths:
+      - "Mathematiques/manuel-maths/**"
+      - "NSI/gabarits/nexus-manuel.cls"
+      - "NSI/gabarits/nexus-icons.tex"
+      - "NSI/gabarits/nexus-figures.tex"
+      - "NSI/gabarits/nexus-signatures.tex"
+      - "NSI/docs/06_charte_graphique.md"
+      - "NSI/docs/07_ligne_editoriale.md"
+      - "scripts/check_charte_sync.py"
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Gate de synchronisation de charte
+        run: python scripts/check_charte_sync.py
+      - name: Dépendances (gates légers, sans embeddings)
+        run: pip install sympy pyyaml jsonschema pytest python-dotenv
+      - name: Installation TeX
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-lang-french texlive-fonts-recommended poppler-utils
+      - name: Schémas des métadonnées
+        working-directory: Mathematiques/manuel-maths
+        run: python -m pytest tests/test_meta_schemas.py -q
+      - name: Gate SymPy (chapitres modifiés)
+        working-directory: Mathematiques/manuel-maths
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          for chap in $(git diff --name-only "$base" "$GITHUB_SHA" -- chapitres | cut -d/ -f2 | sort -u); do
+            python scripts/verify_sympy.py --chap "$chap"
+          done
+      - name: Gate couverture
+        working-directory: Mathematiques/manuel-maths
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          for chap in $(git diff --name-only "$base" "$GITHUB_SHA" -- chapitres | cut -d/ -f2 | sort -u); do
+            python scripts/coverage_report.py --chap "$chap"
+          done
+      - name: Compilation specimen (gate charte)
+        working-directory: Mathematiques/manuel-maths
+        run: make specimen
+      - name: Compilation chapitres modifiés
+        working-directory: Mathematiques/manuel-maths
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          for chap in $(git diff --name-only "$base" "$GITHUB_SHA" -- chapitres | cut -d/ -f2 | sort -u); do
+            python scripts/assemble.py --chap "$chap" --variant complet
+          done
+      - name: Publier les PDF de preuve
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-mathematiques-${{ github.sha }}
+          path: Mathematiques/manuel-maths/build/**/*.pdf
+          if-no-files-found: warn

@@ -72,3 +72,35 @@ contenu n'a ete ajoute ni supprime.**
 
 Le defaut de sous-titre "Manuel NSI Premiere" sur les couvertures maths est un point
 ouvert a corriger.
+
+## F.2 — Inspection complementaire exercices / QCM / corriges (16 juillet 2026)
+
+PNG supplementaires inspectes (150 dpi) :
+- `suites_exo-24.png` : page 24, exercices 1-5 (parcours 1)
+- `suites_qcm-42.png` : page 42, QCM + debut C1
+- `suites_eval-49.png` : page 49, evaluation A
+- `secdeg_exo-20.png` : page 20, exercices 1-3 (parcours 1)
+- `secdeg_qcm-35.png` : page 35, TD fil rouge + QCM
+- `nsi_exo-10.png` : page 10, exercices NSI 1-4 (parcours 1)
+- `nsi_qcm-25.png` : page 25, coups de pouce + TD 1
+
+### Grille d'inspection
+
+| Page | Accents | Losanges parcours | Encadres | Overfull | Verdict |
+|---|---|---|---|---|---|
+| SUITES exo p.24 | OK (considere, definie, geometrique) | 1 losange jaune par exercice (parcours 1) | Exercice bleu, ID + temps en marge | 0 | PASS |
+| SUITES QCM p.42 | Partiels (titre QCM sans accents : auto-evaluation, numeriques) | — | Titre section bleu | 0 | PASS (*) |
+| SUITES eval p.49 | OK (evaluation, capacites) | — | Sujet numerote | 0 | PASS |
+| SECDEG exo p.20 | OK (trinome, parabole, canonique) | 1 losange jaune (parcours 1) | Exercice bleu, marge OK | 0 | PASS |
+| SECDEG QCM p.35 | Partiels (titre QCM sans accents) | 3 losanges (exercice 48 = parcours 3) | Corrige gris, QCM section | 0 | PASS (*) |
+| NSI exo p.10 | OK (considere, ecrire, euclidienne) | 1 losange jaune (parcours 1) | Exercice bleu, code Python OK | 0 | PASS |
+| NSI CDP+TD p.25 | OK (meteo, temperature, comprehension) | 1 losange (exercice 56-57 TD) | CDP gras, TD section | 0 | PASS |
+
+(*) Les titres QCM sans accents proviennent du contenu des fichiers .tex (pas de la classe).
+Le rendu losange, la mise en page et les encadres sont conformes a la charte v3.2.
+
+### Verdict F.2
+
+**PASS** — 0 defaut bloquant sur les pages exercices, QCM et TD des trois chapitres.
+Les accents manquants dans les titres QCM sont un point cosmétique non bloquant
+(contenu des fichiers .tex, pas defaut de classe).

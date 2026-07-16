@@ -39,7 +39,7 @@ def test_verify_pdf_reports_missing_pdffonts_without_traceback(tmp_path, monkeyp
 
 
 def test_missing_asset_in_log_triggers_verify_failure(tmp_path):
-    """E.3.1 — bout-en-bout : un asset du tronc absent produit warning => verify_pdf = 1."""
+    """Unit : un log contenant le warning Nexus asset missing => verify_pdf = 1."""
     import pdf_integrity
 
     pdf = tmp_path / "chapter.pdf"
@@ -54,8 +54,61 @@ def test_missing_asset_in_log_triggers_verify_failure(tmp_path):
     assert pdf_integrity.verify_pdf(pdf, log) == 1
 
 
+import shutil
+import pytest
+
+_HAS_LUALATEX = shutil.which("lualatex") is not None
+
+
+@pytest.mark.skipif(not _HAS_LUALATEX, reason="lualatex absent de cet environnement")
+def test_missing_asset_produces_warning_in_real_compilation(tmp_path):
+    """F.1 — bout-en-bout reel : retirer nexus-icons.tex, compiler, verifier
+    que le log contient le warning ET que verify_pdf retourne 1."""
+    import subprocess
+    import pdf_integrity
+
+    # Copier gabarits/ en retirant nexus-icons.tex
+    gabarits_src = ROOT / "gabarits"
+    gabarits_dst = tmp_path / "gabarits"
+    shutil.copytree(gabarits_src, gabarits_dst)
+    (gabarits_dst / "nexus-icons.tex").unlink()
+
+    # Document minimal
+    doc = tmp_path / "minimal.tex"
+    doc.write_text(
+        "\\documentclass{nexus-manuel}\n"
+        "\\begin{document}\n"
+        "Page de test sans icons.\n"
+        "\\end{document}\n",
+        encoding="utf-8",
+    )
+
+    # Compiler avec TEXINPUTS pointant vers la copie
+    import os
+    env = os.environ.copy()
+    env["TEXINPUTS"] = f"{gabarits_dst}:{env.get('TEXINPUTS', '')}"
+    subprocess.run(
+        ["lualatex", "-interaction=nonstopmode",
+         f"-output-directory={tmp_path}", str(doc)],
+        capture_output=True, cwd=tmp_path, env=env,
+    )
+
+    log_path = tmp_path / "minimal.log"
+    pdf_path = tmp_path / "minimal.pdf"
+    assert log_path.exists(), "le log de compilation n'a pas ete produit"
+
+    log_text = log_path.read_text(encoding="utf-8", errors="replace")
+    assert "Nexus asset missing" in log_text, (
+        "le warning Nexus asset missing n'apparait pas dans le log"
+    )
+
+    assert pdf_integrity.verify_pdf(pdf_path, log_path) == 1, (
+        "verify_pdf aurait du retourner 1 (asset manquant)"
+    )
+
+
 def test_specimen_compiles_with_exit_zero():
-    """E.3.1 — contre-epreuve : make specimen = 0 quand le gabarit est complet."""
+    """F.1 — contre-epreuve : make specimen = 0 quand le gabarit est complet."""
     import subprocess
 
     result = subprocess.run(
