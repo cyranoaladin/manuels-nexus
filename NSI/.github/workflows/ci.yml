@@ -1,25 +1,61 @@
 name: CI manuels NSI
+
 on:
   pull_request:
-    paths: ["chapitres/**", "gabarits/**", "scripts/**", "schemas/**", "referentiel/**"]
+    paths:
+      - "NSI/**"
+      - "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls"
+      - "Mathematiques/manuel-maths/gabarits/nexus-icons.tex"
+      - "Mathematiques/manuel-maths/gabarits/nexus-figures.tex"
+      - "Mathematiques/manuel-maths/gabarits/nexus-signatures.tex"
+      - "Mathematiques/manuel-maths/docs/06_charte_graphique.md"
+      - "Mathematiques/manuel-maths/docs/07_ligne_editoriale.md"
+      - "scripts/check_charte_sync.py"
+  push:
+    branches: [main]
+    paths:
+      - "NSI/**"
+      - "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls"
+      - "Mathematiques/manuel-maths/gabarits/nexus-icons.tex"
+      - "Mathematiques/manuel-maths/gabarits/nexus-figures.tex"
+      - "Mathematiques/manuel-maths/gabarits/nexus-signatures.tex"
+      - "Mathematiques/manuel-maths/docs/06_charte_graphique.md"
+      - "Mathematiques/manuel-maths/docs/07_ligne_editoriale.md"
+      - "scripts/check_charte_sync.py"
+
 jobs:
   gates:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with: { submodules: recursive }
+        with: { fetch-depth: 0 }
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
-      - run: pip install pyyaml jsonschema pytest ruff python-dotenv
-      - run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-lang-french texlive-pictures pandoc
+      - name: Gate de synchronisation de charte
+        run: python scripts/check_charte_sync.py
+      - name: Dépendances
+        run: pip install pyyaml jsonschema pytest ruff python-dotenv
+      - name: Installation TeX
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-lang-french texlive-pictures pandoc
       - name: Tests noyau + schémas META
+        working-directory: NSI
         run: python -m pytest tests/ -q
       - name: Gate accents (R10)
+        working-directory: NSI
         run: make accents
       - name: Gates d'exécution + compilation des chapitres modifiés
+        working-directory: NSI
         run: |
-          for chap in $(git diff --name-only origin/${{ github.base_ref }} -- chapitres | cut -d/ -f2 | sort -u); do
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          for chap in $(git diff --name-only "$base" "$GITHUB_SHA" -- chapitres | cut -d/ -f2 | sort -u); do
             python scripts/verify_python.py --chap "$chap"
-            python scripts/coverage_report.py --chap "$chap" || echo "::warning::couverture incomplète $chap"
+            python scripts/coverage_report.py --chap "$chap"
             python scripts/assemble.py --chap "$chap" --variant complet
           done
+      - name: Publier les PDF de preuve
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf-nsi-${{ github.sha }}
+          path: NSI/build/**/*.pdf
+          if-no-files-found: warn

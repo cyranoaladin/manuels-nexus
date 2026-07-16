@@ -24,7 +24,7 @@ Toute evolution de la charte se fait cote maths, puis se propage aux autres manu
 ## Commande de synchronisation
 
 ```bash
-cd ~/Documents/Manuels_Nexus
+cd "$(git rev-parse --show-toplevel)"
 rsync -av --checksum \
   Mathematiques/manuel-maths/gabarits/{nexus-manuel.cls,nexus-icons.tex,nexus-figures.tex,nexus-signatures.tex} \
   NSI/gabarits/

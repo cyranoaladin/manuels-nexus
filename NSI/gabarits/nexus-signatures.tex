@@ -96,32 +96,6 @@
   \end{tikzpicture}%
 }
 
-% --- Types construits : mémoire 6 x 4, valeurs et références ---
-\newcommand{\motifTypesConstruits}{%
-  \begin{tikzpicture}[overlay,remember picture]
-    \coordinate (nxmemoireorigine) at ([xshift=-28mm,yshift=31mm]current page.south east);
-    \foreach \r in {0,...,3}{%
-      \foreach \c in {0,...,5}{%
-        \node[draw=nxBleu!35,line width=.55pt,rounded corners=1.4pt,
-          minimum width=13mm,minimum height=11mm,inner sep=0pt]
-          (nxmem-\r-\c) at ($(nxmemoireorigine)+(-\c*16mm,\r*15mm)$) {};%
-      }%
-    }%
-    \foreach \r/\c in {0/0,0/3,1/2,2/4,3/1}{%
-      \fill[nxOr!60,rounded corners=1.1pt]
-        ($(nxmem-\r-\c.center)+(-5.5mm,-4mm)$) rectangle ++(11mm,8mm);%
-    }%
-    \foreach \r/\a/\b in {0/0/1,0/2/3,1/1/2,2/3/4,3/0/1}{%
-      \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
-        (nxmem-\r-\a.east) -- (nxmem-\r-\b.west);%
-    }%
-    \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
-      (nxmem-0-3.south) -- (nxmem-1-2.north);
-    \draw[nxBleu!35,line width=.5pt,-{Stealth[length=3pt]}]
-      (nxmem-1-2.south) -- (nxmem-2-4.north);
-  \end{tikzpicture}%
-}
-
 % ============================================================
 %  BANDEAU D'OUVERTURE
 % ============================================================

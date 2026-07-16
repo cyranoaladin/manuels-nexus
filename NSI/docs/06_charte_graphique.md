@@ -1,6 +1,26 @@
-# Charte graphique — Manuel Nexus Réussite
+# Charte graphique — Manuel Nexus Réussite v3
 
-Version 3.2 — Juillet 2026. Ce document est la spécification de référence pour la mise en page du manuel. Toute production PDF doit s'y conformer. La classe `gabarits/nexus-manuel.cls` implémente ces règles.
+Version 3.0 — Juillet 2026. Édition professionnelle. Moteur LuaLaTeX, KOMA-Script scrbook,
+polices Libertinus/Montserrat/JetBrains Mono embarquées. Ce document est la spécification
+de référence pour la mise en page. La classe `gabarits/nexus-manuel.cls` v3 implémente ces règles.
+
+## Pile technique
+
+| Composant | Choix v3 | Raison |
+|---|---|---|
+| Moteur | LuaLaTeX | fontspec + unicode-math + microtype plein |
+| Base | KOMA-Script scrbook 9.5pt twoside | en-tetes/titres/espacements configurables |
+| Texte | Libertinus Serif 9.5/13.5pt (OFL) | qualite editoriale, accord parfait avec math |
+| Maths | Libertinus Math | meme famille que le texte |
+| Titres | Montserrat SemiBold/Medium (OFL) | contraste sans-serif, petites capitales espacees |
+| Code | JetBrains Mono 8.5pt (OFL) | ligatures off, chiffres tabulaires |
+| Microtype | protrusion + expansion | gris typographique professionnel |
+| Grille | 118mm texte + 46mm marge pedagogique | colonne de marge = objet de design |
+| Encadres | tcolorbox filet gauche 2pt | plus aeré que cadres complets |
+| Listes | enumitem compact (1pt itemsep) | densite sans surcharge |
+| Tables | booktabs | pas de filets verticaux |
+| Espacements | multiples de 4.5pt (tiers de ligne) | rythme vertical strict |
+| Polices | embarquees dans gabarits/fonts/ | reproductibilite totale |
 
 ---
 
@@ -62,7 +82,7 @@ Aucun calcul indispensable ne vit dans la marge : elle n'accueille que des appui
 
 - Veuves et orphelines interdites : `\widowpenalty=\clubpenalty=10000`.
 - Pas de césure en début de ligne après un titre.
-- Les titres d'encadrés sont en capitales réelles (`\MakeUppercase`) : Montserrat ne fournit pas de petites capitales utilisables par `fontspec`. La couleur est cuite dans `\nxboxtitle{couleur}{texte}` et ne dépend jamais de `tcbcolframe`.
+- Les titres d'encadrés sont en **petites capitales** (`\textsc`).
 - Le corps de l'encadré reste en romain standard.
 
 ---
@@ -110,14 +130,12 @@ Tous les encadrés utilisent `tcolorbox` avec les réglages suivants :
 
 | Style | Fond | Cadre | Titre |
 |---|---|---|---|
-| Définition (`nxdef`) | `nxBleu!4` | règle gauche 2 pt nxBleu | bleu Nexus |
-| Théorème (`nxthm`) | `nxBleu!5` | règle gauche 2 pt nxBleu 80% noir | bleu Nexus 80% noir |
-| Propriété (`nxprop`) | `nxGris!6` | règle gauche 2 pt nxGris 80% noir | nxGris 80% noir (jamais gris pur) |
-| Erreur fréquente (`nxerr`) | `nxRouge!6` | règle gauche 2 pt nxRouge | rouge Nexus |
-| Méthode (`fmbox`) | `nxOr!6` | règle gauche 2 pt nxOr 75% noir | nxOr 75% noir |
-| Approfondissement (`nxstar`) | `nxBleu!6` | sans filet | bleu Nexus |
-| Carte (`nxcard`) | `nxGris!6` | règle gauche 2 pt nxGris 80% noir | nxGris 80% noir |
-| Mini-projet (`mpbox`) | `nxOr!5` | règle gauche 2 pt nxOr 75% noir | nxOr 75% noir |
+| Définition (`nxdef`) | `nxBleu!4` | règle gauche 1,2 pt nxBleu, pas de cadre | `\textsc{Définition}` + numéro |
+| Théorème (`nxthm`) | `nxBleu!5` | règle gauche 1,2 pt nxBleu 80% noir | `\textsc{Théorème}` + numéro |
+| Propriété (`nxprop`) | `nxGris!6` | règle gauche 1,2 pt nxGris | `\textsc{Propriété}` + numéro |
+| Erreur fréquente (`nxerr`) | `nxRouge!6` | règle gauche 1,2 pt nxRouge | triangle + `\textsc{Erreur fréquente}` |
+| Méthode (`fmbox`) | `nxOr!6` | règle gauche 1,2 pt nxOr 80% noir | `\textsc{Méthode Mn}` + titre |
+| Approfondissement (`nxstar`) | `nxBleu!5` | cadre fin 0,4 pt nxBleu | étoile + `\textsc{Pour aller plus loin}` |
 
 ### Principes communs
 
@@ -171,8 +189,8 @@ Le sommaire est précédé de l'ouverture de chapitre. Les entrées de section a
 
 La commande `\ouverturechapitre{titre}{capacités}{carte}{temps}` compose une pleine page :
 
-1. **Page bleue identitaire** : numéro de chapitre Montserrat Thin 110 pt blanc à 85 % en haut à droite ; motif génératif du chapitre dans la moitié inférieure droite ; filet or 30 mm × 1,2 pt au-dessus du titre blanc 26 pt ; signature « Manuel NSI Première — Nexus Réussite » en Montserrat Medium 8,5 pt blanc 80 %.
-2. **Liste « Ce que je vais savoir faire »** : chaque capacité C1..Cn est précédée de `\icnObjectif` et formulée en langage élève.
+1. **Titre** en 26 pt gras bleu, précédé d'un espace vertical généreux.
+2. **Liste « Ce que je vais savoir faire »** : capacités C1..Cn en langage élève.
 3. **Carte du chapitre** : encadré gris, résumé de la situation d'accroche et structure.
 4. **Temps estimés** par parcours : or, en pied de la page d'ouverture.
 
@@ -224,13 +242,11 @@ Style normalisé dans `gabarits/nexus-figures.tex`.
 | Élément | Style |
 |---|---|
 | Axes | nxGris 0,5 pt, flèches Stealth 4 pt |
-| Grille | nxGris!15, 0,3 pt |
+| Grille | nxGris!20, 0,3 pt |
 | Courbes | nxBleu 1,1 pt |
 | Tangentes | nxOr 1,1 pt |
 | Sécantes | nxOr!60, 0,8 pt, pointillées |
-| Points de contact | disque 1,6 pt nxBleu, sans étiquette |
+| Points | disques 1,6 pt nxBleu, étiquetés |
 | Aires | nxVert!15, sans contour |
-
-Les graduations sont limitées aux valeurs utiles. Une étiquette de courbe se place en fin de courbe, décalée à droite (`\node[right, nxBleu]`), jamais sur le tracé. Une étiquette de tangente se place sous la droite en `nxOr!75!black`. Le point de contact ne porte aucune autre annotation.
 
 **Règle permanente** : toute capacité graphique implique ≥ 2 figures dans le cours et ≥ 1 dans les exercices. Chapitre d'analyse ≥ 6 figures, géométrie ≥ 10.

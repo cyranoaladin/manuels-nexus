@@ -146,10 +146,10 @@
 % ===========================================================================
 \RequirePackage[automark]{scrlayer-scrpage}
 \clearpairofpagestyles
-\ohead{\ifodd\value{page}\nxOnglet\fi\nxMiniMotif\kern0.7em\sffamily\fontsize{7.5}{10}\selectfont\color{nxGris}\headmark}
+\ohead{\sffamily\fontsize{7.5}{10}\selectfont\color{nxGris}\headmark}
 % Pied : numéro dans pavé nxBleu coin extérieur, Nexus Réussite côté intérieur
 \ofoot{\colorbox{nxBleu}{\color{white}\sffamily\bfseries\fontsize{7.5}{10}\selectfont~\thepage~}}
-\ifoot{\sffamily\fontsize{6.5}{8}\selectfont\color{nxGris}\addfontfeatures{LetterSpace=6}\MakeUppercase{Nexus Réussite}}
+\ifoot{\sffamily\fontsize{6.5}{8}\selectfont\color{nxGris}\addfontfeatures{LetterSpace=6}\textsc{Nexus Réussite}}
 
 % ===========================================================================
 %  LISTES (enumitem global)
@@ -165,29 +165,30 @@
 \RequirePackage[most,skins]{tcolorbox}
 \RequirePackage{pifont}
 
-% Style de base v3.2 : la couleur du titre est cuite dans son contenu.
-% tcbcolframe n'est jamais lu par le titre detache, ce qui rend le contraste
-% identique dans tous les encadres et ne depend pas de petites capitales absentes.
-\newcommand{\nxboxtitle}[2]{{\sffamily\bfseries\fontsize{8}{11}\selectfont
-  \addfontfeatures{LetterSpace=8}\textcolor{#1}{\MakeUppercase{#2}}}}
+% Style de base v3.1 : filet gauche, pas de barre de titre, titre detache
+% en petites capitales de la couleur du filet, pose sur le fond
 \tcbset{
   nxbase/.style={
-    enhanced, breakable, sharp corners, boxrule=0pt, leftrule=2pt,
-    left=8pt, right=8pt, top=7pt, bottom=7pt, before skip=9pt, after skip=9pt,
-    detach title, before upper={\tcbtitle\par\smallskip}
+    enhanced, breakable,
+    boxrule=0pt, leftrule=2pt, sharp corners,
+    detach title,
+    before upper={\sffamily\bfseries\fontsize{8.5}{11}\selectfont
+      \addfontfeatures{LetterSpace=6}\textcolor{tcbcolframe}{\tcbtitle}\par
+      \smallskip\rmfamily\mdseries\fontsize{9.5}{13.5}\selectfont
+      \setlength{\parskip}{0.35em}},
+    before skip=9pt, after skip=9pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
   },
 }
 
 % Définitions / Théorèmes (filet nxBleu, fond nxBleu!4)
 \newcounter{nxDefNum}[chapter]
 \newtcolorbox{nxdef}[1][]{nxbase, colframe=nxBleu, colback=nxBleu!4,
-  title={\nxboxtitle{nxBleu}{Définition~#1}}}
+  title={\textsc{Définition}~#1}}
 \newtcolorbox{nxthm}[1][]{nxbase, colframe=nxBleu!80!black, colback=nxBleu!5,
-  title={\nxboxtitle{nxBleu!80!black}{Théorème~#1}}}
-\newtcolorbox{nxprop}[1][]{nxbase, colframe=nxGris!80!black, colback=nxGris!6,
-  title={\nxboxtitle{nxGris!80!black}{Propriété~#1}}}
-\newtcolorbox{nxcard}[1][]{nxbase, colframe=nxGris!80!black, colback=nxGris!6,
-  title={\nxboxtitle{nxGris!80!black}{Carte~#1}}}
+  title={\textsc{Théorème}~#1}}
+\newtcolorbox{nxprop}[1][]{nxbase, colframe=nxGris, colback=nxGris!6,
+  title={\textsc{Propriété}~#1}}
 
 % Raccourcis
 \newcommand{\definition}[2][]{\begin{nxdef}[#1]#2\end{nxdef}}
@@ -199,19 +200,27 @@
 % Erreur fréquente (filet nxRouge)
 \RequirePackage[normalem]{ulem}
 \newtcolorbox{nxerr}{nxbase, colframe=nxRouge, colback=nxRouge!6,
-  title={\nxboxtitle{nxRouge}{Erreur fréquente}}}
+  title={\textsc{Erreur fréquente}}}
 \newcommand{\erreurFrequente}[1]{\begin{nxerr}#1\end{nxerr}}
 
-% Approfondissement ★ : fond seul, sans filet.
-\newtcolorbox{nxstar}{nxbase, leftrule=0pt, colback=nxBleu!6, colframe=nxBleu,
-  title={\icnEtoile[nxBleu]\kern0.35em\nxboxtitle{nxBleu}{Pour aller plus loin}}}
+% Approfondissement ★ (fond nxBleu!6, PAS de filet, titre nxBleu)
+\newtcolorbox{nxstar}{enhanced, breakable, boxrule=0pt, sharp corners,
+  colback=nxBleu!6, colframe=nxBleu,
+  detach title,
+  before upper={\sffamily\bfseries\fontsize{8.5}{11}\selectfont
+    \addfontfeatures{LetterSpace=6}\textcolor{nxBleu}{\tcbtitle}\par
+    \smallskip\rmfamily\mdseries\fontsize{9.5}{13.5}\selectfont
+    \setlength{\parskip}{0.35em}},
+  before skip=9pt, after skip=9pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  title={\textsc{Pour aller plus loin}}}
 \newcommand{\approfondissement}[1]{\begin{nxstar}#1\end{nxstar}}
 
 % ===========================================================================
 %  FICHES MÉTHODES (filet nxOr, 6 rubriques)
 % ===========================================================================
-\newtcolorbox{fmbox}[2]{nxbase, colframe=nxOr!75!black, colback=nxOr!6,
-  title={\nxboxtitle{nxOr!75!black}{Méthode #1 --- #2}}}
+\newtcolorbox{fmbox}[2]{nxbase, colframe=nxOr!80!black, colback=nxOr!6,
+  title={\textsc{Méthode #1} --- #2}}
 \newenvironment{fichemethode}[2]{\begin{fmbox}{#1}{#2}}{\end{fmbox}}
 \newcommand{\quandUtiliser}[1]{\paragraph{Quand l'utiliser.}#1}
 \newcommand{\pasApas}[1]{\paragraph{La méthode pas à pas.}#1}
@@ -324,7 +333,7 @@
 \usetikzlibrary{arrows.meta,positioning,calc}
 
 % ===========================================================================
-%  OUVERTURE DE CHAPITRE v3.2 — pleine page identitaire + page contrat
+%  OUVERTURE DE CHAPITRE v3.1 — pleine page visuelle + page contrat
 % ===========================================================================
 % nxChapNum est defini dans nexus-signatures.tex
 \usetikzlibrary{backgrounds}
@@ -340,23 +349,17 @@
   \thispagestyle{empty}%
   \begin{tikzpicture}[remember picture, overlay]
     \fill[nxBleu] (current page.south west) rectangle (current page.north east);
-    % Numéro Montserrat Thin, haut droit, volontairement aérien.
-    \node[anchor=north east, text=white, text opacity=.85,
-      font=\sffamily\fontseries{thin}\fontsize{110}{110}\selectfont]
+    % Numéro de chapitre Montserrat Thin 90pt blanc
+    \node[anchor=north east, text=white, font=\sffamily\fontseries{thin}\fontsize{90}{90}\selectfont]
       at ([xshift=-20mm, yshift=-25mm]current page.north east) {\thechapter};
-    % Motif propre au chapitre, dans la moitié inférieure droite.
-    \csname #1\endcsname
-    % Filet or au-dessus du bloc de titre.
-    \draw[nxOr,line width=1.2pt]
-      ([xshift=20mm,yshift=83mm]current page.south west) -- ++(30mm,0);
     % Titre 26pt blanc
     \node[anchor=south west, text=white, font=\sffamily\bfseries\fontsize{26}{32}\selectfont,
       text width=140mm]
-      at ([xshift=20mm, yshift=50mm]current page.south west) {#2};
-    \node[anchor=south west, text=white!80,
-      font=\sffamily\fontseries{m}\fontsize{8.5}{11}\selectfont]
-      at ([xshift=20mm, yshift=36mm]current page.south west)
-      {Manuel NSI Première --- Nexus Réussite};
+      at ([xshift=20mm, yshift=40mm]current page.south west) {#2};
+    % Sous-titre Nexus
+    \node[anchor=south west, text=white!70, font=\sffamily\fontsize{10}{14}\selectfont]
+      at ([xshift=20mm, yshift=28mm]current page.south west)
+      {\addfontfeatures{LetterSpace=8}\textsc{Nexus Réussite}};
   \end{tikzpicture}%
   \clearpage
   % --- PAGE CONTRAT (verso) ---
@@ -367,9 +370,10 @@
   \vspace{0.4cm}%
   #3%
   \vspace{0.6cm}%
-  \begin{nxcard}%
+  \begin{tcolorbox}[nxbase, colframe=nxGris, colback=nxGris!6,
+    title={\textsc{Carte du chapitre}}]%
     #4%
-  \end{nxcard}%
+  \end{tcolorbox}%
   \vspace{0.4cm}%
   \noindent\textcolor{nxOr}{\sffamily\bfseries Temps estimés :} #5%
   \par\vfill
