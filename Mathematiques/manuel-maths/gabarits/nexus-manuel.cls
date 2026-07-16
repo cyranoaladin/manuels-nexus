@@ -111,21 +111,16 @@
 \colorlet{nxVert}{nsiAccent}
 
 % ===========================================================================
-%  GRILLE DE PAGE (colonne texte 118mm + marge pédagogique 46mm)
+%  GRILLE DE PAGE — Kit v2 : marge ext. large pour notes marginales
 % ===========================================================================
 \RequirePackage{geometry}
 \geometry{%
   a4paper,
-  inner=17mm,
-  textwidth=118mm,
-  marginparsep=6mm,
-  marginparwidth=46mm,
-  top=20mm,
-  bottom=18mm,
-  headsep=10mm,
-  footskip=12mm,
+  top=2.4cm, bottom=2.6cm,
+  inner=2.0cm, outer=4.8cm,
+  marginparwidth=3.5cm, marginparsep=0.6cm,
+  headsep=0.7cm,
 }
-% Marge extérieure calculée : 210 - 17 - 118 - 6 - 46 = 23mm (dont 15mm après marge)
 
 % ===========================================================================
 %  MARGE PÉDAGOGIQUE (colonne de design)
@@ -380,6 +375,9 @@
   belowskip=9pt,
 }
 \lstnewenvironment{python}{\lstset{style=nxpy}}{}
+
+% Code en ligne
+\newcommand{\code}[1]{{\ttfamily\color{coulCode}#1}}
 
 % Protection de \lstinline contre babel-french (NoAutoSpacing)
 \let\nxOrigLstinline\lstinline
