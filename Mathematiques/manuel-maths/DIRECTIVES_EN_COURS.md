@@ -42,6 +42,14 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
 
 **Règle de complétude** : un point de directive n'est réputé traité que si son livrable existe et est cité avec son chemin exact dans le rapport. Un tour ne se termine jamais sur une liste de restes : tant qu'il reste un point exécutable sans validation humaine, il est exécuté dans le même tour. Les seules fins de tour admises restent : rapport final, pause pilote non bloquante (avec bascule immédiate), ou ARRET_MISSION.md documenté.
 
+> Le chat n'est pas un canal de reporting. Tout constat, verdict, explication
+> ou état d'avancement s'écrit UNIQUEMENT dans les fichiers du dépôt
+> (rapports de LOT, addendums, MISSION_LOG.md). La seule sortie chat
+> autorisée est une ligne unique, à la fin du travail :
+> « TERMINÉ <hash du dernier commit> — prochaine tâche : <tâche> »
+> Toute autre phrase écrite dans le chat compte comme un contournement
+> documenté au sens du protocole d'arrêt.
+
 - E5/F01 : ≥ 50 exercices par chapitre, ≥ 2 exercices par case capacité × parcours, ratio 40/40/20.
 - Tout objet autonome : corrigé copie-modèle 10-20 lignes, méthode illustrée, diagnostic QCM, CDP séparés.
 - Parcours ◆ = coups de pouce, ◆◆ = format examen contextualisé, ◆◆◆ = prise d'initiative/recherche.
