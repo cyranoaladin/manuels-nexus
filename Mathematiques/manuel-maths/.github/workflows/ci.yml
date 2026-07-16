@@ -36,7 +36,7 @@ jobs:
       - name: Dépendances (gates légers, sans embeddings)
         run: pip install sympy pyyaml jsonschema pytest python-dotenv
       - name: Installation TeX
-        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-lang-french texlive-fonts-recommended
+        run: sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-lang-french texlive-fonts-recommended
       - name: Schémas des métadonnées
         working-directory: Mathematiques/manuel-maths
         run: python -m pytest tests/test_meta_schemas.py -q

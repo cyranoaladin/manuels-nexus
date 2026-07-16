@@ -1,5 +1,5 @@
 """Assemblage (R5/F06) : génère le .tex maître d'un chapitre depuis les objets,
-dans l'ordre des 9 temps du gabarit, puis compile (pdflatex ×2).
+dans l'ordre des 9 temps du gabarit, puis compile (LuaLaTeX ×2).
 
 Déclinaisons : --variant complet|methodes|parcours1|remediation
 """
@@ -79,7 +79,7 @@ def main(chap: str, variant: str) -> int:
     tex_path.write_text(master, encoding="utf-8")
     for _ in range(2):
         proc = subprocess.run(
-            ["pdflatex", "-interaction=nonstopmode", "-halt-on-error",
+            ["lualatex", "-interaction=nonstopmode", "-halt-on-error",
              f"-output-directory={build}", str(tex_path)],
             capture_output=True, text=True, cwd=ROOT, errors="replace")
     if proc.returncode != 0:

@@ -242,6 +242,18 @@ Cycle de production d'un chapitre (calibrage : ~2 semaines en travail parallèle
 
 Chaque LOT laisse un fichier de synthèse (`LOT-n_rapport.md`) dans le dépôt : décisions, verdicts, coûts API, points reportés — traçabilité identique au workflow de certification NSI.
 
+## Politique des PDF de preuve
+
+Les PDF de chapitre ne sont pas versionnés dans Git : les sources LaTeX, les rapports de LOT et
+les verdicts de gates constituent la source de vérité. À chaque compilation CI d'un chapitre,
+notamment au LOT 7, le PDF produit dans `build/` est publié comme artefact GitHub Actions.
+
+Au début d'une session, tout chapitre marqué complet dont le PDF est absent du répertoire local
+est recompilé avec `make chapter CHAP=<identifiant>`. Le rapport de LOT ou le journal de mission
+consigne alors la commande, la date, le nombre de pages et le résultat de l'inspection. Un PDF
+absent ne justifie jamais d'abaisser un gate ni de déclarer un chapitre non vérifié sans cette
+tentative de ré-attestation.
+
 ## Estimation de charge (ordre de grandeur, chapitre lycée standard)
 
 - Corpus : 300–800 chunks utiles par thème après curation.

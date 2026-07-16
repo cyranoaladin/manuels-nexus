@@ -24,6 +24,9 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
   - [x] 2e. GATE VISUEL v3 : 5 PNG inspectés PASS, 0 régression.
   - Commit : c61daa1
 
+- [x] **2f. INTÉGRITÉ — Ré-attestation PDF et restauration des correctifs v3.2.**
+  - Commit : 410007f
+
 - [ ] **3. PRODUCTION SANS ARRÊT**
   - [x] 3a/3b. C1-C5 complets, 30 ex (6/capacité, 2/case), coverage 0 manquant.
     C1:fca6a93, C2:973a268, C3:b3e4057, C4:87ce22e, C5:0a29108.

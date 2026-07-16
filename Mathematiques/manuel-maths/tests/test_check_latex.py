@@ -21,5 +21,6 @@ def test_compile_tex_files_returns_nonzero_when_pdflatex_fails(tmp_path):
 
     assert code == 1
     assert calls
+    assert calls[0][0][0] == "lualatex"
     assert "-interaction=nonstopmode" in calls[0][0]
     assert "-halt-on-error" in calls[0][0]

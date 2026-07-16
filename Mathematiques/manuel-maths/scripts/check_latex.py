@@ -38,7 +38,7 @@ def compile_tex_files(
             wrapper = output_dir / f"check_{index:03d}.tex"
             wrapper.write_text(_wrapper(source, project_root), encoding="utf-8")
             command = [
-                "pdflatex",
+                "lualatex",
                 "-interaction=nonstopmode",
                 "-halt-on-error",
                 f"-output-directory={output_dir}",

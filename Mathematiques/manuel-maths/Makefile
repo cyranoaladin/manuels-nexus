@@ -8,7 +8,7 @@ setup:
 	python3 -m venv .venv
 	.venv/bin/pip install -U pip
 	.venv/bin/pip install -r requirements.txt
-	@which pdflatex >/dev/null || echo "ATTENTION : pdflatex introuvable (installer texlive-full)"
+	@which lualatex >/dev/null || echo "ATTENTION : lualatex introuvable (installer texlive-full)"
 	@echo "Puis : cp .env.example .env && make db"
 
 db:
