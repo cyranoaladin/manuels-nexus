@@ -1,4 +1,4 @@
-.PHONY: setup db crawl ingest index verify similarity coverage chapter check-latex specimen test
+.PHONY: setup setup-fonts db crawl ingest index verify similarity coverage chapter check-latex specimen test
 
 PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 CHAP ?= 1SPE-SUITES
@@ -9,7 +9,14 @@ setup:
 	.venv/bin/pip install -U pip
 	.venv/bin/pip install -r requirements.txt
 	@which lualatex >/dev/null || echo "ATTENTION : lualatex introuvable (installer texlive-full)"
+	$(MAKE) setup-fonts
 	@echo "Puis : cp .env.example .env && make db"
+
+setup-fonts:
+	mkdir -p ~/.local/share/fonts
+	cp gabarits/fonts/JetBrainsMono*.otf ~/.local/share/fonts/
+	fc-cache -f ~/.local/share/fonts
+	@echo "JetBrains Mono installé dans ~/.local/share/fonts/"
 
 db:
 	psql "$$DATABASE_URL" -f db/schema.sql

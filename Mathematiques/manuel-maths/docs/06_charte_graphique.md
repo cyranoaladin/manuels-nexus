@@ -38,7 +38,7 @@ Format A4 recto-verso (`twoside`). Marge extérieure large pour les notes margin
 |---|---|---|
 | Corps + maths | TeX Gyre Pagella + TeX Gyre Pagella Math | `fontspec` + `unicode-math`, interligne 1.06 |
 | Titres, labels, en-têtes, folio | TeX Gyre Heros | `setsansfont`, Scale=0.94 |
-| Code Python | JetBrains Mono | Embarqué `gabarits/fonts/`, Scale=0.89 |
+| Code Python | JetBrains Mono | Résolu par nom système (`make setup-fonts` pour installer), Scale=0.89. Sources .otf dans `gabarits/fonts/`. |
 
 Raccourci `\titrefont` = `\sffamily\bfseries` (toujours Heros gras).
 

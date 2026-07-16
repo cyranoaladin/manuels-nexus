@@ -40,5 +40,8 @@ Le bloc VERIFY est obligatoire pour exercices/corrigés/évaluations à résulta
 - Contenu hors macro dans les strates (tout passe par les environnements : c'est ce qui permet les déclinaisons F06).
 - `rsync --delete` sur `gabarits/` : les extensions NSI (`nexus-code.tex`, `nexus-figures-nsi.tex`) n'existent que côté NSI et seraient détruites.
 
+## Polices
+JetBrains Mono est résolu par nom système. Installer avec `make setup-fonts` (copie les .otf de `gabarits/fonts/` dans `~/.local/share/fonts/` et met à jour le cache fontconfig). TeX Gyre Pagella et TeX Gyre Heros sont fournis par `texlive-fonts-recommended`.
+
 ## Synchronisation de la charte
 La synchro entre projets se fait UNIQUEMENT par `python scripts/check_charte_sync.py` (7 fichiers du tronc commun) ou le rsync fichier-par-fichier de `SYNC_CHARTE.md`. Voir `docs/06_charte_graphique.md` §12.
