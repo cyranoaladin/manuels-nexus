@@ -1,37 +1,46 @@
-# SPECIMEN A VALIDER --- Charte v3.1 edition professionnelle
+# SPECIMEN A VALIDER --- Charte v4
 
-PDF : `build/specimen.pdf` (5 pages, 69 Ko, 0 overfull hbox)
-PNG : `build/specimen_page-{1..5}.png` (150 dpi)
+PDF : `build/specimen/specimen.pdf` (5 pages, 68 Ko)
 
-## Corrections v3.0 → v3.1
+## Changement principal v3.2 -> v4
 
-| Defaut v3.0 | Correction v3.1 |
-|---|---|
-| Titres d'encadres : barre pleine, « Pour aller plus loin » illisible | detach title : texte petites capitales de la couleur du filet, pose sur le fond, sans barre |
-| Ouverture de chapitre : pages blanches, pas d'ouverture composee | Pleine page TikZ overlay : fond nxBleu, numero Montserrat Thin 90pt blanc, titre 26pt. Page contrat separee |
-| Numerotation « 0.1 » en en-tete | refstepcounter{chapter} + chaptermark dans ouverturechapitre. Sections numerotees 1.1, 1.2 |
-| Pied de page : chiffre centre nu | Pave nxBleu coin exterieur + « Nexus Reussite » petites capitales cote interieur |
-| Code : espaces parasites, guillemets courbes | lstset global columns=fullflexible, keepspaces, breaklines. lstinline protege de babel NoAutoSpacing |
-| QCM : diagnostics a cote des options (revele la reponse) | Options propres (A/B/C sans annotation). Diagnostics dans fichier separe (QCM-DIAG.tex) |
-| 22 overfull hbox dans le pilote | 0 overfull (breaklines + reformulations lstinline longs) |
-| ID/duree dans le bandeau exercice (pollution visuelle) | Metadata deportees en marge (ID + duree en Montserrat 6.5pt gris) |
+Le sous-titre de couverture etait code en dur « Manuel NSI Premiere --- Nexus Reussite »
+(cls:361). Il est desormais parametre par `\matiere` et `\niveau` :
 
-## Contenu du specimen (5 pages)
+```latex
+\matiere{Mathematiques}\niveau{Premiere specialite}  % => Mathematiques --- Premiere specialite --- Nexus Reussite
+\matiere{NSI}\niveau{Premiere}                        % => NSI --- Premiere --- Nexus Reussite
+```
 
-1. Ouverture pleine page bleu + page contrat
-2. Cours : definition D1, theoreme (deballage), erreur frequente (copie fautive barree), figure pgfplots, approfondissement, 2 appuis de marge
-3. Fiche methode M1 complete (6 rubriques)
-4. Exercices 3 parcours (bandeaux, metadata en marge) + corriges avec commentaire de marge
-5. Code NSI (codereference en boite, python, console, memtable, arbre TikZ) + mini-projet en boite or + QCM nouvelle formule
+Defaut : NSI / Premiere (retro-compatible avec les chapitres NSI existants).
+Les gabarits `chapitre_master.tex` fixent la matiere pour chaque projet.
 
-## Gates
+## Invariants preserves
 
-- 0 Overfull hbox > 2pt
-- 170 tests passes (dont regression QCM diagnostic adjacent)
-- lot-gates ALL PASSED sur le pilote (verify 0 fail, accents OK, gates-corpus-strict VERT)
-- Pilote 0 overfull, 211 Ko
+- Noms et signatures d'environnements inchanges (nxdef, nxthm, nxprop, nxerr, nxstar,
+  nxcard, fmbox, fichemethode, exercice, corrige, codereference, python, console,
+  evaluation, miniprojet, ouverturechapitre).
+- Losanges de parcours (parcoursUn, parcoursDeux, parcoursTrois) conserves.
+- Moteur LuaLaTeX obligatoire (\RequireLuaTeX).
+- Polices embarquees (Libertinus, Montserrat, JetBrains Mono).
+
+## Gate visuel (5 cibles compilees)
+
+| Cible | Pages | Ko | Sous-titre couverture | Verdict |
+|---|---:|---:|---|---|
+| 1SPE-SUITES | 77 | 462 | Mathematiques --- Premiere specialite --- Nexus Reussite | PASS |
+| 1SPE-SECOND-DEGRE | 61 | 349 | Mathematiques --- Premiere specialite --- Nexus Reussite | PASS |
+| 1NSI-TYPES-CONSTRUITS | 34 | 213 | (pas d'ouverture dans le maitre) | PASS |
+| Specimen maths | 5 | 68 | NSI --- Premiere --- Nexus Reussite | PASS |
+
+## Tests
+
+- `test_nexus_class_has_no_hardcoded_subject_label` : PASS
+- `make test` maths : 343 pass
+- `make test` NSI : 214 pass
+- `check_charte_sync` : 7/7 identiques
 
 ## Decision requise
 
-Valider la charte v3.1 avant migration des chapitres existants.
-Les deux validations (specimen v3.1 + pilote NSI) sont traitees ensemble.
+Valider la charte v4 (parametrage matiere/niveau).
+Pause non bloquante : la production (PHASE C) peut enchainer immediatement.

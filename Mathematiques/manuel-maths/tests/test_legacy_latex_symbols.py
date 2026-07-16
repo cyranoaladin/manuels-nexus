@@ -32,3 +32,13 @@ def test_nexus_class_loads_common_assets_from_the_gabarits_directory():
     document_class = (ROOT / "gabarits" / "nexus-manuel.cls").read_text(encoding="utf-8")
 
     assert r"\InputIfFileExists{gabarits/nexus-icons.tex}" in document_class
+
+
+def test_nexus_class_has_no_hardcoded_subject_label():
+    """B.2 — aucun libelle de matiere en dur dans la classe."""
+    document_class = (ROOT / "gabarits" / "nexus-manuel.cls").read_text(encoding="utf-8")
+
+    for label in ["Manuel NSI", "Manuel Mathématiques", "Manuel Physique"]:
+        assert label not in document_class, (
+            f"Libellé de matière « {label} » codé en dur dans nexus-manuel.cls"
+        )

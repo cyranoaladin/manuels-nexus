@@ -3,7 +3,7 @@
 % Polices : Libertinus Serif/Math + Montserrat + JetBrains Mono (OFL, embarquées).
 % Charte graphique : docs/06_charte_graphique.md v3.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nexus-manuel}[2026/07/15 v3.0 Manuel Nexus Reussite - edition professionnelle]
+\ProvidesClass{nexus-manuel}[2026/07/16 v4.0 Manuel Nexus Reussite - edition professionnelle]
 
 % ===========================================================================
 %  BASE KOMA-SCRIPT
@@ -21,6 +21,14 @@
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
 \RequirePackage{amssymb}
+
+% ===========================================================================
+%  MATIÈRE ET NIVEAU (paramétrage du sous-titre de couverture)
+% ===========================================================================
+\newcommand{\nexus@matiere}{NSI}
+\newcommand{\nexus@niveau}{Première}
+\newcommand{\matiere}[1]{\renewcommand{\nexus@matiere}{#1}}
+\newcommand{\niveau}[1]{\renewcommand{\nexus@niveau}{#1}}
 
 % ===========================================================================
 %  POLICES (fontspec + unicode-math, embarquées via Path=)
@@ -358,7 +366,7 @@
     \node[anchor=south west, text=white!80,
       font=\sffamily\fontseries{m}\fontsize{8.5}{11}\selectfont]
       at ([xshift=20mm, yshift=36mm]current page.south west)
-      {Manuel NSI Première --- Nexus Réussite};
+      {\nexus@matiere\ --- \nexus@niveau\ --- Nexus Réussite};
   \end{tikzpicture}%
   \clearpage
   % --- PAGE CONTRAT (verso) ---

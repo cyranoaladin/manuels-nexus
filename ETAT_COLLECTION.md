@@ -17,7 +17,7 @@ Dernière consolidation : 16 juillet 2026 (post E.2-E.4).
 - NSI : rapprochement `NSI/validations/E2_rapprochement_pilote_nsi.md` ;
   `make test` 214 pass, `gates-corpus-strict` tout VERT, verify_pdf branché.
 - Assertion amsthm : `test_nexus_class_loads_amsthm_after_amsmath_for_qed` PASS.
-- Défaut ouvert : sous-titre couverture maths « Manuel NSI Première » (cls:361).
+- Défaut fermé : sous-titre couverture paramétré via `\matiere`/`\niveau` (charte v4).
 
 ## Prochaine action
 
