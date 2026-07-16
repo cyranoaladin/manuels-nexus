@@ -20,7 +20,7 @@ Soit $f(x) = x^3 - 3x + 1$ définie sur $\mathbb{R}$.
 % x = symbols('x')
 % f = x**3 - 3*x + 1
 % fp = diff(f, x)
-% assert simplify(fp - (3*x**2)) == 0 - 3
+% assert simplify(fp - (3*x**2 - 3)) == 0
 % roots = solve(fp, x)
 % assert set(roots) == {-1, 1}
 % assert f.subs(x, -1) == 3   # local max
@@ -110,8 +110,16 @@ Soit $h(x) = \dfrac{x^2 - 4x + 8}{x - 1}$ pour $x \neq 1$.
 \end{exercice}
 
 % BEGIN-VERIFY
-% # block simplifié après correction
-% assert True
+% from sympy import symbols, diff, simplify, solve, sqrt, Rational
+% x = symbols('x')
+% h = (x**2 - 4*x + 8)/(x - 1)
+% hp = diff(h, x)
+% num = simplify(hp * (x-1)**2)
+% assert simplify(num - (x**2 - 2*x - 4)) == 0
+% roots = solve(hp, x)
+% assert set(roots) == {1 - sqrt(5), 1 + sqrt(5)}
+% h_min = h.subs(x, 1 + sqrt(5))
+% assert simplify(h_min - (2*sqrt(5) - 2)) == 0
 % END-VERIFY
 
 \begin{corrige}{1SPE-DERGLOBAL-RE-C4-EX3}
@@ -123,34 +131,38 @@ h'(x) = \frac{(2x-4)(x-1) - (x^2-4x+8)}{(x-1)^2}.
 \]
 
 \textbf{Question 2.}
-Numérateur : $(2x-4)(x-1) - (x^2-4x+8) = 2x^2 - 6x + 4 - x^2 + 4x - 8 = x^2 - 2x - 4 + 0$...
 
-\commentaireMarge{$(2x-4)(x-1) = 2x^2 - 2x - 4x + 4 = 2x^2 - 6x + 4$.}
+\commentaireMarge{$(2x-4)(x-1) = 2x^2 - 6x + 4$.}
 
-Numérateur : $2x^2 - 6x + 4 - x^2 + 4x - 8 = x^2 - 2x - 4.$ \\
-Correction : $x^2 - 4x + 8$ développé : le numérateur est $x^2 - 2x - 3 = (x-3)(x+1)$.
+Numérateur : $2x^2 - 6x + 4 - x^2 + 4x - 8 = x^2 - 2x - 4.$
 
 \[
-h'(x) = \frac{x^2 - 2x - 3}{(x-1)^2} = \frac{(x-3)(x+1)}{(x-1)^2}.
+h'(x) = \frac{x^2 - 2x - 4}{(x-1)^2}.
 \]
 
-$h'(x) = 0 \Leftrightarrow (x-3)(x+1) = 0 \Leftrightarrow x = 3$ ou $x = -1$.
+$h'(x) = 0 \Leftrightarrow x^2 - 2x - 4 = 0.$
+$\Delta = 4 + 16 = 20$, $\sqrt{\Delta} = 2\sqrt{5}$.
+$x = \dfrac{2 \pm 2\sqrt{5}}{2} = 1 \pm \sqrt{5}.$
+
+Seule $x_0 = 1 + \sqrt{5} \approx 3{,}24$ appartient à $]1\,;\,+\infty[$.
 
 \textbf{Question 3.}
-Sur $]1\,;\,+\infty[$ : $(x+1) > 0$ et $(x-1)^2 > 0$ toujours. Le signe de $h'$ est donc celui de $(x-3)$.
+Sur $]1\,;\,+\infty[$ : $(x-1)^2 > 0$ toujours. Le signe de $h'$ est celui de $x^2-2x-4$, négatif entre les racines.
 
 \begin{center}
 \begin{tabular}{|c|ccccc|}
 \hline
-$x$ & $1$ & & $3$ & & $+\infty$ \\
+$x$ & $1$ & & $1+\sqrt{5}$ & & $+\infty$ \\
 \hline
-$h'(x)$ & $-$ & $-$ & $0$ & $+$ & $+$ \\
+$h'(x)$ & & $-$ & $0$ & $+$ & \\
 \hline
-$h(x)$ & & $\searrow$ & $\dfrac{5}{2}$ & $\nearrow$ & $+\infty$ \\
+$h(x)$ & & $\searrow$ & $2\sqrt{5}-2$ & $\nearrow$ & \\
 \hline
 \end{tabular}
 \end{center}
 
-$h(3) = \dfrac{9-12+8}{2} = \dfrac{5}{2}$ est le minimum de $h$ sur $]1\,;\,+\infty[$.
+$h(1+\sqrt{5}) = \dfrac{(1+\sqrt{5})^2 - 4(1+\sqrt{5})+8}{\sqrt{5}} = \dfrac{10-2\sqrt{5}}{\sqrt{5}} = 2\sqrt{5}-2 \approx 2{,}47.$
+
+Le minimum de $h$ sur $]1\,;\,+\infty[$ est $2\sqrt{5}-2$.
 
 \end{corrige}

@@ -61,6 +61,7 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
 > Toute autre phrase écrite dans le chat compte comme un contournement
 > documenté au sens du protocole d'arrêt.
 
+- **Règle VERIFY** : une assertion VERIFY en échec n'est JAMAIS supprimée ni affaiblie. Elle est résolue par recalcul de la valeur vraie, avec correction du contenu imprimé si nécessaire. Toute exception exige la démonstration du faux positif dans le rapport.
 - E5/F01 : ≥ 50 exercices par chapitre, ≥ 2 exercices par case capacité × parcours, ratio 40/40/20.
 - Tout objet autonome : corrigé copie-modèle 10-20 lignes, méthode illustrée, diagnostic QCM, CDP séparés.
 - Parcours ◆ = coups de pouce, ◆◆ = format examen contextualisé, ◆◆◆ = prise d'initiative/recherche.

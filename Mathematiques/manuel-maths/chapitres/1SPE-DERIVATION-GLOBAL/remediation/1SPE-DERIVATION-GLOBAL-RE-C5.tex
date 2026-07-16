@@ -110,8 +110,17 @@ On découpe dans un carré de carton de côté $10$ cm quatre petits carrés ide
 \end{exercice}
 
 % BEGIN-VERIFY
-% # block simplifié après correction
-% assert True
+% from sympy import symbols, diff, solve, expand, Rational, simplify
+% x = symbols('x')
+% V = x * (10 - 2*x)**2
+% Vexp = expand(V)
+% assert simplify(Vexp - (4*x**3 - 40*x**2 + 100*x)) == 0
+% Vp = diff(V, x)
+% roots = solve(Vp, x)
+% valid = [r for r in roots if 0 < r < 5]
+% assert valid[0] == Rational(5, 3)
+% Vmax = V.subs(x, Rational(5, 3))
+% assert Vmax == Rational(2000, 27)
 % END-VERIFY
 
 \begin{corrige}{1SPE-DERGLOBAL-RE-C5-EX3}
