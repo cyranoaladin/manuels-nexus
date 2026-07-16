@@ -1,9 +1,9 @@
-% nexus-manuel.cls v3 — Classe du manuel Nexus Réussite (édition professionnelle)
+% nexus-manuel.cls v4.1 — Classe du manuel Nexus Réussite (édition premium)
 % Moteur : LuaLaTeX obligatoire. Base : KOMA-Script scrbook.
-% Polices : Libertinus Serif/Math + Montserrat + JetBrains Mono (OFL, embarquées).
-% Charte graphique : docs/06_charte_graphique.md v3.
+% Polices : TeX Gyre Pagella (corps + maths) + TeX Gyre Heros (titres) + JetBrains Mono (code).
+% Charte graphique : kit v2 « Éditorial premium » transposé.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{nexus-manuel}[2026/07/16 v4.0 Manuel Nexus Reussite - edition professionnelle]
+\ProvidesClass{nexus-manuel}[2026/07/16 v4.1 Manuel Nexus Reussite - editorial premium]
 
 % ===========================================================================
 %  BASE KOMA-SCRIPT
@@ -31,38 +31,28 @@
 \newcommand{\niveau}[1]{\renewcommand{\nexus@niveau}{#1}}
 
 % ===========================================================================
-%  POLICES (fontspec + unicode-math, embarquées via Path=)
+%  POLICES — Kit v2 : Pagella (corps+maths), Heros (titres), JetBrains Mono (code)
 % ===========================================================================
 \RequirePackage{fontspec}
 \RequirePackage{unicode-math}
 
 \defaultfontfeatures{Ligatures=TeX}
 
-% Détection du chemin des fontes (gabarits/fonts/ depuis le répertoire de travail)
+% Chemin pour les polices embarquées (JetBrains Mono)
 \newcommand{\nxFontPath}{gabarits/fonts/}
 
-\setmainfont{LibertinusSerif}[
-  Path=\nxFontPath,
-  Extension=.otf,
-  UprightFont=*-Regular,
-  BoldFont=*-Bold,
-  ItalicFont=*-Italic,
-  BoldItalicFont=*-BoldItalic,
-]
-\setmathfont{LibertinusMath-Regular.otf}[Path=\nxFontPath]
+% Corps : TeX Gyre Pagella (= Palatino libre), interligne 1.06
+\setmainfont{TeX Gyre Pagella}
+\linespread{1.06}
+% Mathématiques : TeX Gyre Pagella Math
+\setmathfont{TeX Gyre Pagella Math}
 
-\setsansfont{Montserrat}[
-  Path=\nxFontPath,
-  Extension=.otf,
-  UprightFont=*-Regular,
-  BoldFont=*-SemiBold,
-  ItalicFont=*-Italic,
-  BoldItalicFont=*-SemiBoldItalic,
-  FontFace={m}{n}{*-Medium},
-  FontFace={m}{it}{*-MediumItalic},
-  FontFace={thin}{n}{*-Thin},
-]
+% Titres, labels, en-têtes, folio : TeX Gyre Heros (= Helvetica libre)
+\setsansfont{TeX Gyre Heros}[Scale=0.94]
+% Raccourci « famille titre » : toujours sans-serif gras.
+\newcommand{\titrefont}{\sffamily\bfseries}
 
+% Code : JetBrains Mono (embarqué, conservé du v3)
 \setmonofont{JetBrainsMono}[
   Path=\nxFontPath,
   Extension=.otf,
