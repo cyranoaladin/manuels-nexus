@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-EXPO-ME-002","chapitre":"1SPE-EXPONENTIELLE","type_objet":"methode","capacites_codes":["C3","C4"],"status":"generated"}
+\begin{fichemethode}{M2}{Étudier les variations d'une fonction avec l'exponentielle}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande d'étudier les variations d'une fonction $f$ faisant intervenir l'exponentielle, ou de dresser son tableau de variations.}
+\pasApas{\begin{enumerate}
+  \item Je calcule $f'(x)$ en utilisant les règles de dérivation (produit, quotient, composition avec $\mathrm{e}^{u}$).
+  \item Je factorise $f'(x)$ en isolant le facteur exponentiel.
+  \item J'utilise le fait que $\mathrm{e}^{(\cdot)} > 0$ pour tout réel : le signe de $f'(x)$ est celui du facteur restant.
+  \item J'étudie le signe du facteur restant et j'en déduis les variations de $f$.
+\end{enumerate}}
+\exempleRedige{Étudions les variations de $f(x) = (2x-1)\mathrm{e}^x$ sur $\mathbb{R}$. \commentaireMarge{Étape 1 : dérivée (règle du produit).} $f'(x) = 2\,\mathrm{e}^x + (2x-1)\mathrm{e}^x$. \commentaireMarge{Étape 2 : factorisation.} $f'(x) = \mathrm{e}^x\bigl(2 + 2x - 1\bigr) = \mathrm{e}^x(2x+1)$. \commentaireMarge{Étape 3 : $\mathrm{e}^x > 0$ toujours.} Le signe de $f'(x)$ est celui de $2x+1$. \commentaireMarge{Étape 4 : signe de $2x+1$.} $2x+1 = 0 \Leftrightarrow x = -\dfrac{1}{2}$. On a $f'(x) < 0$ sur $\left]-\infty ; -\dfrac{1}{2}\right[$ et $f'(x) > 0$ sur $\left]-\dfrac{1}{2} ; +\infty\right[$.
+\[\begin{array}{|c|ccccc|}
+\hline
+x & -\infty & & -\dfrac{1}{2} & & +\infty \\
+\hline
+f'(x) & & - & 0 & + & \\
+\hline
+f & \searrow & & f\!\left(-\tfrac{1}{2}\right) & & \nearrow \\
+\hline
+\end{array}\]
+$f$ admet un minimum en $x = -\dfrac{1}{2}$, de valeur $f\!\left(-\dfrac{1}{2}\right) = -2\,\mathrm{e}^{-1/2}$.}
+\pieges{\begin{itemize}
+  \item Oublier de factoriser par $\mathrm{e}^x$ et tenter de résoudre $f'(x) = 0$ sans simplifier.
+  \item Croire que $\mathrm{e}^x$ peut s'annuler ou changer de signe : $\mathrm{e}^x > 0$ pour tout $x \in \mathbb{R}$.
+  \item Se tromper dans la dérivation du produit : oublier le terme $u'v$ ou $uv'$.
+\end{itemize}}
+\verifier{Je contrôle que $f'\!\left(-\dfrac{1}{2}\right) = 0$ en remplaçant dans l'expression factorisée, et que les variations sont cohérentes avec quelques valeurs numériques de $f$.}
+\sEntrainer{\refExos{M2}}
+\end{fichemethode}

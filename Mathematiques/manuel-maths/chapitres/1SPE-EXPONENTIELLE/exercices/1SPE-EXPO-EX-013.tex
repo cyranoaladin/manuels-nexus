@@ -1,0 +1,16 @@
+% META: {"id":"1SPE-EXPO-EX-013","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C2"],"capacites_codes":["C2"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-013.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-013.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify
+% x = symbols('x')
+% assert simplify(exp(x+1)*exp(x-1) - exp(2*x)) == 0
+% assert simplify(exp(2*x+3)/exp(x+1) - exp(x+2)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-013}{1}{5}
+Simplifier chacune des expressions suivantes :
+\begin{enumerate}
+  \item $\mathrm{e}^{x+1} \times \mathrm{e}^{x-1}$
+  \item $\dfrac{\mathrm{e}^{2x+3}}{\mathrm{e}^{x+1}}$
+  \item $\dfrac{\left(\mathrm{e}^{x}\right)^3}{\mathrm{e}^{2x}}$
+  \item $\mathrm{e}^{x+2} \times \mathrm{e}^{-(x-2)}$
+\end{enumerate}
+\end{exercice}

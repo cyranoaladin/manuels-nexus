@@ -1,0 +1,25 @@
+% META: {"id":"1SPE-EXPO-EX-048","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C2","1SPE-EXPONENTIELLE-C3","1SPE-EXPONENTIELLE-C4"],"capacites_codes":["C2","C3","C4"],"methodes":["M2","M3"],"parcours":3,"competences":["raisonner","calculer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-048.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-048.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% f = exp(x) / (exp(x) + 1)
+% fp = simplify(diff(f, x))
+% # f'(x) = e^x / (e^x + 1)^2
+% assert simplify(fp - exp(x)/(exp(x) + 1)**2) == 0
+% # f'(x) > 0 pour tout x, donc f strictement croissante
+% # limites
+% assert limit(f, x, oo) == 1
+% assert limit(f, x, -oo) == 0
+% # f(0) = 1/2
+% assert f.subs(x, 0) == Rational(1, 2)
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-048}{3}{15}
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = \dfrac{\mathrm{e}^x}{\mathrm{e}^x + 1}$.
+\begin{enumerate}
+\item Montrer que $f(x) = \dfrac{1}{1 + \mathrm{e}^{-x}}$ pour tout réel $x$.
+\item Calculer $f'(x)$ et montrer que $f'(x) = \dfrac{\mathrm{e}^x}{(\mathrm{e}^x + 1)^2}$.
+\item En déduire que $f$ est strictement croissante sur $\mathbb{R}$.
+\item Déterminer les limites de $f$ en $+\infty$ et en $-\infty$. En déduire les asymptotes.
+\item Calculer $f(0)$ et dresser le tableau de variations complet de $f$.
+\end{enumerate}
+\end{exercice}

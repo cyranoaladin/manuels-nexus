@@ -1,0 +1,16 @@
+% META: {"id":"1SPE-EXPO-EX-023","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C3"],"capacites_codes":["C3"],"methodes":["M2"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-023.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-023.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x), x, oo) == oo
+% assert limit(exp(x), x, -oo) == 0
+% assert limit(exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-023}{1}{5}
+Déterminer les limites suivantes en justifiant :
+\begin{enumerate}
+  \item $\displaystyle\lim_{x \to +\infty} \mathrm{e}^x$
+  \item $\displaystyle\lim_{x \to -\infty} \mathrm{e}^x$
+  \item $\displaystyle\lim_{x \to +\infty} \mathrm{e}^{-x}$
+\end{enumerate}
+\end{exercice}

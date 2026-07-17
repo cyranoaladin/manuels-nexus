@@ -1,0 +1,159 @@
+% META: {"id":"1SPE-EXPO-TD-FIL-ROUGE","chapitre":"1SPE-EXPONENTIELLE","type_objet":"td","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":50,"status":"generated"}
+
+% ============================================================
+% TD FIL ROUGE — Des intérêts composés au nombre e
+% Nexus Réussite — 1re Spécialité
+% Durée : 50 min — Situation accroche du chapitre
+% ============================================================
+
+\section*{TD fil rouge — Des intérêts composés au nombre $\mathrm{e}$}
+
+\textit{Durée : 50 minutes — Toutes les capacités C1 à C5 sont mobilisées.}
+
+\bigskip
+
+\begin{center}
+\textbf{Accroche}
+
+\medskip
+\parbox{0.9\textwidth}{On place un capital de $1\,000$~\euro{} sur un compte rémunéré au taux annuel de $100\,\%$. Si les intérêts sont calculés une seule fois en fin d'année, le capital double et vaut $2\,000$~\euro{}. Mais que se passe-t-il si les intérêts sont calculés plus fréquemment : chaque mois, chaque jour, chaque seconde ? Le capital peut-il croître sans limite ?}
+\end{center}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie A — Intérêts composés et découverte de $\mathrm{e}$ (C1) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}
+  \item Le taux annuel est $100\,\%$. Si les intérêts sont calculés $n$ fois par an, le taux par période est $\dfrac{1}{n}$. Exprimer le capital $C_n$ au bout d'un an en fonction de $n$.
+  \item Calculer $C_n$ pour $n = 1$, $n = 2$, $n = 4$, $n = 12$, $n = 365$.
+  \item Conjecturer la valeur de $\displaystyle\lim_{n \to +\infty} C_n$. Que vaut $\displaystyle\lim_{n \to +\infty} \left(1 + \frac{1}{n}\right)^n$ ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, N as Neval, E, limit, oo
+% n = symbols('n', positive=True, integer=True)
+% C = 1000 * (1 + Rational(1, 1))**1  # n=1
+% assert C == 2000
+% C2 = 1000 * (1 + Rational(1, 2))**2
+% assert C2 == 1000 * Rational(9, 4)
+% assert C2 == Rational(9000, 4)  # 2250
+% C4 = 1000 * (1 + Rational(1, 4))**4
+% C4_num = float(Neval(C4))
+% assert abs(C4_num - 2441.41) < 1
+% C12 = 1000 * (1 + Rational(1, 12))**12
+% C12_num = float(Neval(C12))
+% assert abs(C12_num - 2613.04) < 1
+% C365 = 1000 * (1 + Rational(1, 365))**365
+% C365_num = float(Neval(C365))
+% assert abs(C365_num - 2714.57) < 1
+% # Limit: (1 + 1/n)^n -> e
+% from sympy import Symbol
+% n_cont = Symbol('n', positive=True)
+% assert limit((1 + 1/n_cont)**n_cont, n_cont, oo) == E
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie B — Propriétés algébriques (C2) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Le capital au bout de $t$ années (avec capitalisation continue) est $C(t) = 1000\,\mathrm{e}^t$. Calculer $C(1)$, $C(2)$ et $C(3)$.
+  \item Vérifier que $C(2) = C(1) \times \mathrm{e}$. Quelle propriété algébrique de l'exponentielle est utilisée ?
+  \item Montrer que $\dfrac{C(t+1)}{C(t)} = \mathrm{e}$ pour tout $t$. Interpréter : le coefficient multiplicateur annuel est constant.
+  \item Simplifier $\dfrac{C(t_2)}{C(t_1)}$ en fonction de $t_2 - t_1$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify, E, N as Neval
+% t, t1, t2 = symbols('t t_1 t_2')
+% C = 1000*exp(t)
+% assert C.subs(t, 0) == 1000
+% C1 = C.subs(t, 1)
+% assert simplify(C1 - 1000*E) == 0
+% C2 = C.subs(t, 2)
+% assert simplify(C2 - 1000*E**2) == 0
+% # C(2) = C(1) * e
+% assert simplify(C2 - C1*E) == 0
+% # C(t+1)/C(t) = e
+% ratio = simplify(C.subs(t, t+1) / C)
+% assert ratio == E
+% # C(t2)/C(t1) = e^(t2-t1)
+% ratio2 = simplify(1000*exp(t2) / (1000*exp(t1)))
+% assert simplify(ratio2 - exp(t2 - t1)) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie C — Étude de la croissance du capital (C3, C4) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Calculer $C'(t)$. Que remarque-t-on ?
+  \item Étudier le sens de variation de $C$ sur $[0\,;\,+\infty[$. Justifier.
+  \item Calculer $\displaystyle\lim_{t \to +\infty} C(t)$. Le capital croît-il sans limite ?
+  \item On considère un placement plus réaliste au taux annuel de $5\,\%$ : $C_5(t) = 1000\,\mathrm{e}^{0{,}05t}$. Calculer $C_5'(t)$. Comparer la vitesse de croissance à celle du placement à $100\,\%$.
+  \item Étudier les variations de $f(t) = C_5(t) - (1000 + 50t)$, c'est-à-dire comparer la capitalisation continue au placement linéaire. Montrer que $f$ est croissante sur $[0\,;\,+\infty[$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify, limit, oo
+% t = symbols('t')
+% C = 1000*exp(t)
+% Cp = diff(C, t)
+% assert simplify(Cp - 1000*exp(t)) == 0  # C' = C
+% assert limit(C, t, oo) == oo
+% # Placement at 5%
+% C5 = 1000*exp(Rational(5, 100)*t)
+% from sympy import Rational
+% C5 = 1000*exp(Rational(1, 20)*t)
+% C5p = diff(C5, t)
+% assert simplify(C5p - 50*exp(Rational(1, 20)*t)) == 0
+% # f(t) = C5(t) - 1000 - 50t
+% f = C5 - 1000 - 50*t
+% fp = diff(f, t)
+% # fp = 50*e^(t/20) - 50 = 50*(e^(t/20) - 1)
+% assert simplify(fp - 50*(exp(Rational(1, 20)*t) - 1)) == 0
+% # For t >= 0: e^(t/20) >= 1 so fp >= 0
+% assert fp.subs(t, 0) == 0
+% assert fp.subs(t, 1) > 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie D — Temps de doublement et synthèse (C5) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Pour le placement à $5\,\%$, résoudre $C_5(t) = 2000$ pour déterminer le temps de doublement $T_d$.
+  \item Exprimer $T_d$ en fonction du taux $r$ pour un placement général $C_r(t) = 1000\,\mathrm{e}^{rt}$.
+  \item Calculer $T_d$ pour $r = 0{,}03$ (taux à $3\,\%$) et $r = 0{,}10$ (taux à $10\,\%$). Arrondir à l'année.
+  \item Montrer que le temps de doublement vérifie l'inéquation $T_d > \dfrac{\ln 2}{r}$ si l'on impose $C_r(T_d) \geqslant 2000$. Cette inégalité est-elle une égalité ?
+  \item Rédiger une synthèse de 3 à 5 lignes : comment le nombre $\mathrm{e}$ apparaît-il naturellement dans les problèmes de croissance continue ? Quel est le lien entre la propriété $\mathrm{e}^{a+b} = \mathrm{e}^a \mathrm{e}^b$ et le coefficient multiplicateur constant ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, log, Eq, Rational, N as Neval
+% t, r = symbols('t r', positive=True)
+% # C_r(t) = 1000*e^(rt) = 2000 => e^(rt) = 2 => rt = ln(2) => t = ln(2)/r
+% sol = solve(Eq(1000*exp(r*t), 2000), t)
+% assert sol == [log(2)/r]
+% # r = 0.05: Td = ln(2)/0.05
+% Td_005 = float(Neval(log(2)/Rational(1, 20)))
+% assert abs(Td_005 - 13.86) < 0.1  # ~13.86 years
+% # r = 0.03: Td = ln(2)/0.03
+% Td_003 = float(Neval(log(2)/Rational(3, 100)))
+% assert abs(Td_003 - 23.1) < 0.2
+% # r = 0.10: Td = ln(2)/0.10
+% Td_010 = float(Neval(log(2)/Rational(1, 10)))
+% assert abs(Td_010 - 6.93) < 0.1
+% END-VERIFY

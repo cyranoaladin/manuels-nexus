@@ -1,0 +1,31 @@
+% META: {"id":"1SPE-EXPO-CO-005","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-005","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = Function('f')
+% g = f(x) * exp(-x)
+% g_prime = diff(f(x), x) * exp(-x) + f(x) * (-exp(-x))
+% g_prime_sub = g_prime.subs(diff(f(x), x), f(x))
+% assert simplify(g_prime_sub) == 0, "g'=0 quand f'=f"
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-005}
+\begin{enumerate}
+\item La fonction $g$ est un produit $g(x) = f(x) \cdot \mathrm{e}^{-x}$. Par la formule $(uv)' = u'v + uv'$ :
+\[g'(x) = f'(x) \cdot \mathrm{e}^{-x} + f(x) \cdot (-\mathrm{e}^{-x}) = \mathrm{e}^{-x}\bigl(f'(x) - f(x)\bigr).\]
+
+\item Puisque $f'(x) = f(x)$, on obtient :
+\[g'(x) = \mathrm{e}^{-x}\bigl(f(x) - f(x)\bigr) = \mathrm{e}^{-x} \times 0 = 0.\]
+Donc $g'(x) = 0$ pour tout réel $x$.
+
+\item Une fonction dont la dérivée est nulle sur $\mathbb{R}$ est constante sur $\mathbb{R}$. Donc il existe une constante $C$ telle que $g(x) = C$ pour tout réel $x$.
+
+\item En évaluant en $x = 0$ : $g(0) = f(0) \cdot \mathrm{e}^{0} = f(0) \cdot 1 = f(0)$.
+
+Donc $C = f(0)$ et pour tout réel $x$ :
+\[f(x) \cdot \mathrm{e}^{-x} = f(0), \quad \text{soit} \quad f(x) = f(0) \cdot \mathrm{e}^x.\]
+
+\item Si $f(0) \neq 0$, alors $f(x) = f(0) \cdot \mathrm{e}^x$. Comme $\mathrm{e}^x > 0$ pour tout réel $x$ et $f(0) \neq 0$, le produit $f(0) \cdot \mathrm{e}^x$ n'est jamais nul : $f$ ne s'annule jamais.
+
+Si $f(0) = 0$, alors $f(x) = 0 \cdot \mathrm{e}^x = 0$ pour tout réel $x$ : $f$ est la fonction nulle.
+\end{enumerate}
+\end{corrige}

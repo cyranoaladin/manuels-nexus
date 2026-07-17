@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-EXPO-EX-005","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["raisonner"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-005.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-005.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = Function('f')
+% # If f' = f, consider g = f * exp(-x)
+% g = f(x) * exp(-x)
+% g_prime = diff(f(x), x) * exp(-x) + f(x) * (-exp(-x))
+% # If f'(x) = f(x), then g'(x) = f(x)*exp(-x) - f(x)*exp(-x) = 0
+% g_prime_substituted = g_prime.subs(diff(f(x), x), f(x))
+% assert simplify(g_prime_substituted) == 0, "g' = 0 when f' = f"
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-005}{2}{10}
+On suppose qu'une fonction $f$, dérivable sur $\mathbb{R}$, vérifie $f' = f$.
+
+On pose $g(x) = f(x) \cdot \mathrm{e}^{-x}$.
+\begin{enumerate}
+\item Calculer $g'(x)$ en utilisant la formule de dérivation d'un produit.
+\item En utilisant l'hypothèse $f'(x) = f(x)$, montrer que $g'(x) = 0$ pour tout réel $x$.
+\item En déduire que $g$ est une fonction constante sur $\mathbb{R}$.
+\item Montrer que $f(x) = f(0) \cdot \mathrm{e}^x$ pour tout réel $x$.
+\item En déduire que si $f$ vérifie $f' = f$, alors $f$ ne s'annule jamais ou bien $f$ est la fonction nulle.
+\end{enumerate}
+\end{exercice}

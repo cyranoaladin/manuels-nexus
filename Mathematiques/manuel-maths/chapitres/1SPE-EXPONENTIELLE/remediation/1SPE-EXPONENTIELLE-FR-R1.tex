@@ -1,0 +1,155 @@
+% META: {"id": "1SPE-EXPONENTIELLE-FR-R1", "chapitre": "1SPE-EXPONENTIELLE", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R1 : Derivee somme/produit/quotient
+% Prerequis issu de 1SPE-DERIVATION-GLOBAL
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Derivee d'une somme, d'un produit, d'un quotient}
+
+\textbf{Somme :} $(u + v)' = u' + v'$.
+
+\textbf{Produit :} $(uv)' = u'v + uv'$.
+
+\textbf{Quotient :} $\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2}$ \quad (avec $v \neq 0$).
+
+Ces formules sont indispensables pour deriver les fonctions faisant intervenir $\mathrm{e}^x$ multipliee ou divisee par d'autres fonctions.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R1-EX1}{1}{6}
+Calculer la derivee de chaque fonction.
+\begin{enumerate}
+  \item $f(x) = 3x^2 + 5x - 7$
+  \item $g(x) = x^3 - 4x + 1$
+  \item $h(x) = 2x^4 + x^2 - 3x$
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{On applique la derivee terme a terme : $(x^n)' = nx^{n-1}$ et la constante disparait.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x')
+% f = 3*x**2 + 5*x - 7
+% assert diff(f, x) == 6*x + 5
+% g = x**3 - 4*x + 1
+% assert diff(g, x) == 3*x**2 - 4
+% h = 2*x**4 + x**2 - 3*x
+% assert diff(h, x) == 8*x**3 + 2*x - 3
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R1-EX1}
+
+\commentaireMarge{On derive terme a terme : $(ax^n)' = anx^{n-1}$.}
+
+\textbf{Question 1.}
+\[
+f'(x) = 3 \times 2x + 5 = 6x + 5.
+\]
+
+\textbf{Question 2.}
+\[
+g'(x) = 3x^2 - 4.
+\]
+
+\textbf{Question 3.}
+\[
+h'(x) = 2 \times 4x^3 + 2x - 3 = 8x^3 + 2x - 3.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R1-EX2}{1}{8}
+Calculer la derivee de chaque fonction en utilisant la formule du produit.
+\begin{enumerate}
+  \item $f(x) = x(2x + 3)$
+  \item $g(x) = (x + 1)(x^2 - 1)$
+  \item $h(x) = (3x - 2)(x + 5)$
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Formule du produit : $(uv)' = u'v + uv'$. Identifier $u$ et $v$, calculer $u'$ et $v'$, puis assembler.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand
+% x = symbols('x')
+% f = x*(2*x + 3)
+% assert expand(diff(f, x)) == 4*x + 3
+% g = (x + 1)*(x**2 - 1)
+% assert expand(diff(g, x)) == 3*x**2 + 2*x - 1
+% h = (3*x - 2)*(x + 5)
+% assert expand(diff(h, x)) == 6*x + 13
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R1-EX2}
+
+\commentaireMarge{$(uv)' = u'v + uv'$.}
+
+\textbf{Question 1.} $u = x$, $v = 2x+3$ donc $u' = 1$, $v' = 2$.
+\[
+f'(x) = 1 \times (2x+3) + x \times 2 = 2x + 3 + 2x = 4x + 3.
+\]
+
+\textbf{Question 2.} $u = x+1$, $v = x^2-1$ donc $u' = 1$, $v' = 2x$.
+\[
+g'(x) = 1 \times (x^2 - 1) + (x+1) \times 2x = x^2 - 1 + 2x^2 + 2x = 3x^2 + 2x - 1.
+\]
+
+\textbf{Question 3.} $u = 3x-2$, $v = x+5$ donc $u' = 3$, $v' = 1$.
+\[
+h'(x) = 3(x+5) + (3x-2) \times 1 = 3x + 15 + 3x - 2 = 6x + 13.
+\]
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R1-EX3}{2}{8}
+Calculer la derivee de chaque fonction en utilisant la formule du quotient.
+\begin{enumerate}
+  \item $f(x) = \dfrac{x+1}{x-1}$ \quad pour $x \neq 1$
+  \item $g(x) = \dfrac{2x}{x^2+1}$
+  \item $h(x) = \dfrac{x^2 - 3}{x + 2}$ \quad pour $x \neq -2$
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Formule du quotient : $\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$. Bien identifier $u$, $v$, $u'$, $v'$ avant de calculer.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, factor
+% x = symbols('x')
+% f = (x + 1)/(x - 1)
+% assert simplify(diff(f, x) + 2/(x - 1)**2) == 0
+% g = 2*x/(x**2 + 1)
+% gp = diff(g, x)
+% assert simplify(gp - 2*(1 - x**2)/(x**2 + 1)**2) == 0
+% h = (x**2 - 3)/(x + 2)
+% hp = diff(h, x)
+% assert simplify(hp - (x**2 + 4*x + 3)/(x + 2)**2) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R1-EX3}
+
+\commentaireMarge{$\left(\frac{u}{v}\right)' = \frac{u'v - uv'}{v^2}$.}
+
+\textbf{Question 1.} $u = x+1$, $v = x-1$, $u' = 1$, $v' = 1$.
+\[
+f'(x) = \frac{1 \times (x-1) - (x+1) \times 1}{(x-1)^2} = \frac{x - 1 - x - 1}{(x-1)^2} = \frac{-2}{(x-1)^2}.
+\]
+
+\textbf{Question 2.} $u = 2x$, $v = x^2+1$, $u' = 2$, $v' = 2x$.
+\[
+g'(x) = \frac{2(x^2+1) - 2x \times 2x}{(x^2+1)^2} = \frac{2x^2 + 2 - 4x^2}{(x^2+1)^2} = \frac{2 - 2x^2}{(x^2+1)^2} = \frac{2(1-x^2)}{(x^2+1)^2}.
+\]
+
+\textbf{Question 3.} $u = x^2-3$, $v = x+2$, $u' = 2x$, $v' = 1$.
+\[
+h'(x) = \frac{2x(x+2) - (x^2-3)}{(x+2)^2} = \frac{2x^2 + 4x - x^2 + 3}{(x+2)^2} = \frac{x^2 + 4x + 3}{(x+2)^2}.
+\]
+
+On peut factoriser : $x^2 + 4x + 3 = (x+1)(x+3)$ donc $h'(x) = \dfrac{(x+1)(x+3)}{(x+2)^2}$.
+
+\end{corrige}

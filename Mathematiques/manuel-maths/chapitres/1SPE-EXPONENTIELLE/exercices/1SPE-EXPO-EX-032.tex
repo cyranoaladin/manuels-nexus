@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-EX-032","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C4"],"capacites_codes":["C4"],"methodes":["M3"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-032.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-032.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = 5*exp(2*x)
+% assert diff(f, x) == 10*exp(2*x)
+% g = -3*exp(-4*x)
+% assert diff(g, x) == 12*exp(-4*x)
+% h = exp(x)/2
+% assert diff(h, x) == exp(x)/2
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-032}{1}{5}
+Dériver chacune des fonctions suivantes définies sur $\mathbb{R}$.
+\begin{enumerate}
+\item $f(x) = 5\,\mathrm{e}^{2x}$
+\item $g(x) = -3\,\mathrm{e}^{-4x}$
+\item $h(x) = \dfrac{\mathrm{e}^{x}}{2}$
+\end{enumerate}
+\end{exercice}

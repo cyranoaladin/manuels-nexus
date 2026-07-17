@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-EX-033","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C4"],"capacites_codes":["C4"],"methodes":["M3"],"parcours":1,"competences":["calculer"],"duree_min":7,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-033.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-033.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x) + x
+% assert diff(f, x) == exp(x) + 1
+% g = exp(-x) + exp(x)
+% assert simplify(diff(g, x) - (exp(x) - exp(-x))) == 0
+% h = x - exp(x)
+% assert diff(h, x) == 1 - exp(x)
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-033}{1}{7}
+Dériver chacune des fonctions suivantes définies sur $\mathbb{R}$.
+\begin{enumerate}
+\item $f(x) = \mathrm{e}^{x} + x$
+\item $g(x) = \mathrm{e}^{-x} + \mathrm{e}^{x}$
+\item $h(x) = x - \mathrm{e}^{x}$
+\end{enumerate}
+\end{exercice}

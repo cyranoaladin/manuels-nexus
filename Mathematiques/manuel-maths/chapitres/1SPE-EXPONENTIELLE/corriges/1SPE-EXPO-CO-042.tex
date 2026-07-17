@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-EXPO-CO-042","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-042","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert solve(exp(x) - 3, x) == [log(3)]
+% assert solve(exp(2*x) - 7, x) == [log(7)/2]
+% assert solve(exp(-x) - 5, x) == [-log(5)]
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-042}
+\begin{enumerate}
+\item $\mathrm{e}^x = 3$.
+
+Comme $3 > 0$, l'équation admet une solution. Par définition du logarithme népérien :
+\[\mathrm{e}^x = 3 \iff x = \ln 3.\]
+L'unique solution est $\boxed{x = \ln 3}$.
+
+\item $\mathrm{e}^{2x} = 7$.
+
+Comme $7 > 0$, on a :
+\[\mathrm{e}^{2x} = 7 \iff 2x = \ln 7 \iff x = \dfrac{\ln 7}{2}.\]
+L'unique solution est $\boxed{x = \dfrac{\ln 7}{2}}$.
+
+\item $\mathrm{e}^{-x} = 5$.
+
+Comme $5 > 0$, on a :
+\[\mathrm{e}^{-x} = 5 \iff -x = \ln 5 \iff x = -\ln 5.\]
+L'unique solution est $\boxed{x = -\ln 5}$.
+\end{enumerate}
+\end{corrige}

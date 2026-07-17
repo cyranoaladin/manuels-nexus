@@ -1,0 +1,50 @@
+% META: {"id":"1SPE-EXPO-CO-030","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-030","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% h = exp(x) - x - 1
+% hp = diff(h, x)
+% assert simplify(hp - (exp(x) - 1)) == 0
+% assert h.subs(x, 0) == 0
+% assert hp.subs(x, 0) == 0
+% # h decroissante sur ]-inf,0] et croissante sur [0,+inf[
+% # minimum en x=0, h(0)=0, donc h(x)>=0
+% assert limit(h, x, oo) == oo
+% assert limit(h, x, -oo) == oo
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-030}
+\textbf{1.} $h(0) = \mathrm{e}^0 - 0 - 1 = 1 - 0 - 1 = 0$.
+
+\textbf{2.} La fonction $h$ est dérivable sur $\mathbb{R}$ et :
+\[h'(x) = \mathrm{e}^x - 1.\]
+Étude du signe de $h'(x)$ :
+\begin{itemize}
+  \item $h'(x) = 0 \iff \mathrm{e}^x = 1 \iff x = 0$.
+  \item Si $x < 0$, alors $\mathrm{e}^x < \mathrm{e}^0 = 1$ (croissance de $\exp$), donc $h'(x) < 0$.
+  \item Si $x > 0$, alors $\mathrm{e}^x > 1$, donc $h'(x) > 0$.
+\end{itemize}
+
+\textbf{3.} Tableau de variations de $h$ :
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $0$ & & $+\infty$ \\
+\hline
+$h'(x)$ & & $-$ & $0$ & $+$ & \\
+\hline
+$h(x)$ & $+\infty$ & $\searrow$ & $0$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+La fonction $h$ admet un \textbf{minimum} en $x = 0$, égal à $h(0) = 0$.
+
+\textbf{4.} D'après le tableau de variations, $h(x) \geqslant h(0) = 0$ pour tout réel $x$.
+
+Donc $\mathrm{e}^x - x - 1 \geqslant 0$, c'est-à-dire :
+\[\boxed{\mathrm{e}^x \geqslant x + 1 \quad \text{pour tout réel } x.}\]
+L'égalité a lieu si et seulement si $x = 0$.
+
+\textbf{5.} La droite $T : y = x + 1$ est la tangente à la courbe $\mathcal{C}$ de $\exp$ au point $A(0\,;\,1)$. L'inégalité $\mathrm{e}^x \geqslant x + 1$ signifie que la courbe $\mathcal{C}$ est \textbf{au-dessus} de sa tangente $T$ en tout point. La courbe et la tangente ne se touchent qu'au point $A(0\,;\,1)$. Cela traduit la \textbf{convexité} de la fonction exponentielle.
+\end{corrige}

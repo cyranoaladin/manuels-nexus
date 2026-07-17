@@ -1,0 +1,30 @@
+% META: {"id":"1SPE-EXPO-CO-044","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-044","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% X = symbols('X')
+% assert set(solve(X**2 - X - 2, X)) == {-1, 2}
+% assert solve(exp(2*x) - exp(x) - 2, x) == [log(2)]
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-044}
+\begin{enumerate}
+\item On pose $X = \mathrm{e}^x$. Comme $\mathrm{e}^{2x} = X^2$, l'équation devient :
+\[X^2 - X - 2 = 0.\]
+
+On calcule le discriminant : $\Delta = 1 + 8 = 9 > 0$.
+
+Les solutions sont :
+\[X_1 = \dfrac{1 - 3}{2} = -1 \quad \text{et} \quad X_2 = \dfrac{1 + 3}{2} = 2.\]
+
+Or $X = \mathrm{e}^x > 0$ pour tout réel $x$, donc $X = -1$ est impossible.
+
+Seule la valeur $X = 2$ convient : $\mathrm{e}^x = 2 \iff x = \ln 2$.
+
+L'ensemble des solutions est $\boxed{S = \{\ln 2\}}$.
+
+\item La fonction exponentielle est strictement croissante, donc :
+\[\mathrm{e}^x \geqslant 2 \iff \mathrm{e}^x \geqslant \mathrm{e}^{\ln 2} \iff x \geqslant \ln 2.\]
+
+L'ensemble des solutions est $\boxed{S = [\ln 2\,;+\infty[}$.
+\end{enumerate}
+\end{corrige}

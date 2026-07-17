@@ -1,0 +1,121 @@
+% META: {"id":"1SPE-EXPO-COURS-C1","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","capacites_codes":["C1"],"status":"generated"}
+
+\section{Définition de la fonction exponentielle}
+
+\margeAppui{La fonction exponentielle est la seule fonction de $\mathbb{R}$ dans $\mathbb{R}$ qui est égale à sa propre dérivée et qui vaut $1$ en $0$. Cette caractérisation par une équation différentielle est le point de départ de toute la théorie.}
+
+\theoreme[Existence et unicité de la fonction exponentielle]{
+Il existe une unique fonction $f$ dérivable sur $\mathbb{R}$ telle que :
+\[
+f'= f \quad \text{et} \quad f(0) = 1.
+\]
+Cette fonction est appelée \textbf{fonction exponentielle}, notée $\exp$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff
+% x = symbols('x')
+% f = exp(x)
+% assert diff(f, x) == f
+% assert f.subs(x, 0) == 1
+% END-VERIFY
+
+\definition[Fonction exponentielle]{
+La \textbf{fonction exponentielle}, notée $\exp$, est l'unique fonction définie et dérivable sur $\mathbb{R}$ vérifiant :
+\[
+\exp'(x) = \exp(x) \quad \text{pour tout } x \in \mathbb{R}, \qquad \exp(0) = 1.
+\]
+}
+
+\propriete[Valeurs remarquables et signe]{
+\begin{itemize}
+  \item $\exp(0) = 1$.
+  \item $\exp(1) = \mathrm{e} \approx 2{,}718$.
+  \item Pour tout $x \in \mathbb{R}$, $\exp(x) > 0$.
+  \item Pour tout $x \in \mathbb{R}$, $\exp(x) \neq 0$.
+\end{itemize}
+}
+
+% BEGIN-VERIFY
+% from sympy import exp, N, E
+% assert exp(0) == 1
+% assert exp(1) == E
+% e_approx = float(N(E))
+% assert abs(e_approx - 2.718) < 0.001
+% END-VERIFY
+
+\demonstration{
+\textbf{Preuve que $\exp(x) \neq 0$ pour tout $x \in \mathbb{R}$.}
+
+Posons $g(x) = \exp(x) \times \exp(-x)$. Calculons la dérivée de $g$ à l'aide de la règle du produit :
+\[
+g'(x) = \exp'(x) \cdot \exp(-x) + \exp(x) \cdot (\exp(-x))'
+= \exp(x) \cdot \exp(-x) + \exp(x) \cdot (-\exp(-x)) = 0.
+\]
+Donc $g$ est constante sur $\mathbb{R}$. Or $g(0) = \exp(0) \times \exp(0) = 1 \times 1 = 1$.
+Ainsi, pour tout $x \in \mathbb{R}$, $\exp(x) \times \exp(-x) = 1$.
+En particulier, $\exp(x) \neq 0$ pour tout $x$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x = symbols('x')
+% g = exp(x)*exp(-x)
+% assert simplify(diff(g, x)) == 0
+% assert simplify(g) == 1
+% END-VERIFY
+
+\definition[Nombre $\mathrm{e}$]{
+Le nombre $\mathrm{e} = \exp(1) \approx 2{,}718\,28$ est appelé le \textbf{nombre d'Euler}. C'est un nombre irrationnel.
+}
+
+\propriete[Notation $\mathrm{e}^x$]{
+Pour tout $x \in \mathbb{R}$, on note $\mathrm{e}^x = \exp(x)$.
+
+Cette notation sera justifiée dans la section suivante par les propriétés algébriques de la fonction exponentielle.
+}
+
+\exemple{
+Calculer $\exp(0)$, $\exp(1)$ et vérifier que $\exp'(0) = \exp(0)$.
+
+$\exp(0) = 1$. $\exp(1) = \mathrm{e} \approx 2{,}718$.
+Comme $\exp' = \exp$, on a $\exp'(0) = \exp(0) = 1$. La tangente à la courbe de $\exp$ au point d'abscisse $0$ a pour pente $1$.
+}
+
+\exemple{
+La tangente à la courbe de la fonction exponentielle au point d'abscisse $a$ a pour équation :
+\[
+y = \exp(a)(x - a) + \exp(a) = \mathrm{e}^a(x - a + 1).
+\]
+En $a = 0$ : $y = 1 \cdot (x + 1) = x + 1$.
+
+En $a = 1$ : $y = \mathrm{e}(x - 1 + 1) = \mathrm{e}x$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify
+% x, a = symbols('x a')
+% tangente = exp(a)*(x - a) + exp(a)
+% assert simplify(tangente - exp(a)*(x - a + 1)) == 0
+% # en a=0 : tangente = x+1
+% assert simplify(tangente.subs(a, 0) - (x + 1)) == 0
+% # en a=1 : tangente = e*x
+% from sympy import E
+% assert simplify(tangente.subs(a, 1) - E*x) == 0
+% END-VERIFY
+
+\erreurFrequente{
+Écrire $\exp(0) = 0$. La condition initiale est $\exp(0) = 1$, et non $0$. L'exponentielle ne s'annule \emph{jamais}.
+}
+
+\erreurFrequente{
+Croire que $\mathrm{e} = 2{,}718$ exactement. Le nombre $\mathrm{e}$ est irrationnel : $2{,}718$ n'est qu'une valeur approchée. En calcul exact, on laisse $\mathrm{e}$.
+}
+
+\contreexemple{
+La fonction $f(x) = 2\mathrm{e}^x$ vérifie $f' = f$ mais $f(0) = 2 \neq 1$. Elle n'est donc pas la fonction exponentielle. La condition $f(0) = 1$ est indispensable pour l'unicité.
+}
+
+\approfondissement{
+La propriété $\exp' = \exp$ est une \emph{équation différentielle} : $y' = y$. L'ensemble complet des solutions de cette équation est $\{x \mapsto C\mathrm{e}^x \mid C \in \mathbb{R}\}$. La condition initiale $y(0) = 1$ sélectionne l'unique solution $C = 1$, c'est-à-dire $y = \exp$.
+}

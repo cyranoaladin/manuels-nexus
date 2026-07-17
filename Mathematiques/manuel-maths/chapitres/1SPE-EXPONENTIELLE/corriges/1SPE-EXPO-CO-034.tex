@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-EXPO-CO-034","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-034","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert diff(exp(x**2), x) == 2*x*exp(x**2)
+% assert diff(exp(x**2 + 1), x) == 2*x*exp(x**2 + 1)
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-034}
+On applique la formule $(\mathrm{e}^{u})' = u'\,\mathrm{e}^{u}$.
+
+\textbf{Question 1.} On pose $u(x) = x^2$, donc $u'(x) = 2x$.
+\[f'(x) = 2x\,\mathrm{e}^{x^2}.\]
+
+\textbf{Question 2.} On pose $u(x) = x^2 + 1$, donc $u'(x) = 2x$.
+\[g'(x) = 2x\,\mathrm{e}^{x^2+1}.\]
+
+\textit{Remarque :} on peut aussi écrire $g(x) = \mathrm{e}^1 \times \mathrm{e}^{x^2} = \mathrm{e}\,\mathrm{e}^{x^2}$, et alors $g'(x) = \mathrm{e} \times 2x\,\mathrm{e}^{x^2} = 2x\,\mathrm{e}^{x^2+1}$, ce qui confirme le résultat.
+\end{corrige}

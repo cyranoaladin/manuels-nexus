@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-EXPO-CO-023","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-023","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x), x, oo) == oo
+% assert limit(exp(x), x, -oo) == 0
+% assert limit(exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-023}
+\textbf{1.} D'après le cours, $\displaystyle\lim_{x \to +\infty} \mathrm{e}^x = +\infty$.
+
+La fonction exponentielle tend vers $+\infty$ quand $x$ tend vers $+\infty$.
+
+\textbf{2.} D'après le cours, $\displaystyle\lim_{x \to -\infty} \mathrm{e}^x = 0$.
+
+La fonction exponentielle tend vers $0$ quand $x$ tend vers $-\infty$. L'axe des abscisses est asymptote horizontale à la courbe de $\exp$ en $-\infty$.
+
+\textbf{3.} Quand $x \to +\infty$, on a $-x \to -\infty$, donc par composition :
+\[\lim_{x \to +\infty} \mathrm{e}^{-x} = \lim_{X \to -\infty} \mathrm{e}^X = 0.\]
+\end{corrige}

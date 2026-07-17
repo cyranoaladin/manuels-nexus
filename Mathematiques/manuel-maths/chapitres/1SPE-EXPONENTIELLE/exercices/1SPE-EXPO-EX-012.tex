@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-EXPO-EX-012","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C2"],"capacites_codes":["C2"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-012.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-012.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify
+% x = symbols('x')
+% assert simplify(exp(x)*exp(2*x) - exp(3*x)) == 0
+% assert simplify(exp(3*x)/exp(x) - exp(2*x)) == 0
+% assert simplify((exp(x))**5 - exp(5*x)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-012}{1}{5}
+Écrire chacune des expressions suivantes sous la forme $\mathrm{e}^{f(x)}$ :
+\begin{enumerate}
+  \item $\mathrm{e}^x \times \mathrm{e}^{2x}$
+  \item $\dfrac{\mathrm{e}^{3x}}{\mathrm{e}^x}$
+  \item $\left(\mathrm{e}^x\right)^5$
+  \item $\mathrm{e}^{2x} \times \mathrm{e}^{-x} \times \mathrm{e}^{3x}$
+\end{enumerate}
+\end{exercice}

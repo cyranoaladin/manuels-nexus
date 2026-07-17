@@ -1,0 +1,31 @@
+% META: {"id":"1SPE-EXPO-CO-029","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-029","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% fp = diff(f, x)
+% assert simplify(fp - exp(x)) == 0
+% assert exp(0) > 0
+% assert exp(5) > 0
+% assert exp(-10) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-029}
+\textbf{1.} La fonction exponentielle est dérivable sur $\mathbb{R}$ et $f'(x) = \mathrm{e}^x$ pour tout réel $x$.
+
+La fonction exponentielle est égale à sa propre dérivée.
+
+\textbf{2.} Pour tout réel $x$, $\mathrm{e}^x > 0$ (la fonction exponentielle est \textbf{strictement positive}).
+
+Donc $f'(x) = \mathrm{e}^x > 0$ pour tout réel $x$.
+
+\textbf{3.} La fonction $f$ est dérivable sur $\mathbb{R}$ et sa dérivée $f'$ est strictement positive sur $\mathbb{R}$.
+
+D'après le théorème liant signe de la dérivée et variations, la fonction $f$ est \textbf{strictement croissante} sur $\mathbb{R}$.
+
+\textbf{4.} Une fonction strictement croissante sur un intervalle est \textbf{injective} : elle ne prend jamais deux fois la même valeur.
+
+\begin{itemize}
+  \item Si $\mathrm{e}^a = \mathrm{e}^b$, alors nécessairement $a = b$ (injectivité). Réciproquement, si $a = b$, alors $\mathrm{e}^a = \mathrm{e}^b$. D'où $\mathrm{e}^a = \mathrm{e}^b \iff a = b$.
+  \item Une fonction strictement croissante conserve l'ordre strict : si $a < b$, alors $f(a) < f(b)$, c'est-à-dire $\mathrm{e}^a < \mathrm{e}^b$. Réciproquement, si $\mathrm{e}^a < \mathrm{e}^b$, alors $a < b$ (sinon $a \geqslant b$ entraînerait $\mathrm{e}^a \geqslant \mathrm{e}^b$, contradiction). D'où $\mathrm{e}^a < \mathrm{e}^b \iff a < b$.
+\end{itemize}
+\end{corrige}

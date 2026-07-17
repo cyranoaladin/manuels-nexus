@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-EXPO-ME-001","chapitre":"1SPE-EXPONENTIELLE","type_objet":"methode","capacites_codes":["C2"],"status":"generated"}
+\begin{fichemethode}{M1}{Simplifier une expression avec l'exponentielle}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de simplifier une expression contenant des produits, quotients ou puissances de l'exponentielle, par exemple $\mathrm{e}^a \times \mathrm{e}^b$, $\dfrac{\mathrm{e}^a}{\mathrm{e}^b}$ ou $\left(\mathrm{e}^a\right)^n$.}
+\pasApas{\begin{enumerate}
+  \item J'identifie les termes en exponentielle présents dans l'expression.
+  \item J'applique la propriété algébrique adaptée :
+    \begin{itemize}
+      \item Produit : $\mathrm{e}^a \times \mathrm{e}^b = \mathrm{e}^{a+b}$ ;
+      \item Quotient : $\dfrac{\mathrm{e}^a}{\mathrm{e}^b} = \mathrm{e}^{a-b}$ ;
+      \item Puissance : $\left(\mathrm{e}^a\right)^n = \mathrm{e}^{na}$.
+    \end{itemize}
+  \item Je simplifie l'exposant obtenu (réduire, factoriser si utile).
+\end{enumerate}}
+\exempleRedige{Simplifions $A = \dfrac{\mathrm{e}^{3x} \times \mathrm{e}^{2}}{\mathrm{e}^{x+1}}$. \commentaireMarge{Étape 1 : produit au numérateur.} Au numérateur, $\mathrm{e}^{3x} \times \mathrm{e}^{2} = \mathrm{e}^{3x+2}$. \commentaireMarge{Étape 2 : quotient.} Donc $A = \dfrac{\mathrm{e}^{3x+2}}{\mathrm{e}^{x+1}} = \mathrm{e}^{(3x+2)-(x+1)} = \mathrm{e}^{2x+1}$.
+\[A = \mathrm{e}^{2x+1}.\]}
+\pieges{\begin{itemize}
+  \item Écrire $\mathrm{e}^a \times \mathrm{e}^b = \mathrm{e}^{ab}$ : on additionne les exposants, on ne les multiplie pas.
+  \item Écrire $\mathrm{e}^a + \mathrm{e}^b = \mathrm{e}^{a+b}$ : la relation fonctionnelle concerne le produit, pas la somme.
+  \item Oublier de distribuer le signe moins dans $\mathrm{e}^{a-(b+c)}$ : on obtient $\mathrm{e}^{a-b-c}$.
+\end{itemize}}
+\verifier{Je vérifie en remplaçant par une valeur numérique simple (par exemple $x=0$) que l'expression initiale et l'expression simplifiée donnent le même résultat.}
+\sEntrainer{\refExos{M1}}
+\end{fichemethode}

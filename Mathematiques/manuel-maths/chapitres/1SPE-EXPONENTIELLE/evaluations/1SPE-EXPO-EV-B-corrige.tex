@@ -1,0 +1,141 @@
+% META: {"id":"1SPE-EXPO-EV-B-corrige","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+
+\section*{Corrigé — Évaluation B — Fonction exponentielle}
+
+%---------------------------------------------------------------
+\subsection*{Exercice 1 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$f(x) = \mathrm{e}^{3x+2}$. On pose $u(x) = 3x + 2$, d'où $u'(x) = 3$.
+
+Par la formule de dérivation de $\mathrm{e}^{u}$ :
+\[
+f'(x) = u'(x)\,\mathrm{e}^{u(x)} = 3\,\mathrm{e}^{3x+2}.
+\]
+
+\textbf{Question 2.}
+En utilisant la propriété $\dfrac{\mathrm{e}^a}{\mathrm{e}^b} = \mathrm{e}^{a-b}$ :
+\[
+\frac{\mathrm{e}^{3x+2}}{\mathrm{e}^{x+2}} = \mathrm{e}^{(3x+2)-(x+2)} = \mathrm{e}^{2x}.
+\]
+
+\textbf{Question 3.}
+$f(0) = \mathrm{e}^{3 \times 0 + 2} = \mathrm{e}^{2} \approx 7{,}389.$
+
+$f\!\left(-\dfrac{2}{3}\right) = \mathrm{e}^{3 \times (-\frac{2}{3}) + 2} = \mathrm{e}^{-2+2} = \mathrm{e}^0 = 1.$
+
+Interprétation : $f\!\left(-\dfrac{2}{3}\right) = 1$ signifie que le point de coordonnées $\left(-\dfrac{2}{3}\,;\,1\right)$ appartient à la courbe de $f$. C'est le point où la courbe coupe la droite $y = 1$.
+
+\textbf{Question 4.}
+On a $f'(x) = 3\,\mathrm{e}^{3x+2}$ (question 1) et $3f(x) = 3\,\mathrm{e}^{3x+2}$.
+
+Donc $f'(x) = 3f(x)$ pour tout $x \in \mathbb{R}$ : $f$ est bien solution de $y' = 3y$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 2 — 6 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$g(x) = (x+1)\,\mathrm{e}^{-x}$. C'est un produit $u \cdot v$ avec $u(x) = x+1$ et $v(x) = \mathrm{e}^{-x}$.
+
+$u'(x) = 1$ et $v'(x) = -\mathrm{e}^{-x}$.
+\[
+g'(x) = u'v + uv' = 1 \cdot \mathrm{e}^{-x} + (x+1) \cdot (-\mathrm{e}^{-x}) = \mathrm{e}^{-x}\bigl(1 - (x+1)\bigr) = -x\,\mathrm{e}^{-x}.
+\]
+
+\textbf{Question 2.}
+$g'(x) = -x\,\mathrm{e}^{-x}$.
+
+Or $\mathrm{e}^{-x} > 0$ pour tout $x \in \mathbb{R}$, donc le signe de $g'(x)$ est celui de $-x$ :
+\begin{itemize}
+  \item $g'(x) > 0$ si $x < 0$ : $g$ est strictement croissante sur $]-\infty\,;\,0]$ ;
+  \item $g'(x) = 0$ si $x = 0$ ;
+  \item $g'(x) < 0$ si $x > 0$ : $g$ est strictement décroissante sur $[0\,;\,+\infty[$.
+\end{itemize}
+
+$g(0) = (0+1)\,\mathrm{e}^{0} = 1.$
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $0$ & & $+\infty$ \\
+\hline
+$g'(x)$ & & $+$ & $0$ & $-$ & \\
+\hline
+$g(x)$ & $-\infty$ & $\nearrow$ & $1$ & $\searrow$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.}
+D'après le tableau de variations, $g$ admet un \textbf{maximum} de $1$ atteint en $x = 0$.
+
+\textbf{Question 4.}
+\begin{itemize}
+  \item En $+\infty$ : on utilise le résultat du cours $\lim_{x \to +\infty} x\,\mathrm{e}^{-x} = 0$ (la décroissance exponentielle l'emporte). Donc $\lim_{x \to +\infty} (x+1)\,\mathrm{e}^{-x} = 0$.
+  \item En $-\infty$ : $\lim_{x \to -\infty} (x+1) = -\infty$ et $\lim_{x \to -\infty} \mathrm{e}^{-x} = +\infty$, donc par produit $\lim_{x \to -\infty} g(x) = -\infty$.
+\end{itemize}
+
+%---------------------------------------------------------------
+\subsection*{Exercice 3 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+En posant $X = \mathrm{e}^x$, on a $\mathrm{e}^{2x} = \left(\mathrm{e}^x\right)^2 = X^2$, donc :
+\[
+h(x) = X^2 - 3X + 2.
+\]
+
+\textbf{Question 2.}
+On résout $X^2 - 3X + 2 = 0$.
+
+$\Delta = (-3)^2 - 4 \times 1 \times 2 = 9 - 8 = 1 > 0.$
+
+$X_1 = \dfrac{3 - 1}{2} = 1$ \quad et \quad $X_2 = \dfrac{3 + 1}{2} = 2.$
+
+\textbf{Question 3.}
+On revient à la variable $x$ en remplaçant $X$ par $\mathrm{e}^x$ :
+
+\begin{itemize}
+  \item $\mathrm{e}^x = 1 \Leftrightarrow x = 0$ ;
+  \item $\mathrm{e}^x = 2 \Leftrightarrow x = \ln 2$.
+\end{itemize}
+
+Les solutions de $h(x) = 0$ sont $\boxed{x = 0}$ et $\boxed{x = \ln 2}$.
+
+\textbf{Question 4.}
+$h(x) \leqslant 0 \Leftrightarrow X^2 - 3X + 2 \leqslant 0$ avec $X = \mathrm{e}^x > 0$.
+
+Le trinôme $X^2 - 3X + 2 = (X-1)(X-2)$ est négatif ou nul pour $1 \leqslant X \leqslant 2$.
+
+On traduit en $x$ : $1 \leqslant \mathrm{e}^x \leqslant 2$. Comme la fonction exponentielle est strictement croissante :
+\[
+\ln 1 \leqslant x \leqslant \ln 2 \quad \text{soit} \quad 0 \leqslant x \leqslant \ln 2.
+\]
+
+L'ensemble des solutions est $\boxed{[0\,;\,\ln 2]}$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 4 — 4 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$P(0) = 30\,000\,\mathrm{e}^{0{,}03 \times 0} = 30\,000\,\mathrm{e}^0 = 30\,000.$
+
+Interprétation : en 2020 (année de départ, $t = 0$), la population du village est de $30\,000$ habitants.
+
+\textbf{Question 2.}
+$P(10) = 30\,000\,\mathrm{e}^{0{,}03 \times 10} = 30\,000\,\mathrm{e}^{0{,}3} \approx 30\,000 \times 1{,}3499 \approx 40\,496.$
+
+En 2030, la population sera d'environ $\mathbf{40\,496}$ habitants.
+
+\textbf{Question 3.}
+$P(t) = 60\,000 \Leftrightarrow 30\,000\,\mathrm{e}^{0{,}03\,t} = 60\,000 \Leftrightarrow \mathrm{e}^{0{,}03\,t} = 2 \Leftrightarrow 0{,}03\,t = \ln 2 \Leftrightarrow t = \dfrac{\ln 2}{0{,}03} = \dfrac{100\ln 2}{3} \approx 23{,}1.$
+
+La population atteindra $60\,000$ habitants environ $23{,}1$ ans après 2020, soit au cours de l'année $\mathbf{2044}$.
+
+\textbf{Question 4.}
+$P(t) \geqslant 45\,000 \Leftrightarrow \mathrm{e}^{0{,}03\,t} \geqslant \dfrac{45\,000}{30\,000} = \dfrac{3}{2} \Leftrightarrow 0{,}03\,t \geqslant \ln\!\left(\dfrac{3}{2}\right) \Leftrightarrow t \geqslant \dfrac{100}{3}\,\ln\!\left(\dfrac{3}{2}\right) \approx 13{,}5.$
+
+La population dépassera $45\,000$ habitants à partir de $t = 14$ ans, soit à partir de l'année $\mathbf{2034}$.

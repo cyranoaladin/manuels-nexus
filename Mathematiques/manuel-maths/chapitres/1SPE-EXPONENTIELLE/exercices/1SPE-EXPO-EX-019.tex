@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-EX-019","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C2"],"capacites_codes":["C2"],"methodes":["M1"],"parcours":3,"competences":["raisonner","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-019.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-019.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify
+% a = symbols('a')
+% n = 4
+% assert simplify(exp(n*a) - exp(a)**n) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-019}{3}{15}
+On admet la propriété : pour tous réels $a$ et $b$, $\exp(a+b) = \exp(a) \times \exp(b)$.
+
+Démontrer par récurrence que pour tout entier naturel $n \geqslant 1$ et pour tout réel $a$ :
+\[ \exp(na) = \bigl[\exp(a)\bigr]^n. \]
+\begin{enumerate}
+  \item \textbf{Initialisation :} Vérifier la propriété pour $n=1$.
+  \item \textbf{Hérédité :} On suppose que pour un certain entier $k \geqslant 1$, $\exp(ka) = \bigl[\exp(a)\bigr]^k$. Montrer que $\exp\bigl((k+1)a\bigr) = \bigl[\exp(a)\bigr]^{k+1}$.
+  \item \textbf{Conclusion :} Rédiger la conclusion du raisonnement par récurrence.
+  \item En déduire que pour tout entier naturel $n$ et tout réel $a$, $\exp(-na) = \dfrac{1}{\bigl[\exp(a)\bigr]^n}$.
+\end{enumerate}
+\end{exercice}

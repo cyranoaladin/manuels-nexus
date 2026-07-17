@@ -1,0 +1,14 @@
+% META: {"id":"1SPE-EXPO-CO-022","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-022","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% vals = [exp(-2), exp(-1), 1, exp(1), exp(2)]
+% assert vals == sorted(vals), "ordre croissant verifie"
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-022}
+On classe d'abord les exposants dans l'ordre croissant :
+\[-2 < -1 < 0 < 1 < 2.\]
+La fonction exponentielle étant \textbf{strictement croissante} sur $\mathbb{R}$, elle conserve l'ordre. Donc :
+\[\mathrm{e}^{-2} < \mathrm{e}^{-1} < \mathrm{e}^0 < \mathrm{e}^1 < \mathrm{e}^2,\]
+c'est-à-dire :
+\[\mathrm{e}^{-2} < \mathrm{e}^{-1} < 1 < \mathrm{e} < \mathrm{e}^2.\]
+\end{corrige}

@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-EXPO-EX-006","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["calculer","representer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-006.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-006.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% # Tangent at x=0: y = f(0) + f'(0)*(x-0) = 1 + x
+% f0 = f.subs(x, 0)
+% fp0 = f.diff(x).subs(x, 0)
+% tangent = f0 + fp0 * x
+% assert tangent == 1 + x, "tangent at 0 is y = x + 1"
+% assert f0 == 1, "f(0) = 1"
+% assert fp0 == 1, "f'(0) = 1"
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-006}{2}{8}
+On considère la courbe représentative $\mathcal{C}$ de la fonction exponentielle dans un repère orthonormé.
+\begin{enumerate}
+\item Rappeler la valeur de $\exp(0)$ et $\exp'(0)$.
+\item Déterminer l'équation de la tangente $T$ à la courbe $\mathcal{C}$ au point d'abscisse $0$.
+\item Vérifier que la tangente passe par l'origine du repère.
+\item La courbe $\mathcal{C}$ est-elle au-dessus ou en dessous de la tangente $T$ au voisinage de $x = 0$ ? Justifier à l'aide de la convexité ou d'un argument sur $\mathrm{e}^x - (x+1)$.
+\end{enumerate}
+\end{exercice}

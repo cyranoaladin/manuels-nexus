@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-EXPO-EX-004","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-004.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-004.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # Q1: exp(0) = 1 VRAI
+% assert exp(0) == 1
+% # Q2: exp'(x) = exp(x) VRAI
+% assert diff(exp(x), x) == exp(x)
+% # Q3: exp(x) >= 0 : FAUX (c'est strictement >0)
+% # Q4: exp(1) = e VRAI
+% assert exp(1) == E
+% # Q5: exp peut s'annuler : FAUX
+% assert exp(0) != 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-004}{1}{5}
+Répondre par \textbf{vrai} ou \textbf{faux} à chaque affirmation. Justifier chaque réponse.
+\begin{enumerate}
+\item $\exp(0) = 1$.
+\item Pour tout réel $x$, $\exp'(x) = \exp(x)$.
+\item Pour tout réel $x$, $\mathrm{e}^x \geqslant 0$ (l'exponentielle est positive ou nulle).
+\item $\exp(1) = \mathrm{e}$.
+\item Il existe un réel $x$ tel que $\mathrm{e}^x = 0$.
+\end{enumerate}
+\end{exercice}

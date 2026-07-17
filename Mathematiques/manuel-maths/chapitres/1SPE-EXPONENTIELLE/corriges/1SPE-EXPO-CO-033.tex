@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-EXPO-CO-033","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-033","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert diff(exp(x) + x, x) == exp(x) + 1
+% assert simplify(diff(exp(-x) + exp(x), x) - (exp(x) - exp(-x))) == 0
+% assert diff(x - exp(x), x) == 1 - exp(x)
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-033}
+On dérive terme à terme en utilisant $(\mathrm{e}^{x})' = \mathrm{e}^{x}$ et $(\mathrm{e}^{-x})' = -\mathrm{e}^{-x}$.
+
+\textbf{Question 1.}
+\[f'(x) = \mathrm{e}^{x} + 1.\]
+
+\textbf{Question 2.} On a $(\mathrm{e}^{-x})' = -\mathrm{e}^{-x}$ et $(\mathrm{e}^{x})' = \mathrm{e}^{x}$, donc :
+\[g'(x) = -\mathrm{e}^{-x} + \mathrm{e}^{x} = \boxed{\mathrm{e}^{x} - \mathrm{e}^{-x}}.\]
+
+\textbf{Question 3.}
+\[h'(x) = 1 - \mathrm{e}^{x}.\]
+\end{corrige}

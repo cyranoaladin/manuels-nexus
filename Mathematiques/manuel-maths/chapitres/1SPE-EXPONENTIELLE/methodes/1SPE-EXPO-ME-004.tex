@@ -1,0 +1,27 @@
+% META: {"id":"1SPE-EXPO-ME-004","chapitre":"1SPE-EXPONENTIELLE","type_objet":"methode","capacites_codes":["C5"],"status":"generated"}
+\begin{fichemethode}{M4}{Résoudre une équation avec l'exponentielle}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de résoudre une équation faisant intervenir l'exponentielle, du type $\mathrm{e}^A = \mathrm{e}^B$ ou $\mathrm{e}^A = k$.}
+\pasApas{\begin{enumerate}
+  \item Je ramène l'équation à l'une des deux formes suivantes :
+    \begin{itemize}
+      \item $\mathrm{e}^A = \mathrm{e}^B$ ;
+      \item $\mathrm{e}^A = k$, où $k$ est un réel.
+    \end{itemize}
+  \item J'applique la règle correspondante :
+    \begin{itemize}
+      \item Si $\mathrm{e}^A = \mathrm{e}^B$, alors $A = B$ (injectivité de l'exponentielle).
+      \item Si $\mathrm{e}^A = k$ avec $k > 0$, alors $A = \ln(k)$.
+      \item Si $\mathrm{e}^A = k$ avec $k \leq 0$, l'équation n'a pas de solution (car $\mathrm{e}^A > 0$).
+    \end{itemize}
+  \item Je résous l'équation algébrique obtenue.
+\end{enumerate}}
+\exempleRedige{Résolvons $\mathrm{e}^{2x-1} = \mathrm{e}^{x+3}$ dans $\mathbb{R}$. \commentaireMarge{Forme $\mathrm{e}^A = \mathrm{e}^B$.} L'exponentielle est injective, donc $\mathrm{e}^{2x-1} = \mathrm{e}^{x+3} \Leftrightarrow 2x - 1 = x + 3$. \commentaireMarge{Résolution de l'équation du premier degré.} $2x - x = 3 + 1$, soit $x = 4$.
+\[\mathcal{S} = \{4\}.\]}
+\pieges{\begin{itemize}
+  \item Oublier de vérifier que $k > 0$ avant d'écrire $A = \ln(k)$ : si $k \leq 0$, il n'y a pas de solution.
+  \item Simplifier $\mathrm{e}^A = \mathrm{e}^B$ en divisant par $\mathrm{e}^B$ sans justifier : il est plus rigoureux d'invoquer l'injectivité.
+  \item Écrire $\ln(\mathrm{e}^A) = A$ sans préciser que cela provient de la définition de $\ln$ comme réciproque de $\exp$.
+\end{itemize}}
+\verifier{Je remplace la valeur trouvée dans l'équation de départ pour vérifier l'égalité : $\mathrm{e}^{2 \times 4 - 1} = \mathrm{e}^{7}$ et $\mathrm{e}^{4+3} = \mathrm{e}^{7}$.}
+\sEntrainer{\refExos{M4}}
+\end{fichemethode}

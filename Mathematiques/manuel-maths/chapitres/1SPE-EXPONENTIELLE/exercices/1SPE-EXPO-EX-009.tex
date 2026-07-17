@@ -1,0 +1,31 @@
+% META: {"id":"1SPE-EXPO-EX-009","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":3,"competences":["raisonner","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-009.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-009.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = Function('f')
+% # If f'=f and f(0)=1, consider g = f/exp
+% # g' = (f'*exp - f*exp)/exp^2 = (f*exp - f*exp)/exp^2 = 0 when f'=f
+% g = f(x) / exp(x)
+% g_prime_num = diff(f(x), x) * exp(x) - f(x) * exp(x)
+% g_prime_num_sub = g_prime_num.subs(diff(f(x), x), f(x))
+% assert simplify(g_prime_num_sub) == 0, "numerator of g' is 0 when f'=f"
+% # g constant = g(0) = f(0)/exp(0) = 1/1 = 1
+% assert exp(0) == 1
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-009}{3}{15}
+\textbf{Unicité de la fonction exponentielle.}
+
+On admet qu'il existe au moins une fonction $\exp$ dérivable sur $\mathbb{R}$ telle que $\exp' = \exp$ et $\exp(0) = 1$.
+
+Soit $f$ une autre fonction dérivable sur $\mathbb{R}$ vérifiant $f' = f$ et $f(0) = 1$.
+
+On pose $g(x) = \dfrac{f(x)}{\exp(x)}$.
+\begin{enumerate}
+\item Justifier que $g$ est bien définie sur $\mathbb{R}$.
+\item Calculer $g'(x)$ à l'aide de la formule du quotient.
+\item En utilisant les hypothèses $f' = f$ et $\exp' = \exp$, montrer que $g'(x) = 0$ pour tout réel $x$.
+\item En déduire que $g$ est constante sur $\mathbb{R}$.
+\item Calculer $g(0)$ et en déduire la valeur de la constante.
+\item Conclure que $f = \exp$ : la fonction exponentielle est unique.
+\end{enumerate}
+\end{exercice}

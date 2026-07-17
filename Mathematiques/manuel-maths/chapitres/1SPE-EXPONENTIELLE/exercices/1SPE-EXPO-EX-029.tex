@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-EXPO-EX-029","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C3"],"capacites_codes":["C3"],"methodes":["M2"],"parcours":3,"competences":["raisonner","representer"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-029.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-029.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% fp = diff(f, x)
+% assert simplify(fp - exp(x)) == 0
+% assert fp.subs(x, 0) > 0
+% # exp'(x) = exp(x) > 0 pour tout x, donc exp strictement croissante
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-029}{3}{12}
+L'objectif de cet exercice est de démontrer que la fonction exponentielle est strictement croissante sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Rappeler la dérivée de la fonction $f : x \mapsto \mathrm{e}^x$.
+  \item Montrer que $f'(x) > 0$ pour tout réel $x$.
+  \item En déduire que la fonction exponentielle est strictement croissante sur $\mathbb{R}$.
+  \item Expliquer alors pourquoi, pour tous réels $a$ et $b$ :
+  \[\mathrm{e}^a = \mathrm{e}^b \iff a = b \quad \text{et} \quad \mathrm{e}^a < \mathrm{e}^b \iff a < b.\]
+\end{enumerate}
+\end{exercice}

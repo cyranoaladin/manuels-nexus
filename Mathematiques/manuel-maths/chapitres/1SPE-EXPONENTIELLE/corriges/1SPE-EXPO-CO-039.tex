@@ -1,0 +1,47 @@
+% META: {"id":"1SPE-EXPO-CO-039","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-039","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x - 1)*exp(x)
+% fp = diff(f, x)
+% assert simplify(fp - x*exp(x)) == 0
+% assert solve(fp, x) == [0]
+% assert f.subs(x, 0) == -1
+% assert f.subs(x, 1) == 0
+% assert simplify(f.subs(x, -1) - (-2)*exp(-1)) == 0
+% assert limit(f, x, -oo) == 0
+% assert limit(f, x, oo) == oo
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-039}
+
+\textbf{Question 1.} On pose $u(x) = x - 1$ et $v(x) = \mathrm{e}^{x}$.
+
+On a $u'(x) = 1$ et $v'(x) = \mathrm{e}^{x}$.
+
+Par la formule du produit :
+\[f'(x) = 1 \times \mathrm{e}^{x} + (x-1) \times \mathrm{e}^{x} = \mathrm{e}^{x}\bigl[1 + (x-1)\bigr] = \boxed{x\,\mathrm{e}^{x}}.\]
+
+\textbf{Question 2.} Comme $\mathrm{e}^{x} > 0$ pour tout réel $x$, le signe de $f'(x)$ est celui de $x$ :
+\begin{itemize}
+\item Si $x < 0$, $f'(x) < 0$ : $f$ est décroissante sur $]-\infty\,;\,0]$.
+\item Si $x > 0$, $f'(x) > 0$ : $f$ est croissante sur $[0\,;\,+\infty[$.
+\end{itemize}
+$f$ admet un minimum en $x = 0$.
+
+\textbf{Question 3.}
+\begin{itemize}
+\item En $-\infty$ : $\displaystyle\lim_{x \to -\infty} (x-1)\,\mathrm{e}^{x} = 0$ car la croissance de $\mathrm{e}^{x}$ vers $0$ l'emporte sur le facteur polynomial (croissances comparées).
+\item En $+\infty$ : $\displaystyle\lim_{x \to +\infty} (x-1)\,\mathrm{e}^{x} = +\infty$ car $\mathrm{e}^{x} \to +\infty$ et $x - 1 \to +\infty$.
+\end{itemize}
+
+\textbf{Question 4.}
+\[f(0) = (0-1)\,\mathrm{e}^{0} = -1, \qquad f(1) = (1-1)\,\mathrm{e}^{1} = 0, \qquad f(-1) = (-1-1)\,\mathrm{e}^{-1} = -\frac{2}{\mathrm{e}}.\]
+
+\textbf{Question 5.} Tableau de variations complet :
+\begin{itemize}
+\item $\displaystyle\lim_{x \to -\infty} f(x) = 0$ (asymptote horizontale $y = 0$).
+\item $f$ est décroissante sur $]-\infty\,;\,0]$, minimum $f(0) = -1$.
+\item $f$ est croissante sur $[0\,;\,+\infty[$, $f(1) = 0$, $\displaystyle\lim_{x \to +\infty} f(x) = +\infty$.
+\end{itemize}
+La courbe coupe l'axe des abscisses en $x = 1$ (car $f(1) = 0$) et admet l'axe des abscisses comme asymptote en $-\infty$.
+\end{corrige}

@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-CO-011","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-011","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import exp, simplify
+% assert simplify(exp(3)*exp(5) - exp(8)) == 0
+% assert simplify(exp(7)/exp(2) - exp(5)) == 0
+% assert simplify((exp(2))**4 - exp(8)) == 0
+% assert simplify(exp(4)*exp(-1) - exp(3)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-011}
+On utilise les propriétés algébriques de l'exponentielle : $\mathrm{e}^a \times \mathrm{e}^b = \mathrm{e}^{a+b}$, $\dfrac{\mathrm{e}^a}{\mathrm{e}^b} = \mathrm{e}^{a-b}$ et $\left(\mathrm{e}^a\right)^n = \mathrm{e}^{na}$.
+
+\textbf{1.} $\mathrm{e}^3 \times \mathrm{e}^5 = \mathrm{e}^{3+5} = \mathrm{e}^8$.
+
+\textbf{2.} $\dfrac{\mathrm{e}^7}{\mathrm{e}^2} = \mathrm{e}^{7-2} = \mathrm{e}^5$.
+
+\textbf{3.} $\left(\mathrm{e}^2\right)^4 = \mathrm{e}^{2 \times 4} = \mathrm{e}^8$.
+
+\textbf{4.} $\mathrm{e}^4 \times \mathrm{e}^{-1} = \mathrm{e}^{4+(-1)} = \mathrm{e}^3$.
+\end{corrige}

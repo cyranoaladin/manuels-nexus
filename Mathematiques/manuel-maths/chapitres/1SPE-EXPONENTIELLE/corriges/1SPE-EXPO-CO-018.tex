@@ -1,0 +1,30 @@
+% META: {"id":"1SPE-EXPO-CO-018","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-018","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify
+% x = symbols('x')
+% assert simplify(exp(2*x) - exp(x) - exp(x)*(exp(x) - 1)) == 0
+% assert simplify(exp(2*x) - 2*exp(x) + 1 - (exp(x) - 1)**2) == 0
+% assert simplify(exp(2*x) - 9 - (exp(x) - 3)*(exp(x) + 3)) == 0
+% assert simplify(exp(2*x) + 5*exp(x) + 6 - (exp(x) + 2)*(exp(x) + 3)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-018}
+On utilise $\mathrm{e}^{2x} = \left(\mathrm{e}^x\right)^2$ pour ramener les expressions à des formes algébriques connues en posant $X = \mathrm{e}^x$.
+
+\textbf{1.} $A = \mathrm{e}^{2x} - \mathrm{e}^x = \mathrm{e}^x\left(\mathrm{e}^x - 1\right)$.
+
+On factorise par $\mathrm{e}^x$ (facteur commun).
+
+\textbf{2.} $B = \mathrm{e}^{2x} - 2\,\mathrm{e}^x + 1 = \left(\mathrm{e}^x\right)^2 - 2\,\mathrm{e}^x + 1$.
+
+On reconnaît $(X-1)^2$ avec $X = \mathrm{e}^x$ : $B = \left(\mathrm{e}^x - 1\right)^2$.
+
+\textbf{3.} $C = \mathrm{e}^{2x} - 9 = \left(\mathrm{e}^x\right)^2 - 3^2$.
+
+On reconnaît $a^2 - b^2 = (a-b)(a+b)$ : $C = \left(\mathrm{e}^x - 3\right)\left(\mathrm{e}^x + 3\right)$.
+
+\textbf{4.} $D = \mathrm{e}^{2x} + 5\,\mathrm{e}^x + 6$. On pose $X = \mathrm{e}^x$ : $D = X^2 + 5X + 6$.
+
+On cherche deux nombres de somme $5$ et de produit $6$ : ce sont $2$ et $3$.
+
+Donc $D = (X+2)(X+3) = \left(\mathrm{e}^x + 2\right)\left(\mathrm{e}^x + 3\right)$.
+\end{corrige}

@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-EXPO-CO-045","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-045","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% X = symbols('X')
+% eq_X = X**2 + X - 6
+% assert set(solve(eq_X, X)) == {-3, 2}
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-045}
+On pose $X = \mathrm{e}^x$, avec $X > 0$. L'inéquation devient :
+\[X^2 + X - 6 \leqslant 0.\]
+
+On résout $X^2 + X - 6 = 0$. Le discriminant vaut $\Delta = 1 + 24 = 25 > 0$.
+
+Les racines sont :
+\[X_1 = \dfrac{-1 - 5}{2} = -3 \quad \text{et} \quad X_2 = \dfrac{-1 + 5}{2} = 2.\]
+
+Le trinôme $X^2 + X - 6 = (X + 3)(X - 2)$ est négatif ou nul pour $X \in [-3\,;2]$.
+
+Or $X = \mathrm{e}^x > 0$, donc la contrainte $X \in [-3\,;2]$ combinée à $X > 0$ donne :
+\[0 < X \leqslant 2.\]
+
+On revient à $x$ : $\mathrm{e}^x \leqslant 2 \iff x \leqslant \ln 2$ (car la fonction exponentielle est strictement croissante).
+
+La condition $\mathrm{e}^x > 0$ est toujours vérifiée.
+
+L'ensemble des solutions est $\boxed{S = \left]-\infty\,;\,\ln 2\right]}$.
+\end{corrige}

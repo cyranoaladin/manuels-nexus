@@ -1,0 +1,45 @@
+% META: {"id":"1SPE-EXPO-CO-010","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-010","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*exp(x) - exp(x) + 1
+% fp = f.diff(x)
+% fpp = f.diff(x, 2)
+% assert simplify(f.subs(x, 0)) == 0, "f(0) = 0"
+% assert simplify(fp) == x*exp(x), "f'(x) = x*exp(x)"
+% assert simplify(fp.subs(x, 0)) == 0, "f'(0) = 0"
+% assert simplify(fpp) == (x + 1)*exp(x), "f''(x) = (x+1)*exp(x)"
+% assert simplify(fpp.subs(x, 0)) == 1, "f''(0) = 1 > 0"
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-010}
+\begin{enumerate}
+\item $f(0) = 0 \cdot \mathrm{e}^0 - \mathrm{e}^0 + 1 = 0 - 1 + 1 = 0$.
+
+\item On dérive en utilisant la formule du produit pour $x\mathrm{e}^x$ :
+\[f'(x) = (x\mathrm{e}^x)' - (\mathrm{e}^x)' = (\mathrm{e}^x + x\mathrm{e}^x) - \mathrm{e}^x = x\mathrm{e}^x.\]
+
+\item $f'(0) = 0 \cdot \mathrm{e}^0 = 0$.
+
+Le point $x = 0$ est un point critique de $f$.
+
+\item On dérive $f'(x) = x\mathrm{e}^x$ par la formule du produit :
+\[f''(x) = \mathrm{e}^x + x\mathrm{e}^x = (x+1)\mathrm{e}^x.\]
+
+\item $f''(0) = (0+1)\mathrm{e}^0 = 1 > 0$.
+
+Comme $f'(0) = 0$ et $f''(0) > 0$, le point $x = 0$ est un \textbf{minimum local} de $f$.
+
+\item \textbf{Signe de $f'(x) = x\mathrm{e}^x$.} Comme $\mathrm{e}^x > 0$ pour tout $x$, le signe de $f'(x)$ est celui de $x$ :
+\begin{itemize}
+\item $f'(x) < 0$ si $x < 0$ : $f$ est strictement décroissante sur $]-\infty ; 0]$.
+\item $f'(x) > 0$ si $x > 0$ : $f$ est strictement croissante sur $[0 ; +\infty[$.
+\end{itemize}
+
+Donc $f$ admet un \textbf{minimum global} en $x = 0$, avec $f(0) = 0$.
+
+Par conséquent, $f(x) \geqslant 0$ pour tout réel $x$.
+
+\item Puisque $f(x) \geqslant 0$, on a $x\mathrm{e}^x - \mathrm{e}^x + 1 \geqslant 0$, soit :
+\[x\mathrm{e}^x \geqslant \mathrm{e}^x - 1 \quad \text{pour tout réel } x.\]
+\end{enumerate}
+\end{corrige}

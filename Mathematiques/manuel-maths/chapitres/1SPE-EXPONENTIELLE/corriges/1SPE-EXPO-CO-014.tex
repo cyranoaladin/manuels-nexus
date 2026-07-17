@@ -1,0 +1,30 @@
+% META: {"id":"1SPE-EXPO-CO-014","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-014","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify, E
+% a, b, x = symbols('a b x')
+% # 1. FAUX: e^{a+b} = e^a * e^b, pas e^a + e^b
+% assert simplify(exp(1+1) - (exp(1)+exp(1))) != 0
+% # 2. FAUX: e^{a*b} != e^a * e^b en general
+% assert simplify(exp(2*3) - exp(2)*exp(3)) != 0
+% # 3. VRAI: e^{-x} = 1/e^x
+% assert simplify(exp(-x) - 1/exp(x)) == 0
+% # 4. FAUX: (e^a)^n = e^{n*a}, pas e^{a+n}
+% assert simplify(exp(2)**3 - exp(2+3)) != 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-014}
+
+\textbf{1. FAUX.} La bonne propriété est $\mathrm{e}^{a+b} = \mathrm{e}^a \times \mathrm{e}^b$ (produit, pas somme).
+
+Contre-exemple : $\mathrm{e}^{1+1} = \mathrm{e}^2 \approx 7{,}39$ alors que $\mathrm{e}^1 + \mathrm{e}^1 = 2\mathrm{e} \approx 5{,}44$.
+
+\textbf{2. FAUX.} La propriété $\mathrm{e}^a \times \mathrm{e}^b = \mathrm{e}^{a+b}$ concerne la \emph{somme} des exposants, pas leur produit. En général, $\mathrm{e}^{ab} \neq \mathrm{e}^a \times \mathrm{e}^b$.
+
+Contre-exemple : $\mathrm{e}^{2 \times 3} = \mathrm{e}^6$ alors que $\mathrm{e}^2 \times \mathrm{e}^3 = \mathrm{e}^5$.
+
+\textbf{3. VRAI.} En appliquant $\mathrm{e}^{a+b} = \mathrm{e}^a \times \mathrm{e}^b$ avec $b = -x$ et $a = x$ :
+$\mathrm{e}^x \times \mathrm{e}^{-x} = \mathrm{e}^{x+(-x)} = \mathrm{e}^0 = 1$, donc $\mathrm{e}^{-x} = \dfrac{1}{\mathrm{e}^x}$.
+
+\textbf{4. FAUX.} La bonne propriété est $\left(\mathrm{e}^a\right)^n = \mathrm{e}^{na}$ (produit $na$, pas somme $a+n$).
+
+Contre-exemple : $\left(\mathrm{e}^2\right)^3 = \mathrm{e}^6$ alors que $\mathrm{e}^{2+3} = \mathrm{e}^5$.
+\end{corrige}

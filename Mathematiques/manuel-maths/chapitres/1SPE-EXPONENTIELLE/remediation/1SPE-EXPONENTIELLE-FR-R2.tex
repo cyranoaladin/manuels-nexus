@@ -1,0 +1,158 @@
+% META: {"id": "1SPE-EXPONENTIELLE-FR-R2", "chapitre": "1SPE-EXPONENTIELLE", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R2 : Signe de la derivee et variations
+% Prerequis issu de 1SPE-DERIVATION-GLOBAL
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Signe de la derivee et sens de variation}
+
+Soit $f$ une fonction derivable sur un intervalle $I$.
+\begin{itemize}
+  \item Si $f'(x) > 0$ pour tout $x \in I$, alors $f$ est \textbf{strictement croissante} sur $I$.
+  \item Si $f'(x) < 0$ pour tout $x \in I$, alors $f$ est \textbf{strictement decroissante} sur $I$.
+  \item Si $f'(x) = 0$ pour tout $x \in I$, alors $f$ est \textbf{constante} sur $I$.
+\end{itemize}
+
+Pour dresser le tableau de variations de $f$, on etudie le signe de $f'$ sur son domaine de definition.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R2-EX1}{1}{6}
+Soit $f(x) = x^2 - 6x + 5$.
+\begin{enumerate}
+  \item Calculer $f'(x)$.
+  \item Resoudre $f'(x) = 0$, puis determiner le signe de $f'(x)$.
+  \item En deduire le tableau de variations de $f$ sur $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$f'(x)$ est une fonction affine. Son signe change au point ou elle s'annule.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve
+% x = symbols('x')
+% f = x**2 - 6*x + 5
+% fp = diff(f, x)
+% assert fp == 2*x - 6
+% assert solve(fp, x) == [3]
+% assert f.subs(x, 3) == -4
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R2-EX1}
+
+\textbf{Question 1.}
+\[
+f'(x) = 2x - 6.
+\]
+
+\textbf{Question 2.} $f'(x) = 0 \Leftrightarrow 2x - 6 = 0 \Leftrightarrow x = 3$.
+
+$f'(x) < 0$ pour $x < 3$ et $f'(x) > 0$ pour $x > 3$.
+
+\commentaireMarge{$f'$ est negative avant $3$ (decroissance), positive apres (croissance).}
+
+\textbf{Question 3.} $f(3) = 9 - 18 + 5 = -4$.
+
+$f$ est strictement decroissante sur $]-\infty\,;\,3]$ et strictement croissante sur $[3\,;\,+\infty[$.
+
+Le minimum de $f$ est $-4$, atteint en $x = 3$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R2-EX2}{1}{8}
+Soit $g(x) = -x^3 + 3x$ definie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $g'(x)$.
+  \item Resoudre $g'(x) = 0$, puis etudier le signe de $g'(x)$.
+  \item Dresser le tableau de variations de $g$ sur $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$g'(x) = -3x^2 + 3 = -3(x^2 - 1) = -3(x-1)(x+1)$. Utiliser un tableau de signes.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, factor, simplify
+% x = symbols('x')
+% g = -x**3 + 3*x
+% gp = diff(g, x)
+% assert gp == -3*x**2 + 3
+% assert simplify(factor(gp) - (-3*(x - 1)*(x + 1))) == 0
+% sols = solve(gp, x)
+% assert sorted(sols) == [-1, 1]
+% assert g.subs(x, -1) == -2
+% assert g.subs(x, 1) == 2
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R2-EX2}
+
+\textbf{Question 1.}
+\[
+g'(x) = -3x^2 + 3.
+\]
+
+\textbf{Question 2.} $g'(x) = 0 \Leftrightarrow -3x^2 + 3 = 0 \Leftrightarrow x^2 = 1 \Leftrightarrow x = -1$ ou $x = 1$.
+
+On factorise : $g'(x) = -3(x-1)(x+1)$.
+
+Tableau de signes :
+\begin{itemize}
+  \item $g'(x) < 0$ pour $x < -1$,
+  \item $g'(x) > 0$ pour $-1 < x < 1$,
+  \item $g'(x) < 0$ pour $x > 1$.
+\end{itemize}
+
+\commentaireMarge{$g(-1) = 1 - 3 = -2$ et $g(1) = -1 + 3 = 2$.}
+
+\textbf{Question 3.} $g(-1) = -2$, $g(1) = 2$.
+
+$g$ est strictement decroissante sur $]-\infty\,;\,-1]$, strictement croissante sur $[-1\,;\,1]$, strictement decroissante sur $[1\,;\,+\infty[$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R2-EX3}{2}{8}
+Soit $h(x) = \dfrac{x}{x^2 + 1}$ definie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $h'(x)$ a l'aide de la formule du quotient.
+  \item Etudier le signe de $h'(x)$.
+  \item En deduire le tableau de variations de $h$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Le denominateur $(x^2+1)^2$ est toujours positif. Le signe de $h'(x)$ depend uniquement du numerateur.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify
+% x = symbols('x')
+% h = x/(x**2 + 1)
+% hp = diff(h, x)
+% assert simplify(hp - (1 - x**2)/(x**2 + 1)**2) == 0
+% assert simplify(hp.subs(x, 1)) == 0
+% assert simplify(hp.subs(x, -1)) == 0
+% from sympy import Rational
+% assert h.subs(x, 1) == Rational(1, 2)
+% assert h.subs(x, -1) == Rational(-1, 2)
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R2-EX3}
+
+\textbf{Question 1.} $u = x$, $v = x^2+1$, $u' = 1$, $v' = 2x$.
+\[
+h'(x) = \frac{1 \times (x^2+1) - x \times 2x}{(x^2+1)^2} = \frac{x^2 + 1 - 2x^2}{(x^2+1)^2} = \frac{1 - x^2}{(x^2+1)^2}.
+\]
+
+\textbf{Question 2.} Le denominateur $(x^2+1)^2 > 0$ pour tout $x$. Le signe de $h'(x)$ est celui de $1 - x^2 = (1-x)(1+x)$.
+
+$h'(x) > 0$ pour $-1 < x < 1$ et $h'(x) < 0$ pour $x < -1$ ou $x > 1$.
+
+\commentaireMarge{$h(-1) = -1/2$ et $h(1) = 1/2$.}
+
+\textbf{Question 3.} $h(-1) = -\frac{1}{2}$, $h(1) = \frac{1}{2}$.
+
+$h$ est strictement decroissante sur $]-\infty\,;\,-1]$, strictement croissante sur $[-1\,;\,1]$, strictement decroissante sur $[1\,;\,+\infty[$.
+
+\end{corrige}

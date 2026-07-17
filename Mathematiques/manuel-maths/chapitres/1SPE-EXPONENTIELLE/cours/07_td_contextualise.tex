@@ -1,0 +1,134 @@
+% META: {"id":"1SPE-EXPO-TD-CONTEXTUALISE","chapitre":"1SPE-EXPONENTIELLE","type_objet":"td","capacites_codes":["C3","C4","C5"],"duree_min":50,"status":"generated"}
+
+% ============================================================
+% TD CONTEXTUALISE — Décroissance radioactive
+% Nexus Réussite — 1re Spécialité
+% Durée : 50 min — 4 parties
+% ============================================================
+
+\section*{TD — Décroissance radioactive du carbone 14}
+
+\textit{Durée : 50 minutes.}
+
+\bigskip
+
+\begin{center}
+\textbf{Situation}
+
+\medskip
+\parbox{0.9\textwidth}{Le carbone 14 (${}^{14}\mathrm{C}$) est un isotope radioactif utilisé en archéologie pour dater des vestiges organiques. La quantité de carbone 14 dans un échantillon décroît au cours du temps selon la loi :
+\[
+N(t) = N_0\,\mathrm{e}^{-\lambda t},
+\]
+où $N_0$ est la quantité initiale, $t$ est le temps en années, et $\lambda = 1{,}21 \times 10^{-4}$ an$^{-1}$ est la constante de désintégration.
+
+La \textbf{demi-vie} est la durée $T$ au bout de laquelle la moitié de la quantité initiale a disparu.}
+\end{center}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie A — Le modèle exponentiel (C3) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}
+  \item Vérifier que $N(0) = N_0$. Interpréter ce résultat.
+  \item Calculer $\displaystyle\lim_{t \to +\infty} N(t)$. Interpréter physiquement.
+  \item Montrer que $N$ est une fonction strictement décroissante sur $[0\,;\,+\infty[$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, limit, oo, simplify
+% t, lam, N0 = symbols('t lambda N_0', positive=True)
+% N = N0 * exp(-lam*t)
+% assert N.subs(t, 0) == N0
+% assert limit(N, t, oo) == 0
+% # N'(t) = -lambda * N0 * e^(-lambda*t) < 0
+% from sympy import diff
+% Np = diff(N, t)
+% assert simplify(Np + lam*N0*exp(-lam*t)) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie B — Calcul de la demi-vie (C5) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item La demi-vie $T$ vérifie $N(T) = \dfrac{N_0}{2}$. Écrire l'équation correspondante.
+  \item Résoudre cette équation pour obtenir $T$ en fonction de $\lambda$.
+  \item Calculer $T$ numériquement avec $\lambda = 1{,}21 \times 10^{-4}$. Arrondir à la dizaine d'années.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, log, Eq, N as Neval, Rational
+% t, lam = symbols('t lambda', positive=True)
+% # N0 * e^(-lam*t) = N0/2 => e^(-lam*t) = 1/2 => -lam*t = ln(1/2) => t = ln(2)/lam
+% eq = Eq(exp(-lam*t), Rational(1, 2))
+% sol = solve(eq, t)
+% assert sol == [log(2)/lam]
+% # Numerical value with lambda = 1.21e-4
+% T_num = float(Neval(log(2) / 1.21e-4))
+% assert abs(T_num - 5730) < 50  # T ~ 5728 years
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie C — Datation d'un échantillon (C4, C5) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Un os découvert lors de fouilles contient $35\,\%$ de la quantité initiale de carbone 14. Écrire l'équation $N(t) = 0{,}35\,N_0$.
+  \item Résoudre cette équation pour exprimer $t$ en fonction de $\lambda$.
+  \item Calculer l'âge de l'os (arrondir à la centaine d'années).
+  \item Calculer $N'(t)$ et interpréter le signe de $N'(t)$ en termes de vitesse de désintégration.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, log, Eq, N as Neval
+% t = symbols('t', positive=True)
+% lam_val = 1.21e-4
+% # e^(-lam*t) = 0.35 => -lam*t = ln(0.35) => t = -ln(0.35)/lam
+% from sympy import ln, Rational
+% lam = symbols('lambda', positive=True)
+% eq = Eq(exp(-lam*t), Rational(35, 100))
+% sol = solve(eq, t)
+% # t = -ln(7/20)/lam = ln(20/7)/lam
+% from sympy import simplify
+% assert len(sol) == 1
+% t_exact = sol[0]
+% t_num = float(Neval(t_exact.subs(lam, 1.21e-4)))
+% assert abs(t_num - 8680) < 200  # approximately 8678 years
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie D — Synthèse et limites du modèle (C3) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Au bout de combien de demi-vies la quantité restante est-elle inférieure à $1\,\%$ de $N_0$ ? Justifier par un calcul.
+  \item En déduire une limite pratique de la méthode de datation au carbone 14 (en années).
+  \item Rédiger une synthèse de 3 à 5 lignes expliquant pourquoi la fonction exponentielle est le modèle naturel de la décroissance radioactive.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, log, N as Neval, ceiling
+% # After n half-lives: N = N0 * (1/2)^n
+% # N < 0.01*N0 iff (1/2)^n < 0.01 iff n*ln(1/2) < ln(0.01)
+% # iff n > ln(0.01)/ln(1/2) = ln(100)/ln(2)
+% from sympy import ln, Rational
+% n_min = ln(100)/ln(2)
+% n_num = float(Neval(n_min))
+% assert n_num > 6.6 and n_num < 6.7  # n >= 7 half-lives
+% # 7 * 5730 ~ 40110 years
+% age_limit = 7 * 5730
+% assert age_limit > 40000
+% END-VERIFY

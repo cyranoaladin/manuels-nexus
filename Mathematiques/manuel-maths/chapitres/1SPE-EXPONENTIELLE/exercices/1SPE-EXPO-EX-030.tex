@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-EXPO-EX-030","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C3"],"capacites_codes":["C3"],"methodes":["M2"],"parcours":3,"competences":["raisonner","representer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-030.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-030.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% h = exp(x) - x - 1
+% hp = diff(h, x)
+% assert simplify(hp - (exp(x) - 1)) == 0
+% assert h.subs(x, 0) == 0
+% # h'(x) = e^x - 1, h'(0) = 0
+% assert hp.subs(x, 0) == 0
+% # h''(x) = e^x > 0 : h convexe, donc min en x=0
+% hpp = diff(h, x, 2)
+% assert simplify(hpp - exp(x)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-030}{3}{15}
+On pose $h(x) = \mathrm{e}^x - x - 1$ pour tout réel $x$. La droite $T : y = x + 1$ est la tangente à la courbe de la fonction exponentielle au point d'abscisse $0$.
+\begin{enumerate}
+  \item Calculer $h(0)$.
+  \item Calculer $h'(x)$ et étudier son signe.
+  \item Dresser le tableau de variations de $h$.
+  \item En déduire que pour tout réel $x$ : $\mathrm{e}^x \geqslant x + 1$.
+  \item Interpréter graphiquement ce résultat : quelle est la position de la courbe de $\exp$ par rapport à sa tangente en $0$ ?
+\end{enumerate}
+\end{exercice}

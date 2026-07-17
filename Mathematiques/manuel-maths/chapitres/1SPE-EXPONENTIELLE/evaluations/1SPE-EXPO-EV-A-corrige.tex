@@ -1,0 +1,143 @@
+% META: {"id":"1SPE-EXPO-EV-A-corrige","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+
+\section*{Corrigé — Évaluation A — Fonction exponentielle}
+
+%---------------------------------------------------------------
+\subsection*{Exercice 1 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$f(x) = \mathrm{e}^{2x-1}$. On pose $u(x) = 2x - 1$, d'où $u'(x) = 2$.
+
+Par la formule de dérivation de $\mathrm{e}^{u}$ :
+\[
+f'(x) = u'(x)\,\mathrm{e}^{u(x)} = 2\,\mathrm{e}^{2x-1}.
+\]
+
+\textbf{Question 2.}
+En utilisant la propriété $\mathrm{e}^a \times \mathrm{e}^b = \mathrm{e}^{a+b}$ :
+\[
+\mathrm{e}^{2x-1} \times \mathrm{e}^{1-x} = \mathrm{e}^{(2x-1)+(1-x)} = \mathrm{e}^{x}.
+\]
+
+\textbf{Question 3.}
+$f(0) = \mathrm{e}^{2 \times 0 - 1} = \mathrm{e}^{-1} = \dfrac{1}{\mathrm{e}} \approx 0{,}368.$
+
+$f\!\left(\dfrac{1}{2}\right) = \mathrm{e}^{2 \times \frac{1}{2} - 1} = \mathrm{e}^{1-1} = \mathrm{e}^0 = 1.$
+
+Interprétation : $f\!\left(\dfrac{1}{2}\right) = 1$ signifie que le point de coordonnées $\left(\dfrac{1}{2}\,;\,1\right)$ appartient à la courbe de $f$. C'est le point où la courbe coupe la droite $y = 1$.
+
+\textbf{Question 4.}
+On a $f'(x) = 2\,\mathrm{e}^{2x-1}$ (question 1) et $2f(x) = 2\,\mathrm{e}^{2x-1}$.
+
+Donc $f'(x) = 2f(x)$ pour tout $x \in \mathbb{R}$ : $f$ est bien solution de $y' = 2y$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 2 — 6 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$g(x) = (x-2)\,\mathrm{e}^x$. C'est un produit $u \cdot v$ avec $u(x) = x-2$ et $v(x) = \mathrm{e}^x$.
+
+$u'(x) = 1$ et $v'(x) = \mathrm{e}^x$.
+\[
+g'(x) = u'v + uv' = 1 \cdot \mathrm{e}^x + (x-2) \cdot \mathrm{e}^x = \mathrm{e}^x\bigl(1 + x - 2\bigr) = (x-1)\,\mathrm{e}^x.
+\]
+
+\textbf{Question 2.}
+$g'(x) = (x-1)\,\mathrm{e}^x$.
+
+Or $\mathrm{e}^x > 0$ pour tout $x \in \mathbb{R}$, donc le signe de $g'(x)$ est celui de $(x-1)$ :
+\begin{itemize}
+  \item $g'(x) < 0$ si $x < 1$ : $g$ est strictement décroissante sur $]-\infty\,;\,1]$ ;
+  \item $g'(x) = 0$ si $x = 1$ ;
+  \item $g'(x) > 0$ si $x > 1$ : $g$ est strictement croissante sur $[1\,;\,+\infty[$.
+\end{itemize}
+
+$g(1) = (1-2)\,\mathrm{e}^1 = -\mathrm{e} \approx -2{,}72.$
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $1$ & & $+\infty$ \\
+\hline
+$g'(x)$ & & $-$ & $0$ & $+$ & \\
+\hline
+$g(x)$ & $0$ & $\searrow$ & $-\mathrm{e}$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Question 3.}
+D'après le tableau de variations, $g$ admet un \textbf{minimum} de $-\mathrm{e} \approx -2{,}72$ atteint en $x = 1$.
+
+\textbf{Question 4.}
+\begin{itemize}
+  \item En $+\infty$ : $\lim_{x \to +\infty} (x-2) = +\infty$ et $\lim_{x \to +\infty} \mathrm{e}^x = +\infty$, donc par produit $\lim_{x \to +\infty} g(x) = +\infty$.
+  \item En $-\infty$ : $\lim_{x \to -\infty} (x-2) = -\infty$ et $\lim_{x \to -\infty} \mathrm{e}^x = 0^+$.
+
+  On utilise le résultat du cours : $\lim_{x \to -\infty} x\,\mathrm{e}^x = 0$, car l'exponentielle l'emporte. Donc $\lim_{x \to -\infty} (x-2)\,\mathrm{e}^x = 0$.
+\end{itemize}
+
+%---------------------------------------------------------------
+\subsection*{Exercice 3 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+En posant $X = \mathrm{e}^x$, on a $\mathrm{e}^{2x} = \left(\mathrm{e}^x\right)^2 = X^2$, donc :
+\[
+h(x) = X^2 - 5X + 4.
+\]
+
+\textbf{Question 2.}
+On résout $X^2 - 5X + 4 = 0$.
+
+$\Delta = (-5)^2 - 4 \times 1 \times 4 = 25 - 16 = 9 > 0.$
+
+$X_1 = \dfrac{5 - 3}{2} = 1$ \quad et \quad $X_2 = \dfrac{5 + 3}{2} = 4.$
+
+\textbf{Question 3.}
+On revient à la variable $x$ en remplaçant $X$ par $\mathrm{e}^x$ :
+
+\begin{itemize}
+  \item $\mathrm{e}^x = 1 \Leftrightarrow x = 0$ ;
+  \item $\mathrm{e}^x = 4 \Leftrightarrow x = \ln 4$.
+\end{itemize}
+
+Les solutions de $h(x) = 0$ sont $\boxed{x = 0}$ et $\boxed{x = \ln 4}$.
+
+\textbf{Question 4.}
+$h(x) \leqslant 0 \Leftrightarrow X^2 - 5X + 4 \leqslant 0$ avec $X = \mathrm{e}^x > 0$.
+
+Le trinôme $X^2 - 5X + 4 = (X-1)(X-4)$ est négatif ou nul pour $1 \leqslant X \leqslant 4$.
+
+On traduit en $x$ : $1 \leqslant \mathrm{e}^x \leqslant 4$. Comme la fonction exponentielle est strictement croissante :
+\[
+\ln 1 \leqslant x \leqslant \ln 4 \quad \text{soit} \quad 0 \leqslant x \leqslant \ln 4.
+\]
+
+L'ensemble des solutions est $\boxed{[0\,;\,\ln 4]}$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 4 — 4 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$P(0) = 50\,000\,\mathrm{e}^{0{,}02 \times 0} = 50\,000\,\mathrm{e}^0 = 50\,000.$
+
+Interprétation : en 2020 (année de départ, $t = 0$), la population de la ville est de $50\,000$ habitants.
+
+\textbf{Question 2.}
+$P(10) = 50\,000\,\mathrm{e}^{0{,}02 \times 10} = 50\,000\,\mathrm{e}^{0{,}2} \approx 50\,000 \times 1{,}2214 \approx 61\,070.$
+
+En 2030, la population sera d'environ $\mathbf{61\,070}$ habitants.
+
+\textbf{Question 3.}
+$P(t) = 100\,000 \Leftrightarrow 50\,000\,\mathrm{e}^{0{,}02\,t} = 100\,000 \Leftrightarrow \mathrm{e}^{0{,}02\,t} = 2 \Leftrightarrow 0{,}02\,t = \ln 2 \Leftrightarrow t = \dfrac{\ln 2}{0{,}02} = 50\ln 2 \approx 34{,}66.$
+
+La population atteindra $100\,000$ habitants environ $34{,}7$ ans après 2020, soit au cours de l'année $\mathbf{2055}$.
+
+\textbf{Question 4.}
+$P(t) \geqslant 75\,000 \Leftrightarrow \mathrm{e}^{0{,}02\,t} \geqslant \dfrac{75\,000}{50\,000} = \dfrac{3}{2} \Leftrightarrow 0{,}02\,t \geqslant \ln\!\left(\dfrac{3}{2}\right) \Leftrightarrow t \geqslant 50\,\ln\!\left(\dfrac{3}{2}\right) \approx 20{,}27.$
+
+La population dépassera $75\,000$ habitants à partir de $t = 21$ ans, soit à partir de l'année $\mathbf{2041}$.

@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-EXPO-CO-015","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-015","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x, b = symbols('x b')
+% g = exp(x + b) / exp(x)
+% gp = diff(g, x)
+% assert simplify(gp) == 0
+% assert simplify(g.subs(x, 0) - exp(b)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-015}
+
+\textbf{Question 1.} Pour tout $x \in \mathbb{R}$, $\exp(x) > 0$ donc $g(x) = \dfrac{\exp(x+b)}{\exp(x)}$ est bien définie. Les fonctions $x \mapsto \exp(x+b)$ et $x \mapsto \exp(x)$ sont dérivables sur $\mathbb{R}$, et $\exp(x) \neq 0$, donc $g$ est dérivable sur $\mathbb{R}$ comme quotient.
+
+\textbf{Question 2.} En appliquant la règle du quotient avec $u(x) = \exp(x+b)$ et $v(x) = \exp(x)$ :
+
+$u'(x) = \exp(x+b)$ et $v'(x) = \exp(x)$.
+\[
+g'(x) = \frac{\exp(x+b) \times \exp(x) - \exp(x+b) \times \exp(x)}{[\exp(x)]^2} = \frac{0}{[\exp(x)]^2} = 0.
+\]
+
+\textbf{Question 3.} Comme $g'(x) = 0$ pour tout $x \in \mathbb{R}$, la fonction $g$ est constante sur $\mathbb{R}$.
+
+\textbf{Question 4.} $g(0) = \dfrac{\exp(0+b)}{\exp(0)} = \dfrac{\exp(b)}{1} = \exp(b)$.
+
+Donc pour tout $x \in \mathbb{R}$ : $g(x) = \exp(b)$, c'est-à-dire $\dfrac{\exp(x+b)}{\exp(x)} = \exp(b)$, soit $\exp(x+b) = \exp(x) \times \exp(b)$.
+
+En posant $x = a$, on obtient : $\exp(a+b) = \exp(a) \times \exp(b)$.
+\end{corrige}

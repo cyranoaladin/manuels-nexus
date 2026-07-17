@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-EXPO-EX-020","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C2"],"capacites_codes":["C2"],"methodes":["M1"],"parcours":3,"competences":["raisonner","calculer","communiquer"],"duree_min":12,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-020.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-020.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify, diff, Rational
+% x = symbols('x')
+% f = (exp(x) + exp(-x)) / 2
+% assert simplify(f.subs(x, -x) - f) == 0
+% assert simplify(f.subs(x, 0) - 1) == 0
+% fp = diff(f, x)
+% assert simplify(fp - (exp(x) - exp(-x))/2) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-020}{3}{12}
+On définit la fonction $f$ sur $\mathbb{R}$ par :
+\[ f(x) = \frac{\mathrm{e}^x + \mathrm{e}^{-x}}{2}. \]
+\begin{enumerate}
+  \item Montrer que pour tout réel $x$, $f(-x) = f(x)$. Comment se traduit cette propriété graphiquement ?
+  \item Calculer $f(0)$.
+  \item Calculer $f'(x)$ et montrer que $f'(x) = \dfrac{\mathrm{e}^x - \mathrm{e}^{-x}}{2}$.
+  \item Étudier le signe de $f'(x)$ et en déduire les variations de $f$ sur $\mathbb{R}$.
+  \item Montrer que pour tout réel $x$, $\bigl[f(x)\bigr]^2 - \left[\dfrac{\mathrm{e}^x - \mathrm{e}^{-x}}{2}\right]^2 = 1$.
+\end{enumerate}
+\end{exercice}

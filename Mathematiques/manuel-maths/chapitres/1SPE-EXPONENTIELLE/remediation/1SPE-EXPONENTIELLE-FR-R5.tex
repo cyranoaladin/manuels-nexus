@@ -1,0 +1,138 @@
+% META: {"id": "1SPE-EXPONENTIELLE-FR-R5", "chapitre": "1SPE-EXPONENTIELLE", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R5 : Suites geometriques
+% Prerequis issu de 1SPE-SUITES
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Suites geometriques et coefficient multiplicateur}
+
+Une suite $(u_n)$ est \textbf{geometrique} de raison $q$ si pour tout $n$ : $u_{n+1} = q \times u_n$.
+
+Formule explicite : $u_n = u_0 \times q^n$.
+
+Lien avec l'exponentielle : la suite $u_n = u_0 \times \mathrm{e}^{rn}$ est geometrique de raison $q = \mathrm{e}^r$, car $u_{n+1} = u_0 \times \mathrm{e}^{r(n+1)} = \mathrm{e}^r \times u_n$.
+
+Le coefficient multiplicateur d'une augmentation de $t\,\%$ est $q = 1 + \dfrac{t}{100}$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R5-EX1}{1}{5}
+Soit $(u_n)$ la suite geometrique de premier terme $u_0 = 5$ et de raison $q = 2$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$, $u_3$.
+  \item Donner la formule explicite de $u_n$.
+  \item Calculer $u_{10}$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$u_{n+1} = q \times u_n$. Formule explicite : $u_n = u_0 \times q^n$.}
+
+% BEGIN-VERIFY
+% u0 = 5
+% q = 2
+% u1 = u0 * q
+% assert u1 == 10
+% u2 = u1 * q
+% assert u2 == 20
+% u3 = u2 * q
+% assert u3 == 40
+% assert u0 * q**10 == 5120
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R5-EX1}
+
+\textbf{Question 1.}
+$u_1 = 5 \times 2 = 10$, $u_2 = 10 \times 2 = 20$, $u_3 = 20 \times 2 = 40$.
+
+\textbf{Question 2.}
+$u_n = 5 \times 2^n$.
+
+\textbf{Question 3.}
+$u_{10} = 5 \times 2^{10} = 5 \times 1024 = 5120$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R5-EX2}{1}{6}
+Un capital de $1\,000$~euros est place a un taux annuel de $3\,\%$. On note $C_n$ le capital au bout de $n$ annees.
+\begin{enumerate}
+  \item Quel est le coefficient multiplicateur annuel ?
+  \item Exprimer $C_n$ en fonction de $n$.
+  \item Calculer $C_5$ (arrondir au centime).
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Coefficient multiplicateur pour une augmentation de $t\,\%$ : $q = 1 + t/100$. Ici $t = 3$.}
+
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% q = Rational(103, 100)
+% C0 = 1000
+% C5 = C0 * q**5
+% assert abs(float(C5) - 1159.27) < 0.01
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R5-EX2}
+
+\textbf{Question 1.} Le coefficient multiplicateur est $q = 1 + \frac{3}{100} = 1{,}03$.
+
+\textbf{Question 2.} $(C_n)$ est geometrique de raison $1{,}03$ et $C_0 = 1000$.
+\[
+C_n = 1000 \times 1{,}03^n.
+\]
+
+\textbf{Question 3.}
+$C_5 = 1000 \times 1{,}03^5 \approx 1000 \times 1{,}15927 \approx 1159{,}27$~euros.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-FR-R5-EX3}{2}{6}
+Une population de bacteries est modelisee par $P_n = 500 \times (1{,}5)^n$ ou $n$ est le nombre d'heures.
+\begin{enumerate}
+  \item Justifier que $(P_n)$ est une suite geometrique. Donner sa raison.
+  \item Calculer $P_0$, $P_1$, $P_2$ et $P_3$.
+  \item A partir de quel rang $n$ a-t-on $P_n > 5\,000$ ? (on pourra tester quelques valeurs)
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{$P_{n+1}/P_n = (1{,}5)^{n+1}/(1{,}5)^n = 1{,}5$ : le quotient est constant.}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% q = Rational(3, 2)
+% P = [500 * q**n for n in range(10)]
+% assert P[0] == 500
+% assert P[1] == 750
+% assert P[2] == Rational(2250, 2)  # 1125
+% assert float(P[2]) == 1125.0
+% assert float(P[3]) == 1687.5
+% # P_n > 5000 : tester
+% n = 0
+% while float(500 * q**n) <= 5000:
+%     n += 1
+% assert n == 6  # P_6 = 500 * 1.5^6 = 500 * 11.390625 = 5695.3125
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-FR-R5-EX3}
+
+\textbf{Question 1.} $P_{n+1} = 500 \times (1{,}5)^{n+1} = 1{,}5 \times 500 \times (1{,}5)^n = 1{,}5 \times P_n$.
+
+Le quotient $P_{n+1}/P_n = 1{,}5$ est constant : $(P_n)$ est geometrique de raison $q = 1{,}5$.
+
+\textbf{Question 2.}
+$P_0 = 500$, $P_1 = 750$, $P_2 = 1125$, $P_3 = 1687{,}5$.
+
+\commentaireMarge{On teste les valeurs successives jusqu'a depasser $5000$.}
+
+\textbf{Question 3.} On calcule :
+$P_4 = 2531{,}25$, $P_5 \approx 3796{,}9$, $P_6 \approx 5695{,}3$.
+
+$P_5 \approx 3797 < 5000$ et $P_6 \approx 5695 > 5000$.
+
+A partir du rang $n = 6$, on a $P_n > 5000$.
+
+\end{corrige}

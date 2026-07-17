@@ -1,0 +1,15 @@
+% META: {"id":"1SPE-EXPO-EX-027","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C3"],"capacites_codes":["C3"],"methodes":["M2"],"parcours":2,"competences":["raisonner","calculer"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-027.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-027.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x) - x, x, oo) == oo
+% assert limit(exp(x) + x, x, -oo) == -oo
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-027}{2}{8}
+Calculer les limites suivantes :
+\begin{enumerate}
+  \item $\displaystyle\lim_{x \to +\infty} \left(\mathrm{e}^x - x\right)$
+  \item $\displaystyle\lim_{x \to -\infty} \left(\mathrm{e}^x + x\right)$
+\end{enumerate}
+\textit{Indication pour la question 1 : on admettra que $\mathrm{e}^x$ croît plus vite que $x$ quand $x \to +\infty$.}
+\end{exercice}

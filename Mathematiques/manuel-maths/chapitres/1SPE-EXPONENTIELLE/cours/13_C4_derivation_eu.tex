@@ -1,0 +1,177 @@
+% META: {"id":"1SPE-EXPO-COURS-C4","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","capacites_codes":["C4"],"status":"generated"}
+
+\section{Dérivation de $\mathrm{e}^{u(x)}$}
+
+\margeAppui{Cette formule de dérivation est la règle de la chaîne appliquée à la fonction exponentielle. Elle est utilisée dans la quasi-totalité des exercices sur l'exponentielle.}
+
+\theoreme[Dérivée de $\mathrm{e}^{u}$]{
+Soit $u$ une fonction dérivable sur un intervalle $I$. La fonction $f$ définie par $f(x) = \mathrm{e}^{u(x)}$ est dérivable sur $I$ et :
+\[
+f'(x) = u'(x)\,\mathrm{e}^{u(x)}.
+\]
+}
+
+\margeAppui{En notation condensée : $\left(\mathrm{e}^u\right)' = u' \mathrm{e}^u$. On multiplie par la dérivée de l'exposant.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Function
+% x = symbols('x')
+% u = Function('u')(x)
+% f = exp(u)
+% assert diff(f, x) == exp(u)*diff(u, x)
+% END-VERIFY
+
+\propriete[Cas particulier $u(x) = x$]{
+Pour $u(x) = x$, on retrouve $(\mathrm{e}^x)' = 1 \times \mathrm{e}^x = \mathrm{e}^x$.
+
+La fonction exponentielle est sa propre dérivée.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff
+% x = symbols('x')
+% assert diff(exp(x), x) == exp(x)
+% END-VERIFY
+
+\definition[Méthode de dérivation]{
+Pour dériver $f(x) = \mathrm{e}^{u(x)}$, on procède en trois étapes :
+\begin{enumerate}
+  \item Identifier la fonction $u(x)$ (l'exposant).
+  \item Calculer $u'(x)$.
+  \item Appliquer la formule : $f'(x) = u'(x)\,\mathrm{e}^{u(x)}$.
+\end{enumerate}
+}
+
+\exemple{
+Dériver $f(x) = \mathrm{e}^{3x+1}$.
+
+On identifie $u(x) = 3x + 1$, donc $u'(x) = 3$. Ainsi :
+\[
+f'(x) = 3\mathrm{e}^{3x+1}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x = symbols('x')
+% f = exp(3*x + 1)
+% assert simplify(diff(f, x) - 3*exp(3*x + 1)) == 0
+% END-VERIFY
+
+\exemple{
+Dériver $g(x) = \mathrm{e}^{-x^2}$.
+
+On identifie $u(x) = -x^2$, donc $u'(x) = -2x$. Ainsi :
+\[
+g'(x) = -2x\,\mathrm{e}^{-x^2}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x = symbols('x')
+% g = exp(-x**2)
+% assert simplify(diff(g, x) - (-2*x)*exp(-x**2)) == 0
+% END-VERIFY
+
+\exemple{
+Dériver $h(x) = \mathrm{e}^{x^2 - 3x + 2}$.
+
+On identifie $u(x) = x^2 - 3x + 2$, donc $u'(x) = 2x - 3$. Ainsi :
+\[
+h'(x) = (2x - 3)\,\mathrm{e}^{x^2 - 3x + 2}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x = symbols('x')
+% h = exp(x**2 - 3*x + 2)
+% assert simplify(diff(h, x) - (2*x - 3)*exp(x**2 - 3*x + 2)) == 0
+% END-VERIFY
+
+\exemple{
+Dériver $p(x) = x^2 \mathrm{e}^{x}$ à l'aide de la règle du produit.
+
+On pose $u = x^2$ et $v = \mathrm{e}^x$, d'où $u' = 2x$ et $v' = \mathrm{e}^x$. Alors :
+\[
+p'(x) = 2x\,\mathrm{e}^x + x^2\,\mathrm{e}^x = (2x + x^2)\mathrm{e}^x = x(x + 2)\mathrm{e}^x.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify, factor
+% x = symbols('x')
+% p = x**2 * exp(x)
+% dp = diff(p, x)
+% assert simplify(dp - (2*x + x**2)*exp(x)) == 0
+% assert simplify(dp - x*(x + 2)*exp(x)) == 0
+% END-VERIFY
+
+\exemple{
+Dériver $q(x) = \dfrac{\mathrm{e}^x}{x+1}$ pour $x \neq -1$.
+
+On applique la règle du quotient avec $u = \mathrm{e}^x$ et $v = x + 1$ :
+\[
+q'(x) = \frac{\mathrm{e}^x(x+1) - \mathrm{e}^x \cdot 1}{(x+1)^2} = \frac{x\,\mathrm{e}^x}{(x+1)^2}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x = symbols('x')
+% q = exp(x)/(x + 1)
+% dq = diff(q, x)
+% expected = x*exp(x)/(x + 1)**2
+% assert simplify(dq - expected) == 0
+% END-VERIFY
+
+\exemple{
+Étude de variations de $f(x) = (1 - 2x)\mathrm{e}^x$ sur $\mathbb{R}$.
+
+Règle du produit : $f'(x) = -2\mathrm{e}^x + (1 - 2x)\mathrm{e}^x = (-2 + 1 - 2x)\mathrm{e}^x = (-1 - 2x)\mathrm{e}^x$.
+
+Comme $\mathrm{e}^x > 0$, le signe de $f'(x)$ est celui de $-1 - 2x$.
+
+$f'(x) = 0 \iff -1 - 2x = 0 \iff x = -\dfrac{1}{2}$.
+
+$f'(x) > 0 \iff x < -\dfrac{1}{2}$ et $f'(x) < 0 \iff x > -\dfrac{1}{2}$.
+
+Donc $f$ est croissante sur $\left]-\infty\,;\,-\dfrac{1}{2}\right]$ et décroissante sur $\left[-\dfrac{1}{2}\,;\,+\infty\right[$.
+
+Le maximum est atteint en $x = -\dfrac{1}{2}$ : $f\!\left(-\dfrac{1}{2}\right) = 2\,\mathrm{e}^{-1/2} = \dfrac{2}{\sqrt{\mathrm{e}}}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify, solve, Rational
+% x = symbols('x')
+% f = (1 - 2*x)*exp(x)
+% fp = diff(f, x)
+% assert simplify(fp - (-1 - 2*x)*exp(x)) == 0
+% roots = solve(-1 - 2*x, x)
+% assert roots == [Rational(-1, 2)]
+% fmax = f.subs(x, Rational(-1, 2))
+% assert simplify(fmax - 2*exp(Rational(-1, 2))) == 0
+% END-VERIFY
+
+\erreurFrequente{
+Oublier de multiplier par $u'(x)$ : écrire $(\mathrm{e}^{3x})' = \mathrm{e}^{3x}$ au lieu de $(\mathrm{e}^{3x})' = 3\mathrm{e}^{3x}$. La dérivée de l'exposant ne doit jamais être omise (sauf si $u(x) = x$, car alors $u'(x) = 1$).
+}
+
+\erreurFrequente{
+Écrire $(\mathrm{e}^{u})' = u' \times \mathrm{e}^{u'}$. L'exponentielle porte sur $u$, pas sur $u'$. La bonne formule est $(\mathrm{e}^{u})' = u' \times \mathrm{e}^{u}$.
+}
+
+\contreexemple{
+Pour $f(x) = \mathrm{e}^{5x}$, si l'on oublie la dérivée intérieure, on obtient $f'(x) = \mathrm{e}^{5x}$. Vérification numérique en $x = 0$ : $f(0) = 1$ et le taux de variation $\dfrac{f(h) - 1}{h} \approx \dfrac{\mathrm{e}^{5h} - 1}{h}$ tend vers $5$ et non $1$ quand $h \to 0$. La bonne réponse est $f'(x) = 5\mathrm{e}^{5x}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff
+% x = symbols('x')
+% assert diff(exp(5*x), x) == 5*exp(5*x)
+% END-VERIFY
+
+\approfondissement{
+La formule $(\mathrm{e}^u)' = u'\mathrm{e}^u$ est un cas particulier de la \emph{règle de la chaîne} : si $f = g \circ u$ avec $g$ dérivable, alors $f' = u' \times (g' \circ u)$. Ici $g = \exp$ et $g' = \exp$, d'où le résultat. Cette règle s'applique à toute composition de fonctions dérivables.
+}

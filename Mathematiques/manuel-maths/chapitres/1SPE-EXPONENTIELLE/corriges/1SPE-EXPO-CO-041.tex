@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-EXPO-CO-041","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-041","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert solve(exp(x) - exp(5), x) == [5]
+% assert solve(exp(2*x) - exp(-3), x) == [Rational(-3, 2)]
+% assert solve(exp(x + 1) - exp(4), x) == [3]
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-041}
+\begin{enumerate}
+\item $\mathrm{e}^x = \mathrm{e}^5$.
+
+La fonction exponentielle est une bijection de $\mathbb{R}$ dans $]0\,;+\infty[$, donc :
+\[\mathrm{e}^x = \mathrm{e}^5 \iff x = 5.\]
+L'unique solution est $\boxed{x = 5}$.
+
+\item $\mathrm{e}^{2x} = \mathrm{e}^{-3}$.
+
+Par injectivité de la fonction exponentielle :
+\[\mathrm{e}^{2x} = \mathrm{e}^{-3} \iff 2x = -3 \iff x = -\dfrac{3}{2}.\]
+L'unique solution est $\boxed{x = -\dfrac{3}{2}}$.
+
+\item $\mathrm{e}^{x+1} = \mathrm{e}^4$.
+
+Par injectivité de la fonction exponentielle :
+\[\mathrm{e}^{x+1} = \mathrm{e}^4 \iff x + 1 = 4 \iff x = 3.\]
+L'unique solution est $\boxed{x = 3}$.
+\end{enumerate}
+\end{corrige}

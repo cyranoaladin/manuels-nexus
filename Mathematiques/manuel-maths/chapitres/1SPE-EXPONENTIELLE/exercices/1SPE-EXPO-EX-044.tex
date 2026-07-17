@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-EXPO-EX-044","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C5"],"methodes":["M4"],"parcours":2,"competences":["chercher","calculer"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-044.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-044.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% X = symbols('X')
+% # e^(2x) - e^x - 2 = 0, poser X = e^x
+% eq_X = X**2 - X - 2
+% sols_X = solve(eq_X, X)
+% assert set(sols_X) == {-1, 2}
+% # X = e^x > 0 donc X = -1 impossible, seul X = 2
+% sols_x = solve(exp(2*x) - exp(x) - 2, x)
+% assert sols_x == [log(2)]
+% # e^x >= 2 <=> x >= ln(2)
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-044}{2}{10}
+\begin{enumerate}
+\item Résoudre dans $\mathbb{R}$ l'équation $\mathrm{e}^{2x} - \mathrm{e}^x - 2 = 0$.
+
+\textit{On posera $X = \mathrm{e}^x$ et on tiendra compte du signe de $X$.}
+\item Résoudre dans $\mathbb{R}$ l'inéquation $\mathrm{e}^x \geqslant 2$.
+\end{enumerate}
+\end{exercice}

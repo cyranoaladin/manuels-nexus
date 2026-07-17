@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-EXPO-EX-015","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C2"],"capacites_codes":["C2"],"methodes":["M1"],"parcours":2,"competences":["raisonner","calculer"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-015.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-015.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x, b = symbols('x b')
+% g = exp(x + b) / exp(x)
+% gp = diff(g, x)
+% assert simplify(gp) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-015}{2}{10}
+On souhaite démontrer que pour tous réels $a$ et $b$, $\exp(a+b) = \exp(a) \times \exp(b)$.
+
+On fixe un réel $b$ et on pose, pour tout $x \in \mathbb{R}$ :
+\[ g(x) = \frac{\exp(x+b)}{\exp(x)}. \]
+\begin{enumerate}
+  \item Justifier que $g$ est bien définie et dérivable sur $\mathbb{R}$.
+  \item Calculer $g'(x)$ et montrer que $g'(x) = 0$ pour tout $x \in \mathbb{R}$.
+  \item En déduire que $g$ est constante sur $\mathbb{R}$.
+  \item Calculer $g(0)$ et conclure.
+\end{enumerate}
+\end{exercice}

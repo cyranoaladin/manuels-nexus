@@ -1,0 +1,138 @@
+% META: {"id": "1SPE-EXPONENTIELLE-RE-C1", "chapitre": "1SPE-EXPONENTIELLE", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1
+% Definition de l'exponentielle, exp(0)=1, exp toujours positive
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrige pas a pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-RE-C1-EX1}{1}{6}
+On considere la fonction exponentielle, notee $\exp$ ou $x \mapsto \mathrm{e}^x$.
+\begin{enumerate}
+  \item Enoncer la propriete qui caracterise la fonction exponentielle (equation differentielle et condition initiale).
+  \item En deduire la valeur de $\exp'(0)$.
+  \item Justifier que $\mathrm{e}^0 = 1$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import exp, diff, symbols
+% x = symbols('x')
+% f = exp(x)
+% assert diff(f, x) == exp(x)
+% assert f.subs(x, 0) == 1
+% assert diff(f, x).subs(x, 0) == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-RE-C1-EX1}
+
+\commentaireMarge{La definition de l'exponentielle repose sur deux conditions.}
+
+\textbf{Question 1.} La fonction exponentielle est l'unique fonction $f$ derivable sur $\mathbb{R}$ telle que :
+\[
+f'(x) = f(x) \quad \text{pour tout } x \in \mathbb{R} \qquad \text{et} \qquad f(0) = 1.
+\]
+
+\textbf{Question 2.} Comme $f'(x) = f(x)$ pour tout $x$, en particulier pour $x = 0$ :
+\[
+\exp'(0) = \exp(0) = 1.
+\]
+
+\textbf{Question 3.} C'est la condition initiale de la definition : $f(0) = 1$, donc $\mathrm{e}^0 = 1$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-RE-C1-EX2}{1}{6}
+Justifier chacune des affirmations suivantes.
+\begin{enumerate}
+  \item $\mathrm{e}^x > 0$ pour tout reel $x$.
+  \item $\mathrm{e}^x \neq 0$ pour tout reel $x$.
+  \item Pour $x < 0$, $\mathrm{e}^x$ est compris entre $0$ et $1$.
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{Pour la question 3, utiliser que $\mathrm{e}^0 = 1$ et que l'exponentielle est strictement croissante : si $x < 0$ alors $\mathrm{e}^x < \mathrm{e}^0 = 1$.}
+
+% BEGIN-VERIFY
+% from sympy import exp, oo, limit, symbols
+% x = symbols('x')
+% # exp(x) > 0 pour tout x : on verifie quelques valeurs
+% assert exp(-10) > 0
+% assert exp(0) == 1
+% assert exp(10) > 0
+% # Pour x < 0 : 0 < exp(x) < 1
+% assert 0 < exp(-1) < 1
+% assert 0 < exp(-5) < 1
+% # Limite en -infini
+% assert limit(exp(x), x, -oo) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-RE-C1-EX2}
+
+\textbf{Question 1.} La fonction exponentielle est strictement positive sur $\mathbb{R}$ : pour tout $x \in \mathbb{R}$, $\mathrm{e}^x > 0$. C'est une propriete fondamentale qui decoule du fait que $\exp$ ne s'annule jamais et que $\exp(0) = 1 > 0$.
+
+\textbf{Question 2.} C'est une consequence directe de la stricte positivite : $\mathrm{e}^x > 0$ implique $\mathrm{e}^x \neq 0$.
+
+\commentaireMarge{$x < 0 \Rightarrow \mathrm{e}^x < \mathrm{e}^0 = 1$ car $\exp$ est croissante.}
+
+\textbf{Question 3.} Pour $x < 0$ :
+\begin{itemize}
+  \item $\mathrm{e}^x > 0$ (stricte positivite),
+  \item $x < 0 = $ exposant de $\mathrm{e}^0$, et comme $\exp$ est strictement croissante, $\mathrm{e}^x < \mathrm{e}^0 = 1$.
+\end{itemize}
+Donc $0 < \mathrm{e}^x < 1$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-RE-C1-EX3}{1}{8}
+Parmi les affirmations suivantes, indiquer si elles sont vraies ou fausses et justifier.
+\begin{enumerate}
+  \item $\mathrm{e}^{-3}$ est un nombre negatif.
+  \item Il existe un reel $x$ tel que $\mathrm{e}^x = 0$.
+  \item La tangente a la courbe de $\exp$ au point d'abscisse $0$ a pour equation $y = x + 1$.
+  \item $\mathrm{e}^1 \approx 2{,}718$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import exp, E, Abs, Rational, symbols
+% x = symbols('x')
+% # (1) e^(-3) > 0
+% assert exp(-3) > 0
+% # (2) exp(x) = 0 n'a pas de solution
+% from sympy import solve
+% assert solve(exp(x), x) == []
+% # (3) Tangente en x=0 : y = exp'(0)(x-0) + exp(0) = 1*x + 1 = x + 1
+% assert diff(exp(x), x).subs(x, 0) == 1
+% assert exp(0) == 1
+% # (4) e approx 2.718
+% assert Abs(float(E) - 2.718) < 0.001
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-RE-C1-EX3}
+
+\textbf{Question 1.} \textbf{Faux.} $\mathrm{e}^{-3} > 0$ (l'exponentielle est toujours strictement positive). On a $\mathrm{e}^{-3} = \dfrac{1}{\mathrm{e}^3} \approx 0{,}05$.
+
+\textbf{Question 2.} \textbf{Faux.} L'exponentielle ne s'annule jamais : $\mathrm{e}^x > 0$ pour tout $x \in \mathbb{R}$.
+
+\commentaireMarge{Tangente : $y = f'(a)(x - a) + f(a)$ avec $a = 0$, $f'(0) = 1$, $f(0) = 1$.}
+
+\textbf{Question 3.} \textbf{Vrai.} La tangente en $x = 0$ a pour equation :
+\[
+y = \exp'(0)(x - 0) + \exp(0) = 1 \times x + 1 = x + 1.
+\]
+
+\textbf{Question 4.} \textbf{Vrai.} $\mathrm{e} = \mathrm{e}^1 \approx 2{,}71828...$, que l'on arrondit a $2{,}718$.
+
+\end{corrige}

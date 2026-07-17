@@ -1,0 +1,141 @@
+% META: {"id":"1SPE-EXPO-EV-A","chapitre":"1SPE-EXPONENTIELLE","type_objet":"evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":55,"points":20,"status":"generated","sympy_params":{"f_ex1":"exp(2*x-1)","g_ex2":"(x-2)*exp(x)","h_ex3":"exp(2*x)-5*exp(x)+4","P_ex4":"50000*exp(0.02*t)"}}
+
+\section*{Évaluation A — Fonction exponentielle}
+
+\textit{Durée : 55 minutes — 20 points — Calculatrice autorisée.}
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 1} \hfill \textit{5 points — C1, C2}
+%---------------------------------------------------------------
+
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = \mathrm{e}^{2x-1}$.
+
+\begin{enumerate}
+  \item Calculer $f'(x)$. \hfill \textit{(1 pt)}
+  \item Simplifier $\mathrm{e}^{2x-1} \times \mathrm{e}^{1-x}$. \hfill \textit{(1,5 pt)}
+  \item Calculer $f(0)$ et $f\!\left(\dfrac{1}{2}\right)$. Interpréter $f\!\left(\dfrac{1}{2}\right)$. \hfill \textit{(1,5 pt)}
+  \item Montrer que $f$ est solution de l'équation différentielle $y' = 2y$. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify, Rational
+% x = symbols('x')
+% f = exp(2*x - 1)
+% fp = diff(f, x)
+% assert simplify(fp - 2*exp(2*x - 1)) == 0
+% prod = exp(2*x - 1) * exp(1 - x)
+% assert simplify(prod - exp(x)) == 0
+% assert simplify(f.subs(x, 0) - exp(-1)) == 0
+% assert simplify(f.subs(x, Rational(1, 2)) - 1) == 0
+% assert simplify(fp - 2*f) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 2} \hfill \textit{6 points — C3, C4}
+%---------------------------------------------------------------
+
+Soit $g$ la fonction définie sur $\mathbb{R}$ par $g(x) = (x-2)\,\mathrm{e}^x$.
+
+\begin{enumerate}
+  \item Calculer $g'(x)$. \hfill \textit{(2 pt)}
+  \item Dresser le tableau de variations de $g$ sur $\mathbb{R}$. \hfill \textit{(2 pt)}
+  \item En déduire le minimum de $g$ et la valeur de $x$ pour laquelle il est atteint. \hfill \textit{(1 pt)}
+  \item Déterminer les limites de $g$ en $+\infty$ et en $-\infty$. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify, factor, oo, limit
+% x = symbols('x')
+% g = (x - 2)*exp(x)
+% gp = diff(g, x)
+% # g'(x) = e^x + (x-2)*e^x = (x-1)*e^x
+% assert simplify(gp - (x - 1)*exp(x)) == 0
+% # g'(x) = 0 => x = 1
+% from sympy import solve
+% assert solve(gp, x) == [1]
+% # g(1) = (1-2)*e^1 = -e
+% from sympy import E
+% assert simplify(g.subs(x, 1) + E) == 0
+% # g'(0) = (0-1)*e^0 = -1 < 0 => g decreasing on ]-inf, 1[
+% assert gp.subs(x, 0) == -1
+% # g'(2) = (2-1)*e^2 = e^2 > 0 => g increasing on ]1, +inf[
+% assert simplify(gp.subs(x, 2) - exp(2)) == 0
+% # limits
+% assert limit(g, x, oo) == oo
+% assert limit(g, x, -oo) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 3} \hfill \textit{5 points — C2, C4, C5}
+%---------------------------------------------------------------
+
+Soit $h$ la fonction définie sur $\mathbb{R}$ par $h(x) = \mathrm{e}^{2x} - 5\,\mathrm{e}^x + 4$.
+
+\begin{enumerate}
+  \item Poser $X = \mathrm{e}^x$. Exprimer $h(x)$ en fonction de $X$. \hfill \textit{(1 pt)}
+  \item Résoudre $X^2 - 5X + 4 = 0$. \hfill \textit{(1,5 pt)}
+  \item En déduire les solutions de $h(x) = 0$. \hfill \textit{(1,5 pt)}
+  \item Résoudre $h(x) \leqslant 0$. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, simplify, ln, log
+% x, X = symbols('x X')
+% h = exp(2*x) - 5*exp(x) + 4
+% # With X = e^x: h = X^2 - 5X + 4
+% poly = X**2 - 5*X + 4
+% roots = solve(poly, X)
+% assert set(roots) == {1, 4}
+% # e^x = 1 => x = 0; e^x = 4 => x = ln(4)
+% sols = solve(h, x)
+% assert 0 in sols
+% assert log(4) in sols
+% # h(x) <= 0 <=> 1 <= e^x <= 4 <=> 0 <= x <= ln(4)
+% from sympy import Rational
+% assert simplify(h.subs(x, 0)) == 0
+% assert simplify(h.subs(x, log(4))) == 0
+% # check h(ln(2)) = e^(2*ln2) - 5*e^(ln2) + 4 = 4 - 10 + 4 = -2 < 0
+% assert simplify(h.subs(x, log(2))) == -2
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 4} \hfill \textit{4 points — C5}
+%---------------------------------------------------------------
+
+La population d'une ville est modélisée par $P(t) = 50\,000\,\mathrm{e}^{0{,}02\,t}$, où $t$ désigne le nombre d'années écoulées depuis 2020.
+
+\begin{enumerate}
+  \item Calculer $P(0)$. Interpréter ce résultat. \hfill \textit{(1 pt)}
+  \item Calculer $P(10)$ (arrondir à l'unité). \hfill \textit{(1 pt)}
+  \item Déterminer $t$ tel que $P(t) = 100\,000$. \hfill \textit{(1 pt)}
+  \item Déterminer à partir de quelle année la population dépasse $75\,000$ habitants. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, log, simplify, N, ceiling
+% t = symbols('t')
+% P = 50000*exp(Rational(2, 100)*t)
+% assert P.subs(t, 0) == 50000
+% # P(10) = 50000*e^0.2
+% P10 = P.subs(t, 10)
+% P10_num = float(N(P10))
+% assert abs(P10_num - 61070) < 5
+% # P(t) = 100000 => e^(0.02t) = 2 => t = ln(2)/0.02 = 50*ln(2)
+% sol = solve(P - 100000, t)
+% assert len(sol) == 1
+% from sympy import Rational as R
+% assert simplify(sol[0] - 50*log(2)) == 0
+% # P(t) >= 75000 => e^(0.02t) >= 3/2 => t >= 50*ln(3/2)
+% sol75 = solve(P - 75000, t)
+% assert simplify(sol75[0] - 50*log(R(3, 2))) == 0
+% # 50*ln(3/2) ~ 20.27 => year 2041
+% assert 20 < float(N(sol75[0])) < 21
+% END-VERIFY

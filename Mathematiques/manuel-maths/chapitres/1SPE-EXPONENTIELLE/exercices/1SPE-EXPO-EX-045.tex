@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-EXPO-EX-045","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C5"],"methodes":["M4"],"parcours":3,"competences":["chercher","raisonner","calculer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-045.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-045.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% X = symbols('X')
+% # e^(2x) + e^x - 6 <= 0, poser X = e^x
+% eq_X = X**2 + X - 6
+% sols_X = solve(eq_X, X)
+% assert set(sols_X) == {-3, 2}
+% # X = e^x > 0 donc -3 <= X <= 2 donne 0 < X <= 2
+% # e^x <= 2 <=> x <= ln(2), et e^x > 0 toujours
+% # Ensemble de solutions : ]-inf, ln(2)]
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-045}{3}{15}
+Résoudre dans $\mathbb{R}$ l'inéquation :
+\[\mathrm{e}^{2x} + \mathrm{e}^x - 6 \leqslant 0.\]
+\textit{On posera $X = \mathrm{e}^x$ et on discutera les contraintes sur $X$.}
+\end{exercice}

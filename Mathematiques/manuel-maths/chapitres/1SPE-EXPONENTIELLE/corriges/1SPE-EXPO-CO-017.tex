@@ -1,0 +1,36 @@
+% META: {"id":"1SPE-EXPO-CO-017","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-017","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify, log, Rational
+% x = symbols('x')
+% A = (exp(2*x) - 1)*(exp(2*x) + 1)
+% assert simplify(A - (exp(4*x) - 1)) == 0
+% B = (exp(x) + exp(-x))**2
+% assert simplify(B - (exp(2*x) + 2 + exp(-2*x))) == 0
+% val = exp(3*log(2)) + exp(-3*log(2))
+% assert simplify(val - Rational(65, 8)) == 0
+% C = exp(3*x)*exp(-x) / (exp(x))**2
+% assert simplify(C - 1) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-017}
+
+\textbf{Question 1.} On reconnaît une identité remarquable $(a-b)(a+b) = a^2 - b^2$ avec $a = \mathrm{e}^{2x}$ et $b = 1$ :
+\[
+A = \left(\mathrm{e}^{2x}\right)^2 - 1^2 = \mathrm{e}^{4x} - 1.
+\]
+
+\textbf{Question 2.} On développe $(a+b)^2 = a^2 + 2ab + b^2$ :
+\[
+B = \left(\mathrm{e}^x\right)^2 + 2 \times \mathrm{e}^x \times \mathrm{e}^{-x} + \left(\mathrm{e}^{-x}\right)^2 = \mathrm{e}^{2x} + 2 \times 1 + \mathrm{e}^{-2x} = \mathrm{e}^{2x} + 2 + \mathrm{e}^{-2x}.
+\]
+
+\textbf{Question 3.} Si $x = \ln 2$, alors $\mathrm{e}^x = 2$, donc :
+\[
+\mathrm{e}^{3x} + \mathrm{e}^{-3x} = \left(\mathrm{e}^x\right)^3 + \left(\mathrm{e}^{-x}\right)^3 = 2^3 + \left(\frac{1}{2}\right)^3 = 8 + \frac{1}{8} = \frac{65}{8}.
+\]
+
+\textbf{Question 4.} Au numérateur : $\mathrm{e}^{3x} \times \mathrm{e}^{-x} = \mathrm{e}^{3x-x} = \mathrm{e}^{2x}$.
+
+Au dénominateur : $\left(\mathrm{e}^x\right)^2 = \mathrm{e}^{2x}$.
+
+Donc $C = \dfrac{\mathrm{e}^{2x}}{\mathrm{e}^{2x}} = 1$.
+\end{corrige}

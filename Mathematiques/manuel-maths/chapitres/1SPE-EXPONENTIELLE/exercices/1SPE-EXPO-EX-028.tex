@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-EXPO-EX-028","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C3"],"capacites_codes":["C3"],"methodes":["M2"],"parcours":2,"competences":["raisonner"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-028.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-028.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% g = exp(x) - x - 2
+% assert g.subs(x, 0) == -1
+% assert g.subs(x, 2) == exp(2) - 4
+% assert g.subs(x, 0) < 0
+% assert g.subs(x, 2) > 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-028}{2}{10}
+On pose $g(x) = \mathrm{e}^x - x - 2$ pour tout réel $x$.
+\begin{enumerate}
+  \item Calculer $g(0)$ et $g(2)$.
+  \item Montrer que $g$ est continue sur $[0\,;\,2]$.
+  \item En déduire que l'équation $\mathrm{e}^x = x + 2$ admet au moins une solution dans l'intervalle $[0\,;\,2]$.
+\end{enumerate}
+\end{exercice}

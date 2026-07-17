@@ -1,0 +1,49 @@
+% META: {"id":"1SPE-EXPO-CO-008","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-008","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% assert f.diff(x) == f, "exp' = exp > 0 donc croissante"
+% assert f.subs(x, 0) == 1
+% assert exp(1) > 1
+% assert exp(Rational(1,2)) > 1
+% assert exp(-1) > 0
+% assert exp(-1) < 1
+% assert exp(-2) > 0
+% assert exp(-2) < 1
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-008}
+\begin{enumerate}
+\item Pour tout réel $x$, $\exp'(x) = \exp(x) > 0$ (la fonction exponentielle est strictement positive).
+
+Une fonction dont la dérivée est strictement positive sur $\mathbb{R}$ est \textbf{strictement croissante} sur $\mathbb{R}$.
+
+\item
+\begin{enumerate}
+\item Soit $x > 0$. Comme $\exp$ est strictement croissante et $x > 0$, on a :
+\[\exp(x) > \exp(0) = 1.\]
+Donc $\mathrm{e}^x > 1$ pour tout $x > 0$.
+
+\item Soit $x < 0$. Comme $\exp$ est strictement croissante et $x < 0$, on a :
+\[\exp(x) < \exp(0) = 1.\]
+Donc $\mathrm{e}^x < 1$ pour tout $x < 0$.
+\end{enumerate}
+
+\item Pour tout $x < 0$, on sait que $\mathrm{e}^x > 0$ (l'exponentielle est strictement positive sur $\mathbb{R}$) et $\mathrm{e}^x < 1$ (d'après la question 2b). Donc :
+\[0 < \mathrm{e}^x < 1 \quad \text{pour tout } x < 0.\]
+
+\item Tableau de signes de $\mathrm{e}^x - 1$ :
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$x$ & $-\infty$ & & $0$ & & $+\infty$ \\
+\hline
+$\mathrm{e}^x - 1$ & & $-$ & $0$ & $+$ & \\
+\hline
+\end{tabular}
+\end{center}
+
+$\mathrm{e}^x - 1 = 0 \Leftrightarrow \mathrm{e}^x = 1 \Leftrightarrow x = 0$.
+\end{enumerate}
+\end{corrige}

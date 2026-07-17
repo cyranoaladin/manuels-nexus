@@ -1,0 +1,40 @@
+% META: {"id":"1SPE-EXPO-CO-048","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-048","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% f = exp(x) / (exp(x) + 1)
+% fp = simplify(diff(f, x))
+% assert simplify(fp - exp(x)/(exp(x) + 1)**2) == 0
+% assert limit(f, x, oo) == 1
+% assert limit(f, x, -oo) == 0
+% assert f.subs(x, 0) == Rational(1, 2)
+% # Verify the alternative form
+% alt = 1 / (1 + exp(-x))
+% assert simplify(f - alt) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-048}
+\begin{enumerate}
+\item On multiplie numérateur et dénominateur par $\mathrm{e}^{-x}$ :
+\[f(x) = \dfrac{\mathrm{e}^x}{\mathrm{e}^x + 1} = \dfrac{\mathrm{e}^x \cdot \mathrm{e}^{-x}}{(\mathrm{e}^x + 1)\cdot \mathrm{e}^{-x}} = \dfrac{1}{1 + \mathrm{e}^{-x}}.\]
+
+\item On dérive $f(x) = \dfrac{\mathrm{e}^x}{\mathrm{e}^x + 1}$ avec la règle du quotient :
+\[f'(x) = \dfrac{\mathrm{e}^x(\mathrm{e}^x + 1) - \mathrm{e}^x \cdot \mathrm{e}^x}{(\mathrm{e}^x + 1)^2} = \dfrac{\mathrm{e}^{2x} + \mathrm{e}^x - \mathrm{e}^{2x}}{(\mathrm{e}^x + 1)^2} = \dfrac{\mathrm{e}^x}{(\mathrm{e}^x + 1)^2}.\]
+
+\item Pour tout réel $x$, $\mathrm{e}^x > 0$ et $(\mathrm{e}^x + 1)^2 > 0$, donc $f'(x) > 0$ pour tout $x$.
+
+Ainsi $f$ est \textbf{strictement croissante} sur $\mathbb{R}$.
+
+\item \textbf{Limite en $+\infty$ :} $\lim_{x \to +\infty} \mathrm{e}^{-x} = 0$, donc $\lim_{x \to +\infty} f(x) = \dfrac{1}{1 + 0} = 1$.
+
+La droite $y = 1$ est asymptote horizontale en $+\infty$.
+
+\textbf{Limite en $-\infty$ :} $\lim_{x \to -\infty} \mathrm{e}^{x} = 0$, donc $\lim_{x \to -\infty} f(x) = \dfrac{0}{0 + 1} = 0$.
+
+La droite $y = 0$ est asymptote horizontale en $-\infty$.
+
+\item On calcule :
+\[f(0) = \dfrac{\mathrm{e}^0}{\mathrm{e}^0 + 1} = \dfrac{1}{2}.\]
+
+$f$ est strictement croissante sur $\mathbb{R}$, avec $\lim_{-\infty} f = 0$ et $\lim_{+\infty} f = 1$.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,152 @@
+% META: {"id": "1SPE-EXPONENTIELLE-RE-C5", "chapitre": "1SPE-EXPONENTIELLE", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5
+% Equations et inequations avec l'exponentielle
+%---------------------------------------------------------------
+
+%---------------------------------------------------------------
+% EXERCICE 1 — Corrige pas a pas
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-RE-C5-EX1}{1}{6}
+Resoudre dans $\mathbb{R}$ les equations suivantes.
+\begin{enumerate}
+  \item $\mathrm{e}^{x} = \mathrm{e}^{3}$
+  \item $\mathrm{e}^{2x-1} = \mathrm{e}^{x+4}$
+  \item $\mathrm{e}^{x^2} = \mathrm{e}^{9}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, exp, Eq
+% x = symbols('x')
+% # (1) e^x = e^3 => x = 3
+% assert solve(Eq(exp(x), exp(3)), x) == [3]
+% # (2) e^(2x-1) = e^(x+4) => 2x-1 = x+4 => x = 5
+% assert solve(Eq(2*x - 1, x + 4), x) == [5]
+% # (3) e^(x^2) = e^9 => x^2 = 9 => x = +-3
+% assert sorted(solve(Eq(x**2, 9), x)) == [-3, 3]
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-RE-C5-EX1}
+
+\commentaireMarge{L'exponentielle est injective : $\mathrm{e}^a = \mathrm{e}^b \Leftrightarrow a = b$.}
+
+\textbf{Question 1.} $\mathrm{e}^x = \mathrm{e}^3 \Leftrightarrow x = 3$.
+
+Solution : $\{3\}$.
+
+\textbf{Question 2.} $\mathrm{e}^{2x-1} = \mathrm{e}^{x+4} \Leftrightarrow 2x - 1 = x + 4 \Leftrightarrow x = 5$.
+
+Solution : $\{5\}$.
+
+\textbf{Question 3.} $\mathrm{e}^{x^2} = \mathrm{e}^{9} \Leftrightarrow x^2 = 9 \Leftrightarrow x = -3$ ou $x = 3$.
+
+Solution : $\{-3\,;\,3\}$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 2 — Avec coup de pouce
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-RE-C5-EX2}{1}{8}
+Resoudre dans $\mathbb{R}$ les inequations suivantes.
+\begin{enumerate}
+  \item $\mathrm{e}^{x} \geqslant \mathrm{e}^{2}$
+  \item $\mathrm{e}^{3x+1} < \mathrm{e}^{-2}$
+  \item $\mathrm{e}^{x} \leqslant 1$
+\end{enumerate}
+\end{exercice}
+
+\coupDePouce{1}{L'exponentielle est strictement croissante, donc elle \textbf{conserve le sens} des inegalites : $\mathrm{e}^a \geqslant \mathrm{e}^b \Leftrightarrow a \geqslant b$. Pour la question 3, ecrire $1 = \mathrm{e}^0$.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, S, oo
+% x = symbols('x')
+% # (1) e^x >= e^2 <=> x >= 2
+% # (2) e^(3x+1) < e^(-2) <=> 3x+1 < -2 <=> x < -1
+% assert solve(3*x + 1 + 2, x) == [-1]
+% # (3) e^x <= 1 = e^0 <=> x <= 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-RE-C5-EX2}
+
+\commentaireMarge{$\exp$ croissante : elle conserve le sens des inegalites.}
+
+\textbf{Question 1.} $\mathrm{e}^x \geqslant \mathrm{e}^2 \Leftrightarrow x \geqslant 2$ (croissance de $\exp$).
+
+Solution : $[2\,;\,+\infty[$.
+
+\textbf{Question 2.} $\mathrm{e}^{3x+1} < \mathrm{e}^{-2} \Leftrightarrow 3x + 1 < -2 \Leftrightarrow 3x < -3 \Leftrightarrow x < -1$.
+
+Solution : $]-\infty\,;\,-1[$.
+
+\textbf{Question 3.} $\mathrm{e}^x \leqslant 1 = \mathrm{e}^0 \Leftrightarrow x \leqslant 0$.
+
+Solution : $]-\infty\,;\,0]$.
+
+\end{corrige}
+
+%---------------------------------------------------------------
+% EXERCICE 3 — En autonomie
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-EXPO-RE-C5-EX3}{2}{10}
+Resoudre dans $\mathbb{R}$.
+\begin{enumerate}
+  \item $\mathrm{e}^{x^2 - 5x + 6} = 1$
+  \item $\mathrm{e}^{2x} - 5\,\mathrm{e}^{x} + 6 = 0$ \quad (poser $X = \mathrm{e}^x$)
+  \item $\mathrm{e}^{2x+1} > \mathrm{e}^{x^2}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, exp, Eq, log, sqrt, S
+% x = symbols('x')
+% # (1) x^2 - 5x + 6 = 0 => (x-2)(x-3) = 0
+% assert sorted(solve(x**2 - 5*x + 6, x)) == [2, 3]
+% # (2) Poser X = e^x. X^2 - 5X + 6 = 0 => (X-2)(X-3) = 0
+% # X = 2 => x = ln(2), X = 3 => x = ln(3)
+% X = symbols('X', positive=True)
+% assert sorted(solve(X**2 - 5*X + 6, X)) == [2, 3]
+% sols = solve(exp(2*x) - 5*exp(x) + 6, x)
+% assert sorted(sols) == sorted([log(2), log(3)])
+% # (3) 2x+1 > x^2 <=> -x^2 + 2x + 1 > 0 <=> x^2 - 2x - 1 < 0
+% # Delta = 4 + 4 = 8, racines 1 +/- sqrt(2)
+% roots = solve(x**2 - 2*x - 1, x)
+% assert sorted(roots) == sorted([1 - sqrt(2), 1 + sqrt(2)])
+% END-VERIFY
+
+\begin{corrige}{1SPE-EXPO-RE-C5-EX3}
+
+\textbf{Question 1.} $\mathrm{e}^{x^2-5x+6} = 1 = \mathrm{e}^0 \Leftrightarrow x^2 - 5x + 6 = 0$.
+
+$\Delta = 25 - 24 = 1$. Racines : $x = 2$ et $x = 3$.
+
+Solution : $\{2\,;\,3\}$.
+
+\commentaireMarge{On pose $X = \mathrm{e}^x > 0$. Alors $\mathrm{e}^{2x} = X^2$.}
+
+\textbf{Question 2.} On pose $X = \mathrm{e}^x$ (avec $X > 0$). L'equation devient :
+\[
+X^2 - 5X + 6 = 0 \Leftrightarrow (X-2)(X-3) = 0.
+\]
+Donc $X = 2$ ou $X = 3$, c'est-a-dire $\mathrm{e}^x = 2$ ou $\mathrm{e}^x = 3$.
+
+Les deux valeurs sont strictement positives, donc les solutions existent.
+
+Solutions : $x = \ln 2$ ou $x = \ln 3$.
+
+\textbf{Question 3.} $\mathrm{e}^{2x+1} > \mathrm{e}^{x^2} \Leftrightarrow 2x + 1 > x^2$ (croissance de $\exp$).
+
+$-x^2 + 2x + 1 > 0 \Leftrightarrow x^2 - 2x - 1 < 0$.
+
+$\Delta = 4 + 4 = 8$. Racines : $x = 1 - \sqrt{2}$ et $x = 1 + \sqrt{2}$.
+
+Comme $a = 1 > 0$ pour $x^2 - 2x - 1$, le trinome est negatif entre les racines.
+
+Solution : $x \in \,]1 - \sqrt{2}\,;\,1 + \sqrt{2}[$.
+
+\end{corrige}

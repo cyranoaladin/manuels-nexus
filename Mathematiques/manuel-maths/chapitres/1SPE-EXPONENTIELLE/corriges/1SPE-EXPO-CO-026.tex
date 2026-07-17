@@ -1,0 +1,39 @@
+% META: {"id":"1SPE-EXPO-CO-026","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-026","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(2*x - 1)
+% fp = diff(f, x)
+% assert simplify(fp - 2*exp(2*x - 1)) == 0
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -oo) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-026}
+\textbf{1.} La fonction $f(x) = \mathrm{e}^{2x-1}$ est de la forme $\mathrm{e}^{u(x)}$ avec $u(x) = 2x - 1$, donc $u'(x) = 2$.
+
+On a $f'(x) = u'(x)\,\mathrm{e}^{u(x)} = 2\,\mathrm{e}^{2x-1}$.
+
+Comme $\mathrm{e}^{2x-1} > 0$ pour tout réel $x$, on a $f'(x) = 2\,\mathrm{e}^{2x-1} > 0$ pour tout réel $x$.
+
+\textbf{2.} Puisque $f'(x) > 0$ pour tout $x \in \mathbb{R}$, la fonction $f$ est \textbf{strictement croissante} sur $\mathbb{R}$.
+
+\textbf{3.} Quand $x \to +\infty$, on a $2x - 1 \to +\infty$, donc $\displaystyle\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} \mathrm{e}^{2x-1} = +\infty$.
+
+Quand $x \to -\infty$, on a $2x - 1 \to -\infty$, donc $\displaystyle\lim_{x \to -\infty} f(x) = \lim_{x \to -\infty} \mathrm{e}^{2x-1} = 0$.
+
+\textbf{4.} Tableau de variations de $f$ :
+
+\begin{center}
+\begin{tabular}{|c|ccc|}
+\hline
+$x$ & $-\infty$ & & $+\infty$ \\
+\hline
+$f'(x)$ & & $+$ & \\
+\hline
+$f(x)$ & $0$ & $\nearrow$ & $+\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+
+L'axe des abscisses ($y = 0$) est asymptote horizontale en $-\infty$.
+\end{corrige}

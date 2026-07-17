@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-EXPO-CO-046","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-046","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% t = symbols('t', real=True)
+% P = 1000 * exp(Rational(5, 100) * t)
+% assert P.subs(t, 0) == 1000
+% sol = solve(P - 5000, t)
+% assert len(sol) == 1 and simplify(sol[0] - 20*log(5)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-046}
+\begin{enumerate}
+\item On calcule :
+\[P(0) = 1000\,\mathrm{e}^{0{,}05 \times 0} = 1000\,\mathrm{e}^0 = 1000.\]
+\textbf{Interprétation :} au temps initial ($t = 0$), la population compte $1000$ bactéries.
+
+\item On résout $P(t) = 5000$ :
+\[1000\,\mathrm{e}^{0{,}05t} = 5000 \iff \mathrm{e}^{0{,}05t} = 5 \iff 0{,}05t = \ln 5 \iff t = \dfrac{\ln 5}{0{,}05} = 20\ln 5.\]
+
+Valeur exacte : $\boxed{t = 20\ln 5}$. Valeur approchée : $t \approx 20 \times 1{,}609 \approx 32$ heures.
+
+\item On résout $P(t) \geqslant 10\,000$ :
+\[1000\,\mathrm{e}^{0{,}05t} \geqslant 10\,000 \iff \mathrm{e}^{0{,}05t} \geqslant 10 \iff 0{,}05t \geqslant \ln 10 \iff t \geqslant 20\ln 10.\]
+
+L'ensemble des solutions est $S = [20\ln 10\,;+\infty[$.
+
+\textbf{Interprétation :} la population atteint ou dépasse $10\,000$ bactéries à partir de $t = 20\ln 10 \approx 46$ heures.
+\end{enumerate}
+\end{corrige}

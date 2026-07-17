@@ -1,0 +1,24 @@
+% META: {"id":"1SPE-EXPO-CO-031","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-031","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert diff(exp(3*x), x) == 3*exp(3*x)
+% assert diff(exp(-x), x) == -exp(-x)
+% assert diff(exp(x + 1), x) == exp(x + 1)
+% assert diff(exp(2*x - 3), x) == 2*exp(2*x - 3)
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-031}
+On applique la formule $(\mathrm{e}^{u})' = u' \mathrm{e}^{u}$.
+
+\textbf{Question 1.} On pose $u(x) = 3x$, donc $u'(x) = 3$.
+\[f'(x) = 3\,\mathrm{e}^{3x}.\]
+
+\textbf{Question 2.} On pose $u(x) = -x$, donc $u'(x) = -1$.
+\[g'(x) = -\mathrm{e}^{-x}.\]
+
+\textbf{Question 3.} On pose $u(x) = x + 1$, donc $u'(x) = 1$.
+\[h'(x) = \mathrm{e}^{x+1}.\]
+
+\textbf{Question 4.} On pose $u(x) = 2x - 3$, donc $u'(x) = 2$.
+\[k'(x) = 2\,\mathrm{e}^{2x-3}.\]
+\end{corrige}

@@ -1,0 +1,30 @@
+% META: {"id":"1SPE-EXPO-CO-016","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-016","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify
+% a, b = symbols('a b')
+% assert simplify(exp(-a) - 1/exp(a)) == 0
+% assert simplify(exp(a-b) - exp(a)/exp(b)) == 0
+% assert simplify(exp(a)*exp(-a) - 1) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-016}
+
+\textbf{Question 1.} On applique la propriété avec $b = -a$ :
+\[
+\exp(a) \times \exp(-a) = \exp(a + (-a)) = \exp(0) = 1.
+\]
+Comme $\exp(a) > 0$, on peut diviser par $\exp(a)$ :
+\[
+\exp(-a) = \frac{1}{\exp(a)}.
+\]
+
+\textbf{Question 2.} On écrit $a - b = a + (-b)$ puis on applique la propriété :
+\[
+\exp(a - b) = \exp(a + (-b)) = \exp(a) \times \exp(-b) = \exp(a) \times \frac{1}{\exp(b)} = \frac{\exp(a)}{\exp(b)}.
+\]
+
+\textbf{Question 3.} D'après la propriété fondamentale :
+\[
+\exp(a) \times \exp(-a) = \exp(a + (-a)) = \exp(0) = 1.
+\]
+Ce résultat découle directement de la question 1 : $\exp(a) \times \dfrac{1}{\exp(a)} = 1$.
+\end{corrige}

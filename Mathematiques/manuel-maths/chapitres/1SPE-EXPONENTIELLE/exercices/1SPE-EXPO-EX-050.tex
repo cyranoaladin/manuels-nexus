@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-EXPO-EX-050","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1","1SPE-EXPONENTIELLE-C2","1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C1","C2","C5"],"methodes":["M1","M4"],"parcours":3,"competences":["raisonner","calculer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-050.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-050.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # e^1 > 1 (base case: e > 1)
+% assert exp(1) > 1
+% # For n=1: e^1 = e > 1
+% assert E > 1
+% # For n=2: e^2 > 2
+% assert exp(2) > 2
+% # For n=5: e^5 > 5
+% assert exp(5) > 5
+% # e^x - x: derivative is e^x - 1, zero at x=0, min value 1-0=1 > 0
+% g = exp(x) - x
+% gp = diff(g, x)
+% assert solve(gp, x) == [0]
+% assert g.subs(x, 0) == 1
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-050}{3}{15}
+L'objectif de cet exercice est de montrer que $\mathrm{e}^x > x$ pour tout réel $x$.
+\begin{enumerate}
+\item On pose $g(x) = \mathrm{e}^x - x$. Calculer $g'(x)$.
+\item Résoudre $g'(x) = 0$ et étudier le signe de $g'(x)$.
+\item Dresser le tableau de variations de $g$ sur $\mathbb{R}$.
+\item En déduire que $g(x) > 0$ pour tout réel $x$, c'est-à-dire que $\mathrm{e}^x > x$.
+\item \textbf{Application.} Montrer que l'équation $\mathrm{e}^x = x$ n'a aucune solution dans $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}

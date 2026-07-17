@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-EXPO-CO-003","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-003","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert exp(0) == 1, "exp(0) = 1"
+% assert exp(-1000) > 0, "exp is always positive"
+% assert exp(1000) > 0, "exp is always positive"
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-003}
+\begin{enumerate}
+\item $\exp(0) = \mathrm{e}^0 = 1$.
+
+\item La fonction exponentielle ne peut \textbf{jamais} s'annuler. En effet, par définition, pour tout réel $x$, $\mathrm{e}^x > 0$. Aucune valeur de $x$ ne peut donc donner $\mathrm{e}^x = 0$.
+
+\item Pour tout réel $x$, $\mathrm{e}^x > 0$.
+
+La fonction exponentielle est \textbf{strictement positive} sur $\mathbb{R}$ tout entier.
+
+\item Puisque $\mathrm{e}^x > 0$ pour tout réel $x$, il n'existe aucun réel $x$ tel que $\mathrm{e}^x = 0$.
+
+L'équation $\mathrm{e}^x = 0$ n'a \textbf{aucune solution} dans $\mathbb{R}$.
+\end{enumerate}
+\end{corrige}

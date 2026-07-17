@@ -1,0 +1,396 @@
+{
+  "chapitre": "1SPE-EXPONENTIELLE",
+  "titre": "Fonction exponentielle — QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Parmi les proprietes suivantes, laquelle caracterise la fonction exponentielle ?",
+      "options": {
+        "A": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(1) = \\mathrm{e}$.",
+        "B": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 1$.",
+        "C": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = f(x)$ pour tout $x$ et $f(0) = 0$.",
+        "D": "C'est la seule fonction derivable sur $\\mathbb{R}$ telle que $f'(x) = x f(x)$ pour tout $x$ et $f(0) = 1$."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La condition initiale correcte est $f(0) = 1$, pas $f(1) = \\mathrm{e}$. L'eleve confond la condition qui definit l'exponentielle avec une consequence ($\\exp(1) = \\mathrm{e}$).",
+          "renvoi": "M1, etape 1"
+        },
+        "C": {
+          "erreur": "Avec $f(0) = 0$, la seule solution de $f' = f$ est la fonction nulle $f = 0$, pas l'exponentielle. La condition initiale $f(0) = 1$ est essentielle.",
+          "renvoi": "M1, etape 1"
+        },
+        "D": {
+          "erreur": "L'equation differentielle de l'exponentielle est $f' = f$, pas $f'(x) = xf(x)$. Confusion entre deux equations differentielles distinctes.",
+          "renvoi": "M1, etape 1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Quelle est la valeur de $\\mathrm{e}^0$ ?",
+      "options": {
+        "A": "$0$",
+        "B": "$\\mathrm{e}$",
+        "C": "$1$",
+        "D": "La valeur n'est pas definie."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve confond l'exposant $0$ avec le resultat : $\\mathrm{e}^0 = 1$, pas $0$. Confusion entre puissance nulle et resultat nul.",
+          "renvoi": "M1, propriete fondamentale"
+        },
+        "B": {
+          "erreur": "L'eleve confond $\\mathrm{e}^0$ et $\\mathrm{e}^1$. On a $\\mathrm{e}^1 = \\mathrm{e}$ mais $\\mathrm{e}^0 = 1$.",
+          "renvoi": "M1, propriete fondamentale"
+        },
+        "D": {
+          "erreur": "L'exponentielle est definie sur $\\mathbb{R}$ entier, donc $\\mathrm{e}^0$ est bien defini et vaut $1$.",
+          "renvoi": "M1, etape 1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "Pour tout reel $x$, on a :",
+      "options": {
+        "A": "$\\mathrm{e}^x > 0$",
+        "B": "$\\mathrm{e}^x \\geqslant 0$ (avec $\\mathrm{e}^x = 0$ possible)",
+        "C": "$\\mathrm{e}^x$ peut etre negatif si $x < 0$",
+        "D": "$\\mathrm{e}^x > 1$ pour tout $x \\in \\mathbb{R}$"
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'exponentielle est strictement positive : $\\mathrm{e}^x > 0$ pour tout $x$, elle n'atteint jamais $0$.",
+          "renvoi": "M1, etape 2"
+        },
+        "C": {
+          "erreur": "Pour $x < 0$, $\\mathrm{e}^x$ est positif (par exemple $\\mathrm{e}^{-1} = 1/\\mathrm{e} \\approx 0{,}37 > 0$). L'eleve confond exposant negatif et resultat negatif.",
+          "renvoi": "M1, etape 2"
+        },
+        "D": {
+          "erreur": "Pour $x < 0$, $\\mathrm{e}^x < 1$ (par exemple $\\mathrm{e}^{-1} \\approx 0{,}37 < 1$). La propriete $\\mathrm{e}^x > 1$ n'est vraie que pour $x > 0$.",
+          "renvoi": "M1, etape 2 ; M3"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Simplifier $\\mathrm{e}^3 \\times \\mathrm{e}^5$.",
+      "options": {
+        "A": "$\\mathrm{e}^{15}$",
+        "B": "$\\mathrm{e}^8$",
+        "C": "$2\\mathrm{e}^8$",
+        "D": "$\\mathrm{e}^{35}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a multiplie les exposants ($3 \\times 5 = 15$) au lieu de les additionner ($3 + 5 = 8$). Confusion entre $\\mathrm{e}^a \\times \\mathrm{e}^b = \\mathrm{e}^{a+b}$ et $(\\mathrm{e}^a)^b = \\mathrm{e}^{ab}$.",
+          "renvoi": "M2, regle 1"
+        },
+        "C": {
+          "erreur": "L'eleve a additionne les coefficients devant $\\mathrm{e}$ (comme $1 + 1 = 2$) en traitant $\\mathrm{e}^3$ et $\\mathrm{e}^5$ comme des termes au lieu de facteurs.",
+          "renvoi": "M2, regle 1 ; R4"
+        },
+        "D": {
+          "erreur": "L'eleve a concatene les chiffres $3$ et $5$ au lieu de les additionner.",
+          "renvoi": "M2, regle 1 ; R4"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C2",
+      "enonce": "Simplifier $\\dfrac{\\mathrm{e}^{7}}{\\mathrm{e}^{3}}$.",
+      "options": {
+        "A": "$\\mathrm{e}^{7/3}$",
+        "B": "$\\mathrm{e}^{-21}$",
+        "C": "$\\mathrm{e}^{4}$",
+        "D": "$\\mathrm{e}^{10}$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a divise les exposants ($7/3$) au lieu de les soustraire ($7 - 3 = 4$). Confusion entre quotient d'exponentielles et quotient d'exposants.",
+          "renvoi": "M2, regle 2 ; R4"
+        },
+        "B": {
+          "erreur": "L'eleve a multiplie les exposants avec un signe negatif ($-7 \\times 3 = -21$) au lieu de soustraire.",
+          "renvoi": "M2, regle 2 ; R4"
+        },
+        "D": {
+          "erreur": "L'eleve a additionne les exposants ($7 + 3 = 10$) au lieu de les soustraire. Confusion entre produit et quotient d'exponentielles.",
+          "renvoi": "M2, regle 2"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C2",
+      "enonce": "Simplifier $(\\mathrm{e}^{2})^3 \\times \\mathrm{e}^{-4}$.",
+      "options": {
+        "A": "$\\mathrm{e}^{-2}$",
+        "B": "$\\mathrm{e}^{1}$",
+        "C": "$\\mathrm{e}^{2}$",
+        "D": "$\\mathrm{e}^{10}$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a calcule $(\\mathrm{e}^2)^3 = \\mathrm{e}^{2+3} = \\mathrm{e}^5$ (addition au lieu de multiplication) puis $5 + (-4) = 1$... Non, plus probablement $\\mathrm{e}^{2} \\times \\mathrm{e}^{-4} = \\mathrm{e}^{-2}$ en oubliant la puissance 3.",
+          "renvoi": "M2, regle 3 ; R4"
+        },
+        "B": {
+          "erreur": "L'eleve a calcule $(\\mathrm{e}^2)^3 = \\mathrm{e}^{2+3} = \\mathrm{e}^{5}$ (addition au lieu de multiplication des exposants) puis $5 - 4 = 1$.",
+          "renvoi": "M2, regle 3 ; R4"
+        },
+        "D": {
+          "erreur": "L'eleve a calcule $(\\mathrm{e}^2)^3 = \\mathrm{e}^6$ correctement, puis a additionne $6 + 4 = 10$ au lieu de soustraire $6 - 4 = 2$.",
+          "renvoi": "M2, regles 2-3"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C3",
+      "enonce": "La fonction exponentielle est :",
+      "options": {
+        "A": "strictement decroissante sur $\\mathbb{R}$",
+        "B": "strictement croissante sur $\\mathbb{R}$",
+        "C": "croissante sur $]0\\,;+\\infty[$ et decroissante sur $]-\\infty\\,;0[$",
+        "D": "constante sur $\\mathbb{R}$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve confond avec la fonction $x \\mapsto \\mathrm{e}^{-x}$ qui est decroissante. L'exponentielle $x \\mapsto \\mathrm{e}^x$ est strictement croissante car $\\exp'(x) = \\exp(x) > 0$.",
+          "renvoi": "M3, etape 1"
+        },
+        "C": {
+          "erreur": "L'exponentielle n'a pas de minimum en $x = 0$. Elle est strictement croissante sur $\\mathbb{R}$ tout entier, sans changement de variation.",
+          "renvoi": "M3, etape 1"
+        },
+        "D": {
+          "erreur": "La derivee de l'exponentielle est $\\exp(x) > 0$, donc la fonction est strictement croissante, certainement pas constante.",
+          "renvoi": "M3, etape 1"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C3",
+      "enonce": "Quelle est la limite de $\\mathrm{e}^x$ lorsque $x \\to +\\infty$ ?",
+      "options": {
+        "A": "$0$",
+        "B": "$1$",
+        "C": "$\\mathrm{e}$",
+        "D": "$+\\infty$"
+      },
+      "correcte": "D",
+      "diagnostics": {
+        "A": {
+          "erreur": "C'est la limite en $-\\infty$ qui vaut $0$ ($\\lim_{x \\to -\\infty} \\mathrm{e}^x = 0$). Confusion entre les deux limites aux infinis.",
+          "renvoi": "M3, etape 2"
+        },
+        "B": {
+          "erreur": "L'eleve confond la valeur en $0$ ($\\mathrm{e}^0 = 1$) avec la limite en $+\\infty$.",
+          "renvoi": "M3, etape 2"
+        },
+        "C": {
+          "erreur": "L'eleve confond la valeur en $1$ ($\\mathrm{e}^1 = \\mathrm{e}$) avec la limite en $+\\infty$.",
+          "renvoi": "M3, etape 2"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C3",
+      "enonce": "Sachant que la fonction exponentielle est strictement croissante, comparer $\\mathrm{e}^{2{,}5}$ et $\\mathrm{e}^{\\sqrt{7}}$.",
+      "options": {
+        "A": "$\\mathrm{e}^{2{,}5} < \\mathrm{e}^{\\sqrt{7}}$",
+        "B": "$\\mathrm{e}^{2{,}5} > \\mathrm{e}^{\\sqrt{7}}$",
+        "C": "$\\mathrm{e}^{2{,}5} = \\mathrm{e}^{\\sqrt{7}}$",
+        "D": "On ne peut pas comparer sans calculatrice."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve a mal compare les exposants. Or $2{,}5^2 = 6{,}25 < 7$ donc $2{,}5 < \\sqrt{7}$, et par croissance de l'exponentielle, $\\mathrm{e}^{2{,}5} < \\mathrm{e}^{\\sqrt{7}}$.",
+          "renvoi": "M3, etape 3"
+        },
+        "C": {
+          "erreur": "$2{,}5 \\neq \\sqrt{7}$ car $2{,}5^2 = 6{,}25 \\neq 7$. Comme les exposants sont differents et l'exponentielle est injective, les images sont differentes.",
+          "renvoi": "M3 ; R3"
+        },
+        "D": {
+          "erreur": "On peut comparer sans calculatrice en comparant les exposants : $2{,}5^2 = 6{,}25 < 7$ donc $2{,}5 < \\sqrt{7}$, et on utilise la croissance de $\\exp$.",
+          "renvoi": "M3, etape 3"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C4",
+      "enonce": "Soit $f(x) = \\mathrm{e}^{3x+1}$. Quelle est $f'(x)$ ?",
+      "options": {
+        "A": "$\\mathrm{e}^{3x+1}$",
+        "B": "$(3x+1)\\,\\mathrm{e}^{3x+1}$",
+        "C": "$3\\,\\mathrm{e}^{3x+1}$",
+        "D": "$3\\,\\mathrm{e}^{3}$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a oublie de multiplier par $u'(x) = 3$. La formule $(\\mathrm{e}^u)' = u' \\mathrm{e}^u$ necessite le facteur $u'$.",
+          "renvoi": "M4, etape 2"
+        },
+        "B": {
+          "erreur": "L'eleve a confondu $u'(x)$ avec $u(x)$ : il a ecrit $u(x) \\cdot \\mathrm{e}^{u(x)}$ au lieu de $u'(x) \\cdot \\mathrm{e}^{u(x)}$.",
+          "renvoi": "M4, etape 1 ; R1"
+        },
+        "D": {
+          "erreur": "La derivee de $u(x) = 3x + 1$ est bien $3$, mais l'exponentielle reste $\\mathrm{e}^{3x+1}$ (pas $\\mathrm{e}^3$).",
+          "renvoi": "M4, etape 2"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C4",
+      "enonce": "Soit $g(x) = \\mathrm{e}^{x^2}$. Quelle est $g'(x)$ ?",
+      "options": {
+        "A": "$\\mathrm{e}^{x^2}$",
+        "B": "$x^2\\,\\mathrm{e}^{x^2}$",
+        "C": "$2x\\,\\mathrm{e}^{x^2}$",
+        "D": "$2x\\,\\mathrm{e}^{2x}$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a oublie le facteur $u'(x) = 2x$ dans la formule $(\\mathrm{e}^u)' = u' \\mathrm{e}^u$.",
+          "renvoi": "M4, etape 2"
+        },
+        "B": {
+          "erreur": "L'eleve a confondu $u'(x) = 2x$ avec $u(x) = x^2$. Il a ecrit $u \\cdot \\mathrm{e}^u$ au lieu de $u' \\cdot \\mathrm{e}^u$.",
+          "renvoi": "M4, etape 1 ; R1"
+        },
+        "D": {
+          "erreur": "La derivee $u'(x) = 2x$ est correcte, mais l'exposant reste $x^2$ et non $2x$. L'eleve a remplace l'exposant par la derivee.",
+          "renvoi": "M4, etape 2"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C4",
+      "enonce": "Soit $h(x) = x\\,\\mathrm{e}^{x}$. Quelle est $h'(x)$ ?",
+      "options": {
+        "A": "$\\mathrm{e}^x$",
+        "B": "$x\\,\\mathrm{e}^x$",
+        "C": "$(1+x)\\,\\mathrm{e}^x$",
+        "D": "$(x-1)\\,\\mathrm{e}^x$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a derive uniquement $x$ (donnant $1$) et multiplie par $\\mathrm{e}^x$, en oubliant la derivee de $\\mathrm{e}^x$ multipliee par $x$ : formule du produit $(uv)' = u'v + uv'$ non appliquee.",
+          "renvoi": "M4 ; R1"
+        },
+        "B": {
+          "erreur": "L'eleve a oublie le terme $u'v = 1 \\cdot \\mathrm{e}^x$ dans la formule du produit. Il n'a garde que $uv' = x \\cdot \\mathrm{e}^x$.",
+          "renvoi": "M4 ; R1"
+        },
+        "D": {
+          "erreur": "L'eleve a obtenu $x - 1$ au lieu de $x + 1$. Erreur de signe dans l'application de la formule du produit.",
+          "renvoi": "M4 ; R1"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C5",
+      "enonce": "Resoudre $\\mathrm{e}^{x} = \\mathrm{e}^{5}$.",
+      "options": {
+        "A": "$x = \\mathrm{e}^5$",
+        "B": "$x = 5$",
+        "C": "$x = \\ln 5$",
+        "D": "Pas de solution."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a confondu l'egalite des exponentielles avec la valeur de l'exponentielle : $\\mathrm{e}^x = \\mathrm{e}^5$ implique $x = 5$ (injectivite), pas $x = \\mathrm{e}^5$.",
+          "renvoi": "M5, etape 1"
+        },
+        "C": {
+          "erreur": "Le logarithme neperien n'est pas necessaire ici. L'injectivite de l'exponentielle donne directement $x = 5$. $\\ln 5$ serait la solution de $\\mathrm{e}^x = 5$.",
+          "renvoi": "M5, etape 1"
+        },
+        "D": {
+          "erreur": "L'equation admet bien une solution ($x = 5$). L'eleve a peut-etre cru que les exponentielles ne pouvaient pas etre egales.",
+          "renvoi": "M5, etape 1"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C5",
+      "enonce": "Resoudre l'inequation $\\mathrm{e}^{2x-1} \\geqslant 1$.",
+      "options": {
+        "A": "$x \\geqslant 1$",
+        "B": "$x \\geqslant \\dfrac{1}{2}$",
+        "C": "$x \\leqslant \\dfrac{1}{2}$",
+        "D": "$x \\geqslant 0$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a resolu $2x - 1 \\geqslant 1$ au lieu de $2x - 1 \\geqslant 0$ (oubli que $1 = \\mathrm{e}^0$, pas $\\mathrm{e}^1$).",
+          "renvoi": "M5, etape 2"
+        },
+        "C": {
+          "erreur": "L'eleve a inverse le sens de l'inequation. L'exponentielle etant strictement croissante, elle conserve le sens des inegalites.",
+          "renvoi": "M5, etape 2 ; M3"
+        },
+        "D": {
+          "erreur": "L'eleve a ecrit $\\mathrm{e}^{2x-1} \\geqslant \\mathrm{e}^0$ puis $2x \\geqslant 0$ en oubliant le $-1$ dans l'exposant.",
+          "renvoi": "M5, etape 2"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C5",
+      "enonce": "Resoudre $\\mathrm{e}^{x^2 - 4} = 1$.",
+      "options": {
+        "A": "$x = 4$",
+        "B": "$x = 2$",
+        "C": "$x = -2$ ou $x = 2$",
+        "D": "$x = 0$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve a resolu $x^2 = 4$ mais a donne $x = 4$ au lieu de $x = \\pm 2$. Confusion entre $x^2 = 4$ et $x = 4$.",
+          "renvoi": "M5, etape 1 ; R3"
+        },
+        "B": {
+          "erreur": "L'eleve a oublie la solution $x = -2$. L'equation $x^2 = 4$ admet deux solutions : $x = 2$ et $x = -2$.",
+          "renvoi": "M5, etape 1 ; R3"
+        },
+        "D": {
+          "erreur": "L'eleve a teste $x = 0$ : $\\mathrm{e}^{0 - 4} = \\mathrm{e}^{-4} \\neq 1$. Il faut $x^2 - 4 = 0$, pas $x = 0$.",
+          "renvoi": "M5, etape 1"
+        }
+      }
+    }
+  ]
+}

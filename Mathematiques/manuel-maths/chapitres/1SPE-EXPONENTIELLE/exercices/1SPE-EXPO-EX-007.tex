@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-EXPO-EX-007","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["calculer","raisonner"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-007.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-007.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% h = 3*exp(x) - 2
+% hp = h.diff(x)
+% assert hp == 3*exp(x), "h'(x) = 3*exp(x)"
+% assert simplify(hp - h) == 2, "h'(x) - h(x) = 2"
+% assert simplify(hp - (h + 2)) == 0, "h' = h + 2, i.e. y' = y + 2"
+% assert h.subs(x, 0) == 1, "h(0) = 1"
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-007}{2}{8}
+On considère la fonction $h$ définie sur $\mathbb{R}$ par $h(x) = 3\mathrm{e}^x - 2$.
+\begin{enumerate}
+\item Calculer $h'(x)$.
+\item La fonction $h$ est-elle solution de l'équation différentielle $y' = y$ ? Justifier.
+\item Calculer $h'(x) - h(x)$. Quelle équation différentielle $h$ vérifie-t-elle ?
+\item Calculer $h(0)$. La condition $h(0) = 1$ est-elle vérifiée ?
+\item Pourquoi $h$ n'est-elle pas la fonction exponentielle malgré $h(0) = 1$ ?
+\end{enumerate}
+\end{exercice}

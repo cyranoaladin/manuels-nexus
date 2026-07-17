@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-EXPO-EX-046","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C5"],"methodes":["M4"],"parcours":3,"competences":["modeliser","calculer","communiquer"],"duree_min":15,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-046.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-046.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% t = symbols('t', real=True)
+% P = 1000 * exp(Rational(5, 100) * t)
+% # P(t) = 5000 => e^(0.05t) = 5 => t = ln(5)/0.05 = 20*ln(5)
+% sol_eq = solve(P - 5000, t)
+% assert len(sol_eq) == 1 and simplify(sol_eq[0] - 20*log(5)) == 0
+% # P(t) >= 10000 => e^(0.05t) >= 10 => t >= 20*ln(10)
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-046}{3}{15}
+La population d'une culture bactérienne est modélisée par la fonction :
+\[P(t) = 1000\,\mathrm{e}^{0{,}05t}\]
+où $t$ est le temps en heures et $P(t)$ le nombre de bactéries.
+\begin{enumerate}
+\item Calculer $P(0)$. Interpréter ce résultat.
+\item Déterminer à quel instant $t$ la population atteint $5000$ bactéries. On donnera la valeur exacte puis une valeur approchée à l'unité.
+\item Résoudre l'inéquation $P(t) \geqslant 10\,000$. Interpréter le résultat.
+\end{enumerate}
+\end{exercice}

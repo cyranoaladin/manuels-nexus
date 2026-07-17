@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-EXPO-CO-002","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-002","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% g = 2*exp(x)
+% assert g.diff(x) == 2*exp(x), "g'(x) = 2*exp(x)"
+% assert g.subs(x, 0) == 2, "g(0) = 2"
+% assert g.diff(x) == g, "g' = g (equation y'=y est verifiee)"
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-002}
+\begin{enumerate}
+\item On dérive : $g'(x) = 2\mathrm{e}^x$.
+
+\item On a $g'(x) = 2\mathrm{e}^x = g(x)$ pour tout réel $x$.
+Donc $g$ vérifie bien l'équation $y' = y$.
+
+\item On calcule $g(0) = 2\mathrm{e}^0 = 2 \times 1 = 2$.
+La condition $y(0) = 1$ n'est \textbf{pas} vérifiée car $g(0) = 2 \neq 1$.
+
+\item La fonction exponentielle est l'unique fonction vérifiant \textbf{simultanément} $y' = y$ et $y(0) = 1$. La fonction $g$ vérifie $g' = g$ mais pas $g(0) = 1$. Elle ne peut donc pas être la fonction exponentielle. C'est un multiple de l'exponentielle, mais pas l'exponentielle elle-même.
+\end{enumerate}
+\end{corrige}

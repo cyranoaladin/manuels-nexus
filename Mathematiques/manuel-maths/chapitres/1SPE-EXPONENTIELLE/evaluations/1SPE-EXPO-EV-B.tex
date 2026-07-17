@@ -1,0 +1,138 @@
+% META: {"id":"1SPE-EXPO-EV-B","chapitre":"1SPE-EXPONENTIELLE","type_objet":"evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":55,"points":20,"status":"generated","sympy_params":{"f_ex1":"exp(3*x+2)","g_ex2":"(x+1)*exp(-x)","h_ex3":"exp(2*x)-3*exp(x)+2","P_ex4":"30000*exp(0.03*t)"}}
+
+\section*{Évaluation B — Fonction exponentielle}
+
+\textit{Durée : 55 minutes — 20 points — Calculatrice autorisée.}
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 1} \hfill \textit{5 points — C1, C2}
+%---------------------------------------------------------------
+
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = \mathrm{e}^{3x+2}$.
+
+\begin{enumerate}
+  \item Calculer $f'(x)$. \hfill \textit{(1 pt)}
+  \item Simplifier $\dfrac{\mathrm{e}^{3x+2}}{\mathrm{e}^{x+2}}$. \hfill \textit{(1,5 pt)}
+  \item Calculer $f(0)$ et $f\!\left(-\dfrac{2}{3}\right)$. Interpréter $f\!\left(-\dfrac{2}{3}\right)$. \hfill \textit{(1,5 pt)}
+  \item Montrer que $f$ est solution de l'équation différentielle $y' = 3y$. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify, Rational
+% x = symbols('x')
+% f = exp(3*x + 2)
+% fp = diff(f, x)
+% assert simplify(fp - 3*exp(3*x + 2)) == 0
+% quot = exp(3*x + 2) / exp(x + 2)
+% assert simplify(quot - exp(2*x)) == 0
+% assert simplify(f.subs(x, 0) - exp(2)) == 0
+% assert simplify(f.subs(x, Rational(-2, 3)) - 1) == 0
+% assert simplify(fp - 3*f) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 2} \hfill \textit{6 points — C3, C4}
+%---------------------------------------------------------------
+
+Soit $g$ la fonction définie sur $\mathbb{R}$ par $g(x) = (x+1)\,\mathrm{e}^{-x}$.
+
+\begin{enumerate}
+  \item Calculer $g'(x)$. \hfill \textit{(2 pt)}
+  \item Dresser le tableau de variations de $g$ sur $\mathbb{R}$. \hfill \textit{(2 pt)}
+  \item En déduire le maximum de $g$ et la valeur de $x$ pour laquelle il est atteint. \hfill \textit{(1 pt)}
+  \item Déterminer les limites de $g$ en $+\infty$ et en $-\infty$. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify, solve, oo, limit, E
+% x = symbols('x')
+% g = (x + 1)*exp(-x)
+% gp = diff(g, x)
+% # g'(x) = e^{-x} + (x+1)*(-e^{-x}) = e^{-x}(1 - x - 1) = -x*e^{-x}
+% assert simplify(gp - (-x*exp(-x))) == 0
+% assert solve(gp, x) == [0]
+% # g(0) = (0+1)*e^0 = 1
+% assert g.subs(x, 0) == 1
+% # g'(-1) = -(-1)*e^1 = e > 0 => increasing on ]-inf, 0[
+% assert simplify(gp.subs(x, -1) - E) == 0
+% # g'(1) = -1*e^{-1} < 0 => decreasing on ]0, +inf[
+% assert simplify(gp.subs(x, 1) + exp(-1)) == 0
+% # limits
+% assert limit(g, x, oo) == 0
+% assert limit(g, x, -oo) == -oo
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 3} \hfill \textit{5 points — C2, C4, C5}
+%---------------------------------------------------------------
+
+Soit $h$ la fonction définie sur $\mathbb{R}$ par $h(x) = \mathrm{e}^{2x} - 3\,\mathrm{e}^x + 2$.
+
+\begin{enumerate}
+  \item Poser $X = \mathrm{e}^x$. Exprimer $h(x)$ en fonction de $X$. \hfill \textit{(1 pt)}
+  \item Résoudre $X^2 - 3X + 2 = 0$. \hfill \textit{(1,5 pt)}
+  \item En déduire les solutions de $h(x) = 0$. \hfill \textit{(1,5 pt)}
+  \item Résoudre $h(x) \leqslant 0$. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, simplify, log
+% x, X = symbols('x X')
+% h = exp(2*x) - 3*exp(x) + 2
+% poly = X**2 - 3*X + 2
+% roots = solve(poly, X)
+% assert set(roots) == {1, 2}
+% sols = solve(h, x)
+% assert 0 in sols
+% assert log(2) in sols
+% assert simplify(h.subs(x, 0)) == 0
+% assert simplify(h.subs(x, log(2))) == 0
+% # h(x) <= 0 <=> 1 <= e^x <= 2 <=> 0 <= x <= ln(2)
+% # check interior point: h(ln(3/2)) = (3/2)^2 - 3*(3/2) + 2 = 9/4 - 9/2 + 2 = -1/4 < 0
+% from sympy import Rational
+% val = h.subs(x, log(Rational(3, 2)))
+% assert simplify(val + Rational(1, 4)) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 4} \hfill \textit{4 points — C5}
+%---------------------------------------------------------------
+
+La population d'un village est modélisée par $P(t) = 30\,000\,\mathrm{e}^{0{,}03\,t}$, où $t$ désigne le nombre d'années écoulées depuis 2020.
+
+\begin{enumerate}
+  \item Calculer $P(0)$. Interpréter ce résultat. \hfill \textit{(1 pt)}
+  \item Calculer $P(10)$ (arrondir à l'unité). \hfill \textit{(1 pt)}
+  \item Déterminer $t$ tel que $P(t) = 60\,000$. \hfill \textit{(1 pt)}
+  \item Déterminer à partir de quelle année la population dépasse $45\,000$ habitants. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, log, simplify, N, Rational
+% t = symbols('t', real=True)
+% P = 30000*exp(Rational(3, 100)*t)
+% assert P.subs(t, 0) == 30000
+% P10 = P.subs(t, 10)
+% P10_num = float(N(P10))
+% assert abs(P10_num - 40496) < 5
+% # P(t) = 60000 => e^(0.03t) = 2 => t = ln(2)/0.03
+% sol = solve(P - 60000, t)
+% assert len(sol) == 1
+% assert simplify(sol[0] - log(2)/Rational(3, 100)) == 0
+% assert simplify(sol[0] - Rational(100, 3)*log(2)) == 0
+% # t ~ 23.1 => year 2044
+% assert 23 < float(N(sol[0])) < 24
+% # P(t) >= 45000 => e^(0.03t) >= 3/2 => t >= ln(3/2)/0.03
+% sol45 = solve(P - 45000, t)
+% assert simplify(sol45[0] - Rational(100, 3)*log(Rational(3, 2))) == 0
+% # t ~ 13.5 => year 2034
+% assert 13 < float(N(sol45[0])) < 14
+% END-VERIFY

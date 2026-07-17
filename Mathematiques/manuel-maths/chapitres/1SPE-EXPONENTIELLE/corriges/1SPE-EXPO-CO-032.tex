@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-EXPO-CO-032","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-032","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert diff(5*exp(2*x), x) == 10*exp(2*x)
+% assert diff(-3*exp(-4*x), x) == 12*exp(-4*x)
+% assert diff(exp(x)/2, x) == exp(x)/2
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-032}
+On applique la formule $(\mathrm{e}^{u})' = u' \mathrm{e}^{u}$ combinée à la règle $(k \cdot v)' = k \cdot v'$.
+
+\textbf{Question 1.} On pose $u(x) = 2x$, donc $u'(x) = 2$.
+\[f'(x) = 5 \times 2\,\mathrm{e}^{2x} = \boxed{10\,\mathrm{e}^{2x}}.\]
+
+\textbf{Question 2.} On pose $u(x) = -4x$, donc $u'(x) = -4$.
+\[g'(x) = -3 \times (-4)\,\mathrm{e}^{-4x} = \boxed{12\,\mathrm{e}^{-4x}}.\]
+
+\textbf{Question 3.} On pose $u(x) = x$, donc $u'(x) = 1$.
+\[h'(x) = \frac{1}{2} \times 1 \times \mathrm{e}^{x} = \boxed{\frac{\mathrm{e}^{x}}{2}}.\]
+\end{corrige}

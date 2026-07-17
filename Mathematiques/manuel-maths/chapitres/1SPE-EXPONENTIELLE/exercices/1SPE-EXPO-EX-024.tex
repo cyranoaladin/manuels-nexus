@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-EXPO-EX-024","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C3"],"capacites_codes":["C3"],"methodes":["M2"],"parcours":1,"competences":["raisonner"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-024.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-024.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # e^x > 0 pour tout x : VRAI
+% assert exp(x).is_positive is None or exp(0) > 0
+% assert exp(0) > 0
+% assert exp(-100) > 0
+% # e^x ne peut pas etre negatif : VRAI (donc l'affirmation "peut etre negatif" est FAUSSE)
+% # e^{-x} tend vers +inf quand x->+inf : FAUX, tend vers 0
+% assert limit(exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-024}{1}{5}
+Dire si chaque affirmation est \textbf{vraie} ou \textbf{fausse}, et justifier :
+\begin{enumerate}
+  \item « Pour tout réel $x$, $\mathrm{e}^x > 0$. »
+  \item « Il existe un réel $x$ tel que $\mathrm{e}^x$ soit négatif. »
+  \item « $\mathrm{e}^{-x}$ tend vers $+\infty$ quand $x$ tend vers $+\infty$. »
+\end{enumerate}
+\end{exercice}

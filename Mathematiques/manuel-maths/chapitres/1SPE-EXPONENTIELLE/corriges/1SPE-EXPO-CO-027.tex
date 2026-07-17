@@ -1,0 +1,25 @@
+% META: {"id":"1SPE-EXPO-CO-027","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-027","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x) - x, x, oo) == oo
+% assert limit(exp(x) + x, x, -oo) == -oo
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-027}
+\textbf{1.} On factorise par $\mathrm{e}^x$ :
+\[\mathrm{e}^x - x = \mathrm{e}^x\left(1 - x\,\mathrm{e}^{-x}\right).\]
+Or $\displaystyle\lim_{x \to +\infty} x\,\mathrm{e}^{-x} = 0$ (croissance comparée : l'exponentielle l'emporte sur toute puissance de $x$).
+
+Donc $\displaystyle\lim_{x \to +\infty}\left(1 - x\,\mathrm{e}^{-x}\right) = 1$ et $\displaystyle\lim_{x \to +\infty} \mathrm{e}^x = +\infty$.
+
+Par produit : $\displaystyle\lim_{x \to +\infty} \left(\mathrm{e}^x - x\right) = +\infty$.
+
+L'exponentielle « domine » la fonction linéaire en $+\infty$.
+
+\textbf{2.} Quand $x \to -\infty$ :
+\begin{itemize}
+  \item $\displaystyle\lim_{x \to -\infty} \mathrm{e}^x = 0$ ;
+  \item $\displaystyle\lim_{x \to -\infty} x = -\infty$.
+\end{itemize}
+Par somme : $\displaystyle\lim_{x \to -\infty} \left(\mathrm{e}^x + x\right) = -\infty$.
+\end{corrige}

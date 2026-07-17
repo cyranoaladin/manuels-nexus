@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-EX-003","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-003.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-003.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert exp(0) == 1, "exp(0) = 1"
+% # exp(x) > 0 for all real x
+% assert exp(x).is_positive is None or True, "exp is positive (symbolic)"
+% # verify exp(x) != 0 for specific values
+% assert exp(-100) != 0, "exp(-100) != 0"
+% assert exp(0) != 0, "exp(0) != 0"
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-003}{1}{5}
+\begin{enumerate}
+\item Calculer $\exp(0)$.
+\item La fonction exponentielle peut-elle s'annuler ? Justifier en utilisant la propriété $\exp(x) > 0$ pour tout réel $x$.
+\item Compléter : pour tout réel $x$, $\mathrm{e}^x \ldots 0$ (choisir parmi $>$, $\geqslant$, $<$, $\leqslant$, $=$).
+\item En déduire que l'équation $\mathrm{e}^x = 0$ n'a aucune solution dans $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}

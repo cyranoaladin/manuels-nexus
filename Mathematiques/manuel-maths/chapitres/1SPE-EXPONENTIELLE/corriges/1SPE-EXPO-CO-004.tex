@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-EXPO-CO-004","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-004","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert exp(0) == 1, "Q1 vrai"
+% assert diff(exp(x), x) == exp(x), "Q2 vrai"
+% assert exp(1) == E, "Q4 vrai"
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-004}
+\begin{enumerate}
+\item \textbf{Vrai.} Par définition de la fonction exponentielle, $\exp(0) = 1$. C'est la condition initiale $y(0) = 1$.
+
+\item \textbf{Vrai.} La fonction exponentielle est l'unique fonction vérifiant $y' = y$ et $y(0) = 1$. En particulier, $\exp'(x) = \exp(x)$ pour tout réel $x$.
+
+\item \textbf{Vrai, mais imprécis.} L'affirmation $\mathrm{e}^x \geqslant 0$ est vraie, mais on peut être plus précis : pour tout réel $x$, $\mathrm{e}^x > 0$ (\textbf{strictement} positif). L'exponentielle ne s'annule jamais.
+
+\item \textbf{Vrai.} $\exp(1) = \mathrm{e}^1 = \mathrm{e} \approx 2{,}718$. Le nombre $\mathrm{e}$ est défini comme l'image de $1$ par la fonction exponentielle.
+
+\item \textbf{Faux.} Pour tout réel $x$, $\mathrm{e}^x > 0$. La fonction exponentielle est strictement positive, elle ne s'annule jamais. L'équation $\mathrm{e}^x = 0$ n'a aucune solution.
+\end{enumerate}
+\end{corrige}

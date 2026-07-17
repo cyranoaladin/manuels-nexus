@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-EXPO-EX-038","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C4"],"capacites_codes":["C4"],"methodes":["M3"],"parcours":2,"competences":["calculer","raisonner"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-038.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-038.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**2 - 1)*exp(x)
+% fp = diff(f, x)
+% assert simplify(fp - (x**2 + 2*x - 1)*exp(x)) == 0
+% sols = solve(fp, x)
+% assert set(sols) == {-1 + sqrt(2), -1 - sqrt(2)}
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-038}{2}{10}
+Soit $f$ la fonction définie sur $\mathbb{R}$ par $f(x) = (x^2-1)\,\mathrm{e}^{x}$.
+\begin{enumerate}
+\item Calculer $f'(x)$.
+\item Montrer que $f'(x) = (x^2+2x-1)\,\mathrm{e}^{x}$.
+\item Résoudre $x^2 + 2x - 1 = 0$ et en déduire les extremums de $f$.
+\end{enumerate}
+\end{exercice}

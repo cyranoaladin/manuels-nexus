@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-EXPO-CO-038","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-038","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**2 - 1)*exp(x)
+% fp = diff(f, x)
+% assert simplify(fp - (x**2 + 2*x - 1)*exp(x)) == 0
+% sols = solve(fp, x)
+% assert set(sols) == {-1 + sqrt(2), -1 - sqrt(2)}
+% x1 = -1 - sqrt(2)
+% x2 = -1 + sqrt(2)
+% assert simplify(f.subs(x, x1) - (2 + 2*sqrt(2))*exp(-1 - sqrt(2))) == 0
+% assert simplify(f.subs(x, x2) - (2 - 2*sqrt(2))*exp(-1 + sqrt(2))) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-038}
+
+\textbf{Question 1.} On pose $u(x) = x^2 - 1$ et $v(x) = \mathrm{e}^{x}$.
+
+On a $u'(x) = 2x$ et $v'(x) = \mathrm{e}^{x}$.
+
+Par la formule du produit :
+\[f'(x) = 2x\,\mathrm{e}^{x} + (x^2-1)\,\mathrm{e}^{x}.\]
+
+\textbf{Question 2.} On factorise par $\mathrm{e}^{x}$ :
+\[f'(x) = \bigl[2x + x^2 - 1\bigr]\,\mathrm{e}^{x} = \boxed{(x^2+2x-1)\,\mathrm{e}^{x}}.\]
+
+\textbf{Question 3.} On résout $x^2 + 2x - 1 = 0$.
+
+Le discriminant est $\Delta = 4 + 4 = 8$, donc $\sqrt{\Delta} = 2\sqrt{2}$.
+
+Les solutions sont :
+\[x_1 = \frac{-2 - 2\sqrt{2}}{2} = -1 - \sqrt{2} \qquad \text{et} \qquad x_2 = \frac{-2 + 2\sqrt{2}}{2} = -1 + \sqrt{2}.\]
+
+Comme $\mathrm{e}^{x} > 0$, le signe de $f'(x)$ est celui de $x^2 + 2x - 1$ :
+\begin{itemize}
+\item $f'(x) > 0$ sur $]-\infty\,;\,-1-\sqrt{2}[\,\cup\,]-1+\sqrt{2}\,;\,+\infty[$ ;
+\item $f'(x) < 0$ sur $]-1-\sqrt{2}\,;\,-1+\sqrt{2}[$.
+\end{itemize}
+
+Donc $f$ admet un \textbf{maximum local} en $x_1 = -1 - \sqrt{2}$ et un \textbf{minimum local} en $x_2 = -1 + \sqrt{2}$.
+\end{corrige}

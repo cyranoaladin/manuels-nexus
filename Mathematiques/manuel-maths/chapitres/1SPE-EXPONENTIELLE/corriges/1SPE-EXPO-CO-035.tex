@@ -1,0 +1,33 @@
+% META: {"id":"1SPE-EXPO-CO-035","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-035","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*exp(x)
+% fp = diff(f, x)
+% assert simplify(fp - (x + 1)*exp(x)) == 0
+% assert solve(fp, x) == [-1]
+% assert f.subs(x, -1) == -exp(-1)
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-035}
+
+\textbf{Question 1.} On pose $u(x) = x$ et $v(x) = \mathrm{e}^{x}$.
+
+On a $u'(x) = 1$ et $v'(x) = \mathrm{e}^{x}$.
+
+Par la formule du produit :
+\[f'(x) = u'(x)\,v(x) + u(x)\,v'(x) = 1 \times \mathrm{e}^{x} + x \times \mathrm{e}^{x}.\]
+
+\textbf{Question 2.} On factorise par $\mathrm{e}^{x}$ :
+\[f'(x) = \mathrm{e}^{x} + x\,\mathrm{e}^{x} = \boxed{(x+1)\,\mathrm{e}^{x}}.\]
+
+\textbf{Question 3.} On résout $f'(x) = 0$, soit $(x+1)\,\mathrm{e}^{x} = 0$.
+
+Comme $\mathrm{e}^{x} > 0$ pour tout réel $x$, le produit est nul si et seulement si $x + 1 = 0$, c'est-à-dire $\boxed{x = -1}$.
+
+\textbf{Question 4.} Le signe de $f'(x)$ est celui de $x + 1$ (car $\mathrm{e}^{x} > 0$).
+\begin{itemize}
+\item Si $x < -1$, alors $f'(x) < 0$ : $f$ est décroissante.
+\item Si $x > -1$, alors $f'(x) > 0$ : $f$ est croissante.
+\end{itemize}
+La fonction $f$ admet un minimum en $x = -1$, avec $f(-1) = -1 \times \mathrm{e}^{-1} = -\dfrac{1}{\mathrm{e}}$.
+\end{corrige}

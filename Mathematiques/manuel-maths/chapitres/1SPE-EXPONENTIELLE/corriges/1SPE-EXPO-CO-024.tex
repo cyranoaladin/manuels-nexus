@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-EXPO-CO-024","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-024","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert exp(0) > 0
+% assert exp(-100) > 0
+% assert limit(exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-024}
+\textbf{1.} \textbf{Vrai.} La fonction exponentielle est \textbf{strictement positive} sur $\mathbb{R}$ : pour tout réel $x$, $\mathrm{e}^x > 0$. C'est une propriété fondamentale du cours.
+
+\textbf{2.} \textbf{Faux.} Puisque $\mathrm{e}^x > 0$ pour tout réel $x$, la fonction exponentielle ne prend \textbf{jamais} de valeur négative (ni nulle).
+
+\textbf{3.} \textbf{Faux.} Quand $x \to +\infty$, on a $-x \to -\infty$, donc :
+\[\lim_{x \to +\infty} \mathrm{e}^{-x} = \lim_{X \to -\infty} \mathrm{e}^X = 0.\]
+La fonction $x \mapsto \mathrm{e}^{-x}$ tend vers $0$ (et non $+\infty$) quand $x$ tend vers $+\infty$.
+\end{corrige}

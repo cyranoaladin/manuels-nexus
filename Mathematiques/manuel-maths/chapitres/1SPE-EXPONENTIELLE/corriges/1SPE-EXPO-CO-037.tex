@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-EXPO-CO-037","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-037","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)/(x + 1)
+% fp = diff(f, x)
+% assert simplify(fp - x*exp(x)/(x + 1)**2) == 0
+% assert solve(fp, x) == [0]
+% assert f.subs(x, 0) == 1
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-037}
+
+\textbf{Question 1.} On pose $u(x) = \mathrm{e}^{x}$ et $v(x) = x + 1$.
+
+On a $u'(x) = \mathrm{e}^{x}$ et $v'(x) = 1$.
+
+Par la formule du quotient :
+\[f'(x) = \frac{u'v - uv'}{v^2} = \frac{\mathrm{e}^{x}(x+1) - \mathrm{e}^{x} \times 1}{(x+1)^2}.\]
+
+\textbf{Question 2.} On factorise le numérateur par $\mathrm{e}^{x}$ :
+\[f'(x) = \frac{\mathrm{e}^{x}\bigl[(x+1) - 1\bigr]}{(x+1)^2} = \boxed{\frac{x\,\mathrm{e}^{x}}{(x+1)^2}}.\]
+
+\textbf{Question 3.} Sur $]-1\,;\,+\infty[$, on a $(x+1)^2 > 0$ et $\mathrm{e}^{x} > 0$, donc le signe de $f'(x)$ est celui de $x$.
+\begin{itemize}
+\item Si $-1 < x < 0$, alors $f'(x) < 0$ : $f$ est décroissante sur $]-1\,;\,0]$.
+\item Si $x > 0$, alors $f'(x) > 0$ : $f$ est croissante sur $[0\,;\,+\infty[$.
+\end{itemize}
+La fonction $f$ admet un minimum en $x = 0$, avec $f(0) = \dfrac{\mathrm{e}^{0}}{0+1} = 1$.
+\end{corrige}

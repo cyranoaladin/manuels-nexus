@@ -1,0 +1,169 @@
+% META: {"id":"1SPE-EXPO-COURS-C5","chapitre":"1SPE-EXPONENTIELLE","type_objet":"cours","capacites_codes":["C5"],"status":"generated"}
+
+\section{Équations et inéquations avec l'exponentielle}
+
+\margeAppui{L'injectivité de la fonction exponentielle (strictement croissante) permet de résoudre les équations et inéquations exponentielles en comparant directement les exposants.}
+
+\propriete[Résolution d'équations exponentielles]{
+Pour tous réels $A$ et $B$ :
+\[
+\mathrm{e}^A = \mathrm{e}^B \iff A = B.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, Eq
+% x = symbols('x')
+% # e^(2x-1) = e^(x+3) iff 2x-1 = x+3 iff x=4
+% sol = solve(Eq(2*x - 1, x + 3), x)
+% assert sol == [4]
+% # Verification: exp(2*4-1) = exp(7) = exp(4+3)
+% assert exp(2*4 - 1) == exp(4 + 3)
+% END-VERIFY
+
+\definition[Équation de type $\mathrm{e}^A = k$]{
+Soit $k$ un nombre réel.
+\begin{itemize}
+  \item Si $k > 0$ : l'équation $\mathrm{e}^A = k$ équivaut à $A = \ln(k)$.
+  \item Si $k \leqslant 0$ : l'équation $\mathrm{e}^A = k$ n'a \textbf{aucune solution}, car $\mathrm{e}^A > 0$ pour tout réel $A$.
+\end{itemize}
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, log, Eq
+% x = symbols('x')
+% # e^x = 5 iff x = ln(5)
+% sol = solve(Eq(exp(x), 5), x)
+% assert sol == [log(5)]
+% # e^x = -2 has no solution
+% sol2 = solve(Eq(exp(x), -2), x)
+% # sympy may return complex solutions; filter real ones
+% real_sols = [s for s in sol2 if s.is_real]
+% assert len(real_sols) == 0
+% END-VERIFY
+
+\propriete[Résolution d'inéquations exponentielles]{
+La fonction exponentielle étant \textbf{strictement croissante} :
+\[
+\mathrm{e}^A \leqslant \mathrm{e}^B \iff A \leqslant B, \qquad \mathrm{e}^A < \mathrm{e}^B \iff A < B.
+\]
+De même :
+\[
+\mathrm{e}^A \geqslant k \quad (k > 0) \iff A \geqslant \ln(k).
+\]
+}
+
+\exemple{
+Résoudre $\mathrm{e}^{2x-1} = \mathrm{e}^{x+3}$.
+
+$\mathrm{e}^{2x-1} = \mathrm{e}^{x+3} \iff 2x - 1 = x + 3 \iff x = 4$.
+
+L'ensemble des solutions est $S = \{4\}$.
+}
+
+\exemple{
+Résoudre $\mathrm{e}^{3x} = 7$.
+
+$\mathrm{e}^{3x} = 7 \iff 3x = \ln(7) \iff x = \dfrac{\ln 7}{3}$.
+
+L'ensemble des solutions est $S = \left\{\dfrac{\ln 7}{3}\right\}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, log, Eq, Rational, simplify
+% x = symbols('x', real=True)
+% sol = solve(Eq(exp(3*x), 7), x)
+% assert len(sol) == 1
+% assert simplify(sol[0] - log(7)/3) == 0
+% END-VERIFY
+
+\exemple{
+Résoudre $\mathrm{e}^{x^2 - 4} = 1$.
+
+$\mathrm{e}^{x^2 - 4} = 1 = \mathrm{e}^0 \iff x^2 - 4 = 0 \iff x^2 = 4 \iff x = 2$ ou $x = -2$.
+
+L'ensemble des solutions est $S = \{-2\,;\,2\}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq
+% x = symbols('x')
+% sol = solve(Eq(x**2 - 4, 0), x)
+% assert set(sol) == {-2, 2}
+% END-VERIFY
+
+\exemple{
+Résoudre $\mathrm{e}^{x} = -3$.
+
+L'exponentielle est toujours strictement positive : $\mathrm{e}^x > 0$ pour tout $x \in \mathbb{R}$.
+
+L'équation $\mathrm{e}^x = -3$ n'a \textbf{aucune solution}. $S = \varnothing$.
+}
+
+\exemple{
+Résoudre l'inéquation $\mathrm{e}^{2x+1} < \mathrm{e}^{5-x}$.
+
+La fonction exponentielle est strictement croissante, donc :
+\[
+\mathrm{e}^{2x+1} < \mathrm{e}^{5-x} \iff 2x + 1 < 5 - x \iff 3x < 4 \iff x < \frac{4}{3}.
+\]
+
+L'ensemble des solutions est $S = \left]-\infty\,;\,\dfrac{4}{3}\right[$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Rational
+% x = symbols('x')
+% # 2x+1 < 5-x iff 3x < 4 iff x < 4/3
+% assert solve(2*x + 1 - (5 - x), x) == [Rational(4, 3)]
+% END-VERIFY
+
+\exemple{
+Résoudre l'inéquation $\mathrm{e}^{x} \geqslant \mathrm{e}^2$.
+
+$\mathrm{e}^x \geqslant \mathrm{e}^2 \iff x \geqslant 2$.
+
+L'ensemble des solutions est $S = [2\,;\,+\infty[$.
+}
+
+\exemple{
+Résoudre $\mathrm{e}^{2x} - 5\mathrm{e}^x + 6 = 0$.
+
+On pose $X = \mathrm{e}^x > 0$. L'équation devient $X^2 - 5X + 6 = 0$.
+
+$\Delta = 25 - 24 = 1$, d'où $X_1 = \dfrac{5 - 1}{2} = 2$ et $X_2 = \dfrac{5 + 1}{2} = 3$.
+
+Les deux valeurs sont positives, donc :
+\[
+\mathrm{e}^x = 2 \iff x = \ln 2, \qquad \mathrm{e}^x = 3 \iff x = \ln 3.
+\]
+
+L'ensemble des solutions est $S = \{\ln 2\,;\,\ln 3\}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, solve, log
+% x = symbols('x')
+% eq = exp(2*x) - 5*exp(x) + 6
+% sol = solve(eq, x)
+% assert set(sol) == {log(2), log(3)}
+% # Verify: discriminant of X^2 - 5X + 6
+% X = symbols('X')
+% assert solve(X**2 - 5*X + 6, X) == [2, 3]
+% END-VERIFY
+
+\erreurFrequente{
+Oublier de vérifier que $k > 0$ dans l'équation $\mathrm{e}^A = k$. Si $k \leqslant 0$, il n'y a aucune solution. Ne jamais écrire $\mathrm{e}^A = -3 \implies A = \ln(-3)$ : le logarithme d'un nombre négatif n'existe pas dans $\mathbb{R}$.
+}
+
+\erreurFrequente{
+Inverser le sens de l'inégalité en passant aux exposants. La fonction exponentielle est \emph{croissante} : elle \emph{conserve} l'ordre. $\mathrm{e}^A < \mathrm{e}^B \iff A < B$ (même sens).
+}
+
+\contreexemple{
+On pourrait croire que $\mathrm{e}^{x^2} = \mathrm{e}^{4}$ donne $x = 2$ uniquement. Or $x^2 = 4$ admet \emph{deux} solutions : $x = 2$ et $x = -2$. Ne pas oublier de résoudre complètement l'équation sur les exposants.
+}
+
+\approfondissement{
+La substitution $X = \mathrm{e}^x$ permet de ramener certaines équations exponentielles à des équations polynomiales. Plus généralement, toute équation de la forme $a\,\mathrm{e}^{2x} + b\,\mathrm{e}^x + c = 0$ se ramène à $aX^2 + bX + c = 0$ avec la contrainte $X > 0$, ce qui exclut les racines négatives ou nulles.
+}

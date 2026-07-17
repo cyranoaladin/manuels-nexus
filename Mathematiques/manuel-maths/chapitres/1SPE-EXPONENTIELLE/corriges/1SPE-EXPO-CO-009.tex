@@ -1,0 +1,36 @@
+% META: {"id":"1SPE-EXPO-CO-009","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-009","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = Function('f')
+% # g = f/exp, g' numerator = f'*exp - f*exp' = (f-f)*exp = 0 when f'=f and exp'=exp
+% g_prime_num = diff(f(x), x) * exp(x) - f(x) * exp(x)
+% g_prime_num_sub = g_prime_num.subs(diff(f(x), x), f(x))
+% assert simplify(g_prime_num_sub) == 0
+% # g(0) = f(0)/exp(0) = 1/1 = 1
+% assert exp(0) == 1
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-009}
+\begin{enumerate}
+\item La fonction $g(x) = \dfrac{f(x)}{\exp(x)}$ est définie à condition que $\exp(x) \neq 0$. Or, pour tout réel $x$, $\exp(x) > 0$, donc $\exp(x) \neq 0$. La fonction $g$ est bien définie sur $\mathbb{R}$.
+
+\item Par la formule du quotient $\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2}$ avec $u = f$ et $v = \exp$ :
+\[g'(x) = \frac{f'(x) \cdot \exp(x) - f(x) \cdot \exp'(x)}{[\exp(x)]^2}.\]
+
+\item On utilise les hypothèses : $f'(x) = f(x)$ et $\exp'(x) = \exp(x)$. On remplace dans le numérateur :
+\[f'(x) \cdot \exp(x) - f(x) \cdot \exp'(x) = f(x) \cdot \exp(x) - f(x) \cdot \exp(x) = 0.\]
+Donc :
+\[g'(x) = \frac{0}{[\exp(x)]^2} = 0 \quad \text{pour tout réel } x.\]
+
+\item Une fonction dont la dérivée est nulle sur $\mathbb{R}$ est constante sur $\mathbb{R}$. Il existe donc une constante $C \in \mathbb{R}$ telle que $g(x) = C$ pour tout réel $x$.
+
+\item On calcule $g(0)$ :
+\[g(0) = \frac{f(0)}{\exp(0)} = \frac{1}{1} = 1.\]
+Donc $C = 1$.
+
+\item Pour tout réel $x$, $g(x) = 1$, c'est-à-dire :
+\[\frac{f(x)}{\exp(x)} = 1, \quad \text{soit} \quad f(x) = \exp(x).\]
+
+Toute fonction $f$ vérifiant $f' = f$ et $f(0) = 1$ est nécessairement égale à $\exp$. La fonction exponentielle est donc \textbf{l'unique} fonction dérivable sur $\mathbb{R}$ telle que $f' = f$ et $f(0) = 1$.
+\end{enumerate}
+\end{corrige}

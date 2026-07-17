@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-EXPO-CO-028","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-028","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% g = exp(x) - x - 2
+% assert g.subs(x, 0) == -1
+% assert g.subs(x, 2) == exp(2) - 4
+% assert g.subs(x, 0) < 0
+% assert g.subs(x, 2) > 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-028}
+\textbf{1.} On calcule :
+\[g(0) = \mathrm{e}^0 - 0 - 2 = 1 - 2 = -1 < 0.\]
+\[g(2) = \mathrm{e}^2 - 2 - 2 = \mathrm{e}^2 - 4 \approx 7{,}389 - 4 = 3{,}389 > 0.\]
+
+\textbf{2.} La fonction $g$ est la somme de la fonction exponentielle (continue sur $\mathbb{R}$) et de la fonction affine $x \mapsto -x - 2$ (continue sur $\mathbb{R}$). Donc $g$ est \textbf{continue} sur $\mathbb{R}$, et en particulier sur $[0\,;\,2]$.
+
+\textbf{3.} On a :
+\begin{itemize}
+  \item $g$ est continue sur $[0\,;\,2]$ ;
+  \item $g(0) = -1 < 0$ et $g(2) = \mathrm{e}^2 - 4 > 0$.
+\end{itemize}
+D'après le \textbf{théorème des valeurs intermédiaires}, comme $0$ est compris entre $g(0)$ et $g(2)$, il existe au moins un réel $c \in [0\,;\,2]$ tel que $g(c) = 0$, c'est-à-dire $\mathrm{e}^c = c + 2$.
+
+L'équation $\mathrm{e}^x = x + 2$ admet donc au moins une solution dans $[0\,;\,2]$.
+\end{corrige}

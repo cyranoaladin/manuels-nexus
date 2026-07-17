@@ -1,0 +1,50 @@
+% META: {"id":"1SPE-EXPO-CO-040","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-040","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2*exp(-x)
+% fp = diff(f, x)
+% assert simplify(fp - x*(2 - x)*exp(-x)) == 0
+% assert set(solve(fp, x)) == {0, 2}
+% assert f.subs(x, 0) == 0
+% assert simplify(f.subs(x, 2) - 4*exp(-2)) == 0
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == oo
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-040}
+
+\textbf{Question 1.} On pose $u(x) = x^2$ et $v(x) = \mathrm{e}^{-x}$.
+
+On a $u'(x) = 2x$ et $v'(x) = -\mathrm{e}^{-x}$.
+
+Par la formule du produit :
+\[f'(x) = 2x\,\mathrm{e}^{-x} + x^2 \times (-\mathrm{e}^{-x}) = 2x\,\mathrm{e}^{-x} - x^2\,\mathrm{e}^{-x}.\]
+On factorise par $x\,\mathrm{e}^{-x}$ :
+\[f'(x) = x\,\mathrm{e}^{-x}(2 - x) = \boxed{x(2-x)\,\mathrm{e}^{-x}}.\]
+
+\textbf{Question 2.} On résout $f'(x) = 0$, soit $x(2-x)\,\mathrm{e}^{-x} = 0$.
+
+Comme $\mathrm{e}^{-x} > 0$, on obtient $x = 0$ ou $2 - x = 0$, d'où $\boxed{x = 0 \text{ ou } x = 2}$.
+
+\textbf{Question 3.} Le signe de $f'(x)$ est celui de $x(2-x)$ (car $\mathrm{e}^{-x} > 0$).
+
+Le produit $x(2-x)$ est positif entre les racines :
+\begin{itemize}
+\item $f'(x) < 0$ sur $]-\infty\,;\,0[$ : $f$ est décroissante.
+\item $f'(x) > 0$ sur $]0\,;\,2[$ : $f$ est croissante.
+\item $f'(x) < 0$ sur $]2\,;\,+\infty[$ : $f$ est décroissante.
+\end{itemize}
+
+\textbf{Question 4.}
+\begin{itemize}
+\item En $+\infty$ : $\displaystyle\lim_{x \to +\infty} x^2\,\mathrm{e}^{-x} = 0$ par croissances comparées ($\mathrm{e}^{x}$ l'emporte sur $x^2$).
+\item En $-\infty$ : $\displaystyle\lim_{x \to -\infty} x^2\,\mathrm{e}^{-x} = +\infty$ car $x^2 \to +\infty$ et $\mathrm{e}^{-x} \to +\infty$.
+\end{itemize}
+
+\textbf{Question 5.}
+\begin{itemize}
+\item $f$ admet un \textbf{minimum local} en $x = 0$ : $f(0) = 0$.
+\item $f$ admet un \textbf{maximum local} en $x = 2$ : $f(2) = 4\,\mathrm{e}^{-2} = \dfrac{4}{\mathrm{e}^2} \approx 0{,}54$.
+\end{itemize}
+La courbe part de $+\infty$ en $-\infty$, décroît jusqu'au minimum $(0\,;\,0)$, croît jusqu'au maximum $\left(2\,;\,\dfrac{4}{\mathrm{e}^2}\right)$, puis décroît vers $0$ en $+\infty$ (asymptote horizontale $y = 0$).
+\end{corrige}

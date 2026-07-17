@@ -1,0 +1,46 @@
+% META: {"id":"1SPE-EXPO-CO-020","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-020","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify, diff
+% x = symbols('x')
+% f = (exp(x) + exp(-x)) / 2
+% g = (exp(x) - exp(-x)) / 2
+% assert simplify(f.subs(x, -x) - f) == 0
+% assert simplify(f.subs(x, 0) - 1) == 0
+% assert simplify(diff(f, x) - g) == 0
+% assert simplify(f**2 - g**2 - 1) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-020}
+
+\textbf{Question 1.} Pour tout réel $x$ :
+\[
+f(-x) = \frac{\mathrm{e}^{-x} + \mathrm{e}^{-(-x)}}{2} = \frac{\mathrm{e}^{-x} + \mathrm{e}^x}{2} = f(x).
+\]
+La fonction $f$ est paire. Sa courbe représentative est symétrique par rapport à l'axe des ordonnées.
+
+\textbf{Question 2.} $f(0) = \dfrac{\mathrm{e}^0 + \mathrm{e}^0}{2} = \dfrac{1+1}{2} = 1$.
+
+\textbf{Question 3.} La fonction $f$ est dérivable sur $\mathbb{R}$ comme somme de fonctions exponentielles. On a :
+\[
+f'(x) = \frac{\mathrm{e}^x + (-1)\mathrm{e}^{-x}}{2} = \frac{\mathrm{e}^x - \mathrm{e}^{-x}}{2}.
+\]
+
+\textbf{Question 4.} On étudie le signe de $f'(x) = \dfrac{\mathrm{e}^x - \mathrm{e}^{-x}}{2}$.
+
+$f'(x) \geqslant 0 \iff \mathrm{e}^x \geqslant \mathrm{e}^{-x} \iff x \geqslant -x \iff x \geqslant 0$ (car $\exp$ est strictement croissante).
+
+Donc $f$ est décroissante sur $]-\infty\,;\,0]$ et croissante sur $[0\,;\,+\infty[$. Le minimum de $f$ est $f(0) = 1$.
+
+\textbf{Question 5.} On pose $g(x) = \dfrac{\mathrm{e}^x - \mathrm{e}^{-x}}{2}$ et on calcule :
+\begin{align*}
+[f(x)]^2 - [g(x)]^2 &= \frac{(\mathrm{e}^x + \mathrm{e}^{-x})^2 - (\mathrm{e}^x - \mathrm{e}^{-x})^2}{4}.
+\end{align*}
+On développe les carrés :
+\begin{align*}
+(\mathrm{e}^x + \mathrm{e}^{-x})^2 &= \mathrm{e}^{2x} + 2 + \mathrm{e}^{-2x}, \\
+(\mathrm{e}^x - \mathrm{e}^{-x})^2 &= \mathrm{e}^{2x} - 2 + \mathrm{e}^{-2x}.
+\end{align*}
+Donc :
+\[
+[f(x)]^2 - [g(x)]^2 = \frac{(\mathrm{e}^{2x} + 2 + \mathrm{e}^{-2x}) - (\mathrm{e}^{2x} - 2 + \mathrm{e}^{-2x})}{4} = \frac{4}{4} = 1.
+\]
+\end{corrige}

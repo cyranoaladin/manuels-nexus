@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-EXPO-EX-037","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C4"],"capacites_codes":["C4"],"methodes":["M3"],"parcours":2,"competences":["calculer","raisonner"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-037.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-037.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)/(x + 1)
+% fp = diff(f, x)
+% assert simplify(fp - x*exp(x)/(x + 1)**2) == 0
+% sols = solve(fp, x)
+% assert sols == [0]
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-037}{2}{10}
+Soit $f$ la fonction définie sur $]-1\,;\,+\infty[$ par $f(x) = \dfrac{\mathrm{e}^{x}}{x+1}$.
+\begin{enumerate}
+\item Calculer $f'(x)$ en utilisant la formule du quotient $\left(\dfrac{u}{v}\right)' = \dfrac{u'v - uv'}{v^2}$.
+\item Montrer que $f'(x) = \dfrac{x\,\mathrm{e}^{x}}{(x+1)^2}$.
+\item Étudier le signe de $f'(x)$ sur $]-1\,;\,+\infty[$ et dresser le tableau de variations de $f$.
+\end{enumerate}
+\end{exercice}

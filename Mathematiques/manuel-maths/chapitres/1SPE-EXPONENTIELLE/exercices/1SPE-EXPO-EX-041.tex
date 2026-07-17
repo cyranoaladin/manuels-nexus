@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-EX-041","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C5"],"methodes":["M4"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-041.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-041.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # e^x = e^5 => x = 5
+% assert solve(exp(x) - exp(5), x) == [5]
+% # e^(2x) = e^(-3) => 2x = -3 => x = -3/2
+% assert solve(exp(2*x) - exp(-3), x) == [Rational(-3, 2)]
+% # e^(x+1) = e^4 => x+1 = 4 => x = 3
+% assert solve(exp(x + 1) - exp(4), x) == [3]
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-041}{1}{5}
+Résoudre dans $\mathbb{R}$ les équations suivantes.
+\begin{enumerate}
+\item $\mathrm{e}^x = \mathrm{e}^5$
+\item $\mathrm{e}^{2x} = \mathrm{e}^{-3}$
+\item $\mathrm{e}^{x+1} = \mathrm{e}^4$
+\end{enumerate}
+\end{exercice}

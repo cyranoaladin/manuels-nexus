@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-EX-042","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C5"],"capacites_codes":["C5"],"methodes":["M4"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-042.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-042.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # e^x = 3 => x = ln(3)
+% assert solve(exp(x) - 3, x) == [log(3)]
+% # e^(2x) = 7 => x = ln(7)/2
+% assert solve(exp(2*x) - 7, x) == [log(7)/2]
+% # e^(-x) = 5 => x = -ln(5)
+% assert solve(exp(-x) - 5, x) == [-log(5)]
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-042}{1}{5}
+Résoudre dans $\mathbb{R}$ les équations suivantes. On donnera les solutions sous forme exacte.
+\begin{enumerate}
+\item $\mathrm{e}^x = 3$
+\item $\mathrm{e}^{2x} = 7$
+\item $\mathrm{e}^{-x} = 5$
+\end{enumerate}
+\end{exercice}

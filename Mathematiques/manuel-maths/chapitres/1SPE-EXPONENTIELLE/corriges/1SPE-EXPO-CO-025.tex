@@ -1,0 +1,27 @@
+% META: {"id":"1SPE-EXPO-CO-025","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-025","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% sol1 = solve(exp(x) - exp(3), x)
+% assert sol1 == [3]
+% sol2 = solve(2*x - 5, x)
+% assert sol2 == [Rational(5,2)]
+% sol3 = solve(-x - 2, x)
+% assert sol3 == [-2]
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-025}
+La fonction exponentielle est \textbf{strictement croissante} sur $\mathbb{R}$, donc pour tous réels $a$ et $b$ :
+\[\mathrm{e}^a > \mathrm{e}^b \iff a > b \quad;\quad \mathrm{e}^a \leqslant \mathrm{e}^b \iff a \leqslant b.\]
+
+\textbf{1.} $\mathrm{e}^x > \mathrm{e}^3 \iff x > 3$.
+
+L'ensemble des solutions est $\boxed{]3\,;\,+\infty[}$.
+
+\textbf{2.} $\mathrm{e}^{2x} \leqslant \mathrm{e}^5 \iff 2x \leqslant 5 \iff x \leqslant \dfrac{5}{2}$.
+
+L'ensemble des solutions est $\boxed{\left]-\infty\,;\,\dfrac{5}{2}\right]}$.
+
+\textbf{3.} $\mathrm{e}^{-x} \geqslant \mathrm{e}^2 \iff -x \geqslant 2 \iff x \leqslant -2$.
+
+L'ensemble des solutions est $\boxed{]-\infty\,;\,-2]}$.
+\end{corrige}

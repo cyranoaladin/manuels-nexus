@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-ME-003","chapitre":"1SPE-EXPONENTIELLE","type_objet":"methode","capacites_codes":["C4"],"status":"generated"}
+\begin{fichemethode}{M3}{Dériver une fonction de la forme $\mathrm{e}^{u(x)}$}
+\quandUtiliser{J'utilise cette méthode lorsque l'énoncé demande de calculer la dérivée d'une fonction de la forme $f(x) = \mathrm{e}^{u(x)}$, où $u$ est une fonction dérivable.}
+\pasApas{\begin{enumerate}
+  \item J'identifie la fonction $u(x)$ qui est à l'exposant de l'exponentielle.
+  \item Je calcule la dérivée $u'(x)$.
+  \item J'applique la formule : $\left(\mathrm{e}^{u(x)}\right)' = u'(x)\,\mathrm{e}^{u(x)}$.
+  \item Je simplifie l'expression obtenue si possible.
+\end{enumerate}}
+\exempleRedige{Calculons la dérivée de $f(x) = \mathrm{e}^{x^2 - 3x}$. \commentaireMarge{Étape 1 : identifier $u$.} On pose $u(x) = x^2 - 3x$. \commentaireMarge{Étape 2 : dériver $u$.} $u'(x) = 2x - 3$. \commentaireMarge{Étape 3 : appliquer la formule.} $f'(x) = u'(x)\,\mathrm{e}^{u(x)} = (2x-3)\,\mathrm{e}^{x^2 - 3x}$.
+\[f'(x) = (2x-3)\,\mathrm{e}^{x^2 - 3x}.\]}
+\pieges{\begin{itemize}
+  \item Écrire $\left(\mathrm{e}^{u}\right)' = \mathrm{e}^{u'}$ : on ne dérive pas l'exposant seul, on multiplie par $u'$.
+  \item Oublier le facteur $u'(x)$ devant l'exponentielle : $\left(\mathrm{e}^{u}\right)' \neq \mathrm{e}^{u}$ sauf si $u(x) = x$.
+  \item Se tromper dans le calcul de $u'(x)$, en particulier lorsque $u$ est un polynôme de degré 2 ou plus.
+\end{itemize}}
+\verifier{Je vérifie le cas particulier $u(x) = x$ : on doit retrouver $\left(\mathrm{e}^x\right)' = \mathrm{e}^x$, ce qui confirme la formule avec $u'(x) = 1$.}
+\sEntrainer{\refExos{M3}}
+\end{fichemethode}

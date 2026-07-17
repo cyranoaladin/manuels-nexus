@@ -1,0 +1,42 @@
+% META: {"id":"1SPE-EXPO-CO-006","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-006","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% f0 = f.subs(x, 0)
+% fp0 = f.diff(x).subs(x, 0)
+% tangent = f0 + fp0 * x
+% assert tangent == 1 + x, "tangent y = x + 1"
+% assert f0 == 1
+% assert fp0 == 1
+% # tangent passes through origin: y(0) = 1, not 0. Actually T at x=-1: y=0
+% # T passes through (-1, 0), not origin. Let's check T(0)=1
+% assert tangent.subs(x, 0) == 1, "T(0) = 1"
+% # e^x >= x+1 for all x
+% h = exp(x) - (x + 1)
+% assert h.subs(x, 0) == 0, "h(0) = 0"
+% assert h.diff(x).subs(x, 0) == 0, "h'(0) = 0"
+% assert h.diff(x, 2).subs(x, 0) == 1, "h''(0) = 1 > 0"
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-006}
+\begin{enumerate}
+\item Par définition de la fonction exponentielle :
+\[\exp(0) = 1 \quad \text{et} \quad \exp'(0) = \exp(0) = 1.\]
+
+\item L'équation de la tangente à $\mathcal{C}$ au point d'abscisse $a = 0$ est :
+\[y = f(0) + f'(0)(x - 0) = 1 + 1 \cdot x.\]
+Donc l'équation de $T$ est $y = x + 1$.
+
+\item Pour $x = 0$ : $y = 0 + 1 = 1 \neq 0$. La tangente ne passe \textbf{pas} par l'origine $O(0 ; 0)$. Elle passe par le point $(0 ; 1)$, qui est le point de tangence.
+
+\emph{Remarque :} la tangente coupe l'axe des abscisses en $x = -1$ (car $x + 1 = 0 \Leftrightarrow x = -1$).
+
+\item Posons $h(x) = \mathrm{e}^x - (x + 1)$. On a $h(0) = 1 - 1 = 0$ et $h'(x) = \mathrm{e}^x - 1$.
+
+$h'(0) = 0$ et $h''(x) = \mathrm{e}^x > 0$ pour tout réel $x$.
+
+Donc $h'$ est strictement croissante. Comme $h'(0) = 0$, on a $h'(x) < 0$ pour $x < 0$ et $h'(x) > 0$ pour $x > 0$. Ainsi $h$ admet un minimum en $x = 0$ avec $h(0) = 0$.
+
+Donc $h(x) \geqslant 0$ pour tout réel $x$, c'est-à-dire $\mathrm{e}^x \geqslant x + 1$. La courbe $\mathcal{C}$ est \textbf{au-dessus} de la tangente $T$.
+\end{enumerate}
+\end{corrige}

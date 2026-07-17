@@ -1,0 +1,41 @@
+% META: {"id":"1SPE-EXPO-CO-050","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-050","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% g = exp(x) - x
+% gp = diff(g, x)
+% assert gp == exp(x) - 1
+% assert solve(gp, x) == [0]
+% assert g.subs(x, 0) == 1
+% assert solve(exp(x) - x, x) == []
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-050}
+\begin{enumerate}
+\item On dérive $g(x) = \mathrm{e}^x - x$ :
+\[g'(x) = \mathrm{e}^x - 1.\]
+
+\item $g'(x) = 0 \iff \mathrm{e}^x = 1 \iff x = 0$.
+
+Signe de $g'(x)$ :
+\begin{itemize}
+\item Si $x < 0$, alors $\mathrm{e}^x < 1$, donc $g'(x) < 0$.
+\item Si $x > 0$, alors $\mathrm{e}^x > 1$, donc $g'(x) > 0$.
+\end{itemize}
+
+\item $g$ est strictement décroissante sur $]-\infty\,;0]$ et strictement croissante sur $[0\,;+\infty[$.
+
+Le minimum de $g$ est atteint en $x = 0$ :
+\[g(0) = \mathrm{e}^0 - 0 = 1.\]
+
+\item D'après le tableau de variations, $g$ admet un minimum global égal à $1 > 0$.
+
+Donc pour tout réel $x$ :
+\[g(x) \geqslant 1 > 0 \implies \mathrm{e}^x - x > 0 \implies \boxed{\mathrm{e}^x > x}.\]
+
+\item L'équation $\mathrm{e}^x = x$ s'écrit $\mathrm{e}^x - x = 0$, c'est-à-dire $g(x) = 0$.
+
+Or on a montré que $g(x) \geqslant 1 > 0$ pour tout réel $x$, donc $g(x) = 0$ n'a \textbf{aucune solution}.
+
+L'équation $\mathrm{e}^x = x$ n'a aucune solution dans $\mathbb{R}$.
+\end{enumerate}
+\end{corrige}

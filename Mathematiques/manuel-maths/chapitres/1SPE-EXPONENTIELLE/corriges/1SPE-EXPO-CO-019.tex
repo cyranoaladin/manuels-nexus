@@ -1,0 +1,35 @@
+% META: {"id":"1SPE-EXPO-CO-019","chapitre":"1SPE-EXPONENTIELLE","type_objet":"corrige","exercice_id":"1SPE-EXPO-EX-019","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify
+% a = symbols('a')
+% for n in range(1, 6):
+%     assert simplify(exp(n*a) - exp(a)**n) == 0
+% assert simplify(exp(-3*a) - 1/exp(a)**3) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-EXPO-EX-019}
+On note $\mathcal{P}(n)$ la propriété : « $\exp(na) = \bigl[\exp(a)\bigr]^n$ ».
+
+\textbf{Question 1 — Initialisation.} Pour $n = 1$ : $\exp(1 \times a) = \exp(a) = \bigl[\exp(a)\bigr]^1$. La propriété $\mathcal{P}(1)$ est vraie.
+
+\textbf{Question 2 — Hérédité.} Soit $k \geqslant 1$ un entier tel que $\mathcal{P}(k)$ est vraie, c'est-à-dire $\exp(ka) = \bigl[\exp(a)\bigr]^k$.
+
+Montrons $\mathcal{P}(k+1)$ :
+\begin{align*}
+\exp\bigl((k+1)a\bigr) &= \exp(ka + a) \\
+  &= \exp(ka) \times \exp(a) \quad \text{(propriété $\exp(u+v) = \exp(u)\exp(v)$)} \\
+  &= \bigl[\exp(a)\bigr]^k \times \exp(a) \quad \text{(hypothèse de récurrence)} \\
+  &= \bigl[\exp(a)\bigr]^{k+1}.
+\end{align*}
+La propriété $\mathcal{P}(k+1)$ est donc vraie.
+
+\textbf{Question 3 — Conclusion.} Par le principe de récurrence, la propriété $\mathcal{P}(n)$ est vraie pour tout entier naturel $n \geqslant 1$ :
+\[
+\forall\, n \in \mathbb{N}^*,\quad \forall\, a \in \mathbb{R},\quad \exp(na) = \bigl[\exp(a)\bigr]^n.
+\]
+
+\textbf{Question 4.} Pour tout entier $n \geqslant 1$ et tout réel $a$ :
+\[
+\exp(-na) = \frac{1}{\exp(na)} = \frac{1}{\bigl[\exp(a)\bigr]^n}.
+\]
+La première égalité vient de $\exp(-u) = \dfrac{1}{\exp(u)}$ et la seconde de la propriété démontrée.
+\end{corrige}

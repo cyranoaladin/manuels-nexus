@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-EXPO-EX-017","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C2"],"capacites_codes":["C2"],"methodes":["M1"],"parcours":2,"competences":["calculer"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-017.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-017.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, simplify, expand, log, Rational
+% x = symbols('x')
+% A = (exp(2*x) - 1)*(exp(2*x) + 1)
+% assert simplify(A - (exp(4*x) - 1)) == 0
+% val = (exp(3*log(2)) + exp(-3*log(2)))
+% assert simplify(val - (8 + Rational(1,8))) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-017}{2}{10}
+\begin{enumerate}
+  \item Développer et simplifier $A = \left(\mathrm{e}^{2x} - 1\right)\left(\mathrm{e}^{2x} + 1\right)$.
+  \item Développer et simplifier $B = \left(\mathrm{e}^x + \mathrm{e}^{-x}\right)^2$.
+  \item On pose $x = \ln 2$. Calculer la valeur exacte de $\mathrm{e}^{3x} + \mathrm{e}^{-3x}$.
+  \item Simplifier $C = \dfrac{\mathrm{e}^{3x} \times \mathrm{e}^{-x}}{\left(\mathrm{e}^x\right)^2}$.
+\end{enumerate}
+\end{exercice}

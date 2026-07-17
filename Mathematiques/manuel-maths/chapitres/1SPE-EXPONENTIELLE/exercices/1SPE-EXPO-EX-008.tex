@@ -1,0 +1,29 @@
+% META: {"id":"1SPE-EXPO-EX-008","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["raisonner"],"duree_min":10,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-008.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-008.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% # exp is strictly increasing (exp' = exp > 0)
+% assert f.diff(x) == f, "exp' = exp"
+% # exp(0) = 1, so for x > 0, exp(x) > exp(0) = 1
+% assert f.subs(x, 0) == 1
+% # for x > 0, exp(x) > 1
+% assert exp(1) > 1
+% assert exp(Rational(1,2)) > 1
+% # for x < 0, 0 < exp(x) < 1
+% assert exp(-1) < 1
+% assert exp(-1) > 0
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-008}{2}{10}
+On utilise la définition de la fonction exponentielle ($\exp' = \exp$, $\exp(0) = 1$, $\exp(x) > 0$).
+\begin{enumerate}
+\item Justifier que la fonction exponentielle est strictement croissante sur $\mathbb{R}$.
+\item En utilisant la croissance et la valeur $\exp(0) = 1$, montrer que :
+  \begin{enumerate}
+  \item pour tout $x > 0$, $\mathrm{e}^x > 1$ ;
+  \item pour tout $x < 0$, $\mathrm{e}^x < 1$.
+  \end{enumerate}
+\item Montrer que pour tout $x < 0$, on a $0 < \mathrm{e}^x < 1$.
+\item Résumer les résultats dans un tableau de signes de $\mathrm{e}^x - 1$ sur $\mathbb{R}$.
+\end{enumerate}
+\end{exercice}

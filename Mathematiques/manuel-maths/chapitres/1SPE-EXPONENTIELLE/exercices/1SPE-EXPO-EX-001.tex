@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-EXPO-EX-001","chapitre":"1SPE-EXPONENTIELLE","type_objet":"exercice","capacites":["1SPE-EXPONENTIELLE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-EXPONENTIELLE/exercices/1SPE-EXPO-EX-001.tex","corrige_tex":"chapitres/1SPE-EXPONENTIELLE/corriges/1SPE-EXPO-CO-001.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% assert f.diff(x) == f, "exp'(x) = exp(x)"
+% assert f.subs(x, 0) == 1, "exp(0) = 1"
+% assert exp(1) == E, "exp(1) = e"
+% END-VERIFY
+\begin{exercice}{1SPE-EXPO-EX-001}{1}{5}
+On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = \mathrm{e}^x$.
+\begin{enumerate}
+\item Calculer $f'(x)$. Que constate-t-on ?
+\item Vérifier que $f'(x) = f(x)$ pour tout réel $x$.
+\item Calculer $f(0)$.
+\item En déduire que $f$ est l'unique fonction vérifiant $f' = f$ et $f(0) = 1$.
+\item Donner la valeur de $\exp(1)$. Comment note-t-on ce nombre ?
+\end{enumerate}
+\end{exercice}
