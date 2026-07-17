@@ -25,12 +25,22 @@ from common import ROOT, write_json
 BLOCK = re.compile(r"% BEGIN-VERIFY\n(.*?)% END-VERIFY", re.S)
 
 
+def extract_scripts(tex: str) -> list[str]:
+    """Extract ALL BEGIN-VERIFY blocks from a .tex file."""
+    matches = BLOCK.findall(tex)
+    scripts = []
+    for body in matches:
+        lines = [re.sub(r"^%\s?", "", l) for l in body.splitlines()]
+        scripts.append("\n".join(lines))
+    return scripts
+
+
 def extract_script(tex: str) -> str | None:
-    m = BLOCK.search(tex)
-    if not m:
+    """Legacy: return a single combined script from all blocks."""
+    scripts = extract_scripts(tex)
+    if not scripts:
         return None
-    lines = [re.sub(r"^%\s?", "", l) for l in m.group(1).splitlines()]
-    return "\n".join(lines)
+    return "\n".join(scripts)
 
 
 def run_sandbox(script: str, timeout: int = 30) -> tuple[str, str]:
@@ -50,9 +60,13 @@ def run_sandbox(script: str, timeout: int = 30) -> tuple[str, str]:
 def verify_chapter(chap: str) -> int:
     chap_dir = ROOT / "chapitres" / chap
     failures = 0
-    for tex in sorted(list((chap_dir / "exercices").glob("*.tex")) +
-                      list((chap_dir / "corriges").glob("*.tex")) +
-                      list((chap_dir / "evaluations").glob("*.tex"))):
+    tex_dirs = ["exercices", "corriges", "evaluations", "remediation", "cours", "qcm"]
+    all_tex = []
+    for d in tex_dirs:
+        sub = chap_dir / d
+        if sub.is_dir():
+            all_tex.extend(sub.glob("*.tex"))
+    for tex in sorted(all_tex):
         script = extract_script(tex.read_text(encoding="utf-8"))
         if script is None:
             verdict, details = "manual_review", "aucun bloc VERIFY : revue humaine requise"

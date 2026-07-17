@@ -10,7 +10,9 @@ Date : 2026-07-16.
 
 ## SymPy
 
-146 blocs VERIFY, 146 passed, 0 failed.
+114 fichiers vérifiés OK, 0 FAIL, 26 REVIEW (CDP/corrigés éval sans bloc calculable).
+146 blocs BEGIN-VERIFY individuels (50 EX + 50 CO + 8 EV + 30 remédiation + 8 cours).
+Script `verify_sympy.py` étendu pour couvrir remediation/, cours/, qcm/ (anciennement limité à exercices/corriges/evaluations).
 
 ## Check-list qualité (docs/01 Partie 8)
 
@@ -59,6 +61,37 @@ Une erreur détectée et corrigée dans EX-3 (numérateur h').
 
 ## Cohérence I.2 — fichiers modifiés par sed
 
-16 fichiers vérifiés : 16/16 PASS (voir tableau dans le commit).
+| Fichier | Verdict | Notes |
+|---------|---------|-------|
+| FR-R1.tex | PASS | 3 ex : taux de variation, nombre dérivé, pentes |
+| FR-R2.tex | PASS | 3 ex : équations de tangentes |
+| FR-R3.tex | PASS | 3 ex : calcul littéral, factorisations |
+| FR-R4.tex | PASS | 3 ex : discriminant, racines, signes |
+| FR-R5.tex | PASS | 3 ex : sens de variation |
+| RE-C1.tex | PASS | 3 ex : dérivées de référence |
+| RE-C2.tex | PASS | 3 ex : somme, produit, quotient |
+| RE-C3.tex | PASS | 3 ex : signe dérivée, variations |
+| RE-C4.tex | PASS | 3 ex ; EX3 numérateur `x²-2x-4` conforme VERIFY et texte |
+| RE-C5.tex | PASS | 3 ex ; EX3 `x=5/3`, `V=2000/27` conforme VERIFY et texte |
+| EV-A.tex | PASS | 4 ex : tous blocs VERIFY concordants |
+| EV-A-corrige.tex | PASS | Numérateur EX3 corrigé `x²-2x-2` (LOT-6 §5) |
+| EV-B.tex | PASS | 4 ex reparamétrés, VERIFY concordants |
+| EV-B-corrige.tex | PASS | Valeurs concordantes |
+| 07_td_contextualise.tex | PASS | Profit P(x), 4 parties, VERIFY OK |
+| 07_td_fil_rouge.tex | PASS | Boîte cylindrique S(r), 4 parties, VERIFY OK |
+
+16 fichiers vérifiés : **16/16 PASS**.
+
+## CI GitHub Actions
+
+| Commit | Run | Résultat | Cause échec |
+|--------|-----|----------|-------------|
+| eea9b2c (LOT-5-6-7) | 29541576600 | FAILURE | Schémas : `"prouver"`/`"critiquer"` hors enum |
+| 0960188 (EXPO LOT-0) | 29541703587 | FAILURE | Idem (chapitres pas modifiés, même base) |
+| d1cb480 (intégrité) | 29542267235 | FAILURE | Idem |
+| (ce commit) | — | ATTENDUE VERTE | 4 META corrigés, test local 540/540 PASS |
+
+Cause racine : EX-009, EX-010, EX-019, EX-020 utilisaient `"prouver"` ou `"critiquer"` dans `competences[]`, hors de l'enum du schéma BO (`["chercher","modeliser","representer","calculer","raisonner","communiquer"]`). Corrigé : remplacé par `"raisonner"` (subsumant prouver/critiquer en maths).
 
 Tag : `chap/1SPE-DERIVATION-GLOBAL-v1`.
+Tags remote (4/4) : SUITES, SECOND-DEGRE, DERIVATION-LOCAL, DERIVATION-GLOBAL.
