@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-PRODSCAL-CO-036","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-036","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Projection of v on u
+% # proj = (u.v / ||u||^2) * u
+% ps = 3*1 + (-1)*2  # = 1
+% assert ps == 1
+% u_sq = 1 + 4  # = 5
+% assert u_sq == 5
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-036}
+\begin{enumerate}
+\item $\vec{u} \cdot \vec{v} = 3 - 2 = 1$ et $\|\vec{u}\|^2 = 5$.
+
+$\text{proj}_{\vec{u}}\vec{v} = \dfrac{1}{5}\begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 1/5 \\ 2/5 \end{pmatrix}$.
+
+\item $\vec{v} - \text{proj} = \begin{pmatrix} 3-1/5 \\ -1-2/5 \end{pmatrix} = \begin{pmatrix} 14/5 \\ -7/5 \end{pmatrix}$.
+
+$\begin{pmatrix} 14/5 \\ -7/5 \end{pmatrix} \cdot \begin{pmatrix} 1 \\ 2 \end{pmatrix} = \dfrac{14}{5} - \dfrac{14}{5} = 0$. \checkmark
+\end{enumerate}
+\end{corrige}

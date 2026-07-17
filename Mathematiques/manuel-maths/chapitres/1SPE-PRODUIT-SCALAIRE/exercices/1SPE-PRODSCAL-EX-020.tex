@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-PRODSCAL-EX-020","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":3,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-020.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-020.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # ||u||=5, ||v||=3, ||u-v||=7
+% # ||u-v||^2 = ||u||^2 - 2u.v + ||v||^2
+% # 49 = 25 - 2*u.v + 9 => u.v = (25+9-49)/2 = -15/2
+% assert Rational(25+9-49, 2) == Rational(-15, 2)
+% # cos(theta) = -15/2 / (5*3) = -15/30 = -1/2
+% assert Rational(-15, 30) == Rational(-1, 2)
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-020}{3}{10}
+Sachant que $\|\vec{u}\| = 5$, $\|\vec{v}\| = 3$ et $\|\vec{u} - \vec{v}\| = 7$, calculer :
+\begin{enumerate}
+  \item $\vec{u} \cdot \vec{v}$.
+  \item L'angle $\theta$ entre $\vec{u}$ et $\vec{v}$.
+  \item $\|\vec{u} + \vec{v}\|$.
+\end{enumerate}
+\end{exercice}

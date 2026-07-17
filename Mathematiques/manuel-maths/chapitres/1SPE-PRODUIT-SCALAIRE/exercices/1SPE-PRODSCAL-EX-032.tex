@@ -1,0 +1,15 @@
+% META: {"id":"1SPE-PRODSCAL-EX-032","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-032.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-032.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # A(0,0), B(6,0), C(2,4): AH perp BC
+% # BC = (-4,4), H on line BC: H = B + t*BC = (6-4t, 4t)
+% # AH.BC = 0: (6-4t)*(-4) + 4t*4 = 0 => -24+16t+16t=0 => 32t=24 => t=3/4
+% t = Rational(3, 4)
+% Hx = 6 - 4*t
+% Hy = 4*t
+% assert Hx == 3
+% assert Hy == 3
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-032}{1}{8}
+Soit $A(0; 0)$, $B(6; 0)$, $C(2; 4)$. Determiner les coordonnees du pied $H$ de la hauteur issue de $A$ dans le triangle $ABC$.
+\end{exercice}

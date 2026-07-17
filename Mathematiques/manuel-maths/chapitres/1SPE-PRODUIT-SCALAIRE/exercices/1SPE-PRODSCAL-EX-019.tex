@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-PRODSCAL-EX-019","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":3,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-019.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-019.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # ||u+v||^2 + ||u-v||^2 = 2(||u||^2 + ||v||^2)
+% x1, y1, x2, y2 = symbols('x1 y1 x2 y2', real=True)
+% upv = (x1+x2)**2 + (y1+y2)**2
+% umv = (x1-x2)**2 + (y1-y2)**2
+% rhs = 2*((x1**2+y1**2) + (x2**2+y2**2))
+% assert expand(upv + umv - rhs) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-019}{3}{10}
+\textbf{Identite du parallelogramme.}
+Demontrer que pour tous vecteurs $\vec{u}$ et $\vec{v}$ :
+\[
+\|\vec{u} + \vec{v}\|^2 + \|\vec{u} - \vec{v}\|^2 = 2\left(\|\vec{u}\|^2 + \|\vec{v}\|^2\right).
+\]
+\textit{Interpretation geometrique : dans un parallelogramme, la somme des carres des diagonales est egale a la somme des carres des quatre cotes.}
+\end{exercice}

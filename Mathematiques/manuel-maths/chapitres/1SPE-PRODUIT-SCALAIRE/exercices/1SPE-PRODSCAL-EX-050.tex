@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-PRODSCAL-EX-050","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":3,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-050.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-050.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Triangle with sides 5, 6, 7: all angles
+% cos_A = Rational(36+49-25, 2*6*7)
+% assert cos_A == Rational(60, 84) == Rational(5, 7)
+% cos_B = Rational(25+49-36, 2*5*7)
+% assert cos_B == Rational(38, 70) == Rational(19, 35)
+% cos_C = Rational(25+36-49, 2*5*6)
+% assert cos_C == Rational(12, 60) == Rational(1, 5)
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-050}{3}{12}
+Un terrain triangulaire a pour cotes $a = 5$ m, $b = 6$ m et $c = 7$ m.
+\begin{enumerate}
+  \item Calculer les trois angles du triangle.
+  \item En deduire l'aire du terrain par la formule $\mathcal{A} = \frac{1}{2}ab\sin\widehat{C}$.
+  \item Calculer la longueur de la mediane issue du sommet oppose au cote de longueur $7$.
+\end{enumerate}
+\end{exercice}

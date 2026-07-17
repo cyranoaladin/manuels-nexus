@@ -1,0 +1,34 @@
+% META: {"id": "1SPE-PRODUIT-SCALAIRE-FR-R2", "chapitre": "1SPE-PRODUIT-SCALAIRE", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R2 : Norme d'un vecteur
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Norme d'un vecteur}
+
+La \textbf{norme} d'un vecteur $\vec{u}\begin{pmatrix} x \\ y \end{pmatrix}$ est $\|\vec{u}\| = \sqrt{x^2 + y^2}$.
+
+La \textbf{distance} entre $A(x_A; y_A)$ et $B(x_B; y_B)$ est $AB = \|\overrightarrow{AB}\| = \sqrt{(x_B-x_A)^2 + (y_B-y_A)^2}$.
+
+\begin{exercice}{1SPE-PRODSCAL-FR-R2-EX1}{1}{6}
+Calculer la norme de chaque vecteur.
+\begin{enumerate}
+  \item $\vec{u}\begin{pmatrix} 3 \\ 4 \end{pmatrix}$
+  \item $\vec{v}\begin{pmatrix} -1 \\ 2 \end{pmatrix}$
+  \item $\vec{w}\begin{pmatrix} 5 \\ 0 \end{pmatrix}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert sqrt(9+16) == 5
+% assert sqrt(1+4) == sqrt(5)
+% assert sqrt(25) == 5
+% END-VERIFY
+
+\begin{corrige}{1SPE-PRODSCAL-FR-R2-EX1}
+\textbf{1.} $\|\vec{u}\| = \sqrt{9+16} = 5$.
+\textbf{2.} $\|\vec{v}\| = \sqrt{1+4} = \sqrt{5}$.
+\textbf{3.} $\|\vec{w}\| = \sqrt{25} = 5$.
+\end{corrige}
+

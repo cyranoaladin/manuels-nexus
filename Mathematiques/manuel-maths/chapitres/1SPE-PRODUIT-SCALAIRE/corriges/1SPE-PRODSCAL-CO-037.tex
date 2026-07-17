@@ -1,0 +1,18 @@
+% META: {"id":"1SPE-PRODSCAL-CO-037","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-037","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # A(0,0), B(4,0), C(4,3): right angle at B
+% # Height from C to AB: foot is (4,0) = B
+% assert 4*0 + 0*3 == 0  # AB.BC = 0 already
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-037}
+\begin{enumerate}
+\item $\overrightarrow{BA}\begin{pmatrix} -4 \\ 0 \end{pmatrix}$, $\overrightarrow{BC}\begin{pmatrix} 0 \\ 3 \end{pmatrix}$.
+
+$\overrightarrow{BA} \cdot \overrightarrow{BC} = 0$. Le triangle est rectangle en $B$.
+
+\item $\mathcal{A} = \dfrac{1}{2} \times BA \times BC = \dfrac{1}{2} \times 4 \times 3 = 6$.
+
+\item La hauteur issue de $C$ relative a $[AB]$ est la perpendiculaire a $(AB)$ passant par $C$. Comme $(AB)$ est l'axe des abscisses, le pied est $H(4; 0) = B$.
+\end{enumerate}
+\end{corrige}

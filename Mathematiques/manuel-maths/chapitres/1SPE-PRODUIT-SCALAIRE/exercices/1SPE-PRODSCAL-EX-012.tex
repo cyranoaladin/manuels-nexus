@@ -1,0 +1,15 @@
+% META: {"id":"1SPE-PRODSCAL-EX-012","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C2"],"capacites_codes":["C2"],"methodes":["M2"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-012.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-012.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x1, y1, x2, y2 = symbols('x1 y1 x2 y2', real=True)
+% lhs = (x1+x2)**2 + (y1+y2)**2
+% rhs = x1**2+y1**2 + 2*(x1*x2+y1*y2) + x2**2+y2**2
+% assert expand(lhs - rhs) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-012}{1}{6}
+Demontrer que pour tous vecteurs $\vec{u}$ et $\vec{v}$ :
+\[
+\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2.
+\]
+\textit{Indication : developper $(\vec{u} + \vec{v}) \cdot (\vec{u} + \vec{v})$ par bilinearite.}
+\end{exercice}

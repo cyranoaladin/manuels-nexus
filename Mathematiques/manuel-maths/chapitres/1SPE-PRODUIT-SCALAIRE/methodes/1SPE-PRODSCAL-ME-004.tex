@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-PRODSCAL-ME-004","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"methode","capacites_codes":["C4"],"status":"generated"}
+\begin{fichemethode}{M4}{Resoudre un probleme geometrique avec le produit scalaire}
+\quandUtiliser{J'utilise cette methode lorsque l'enonce demande de trouver une mediatrice, une hauteur, une projection ou une aire a l'aide du produit scalaire.}
+\pasApas{\begin{enumerate}
+  \item \textbf{Mediatrice :} $M$ est sur la mediatrice de $[AB]$ ssi $\overrightarrow{IM} \cdot \overrightarrow{AB} = 0$ (avec $I$ milieu de $[AB]$), ou de maniere equivalente $MA = MB$.
+  \item \textbf{Hauteur :} le pied $H$ de la hauteur issue de $A$ dans le triangle $ABC$ verifie $\overrightarrow{AH} \cdot \overrightarrow{BC} = 0$.
+  \item \textbf{Aire :} $\mathcal{A} = \frac{1}{2} \|\vec{u}\| \|\vec{v}\| |\sin(\vec{u}, \vec{v})|$ avec $\sin\theta = \sqrt{1 - \cos^2\theta}$.
+\end{enumerate}}
+\exempleRedige{Soit $A(1; 3)$ et $B(5; 1)$. Determiner l'equation de la mediatrice de $[AB]$.
+\commentaireMarge{Etape 1 : milieu $I$ et vecteur directeur.}
+$I = (3; 2)$ et $\overrightarrow{AB}\begin{pmatrix} 4 \\ -2 \end{pmatrix}$.
+$M(x; y)$ est sur la mediatrice ssi $\overrightarrow{IM} \cdot \overrightarrow{AB} = 0$ :
+$(x - 3) \times 4 + (y - 2) \times (-2) = 0$, soit $4x - 2y - 8 = 0$, c'est-a-dire $2x - y = 4$.}
+\pieges{\begin{itemize}
+  \item Confondre mediatrice et mediane.
+  \item Oublier le facteur $\frac{1}{2}$ dans la formule de l'aire.
+  \item Ne pas savoir passer de $\cos$ a $\sin$ pour l'aire.
+\end{itemize}}
+\verifier{Pour la mediatrice, je verifie que le milieu $I$ satisfait l'equation, et que $A$ et $B$ ne la satisfont pas (sauf si $A = B$).}
+\sEntrainer{\refExos{M4}}
+\end{fichemethode}

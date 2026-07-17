@@ -1,0 +1,13 @@
+% META: {"id":"1SPE-PRODSCAL-EX-047","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C5"],"capacites_codes":["C5"],"methodes":["M5"],"parcours":2,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-047.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-047.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Demo Al-Kashi
+% b, c, A = symbols('b c A', positive=True)
+% a_sq = b**2 + c**2 - 2*b*c*cos(A)
+% assert simplify(a_sq.subs(A, pi/2) - b**2 - c**2) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-047}{2}{10}
+\textbf{Demonstration de la formule d'Al-Kashi.}
+
+Dans un triangle $ABC$, demontrer que $BC^2 = AB^2 + AC^2 - 2 \times AB \times AC \times \cos\widehat{BAC}$ en utilisant le produit scalaire.
+\end{exercice}

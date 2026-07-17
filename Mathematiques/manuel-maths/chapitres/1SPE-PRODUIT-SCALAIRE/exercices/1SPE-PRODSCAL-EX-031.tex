@@ -1,0 +1,12 @@
+% META: {"id":"1SPE-PRODSCAL-EX-031","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":1,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-031.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-031.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # A(1,3), B(5,1): I=(3,2), AB=(4,-2)
+% # M(x,y) on bisector: (x-3)*4 + (y-2)*(-2) = 0 => 4x-2y-8=0 => 2x-y=4
+% x, y = symbols('x y')
+% eq = 4*(x-3) + (-2)*(y-2)
+% assert expand(eq - (4*x - 2*y - 8)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-031}{1}{6}
+Soient $A(1; 3)$ et $B(5; 1)$. Determiner l'equation de la mediatrice de $[AB]$.
+\end{exercice}

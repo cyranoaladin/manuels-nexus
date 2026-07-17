@@ -1,0 +1,112 @@
+% META: {"id":"1SPE-PRODSCAL-COURS-C1","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"cours","capacites_codes":["C1"],"status":"generated"}
+
+\section{Produit scalaire de deux vecteurs}
+
+\margeAppui{Le produit scalaire est une operation qui associe a deux vecteurs un nombre reel. Il permet de traduire algebriquement des notions geometriques comme l'angle, l'orthogonalite et la projection.}
+
+\definition[Produit scalaire (definition geometrique)]{
+Soient $\vec{u}$ et $\vec{v}$ deux vecteurs du plan. Le \textbf{produit scalaire} de $\vec{u}$ et $\vec{v}$ est le nombre reel :
+\[
+\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\| \times \cos(\vec{u}, \vec{v})
+\]
+ou $(\vec{u}, \vec{v})$ designe l'angle oriente des vecteurs $\vec{u}$ et $\vec{v}$.
+
+Si l'un des deux vecteurs est nul, on pose $\vec{u} \cdot \vec{v} = 0$.
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% u_norm, v_norm, theta = symbols('u_norm v_norm theta', positive=True)
+% ps = u_norm * v_norm * cos(theta)
+% # ps is a real number
+% assert ps.is_real or ps.is_complex
+% # If theta = 0: ps = ||u||*||v||
+% assert simplify(ps.subs(theta, 0) - u_norm * v_norm) == 0
+% # If theta = pi/2: ps = 0
+% assert simplify(ps.subs(theta, pi/2)) == 0
+% END-VERIFY
+
+\propriete[Cas particuliers]{
+\begin{itemize}
+  \item Si $\vec{u}$ et $\vec{v}$ sont colineaires de meme sens : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\|$.
+  \item Si $\vec{u}$ et $\vec{v}$ sont colineaires de sens contraire : $\vec{u} \cdot \vec{v} = -\|\vec{u}\| \times \|\vec{v}\|$.
+  \item Si $\vec{u}$ et $\vec{v}$ sont orthogonaux : $\vec{u} \cdot \vec{v} = 0$.
+  \item $\vec{u} \cdot \vec{u} = \|\vec{u}\|^2$.
+\end{itemize}
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% u_norm, v_norm = symbols('u_norm v_norm', positive=True)
+% # Same direction: angle = 0
+% assert simplify(u_norm * v_norm * cos(0) - u_norm * v_norm) == 0
+% # Opposite direction: angle = pi
+% assert simplify(u_norm * v_norm * cos(pi) + u_norm * v_norm) == 0
+% # Orthogonal: angle = pi/2
+% assert simplify(u_norm * v_norm * cos(pi/2)) == 0
+% # u.u = ||u||^2
+% assert simplify(u_norm * u_norm * cos(0) - u_norm**2) == 0
+% END-VERIFY
+
+\definition[Produit scalaire par projection]{
+Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls. Si $H$ est le projete orthogonal de l'extremite de $\vec{v}$ sur la droite portant $\vec{u}$, alors :
+\[
+\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \overline{OH}
+\]
+ou $\overline{OH}$ est la mesure algebrique de la projection.
+}
+
+\definition[Expression analytique]{
+Dans un repere orthonorme $(O; \vec{i}, \vec{j})$, si $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix}$, alors :
+\[
+\vec{u} \cdot \vec{v} = x_1 x_2 + y_1 y_2.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x1, y1, x2, y2 = symbols('x1 y1 x2 y2', real=True)
+% ps = x1*x2 + y1*y2
+% # Example: u=(3,4), v=(1,2) => u.v = 3+8 = 11
+% assert ps.subs([(x1, 3), (y1, 4), (x2, 1), (y2, 2)]) == 11
+% # Example: u=(1,0), v=(0,1) => u.v = 0 (orthogonal)
+% assert ps.subs([(x1, 1), (y1, 0), (x2, 0), (y2, 1)]) == 0
+% END-VERIFY
+
+\exemple{
+Calculer le produit scalaire de $\vec{u}\begin{pmatrix} 3 \\ -1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 2 \\ 5 \end{pmatrix}$.
+
+$\vec{u} \cdot \vec{v} = 3 \times 2 + (-1) \times 5 = 6 - 5 = 1.$
+}
+
+\exemple{
+Deux vecteurs $\vec{u}$ et $\vec{v}$ verifient $\|\vec{u}\| = 4$, $\|\vec{v}\| = 3$ et l'angle entre eux est $\dfrac{\pi}{3}$.
+
+$\vec{u} \cdot \vec{v} = 4 \times 3 \times \cos\!\left(\dfrac{\pi}{3}\right) = 12 \times \dfrac{1}{2} = 6.$
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert 3*2 + (-1)*5 == 1
+% assert simplify(4*3*cos(pi/3) - 6) == 0
+% END-VERIFY
+
+\erreurFrequente{
+Oublier le cosinus dans la definition geometrique et ecrire $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\|$. Le cosinus de l'angle est indispensable.
+}
+
+\erreurFrequente{
+Utiliser la formule analytique $x_1 x_2 + y_1 y_2$ dans un repere non orthonorme. Cette formule n'est valable que dans un repere \textbf{orthonorme}.
+}
+
+\erreurFrequente{
+Croire que le produit scalaire est un vecteur. Le produit scalaire est un \textbf{nombre reel}.
+}
+
+\contreexemple{
+Dans un repere non orthonorme, $\vec{i} \cdot \vec{j} \neq 0$ en general. On ne peut alors pas utiliser la formule $x_1 x_2 + y_1 y_2$.
+}
+
+\approfondissement{
+Le produit scalaire se generalise en dimension $n$ : pour $\vec{u} = (x_1, \ldots, x_n)$ et $\vec{v} = (y_1, \ldots, y_n)$, on pose $\vec{u} \cdot \vec{v} = \sum_{k=1}^{n} x_k y_k$. Cette notion est fondamentale en algebre lineaire et en physique.
+}

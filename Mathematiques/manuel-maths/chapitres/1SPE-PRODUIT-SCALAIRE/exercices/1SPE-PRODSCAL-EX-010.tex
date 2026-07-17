@@ -1,0 +1,20 @@
+% META: {"id":"1SPE-PRODSCAL-EX-010","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":3,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-010.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-010.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u = (cos(pi/3), sin(pi/3))*4 = (2, 2*sqrt(3))
+% # v = (cos(-pi/4), sin(-pi/4))*3 = (3*sqrt(2)/2, -3*sqrt(2)/2)
+% ux, uy = 4*cos(pi/3), 4*sin(pi/3)
+% vx, vy = 3*cos(-pi/4), 3*sin(-pi/4)
+% ps = ux*vx + uy*vy
+% ps_geom = 4*3*cos(pi/3 + pi/4)
+% assert simplify(ps - ps_geom) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-010}{3}{10}
+Le vecteur $\vec{u}$ a pour norme $4$ et fait un angle de $\dfrac{\pi}{3}$ avec l'axe des abscisses. Le vecteur $\vec{v}$ a pour norme $3$ et fait un angle de $-\dfrac{\pi}{4}$ avec l'axe des abscisses.
+\begin{enumerate}
+  \item Donner les coordonnees de $\vec{u}$ et $\vec{v}$.
+  \item Calculer $\vec{u} \cdot \vec{v}$ par la formule analytique.
+  \item Calculer $\vec{u} \cdot \vec{v}$ par la definition geometrique.
+  \item Verifier la coherence des deux resultats.
+\end{enumerate}
+\end{exercice}

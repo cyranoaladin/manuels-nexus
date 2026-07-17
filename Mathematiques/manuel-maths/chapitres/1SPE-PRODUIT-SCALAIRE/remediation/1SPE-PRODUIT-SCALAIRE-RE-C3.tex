@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-PRODUIT-SCALAIRE-RE-C3", "chapitre": "1SPE-PRODUIT-SCALAIRE", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+\subsection*{Remediation C3 — Orthogonalite et angles}
+
+\begin{exercice}{1SPE-PRODSCAL-RE-C3-EX1}{1}{6}
+\begin{enumerate}
+  \item $\vec{u}\begin{pmatrix} 4 \\ -2 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 1 \\ 2 \end{pmatrix}$ sont-ils orthogonaux ?
+  \item Calculer l'angle entre $\vec{u}\begin{pmatrix} 1 \\ 0 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 1 \\ \sqrt{3} \end{pmatrix}$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert 4*1 + (-2)*2 == 0
+% assert acos(Rational(1,2)) == pi/3
+% END-VERIFY
+
+\begin{corrige}{1SPE-PRODSCAL-RE-C3-EX1}
+\textbf{1.} $\vec{u}\cdot\vec{v} = 4-4 = 0$. Oui, orthogonaux.
+\textbf{2.} $\cos\theta = \frac{1}{2}$, donc $\theta = \frac{\pi}{3}$.
+\end{corrige}
+

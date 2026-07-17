@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-PRODUIT-SCALAIRE-FR-R4", "chapitre": "1SPE-PRODUIT-SCALAIRE", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R4 : Calcul litteral
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Identites remarquables}
+
+$(a+b)^2 = a^2 + 2ab + b^2$ \quad $(a-b)^2 = a^2 - 2ab + b^2$ \quad $(a+b)(a-b) = a^2 - b^2$
+
+\begin{exercice}{1SPE-PRODSCAL-FR-R4-EX1}{1}{6}
+Developper et reduire.
+\begin{enumerate}
+  \item $(x+3)^2$
+  \item $(2x-1)^2$
+  \item $(x+2)(x-2)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert expand((x+3)**2) == x**2 + 6*x + 9
+% assert expand((2*x-1)**2) == 4*x**2 - 4*x + 1
+% assert expand((x+2)*(x-2)) == x**2 - 4
+% END-VERIFY
+
+\begin{corrige}{1SPE-PRODSCAL-FR-R4-EX1}
+\textbf{1.} $(x+3)^2 = x^2 + 6x + 9$.
+\textbf{2.} $(2x-1)^2 = 4x^2 - 4x + 1$.
+\textbf{3.} $(x+2)(x-2) = x^2 - 4$.
+\end{corrige}
+

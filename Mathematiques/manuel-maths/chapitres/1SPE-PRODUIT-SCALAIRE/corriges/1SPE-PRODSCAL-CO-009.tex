@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-PRODSCAL-CO-009","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-009","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # A=(0,0), B=(6,0), C=(2,4)
+% # AB.AC = 6*2 + 0*4 = 12
+% assert 6*2 + 0*4 == 12
+% # AB.BC = 6*(-4) + 0*4 = -24
+% assert 6*(-4) + 0*4 == -24
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-009}
+\begin{enumerate}
+\item $\overrightarrow{AB}\begin{pmatrix} 6 \\ 0 \end{pmatrix}$, $\overrightarrow{AC}\begin{pmatrix} 2 \\ 4 \end{pmatrix}$, $\overrightarrow{BC}\begin{pmatrix} -4 \\ 4 \end{pmatrix}$.
+
+$\overrightarrow{AB} \cdot \overrightarrow{AC} = 12$, $\overrightarrow{AB} \cdot \overrightarrow{BC} = -24$, $\overrightarrow{AC} \cdot \overrightarrow{BC} = -8 + 16 = 8$.
+
+\item $\|\overrightarrow{AB}\| = 6$, $\|\overrightarrow{AC}\| = \sqrt{20} = 2\sqrt{5}$, $\|\overrightarrow{BC}\| = \sqrt{32} = 4\sqrt{2}$.
+
+$\cos\widehat{A} = \dfrac{12}{6 \times 2\sqrt{5}} = \dfrac{1}{\sqrt{5}}$.
+
+$\cos\widehat{B} = \dfrac{\overrightarrow{BA} \cdot \overrightarrow{BC}}{\|\overrightarrow{BA}\| \|\overrightarrow{BC}\|} = \dfrac{24}{6 \times 4\sqrt{2}} = \dfrac{1}{\sqrt{2}}$.
+
+$\cos\widehat{C} = \dfrac{\overrightarrow{CA} \cdot \overrightarrow{CB}}{\|\overrightarrow{CA}\| \|\overrightarrow{CB}\|} = \dfrac{-8}{2\sqrt{5} \times 4\sqrt{2}} = \dfrac{-1}{\sqrt{10}}$.
+
+\item $\widehat{B} = \dfrac{\pi}{4}$. On verifie que $\widehat{A} + \widehat{B} + \widehat{C} = \pi$.
+\end{enumerate}
+\end{corrige}

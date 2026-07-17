@@ -42,7 +42,7 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
   - [x] 3f. 1SPE-DERIVATION-GLOBAL LOT 0→7. 50 ex, 146 VERIFY, PDF 46p. Tag `chap/1SPE-DERIVATION-GLOBAL-v1`.
   - [x] 3g. 1SPE-EXPONENTIELLE LOT 0→7. 50 ex, 119 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-EXPONENTIELLE-v1`.
   - [x] 3h. 1SPE-TRIGONOMETRIE LOT 0→7. 50 ex, 116 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-TRIGONOMETRIE-v1`.
-  - [ ] 3i. 1SPE-PRODUIT-SCALAIRE LOT 0→7.
+  - [x] 3i. 1SPE-PRODUIT-SCALAIRE LOT 0→7. 50 ex, 119 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-PRODUIT-SCALAIRE-v1`.
   - [ ] 3j. 1SPE-GEOMETRIE-REPEREE LOT 0→7.
   - [ ] 3k. 1SPE-PROBA-COND LOT 0→7.
   - [ ] 3l. 1SPE-VARIABLES-ALEATOIRES LOT 0→7.

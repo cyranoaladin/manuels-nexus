@@ -1,0 +1,34 @@
+% META: {"id": "1SPE-PRODUIT-SCALAIRE-FR-R5", "chapitre": "1SPE-PRODUIT-SCALAIRE", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R5 : Theoreme de Pythagore
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Theoreme de Pythagore}
+
+Dans un triangle rectangle en $C$ : $AB^2 = AC^2 + BC^2$ (ou $AB$ est l'hypotenuse).
+
+\textbf{Reciproque :} Si $AB^2 = AC^2 + BC^2$, alors le triangle est rectangle en $C$.
+
+\begin{exercice}{1SPE-PRODSCAL-FR-R5-EX1}{1}{6}
+\begin{enumerate}
+  \item Dans un triangle rectangle en $C$, $AC = 3$ et $BC = 4$. Calculer $AB$.
+  \item Le triangle de cotes $5$, $12$ et $13$ est-il rectangle ?
+  \item Le triangle de cotes $3$, $5$ et $7$ est-il rectangle ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert sqrt(9+16) == 5
+% assert 5**2 + 12**2 == 169 == 13**2
+% assert 3**2 + 5**2 == 34
+% assert 34 != 49
+% END-VERIFY
+
+\begin{corrige}{1SPE-PRODSCAL-FR-R5-EX1}
+\textbf{1.} $AB = \sqrt{9 + 16} = 5$.
+\textbf{2.} $5^2 + 12^2 = 25 + 144 = 169 = 13^2$. Oui, rectangle.
+\textbf{3.} $3^2 + 5^2 = 34 \neq 49 = 7^2$. Non, pas rectangle.
+\end{corrige}
+

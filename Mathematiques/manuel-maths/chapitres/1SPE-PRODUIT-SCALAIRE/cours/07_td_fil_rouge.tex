@@ -1,0 +1,133 @@
+% META: {"id":"1SPE-PRODSCAL-TD-FIL-ROUGE","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"td","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":50,"status":"generated"}
+
+% ============================================================
+% TD FIL ROUGE — Le randonneur et le triangle de terrain
+% Nexus Reussite — 1re Specialite
+% Duree : 50 min — Situation accroche du chapitre
+% ============================================================
+
+\section*{TD fil rouge — Le randonneur et le triangle de terrain}
+
+\textit{Duree : 50 minutes — Toutes les capacites C1 a C5 sont mobilisees.}
+
+\bigskip
+
+\begin{center}
+\textbf{Accroche}
+
+\medskip
+\parbox{0.9\textwidth}{Un randonneur part d'un refuge $A$, marche $5$ km vers le nord-est jusqu'a un sommet $B$, puis $3$ km vers le sud-est jusqu'a un lac $C$. L'angle $\widehat{ABC} = \frac{2\pi}{3}$. On munit le plan d'un repere orthonorme d'unite 1 km.}
+\end{center}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie A — Produit scalaire et distances (C1, C2) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}
+  \item Calculer $\overrightarrow{BA} \cdot \overrightarrow{BC}$ a l'aide de la definition geometrique.
+  \item En deduire $\|\overrightarrow{BA} + \overrightarrow{BC}\|^2$ en utilisant l'identite remarquable vectorielle $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$.
+  \item Calculer $\|\overrightarrow{BA} - \overrightarrow{BC}\|^2$. Que represente le vecteur $\overrightarrow{BA} - \overrightarrow{BC}$ ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # BA.BC = ||BA||*||BC||*cos(2*pi/3) = 5*3*(-1/2) = -15/2
+% ps = 5*3*cos(2*pi/3)
+% assert simplify(ps + Rational(15, 2)) == 0
+% # ||BA+BC||^2 = 25 + 2*(-15/2) + 9 = 25 - 15 + 9 = 19
+% upv_sq = 25 + 2*ps + 9
+% assert simplify(upv_sq - 19) == 0
+% # ||BA-BC||^2 = 25 - 2*(-15/2) + 9 = 25 + 15 + 9 = 49
+% umv_sq = 25 - 2*ps + 9
+% assert simplify(umv_sq - 49) == 0
+% # BA - BC = CA, so ||CA|| = 7
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie B — Distance $AC$ par Al-Kashi (C5) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Appliquer la formule d'Al-Kashi dans le triangle $ABC$ pour calculer $AC$.
+  \item Verifier la coherence avec le resultat de la question 3 de la Partie A.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # Al-Kashi: AC^2 = AB^2 + BC^2 - 2*AB*BC*cos(ABC)
+% # AC^2 = 25 + 9 - 2*5*3*cos(2*pi/3) = 34 - 30*(-1/2) = 34 + 15 = 49
+% AC_sq = 25 + 9 - 2*5*3*cos(2*pi/3)
+% assert simplify(AC_sq - 49) == 0
+% assert sqrt(49) == 7
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie C — Angles et orthogonalite (C3) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Calculer $\cos(\widehat{BAC})$ a l'aide du produit scalaire $\overrightarrow{AB} \cdot \overrightarrow{AC}$.
+  \item En deduire la mesure de l'angle $\widehat{BAC}$.
+  \item On place $D$ tel que $\overrightarrow{BD} = \overrightarrow{BA} + \overrightarrow{BC}$. Montrer que $\overrightarrow{BD}$ est orthogonal a $\overrightarrow{AC}$ si et seulement si $AB = BC$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # Need coordinates. Place B at origin.
+% # BA has norm 5, BC has norm 3, angle(BA,BC) = 2pi/3
+% # Let BA along direction alpha, BC along direction alpha - 2pi/3
+% # Simplify: put BA along x-axis: A = (5, 0)
+% # BC at angle -(2pi/3) from BA, but BA is along +x, so BC at angle -2pi/3?
+% # Actually angle (BA, BC) = 2pi/3 means angle from BA to BC is 2pi/3
+% # B = (0,0), A = (5, 0), C = (3*cos(-2*pi/3), 3*sin(-2*pi/3)) or + direction
+% # Let's use: angle at B = 2pi/3 between BA and BC
+% # BA direction: towards A from B
+% # Take BA = (5, 0), BC = 3*(cos(2*pi/3), sin(2*pi/3)) = (-3/2, 3*sqrt(3)/2)
+% # No wait, if angle between BA and BC is 2pi/3, and BA = (5,0):
+% # BC = 3*(cos(2*pi/3), sin(2*pi/3)) = 3*(-1/2, sqrt(3)/2) = (-3/2, 3*sqrt(3)/2)
+% Bx, By = 0, 0
+% Ax, Ay = 5, 0
+% Cx, Cy = Rational(-3, 2), 3*sqrt(3)/2
+% # AB = B - A = (-5, 0), AC = C - A = (-3/2 - 5, 3*sqrt(3)/2) = (-13/2, 3*sqrt(3)/2)
+% ABx, ABy = -5, 0
+% ACx, ACy = Rational(-13, 2), 3*sqrt(3)/2
+% ps_AB_AC = ABx*ACx + ABy*ACy
+% assert simplify(ps_AB_AC - Rational(65, 2)) == 0
+% norm_AB = 5
+% norm_AC = sqrt(ACx**2 + ACy**2)
+% assert simplify(norm_AC**2 - 49) == 0  # AC = 7
+% cos_BAC = ps_AB_AC / (norm_AB * 7)
+% assert simplify(cos_BAC - Rational(13, 14)) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie D — Aire et hauteur (C4) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Calculer l'aire du triangle $ABC$ a l'aide de la formule $\mathcal{A} = \frac{1}{2} \times AB \times BC \times \sin(\widehat{ABC})$.
+  \item En deduire la hauteur $h$ issue de $A$ dans le triangle $ABC$ (hauteur relative au cote $[BC]$).
+  \item Le randonneur souhaite rejoindre le cote $[BC]$ en marchant perpendiculairement. Montrer que la distance minimale est exactement $h$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # Aire = 1/2 * AB * BC * sin(2*pi/3)
+% aire = Rational(1, 2) * 5 * 3 * sin(2*pi/3)
+% assert simplify(aire - 15*sqrt(3)/4) == 0
+% # h = 2*Aire / BC = 2*(15*sqrt(3)/4) / 3 = 15*sqrt(3)/6 = 5*sqrt(3)/2
+% h = 2*aire / 3
+% assert simplify(h - 5*sqrt(3)/2) == 0
+% END-VERIFY

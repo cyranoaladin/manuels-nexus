@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-PRODSCAL-CO-020","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-020","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # ||u||=5, ||v||=3, ||u-v||=7
+% # ||u-v||^2 = ||u||^2 - 2u.v + ||v||^2
+% # 49 = 25 - 2*u.v + 9 => u.v = (25+9-49)/2 = -15/2
+% assert Rational(25+9-49, 2) == Rational(-15, 2)
+% # cos(theta) = -15/2 / (5*3) = -15/30 = -1/2
+% assert Rational(-15, 30) == Rational(-1, 2)
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-020}
+\begin{enumerate}
+\item $\|\vec{u} - \vec{v}\|^2 = \|\vec{u}\|^2 - 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$, donc $49 = 25 - 2\,\vec{u} \cdot \vec{v} + 9$, d'ou $\vec{u} \cdot \vec{v} = -\dfrac{15}{2}$.
+\item $\cos\theta = \dfrac{-15/2}{5 \times 3} = \dfrac{-15}{30} = -\dfrac{1}{2}$, donc $\theta = \dfrac{2\pi}{3}$.
+\item $\|\vec{u} + \vec{v}\|^2 = 25 + 2 \times (-\frac{15}{2}) + 9 = 25 - 15 + 9 = 19$, donc $\|\vec{u} + \vec{v}\| = \sqrt{19}$.
+\end{enumerate}
+\end{corrige}

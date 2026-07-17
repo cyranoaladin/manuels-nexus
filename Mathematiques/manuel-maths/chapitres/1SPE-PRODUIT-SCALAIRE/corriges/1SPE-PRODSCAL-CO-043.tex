@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-PRODSCAL-CO-043","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-043","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # a=8, b=5, c=7
+% cos_A = Rational(25+49-64, 2*5*7)
+% assert cos_A == Rational(10, 70)
+% assert cos_A == Rational(1, 7)
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-043}
+\begin{enumerate}
+\item $\cos\widehat{A} = \dfrac{b^2+c^2-a^2}{2bc} = \dfrac{25+49-64}{70} = \dfrac{10}{70} = \dfrac{1}{7}$, $\widehat{A} \approx 81{,}8°$.
+
+$\cos\widehat{B} = \dfrac{a^2+c^2-b^2}{2ac} = \dfrac{64+49-25}{112} = \dfrac{88}{112} = \dfrac{11}{14}$, $\widehat{B} \approx 38{,}2°$.
+
+$\cos\widehat{C} = \dfrac{a^2+b^2-c^2}{2ab} = \dfrac{64+25-49}{80} = \dfrac{40}{80} = \dfrac{1}{2}$, $\widehat{C} = 60°$.
+
+\item $81{,}8° + 38{,}2° + 60° = 180°$. \checkmark
+\end{enumerate}
+\end{corrige}

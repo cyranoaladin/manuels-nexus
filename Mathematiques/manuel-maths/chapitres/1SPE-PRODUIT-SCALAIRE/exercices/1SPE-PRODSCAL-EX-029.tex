@@ -1,0 +1,10 @@
+% META: {"id":"1SPE-PRODSCAL-EX-029","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":3,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-029.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-029.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% k, m = symbols('k m', real=True)
+% # u=(k,3), v=(2,m): u.v = 2k+3m = 0
+% assert solve(2*k + 3*m, k) == [-3*m/2]
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-029}{3}{10}
+Determiner l'ensemble des couples $(k, m)$ tels que les vecteurs $\vec{u}\begin{pmatrix} k \\ 3 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 2 \\ m \end{pmatrix}$ soient orthogonaux. Representer cet ensemble dans le plan $(k, m)$.
+\end{exercice}

@@ -1,0 +1,26 @@
+% META: {"id":"1SPE-PRODSCAL-ME-002","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"methode","capacites_codes":["C2"],"status":"generated"}
+\begin{fichemethode}{M2}{Developper et reduire avec le produit scalaire}
+\quandUtiliser{J'utilise cette methode lorsque l'enonce demande de developper $\|\vec{u} + \vec{v}\|^2$, $\|\vec{u} - \vec{v}\|^2$ ou $(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v})$, ou de calculer une norme a partir du produit scalaire.}
+\pasApas{\begin{enumerate}
+  \item J'identifie l'expression a developper.
+  \item J'applique l'identite remarquable correspondante :
+    \begin{itemize}
+      \item $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$ ;
+      \item $\|\vec{u} - \vec{v}\|^2 = \|\vec{u}\|^2 - 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$ ;
+      \item $(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v}) = \|\vec{u}\|^2 - \|\vec{v}\|^2$.
+    \end{itemize}
+  \item Je remplace par les valeurs connues et je simplifie.
+\end{enumerate}}
+\exempleRedige{Calculons $\|\vec{u} + \vec{v}\|$ sachant que $\|\vec{u}\| = 3$, $\|\vec{v}\| = 4$ et $\vec{u} \cdot \vec{v} = -6$.
+\commentaireMarge{Etape 2 : identite remarquable.}
+$\|\vec{u} + \vec{v}\|^2 = 9 + 2 \times (-6) + 16 = 9 - 12 + 16 = 13$.
+\commentaireMarge{Etape 3 : conclusion.}
+Donc $\|\vec{u} + \vec{v}\| = \sqrt{13}$.}
+\pieges{\begin{itemize}
+  \item Ecrire $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2$ en oubliant $2\,\vec{u} \cdot \vec{v}$.
+  \item Confondre $\|\vec{u}\|^2$ et $\vec{u}^2$ (notation abusive).
+  \item Oublier que $\vec{u} \cdot \vec{u} = \|\vec{u}\|^2$, pas $\|\vec{u}\|$.
+\end{itemize}}
+\verifier{Si $\vec{u} \perp \vec{v}$, on retrouve le theoreme de Pythagore : $\|\vec{u}+\vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2$.}
+\sEntrainer{\refExos{M2}}
+\end{fichemethode}

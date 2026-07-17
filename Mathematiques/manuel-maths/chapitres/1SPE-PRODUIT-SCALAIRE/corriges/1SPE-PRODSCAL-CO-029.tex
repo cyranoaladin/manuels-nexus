@@ -1,0 +1,12 @@
+% META: {"id":"1SPE-PRODSCAL-CO-029","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-029","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% k, m = symbols('k m', real=True)
+% # u=(k,3), v=(2,m): u.v = 2k+3m = 0
+% assert solve(2*k + 3*m, k) == [-3*m/2]
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-029}
+$\vec{u} \cdot \vec{v} = 2k + 3m = 0$, soit $k = -\dfrac{3m}{2}$.
+
+L'ensemble des couples $(k, m)$ est la droite d'equation $2k + 3m = 0$ dans le plan $(k, m)$, passant par l'origine de pente $-\dfrac{2}{3}$.
+\end{corrige}

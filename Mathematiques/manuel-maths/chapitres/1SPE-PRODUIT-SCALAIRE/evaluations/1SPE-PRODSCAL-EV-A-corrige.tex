@@ -1,0 +1,84 @@
+% META: {"id":"1SPE-PRODSCAL-EV-A-corrige","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige_evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"status":"generated"}
+
+\section*{Corrige — Evaluation A — Produit scalaire}
+
+%---------------------------------------------------------------
+\subsection*{Exercice 1 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$\vec{u} \cdot \vec{v} = 3 \times 2 + (-1) \times 5 = 6 - 5 = 1$.
+
+\textbf{Question 2.}
+$\|\vec{u}\| = \sqrt{9 + 1} = \sqrt{10}$ et $\|\vec{v}\| = \sqrt{4 + 25} = \sqrt{29}$.
+
+\textbf{Question 3.}
+$\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2 = 10 + 2 + 29 = 41$.
+
+Donc $\|\vec{u} + \vec{v}\| = \sqrt{41}$.
+
+Verification directe : $\vec{u} + \vec{v} = \begin{pmatrix} 5 \\ 4 \end{pmatrix}$, $\|\vec{u} + \vec{v}\|^2 = 25 + 16 = 41$. \checkmark
+
+\textbf{Question 4.}
+$(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v}) = \|\vec{u}\|^2 - \|\vec{v}\|^2 = 10 - 29 = -19$.
+
+Verification : $\vec{u} + \vec{v} = \begin{pmatrix} 5 \\ 4 \end{pmatrix}$, $\vec{u} - \vec{v} = \begin{pmatrix} 1 \\ -6 \end{pmatrix}$. $(5)(1) + (4)(-6) = 5 - 24 = -19$. \checkmark
+
+%---------------------------------------------------------------
+\subsection*{Exercice 2 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$\overrightarrow{AB}\begin{pmatrix} 3 \\ -2 \end{pmatrix}$ et $\overrightarrow{AC}\begin{pmatrix} 2 \\ 3 \end{pmatrix}$.
+
+$\overrightarrow{AB} \cdot \overrightarrow{AC} = 3 \times 2 + (-2) \times 3 = 6 - 6 = 0$.
+
+Le triangle $ABC$ est \textbf{rectangle en $A$}.
+
+\textbf{Question 2.}
+$\overrightarrow{BA}\begin{pmatrix} -3 \\ 2 \end{pmatrix}$, $\overrightarrow{BC}\begin{pmatrix} -1 \\ 5 \end{pmatrix}$.
+
+$\overrightarrow{BA} \cdot \overrightarrow{BC} = 3 + 10 = 13$, $\|\overrightarrow{BA}\| = \sqrt{13}$, $\|\overrightarrow{BC}\| = \sqrt{26}$.
+
+$\cos\widehat{ABC} = \dfrac{13}{\sqrt{13}\sqrt{26}} = \dfrac{13}{\sqrt{338}} = \dfrac{13}{13\sqrt{2}} = \dfrac{1}{\sqrt{2}} = \dfrac{\sqrt{2}}{2}$.
+
+Donc $\widehat{ABC} = \dfrac{\pi}{4}$.
+
+\textbf{Question 3.}
+$\widehat{ACB} = \pi - \dfrac{\pi}{2} - \dfrac{\pi}{4} = \dfrac{\pi}{4}$.
+
+Le triangle est rectangle isocele en $A$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 3 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$I = (3; 0)$ milieu de $[AB]$ et $\overrightarrow{AB}\begin{pmatrix} 6 \\ 0 \end{pmatrix}$.
+
+$\overrightarrow{IM} \cdot \overrightarrow{AB} = 0$ : $6(x - 3) + 0 = 0$, soit $x = 3$.
+
+\textbf{Question 2.}
+$\overrightarrow{BC}\begin{pmatrix} -4 \\ 4 \end{pmatrix}$. On parametrise : $H = B + t\,\overrightarrow{BC} = (6 - 4t; 4t)$.
+
+$\overrightarrow{AH} \cdot \overrightarrow{BC} = 0$ : $(6-4t)(-4) + (4t)(4) = 0$, soit $-24 + 32t = 0$, d'ou $t = \dfrac{3}{4}$.
+
+$H = (3; 3)$.
+
+\textbf{Question 3.}
+$\mathcal{A} = \dfrac{1}{2} |x_B \cdot y_C - x_C \cdot y_B| = \dfrac{1}{2} |6 \times 4 - 2 \times 0| = \dfrac{24}{2} = 12$.
+
+%---------------------------------------------------------------
+\subsection*{Exercice 4 — 5 points}
+%---------------------------------------------------------------
+
+\textbf{Question 1.}
+$BC^2 = AB^2 + AC^2 - 2 \cdot AB \cdot AC \cdot \cos\widehat{BAC} = 64 + 25 - 80 \times \dfrac{1}{2} = 89 - 40 = 49$.
+
+$BC = 7$.
+
+\textbf{Question 2.}
+$\cos\widehat{ABC} = \dfrac{BC^2 + AB^2 - AC^2}{2 \cdot BC \cdot AB} = \dfrac{49 + 64 - 25}{112} = \dfrac{88}{112} = \dfrac{11}{14}$.
+
+\textbf{Question 3.}
+$\mathcal{A} = \dfrac{1}{2} \times AB \times AC \times \sin\widehat{BAC} = \dfrac{1}{2} \times 8 \times 5 \times \dfrac{\sqrt{3}}{2} = 10\sqrt{3} \approx 17{,}3$.

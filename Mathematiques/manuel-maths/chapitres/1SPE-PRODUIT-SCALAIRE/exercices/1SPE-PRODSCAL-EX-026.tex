@@ -1,0 +1,10 @@
+% META: {"id":"1SPE-PRODSCAL-EX-026","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":2,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-026.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-026.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u=(3,1), v=(1,k): u.v = 3+k = 0 => k = -3
+% k = symbols('k')
+% assert solve(3 + k, k) == [-3]
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-026}{2}{6}
+Determiner la valeur de $k$ pour que les vecteurs $\vec{u}\begin{pmatrix} 3 \\ 1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 1 \\ k \end{pmatrix}$ soient orthogonaux.
+\end{exercice}

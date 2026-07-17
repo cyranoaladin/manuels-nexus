@@ -1,0 +1,114 @@
+% META: {"id":"1SPE-PRODSCAL-EV-B","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"evaluation","capacites_codes":["C1","C2","C3","C4","C5"],"duree_min":55,"points":20,"status":"generated"}
+
+\section*{Evaluation B — Produit scalaire}
+
+\textit{Duree : 55 minutes — 20 points — Calculatrice autorisee.}
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 1} \hfill \textit{5 points — C1, C2}
+%---------------------------------------------------------------
+
+Soient $\vec{u}\begin{pmatrix} 4 \\ 2 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} -1 \\ 3 \end{pmatrix}$.
+
+\begin{enumerate}
+  \item Calculer $\vec{u} \cdot \vec{v}$. \hfill \textit{(1 pt)}
+  \item Calculer $\|\vec{u}\|$ et $\|\vec{v}\|$. \hfill \textit{(1 pt)}
+  \item Calculer $\|\vec{u} - \vec{v}\|^2$ par l'identite remarquable. \hfill \textit{(1,5 pt)}
+  \item Calculer $(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v})$ et verifier que le resultat est $\|\vec{u}\|^2 - \|\vec{v}\|^2$. \hfill \textit{(1,5 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert 4*(-1) + 2*3 == 2
+% assert 4**2 + 2**2 == 20
+% assert (-1)**2 + 3**2 == 10
+% # ||u-v||^2 = 20 - 2*2 + 10 = 26
+% assert 20 - 4 + 10 == 26
+% # (u+v).(u-v) = 20 - 10 = 10
+% assert 20 - 10 == 10
+% # Direct: u+v=(3,5), u-v=(5,-1). (3)(5)+(5)(-1)=15-5=10
+% assert 3*5 + 5*(-1) == 10
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 2} \hfill \textit{5 points — C3}
+%---------------------------------------------------------------
+
+Soient $A(0; 1)$, $B(3; -1)$ et $C(2; 4)$.
+
+\begin{enumerate}
+  \item Montrer que le triangle $ABC$ est rectangle. Preciser en quel sommet. \hfill \textit{(2 pt)}
+  \item Calculer l'angle $\widehat{ABC}$. \hfill \textit{(2 pt)}
+  \item En deduire l'angle $\widehat{ACB}$. \hfill \textit{(1 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # A(0,1), B(3,-1), C(2,4)
+% # AB = (3,-2), AC = (2,3). AB.AC = 6-6 = 0. Right angle at A.
+% assert 3*2 + (-2)*3 == 0
+% # BA = (-3,2), BC = (-1,5). BA.BC = 3+10 = 13
+% assert (-3)*(-1) + 2*5 == 13
+% norm_BA = sqrt(13)
+% norm_BC = sqrt(26)
+% cos_B = Rational(13, 1) / (sqrt(13)*sqrt(26))
+% assert simplify(cos_B - sqrt(2)/2) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 3} \hfill \textit{5 points — C4}
+%---------------------------------------------------------------
+
+Soient $A(0; 0)$, $B(8; 0)$ et $C(3; 6)$.
+
+\begin{enumerate}
+  \item Determiner l'equation de la mediatrice de $[AB]$. \hfill \textit{(1,5 pt)}
+  \item Determiner les coordonnees du pied $H$ de la hauteur issue de $A$. \hfill \textit{(2 pt)}
+  \item Calculer l'aire du triangle $ABC$. \hfill \textit{(1,5 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # Mediatrice AB: I=(4,0), AB=(8,0). => x=4
+% # Height from A to BC: BC=(3-8,6-0)=(-5,6). H=B+t*BC=(8-5t,6t)
+% # AH.BC=0: (8-5t)*(-5)+(6t)*6=0 => -40+25t+36t=0 => 61t=40 => t=40/61
+% t = Rational(40, 61)
+% Hx = 8 - 5*t
+% Hy = 6*t
+% assert Hx == Rational(288, 61)
+% assert Hy == Rational(240, 61)
+% # Aire = 1/2 * |8*6 - 3*0| = 24
+% assert abs(8*6 - 3*0) // 2 == 24
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\textbf{Exercice 4} \hfill \textit{5 points — C5}
+%---------------------------------------------------------------
+
+Dans un triangle $ABC$, on donne $AB = 6$, $AC = 10$ et $\widehat{BAC} = \dfrac{\pi}{4}$.
+
+\begin{enumerate}
+  \item Calculer $BC$ a l'aide de la formule d'Al-Kashi. \hfill \textit{(2 pt)}
+  \item Calculer $\cos\widehat{ABC}$. \hfill \textit{(1,5 pt)}
+  \item Calculer l'aire du triangle $ABC$. \hfill \textit{(1,5 pt)}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # BC^2 = 36 + 100 - 2*6*10*cos(pi/4) = 136 - 60*sqrt(2)
+% BC_sq = 36 + 100 - 120*cos(pi/4)
+% assert simplify(BC_sq - (136 - 60*sqrt(2))) == 0
+% BC_num = float(N(sqrt(BC_sq)))
+% assert abs(BC_num - 7.15) < 0.1
+% # Aire = 1/2 * 6 * 10 * sin(pi/4) = 30*sqrt(2)/2 = 15*sqrt(2)
+% aire = Rational(1,2)*6*10*sin(pi/4)
+% assert simplify(aire - 15*sqrt(2)) == 0
+% END-VERIFY

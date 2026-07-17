@@ -1,0 +1,76 @@
+% META: {"id":"1SPE-PRODSCAL-COURS-C3","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"cours","capacites_codes":["C3"],"status":"generated"}
+
+\section{Orthogonalite et calcul d'angles}
+
+\margeAppui{Le produit scalaire fournit un critere algebrique simple pour l'orthogonalite et permet de calculer l'angle entre deux vecteurs sans mesure directe.}
+
+\theoreme[Critere d'orthogonalite]{
+Deux vecteurs $\vec{u}$ et $\vec{v}$ sont orthogonaux si et seulement si :
+\[
+\vec{u} \cdot \vec{v} = 0.
+\]
+Le vecteur nul est orthogonal a tout vecteur.
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # Orthogonal vectors: (1,2) and (2,-1)
+% assert 1*2 + 2*(-1) == 0
+% # (3,0) and (0,7)
+% assert 3*0 + 0*7 == 0
+% END-VERIFY
+
+\propriete[Calcul de l'angle entre deux vecteurs]{
+Soient $\vec{u}$ et $\vec{v}$ deux vecteurs non nuls. L'angle $\theta = (\vec{u}, \vec{v})$ verifie :
+\[
+\cos\theta = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \times \|\vec{v}\|}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # u=(1,1), v=(1,0): angle = pi/4
+% ps = 1*1 + 1*0  # = 1
+% norm_u = sqrt(1**2 + 1**2)  # = sqrt(2)
+% norm_v = sqrt(1**2 + 0**2)  # = 1
+% cos_theta = ps / (norm_u * norm_v)
+% assert simplify(cos_theta - sqrt(2)/2) == 0
+% assert simplify(acos(cos_theta) - pi/4) == 0
+% END-VERIFY
+
+\exemple{
+Soient $\vec{u}\begin{pmatrix} 1 \\ 1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 1 \\ 0 \end{pmatrix}$. Calculer l'angle entre $\vec{u}$ et $\vec{v}$.
+
+$\vec{u} \cdot \vec{v} = 1 + 0 = 1$, $\|\vec{u}\| = \sqrt{2}$, $\|\vec{v}\| = 1$.
+
+$\cos\theta = \dfrac{1}{\sqrt{2}} = \dfrac{\sqrt{2}}{2}$, donc $\theta = \dfrac{\pi}{4}$.
+}
+
+\exemple{
+Montrer que les vecteurs $\vec{u}\begin{pmatrix} 3 \\ -2 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 4 \\ 6 \end{pmatrix}$ sont orthogonaux.
+
+$\vec{u} \cdot \vec{v} = 3 \times 4 + (-2) \times 6 = 12 - 12 = 0$.
+
+Comme $\vec{u} \cdot \vec{v} = 0$, les vecteurs $\vec{u}$ et $\vec{v}$ sont orthogonaux.
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert 3*4 + (-2)*6 == 0
+% END-VERIFY
+
+\propriete[Orthogonalite de droites]{
+Dans un repere orthonorme, deux droites de vecteurs directeurs $\vec{u}$ et $\vec{v}$ sont perpendiculaires si et seulement si $\vec{u} \cdot \vec{v} = 0$.
+}
+
+\erreurFrequente{
+Oublier de verifier que les vecteurs sont non nuls avant de calculer l'angle. La formule $\cos\theta = \dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\|}$ suppose $\vec{u} \neq \vec{0}$ et $\vec{v} \neq \vec{0}$.
+}
+
+\erreurFrequente{
+Calculer $\cos\theta$ mais oublier de passer a l'angle $\theta$ par $\theta = \arccos\!\left(\dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\|}\right)$.
+}
+
+\erreurFrequente{
+Conclure que deux vecteurs sont paralleles quand leur produit scalaire est non nul. Un produit scalaire non nul signifie seulement qu'ils ne sont pas orthogonaux.
+}

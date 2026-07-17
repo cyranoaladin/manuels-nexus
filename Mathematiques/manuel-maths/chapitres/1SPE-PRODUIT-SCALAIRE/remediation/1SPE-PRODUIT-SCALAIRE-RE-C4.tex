@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-PRODUIT-SCALAIRE-RE-C4", "chapitre": "1SPE-PRODUIT-SCALAIRE", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+\subsection*{Remediation C4 — Applications geometriques}
+
+\begin{exercice}{1SPE-PRODSCAL-RE-C4-EX1}{1}{8}
+$A(0;0)$, $B(4;2)$. Determiner l'equation de la mediatrice de $[AB]$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # I=(2,1), AB=(4,2). IM.AB=0: 4(x-2)+2(y-1)=0 => 4x+2y=10 => 2x+y=5
+% assert expand(4*(x-2)+2*(y-1) - (4*x+2*y-10)) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-PRODSCAL-RE-C4-EX1}
+$I(2;1)$, $\overrightarrow{AB}\begin{pmatrix} 4 \\ 2 \end{pmatrix}$. $4(x-2)+2(y-1)=0$, soit $2x+y=5$.
+\end{corrige}
+

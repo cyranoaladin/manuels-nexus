@@ -1,0 +1,12 @@
+% META: {"id":"1SPE-PRODSCAL-CO-044","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-044","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # a=6, b=10, angle C = pi/4
+% c_sq = 36 + 100 - 2*6*10*cos(pi/4)
+% assert simplify(c_sq - (136 - 60*sqrt(2))) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-044}
+Par Al-Kashi : $c^2 = a^2 + b^2 - 2ab\cos\widehat{C} = 36 + 100 - 120\cos\!\left(\dfrac{\pi}{4}\right) = 136 - 60\sqrt{2}$.
+
+$c = \sqrt{136 - 60\sqrt{2}} \approx \sqrt{136 - 84{,}85} \approx \sqrt{51{,}15} \approx 7{,}15$.
+\end{corrige}

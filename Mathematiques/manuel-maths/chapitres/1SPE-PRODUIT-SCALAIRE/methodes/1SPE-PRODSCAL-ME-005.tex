@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-PRODSCAL-ME-005","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"methode","capacites_codes":["C5"],"status":"generated"}
+\begin{fichemethode}{M5}{Appliquer la formule d'Al-Kashi}
+\quandUtiliser{J'utilise cette methode lorsque l'enonce donne un triangle avec deux cotes et l'angle compris, ou trois cotes, et demande de calculer un cote ou un angle manquant.}
+\pasApas{\begin{enumerate}
+  \item J'identifie les elements connus : cotes $a$, $b$, $c$ et angles $\widehat{A}$, $\widehat{B}$, $\widehat{C}$ (le cote $a$ est oppose a l'angle $\widehat{A}$).
+  \item \textbf{Pour trouver un cote :} j'applique $a^2 = b^2 + c^2 - 2bc\,\cos\widehat{A}$.
+  \item \textbf{Pour trouver un angle :} j'isole $\cos\widehat{A} = \dfrac{b^2 + c^2 - a^2}{2bc}$ puis $\widehat{A} = \arccos(\ldots)$.
+  \item Je simplifie et je donne le resultat exact ou arrondi selon la consigne.
+\end{enumerate}}
+\exempleRedige{Dans le triangle $ABC$, $AB = 6$, $AC = 4$ et $\widehat{BAC} = \dfrac{\pi}{4}$. Calculer $BC$.
+\commentaireMarge{Etape 1 : identification. Cote cherche $a = BC$, oppose a $\widehat{A}$.}
+\commentaireMarge{Etape 2 : Al-Kashi.}
+$BC^2 = AB^2 + AC^2 - 2 \times AB \times AC \times \cos\!\left(\dfrac{\pi}{4}\right) = 36 + 16 - 48 \times \dfrac{\sqrt{2}}{2} = 52 - 24\sqrt{2}.$
+\commentaireMarge{Etape 4 : resultat.}
+$BC = \sqrt{52 - 24\sqrt{2}} \approx 4{,}35.$}
+\pieges{\begin{itemize}
+  \item Se tromper dans l'attribution cote/angle : le cote isole est oppose a l'angle utilise.
+  \item Oublier le signe $-$ dans la formule.
+  \item Oublier de prendre la racine carree a la fin pour obtenir le cote.
+\end{itemize}}
+\verifier{Si l'angle est droit ($\pi/2$), on doit retrouver le theoreme de Pythagore. Verifier aussi que $\cos\widehat{A}$ est entre $-1$ et $1$.}
+\sEntrainer{\refExos{M5}}
+\end{fichemethode}

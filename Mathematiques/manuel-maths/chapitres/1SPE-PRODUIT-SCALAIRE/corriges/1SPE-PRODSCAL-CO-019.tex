@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-PRODSCAL-CO-019","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-019","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # ||u+v||^2 + ||u-v||^2 = 2(||u||^2 + ||v||^2)
+% x1, y1, x2, y2 = symbols('x1 y1 x2 y2', real=True)
+% upv = (x1+x2)**2 + (y1+y2)**2
+% umv = (x1-x2)**2 + (y1-y2)**2
+% rhs = 2*((x1**2+y1**2) + (x2**2+y2**2))
+% assert expand(upv + umv - rhs) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-019}
+On developpe chaque terme :
+\begin{align*}
+\|\vec{u} + \vec{v}\|^2 &= \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2 \\
+\|\vec{u} - \vec{v}\|^2 &= \|\vec{u}\|^2 - 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2
+\end{align*}
+
+En additionnant :
+$\|\vec{u} + \vec{v}\|^2 + \|\vec{u} - \vec{v}\|^2 = 2\|\vec{u}\|^2 + 2\|\vec{v}\|^2 = 2\left(\|\vec{u}\|^2 + \|\vec{v}\|^2\right)$.
+
+Les termes en $\vec{u} \cdot \vec{v}$ s'annulent.
+\end{corrige}

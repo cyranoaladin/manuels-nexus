@@ -1,0 +1,97 @@
+% META: {"id":"1SPE-PRODSCAL-COURS-C4","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"cours","capacites_codes":["C4"],"status":"generated"}
+
+\section{Applications geometriques}
+
+\margeAppui{Le produit scalaire permet de traduire algebriquement des proprietes geometriques classiques : mediatrice, hauteurs d'un triangle, calcul d'aires.}
+
+\theoreme[Mediatrice et produit scalaire]{
+Soit $[AB]$ un segment et $M$ un point du plan. Alors :
+\[
+M \in \text{mediatrice de } [AB] \iff \overrightarrow{MA} \cdot \overrightarrow{MB} = \frac{\|\overrightarrow{MA}\|^2 + \|\overrightarrow{MB}\|^2 - \|\overrightarrow{AB}\|^2}{2}
+\]
+Plus directement :
+\[
+M \in \text{mediatrice de } [AB] \iff \overrightarrow{MA} \cdot \overrightarrow{AB} = \frac{1}{2}\|\overrightarrow{AB}\|^2
+\]
+ou, de maniere equivalente, $MA = MB$.
+}
+
+\propriete[Caracterisation vectorielle de la mediatrice]{
+$M$ appartient a la mediatrice de $[AB]$ si et seulement si :
+\[
+\overrightarrow{MA} \cdot \overrightarrow{MB} = 0 \quad \text{(avec I milieu de [AB] : } \overrightarrow{IM} \perp \overrightarrow{AB}\text{)}
+\]
+Autrement dit, en posant $I$ milieu de $[AB]$ : $M$ est sur la mediatrice ssi $\overrightarrow{IM} \cdot \overrightarrow{AB} = 0$.
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # M on perpendicular bisector of AB means IM.AB = 0
+% # where I is midpoint. Equivalently MA^2 = MB^2
+% xA, yA, xB, yB, xM, yM = symbols('xA yA xB yB xM yM', real=True)
+% MA_sq = (xA-xM)**2 + (yA-yM)**2
+% MB_sq = (xB-xM)**2 + (yB-yM)**2
+% # MA^2 = MB^2 <=> MA^2 - MB^2 = 0
+% diff_sq = expand(MA_sq - MB_sq)
+% # This should give a linear equation in xM, yM
+% # Check: IM.AB = 0 where I = ((xA+xB)/2, (yA+yB)/2)
+% xI = (xA+xB)/2
+% yI = (yA+yB)/2
+% IM_dot_AB = (xM - xI)*(xB - xA) + (yM - yI)*(yB - yA)
+% # Both conditions should be equivalent
+% assert expand(diff_sq - 2*IM_dot_AB) == 0
+% END-VERIFY
+
+\propriete[Hauteur d'un triangle]{
+Dans un triangle $ABC$, la hauteur issue de $A$ est la droite passant par $A$ et perpendiculaire a $(BC)$. Le pied $H$ de cette hauteur verifie :
+\[
+\overrightarrow{AH} \cdot \overrightarrow{BC} = 0.
+\]
+}
+
+\propriete[Aire d'un triangle]{
+L'aire d'un triangle $ABC$ est donnee par :
+\[
+\mathcal{A} = \frac{1}{2} \|\overrightarrow{AB}\| \times \|\overrightarrow{AC}\| \times |\sin(\widehat{BAC})|.
+\]
+On peut calculer $\sin(\widehat{BAC})$ a partir de $\cos(\widehat{BAC})$ obtenu par le produit scalaire, en utilisant $\sin^2 + \cos^2 = 1$.
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # Triangle with A=(0,0), B=(4,0), C=(1,3)
+% # AB = (4,0), AC = (1,3)
+% AB_x, AB_y = 4, 0
+% AC_x, AC_y = 1, 3
+% ps_AB_AC = AB_x*AC_x + AB_y*AC_y  # = 4
+% norm_AB = sqrt(AB_x**2 + AB_y**2)  # = 4
+% norm_AC = sqrt(AC_x**2 + AC_y**2)  # = sqrt(10)
+% cos_A = ps_AB_AC / (norm_AB * norm_AC)
+% sin_A = sqrt(1 - cos_A**2)
+% aire = Rational(1, 2) * norm_AB * norm_AC * sin_A
+% assert simplify(aire - 6) == 0
+% END-VERIFY
+
+\exemple{
+Soit $A(0; 0)$, $B(4; 0)$ et $C(1; 3)$. Calculer l'aire du triangle $ABC$.
+
+$\overrightarrow{AB}\begin{pmatrix} 4 \\ 0 \end{pmatrix}$, $\overrightarrow{AC}\begin{pmatrix} 1 \\ 3 \end{pmatrix}$.
+
+$\overrightarrow{AB} \cdot \overrightarrow{AC} = 4$, $\|\overrightarrow{AB}\| = 4$, $\|\overrightarrow{AC}\| = \sqrt{10}$.
+
+$\cos(\widehat{BAC}) = \dfrac{4}{4\sqrt{10}} = \dfrac{1}{\sqrt{10}}$, donc $\sin(\widehat{BAC}) = \dfrac{3}{\sqrt{10}}$.
+
+$\mathcal{A} = \dfrac{1}{2} \times 4 \times \sqrt{10} \times \dfrac{3}{\sqrt{10}} = 6.$
+}
+
+\erreurFrequente{
+Confondre mediatrice et mediane. La mediatrice de $[AB]$ est perpendiculaire a $AB$ et passe par le milieu ; la mediane relie un sommet au milieu du cote oppose.
+}
+
+\erreurFrequente{
+Oublier le facteur $\dfrac{1}{2}$ dans la formule de l'aire du triangle.
+}
+
+\erreurFrequente{
+Ne pas savoir traduire « $M$ appartient a la mediatrice de $[AB]$ » en equation vectorielle.
+}

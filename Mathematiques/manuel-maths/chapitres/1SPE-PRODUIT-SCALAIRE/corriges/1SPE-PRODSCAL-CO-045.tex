@@ -1,0 +1,14 @@
+% META: {"id":"1SPE-PRODSCAL-CO-045","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-045","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Median formula: AM^2 = (2*AB^2 + 2*AC^2 - BC^2)/4
+% AM_sq = Rational(2*36 + 2*64 - 100, 4)
+% assert AM_sq == 25
+% assert sqrt(25) == 5
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-045}
+\begin{enumerate}
+\item $AM^2 = \dfrac{2 \times 36 + 2 \times 64 - 100}{4} = \dfrac{72 + 128 - 100}{4} = \dfrac{100}{4} = 25$. Donc $AM = 5$.
+\item $AB^2 + AC^2 = 36 + 64 = 100 = BC^2$. Le triangle est rectangle en $A$. La mediane issue de $A$ est egale a la moitie de l'hypotenuse : $AM = BC/2 = 5$. \checkmark
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-PRODSCAL-CO-030","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-030","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Equilateral triangle: A=(0,0), B=(2,0), C=(1,sqrt(3))
+% ABx, ABy = 2, 0
+% ACx, ACy = 1, sqrt(3)
+% ps = 2*1 + 0*sqrt(3)
+% assert ps == 2
+% cos_A = 2/(2*2)
+% assert cos_A == Rational(1, 2)
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-030}
+\begin{enumerate}
+\item $C = (1; \sqrt{3})$ (milieu en abscisse, $y = \sqrt{4 - 1} = \sqrt{3}$).
+\item $\overrightarrow{AB} \cdot \overrightarrow{AC} = 2 \times 1 + 0 \times \sqrt{3} = 2$. $\|\overrightarrow{AB}\| = 2$, $\|\overrightarrow{AC}\| = 2$.
+$\cos\widehat{BAC} = \dfrac{2}{4} = \dfrac{1}{2}$, donc $\widehat{BAC} = \dfrac{\pi}{3}$.
+\item Par symetrie du triangle equilateral, les trois angles sont egaux a $\dfrac{\pi}{3}$.
+\end{enumerate}
+\end{corrige}

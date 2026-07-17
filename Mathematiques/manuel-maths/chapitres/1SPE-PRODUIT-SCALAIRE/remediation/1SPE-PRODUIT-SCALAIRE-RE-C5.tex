@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-PRODUIT-SCALAIRE-RE-C5", "chapitre": "1SPE-PRODUIT-SCALAIRE", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+\subsection*{Remediation C5 — Formule d'Al-Kashi}
+
+\begin{exercice}{1SPE-PRODSCAL-RE-C5-EX1}{1}{6}
+Triangle $ABC$ : $AB=4$, $AC=6$, $\widehat{BAC}=\frac{\pi}{3}$. Calculer $BC$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% BC_sq = 16 + 36 - 2*4*6*cos(pi/3)
+% assert simplify(BC_sq - 28) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-PRODSCAL-RE-C5-EX1}
+$BC^2 = 16+36-48\times\frac{1}{2} = 52-24 = 28$. $BC = 2\sqrt{7} \approx 5{,}29$.
+\end{corrige}
+

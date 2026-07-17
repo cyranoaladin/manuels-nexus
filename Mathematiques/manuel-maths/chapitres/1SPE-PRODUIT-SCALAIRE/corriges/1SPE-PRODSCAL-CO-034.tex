@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-PRODSCAL-CO-034","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-034","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # A(2,1), B(6,3): I=(4,2), AB=(4,2)
+% # Mediatrice: (x-4)*4 + (y-2)*2 = 0 => 4x+2y-20=0 => 2x+y=10
+% x, y = symbols('x y')
+% assert expand(4*(x-4) + 2*(y-2) - (4*x+2*y-20)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-034}
+\begin{enumerate}
+\item $I = (4; 2)$, $\overrightarrow{AB}\begin{pmatrix} 4 \\ 2 \end{pmatrix}$.
+
+$\overrightarrow{IM} \cdot \overrightarrow{AB} = 0$ : $4(x - 4) + 2(y - 2) = 0$, soit $2x + y = 10$.
+
+\item $2 \times 3 + 4 = 10$. \checkmark Le point $C$ est sur la mediatrice, donc $CA = CB$.
+\end{enumerate}
+\end{corrige}

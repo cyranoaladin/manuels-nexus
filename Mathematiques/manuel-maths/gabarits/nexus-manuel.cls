@@ -316,6 +316,7 @@
 \newcommand{\coupDePouce}[2]{%
   \par\noindent{\small\sffamily\textbf{Coup de pouce #1.} #2}\par
 }
+\newenvironment{coupdepouce}[1]{}{}
 
 % ===========================================================================
 %  ÉVALUATIONS

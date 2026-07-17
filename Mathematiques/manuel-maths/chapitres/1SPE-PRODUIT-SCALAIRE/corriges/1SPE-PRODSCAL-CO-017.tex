@@ -1,0 +1,15 @@
+% META: {"id":"1SPE-PRODSCAL-CO-017","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-017","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u=(1,2), v=(-2,1): u.v = -2+2 = 0 (orthogonal)
+% assert 1*(-2) + 2*1 == 0
+% # ||u+v||^2 = ||u||^2 + ||v||^2 = 5 + 5 = 10
+% assert (1-2)**2 + (2+1)**2 == 10
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-017}
+\begin{enumerate}
+\item $\vec{u} \cdot \vec{v} = 1 \times (-2) + 2 \times 1 = -2 + 2 = 0$. Les vecteurs sont orthogonaux.
+\item $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2 \times 0 + \|\vec{v}\|^2 = 5 + 5 = 10$.
+\item Comme $\vec{u} \cdot \vec{v} = 0$, on a bien $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2 = 10$. C'est le theoreme de Pythagore.
+\end{enumerate}
+\end{corrige}

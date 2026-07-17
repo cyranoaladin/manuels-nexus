@@ -1,0 +1,15 @@
+% META: {"id":"1SPE-PRODSCAL-CO-049","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-049","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Quadrilateral ABCD: A(0,0), B(3,0), C(4,2), D(1,3)
+% # AC^2 = 16+4 = 20, BD^2 = 4+9 = 13
+% assert 4**2 + 2**2 == 20
+% assert (1-3)**2 + 3**2 == 13
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-049}
+\begin{enumerate}
+\item $AC = \sqrt{16 + 4} = \sqrt{20} = 2\sqrt{5}$ et $BD = \sqrt{4 + 9} = \sqrt{13}$.
+\item $\overrightarrow{AC}\begin{pmatrix} 4 \\ 2 \end{pmatrix}$, $\overrightarrow{BD}\begin{pmatrix} -2 \\ 3 \end{pmatrix}$. $\overrightarrow{AC} \cdot \overrightarrow{BD} = -8 + 6 = -2 \neq 0$.
+\item $\cos\theta = \dfrac{-2}{2\sqrt{5} \times \sqrt{13}} = \dfrac{-1}{\sqrt{65}}$, donc $\theta = \arccos\!\left(\dfrac{-1}{\sqrt{65}}\right) \approx 97{,}1°$.
+\end{enumerate}
+\end{corrige}

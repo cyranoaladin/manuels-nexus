@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-PRODUIT-SCALAIRE-FR-R1", "chapitre": "1SPE-PRODUIT-SCALAIRE", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R1 : Vecteurs et coordonnees
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Vecteurs et coordonnees dans le plan}
+
+\textbf{Coordonnees d'un vecteur :} Si $A(x_A; y_A)$ et $B(x_B; y_B)$, alors $\overrightarrow{AB}\begin{pmatrix} x_B - x_A \\ y_B - y_A \end{pmatrix}$.
+
+\textbf{Somme :} $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix} + \vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix} = \begin{pmatrix} x_1 + x_2 \\ y_1 + y_2 \end{pmatrix}$.
+
+\textbf{Produit par un scalaire :} $\lambda \vec{u} = \begin{pmatrix} \lambda x_1 \\ \lambda y_1 \end{pmatrix}$.
+
+\begin{exercice}{1SPE-PRODSCAL-FR-R1-EX1}{1}{6}
+Calculer les coordonnees des vecteurs suivants.
+\begin{enumerate}
+  \item $\overrightarrow{AB}$ avec $A(1; 3)$ et $B(4; -1)$.
+  \item $\vec{u} + \vec{v}$ avec $\vec{u}\begin{pmatrix} 2 \\ -1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} -3 \\ 5 \end{pmatrix}$.
+  \item $3\vec{u}$ avec $\vec{u}\begin{pmatrix} -1 \\ 4 \end{pmatrix}$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert (4-1, -1-3) == (3, -4)
+% assert (2-3, -1+5) == (-1, 4)
+% assert (-3, 12) == (-3, 12)
+% END-VERIFY
+
+\begin{corrige}{1SPE-PRODSCAL-FR-R1-EX1}
+\textbf{1.} $\overrightarrow{AB} = \begin{pmatrix} 3 \\ -4 \end{pmatrix}$.
+\textbf{2.} $\vec{u} + \vec{v} = \begin{pmatrix} -1 \\ 4 \end{pmatrix}$.
+\textbf{3.} $3\vec{u} = \begin{pmatrix} -3 \\ 12 \end{pmatrix}$.
+\end{corrige}
+

@@ -1,0 +1,11 @@
+% META: {"id":"1SPE-PRODSCAL-CO-016","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-016","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u.v = (||u+v||^2 - ||u||^2 - ||v||^2)/2 = (49 - 9 - 25)/2 = 15/2
+% assert (49 - 9 - 25) == 15
+% assert Rational(15, 2) == Rational(15, 2)
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-016}
+On utilise l'identite de polarisation :
+$\vec{u} \cdot \vec{v} = \dfrac{\|\vec{u} + \vec{v}\|^2 - \|\vec{u}\|^2 - \|\vec{v}\|^2}{2} = \dfrac{49 - 9 - 25}{2} = \dfrac{15}{2}$.
+\end{corrige}

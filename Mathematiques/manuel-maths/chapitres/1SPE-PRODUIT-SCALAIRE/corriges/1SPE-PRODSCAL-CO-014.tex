@@ -1,0 +1,21 @@
+% META: {"id":"1SPE-PRODSCAL-CO-014","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-014","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x1, y1, x2, y2 = symbols('x1 y1 x2 y2', real=True)
+% # ||u+v||^2 - ||u-v||^2 = 4*u.v
+% upv = (x1+x2)**2 + (y1+y2)**2
+% umv = (x1-x2)**2 + (y1-y2)**2
+% assert expand(upv - umv - 4*(x1*x2+y1*y2)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-014}
+\begin{enumerate}
+\item On part de $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$.
+
+En isolant $\vec{u} \cdot \vec{v}$ :
+$\vec{u} \cdot \vec{v} = \dfrac{\|\vec{u} + \vec{v}\|^2 - \|\vec{u}\|^2 - \|\vec{v}\|^2}{2}$.
+
+\item On a $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$ et $\|\vec{u} - \vec{v}\|^2 = \|\vec{u}\|^2 - 2\,\vec{u} \cdot \vec{v} + \|\vec{v}\|^2$.
+
+Par soustraction : $\|\vec{u} + \vec{v}\|^2 - \|\vec{u} - \vec{v}\|^2 = 4\,\vec{u} \cdot \vec{v}$, d'ou le resultat.
+\end{enumerate}
+\end{corrige}

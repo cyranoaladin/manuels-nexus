@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-PRODSCAL-CO-006","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-006","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u=(2,1), v=(3,-2): u.v = 6-2 = 4
+% assert 2*3 + 1*(-2) == 4
+% # u+v = (5,-1), u-v = (-1,3)
+% assert (2+3)*1 + (1-2)*1 == 4  # not needed, just check ps
+% assert 5*(-1) + (-1)*3 == -8
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-006}
+\begin{enumerate}
+\item $\vec{u} \cdot \vec{v} = 2 \times 3 + 1 \times (-2) = 6 - 2 = 4$.
+\item $\vec{u} + \vec{v} = \begin{pmatrix} 5 \\ -1 \end{pmatrix}$ et $\vec{u} - \vec{v} = \begin{pmatrix} -1 \\ 3 \end{pmatrix}$.
+\item $(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v}) = 5 \times (-1) + (-1) \times 3 = -5 - 3 = -8$.
+\item $\|\vec{u}\|^2 = 4 + 1 = 5$ et $\|\vec{v}\|^2 = 9 + 4 = 13$. Donc $\|\vec{u}\|^2 - \|\vec{v}\|^2 = 5 - 13 = -8$. \checkmark
+\end{enumerate}
+\end{corrige}

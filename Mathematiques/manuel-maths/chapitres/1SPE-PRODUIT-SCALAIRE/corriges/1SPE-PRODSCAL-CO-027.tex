@@ -1,0 +1,15 @@
+% META: {"id":"1SPE-PRODSCAL-CO-027","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-027","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u=(2,-1), v=(3,5): cos = 1/(sqrt(5)*sqrt(34))
+% ps = 2*3 + (-1)*5
+% assert ps == 1
+% assert simplify(sqrt(5)*sqrt(34) - sqrt(170)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-027}
+$\vec{u} \cdot \vec{v} = 6 - 5 = 1$, $\|\vec{u}\| = \sqrt{5}$, $\|\vec{v}\| = \sqrt{34}$.
+
+$\cos\theta = \dfrac{1}{\sqrt{5} \times \sqrt{34}} = \dfrac{1}{\sqrt{170}}$.
+
+$\theta = \arccos\!\left(\dfrac{1}{\sqrt{170}}\right) \approx 1{,}49$ rad $\approx 85{,}6°$.
+\end{corrige}

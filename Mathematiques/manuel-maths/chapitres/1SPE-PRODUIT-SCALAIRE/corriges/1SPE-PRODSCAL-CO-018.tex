@@ -1,0 +1,14 @@
+% META: {"id":"1SPE-PRODSCAL-CO-018","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-018","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # (u+v).(u-v) = ||u||^2 - ||v||^2 = 0 iff ||u|| = ||v||
+% u, v = symbols('u v', positive=True)
+% assert simplify(u**2 - v**2) == u**2 - v**2
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-018}
+$(\vec{u} + \vec{v}) \perp (\vec{u} - \vec{v})$ signifie $(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v}) = 0$.
+
+Or $(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v}) = \|\vec{u}\|^2 - \|\vec{v}\|^2$.
+
+Donc $(\vec{u} + \vec{v}) \cdot (\vec{u} - \vec{v}) = 0 \iff \|\vec{u}\|^2 = \|\vec{v}\|^2 \iff \|\vec{u}\| = \|\vec{v}\|$ (les normes sont positives).
+\end{corrige}

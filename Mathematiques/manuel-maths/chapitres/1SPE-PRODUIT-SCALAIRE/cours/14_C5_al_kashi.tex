@@ -1,0 +1,136 @@
+% META: {"id":"1SPE-PRODSCAL-COURS-C5","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"cours","capacites_codes":["C5"],"status":"generated"}
+
+\section{Formule d'Al-Kashi}
+
+\margeAppui{La formule d'Al-Kashi generalise le theoreme de Pythagore a tout triangle, en reliant les longueurs des trois cotes a l'un des angles. Sa demonstration par le produit scalaire est exigible.}
+
+\theoreme[Formule d'Al-Kashi]{
+Dans un triangle $ABC$, en notant $a = BC$, $b = AC$, $c = AB$ :
+\[
+a^2 = b^2 + c^2 - 2bc\,\cos(\widehat{BAC}).
+\]
+De meme, par permutation circulaire :
+\[
+b^2 = a^2 + c^2 - 2ac\,\cos(\widehat{ABC}), \qquad c^2 = a^2 + b^2 - 2ab\,\cos(\widehat{ACB}).
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% a, b, c, A_angle = symbols('a b c A', positive=True)
+% # Al-Kashi: a^2 = b^2 + c^2 - 2bc*cos(A)
+% al_kashi = b**2 + c**2 - 2*b*c*cos(A_angle)
+% # When A = pi/2: a^2 = b^2 + c^2 (Pythagoras)
+% assert simplify(al_kashi.subs(A_angle, pi/2) - (b**2 + c**2)) == 0
+% # Numerical check: triangle 3-4-5, angle opposite to 5 is pi/2
+% # 5^2 = 3^2 + 4^2 - 2*3*4*cos(pi/2) = 9 + 16 - 0 = 25
+% assert al_kashi.subs([(b, 3), (c, 4), (A_angle, pi/2)]) == 25
+% # Triangle with a=7, b=5, c=8: cos(A) = (b^2+c^2-a^2)/(2bc)
+% cos_A = (5**2 + 8**2 - 7**2) / (2*5*8)
+% assert cos_A == Rational(40, 80)
+% assert cos_A == Rational(1, 2)
+% END-VERIFY
+
+\demonstration{
+\textbf{Demonstration de la formule d'Al-Kashi (exigible).}
+
+Dans le triangle $ABC$, on a $\overrightarrow{BC} = \overrightarrow{BA} + \overrightarrow{AC} = \overrightarrow{AC} - \overrightarrow{AB}$.
+
+On calcule $BC^2 = \|\overrightarrow{BC}\|^2 = \overrightarrow{BC} \cdot \overrightarrow{BC}$ :
+\begin{align*}
+a^2 &= \|\overrightarrow{AC} - \overrightarrow{AB}\|^2 \\
+&= (\overrightarrow{AC} - \overrightarrow{AB}) \cdot (\overrightarrow{AC} - \overrightarrow{AB}) \\
+&= \|\overrightarrow{AC}\|^2 - 2\,\overrightarrow{AB} \cdot \overrightarrow{AC} + \|\overrightarrow{AB}\|^2 \\
+&= b^2 + c^2 - 2\,\overrightarrow{AB} \cdot \overrightarrow{AC}.
+\end{align*}
+
+Or $\overrightarrow{AB} \cdot \overrightarrow{AC} = \|\overrightarrow{AB}\| \times \|\overrightarrow{AC}\| \times \cos(\widehat{BAC}) = c \times b \times \cos(\widehat{BAC})$.
+
+Donc $a^2 = b^2 + c^2 - 2bc\,\cos(\widehat{BAC})$.
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% b, c, A_angle = symbols('b c A', positive=True)
+% # BC = AC - AB, so ||BC||^2 = ||AC||^2 - 2*AB.AC + ||AB||^2
+% # = b^2 + c^2 - 2*c*b*cos(A)
+% a_sq = b**2 + c**2 - 2*b*c*cos(A_angle)
+% # This is the formula
+% assert simplify(a_sq - (b**2 + c**2 - 2*b*c*cos(A_angle))) == 0
+% END-VERIFY
+
+\propriete[Cas particulier : theoreme de Pythagore]{
+Si $\widehat{BAC} = \dfrac{\pi}{2}$, alors $\cos(\widehat{BAC}) = 0$ et la formule d'Al-Kashi donne :
+\[
+a^2 = b^2 + c^2.
+\]
+C'est le theoreme de Pythagore.
+}
+
+\propriete[Formule de la mediane]{
+Soit $M$ le milieu de $[BC]$. Alors :
+\[
+AM^2 = \frac{2\,AB^2 + 2\,AC^2 - BC^2}{4}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # Triangle A=(0,0), B=(4,0), C=(2,6). M = milieu BC = (3,3)
+% AM_sq = 3**2 + 3**2  # = 18
+% AB_sq = 16
+% AC_sq = 4 + 36  # = 40
+% BC_sq = (2-4)**2 + 6**2  # = 4+36 = 40
+% median_formula = (2*AB_sq + 2*AC_sq - BC_sq) / 4
+% assert median_formula == Rational(2*16 + 2*40 - 40, 4)
+% assert median_formula == Rational(72, 4)
+% assert median_formula == 18
+% assert AM_sq == 18
+% END-VERIFY
+
+\exemple{
+Dans un triangle $ABC$ avec $AB = 8$, $AC = 5$ et $\widehat{BAC} = \dfrac{\pi}{3}$.
+
+Calculer $BC$.
+
+$BC^2 = AB^2 + AC^2 - 2 \times AB \times AC \times \cos\!\left(\dfrac{\pi}{3}\right) = 64 + 25 - 2 \times 8 \times 5 \times \dfrac{1}{2} = 89 - 40 = 49.$
+
+Donc $BC = 7$.
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert 8**2 + 5**2 - 2*8*5*cos(pi/3) == 49
+% assert sqrt(49) == 7
+% END-VERIFY
+
+\exemple{
+Dans un triangle $ABC$ avec $a = 7$, $b = 5$, $c = 8$. Calculer $\widehat{BAC}$.
+
+$\cos(\widehat{BAC}) = \dfrac{b^2 + c^2 - a^2}{2bc} = \dfrac{25 + 64 - 49}{2 \times 5 \times 8} = \dfrac{40}{80} = \dfrac{1}{2}.$
+
+Donc $\widehat{BAC} = \dfrac{\pi}{3}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import *
+% cos_A = Rational(25 + 64 - 49, 2*5*8)
+% assert cos_A == Rational(1, 2)
+% assert acos(Rational(1, 2)) == pi/3
+% END-VERIFY
+
+\erreurFrequente{
+Se tromper dans l'attribution des cotes et des angles dans la formule d'Al-Kashi. Le cote isole au premier membre est \textbf{toujours} le cote oppose a l'angle utilise.
+}
+
+\erreurFrequente{
+Oublier le signe moins dans $a^2 = b^2 + c^2 \mathbf{-}\ 2bc\cos(\widehat{A})$.
+}
+
+\erreurFrequente{
+Confondre la formule d'Al-Kashi avec la loi des sinus $\dfrac{a}{\sin A} = \dfrac{b}{\sin B}$, qui est une autre relation dans le triangle.
+}
+
+\approfondissement{
+La formule d'Al-Kashi est aussi appelee « loi des cosinus » ou « theoreme de la generalisation de Pythagore ». Elle est connue depuis l'Antiquite (Euclide) mais a ete systematisee par le mathematicien persan Al-Kashi au XV\textsuperscript{e} siecle.
+}

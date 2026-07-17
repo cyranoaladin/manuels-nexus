@@ -1,0 +1,28 @@
+% META: {"id":"1SPE-PRODSCAL-CO-050","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-050","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Triangle with sides 5, 6, 7: all angles
+% cos_A = Rational(36+49-25, 2*6*7)
+% assert cos_A == Rational(60, 84) == Rational(5, 7)
+% cos_B = Rational(25+49-36, 2*5*7)
+% assert cos_B == Rational(38, 70) == Rational(19, 35)
+% cos_C = Rational(25+36-49, 2*5*6)
+% assert cos_C == Rational(12, 60) == Rational(1, 5)
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-050}
+\begin{enumerate}
+\item $\cos\widehat{A} = \dfrac{36+49-25}{84} = \dfrac{60}{84} = \dfrac{5}{7}$, $\widehat{A} \approx 44{,}4°$.
+
+$\cos\widehat{B} = \dfrac{25+49-36}{70} = \dfrac{38}{70} = \dfrac{19}{35}$, $\widehat{B} \approx 57{,}1°$.
+
+$\cos\widehat{C} = \dfrac{25+36-49}{60} = \dfrac{12}{60} = \dfrac{1}{5}$, $\widehat{C} \approx 78{,}5°$.
+
+\item $\sin\widehat{C} = \sqrt{1 - 1/25} = \dfrac{\sqrt{24}}{5} = \dfrac{2\sqrt{6}}{5}$.
+
+$\mathcal{A} = \dfrac{1}{2} \times 5 \times 6 \times \dfrac{2\sqrt{6}}{5} = 6\sqrt{6} \approx 14{,}7$ m$^2$.
+
+\item Mediane issue du sommet oppose a $c = 7$ (sommet $C$, milieu $M$ de $[AB]$) :
+
+$CM^2 = \dfrac{2a^2 + 2b^2 - c^2}{4} = \dfrac{50 + 72 - 49}{4} = \dfrac{73}{4}$, donc $CM = \dfrac{\sqrt{73}}{2} \approx 4{,}27$ m.
+\end{enumerate}
+\end{corrige}

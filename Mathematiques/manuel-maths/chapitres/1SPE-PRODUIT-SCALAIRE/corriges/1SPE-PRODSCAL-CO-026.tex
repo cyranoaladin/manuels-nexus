@@ -1,0 +1,12 @@
+% META: {"id":"1SPE-PRODSCAL-CO-026","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-026","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u=(3,1), v=(1,k): u.v = 3+k = 0 => k = -3
+% k = symbols('k')
+% assert solve(3 + k, k) == [-3]
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-026}
+$\vec{u} \cdot \vec{v} = 3 \times 1 + 1 \times k = 3 + k$.
+
+$\vec{u} \perp \vec{v} \iff \vec{u} \cdot \vec{v} = 0 \iff 3 + k = 0 \iff k = -3$.
+\end{corrige}

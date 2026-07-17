@@ -1,0 +1,130 @@
+% META: {"id":"1SPE-PRODSCAL-TD-CONTEXTUALISE","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"td","capacites_codes":["C1","C3","C5"],"duree_min":50,"status":"generated"}
+
+% ============================================================
+% TD CONTEXTUALISE — Navigation et cap
+% Nexus Reussite — 1re Specialite
+% Duree : 50 min — 4 parties
+% ============================================================
+
+\section*{TD — Navigation et cap}
+
+\textit{Duree : 50 minutes.}
+
+\bigskip
+
+\begin{center}
+\textbf{Situation}
+
+\medskip
+\parbox{0.9\textwidth}{Un bateau quitte le port $P$ et navigue $8$ km dans la direction du vecteur $\vec{u}$ (cap nord-est, angle $\frac{\pi}{4}$ avec l'axe est). Il change ensuite de cap et parcourt $5$ km dans la direction du vecteur $\vec{v}$ (cap sud-est, angle $-\frac{\pi}{6}$ avec l'axe est). On souhaite calculer la distance totale au port et l'angle entre les deux trajets.}
+\end{center}
+
+\bigskip
+
+\hrule
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie A — Modelisation vectorielle (C1) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}
+  \item Exprimer les coordonnees de $\vec{u}$ dans un repere orthonorme, sachant que $\|\vec{u}\| = 8$ et que $\vec{u}$ fait un angle de $\frac{\pi}{4}$ avec l'axe des abscisses.
+  \item Exprimer les coordonnees de $\vec{v}$ avec $\|\vec{v}\| = 5$ et un angle de $-\frac{\pi}{6}$.
+  \item Calculer $\vec{u} \cdot \vec{v}$ par la formule analytique.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # u = 8*(cos(pi/4), sin(pi/4)) = (4*sqrt(2), 4*sqrt(2))
+% ux = 8*cos(pi/4)
+% uy = 8*sin(pi/4)
+% assert simplify(ux - 4*sqrt(2)) == 0
+% assert simplify(uy - 4*sqrt(2)) == 0
+% # v = 5*(cos(-pi/6), sin(-pi/6)) = (5*sqrt(3)/2, -5/2)
+% vx = 5*cos(-pi/6)
+% vy = 5*sin(-pi/6)
+% assert simplify(vx - 5*sqrt(3)/2) == 0
+% assert simplify(vy + Rational(5, 2)) == 0
+% # u.v = ux*vx + uy*vy
+% ps = ux*vx + uy*vy
+% ps_simplified = simplify(ps)
+% # = 4*sqrt(2)*5*sqrt(3)/2 + 4*sqrt(2)*(-5/2)
+% # = 10*sqrt(6) - 10*sqrt(2)
+% assert simplify(ps - (10*sqrt(6) - 10*sqrt(2))) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie B — Angle entre les trajets (C3) — 10 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Calculer $\vec{u} \cdot \vec{v}$ par la definition geometrique. En deduire l'angle $\theta$ entre $\vec{u}$ et $\vec{v}$.
+  \item Verifier la coherence avec la valeur obtenue dans la Partie A.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # Angle between u and v: pi/4 - (-pi/6) = pi/4 + pi/6 = 5*pi/12
+% theta = pi/4 + pi/6
+% assert simplify(theta - 5*pi/12) == 0
+% # u.v = ||u||*||v||*cos(theta) = 8*5*cos(5*pi/12) = 40*cos(5*pi/12)
+% ps_geom = 8*5*cos(5*pi/12)
+% ps_analyt = 10*sqrt(6) - 10*sqrt(2)
+% assert simplify(ps_geom - ps_analyt) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie C — Distance au port (C5) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Le point d'arrivee $Q$ verifie $\overrightarrow{PQ} = \vec{u} + \vec{v}$. Calculer $PQ^2 = \|\vec{u} + \vec{v}\|^2$ en utilisant l'identite remarquable vectorielle.
+  \item En deduire $PQ$ (arrondir au dixieme).
+  \item Retrouver ce resultat par la formule d'Al-Kashi dans le triangle forme par $P$, le point intermediaire $R$ (fin du premier trajet) et $Q$, sachant que $PR = 8$, $RQ = 5$ et l'angle en $R$ est $\pi - \theta$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # PQ^2 = ||u||^2 + 2*u.v + ||v||^2
+% u_sq = 64
+% v_sq = 25
+% ps = 10*sqrt(6) - 10*sqrt(2)
+% PQ_sq = u_sq + 2*ps + v_sq
+% assert simplify(PQ_sq - (89 + 20*sqrt(6) - 20*sqrt(2))) == 0
+% PQ_num = float(N(sqrt(PQ_sq)))
+% assert abs(PQ_num - 10.46) < 0.1
+% # Al-Kashi: PQ^2 = PR^2 + RQ^2 - 2*PR*RQ*cos(angle at R)
+% # angle at R = pi - 5*pi/12 = 7*pi/12
+% angle_R = pi - 5*pi/12
+% al_kashi = 64 + 25 - 2*8*5*cos(7*pi/12)
+% assert simplify(al_kashi - PQ_sq) == 0
+% END-VERIFY
+
+\bigskip
+
+%---------------------------------------------------------------
+\subsection*{Partie D — Synthese (C1, C5) — 15 min}
+%---------------------------------------------------------------
+
+\begin{enumerate}[resume]
+  \item Le cap de retour direct de $Q$ a $P$ fait un angle $\alpha$ avec l'axe est. Calculer $\cos\alpha$ et $\sin\alpha$ a partir des coordonnees de $\overrightarrow{QP}$.
+  \item Rediger une synthese de 3 a 5 lignes expliquant comment le produit scalaire et la formule d'Al-Kashi permettent de resoudre un probleme de navigation.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # QP = -(u+v) = -(4*sqrt(2) + 5*sqrt(3)/2, 4*sqrt(2) - 5/2)
+% QPx = -(4*sqrt(2) + 5*sqrt(3)/2)
+% QPy = -(4*sqrt(2) - Rational(5, 2))
+% PQ_norm = sqrt(QPx**2 + QPy**2)
+% cos_alpha = QPx / PQ_norm
+% sin_alpha = QPy / PQ_norm
+% # Just verify cos^2 + sin^2 = 1
+% assert simplify(cos_alpha**2 + sin_alpha**2 - 1) == 0
+% END-VERIFY

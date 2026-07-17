@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-PRODSCAL-CO-039","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-039","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Orthocenter: AH perp BC and BH perp AC
+% # A(0,0), B(5,0), C(2,3)
+% # BC=(-3,3), AC=(2,3)
+% x, y = symbols('x y')
+% # AH.BC = 0: -3x + 3y = 0 => x = y
+% # BH.AC = 0: 2(x-5) + 3y = 0 => 2x+3y = 10
+% sol = solve([x-y, 2*x+3*y-10], [x,y])
+% assert sol == {x: 2, y: 2}
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-039}
+\begin{enumerate}
+\item $\overrightarrow{BC}\begin{pmatrix} -3 \\ 3 \end{pmatrix}$. Hauteur issue de $A$ : $\overrightarrow{AM} \cdot \overrightarrow{BC} = 0$, soit $-3x + 3y = 0$, d'ou $x = y$.
+\item $\overrightarrow{AC}\begin{pmatrix} 2 \\ 3 \end{pmatrix}$. Hauteur issue de $B$ : $2(x-5) + 3y = 0$, soit $2x + 3y = 10$.
+\item $x = y$ et $2x + 3x = 10$, donc $x = 2$, $y = 2$. L'orthocentre est $H(2; 2)$.
+\end{enumerate}
+\end{corrige}

@@ -1,0 +1,31 @@
+{
+  "chapitre": "1SPE-PRODUIT-SCALAIRE",
+  "mode": "ex_nihilo",
+  "capacites": {
+    "C1": {
+      "approche": "Definition geometrique du produit scalaire : u.v = ||u|| ||v|| cos(u,v). Interpretation par projection orthogonale : u.v = ||u|| * projection de v sur u. Expression analytique dans un repere orthonorme : u.v = x_a*x_b + y_a*y_b. Equivalence des trois definitions.",
+      "erreurs_types": ["Oublier le cosinus dans la definition geometrique", "Confondre produit scalaire et produit vectoriel", "Oublier que le repere doit etre orthonorme pour la formule analytique"],
+      "format_examen": "Calcul de produits scalaires avec les deux methodes, verification de la coherence"
+    },
+    "C2": {
+      "approche": "Bilinearite : (lambda u + mu v).w = lambda(u.w) + mu(v.w). Symetrie : u.v = v.u. Norme et produit scalaire : ||u||^2 = u.u. Demonstration exigible de l'expression analytique a partir de ||u||^2 = u.u. Identites remarquables vectorielles.",
+      "erreurs_types": ["Ecrire (u.v)^2 au lieu de u.u = ||u||^2", "Oublier que u.v n'est pas un vecteur mais un reel", "Confondre ||u+v||^2 et ||u||^2 + ||v||^2"],
+      "format_examen": "Developpement de ||u+v||^2, demonstration de l'expression analytique, calcul de normes"
+    },
+    "C3": {
+      "approche": "Critere d'orthogonalite : u perp v ssi u.v = 0. Calcul de l'angle entre deux vecteurs : cos(u,v) = u.v / (||u|| ||v||). Application au calcul d'angles dans les figures geometriques.",
+      "erreurs_types": ["Oublier de verifier que les vecteurs sont non nuls avant de calculer l'angle", "Ecrire cos au lieu de arccos pour trouver l'angle", "Confondre orthogonalite et parallelisme"],
+      "format_examen": "Montrer que deux droites sont perpendiculaires, calculer un angle dans un triangle"
+    },
+    "C4": {
+      "approche": "Equation de la mediatrice d'un segment par le produit scalaire. Hauteurs d'un triangle : le pied de la hauteur minimise la distance. Calcul d'aires de triangles via le produit scalaire et la formule A = (1/2)||u||*||v||*sin(angle).",
+      "erreurs_types": ["Confondre mediatrice et mediane", "Oublier le facteur 1/2 dans l'aire", "Ne pas savoir traduire 'M appartient a la mediatrice de [AB]' en equation"],
+      "format_examen": "Determination de la mediatrice, preuve d'orthocentre, calcul d'aire"
+    },
+    "C5": {
+      "approche": "Formule d'Al-Kashi : a^2 = b^2 + c^2 - 2bc cos(A). Demonstration exigible a partir du produit scalaire. Cas particulier : theoreme de Pythagore quand A = pi/2. Application : calcul de cotes et d'angles dans un triangle quelconque. Formule de la mediane.",
+      "erreurs_types": ["Se tromper dans l'attribution des cotes et angles dans Al-Kashi", "Oublier le signe moins dans la formule", "Confondre formule d'Al-Kashi et loi des sinus"],
+      "format_examen": "Calcul du troisieme cote d'un triangle, calcul d'un angle, demonstration de la formule"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+% META: {"id":"1SPE-PRODSCAL-EX-036","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C4"],"capacites_codes":["C4"],"methodes":["M4"],"parcours":2,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-036.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-036.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Projection of v on u
+% # proj = (u.v / ||u||^2) * u
+% ps = 3*1 + (-1)*2  # = 1
+% assert ps == 1
+% u_sq = 1 + 4  # = 5
+% assert u_sq == 5
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-036}{2}{8}
+Soient $\vec{u}\begin{pmatrix} 1 \\ 2 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 3 \\ -1 \end{pmatrix}$.
+\begin{enumerate}
+  \item Calculer le projete orthogonal de $\vec{v}$ sur $\vec{u}$ : $\text{proj}_{\vec{u}}\vec{v} = \dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\|^2}\,\vec{u}$.
+  \item Verifier que $\vec{v} - \text{proj}_{\vec{u}}\vec{v}$ est orthogonal a $\vec{u}$.
+\end{enumerate}
+\end{exercice}

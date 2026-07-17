@@ -1,0 +1,26 @@
+chapitre: 1SPE-PRODUIT-SCALAIRE
+niveau: 1SPE
+theme: PRODUIT-SCALAIRE
+titre: "Produit scalaire"
+statut: complete
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C1, libelle_eleve: "Je sais calculer un produit scalaire (definition geometrique, projection, expression analytique)." }
+  - { code: C2, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C2, libelle_eleve: "Je sais utiliser les proprietes du produit scalaire (bilinearite, symetrie, norme)." }
+  - { code: C3, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C3, libelle_eleve: "Je sais determiner l'orthogonalite de deux vecteurs et calculer un angle." }
+  - { code: C4, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C4, libelle_eleve: "Je sais utiliser le produit scalaire dans des problemes geometriques (mediatrice, hauteurs, aires)." }
+  - { code: C5, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C5, libelle_eleve: "Je sais appliquer la formule d'Al-Kashi et en connais la demonstration." }
+
+prerequis:
+  - { code: R1, libelle: "Vecteurs et coordonnees dans le plan", chapitre_origine: "2GT" }
+  - { code: R2, libelle: "Norme d'un vecteur", chapitre_origine: "2GT" }
+  - { code: R3, libelle: "Trigonometrie (cos, sin, valeurs remarquables)", chapitre_origine: "1SPE-TRIGONOMETRIE" }
+  - { code: R4, libelle: "Calcul litteral (identites remarquables, developpement)", chapitre_origine: "2GT" }
+  - { code: R5, libelle: "Theoreme de Pythagore", chapitre_origine: "2GT" }
+
+situation_accroche: >
+  Un randonneur se deplace de 5 km vers le nord-est puis de 3 km vers le sud-est.
+  Quelle distance le separe de son point de depart ?
+  Comment calculer l'angle entre deux trajets dans le plan ?
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

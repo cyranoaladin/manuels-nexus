@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-PRODSCAL-EX-030","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C3"],"capacites_codes":["C3"],"methodes":["M3"],"parcours":3,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-030.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-030.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Equilateral triangle: A=(0,0), B=(2,0), C=(1,sqrt(3))
+% ABx, ABy = 2, 0
+% ACx, ACy = 1, sqrt(3)
+% ps = 2*1 + 0*sqrt(3)
+% assert ps == 2
+% cos_A = 2/(2*2)
+% assert cos_A == Rational(1, 2)
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-030}{3}{10}
+Soit $ABC$ un triangle equilateral de cote $2$. On place $A$ a l'origine et $B$ en $(2; 0)$.
+\begin{enumerate}
+  \item Determiner les coordonnees de $C$ (on choisira $C$ avec $y_C > 0$).
+  \item Calculer $\overrightarrow{AB} \cdot \overrightarrow{AC}$ et en deduire l'angle $\widehat{BAC}$.
+  \item Verifier que les trois angles du triangle sont egaux a $\dfrac{\pi}{3}$.
+\end{enumerate}
+\end{exercice}

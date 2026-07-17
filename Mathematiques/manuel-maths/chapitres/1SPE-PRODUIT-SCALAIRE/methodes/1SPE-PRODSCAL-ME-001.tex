@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-PRODSCAL-ME-001","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"methode","capacites_codes":["C1"],"status":"generated"}
+\begin{fichemethode}{M1}{Calculer un produit scalaire}
+\quandUtiliser{J'utilise cette methode lorsque l'enonce demande de calculer $\vec{u} \cdot \vec{v}$, soit a partir des normes et de l'angle, soit a partir des coordonnees.}
+\pasApas{\begin{enumerate}
+  \item Si je connais les coordonnees de $\vec{u}\begin{pmatrix} x_1 \\ y_1 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} x_2 \\ y_2 \end{pmatrix}$ dans un repere \textbf{orthonorme} : $\vec{u} \cdot \vec{v} = x_1 x_2 + y_1 y_2$.
+  \item Si je connais les normes et l'angle : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \|\vec{v}\| \times \cos(\vec{u}, \vec{v})$.
+  \item Si je connais une projection : $\vec{u} \cdot \vec{v} = \|\vec{u}\| \times \overline{OH}$ ou $H$ est le projete orthogonal.
+\end{enumerate}}
+\exempleRedige{Calculons $\vec{u} \cdot \vec{v}$ avec $\vec{u}\begin{pmatrix} 2 \\ -3 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} 4 \\ 1 \end{pmatrix}$.
+\commentaireMarge{Etape 1 : coordonnees connues, repere orthonorme.}
+$\vec{u} \cdot \vec{v} = 2 \times 4 + (-3) \times 1 = 8 - 3 = 5.$}
+\pieges{\begin{itemize}
+  \item Utiliser la formule analytique dans un repere non orthonorme.
+  \item Oublier le cosinus dans la formule geometrique.
+  \item Confondre le produit scalaire (nombre reel) avec un vecteur.
+\end{itemize}}
+\verifier{Je verifie le signe : si l'angle est aigu, le produit scalaire est positif ; si l'angle est obtus, il est negatif.}
+\sEntrainer{\refExos{M1}}
+\end{fichemethode}

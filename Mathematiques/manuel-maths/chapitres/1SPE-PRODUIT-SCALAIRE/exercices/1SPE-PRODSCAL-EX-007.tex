@@ -1,0 +1,19 @@
+% META: {"id":"1SPE-PRODSCAL-EX-007","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"exercice","capacites":["1SPE-PRODUIT-SCALAIRE-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":2,"competences":["calculer"],"duree_min":5,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/exercices/1SPE-PRODSCAL-EX-007.tex","corrige_tex":"chapitres/1SPE-PRODUIT-SCALAIRE/corriges/1SPE-PRODSCAL-CO-007.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u=(4,-3): ||u|| = 5
+% assert sqrt(16 + 9) == 5
+% # v=(-2,1): ||v|| = sqrt(5)
+% assert sqrt(4+1) == sqrt(5)
+% # u.v = -8-3 = -11
+% assert 4*(-2) + (-3)*1 == -11
+% END-VERIFY
+\begin{exercice}{1SPE-PRODSCAL-EX-007}{2}{8}
+Soient $\vec{u}\begin{pmatrix} 4 \\ -3 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} -2 \\ 1 \end{pmatrix}$.
+\begin{enumerate}
+  \item Calculer $\|\vec{u}\|$ et $\|\vec{v}\|$.
+  \item Calculer $\vec{u} \cdot \vec{v}$.
+  \item En deduire le cosinus de l'angle $\theta$ entre $\vec{u}$ et $\vec{v}$.
+  \item Ce produit scalaire est-il positif ou negatif ? Que peut-on en deduire sur l'angle ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-PRODSCAL-ME-003","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"methode","capacites_codes":["C3"],"status":"generated"}
+\begin{fichemethode}{M3}{Montrer l'orthogonalite ou calculer un angle}
+\quandUtiliser{J'utilise cette methode lorsque l'enonce demande de montrer que deux droites ou vecteurs sont perpendiculaires, ou de calculer l'angle entre deux vecteurs.}
+\pasApas{\begin{enumerate}
+  \item Je calcule le produit scalaire $\vec{u} \cdot \vec{v}$ (par coordonnees ou geometriquement).
+  \item \textbf{Pour l'orthogonalite :} je verifie que $\vec{u} \cdot \vec{v} = 0$.
+  \item \textbf{Pour l'angle :} je calcule $\cos\theta = \dfrac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \times \|\vec{v}\|}$ puis $\theta = \arccos(\cos\theta)$.
+  \item Je verifie que $\vec{u} \neq \vec{0}$ et $\vec{v} \neq \vec{0}$ avant de diviser par les normes.
+\end{enumerate}}
+\exempleRedige{Montrons que $\vec{u}\begin{pmatrix} 3 \\ 2 \end{pmatrix}$ et $\vec{v}\begin{pmatrix} -4 \\ 6 \end{pmatrix}$ sont orthogonaux.
+\commentaireMarge{Etape 1 : calcul du produit scalaire.}
+$\vec{u} \cdot \vec{v} = 3 \times (-4) + 2 \times 6 = -12 + 12 = 0$.
+\commentaireMarge{Etape 2 : conclusion.}
+Comme $\vec{u} \cdot \vec{v} = 0$, les vecteurs $\vec{u}$ et $\vec{v}$ sont orthogonaux.}
+\pieges{\begin{itemize}
+  \item Conclure que deux vecteurs sont paralleles si $\vec{u} \cdot \vec{v} \neq 0$.
+  \item Oublier de verifier que les vecteurs sont non nuls pour le calcul d'angle.
+  \item Confondre $\cos\theta$ et $\theta$ : il faut passer par $\arccos$.
+\end{itemize}}
+\verifier{Pour l'orthogonalite, je verifie en faisant un dessin rapide ou en utilisant la condition $x_1 x_2 + y_1 y_2 = 0$.}
+\sEntrainer{\refExos{M3}}
+\end{fichemethode}

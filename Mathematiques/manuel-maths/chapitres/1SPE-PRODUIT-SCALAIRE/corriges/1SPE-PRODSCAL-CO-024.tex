@@ -1,0 +1,11 @@
+% META: {"id":"1SPE-PRODSCAL-CO-024","chapitre":"1SPE-PRODUIT-SCALAIRE","type_objet":"corrige","exercice_id":"1SPE-PRODSCAL-EX-024","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u=(1,sqrt(3)), v=(sqrt(3),-1): u.v = sqrt(3) - sqrt(3) = 0
+% assert simplify(1*sqrt(3) + sqrt(3)*(-1)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-PRODSCAL-EX-024}
+$\vec{u} \cdot \vec{v} = 1 \times \sqrt{3} + \sqrt{3} \times (-1) = \sqrt{3} - \sqrt{3} = 0$.
+
+Comme $\vec{u} \cdot \vec{v} = 0$ et les deux vecteurs sont non nuls, ils sont orthogonaux. Les droites de vecteurs directeurs $\vec{u}$ et $\vec{v}$ sont donc perpendiculaires.
+\end{corrige}
