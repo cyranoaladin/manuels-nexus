@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-TRIGO-CO-048", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-048", "capacites_codes": ["C2","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% f = 2*sin(x) - sqrt(3)
+% assert f.subs(x, pi/3) == 0
+% assert f.subs(x, 2*pi/3) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-048}
+
+\textbf{1.} $f(x) = 0 \iff \sin x = \dfrac{\sqrt{3}}{2} \iff x = \dfrac{\pi}{3}$ ou $x = \dfrac{2\pi}{3}$ sur $[0;2\pi]$.
+
+\textbf{2.} $f$ croissante sur $\left[0;\dfrac{\pi}{2}\right]$ (de $-\sqrt{3}$ a $2-\sqrt{3}$), decroissante sur $\left[\dfrac{\pi}{2};\dfrac{3\pi}{2}\right]$ (de $2-\sqrt{3}$ a $-2-\sqrt{3}$), croissante sur $\left[\dfrac{3\pi}{2};2\pi\right]$ (de $-2-\sqrt{3}$ a $-\sqrt{3}$).
+
+\textbf{3.} $f(x) > 0$ sur $\left]\dfrac{\pi}{3};\dfrac{2\pi}{3}\right[$, $f(x) < 0$ sur $\left[0;\dfrac{\pi}{3}\right[ \cup \left]\dfrac{2\pi}{3};2\pi\right]$.
+
+\textbf{4.} $2\sin x \geqslant \sqrt{3} \iff f(x) \geqslant 0 \iff x \in \left[\dfrac{\pi}{3};\dfrac{2\pi}{3}\right]$.
+
+\end{corrige}

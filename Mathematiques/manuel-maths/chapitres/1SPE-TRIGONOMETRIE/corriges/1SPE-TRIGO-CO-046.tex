@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-TRIGO-CO-046", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-046", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% u = symbols('u')
+% g = -u**2 - u + 1
+% assert g.subs(u, Rational(-1,2)) == Rational(5,4)
+% assert simplify(sin(2*pi/3)**2 - cos(2*pi/3) - Rational(5,4)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-046}
+
+\textbf{1.} $f(x) = \sin^2 x - \cos x = (1 - \cos^2 x) - \cos x = -\cos^2 x - \cos x + 1$.
+
+\textbf{2.} $g(u) = -u^2 - u + 1$ sur $[-1;1]$. Le sommet est en $u_0 = -\dfrac{-1}{2 \times (-1)} = -\dfrac{1}{2}$.
+
+$g\!\left(-\dfrac{1}{2}\right) = -\dfrac{1}{4} + \dfrac{1}{2} + 1 = \dfrac{5}{4}$.
+
+Comme $a = -1 < 0$, le maximum de $g$ est $\dfrac{5}{4}$, atteint en $u = -\dfrac{1}{2}$.
+
+On verifie : $g(-1) = -1 + 1 + 1 = 1$ et $g(1) = -1 - 1 + 1 = -1$.
+
+\textbf{3.} Le maximum de $f$ est $\dfrac{5}{4}$, atteint lorsque $\cos x = -\dfrac{1}{2}$, c'est-a-dire $x = \dfrac{2\pi}{3} + 2k\pi$ ou $x = \dfrac{4\pi}{3} + 2k\pi$, $k \in \mathbb{Z}$.
+
+\end{corrige}

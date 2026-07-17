@@ -1,0 +1,100 @@
+% META: {"id": "1SPE-TRIGO-CR-012", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+
+\section{Formules d'addition et de duplication}
+
+% ============================================================
+% STRATE 1 — Formules d'addition
+% ============================================================
+
+\theoreme{
+Pour tous reels $a$ et $b$ :
+\begin{align*}
+  \cos(a + b) &= \cos a \cos b - \sin a \sin b, \\
+  \cos(a - b) &= \cos a \cos b + \sin a \sin b, \\
+  \sin(a + b) &= \sin a \cos b + \cos a \sin b, \\
+  \sin(a - b) &= \sin a \cos b - \cos a \sin b.
+\end{align*}
+}
+
+% ============================================================
+% STRATE 3 — Demonstration exigible de cos(a+b)
+% ============================================================
+
+\demonstration{
+\textbf{Demonstration de la formule $\cos(a+b) = \cos a \cos b - \sin a \sin b$.}
+
+\medskip
+On se place dans le cercle trigonometrique. Soient $M$, $N$, $P$, $Q$ les points associes respectivement aux reels $a$, $-b$, $a+b$, $0$.
+
+Les coordonnees sont : $M = (\cos a\,;\, \sin a)$, $N = (\cos b\,;\, -\sin b)$ (car $\cos(-b) = \cos b$ et $\sin(-b) = -\sin b$), $P = (\cos(a+b)\,;\, \sin(a+b))$, $Q = (1\,;\, 0)$.
+
+L'angle oriente $(\overrightarrow{ON}, \overrightarrow{OM})$ a pour mesure $a - (-b) = a + b$, qui est aussi la mesure de $(\overrightarrow{OQ}, \overrightarrow{OP})$.
+
+Donc les arcs $NM$ et $QP$ ont la meme longueur, ce qui donne $MN = QP$ (meme corde).
+
+\medskip
+Calculons $MN^2$ :
+\[
+  MN^2 = (\cos a - \cos b)^2 + (\sin a + \sin b)^2 = 2 - 2\cos a \cos b + 2\sin a \sin b.
+\]
+
+Calculons $QP^2$ :
+\[
+  QP^2 = (\cos(a+b) - 1)^2 + \sin^2(a+b) = 2 - 2\cos(a+b).
+\]
+
+En egalant $MN^2 = QP^2$ :
+\[
+  2 - 2\cos a \cos b + 2\sin a \sin b = 2 - 2\cos(a+b),
+\]
+d'ou
+\[
+  \cos(a+b) = \cos a \cos b - \sin a \sin b. \qquad \square
+\]
+}
+
+\exemple{
+Calculons $\cos\!\left(\dfrac{\pi}{12}\right) = \cos\!\left(\dfrac{\pi}{3} - \dfrac{\pi}{4}\right)$ :
+\[
+  \cos\!\left(\dfrac{\pi}{12}\right) = \cos\!\left(\dfrac{\pi}{3}\right)\cos\!\left(\dfrac{\pi}{4}\right) + \sin\!\left(\dfrac{\pi}{3}\right)\sin\!\left(\dfrac{\pi}{4}\right) = \frac{1}{2} \cdot \frac{\sqrt{2}}{2} + \frac{\sqrt{3}}{2} \cdot \frac{\sqrt{2}}{2} = \frac{\sqrt{2} + \sqrt{6}}{4}.
+\]
+}
+
+% ============================================================
+% STRATE 2 — Formules de duplication
+% ============================================================
+
+\propriete{
+Pour tout reel $a$ :
+\begin{align*}
+  \cos(2a) &= \cos^2 a - \sin^2 a = 2\cos^2 a - 1 = 1 - 2\sin^2 a, \\
+  \sin(2a) &= 2\sin a \cos a.
+\end{align*}
+}
+
+\demonstration{
+On pose $b = a$ dans les formules d'addition :
+\[
+  \cos(2a) = \cos(a+a) = \cos^2 a - \sin^2 a.
+\]
+En utilisant $\cos^2 a = 1 - \sin^2 a$ : $\cos(2a) = 1 - 2\sin^2 a$.
+
+En utilisant $\sin^2 a = 1 - \cos^2 a$ : $\cos(2a) = 2\cos^2 a - 1$.
+
+Pour le sinus : $\sin(2a) = \sin(a+a) = \sin a \cos a + \cos a \sin a = 2\sin a \cos a$.
+}
+
+\exemple{
+$\sin\!\left(\dfrac{\pi}{3}\right) = \sin\!\left(2 \times \dfrac{\pi}{6}\right) = 2\sin\!\left(\dfrac{\pi}{6}\right)\cos\!\left(\dfrac{\pi}{6}\right) = 2 \times \dfrac{1}{2} \times \dfrac{\sqrt{3}}{2} = \dfrac{\sqrt{3}}{2}$. \checkmark
+}
+
+% ============================================================
+% Linearisation (complement)
+% ============================================================
+
+\propriete{
+Les formules de duplication permettent d'exprimer $\cos^2 a$ et $\sin^2 a$ en fonction de $\cos(2a)$ :
+\[
+  \cos^2 a = \frac{1 + \cos(2a)}{2}, \qquad \sin^2 a = \frac{1 - \cos(2a)}{2}.
+\]
+}

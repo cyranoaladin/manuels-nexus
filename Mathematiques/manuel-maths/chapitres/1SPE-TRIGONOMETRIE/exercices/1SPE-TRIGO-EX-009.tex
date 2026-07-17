@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-EX-009", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "chercher"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-009.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Sector area = (1/2) * R^2 * theta
+% R, theta = symbols('R theta', positive=True)
+% area = Rational(1,2) * R**2 * theta
+% assert area.subs(R, 5).subs(theta, pi/3) == Rational(25,2) * pi / 3
+% assert simplify(area.subs(R, 5).subs(theta, pi/3) - 25*pi/6) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-009}{3}{15}
+L'aire d'un secteur circulaire de rayon $R$ et d'angle au centre $\theta$ (en radians) est $\mathcal{A} = \dfrac{1}{2}R^2\theta$.
+\begin{enumerate}
+  \item Justifier cette formule en utilisant la proportionnalite avec l'aire du disque complet.
+  \item Calculer l'aire du secteur circulaire de rayon $5$~cm et d'angle $\dfrac{\pi}{3}$.
+  \item Quel angle au centre faut-il choisir pour que l'aire du secteur soit egale au quart de l'aire du disque ? Exprimer le resultat en radians et en degres.
+\end{enumerate}
+\end{exercice}

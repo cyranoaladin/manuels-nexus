@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-CO-007", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-007", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% R = 6371
+% nm = R * pi / (60 * 180)
+% assert abs(float(nm) - 1.853) < 0.01
+% assert 5 * 60 == 300
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-007}
+
+\textbf{1.} $1' = \dfrac{1}{60}° = \dfrac{1}{60} \times \dfrac{\pi}{180} = \dfrac{\pi}{10800}$ rad.
+
+\textbf{2.} La longueur d'un mille nautique est $\ell = R\theta = 6371 \times \dfrac{\pi}{10800} \approx 1{,}852$~km.
+
+\textbf{3.} $5° = 5 \times 60 = 300$ minutes d'arc, soit $300$ milles nautiques.
+
+\end{corrige}

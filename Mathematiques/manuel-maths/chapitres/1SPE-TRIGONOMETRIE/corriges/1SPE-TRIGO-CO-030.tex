@@ -1,0 +1,32 @@
+% META: {"id": "1SPE-TRIGO-CO-030", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-030", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% a, b = symbols('a b', real=True)
+% M = Matrix([cos(a), sin(a)])
+% N = Matrix([cos(b), -sin(b)])
+% P = Matrix([cos(a+b), sin(a+b)])
+% Q = Matrix([1, 0])
+% MN2 = (M-N).dot(M-N)
+% QP2 = (Q-P).dot(Q-P)
+% assert trigsimp(MN2 - QP2) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-030}
+
+\textbf{1.} L'arc $\overset{\frown}{NM}$ a pour mesure $a - (-b) = a + b$, et l'arc $\overset{\frown}{QP}$ a pour mesure $(a+b) - 0 = a+b$. Les deux arcs ont la meme mesure.
+
+\textbf{2.} Deux arcs de meme longueur sur un meme cercle ont des cordes de meme longueur, donc $MN = QP$.
+
+\textbf{3.} $MN^2 = (\cos a - \cos b)^2 + (\sin a + \sin b)^2$
+$= \cos^2 a - 2\cos a\cos b + \cos^2 b + \sin^2 a + 2\sin a\sin b + \sin^2 b$
+$= (\cos^2 a + \sin^2 a) + (\cos^2 b + \sin^2 b) - 2\cos a\cos b + 2\sin a\sin b$
+$= 2 - 2\cos a\cos b + 2\sin a\sin b$.
+
+\textbf{4.} $QP^2 = (\cos(a+b) - 1)^2 + \sin^2(a+b)$
+$= \cos^2(a+b) - 2\cos(a+b) + 1 + \sin^2(a+b)$
+$= 2 - 2\cos(a+b)$.
+
+\textbf{5.} $MN^2 = QP^2$ donne :
+$2 - 2\cos a\cos b + 2\sin a\sin b = 2 - 2\cos(a+b)$,
+d'ou $\cos(a+b) = \cos a\cos b - \sin a\sin b$. \hfill $\square$
+
+\end{corrige}

@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-TRIGO-CO-018", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-018", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp((cos(x)+sin(x))**2 - 1 - 2*cos(x)*sin(x)) == 0
+% # cos(x)+sin(x)=7/5 => cos*sin = (49/25-1)/2 = 24/50 = 12/25
+% assert Rational(49,25) - 1 == Rational(24,25)
+% assert Rational(24,25) / 2 == Rational(12,25)
+% # (cos-sin)^2 = 1 - 2*12/25 = 1/25
+% assert 1 - Rational(24,25) == Rational(1,25)
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-018}
+
+\textbf{1.} $(\cos x + \sin x)^2 = \cos^2 x + 2\cos x\sin x + \sin^2 x = 1 + 2\cos x\sin x$.
+
+\textbf{2.} On a bien $(\cos x + \sin x)^2 = 1 + 2\cos x\sin x$ d'apres $\cos^2 x + \sin^2 x = 1$.
+
+\textbf{3.} $(\cos x - \sin x)^2 = \cos^2 x - 2\cos x\sin x + \sin^2 x = 1 - 2\cos x\sin x$.
+
+\textbf{4.} Si $\cos x + \sin x = \dfrac{7}{5}$, alors $\left(\dfrac{7}{5}\right)^2 = 1 + 2\cos x\sin x$, d'ou $\cos x\sin x = \dfrac{49/25 - 1}{2} = \dfrac{12}{25}$.
+
+$(\cos x - \sin x)^2 = 1 - 2 \times \dfrac{12}{25} = \dfrac{1}{25}$.
+
+Comme $x \in \left]0;\dfrac{\pi}{4}\right[$, $\cos x > \sin x$, donc $\cos x - \sin x = \dfrac{1}{5}$.
+
+\end{corrige}

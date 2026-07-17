@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-TRIGO-CO-013", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-013", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert Rational(3,5)**2 + Rational(4,5)**2 == 1
+% assert Rational(5,13)**2 + Rational(12,13)**2 == 1
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-013}
+
+\textbf{1.} $\cos^2 x + \sin^2 x = 1$, donc $\sin^2 x = 1 - \left(\dfrac{3}{5}\right)^2 = 1 - \dfrac{9}{25} = \dfrac{16}{25}$.
+
+Comme $x \in \left[0;\dfrac{\pi}{2}\right]$, $\sin x \geqslant 0$, donc $\sin x = \dfrac{4}{5}$.
+
+\textbf{2.} $\cos^2 x = 1 - \left(-\dfrac{5}{13}\right)^2 = 1 - \dfrac{25}{169} = \dfrac{144}{169}$.
+
+Comme $x \in \left[\pi;\dfrac{3\pi}{2}\right]$, $\cos x \leqslant 0$, donc $\cos x = -\dfrac{12}{13}$.
+
+\textbf{3.} $\left(\dfrac{3}{5}\right)^2 + \left(\dfrac{4}{5}\right)^2 = \dfrac{9+16}{25} = 1$ \checkmark \quad et \quad $\left(-\dfrac{12}{13}\right)^2 + \left(-\dfrac{5}{13}\right)^2 = \dfrac{144+25}{169} = 1$ \checkmark.
+
+\end{corrige}

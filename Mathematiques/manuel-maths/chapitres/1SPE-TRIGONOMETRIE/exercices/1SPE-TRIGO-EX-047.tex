@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-TRIGO-EX-047", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C1","1SPE-TRIGONOMETRIE-C2","1SPE-TRIGONOMETRIE-C3"], "capacites_codes": ["C1","C2","C3"], "methodes": ["M1","M2","M3"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-047.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-047.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # cos(5pi/12) = cos(pi/4 + pi/6) = cos(pi/4)*cos(pi/6) - sin(pi/4)*sin(pi/6)
+% assert simplify(cos(5*pi/12) - (sqrt(6)-sqrt(2))/4) == 0
+% assert simplify(sin(5*pi/12) - (sqrt(6)+sqrt(2))/4) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-047}{2}{15}
+\begin{enumerate}
+  \item Convertir $75°$ en radians.
+  \item Ecrire $\dfrac{5\pi}{12}$ comme somme de deux angles remarquables.
+  \item Calculer $\cos\!\left(\dfrac{5\pi}{12}\right)$ et $\sin\!\left(\dfrac{5\pi}{12}\right)$.
+  \item En deduire $\cos\!\left(-\dfrac{5\pi}{12}\right)$ et $\sin\!\left(\pi - \dfrac{5\pi}{12}\right)$.
+\end{enumerate}
+\end{exercice}

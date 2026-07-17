@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-TRIGO-CO-020", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-020", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert cos(pi/4) == sqrt(2)/2
+% assert cos(pi/6) == sqrt(3)/2
+% assert sin(pi/6) == Rational(1,2)
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-020}
+
+\textbf{1.} Soit un triangle rectangle isocele d'hypotenuse $1$. Si les cotes egaux mesurent $a$, alors $a^2 + a^2 = 1$, soit $2a^2 = 1$, d'ou $a = \dfrac{1}{\sqrt{2}} = \dfrac{\sqrt{2}}{2}$.
+
+L'angle a la base vaut $\dfrac{\pi}{4}$, donc $\cos\!\left(\dfrac{\pi}{4}\right) = \sin\!\left(\dfrac{\pi}{4}\right) = \dfrac{\sqrt{2}}{2}$.
+
+\textbf{2.} Triangle equilateral de cote $1$ : la hauteur $h$ partage la base en deux segments de longueur $\dfrac{1}{2}$.
+
+Par Pythagore : $h^2 + \left(\dfrac{1}{2}\right)^2 = 1^2$, d'ou $h = \dfrac{\sqrt{3}}{2}$.
+
+L'angle au sommet vaut $\dfrac{\pi}{3}$ et le demi-angle a la base vaut $\dfrac{\pi}{6}$ :
+
+$\cos\!\left(\dfrac{\pi}{6}\right) = \dfrac{h}{1} = \dfrac{\sqrt{3}}{2}$, \quad $\sin\!\left(\dfrac{\pi}{6}\right) = \dfrac{1/2}{1} = \dfrac{1}{2}$.
+
+$\cos\!\left(\dfrac{\pi}{3}\right) = \dfrac{1/2}{1} = \dfrac{1}{2}$, \quad $\sin\!\left(\dfrac{\pi}{3}\right) = \dfrac{h}{1} = \dfrac{\sqrt{3}}{2}$.
+
+\end{corrige}

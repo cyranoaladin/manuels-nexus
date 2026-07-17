@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-TRIGO-CO-039", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-039", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert cos(0) == cos(0)
+% assert cos(pi/2) == cos(3*pi/2)
+% assert sin(pi/4) == cos(pi/4)
+% assert sin(5*pi/4) == cos(5*pi/4)
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-039}
+
+\textbf{1.} $\cos x = \cos(3x)$ : $x = 3x + 2k\pi$ ou $x = -3x + 2k\pi$.
+
+Cas 1 : $-2x = 2k\pi$, soit $x = -k\pi = k\pi$. Sur $[0;2\pi]$ : $x = 0$, $\pi$, $2\pi$.
+
+Cas 2 : $4x = 2k\pi$, soit $x = \dfrac{k\pi}{2}$. Sur $[0;2\pi]$ : $x = 0$, $\dfrac{\pi}{2}$, $\pi$, $\dfrac{3\pi}{2}$, $2\pi$.
+
+Solutions sur $[0;2\pi]$ : $\left\{0,\;\dfrac{\pi}{2},\;\pi,\;\dfrac{3\pi}{2},\;2\pi\right\}$.
+
+\textbf{2.} $\sin x = \cos x$ : si $\cos x \neq 0$, cela revient a $\dfrac{\sin x}{\cos x} = 1$.
+
+On ecrit $\sin x - \cos x = 0$. On sait que $\sin x = \cos\!\left(\dfrac{\pi}{2} - x\right)$, donc $\cos\!\left(\dfrac{\pi}{2} - x\right) = \cos x$, d'ou $\dfrac{\pi}{2} - x = x + 2k\pi$ ou $\dfrac{\pi}{2} - x = -x + 2k\pi$.
+
+Cas 1 : $\dfrac{\pi}{2} = 2x + 2k\pi$, soit $x = \dfrac{\pi}{4} + k\pi$.
+Cas 2 : $\dfrac{\pi}{2} = 2k\pi$, impossible.
+
+Sur $[0;2\pi]$ : $x = \dfrac{\pi}{4}$ et $x = \dfrac{5\pi}{4}$.
+
+\end{corrige}

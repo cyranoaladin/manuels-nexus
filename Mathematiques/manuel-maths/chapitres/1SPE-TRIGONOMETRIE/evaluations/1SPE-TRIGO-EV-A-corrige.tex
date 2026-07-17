@@ -1,0 +1,96 @@
+% META: {"id": "1SPE-TRIGO-EV-A-corrige", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-TRIGO-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/evaluations/1SPE-TRIGO-EV-A-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert 225 * pi / 180 == 5*pi/4
+% assert 7*pi/6 * 180/pi == 210
+% assert Rational(11,4) - 2 == Rational(3,4)
+% assert cos(-2*pi/3) == Rational(-1,2)
+% assert sin(-2*pi/3) == -sqrt(3)/2
+% assert cos(5*pi/6) == -sqrt(3)/2
+% assert sin(5*pi/6) == Rational(1,2)
+% assert sin(7*pi/4) == -sqrt(2)/2
+% assert Rational(3,5)**2 + Rational(4,5)**2 == 1
+% assert simplify(cos(5*pi/12) - (sqrt(6)-sqrt(2))/4) == 0
+% assert simplify(sin(pi/8)**2 - (2-sqrt(2))/4) == 0
+% f = 2*cos(x) + 1
+% assert f.subs(x, 0) == 3
+% assert f.subs(x, pi) == -1
+% assert f.subs(x, 2*pi/3) == 0
+% assert f.subs(x, 4*pi/3) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-EV-A}
+
+%===============================================================
+\section*{Exercice 1 \hfill (4 points) — C1}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt ; Q2 : 1 pt ; Q3 : 1 pt ; Q4 : 1 pt}
+
+\textbf{1.} $225° = 225 \times \dfrac{\pi}{180} = \dfrac{5\pi}{4}$.
+
+\textbf{2.} $\dfrac{7\pi}{6} = \dfrac{7\pi}{6} \times \dfrac{180}{\pi} = 210°$.
+
+\textbf{3.} $\dfrac{11\pi}{4} - 2\pi = \dfrac{11\pi}{4} - \dfrac{8\pi}{4} = \dfrac{3\pi}{4} \in {]-\pi;\pi]}$. Mesure principale : $\dfrac{3\pi}{4}$.
+
+\textbf{4.} $-\dfrac{2\pi}{3}$ : $\cos\!\left(-\dfrac{2\pi}{3}\right) = \cos\dfrac{2\pi}{3} = -\dfrac{1}{2}$ et $\sin\!\left(-\dfrac{2\pi}{3}\right) = -\sin\dfrac{2\pi}{3} = -\dfrac{\sqrt{3}}{2}$.
+
+Coordonnees : $\left(-\dfrac{1}{2}\,;\,-\dfrac{\sqrt{3}}{2}\right)$.
+
+%===============================================================
+\section*{Exercice 2 \hfill (4 points) — C2}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1,5 pt ; Q2 : 1 pt ; Q3 : 1,5 pt}
+
+\textbf{1.} $\dfrac{5\pi}{6} = \pi - \dfrac{\pi}{6}$ :
+$\cos\dfrac{5\pi}{6} = -\cos\dfrac{\pi}{6} = -\dfrac{\sqrt{3}}{2}$, \quad $\sin\dfrac{5\pi}{6} = \sin\dfrac{\pi}{6} = \dfrac{1}{2}$.
+
+\textbf{2.} $\dfrac{7\pi}{4} = 2\pi - \dfrac{\pi}{4} = -\dfrac{\pi}{4} + 2\pi$ :
+$\sin\dfrac{7\pi}{4} = -\sin\dfrac{\pi}{4} = -\dfrac{\sqrt{2}}{2}$.
+
+\textbf{3.} $\sin^2 x = 1 - \dfrac{9}{25} = \dfrac{16}{25}$. Comme $x \in \left]\dfrac{\pi}{2};\pi\right[$, $\sin x > 0$, donc $\sin x = \dfrac{4}{5}$.
+
+%===============================================================
+\section*{Exercice 3 \hfill (4 points) — C3}
+%===============================================================
+
+\baremeIndicatif{Q1 : 2 pts ; Q2 : 1 pt ; Q3 : 1 pt}
+
+\textbf{1.} $\cos\dfrac{5\pi}{12} = \cos\!\left(\dfrac{\pi}{4}+\dfrac{\pi}{6}\right) = \cos\dfrac{\pi}{4}\cos\dfrac{\pi}{6} - \sin\dfrac{\pi}{4}\sin\dfrac{\pi}{6}$
+$= \dfrac{\sqrt{2}}{2} \cdot \dfrac{\sqrt{3}}{2} - \dfrac{\sqrt{2}}{2} \cdot \dfrac{1}{2} = \dfrac{\sqrt{6}-\sqrt{2}}{4}$.
+
+\textbf{2.} $\cos(2x) = \cos^2 x - \sin^2 x = (1-\sin^2 x) - \sin^2 x = 1 - 2\sin^2 x$.
+
+\textbf{3.} $\sin^2\dfrac{\pi}{8} = \dfrac{1-\cos\dfrac{\pi}{4}}{2} = \dfrac{1 - \frac{\sqrt{2}}{2}}{2} = \dfrac{2 - \sqrt{2}}{4}$.
+
+%===============================================================
+\section*{Exercice 4 \hfill (4 points) — C4}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1,5 pt ; Q2 : 1,5 pt ; Q3 : 1 pt}
+
+\textbf{1.} $\cos x = \dfrac{1}{2}$ : $x = \dfrac{\pi}{3} + 2k\pi$ ou $x = -\dfrac{\pi}{3} + 2k\pi$, $k \in \mathbb{Z}$.
+
+\textbf{2.} $\sin x = -\dfrac{\sqrt{2}}{2}$ : $\alpha = -\dfrac{\pi}{4}$.
+$x = -\dfrac{\pi}{4} + 2\pi = \dfrac{7\pi}{4}$ ou $x = \pi+\dfrac{\pi}{4} = \dfrac{5\pi}{4}$. Solutions : $\left\{\dfrac{5\pi}{4};\dfrac{7\pi}{4}\right\}$.
+
+\textbf{3.} $\cos x \leqslant -\dfrac{1}{2}$ : $\cos x = -\dfrac{1}{2}$ en $x = \dfrac{2\pi}{3}$ et $x = \dfrac{4\pi}{3}$.
+Solution : $x \in \left[\dfrac{2\pi}{3};\dfrac{4\pi}{3}\right]$.
+
+%===============================================================
+\section*{Exercice 5 \hfill (4 points) — C5}
+%===============================================================
+
+\baremeIndicatif{Q1 : 1 pt ; Q2 : 1,5 pt ; Q3 : 1 pt ; Q4 : 0,5 pt}
+
+\textbf{1.} Periode : $2\pi$. $f(-x) = 2\cos(-x)+1 = 2\cos x + 1 = f(x)$ : $f$ est paire.
+
+\textbf{2.} $f$ decroissante sur $[0;\pi]$ (de $3$ a $-1$) et croissante sur $[\pi;2\pi]$ (de $-1$ a $3$).
+
+\textbf{3.} $f(x) = 0 \iff \cos x = -\dfrac{1}{2} \iff x = \dfrac{2\pi}{3}$ ou $x = \dfrac{4\pi}{3}$.
+
+\textbf{4.} $f(x) \geqslant 0$ sur $\left[0;\dfrac{2\pi}{3}\right] \cup \left[\dfrac{4\pi}{3};2\pi\right]$ et $f(x) \leqslant 0$ sur $\left[\dfrac{2\pi}{3};\dfrac{4\pi}{3}\right]$.
+
+\end{corrige}

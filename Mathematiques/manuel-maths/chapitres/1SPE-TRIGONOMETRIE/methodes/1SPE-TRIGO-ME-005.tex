@@ -1,0 +1,53 @@
+% META: {"id": "1SPE-TRIGO-ME-005", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M5}{Etudier une fonction trigonometrique}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'on doit etudier les variations, la periodicite,
+  le tableau de signes ou representer graphiquement une fonction du type
+  $f(x) = A\cos(x) + B$ ou $f(x) = A\sin(x) + B$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Identifier l'ensemble de definition ($\mathbb{R}$ pour $\cos$ et $\sin$).
+    \item Etudier la parite : si $f(-x) = f(x)$, $f$ est paire ; si $f(-x) = -f(x)$, $f$ est impaire.
+    \item Verifier la periodicite : $f(x + T) = f(x)$ pour tout $x$. Pour $A\cos x + B$ ou $A\sin x + B$, la periode est $T = 2\pi$.
+    \item Dresser le tableau de variations sur une periode $[0\,;\,2\pi]$ en utilisant les variations connues de $\cos$ ou $\sin$.
+    \item Determiner les extremums : pour $f(x) = A\cos x + B$, le maximum est $A + B$ (si $A > 0$) ou $-A + B$ (si $A < 0$), et inversement pour le minimum.
+    \item Tracer la courbe sur une ou deux periodes.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Etudier $f(x) = 3\sin x - 1$ sur $[0\,;\,2\pi]$.
+
+  \medskip
+  \commentaireMarge{$f$ est de la forme $A\sin x + B$ avec $A = 3$, $B = -1$.}%
+  La fonction $f$ est definie sur $\mathbb{R}$, periodique de periode $2\pi$.
+
+  \commentaireMarge{Variations : memes que $\sin$ (car $A = 3 > 0$).}%
+  $f$ est croissante sur $\left[0\,;\,\dfrac{\pi}{2}\right]$, decroissante sur $\left[\dfrac{\pi}{2}\,;\,\dfrac{3\pi}{2}\right]$, croissante sur $\left[\dfrac{3\pi}{2}\,;\,2\pi\right]$.
+
+  \commentaireMarge{Extremums.}%
+  Maximum : $f\!\left(\dfrac{\pi}{2}\right) = 3 \times 1 - 1 = 2$.
+
+  Minimum : $f\!\left(\dfrac{3\pi}{2}\right) = 3 \times (-1) - 1 = -4$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre les intervalles de monotonie de $\cos$ et $\sin$.
+      Retenir : $\cos$ a un seul changement ($\pi$), $\sin$ en a deux ($\frac{\pi}{2}$ et $\frac{3\pi}{2}$).
+    \item \textbf{Piege 2.} Si $A < 0$, les variations sont inversees par rapport a celles de $\cos$ ou $\sin$.
+    \item \textbf{Piege 3.} Oublier que la periode est $2\pi$, pas $\pi$ (sauf cas particuliers comme $\cos(2x)$).
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier que les valeurs extremes sont coherentes : pour $f(x) = A\cos x + B$,
+  les valeurs extremes sont $B - |A|$ et $B + |A|$.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

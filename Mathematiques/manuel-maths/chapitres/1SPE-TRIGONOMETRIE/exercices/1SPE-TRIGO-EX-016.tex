@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-TRIGO-EX-016", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-016.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-016.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # cos(x) + cos(pi-x) = cos(x) - cos(x) = 0
+% assert trigsimp(cos(x) + cos(pi - x)) == 0
+% # sin(x) + sin(pi-x) = sin(x) + sin(x) = 2*sin(x)
+% assert trigsimp(sin(x) + sin(pi - x) - 2*sin(x)) == 0
+% # sin(x)*sin(pi-x) + cos(x)*cos(pi-x) = sin^2(x) - cos^2(x) = -cos(2x)
+% expr = sin(x)*sin(pi-x) + cos(x)*cos(pi-x)
+% assert trigsimp(expr + cos(2*x)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-016}{2}{12}
+Pour tout reel $x$, simplifier les expressions suivantes.
+\begin{enumerate}
+  \item $\cos x + \cos(\pi - x)$
+  \item $\sin x + \sin(\pi - x)$
+  \item $\sin x \cdot \sin(\pi - x) + \cos x \cdot \cos(\pi - x)$
+\end{enumerate}
+\end{exercice}

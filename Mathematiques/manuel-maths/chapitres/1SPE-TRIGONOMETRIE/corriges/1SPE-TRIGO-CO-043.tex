@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-CO-043", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-043", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp(cos(x)**2 - (1 + cos(2*x))/2) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-043}
+
+\textbf{1.} $\cos^2 x = \dfrac{1+\cos(2x)}{2}$ (linearisation).
+
+\textbf{2.} La periode de $\cos(2x)$ est $\pi$, donc la periode de $h$ est $\pi$.
+
+\textbf{3.} Sur $[0;\pi]$ : $h(0) = 1$, $h\!\left(\dfrac{\pi}{2}\right) = 0$, $h(\pi) = 1$. $h$ est decroissante sur $\left[0;\dfrac{\pi}{2}\right]$ et croissante sur $\left[\dfrac{\pi}{2};\pi\right]$.
+
+\textbf{4.} $h(-x) = \cos^2(-x) = \cos^2 x = h(x)$ : $h$ est paire.
+
+\end{corrige}

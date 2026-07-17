@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-TRIGO-CO-035", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-035", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert cos(pi/3) == Rational(1,2)
+% # cos(2x)=1/2 => 2x = pi/3+2kpi or 2x = -pi/3+2kpi => x=pi/6+kpi or x=-pi/6+kpi
+% # On [0;2pi]: pi/6, 5pi/6, 7pi/6, 11pi/6
+% for v in [pi/6, 5*pi/6, 7*pi/6, 11*pi/6]:
+%     assert cos(2*v) == Rational(1,2)
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-035}
+
+\textbf{1.} $\cos(2x) = \dfrac{1}{2}$ : $2x = \dfrac{\pi}{3} + 2k\pi$ ou $2x = -\dfrac{\pi}{3} + 2k\pi$, donc $x = \dfrac{\pi}{6} + k\pi$ ou $x = -\dfrac{\pi}{6} + k\pi$.
+
+Sur $[0;2\pi]$ : $x \in \left\{\dfrac{\pi}{6},\;\dfrac{5\pi}{6},\;\dfrac{7\pi}{6},\;\dfrac{11\pi}{6}\right\}$.
+
+\textbf{2.} $\sin(2x) = -\dfrac{\sqrt{3}}{2}$ : $2x = -\dfrac{\pi}{3} + 2k\pi$ ou $2x = \pi + \dfrac{\pi}{3} + 2k\pi = \dfrac{4\pi}{3} + 2k\pi$.
+
+Donc $x = -\dfrac{\pi}{6} + k\pi$ ou $x = \dfrac{2\pi}{3} + k\pi$.
+
+Sur $[0;2\pi]$ : $x \in \left\{\dfrac{2\pi}{3},\;\dfrac{5\pi}{6},\;\dfrac{5\pi}{3},\;\dfrac{11\pi}{6}\right\}$.
+
+\end{corrige}

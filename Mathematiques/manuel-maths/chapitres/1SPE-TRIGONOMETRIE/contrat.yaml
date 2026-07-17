@@ -1,0 +1,27 @@
+chapitre: 1SPE-TRIGONOMETRIE
+niveau: 1SPE
+theme: TRIGONOMETRIE
+titre: "Trigonometrie"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-TRIGONOMETRIE-C1, libelle_eleve: "Je sais placer un angle oriente sur le cercle trigonometrique et convertir degres/radians." }
+  - { code: C2, ref_capacite: 1SPE-TRIGONOMETRIE-C2, libelle_eleve: "Je connais la relation $\\cos^2+\\sin^2=1$, les valeurs remarquables et les formules de symetrie." }
+  - { code: C3, ref_capacite: 1SPE-TRIGONOMETRIE-C3, libelle_eleve: "Je sais utiliser les formules d'addition $\\cos(a+b)$, $\\sin(a+b)$ et de duplication $\\cos(2a)$, $\\sin(2a)$." }
+  - { code: C4, ref_capacite: 1SPE-TRIGONOMETRIE-C4, libelle_eleve: "Je sais resoudre les equations $\\cos(x)=a$, $\\sin(x)=a$ et les inequations trigonometriques." }
+  - { code: C5, ref_capacite: 1SPE-TRIGONOMETRIE-C5, libelle_eleve: "Je sais etudier les fonctions cosinus et sinus : variations sur $[0\\,;\\,2\\pi]$, periodicite, representation graphique." }
+
+prerequis:
+  - { code: R1, libelle: "Theoreme de Pythagore", chapitre_origine: "2GT" }
+  - { code: R2, libelle: "Reperage dans le plan : coordonnees, distance", chapitre_origine: "2GT" }
+  - { code: R3, libelle: "Fonctions de reference : carre, inverse, racine carree", chapitre_origine: "2GT" }
+  - { code: R4, libelle: "Calcul litteral : developper, factoriser, identites remarquables", chapitre_origine: "2GT" }
+  - { code: R5, libelle: "Second degre : discriminant, resolution, signe du trinome", chapitre_origine: "1SPE-SECOND-DEGRE" }
+
+situation_accroche: >
+  Une grande roue de fete foraine a un rayon de 25 metres et son centre est a 27 metres du sol.
+  A quelle hauteur se trouve un passager apres un tour d'un sixieme du cercle ?
+  Modeliser la hauteur en fonction de l'angle de rotation conduit naturellement
+  aux fonctions cosinus et sinus et au radian comme unite de mesure d'angle.
+
+temps_estime_h: { parcours1: 14, parcours2: 11, parcours3: 9 }

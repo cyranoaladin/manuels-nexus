@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-TRIGO-EX-040", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-040.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-040.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # 2*cos^2(x) - 3*cos(x) + 1 = 0
+% u = symbols('u')
+% sols_u = solve(2*u**2 - 3*u + 1, u)
+% assert sorted(sols_u) == [Rational(1,2), 1]
+% # cos(x) = 1 => x = 2k*pi
+% # cos(x) = 1/2 => x = pi/3 + 2k*pi or x = -pi/3 + 2k*pi
+% assert cos(pi/3) == Rational(1,2)
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-040}{3}{18}
+Resoudre dans $\mathbb{R}$ l'equation $2\cos^2 x - 3\cos x + 1 = 0$.
+
+\begin{enumerate}
+  \item Poser $u = \cos x$ et resoudre l'equation du second degre $2u^2 - 3u + 1 = 0$.
+  \item Pour chaque valeur de $u$, resoudre l'equation $\cos x = u$.
+  \item Donner l'ensemble complet des solutions.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-TRIGO-EX-006", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-006.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # On a regular hexagon inscribed in the unit circle
+% # vertices at k*pi/3 for k=0..5
+% assert cos(0) == 1
+% assert cos(pi/3) == Rational(1,2)
+% assert cos(2*pi/3) == Rational(-1,2)
+% assert cos(pi) == -1
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-006}{2}{12}
+On considere un hexagone regulier $A_0A_1A_2A_3A_4A_5$ inscrit dans le cercle trigonometrique, avec $A_0 = (1\,;\,0)$.
+\begin{enumerate}
+  \item Quelle est la mesure en radians de l'angle au centre $\widehat{A_0OA_1}$ ?
+  \item En deduire les mesures (en radians) des angles associes aux points $A_1$, $A_2$, $A_3$, $A_4$, $A_5$.
+  \item Donner les coordonnees de chacun des sommets.
+  \item Verifier que $A_3 = (-1\,;\,0)$.
+\end{enumerate}
+\end{exercice}

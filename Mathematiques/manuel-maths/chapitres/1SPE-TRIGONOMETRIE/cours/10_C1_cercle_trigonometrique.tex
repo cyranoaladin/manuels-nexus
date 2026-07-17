@@ -1,0 +1,68 @@
+% META: {"id": "1SPE-TRIGO-CR-010", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Cercle trigonometrique, radian, angles orientes}
+
+% ============================================================
+% STRATE 1 — Definitions et proprietes fondamentales
+% ============================================================
+
+\definition[1]{
+Le \textbf{radian} est l'unite de mesure d'angle definie par : un angle de $1$~radian est un angle au centre qui intercepte un arc de longueur egale au rayon du cercle.
+
+La correspondance avec les degres est :
+\[
+  \pi \text{ rad} = 180°.
+\]
+}
+
+\exemple{
+Conversions usuelles :
+\[
+  90° = \frac{\pi}{2} \text{ rad}, \quad 60° = \frac{\pi}{3} \text{ rad}, \quad 45° = \frac{\pi}{4} \text{ rad}, \quad 30° = \frac{\pi}{6} \text{ rad}, \quad 360° = 2\pi \text{ rad}.
+\]
+}
+
+\definition[2]{
+Le \textbf{cercle trigonometrique} est le cercle de centre $O$ et de rayon $1$ dans un repere orthonorme $(O\,;\,\vec{\imath},\vec{\jmath})$.
+
+Le point $A = (1\,;\,0)$ est appele \textbf{origine des arcs}. Le sens positif (sens trigonometrique) est le sens inverse des aiguilles d'une montre.
+}
+
+\definition[3]{
+Soit $t$ un reel. On associe au reel $t$ le point $M$ du cercle trigonometrique tel que l'arc $\overset{\frown}{AM}$, mesure dans le sens positif, a pour longueur $|t|$ (positivement si $t > 0$, negativement si $t < 0$).
+
+On dit que $t$ est \textbf{une mesure} (en radians) de l'angle oriente $(\overrightarrow{OA},\overrightarrow{OM})$.
+}
+
+\propriete{
+Deux reels $t$ et $t'$ definissent le meme point sur le cercle trigonometrique si et seulement si
+\[
+  t' = t + 2k\pi, \quad k \in \mathbb{Z}.
+\]
+On dit que $t$ et $t'$ sont \textbf{egaux modulo $2\pi$}.
+}
+
+\definition[4]{
+La \textbf{mesure principale} d'un angle est l'unique reel $t_0 \in {]-\pi\,;\,\pi]}$ tel que $t = t_0 + 2k\pi$ pour un certain $k \in \mathbb{Z}$.
+}
+
+\exemple{
+\begin{itemize}
+  \item La mesure principale de $\dfrac{7\pi}{3}$ est $\dfrac{7\pi}{3} - 2\pi = \dfrac{\pi}{3}$.
+  \item La mesure principale de $-\dfrac{5\pi}{4}$ est $-\dfrac{5\pi}{4} + 2\pi = \dfrac{3\pi}{4}$.
+\end{itemize}
+}
+
+% ============================================================
+% STRATE 2 — Methode de conversion
+% ============================================================
+
+\margeAppui{Pour convertir un angle $\alpha$ de degres en radians, on utilise la formule $\alpha_{\text{rad}} = \alpha_{\text{deg}} \times \frac{\pi}{180}$. Reciproquement : $\alpha_{\text{deg}} = \alpha_{\text{rad}} \times \frac{180}{\pi}$.}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+La notion de radian est liee a la longueur d'arc : sur un cercle de rayon $R$, un angle au centre de mesure $\theta$ (en radians) intercepte un arc de longueur $\ell = R\theta$. Sur le cercle trigonometrique ($R = 1$), la longueur d'arc est donc egale a la mesure de l'angle en radians.
+}

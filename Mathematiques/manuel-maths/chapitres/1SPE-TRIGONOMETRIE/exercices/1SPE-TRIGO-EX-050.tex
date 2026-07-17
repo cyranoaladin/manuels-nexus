@@ -1,0 +1,30 @@
+% META: {"id": "1SPE-TRIGO-EX-050", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C1","1SPE-TRIGONOMETRIE-C2","1SPE-TRIGONOMETRIE-C3","1SPE-TRIGONOMETRIE-C4","1SPE-TRIGONOMETRIE-C5"], "capacites_codes": ["C1","C2","C3","C4","C5"], "methodes": ["M1","M2","M3","M4","M5"], "parcours": 3, "competences": ["chercher", "modeliser", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-050.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-050.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% t = symbols('t', real=True)
+% # h(t) = 10 + 8*sin(pi*t/6 - pi/2) = 10 - 8*cos(pi*t/6)
+% h = 10 - 8*cos(pi*t/6)
+% assert h.subs(t, 0) == 2
+% assert h.subs(t, 6) == 18
+% assert h.subs(t, 12) == 2
+% # h(t) = 14 <=> cos(pi*t/6) = -1/2 <=> pi*t/6 = 2*pi/3 + 2k*pi or -2*pi/3 + 2k*pi
+% # t = 4 + 12k or t = -4 + 12k => on [0;12]: t=4 and t=8
+% assert simplify(h.subs(t, 4) - 14) == 0
+% assert simplify(h.subs(t, 8) - 14) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-050}{3}{20}
+\textbf{Probleme de synthese — Marees.}
+
+La hauteur d'eau (en metres) dans un port est modelisee par
+\[
+  h(t) = 10 - 8\cos\!\left(\frac{\pi t}{6}\right),
+\]
+ou $t$ est le temps en heures depuis la maree basse.
+\begin{enumerate}
+  \item Quelle est la hauteur d'eau a maree basse ($t = 0$) ? A maree haute ?
+  \item Quelle est la periode du phenomene (en heures) ?
+  \item Dresser le tableau de variations de $h$ sur une periode.
+  \item Un bateau a besoin d'au moins $14$~m d'eau pour entrer dans le port. Resoudre $h(t) \geqslant 14$ sur $[0\,;\,12]$ et en deduire la plage horaire pendant laquelle le bateau peut entrer.
+  \item Convertir les bornes de cette plage en heures et minutes.
+\end{enumerate}
+\end{exercice}

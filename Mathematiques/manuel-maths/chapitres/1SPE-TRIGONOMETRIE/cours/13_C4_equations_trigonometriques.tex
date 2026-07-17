@@ -1,0 +1,79 @@
+% META: {"id": "1SPE-TRIGO-CR-013", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+
+\section{Equations et inequations trigonometriques}
+
+% ============================================================
+% STRATE 1 — Equations fondamentales
+% ============================================================
+
+\propriete{
+Soit $a$ un reel de $[-1\,;\,1]$.
+
+\medskip
+\textbf{Resolution de $\cos x = a$ :}
+
+Il existe un unique $\alpha \in [0\,;\,\pi]$ tel que $\cos \alpha = a$. Les solutions sont :
+\[
+  x = \alpha + 2k\pi \quad \text{ou} \quad x = -\alpha + 2k\pi, \qquad k \in \mathbb{Z}.
+\]
+
+\medskip
+\textbf{Resolution de $\sin x = a$ :}
+
+Il existe un unique $\alpha \in \left[-\dfrac{\pi}{2}\,;\,\dfrac{\pi}{2}\right]$ tel que $\sin \alpha = a$. Les solutions sont :
+\[
+  x = \alpha + 2k\pi \quad \text{ou} \quad x = \pi - \alpha + 2k\pi, \qquad k \in \mathbb{Z}.
+\]
+}
+
+\exemple{
+Resoudre $\cos x = \dfrac{1}{2}$.
+
+On sait que $\cos\!\left(\dfrac{\pi}{3}\right) = \dfrac{1}{2}$, donc $\alpha = \dfrac{\pi}{3}$.
+
+Les solutions sont : $x = \dfrac{\pi}{3} + 2k\pi$ ou $x = -\dfrac{\pi}{3} + 2k\pi$, $k \in \mathbb{Z}$.
+}
+
+\exemple{
+Resoudre $\sin x = \dfrac{\sqrt{2}}{2}$.
+
+On sait que $\sin\!\left(\dfrac{\pi}{4}\right) = \dfrac{\sqrt{2}}{2}$, donc $\alpha = \dfrac{\pi}{4}$.
+
+Les solutions sont : $x = \dfrac{\pi}{4} + 2k\pi$ ou $x = \pi - \dfrac{\pi}{4} + 2k\pi = \dfrac{3\pi}{4} + 2k\pi$, $k \in \mathbb{Z}$.
+}
+
+% ============================================================
+% STRATE 2 — Equations particulieres
+% ============================================================
+
+\propriete{
+\begin{itemize}
+  \item $\cos x = \cos y \iff x = y + 2k\pi$ ou $x = -y + 2k\pi$ \quad ($k \in \mathbb{Z}$).
+  \item $\sin x = \sin y \iff x = y + 2k\pi$ ou $x = \pi - y + 2k\pi$ \quad ($k \in \mathbb{Z}$).
+\end{itemize}
+}
+
+\exemple{
+Resoudre $\cos(2x) = \cos\!\left(\dfrac{\pi}{5}\right)$.
+
+On a : $2x = \dfrac{\pi}{5} + 2k\pi$ ou $2x = -\dfrac{\pi}{5} + 2k\pi$.
+
+Donc : $x = \dfrac{\pi}{10} + k\pi$ ou $x = -\dfrac{\pi}{10} + k\pi$, $k \in \mathbb{Z}$.
+}
+
+% ============================================================
+% Inequations
+% ============================================================
+
+\margeAppui{Pour resoudre une inequation trigonometrique ($\cos x \geqslant a$, $\sin x \leqslant a$, etc.) : (1) tracer le cercle trigonometrique et reperer les points ou $\cos = a$ (ou $\sin = a$) ; (2) identifier les arcs ou l'inegalite est verifiee ; (3) ecrire l'ensemble des solutions avec la periodicite $2\pi$.}
+
+\exemple{
+Resoudre $\cos x \geqslant \dfrac{1}{2}$ sur $[0\,;\,2\pi]$.
+
+On a $\cos x = \dfrac{1}{2}$ pour $x = \dfrac{\pi}{3}$ et $x = \dfrac{5\pi}{3}$.
+
+Sur le cercle trigonometrique, $\cos x \geqslant \dfrac{1}{2}$ entre ces deux valeurs (du cote des $\cos$ positifs) :
+\[
+  x \in \left[0\,;\,\frac{\pi}{3}\right] \cup \left[\frac{5\pi}{3}\,;\,2\pi\right].
+\]
+}

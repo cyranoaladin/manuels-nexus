@@ -1,0 +1,85 @@
+% META: {"id": "1SPE-TRIGO-CR-014", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+
+\section{Fonctions cosinus et sinus}
+
+% ============================================================
+% STRATE 1 — Definitions et proprietes
+% ============================================================
+
+\definition[1]{
+La \textbf{fonction cosinus} est la fonction $\cos : \mathbb{R} \to [-1\,;\,1]$ qui a tout reel $x$ associe $\cos x$.
+
+La \textbf{fonction sinus} est la fonction $\sin : \mathbb{R} \to [-1\,;\,1]$ qui a tout reel $x$ associe $\sin x$.
+}
+
+\propriete{
+\begin{itemize}
+  \item La fonction cosinus est \textbf{paire} : pour tout $x \in \mathbb{R}$, $\cos(-x) = \cos x$.
+
+    Sa courbe est symetrique par rapport a l'axe des ordonnees.
+  \item La fonction sinus est \textbf{impaire} : pour tout $x \in \mathbb{R}$, $\sin(-x) = -\sin x$.
+
+    Sa courbe est symetrique par rapport a l'origine.
+\end{itemize}
+}
+
+\propriete{
+Les fonctions cosinus et sinus sont \textbf{periodiques de periode $2\pi$} :
+\[
+  \cos(x + 2\pi) = \cos x \quad \text{et} \quad \sin(x + 2\pi) = \sin x \quad \text{pour tout } x \in \mathbb{R}.
+\]
+Il suffit donc d'etudier ces fonctions sur un intervalle de longueur $2\pi$ (par exemple $[0\,;\,2\pi]$).
+}
+
+% ============================================================
+% STRATE 2 — Variations
+% ============================================================
+
+\propriete{
+\textbf{Variations de la fonction cosinus sur $[0\,;\,2\pi]$ :}
+
+\begin{center}
+\begin{tabular}{c|ccccc}
+$x$ & $0$ & & $\pi$ & & $2\pi$ \\
+\hline
+$\cos x$ & $1$ & $\searrow$ & $-1$ & $\nearrow$ & $1$ \\
+\end{tabular}
+\end{center}
+
+La fonction cosinus est \textbf{decroissante} sur $[0\,;\,\pi]$ et \textbf{croissante} sur $[\pi\,;\,2\pi]$.
+}
+
+\propriete{
+\textbf{Variations de la fonction sinus sur $[0\,;\,2\pi]$ :}
+
+\begin{center}
+\begin{tabular}{c|ccccccc}
+$x$ & $0$ & & $\dfrac{\pi}{2}$ & & $\dfrac{3\pi}{2}$ & & $2\pi$ \\
+\hline
+$\sin x$ & $0$ & $\nearrow$ & $1$ & $\searrow$ & $-1$ & $\nearrow$ & $0$ \\
+\end{tabular}
+\end{center}
+
+La fonction sinus est \textbf{croissante} sur $\left[0\,;\,\dfrac{\pi}{2}\right]$, \textbf{decroissante} sur $\left[\dfrac{\pi}{2}\,;\,\dfrac{3\pi}{2}\right]$, \textbf{croissante} sur $\left[\dfrac{3\pi}{2}\,;\,2\pi\right]$.
+}
+
+\exemple{
+\begin{itemize}
+  \item Le maximum de $\cos$ est $1$, atteint en $x = 0$ (et $x = 2k\pi$, $k \in \mathbb{Z}$).
+  \item Le minimum de $\cos$ est $-1$, atteint en $x = \pi$ (et $x = \pi + 2k\pi$).
+  \item Le maximum de $\sin$ est $1$, atteint en $x = \dfrac{\pi}{2}$ (et $x = \dfrac{\pi}{2} + 2k\pi$).
+  \item Le minimum de $\sin$ est $-1$, atteint en $x = \dfrac{3\pi}{2}$ (et $x = \dfrac{3\pi}{2} + 2k\pi$).
+\end{itemize}
+}
+
+% ============================================================
+% STRATE 3 — Representation graphique
+% ============================================================
+
+\approfondissement{
+La courbe representative de la fonction cosinus est appelee \textbf{cosinusoide} et celle de la fonction sinus est appelee \textbf{sinusoide}. On peut passer de l'une a l'autre par une translation horizontale de $\dfrac{\pi}{2}$ vers la gauche :
+\[
+  \cos x = \sin\!\left(x + \frac{\pi}{2}\right).
+\]
+Cela signifie que la courbe de $\cos$ est l'image de la courbe de $\sin$ par la translation de vecteur $-\dfrac{\pi}{2}\,\vec{\imath}$.
+}

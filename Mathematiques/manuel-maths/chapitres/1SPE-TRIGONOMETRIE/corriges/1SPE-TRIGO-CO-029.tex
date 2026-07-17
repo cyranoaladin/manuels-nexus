@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-CO-029", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-029", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert simplify(cos(pi/5) - (1+sqrt(5))/4) == 0
+% assert simplify(cos(2*pi/5) - (sqrt(5)-1)/4) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-029}
+
+\textbf{1.} $\cos^2\!\left(\dfrac{\pi}{5}\right) = \left(\dfrac{1+\sqrt{5}}{4}\right)^2 = \dfrac{1 + 2\sqrt{5} + 5}{16} = \dfrac{6+2\sqrt{5}}{16} = \dfrac{3+\sqrt{5}}{8}$.
+
+\textbf{2.} $\cos\!\left(\dfrac{2\pi}{5}\right) = 2\cos^2\!\left(\dfrac{\pi}{5}\right) - 1 = 2 \times \dfrac{3+\sqrt{5}}{8} - 1 = \dfrac{3+\sqrt{5}}{4} - 1 = \dfrac{\sqrt{5}-1}{4}$.
+
+\textbf{3.} $\sin^2\!\left(\dfrac{\pi}{5}\right) = 1 - \dfrac{3+\sqrt{5}}{8} = \dfrac{5-\sqrt{5}}{8}$.
+
+Comme $\dfrac{\pi}{5} \in \left]0;\dfrac{\pi}{2}\right[$, $\sin\!\left(\dfrac{\pi}{5}\right) > 0$ et $\sin\!\left(\dfrac{\pi}{5}\right) = \sqrt{\dfrac{5-\sqrt{5}}{8}} = \dfrac{\sqrt{10-2\sqrt{5}}}{4}$.
+
+\end{corrige}

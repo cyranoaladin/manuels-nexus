@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-TRIGO-EX-013", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-013.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-013.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp(cos(x)**2 + sin(x)**2) == 1
+% # If cos(x) = 3/5 and x in [0, pi/2], sin(x) = 4/5
+% assert Rational(3,5)**2 + Rational(4,5)**2 == 1
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-013}{1}{10}
+\begin{enumerate}
+  \item Sachant que $\cos x = \dfrac{3}{5}$ et que $x \in \left[0\,;\,\dfrac{\pi}{2}\right]$, calculer $\sin x$.
+  \item Sachant que $\sin x = -\dfrac{5}{13}$ et que $x \in \left[\pi\,;\,\dfrac{3\pi}{2}\right]$, calculer $\cos x$.
+  \item Verifier dans chaque cas que $\cos^2 x + \sin^2 x = 1$.
+\end{enumerate}
+\end{exercice}

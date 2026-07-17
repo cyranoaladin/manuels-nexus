@@ -1,0 +1,32 @@
+% META: {"id": "1SPE-TRIGO-RE-C4", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : Equations trigonometriques
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-TRIGO-RE-C4-EX1}{1}{10}
+\begin{enumerate}
+  \item Resoudre $\cos x = \dfrac{\sqrt{2}}{2}$ dans $\mathbb{R}$.
+  \item Resoudre $\sin x = -1$ dans $\mathbb{R}$.
+  \item Resoudre $\cos x = -\dfrac{1}{2}$ sur $[0;2\pi]$.
+  \item Resoudre $\sin x \leqslant 0$ sur $[0;2\pi]$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert cos(pi/4) == sqrt(2)/2
+% assert sin(3*pi/2) == -1
+% assert cos(2*pi/3) == Rational(-1,2)
+% assert cos(4*pi/3) == Rational(-1,2)
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-RE-C4-EX1}
+\textbf{1.} $x = \dfrac{\pi}{4} + 2k\pi$ ou $x = -\dfrac{\pi}{4} + 2k\pi$, $k \in \mathbb{Z}$.
+
+\textbf{2.} $x = -\dfrac{\pi}{2} + 2k\pi = \dfrac{3\pi}{2} + 2k\pi$, $k \in \mathbb{Z}$.
+
+\textbf{3.} $x = \dfrac{2\pi}{3}$ ou $x = \dfrac{4\pi}{3}$.
+
+\textbf{4.} $\sin x \leqslant 0$ pour $x \in [\pi;2\pi] \cup \{0\}$, soit $x \in \{0\} \cup [\pi;2\pi]$.
+\end{corrige}

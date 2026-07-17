@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-TRIGO-FR-R2", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R2 : Reperage dans le plan
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Coordonnees et distance}
+
+Dans un repere orthonorme $(O;\vec{\imath},\vec{\jmath})$, un point $M$ a pour coordonnees $(x;y)$.
+
+La distance $OM$ est $OM = \sqrt{x^2 + y^2}$.
+
+\begin{exercice}{1SPE-TRIGO-FR-R2-EX1}{1}{5}
+\begin{enumerate}
+  \item Placer les points $A(1;0)$, $B(0;1)$, $C(-1;0)$, $D(0;-1)$ dans un repere.
+  \item Calculer $OA$, $OB$, $OC$, $OD$.
+  \item Ces quatre points sont-ils sur un meme cercle ? Lequel ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert sqrt(1**2 + 0**2) == 1
+% assert sqrt(0**2 + 1**2) == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-FR-R2-EX1}
+\textbf{1.} Points places sur les axes.
+
+\textbf{2.} $OA = OB = OC = OD = 1$.
+
+\textbf{3.} Oui, ils sont sur le cercle de centre $O$ et de rayon $1$ : le cercle trigonometrique.
+\end{corrige}

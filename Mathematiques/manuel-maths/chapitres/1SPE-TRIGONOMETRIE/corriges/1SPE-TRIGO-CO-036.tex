@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-TRIGO-CO-036", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-036", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% u = symbols('u')
+% assert sorted(solve(2*u**2 + u - 1, u)) == [-1, Rational(1,2)]
+% assert cos(pi/4) == sqrt(2)/2
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-036}
+
+\textbf{1.} $2\cos^2 x - 1 = 0 \iff \cos^2 x = \dfrac{1}{2} \iff \cos x = \pm\dfrac{\sqrt{2}}{2}$.
+
+Sur $[0;2\pi]$ : $x \in \left\{\dfrac{\pi}{4},\;\dfrac{3\pi}{4},\;\dfrac{5\pi}{4},\;\dfrac{7\pi}{4}\right\}$.
+
+\textbf{2.} Posons $u = \sin x$. On resout $2u^2 + u - 1 = 0$.
+
+$\Delta = 1 + 8 = 9$, $u = \dfrac{-1 \pm 3}{4}$, d'ou $u = \dfrac{1}{2}$ ou $u = -1$.
+
+$\sin x = \dfrac{1}{2}$ : $x = \dfrac{\pi}{6}$ ou $x = \dfrac{5\pi}{6}$.
+
+$\sin x = -1$ : $x = \dfrac{3\pi}{2}$.
+
+Sur $[0;2\pi]$ : $x \in \left\{\dfrac{\pi}{6},\;\dfrac{5\pi}{6},\;\dfrac{3\pi}{2}\right\}$.
+
+\end{corrige}

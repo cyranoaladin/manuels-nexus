@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-TRIGO-CO-047", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-047", "capacites_codes": ["C1","C2","C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert 75 * pi / 180 == 5*pi/12
+% assert simplify(cos(5*pi/12) - (sqrt(6)-sqrt(2))/4) == 0
+% assert simplify(sin(5*pi/12) - (sqrt(6)+sqrt(2))/4) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-047}
+
+\textbf{1.} $75° = 75 \times \dfrac{\pi}{180} = \dfrac{5\pi}{12}$.
+
+\textbf{2.} $\dfrac{5\pi}{12} = \dfrac{\pi}{4} + \dfrac{\pi}{6}$.
+
+\textbf{3.} $\cos\dfrac{5\pi}{12} = \cos\dfrac{\pi}{4}\cos\dfrac{\pi}{6} - \sin\dfrac{\pi}{4}\sin\dfrac{\pi}{6} = \dfrac{\sqrt{2}}{2}\cdot\dfrac{\sqrt{3}}{2} - \dfrac{\sqrt{2}}{2}\cdot\dfrac{1}{2} = \dfrac{\sqrt{6}-\sqrt{2}}{4}$.
+
+$\sin\dfrac{5\pi}{12} = \sin\dfrac{\pi}{4}\cos\dfrac{\pi}{6} + \cos\dfrac{\pi}{4}\sin\dfrac{\pi}{6} = \dfrac{\sqrt{6}+\sqrt{2}}{4}$.
+
+\textbf{4.} $\cos\!\left(-\dfrac{5\pi}{12}\right) = \cos\dfrac{5\pi}{12} = \dfrac{\sqrt{6}-\sqrt{2}}{4}$ et $\sin\!\left(\pi-\dfrac{5\pi}{12}\right) = \sin\dfrac{5\pi}{12} = \dfrac{\sqrt{6}+\sqrt{2}}{4}$.
+
+\end{corrige}

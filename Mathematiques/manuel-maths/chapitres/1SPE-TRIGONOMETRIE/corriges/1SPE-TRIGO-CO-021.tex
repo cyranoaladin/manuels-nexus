@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-TRIGO-CO-021", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-021", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert simplify(cos(pi/12) - (sqrt(6)+sqrt(2))/4) == 0
+% assert simplify(sin(pi/12) - (sqrt(6)-sqrt(2))/4) == 0
+% assert simplify(cos(pi/12)**2 + sin(pi/12)**2 - 1) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-021}
+
+\textbf{1.} $\cos\!\left(\dfrac{\pi}{12}\right) = \cos\!\left(\dfrac{\pi}{3}-\dfrac{\pi}{4}\right) = \cos\dfrac{\pi}{3}\cos\dfrac{\pi}{4} + \sin\dfrac{\pi}{3}\sin\dfrac{\pi}{4}$
+$= \dfrac{1}{2}\cdot\dfrac{\sqrt{2}}{2} + \dfrac{\sqrt{3}}{2}\cdot\dfrac{\sqrt{2}}{2} = \dfrac{\sqrt{2}+\sqrt{6}}{4}$.
+
+\textbf{2.} $\sin\!\left(\dfrac{\pi}{12}\right) = \sin\!\left(\dfrac{\pi}{3}-\dfrac{\pi}{4}\right) = \sin\dfrac{\pi}{3}\cos\dfrac{\pi}{4} - \cos\dfrac{\pi}{3}\sin\dfrac{\pi}{4}$
+$= \dfrac{\sqrt{3}}{2}\cdot\dfrac{\sqrt{2}}{2} - \dfrac{1}{2}\cdot\dfrac{\sqrt{2}}{2} = \dfrac{\sqrt{6}-\sqrt{2}}{4}$.
+
+\textbf{Verification :} $\left(\dfrac{\sqrt{2}+\sqrt{6}}{4}\right)^2 + \left(\dfrac{\sqrt{6}-\sqrt{2}}{4}\right)^2 = \dfrac{2+2\sqrt{12}+6+6-2\sqrt{12}+2}{16} = \dfrac{16}{16} = 1$. \checkmark
+
+\end{corrige}

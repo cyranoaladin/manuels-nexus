@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-TRIGO-CO-005", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert Rational(100,3) - 16*2 == Rational(4,3)
+% assert Rational(4,3) - 2 == Rational(-2,3)
+% assert Rational(-23,4) + 6 == Rational(1,4)
+% assert 150 * pi / 180 == 5*pi/6
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-005}
+
+\textbf{1.} $\dfrac{100\pi}{3}$ : on calcule $\dfrac{100}{3 \times 2} = \dfrac{100}{6} \approx 16{,}67$. Donc on retranche $16 \times 2\pi$ :
+\[
+\dfrac{100\pi}{3} - 32\pi = \dfrac{100\pi - 96\pi}{3} = \dfrac{4\pi}{3}.
+\]
+Or $\dfrac{4\pi}{3} > \pi$, donc $\dfrac{4\pi}{3} - 2\pi = -\dfrac{2\pi}{3}$.
+
+La mesure principale est $-\dfrac{2\pi}{3}$.
+
+\medskip
+\textbf{2.} $-\dfrac{23\pi}{4}$ : on calcule $\dfrac{23}{4 \times 2} = \dfrac{23}{8} \approx 2{,}875$. On ajoute $3 \times 2\pi$ :
+\[
+-\dfrac{23\pi}{4} + 6\pi = -\dfrac{23\pi}{4} + \dfrac{24\pi}{4} = \dfrac{\pi}{4}.
+\]
+
+La mesure principale est $\dfrac{\pi}{4}$.
+
+\medskip
+\textbf{3.} $150° = 150 \times \dfrac{\pi}{180} = \dfrac{5\pi}{6}$.
+
+\medskip
+\textbf{4.} Le point $(-1;0)$ correspond a l'angle $\pi$. La mesure principale est $\pi$.
+
+\end{corrige}

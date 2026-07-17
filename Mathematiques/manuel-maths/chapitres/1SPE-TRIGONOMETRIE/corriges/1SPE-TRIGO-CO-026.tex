@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-TRIGO-CO-026", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-026", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp(cos(3*x) - (4*cos(x)**3 - 3*cos(x))) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-026}
+
+\textbf{1.} $\cos(3x) = \cos(2x + x) = \cos(2x)\cos x - \sin(2x)\sin x$.
+
+\textbf{2.} $\cos(2x) = 2\cos^2 x - 1$ et $\sin(2x) = 2\sin x\cos x$.
+
+\textbf{3.} $\cos(3x) = (2\cos^2 x - 1)\cos x - 2\sin x\cos x \cdot \sin x$
+$= 2\cos^3 x - \cos x - 2\sin^2 x\cos x$
+$= 2\cos^3 x - \cos x - 2(1-\cos^2 x)\cos x$
+$= 2\cos^3 x - \cos x - 2\cos x + 2\cos^3 x$
+$= 4\cos^3 x - 3\cos x$. \hfill $\square$
+
+\end{corrige}

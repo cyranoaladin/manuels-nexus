@@ -1,0 +1,171 @@
+{
+  "chapitre": "1SPE-TRIGONOMETRIE",
+  "titre": "Trigonometrie — QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Quelle est la mesure en radians de $60°$ ?",
+      "options": {"A": "$\\frac{\\pi}{6}$", "B": "$\\frac{\\pi}{4}$", "C": "$\\frac{\\pi}{3}$", "D": "$\\frac{\\pi}{2}$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a confondu 60° et 30°. $\\frac{\\pi}{6}$ correspond a $30°$.", "renvoi": "C1, conversion"},
+        "B": {"erreur": "L'eleve a confondu 60° et 45°. $\\frac{\\pi}{4}$ correspond a $45°$.", "renvoi": "C1, conversion"},
+        "D": {"erreur": "L'eleve a confondu 60° et 90°. $\\frac{\\pi}{2}$ correspond a $90°$.", "renvoi": "C1, conversion"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C1",
+      "enonce": "Quelle est la mesure principale de $\\frac{9\\pi}{4}$ ?",
+      "options": {"A": "$\\frac{\\pi}{4}$", "B": "$\\frac{9\\pi}{4}$", "C": "$-\\frac{7\\pi}{4}$", "D": "$\\frac{5\\pi}{4}$"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'eleve n'a pas retranche $2\\pi$. $\\frac{9\\pi}{4}$ n'est pas dans $]-\\pi;\\pi]$.", "renvoi": "C1, mesure principale"},
+        "C": {"erreur": "L'eleve a soustrait $4\\pi$ au lieu de $2\\pi$.", "renvoi": "C1, mesure principale"},
+        "D": {"erreur": "L'eleve a soustrait seulement $\\pi$ au lieu de $2\\pi$.", "renvoi": "C1, mesure principale"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C1",
+      "enonce": "Combien vaut $180°$ en radians ?",
+      "options": {"A": "$2\\pi$", "B": "$\\pi$", "C": "$\\frac{\\pi}{2}$", "D": "$\\frac{3\\pi}{2}$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a confondu $180°$ et $360°$.", "renvoi": "C1, conversion"},
+        "C": {"erreur": "L'eleve a confondu $180°$ et $90°$.", "renvoi": "C1, conversion"},
+        "D": {"erreur": "L'eleve a confondu $180°$ et $270°$.", "renvoi": "C1, conversion"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C2",
+      "enonce": "Quelle est la valeur de $\\cos\\left(\\frac{\\pi}{3}\\right)$ ?",
+      "options": {"A": "$\\frac{\\sqrt{3}}{2}$", "B": "$\\frac{\\sqrt{2}}{2}$", "C": "$\\frac{1}{2}$", "D": "$0$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a confondu $\\cos(\\frac{\\pi}{3})$ et $\\cos(\\frac{\\pi}{6})$.", "renvoi": "C2, valeurs remarquables"},
+        "B": {"erreur": "L'eleve a confondu $\\cos(\\frac{\\pi}{3})$ et $\\cos(\\frac{\\pi}{4})$.", "renvoi": "C2, valeurs remarquables"},
+        "D": {"erreur": "L'eleve a confondu $\\cos(\\frac{\\pi}{3})$ et $\\cos(\\frac{\\pi}{2})$.", "renvoi": "C2, valeurs remarquables"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C2",
+      "enonce": "Quelle est la valeur de $\\sin\\left(\\frac{5\\pi}{6}\\right)$ ?",
+      "options": {"A": "$-\\frac{1}{2}$", "B": "$\\frac{1}{2}$", "C": "$\\frac{\\sqrt{3}}{2}$", "D": "$-\\frac{\\sqrt{3}}{2}$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a applique un mauvais signe. $\\sin(\\pi - x) = \\sin x > 0$.", "renvoi": "C2, symetries"},
+        "C": {"erreur": "L'eleve a confondu $\\sin(\\frac{\\pi}{6})$ et $\\sin(\\frac{\\pi}{3})$.", "renvoi": "C2, valeurs remarquables"},
+        "D": {"erreur": "Double erreur : mauvaise valeur et mauvais signe.", "renvoi": "C2, symetries"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C2",
+      "enonce": "Que vaut $\\cos^2\\left(\\frac{\\pi}{4}\\right) + \\sin^2\\left(\\frac{\\pi}{4}\\right)$ ?",
+      "options": {"A": "$\\frac{1}{2}$", "B": "$1$", "C": "$\\sqrt{2}$", "D": "$2$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a calcule $\\cos^2(\\frac{\\pi}{4})$ seul sans ajouter $\\sin^2$.", "renvoi": "C2, relation fondamentale"},
+        "C": {"erreur": "L'eleve a additionne $\\cos(\\frac{\\pi}{4}) + \\sin(\\frac{\\pi}{4})$ au lieu des carres.", "renvoi": "C2, relation fondamentale"},
+        "D": {"erreur": "L'eleve a double le resultat.", "renvoi": "C2, relation fondamentale"}
+      }
+    },
+    {
+      "id": "Q7", "capacite": "C3",
+      "enonce": "Que vaut $\\cos(a+b)$ ?",
+      "options": {"A": "$\\cos a\\cos b + \\sin a\\sin b$", "B": "$\\cos a\\cos b - \\sin a\\sin b$", "C": "$\\sin a\\cos b + \\cos a\\sin b$", "D": "$\\sin a\\cos b - \\cos a\\sin b$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "C'est la formule de $\\cos(a-b)$, pas $\\cos(a+b)$. Le signe est $-$ devant $\\sin\\sin$.", "renvoi": "C3, formule addition"},
+        "C": {"erreur": "C'est la formule de $\\sin(a+b)$, pas $\\cos(a+b)$.", "renvoi": "C3, formule addition"},
+        "D": {"erreur": "C'est la formule de $\\sin(a-b)$.", "renvoi": "C3, formule addition"}
+      }
+    },
+    {
+      "id": "Q8", "capacite": "C3",
+      "enonce": "Que vaut $\\sin(2a)$ ?",
+      "options": {"A": "$2\\sin a$", "B": "$\\sin^2 a$", "C": "$2\\sin a\\cos a$", "D": "$\\cos^2 a - \\sin^2 a$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve pense que $\\sin(2a) = 2\\sin a$, ce qui est faux. Il faut appliquer la formule de duplication.", "renvoi": "C3, duplication"},
+        "B": {"erreur": "Confusion avec une autre formule. $\\sin^2 a$ n'est pas $\\sin(2a)$.", "renvoi": "C3, duplication"},
+        "D": {"erreur": "C'est la formule de $\\cos(2a)$, pas $\\sin(2a)$.", "renvoi": "C3, duplication"}
+      }
+    },
+    {
+      "id": "Q9", "capacite": "C3",
+      "enonce": "Quelle est la valeur de $\\cos(2a)$ si $\\cos a = \\frac{1}{2}$ ?",
+      "options": {"A": "$1$", "B": "$\\frac{1}{2}$", "C": "$-\\frac{1}{2}$", "D": "$0$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a calcule $2\\cos a = 1$ au lieu de $2\\cos^2 a - 1$.", "renvoi": "C3, duplication"},
+        "B": {"erreur": "L'eleve pense que $\\cos(2a) = \\cos a$.", "renvoi": "C3, duplication"},
+        "D": {"erreur": "Erreur de calcul : $2 \\times \\frac{1}{4} - 1 = -\\frac{1}{2}$, pas $0$.", "renvoi": "C3, duplication"}
+      }
+    },
+    {
+      "id": "Q10", "capacite": "C4",
+      "enonce": "Combien l'equation $\\cos x = \\frac{1}{2}$ a-t-elle de solutions sur $[0;2\\pi]$ ?",
+      "options": {"A": "$0$", "B": "$1$", "C": "$2$", "D": "une infinite"},
+      "correcte": "C",
+      "diagnostics": {
+        "B": {"erreur": "L'eleve a oublie la deuxieme solution. Il y a toujours deux solutions (sauf cas $a = \\pm 1$).", "renvoi": "C4, resolution"},
+        "D": {"erreur": "Sur $[0;2\\pi]$, il y a un nombre fini de solutions. L'infinite n'apparait que sur $\\mathbb{R}$.", "renvoi": "C4, resolution"},
+        "A": {"erreur": "$\\frac{1}{2} \\in [-1;1]$, donc des solutions existent.", "renvoi": "C4, resolution"}
+      }
+    },
+    {
+      "id": "Q11", "capacite": "C4",
+      "enonce": "Les solutions de $\\sin x = 0$ dans $\\mathbb{R}$ sont :",
+      "options": {"A": "$x = 2k\\pi$", "B": "$x = k\\pi$", "C": "$x = \\frac{\\pi}{2} + k\\pi$", "D": "$x = \\frac{k\\pi}{2}$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a oublie $\\sin\\pi = 0$. Les solutions incluent aussi les multiples impairs de $\\pi$.", "renvoi": "C4, resolution"},
+        "C": {"erreur": "Ce sont les solutions de $\\cos x = 0$, pas $\\sin x = 0$.", "renvoi": "C4, resolution"},
+        "D": {"erreur": "Cela inclut $\\sin(\\frac{\\pi}{2}) = 1 \\neq 0$.", "renvoi": "C4, resolution"}
+      }
+    },
+    {
+      "id": "Q12", "capacite": "C4",
+      "enonce": "Sur $[0;2\\pi]$, l'ensemble des solutions de $\\cos x \\geqslant 0$ est :",
+      "options": {"A": "$[0;\\frac{\\pi}{2}]$", "B": "$[0;\\frac{\\pi}{2}] \\cup [\\frac{3\\pi}{2};2\\pi]$", "C": "$[\\frac{\\pi}{2};\\frac{3\\pi}{2}]$", "D": "$[0;\\pi]$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a oublie l'intervalle $[\\frac{3\\pi}{2};2\\pi]$ ou le cosinus est aussi positif.", "renvoi": "C4, inequations"},
+        "C": {"erreur": "C'est l'ensemble ou $\\cos x \\leqslant 0$, pas $\\geqslant 0$.", "renvoi": "C4, inequations"},
+        "D": {"erreur": "Confusion entre les variations du cosinus et son signe.", "renvoi": "C4, inequations"}
+      }
+    },
+    {
+      "id": "Q13", "capacite": "C5",
+      "enonce": "La fonction cosinus est :",
+      "options": {"A": "paire et periodique de periode $\\pi$", "B": "impaire et periodique de periode $2\\pi$", "C": "paire et periodique de periode $2\\pi$", "D": "ni paire ni impaire"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "La periode du cosinus est $2\\pi$, pas $\\pi$.", "renvoi": "C5, periodicite"},
+        "B": {"erreur": "C'est le sinus qui est impair, pas le cosinus.", "renvoi": "C5, parite"},
+        "D": {"erreur": "$\\cos(-x) = \\cos x$, donc la fonction est bien paire.", "renvoi": "C5, parite"}
+      }
+    },
+    {
+      "id": "Q14", "capacite": "C5",
+      "enonce": "Sur $[0;2\\pi]$, la fonction sinus atteint son maximum en :",
+      "options": {"A": "$x = 0$", "B": "$x = \\frac{\\pi}{2}$", "C": "$x = \\pi$", "D": "$x = \\frac{3\\pi}{2}$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "$\\sin 0 = 0$, ce n'est pas le maximum.", "renvoi": "C5, variations"},
+        "C": {"erreur": "$\\sin\\pi = 0$, ce n'est pas le maximum.", "renvoi": "C5, variations"},
+        "D": {"erreur": "$\\sin\\frac{3\\pi}{2} = -1$, c'est le minimum.", "renvoi": "C5, variations"}
+      }
+    },
+    {
+      "id": "Q15", "capacite": "C5",
+      "enonce": "Quel est le maximum de la fonction $f(x) = 3\\cos x + 5$ ?",
+      "options": {"A": "$3$", "B": "$5$", "C": "$8$", "D": "$2$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a donne l'amplitude au lieu du maximum. Le max est $A + B = 3 + 5 = 8$.", "renvoi": "C5, extremums"},
+        "B": {"erreur": "L'eleve a oublie l'amplitude. $5$ est la valeur moyenne, pas le maximum.", "renvoi": "C5, extremums"},
+        "D": {"erreur": "L'eleve a calcule le minimum $-3 + 5 = 2$ au lieu du maximum.", "renvoi": "C5, extremums"}
+      }
+    }
+  ]
+}

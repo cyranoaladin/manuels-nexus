@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-EX-028", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-028.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-028.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% a, b = symbols('a b', real=True)
+% # cos(a+b)*cos(a-b) = cos^2(a) - sin^2(b) (or cos^2(a)*cos^2(b) - sin^2(a)*sin^2(b))
+% # Actually: cos(a+b)*cos(a-b) = cos^2(a) - sin^2(b)
+% expr = cos(a+b)*cos(a-b)
+% target = cos(a)**2 - sin(b)**2
+% assert trigsimp(expr - target) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-028}{3}{15}
+\begin{enumerate}
+  \item Developper $\cos(a+b)\cos(a-b)$ en utilisant les formules d'addition.
+  \item Montrer que $\cos(a+b)\cos(a-b) = \cos^2 a - \sin^2 b$.
+  \item Application : en posant $a = \dfrac{\pi}{4}$ et $b = \dfrac{\pi}{12}$, calculer $\cos\!\left(\dfrac{\pi}{3}\right)\cos\!\left(\dfrac{\pi}{6}\right)$ et verifier le resultat.
+\end{enumerate}
+\end{exercice}

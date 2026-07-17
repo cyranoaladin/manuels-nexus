@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-TRIGO-CO-028", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-028", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% a, b = symbols('a b', real=True)
+% assert trigsimp(cos(a+b)*cos(a-b) - cos(a)**2 + sin(b)**2) == 0
+% assert simplify(cos(pi/3)*cos(pi/6) - sqrt(3)/4) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-028}
+
+\textbf{1.} $\cos(a+b)\cos(a-b) = [\cos a\cos b - \sin a\sin b][\cos a\cos b + \sin a\sin b]$
+$= \cos^2 a\cos^2 b - \sin^2 a\sin^2 b$.
+
+\textbf{2.} $= \cos^2 a\cos^2 b - \sin^2 a\sin^2 b = \cos^2 a(1-\sin^2 b) - (1-\cos^2 a)\sin^2 b$
+$= \cos^2 a - \cos^2 a\sin^2 b - \sin^2 b + \cos^2 a\sin^2 b = \cos^2 a - \sin^2 b$. \hfill $\square$
+
+\textbf{3.} Avec $a = \dfrac{\pi}{4}$, $b = \dfrac{\pi}{12}$ : $a+b = \dfrac{\pi}{3}$, $a-b = \dfrac{\pi}{6}$.
+$\cos\dfrac{\pi}{3}\cos\dfrac{\pi}{6} = \cos^2\dfrac{\pi}{4} - \sin^2\dfrac{\pi}{12} = \dfrac{1}{2} - \sin^2\dfrac{\pi}{12}$.
+
+Directement : $\cos\dfrac{\pi}{3}\cos\dfrac{\pi}{6} = \dfrac{1}{2} \times \dfrac{\sqrt{3}}{2} = \dfrac{\sqrt{3}}{4}$. \checkmark
+
+\end{corrige}

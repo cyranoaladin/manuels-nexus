@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-TRIGO-EX-039", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 3, "competences": ["raisonner", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-039.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # cos(x) = cos(3x) <=> x = 3x + 2k*pi or x = -3x + 2k*pi
+% # Case 1: -2x = 2k*pi => x = -k*pi => x = k*pi
+% # Case 2: 4x = 2k*pi => x = k*pi/2
+% # On [0;2pi]: x = 0, pi/2, pi, 3pi/2, 2pi
+% assert cos(0) == cos(0)
+% assert cos(pi/2) == cos(3*pi/2)
+% assert cos(pi) == cos(3*pi)
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-039}{3}{15}
+Resoudre sur $[0\,;\,2\pi]$ les equations suivantes.
+\begin{enumerate}
+  \item $\cos x = \cos(3x)$
+  \item $\sin x = \cos x$
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-EX-017", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-017.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-017.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # cos(x)=7/25, x in ]pi/2; pi[ => sin > 0 => sin = 24/25... wait, 7^2+24^2 = 49+576=625=25^2
+% # But cos(x) = 7/25 in ]pi/2;pi[ is impossible since cos < 0 there
+% # Let's use cos(x) = -7/25 and x in ]pi/2; pi[
+% assert Rational(7,25)**2 + Rational(24,25)**2 == 1
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-017}{2}{10}
+On sait que $\cos x = \dfrac{7}{25}$ et que $x \in \left]0\,;\,\dfrac{\pi}{2}\right[$.
+\begin{enumerate}
+  \item Calculer $\sin x$.
+  \item En deduire $\cos(\pi - x)$ et $\sin(\pi - x)$.
+  \item En deduire $\cos(\pi + x)$ et $\sin(\pi + x)$.
+  \item Calculer $\cos(-x)$ et $\sin(-x)$.
+\end{enumerate}
+\end{exercice}

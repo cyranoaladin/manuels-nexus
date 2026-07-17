@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-TRIGO-CO-038", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-038", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert sin(0) + cos(0) == 1
+% assert sin(pi/2) + cos(pi/2) == 1
+% assert sin(pi) + cos(pi) == -1
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-038}
+
+On eleve au carre : $(\sin x + \cos x)^2 = 1$, soit $1 + 2\sin x\cos x = 1$, d'ou $\sin(2x) = 0$.
+
+Donc $2x = k\pi$, soit $x = \dfrac{k\pi}{2}$, $k \in \mathbb{Z}$.
+
+\textbf{Verification :}
+\begin{itemize}
+  \item $k = 0$ : $x = 0$, $\sin 0 + \cos 0 = 0 + 1 = 1$. \checkmark
+  \item $k = 1$ : $x = \dfrac{\pi}{2}$, $\sin\dfrac{\pi}{2} + \cos\dfrac{\pi}{2} = 1 + 0 = 1$. \checkmark
+  \item $k = 2$ : $x = \pi$, $\sin\pi + \cos\pi = 0 + (-1) = -1 \neq 1$. Exclu.
+  \item $k = 3$ : $x = \dfrac{3\pi}{2}$, $\sin\dfrac{3\pi}{2} + \cos\dfrac{3\pi}{2} = -1 + 0 = -1 \neq 1$. Exclu.
+\end{itemize}
+
+Les solutions sont $x = 2k\pi$ ou $x = \dfrac{\pi}{2} + 2k\pi$, $k \in \mathbb{Z}$.
+
+\end{corrige}

@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-TRIGO-RE-C2", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : Valeurs remarquables et symetries
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-TRIGO-RE-C2-EX1}{1}{8}
+\begin{enumerate}
+  \item Completer de memoire le tableau des valeurs remarquables pour $0$, $\dfrac{\pi}{6}$, $\dfrac{\pi}{4}$, $\dfrac{\pi}{3}$, $\dfrac{\pi}{2}$.
+  \item Calculer $\cos\!\left(\dfrac{2\pi}{3}\right)$, $\sin\!\left(\dfrac{7\pi}{6}\right)$, $\cos\!\left(-\dfrac{\pi}{4}\right)$.
+  \item Sachant que $\cos x = \dfrac{4}{5}$ et $x \in \left[0;\dfrac{\pi}{2}\right]$, calculer $\sin x$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert cos(2*pi/3) == Rational(-1,2)
+% assert sin(7*pi/6) == Rational(-1,2)
+% assert cos(-pi/4) == sqrt(2)/2
+% assert Rational(4,5)**2 + Rational(3,5)**2 == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-RE-C2-EX1}
+\textbf{2.} $\cos\!\left(\dfrac{2\pi}{3}\right) = \cos(\pi-\dfrac{\pi}{3}) = -\cos\dfrac{\pi}{3} = -\dfrac{1}{2}$.
+
+$\sin\!\left(\dfrac{7\pi}{6}\right) = \sin(\pi+\dfrac{\pi}{6}) = -\sin\dfrac{\pi}{6} = -\dfrac{1}{2}$.
+
+$\cos(-\dfrac{\pi}{4}) = \cos\dfrac{\pi}{4} = \dfrac{\sqrt{2}}{2}$.
+
+\textbf{3.} $\sin^2 x = 1 - \dfrac{16}{25} = \dfrac{9}{25}$, $\sin x = \dfrac{3}{5}$ (car $x \in [0;\dfrac{\pi}{2}]$).
+\end{corrige}

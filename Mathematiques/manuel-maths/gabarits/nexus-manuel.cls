@@ -242,6 +242,7 @@
 \newcommand{\propriete}[2][]{\begin{nxprop}[#1]#2\end{nxprop}}
 \newcommand{\exemple}[1]{\par\noindent\textbf{\textcolor{chapcolor}{Exemple.}} #1\par}
 \newcommand{\contreexemple}[1]{\par\noindent\textbf{\textcolor{coulRetenir}{Contre-exemple.}} #1\par}
+\newcommand{\demonstration}[1]{\par\noindent\textit{D\'emonstration.} #1\par}
 
 % ---- ERREUR FRÉQUENTE : corail ----
 \newtcolorbox{nxerr}{manuelbase, ongletplein,

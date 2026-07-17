@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-TRIGO-EX-024", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-024.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-024.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # cos^2(x) = (1 + cos(2x))/2
+% assert trigsimp(cos(x)**2 - (1 + cos(2*x))/2) == 0
+% # sin^2(x) = (1 - cos(2x))/2
+% assert trigsimp(sin(x)**2 - (1 - cos(2*x))/2) == 0
+% # cos^2(pi/8) = (1+cos(pi/4))/2 = (1+sqrt(2)/2)/2 = (2+sqrt(2))/4
+% assert simplify(cos(pi/8)**2 - (2+sqrt(2))/4) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-024}{1}{10}
+\begin{enumerate}
+  \item A l'aide de $\cos(2a) = 2\cos^2 a - 1$, montrer que $\cos^2 a = \dfrac{1 + \cos(2a)}{2}$.
+  \item De meme, montrer que $\sin^2 a = \dfrac{1 - \cos(2a)}{2}$.
+  \item En deduire la valeur exacte de $\cos^2\!\left(\dfrac{\pi}{8}\right)$.
+\end{enumerate}
+\end{exercice}

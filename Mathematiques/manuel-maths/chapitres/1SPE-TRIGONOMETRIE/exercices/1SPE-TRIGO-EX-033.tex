@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-TRIGO-EX-033", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-033.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-033.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # cos(x) = sqrt(3)/2 on [0;2pi] => x = pi/6 or x = 11pi/6
+% assert cos(pi/6) == sqrt(3)/2
+% assert cos(11*pi/6) == sqrt(3)/2
+% # sin(x) = -1/2 on [0;2pi] => x = 7pi/6 or x = 11pi/6
+% assert sin(7*pi/6) == Rational(-1,2)
+% assert sin(11*pi/6) == Rational(-1,2)
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-033}{1}{10}
+Resoudre sur $[0\,;\,2\pi]$ les equations suivantes.
+\begin{enumerate}
+  \item $\cos x = \dfrac{\sqrt{3}}{2}$
+  \item $\sin x = -\dfrac{1}{2}$
+  \item $\cos x = 0$
+\end{enumerate}
+\end{exercice}

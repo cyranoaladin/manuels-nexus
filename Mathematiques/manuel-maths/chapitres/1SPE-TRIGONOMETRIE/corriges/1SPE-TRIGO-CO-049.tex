@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-TRIGO-CO-049", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-049", "capacites_codes": ["C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp(cos(2*x) + cos(x) - (2*cos(x)**2 + cos(x) - 1)) == 0
+% u = symbols('u')
+% assert factor(2*u**2 + u - 1) == (u + 1)*(2*u - 1)
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-049}
+
+\textbf{1.} $\cos(2x) + \cos x = (2\cos^2 x - 1) + \cos x = 2\cos^2 x + \cos x - 1$.
+
+\textbf{2.} $2u^2 + u - 1 = (u+1)(2u-1)$, donc $f(x) = (\cos x + 1)(2\cos x - 1)$.
+
+\textbf{3.} $f(x) = 0 \iff \cos x = -1$ ou $\cos x = \dfrac{1}{2}$.
+$\cos x = -1$ : $x = \pi$.
+$\cos x = \dfrac{1}{2}$ : $x = \dfrac{\pi}{3}$ ou $x = \dfrac{5\pi}{3}$.
+
+Solutions sur $[0;2\pi]$ : $\left\{\dfrac{\pi}{3},\;\pi,\;\dfrac{5\pi}{3}\right\}$.
+
+\textbf{4.} $\cos x + 1 \geqslant 0$ toujours sur $[0;2\pi]$ (egal a $0$ seulement en $x = \pi$). Le signe de $f$ est celui de $2\cos x - 1$, soit le signe de $\cos x - \dfrac{1}{2}$.
+
+$f(x) \geqslant 0$ sur $\left[0;\dfrac{\pi}{3}\right] \cup \left[\dfrac{5\pi}{3};2\pi\right]$ et $f(x) \leqslant 0$ sur $\left[\dfrac{\pi}{3};\dfrac{5\pi}{3}\right]$.
+
+\end{corrige}

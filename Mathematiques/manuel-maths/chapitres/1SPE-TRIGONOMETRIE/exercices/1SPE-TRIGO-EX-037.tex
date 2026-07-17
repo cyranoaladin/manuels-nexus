@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-TRIGO-EX-037", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-037.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-037.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # cos(x) <= -sqrt(2)/2 on [0;2pi] => x in [3pi/4; 5pi/4]
+% assert cos(3*pi/4) == -sqrt(2)/2
+% assert cos(5*pi/4) == -sqrt(2)/2
+% assert cos(pi) == -1  # < -sqrt(2)/2
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-037}{2}{12}
+Resoudre sur $[0\,;\,2\pi]$ les inequations suivantes.
+\begin{enumerate}
+  \item $\cos x \leqslant -\dfrac{\sqrt{2}}{2}$
+  \item $\sin x \geqslant \dfrac{\sqrt{3}}{2}$
+\end{enumerate}
+\end{exercice}

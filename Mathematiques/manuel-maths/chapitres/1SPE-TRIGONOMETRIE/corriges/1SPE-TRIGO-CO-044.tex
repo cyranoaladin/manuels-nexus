@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-TRIGO-CO-044", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-044", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp(cos(x) + sin(x) - sqrt(2)*cos(x - pi/4)) == 0
+% assert simplify(cos(3*pi/4) + sin(3*pi/4)) == 0
+% assert simplify(cos(7*pi/4) + sin(7*pi/4)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-044}
+
+\textbf{1.} $\sqrt{2}\cos\!\left(x-\dfrac{\pi}{4}\right) = \sqrt{2}\left[\cos x\cos\dfrac{\pi}{4} + \sin x\sin\dfrac{\pi}{4}\right] = \sqrt{2}\left[\dfrac{\sqrt{2}}{2}\cos x + \dfrac{\sqrt{2}}{2}\sin x\right] = \cos x + \sin x = f(x)$.
+
+\textbf{2.} Periode : $2\pi$. Maximum : $\sqrt{2}$ (atteint en $x = \dfrac{\pi}{4}$). Minimum : $-\sqrt{2}$ (atteint en $x = \dfrac{5\pi}{4}$).
+
+\textbf{3.} $f$ croissante sur $\left[0;\dfrac{\pi}{4}\right] \cup \left[\dfrac{5\pi}{4};2\pi\right]$, decroissante sur $\left[\dfrac{\pi}{4};\dfrac{5\pi}{4}\right]$.
+
+\textbf{4.} $f(x) = 0 \iff \cos\!\left(x - \dfrac{\pi}{4}\right) = 0 \iff x - \dfrac{\pi}{4} = \dfrac{\pi}{2} + k\pi$, soit $x = \dfrac{3\pi}{4} + k\pi$.
+Sur $[0;2\pi]$ : $x = \dfrac{3\pi}{4}$ ou $x = \dfrac{7\pi}{4}$.
+
+\end{corrige}

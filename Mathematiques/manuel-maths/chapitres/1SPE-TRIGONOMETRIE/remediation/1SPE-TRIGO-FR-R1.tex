@@ -1,0 +1,38 @@
+% META: {"id": "1SPE-TRIGO-FR-R1", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R1 : Theoreme de Pythagore
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Theoreme de Pythagore}
+
+Dans un triangle rectangle, le carre de l'hypotenuse est egal a la somme des carres des deux autres cotes :
+\[
+  c^2 = a^2 + b^2.
+\]
+
+Ce theoreme est fondamental en trigonometrie car il justifie la relation $\cos^2 x + \sin^2 x = 1$ sur le cercle trigonometrique.
+
+\begin{exercice}{1SPE-TRIGO-FR-R1-EX1}{1}{5}
+Dans un triangle rectangle, calculer la longueur manquante.
+\begin{enumerate}
+  \item $a = 3$, $b = 4$, $c = \,?$
+  \item $a = 5$, $c = 13$, $b = \,?$
+  \item $a = 1$, $b = 1$, $c = \,?$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert sqrt(9 + 16) == 5
+% assert sqrt(169 - 25) == 12
+% assert sqrt(2) == sqrt(2)
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-FR-R1-EX1}
+\textbf{1.} $c = \sqrt{3^2 + 4^2} = \sqrt{9+16} = \sqrt{25} = 5$.
+
+\textbf{2.} $b = \sqrt{13^2 - 5^2} = \sqrt{169-25} = \sqrt{144} = 12$.
+
+\textbf{3.} $c = \sqrt{1^2 + 1^2} = \sqrt{2}$.
+\end{corrige}

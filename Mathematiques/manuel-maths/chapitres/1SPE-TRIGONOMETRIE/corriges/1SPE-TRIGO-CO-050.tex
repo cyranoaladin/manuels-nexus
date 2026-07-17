@@ -1,0 +1,29 @@
+% META: {"id": "1SPE-TRIGO-CO-050", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-050", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% t = symbols('t', real=True)
+% h = 10 - 8*cos(pi*t/6)
+% assert h.subs(t, 0) == 2
+% assert h.subs(t, 6) == 18
+% assert simplify(h.subs(t, 4) - 14) == 0
+% assert simplify(h.subs(t, 8) - 14) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-050}
+
+\textbf{1.} $h(0) = 10 - 8 \times 1 = 2$~m (maree basse). $h(6) = 10 - 8\cos\pi = 10 + 8 = 18$~m (maree haute).
+
+\textbf{2.} La periode de $\cos\!\left(\dfrac{\pi t}{6}\right)$ est $\dfrac{2\pi}{\pi/6} = 12$ heures.
+
+\textbf{3.} $h$ croissante sur $[0;6]$ (de $2$ a $18$), decroissante sur $[6;12]$ (de $18$ a $2$).
+
+\textbf{4.} $h(t) \geqslant 14 \iff 10 - 8\cos\!\left(\dfrac{\pi t}{6}\right) \geqslant 14 \iff \cos\!\left(\dfrac{\pi t}{6}\right) \leqslant -\dfrac{1}{2}$.
+
+$\cos\theta = -\dfrac{1}{2}$ en $\theta = \dfrac{2\pi}{3}$ et $\theta = \dfrac{4\pi}{3}$. On a $\theta = \dfrac{\pi t}{6}$, donc $t = \dfrac{6\theta}{\pi}$.
+
+$t_1 = \dfrac{6 \times 2\pi/3}{\pi} = 4$ et $t_2 = \dfrac{6 \times 4\pi/3}{\pi} = 8$.
+
+Le bateau peut entrer pour $t \in [4;8]$.
+
+\textbf{5.} $t = 4$~h et $t = 8$~h apres la maree basse, soit une plage de $4$ heures.
+
+\end{corrige}

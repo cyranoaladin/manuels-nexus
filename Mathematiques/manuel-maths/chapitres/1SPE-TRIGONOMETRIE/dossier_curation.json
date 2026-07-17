@@ -1,0 +1,47 @@
+{
+  "chapitre": "1SPE-TRIGONOMETRIE",
+  "mode": "ex_nihilo",
+  "note": "Dossier constitue sans corpus indexe.",
+  "capacites": {
+    "C1": {
+      "chunks_retenus": [],
+      "brief": "Cercle trigonometrique : cercle de centre O et de rayon 1 dans un repere orthonorme. Un angle oriente de mesure t (en radians) correspond au point M du cercle tel que l'arc AM = t (A = (1;0)). Conversion : pi rad = 180 deg. Mesure principale dans ]-pi;pi]. Erreurs types : (1) confondre degres et radians dans les calculs ; (2) oublier que le cercle trigonometrique a un rayon 1 et non un rayon quelconque ; (3) ne pas savoir retrouver la mesure principale d'un angle (ajouter ou retrancher 2pi).",
+      "angles_morts": [],
+      "approche": "Partir de la grande roue pour motiver le passage du degre au radian. Introduire le cercle trigonometrique comme modele unitaire.",
+      "erreurs_types": ["Confondre degres et radians", "Se tromper de sens de parcours sur le cercle", "Oublier la periodicite 2pi"],
+      "format_examen": "Placer des points sur le cercle trigonometrique, convertir des angles"
+    },
+    "C2": {
+      "chunks_retenus": [],
+      "brief": "Relation fondamentale cos^2(x)+sin^2(x)=1 (consequence directe de Pythagore dans le cercle trigonometrique). Valeurs remarquables : cos(0)=1, sin(0)=0 ; cos(pi/6)=sqrt(3)/2, sin(pi/6)=1/2 ; cos(pi/4)=sqrt(2)/2, sin(pi/4)=sqrt(2)/2 ; cos(pi/3)=1/2, sin(pi/3)=sqrt(3)/2 ; cos(pi/2)=0, sin(pi/2)=1. Formules de symetrie : cos(-x)=cos(x), sin(-x)=-sin(x), cos(pi-x)=-cos(x), sin(pi-x)=sin(x), cos(pi+x)=-cos(x), sin(pi+x)=-sin(x). Erreurs types : (1) inverser cos(pi/3) et cos(pi/6) ; (2) se tromper de signe dans les formules de symetrie ; (3) oublier que cos^2 signifie (cos)^2.",
+      "angles_morts": [],
+      "approche": "Construire le tableau des valeurs remarquables a partir du triangle equilateral et du triangle isocele rectangle. Visualiser les symetries sur le cercle.",
+      "erreurs_types": ["Inverser cos(pi/3) et cos(pi/6)", "Erreur de signe dans sin(pi-x)", "Confondre cos^2(x) et cos(x^2)"],
+      "format_examen": "Calculer des expressions trigonometriques exactes, simplifier avec les formules de symetrie"
+    },
+    "C3": {
+      "chunks_retenus": [],
+      "brief": "Formules d'addition : cos(a+b)=cos(a)cos(b)-sin(a)sin(b), sin(a+b)=sin(a)cos(b)+cos(a)sin(b). Formules de soustraction (changer le signe de b). Formules de duplication : cos(2a)=cos^2(a)-sin^2(a)=2cos^2(a)-1=1-2sin^2(a), sin(2a)=2sin(a)cos(a). Demonstration exigible de cos(a+b) par le produit scalaire ou la distance. Erreurs types : (1) se tromper de signe dans cos(a+b) (le signe - est devant sin.sin) ; (2) confondre cos(2a)=cos^2-sin^2 et cos(2a)=cos^2+sin^2 ; (3) oublier le facteur 2 dans sin(2a)=2sin.cos.",
+      "angles_morts": [],
+      "approche": "Demontrer cos(a+b) par la methode de la distance (rotation). Deduire toutes les autres formules par specialisation.",
+      "erreurs_types": ["Erreur de signe dans cos(a+b)", "Oublier le 2 dans sin(2a)", "Confondre les trois formes de cos(2a)"],
+      "format_examen": "Calculer cos(pi/12), sin(7pi/12), lineariser, demontrer une identite"
+    },
+    "C4": {
+      "chunks_retenus": [],
+      "brief": "Resolution de cos(x)=a : si a dans [-1;1], solutions x = arccos(a) + 2k*pi ou x = -arccos(a) + 2k*pi (k entier). Resolution de sin(x)=a : si a dans [-1;1], solutions x = arcsin(a) + 2k*pi ou x = pi-arcsin(a) + 2k*pi. Inequations : cos(x)>=a se resout en utilisant le cercle trigonometrique (lire les arcs ou cos>=a). Erreurs types : (1) oublier la deuxieme famille de solutions ; (2) ecrire les solutions sans le +2k*pi ; (3) confondre les formules de resolution pour cos et sin.",
+      "angles_morts": [],
+      "approche": "Toujours partir du cercle trigonometrique pour visualiser les solutions. Insister sur les deux familles de solutions.",
+      "erreurs_types": ["Oublier une famille de solutions", "Pas de +2k*pi", "Confondre resolution cos et sin"],
+      "format_examen": "Resoudre cos(x)=1/2, sin(2x)=sqrt(3)/2, cos(x)>=0 sur [0;2pi]"
+    },
+    "C5": {
+      "chunks_retenus": [],
+      "brief": "Fonctions x->cos(x) et x->sin(x) definies sur R, a valeurs dans [-1;1], periodiques de periode 2pi. Variations sur [0;2pi] : cos decroissante sur [0;pi], croissante sur [pi;2pi] ; sin croissante sur [0;pi/2], decroissante sur [pi/2;3pi/2], croissante sur [3pi/2;2pi]. Parite : cos est paire, sin est impaire. Courbes representatives. Erreurs types : (1) se tromper sur les intervalles de monotonie ; (2) confondre les courbes de cos et sin ; (3) oublier que la periode est 2pi et non pi.",
+      "angles_morts": [],
+      "approche": "Construire les courbes point par point a partir du cercle trigonometrique (projection sur les axes). Exploiter la parite et la periodicite pour simplifier l'etude.",
+      "erreurs_types": ["Erreur sur les intervalles de monotonie de sin", "Confondre les courbes cos et sin", "Periode 2pi et non pi"],
+      "format_examen": "Dresser le tableau de variations, lire graphiquement des solutions, etudier f(x)=2cos(x)+1"
+    }
+  }
+}

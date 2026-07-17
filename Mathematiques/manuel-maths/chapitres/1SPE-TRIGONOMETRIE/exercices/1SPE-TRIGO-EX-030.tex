@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-TRIGO-EX-030", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-030.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-030.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% a, b = symbols('a b', real=True)
+% # Demonstration de cos(a+b) par la distance
+% M = Matrix([cos(a), sin(a)])
+% N = Matrix([cos(b), -sin(b)])
+% P = Matrix([cos(a+b), sin(a+b)])
+% Q = Matrix([1, 0])
+% MN2 = (M-N).dot(M-N)
+% QP2 = (Q-P).dot(Q-P)
+% assert trigsimp(MN2 - QP2) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-030}{3}{18}
+\textbf{Demonstration exigible : formule de $\cos(a+b)$.}
+
+On se place dans le cercle trigonometrique. On considere les points $M(\cos a\,;\,\sin a)$, $N(\cos(-b)\,;\,\sin(-b))$, $P(\cos(a+b)\,;\,\sin(a+b))$ et $Q(1\,;\,0)$.
+\begin{enumerate}
+  \item Justifier que les arcs $\overset{\frown}{NM}$ et $\overset{\frown}{QP}$ ont la meme mesure.
+  \item En deduire que $MN = QP$.
+  \item Calculer $MN^2$ en fonction de $\cos a$, $\sin a$, $\cos b$, $\sin b$.
+  \item Calculer $QP^2$ en fonction de $\cos(a+b)$ et $\sin(a+b)$.
+  \item En egalant $MN^2$ et $QP^2$, demontrer que $\cos(a+b) = \cos a \cos b - \sin a \sin b$.
+\end{enumerate}
+\end{exercice}

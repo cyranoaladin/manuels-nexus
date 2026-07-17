@@ -1,0 +1,82 @@
+% META: {"id": "1SPE-TRIGO-CR-011", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+
+\section{Cosinus, sinus et valeurs remarquables}
+
+% ============================================================
+% STRATE 1 — Definitions et proprietes fondamentales
+% ============================================================
+
+\definition[1]{
+Soit $M$ le point du cercle trigonometrique associe au reel $t$. Les coordonnees de $M$ dans le repere $(O\,;\,\vec{\imath},\vec{\jmath})$ sont :
+\[
+  M = (\cos t\,;\, \sin t).
+\]
+Le reel $\cos t$ est le \textbf{cosinus} de $t$ et le reel $\sin t$ est le \textbf{sinus} de $t$.
+}
+
+\propriete{
+Pour tout reel $t$ :
+\[
+  \cos^2 t + \sin^2 t = 1.
+\]
+De plus : $-1 \leqslant \cos t \leqslant 1$ et $-1 \leqslant \sin t \leqslant 1$.
+}
+
+\demonstration{
+Le point $M(\cos t\,;\,\sin t)$ est sur le cercle de centre $O$ et de rayon $1$, donc $OM^2 = 1$. Or $OM^2 = \cos^2 t + \sin^2 t$ d'apres le theoreme de Pythagore. D'ou $\cos^2 t + \sin^2 t = 1$.
+}
+
+% ============================================================
+% Valeurs remarquables
+% ============================================================
+
+\propriete{
+Les valeurs remarquables du cosinus et du sinus sont :
+
+\begin{center}
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$t$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\dfrac{\pi}{2}$ \\
+\hline
+$\cos t$ & $1$ & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$ & $0$ \\
+\hline
+$\sin t$ & $0$ & $\dfrac{1}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\exemple{
+On verifie : $\cos^2\!\left(\dfrac{\pi}{3}\right) + \sin^2\!\left(\dfrac{\pi}{3}\right) = \left(\dfrac{1}{2}\right)^2 + \left(\dfrac{\sqrt{3}}{2}\right)^2 = \dfrac{1}{4} + \dfrac{3}{4} = 1$. \checkmark
+}
+
+% ============================================================
+% STRATE 2 — Formules de symetrie
+% ============================================================
+
+\propriete{
+Pour tout reel $x$ :
+\begin{align*}
+  &\text{(Parite)} & \cos(-x) &= \cos x, & \sin(-x) &= -\sin x, \\
+  &\text{(Supplementaire)} & \cos(\pi - x) &= -\cos x, & \sin(\pi - x) &= \sin x, \\
+  &\text{(Anti-supplementaire)} & \cos(\pi + x) &= -\cos x, & \sin(\pi + x) &= -\sin x, \\
+  &\text{(Complementaire)} & \cos\!\left(\frac{\pi}{2} - x\right) &= \sin x, & \sin\!\left(\frac{\pi}{2} - x\right) &= \cos x.
+\end{align*}
+}
+
+\exemple{
+\begin{itemize}
+  \item $\cos\!\left(-\dfrac{\pi}{3}\right) = \cos\!\left(\dfrac{\pi}{3}\right) = \dfrac{1}{2}$.
+  \item $\sin\!\left(\pi - \dfrac{\pi}{6}\right) = \sin\!\left(\dfrac{\pi}{6}\right) = \dfrac{1}{2}$.
+  \item $\cos\!\left(\dfrac{2\pi}{3}\right) = \cos\!\left(\pi - \dfrac{\pi}{3}\right) = -\cos\!\left(\dfrac{\pi}{3}\right) = -\dfrac{1}{2}$.
+\end{itemize}
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+Les valeurs remarquables de $\cos\!\left(\dfrac{\pi}{6}\right)$ et $\sin\!\left(\dfrac{\pi}{6}\right)$ se retrouvent a partir d'un triangle equilateral de cote $1$ : la hauteur vaut $\dfrac{\sqrt{3}}{2}$ et la moitie de la base vaut $\dfrac{1}{2}$. Celles de $\cos\!\left(\dfrac{\pi}{4}\right)$ et $\sin\!\left(\dfrac{\pi}{4}\right)$ proviennent d'un triangle rectangle isocele d'hypotenuse $1$.
+}

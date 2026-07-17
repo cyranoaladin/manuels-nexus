@@ -1,0 +1,66 @@
+% META: {"id": "1SPE-TRIGO-TD-CONTEXTUALISE", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "td", "capacites_codes": ["C1","C2","C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% TD CONTEXTUALISE — Hauteur sur une grande roue
+%---------------------------------------------------------------
+
+\section*{TD contextualise — La grande roue}
+
+\subsection*{Mise en situation}
+
+Une grande roue de fete foraine a un rayon de $25$~m et son centre est situe a $27$~m du sol. Un passager monte dans une nacelle au point le plus bas de la roue. On note $\theta$ l'angle (en radians) parcouru depuis ce point le plus bas, dans le sens trigonometrique.
+
+La hauteur $h(\theta)$ du passager par rapport au sol est modelisee par :
+\[
+  h(\theta) = 27 - 25\cos\theta.
+\]
+
+\bigskip
+
+\subsection*{Partie A — Premieres observations}
+
+\begin{exercice}{1SPE-TRIGO-TD-CTX-A}{1}{10}
+\begin{enumerate}
+  \item Calculer $h(0)$. Quelle est la hauteur du passager au depart ?
+  \item Calculer $h(\pi)$. Quelle est la hauteur du passager au point le plus haut ?
+  \item Calculer $h\!\left(\dfrac{\pi}{3}\right)$. Donner la valeur exacte puis une valeur approchee au dixieme.
+  \item Pour quelle(s) valeur(s) de $\theta \in [0\,;\,2\pi]$ le passager est-il a $27$~m du sol ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% theta = symbols('theta', real=True)
+% h = 27 - 25*cos(theta)
+% assert h.subs(theta, 0) == 2
+% assert h.subs(theta, pi) == 52
+% assert simplify(h.subs(theta, pi/3) - Rational(29, 2)) == 0
+% # h(theta) = 27 quand cos(theta) = 0, i.e. theta = pi/2 ou 3*pi/2
+% assert h.subs(theta, pi/2) == 27
+% assert h.subs(theta, 3*pi/2) == 27
+% END-VERIFY
+
+\subsection*{Partie B — Etude de la hauteur}
+
+\begin{exercice}{1SPE-TRIGO-TD-CTX-B}{2}{15}
+\begin{enumerate}
+  \item Dresser le tableau de variations de $h$ sur $[0\,;\,2\pi]$ en utilisant les variations de la fonction cosinus.
+  \item A quelle(s) valeur(s) de $\theta$ le passager atteint-il une hauteur de $39{,}5$~m ?
+    Resoudre $h(\theta) = 39{,}5$, soit $\cos\theta = -\dfrac{1}{2}$.
+  \item La grande roue fait un tour complet en $3$~minutes. Exprimer $\theta$ en fonction du temps $t$ (en minutes). En deduire la hauteur en fonction de $t$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% theta = symbols('theta', real=True)
+% # cos(theta) = -1/2 => theta = 2*pi/3 ou theta = 4*pi/3
+% assert cos(Rational(2,1)*pi/3) == Rational(-1, 2)
+% assert cos(4*pi/3) == Rational(-1, 2)
+% # theta = 2*pi*t/3 (un tour = 2*pi en 3 min)
+% t = symbols('t', real=True)
+% theta_t = 2*pi*t/3
+% h_t = 27 - 25*cos(theta_t)
+% assert h_t.subs(t, 0) == 2
+% assert simplify(h_t.subs(t, 3) - 2) == 0
+% END-VERIFY

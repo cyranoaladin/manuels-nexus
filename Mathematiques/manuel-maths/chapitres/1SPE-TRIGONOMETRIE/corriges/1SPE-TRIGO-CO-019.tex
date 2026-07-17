@@ -1,0 +1,29 @@
+% META: {"id": "1SPE-TRIGO-CO-019", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-019", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp(cos(pi/2 - x) - sin(x)) == 0
+% assert trigsimp(sin(pi/2 - x) - cos(x)) == 0
+% assert trigsimp(cos(pi/2 + x) + sin(x)) == 0
+% assert trigsimp(sin(pi/2 + x) - cos(x)) == 0
+% assert cos(pi/2 + pi/6) == -sin(pi/6)
+% assert sin(pi/2 - pi/3) == cos(pi/3)
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-019}
+
+\textbf{1.} Par la formule d'addition :
+$\cos\!\left(\dfrac{\pi}{2} - x\right) = \cos\dfrac{\pi}{2}\cos x + \sin\dfrac{\pi}{2}\sin x = 0 \cdot \cos x + 1 \cdot \sin x = \sin x$.
+
+$\sin\!\left(\dfrac{\pi}{2} - x\right) = \sin\dfrac{\pi}{2}\cos x - \cos\dfrac{\pi}{2}\sin x = 1 \cdot \cos x - 0 \cdot \sin x = \cos x$.
+
+\textbf{2.} En remplacant $x$ par $-x$ dans $\cos\!\left(\dfrac{\pi}{2} - x\right) = \sin x$ :
+$\cos\!\left(\dfrac{\pi}{2} + x\right) = \sin(-x) = -\sin x$.
+
+En remplacant $x$ par $-x$ dans $\sin\!\left(\dfrac{\pi}{2} - x\right) = \cos x$ :
+$\sin\!\left(\dfrac{\pi}{2} + x\right) = \cos(-x) = \cos x$.
+
+\textbf{3.} $\cos\!\left(\dfrac{\pi}{2} + \dfrac{\pi}{6}\right) = -\sin\dfrac{\pi}{6} = -\dfrac{1}{2}$.
+
+$\sin\!\left(\dfrac{\pi}{2} - \dfrac{\pi}{3}\right) = \cos\dfrac{\pi}{3} = \dfrac{1}{2}$.
+
+\end{corrige}

@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-TRIGO-FR-R4", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R4 : Calcul litteral
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Identites remarquables et developpement}
+
+\[
+  (a+b)^2 = a^2 + 2ab + b^2, \quad (a-b)^2 = a^2 - 2ab + b^2, \quad (a+b)(a-b) = a^2 - b^2.
+\]
+
+\begin{exercice}{1SPE-TRIGO-FR-R4-EX1}{1}{5}
+Developper et reduire.
+\begin{enumerate}
+  \item $(\cos x + \sin x)^2$
+  \item $(\cos x - \sin x)(\cos x + \sin x)$
+  \item $2(\cos x + 1)(\cos x - 1)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert expand((cos(x)+sin(x))**2) == cos(x)**2 + 2*cos(x)*sin(x) + sin(x)**2
+% assert expand((cos(x)-sin(x))*(cos(x)+sin(x))) == cos(x)**2 - sin(x)**2
+% assert expand(2*(cos(x)+1)*(cos(x)-1)) == 2*cos(x)**2 - 2
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-FR-R4-EX1}
+\textbf{1.} $\cos^2 x + 2\cos x\sin x + \sin^2 x = 1 + 2\cos x\sin x = 1 + \sin(2x)$.
+
+\textbf{2.} $\cos^2 x - \sin^2 x = \cos(2x)$.
+
+\textbf{3.} $2(\cos^2 x - 1) = 2\cos^2 x - 2$.
+\end{corrige}

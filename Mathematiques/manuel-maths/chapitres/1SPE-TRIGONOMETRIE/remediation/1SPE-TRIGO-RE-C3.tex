@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-TRIGO-RE-C3", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : Formules d'addition et duplication
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-TRIGO-RE-C3-EX1}{1}{10}
+\begin{enumerate}
+  \item Ecrire les formules de $\cos(a+b)$, $\sin(a+b)$, $\cos(2a)$, $\sin(2a)$.
+  \item Calculer $\cos\!\left(\dfrac{\pi}{12}\right)$ en utilisant $\dfrac{\pi}{12} = \dfrac{\pi}{3} - \dfrac{\pi}{4}$.
+  \item Simplifier $\cos^2 x - \sin^2 x$.
+  \item Calculer $\cos(2 \times \dfrac{\pi}{4})$ de deux facons differentes.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert simplify(cos(pi/12) - (sqrt(6)+sqrt(2))/4) == 0
+% assert trigsimp(cos(x)**2 - sin(x)**2 - cos(2*x)) == 0
+% assert cos(pi/2) == 0
+% assert 2*cos(pi/4)**2 - 1 == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-RE-C3-EX1}
+\textbf{2.} $\cos\dfrac{\pi}{12} = \cos\dfrac{\pi}{3}\cos\dfrac{\pi}{4} + \sin\dfrac{\pi}{3}\sin\dfrac{\pi}{4} = \dfrac{\sqrt{2}+\sqrt{6}}{4}$.
+
+\textbf{3.} $\cos^2 x - \sin^2 x = \cos(2x)$.
+
+\textbf{4.} Directement : $\cos\dfrac{\pi}{2} = 0$. Par duplication : $2\cos^2\dfrac{\pi}{4} - 1 = 2 \times \dfrac{1}{2} - 1 = 0$. \checkmark
+\end{corrige}

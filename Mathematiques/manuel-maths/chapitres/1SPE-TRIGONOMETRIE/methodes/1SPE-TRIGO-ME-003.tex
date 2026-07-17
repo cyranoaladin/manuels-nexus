@@ -1,0 +1,54 @@
+% META: {"id": "1SPE-TRIGO-ME-003", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Utiliser les formules d'addition et de duplication}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'on doit calculer $\cos(a \pm b)$, $\sin(a \pm b)$, $\cos(2a)$, $\sin(2a)$,
+  lineariser $\cos^2 a$ ou $\sin^2 a$, ou demontrer une identite trigonometrique.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Identifier la formule a utiliser :
+      \begin{itemize}
+        \item $\cos(a+b) = \cos a \cos b - \sin a \sin b$ (signe $-$ devant $\sin\sin$).
+        \item $\sin(a+b) = \sin a \cos b + \cos a \sin b$ (signes $+$).
+        \item $\cos(2a) = 2\cos^2 a - 1 = 1 - 2\sin^2 a = \cos^2 a - \sin^2 a$.
+        \item $\sin(2a) = 2\sin a \cos a$.
+      \end{itemize}
+    \item Decomposer l'angle en somme ou difference d'angles remarquables.
+    \item Appliquer la formule et remplacer par les valeurs connues.
+    \item Simplifier le resultat.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Calculer $\sin\!\left(\dfrac{7\pi}{12}\right)$.
+
+  \medskip
+  \commentaireMarge{Decomposer : $\frac{7\pi}{12} = \frac{\pi}{3} + \frac{\pi}{4}$.}%
+  On ecrit $\dfrac{7\pi}{12} = \dfrac{\pi}{3} + \dfrac{\pi}{4}$.
+
+  \commentaireMarge{Appliquer $\sin(a+b) = \sin a \cos b + \cos a \sin b$.}%
+  \begin{align*}
+    \sin\!\left(\frac{7\pi}{12}\right) &= \sin\!\left(\frac{\pi}{3}\right)\cos\!\left(\frac{\pi}{4}\right) + \cos\!\left(\frac{\pi}{3}\right)\sin\!\left(\frac{\pi}{4}\right) \\
+    &= \frac{\sqrt{3}}{2} \cdot \frac{\sqrt{2}}{2} + \frac{1}{2} \cdot \frac{\sqrt{2}}{2} = \frac{\sqrt{6} + \sqrt{2}}{4}.
+  \end{align*}
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Erreur de signe dans $\cos(a+b)$ : le signe devant $\sin a \sin b$ est \textbf{negatif} (« $-$»).
+    \item \textbf{Piege 2.} Oublier le coefficient $2$ dans $\sin(2a) = 2\sin a \cos a$.
+    \item \textbf{Piege 3.} Confondre les trois ecritures de $\cos(2a)$ : choisir celle qui simplifie le calcul
+      en fonction de ce qu'on connait (seulement $\cos$ ? seulement $\sin$ ? les deux ?).
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier le resultat numeriquement a la calculatrice :
+  $\sin\!\left(\dfrac{7\pi}{12}\right) \approx 0{,}966$ et $\dfrac{\sqrt{6}+\sqrt{2}}{4} \approx 0{,}966$. \checkmark
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

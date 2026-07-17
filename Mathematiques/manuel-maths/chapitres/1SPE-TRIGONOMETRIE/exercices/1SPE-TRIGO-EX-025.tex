@@ -1,0 +1,23 @@
+% META: {"id": "1SPE-TRIGO-EX-025", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-025.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-025.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% # cos(a+b)+cos(a-b) = 2*cos(a)*cos(b)
+% a, b = symbols('a b', real=True)
+% assert trigsimp(cos(a+b) + cos(a-b) - 2*cos(a)*cos(b)) == 0
+% # sin(a+b)+sin(a-b) = 2*sin(a)*cos(b)
+% assert trigsimp(sin(a+b) + sin(a-b) - 2*sin(a)*cos(b)) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-025}{2}{12}
+\begin{enumerate}
+  \item A l'aide des formules d'addition, montrer que pour tous reels $a$ et $b$ :
+  \[
+    \cos(a+b) + \cos(a-b) = 2\cos a \cos b.
+  \]
+  \item De meme, montrer que :
+  \[
+    \sin(a+b) + \sin(a-b) = 2\sin a \cos b.
+  \]
+  \item Application : calculer $\cos\!\left(\dfrac{5\pi}{12}\right) + \cos\!\left(\dfrac{\pi}{12}\right)$ en posant $a = \dfrac{\pi}{4}$ et $b = \dfrac{\pi}{6}$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,34 @@
+% META: {"id": "1SPE-TRIGO-FR-R3", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["R3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R3 : Fonctions de reference
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Parite et periodicite}
+
+Une fonction $f$ est \textbf{paire} si $f(-x) = f(x)$ pour tout $x$ (symetrie par rapport a l'axe des ordonnees).
+
+Une fonction $f$ est \textbf{impaire} si $f(-x) = -f(x)$ pour tout $x$ (symetrie par rapport a l'origine).
+
+\begin{exercice}{1SPE-TRIGO-FR-R3-EX1}{1}{5}
+\begin{enumerate}
+  \item La fonction $f(x) = x^2$ est-elle paire, impaire ou ni l'un ni l'autre ?
+  \item La fonction $g(x) = x^3$ est-elle paire, impaire ou ni l'un ni l'autre ?
+  \item Dresser le tableau de variations de $f(x) = x^2$ sur $[-3;3]$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert (x**2).subs(x, -x) == x**2
+% assert (x**3).subs(x, -x) == -x**3
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-FR-R3-EX1}
+\textbf{1.} $f(-x) = (-x)^2 = x^2 = f(x)$ : $f$ est paire.
+
+\textbf{2.} $g(-x) = (-x)^3 = -x^3 = -g(x)$ : $g$ est impaire.
+
+\textbf{3.} $f$ decroissante sur $[-3;0]$ (de $9$ a $0$) et croissante sur $[0;3]$ (de $0$ a $9$).
+\end{corrige}

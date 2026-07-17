@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-CO-042", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-042", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% g = 3*sin(x) + 2
+% assert g.subs(x, pi/2) == 5
+% assert g.subs(x, 3*pi/2) == -1
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-042}
+
+\textbf{1.} La periode de $g$ est $2\pi$ (meme que $\sin$).
+
+\textbf{2.} $g$ croissante sur $\left[0;\dfrac{\pi}{2}\right]$ (de $2$ a $5$), decroissante sur $\left[\dfrac{\pi}{2};\dfrac{3\pi}{2}\right]$ (de $5$ a $-1$), croissante sur $\left[\dfrac{3\pi}{2};2\pi\right]$ (de $-1$ a $2$).
+
+\textbf{3.} Maximum : $g\!\left(\dfrac{\pi}{2}\right) = 3 \times 1 + 2 = 5$. Minimum : $g\!\left(\dfrac{3\pi}{2}\right) = 3 \times (-1) + 2 = -1$.
+
+\end{corrige}

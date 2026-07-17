@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-TRIGO-CO-040", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-040", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% u = symbols('u')
+% assert sorted(solve(2*u**2 - 3*u + 1, u)) == [Rational(1,2), 1]
+% assert cos(pi/3) == Rational(1,2)
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-040}
+
+\textbf{1.} $2u^2 - 3u + 1 = 0$. $\Delta = 9 - 8 = 1$. $u = \dfrac{3 \pm 1}{4}$, d'ou $u = 1$ ou $u = \dfrac{1}{2}$.
+
+\textbf{2.} $\cos x = 1$ : $x = 2k\pi$, $k \in \mathbb{Z}$.
+
+$\cos x = \dfrac{1}{2}$ : $x = \dfrac{\pi}{3} + 2k\pi$ ou $x = -\dfrac{\pi}{3} + 2k\pi$, $k \in \mathbb{Z}$.
+
+\textbf{3.} L'ensemble des solutions est $\left\{2k\pi,\; k \in \mathbb{Z}\right\} \cup \left\{\dfrac{\pi}{3} + 2k\pi,\; k \in \mathbb{Z}\right\} \cup \left\{-\dfrac{\pi}{3} + 2k\pi,\; k \in \mathbb{Z}\right\}$.
+
+\end{corrige}

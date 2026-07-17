@@ -1,0 +1,39 @@
+% META: {"id": "1SPE-TRIGO-RE-C5", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : Fonctions cos et sin
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-TRIGO-RE-C5-EX1}{1}{10}
+On considere $f(x) = -\cos x + 3$.
+\begin{enumerate}
+  \item Quelle est la periode de $f$ ?
+  \item $f$ est-elle paire, impaire, ou ni l'un ni l'autre ?
+  \item Dresser le tableau de variations de $f$ sur $[0;2\pi]$.
+  \item Determiner le maximum et le minimum de $f$.
+  \item Resoudre $f(x) = 3$ sur $[0;2\pi]$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% f = -cos(x) + 3
+% assert f.subs(x, 0) == 2
+% assert f.subs(x, pi) == 4
+% assert f.subs(x, 2*pi) == 2
+% assert f.subs(x, pi/2) == 3
+% assert f.subs(x, 3*pi/2) == 3
+% END-VERIFY
+
+\begin{corrige}{1SPE-TRIGO-RE-C5-EX1}
+\textbf{1.} Periode : $2\pi$.
+
+\textbf{2.} $f(-x) = -\cos(-x) + 3 = -\cos x + 3 = f(x)$ : $f$ est paire.
+
+\textbf{3.} Comme le coefficient de $\cos$ est $-1 < 0$, les variations sont inversees. $f$ croissante sur $[0;\pi]$ (de $2$ a $4$), decroissante sur $[\pi;2\pi]$ (de $4$ a $2$).
+
+\textbf{4.} Maximum : $f(\pi) = 4$. Minimum : $f(0) = f(2\pi) = 2$.
+
+\textbf{5.} $f(x) = 3 \iff \cos x = 0 \iff x = \dfrac{\pi}{2}$ ou $x = \dfrac{3\pi}{2}$.
+\end{corrige}

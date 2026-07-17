@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-CO-024", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-024", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp(cos(x)**2 - (1 + cos(2*x))/2) == 0
+% assert trigsimp(sin(x)**2 - (1 - cos(2*x))/2) == 0
+% assert simplify(cos(pi/8)**2 - (2+sqrt(2))/4) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-024}
+
+\textbf{1.} $\cos(2a) = 2\cos^2 a - 1 \implies \cos^2 a = \dfrac{1 + \cos(2a)}{2}$.
+
+\textbf{2.} $\cos(2a) = 1 - 2\sin^2 a \implies \sin^2 a = \dfrac{1 - \cos(2a)}{2}$.
+
+\textbf{3.} $\cos^2\!\left(\dfrac{\pi}{8}\right) = \dfrac{1 + \cos\!\left(\dfrac{\pi}{4}\right)}{2} = \dfrac{1 + \frac{\sqrt{2}}{2}}{2} = \dfrac{2 + \sqrt{2}}{4}$.
+
+\end{corrige}

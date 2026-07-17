@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-TRIGO-EX-043", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["1SPE-TRIGONOMETRIE-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner", "representer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-TRIGONOMETRIE/exercices/1SPE-TRIGO-EX-043.tex", "corrige_tex": "chapitres/1SPE-TRIGONOMETRIE/corriges/1SPE-TRIGO-CO-043.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% h = cos(x)**2
+% # h(x) = (1 + cos(2x))/2, period = pi
+% assert trigsimp(h - (1 + cos(2*x))/2) == 0
+% assert h.subs(x, 0) == 1
+% assert h.subs(x, pi/2) == 0
+% assert h.subs(x, pi) == 1
+% END-VERIFY
+\begin{exercice}{1SPE-TRIGO-EX-043}{2}{12}
+On considere la fonction $h$ definie sur $\mathbb{R}$ par $h(x) = \cos^2 x$.
+\begin{enumerate}
+  \item Montrer que $h(x) = \dfrac{1 + \cos(2x)}{2}$.
+  \item En deduire la periode de $h$.
+  \item Dresser le tableau de variations de $h$ sur $[0\,;\,\pi]$.
+  \item La fonction $h$ est-elle paire, impaire, ou ni l'un ni l'autre ?
+\end{enumerate}
+\end{exercice}

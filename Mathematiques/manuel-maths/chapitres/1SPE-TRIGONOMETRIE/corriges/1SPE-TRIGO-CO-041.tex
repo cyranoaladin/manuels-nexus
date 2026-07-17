@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-TRIGO-CO-041", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-041", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% f = 2*cos(x) - 1
+% assert f.subs(x, 0) == 1
+% assert f.subs(x, pi/3) == 0
+% assert f.subs(x, pi) == -3
+% assert f.subs(x, 5*pi/3) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-041}
+
+\textbf{1.} $f(0) = 2 \times 1 - 1 = 1$. $f\!\left(\dfrac{\pi}{3}\right) = 2 \times \dfrac{1}{2} - 1 = 0$. $f(\pi) = 2 \times (-1) - 1 = -3$. $f(2\pi) = 2 \times 1 - 1 = 1$.
+
+\textbf{2.} $f(x) = 2\cos x - 1$. Comme $\cos$ est decroissante sur $[0;\pi]$ et croissante sur $[\pi;2\pi]$, $f$ est decroissante sur $[0;\pi]$ (de $1$ a $-3$) et croissante sur $[\pi;2\pi]$ (de $-3$ a $1$).
+
+\textbf{3.} Maximum : $f(0) = f(2\pi) = 1$. Minimum : $f(\pi) = -3$.
+
+\textbf{4.} $f(x) = 0 \iff \cos x = \dfrac{1}{2} \iff x = \dfrac{\pi}{3}$ ou $x = \dfrac{5\pi}{3}$.
+
+\end{corrige}

@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-TRIGO-CO-016", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-016", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', real=True)
+% assert trigsimp(cos(x) + cos(pi - x)) == 0
+% assert trigsimp(sin(x) + sin(pi - x) - 2*sin(x)) == 0
+% assert trigsimp(sin(x)*sin(pi-x) + cos(x)*cos(pi-x) + cos(2*x)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-016}
+
+\textbf{1.} $\cos x + \cos(\pi-x) = \cos x + (-\cos x) = 0$.
+
+\textbf{2.} $\sin x + \sin(\pi-x) = \sin x + \sin x = 2\sin x$.
+
+\textbf{3.} $\sin x \sin(\pi-x) + \cos x \cos(\pi-x) = \sin x \cdot \sin x + \cos x \cdot (-\cos x) = \sin^2 x - \cos^2 x = -\cos(2x)$.
+
+\end{corrige}

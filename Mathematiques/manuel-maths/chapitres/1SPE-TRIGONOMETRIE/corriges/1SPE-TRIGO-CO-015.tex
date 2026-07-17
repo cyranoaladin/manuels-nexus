@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-TRIGO-CO-015", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-015", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% A = cos(pi/3) + sin(pi/6) - cos(pi)
+% assert A == 2
+% C = cos(pi/6)**2 - sin(pi/6)**2
+% assert simplify(C - Rational(1,2)) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-015}
+
+\textbf{1.} $A = \dfrac{1}{2} + \dfrac{1}{2} - (-1) = \dfrac{1}{2} + \dfrac{1}{2} + 1 = 2$.
+
+\textbf{2.} $B = \sin\!\left(\dfrac{5\pi}{6}\right)\cos\!\left(\dfrac{\pi}{3}\right) + \cos\!\left(\dfrac{5\pi}{6}\right)\sin\!\left(\dfrac{\pi}{4}\right) = \dfrac{1}{2} \times \dfrac{1}{2} + \left(-\dfrac{\sqrt{3}}{2}\right) \times \dfrac{\sqrt{2}}{2} = \dfrac{1}{4} - \dfrac{\sqrt{6}}{4} = \dfrac{1 - \sqrt{6}}{4}$.
+
+\textbf{3.} $C = \cos^2\!\left(\dfrac{\pi}{6}\right) - \sin^2\!\left(\dfrac{\pi}{6}\right) = \dfrac{3}{4} - \dfrac{1}{4} = \dfrac{1}{2}$.
+
+On remarque que $C = \cos\!\left(2 \times \dfrac{\pi}{6}\right) = \cos\!\left(\dfrac{\pi}{3}\right) = \dfrac{1}{2}$. \checkmark
+
+\end{corrige}

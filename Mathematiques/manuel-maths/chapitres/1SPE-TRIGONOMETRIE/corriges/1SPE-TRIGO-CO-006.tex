@@ -1,0 +1,29 @@
+% META: {"id": "1SPE-TRIGO-CO-006", "chapitre": "1SPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "1SPE-TRIGO-EX-006", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert cos(pi/3) == Rational(1,2)
+% assert sin(pi/3) == sqrt(3)/2
+% assert cos(2*pi/3) == Rational(-1,2)
+% assert sin(2*pi/3) == sqrt(3)/2
+% assert cos(pi) == -1
+% assert sin(pi) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-TRIGO-EX-006}
+
+\textbf{1.} L'hexagone regulier divise le cercle en $6$ arcs egaux. L'angle au centre est $\dfrac{2\pi}{6} = \dfrac{\pi}{3}$.
+
+\textbf{2.} Les mesures associees sont : $A_1 \leftrightarrow \dfrac{\pi}{3}$, $A_2 \leftrightarrow \dfrac{2\pi}{3}$, $A_3 \leftrightarrow \pi$, $A_4 \leftrightarrow \dfrac{4\pi}{3}$, $A_5 \leftrightarrow \dfrac{5\pi}{3}$.
+
+\textbf{3.} Coordonnees :
+\begin{itemize}
+  \item $A_0 = (1\,;\,0)$
+  \item $A_1 = \left(\dfrac{1}{2}\,;\,\dfrac{\sqrt{3}}{2}\right)$
+  \item $A_2 = \left(-\dfrac{1}{2}\,;\,\dfrac{\sqrt{3}}{2}\right)$
+  \item $A_3 = (-1\,;\,0)$
+  \item $A_4 = \left(-\dfrac{1}{2}\,;\,-\dfrac{\sqrt{3}}{2}\right)$
+  \item $A_5 = \left(\dfrac{1}{2}\,;\,-\dfrac{\sqrt{3}}{2}\right)$
+\end{itemize}
+
+\textbf{4.} $A_3 = (\cos\pi\,;\,\sin\pi) = (-1\,;\,0)$. \checkmark
+
+\end{corrige}
