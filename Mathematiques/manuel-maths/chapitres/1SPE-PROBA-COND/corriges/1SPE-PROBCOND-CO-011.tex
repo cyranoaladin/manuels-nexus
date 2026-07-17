@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-PROBCOND-CO-011", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-011", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_R1R2 = Rational(3, 10)
+% P_aumoins1R = 1 - Rational(1, 10)
+% assert P_aumoins1R == Rational(9, 10)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-011}
+
+\textbf{1.} Arbre : $P(R_1) = \frac{3}{5}$, $P(V_1) = \frac{2}{5}$. Sachant $R_1$ : $P(R_2) = \frac{1}{2}$, $P(V_2) = \frac{1}{2}$. Sachant $V_1$ : $P(R_2) = \frac{3}{4}$, $P(V_2) = \frac{1}{4}$.
+
+\medskip
+\textbf{2.} $P(R_1 \cap R_2) = \dfrac{3}{5} \times \dfrac{1}{2} = \dfrac{3}{10}$.
+
+\medskip
+\textbf{3.} $P(\text{au moins 1 rouge}) = 1 - P(V_1 \cap V_2) = 1 - \dfrac{2}{5} \times \dfrac{1}{4} = 1 - \dfrac{1}{10} = \dfrac{9}{10}$.
+
+\end{corrige}

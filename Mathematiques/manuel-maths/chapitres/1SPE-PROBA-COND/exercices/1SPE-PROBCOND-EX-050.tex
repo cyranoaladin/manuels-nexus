@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-PROBCOND-EX-050", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-050.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-050.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, Symbol, solve
+% p = Symbol('p')
+% # Prevalence p inconnue, sensibilite 95%, specificite 90%
+% # On veut VPP >= 1/2
+% # P_T_M = 95/100, P_T_Mbar = 10/100
+% # VPP = p * 95/100 / (p * 95/100 + (1-p) * 10/100)
+% # VPP >= 1/2
+% # 95p / (95p + 10(1-p)) >= 1/2
+% # 95p / (85p + 10) >= 1/2
+% # 190p >= 85p + 10
+% # 105p >= 10
+% # p >= 10/105 = 2/21
+% from sympy import Rational as R
+% seuil = R(2, 21)
+% # Verification
+% num = R(95,100) * seuil
+% den = seuil * R(95,100) + (1-seuil) * R(10,100)
+% vpp = num / den
+% assert vpp == R(1, 2)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-050}{3}{20}
+Un test a une sensibilite de $95\,\%$ et une specificite de $90\,\%$. On note $p$ la prevalence de la maladie.
+
+\begin{enumerate}
+  \item Exprimer la valeur predictive positive $P_T(M)$ en fonction de $p$.
+  \item Determiner la valeur minimale de $p$ pour que $P_T(M) \geq \dfrac{1}{2}$.
+  \item Interpreter : a partir de quelle prevalence un test positif est-il << plus probable que non >> ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-PROBCOND-EX-003", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-003.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # 200 eleves, 120 filles, 45 filles sportives
+% P_F = Rational(120, 200)
+% P_FinterS = Rational(45, 200)
+% P_F_S = P_FinterS / P_F
+% assert P_F_S == Rational(3, 8)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-003}{1}{10}
+Dans un lycee de $200$ eleves, $120$ sont des filles et $45$ filles pratiquent un sport.
+
+On tire un eleve au hasard. On note $F$ : << l'eleve est une fille >> et $S$ : << l'eleve est sportif >>.
+
+\begin{enumerate}
+  \item Donner $P(F)$ et $P(F \cap S)$.
+  \item Calculer $P_F(S)$. Interpreter.
+\end{enumerate}
+\end{exercice}

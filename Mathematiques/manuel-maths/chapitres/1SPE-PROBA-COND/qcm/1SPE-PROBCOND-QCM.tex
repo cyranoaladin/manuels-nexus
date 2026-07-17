@@ -1,0 +1,273 @@
+% META: {"id": "1SPE-PROBCOND-QCM", "chapitre": "1SPE-PROBA-COND", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+
+% ============================================================
+% QCM D'AUTO-EVALUATION --- Probabilites conditionnelles et independance
+% Nexus Reussite
+% 18 questions --- 3 ou 4 par capacite C1 a C5
+% ============================================================
+
+\section*{QCM d'auto-evaluation --- Probabilites conditionnelles}
+
+\begin{center}
+\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\end{center}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C1 --- Probabilite conditionnelle}
+% ------------------------------------------------------------
+
+\begin{enumerate}
+
+% ---- Q1 ----
+\item \textbf{[Q1]} On donne $P(A) = \dfrac{1}{2}$ et $P(A \cap B) = \dfrac{1}{6}$. Que vaut $P_A(B)$ ?
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $\dfrac{1}{3}$
+    \item $\dfrac{1}{2}$
+    \item $\dfrac{1}{6}$
+    \item $\dfrac{2}{3}$
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q2 ----
+\item \textbf{[Q2]} $P_A(B) = \dfrac{3}{5}$ signifie :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item La probabilite de $A$ sachant $B$ est $\dfrac{3}{5}$.
+    \item La probabilite de $A \cap B$ est $\dfrac{3}{5}$.
+    \item La probabilite de $B$ sachant que $A$ est realise est $\dfrac{3}{5}$.
+    \item La probabilite de $A \cup B$ est $\dfrac{3}{5}$.
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q3 ----
+\item \textbf{[Q3]} Si $P(A) = \dfrac{2}{5}$ et $P_A(B) = \dfrac{3}{4}$, que vaut $P(A \cap B)$ ?
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $\dfrac{3}{20}$
+    \item $\dfrac{3}{10}$
+    \item $\dfrac{23}{20}$
+    \item $\dfrac{6}{5}$
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q4 ----
+\item \textbf{[Q4]} On donne $P_A(B) = \dfrac{2}{3}$. Que vaut $P_A(\overline{B})$ ?
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $\dfrac{2}{3}$
+    \item $\dfrac{1}{3}$
+    \item On ne peut pas savoir.
+    \item $0$
+  \end{enumerate}
+
+\end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C2 --- Arbre pondere}
+% ------------------------------------------------------------
+
+\begin{enumerate}
+\setcounter{enumi}{4}
+
+% ---- Q5 ----
+\item \textbf{[Q5]} Dans un arbre pondere, la probabilite d'un chemin s'obtient en :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item additionnant les probabilites des branches du chemin.
+    \item multipliant les probabilites des branches du chemin.
+    \item prenant la plus grande probabilite du chemin.
+    \item divisant les probabilites des branches du chemin.
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q6 ----
+\item \textbf{[Q6]} A chaque noeud d'un arbre pondere, la somme des probabilites des branches vaut :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $0$
+    \item la probabilite du noeud parent.
+    \item $1$
+    \item le nombre de branches.
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q7 ----
+\item \textbf{[Q7]} Sur un arbre, les probabilites inscrites sur les branches issues d'un noeud $A$ sont :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item Des probabilites $P(B)$, $P(\overline{B})$.
+    \item Des probabilites conditionnelles $P_A(B)$, $P_A(\overline{B})$.
+    \item Des probabilites d'intersection $P(A \cap B)$, $P(A \cap \overline{B})$.
+    \item Des frequences observees.
+  \end{enumerate}
+
+\end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C3 --- Formule des probabilites totales}
+% ------------------------------------------------------------
+
+\begin{enumerate}
+\setcounter{enumi}{7}
+
+% ---- Q8 ----
+\item \textbf{[Q8]} Si $P(B) = \dfrac{1}{3}$, $P_B(A) = \dfrac{1}{2}$ et $P_{\overline{B}}(A) = \dfrac{1}{4}$, alors $P(A)$ vaut :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $\dfrac{1}{3}$
+    \item $\dfrac{1}{6} + \dfrac{1}{6} = \dfrac{1}{3}$
+    \item $\dfrac{1}{6} + \dfrac{1}{4} = \dfrac{5}{12}$
+    \item $\dfrac{1}{6} + \dfrac{2}{12} = \dfrac{1}{3}$
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q9 ----
+\item \textbf{[Q9]} Pour appliquer la formule des probabilites totales avec $\{B_1, B_2, B_3\}$, il faut que :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item Les $B_i$ soient independants.
+    \item Les $B_i$ forment une partition de $\Omega$.
+    \item Les $B_i$ soient equiprobables.
+    \item $P(B_i) > \dfrac{1}{2}$ pour tout $i$.
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q10 ----
+\item \textbf{[Q10]} La formule des probabilites totales pour la partition $\{B, \overline{B}\}$ s'ecrit :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $P(A) = P(B) + P(\overline{B})$
+    \item $P(A) = P(A \cap B) \times P(A \cap \overline{B})$
+    \item $P(A) = P(B)\,P_B(A) + P(\overline{B})\,P_{\overline{B}}(A)$
+    \item $P(A) = P(B)\,P(A) + P(\overline{B})\,P(A)$
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q11 ----
+\item \textbf{[Q11]} Laquelle de ces etapes fait partie de la demonstration de la formule des probabilites totales ?
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $A = A \cup B$
+    \item $A = (A \cap B) \cup (A \cap \overline{B})$ avec evenements incompatibles
+    \item $P(A) = P(B) \times P(A)$
+    \item $A$ et $B$ sont independants
+  \end{enumerate}
+
+\end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C4 --- Independance}
+% ------------------------------------------------------------
+
+\begin{enumerate}
+\setcounter{enumi}{11}
+
+% ---- Q12 ----
+\item \textbf{[Q12]} $A$ et $B$ sont independants si et seulement si :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $P(A \cap B) = 0$
+    \item $P(A \cap B) = P(A) + P(B)$
+    \item $P(A \cap B) = P(A) \times P(B)$
+    \item $P(A \cup B) = P(A) \times P(B)$
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q13 ----
+\item \textbf{[Q13]} Si $A$ et $B$ sont incompatibles avec $P(A) > 0$ et $P(B) > 0$, alors :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $A$ et $B$ sont independants.
+    \item $A$ et $B$ ne sont pas independants.
+    \item On ne peut pas conclure.
+    \item $P_A(B) = 1$.
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q14 ----
+\item \textbf{[Q14]} Si $A$ et $B$ sont independants, alors $\overline{A}$ et $B$ sont :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item incompatibles.
+    \item independants.
+    \item de meme probabilite.
+    \item sans lien.
+  \end{enumerate}
+
+\end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C5 --- Problemes contextualises}
+% ------------------------------------------------------------
+
+\begin{enumerate}
+\setcounter{enumi}{14}
+
+% ---- Q15 ----
+\item \textbf{[Q15]} La sensibilite d'un test est :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $P(M | T^+)$ (probabilite d'etre malade sachant test positif).
+    \item $P(T^+ | M)$ (probabilite d'un test positif sachant qu'on est malade).
+    \item $P(T^- | \overline{M})$ (probabilite d'un test negatif sachant qu'on est sain).
+    \item $P(M)$ (prevalence de la maladie).
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q16 ----
+\item \textbf{[Q16]} La valeur predictive positive (VPP) est :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item $P(T^+ | M)$
+    \item $P(M | T^+)$
+    \item $P(T^+)$
+    \item $P(\overline{M} | T^-)$
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q17 ----
+\item \textbf{[Q17]} Un test a une sensibilite de $99\,\%$ et la prevalence est de $0{,}1\,\%$. La VPP sera :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item Proche de $99\,\%$.
+    \item Proche de $50\,\%$.
+    \item Probablement faible (bien inferieure a $50\,\%$).
+    \item Exactement $0{,}1\,\%$.
+  \end{enumerate}
+
+\bigskip
+
+% ---- Q18 ----
+\item \textbf{[Q18]} Dans un probleme de controle qualite avec 3 machines, on utilise :
+
+  \begin{enumerate}[label=\Alph*.]
+    \item L'independance.
+    \item La formule de Bayes (probabilites totales + conditionnelle inversee).
+    \item Uniquement des probabilites simples.
+    \item Le theoreme des valeurs intermediaires.
+  \end{enumerate}
+
+\end{enumerate}

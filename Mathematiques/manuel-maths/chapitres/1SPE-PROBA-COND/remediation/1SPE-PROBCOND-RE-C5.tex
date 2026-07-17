@@ -1,0 +1,39 @@
+% META: {"id": "1SPE-PROBCOND-RE-C5", "chapitre": "1SPE-PROBA-COND", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION --- C5
+% Problemes contextualises
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-PROBCOND-RE-C5-EX1}{1}{10}
+Dans un village, $40\,\%$ des habitants possedent un chien ($C$). Parmi les proprietaires de chien, $30\,\%$ ont aussi un chat ($H$). Parmi ceux sans chien, $50\,\%$ ont un chat.
+
+\begin{enumerate}
+  \item Identifier les evenements et ecrire les probabilites.
+  \item Calculer $P(H)$ par la formule des probabilites totales.
+  \item Calculer $P_H(C)$ : sachant qu'une personne a un chat, quelle est la probabilite qu'elle ait aussi un chien ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_C = Rational(2, 5)
+% P_H_C = Rational(3, 10)
+% P_H_Cbar = Rational(1, 2)
+% P_H = P_C * P_H_C + (1-P_C) * P_H_Cbar
+% assert P_H == Rational(2,5)*Rational(3,10) + Rational(3,5)*Rational(1,2)
+% assert P_H == Rational(6,50) + Rational(3,10)
+% assert P_H == Rational(6,50) + Rational(15,50)
+% assert P_H == Rational(21, 50)
+% P_C_H = P_C * P_H_C / P_H
+% assert P_C_H == Rational(6,50) / Rational(21,50)
+% assert P_C_H == Rational(2, 7)
+% END-VERIFY
+
+\begin{corrige}{1SPE-PROBCOND-RE-C5-EX1}
+\textbf{1.} $P(C) = \frac{2}{5}$, $P_C(H) = \frac{3}{10}$, $P_{\overline{C}}(H) = \frac{1}{2}$.
+
+\textbf{2.} $P(H) = \frac{2}{5}\times\frac{3}{10} + \frac{3}{5}\times\frac{1}{2} = \frac{6}{50}+\frac{15}{50} = \frac{21}{50} = 42\,\%$.
+
+\textbf{3.} $P_H(C) = \frac{P(C \cap H)}{P(H)} = \frac{6/50}{21/50} = \frac{6}{21} = \frac{2}{7} \approx 28{,}6\,\%$.
+\end{corrige}

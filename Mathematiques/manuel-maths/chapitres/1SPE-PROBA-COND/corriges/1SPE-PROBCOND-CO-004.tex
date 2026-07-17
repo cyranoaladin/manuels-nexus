@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-PROBCOND-CO-004", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-004", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_A = Rational(1, 4)
+% P_A_B = Rational(3, 5)
+% P_AinterB = P_A * P_A_B
+% assert P_AinterB == Rational(3, 20)
+% P_B = Rational(1, 2)
+% P_B_A = P_AinterB / P_B
+% assert P_B_A == Rational(3, 10)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-004}
+
+\textbf{1.} $P(A \cap B) = P(A) \times P_A(B) = \dfrac{1}{4} \times \dfrac{3}{5} = \dfrac{3}{20}$.
+
+\medskip
+\textbf{2.} $P_B(A) = \dfrac{P(A \cap B)}{P(B)} = \dfrac{\frac{3}{20}}{\frac{1}{2}} = \dfrac{3}{20} \times 2 = \dfrac{3}{10}$.
+
+\end{corrige}

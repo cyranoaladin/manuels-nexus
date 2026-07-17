@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-PROBCOND-EX-013", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-013.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-013.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_R = Rational(1, 2)
+% P_B = Rational(1, 3)
+% P_N = Rational(1, 6)
+% P_G_R = Rational(1, 5)
+% P_G_B = Rational(2, 5)
+% P_G_N = Rational(3, 5)
+% P_G = P_R * P_G_R + P_B * P_G_B + P_N * P_G_N
+% assert P_G == Rational(1,2)*Rational(1,5) + Rational(1,3)*Rational(2,5) + Rational(1,6)*Rational(3,5)
+% assert P_G == Rational(1,10) + Rational(2,15) + Rational(1,10)
+% assert P_G == Rational(2,10) + Rational(2,15)
+% assert P_G == Rational(3,30) + Rational(4,30) + Rational(3,30)
+% assert P_G == Rational(1,3)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-013}{1}{10}
+Un sac contient des jetons rouges, bleus et noirs en proportions $\dfrac{1}{2}$, $\dfrac{1}{3}$ et $\dfrac{1}{6}$. Si le jeton est rouge, on gagne avec probabilite $\dfrac{1}{5}$. S'il est bleu, on gagne avec probabilite $\dfrac{2}{5}$. S'il est noir, on gagne avec probabilite $\dfrac{3}{5}$.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere.
+  \item Calculer la probabilite de gagner.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-PROBCOND-FR-R3", "chapitre": "1SPE-PROBA-COND", "type_objet": "remediation", "capacites_codes": ["R3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU --- R3 : Arbres de denombrement
+%---------------------------------------------------------------
+
+\subsection*{Rappel --- Arbres de denombrement}
+
+Un \textbf{arbre de denombrement} represente les issues possibles d'une experience a plusieurs etapes. Le nombre total d'issues est le produit du nombre de choix a chaque etape.
+
+\begin{exercice}{1SPE-PROBCOND-FR-R3-EX1}{1}{5}
+Un menu propose $3$ entrees, $4$ plats et $2$ desserts.
+\begin{enumerate}
+  \item Combien de menus differents peut-on composer ?
+  \item Si l'on ne prend ni entree ni dessert, combien de choix reste-t-il ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 3 * 4 * 2 == 24
+% assert 4 == 4
+% END-VERIFY
+
+\begin{corrige}{1SPE-PROBCOND-FR-R3-EX1}
+\textbf{1.} $3 \times 4 \times 2 = 24$ menus differents.
+
+\textbf{2.} Il reste $4$ choix (le plat uniquement).
+\end{corrige}

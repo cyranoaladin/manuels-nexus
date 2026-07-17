@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-PROBCOND-EX-015", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-015.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-015.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_S = Rational(3, 5)
+% P_R_S = Rational(9, 10)
+% P_R_Sbar = Rational(7, 10)
+% P_SinterR = P_S * P_R_S
+% assert P_SinterR == Rational(27, 50)
+% P_SbarinterR = (1-P_S) * P_R_Sbar
+% assert P_SbarinterR == Rational(14, 50)
+% assert P_SbarinterR == Rational(7, 25)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-015}{1}{10}
+Un eleve revise ses cours avec probabilite $\dfrac{3}{5}$. S'il a revise, il reussit l'examen avec probabilite $\dfrac{9}{10}$. S'il n'a pas revise, il reussit avec probabilite $\dfrac{7}{10}$.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere de la situation.
+  \item Calculer la probabilite de chaque chemin.
+  \item Verifier que la somme des feuilles vaut $1$.
+\end{enumerate}
+\end{exercice}

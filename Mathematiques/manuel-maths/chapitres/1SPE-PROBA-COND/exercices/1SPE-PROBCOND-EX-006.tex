@@ -1,0 +1,37 @@
+% META: {"id": "1SPE-PROBCOND-EX-006", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-006.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Tableau : H=60, F=40, total=100. Sport: H_S=36, F_S=20
+% P_H = Rational(60, 100)
+% P_HinterS = Rational(36, 100)
+% P_H_S = P_HinterS / P_H
+% assert P_H_S == Rational(3, 5)
+% P_F = Rational(40, 100)
+% P_FinterS = Rational(20, 100)
+% P_F_S = P_FinterS / P_F
+% assert P_F_S == Rational(1, 2)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-006}{2}{12}
+Dans un club de $100$ membres, on releve les donnees suivantes :
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+ & Sport & Pas sport & Total \\
+\hline
+Hommes & $36$ & $24$ & $60$ \\
+\hline
+Femmes & $20$ & $20$ & $40$ \\
+\hline
+Total & $56$ & $44$ & $100$ \\
+\hline
+\end{tabular}
+\end{center}
+
+On note $H$ : << la personne est un homme >> et $S$ : << la personne fait du sport >>.
+
+\begin{enumerate}
+  \item Calculer $P_H(S)$ et $P_F(S)$.
+  \item Comparer et interpreter.
+\end{enumerate}
+\end{exercice}

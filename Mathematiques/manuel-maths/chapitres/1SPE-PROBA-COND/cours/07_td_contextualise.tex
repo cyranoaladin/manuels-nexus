@@ -1,0 +1,77 @@
+% META: {"id": "1SPE-PROBCOND-TD-001", "chapitre": "1SPE-PROBA-COND", "type_objet": "cours", "sous_type": "td_contextualise", "capacites_codes": ["C1","C2","C3","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify
+% # Partie A : prevalence 2%, sensibilite 90%, specificite 95%
+% P_M = Rational(2, 100)
+% P_Mbar = 1 - P_M
+% P_T_M = Rational(90, 100)
+% P_Tbar_Mbar = Rational(95, 100)
+% P_T_Mbar = 1 - P_Tbar_Mbar
+% assert P_T_Mbar == Rational(1, 20)
+% # P(T) par prob totales
+% P_T = P_M * P_T_M + P_Mbar * P_T_Mbar
+% assert P_T == Rational(2,100)*Rational(90,100) + Rational(98,100)*Rational(5,100)
+% assert P_T == Rational(180, 10000) + Rational(490, 10000)
+% assert P_T == Rational(670, 10000)
+% assert P_T == Rational(67, 1000)
+% # VPP
+% P_M_T = P_M * P_T_M / P_T
+% assert P_M_T == Rational(180, 10000) / Rational(67, 1000)
+% assert P_M_T == Rational(18, 67)
+% # Partie B : prevalence 20%
+% P_M2 = Rational(20, 100)
+% P_Mbar2 = 1 - P_M2
+% P_T2 = P_M2 * P_T_M + P_Mbar2 * P_T_Mbar
+% assert P_T2 == Rational(20,100)*Rational(90,100) + Rational(80,100)*Rational(5,100)
+% assert P_T2 == Rational(1800, 10000) + Rational(400, 10000)
+% assert P_T2 == Rational(2200, 10000)
+% assert P_T2 == Rational(11, 50)
+% P_M_T2 = P_M2 * P_T_M / P_T2
+% assert P_M_T2 == Rational(9, 11)
+% END-VERIFY
+
+\section*{TD --- Depistage et valeur predictive}
+
+\textit{Duree estimee : 50 minutes. Capacites : C1, C2, C3, C5.}
+
+\bigskip
+
+Un laboratoire evalue un test de depistage pour une maladie rare. Le test a une \textbf{sensibilite} de $90\,\%$ (il detecte $90\,\%$ des malades) et une \textbf{specificite} de $95\,\%$ (il identifie correctement $95\,\%$ des personnes saines).
+
+On note $M$ l'evenement << la personne est malade >> et $T$ l'evenement << le test est positif >>.
+
+\subsection*{Partie A --- Maladie rare (prevalence $2\,\%$)}
+
+Dans la population generale, $2\,\%$ des personnes sont atteintes.
+
+\begin{enumerate}
+  \item Traduire les donnees de l'enonce en probabilites : $P(M)$, $P_M(T)$, $P_{\overline{M}}(T)$.
+
+  \item Construire un arbre pondere complet a deux niveaux.
+
+  \item Calculer $P(T)$ a l'aide de la formule des probabilites totales.
+
+  \item Calculer la \textbf{valeur predictive positive} $P_T(M)$. Interpreter le resultat.
+
+  \item Expliquer pourquoi, malgre la bonne qualite du test, un resultat positif n'est pas synonyme de maladie certaine.
+\end{enumerate}
+
+\subsection*{Partie B --- Maladie frequente (prevalence $20\,\%$)}
+
+On suppose maintenant que la prevalence est de $20\,\%$.
+
+\begin{enumerate}
+  \setcounter{enumi}{5}
+  \item Recalculer $P(T)$ et $P_T(M)$ avec cette nouvelle prevalence.
+
+  \item Comparer avec la partie A et commenter l'influence de la prevalence.
+\end{enumerate}
+
+\subsection*{Partie C --- Synthese}
+
+\begin{enumerate}
+  \setcounter{enumi}{7}
+  \item Resumer dans un tableau les valeurs de $P_T(M)$ pour les prevalences $2\,\%$ et $20\,\%$.
+
+  \item Un depistage systematique de la population generale est-il pertinent pour une maladie rare ? Argumenter.
+\end{enumerate}

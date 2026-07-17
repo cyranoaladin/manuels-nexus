@@ -1,0 +1,30 @@
+% META: {"id": "1SPE-PROBCOND-EX-048", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-048.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-048.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Assurance: conducteur prudent (P) ou risque (R)
+% # P(P) = 4/5, P(R) = 1/5
+% # P(accident|P) = 1/20, P(accident|R) = 1/4
+% P_P = Rational(4, 5)
+% P_R = Rational(1, 5)
+% P_A_P = Rational(1, 20)
+% P_A_R = Rational(1, 4)
+% P_A = P_P * P_A_P + P_R * P_A_R
+% assert P_A == Rational(4,5)*Rational(1,20) + Rational(1,5)*Rational(1,4)
+% assert P_A == Rational(4,100) + Rational(1,20)
+% assert P_A == Rational(1,25) + Rational(1,20)
+% assert P_A == Rational(4,100) + Rational(5,100)
+% assert P_A == Rational(9, 100)
+% P_R_A = P_R * P_A_R / P_A
+% assert P_R_A == Rational(1,20) / Rational(9,100)
+% assert P_R_A == Rational(1,20) * Rational(100,9)
+% assert P_R_A == Rational(5, 9)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-048}{2}{15}
+Une compagnie d'assurance classe ses conducteurs en << prudents >> ($80\,\%$) et << a risque >> ($20\,\%$). La probabilite d'accident est de $5\,\%$ pour un prudent et de $25\,\%$ pour un conducteur a risque.
+
+\begin{enumerate}
+  \item Calculer la probabilite qu'un conducteur ait un accident.
+  \item Un conducteur a eu un accident. Calculer la probabilite qu'il soit << a risque >>.
+  \item Commenter le resultat.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,23 @@
+% META: {"id": "1SPE-PROBCOND-EX-023", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-023.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-023.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_C1 = Rational(1, 2)
+% P_C2 = Rational(3, 10)
+% P_C3 = Rational(1, 5)
+% assert P_C1 + P_C2 + P_C3 == 1
+% P_D_C1 = Rational(1, 50)
+% P_D_C2 = Rational(3, 100)
+% P_D_C3 = Rational(1, 20)
+% P_D = P_C1*P_D_C1 + P_C2*P_D_C2 + P_C3*P_D_C3
+% assert P_D == Rational(1,100) + Rational(9,1000) + Rational(1,100)
+% assert P_D == Rational(10,1000) + Rational(9,1000) + Rational(10,1000)
+% assert P_D == Rational(29, 1000)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-023}{1}{12}
+Une usine dispose de trois chaines : $C_1$ ($50\,\%$), $C_2$ ($30\,\%$), $C_3$ ($20\,\%$). Les taux de defaut sont respectivement $2\,\%$, $3\,\%$ et $5\,\%$.
+
+\begin{enumerate}
+  \item Verifier que $\{C_1, C_2, C_3\}$ est une partition.
+  \item Calculer $P(D)$ ou $D$ est << piece defectueuse >>.
+\end{enumerate}
+\end{exercice}

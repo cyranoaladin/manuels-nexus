@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-PROBCOND-EX-047", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-047.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-047.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Test antidopage: sensibilite 99%, specificite 95%, prevalence 5%
+% P_D = Rational(5, 100)
+% P_T_D = Rational(99, 100)
+% P_T_Dbar = Rational(5, 100)
+% P_T = P_D * P_T_D + (1-P_D) * P_T_Dbar
+% assert P_T == Rational(5,100)*Rational(99,100) + Rational(95,100)*Rational(5,100)
+% assert P_T == Rational(495,10000) + Rational(475,10000)
+% assert P_T == Rational(970, 10000)
+% assert P_T == Rational(97, 1000)
+% P_D_T = P_D * P_T_D / P_T
+% assert P_D_T == Rational(495,10000) / Rational(97,1000)
+% assert P_D_T == Rational(495, 10000) * Rational(1000, 97)
+% assert P_D_T == Rational(495, 970)
+% assert P_D_T == Rational(99, 194)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-047}{2}{15}
+Un test antidopage a une sensibilite de $99\,\%$ et une specificite de $95\,\%$. On estime que $5\,\%$ des sportifs sont dopes.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere. Definir les evenements.
+  \item Calculer la probabilite d'un test positif.
+  \item Calculer $P_T(D)$ : probabilite d'etre reellement dope sachant que le test est positif.
+  \item Un sportif positif doit-il etre automatiquement sanctionne ? Argumenter.
+\end{enumerate}
+\end{exercice}

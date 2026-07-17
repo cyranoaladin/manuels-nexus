@@ -1,0 +1,64 @@
+% META: {"id": "1SPE-PROBCOND-CR-013", "chapitre": "1SPE-PROBA-COND", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+
+\section{Independance de deux evenements}
+
+% ============================================================
+% STRATE 1 --- Definition
+% ============================================================
+
+\definition[1]{
+Deux evenements $A$ et $B$ sont \textbf{independants} si et seulement si :
+\[
+  P(A \cap B) = P(A) \times P(B).
+\]
+}
+
+\propriete[1]{
+Si $P(A) > 0$, alors $A$ et $B$ sont independants si et seulement si :
+\[
+  P_A(B) = P(B).
+\]
+
+Autrement dit, la realisation de $A$ ne modifie pas la probabilite de $B$.
+}
+
+\exemple{
+On lance un de equilibre a six faces. On note $A$ : << le resultat est pair >> et $B$ : << le resultat est superieur ou egal a 5 >>.
+
+$P(A) = \dfrac{3}{6} = \dfrac{1}{2}$, \quad $P(B) = \dfrac{2}{6} = \dfrac{1}{3}$, \quad $A \cap B = \{6\}$ donc $P(A \cap B) = \dfrac{1}{6}$.
+
+$P(A) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{3} = \dfrac{1}{6} = P(A \cap B)$.
+
+Les evenements $A$ et $B$ sont independants.
+}
+
+\contreexemple{
+\textbf{Independance $\neq$ incompatibilite !}
+
+Deux evenements incompatibles ($A \cap B = \varnothing$) ont $P(A \cap B) = 0$. Ils ne sont independants que si $P(A) = 0$ ou $P(B) = 0$.
+
+Deux evenements incompatibles de probabilites non nulles ne sont \textbf{jamais} independants.
+}
+
+% ============================================================
+% STRATE 2 --- Proprietes
+% ============================================================
+
+\propriete[2]{
+Si $A$ et $B$ sont independants, alors :
+\begin{itemize}
+  \item $A$ et $\overline{B}$ sont independants ;
+  \item $\overline{A}$ et $B$ sont independants ;
+  \item $\overline{A}$ et $\overline{B}$ sont independants.
+\end{itemize}
+}
+
+\exemple{
+On tire une carte dans un jeu de 52. On note $A$ : << la carte est rouge >> ($P(A) = \dfrac{1}{2}$) et $B$ : << la carte est un as >> ($P(B) = \dfrac{4}{52} = \dfrac{1}{13}$).
+
+$P(A \cap B) = \dfrac{2}{52} = \dfrac{1}{26}$ (deux as rouges).
+
+$P(A) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{13} = \dfrac{1}{26}$. Donc $A$ et $B$ sont independants.
+
+Verification : $P(A \cap \overline{B}) = \dfrac{24}{52} = \dfrac{12}{26}$ et $P(A) \times P(\overline{B}) = \dfrac{1}{2} \times \dfrac{12}{13} = \dfrac{12}{26}$. \checkmark
+}

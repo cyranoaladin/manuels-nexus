@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-PROBCOND-CO-002", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-002", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_B = Rational(2, 5)
+% P_AinterB = Rational(3, 20)
+% P_B_A = P_AinterB / P_B
+% assert P_B_A == Rational(3, 8)
+% P_B_Abar = 1 - P_B_A
+% assert P_B_Abar == Rational(5, 8)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-002}
+
+\textbf{1.} $P_B(A) = \dfrac{P(A \cap B)}{P(B)} = \dfrac{\frac{3}{20}}{\frac{2}{5}} = \dfrac{3}{20} \times \dfrac{5}{2} = \dfrac{3}{8}$.
+
+\medskip
+\textbf{2.} $P_B(\overline{A}) = 1 - P_B(A) = 1 - \dfrac{3}{8} = \dfrac{5}{8}$.
+
+\end{corrige}

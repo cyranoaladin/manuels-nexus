@@ -1,0 +1,148 @@
+% META: {"id": "1SPE-PROBCOND-EV-A", "chapitre": "1SPE-PROBA-COND", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1","C2","C3","C4","C5"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-A-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify
+%
+% # ---- Exercice 1 : proba conditionnelle + arbre (C1, C2) ----
+% P_R = Rational(3, 5)
+% P_V = Rational(2, 5)
+% P_G_R = Rational(1, 2)
+% P_G_V = Rational(1, 4)
+% P_RinterG = P_R * P_G_R
+% assert P_RinterG == Rational(3, 10)
+% P_VinterG = P_V * P_G_V
+% assert P_VinterG == Rational(1, 10)
+% P_G = P_RinterG + P_VinterG
+% assert P_G == Rational(2, 5)
+%
+% # ---- Exercice 2 : prob totales + Bayes (C3, C5) ----
+% P_M = Rational(3, 100)
+% P_T_M = Rational(9, 10)
+% P_T_Mbar = Rational(1, 25)
+% P_T = P_M * P_T_M + (1-P_M) * P_T_Mbar
+% assert P_T == Rational(3,100)*Rational(9,10) + Rational(97,100)*Rational(1,25)
+% assert P_T == Rational(27,1000) + Rational(97,2500)
+% assert P_T == Rational(27,1000) + Rational(388,10000)
+% # 27/1000 = 270/10000, so P_T = (270+388)/10000 = 658/10000 = 329/5000
+% assert P_T == Rational(270+388, 10000)
+% assert P_T == Rational(329, 5000)
+% P_M_T = P_M * P_T_M / P_T
+% assert P_M_T == Rational(27,1000) / Rational(329,5000)
+% assert P_M_T == Rational(27,1000) * Rational(5000,329)
+% assert P_M_T == Rational(135, 329)
+%
+% # ---- Exercice 3 : independance (C4) ----
+% P_A = Rational(1, 2)
+% P_B = Rational(1, 5)
+% P_AinterB = Rational(1, 10)
+% assert P_A * P_B == P_AinterB  # independants
+% P_AunionB = P_A + P_B - P_AinterB
+% assert P_AunionB == Rational(3, 5)
+%
+% # ---- Exercice 4 : probleme contextualise assurance (C3, C5) ----
+% P_J = Rational(1, 5)
+% P_S = Rational(4, 5)
+% P_A_J = Rational(1, 10)
+% P_A_S = Rational(1, 40)
+% P_A = P_J * P_A_J + P_S * P_A_S
+% assert P_A == Rational(1,5)*Rational(1,10) + Rational(4,5)*Rational(1,40)
+% assert P_A == Rational(1,50) + Rational(1,50)
+% assert P_A == Rational(1, 25)
+% P_J_A = P_J * P_A_J / P_A
+% assert P_J_A == Rational(1,50) / Rational(1,25)
+% assert P_J_A == Rational(1, 2)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes --- Bareme : 20 points
+% Toute reponse doit etre justifiee.
+%---------------------------------------------------------------
+
+\begin{evaluation}{1SPE-PROBCOND-EV-A}{55}
+
+%===============================================================
+\section*{Exercice 1 \hfill (5 points) \hfill Capacites C1, C2}
+%===============================================================
+
+\textit{Competences evaluees : calculer, representer.}
+
+\medskip
+Un sac contient $3$ jetons rouges et $2$ jetons verts. On tire un jeton au hasard. Si le jeton est rouge, on gagne avec probabilite $\dfrac{1}{2}$. Si le jeton est vert, on gagne avec probabilite $\dfrac{1}{4}$.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere de cette experience.
+  \hfill\textit{(1,5 pt --- representer)}
+
+  \item Calculer $P(R \cap G)$ ou $G$ designe << gagner >>.
+  \hfill\textit{(1 pt --- calculer)}
+
+  \item Calculer la probabilite de gagner.
+  \hfill\textit{(1,5 pt --- calculer)}
+
+  \item Sachant qu'on a gagne, quelle est la probabilite d'avoir tire un jeton rouge ?
+  \hfill\textit{(1 pt --- raisonner)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 2 \hfill (6 points) \hfill Capacites C3, C5}
+%===============================================================
+
+\textit{Competences evaluees : modeliser, calculer, communiquer.}
+
+\medskip
+Un test de depistage a une sensibilite de $90\,\%$ et une specificite de $96\,\%$. La prevalence de la maladie est de $3\,\%$. On note $M$ : << malade >> et $T$ : << test positif >>.
+
+\begin{enumerate}
+  \item Donner les valeurs de $P(M)$, $P_M(T)$ et $P_{\overline{M}}(T)$.
+  \hfill\textit{(1,5 pt --- modeliser)}
+
+  \item Calculer $P(T)$ par la formule des probabilites totales.
+  \hfill\textit{(2 pts --- calculer)}
+
+  \item Calculer la valeur predictive positive $P_T(M)$.
+  \hfill\textit{(1,5 pt --- calculer)}
+
+  \item Le test est-il fiable pour un diagnostic individuel ? Argumenter.
+  \hfill\textit{(1 pt --- communiquer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 3 \hfill (4 points) \hfill Capacite C4}
+%===============================================================
+
+\textit{Competences evaluees : raisonner, calculer.}
+
+\medskip
+On donne $P(A) = \dfrac{1}{2}$, $P(B) = \dfrac{1}{5}$ et $P(A \cap B) = \dfrac{1}{10}$.
+
+\begin{enumerate}
+  \item Les evenements $A$ et $B$ sont-ils independants ? Justifier.
+  \hfill\textit{(2 pts --- raisonner)}
+
+  \item Calculer $P(A \cup B)$.
+  \hfill\textit{(1 pt --- calculer)}
+
+  \item Montrer que $\overline{A}$ et $B$ sont aussi independants.
+  \hfill\textit{(1 pt --- raisonner)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 4 \hfill (5 points) \hfill Capacites C3, C5}
+%===============================================================
+
+\textit{Competences evaluees : modeliser, calculer, raisonner.}
+
+\medskip
+Une compagnie d'assurance distingue les conducteurs << jeunes >> ($20\,\%$) et << seniors >> ($80\,\%$). La probabilite d'accident est $\dfrac{1}{10}$ pour un jeune et $\dfrac{1}{40}$ pour un senior.
+
+\begin{enumerate}
+  \item Construire un arbre pondere.
+  \hfill\textit{(1 pt --- representer)}
+
+  \item Calculer la probabilite qu'un conducteur ait un accident.
+  \hfill\textit{(2 pts --- calculer)}
+
+  \item Un conducteur a eu un accident. Calculer la probabilite qu'il soit jeune.
+  \hfill\textit{(2 pts --- raisonner)}
+\end{enumerate}
+
+\end{evaluation}

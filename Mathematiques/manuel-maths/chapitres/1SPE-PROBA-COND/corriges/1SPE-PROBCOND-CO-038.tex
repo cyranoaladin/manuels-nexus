@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-PROBCOND-CO-038", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-038", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(1,2)*Rational(3,10) == Rational(3, 20)
+% assert Rational(1,2)+Rational(3,10)-Rational(3,20) == Rational(13, 20)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-038}
+
+\textbf{1.} $P(A \cap B) = P(A) \times P(B) = \frac{1}{2} \times \frac{3}{10} = \frac{3}{20}$ (car independants).
+
+\textbf{2.} $P(A \cup B) = P(A)+P(B)-P(A \cap B) = \frac{1}{2}+\frac{3}{10}-\frac{3}{20} = \frac{10+6-3}{20} = \frac{13}{20}$.
+
+\textbf{3.} $P_A(B) = \frac{P(A \cap B)}{P(A)} = \frac{3/20}{1/2} = \frac{3}{10} = P(B)$. Normal : l'independance signifie que $P_A(B) = P(B)$.
+
+\end{corrige}

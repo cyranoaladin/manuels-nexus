@@ -1,0 +1,56 @@
+% META: {"id": "1SPE-PROBCOND-ME-005", "chapitre": "1SPE-PROBA-COND", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M5}{Resoudre un probleme contextualise de probabilites conditionnelles}
+
+\quandUtiliser{%
+  Utiliser cette methode pour tout probleme en contexte reel (test medical, controle qualite,
+  jeu de hasard, genetique) faisant intervenir des probabilites conditionnelles.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Lire l'enonce} et identifier les evenements (les nommer avec des lettres).
+    \item \textbf{Extraire les donnees} : les probabilites donnees, en distinguant
+          $P(A)$, $P_A(B)$, $P(A \cap B)$, etc.
+    \item \textbf{Choisir un outil} : arbre pondere (souvent le plus adapte) ou tableau a double entree.
+    \item \textbf{Completer l'outil} avec toutes les probabilites deduites.
+    \item \textbf{Repondre aux questions} en utilisant les formules :
+          \begin{itemize}
+            \item probabilite conditionnelle : $P_A(B) = \dfrac{P(A \cap B)}{P(A)}$ ;
+            \item probabilites totales : $P(B) = P(A) \times P_A(B) + P(\overline{A}) \times P_{\overline{A}}(B)$ ;
+            \item independance : $P(A \cap B) = P(A) \times P(B)$ ?
+          \end{itemize}
+    \item \textbf{Conclure par une phrase} en revenant au contexte.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Dans une region, $30\,\%$ de la population est vaccinee ($V$). Parmi les vaccines, $2\,\%$ tombent malades ($M$). Parmi les non-vaccines, $15\,\%$ tombent malades. Quelle est la probabilite qu'une personne malade soit vaccinee ?
+
+  \medskip
+  \commentaireMarge{Donnees.}%
+  $P(V) = \dfrac{3}{10}$, $P_V(M) = \dfrac{1}{50}$, $P_{\overline{V}}(M) = \dfrac{3}{20}$.
+
+  \commentaireMarge{Probabilites totales.}%
+  $P(M) = \dfrac{3}{10} \times \dfrac{1}{50} + \dfrac{7}{10} \times \dfrac{3}{20} = \dfrac{3}{500} + \dfrac{21}{200} = \dfrac{6}{1000} + \dfrac{105}{1000} = \dfrac{111}{1000}$.
+
+  \commentaireMarge{Probabilite conditionnelle inversee.}%
+  $P_M(V) = \dfrac{P(V \cap M)}{P(M)} = \dfrac{\frac{3}{500}}{\frac{111}{1000}} = \dfrac{3}{500} \times \dfrac{1000}{111} = \dfrac{6}{111} = \dfrac{2}{37}$.
+
+  Environ $5{,}4\,\%$ des malades sont vaccines.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Mal identifier les evenements (confondre sensibilite et VPP).
+    \item \textbf{Piege 2.} Confondre pourcentages et probabilites ($30\,\%$ s'ecrit $0{,}3$ ou $\frac{3}{10}$).
+    \item \textbf{Piege 3.} Oublier de revenir au contexte dans la conclusion.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier que la somme des feuilles de l'arbre vaut $1$. Verifier que $P_M(V) + P_M(\overline{V}) = 1$.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

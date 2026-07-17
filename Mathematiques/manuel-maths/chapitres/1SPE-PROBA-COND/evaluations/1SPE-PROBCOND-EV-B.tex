@@ -1,0 +1,149 @@
+% META: {"id": "1SPE-PROBCOND-EV-B", "chapitre": "1SPE-PROBA-COND", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1","C2","C3","C4","C5"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-B.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/evaluations/1SPE-PROBCOND-EV-B-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+%
+% # ---- Exercice 1 : arbre + proba cond (C1, C2) ----
+% P_B = Rational(2, 5)
+% P_N = Rational(3, 5)
+% P_G_B = Rational(3, 4)
+% P_G_N = Rational(1, 3)
+% P_BinterG = P_B * P_G_B
+% assert P_BinterG == Rational(3, 10)
+% P_NinterG = P_N * P_G_N
+% assert P_NinterG == Rational(1, 5)
+% P_G = P_BinterG + P_NinterG
+% assert P_G == Rational(3,10) + Rational(1,5)
+% assert P_G == Rational(1, 2)
+% P_B_G = P_BinterG / P_G
+% assert P_B_G == Rational(3, 5)
+%
+% # ---- Exercice 2 : prob totales (C3, C5) ----
+% P_M2 = Rational(1, 50)
+% P_T2_M = Rational(19, 20)
+% P_T2_Mbar = Rational(1, 20)
+% P_T2 = P_M2 * P_T2_M + (1-P_M2) * P_T2_Mbar
+% assert P_T2 == Rational(1,50)*Rational(19,20) + Rational(49,50)*Rational(1,20)
+% assert P_T2 == Rational(19,1000) + Rational(49,1000)
+% assert P_T2 == Rational(68, 1000)
+% assert P_T2 == Rational(17, 250)
+% P_M2_T2 = P_M2 * P_T2_M / P_T2
+% assert P_M2_T2 == Rational(19,1000) / Rational(17,250)
+% assert P_M2_T2 == Rational(19,1000) * Rational(250,17)
+% assert P_M2_T2 == Rational(19, 68)
+%
+% # ---- Exercice 3 : independance (C4) ----
+% P_A3 = Rational(1, 3)
+% P_B3 = Rational(3, 8)
+% P_A3interB3 = Rational(1, 8)
+% assert P_A3 * P_B3 == Rational(1, 8)
+% assert P_A3 * P_B3 == P_A3interB3  # independants
+%
+% # ---- Exercice 4 : controle qualite (C3, C5) ----
+% P_F1 = Rational(7, 10)
+% P_F2 = Rational(3, 10)
+% P_D_F1 = Rational(1, 50)
+% P_D_F2 = Rational(3, 50)
+% P_D4 = P_F1 * P_D_F1 + P_F2 * P_D_F2
+% assert P_D4 == Rational(7,500) + Rational(9,500)
+% assert P_D4 == Rational(16, 500)
+% assert P_D4 == Rational(4, 125)
+% P_F2_D4 = P_F2 * P_D_F2 / P_D4
+% assert P_F2_D4 == Rational(9,500) / Rational(4,125)
+% assert P_F2_D4 == Rational(9,500) * Rational(125,4)
+% assert P_F2_D4 == Rational(9, 16)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes --- Bareme : 20 points
+% Toute reponse doit etre justifiee.
+%---------------------------------------------------------------
+
+\begin{evaluation}{1SPE-PROBCOND-EV-B}{55}
+
+%===============================================================
+\section*{Exercice 1 \hfill (5 points) \hfill Capacites C1, C2}
+%===============================================================
+
+\textit{Competences evaluees : calculer, representer.}
+
+\medskip
+Un sac contient $2$ boules blanches et $3$ boules noires. On tire une boule au hasard. Si elle est blanche, on gagne avec probabilite $\dfrac{3}{4}$. Si elle est noire, on gagne avec probabilite $\dfrac{1}{3}$.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere de cette experience.
+  \hfill\textit{(1,5 pt --- representer)}
+
+  \item Calculer $P(B \cap G)$ ou $G$ designe << gagner >>.
+  \hfill\textit{(1 pt --- calculer)}
+
+  \item Calculer la probabilite de gagner.
+  \hfill\textit{(1,5 pt --- calculer)}
+
+  \item Sachant qu'on a gagne, quelle est la probabilite d'avoir tire une boule blanche ?
+  \hfill\textit{(1 pt --- raisonner)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 2 \hfill (6 points) \hfill Capacites C3, C5}
+%===============================================================
+
+\textit{Competences evaluees : modeliser, calculer, communiquer.}
+
+\medskip
+Un test de depistage a une sensibilite de $95\,\%$ et une specificite de $95\,\%$. La prevalence est de $2\,\%$. On note $M$ : << malade >> et $T$ : << test positif >>.
+
+\begin{enumerate}
+  \item Donner les valeurs de $P(M)$, $P_M(T)$ et $P_{\overline{M}}(T)$.
+  \hfill\textit{(1,5 pt --- modeliser)}
+
+  \item Calculer $P(T)$ par la formule des probabilites totales.
+  \hfill\textit{(2 pts --- calculer)}
+
+  \item Calculer la valeur predictive positive $P_T(M)$.
+  \hfill\textit{(1,5 pt --- calculer)}
+
+  \item Commenter le resultat.
+  \hfill\textit{(1 pt --- communiquer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 3 \hfill (4 points) \hfill Capacite C4}
+%===============================================================
+
+\textit{Competences evaluees : raisonner, calculer.}
+
+\medskip
+On donne $P(A) = \dfrac{1}{3}$, $P(B) = \dfrac{3}{8}$ et $P(A \cap B) = \dfrac{1}{8}$.
+
+\begin{enumerate}
+  \item Les evenements $A$ et $B$ sont-ils independants ? Justifier.
+  \hfill\textit{(2 pts --- raisonner)}
+
+  \item Calculer $P(A \cup B)$.
+  \hfill\textit{(1 pt --- calculer)}
+
+  \item Calculer $P_A(B)$. Comparer avec $P(B)$ et commenter.
+  \hfill\textit{(1 pt --- raisonner)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 4 \hfill (5 points) \hfill Capacites C3, C5}
+%===============================================================
+
+\textit{Competences evaluees : modeliser, calculer, raisonner.}
+
+\medskip
+Une usine a deux fournisseurs. Le fournisseur $F_1$ fournit $70\,\%$ des pieces avec un taux de defaut de $2\,\%$. Le fournisseur $F_2$ fournit $30\,\%$ avec un taux de defaut de $6\,\%$.
+
+\begin{enumerate}
+  \item Construire un arbre pondere.
+  \hfill\textit{(1 pt --- representer)}
+
+  \item Calculer la probabilite qu'une piece soit defectueuse.
+  \hfill\textit{(2 pts --- calculer)}
+
+  \item Une piece est defectueuse. Calculer la probabilite qu'elle vienne de $F_2$.
+  \hfill\textit{(2 pts --- raisonner)}
+\end{enumerate}
+
+\end{evaluation}

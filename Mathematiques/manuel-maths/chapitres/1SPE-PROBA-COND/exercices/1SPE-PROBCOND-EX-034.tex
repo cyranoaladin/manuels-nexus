@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-PROBCOND-EX-034", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-034.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-034.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # De a 6 faces. A: pair, B: >=5
+% P_A = Rational(3, 6)
+% P_B = Rational(2, 6)
+% P_AinterB = Rational(1, 6)  # {6}
+% assert P_A * P_B == P_AinterB
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-034}{1}{10}
+On lance un de equilibre a six faces. On note $A$ : << le resultat est pair >> et $B$ : << le resultat est superieur ou egal a $5$ >>.
+
+\begin{enumerate}
+  \item Determiner $P(A)$, $P(B)$ et $P(A \cap B)$.
+  \item Les evenements $A$ et $B$ sont-ils independants ?
+\end{enumerate}
+\end{exercice}

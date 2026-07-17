@@ -1,0 +1,28 @@
+chapitre: 1SPE-PROBA-COND
+niveau: 1SPE
+theme: PROBA-COND
+titre: "Probabilites conditionnelles et independance"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-PROBA-COND-C1, libelle_eleve: "Je sais calculer une probabilite conditionnelle $P_A(B) = P(A \\cap B) / P(A)$." }
+  - { code: C2, ref_capacite: 1SPE-PROBA-COND-C2, libelle_eleve: "Je sais construire et lire un arbre pondere." }
+  - { code: C3, ref_capacite: 1SPE-PROBA-COND-C3, libelle_eleve: "Je sais appliquer la formule des probabilites totales." }
+  - { code: C4, ref_capacite: 1SPE-PROBA-COND-C4, libelle_eleve: "Je sais determiner si deux evenements sont independants." }
+  - { code: C5, ref_capacite: 1SPE-PROBA-COND-C5, libelle_eleve: "Je sais resoudre un probleme contextualise de probabilites conditionnelles." }
+
+prerequis:
+  - { code: R1, libelle: "Probabilites de base : vocabulaire, union, intersection, complementaire", chapitre_origine: "2GT" }
+  - { code: R2, libelle: "Fractions et pourcentages : conversions, operations", chapitre_origine: "2GT" }
+  - { code: R3, libelle: "Arbres de denombrement", chapitre_origine: "2GT" }
+  - { code: R4, libelle: "Calcul litteral : mise en equation, resolution", chapitre_origine: "2GT" }
+  - { code: R5, libelle: "Tableaux de donnees : lecture, frequences, effectifs", chapitre_origine: "2GT" }
+
+situation_accroche: >
+  Un test de depistage detecte correctement 95 % des personnes malades,
+  mais donne aussi un resultat positif chez 3 % des personnes saines.
+  Si 1 % de la population est atteinte, quelle est la probabilite
+  d'etre reellement malade quand le test est positif ?
+  Un probleme qui necessite les probabilites conditionnelles.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

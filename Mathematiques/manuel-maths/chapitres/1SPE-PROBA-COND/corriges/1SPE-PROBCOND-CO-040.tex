@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-PROBCOND-CO-040", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-040", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(2, 3)
+% assert p**3 == Rational(8, 27)
+% assert 1-(1-p)**3 == Rational(26, 27)
+% # P(exactement 2) = C(3,2)*p^2*(1-p) = 3*4/9*1/3 = 4/9
+% assert 3*p**2*(1-p) == Rational(4, 9)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-040}
+
+\textbf{1.} $P(3S) = \left(\frac{2}{3}\right)^3 = \frac{8}{27}$.
+
+\textbf{2.} $P(\text{au moins 1}) = 1 - P(0S) = 1 - \left(\frac{1}{3}\right)^3 = 1 - \frac{1}{27} = \frac{26}{27}$.
+
+\textbf{3.} $P(2S) = \binom{3}{2}\left(\frac{2}{3}\right)^2\left(\frac{1}{3}\right) = 3 \times \frac{4}{9} \times \frac{1}{3} = \frac{4}{9}$.
+
+\end{corrige}

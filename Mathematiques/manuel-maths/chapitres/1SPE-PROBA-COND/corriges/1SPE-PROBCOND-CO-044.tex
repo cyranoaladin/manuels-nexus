@@ -1,0 +1,14 @@
+% META: {"id": "1SPE-PROBCOND-CO-044", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-044", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(1,4)+Rational(1,2)+Rational(1,4) == 1
+% P_porteur_nonmalade = Rational(1,2)/(Rational(1,4)+Rational(1,2))
+% assert P_porteur_nonmalade == Rational(2, 3)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-044}
+
+\textbf{2.} $P(aa) = \frac{1}{2}\times\frac{1}{2} = \frac{1}{4}$, $P(Aa) = 2\times\frac{1}{2}\times\frac{1}{2} = \frac{1}{2}$, $P(AA) = \frac{1}{4}$.
+
+\textbf{3.} $P(\text{porteur}|\text{non malade}) = \frac{P(Aa)}{P(Aa)+P(AA)} = \frac{1/2}{1/2+1/4} = \frac{1/2}{3/4} = \frac{2}{3}$.
+
+\end{corrige}

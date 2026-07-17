@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-PROBCOND-CO-049", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-049", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_T1 = Rational(29, 250)
+% P_M_T1 = Rational(9, 58)
+% P_T1T2 = Rational(11, 500)
+% P_M_T1T2 = Rational(171, 220)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-049}
+
+\textbf{1.} $P(T_1) = \frac{2}{100}\times\frac{9}{10}+\frac{98}{100}\times\frac{1}{10} = \frac{18+98}{1000} = \frac{116}{1000} = \frac{29}{250}$.
+
+\textbf{2.} $P_{T_1}(M) = \frac{18/1000}{29/250} = \frac{18}{1000}\times\frac{250}{29} = \frac{9}{58} \approx 15{,}5\,\%$.
+
+\textbf{3.} $P(T_1^+ \cap T_2^+) = \frac{2}{100}\times\frac{9}{10}\times\frac{19}{20}+\frac{98}{100}\times\frac{1}{10}\times\frac{1}{20} = \frac{342+98}{20000} = \frac{440}{20000} = \frac{11}{500}$.
+
+\textbf{4.} $P(M|T_1^+ \cap T_2^+) = \frac{342/20000}{11/500} = \frac{342}{440} = \frac{171}{220} \approx 77{,}7\,\%$. Le double test ameliore considerablement la VPP ($15{,}5\,\% \to 77{,}7\,\%$).
+
+\end{corrige}

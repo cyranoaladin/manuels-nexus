@@ -1,0 +1,14 @@
+% META: {"id": "1SPE-PROBCOND-EX-025", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-025.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-025.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_A = Rational(7, 10)
+% P_B_A = Rational(4, 7)
+% P_B_Abar = Rational(2, 3)
+% P_B = P_A * P_B_A + (1-P_A) * P_B_Abar
+% assert P_B == Rational(7,10)*Rational(4,7) + Rational(3,10)*Rational(2,3)
+% assert P_B == Rational(2,5) + Rational(1,5)
+% assert P_B == Rational(3, 5)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-025}{1}{10}
+On donne $P(A) = \dfrac{7}{10}$, $P_A(B) = \dfrac{4}{7}$ et $P_{\overline{A}}(B) = \dfrac{2}{3}$. Calculer $P(B)$.
+\end{exercice}

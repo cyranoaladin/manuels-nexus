@@ -1,0 +1,78 @@
+% META: {"id": "1SPE-PROBCOND-EV-B-corrige", "chapitre": "1SPE-PROBA-COND", "type_objet": "evaluation_corrige", "version": "B", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Ex1
+% assert Rational(2,5)*Rational(3,4) == Rational(3, 10)
+% assert Rational(3,5)*Rational(1,3) == Rational(1, 5)
+% assert Rational(3,10)+Rational(1,5) == Rational(1, 2)
+% assert Rational(3,10)/Rational(1,2) == Rational(3, 5)
+% # Ex2
+% assert Rational(17, 250) == Rational(1,50)*Rational(19,20)+Rational(49,50)*Rational(1,20)
+% assert Rational(19, 68) == Rational(19,1000)/Rational(17,250)
+% # Ex3
+% assert Rational(1,3)*Rational(3,8) == Rational(1, 8)
+% assert Rational(1,3)+Rational(3,8)-Rational(1,8) == Rational(7, 12)
+% # Ex4
+% assert Rational(4, 125) == Rational(7,10)*Rational(1,50)+Rational(3,10)*Rational(3,50)
+% assert Rational(9, 16) == (Rational(3,10)*Rational(3,50))/Rational(4,125)
+% END-VERIFY
+
+\begin{evaluation}{1SPE-PROBCOND-EV-B-corrige}{55}
+
+%===============================================================
+\section*{Exercice 1 --- Corrige}
+%===============================================================
+
+\textbf{1.} Arbre : $P(B) = \frac{2}{5}$, $P(N) = \frac{3}{5}$. Sachant $B$ : $P_B(G) = \frac{3}{4}$, $P_B(\overline{G}) = \frac{1}{4}$. Sachant $N$ : $P_N(G) = \frac{1}{3}$, $P_N(\overline{G}) = \frac{2}{3}$.
+
+\medskip
+\textbf{2.} $P(B \cap G) = \dfrac{2}{5} \times \dfrac{3}{4} = \dfrac{3}{10}$.
+
+\medskip
+\textbf{3.} $P(G) = P(B \cap G) + P(N \cap G) = \dfrac{3}{10} + \dfrac{3}{5} \times \dfrac{1}{3} = \dfrac{3}{10} + \dfrac{1}{5} = \dfrac{3}{10} + \dfrac{2}{10} = \dfrac{1}{2}$.
+
+\medskip
+\textbf{4.} $P_G(B) = \dfrac{P(B \cap G)}{P(G)} = \dfrac{3/10}{1/2} = \dfrac{3}{5}$.
+
+%===============================================================
+\section*{Exercice 2 --- Corrige}
+%===============================================================
+
+\textbf{1.} $P(M) = \dfrac{1}{50}$, $P_M(T) = \dfrac{19}{20}$, $P_{\overline{M}}(T) = 1 - \dfrac{95}{100} = \dfrac{1}{20}$.
+
+\medskip
+\textbf{2.} $P(T) = \dfrac{1}{50} \times \dfrac{19}{20} + \dfrac{49}{50} \times \dfrac{1}{20} = \dfrac{19}{1000} + \dfrac{49}{1000} = \dfrac{68}{1000} = \dfrac{17}{250}$.
+
+\medskip
+\textbf{3.} $P_T(M) = \dfrac{19/1000}{17/250} = \dfrac{19}{1000} \times \dfrac{250}{17} = \dfrac{19}{68} \approx 27{,}9\,\%$.
+
+\medskip
+\textbf{4.} La VPP est faible (environ $28\,\%$) : un test positif ne correspond a la maladie que dans $1$ cas sur $3{,}6$ environ. Cela s'explique par la faible prevalence ($2\,\%$) qui genere beaucoup de faux positifs.
+
+%===============================================================
+\section*{Exercice 3 --- Corrige}
+%===============================================================
+
+\textbf{1.} $P(A) \times P(B) = \dfrac{1}{3} \times \dfrac{3}{8} = \dfrac{1}{8} = P(A \cap B)$. Donc $A$ et $B$ sont independants.
+
+\medskip
+\textbf{2.} $P(A \cup B) = P(A) + P(B) - P(A \cap B) = \dfrac{1}{3} + \dfrac{3}{8} - \dfrac{1}{8} = \dfrac{8+9-3}{24} = \dfrac{14}{24} = \dfrac{7}{12}$.
+
+\medskip
+\textbf{3.} $P_A(B) = \dfrac{P(A \cap B)}{P(A)} = \dfrac{1/8}{1/3} = \dfrac{3}{8} = P(B)$. L'egalite $P_A(B) = P(B)$ confirme l'independance.
+
+%===============================================================
+\section*{Exercice 4 --- Corrige}
+%===============================================================
+
+\textbf{1.} Arbre : $P(F_1) = \frac{7}{10}$, $P(F_2) = \frac{3}{10}$. Sachant $F_1$ : $P_{F_1}(D) = \frac{1}{50}$. Sachant $F_2$ : $P_{F_2}(D) = \frac{3}{50}$.
+
+\medskip
+\textbf{2.} $P(D) = \dfrac{7}{10} \times \dfrac{1}{50} + \dfrac{3}{10} \times \dfrac{3}{50} = \dfrac{7}{500} + \dfrac{9}{500} = \dfrac{16}{500} = \dfrac{4}{125} = 3{,}2\,\%$.
+
+\medskip
+\textbf{3.} $P_D(F_2) = \dfrac{P(F_2 \cap D)}{P(D)} = \dfrac{9/500}{4/125} = \dfrac{9}{500} \times \dfrac{125}{4} = \dfrac{9}{16} = 56{,}25\,\%$.
+
+Plus de la moitie des pieces defectueuses viennent de $F_2$, alors que $F_2$ ne fournit que $30\,\%$ des pieces.
+
+\end{evaluation}

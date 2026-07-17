@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-PROBCOND-CO-003", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-003", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_F = Rational(120, 200)
+% P_FinterS = Rational(45, 200)
+% P_F_S = P_FinterS / P_F
+% assert P_F_S == Rational(3, 8)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-003}
+
+\textbf{1.} $P(F) = \dfrac{120}{200} = \dfrac{3}{5}$ et $P(F \cap S) = \dfrac{45}{200} = \dfrac{9}{40}$.
+
+\medskip
+\textbf{2.} $P_F(S) = \dfrac{P(F \cap S)}{P(F)} = \dfrac{\frac{9}{40}}{\frac{3}{5}} = \dfrac{9}{40} \times \dfrac{5}{3} = \dfrac{3}{8}$.
+
+Parmi les filles, $\dfrac{3}{8} = 37{,}5\,\%$ pratiquent un sport.
+
+\end{corrige}

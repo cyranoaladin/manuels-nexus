@@ -1,0 +1,70 @@
+% META: {"id": "1SPE-PROBCOND-CR-010", "chapitre": "1SPE-PROBA-COND", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Probabilite conditionnelle}
+
+% ============================================================
+% STRATE 1 --- Definitions et proprietes fondamentales
+% ============================================================
+
+\definition[1]{
+Soit $A$ et $B$ deux evenements d'un univers $\Omega$, avec $P(A) > 0$.
+
+La \textbf{probabilite conditionnelle de $B$ sachant $A$}, notee $P_A(B)$, est le nombre :
+\[
+  P_A(B) = \frac{P(A \cap B)}{P(A)}.
+\]
+
+On lit : << probabilite de $B$ sachant que $A$ est realise >>.
+}
+
+\exemple{
+Dans un lycee de $500$ eleves, $200$ sont en Premiere, et parmi ceux-ci $80$ suivent la specialite Maths.
+
+On note $A$ : << l'eleve est en Premiere >> et $B$ : << l'eleve suit Maths >>.
+
+$P(A) = \dfrac{200}{500} = \dfrac{2}{5}$, \quad $P(A \cap B) = \dfrac{80}{500} = \dfrac{4}{25}$.
+
+\[
+  P_A(B) = \frac{P(A \cap B)}{P(A)} = \frac{\frac{4}{25}}{\frac{2}{5}} = \frac{4}{25} \times \frac{5}{2} = \frac{2}{5}.
+\]
+
+Parmi les eleves de Premiere, $\dfrac{2}{5}$ suivent Maths.
+}
+
+\contreexemple{
+Attention : $P_A(B) \neq P_B(A)$ en general !
+
+Ici, $P_B(A) = \dfrac{P(A \cap B)}{P(B)}$ necessite de connaitre $P(B)$ (la proportion de tous les eleves qui font Maths, pas seulement ceux de Premiere).
+}
+
+% ============================================================
+% STRATE 2 --- Proprietes et formule de multiplication
+% ============================================================
+
+\propriete[1]{
+Si $P(A) > 0$, alors :
+\[
+  P(A \cap B) = P(A) \times P_A(B).
+\]
+
+C'est la \textbf{formule de multiplication} (ou formule des probabilites composees).
+}
+
+\exemple{
+On tire une carte au hasard dans un jeu de 32 cartes. On note $A$ : << la carte est un coeur >> et $B$ : << la carte est un roi >>.
+
+$P(A) = \dfrac{8}{32} = \dfrac{1}{4}$.
+
+Sachant que la carte est un coeur, la probabilite que ce soit le roi de coeur est $P_A(B) = \dfrac{1}{8}$.
+
+Donc $P(A \cap B) = P(A) \times P_A(B) = \dfrac{1}{4} \times \dfrac{1}{8} = \dfrac{1}{32}$.
+}
+
+\propriete[2]{
+Si $P(A) > 0$, alors la fonction $B \mapsto P_A(B)$ verifie les axiomes d'une probabilite :
+\begin{itemize}
+  \item $P_A(\Omega) = 1$ ;
+  \item Pour tout evenement $B$, $0 \leq P_A(B) \leq 1$ ;
+  \item $P_A(\overline{B}) = 1 - P_A(B)$.
+\end{itemize}
+}

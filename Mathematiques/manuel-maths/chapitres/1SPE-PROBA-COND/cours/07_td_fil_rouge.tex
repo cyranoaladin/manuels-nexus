@@ -1,0 +1,91 @@
+% META: {"id": "1SPE-PROBCOND-TD-002", "chapitre": "1SPE-PROBA-COND", "type_objet": "cours", "sous_type": "td_fil_rouge", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify
+% # Donnees : 3 fournisseurs, taux defaut
+% P_F1 = Rational(1, 2)
+% P_F2 = Rational(3, 10)
+% P_F3 = Rational(1, 5)
+% assert P_F1 + P_F2 + P_F3 == 1
+% P_D_F1 = Rational(4, 100)
+% P_D_F2 = Rational(6, 100)
+% P_D_F3 = Rational(10, 100)
+% # Prob totales
+% P_D = P_F1 * P_D_F1 + P_F2 * P_D_F2 + P_F3 * P_D_F3
+% assert P_D == Rational(1,2)*Rational(4,100) + Rational(3,10)*Rational(6,100) + Rational(1,5)*Rational(10,100)
+% assert P_D == Rational(4,200) + Rational(18,1000) + Rational(10,500)
+% # Compute manually: 4/200 = 1/50 = 20/1000, 18/1000, 10/500 = 20/1000
+% assert P_D == Rational(20,1000) + Rational(18,1000) + Rational(20,1000)
+% assert P_D == Rational(58, 1000)
+% assert P_D == Rational(29, 500)
+% # P(F1|D)
+% P_F1_D = P_F1 * P_D_F1 / P_D
+% assert P_F1_D == Rational(20,1000) / Rational(29,500)
+% assert P_F1_D == Rational(20,1000) * Rational(500,29)
+% assert P_F1_D == Rational(10, 29)
+% # P(F3|D)
+% P_F3_D = P_F3 * P_D_F3 / P_D
+% assert P_F3_D == Rational(20,1000) / Rational(29,500)
+% assert P_F3_D == Rational(10, 29)
+% # Independance F1 et D ?
+% P_F1_inter_D = P_F1 * P_D_F1
+% assert P_F1_inter_D == Rational(1, 50)
+% prod = P_F1 * P_D
+% assert prod == Rational(1,2) * Rational(29,500)
+% assert prod == Rational(29, 1000)
+% assert P_F1_inter_D != prod  # pas independants
+% END-VERIFY
+
+\section*{TD fil rouge --- Controle qualite multi-fournisseurs}
+
+\textit{Duree estimee : 50 minutes. Capacites : C1 a C5.}
+
+\bigskip
+
+Une entreprise d'electronique s'approvisionne aupres de trois fournisseurs $F_1$, $F_2$ et $F_3$.
+
+\begin{itemize}
+  \item $F_1$ fournit $50\,\%$ des composants, avec un taux de defaut de $4\,\%$.
+  \item $F_2$ fournit $30\,\%$ des composants, avec un taux de defaut de $6\,\%$.
+  \item $F_3$ fournit $20\,\%$ des composants, avec un taux de defaut de $10\,\%$.
+\end{itemize}
+
+On preleve un composant au hasard. On note $D$ : << le composant est defectueux >>.
+
+\subsection*{Partie A --- Modelisation (C1, C2)}
+
+\begin{enumerate}
+  \item Traduire les donnees en probabilites : $P(F_1)$, $P(F_2)$, $P(F_3)$, $P_{F_1}(D)$, $P_{F_2}(D)$, $P_{F_3}(D)$.
+
+  \item Construire l'arbre pondere complet. Verifier que la somme des branches a chaque noeud vaut $1$.
+
+  \item Calculer $P(F_2 \cap D)$.
+\end{enumerate}
+
+\subsection*{Partie B --- Probabilites totales (C3)}
+
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item Justifier que $\{F_1, F_2, F_3\}$ est une partition de l'univers.
+
+  \item Calculer $P(D)$ a l'aide de la formule des probabilites totales.
+
+  \item Interpreter : quel est le pourcentage global de composants defectueux ?
+\end{enumerate}
+
+\subsection*{Partie C --- Diagnostic (C1, C5)}
+
+\begin{enumerate}
+  \setcounter{enumi}{6}
+  \item Un composant est defectueux. Calculer $P_D(F_1)$ et $P_D(F_3)$. Comparer.
+
+  \item Le fournisseur $F_3$ est-il le plus << responsable >> des defauts ? Argumenter.
+\end{enumerate}
+
+\subsection*{Partie D --- Independance (C4)}
+
+\begin{enumerate}
+  \setcounter{enumi}{8}
+  \item Les evenements $F_1$ et $D$ sont-ils independants ? Justifier par le calcul.
+
+  \item Interpreter : le fait qu'un composant vienne de $F_1$ influence-t-il la probabilite qu'il soit defectueux ?
+\end{enumerate}

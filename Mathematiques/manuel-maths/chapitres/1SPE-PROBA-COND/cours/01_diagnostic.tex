@@ -1,0 +1,107 @@
+% META: {"id": "1SPE-PROBCOND-CR-001", "chapitre": "1SPE-PROBA-COND", "type_objet": "cours", "sous_type": "diagnostic", "titre": "Diagnostic d'entree", "temps_gabarit": 2, "duree_min": 20, "prerequis_testes": ["R1", "R2", "R3", "R4", "R5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, simplify
+% # Q1 : P(A union B) = P(A) + P(B) - P(A inter B)
+% P_A = Rational(3, 10)
+% P_B = Rational(2, 5)
+% P_AinterB = Rational(1, 10)
+% P_AunionB = P_A + P_B - P_AinterB
+% assert P_AunionB == Rational(3, 5)
+% # Q2 : complementaire
+% P_Abar = 1 - P_A
+% assert P_Abar == Rational(7, 10)
+% # Q3 : fraction -> pourcentage : 3/20 = 15%
+% assert Rational(3, 20) * 100 == 15
+% # Q4 : 45% -> fraction
+% assert Rational(45, 100) == Rational(9, 20)
+% # Q5 : arbre : 2 branches x 3 branches = 6 issues
+% assert 2 * 3 == 6
+% # Q6 : resoudre 3x + 7 = 22 => x = 5
+% assert (22 - 7) / 3 == 5
+% # Q7 : tableau : effectif total = 120 + 80 = 200
+% assert 120 + 80 == 200
+% # Q8 : frequence = 120/200 = 3/5
+% assert Rational(120, 200) == Rational(3, 5)
+% END-VERIFY
+
+\section*{Temps 2 --- Diagnostic d'entree \hfill \normalfont\small(15--20 min, sans calculatrice)}
+
+Reponds a chaque question sur ta copie. L'objectif est de reperer ce que tu maitrises, pas de tout reussir.
+
+\bigskip
+
+\subsection*{R1 --- Probabilites de base}
+
+\begin{enumerate}
+
+  \item On donne $P(A) = \dfrac{3}{10}$, $P(B) = \dfrac{2}{5}$ et $P(A \cap B) = \dfrac{1}{10}$. Calcule $P(A \cup B)$.
+
+  \item Calcule $P(\overline{A})$ si $P(A) = \dfrac{3}{10}$.
+
+\end{enumerate}
+
+\subsection*{R2 --- Fractions et pourcentages}
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+
+  \item Convertis $\dfrac{3}{20}$ en pourcentage.
+
+  \item Ecris $45\,\%$ sous forme d'une fraction irreductible.
+
+\end{enumerate}
+
+\subsection*{R3 --- Arbres de denombrement}
+
+\begin{enumerate}
+  \setcounter{enumi}{4}
+
+  \item On choisit d'abord une couleur parmi 2, puis une taille parmi 3. Combien d'issues possibles ?
+
+\end{enumerate}
+
+\subsection*{R4 --- Calcul litteral}
+
+\begin{enumerate}
+  \setcounter{enumi}{5}
+
+  \item Resous l'equation $3x + 7 = 22$.
+
+\end{enumerate}
+
+\subsection*{R5 --- Tableaux de donnees}
+
+\begin{enumerate}
+  \setcounter{enumi}{6}
+
+  \item Dans un lycee, $120$ eleves pratiquent un sport et $80$ n'en pratiquent pas. Quel est l'effectif total ?
+
+  \item Quelle est la frequence des sportifs dans cet etablissement ?
+
+\end{enumerate}
+
+\bigskip
+
+\subsection*{Grille de decodage}
+
+\begin{center}
+\begin{tabular}{|c|c|l|l|}
+\hline
+\textbf{Questions} & \textbf{Prerequis teste} & \textbf{Si tu as echoue\ldots} & \textbf{Fiche a lire} \\
+\hline
+1 et 2 & R1 --- Probabilites de base & \ldots avant de commencer C1, C3 & Fiche R1 \\
+\hline
+3 et 4 & R2 --- Fractions et pourcentages & \ldots avant de commencer C1, C5 & Fiche R2 \\
+\hline
+5 & R3 --- Arbres de denombrement & \ldots avant de commencer C2 & Fiche R3 \\
+\hline
+6 & R4 --- Calcul litteral & \ldots avant de commencer C4, C5 & Fiche R4 \\
+\hline
+7 et 8 & R5 --- Tableaux de donnees & \ldots avant de commencer C1, C5 & Fiche R5 \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+Si tu as reussi toutes les questions sans difficulte, tu peux demarrer directement le Temps~3.

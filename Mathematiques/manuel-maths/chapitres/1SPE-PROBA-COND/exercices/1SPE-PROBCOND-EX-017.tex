@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-PROBCOND-EX-017", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-017.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-017.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Piece truquee : P=2/3, F=1/3. On lance 2 fois.
+% P_P = Rational(2, 3)
+% P_F = Rational(1, 3)
+% P_PP = P_P * P_P
+% assert P_PP == Rational(4, 9)
+% P_1P = P_P*P_F + P_F*P_P
+% assert P_1P == Rational(4, 9)
+% P_FF = P_F * P_F
+% assert P_FF == Rational(1, 9)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-017}{2}{12}
+On lance deux fois une piece truquee : $P(\text{pile}) = \dfrac{2}{3}$ et $P(\text{face}) = \dfrac{1}{3}$.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere (les deux lancers sont independants).
+  \item Calculer la probabilite d'obtenir deux piles.
+  \item Calculer la probabilite d'obtenir exactement un pile.
+\end{enumerate}
+\end{exercice}

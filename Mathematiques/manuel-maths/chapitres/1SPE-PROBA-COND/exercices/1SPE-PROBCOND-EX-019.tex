@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-PROBCOND-EX-019", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-019.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-019.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Tirage 3 boules sans remise : 5R, 3B
+% P_R1 = Rational(5, 8)
+% P_R2_R1 = Rational(4, 7)
+% P_R3_R1R2 = Rational(3, 6)
+% P_3R = P_R1 * P_R2_R1 * P_R3_R1R2
+% assert P_3R == Rational(5,8)*Rational(4,7)*Rational(3,6)
+% assert P_3R == Rational(60, 336)
+% assert P_3R == Rational(5, 28)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-019}{3}{15}
+Un sac contient $5$ boules rouges et $3$ boules bleues. On tire trois boules successivement sans remise.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere pour les trois premiers niveaux (branche rouge uniquement au deuxieme et troisieme niveau).
+  \item Calculer la probabilite d'obtenir trois boules rouges.
+  \item Sans arbre complet, determiner la probabilite d'obtenir $0$ boule rouge.
+\end{enumerate}
+\end{exercice}

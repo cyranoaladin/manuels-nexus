@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-PROBCOND-CO-046", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-046", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(1, 495) == Rational(5,100)*Rational(4,99)
+% assert Rational(97, 990) == 1-Rational(95,100)*Rational(94,99)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-046}
+
+\textbf{1.} $P(2D) = \frac{5}{100}\times\frac{4}{99} = \frac{20}{9900} = \frac{1}{495}$.
+
+\textbf{2.} $P(\text{au moins 1D}) = 1 - P(0D) = 1 - \frac{95}{100}\times\frac{94}{99} = 1 - \frac{8930}{9900} = \frac{970}{9900} = \frac{97}{990} \approx 9{,}8\,\%$.
+
+\textbf{3.} Avec remise : $P(\text{au moins 1D}) = 1 - (0{,}95)^2 = 1 - 0{,}9025 = 0{,}0975 \approx 9{,}75\,\%$. Tres proche.
+
+\end{corrige}

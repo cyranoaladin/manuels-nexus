@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-PROBCOND-EX-020", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-020.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-020.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Arbre a reconstituer: P(AinterB)=3/20, P(AinterBbar)=1/20
+% # => P(A)=3/20+1/20=4/20=1/5
+% P_A = Rational(1, 5)
+% P_A_B = Rational(3,20) / P_A
+% assert P_A_B == Rational(3, 4)
+% # P(AbarinterB)=1/4, P(AbarinterBbar)=11/20
+% P_Abar = Rational(1,4) + Rational(11,20)
+% assert P_Abar == Rational(4,5)
+% P_Abar_B = Rational(1,4) / P_Abar
+% assert P_Abar_B == Rational(5, 16)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-020}{3}{15}
+On connait les probabilites des quatre feuilles d'un arbre a deux niveaux :
+\[
+  P(A \cap B) = \frac{3}{20}, \quad P(A \cap \overline{B}) = \frac{1}{20}, \quad P(\overline{A} \cap B) = \frac{1}{4}, \quad P(\overline{A} \cap \overline{B}) = \frac{11}{20}.
+\]
+
+\begin{enumerate}
+  \item Verifier que la somme de ces quatre probabilites vaut $1$.
+  \item Reconstituer l'arbre pondere complet : determiner $P(A)$, $P_A(B)$, $P_{\overline{A}}(B)$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-PROBCOND-CO-020", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-020", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% s = Rational(3,20)+Rational(1,20)+Rational(1,4)+Rational(11,20)
+% assert s == 1
+% P_A = Rational(3,20)+Rational(1,20)
+% assert P_A == Rational(1, 5)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-020}
+
+\textbf{1.} $\frac{3}{20}+\frac{1}{20}+\frac{1}{4}+\frac{11}{20} = \frac{3}{20}+\frac{1}{20}+\frac{5}{20}+\frac{11}{20} = \frac{20}{20} = 1$ \checkmark.
+
+\medskip
+\textbf{2.} $P(A) = P(A \cap B) + P(A \cap \overline{B}) = \frac{3}{20}+\frac{1}{20} = \frac{1}{5}$.
+
+$P_A(B) = \frac{P(A \cap B)}{P(A)} = \frac{3/20}{1/5} = \frac{3}{4}$.
+
+$P(\overline{A}) = \frac{4}{5}$. $P_{\overline{A}}(B) = \frac{1/4}{4/5} = \frac{5}{16}$.
+
+\end{corrige}

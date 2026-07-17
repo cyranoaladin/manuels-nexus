@@ -1,0 +1,42 @@
+% META: {"id": "1SPE-PROBCOND-FR-R5", "chapitre": "1SPE-PROBA-COND", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU --- R5 : Tableaux de donnees
+%---------------------------------------------------------------
+
+\subsection*{Rappel --- Tableaux de donnees}
+
+Un \textbf{tableau a double entree} croise deux criteres. La \textbf{frequence} d'une categorie est le rapport de son effectif au total.
+
+\begin{exercice}{1SPE-PROBCOND-FR-R5-EX1}{1}{5}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+ & Bus & Velo & Total \\
+\hline
+Garcons & $30$ & $20$ & $50$ \\
+\hline
+Filles & $40$ & $10$ & $50$ \\
+\hline
+Total & $70$ & $30$ & $100$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+  \item Quelle est la frequence des cyclistes ?
+  \item Quelle est la frequence des filles parmi les cyclistes ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(30, 100) == Rational(3, 10)
+% assert Rational(10, 30) == Rational(1, 3)
+% END-VERIFY
+
+\begin{corrige}{1SPE-PROBCOND-FR-R5-EX1}
+\textbf{1.} Frequence des cyclistes : $\frac{30}{100} = \frac{3}{10} = 30\,\%$.
+
+\textbf{2.} Parmi les cyclistes : $\frac{10}{30} = \frac{1}{3} \approx 33{,}3\,\%$.
+\end{corrige}

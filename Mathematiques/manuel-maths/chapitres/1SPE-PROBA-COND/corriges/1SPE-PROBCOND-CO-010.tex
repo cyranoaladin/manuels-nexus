@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-PROBCOND-CO-010", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-010", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_AinterB = Rational(3, 10)
+% P_A_B = Rational(1, 2)
+% P_B_A = Rational(3, 5)
+% P_Abar_B = Rational(1, 2)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-010}
+
+\textbf{1.} $P(A \cap B) = P(A) + P(B) - P(A \cup B) = \dfrac{3}{5} + \dfrac{1}{2} - \dfrac{4}{5} = \dfrac{6}{10} + \dfrac{5}{10} - \dfrac{8}{10} = \dfrac{3}{10}$.
+
+\medskip
+\textbf{2.} $P_A(B) = \dfrac{3/10}{3/5} = \dfrac{1}{2}$ et $P_B(A) = \dfrac{3/10}{1/2} = \dfrac{3}{5}$.
+
+\medskip
+\textbf{3.} $P(\overline{A}) = \dfrac{2}{5}$. $P(\overline{A} \cap B) = P(B) - P(A \cap B) = \dfrac{1}{2} - \dfrac{3}{10} = \dfrac{1}{5}$.
+
+$P_{\overline{A}}(B) = \dfrac{1/5}{2/5} = \dfrac{1}{2}$.
+
+\medskip
+\textbf{4.} $P_A(B) = P_{\overline{A}}(B) = \dfrac{1}{2}$. La realisation de $A$ ne modifie pas la probabilite de $B$.
+
+\end{corrige}

@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-PROBCOND-EX-045", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-045.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-045.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Meteo: P(pluie demain | pluie auj) = 7/10
+% # P(pluie demain | soleil auj) = 3/10
+% # Aujourd'hui: pluie avec P=2/5
+% P_P = Rational(2, 5)
+% P_Pdem_P = Rational(7, 10)
+% P_Pdem_S = Rational(3, 10)
+% P_Pdem = P_P * P_Pdem_P + (1-P_P) * P_Pdem_S
+% assert P_Pdem == Rational(2,5)*Rational(7,10) + Rational(3,5)*Rational(3,10)
+% assert P_Pdem == Rational(14,50) + Rational(9,50)
+% assert P_Pdem == Rational(23, 50)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-045}{1}{10}
+La probabilite de pluie aujourd'hui est $\dfrac{2}{5}$. Si aujourd'hui il pleut, la probabilite de pluie demain est $\dfrac{7}{10}$. Si aujourd'hui il fait soleil, la probabilite de pluie demain est $\dfrac{3}{10}$.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere.
+  \item Calculer la probabilite qu'il pleuve demain.
+\end{enumerate}
+\end{exercice}

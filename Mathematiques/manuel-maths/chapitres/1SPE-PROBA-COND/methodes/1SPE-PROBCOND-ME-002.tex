@@ -1,0 +1,53 @@
+% META: {"id": "1SPE-PROBCOND-ME-002", "chapitre": "1SPE-PROBA-COND", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Construire et exploiter un arbre pondere}
+
+\quandUtiliser{%
+  Utiliser cette methode pour toute experience en deux etapes ou plus, lorsqu'on connait
+  des probabilites conditionnelles et qu'on cherche des probabilites d'intersections.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie la premiere etape et ses issues. Je place les probabilites sur les premieres branches.
+    \item Pour chaque issue de la premiere etape, j'identifie les issues de la deuxieme etape
+          et je place les \textbf{probabilites conditionnelles} correspondantes.
+    \item Je verifie : a chaque noeud, la somme des branches vaut $1$.
+    \item Pour calculer la probabilite d'un chemin, je \textbf{multiplie} les probabilites le long du chemin.
+    \item La probabilite d'un evenement est la \textbf{somme} des probabilites des chemins qui le realisent.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Un sac contient $4$ boules rouges et $6$ boules bleues. On tire une boule, puis sans remise une seconde.
+  Calculer la probabilite d'obtenir deux boules de couleurs differentes.
+
+  \medskip
+  \commentaireMarge{Premiere branche.}%
+  $P(R_1) = \dfrac{4}{10} = \dfrac{2}{5}$, \quad $P(B_1) = \dfrac{6}{10} = \dfrac{3}{5}$.
+
+  \commentaireMarge{Branches conditionnelles.}%
+  Sachant $R_1$ : $P_{R_1}(R_2) = \dfrac{3}{9} = \dfrac{1}{3}$, $P_{R_1}(B_2) = \dfrac{6}{9} = \dfrac{2}{3}$.
+
+  Sachant $B_1$ : $P_{B_1}(R_2) = \dfrac{4}{9}$, $P_{B_1}(B_2) = \dfrac{5}{9}$.
+
+  \commentaireMarge{Chemins << couleurs differentes >>.}%
+  \[
+    P(\text{diff.}) = P(R_1 \cap B_2) + P(B_1 \cap R_2) = \frac{2}{5} \times \frac{2}{3} + \frac{3}{5} \times \frac{4}{9} = \frac{4}{15} + \frac{12}{45} = \frac{4}{15} + \frac{4}{15} = \frac{8}{15}.
+  \]
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Placer $P(A \cap B)$ sur une branche au lieu de $P_A(B)$.
+    \item \textbf{Piege 2.} Additionner au lieu de multiplier le long d'un chemin.
+    \item \textbf{Piege 3.} Oublier de verifier la somme des branches a chaque noeud.
+  \end{itemize}
+}
+
+\verifier{%
+  La somme de toutes les feuilles doit valoir $1$.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

@@ -1,0 +1,53 @@
+% META: {"id": "1SPE-PROBCOND-ME-003", "chapitre": "1SPE-PROBA-COND", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Appliquer la formule des probabilites totales}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'on cherche $P(A)$ et que l'on connait les probabilites
+  conditionnelles $P_{B_i}(A)$ pour une partition $\{B_1, \ldots, B_n\}$ de l'univers.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie une partition de l'univers : des evenements $B_1, \ldots, B_n$ incompatibles et exhaustifs.
+    \item Je repere les valeurs de $P(B_i)$ et $P_{B_i}(A)$ pour chaque $i$.
+    \item J'applique la formule :
+    \[
+      P(A) = P(B_1) \times P_{B_1}(A) + P(B_2) \times P_{B_2}(A) + \cdots + P(B_n) \times P_{B_n}(A).
+    \]
+    \item Si la partition est $\{B, \overline{B}\}$, la formule se reduit a :
+    \[
+      P(A) = P(B) \times P_B(A) + P(\overline{B}) \times P_{\overline{B}}(A).
+    \]
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  $60\,\%$ des habitants d'une ville utilisent les transports en commun ($T$). Parmi ceux-ci, $80\,\%$ arrivent a l'heure ($H$). Parmi ceux qui n'utilisent pas les transports en commun, $70\,\%$ arrivent a l'heure.
+
+  \medskip
+  \commentaireMarge{Partition $\{T, \overline{T}\}$.}%
+  $P(T) = \dfrac{3}{5}$, $P(\overline{T}) = \dfrac{2}{5}$, $P_T(H) = \dfrac{4}{5}$, $P_{\overline{T}}(H) = \dfrac{7}{10}$.
+
+  \commentaireMarge{Probabilites totales.}%
+  \[
+    P(H) = P(T) \times P_T(H) + P(\overline{T}) \times P_{\overline{T}}(H) = \frac{3}{5} \times \frac{4}{5} + \frac{2}{5} \times \frac{7}{10} = \frac{12}{25} + \frac{14}{50} = \frac{24}{50} + \frac{14}{50} = \frac{38}{50} = \frac{19}{25}.
+  \]
+
+  La probabilite d'arriver a l'heure est $\dfrac{19}{25} = 76\,\%$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier un terme de la partition (par exemple oublier $P(\overline{B}) \times P_{\overline{B}}(A)$).
+    \item \textbf{Piege 2.} Ne pas verifier que les $B_i$ forment bien une partition.
+    \item \textbf{Piege 3.} Confondre $P(A)$ et $P_B(A)$.
+  \end{itemize}
+}
+
+\verifier{%
+  On peut verifier en calculant aussi $P(\overline{A})$ par probabilites totales et en verifiant que $P(A) + P(\overline{A}) = 1$.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

@@ -1,0 +1,49 @@
+% META: {"id": "1SPE-PROBCOND-ME-004", "chapitre": "1SPE-PROBA-COND", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Determiner si deux evenements sont independants}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande si deux evenements sont independants,
+  ou lorsque l'on veut savoir si la realisation de l'un influence la probabilite de l'autre.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie les evenements $A$ et $B$.
+    \item Je calcule $P(A)$, $P(B)$ et $P(A \cap B)$ (par arbre, tableau ou formule).
+    \item Je calcule le produit $P(A) \times P(B)$.
+    \item Je compare : si $P(A \cap B) = P(A) \times P(B)$, les evenements sont independants.
+          Sinon, ils ne le sont pas.
+    \item \textbf{Methode alternative (si $P(A) > 0$)} : je compare $P_A(B)$ et $P(B)$.
+          Egalite $\Leftrightarrow$ independance.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  On lance deux des equilibres. $A$ : << le premier de donne $6$ >>, $B$ : << la somme vaut $7$ >>.
+
+  \medskip
+  \commentaireMarge{Calculer $P(A)$, $P(B)$, $P(A \cap B)$.}%
+  $P(A) = \dfrac{1}{6}$, \quad $P(B) = \dfrac{6}{36} = \dfrac{1}{6}$, \quad $A \cap B = \{(6,1)\}$ donc $P(A \cap B) = \dfrac{1}{36}$.
+
+  \commentaireMarge{Comparer.}%
+  $P(A) \times P(B) = \dfrac{1}{6} \times \dfrac{1}{6} = \dfrac{1}{36} = P(A \cap B)$.
+
+  Les evenements $A$ et $B$ sont independants.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre independance et incompatibilite. Deux evenements
+          incompatibles de probabilites non nulles ne sont \textbf{jamais} independants.
+    \item \textbf{Piege 2.} Affirmer l'independance sans calcul, << parce que ca parait logique >>.
+    \item \textbf{Piege 3.} Oublier de conclure par une phrase.
+  \end{itemize}
+}
+
+\verifier{%
+  Si $A$ et $B$ sont independants, verifier aussi que $P_A(B) = P(B)$ (ou inversement).
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

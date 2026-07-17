@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-PROBCOND-EX-033", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-033.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-033.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_A = Rational(1, 2)
+% P_B = Rational(1, 6)
+% P_AinterB = Rational(1, 12)
+% assert P_A * P_B == P_AinterB  # independants
+% # Abar et B
+% P_Abar = 1 - P_A
+% P_AbarinterB = P_B - P_AinterB
+% assert P_AbarinterB == Rational(1, 12)
+% assert P_Abar * P_B == Rational(1,2)*Rational(1,6)
+% assert P_Abar * P_B == P_AbarinterB
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-033}{1}{10}
+On donne $P(A) = \dfrac{1}{2}$, $P(B) = \dfrac{1}{6}$ et $P(A \cap B) = \dfrac{1}{12}$.
+
+\begin{enumerate}
+  \item Montrer que $A$ et $B$ sont independants.
+  \item En deduire que $\overline{A}$ et $B$ sont aussi independants.
+\end{enumerate}
+\end{exercice}

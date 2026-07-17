@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-PROBCOND-EX-024", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-024.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-024.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_R = Rational(1, 3)
+% P_S_R = Rational(9, 10)
+% P_S_Rbar = Rational(1, 2)
+% P_S = P_R * P_S_R + (1-P_R) * P_S_Rbar
+% assert P_S == Rational(1,3)*Rational(9,10) + Rational(2,3)*Rational(1,2)
+% assert P_S == Rational(3,10) + Rational(1,3)
+% assert P_S == Rational(9,30) + Rational(10,30)
+% assert P_S == Rational(19, 30)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-024}{1}{10}
+Un eleve revise un chapitre avec probabilite $\dfrac{1}{3}$. S'il a revise, il reussit le controle avec probabilite $\dfrac{9}{10}$. Sinon, il reussit avec probabilite $\dfrac{1}{2}$.
+
+Calculer la probabilite de reussir le controle.
+\end{exercice}

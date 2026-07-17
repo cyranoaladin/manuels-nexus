@@ -1,0 +1,82 @@
+% META: {"id": "1SPE-PROBCOND-EV-A-corrige", "chapitre": "1SPE-PROBA-COND", "type_objet": "evaluation_corrige", "version": "A", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Ex1
+% assert Rational(3,5)*Rational(1,2) == Rational(3, 10)
+% assert Rational(2,5)*Rational(1,4) == Rational(1, 10)
+% assert Rational(3,10)+Rational(1,10) == Rational(2, 5)
+% assert Rational(3,10)/Rational(2,5) == Rational(3, 4)
+% # Ex2
+% assert Rational(329, 5000) == Rational(3,100)*Rational(9,10)+Rational(97,100)*Rational(1,25)
+% assert Rational(135, 329) == Rational(27,1000)/Rational(329,5000)
+% # Ex3
+% assert Rational(1,2)*Rational(1,5) == Rational(1, 10)
+% assert Rational(1,2)+Rational(1,5)-Rational(1,10) == Rational(3, 5)
+% # Ex4
+% assert Rational(1,25) == Rational(1,5)*Rational(1,10)+Rational(4,5)*Rational(1,40)
+% assert Rational(1,2) == (Rational(1,5)*Rational(1,10))/Rational(1,25)
+% END-VERIFY
+
+\begin{evaluation}{1SPE-PROBCOND-EV-A-corrige}{55}
+
+%===============================================================
+\section*{Exercice 1 --- Corrige}
+%===============================================================
+
+\textbf{1.} Arbre : $P(R) = \frac{3}{5}$, $P(V) = \frac{2}{5}$. Sachant $R$ : $P_R(G) = \frac{1}{2}$, $P_R(\overline{G}) = \frac{1}{2}$. Sachant $V$ : $P_V(G) = \frac{1}{4}$, $P_V(\overline{G}) = \frac{3}{4}$.
+
+\medskip
+\textbf{2.} $P(R \cap G) = P(R) \times P_R(G) = \dfrac{3}{5} \times \dfrac{1}{2} = \dfrac{3}{10}$.
+
+\medskip
+\textbf{3.} $P(G) = P(R \cap G) + P(V \cap G) = \dfrac{3}{10} + \dfrac{2}{5} \times \dfrac{1}{4} = \dfrac{3}{10} + \dfrac{1}{10} = \dfrac{2}{5}$.
+
+\medskip
+\textbf{4.} $P_G(R) = \dfrac{P(R \cap G)}{P(G)} = \dfrac{3/10}{2/5} = \dfrac{3}{10} \times \dfrac{5}{2} = \dfrac{3}{4}$.
+
+%===============================================================
+\section*{Exercice 2 --- Corrige}
+%===============================================================
+
+\textbf{1.} $P(M) = \dfrac{3}{100}$, $P_M(T) = \dfrac{9}{10}$, $P_{\overline{M}}(T) = 1 - \dfrac{96}{100} = \dfrac{1}{25}$.
+
+\medskip
+\textbf{2.} $P(T) = P(M)\,P_M(T) + P(\overline{M})\,P_{\overline{M}}(T) = \dfrac{3}{100} \times \dfrac{9}{10} + \dfrac{97}{100} \times \dfrac{1}{25}$.
+
+$= \dfrac{27}{1000} + \dfrac{97}{2500} = \dfrac{270}{10000} + \dfrac{388}{10000} = \dfrac{658}{10000} = \dfrac{329}{5000}$.
+
+\medskip
+\textbf{3.} $P_T(M) = \dfrac{P(M \cap T)}{P(T)} = \dfrac{27/1000}{329/5000} = \dfrac{27}{1000} \times \dfrac{5000}{329} = \dfrac{135}{329} \approx 41{,}0\,\%$.
+
+\medskip
+\textbf{4.} La VPP est d'environ $41\,\%$ : un test positif ne signifie la maladie que dans moins d'un cas sur deux. Le test est utile pour orienter le diagnostic mais necessite une confirmation. La prevalence de $3\,\%$ est encore trop faible pour que le test soit determinant a lui seul.
+
+%===============================================================
+\section*{Exercice 3 --- Corrige}
+%===============================================================
+
+\textbf{1.} $P(A) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{5} = \dfrac{1}{10} = P(A \cap B)$. Donc $A$ et $B$ sont independants.
+
+\medskip
+\textbf{2.} $P(A \cup B) = P(A) + P(B) - P(A \cap B) = \dfrac{1}{2} + \dfrac{1}{5} - \dfrac{1}{10} = \dfrac{5+2-1}{10} = \dfrac{3}{5}$.
+
+\medskip
+\textbf{3.} $P(\overline{A} \cap B) = P(B) - P(A \cap B) = \dfrac{1}{5} - \dfrac{1}{10} = \dfrac{1}{10}$.
+
+$P(\overline{A}) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{5} = \dfrac{1}{10} = P(\overline{A} \cap B)$. Donc $\overline{A}$ et $B$ sont independants.
+
+%===============================================================
+\section*{Exercice 4 --- Corrige}
+%===============================================================
+
+\textbf{1.} Arbre : $P(J) = \frac{1}{5}$, $P(S) = \frac{4}{5}$. Sachant $J$ : $P_J(A) = \frac{1}{10}$. Sachant $S$ : $P_S(A) = \frac{1}{40}$.
+
+\medskip
+\textbf{2.} $P(A) = P(J)\,P_J(A) + P(S)\,P_S(A) = \dfrac{1}{5} \times \dfrac{1}{10} + \dfrac{4}{5} \times \dfrac{1}{40} = \dfrac{1}{50} + \dfrac{1}{50} = \dfrac{2}{50} = \dfrac{1}{25}$.
+
+\medskip
+\textbf{3.} $P_A(J) = \dfrac{P(J \cap A)}{P(A)} = \dfrac{1/50}{1/25} = \dfrac{1}{50} \times 25 = \dfrac{1}{2}$.
+
+Un conducteur accidente a une chance sur deux d'etre jeune, alors que les jeunes ne representent que $20\,\%$ des assures.
+
+\end{evaluation}

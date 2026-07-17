@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-PROBCOND-EX-039", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-039.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, Symbol, solve
+% p = Symbol('p')
+% # A et B independants, P(A)=p, P(B)=2p, P(AuB)=7/12
+% # P(AuB) = P(A)+P(B)-P(AinterB) = p+2p-p*2p = 3p-2p^2
+% eq = 3*p - 2*p**2 - Rational(7,12)
+% sols = solve(eq, p)
+% # 2p^2 - 3p + 7/12 = 0 => 24p^2 - 36p + 7 = 0
+% # delta = 1296 - 672 = 624. Hmm let me check
+% # Actually: 3p - 2p^2 = 7/12 => 2p^2 - 3p + 7/12 = 0 => 24p^2 - 36p + 7 = 0
+% # delta = 36^2 - 4*24*7 = 1296 - 672 = 624 = 16*39
+% # p = (36 +/- 4*sqrt(39))/48
+% # Hmm not clean. Let me use P(A)=1/4, P(B)=1/2 so P(AuB)=1/4+1/2-1/8=5/8
+% # Better: P(A)=1/3, P(B)=1/4, P(AuB)=1/3+1/4-1/12=6/12=1/2
+% # Let me redefine the exercise
+% P_A = Rational(1, 3)
+% P_B = Rational(1, 4)
+% P_AuB = P_A + P_B - P_A*P_B
+% assert P_AuB == Rational(1,3)+Rational(1,4)-Rational(1,12)
+% assert P_AuB == Rational(1, 2)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-039}{3}{15}
+$A$ et $B$ sont independants. On donne $P(A) = \dfrac{1}{3}$ et $P(A \cup B) = \dfrac{1}{2}$.
+
+\begin{enumerate}
+  \item Exprimer $P(A \cup B)$ en fonction de $P(A)$ et $P(B)$ en utilisant l'independance.
+  \item En deduire $P(B)$.
+  \item Verifier en calculant directement $P(A \cap B)$ et $P(A) + P(B) - P(A \cap B)$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,35 @@
+% META: {"id": "1SPE-PROBCOND-RE-C2", "chapitre": "1SPE-PROBA-COND", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION --- C2
+% Construire et lire un arbre pondere
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-PROBCOND-RE-C2-EX1}{1}{8}
+Un sac contient $2$ boules rouges et $3$ boules bleues. On tire une boule, puis sans remise une deuxieme.
+
+\begin{enumerate}
+  \item Donner $P(R_1)$ et $P(B_1)$.
+  \item Sachant $R_1$, donner $P_{R_1}(R_2)$ et $P_{R_1}(B_2)$. Verifier qu'elles somment a $1$.
+  \item Calculer $P(R_1 \cap R_2)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_R1 = Rational(2, 5)
+% P_B1 = Rational(3, 5)
+% P_R2_R1 = Rational(1, 4)
+% P_B2_R1 = Rational(3, 4)
+% assert P_R2_R1 + P_B2_R1 == 1
+% assert P_R1 * P_R2_R1 == Rational(1, 10)
+% END-VERIFY
+
+\begin{corrige}{1SPE-PROBCOND-RE-C2-EX1}
+
+\textbf{1.} $P(R_1) = \frac{2}{5}$, $P(B_1) = \frac{3}{5}$.
+
+\textbf{2.} Sachant $R_1$, il reste $1$ rouge et $3$ bleues dans $4$ boules : $P_{R_1}(R_2) = \frac{1}{4}$, $P_{R_1}(B_2) = \frac{3}{4}$. Somme : $\frac{1}{4}+\frac{3}{4}=1$ \checkmark.
+
+\textbf{3.} $P(R_1 \cap R_2) = \frac{2}{5} \times \frac{1}{4} = \frac{1}{10}$.
+\end{corrige}

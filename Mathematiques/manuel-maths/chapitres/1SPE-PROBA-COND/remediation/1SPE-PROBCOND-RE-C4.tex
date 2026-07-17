@@ -1,0 +1,32 @@
+% META: {"id": "1SPE-PROBCOND-RE-C4", "chapitre": "1SPE-PROBA-COND", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION --- C4
+% Independance de deux evenements
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-PROBCOND-RE-C4-EX1}{1}{8}
+On donne $P(A) = \dfrac{1}{3}$, $P(B) = \dfrac{3}{4}$, $P(A \cap B) = \dfrac{1}{4}$.
+
+\begin{enumerate}
+  \item Calculer $P(A) \times P(B)$.
+  \item Comparer avec $P(A \cap B)$.
+  \item Conclure : $A$ et $B$ sont-ils independants ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_A = Rational(1, 3)
+% P_B = Rational(3, 4)
+% assert P_A * P_B == Rational(1, 4)
+% assert P_A * P_B == Rational(1, 4)  # = P(A inter B) => independants
+% END-VERIFY
+
+\begin{corrige}{1SPE-PROBCOND-RE-C4-EX1}
+\textbf{1.} $P(A) \times P(B) = \frac{1}{3} \times \frac{3}{4} = \frac{1}{4}$.
+
+\textbf{2.} $P(A) \times P(B) = \frac{1}{4} = P(A \cap B)$.
+
+\textbf{3.} Comme $P(A \cap B) = P(A) \times P(B)$, les evenements $A$ et $B$ sont independants.
+\end{corrige}

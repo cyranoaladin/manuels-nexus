@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-PROBCOND-CO-008", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-008", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_C = Rational(8, 32)
+% P_F = Rational(12, 32)
+% P_CinterF = Rational(3, 32)
+% P_C_F = P_CinterF / P_C
+% assert P_C_F == Rational(3, 8)
+% P_F_C = P_CinterF / P_F
+% assert P_F_C == Rational(1, 4)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-008}
+
+\textbf{1.} $P(C) = \dfrac{8}{32} = \dfrac{1}{4}$, $P(F) = \dfrac{12}{32} = \dfrac{3}{8}$, $P(C \cap F) = \dfrac{3}{32}$ (roi, dame, valet de coeur).
+
+\medskip
+\textbf{2.} $P_C(F) = \dfrac{P(C \cap F)}{P(C)} = \dfrac{\frac{3}{32}}{\frac{1}{4}} = \dfrac{3}{32} \times 4 = \dfrac{3}{8}$.
+
+Parmi les coeurs, $\dfrac{3}{8}$ sont des figures.
+
+\medskip
+\textbf{3.} $P_F(C) = \dfrac{P(C \cap F)}{P(F)} = \dfrac{\frac{3}{32}}{\frac{3}{8}} = \dfrac{3}{32} \times \dfrac{8}{3} = \dfrac{1}{4}$.
+
+\end{corrige}

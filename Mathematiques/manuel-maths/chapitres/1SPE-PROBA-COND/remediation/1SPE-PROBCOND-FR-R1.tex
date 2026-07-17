@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-PROBCOND-FR-R1", "chapitre": "1SPE-PROBA-COND", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU --- R1 : Probabilites de base
+%---------------------------------------------------------------
+
+\subsection*{Rappel --- Probabilites de base}
+
+\textbf{Vocabulaire :} un \textbf{univers} $\Omega$ est l'ensemble de toutes les issues possibles. Un \textbf{evenement} est une partie de $\Omega$.
+
+\textbf{Formules fondamentales :}
+\[
+  P(\overline{A}) = 1 - P(A) \qquad P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+
+\begin{exercice}{1SPE-PROBCOND-FR-R1-EX1}{1}{5}
+On donne $P(A) = \dfrac{3}{8}$ et $P(B) = \dfrac{1}{4}$ avec $A \cap B = \varnothing$.
+\begin{enumerate}
+  \item Calculer $P(\overline{A})$.
+  \item Calculer $P(A \cup B)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_A = Rational(3, 8)
+% P_B = Rational(1, 4)
+% assert 1 - P_A == Rational(5, 8)
+% assert P_A + P_B == Rational(5, 8)
+% END-VERIFY
+
+\begin{corrige}{1SPE-PROBCOND-FR-R1-EX1}
+\textbf{1.} $P(\overline{A}) = 1 - P(A) = 1 - \frac{3}{8} = \frac{5}{8}$.
+
+\textbf{2.} Comme $A \cap B = \varnothing$, $P(A \cup B) = P(A) + P(B) = \frac{3}{8} + \frac{1}{4} = \frac{3}{8} + \frac{2}{8} = \frac{5}{8}$.
+\end{corrige}

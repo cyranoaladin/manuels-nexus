@@ -1,0 +1,35 @@
+% META: {"id": "1SPE-PROBCOND-RE-C1", "chapitre": "1SPE-PROBA-COND", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION --- C1
+% Calculer une probabilite conditionnelle
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-PROBCOND-RE-C1-EX1}{1}{8}
+On donne $P(A) = \dfrac{2}{5}$ et $P(A \cap B) = \dfrac{1}{5}$.
+\begin{enumerate}
+  \item Ecrire la formule de $P_A(B)$.
+  \item Calculer $P_A(B)$.
+  \item Calculer $P_A(\overline{B})$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_A = Rational(2, 5)
+% P_AinterB = Rational(1, 5)
+% P_A_B = P_AinterB / P_A
+% assert P_A_B == Rational(1, 2)
+% assert 1 - P_A_B == Rational(1, 2)
+% END-VERIFY
+
+\begin{corrige}{1SPE-PROBCOND-RE-C1-EX1}
+
+\commentaireMarge{Formule de la probabilite conditionnelle.}
+
+\textbf{Question 1.} $P_A(B) = \dfrac{P(A \cap B)}{P(A)}$.
+
+\textbf{Question 2.} $P_A(B) = \dfrac{1/5}{2/5} = \dfrac{1}{5} \times \dfrac{5}{2} = \dfrac{1}{2}$.
+
+\textbf{Question 3.} $P_A(\overline{B}) = 1 - P_A(B) = 1 - \dfrac{1}{2} = \dfrac{1}{2}$.
+\end{corrige}

@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-PROBCOND-RE-C3", "chapitre": "1SPE-PROBA-COND", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION --- C3
+% Formule des probabilites totales
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-PROBCOND-RE-C3-EX1}{1}{8}
+$P(B) = \dfrac{1}{4}$, $P_B(A) = \dfrac{2}{3}$, $P_{\overline{B}}(A) = \dfrac{1}{3}$.
+
+\begin{enumerate}
+  \item Calculer $P(\overline{B})$.
+  \item Calculer $P(B) \times P_B(A)$.
+  \item Calculer $P(\overline{B}) \times P_{\overline{B}}(A)$.
+  \item En deduire $P(A)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_B = Rational(1, 4)
+% P_Bbar = Rational(3, 4)
+% P_A = P_B * Rational(2,3) + P_Bbar * Rational(1,3)
+% assert P_A == Rational(1,6) + Rational(1,4)
+% assert P_A == Rational(5, 12)
+% END-VERIFY
+
+\begin{corrige}{1SPE-PROBCOND-RE-C3-EX1}
+\textbf{1.} $P(\overline{B}) = 1 - \frac{1}{4} = \frac{3}{4}$.
+
+\textbf{2.} $\frac{1}{4} \times \frac{2}{3} = \frac{2}{12} = \frac{1}{6}$.
+
+\textbf{3.} $\frac{3}{4} \times \frac{1}{3} = \frac{3}{12} = \frac{1}{4}$.
+
+\textbf{4.} $P(A) = \frac{1}{6} + \frac{1}{4} = \frac{2}{12} + \frac{3}{12} = \frac{5}{12}$.
+\end{corrige}

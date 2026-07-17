@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-PROBCOND-CO-016", "chapitre": "1SPE-PROBA-COND", "type_objet": "corrige", "exercice_ref": "1SPE-PROBCOND-EX-016", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_meme = Rational(3, 7)
+% P_aumoins1B = 1 - Rational(2, 7)
+% assert P_aumoins1B == Rational(5, 7)
+% END-VERIFY
+\begin{corrige}{1SPE-PROBCOND-EX-016}
+
+\textbf{1.} Arbre construit avec $P(R_1)=\frac{4}{7}$, $P(B_1)=\frac{3}{7}$ et les conditionnelles sans remise.
+
+\medskip
+\textbf{2.} $P(\text{meme}) = \frac{4}{7}\times\frac{3}{6} + \frac{3}{7}\times\frac{2}{6} = \frac{2}{7} + \frac{1}{7} = \frac{3}{7}$.
+
+\medskip
+\textbf{3.} $P(\text{au moins 1 bleue}) = 1 - P(R_1 \cap R_2) = 1 - \frac{2}{7} = \frac{5}{7}$.
+
+\end{corrige}

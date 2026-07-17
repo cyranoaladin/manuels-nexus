@@ -1,0 +1,32 @@
+{
+  "chapitre": "1SPE-PROBA-COND",
+  "mode": "ex_nihilo",
+  "note": "Dossier constitue sans corpus indexe.",
+  "capacites": {
+    "C1": {
+      "chunks_retenus": [],
+      "brief": "Probabilite conditionnelle : P_A(B) = P(A inter B) / P(A), avec P(A) > 0. Interpretation : probabilite de B sachant que A est realise. Erreurs types : (1) confondre P_A(B) et P_B(A) ; (2) confondre P(A inter B) et P(A union B) ; (3) oublier la condition P(A) > 0 ; (4) confondre P_A(B) et P(A) x P(B).",
+      "angles_morts": []
+    },
+    "C2": {
+      "chunks_retenus": [],
+      "brief": "Arbre pondere : chaque branche porte la probabilite conditionnelle correspondante. Regle du produit le long d'un chemin. La somme des probabilites des branches issues d'un meme noeud vaut 1. Erreurs types : (1) placer P(A inter B) sur une branche au lieu de P_A(B) ; (2) additionner au lieu de multiplier le long d'un chemin ; (3) ne pas verifier que les branches d'un noeud somment a 1.",
+      "angles_morts": []
+    },
+    "C3": {
+      "chunks_retenus": [],
+      "brief": "Formule des probabilites totales : si B1, B2, ..., Bn forment une partition de Omega, alors P(A) = somme P(Bi) x P_Bi(A). Cas usuel avec B et Bbar. Demonstration exigible : P(A) = P(A inter B) + P(A inter Bbar) = P(B) x P_B(A) + P(Bbar) x P_Bbar(A). Erreurs types : (1) oublier un terme de la partition ; (2) ne pas verifier que les Bi forment bien une partition (exhaustivite + incompatibilite) ; (3) confondre P(A) et P_B(A).",
+      "angles_morts": []
+    },
+    "C4": {
+      "chunks_retenus": [],
+      "brief": "Independance : A et B sont independants si et seulement si P(A inter B) = P(A) x P(B). Equivalence : P_A(B) = P(B) (quand P(A) > 0). Erreurs types : (1) confondre independance et incompatibilite ; (2) affirmer l'independance sans la verifier par le calcul ; (3) croire que l'independance est une propriete evidente du contexte.",
+      "angles_morts": []
+    },
+    "C5": {
+      "chunks_retenus": [],
+      "brief": "Problemes contextualises : tests medicaux (sensibilite, specificite, valeur predictive), controle qualite (taux de defaut, lots), jeux de hasard, genetique. Methode : (1) identifier les evenements, (2) extraire les probabilites de l'enonce, (3) construire un arbre ou un tableau, (4) appliquer les formules. Erreurs types : (1) mal identifier les evenements ; (2) confondre sensibilite et valeur predictive positive ; (3) ne pas convertir les pourcentages en probabilites.",
+      "angles_morts": []
+    }
+  }
+}

@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-PROBCOND-EX-042", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-042.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-042.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_A = Rational(3, 5)
+% P_B = Rational(2, 5)
+% P_D_A = Rational(1, 25)
+% P_D_B = Rational(7, 100)
+% P_D = P_A * P_D_A + P_B * P_D_B
+% assert P_D == Rational(3,5)*Rational(1,25) + Rational(2,5)*Rational(7,100)
+% assert P_D == Rational(3,125) + Rational(14,500)
+% assert P_D == Rational(12,500) + Rational(14,500)
+% assert P_D == Rational(26, 500)
+% assert P_D == Rational(13, 250)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-042}{1}{12}
+Une usine produit des ampoules sur deux lignes : la ligne $A$ ($60\,\%$, defaut $4\,\%$) et la ligne $B$ ($40\,\%$, defaut $7\,\%$).
+
+\begin{enumerate}
+  \item Calculer la probabilite qu'une ampoule soit defectueuse.
+  \item Une ampoule est defectueuse. Calculer la probabilite qu'elle vienne de la ligne $B$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,44 @@
+% META: {"id": "1SPE-PROBCOND-EX-049", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-049.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-049.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Double test: si T1 positif, on fait T2
+% P_M = Rational(2, 100)
+% P_T1_M = Rational(9, 10)
+% P_T1_Mbar = Rational(1, 10)
+% P_T2_M = Rational(19, 20)
+% P_T2_Mbar = Rational(1, 20)
+% # P(T1 positif)
+% P_T1 = P_M * P_T1_M + (1-P_M) * P_T1_Mbar
+% assert P_T1 == Rational(2,100)*Rational(9,10) + Rational(98,100)*Rational(1,10)
+% assert P_T1 == Rational(18,1000) + Rational(98,1000)
+% assert P_T1 == Rational(116, 1000)
+% assert P_T1 == Rational(29, 250)
+% # Sachant T1+, P(M|T1+)
+% P_M_T1 = P_M * P_T1_M / P_T1
+% assert P_M_T1 == Rational(18,1000) / Rational(29,250)
+% assert P_M_T1 == Rational(18,1000) * Rational(250,29)
+% assert P_M_T1 == Rational(9, 58)
+% # Sachant T1+, on fait T2. P(T2+|M,T1+) = P_T2_M (independance conditionnelle)
+% # P(T2+|Mbar,T1+) = P_T2_Mbar
+% # P(T1+ et T2+) = P(M)*P(T1+|M)*P(T2+|M) + P(Mbar)*P(T1+|Mbar)*P(T2+|Mbar)
+% P_T1T2 = P_M * P_T1_M * P_T2_M + (1-P_M) * P_T1_Mbar * P_T2_Mbar
+% assert P_T1T2 == Rational(2,100)*Rational(9,10)*Rational(19,20) + Rational(98,100)*Rational(1,10)*Rational(1,20)
+% assert P_T1T2 == Rational(342,20000) + Rational(98,20000)
+% assert P_T1T2 == Rational(440, 20000)
+% assert P_T1T2 == Rational(11, 500)
+% # P(M | T1+ et T2+)
+% P_M_T1T2 = P_M * P_T1_M * P_T2_M / P_T1T2
+% assert P_M_T1T2 == Rational(342,20000) / Rational(11,500)
+% assert P_M_T1T2 == Rational(342,20000) * Rational(500,11)
+% assert P_M_T1T2 == Rational(171, 220)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-049}{3}{20}
+On effectue un double test de depistage. Le premier test a une sensibilite de $90\,\%$ et une specificite de $90\,\%$. Si le premier test est positif, on effectue un second test (sensibilite $95\,\%$, specificite $95\,\%$). La prevalence est de $2\,\%$.
+
+\begin{enumerate}
+  \item Calculer la probabilite d'un premier test positif.
+  \item Calculer $P_T(M)$ pour le premier test seul.
+  \item Calculer la probabilite que les deux tests soient positifs.
+  \item Calculer la probabilite d'etre malade sachant que les deux tests sont positifs. Comparer avec la question 2.
+\end{enumerate}
+\end{exercice}

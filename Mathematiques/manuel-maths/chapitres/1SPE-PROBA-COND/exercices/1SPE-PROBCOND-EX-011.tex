@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-PROBCOND-EX-011", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-011.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-011.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_R1 = Rational(3, 5)
+% P_V1 = Rational(2, 5)
+% P_R2_R1 = Rational(1, 2)
+% P_V2_R1 = Rational(1, 2)
+% P_R2_V1 = Rational(3, 4)
+% P_V2_V1 = Rational(1, 4)
+% P_R1R2 = P_R1 * P_R2_R1
+% assert P_R1R2 == Rational(3, 10)
+% P_R1V2 = P_R1 * P_V2_R1
+% assert P_R1V2 == Rational(3, 10)
+% P_V1R2 = P_V1 * P_R2_V1
+% assert P_V1R2 == Rational(3, 10)
+% P_V1V2 = P_V1 * P_V2_V1
+% assert P_V1V2 == Rational(1, 10)
+% assert P_R1R2 + P_R1V2 + P_V1R2 + P_V1V2 == 1
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-011}{1}{10}
+Une urne contient $3$ boules rouges et $2$ boules vertes. On tire une boule, on note sa couleur, puis sans remise on tire une deuxieme boule.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere de cette experience.
+  \item Calculer la probabilite d'obtenir deux boules rouges.
+  \item Calculer la probabilite d'obtenir au moins une boule rouge.
+\end{enumerate}
+\end{exercice}

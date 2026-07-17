@@ -1,0 +1,54 @@
+% META: {"id": "1SPE-PROBCOND-ME-001", "chapitre": "1SPE-PROBA-COND", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Calculer une probabilite conditionnelle}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de calculer << la probabilite de $B$ sachant $A$ >>,
+  ou lorsqu'on connait $P(A \cap B)$ et $P(A)$ et qu'on cherche $P_A(B)$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie les evenements $A$ et $B$ a partir de l'enonce.
+    \item Je determine $P(A)$ et $P(A \cap B)$ (par lecture directe, arbre ou tableau).
+    \item Je verifie que $P(A) > 0$ (condition d'existence).
+    \item J'applique la formule : $P_A(B) = \dfrac{P(A \cap B)}{P(A)}$.
+    \item Je simplifie la fraction si possible.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Dans un groupe de $200$ eleves, $120$ sont des filles. Parmi les filles, $48$ portent des lunettes.
+  On tire un eleve au hasard. Calculer la probabilite de porter des lunettes sachant que l'eleve est une fille.
+
+  \medskip
+  \commentaireMarge{Identifier les evenements.}%
+  $A$ : << l'eleve est une fille >>, $B$ : << l'eleve porte des lunettes >>.
+
+  \commentaireMarge{Lire les probabilites.}%
+  $P(A) = \dfrac{120}{200} = \dfrac{3}{5}$, \quad $P(A \cap B) = \dfrac{48}{200} = \dfrac{6}{25}$.
+
+  \commentaireMarge{Appliquer la formule.}%
+  \[
+    P_A(B) = \frac{P(A \cap B)}{P(A)} = \frac{\frac{6}{25}}{\frac{3}{5}} = \frac{6}{25} \times \frac{5}{3} = \frac{2}{5}.
+  \]
+
+  \medskip
+  Parmi les filles, $\dfrac{2}{5} = 40\,\%$ portent des lunettes.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre $P_A(B)$ et $P_B(A)$ : l'ordre compte !
+    \item \textbf{Piege 2.} Confondre $P(A \cap B)$ et $P(A \cup B)$ dans la formule.
+    \item \textbf{Piege 3.} Oublier de verifier que $P(A) > 0$.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier que $0 \leq P_A(B) \leq 1$. Si le resultat depasse $1$ ou est negatif, il y a une erreur.
+  On peut aussi verifier que $P_A(B) + P_A(\overline{B}) = 1$.
+}
+
+\sEntrainer{\refExos{M1}}
+
+\end{fichemethode}

@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-PROBCOND-EX-012", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-012.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-012.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_P = Rational(1, 3)
+% P_F = Rational(2, 3)
+% P_G_P = Rational(3, 4)
+% P_G_F = Rational(1, 4)
+% P_PinterG = P_P * P_G_P
+% assert P_PinterG == Rational(1, 4)
+% P_FinterG = P_F * P_G_F
+% assert P_FinterG == Rational(1, 6)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-012}{1}{10}
+Un joueur lance un de truque : il obtient << pile >> avec la probabilite $\dfrac{1}{3}$ et << face >> avec la probabilite $\dfrac{2}{3}$. S'il obtient pile, il gagne un lot avec la probabilite $\dfrac{3}{4}$. S'il obtient face, il gagne un lot avec la probabilite $\dfrac{1}{4}$.
+
+\begin{enumerate}
+  \item Construire l'arbre pondere.
+  \item Calculer $P(\text{pile} \cap \text{lot})$ et $P(\text{face} \cap \text{lot})$.
+  \item Verifier que la somme de toutes les feuilles vaut $1$.
+\end{enumerate}
+\end{exercice}

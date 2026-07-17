@@ -1,0 +1,74 @@
+% META: {"id": "1SPE-PROBCOND-CR-012", "chapitre": "1SPE-PROBA-COND", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+
+\section{Formule des probabilites totales}
+
+% ============================================================
+% STRATE 1 --- Enonce et cas usuel
+% ============================================================
+
+\definition[1]{
+Une \textbf{partition} de l'univers $\Omega$ est une famille d'evenements $B_1, B_2, \ldots, B_n$ tels que :
+\begin{itemize}
+  \item les $B_i$ sont deux a deux incompatibles : $B_i \cap B_j = \varnothing$ pour $i \neq j$ ;
+  \item leur reunion couvre $\Omega$ : $B_1 \cup B_2 \cup \cdots \cup B_n = \Omega$.
+\end{itemize}
+
+Le cas le plus courant est la partition $\{B, \overline{B}\}$.
+}
+
+\theoreme[1]{(\textbf{Formule des probabilites totales})
+
+Si $B_1, B_2, \ldots, B_n$ forment une partition de $\Omega$ avec $P(B_i) > 0$ pour tout $i$, alors pour tout evenement $A$ :
+\[
+  P(A) = \sum_{i=1}^{n} P(B_i) \times P_{B_i}(A)
+         = P(B_1)\,P_{B_1}(A) + P(B_2)\,P_{B_2}(A) + \cdots + P(B_n)\,P_{B_n}(A).
+\]
+
+\textbf{Cas usuel} avec la partition $\{B, \overline{B}\}$ :
+\[
+  P(A) = P(B) \times P_B(A) + P(\overline{B}) \times P_{\overline{B}}(A).
+\]
+}
+
+% ============================================================
+% STRATE 3 --- Demonstration exigible
+% ============================================================
+
+\demonstration{
+\textbf{Demonstration (exigible au baccalaureat).}
+
+Comme $\{B, \overline{B}\}$ est une partition de $\Omega$, on a :
+\[
+  A = (A \cap B) \cup (A \cap \overline{B}),
+\]
+et les evenements $A \cap B$ et $A \cap \overline{B}$ sont incompatibles.
+
+Par additivite de la probabilite :
+\[
+  P(A) = P(A \cap B) + P(A \cap \overline{B}).
+\]
+
+Or, par definition de la probabilite conditionnelle :
+\[
+  P(A \cap B) = P(B) \times P_B(A) \quad \text{et} \quad P(A \cap \overline{B}) = P(\overline{B}) \times P_{\overline{B}}(A).
+\]
+
+D'ou :
+\[
+  P(A) = P(B) \times P_B(A) + P(\overline{B}) \times P_{\overline{B}}(A). \qed
+\]
+}
+
+\exemple{
+Une usine a deux chaines de production. La chaine 1 produit $60\,\%$ des pieces et la chaine 2 produit $40\,\%$. Le taux de pieces defectueuses est de $3\,\%$ pour la chaine 1 et de $5\,\%$ pour la chaine 2.
+
+On note $C_1$ : << la piece vient de la chaine 1 >>, $C_2$ : << la piece vient de la chaine 2 >>, et $D$ : << la piece est defectueuse >>.
+
+$\{C_1, C_2\}$ est une partition de $\Omega$.
+
+\[
+  P(D) = P(C_1) \times P_{C_1}(D) + P(C_2) \times P_{C_2}(D) = \frac{60}{100} \times \frac{3}{100} + \frac{40}{100} \times \frac{5}{100} = \frac{18}{1000} + \frac{20}{1000} = \frac{38}{1000} = \frac{19}{500}.
+\]
+
+La probabilite qu'une piece soit defectueuse est $\dfrac{19}{500} = 3{,}8\,\%$.
+}

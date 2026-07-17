@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-PROBCOND-EX-046", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-046.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-046.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Controle qualite: lot de 100 pieces, 5 defectueuses
+% # On preleve 2 sans remise
+% P_D1 = Rational(5, 100)
+% P_D2_D1 = Rational(4, 99)
+% P_2D = P_D1 * P_D2_D1
+% assert P_2D == Rational(20, 9900)
+% assert P_2D == Rational(1, 495)
+% P_D2_Dbar1 = Rational(5, 99)
+% P_aumoins1 = 1 - (1-P_D1)*(1-P_D2_Dbar1)
+% # P(0 defaut) = 95/100 * 94/99 = 8930/9900
+% P_0D = Rational(95,100) * Rational(94,99)
+% assert P_0D == Rational(8930, 9900)
+% P_aumoins1 = 1 - P_0D
+% assert P_aumoins1 == Rational(970, 9900)
+% assert P_aumoins1 == Rational(97, 990)
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-046}{2}{15}
+Un lot de $100$ pieces contient $5$ pieces defectueuses. On preleve $2$ pieces sans remise.
+
+\begin{enumerate}
+  \item Calculer la probabilite que les deux pieces soient defectueuses.
+  \item Calculer la probabilite qu'au moins une piece soit defectueuse.
+  \item Comparer avec le cas d'un tirage avec remise.
+\end{enumerate}
+\end{exercice}

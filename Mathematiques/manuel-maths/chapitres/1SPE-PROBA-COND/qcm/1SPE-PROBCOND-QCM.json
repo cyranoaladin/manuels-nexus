@@ -1,0 +1,204 @@
+{
+  "chapitre": "1SPE-PROBA-COND",
+  "titre": "Probabilites conditionnelles et independance --- QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "On donne P(A) = 1/2 et P(A inter B) = 1/6. Que vaut P_A(B) ?",
+      "options": {"A": "1/3", "B": "1/2", "C": "1/6", "D": "2/3"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "L'eleve a confondu P_A(B) avec P(A). P_A(B) = P(A inter B)/P(A) = (1/6)/(1/2) = 1/3.", "renvoi": "C1, definition"},
+        "C": {"erreur": "L'eleve a donne P(A inter B) au lieu de calculer le quotient.", "renvoi": "C1, formule"},
+        "D": {"erreur": "L'eleve a inverse la fraction : P(A)/P(A inter B) = 3 au lieu de P(A inter B)/P(A) = 1/3.", "renvoi": "C1, formule"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C1",
+      "enonce": "P_A(B) = 3/5 signifie :",
+      "options": {"A": "P(A sachant B) = 3/5", "B": "P(A inter B) = 3/5", "C": "P(B sachant A) = 3/5", "D": "P(A union B) = 3/5"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a inverse l'ordre de conditionnement : P_A(B) est la probabilite de B sachant A, pas de A sachant B.", "renvoi": "C1, notation"},
+        "B": {"erreur": "P_A(B) n'est pas P(A inter B), c'est le quotient P(A inter B)/P(A).", "renvoi": "C1, definition"},
+        "D": {"erreur": "Confusion entre probabilite conditionnelle et probabilite de l'union.", "renvoi": "C1, definition"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C1",
+      "enonce": "Si P(A) = 2/5 et P_A(B) = 3/4, que vaut P(A inter B) ?",
+      "options": {"A": "3/20", "B": "3/10", "C": "23/20", "D": "6/5"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a divise au lieu de multiplier : P(A inter B) = P(A) x P_A(B), pas P(A) / P_A(B).", "renvoi": "C1, formule de multiplication"},
+        "C": {"erreur": "L'eleve a additionne P(A) + P_A(B) au lieu de les multiplier.", "renvoi": "C1, formule de multiplication"},
+        "D": {"erreur": "L'eleve a calcule P_A(B)/P(A) = (3/4)/(2/5) = 15/8 ou une autre erreur de calcul.", "renvoi": "C1, formule de multiplication"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C1",
+      "enonce": "On donne P_A(B) = 2/3. Que vaut P_A(Bbar) ?",
+      "options": {"A": "2/3", "B": "1/3", "C": "On ne peut pas savoir.", "D": "0"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a recopie P_A(B) au lieu de calculer le complementaire.", "renvoi": "C1, complementaire conditionnel"},
+        "C": {"erreur": "La relation P_A(B) + P_A(Bbar) = 1 est toujours vraie, donc on peut conclure.", "renvoi": "C1, propriete"},
+        "D": {"erreur": "Confusion avec l'incompatibilite.", "renvoi": "C1, complementaire"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C2",
+      "enonce": "Dans un arbre pondere, la probabilite d'un chemin s'obtient en :",
+      "options": {"A": "additionnant", "B": "multipliant", "C": "prenant le max", "D": "divisant"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "On additionne les probabilites des chemins pour obtenir la probabilite d'un evenement, mais le long d'un chemin on multiplie.", "renvoi": "C2, regle du produit"},
+        "C": {"erreur": "Erreur de methode : on multiplie les probabilites le long d'un chemin.", "renvoi": "C2, regle du produit"},
+        "D": {"erreur": "La division intervient dans le calcul de P_A(B), pas dans le produit le long d'un chemin.", "renvoi": "C2, regle du produit"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C2",
+      "enonce": "A chaque noeud d'un arbre pondere, la somme des probabilites des branches vaut :",
+      "options": {"A": "0", "B": "la probabilite du noeud parent", "C": "1", "D": "le nombre de branches"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Les probabilites sont positives, leur somme ne peut pas etre nulle.", "renvoi": "C2, regle de construction"},
+        "B": {"erreur": "La somme des probabilites conditionnelles issues d'un noeud vaut 1, pas la probabilite du noeud.", "renvoi": "C2, regle de construction"},
+        "D": {"erreur": "Confusion entre le nombre de branches et la somme des probabilites.", "renvoi": "C2, regle de construction"}
+      }
+    },
+    {
+      "id": "Q7", "capacite": "C2",
+      "enonce": "Les probabilites inscrites sur les branches issues d'un noeud A sont :",
+      "options": {"A": "P(B), P(Bbar)", "B": "P_A(B), P_A(Bbar)", "C": "P(A inter B), P(A inter Bbar)", "D": "des frequences"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Ce sont des probabilites conditionnelles, pas des probabilites marginales.", "renvoi": "C2, construction"},
+        "C": {"erreur": "Les probabilites d'intersection sont celles des feuilles (chemins complets), pas des branches.", "renvoi": "C2, construction"},
+        "D": {"erreur": "Un arbre pondere utilise des probabilites, pas des frequences observees.", "renvoi": "C2, definition"}
+      }
+    },
+    {
+      "id": "Q8", "capacite": "C3",
+      "enonce": "Si P(B) = 1/3, P_B(A) = 1/2 et P_Bbar(A) = 1/4, alors P(A) vaut :",
+      "options": {"A": "1/3", "B": "1/6 + 1/6 = 1/3", "C": "1/6 + 1/4 = 5/12", "D": "1/6 + 2/12 = 1/3"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a repondu P(B) au lieu de calculer P(A) par les probabilites totales.", "renvoi": "C3, formule"},
+        "B": {"erreur": "L'eleve a calcule P(B)*P_B(A) = 1/6 correctement mais a oublie d'utiliser P(Bbar) = 2/3 pour le second terme.", "renvoi": "C3, formule"},
+        "C": {"erreur": "Le second terme doit etre P(Bbar)*P_Bbar(A) = 2/3 * 1/4 = 1/6, pas 1/4.", "renvoi": "C3, formule"}
+      }
+    },
+    {
+      "id": "Q9", "capacite": "C3",
+      "enonce": "Pour appliquer la formule des probabilites totales avec {B1, B2, B3}, il faut que :",
+      "options": {"A": "Les Bi soient independants", "B": "Les Bi forment une partition", "C": "Les Bi soient equiprobables", "D": "P(Bi) > 1/2"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'independance n'est pas requise ; c'est la structure de partition qui est necessaire.", "renvoi": "C3, hypothese"},
+        "C": {"erreur": "L'equiprobabilite n'est pas necessaire.", "renvoi": "C3, hypothese"},
+        "D": {"erreur": "Il suffit que P(Bi) > 0.", "renvoi": "C3, hypothese"}
+      }
+    },
+    {
+      "id": "Q10", "capacite": "C3",
+      "enonce": "La formule des probabilites totales pour {B, Bbar} s'ecrit :",
+      "options": {"A": "P(A) = P(B) + P(Bbar)", "B": "P(A) = P(A inter B) x P(A inter Bbar)", "C": "P(A) = P(B)*P_B(A) + P(Bbar)*P_Bbar(A)", "D": "P(A) = P(B)*P(A) + P(Bbar)*P(A)"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "P(B) + P(Bbar) = 1, pas P(A). Il manque les probabilites conditionnelles.", "renvoi": "C3, formule"},
+        "B": {"erreur": "On additionne les termes, on ne les multiplie pas.", "renvoi": "C3, formule"},
+        "D": {"erreur": "La formule D se simplifie en P(A) = P(A), ce qui est trivial et inutile.", "renvoi": "C3, formule"}
+      }
+    },
+    {
+      "id": "Q11", "capacite": "C3",
+      "enonce": "Quelle etape fait partie de la demonstration de la formule des probabilites totales ?",
+      "options": {"A": "A = A union B", "B": "A = (A inter B) union (A inter Bbar) incompatibles", "C": "P(A) = P(B) x P(A)", "D": "A et B sont independants"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "A = A union B est faux en general (sauf si A inclus dans B).", "renvoi": "C3, demonstration"},
+        "C": {"erreur": "Cela donnerait P(B) = 1, ce qui est faux en general.", "renvoi": "C3, demonstration"},
+        "D": {"erreur": "L'independance n'est pas une hypothese de la demonstration.", "renvoi": "C3, demonstration"}
+      }
+    },
+    {
+      "id": "Q12", "capacite": "C4",
+      "enonce": "A et B sont independants ssi :",
+      "options": {"A": "P(A inter B) = 0", "B": "P(A inter B) = P(A) + P(B)", "C": "P(A inter B) = P(A) x P(B)", "D": "P(A union B) = P(A) x P(B)"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "P(A inter B) = 0 signifie incompatibilite, pas independance.", "renvoi": "C4, definition"},
+        "B": {"erreur": "P(A inter B) = P(A) + P(B) est impossible (depasse 1 en general).", "renvoi": "C4, definition"},
+        "D": {"erreur": "La formule de l'union est P(A union B) = P(A) + P(B) - P(A inter B), pas un produit.", "renvoi": "C4, definition"}
+      }
+    },
+    {
+      "id": "Q13", "capacite": "C4",
+      "enonce": "Si A et B sont incompatibles avec P(A) > 0 et P(B) > 0, alors :",
+      "options": {"A": "ils sont independants", "B": "ils ne sont pas independants", "C": "on ne peut pas conclure", "D": "P_A(B) = 1"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Incompatibles => P(A inter B) = 0, mais P(A)*P(B) > 0, donc pas independants.", "renvoi": "C4, contre-exemple"},
+        "C": {"erreur": "On peut conclure : P(A inter B) = 0 != P(A)*P(B) > 0.", "renvoi": "C4, contre-exemple"},
+        "D": {"erreur": "P_A(B) = P(A inter B)/P(A) = 0/P(A) = 0, pas 1.", "renvoi": "C4, incompatibilite"}
+      }
+    },
+    {
+      "id": "Q14", "capacite": "C4",
+      "enonce": "Si A et B sont independants, alors Abar et B sont :",
+      "options": {"A": "incompatibles", "B": "independants", "C": "de meme probabilite", "D": "sans lien"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'independance de A et B n'implique pas l'incompatibilite de Abar et B.", "renvoi": "C4, propriete"},
+        "C": {"erreur": "Rien ne dit que P(Abar) = P(B).", "renvoi": "C4, propriete"},
+        "D": {"erreur": "Il y a un lien precis : ils sont independants (propriete demontrable).", "renvoi": "C4, propriete"}
+      }
+    },
+    {
+      "id": "Q15", "capacite": "C5",
+      "enonce": "La sensibilite d'un test est :",
+      "options": {"A": "P(M | T+)", "B": "P(T+ | M)", "C": "P(T- | Mbar)", "D": "P(M)"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "P(M | T+) est la valeur predictive positive, pas la sensibilite.", "renvoi": "C5, definitions"},
+        "C": {"erreur": "P(T- | Mbar) est la specificite, pas la sensibilite.", "renvoi": "C5, definitions"},
+        "D": {"erreur": "P(M) est la prevalence, pas la sensibilite.", "renvoi": "C5, definitions"}
+      }
+    },
+    {
+      "id": "Q16", "capacite": "C5",
+      "enonce": "La valeur predictive positive (VPP) est :",
+      "options": {"A": "P(T+ | M)", "B": "P(M | T+)", "C": "P(T+)", "D": "P(Mbar | T-)"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "P(T+ | M) est la sensibilite, pas la VPP.", "renvoi": "C5, definitions"},
+        "C": {"erreur": "P(T+) est la probabilite globale d'un test positif.", "renvoi": "C5, definitions"},
+        "D": {"erreur": "P(Mbar | T-) est la valeur predictive negative.", "renvoi": "C5, definitions"}
+      }
+    },
+    {
+      "id": "Q17", "capacite": "C5",
+      "enonce": "Sensibilite 99%, prevalence 0,1%. La VPP sera :",
+      "options": {"A": "proche de 99%", "B": "proche de 50%", "C": "probablement faible", "D": "exactement 0,1%"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Meme avec une tres bonne sensibilite, la VPP est faible si la prevalence est tres basse (beaucoup de faux positifs).", "renvoi": "C5, VPP et prevalence"},
+        "B": {"erreur": "Avec 0,1% de prevalence, la VPP sera bien en dessous de 50%.", "renvoi": "C5, VPP et prevalence"},
+        "D": {"erreur": "La VPP n'est pas egale a la prevalence.", "renvoi": "C5, formule de Bayes"}
+      }
+    },
+    {
+      "id": "Q18", "capacite": "C5",
+      "enonce": "Controle qualite avec 3 machines, on utilise :",
+      "options": {"A": "l'independance", "B": "formule de Bayes (prob totales + cond inversee)", "C": "uniquement des prob simples", "D": "theoreme des valeurs intermediaires"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'independance peut intervenir mais l'outil central est la formule des probabilites totales.", "renvoi": "C5, methode"},
+        "C": {"erreur": "Le probleme necessite des probabilites conditionnelles.", "renvoi": "C5, methode"},
+        "D": {"erreur": "Le TVI est un theoreme d'analyse, sans rapport avec les probabilites.", "renvoi": "C5, hors sujet"}
+      }
+    }
+  ]
+}

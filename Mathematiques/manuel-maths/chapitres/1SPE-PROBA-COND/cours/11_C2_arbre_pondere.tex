@@ -1,0 +1,56 @@
+% META: {"id": "1SPE-PROBCOND-CR-011", "chapitre": "1SPE-PROBA-COND", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+
+\section{Arbre pondere}
+
+% ============================================================
+% STRATE 1 --- Construction et regles
+% ============================================================
+
+\definition[1]{
+Un \textbf{arbre pondere} (ou arbre de probabilites) est un arbre dont chaque branche porte une probabilite, et qui modelise une experience aleatoire en deux ou plusieurs etapes.
+
+\textbf{Regles de construction :}
+\begin{enumerate}
+  \item Chaque noeud represente un evenement ou un sous-evenement.
+  \item La probabilite portee par une branche est la \textbf{probabilite conditionnelle} correspondante.
+  \item La somme des probabilites des branches issues d'un meme noeud vaut $1$.
+\end{enumerate}
+}
+
+\propriete[1]{
+\textbf{Regle du produit le long d'un chemin :}
+
+La probabilite d'un chemin (de la racine a une feuille) est egale au \textbf{produit} des probabilites inscrites sur les branches de ce chemin.
+
+Par exemple, le chemin << $A$ puis $B$ sachant $A$ >> a pour probabilite :
+\[
+  P(A \cap B) = P(A) \times P_A(B).
+\]
+}
+
+\exemple{
+Une urne contient $3$ boules rouges et $2$ boules vertes. On tire une boule, puis sans remise, une seconde.
+
+\textbf{Premiere etape :} $P(R_1) = \dfrac{3}{5}$, $P(V_1) = \dfrac{2}{5}$.
+
+\textbf{Deuxieme etape sachant $R_1$ :} $P_{R_1}(R_2) = \dfrac{2}{4} = \dfrac{1}{2}$, $P_{R_1}(V_2) = \dfrac{2}{4} = \dfrac{1}{2}$.
+
+\textbf{Deuxieme etape sachant $V_1$ :} $P_{V_1}(R_2) = \dfrac{3}{4}$, $P_{V_1}(V_2) = \dfrac{1}{4}$.
+
+Le chemin << rouge puis vert >> a pour probabilite $P(R_1 \cap V_2) = \dfrac{3}{5} \times \dfrac{1}{2} = \dfrac{3}{10}$.
+}
+
+\propriete[2]{
+\textbf{Somme des feuilles :}
+
+La somme des probabilites de toutes les feuilles (tous les chemins) vaut $1$. Ceci sert de verification.
+}
+
+\exemple{
+Avec l'urne precedente :
+\begin{align*}
+P(R_1 \cap R_2) + P(R_1 \cap V_2) + P(V_1 \cap R_2) + P(V_1 \cap V_2)
+&= \frac{3}{10} + \frac{3}{10} + \frac{6}{20} + \frac{2}{20} \\
+&= \frac{3}{10} + \frac{3}{10} + \frac{3}{10} + \frac{1}{10} = 1. \checkmark
+\end{align*}
+}

@@ -1,0 +1,14 @@
+% META: {"id": "1SPE-PROBCOND-EX-035", "chapitre": "1SPE-PROBA-COND", "type_objet": "exercice", "capacites": ["1SPE-PROBA-COND-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-PROBA-COND/exercices/1SPE-PROBCOND-EX-035.tex", "corrige_tex": "chapitres/1SPE-PROBA-COND/corriges/1SPE-PROBCOND-CO-035.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Incompatibles => P(A inter B) = 0, mais P(A)*P(B) != 0
+% P_A = Rational(1, 4)
+% P_B = Rational(1, 3)
+% P_AinterB = Rational(0, 1)
+% assert P_A * P_B != P_AinterB  # pas independants
+% END-VERIFY
+\begin{exercice}{1SPE-PROBCOND-EX-035}{1}{8}
+Deux evenements $A$ et $B$ sont incompatibles avec $P(A) = \dfrac{1}{4}$ et $P(B) = \dfrac{1}{3}$.
+
+$A$ et $B$ peuvent-ils etre independants ? Justifier.
+\end{exercice}
