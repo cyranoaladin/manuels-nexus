@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-GEOREP-CO-046", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-046", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Milieu des diagonales de ABCD: A(-1,1), B(3,3), C(5,-1), D(1,-3)
+% # Milieu AC: (2, 0), Milieu BD: (2, 0) => parallelogramme
+% assert (-1+5)//2 == 2
+% assert (1-1)//2 == 0
+% assert (3+1)//2 == 2
+% assert (3-3)//2 == 0
+% # |AC| = sqrt(36+4) = sqrt(40), |BD| = sqrt(4+36) = sqrt(40) => rectangle
+% assert (5-(-1))**2 + (-1-1)**2 == 40
+% assert (1-3)**2 + (-3-3)**2 == 40
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-046}
+
+Milieu de $[AC]$ : $\left(\dfrac{-1+5}{2} ; \dfrac{1-1}{2}\right) = (2 ; 0)$.
+
+Milieu de $[BD]$ : $\left(\dfrac{3+1}{2} ; \dfrac{3-3}{2}\right) = (2 ; 0)$.
+
+Même milieu : $ABCD$ est un parallélogramme.
+
+$AC = \sqrt{36 + 4} = \sqrt{40}$, $BD = \sqrt{4 + 36} = \sqrt{40}$.
+
+$AC = BD$ : parallélogramme à diagonales égales, c'est un \textbf{rectangle}.
+
+\end{corrige}

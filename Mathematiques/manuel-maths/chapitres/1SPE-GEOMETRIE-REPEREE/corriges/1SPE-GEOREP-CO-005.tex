@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-GEOREP-CO-005", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite par A(-2,3) et B(4,-1): m = (-1-3)/(4-(-2)) = -4/6 = -2/3
+% m = Rational(-4, 6)
+% assert m == Rational(-2, 3)
+% # y - 3 = -2/3(x + 2) => y = -2x/3 - 4/3 + 3 = -2x/3 + 5/3
+% # 2x + 3y - 5 = 0
+% assert 2*(-2) + 3*3 - 5 == 0
+% assert 2*4 + 3*(-1) - 5 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-005}
+
+\commentaireMarge{Coefficient directeur puis équation réduite.}
+
+$m = \dfrac{-1 - 3}{4 - (-2)} = \dfrac{-4}{6} = -\dfrac{2}{3}$.
+
+$y - 3 = -\dfrac{2}{3}(x + 2) = -\dfrac{2}{3}x - \dfrac{4}{3}$.
+
+$y = -\dfrac{2}{3}x + \dfrac{5}{3}$.
+
+En multipliant par $3$ : $3y = -2x + 5$, soit $\boxed{2x + 3y - 5 = 0}$.
+
+Vérification : $A$ : $2(-2) + 3(3) - 5 = -4 + 9 - 5 = 0$ \checkmark. $B$ : $2(4) + 3(-1) - 5 = 8 - 3 - 5 = 0$ \checkmark.
+
+\end{corrige}

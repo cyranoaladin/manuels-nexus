@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-GEOREP-EX-039", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-039.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Intersection de deux cercles
+% # C1: x^2+y^2=25, C2: (x-4)^2+(y-3)^2=4
+% # C2 dev: x^2-8x+16+y^2-6y+9=4 => x^2+y^2-8x-6y+21=0
+% # C1: x^2+y^2=25
+% # Soustraction: -8x-6y+21 = -25 => 8x+6y = 46 => 4x+3y=23
+% # Droite radicale: 4x+3y-23=0
+% # Substitution dans C1: y=(23-4x)/3, x^2+((23-4x)/3)^2=25
+% eq = x**2 + ((23-4*x)/3)**2 - 25
+% sols = solve(eq, x)
+% assert len(sols) == 2
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-039}{3}{20}
+Déterminer les points d'intersection des cercles $\mathcal{C}_1 : x^2 + y^2 = 25$ et $\mathcal{C}_2 : (x-4)^2 + (y-3)^2 = 4$.
+\end{exercice}

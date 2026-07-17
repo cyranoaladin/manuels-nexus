@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-GEOREP-CO-031", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-031", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # D1: 2x + y - 3 = 0, D2: 4x + 2y + 1 = 0
+% # det = 2*2 - 1*4 = 0 => paralleles
+% assert 2*2 - 1*4 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-031}
+
+\commentaireMarge{On calcule le déterminant $a_1 b_2 - a_2 b_1$.}
+
+$a_1 b_2 - a_2 b_1 = 2 \times 2 - 4 \times 1 = 0$.
+
+Les droites sont parallèles. $\mathcal{D}_2 = 2\mathcal{D}_1$ donnerait $c_2 = 2 \times (-3) = -6 \neq 1$, elles sont strictement parallèles.
+
+\end{corrige}

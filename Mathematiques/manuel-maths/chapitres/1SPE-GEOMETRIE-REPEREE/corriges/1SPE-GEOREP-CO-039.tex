@@ -1,0 +1,38 @@
+% META: {"id": "1SPE-GEOREP-CO-039", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-039", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Intersection de deux cercles
+% # C1: x^2+y^2=25, C2: (x-4)^2+(y-3)^2=4
+% # C2 dev: x^2-8x+16+y^2-6y+9=4 => x^2+y^2-8x-6y+21=0
+% # C1: x^2+y^2=25
+% # Soustraction: -8x-6y+21 = -25 => 8x+6y = 46 => 4x+3y=23
+% # Droite radicale: 4x+3y-23=0
+% # Substitution dans C1: y=(23-4x)/3, x^2+((23-4x)/3)^2=25
+% eq = x**2 + ((23-4*x)/3)**2 - 25
+% sols = solve(eq, x)
+% assert len(sols) == 2
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-039}
+
+\commentaireMarge{On soustrait les deux équations développées pour obtenir la droite radicale.}
+
+$\mathcal{C}_2$ développée : $x^2 + y^2 - 8x - 6y + 21 = 0$.
+
+$\mathcal{C}_1$ : $x^2 + y^2 - 25 = 0$.
+
+Soustraction : $-8x - 6y + 46 = 0$, soit $4x + 3y - 23 = 0$, d'où $y = \dfrac{23 - 4x}{3}$.
+
+Substitution dans $\mathcal{C}_1$ : $x^2 + \dfrac{(23-4x)^2}{9} = 25$.
+
+$9x^2 + 529 - 184x + 16x^2 = 225$, soit $25x^2 - 184x + 304 = 0$.
+
+$\Delta = 184^2 - 4 \times 25 \times 304 = 33856 - 30400 = 3456 = 576 \times 6$.
+
+$\sqrt{\Delta} = 24\sqrt{6}$.
+
+$x = \dfrac{184 \pm 24\sqrt{6}}{50} = \dfrac{92 \pm 12\sqrt{6}}{25}$.
+
+Les ordonnées se déduisent de $y = \dfrac{23 - 4x}{3}$.
+
+\end{corrige}

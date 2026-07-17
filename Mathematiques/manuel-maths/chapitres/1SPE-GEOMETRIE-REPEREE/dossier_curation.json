@@ -1,0 +1,39 @@
+{
+  "chapitre": "1SPE-GEOMETRIE-REPEREE",
+  "mode": "ex_nihilo",
+  "note": "Dossier constitue sans corpus indexe. Syntheses basees sur les connaissances du programme officiel, rapports de jurys et erreurs types classiques.",
+  "capacites": {
+    "C1": {
+      "chunks_retenus": [],
+      "brief": "Determiner une equation cartesienne d'une droite sous la forme ax+by+c=0. Trois approches d'introduction : (1) a partir de deux points (systeme), (2) a partir d'un point et d'un vecteur directeur, (3) a partir d'un point et d'un vecteur normal. Lien avec la forme y=mx+p pour b!=0. Erreurs types : (1) confusion entre les coefficients a, b, c et les coordonnees d'un point ; (2) oubli de la condition (a,b)!=(0,0) ; (3) erreur de signe dans le passage de y=mx+p a ax+by+c=0 ; (4) confusion entre equation cartesienne et equation reduite. Formats bac : determiner l'equation d'une droite passant par deux points, verifier qu'un point appartient a une droite.",
+      "angles_morts": ["Exercices de passage entre les differentes formes d'equation d'une droite"]
+    },
+    "C2": {
+      "chunks_retenus": [],
+      "brief": "Vecteur normal a une droite d'equation ax+by+c=0 : le vecteur (a,b) est normal a la droite, et le vecteur (-b,a) est directeur. Reciproque : si on connait un vecteur normal n(a,b) et un point A(x0,y0), l'equation est a(x-x0)+b(y-y0)=0. Erreurs types : (1) confusion entre vecteur normal et vecteur directeur ; (2) inversion des coordonnees du vecteur directeur (ecrire (a,-b) au lieu de (-b,a)) ; (3) oubli du changement de signe ; (4) ne pas reconnaitre qu'un vecteur normal et un vecteur directeur sont orthogonaux. Formats bac : passer d'un vecteur normal a l'equation, trouver une droite perpendiculaire a une droite donnee passant par un point.",
+      "angles_morts": ["Exercices de demonstration d'orthogonalite via vecteurs normaux"]
+    },
+    "C3": {
+      "chunks_retenus": [],
+      "brief": "Equation du cercle de centre Omega(a,b) et de rayon r : (x-a)^2+(y-b)^2=r^2. Identification du centre et du rayon a partir d'une equation developpee x^2+y^2+Ax+By+C=0 par mise sous forme canonique. Erreurs types : (1) oubli du carre sur le rayon (ecrire r au lieu de r^2) ; (2) erreur de signe sur les coordonnees du centre (le centre est (-A/2, -B/2) et non (A/2, B/2)) ; (3) confusion entre equation du cercle et inequation du disque ; (4) oublier de verifier que le rayon est strictement positif. Formats bac : determiner l'equation d'un cercle connaissant centre et rayon, determiner si un point est sur/dans/hors du cercle.",
+      "angles_morts": ["Exercices avec equation du cercle sous forme developpee"]
+    },
+    "C4": {
+      "chunks_retenus": [],
+      "brief": "Positions relatives : (1) droite-droite : parallelisme par colinearite des vecteurs directeurs, intersection par systeme, (2) droite-cercle : distance du centre a la droite comparee au rayon (tangence si d=r, secance si d<r, exterieur si d>r), ou substitution de l'equation de la droite dans celle du cercle et etude du discriminant. Erreurs types : (1) confusion entre parallelisme et perpendicularite ; (2) erreur dans le calcul de la distance d'un point a une droite (formule |ax0+by0+c|/sqrt(a^2+b^2)) ; (3) oubli de la valeur absolue dans la formule de distance ; (4) confusion sur l'interpretation du discriminant. Formats bac : determiner l'intersection d'une droite et d'un cercle, prouver une tangence.",
+      "angles_morts": ["Exercices combinant deux cercles (intersection de deux cercles)"]
+    },
+    "C5": {
+      "chunks_retenus": [],
+      "brief": "Problemes geometriques dans un repere orthonorme : determiner la nature d'un quadrilatere, calculer des aires, trouver le pied de la hauteur, le projete orthogonal, le symetrique d'un point par rapport a une droite. Utilisation combinee des outils C1-C4. Erreurs types : (1) oublier de preciser que le repere est orthonorme (necessaire pour la distance et l'orthogonalite) ; (2) erreur dans le calcul de l'aire d'un triangle (oubli du 1/2 ou du determinant) ; (3) confusion entre milieu et projete orthogonal ; (4) ne pas structurer la demarche en etapes. Formats bac : problemes de synthese, lieux geometriques, optimisation de distances.",
+      "angles_morts": ["Exercices de lieu geometrique"]
+    }
+  },
+  "prerequis": {
+    "R1": "Reperant dans le plan (coordonnees, milieu d'un segment, distance entre deux points)",
+    "R2": "Vecteurs : coordonnees, somme, produit par un scalaire, colinearite",
+    "R3": "Produit scalaire : formule analytique, condition d'orthogonalite",
+    "R4": "Equations du second degre : discriminant, nombre de solutions",
+    "R5": "Systemes de deux equations a deux inconnues (methode de substitution ou combinaison)"
+  }
+}

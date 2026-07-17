@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-GEOREP-CO-001", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite par A(1,3) B(5,7): pente = (7-3)/(5-1) = 1
+% m = Rational(7-3, 5-1)
+% assert m == 1
+% # y = x + 2, soit x - y + 2 = 0
+% assert 1*1 - 3 + 2 == 0
+% assert 1*5 - 7 + 2 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-001}
+
+\commentaireMarge{Calculer le coefficient directeur.}
+
+\textbf{} Le coefficient directeur est $m = \dfrac{7 - 3}{5 - 1} = \dfrac{4}{4} = 1$.
+
+L'équation réduite est $y - 3 = 1(x - 1)$, soit $y = x + 2$.
+
+L'équation cartésienne est $\boxed{x - y + 2 = 0}$.
+
+Vérification : $A$ : $1 - 3 + 2 = 0$ \checkmark. $B$ : $5 - 7 + 2 = 0$ \checkmark.
+
+\end{corrige}

@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-GEOREP-CO-032", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-032", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # D1: x + y - 2 = 0, D2: 2x - y - 1 = 0
+% # det = 1*(-1) - 2*1 = -3 != 0 => secantes
+% sol = solve([x+y-2, 2*x-y-1], [x,y])
+% assert sol == {x: 1, y: 1}
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-032}
+
+$a_1 b_2 - a_2 b_1 = 1 \times (-1) - 2 \times 1 = -3 \neq 0$ : droites sécantes.
+
+$\begin{cases} x + y = 2 \\ 2x - y = 1 \end{cases}$. Somme : $3x = 3$, $x = 1$, $y = 1$.
+
+Point d'intersection : $\boxed{(1 ; 1)}$.
+
+\end{corrige}

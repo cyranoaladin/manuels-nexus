@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-GEOREP-CO-030", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-030", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Montrer que M est sur le cercle de diametre [AB] ssi MA.MB = 0
+% # A(0,0), B(6,2), M(x,y)
+% # MA.MB = x(x-6) + y(y-2) = x^2-6x+y^2-2y
+% # Cercle de diametre [AB]: centre I(3,1), r = sqrt(9+1)=sqrt(10)
+% # (x-3)^2+(y-1)^2=10 => x^2-6x+9+y^2-2y+1=10 => x^2+y^2-6x-2y=0
+% eq1 = x**2 - 6*x + y**2 - 2*y
+% eq2 = (x-3)**2 + (y-1)**2 - 10
+% assert expand(eq1 - eq2) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-030}
+
+$\vec{MA}\begin{pmatrix} -x \\ -y \end{pmatrix}$, $\vec{MB}\begin{pmatrix} 6-x \\ 2-y \end{pmatrix}$.
+
+$\vec{MA} \cdot \vec{MB} = -x(6-x) + (-y)(2-y) = x^2 - 6x + y^2 - 2y$.
+
+$\vec{MA} \cdot \vec{MB} = 0 \iff x^2 + y^2 - 6x - 2y = 0$.
+
+En complétant : $(x-3)^2 - 9 + (y-1)^2 - 1 = 0$, soit $(x-3)^2 + (y-1)^2 = 10$.
+
+C'est le cercle de centre $I(3 ; 1)$ (milieu de $[AB]$) et de rayon $r = \sqrt{10}$, soit le cercle de diamètre $[AB]$.
+
+\end{corrige}

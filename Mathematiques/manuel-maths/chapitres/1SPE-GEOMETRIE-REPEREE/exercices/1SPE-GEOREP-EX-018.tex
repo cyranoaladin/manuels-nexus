@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-GEOREP-EX-018", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-018.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-018.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Hauteur du triangle ABC issue de A
+% # A(0,0), B(6,0), C(2,4)
+% # Vecteur BC = (-4,4), normal a la hauteur issue de A
+% # -4(x-0) + 4(y-0) = 0 => -4x + 4y = 0 => x - y = 0
+% assert -4*0 + 4*0 == 0
+% # Vecteur directeur de (BC): (4,4) ou simplifie (1,1)
+% assert (-4)*1 + 4*1 == 0  # check orthogonality n dot u
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-018}{2}{15}
+Soit le triangle $ABC$ avec $A(0 ; 0)$, $B(6 ; 0)$ et $C(2 ; 4)$. Déterminer l'équation de la hauteur issue de $A$.
+\end{exercice}

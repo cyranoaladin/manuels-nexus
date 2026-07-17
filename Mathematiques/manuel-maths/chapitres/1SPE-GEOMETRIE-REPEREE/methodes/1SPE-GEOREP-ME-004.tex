@@ -1,0 +1,58 @@
+% META: {"id": "1SPE-GEOREP-ME-004", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Étudier la position relative d'une droite et d'un cercle}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « déterminer la position relative d'une droite et d'un cercle »,
+  « montrer qu'une droite est tangente à un cercle »,
+  ou « calculer les points d'intersection d'une droite et d'un cercle ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Méthode 1 — Distance.} Calculer la distance $d$ du centre $\Omega$ du cercle à la droite $\mathcal{D}$ :
+      \[
+        d = \frac{|a x_\Omega + b y_\Omega + c|}{\sqrt{a^2 + b^2}}.
+      \]
+      Comparer $d$ et $r$ : si $d > r$ (extérieure), $d = r$ (tangente), $d < r$ (sécante).
+    \item \textbf{Méthode 2 — Substitution.} Exprimer $y$ (ou $x$) à partir de l'équation de $\mathcal{D}$ et substituer dans l'équation du cercle. On obtient une équation du second degré ; son discriminant $\Delta$ détermine le nombre de solutions.
+    \item Si sécante ou tangente, résoudre pour trouver les coordonnées des points communs.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple — Par la distance.}
+  $\mathcal{C}$ de centre $\Omega(1 ; 3)$ et de rayon $r = \sqrt{5}$. Droite $\mathcal{D} : 2x - y + 1 = 0$.
+
+  \medskip
+  \commentaireMarge{Calcul de la distance.}%
+  $d = \dfrac{|2 \times 1 - 3 + 1|}{\sqrt{4 + 1}} = \dfrac{|0|}{\sqrt{5}} = 0$.
+
+  $d = 0 < \sqrt{5} = r$ : la droite passe par le centre du cercle, elle est sécante.
+
+  \bigskip
+  \textbf{Exemple — Par substitution.}
+  $\mathcal{C} : (x - 2)^2 + (y + 1)^2 = 5$. Droite $\mathcal{D} : y = 2x - 3$.
+
+  \commentaireMarge{Substituer $y = 2x - 3$ dans l'équation du cercle.}%
+  $(x - 2)^2 + (2x - 3 + 1)^2 = 5$, soit $(x-2)^2 + (2x-2)^2 = 5$.
+
+  $x^2 - 4x + 4 + 4x^2 - 8x + 4 = 5$, soit $5x^2 - 12x + 3 = 0$.
+
+  $\Delta = 144 - 60 = 84 > 0$ : deux solutions, la droite est sécante.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Ne pas oublier la valeur absolue dans la formule de distance.
+    \item \textbf{Piège 2.} Avec la méthode de substitution, bien développer les carrés avant de simplifier.
+    \item \textbf{Piège 3.} Comparer $d$ à $r$ (le rayon), pas à $r^2$.
+  \end{itemize}
+}
+
+\verifier{%
+  Si on trouve des points d'intersection, vérifier qu'ils appartiennent à la fois à la droite et au cercle en substituant dans les deux équations.
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

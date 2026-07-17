@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-GEOREP-CO-022", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-022", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Identifier centre et rayon de (x+1)^2 + (y-4)^2 = 9
+% # Centre (-1, 4), rayon 3
+% assert (-1+1)**2 + (4-4)**2 == 0  # centre est a distance 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-022}
+
+\commentaireMarge{$(x + 1)^2 = (x - (-1))^2$.}
+
+Le centre est $\Omega(-1 ; 4)$ et le rayon est $r = \sqrt{9} = 3$.
+
+\end{corrige}

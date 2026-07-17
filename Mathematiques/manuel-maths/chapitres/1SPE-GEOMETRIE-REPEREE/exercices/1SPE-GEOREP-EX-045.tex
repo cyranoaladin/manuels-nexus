@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-GEOREP-EX-045", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-045.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-045.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Nature de ABCD: A(0,2), B(3,0), C(5,3), D(2,5)
+% # AB = (3,-2), BC = (2,3), CD = (-3,2), DA = (-2,-3)
+% # AB.BC = 6-6 = 0 => angle droit en B
+% assert 3*2 + (-2)*3 == 0
+% # |AB| = sqrt(13), |BC| = sqrt(13) => losange? Non: |AB|=|BC| mais check CD,DA
+% # |CD| = sqrt(13), |DA| = sqrt(13) => losange
+% # Angle droit => rectangle and losange => carre
+% assert 3**2 + 2**2 == 13
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-045}{2}{15}
+Soit $A(0 ; 2)$, $B(3 ; 0)$, $C(5 ; 3)$, $D(2 ; 5)$. Déterminer la nature du quadrilatère $ABCD$.
+\end{exercice}

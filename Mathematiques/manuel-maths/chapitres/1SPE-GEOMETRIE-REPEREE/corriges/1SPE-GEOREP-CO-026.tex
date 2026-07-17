@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-GEOREP-CO-026", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-026", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # x^2 + y^2 - 6x + 2y + 15 = 0
+% # A=-6, B=2, C=15
+% # r^2 = 9 + 1 - 15 = -5 < 0 : pas un cercle
+% assert 9 + 1 - 15 == -5
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-026}
+
+$A = -6$, $B = 2$, $C = 15$.
+
+$\dfrac{A^2}{4} + \dfrac{B^2}{4} - C = 9 + 1 - 15 = -5 < 0$.
+
+L'équation n'a pas de solution : elle ne représente \textbf{aucun cercle}.
+
+\end{corrige}

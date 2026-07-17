@@ -1,0 +1,89 @@
+% META: {"id": "1SPE-GEOREP-CR-010", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Équation cartésienne d'une droite}
+
+% ============================================================
+% STRATE 1 — Définitions et résultats fondamentaux
+% ============================================================
+
+\definition[1]{
+Dans le plan muni d'un repère $(O ; \vec{i}, \vec{j})$, une \textbf{équation cartésienne} d'une droite $\mathcal{D}$ est une équation de la forme
+\[
+  ax + by + c = 0
+\]
+où $a$, $b$, $c$ sont des réels avec $(a, b) \neq (0, 0)$.
+
+Un point $M(x ; y)$ appartient à $\mathcal{D}$ si et seulement si ses coordonnées vérifient cette équation.
+}
+
+\exemple{
+La droite $\mathcal{D}$ d'équation $2x - 3y + 6 = 0$.
+\begin{itemize}
+  \item Le point $A(0 ; 2)$ : $2 \times 0 - 3 \times 2 + 6 = 0$. Donc $A \in \mathcal{D}$.
+  \item Le point $B(3 ; 0)$ : $2 \times 3 - 3 \times 0 + 6 = 12 \neq 0$. Donc $B \notin \mathcal{D}$.
+  \item Le point $C(3 ; 4)$ : $2 \times 3 - 3 \times 4 + 6 = -6 + 6 = 0 $. Donc $C \in \mathcal{D}$.
+\end{itemize}
+}
+
+\propriete[1]{
+Toute droite du plan admet une équation cartésienne $ax + by + c = 0$.
+\begin{itemize}
+  \item Si $b \neq 0$, on peut écrire $y = -\dfrac{a}{b}x - \dfrac{c}{b}$, soit $y = mx + p$ (équation réduite). La droite n'est pas verticale, de coefficient directeur $m = -\dfrac{a}{b}$ et d'ordonnée à l'origine $p = -\dfrac{c}{b}$.
+  \item Si $b = 0$, l'équation devient $ax + c = 0$, soit $x = -\dfrac{c}{a}$ : la droite est verticale.
+\end{itemize}
+}
+
+\exemple{
+L'équation $3x + 2y - 6 = 0$ donne $y = -\dfrac{3}{2}x + 3$. Coefficient directeur $m = -\dfrac{3}{2}$, ordonnée à l'origine $p = 3$.
+
+L'équation $5x + 10 = 0$ donne $x = -2$ : droite verticale d'abscisse $-2$.
+}
+
+\contreexemple{
+L'équation $0x + 0y + 3 = 0$ (soit $3 = 0$) ne définit aucune droite : $(a, b) = (0, 0)$.
+}
+
+\propriete[2]{
+Pour déterminer une équation cartésienne de la droite passant par $A(x_A ; y_A)$ et $B(x_B ; y_B)$ avec $A \neq B$ :
+\begin{enumerate}
+  \item Si $x_A = x_B$, la droite est verticale : $x = x_A$.
+  \item Sinon, calculer le coefficient directeur $m = \dfrac{y_B - y_A}{x_B - x_A}$, puis $p = y_A - m x_A$. L'équation cartésienne est $mx - y + p = 0$.
+\end{enumerate}
+}
+
+\exemple{
+Droite passant par $A(1 ; 3)$ et $B(4 ; 9)$.
+
+$m = \dfrac{9 - 3}{4 - 1} = \dfrac{6}{3} = 2$. Puis $p = 3 - 2 \times 1 = 1$. Équation réduite : $y = 2x + 1$, soit $2x - y + 1 = 0$.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs fréquentes
+% ============================================================
+
+\margeAppui{
+\textbf{Pour vérifier} qu'un point appartient à une droite, on substitue ses coordonnées dans l'équation : si on obtient $0$, le point est sur la droite.
+
+\textbf{Pour trouver} des points sur une droite $ax + by + c = 0$ : choisir une coordonnée (par exemple $x = 0$) et calculer l'autre.
+}
+
+\erreurFrequente{
+\textbf{Erreur sur le signe lors du passage équation réduite $\leftrightarrow$ équation cartésienne.}
+
+Si $y = 2x - 5$, l'équation cartésienne est $2x - y - 5 = 0$ (et non $2x + y - 5 = 0$).
+Il faut passer le $y$ de l'autre côté : $2x - y - 5 = 0$.
+}
+
+\erreurFrequente{
+\textbf{Oublier le cas de la droite verticale.}
+
+La droite passant par $A(3 ; 1)$ et $B(3 ; 7)$ a pour équation $x = 3$ (et non $y = \ldots$). Elle n'a pas de coefficient directeur.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+L'équation cartésienne $ax + by + c = 0$ n'est pas unique : toute équation $\lambda a x + \lambda b y + \lambda c = 0$ avec $\lambda \neq 0$ définit la même droite. On peut toujours normaliser en imposant par exemple $a^2 + b^2 = 1$ (vecteur normal unitaire).
+}

@@ -1,0 +1,74 @@
+% META: {"id": "1SPE-GEOREP-COURS-07-FR", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "cours", "sous_type": "td_fil_rouge", "titre": "TD fil rouge — Cable et zone interdite", "temps_gabarit": 7, "capacites": ["C1", "C3", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cable de A(1,7) a B(9,1)
+% # Equation de (AB) : pente = (1-7)/(9-1) = -6/8 = -3/4
+% m = Rational(-3, 4)
+% # y - 7 = -3/4 (x - 1) => y = -3x/4 + 3/4 + 7 = -3x/4 + 31/4
+% # 3x + 4y - 31 = 0
+% assert 3*1 + 4*7 - 31 == 0
+% assert 3*9 + 4*1 - 31 == 0
+% # Zone interdite : centre Omega(5,2), rayon 3
+% # (x-5)^2 + (y-2)^2 = 9
+% # Distance de Omega a (AB) : |3*5 + 4*2 - 31|/sqrt(9+16) = |15+8-31|/5 = |-8|/5 = 8/5
+% d = Rational(8, 5)
+% assert abs(3*5 + 4*2 - 31) == 8
+% assert sqrt(9 + 16) == 5
+% # d = 8/5 = 1.6 < 3 = r : le cable traverse la zone
+% assert d < 3
+% # Intersection : substituer y = (-3x + 31)/4 dans (x-5)^2 + (y-2)^2 = 9
+% y_expr = (-3*x + 31) / 4
+% eq = (x - 5)**2 + (y_expr - 2)**2 - 9
+% eq_expanded = expand(eq)
+% sols = solve(eq_expanded, x)
+% assert len(sols) == 2
+% for s in sols:
+%     yv = (-3*s + 31)/4
+%     assert expand((s - 5)**2 + (yv - 2)**2) == 9
+% END-VERIFY
+
+\section*{Temps 7 — TD fil rouge : Le câble et la zone interdite}
+
+\textbf{Situation.} Un ingénieur cartographe travaille sur un plan quadrillé (repère orthonormé, unité : 100~m). Un câble rectiligne relie deux pylônes $A(1 ; 7)$ et $B(9 ; 1)$. Une zone circulaire interdite a pour centre $\Omega(5 ; 2)$ et pour rayon $3$.
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE A — Equation de la droite (AB)
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-GEOREP-COURS-07-FR-EX1}{2}{20}
+
+\textbf{Partie A — Équation de la droite $(AB)$ \hfill [C1]}
+
+\begin{enumerate}
+  \item Calculer les coordonnées du vecteur $\vec{AB}$.
+  \item Déterminer le coefficient directeur de la droite $(AB)$.
+  \item En déduire une équation cartésienne de $(AB)$.
+  \item Vérifier que $A$ et $B$ vérifient cette équation.
+\end{enumerate}
+
+\textbf{Partie B — Équation du cercle \hfill [C3]}
+
+\begin{enumerate}[resume]
+  \item Écrire l'équation du cercle $\mathcal{C}$ délimitant la zone interdite.
+\end{enumerate}
+
+\textbf{Partie C — Le câble traverse-t-il la zone ? \hfill [C4]}
+
+\begin{enumerate}[resume]
+  \item Calculer la distance du centre $\Omega$ à la droite $(AB)$.
+  \item Comparer cette distance au rayon $r$. Conclure.
+  \item Déterminer les coordonnées exactes des points d'intersection du câble et de la frontière de la zone.
+\end{enumerate}
+
+\textbf{Partie D — Longueur du tronçon interdit \hfill [C5]}
+
+\begin{enumerate}[resume]
+  \item Calculer la longueur exacte du tronçon de câble situé dans la zone interdite.
+  \item L'ingénieur envisage de déplacer le pylône $B$ en $B'(9 ; y')$ pour que le câble soit tangent à la zone. Déterminer la ou les valeurs possibles de $y'$.
+\end{enumerate}
+
+\end{exercice}

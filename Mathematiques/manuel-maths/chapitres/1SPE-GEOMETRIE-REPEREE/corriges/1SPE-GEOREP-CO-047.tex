@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-GEOREP-CO-047", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-047", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Orthocentre du triangle A(0,0), B(6,0), C(2,4)
+% # Hauteur issue de A: perpendiculaire a BC. BC=(−4,4), normal a la hauteur
+% # -4x + 4y = 0 => x - y = 0
+% # Hauteur issue de B: perpendiculaire a AC. AC=(2,4), normal a la hauteur
+% # 2(x-6) + 4(y-0) = 0 => 2x + 4y - 12 = 0 => x + 2y - 6 = 0
+% sol = solve([x-y, x+2*y-6], [x,y])
+% assert sol == {x: 2, y: 2}
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-047}
+
+\commentaireMarge{L'orthocentre est l'intersection de deux hauteurs.}
+
+Hauteur issue de $A$ (perpendiculaire à $(BC)$) : $\vec{BC}(-4 ; 4)$ normal, $-4x + 4y = 0$, soit $x - y = 0$.
+
+Hauteur issue de $B$ (perpendiculaire à $(AC)$) : $\vec{AC}(2 ; 4)$ normal, $2(x-6) + 4y = 0$, soit $x + 2y - 6 = 0$.
+
+$\begin{cases} x - y = 0 \\ x + 2y = 6 \end{cases}$. De la première : $x = y$. Puis $3y = 6$, $y = 2$, $x = 2$.
+
+L'orthocentre est $\boxed{H(2 ; 2)}$.
+
+\end{corrige}

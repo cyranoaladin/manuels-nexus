@@ -1,0 +1,23 @@
+% META: {"id": "1SPE-GEOREP-CO-044", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-044", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Symetrique de P(3,7) par rapport a D: x - y + 2 = 0
+% # Perpendiculaire: x + y + c = 0 passant par P: 3+7+c=0 => c=-10 => x+y-10=0
+% x, y = symbols('x y')
+% sol = solve([x-y+2, x+y-10], [x,y])
+% assert sol == {x: 4, y: 6}
+% # Symetrique: P' = 2H - P = (8-3, 12-7) = (5, 5)
+% assert 2*4 - 3 == 5
+% assert 2*6 - 7 == 5
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-044}
+
+Perpendiculaire à $\mathcal{D}$ passant par $P$ : $x + y + c = 0$. En $P$ : $10 + c = 0$, $c = -10$.
+
+$\begin{cases} x - y = -2 \\ x + y = 10 \end{cases}$. Somme : $2x = 8$, $x = 4$, $y = 6$. Donc $H(4 ; 6)$.
+
+$P' = 2H - P$ : $x_{P'} = 8 - 3 = 5$, $y_{P'} = 12 - 7 = 5$.
+
+Le symétrique est $\boxed{P'(5 ; 5)}$.
+
+\end{corrige}

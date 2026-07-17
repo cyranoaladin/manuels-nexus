@@ -1,0 +1,120 @@
+% META: {"id": "1SPE-GEOREP-EV-B-corrige", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-GEOREP-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "sources_inspiration": [], "parametres_sympy": {"A": [2, 5], "B": [6, -1], "Omega": [4, 1], "r": 3}, "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-B-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+%
+% # Exercice 1
+% m = Rational(-1-5, 6-2)
+% assert m == Rational(-3, 2)
+% assert 3*2 + 2*5 - 16 == 0
+% assert 3*6 + 2*(-1) - 16 == 0
+%
+% # Exercice 2
+% assert 3*(-2) + 2*3 == 0
+% assert 2*1 - 3*2 + 4 == 0
+% assert 3*2 + 2*(-3) == 0
+%
+% # Exercice 3
+% assert (7-4)**2 + (1-1)**2 == 9
+% assert (4-4)**2 + (4-1)**2 == 9
+%
+% # Exercice 4
+% d = abs(12+2-16)/sqrt(13)
+% assert d == 2*sqrt(13)/13
+% assert float(d) < 3
+% # Intersection: 3x+2y=16 et (x-4)^2+(y-1)^2=9
+% y_expr = (16-3*x)/2
+% eq = (x-4)**2 + (y_expr-1)**2 - 9
+% sols = solve(expand(eq), x)
+% assert len(sols) == 2
+%
+% # Exercice 5
+% # AB=(4,-6), AOmega=(2,-4)
+% aire = abs(4*(-4) - (-6)*2) // 2
+% assert aire == 2
+% # Projete: perp a D passant par Omega: 2x-3y+c=0, 8-3+c=0 => c=-5 => 2x-3y-5=0
+% sol_H = solve([3*x+2*y-16, 2*x-3*y-5], [x,y])
+% assert sol_H[x] == Rational(58,13)
+% assert sol_H[y] == Rational(17,13)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% CORRIGÉ — Évaluation B (55 min) — Géométrie repérée
+% Résolution aveugle tracée
+%---------------------------------------------------------------
+
+\textbf{Exercice 1 — Équation cartésienne (4 pts)}
+
+\textbf{1.} $\vec{AB}\begin{pmatrix} 6-2 \\ -1-5 \end{pmatrix} = \begin{pmatrix} 4 \\ -6 \end{pmatrix}$.
+
+\textbf{2.} $m = \dfrac{-6}{4} = -\dfrac{3}{2}$.
+
+\textbf{3.} $y - 5 = -\dfrac{3}{2}(x - 2)$, soit $2y - 10 = -3x + 6$, d'où $3x + 2y - 16 = 0$.
+
+\textbf{4.} $A$ : $6 + 10 - 16 = 0$ \checkmark. $B$ : $18 - 2 - 16 = 0$ \checkmark.
+
+\bigskip
+
+\textbf{Exercice 2 — Vecteur normal (4 pts)}
+
+\textbf{1.} $\vec{n}(3 ; 2)$ normal, $\vec{u}(-2 ; 3)$ directeur. $\vec{n} \cdot \vec{u} = -6 + 6 = 0$ \checkmark.
+
+\textbf{2.} $\mathcal{D}'$ : vecteur normal $(-2 ; 3)$ (directeur de $\mathcal{D}$), passant par $M(1 ; 2)$ :
+
+$-2(x-1) + 3(y-2) = 0$, soit $2x - 3y + 4 = 0$.
+
+$M$ : $2 - 6 + 4 = 0$ \checkmark.
+
+\textbf{3.} $3 \times 2 + 2 \times (-3) = 6 - 6 = 0$ \checkmark.
+
+\bigskip
+
+\textbf{Exercice 3 — Cercle (4 pts)}
+
+\textbf{1.} $(x - 4)^2 + (y - 1)^2 = 9$.
+
+\textbf{2.} $(7-4)^2 + (1-1)^2 = 9 + 0 = 9$. $P \in \mathcal{C}$.
+
+\textbf{3.} $(4-4)^2 + (4-1)^2 = 0 + 9 = 9$. $Q \in \mathcal{C}$.
+
+\textbf{4.} $x^2 - 8x + 16 + y^2 - 2y + 1 = 9$, soit $x^2 + y^2 - 8x - 2y + 8 = 0$.
+
+Retour : $(x-4)^2 - 16 + (y-1)^2 - 1 + 8 = 0$, soit $(x-4)^2 + (y-1)^2 = 9$. \checkmark.
+
+\bigskip
+
+\textbf{Exercice 4 — Position relative (4 pts)}
+
+\textbf{1.} $d = \dfrac{|12 + 2 - 16|}{\sqrt{9+4}} = \dfrac{2}{\sqrt{13}} = \dfrac{2\sqrt{13}}{13} \approx 0{,}55$.
+
+\textbf{2.} $d \approx 0{,}55 < 3 = r$ : la droite est sécante.
+
+\textbf{3.} On pose $y = \dfrac{16 - 3x}{2}$ dans $(x-4)^2 + (y-1)^2 = 9$ :
+
+$(x-4)^2 + \left(\dfrac{14-3x}{2}\right)^2 = 9$.
+
+$4(x-4)^2 + (14-3x)^2 = 36$.
+
+$4x^2 - 32x + 64 + 9x^2 - 84x + 196 = 36$, soit $13x^2 - 116x + 224 = 0$.
+
+$\Delta = 13456 - 11648 = 1808$. $\sqrt{1808} = 4\sqrt{113}$.
+
+$x = \dfrac{116 \pm 4\sqrt{113}}{26} = \dfrac{58 \pm 2\sqrt{113}}{13}$.
+
+\bigskip
+
+\textbf{Exercice 5 — Problème (4 pts)}
+
+\textbf{1.} $\vec{AB}(4 ; -6)$, $\vec{A\Omega}(2 ; -4)$.
+
+$\mathcal{A} = \dfrac{1}{2}|4 \times (-4) - (-6) \times 2| = \dfrac{1}{2}|-16 + 12| = \dfrac{4}{2} = 2$.
+
+\textbf{2.} Perpendiculaire : $2x - 3y + c = 0$. En $\Omega(4;1)$ : $8 - 3 + c = 0$, $c = -5$.
+
+$\begin{cases} 3x + 2y = 16 \\ 2x - 3y = 5 \end{cases}$. $9x + 6y = 48$ et $4x - 6y = 10$. $13x = 58$, $x = \dfrac{58}{13}$, $y = \dfrac{17}{13}$.
+
+$H\!\left(\dfrac{58}{13} ; \dfrac{17}{13}\right)$.
+
+\textbf{3.} $h = d(\Omega, (AB)) = \dfrac{2\sqrt{13}}{13}$.
+
+Vérification : $AB = \sqrt{16+36} = 2\sqrt{13}$. $\mathcal{A} = \dfrac{1}{2} \times 2\sqrt{13} \times \dfrac{2\sqrt{13}}{13} = \dfrac{1}{2} \times \dfrac{4 \times 13}{13} = 2$ \checkmark.

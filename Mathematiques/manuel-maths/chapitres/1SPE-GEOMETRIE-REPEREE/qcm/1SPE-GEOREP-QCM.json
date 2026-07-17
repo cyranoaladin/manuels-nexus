@@ -1,0 +1,186 @@
+{
+  "chapitre": "1SPE-GEOMETRIE-REPEREE",
+  "titre": "Geometrie reperee — QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "La droite passant par $A(1 ; 3)$ et $B(3 ; 7)$ a pour equation :",
+      "options": {"A": "$2x - y + 1 = 0$", "B": "$x - 2y + 5 = 0$", "C": "$2x + y - 5 = 0$", "D": "$x + 2y - 7 = 0$"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Inversion du coefficient directeur (1/2 au lieu de 2).", "renvoi": "M1, etape 1"},
+        "C": {"erreur": "Erreur de signe sur le coefficient de y.", "renvoi": "M1, etape 2"},
+        "D": {"erreur": "Confusion entre les coefficients a et b.", "renvoi": "M1, etape 2"}
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Le point $P(2 ; -1)$ appartient a la droite $3x + 2y - 4 = 0$.",
+      "options": {"A": "Vrai", "B": "Faux", "C": "On ne peut pas savoir", "D": "Seulement si le repere est orthonorme"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Erreur de calcul : $3(2) + 2(-1) - 4 = 6 - 2 - 4 = 0$.", "renvoi": "M1, etape 3"},
+        "C": {"erreur": "On peut toujours verifier en substituant les coordonnees.", "renvoi": "M1, etape 3"},
+        "D": {"erreur": "L'appartenance a une droite ne depend pas du type de repere.", "renvoi": "Cours C1"}
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "La droite d'equation $x = 5$ est :",
+      "options": {"A": "horizontale", "B": "verticale", "C": "de coefficient directeur $5$", "D": "de coefficient directeur $1/5$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Confusion : $y = 5$ est horizontale, $x = 5$ est verticale.", "renvoi": "Cours C1"},
+        "C": {"erreur": "La droite $x = 5$ n'a pas de coefficient directeur (verticale).", "renvoi": "Cours C1"},
+        "D": {"erreur": "La droite $x = 5$ n'a pas de coefficient directeur (verticale).", "renvoi": "Cours C1"}
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C2",
+      "enonce": "Un vecteur normal a la droite $4x - 3y + 2 = 0$ est :",
+      "options": {"A": "$\\vec{n}(3 ; 4)$", "B": "$\\vec{n}(4 ; -3)$", "C": "$\\vec{n}(-3 ; 4)$", "D": "$\\vec{n}(4 ; 3)$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "C'est le vecteur directeur, pas le vecteur normal.", "renvoi": "M2, etape 1"},
+        "C": {"erreur": "Inversion des signes : le vecteur normal est $(a ; b)$ et non $(-b ; a)$.", "renvoi": "M2, etape 1"},
+        "D": {"erreur": "Erreur de signe sur la deuxieme coordonnee.", "renvoi": "M2, etape 1"}
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C2",
+      "enonce": "Un vecteur directeur de la droite $2x + 5y - 1 = 0$ est :",
+      "options": {"A": "$\\vec{u}(2 ; 5)$", "B": "$\\vec{u}(-5 ; 2)$", "C": "$\\vec{u}(5 ; 2)$", "D": "$\\vec{u}(5 ; -2)$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "C'est le vecteur normal, pas le vecteur directeur.", "renvoi": "M2, etape 1"},
+        "C": {"erreur": "Oubli du signe negatif sur la premiere coordonnee.", "renvoi": "M2, etape 1"},
+        "D": {"erreur": "Le signe negatif est sur la premiere coordonnee, pas la deuxieme.", "renvoi": "M2, etape 1"}
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C2",
+      "enonce": "Les droites $D_1 : 2x - y + 3 = 0$ et $D_2 : x + 2y - 1 = 0$ sont :",
+      "options": {"A": "paralleles", "B": "confondues", "C": "perpendiculaires", "D": "secantes non perpendiculaires"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "$a_1 b_2 - a_2 b_1 = 2(2) - 1(-1) = 5 \\neq 0$, pas paralleles.", "renvoi": "Cours C4"},
+        "B": {"erreur": "Les coefficients ne sont pas proportionnels.", "renvoi": "Cours C4"},
+        "D": {"erreur": "$a_1 a_2 + b_1 b_2 = 2(1) + (-1)(2) = 0$, donc perpendiculaires.", "renvoi": "M2, propriete 3"}
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C3",
+      "enonce": "L'equation $(x - 3)^2 + (y + 1)^2 = 16$ represente un cercle de :",
+      "options": {"A": "centre $(3 ; -1)$ et rayon $16$", "B": "centre $(3 ; 1)$ et rayon $4$", "C": "centre $(3 ; -1)$ et rayon $4$", "D": "centre $(-3 ; 1)$ et rayon $4$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Le rayon est $\\sqrt{16} = 4$, pas $16$.", "renvoi": "M3, piege 2"},
+        "B": {"erreur": "Erreur de signe : $(y + 1)^2 = (y - (-1))^2$, donc le centre a pour ordonnee $-1$.", "renvoi": "M3, piege 1"},
+        "D": {"erreur": "Erreur de signe sur les deux coordonnees.", "renvoi": "M3, piege 1"}
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C3",
+      "enonce": "Le cercle de centre $(0 ; 0)$ et de rayon $3$ a pour equation :",
+      "options": {"A": "$x^2 + y^2 = 3$", "B": "$x^2 + y^2 = 9$", "C": "$(x + 3)^2 + (y + 3)^2 = 0$", "D": "$x + y = 3$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Le membre de droite est $r^2 = 9$, pas $r = 3$.", "renvoi": "M3, piege 2"},
+        "C": {"erreur": "Le centre est $(0;0)$, pas $(-3;-3)$, et le rayon ne peut pas etre $0$.", "renvoi": "Cours C3"},
+        "D": {"erreur": "C'est l'equation d'une droite, pas d'un cercle.", "renvoi": "Cours C3"}
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C3",
+      "enonce": "L'equation $x^2 + y^2 - 2x + 4y - 4 = 0$ represente :",
+      "options": {"A": "un cercle de centre $(1 ; -2)$ et de rayon $3$", "B": "un cercle de centre $(-1 ; 2)$ et de rayon $9$", "C": "un cercle de centre $(1 ; -2)$ et de rayon $9$", "D": "aucun cercle"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Erreur de signe sur le centre : c'est $(-A/2, -B/2) = (1, -2)$.", "renvoi": "M3, piege 1"},
+        "C": {"erreur": "Le rayon est $\\sqrt{1 + 4 + 4} = 3$, pas $9$.", "renvoi": "M3, piege 2"},
+        "D": {"erreur": "$r^2 = 1 + 4 + 4 = 9 > 0$, c'est bien un cercle.", "renvoi": "Cours C3"}
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C4",
+      "enonce": "La distance du point $P(1 ; 2)$ a la droite $3x + 4y - 7 = 0$ est :",
+      "options": {"A": "$4/5$", "B": "$4$", "C": "$7/5$", "D": "$0$"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Oubli de diviser par $\\sqrt{a^2+b^2}$ : le numerateur est $|3+8-7|=4$, mais il faut diviser par $\\sqrt{9+16}=5$.", "renvoi": "M4, etape 1"},
+        "C": {"erreur": "Erreur de calcul dans le numerateur : $|3+8-7|=4$ et non $7$.", "renvoi": "M4, etape 1"},
+        "D": {"erreur": "$3(1)+4(2)-7 = 4 \\neq 0$, donc $P$ n'est pas sur la droite et la distance n'est pas nulle.", "renvoi": "M4, etape 1"}
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C4",
+      "enonce": "Si la distance du centre d'un cercle de rayon $5$ a une droite est $5$, alors :",
+      "options": {"A": "la droite est secante au cercle", "B": "la droite est exterieure au cercle", "C": "la droite est tangente au cercle", "D": "on ne peut pas conclure"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "La droite est secante si $d < r$, or ici $d = r$.", "renvoi": "Cours C4, propriete 3"},
+        "B": {"erreur": "La droite est exterieure si $d > r$, or ici $d = r$.", "renvoi": "Cours C4, propriete 3"},
+        "D": {"erreur": "La comparaison $d$ vs $r$ suffit toujours a conclure.", "renvoi": "Cours C4, propriete 3"}
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C4",
+      "enonce": "Les droites $D_1 : 3x - y + 2 = 0$ et $D_2 : 6x - 2y + 4 = 0$ sont :",
+      "options": {"A": "strictement paralleles", "B": "secantes", "C": "perpendiculaires", "D": "confondues"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "$D_2 = 2 D_1$ exactement (tous les coefficients proportionnels, meme $c$), donc confondues.", "renvoi": "Cours C4, propriete 1"},
+        "B": {"erreur": "Les vecteurs normaux sont colineaires, donc pas secantes.", "renvoi": "Cours C4"},
+        "C": {"erreur": "$a_1 a_2 + b_1 b_2 = 18 + 2 = 20 \\neq 0$.", "renvoi": "Cours C2, propriete 3"}
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C5",
+      "enonce": "L'aire du triangle de sommets $A(0 ; 0)$, $B(4 ; 0)$ et $C(0 ; 6)$ est :",
+      "options": {"A": "$24$", "B": "$12$", "C": "$10$", "D": "$48$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Oubli du facteur $1/2$ dans la formule de l'aire.", "renvoi": "Cours C5, propriete 4"},
+        "C": {"erreur": "Erreur de calcul : le determinant vaut $24$, pas $20$.", "renvoi": "Cours C5, propriete 4"},
+        "D": {"erreur": "Erreur de calcul : l'aire est $|4 \\times 6|/2 = 12$, pas $48$.", "renvoi": "Cours C5"}
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C5",
+      "enonce": "Le projete orthogonal de $P$ sur une droite $D$ est :",
+      "options": {"A": "le milieu de $P$ et du pied de la perpendiculaire", "B": "le point de $D$ le plus proche de $P$", "C": "le symetrique de $P$ par rapport a $D$", "D": "l'intersection de $D$ avec l'axe des abscisses"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Le projete orthogonal EST le pied de la perpendiculaire, pas le milieu.", "renvoi": "Cours C5, propriete 2"},
+        "C": {"erreur": "Le symetrique est le point tel que le projete est le milieu de $[PP']$.", "renvoi": "Cours C5, propriete 3"},
+        "D": {"erreur": "Le projete n'a rien a voir avec l'axe des abscisses en general.", "renvoi": "Cours C5"}
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C5",
+      "enonce": "Si $ABCD$ est un parallelogramme et $AC = BD$, alors $ABCD$ est :",
+      "options": {"A": "un losange", "B": "un rectangle", "C": "un carre", "D": "un trapeze"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Un losange a ses diagonales perpendiculaires, pas necessairement egales.", "renvoi": "Cours C5, propriete 1"},
+        "C": {"erreur": "Un carre est un cas particulier (rectangle ET losange), on n'a pas assez d'information.", "renvoi": "Cours C5"},
+        "D": {"erreur": "Un parallelogramme est un cas particulier de trapeze, mais la propriete le precise en rectangle.", "renvoi": "Cours C5"}
+      }
+    }
+  ]
+}

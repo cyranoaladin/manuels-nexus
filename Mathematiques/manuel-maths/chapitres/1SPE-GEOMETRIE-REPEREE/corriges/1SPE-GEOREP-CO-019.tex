@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-GEOREP-CO-019", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-019", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite d'equation y = 2x - 1, soit 2x - y - 1 = 0
+% # Vecteur normal: (2, -1)
+% # Droite passant par P(3,4) avec vecteur normal (2,-1) ET perpendiculaire
+% # Non: droite passant par P parallele a D
+% # Parallele: 2x - y + c = 0, en P: 6 - 4 + c = 0 => c = -2
+% # 2x - y - 2 = 0
+% assert 2*3 - 4 - 2 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-019}
+
+\textbf{Question 1.} $\mathcal{D} : 2x - y - 1 = 0$. Un vecteur normal est $\vec{n}(2 ; -1)$.
+
+\textbf{Question 2.} $\mathcal{D}'$ parallèle à $\mathcal{D}$ : $2x - y + c = 0$. En $P(3 ; 4)$ : $6 - 4 + c = 0$, $c = -2$.
+
+$\boxed{\mathcal{D}' : 2x - y - 2 = 0}$.
+
+\textbf{Question 3.} $\mathcal{D}''$ perpendiculaire à $\mathcal{D}$ : le vecteur directeur de $\mathcal{D}$ est $(1 ; 2)$, qui est normal à $\mathcal{D}''$.
+
+$1(x - 3) + 2(y - 4) = 0$, soit $\boxed{x + 2y - 11 = 0}$.
+
+Vérification : $2 \times 1 + (-1) \times 2 = 0$ \checkmark.
+
+\end{corrige}

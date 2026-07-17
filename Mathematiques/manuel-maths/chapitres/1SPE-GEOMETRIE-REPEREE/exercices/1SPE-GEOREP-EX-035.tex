@@ -1,0 +1,13 @@
+% META: {"id": "1SPE-GEOREP-EX-035", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-035.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-035.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cercle (x-1)^2+(y-2)^2=5, droite y=2x
+% # Substitution: (x-1)^2+(2x-2)^2=5 => (x-1)^2+4(x-1)^2=5 => 5(x-1)^2=5 => (x-1)^2=1
+% # x=0 ou x=2
+% sol = solve([(x-1)**2+(y-2)**2-5, y-2*x], [x,y])
+% assert len(sol) == 2
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-035}{2}{15}
+Déterminer les points d'intersection du cercle $\mathcal{C} : (x-1)^2 + (y-2)^2 = 5$ et de la droite $\mathcal{D} : y = 2x$.
+\end{exercice}

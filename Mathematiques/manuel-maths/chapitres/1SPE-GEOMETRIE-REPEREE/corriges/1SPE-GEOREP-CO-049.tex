@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-GEOREP-CO-049", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-049", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Lieu des points M equidistants de A(1,0) et de la droite D: x = -1
+% # MA^2 = (x-1)^2 + y^2, d(M,D)^2 = (x+1)^2
+% # (x-1)^2 + y^2 = (x+1)^2 => x^2-2x+1+y^2 = x^2+2x+1 => y^2 = 4x
+% eq = (x-1)**2 + y**2 - (x+1)**2
+% assert expand(eq) == y**2 - 4*x
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-049}
+
+$MA^2 = (x-1)^2 + y^2$ et $d(M, \mathcal{D})^2 = (x+1)^2$.
+
+$MA = d(M, \mathcal{D}) \iff (x-1)^2 + y^2 = (x+1)^2$.
+
+$x^2 - 2x + 1 + y^2 = x^2 + 2x + 1$, soit $\boxed{y^2 = 4x}$.
+
+C'est une parabole de sommet $O$ et de foyer $A(1 ; 0)$.
+
+\end{corrige}

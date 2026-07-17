@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-GEOREP-EX-030", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-030.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-030.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Montrer que M est sur le cercle de diametre [AB] ssi MA.MB = 0
+% # A(0,0), B(6,2), M(x,y)
+% # MA.MB = x(x-6) + y(y-2) = x^2-6x+y^2-2y
+% # Cercle de diametre [AB]: centre I(3,1), r = sqrt(9+1)=sqrt(10)
+% # (x-3)^2+(y-1)^2=10 => x^2-6x+9+y^2-2y+1=10 => x^2+y^2-6x-2y=0
+% eq1 = x**2 - 6*x + y**2 - 2*y
+% eq2 = (x-3)**2 + (y-1)**2 - 10
+% assert expand(eq1 - eq2) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-030}{3}{15}
+Soit $A(0 ; 0)$ et $B(6 ; 2)$. Montrer que l'ensemble des points $M(x ; y)$ tels que $\vec{MA} \cdot \vec{MB} = 0$ est un cercle dont on précisera le centre et le rayon.
+\end{exercice}

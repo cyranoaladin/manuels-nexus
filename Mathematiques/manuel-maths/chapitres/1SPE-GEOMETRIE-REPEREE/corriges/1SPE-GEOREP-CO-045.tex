@@ -1,0 +1,23 @@
+% META: {"id": "1SPE-GEOREP-CO-045", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-045", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Nature de ABCD: A(0,2), B(3,0), C(5,3), D(2,5)
+% # AB = (3,-2), BC = (2,3), CD = (-3,2), DA = (-2,-3)
+% # AB.BC = 6-6 = 0 => angle droit en B
+% assert 3*2 + (-2)*3 == 0
+% # |AB| = sqrt(13), |BC| = sqrt(13) => losange? Non: |AB|=|BC| mais check CD,DA
+% # |CD| = sqrt(13), |DA| = sqrt(13) => losange
+% # Angle droit => rectangle and losange => carre
+% assert 3**2 + 2**2 == 13
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-045}
+
+$\vec{AB}\begin{pmatrix} 3 \\ -2 \end{pmatrix}$, $\vec{DC}\begin{pmatrix} 3 \\ -2 \end{pmatrix}$. $\vec{AB} = \vec{DC}$ : parallélogramme.
+
+$AB = \sqrt{9 + 4} = \sqrt{13}$, $BC = \sqrt{4 + 9} = \sqrt{13}$. Deux côtés consécutifs égaux : losange.
+
+$\vec{AB} \cdot \vec{BC} = 3 \times 2 + (-2) \times 3 = 0$ : angle droit en $B$, donc rectangle.
+
+$ABCD$ est à la fois un losange et un rectangle : c'est un \textbf{carré}.
+
+\end{corrige}

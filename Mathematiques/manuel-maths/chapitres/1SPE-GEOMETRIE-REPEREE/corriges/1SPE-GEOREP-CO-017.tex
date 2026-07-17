@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-GEOREP-CO-017", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-017", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Mediaire de [AB] avec A(1,3) B(5,7)
+% # Milieu I = (3, 5)
+% # Vecteur AB = (4, 4), normal a la mediatrice
+% # 4(x-3) + 4(y-5) = 0 => 4x + 4y - 32 = 0 => x + y - 8 = 0
+% assert 1*3 + 5 - 8 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-017}
+
+\commentaireMarge{La médiatrice passe par le milieu de $[AB]$ et est perpendiculaire à $(AB)$.}
+
+Milieu : $I\!\left(\dfrac{1+5}{2} ; \dfrac{3+7}{2}\right) = I(3 ; 5)$.
+
+$\vec{AB}\begin{pmatrix} 4 \\ 4 \end{pmatrix}$ est un vecteur normal à la médiatrice.
+
+Équation : $4(x - 3) + 4(y - 5) = 0$, soit $4x + 4y - 32 = 0$, ou $\boxed{x + y - 8 = 0}$.
+
+Vérification : $I(3 ; 5)$ : $3 + 5 - 8 = 0$ \checkmark.
+
+\end{corrige}

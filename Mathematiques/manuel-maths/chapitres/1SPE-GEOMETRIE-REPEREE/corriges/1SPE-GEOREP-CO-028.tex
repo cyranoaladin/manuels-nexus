@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-GEOREP-CO-028", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-028", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Determiner si P(3,1) est a l'interieur, sur, ou a l'exterieur de C: (x-1)^2+(y+2)^2=18
+% val = (3-1)**2 + (1+2)**2
+% assert val == 13
+% assert val < 18  # interieur
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-028}
+
+$(3 - 1)^2 + (1 + 2)^2 = 4 + 9 = 13$.
+
+$13 < 18 = r^2$, donc $\Omega P < r$ : le point $P$ est \textbf{à l'intérieur} du cercle.
+
+\end{corrige}

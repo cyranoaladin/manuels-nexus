@@ -1,0 +1,12 @@
+% META: {"id": "1SPE-GEOREP-EX-037", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-037.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-037.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Tangence: cercle centre (2,-1) rayon sqrt(5), droite D: x - 2y + c = 0
+% # d = |2+2+c|/sqrt(1+4) = |4+c|/sqrt(5) = sqrt(5)
+% # |4+c| = 5 => c = 1 ou c = -9
+% assert abs(4+1) == 5
+% assert abs(4-9) == 5
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-037}{2}{15}
+Déterminer les valeurs de $c$ pour que la droite $\mathcal{D} : x - 2y + c = 0$ soit tangente au cercle de centre $\Omega(2 ; -1)$ et de rayon $\sqrt{5}$.
+\end{exercice}

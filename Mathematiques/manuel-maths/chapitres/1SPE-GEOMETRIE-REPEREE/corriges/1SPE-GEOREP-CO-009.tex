@@ -1,0 +1,32 @@
+% META: {"id": "1SPE-GEOREP-CO-009", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-009", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y, k = symbols('x y k')
+% # Faisceau de droites par le point d'intersection de D1 et D2
+% # D1: x + 2y - 4 = 0, D2: 3x - y - 1 = 0
+% sol = solve([x + 2*y - 4, 3*x - y - 1], [x, y])
+% assert sol == {x: Rational(6,7), y: Rational(11,7)}
+% # Droite du faisceau passant par P(2,0)
+% # (x+2y-4) + k(3x-y-1) = 0 en (2,0): (2+0-4) + k(6-0-1) = 0
+% # -2 + 5k = 0 => k = 2/5
+% k_val = Rational(2, 5)
+% assert -2 + 5*k_val == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-009}
+
+\textbf{Question 1.} On résout le système :
+$\begin{cases} x + 2y = 4 \\ 3x - y = 1 \end{cases}$.
+
+De la deuxième : $y = 3x - 1$. En substituant : $x + 2(3x - 1) = 4$, soit $7x = 6$, $x = \dfrac{6}{7}$, $y = \dfrac{11}{7}$.
+
+Le point d'intersection est $I\!\left(\dfrac{6}{7} ; \dfrac{11}{7}\right)$.
+
+\textbf{Question 2.} Droite passant par $I$ et $P(2 ; 0)$.
+
+$m = \dfrac{0 - 11/7}{2 - 6/7} = \dfrac{-11/7}{8/7} = -\dfrac{11}{8}$.
+
+$y - 0 = -\dfrac{11}{8}(x - 2)$, soit $11x + 8y - 22 = 0$.
+
+Vérification : $I$ : $11 \times \dfrac{6}{7} + 8 \times \dfrac{11}{7} - 22 = \dfrac{66 + 88}{7} - 22 = \dfrac{154}{7} - 22 = 22 - 22 = 0$ \checkmark.
+
+\end{corrige}

@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-GEOREP-CO-027", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-027", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cercle passant par A(0,0), B(4,0), C(0,6)
+% # Forme x^2+y^2+Ax+By+C=0. C passe par (0,0): C=0.
+% # Par (4,0): 16+4A=0 => A=-4
+% # Par (0,6): 36+6B=0 => B=-6
+% # Centre: (2,3), rayon = sqrt(4+9) = sqrt(13)
+% assert 4**2 + (-4)*4 == 0
+% assert 6**2 + (-6)*6 == 0
+% assert 4 + 9 == 13
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-027}
+
+\commentaireMarge{On pose $x^2 + y^2 + Ax + By + C = 0$ et on substitue les trois points.}
+
+$A(0 ; 0)$ : $C = 0$.
+
+$B(4 ; 0)$ : $16 + 4A = 0$, soit $A = -4$.
+
+$C(0 ; 6)$ : $36 + 6B = 0$, soit $B = -6$.
+
+L'équation est $x^2 + y^2 - 4x - 6y = 0$.
+
+Centre : $\Omega(2 ; 3)$, rayon $r = \sqrt{4 + 9} = \sqrt{13}$.
+
+\end{corrige}

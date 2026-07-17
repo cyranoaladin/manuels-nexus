@@ -1,0 +1,14 @@
+% META: {"id": "1SPE-GEOREP-EX-040", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-040.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-040.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y, m = symbols('x y m')
+% # Droite y = mx passant par O(0,0) tangente a C: (x-3)^2+(y-4)^2=1
+% # d(centre, droite) = r <=> |3m-4|/sqrt(m^2+1) = 1
+% # (3m-4)^2 = m^2+1 => 9m^2-24m+16 = m^2+1 => 8m^2-24m+15=0
+% delta = 24**2 - 4*8*15
+% assert delta == 576 - 480
+% assert delta == 96
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-040}{3}{20}
+Déterminer les équations des droites passant par l'origine et tangentes au cercle $\mathcal{C} : (x-3)^2 + (y-4)^2 = 1$.
+\end{exercice}

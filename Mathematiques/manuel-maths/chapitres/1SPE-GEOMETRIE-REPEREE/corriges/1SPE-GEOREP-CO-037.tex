@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-GEOREP-CO-037", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-037", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Tangence: cercle centre (2,-1) rayon sqrt(5), droite D: x - 2y + c = 0
+% # d = |2+2+c|/sqrt(1+4) = |4+c|/sqrt(5) = sqrt(5)
+% # |4+c| = 5 => c = 1 ou c = -9
+% assert abs(4+1) == 5
+% assert abs(4-9) == 5
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-037}
+
+\commentaireMarge{Tangence $\iff$ $d(\Omega, \mathcal{D}) = r$.}
+
+$d = \dfrac{|2 - 2(-1) + c|}{\sqrt{1 + 4}} = \dfrac{|4 + c|}{\sqrt{5}}$.
+
+$d = \sqrt{5} \iff |4 + c| = 5$.
+
+$4 + c = 5$ ou $4 + c = -5$, soit $\boxed{c = 1}$ ou $\boxed{c = -9}$.
+
+\end{corrige}

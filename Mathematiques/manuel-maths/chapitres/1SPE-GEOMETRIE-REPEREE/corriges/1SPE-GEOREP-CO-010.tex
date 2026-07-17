@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-GEOREP-CO-010", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-010", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite passant par A(1,2) perpendiculaire a D: 4x - 3y + 6 = 0
+% # Vecteur normal de D: n(4,-3), qui est directeur de la perpendiculaire
+% # Vecteur normal de la perpendiculaire: (3,4) (directeur de D)
+% # 3(x-1) + 4(y-2) = 0 => 3x + 4y - 11 = 0
+% assert 3*1 + 4*2 - 11 == 0
+% # Perpendiculaires: 4*3 + (-3)*4 = 0
+% assert 4*3 + (-3)*4 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-010}
+
+\commentaireMarge{La perpendiculaire à $\mathcal{D}$ a pour vecteur directeur le vecteur normal de $\mathcal{D}$.}
+
+Un vecteur normal de $\mathcal{D}$ est $\vec{n}(4 ; -3)$. Le vecteur directeur de $\mathcal{D}$ est $\vec{u}(3 ; 4)$.
+
+La perpendiculaire a pour vecteur normal $\vec{u}(3 ; 4)$.
+
+Équation : $3(x - 1) + 4(y - 2) = 0$, soit $\boxed{3x + 4y - 11 = 0}$.
+
+Vérification : $3 \times 1 + 4 \times 2 - 11 = 3 + 8 - 11 = 0$ \checkmark.
+
+Orthogonalité : $4 \times 3 + (-3) \times 4 = 12 - 12 = 0$ \checkmark.
+
+\end{corrige}

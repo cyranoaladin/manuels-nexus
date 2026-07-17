@@ -1,0 +1,63 @@
+% META: {"id": "1SPE-GEOREP-ME-005", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "methode", "capacites_codes": ["C5"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M5}{Résoudre un problème géométrique dans un repère orthonormé}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « déterminer la nature d'un quadrilatère »,
+  « calculer l'aire d'un triangle »,
+  « trouver le projeté orthogonal d'un point sur une droite »,
+  ou « déterminer le symétrique d'un point par rapport à une droite ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Lire et organiser les données} : placer les points, noter les coordonnées.
+    \item \textbf{Identifier les outils nécessaires} parmi :
+      \begin{itemize}
+        \item Distance entre deux points, milieu d'un segment.
+        \item Équation d'une droite, vecteur directeur, vecteur normal.
+        \item Produit scalaire, orthogonalité.
+        \item Distance d'un point à une droite.
+      \end{itemize}
+    \item \textbf{Exécuter le plan} étape par étape, en justifiant chaque affirmation.
+    \item \textbf{Conclure} avec la réponse à la question posée.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple — Projeté orthogonal et symétrique.}
+  Soit $\mathcal{D} : 3x + 4y - 12 = 0$ et $P(7 ; 1)$. Déterminer le projeté orthogonal $H$ de $P$ sur $\mathcal{D}$, puis le symétrique $P'$ de $P$ par rapport à $\mathcal{D}$.
+
+  \medskip
+  \commentaireMarge{Écrire l'équation de la perpendiculaire à $\mathcal{D}$ passant par $P$.}%
+  Un vecteur normal à $\mathcal{D}$ est $\vec{n}(3 ; 4)$, qui est un vecteur directeur de $(PH)$.
+
+  La perpendiculaire passe par $P(7 ; 1)$ et a pour vecteur normal $\vec{u}(-4 ; 3)$ (vecteur directeur de $\mathcal{D}$).
+
+  Équation : $-4(x - 7) + 3(y - 1) = 0$, soit $-4x + 3y + 25 = 0$, ou $4x - 3y - 25 = 0$.
+
+  \commentaireMarge{Résoudre le système.}%
+  $\begin{cases} 3x + 4y = 12 \\ 4x - 3y = 25 \end{cases}$.
+  En multipliant : $9x + 12y = 36$ et $16x - 12y = 100$. Somme : $25x = 136$, $x = \dfrac{136}{25}$. Puis $y = \dfrac{12 - 3 \times 136/25}{4} = \dfrac{-108}{100} = -\dfrac{27}{25}$.
+
+  $H\!\left(\dfrac{136}{25} ; -\dfrac{27}{25}\right)$.
+
+  \commentaireMarge{Le symétrique : $P' = 2H - P$.}%
+  $x_{P'} = 2 \times \dfrac{136}{25} - 7 = \dfrac{272 - 175}{25} = \dfrac{97}{25}$.
+  $y_{P'} = 2 \times \left(-\dfrac{27}{25}\right) - 1 = \dfrac{-54 - 25}{25} = -\dfrac{79}{25}$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Ne pas confondre le milieu d'un segment et le projeté orthogonal sur une droite.
+    \item \textbf{Piège 2.} Oublier que le symétrique se calcule avec la formule $P' = 2H - P$, et non $P' = H - P$.
+    \item \textbf{Piège 3.} Bien vérifier que $H$ appartient à $\mathcal{D}$ à la fin du calcul.
+  \end{itemize}
+}
+
+\verifier{%
+  Vérifier que $H$ est sur $\mathcal{D}$, que $PH \perp \mathcal{D}$, et que $H$ est le milieu de $[PP']$.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

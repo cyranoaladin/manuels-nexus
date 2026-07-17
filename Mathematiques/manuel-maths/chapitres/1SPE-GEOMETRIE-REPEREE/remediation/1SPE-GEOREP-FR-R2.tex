@@ -1,0 +1,35 @@
+% META: {"id": "1SPE-GEOREP-FR-R2", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R2 : Vecteurs et coordonnées
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Vecteurs et coordonnées}
+
+\textbf{Coordonnées d'un vecteur.} $\vec{AB}\begin{pmatrix} x_B - x_A \\ y_B - y_A \end{pmatrix}$.
+
+\textbf{Colinéarité.} $\vec{u}(x ; y)$ et $\vec{v}(x' ; y')$ sont colinéaires $\iff xy' - x'y = 0$.
+
+\begin{exercice}{1SPE-GEOREP-FR-R2-EX1}{1}{5}
+\begin{enumerate}
+  \item Calculer les coordonnées de $\vec{AB}$ avec $A(1 ; 4)$ et $B(3 ; -2)$.
+  \item Les vecteurs $\vec{u}(3 ; 6)$ et $\vec{v}(1 ; 2)$ sont-ils colinéaires ?
+  \item Les vecteurs $\vec{u}(2 ; 5)$ et $\vec{v}(3 ; -1)$ sont-ils colinéaires ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert (3-1, -2-4) == (2, -6)
+% assert 3*2 - 6*1 == 0
+% assert 2*(-1) - 5*3 != 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-FR-R2-EX1}
+
+\textbf{1.} $\vec{AB}\begin{pmatrix} 3-1 \\ -2-4 \end{pmatrix} = \begin{pmatrix} 2 \\ -6 \end{pmatrix}$.
+
+\textbf{2.} $3 \times 2 - 6 \times 1 = 0$ : oui, colinéaires.
+
+\textbf{3.} $2 \times (-1) - 5 \times 3 = -17 \neq 0$ : non, pas colinéaires.
+
+\end{corrige}

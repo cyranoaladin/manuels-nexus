@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-GEOREP-CO-038", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-038", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Tangente au cercle (x-2)^2+(y-3)^2=4 au point A(2,5)
+% # Vecteur OmegaA = (0,2), normal a la tangente
+% # 0(x-2) + 2(y-5) = 0 => y - 5 = 0 => y = 5
+% assert (2-2)**2 + (5-3)**2 == 4
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-038}
+
+\commentaireMarge{La tangente en $A$ est perpendiculaire au rayon $[\Omega A]$.}
+
+Vérifions que $A$ est sur $\mathcal{C}$ : $(2-2)^2 + (5-3)^2 = 0 + 4 = 4$ \checkmark.
+
+$\vec{\Omega A}\begin{pmatrix} 0 \\ 2 \end{pmatrix}$ est normal à la tangente.
+
+Tangente : $0(x - 2) + 2(y - 5) = 0$, soit $\boxed{y = 5}$.
+
+\end{corrige}

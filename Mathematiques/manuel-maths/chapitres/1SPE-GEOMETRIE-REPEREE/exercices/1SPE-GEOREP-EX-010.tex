@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-GEOREP-EX-010", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-010.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite passant par A(1,2) perpendiculaire a D: 4x - 3y + 6 = 0
+% # Vecteur normal de D: n(4,-3), qui est directeur de la perpendiculaire
+% # Vecteur normal de la perpendiculaire: (3,4) (directeur de D)
+% # 3(x-1) + 4(y-2) = 0 => 3x + 4y - 11 = 0
+% assert 3*1 + 4*2 - 11 == 0
+% # Perpendiculaires: 4*3 + (-3)*4 = 0
+% assert 4*3 + (-3)*4 == 0
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-010}{3}{15}
+Déterminer l'équation cartésienne de la droite passant par $A(1 ; 2)$ et perpendiculaire à la droite $\mathcal{D} : 4x - 3y + 6 = 0$.
+\end{exercice}

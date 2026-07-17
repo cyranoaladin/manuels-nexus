@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-GEOREP-CO-007", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-007", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite par A(1,-2) parallele a D: 3x + y - 5 = 0
+% # Meme vecteur directeur => meme a,b => 3x + y + c = 0
+% # 3*1 + (-2) + c = 0 => c = -1
+% assert 3*1 + (-2) - 1 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-007}
+
+\commentaireMarge{Deux droites parallèles ont le même vecteur directeur, donc les mêmes coefficients $a$ et $b$.}
+
+La droite cherchée a pour équation $3x + y + c = 0$.
+
+$A(1 ; -2)$ est sur cette droite : $3 \times 1 + (-2) + c = 0$, soit $c = -1$.
+
+L'équation est $\boxed{3x + y - 1 = 0}$.
+
+\end{corrige}

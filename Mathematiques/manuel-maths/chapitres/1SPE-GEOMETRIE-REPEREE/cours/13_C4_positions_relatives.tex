@@ -1,0 +1,91 @@
+% META: {"id": "1SPE-GEOREP-CR-013", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+
+\section{Positions relatives de droites et de cercles}
+
+% ============================================================
+% STRATE 1 — Résultats fondamentaux
+% ============================================================
+
+\subsection{Positions relatives de deux droites}
+
+\propriete[1]{
+Soient $\mathcal{D}_1 : a_1 x + b_1 y + c_1 = 0$ et $\mathcal{D}_2 : a_2 x + b_2 y + c_2 = 0$ deux droites.
+\begin{itemize}
+  \item $\mathcal{D}_1$ et $\mathcal{D}_2$ sont \textbf{parallèles} $\iff$ $a_1 b_2 - a_2 b_1 = 0$ (vecteurs directeurs colinéaires).
+  \item $\mathcal{D}_1$ et $\mathcal{D}_2$ sont \textbf{sécantes} $\iff$ $a_1 b_2 - a_2 b_1 \neq 0$.
+  \item Si elles sont sécantes, le point d'intersection s'obtient en résolvant le système $\begin{cases} a_1 x + b_1 y + c_1 = 0 \\ a_2 x + b_2 y + c_2 = 0 \end{cases}$.
+  \item $\mathcal{D}_1$ et $\mathcal{D}_2$ sont \textbf{confondues} $\iff$ il existe $\lambda \neq 0$ tel que $a_2 = \lambda a_1$, $b_2 = \lambda b_1$ et $c_2 = \lambda c_1$.
+\end{itemize}
+}
+
+\exemple{
+$\mathcal{D}_1 : 2x + 3y - 1 = 0$ et $\mathcal{D}_2 : 4x + 6y + 5 = 0$.
+
+$a_1 b_2 - a_2 b_1 = 2 \times 6 - 4 \times 3 = 12 - 12 = 0$ : droites parallèles.
+
+$\mathcal{D}_2$ s'écrit aussi $2(2x + 3y) + 5 = 0$. Si elles étaient confondues, on aurait $c_2 = 2 c_1 = -2$, or $c_2 = 5 \neq -2$. Elles sont donc strictement parallèles (non confondues).
+}
+
+\exemple{
+$\mathcal{D}_1 : x - 2y + 3 = 0$ et $\mathcal{D}_2 : 3x + y - 5 = 0$.
+
+$a_1 b_2 - a_2 b_1 = 1 \times 1 - 3 \times (-2) = 1 + 6 = 7 \neq 0$ : droites sécantes.
+
+Système : $\begin{cases} x - 2y = -3 \\ 3x + y = 5 \end{cases}$. De la première : $x = 2y - 3$. En substituant : $3(2y - 3) + y = 5$, soit $7y = 14$, $y = 2$, $x = 1$.
+
+Point d'intersection : $(1 ; 2)$.
+}
+
+\subsection{Distance d'un point à une droite}
+
+\propriete[2]{
+Dans un repère orthonormé, la distance du point $M_0(x_0 ; y_0)$ à la droite $\mathcal{D} : ax + by + c = 0$ est :
+\[
+  d(M_0, \mathcal{D}) = \frac{|a x_0 + b y_0 + c|}{\sqrt{a^2 + b^2}}.
+\]
+}
+
+\exemple{
+Distance du point $P(1 ; 3)$ à la droite $\mathcal{D} : 3x - 4y + 2 = 0$.
+
+$d = \dfrac{|3 \times 1 - 4 \times 3 + 2|}{\sqrt{9 + 16}} = \dfrac{|3 - 12 + 2|}{5} = \dfrac{|-7|}{5} = \dfrac{7}{5}$.
+}
+
+\subsection{Positions relatives d'une droite et d'un cercle}
+
+\propriete[3]{
+Soit $\mathcal{C}$ un cercle de centre $\Omega$ et de rayon $r$, et $\mathcal{D}$ une droite. On note $d = d(\Omega, \mathcal{D})$ la distance du centre à la droite.
+\begin{itemize}
+  \item Si $d > r$ : $\mathcal{D}$ et $\mathcal{C}$ n'ont \textbf{aucun point commun} (la droite est extérieure au cercle).
+  \item Si $d = r$ : $\mathcal{D}$ et $\mathcal{C}$ ont \textbf{un seul point commun} (la droite est tangente au cercle).
+  \item Si $d < r$ : $\mathcal{D}$ et $\mathcal{C}$ ont \textbf{deux points communs} (la droite est sécante au cercle).
+\end{itemize}
+}
+
+\exemple{
+$\mathcal{C}$ de centre $\Omega(2 ; 1)$ et de rayon $r = 5$. Droite $\mathcal{D} : 3x + 4y - 1 = 0$.
+
+$d = \dfrac{|3 \times 2 + 4 \times 1 - 1|}{\sqrt{9 + 16}} = \dfrac{|6 + 4 - 1|}{5} = \dfrac{9}{5} = 1{,}8$.
+
+$d = 1{,}8 < 5 = r$ : la droite est sécante au cercle (deux points d'intersection).
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs fréquentes
+% ============================================================
+
+\margeAppui{
+\textbf{Méthode alternative} pour l'intersection droite-cercle : substituer l'expression de $y$ (tirée de l'équation de la droite) dans l'équation du cercle. On obtient une équation du second degré en $x$. Le discriminant détermine le nombre de solutions.
+}
+
+\erreurFrequente{
+\textbf{Oubli de la valeur absolue} dans la formule de distance : $|ax_0 + by_0 + c|$ et non $ax_0 + by_0 + c$. La distance est toujours positive.
+}
+
+\erreurFrequente{
+\textbf{Erreur dans $\sqrt{a^2 + b^2}$} : le dénominateur utilise les coefficients $a$ et $b$ de l'équation de la droite, pas les coordonnées du point.
+}
+
+\erreurFrequente{
+\textbf{Confusion tangente/sécante.} Une droite tangente touche le cercle en un seul point ($d = r$), une droite sécante coupe le cercle en deux points ($d < r$).
+}

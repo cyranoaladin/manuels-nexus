@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-GEOREP-EX-009", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-009.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y, k = symbols('x y k')
+% # Faisceau de droites par le point d'intersection de D1 et D2
+% # D1: x + 2y - 4 = 0, D2: 3x - y - 1 = 0
+% sol = solve([x + 2*y - 4, 3*x - y - 1], [x, y])
+% assert sol == {x: Rational(6,7), y: Rational(11,7)}
+% # Droite du faisceau passant par P(2,0)
+% # (x+2y-4) + k(3x-y-1) = 0 en (2,0): (2+0-4) + k(6-0-1) = 0
+% # -2 + 5k = 0 => k = 2/5
+% k_val = Rational(2, 5)
+% assert -2 + 5*k_val == 0
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-009}{3}{15}
+Soient les droites $\mathcal{D}_1 : x + 2y - 4 = 0$ et $\mathcal{D}_2 : 3x - y - 1 = 0$.
+\begin{enumerate}
+  \item Déterminer le point d'intersection $I$ de $\mathcal{D}_1$ et $\mathcal{D}_2$.
+  \item Déterminer l'équation de la droite passant par $I$ et par $P(2 ; 0)$.
+\end{enumerate}
+\end{exercice}

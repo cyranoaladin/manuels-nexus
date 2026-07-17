@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-GEOREP-CO-003", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-003", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite par A(0,4) de vecteur directeur u(3,2)
+% # Vecteur normal n(2,-3), equation: 2(x-0) - 3(y-4) = 0 => 2x - 3y + 12 = 0
+% assert 2*0 - 3*4 + 12 == 0
+% # Verification avec un autre point: x=3, y = (2*3+12)/3 = 6
+% assert 2*3 - 3*6 + 12 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-003}
+
+\commentaireMarge{Si $\vec{u}(3 ; 2)$ est directeur, alors $\vec{n}(2 ; -3)$ est normal.}
+
+\textbf{} Le vecteur directeur est $\vec{u}\begin{pmatrix} 3 \\ 2 \end{pmatrix}$, donc un vecteur normal est $\vec{n}\begin{pmatrix} 2 \\ -3 \end{pmatrix}$.
+
+L'équation est $2(x - 0) - 3(y - 4) = 0$, soit $\boxed{2x - 3y + 12 = 0}$.
+
+Vérification : $A(0 ; 4)$ : $2 \times 0 - 3 \times 4 + 12 = 0$ \checkmark.
+
+\end{corrige}

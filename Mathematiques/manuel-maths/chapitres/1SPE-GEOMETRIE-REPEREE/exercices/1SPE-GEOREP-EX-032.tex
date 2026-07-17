@@ -1,0 +1,12 @@
+% META: {"id": "1SPE-GEOREP-EX-032", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-032.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-032.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # D1: x + y - 2 = 0, D2: 2x - y - 1 = 0
+% # det = 1*(-1) - 2*1 = -3 != 0 => secantes
+% sol = solve([x+y-2, 2*x-y-1], [x,y])
+% assert sol == {x: 1, y: 1}
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-032}{1}{12}
+Déterminer le point d'intersection des droites $\mathcal{D}_1 : x + y - 2 = 0$ et $\mathcal{D}_2 : 2x - y - 1 = 0$.
+\end{exercice}

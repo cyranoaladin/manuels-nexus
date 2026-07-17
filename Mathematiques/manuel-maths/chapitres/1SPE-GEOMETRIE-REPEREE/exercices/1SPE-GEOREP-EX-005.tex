@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-GEOREP-EX-005", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-005.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite par A(-2,3) et B(4,-1): m = (-1-3)/(4-(-2)) = -4/6 = -2/3
+% m = Rational(-4, 6)
+% assert m == Rational(-2, 3)
+% # y - 3 = -2/3(x + 2) => y = -2x/3 - 4/3 + 3 = -2x/3 + 5/3
+% # 2x + 3y - 5 = 0
+% assert 2*(-2) + 3*3 - 5 == 0
+% assert 2*4 + 3*(-1) - 5 == 0
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-005}{2}{10}
+Déterminer une équation cartésienne de la droite passant par $A(-2 ; 3)$ et $B(4 ; -1)$.
+\end{exercice}

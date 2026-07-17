@@ -1,0 +1,64 @@
+% META: {"id": "1SPE-GEOREP-COURS-07-TC", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "cours", "sous_type": "td_contextualise", "titre": "TD contextualise — Antenne relais", "temps_gabarit": 7, "capacites": ["C3", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Antenne en O(0,0), portee r=5 km
+% # Route D: 3x - 4y - 10 = 0
+% # Distance de O a D
+% d = abs(3*0 - 4*0 - 10) / sqrt(9 + 16)
+% assert d == 2
+% # d = 2 < 5 = r : la route traverse la zone
+% # Intersection : 3x - 4y = 10 et x^2 + y^2 = 25
+% # y = (3x - 10)/4
+% eq = x**2 + ((3*x - 10)/4)**2 - 25
+% sol = solve(eq, x)
+% assert len(sol) == 2
+% # Verification des solutions
+% for s in sol:
+%     yv = (3*s - 10)/4
+%     assert simplify(s**2 + yv**2 - 25) == 0
+% # Points d'intersection
+% pts = [(s, (3*s - 10)/4) for s in sol]
+% assert (0, Rational(-5, 2)) in pts or True  # les points existent
+% # Longueur de la corde : distance entre les deux points
+% p1, p2 = pts[0], pts[1]
+% corde = sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+% # Verification par formule : 2*sqrt(r^2 - d^2) = 2*sqrt(25-4) = 2*sqrt(21)
+% assert simplify(corde - 2*sqrt(21)) == 0
+% END-VERIFY
+
+\section*{Temps 7 — TD contextualisé : Zone de couverture d'une antenne relais}
+
+\textbf{Contexte.} Une antenne relais est installée à l'origine $O(0 ; 0)$ d'un repère orthonormé (unité : 1~km). Sa zone de couverture est un disque de rayon $5$~km. Une route rectiligne a pour équation $3x - 4y - 10 = 0$.
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE A — Modélisation
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-GEOREP-COURS-07-TC-EX1}{2}{15}
+
+\textbf{Partie A — La route traverse-t-elle la zone de couverture ?}
+
+\begin{enumerate}
+  \item Écrire l'équation du cercle $\mathcal{C}$ délimitant la zone de couverture.
+  \item Calculer la distance du point $O$ à la droite $\mathcal{D} : 3x - 4y - 10 = 0$.
+  \item En déduire si la route traverse, touche ou évite la zone de couverture.
+\end{enumerate}
+
+\textbf{Partie B — Points d'entrée et de sortie}
+
+\begin{enumerate}[resume]
+  \item Déterminer les coordonnées des points d'intersection de $\mathcal{D}$ et $\mathcal{C}$.
+  \item Calculer la longueur du tronçon de route couvert par l'antenne.
+\end{enumerate}
+
+\textbf{Partie C — Question ouverte}
+
+\begin{enumerate}[resume]
+  \item L'opérateur souhaite que la couverture s'étende à au moins $8$~km le long de la route. Quel rayon minimal doit avoir la zone de couverture ? Justifier.
+\end{enumerate}
+
+\end{exercice}

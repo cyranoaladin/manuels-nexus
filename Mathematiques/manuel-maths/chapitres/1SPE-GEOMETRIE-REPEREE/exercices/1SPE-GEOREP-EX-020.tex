@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-GEOREP-EX-020", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-020.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-020.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Montrer que le triangle est rectangle
+% # A(1,2), B(4,6), C(8,3)
+% # AB = (3,4), AC = (7,1)
+% # AB.AC = 21 + 4 = 25 != 0
+% # AB = (3,4), BC = (4,-3)
+% # AB.BC = 12 - 12 = 0 => angle droit en B
+% assert 3*4 + 4*(-3) == 0
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-020}{3}{15}
+Soit $A(1 ; 2)$, $B(4 ; 6)$, $C(8 ; 3)$. Montrer que le triangle $ABC$ est rectangle et préciser en quel sommet.
+\end{exercice}

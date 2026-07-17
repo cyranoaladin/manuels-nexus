@@ -1,0 +1,61 @@
+% META: {"id": "1SPE-GEOREP-RE-C1", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C1
+% Équation cartésienne d'une droite
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-GEOREP-RE-C1-EX1}{1}{8}
+Déterminer une équation cartésienne de la droite passant par $A(2 ; 1)$ et $B(6 ; 3)$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # m = (3-1)/(6-2) = 1/2
+% assert Rational(2, 4) == Rational(1, 2)
+% # y = x/2, soit x - 2y = 0. Hmm: y - 1 = 1/2(x-2), y = x/2. x - 2y = 0.
+% assert 1*2 - 2*1 == 0
+% assert 1*6 - 2*3 == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C1-EX1}
+
+\commentaireMarge{Coefficient directeur : $m = \dfrac{y_B - y_A}{x_B - x_A}$.}
+
+$m = \dfrac{3 - 1}{6 - 2} = \dfrac{1}{2}$.
+
+$y - 1 = \dfrac{1}{2}(x - 2)$, soit $y = \dfrac{x}{2}$, d'où $x - 2y = 0$.
+
+Vérification : $A$ : $2 - 2 = 0$ \checkmark. $B$ : $6 - 6 = 0$ \checkmark.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C1-EX2}{1}{8}
+Le point $M(4 ; -3)$ appartient-il à la droite $\mathcal{D} : 2x + 3y + 1 = 0$ ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 2*4 + 3*(-3) + 1 == 0
+% END-VERIFY
+
+\coupDePouce{1}{Substitue les coordonnées de $M$ dans $2x + 3y + 1$ et vérifie si tu obtiens $0$.}
+
+\begin{corrige}{1SPE-GEOREP-RE-C1-EX2}
+
+$2 \times 4 + 3 \times (-3) + 1 = 8 - 9 + 1 = 0$. Donc $M \in \mathcal{D}$.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C1-EX3}{1}{10}
+Déterminer l'équation cartésienne de la droite verticale passant par $A(-3 ; 7)$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert True  # x = -3
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C1-EX3}
+
+Une droite verticale a pour équation $x = x_A$, soit $x = -3$, ou $x + 3 = 0$.
+
+\end{corrige}

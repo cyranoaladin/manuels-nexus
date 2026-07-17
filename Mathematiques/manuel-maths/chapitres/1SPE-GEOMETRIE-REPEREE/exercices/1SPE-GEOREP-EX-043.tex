@@ -1,0 +1,14 @@
+% META: {"id": "1SPE-GEOREP-EX-043", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-043.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-043.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Projete orthogonal de P(4,5) sur D: 3x + 4y - 6 = 0
+% # Perpendiculaire: 4x - 3y + c = 0 passant par P: 16-15+c=0 => c=-1
+% # Systeme: 3x+4y=6, 4x-3y=1
+% sol = solve([3*x+4*y-6, 4*x-3*y-1], [x,y])
+% assert sol[x] == Rational(22,25)
+% assert sol[y] == Rational(21,25)
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-043}{2}{15}
+Déterminer le projeté orthogonal du point $P(4 ; 5)$ sur la droite $\mathcal{D} : 3x + 4y - 6 = 0$.
+\end{exercice}

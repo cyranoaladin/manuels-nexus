@@ -1,0 +1,57 @@
+% META: {"id": "1SPE-GEOREP-RE-C4", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C4
+% Positions relatives
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-GEOREP-RE-C4-EX1}{1}{8}
+Calculer la distance du point $P(3 ; 4)$ à la droite $\mathcal{D} : 4x - 3y + 2 = 0$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% d = abs(4*3 - 3*4 + 2) / sqrt(16+9)
+% assert d == Rational(2, 5)
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C4-EX1}
+
+$d = \dfrac{|12 - 12 + 2|}{\sqrt{16+9}} = \dfrac{2}{5}$.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C4-EX2}{1}{10}
+Le cercle de centre $O(0 ; 0)$ et de rayon $3$ et la droite $\mathcal{D} : 4x + 3y - 15 = 0$ ont-ils des points communs ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% d = abs(4*0 + 3*0 - 15) / sqrt(16+9)
+% assert d == 3
+% # d = r => tangente
+% END-VERIFY
+
+\coupDePouce{1}{Calcule $d(O, \mathcal{D})$ et compare avec $r = 3$.}
+
+\begin{corrige}{1SPE-GEOREP-RE-C4-EX2}
+
+$d = \dfrac{|0 + 0 - 15|}{5} = 3 = r$. La droite est tangente au cercle : un seul point commun.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C4-EX3}{1}{10}
+Les droites $\mathcal{D}_1 : x + 3y - 2 = 0$ et $\mathcal{D}_2 : 2x + 6y + 1 = 0$ sont-elles parallèles ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 1*6 - 2*3 == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C4-EX3}
+
+$a_1 b_2 - a_2 b_1 = 1 \times 6 - 2 \times 3 = 0$. Les droites sont parallèles.
+
+$\dfrac{c_2}{c_1} = \dfrac{1}{-2} \neq 2$ : strictement parallèles (non confondues).
+
+\end{corrige}

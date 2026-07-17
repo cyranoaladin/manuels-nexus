@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-GEOREP-CO-011", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-011", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # D: 5x - 3y + 7 = 0
+% # Vecteur normal: (5, -3), vecteur directeur: (3, 5)
+% assert 5*3 + (-3)*5 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-011}
+
+\commentaireMarge{Pour $ax + by + c = 0$, le vecteur normal est $(a ; b)$ et le vecteur directeur est $(-b ; a)$.}
+
+Un vecteur normal est $\vec{n}\begin{pmatrix} 5 \\ -3 \end{pmatrix}$.
+
+Un vecteur directeur est $\vec{u}\begin{pmatrix} 3 \\ 5 \end{pmatrix}$.
+
+Vérification : $\vec{n} \cdot \vec{u} = 5 \times 3 + (-3) \times 5 = 0$ \checkmark.
+
+\end{corrige}

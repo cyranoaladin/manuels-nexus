@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-GEOREP-CO-043", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-043", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Projete orthogonal de P(4,5) sur D: 3x + 4y - 6 = 0
+% # Perpendiculaire: 4x - 3y + c = 0 passant par P: 16-15+c=0 => c=-1
+% # Systeme: 3x+4y=6, 4x-3y=1
+% sol = solve([3*x+4*y-6, 4*x-3*y-1], [x,y])
+% assert sol[x] == Rational(22,25)
+% assert sol[y] == Rational(21,25)
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-043}
+
+\commentaireMarge{La perpendiculaire à $\mathcal{D}$ passant par $P$ a pour vecteur normal le vecteur directeur de $\mathcal{D}$.}
+
+Perpendiculaire : $4x - 3y + c = 0$. En $P$ : $16 - 15 + c = 0$, $c = -1$.
+
+$\begin{cases} 3x + 4y = 6 \\ 4x - 3y = 1 \end{cases}$. On multiplie : $9x + 12y = 18$ et $16x - 12y = 4$.
+
+$25x = 22$, $x = \dfrac{22}{25}$. $y = \dfrac{6 - 3 \times 22/25}{4} = \dfrac{84/25}{4} = \dfrac{21}{25}$.
+
+$H\!\left(\dfrac{22}{25} ; \dfrac{21}{25}\right)$.
+
+\end{corrige}

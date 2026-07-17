@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-GEOREP-CO-041", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-041", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Aire du triangle A(1,1), B(5,1), C(3,5)
+% # AB = (4,0), AC = (2,4)
+% # Aire = |4*4 - 0*2|/2 = 16/2 = 8
+% assert abs(4*4 - 0*2) == 16
+% assert 16//2 == 8
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-041}
+
+$\vec{AB}\begin{pmatrix} 4 \\ 0 \end{pmatrix}$, $\vec{AC}\begin{pmatrix} 2 \\ 4 \end{pmatrix}$.
+
+$\mathcal{A} = \dfrac{1}{2}|4 \times 4 - 0 \times 2| = \dfrac{1}{2} \times 16 = \boxed{8}$ unités d'aire.
+
+\end{corrige}

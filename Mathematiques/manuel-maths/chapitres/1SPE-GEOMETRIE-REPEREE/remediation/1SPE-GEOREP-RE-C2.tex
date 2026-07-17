@@ -1,0 +1,52 @@
+% META: {"id": "1SPE-GEOREP-RE-C2", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C2
+% Vecteur normal à une droite
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-GEOREP-RE-C2-EX1}{1}{8}
+Donner un vecteur normal et un vecteur directeur de $\mathcal{D} : 7x - 2y + 3 = 0$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 7*2 + (-2)*7 == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C2-EX1}
+
+Normal : $\vec{n}(7 ; -2)$. Directeur : $\vec{u}(2 ; 7)$.
+
+Vérification : $7 \times 2 + (-2) \times 7 = 0$ \checkmark.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C2-EX2}{1}{10}
+Déterminer l'équation de la droite de vecteur normal $\vec{n}(3 ; -5)$ passant par $A(2 ; 1)$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 3*2 + (-5)*1 - 1 == 0
+% END-VERIFY
+
+\coupDePouce{1}{Utilise $a(x - x_0) + b(y - y_0) = 0$ avec $(a ; b) = (3 ; -5)$.}
+
+\begin{corrige}{1SPE-GEOREP-RE-C2-EX2}
+
+$3(x - 2) - 5(y - 1) = 0$, soit $3x - 5y - 1 = 0$.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C2-EX3}{1}{10}
+Les droites $\mathcal{D}_1 : 4x + y - 3 = 0$ et $\mathcal{D}_2 : x - 4y + 1 = 0$ sont-elles perpendiculaires ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 4*1 + 1*(-4) == 0
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C2-EX3}
+
+$a_1 a_2 + b_1 b_2 = 4 \times 1 + 1 \times (-4) = 0$. Donc $\mathcal{D}_1 \perp \mathcal{D}_2$.
+
+\end{corrige}

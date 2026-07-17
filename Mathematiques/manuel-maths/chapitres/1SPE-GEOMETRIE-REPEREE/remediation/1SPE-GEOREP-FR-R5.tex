@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-GEOREP-FR-R5", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R5 : Systèmes d'équations
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Systèmes linéaires}
+
+\textbf{Substitution :} exprimer une inconnue en fonction de l'autre, puis remplacer.
+
+\textbf{Combinaison :} multiplier les équations pour éliminer une inconnue par addition.
+
+\begin{exercice}{1SPE-GEOREP-FR-R5-EX1}{1}{8}
+Résoudre les systèmes suivants.
+\begin{enumerate}
+  \item $\begin{cases} x + y = 7 \\ 2x - y = 5 \end{cases}$
+  \item $\begin{cases} 3x + 2y = 12 \\ x - y = 1 \end{cases}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% sol1 = solve([x+y-7, 2*x-y-5], [x,y])
+% assert sol1 == {x: 4, y: 3}
+% sol2 = solve([3*x+2*y-12, x-y-1], [x,y])
+% assert sol2 == {x: Rational(14,5), y: Rational(9,5)}
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-FR-R5-EX1}
+
+\textbf{1.} Somme des deux équations : $3x = 12$, $x = 4$. Puis $y = 7 - 4 = 3$. Solution : $(4 ; 3)$.
+
+\textbf{2.} De la deuxième : $x = y + 1$. En substituant : $3(y+1) + 2y = 12$, $5y = 9$, $y = \dfrac{9}{5}$, $x = \dfrac{14}{5}$.
+
+\end{corrige}

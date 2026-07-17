@@ -1,0 +1,63 @@
+% META: {"id": "1SPE-GEOREP-RE-C5", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C5
+% Problèmes dans un repère orthonormé
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-GEOREP-RE-C5-EX1}{1}{10}
+Calculer l'aire du triangle $ABC$ avec $A(0 ; 0)$, $B(3 ; 0)$ et $C(1 ; 4)$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert abs(3*4 - 0*1) // 2 == 6
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C5-EX1}
+
+$\vec{AB}(3 ; 0)$, $\vec{AC}(1 ; 4)$.
+
+$\mathcal{A} = \dfrac{1}{2}|3 \times 4 - 0 \times 1| = \dfrac{12}{2} = 6$.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C5-EX2}{1}{10}
+Montrer que le quadrilatère $ABCD$ avec $A(0 ; 0)$, $B(2 ; 3)$, $C(5 ; 5)$, $D(3 ; 2)$ est un parallélogramme.
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert (2-0, 3-0) == (5-3, 5-2)
+% END-VERIFY
+
+\coupDePouce{1}{Vérifie que $\vec{AB} = \vec{DC}$.}
+
+\begin{corrige}{1SPE-GEOREP-RE-C5-EX2}
+
+$\vec{AB}(2 ; 3)$, $\vec{DC}(5-3 ; 5-2) = (2 ; 3)$.
+
+$\vec{AB} = \vec{DC}$, donc $ABCD$ est un parallélogramme.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C5-EX3}{1}{12}
+Déterminer le projeté orthogonal de $P(5 ; 3)$ sur la droite $\mathcal{D} : x + y - 2 = 0$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% sol = solve([x+y-2, x-y-(5-3)], [x,y])
+% # Perpendiculaire: x - y + c = 0 passant par P: 5-3+c=0 => c=-2 => x-y-2=0
+% sol = solve([x+y-2, x-y-2], [x,y])
+% assert sol == {x: 2, y: 0}
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C5-EX3}
+
+Perpendiculaire à $\mathcal{D}$ passant par $P$ : $x - y + c = 0$. En $P$ : $5 - 3 + c = 0$, $c = -2$.
+
+$\begin{cases} x + y = 2 \\ x - y = 2 \end{cases}$. $2x = 4$, $x = 2$, $y = 0$.
+
+Le projeté est $H(2 ; 0)$.
+
+\end{corrige}

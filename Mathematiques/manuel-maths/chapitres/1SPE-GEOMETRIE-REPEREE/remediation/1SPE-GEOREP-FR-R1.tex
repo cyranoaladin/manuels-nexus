@@ -1,0 +1,60 @@
+% META: {"id": "1SPE-GEOREP-FR-R1", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R1 : Repérage dans le plan
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Repérage dans le plan}
+
+\textbf{Coordonnées d'un point.} Dans un repère $(O ; \vec{i}, \vec{j})$, tout point $M$ est repéré par ses coordonnées $(x ; y)$.
+
+\textbf{Distance entre deux points.} $AB = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}$ (repère orthonormé).
+
+\textbf{Milieu d'un segment.} Le milieu $I$ de $[AB]$ a pour coordonnées $I\!\left(\dfrac{x_A + x_B}{2} ; \dfrac{y_A + y_B}{2}\right)$.
+
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-GEOREP-FR-R1-EX1}{1}{5}
+Calculer la distance entre les points suivants.
+\begin{enumerate}
+  \item $A(2 ; 1)$ et $B(5 ; 5)$
+  \item $C(-1 ; 3)$ et $D(2 ; -1)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import sqrt
+% assert sqrt((5-2)**2 + (5-1)**2) == 5
+% assert sqrt((2-(-1))**2 + (-1-3)**2) == 5
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-FR-R1-EX1}
+
+\textbf{1.} $AB = \sqrt{(5-2)^2 + (5-1)^2} = \sqrt{9+16} = \sqrt{25} = 5$.
+
+\textbf{2.} $CD = \sqrt{(2+1)^2 + (-1-3)^2} = \sqrt{9+16} = 5$.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-FR-R1-EX2}{1}{5}
+Déterminer les coordonnées du milieu de $[AB]$ dans chaque cas.
+\begin{enumerate}
+  \item $A(2 ; 6)$ et $B(8 ; 2)$
+  \item $A(-3 ; 1)$ et $B(5 ; 7)$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert (2+8)/2 == 5
+% assert (6+2)/2 == 4
+% assert (-3+5)/2 == 1
+% assert (1+7)/2 == 4
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-FR-R1-EX2}
+
+\textbf{1.} $I\!\left(\dfrac{2+8}{2} ; \dfrac{6+2}{2}\right) = I(5 ; 4)$.
+
+\textbf{2.} $I\!\left(\dfrac{-3+5}{2} ; \dfrac{1+7}{2}\right) = I(1 ; 4)$.
+
+\end{corrige}

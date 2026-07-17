@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-GEOREP-EX-047", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-047.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-047.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Orthocentre du triangle A(0,0), B(6,0), C(2,4)
+% # Hauteur issue de A: perpendiculaire a BC. BC=(−4,4), normal a la hauteur
+% # -4x + 4y = 0 => x - y = 0
+% # Hauteur issue de B: perpendiculaire a AC. AC=(2,4), normal a la hauteur
+% # 2(x-6) + 4(y-0) = 0 => 2x + 4y - 12 = 0 => x + 2y - 6 = 0
+% sol = solve([x-y, x+2*y-6], [x,y])
+% assert sol == {x: 2, y: 2}
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-047}{3}{20}
+Soit le triangle $ABC$ avec $A(0 ; 0)$, $B(6 ; 0)$ et $C(2 ; 4)$. Déterminer les coordonnées de l'orthocentre $H$.
+\end{exercice}

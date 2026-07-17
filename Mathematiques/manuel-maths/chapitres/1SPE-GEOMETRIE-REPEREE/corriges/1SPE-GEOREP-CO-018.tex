@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-GEOREP-CO-018", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-018", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Hauteur du triangle ABC issue de A
+% # A(0,0), B(6,0), C(2,4)
+% # Vecteur BC = (-4,4), normal a la hauteur issue de A
+% # -4(x-0) + 4(y-0) = 0 => -4x + 4y = 0 => x - y = 0
+% assert -4*0 + 4*0 == 0
+% # Vecteur directeur de (BC): (4,4) ou simplifie (1,1)
+% assert (-4)*1 + 4*1 == 0  # check orthogonality n dot u
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-018}
+
+\commentaireMarge{La hauteur issue de $A$ est perpendiculaire à $(BC)$.}
+
+$\vec{BC}\begin{pmatrix} 2 - 6 \\ 4 - 0 \end{pmatrix} = \begin{pmatrix} -4 \\ 4 \end{pmatrix}$.
+
+$\vec{BC}$ est un vecteur normal à la hauteur issue de $A$.
+
+Équation : $-4(x - 0) + 4(y - 0) = 0$, soit $-4x + 4y = 0$, ou $\boxed{x - y = 0}$.
+
+Vérification : $A(0 ; 0)$ : $0 - 0 = 0$ \checkmark.
+
+\end{corrige}

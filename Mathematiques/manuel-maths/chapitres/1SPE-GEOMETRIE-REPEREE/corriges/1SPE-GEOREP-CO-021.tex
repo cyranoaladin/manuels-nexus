@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-GEOREP-CO-021", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-021", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cercle centre (2,-3), rayon 5
+% # (x-2)^2 + (y+3)^2 = 25
+% assert (0-2)**2 + (0+3)**2 == 13  # (0,0) pas sur le cercle
+% assert (2-2)**2 + (2+3)**2 == 25  # (2,2) sur le cercle
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-021}
+
+\textbf{Question 1.} $(x - 2)^2 + (y + 3)^2 = 25$.
+
+\textbf{Question 2.} $(2 - 2)^2 + (2 + 3)^2 = 0 + 25 = 25$. Donc $A \in \mathcal{C}$.
+
+\end{corrige}

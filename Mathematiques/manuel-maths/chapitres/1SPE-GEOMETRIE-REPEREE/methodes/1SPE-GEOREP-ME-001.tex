@@ -1,0 +1,53 @@
+% META: {"id": "1SPE-GEOREP-ME-001", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Déterminer une équation cartésienne d'une droite}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « déterminer une équation cartésienne de la droite $(AB)$ »,
+  « écrire l'équation de la droite passant par $A$ et de vecteur directeur $\vec{u}$ »,
+  ou « montrer que la droite a pour équation $ax + by + c = 0$ ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'identifie les données :
+      \begin{itemize}
+        \item \textbf{Deux points} $A(x_A ; y_A)$ et $B(x_B ; y_B)$ : je calcule le coefficient directeur $m = \dfrac{y_B - y_A}{x_B - x_A}$ (si $x_A \neq x_B$).
+        \item \textbf{Un point et un vecteur directeur} $\vec{u}(-b ; a)$ : j'utilise $a(x - x_A) + b(y - y_A) = 0$ avec le vecteur normal $\vec{n}(a ; b)$.
+        \item \textbf{Un point et un vecteur normal} $\vec{n}(a ; b)$ : j'écris $a(x - x_A) + b(y - y_A) = 0$.
+      \end{itemize}
+    \item Je développe et réduis pour obtenir la forme $ax + by + c = 0$.
+    \item Je vérifie en substituant les coordonnées du ou des points connus.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple — À partir de deux points.}
+  Déterminer une équation cartésienne de la droite passant par $A(2 ; 5)$ et $B(6 ; 3)$.
+
+  \medskip
+  \commentaireMarge{Calculer le coefficient directeur.}%
+  $m = \dfrac{3 - 5}{6 - 2} = \dfrac{-2}{4} = -\dfrac{1}{2}$.
+
+  \commentaireMarge{Écrire l'équation réduite puis la forme cartésienne.}%
+  $y - 5 = -\dfrac{1}{2}(x - 2)$, soit $y = -\dfrac{1}{2}x + 6$, d'où $x + 2y - 12 = 0$.
+
+  \commentaireMarge{Vérifier avec le point $B$.}%
+  $6 + 2 \times 3 - 12 = 6 + 6 - 12 = 0$. \checkmark
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Si $x_A = x_B$, la droite est verticale : son équation est $x = x_A$ (pas de coefficient directeur).
+    \item \textbf{Piège 2.} Erreur de signe dans le passage de $y = mx + p$ à $ax + by + c = 0$ : ne pas oublier que $y = mx + p$ donne $mx - y + p = 0$.
+    \item \textbf{Piège 3.} Ne pas confondre les coordonnées du vecteur normal $(a, b)$ avec la constante $c$.
+  \end{itemize}
+}
+
+\verifier{%
+  Toujours substituer les coordonnées des points connus dans l'équation obtenue.
+  Si un point connu ne vérifie pas l'équation, il y a une erreur de calcul.
+}
+
+\sEntrainer{\refExos{M1}}
+
+\end{fichemethode}

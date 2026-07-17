@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-GEOREP-CO-034", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-034", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Cercle C: centre (0,0), rayon 5. Droite D: 3x + 4y - 15 = 0
+% d = abs(3*0 + 4*0 - 15) / sqrt(9+16)
+% assert d == 3
+% # d = 3 < 5 = r : secante
+% assert 3 < 5
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-034}
+
+$d(O, \mathcal{D}) = \dfrac{|3 \times 0 + 4 \times 0 - 15|}{\sqrt{9 + 16}} = \dfrac{15}{5} = 3$.
+
+$d = 3 < 5 = r$ : la droite est \textbf{sécante} au cercle (deux points d'intersection).
+
+\end{corrige}

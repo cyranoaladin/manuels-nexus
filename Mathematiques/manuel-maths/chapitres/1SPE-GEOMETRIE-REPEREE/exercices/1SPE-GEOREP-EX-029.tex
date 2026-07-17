@@ -1,0 +1,14 @@
+% META: {"id": "1SPE-GEOREP-EX-029", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-029.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-029.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cercle de centre (a,0) passant par A(1,2) et B(3,-2)
+% # (1-a)^2+4 = (3-a)^2+4 => (1-a)^2 = (3-a)^2
+% # 1-2a+a^2 = 9-6a+a^2 => 4a = 8 => a = 2
+% assert 4*2 == 8
+% # r^2 = (1-2)^2 + 4 = 5
+% assert (1-2)**2 + 4 == 5
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-029}{3}{15}
+Déterminer la valeur de $a$ pour que le cercle de centre $\Omega(a ; 0)$ passe par $A(1 ; 2)$ et $B(3 ; -2)$.
+\end{exercice}

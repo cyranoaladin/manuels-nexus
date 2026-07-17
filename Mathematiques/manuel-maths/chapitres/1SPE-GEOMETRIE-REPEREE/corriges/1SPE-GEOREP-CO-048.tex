@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-GEOREP-CO-048", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-048", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cercle circonscrit au triangle A(0,0), B(4,0), C(0,6)
+% # x^2+y^2+Ax+By+C=0. A: C=0. B: 16+4A=0 => A=-4. C: 36+6B=0 => B=-6
+% # Centre (2,3), rayon sqrt(4+9)=sqrt(13)
+% assert (4+9) == 13
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-048}
+
+On pose $x^2 + y^2 + Ax + By + C = 0$.
+
+$A(0;0)$ : $C = 0$. $B(4;0)$ : $16 + 4A = 0$, $A = -4$. $C(0;6)$ : $36 + 6B = 0$, $B = -6$.
+
+Équation : $x^2 + y^2 - 4x - 6y = 0$, soit $(x-2)^2 + (y-3)^2 = 13$.
+
+Centre $\Omega(2 ; 3)$, rayon $r = \sqrt{13}$.
+
+\end{corrige}

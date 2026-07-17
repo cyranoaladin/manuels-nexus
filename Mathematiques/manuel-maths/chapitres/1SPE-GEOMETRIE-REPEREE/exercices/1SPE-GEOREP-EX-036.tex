@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-GEOREP-EX-036", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-036.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-036.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Cercle centre (3,1) rayon 2. Droite D: 3x + 4y - 5 = 0
+% d = abs(3*3 + 4*1 - 5) / sqrt(9+16)
+% assert d == Rational(8,5)
+% # d = 8/5 = 1.6 < 2 = r : secante
+% assert Rational(8,5) < 2
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-036}{2}{15}
+Soit le cercle $\mathcal{C}$ de centre $\Omega(3 ; 1)$ et de rayon $2$, et la droite $\mathcal{D} : 3x + 4y - 5 = 0$.
+\begin{enumerate}
+  \item Calculer la distance de $\Omega$ à $\mathcal{D}$.
+  \item En déduire la position relative de $\mathcal{D}$ et $\mathcal{C}$.
+\end{enumerate}
+\end{exercice}

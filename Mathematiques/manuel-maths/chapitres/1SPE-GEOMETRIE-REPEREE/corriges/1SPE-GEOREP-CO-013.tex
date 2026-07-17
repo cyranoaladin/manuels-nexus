@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-GEOREP-CO-013", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-013", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # D1: 2x + 3y - 1 = 0, D2: 6x + 9y + 4 = 0
+% # Vecteurs normaux: n1(2,3), n2(6,9) = 3*n1 => colineaires => paralleles
+% assert 2*9 - 3*6 == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-013}
+
+\commentaireMarge{On compare les vecteurs normaux.}
+
+$\vec{n}_1(2 ; 3)$ et $\vec{n}_2(6 ; 9) = 3\vec{n}_1$.
+
+Les vecteurs normaux sont colinéaires, donc les droites sont \textbf{parallèles}.
+
+Elles ne sont pas confondues car $\dfrac{c_2}{c_1} = \dfrac{4}{-1} = -4 \neq 3$.
+
+\end{corrige}

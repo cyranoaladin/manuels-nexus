@@ -1,0 +1,117 @@
+% META: {"id": "1SPE-GEOREP-EV-A-corrige", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-GEOREP-EV-A", "version": "A", "capacites_codes": ["C1", "C2", "C3", "C4", "C5"], "sources_inspiration": [], "parametres_sympy": {"A": [1, 3], "B": [5, 1], "Omega": [3, -1], "r": 4}, "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/evaluations/1SPE-GEOREP-EV-A-corrige.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+%
+% # Exercice 1
+% m = Rational(1-3, 5-1)
+% assert m == Rational(-1, 2)
+% assert 1 + 2*3 - 7 == 0
+% assert 5 + 2*1 - 7 == 0
+%
+% # Exercice 2
+% assert 1*(-2) + 2*1 == 0  # n.u = 0
+% assert 2*3 - 4 - 2 == 0  # M on D'
+% assert 1*2 + 2*(-1) == 0  # perp check
+%
+% # Exercice 3
+% assert (7-3)**2 + (-1+1)**2 == 16
+% assert (3-3)**2 + (3+1)**2 == 16
+%
+% # Exercice 4
+% d = abs(3 + 2*(-1) - 7) / sqrt(5)
+% assert d == 6*sqrt(5)/5
+% assert d < 4
+% # Intersection: x + 2y = 7 et (x-3)^2+(y+1)^2=16
+% y_expr = (7-x)/2
+% eq = (x-3)**2 + (y_expr+1)**2 - 16
+% sols = solve(expand(eq), x)
+% assert len(sols) == 2
+%
+% # Exercice 5
+% assert abs(4*(-4) - (-2)*2) // 2 == 6
+% # Projete de Omega sur (AB): x+2y-7=0
+% # Perp: 2x-y+c=0, Omega(3,-1): 6+1+c=0 => c=-7 => 2x-y-7=0
+% sol_H = solve([x+2*y-7, 2*x-y-7], [x,y])
+% assert sol_H[x] == Rational(21,5)
+% assert sol_H[y] == Rational(7,5)
+% # Hauteur = distance Omega a (AB) = 6*sqrt(5)/5
+% END-VERIFY
+
+%---------------------------------------------------------------
+% CORRIGÉ — Évaluation A (55 min) — Géométrie repérée
+%---------------------------------------------------------------
+
+\textbf{Exercice 1 — Équation cartésienne (4 pts)}
+
+\textbf{1.} $\vec{AB}\begin{pmatrix} 5-1 \\ 1-3 \end{pmatrix} = \begin{pmatrix} 4 \\ -2 \end{pmatrix}$.
+
+\textbf{2.} $m = \dfrac{-2}{4} = -\dfrac{1}{2}$.
+
+\textbf{3.} $y - 3 = -\dfrac{1}{2}(x - 1)$, soit $2y - 6 = -(x-1) = -x + 1$, d'où $x + 2y - 7 = 0$.
+
+\textbf{4.} $A$ : $1 + 6 - 7 = 0$ \checkmark. $B$ : $5 + 2 - 7 = 0$ \checkmark.
+
+\bigskip
+
+\textbf{Exercice 2 — Vecteur normal (4 pts)}
+
+\textbf{1.} $\vec{n}(1 ; 2)$ est normal et $\vec{u}(-2 ; 1)$ est directeur. $\vec{n} \cdot \vec{u} = -2 + 2 = 0$ \checkmark.
+
+\textbf{2.} $\mathcal{D}'$ perpendiculaire à $\mathcal{D}$ passant par $M(3 ; 4)$ : le vecteur directeur de $\mathcal{D}$ est $(-2 ; 1)$, normal de $\mathcal{D}'$.
+
+$-2(x-3) + 1(y-4) = 0$, soit $-2x + y + 2 = 0$, ou $2x - y - 2 = 0$.
+
+$M$ : $6 - 4 - 2 = 0$ \checkmark.
+
+\textbf{3.} $a_1 a_2 + b_1 b_2 = 1 \times 2 + 2 \times (-1) = 0$ : perpendiculaires \checkmark.
+
+\bigskip
+
+\textbf{Exercice 3 — Cercle (4 pts)}
+
+\textbf{1.} $(x - 3)^2 + (y + 1)^2 = 16$.
+
+\textbf{2.} $(7-3)^2 + (-1+1)^2 = 16 + 0 = 16 = r^2$. $P$ est sur $\mathcal{C}$.
+
+\textbf{3.} $(3-3)^2 + (3+1)^2 = 0 + 16 = 16 = r^2$. $Q$ est sur $\mathcal{C}$.
+
+\textbf{4.} Développement : $x^2 - 6x + 9 + y^2 + 2y + 1 = 16$, soit $x^2 + y^2 - 6x + 2y - 6 = 0$.
+
+Retour : $(x^2-6x) = (x-3)^2 - 9$, $(y^2+2y) = (y+1)^2 - 1$. $(x-3)^2 + (y+1)^2 = 16$. \checkmark.
+
+\bigskip
+
+\textbf{Exercice 4 — Position relative (4 pts)}
+
+\textbf{1.} $d(\Omega, (AB)) = \dfrac{|3 + 2(-1) - 7|}{\sqrt{1+4}} = \dfrac{|-6|}{\sqrt{5}} = \dfrac{6}{\sqrt{5}} = \dfrac{6\sqrt{5}}{5}$.
+
+\textbf{2.} $\dfrac{6\sqrt{5}}{5} \approx 2{,}68 < 4 = r$ : la droite est sécante au cercle.
+
+\textbf{3.} On substitue $x = 7 - 2y$ dans $(x-3)^2 + (y+1)^2 = 16$ :
+
+$(4 - 2y)^2 + (y+1)^2 = 16$, soit $16 - 16y + 4y^2 + y^2 + 2y + 1 = 16$, d'où $5y^2 - 14y + 1 = 0$.
+
+$\Delta = 196 - 20 = 176 = 16 \times 11$. $y = \dfrac{14 \pm 4\sqrt{11}}{10} = \dfrac{7 \pm 2\sqrt{11}}{5}$.
+
+$x = 7 - 2y = \dfrac{21 \mp 4\sqrt{11}}{5}$.
+
+Points : $\left(\dfrac{21 - 4\sqrt{11}}{5} ; \dfrac{7 + 2\sqrt{11}}{5}\right)$ et $\left(\dfrac{21 + 4\sqrt{11}}{5} ; \dfrac{7 - 2\sqrt{11}}{5}\right)$.
+
+\bigskip
+
+\textbf{Exercice 5 — Problème (4 pts)}
+
+\textbf{1.} $\vec{AB}(4 ; -2)$, $\vec{A\Omega}(2 ; -4)$.
+
+$\mathcal{A} = \dfrac{1}{2}|4 \times (-4) - (-2) \times 2| = \dfrac{1}{2} \times 12 = 6$.
+
+\textbf{2.} Perpendiculaire à $(AB)$ passant par $\Omega$ : $2x - y + c = 0$. En $\Omega(3;-1)$ : $6 + 1 + c = 0$, $c = -7$.
+
+$\begin{cases} x + 2y = 7 \\ 2x - y = 7 \end{cases}$. $5x = 21$, $x = \dfrac{21}{5}$, $y = \dfrac{7}{5}$.
+
+$H\!\left(\dfrac{21}{5} ; \dfrac{7}{5}\right)$.
+
+\textbf{3.} La hauteur relative à $[AB]$ est $d(\Omega, (AB)) = \dfrac{6\sqrt{5}}{5}$.
+
+Vérification : $\mathcal{A} = \dfrac{1}{2} \times AB \times h$. $AB = \sqrt{16+4} = 2\sqrt{5}$. $h = \dfrac{2 \times 6}{2\sqrt{5}} = \dfrac{6}{\sqrt{5}} = \dfrac{6\sqrt{5}}{5}$ \checkmark.

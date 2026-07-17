@@ -1,0 +1,75 @@
+% META: {"id": "1SPE-GEOREP-CR-014", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+
+\section{Problèmes géométriques dans un repère orthonormé}
+
+% ============================================================
+% STRATE 1 — Outils de synthèse
+% ============================================================
+
+\propriete[1]{
+Dans un repère orthonormé, pour déterminer la \textbf{nature d'un quadrilatère} $ABCD$, on dispose des outils suivants :
+\begin{itemize}
+  \item \textbf{Parallélisme} : $\vec{AB}$ et $\vec{DC}$ colinéaires $\iff$ $ABCD$ est un trapèze (au moins).
+  \item \textbf{Parallélogramme} : $\vec{AB} = \vec{DC}$, ou bien les diagonales ont le même milieu.
+  \item \textbf{Rectangle} : parallélogramme dont les diagonales ont la même longueur, ou parallélogramme ayant un angle droit.
+  \item \textbf{Losange} : parallélogramme dont deux côtés consécutifs ont la même longueur.
+  \item \textbf{Carré} : à la fois rectangle et losange.
+\end{itemize}
+}
+
+\propriete[2]{
+Le \textbf{projeté orthogonal} du point $P$ sur la droite $\mathcal{D}$ est le point $H$ de $\mathcal{D}$ tel que $(PH) \perp \mathcal{D}$. Pour le déterminer :
+\begin{enumerate}
+  \item Écrire l'équation de la droite $\mathcal{D}'$ passant par $P$ et perpendiculaire à $\mathcal{D}$ (un vecteur directeur de $\mathcal{D}'$ est un vecteur normal de $\mathcal{D}$).
+  \item Résoudre le système formé par les équations de $\mathcal{D}$ et $\mathcal{D}'$.
+\end{enumerate}
+}
+
+\exemple{
+Projeté orthogonal de $P(5 ; 7)$ sur $\mathcal{D} : x + 2y - 3 = 0$.
+
+Un vecteur normal à $\mathcal{D}$ est $\vec{n}\begin{pmatrix} 1 \\ 2 \end{pmatrix}$. La droite $\mathcal{D}'$ passant par $P$ et dirigée par $\vec{n}$ a pour équation :
+$\dfrac{x - 5}{1} = \dfrac{y - 7}{2}$, soit $2(x - 5) = y - 7$, d'où $2x - y - 3 = 0$.
+
+Système : $\begin{cases} x + 2y = 3 \\ 2x - y = 3 \end{cases}$. On obtient : $5x = 9$, $x = \dfrac{9}{5}$, $y = \dfrac{3}{5}$.
+
+Le projeté orthogonal est $H\!\left(\dfrac{9}{5} ; \dfrac{3}{5}\right)$.
+}
+
+\propriete[3]{
+Le \textbf{symétrique} du point $P$ par rapport à la droite $\mathcal{D}$ est le point $P'$ tel que $H$ (projeté orthogonal de $P$ sur $\mathcal{D}$) est le milieu de $[PP']$.
+
+Si $H\!\left(\dfrac{x_P + x_{P'}}{2} ; \dfrac{y_P + y_{P'}}{2}\right)$, alors $x_{P'} = 2x_H - x_P$ et $y_{P'} = 2y_H - y_P$.
+}
+
+\propriete[4]{
+\textbf{Aire d'un triangle} $ABC$ dans un repère orthonormé :
+\[
+  \mathcal{A} = \frac{1}{2} |x_{\vec{AB}} \cdot y_{\vec{AC}} - y_{\vec{AB}} \cdot x_{\vec{AC}}|
+\]
+où $\vec{AB}\begin{pmatrix} x_{\vec{AB}} \\ y_{\vec{AB}} \end{pmatrix}$ et $\vec{AC}\begin{pmatrix} x_{\vec{AC}} \\ y_{\vec{AC}} \end{pmatrix}$.
+}
+
+\exemple{
+$A(1 ; 2)$, $B(4 ; 6)$, $C(7 ; 2)$.
+
+$\vec{AB}\begin{pmatrix} 3 \\ 4 \end{pmatrix}$, $\vec{AC}\begin{pmatrix} 6 \\ 0 \end{pmatrix}$.
+
+$\mathcal{A} = \dfrac{1}{2}|3 \times 0 - 4 \times 6| = \dfrac{1}{2} \times 24 = 12$.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre milieu et projeté orthogonal.} Le milieu de $[AP]$ est le point qui partage le segment en deux parties égales. Le projeté orthogonal de $P$ sur une droite $\mathcal{D}$ est un point de $\mathcal{D}$ — ce n'est pas le milieu de $[AP]$ en général.
+}
+
+\erreurFrequente{
+\textbf{Oublier la valeur absolue dans le calcul de l'aire.} Le déterminant $x_{\vec{AB}} \cdot y_{\vec{AC}} - y_{\vec{AB}} \cdot x_{\vec{AC}}$ peut être négatif, mais une aire est toujours positive.
+}
+
+\erreurFrequente{
+\textbf{Ne pas structurer la démarche.} Dans un problème de synthèse, commencer par identifier les données (coordonnées des points, équation de la droite, etc.), les objectifs (nature d'un quadrilatère, aire, etc.) et les outils nécessaires avant de calculer.
+}

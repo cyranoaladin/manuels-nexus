@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-GEOREP-EX-019", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-019.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-019.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite d'equation y = 2x - 1, soit 2x - y - 1 = 0
+% # Vecteur normal: (2, -1)
+% # Droite passant par P(3,4) avec vecteur normal (2,-1) ET perpendiculaire
+% # Non: droite passant par P parallele a D
+% # Parallele: 2x - y + c = 0, en P: 6 - 4 + c = 0 => c = -2
+% # 2x - y - 2 = 0
+% assert 2*3 - 4 - 2 == 0
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-019}{3}{15}
+Soit la droite $\mathcal{D} : y = 2x - 1$.
+\begin{enumerate}
+  \item Déterminer un vecteur normal à $\mathcal{D}$.
+  \item En déduire l'équation de la droite $\mathcal{D}'$ parallèle à $\mathcal{D}$ passant par $P(3 ; 4)$.
+  \item Déterminer l'équation de la droite $\mathcal{D}''$ perpendiculaire à $\mathcal{D}$ passant par $P$.
+\end{enumerate}
+\end{exercice}

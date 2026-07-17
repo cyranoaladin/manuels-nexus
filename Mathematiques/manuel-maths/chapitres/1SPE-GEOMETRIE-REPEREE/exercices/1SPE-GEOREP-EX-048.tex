@@ -1,0 +1,12 @@
+% META: {"id": "1SPE-GEOREP-EX-048", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-048.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-048.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cercle circonscrit au triangle A(0,0), B(4,0), C(0,6)
+% # x^2+y^2+Ax+By+C=0. A: C=0. B: 16+4A=0 => A=-4. C: 36+6B=0 => B=-6
+% # Centre (2,3), rayon sqrt(4+9)=sqrt(13)
+% assert (4+9) == 13
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-048}{3}{20}
+Déterminer l'équation du cercle circonscrit au triangle $ABC$ avec $A(0 ; 0)$, $B(4 ; 0)$ et $C(0 ; 6)$.
+\end{exercice}

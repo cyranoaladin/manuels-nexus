@@ -1,0 +1,38 @@
+% META: {"id": "1SPE-GEOREP-FR-R4", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE À NIVEAU — R4 : Équations du second degré
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Discriminant et racines}
+
+Pour $ax^2 + bx + c = 0$ avec $a \neq 0$ : $\Delta = b^2 - 4ac$.
+
+$\Delta > 0$ : deux racines $x_{1,2} = \dfrac{-b \pm \sqrt{\Delta}}{2a}$. \quad $\Delta = 0$ : une racine double. \quad $\Delta < 0$ : pas de solution réelle.
+
+\begin{exercice}{1SPE-GEOREP-FR-R4-EX1}{1}{8}
+Résoudre dans $\mathbb{R}$.
+\begin{enumerate}
+  \item $x^2 - 5x + 6 = 0$
+  \item $2x^2 + 3x + 5 = 0$
+  \item $x^2 - 6x + 9 = 0$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert solve(x**2 - 5*x + 6, x) == [2, 3]
+% assert 3**2 - 4*2*5 < 0  # discriminant < 0 => no real solutions
+% assert solve(x**2 - 6*x + 9, x) == [3]
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-FR-R4-EX1}
+
+\textbf{1.} $\Delta = 25 - 24 = 1 > 0$. $x_1 = \dfrac{5 - 1}{2} = 2$, $x_2 = \dfrac{5 + 1}{2} = 3$. $S = \{2 ; 3\}$.
+
+\textbf{2.} $\Delta = 9 - 40 = -31 < 0$. Pas de solution réelle.
+
+\textbf{3.} $\Delta = 36 - 36 = 0$. Racine double $x = \dfrac{6}{2} = 3$. $S = \{3\}$.
+
+\end{corrige}

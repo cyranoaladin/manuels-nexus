@@ -1,0 +1,54 @@
+% META: {"id": "1SPE-GEOREP-ME-002", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Utiliser un vecteur normal à une droite}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « déterminer un vecteur normal »,
+  « passer d'un vecteur normal à l'équation cartésienne »,
+  « trouver la droite perpendiculaire à $\mathcal{D}$ passant par un point ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Pour $\mathcal{D} : ax + by + c = 0$ :
+      \begin{itemize}
+        \item Vecteur normal : $\vec{n}\begin{pmatrix} a \\ b \end{pmatrix}$.
+        \item Vecteur directeur : $\vec{u}\begin{pmatrix} -b \\ a \end{pmatrix}$.
+      \end{itemize}
+    \item Pour construire l'équation d'une droite à partir d'un vecteur normal $\vec{n}(a ; b)$ et d'un point $A(x_0 ; y_0)$ : $a(x - x_0) + b(y - y_0) = 0$.
+    \item Pour la perpendiculaire à $\mathcal{D}$ passant par $P$ : le vecteur normal à $\mathcal{D}$ devient un vecteur directeur de la perpendiculaire.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple — Droite perpendiculaire.}
+  Soit $\mathcal{D} : 2x + 5y - 3 = 0$ et $P(1 ; -1)$. Déterminer l'équation de la droite $\mathcal{D}'$ perpendiculaire à $\mathcal{D}$ passant par $P$.
+
+  \medskip
+  \commentaireMarge{Le vecteur normal de $\mathcal{D}$ est un vecteur directeur de $\mathcal{D}'$.}%
+  $\vec{n}_{\mathcal{D}} = \begin{pmatrix} 2 \\ 5 \end{pmatrix}$ est un vecteur directeur de $\mathcal{D}'$.
+
+  \commentaireMarge{Le vecteur normal de $\mathcal{D}'$ est un vecteur directeur de $\mathcal{D}$.}%
+  $\vec{n}_{\mathcal{D}'} = \begin{pmatrix} -5 \\ 2 \end{pmatrix}$ (ou $\begin{pmatrix} 5 \\ -2 \end{pmatrix}$).
+
+  $\mathcal{D}' : 5(x - 1) - 2(y + 1) = 0$, soit $5x - 2y - 7 = 0$.
+
+  \commentaireMarge{Vérification : $P$ est sur $\mathcal{D}'$.}%
+  $5 \times 1 - 2 \times (-1) - 7 = 5 + 2 - 7 = 0$. \checkmark
+
+  Orthogonalité : $2 \times 5 + 5 \times (-2) = 10 - 10 = 0$. \checkmark
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Ne pas confondre vecteur normal et vecteur directeur : le vecteur normal est perpendiculaire à la droite.
+    \item \textbf{Piège 2.} Inversion du signe : le vecteur directeur de $ax + by + c = 0$ est $(-b ; a)$, avec un signe $-$ sur la première coordonnée.
+  \end{itemize}
+}
+
+\verifier{%
+  Vérifier l'orthogonalité : le produit scalaire du vecteur directeur de $\mathcal{D}$ et du vecteur directeur de $\mathcal{D}'$ doit être nul.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

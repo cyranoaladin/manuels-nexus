@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-GEOREP-CO-050", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-050", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Point de la droite D: 2x+y-10=0 le plus proche de l'origine
+% # C'est le projete orthogonal de O sur D
+% # Perpendiculaire: x - 2y = 0 (vecteur normal (2,1) directeur de la perp => normal de perp est (1,-2)... non)
+% # D: 2x+y-10=0, vecteur normal (2,1)
+% # Perpendiculaire passant par O: direction (2,1), normal (-1,2)
+% # -1(x) + 2(y) = 0 => x - 2y = 0 => x = 2y
+% sol = solve([2*x+y-10, x-2*y], [x,y])
+% assert sol == {x: 4, y: 2}
+% d = sqrt(4**2 + 2**2)
+% assert d == 2*sqrt(5)
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-050}
+
+\commentaireMarge{Le point le plus proche est le projeté orthogonal de $O$ sur $\mathcal{D}$.}
+
+Perpendiculaire à $\mathcal{D}$ passant par $O$ : direction $\vec{n}(2 ; 1)$, donc $x = 2y$ (paramétrage).
+
+$\begin{cases} 2x + y = 10 \\ x = 2y \end{cases}$. En substituant : $4y + y = 10$, $y = 2$, $x = 4$.
+
+Le point le plus proche est $H(4 ; 2)$, à distance $OH = \sqrt{16 + 4} = 2\sqrt{5}$.
+
+\end{corrige}

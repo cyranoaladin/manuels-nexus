@@ -1,0 +1,53 @@
+% META: {"id": "1SPE-GEOREP-RE-C3", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMÉDIATION — C3
+% Équation du cercle
+%---------------------------------------------------------------
+
+\begin{exercice}{1SPE-GEOREP-RE-C3-EX1}{1}{8}
+Écrire l'équation du cercle de centre $\Omega(1 ; -4)$ et de rayon $3$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 3**2 == 9
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C3-EX1}
+
+$(x - 1)^2 + (y + 4)^2 = 9$.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C3-EX2}{1}{10}
+Identifier le centre et le rayon du cercle $x^2 + y^2 + 8x - 2y - 8 = 0$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% # A=8, B=-2, C=-8. Centre (-4, 1). r^2 = 16+1+8 = 25
+% assert 16 + 1 + 8 == 25
+% END-VERIFY
+
+\coupDePouce{1}{Complète le carré : $x^2 + 8x = (x+4)^2 - 16$.}
+
+\begin{corrige}{1SPE-GEOREP-RE-C3-EX2}
+
+$x^2 + 8x = (x+4)^2 - 16$ et $y^2 - 2y = (y-1)^2 - 1$.
+
+$(x+4)^2 + (y-1)^2 = 25$. Centre $(-4 ; 1)$, rayon $5$.
+
+\end{corrige}
+
+\begin{exercice}{1SPE-GEOREP-RE-C3-EX3}{1}{8}
+Le point $P(5 ; 0)$ est-il sur le cercle $(x - 2)^2 + (y - 4)^2 = 25$ ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert (5-2)**2 + (0-4)**2 == 25
+% END-VERIFY
+
+\begin{corrige}{1SPE-GEOREP-RE-C3-EX3}
+
+$(5 - 2)^2 + (0 - 4)^2 = 9 + 16 = 25$. Donc $P$ est sur le cercle.
+
+\end{corrige}

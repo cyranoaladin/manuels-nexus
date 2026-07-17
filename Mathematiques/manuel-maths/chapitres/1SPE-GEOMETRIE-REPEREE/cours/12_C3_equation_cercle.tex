@@ -1,0 +1,94 @@
+% META: {"id": "1SPE-GEOREP-CR-012", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+
+\section{Équation d'un cercle}
+
+% ============================================================
+% STRATE 1 — Définitions et résultats fondamentaux
+% ============================================================
+
+\definition[1]{
+Dans le plan muni d'un repère orthonormé $(O ; \vec{i}, \vec{j})$, le \textbf{cercle} de centre $\Omega(a ; b)$ et de rayon $r > 0$ est l'ensemble des points $M(x ; y)$ tels que $\Omega M = r$, c'est-à-dire :
+\[
+  (x - a)^2 + (y - b)^2 = r^2.
+\]
+}
+
+\exemple{
+Le cercle de centre $\Omega(3 ; -1)$ et de rayon $4$ a pour équation :
+\[
+  (x - 3)^2 + (y + 1)^2 = 16.
+\]
+Le point $A(7 ; -1)$ : $(7 - 3)^2 + (-1 + 1)^2 = 16 + 0 = 16$. Donc $A$ est sur le cercle.
+
+Le point $B(3 ; 3)$ : $(3 - 3)^2 + (3 + 1)^2 = 0 + 16 = 16$. Donc $B$ est sur le cercle.
+
+Le point $C(0 ; 0)$ : $(0 - 3)^2 + (0 + 1)^2 = 9 + 1 = 10 \neq 16$. Donc $C$ n'est pas sur le cercle.
+}
+
+\propriete[1]{
+En développant l'équation $(x - a)^2 + (y - b)^2 = r^2$, on obtient la \textbf{forme développée} :
+\[
+  x^2 + y^2 - 2ax - 2by + (a^2 + b^2 - r^2) = 0.
+\]
+Réciproquement, une équation de la forme $x^2 + y^2 + Ax + By + C = 0$ représente un cercle si et seulement si $\dfrac{A^2}{4} + \dfrac{B^2}{4} - C > 0$. Dans ce cas :
+\begin{itemize}
+  \item le centre est $\Omega\!\left(-\dfrac{A}{2} ; -\dfrac{B}{2}\right)$,
+  \item le rayon est $r = \sqrt{\dfrac{A^2}{4} + \dfrac{B^2}{4} - C}$.
+\end{itemize}
+}
+
+\exemple{
+Soit l'équation $x^2 + y^2 - 6x + 4y - 3 = 0$.
+
+On identifie : $A = -6$, $B = 4$, $C = -3$.
+
+Centre : $\Omega\!\left(-\dfrac{-6}{2} ; -\dfrac{4}{2}\right) = \Omega(3 ; -2)$.
+
+Rayon : $r = \sqrt{\dfrac{36}{4} + \dfrac{16}{4} + 3} = \sqrt{9 + 4 + 3} = \sqrt{16} = 4$.
+
+Le cercle a pour centre $\Omega(3 ; -2)$ et pour rayon $4$.
+}
+
+\contreexemple{
+L'équation $x^2 + y^2 + 2x + 2y + 5 = 0$ : $A = 2$, $B = 2$, $C = 5$.
+
+$\dfrac{A^2}{4} + \dfrac{B^2}{4} - C = 1 + 1 - 5 = -3 < 0$.
+
+Cette équation n'a pas de solution : elle ne représente aucun cercle (ni aucun point).
+}
+
+\propriete[2]{
+Soit $A$ et $B$ deux points distincts. Le cercle de diamètre $[AB]$ a pour centre le milieu $I$ de $[AB]$ et pour rayon $r = \dfrac{AB}{2}$.
+
+Un point $M$ appartient à ce cercle si et seulement si $\vec{MA} \cdot \vec{MB} = 0$ (angle inscrit dans un demi-cercle).
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs fréquentes
+% ============================================================
+
+\margeAppui{
+\textbf{Pour identifier un cercle} à partir de sa forme développée : compléter les carrés.
+
+$x^2 - 6x = (x - 3)^2 - 9$ et $y^2 + 4y = (y + 2)^2 - 4$.
+
+Donc $x^2 + y^2 - 6x + 4y - 3 = 0$ $\Leftrightarrow$ $(x - 3)^2 - 9 + (y + 2)^2 - 4 - 3 = 0$ $\Leftrightarrow$ $(x-3)^2 + (y+2)^2 = 16$.
+}
+
+\erreurFrequente{
+\textbf{Erreur de signe sur le centre.}
+
+Dans $(x - 3)^2 + (y + 2)^2 = 16$, le centre est $(3 ; -2)$ et non $(3 ; 2)$. Attention au signe de la coordonnée extraite de $(y + 2)^2 = (y - (-2))^2$.
+}
+
+\erreurFrequente{
+\textbf{Confondre $r$ et $r^2$.}
+
+Dans $(x - 1)^2 + (y - 4)^2 = 25$, le rayon est $r = 5$ (et non $r = 25$). Le membre de droite est $r^2$.
+}
+
+\erreurFrequente{
+\textbf{Oublier que le repère doit être orthonormé.}
+
+La formule $(x - a)^2 + (y - b)^2 = r^2$ n'est valable que dans un repère \emph{orthonormé}. Si le repère n'est pas orthonormé, la distance ne se calcule pas par la formule usuelle.
+}

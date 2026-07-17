@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-GEOREP-CO-040", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-040", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y, m = symbols('x y m')
+% # Droite y = mx passant par O(0,0) tangente a C: (x-3)^2+(y-4)^2=1
+% # d(centre, droite) = r <=> |3m-4|/sqrt(m^2+1) = 1
+% # (3m-4)^2 = m^2+1 => 9m^2-24m+16 = m^2+1 => 8m^2-24m+15=0
+% delta = 24**2 - 4*8*15
+% assert delta == 576 - 480
+% assert delta == 96
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-040}
+
+\commentaireMarge{Une droite passant par $O$ a pour équation $y = mx$, soit $mx - y = 0$.}
+
+$d(\Omega, \mathcal{D}) = \dfrac{|3m - 4|}{\sqrt{m^2 + 1}} = 1$.
+
+$(3m-4)^2 = m^2 + 1$, soit $9m^2 - 24m + 16 = m^2 + 1$, d'où $8m^2 - 24m + 15 = 0$.
+
+$\Delta = 576 - 480 = 96$, $\sqrt{\Delta} = 4\sqrt{6}$.
+
+$m = \dfrac{24 \pm 4\sqrt{6}}{16} = \dfrac{6 \pm \sqrt{6}}{4}$.
+
+Les deux tangentes ont pour équations $y = \dfrac{6 + \sqrt{6}}{4}x$ et $y = \dfrac{6 - \sqrt{6}}{4}x$.
+
+\end{corrige}

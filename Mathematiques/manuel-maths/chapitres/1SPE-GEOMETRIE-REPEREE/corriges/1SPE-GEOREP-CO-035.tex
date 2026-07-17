@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-GEOREP-CO-035", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-035", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cercle (x-1)^2+(y-2)^2=5, droite y=2x
+% # Substitution: (x-1)^2+(2x-2)^2=5 => (x-1)^2+4(x-1)^2=5 => 5(x-1)^2=5 => (x-1)^2=1
+% # x=0 ou x=2
+% sol = solve([(x-1)**2+(y-2)**2-5, y-2*x], [x,y])
+% assert len(sol) == 2
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-035}
+
+\commentaireMarge{Méthode par substitution.}
+
+On substitue $y = 2x$ dans $(x-1)^2 + (y-2)^2 = 5$ :
+
+$(x-1)^2 + (2x-2)^2 = 5$, soit $(x-1)^2 + 4(x-1)^2 = 5$, d'où $5(x-1)^2 = 5$, $(x-1)^2 = 1$.
+
+$x - 1 = \pm 1$, soit $x = 0$ ou $x = 2$.
+
+Pour $x = 0$ : $y = 0$. Pour $x = 2$ : $y = 4$.
+
+Les points d'intersection sont $\boxed{(0 ; 0)}$ et $\boxed{(2 ; 4)}$.
+
+\end{corrige}

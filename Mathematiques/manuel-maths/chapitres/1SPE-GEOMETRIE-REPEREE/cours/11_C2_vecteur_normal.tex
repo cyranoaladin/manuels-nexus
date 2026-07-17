@@ -1,0 +1,105 @@
+% META: {"id": "1SPE-GEOREP-CR-011", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+
+\section{Vecteur normal à une droite}
+
+% ============================================================
+% STRATE 1 — Définitions et résultats fondamentaux
+% ============================================================
+
+\definition[1]{
+Un vecteur $\vec{n}$ non nul est \textbf{normal} à une droite $\mathcal{D}$ s'il est orthogonal à tout vecteur directeur de $\mathcal{D}$.
+}
+
+\propriete[1]{
+Si la droite $\mathcal{D}$ a pour équation cartésienne $ax + by + c = 0$, alors :
+\begin{itemize}
+  \item le vecteur $\vec{n}\begin{pmatrix} a \\ b \end{pmatrix}$ est un \textbf{vecteur normal} à $\mathcal{D}$,
+  \item le vecteur $\vec{u}\begin{pmatrix} -b \\ a \end{pmatrix}$ est un \textbf{vecteur directeur} de $\mathcal{D}$.
+\end{itemize}
+}
+
+\demonstration{
+Soit $M(x ; y)$ et $M'(x' ; y')$ deux points de $\mathcal{D}$. On a $ax + by + c = 0$ et $ax' + by' + c = 0$. Par soustraction : $a(x' - x) + b(y' - y) = 0$.
+
+Le vecteur $\vec{MM'}\begin{pmatrix} x' - x \\ y' - y \end{pmatrix}$ est un vecteur directeur de $\mathcal{D}$. L'égalité $a(x'-x) + b(y'-y) = 0$ signifie que $\vec{n}\begin{pmatrix} a \\ b \end{pmatrix} \cdot \vec{MM'} = 0$.
+
+Donc $\vec{n}$ est orthogonal à tout vecteur directeur de $\mathcal{D}$ : c'est un vecteur normal.
+
+De plus, $\vec{u}\begin{pmatrix} -b \\ a \end{pmatrix}$ vérifie $\vec{n} \cdot \vec{u} = a(-b) + b \cdot a = 0$, donc $\vec{u}$ est orthogonal à $\vec{n}$ et c'est un vecteur directeur de $\mathcal{D}$.
+}
+
+\exemple{
+La droite $\mathcal{D} : 3x - 2y + 5 = 0$ admet :
+\begin{itemize}
+  \item un vecteur normal $\vec{n}\begin{pmatrix} 3 \\ -2 \end{pmatrix}$,
+  \item un vecteur directeur $\vec{u}\begin{pmatrix} 2 \\ 3 \end{pmatrix}$.
+\end{itemize}
+Vérification : $\vec{n} \cdot \vec{u} = 3 \times 2 + (-2) \times 3 = 6 - 6 = 0$. \checkmark
+}
+
+\propriete[2]{
+Réciproquement, si $\vec{n}\begin{pmatrix} a \\ b \end{pmatrix}$ est un vecteur normal à une droite $\mathcal{D}$ et si $A(x_0 ; y_0)$ est un point de $\mathcal{D}$, alors une équation cartésienne de $\mathcal{D}$ est :
+\[
+  a(x - x_0) + b(y - y_0) = 0.
+\]
+}
+
+\exemple{
+La droite passant par $A(2 ; -1)$ et de vecteur normal $\vec{n}\begin{pmatrix} 4 \\ 1 \end{pmatrix}$ a pour équation :
+\[
+  4(x - 2) + 1(y + 1) = 0, \quad \text{soit} \quad 4x + y - 7 = 0.
+\]
+
+Vérification : $4 \times 2 + 1 \times (-1) - 7 = 8 - 1 - 7 = 0$. \checkmark
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs fréquentes
+% ============================================================
+
+\margeAppui{
+\textbf{Résumé :} pour $\mathcal{D} : ax + by + c = 0$ :
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Vecteur normal} & $\vec{n}\begin{pmatrix} a \\ b \end{pmatrix}$ \\
+\hline
+\textbf{Vecteur directeur} & $\vec{u}\begin{pmatrix} -b \\ a \end{pmatrix}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+On permute les coordonnées et on change un signe pour passer du normal au directeur.
+}
+
+\erreurFrequente{
+\textbf{Inversion du signe.}
+
+Pour $\mathcal{D} : 3x + 5y - 1 = 0$, le vecteur directeur est $\vec{u}\begin{pmatrix} -5 \\ 3 \end{pmatrix}$ et non $\begin{pmatrix} 5 \\ 3 \end{pmatrix}$.
+
+Moyen mnémotechnique : dans le vecteur directeur, la première coordonnée prend un signe $-$.
+}
+
+\erreurFrequente{
+\textbf{Confusion entre vecteur normal et vecteur directeur.}
+
+Le vecteur normal est \emph{perpendiculaire} à la droite, pas parallèle. Deux droites perpendiculaires ont des vecteurs directeurs dont le produit scalaire est nul, ce qui revient à dire que le vecteur directeur de l'une est un vecteur normal de l'autre.
+}
+
+\propriete[3]{
+Deux droites sont \textbf{perpendiculaires} si et seulement si un vecteur directeur de l'une est un vecteur normal de l'autre.
+
+Autrement dit, si $\mathcal{D}_1 : a_1 x + b_1 y + c_1 = 0$ et $\mathcal{D}_2 : a_2 x + b_2 y + c_2 = 0$, alors :
+\[
+  \mathcal{D}_1 \perp \mathcal{D}_2 \iff a_1 a_2 + b_1 b_2 = 0.
+\]
+}
+
+\exemple{
+$\mathcal{D}_1 : 2x + 3y - 1 = 0$ et $\mathcal{D}_2 : 3x - 2y + 4 = 0$.
+
+$a_1 a_2 + b_1 b_2 = 2 \times 3 + 3 \times (-2) = 6 - 6 = 0$.
+
+Donc $\mathcal{D}_1 \perp \mathcal{D}_2$.
+}

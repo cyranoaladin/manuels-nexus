@@ -327,6 +327,10 @@
   {\sffamily\fontsize{8}{10}\selectfont #2~min}\par\nopagebreak\medskip
 }{\par\bigskip}
 
+\newcommand{\exerciceEval}[4]{%
+  \par\medskip\noindent\textbf{Exercice #1}\hfill\textit{#2 points --- #3}\par\nopagebreak\smallskip
+}
+
 % ===========================================================================
 %  CODE PYTHON (listings avec JetBrains Mono)
 % ===========================================================================

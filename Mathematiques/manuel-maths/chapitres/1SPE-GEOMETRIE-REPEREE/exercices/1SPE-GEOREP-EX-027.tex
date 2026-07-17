@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-GEOREP-EX-027", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-027.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-027.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Cercle passant par A(0,0), B(4,0), C(0,6)
+% # Forme x^2+y^2+Ax+By+C=0. C passe par (0,0): C=0.
+% # Par (4,0): 16+4A=0 => A=-4
+% # Par (0,6): 36+6B=0 => B=-6
+% # Centre: (2,3), rayon = sqrt(4+9) = sqrt(13)
+% assert 4**2 + (-4)*4 == 0
+% assert 6**2 + (-6)*6 == 0
+% assert 4 + 9 == 13
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-027}{2}{15}
+Déterminer l'équation du cercle $\mathcal{C}$ passant par $A(0 ; 0)$, $B(4 ; 0)$ et $C(0 ; 6)$.
+\end{exercice}

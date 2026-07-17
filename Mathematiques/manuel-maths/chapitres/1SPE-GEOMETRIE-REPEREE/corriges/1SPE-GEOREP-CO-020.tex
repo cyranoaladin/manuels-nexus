@@ -1,0 +1,23 @@
+% META: {"id": "1SPE-GEOREP-CO-020", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "corrige", "exercice_ref": "1SPE-GEOREP-EX-020", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Montrer que le triangle est rectangle
+% # A(1,2), B(4,6), C(8,3)
+% # AB = (3,4), AC = (7,1)
+% # AB.AC = 21 + 4 = 25 != 0
+% # AB = (3,4), BC = (4,-3)
+% # AB.BC = 12 - 12 = 0 => angle droit en B
+% assert 3*4 + 4*(-3) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-GEOREP-EX-020}
+
+\commentaireMarge{On calcule les produits scalaires de vecteurs issus de chaque sommet.}
+
+$\vec{BA}\begin{pmatrix} -3 \\ -4 \end{pmatrix}$, $\vec{BC}\begin{pmatrix} 4 \\ -3 \end{pmatrix}$.
+
+$\vec{BA} \cdot \vec{BC} = (-3)(4) + (-4)(-3) = -12 + 12 = 0$.
+
+Donc $\vec{BA} \perp \vec{BC}$, le triangle $ABC$ est \textbf{rectangle en $B$}.
+
+\end{corrige}

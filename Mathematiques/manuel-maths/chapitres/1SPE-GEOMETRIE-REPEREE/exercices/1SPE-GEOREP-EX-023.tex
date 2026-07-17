@@ -1,0 +1,15 @@
+% META: {"id": "1SPE-GEOREP-EX-023", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-023.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-023.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # x^2 + y^2 - 4x + 6y - 3 = 0
+% # A=-4, B=6, C=-3
+% # Centre: (2, -3), rayon = sqrt(4+9+3) = sqrt(16) = 4
+% assert (-4/2) == -2  # non, centre is (-A/2, -B/2) = (2, -3)
+% assert (4 + 9 + 3) == 16
+% assert 2**2 + (-3)**2 - 4*2 + 6*(-3) - 3 == 4+9-8-18-3  # = -16
+% # so r^2 = 16
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-023}{1}{12}
+Déterminer le centre et le rayon du cercle d'équation $x^2 + y^2 - 4x + 6y - 3 = 0$.
+\end{exercice}

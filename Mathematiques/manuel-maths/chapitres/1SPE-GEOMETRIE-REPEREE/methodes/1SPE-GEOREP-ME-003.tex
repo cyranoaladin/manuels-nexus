@@ -1,0 +1,54 @@
+% META: {"id": "1SPE-GEOREP-ME-003", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Déterminer l'équation d'un cercle}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de « déterminer l'équation du cercle de centre $\Omega$ et de rayon $r$ »,
+  « identifier le centre et le rayon d'un cercle dont l'équation est donnée sous forme développée »,
+  ou « montrer qu'un point appartient à un cercle ».
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Si centre et rayon sont donnés :} écrire directement $(x - a)^2 + (y - b)^2 = r^2$.
+    \item \textbf{Si l'équation est sous forme développée} $x^2 + y^2 + Ax + By + C = 0$ :
+      \begin{itemize}
+        \item Regrouper les termes en $x$ et compléter le carré : $x^2 + Ax = \left(x + \dfrac{A}{2}\right)^2 - \dfrac{A^2}{4}$.
+        \item Faire de même avec $y$ : $y^2 + By = \left(y + \dfrac{B}{2}\right)^2 - \dfrac{B^2}{4}$.
+        \item En déduire le centre $\Omega\!\left(-\dfrac{A}{2} ; -\dfrac{B}{2}\right)$ et le rayon $r = \sqrt{\dfrac{A^2}{4} + \dfrac{B^2}{4} - C}$.
+      \end{itemize}
+    \item \textbf{Vérifier} que $r^2 > 0$ (sinon l'équation ne représente pas un cercle).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple — Forme développée vers centre et rayon.}
+  Identifier le cercle d'équation $x^2 + y^2 + 4x - 6y - 12 = 0$.
+
+  \medskip
+  \commentaireMarge{Compléter le carré en $x$ : $x^2 + 4x = (x+2)^2 - 4$.}%
+  $x^2 + 4x = (x + 2)^2 - 4$.
+
+  \commentaireMarge{Compléter le carré en $y$ : $y^2 - 6y = (y - 3)^2 - 9$.}%
+  $y^2 - 6y = (y - 3)^2 - 9$.
+
+  L'équation devient : $(x + 2)^2 - 4 + (y - 3)^2 - 9 - 12 = 0$, soit $(x + 2)^2 + (y - 3)^2 = 25$.
+
+  Le cercle a pour centre $\Omega(-2 ; 3)$ et rayon $r = 5$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Erreur de signe sur le centre : dans $(x + 2)^2$, le centre a pour abscisse $-2$ (et non $+2$).
+    \item \textbf{Piège 2.} Confondre $r$ et $r^2$ : le membre de droite est le carré du rayon.
+    \item \textbf{Piège 3.} Oublier de vérifier que $r^2 > 0$.
+  \end{itemize}
+}
+
+\verifier{%
+  Substituer les coordonnées du centre dans l'équation développée et vérifier que le résultat vaut $-r^2$.
+  Par exemple : $(-2)^2 + 3^2 + 4 \times (-2) - 6 \times 3 - 12 = 4 + 9 - 8 - 18 - 12 = -25$, donc $r^2 = 25$. \checkmark
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

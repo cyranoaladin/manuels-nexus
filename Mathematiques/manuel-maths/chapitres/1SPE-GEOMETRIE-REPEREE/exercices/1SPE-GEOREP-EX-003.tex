@@ -1,0 +1,13 @@
+% META: {"id": "1SPE-GEOREP-EX-003", "chapitre": "1SPE-GEOMETRIE-REPEREE", "type_objet": "exercice", "capacites": ["1SPE-GEOREP-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/exercices/1SPE-GEOREP-EX-003.tex", "corrige_tex": "chapitres/1SPE-GEOMETRIE-REPEREE/corriges/1SPE-GEOREP-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # Droite par A(0,4) de vecteur directeur u(3,2)
+% # Vecteur normal n(2,-3), equation: 2(x-0) - 3(y-4) = 0 => 2x - 3y + 12 = 0
+% assert 2*0 - 3*4 + 12 == 0
+% # Verification avec un autre point: x=3, y = (2*3+12)/3 = 6
+% assert 2*3 - 3*6 + 12 == 0
+% END-VERIFY
+\begin{exercice}{1SPE-GEOREP-EX-003}{1}{10}
+Déterminer une équation cartésienne de la droite $\mathcal{D}$ passant par $A(0 ; 4)$ et de vecteur directeur $\vec{u}\begin{pmatrix} 3 \\ 2 \end{pmatrix}$.
+\end{exercice}
