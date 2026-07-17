@@ -46,9 +46,11 @@ Script `verify_sympy.py` étendu pour couvrir remediation/, cours/, qcm/ (ancien
 
 ## Résolution aveugle
 
-Tracée dans LOT-6_rapport.md §3 : protocole complet + calculs pour EV-A
-(4 exercices), comparaison point par point §4. 0 divergence résiduelle.
-Une erreur détectée et corrigée dans EX-3 (numérateur h').
+- **EV-A** : LOT-6_rapport.md §3 — protocole complet + calculs (4 exercices),
+  comparaison §4. 1 erreur détectée et corrigée (EX-3 numérateur h').
+  0 divergence résiduelle.
+- **EV-B** : LOT-6_rapport.md §7 — protocole complet + calculs (4 exercices),
+  comparaison §8. 0 divergence. Résolution aveugle A+B : 0 divergence totale.
 
 ## Assertions rétablies (I.1)
 
@@ -89,7 +91,7 @@ Une erreur détectée et corrigée dans EX-3 (numérateur h').
 | eea9b2c (LOT-5-6-7) | 29541576600 | FAILURE | Schémas : `"prouver"`/`"critiquer"` hors enum |
 | 0960188 (EXPO LOT-0) | 29541703587 | FAILURE | Idem (chapitres pas modifiés, même base) |
 | d1cb480 (intégrité) | 29542267235 | FAILURE | Idem |
-| (ce commit) | — | ATTENDUE VERTE | 4 META corrigés, test local 540/540 PASS |
+| 998db4d (CI-fix) | 29560207886 | SUCCESS | 4 META corrigés, test 540/540 PASS |
 
 Cause racine : EX-009, EX-010, EX-019, EX-020 utilisaient `"prouver"` ou `"critiquer"` dans `competences[]`, hors de l'enum du schéma BO (`["chercher","modeliser","representer","calculer","raisonner","communiquer"]`). Corrigé : remplacé par `"raisonner"` (subsumant prouver/critiquer en maths).
 

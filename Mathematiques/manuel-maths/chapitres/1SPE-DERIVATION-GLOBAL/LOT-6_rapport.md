@@ -221,9 +221,82 @@ Les deux TD comportent des blocs BEGIN-VERIFY SymPy sur toutes les étapes de ca
 
 ---
 
-## 7. Points ouverts
+## 7. TRACED — Résolution aveugle de l'Évaluation B
+
+*Résolution complète sans consulter le corrigé, suivie de comparaison point par point.*
+
+### EXERCICE 1 — résolution aveugle
+
+**Données :** $f(x) = 2x^2 + 3x - 4$.
+
+**Q1.** $f'(x) = 4x + 3.$
+
+**Q2.** $f'(1) = 4 + 3 = 7.$ Interprétation : coefficient directeur de la tangente en $x=1$.
+
+**Q3.** $f(1) = 2 + 3 - 4 = 1.$ Tangente : $T: y = 7(x-1)+1 = 7x - 6.$
+
+**Q4.** $f'(x) = 0 \Leftrightarrow 4x+3=0 \Leftrightarrow x = -3/4.$
+
+### EXERCICE 2 — résolution aveugle
+
+**Données :** $g(x) = 2x^3 - 9x^2 + 12x$.
+
+**Q1.** $g'(x) = 6x^2 - 18x + 12 = 6(x^2-3x+2) = 6(x-1)(x-2).$
+
+**Q2.** $g'(x) = 0 \Leftrightarrow x=1$ ou $x=2.$ Signe : $+$ / $0$ / $-$ / $0$ / $+$.
+
+**Q3.** $g(1) = 2-9+12 = 5$, $g(2) = 16-36+24 = 4.$ Variations : $\nearrow 5 \searrow 4 \nearrow$.
+
+**Q4.** Maximum local $5$ en $x=1$, minimum local $4$ en $x=2$.
+
+### EXERCICE 3 — résolution aveugle
+
+**Données :** $h(x) = (x^2-4)/(x+2)$.
+
+**Q1.** $x^2-4 = (x-2)(x+2)$, donc $h(x) = x-2$ pour $x \neq -2$.
+
+**Q2.** $h'(x) = 1$.
+
+**Q3.** $h'(x) = 1 > 0$ partout, pas de racine. $h$ strictement croissante sur $]-\infty;-2[$.
+
+### EXERCICE 4 — résolution aveugle
+
+**Données :** $R(x) = x(30-2x) = 30x - 2x^2$.
+
+**Q1.** $R(x) = 30x - 2x^2.$
+
+**Q2.** $R'(x) = 30 - 4x.$ $R'(x) = 0 \Leftrightarrow x = 15/2 = 7{,}5.$
+
+**Q3.** $R(7{,}5) = 30 \times 7{,}5 - 2 \times 56{,}25 = 225 - 112{,}5 = 112{,}5$ euros.
+
+---
+
+## 8. Comparaison résolution aveugle EV-B vs corrigé
+
+| Exercice | Question | Résolution aveugle | Corrigé | Concordance |
+|---|---|---|---|---|
+| Ex 1 | Q1 | $f'(x)=4x+3$ | idem | ✓ |
+| Ex 1 | Q2 | $f'(1)=7$ | idem | ✓ |
+| Ex 1 | Q3 | $T: y=7x-6$ | idem | ✓ |
+| Ex 1 | Q4 | $x=-3/4$ | idem | ✓ |
+| Ex 2 | Q1 | $g'=6(x-1)(x-2)$ | idem | ✓ |
+| Ex 2 | Q2 | $x=1, x=2$ | idem | ✓ |
+| Ex 2 | Q3 | $g(1)=5, g(2)=4$ | idem | ✓ |
+| Ex 2 | Q4 | max $5$ en $1$, min $4$ en $2$ | idem | ✓ |
+| Ex 3 | Q1 | $h(x)=x-2$ | idem | ✓ |
+| Ex 3 | Q2 | $h'(x)=1$ | idem | ✓ |
+| Ex 3 | Q3 | croissante, pas de racine | idem | ✓ |
+| Ex 4 | Q1 | $R=30x-2x^2$ | idem | ✓ |
+| Ex 4 | Q2 | $x=7{,}5$ | idem | ✓ |
+| Ex 4 | Q3 | $112{,}5$ euros | idem | ✓ |
+
+**0 divergence EV-B.** Résolution aveugle complète (A+B) : 0 divergence résiduelle.
+
+---
+
+## 9. Points ouverts
 
 - Divergence EV-A Ex3 : **résolue et corrigée** dans les fichiers tex et les blocs BEGIN-VERIFY.
-- Résolution aveugle déclare **0 divergence résiduelle** : tous les résultats des exercices 1, 2 et 4 sont concordants ; la divergence de l'exercice 3 a été détectée et corrigée dans la même session.
-- Vérification `make verify CHAP=1SPE-DERIVATION-GLOBAL` à lancer pour valider tous les blocs BEGIN-VERIFY.
-- La compilation LaTeX (`make chapter CHAP=1SPE-DERIVATION-GLOBAL`) est à effectuer avant commit définitif.
+- Résolution aveugle A+B : **0 divergence résiduelle totale**.
+- Vérification `make verify CHAP=1SPE-DERIVATION-GLOBAL` : 146/146 PASS (LOT-7).
+- La compilation LaTeX (`make chapter CHAP=1SPE-DERIVATION-GLOBAL`) : PASS (LOT-7, 46p).
