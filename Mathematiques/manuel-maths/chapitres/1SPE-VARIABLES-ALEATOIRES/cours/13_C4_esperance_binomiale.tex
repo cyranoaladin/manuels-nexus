@@ -1,0 +1,96 @@
+% META: {"id": "1SPE-VARALEA-CR-013", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+
+\section{Espérance et variance de la loi binomiale}
+
+% ============================================================
+% STRATE 1 — Formules et propriétés
+% ============================================================
+
+\propriete{
+Soit $X \sim \mathcal{B}(n, p)$. Alors :
+\[
+  E(X) = np, \qquad V(X) = np(1-p), \qquad \sigma(X) = \sqrt{np(1-p)}.
+\]
+}
+
+\exemple{
+Soit $X \sim \mathcal{B}(10, \frac{1}{4})$. Alors :
+\[
+E(X) = 10 \times \frac{1}{4} = \frac{10}{4} = \frac{5}{2}, \qquad V(X) = 10 \times \frac{1}{4} \times \frac{3}{4} = \frac{30}{16} = \frac{15}{8}.
+\]
+\[
+\sigma(X) = \sqrt{\frac{15}{8}} \approx 1{,}37.
+\]
+En moyenne, on obtient $2{,}5$ succès sur $10$ épreuves.
+}
+
+\exemple{
+Pour la loi de Bernoulli $X \sim \mathcal{B}(p)$ (cas $n = 1$) :
+\[
+E(X) = 1 \times p + 0 \times (1-p) = p, \qquad V(X) = p(1-p).
+\]
+On retrouve $E(X) = np = 1 \times p = p$ et $V(X) = np(1-p) = p(1-p)$.
+}
+
+\margeAppui{%
+\textbf{Application :}\newline
+Connaissant $E(X)$ et $V(X)$, on peut retrouver $n$ et $p$ :\newline
+$p = 1 - \dfrac{V(X)}{E(X)}$ et $n = \dfrac{E(X)}{p}$.%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre $np$ et $n/p$.}
+
+$E(X) = np$ est un \emph{produit}, pas un quotient. Si $n = 20$ et $p = \frac{1}{5}$, alors $E(X) = 20 \times \frac{1}{5} = 4$, et non $20 / \frac{1}{5} = 100$.
+}
+
+\erreurFrequente{
+\textbf{Écrire $V(X) = npq$ avec $q = p$.}
+
+Dans la formule $V(X) = npq$, le paramètre $q$ est $q = 1 - p$ (probabilité d'échec), et non $q = p$. Si $p = \frac{1}{3}$, alors $q = \frac{2}{3}$.
+}
+
+% ============================================================
+% STRATE 3 — Démonstration exigible : E(X) = np
+% ============================================================
+
+\approfondissement{
+\textbf{Démonstration de $E(X) = np$ pour $X \sim \mathcal{B}(n, p)$.}
+
+\medskip
+\textbf{Méthode par linéarité de l'espérance.}
+
+On décompose $X$ en somme de $n$ variables de Bernoulli indépendantes :
+\[
+  X = X_1 + X_2 + \cdots + X_n,
+\]
+où chaque $X_i$ vaut $1$ si la $i$-ème épreuve est un succès, $0$ sinon. Chaque $X_i \sim \mathcal{B}(p)$.
+
+Par linéarité de l'espérance :
+\[
+  E(X) = E(X_1) + E(X_2) + \cdots + E(X_n) = \underbrace{p + p + \cdots + p}_{n \text{ termes}} = np.
+\]
+
+\medskip
+\textbf{Méthode par calcul direct.}
+
+\[
+  E(X) = \sum_{k=0}^{n} k \binom{n}{k} p^k (1-p)^{n-k}.
+\]
+
+Le terme $k = 0$ est nul. Pour $k \geq 1$, on utilise l'identité $k \binom{n}{k} = n \binom{n-1}{k-1}$ :
+\[
+  E(X) = \sum_{k=1}^{n} n \binom{n-1}{k-1} p^k (1-p)^{n-k} = np \sum_{k=1}^{n} \binom{n-1}{k-1} p^{k-1} (1-p)^{n-k}.
+\]
+
+En posant $j = k - 1$ :
+\[
+  E(X) = np \sum_{j=0}^{n-1} \binom{n-1}{j} p^j (1-p)^{(n-1)-j} = np \cdot (p + 1 - p)^{n-1} = np \cdot 1 = np.
+\]
+
+\textbf{Identité utilisée :} $k \binom{n}{k} = k \times \frac{n!}{k!(n-k)!} = \frac{n!}{(k-1)!(n-k)!} = n \times \frac{(n-1)!}{(k-1)!(n-k)!} = n \binom{n-1}{k-1}$.
+}

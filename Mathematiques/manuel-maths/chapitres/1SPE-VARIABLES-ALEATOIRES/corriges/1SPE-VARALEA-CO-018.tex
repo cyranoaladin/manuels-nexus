@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-VARALEA-CO-018", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-018", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% E = sum(k*Rational(2*k-1,36) for k in range(1,7))
+% assert E == Rational(161,36)
+% E2 = sum(k**2*Rational(2*k-1,36) for k in range(1,7))
+% V = E2 - E**2
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-018}
+
+\textbf{1.} $E(X) = \frac{1 \times 1 + 2 \times 3 + 3 \times 5 + 4 \times 7 + 5 \times 9 + 6 \times 11}{36} = \frac{1+6+15+28+45+66}{36} = \frac{161}{36} \approx 4{,}47$.
+
+\medskip
+\textbf{2.} $E(X^2) = \frac{1+12+45+112+225+396}{36} = \frac{791}{36}$.
+
+$V(X) = \frac{791}{36} - \left(\frac{161}{36}\right)^2 = \frac{791}{36} - \frac{25921}{1296} = \frac{28476 - 25921}{1296} = \frac{2555}{1296} \approx 1{,}97$.
+
+\medskip
+\textbf{3.} $E(X) \approx 4{,}47$ : le maximum est en moyenne plus proche de $4{,}5$, donc légèrement plus proche de $4$ que de $5$.
+
+\end{corrige}

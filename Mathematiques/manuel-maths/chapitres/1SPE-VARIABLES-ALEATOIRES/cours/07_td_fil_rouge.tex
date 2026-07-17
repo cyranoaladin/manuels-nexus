@@ -1,0 +1,79 @@
+% META: {"id": "1SPE-VARALEA-TD-FIL-ROUGE", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "td", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, binomial
+% # Assurance smartphone : prime = 50, remboursement = 300, p_casse = 1/10
+% p = Rational(1, 10)
+% prime = 50
+% remb = 300
+% # Gain assure : X
+% # Casse : X = remb - prime = 250
+% # Pas casse : X = -prime = -50
+% E_X = 250 * p + (-50) * (1 - p)
+% assert E_X == Rational(250, 10) + Rational(-450, 10)
+% assert E_X == Rational(-200, 10)
+% assert E_X == -20
+% # Benefice assureur par contrat : B = prime - remb * indicatrice_casse
+% E_B = prime - remb * p
+% assert E_B == 50 - 30
+% assert E_B == 20
+% # Partie B : n = 1000 contrats, Y = nombre de casses ~ B(1000, 1/10)
+% n = 1000
+% E_Y = n * p
+% assert E_Y == 100
+% V_Y = n * p * (1 - p)
+% assert V_Y == 90
+% sigma_Y = sqrt(V_Y)
+% # Benefice total = 1000*50 - 300*Y
+% E_benef = 1000 * 50 - 300 * E_Y
+% assert E_benef == 50000 - 30000
+% assert E_benef == 20000
+% END-VERIFY
+
+%---------------------------------------------------------------
+% TD FIL ROUGE — L'assurance smartphone (retour sur la situation d'accroche)
+%---------------------------------------------------------------
+
+\section*{TD fil rouge — L'assurance smartphone}
+
+\subsection*{Rappel de la situation}
+
+Un assureur propose un contrat annuel couvrant la casse d'un smartphone.
+\begin{itemize}
+  \item Prime annuelle : $50$~euros.
+  \item Remboursement en cas de casse : $300$~euros.
+  \item Probabilité de casse dans l'année : $p = \dfrac{1}{10}$.
+\end{itemize}
+
+\subsection*{Partie A — Du point de vue de l'assuré}
+
+\begin{exercice}{1SPE-VARALEA-TD-FR-A}{1}{15}
+\begin{enumerate}
+  \item Soit $X$ le gain de l'assuré (remboursement éventuel moins la prime). Quelles sont les valeurs possibles de $X$ ?
+  \item Déterminer la loi de probabilité de $X$ (tableau de loi).
+  \item Calculer $E(X)$. Interpréter : le contrat est-il avantageux pour l'assuré ?
+  \item Calculer $V(X)$ et $\sigma(X)$. Que signifie un écart type élevé pour l'assuré ?
+\end{enumerate}
+\end{exercice}
+
+\subsection*{Partie B — Du point de vue de l'assureur (1000 contrats)}
+
+\begin{exercice}{1SPE-VARALEA-TD-FR-B}{2}{20}
+L'assureur vend $1000$ contrats identiques. On note $Y$ le nombre de sinistres parmi les $1000$ assurés.
+\begin{enumerate}
+  \item Justifier que $Y \sim \mathcal{B}(1000, \frac{1}{10})$.
+  \item Calculer $E(Y)$, $V(Y)$ et $\sigma(Y)$.
+  \item Le bénéfice total de l'assureur est $B = 1000 \times 50 - 300 \times Y$. Calculer $E(B)$.
+  \item Interpréter : combien l'assureur espère-t-il gagner en moyenne ?
+  \item Pour que l'assureur ait un bénéfice positif, il faut $B > 0$, soit $Y < \frac{50\,000}{300} \approx 166{,}7$. Commenter : est-ce probable ?
+  \item Quelle prime minimale $c$ doit-il fixer pour que $E(B) \geq 0$ ? Retrouver la condition $c \geq pI$.
+\end{enumerate}
+\end{exercice}
+
+\subsection*{Partie C — Approfondissement}
+
+\begin{exercice}{1SPE-VARALEA-TD-FR-C}{3}{10}
+\begin{enumerate}
+  \item L'assureur envisage de couvrir aussi le vol (probabilité $\frac{1}{20}$, indépendant de la casse, indemnité $200$~euros). Soit $Z$ le nombre total d'indemnisations parmi $1000$ contrats. $Z$ suit-elle une loi binomiale ? Justifier.
+  \item Proposer un modèle simplifié et calculer la prime minimale pour que le contrat reste rentable.
+\end{enumerate}
+\end{exercice}

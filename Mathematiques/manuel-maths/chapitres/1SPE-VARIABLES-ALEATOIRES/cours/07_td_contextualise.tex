@@ -1,0 +1,58 @@
+% META: {"id": "1SPE-VARALEA-TD-CONTEXTUALISE", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "td", "capacites_codes": ["C1","C2","C3","C5"], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt, binomial
+% # Partie A : loi de X (gain au jeu de des)
+% # On lance 2 des, X = somme. Ici version simplifiee : jeu forain
+% # Mise = 2 euros. Si double 6 : gain 50. Si un seul 6 : gain 5. Sinon : rien.
+% p_double6 = Rational(1, 36)
+% p_un_seul6 = Rational(10, 36)
+% p_aucun6 = Rational(25, 36)
+% assert p_double6 + p_un_seul6 + p_aucun6 == 1
+% # Gain algebrique G = gain - mise
+% G_double6 = 50 - 2
+% G_un6 = 5 - 2
+% G_rien = 0 - 2
+% E_G = G_double6 * p_double6 + G_un6 * p_un_seul6 + G_rien * p_aucun6
+% assert E_G == Rational(48, 36) + Rational(30, 36) + Rational(-50, 36)
+% assert E_G == Rational(28, 36)
+% assert E_G == Rational(7, 9)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% TD CONTEXTUALISE — Le jeu du stand forain
+%---------------------------------------------------------------
+
+\section*{TD contextualisé — Le jeu du stand forain}
+
+\subsection*{Mise en situation}
+
+À une fête foraine, un stand propose le jeu suivant. On lance deux dés équilibrés et on paie $2$~euros pour jouer.
+\begin{itemize}
+  \item Si l'on obtient un double $6$, on gagne $50$~euros.
+  \item Si l'on obtient exactement un seul $6$ (parmi les deux dés), on gagne $5$~euros.
+  \item Sinon, on ne gagne rien.
+\end{itemize}
+
+\bigskip
+
+\subsection*{Partie A — Construction de la loi du gain}
+
+\begin{exercice}{1SPE-VARALEA-TD-CTX-A}{1}{15}
+\begin{enumerate}
+  \item Parmi les $36$ issues équiprobables du lancer de deux dés, combien donnent un double $6$ ? Combien donnent exactement un seul $6$ ? Combien ne donnent aucun $6$ ?
+  \item On note $G$ le gain algébrique du joueur (gain reçu moins mise). Quelles sont les valeurs possibles de $G$ ?
+  \item Construire le tableau de loi de $G$. Vérifier que la somme des probabilités vaut $1$.
+  \item Calculer $E(G)$. Le jeu est-il favorable au joueur ?
+  \item Si $100$ personnes jouent, quel bénéfice moyen le forain peut-il espérer ?
+\end{enumerate}
+\end{exercice}
+
+\subsection*{Partie B — Modification des règles}
+
+\begin{exercice}{1SPE-VARALEA-TD-CTX-B}{2}{15}
+\begin{enumerate}
+  \item Le forain veut rendre le jeu équitable. Quelle mise $m$ doit-il fixer pour que $E(G) = 0$ ?
+  \item Le forain veut garder la mise à $2$~euros mais modifier le gain en cas de double $6$. Quel montant $M$ rend le jeu équitable ?
+  \item Calculer la variance et l'écart type de $G$ avec les règles initiales. Interpréter.
+\end{enumerate}
+\end{exercice}

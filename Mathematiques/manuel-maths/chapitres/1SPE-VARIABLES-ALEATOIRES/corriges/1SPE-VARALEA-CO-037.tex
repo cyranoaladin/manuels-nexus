@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-CO-037", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-037", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert 50*Rational(2,5) == 20
+% assert 100*Rational(1,5) == 20
+% assert 50*Rational(2,5)*Rational(3,5) == 12
+% assert 100*Rational(1,5)*Rational(4,5) == 16
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-037}
+
+\textbf{1.} $E(X) = 50 \times 0{,}4 = 20$. \quad $E(Y) = 100 \times 0{,}2 = 20$. Mêmes espérances.
+
+\medskip
+\textbf{2.} $V(X) = 50 \times 0{,}4 \times 0{,}6 = 12$. \quad $V(Y) = 100 \times 0{,}2 \times 0{,}8 = 16$.
+
+\medskip
+\textbf{3.} $\sigma(X) = \sqrt{12} \approx 3{,}46$ et $\sigma(Y) = 4$. $X$ est plus concentrée ($\sigma$ plus petit).
+
+\end{corrige}

@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-VARALEA-EX-049", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-049.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-049.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% # Vaccin: efficacite 90%. 8 personnes vaccinees. X = nb proteges.
+% # X ~ B(8, 9/10). P(X=8)? P(X>=6)?
+% p = Rational(9,10); n = 8
+% P8 = p**8
+% assert P8 == Rational(9,10)**8
+% P6 = binomial(8,6)*p**6*(1-p)**2
+% P7 = binomial(8,7)*p**7*(1-p)
+% Pge6 = P6+P7+P8
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-049}{2}{15}
+Un vaccin a une efficacité de $90\,\%$. On vaccine $8$ personnes. Soit $X$ le nombre de personnes effectivement protégées.
+
+\begin{enumerate}
+  \item Justifier que $X \sim \mathcal{B}(8, 0{,}9)$.
+  \item Calculer $P(X = 8)$ (toutes protégées).
+  \item Calculer $E(X)$.
+\end{enumerate}
+\end{exercice}

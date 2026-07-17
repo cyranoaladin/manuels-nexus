@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-CO-047", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-047", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(1,50)
+% assert 5000*p == 100
+% B_1000 = 1000*150 - 5000*1000*p
+% assert B_1000 == 150000 - 100000
+% assert B_1000 == 50000
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-047}
+
+\textbf{1.} $E(B) = c - 5000 \times \frac{1}{50} = c - 100 \geq 0 \Leftrightarrow c \geq 100$~euros.
+
+\medskip
+\textbf{2.} Bénéfice moyen $= 1000 \times 150 - 5000 \times 1000 \times \frac{1}{50} = 150\,000 - 100\,000 = 50\,000$~euros.
+
+\end{corrige}

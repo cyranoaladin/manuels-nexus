@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-VARALEA-CO-041", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-041", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% E = 5*Rational(1,6) + (-2)*Rational(5,6)
+% assert E == Rational(-5,6)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-041}
+
+\textbf{1.} $G = 7-2 = 5$ si $6$ (prob. $\frac{1}{6}$), $G = 0-2 = -2$ sinon (prob. $\frac{5}{6}$).
+\[
+\begin{array}{|c|c|c|}
+\hline
+g_i & -2 & 5 \\
+\hline
+P(G=g_i) & \frac{5}{6} & \frac{1}{6} \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{2.} $E(G) = 5 \times \frac{1}{6} + (-2) \times \frac{5}{6} = \frac{5-10}{6} = -\frac{5}{6} \approx -0{,}83$.
+
+$E(G) < 0$ : le jeu est défavorable au joueur.
+
+\end{corrige}

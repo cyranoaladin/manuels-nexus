@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-VARALEA-CO-017", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-017", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% E = 1; V = Rational(1,2)
+% # Par decomposition: E = 2*1/2 = 1, V = 2*1/4 = 1/2
+% assert 2*Rational(1,2) == 1
+% assert 2*Rational(1,4) == Rational(1,2)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-017}
+
+\textbf{1.} $E(X) = 0 \times \frac{1}{4} + 1 \times \frac{1}{2} + 2 \times \frac{1}{4} = 1$.
+
+$E(X^2) = 0 + 1 \times \frac{1}{2} + 4 \times \frac{1}{4} = \frac{3}{2}$.
+
+$V(X) = \frac{3}{2} - 1 = \frac{1}{2}$. \quad $\sigma(X) = \sqrt{\frac{1}{2}} = \frac{\sqrt{2}}{2} \approx 0{,}71$.
+
+\medskip
+\textbf{2.} $X = X_1 + X_2$ avec $X_i \sim \mathcal{B}(\frac{1}{2})$, $E(X_i) = \frac{1}{2}$, $V(X_i) = \frac{1}{4}$.
+
+$E(X) = 2 \times \frac{1}{2} = 1$. \quad $V(X) = 2 \times \frac{1}{4} = \frac{1}{2}$ (par indépendance). \checkmark
+
+\end{corrige}

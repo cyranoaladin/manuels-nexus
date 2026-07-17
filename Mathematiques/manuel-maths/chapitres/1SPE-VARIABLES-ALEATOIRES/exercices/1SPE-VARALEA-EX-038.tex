@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-VARALEA-EX-038", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C4"], "capacites_codes": ["C4"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-038.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-038.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% # Demonstration V(X)=np(1-p) pour B(n,p)
+% # On utilise V(X) = E(X^2) - [E(X)]^2
+% # E(X^2) = E(X(X-1)) + E(X) = n(n-1)p^2 + np
+% # V(X) = n(n-1)p^2 + np - n^2p^2 = np(1-p)
+% n, p = 5, Rational(1,3)
+% E = n*p; V = n*p*(1-p)
+% E_direct = sum(k*binomial(n,k)*p**k*(1-p)**(n-k) for k in range(n+1))
+% E2_direct = sum(k**2*binomial(n,k)*p**k*(1-p)**(n-k) for k in range(n+1))
+% V_direct = E2_direct - E_direct**2
+% assert V_direct == V
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-038}{3}{20}
+\begin{enumerate}
+  \item Démontrer que pour $X \sim \mathcal{B}(n,p)$ : $E[X(X-1)] = n(n-1)p^2$.
+  \item En déduire $E(X^2) = n(n-1)p^2 + np$.
+  \item Montrer que $V(X) = np(1-p)$.
+  \item Vérifier pour $X \sim \mathcal{B}(5, \frac{1}{3})$.
+\end{enumerate}
+\end{exercice}

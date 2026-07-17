@@ -1,0 +1,123 @@
+% META: {"id": "1SPE-VARALEA-CR-001", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "sous_type": "diagnostic", "titre": "Diagnostic d'entree", "temps_gabarit": 2, "duree_min": 20, "prerequis_testes": ["R1", "R2", "R3", "R4", "R5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, factorial, symbols, summation
+% # Q1 : probabilite d'un evenement simple (de)
+% p_pair = Rational(3, 6)
+% assert p_pair == Rational(1, 2)
+% # Q2 : probabilite complementaire
+% p_non_6 = 1 - Rational(1, 6)
+% assert p_non_6 == Rational(5, 6)
+% # Q3 : probabilites totales
+% # P(A) = P(A|B)*P(B) + P(A|Bc)*P(Bc) = 0.3*0.4 + 0.1*0.6 = 0.18
+% pA = Rational(3,10)*Rational(2,5) + Rational(1,10)*Rational(3,5)
+% assert pA == Rational(18,100)
+% # Q4 : denombrement tirages
+% # Nombre de facons de choisir 2 parmi 5 = C(5,2) = 10
+% from sympy import binomial
+% assert binomial(5, 2) == 10
+% # Q5 : somme 1+2+...+10
+% n = symbols('n')
+% assert sum(range(1, 11)) == 55
+% # Q6 : puissances
+% assert Rational(2,3)**3 == Rational(8,27)
+% # Q7 : produit de probabilites (independance)
+% p_indep = Rational(1,2) * Rational(1,2) * Rational(1,2)
+% assert p_indep == Rational(1,8)
+% # Q8 : suite geometrique somme
+% # somme de (1/2)^k pour k=0..3 = 1 + 1/2 + 1/4 + 1/8 = 15/8
+% s = sum(Rational(1,2)**k for k in range(4))
+% assert s == Rational(15, 8)
+% # Q9 : factorielle
+% assert factorial(5) == 120
+% # Q10 : arbre
+% p_RR = Rational(3,5) * Rational(2,4)
+% assert p_RR == Rational(3,10)
+% END-VERIFY
+
+\section*{Temps 2 — Diagnostic d'entrée \hfill \normalfont\small(15–20 min, sans calculatrice)}
+
+Réponds à chaque question sur ta copie. Ne cherche pas à aller vite : l'objectif est de repérer ce que tu maîtrises, pas de tout réussir.
+
+\bigskip
+
+\subsection*{R1 — Probabilités de base}
+
+\begin{enumerate}
+
+  \item On lance un dé équilibré à $6$ faces. Quelle est la probabilité d'obtenir un nombre pair ?
+
+  \item Quelle est la probabilité de \emph{ne pas} obtenir un $6$ en lançant un dé équilibré ?
+
+\end{enumerate}
+
+\subsection*{R2 — Probabilités conditionnelles}
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+
+  \item Un sac contient $40\,\%$ de billes rouges et $60\,\%$ de billes bleues. La probabilité qu'une bille rouge soit rayée est $0{,}3$ et celle qu'une bille bleue soit rayée est $0{,}1$. Quelle est la probabilité qu'une bille tirée au hasard soit rayée ?
+
+\end{enumerate}
+
+\subsection*{R3 — Combinatoire de base}
+
+\begin{enumerate}
+  \setcounter{enumi}{3}
+
+  \item De combien de façons peut-on choisir $2$ élèves parmi $5$ (sans tenir compte de l'ordre) ?
+
+\end{enumerate}
+
+\subsection*{R4 — Suites et sommes}
+
+\begin{enumerate}
+  \setcounter{enumi}{4}
+
+  \item Calculer $1 + 2 + 3 + \cdots + 10$.
+
+  \item Calculer $\displaystyle\sum_{k=0}^{3} \left(\dfrac{1}{2}\right)^k$.
+
+\end{enumerate}
+
+\subsection*{R5 — Puissances}
+
+\begin{enumerate}
+  \setcounter{enumi}{6}
+
+  \item Calculer $\left(\dfrac{2}{3}\right)^3$.
+
+  \item On lance $3$ fois une pièce équilibrée. En admettant l'indépendance des lancers, quelle est la probabilité d'obtenir $3$ fois Pile ?
+
+  \item Calculer $5!$ (factorielle $5$).
+
+  \item Une urne contient $3$ boules rouges et $2$ boules vertes. On tire successivement $2$ boules \emph{sans remise}. Quelle est la probabilité d'obtenir $2$ boules rouges ?
+
+\end{enumerate}
+
+\bigskip
+
+\subsection*{Grille de décodage}
+
+Reporte tes résultats dans ce tableau, puis suis les conseils de remédiation avant de commencer le cours.
+
+\begin{center}
+\begin{tabular}{|c|c|l|l|}
+\hline
+\textbf{Questions} & \textbf{Prérequis testé} & \textbf{Si tu as échoué\ldots} & \textbf{Fiche à lire} \\
+\hline
+1 et 2 & R1 — Probabilités de base & \ldots avant de commencer C1 & Fiche R1 \\
+\hline
+3 & R2 — Probabilités conditionnelles & \ldots avant de commencer C1, C3 & Fiche R2 \\
+\hline
+4 & R3 — Combinatoire de base & \ldots avant de commencer C3 & Fiche R3 \\
+\hline
+5 et 6 & R4 — Suites et sommes & \ldots avant de commencer C2, C4 & Fiche R4 \\
+\hline
+7, 8, 9 et 10 & R5 — Puissances & \ldots avant de commencer C3, C4 & Fiche R5 \\
+\hline
+\end{tabular}
+\end{center}
+
+\bigskip
+
+Si tu as réussi toutes les questions sans difficulté, tu peux démarrer directement le Temps~3.

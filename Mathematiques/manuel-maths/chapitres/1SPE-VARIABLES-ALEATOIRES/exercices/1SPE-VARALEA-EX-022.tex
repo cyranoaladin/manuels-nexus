@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-VARALEA-EX-022", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C3"], "capacites_codes": ["C3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-022.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-022.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% # X ~ B(5, 1/2), P(X=3)
+% p = Rational(1,2)
+% P3 = binomial(5,3) * p**3 * (1-p)**2
+% assert P3 == Rational(10,32)
+% assert P3 == Rational(5,16)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-022}{1}{12}
+On lance $5$ fois une pièce équilibrée. Soit $X$ le nombre de Pile.
+
+\begin{enumerate}
+  \item Justifier que $X \sim \mathcal{B}(5, \frac{1}{2})$.
+  \item Calculer $P(X = 3)$.
+  \item Calculer $P(X = 0)$ et $P(X = 5)$.
+\end{enumerate}
+\end{exercice}

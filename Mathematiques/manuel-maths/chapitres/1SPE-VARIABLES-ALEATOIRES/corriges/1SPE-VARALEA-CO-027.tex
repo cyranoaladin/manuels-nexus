@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-VARALEA-CO-027", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-027", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% p = Rational(1,3); q = Rational(2,3); n = 8
+% P0 = q**8; P1 = 8*p*q**7; P2 = binomial(8,2)*p**2*q**6
+% P3 = binomial(8,3)*p**3*q**5
+% Ple2 = P0+P1+P2
+% Pge3 = 1 - Ple2
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-027}
+
+\textbf{1.} $P(X=0) = \left(\frac{2}{3}\right)^8 = \frac{256}{6561} \approx 0{,}039$.
+
+$P(X=1) = 8 \times \frac{1}{3} \times \left(\frac{2}{3}\right)^7 = \frac{8 \times 128}{6561} = \frac{1024}{6561} \approx 0{,}156$.
+
+$P(X=2) = 28 \times \frac{1}{9} \times \frac{64}{729} = \frac{1792}{6561} \approx 0{,}273$.
+
+$P(X=3) = 56 \times \frac{1}{27} \times \frac{32}{243} = \frac{1792}{6561} \approx 0{,}273$.
+
+\medskip
+\textbf{2.} $P(X \leq 2) = \frac{256+1024+1792}{6561} = \frac{3072}{6561} \approx 0{,}468$.
+
+\medskip
+\textbf{3.} $P(X \geq 3) = 1 - P(X \leq 2) \approx 0{,}532$.
+
+\end{corrige}

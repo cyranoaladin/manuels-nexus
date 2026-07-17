@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-VARALEA-RE-C4", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+\begin{exercice}{1SPE-VARALEA-RE-C4-EX1}{1}{10}
+Soit $X \sim \mathcal{B}(12, \frac{1}{4})$.
+\begin{enumerate}
+  \item Calculer $E(X)$ à l'aide de la formule $np$.
+  \item Calculer $V(X)$ et $\sigma(X)$.
+  \item Retrouver $n$ et $p$ à partir de $E(X)$ et $V(X)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% n, p = 12, Rational(1,4)
+% E = n*p; assert E == 3
+% V = n*p*(1-p); assert V == Rational(9,4)
+% p_check = 1 - V/E; assert p_check == Rational(1,4)
+% n_check = E/p_check; assert n_check == 12
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-RE-C4-EX1}
+\textbf{1.} $E(X) = 12 \times \frac{1}{4} = 3$.
+\textbf{2.} $V(X) = 12 \times \frac{1}{4} \times \frac{3}{4} = \frac{9}{4} = 2{,}25$. $\sigma(X) = \frac{3}{2} = 1{,}5$.
+\textbf{3.} $1-p = \frac{9/4}{3} = \frac{3}{4}$, donc $p = \frac{1}{4}$. $n = \frac{3}{1/4} = 12$. \checkmark
+\end{corrige}

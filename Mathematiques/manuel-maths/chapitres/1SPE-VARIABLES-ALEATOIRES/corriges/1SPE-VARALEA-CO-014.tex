@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-VARALEA-CO-014", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-014", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% E = Rational(7,2)
+% E2 = Rational(91,6)
+% V = E2 - E**2
+% assert V == Rational(35,12)
+% E_Y = 2*E - 1
+% assert E_Y == 6
+% V_Y = 4*V
+% assert V_Y == Rational(35,3)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-014}
+
+\textbf{1.} $E(X^2) = \frac{1+4+9+16+25+36}{6} = \frac{91}{6}$.
+
+\medskip
+\textbf{2.} $V(X) = \frac{91}{6} - \left(\frac{7}{2}\right)^2 = \frac{91}{6} - \frac{49}{4} = \frac{182-147}{12} = \frac{35}{12}$.
+
+$\sigma(X) = \sqrt{\frac{35}{12}} \approx 1{,}71$.
+
+\medskip
+\textbf{3.} $E(Y) = 2E(X)-1 = 7-1 = 6$. \quad $V(Y) = 2^2 V(X) = 4 \times \frac{35}{12} = \frac{35}{3}$.
+
+\end{corrige}

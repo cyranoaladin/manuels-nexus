@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-VARALEA-EX-015", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C2"], "capacites_codes": ["C2"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-015.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-015.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Piece equilibree, X=1 (Pile), X=0 (Face)
+% E = Rational(1,2)
+% V = Rational(1,2)*Rational(1,2)
+% assert V == Rational(1,4)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-015}{1}{10}
+On lance une pièce équilibrée. Soit $X = 1$ si Pile et $X = 0$ si Face.
+
+\begin{enumerate}
+  \item Calculer $E(X)$ et $V(X)$.
+  \item On pose $Y = 10X - 5$. Calculer $E(Y)$. Pour quelle valeur de la mise $m$ le jeu « on gagne $10$~euros si Pile, on perd $m$ si Face » est-il équitable ?
+\end{enumerate}
+\end{exercice}

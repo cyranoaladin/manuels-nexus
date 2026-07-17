@@ -1,0 +1,32 @@
+{
+  "chapitre": "1SPE-VARIABLES-ALEATOIRES",
+  "mode": "ex_nihilo",
+  "note": "Dossier constitue sans corpus indexe.",
+  "capacites": {
+    "C1": {
+      "chunks_retenus": [],
+      "brief": "Variable aleatoire X sur un univers fini : X associe a chaque issue un reel. Loi de probabilite : tableau donnant les valeurs x_i de X et les probabilites P(X=x_i), avec somme des probabilites = 1. Construction a partir d'un arbre ou d'un tableau d'univers. Erreurs types : (1) oublier une valeur de X ; (2) ne pas verifier que la somme des probabilites vaut 1 ; (3) confondre P(X=x_i) et P(X<=x_i).",
+      "angles_morts": []
+    },
+    "C2": {
+      "chunks_retenus": [],
+      "brief": "Esperance E(X) = somme x_i * P(X=x_i). Variance V(X) = E(X^2) - [E(X)]^2 = somme (x_i - E(X))^2 * P(X=x_i). Ecart type sigma(X) = sqrt(V(X)). Interpretation : E(X) est la valeur moyenne attendue sur un grand nombre de repetitions, sigma(X) mesure la dispersion. Erreurs types : (1) confondre E(X^2) et [E(X)]^2 ; (2) oublier de prendre la racine carree pour l'ecart type ; (3) erreur de signe dans V(X) = E(X^2) - [E(X)]^2.",
+      "angles_morts": []
+    },
+    "C3": {
+      "chunks_retenus": [],
+      "brief": "Loi de Bernoulli B(p) : X vaut 1 (succes) avec probabilite p, 0 (echec) avec probabilite 1-p. Schema de Bernoulli : repetition de n epreuves de Bernoulli independantes. Loi binomiale B(n,p) : X = nombre de succes parmi n epreuves. P(X=k) = C(n,k) * p^k * (1-p)^(n-k). Coefficients binomiaux : C(n,k) = n! / (k!(n-k)!), triangle de Pascal, formule de symetrie C(n,k) = C(n,n-k). Erreurs types : (1) oublier la condition d'independance ; (2) erreur dans le calcul de C(n,k) ; (3) confondre p^k et p^(n-k).",
+      "angles_morts": []
+    },
+    "C4": {
+      "chunks_retenus": [],
+      "brief": "Pour X ~ B(n,p) : E(X) = np, V(X) = np(1-p), sigma(X) = sqrt(np(1-p)). Demonstration exigible de E(X) = np par linearite de l'esperance ou par calcul direct avec somme des k*C(n,k)*p^k*(1-p)^(n-k). Utilisation pour determiner des parametres n et p a partir de E(X) et V(X). Erreurs types : (1) confondre np et n/p ; (2) ecrire V(X) = npq avec q=p au lieu de q=1-p ; (3) ne pas justifier les etapes de la demonstration.",
+      "angles_morts": []
+    },
+    "C5": {
+      "chunks_retenus": [],
+      "brief": "Modelisation de situations concretes : jeux de hasard (gain algebrique), controle qualite (nombre de defauts), assurances (indemnisation), decisions (seuil de rentabilite). Methode : (1) definir la variable aleatoire X adaptee, (2) determiner sa loi, (3) calculer E(X) pour conclure. Jeu equitable : E(X) = 0. Erreurs types : (1) oublier la mise initiale dans le gain algebrique ; (2) ne pas definir clairement la variable aleatoire ; (3) confondre gain et probabilite.",
+      "angles_morts": []
+    }
+  }
+}

@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-EX-042", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C5"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-042.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-042.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Assurance: prime 40, remboursement 500, p_sinistre = 1/20
+% p = Rational(1,20)
+% B = 40 - 500*p
+% assert B == 40 - 25
+% assert B == 15
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-042}{1}{12}
+Un assureur propose un contrat : prime annuelle $40$~euros, remboursement $500$~euros en cas de sinistre. La probabilité de sinistre est $\frac{1}{20}$.
+
+\begin{enumerate}
+  \item Soit $B$ le bénéfice de l'assureur par contrat. Dresser le tableau de loi de $B$.
+  \item Calculer $E(B)$. Le contrat est-il rentable pour l'assureur ?
+\end{enumerate}
+\end{exercice}

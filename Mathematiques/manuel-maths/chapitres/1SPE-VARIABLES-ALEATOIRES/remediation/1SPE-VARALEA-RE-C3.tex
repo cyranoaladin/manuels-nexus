@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-VARALEA-RE-C3", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+\begin{exercice}{1SPE-VARALEA-RE-C3-EX1}{1}{10}
+On tire $3$ fois à pile ou face (pièce équilibrée). Soit $X$ le nombre de Pile.
+\begin{enumerate}
+  \item Vérifier que $X \sim \mathcal{B}(3, \frac{1}{2})$.
+  \item Calculer $P(X=0)$, $P(X=1)$, $P(X=2)$ et $P(X=3)$ en utilisant la formule $P(X=k) = \binom{3}{k}\left(\frac{1}{2}\right)^3$.
+  \item Vérifier que $\sum P(X=k) = 1$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p = Rational(1,2); n = 3
+% for k in range(4):
+%     assert binomial(3,k)*p**3 == Rational(binomial(3,k),8)
+% assert sum(binomial(3,k)*p**3 for k in range(4)) == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-RE-C3-EX1}
+\textbf{1.} $3$ épreuves de Bernoulli indépendantes, $p = \frac{1}{2}$ : $X \sim \mathcal{B}(3, \frac{1}{2})$.
+\textbf{2.} $P(X=0) = \frac{1}{8}$, $P(X=1) = \frac{3}{8}$, $P(X=2) = \frac{3}{8}$, $P(X=3) = \frac{1}{8}$.
+\textbf{3.} $\frac{1+3+3+1}{8} = 1$. \checkmark
+\end{corrige}

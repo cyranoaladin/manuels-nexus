@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-VARALEA-CO-050", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-050", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_R = Rational(2,5); P_B = Rational(3,5)
+% E = 3*P_R + (-1)*P_B
+% assert E == Rational(3,5)
+% # Urne A: P(R)=3/5, E_A = 3*3/5 + (-1)*2/5 = 9/5 - 2/5 = 7/5
+% E_A = 3*Rational(3,5) + (-1)*Rational(2,5)
+% assert E_A == Rational(7,5)
+% # Urne B: P(R)=1/5, E_B = 3*1/5 + (-1)*4/5 = 3/5 - 4/5 = -1/5
+% E_B = 3*Rational(1,5) + (-1)*Rational(4,5)
+% assert E_B == Rational(-1,5)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-050}
+
+\textbf{1.} $P(R) = \frac{1}{2} \times \frac{3}{5} + \frac{1}{2} \times \frac{1}{5} = \frac{3}{10} + \frac{1}{10} = \frac{2}{5}$.
+
+\medskip
+\textbf{2.} $G = 4-1 = 3$ si rouge ($P = \frac{2}{5}$), $G = -1$ si bleue ($P = \frac{3}{5}$).
+\[
+\begin{array}{|c|c|c|}
+\hline
+g_i & -1 & 3 \\
+\hline
+P(G=g_i) & \frac{3}{5} & \frac{2}{5} \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{3.} $E(G) = 3 \times \frac{2}{5} + (-1) \times \frac{3}{5} = \frac{6-3}{5} = \frac{3}{5} = 0{,}6$. Le jeu est favorable ($E(G) > 0$).
+
+\medskip
+\textbf{4.} Urne A : $E_A = 3 \times \frac{3}{5} + (-1) \times \frac{2}{5} = \frac{7}{5} = 1{,}4$. Urne B : $E_B = 3 \times \frac{1}{5} + (-1) \times \frac{4}{5} = -\frac{1}{5}$. Choisir l'urne A.
+
+\end{corrige}

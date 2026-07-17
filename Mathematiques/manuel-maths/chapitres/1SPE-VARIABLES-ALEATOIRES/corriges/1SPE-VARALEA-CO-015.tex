@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-VARALEA-CO-015", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-015", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% E = Rational(1,2)
+% V = Rational(1,4)
+% E_Y = 10*E - 5
+% assert E_Y == 0
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-015}
+
+\textbf{1.} $E(X) = 0 \times \frac{1}{2} + 1 \times \frac{1}{2} = \frac{1}{2}$.
+
+$V(X) = E(X^2) - [E(X)]^2 = \frac{1}{2} - \frac{1}{4} = \frac{1}{4}$.
+
+\medskip
+\textbf{2.} $E(Y) = 10 \times \frac{1}{2} - 5 = 0$. Le jeu est équitable si la mise est $m = 5$~euros (car $Y = 10 - 5 = 5$ si Pile, $Y = 0 - 5 = -5$ si Face, et $E(Y) = 0$).
+
+\end{corrige}

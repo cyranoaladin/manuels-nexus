@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-EX-039", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C4"], "capacites_codes": ["C4"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-039.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # B(1,p) = Bernoulli
+% p = Rational(2,5)
+% E = p; V = p*(1-p)
+% assert E == Rational(2,5)
+% assert V == Rational(6,25)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-039}{1}{10}
+Soit $X \sim \mathcal{B}(\frac{2}{5})$ (loi de Bernoulli).
+
+\begin{enumerate}
+  \item Vérifier que $E(X) = p$ en utilisant la formule $np$ avec $n=1$.
+  \item Vérifier que $V(X) = p(1-p)$.
+\end{enumerate}
+\end{exercice}

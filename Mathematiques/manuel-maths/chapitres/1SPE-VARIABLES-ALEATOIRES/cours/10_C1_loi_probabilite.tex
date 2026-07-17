@@ -1,0 +1,106 @@
+% META: {"id": "1SPE-VARALEA-CR-010", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Loi de probabilité d'une variable aléatoire discrète finie}
+
+% ============================================================
+% STRATE 1 — Définitions et propriétés fondamentales
+% ============================================================
+
+\definition[1]{
+Soit $(\Omega, P)$ un espace probabilisé fini. Une \textbf{variable aléatoire} $X$ est une fonction qui associe à chaque issue $\omega$ de $\Omega$ un nombre réel $X(\omega)$.
+
+L'ensemble des valeurs prises par $X$ est noté $X(\Omega) = \{x_1, x_2, \ldots, x_r\}$.
+}
+
+\exemple{
+On lance un dé équilibré à $6$ faces. On définit $X$ comme le nombre obtenu. Alors $X(\Omega) = \{1, 2, 3, 4, 5, 6\}$.
+
+Si l'on définit $Y$ comme le gain dans un jeu où l'on gagne $2$~euros si le résultat est pair et on perd $1$~euro sinon, alors $Y(\Omega) = \{-1, 2\}$.
+}
+
+\definition[2]{
+La \textbf{loi de probabilité} de $X$ est la donnée de chaque valeur $x_i$ prise par $X$ et de la probabilité correspondante $P(X = x_i)$.
+
+On la représente par un \textbf{tableau de loi} :
+\[
+\begin{array}{|c|c|c|c|c|}
+\hline
+x_i & x_1 & x_2 & \cdots & x_r \\
+\hline
+P(X = x_i) & p_1 & p_2 & \cdots & p_r \\
+\hline
+\end{array}
+\]
+avec $p_i \geq 0$ pour tout $i$ et $\displaystyle\sum_{i=1}^{r} p_i = 1$.
+}
+
+\exemple{
+On lance un dé équilibré. Soit $X$ le résultat obtenu. La loi de $X$ est :
+\[
+\begin{array}{|c|c|c|c|c|c|c|}
+\hline
+x_i & 1 & 2 & 3 & 4 & 5 & 6 \\
+\hline
+P(X = x_i) & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} & \frac{1}{6} \\
+\hline
+\end{array}
+\]
+Vérification : $6 \times \frac{1}{6} = 1$. \checkmark
+}
+
+\exemple{
+On lance deux pièces équilibrées. Soit $X$ le nombre de Pile obtenus.
+
+L'univers est $\Omega = \{PP, PF, FP, FF\}$ avec chaque issue de probabilité $\frac{1}{4}$.
+
+$X(PP) = 2$, $X(PF) = X(FP) = 1$, $X(FF) = 0$.
+
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+x_i & 0 & 1 & 2 \\
+\hline
+P(X = x_i) & \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\
+\hline
+\end{array}
+\]
+Vérification : $\frac{1}{4} + \frac{1}{2} + \frac{1}{4} = 1$. \checkmark
+}
+
+\propriete{
+Pour tout événement de la forme $\{X \leq a\}$ ou $\{X \geq a\}$, on a :
+\[
+P(X \leq a) = \sum_{x_i \leq a} P(X = x_i), \qquad P(X \geq a) = \sum_{x_i \geq a} P(X = x_i).
+\]
+}
+
+\margeAppui{%
+\textbf{Vérification systématique :}\newline
+La somme de toutes les probabilités du tableau de loi doit être égale à $1$.\newline
+Si ce n'est pas le cas, il y a une erreur dans le calcul.%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de vérifier que la somme des probabilités vaut $1$.}
+
+Après avoir construit un tableau de loi, toujours additionner toutes les probabilités. Si la somme n'est pas $1$, c'est qu'une valeur est manquante ou qu'un calcul est erroné.
+}
+
+\erreurFrequente{
+\textbf{Confondre $P(X = x_i)$ et $P(X \leq x_i)$.}
+
+$P(X = 3)$ est la probabilité que $X$ prenne exactement la valeur $3$. $P(X \leq 3)$ est la probabilité que $X$ prenne une valeur inférieure ou égale à $3$ : c'est la somme $P(X = x_1) + P(X = x_2) + \cdots$ pour tous les $x_i \leq 3$.
+}
+
+\margeAppui{%
+\textbf{Construction d'un tableau de loi :}\newline
+1. Lister toutes les issues de l'univers.\newline
+2. Calculer $X(\omega)$ pour chaque issue.\newline
+3. Regrouper les issues donnant la même valeur.\newline
+4. Sommer les probabilités de chaque groupe.\newline
+5. Vérifier : somme $= 1$.%
+}

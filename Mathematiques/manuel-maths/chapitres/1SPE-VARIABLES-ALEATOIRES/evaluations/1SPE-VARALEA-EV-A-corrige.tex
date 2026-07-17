@@ -1,0 +1,117 @@
+% META: {"id": "1SPE-VARALEA-EV-A-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-A", "version": "A", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial, sqrt
+% # Ex 1
+% p_R = Rational(1,2); p_B = Rational(3,8); p_V = Rational(1,8)
+% E = 1*p_R + 3*p_B + 10*p_V
+% assert E == Rational(23,8)
+% E2 = 1*p_R + 9*p_B + 100*p_V
+% assert E2 == Rational(131,8)
+% V = E2 - E**2; assert V == Rational(519,64)
+% E_G = E - 3; assert E_G == Rational(23-24, 8); assert E_G == Rational(-1,8)
+% # Ex 2
+% P0 = Rational(2,3)**6; assert P0 == Rational(64,729)
+% P2 = binomial(6,2)*Rational(1,9)*Rational(16,81); assert P2 == Rational(240,729)
+% E_X = 2; V_X = Rational(4,3)
+% Pge1 = 1 - P0; assert Pge1 == Rational(665,729)
+% # Ex 3
+% E_G3 = 12*Rational(1,6) + (-3)*Rational(5,6)
+% assert E_G3 == Rational(-1,2)
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-EV-A}
+
+%===============================================================
+\section*{Exercice 1 \hfill (8 points) — C1, C2}
+%===============================================================
+
+\baremeIndicatif{Q1: 2 pts; Q2: 2 pts; Q3: 1 pt; Q4: 2 pts; Q5: 1 pt}
+
+\bigskip
+\textbf{Question 1 — Tableau de loi.}
+
+\commentaireMarge{$8$ boules au total, équiprobabilité.}
+
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+x_i & 1 & 3 & 10 \\
+\hline
+P(X=x_i) & \frac{4}{8} = \frac{1}{2} & \frac{3}{8} & \frac{1}{8} \\
+\hline
+\end{array}
+\]
+
+Vérification : $\frac{1}{2} + \frac{3}{8} + \frac{1}{8} = 1$. \checkmark
+
+\medskip
+\textbf{Question 2 — Espérance.}
+
+\commentaireMarge{$E(X) = \sum x_i p_i$.}
+
+$E(X) = 1 \times \frac{1}{2} + 3 \times \frac{3}{8} + 10 \times \frac{1}{8} = \frac{4+9+10}{8} = \frac{23}{8} = 2{,}875$.
+
+En moyenne, le gain par tirage est de $2{,}875$~euros.
+
+\medskip
+\textbf{Question 3 — $E(X^2)$.}
+
+$E(X^2) = 1 \times \frac{1}{2} + 9 \times \frac{3}{8} + 100 \times \frac{1}{8} = \frac{4+27+100}{8} = \frac{131}{8}$.
+
+\medskip
+\textbf{Question 4 — Variance et écart type.}
+
+$V(X) = \frac{131}{8} - \left(\frac{23}{8}\right)^2 = \frac{131}{8} - \frac{529}{64} = \frac{1048-529}{64} = \frac{519}{64} \approx 8{,}11$.
+
+$\sigma(X) = \sqrt{\frac{519}{64}} \approx 2{,}85$.
+
+\medskip
+\textbf{Question 5 — Gain algébrique.}
+
+$E(G) = E(X) - 3 = \frac{23}{8} - 3 = -\frac{1}{8} = -0{,}125$.
+
+$E(G) < 0$ : le jeu est défavorable au joueur.
+
+%===============================================================
+\section*{Exercice 2 \hfill (7 points) — C3, C4}
+%===============================================================
+
+\textbf{Question 1.} Chaque tir est une épreuve de Bernoulli (succès $= $ atteindre, $p = \frac{1}{3}$). Les $6$ tirs sont indépendants. $X$ compte le nombre de succès : $X \sim \mathcal{B}(6, \frac{1}{3})$.
+
+\medskip
+\textbf{Question 2.} $P(X=0) = \left(\frac{2}{3}\right)^6 = \frac{64}{729} \approx 0{,}088$.
+
+\medskip
+\textbf{Question 3.} $P(X=2) = \binom{6}{2}\left(\frac{1}{3}\right)^2\left(\frac{2}{3}\right)^4 = 15 \times \frac{1}{9} \times \frac{16}{81} = \frac{240}{729} = \frac{80}{243} \approx 0{,}329$.
+
+\medskip
+\textbf{Question 4.} $E(X) = 6 \times \frac{1}{3} = 2$. \quad $V(X) = 6 \times \frac{1}{3} \times \frac{2}{3} = \frac{4}{3} \approx 1{,}33$.
+
+\medskip
+\textbf{Question 5.} $P(X \geq 1) = 1 - P(X=0) = 1 - \frac{64}{729} = \frac{665}{729} \approx 0{,}912$.
+
+%===============================================================
+\section*{Exercice 3 \hfill (5 points) — C5}
+%===============================================================
+
+\textbf{Question 1.} Doubles : $(1,1),(2,2),\ldots,(6,6)$, soit $6$ sur $36$ : $P = \frac{1}{6}$.
+
+\medskip
+\textbf{Question 2.} $G = 15 - 3 = 12$ si double ($\frac{1}{6}$), $G = -3$ sinon ($\frac{5}{6}$).
+
+\[
+\begin{array}{|c|c|c|}
+\hline
+g_i & -3 & 12 \\
+\hline
+P(G=g_i) & \frac{5}{6} & \frac{1}{6} \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{Question 3.} $E(G) = 12 \times \frac{1}{6} + (-3) \times \frac{5}{6} = 2 - \frac{5}{2} = -\frac{1}{2}$.
+
+$E(G) = -0{,}5 < 0$ : le jeu est défavorable au joueur.
+
+\end{corrige}

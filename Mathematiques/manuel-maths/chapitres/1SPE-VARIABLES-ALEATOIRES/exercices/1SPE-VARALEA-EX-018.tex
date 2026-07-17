@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-VARALEA-EX-018", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C2"], "capacites_codes": ["C2"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-018.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-018.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% # Max de 2 des: E(X)
+% E = sum(k*Rational(2*k-1,36) for k in range(1,7))
+% assert E == Rational(161,36)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-018}{3}{15}
+Reprendre l'exercice 008 ($X$ = maximum de deux dés).
+
+\begin{enumerate}
+  \item Calculer $E(X)$.
+  \item Calculer $V(X)$.
+  \item En moyenne, le maximum est-il plus proche de $4$ ou de $5$ ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-EX-003", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C1"], "capacites_codes": ["C1"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-003.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Urne: 3 rouges, 2 bleues, 1 verte. X = gain selon couleur
+% # Rouge: 1 euro, Bleue: 3 euros, Verte: 5 euros
+% p_r = Rational(3,6); p_b = Rational(2,6); p_v = Rational(1,6)
+% assert p_r + p_b + p_v == 1
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-003}{1}{12}
+Une urne contient $3$ boules rouges, $2$ boules bleues et $1$ boule verte. On tire une boule au hasard. On gagne $1$~euro si elle est rouge, $3$~euros si elle est bleue et $5$~euros si elle est verte. Soit $X$ le gain.
+
+\begin{enumerate}
+  \item Quelles sont les valeurs prises par $X$ ?
+  \item Dresser le tableau de loi de $X$.
+  \item Calculer $P(X \geq 3)$.
+\end{enumerate}
+\end{exercice}

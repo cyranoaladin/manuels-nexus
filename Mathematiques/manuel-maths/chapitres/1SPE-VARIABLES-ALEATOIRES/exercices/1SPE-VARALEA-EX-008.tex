@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-VARALEA-EX-008", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C1"], "capacites_codes": ["C1"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-008.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Max de 2 des: X = max(d1, d2)
+% # P(X=k) = (2k-1)/36
+% assert sum(Rational(2*k-1, 36) for k in range(1,7)) == 1
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-008}{3}{15}
+On lance deux dés équilibrés. Soit $X$ le maximum des deux résultats.
+
+\begin{enumerate}
+  \item Montrer que $P(X \leq k) = \left(\dfrac{k}{6}\right)^2$ pour $k \in \{1,\ldots,6\}$.
+  \item En déduire $P(X = k)$ pour chaque $k$.
+  \item Dresser le tableau de loi de $X$.
+\end{enumerate}
+\end{exercice}

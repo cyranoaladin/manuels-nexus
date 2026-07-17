@@ -1,0 +1,29 @@
+% META: {"id": "1SPE-VARALEA-CO-005", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(1,8)+Rational(3,8) == Rational(1,2)
+% assert Rational(3,8)+Rational(1,8) == Rational(1,2)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-005}
+
+\textbf{1.} $\Omega = \{PPP, PPF, PFP, FPP, PFF, FPF, FFP, FFF\}$.
+
+\medskip
+\textbf{2.} $X(PPP)=3$, $X(PPF)=X(PFP)=X(FPP)=2$, $X(PFF)=X(FPF)=X(FFP)=1$, $X(FFF)=0$.
+\[
+\begin{array}{|c|c|c|c|c|}
+\hline
+x_i & 0 & 1 & 2 & 3 \\
+\hline
+P(X=x_i) & \frac{1}{8} & \frac{3}{8} & \frac{3}{8} & \frac{1}{8} \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{3.} $P(X \leq 1) = \frac{1}{8}+\frac{3}{8} = \frac{1}{2}$. \quad $P(X \geq 2) = \frac{3}{8}+\frac{1}{8} = \frac{1}{2}$.
+
+\medskip
+\textbf{4.} $\frac{1}{2}+\frac{1}{2}=1$. \checkmark
+
+\end{corrige}

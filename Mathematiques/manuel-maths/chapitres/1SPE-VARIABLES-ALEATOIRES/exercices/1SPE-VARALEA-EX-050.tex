@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-VARALEA-EX-050", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C5"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-050.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-050.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial, sqrt
+% # Jeu complexe: 2 urnes. Urne A: 3R, 2B. Urne B: 1R, 4B.
+% # On choisit une urne au hasard, puis on tire 1 boule.
+% # Rouge: gain 4. Bleue: perte 1. Mise = 1.
+% # P(R) = 1/2 * 3/5 + 1/2 * 1/5 = 3/10 + 1/10 = 4/10 = 2/5
+% P_R = Rational(1,2)*Rational(3,5) + Rational(1,2)*Rational(1,5)
+% assert P_R == Rational(2,5)
+% P_B = 1 - P_R; assert P_B == Rational(3,5)
+% G_R = 4 - 1; G_B = -1
+% E = G_R * P_R + G_B * P_B
+% assert E == 3*Rational(2,5) + (-1)*Rational(3,5)
+% assert E == Rational(6,5) - Rational(3,5)
+% assert E == Rational(3,5)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-050}{3}{20}
+On dispose de deux urnes. L'urne A contient $3$ boules rouges et $2$ bleues. L'urne B contient $1$ boule rouge et $4$ bleues. On choisit une urne au hasard (probabilité $\frac{1}{2}$ chacune), puis on tire une boule.
+
+Le joueur paie $1$~euro. S'il tire une boule rouge, il reçoit $4$~euros. Sinon, il ne reçoit rien.
+
+\begin{enumerate}
+  \item Calculer la probabilité de tirer une boule rouge (formule des probabilités totales).
+  \item Dresser le tableau de loi du gain algébrique $G$.
+  \item Calculer $E(G)$. Le jeu est-il favorable ?
+  \item Le joueur peut-il choisir l'urne ? Si oui, laquelle choisir ?
+\end{enumerate}
+\end{exercice}

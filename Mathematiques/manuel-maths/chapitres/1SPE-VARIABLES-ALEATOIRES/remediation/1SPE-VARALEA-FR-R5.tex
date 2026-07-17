@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-VARALEA-FR-R5", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+\subsection*{Rappel — Puissances}
+
+Règles :
+\begin{itemize}
+  \item $a^m \times a^n = a^{m+n}$
+  \item $(a^m)^n = a^{mn}$
+  \item $\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}$
+  \item $a^0 = 1$ (pour $a \neq 0$)
+\end{itemize}
+
+\begin{exercice}{1SPE-VARALEA-FR-R5-EX1}{1}{5}
+Calculer :
+\begin{enumerate}
+  \item $\left(\frac{1}{2}\right)^4$
+  \item $\left(\frac{3}{4}\right)^2$
+  \item $2^3 \times 2^4$
+  \item $\left(\frac{2}{3}\right)^0$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(1,2)**4 == Rational(1,16)
+% assert Rational(3,4)**2 == Rational(9,16)
+% assert 2**3 * 2**4 == 128
+% assert Rational(2,3)**0 == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-FR-R5-EX1}
+\textbf{1.} $\frac{1}{16}$.
+\textbf{2.} $\frac{9}{16}$.
+\textbf{3.} $2^7 = 128$.
+\textbf{4.} $1$.
+\end{corrige}

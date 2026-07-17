@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-EX-016", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C2"], "capacites_codes": ["C2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-016.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-016.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Roulette: X = -1 (perte) ou 35 (gain)
+% E = 35*Rational(1,37) + (-1)*Rational(36,37)
+% assert E == Rational(35-36, 37)
+% assert E == Rational(-1,37)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-016}{2}{15}
+Reprendre l'exercice 010 (roulette, mise $1$~euro sur un numéro).
+
+\begin{enumerate}
+  \item Calculer $E(X)$.
+  \item Le jeu est-il équitable ? Favorable au joueur ? À la banque ?
+  \item Sur $370$ parties, combien le joueur perd-il en moyenne ?
+\end{enumerate}
+\end{exercice}

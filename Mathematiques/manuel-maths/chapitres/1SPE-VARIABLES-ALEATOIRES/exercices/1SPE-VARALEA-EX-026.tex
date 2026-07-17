@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-VARALEA-EX-026", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C3"], "capacites_codes": ["C3"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-026.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-026.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% # Controle qualite: 5% defaut, n=10, X~B(10, 1/20)
+% p = Rational(1,20); n = 10
+% P0 = (1-p)**n
+% assert P0 == Rational(19,20)**10
+% P1 = binomial(10,1)*p*(1-p)**9
+% P_le_1 = P0 + P1
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-026}{2}{15}
+Une machine produit $5\,\%$ de pièces défectueuses. On prélève $10$ pièces au hasard. Soit $X$ le nombre de pièces défectueuses.
+
+\begin{enumerate}
+  \item Justifier que $X \sim \mathcal{B}(10, 0{,}05)$.
+  \item Calculer $P(X = 0)$ (aucune pièce défectueuse).
+  \item Calculer $P(X = 1)$.
+  \item En déduire $P(X \leq 1)$. Interpréter.
+\end{enumerate}
+\end{exercice}

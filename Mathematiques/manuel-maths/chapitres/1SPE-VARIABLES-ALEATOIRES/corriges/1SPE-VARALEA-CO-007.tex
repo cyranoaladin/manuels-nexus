@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-VARALEA-CO-007", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-007", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p0 = Rational(1,10); p1 = Rational(6,10); p2 = Rational(3,10)
+% assert p0+p1+p2 == 1
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-007}
+
+\textbf{1.} $X \in \{0, 1, 2\}$.
+
+\medskip
+\textbf{2.} Il y a $\binom{5}{2} = 10$ tirages possibles.
+
+$P(X=0) = \frac{\binom{2}{2}}{\binom{5}{2}} = \frac{1}{10}$.
+
+$P(X=1) = \frac{\binom{3}{1}\binom{2}{1}}{\binom{5}{2}} = \frac{6}{10} = \frac{3}{5}$.
+
+$P(X=2) = \frac{\binom{3}{2}}{\binom{5}{2}} = \frac{3}{10}$.
+
+\medskip
+\textbf{3.}
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+x_i & 0 & 1 & 2 \\
+\hline
+P(X=x_i) & \frac{1}{10} & \frac{3}{5} & \frac{3}{10} \\
+\hline
+\end{array}
+\]
+$\frac{1}{10}+\frac{6}{10}+\frac{3}{10}=1$. \checkmark
+
+\end{corrige}

@@ -1,0 +1,36 @@
+% META: {"id": "1SPE-VARALEA-RE-C2", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+\begin{exercice}{1SPE-VARALEA-RE-C2-EX1}{1}{10}
+Soit $X$ la variable aléatoire de loi :
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+x_i & 0 & 1 & 4 \\
+\hline
+P(X=x_i) & \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\
+\hline
+\end{array}
+\]
+\begin{enumerate}
+  \item Calculer $E(X)$ pas à pas.
+  \item Calculer $E(X^2)$.
+  \item En déduire $V(X)$ et $\sigma(X)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% E = 0*Rational(1,4)+1*Rational(1,2)+4*Rational(1,4)
+% assert E == Rational(3,2)
+% E2 = 0+1*Rational(1,2)+16*Rational(1,4)
+% assert E2 == Rational(9,2)
+% V = E2 - E**2; assert V == Rational(9,2) - Rational(9,4)
+% assert V == Rational(9,4)
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-RE-C2-EX1}
+\textbf{1.} $E(X) = 0 \times \frac{1}{4} + 1 \times \frac{1}{2} + 4 \times \frac{1}{4} = \frac{1}{2}+1 = \frac{3}{2}$.
+\textbf{2.} $E(X^2) = 0+1 \times \frac{1}{2}+16 \times \frac{1}{4} = \frac{1}{2}+4 = \frac{9}{2}$.
+\textbf{3.} $V(X) = \frac{9}{2} - \left(\frac{3}{2}\right)^2 = \frac{9}{2}-\frac{9}{4} = \frac{9}{4}$.
+$\sigma(X) = \frac{3}{2} = 1{,}5$.
+\end{corrige}

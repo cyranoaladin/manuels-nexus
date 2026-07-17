@@ -1,0 +1,22 @@
+% META: {"id": "1SPE-VARALEA-CO-026", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-026", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% p = Rational(1,20); n = 10
+% P0 = Rational(19,20)**10
+% P1 = 10*Rational(1,20)*Rational(19,20)**9
+% Ple1 = P0 + P1
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-026}
+
+\textbf{1.} La production est supposée assez grande pour que les tirages soient indépendants. Chaque pièce est défectueuse avec $p = 0{,}05$. Donc $X \sim \mathcal{B}(10, 0{,}05)$.
+
+\medskip
+\textbf{2.} $P(X=0) = (0{,}95)^{10} \approx 0{,}599$.
+
+\medskip
+\textbf{3.} $P(X=1) = \binom{10}{1}(0{,}05)(0{,}95)^9 = 10 \times 0{,}05 \times (0{,}95)^9 \approx 0{,}315$.
+
+\medskip
+\textbf{4.} $P(X \leq 1) \approx 0{,}599 + 0{,}315 = 0{,}914$. Il y a environ $91{,}4\,\%$ de chances d'avoir au plus une pièce défectueuse dans l'échantillon.
+
+\end{corrige}

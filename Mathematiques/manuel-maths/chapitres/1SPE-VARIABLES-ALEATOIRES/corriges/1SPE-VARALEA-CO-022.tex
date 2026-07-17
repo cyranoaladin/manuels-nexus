@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-VARALEA-CO-022", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-022", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% p = Rational(1,2)
+% P3 = binomial(5,3)*p**3*(1-p)**2
+% assert P3 == Rational(5,16)
+% P0 = p**5; assert P0 == Rational(1,32)
+% P5 = p**5; assert P5 == Rational(1,32)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-022}
+
+\textbf{1.} Chaque lancer est une épreuve de Bernoulli ($p = \frac{1}{2}$), les $5$ lancers sont indépendants, $X$ compte le nombre de succès : $X \sim \mathcal{B}(5, \frac{1}{2})$.
+
+\medskip
+\textbf{2.} $P(X=3) = \binom{5}{3}\left(\frac{1}{2}\right)^3\left(\frac{1}{2}\right)^2 = 10 \times \frac{1}{32} = \frac{10}{32} = \frac{5}{16}$.
+
+\medskip
+\textbf{3.} $P(X=0) = \left(\frac{1}{2}\right)^5 = \frac{1}{32}$. \quad $P(X=5) = \left(\frac{1}{2}\right)^5 = \frac{1}{32}$.
+
+\end{corrige}

@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-VARALEA-EX-025", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C3"], "capacites_codes": ["C3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-025.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-025.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% # Triangle de Pascal lignes 0-5
+% for n in range(6):
+%     for k in range(n+1):
+%         assert binomial(n,k) == binomial(n-1,k-1) + binomial(n-1,k) if n>0 and 0<k<n else True
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-025}{1}{10}
+Construire les lignes $n = 0$ à $n = 5$ du triangle de Pascal.
+
+\begin{enumerate}
+  \item Écrire les $6$ premières lignes.
+  \item Vérifier la relation $\binom{4}{2} = \binom{3}{1} + \binom{3}{2}$.
+\end{enumerate}
+\end{exercice}

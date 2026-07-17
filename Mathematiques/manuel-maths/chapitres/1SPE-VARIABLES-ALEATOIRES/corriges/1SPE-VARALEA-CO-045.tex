@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-VARALEA-CO-045", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-045", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% E = 3*Rational(1,2) + (-2)*Rational(1,2)
+% assert E == Rational(1,2)
+% assert 100*E == 50
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-045}
+
+\textbf{1.}
+\[
+\begin{array}{|c|c|c|}
+\hline
+g_i & -2 & 3 \\
+\hline
+P(G=g_i) & \frac{1}{2} & \frac{1}{2} \\
+\hline
+\end{array}
+\]
+
+\textbf{2.} $E(G) = 3 \times \frac{1}{2} + (-2) \times \frac{1}{2} = \frac{1}{2}$. Jeu favorable ($E(G) > 0$).
+
+\textbf{3.} Gain total moyen : $100 \times \frac{1}{2} = 50$~euros.
+
+\end{corrige}

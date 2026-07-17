@@ -1,0 +1,60 @@
+% META: {"id": "1SPE-VARALEA-ME-002", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Calculer espérance, variance et écart type}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de calculer $E(X)$, $V(X)$ ou $\sigma(X)$, ou de déterminer si un jeu est équitable.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item J'écris le tableau de loi de $X$ : valeurs $x_i$ et probabilités $p_i$.
+    \item Je calcule $E(X) = \displaystyle\sum_{i} x_i \, p_i$.
+    \item Je calcule $E(X^2) = \displaystyle\sum_{i} x_i^2 \, p_i$.
+    \item J'applique la formule de König-Huygens : $V(X) = E(X^2) - [E(X)]^2$.
+    \item Je calcule $\sigma(X) = \sqrt{V(X)}$.
+    \item J'interprète dans le contexte du problème.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  Un sac contient $3$ boules numérotées $1$, $2$, $5$. On tire une boule au hasard. Soit $X$ le numéro obtenu.
+
+  \medskip
+  \commentaireMarge{Tableau de loi.}%
+  \[
+  \begin{array}{|c|c|c|c|}
+  \hline
+  x_i & 1 & 2 & 5 \\
+  \hline
+  P(X = x_i) & \frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+  \hline
+  \end{array}
+  \]
+
+  \commentaireMarge{Calcul de $E(X)$.}%
+  $E(X) = 1 \times \frac{1}{3} + 2 \times \frac{1}{3} + 5 \times \frac{1}{3} = \frac{8}{3}$.
+
+  \commentaireMarge{Calcul de $E(X^2)$.}%
+  $E(X^2) = 1 \times \frac{1}{3} + 4 \times \frac{1}{3} + 25 \times \frac{1}{3} = \frac{30}{3} = 10$.
+
+  \commentaireMarge{Variance et écart type.}%
+  $V(X) = 10 - \left(\frac{8}{3}\right)^2 = 10 - \frac{64}{9} = \frac{90 - 64}{9} = \frac{26}{9}$.
+
+  $\sigma(X) = \sqrt{\frac{26}{9}} = \frac{\sqrt{26}}{3} \approx 1{,}70$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Confondre $E(X^2) = \sum x_i^2 p_i$ et $[E(X)]^2 = \left(\sum x_i p_i\right)^2$.
+    \item \textbf{Piège 2.} Oublier la racine carrée : $\sigma(X) = \sqrt{V(X)}$, pas $V(X)$.
+    \item \textbf{Piège 3.} Écrire $V(X) = [E(X)]^2 - E(X^2)$ (inversion) : c'est $E(X^2) - [E(X)]^2$.
+  \end{itemize}
+}
+
+\verifier{%
+  $V(X)$ doit être positif ou nul. Si vous obtenez un nombre négatif, il y a une erreur de calcul (probablement une inversion dans la formule de König-Huygens).
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

@@ -1,0 +1,48 @@
+% META: {"id": "1SPE-VARALEA-ME-004", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "methode", "capacites_codes": ["C4"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Utiliser les formules $E(X)=np$ et $V(X)=np(1-p)$}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque $X$ suit une loi binomiale $\mathcal{B}(n,p)$ et que l'on doit calculer son espérance, sa variance ou son écart type, ou retrouver $n$ et $p$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Je vérifie que $X \sim \mathcal{B}(n, p)$.
+    \item J'applique directement : $E(X) = np$, $V(X) = np(1-p)$, $\sigma(X) = \sqrt{np(1-p)}$.
+    \item Si l'on me donne $E(X)$ et $V(X)$ et qu'on me demande $n$ et $p$ :
+      \begin{itemize}
+        \item $1 - p = \dfrac{V(X)}{E(X)}$, donc $p = 1 - \dfrac{V(X)}{E(X)}$.
+        \item $n = \dfrac{E(X)}{p}$.
+      \end{itemize}
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  On sait que $X \sim \mathcal{B}(n, p)$ avec $E(X) = 6$ et $V(X) = 4{,}2$. Trouver $n$ et $p$.
+
+  \medskip
+  \commentaireMarge{$V(X)/E(X) = 1-p$.}%
+  $1 - p = \dfrac{4{,}2}{6} = 0{,}7$, donc $p = 0{,}3$.
+
+  \commentaireMarge{$n = E(X)/p$.}%
+  $n = \dfrac{6}{0{,}3} = 20$.
+
+  \medskip
+  \textbf{Vérification :} $E(X) = 20 \times 0{,}3 = 6$ \checkmark \quad $V(X) = 20 \times 0{,}3 \times 0{,}7 = 4{,}2$ \checkmark.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Appliquer $E(X) = np$ à une variable qui ne suit pas une loi binomiale.
+    \item \textbf{Piège 2.} Écrire $V(X) = np^2$ au lieu de $np(1-p)$.
+    \item \textbf{Piège 3.} Confondre $np$ et $n/p$.
+  \end{itemize}
+}
+
+\verifier{%
+  Toujours vérifier que $n$ est un entier naturel et que $0 < p < 1$. Si ce n'est pas le cas, il y a une erreur ou l'hypothèse de loi binomiale est incorrecte.
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

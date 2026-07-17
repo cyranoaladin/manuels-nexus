@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-VARALEA-CO-010", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-010", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p_gain = Rational(1,37); p_perte = Rational(36,37)
+% assert p_gain + p_perte == 1
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-010}
+
+\textbf{1.} Si le numéro sort : $X = 36 - 1 = 35$ avec $P = \frac{1}{37}$.
+
+Si le numéro ne sort pas : $X = -1$ avec $P = \frac{36}{37}$.
+
+\medskip
+\textbf{2.}
+\[
+\begin{array}{|c|c|c|}
+\hline
+x_i & -1 & 35 \\
+\hline
+P(X=x_i) & \frac{36}{37} & \frac{1}{37} \\
+\hline
+\end{array}
+\]
+
+\end{corrige}

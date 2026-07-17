@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-EX-037", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C4"], "capacites_codes": ["C4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-037.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-037.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Comparaison de 2 lois binomiales
+% # X~B(50,0.4), Y~B(100,0.2)
+% E_X = 50*Rational(2,5); assert E_X == 20
+% V_X = 50*Rational(2,5)*Rational(3,5); assert V_X == 12
+% E_Y = 100*Rational(1,5); assert E_Y == 20
+% V_Y = 100*Rational(1,5)*Rational(4,5); assert V_Y == 16
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-037}{2}{15}
+Soit $X \sim \mathcal{B}(50, 0{,}4)$ et $Y \sim \mathcal{B}(100, 0{,}2)$.
+
+\begin{enumerate}
+  \item Calculer $E(X)$ et $E(Y)$.
+  \item Calculer $V(X)$ et $V(Y)$.
+  \item Comparer les dispersions. Laquelle des deux variables est la plus concentrée autour de son espérance ?
+\end{enumerate}
+\end{exercice}

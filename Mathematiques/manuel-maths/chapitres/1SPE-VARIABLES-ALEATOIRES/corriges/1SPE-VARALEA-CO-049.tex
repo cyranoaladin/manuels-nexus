@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-VARALEA-CO-049", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-049", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(9,10); n = 8
+% P8 = p**8
+% E = n*p; assert E == Rational(36,5)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-049}
+
+\textbf{1.} Chaque vaccination est une épreuve de Bernoulli ($p = 0{,}9$), les $8$ sont indépendantes : $X \sim \mathcal{B}(8, 0{,}9)$.
+
+\medskip
+\textbf{2.} $P(X=8) = (0{,}9)^8 \approx 0{,}430$.
+
+\medskip
+\textbf{3.} $E(X) = 8 \times 0{,}9 = 7{,}2$ personnes protégées en moyenne.
+
+\end{corrige}

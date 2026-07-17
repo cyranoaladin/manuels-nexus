@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-EX-023", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C3"], "capacites_codes": ["C3"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-023.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-023.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% # X ~ B(4, 1/6), P(X=2)
+% p = Rational(1,6); q = Rational(5,6)
+% P2 = binomial(4,2)*p**2*q**2
+% assert P2 == 6*Rational(1,36)*Rational(25,36)
+% assert P2 == Rational(150,1296)
+% assert P2 == Rational(25,216)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-023}{1}{12}
+On lance $4$ fois un dé. Soit $X$ le nombre de $6$ obtenus. On a $X \sim \mathcal{B}(4, \frac{1}{6})$.
+
+\begin{enumerate}
+  \item Calculer $P(X = 0)$.
+  \item Calculer $P(X = 2)$.
+  \item En déduire $P(X \geq 1)$.
+\end{enumerate}
+\end{exercice}

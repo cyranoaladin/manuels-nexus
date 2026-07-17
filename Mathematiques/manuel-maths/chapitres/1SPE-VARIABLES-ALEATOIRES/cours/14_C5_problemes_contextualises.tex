@@ -1,0 +1,90 @@
+% META: {"id": "1SPE-VARALEA-CR-014", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+
+\section{Problèmes contextualisés}
+
+% ============================================================
+% STRATE 1 — Jeux de hasard et gain algébrique
+% ============================================================
+
+\definition[1]{
+Dans un jeu de hasard, le \textbf{gain algébrique} $G$ d'un joueur est la différence entre ce qu'il reçoit et ce qu'il a payé pour jouer (la mise). Le gain peut être négatif (perte).
+
+Un jeu est dit \textbf{équitable} si $E(G) = 0$ : en moyenne, le joueur ne gagne ni ne perd.
+
+Un jeu est dit \textbf{favorable au joueur} si $E(G) > 0$ et \textbf{défavorable} si $E(G) < 0$.
+}
+
+\exemple{
+On lance un dé équilibré. Si le résultat est $6$, on gagne $10$~euros ; sinon, on perd $2$~euros. La mise est incluse dans les montants.
+
+$G$ prend les valeurs $10$ (avec probabilité $\frac{1}{6}$) et $-2$ (avec probabilité $\frac{5}{6}$).
+
+\[
+E(G) = 10 \times \frac{1}{6} + (-2) \times \frac{5}{6} = \frac{10}{6} - \frac{10}{6} = 0.
+\]
+
+Le jeu est équitable.
+}
+
+% ============================================================
+% STRATE 1 — Contrôle qualité
+% ============================================================
+
+\propriete{
+Dans un problème de \textbf{contrôle qualité}, si l'on prélève $n$ pièces indépendamment dans une production dont le taux de défaut est $p$, le nombre $X$ de pièces défectueuses suit une loi binomiale $\mathcal{B}(n, p)$ (à condition que la production soit assez grande pour considérer les tirages comme indépendants).
+}
+
+\exemple{
+Une machine produit $5\,\%$ de pièces défectueuses. On prélève $20$ pièces au hasard.
+
+$X \sim \mathcal{B}(20, 0{,}05)$. On a $E(X) = 20 \times 0{,}05 = 1$ et $\sigma(X) = \sqrt{20 \times 0{,}05 \times 0{,}95} \approx 0{,}97$.
+
+En moyenne, on s'attend à $1$ pièce défectueuse dans l'échantillon.
+}
+
+% ============================================================
+% STRATE 1 — Assurances et décisions
+% ============================================================
+
+\propriete{
+Dans un problème d'\textbf{assurance}, l'assureur fixe une prime $c$ et verse une indemnité $I$ en cas de sinistre (de probabilité $p$). Le bénéfice de l'assureur par contrat est une variable aléatoire $B$ :
+\begin{itemize}
+  \item $B = c$ si pas de sinistre (probabilité $1 - p$).
+  \item $B = c - I$ si sinistre (probabilité $p$).
+\end{itemize}
+\[
+E(B) = c - pI.
+\]
+Le contrat est rentable pour l'assureur si $E(B) > 0$, c'est-à-dire $c > pI$.
+}
+
+\margeAppui{%
+\textbf{Méthode pour un problème contextualisé :}\newline
+1. Définir clairement la variable aléatoire $X$.\newline
+2. Lister ses valeurs et leurs probabilités.\newline
+3. Construire le tableau de loi.\newline
+4. Calculer $E(X)$ pour conclure.\newline
+5. Interpréter dans le contexte.%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier la mise dans le gain algébrique.}
+
+Si un joueur paie $3$~euros pour jouer et peut gagner $10$~euros, son gain est $10 - 3 = 7$ (et non $10$). S'il ne gagne rien, son gain est $0 - 3 = -3$ (et non $0$).
+}
+
+\erreurFrequente{
+\textbf{Confondre gain et probabilité.}
+
+L'espérance n'est pas une probabilité : $E(G) = -2$ signifie qu'en moyenne on perd $2$~euros par partie, pas que la probabilité de perdre est $2$.
+}
+
+\erreurFrequente{
+\textbf{Ne pas définir clairement la variable aléatoire.}
+
+Avant tout calcul, écrire « Soit $X$ la variable aléatoire qui représente\ldots ». Un exercice où $X$ n'est pas défini est incomplet.
+}

@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-VARALEA-CO-048", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-048", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% p = Rational(3,5)
+% E = 8000*p + (-10000)*(1-p)
+% assert E == 800
+% E2 = 8000**2*p + 10000**2*(1-p)
+% V = E2 - E**2
+% sigma = sqrt(V)
+% # 5 projets: X~B(5, 0.6), gain = 1600*X - 2000*5
+% # Oui on fait ca simplement par E et V
+% E5 = 5 * (1600*p + (-2000)*(1-p))
+% assert E5 == 5*(960-800)
+% assert E5 == 800
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-048}
+
+\textbf{1.} $G = 8000$ si succès ($p = 0{,}6$), $G = -10000$ si échec ($p = 0{,}4$).
+
+\medskip
+\textbf{2.} $E(G) = 8000 \times 0{,}6 + (-10000) \times 0{,}4 = 4800 - 4000 = 800$~euros. L'investissement est intéressant en moyenne.
+
+\medskip
+\textbf{3.} $E(G^2) = 64\,000\,000 \times 0{,}6 + 100\,000\,000 \times 0{,}4 = 38\,400\,000 + 40\,000\,000 = 78\,400\,000$.
+
+$V(G) = 78\,400\,000 - 640\,000 = 77\,760\,000$. $\sigma(G) \approx 8\,818$~euros. Le risque est élevé.
+
+\medskip
+\textbf{4.} Avec $5$ projets à $2000$~euros : gain par projet $= 1600$ (succès) ou $-2000$ (échec). $E = 5 \times 160 = 800$~euros (même espérance). Mais $\sigma \approx 3946$~euros (divisé par $\sqrt{5}$ environ) : le risque est réduit par la diversification.
+
+\end{corrige}

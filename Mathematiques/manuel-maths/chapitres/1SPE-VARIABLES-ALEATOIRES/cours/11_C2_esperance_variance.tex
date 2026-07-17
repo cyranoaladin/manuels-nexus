@@ -1,0 +1,93 @@
+% META: {"id": "1SPE-VARALEA-CR-011", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+
+\section{Espérance, variance et écart type}
+
+% ============================================================
+% STRATE 1 — Définitions et propriétés fondamentales
+% ============================================================
+
+\definition[1]{
+Soit $X$ une variable aléatoire prenant les valeurs $x_1, x_2, \ldots, x_r$ avec les probabilités $p_1, p_2, \ldots, p_r$. L'\textbf{espérance} de $X$ est le nombre réel :
+\[
+  E(X) = \sum_{i=1}^{r} x_i \, p_i = x_1 p_1 + x_2 p_2 + \cdots + x_r p_r.
+\]
+
+L'espérance représente la \textbf{valeur moyenne} de $X$ sur un grand nombre de répétitions de l'expérience (loi des grands nombres).
+}
+
+\exemple{
+On lance un dé équilibré. Soit $X$ le résultat.
+\[
+E(X) = 1 \times \frac{1}{6} + 2 \times \frac{1}{6} + 3 \times \frac{1}{6} + 4 \times \frac{1}{6} + 5 \times \frac{1}{6} + 6 \times \frac{1}{6} = \frac{21}{6} = \frac{7}{2} = 3{,}5.
+\]
+En moyenne, sur un grand nombre de lancers, le résultat moyen est $3{,}5$.
+}
+
+\definition[2]{
+La \textbf{variance} de $X$ mesure la dispersion des valeurs de $X$ autour de son espérance :
+\[
+  V(X) = \sum_{i=1}^{r} (x_i - E(X))^2 \, p_i = E\!\left[(X - E(X))^2\right].
+\]
+
+Formule de König-Huygens (souvent plus pratique pour le calcul) :
+\[
+  V(X) = E(X^2) - [E(X)]^2, \qquad \text{où } E(X^2) = \sum_{i=1}^{r} x_i^2 \, p_i.
+\]
+}
+
+\definition[3]{
+L'\textbf{écart type} de $X$ est :
+\[
+  \sigma(X) = \sqrt{V(X)}.
+\]
+Il est exprimé dans la même unité que $X$ et mesure l'écart moyen des valeurs par rapport à l'espérance.
+}
+
+\exemple{
+Reprenons le dé équilibré. $E(X) = \frac{7}{2}$.
+\[
+E(X^2) = 1^2 \times \frac{1}{6} + 2^2 \times \frac{1}{6} + 3^2 \times \frac{1}{6} + 4^2 \times \frac{1}{6} + 5^2 \times \frac{1}{6} + 6^2 \times \frac{1}{6} = \frac{91}{6}.
+\]
+\[
+V(X) = \frac{91}{6} - \left(\frac{7}{2}\right)^2 = \frac{91}{6} - \frac{49}{4} = \frac{182}{12} - \frac{147}{12} = \frac{35}{12}.
+\]
+\[
+\sigma(X) = \sqrt{\frac{35}{12}} \approx 1{,}71.
+\]
+}
+
+\propriete{
+Pour toute variable aléatoire $X$ et tous réels $a$, $b$ :
+\begin{itemize}
+  \item $E(aX + b) = aE(X) + b$ \quad (linéarité de l'espérance).
+  \item $V(aX + b) = a^2 V(X)$ \quad (la constante $b$ ne change pas la dispersion).
+  \item $\sigma(aX + b) = |a| \, \sigma(X)$.
+\end{itemize}
+}
+
+\margeAppui{%
+\textbf{Interprétation :}\newline
+$E(X)$ = centre de la distribution.\newline
+$V(X)$ = mesure de l'étalement.\newline
+$\sigma(X)$ = même unité que $X$.%
+}
+
+% ============================================================
+% STRATE 2 — Erreurs fréquentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre $E(X^2)$ et $[E(X)]^2$.}
+
+$E(X^2) = \sum x_i^2 p_i$ : on met chaque valeur au carré \emph{avant} de pondérer.
+
+$[E(X)]^2$ : on calcule d'abord l'espérance, \emph{puis} on met au carré.
+
+En général, $E(X^2) \neq [E(X)]^2$. La variance est leur différence : $V(X) = E(X^2) - [E(X)]^2 \geq 0$.
+}
+
+\erreurFrequente{
+\textbf{Oublier la racine carrée pour l'écart type.}
+
+$\sigma(X) = \sqrt{V(X)}$, pas $V(X)$. L'écart type a la même unité que $X$, tandis que la variance est en unités au carré.
+}

@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-EX-047", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-047.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-047.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Assurance auto: prime c, sinistre 5000 avec p=1/50
+% # E(B) >= 0 => c >= 5000/50 = 100
+% p = Rational(1,50)
+% c_min = 5000*p
+% assert c_min == 100
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-047}{2}{15}
+Un assureur couvre un risque automobile. En cas de sinistre (probabilité $\frac{1}{50}$), il verse $5\,000$~euros.
+
+\begin{enumerate}
+  \item Quelle prime annuelle minimale doit-il fixer pour que le contrat soit rentable en moyenne ?
+  \item S'il fixe la prime à $150$~euros et vend $1\,000$ contrats, quel est son bénéfice moyen ?
+\end{enumerate}
+\end{exercice}

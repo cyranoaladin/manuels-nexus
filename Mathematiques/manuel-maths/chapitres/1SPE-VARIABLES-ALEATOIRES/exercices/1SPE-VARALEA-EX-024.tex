@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-EX-024", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C3"], "capacites_codes": ["C3"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-024.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-024.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% # QCM 10 questions, 4 choix, reponse au hasard. X ~ B(10, 1/4)
+% p = Rational(1,4); n = 10
+% P0 = (1-p)**n
+% assert P0 == Rational(3,4)**10
+% P_ge_5 = sum(binomial(n,k)*p**k*(1-p)**(n-k) for k in range(5,11))
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-024}{2}{15}
+Un QCM contient $10$ questions avec $4$ propositions chacune (une seule correcte). Un élève répond au hasard. Soit $X$ le nombre de bonnes réponses.
+
+\begin{enumerate}
+  \item Justifier que $X \sim \mathcal{B}(10, \frac{1}{4})$.
+  \item Calculer $P(X = 0)$.
+  \item Calculer $P(X = 5)$.
+  \item La note est $2X$. Quelle note moyenne obtient-on en répondant au hasard ?
+\end{enumerate}
+\end{exercice}

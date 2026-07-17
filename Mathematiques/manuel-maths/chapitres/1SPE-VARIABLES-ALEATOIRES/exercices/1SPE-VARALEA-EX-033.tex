@@ -1,0 +1,13 @@
+% META: {"id": "1SPE-VARALEA-EX-033", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C4"], "capacites_codes": ["C4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-033.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-033.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Retrouver n et p a partir de E=6 et V=4.2
+% E = 6; V = Rational(42,10)
+% p = 1 - V/E
+% assert p == Rational(3,10)
+% n = E/p
+% assert n == 20
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-033}{2}{15}
+On sait que $X \sim \mathcal{B}(n, p)$ avec $E(X) = 6$ et $V(X) = 4{,}2$. Déterminer $n$ et $p$.
+\end{exercice}

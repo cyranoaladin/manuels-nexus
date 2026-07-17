@@ -1,0 +1,118 @@
+% META: {"id": "1SPE-VARALEA-EV-A", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1","C2","C3","C4","C5"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial, sqrt
+%
+% # ---- Exercice 1 : loi de X (urne) ----
+% # 4R, 3B, 1V. X = gain: R->1, B->3, V->10
+% p_R = Rational(4,8); p_B = Rational(3,8); p_V = Rational(1,8)
+% assert p_R + p_B + p_V == 1
+% E = 1*p_R + 3*p_B + 10*p_V
+% assert E == Rational(4+9+10, 8)
+% assert E == Rational(23,8)
+% E2 = 1*p_R + 9*p_B + 100*p_V
+% assert E2 == Rational(4+27+100, 8)
+% assert E2 == Rational(131,8)
+% V = E2 - E**2
+% assert V == Rational(131,8) - Rational(529,64)
+% assert V == Rational(1048-529, 64)
+% assert V == Rational(519,64)
+%
+% # ---- Exercice 2 : loi binomiale ----
+% # X ~ B(6, 1/3)
+% n, p = 6, Rational(1,3)
+% P0 = Rational(2,3)**6; assert P0 == Rational(64,729)
+% P2 = binomial(6,2)*Rational(1,3)**2*Rational(2,3)**4
+% assert P2 == 15*Rational(1,9)*Rational(16,81)
+% assert P2 == Rational(240,729)
+% assert P2 == Rational(80,243)
+% E_X = n*p; assert E_X == 2
+% V_X = n*p*(1-p); assert V_X == Rational(4,3)
+%
+% # ---- Exercice 3 : jeu (C5) ----
+% # Mise 3. Si double au lancer de 2 des: gain 15. P(double) = 1/6.
+% G_double = 15 - 3; G_other = -3
+% E_G = G_double*Rational(1,6) + G_other*Rational(5,6)
+% assert E_G == Rational(12-15, 6)
+% assert E_G == Rational(-1,2)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Durée : 55 minutes — Barème : 20 points
+% Toute réponse doit être justifiée ; les résultats seuls ne sont pas acceptés.
+%---------------------------------------------------------------
+
+\begin{evaluation}{1SPE-VARALEA-EV-A}{55}
+
+%===============================================================
+\section*{Exercice 1 \hfill (8 points) \hfill Capacités C1, C2}
+%===============================================================
+
+\textit{Compétences évaluées : calculer, raisonner, communiquer.}
+
+\medskip
+Une urne contient $4$ boules rouges, $3$ boules bleues et $1$ boule verte. On tire une boule au hasard. Le gain associé est : $1$~euro si rouge, $3$~euros si bleue, $10$~euros si verte. Soit $X$ le gain.
+
+\begin{enumerate}
+  \item Dresser le tableau de loi de $X$.
+  \hfill\textit{(2 pts — calculer)}
+
+  \item Calculer $E(X)$. Interpréter.
+  \hfill\textit{(2 pts — calculer, communiquer)}
+
+  \item Calculer $E(X^2)$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item En déduire $V(X)$ et $\sigma(X)$.
+  \hfill\textit{(2 pts — calculer)}
+
+  \item Le joueur paie $3$~euros pour jouer. Soit $G = X - 3$ son gain algébrique. Calculer $E(G)$. Le jeu est-il favorable ?
+  \hfill\textit{(1 pt — raisonner)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 2 \hfill (7 points) \hfill Capacités C3, C4}
+%===============================================================
+
+\textit{Compétences évaluées : calculer, raisonner.}
+
+\medskip
+Un tireur atteint sa cible avec une probabilité $\frac{1}{3}$ à chaque tir. Il effectue $6$ tirs indépendants. Soit $X$ le nombre de cibles atteintes.
+
+\begin{enumerate}
+  \item Justifier que $X \sim \mathcal{B}(6, \frac{1}{3})$.
+  \hfill\textit{(1 pt — raisonner)}
+
+  \item Calculer $P(X = 0)$ (aucune cible atteinte).
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Calculer $P(X = 2)$.
+  \hfill\textit{(2 pts — calculer)}
+
+  \item Calculer $E(X)$ et $V(X)$ à l'aide des formules du cours.
+  \hfill\textit{(2 pts — calculer)}
+
+  \item En déduire $P(X \geq 1)$.
+  \hfill\textit{(1 pt — calculer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 3 \hfill (5 points) \hfill Capacité C5}
+%===============================================================
+
+\textit{Compétences évaluées : modéliser, calculer, communiquer.}
+
+\medskip
+On lance deux dés. Si l'on obtient un double (deux résultats identiques), on reçoit $15$~euros. La mise est de $3$~euros.
+
+\begin{enumerate}
+  \item Calculer la probabilité d'obtenir un double.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Définir la variable aléatoire $G$ (gain algébrique) et dresser son tableau de loi.
+  \hfill\textit{(2 pts — modéliser)}
+
+  \item Calculer $E(G)$. Le jeu est-il équitable ? Favorable ? Défavorable ?
+  \hfill\textit{(2 pts — calculer, communiquer)}
+\end{enumerate}
+
+\end{evaluation}

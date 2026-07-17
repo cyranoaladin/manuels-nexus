@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-EX-030", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C3"], "capacites_codes": ["C3"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-030.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-030.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% # Verification: X~B(3,1/2), loi complete
+% p = Rational(1,2); n = 3
+% for k in range(4):
+%     pk = binomial(3,k)*p**3
+%     assert pk == Rational(binomial(3,k), 8)
+% assert sum(binomial(3,k)*p**3 for k in range(4)) == 1
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-030}{2}{15}
+Soit $X \sim \mathcal{B}(3, \frac{1}{2})$.
+
+\begin{enumerate}
+  \item Dresser le tableau de loi complet de $X$.
+  \item Représenter graphiquement cette loi (diagramme en bâtons).
+  \item Vérifier que $E(X) = np$.
+\end{enumerate}
+\end{exercice}

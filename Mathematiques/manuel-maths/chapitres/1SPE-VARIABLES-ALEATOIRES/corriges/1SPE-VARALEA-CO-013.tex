@@ -1,0 +1,23 @@
+% META: {"id": "1SPE-VARALEA-CO-013", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-013", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% E = -2*Rational(1,4) + 0*Rational(1,2) + 3*Rational(1,4)
+% assert E == Rational(1,4)
+% E2 = 4*Rational(1,4) + 0 + 9*Rational(1,4)
+% assert E2 == Rational(13,4)
+% V = E2 - E**2
+% assert V == Rational(51,16)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-013}
+
+\textbf{1.} $E(X) = (-2) \times \frac{1}{4} + 0 \times \frac{1}{2} + 3 \times \frac{1}{4} = -\frac{1}{2} + 0 + \frac{3}{4} = \frac{1}{4}$.
+
+\medskip
+\textbf{2.} $E(X^2) = 4 \times \frac{1}{4} + 0 \times \frac{1}{2} + 9 \times \frac{1}{4} = 1 + 0 + \frac{9}{4} = \frac{13}{4}$.
+
+$V(X) = \frac{13}{4} - \left(\frac{1}{4}\right)^2 = \frac{13}{4} - \frac{1}{16} = \frac{52-1}{16} = \frac{51}{16}$.
+
+\medskip
+\textbf{3.} $\sigma(X) = \sqrt{\frac{51}{16}} = \frac{\sqrt{51}}{4} \approx 1{,}79$.
+
+\end{corrige}

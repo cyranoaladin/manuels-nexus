@@ -1,0 +1,18 @@
+% META: {"id": "1SPE-VARALEA-CO-033", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-033", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = 1 - Rational(42,10)/6
+% assert p == Rational(3,10)
+% n = 6/p; assert n == 20
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-033}
+
+\commentaireMarge{$1-p = V(X)/E(X)$.}
+
+$1-p = \frac{V(X)}{E(X)} = \frac{4{,}2}{6} = 0{,}7$, donc $p = 0{,}3$.
+
+$n = \frac{E(X)}{p} = \frac{6}{0{,}3} = 20$.
+
+\textbf{Vérification :} $E(X) = 20 \times 0{,}3 = 6$ \checkmark \quad $V(X) = 20 \times 0{,}3 \times 0{,}7 = 4{,}2$ \checkmark.
+
+\end{corrige}

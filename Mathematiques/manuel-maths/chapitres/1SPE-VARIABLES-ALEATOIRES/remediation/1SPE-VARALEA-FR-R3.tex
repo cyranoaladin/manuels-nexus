@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-VARALEA-FR-R3", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["R3"], "status": "generated"}
+
+\subsection*{Rappel — Combinatoire de base}
+
+\textbf{Nombre de façons de choisir $k$ éléments parmi $n$} (sans ordre) :
+$\binom{n}{k} = \frac{n!}{k!(n-k)!}$.
+
+Rappel : $n! = n \times (n-1) \times \cdots \times 2 \times 1$ et $0! = 1$.
+
+\begin{exercice}{1SPE-VARALEA-FR-R3-EX1}{1}{5}
+\begin{enumerate}
+  \item Calculer $\binom{4}{2}$ et $\binom{5}{3}$.
+  \item De combien de façons peut-on choisir $3$ élèves parmi $7$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert binomial(4,2) == 6
+% assert binomial(5,3) == 10
+% assert binomial(7,3) == 35
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-FR-R3-EX1}
+\textbf{1.} $\binom{4}{2} = \frac{4!}{2!2!} = 6$. $\binom{5}{3} = \frac{5!}{3!2!} = 10$.
+\textbf{2.} $\binom{7}{3} = \frac{7 \times 6 \times 5}{3!} = \frac{210}{6} = 35$.
+\end{corrige}

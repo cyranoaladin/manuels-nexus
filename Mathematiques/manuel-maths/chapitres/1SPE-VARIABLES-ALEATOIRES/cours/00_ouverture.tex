@@ -1,0 +1,53 @@
+% META: {"id": "1SPE-VARALEA-CR-000", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "cours", "sous_type": "ouverture", "titre": "Variables aleatoires", "temps_gabarit": 1, "parcours_duree": {"P1": "14h", "P2": "11h", "P3": "9h"}, "prerequis": ["R1", "R2", "R3", "R4", "R5"], "capacites": ["C1", "C2", "C3", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+\chapter{Variables aléatoires}
+
+\section*{Contrat du chapitre}
+
+\subsection*{Ce que tu vas savoir faire}
+
+À la fin de ce chapitre, tu seras capable de :
+
+\begin{itemize}
+  \item[\textbf{C1}] Déterminer la loi de probabilité d'une variable aléatoire discrète finie (tableau de loi).
+  \item[\textbf{C2}] Calculer l'espérance $E(X)$, la variance $V(X)$ et l'écart type $\sigma(X)$ d'une variable aléatoire.
+  \item[\textbf{C3}] Reconnaître et utiliser la loi de Bernoulli $\mathcal{B}(p)$ et la loi binomiale $\mathcal{B}(n,p)$, et calculer les coefficients binomiaux.
+  \item[\textbf{C4}] Calculer $E(X) = np$ et $V(X) = np(1-p)$ pour $X \sim \mathcal{B}(n,p)$. Démontrer que $E(X) = np$.
+  \item[\textbf{C5}] Résoudre des problèmes contextualisés (jeux, décisions, assurances) à l'aide de variables aléatoires.
+\end{itemize}
+
+\subsection*{Ce dont tu as besoin avant de commencer}
+
+Ce chapitre s'appuie sur cinq familles de prérequis. Le diagnostic de la page suivante te dira lesquels tu maîtrises déjà.
+
+\begin{itemize}
+  \item[\textbf{R1}] \textbf{Probabilités de base} — expérience aléatoire, univers, événements, probabilité d'un événement.
+  \item[\textbf{R2}] \textbf{Probabilités conditionnelles} — formule des probabilités totales, indépendance.
+  \item[\textbf{R3}] \textbf{Combinatoire de base} — dénombrements, nombre de cas favorables.
+  \item[\textbf{R4}] \textbf{Suites et sommes} — notation $\sum$, suites arithmétiques et géométriques.
+  \item[\textbf{R5}] \textbf{Puissances} — règles de calcul, puissances entières.
+\end{itemize}
+
+Si une fiche R te concerne, lis-la avant d'aborder le cours : chaque notion manquante sera un obstacle au moment où tu en auras le plus besoin.
+
+\subsection*{Temps de travail estimé}
+
+\begin{itemize}
+  \item Parcours~\parcoursUn{} (Consolidation) : environ \textbf{14~h}.
+  \item Parcours~\parcoursDeux{} (Maîtrise) : environ \textbf{11~h}.
+  \item Parcours~\parcoursTrois{} (Approfondissement) : environ \textbf{9~h}.
+\end{itemize}
+
+\subsection*{Situation d'accroche — L'assurance smartphone}
+
+Un assureur propose un contrat couvrant la casse d'un smartphone. La prime annuelle est de $50$~euros. En cas de casse, l'assureur rembourse $300$~euros. On estime que la probabilité de casse dans l'année est $\dfrac{1}{10}$.
+
+\begin{itemize}
+  \item Si l'on note $X$ le gain de l'assuré (remboursement moins prime), quelles sont les valeurs possibles de $X$ ?
+  \item Quelle est la probabilité de chaque valeur ?
+  \item En moyenne, sur un grand nombre d'assurés, ce contrat est-il avantageux pour l'assuré ? Pour l'assureur ?
+\end{itemize}
+
+On a $X = 250$ (cas de casse : $300 - 50$) avec probabilité $\frac{1}{10}$ et $X = -50$ (pas de casse : $-50$) avec probabilité $\frac{9}{10}$. L'espérance $E(X) = 250 \times \frac{1}{10} + (-50) \times \frac{9}{10} = 25 - 45 = -20$. En moyenne, l'assuré perd $20$~euros par an : le contrat est avantageux pour l'assureur.
+
+Cette situation sera entièrement traitée au Temps~7 (TD fil rouge), une fois les capacités C1 à C5 acquises.

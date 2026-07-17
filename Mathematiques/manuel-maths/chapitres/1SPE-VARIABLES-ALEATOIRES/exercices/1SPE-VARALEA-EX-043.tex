@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-VARALEA-EX-043", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C5"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-043.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-043.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Jeu equitable: trouver la mise
+% # On lance 2 des. Si double: gain 18 euros. Mise m.
+% # P(double) = 6/36 = 1/6
+% # E(G) = (18-m)*1/6 + (-m)*5/6 = 0
+% # 18/6 - m/6 - 5m/6 = 0 => 3 - m = 0 => m = 3
+% m = 3
+% E = (18-m)*Rational(1,6) + (-m)*Rational(5,6)
+% assert E == 0
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-043}{2}{15}
+On lance deux dés. Si l'on obtient un double (deux résultats identiques), on gagne $18$~euros. Sinon, on ne gagne rien.
+
+\begin{enumerate}
+  \item Calculer la probabilité d'obtenir un double.
+  \item Soit $m$ la mise. Exprimer $E(G)$ en fonction de $m$ où $G$ est le gain algébrique.
+  \item Quelle mise rend le jeu équitable ?
+\end{enumerate}
+\end{exercice}

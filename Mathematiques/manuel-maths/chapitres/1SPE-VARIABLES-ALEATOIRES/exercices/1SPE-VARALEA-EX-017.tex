@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-EX-017", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C2"], "capacites_codes": ["C2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-017.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-017.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% # 2 pieces: X = nb Pile. E(X), V(X)
+% E = 0*Rational(1,4)+1*Rational(1,2)+2*Rational(1,4)
+% assert E == 1
+% E2 = 0+1*Rational(1,2)+4*Rational(1,4)
+% assert E2 == Rational(3,2)
+% V = E2 - E**2
+% assert V == Rational(1,2)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-017}{2}{15}
+On lance deux pièces équilibrées. Soit $X$ le nombre de Pile.
+
+\begin{enumerate}
+  \item Calculer $E(X)$, $V(X)$ et $\sigma(X)$.
+  \item Retrouver ces résultats en utilisant $X = X_1 + X_2$ où $X_i \sim \mathcal{B}(\frac{1}{2})$.
+\end{enumerate}
+\end{exercice}

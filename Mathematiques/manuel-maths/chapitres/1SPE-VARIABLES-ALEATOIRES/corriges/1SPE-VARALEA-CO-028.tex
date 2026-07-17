@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-VARALEA-CO-028", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-028", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% for n in range(1,8):
+%     assert sum(binomial(n,k) for k in range(n+1)) == 2**n
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-028}
+
+\textbf{1.} $\binom{n-1}{k-1} + \binom{n-1}{k} = \frac{(n-1)!}{(k-1)!(n-k)!} + \frac{(n-1)!}{k!(n-1-k)!}$.
+
+$= \frac{(n-1)! \cdot k + (n-1)! \cdot (n-k)}{k!(n-k)!} = \frac{(n-1)! \cdot n}{k!(n-k)!} = \frac{n!}{k!(n-k)!} = \binom{n}{k}$.
+
+\medskip
+\textbf{2.} Par la formule du binôme de Newton avec $a=b=1$ :
+$\sum_{k=0}^{n} \binom{n}{k} 1^k \cdot 1^{n-k} = (1+1)^n = 2^n$.
+
+\medskip
+\textbf{3.} Pour $X \sim \mathcal{B}(n, \frac{1}{2})$ :
+$\sum_{k=0}^{n} P(X=k) = \sum_{k=0}^{n} \binom{n}{k} \left(\frac{1}{2}\right)^n = \frac{1}{2^n} \sum_{k=0}^{n} \binom{n}{k} = \frac{2^n}{2^n} = 1$. \checkmark
+
+\end{corrige}

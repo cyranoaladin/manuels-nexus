@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-EX-041", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C5"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-041.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-041.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Jeu de de: mise 2, gain 7 si 6, sinon rien
+% G6 = 7 - 2; G_other = -2
+% E = G6*Rational(1,6) + G_other*Rational(5,6)
+% assert E == Rational(5,6) + Rational(-10,6)
+% assert E == Rational(-5,6)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-041}{1}{12}
+Un joueur paie $2$~euros pour lancer un dé. S'il obtient un $6$, il reçoit $7$~euros. Sinon, il ne reçoit rien. Soit $G$ le gain algébrique.
+
+\begin{enumerate}
+  \item Dresser le tableau de loi de $G$.
+  \item Calculer $E(G)$. Le jeu est-il favorable au joueur ?
+\end{enumerate}
+\end{exercice}

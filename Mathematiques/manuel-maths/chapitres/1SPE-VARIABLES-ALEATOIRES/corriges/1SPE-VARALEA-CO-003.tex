@@ -1,0 +1,28 @@
+% META: {"id": "1SPE-VARALEA-CO-003", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-003", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p_r = Rational(3,6); p_b = Rational(2,6); p_v = Rational(1,6)
+% assert p_r + p_b + p_v == 1
+% assert p_b + p_v == Rational(1,2)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-003}
+
+\textbf{1.} $X$ prend les valeurs $1$, $3$ et $5$.
+
+\medskip
+\textbf{2.} Il y a $6$ boules au total.
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+x_i & 1 & 3 & 5 \\
+\hline
+P(X=x_i) & \frac{3}{6} = \frac{1}{2} & \frac{2}{6} = \frac{1}{3} & \frac{1}{6} \\
+\hline
+\end{array}
+\]
+Vérification : $\frac{1}{2} + \frac{1}{3} + \frac{1}{6} = \frac{3+2+1}{6} = 1$. \checkmark
+
+\medskip
+\textbf{3.} $P(X \geq 3) = \frac{1}{3} + \frac{1}{6} = \frac{2+1}{6} = \frac{1}{2}$.
+
+\end{corrige}

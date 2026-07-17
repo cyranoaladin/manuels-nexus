@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-EX-046", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C5"], "capacites_codes": ["C5"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-046.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-046.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% # Jeu: lancer 3 des. Gain = 10*(nb de 6) - 5 (mise).
+% # X = nb de 6 ~ B(3, 1/6). G = 10X - 5.
+% p = Rational(1,6); n = 3
+% E_X = n*p; assert E_X == Rational(1,2)
+% E_G = 10*E_X - 5; assert E_G == 0
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-046}{3}{20}
+On paie $5$~euros pour lancer $3$ dés. Pour chaque $6$ obtenu, on reçoit $10$~euros. Soit $X$ le nombre de $6$ et $G = 10X - 5$ le gain algébrique.
+
+\begin{enumerate}
+  \item Quelle est la loi de $X$ ?
+  \item Dresser le tableau de loi de $G$.
+  \item Calculer $E(G)$. Le jeu est-il équitable ?
+  \item Calculer $V(G)$ et $\sigma(G)$.
+\end{enumerate}
+\end{exercice}

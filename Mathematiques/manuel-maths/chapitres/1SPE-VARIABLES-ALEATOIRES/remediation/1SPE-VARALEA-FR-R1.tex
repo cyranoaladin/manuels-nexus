@@ -1,0 +1,32 @@
+% META: {"id": "1SPE-VARALEA-FR-R1", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+\subsection*{Rappel — Probabilités de base}
+
+\textbf{Expérience aléatoire} : expérience dont on ne peut pas prévoir le résultat.
+
+\textbf{Univers} $\Omega$ : ensemble de toutes les issues possibles.
+
+\textbf{Événement} : sous-ensemble de $\Omega$. La probabilité d'un événement $A$ vérifie $0 \leq P(A) \leq 1$ et $P(\Omega) = 1$.
+
+\textbf{Équiprobabilité} : si toutes les issues sont également probables, $P(A) = \frac{\text{nombre de cas favorables}}{\text{nombre de cas possibles}}$.
+
+\begin{exercice}{1SPE-VARALEA-FR-R1-EX1}{1}{5}
+On lance un dé équilibré à $6$ faces.
+\begin{enumerate}
+  \item Quel est l'univers $\Omega$ ?
+  \item Calculer $P(\text{obtenir un nombre pair})$.
+  \item Calculer $P(\text{obtenir un nombre supérieur à 4})$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(3,6) == Rational(1,2)
+% assert Rational(2,6) == Rational(1,3)
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-FR-R1-EX1}
+\textbf{1.} $\Omega = \{1,2,3,4,5,6\}$.
+\textbf{2.} Nombres pairs : $\{2,4,6\}$, donc $P = \frac{3}{6} = \frac{1}{2}$.
+\textbf{3.} Supérieurs à $4$ : $\{5,6\}$, donc $P = \frac{2}{6} = \frac{1}{3}$.
+\end{corrige}

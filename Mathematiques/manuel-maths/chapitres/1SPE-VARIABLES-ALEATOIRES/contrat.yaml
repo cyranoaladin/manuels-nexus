@@ -1,0 +1,27 @@
+chapitre: 1SPE-VARIABLES-ALEATOIRES
+niveau: 1SPE
+theme: VARIABLES-ALEATOIRES
+titre: "Variables aleatoires"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C1, libelle_eleve: "Je sais determiner la loi de probabilite d'une variable aleatoire discrete finie (tableau de loi)." }
+  - { code: C2, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C2, libelle_eleve: "Je sais calculer l'esperance E(X), la variance V(X) et l'ecart type sigma(X) d'une variable aleatoire." }
+  - { code: C3, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C3, libelle_eleve: "Je sais reconnaitre et utiliser la loi de Bernoulli B(p) et la loi binomiale B(n,p), et calculer les coefficients binomiaux." }
+  - { code: C4, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C4, libelle_eleve: "Je sais calculer E(X)=np et V(X)=np(1-p) pour X suivant B(n,p). Je sais demontrer E(X)=np." }
+  - { code: C5, ref_capacite: 1SPE-VARIABLES-ALEATOIRES-C5, libelle_eleve: "Je sais resoudre des problemes contextualises (jeux, decisions, assurances) a l'aide de variables aleatoires." }
+
+prerequis:
+  - { code: R1, libelle: "Probabilites de base : experience aleatoire, univers, evenements, probabilite d'un evenement", chapitre_origine: "2GT" }
+  - { code: R2, libelle: "Probabilites conditionnelles et independance", chapitre_origine: "1SPE-PROBA-COND" }
+  - { code: R3, libelle: "Combinatoire de base : denombrement, arrangements", chapitre_origine: "2GT" }
+  - { code: R4, libelle: "Suites et sommes : notation sigma, suites arithmetiques et geometriques", chapitre_origine: "1SPE-SUITES" }
+  - { code: R5, libelle: "Puissances : regles de calcul, puissances entieres", chapitre_origine: "2GT" }
+
+situation_accroche: >
+  Un assureur propose un contrat couvrant la casse d'un smartphone. La prime annuelle est de 50 euros.
+  En cas de casse, l'assureur rembourse 300 euros. Si la probabilite de casse est de 1/10, ce contrat
+  est-il avantageux pour l'assure ? Pour l'assureur ? Un probleme de decision qui se ramene a l'etude
+  de l'esperance d'une variable aleatoire.
+
+temps_estime_h: { parcours1: 14, parcours2: 11, parcours3: 9 }

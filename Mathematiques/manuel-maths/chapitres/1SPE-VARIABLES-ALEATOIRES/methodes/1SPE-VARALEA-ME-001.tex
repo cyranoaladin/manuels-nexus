@@ -1,0 +1,61 @@
+% META: {"id": "1SPE-VARALEA-ME-001", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Construire le tableau de loi d'une variable aléatoire}
+
+\quandUtiliser{%
+  Utiliser cette méthode lorsque l'énoncé demande de déterminer la loi de probabilité d'une variable aléatoire, c'est-à-dire de dresser le tableau donnant chaque valeur et sa probabilité.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item Je liste toutes les issues de l'univers $\Omega$ et leurs probabilités.
+    \item Pour chaque issue $\omega$, je calcule la valeur $X(\omega)$.
+    \item Je regroupe les issues qui donnent la même valeur de $X$.
+    \item Pour chaque valeur $x_i$, je somme les probabilités des issues correspondantes : $P(X = x_i)$.
+    \item Je présente le résultat dans un tableau de loi.
+    \item Je vérifie que la somme de toutes les probabilités vaut $1$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  On lance deux pièces équilibrées. Soit $X$ le nombre de Pile obtenus.
+
+  \medskip
+  \commentaireMarge{Lister les issues.}%
+  $\Omega = \{PP, PF, FP, FF\}$, chaque issue a probabilité $\frac{1}{4}$.
+
+  \commentaireMarge{Calculer $X(\omega)$.}%
+  $X(PP) = 2$, $X(PF) = 1$, $X(FP) = 1$, $X(FF) = 0$.
+
+  \commentaireMarge{Regrouper et sommer.}%
+  $P(X = 0) = \frac{1}{4}$, $P(X = 1) = \frac{1}{4} + \frac{1}{4} = \frac{1}{2}$, $P(X = 2) = \frac{1}{4}$.
+
+  \commentaireMarge{Tableau de loi.}%
+  \[
+  \begin{array}{|c|c|c|c|}
+  \hline
+  x_i & 0 & 1 & 2 \\
+  \hline
+  P(X = x_i) & \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\
+  \hline
+  \end{array}
+  \]
+
+  \commentaireMarge{Vérification.}%
+  $\frac{1}{4} + \frac{1}{2} + \frac{1}{4} = 1$ \checkmark
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piège 1.} Oublier une issue de l'univers (par exemple oublier $FP$ et ne compter que $PF$ pour $X = 1$).
+    \item \textbf{Piège 2.} Ne pas regrouper toutes les issues donnant la même valeur de $X$.
+    \item \textbf{Piège 3.} Ne pas vérifier que la somme des probabilités vaut $1$.
+  \end{itemize}
+}
+
+\verifier{%
+  Additionner toutes les probabilités du tableau : le total doit être exactement $1$. Si ce n'est pas le cas, une valeur a été oubliée ou un calcul est erroné.
+}
+
+\sEntrainer{\refExos{M1}}
+
+\end{fichemethode}

@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-VARALEA-FR-R4", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "generated"}
+
+\subsection*{Rappel — Suites et sommes}
+
+\textbf{Somme des entiers} : $1 + 2 + \cdots + n = \frac{n(n+1)}{2}$.
+
+\textbf{Notation sigma} : $\sum_{k=1}^{n} a_k = a_1 + a_2 + \cdots + a_n$.
+
+\textbf{Somme géométrique} : $\sum_{k=0}^{n} q^k = \frac{1-q^{n+1}}{1-q}$ si $q \neq 1$.
+
+\begin{exercice}{1SPE-VARALEA-FR-R4-EX1}{1}{5}
+\begin{enumerate}
+  \item Calculer $\sum_{k=1}^{5} k$.
+  \item Calculer $\sum_{k=0}^{4} \left(\frac{1}{2}\right)^k$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert sum(range(1,6)) == 15
+% assert sum(Rational(1,2)**k for k in range(5)) == Rational(31,16)
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-FR-R4-EX1}
+\textbf{1.} $1+2+3+4+5 = 15$.
+\textbf{2.} $1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \frac{1}{16} = \frac{16+8+4+2+1}{16} = \frac{31}{16}$.
+\end{corrige}

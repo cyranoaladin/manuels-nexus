@@ -1,0 +1,21 @@
+% META: {"id": "1SPE-VARALEA-EX-010", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C1"], "capacites_codes": ["C1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-010.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Roulette simplifiee: 37 cases (0..36), X = gain
+% # Mise = 1 euro. Pari sur un numero: gain = 36 - 1 = 35 ou perte = -1
+% p_gain = Rational(1,37); p_perte = Rational(36,37)
+% assert p_gain + p_perte == 1
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-010}{2}{15}
+À la roulette, il y a $37$ cases numérotées de $0$ à $36$. Un joueur mise $1$~euro sur un numéro.
+\begin{itemize}
+  \item Si le numéro sort, il reçoit $36$~euros (gain net : $35$~euros).
+  \item Sinon, il perd sa mise.
+\end{itemize}
+Soit $X$ le gain algébrique du joueur.
+
+\begin{enumerate}
+  \item Quelles sont les valeurs de $X$ et leurs probabilités ?
+  \item Dresser le tableau de loi de $X$.
+\end{enumerate}
+\end{exercice}

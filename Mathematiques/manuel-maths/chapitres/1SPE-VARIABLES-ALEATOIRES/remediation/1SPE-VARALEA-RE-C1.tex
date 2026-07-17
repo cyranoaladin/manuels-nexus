@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-VARALEA-RE-C1", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+\begin{exercice}{1SPE-VARALEA-RE-C1-EX1}{1}{10}
+On tire une carte au hasard dans un jeu de $32$ cartes. Soit $X$ le nombre de points associé : $1$ pour un As, $7$ pour un $7$, $8$ pour un $8$, $9$ pour un $9$, $10$ pour un $10$, Valet, Dame, Roi.
+\begin{enumerate}
+  \item Quelles sont les valeurs prises par $X$ ?
+  \item Combien de cartes donnent chaque valeur ?
+  \item Dresser le tableau de loi de $X$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% # 32 cartes: 4 As (1pt), 4x7 (7pt), 4x8 (8pt), 4x9 (9pt), 4x10+4xV+4xD+4xR (10pt)
+% assert 4+4+4+4+16 == 32
+% assert Rational(4,32)+Rational(4,32)+Rational(4,32)+Rational(4,32)+Rational(16,32) == 1
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-RE-C1-EX1}
+\textbf{1.} $X \in \{1, 7, 8, 9, 10\}$.
+\textbf{2.} $4$ As, $4$ sept, $4$ huit, $4$ neuf, $16$ figures/dix.
+\textbf{3.}
+\[
+\begin{array}{|c|c|c|c|c|c|}
+\hline
+x_i & 1 & 7 & 8 & 9 & 10 \\
+\hline
+P(X=x_i) & \frac{4}{32}=\frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{1}{8} & \frac{16}{32}=\frac{1}{2} \\
+\hline
+\end{array}
+\]
+Vérification : $4 \times \frac{1}{8} + \frac{1}{2} = \frac{1}{2}+\frac{1}{2} = 1$. \checkmark
+\end{corrige}

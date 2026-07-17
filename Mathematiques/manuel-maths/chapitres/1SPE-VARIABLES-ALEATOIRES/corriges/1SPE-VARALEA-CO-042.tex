@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-VARALEA-CO-042", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-042", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(1,20)
+% E_B = 40*(1-p) + (40-500)*p
+% assert E_B == 38 + Rational(-460,20)
+% assert E_B == 15
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-042}
+
+\textbf{1.} Pas de sinistre : $B = 40$ (prob. $\frac{19}{20}$). Sinistre : $B = 40 - 500 = -460$ (prob. $\frac{1}{20}$).
+
+\[
+\begin{array}{|c|c|c|}
+\hline
+b_i & -460 & 40 \\
+\hline
+P(B=b_i) & \frac{1}{20} & \frac{19}{20} \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{2.} $E(B) = 40 - 500 \times \frac{1}{20} = 40 - 25 = 15$. Le contrat est rentable : l'assureur gagne en moyenne $15$~euros par contrat.
+
+\end{corrige}

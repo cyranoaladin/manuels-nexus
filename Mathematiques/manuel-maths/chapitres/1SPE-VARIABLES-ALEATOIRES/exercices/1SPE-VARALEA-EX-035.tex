@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-VARALEA-EX-035", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C4"], "capacites_codes": ["C4"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-035.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-035.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial, symbols
+% # Demonstration E(X)=np par calcul direct
+% # k*C(n,k) = n*C(n-1,k-1)
+% n = 5
+% for k in range(1,n+1):
+%     assert k*binomial(n,k) == n*binomial(n-1,k-1)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-035}{3}{20}
+\begin{enumerate}
+  \item Démontrer que pour $1 \leq k \leq n$ : $k \binom{n}{k} = n \binom{n-1}{k-1}$.
+  \item En utilisant cette identité, démontrer que si $X \sim \mathcal{B}(n,p)$, alors $E(X) = np$.
+  \item Application : vérifier pour $X \sim \mathcal{B}(4, \frac{1}{3})$.
+\end{enumerate}
+\end{exercice}

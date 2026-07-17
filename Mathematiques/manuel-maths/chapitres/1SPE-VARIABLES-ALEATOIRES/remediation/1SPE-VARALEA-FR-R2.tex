@@ -1,0 +1,29 @@
+% META: {"id": "1SPE-VARALEA-FR-R2", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "generated"}
+
+\subsection*{Rappel — Probabilités conditionnelles}
+
+$P(A|B) = \frac{P(A \cap B)}{P(B)}$ si $P(B) > 0$.
+
+\textbf{Formule des probabilités totales} : si $B_1, \ldots, B_n$ forment une partition de $\Omega$ :
+$P(A) = \sum_{i=1}^{n} P(A|B_i) P(B_i)$.
+
+\textbf{Indépendance} : $A$ et $B$ sont indépendants si $P(A \cap B) = P(A) \times P(B)$.
+
+\begin{exercice}{1SPE-VARALEA-FR-R2-EX1}{1}{5}
+Une urne contient $4$ boules rouges et $6$ boules bleues. On tire deux boules successivement sans remise.
+\begin{enumerate}
+  \item Calculer la probabilité que la première boule soit rouge.
+  \item Sachant que la première est rouge, calculer la probabilité que la deuxième soit rouge.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% assert Rational(4,10) == Rational(2,5)
+% assert Rational(3,9) == Rational(1,3)
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-FR-R2-EX1}
+\textbf{1.} $P(R_1) = \frac{4}{10} = \frac{2}{5}$.
+\textbf{2.} $P(R_2|R_1) = \frac{3}{9} = \frac{1}{3}$.
+\end{corrige}

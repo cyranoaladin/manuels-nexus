@@ -1,0 +1,31 @@
+% META: {"id": "1SPE-VARALEA-EX-013", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C2"], "capacites_codes": ["C2"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-013.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-013.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% # X: loi donnee par tableau
+% # x: -2, 0, 3 avec p: 1/4, 1/2, 1/4
+% E = -2*Rational(1,4) + 0*Rational(1,2) + 3*Rational(1,4)
+% assert E == Rational(1,4)
+% E2 = 4*Rational(1,4) + 0*Rational(1,2) + 9*Rational(1,4)
+% assert E2 == Rational(13,4)
+% V = E2 - E**2
+% assert V == Rational(13,4) - Rational(1,16)
+% assert V == Rational(51,16)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-013}{1}{12}
+Soit $X$ une variable aléatoire de loi :
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+x_i & -2 & 0 & 3 \\
+\hline
+P(X=x_i) & \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\
+\hline
+\end{array}
+\]
+
+\begin{enumerate}
+  \item Calculer $E(X)$.
+  \item Calculer $V(X)$ par la formule de König-Huygens.
+  \item Calculer $\sigma(X)$.
+\end{enumerate}
+\end{exercice}

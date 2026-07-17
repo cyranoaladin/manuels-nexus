@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-CO-043", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-043", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, solve
+% m = symbols('m')
+% E = (18-m)*Rational(1,6) + (-m)*Rational(5,6)
+% sol = solve(E, m)
+% assert sol == [3]
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-043}
+
+\textbf{1.} Doubles : $(1,1),(2,2),\ldots,(6,6)$, soit $6$ sur $36$ : $P = \frac{1}{6}$.
+
+\medskip
+\textbf{2.} $E(G) = (18-m) \times \frac{1}{6} + (-m) \times \frac{5}{6} = \frac{18-m-5m}{6} = \frac{18-6m}{6} = 3-m$.
+
+\medskip
+\textbf{3.} $E(G) = 0 \Leftrightarrow 3 - m = 0 \Leftrightarrow m = 3$~euros.
+
+\end{corrige}

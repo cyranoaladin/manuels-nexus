@@ -1,0 +1,33 @@
+% META: {"id": "1SPE-VARALEA-RE-C5", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+\begin{exercice}{1SPE-VARALEA-RE-C5-EX1}{1}{10}
+Un jeu consiste à tirer une boule dans une urne contenant $5$ boules : $2$ gagnantes et $3$ perdantes. La mise est $1$~euro. Si la boule est gagnante, on reçoit $3$~euros.
+\begin{enumerate}
+  \item Définir la variable aléatoire $G$ (gain algébrique) et ses valeurs.
+  \item Dresser le tableau de loi de $G$.
+  \item Calculer $E(G)$ et conclure.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% G_win = 3 - 1; G_lose = -1
+% E = G_win*Rational(2,5) + G_lose*Rational(3,5)
+% assert E == Rational(4,5) + Rational(-3,5)
+% assert E == Rational(1,5)
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-RE-C5-EX1}
+\textbf{1.} $G = 3-1 = 2$ (boule gagnante) ou $G = 0-1 = -1$ (boule perdante).
+\textbf{2.}
+\[
+\begin{array}{|c|c|c|}
+\hline
+g_i & -1 & 2 \\
+\hline
+P(G=g_i) & \frac{3}{5} & \frac{2}{5} \\
+\hline
+\end{array}
+\]
+\textbf{3.} $E(G) = 2 \times \frac{2}{5} + (-1) \times \frac{3}{5} = \frac{4-3}{5} = \frac{1}{5} = 0{,}2$. Le jeu est favorable au joueur.
+\end{corrige}

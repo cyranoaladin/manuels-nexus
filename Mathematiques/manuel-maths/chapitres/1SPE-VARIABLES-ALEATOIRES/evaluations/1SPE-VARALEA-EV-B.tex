@@ -1,0 +1,116 @@
+% META: {"id": "1SPE-VARALEA-EV-B", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1","C2","C3","C4","C5"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial, sqrt
+%
+% # ---- Exercice 1 : loi de X (sac de bonbons) ----
+% # 5 rouges(2pts), 3 jaunes(5pts), 2 verts(8pts). Total 10.
+% p_R = Rational(5,10); p_J = Rational(3,10); p_V = Rational(2,10)
+% assert p_R + p_J + p_V == 1
+% E = 2*p_R + 5*p_J + 8*p_V
+% assert E == Rational(10+15+16, 10)
+% assert E == Rational(41,10)
+% E2 = 4*p_R + 25*p_J + 64*p_V
+% assert E2 == Rational(20+75+128, 10)
+% assert E2 == Rational(223,10)
+% V = E2 - E**2
+% assert V == Rational(223,10) - Rational(1681,100)
+% assert V == Rational(2230-1681, 100)
+% assert V == Rational(549,100)
+%
+% # ---- Exercice 2 : loi binomiale ----
+% # X ~ B(5, 1/4)
+% n, p = 5, Rational(1,4)
+% P0 = Rational(3,4)**5; assert P0 == Rational(243,1024)
+% P3 = binomial(5,3)*Rational(1,4)**3*Rational(3,4)**2
+% assert P3 == 10*Rational(1,64)*Rational(9,16)
+% assert P3 == Rational(90,1024)
+% assert P3 == Rational(45,512)
+% E_X = n*p; assert E_X == Rational(5,4)
+% V_X = n*p*(1-p); assert V_X == Rational(15,16)
+%
+% # ---- Exercice 3 : assurance (C5) ----
+% # Prime 80, sinistre 2000, p = 1/50
+% E_B = 80 - 2000*Rational(1,50)
+% assert E_B == 80 - 40
+% assert E_B == 40
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Durée : 55 minutes — Barème : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{1SPE-VARALEA-EV-B}{55}
+
+%===============================================================
+\section*{Exercice 1 \hfill (8 points) \hfill Capacités C1, C2}
+%===============================================================
+
+\textit{Compétences évaluées : calculer, raisonner, communiquer.}
+
+\medskip
+Un sac contient $5$ bonbons rouges ($2$ points chacun), $3$ bonbons jaunes ($5$ points) et $2$ bonbons verts ($8$ points). On tire un bonbon au hasard. Soit $X$ le nombre de points.
+
+\begin{enumerate}
+  \item Dresser le tableau de loi de $X$.
+  \hfill\textit{(2 pts — calculer)}
+
+  \item Calculer $E(X)$. Interpréter.
+  \hfill\textit{(2 pts — calculer, communiquer)}
+
+  \item Calculer $V(X)$ et $\sigma(X)$.
+  \hfill\textit{(3 pts — calculer)}
+
+  \item On pose $Y = 2X - 3$. Calculer $E(Y)$ et $V(Y)$.
+  \hfill\textit{(1 pt — calculer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 2 \hfill (7 points) \hfill Capacités C3, C4}
+%===============================================================
+
+\textit{Compétences évaluées : calculer, raisonner.}
+
+\medskip
+Un joueur de basket réussit un lancer franc avec probabilité $\frac{1}{4}$. Il effectue $5$ lancers indépendants. Soit $X$ le nombre de lancers réussis.
+
+\begin{enumerate}
+  \item Justifier que $X \sim \mathcal{B}(5, \frac{1}{4})$.
+  \hfill\textit{(1 pt — raisonner)}
+
+  \item Calculer $P(X = 0)$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Calculer $P(X = 3)$.
+  \hfill\textit{(2 pts — calculer)}
+
+  \item Calculer $E(X)$, $V(X)$ et $\sigma(X)$.
+  \hfill\textit{(2 pts — calculer)}
+
+  \item Calculer $P(X \geq 1)$.
+  \hfill\textit{(1 pt — calculer)}
+\end{enumerate}
+
+%===============================================================
+\section*{Exercice 3 \hfill (5 points) \hfill Capacité C5}
+%===============================================================
+
+\textit{Compétences évaluées : modéliser, calculer, communiquer.}
+
+\medskip
+Un assureur propose un contrat annuel : prime de $80$~euros. En cas de sinistre (probabilité $\frac{1}{50}$), il verse $2\,000$~euros.
+
+\begin{enumerate}
+  \item Soit $B$ le bénéfice de l'assureur par contrat. Quelles sont les valeurs de $B$ ?
+  \hfill\textit{(1 pt — modéliser)}
+
+  \item Dresser le tableau de loi de $B$.
+  \hfill\textit{(1 pt — calculer)}
+
+  \item Calculer $E(B)$. Le contrat est-il rentable ?
+  \hfill\textit{(2 pts — calculer, communiquer)}
+
+  \item Pour $500$ contrats, quel bénéfice total moyen l'assureur espère-t-il ?
+  \hfill\textit{(1 pt — calculer)}
+\end{enumerate}
+
+\end{evaluation}

@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-CO-031", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-031", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% n, p = 10, Rational(1,4)
+% assert n*p == Rational(5,2)
+% assert n*p*(1-p) == Rational(15,8)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-031}
+
+\textbf{1.} $E(X) = np = 10 \times \frac{1}{4} = \frac{5}{2}$.
+
+\medskip
+\textbf{2.} $V(X) = np(1-p) = 10 \times \frac{1}{4} \times \frac{3}{4} = \frac{30}{16} = \frac{15}{8}$.
+
+$\sigma(X) = \sqrt{\frac{15}{8}} \approx 1{,}37$.
+
+\end{corrige}

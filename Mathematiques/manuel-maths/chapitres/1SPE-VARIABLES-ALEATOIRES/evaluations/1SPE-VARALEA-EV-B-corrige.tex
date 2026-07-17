@@ -1,0 +1,110 @@
+% META: {"id": "1SPE-VARALEA-EV-B-corrige", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "1SPE-VARALEA-EV-B", "version": "B", "capacites_codes": ["C1","C2","C3","C4","C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial, sqrt
+% # Ex 1
+% E = 2*Rational(1,2)+5*Rational(3,10)+8*Rational(1,5)
+% assert E == Rational(41,10)
+% E2 = 4*Rational(1,2)+25*Rational(3,10)+64*Rational(1,5)
+% assert E2 == Rational(223,10)
+% V = E2 - E**2; assert V == Rational(549,100)
+% E_Y = 2*E - 3; assert E_Y == Rational(82-30,10); assert E_Y == Rational(52,10)
+% V_Y = 4*V; assert V_Y == Rational(549,25)
+% # Ex 2
+% P0 = Rational(3,4)**5; assert P0 == Rational(243,1024)
+% P3 = binomial(5,3)*Rational(1,4)**3*Rational(3,4)**2; assert P3 == Rational(45,512)
+% E_X = Rational(5,4); V_X = Rational(15,16)
+% Pge1 = 1 - P0; assert Pge1 == Rational(781,1024)
+% # Ex 3
+% E_B = 80 - 2000*Rational(1,50); assert E_B == 40
+% B_500 = 500*40; assert B_500 == 20000
+% END-VERIFY
+
+\begin{corrige}{1SPE-VARALEA-EV-B}
+
+%===============================================================
+\section*{Exercice 1 \hfill (8 points) — C1, C2}
+%===============================================================
+
+\textbf{Question 1 — Tableau de loi.}
+
+\[
+\begin{array}{|c|c|c|c|}
+\hline
+x_i & 2 & 5 & 8 \\
+\hline
+P(X=x_i) & \frac{5}{10} = \frac{1}{2} & \frac{3}{10} & \frac{2}{10} = \frac{1}{5} \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{Question 2 — Espérance.}
+
+$E(X) = 2 \times \frac{1}{2} + 5 \times \frac{3}{10} + 8 \times \frac{1}{5} = 1 + \frac{3}{2} + \frac{8}{5} = \frac{10+15+16}{10} = \frac{41}{10} = 4{,}1$.
+
+En moyenne, on obtient $4{,}1$ points par tirage.
+
+\medskip
+\textbf{Question 3 — Variance et écart type.}
+
+$E(X^2) = 4 \times \frac{1}{2} + 25 \times \frac{3}{10} + 64 \times \frac{1}{5} = 2 + \frac{15}{2} + \frac{64}{5} = \frac{20+75+128}{10} = \frac{223}{10}$.
+
+$V(X) = \frac{223}{10} - \left(\frac{41}{10}\right)^2 = \frac{2230-1681}{100} = \frac{549}{100} = 5{,}49$.
+
+$\sigma(X) = \sqrt{5{,}49} \approx 2{,}34$.
+
+\medskip
+\textbf{Question 4.}
+
+$E(Y) = 2E(X) - 3 = 2 \times 4{,}1 - 3 = 5{,}2$.
+
+$V(Y) = 4V(X) = 4 \times 5{,}49 = 21{,}96$.
+
+%===============================================================
+\section*{Exercice 2 \hfill (7 points) — C3, C4}
+%===============================================================
+
+\textbf{Question 1.} Chaque lancer est une épreuve de Bernoulli ($p = \frac{1}{4}$), les $5$ lancers sont indépendants : $X \sim \mathcal{B}(5, \frac{1}{4})$.
+
+\medskip
+\textbf{Question 2.} $P(X=0) = \left(\frac{3}{4}\right)^5 = \frac{243}{1024} \approx 0{,}237$.
+
+\medskip
+\textbf{Question 3.} $P(X=3) = \binom{5}{3}\left(\frac{1}{4}\right)^3\left(\frac{3}{4}\right)^2 = 10 \times \frac{1}{64} \times \frac{9}{16} = \frac{90}{1024} = \frac{45}{512} \approx 0{,}088$.
+
+\medskip
+\textbf{Question 4.} $E(X) = 5 \times \frac{1}{4} = \frac{5}{4} = 1{,}25$.
+
+$V(X) = 5 \times \frac{1}{4} \times \frac{3}{4} = \frac{15}{16} \approx 0{,}94$. $\sigma(X) = \sqrt{\frac{15}{16}} \approx 0{,}97$.
+
+\medskip
+\textbf{Question 5.} $P(X \geq 1) = 1 - P(X=0) = 1 - \frac{243}{1024} = \frac{781}{1024} \approx 0{,}763$.
+
+%===============================================================
+\section*{Exercice 3 \hfill (5 points) — C5}
+%===============================================================
+
+\textbf{Question 1.} Pas de sinistre : $B = 80$. Sinistre : $B = 80 - 2000 = -1920$.
+
+\medskip
+\textbf{Question 2.}
+
+\[
+\begin{array}{|c|c|c|}
+\hline
+b_i & -1920 & 80 \\
+\hline
+P(B=b_i) & \frac{1}{50} & \frac{49}{50} \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{Question 3.} $E(B) = 80 - 2000 \times \frac{1}{50} = 80 - 40 = 40$~euros.
+
+$E(B) > 0$ : le contrat est rentable pour l'assureur.
+
+\medskip
+\textbf{Question 4.} Bénéfice total moyen : $500 \times 40 = 20\,000$~euros.
+
+\end{corrige}

@@ -1,0 +1,26 @@
+% META: {"id": "1SPE-VARALEA-EX-007", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C1"], "capacites_codes": ["C1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-007.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% # Tirage sans remise 2 boules parmi 3R+2B, X = nb rouges
+% # P(X=0) = C(2,2)/C(5,2) = 1/10
+% # P(X=1) = C(3,1)*C(2,1)/C(5,2) = 6/10
+% # P(X=2) = C(3,2)/C(5,2) = 3/10
+% from sympy import binomial
+% assert binomial(5,2) == 10
+% p0 = Rational(binomial(2,2), binomial(5,2))
+% p1 = Rational(binomial(3,1)*binomial(2,1), binomial(5,2))
+% p2 = Rational(binomial(3,2), binomial(5,2))
+% assert p0 == Rational(1,10)
+% assert p1 == Rational(6,10)
+% assert p2 == Rational(3,10)
+% assert p0+p1+p2 == 1
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-007}{2}{15}
+Une urne contient $3$ boules rouges et $2$ boules bleues. On tire $2$ boules au hasard \emph{sans remise}. Soit $X$ le nombre de boules rouges obtenues.
+
+\begin{enumerate}
+  \item Quelles sont les valeurs possibles de $X$ ?
+  \item Calculer $P(X=0)$, $P(X=1)$ et $P(X=2)$ à l'aide des coefficients binomiaux.
+  \item Dresser le tableau de loi de $X$ et vérifier.
+\end{enumerate}
+\end{exercice}

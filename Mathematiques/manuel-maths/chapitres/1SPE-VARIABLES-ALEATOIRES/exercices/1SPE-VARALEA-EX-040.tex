@@ -1,0 +1,17 @@
+% META: {"id": "1SPE-VARALEA-EX-040", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "exercice", "capacites": ["1SPE-VARIABLES-ALEATOIRES-C4"], "capacites_codes": ["C4"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/exercices/1SPE-VARALEA-EX-040.tex", "corrige_tex": "chapitres/1SPE-VARIABLES-ALEATOIRES/corriges/1SPE-VARALEA-CO-040.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% # n=50, p=0.1
+% n, p = 50, Rational(1,10)
+% E = n*p; assert E == 5
+% V = n*p*(1-p); assert V == Rational(9,2)
+% END-VERIFY
+\begin{exercice}{1SPE-VARALEA-EX-040}{2}{15}
+Un contrôle qualité porte sur $50$ pièces. Le taux de défaut est $10\,\%$. Soit $X$ le nombre de pièces défectueuses.
+
+\begin{enumerate}
+  \item Quelle loi suit $X$ ?
+  \item Calculer $E(X)$, $V(X)$ et $\sigma(X)$.
+  \item En moyenne, combien de pièces défectueuses trouve-t-on ?
+\end{enumerate}
+\end{exercice}

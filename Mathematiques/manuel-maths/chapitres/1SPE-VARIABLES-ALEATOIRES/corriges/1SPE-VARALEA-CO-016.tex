@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-CO-016", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-016", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% E = 35*Rational(1,37) + (-1)*Rational(36,37)
+% assert E == Rational(-1,37)
+% perte_370 = 370 * Rational(1,37)
+% assert perte_370 == 10
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-016}
+
+\textbf{1.} $E(X) = 35 \times \frac{1}{37} + (-1) \times \frac{36}{37} = \frac{35-36}{37} = -\frac{1}{37} \approx -0{,}027$.
+
+\medskip
+\textbf{2.} $E(X) < 0$ : le jeu est défavorable au joueur, favorable à la banque.
+
+\medskip
+\textbf{3.} Sur $370$ parties : perte moyenne $= 370 \times \frac{1}{37} = 10$~euros.
+
+\end{corrige}

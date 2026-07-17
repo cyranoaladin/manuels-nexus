@@ -1,0 +1,25 @@
+% META: {"id": "1SPE-VARALEA-CO-024", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-024", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% p = Rational(1,4); n = 10
+% P0 = Rational(3,4)**10; assert P0 == Rational(59049, 1048576)
+% P5 = binomial(10,5)*p**5*Rational(3,4)**5
+% assert P5 == 252*Rational(1,1024)*Rational(243,1024)
+% assert P5 == Rational(61236, 1048576)
+% E = 10*Rational(1,4); assert E == Rational(5,2)
+% note = 2*E; assert note == 5
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-024}
+
+\textbf{1.} Chaque question est une épreuve de Bernoulli ($p = \frac{1}{4}$), les $10$ réponses sont indépendantes. $X \sim \mathcal{B}(10, \frac{1}{4})$.
+
+\medskip
+\textbf{2.} $P(X=0) = \left(\frac{3}{4}\right)^{10} = \frac{59049}{1048576} \approx 0{,}056$.
+
+\medskip
+\textbf{3.} $P(X=5) = \binom{10}{5}\left(\frac{1}{4}\right)^5\left(\frac{3}{4}\right)^5 = 252 \times \frac{243}{1048576} = \frac{61236}{1048576} \approx 0{,}058$.
+
+\medskip
+\textbf{4.} $E(\text{note}) = 2E(X) = 2 \times 10 \times \frac{1}{4} = 5$ sur $20$.
+
+\end{corrige}

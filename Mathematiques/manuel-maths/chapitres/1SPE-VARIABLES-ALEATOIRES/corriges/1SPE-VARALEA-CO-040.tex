@@ -1,0 +1,16 @@
+% META: {"id": "1SPE-VARALEA-CO-040", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-040", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, sqrt
+% n, p = 50, Rational(1,10)
+% assert n*p == 5
+% assert n*p*(1-p) == Rational(9,2)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-040}
+
+\textbf{1.} $X \sim \mathcal{B}(50, 0{,}1)$.
+
+\textbf{2.} $E(X) = 50 \times 0{,}1 = 5$. $V(X) = 50 \times 0{,}1 \times 0{,}9 = 4{,}5$. $\sigma(X) = \sqrt{4{,}5} \approx 2{,}12$.
+
+\textbf{3.} En moyenne, on trouve $5$ pièces défectueuses.
+
+\end{corrige}

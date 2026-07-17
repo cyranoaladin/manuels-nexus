@@ -1,0 +1,30 @@
+% META: {"id": "1SPE-VARALEA-CO-030", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-030", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% p = Rational(1,2); n = 3
+% E = sum(k*binomial(3,k)*p**3 for k in range(4))
+% assert E == Rational(3,2)
+% assert E == n*p
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-030}
+
+\textbf{1.}
+\[
+\begin{array}{|c|c|c|c|c|}
+\hline
+k & 0 & 1 & 2 & 3 \\
+\hline
+P(X=k) & \frac{1}{8} & \frac{3}{8} & \frac{3}{8} & \frac{1}{8} \\
+\hline
+\end{array}
+\]
+
+\medskip
+\textbf{2.} Diagramme en bâtons : un bâton de hauteur $\frac{1}{8}$ en $k=0$ et $k=3$, de hauteur $\frac{3}{8}$ en $k=1$ et $k=2$.
+
+\medskip
+\textbf{3.} $E(X) = 0 \times \frac{1}{8} + 1 \times \frac{3}{8} + 2 \times \frac{3}{8} + 3 \times \frac{1}{8} = \frac{0+3+6+3}{8} = \frac{12}{8} = \frac{3}{2}$.
+
+$np = 3 \times \frac{1}{2} = \frac{3}{2}$. \checkmark
+
+\end{corrige}

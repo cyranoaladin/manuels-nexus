@@ -45,7 +45,7 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
   - [x] 3i. 1SPE-PRODUIT-SCALAIRE LOT 0→7. 50 ex, 119 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-PRODUIT-SCALAIRE-v1`.
   - [x] 3j. 1SPE-GEOMETRIE-REPEREE LOT 0→7. 50 ex, 117 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-GEOMETRIE-REPEREE-v1`.
   - [x] 3k. 1SPE-PROBA-COND LOT 0→7. 50 ex, 117 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-PROBA-COND-v1`.
-  - [ ] 3l. 1SPE-VARIABLES-ALEATOIRES LOT 0→7.
+  - [x] 3l. 1SPE-VARIABLES-ALEATOIRES LOT 0→7. 50 ex, 117 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-VARIABLES-ALEATOIRES-v1`.
 
 - [ ] **4. RAPPORT_FINAL.md** — Fin de tour.
 

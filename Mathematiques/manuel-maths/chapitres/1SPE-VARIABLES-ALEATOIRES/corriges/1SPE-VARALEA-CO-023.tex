@@ -1,0 +1,19 @@
+% META: {"id": "1SPE-VARALEA-CO-023", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "corrige", "exercice_ref": "1SPE-VARALEA-EX-023", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial, Rational
+% p = Rational(1,6); q = Rational(5,6)
+% P0 = q**4; assert P0 == Rational(625,1296)
+% P2 = binomial(4,2)*p**2*q**2; assert P2 == Rational(25,216)
+% Pge1 = 1 - P0; assert Pge1 == Rational(671,1296)
+% END-VERIFY
+\begin{corrige}{1SPE-VARALEA-EX-023}
+
+\textbf{1.} $P(X=0) = \left(\frac{5}{6}\right)^4 = \frac{625}{1296}$.
+
+\medskip
+\textbf{2.} $P(X=2) = \binom{4}{2}\left(\frac{1}{6}\right)^2\left(\frac{5}{6}\right)^2 = 6 \times \frac{1}{36} \times \frac{25}{36} = \frac{150}{1296} = \frac{25}{216}$.
+
+\medskip
+\textbf{3.} $P(X \geq 1) = 1 - P(X=0) = 1 - \frac{625}{1296} = \frac{671}{1296}$.
+
+\end{corrige}
