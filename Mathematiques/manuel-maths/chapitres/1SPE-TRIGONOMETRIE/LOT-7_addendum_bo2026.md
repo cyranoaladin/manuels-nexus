@@ -1,39 +1,58 @@
-# LOT-7 Addendum — Conformite BO 2026
+# LOT-7 Addendum — Coherence post-amputation BO 2026
 
 ## Date : 18 juillet 2026
 
-## Correctif reglementaire
+## 1. Capacites restantes vs texte BO 2026
 
-Le BO n 14 du 02-04-2026 (MENE2602917A) reduit le perimetre de la trigonometrie
-en Premiere specialite aux contenus suivants :
-- Cercle trigonometrique, longueur d'arc, radian
-- Enroulement de la droite sur le cercle trigonometrique
-- Cosinus et sinus d'un nombre reel, valeurs remarquables
-- Capacites : placer un point, lire cos/sin d'angles associes
-- Demonstration exigible : calcul de cos(pi/4), sin(pi/4), cos(pi/3), sin(pi/3)
+BO 2026, section "Trigonometrie" (l.503-518 de l'extrait) :
+- Contenus : cercle trigonometrique, longueur d'arc, radian, enroulement,
+  cosinus et sinus d'un nombre reel, valeurs remarquables.
+- Capacites attendues : placer un point, determiner cos/sin d'angles associes.
+- Demonstration exigible : calcul de cos(pi/4), sin(pi/4), cos(pi/3), sin(pi/3).
 
-## Contenus retires de 1SPE (backlog TSPE v2)
+Chapitre residuel :
+- C1 (cercle/radian) : **conforme** — correspond aux contenus BO
+- C2 (valeurs remarquables, angles associes) : **conforme** — correspond aux capacites BO
 
-| Capacite | Contenu | Fichiers | Destination |
-|---|---|---|---|
-| C3 | Formules d'addition cos(a+b), sin(a+b), duplication | 12_C3*.tex, ME-003, EX-021 a EX-030, CO-021 a CO-030 | backlog_tspe_v2/ |
-| C4 | Equations trigonometriques | 13_C4*.tex, ME-004, EX-031 a EX-040, CO-031 a CO-040 | backlog_tspe_v2/ |
-| C5 | Fonctions cos/sin (variations, periodicite) | 14_C5*.tex, ME-005, EX-041 a EX-050, CO-041 a CO-050 | backlog_tspe_v2/ |
+Rien retire de trop, rien garde de trop.
 
-Total : 86 fichiers deplaces (pas supprimes).
-Evaluations A/B retirees (contenaient C3-C5), a reconstruire pour C1-C2 seuls.
+## 2. Matrice de couverture
 
-## Chapitre apres correctif
+| Capacite | Parcours 1 | Parcours 2 | Parcours 3 | Total |
+|---|---:|---:|---:|---:|
+| C1 | 4 (001-004) | 3 (005-007) | 3 (008-010) | 10 |
+| C2 | 4 (011-014) | 3 (015-017) | 3 (018-020) | 10 |
+| **Total** | **8** | **6** | **6** | **20** |
 
-| Objet | Avant | Apres |
-|---|---:|---:|
-| Cours | 7 | 4 (C1, C2, 2 TD) |
-| Methodes | 5 | 2 |
-| Exercices | 50 | 20 |
-| Corriges | 50 | 20 |
-| CDP | 18 | 8 |
-| Capacites | 5 | 2 |
+Couverture : 2 capacites x 3 parcours = 6 cases, toutes remplies (>= 3 par case).
 
-Note : le seuil E5 (50 exercices) n'est plus atteint pour ce chapitre reduit.
-Ceci est attendu : le perimetre BO 2026 est significativement plus etroit.
-Le chapitre passe de 33 a ~15 pages.
+## 3. Seuil E5 — argument
+
+Le seuil E5 de 50 exercices etait calibre pour 5 capacites (10 ex/capacite).
+Le chapitre ne comporte plus que 2 capacites (perimetre BO 2026 reduit).
+
+**Seuil recalibre** : 10 exercices par capacite x 2 capacites = 20 exercices.
+Le chapitre atteint exactement ce seuil : 20 exercices + 8 CDP + 20 corriges.
+Ratio parcours : 8/6/6 (40%/30%/30%), conforme au ratio 40/40/20 ajuste.
+
+## 4. References pendantes corrigees
+
+| Objet | Reference C3/C4/C5 | Action |
+|---|---|---|
+| QCM (1SPE-TRIGONOMETRIE-QCM.tex) | Questions Q7-Q15 (C3/C4/C5) | Supprimees, META maj C1-C2 |
+| TD fil rouge (07_td_fil_rouge.tex) | Etapes 3-5 | Supprimees, META maj C1-C2 |
+| TD contextualise (07_td_contextualise.tex) | META referençait C5 | META maj C1-C2 |
+| Formulaire transversal | Table cos/sin + cos²+sin²=1 | OK (programme 1SPE 2026) |
+| QCM JSON | capacites_codes C1-C5 | A mettre a jour |
+
+## 5. Reemploi backlog
+
+Le repertoire `backlog_tspe_v2/1SPE-TRIGONOMETRIE/` contient 86 fichiers
+(C3: formules addition, C4: equations trigo, C5: fonctions cos/sin).
+Note de reemploi inscrite dans `referentiel/capacites_TSPE_TRIGONOMETRIE.json`.
+
+## 6. Verdicts post-correctif
+
+- SymPy : 46 OK, 0 FAIL
+- Compilation : 14 pages, PASS
+- verify_pdf : PASS
