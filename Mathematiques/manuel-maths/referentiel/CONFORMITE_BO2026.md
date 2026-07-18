@@ -23,7 +23,7 @@ Reference croisee avec `BO2019_1SPE_specialite.pdf` pour les chapitres ancres 20
 | 1SPE-PRODUIT-SCALAIRE | **CONFORME** | Section "Calcul vectoriel et produit scalaire" (l.541-561). Projection, cosinus, bilinearite, expression analytique, Al-Kashi, MA.MB. Demonstrations exigibles : Al-Kashi, ensemble MA.MB=0. |
 | 1SPE-GEOMETRIE-REPEREE | **CONFORME** | Section "Geometrie reperee" (l.564-578). Vecteur normal, projection orthogonale, equation de cercle. |
 | 1SPE-PROBA-COND | **CONFORME** (precision ajoutee) | Section "Probabilites conditionnelles et independance" (l.612-633). BO 2026 precise : "Pour n<=4, repetition de n epreuves de Bernoulli". |
-| 1SPE-VARIABLES-ALEATOIRES | **AJOUT REQUIS** | Section "Variables aleatoires reelles" (l.634-667). Conforme pour : VA, loi, esperance, variance, ecart type, linearite. **Manque** : formule de Konig-Huygens (contenu explicite du BO 2026). |
+| 1SPE-VARIABLES-ALEATOIRES | **CONFORME** | Section "Variables aleatoires reelles" (l.634-667). VA, loi, esperance, variance, ecart type, linearite, formule de Konig-Huygens : tout present dans cours/11_C2. |
 
 ## Detail des ecarts
 
@@ -34,7 +34,7 @@ Reference croisee avec `BO2019_1SPE_specialite.pdf` pour les chapitres ancres 20
 | E1 | DERIVATION-GLOBAL | AJOUT | Fonctions paires, impaires : representation algebrique et graphique, traduction geometrique | Ajouter section cours + 2-3 exercices |
 | E2 | DERIVATION-GLOBAL | AJOUT | Fonction valeur absolue : etude de la derivabilite en 0 | Ajouter dans cours C1 ou C2 |
 | E3 | DERIVATION-GLOBAL | VERIFIER | Pour n dans Z, derivee de x^n | Verifier si present dans le cours actuel |
-| E4 | VARIABLES-ALEATOIRES | AJOUT | Formule de Konig-Huygens : V(X) = E(X^2) - [E(X)]^2 | Ajouter dans cours C2 + exercices |
+| E4 | VARIABLES-ALEATOIRES | ~~AJOUT~~ PRESENT | Formule de Konig-Huygens : V(X) = E(X^2) - [E(X)]^2 | Deja dans cours/11_C2, l.32-34 |
 | E5 | TRIGONOMETRIE | RETRAIT | Formules d'addition cos(a+b), sin(a+b), duplication | Deplacer vers backlog TSPE v2 |
 | E6 | TRIGONOMETRIE | RETRAIT | Equations trigonometriques cos(x)=a, sin(x)=a | Deplacer vers backlog TSPE v2 |
 | E7 | TRIGONOMETRIE | RETRAIT | Fonctions cos/sin : variations, periodicite, courbes, derivees | Deplacer vers backlog TSPE v2 |
