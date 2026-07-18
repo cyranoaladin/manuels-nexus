@@ -1,0 +1,96 @@
+% META: {"id": "TSPE-LIMFCT-EV-B", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3"], "competences": ["chercher", "calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+%
+% # ---- Exercice 1 (6 pts) : Limites (C1) ----
+% assert limit((4*x**2 - 3*x)/(2*x**2 + 1), x, oo) == 2
+% assert limit(3*Rational(2,5)**x - 1, x, oo) == -1
+% assert limit(-x**3 + 2*x**2 + 5, x, oo) == -oo
+%
+% # ---- Exercice 2 (7 pts) : Asymptotes (C2) ----
+% f2 = (3*x - 2)/(x + 4)
+% assert limit(f2, x, oo) == 3
+% assert limit(f2, x, -4, '+') == -oo
+% assert limit(f2, x, -4, '-') == oo
+% assert simplify(f2 - (3 - 14/(x+4))) == 0
+%
+% # ---- Exercice 3 (7 pts) : Croissances comparees (C3) ----
+% f3 = (x**2 + 2*x)*exp(-x)
+% assert limit(f3, x, oo) == 0
+% assert limit(f3, x, -oo) == oo
+% f3p = diff(f3, x)
+% assert simplify(f3p - (-x**2 + 2)*exp(-x)) == 0
+% assert simplify(f3p + (x - sqrt(2))*(x + sqrt(2))*exp(-x)) == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+% Toute reponse doit etre justifiee ; les resultats seuls ne sont pas acceptes.
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-LIMFCT-EV-B}{55}
+
+%===============================================================
+% EXERCICE 1 — Limites de fonctions (6 points)
+%===============================================================
+
+\begin{exercice}{TSPE-LIMFCT-EV-B-EX1}{2}{12}
+
+\textbf{Exercice 1} (6 points) — \textit{Capacite C1}
+
+\medskip
+
+Determiner les limites suivantes en justifiant.
+
+\begin{enumerate}
+  \item (2 pts) $\lim_{x \to +\infty} \dfrac{4x^2 - 3x}{2x^2 + 1}$
+  \item (2 pts) $\lim_{x \to +\infty} \left(3 \times \left(\dfrac{2}{5}\right)^x - 1\right)$
+  \item (2 pts) $\lim_{x \to +\infty} (-x^3 + 2x^2 + 5)$ (factoriser par le terme preponderant)
+\end{enumerate}
+
+\end{exercice}
+
+%===============================================================
+% EXERCICE 2 — Asymptotes (7 points)
+%===============================================================
+
+\begin{exercice}{TSPE-LIMFCT-EV-B-EX2}{2}{15}
+
+\textbf{Exercice 2} (7 points) — \textit{Capacite C2}
+
+\medskip
+
+Soit $f(x) = \dfrac{3x - 2}{x + 4}$ definie sur $\mathbb{R} \setminus \{-4\}$.
+
+\begin{enumerate}
+  \item (2 pts) Determiner $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$. En deduire l'asymptote horizontale.
+  \item (2 pts) Determiner $\lim_{x \to (-4)^+} f(x)$ et $\lim_{x \to (-4)^-} f(x)$. En deduire l'asymptote verticale.
+  \item (1,5 pt) Montrer que $f(x) = 3 - \dfrac{14}{x+4}$.
+  \item (1,5 pt) En deduire la position de la courbe par rapport a l'asymptote horizontale.
+\end{enumerate}
+
+\end{exercice}
+
+%===============================================================
+% EXERCICE 3 — Etude de fonction avec exponentielle (7 points)
+%===============================================================
+
+\begin{exercice}{TSPE-LIMFCT-EV-B-EX3}{3}{20}
+
+\textbf{Exercice 3} (7 points) — \textit{Capacite C3}
+
+\medskip
+
+Soit $f(x) = (x^2 + 2x)\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+
+\begin{enumerate}
+  \item (2 pts) Determiner $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$. Preciser l'asymptote eventuelle.
+  \item (2,5 pts) Calculer $f'(x)$ et montrer que $f'(x) = (-x^2 + 2)\,\mathrm{e}^{-x}$.
+  \item (1,5 pt) Dresser le tableau de variations de $f$.
+  \item (1 pt) Calculer $f(\sqrt{2})$.
+\end{enumerate}
+
+\end{exercice}
+
+\end{evaluation}

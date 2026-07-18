@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-CO-004", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-004", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x**2 - 5*x + 3, x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-004}
+
+\textbf{1.} Terme preponderant $x^2$. $\boxed{\lim = +\infty}$.
+
+\textbf{2.} Degre numerateur < degre denominateur. $\boxed{\lim = 0}$.
+
+\textbf{3.} $\dfrac{x^3}{x+1} = \dfrac{x^2}{1+1/x} \to \boxed{+\infty}$.
+
+\end{corrige}

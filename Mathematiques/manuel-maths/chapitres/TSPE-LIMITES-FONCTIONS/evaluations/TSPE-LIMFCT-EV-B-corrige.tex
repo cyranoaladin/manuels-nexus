@@ -1,0 +1,86 @@
+% META: {"id": "TSPE-LIMFCT-EV-B-corrige", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-LIMFCT-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+%
+% # ---- Exercice 1 ----
+% assert limit((4*x**2 - 3*x)/(2*x**2 + 1), x, oo) == 2
+% assert limit(3*Rational(2,5)**x - 1, x, oo) == -1
+% assert limit(-x**3 + 2*x**2 + 5, x, oo) == -oo
+%
+% # ---- Exercice 2 ----
+% assert limit((3*x - 2)/(x + 4), x, oo) == 3
+% assert limit((3*x - 2)/(x + 4), x, -4, '+') == -oo
+% assert limit((3*x - 2)/(x + 4), x, -4, '-') == oo
+% assert simplify((3*x-2)/(x+4) - (3 - 14/(x+4))) == 0
+%
+% # ---- Exercice 3 ----
+% f3 = (x**2 + 2*x)*exp(-x)
+% assert limit(f3, x, oo) == 0
+% assert limit(f3, x, -oo) == oo
+% assert simplify(diff(f3, x) - (-x**2 + 2)*exp(-x)) == 0
+% END-VERIFY
+
+\textbf{Corrige de l'evaluation B — TSPE-LIMFCT-EV-B}
+
+\bigskip
+
+%===============================================================
+% EXERCICE 1
+%===============================================================
+
+\textbf{Exercice 1.}
+
+\textbf{1.} $\dfrac{4x^2-3x}{2x^2+1} = \dfrac{4-3/x}{2+1/x^2} \to \boxed{2}$.
+
+\textbf{2.} $|2/5| < 1$, donc $(2/5)^x \to 0$. $3 \times 0 - 1 = \boxed{-1}$.
+
+\textbf{3.} $-x^3 + 2x^2 + 5 = x^3(-1 + 2/x + 5/x^3)$. $x^3 \to +\infty$ et $(-1 + \ldots) \to -1 < 0$. $\boxed{\lim = -\infty}$.
+
+\bigskip
+
+%===============================================================
+% EXERCICE 2
+%===============================================================
+
+\textbf{Exercice 2.}
+
+\textbf{1.} $f(x) = \dfrac{3-2/x}{1+4/x} \to 3$ en $\pm\infty$. AH : $y = 3$.
+
+\textbf{2.} Numerateur en $-4$ : $-12-2 = -14 < 0$. Denominateur $x+4$.
+
+$x \to (-4)^+$ : $x+4 \to 0^+$. $f(x) \to -14/0^+ = \boxed{-\infty}$.
+
+$x \to (-4)^-$ : $x+4 \to 0^-$. $f(x) \to -14/0^- = \boxed{+\infty}$.
+
+AV : $x = -4$.
+
+\textbf{3.} $\dfrac{3x-2}{x+4} = \dfrac{3(x+4)-14}{x+4} = 3 - \dfrac{14}{x+4}$.
+
+\textbf{4.} $f(x) - 3 = -\dfrac{14}{x+4}$. Pour $x > -4$ : $< 0$, courbe en dessous de l'AH. Pour $x < -4$ : $> 0$, courbe au-dessus.
+
+\bigskip
+
+%===============================================================
+% EXERCICE 3
+%===============================================================
+
+\textbf{Exercice 3.}
+
+\textbf{1.} $f(x) = \dfrac{x^2+2x}{\mathrm{e}^x}$. Croissances comparees : $x^2/\mathrm{e}^x \to 0$ et $x/\mathrm{e}^x \to 0$. $\lim_{+\infty} f = \boxed{0}$. AH $y = 0$.
+
+En $-\infty$ : $x^2+2x \to +\infty$ (terme preponderant $x^2$) et $\mathrm{e}^{-x} \to +\infty$. $\lim_{-\infty} f = \boxed{+\infty}$.
+
+\textbf{2.} $f'(x) = (2x+2)\mathrm{e}^{-x} + (x^2+2x)(-\mathrm{e}^{-x}) = (2x+2-x^2-2x)\mathrm{e}^{-x} = (-x^2+2)\mathrm{e}^{-x}$.
+
+\textbf{3.} $f'(x) = 0 \iff x^2 = 2 \iff x = \pm\sqrt{2}$.
+
+$-x^2+2 > 0 \iff x^2 < 2 \iff -\sqrt{2} < x < \sqrt{2}$.
+
+$f$ decroissante sur $]-\infty, -\sqrt{2}]$, croissante sur $[-\sqrt{2}, \sqrt{2}]$, decroissante sur $[\sqrt{2}, +\infty[$.
+
+Min en $-\sqrt{2}$ : $f(-\sqrt{2}) = (2-2\sqrt{2})\mathrm{e}^{\sqrt{2}}$.
+
+Max en $\sqrt{2}$ : $f(\sqrt{2}) = (2+2\sqrt{2})\mathrm{e}^{-\sqrt{2}}$.
+
+\textbf{4.} $f(\sqrt{2}) = (\sqrt{2})^2 + 2\sqrt{2})\mathrm{e}^{-\sqrt{2}} = (2+2\sqrt{2})\mathrm{e}^{-\sqrt{2}} = \boxed{2(1+\sqrt{2})\,\mathrm{e}^{-\sqrt{2}}} \approx 1{,}41$.

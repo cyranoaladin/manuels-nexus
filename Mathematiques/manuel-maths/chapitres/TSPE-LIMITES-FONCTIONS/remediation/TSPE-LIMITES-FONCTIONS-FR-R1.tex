@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-LIMITES-FONCTIONS-FR-R1", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R1 : Limites de suites
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Limites de suites}
+
+\textbf{Limite finie :} $\lim_{n \to +\infty} u_n = \ell$ signifie que $u_n$ se rapproche de $\ell$.
+
+\textbf{Limites usuelles :} $1/n \to 0$, $q^n \to 0$ si $|q| < 1$, $n^k \to +\infty$.
+
+\textbf{Operations :} somme, produit, quotient de limites (sauf formes indeterminees).
+
+\begin{exercice}{TSPE-LIMFCT-FR-R1-EX1}{1}{8}
+\begin{enumerate}
+  \item Determiner $\lim_{n \to +\infty} \dfrac{3n+1}{n+2}$.
+  \item Determiner $\lim_{n \to +\infty} 5 \times (0{,}7)^n$.
+  \item Determiner $\lim_{n \to +\infty} (n^2 - 3n)$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonneg=True)
+% assert limit((3*n+1)/(n+2), n, oo) == 3
+% assert limit(5*Rational(7,10)**n, n, oo) == 0
+% assert limit(n**2 - 3*n, n, oo) == oo
+% END-VERIFY

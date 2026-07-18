@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-009", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-009", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x**2 - 3*x)*exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-009}
+
+\textbf{1.} $(x^2-3x)\mathrm{e}^{-x} = \dfrac{x^2-3x}{\mathrm{e}^x}$. Croissances comparees : $\dfrac{x^2}{\mathrm{e}^x} \to 0$. $\boxed{\lim = 0}$.
+
+\textbf{2.} $\dfrac{\mathrm{e}^x}{x^2+1}$. Croissances comparees : $\dfrac{\mathrm{e}^x}{x^2} \to +\infty$. $\boxed{\lim = +\infty}$.
+
+\end{corrige}

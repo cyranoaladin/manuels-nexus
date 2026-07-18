@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-EX-003", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-003.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(1/(x - 1), x, 1, '+') == oo
+% assert limit(1/(x - 1), x, 1, '-') == -oo
+% assert limit((x**2 - 4)/(x - 2), x, 2) == 4
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-003}{1}{8}
+Determiner les limites suivantes.
+\begin{enumerate}
+  \item $\lim_{x \to 1^+} \dfrac{1}{x-1}$ et $\lim_{x \to 1^-} \dfrac{1}{x-1}$
+  \item $\lim_{x \to 2} \dfrac{x^2 - 4}{x - 2}$
+\end{enumerate}
+\end{exercice}

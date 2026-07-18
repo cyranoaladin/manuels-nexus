@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-CO-028", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-028", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x*exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-028}
+
+\textbf{1.} $\lim_{+\infty} x\mathrm{e}^{-x} = \boxed{0}$ (croissances comparees). $\lim_{-\infty}$ : $x \to -\infty$ et $\mathrm{e}^{-x} \to +\infty$, produit $\boxed{-\infty}$.
+
+\textbf{2.} AH en $+\infty$ : $y = 0$. Pas d'AH en $-\infty$. Pas d'AV.
+
+\textbf{3.} Pour $x > 0$ : $f(x) = x\mathrm{e}^{-x} > 0$. Courbe au-dessus de $y = 0$.
+
+\end{corrige}

@@ -1,0 +1,87 @@
+% META: {"id": "TSPE-LIMFCT-EV-A-corrige", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-LIMFCT-EV-A", "version": "A", "capacites_codes": ["C1", "C2", "C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+%
+% # ---- Exercice 1 ----
+% assert limit((3*x**2 + x - 1)/(x**2 - 2), x, oo) == 3
+% assert limit(5*Rational(1,3)**x + 2, x, oo) == 2
+% assert limit(x**2 - 4*x + 1, x, oo) == oo
+%
+% # ---- Exercice 2 ----
+% assert limit((2*x + 5)/(x - 1), x, oo) == 2
+% assert limit((2*x + 5)/(x - 1), x, 1, '+') == oo
+% assert limit((2*x + 5)/(x - 1), x, 1, '-') == -oo
+% assert simplify((2*x+5)/(x-1) - (2 + 7/(x-1))) == 0
+%
+% # ---- Exercice 3 ----
+% f3 = (x**2 - 3)*exp(-x)
+% assert limit(f3, x, oo) == 0
+% assert limit(f3, x, -oo) == oo
+% assert simplify(diff(f3, x) + (x-3)*(x+1)*exp(-x)) == 0
+% assert f3.subs(x, 3) == 6*exp(-3)
+% END-VERIFY
+
+\textbf{Corrige de l'evaluation A — TSPE-LIMFCT-EV-A}
+
+\bigskip
+
+%===============================================================
+% EXERCICE 1
+%===============================================================
+
+\textbf{Exercice 1.}
+
+\textbf{1.} $\dfrac{3x^2+x-1}{x^2-2} = \dfrac{x^2(3+1/x-1/x^2)}{x^2(1-2/x^2)} = \dfrac{3+1/x-1/x^2}{1-2/x^2} \to \dfrac{3}{1} = \boxed{3}$.
+
+\textbf{2.} $\left(\dfrac{1}{3}\right)^x = \mathrm{e}^{-x\ln 3}$. Comme $\ln 3 > 0$, $-x\ln 3 \to -\infty$, donc $(1/3)^x \to 0$. $5 \times 0 + 2 = \boxed{2}$.
+
+\textbf{3.} $x^2 - 4x + 1 = x^2(1 - 4/x + 1/x^2)$. $x^2 \to +\infty$ et $(1 - \ldots) \to 1 > 0$. $\boxed{\lim = +\infty}$.
+
+\bigskip
+
+%===============================================================
+% EXERCICE 2
+%===============================================================
+
+\textbf{Exercice 2.}
+
+\textbf{1.} $f(x) = \dfrac{2+5/x}{1-1/x} \to 2$ en $\pm\infty$. AH : $y = 2$.
+
+\textbf{2.} Numerateur en $1$ : $2+5 = 7 > 0$. Denominateur $x-1$.
+
+$x \to 1^+$ : $x-1 \to 0^+$. $f \to \boxed{+\infty}$.
+
+$x \to 1^-$ : $x-1 \to 0^-$. $f \to \boxed{-\infty}$.
+
+AV : $x = 1$.
+
+\textbf{3.} $\dfrac{2x+5}{x-1} = \dfrac{2(x-1)+7}{x-1} = 2 + \dfrac{7}{x-1}$.
+
+\textbf{4.} $f(x) - 2 = \dfrac{7}{x-1}$. Pour $x > 1$ : $> 0$, courbe au-dessus de l'AH. Pour $x < 1$ : $< 0$, courbe en dessous.
+
+\bigskip
+
+%===============================================================
+% EXERCICE 3
+%===============================================================
+
+\textbf{Exercice 3.}
+
+\textbf{1.} $f(x) = \dfrac{x^2-3}{\mathrm{e}^x}$. Croissances comparees : $x^2/\mathrm{e}^x \to 0$. $\lim_{+\infty} f = \boxed{0}$. AH $y = 0$ en $+\infty$.
+
+En $-\infty$ : $x^2-3 \to +\infty$ et $\mathrm{e}^{-x} \to +\infty$. $\lim_{-\infty} f = \boxed{+\infty}$.
+
+\textbf{2.} $f'(x) = 2x\,\mathrm{e}^{-x} + (x^2-3)(-\mathrm{e}^{-x}) = (2x - x^2 + 3)\mathrm{e}^{-x} = (-x^2+2x+3)\mathrm{e}^{-x}$.
+
+$-x^2+2x+3 = -(x^2-2x-3) = -(x-3)(x+1)$. Donc $f'(x) = -(x-3)(x+1)\,\mathrm{e}^{-x}$.
+
+\textbf{3.} $f'(x) = 0 \iff x = -1$ ou $x = 3$. Signe de $-(x-3)(x+1)$ : positif sur $]-1, 3[$, negatif ailleurs.
+
+$f$ decroissante sur $]-\infty, -1]$, croissante sur $[-1, 3]$, decroissante sur $[3, +\infty[$.
+
+Min local en $-1$ : $f(-1) = (1-3)\mathrm{e}^1 = -2\mathrm{e} \approx -5{,}44$.
+
+Max local en $3$ : $f(3) = (9-3)\mathrm{e}^{-3} = 6\mathrm{e}^{-3} \approx 0{,}30$.
+
+\textbf{4.} $f(3) = 6\,\mathrm{e}^{-3} = \boxed{\dfrac{6}{\mathrm{e}^3}} \approx 0{,}30$.

@@ -1,0 +1,53 @@
+% META: {"id": "TSPE-LIMFCT-ME-001", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Determiner la limite d'une fonction}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de « calculer la limite », « etudier le comportement asymptotique » ou « determiner la limite en l'infini ou en un point » d'une fonction.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier le type de limite :} en $+\infty$, $-\infty$, en un point $a$, a gauche ou a droite.
+    \item \textbf{Appliquer les operations sur les limites :} somme, produit, quotient, composition.
+    \item \textbf{Si forme indeterminee :}
+      \begin{itemize}
+        \item Polynome ou fraction rationnelle : factoriser par le terme preponderant (plus haut degre).
+        \item Avec exponentielle : factoriser par $\mathrm{e}^x$ et utiliser les croissances comparees.
+        \item En un point : factoriser, simplifier, ou reconnaitre un taux de variation.
+      \end{itemize}
+    \item \textbf{Conclure :} enoncer la limite trouvee.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Determiner $\lim_{x \to +\infty} \dfrac{x^2 + 3x}{2x^2 - 1}$.
+
+  \medskip
+  \commentaireMarge{Forme $\dfrac{\infty}{\infty}$ : factoriser par $x^2$.}%
+  On factorise par $x^2$ au numerateur et au denominateur :
+  \[
+    \frac{x^2 + 3x}{2x^2 - 1} = \frac{x^2(1 + 3/x)}{x^2(2 - 1/x^2)} = \frac{1 + 3/x}{2 - 1/x^2}.
+  \]
+
+  \commentaireMarge{Appliquer les operations sur les limites.}%
+  Or $\dfrac{3}{x} \to 0$ et $\dfrac{1}{x^2} \to 0$, donc :
+  \[
+    \lim_{x \to +\infty} \frac{x^2 + 3x}{2x^2 - 1} = \frac{1}{2}.
+  \]
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Ecrire $\dfrac{\infty}{\infty} = 1$. C'est une forme indeterminee, pas un resultat.
+    \item \textbf{Piege 2.} Oublier de preciser le sens de la limite en un point (a gauche ou a droite).
+    \item \textbf{Piege 3.} Confondre $\lim f(x)$ et $f(a)$ quand $f$ n'est pas definie en $a$.
+  \end{itemize}
+}
+
+\verifier{%
+  Tester la limite trouvee avec une grande valeur de $x$ (ex : $x = 1000$). Le resultat numerique doit etre proche de la limite.
+}
+
+\sEntrainer{\refExos{M1}}
+
+\end{fichemethode}

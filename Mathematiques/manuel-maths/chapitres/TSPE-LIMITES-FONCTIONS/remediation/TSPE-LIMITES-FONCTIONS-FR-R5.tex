@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-LIMITES-FONCTIONS-FR-R5", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R5 : Notion intuitive de limite
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Notion de limite (approche intuitive)}
+
+\textbf{Limite en un point :} $f(x)$ se rapproche de $\ell$ quand $x$ se rapproche de $a$.
+
+\textbf{Limite en $+\infty$ :} $f(x)$ se rapproche de $\ell$ quand $x$ devient grand.
+
+\textbf{Limite infinie :} $f(x)$ depasse tout reel quand $x$ se rapproche de $a$.
+
+\begin{exercice}{TSPE-LIMFCT-FR-R5-EX1}{1}{8}
+A partir du graphique de $f(x) = \dfrac{1}{x-1} + 2$ :
+\begin{enumerate}
+  \item Lire graphiquement $\lim_{x \to +\infty} f(x)$.
+  \item Lire graphiquement $\lim_{x \to 1^+} f(x)$.
+  \item Quelles sont les asymptotes de $\mathcal{C}_f$ ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(1/(x-1) + 2, x, oo) == 2
+% assert limit(1/(x-1) + 2, x, 1, '+') == oo
+% END-VERIFY

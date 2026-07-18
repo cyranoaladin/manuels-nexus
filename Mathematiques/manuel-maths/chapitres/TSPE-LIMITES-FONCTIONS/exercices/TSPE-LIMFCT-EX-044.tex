@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-LIMFCT-EX-044", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-044.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-044.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x - 1)*exp(x) + 2
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -oo) == 2
+% fp = diff(f, x)
+% assert simplify(fp - x*exp(x)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-044}{2}{15}
+Soit $f(x) = (x-1)\,\mathrm{e}^x + 2$.
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$ et $-\infty$.
+  \item En deduire les asymptotes.
+  \item Calculer $f'(x)$ et dresser le tableau de variations.
+\end{enumerate}
+\end{exercice}

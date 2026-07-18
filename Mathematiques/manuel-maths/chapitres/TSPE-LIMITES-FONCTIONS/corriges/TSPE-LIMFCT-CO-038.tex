@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-038", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-038", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(3*x**2*exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-038}
+
+\textbf{1.} $3x^2\mathrm{e}^{-x} = 3 \cdot \dfrac{x^2}{\mathrm{e}^x} \to 3 \times 0 = \boxed{0}$.
+
+\textbf{2.} $\mathrm{e}^x - x = \mathrm{e}^x(1 - x/\mathrm{e}^x)$. $x/\mathrm{e}^x \to 0$. Parenthese $\to 1$. $\boxed{\lim = +\infty}$.
+
+\end{corrige}

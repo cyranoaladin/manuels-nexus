@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-LIMFCT-EX-048", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-048.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-048.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*exp(-x)
+% assert limit(f, x, oo) == 0
+% fp = diff(f, x)
+% assert simplify(fp - (1-x)*exp(-x)) == 0
+% assert f.subs(x, 1) == exp(-1)
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-048}{3}{20}
+Soit $f(x) = x\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$ et $-\infty$.
+  \item Calculer $f'(x)$ et dresser le tableau de variations.
+  \item En deduire que $f$ admet un maximum global et le calculer.
+  \item Montrer que pour tout $x \geq 0$, $x \leq \mathrm{e}^x$.
+\end{enumerate}
+\end{exercice}

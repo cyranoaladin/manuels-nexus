@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-039", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-039.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x + 1)*exp(-x), x, oo) == 0
+% assert limit((-x**2 + 5)*exp(x), x, -oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-039}{1}{8}
+Determiner les limites.
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} (x+1)\,\mathrm{e}^{-x}$
+  \item $\lim_{x \to -\infty} (-x^2 + 5)\,\mathrm{e}^x$
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-CO-011", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-011", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x) - x**2, x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-011}
+
+\commentaireMarge{Factoriser par $\mathrm{e}^x$.}
+
+\textbf{1.} $\mathrm{e}^x - x^2 = \mathrm{e}^x(1 - x^2/\mathrm{e}^x)$. $x^2/\mathrm{e}^x \to 0$, parenthese $\to 1$. $\boxed{\lim = +\infty}$.
+
+\textbf{2.} $\mathrm{e}^x(1 - x^3/\mathrm{e}^x + 2x/\mathrm{e}^x)$. $x^3/\mathrm{e}^x \to 0$ et $x/\mathrm{e}^x \to 0$. Parenthese $\to 1$. $\boxed{\lim = +\infty}$.
+
+\end{corrige}

@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-LIMITES-FONCTIONS-FR-R4", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R4 : Fonctions de reference
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Fonctions de reference}
+
+\textbf{Polynomes :} degre, coefficient dominant, comportement en $\pm\infty$.
+
+\textbf{Inverse :} $f(x) = 1/x$ definie sur $\mathbb{R}^*$, limite $0$ en $\pm\infty$.
+
+\textbf{Racine carree :} $f(x) = \sqrt{x}$ definie sur $[0, +\infty[$, $\lim_{+\infty} = +\infty$.
+
+\begin{exercice}{TSPE-LIMFCT-FR-R4-EX1}{1}{8}
+\begin{enumerate}
+  \item Donner le degre et le coefficient dominant de $P(x) = -3x^4 + 2x^2 - 1$.
+  \item Determiner $\lim_{x \to +\infty} P(x)$.
+  \item Determiner le domaine de definition de $f(x) = \dfrac{x}{\sqrt{x+1}}$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(-3*x**4 + 2*x**2 - 1, x, oo) == -oo
+% END-VERIFY

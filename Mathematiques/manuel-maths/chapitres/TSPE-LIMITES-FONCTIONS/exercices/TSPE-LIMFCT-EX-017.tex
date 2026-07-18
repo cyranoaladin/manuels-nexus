@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-LIMFCT-EX-017", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-017.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-017.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**2 + x - 2)/(x**2 - 1)
+% assert limit(f, x, oo) == 1
+% assert limit(f, x, 1) == Rational(3, 2)
+% assert limit(f, x, -1, '+') == oo
+% assert limit(f, x, -1, '-') == -oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-017}{3}{18}
+Soit $f(x) = \dfrac{x^2 + x - 2}{x^2 - 1}$.
+\begin{enumerate}
+  \item Determiner le domaine de definition.
+  \item Simplifier $f(x)$ en factorisant.
+  \item Determiner toutes les limites aux bornes du domaine.
+  \item En deduire les asymptotes.
+\end{enumerate}
+\end{exercice}

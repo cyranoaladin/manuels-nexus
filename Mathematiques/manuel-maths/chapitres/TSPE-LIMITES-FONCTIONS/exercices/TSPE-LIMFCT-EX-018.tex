@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-LIMFCT-EX-018", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "calculer", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-018.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-018.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2*exp(-x)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == oo
+% fp = diff(f, x)
+% assert simplify(fp - x*(2-x)*exp(-x)) == 0
+% assert f.subs(x, 2) == 4*exp(-2)
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-018}{3}{20}
+Soit $f(x) = x^2\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$ et en $-\infty$.
+  \item Calculer $f'(x)$ et montrer que $f'(x) = x(2-x)\,\mathrm{e}^{-x}$.
+  \item Dresser le tableau de variations complet de $f$.
+  \item En deduire que pour tout $x \geq 0$, $0 \leq x^2\,\mathrm{e}^{-x} \leq 4\mathrm{e}^{-2}$.
+\end{enumerate}
+\end{exercice}

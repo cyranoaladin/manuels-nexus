@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-041", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-041", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(2*x)/x, x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-041}
+
+\textbf{1.} $X = 2x \to +\infty$. $\dfrac{\mathrm{e}^{2x}}{x} = \dfrac{2\mathrm{e}^X}{X} \to +\infty$ (croissances comparees). $\boxed{+\infty}$.
+
+\textbf{2.} $x\mathrm{e}^{-2x} = \dfrac{X}{2} \cdot \dfrac{1}{\mathrm{e}^X} = \dfrac{X}{2\mathrm{e}^X} \to 0$. $\boxed{0}$.
+
+\end{corrige}

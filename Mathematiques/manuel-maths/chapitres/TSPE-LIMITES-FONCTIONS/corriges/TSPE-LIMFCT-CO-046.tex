@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-LIMFCT-CO-046", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-046", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x**2 + 1)*exp(-x), x, oo) == 0
+% assert simplify(diff((x**2+1)*exp(-x), x) + (x-1)**2*exp(-x)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-046}
+
+\textbf{1.} $\lim_{+\infty} = 0$ (croissances comparees). $\lim_{-\infty} = +\infty$.
+
+\textbf{2.} $f'(x) = 2x\mathrm{e}^{-x} - (x^2+1)\mathrm{e}^{-x} = (-x^2+2x-1)\mathrm{e}^{-x} = -(x-1)^2\mathrm{e}^{-x}$.
+
+\textbf{3.} $(x-1)^2 \geq 0$ et $\mathrm{e}^{-x} > 0$, donc $f'(x) \leq 0$. $f$ est decroissante sur $\mathbb{R}$.
+
+\textbf{4.} $f$ decroissante de $+\infty$ a $0$. $f(1) = 2\mathrm{e}^{-1}$. $f'(1) = 0$ : point d'inflexion (pas d'extremum).
+
+\end{corrige}

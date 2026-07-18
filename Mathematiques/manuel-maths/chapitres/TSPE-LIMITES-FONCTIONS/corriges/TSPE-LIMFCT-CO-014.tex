@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-014", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-014", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x**2 - 1)/(x + 1), x, -1) == -2
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-014}
+
+\textbf{1.} $\dfrac{x^2-1}{x+1} = \dfrac{(x-1)(x+1)}{x+1} = x-1$ pour $x \neq -1$. $\lim = -1-1 = \boxed{-2}$.
+
+\textbf{2.} $\dfrac{x}{x^2-9} = \dfrac{x}{(x-3)(x+3)}$. En $3^+$ : $x \to 3 > 0$, $(x-3) \to 0^+$, $(x+3) \to 6 > 0$. $\boxed{\lim = +\infty}$.
+
+\end{corrige}

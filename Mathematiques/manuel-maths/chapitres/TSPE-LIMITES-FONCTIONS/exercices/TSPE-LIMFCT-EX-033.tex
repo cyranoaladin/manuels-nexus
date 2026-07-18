@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-LIMFCT-EX-033", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["raisonner", "calculer", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-033.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-033.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (2*x**2 + x - 1)/(x + 2)
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -2, '+') == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-033}{3}{20}
+Soit $f(x) = \dfrac{2x^2 + x - 1}{x + 2}$.
+\begin{enumerate}
+  \item Determiner l'AV de $\mathcal{C}_f$.
+  \item Effectuer la division euclidienne. En deduire l'asymptote oblique.
+  \item Dresser le tableau de variations complet de $f$ (avec limites).
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-023", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-023", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x**2 - 1)/(x + 2), x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-023}
+
+\textbf{1.} $\lim_{+\infty} f(x) = +\infty$ et $\lim_{-\infty} f(x) = -\infty$. Pas de limite finie en l'infini, donc \textbf{pas d'AH}.
+
+\textbf{2.} Valeur interdite : $x = -2$. Numerateur en $-2$ : $4-1 = 3 > 0$. $(x+2) \to 0^+$ donne $f \to +\infty$. $(x+2) \to 0^-$ donne $f \to -\infty$. AV : $x = -2$.
+
+\end{corrige}

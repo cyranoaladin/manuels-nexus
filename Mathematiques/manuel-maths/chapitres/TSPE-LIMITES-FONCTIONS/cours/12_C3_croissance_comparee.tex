@@ -1,0 +1,131 @@
+% META: {"id": "TSPE-LIMFCT-CR-012", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+
+\section{Croissance comparee de $x^n$ et $\mathrm{e}^x$}
+
+% ============================================================
+% STRATE 1 — Theoreme et demonstration exigible
+% ============================================================
+
+\subsection{Resultat fondamental}
+
+\theoreme{
+Pour tout entier naturel $n$ :
+\[
+  \lim_{x \to +\infty} \frac{\mathrm{e}^x}{x^n} = +\infty.
+\]
+Autrement dit, l'exponentielle croit plus vite que toute puissance de $x$ en $+\infty$.
+}
+
+\subsection{Demonstration exigible}
+
+\demonstration{
+\textbf{Etape 1 : cas $n = 1$, c'est-a-dire $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x} = +\infty$.}
+
+\medskip
+
+Pour tout $x \geq 0$, on a l'inegalite $\mathrm{e}^x \geq 1 + x$ (admise, ou obtenue par etude de $g(x) = \mathrm{e}^x - 1 - x$ qui verifie $g'(x) = \mathrm{e}^x - 1 \geq 0$ pour $x \geq 0$, $g(0) = 0$, donc $g(x) \geq 0$).
+
+Appliquons cette inegalite a $x/2$ : pour tout $x \geq 0$,
+\[
+  \mathrm{e}^{x/2} \geq 1 + \frac{x}{2}.
+\]
+
+Donc :
+\[
+  \mathrm{e}^x = \left(\mathrm{e}^{x/2}\right)^2 \geq \left(1 + \frac{x}{2}\right)^2 \geq \frac{x^2}{4}.
+\]
+
+Pour $x > 0$, on divise par $x$ :
+\[
+  \frac{\mathrm{e}^x}{x} \geq \frac{x}{4}.
+\]
+
+Or $\lim_{x \to +\infty} \dfrac{x}{4} = +\infty$, donc par comparaison :
+\[
+  \lim_{x \to +\infty} \frac{\mathrm{e}^x}{x} = +\infty.
+\]
+
+\medskip
+
+\textbf{Etape 2 : cas general, c'est-a-dire $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$ pour tout $n \geq 1$.}
+
+\medskip
+
+On ecrit :
+\[
+  \frac{\mathrm{e}^x}{x^n} = \frac{\mathrm{e}^{x/n \cdot n}}{x^n} = \left(\frac{\mathrm{e}^{x/n}}{x^{n \cdot 1/n}}\right)^n = \left(\frac{\mathrm{e}^{x/n}}{x}\right)^n \quad \text{(non, corrigeons)}.
+\]
+
+Procedons autrement. On pose $X = x/n$, soit $x = nX$. Quand $x \to +\infty$, $X \to +\infty$.
+\[
+  \frac{\mathrm{e}^x}{x^n} = \frac{\mathrm{e}^{nX}}{(nX)^n} = \frac{(\mathrm{e}^X)^n}{n^n \, X^n} = \frac{1}{n^n}\left(\frac{\mathrm{e}^X}{X}\right)^n.
+\]
+
+D'apres l'etape 1, $\dfrac{\mathrm{e}^X}{X} \to +\infty$ quand $X \to +\infty$.
+
+Donc $\left(\dfrac{\mathrm{e}^X}{X}\right)^n \to +\infty$, et $\dfrac{\mathrm{e}^x}{x^n} \to +\infty$.
+}
+
+\subsection{Consequences}
+
+\propriete{
+Pour tout entier naturel $n$ :
+\[
+  \lim_{x \to +\infty} \frac{x^n}{\mathrm{e}^x} = 0 \qquad \text{et} \qquad \lim_{x \to -\infty} x^n \, \mathrm{e}^x = 0.
+\]
+}
+
+\textit{Justification de la seconde limite.} On pose $X = -x$, soit $x = -X$. Quand $x \to -\infty$, $X \to +\infty$.
+\[
+  x^n \, \mathrm{e}^x = (-X)^n \, \mathrm{e}^{-X} = (-1)^n \frac{X^n}{\mathrm{e}^X} \to 0
+\]
+d'apres la premiere limite.
+
+\exemple{
+$\lim_{x \to +\infty} x^{100}\, \mathrm{e}^{-x} = \lim_{x \to +\infty} \dfrac{x^{100}}{\mathrm{e}^x} = 0$.
+}
+
+\exemple{
+$\lim_{x \to +\infty} (x^3 - \mathrm{e}^x)$. On factorise par $\mathrm{e}^x$ :
+\[
+  x^3 - \mathrm{e}^x = \mathrm{e}^x\left(\frac{x^3}{\mathrm{e}^x} - 1\right).
+\]
+$\dfrac{x^3}{\mathrm{e}^x} \to 0$ donc le contenu de la parenthese $\to -1$, et $\mathrm{e}^x \to +\infty$. La limite est $-\infty$.
+}
+
+\exemple{
+$\lim_{x \to -\infty} x^2 \, \mathrm{e}^x = 0$ par croissances comparees.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Hierarchie des croissances en $+\infty$ :}
+\[
+  \ln x \ll x^{1/n} \ll x \ll x^n \ll \mathrm{e}^x
+\]
+(pour $n \geq 2$). Chaque fonction croit « infiniment plus vite » que la precedente. Pour le programme de terminale, on retient surtout $x^n \ll \mathrm{e}^x$.
+}
+
+\margeAppui{
+\textbf{Memo pour les formes indeterminees avec exponentielle :}
+\begin{itemize}
+  \item $x^n \, \mathrm{e}^{-x} \to 0$ en $+\infty$ (l'exponentielle « l'emporte »)
+  \item $x^n \, \mathrm{e}^x \to 0$ en $-\infty$ (idem, par changement de variable)
+  \item Factoriser par $\mathrm{e}^x$ pour ramener a une limite connue.
+\end{itemize}
+}
+
+\erreurFrequente{
+\textbf{Appliquer les croissances comparees en $-\infty$ sans changement de variable.}
+
+La limite $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^n} = +\infty$ est un resultat en $+\infty$. En $-\infty$, on pose $X = -x$ ou on utilise la consequence $\lim_{x \to -\infty} x^n\,\mathrm{e}^x = 0$.
+}
+
+\erreurFrequente{
+\textbf{Ecrire $\mathrm{e}^x - x^n = \mathrm{e}^x$ « car l'exponentielle domine ».}
+
+Les croissances comparees donnent le comportement du \emph{rapport}, pas de la difference. Pour la difference $\mathrm{e}^x - x^n$, il faut factoriser par $\mathrm{e}^x$ et utiliser $\dfrac{x^n}{\mathrm{e}^x} \to 0$.
+}

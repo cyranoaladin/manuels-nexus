@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-CO-021", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-021", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((3*x + 1)/(x - 2), x, oo) == 3
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-021}
+
+\textbf{1.} $f(x) = \dfrac{3+1/x}{1-2/x} \to \boxed{3}$ en $\pm\infty$.
+
+\textbf{2.} Numerateur en $2$ : $7 > 0$. $(x-2) \to 0^+$ : $f \to \boxed{+\infty}$. $(x-2) \to 0^-$ : $f \to \boxed{-\infty}$.
+
+\textbf{3.} AH : $y = 3$. AV : $x = 2$.
+
+\end{corrige}

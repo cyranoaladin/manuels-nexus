@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-026", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-026", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x/(x**2 + 1), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-026}
+
+\textbf{1.} $\dfrac{x}{x^2+1} = \dfrac{1/x}{1+1/x^2} \to \boxed{0}$ en $\pm\infty$.
+
+\textbf{2.} AH : $y = 0$ en $+\infty$ et en $-\infty$. Pas d'AV ($x^2+1 > 0$ pour tout $x$).
+
+\end{corrige}

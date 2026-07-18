@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-LIMFCT-EX-050", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["raisonner", "calculer", "modeliser"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-050.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-050.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% # f(x) = x*e^(-x/2), modele concentration
+% f = x*exp(-x/2)
+% assert limit(f, x, oo) == 0
+% fp = diff(f, x)
+% assert simplify(fp - (1-x/2)*exp(-x/2)) == 0
+% assert f.subs(x, 2) == 2*exp(-1)
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-050}{3}{25}
+\textbf{(Type bac)} La concentration (en mg/L) d'un medicament dans le sang est modelisee par $C(t) = t\,\mathrm{e}^{-t/2}$ pour $t \geq 0$ (en heures).
+\begin{enumerate}
+  \item Determiner $\lim_{t \to +\infty} C(t)$. Interpreter.
+  \item Calculer $C'(t)$ et montrer que $C'(t) = \left(1 - \dfrac{t}{2}\right)\mathrm{e}^{-t/2}$.
+  \item Dresser le tableau de variations de $C$.
+  \item Determiner la concentration maximale et l'instant ou elle est atteinte.
+  \item Le medicament est efficace si $C(t) \geq 0{,}5$. Justifier que l'equation $C(t) = 0{,}5$ admet exactement deux solutions.
+\end{enumerate}
+\end{exercice}

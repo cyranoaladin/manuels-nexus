@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-LIMFCT-EX-024", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer", "representer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-024.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-024.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (2*x - 1)/(x + 1)
+% assert limit(f, x, oo) == 2
+% assert limit(f, x, -1, '+') == -oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-024}{1}{10}
+Soit $f(x) = \dfrac{2x-1}{x+1}$.
+\begin{enumerate}
+  \item Determiner les asymptotes de $\mathcal{C}_f$.
+  \item Montrer que $f(x) = 2 - \dfrac{3}{x+1}$.
+  \item En deduire la position de $\mathcal{C}_f$ par rapport a la droite $y = 2$.
+\end{enumerate}
+\end{exercice}

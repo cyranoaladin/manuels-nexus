@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-LIMFCT-CO-016", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-016", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x + 2 + 1/(x - 1), x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-016}
+
+\textbf{1.} $f(x) = x+2+\dfrac{1}{x-1}$. $\dfrac{1}{x-1} \to 0$ en $\pm\infty$. $f(x) \sim x+2$.
+
+$\lim_{+\infty} f = \boxed{+\infty}$, $\lim_{-\infty} f = \boxed{-\infty}$.
+
+\textbf{2.} $x+2 \to 3$ en $1$. $\dfrac{1}{x-1} \to \pm\infty$. $\lim_{1^+} f = \boxed{+\infty}$, $\lim_{1^-} f = \boxed{-\infty}$.
+
+\textbf{3.} $f(x) - (x+2) = \dfrac{1}{x-1} \to 0$ en $\pm\infty$. Donc $y = x+2$ est asymptote oblique.
+
+\end{corrige}

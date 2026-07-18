@@ -1,0 +1,119 @@
+% META: {"id": "TSPE-LIMFCT-COURS-07-FR", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "cours", "sous_type": "td_fil_rouge", "titre": "TD fil rouge — Etude complete d'une fonction rationnelle et exponentielle", "temps_gabarit": 7, "capacites": ["C1", "C2", "C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # Partie A : f(x) = (x^2 + 1)/(x - 2) pour x != 2
+% f = (x**2 + 1)/(x - 2)
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -oo) == -oo
+% assert limit(f, x, 2, '+') == oo
+% assert limit(f, x, 2, '-') == -oo
+% # Partie B : g(x) = (x^2 - x + 1)*e^(-x)
+% g = (x**2 - x + 1)*exp(-x)
+% assert limit(g, x, oo) == 0
+% assert limit(g, x, -oo) == oo
+% gp = diff(g, x)
+% assert simplify(gp - (-x**2 + 3*x - 2)*exp(-x)) == 0
+% assert simplify(gp - (-(x-1)*(x-2))*exp(-x)) == 0
+% assert g.subs(x, 1) == exp(-1)
+% assert g.subs(x, 2) == 3*exp(-2)
+% END-VERIFY
+
+\section*{Temps 7 — TD fil rouge : Limites, asymptotes et croissances comparees}
+
+\textbf{Objectif.} Mobiliser les trois capacites du chapitre (limites, asymptotes, croissances comparees) dans deux etudes de fonctions.
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE A — Fonction rationnelle (C1, C2)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-LIMFCT-COURS-07-FR-EX1}{2}{15}
+
+\textbf{Partie A — Etude d'une fonction rationnelle}
+
+Soit $f(x) = \dfrac{x^2 + 1}{x - 2}$ definie sur $\mathbb{R} \setminus \{2\}$.
+
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$ et en $-\infty$.
+  \item Determiner les limites de $f$ en $2^+$ et en $2^-$.
+  \item En deduire les asymptotes de $\mathcal{C}_f$.
+  \item La courbe admet-elle une asymptote horizontale ? Justifier.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-LIMFCT-COURS-07-FR-EX1}
+
+\commentaireMarge{Le terme preponderant domine en l'infini.}
+
+\textbf{Question 1.} $f(x) = \dfrac{x^2 + 1}{x - 2} = \dfrac{x^2(1 + 1/x^2)}{x(1 - 2/x)} = \dfrac{x(1 + 1/x^2)}{1 - 2/x}$.
+
+Quand $x \to +\infty$ : $f(x) \sim x \to +\infty$.
+
+Quand $x \to -\infty$ : $f(x) \sim x \to -\infty$.
+
+\textbf{Question 2.} En $x = 2$ : le numerateur $\to 4 + 1 = 5 > 0$.
+\begin{itemize}
+  \item $x \to 2^+$ : $x - 2 \to 0^+$, donc $f(x) \to +\infty$.
+  \item $x \to 2^-$ : $x - 2 \to 0^-$, donc $f(x) \to -\infty$.
+\end{itemize}
+
+\textbf{Question 3.} $x = 2$ est asymptote verticale (limites infinies en $2$). Il n'y a pas d'asymptote horizontale (les limites en $\pm\infty$ sont infinies).
+
+\textbf{Question 4.} Non, car $\lim_{x \to +\infty} f(x) = +\infty$ et $\lim_{x \to -\infty} f(x) = -\infty$. Aucune limite finie en l'infini.
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE B — Fonction avec exponentielle (C1, C2, C3)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-LIMFCT-COURS-07-FR-EX2}{2}{20}
+
+\textbf{Partie B — Etude d'une fonction avec exponentielle}
+
+Soit $g(x) = (x^2 - x + 1)\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+
+\begin{enumerate}
+  \item Determiner $\lim_{x \to +\infty} g(x)$. Quelle technique utilise-t-on ?
+  \item Determiner $\lim_{x \to -\infty} g(x)$.
+  \item La courbe $\mathcal{C}_g$ admet-elle des asymptotes ? Lesquelles ?
+  \item Calculer $g'(x)$ et montrer que $g'(x) = -(x-1)(x-2)\,\mathrm{e}^{-x}$.
+  \item Dresser le tableau de variations complet de $g$.
+  \item Calculer $g(1)$ et $g(2)$.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-LIMFCT-COURS-07-FR-EX2}
+
+\commentaireMarge{Les croissances comparees sont la cle.}
+
+\textbf{Question 1.} $g(x) = \dfrac{x^2 - x + 1}{\mathrm{e}^x}$. Le numerateur est un polynome de degre 2. Par les croissances comparees ($\mathrm{e}^x$ croit plus vite que $x^2$), $\lim_{x \to +\infty} g(x) = 0$.
+
+\textbf{Question 2.} Quand $x \to -\infty$ : $x^2 - x + 1 \to +\infty$ et $\mathrm{e}^{-x} \to +\infty$. Produit de deux quantites tendant vers $+\infty$ : $\lim_{x \to -\infty} g(x) = +\infty$.
+
+\textbf{Question 3.} Pas d'AV (la fonction est definie sur $\mathbb{R}$). AH en $+\infty$ : $y = 0$ (car $\lim_{+\infty} g = 0$). Pas d'AH en $-\infty$ (limite $+\infty$).
+
+\textbf{Question 4.} $g'(x) = (2x - 1)\mathrm{e}^{-x} + (x^2 - x + 1)(-1)\mathrm{e}^{-x} = (2x - 1 - x^2 + x - 1)\mathrm{e}^{-x} = (-x^2 + 3x - 2)\mathrm{e}^{-x}$.
+
+Or $-x^2 + 3x - 2 = -(x^2 - 3x + 2) = -(x-1)(x-2)$.
+
+Donc $g'(x) = -(x-1)(x-2)\,\mathrm{e}^{-x}$.
+
+\textbf{Question 5.} $g'(x) = 0 \iff x = 1$ ou $x = 2$. Signe de $-(x-1)(x-2)$ : positif sur $]1, 2[$, negatif sur $]-\infty, 1[$ et $]2, +\infty[$.
+
+$g$ decroissante sur $]-\infty, 1]$, croissante sur $[1, 2]$, decroissante sur $[2, +\infty[$.
+
+Minimum local en $x = 1$, maximum local en $x = 2$.
+
+\textbf{Question 6.} $g(1) = (1 - 1 + 1)\mathrm{e}^{-1} = \mathrm{e}^{-1} \approx 0{,}368$.
+
+$g(2) = (4 - 2 + 1)\mathrm{e}^{-2} = 3\mathrm{e}^{-2} \approx 0{,}406$.
+
+\end{corrige}

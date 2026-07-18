@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-LIMITES-FONCTIONS-RE-C2", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : Asymptotes
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-LIMFCT-RE-C2-EX1}{1}{10}
+Determiner les asymptotes de chaque fonction.
+\begin{enumerate}
+  \item $f(x) = \dfrac{2x}{x-1}$
+  \item $g(x) = \mathrm{e}^{-x} + 5$
+  \item $h(x) = \dfrac{x+3}{x^2}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(2*x/(x-1), x, oo) == 2
+% assert limit(2*x/(x-1), x, 1, '+') == oo
+% assert limit(exp(-x) + 5, x, oo) == 5
+% assert limit((x+3)/x**2, x, oo) == 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-LIMFCT-RE-C2-EX1}
+\textbf{a.} AH $y = 2$. AV $x = 1$. \quad \textbf{b.} AH $y = 5$ en $+\infty$. Pas d'AV. \quad \textbf{c.} AH $y = 0$. AV $x = 0$.
+\end{corrige}

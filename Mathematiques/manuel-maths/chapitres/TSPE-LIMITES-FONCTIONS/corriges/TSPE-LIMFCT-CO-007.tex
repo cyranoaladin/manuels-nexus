@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-007", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-007", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(-2*x**4 + x**3 + 5, x, oo) == -oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-007}
+
+\textbf{1.} $x^4(-2 + 1/x + 5/x^4)$. $x^4 \to +\infty$, $(-2 + \ldots) \to -2 < 0$. $\boxed{\lim = -\infty}$.
+
+\textbf{2.} $\dfrac{x^3(1-1/x^3)}{x^3(2+1/x^2)} = \dfrac{1-1/x^3}{2+1/x^2} \to \boxed{\dfrac{1}{2}}$.
+
+\end{corrige}

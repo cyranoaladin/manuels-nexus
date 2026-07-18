@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-LIMFCT-EX-015", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-015.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-015.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (2*x**2 - x + 3)*exp(-x)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == oo
+% fp = diff(f, x)
+% assert simplify(fp - (-2*x**2 + 5*x - 4)*exp(-x)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-015}{3}{15}
+Soit $f(x) = (2x^2 - x + 3)\,\mathrm{e}^{-x}$.
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$ et en $-\infty$.
+  \item Calculer $f'(x)$.
+  \item Etudier le signe de $f'(x)$ et dresser le tableau de variations.
+\end{enumerate}
+\end{exercice}

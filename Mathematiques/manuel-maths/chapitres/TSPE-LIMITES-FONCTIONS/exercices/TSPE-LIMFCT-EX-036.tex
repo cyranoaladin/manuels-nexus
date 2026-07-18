@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-036", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer"], "duree_min": 5, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-036.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-036.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x/exp(x), x, oo) == 0
+% assert limit(x**2/exp(x), x, oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-036}{1}{5}
+En utilisant les croissances comparees, determiner :
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} \dfrac{x}{\mathrm{e}^x}$
+  \item $\lim_{x \to +\infty} \dfrac{x^2}{\mathrm{e}^x}$
+\end{enumerate}
+\end{exercice}

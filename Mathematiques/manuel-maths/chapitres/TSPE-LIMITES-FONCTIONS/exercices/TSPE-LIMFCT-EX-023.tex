@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-EX-023", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-023.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-023.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**2 - 1)/(x + 2)
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -2, '+') == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-023}{1}{8}
+Soit $f(x) = \dfrac{x^2-1}{x+2}$.
+\begin{enumerate}
+  \item La courbe $\mathcal{C}_f$ admet-elle une AH ? Justifier.
+  \item Determiner les AV de $\mathcal{C}_f$.
+\end{enumerate}
+\end{exercice}

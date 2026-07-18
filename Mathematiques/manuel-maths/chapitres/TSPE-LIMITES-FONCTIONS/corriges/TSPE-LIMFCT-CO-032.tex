@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-LIMFCT-CO-032", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-032", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert simplify((x**2 - 3*x + 2)/(x - 3) - (x + Rational(2,1)/(x-3))) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-032}
+
+\textbf{1.} $\lim_{\pm\infty} f = \pm\infty$. $\lim_{3^+} = +\infty$, $\lim_{3^-} = -\infty$ (numerateur en $3$ : $9-9+2 = 2 > 0$).
+
+\textbf{2.} Division : $x^2-3x+2 = (x-3) \cdot x + (0 \cdot x + 2)$. Verifions : $(x-3)x + 2 = x^2-3x+2$. Oui. Donc $f(x) = x + \dfrac{2}{x-3}$.
+
+Correction : $f(x) = x + \dfrac{2}{x-3}$ (et non $x - 2/(x-3)$).
+
+\textbf{3.} $f(x) - x = \dfrac{2}{x-3} \to 0$ en $\pm\infty$. $y = x$ est asymptote oblique.
+
+\textbf{4.} $f(x) - x = \dfrac{2}{x-3}$. Si $x > 3$ : $> 0$, courbe au-dessus. Si $x < 3$ : $< 0$, courbe en dessous.
+
+\end{corrige}

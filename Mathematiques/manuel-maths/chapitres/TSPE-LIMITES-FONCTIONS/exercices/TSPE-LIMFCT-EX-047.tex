@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-LIMFCT-EX-047", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-047.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-047.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # Demo: e^x >= 1 + x pour x >= 0
+% g = exp(x) - 1 - x
+% gp = diff(g, x)
+% assert simplify(gp - (exp(x) - 1)) == 0
+% assert g.subs(x, 0) == 0
+% # e^(x/2) >= 1 + x/2, so e^x >= (1+x/2)^2 >= x^2/4
+% # e^x/x >= x/4 -> +inf
+% assert limit(exp(x)/x, x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-047}{3}{20}
+\textbf{Demonstration de la croissance comparee.}
+\begin{enumerate}
+  \item Soit $g(x) = \mathrm{e}^x - 1 - x$. Montrer que $g'(x) = \mathrm{e}^x - 1$ et que $g(x) \geq 0$ pour $x \geq 0$.
+  \item En deduire que $\mathrm{e}^{x/2} \geq 1 + x/2$ pour $x \geq 0$.
+  \item Montrer que $\mathrm{e}^x \geq x^2/4$ pour $x \geq 0$.
+  \item Conclure que $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x} = +\infty$.
+\end{enumerate}
+\end{exercice}

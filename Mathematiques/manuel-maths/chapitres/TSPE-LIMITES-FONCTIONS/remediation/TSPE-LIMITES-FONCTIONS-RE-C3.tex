@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-LIMITES-FONCTIONS-RE-C3", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : Croissances comparees
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-LIMFCT-RE-C3-EX1}{1}{10}
+Determiner les limites suivantes.
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} \dfrac{x^2}{\mathrm{e}^x}$
+  \item $\lim_{x \to +\infty} (\mathrm{e}^x - x)$
+  \item $\lim_{x \to -\infty} x\,\mathrm{e}^x$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x**2/exp(x), x, oo) == 0
+% assert limit(exp(x) - x, x, oo) == oo
+% assert limit(x*exp(x), x, -oo) == 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-LIMFCT-RE-C3-EX1}
+\textbf{a.} Croissances comparees : $0$. \quad \textbf{b.} Factoriser par $\mathrm{e}^x$ : $\mathrm{e}^x(1-x/\mathrm{e}^x) \to +\infty$. \quad \textbf{c.} Croissances comparees en $-\infty$ : $0$.
+\end{corrige}

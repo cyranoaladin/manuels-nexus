@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-EX-041", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-041.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-041.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(2*x)/x, x, oo) == oo
+% assert limit(x*exp(-2*x), x, oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-041}{1}{10}
+Determiner les limites en $+\infty$.
+\begin{enumerate}
+  \item $\dfrac{\mathrm{e}^{2x}}{x}$
+  \item $x\,\mathrm{e}^{-2x}$
+\end{enumerate}
+\textit{Indication : poser $X = 2x$.}
+\end{exercice}

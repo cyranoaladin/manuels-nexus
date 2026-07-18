@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-043", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-043.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-043.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(2*x**2 - 3*exp(x), x, oo) == -oo
+% assert limit(exp(x)*(1 - x), x, -oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-043}{2}{12}
+Determiner les limites.
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} (2x^2 - 3\mathrm{e}^x)$
+  \item $\lim_{x \to -\infty} \mathrm{e}^x(1 - x)$
+\end{enumerate}
+\end{exercice}

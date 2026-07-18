@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-042", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-042", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((2*x**3 - x)*exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-042}
+
+\textbf{1.} $(2x^3-x)\mathrm{e}^{-x} = \dfrac{2x^3-x}{\mathrm{e}^x}$. $\dfrac{x^3}{\mathrm{e}^x} \to 0$. $\boxed{\lim = 0}$.
+
+\textbf{2.} $\dfrac{\mathrm{e}^x}{x^3-x+1} \sim \dfrac{\mathrm{e}^x}{x^3} \to +\infty$. $\boxed{+\infty}$.
+
+\end{corrige}

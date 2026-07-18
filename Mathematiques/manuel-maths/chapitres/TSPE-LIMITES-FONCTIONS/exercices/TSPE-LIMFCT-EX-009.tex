@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-009", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-009.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x**2 - 3*x)*exp(-x), x, oo) == 0
+% assert limit(exp(x)/(x**2 + 1), x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-009}{2}{10}
+Determiner les limites en $+\infty$ (formes indeterminees avec exponentielle).
+\begin{enumerate}
+  \item $(x^2 - 3x)\,\mathrm{e}^{-x}$
+  \item $\dfrac{\mathrm{e}^x}{x^2 + 1}$
+\end{enumerate}
+\end{exercice}

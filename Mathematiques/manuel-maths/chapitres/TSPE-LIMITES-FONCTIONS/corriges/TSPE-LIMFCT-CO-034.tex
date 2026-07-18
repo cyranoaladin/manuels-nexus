@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-LIMFCT-CO-034", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-034", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x*exp(x)/(exp(x) - 1), x, oo) == oo
+% assert limit(x*exp(x)/(exp(x) - 1), x, 0) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-034}
+
+\textbf{1.} En $+\infty$ : diviser par $\mathrm{e}^x$ : $\dfrac{x}{1-1/\mathrm{e}^x} \to +\infty$.
+
+En $-\infty$ : $x\mathrm{e}^x \to 0$ et $\mathrm{e}^x-1 \to -1$. $f \to 0$.
+
+En $0$ : $\dfrac{x\mathrm{e}^x}{\mathrm{e}^x-1} = \dfrac{x}{\mathrm{e}^x-1} \cdot \mathrm{e}^x$. $\dfrac{\mathrm{e}^x-1}{x} \to 1$ (taux de variation). Donc $\dfrac{x}{\mathrm{e}^x-1} \to 1$, et $\mathrm{e}^0 = 1$. $f \to 1$.
+
+\textbf{2.} AH en $-\infty$ : $y = 0$. Pas d'AH en $+\infty$. Pas d'AV (limite finie en $0$).
+
+\textbf{3.} Oui, en posant $f(0) = 1$.
+
+\end{corrige}

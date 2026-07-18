@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-CO-006", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-006", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(2*x - 1), x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-006}
+
+\commentaireMarge{Theoreme de composition.}
+
+\textbf{1.} $2x-1 \to +\infty$, $\mathrm{e}^X \to +\infty$ quand $X \to +\infty$. $\boxed{\lim = +\infty}$.
+
+\textbf{2.} $-x^2 \to -\infty$, $\mathrm{e}^X \to 0$ quand $X \to -\infty$. $\boxed{\lim = 0}$.
+
+\end{corrige}

@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-037", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-037", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x)/x**3, x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-037}
+
+\textbf{1.} Croissances comparees : $\dfrac{\mathrm{e}^x}{x^3} \to \boxed{+\infty}$.
+
+\textbf{2.} Croissances comparees en $-\infty$ : $x^n\mathrm{e}^x \to 0$. $\boxed{\lim = 0}$.
+
+\end{corrige}

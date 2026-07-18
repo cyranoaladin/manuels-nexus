@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-LIMITES-FONCTIONS-RE-C1", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : Determiner des limites
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-LIMFCT-RE-C1-EX1}{1}{10}
+Determiner la limite de chaque fonction en $+\infty$.
+\begin{enumerate}
+  \item $f(x) = \dfrac{4x+1}{x+2}$
+  \item $g(x) = 2x^2 - x$
+  \item $h(x) = \dfrac{3}{x+1}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((4*x+1)/(x+2), x, oo) == 4
+% assert limit(2*x**2 - x, x, oo) == oo
+% assert limit(3/(x+1), x, oo) == 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-LIMFCT-RE-C1-EX1}
+\textbf{a.} $f(x) = \dfrac{4+1/x}{1+2/x} \to 4$. \quad \textbf{b.} Terme preponderant $2x^2 \to +\infty$. \quad \textbf{c.} $h(x) \to 0$.
+\end{corrige}

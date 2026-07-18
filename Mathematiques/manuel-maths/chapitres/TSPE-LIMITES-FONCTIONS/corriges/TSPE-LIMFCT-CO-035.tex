@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-LIMFCT-CO-035", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-035", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% assert (x + 1/x).subs(x, 1) == 2
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-035}
+
+\textbf{1.} $\dfrac{x^2+1}{x} = x + \dfrac{1}{x}$.
+
+\textbf{2.} $\lim_{+\infty} = +\infty$, $\lim_{-\infty} = -\infty$, $\lim_{0^+} = +\infty$, $\lim_{0^-} = -\infty$.
+
+\textbf{3.} $f(x) - x = 1/x \to 0$ : AO $y = x$. Limites infinies en $0$ : AV $x = 0$.
+
+\textbf{4.} Pour $x > 0$ : $f(x) - 2 = x + 1/x - 2 = \dfrac{x^2-2x+1}{x} = \dfrac{(x-1)^2}{x} \geq 0$. Donc $f(x) \geq 2$.
+
+\end{corrige}

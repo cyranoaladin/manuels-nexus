@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-007", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-007.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(-2*x**4 + x**3 + 5, x, oo) == -oo
+% assert limit((x**3 - 1)/(2*x**3 + x), x, -oo) == Rational(1, 2)
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-007}{1}{10}
+Determiner les limites.
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} (-2x^4 + x^3 + 5)$
+  \item $\lim_{x \to -\infty} \dfrac{x^3 - 1}{2x^3 + x}$
+\end{enumerate}
+\end{exercice}

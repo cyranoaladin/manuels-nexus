@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-LIMFCT-CO-044", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-044", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x - 1)*exp(x) + 2, x, -oo) == 2
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-044}
+
+\textbf{1.} En $+\infty$ : $(x-1)\mathrm{e}^x \to +\infty$. $\lim = +\infty$.
+
+En $-\infty$ : $x\mathrm{e}^x \to 0$ et $\mathrm{e}^x \to 0$. $(x-1)\mathrm{e}^x \to 0$. $\lim = \boxed{2}$.
+
+\textbf{2.} AH en $-\infty$ : $y = 2$. Pas d'AH en $+\infty$. Pas d'AV.
+
+\textbf{3.} $f'(x) = \mathrm{e}^x + (x-1)\mathrm{e}^x = x\,\mathrm{e}^x$. $f'(x) = 0 \iff x = 0$. $f'(x) < 0$ sur $]-\infty, 0[$, $f'(x) > 0$ sur $]0, +\infty[$. Minimum en $0$ : $f(0) = -1+2 = 1$.
+
+\end{corrige}

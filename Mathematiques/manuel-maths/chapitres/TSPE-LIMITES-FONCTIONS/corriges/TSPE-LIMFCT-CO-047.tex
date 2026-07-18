@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-LIMFCT-CO-047", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-047", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x)/x, x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-047}
+
+\textbf{1.} $g'(x) = \mathrm{e}^x - 1$. Pour $x \geq 0$ : $\mathrm{e}^x \geq 1$, donc $g'(x) \geq 0$. $g$ croissante sur $[0, +\infty[$. $g(0) = 0$. Donc $g(x) \geq 0$, i.e. $\mathrm{e}^x \geq 1 + x$.
+
+\textbf{2.} Appliquons a $x/2 \geq 0$ : $\mathrm{e}^{x/2} \geq 1 + x/2$.
+
+\textbf{3.} $\mathrm{e}^x = (\mathrm{e}^{x/2})^2 \geq (1+x/2)^2 \geq x^2/4$ (car $(1+x/2)^2 = 1 + x + x^2/4 \geq x^2/4$).
+
+\textbf{4.} Pour $x > 0$ : $\dfrac{\mathrm{e}^x}{x} \geq \dfrac{x}{4} \to +\infty$. Par comparaison : $\boxed{\lim_{+\infty} \dfrac{\mathrm{e}^x}{x} = +\infty}$.
+
+\end{corrige}

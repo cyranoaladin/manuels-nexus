@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-LIMITES-FONCTIONS-FR-R2", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R2 : Derivation
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Derivation et etude de variations}
+
+\textbf{Derivees usuelles :} $(x^n)' = nx^{n-1}$, $(\mathrm{e}^x)' = \mathrm{e}^x$, $(1/x)' = -1/x^2$.
+
+\textbf{Regles :} $(u+v)' = u'+v'$, $(ku)' = ku'$, $(uv)' = u'v + uv'$, $(u/v)' = (u'v-uv')/v^2$.
+
+\begin{exercice}{TSPE-LIMFCT-FR-R2-EX1}{1}{8}
+\begin{enumerate}
+  \item Deriver $f(x) = 3x^2 - 5x + 2$.
+  \item Deriver $g(x) = x\,\mathrm{e}^x$.
+  \item Dresser le tableau de variations de $f$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert diff(3*x**2 - 5*x + 2, x) == 6*x - 5
+% assert simplify(diff(x*exp(x), x) - (1+x)*exp(x)) == 0
+% END-VERIFY

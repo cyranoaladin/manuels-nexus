@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-013", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-013.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-013.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x*exp(-x) + 3, x, oo) == 3
+% assert limit((exp(x) + x)/(exp(x) - 1), x, oo) == 1
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-013}{2}{10}
+Determiner les limites en $+\infty$.
+\begin{enumerate}
+  \item $x\,\mathrm{e}^{-x} + 3$
+  \item $\dfrac{\mathrm{e}^x + x}{\mathrm{e}^x - 1}$
+\end{enumerate}
+\end{exercice}

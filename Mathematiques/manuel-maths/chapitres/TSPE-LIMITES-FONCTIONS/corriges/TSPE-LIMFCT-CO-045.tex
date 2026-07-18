@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-LIMFCT-CO-045", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-045", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x)/(exp(x) + x), x, oo) == 1
+% assert limit(exp(x)/(exp(x) + x), x, -oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-045}
+
+\textbf{1.} En $+\infty$ : diviser par $\mathrm{e}^x$ : $\dfrac{1}{1+x/\mathrm{e}^x} \to \dfrac{1}{1+0} = \boxed{1}$.
+
+En $-\infty$ : $\mathrm{e}^x \to 0$ et $x \to -\infty$. $\dfrac{\mathrm{e}^x}{\mathrm{e}^x + x} = \dfrac{\mathrm{e}^x/x}{\mathrm{e}^x/x + 1} \to \dfrac{0}{0+1} = \boxed{0}$.
+
+\textbf{2.} AH en $+\infty$ : $y = 1$. AH en $-\infty$ : $y = 0$.
+
+\end{corrige}

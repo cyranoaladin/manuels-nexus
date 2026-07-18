@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-CO-005", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% assert limit(sqrt(x**2 + 1)/x, x, oo) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-005}
+
+\textbf{1.} Pour $x > 0$ : $\dfrac{\sqrt{x^2+1}}{x} = \sqrt{1+1/x^2} \to \boxed{1}$.
+
+\commentaireMarge{Expression conjuguee.}
+
+\textbf{2.} $\sqrt{x+3}-\sqrt{x} = \dfrac{3}{\sqrt{x+3}+\sqrt{x}} \to \boxed{0}$.
+
+\end{corrige}

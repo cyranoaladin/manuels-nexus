@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-019", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-019.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-019.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((exp(x) - 1)/x, x, 0) == 1
+% assert limit((exp(2*x) - 1)/x, x, 0) == 2
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-019}{3}{15}
+Determiner les limites suivantes (taux de variation).
+\begin{enumerate}
+  \item $\lim_{x \to 0} \dfrac{\mathrm{e}^x - 1}{x}$
+  \item $\lim_{x \to 0} \dfrac{\mathrm{e}^{2x} - 1}{x}$
+\end{enumerate}
+\end{exercice}

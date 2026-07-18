@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-002", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-002.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((5*x - 3)/(2*x + 7), x, oo) == Rational(5, 2)
+% assert limit((x**2 + 1)/(3*x**2 - x), x, oo) == Rational(1, 3)
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-002}{1}{8}
+Determiner les limites en $+\infty$.
+\begin{enumerate}
+  \item $\dfrac{5x - 3}{2x + 7}$
+  \item $\dfrac{x^2 + 1}{3x^2 - x}$
+\end{enumerate}
+\end{exercice}

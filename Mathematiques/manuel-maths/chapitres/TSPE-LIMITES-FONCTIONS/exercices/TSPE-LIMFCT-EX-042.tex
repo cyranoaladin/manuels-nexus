@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-042", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-042.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-042.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((2*x**3 - x)*exp(-x), x, oo) == 0
+% assert limit(exp(x)/(x**3 - x + 1), x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-042}{2}{12}
+Determiner les limites en $+\infty$.
+\begin{enumerate}
+  \item $(2x^3 - x)\,\mathrm{e}^{-x}$
+  \item $\dfrac{\mathrm{e}^x}{x^3 - x + 1}$
+\end{enumerate}
+\end{exercice}

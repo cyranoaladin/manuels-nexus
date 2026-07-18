@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-EX-012", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-012.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-012.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((2*x**2 + 3)/(x**2 - 4), x, 2, '+') == oo
+% assert limit((2*x**2 + 3)/(x**2 - 4), x, 2, '-') == -oo
+% assert limit((2*x**2 + 3)/(x**2 - 4), x, oo) == 2
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-012}{2}{12}
+Soit $f(x) = \dfrac{2x^2 + 3}{x^2 - 4}$.
+\begin{enumerate}
+  \item Determiner $\lim_{x \to +\infty} f(x)$.
+  \item Determiner $\lim_{x \to 2^+} f(x)$ et $\lim_{x \to 2^-} f(x)$.
+\end{enumerate}
+\end{exercice}

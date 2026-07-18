@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-CO-003", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-003", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x**2 - 4)/(x - 2), x, 2) == 4
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-003}
+
+\textbf{1.} $x \to 1^+$ : $x-1 \to 0^+$, $\boxed{\lim = +\infty}$. $x \to 1^-$ : $x-1 \to 0^-$, $\boxed{\lim = -\infty}$.
+
+\commentaireMarge{Forme $0/0$ : factoriser.}
+
+\textbf{2.} $\dfrac{x^2-4}{x-2} = \dfrac{(x-2)(x+2)}{x-2} = x+2$ pour $x \neq 2$. $\lim_{x \to 2} = \boxed{4}$.
+
+\end{corrige}

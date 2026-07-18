@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-029", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-029", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x**2 + 2*x)/(x**2 - 9), x, oo) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-029}
+
+\textbf{1.} $\lim_{\pm\infty} f = 1$ : AH $y = 1$. AV en $x = 3$ et $x = -3$.
+
+\textbf{2.} $f(x) - 1 = \dfrac{x^2+2x-(x^2-9)}{x^2-9} = \dfrac{2x+9}{x^2-9}$. Signe de $\dfrac{2x+9}{(x-3)(x+3)}$ : selon les intervalles.
+
+\end{corrige}

@@ -1,0 +1,160 @@
+{
+  "chapitre": "TSPE-LIMITES-FONCTIONS",
+  "titre": "Limites des fonctions — QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "$\\lim_{x \\to +\\infty} \\dfrac{3x^2 - x}{x^2 + 5}$",
+      "options": {"A": "$0$", "B": "$3$", "C": "$-1/5$", "D": "$+\\infty$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve confond avec une fraction dont le degre du numerateur est inferieur.", "renvoi": "M1, etape 3"},
+        "C": {"erreur": "L'eleve a divise les termes constants (-1 et 5) au lieu des coefficients dominants.", "renvoi": "M1, etape 3"},
+        "D": {"erreur": "L'eleve pense que tout quotient de polynomes de meme degre diverge.", "renvoi": "M1, etape 2"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C1",
+      "enonce": "$\\lim_{x \\to +\\infty} (x^2 - 3x + 1)$",
+      "options": {"A": "$1$", "B": "$-\\infty$", "C": "$+\\infty$", "D": "On ne peut pas conclure"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a garde seulement le terme constant.", "renvoi": "C1, terme preponderant"},
+        "B": {"erreur": "L'eleve a regarde le coefficient de $-3x$ au lieu de $x^2$.", "renvoi": "C1, terme preponderant"},
+        "D": {"erreur": "L'eleve croit que $+\\infty - \\infty$ est toujours indetermine, meme apres factorisation.", "renvoi": "M1, piege 1"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C1",
+      "enonce": "La forme $\\dfrac{+\\infty}{+\\infty}$ est :",
+      "options": {"A": "egale a 1", "B": "egale a $+\\infty$", "C": "une forme indeterminee", "D": "egale a 0"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve simplifie mecaniquement infini/infini = 1.", "renvoi": "C1, formes indeterminees"},
+        "B": {"erreur": "L'eleve pense que +inf/+inf = +inf.", "renvoi": "C1, formes indeterminees"},
+        "D": {"erreur": "Confusion avec une autre forme.", "renvoi": "C1, formes indeterminees"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C1",
+      "enonce": "$\\lim_{x \\to 0^+} \\dfrac{1}{x}$",
+      "options": {"A": "$0$", "B": "$1$", "C": "$+\\infty$", "D": "$-\\infty$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve confond avec $\\lim_{x \\to +\\infty} 1/x$.", "renvoi": "C1, limite en un point"},
+        "D": {"erreur": "L'eleve confond $0^+$ et $0^-$.", "renvoi": "C1, limites a gauche/droite"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C1",
+      "enonce": "$\\lim_{x \\to +\\infty} x\\,\\mathrm{e}^{-x}$",
+      "options": {"A": "$+\\infty$", "B": "$0$", "C": "$1$", "D": "$-\\infty$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve croit que $x \\to +\\infty$ l'emporte.", "renvoi": "M3, croissances comparees"},
+        "C": {"erreur": "L'eleve confond avec un taux de variation.", "renvoi": "C3, resultat fondamental"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C2",
+      "enonce": "$y = 2$ est AH a $\\mathcal{C}_f$ si :",
+      "options": {"A": "$f(2) = 0$", "B": "$\\lim_{x \\to 2} f(x) = +\\infty$", "C": "$\\lim_{x \\to \\pm\\infty} f(x) = 2$", "D": "La courbe coupe $y = 2$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Confusion entre AH et zero de la fonction.", "renvoi": "C2, definition AH"},
+        "B": {"erreur": "C'est la definition d'une AV, pas d'une AH.", "renvoi": "C2, definition AV"},
+        "D": {"erreur": "L'intersection n'est pas le critere.", "renvoi": "C2, erreur frequente"}
+      }
+    },
+    {
+      "id": "Q7", "capacite": "C2",
+      "enonce": "AV de $f(x) = \\dfrac{x+1}{x-3}$ :",
+      "options": {"A": "$x = -1$", "B": "$x = 3$", "C": "$y = 1$", "D": "$x = 0$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a pris le zero du numerateur au lieu du denominateur.", "renvoi": "M2, etape 2"},
+        "C": {"erreur": "C'est l'AH, pas l'AV.", "renvoi": "C2, definition AH vs AV"}
+      }
+    },
+    {
+      "id": "Q8", "capacite": "C2",
+      "enonce": "AH de $f(x) = \\dfrac{4x}{x+1}$ en $+\\infty$ :",
+      "options": {"A": "$y = 0$", "B": "$y = 4$", "C": "$y = 1$", "D": "Pas d'AH"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve confond avec le cas deg(num) < deg(den).", "renvoi": "M1, etape 3"},
+        "C": {"erreur": "L'eleve a calcule le rapport des termes constants.", "renvoi": "M1, etape 3"}
+      }
+    },
+    {
+      "id": "Q9", "capacite": "C2",
+      "enonce": "$f(x) = \\mathrm{e}^{-x} + 3$ admet :",
+      "options": {"A": "AH $y=0$ et AV $x=3$", "B": "AH $y=3$ en $+\\infty$ et pas d'AV", "C": "AH $y=3$ en $-\\infty$ et pas d'AV", "D": "Pas d'asymptote"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'exponentielle n'a pas de valeur interdite.", "renvoi": "C2, AV seulement aux valeurs interdites"},
+        "C": {"erreur": "$\\mathrm{e}^{-x} \\to 0$ en $+\\infty$, pas en $-\\infty$.", "renvoi": "C1, limites de l'exponentielle"}
+      }
+    },
+    {
+      "id": "Q10", "capacite": "C2",
+      "enonce": "Si $\\lim_{x \\to 5^+} f(x) = -\\infty$, alors :",
+      "options": {"A": "$y=5$ est AH", "B": "$x=5$ est AV", "C": "$f(5) = -\\infty$", "D": "Courbe coupe l'axe en 5"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Confusion AH/AV.", "renvoi": "C2, definitions"},
+        "C": {"erreur": "$f(5)$ n'est pas defini en general, la limite n'est pas une valeur.", "renvoi": "C2, definition AV"}
+      }
+    },
+    {
+      "id": "Q11", "capacite": "C3",
+      "enonce": "$\\lim_{x \\to +\\infty} \\dfrac{\\mathrm{e}^x}{x^3}$",
+      "options": {"A": "$0$", "B": "$1$", "C": "$+\\infty$", "D": "$1/3$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a inverse numerateur et denominateur dans la croissance comparee.", "renvoi": "C3, theoreme"},
+        "D": {"erreur": "L'eleve a divise l'exposant par le degre.", "renvoi": "C3, theoreme"}
+      }
+    },
+    {
+      "id": "Q12", "capacite": "C3",
+      "enonce": "$\\lim_{x \\to -\\infty} x^2\\,\\mathrm{e}^x$",
+      "options": {"A": "$+\\infty$", "B": "$0$", "C": "$-\\infty$", "D": "$1$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve ne considere que $x^2 \\to +\\infty$ et oublie $\\mathrm{e}^x \\to 0$.", "renvoi": "C3, consequence en $-\\infty$"},
+        "C": {"erreur": "L'eleve confond $x$ et $x^2$ (le signe).", "renvoi": "C3, consequence en $-\\infty$"}
+      }
+    },
+    {
+      "id": "Q13", "capacite": "C3",
+      "enonce": "Pour $\\lim_{+\\infty}(\\mathrm{e}^x - x^2)$ :",
+      "options": {"A": "$+\\infty - \\infty = 0$", "B": "Factoriser par $\\mathrm{e}^x$, utiliser $x^2/\\mathrm{e}^x \\to 0$", "C": "Factoriser par $x^2$", "D": "FI sans conclusion"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "$+\\infty - \\infty$ est une FI, pas un resultat.", "renvoi": "C1, formes indeterminees"},
+        "D": {"erreur": "On peut conclure grace aux croissances comparees.", "renvoi": "M3, pas a pas"}
+      }
+    },
+    {
+      "id": "Q14", "capacite": "C3",
+      "enonce": "$\\mathrm{e}^x \\geq 1 + x$ pour $x \\geq 0$ s'obtient par :",
+      "options": {"A": "Recurrence", "B": "Etude de $g(x) = \\mathrm{e}^x - 1 - x$", "C": "Division euclidienne", "D": "Formule de Taylor"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "La recurrence s'applique aux entiers, pas aux reels.", "renvoi": "C3, demonstration"},
+        "C": {"erreur": "La division euclidienne concerne les polynomes.", "renvoi": "C3, demonstration"}
+      }
+    },
+    {
+      "id": "Q15", "capacite": "C3",
+      "enonce": "$\\lim_{x \\to +\\infty} \\dfrac{x^{100}}{\\mathrm{e}^x}$",
+      "options": {"A": "$+\\infty$", "B": "$100$", "C": "$0$", "D": "$1$"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve pense que $x^{100}$ croit plus vite que $\\mathrm{e}^x$.", "renvoi": "C3, theoreme : pour TOUT $n$"},
+        "B": {"erreur": "L'exposant n'intervient pas dans la valeur de la limite.", "renvoi": "C3, theoreme"}
+      }
+    }
+  ]
+}

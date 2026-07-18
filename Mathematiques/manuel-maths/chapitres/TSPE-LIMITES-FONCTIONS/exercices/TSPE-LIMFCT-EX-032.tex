@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-LIMFCT-EX-032", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["raisonner", "calculer", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-032.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-032.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**2 - 3*x + 2)/(x - 3)
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, 3, '+') == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-032}{3}{20}
+Soit $f(x) = \dfrac{x^2 - 3x + 2}{x - 3}$ definie sur $\mathbb{R} \setminus \{3\}$.
+\begin{enumerate}
+  \item Determiner les limites aux bornes du domaine.
+  \item Montrer que $f(x) = x - \dfrac{2}{x-3}$ (division euclidienne).
+  \item En deduire que $y = x$ est asymptote oblique.
+  \item Preciser la position de la courbe par rapport a cette asymptote.
+\end{enumerate}
+\end{exercice}

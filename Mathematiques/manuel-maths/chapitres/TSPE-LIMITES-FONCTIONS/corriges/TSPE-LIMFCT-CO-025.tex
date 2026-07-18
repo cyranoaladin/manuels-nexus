@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-025", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-025", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(-x) + 1, x, oo) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-025}
+
+\textbf{1.} $\mathrm{e}^{-x} \to 0$ en $+\infty$ : $\lim_{+\infty} f = \boxed{1}$. $\mathrm{e}^{-x} \to +\infty$ en $-\infty$ : $\lim_{-\infty} f = \boxed{+\infty}$.
+
+\textbf{2.} AH en $+\infty$ : $y = 1$. Pas d'AH en $-\infty$. Pas d'AV ($f$ definie sur $\mathbb{R}$).
+
+\end{corrige}

@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-LIMFCT-EX-004", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-004.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x**2 - 5*x + 3, x, oo) == oo
+% assert limit((2*x + 1)/(x**2 + 1), x, oo) == 0
+% assert limit(x**3/(x + 1), x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-004}{1}{8}
+Determiner les limites en $+\infty$.
+\begin{enumerate}
+  \item $x^2 - 5x + 3$
+  \item $\dfrac{2x + 1}{x^2 + 1}$
+  \item $\dfrac{x^3}{x + 1}$
+\end{enumerate}
+\end{exercice}

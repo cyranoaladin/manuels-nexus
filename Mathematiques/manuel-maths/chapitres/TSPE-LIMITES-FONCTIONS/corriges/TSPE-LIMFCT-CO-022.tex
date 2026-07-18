@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-022", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-022", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(1/(x + 3), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-022}
+
+\textbf{1.} $\lim_{\pm\infty} f = 0$ : AH $y = 0$. $\lim_{-3^+} f = +\infty$, $\lim_{-3^-} f = -\infty$ : AV $x = -3$.
+
+\textbf{2.} Pour $x > 0$ : $f(x) = 1/(x+3) > 0$. La courbe est au-dessus de l'AH $y = 0$.
+
+\end{corrige}

@@ -1,0 +1,180 @@
+% META: {"id": "TSPE-LIMFCT-CR-010", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Limites d'une fonction}
+
+% ============================================================
+% STRATE 1 — Limites en l'infini et en un point
+% ============================================================
+
+\subsection{Limites en $+\infty$ et $-\infty$}
+
+\definition[1]{
+Soit $f$ une fonction definie sur un intervalle $[a, +\infty[$.
+
+On dit que $f(x)$ tend vers $\ell \in \mathbb{R}$ quand $x$ tend vers $+\infty$, et on note $\lim_{x \to +\infty} f(x) = \ell$, si tout intervalle ouvert contenant $\ell$ contient toutes les valeurs $f(x)$ pour $x$ assez grand.
+
+On dit que $f(x)$ tend vers $+\infty$ quand $x$ tend vers $+\infty$, et on note $\lim_{x \to +\infty} f(x) = +\infty$, si pour tout reel $A$, on a $f(x) > A$ pour $x$ assez grand.
+}
+
+\definition[1]{
+On definit de maniere analogue $\lim_{x \to -\infty} f(x) = \ell$, $\lim_{x \to -\infty} f(x) = +\infty$ et $\lim_{x \to -\infty} f(x) = -\infty$.
+}
+
+\subsection{Limites usuelles}
+
+\propriete{
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Fonction} & $\lim_{x \to +\infty}$ & $\lim_{x \to -\infty}$ \\
+\hline
+$x^n$ ($n \geq 1$) & $+\infty$ & $(-1)^n \infty$ \\
+$\dfrac{1}{x}$ & $0$ & $0$ \\
+$\dfrac{1}{x^n}$ ($n \geq 1$) & $0$ & $0$ \\
+$\sqrt{x}$ & $+\infty$ & --- \\
+$\mathrm{e}^x$ & $+\infty$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\subsection{Limite en un point}
+
+\definition[1]{
+Soit $f$ une fonction definie sur un intervalle ouvert contenant $a$, sauf peut-etre en $a$.
+
+On dit que $f(x)$ tend vers $\ell$ quand $x$ tend vers $a$, et on note $\lim_{x \to a} f(x) = \ell$, si $f(x)$ est aussi proche de $\ell$ que l'on veut pour $x$ suffisamment proche de $a$.
+}
+
+\exemple{
+$\lim_{x \to 0} \dfrac{\mathrm{e}^x - 1}{x} = 1$ (taux de variation de $\mathrm{e}^x$ en $0$, egal a $(\mathrm{e}^x)'\big|_{x=0} = 1$).
+}
+
+\subsection{Limites a gauche, limites a droite}
+
+\definition[1]{
+On note $\lim_{x \to a^+} f(x)$ la limite de $f(x)$ quand $x$ tend vers $a$ par valeurs superieures, et $\lim_{x \to a^-} f(x)$ la limite quand $x$ tend vers $a$ par valeurs inferieures.
+}
+
+\exemple{
+$\lim_{x \to 0^+} \dfrac{1}{x} = +\infty$ et $\lim_{x \to 0^-} \dfrac{1}{x} = -\infty$.
+}
+
+\subsection{Operations sur les limites}
+
+\propriete{
+Les operations sur les limites sont analogues a celles sur les suites.
+
+\textbf{Somme :} si $\lim f = \ell$ et $\lim g = \ell'$, alors $\lim (f+g) = \ell + \ell'$.
+
+\textbf{Produit :} si $\lim f = \ell$ et $\lim g = \ell'$, alors $\lim (fg) = \ell \ell'$.
+
+\textbf{Quotient :} si $\lim f = \ell$ et $\lim g = \ell' \neq 0$, alors $\lim \dfrac{f}{g} = \dfrac{\ell}{\ell'}$.
+
+Ces regles s'appliquent aussi quand $\ell$ ou $\ell'$ est $\pm \infty$, \textbf{sauf dans les cas de formes indeterminees}.
+}
+
+\subsection{Formes indeterminees}
+
+\propriete{
+Les formes indeterminees sont :
+\[
+  ``+\infty - \infty" \qquad ``0 \times \infty" \qquad ``\frac{\infty}{\infty}" \qquad ``\frac{0}{0}"
+\]
+Dans ces cas, il faut utiliser d'autres techniques (factorisation, croissances comparees, etc.) pour lever l'indetermination.
+}
+
+\subsection{Terme preponderant}
+
+\propriete{
+Pour determiner la limite d'une somme de fonctions en $\pm \infty$, on factorise par le terme de plus haut degre (le terme \textbf{preponderant}).
+}
+
+\exemple{
+Determiner $\lim_{x \to +\infty} (3x^3 - 2x^2 + x - 7)$.
+
+On factorise par $x^3$ :
+\[
+  3x^3 - 2x^2 + x - 7 = x^3\left(3 - \frac{2}{x} + \frac{1}{x^2} - \frac{7}{x^3}\right).
+\]
+Or $x^3 \to +\infty$ et le contenu de la parenthese $\to 3 > 0$, donc la limite est $+\infty$.
+}
+
+\exemple{
+Determiner $\lim_{x \to +\infty} \dfrac{2x^2 - 3x + 1}{5x^2 + x}$.
+
+On factorise par $x^2$ :
+\[
+  \frac{2x^2 - 3x + 1}{5x^2 + x} = \frac{x^2(2 - 3/x + 1/x^2)}{x^2(5 + 1/x)} = \frac{2 - 3/x + 1/x^2}{5 + 1/x} \to \frac{2}{5}.
+\]
+}
+
+\subsection{Croissances comparees}
+
+\propriete{
+En $+\infty$, l'exponentielle croit plus vite que tout polynome :
+\[
+  \lim_{x \to +\infty} \frac{\mathrm{e}^x}{x^n} = +\infty \quad \text{pour tout } n \in \mathbb{N}.
+\]
+Equivalemment : $\lim_{x \to +\infty} \dfrac{x^n}{\mathrm{e}^x} = 0$.
+}
+
+\propriete{
+En $-\infty$ :
+\[
+  \lim_{x \to -\infty} x^n \, \mathrm{e}^x = 0 \quad \text{pour tout } n \in \mathbb{N}.
+\]
+}
+
+\exemple{
+$\lim_{x \to +\infty} (x^2 - \mathrm{e}^x)$. C'est une forme indeterminee $+\infty - \infty$.
+
+On factorise par $\mathrm{e}^x$ : $x^2 - \mathrm{e}^x = \mathrm{e}^x\left(\dfrac{x^2}{\mathrm{e}^x} - 1\right)$.
+
+Or $\dfrac{x^2}{\mathrm{e}^x} \to 0$ par croissances comparees, donc le contenu de la parenthese $\to -1$.
+
+Puisque $\mathrm{e}^x \to +\infty$, on a $x^2 - \mathrm{e}^x \to -\infty$.
+}
+
+\subsection{Theoreme de composition}
+
+\propriete{
+Si $\lim_{x \to a} g(x) = b$ et $\lim_{u \to b} f(u) = \ell$, alors $\lim_{x \to a} f(g(x)) = \ell$.
+
+(avec $a$, $b$, $\ell$ reels ou $\pm\infty$)
+}
+
+\exemple{
+$\lim_{x \to +\infty} \mathrm{e}^{-x^2} = 0$. En effet, $-x^2 \to -\infty$ et $\mathrm{e}^X \to 0$ quand $X \to -\infty$.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Forme indeterminee $\neq$ resultat indetermine.}
+Une forme indeterminee signifie simplement que les operations sur les limites ne suffisent pas. Il faut utiliser une technique pour lever l'indetermination. Le resultat, lui, est toujours determine (la limite existe ou non).
+}
+
+\margeAppui{
+\textbf{Strategie face a une forme indeterminee :}
+\begin{itemize}
+  \item Polynome : factoriser par le terme de plus haut degre.
+  \item Fraction rationnelle : factoriser numerateur et denominateur par le terme dominant.
+  \item Avec $\mathrm{e}^x$ : factoriser par $\mathrm{e}^x$ et utiliser les croissances comparees.
+  \item En un point : factoriser, simplifier, ou utiliser le taux de variation.
+\end{itemize}
+}
+
+\erreurFrequente{
+\textbf{Ecrire $\dfrac{\infty}{\infty} = 1$.}
+
+$\dfrac{\infty}{\infty}$ est une forme indeterminee, pas un resultat. Par exemple, $\dfrac{x^2}{x} \to +\infty$ mais $\dfrac{x}{x^2} \to 0$.
+}
+
+\erreurFrequente{
+\textbf{Confondre $\lim_{x \to a} f(x)$ et $f(a)$.}
+
+La limite en $a$ peut exister meme si $f(a)$ n'est pas defini. Par exemple, $\lim_{x \to 0} \dfrac{\sin x}{x} = 1$ mais $\dfrac{\sin 0}{0}$ n'existe pas.
+}

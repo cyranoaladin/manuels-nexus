@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-CO-001", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(3*x**3 - 2*x + 1, x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-001}
+
+\commentaireMarge{Factoriser par le terme de plus haut degre.}
+
+\textbf{1.} $3x^3 - 2x + 1 = x^3(3 - 2/x^2 + 1/x^3)$. $x^3 \to +\infty$ et la parenthese $\to 3 > 0$. $\boxed{\lim = +\infty}$.
+
+\textbf{2.} $x^3 \to -\infty$ et $(3 - \ldots) \to 3 > 0$. $\boxed{\lim = -\infty}$.
+
+\end{corrige}

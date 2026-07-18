@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-010", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-010.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-010.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x**3*exp(x), x, -oo) == 0
+% assert limit((x**2 + 1)*exp(x), x, -oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-010}{2}{10}
+Determiner les limites en $-\infty$.
+\begin{enumerate}
+  \item $x^3\,\mathrm{e}^x$
+  \item $(x^2 + 1)\,\mathrm{e}^x$
+\end{enumerate}
+\end{exercice}

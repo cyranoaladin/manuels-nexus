@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-011", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-011.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-011.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x) - x**2, x, oo) == oo
+% assert limit(exp(x) - x**3 + 2*x, x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-011}{2}{12}
+Lever les formes indeterminees suivantes.
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} (\mathrm{e}^x - x^2)$
+  \item $\lim_{x \to +\infty} (\mathrm{e}^x - x^3 + 2x)$
+\end{enumerate}
+\end{exercice}

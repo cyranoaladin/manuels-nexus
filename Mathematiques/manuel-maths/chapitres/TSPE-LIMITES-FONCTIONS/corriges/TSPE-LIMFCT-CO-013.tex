@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-CO-013", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-013", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x*exp(-x) + 3, x, oo) == 3
+% assert limit((exp(x) + x)/(exp(x) - 1), x, oo) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-013}
+
+\textbf{1.} $x\mathrm{e}^{-x} \to 0$ (croissances comparees). Donc $\lim = 0 + 3 = \boxed{3}$.
+
+\textbf{2.} Diviser par $\mathrm{e}^x$ : $\dfrac{1 + x/\mathrm{e}^x}{1 - 1/\mathrm{e}^x}$. $x/\mathrm{e}^x \to 0$, $1/\mathrm{e}^x \to 0$. $\lim = \boxed{1}$.
+
+\end{corrige}

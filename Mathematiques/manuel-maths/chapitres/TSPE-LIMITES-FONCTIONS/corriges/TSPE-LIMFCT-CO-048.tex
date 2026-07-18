@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-LIMFCT-CO-048", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-048", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x*exp(-x), x, oo) == 0
+% assert exp(-1) == exp(-1)
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-048}
+
+\textbf{1.} $\lim_{+\infty} x\mathrm{e}^{-x} = 0$ (croissances comparees). $\lim_{-\infty} = -\infty$.
+
+\textbf{2.} $f'(x) = \mathrm{e}^{-x} - x\mathrm{e}^{-x} = (1-x)\mathrm{e}^{-x}$. $f'(x) = 0 \iff x = 1$. Croissante sur $]-\infty, 1]$, decroissante sur $[1, +\infty[$.
+
+\textbf{3.} Max en $x = 1$ : $f(1) = \mathrm{e}^{-1} = 1/\mathrm{e}$.
+
+\textbf{4.} $f(x) \leq f(1)$ pour $x \geq 0$, soit $x\mathrm{e}^{-x} \leq 1$, donc $x \leq \mathrm{e}^x$.
+
+\end{corrige}

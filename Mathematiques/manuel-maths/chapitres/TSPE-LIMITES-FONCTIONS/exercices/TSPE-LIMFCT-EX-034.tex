@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-LIMFCT-EX-034", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-034.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-034.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x*exp(x))/(exp(x) - 1)
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -oo) == 0
+% assert limit(f, x, 0) == 1
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-034}{3}{18}
+Soit $f(x) = \dfrac{x\,\mathrm{e}^x}{\mathrm{e}^x - 1}$ definie sur $\mathbb{R}^*$.
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$, $-\infty$ et en $0$.
+  \item En deduire les asymptotes de $\mathcal{C}_f$.
+  \item La fonction $f$ est-elle prolongeable par continuite en $0$ ?
+\end{enumerate}
+\end{exercice}

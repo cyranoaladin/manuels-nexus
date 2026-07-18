@@ -1,0 +1,58 @@
+% META: {"id": "TSPE-LIMFCT-ME-003", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Utiliser les croissances comparees avec l'exponentielle}
+
+\quandUtiliser{%
+  Utiliser cette methode pour lever une forme indeterminee faisant intervenir $\mathrm{e}^x$ et un polynome, en $+\infty$ ou en $-\infty$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier la forme indeterminee :}
+      \begin{itemize}
+        \item En $+\infty$ : $\dfrac{P(x)}{\mathrm{e}^x}$, ou $P(x) - \mathrm{e}^x$, ou $P(x)\,\mathrm{e}^{-x}$.
+        \item En $-\infty$ : $P(x)\,\mathrm{e}^x$.
+      \end{itemize}
+    \item \textbf{Appliquer le resultat de croissances comparees :}
+      \begin{itemize}
+        \item $\dfrac{x^n}{\mathrm{e}^x} \to 0$ en $+\infty$ (pour tout $n$).
+        \item $x^n \, \mathrm{e}^x \to 0$ en $-\infty$ (pour tout $n$).
+      \end{itemize}
+    \item \textbf{Pour une difference :} factoriser par $\mathrm{e}^x$ (en $+\infty$) ou par le polynome.
+    \item \textbf{Conclure} en utilisant les regles sur les produits de limites.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Determiner $\lim_{x \to +\infty} (2x^3 - 5\mathrm{e}^x)$.
+
+  \medskip
+  \commentaireMarge{FI : $+\infty - \infty$. Factoriser par $\mathrm{e}^x$.}%
+  On factorise par $\mathrm{e}^x$ :
+  \[
+    2x^3 - 5\mathrm{e}^x = \mathrm{e}^x\left(\frac{2x^3}{\mathrm{e}^x} - 5\right).
+  \]
+
+  \commentaireMarge{Croissances comparees : $x^3/\mathrm{e}^x \to 0$.}%
+  Par croissances comparees, $\dfrac{x^3}{\mathrm{e}^x} \to 0$, donc $\dfrac{2x^3}{\mathrm{e}^x} - 5 \to -5$.
+
+  Puisque $\mathrm{e}^x \to +\infty$ et $-5 < 0$ :
+  \[
+    \lim_{x \to +\infty} (2x^3 - 5\mathrm{e}^x) = -\infty.
+  \]
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Ecrire directement « l'exponentielle l'emporte donc la limite est $\mathrm{e}^x$ ». Il faut factoriser proprement.
+    \item \textbf{Piege 2.} Appliquer les croissances comparees en $-\infty$ comme si c'etait en $+\infty$. En $-\infty$, on utilise $x^n\,\mathrm{e}^x \to 0$.
+    \item \textbf{Piege 3.} Oublier que $\mathrm{e}^{-x} = \dfrac{1}{\mathrm{e}^x}$, ce qui ramene au cas en $+\infty$.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier avec une valeur numerique : $x = 10$, $2 \times 1000 - 5\mathrm{e}^{10} \approx 2000 - 110132 < 0$. Coherent.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

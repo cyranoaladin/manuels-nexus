@@ -1,0 +1,25 @@
+chapitre: TSPE-LIMITES-FONCTIONS
+niveau: TSPE
+theme: LIMITES-FONCTIONS
+titre: "Limites des fonctions"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: TSPE-LIMFCT-C1, libelle_eleve: "Je sais determiner la limite d'une fonction en utilisant les limites usuelles, les croissances comparees, les operations sur les limites et la factorisation du terme preponderant." }
+  - { code: C2, ref_capacite: TSPE-LIMFCT-C2, libelle_eleve: "Je sais interpreter une asymptote horizontale ou verticale en termes de limite et reciproquement." }
+  - { code: C3, ref_capacite: TSPE-LIMFCT-C3, libelle_eleve: "Je sais demontrer la croissance comparee de $x^n$ et de l'exponentielle en $+\\infty$." }
+
+prerequis:
+  - { code: R1, libelle: "Limites de suites : operations, comparaison, gendarmes", chapitre_origine: "TSPE-SUITES-LIMITES" }
+  - { code: R2, libelle: "Derivation : etude de variations d'une fonction", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
+  - { code: R3, libelle: "Fonction exponentielle : definition, proprietes, derivee", chapitre_origine: "1SPE-EXPONENTIELLE" }
+  - { code: R4, libelle: "Fonctions de reference : polynomes, inverse, racine carree", chapitre_origine: "2GT" }
+  - { code: R5, libelle: "Notion intuitive de limite en seconde et premiere", chapitre_origine: "1SPE-DERIVATION-LOCAL" }
+
+situation_accroche: >
+  La concentration d'un medicament dans le sang diminue apres injection.
+  Que devient cette concentration a long terme ?
+  Comment prevoir le comportement d'une fonction aux extremites de son
+  ensemble de definition ? Les limites de fonctions repondent a ces questions.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

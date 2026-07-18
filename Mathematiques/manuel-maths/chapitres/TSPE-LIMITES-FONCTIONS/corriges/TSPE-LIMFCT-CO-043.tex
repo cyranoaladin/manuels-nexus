@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-043", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-043", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(2*x**2 - 3*exp(x), x, oo) == -oo
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-043}
+
+\textbf{1.} $2x^2 - 3\mathrm{e}^x = \mathrm{e}^x(2x^2/\mathrm{e}^x - 3)$. $x^2/\mathrm{e}^x \to 0$, parenthese $\to -3$. $\mathrm{e}^x \to +\infty$. $\boxed{\lim = -\infty}$.
+
+\textbf{2.} $\mathrm{e}^x \to 0$ et $(1-x) \to +\infty$ en $-\infty$. $\mathrm{e}^x(1-x) = \mathrm{e}^x - x\mathrm{e}^x$. $\mathrm{e}^x \to 0$ et $x\mathrm{e}^x \to 0$. $\boxed{\lim = 0}$.
+
+\end{corrige}

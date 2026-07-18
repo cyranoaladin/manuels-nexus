@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-LIMFCT-CO-010", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-010", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x**3*exp(x), x, -oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-010}
+
+\textbf{1.} Croissances comparees en $-\infty$ : $x^n\,\mathrm{e}^x \to 0$. $\boxed{\lim = 0}$.
+
+\textbf{2.} $x^2\,\mathrm{e}^x \to 0$ et $\mathrm{e}^x \to 0$. Somme : $\boxed{\lim = 0}$.
+
+\end{corrige}

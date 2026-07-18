@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-LIMFCT-EX-028", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-028.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-028.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*exp(-x)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == -oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-028}{2}{12}
+Soit $f(x) = x\,\mathrm{e}^{-x}$.
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$ et en $-\infty$.
+  \item La courbe admet-elle des asymptotes ? Preciser.
+  \item $f$ est-elle au-dessus ou en dessous de l'AH pour $x > 0$ ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-LIMFCT-CO-019", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-019", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((exp(x) - 1)/x, x, 0) == 1
+% assert limit((exp(2*x) - 1)/x, x, 0) == 2
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-019}
+
+\commentaireMarge{Reconnaitre un taux de variation.}
+
+\textbf{1.} $\dfrac{\mathrm{e}^x - 1}{x} = \dfrac{\mathrm{e}^x - \mathrm{e}^0}{x - 0}$. C'est le taux de variation de $\mathrm{e}^x$ en $0$. $\lim = (\mathrm{e}^x)'\big|_{x=0} = \mathrm{e}^0 = \boxed{1}$.
+
+\textbf{2.} $\dfrac{\mathrm{e}^{2x}-1}{x} = 2 \cdot \dfrac{\mathrm{e}^{2x}-1}{2x}$. On pose $u = 2x \to 0$ : $\dfrac{\mathrm{e}^u - 1}{u} \to 1$. Donc $\lim = \boxed{2}$.
+
+\end{corrige}

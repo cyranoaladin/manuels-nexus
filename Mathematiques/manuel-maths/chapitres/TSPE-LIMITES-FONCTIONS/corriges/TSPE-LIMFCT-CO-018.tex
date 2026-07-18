@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-LIMFCT-CO-018", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-018", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x**2*exp(-x), x, oo) == 0
+% assert 4*exp(-2) == 4*exp(-2)
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-018}
+
+\textbf{1.} $f(x) = x^2/\mathrm{e}^x$. Croissances comparees : $\lim_{+\infty} = \boxed{0}$.
+
+$f(x) = x^2 \cdot \mathrm{e}^{-x}$. En $-\infty$ : $x^2 \to +\infty$, $\mathrm{e}^{-x} \to +\infty$. $\boxed{\lim = +\infty}$.
+
+\textbf{2.} $f'(x) = 2x\mathrm{e}^{-x} + x^2(-\mathrm{e}^{-x}) = (2x - x^2)\mathrm{e}^{-x} = x(2-x)\mathrm{e}^{-x}$.
+
+\textbf{3.} $f'(x) = 0 \iff x = 0$ ou $x = 2$. $f'(x) > 0$ sur $]0, 2[$, $f'(x) < 0$ sur $]-\infty, 0[$ et $]2, +\infty[$.
+
+Min local en $0$ : $f(0) = 0$. Max local en $2$ : $f(2) = 4\mathrm{e}^{-2}$.
+
+\textbf{4.} Pour $x \geq 0$ : $f(x) \geq 0$ (evident) et $f$ atteint son max en $2$. $f(x) \leq f(2) = 4\mathrm{e}^{-2}$.
+
+\end{corrige}

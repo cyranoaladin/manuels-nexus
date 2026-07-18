@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-LIMFCT-EX-029", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-029.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-029.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**2 + 2*x)/(x**2 - 9)
+% assert limit(f, x, oo) == 1
+% assert limit(f, x, 3, '+') == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-029}{2}{12}
+Soit $f(x) = \dfrac{x^2 + 2x}{x^2 - 9}$.
+\begin{enumerate}
+  \item Determiner les asymptotes de $\mathcal{C}_f$.
+  \item Etudier la position de la courbe par rapport a l'AH.
+\end{enumerate}
+\end{exercice}

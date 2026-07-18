@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-LIMFCT-EX-020", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "calculer", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-020.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-020.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (x**3 - 8)/(x**2 - 4)
+% assert limit(f, x, 2) == 3
+% assert limit(f, x, -2, '+') == oo
+% assert limit(f, x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-020}{3}{20}
+Soit $f(x) = \dfrac{x^3 - 8}{x^2 - 4}$ definie sur $\mathbb{R} \setminus \{-2, 2\}$.
+\begin{enumerate}
+  \item Factoriser $x^3 - 8$ et $x^2 - 4$.
+  \item En deduire une ecriture simplifiee de $f(x)$ pour $x \neq 2$.
+  \item Determiner toutes les limites aux bornes du domaine.
+  \item Preciser les asymptotes de $\mathcal{C}_f$.
+\end{enumerate}
+\end{exercice}

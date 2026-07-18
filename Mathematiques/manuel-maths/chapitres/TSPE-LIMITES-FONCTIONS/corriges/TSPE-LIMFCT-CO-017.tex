@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-LIMFCT-CO-017", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-017", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((x**2 + x - 2)/(x**2 - 1), x, oo) == 1
+% assert limit((x**2 + x - 2)/(x**2 - 1), x, 1) == Rational(3, 2)
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-017}
+
+\textbf{1.} $x^2-1 = 0 \iff x = \pm 1$. $D_f = \mathbb{R} \setminus \{-1, 1\}$.
+
+\textbf{2.} $x^2+x-2 = (x-1)(x+2)$, $x^2-1 = (x-1)(x+1)$. Pour $x \neq 1$ : $f(x) = \dfrac{x+2}{x+1}$.
+
+\textbf{3.} $\lim_{\pm\infty} f = 1$. $\lim_{x \to 1} f = 3/2$. $\lim_{x \to -1^+} f = -\infty$. $\lim_{x \to -1^-} f = +\infty$.
+
+Correction du signe : en $-1^+$ : $(x+2) \to 1 > 0$, $(x+1) \to 0^+$, $f \to \boxed{+\infty}$. En $-1^-$ : $(x+1) \to 0^-$, $f \to \boxed{-\infty}$.
+
+\textbf{4.} AH : $y = 1$ en $\pm\infty$. AV : $x = -1$. En $x = 1$ : pas d'AV (limite finie $3/2$, trou dans la courbe).
+
+\end{corrige}

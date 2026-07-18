@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LIMFCT-EX-045", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "exercice", "capacites": ["TSPE-LIMFCT-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LIMITES-FONCTIONS/exercices/TSPE-LIMFCT-EX-045.tex", "corrige_tex": "chapitres/TSPE-LIMITES-FONCTIONS/corriges/TSPE-LIMFCT-CO-045.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x)/(exp(x) + x), x, oo) == 1
+% assert limit(exp(x)/(exp(x) + x), x, -oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LIMFCT-EX-045}{2}{15}
+Soit $f(x) = \dfrac{\mathrm{e}^x}{\mathrm{e}^x + x}$.
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$ et $-\infty$.
+  \item La courbe admet-elle des asymptotes ?
+\end{enumerate}
+\end{exercice}

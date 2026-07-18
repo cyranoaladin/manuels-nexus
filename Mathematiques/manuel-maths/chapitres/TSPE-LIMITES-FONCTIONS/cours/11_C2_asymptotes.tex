@@ -1,0 +1,115 @@
+% META: {"id": "TSPE-LIMFCT-CR-011", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+
+\section{Asymptotes}
+
+% ============================================================
+% STRATE 1 — Definitions et lien avec les limites
+% ============================================================
+
+\subsection{Asymptote horizontale}
+
+\definition[1]{
+La droite d'equation $y = \ell$ est \textbf{asymptote horizontale} a la courbe $\mathcal{C}_f$ en $+\infty$ (resp. en $-\infty$) si et seulement si :
+\[
+  \lim_{x \to +\infty} f(x) = \ell \qquad \left(\text{resp. } \lim_{x \to -\infty} f(x) = \ell\right).
+\]
+}
+
+\exemple{
+Soit $f(x) = \dfrac{2x+1}{x-3}$ pour $x \neq 3$.
+
+On a $f(x) = \dfrac{x(2+1/x)}{x(1-3/x)} = \dfrac{2+1/x}{1-3/x} \to 2$ quand $x \to \pm\infty$.
+
+La droite $y = 2$ est asymptote horizontale a $\mathcal{C}_f$ en $+\infty$ et en $-\infty$.
+}
+
+\margeAppui{
+\textbf{Interpretation graphique.} La courbe $\mathcal{C}_f$ se rapproche de la droite $y = \ell$ sans necessairement l'atteindre. La distance verticale $|f(x) - \ell| \to 0$.
+}
+
+\subsection{Asymptote verticale}
+
+\definition[1]{
+La droite d'equation $x = a$ est \textbf{asymptote verticale} a la courbe $\mathcal{C}_f$ si :
+\[
+  \lim_{x \to a^+} f(x) = \pm\infty \qquad \text{ou} \qquad \lim_{x \to a^-} f(x) = \pm\infty.
+\]
+}
+
+\exemple{
+Soit $f(x) = \dfrac{1}{x-2}$.
+
+$\lim_{x \to 2^+} f(x) = +\infty$ et $\lim_{x \to 2^-} f(x) = -\infty$.
+
+La droite $x = 2$ est asymptote verticale a $\mathcal{C}_f$.
+}
+
+\exemple{
+Soit $g(x) = \dfrac{x+1}{(x-1)(x+3)}$.
+
+Les valeurs interdites sont $x = 1$ et $x = -3$.
+
+$\lim_{x \to 1^+} g(x) = +\infty$ (numerateur $\to 2 > 0$, denominateur $\to 0^+ \times 4 = 0^+$).
+
+Les droites $x = 1$ et $x = -3$ sont asymptotes verticales.
+}
+
+\subsection{Determination des asymptotes : methode}
+
+\propriete{
+Pour trouver les asymptotes d'une fonction $f$ :
+\begin{enumerate}
+  \item \textbf{AH :} calculer $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$. Si une limite est finie $\ell$, alors $y = \ell$ est AH.
+  \item \textbf{AV :} identifier les valeurs $a$ ou $f$ n'est pas definie et calculer les limites a gauche et a droite en $a$. Si une de ces limites est $\pm\infty$, alors $x = a$ est AV.
+\end{enumerate}
+}
+
+\exemple{
+\textbf{Etude complete des asymptotes de $f(x) = \dfrac{x^2}{x^2 - 4}$.}
+
+\medskip
+
+\textbf{Domaine :} $\mathbb{R} \setminus \{-2, 2\}$.
+
+\textbf{AH :} $f(x) = \dfrac{x^2}{x^2(1 - 4/x^2)} = \dfrac{1}{1 - 4/x^2} \to 1$ en $\pm\infty$. Donc $y = 1$ est AH.
+
+\textbf{AV :} En $x = 2$ : $x^2 \to 4 > 0$ et $x^2 - 4 \to 0$. Signe de $x^2-4$ : positif pour $x > 2$, negatif pour $x < 2$ (pres de $2$). Donc $\lim_{x \to 2^+} f(x) = +\infty$ et $\lim_{x \to 2^-} f(x) = -\infty$. $x = 2$ est AV.
+
+Par symetrie ($f$ est paire), $x = -2$ est aussi AV.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Resume :}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Asymptote} & \textbf{Condition} \\
+\hline
+$y = \ell$ (AH) & $\lim_{x \to \pm\infty} f(x) = \ell$ \\
+$x = a$ (AV) & $\lim_{x \to a^{\pm}} f(x) = \pm\infty$ \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\erreurFrequente{
+\textbf{Chercher une AV en un point ou $f$ est definie.}
+
+Les asymptotes verticales ne peuvent se trouver qu'en des points ou $f$ n'est pas definie (valeurs interdites du denominateur). Si $f$ est definie et continue en $a$, il n'y a pas d'AV en $x = a$.
+}
+
+\erreurFrequente{
+\textbf{Affirmer que la courbe ne coupe pas une asymptote.}
+
+Une courbe peut \emph{couper} son asymptote horizontale. Par exemple, $f(x) = \dfrac{\sin x}{x}$ a pour AH $y = 0$ en $+\infty$, mais $f$ s'annule en tout $x = k\pi$.
+}
+
+\erreurFrequente{
+\textbf{Oublier d'etudier les limites a gauche et a droite separement.}
+
+En une valeur interdite, les limites a gauche et a droite peuvent etre differentes ($+\infty$ et $-\infty$). Il faut etudier le signe du denominateur de chaque cote.
+}

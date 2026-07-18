@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-LIMFCT-CO-015", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-015", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit((2*x**2 - x + 3)*exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-015}
+
+\textbf{1.} En $+\infty$ : $f(x) = \dfrac{2x^2-x+3}{\mathrm{e}^x}$. Croissances comparees : $\boxed{\lim = 0}$.
+
+En $-\infty$ : $2x^2-x+3 \to +\infty$ et $\mathrm{e}^{-x} \to +\infty$. Produit : $\boxed{\lim = +\infty}$.
+
+\textbf{2.} $f'(x) = (4x-1)\mathrm{e}^{-x} + (2x^2-x+3)(-1)\mathrm{e}^{-x} = (-2x^2+5x-4)\mathrm{e}^{-x}$.
+
+\textbf{3.} $\Delta = 25 - 32 = -7 < 0$ et coefficient de $x^2$ negatif. Donc $-2x^2+5x-4 < 0$ pour tout $x$. $f'(x) < 0$ : $f$ est strictement decroissante sur $\mathbb{R}$.
+
+\end{corrige}

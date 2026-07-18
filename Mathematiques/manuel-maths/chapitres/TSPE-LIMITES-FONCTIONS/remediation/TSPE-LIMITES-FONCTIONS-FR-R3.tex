@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-LIMITES-FONCTIONS-FR-R3", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "remediation", "capacites_codes": ["R3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R3 : Fonction exponentielle
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Fonction exponentielle}
+
+\textbf{Definition :} $\mathrm{e}^x$ est l'unique fonction derivable telle que $f' = f$ et $f(0) = 1$.
+
+\textbf{Proprietes :} $\mathrm{e}^{a+b} = \mathrm{e}^a \cdot \mathrm{e}^b$, $\mathrm{e}^{-a} = 1/\mathrm{e}^a$, $\mathrm{e}^x > 0$ pour tout $x$.
+
+\textbf{Limites :} $\lim_{+\infty} \mathrm{e}^x = +\infty$, $\lim_{-\infty} \mathrm{e}^x = 0$.
+
+\begin{exercice}{TSPE-LIMFCT-FR-R3-EX1}{1}{8}
+\begin{enumerate}
+  \item Simplifier $\mathrm{e}^{3x} \times \mathrm{e}^{-x}$.
+  \item Deriver $h(x) = \mathrm{e}^{2x+1}$.
+  \item Resoudre $\mathrm{e}^x = 5$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert simplify(exp(3*x)*exp(-x) - exp(2*x)) == 0
+% assert diff(exp(2*x+1), x) == 2*exp(2*x+1)
+% assert solve(exp(x) - 5, x) == [log(5)]
+% END-VERIFY

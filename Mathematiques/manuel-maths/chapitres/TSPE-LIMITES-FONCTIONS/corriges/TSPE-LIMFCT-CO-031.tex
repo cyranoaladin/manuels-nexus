@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-LIMFCT-CO-031", "chapitre": "TSPE-LIMITES-FONCTIONS", "type_objet": "corrige", "exercice_ref": "TSPE-LIMFCT-EX-031", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(x + 1 - 4/(x - 2) - (x + 1), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LIMFCT-EX-031}
+
+\textbf{1.} $4/(x-2) \to 0$ en $\pm\infty$. $f \sim x+1$. $\lim_{+\infty} = +\infty$, $\lim_{-\infty} = -\infty$.
+
+$\lim_{2^+} : -4/(0^+) = -\infty$. $f \to -\infty$. $\lim_{2^-} : -4/(0^-) = +\infty$. $f \to +\infty$.
+
+\textbf{2.} $f(x) - (x+1) = -4/(x-2) \to 0$ en $\pm\infty$. Donc $y = x+1$ est asymptote oblique.
+
+\textbf{3.} AV : $x = 2$.
+
+\end{corrige}
