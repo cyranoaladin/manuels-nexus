@@ -1,0 +1,134 @@
+% formulaire.tex — Formulaire de Première spécialité
+% Fragment \input (pas de \documentclass)
+
+\chapter*{Formulaire}
+\addcontentsline{toc}{chapter}{Formulaire}
+
+%% ─────────────────────────────────────────────
+\section*{Dérivées des fonctions de référence}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lll}
+\toprule
+\textbf{Fonction $f(x)$} & \textbf{Dérivée $f'(x)$} & \textbf{Ensemble de dérivabilité} \\
+\midrule
+$k$ (constante)        & $0$                   & $\mathbb{R}$ \\
+$x$                    & $1$                   & $\mathbb{R}$ \\
+$x^2$                  & $2x$                  & $\mathbb{R}$ \\
+$x^3$                  & $3x^2$                & $\mathbb{R}$ \\
+$x^n$ ($n \in \mathbb{N}^*$) & $nx^{n-1}$     & $\mathbb{R}$ \\
+$\dfrac{1}{x}$         & $-\dfrac{1}{x^2}$     & $\mathbb{R}^*$ \\
+$\sqrt{x}$             & $\dfrac{1}{2\sqrt{x}}$ & $\left]0\,;+\infty\right[$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%% ─────────────────────────────────────────────
+\section*{Règles de dérivation}
+
+\begin{align*}
+(u + v)'     &= u' + v'              &\qquad (ku)'   &= ku'  \\
+(uv)'        &= u'v + uv'            &\qquad \left(\frac{u}{v}\right)' &= \frac{u'v - uv'}{v^2} \\
+(v \circ u)' &= u' \times (v' \circ u)
+\end{align*}
+
+%% ─────────────────────────────────────────────
+\section*{Second degré}
+
+Soit $f(x) = ax^2 + bx + c$ avec $a \neq 0$ et $\Delta = b^2 - 4ac$.
+
+\begin{align*}
+\text{Sommet :} \quad & x_S = -\frac{b}{2a}, \qquad
+  f(x_S) = -\frac{\Delta}{4a} \\[6pt]
+\Delta > 0 : \quad & x_1 = \frac{-b - \sqrt{\Delta}}{2a}, \qquad
+  x_2 = \frac{-b + \sqrt{\Delta}}{2a} \\[4pt]
+\Delta = 0 : \quad & x_0 = -\frac{b}{2a} \\[4pt]
+\Delta < 0 : \quad & \text{pas de racine réelle}
+\end{align*}
+
+Forme factorisée ($\Delta > 0$) : $f(x) = a(x - x_1)(x - x_2)$.
+
+Forme canonique : $f(x) = a\!\left(x - x_S\right)^2 + f(x_S)$.
+
+%% ─────────────────────────────────────────────
+\section*{Suites arithmétiques et géométriques}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{lcc}
+\toprule
+ & \textbf{Suite arithmétique} & \textbf{Suite géométrique} \\
+\midrule
+Définition   & $u_{n+1} = u_n + r$         & $u_{n+1} = q \cdot u_n$ \\
+Terme général & $u_n = u_0 + nr$            & $u_n = u_0 \cdot q^n$ \\
+Somme des termes & $S = \dfrac{(n+1)(u_0 + u_n)}{2}$ &
+  $S = u_0 \cdot \dfrac{1 - q^{n+1}}{1 - q}$ \; ($q \neq 1$) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%% ─────────────────────────────────────────────
+\section*{Fonction exponentielle}
+
+\begin{align*}
+e^0 &= 1 &\qquad e^{a+b} &= e^a \cdot e^b \\
+e^{-a} &= \frac{1}{e^a} &\qquad e^{a-b} &= \frac{e^a}{e^b} \\
+\left(e^a\right)^n &= e^{na} &\qquad (e^x)' &= e^x \\
+(e^{u})' &= u' \, e^{u}
+\end{align*}
+
+Pour tout $x \in \mathbb{R}$ : $e^x > 0$.
+
+%% ─────────────────────────────────────────────
+\section*{Trigonométrie — Valeurs remarquables}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l*{5}{c}}
+\toprule
+$\theta$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ & $\dfrac{\pi}{2}$ \\
+\midrule
+$\cos\theta$ & $1$ & $\dfrac{\sqrt{3}}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{1}{2}$ & $0$ \\[6pt]
+$\sin\theta$ & $0$ & $\dfrac{1}{2}$ & $\dfrac{\sqrt{2}}{2}$ & $\dfrac{\sqrt{3}}{2}$ & $1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Identité fondamentale : $\cos^2\theta + \sin^2\theta = 1$.
+
+%% ─────────────────────────────────────────────
+\section*{Probabilités}
+
+\textbf{Probabilité conditionnelle :}
+\[
+P_A(B) = \frac{P(A \cap B)}{P(A)}, \qquad P(A) \neq 0.
+\]
+
+\textbf{Formule des probabilités totales} (partition $A_1, \dots, A_n$) :
+\[
+P(B) = \sum_{i=1}^{n} P(A_i) \cdot P_{A_i}(B).
+\]
+
+\textbf{Indépendance :} $A$ et $B$ sont indépendants si et seulement si
+$P(A \cap B) = P(A) \cdot P(B)$.
+
+%% ─────────────────────────────────────────────
+\section*{Coefficients binomiaux}
+
+\[
+\binom{n}{k} = \frac{n!}{k!\,(n-k)!}, \qquad 0 \leq k \leq n.
+\]
+
+Formule de Pascal :
+\[
+\binom{n+1}{k} = \binom{n}{k-1} + \binom{n}{k}.
+\]
+
+Loi binomiale $X \sim \mathcal{B}(n, p)$ :
+\[
+P(X = k) = \binom{n}{k} \, p^k \, (1-p)^{n-k}, \qquad
+E(X) = np, \qquad V(X) = np(1-p).
+\]
+
+\newpage

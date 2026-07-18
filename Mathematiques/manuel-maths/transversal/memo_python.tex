@@ -1,0 +1,111 @@
+% memo_python.tex — Mémo Python pour les chapitres du manuel
+% Fragment \input (pas de \documentclass)
+
+\chapter*{Mémo Python}
+\addcontentsline{toc}{chapter}{Mémo Python}
+
+Ce mémo regroupe les instructions Python utilisées dans les exercices
+d'algorithmique du manuel.
+
+%% ─────────────────────────────────────────────
+\section*{Types et opérations de base}
+
+\begin{verbatim}
+x = 3              # affectation d'un entier
+y = 2.5            # nombre à virgule flottante
+s = "texte"        # chaîne de caractères
+x + y              # addition
+x * y              # multiplication
+x ** 2             # puissance (x²)
+x // 3             # quotient entier
+x % 3              # reste de la division euclidienne
+\end{verbatim}
+
+%% ─────────────────────────────────────────────
+\section*{Affichage}
+
+\begin{verbatim}
+print(x)                    # affiche la valeur de x
+print("Résultat :", x)      # affiche du texte suivi de la valeur
+print(f"x vaut {x}")        # f-string (mise en forme)
+\end{verbatim}
+
+%% ─────────────────────────────────────────────
+\section*{Structures conditionnelles}
+
+\begin{verbatim}
+if condition:
+    instruction_1
+elif autre_condition:
+    instruction_2
+else:
+    instruction_3
+\end{verbatim}
+
+%% ─────────────────────────────────────────────
+\section*{Boucles}
+
+\begin{verbatim}
+# Boucle for : répéter un nombre connu de fois
+for i in range(n):          # i parcourt 0, 1, ..., n-1
+    instruction
+
+for i in range(a, b):       # i parcourt a, a+1, ..., b-1
+
+# Boucle while : répéter tant qu'une condition est vraie
+while condition:
+    instruction
+\end{verbatim}
+
+%% ─────────────────────────────────────────────
+\section*{Fonctions}
+
+\begin{verbatim}
+def nom_fonction(parametre_1, parametre_2):
+    """Description de la fonction."""
+    resultat = parametre_1 + parametre_2
+    return resultat
+
+# Appel
+valeur = nom_fonction(3, 5)
+\end{verbatim}
+
+%% ─────────────────────────────────────────────
+\section*{Listes}
+
+\begin{verbatim}
+L = [1, 4, 9, 16]          # définition d'une liste
+L[0]                        # premier élément (indice 0)
+len(L)                      # nombre d'éléments
+L.append(25)                # ajouter un élément en fin de liste
+
+# Construction par compréhension
+carres = [i**2 for i in range(1, 11)]
+\end{verbatim}
+
+%% ─────────────────────────────────────────────
+\section*{Modules utilisés dans le manuel}
+
+\begin{verbatim}
+import math
+math.sqrt(2)                # racine carrée
+math.pi                     # valeur de pi
+math.exp(1)                 # exponentielle
+math.log(x)                 # logarithme népérien
+math.factorial(n)           # factorielle
+
+import random
+random.random()             # nombre aléatoire dans [0, 1[
+random.randint(a, b)        # entier aléatoire dans [a, b]
+
+import matplotlib.pyplot as plt
+plt.plot(x, y)              # tracer une courbe
+plt.scatter(x, y)           # nuage de points
+plt.xlabel("x")             # légende axe des abscisses
+plt.ylabel("y")             # légende axe des ordonnées
+plt.title("Titre")          # titre du graphique
+plt.grid()                  # afficher la grille
+plt.show()                  # afficher la figure
+\end{verbatim}
+
+\newpage
