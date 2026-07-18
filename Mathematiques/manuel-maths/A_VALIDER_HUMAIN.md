@@ -2,9 +2,11 @@
 
 Ce fichier centralise tout ce qu'un humain devra re-verifier avant commercialisation.
 
-## Referentiel / B.O.
+## Referentiel / B.O. (BLOQUANT COMMERCIALISATION)
+- [ ] **Texte BO 2026 absent du depot** : fournir `sources/bo_2026_maths_1spe.pdf`
 - [ ] Toutes les formulations `libelle_bo` dans `referentiel/capacites_1SPE_*.json` sont a verifier mot a mot contre le B.O. en vigueur (note R7 presente dans chaque fichier).
-- [ ] Harmoniser au LOT FINAL les chapitres Suites et Second degré, produits à partir du programme 2019, avec le programme de première publié au BO n° 14 du 2 avril 2026 et applicable à la rentrée 2026-2027.
+- [ ] Harmoniser les chapitres Suites et Second degre (ancres BO 2019) avec le BO n 14 du 2 avril 2026.
+- [ ] Voir `referentiel/CONFORMITE_BO2026.md` pour le detail par chapitre (10/10 A_VALIDER_HUMAIN).
 
 ## Modes degrades
 - [ ] MODE FICHIERS : la production est realisee sans base PostgreSQL/pgvector. Le corpus et la recherche se font par lecture directe des fichiers JSON. A migrer vers la base en production.
