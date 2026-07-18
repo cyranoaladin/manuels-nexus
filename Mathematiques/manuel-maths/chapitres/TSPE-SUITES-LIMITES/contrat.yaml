@@ -1,0 +1,29 @@
+chapitre: TSPE-SUITES-LIMITES
+niveau: TSPE
+theme: SUITES-LIMITES
+titre: "Complements sur les suites : limites et convergence"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: TSPE-SUITLIM-C1, libelle_eleve: "Je sais etablir la convergence ou la divergence d'une suite en utilisant les outils adaptes (comparaison, gendarmes, suite monotone bornee)." }
+  - { code: C2, ref_capacite: TSPE-SUITLIM-C2, libelle_eleve: "Je sais demontrer une propriete d'une suite par recurrence." }
+  - { code: C3, ref_capacite: TSPE-SUITLIM-C3, libelle_eleve: "Je sais modeliser et etudier un phenomene d'evolution a l'aide d'une suite." }
+  - { code: C4, ref_capacite: TSPE-SUITLIM-C4, libelle_eleve: "Je sais demontrer que toute suite croissante non majoree tend vers $+\\infty$." }
+  - { code: C5, ref_capacite: TSPE-SUITLIM-C5, libelle_eleve: "Je sais demontrer l'inegalite de Bernoulli par recurrence et en deduire la limite de $(q^n)$." }
+  - { code: C6, ref_capacite: TSPE-SUITLIM-C6, libelle_eleve: "Je sais utiliser le theoreme de comparaison pour etablir une divergence." }
+  - { code: C7, ref_capacite: TSPE-SUITLIM-C7, libelle_eleve: "Je sais demontrer les limites de la fonction exponentielle en $+\\infty$ et $-\\infty$." }
+
+prerequis:
+  - { code: R1, libelle: "Suites arithmetiques et geometriques : definition, terme general, somme", chapitre_origine: "1SPE-SUITES" }
+  - { code: R2, libelle: "Sens de variation d'une suite", chapitre_origine: "1SPE-SUITES" }
+  - { code: R3, libelle: "Fonction exponentielle : definition, proprietes, derivee", chapitre_origine: "1SPE-EXPONENTIELLE" }
+  - { code: R4, libelle: "Derivation : etude de variations", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
+  - { code: R5, libelle: "Inegalites et encadrements", chapitre_origine: "2GT" }
+
+situation_accroche: >
+  Un capital de 10 000 euros est place a un taux annuel de 3%.
+  Combien d'annees faut-il pour que le capital depasse 20 000 euros ?
+  Et si le taux diminue chaque annee, le capital augmente-t-il indefiniment ?
+  Les limites de suites permettent de repondre rigoureusement a ces questions.
+
+temps_estime_h: { parcours1: 14, parcours2: 12, parcours3: 10 }
