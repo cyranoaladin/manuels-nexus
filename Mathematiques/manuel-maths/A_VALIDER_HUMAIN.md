@@ -3,15 +3,17 @@
 Ce fichier centralise tout ce qu'un humain devra re-verifier avant commercialisation.
 
 ## Referentiel / B.O. (BLOQUANT COMMERCIALISATION)
-- [ ] **Texte BO 2026 absent du depot** : fournir `sources/bo_2026_maths_1spe.pdf`
-- [ ] Toutes les formulations `libelle_bo` dans `referentiel/capacites_1SPE_*.json` sont a verifier mot a mot contre le B.O. en vigueur (note R7 presente dans chaque fichier).
-- [ ] Harmoniser les chapitres Suites et Second degre (ancres BO 2019) avec le BO n 14 du 2 avril 2026.
-- [ ] Voir `referentiel/CONFORMITE_BO2026.md` pour le detail par chapitre (10/10 A_VALIDER_HUMAIN).
+- [x] Texte BO 2026 depose : `sources/BO2026_1SPE_specialite.pdf` (SHA-256 verifie)
+- [x] Conformite verifiee sur texte officiel le 18/07/2026 — voir `referentiel/CONFORMITE_BO2026.md`
+- [x] TRIGO C3/C4/C5 retires (backlog TSPE v2), chapitre recompile 16p
+- [ ] **Validation humaine finale** de `CONFORMITE_BO2026.md` requise avant commercialisation
+- [ ] Reformuler les `libelle_bo` comme citations exactes du BO 2026 (actuellement formulations agent)
+- [ ] Produire les ajouts identifies : fonctions paires/impaires (DERIVATION-GLOBAL), valeur absolue derivabilite, Konig-Huygens (VARIABLES-ALEATOIRES)
 
-## 6. Terminale (TSPE)
-- [ ] Fournir le texte BO Terminale dans `sources/bo_tspe_maths.pdf`
-- [ ] Valider la liste des 13 chapitres provisoires (`docs/10_perimetre_terminale.md`)
-- [ ] Creer les referentiels `capacites_TSPE_*.json` depuis le BO
+## 6. Terminale (TSPE v1, programme 2019)
+- [x] Texte BO 2019 depose : `sources/BO2019_TSPE_specialite.pdf`
+- [ ] Valider la liste des 12 chapitres (`docs/10_perimetre_terminale.md`)
+- [x] Referentiels `capacites_TSPE_*.json` en cours de creation depuis le BO 2019
 
 ## Modes degrades
 - [ ] MODE FICHIERS : la production est realisee sans base PostgreSQL/pgvector. Le corpus et la recherche se font par lecture directe des fichiers JSON. A migrer vers la base en production.
