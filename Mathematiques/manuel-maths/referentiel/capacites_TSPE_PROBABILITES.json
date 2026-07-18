@@ -1,0 +1,64 @@
+{
+  "niveau": "TSPE",
+  "theme": "PROBABILITES",
+  "bo_reference": "Programme de spécialité mathématiques de terminale générale, BO spécial n°8 du 25 juillet 2019 — Probabilités / Succession d'épreuves indépendantes, schéma de Bernoulli + Sommes de variables aléatoires",
+  "note": "Formulations libelle_bo extraites de sources/BO2019_TSPE_specialite.txt, sections Succession d'épreuves indépendantes et Sommes de variables aléatoires. R7 vérifié.",
+  "capacites": [
+    {
+      "id": "TSPE-PROBA-C1",
+      "libelle_bo": "Modéliser une situation par une succession d'épreuves indépendantes, ou une succession de deux ou trois épreuves quelconques. Représenter la situation par un arbre. Calculer une probabilité en utilisant l'indépendance, des probabilités conditionnelles, la formule des probabilités totales.",
+      "libelle_eleve": "Je sais modéliser une situation par une succession d'épreuves indépendantes, la représenter par un arbre et calculer des probabilités.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TSPE-PROBA-C2",
+      "libelle_bo": "Modéliser une situation par un schéma de Bernoulli, par une loi binomiale.",
+      "libelle_eleve": "Je sais reconnaître et modéliser une situation par un schéma de Bernoulli et une loi binomiale.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TSPE-PROBA-C3",
+      "libelle_bo": "Utiliser l'expression de la loi binomiale pour résoudre un problème de seuil, de comparaison, d'optimisation relatif à des probabilités de nombre de succès.",
+      "libelle_eleve": "Je sais utiliser la loi binomiale pour résoudre des problèmes de seuil, comparaison ou optimisation.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TSPE-PROBA-C4",
+      "libelle_bo": "Dans le cadre d'une résolution de problème modélisé par une variable binomiale X, calculer numériquement une probabilité du type P(X = k), P(X ⩽ k), P(k ⩽ X ⩽ k'), en s'aidant au besoin d'un algorithme ; chercher un intervalle I pour lequel la probabilité P(X ∈ I) est inférieure à une valeur donnée α, ou supérieure à 1 - α.",
+      "libelle_eleve": "Je sais calculer numériquement des probabilités binomiales et chercher un intervalle de probabilité donnée.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TSPE-PROBA-C5",
+      "libelle_bo": "Expression de la probabilité de k succès dans le schéma de Bernoulli.",
+      "libelle_eleve": "Je sais démontrer l'expression P(X = k) = C(n,k) p^k (1-p)^(n-k) dans le schéma de Bernoulli.",
+      "demonstration_exigible": true,
+      "demonstration": "Expression de la probabilité de k succès dans le schéma de Bernoulli."
+    },
+    {
+      "id": "TSPE-PROBA-C6",
+      "libelle_bo": "Représenter une variable comme somme de variables aléatoires plus simples.",
+      "libelle_eleve": "Je sais décomposer une variable aléatoire en somme de variables aléatoires plus simples.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TSPE-PROBA-C7",
+      "libelle_bo": "Calculer l'espérance d'une variable aléatoire, notamment en utilisant la propriété de linéarité.",
+      "libelle_eleve": "Je sais calculer l'espérance d'une variable aléatoire en utilisant la linéarité de l'espérance.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TSPE-PROBA-C8",
+      "libelle_bo": "Calculer la variance d'une variable aléatoire, notamment en l'exprimant comme somme de variables aléatoires indépendantes.",
+      "libelle_eleve": "Je sais calculer la variance d'une variable aléatoire en utilisant l'additivité de la variance pour des variables indépendantes.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TSPE-PROBA-C9",
+      "libelle_bo": "Espérance et variance de la loi binomiale.",
+      "libelle_eleve": "Je sais démontrer les formules de l'espérance (np) et de la variance (np(1-p)) de la loi binomiale.",
+      "demonstration_exigible": true,
+      "demonstration": "Espérance et variance de la loi binomiale."
+    }
+  ]
+}
