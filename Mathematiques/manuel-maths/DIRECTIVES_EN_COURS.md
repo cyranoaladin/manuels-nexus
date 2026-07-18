@@ -32,7 +32,7 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
   - E.3 : test bout-en-bout, verify_pdf NSI, make specimen CI.
   - E.4 : PNG 150 dpi x4, tout vert, défaut ouvert cls:361.
 
-- [ ] **3. PRODUCTION SANS ARRÊT**
+- [x] **3. PRODUCTION SANS ARRÊT**
   - [x] 3a/3b. C1-C5 complets, 30 ex (6/capacité, 2/case), coverage 0 manquant.
     C1:fca6a93, C2:973a268, C3:b3e4057, C4:87ce22e, C5:0a29108.
     Reste : 20 ex supplémentaires pour atteindre 50 (E5).
@@ -47,7 +47,12 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
   - [x] 3k. 1SPE-PROBA-COND LOT 0→7. 50 ex, 117 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-PROBA-COND-v1`.
   - [x] 3l. 1SPE-VARIABLES-ALEATOIRES LOT 0→7. 50 ex, 117 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/1SPE-VARIABLES-ALEATOIRES-v1`.
 
-- [ ] **4. RAPPORT_FINAL.md** — Fin de tour.
+- [x] **4. RAPPORT_FINAL_1SPE.md** — Manuel 1SPE complet. Tag `manuel/1SPE-v1`. 445p prof, 399p eleve.
+
+- [ ] **5. J4 — Bootstrap Terminale TSPE**
+  - [ ] 5a. Referentiel TSPE ancre BO 2026, architecture 13 chapitres
+  - [ ] 5b. `docs/10_perimetre_terminale.md`
+  - [ ] 5c. Premier chapitre TSPE LOT 0→7
 
 ## Exigences métier permanentes
 
