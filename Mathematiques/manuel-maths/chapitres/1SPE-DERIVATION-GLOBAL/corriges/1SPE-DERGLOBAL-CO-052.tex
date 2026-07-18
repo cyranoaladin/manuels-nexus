@@ -1,0 +1,34 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-052","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-052","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Abs, diff
+% x = symbols('x')
+% # Pour x > 0, |x| = x, dérivée = 1
+% assert diff(x, x) == 1
+% # Pour x < 0, |x| = -x, dérivée = -1
+% assert diff(-x, x) == -1
+% # Dérivées à gauche et à droite en 0 sont différentes
+% assert 1 != -1
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-052}
+\textbf{1.} Le taux de variation de $f$ entre $0$ et $h$ ($h \neq 0$) est :
+\[
+\tau(h) = \frac{f(0+h) - f(0)}{h} = \frac{|h| - 0}{h} = \frac{|h|}{h}.
+\]
+
+\begin{itemize}
+  \item Si $h > 0$ : $|h| = h$, donc $\tau(h) = \dfrac{h}{h} = 1$.
+  \item Si $h < 0$ : $|h| = -h$, donc $\tau(h) = \dfrac{-h}{h} = -1$.
+\end{itemize}
+
+\textbf{2.} Quand $h \to 0^+$, $\tau(h) \to 1$. Quand $h \to 0^-$, $\tau(h) \to -1$.
+
+Les limites à gauche et à droite sont différentes ($1 \neq -1$), donc $\tau(h)$ n'a pas de limite en $0$ : le nombre dérivé $f'(0)$ n'existe pas. La fonction $f$ n'est \textbf{pas dérivable en $0$}.
+
+Graphiquement, la courbe de $|x|$ présente un point anguleux en $x = 0$.
+
+\textbf{3.} La fonction $g(x) = |x - 2|$ se comporte comme $|u|$ avec $u = x - 2$. Le point « anguleux » se situe là où $u = 0$, c'est-à-dire en $x = 2$. Par le même raisonnement (taux de variation $\frac{|h|}{h}$ en $x = 2$), $g$ n'est \textbf{pas dérivable en $x = 2$}.
+
+\textbf{4.} Pour $x > 0$ : $f(x) = |x| = x$, donc $f'(x) = 1$.
+
+Pour $x < 0$ : $f(x) = |x| = -x$, donc $f'(x) = -1$.
+\end{corrige}

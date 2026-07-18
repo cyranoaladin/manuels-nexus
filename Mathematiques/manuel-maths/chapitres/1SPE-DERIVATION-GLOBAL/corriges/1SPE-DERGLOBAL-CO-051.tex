@@ -1,0 +1,35 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-051","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-051","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% f = 3*x**2 - 5
+% assert f.subs(x, -x) == f
+% g = x**3 + 2*x
+% assert g.subs(x, -x) == -g
+% h = x**2 + x
+% h_neg = h.subs(x, -x)  # x^2 - x
+% assert h_neg != h and h_neg != -h
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-051}
+Chaque fonction est définie sur $\mathbb{R}$, domaine symétrique par rapport à $0$.
+
+\textbf{1.} Calculons $f(-x)$ :
+\[
+f(-x) = 3(-x)^2 - 5 = 3x^2 - 5 = f(x).
+\]
+Donc $f$ est \textbf{paire}. Sa courbe est symétrique par rapport à l'axe des ordonnées.
+
+\textbf{2.} Calculons $g(-x)$ :
+\[
+g(-x) = (-x)^3 + 2(-x) = -x^3 - 2x = -(x^3 + 2x) = -g(x).
+\]
+Donc $g$ est \textbf{impaire}. Sa courbe est symétrique par rapport à l'origine.
+
+\textbf{3.} Calculons $h(-x)$ :
+\[
+h(-x) = (-x)^2 + (-x) = x^2 - x.
+\]
+On a $h(-x) = x^2 - x \neq x^2 + x = h(x)$ et $h(-x) = x^2 - x \neq -(x^2 + x) = -x^2 - x = -h(x)$.
+
+Donc $h$ n'est \textbf{ni paire ni impaire}.
+\end{corrige}

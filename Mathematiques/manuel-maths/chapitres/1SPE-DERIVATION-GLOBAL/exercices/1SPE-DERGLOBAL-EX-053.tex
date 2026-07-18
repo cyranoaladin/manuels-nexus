@@ -1,0 +1,22 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-053","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C1"],"capacites_codes":["C1"],"methodes":["M1"],"parcours":1,"competences":["calculer"],"duree_min":6,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-053.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-053.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational
+% x = symbols('x')
+% # f(x) = x^(-2), f'(x) = -2x^(-3)
+% assert diff(x**(-2), x) == -2*x**(-3)
+% # g(x) = x^(-3), g'(x) = -3x^(-4)
+% assert diff(x**(-3), x) == -3*x**(-4)
+% # h(x) = 5*x^(-1), h'(x) = -5*x^(-2)
+% assert diff(5*x**(-1), x) == -5*x**(-2)
+% # k(x) = x^(-4) + x^2, k'(x) = -4x^(-5) + 2x
+% assert diff(x**(-4) + x**2, x) == -4*x**(-5) + 2*x
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-053}{1}{6}
+En utilisant la formule $(x^n)' = nx^{n-1}$ valable pour $n \in \mathbb{Z}$, dériver les fonctions suivantes sur $\mathbb{R} \setminus \{0\}$ :
+\begin{enumerate}
+  \item $f(x) = x^{-2}$
+  \item $g(x) = x^{-3}$
+  \item $h(x) = 5x^{-1}$
+  \item $k(x) = x^{-4} + x^2$
+\end{enumerate}
+\end{exercice}

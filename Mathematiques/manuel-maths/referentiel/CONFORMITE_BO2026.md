@@ -17,7 +17,7 @@ Reference croisee avec `BO2019_1SPE_specialite.pdf` pour les chapitres ancres 20
 | 1SPE-SUITES | **CONFORME** (reformulations mineures) | Contenus et capacites identiques au BO 2026 section "Suites numeriques, modeles discrets" (l.333-388). Demonstrations exigibles : terme general arith/geo, 1+2+...+n, 1+q+...+q^n. Ajout BO 2026 : motifs geometriques/combinatoires dans modes de generation. |
 | 1SPE-SECOND-DEGRE | **CONFORME** (reformulations) | Section "Equations, fonctions polynomes du second degre" (l.370-388). Forme canonique, discriminant, factorisation, signe. BO 2026 ajoute : "diversifier les strategies de factorisation (racine evidente, somme/produit, identite remarquable, formules generales)". Demonstration exigible : resolution equation 2nd degre. |
 | 1SPE-DERIVATION-LOCAL | **CONFORME** | Section "Derivation — Point de vue local" (l.433-455). Taux de variation, nombre derive, tangente, approximation lineaire. |
-| 1SPE-DERIVATION-GLOBAL | **AJOUTS REQUIS** | Section "Derivation — Point de vue global" + "Variations et courbes" (l.456-490). Conforme pour : fonction derivee, operations, signe/variations, extremums, optimisation. **Manquent** : (1) fonctions paires/impaires + traduction geometrique ; (2) fonction valeur absolue : derivabilite en 0 ; (3) pour n dans Z, derivee de x^n. |
+| 1SPE-DERIVATION-GLOBAL | **CONFORME** (apres ajouts E1-E3) | Section "Derivation — Point de vue global" + "Variations et courbes" (l.456-490). Ajouts produits : (1) fonctions paires/impaires dans cours/12_C3 ; (2) valeur absolue derivabilite en 0 dans cours/10_C1 ; (3) x^n pour n dans Z dans cours/10_C1. 3 exercices + 3 corriges ajoutes (EX-051 a 053). |
 | 1SPE-EXPONENTIELLE | **CONFORME** | Section "Fonction exponentielle" (l.479-500). Definition, proprietes algebriques, e^(at), signe, variations. Demonstration : unicite admise. |
 | 1SPE-TRIGONOMETRIE | **HORS PROGRAMME PARTIEL** | Section "Trigonometrie" (l.503-518). **Maintenu** : C1 (cercle, radian, enroulement), C2 (valeurs remarquables, angles associes par lecture du cercle). **Retire du programme 1SPE 2026** : C3 (formules d'addition/duplication), C4 (equations trigonometriques), C5 (fonctions cos/sin : variations, periodicite, courbes). Ces contenus passent en Terminale (TSPE v2, programme 2027). |
 | 1SPE-PRODUIT-SCALAIRE | **CONFORME** | Section "Calcul vectoriel et produit scalaire" (l.541-561). Projection, cosinus, bilinearite, expression analytique, Al-Kashi, MA.MB. Demonstrations exigibles : Al-Kashi, ensemble MA.MB=0. |
@@ -31,9 +31,9 @@ Reference croisee avec `BO2019_1SPE_specialite.pdf` pour les chapitres ancres 20
 
 | # | Chapitre | Type | Contenu | Action |
 |---|---|---|---|---|
-| E1 | DERIVATION-GLOBAL | AJOUT | Fonctions paires, impaires : representation algebrique et graphique, traduction geometrique | Ajouter section cours + 2-3 exercices |
-| E2 | DERIVATION-GLOBAL | AJOUT | Fonction valeur absolue : etude de la derivabilite en 0 | Ajouter dans cours C1 ou C2 |
-| E3 | DERIVATION-GLOBAL | VERIFIER | Pour n dans Z, derivee de x^n | Verifier si present dans le cours actuel |
+| E1 | DERIVATION-GLOBAL | **PRODUIT** | Fonctions paires, impaires : section ajoutee dans cours/12_C3 + EX-051 | Commit [LF.1] ajouts E1-E3 |
+| E2 | DERIVATION-GLOBAL | **PRODUIT** | Fonction valeur absolue : derivabilite en 0 ajoutee dans cours/10_C1 + EX-052 | Commit [LF.1] ajouts E1-E3 |
+| E3 | DERIVATION-GLOBAL | **PRODUIT** | Pour n dans Z, derivee de x^n : extension dans cours/10_C1 + EX-053 | Commit [LF.1] ajouts E1-E3 |
 | E4 | VARIABLES-ALEATOIRES | ~~AJOUT~~ PRESENT | Formule de Konig-Huygens : V(X) = E(X^2) - [E(X)]^2 | Deja dans cours/11_C2, l.32-34 |
 | E5 | TRIGONOMETRIE | RETRAIT | Formules d'addition cos(a+b), sin(a+b), duplication | Deplacer vers backlog TSPE v2 |
 | E6 | TRIGONOMETRIE | RETRAIT | Equations trigonometriques cos(x)=a, sin(x)=a | Deplacer vers backlog TSPE v2 |

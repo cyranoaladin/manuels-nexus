@@ -1,0 +1,32 @@
+% META: {"id":"1SPE-DERGLOBAL-CO-053","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"corrige","exercice_id":"1SPE-DERGLOBAL-EX-053","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x')
+% assert diff(x**(-2), x) == -2*x**(-3)
+% assert diff(x**(-3), x) == -3*x**(-4)
+% assert diff(5*x**(-1), x) == -5*x**(-2)
+% assert diff(x**(-4) + x**2, x) == -4*x**(-5) + 2*x
+% END-VERIFY
+\begin{corrige}{1SPE-DERGLOBAL-EX-053}
+On applique la formule $(x^n)' = nx^{n-1}$ pour $n \in \mathbb{Z}$.
+
+\textbf{1.} $f(x) = x^{-2}$, donc $n = -2$ :
+\[
+f'(x) = -2x^{-3} = -\frac{2}{x^3}.
+\]
+
+\textbf{2.} $g(x) = x^{-3}$, donc $n = -3$ :
+\[
+g'(x) = -3x^{-4} = -\frac{3}{x^4}.
+\]
+
+\textbf{3.} $h(x) = 5x^{-1}$. Par linéarité et avec $n = -1$ :
+\[
+h'(x) = 5 \times (-1) x^{-2} = -\frac{5}{x^2}.
+\]
+
+\textbf{4.} $k(x) = x^{-4} + x^2$. On dérive terme à terme :
+\[
+k'(x) = -4x^{-5} + 2x = -\frac{4}{x^5} + 2x.
+\]
+\end{corrige}

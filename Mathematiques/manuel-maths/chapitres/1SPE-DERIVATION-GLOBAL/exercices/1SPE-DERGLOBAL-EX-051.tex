@@ -1,0 +1,23 @@
+% META: {"id":"1SPE-DERGLOBAL-EX-051","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"exercice","capacites":["1SPE-DERIVATION-GLOBAL-C3"],"capacites_codes":["C3"],"methodes":["M1"],"parcours":1,"competences":["raisonner"],"duree_min":8,"mode_creation":"ex_nihilo","sources_inspiration":[],"fichier_tex":"chapitres/1SPE-DERIVATION-GLOBAL/exercices/1SPE-DERGLOBAL-EX-051.tex","corrige_tex":"chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-051.tex","status":"generated"}
+% BEGIN-VERIFY
+% from sympy import symbols
+% x = symbols('x')
+% # f(x) = 3x^2 - 5 est paire
+% f = 3*x**2 - 5
+% assert f.subs(x, -x) == f
+% # g(x) = x^3 + 2x est impaire
+% g = x**3 + 2*x
+% assert g.subs(x, -x) == -g
+% # h(x) = x^2 + x n'est ni paire ni impaire
+% h = x**2 + x
+% assert h.subs(x, -x) != h
+% assert h.subs(x, -x) != -h
+% END-VERIFY
+\begin{exercice}{1SPE-DERGLOBAL-EX-051}{1}{8}
+Pour chacune des fonctions suivantes, déterminer si elle est paire, impaire, ou ni l'une ni l'autre. Justifier par le calcul.
+\begin{enumerate}
+  \item $f(x) = 3x^2 - 5$
+  \item $g(x) = x^3 + 2x$
+  \item $h(x) = x^2 + x$
+\end{enumerate}
+\end{exercice}

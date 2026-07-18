@@ -1,5 +1,80 @@
 % META: {"id":"1SPE-DERGLOBAL-COURS-C3","chapitre":"1SPE-DERIVATION-GLOBAL","type_objet":"cours","capacites_codes":["C3"],"status":"generated"}
 
+\section{Fonctions paires et fonctions impaires}
+
+\definition[Fonction paire]{
+Une fonction $f$ définie sur un domaine $D$ symétrique par rapport à $0$ est dite \textbf{paire} si, pour tout $x \in D$ :
+\[
+f(-x) = f(x).
+\]
+\emph{Interprétation graphique :} la courbe représentative de $f$ est \textbf{symétrique par rapport à l'axe des ordonnées}.
+}
+
+\definition[Fonction impaire]{
+Une fonction $f$ définie sur un domaine $D$ symétrique par rapport à $0$ est dite \textbf{impaire} si, pour tout $x \in D$ :
+\[
+f(-x) = -f(x).
+\]
+\emph{Interprétation graphique :} la courbe représentative de $f$ est \textbf{symétrique par rapport à l'origine} $O$.
+}
+
+\margeAppui{Pré-requis : le domaine de $f$ doit être symétrique par rapport à $0$ (c'est-à-dire $x \in D \Rightarrow -x \in D$). Sinon, la question de la parité ne se pose pas.}
+
+\propriete[Exemples fondamentaux]{
+\begin{itemize}
+  \item \textbf{Fonctions paires :} $x \mapsto x^2$, $x \mapsto x^4$, $x \mapsto |x|$.
+  \item \textbf{Fonctions impaires :} $x \mapsto x^3$, $x \mapsto x$, $x \mapsto \dfrac{1}{x}$.
+\end{itemize}
+Plus généralement, $x \mapsto x^n$ est paire si $n$ est pair, et impaire si $n$ est impair.
+}
+
+\exemple{
+Montrons que $f(x) = x^2 + 1$ est paire.
+
+Le domaine de $f$ est $\mathbb{R}$, qui est symétrique par rapport à $0$. Pour tout $x \in \mathbb{R}$ :
+\[
+f(-x) = (-x)^2 + 1 = x^2 + 1 = f(x).
+\]
+Donc $f$ est paire. Sa courbe est symétrique par rapport à l'axe des ordonnées.
+}
+
+\exemple{
+Montrons que $g(x) = x^3 - x$ est impaire.
+
+Le domaine de $g$ est $\mathbb{R}$. Pour tout $x \in \mathbb{R}$ :
+\[
+g(-x) = (-x)^3 - (-x) = -x^3 + x = -(x^3 - x) = -g(x).
+\]
+Donc $g$ est impaire. Sa courbe est symétrique par rapport à l'origine.
+}
+
+\erreurFrequente{
+Conclure qu'une fonction est impaire parce qu'elle n'est pas paire (ou inversement). De nombreuses fonctions ne sont \emph{ni paires ni impaires} : par exemple $f(x) = x^2 + x$ vérifie $f(-1) = 0$ et $f(1) = 2$, donc $f(-1) \neq f(1)$ et $f(-1) \neq -f(1)$.
+}
+
+\propriete[Conséquence pour l'étude de variations]{
+Pour une fonction paire ou impaire, il suffit d'étudier la fonction sur $[0\,;\,+\infty[$ (ou $]0\,;\,+\infty[$), puis de compléter par symétrie. Cela divise le travail par deux.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Abs
+% x = symbols('x')
+% # Fonctions paires : f(-x) = f(x)
+% assert (-x)**2 == x**2
+% assert (-x)**4 == x**4
+% assert Abs(-x) == Abs(x)
+% # Fonctions impaires : f(-x) = -f(x)
+% assert (-x)**3 == -(x**3)
+% assert (-x) == -(x)
+% assert 1/(-x) == -(1/x)
+% # Exemple : x^2 + 1 est paire
+% f = x**2 + 1
+% assert f.subs(x, -x) == f
+% # Exemple : x^3 - x est impaire
+% g = x**3 - x
+% assert g.subs(x, -x) == -g
+% END-VERIFY
+
 \section{Signe de la dérivée et sens de variation}
 
 \theoreme[Lien entre signe de $f'$ et variations de $f$]{

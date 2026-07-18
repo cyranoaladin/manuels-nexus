@@ -19,6 +19,8 @@ f(x) = x & \mathbb{R} & f'(x) = 1 \\
 \hline
 f(x) = x^n \quad (n \in \mathbb{N},\, n \geqslant 2) & \mathbb{R} & f'(x) = nx^{n-1} \\
 \hline
+f(x) = x^n \quad (n \in \mathbb{Z},\, n \leqslant -1) & \mathbb{R} \setminus \{0\} & f'(x) = nx^{n-1} \\
+\hline
 f(x) = \dfrac{1}{x} & \mathbb{R} \setminus \{0\} & f'(x) = -\dfrac{1}{x^2} \\[6pt]
 \hline
 f(x) = \sqrt{x} & [0\,;\,+\infty[ & f'(x) = \dfrac{1}{2\sqrt{x}} \quad (x > 0) \\[6pt]
@@ -62,6 +64,38 @@ En $x = 4$ : $\varphi'(4) = \dfrac{1}{2\sqrt{4}} = \dfrac{1}{4}$.
 La fonction $\sqrt{x}$ n'est pas dérivable en $0$ : $\varphi'(x) = \dfrac{1}{2\sqrt{x}}$ tend vers $+\infty$ quand $x \to 0^+$. La tangente à la courbe en $(0;0)$ est verticale, ce qui correspond à une pente infinie — donc un nombre dérivé qui n'existe pas.
 }
 
+\contreexemple{
+La fonction valeur absolue $f(x) = |x|$ n'est pas dérivable en $0$.
+
+En effet, le taux de variation à gauche et à droite de $0$ donne :
+\[
+\lim_{h \to 0^-} \frac{|0+h| - |0|}{h} = \lim_{h \to 0^-} \frac{-h}{h} = -1 \qquad \text{(dérivée à gauche)}
+\]
+\[
+\lim_{h \to 0^+} \frac{|0+h| - |0|}{h} = \lim_{h \to 0^+} \frac{h}{h} = 1 \qquad \text{(dérivée à droite)}
+\]
+Les limites à gauche et à droite sont différentes ($-1 \neq 1$) : le nombre dérivé n'existe pas en $0$.
+
+\emph{Interprétation graphique :} la courbe de $|x|$ présente un « angle pointu » (un point anguleux) en $x = 0$. Il n'y a pas de tangente unique en ce point.
+}
+
+\margeAppui{La non-dérivabilité en un point peut se manifester de deux façons : une tangente verticale (comme $\sqrt{x}$ en $0$) ou un point anguleux (comme $|x|$ en $0$). Dans les deux cas, la fonction est continue en ce point mais pas dérivable.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Abs, Rational, limit
+% x, h = symbols('x h')
+% # Taux de variation de |x| en 0 : |h|/h
+% # Pour h > 0 : |h|/h = 1 ; pour h < 0 : |h|/h = -1
+% assert Abs(1)/1 == 1
+% assert Abs(-1)/(-1) == -1
+% # Vérifier que |x| est dérivable pour x != 0
+% from sympy import diff, Piecewise
+% # Pour x > 0, |x| = x, dérivée = 1
+% assert diff(x, x) == 1
+% # Pour x < 0, |x| = -x, dérivée = -1
+% assert diff(-x, x) == -1
+% END-VERIFY
+
 \erreurFrequente{
 Écrire $(x^n)' = nx^n$ en oubliant de diminuer l'exposant d'une unité. La bonne formule est $(x^n)' = nx^{n-1}$ : on multiplie par l'exposant et on soustrait $1$.
 }
@@ -75,6 +109,45 @@ Confondre $\sqrt{x}$ et $x^{1/2}$ dans le calcul : $(\sqrt{x})' = \dfrac{1}{2\sq
 }
 
 \margeAppui{La formule $x^n \mapsto nx^{n-1}$ fonctionne aussi pour $n=1$ : $(x)' = 1 \cdot x^0 = 1$. Et pour $n=0$ : $(1)' = 0 \cdot x^{-1} = 0$. Tout est cohérent.}
+
+\propriete[Extension aux exposants entiers négatifs]{
+Pour tout $n \in \mathbb{Z}$ (y compris les entiers négatifs), la fonction $f(x) = x^n$ est dérivable sur $\mathbb{R} \setminus \{0\}$ et :
+\[
+f'(x) = nx^{n-1}.
+\]
+La formule est la même que pour $n \in \mathbb{N}$ ; seul le domaine change.
+}
+
+\exemple{
+Pour $f(x) = x^{-2} = \dfrac{1}{x^2}$, on applique la formule avec $n = -2$ :
+\[
+f'(x) = -2x^{-3} = -\frac{2}{x^3}.
+\]
+}
+
+\exemple{
+Pour $g(x) = x^{-3} = \dfrac{1}{x^3}$, on a $n = -3$ :
+\[
+g'(x) = -3x^{-4} = -\frac{3}{x^4}.
+\]
+}
+
+\margeAppui{La ligne $\dfrac{1}{x}$ du tableau des dérivées de référence est un cas particulier : $\dfrac{1}{x} = x^{-1}$, et la formule $(-1)x^{-2} = -\dfrac{1}{x^2}$ redonne bien le résultat connu.}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational
+% x = symbols('x')
+% # Dérivée de x^(-2) = -2*x^(-3)
+% assert diff(x**(-2), x) == -2*x**(-3)
+% # Dérivée de x^(-3) = -3*x^(-4)
+% assert diff(x**(-3), x) == -3*x**(-4)
+% # Dérivée de x^(-1) = -x^(-2) = -1/x^2
+% assert diff(x**(-1), x) == -x**(-2)
+% # Cas général : pour tout n entier, (x^n)' = n*x^(n-1)
+% from sympy import Integer
+% for n_val in [-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]:
+%     assert diff(x**n_val, x) == n_val * x**(n_val - 1)
+% END-VERIFY
 
 \approfondissement{
 On peut retrouver la formule $(x^n)' = nx^{n-1}$ à partir de la définition du nombre dérivé. Le taux de variation de $f(x) = x^n$ entre $a$ et $a+h$ est :

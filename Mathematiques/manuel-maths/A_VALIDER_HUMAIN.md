@@ -8,7 +8,7 @@ Ce fichier centralise tout ce qu'un humain devra re-verifier avant commercialisa
 - [x] TRIGO C3/C4/C5 retires (backlog TSPE v2), chapitre recompile 16p
 - [ ] **Validation humaine finale** de `CONFORMITE_BO2026.md` requise avant commercialisation
 - [ ] Reformuler les `libelle_bo` comme citations exactes du BO 2026 (actuellement formulations agent)
-- [ ] Produire les ajouts identifies : fonctions paires/impaires (DERIVATION-GLOBAL), valeur absolue derivabilite, Konig-Huygens (VARIABLES-ALEATOIRES)
+- [x] Ajouts produits : paires/impaires + valeur absolue + x^n Z dans DERIVATION-GLOBAL (EX-051 a 053), Konig-Huygens deja present
 
 ## 6. Terminale (TSPE v1, programme 2019)
 - [x] Texte BO 2019 depose : `sources/BO2019_TSPE_specialite.pdf`
