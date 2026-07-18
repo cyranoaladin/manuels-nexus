@@ -26,6 +26,23 @@
 - 3 fiches methodes couvrant M1-M3.
 - VERIFY blocks presents dans les TD.
 
+### Audit de densite (reprise 18/07/2026)
+
+| Contenu BO 2019 | Couvert | Localisation |
+|---|---|---|
+| Limite finie/infinie en +inf, -inf, en un point | oui | C1 subsections 1-4 |
+| Limites fonctions reference (puissances, racine, exp) | oui | C1 "Limites usuelles" |
+| Limites et comparaison | oui | C1 "Croissances comparees" |
+| Operations sur les limites | oui | C1 "Operations" |
+| Formes indeterminees | oui | C1 "Formes indeterminees" |
+| Terme preponderant | oui | C1 "Terme preponderant" |
+| Composition des limites | oui | C1 "Theoreme de composition" |
+| Asymptote parallele a un axe | oui | C2 "AH, AV" |
+| Croissance comparee x^n et exp | oui | C3 + demonstration exigible |
+
+Verdict : **9/9 contenus BO couverts**. 17 objets pedagogiques dans C1 (180 lignes),
+10 dans C2 (115 lignes), 8 dans C3 (131 lignes). Densite adequate pour 3 capacites.
+
 ### Points ouverts
 
-- Verification LaTeX (make check-latex) a effectuer.
+- Aucun (compilation verifiee, densite adequate).
