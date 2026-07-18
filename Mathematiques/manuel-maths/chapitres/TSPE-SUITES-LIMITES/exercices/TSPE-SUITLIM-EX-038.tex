@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-EX-038", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C6"], "capacites_codes": ["C6"], "methodes": ["M4"], "parcours": 1, "competences": ["raisonner", "calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = (n + sin(n)) / (n + 1)
+% # n-1 <= n+sin(n) <= n+1, so (n-1)/(n+1) <= u_n <= 1
+% # both bounds -> 1
+% assert limit(u, n, oo) == 1
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-038}{1}{10}
+Soit $(u_n)$ la suite definie pour $n \geq 1$ par $u_n = \dfrac{n + \sin(n)}{n + 1}$.
+\begin{enumerate}
+  \item Montrer que pour tout $n \geq 1$, $\dfrac{n - 1}{n + 1} \leq u_n \leq \dfrac{n + 1}{n + 1} = 1$.
+  \item Determiner $\lim_{n \to +\infty} \dfrac{n-1}{n+1}$.
+  \item En deduire $\lim_{n \to +\infty} u_n$.
+\end{enumerate}
+\end{exercice}

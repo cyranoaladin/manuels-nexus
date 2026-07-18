@@ -1,0 +1,24 @@
+% META: {"id": "TSPE-SUITLIM-EX-018", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["modeliser", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # u_{n+1} = 0.6*u_n + 120, u_0 = 50
+% # l = 120/0.4 = 300
+% a = Rational(3, 5)
+% b = 120
+% l = Rational(300)
+% assert l == b/(1-a)
+% n = symbols('n', integer=True, nonnegative=True)
+% u_expr = 300 - 250*a**n
+% assert u_expr.subs(n, 0) == 50
+% assert u_expr.subs(n, 1) == 150
+% assert limit(u_expr, n, oo) == 300
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-018}{2}{15}
+Une population de poissons dans un lac est modelisee par la suite $(u_n)$ definie par $u_0 = 50$ et $u_{n+1} = 0{,}6\,u_n + 120$ (en centaines d'individus).
+\begin{enumerate}
+  \item Interpreter les coefficients $0{,}6$ et $120$ dans le contexte.
+  \item Determiner la valeur d'equilibre $\ell$ de cette suite.
+  \item Exprimer $u_n$ en fonction de $n$.
+  \item Montrer que la suite est croissante et determiner sa limite. Interpreter.
+\end{enumerate}
+\end{exercice}

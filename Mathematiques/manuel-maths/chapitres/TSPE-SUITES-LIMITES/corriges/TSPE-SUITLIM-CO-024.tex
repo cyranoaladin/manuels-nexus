@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-SUITLIM-CO-024", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-024", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% from fractions import Fraction
+% S = [Fraction(0)]
+% for k in range(1, 5):
+%     S.append(S[-1] + Fraction(1,k))
+% assert S[1] == 1
+% assert S[2] == Fraction(3,2)
+% assert S[3] == Fraction(11,6)
+% assert S[4] == Fraction(25,12)
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-024}
+
+\textbf{Question 1.} $S_1 = 1$, $S_2 = \dfrac{3}{2}$, $S_3 = \dfrac{11}{6}$, $S_4 = \dfrac{25}{12}$.
+
+\textbf{Question 2.} $S_{n+1} - S_n = \dfrac{1}{n+1} > 0$. Croissante.
+
+\textbf{Question 3.} $S_{2^p} = 1 + \dfrac{1}{2} + \left(\dfrac{1}{3}+\dfrac{1}{4}\right) + \cdots \geq 1 + \dfrac{1}{2} + \dfrac{2}{4} + \dfrac{4}{8} + \cdots = 1 + \dfrac{p}{2}$.
+
+Car chaque bloc $\sum_{k=2^{j-1}+1}^{2^j} \dfrac{1}{k} \geq \dfrac{2^{j-1}}{2^j} = \dfrac{1}{2}$, et il y a $p$ blocs.
+
+\textbf{Question 4.} $S_{2^p} \geq 1 + p/2 \to +\infty$. Comme $(S_n)$ est croissante et contient la sous-suite $(S_{2^p})$ non majoree, $\boxed{\lim S_n = +\infty}$.
+
+\end{corrige}

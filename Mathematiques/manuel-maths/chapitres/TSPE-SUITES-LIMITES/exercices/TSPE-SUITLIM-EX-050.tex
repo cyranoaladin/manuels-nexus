@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-SUITLIM-EX-050", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C7"], "capacites_codes": ["C7"], "methodes": ["M5"], "parcours": 3, "competences": ["raisonner", "communiquer", "modeliser"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% n = symbols('n', integer=True, nonnegative=True)
+% # f(x) = x*e^(-x), max at x=1 with f(1)=1/e
+% f = x*exp(-x)
+% fp = diff(f, x)
+% assert simplify(fp - (1-x)*exp(-x)) == 0
+% assert f.subs(x, 1) == exp(-1)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == -oo
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-050}{3}{25}
+Soit $f(x) = x\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Determiner les limites de $f$ en $+\infty$ et en $-\infty$.
+  \item Calculer $f'(x)$ et dresser le tableau de variations de $f$.
+  \item Montrer que $f$ admet un maximum global en $x = 1$, egal a $\dfrac{1}{\mathrm{e}}$.
+  \item En deduire que pour tout $n \geq 1$, $\dfrac{n}{\mathrm{e}^n} \leq \dfrac{1}{\mathrm{e}}$, et retrouver que $\mathrm{e}^n \geq n\,\mathrm{e}^{n-1}$.
+\end{enumerate}
+\end{exercice}

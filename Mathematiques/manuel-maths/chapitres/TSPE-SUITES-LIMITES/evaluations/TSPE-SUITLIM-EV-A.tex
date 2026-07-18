@@ -1,0 +1,135 @@
+% META: {"id": "TSPE-SUITLIM-EV-A", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "competences": ["chercher", "modeliser", "representer", "calculer", "raisonner", "communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% n = symbols('n', integer=True, nonnegative=True)
+%
+% # ---- Exercice 1 (5 pts) : Limites directes (C1, C5) ----
+% u1 = (3*n**2 + 2*n)/(n**2 + 4)
+% assert limit(u1, n, oo) == 3
+% u2 = 5*Rational(3,4)**n - 2
+% assert limit(u2, n, oo) == -2
+% u3 = n**2 - 3*n + 1
+% assert limit(u3, n, oo) == oo
+%
+% # ---- Exercice 2 (5 pts) : Recurrence (C2) ----
+% # P(n): 4^n >= 3n+1
+% assert 4**0 >= 1
+% for k in range(10):
+%     assert 4**k >= 3*k + 1
+%
+% # ---- Exercice 3 (5 pts) : Modelisation (C3) ----
+% # u_0=500, u_{n+1}=0.9*u_n+80, l=800
+% a3 = Rational(9, 10)
+% b3 = 80
+% l3 = b3 / (1 - a3)
+% assert l3 == 800
+% u3_expr = 800 - 300*a3**n
+% assert u3_expr.subs(n, 0) == 500
+% assert u3_expr.subs(n, 1) == 530
+% assert limit(u3_expr, n, oo) == 800
+%
+% # ---- Exercice 4 (5 pts) : Suite recurrente, convergence (C4, C6, C7) ----
+% # u_0=1, u_{n+1}=sqrt(3*u_n). Limit l=sqrt(3l) => l=3
+% import math as m
+% u4 = [1.0]
+% for i in range(100):
+%     u4.append(m.sqrt(3*u4[-1]))
+% assert abs(u4[-1] - 3) < 1e-6
+% for i in range(len(u4)-1):
+%     assert u4[i] <= u4[i+1]
+%     assert u4[i] <= 3.001
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+% Toute reponse doit etre justifiee ; les resultats seuls ne sont pas acceptes.
+% La qualite de la redaction sera prise en compte.
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-SUITLIM-EV-A}{55}
+
+%===============================================================
+% EXERCICE 1 — Limites de suites (5 points)
+% Capacites : C1, C5
+%===============================================================
+
+\begin{exercice}{TSPE-SUITLIM-EV-A-EX1}{2}{12}
+
+\textbf{Exercice 1} (5 points) — \textit{Capacites C1, C5}
+
+\medskip
+
+Determiner les limites des suites suivantes en justifiant chaque etape.
+
+\begin{enumerate}
+  \item (1,5 pt) $u_n = \dfrac{3n^2 + 2n}{n^2 + 4}$
+  \item (1,5 pt) $v_n = 5 \times \left(\dfrac{3}{4}\right)^n - 2$
+  \item (2 pts) $w_n = n^2 - 3n + 1$ (on montrera que $w_n \geq \dfrac{n^2}{2}$ pour $n$ assez grand)
+\end{enumerate}
+
+\end{exercice}
+
+%===============================================================
+% EXERCICE 2 — Recurrence (5 points)
+% Capacite : C2
+%===============================================================
+
+\begin{exercice}{TSPE-SUITLIM-EV-A-EX2}{2}{12}
+
+\textbf{Exercice 2} (5 points) — \textit{Capacite C2}
+
+\medskip
+
+\begin{enumerate}
+  \item (3 pts) Demontrer par recurrence que pour tout entier naturel $n$, $4^n \geq 3n + 1$.
+  \item (2 pts) En deduire $\lim_{n \to +\infty} 4^n$.
+\end{enumerate}
+
+\end{exercice}
+
+%===============================================================
+% EXERCICE 3 — Modelisation (5 points)
+% Capacite : C3
+%===============================================================
+
+\begin{exercice}{TSPE-SUITLIM-EV-A-EX3}{2}{15}
+
+\textbf{Exercice 3} (5 points) — \textit{Capacite C3}
+
+\medskip
+
+Un lac contient $500$ poissons. Chaque annee, $10\,\%$ de la population disparait et on ajoute $80$ poissons. On note $u_n$ le nombre de poissons au debut de l'annee $n$.
+
+\begin{enumerate}
+  \item (1 pt) Justifier que $u_0 = 500$ et $u_{n+1} = 0{,}9\,u_n + 80$.
+  \item (1 pt) Calculer $u_1$ et $u_2$.
+  \item (2 pts) Determiner le reel $\ell$ tel que $v_n = u_n - \ell$ soit geometrique. Exprimer $u_n$ en fonction de $n$.
+  \item (1 pt) Determiner $\lim_{n \to +\infty} u_n$ et interpreter.
+\end{enumerate}
+
+\end{exercice}
+
+%===============================================================
+% EXERCICE 4 — Convergence d'une suite recurrente (5 points)
+% Capacites : C4, C6, C7
+%===============================================================
+
+\begin{exercice}{TSPE-SUITLIM-EV-A-EX4}{3}{16}
+
+\textbf{Exercice 4} (5 points) — \textit{Capacites C4, C6}
+
+\medskip
+
+Soit $(u_n)$ la suite definie par $u_0 = 1$ et $u_{n+1} = \sqrt{3\,u_n}$ pour tout $n \in \mathbb{N}$.
+
+\begin{enumerate}
+  \item (1 pt) Calculer $u_1$, $u_2$ et $u_3$ (valeurs exactes).
+  \item (1,5 pt) Montrer par recurrence que pour tout $n \in \mathbb{N}$, $0 < u_n \leq 3$.
+  \item (1,5 pt) Montrer que la suite $(u_n)$ est croissante.
+  \item (1 pt) En deduire que $(u_n)$ converge et determiner sa limite.
+\end{enumerate}
+
+\end{exercice}
+
+\end{evaluation}

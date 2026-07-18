@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-SUITLIM-CO-002", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-002", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = (n**2 - 4)/(2*n**2 + 1)
+% assert u.subs(n, 0) == -4
+% assert u.subs(n, 2) == 0
+% assert limit(u, n, oo) == Rational(1, 2)
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-002}
+
+\commentaireMarge{Substituer $n = 0$ et $n = 2$.}
+
+\textbf{Question 1.} $u_0 = \dfrac{0 - 4}{0 + 1} = -4$. \quad $u_2 = \dfrac{4 - 4}{8 + 1} = 0$.
+
+\commentaireMarge{Factoriser par $n^2$.}
+
+\textbf{Question 2.} $u_n = \dfrac{n^2(1 - 4/n^2)}{n^2(2 + 1/n^2)} = \dfrac{1 - 4/n^2}{2 + 1/n^2} \to \dfrac{1}{2}$.
+
+Donc $\boxed{\lim_{n \to +\infty} u_n = \dfrac{1}{2}}$.
+
+\end{corrige}

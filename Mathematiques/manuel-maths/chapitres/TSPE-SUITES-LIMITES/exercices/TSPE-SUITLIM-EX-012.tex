@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-SUITLIM-EX-012", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # u_0 = 1, u_{n+1} = u_n/(2u_n+1). Show 0 < u_n <= 1/(2n+1)
+% u = [Rational(1)]
+% for i in range(8):
+%     u.append(u[-1]/(2*u[-1]+1))
+% for i in range(8):
+%     assert u[i] > 0
+%     assert u[i] <= Rational(1, 2*i+1)
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-012}{2}{15}
+Soit $(u_n)$ definie par $u_0 = 1$ et $u_{n+1} = \dfrac{u_n}{2u_n + 1}$ pour tout $n \in \mathbb{N}$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$.
+  \item Demontrer par recurrence que pour tout $n \in \mathbb{N}$, $0 < u_n \leq \dfrac{1}{2n+1}$.
+  \item En deduire $\lim_{n \to +\infty} u_n$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-SUITLIM-CO-020", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-020", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% u = [2.0]
+% for i in range(20):
+%     u.append(math.sqrt(u[-1]+6))
+% assert abs(u[-1] - 3) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-020}
+
+\textbf{Question 1.} $u_1 = \sqrt{8} = 2\sqrt{2}$, $u_2 = \sqrt{2\sqrt{2}+6}$, $u_3 = \sqrt{\sqrt{2\sqrt{2}+6}+6}$.
+
+\textbf{Question 2.} $\mathcal{P}(n)$ : « $0 \leq u_n \leq 3$ ». $u_0 = 2 \in [0,3]$. Si $0 \leq u_n \leq 3$, $6 \leq u_n + 6 \leq 9$, $\sqrt{6} \leq u_{n+1} \leq 3$. Vrai.
+
+\textbf{Question 3.} $u_{n+1} \geq u_n \iff \sqrt{u_n+6} \geq u_n \iff u_n + 6 \geq u_n^2$ (car tout est positif) $\iff u_n^2 - u_n - 6 \leq 0 \iff (u_n-3)(u_n+2) \leq 0$. Vrai car $0 \leq u_n \leq 3$.
+
+\textbf{Question 4.} Croissante majoree par $3$ : converge. $\ell = \sqrt{\ell+6}$, $\ell^2 = \ell+6$, $\ell = 3$ (car $\ell \geq 0$). $\boxed{\lim u_n = 3}$.
+
+\end{corrige}

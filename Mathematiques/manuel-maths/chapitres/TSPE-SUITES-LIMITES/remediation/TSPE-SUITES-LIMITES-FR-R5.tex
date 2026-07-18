@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-SUITES-LIMITES-FR-R5", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["R5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R5 : Inegalites et encadrements
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Inegalites et encadrements}
+
+\textbf{Regles :} On peut ajouter membre a membre deux inegalites de meme sens. On peut multiplier par un reel positif sans changer le sens, par un reel negatif en changeant le sens.
+
+\textbf{Encadrement :} $a \leq x \leq b$ signifie que $x$ est compris entre $a$ et $b$.
+
+\begin{exercice}{TSPE-SUITLIM-FR-R5-EX1}{1}{8}
+\begin{enumerate}
+  \item Si $2 \leq x \leq 5$, encadrer $3x + 1$.
+  \item Si $-1 \leq \cos(\theta) \leq 1$, encadrer $\dfrac{\cos(\theta)}{n}$ pour $n \geq 1$.
+  \item Si $0 < a < 1$, montrer que $0 < a^2 < a$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% # 2 <= x <= 5 => 7 <= 3x+1 <= 16
+% assert 3*2+1 == 7
+% assert 3*5+1 == 16
+% END-VERIFY

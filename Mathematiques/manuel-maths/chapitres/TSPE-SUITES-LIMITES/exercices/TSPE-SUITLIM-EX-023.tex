@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-EX-023", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = sqrt(n)
+% # u_{n+1} - u_n = sqrt(n+1) - sqrt(n) > 0
+% # not bounded: sqrt(n) >= M => n >= M^2
+% assert limit(u, n, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-023}{1}{12}
+Soit $(u_n)$ la suite definie pour tout $n \in \mathbb{N}$ par $u_n = \sqrt{n}$.
+\begin{enumerate}
+  \item Montrer que $(u_n)$ est croissante.
+  \item Soit $M > 0$ un reel quelconque. Montrer qu'il existe $N$ tel que $u_N > M$.
+  \item Conclure que $\lim_{n \to +\infty} u_n = +\infty$.
+\end{enumerate}
+\end{exercice}

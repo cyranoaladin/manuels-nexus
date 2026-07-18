@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-SUITLIM-EX-030", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 1, "competences": ["raisonner", "calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # Bernoulli: (1+0.1)^n >= 1 + 0.1n
+% # Check for n=10: 1.1^10 >= 2
+% assert 1.1**10 >= 2
+% assert 1 + 0.1*10 == 2
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-030}{1}{10}
+\begin{enumerate}
+  \item Enoncer l'inegalite de Bernoulli.
+  \item En deduire que pour tout $n \in \mathbb{N}$, $1{,}1^n \geq 1 + 0{,}1n$.
+  \item Montrer que $\lim_{n \to +\infty} 1{,}1^n = +\infty$.
+\end{enumerate}
+\end{exercice}

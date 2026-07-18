@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-SUITLIM-CO-014", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-014", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% u = [3.0]
+% for i in range(20):
+%     u.append(math.sqrt(2*u[-1]+3))
+% assert abs(u[-1] - 3) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-014}
+
+\textbf{Question 1.} $\mathcal{P}(n)$ : « $1 \leq u_n \leq 3$ ». $u_0 = 3 \in [1,3]$. Si $1 \leq u_n \leq 3$, alors $5 \leq 2u_n+3 \leq 9$, donc $\sqrt{5} \leq u_{n+1} \leq 3$, et $1 \leq u_{n+1} \leq 3$.
+
+\textbf{Question 2.} $u_{n+1}^2 - u_n^2 = 2u_n + 3 - u_n^2 = -(u_n^2 - 2u_n - 3) = -(u_n-3)(u_n+1)$. Comme $1 \leq u_n \leq 3$, on a $u_n-3 \leq 0$ et $u_n+1 > 0$, donc $u_{n+1}^2 - u_n^2 \geq 0$. Avec $u_{n+1}, u_n > 0$, $u_{n+1} \geq u_n$. En fait $u_{n+1}^2 \leq u_n^2$ pour $u_n = 3$, verifions : si $u_n = 3$, $u_{n+1} = 3$. Pour $u_n < 3$, $u_{n+1}^2 - u_n^2 > 0$, mais $u_{n+1} = \sqrt{2u_n+3} \leq \sqrt{9} = 3 = u_n$ quand $u_n = 3$. Donc $(u_n)$ est decroissante car $u_{n+1} = \sqrt{2u_n+3} \leq \sqrt{2 \times 3 + 3} = 3 = u_0$, et $u_{n+1}^2 = 2u_n+3 \leq 2 \times 3+3 = 9 = u_n^2$ quand $u_n=3$.
+
+Plus rigoureusement : $u_{n+1} \leq u_n \iff \sqrt{2u_n+3} \leq u_n \iff 2u_n+3 \leq u_n^2 \iff u_n^2-2u_n-3 \geq 0 \iff (u_n-3)(u_n+1) \geq 0$. Comme $u_n \geq 1$, cette condition equivaut a $u_n \geq 3$. Puisque $u_0 = 3$ et par recurrence $u_n \leq 3$, on a $u_n = 3$ pour tout $n$ : la suite est constante.
+
+Verifions : $u_1 = \sqrt{9} = 3$. La suite est effectivement constante egale a $3$.
+
+\textbf{Question 3.} $(u_n)$ constante, donc convergente. $\boxed{\lim u_n = 3}$.
+
+\end{corrige}

@@ -1,0 +1,24 @@
+% META: {"id": "TSPE-SUITES-LIMITES-RE-C5", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : Bernoulli, $q^n$ et exponentielle
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-RE-C5-EX1}{1}{10}
+\begin{enumerate}
+  \item Montrer que $1{,}03^n \geq 1 + 0{,}03n$ pour tout $n$.
+  \item En deduire $\lim 1{,}03^n$.
+  \item Determiner $\lim n \times 0{,}8^n$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonneg=True)
+% assert limit(Rational(103,100)**n, n, oo) == oo
+% assert limit(n * Rational(4,5)**n, n, oo) == 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-SUITLIM-RE-C5-EX1}
+\textbf{a.} Bernoulli avec $a=0{,}03$. \textbf{b.} $1+0{,}03n \to +\infty$, par comparaison $1{,}03^n \to +\infty$. \textbf{c.} $|0{,}8|<1$, $n \times q^n \to 0$ (croissance comparee).
+\end{corrige}

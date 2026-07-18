@@ -1,0 +1,105 @@
+% META: {"id": "TSPE-SUITLIM-CR-012", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+
+\section{Modelisation par des suites}
+
+% ============================================================
+% STRATE 1 — Suites auxiliaires et modeles discrets
+% ============================================================
+
+\subsection{Suites auxiliaires}
+
+\definition[1]{
+Etant donnee une suite $(u_n)$, on appelle \textbf{suite auxiliaire} toute suite $(v_n)$ construite a partir de $(u_n)$ (par translation, produit, quotient, etc.) dont l'etude est plus simple et permet de retrouver les proprietes de $(u_n)$.
+}
+
+\exemple{
+Soit $(u_n)$ la suite definie par $u_0 = 5$ et $u_{n+1} = \dfrac{1}{2}\,u_n + 3$ pour tout $n \in \mathbb{N}$.
+
+On pose $v_n = u_n - 6$. Alors :
+\[
+  v_{n+1} = u_{n+1} - 6 = \frac{1}{2}\,u_n + 3 - 6 = \frac{1}{2}\,u_n - 3 = \frac{1}{2}(u_n - 6) = \frac{1}{2}\,v_n.
+\]
+
+La suite $(v_n)$ est geometrique de raison $\dfrac{1}{2}$ et de premier terme $v_0 = u_0 - 6 = -1$.
+
+Donc $v_n = -\left(\dfrac{1}{2}\right)^n$ et $u_n = 6 - \left(\dfrac{1}{2}\right)^n$.
+
+Puisque $\left(\dfrac{1}{2}\right)^n \to 0$, on obtient $\lim_{n \to +\infty} u_n = 6$.
+}
+
+\subsection{Suites auto-referentes}
+
+\definition[2]{
+Une suite $(u_n)$ definie par $u_{n+1} = f(u_n)$ est dite \textbf{auto-referente} (ou \emph{definie par une relation de recurrence du type $u_{n+1} = f(u_n)$}).
+
+Si $(u_n)$ converge vers $\ell$ et si $f$ est continue en $\ell$, alors $\ell$ est un \textbf{point fixe} de $f$ : $f(\ell) = \ell$.
+}
+
+\propriete{
+Si la suite $(u_n)$ definie par $u_{n+1} = f(u_n)$ converge vers $\ell$ et si $f$ est continue en $\ell$, alors $\ell = f(\ell)$.
+}
+
+\exemple{
+Avec $u_{n+1} = \dfrac{1}{2}\,u_n + 3$, la fonction $f(x) = \dfrac{x}{2} + 3$ est continue. Si $(u_n)$ converge vers $\ell$, alors $\ell = \dfrac{\ell}{2} + 3$, soit $\dfrac{\ell}{2} = 3$, d'ou $\ell = 6$.
+}
+
+\subsection{Modeles discrets}
+
+\definition[3]{
+De nombreux phenomenes d'evolution se modelisent par des suites :
+\begin{itemize}
+  \item \textbf{Croissance exponentielle} : $u_{n+1} = q \, u_n$ (suite geometrique), par exemple la croissance d'une population ou d'un capital place a interets composes.
+  \item \textbf{Croissance avec freinage} : $u_{n+1} = a\,u_n + b$ avec $0 < a < 1$ (suite arithmetico-geometrique), par exemple un traitement medicamenteux avec elimination partielle.
+  \item \textbf{Modele logistique} : $u_{n+1} = r\,u_n(1 - u_n)$, par exemple une population dans un milieu a ressources limitees.
+\end{itemize}
+}
+
+\exemple{
+\textbf{Modele de medicament.} Un patient prend chaque jour un comprime apportant $100$~mg de principe actif. Le corps elimine $40\,\%$ de la quantite presente chaque jour. On note $u_n$ la quantite (en mg) juste apres la prise du jour $n$.
+
+On a $u_0 = 100$ et $u_{n+1} = 0{,}6\,u_n + 100$.
+
+En posant $v_n = u_n - 250$, on verifie que $(v_n)$ est geometrique de raison $0{,}6$ :
+\[
+  v_{n+1} = u_{n+1} - 250 = 0{,}6\,u_n + 100 - 250 = 0{,}6(u_n - 250) = 0{,}6\,v_n.
+\]
+
+Comme $|0{,}6| < 1$, on a $v_n \to 0$, donc $u_n \to 250$~mg.
+
+Le taux de principe actif se stabilise a $250$~mg a long terme.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Methode pour une suite $u_{n+1} = a\,u_n + b$ avec $a \neq 1$ :}
+\begin{enumerate}
+  \item Determiner le point fixe $\ell = \dfrac{b}{1 - a}$.
+  \item Poser $v_n = u_n - \ell$.
+  \item Verifier que $(v_n)$ est geometrique de raison $a$.
+  \item En deduire $v_n = v_0 \cdot a^n$, puis $u_n = \ell + (u_0 - \ell) \cdot a^n$.
+  \item Conclure sur la limite : si $|a| < 1$, $u_n \to \ell$.
+\end{enumerate}
+}
+
+\erreurFrequente{
+\textbf{Oublier de prouver la convergence avant de calculer la limite.}
+
+Le fait que $f(\ell) = \ell$ ne prouve pas que la suite converge. Il faut d'abord etablir la convergence (par monotonie et bornitude, ou par encadrement) puis utiliser le point fixe pour identifier la limite.
+}
+
+\erreurFrequente{
+\textbf{Appliquer la formule $\ell = \dfrac{b}{1-a}$ a une suite qui n'est pas arithmetico-geometrique.}
+
+Cette methode ne s'applique qu'aux suites de la forme $u_{n+1} = a\,u_n + b$ avec $a$ et $b$ constants.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement : Grand Oral
+% ============================================================
+
+\approfondissement{
+\textbf{Piste Grand Oral.} « Un medicament pris regulierement finit-il toujours par se stabiliser dans l'organisme ? » La reponse depend du coefficient d'elimination : si le corps elimine une fraction strictement positive a chaque periode, le modele arithmetico-geometrique garantit la convergence. On peut etudier l'impact du dosage et de la frequence sur la concentration d'equilibre.
+}

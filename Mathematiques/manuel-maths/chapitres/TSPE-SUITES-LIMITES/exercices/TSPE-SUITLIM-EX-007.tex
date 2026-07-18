@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-SUITLIM-EX-007", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # u_n = n*cos(n)/(n^2+1) -> 0 by squeeze
+% # |u_n| <= n/(n^2+1) <= 1/n
+% assert limit(n/(n**2 + 1), n, oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-007}{3}{15}
+Soit $(u_n)$ la suite definie pour tout $n \geq 1$ par $u_n = \dfrac{n\cos(n)}{n^2 + 1}$.
+\begin{enumerate}
+  \item Montrer que pour tout $n \geq 1$, $|u_n| \leq \dfrac{n}{n^2 + 1}$.
+  \item Montrer que pour tout $n \geq 1$, $\dfrac{n}{n^2 + 1} \leq \dfrac{1}{n}$.
+  \item En deduire $\lim_{n \to +\infty} u_n$ a l'aide du theoreme des gendarmes.
+\end{enumerate}
+\end{exercice}

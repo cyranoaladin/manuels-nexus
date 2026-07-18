@@ -1,0 +1,89 @@
+% META: {"id": "TSPE-SUITLIM-CR-013", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+
+\section{Suite croissante non majoree}
+
+% ============================================================
+% STRATE 1 — Theoreme et demonstration exigible
+% ============================================================
+
+\theoreme{
+Toute suite croissante non majoree diverge vers $+\infty$.
+}
+
+\demonstration{
+Soit $(u_n)$ une suite croissante non majoree. Montrons que $\lim_{n \to +\infty} u_n = +\infty$.
+
+Soit $A$ un reel quelconque. Montrons qu'il existe un rang $N$ tel que pour tout $n \geq N$, $u_n \geq A$.
+
+Puisque $(u_n)$ n'est pas majoree, le reel $A$ n'est pas un majorant de $(u_n)$. Il existe donc un entier $N$ tel que $u_N > A$.
+
+Or la suite $(u_n)$ est croissante : pour tout $n \geq N$, on a $u_n \geq u_N > A$, soit $u_n \geq A$.
+
+On a montre que pour tout reel $A$, il existe $N \in \mathbb{N}$ tel que pour tout $n \geq N$, $u_n \geq A$.
+
+Par definition, $\lim_{n \to +\infty} u_n = +\infty$.
+}
+
+\margeAppui{
+Ce theoreme admet un enonce analogue : toute suite \emph{decroissante} non minoree diverge vers $-\infty$.
+}
+
+\subsection{Theoreme de la suite monotone bornee}
+
+\theoreme{
+Toute suite croissante et majoree est convergente.
+
+Toute suite decroissante et minoree est convergente.
+}
+
+\margeAppui{
+Ce theoreme (admis) repose sur la propriete de la borne superieure des reels. Il ne donne pas la valeur de la limite, mais garantit son existence.
+}
+
+\exemple{
+Soit $(u_n)$ definie par $u_0 = 0$ et $u_{n+1} = \sqrt{2 + u_n}$.
+
+\textbf{Montrons par recurrence que $0 \leq u_n \leq 2$ pour tout $n$.}
+
+Initialisation : $u_0 = 0 \in [0, 2]$.
+
+Heredite : supposons $0 \leq u_n \leq 2$. Alors $2 \leq 2 + u_n \leq 4$, donc $\sqrt{2} \leq u_{n+1} = \sqrt{2 + u_n} \leq 2$. En particulier $0 \leq u_{n+1} \leq 2$.
+
+\textbf{Montrons que $(u_n)$ est croissante.}
+
+On a $u_{n+1} - u_n = \sqrt{2 + u_n} - u_n$. Posons $g(x) = \sqrt{2 + x} - x$ sur $[0, 2]$.
+
+On a $g'(x) = \dfrac{1}{2\sqrt{2 + x}} - 1 < 0$ pour $x \geq 0$ (car $2\sqrt{2+x} \geq 2\sqrt{2} > 1$). Donc $g$ est decroissante sur $[0,2]$.
+
+Or $g(2) = \sqrt{4} - 2 = 0$, donc $g(x) \geq 0$ pour $x \in [0, 2]$, ce qui donne $u_{n+1} \geq u_n$.
+
+\textbf{Conclusion.} La suite $(u_n)$ est croissante et majoree par $2$, donc elle converge.
+
+La limite $\ell$ verifie $\ell = \sqrt{2 + \ell}$, soit $\ell^2 = 2 + \ell$, d'ou $\ell^2 - \ell - 2 = 0$, c'est-a-dire $(\ell - 2)(\ell + 1) = 0$. Comme $\ell \geq 0$, on obtient $\ell = 2$.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Pour montrer qu'une suite diverge vers $+\infty$ :}
+\begin{enumerate}
+  \item Montrer qu'elle est croissante (recurrence ou $u_{n+1} - u_n \geq 0$).
+  \item Montrer qu'elle n'est pas majoree (trouver une minoration qui tend vers $+\infty$).
+  \item Conclure par le theoreme.
+\end{enumerate}
+
+\textbf{Pour montrer qu'une suite converge :}
+\begin{enumerate}
+  \item Montrer qu'elle est monotone.
+  \item Montrer qu'elle est bornee dans le bon sens (majoree si croissante, minoree si decroissante).
+  \item Conclure par le theoreme de la suite monotone bornee.
+\end{enumerate}
+}
+
+\erreurFrequente{
+\textbf{Confondre « non majoree » et « strictement croissante ».}
+
+La suite $u_n = (-1)^n \cdot n$ n'est pas majoree, mais elle n'est pas croissante. Le theoreme ne s'applique que si la suite est \emph{a la fois} croissante \emph{et} non majoree.
+}

@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-SUITLIM-EX-024", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["raisonner", "calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # S_n = sum_{k=1}^{n} 1/k (harmonic), croissante non majoree
+% # S_n >= 1 + n/2 * 1/n = ... use grouping argument
+% # Just check a few values
+% from fractions import Fraction
+% S = [Fraction(0)]
+% for k in range(1, 20):
+%     S.append(S[-1] + Fraction(1, k))
+% # S is increasing
+% for i in range(1, len(S)):
+%     assert S[i] > S[i-1]
+% # S_10 > 2
+% assert S[10] > 2
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-024}{1}{12}
+On considere la suite des sommes partielles harmoniques $S_n = \displaystyle\sum_{k=1}^{n} \dfrac{1}{k}$.
+\begin{enumerate}
+  \item Calculer $S_1$, $S_2$, $S_3$ et $S_4$.
+  \item Montrer que $(S_n)$ est croissante.
+  \item Montrer que $S_{2^p} \geq 1 + \dfrac{p}{2}$ pour tout $p \geq 1$ (par groupement de termes).
+  \item En deduire que $(S_n)$ diverge vers $+\infty$.
+\end{enumerate}
+\end{exercice}

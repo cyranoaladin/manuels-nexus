@@ -1,0 +1,33 @@
+% META: {"id": "TSPE-SUITLIM-EX-015", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["modeliser", "calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # u_{n+1} = 0.8*u_n + 50, u_0 = 100
+% # point fixe: l = 0.8*l + 50 => l = 250
+% # v_n = u_n - 250, geometrique raison 0.8
+% # v_0 = -150, v_n = -150*0.8^n, u_n = 250 - 150*0.8^n
+% u0 = 100
+% a = Rational(4, 5)
+% b = 50
+% l = Rational(250)
+% assert l == b / (1 - a)
+% u1 = a * u0 + b
+% assert u1 == 130
+% u2 = a * u1 + b
+% assert u2 == 154
+% # u_n = 250 - 150*(4/5)^n
+% u_expr = 250 - 150 * a**n
+% assert u_expr.subs(n, 0) == 100
+% assert u_expr.subs(n, 1) == 130
+% assert u_expr.subs(n, 2) == 154
+% assert limit(u_expr, n, oo) == 250
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-015}{1}{12}
+Un reservoir contient $100$~litres d'eau. Chaque jour, $20\,\%$ de l'eau s'evapore et on ajoute $50$~litres. On note $u_n$ le volume d'eau (en litres) au debut du jour $n$.
+\begin{enumerate}
+  \item Justifier que $u_0 = 100$ et que $u_{n+1} = 0{,}8\,u_n + 50$.
+  \item Calculer $u_1$ et $u_2$.
+  \item Determiner le reel $\ell$ tel que $v_n = u_n - \ell$ soit geometrique.
+  \item Exprimer $u_n$ en fonction de $n$ et determiner $\lim_{n \to +\infty} u_n$.
+\end{enumerate}
+\end{exercice}

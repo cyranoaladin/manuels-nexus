@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-SUITLIM-EX-019", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["modeliser", "raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # Temperature: u_0 = 90, u_{n+1} = 0.85*u_n + 3 (refroidissement + chauffage)
+% # l = 3/(1-0.85) = 20
+% a = Rational(17, 20)
+% b = 3
+% l = Rational(20)
+% assert l == b/(1-a)
+% u_expr = 20 + 70*a**n
+% assert u_expr.subs(n, 0) == 90
+% assert limit(u_expr, n, oo) == 20
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-019}{2}{15}
+La temperature d'un four apres extinction est modelisee par $u_0 = 90$ et $u_{n+1} = 0{,}85\,u_n + 3$ (en degres Celsius, mesure toutes les $10$ minutes). La constante $3$ modelise un leger apport de chaleur residuel.
+\begin{enumerate}
+  \item Determiner la temperature d'equilibre.
+  \item Exprimer $u_n$ en fonction de $n$.
+  \item La suite est-elle monotone ? Justifier.
+  \item A partir de quel rang la temperature est-elle inferieure a $25\,^\circ$C ?
+\end{enumerate}
+\end{exercice}

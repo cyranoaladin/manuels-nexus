@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-SUITLIM-CO-003", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-003", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 3*n**2 - 5*n + 2
+% assert u.subs(n, 0) == 2
+% assert u.subs(n, 1) == 0
+% assert u.subs(n, 2) == 4
+% assert limit(u, n, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-003}
+
+\textbf{Question 1.} $u_0 = 2$, $u_1 = 0$, $u_2 = 4$.
+
+\commentaireMarge{Minorer $u_n$ par $n^2$ pour $n \geq 2$.}
+
+\textbf{Question 2.} Pour $n \geq 2$ : $u_n - n^2 = 2n^2 - 5n + 2 = (2n - 1)(n - 2) \geq 0$. Donc $u_n \geq n^2$.
+
+\textbf{Question 3.} Or $\lim n^2 = +\infty$. Par comparaison, $\boxed{\lim_{n \to +\infty} u_n = +\infty}$.
+
+\end{corrige}

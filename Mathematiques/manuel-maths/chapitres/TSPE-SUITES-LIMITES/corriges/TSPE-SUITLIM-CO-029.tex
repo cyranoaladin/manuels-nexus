@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-CO-029", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-029", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% assert limit(Rational(3,4)**n, n, oo) == 0
+% assert limit(Rational(5,3)**n, n, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-029}
+
+\textbf{a.} $|3/4|<1$, donc $\lim (3/4)^n = \boxed{0}$.
+
+\textbf{b.} $5/3>1$, donc $\lim (5/3)^n = \boxed{+\infty}$.
+
+\textbf{c.} $|-1/2|=1/2<1$, donc $\lim (-1/2)^n = \boxed{0}$.
+
+\textbf{d.} $(-1)^n$ alterne entre $1$ et $-1$ : \boxed{pas de limite}.
+
+\end{corrige}

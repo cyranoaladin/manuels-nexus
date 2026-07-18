@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-SUITLIM-EX-036", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C6"], "capacites_codes": ["C6"], "methodes": ["M4"], "parcours": 1, "competences": ["raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = n**2 + 3*n
+% assert limit(u, n, oo) == oo
+% # u_n >= n^2
+% assert simplify(u - n**2) == 3*n
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-036}{1}{8}
+Soit $(u_n)$ la suite definie par $u_n = n^2 + 3n$.
+\begin{enumerate}
+  \item Montrer que pour tout $n \in \mathbb{N}$, $u_n \geq n^2$.
+  \item En deduire que $\lim_{n \to +\infty} u_n = +\infty$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,30 @@
+% META: {"id": "TSPE-SUITES-LIMITES-FR-R4", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["R4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R4 : Derivation et etude de variations
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Derivation et variations}
+
+\textbf{Si $f'(x) > 0$} sur un intervalle, $f$ est strictement croissante.
+
+\textbf{Si $f'(x) < 0$} sur un intervalle, $f$ est strictement decroissante.
+
+\textbf{Derivees usuelles :} $(x^n)' = nx^{n-1}$, $(\mathrm{e}^x)' = \mathrm{e}^x$, $(uv)' = u'v + uv'$.
+
+\begin{exercice}{TSPE-SUITLIM-FR-R4-EX1}{1}{10}
+Calculer la derivee et etudier les variations.
+\begin{enumerate}
+  \item $f(x) = x^2 - 6x + 5$
+  \item $g(x) = x\,\mathrm{e}^x$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2 - 6*x + 5
+% assert diff(f, x) == 2*x - 6
+% g = x*exp(x)
+% assert simplify(diff(g, x) - (1+x)*exp(x)) == 0
+% END-VERIFY

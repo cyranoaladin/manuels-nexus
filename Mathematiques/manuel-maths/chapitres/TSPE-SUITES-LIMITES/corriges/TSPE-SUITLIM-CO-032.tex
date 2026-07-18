@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-SUITLIM-CO-032", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-032", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% assert limit((Rational(1,2))**n + (Rational(3,4))**n, n, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-032}
+
+\textbf{Q1.} $u_n = \dfrac{2^n}{4^n} + \dfrac{3^n}{4^n} = (1/2)^n + (3/4)^n$.
+
+\textbf{Q2.} $|1/2|<1$ et $|3/4|<1$, donc $(1/2)^n \to 0$ et $(3/4)^n \to 0$. $\boxed{\lim u_n = 0}$.
+
+\textbf{Q3.} $u_{n+1}/u_n < 1$ pour $n$ assez grand (les deux termes decroissent). $(u_n)$ est decroissante a partir d'un certain rang.
+
+\end{corrige}

@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-SUITLIM-EX-033", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # u_n = n*0.9^n -> 0
+% u = n * Rational(9,10)**n
+% assert limit(u, n, oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-033}{2}{15}
+Soit $(u_n)$ la suite definie par $u_n = n \times 0{,}9^n$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_5$ et $u_{10}$ (arrondir a $10^{-2}$).
+  \item On pose $q = 0{,}9$ et on ecrit $\dfrac{1}{q} = \dfrac{10}{9} = 1 + \dfrac{1}{9}$. En utilisant l'inegalite de Bernoulli, montrer que $\left(\dfrac{1}{q}\right)^n \geq 1 + \dfrac{n}{9}$.
+  \item En deduire que $0 \leq u_n \leq \dfrac{9n}{9 + n}$ et conclure sur $\lim u_n$.
+\end{enumerate}
+\end{exercice}

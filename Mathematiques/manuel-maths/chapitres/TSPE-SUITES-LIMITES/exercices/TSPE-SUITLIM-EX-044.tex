@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-SUITLIM-EX-044", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C7"], "capacites_codes": ["C7"], "methodes": ["M5"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x) - x, x, oo) == oo
+% assert limit((exp(x) + 1)/(exp(x) - 1), x, oo) == 1
+% assert limit(exp(-x) + 3, x, oo) == 3
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-044}{1}{10}
+Determiner les limites suivantes.
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} (\mathrm{e}^x - x)$
+  \item $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x + 1}{\mathrm{e}^x - 1}$
+  \item $\lim_{x \to +\infty} (\mathrm{e}^{-x} + 3)$
+\end{enumerate}
+\end{exercice}

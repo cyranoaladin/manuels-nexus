@@ -1,0 +1,32 @@
+% META: {"id": "TSPE-SUITES-LIMITES-FR-R2", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["R2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R2 : Sens de variation d'une suite
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Sens de variation d'une suite}
+
+Pour montrer qu'une suite $(u_n)$ est \textbf{croissante}, on peut :
+\begin{itemize}
+  \item Montrer $u_{n+1} - u_n \geq 0$ pour tout $n$.
+  \item Ou montrer $u_{n+1}/u_n \geq 1$ (si $u_n > 0$).
+  \item Ou etudier $f$ telle que $u_n = f(n)$ et montrer que $f$ est croissante.
+\end{itemize}
+
+\begin{exercice}{TSPE-SUITLIM-FR-R2-EX1}{1}{8}
+Etudier le sens de variation de chaque suite.
+\begin{enumerate}
+  \item $u_n = 3n + 1$
+  \item $v_n = n^2 - 4n$
+  \item $w_n = \dfrac{n}{n+1}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonneg=True)
+% u = 3*n + 1
+% assert simplify(u.subs(n,n+1) - u) == 3
+% v = n**2 - 4*n
+% assert simplify(v.subs(n,n+1) - v) == 2*n - 3
+% END-VERIFY

@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-SUITLIM-CO-011", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-011", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% for n in range(4, 15):
+%     assert math.factorial(n) >= 2**n
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-011}
+
+\textbf{Question 1.} $3! = 6 < 8 = 2^3$. $4! = 24 \geq 16 = 2^4$.
+
+\textbf{Question 2.} $\mathcal{P}(n)$ : « $n! \geq 2^n$ ».
+
+\textit{Init.} $4! = 24 \geq 16 = 2^4$. $\mathcal{P}(4)$ vraie.
+
+\textit{Heredite.} Supposons $n! \geq 2^n$ pour $n \geq 4$. $(n+1)! = (n+1) \times n! \geq (n+1) \times 2^n \geq 2 \times 2^n = 2^{n+1}$ (car $n+1 \geq 5 > 2$).
+
+\textit{Conclusion.} $n! \geq 2^n$ pour tout $n \geq 4$.
+
+\textbf{Question 3.} $2^n \to +\infty$ et $n! \geq 2^n$, donc par comparaison $\boxed{\lim n! = +\infty}$.
+
+\end{corrige}

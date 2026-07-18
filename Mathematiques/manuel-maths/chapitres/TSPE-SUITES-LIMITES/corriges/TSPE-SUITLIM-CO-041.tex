@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-SUITLIM-CO-041", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-041", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% from fractions import Fraction
+% S = Fraction(0)
+% for k in range(1, 100):
+%     S += Fraction(1, k*k)
+% assert S < 2
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-041}
+
+\textbf{Q1.} $S_{n+1} = S_n + 1/(n+1)^2 > S_n$. Croissante.
+
+\textbf{Q2.} $\dfrac{1}{k^2} \leq \dfrac{1}{k(k-1)}$ car $k(k-1) \leq k^2$. Et $\dfrac{1}{k(k-1)} = \dfrac{1}{k-1}-\dfrac{1}{k}$ (decomposition en elements simples).
+
+\textbf{Q3.} $S_n = 1 + \sum_{k=2}^n \dfrac{1}{k^2} \leq 1 + \sum_{k=2}^n \left(\dfrac{1}{k-1}-\dfrac{1}{k}\right) = 1 + 1 - \dfrac{1}{n} = 2-\dfrac{1}{n}$.
+
+\textbf{Q4.} Croissante et majoree par $2$ : $\boxed{(S_n) \text{ converge}}$.
+
+\end{corrige}

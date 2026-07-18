@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-CO-026", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-026", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = n + Rational(1,2)*(-1)**n
+% assert float(u.subs(n, 10000)) > 9000
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-026}
+
+\textbf{Q1.} $u_0=-1/2$, $u_1=3/2$, $u_2=3/2$, $u_3=5/2$. Non monotone ($u_0<u_1$ mais $u_1=u_2$).
+
+\textbf{Q2.} $(-1)^n \geq -1$, donc $u_n = n+(-1)^n/2 \geq n-1/2$.
+
+\textbf{Q3.} $n-1/2 \to +\infty$. Par comparaison, $\boxed{\lim u_n = +\infty}$.
+
+\textbf{Q4.} Non, le theoreme exige la croissance. Ici on utilise directement la comparaison.
+
+\end{corrige}

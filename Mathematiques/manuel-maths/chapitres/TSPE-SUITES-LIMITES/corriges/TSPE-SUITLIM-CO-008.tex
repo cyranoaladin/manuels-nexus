@@ -1,0 +1,24 @@
+% META: {"id": "TSPE-SUITLIM-CO-008", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-008", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% assert 5**0 >= 4*0 + 1
+% for k in range(10):
+%     assert 5**k >= 4*k + 1
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-008}
+
+\commentaireMarge{Recurrence classique sur une inegalite.}
+
+Soit $\mathcal{P}(n)$ : « $5^n \geq 4n + 1$ ».
+
+\textbf{Initialisation.} $5^0 = 1$ et $4 \times 0 + 1 = 1$. On a $1 \geq 1$, donc $\mathcal{P}(0)$ est vraie.
+
+\textbf{Heredite.} Soit $n \geq 0$ fixe. Supposons $5^n \geq 4n+1$.
+
+$5^{n+1} = 5 \times 5^n \geq 5(4n+1) = 20n + 5$.
+
+Or $20n + 5 \geq 4(n+1) + 1 = 4n + 5$ (car $16n \geq 0$). Donc $5^{n+1} \geq 4(n+1)+1$.
+
+\textbf{Conclusion.} Par recurrence, $\boxed{5^n \geq 4n+1}$ pour tout $n \in \mathbb{N}$.
+
+\end{corrige}

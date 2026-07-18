@@ -1,0 +1,189 @@
+% META: {"id": "TSPE-SUITES-LIMITES-QCM", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5","C6","C7"], "status": "generated"}
+
+\section*{QCM d'auto-evaluation — Suites : limites et convergence}
+
+\begin{center}
+\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\end{center}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C1 — Convergence et divergence}
+% ------------------------------------------------------------
+
+\begin{enumerate}
+
+\item \textbf{[Q1]} Soit $(u_n)$ definie par $u_n = \dfrac{5n - 1}{2n + 3}$. Quelle est $\lim_{n \to +\infty} u_n$ ?
+  \begin{enumerate}[label=\Alph*.]
+    \item $\dfrac{5}{3}$
+    \item $\dfrac{5}{2}$
+    \item $+\infty$
+    \item $0$
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q2]} La suite $u_n = (-1)^n + \dfrac{1}{n}$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item convergente vers $0$
+    \item convergente vers $1$
+    \item divergente vers $+\infty$
+    \item divergente sans limite
+  \end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C2 — Raisonnement par recurrence}
+% ------------------------------------------------------------
+
+\item \textbf{[Q3]} Dans une preuve par recurrence, l'etape d'heredite consiste a :
+  \begin{enumerate}[label=\Alph*.]
+    \item Verifier que la propriete est vraie pour $n = 0$.
+    \item Supposer $\mathcal{P}(n)$ vraie et montrer $\mathcal{P}(n+1)$.
+    \item Montrer que $\mathcal{P}(n)$ est vraie pour tout $n$.
+    \item Remplacer $n$ par $n+1$ dans la formule.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q4]} Pour demontrer par recurrence que $2^n > n$ pour tout $n \geq 1$, quelle inegalite faut-il verifier dans l'heredite ?
+  \begin{enumerate}[label=\Alph*.]
+    \item $2^{n+1} > n + 1$ en partant de $2^n > n$.
+    \item $2^n > n$ directement.
+    \item $2^{n+1} = 2^n + 2^n > n + n = 2n$.
+    \item A et C sont correctes.
+  \end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C3 — Modelisation}
+% ------------------------------------------------------------
+
+\item \textbf{[Q5]} La suite definie par $u_0 = 100$ et $u_{n+1} = 0{,}9\,u_n + 20$ converge vers :
+  \begin{enumerate}[label=\Alph*.]
+    \item $180$
+    \item $200$
+    \item $220$
+    \item $0$
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q6]} Pour etudier $u_{n+1} = 0{,}7\,u_n + 9$, on pose $v_n = u_n - \ell$. La raison de la suite geometrique $(v_n)$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $9$
+    \item $0{,}7$
+    \item $30$
+    \item $0{,}3$
+  \end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C4 — Suite croissante non majoree}
+% ------------------------------------------------------------
+
+\item \textbf{[Q7]} Parmi les assertions suivantes, laquelle est vraie ?
+  \begin{enumerate}[label=\Alph*.]
+    \item Toute suite croissante diverge vers $+\infty$.
+    \item Toute suite croissante et majoree converge.
+    \item Toute suite majoree converge.
+    \item Toute suite convergente est croissante.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q8]} Soit $(u_n)$ croissante. Si on montre que $u_n \geq n$ pour tout $n$, on peut conclure que :
+  \begin{enumerate}[label=\Alph*.]
+    \item $(u_n)$ converge vers $1$.
+    \item $(u_n)$ est bornee.
+    \item $(u_n)$ diverge vers $+\infty$.
+    \item $(u_n)$ est decroissante.
+  \end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C5 — Bernoulli et $q^n$}
+% ------------------------------------------------------------
+
+\item \textbf{[Q9]} L'inegalite de Bernoulli affirme que pour $a \geq -1$ et $n \in \mathbb{N}$ :
+  \begin{enumerate}[label=\Alph*.]
+    \item $(1+a)^n \leq 1 + na$
+    \item $(1+a)^n \geq 1 + na$
+    \item $(1+a)^n = 1 + na$
+    \item $(1+a)^n \geq na$
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q10]} $\lim_{n \to +\infty} 0{,}95^n = $
+  \begin{enumerate}[label=\Alph*.]
+    \item $+\infty$
+    \item $0{,}95$
+    \item $0$
+    \item pas de limite
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q11]} $\lim_{n \to +\infty} 1{,}02^n = $
+  \begin{enumerate}[label=\Alph*.]
+    \item $0$
+    \item $1$
+    \item $1{,}02$
+    \item $+\infty$
+  \end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C6 — Comparaison}
+% ------------------------------------------------------------
+
+\item \textbf{[Q12]} Si $u_n \leq v_n$ pour tout $n$ et $\lim u_n = +\infty$, alors :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\lim v_n = +\infty$
+    \item $\lim v_n = 0$
+    \item $(v_n)$ converge
+    \item On ne peut rien conclure
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q13]} Le theoreme des gendarmes s'applique lorsque :
+  \begin{enumerate}[label=\Alph*.]
+    \item Les deux suites encadrantes tendent vers la meme limite.
+    \item Les deux suites encadrantes tendent vers des limites differentes.
+    \item Une seule des suites encadrantes tend vers $\ell$.
+    \item Les suites encadrantes divergent.
+  \end{enumerate}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C7 — Limites de l'exponentielle}
+% ------------------------------------------------------------
+
+\item \textbf{[Q14]} $\lim_{x \to -\infty} \mathrm{e}^x = $
+  \begin{enumerate}[label=\Alph*.]
+    \item $-\infty$
+    \item $0$
+    \item $1$
+    \item $+\infty$
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q15]} $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^2} = $
+  \begin{enumerate}[label=\Alph*.]
+    \item $0$
+    \item $1$
+    \item $+\infty$
+    \item forme indeterminee sans conclusion
+  \end{enumerate}
+
+\end{enumerate}

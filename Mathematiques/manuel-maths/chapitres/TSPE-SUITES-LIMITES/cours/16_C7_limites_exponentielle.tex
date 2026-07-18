@@ -1,0 +1,108 @@
+% META: {"id": "TSPE-SUITLIM-CR-016", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+
+\section{Limites de la fonction exponentielle}
+
+% ============================================================
+% STRATE 1 — Limites et demonstrations exigibles
+% ============================================================
+
+\subsection{Limite en $+\infty$}
+
+\theoreme{
+$\displaystyle\lim_{x \to +\infty} \mathrm{e}^x = +\infty$.
+}
+
+\demonstration{
+Pour tout $x \geq 0$, la derivee de $\mathrm{e}^x$ vaut $\mathrm{e}^x > 0$, donc la fonction exponentielle est strictement croissante sur $\mathbb{R}$.
+
+Pour tout $n \in \mathbb{N}$, posons $u_n = \mathrm{e}^n$. On a $u_{n+1} = \mathrm{e}^{n+1} = \mathrm{e} \cdot \mathrm{e}^n = \mathrm{e} \cdot u_n$.
+
+La suite $(u_n)$ est geometrique de raison $\mathrm{e} > 1$, donc $\lim_{n \to +\infty} u_n = +\infty$ (d'apres le cours sur la limite de $q^n$ avec $q > 1$).
+
+Pour tout reel $x \geq 0$, posons $n = \lfloor x \rfloor$ (partie entiere de $x$). On a $n \leq x$, donc par croissance de l'exponentielle :
+\[
+  \mathrm{e}^x \geq \mathrm{e}^n = u_n.
+\]
+
+Lorsque $x \to +\infty$, on a $n = \lfloor x \rfloor \to +\infty$, donc $u_n \to +\infty$. Par comparaison, $\mathrm{e}^x \to +\infty$.
+}
+
+\subsection{Limite en $-\infty$}
+
+\theoreme{
+$\displaystyle\lim_{x \to -\infty} \mathrm{e}^x = 0$.
+}
+
+\demonstration{
+On effectue le changement de variable $X = -x$. Lorsque $x \to -\infty$, on a $X \to +\infty$.
+
+Or $\mathrm{e}^x = \mathrm{e}^{-X} = \dfrac{1}{\mathrm{e}^X}$.
+
+Puisque $\lim_{X \to +\infty} \mathrm{e}^X = +\infty$, on obtient :
+\[
+  \lim_{x \to -\infty} \mathrm{e}^x = \lim_{X \to +\infty} \frac{1}{\mathrm{e}^X} = 0.
+\]
+
+De plus, $\mathrm{e}^x > 0$ pour tout $x$, donc la limite est $0^+$.
+}
+
+\subsection{Croissances comparees}
+
+\theoreme{
+$\displaystyle\lim_{x \to +\infty} \frac{\mathrm{e}^x}{x} = +\infty$.
+
+Autrement dit, l'exponentielle croit plus vite que toute fonction affine en $+\infty$.
+}
+
+\demonstration{
+Pour tout $x \geq 0$, on a $\mathrm{e}^x \geq 1 + x$ (consequence de la convexite de l'exponentielle, ou de l'inegalite $\mathrm{e}^x \geq 1 + x$ demontree par etude de la fonction $g(x) = \mathrm{e}^x - 1 - x$).
+
+Donc pour $x \geq 0$ :
+\[
+  \mathrm{e}^x = \mathrm{e}^{x/2} \cdot \mathrm{e}^{x/2} \geq \left(1 + \frac{x}{2}\right) \cdot \mathrm{e}^{x/2} \geq \left(1 + \frac{x}{2}\right)^2 \geq \frac{x^2}{4}.
+\]
+
+On en deduit :
+\[
+  \frac{\mathrm{e}^x}{x} \geq \frac{x}{4} \quad \text{pour } x > 0.
+\]
+
+Or $\lim_{x \to +\infty} \dfrac{x}{4} = +\infty$, donc par comparaison $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x} = +\infty$.
+}
+
+\propriete{
+$\displaystyle\lim_{x \to -\infty} x\,\mathrm{e}^x = 0$.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Resume des limites fondamentales :}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Limite} & \textbf{Valeur} \\
+\hline
+$\lim_{x \to +\infty} \mathrm{e}^x$ & $+\infty$ \\
+$\lim_{x \to -\infty} \mathrm{e}^x$ & $0$ \\
+$\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x}$ & $+\infty$ \\
+$\lim_{x \to -\infty} x\,\mathrm{e}^x$ & $0$ \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\erreurFrequente{
+\textbf{Ecrire $\mathrm{e}^{-\infty} = -\infty$.}
+
+La fonction exponentielle est toujours strictement positive. En $-\infty$, $\mathrm{e}^x$ tend vers $0$ (et non vers $-\infty$). L'image de l'exponentielle est $]0, +\infty[$.
+}
+
+\erreurFrequente{
+\textbf{Oublier la croissance comparee dans une forme indeterminee.}
+
+La limite de $\dfrac{\mathrm{e}^x}{x^2}$ en $+\infty$ est $+\infty$ (et non une forme indeterminee « $\dfrac{\infty}{\infty}$ » sans conclusion). L'exponentielle « l'emporte » sur tout polynome.
+}

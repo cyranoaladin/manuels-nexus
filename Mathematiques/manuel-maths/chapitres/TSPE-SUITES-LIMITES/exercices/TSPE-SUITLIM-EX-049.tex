@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-EX-049", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C7"], "capacites_codes": ["C7"], "methodes": ["M5"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% n = symbols('n', integer=True, nonnegative=True)
+% # lim (1 + 1/n)^n = e
+% assert limit((1 + 1/n)**n, n, oo) == E
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-049}{3}{25}
+On pose $v_n = \left(1 + \dfrac{1}{n}\right)^n$ pour $n \geq 1$.
+\begin{enumerate}
+  \item Calculer $v_1$, $v_2$, $v_5$ et $v_{10}$ (arrondir a $10^{-4}$).
+  \item En utilisant l'inegalite de Bernoulli, montrer que $v_n \geq 2$ pour tout $n \geq 1$.
+  \item Montrer que pour tout $n \geq 1$, $v_n \leq 3$ (on pourra utiliser $\left(1 + \dfrac{1}{n}\right)^n \leq \mathrm{e}$, admis).
+  \item Conjecturer la limite de $(v_n)$.
+\end{enumerate}
+(On admet que $\lim_{n \to +\infty} v_n = \mathrm{e}$.)
+\end{exercice}

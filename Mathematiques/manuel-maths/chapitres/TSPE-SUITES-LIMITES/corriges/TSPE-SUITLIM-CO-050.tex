@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-SUITLIM-CO-050", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-050", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x*exp(-x)
+% assert f.subs(x, 1) == exp(-1)
+% assert limit(f, x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-050}
+
+\textbf{Q1.} $\lim_{+\infty} x\mathrm{e}^{-x} = 0$ (croissance comparee). $\lim_{-\infty}$ : $x \to -\infty$, $\mathrm{e}^{-x} \to +\infty$, produit $\to -\infty$.
+
+\textbf{Q2.} $f'(x) = \mathrm{e}^{-x} - x\mathrm{e}^{-x} = (1-x)\mathrm{e}^{-x}$. $f'(x)=0 \iff x=1$. Croissante sur $]-\infty,1]$, decroissante sur $[1,+\infty[$.
+
+\textbf{Q3.} Maximum en $x=1$ : $f(1) = \mathrm{e}^{-1} = 1/\mathrm{e}$.
+
+\textbf{Q4.} $f(n) \leq f(1) = 1/\mathrm{e}$ pour $n \geq 1$, soit $n\mathrm{e}^{-n} \leq 1/\mathrm{e}$, d'ou $\boxed{n \leq \mathrm{e}^{n-1}}$, i.e., $\mathrm{e}^n \geq n\mathrm{e}$.
+
+\end{corrige}

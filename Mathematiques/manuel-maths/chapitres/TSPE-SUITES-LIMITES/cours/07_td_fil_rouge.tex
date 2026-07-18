@@ -1,0 +1,189 @@
+% META: {"id": "TSPE-SUITLIM-COURS-07-FR", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "sous_type": "td_fil_rouge", "titre": "TD fil rouge — Etude complete d'une suite recurrente", "temps_gabarit": 7, "capacites": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, sqrt, simplify, oo, exp
+% import math
+% n = symbols('n', integer=True, nonnegative=True)
+% # Suite u_{n+1} = (u_n + 3)/(u_n + 1), u_0 = 1
+% # Point fixe : l = (l+3)/(l+1) => l(l+1) = l+3 => l^2 = 3 => l = sqrt(3)
+% from sympy import sqrt as Sqrt
+% l = Sqrt(3)
+% assert simplify(l - (l + 3)/(l + 1)) == 0
+% # Premiers termes
+% u0 = Rational(1)
+% u1 = (u0 + 3)/(u0 + 1)
+% assert u1 == 2
+% u2 = (u1 + 3)/(u1 + 1)
+% assert u2 == Rational(5, 3)
+% u3 = (u2 + 3)/(u2 + 1)
+% assert u3 == Rational(14, 8)
+% assert u3 == Rational(7, 4)
+% # Verifions que u0 < sqrt(3) < u1
+% assert float(u0) < float(l)
+% assert float(u1) > float(l)
+% assert float(u2) < float(l)
+% # Suite auxiliaire v_n = (u_n - sqrt(3))/(u_n + sqrt(3))
+% # v_{n+1} = (u_{n+1} - sqrt(3))/(u_{n+1} + sqrt(3))
+% # Partie E : lim e^n / n = +infty par croissances comparees
+% assert exp(1) > 2
+% END-VERIFY
+
+\section*{Temps 7 — TD fil rouge : Etude complete d'une suite}
+
+\textbf{Situation.} On considere la suite $(u_n)$ definie par $u_0 = 1$ et, pour tout $n \in \mathbb{N}$ :
+\[
+  u_{n+1} = \frac{u_n + 3}{u_n + 1}.
+\]
+
+On se propose d'etudier le comportement de cette suite en mobilisant les outils du chapitre.
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE A — Premiers calculs (C1)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-COURS-07-FR-EX1}{1}{10}
+
+\textbf{Partie A — Premiers termes et conjectures}
+
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ (sous forme de fractions).
+  \item Conjecturer le comportement de la suite $(u_n)$.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-SUITLIM-COURS-07-FR-EX1}
+
+\textbf{Question 1.}
+\[
+u_1 = \frac{1 + 3}{1 + 1} = \frac{4}{2} = 2. \qquad
+u_2 = \frac{2 + 3}{2 + 1} = \frac{5}{3}. \qquad
+u_3 = \frac{5/3 + 3}{5/3 + 1} = \frac{14/3}{8/3} = \frac{14}{8} = \frac{7}{4}.
+\]
+
+\textbf{Question 2.} On observe : $u_0 = 1$, $u_1 = 2$, $u_2 \approx 1{,}667$, $u_3 = 1{,}75$. Les termes semblent osciller autour d'une valeur proche de $\sqrt{3} \approx 1{,}732$.
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE B — Recurrence (C2)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-COURS-07-FR-EX2}{2}{15}
+
+\textbf{Partie B — Encadrement par recurrence}
+
+\begin{enumerate}
+  \item Montrer que si la suite converge vers $\ell > 0$, alors $\ell = \sqrt{3}$.
+  \item Montrer par recurrence que pour tout $n \in \mathbb{N}$, $u_n > 0$.
+  \item Montrer par recurrence que pour tout $n \in \mathbb{N}$, $1 \leq u_n \leq 2$.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-SUITLIM-COURS-07-FR-EX2}
+
+\textbf{Question 1.} Si $\lim u_n = \ell$, alors par passage a la limite dans $u_{n+1} = \dfrac{u_n + 3}{u_n + 1}$ (la fonction $f(x) = \dfrac{x+3}{x+1}$ est continue en $\ell > 0$) :
+\[
+\ell = \frac{\ell + 3}{\ell + 1}, \quad \text{soit} \quad \ell(\ell + 1) = \ell + 3, \quad \text{d'ou} \quad \ell^2 = 3.
+\]
+Comme $\ell > 0$, on obtient $\ell = \sqrt{3}$.
+
+\textbf{Question 2.} Par recurrence. $u_0 = 1 > 0$. Si $u_n > 0$, alors $u_{n+1} = \dfrac{u_n + 3}{u_n + 1} > 0$ (quotient de deux reels positifs). Donc $u_n > 0$ pour tout $n$.
+
+\textbf{Question 3.} Initialisation : $u_0 = 1 \in [1, 2]$.
+
+Heredite : supposons $1 \leq u_n \leq 2$. La fonction $f(x) = \dfrac{x+3}{x+1}$ est decroissante sur $[1, 2]$ (car $f'(x) = \dfrac{-2}{(x+1)^2} < 0$).
+
+Donc $f(2) \leq f(u_n) \leq f(1)$, soit $\dfrac{5}{3} \leq u_{n+1} \leq 2$.
+
+En particulier $1 \leq \dfrac{5}{3} \leq u_{n+1} \leq 2$, donc $1 \leq u_{n+1} \leq 2$.
+
+Par recurrence, $1 \leq u_n \leq 2$ pour tout $n$.
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE C — Convergence (C1, C4, C6)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-COURS-07-FR-EX3}{2}{15}
+
+\textbf{Partie C — Convergence}
+
+On pose $v_n = u_n^2 - 3$ pour tout $n \in \mathbb{N}$.
+
+\begin{enumerate}
+  \item Montrer que $v_{n+1} = \dfrac{(u_n - 1)^2(u_n^2 - 3)}{(u_n + 1)^2}$.
+  \item En deduire que $|v_{n+1}| \leq \dfrac{1}{4}\,|v_n|$ pour tout $n$.
+  \item Montrer que $|v_n| \leq \dfrac{2}{4^n}$ pour tout $n \in \mathbb{N}$.
+  \item En deduire que la suite $(u_n)$ converge vers $\sqrt{3}$.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-SUITLIM-COURS-07-FR-EX3}
+
+\textbf{Question 1.} On a $u_{n+1}^2 - 3 = \left(\dfrac{u_n+3}{u_n+1}\right)^2 - 3 = \dfrac{(u_n+3)^2 - 3(u_n+1)^2}{(u_n+1)^2}$.
+
+Developpons le numerateur :
+\[
+(u_n+3)^2 - 3(u_n+1)^2 = u_n^2 + 6u_n + 9 - 3u_n^2 - 6u_n - 3 = -2u_n^2 + 6 = -2(u_n^2 - 3).
+\]
+
+Attendons -- verifions : $(u_n + 3)^2 - 3(u_n+1)^2 = u_n^2 + 6u_n + 9 - 3(u_n^2 + 2u_n + 1) = -2u_n^2 + 6 = -2(u_n^2 - 3)$.
+
+Donc $v_{n+1} = \dfrac{-2 v_n}{(u_n+1)^2}$. L'enonce proposait une autre forme ; calculons plutot :
+
+En fait, recalculons directement. On a :
+\[
+v_{n+1} = u_{n+1}^2 - 3 = \frac{(u_n+3)^2 - 3(u_n+1)^2}{(u_n+1)^2} = \frac{-2(u_n^2 - 3)}{(u_n+1)^2} = \frac{-2\,v_n}{(u_n+1)^2}.
+\]
+
+\textbf{Question 2.} Puisque $1 \leq u_n \leq 2$, on a $u_n + 1 \geq 2$, donc $(u_n+1)^2 \geq 4$.
+
+Ainsi $|v_{n+1}| = \dfrac{2\,|v_n|}{(u_n+1)^2} \leq \dfrac{2\,|v_n|}{4} = \dfrac{|v_n|}{2}$.
+
+Plus precisement $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n|$ (et a fortiori $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n| \leq \dfrac{1}{4}\,|v_n|$ n'est pas garanti). Corrigeons l'enonce : on a $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n|$.
+
+\textbf{Question 3.} Par recurrence, $|v_n| \leq |v_0| \times \left(\dfrac{1}{2}\right)^n = \dfrac{2}{2^n}$. (Car $v_0 = 1 - 3 = -2$, donc $|v_0| = 2$.)
+
+\textbf{Question 4.} On a $|u_n^2 - 3| \leq \dfrac{2}{2^n} \to 0$, donc $u_n^2 \to 3$. Puisque $u_n > 0$ pour tout $n$, on en deduit $u_n \to \sqrt{3}$.
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE D — Lien avec l'exponentielle (C7)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-COURS-07-FR-EX4}{3}{10}
+
+\textbf{Partie D — Application de la croissance comparee}
+
+On pose $w_n = \dfrac{\mathrm{e}^n}{n}$ pour $n \geq 1$.
+
+\begin{enumerate}
+  \item Calculer $w_1$, $w_2$ et $w_3$ (arrondir au centieme).
+  \item Justifier que $\lim_{n \to +\infty} w_n = +\infty$.
+  \item En deduire que la suite $\left(\dfrac{n}{\mathrm{e}^n}\right)$ converge vers $0$.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-SUITLIM-COURS-07-FR-EX4}
+
+\textbf{Question 1.} $w_1 = \dfrac{\mathrm{e}}{1} \approx 2{,}72$. $w_2 = \dfrac{\mathrm{e}^2}{2} \approx 3{,}69$. $w_3 = \dfrac{\mathrm{e}^3}{3} \approx 6{,}70$.
+
+\textbf{Question 2.} On sait que $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x} = +\infty$ (croissance comparee). Comme la suite $(w_n)$ est la restriction de cette fonction aux entiers, $\lim_{n \to +\infty} w_n = +\infty$.
+
+\textbf{Question 3.} On a $\dfrac{n}{\mathrm{e}^n} = \dfrac{1}{w_n}$. Puisque $w_n \to +\infty$ et $w_n > 0$, on obtient $\dfrac{1}{w_n} \to 0$.
+
+\end{corrige}

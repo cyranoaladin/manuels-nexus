@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-CO-046", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-046", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (2*x+1)*exp(-x)
+% assert limit(f, x, oo) == 0
+% assert simplify(diff(f,x) - exp(-x)*(1-2*x)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-046}
+
+\textbf{Q1.} $\lim_{+\infty} (2x+1)\mathrm{e}^{-x} = 0$ (croissance comparee). $\lim_{-\infty}$ : $\mathrm{e}^{-x} \to +\infty$, $2x+1 \to -\infty$, produit $\to -\infty$.
+
+\textbf{Q2.} $f'(x) = 2\mathrm{e}^{-x} - (2x+1)\mathrm{e}^{-x} = (1-2x)\mathrm{e}^{-x}$. $f'(x) = 0 \iff x = 1/2$. $f$ croissante sur $]-\infty, 1/2]$, decroissante sur $[1/2, +\infty[$.
+
+\textbf{Q3.} $\lim_{+\infty} f = 0$, donc $y=0$ est asymptote horizontale en $+\infty$.
+
+\end{corrige}

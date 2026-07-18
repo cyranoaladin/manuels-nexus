@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-SUITLIM-CO-013", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-013", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% for m in range(1, 8):
+%     assert sum(k**2 for k in range(1, m+1)) == m*(m+1)*(2*m+1)//6
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-013}
+
+\textbf{Question 1.} $\mathcal{P}(n)$ : « $\sum_{k=1}^{n} k^2 = \dfrac{n(n+1)(2n+1)}{6}$ ».
+
+\textit{Init.} $n=1$ : $1 = \dfrac{1 \times 2 \times 3}{6} = 1$. Vrai.
+
+\textit{Heredite.} Supposons $\mathcal{P}(n)$. $\sum_{k=1}^{n+1} k^2 = \dfrac{n(n+1)(2n+1)}{6} + (n+1)^2 = \dfrac{(n+1)[n(2n+1)+6(n+1)]}{6} = \dfrac{(n+1)(2n^2+7n+6)}{6} = \dfrac{(n+1)(n+2)(2n+3)}{6}$.
+
+C'est bien $\dfrac{(n+1)((n+1)+1)(2(n+1)+1)}{6}$. $\mathcal{P}(n+1)$ vraie.
+
+\textbf{Question 2.} $\dfrac{1}{n^3} \times \dfrac{n(n+1)(2n+1)}{6} = \dfrac{(1+1/n)(2+1/n)}{6} \to \dfrac{2}{6} = \boxed{\dfrac{1}{3}}$.
+
+\end{corrige}

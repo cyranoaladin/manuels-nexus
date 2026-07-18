@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-SUITLIM-EX-043", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C7"], "capacites_codes": ["C7"], "methodes": ["M5"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% x = symbols('x')
+% assert limit(exp(x), x, oo) == oo
+% assert limit(exp(x), x, -oo) == 0
+% assert limit(exp(x)/x, x, oo) == oo
+% assert limit(x*exp(x), x, -oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-043}{1}{8}
+Determiner les limites suivantes en citant le resultat du cours utilise.
+\begin{enumerate}
+  \item $\lim_{x \to +\infty} \mathrm{e}^x$
+  \item $\lim_{x \to -\infty} \mathrm{e}^x$
+  \item $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x}$
+  \item $\lim_{x \to -\infty} x\,\mathrm{e}^x$
+\end{enumerate}
+\end{exercice}

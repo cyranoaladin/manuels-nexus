@@ -1,0 +1,62 @@
+% META: {"id": "TSPE-SUITLIM-ME-004", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "methode", "capacites_codes": ["C4", "C6"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Montrer qu'une suite converge ou diverge par monotonie/comparaison}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de « montrer que la suite converge » ou « montrer que la suite diverge vers $+\infty$ », et que la suite n'est pas de type explicite simple.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Etudier la monotonie :}
+      \begin{itemize}
+        \item Calculer $u_{n+1} - u_n$ et en determiner le signe, ou
+        \item Calculer $\dfrac{u_{n+1}}{u_n}$ et le comparer a $1$ (si $u_n > 0$), ou
+        \item Etudier la fonction $f$ telle que $u_n = f(n)$.
+      \end{itemize}
+    \item \textbf{Si la suite est croissante :}
+      \begin{itemize}
+        \item Chercher un majorant : si $(u_n)$ est majoree, elle converge (theoreme de la suite monotone bornee).
+        \item Si $(u_n)$ n'est pas majoree : elle diverge vers $+\infty$ (theoreme C4).
+      \end{itemize}
+    \item \textbf{Alternativement, utiliser la comparaison :}
+      \begin{itemize}
+        \item Pour montrer $u_n \to +\infty$ : trouver $v_n \leq u_n$ avec $v_n \to +\infty$.
+        \item Pour montrer $u_n \to \ell$ : encadrer $u_n$ entre deux suites de limite $\ell$ (gendarmes).
+      \end{itemize}
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Soit $(u_n)$ definie par $u_0 = 0$ et $u_{n+1} = \sqrt{6 + u_n}$.
+
+  \medskip
+  \commentaireMarge{Etape 1 : encadrement par recurrence.}%
+  Montrons que $0 \leq u_n \leq 3$ pour tout $n$.
+
+  $u_0 = 0 \in [0, 3]$. Si $0 \leq u_n \leq 3$, alors $6 \leq 6 + u_n \leq 9$, donc $\sqrt{6} \leq u_{n+1} \leq 3$. En particulier $0 \leq u_{n+1} \leq 3$.
+
+  \commentaireMarge{Etape 2 : monotonie.}%
+  $u_{n+1} - u_n = \sqrt{6 + u_n} - u_n$. Posons $h(x) = \sqrt{6+x} - x$. On a $h(3) = 3 - 3 = 0$ et $h'(x) = \dfrac{1}{2\sqrt{6+x}} - 1 < 0$ sur $[0, 3]$. Donc $h$ est decroissante et $h(x) \geq h(3) = 0$ sur $[0, 3]$.
+
+  Ainsi $u_{n+1} \geq u_n$ : la suite est croissante.
+
+  \commentaireMarge{Conclusion.}%
+  $(u_n)$ est croissante et majoree par $3$ : par le theoreme de la suite monotone bornee, elle converge.
+
+  La limite $\ell$ verifie $\ell = \sqrt{6 + \ell}$, soit $\ell^2 = 6 + \ell$, d'ou $\ell^2 - \ell - 6 = 0$, c'est-a-dire $(\ell - 3)(\ell + 2) = 0$. Comme $\ell \geq 0$, on obtient $\ell = 3$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier de prouver la monotonie ou la bornitude : les deux conditions sont necessaires pour appliquer le theoreme de convergence.
+    \item \textbf{Piege 2.} Confondre « majoree » (il existe $M$ tel que $u_n \leq M$ pour tout $n$) avec « la suite finit par diminuer ».
+  \end{itemize}
+}
+
+\verifier{%
+  Calculer quelques termes pour verifier la monotonie et la bornitude conjecturees.
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

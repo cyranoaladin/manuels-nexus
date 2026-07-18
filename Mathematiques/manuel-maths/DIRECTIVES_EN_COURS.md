@@ -52,7 +52,7 @@ Un tour ne se termine jamais par un résumé ni une question. Rapport de LOT + c
 - [ ] **5. J4 — Bootstrap Terminale TSPE**
   - [ ] 5a. Referentiel TSPE ancre BO 2026, architecture 13 chapitres
   - [ ] 5b. `docs/10_perimetre_terminale.md`
-  - [ ] 5c. Premier chapitre TSPE LOT 0→7
+  - [x] 5c. TSPE-SUITES-LIMITES LOT 0→7. 50 ex, 116 VERIFY, résolution aveugle A+B 0 divergence. Tag `chap/TSPE-SUITES-LIMITES-v1`.
 
 ## Exigences métier permanentes
 

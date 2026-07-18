@@ -1,0 +1,108 @@
+% META: {"id": "TSPE-SUITLIM-EV-A-corrige", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-SUITLIM-EV-A", "version": "A", "capacites_codes": ["C1", "C2", "C3", "C4", "C5", "C6", "C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% n = symbols('n', integer=True, nonnegative=True)
+%
+% # ---- Exercice 1 ----
+% u1 = (3*n**2 + 2*n)/(n**2 + 4)
+% assert limit(u1, n, oo) == 3
+% u2 = 5*Rational(3,4)**n - 2
+% assert limit(u2, n, oo) == -2
+% u3 = n**2 - 3*n + 1
+% assert limit(u3, n, oo) == oo
+% # w_n >= n^2/2 for n >= 6: n^2 - 3n + 1 >= n^2/2 iff n^2/2 - 3n + 1 >= 0 iff n >= 6 (approx)
+% for k in range(6, 20):
+%     assert k**2 - 3*k + 1 >= k**2 / 2
+%
+% # ---- Exercice 2 ----
+% for k in range(15):
+%     assert 4**k >= 3*k + 1
+%
+% # ---- Exercice 3 ----
+% a3 = Rational(9, 10)
+% l3 = Rational(800)
+% u3_expr = 800 - 300*a3**n
+% assert u3_expr.subs(n, 0) == 500
+% assert u3_expr.subs(n, 1) == 530
+% assert u3_expr.subs(n, 2) == 557
+% assert limit(u3_expr, n, oo) == 800
+%
+% # ---- Exercice 4 ----
+% u4 = [1.0]
+% for i in range(100):
+%     u4.append(math.sqrt(3*u4[-1]))
+% assert abs(u4[-1] - 3) < 1e-6
+% assert abs(u4[1] - math.sqrt(3)) < 1e-10
+% assert abs(u4[2] - 3**0.75) < 1e-10
+% END-VERIFY
+
+\textbf{Corrige de l'evaluation A — TSPE-SUITLIM-EV-A}
+
+\bigskip
+
+%===============================================================
+% EXERCICE 1
+%===============================================================
+
+\textbf{Exercice 1.}
+
+\textbf{1.} $u_n = \dfrac{n^2(3 + 2/n)}{n^2(1 + 4/n^2)} = \dfrac{3 + 2/n}{1 + 4/n^2}$. Or $2/n \to 0$ et $4/n^2 \to 0$. Donc $\lim u_n = \dfrac{3}{1} = \boxed{3}$.
+
+\textbf{2.} $|3/4| < 1$ donc $(3/4)^n \to 0$. $v_n = 5 \times (3/4)^n - 2 \to 5 \times 0 - 2 = \boxed{-2}$.
+
+\textbf{3.} $w_n = n^2 - 3n + 1 = n^2(1 - 3/n + 1/n^2)$. Pour $n \geq 6$ : $3/n \leq 1/2$ et $1/n^2 \geq 0$, donc $1 - 3/n + 1/n^2 \geq 1/2$, et $w_n \geq n^2/2$. Or $n^2/2 \to +\infty$. Par comparaison, $\boxed{\lim w_n = +\infty}$.
+
+\bigskip
+
+%===============================================================
+% EXERCICE 2
+%===============================================================
+
+\textbf{Exercice 2.}
+
+\textbf{1.} $\mathcal{P}(n)$ : « $4^n \geq 3n + 1$ ».
+
+\textit{Init.} $4^0 = 1 \geq 1 = 3 \times 0 + 1$. Vrai.
+
+\textit{Heredite.} Supposons $4^n \geq 3n+1$. $4^{n+1} = 4 \times 4^n \geq 4(3n+1) = 12n + 4$. Or $12n + 4 \geq 3(n+1) + 1 = 3n + 4$ (car $9n \geq 0$). Donc $4^{n+1} \geq 3(n+1)+1$. $\mathcal{P}(n+1)$ vraie.
+
+\textit{Conclusion.} Par recurrence, $4^n \geq 3n+1$ pour tout $n \in \mathbb{N}$.
+
+\textbf{2.} $3n + 1 \to +\infty$ et $4^n \geq 3n + 1$. Par comparaison, $\boxed{\lim 4^n = +\infty}$.
+
+\bigskip
+
+%===============================================================
+% EXERCICE 3
+%===============================================================
+
+\textbf{Exercice 3.}
+
+\textbf{1.} $u_0 = 500$. Chaque annee, il reste $90\,\%$ de la population plus $80$ : $u_{n+1} = 0{,}9\,u_n + 80$.
+
+\textbf{2.} $u_1 = 0{,}9 \times 500 + 80 = 530$. $u_2 = 0{,}9 \times 530 + 80 = 557$.
+
+\textbf{3.} $\ell = 0{,}9\ell + 80 \Rightarrow 0{,}1\ell = 80 \Rightarrow \ell = 800$.
+
+$v_n = u_n - 800$, $v_{n+1} = 0{,}9(u_n - 800) = 0{,}9\,v_n$. Geometrique de raison $0{,}9$, $v_0 = -300$.
+
+$v_n = -300 \times 0{,}9^n$, donc $u_n = 800 - 300 \times 0{,}9^n$.
+
+\textbf{4.} $0{,}9^n \to 0$, donc $\lim u_n = \boxed{800}$. La population se stabilise a $800$ poissons.
+
+\bigskip
+
+%===============================================================
+% EXERCICE 4
+%===============================================================
+
+\textbf{Exercice 4.}
+
+\textbf{1.} $u_1 = \sqrt{3} \approx 1{,}73$. $u_2 = \sqrt{3\sqrt{3}} = \sqrt{3^{3/2}} = 3^{3/4} \approx 2{,}28$. $u_3 = \sqrt{3 \times 3^{3/4}} = \sqrt{3^{7/4}} = 3^{7/8} \approx 2{,}65$.
+
+\textbf{2.} $\mathcal{P}(n)$ : « $0 < u_n \leq 3$ ». $u_0 = 1 \in ]0, 3]$. Si $0 < u_n \leq 3$ : $u_{n+1} = \sqrt{3u_n} > 0$ et $u_{n+1} = \sqrt{3u_n} \leq \sqrt{3 \times 3} = \sqrt{9} = 3$. Vrai.
+
+\textbf{3.} $u_{n+1} \geq u_n \iff \sqrt{3u_n} \geq u_n \iff 3u_n \geq u_n^2$ (car $u_n > 0$) $\iff u_n(3 - u_n) \geq 0$. Or $0 < u_n \leq 3$, donc $3 - u_n \geq 0$ et $u_n > 0$. L'inegalite est verifiee. $(u_n)$ est croissante.
+
+\textbf{4.} Croissante et majoree par $3$ : converge (theoreme). Si $\ell = \lim u_n$, alors $\ell = \sqrt{3\ell}$, $\ell^2 = 3\ell$, $\ell(\ell - 3) = 0$. Comme $\ell \geq u_0 = 1 > 0$, on obtient $\boxed{\ell = 3}$.

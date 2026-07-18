@@ -1,0 +1,102 @@
+% META: {"id": "TSPE-SUITLIM-CR-015", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+
+\section{Theoremes de comparaison}
+
+% ============================================================
+% STRATE 1 — Theoremes et demonstrations exigibles
+% ============================================================
+
+\subsection{Theoreme de comparaison (divergence)}
+
+\theoreme{
+Soient $(u_n)$ et $(v_n)$ deux suites telles que, a partir d'un certain rang, $u_n \leq v_n$.
+
+Si $\lim_{n \to +\infty} u_n = +\infty$, alors $\lim_{n \to +\infty} v_n = +\infty$.
+}
+
+\demonstration{
+Soit $A$ un reel quelconque. Montrons qu'il existe un rang $N$ tel que pour tout $n \geq N$, $v_n \geq A$.
+
+Par hypothese, $\lim_{n \to +\infty} u_n = +\infty$. Il existe donc $N_1 \in \mathbb{N}$ tel que pour tout $n \geq N_1$, $u_n \geq A$.
+
+De plus, il existe $N_2 \in \mathbb{N}$ tel que pour tout $n \geq N_2$, $u_n \leq v_n$.
+
+Posons $N = \max(N_1, N_2)$. Pour tout $n \geq N$, on a :
+\[
+  v_n \geq u_n \geq A.
+\]
+
+Donc $\lim_{n \to +\infty} v_n = +\infty$.
+}
+
+\margeAppui{
+De meme, si $v_n \leq u_n$ a partir d'un certain rang et $\lim u_n = -\infty$, alors $\lim v_n = -\infty$.
+}
+
+\exemple{
+Soit $u_n = n + (-1)^n$. On a $u_n \geq n - 1$ pour tout $n$. Or $\lim_{n \to +\infty}(n-1) = +\infty$.
+
+Par le theoreme de comparaison, $\lim_{n \to +\infty} u_n = +\infty$.
+}
+
+\subsection{Theoreme des gendarmes (convergence)}
+
+\theoreme{
+Soient $(u_n)$, $(v_n)$ et $(w_n)$ trois suites telles que, a partir d'un certain rang :
+\[
+  u_n \leq v_n \leq w_n.
+\]
+
+Si $\lim_{n \to +\infty} u_n = \lim_{n \to +\infty} w_n = \ell$, alors $\lim_{n \to +\infty} v_n = \ell$.
+}
+
+\demonstration{
+Soit $\varepsilon > 0$.
+
+Puisque $\lim u_n = \ell$, il existe $N_1$ tel que pour tout $n \geq N_1$, $|u_n - \ell| \leq \varepsilon$, c'est-a-dire $\ell - \varepsilon \leq u_n \leq \ell + \varepsilon$.
+
+Puisque $\lim w_n = \ell$, il existe $N_2$ tel que pour tout $n \geq N_2$, $|w_n - \ell| \leq \varepsilon$, c'est-a-dire $\ell - \varepsilon \leq w_n \leq \ell + \varepsilon$.
+
+Il existe $N_3$ tel que pour tout $n \geq N_3$, $u_n \leq v_n \leq w_n$.
+
+Posons $N = \max(N_1, N_2, N_3)$. Pour tout $n \geq N$ :
+\[
+  \ell - \varepsilon \leq u_n \leq v_n \leq w_n \leq \ell + \varepsilon,
+\]
+donc $|v_n - \ell| \leq \varepsilon$.
+
+Par definition, $\lim_{n \to +\infty} v_n = \ell$.
+}
+
+\exemple{
+Soit $u_n = \dfrac{\sin(n)}{n}$ pour $n \geq 1$. On a $-1 \leq \sin(n) \leq 1$, donc :
+\[
+  -\frac{1}{n} \leq \frac{\sin(n)}{n} \leq \frac{1}{n}.
+\]
+
+Or $\lim_{n \to +\infty}\left(-\dfrac{1}{n}\right) = \lim_{n \to +\infty} \dfrac{1}{n} = 0$.
+
+Par le theoreme des gendarmes, $\lim_{n \to +\infty} \dfrac{\sin(n)}{n} = 0$.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Comparaison :} pour montrer que $v_n \to +\infty$, il suffit de trouver $u_n \leq v_n$ avec $u_n \to +\infty$.
+
+\textbf{Gendarmes :} pour montrer que $v_n \to \ell$, il faut encadrer $v_n$ entre deux suites qui tendent toutes deux vers $\ell$.
+}
+
+\erreurFrequente{
+\textbf{Appliquer les gendarmes avec des bornes de limites differentes.}
+
+Si $u_n \to 0$ et $w_n \to 1$ avec $u_n \leq v_n \leq w_n$, on ne peut \emph{pas} conclure sur la limite de $(v_n)$ par les gendarmes. Le theoreme exige que les deux suites encadrantes tendent vers la \emph{meme} limite.
+}
+
+\erreurFrequente{
+\textbf{Confondre comparaison et encadrement.}
+
+Le theoreme de comparaison etablit une \emph{divergence} ($v_n \to +\infty$). Le theoreme des gendarmes etablit une \emph{convergence} ($v_n \to \ell$). Ce sont deux outils distincts.
+}

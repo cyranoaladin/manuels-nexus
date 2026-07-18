@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-CO-031", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-031", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 3*Rational(2,3)**n + 5
+% assert u.subs(n, 0) == 8
+% assert u.subs(n, 1) == 7
+% assert limit(u, n, oo) == 5
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-031}
+
+\textbf{Q1.} $u_0 = 3+5 = 8$, $u_1 = 3 \times 2/3 + 5 = 7$.
+
+\textbf{Q2.} $|2/3| < 1$, donc $(2/3)^n \to 0$.
+
+\textbf{Q3.} $u_n = 3 \times (2/3)^n + 5 \to 3 \times 0 + 5 = \boxed{5}$.
+
+\end{corrige}

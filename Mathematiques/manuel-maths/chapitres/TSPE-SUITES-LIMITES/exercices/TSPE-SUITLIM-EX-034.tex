@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-SUITLIM-EX-034", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # Demontrer Bernoulli amelioree: (1+a)^n >= 1 + na + n(n-1)/2 * a^2 pour a >= 0
+% # Check n=3, a=1: (2)^3 = 8 >= 1 + 3 + 3 = 7
+% assert 2**3 >= 1 + 3 + 3
+% # n=4, a=0.5: (1.5)^4 = 5.0625 >= 1 + 2 + 1.5 = 4.5
+% assert 1.5**4 >= 1 + 4*0.5 + 6*0.25
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-034}{3}{20}
+Soit $a \geq 0$ un reel fixe.
+\begin{enumerate}
+  \item Demontrer par recurrence que pour tout $n \geq 2$,
+    \[
+      (1+a)^n \geq 1 + na + \frac{n(n-1)}{2}\,a^2.
+    \]
+  \item En deduire que pour $q > 1$, $\lim_{n \to +\infty} \dfrac{q^n}{n} = +\infty$.
+\end{enumerate}
+\end{exercice}

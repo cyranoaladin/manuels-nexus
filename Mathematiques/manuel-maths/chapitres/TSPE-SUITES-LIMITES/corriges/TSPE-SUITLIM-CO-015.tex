@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-SUITLIM-CO-015", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-015", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% a = Rational(4, 5)
+% u_expr = 250 - 150 * a**n
+% assert u_expr.subs(n, 0) == 100
+% assert u_expr.subs(n, 1) == 130
+% assert limit(u_expr, n, oo) == 250
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-015}
+
+\textbf{Question 1.} $u_0 = 100$ (volume initial). Chaque jour, il reste $80\,\%$ de l'eau plus $50$~L : $u_{n+1} = 0{,}8\,u_n + 50$.
+
+\textbf{Question 2.} $u_1 = 0{,}8 \times 100 + 50 = 130$. $u_2 = 0{,}8 \times 130 + 50 = 154$.
+
+\textbf{Question 3.} $\ell = 0{,}8\ell + 50 \Rightarrow 0{,}2\ell = 50 \Rightarrow \ell = 250$.
+
+$v_n = u_n - 250$, $v_{n+1} = 0{,}8\,u_n + 50 - 250 = 0{,}8(u_n - 250) = 0{,}8\,v_n$. $(v_n)$ geometrique de raison $0{,}8$.
+
+\textbf{Question 4.} $v_n = (100-250) \times 0{,}8^n = -150 \times 0{,}8^n$. $u_n = 250 - 150 \times 0{,}8^n$.
+
+$0{,}8^n \to 0$, donc $\boxed{\lim u_n = 250}$~litres.
+
+\end{corrige}

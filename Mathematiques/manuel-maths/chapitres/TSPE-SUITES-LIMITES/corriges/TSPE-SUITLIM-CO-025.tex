@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-SUITLIM-CO-025", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-025", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% u = [1.0]
+% for i in range(50):
+%     u.append(u[-1] + 1/u[-1])
+% assert u[50] > 9
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-025}
+
+\textbf{Q1.} $u_0=1>0$. Si $u_n>0$, $u_{n+1}=u_n+1/u_n>0$. Par recurrence, $u_n>0$.
+
+\textbf{Q2.} $u_{n+1}-u_n=1/u_n>0$. Strictement croissante.
+
+\textbf{Q3.} $\mathcal{P}(n)$ : « $u_n^2 \geq n+1$ ». $u_0^2=1 \geq 1$. Si $u_n^2 \geq n+1$ : $u_{n+1}^2 = u_n^2 + 2 + 1/u_n^2 \geq n+1+2 = n+3 > n+2$. Vrai.
+
+\textbf{Q4.} $u_n \geq \sqrt{n+1} \to +\infty$. $\boxed{\lim u_n = +\infty}$.
+
+\end{corrige}

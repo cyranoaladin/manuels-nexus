@@ -1,0 +1,125 @@
+% META: {"id": "TSPE-SUITLIM-CR-010", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Convergence et divergence d'une suite}
+
+% ============================================================
+% STRATE 1 — Definitions formelles
+% ============================================================
+
+\definition[1]{
+Soit $(u_n)$ une suite reelle. On dit que $(u_n)$ \textbf{converge} vers un reel $\ell$ si, pour tout $\varepsilon > 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
+\[
+  |u_n - \ell| \leq \varepsilon.
+\]
+On note $\lim_{n \to +\infty} u_n = \ell$ et on dit que $\ell$ est la \textbf{limite} de la suite $(u_n)$.
+}
+
+\exemple{
+Soit $(u_n)$ la suite definie par $u_n = \dfrac{1}{n+1}$ pour $n \in \mathbb{N}$.
+
+Pour tout $\varepsilon > 0$, on cherche $N$ tel que pour tout $n \geq N$, $\left|\dfrac{1}{n+1} - 0\right| \leq \varepsilon$.
+
+On a $\dfrac{1}{n+1} \leq \varepsilon$ si et seulement si $n+1 \geq \dfrac{1}{\varepsilon}$, soit $n \geq \dfrac{1}{\varepsilon} - 1$.
+
+Il suffit de choisir $N = \left\lfloor \dfrac{1}{\varepsilon} \right\rfloor$. Donc $\lim_{n \to +\infty} u_n = 0$.
+}
+
+\definition[2]{
+On dit que $(u_n)$ \textbf{diverge vers $+\infty$} si, pour tout reel $A > 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
+\[
+  u_n \geq A.
+\]
+On note $\lim_{n \to +\infty} u_n = +\infty$.
+}
+
+\definition[3]{
+On dit que $(u_n)$ \textbf{diverge vers $-\infty$} si, pour tout reel $A < 0$, il existe un rang $N \in \mathbb{N}$ tel que, pour tout $n \geq N$,
+\[
+  u_n \leq A.
+\]
+On note $\lim_{n \to +\infty} u_n = -\infty$.
+}
+
+\exemple{
+La suite $(u_n)$ definie par $u_n = n^2$ diverge vers $+\infty$.
+
+En effet, pour tout $A > 0$, on a $u_n = n^2 \geq A$ des que $n \geq \lceil\sqrt{A}\rceil$. Il suffit de poser $N = \lceil\sqrt{A}\rceil$.
+}
+
+\definition[4]{
+On dit qu'une suite \textbf{diverge} si elle ne converge pas. Elle peut diverger vers $+\infty$, vers $-\infty$, ou n'avoir aucune limite (on dit alors qu'elle est \textbf{divergente sans limite}).
+}
+
+\exemple{
+La suite $(u_n)$ definie par $u_n = (-1)^n$ est divergente sans limite.
+
+En effet, les termes alternent entre $1$ et $-1$ : la suite ne se rapproche d'aucun reel fixe, et ne tend ni vers $+\infty$ ni vers $-\infty$.
+}
+
+% ============================================================
+% Operations sur les limites
+% ============================================================
+
+\subsection{Operations sur les limites}
+
+\propriete{
+Soit $(u_n)$ et $(v_n)$ deux suites convergentes, avec $\lim u_n = \ell$ et $\lim v_n = \ell'$. Alors :
+\begin{itemize}
+  \item $\lim (u_n + v_n) = \ell + \ell'$ ;
+  \item $\lim (\lambda \, u_n) = \lambda \, \ell$ pour tout $\lambda \in \mathbb{R}$ ;
+  \item $\lim (u_n \times v_n) = \ell \times \ell'$ ;
+  \item si $\ell' \neq 0$, alors $\lim \dfrac{u_n}{v_n} = \dfrac{\ell}{\ell'}$ (a partir d'un certain rang, $v_n \neq 0$).
+\end{itemize}
+}
+
+\propriete{
+Si $\lim u_n = +\infty$ et $\lim v_n = \ell > 0$, alors $\lim (u_n \times v_n) = +\infty$.
+
+Si $\lim u_n = +\infty$ et $\lim v_n = +\infty$, alors $\lim (u_n + v_n) = +\infty$.
+}
+
+\erreurFrequente{
+Certaines combinaisons conduisent a des \textbf{formes indeterminees}. Il n'y a pas de regle generale pour :
+\[
+  +\infty - \infty, \qquad 0 \times \infty, \qquad \frac{\infty}{\infty}, \qquad \frac{0}{0}.
+\]
+Dans ces cas, il faut une etude specifique (factorisation, encadrement, suite auxiliaire, etc.).
+}
+
+\subsection{Unicite de la limite}
+
+\propriete{
+Si une suite converge, sa limite est unique.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Convergence :} les termes finissent par rester « arbitrairement proches » du reel $\ell$.
+
+\textbf{Divergence vers $+\infty$ :} les termes finissent par depasser tout seuil fixe a l'avance.
+
+\textbf{Divergente sans limite :} la suite « oscille » sans se stabiliser.
+}
+
+\erreurFrequente{
+\textbf{Confondre « la suite croit » et « la suite diverge vers $+\infty$ ».}
+
+La suite $u_n = 1 - \dfrac{1}{n+1}$ est croissante, mais elle converge vers $1$ (elle est majoree par $1$). Une suite croissante ne diverge vers $+\infty$ que si elle n'est pas majoree.
+}
+
+\erreurFrequente{
+\textbf{Confondre forme indeterminee et limite nulle.}
+
+La suite $u_n = n - n = 0$ a une limite evidente ($0$), mais $v_n = n^2 - n = n(n-1)$ tend vers $+\infty$. Les deux sont de la forme « $+\infty - \infty$ » en apparence ; il faut toujours transformer l'expression.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+\textbf{Suites de Cauchy.} Une suite $(u_n)$ de reels est dite de Cauchy si, pour tout $\varepsilon > 0$, il existe $N$ tel que pour tous $p, q \geq N$, $|u_p - u_q| \leq \varepsilon$. Dans $\mathbb{R}$, une suite est convergente si et seulement si elle est de Cauchy (completude de $\mathbb{R}$).
+}

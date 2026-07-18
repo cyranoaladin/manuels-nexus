@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-CO-043", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-043", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x), x, oo) == oo
+% assert limit(exp(x), x, -oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-043}
+
+\textbf{a.} $\lim_{x \to +\infty} \mathrm{e}^x = \boxed{+\infty}$ (croissance de l'exponentielle, demo du cours).
+
+\textbf{b.} $\lim_{x \to -\infty} \mathrm{e}^x = \boxed{0}$ (changement de variable $X=-x$).
+
+\textbf{c.} $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x} = \boxed{+\infty}$ (croissance comparee).
+
+\textbf{d.} $\lim_{x \to -\infty} x\,\mathrm{e}^x = \boxed{0}$ ($X=-x$, $-X\,\mathrm{e}^{-X} \to 0$).
+
+\end{corrige}

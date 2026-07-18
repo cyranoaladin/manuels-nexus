@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-EX-003", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = 3*n**2 - 5*n + 2
+% assert limit(u, n, oo) == oo
+% assert u.subs(n, 0) == 2
+% assert u.subs(n, 1) == 0
+% assert u.subs(n, 2) == 4
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-003}{1}{10}
+Soit $(u_n)$ la suite definie pour tout $n \in \mathbb{N}$ par $u_n = 3n^2 - 5n + 2$.
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$ et $u_2$.
+  \item Montrer que pour tout $n \geq 2$, $u_n \geq n^2$.
+  \item En deduire $\lim_{n \to +\infty} u_n$.
+\end{enumerate}
+\end{exercice}

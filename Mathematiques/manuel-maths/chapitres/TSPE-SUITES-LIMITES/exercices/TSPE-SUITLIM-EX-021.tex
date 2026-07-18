@@ -1,0 +1,36 @@
+% META: {"id": "TSPE-SUITLIM-EX-021", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 3, "competences": ["modeliser", "raisonner", "communiquer"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Emprunt: u_0 = 200000, u_{n+1} = 1.02*u_n - 12000
+% # l = b/(1-a) = -12000/(1-1.02) = -12000/(-0.02) = 600000
+% # u_n = l + (u_0 - l)*a^n = 600000 - 400000*1.02^n
+% a = Rational(102, 100)
+% b = -12000
+% l = Rational(600000)
+% assert l == b/(1-a)
+% n = symbols('n', integer=True, nonnegative=True)
+% u_expr = 600000 - 400000*a**n
+% assert u_expr.subs(n, 0) == 200000
+% u1 = u_expr.subs(n, 1)
+% assert u1 == 192000
+% import math
+% # u_n = 600000 - 400000*1.02^n -> -oo (loan is eventually repaid)
+% assert float(u_expr.subs(n, 10000)) < -1e6
+% # u_{n+1} - u_n = 0.02*u_n - 12000 < 0 when u_n < 600000
+% # u_0 = 200000 < 600000, and u is decreasing throughout
+% # u_n = 0 when 400000*1.02^n = 600000, i.e. 1.02^n = 1.5
+% n_zero = math.ceil(math.log(1.5)/math.log(1.02))
+% assert n_zero == 21
+% assert float(u_expr.subs(n, 20)) > 0
+% assert float(u_expr.subs(n, 21)) < 0
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-021}{3}{25}
+Un emprunt de $200\,000$~euros est contracte au taux annuel de $2\,\%$. Le remboursement annuel est de $12\,000$~euros. On note $u_n$ le capital restant du au debut de l'annee $n$.
+\begin{enumerate}
+  \item Justifier que $u_0 = 200\,000$ et $u_{n+1} = 1{,}02\,u_n - 12\,000$.
+  \item Determiner le reel $\ell$ tel que $v_n = u_n - \ell$ soit geometrique.
+  \item Exprimer $u_n$ en fonction de $n$.
+  \item Etudier le sens de variation de $(u_n)$. L'emprunt sera-t-il rembourse ? Justifier.
+  \item Quel remboursement annuel minimal faudrait-il pour que l'emprunt soit un jour rembourse ?
+\end{enumerate}
+\end{exercice}

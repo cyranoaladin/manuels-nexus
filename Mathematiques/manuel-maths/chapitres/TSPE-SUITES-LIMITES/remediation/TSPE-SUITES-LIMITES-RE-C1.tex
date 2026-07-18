@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-SUITES-LIMITES-RE-C1", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : Convergence et divergence
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-RE-C1-EX1}{1}{10}
+Determiner la limite de chaque suite.
+\begin{enumerate}
+  \item $u_n = \dfrac{4n+1}{n+2}$
+  \item $v_n = 2n^2 - n$
+  \item $w_n = \dfrac{3}{n+1}$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonneg=True)
+% assert limit((4*n+1)/(n+2), n, oo) == 4
+% assert limit(2*n**2 - n, n, oo) == oo
+% assert limit(3/(n+1), n, oo) == 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-SUITLIM-RE-C1-EX1}
+\textbf{a.} $u_n = \dfrac{4+1/n}{1+2/n} \to 4$. \quad \textbf{b.} $v_n = n(2n-1) \to +\infty$. \quad \textbf{c.} $w_n \to 0$.
+\end{corrige}

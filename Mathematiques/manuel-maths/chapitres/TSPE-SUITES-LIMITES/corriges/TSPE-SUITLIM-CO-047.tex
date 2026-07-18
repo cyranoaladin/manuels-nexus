@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-SUITLIM-CO-047", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-047", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% assert limit(exp(n)/(n**2+1), n, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-047}
+
+\textbf{Q1.} $n^2+1 \leq 2n^2$, donc $u_n = \dfrac{\mathrm{e}^n}{n^2+1} \geq \dfrac{\mathrm{e}^n}{2n^2}$.
+
+\textbf{Q2.} $\dfrac{\mathrm{e}^n}{2n^2} = \dfrac{1}{2}\left(\dfrac{\mathrm{e}^n}{n}\right)\dfrac{1}{n}$... Plus directement : $\dfrac{\mathrm{e}^n}{n^2} \to +\infty$ (croissance comparee). Donc $u_n \geq \dfrac{\mathrm{e}^n}{2n^2} \to +\infty$. $\boxed{\lim u_n = +\infty}$.
+
+\textbf{Q3.} $u_{n+1}/u_n = \dfrac{\mathrm{e}(n^2+1)}{(n+1)^2+1} \to \mathrm{e} > 1$. Croissante a partir d'un certain rang.
+
+\end{corrige}

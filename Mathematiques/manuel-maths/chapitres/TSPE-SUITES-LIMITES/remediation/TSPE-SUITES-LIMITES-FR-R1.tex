@@ -1,0 +1,32 @@
+% META: {"id": "TSPE-SUITES-LIMITES-FR-R1", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["R1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R1 : Suites arithmetiques et geometriques
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Suites arithmetiques et geometriques}
+
+\textbf{Suite arithmetique :} $u_{n+1} = u_n + r$. Terme general : $u_n = u_0 + nr$.
+
+\textbf{Suite geometrique :} $u_{n+1} = q \cdot u_n$. Terme general : $u_n = u_0 \cdot q^n$.
+
+\textbf{Sommes :} $\sum_{k=0}^{n} (u_0 + kr) = (n+1)u_0 + \dfrac{n(n+1)}{2}r$ et $\sum_{k=0}^{n} u_0 q^k = u_0 \cdot \dfrac{1-q^{n+1}}{1-q}$ (si $q \neq 1$).
+
+\begin{exercice}{TSPE-SUITLIM-FR-R1-EX1}{1}{8}
+\begin{enumerate}
+  \item La suite $(u_n)$ definie par $u_n = 3 + 5n$ est-elle arithmetique ? Preciser la raison.
+  \item Exprimer $u_{20}$ et $\sum_{k=0}^{10} u_k$.
+  \item La suite $(v_n)$ definie par $v_n = 4 \times 2^n$ est-elle geometrique ? Preciser la raison.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonneg=True)
+% u = 3 + 5*n
+% assert u.subs(n,1) - u.subs(n,0) == 5
+% assert u.subs(n,20) == 103
+% assert sum(3+5*k for k in range(11)) == 11*3 + 5*55
+% v = 4*2**n
+% assert v.subs(n,1)/v.subs(n,0) == 2
+% END-VERIFY

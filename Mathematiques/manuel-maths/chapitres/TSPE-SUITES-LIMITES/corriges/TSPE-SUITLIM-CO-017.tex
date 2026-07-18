@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-CO-017", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-017", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% a = Rational(1, 2)
+% u1 = a*200 + 200
+% assert u1 == 300
+% u2 = a*300 + 200
+% assert u2 == 350
+% u3 = a*350 + 200
+% assert u3 == 375
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-017}
+
+\textbf{Question 1.} $u_0 = 200$. $u_1 = 0{,}5 \times 200 + 200 = 300$. $u_2 = 0{,}5 \times 300 + 200 = 350$. $u_3 = 0{,}5 \times 350 + 200 = 375$.
+
+\textbf{Question 2.} Point fixe : $\ell = 0{,}5\ell + 200$, $\ell = 400$. $v_n = u_n - 400$ geometrique de raison $0{,}5$, $v_0 = -200$. $u_n = 400 - 200 \times 0{,}5^n$. $\lim u_n = \boxed{400}$~mg. Le taux se stabilise a $400$~mg.
+
+\end{corrige}

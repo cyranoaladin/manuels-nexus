@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-CO-048", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-048", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% g = exp(x) - 1 - x
+% assert g.subs(x, 0) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-048}
+
+\textbf{Q1.} $g'(x) = \mathrm{e}^x - 1$. $g'(x) = 0 \iff x = 0$. $g'<0$ sur $]-\infty,0[$, $g'>0$ sur $]0,+\infty[$. Minimum en $x=0$ : $g(0) = 0$. Donc $g(x) \geq 0$.
+
+\textbf{Q2.} $g(x) \geq 0 \iff \boxed{\mathrm{e}^x \geq 1+x}$ pour tout $x$.
+
+\textbf{Q3.} $\mathrm{e}^{1/2} \geq 3/2$, donc $\mathrm{e}^{n/2} = (\mathrm{e}^{1/2})^n \geq (3/2)^n$.
+
+\textbf{Q4.} $(3/2)^n \to +\infty$ (car $3/2>1$) et $\mathrm{e}^{n/2} \geq (3/2)^n$. Par comparaison, $\mathrm{e}^{n/2} \to +\infty$, donc $\mathrm{e}^x \to +\infty$.
+
+\end{corrige}

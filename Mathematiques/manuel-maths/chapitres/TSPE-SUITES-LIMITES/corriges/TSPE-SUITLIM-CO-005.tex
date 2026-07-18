@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-SUITLIM-CO-005", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = sqrt(n**2 + 3*n) - n
+% assert limit(u, n, oo) == Rational(3, 2)
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-005}
+
+\commentaireMarge{Multiplier par l'expression conjuguee.}
+
+\textbf{Question 1.} Pour $n \geq 1$ :
+\[
+u_n = \frac{(\sqrt{n^2+3n} - n)(\sqrt{n^2+3n} + n)}{\sqrt{n^2+3n} + n} = \frac{n^2+3n - n^2}{\sqrt{n^2+3n}+n} = \frac{3n}{\sqrt{n^2+3n}+n}.
+\]
+
+\textbf{Question 2.} Factorisons par $n$ : $u_n = \dfrac{3}{\sqrt{1+3/n}+1} \to \dfrac{3}{1+1} = \boxed{\dfrac{3}{2}}$.
+
+\end{corrige}

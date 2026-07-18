@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-SUITLIM-CO-019", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-019", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% a = Rational(17, 20)
+% u_expr = 20 + 70*a**n
+% assert u_expr.subs(n, 0) == 90
+% assert limit(u_expr, n, oo) == 20
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-019}
+
+\textbf{Question 1.} $\ell = 0{,}85\ell + 3 \Rightarrow 0{,}15\ell = 3 \Rightarrow \ell = 20\,^\circ$C.
+
+\textbf{Question 2.} $v_n = u_n - 20$, geometrique de raison $0{,}85$, $v_0 = 70$. $u_n = 20 + 70 \times 0{,}85^n$.
+
+\textbf{Question 3.} $u_n > 20$ pour tout $n$ (car $70 \times 0{,}85^n > 0$) et $u_{n+1} - u_n = -0{,}15(u_n - 20) < 0$. Decroissante.
+
+\textbf{Question 4.} $u_n \leq 25 \iff 70 \times 0{,}85^n \leq 5 \iff 0{,}85^n \leq 1/14$. $n \geq \dfrac{\ln(1/14)}{\ln(0{,}85)} \approx 16{,}2$. A partir de $\boxed{n = 17}$.
+
+\end{corrige}

@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-SUITLIM-EX-009", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # sum_{k=0}^{n} 2^k = 2^{n+1} - 1
+% for n in range(6):
+%     assert sum(2**k for k in range(n+1)) == 2**(n+1) - 1
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-009}{1}{10}
+Demontrer par recurrence que pour tout entier naturel $n$,
+\[
+  \sum_{k=0}^{n} 2^k = 2^{n+1} - 1.
+\]
+\end{exercice}

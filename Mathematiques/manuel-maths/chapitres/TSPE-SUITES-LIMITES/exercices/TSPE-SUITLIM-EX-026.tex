@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-SUITLIM-EX-026", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = n + Rational(1,2)*(-1)**n
+% # u is not monotone but u_n >= n - 1/2
+% # u_n -> +infty by comparison with n - 1/2
+% assert float(u.subs(n, 10000)) > 9000
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-026}{2}{15}
+Soit $(u_n)$ la suite definie par $u_n = n + \dfrac{(-1)^n}{2}$.
+\begin{enumerate}
+  \item Calculer $u_0$, $u_1$, $u_2$, $u_3$. La suite est-elle monotone ?
+  \item Montrer que pour tout $n$, $u_n \geq n - \dfrac{1}{2}$.
+  \item En deduire que $(u_n)$ diverge vers $+\infty$.
+  \item Peut-on appliquer le theoreme « suite croissante non majoree » ? Justifier.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-SUITLIM-CO-018", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-018", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% a = Rational(3, 5)
+% u_expr = 300 - 250*a**n
+% assert u_expr.subs(n, 0) == 50
+% assert limit(u_expr, n, oo) == 300
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-018}
+
+\textbf{Question 1.} $0{,}6$ : $40\,\%$ de la population disparait (mortalite/migration). $120$ : apport annuel (naissances/repeuplements).
+
+\textbf{Question 2.} $\ell = 0{,}6\ell + 120 \Rightarrow \ell = 300$.
+
+\textbf{Question 3.} $v_n = u_n - 300$, $v_0 = -250$, $v_n = -250 \times 0{,}6^n$. $u_n = 300 - 250 \times 0{,}6^n$.
+
+\textbf{Question 4.} $u_{n+1} - u_n = 0{,}6\,u_n + 120 - u_n = 120 - 0{,}4\,u_n$. Or $u_n < 300$ (car $250 \times 0{,}6^n > 0$), donc $u_{n+1} - u_n > 120 - 120 = 0$. Croissante. $\lim u_n = \boxed{300}$ centaines.
+
+\end{corrige}

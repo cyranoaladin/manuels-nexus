@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-SUITLIM-CO-045", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-045", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(2*x)/x**2, x, oo) == oo
+% assert limit(x**2*exp(-x), x, oo) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-045}
+
+\textbf{a.} $\dfrac{\mathrm{e}^{2x}}{x^2} = \left(\dfrac{\mathrm{e}^x}{x}\right)^2 \to (+\infty)^2 = \boxed{+\infty}$.
+
+\textbf{b.} $x^2\mathrm{e}^{-x} = \dfrac{x^2}{\mathrm{e}^x}$. $\mathrm{e}^x$ croit plus vite que $x^2$. $\boxed{\lim = 0}$.
+
+\textbf{c.} $X = -x \to +\infty$. $x^3\mathrm{e}^x = -X^3\mathrm{e}^{-X} = -X^3/\mathrm{e}^X \to 0$. $\boxed{\lim = 0}$.
+
+\end{corrige}

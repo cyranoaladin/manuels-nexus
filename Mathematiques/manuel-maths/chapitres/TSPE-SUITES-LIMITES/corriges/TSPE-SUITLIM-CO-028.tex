@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-SUITLIM-CO-028", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-028", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% import math
+% u = [0.0]
+% for i in range(100):
+%     u.append(math.sin(u[-1])+1)
+% assert u[-1] < 2
+% assert abs(math.sin(u[-1])+1-u[-1]) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-028}
+
+\textbf{Q1.} $u_1 = \sin(0)+1 = 1$, $u_2 = \sin(1)+1 \approx 1{,}84$, $u_3 \approx \sin(1{,}84)+1 \approx 1{,}96$.
+
+\textbf{Q2.} $u_0=0 \in [0,2]$. Si $0 \leq u_n \leq 2$ : $\sin(u_n) \in [-1,1]$, donc $0 \leq u_{n+1} = \sin(u_n)+1 \leq 2$.
+
+\textbf{Q3.} $f(x) = \sin(x)+1-x$, $f'(x) = \cos(x)-1 \leq 0$ sur $\mathbb{R}$. $f$ decroissante. $f(0)=1>0$, $f(2)=\sin(2)-1 \approx -0{,}09 < 0$. Pour $x \in [0,2]$, $f(x) \geq f(2) > -1$. Comme $f(0)>0$ et $f$ decroissante, $f(x) \geq 0$ pour $x \in [0, x_0]$ ou $x_0$ est le zero de $f$ dans $[0,2]$. Par recurrence, si $u_n \leq x_0$, $u_{n+1} = \sin(u_n)+1 \geq u_n$. La croissance se verifie plus directement : $u_{n+1}-u_n = \sin(u_n)+1-u_n = f(u_n) \geq 0$ tant que $u_n \leq x_0$.
+
+\textbf{Q4.} Croissante majoree par $2$ : converge. $\ell = \sin(\ell)+1$, soit $\boxed{\sin(\ell) = \ell - 1}$.
+
+\end{corrige}

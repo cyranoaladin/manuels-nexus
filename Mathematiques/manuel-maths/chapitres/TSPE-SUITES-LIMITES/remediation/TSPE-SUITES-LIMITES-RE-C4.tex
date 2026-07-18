@@ -1,0 +1,24 @@
+% META: {"id": "TSPE-SUITES-LIMITES-RE-C4", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : Suite monotone bornee ou non
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-RE-C4-EX1}{1}{10}
+Soit $(u_n)$ definie par $u_n = \dfrac{n^2}{n+1}$.
+\begin{enumerate}
+  \item Montrer que $(u_n)$ est croissante (pour $n \geq 1$).
+  \item Est-elle majoree ? Conclure.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonneg=True)
+% u = n**2/(n+1)
+% assert limit(u, n, oo) == oo
+% END-VERIFY
+
+\begin{corrige}{TSPE-SUITLIM-RE-C4-EX1}
+$u_n = n - \dfrac{n}{n+1}$. $u_{n+1}-u_n > 0$ pour $n \geq 1$ (calcul). $u_n \geq n/2 \to +\infty$. Non majoree. $\lim u_n = +\infty$.
+\end{corrige}

@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-SUITLIM-CO-009", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-009", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% for n in range(8):
+%     assert sum(2**k for k in range(n+1)) == 2**(n+1) - 1
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-009}
+
+\commentaireMarge{Recurrence sur une somme geometrique.}
+
+Soit $\mathcal{P}(n)$ : « $\displaystyle\sum_{k=0}^{n} 2^k = 2^{n+1} - 1$ ».
+
+\textbf{Initialisation.} $\sum_{k=0}^{0} 2^k = 1$ et $2^1 - 1 = 1$. $\mathcal{P}(0)$ vraie.
+
+\textbf{Heredite.} Supposons $\mathcal{P}(n)$ : $\sum_{k=0}^{n} 2^k = 2^{n+1} - 1$.
+
+$\sum_{k=0}^{n+1} 2^k = \sum_{k=0}^{n} 2^k + 2^{n+1} = 2^{n+1} - 1 + 2^{n+1} = 2 \times 2^{n+1} - 1 = 2^{n+2} - 1$.
+
+C'est $2^{(n+1)+1} - 1$, donc $\mathcal{P}(n+1)$ est vraie.
+
+\textbf{Conclusion.} Par recurrence, $\boxed{\sum_{k=0}^{n} 2^k = 2^{n+1} - 1}$ pour tout $n \in \mathbb{N}$.
+
+\end{corrige}

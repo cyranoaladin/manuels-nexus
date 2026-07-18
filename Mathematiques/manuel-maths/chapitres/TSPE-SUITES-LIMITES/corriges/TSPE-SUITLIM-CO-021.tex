@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-SUITLIM-CO-021", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-021", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% a = Rational(102, 100)
+% u_expr = -600000 + 800000*a**n
+% assert u_expr.subs(n, 0) == 200000
+% assert limit(u_expr, n, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-021}
+
+\textbf{Question 1.} $u_0 = 200\,000$. Interets annuels : $0{,}02 \times u_n$. Remboursement : $12\,000$. $u_{n+1} = u_n + 0{,}02\,u_n - 12\,000 = 1{,}02\,u_n - 12\,000$.
+
+\textbf{Question 2.} $\ell = 1{,}02\ell - 12\,000 \Rightarrow -0{,}02\ell = -12\,000 \Rightarrow \ell = 600\,000$.
+
+$v_n = u_n - 600\,000$ geometrique de raison $1{,}02$, $v_0 = -400\,000$.
+
+\textbf{Question 3.} $u_n = 600\,000 - 400\,000 \times 1{,}02^n$.
+
+Attendons : $v_n = -400\,000 \times 1{,}02^n$, donc $u_n = 600\,000 - 400\,000 \times 1{,}02^n$.
+
+Verification : $u_0 = 600\,000 - 400\,000 = 200\,000$. Correct.
+
+\textbf{Question 4.} $u_{n+1} - u_n = 0{,}02\,u_n - 12\,000 < 0$ tant que $u_n < 600\,000$. Or $u_n = 600\,000 - 400\,000 \times 1{,}02^n$; $u_n < 600\,000$ toujours (car $400\,000 \times 1{,}02^n > 0$). Donc $(u_n)$ decroissante. Mais $1{,}02^n \to +\infty$, donc $u_n \to -\infty$ : l'emprunt n'est jamais rembourse (la dette croitra a terme).
+
+\textbf{Question 5.} Pour remboursement : $\ell \leq 0$, soit $b/(1-a) \leq 0$, $\dfrac{-R}{-0{,}02} \leq 0$, $R \geq 0$. Il faut $u_n \to -\infty$, i.e., la suite atteint $0$. Remboursement minimal : $R > 0{,}02 \times 200\,000 = 4\,000$ (les interets de la premiere annee). Plus precisement, $R > 0{,}02\ell = 0{,}02 \times R/0{,}02 = R$, ce qui est circulaire. Condition : $R > 0{,}02 \times u_0 = 4\,000$ au minimum, mais pour rembourser il faut $R > \ell \times 0{,}02$... En fait il suffit que $a = 1{,}02$ et $\ell = R/0{,}02$. Pour que $u_n$ decroisse vers $-\infty$ (dette payee), il faut $\ell > u_0$, soit $R/0{,}02 > 200\,000$, $R > 4\,000$. Or ici $R = 12\,000 > 4\,000$ mais $\ell = 600\,000 > u_0$ donc la suite decroit... Contradiction avec le resultat precedent. Revoyons : $u_n = 600\,000 - 400\,000 \times 1{,}02^n \to -\infty$ car $1{,}02^n \to +\infty$. Donc $u_n$ finit par devenir negatif : l'emprunt est rembourse. Le rang $n_0$ ou $u_{n_0} \leq 0$ est solution de $1{,}02^n \geq 3/2$, soit $n \geq \ln(1{,}5)/\ln(1{,}02) \approx 20{,}5$, donc $\boxed{n_0 = 21}$.
+
+\end{corrige}

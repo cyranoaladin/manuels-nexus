@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-CO-044", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-044", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert limit(exp(x)-x, x, oo) == oo
+% assert limit((exp(x)+1)/(exp(x)-1), x, oo) == 1
+% assert limit(exp(-x)+3, x, oo) == 3
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-044}
+
+\textbf{a.} $\mathrm{e}^x - x = x(\mathrm{e}^x/x - 1)$. $\mathrm{e}^x/x \to +\infty$, donc $\boxed{\lim = +\infty}$.
+
+\textbf{b.} $\dfrac{\mathrm{e}^x+1}{\mathrm{e}^x-1} = \dfrac{1+\mathrm{e}^{-x}}{1-\mathrm{e}^{-x}} \to \dfrac{1+0}{1-0} = \boxed{1}$.
+
+\textbf{c.} $\mathrm{e}^{-x} \to 0$, donc $\boxed{\lim = 3}$.
+
+\end{corrige}

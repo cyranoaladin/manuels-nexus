@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-SUITLIM-CO-023", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-023", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% assert limit(sqrt(n), n, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-023}
+
+\textbf{Question 1.} Pour $n \geq 0$ : $\sqrt{n+1} > \sqrt{n}$ (car la racine carree est croissante). Donc $(u_n)$ est croissante.
+
+\textbf{Question 2.} Soit $M > 0$. On pose $N = \lceil M^2 \rceil$. Alors $u_N = \sqrt{N} \geq \sqrt{M^2} = M$.
+
+\textbf{Question 3.} Pour tout $M > 0$, il existe $N$ tel que $u_N > M$. $(u_n)$ n'est pas majoree, et elle est croissante. Donc $\boxed{\lim \sqrt{n} = +\infty}$.
+
+\end{corrige}

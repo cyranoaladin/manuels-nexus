@@ -1,0 +1,136 @@
+% META: {"id": "TSPE-SUITLIM-COURS-07-TC", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "sous_type": "td_contextualise", "titre": "TD contextualise — Capital place a taux variable", "temps_gabarit": 7, "capacites": ["C1", "C3", "C5", "C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, simplify
+% import math
+% # Capital initial 10000, taux annuel t_n = 3/100 * (1 - 1/(n+2))
+% C0 = 10000
+% # Annee 1 : t_0 = 0.03 * (1 - 1/2) = 0.015
+% t = lambda n: Rational(3, 100) * (1 - Rational(1, n+2))
+% assert t(0) == Rational(3, 200)
+% # C_1 = C_0 * (1 + t_0)
+% C1_val = C0 * (1 + t(0))
+% assert C1_val == 10000 * Rational(203, 200)
+% assert C1_val == Rational(10150)
+% # Taux constant 3% : suite geometrique D_n = 10000 * 1.03^n
+% q_cst = Rational(103, 100)
+% D = lambda n: 10000 * q_cst**n
+% assert D(0) == 10000
+% assert D(1) == 10300
+% # D_n >= 20000 : 1.03^n >= 2 => n >= ln2/ln1.03
+% n_seuil = math.ceil(math.log(2) / math.log(1.03))
+% assert n_seuil == 24
+% assert float(D(23)) < 20000
+% assert float(D(24)) >= 20000
+% # Comparaison: t_n < 3/100 pour tout n, donc C_n < D_n pour tout n >= 1
+% assert t(0) < Rational(3, 100)
+% assert t(10) < Rational(3, 100)
+% END-VERIFY
+
+\section*{Temps 7 — TD contextualise : Capital place a taux variable}
+
+\textbf{Contexte.} Un epargnant place un capital de $10\,000$~euros. Le taux d'interet annuel varie : la $n$-ieme annee (a partir de $n = 0$), le taux est
+\[
+  t_n = 0{,}03 \times \left(1 - \frac{1}{n+2}\right).
+\]
+On note $C_n$ le capital au debut de l'annee $n$, avec $C_0 = 10\,000$.
+
+On note aussi $D_n$ le capital si le taux etait constant a $3\,\%$, soit $D_n = 10\,000 \times 1{,}03^n$.
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE A — Modelisation
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-COURS-07-TC-EX1}{2}{15}
+
+\textbf{Partie A — Etude du taux et du capital}
+
+\begin{enumerate}
+  \item Calculer $t_0$, $t_1$ et $t_2$ sous forme decimale. Le taux est-il croissant ?
+  \item Montrer que pour tout $n \in \mathbb{N}$, $0 < t_n < 0{,}03$.
+  \item Exprimer $C_{n+1}$ en fonction de $C_n$ et de $t_n$.
+  \item Calculer $C_1$ (arrondir au centime).
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-SUITLIM-COURS-07-TC-EX1}
+
+\commentaireMarge{Le taux $t_n$ croit vers $0{,}03$ mais ne l'atteint jamais.}
+
+\textbf{Question 1.} On calcule :
+\[
+  t_0 = 0{,}03 \times \left(1 - \frac{1}{2}\right) = 0{,}03 \times 0{,}5 = 0{,}015.
+\]
+\[
+  t_1 = 0{,}03 \times \left(1 - \frac{1}{3}\right) = 0{,}03 \times \frac{2}{3} = 0{,}02.
+\]
+\[
+  t_2 = 0{,}03 \times \left(1 - \frac{1}{4}\right) = 0{,}03 \times 0{,}75 = 0{,}0225.
+\]
+
+On observe $t_0 < t_1 < t_2$. On admet que la suite $(t_n)$ est croissante (car $\dfrac{1}{n+2}$ est decroissante).
+
+\textbf{Question 2.} Pour tout $n \in \mathbb{N}$, on a $0 < \dfrac{1}{n+2} \leq \dfrac{1}{2} < 1$, donc $0 < 1 - \dfrac{1}{n+2} < 1$, et :
+\[
+  0 < t_n = 0{,}03 \times \left(1 - \frac{1}{n+2}\right) < 0{,}03.
+\]
+
+\textbf{Question 3.} A la fin de l'annee $n$, le capital est multiplie par $(1 + t_n)$ :
+\[
+  C_{n+1} = C_n \times (1 + t_n).
+\]
+
+\textbf{Question 4.} $C_1 = C_0 \times (1 + t_0) = 10\,000 \times 1{,}015 = 10\,150{,}00$~euros.
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE B — Comparaison et limite
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-COURS-07-TC-EX2}{2}{20}
+
+\textbf{Partie B — Comparaison avec un taux constant}
+
+\begin{enumerate}
+  \item Montrer par recurrence que pour tout $n \geq 1$, $C_n < D_n$.
+  \item La suite $(D_n)$ est-elle convergente ? Justifier.
+  \item Montrer que la suite $(C_n)$ est croissante.
+  \item Peut-on affirmer que le capital $C_n$ depasse $20\,000$~euros ? Discuter.
+  \item Calculer le plus petit entier $n$ tel que $D_n \geq 20\,000$. Interpreter.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-SUITLIM-COURS-07-TC-EX2}
+
+\commentaireMarge{On compare les deux modeles pour encadrer le comportement du capital.}
+
+\textbf{Question 1.} On pose $\mathcal{P}(n)$ : « $C_n < D_n$ ».
+
+\textit{Initialisation :} $C_1 = 10\,150$ et $D_1 = 10\,300$. On a $C_1 < D_1$, donc $\mathcal{P}(1)$ est vraie.
+
+\textit{Heredite :} supposons $C_n < D_n$ pour un $n \geq 1$.
+
+On a $C_{n+1} = C_n(1 + t_n)$ et $D_{n+1} = D_n \times 1{,}03$. Puisque $t_n < 0{,}03$, on a $1 + t_n < 1{,}03$.
+
+Donc $C_{n+1} = C_n(1 + t_n) < C_n \times 1{,}03 < D_n \times 1{,}03 = D_{n+1}$ (en utilisant $C_n < D_n$ et $C_n > 0$). Ainsi $\mathcal{P}(n+1)$ est vraie.
+
+\textit{Conclusion :} par recurrence, pour tout $n \geq 1$, $C_n < D_n$.
+
+\textbf{Question 2.} $D_n = 10\,000 \times 1{,}03^n$ avec $q = 1{,}03 > 1$, donc $\lim_{n \to +\infty} D_n = +\infty$. La suite $(D_n)$ diverge vers $+\infty$.
+
+\textbf{Question 3.} On a $C_{n+1} = C_n(1 + t_n)$ avec $t_n > 0$, donc $1 + t_n > 1$ et $C_{n+1} > C_n$ (car $C_n > 0$). La suite $(C_n)$ est strictement croissante.
+
+\textbf{Question 4.} La comparaison $C_n < D_n$ ne permet pas de conclure directement sur la divergence de $(C_n)$ (une suite majoree par une suite divergente peut converger ou diverger). Une etude plus poussee (hors programme) montre que $(C_n)$ diverge aussi vers $+\infty$, mais plus lentement que $(D_n)$.
+
+\textbf{Question 5.} On resout $D_n \geq 20\,000$, soit $1{,}03^n \geq 2$, donc $n \geq \dfrac{\ln 2}{\ln 1{,}03} \approx 23{,}45$. Le plus petit entier est $n = 24$.
+
+Avec un taux constant de $3\,\%$, le capital double au bout de $24$~ans.
+
+\end{corrige}

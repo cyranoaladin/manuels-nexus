@@ -1,0 +1,53 @@
+% META: {"id": "TSPE-SUITLIM-ME-002", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Rediger une demonstration par recurrence}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande de « demontrer par recurrence que\ldots », « prouver que pour tout $n$\ldots » ou lorsqu'une propriete porte sur tous les entiers a partir d'un rang.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Ecrire la propriete.} « Soit $\mathcal{P}(n)$ la propriete : \guillemotleft\ldots\guillemotright. »
+    \item \textbf{Initialisation.} Verifier que $\mathcal{P}(n_0)$ est vraie en remplacant $n$ par $n_0$ dans la propriete.
+    \item \textbf{Heredite.} Ecrire « Soit $n \geq n_0$ fixe. Supposons $\mathcal{P}(n)$ vraie. » Puis demontrer $\mathcal{P}(n+1)$ en utilisant l'hypothese de recurrence.
+    \item \textbf{Conclusion.} Ecrire « Par le principe de recurrence, $\mathcal{P}(n)$ est vraie pour tout $n \geq n_0$. »
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Demontrer par recurrence que pour tout $n \in \mathbb{N}$, $3^n \geq 2n + 1$.
+
+  \medskip
+  \commentaireMarge{Ecrire explicitement la propriete.}%
+  Soit $\mathcal{P}(n)$ la propriete : « $3^n \geq 2n + 1$ ».
+
+  \commentaireMarge{Verifier pour $n = 0$.}%
+  \textbf{Initialisation.} $3^0 = 1$ et $2 \times 0 + 1 = 1$. On a $1 \geq 1$, donc $\mathcal{P}(0)$ est vraie.
+
+  \commentaireMarge{Supposer $\mathcal{P}(n)$ et montrer $\mathcal{P}(n+1)$.}%
+  \textbf{Heredite.} Soit $n \geq 0$ fixe. Supposons que $3^n \geq 2n + 1$.
+
+  Alors $3^{n+1} = 3 \times 3^n \geq 3(2n+1) = 6n + 3$.
+
+  Or $6n + 3 \geq 2(n+1) + 1 = 2n + 3$ (car $4n \geq 0$).
+
+  Donc $3^{n+1} \geq 2(n+1) + 1$ et $\mathcal{P}(n+1)$ est vraie.
+
+  \textbf{Conclusion.} Par le principe de recurrence, pour tout $n \in \mathbb{N}$, $3^n \geq 2n + 1$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier l'initialisation. Sans elle, la recurrence ne prouve rien.
+    \item \textbf{Piege 2.} Dans l'heredite, \emph{demontrer} $\mathcal{P}(n)$ au lieu de la \emph{supposer}. L'hypothese de recurrence est posee, pas prouvee.
+    \item \textbf{Piege 3.} Confondre « montrer $\mathcal{P}(n+1)$ » avec « remplacer $n$ par $n+1$ dans $\mathcal{P}(n)$ ». Il faut partir de l'hypothese et aboutir a la conclusion.
+  \end{itemize}
+}
+
+\verifier{%
+  Apres la redaction, relire en se demandant : « ai-je utilise l'hypothese de recurrence dans l'heredite ? » Si non, la preuve est probablement fausse ou ne necessite pas de recurrence.
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-SUITLIM-EX-046", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C7"], "capacites_codes": ["C7"], "methodes": ["M5"], "parcours": 2, "competences": ["raisonner", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = (2*x + 1)*exp(-x)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == -oo
+% fp = diff(f, x)
+% # f'(x) = 2*exp(-x) - (2x+1)*exp(-x) = exp(-x)*(1-2x)
+% assert simplify(fp - exp(-x)*(1-2*x)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-046}{2}{15}
+Soit $f(x) = (2x + 1)\,\mathrm{e}^{-x}$.
+\begin{enumerate}
+  \item Determiner $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$.
+  \item Calculer $f'(x)$ et etudier les variations de $f$ sur $\mathbb{R}$.
+  \item La droite $y = 0$ est-elle asymptote horizontale ? Justifier.
+\end{enumerate}
+\end{exercice}

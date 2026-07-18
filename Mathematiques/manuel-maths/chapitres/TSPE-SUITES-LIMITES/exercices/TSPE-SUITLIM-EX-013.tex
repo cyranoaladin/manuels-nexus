@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-EX-013", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # sum_{k=1}^{n} k^2 = n(n+1)(2n+1)/6
+% for m in range(1, 10):
+%     assert sum(k**2 for k in range(1, m+1)) == m*(m+1)*(2*m+1)//6
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-013}{3}{20}
+\begin{enumerate}
+  \item Demontrer par recurrence que pour tout entier $n \geq 1$,
+    \[
+      \sum_{k=1}^{n} k^2 = \frac{n(n+1)(2n+1)}{6}.
+    \]
+  \item En deduire $\lim_{n \to +\infty} \dfrac{1}{n^3}\sum_{k=1}^{n} k^2$.
+\end{enumerate}
+\end{exercice}

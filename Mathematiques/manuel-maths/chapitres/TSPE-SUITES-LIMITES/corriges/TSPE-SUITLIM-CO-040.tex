@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-CO-040", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-040", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% assert limit(n - sqrt(n), n, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-040}
+
+\textbf{Q1.} $u_0=0$, $u_1=1-1=0$, $u_2=2+\sqrt{2}$, $u_3=3-\sqrt{3}$. Non monotone.
+
+\textbf{Q2.} $|(-1)^n\sqrt{n}| = \sqrt{n}$. Donc $u_n \geq n - \sqrt{n}$.
+
+\textbf{Q3.} $n-\sqrt{n} = \sqrt{n}(\sqrt{n}-1) \to +\infty$ (produit de deux suites $\to +\infty$).
+
+\textbf{Q4.} Par comparaison, $\boxed{\lim u_n = +\infty}$.
+
+\end{corrige}

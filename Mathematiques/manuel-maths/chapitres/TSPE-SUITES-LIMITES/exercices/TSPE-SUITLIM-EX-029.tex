@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-EX-029", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% assert limit(Rational(3,4)**n, n, oo) == 0
+% assert limit(Rational(5,3)**n, n, oo) == oo
+% assert limit(Rational(-1,2)**n, n, oo) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-029}{1}{8}
+Determiner la limite de chacune des suites suivantes, en justifiant par le cours sur $q^n$.
+\begin{enumerate}
+  \item $u_n = \left(\dfrac{3}{4}\right)^n$
+  \item $v_n = \left(\dfrac{5}{3}\right)^n$
+  \item $w_n = \left(-\dfrac{1}{2}\right)^n$
+  \item $t_n = (-1)^n$
+\end{enumerate}
+\end{exercice}

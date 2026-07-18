@@ -1,0 +1,54 @@
+% META: {"id": "TSPE-SUITLIM-ME-003", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "methode", "capacites_codes": ["C3"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Etudier une suite arithmetico-geometrique}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque la suite est definie par $u_{n+1} = a\,u_n + b$ avec $a \neq 1$ et $b \neq 0$, ou lorsqu'un probleme de modelisation conduit a une telle relation.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Determiner le point fixe} $\ell$ en resolvant $\ell = a\,\ell + b$, soit $\ell = \dfrac{b}{1-a}$.
+    \item \textbf{Poser la suite auxiliaire} $v_n = u_n - \ell$.
+    \item \textbf{Montrer que $(v_n)$ est geometrique} : verifier que $v_{n+1} = a \cdot v_n$.
+    \item \textbf{Exprimer $v_n$} : $v_n = v_0 \cdot a^n = (u_0 - \ell) \cdot a^n$.
+    \item \textbf{Revenir a $u_n$} : $u_n = \ell + (u_0 - \ell) \cdot a^n$.
+    \item \textbf{Conclure sur la limite} : si $|a| < 1$, alors $a^n \to 0$ et $u_n \to \ell$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Soit $(u_n)$ definie par $u_0 = 10$ et $u_{n+1} = 0{,}7\,u_n + 6$.
+
+  \medskip
+  \commentaireMarge{Etape 1 : point fixe.}%
+  On resout $\ell = 0{,}7\,\ell + 6$ : $0{,}3\,\ell = 6$, d'ou $\ell = 20$.
+
+  \commentaireMarge{Etape 2 : suite auxiliaire.}%
+  On pose $v_n = u_n - 20$.
+
+  \commentaireMarge{Etape 3 : verifier que $(v_n)$ est geometrique.}%
+  $v_{n+1} = u_{n+1} - 20 = 0{,}7\,u_n + 6 - 20 = 0{,}7\,u_n - 14 = 0{,}7(u_n - 20) = 0{,}7\,v_n$.
+
+  $(v_n)$ est geometrique de raison $0{,}7$ et de premier terme $v_0 = 10 - 20 = -10$.
+
+  \commentaireMarge{Etapes 4-5 : expression de $u_n$.}%
+  $v_n = -10 \times 0{,}7^n$, donc $u_n = 20 - 10 \times 0{,}7^n$.
+
+  \commentaireMarge{Etape 6 : limite.}%
+  $|0{,}7| < 1$, donc $0{,}7^n \to 0$ et $\lim u_n = 20$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Se tromper de signe dans $v_0 = u_0 - \ell$. Bien calculer $u_0 - \ell$ et non $\ell - u_0$.
+    \item \textbf{Piege 2.} Appliquer la methode avec $a = 1$ : dans ce cas la suite est arithmetique, pas arithmetico-geometrique.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier que $u_0 = \ell + (u_0 - \ell) \cdot a^0 = \ell + u_0 - \ell = u_0$. Verifier aussi $u_1$ par calcul direct et par la formule.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-EX-010", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["raisonner", "calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Suite u_0=2, u_{n+1}=3u_n-4. Montrer u_n=2 pour tout n.
+% u = [2]
+% for i in range(10):
+%     u.append(3*u[-1] - 4)
+% for val in u:
+%     assert val == 2
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-010}{1}{12}
+Soit $(u_n)$ la suite definie par $u_0 = 2$ et $u_{n+1} = 3u_n - 4$ pour tout $n \in \mathbb{N}$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$. Que constate-t-on ?
+  \item Demontrer par recurrence que pour tout $n \in \mathbb{N}$, $u_n = 2$.
+\end{enumerate}
+\end{exercice}

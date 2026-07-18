@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-SUITLIM-CO-022", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-022", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% assert simplify((n+1)**2 + 1 - (n**2+1)) == 2*n + 1
+% assert limit(n**2 + 1, n, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-022}
+
+\textbf{Question 1.} $u_{n+1} - u_n = (n+1)^2+1-(n^2+1) = 2n+1 > 0$ pour tout $n \geq 0$. Croissante.
+
+\textbf{Question 2.} Pour tout $M > 0$, $u_n = n^2+1 > M$ des que $n > \sqrt{M}$. Donc $(u_n)$ n'est pas majoree.
+
+\textbf{Question 3.} Suite croissante et non majoree, donc $\boxed{\lim u_n = +\infty}$.
+
+\end{corrige}

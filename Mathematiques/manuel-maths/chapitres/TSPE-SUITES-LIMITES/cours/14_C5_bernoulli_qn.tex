@@ -1,0 +1,119 @@
+% META: {"id": "TSPE-SUITLIM-CR-014", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+
+\section{Inegalite de Bernoulli et limite de $q^n$}
+
+% ============================================================
+% STRATE 1 — Inegalite de Bernoulli (demonstration exigible)
+% ============================================================
+
+\subsection{Inegalite de Bernoulli}
+
+\theoreme{
+Pour tout reel $a \geq -1$ et tout entier naturel $n$ :
+\[
+  (1 + a)^n \geq 1 + na.
+\]
+}
+
+\demonstration{
+On demontre cette inegalite par recurrence sur $n$.
+
+On pose $\mathcal{P}(n)$ : « $(1 + a)^n \geq 1 + na$ ».
+
+\textbf{Initialisation.} Pour $n = 0$ : $(1 + a)^0 = 1$ et $1 + 0 \times a = 1$. On a $1 \geq 1$, donc $\mathcal{P}(0)$ est vraie.
+
+\textbf{Heredite.} Soit $n \geq 0$ fixe. Supposons $\mathcal{P}(n)$ vraie : $(1+a)^n \geq 1 + na$.
+
+Calculons $(1 + a)^{n+1}$ :
+\[
+  (1+a)^{n+1} = (1+a)^n \times (1+a).
+\]
+
+Par hypothese de recurrence, $(1+a)^n \geq 1 + na$. De plus, $1 + a \geq 0$ (car $a \geq -1$). On peut donc multiplier l'inegalite par $(1+a)$ sans changer le sens :
+\[
+  (1+a)^{n+1} \geq (1 + na)(1 + a) = 1 + a + na + na^2 = 1 + (n+1)a + na^2.
+\]
+
+Or $na^2 \geq 0$, donc :
+\[
+  (1+a)^{n+1} \geq 1 + (n+1)a.
+\]
+
+Ceci prouve $\mathcal{P}(n+1)$.
+
+\textbf{Conclusion.} Par le principe de recurrence, pour tout $n \in \mathbb{N}$ et tout $a \geq -1$, $(1+a)^n \geq 1 + na$.
+}
+
+% ============================================================
+% Limite de q^n (demonstration exigible)
+% ============================================================
+
+\subsection{Limite de $q^n$}
+
+\theoreme{
+Soit $q$ un reel.
+\begin{itemize}
+  \item Si $q > 1$, alors $\lim_{n \to +\infty} q^n = +\infty$.
+  \item Si $q = 1$, alors $q^n = 1$ pour tout $n$ (suite constante).
+  \item Si $-1 < q < 1$, alors $\lim_{n \to +\infty} q^n = 0$.
+  \item Si $q \leq -1$, alors la suite $(q^n)$ diverge (sans limite si $q = -1$, et sans limite si $q < -1$).
+\end{itemize}
+}
+
+\demonstration{
+\textbf{Cas $q > 1$.} On ecrit $q = 1 + a$ avec $a = q - 1 > 0$. Par l'inegalite de Bernoulli :
+\[
+  q^n = (1+a)^n \geq 1 + na.
+\]
+
+Or $\lim_{n \to +\infty}(1 + na) = +\infty$ (car $a > 0$). La suite $(q^n)$ est minoree par une suite qui tend vers $+\infty$, donc $\lim_{n \to +\infty} q^n = +\infty$.
+
+\medskip
+
+\textbf{Cas $-1 < q < 1$, $q \neq 0$.} On a $|q| < 1$, donc $\dfrac{1}{|q|} > 1$. Posons $r = \dfrac{1}{|q|} = 1 + b$ avec $b > 0$.
+
+Par l'inegalite de Bernoulli, $r^n = \left(\dfrac{1}{|q|}\right)^n \geq 1 + nb$, donc :
+\[
+  |q^n| = |q|^n = \frac{1}{r^n} \leq \frac{1}{1 + nb}.
+\]
+
+Or $\lim_{n \to +\infty} \dfrac{1}{1 + nb} = 0$. Par le theoreme des gendarmes (avec $0 \leq |q^n| \leq \dfrac{1}{1+nb}$), on obtient $\lim_{n \to +\infty} |q^n| = 0$, donc $\lim_{n \to +\infty} q^n = 0$.
+
+\medskip
+
+\textbf{Cas $q = 0$.} La suite $(q^n)_{n \geq 1}$ est la suite constante nulle, de limite $0$.
+}
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\margeAppui{
+\textbf{Resume des limites de $q^n$ :}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Valeur de $q$} & \textbf{Limite de $q^n$} \\
+\hline
+$q > 1$ & $+\infty$ \\
+$q = 1$ & $1$ \\
+$-1 < q < 1$ & $0$ \\
+$q = -1$ & pas de limite \\
+$q < -1$ & pas de limite \\
+\hline
+\end{tabular}
+\end{center}
+}
+
+\erreurFrequente{
+\textbf{Appliquer l'inegalite de Bernoulli avec $a < -1$.}
+
+L'inegalite de Bernoulli exige $a \geq -1$, c'est-a-dire $1 + a \geq 0$. Si $a < -1$, le facteur $(1 + a)$ est negatif et la multiplication inverse le sens de l'inegalite.
+}
+
+\erreurFrequente{
+\textbf{Oublier les cas $q \leq -1$ dans un tableau de limites de $q^n$.}
+
+Pour $q = -1$, la suite $(-1)^n$ alterne entre $1$ et $-1$ sans converger. Pour $q < -1$, la suite diverge en oscillant avec des termes de valeur absolue croissante.
+}

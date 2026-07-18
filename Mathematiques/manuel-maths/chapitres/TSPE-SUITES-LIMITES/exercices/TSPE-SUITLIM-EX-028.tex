@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-SUITLIM-EX-028", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Suite croissante majoree: u_0=0, u_{n+1}=sin(u_n)+1
+% # converge vers l tel que l = sin(l)+1, i.e. sin(l)=l-1
+% # Numerically l ~ 1.9346
+% import math
+% u = [0.0]
+% for i in range(100):
+%     u.append(math.sin(u[-1]) + 1)
+% # converges and bounded
+% assert u[-1] < 2
+% assert abs(math.sin(u[-1]) + 1 - u[-1]) < 1e-6
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-028}{3}{20}
+Soit $(u_n)$ definie par $u_0 = 0$ et $u_{n+1} = \sin(u_n) + 1$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ (arrondir a $10^{-2}$).
+  \item Montrer que pour tout $n$, $0 \leq u_n \leq 2$.
+  \item Montrer que $(u_n)$ est croissante (on pourra etudier $f(x) = \sin(x) + 1 - x$ sur $[0, 2]$).
+  \item En deduire que $(u_n)$ converge. Ecrire l'equation verifiee par la limite.
+\end{enumerate}
+\end{exercice}

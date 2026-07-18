@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-EX-006", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = (2*n + 3)/(n + 1)
+% # epsilon-N proof: |u_n - 2| = 1/(n+1) <= eps iff n >= 1/eps - 1
+% assert simplify(u - 2) == 1/(n + 1)
+% assert limit(u, n, oo) == 2
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-006}{3}{15}
+Soit $(u_n)$ la suite definie pour tout $n \in \mathbb{N}$ par $u_n = \dfrac{2n+3}{n+1}$.
+\begin{enumerate}
+  \item Montrer que pour tout $n \in \mathbb{N}$, $u_n - 2 = \dfrac{1}{n+1}$.
+  \item Soit $\varepsilon > 0$. Determiner, en fonction de $\varepsilon$, un rang $N$ a partir duquel $|u_n - 2| \leq \varepsilon$.
+  \item En deduire, avec la definition formelle, que $\lim_{n \to +\infty} u_n = 2$.
+\end{enumerate}
+\end{exercice}

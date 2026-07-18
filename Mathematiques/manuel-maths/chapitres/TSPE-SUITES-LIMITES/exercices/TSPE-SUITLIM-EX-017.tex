@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-SUITLIM-EX-017", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["modeliser", "calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% # Medicament: u_0=0, u_{n+1}=0.5*u_n+200
+% # l = 200/(1-0.5) = 400
+% # u_n = 400 - 400*0.5^n
+% a = Rational(1, 2)
+% b = 200
+% l = Rational(400)
+% assert l == b/(1-a)
+% u0 = 0
+% u1 = a*u0 + b
+% assert u1 == 200
+% u2 = a*u1 + b
+% assert u2 == 300
+% u3 = a*u2 + b
+% assert u3 == 350
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-017}{1}{12}
+Un patient recoit chaque jour une dose de $200$~mg de medicament. Le corps elimine $50\,\%$ de la quantite presente chaque jour. On note $u_n$ la quantite de medicament (en mg) juste apres la prise du jour $n$, avec $u_0 = 0$ (pas de medicament avant le traitement, la premiere dose etant prise au jour $0$ : $u_0 = 200$).
+
+On rectifie : $u_0 = 200$ (premiere prise) et $u_{n+1} = 0{,}5\,u_n + 200$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$.
+  \item Determiner la limite de $(u_n)$. Interpreter.
+\end{enumerate}
+\end{exercice}

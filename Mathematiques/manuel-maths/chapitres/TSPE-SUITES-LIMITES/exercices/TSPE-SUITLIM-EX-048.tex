@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-SUITLIM-EX-048", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C7"], "capacites_codes": ["C7"], "methodes": ["M5"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # e^x >= 1+x for all x
+% g = exp(x) - 1 - x
+% assert g.subs(x, 0) == 0
+% gp = diff(g, x)
+% assert simplify(gp - (exp(x) - 1)) == 0
+% # g'(0) = 0, g''(x) = e^x > 0 so g convex, minimum at x=0 where g=0
+% # Hence e^x >= 1+x for all x
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-048}{3}{20}
+\begin{enumerate}
+  \item Soit $g(x) = \mathrm{e}^x - 1 - x$. Etudier les variations de $g$ et montrer que $g(x) \geq 0$ pour tout $x \in \mathbb{R}$.
+  \item En deduire que $\mathrm{e}^x \geq 1 + x$ pour tout $x \in \mathbb{R}$.
+  \item En appliquant cette inegalite a $x = \dfrac{1}{2}$ repete $n$ fois, montrer que $\mathrm{e}^{n/2} \geq \left(\dfrac{3}{2}\right)^n$.
+  \item En deduire une nouvelle preuve que $\lim_{x \to +\infty} \mathrm{e}^x = +\infty$.
+\end{enumerate}
+\end{exercice}

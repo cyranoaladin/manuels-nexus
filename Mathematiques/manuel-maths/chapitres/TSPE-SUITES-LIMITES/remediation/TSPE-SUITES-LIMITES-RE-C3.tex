@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-SUITES-LIMITES-RE-C3", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : Modelisation par suites
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-SUITLIM-RE-C3-EX1}{1}{10}
+Soit $(u_n)$ definie par $u_0 = 8$ et $u_{n+1} = 0{,}75\,u_n + 5$.
+\begin{enumerate}
+  \item Calculer $u_1$ et $u_2$.
+  \item Determiner le point fixe $\ell$.
+  \item Exprimer $u_n$ et sa limite.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% assert Rational(3,4)*8 + 5 == 11
+% assert Rational(3,4)*11 + 5 == Rational(53,4)
+% assert 5/(1-Rational(3,4)) == 20
+% END-VERIFY
+
+\begin{corrige}{TSPE-SUITLIM-RE-C3-EX1}
+$u_1 = 11$, $u_2 = 13{,}25$. $\ell = 5/0{,}25 = 20$. $v_n = u_n - 20$ geometrique raison $0{,}75$, $v_0 = -12$. $u_n = 20 - 12 \times 0{,}75^n \to 20$.
+\end{corrige}

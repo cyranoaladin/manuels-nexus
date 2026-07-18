@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-SUITLIM-EX-016", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 1, "competences": ["modeliser", "calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% # Capital 5000, taux 4% => C_n = 5000 * 1.04^n
+% C0 = 5000
+% q = Rational(104, 100)
+% C = C0 * q**n
+% assert C.subs(n, 0) == 5000
+% assert C.subs(n, 1) == 5200
+% assert C.subs(n, 2) == 5408
+% assert limit(C, n, oo) == oo
+% # Doubler: 1.04^n >= 2 => n >= ln2/ln1.04
+% import math
+% n_double = math.ceil(math.log(2)/math.log(1.04))
+% assert n_double == 18
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-016}{1}{10}
+Un capital de $5\,000$~euros est place a interets composes au taux annuel de $4\,\%$. On note $C_n$ le capital au bout de $n$ annees.
+\begin{enumerate}
+  \item Justifier que $(C_n)$ est geometrique et preciser sa raison.
+  \item Exprimer $C_n$ en fonction de $n$.
+  \item Determiner le plus petit entier $n$ tel que $C_n \geq 10\,000$.
+\end{enumerate}
+\end{exercice}

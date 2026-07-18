@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-SUITLIM-EX-022", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "exercice", "capacites": ["TSPE-SUITLIM-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% n = symbols('n', integer=True, nonnegative=True)
+% u = n**2 + 1
+% # croissante: u_{n+1} - u_n = (n+1)^2+1 - (n^2+1) = 2n+1 > 0
+% assert expand(u.subs(n, n+1) - u) == 2*n + 1
+% assert limit(u, n, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-SUITLIM-EX-022}{1}{10}
+Soit $(u_n)$ la suite definie pour tout $n \in \mathbb{N}$ par $u_n = n^2 + 1$.
+\begin{enumerate}
+  \item Montrer que la suite $(u_n)$ est croissante.
+  \item Montrer que $(u_n)$ n'est pas majoree.
+  \item Conclure a l'aide du theoreme du cours.
+\end{enumerate}
+\end{exercice}

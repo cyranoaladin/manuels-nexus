@@ -1,0 +1,30 @@
+% META: {"id": "TSPE-SUITES-LIMITES-FR-R3", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "remediation", "capacites_codes": ["R3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU — R3 : Fonction exponentielle
+%---------------------------------------------------------------
+
+\subsection*{Rappel — Fonction exponentielle}
+
+\textbf{Definition :} $\exp$ est la fonction derivable sur $\mathbb{R}$ telle que $\exp'(x) = \exp(x)$ et $\exp(0) = 1$.
+
+\textbf{Notation :} $\mathrm{e}^x = \exp(x)$, ou $\mathrm{e} = \exp(1) \approx 2{,}718$.
+
+\textbf{Proprietes :} $\mathrm{e}^{a+b} = \mathrm{e}^a \cdot \mathrm{e}^b$, $\mathrm{e}^{-a} = 1/\mathrm{e}^a$, $(\mathrm{e}^a)^n = \mathrm{e}^{na}$.
+
+\begin{exercice}{TSPE-SUITLIM-FR-R3-EX1}{1}{8}
+Simplifier les expressions suivantes.
+\begin{enumerate}
+  \item $\mathrm{e}^3 \times \mathrm{e}^{-1}$
+  \item $\dfrac{\mathrm{e}^{2x}}{\mathrm{e}^x}$
+  \item $(\mathrm{e}^{-2})^3$
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert simplify(exp(3)*exp(-1) - exp(2)) == 0
+% assert simplify(exp(2*x)/exp(x) - exp(x)) == 0
+% assert simplify(exp(-2)**3 - exp(-6)) == 0
+% END-VERIFY

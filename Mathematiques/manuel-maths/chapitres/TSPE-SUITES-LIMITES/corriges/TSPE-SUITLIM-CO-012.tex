@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-SUITLIM-CO-012", "chapitre": "TSPE-SUITES-LIMITES", "type_objet": "corrige", "exercice_ref": "TSPE-SUITLIM-EX-012", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% u = [Rational(1)]
+% for i in range(5):
+%     u.append(u[-1]/(2*u[-1]+1))
+% assert u[1] == Rational(1, 3)
+% assert u[2] == Rational(1, 5)
+% assert u[3] == Rational(1, 7)
+% END-VERIFY
+\begin{corrige}{TSPE-SUITLIM-EX-012}
+
+\textbf{Question 1.} $u_1 = \dfrac{1}{3}$, $u_2 = \dfrac{1/3}{2/3+1} = \dfrac{1/3}{5/3} = \dfrac{1}{5}$, $u_3 = \dfrac{1/5}{2/5+1} = \dfrac{1/5}{7/5} = \dfrac{1}{7}$.
+
+\textbf{Question 2.} $\mathcal{P}(n)$ : « $0 < u_n \leq \dfrac{1}{2n+1}$ ».
+
+\textit{Init.} $u_0 = 1 \leq 1 = \dfrac{1}{1}$ et $u_0 > 0$. $\mathcal{P}(0)$ vraie.
+
+\textit{Heredite.} Si $0 < u_n \leq \dfrac{1}{2n+1}$, alors $u_{n+1} = \dfrac{u_n}{2u_n+1} > 0$ et $u_{n+1} = \dfrac{u_n}{2u_n+1} \leq \dfrac{1/(2n+1)}{2/(2n+1)+1} = \dfrac{1}{2+(2n+1)} = \dfrac{1}{2n+3} = \dfrac{1}{2(n+1)+1}$.
+
+\textbf{Question 3.} $0 \leq u_n \leq \dfrac{1}{2n+1} \to 0$. Par les gendarmes, $\boxed{\lim u_n = 0}$.
+
+\end{corrige}

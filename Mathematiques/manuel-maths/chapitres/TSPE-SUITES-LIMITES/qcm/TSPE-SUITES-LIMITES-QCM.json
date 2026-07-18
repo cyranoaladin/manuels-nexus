@@ -1,0 +1,161 @@
+{
+  "chapitre": "TSPE-SUITES-LIMITES",
+  "titre": "Suites : limites et convergence — QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1", "capacite": "C1",
+      "enonce": "Soit $(u_n)$ definie par $u_n = \\dfrac{5n - 1}{2n + 3}$. Quelle est $\\lim_{n \\to +\\infty} u_n$ ?",
+      "options": {"A": "$5/3$", "B": "$5/2$", "C": "$+\\infty$", "D": "$0$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve a divise les termes constants (-1 et 3) au lieu des coefficients dominants.", "renvoi": "M1, etape 3"},
+        "C": {"erreur": "L'eleve pense que tout quotient de polynomes diverge.", "renvoi": "M1, etape 2"},
+        "D": {"erreur": "L'eleve confond avec une suite du type 1/n.", "renvoi": "M1, etape 1"}
+      }
+    },
+    {
+      "id": "Q2", "capacite": "C1",
+      "enonce": "La suite $u_n = (-1)^n + 1/n$ est :",
+      "options": {"A": "convergente vers 0", "B": "convergente vers 1", "C": "divergente vers $+\\infty$", "D": "divergente sans limite"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "L'eleve ne considere que le terme 1/n.", "renvoi": "C1, definition divergence"},
+        "B": {"erreur": "L'eleve ne considere que les termes pairs.", "renvoi": "C1, unicite limite"},
+        "C": {"erreur": "L'eleve confond avec n+1/n.", "renvoi": "C1, exemples"}
+      }
+    },
+    {
+      "id": "Q3", "capacite": "C2",
+      "enonce": "Dans une preuve par recurrence, l'etape d'heredite consiste a :",
+      "options": {"A": "Verifier P(0)", "B": "Supposer P(n) et montrer P(n+1)", "C": "Montrer P(n) pour tout n", "D": "Remplacer n par n+1"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "C'est l'initialisation, pas l'heredite.", "renvoi": "M2, etape 1"},
+        "C": {"erreur": "C'est la conclusion, pas l'heredite.", "renvoi": "M2, etape 4"},
+        "D": {"erreur": "On ne remplace pas mecaniquement; on doit utiliser l'hypothese.", "renvoi": "M2, piege 3"}
+      }
+    },
+    {
+      "id": "Q4", "capacite": "C2",
+      "enonce": "Heredite pour $2^n > n$, $n \\geq 1$ :",
+      "options": {"A": "$2^{n+1} > n+1$ via $2^n > n$", "B": "Montrer $2^n > n$ directement", "C": "$2^{n+1} = 2 \\times 2^n > 2n \\geq n+1$", "D": "A et C correctes"},
+      "correcte": "D",
+      "diagnostics": {
+        "B": {"erreur": "L'heredite suppose P(n), elle ne le demontre pas.", "renvoi": "M2, piege 2"}
+      }
+    },
+    {
+      "id": "Q5", "capacite": "C3",
+      "enonce": "$u_0=100$, $u_{n+1}=0{,}9u_n+20$. Limite ?",
+      "options": {"A": "180", "B": "200", "C": "220", "D": "0"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Erreur de calcul dans $20/(1-0{,}9)$.", "renvoi": "M3, etape 1"},
+        "C": {"erreur": "L'eleve a resolu $\\ell = 0{,}9\\ell + 20$ incorrectement.", "renvoi": "M3, etape 1"},
+        "D": {"erreur": "L'eleve confond avec $0{,}9^n \\to 0$.", "renvoi": "M3, etape 6"}
+      }
+    },
+    {
+      "id": "Q6", "capacite": "C3",
+      "enonce": "$u_{n+1}=0{,}7u_n+9$. Raison de $(v_n)$ ?",
+      "options": {"A": "9", "B": "0,7", "C": "30", "D": "0,3"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Confusion entre la constante additive et la raison.", "renvoi": "M3, etape 3"},
+        "C": {"erreur": "C'est le point fixe $\\ell = 9/0{,}3 = 30$.", "renvoi": "M3, etape 1"},
+        "D": {"erreur": "C'est $1-a$, pas $a$.", "renvoi": "M3, etape 3"}
+      }
+    },
+    {
+      "id": "Q7", "capacite": "C4",
+      "enonce": "Laquelle est vraie ?",
+      "options": {"A": "Toute suite croissante diverge", "B": "Croissante majoree => converge", "C": "Majoree => converge", "D": "Convergente => croissante"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Contre-exemple : $u_n = 1-1/n$ croissante, converge vers 1.", "renvoi": "C4, theoreme"},
+        "C": {"erreur": "Il faut aussi la monotonie.", "renvoi": "C4, theoreme"},
+        "D": {"erreur": "Contre-exemple : $u_n = (-1)^n/n$ converge vers 0 sans etre croissante.", "renvoi": "C1, definition"}
+      }
+    },
+    {
+      "id": "Q8", "capacite": "C4",
+      "enonce": "$(u_n)$ croissante, $u_n \\geq n$. Conclusion ?",
+      "options": {"A": "converge vers 1", "B": "bornee", "C": "diverge vers $+\\infty$", "D": "decroissante"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "Si $u_n \\geq n$, la suite ne peut converger vers un reel fini.", "renvoi": "C4, theoreme"},
+        "B": {"erreur": "$u_n \\geq n$ implique que $(u_n)$ n'est pas majoree.", "renvoi": "C4, theoreme"}
+      }
+    },
+    {
+      "id": "Q9", "capacite": "C5",
+      "enonce": "Inegalite de Bernoulli :",
+      "options": {"A": "$(1+a)^n \\leq 1+na$", "B": "$(1+a)^n \\geq 1+na$", "C": "$(1+a)^n = 1+na$", "D": "$(1+a)^n \\geq na$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "Inversion du sens de l'inegalite.", "renvoi": "C5, theoreme"},
+        "C": {"erreur": "C'est une inegalite, pas une egalite (sauf si $a=0$ ou $n \\leq 1$).", "renvoi": "C5, theoreme"}
+      }
+    },
+    {
+      "id": "Q10", "capacite": "C5",
+      "enonce": "$\\lim 0{,}95^n$ ?",
+      "options": {"A": "$+\\infty$", "B": "0,95", "C": "0", "D": "pas de limite"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "C'est pour $q > 1$.", "renvoi": "C5, tableau"},
+        "B": {"erreur": "Confusion entre $q$ et $\\lim q^n$.", "renvoi": "C5, tableau"}
+      }
+    },
+    {
+      "id": "Q11", "capacite": "C5",
+      "enonce": "$\\lim 1{,}02^n$ ?",
+      "options": {"A": "0", "B": "1", "C": "1,02", "D": "$+\\infty$"},
+      "correcte": "D",
+      "diagnostics": {
+        "A": {"erreur": "C'est pour $|q|<1$.", "renvoi": "C5, tableau"},
+        "B": {"erreur": "C'est pour $q=1$.", "renvoi": "C5, tableau"}
+      }
+    },
+    {
+      "id": "Q12", "capacite": "C6",
+      "enonce": "$u_n \\leq v_n$ et $\\lim u_n = +\\infty$. Conclusion sur $v_n$ ?",
+      "options": {"A": "$\\lim v_n = +\\infty$", "B": "$\\lim v_n = 0$", "C": "$(v_n)$ converge", "D": "On ne peut rien conclure"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Contradiction : $v_n \\geq u_n \\to +\\infty$.", "renvoi": "C6, theoreme comparaison"},
+        "D": {"erreur": "Le theoreme de comparaison donne une conclusion precise.", "renvoi": "C6, theoreme comparaison"}
+      }
+    },
+    {
+      "id": "Q13", "capacite": "C6",
+      "enonce": "Le theoreme des gendarmes s'applique quand :",
+      "options": {"A": "meme limite", "B": "limites differentes", "C": "une seule limite", "D": "divergence"},
+      "correcte": "A",
+      "diagnostics": {
+        "B": {"erreur": "Si les limites sont differentes, on ne peut pas conclure.", "renvoi": "C6, theoreme gendarmes"},
+        "C": {"erreur": "Les DEUX bornes doivent tendre vers $\\ell$.", "renvoi": "C6, theoreme gendarmes"}
+      }
+    },
+    {
+      "id": "Q14", "capacite": "C7",
+      "enonce": "$\\lim_{x \\to -\\infty} e^x$ ?",
+      "options": {"A": "$-\\infty$", "B": "0", "C": "1", "D": "$+\\infty$"},
+      "correcte": "B",
+      "diagnostics": {
+        "A": {"erreur": "$e^x > 0$ pour tout $x$, donc la limite ne peut etre $-\\infty$.", "renvoi": "C7, demonstration"},
+        "C": {"erreur": "$e^0 = 1$ mais $\\lim_{-\\infty} e^x \\neq 1$.", "renvoi": "C7, demonstration"}
+      }
+    },
+    {
+      "id": "Q15", "capacite": "C7",
+      "enonce": "$\\lim_{x \\to +\\infty} e^x / x^2$ ?",
+      "options": {"A": "0", "B": "1", "C": "$+\\infty$", "D": "indeterminee"},
+      "correcte": "C",
+      "diagnostics": {
+        "A": {"erreur": "L'exponentielle croit plus vite que tout polynome.", "renvoi": "C7, croissance comparee"},
+        "D": {"erreur": "C'est une forme indeterminee qui se resout par les croissances comparees.", "renvoi": "C7, croissance comparee"}
+      }
+    }
+  ]
+}
