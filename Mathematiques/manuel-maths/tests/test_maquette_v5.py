@@ -975,161 +975,162 @@ def test_diagnostics_log_contract():
                 checker.assert_diagnostics_log_clean("\n".join(overfull_passes))
 
 
+def _diagnostics_xhtml_fixture(
+    *,
+    table_gap=12.0,
+    score_gap=12.0,
+    answers_y=None,
+    diagnostic_y=None,
+    capacities_on_score=False,
+    poppler_column_order=False,
+    missing_question=None,
+    missing_diagnostic=None,
+    override=None,
+):
+    lines = []
+
+    def add(key, text, y_min, *, x_min=60.0, x_max=430.0, height=4.0):
+        attributes = {
+            "xMin": x_min,
+            "yMin": y_min,
+            "xMax": x_max,
+            "yMax": y_min + height,
+        }
+        if override is not None and override[0] == key:
+            attributes[override[1]] = override[2]
+        line = (
+            '<line data-key="{}" xMin="{}" yMin="{}" xMax="{}" yMax="{}">'
+            '<word xMin="{}" yMin="{}" xMax="{}" yMax="{}">{}</word>'
+            "</line>".format(
+                key,
+                attributes["xMin"],
+                attributes["yMin"],
+                attributes["xMax"],
+                attributes["yMax"],
+                attributes["xMin"],
+                attributes["yMin"],
+                attributes["xMax"],
+                attributes["yMax"],
+                text,
+            )
+        )
+        lines.append((key, line))
+
+    add("header", "Corrigés", 34.0, x_min=40.0, x_max=120.0, height=6.0)
+    add("title", "Correction et diagnostics", 58.0, height=7.0)
+    add("table-header-left", "Question", 72.0, x_max=115.0, height=5.0)
+    add(
+        "table-header-right",
+        "Capacité Réponse",
+        72.0,
+        x_min=125.0,
+        x_max=260.0,
+        height=5.0,
+    )
+
+    correct_answers = {3: "C", 4: "A", 5: "A", 9: "C"}
+    slot = 0
+    for question in range(1, 16):
+        correct_answer = correct_answers.get(question, "B")
+        y_min = 84.0 + slot * 6.0
+        if question != missing_question:
+            add(
+                f"question-{question}",
+                f"Q{question} C{min(5, (question + 2) // 3)} {correct_answer}",
+                y_min,
+            )
+        slot += 1
+        for letter in "ABCD":
+            if letter == correct_answer:
+                continue
+            y_min = 84.0 + slot * 6.0
+            if question == 1 and letter == "A" and diagnostic_y is not None:
+                y_min = diagnostic_y
+            if (question, letter) != missing_diagnostic:
+                method = min(5, (question + 2) // 3)
+                detail = f"{letter} : diagnostic QCM — renvoi M{method}"
+                if question == 15 and letter == "D":
+                    detail = "D : erreur de placement de la virgule — renvoi M5"
+                add(f"diagnostic-{question}-{letter}", detail, y_min)
+            slot += 1
+
+    table_bottom = 84.0 + 59 * 6.0 + 4.0
+    responses_y = table_bottom + table_gap
+    add("responses-title", "Réponses correctes", responses_y, height=7.0)
+    grid_start_y = responses_y + 16.0 if answers_y is None else answers_y
+    add(
+        "answers-1-5",
+        "Q1 B Q2 B Q3 C Q4 A Q5 A",
+        grid_start_y,
+        height=7.0,
+    )
+    add(
+        "answers-6-10",
+        "Q6 B Q7 B Q8 B Q9 C Q10 B",
+        grid_start_y + 12.0,
+        height=7.0,
+    )
+    grid_last_y = grid_start_y + 24.0
+    add(
+        "answers-11-15",
+        "Q11 B Q12 B Q13 B Q14 B Q15 B",
+        grid_last_y,
+        height=7.0,
+    )
+    score_y = responses_y + 47.0 + score_gap
+    add("score", "Score : \x03 \x03 /15", score_y, height=7.0)
+    add(
+        "capacities",
+        "Capacités à retravailler : C1 C2 C3 C4 C5",
+        score_y if capacities_on_score else score_y + 13.0,
+        height=7.0,
+    )
+    add(
+        "footer-brand",
+        "NEXUS RÉUSSITE",
+        804.0,
+        x_min=38.0,
+        x_max=520.0,
+        height=7.0,
+    )
+    add("footer-folio", "13", 804.0, x_min=520.0, x_max=540.0, height=7.0)
+    if poppler_column_order:
+        # Poppler peut placer une colonne de grille après le pied dans
+        # l'ordre XML, tout en conservant ses coordonnées dans la région.
+        lines = [line for line in lines if line[0] != "answers-6-10"] + [
+            line for line in lines if line[0] == "answers-6-10"
+        ]
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>'
+        '<html xmlns="http://www.w3.org/1999/xhtml"><body><doc>'
+        '<page width="595.276" height="841.89"><flow><block>'
+        + "".join(line for _, line in lines)
+        + "</block></flow></page></doc></body></html>"
+    )
+
+
 def test_diagnostics_bbox_contract():
     checker = importlib.import_module("check_maquette_v5")
 
-    def diagnostics_xhtml(
-        *,
-        table_gap=12.0,
-        score_gap=12.0,
-        answers_y=None,
-        diagnostic_y=None,
-        capacities_on_score=False,
-        poppler_column_order=False,
-        missing_question=None,
-        missing_diagnostic=None,
-        override=None,
-    ):
-        lines = []
-
-        def add(key, text, y_min, *, x_min=60.0, x_max=430.0, height=4.0):
-            attributes = {
-                "xMin": x_min,
-                "yMin": y_min,
-                "xMax": x_max,
-                "yMax": y_min + height,
-            }
-            if override is not None and override[0] == key:
-                attributes[override[1]] = override[2]
-            line = (
-                '<line data-key="{}" xMin="{}" yMin="{}" xMax="{}" yMax="{}">'
-                '<word xMin="{}" yMin="{}" xMax="{}" yMax="{}">{}</word>'
-                "</line>".format(
-                    key,
-                    attributes["xMin"],
-                    attributes["yMin"],
-                    attributes["xMax"],
-                    attributes["yMax"],
-                    attributes["xMin"],
-                    attributes["yMin"],
-                    attributes["xMax"],
-                    attributes["yMax"],
-                    text,
-                )
-            )
-            lines.append((key, line))
-
-        add("header", "Corrigés", 34.0, x_min=40.0, x_max=120.0, height=6.0)
-        add("title", "Correction et diagnostics", 58.0, height=7.0)
-        add("table-header-left", "Question", 72.0, x_max=115.0, height=5.0)
-        add(
-            "table-header-right",
-            "Capacité Réponse",
-            72.0,
-            x_min=125.0,
-            x_max=260.0,
-            height=5.0,
-        )
-
-        correct_answers = {3: "C", 4: "A", 5: "A", 9: "C"}
-        slot = 0
-        for question in range(1, 16):
-            correct_answer = correct_answers.get(question, "B")
-            y_min = 84.0 + slot * 6.0
-            if question != missing_question:
-                add(
-                    f"question-{question}",
-                    f"Q{question} C{min(5, (question + 2) // 3)} {correct_answer}",
-                    y_min,
-                )
-            slot += 1
-            for letter in "ABCD":
-                if letter == correct_answer:
-                    continue
-                y_min = 84.0 + slot * 6.0
-                if question == 1 and letter == "A" and diagnostic_y is not None:
-                    y_min = diagnostic_y
-                if (question, letter) != missing_diagnostic:
-                    method = min(5, (question + 2) // 3)
-                    detail = f"{letter} : diagnostic QCM — renvoi M{method}"
-                    if question == 15 and letter == "D":
-                        detail = "D : erreur de placement de la virgule — renvoi M5"
-                    add(f"diagnostic-{question}-{letter}", detail, y_min)
-                slot += 1
-
-        table_bottom = 84.0 + 59 * 6.0 + 4.0
-        responses_y = table_bottom + table_gap
-        add("responses-title", "Réponses correctes", responses_y, height=7.0)
-        grid_start_y = responses_y + 16.0 if answers_y is None else answers_y
-        add(
-            "answers-1-5",
-            "Q1 B Q2 B Q3 C Q4 A Q5 A",
-            grid_start_y,
-            height=7.0,
-        )
-        add(
-            "answers-6-10",
-            "Q6 B Q7 B Q8 B Q9 C Q10 B",
-            grid_start_y + 12.0,
-            height=7.0,
-        )
-        grid_last_y = grid_start_y + 24.0
-        add(
-            "answers-11-15",
-            "Q11 B Q12 B Q13 B Q14 B Q15 B",
-            grid_last_y,
-            height=7.0,
-        )
-        score_y = responses_y + 47.0 + score_gap
-        add("score", "Score : \x03 \x03 /15", score_y, height=7.0)
-        add(
-            "capacities",
-            "Capacités à retravailler : C1 C2 C3 C4 C5",
-            score_y if capacities_on_score else score_y + 13.0,
-            height=7.0,
-        )
-        add(
-            "footer-brand",
-            "NEXUS RÉUSSITE",
-            804.0,
-            x_min=38.0,
-            x_max=520.0,
-            height=7.0,
-        )
-        add("footer-folio", "13", 804.0, x_min=520.0, x_max=540.0, height=7.0)
-        if poppler_column_order:
-            # Poppler peut placer une colonne de grille après le pied dans
-            # l'ordre XML, tout en conservant ses coordonnées dans la région.
-            lines = [line for line in lines if line[0] != "answers-6-10"] + [
-                line for line in lines if line[0] == "answers-6-10"
-            ]
-        return (
-            '<?xml version="1.0" encoding="UTF-8"?>'
-            '<html xmlns="http://www.w3.org/1999/xhtml"><body><doc>'
-            '<page width="595.276" height="841.89"><flow><block>'
-            + "".join(line for _, line in lines)
-            + "</block></flow></page></doc></body></html>"
-        )
-
-    checker.assert_diagnostics_bbox_layout(diagnostics_xhtml())
+    checker.assert_diagnostics_bbox_layout(_diagnostics_xhtml_fixture())
     checker.assert_diagnostics_bbox_layout(
-        diagnostics_xhtml(poppler_column_order=True)
+        _diagnostics_xhtml_fixture(poppler_column_order=True)
     )
 
     invalid_documents = [
-        diagnostics_xhtml(diagnostic_y=84.0),
-        diagnostics_xhtml(capacities_on_score=True),
-        diagnostics_xhtml(answers_y=100.0),
-        diagnostics_xhtml(table_gap=5.0),
-        diagnostics_xhtml(score_gap=5.0),
-        diagnostics_xhtml(override=("question-1", "xMin", 55.9)),
-        diagnostics_xhtml(override=("question-1", "xMax", 459.6)),
-        diagnostics_xhtml(override=("question-1", "yMax", 768.1)),
-        diagnostics_xhtml(override=("question-1", "xMin", float("nan"))),
-        diagnostics_xhtml(override=("question-1", "xMin", 440.0)),
-        diagnostics_xhtml(override=("question-1", "yMin", 89.0)),
-        diagnostics_xhtml(missing_question=7),
-        diagnostics_xhtml(missing_diagnostic=(8, "C")),
+        _diagnostics_xhtml_fixture(diagnostic_y=84.0),
+        _diagnostics_xhtml_fixture(capacities_on_score=True),
+        _diagnostics_xhtml_fixture(answers_y=100.0),
+        _diagnostics_xhtml_fixture(table_gap=5.0),
+        _diagnostics_xhtml_fixture(score_gap=5.0),
+        _diagnostics_xhtml_fixture(override=("question-1", "xMin", 55.9)),
+        _diagnostics_xhtml_fixture(override=("question-1", "xMax", 459.6)),
+        _diagnostics_xhtml_fixture(override=("question-1", "yMax", 768.1)),
+        _diagnostics_xhtml_fixture(override=("question-1", "xMin", float("nan"))),
+        _diagnostics_xhtml_fixture(override=("question-1", "xMin", 440.0)),
+        _diagnostics_xhtml_fixture(override=("question-1", "yMin", 89.0)),
+        _diagnostics_xhtml_fixture(missing_question=7),
+        _diagnostics_xhtml_fixture(missing_diagnostic=(8, "C")),
     ]
     for invalid_document in invalid_documents:
         with pytest.raises(checker.AcceptanceError):
@@ -1154,6 +1155,7 @@ if [ "$NXV_FAKE_MODE" = "nonzero" ] && [ "$tool" = "lualatex" ]; then
   exit 7
 fi
 if [ "$tool" = "lualatex" ]; then
+  printf '%s\n' 'NEXUS-V5-DIAGNOSTICS-START'
   if [ "$NXV_FAKE_MODE" = "first_pass_undefined" ]; then
     count=0
     if [ -f "$NXV_FAKE_STATE" ]; then read count < "$NXV_FAKE_STATE"; fi
@@ -1164,6 +1166,7 @@ if [ "$tool" = "lualatex" ]; then
     else
       printf '%s\n' 'LuaLaTeX synthetic success.'
     fi
+    printf '%s\n' 'NEXUS-V5-DIAGNOSTICS-END'
     exit 0
   fi
   case "$NXV_FAKE_MODE" in
@@ -1171,18 +1174,28 @@ if [ "$tool" = "lualatex" ]; then
     bang_line) printf '%s\n' '! LaTeX Error: synthetic failure.' ;;
     undefined_refs) printf '%s\n' 'LaTeX Warning: There were undefined references.' ;;
     citation_undefined) printf '%s\n' "LaTeX Warning: Citation 'nx' undefined." ;;
+    diagnostics_log_overfull) printf '%s\n' 'Overfull \\hbox (12.0pt too wide)' ;;
     *) printf '%s\n' 'LuaLaTeX synthetic success.' ;;
   esac
+  printf '%s\n' 'NEXUS-V5-DIAGNOSTICS-END'
 elif [ "$tool" = "pdfinfo" ]; then
   printf '%s\n' 'Pages: 15'
 elif [ "$tool" = "pdftotext" ]; then
   page=''
   wants_page=0
+  wants_bbox=0
   for arg in "$@"; do
     if [ "$wants_page" -eq 1 ]; then page=$arg; break; fi
     if [ "$arg" = '-f' ]; then wants_page=1; fi
+    if [ "$arg" = '-bbox-layout' ]; then wants_bbox=1; fi
   done
-  if [ -z "$page" ]; then
+  if [ "$wants_bbox" -eq 1 ]; then
+    if [ "$NXV_FAKE_MODE" = "diagnostics_bbox_bad" ]; then
+      printf '%s\n' '<html><body><line xMin="55"'
+    else
+      /bin/cat "$NXV_FAKE_BBOX"
+    fi
+  elif [ -z "$page" ]; then
     if [ "$NXV_FAKE_MODE" = "question_marks" ]; then
       printf '%s\n' 'Extraction ?? invalide'
     else
@@ -1206,9 +1219,25 @@ elif [ "$tool" = "pdftotext" ]; then
         printf '%s\n' 'Exercices'
         i=1; while [ "$i" -le 9 ]; do printf '%s\n' 'Corrigé p. 15'; i=$((i + 1)); done ;;
       11) printf '%s\n' 'Auto-évaluation [Q1] [Q2] [Q3] [Q4] [Q5] [Q6] [Q7] [Q8]' ;;
-      12) printf '%s\n' 'Auto-évaluation [Q9] [Q10] [Q11] [Q12] [Q13] [Q14] [Q15]' ;;
-      13) printf '%s\n' 'Corrigés Correction et diagnostics' ;;
-      15) printf '%s\n' 'Corrigés Corrigés Corrigé solution Corrigé solution Corrigé solution Corrigé solution Corrigé solution' ;;
+      12)
+        printf '%s\n' 'Auto-évaluation [Q9] [Q10] [Q11] [Q12] [Q13] [Q14] [Q15]'
+        if [ "$NXV_FAKE_MODE" = "diagnostics_leak_p12" ]; then
+          printf '%s\n' 'Correction et diagnostics Réponses correctes Score Capacités à retravailler'
+        fi ;;
+      13)
+        printf '%s\n' 'Corrigés Correction et diagnostics Réponses correctes Score Capacités à retravailler'
+        if [ "$NXV_FAKE_MODE" = "diagnostics_duplicate_rubric" ]; then
+          printf '%s\n' 'Corrigés'
+        fi ;;
+      15)
+        if [ "$NXV_FAKE_MODE" = "bad_p15_rubric" ]; then
+          printf '%s\n' 'Corrigés Corrigé solution Corrigé solution Corrigé solution Corrigé solution Corrigé solution'
+        else
+          printf '%s\n' 'Corrigés Corrigés Corrigé solution Corrigé solution Corrigé solution Corrigé solution Corrigé solution'
+        fi
+        if [ "$NXV_FAKE_MODE" = "diagnostics_leak_p15" ]; then
+          printf '%s\n' 'Correction et diagnostics Réponses correctes Score Capacités à retravailler'
+        fi ;;
     esac
   fi
 elif [ "$tool" = "pdftoppm" ]; then
@@ -1222,6 +1251,10 @@ elif [ "$tool" = "pdftoppm" ]; then
 elif [ "$tool" = "identify" ]; then
   printf '%s' '1241 1754'
 elif [ "$tool" = "compare" ]; then
+  if [ "$NXV_FAKE_MODE" = "compare_diff" ]; then
+    printf '%s' '42' >&2
+    exit 1
+  fi
   printf '%s' '0' >&2
 fi
 """
@@ -1239,6 +1272,9 @@ fi
         executable.chmod(0o755)
     monkeypatch.setenv("NXV_FAKE_LOG", str(log))
     monkeypatch.setenv("NXV_FAKE_STATE", str(tmp_path / "lualatex.state"))
+    bbox_fixture = tmp_path / "diagnostics.xhtml"
+    bbox_fixture.write_text(_diagnostics_xhtml_fixture(), encoding="utf-8")
+    monkeypatch.setenv("NXV_FAKE_BBOX", str(bbox_fixture))
     monkeypatch.setenv("NXV_FAKE_MODE", "success")
     monkeypatch.setenv("PATH", f"{bin_dir}{os.pathsep}{os.environ['PATH']}")
     return log
@@ -1259,12 +1295,13 @@ def test_compile_maquette_calls_generator_three_lualatex_and_pdfinfo(
     assert names.count("python3") == 1
     assert names.count("lualatex") == 3
     assert names.count("pdfinfo") == 1
-    assert names.count("pdftotext") == 1
+    assert names.count("pdftotext") == 2
     assert all(entry[1] == str(ROOT) for entry in entries)
     assert entries[0][0] == "python3"
     assert "build_maquette_v5.py" in entries[0][2]
     assert result["pdfinfo"] == "Pages: 15\n"
     assert "??" not in result["text"]
+    assert result["diagnostics_bbox"] == _diagnostics_xhtml_fixture()
 
 
 def test_compile_maquette_allows_first_pass_undefined_references(
@@ -1359,27 +1396,42 @@ def test_checker_cli_synthetic_exit_codes(tmp_path, monkeypatch):
         )
     )
 
-    monkeypatch.setenv("NXV_FAKE_MODE", "success")
-    output_cases.append(
-        subprocess.run(
-            [
-                sys.executable,
-                str(checker_script),
-                "--manifest",
-                str(synthetic_manifest),
-            ],
-            cwd=synthetic_root,
-            capture_output=True,
-            text=True,
-            check=False,
+    for mode in (
+        "diagnostics_log_overfull",
+        "diagnostics_bbox_bad",
+        "diagnostics_leak_p12",
+        "diagnostics_leak_p15",
+        "diagnostics_duplicate_rubric",
+        "bad_p15_rubric",
+        "compare_diff",
+        "success",
+    ):
+        monkeypatch.setenv("NXV_FAKE_MODE", mode)
+        output_cases.append(
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(checker_script),
+                    "--manifest",
+                    str(synthetic_manifest),
+                ],
+                cwd=synthetic_root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
         )
-    )
 
-    invalid, rejected, success = output_cases
+    invalid, question_marks, *diagnostics_cases, compare_diff, success = output_cases
     assert invalid.returncode == 2
     assert "META V5:" in invalid.stderr
-    assert rejected.returncode == 1
-    assert "MAQUETTE V5:" in rejected.stderr
+    assert question_marks.returncode == 1
+    assert "MAQUETTE V5:" in question_marks.stderr
+    for rejected in diagnostics_cases:
+        assert rejected.returncode == 1
+        assert "MAQUETTE V5:" in rejected.stderr
+    assert compare_diff.returncode == 1
+    assert "page 13 modifiée: AE=42" in compare_diff.stderr
     assert success.returncode == 0
     assert success.stdout == (
         "MAQUETTE V5: PASS — 15 pages; blanches 6,14; "

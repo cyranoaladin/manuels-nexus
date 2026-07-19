@@ -282,7 +282,11 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
 
 
 def run_checked(
-    command: list[str], cwd: Path, *, meta_exit_code: bool = False
+    command: list[str],
+    cwd: Path,
+    *,
+    meta_exit_code: bool = False,
+    accepted_returncodes: tuple[int, ...] = (0,),
 ) -> subprocess.CompletedProcess[str]:
     try:
         result = subprocess.run(
@@ -299,7 +303,7 @@ def run_checked(
         if detail.startswith("META V5:"):
             detail = detail.removeprefix("META V5:").strip()
         raise MetaError(detail or "générateur META en échec")
-    if result.returncode != 0:
+    if result.returncode not in accepted_returncodes:
         raise AcceptanceError(
             f"commande en échec ({result.returncode}): {' '.join(command)}"
         )
@@ -370,16 +374,32 @@ def compile_maquette(manifest_path: Path, root: Path) -> dict[str, str]:
         _assert_clean_tex_output(combined)
         tex_output.append(combined)
     _assert_no_undefined_references(tex_output[-1])
+    combined_log = "".join(tex_output)
+    assert_diagnostics_log_clean(combined_log)
 
     pdf = output_dir / "maquette.pdf"
     pdfinfo = run_checked(["pdfinfo", str(pdf)], safe_root)
     extracted = run_checked(["pdftotext", "-layout", str(pdf), "-"], safe_root)
+    diagnostics_bbox = run_checked(
+        [
+            "pdftotext",
+            "-bbox-layout",
+            "-f",
+            "13",
+            "-l",
+            "13",
+            str(pdf),
+            "-",
+        ],
+        safe_root,
+    )
     if "??" in extracted.stdout:
         raise AcceptanceError("?? dans le texte PDF extrait")
     return {
-        "log": "".join(tex_output),
+        "log": combined_log,
         "pdfinfo": pdfinfo.stdout,
         "text": extracted.stdout,
+        "diagnostics_bbox": diagnostics_bbox.stdout,
     }
 
 
@@ -427,6 +447,7 @@ def accept_maquette(
     expected_pages = manifest["expected_pages"]
     _assert_page_count(compiled["pdfinfo"], expected_pages)
     assert_no_two_column_marginnotes(compiled["log"])
+    assert_diagnostics_bbox_layout(compiled["diagnostics_bbox"])
 
     pdf = root / manifest["output_pdf"]
     if not pdf.is_file():
@@ -459,6 +480,22 @@ def accept_maquette(
     for page, rubric in expected_rubrics.items():
         if normalize_text(rubric) not in pages[page]:
             raise AcceptanceError(f"rubrique {rubric} absente p. {page}")
+
+    diagnostic_strings = (
+        "Correction et diagnostics",
+        "Réponses correctes",
+        "Score",
+        "Capacités à retravailler",
+    )
+    for expected in diagnostic_strings:
+        normalized = normalize_text(expected)
+        if normalized not in pages[13]:
+            raise AcceptanceError(f"diagnostics absents p. 13: {expected}")
+        for page in (12, 14, 15):
+            if normalized in pages[page]:
+                raise AcceptanceError(f"diagnostics présents hors p. 13: p. {page}")
+    if pages[13].count("Corrigés") != 1:
+        raise AcceptanceError("onglet Corrigés p. 13 dupliqué ou absent")
 
     opening = raw_pages[1]
     for label, folio in manifest["chapter_toc"]:
@@ -504,6 +541,7 @@ def accept_maquette(
     comparison = run_checked(
         ["compare", "-metric", "AE", str(reference), str(images[12]), "null:"],
         root,
+        accepted_returncodes=(0, 1),
     )
     if comparison.stderr.strip() != "0":
         raise AcceptanceError(f"page 13 modifiée: AE={comparison.stderr.strip()}")
