@@ -23,14 +23,14 @@
 - Modify: `scripts/check_maquette_v5.py`
 - Modify: `tests/test_maquette_v5.py`
 
-- [ ] **Step 1: écrire les tests unitaires rouges des marqueurs diagnostics.** Ajouter `test_diagnostics_log_contract` avec trois intervalles START/END propres ; exiger le rejet d'un marqueur absent/déséquilibré, d'un quatrième intervalle, d'un `Overfull \\hbox` et d'un `Overfull \\vbox` dans n'importe quel intervalle.
-- [ ] **Step 2: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_diagnostics_log_contract -q`.** Attendu : FAIL, `assert_diagnostics_log_clean` absent.
-- [ ] **Step 3: implémenter `assert_diagnostics_log_clean(log, expected_passes=3)`.** Extraire la séquence de tous les marqueurs et exiger exactement `START, END` répété trois fois ; rejeter `START START END END`, tout marqueur parasite et tout ordre croisé, puis inspecter chaque corps.
-- [ ] **Step 4: réexécuter le test de l'étape 2.** Attendu : `1 passed`.
-- [ ] **Step 5: écrire les tests unitaires rouges du parseur bbox.** Ajouter une fixture XHTML avec en-tête `Corrigés` à y≈36, titre, en-tête `Question`, quinze lignes Q1–Q15, 45 lignes A/C/D, dernière ligne « placement de la virgule », `Réponses correctes`, grille Q1–Q15, `Score` contenant les octets de contrôle `\x03` issus des `\square`, puis pied `NEXUS RÉUSSITE` et folio à y≈806. Tester un document conforme puis les variantes : chevauchement tableau/réponses, chevauchement réponses/score, xMin < 56, xMax > 459.5 ou yMax > 768 sur une ligne du corps, ligne Q manquante et diagnostic manquant ; l'en-tête et le pied hors bornes restent admis.
-- [ ] **Step 6: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_diagnostics_bbox_contract -q`.** Attendu : FAIL, `assert_diagnostics_bbox_layout` absent.
-- [ ] **Step 7: implémenter `assert_diagnostics_bbox_layout(xhtml)`.** Supprimer d'abord uniquement les caractères interdits par XML 1.0 avec `re.sub(r"[\x00-\x08\x0B\x0C\x0E-\x1F]", "", xhtml)`, puis utiliser `xml.etree.ElementTree`, normaliser chaque ligne et calculer ses bornes. Délimiter trois régions par les ancres titre → `Réponses correctes` → `Score`; exiger Q1–Q15 et 45 lignes `A|C|D :` dans la première, Q11–Q15 dans la seconde, puis appliquer la marge de 6 pt. Contrôler les limites seulement sur les lignes du corps, en excluant sémantiquement l'en-tête, `NEXUS RÉUSSITE` et le folio ; lever `AcceptanceError` avec le critère en échec. Le test doit prouver que les cases nettoyées n'empêchent pas de retrouver les Q du score.
-- [ ] **Step 8: réexécuter le test de l'étape 6 puis les deux tests unitaires.** Attendu : `2 passed`.
+- [x] **Step 1: écrire les tests unitaires rouges des marqueurs diagnostics.** Ajouter `test_diagnostics_log_contract` avec trois intervalles START/END propres ; exiger le rejet d'un marqueur absent/déséquilibré, d'un quatrième intervalle, d'un `Overfull \\hbox` et d'un `Overfull \\vbox` dans n'importe quel intervalle.
+- [x] **Step 2: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_diagnostics_log_contract -q`.** Attendu : FAIL, `assert_diagnostics_log_clean` absent.
+- [x] **Step 3: implémenter `assert_diagnostics_log_clean(log, expected_passes=3)`.** Extraire la séquence de tous les marqueurs et exiger exactement `START, END` répété trois fois ; rejeter `START START END END`, tout marqueur parasite et tout ordre croisé, puis inspecter chaque corps.
+- [x] **Step 4: réexécuter le test de l'étape 2.** Attendu : `1 passed`.
+- [x] **Step 5: écrire les tests unitaires rouges du parseur bbox.** Ajouter une fixture XHTML avec en-tête `Corrigés` à y≈36, titre, en-tête `Question`, quinze lignes Q1–Q15, 45 lignes A/C/D, dernière ligne « placement de la virgule », `Réponses correctes`, grille Q1–Q15, `Score` contenant les octets de contrôle `\x03` issus des `\square`, puis pied `NEXUS RÉUSSITE` et folio à y≈806. Tester un document conforme puis les variantes : chevauchement tableau/réponses, chevauchement réponses/score, xMin < 56, xMax > 459.5 ou yMax > 768 sur une ligne du corps, ligne Q manquante et diagnostic manquant ; l'en-tête et le pied hors bornes restent admis.
+- [x] **Step 6: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_diagnostics_bbox_contract -q`.** Attendu : FAIL, `assert_diagnostics_bbox_layout` absent.
+- [x] **Step 7: implémenter `assert_diagnostics_bbox_layout(xhtml)`.** Supprimer d'abord uniquement les caractères interdits par XML 1.0 avec `re.sub(r"[\x00-\x08\x0B\x0C\x0E-\x1F]", "", xhtml)`, puis utiliser `xml.etree.ElementTree`, normaliser chaque ligne et calculer ses bornes. Délimiter trois régions par les ancres titre → `Réponses correctes` → `Score`; exiger Q1–Q15 et 45 lignes `A|C|D :` dans la première, Q11–Q15 dans la seconde, puis appliquer la marge de 6 pt. Contrôler les limites seulement sur les lignes du corps, en excluant sémantiquement l'en-tête, `NEXUS RÉUSSITE` et le folio ; lever `AcceptanceError` avec le critère en échec. Le test doit prouver que les cases nettoyées n'empêchent pas de retrouver les Q du score.
+- [x] **Step 8: réexécuter le test de l'étape 6 puis les deux tests unitaires.** Attendu : `2 passed`.
 
 ### Task 2: Reproduction PDF de la page 13 cassée
 
@@ -38,9 +38,9 @@
 - Modify: `tests/test_maquette_v5.py`
 - Preserve: `chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.tex`
 
-- [ ] **Step 1: ajouter `test_page13_diagnostics_layout_pdf`.** Générer les renvois, lancer trois LuaLaTeX, concaténer leurs sorties, extraire p.12–15 avec `pdftotext -layout` et p.13 avec `-bbox-layout`. Appeler d'abord le validateur géométrique, puis exiger trois paires de marqueurs propres, les quatre chaînes diagnostics seulement p.13, un seul `Corrigés` p.13, p.14 vide, deux `Corrigés` p.15 et le hash QCM canonique.
-- [ ] **Step 2: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_page13_diagnostics_layout_pdf -q`.** Attendu RED d'abord sur la géométrie actuelle (réponses au-dessus de la fin du tableau), indépendamment des marqueurs encore absents ; le log confirme séparément 314,99474 pt et 54,94688 pt de débordement.
-- [ ] **Step 3: vérifier que l'échec est dû au rendu et non à la fixture.** Consigner dans le test les quatre chaînes diagnostics exactes et utiliser le PDF réel, sans mock.
+- [x] **Step 1: ajouter `test_page13_diagnostics_layout_pdf`.** Générer les renvois, lancer trois LuaLaTeX, concaténer leurs sorties, extraire p.12–15 avec `pdftotext -layout` et p.13 avec `-bbox-layout`. Appeler d'abord le validateur géométrique, puis exiger trois paires de marqueurs propres, les quatre chaînes diagnostics seulement p.13, un seul `Corrigés` p.13, p.14 vide, deux `Corrigés` p.15 et le hash QCM canonique.
+- [x] **Step 2: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_page13_diagnostics_layout_pdf -q`.** Attendu RED d'abord sur la géométrie actuelle (réponses au-dessus de la fin du tableau), indépendamment des marqueurs encore absents ; le log confirme séparément 314,99474 pt et 54,94688 pt de débordement.
+- [x] **Step 3: vérifier que l'échec est dû au rendu et non à la fixture.** Consigner dans le test les quatre chaînes diagnostics exactes et utiliser le PDF réel, sans mock.
 
 ### Task 3: Pleine largeur et typographie locale
 
@@ -48,11 +48,11 @@
 - Modify: `gabarits/nexus-manuel-v5.cls:505-560`
 - Modify: `tests/test_maquette_v5.py`
 
-- [ ] **Step 1: ajouter au contrat source les exigences rouges.** Dans `test_qcm_and_corrections_source_contract`, exiger START/END, `\fontsize{6.6}{7.6}\selectfont`, `\setlength{\tabcolsep}{2pt}`, `\renewcommand{\arraystretch}{1.08}`, absence de `\begin{multicols}{2}` après l'écriture du mark `Corrigés`, et fermeture conditionnelle à la fin.
-- [ ] **Step 2: exécuter le contrat source.** Attendu RED sur ces nouvelles exigences.
-- [ ] **Step 3: modifier minimalement `faireLePoint`.** À l'interception du `\newpage`, fermer le QCM multicolonné, expédier p.12, écrire le mark, activer le mode diagnostics et le marqueur START, appliquer les trois valeurs typographiques, mais ne pas rouvrir `multicols`. À la fin, fermer `multicols` seulement hors diagnostics ; en mode diagnostics, exécuter d'abord `\clearpage` pour expédier p.13, écrire END immédiatement après, puis restaurer l'onglet sans seconde fermeture de colonnes.
-- [ ] **Step 4: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_qcm_and_corrections_source_contract tests/test_maquette_v5.py::test_page13_diagnostics_layout_pdf -q -x`.** Attendu GREEN ; si la géométrie échoue, ne modifier qu'une seule valeur typographique à la fois et documenter l'hypothèse.
-- [ ] **Step 5: vérifier le log réel.** Entre START/END : zéro `Overfull \\hbox`, zéro `Overfull \\vbox`; le hash du QCM reste `cb34cb2351761e1c60d15eb5b95bcbc656c718fb19b6dca15290e3df3384b9e3`.
+- [x] **Step 1: ajouter au contrat source les exigences rouges.** Dans `test_qcm_and_corrections_source_contract`, exiger START/END, `\fontsize{6.6}{7.6}\selectfont`, `\setlength{\tabcolsep}{2pt}`, `\renewcommand{\arraystretch}{1.08}`, absence de `\begin{multicols}{2}` après l'écriture du mark `Corrigés`, et fermeture conditionnelle à la fin.
+- [x] **Step 2: exécuter le contrat source.** Attendu RED sur ces nouvelles exigences.
+- [x] **Step 3: modifier minimalement `faireLePoint`.** À l'interception du `\newpage`, fermer le QCM multicolonné, expédier p.12, écrire le mark, activer le mode diagnostics et le marqueur START, appliquer les trois valeurs typographiques, mais ne pas rouvrir `multicols`. À la fin, fermer `multicols` seulement hors diagnostics ; en mode diagnostics, exécuter d'abord `\clearpage` pour expédier p.13, écrire END immédiatement après, puis restaurer l'onglet sans seconde fermeture de colonnes.
+- [x] **Step 4: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_qcm_and_corrections_source_contract tests/test_maquette_v5.py::test_page13_diagnostics_layout_pdf -q -x`.** Attendu GREEN ; si la géométrie échoue, ne modifier qu'une seule valeur typographique à la fois et documenter l'hypothèse.
+- [x] **Step 5: vérifier le log réel.** Entre START/END : zéro `Overfull \\hbox`, zéro `Overfull \\vbox`; le hash du QCM reste `cb34cb2351761e1c60d15eb5b95bcbc656c718fb19b6dca15290e3df3384b9e3`.
 
 ## Chunk 2: Contrôleur, références et livraison
 
@@ -85,11 +85,11 @@ Avant Task 4, vérifier au moins une fois chaque valeur par
 - Modify: `scripts/check_maquette_v5.py`
 - Modify: `tests/test_maquette_v5.py`
 
-- [ ] **Step 1: étendre le faux outillage des tests.** Le faux LuaLaTeX émet une paire START/END par passe ; le faux `pdftotext -bbox-layout` renvoie la fixture géométrique conforme.
-- [ ] **Step 2: écrire les attentes rouges de l'acceptation.** Exiger dans le contrôleur trois intervalles de log propres, la géométrie p.13, les quatre chaînes propres aux diagnostics, l'absence p.12/14 et les rubriques/onglets p.13/p.15.
-- [ ] **Step 3: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_checker_cli_synthetic_exit_codes tests/test_maquette_v5.py::test_maquette_v5_acceptance -q -x`.** Attendu RED sur le premier critère non branché.
-- [ ] **Step 4: brancher les validateurs dans `compile_maquette`/`accept_maquette`.** Ajouter l'extraction bbox p.13 au résultat compilé ou dans l'acceptation, sans dupliquer les appels externes inutiles.
-- [ ] **Step 5: réexécuter les deux tests.** Attendu : les nouveaux contrôles structurels passent et l'acceptation réelle atteint l'ancien oracle, puis échoue avec AE non nul contre `validations/v5-it1/page-13.png`; aucune nouvelle référence n'est créée automatiquement.
+- [x] **Step 1: étendre le faux outillage des tests.** Le faux LuaLaTeX émet une paire START/END par passe ; le faux `pdftotext -bbox-layout` renvoie la fixture géométrique conforme.
+- [x] **Step 2: écrire les attentes rouges de l'acceptation.** Exiger dans le contrôleur trois intervalles de log propres, la géométrie p.13, les quatre chaînes propres aux diagnostics, l'absence p.12/14 et les rubriques/onglets p.13/p.15.
+- [x] **Step 3: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_checker_cli_synthetic_exit_codes tests/test_maquette_v5.py::test_maquette_v5_acceptance -q -x`.** Attendu RED sur le premier critère non branché.
+- [x] **Step 4: brancher les validateurs dans `compile_maquette`/`accept_maquette`.** Ajouter l'extraction bbox p.13 au résultat compilé ou dans l'acceptation, sans dupliquer les appels externes inutiles.
+- [x] **Step 5: réexécuter les deux tests.** Attendu : les nouveaux contrôles structurels passent et l'acceptation réelle atteint l'ancien oracle, puis échoue avec AE non nul contre `validations/v5-it1/page-13.png`; aucune nouvelle référence n'est créée automatiquement.
 
 ### Task 5: Protection des quatorze pages et nouvel oracle p.13
 
@@ -99,12 +99,12 @@ Avant Task 4, vérifier au moins une fois chaque valeur par
 - Create: `validations/v5-it2/page-13.png`
 - Modify: `validations/v5/page-13.png`
 
-- [ ] **Step 1: ajouter la table SHA-256 des PNG hors p.13.** Copier exactement les quatorze valeurs canoniques ci-dessus, issues de `67d979b` avant rerendu ; le test échoue si une page 1–12 ou 14–15 change après le rendu à 150 dpi.
-- [ ] **Step 2: exécuter le test PDF réel.** Attendu : hashes hors p.13 identiques et p.13 différente de `validations/v5-it1/page-13.png`.
-- [ ] **Step 3: inspecter `validations/v5/page-13.png` à pleine résolution.** Vérifier lisibilité ≥6,6 pt, alignement, ordre tableau/réponses/score, absence de texte au-delà des bordures et marge avant le pied.
-- [ ] **Step 4: créer mécaniquement `validations/v5-it2/page-13.png` depuis le rendu inspecté.** Calculer son SHA-256 et l'ajouter à `PAGE_13_REFERENCE_SHA256`.
-- [ ] **Step 5: remplacer tous les usages de l'ancien oracle.** Le contrôleur vérifie le SHA de `validations/v5-it2/page-13.png` puis exige `compare -metric AE = 0` avec le rendu courant. Migrer aussi `test_qcm_diagnostics_and_corrections_pdf` vers l'oracle it2 ; conserver uniquement l'assertion du SHA historique de `validations/v5-it1/page-13.png`, sans comparaison AE. Dans `test_checker_cli_synthetic_exit_codes`, copier la nouvelle référence it2 dans le `synthetic_root` pour que chemin et SHA soient réels avant le faux `compare`.
-- [ ] **Step 6: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_page13_diagnostics_layout_pdf tests/test_maquette_v5.py::test_maquette_v5_acceptance -q`.** Attendu : `2 passed`.
+- [x] **Step 1: ajouter la table SHA-256 des PNG hors p.13.** Copier exactement les quatorze valeurs canoniques ci-dessus, issues de `67d979b` avant rerendu ; le test échoue si une page 1–12 ou 14–15 change après le rendu à 150 dpi.
+- [x] **Step 2: exécuter le test PDF réel.** Attendu : hashes hors p.13 identiques et p.13 différente de `validations/v5-it1/page-13.png`.
+- [x] **Step 3: inspecter `validations/v5/page-13.png` à pleine résolution.** Vérifier lisibilité ≥6,6 pt, alignement, ordre tableau/réponses/score, absence de texte au-delà des bordures et marge avant le pied.
+- [x] **Step 4: créer mécaniquement `validations/v5-it2/page-13.png` depuis le rendu inspecté.** Calculer son SHA-256 et l'ajouter à `PAGE_13_REFERENCE_SHA256`.
+- [x] **Step 5: remplacer tous les usages de l'ancien oracle.** Le contrôleur vérifie le SHA de `validations/v5-it2/page-13.png` puis exige `compare -metric AE = 0` avec le rendu courant. Migrer aussi `test_qcm_diagnostics_and_corrections_pdf` vers l'oracle it2 ; conserver uniquement l'assertion du SHA historique de `validations/v5-it1/page-13.png`, sans comparaison AE. Dans `test_checker_cli_synthetic_exit_codes`, copier la nouvelle référence it2 dans le `synthetic_root` pour que chemin et SHA soient réels avant le faux `compare`.
+- [x] **Step 6: exécuter `python3 -m pytest tests/test_maquette_v5.py::test_page13_diagnostics_layout_pdf tests/test_maquette_v5.py::test_maquette_v5_acceptance -q`.** Attendu : `2 passed`.
 
 ### Task 6: Rapport, revue et vérification finale
 
@@ -113,10 +113,10 @@ Avant Task 4, vérifier au moins une fois chaque valeur par
 - Modify: `docs/superpowers/specs/2026-07-19-page-13-diagnostics-layout-fix-design.md` seulement si l'implémentation révèle une contrainte validée différente
 - Modify: `docs/superpowers/plans/2026-07-19-page-13-diagnostics-layout-fix.md` pour cocher les étapes terminées
 
-- [ ] **Step 1: mettre à jour le rapport.** Remplacer « page 13 non retouchée/AE=0 it1 » par l'audit des deux débordements, la pleine largeur, les preuves bbox/log, le hash it2 et la pause bloquante inchangée.
-- [ ] **Step 2: exécuter `python3 scripts/check_maquette_v5.py --manifest build/maquette-v5/manifest.json`.** Attendu exact : `MAQUETTE V5: PASS — 15 pages; blanches 6,14; renvois 2/2; marginnote colonnes 0`.
-- [ ] **Step 3: exécuter `python3 -m pytest tests/test_maquette_v5.py -q`.** Attendu : tous les tests v5 passent.
-- [ ] **Step 4: exécuter `make check-latex` puis `python3 -m pytest tests/ -q`.** Attendu : codes 0, aucune régression.
+- [x] **Step 1: mettre à jour le rapport.** Remplacer « page 13 non retouchée/AE=0 it1 » par l'audit des deux débordements, la pleine largeur, les preuves bbox/log, le hash it2 et la pause bloquante inchangée.
+- [x] **Step 2: exécuter `python3 scripts/check_maquette_v5.py --manifest build/maquette-v5/manifest.json`.** Attendu exact : `MAQUETTE V5: PASS — 15 pages; blanches 6,14; renvois 2/2; marginnote colonnes 0`.
+- [x] **Step 3: exécuter `python3 -m pytest tests/test_maquette_v5.py -q`.** Attendu : tous les tests v5 passent.
+- [x] **Step 4: exécuter `make check-latex` puis `python3 -m pytest tests/ -q`.** Attendu : codes 0, aucune régression.
 - [ ] **Step 5: demander une revue indépendante.** Résoudre tout P0/P1, relancer les validations affectées et vérifier visuellement p.13.
-- [ ] **Step 6: vérifier l'isolation.** `git diff --check`, worktree principal inchangé, aucun fichier QCM/TSPE/NSI modifié, aucun push/déploiement.
-- [ ] **Step 7: créer un commit local limité à la correction p.13.** Message : `[CHARTE][V5.B-it2] corrige diagnostics page 13`.
+- [x] **Step 6: vérifier l'isolation.** `git diff --check`, worktree principal inchangé, aucun fichier QCM/TSPE/NSI modifié, aucun push/déploiement.
+- [x] **Step 7: créer un commit local limité à la correction p.13.** Message : `[CHARTE][V5.B-it2] corrige diagnostics page 13`.

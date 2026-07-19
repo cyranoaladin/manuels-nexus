@@ -65,9 +65,12 @@ L'acceptation PDF exige aussi :
   diagnostics`, `Réponses correctes`, `Score`, `Capacités à retravailler`) sur
   les pages 12 ou 14 ;
 - une analyse `pdftotext -bbox-layout` segmentée en trois régions par les ancres
-  `Correction et diagnostics`, `Réponses correctes` et `Score` : Q1–Q15 et les
-  45 diagnostics doivent appartenir à la première région, la grille Q11–Q15 à
-  la deuxième ; la dernière ligne
+  `Correction et diagnostics`, `Réponses correctes` et `Score` ; Poppler pouvant
+  restituer les colonnes dans un ordre documentaire différent de l'ordre visuel,
+  chaque ligne est affectée à sa région par sa coordonnée verticale relativement
+  aux ordonnées des ancres, jamais par sa position dans le flux XHTML : Q1–Q15
+  et les 45 diagnostics doivent appartenir à la première région, la grille
+  Q11–Q15 à la deuxième ; la dernière ligne
   du tableau (« placement de la virgule ») doit finir au moins 6 pt avant
   `Réponses correctes`, la dernière ligne de la grille Q11–Q15 au moins 6 pt
   avant `Score`, et toutes les boîtes du corps doivent rester dans

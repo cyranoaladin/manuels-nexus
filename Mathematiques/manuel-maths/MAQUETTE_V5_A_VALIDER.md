@@ -17,6 +17,7 @@ Date : 19 juillet 2026.
 - PDF local non versionné : `build/maquette-v5/maquette.pdf`
 - PNG 150 dpi : `validations/v5/page-01.png` à `page-15.png`
 - Référence immuable itération 1 : `validations/v5-it1/page-13.png`
+- Référence corrigée itération 2 : `validations/v5-it2/page-13.png`
 - Générateur : `scripts/build_maquette_v5.py`
 - Contrôleur : `scripts/check_maquette_v5.py`
 - Régressions : `tests/test_maquette_v5.py`
@@ -32,11 +33,13 @@ Date : 19 juillet 2026.
 | 5 | Renvois | Placeholders `S'entraîner`, aucun lien Méthode/Corrigé. | Renvois générés depuis les META : `S'entraîner : ex. 1, 2, 7 p. 9` et `→ M1 · Corrigé p. 15`. | Chaînes exactes exigées dans le PDF après trois passes LuaLaTeX. | CORRIGÉ |
 | 6 | Badges exercices | IDs bruts visibles, difficulté et pictogrammes absents. | IDs réservés aux META/labels ; difficulté à trois losanges plein/contour ; pictos Python et calculatrice ; 11 badges p.9 et 9 p.10 avec filet central. | Extraction des 20 badges, rejet des 20 IDs et test raster des filets. | CORRIGÉ |
 | 7 | QCM étroit | Fractions disloquées et items susceptibles d'être coupés. | `\tfrac` local, chaque question principale boxée, répartition complète Q1–Q8 p.11 / Q9–Q15 p.12. | Extraction question par question ; Q12 et ses quatre réponses restent dans la même colonne. | CORRIGÉ |
-| 8 | Corrigés finaux | En-tête/onglet `COURS`, titre doublé et numéros de badges désynchronisés. | Mark et onglet `CORRIGÉS`, un seul titre de contenu, cinq badges neutres et style math étroit dans la grille trois colonnes. | Extraction p.15, aucun ID technique et zéro `Overfull \hbox` dans le bloc. | CORRIGÉ |
+| 8 | Diagnostics QCM p.13 | Le tableau quatre colonnes était composé dans une demi-page : débordements de 314.99474 pt et 54.94688 pt, superpositions avec les réponses et le score. | Page pleine largeur hors `multicols`, typographie locale 6,6/7,6 pt, tableau puis réponses puis score sans collision. | Bornes et marges contrôlées par `pdftotext -bbox-layout` ; trois intervalles de log sans `Overfull`; référence it2 SHA-256 `2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23`, `compare -metric AE = 0`. | CORRIGÉ |
+| 9 | Corrigés finaux | En-tête/onglet `COURS`, titre doublé et numéros de badges désynchronisés. | Mark et onglet `CORRIGÉS`, un seul titre de contenu, cinq badges neutres et style math étroit dans la grille trois colonnes. | Extraction p.15, aucun ID technique et zéro `Overfull \hbox` dans le bloc. | CORRIGÉ |
 
-La page 13 n'a pas été retouchée. Sa comparaison raster avec la référence de
-l'itération 1 donne `compare -metric AE = 0`. Les deux fichiers ont le SHA-256
-`ea1750a0f56ecd3b2761614709f96f9b267569ece45bc4103aa11dc2007dacf1`.
+La référence de l'itération 1 reste conservée comme preuve du défaut initial,
+avec le SHA-256
+`ea1750a0f56ecd3b2761614709f96f9b267569ece45bc4103aa11dc2007dacf1` ;
+elle n'est plus utilisée comme oracle d'acceptation.
 
 ## Contrôle automatique
 
@@ -55,13 +58,13 @@ MAQUETTE V5: PASS — 15 pages; blanches 6,14; renvois 2/2; marginnote colonnes 
 Le contrôleur génère la table de renvois, compile exactement trois fois,
 contrôle les 15 pages, les marks, le sommaire, les pages blanches, les chaînes
 META, l'absence d'IDs et de `\marginnote` émis en colonnes, les débordements
-des corrigés compacts et le hash de la référence, préserve la page 13, puis
-régénère exactement les 15 PNG en 150 dpi.
+des corrigés compacts, les bornes, marges et collisions de la page 13, ainsi que
+le hash de la référence it2, puis régénère exactement les 15 PNG en 150 dpi.
 
 ## Verdict attendu
 
-Relire les pages 1 à 15, avec attention particulière aux p.2–5, p.7–10,
-p.11–12 et p.15. Le seul message qui lève la pause est :
+Relire les pages 1 à 15, avec attention particulière aux p.2–5, p.7–13 et
+p.15. Le seul message qui lève la pause est :
 `MAQUETTE V5 VALIDÉE`.
 
 **PAUSE BLOQUANTE — EN ATTENTE DE « MAQUETTE V5 VALIDÉE »**
