@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 import unicodedata
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from build_maquette_v5 import MetaError, load_manifest
@@ -54,6 +55,146 @@ def assert_no_compact_correction_overfull(log: str) -> None:
     compact_log = log[log.index(start) : log.index(end)]
     if "Overfull \\hbox" in compact_log:
         raise AcceptanceError("débordement horizontal des corrigés compacts")
+
+
+def assert_diagnostics_log_clean(log: str, expected_passes: int = 3) -> None:
+    """Require one balanced, overflow-free diagnostics interval per TeX pass."""
+    start = "NEXUS-V5-DIAGNOSTICS-START"
+    end = "NEXUS-V5-DIAGNOSTICS-END"
+    marker_pattern = re.compile(r"NEXUS-V5-DIAGNOSTICS-[A-Z][A-Z0-9_-]*")
+    markers = list(marker_pattern.finditer(log))
+    expected_sequence = [
+        marker for _ in range(expected_passes) for marker in (start, end)
+    ]
+    if [marker.group(0) for marker in markers] != expected_sequence:
+        raise AcceptanceError("marqueurs diagnostics absents, parasites ou déséquilibrés")
+
+    for pass_number in range(expected_passes):
+        interval_start = markers[2 * pass_number].end()
+        interval_end = markers[2 * pass_number + 1].start()
+        interval = log[interval_start:interval_end]
+        if "Overfull \\hbox" in interval or "Overfull \\vbox" in interval:
+            raise AcceptanceError(
+                f"débordement dans les diagnostics, passe {pass_number + 1}"
+            )
+
+
+def assert_diagnostics_bbox_layout(xhtml: str) -> None:
+    """Validate the semantic regions and geometry of diagnostics page XHTML."""
+    xml = re.sub(r"[\x00-\x08\x0B\x0C\x0E-\x1F]", "", xhtml)
+    try:
+        document = ET.fromstring(xml)
+    except (ET.ParseError, ValueError) as exc:
+        raise AcceptanceError(f"XHTML diagnostics invalide: {exc}") from exc
+
+    lines: list[dict[str, object]] = []
+    for element in document.findall(".//{*}line"):
+        text = normalize_text(" ".join(element.itertext()))
+        if not text:
+            continue
+        try:
+            line = {
+                "text": text,
+                "x_min": float(element.attrib["xMin"]),
+                "y_min": float(element.attrib["yMin"]),
+                "x_max": float(element.attrib["xMax"]),
+                "y_max": float(element.attrib["yMax"]),
+            }
+        except (KeyError, ValueError) as exc:
+            raise AcceptanceError("boîte de ligne diagnostics invalide") from exc
+        lines.append(line)
+
+    def anchor_index(label: str, *, prefix: bool = False) -> int:
+        matches = [
+            index
+            for index, line in enumerate(lines)
+            if (
+                str(line["text"]).startswith(label)
+                if prefix
+                else label in str(line["text"])
+            )
+        ]
+        if len(matches) != 1:
+            raise AcceptanceError(f"ancre diagnostics invalide: {label}")
+        return matches[0]
+
+    title_index = anchor_index("Correction et diagnostics")
+    responses_index = anchor_index("Réponses correctes")
+    score_index = anchor_index("Score", prefix=True)
+    if not title_index < responses_index < score_index:
+        raise AcceptanceError("ordre des régions diagnostics invalide")
+
+    def is_header_or_footer(line: dict[str, object]) -> bool:
+        text = str(line["text"])
+        return (
+            text == "Corrigés"
+            or text == "NEXUS RÉUSSITE"
+            or (re.fullmatch(r"\d+", text) is not None and float(line["y_min"]) > 768.0)
+        )
+
+    for line in lines:
+        if is_header_or_footer(line):
+            continue
+        if (
+            float(line["x_min"]) < 56.0
+            or float(line["x_max"]) > 459.5
+            or float(line["y_max"]) > 768.0
+        ):
+            raise AcceptanceError(f"ligne hors corps diagnostics: {line['text']}")
+
+    table_lines = lines[title_index + 1 : responses_index]
+    response_lines = lines[responses_index + 1 : score_index]
+    question_numbers = [
+        int(match.group(1))
+        for line in table_lines
+        for match in re.finditer(r"\bQ(1[0-5]|[1-9])\b", str(line["text"]))
+    ]
+    if len(question_numbers) != 15 or set(question_numbers) != set(range(1, 16)):
+        raise AcceptanceError("lignes Q1–Q15 diagnostics incomplètes")
+
+    diagnostics = [
+        line
+        for line in table_lines
+        if re.match(r"^[ACD]\s*:", str(line["text"])) is not None
+    ]
+    if len(diagnostics) != 45:
+        raise AcceptanceError(
+            f"diagnostics distracteurs: attendu 45, obtenu {len(diagnostics)}"
+        )
+    final_diagnostic = [
+        line for line in diagnostics if "placement de la virgule" in str(line["text"])
+    ]
+    if len(final_diagnostic) != 1:
+        raise AcceptanceError("dernier diagnostic absent: placement de la virgule")
+
+    grid_numbers = [
+        int(match.group(1))
+        for line in response_lines
+        for match in re.finditer(r"\bQ(1[0-5]|[1-9])\b", str(line["text"]))
+    ]
+    if len(grid_numbers) != 15 or set(grid_numbers) != set(range(1, 16)):
+        raise AcceptanceError("grille Q1–Q15 incomplète")
+    final_grid_lines = [
+        line
+        for line in response_lines
+        if any(
+            int(match.group(1)) in range(11, 16)
+            for match in re.finditer(
+                r"\bQ(1[0-5]|[1-9])\b", str(line["text"])
+            )
+        )
+    ]
+    if not final_grid_lines:
+        raise AcceptanceError("lignes Q11–Q15 absentes")
+
+    responses_anchor = lines[responses_index]
+    score_anchor = lines[score_index]
+    table_bottom = max(float(line["y_max"]) for line in table_lines)
+    if float(responses_anchor["y_min"]) - table_bottom < 6.0:
+        raise AcceptanceError("collision tableau diagnostics / réponses correctes")
+    grid_bottom = max(float(line["y_max"]) for line in final_grid_lines)
+    if float(score_anchor["y_min"]) - grid_bottom < 6.0:
+        raise AcceptanceError("collision grille diagnostics / score")
 
 
 def run_checked(

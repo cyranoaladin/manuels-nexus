@@ -933,6 +933,174 @@ def test_pdf_text_helpers_and_margin_log_contract():
         )
 
 
+def test_diagnostics_log_contract():
+    checker = importlib.import_module("check_maquette_v5")
+    start = "NEXUS-V5-DIAGNOSTICS-START"
+    end = "NEXUS-V5-DIAGNOSTICS-END"
+    clean_passes = [
+        f"passage {number}\n{start}\ncomposition saine {number}\n{end}"
+        for number in range(1, 4)
+    ]
+    clean_log = "\n".join(clean_passes)
+
+    checker.assert_diagnostics_log_clean(clean_log)
+    checker.assert_diagnostics_log_clean(
+        "Overfull \\hbox hors diagnostics\n"
+        + clean_log
+        + "\nOverfull \\vbox hors diagnostics"
+    )
+
+    invalid_logs = [
+        "journal sans marqueur diagnostics",
+        clean_log.replace(end, "", 1),
+        clean_log + f"\n{start}\nquatrième passage\n{end}",
+        clean_log.replace(
+            "composition saine 2",
+            "NEXUS-V5-DIAGNOSTICS-PARASITE\ncomposition saine 2",
+        ),
+        f"{start}\n{start}\n{end}\n{end}\n" + "\n".join(clean_passes[2:]),
+    ]
+    for invalid_log in invalid_logs:
+        with pytest.raises(checker.AcceptanceError, match="diagnostics"):
+            checker.assert_diagnostics_log_clean(invalid_log)
+
+    for pass_number in range(3):
+        for box_kind in ("hbox", "vbox"):
+            overfull_passes = clean_passes.copy()
+            overfull_passes[pass_number] = overfull_passes[pass_number].replace(
+                "composition saine",
+                f"Overfull \\{box_kind} (12.0pt too large)\ncomposition saine",
+            )
+            with pytest.raises(checker.AcceptanceError, match="diagnostics"):
+                checker.assert_diagnostics_log_clean("\n".join(overfull_passes))
+
+
+def test_diagnostics_bbox_contract():
+    checker = importlib.import_module("check_maquette_v5")
+
+    def diagnostics_xhtml(
+        *,
+        table_gap=12.0,
+        score_gap=12.0,
+        missing_question=None,
+        missing_diagnostic=None,
+        override=None,
+    ):
+        lines = []
+
+        def add(key, text, y_min, *, x_min=60.0, x_max=430.0, height=4.0):
+            attributes = {
+                "xMin": x_min,
+                "yMin": y_min,
+                "xMax": x_max,
+                "yMax": y_min + height,
+            }
+            if override is not None and override[0] == key:
+                attributes[override[1]] = override[2]
+            lines.append(
+                '<line data-key="{}" xMin="{}" yMin="{}" xMax="{}" yMax="{}">'
+                '<word xMin="{}" yMin="{}" xMax="{}" yMax="{}">{}</word>'
+                "</line>".format(
+                    key,
+                    attributes["xMin"],
+                    attributes["yMin"],
+                    attributes["xMax"],
+                    attributes["yMax"],
+                    attributes["xMin"],
+                    attributes["yMin"],
+                    attributes["xMax"],
+                    attributes["yMax"],
+                    text,
+                )
+            )
+
+        add("header", "Corrigés", 34.0, x_min=40.0, x_max=120.0, height=6.0)
+        add("title", "Correction et diagnostics", 58.0, height=7.0)
+        add("table-header", "Question Capacité Réponse", 72.0, height=5.0)
+
+        slot = 0
+        for question in range(1, 16):
+            y_min = 84.0 + slot * 6.0
+            if question != missing_question:
+                add(
+                    f"question-{question}",
+                    f"Q{question} C{min(5, (question + 2) // 3)} B",
+                    y_min,
+                )
+            slot += 1
+            for letter in ("A", "C", "D"):
+                y_min = 84.0 + slot * 6.0
+                if (question, letter) != missing_diagnostic:
+                    method = min(5, (question + 2) // 3)
+                    detail = f"{letter} : diagnostic QCM — renvoi M{method}"
+                    if question == 15 and letter == "D":
+                        detail = "D : erreur de placement de la virgule — renvoi M5"
+                    add(f"diagnostic-{question}-{letter}", detail, y_min)
+                slot += 1
+
+        table_bottom = 84.0 + 59 * 6.0 + 4.0
+        responses_y = table_bottom + table_gap
+        add("responses-title", "Réponses correctes", responses_y, height=7.0)
+        add(
+            "answers-1-5",
+            "Q1 B Q2 B Q3 C Q4 A Q5 A",
+            responses_y + 16.0,
+            height=7.0,
+        )
+        add(
+            "answers-6-10",
+            "Q6 B Q7 B Q8 B Q9 C Q10 B",
+            responses_y + 28.0,
+            height=7.0,
+        )
+        grid_last_y = responses_y + 40.0
+        add(
+            "answers-11-15",
+            "Q11 B Q12 B Q13 B Q14 B Q15 B",
+            grid_last_y,
+            height=7.0,
+        )
+        score_y = grid_last_y + 7.0 + score_gap
+        add("score", "Score : \x03 \x03 /15", score_y, height=7.0)
+        add(
+            "capacities",
+            "Capacités à retravailler : C1 C2 C3 C4 C5",
+            score_y + 13.0,
+            height=7.0,
+        )
+        add(
+            "footer-brand",
+            "NEXUS RÉUSSITE",
+            804.0,
+            x_min=38.0,
+            x_max=520.0,
+            height=7.0,
+        )
+        add("footer-folio", "13", 804.0, x_min=520.0, x_max=540.0, height=7.0)
+        return (
+            '<?xml version="1.0" encoding="UTF-8"?>'
+            '<html xmlns="http://www.w3.org/1999/xhtml"><body><doc>'
+            '<page width="595.276" height="841.89"><flow><block>'
+            + "".join(lines)
+            + "</block></flow></page></doc></body></html>"
+        )
+
+    checker.assert_diagnostics_bbox_layout(diagnostics_xhtml())
+
+    invalid_documents = [
+        diagnostics_xhtml(table_gap=5.0),
+        diagnostics_xhtml(score_gap=5.0),
+        diagnostics_xhtml(override=("question-1", "xMin", 55.9)),
+        diagnostics_xhtml(override=("question-1", "xMax", 459.6)),
+        diagnostics_xhtml(override=("question-1", "yMax", 768.1)),
+        diagnostics_xhtml(missing_question=7),
+        diagnostics_xhtml(missing_diagnostic=(8, "C")),
+    ]
+    for invalid_document in invalid_documents:
+        with pytest.raises(checker.AcceptanceError):
+            checker.assert_diagnostics_bbox_layout(invalid_document)
+
+
 def _install_fake_maquette_tools(tmp_path, monkeypatch):
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()
