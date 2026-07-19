@@ -54,7 +54,9 @@ La classe écrit les marqueurs
 `NEXUS-V5-DIAGNOSTICS-START` et `NEXUS-V5-DIAGNOSTICS-END`. Chacune des trois
 passes LuaLaTeX doit contenir exactement une paire équilibrée. Le contrôleur
 inspecte chaque intervalle et refuse tout `Overfull \\hbox` ou
-`Overfull \\vbox`. L'acceptation PDF exige aussi :
+`Overfull \\vbox`. Le marqueur END est écrit seulement après le `\clearpage`
+qui expédie la page 13, afin d'inclure les avertissements produits au shipout.
+L'acceptation PDF exige aussi :
 
 - 15 pages ;
 - `Correction et diagnostics`, les 15 lignes Q1 à Q15, les 45 diagnostics,
@@ -62,11 +64,18 @@ inspecte chaque intervalle et refuse tout `Overfull \\hbox` ou
 - aucune des quatre chaînes propres aux diagnostics (`Correction et
   diagnostics`, `Réponses correctes`, `Score`, `Capacités à retravailler`) sur
   les pages 12 ou 14 ;
-- une analyse `pdftotext -bbox-layout` en coordonnées PDF : la dernière ligne
+- une analyse `pdftotext -bbox-layout` segmentée en trois régions par les ancres
+  `Correction et diagnostics`, `Réponses correctes` et `Score` : Q1–Q15 et les
+  45 diagnostics doivent appartenir à la première région, la grille Q11–Q15 à
+  la deuxième ; la dernière ligne
   du tableau (« placement de la virgule ») doit finir au moins 6 pt avant
   `Réponses correctes`, la dernière ligne de la grille Q11–Q15 au moins 6 pt
   avant `Score`, et toutes les boîtes du corps doivent rester dans
-  `56.0 <= xMin`, `xMax <= 459.5` et `yMax <= 768.0` ;
+  `56.0 <= xMin`, `xMax <= 459.5` et `yMax <= 768.0` ; l'en-tête et le pied sont
+  reconnus sémantiquement et exclus de ces bornes ;
+- avant l'analyse XML, suppression ciblée des seuls caractères interdits par
+  XML 1.0 (`0x00–0x08`, `0x0B`, `0x0C`, `0x0E–0x1F`) que Poppler peut émettre
+  pour les cases `\square`; tabulation, CR et LF sont conservés ;
 - aucune collision entre les boîtes de texte appartenant respectivement au
   tableau, à la grille des réponses et au score ;
 - pages blanches 6 et 14 toujours vides ;
