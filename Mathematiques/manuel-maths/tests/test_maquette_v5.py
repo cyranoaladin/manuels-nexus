@@ -2082,6 +2082,117 @@ def test_qcm_and_corrections_source_contract():
     assert "corr:start" not in maquette_source
 
 
+def test_page13_diagnostics_layout_pdf():
+    checker = importlib.import_module("check_maquette_v5")
+    manifest_path = ROOT / "build/maquette-v5/manifest.json"
+    manifest = load_manifest(manifest_path, ROOT)
+    subprocess.run(
+        [
+            "python3",
+            str(ROOT / "scripts/build_maquette_v5.py"),
+            "--manifest",
+            str(manifest_path),
+            "--output",
+            str(ROOT / "build/maquette-v5/renvois.tex"),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    command = [
+        "lualatex",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-output-directory=build/maquette-v5",
+        "build/maquette-v5/maquette.tex",
+    ]
+    outputs = []
+    for _ in range(3):
+        result = subprocess.run(
+            command,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stdout[-5000:] + result.stderr
+        outputs.append(result.stdout + result.stderr)
+    combined = "\n".join(outputs)
+
+    pdf = ROOT / "build/maquette-v5/maquette.pdf"
+    page_layout = {
+        page: subprocess.run(
+            [
+                "pdftotext",
+                "-layout",
+                "-f",
+                str(page),
+                "-l",
+                str(page),
+                str(pdf),
+                "-",
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+        for page in range(12, 16)
+    }
+    page13_bbox = subprocess.run(
+        [
+            "pdftotext",
+            "-bbox-layout",
+            "-f",
+            "13",
+            "-l",
+            "13",
+            str(pdf),
+            "-",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+
+    checker.assert_diagnostics_bbox_layout(page13_bbox)
+    checker.assert_diagnostics_log_clean(combined)
+
+    info = subprocess.run(
+        ["pdfinfo", str(pdf)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    assert re.search(r"(?m)^Pages:\s+15$", info)
+
+    normalized_pages = {
+        page: checker.normalize_text(text) for page, text in page_layout.items()
+    }
+    diagnostic_strings = (
+        "Correction et diagnostics",
+        "Réponses correctes",
+        "Score",
+        "Capacités à retravailler",
+    )
+    for expected in diagnostic_strings:
+        assert expected in normalized_pages[13]
+        assert expected not in normalized_pages[12]
+        assert expected not in normalized_pages[14]
+    assert normalized_pages[13].count("Corrigés") == 1
+    assert checker.page_text_is_empty(normalized_pages[14])
+    assert normalized_pages[15].count("Corrigés") == 2
+
+    qcm = ROOT / manifest["qcm"]["file"]
+    assert (
+        hashlib.sha256(qcm.read_bytes()).hexdigest()
+        == manifest["qcm"]["sha256"]
+    )
+
+
 def test_qcm_diagnostics_and_corrections_pdf(tmp_path):
     checker = importlib.import_module("check_maquette_v5")
     subprocess.run(
