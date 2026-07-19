@@ -117,6 +117,6 @@ Avant Task 4, vérifier au moins une fois chaque valeur par
 - [x] **Step 2: exécuter `python3 scripts/check_maquette_v5.py --manifest build/maquette-v5/manifest.json`.** Attendu exact : `MAQUETTE V5: PASS — 15 pages; blanches 6,14; renvois 2/2; marginnote colonnes 0`.
 - [x] **Step 3: exécuter `python3 -m pytest tests/test_maquette_v5.py -q`.** Attendu : tous les tests v5 passent.
 - [x] **Step 4: exécuter `make check-latex` puis `python3 -m pytest tests/ -q`.** Attendu : codes 0, aucune régression.
-- [ ] **Step 5: demander une revue indépendante.** Résoudre tout P0/P1, relancer les validations affectées et vérifier visuellement p.13.
+- [x] **Step 5: demander une revue indépendante.** Résoudre tout P0/P1, relancer les validations affectées et vérifier visuellement p.13.
 - [x] **Step 6: vérifier l'isolation.** `git diff --check`, worktree principal inchangé, aucun fichier QCM/TSPE/NSI modifié, aucun push/déploiement.
 - [x] **Step 7: créer un commit local limité à la correction p.13.** Message : `[CHARTE][V5.B-it2] corrige diagnostics page 13`.
