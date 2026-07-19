@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import math
 import re
 import subprocess
 import sys
@@ -102,6 +103,17 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
             }
         except (KeyError, ValueError) as exc:
             raise AcceptanceError("boîte de ligne diagnostics invalide") from exc
+        coordinates = [
+            float(line[coordinate])
+            for coordinate in ("x_min", "y_min", "x_max", "y_max")
+        ]
+        if not all(math.isfinite(coordinate) for coordinate in coordinates):
+            raise AcceptanceError("coordonnée diagnostics non finie")
+        if (
+            float(line["x_min"]) > float(line["x_max"])
+            or float(line["y_min"]) > float(line["y_max"])
+        ):
+            raise AcceptanceError("boîte de ligne diagnostics incohérente")
         lines.append(line)
 
     def anchor_index(label: str, *, prefix: bool = False) -> int:
@@ -189,10 +201,27 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
 
     responses_anchor = lines[responses_index]
     score_anchor = lines[score_index]
+    title_anchor = lines[title_index]
+    if any(
+        float(line["y_min"]) < float(title_anchor["y_max"])
+        or float(line["y_max"]) > float(responses_anchor["y_min"])
+        for line in table_lines
+    ):
+        raise AcceptanceError("ligne hors région tableau diagnostics")
+    if any(
+        float(line["y_min"]) < float(responses_anchor["y_max"])
+        or float(line["y_max"]) > float(score_anchor["y_min"])
+        for line in response_lines
+    ):
+        raise AcceptanceError("ligne hors région réponses diagnostics")
+
     table_bottom = max(float(line["y_max"]) for line in table_lines)
     if float(responses_anchor["y_min"]) - table_bottom < 6.0:
         raise AcceptanceError("collision tableau diagnostics / réponses correctes")
-    grid_bottom = max(float(line["y_max"]) for line in final_grid_lines)
+    grid_top = min(float(line["y_min"]) for line in response_lines)
+    if grid_top < float(responses_anchor["y_max"]):
+        raise AcceptanceError("collision réponses correctes / grille diagnostics")
+    grid_bottom = max(float(line["y_max"]) for line in response_lines)
     if float(score_anchor["y_min"]) - grid_bottom < 6.0:
         raise AcceptanceError("collision grille diagnostics / score")
 

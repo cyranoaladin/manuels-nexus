@@ -982,6 +982,7 @@ def test_diagnostics_bbox_contract():
         *,
         table_gap=12.0,
         score_gap=12.0,
+        answers_y=None,
         missing_question=None,
         missing_diagnostic=None,
         override=None,
@@ -1041,26 +1042,27 @@ def test_diagnostics_bbox_contract():
         table_bottom = 84.0 + 59 * 6.0 + 4.0
         responses_y = table_bottom + table_gap
         add("responses-title", "Réponses correctes", responses_y, height=7.0)
+        grid_start_y = responses_y + 16.0 if answers_y is None else answers_y
         add(
             "answers-1-5",
             "Q1 B Q2 B Q3 C Q4 A Q5 A",
-            responses_y + 16.0,
+            grid_start_y,
             height=7.0,
         )
         add(
             "answers-6-10",
             "Q6 B Q7 B Q8 B Q9 C Q10 B",
-            responses_y + 28.0,
+            grid_start_y + 12.0,
             height=7.0,
         )
-        grid_last_y = responses_y + 40.0
+        grid_last_y = grid_start_y + 24.0
         add(
             "answers-11-15",
             "Q11 B Q12 B Q13 B Q14 B Q15 B",
             grid_last_y,
             height=7.0,
         )
-        score_y = grid_last_y + 7.0 + score_gap
+        score_y = responses_y + 47.0 + score_gap
         add("score", "Score : \x03 \x03 /15", score_y, height=7.0)
         add(
             "capacities",
@@ -1088,11 +1090,15 @@ def test_diagnostics_bbox_contract():
     checker.assert_diagnostics_bbox_layout(diagnostics_xhtml())
 
     invalid_documents = [
+        diagnostics_xhtml(answers_y=100.0),
         diagnostics_xhtml(table_gap=5.0),
         diagnostics_xhtml(score_gap=5.0),
         diagnostics_xhtml(override=("question-1", "xMin", 55.9)),
         diagnostics_xhtml(override=("question-1", "xMax", 459.6)),
         diagnostics_xhtml(override=("question-1", "yMax", 768.1)),
+        diagnostics_xhtml(override=("question-1", "xMin", float("nan"))),
+        diagnostics_xhtml(override=("question-1", "xMin", 440.0)),
+        diagnostics_xhtml(override=("question-1", "yMin", 89.0)),
         diagnostics_xhtml(missing_question=7),
         diagnostics_xhtml(missing_diagnostic=(8, "C")),
     ]
