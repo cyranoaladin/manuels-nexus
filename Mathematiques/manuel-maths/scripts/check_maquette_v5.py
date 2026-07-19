@@ -133,7 +133,13 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
     title_index = anchor_index("Correction et diagnostics")
     responses_index = anchor_index("Réponses correctes")
     score_index = anchor_index("Score", prefix=True)
-    if not title_index < responses_index < score_index:
+    title_anchor = lines[title_index]
+    responses_anchor = lines[responses_index]
+    score_anchor = lines[score_index]
+    if not (
+        float(title_anchor["y_max"]) < float(responses_anchor["y_min"])
+        and float(responses_anchor["y_max"]) < float(score_anchor["y_min"])
+    ):
         raise AcceptanceError("ordre des régions diagnostics invalide")
 
     def is_header_or_footer(line: dict[str, object]) -> bool:
@@ -154,11 +160,34 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
         ):
             raise AcceptanceError(f"ligne hors corps diagnostics: {line['text']}")
 
-    table_lines = lines[title_index + 1 : responses_index]
-    response_lines = lines[responses_index + 1 : score_index]
-    score_lines = [
-        line for line in lines[score_index:] if not is_header_or_footer(line)
+    anchors = {id(title_anchor), id(responses_anchor), id(score_anchor)}
+    body_lines = [
+        line
+        for line in lines
+        if id(line) not in anchors and not is_header_or_footer(line)
     ]
+    table_lines = [
+        line
+        for line in body_lines
+        if float(line["y_min"]) >= float(title_anchor["y_max"])
+        and float(line["y_max"]) <= float(responses_anchor["y_min"])
+    ]
+    response_lines = [
+        line
+        for line in body_lines
+        if float(line["y_min"]) >= float(responses_anchor["y_max"])
+        and float(line["y_max"]) <= float(score_anchor["y_min"])
+    ]
+    score_lines = [score_anchor] + [
+        line
+        for line in body_lines
+        if float(line["y_min"]) >= float(score_anchor["y_min"])
+    ]
+    assigned = {
+        id(line) for line in table_lines + response_lines + score_lines[1:]
+    }
+    if any(id(line) not in assigned for line in body_lines):
+        raise AcceptanceError("ligne hors régions diagnostics")
     question_numbers = [
         int(match.group(1))
         for line in table_lines
@@ -170,7 +199,7 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
     diagnostics = [
         line
         for line in table_lines
-        if re.match(r"^[ACD]\s*:", str(line["text"])) is not None
+        if re.match(r"^[A-D]\s*:", str(line["text"])) is not None
     ]
     if len(diagnostics) != 45:
         raise AcceptanceError(
@@ -202,9 +231,6 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
     if not final_grid_lines:
         raise AcceptanceError("lignes Q11–Q15 absentes")
 
-    responses_anchor = lines[responses_index]
-    score_anchor = lines[score_index]
-    title_anchor = lines[title_index]
     if any(
         float(line["y_min"]) < float(title_anchor["y_max"])
         or float(line["y_max"]) > float(responses_anchor["y_min"])
@@ -218,7 +244,7 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
     ):
         raise AcceptanceError("ligne hors région réponses diagnostics")
     if any(
-        float(line["y_min"]) < float(score_anchor["y_max"])
+        float(line["y_min"]) < float(score_anchor["y_min"])
         for line in score_lines[1:]
     ):
         raise AcceptanceError("ligne hors région score diagnostics")

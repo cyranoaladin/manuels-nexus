@@ -985,6 +985,7 @@ def test_diagnostics_bbox_contract():
         answers_y=None,
         diagnostic_y=None,
         capacities_on_score=False,
+        poppler_column_order=False,
         missing_question=None,
         missing_diagnostic=None,
         override=None,
@@ -1000,7 +1001,7 @@ def test_diagnostics_bbox_contract():
             }
             if override is not None and override[0] == key:
                 attributes[override[1]] = override[2]
-            lines.append(
+            line = (
                 '<line data-key="{}" xMin="{}" yMin="{}" xMax="{}" yMax="{}">'
                 '<word xMin="{}" yMin="{}" xMax="{}" yMax="{}">{}</word>'
                 "</line>".format(
@@ -1016,6 +1017,7 @@ def test_diagnostics_bbox_contract():
                     text,
                 )
             )
+            lines.append((key, line))
 
         add("header", "Corrigés", 34.0, x_min=40.0, x_max=120.0, height=6.0)
         add("title", "Correction et diagnostics", 58.0, height=7.0)
@@ -1029,17 +1031,21 @@ def test_diagnostics_bbox_contract():
             height=5.0,
         )
 
+        correct_answers = {3: "C", 4: "A", 5: "A", 9: "C"}
         slot = 0
         for question in range(1, 16):
+            correct_answer = correct_answers.get(question, "B")
             y_min = 84.0 + slot * 6.0
             if question != missing_question:
                 add(
                     f"question-{question}",
-                    f"Q{question} C{min(5, (question + 2) // 3)} B",
+                    f"Q{question} C{min(5, (question + 2) // 3)} {correct_answer}",
                     y_min,
                 )
             slot += 1
-            for letter in ("A", "C", "D"):
+            for letter in "ABCD":
+                if letter == correct_answer:
+                    continue
                 y_min = 84.0 + slot * 6.0
                 if question == 1 and letter == "A" and diagnostic_y is not None:
                     y_min = diagnostic_y
@@ -1091,15 +1097,24 @@ def test_diagnostics_bbox_contract():
             height=7.0,
         )
         add("footer-folio", "13", 804.0, x_min=520.0, x_max=540.0, height=7.0)
+        if poppler_column_order:
+            # Poppler peut placer une colonne de grille après le pied dans
+            # l'ordre XML, tout en conservant ses coordonnées dans la région.
+            lines = [line for line in lines if line[0] != "answers-6-10"] + [
+                line for line in lines if line[0] == "answers-6-10"
+            ]
         return (
             '<?xml version="1.0" encoding="UTF-8"?>'
             '<html xmlns="http://www.w3.org/1999/xhtml"><body><doc>'
             '<page width="595.276" height="841.89"><flow><block>'
-            + "".join(lines)
+            + "".join(line for _, line in lines)
             + "</block></flow></page></doc></body></html>"
         )
 
     checker.assert_diagnostics_bbox_layout(diagnostics_xhtml())
+    checker.assert_diagnostics_bbox_layout(
+        diagnostics_xhtml(poppler_column_order=True)
+    )
 
     invalid_documents = [
         diagnostics_xhtml(diagnostic_y=84.0),
@@ -2058,6 +2073,22 @@ def test_qcm_and_corrections_source_contract():
     assert r"\renewcommand{\newpage}" in qcm_source
     assert qcm_source.index(r"\end{multicols}") < qcm_source.index(
         r"\rubrique{Corrigés}"
+    )
+    diagnostics_start = qcm_source.index(r"\rubrique{Corrigés}")
+    diagnostics_source = qcm_source[diagnostics_start:]
+    assert "NEXUS-V5-DIAGNOSTICS-START" in diagnostics_source
+    assert "NEXUS-V5-DIAGNOSTICS-END" in diagnostics_source
+    assert r"\fontsize{6.6}{7.6}\selectfont" in diagnostics_source
+    assert r"\setlength{\tabcolsep}{2pt}" in diagnostics_source
+    assert r"\renewcommand{\arraystretch}{1.08}" in diagnostics_source
+    assert r"\begin{multicols}{2}" not in diagnostics_source
+    assert r"\ifnxVQcmDiagnostics" in diagnostics_source
+    assert r"\else" in diagnostics_source
+    assert diagnostics_source.index(r"\clearpage") < diagnostics_source.index(
+        "NEXUS-V5-DIAGNOSTICS-END"
+    )
+    assert diagnostics_source.index(r"\else") < diagnostics_source.index(
+        r"\end{multicols}"
     )
     assert r"\let\dfrac\nxVQcmOriginalDfrac" in qcm_source
     assert r"\nxRubriqueMajeure[blanche]{Corrigés}" in corrections_source

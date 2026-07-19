@@ -548,13 +548,22 @@
     \rubrique{Corrigés}%
     \nxVSuppressTabtrue
     \nxVQcmDiagnosticstrue
+    \typeout{NEXUS-V5-DIAGNOSTICS-START}%
     \let\newpage\nxVQcmOriginalNewpage
-    \begin{multicols}{2}% restaurer le gabarit diagnostics validé
+    \fontsize{6.6}{7.6}\selectfont
+    \setlength{\tabcolsep}{2pt}%
+    \renewcommand{\arraystretch}{1.08}%
   }%
 }{%
-  \end{multicols}%
-  \let\dfrac\nxVQcmOriginalDfrac
-  \clearpage
+  \ifnxVQcmDiagnostics
+    \let\dfrac\nxVQcmOriginalDfrac
+    \clearpage
+    \typeout{NEXUS-V5-DIAGNOSTICS-END}%
+  \else
+    \end{multicols}%
+    \let\dfrac\nxVQcmOriginalDfrac
+    \clearpage
+  \fi
   \nxVSuppressTabfalse
 }
 
