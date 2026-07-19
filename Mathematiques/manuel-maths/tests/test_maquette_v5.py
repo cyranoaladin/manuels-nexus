@@ -2182,6 +2182,7 @@ def test_page13_diagnostics_layout_pdf():
         assert expected in normalized_pages[13]
         assert expected not in normalized_pages[12]
         assert expected not in normalized_pages[14]
+        assert expected not in normalized_pages[15]
     assert normalized_pages[13].count("Corrigés") == 1
     assert checker.page_text_is_empty(normalized_pages[14])
     assert normalized_pages[15].count("Corrigés") == 2
