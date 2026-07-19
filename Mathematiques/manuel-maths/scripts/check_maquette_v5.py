@@ -156,6 +156,9 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
 
     table_lines = lines[title_index + 1 : responses_index]
     response_lines = lines[responses_index + 1 : score_index]
+    score_lines = [
+        line for line in lines[score_index:] if not is_header_or_footer(line)
+    ]
     question_numbers = [
         int(match.group(1))
         for line in table_lines
@@ -214,6 +217,32 @@ def assert_diagnostics_bbox_layout(xhtml: str) -> None:
         for line in response_lines
     ):
         raise AcceptanceError("ligne hors région réponses diagnostics")
+    if any(
+        float(line["y_min"]) < float(score_anchor["y_max"])
+        for line in score_lines[1:]
+    ):
+        raise AcceptanceError("ligne hors région score diagnostics")
+
+    def assert_region_rectangles_disjoint(
+        region_name: str, region_lines: list[dict[str, object]]
+    ) -> None:
+        tolerance = 0.25
+        for index, first in enumerate(region_lines):
+            for second in region_lines[index + 1 :]:
+                horizontal_overlap = min(
+                    float(first["x_max"]), float(second["x_max"])
+                ) - max(float(first["x_min"]), float(second["x_min"]))
+                vertical_overlap = min(
+                    float(first["y_max"]), float(second["y_max"])
+                ) - max(float(first["y_min"]), float(second["y_min"]))
+                if horizontal_overlap > tolerance and vertical_overlap > tolerance:
+                    raise AcceptanceError(
+                        f"collision interne dans la région {region_name} diagnostics"
+                    )
+
+    assert_region_rectangles_disjoint("tableau", table_lines)
+    assert_region_rectangles_disjoint("réponses", response_lines)
+    assert_region_rectangles_disjoint("score", score_lines)
 
     table_bottom = max(float(line["y_max"]) for line in table_lines)
     if float(responses_anchor["y_min"]) - table_bottom < 6.0:

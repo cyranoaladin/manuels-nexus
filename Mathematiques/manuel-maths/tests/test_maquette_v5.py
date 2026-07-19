@@ -983,6 +983,8 @@ def test_diagnostics_bbox_contract():
         table_gap=12.0,
         score_gap=12.0,
         answers_y=None,
+        diagnostic_y=None,
+        capacities_on_score=False,
         missing_question=None,
         missing_diagnostic=None,
         override=None,
@@ -1017,7 +1019,15 @@ def test_diagnostics_bbox_contract():
 
         add("header", "Corrigés", 34.0, x_min=40.0, x_max=120.0, height=6.0)
         add("title", "Correction et diagnostics", 58.0, height=7.0)
-        add("table-header", "Question Capacité Réponse", 72.0, height=5.0)
+        add("table-header-left", "Question", 72.0, x_max=115.0, height=5.0)
+        add(
+            "table-header-right",
+            "Capacité Réponse",
+            72.0,
+            x_min=125.0,
+            x_max=260.0,
+            height=5.0,
+        )
 
         slot = 0
         for question in range(1, 16):
@@ -1031,6 +1041,8 @@ def test_diagnostics_bbox_contract():
             slot += 1
             for letter in ("A", "C", "D"):
                 y_min = 84.0 + slot * 6.0
+                if question == 1 and letter == "A" and diagnostic_y is not None:
+                    y_min = diagnostic_y
                 if (question, letter) != missing_diagnostic:
                     method = min(5, (question + 2) // 3)
                     detail = f"{letter} : diagnostic QCM — renvoi M{method}"
@@ -1067,7 +1079,7 @@ def test_diagnostics_bbox_contract():
         add(
             "capacities",
             "Capacités à retravailler : C1 C2 C3 C4 C5",
-            score_y + 13.0,
+            score_y if capacities_on_score else score_y + 13.0,
             height=7.0,
         )
         add(
@@ -1090,6 +1102,8 @@ def test_diagnostics_bbox_contract():
     checker.assert_diagnostics_bbox_layout(diagnostics_xhtml())
 
     invalid_documents = [
+        diagnostics_xhtml(diagnostic_y=84.0),
+        diagnostics_xhtml(capacities_on_score=True),
         diagnostics_xhtml(answers_y=100.0),
         diagnostics_xhtml(table_gap=5.0),
         diagnostics_xhtml(score_gap=5.0),
