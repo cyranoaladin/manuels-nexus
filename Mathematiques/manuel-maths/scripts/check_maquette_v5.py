@@ -17,8 +17,27 @@ from build_maquette_v5 import MetaError, load_manifest
 
 
 PAGE_13_REFERENCE_SHA256 = (
+    "2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23"
+)
+HISTORICAL_PAGE_13_REFERENCE_SHA256 = (
     "ea1750a0f56ecd3b2761614709f96f9b267569ece45bc4103aa11dc2007dacf1"
 )
+NON_DIAGNOSTICS_PAGE_SHA256 = {
+    1: "1e065c44ee1cd031aad570b4f4c5a98aa7ced55bceba78f418ff3ba31d63a24d",
+    2: "83eaaf15bad92a303ce8c367c3dffd498fea505930aaf4be6b06322bd2d07d10",
+    3: "4247bbe4325551dd26164476f9773fc8a11f1a131f3481a8da39e60b8e95c1c1",
+    4: "8229c5aaa4bcec461bf8442c4c448655315a4fb2fedf11a0052dcebdfb8c93c2",
+    5: "54d58a7128379386bfb32f79f6e8b0a3e8ea1916cdd785df748044fac2fcd30a",
+    6: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+    7: "b3499d26ce3c43b206b1913bc3a3bc6960bd0827e131a4634d8807f4f7ecd233",
+    8: "7dc9d309b149ce5717e1f7aeab803c45f282c6cb4a4973668ffb3d1d267764ac",
+    9: "fbe900adaa69d7374e0be7ead78dcc2295e03d35671281e4c7e0890d656e726e",
+    10: "50aec5774963497bdf290b68c571dfa3d13336ded825e5969a3aee66834497be",
+    11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
+    12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
+    14: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+    15: "988b636d4f82ae6fcad93a4651cb43639744aa9094e1d31a4e190a36da1e91b4",
+}
 
 
 class AcceptanceError(RuntimeError):
@@ -440,6 +459,19 @@ def _render_validation_pngs(pdf: Path, root: Path, expected_pages: int) -> list[
     return expected
 
 
+def assert_non_diagnostics_page_hashes(images: list[Path]) -> None:
+    """Reject any raster change outside the corrected diagnostics page."""
+    if len(images) != 15:
+        raise AcceptanceError("jeu de PNG à protéger incomplet")
+    for page, expected_sha in NON_DIAGNOSTICS_PAGE_SHA256.items():
+        image = images[page - 1]
+        if not image.is_file():
+            raise AcceptanceError(f"page {page} absente")
+        actual_sha = hashlib.sha256(image.read_bytes()).hexdigest()
+        if actual_sha != expected_sha:
+            raise AcceptanceError(f"page {page} altérée")
+
+
 def accept_maquette(
     manifest: dict, compiled: dict[str, str], root: Path
 ) -> str:
@@ -532,19 +564,30 @@ def accept_maquette(
         raise AcceptanceError("numéro de corrigé désynchronisé p. 15")
 
     images = _render_validation_pngs(pdf, root, expected_pages)
-    reference = root / "validations/v5-it1/page-13.png"
-    if not reference.is_file():
+    assert_non_diagnostics_page_hashes(images)
+
+    historical = root / "validations/v5-it1/page-13.png"
+    if not historical.is_file():
         raise AcceptanceError("référence it1 p.13 absente")
+    historical_sha = hashlib.sha256(historical.read_bytes()).hexdigest()
+    if historical_sha != HISTORICAL_PAGE_13_REFERENCE_SHA256:
+        raise AcceptanceError("référence it1 p.13 altérée")
+
+    reference = root / "validations/v5-it2/page-13.png"
+    if not reference.is_file():
+        raise AcceptanceError("référence it2 p.13 absente")
     reference_sha = hashlib.sha256(reference.read_bytes()).hexdigest()
     if reference_sha != PAGE_13_REFERENCE_SHA256:
-        raise AcceptanceError("référence it1 p.13 altérée")
+        raise AcceptanceError("référence it2 p.13 altérée")
     comparison = run_checked(
         ["compare", "-metric", "AE", str(reference), str(images[12]), "null:"],
         root,
         accepted_returncodes=(0, 1),
     )
     if comparison.stderr.strip() != "0":
-        raise AcceptanceError(f"page 13 modifiée: AE={comparison.stderr.strip()}")
+        raise AcceptanceError(
+            f"page 13 différente de l'oracle it2: AE={comparison.stderr.strip()}"
+        )
 
     return (
         "MAQUETTE V5: PASS — 15 pages; blanches 6,14; "

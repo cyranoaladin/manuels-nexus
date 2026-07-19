@@ -1245,7 +1245,11 @@ elif [ "$tool" = "pdftoppm" ]; then
   i=1
   while [ "$i" -le 15 ]; do
     number=$(printf '%02d' "$i")
-    : > "${prefix}-${number}.png"
+    if [ -n "$NXV_FAKE_RENDER_DIR" ]; then
+      /bin/cp "$NXV_FAKE_RENDER_DIR/page-${number}.png" "${prefix}-${number}.png"
+    else
+      : > "${prefix}-${number}.png"
+    fi
     i=$((i + 1))
   done
 elif [ "$tool" = "identify" ]; then
@@ -1275,6 +1279,7 @@ fi
     bbox_fixture = tmp_path / "diagnostics.xhtml"
     bbox_fixture.write_text(_diagnostics_xhtml_fixture(), encoding="utf-8")
     monkeypatch.setenv("NXV_FAKE_BBOX", str(bbox_fixture))
+    monkeypatch.setenv("NXV_FAKE_RENDER_DIR", str(ROOT / "validations/v5"))
     monkeypatch.setenv("NXV_FAKE_MODE", "success")
     monkeypatch.setenv("PATH", f"{bin_dir}{os.pathsep}{os.environ['PATH']}")
     return log
@@ -1358,9 +1363,12 @@ def test_checker_cli_synthetic_exit_codes(tmp_path, monkeypatch):
         json.dumps(manifest_data, ensure_ascii=False), encoding="utf-8"
     )
     (synthetic_root / manifest_data["output_pdf"]).write_bytes(b"FAKE PDF")
-    reference = synthetic_root / "validations/v5-it1/page-13.png"
+    historical = synthetic_root / "validations/v5-it1/page-13.png"
+    historical.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / "validations/v5-it1/page-13.png", historical)
+    reference = synthetic_root / "validations/v5-it2/page-13.png"
     reference.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(ROOT / "validations/v5-it1/page-13.png", reference)
+    shutil.copyfile(ROOT / "validations/v5-it2/page-13.png", reference)
     output_cases = []
 
     invalid_manifest = tmp_path / "invalid.json"
@@ -1431,7 +1439,7 @@ def test_checker_cli_synthetic_exit_codes(tmp_path, monkeypatch):
         assert rejected.returncode == 1
         assert "MAQUETTE V5:" in rejected.stderr
     assert compare_diff.returncode == 1
-    assert "page 13 modifiée: AE=42" in compare_diff.stderr
+    assert "page 13 différente de l'oracle it2: AE=42" in compare_diff.stderr
     assert success.returncode == 0
     assert success.stdout == (
         "MAQUETTE V5: PASS — 15 pages; blanches 6,14; "
@@ -2101,6 +2109,68 @@ def test_qcm_hash_is_immutable():
     )
 
 
+def test_validation_png_reference_hashes():
+    checker = importlib.import_module("check_maquette_v5")
+    expected = {
+        1: "1e065c44ee1cd031aad570b4f4c5a98aa7ced55bceba78f418ff3ba31d63a24d",
+        2: "83eaaf15bad92a303ce8c367c3dffd498fea505930aaf4be6b06322bd2d07d10",
+        3: "4247bbe4325551dd26164476f9773fc8a11f1a131f3481a8da39e60b8e95c1c1",
+        4: "8229c5aaa4bcec461bf8442c4c448655315a4fb2fedf11a0052dcebdfb8c93c2",
+        5: "54d58a7128379386bfb32f79f6e8b0a3e8ea1916cdd785df748044fac2fcd30a",
+        6: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+        7: "b3499d26ce3c43b206b1913bc3a3bc6960bd0827e131a4634d8807f4f7ecd233",
+        8: "7dc9d309b149ce5717e1f7aeab803c45f282c6cb4a4973668ffb3d1d267764ac",
+        9: "fbe900adaa69d7374e0be7ead78dcc2295e03d35671281e4c7e0890d656e726e",
+        10: "50aec5774963497bdf290b68c571dfa3d13336ded825e5969a3aee66834497be",
+        11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
+        12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
+        14: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+        15: "988b636d4f82ae6fcad93a4651cb43639744aa9094e1d31a4e190a36da1e91b4",
+    }
+
+    assert checker.NON_DIAGNOSTICS_PAGE_SHA256 == expected
+    images = [
+        ROOT / f"validations/v5/page-{page:02d}.png" for page in range(1, 16)
+    ]
+    checker.assert_non_diagnostics_page_hashes(images)
+    for page, expected_sha in expected.items():
+        rendered = ROOT / f"validations/v5/page-{page:02d}.png"
+        assert hashlib.sha256(rendered.read_bytes()).hexdigest() == expected_sha
+
+    historical = ROOT / "validations/v5-it1/page-13.png"
+    current = ROOT / "validations/v5/page-13.png"
+    assert checker.HISTORICAL_PAGE_13_REFERENCE_SHA256 == (
+        "ea1750a0f56ecd3b2761614709f96f9b267569ece45bc4103aa11dc2007dacf1"
+    )
+    assert hashlib.sha256(historical.read_bytes()).hexdigest() == (
+        "ea1750a0f56ecd3b2761614709f96f9b267569ece45bc4103aa11dc2007dacf1"
+    )
+    assert current.read_bytes() != historical.read_bytes()
+
+    corrected = ROOT / "validations/v5-it2/page-13.png"
+    assert checker.PAGE_13_REFERENCE_SHA256 == (
+        "2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23"
+    )
+    assert hashlib.sha256(corrected.read_bytes()).hexdigest() == (
+        checker.PAGE_13_REFERENCE_SHA256
+    )
+    assert current.read_bytes() == corrected.read_bytes()
+
+
+def test_non_diagnostics_page_hashes_reject_a_changed_page(tmp_path):
+    checker = importlib.import_module("check_maquette_v5")
+    images = []
+    for page in range(1, 16):
+        source = ROOT / f"validations/v5/page-{page:02d}.png"
+        destination = tmp_path / source.name
+        shutil.copyfile(source, destination)
+        images.append(destination)
+    images[6].write_bytes(images[6].read_bytes() + b"altered")
+
+    with pytest.raises(checker.AcceptanceError, match="page 7 altérée"):
+        checker.assert_non_diagnostics_page_hashes(images)
+
+
 def test_qcm_and_corrections_source_contract():
     class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
         encoding="utf-8"
@@ -2275,6 +2345,13 @@ def test_page13_diagnostics_layout_pdf():
         hashlib.sha256(qcm.read_bytes()).hexdigest()
         == manifest["qcm"]["sha256"]
     )
+    images = [
+        ROOT / f"validations/v5/page-{page:02d}.png" for page in range(1, 16)
+    ]
+    checker.assert_non_diagnostics_page_hashes(images)
+    assert (ROOT / "validations/v5/page-13.png").read_bytes() != (
+        ROOT / "validations/v5-it1/page-13.png"
+    ).read_bytes()
 
 
 def test_qcm_diagnostics_and_corrections_pdf(tmp_path):
@@ -2399,7 +2476,7 @@ def test_qcm_diagnostics_and_corrections_pdf(tmp_path):
             "compare",
             "-metric",
             "AE",
-            str(ROOT / "validations/v5-it1/page-13.png"),
+            str(ROOT / "validations/v5-it2/page-13.png"),
             str(current_page),
             "null:",
         ],
