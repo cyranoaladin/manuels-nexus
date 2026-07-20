@@ -1,0 +1,377 @@
+generated_by: inventory_collection.py
+manuals:
+  1NSI:
+    blockers:
+    - code: anomalie:blocking_statuses
+      detail: '154'
+      source: anomalies.blocking_statuses
+    - code: anomalie:chapters_not_in_manual
+      detail: '1'
+      source: anomalies.chapters_not_in_manual
+    - code: anomalie:metadata_missing
+      detail: '19'
+      source: anomalies.metadata_missing
+    - code: anomalie:orphan_files
+      detail: '19'
+      source: anomalies.orphan_files
+    - code: anomalie:unassembled_objects
+      detail: '55'
+      source: anomalies.unassembled_objects
+    - code: chapitres_manquants
+      detail: 1/10
+      source: manuals.1NSI.chapters
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.1NSI.variants.evaluations
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.1NSI.variants.livret_methodes
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.1NSI.variants.manuel_eleve
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.1NSI.variants.manuel_professeur
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.1NSI.variants.projets
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.1NSI.variants.remediations
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.1NSI.variants.version_amenagee
+    - code: statuts_non_approuves
+      detail: objets=153; contrats=1
+      source: manuals.1NSI.statuses
+    current:
+      artifacts: []
+      chapter_count: 1
+      chapters:
+      - 1NSI-TYPES-CONSTRUITS
+      statuses:
+        generated: 3
+        needs_review: 150
+      totals:
+        capacites: 5
+        corriges: 55
+        coups_de_pouce: 24
+        diagnostics: 1
+        evaluations: 2
+        exercices_principaux: 55
+        methodes: 5
+        projets: 1
+        qcm: 1
+        remediations: 1
+        sections_cours: 5
+        td: 2
+    objective:
+      directive: MISSION_PRIORITAIRE §9
+      target_chapters: 10
+    publication_eligible: false
+    variants:
+      evaluations:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      livret_methodes:
+        artifacts: []
+        declared_chapter_variants:
+        - methodes
+        declared_manual_variants: []
+        state: partial
+      manuel_eleve:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      manuel_professeur:
+        artifacts: []
+        declared_chapter_variants:
+        - professeur
+        declared_manual_variants: []
+        state: partial
+      projets:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      remediations:
+        artifacts: []
+        declared_chapter_variants:
+        - remediation
+        declared_manual_variants: []
+        state: partial
+      version_amenagee:
+        artifacts: []
+        declared_chapter_variants:
+        - amenagee
+        declared_manual_variants: []
+        state: partial
+  1SPE:
+    blockers:
+    - code: anomalie:blocking_statuses
+      detail: '1344'
+      source: anomalies.blocking_statuses
+    - code: anomalie:broken_meta_references
+      detail: '24'
+      source: anomalies.broken_meta_references
+    - code: anomalie:duplicate_assembly_objects
+      detail: '3'
+      source: anomalies.duplicate_assembly_objects
+    - code: anomalie:unassembled_objects
+      detail: '459'
+      source: anomalies.unassembled_objects
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.1SPE.variants.banque_evaluations
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.1SPE.variants.livret_methodes
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.1SPE.variants.livret_remediation
+    - code: livrable_non_compile
+      detail: declared
+      source: deliverable_matrix.1SPE.variants.manuel_eleve
+    - code: livrable_non_compile
+      detail: declared
+      source: deliverable_matrix.1SPE.variants.manuel_professeur
+    - code: statuts_non_approuves
+      detail: objets=1334; contrats=10
+      source: manuals.1SPE.statuses
+    current:
+      artifacts: []
+      chapter_count: 10
+      chapters:
+      - 1SPE-DERIVATION-GLOBAL
+      - 1SPE-DERIVATION-LOCAL
+      - 1SPE-EXPONENTIELLE
+      - 1SPE-GEOMETRIE-REPEREE
+      - 1SPE-PROBA-COND
+      - 1SPE-PRODUIT-SCALAIRE
+      - 1SPE-SECOND-DEGRE
+      - 1SPE-SUITES
+      - 1SPE-TRIGONOMETRIE
+      - 1SPE-VARIABLES-ALEATOIRES
+      statuses:
+        generated: 1334
+      totals:
+        capacites: 50
+        corriges: 482
+        coups_de_pouce: 134
+        diagnostics: 5
+        evaluations: 18
+        exercices_principaux: 464
+        methodes: 50
+        projets: 0
+        qcm: 10
+        remediations: 97
+        sections_cours: 50
+        td: 20
+    objective:
+      directive: MISSION_PRIORITAIRE §8
+      target_chapters: 10
+    publication_eligible: false
+    variants:
+      banque_evaluations:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      livret_methodes:
+        artifacts: []
+        declared_chapter_variants:
+        - methodes
+        declared_manual_variants: []
+        state: partial
+      livret_remediation:
+        artifacts: []
+        declared_chapter_variants:
+        - remediation
+        declared_manual_variants: []
+        state: partial
+      manuel_eleve:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants:
+        - eleve
+        state: declared
+      manuel_professeur:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants:
+        - professeur
+        state: declared
+  TNSI:
+    blockers:
+    - code: chapitres_manquants
+      detail: 0/12
+      source: manuals.TNSI.chapters
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TNSI.variants.banque_ecrite
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TNSI.variants.banque_pratique
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TNSI.variants.manuel_eleve
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TNSI.variants.manuel_professeur
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TNSI.variants.projets
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TNSI.variants.remediations
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TNSI.variants.version_amenagee
+    current:
+      artifacts: []
+      chapter_count: 0
+      chapters: []
+      statuses: {}
+      totals:
+        capacites: 0
+        corriges: 0
+        coups_de_pouce: 0
+        diagnostics: 0
+        evaluations: 0
+        exercices_principaux: 0
+        methodes: 0
+        projets: 0
+        qcm: 0
+        remediations: 0
+        sections_cours: 0
+        td: 0
+    objective:
+      directive: MISSION_PRIORITAIRE §11
+      target_chapters: 12
+    publication_eligible: false
+    variants:
+      banque_ecrite:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      banque_pratique:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      manuel_eleve:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      manuel_professeur:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      projets:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      remediations:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      version_amenagee:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+  TSPE_2026_2027:
+    blockers:
+    - code: anomalie:blocking_statuses
+      detail: '298'
+      source: anomalies.blocking_statuses
+    - code: anomalie:chapters_not_in_manual
+      detail: '3'
+      source: anomalies.chapters_not_in_manual
+    - code: anomalie:unassembled_objects
+      detail: '100'
+      source: anomalies.unassembled_objects
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.TSPE_2026_2027.variants.livret_methodes
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TSPE_2026_2027.variants.manuel_eleve
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.TSPE_2026_2027.variants.manuel_professeur
+    - code: objectif_chapitres_non_fige
+      detail: cible a figer en Phase 1
+      source: MISSION_PRIORITAIRE §10
+    - code: statuts_non_approuves
+      detail: objets=295; contrats=3
+      source: manuals.TSPE_2026_2027.statuses
+    current:
+      artifacts: []
+      chapter_count: 3
+      chapters:
+      - TSPE-DERIVATION-CONVEXITE
+      - TSPE-LIMITES-FONCTIONS
+      - TSPE-SUITES-LIMITES
+      statuses:
+        generated: 295
+      totals:
+        capacites: 16
+        corriges: 104
+        coups_de_pouce: 32
+        diagnostics: 0
+        evaluations: 4
+        exercices_principaux: 100
+        methodes: 13
+        projets: 0
+        qcm: 2
+        remediations: 18
+        sections_cours: 16
+        td: 6
+    objective:
+      directive: MISSION_PRIORITAIRE §10
+      target_chapters: null
+    publication_eligible: false
+    variants:
+      banque_evaluations:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      livret_methodes:
+        artifacts: []
+        declared_chapter_variants:
+        - methodes
+        declared_manual_variants: []
+        state: partial
+      livret_remediation:
+        artifacts: []
+        declared_chapter_variants:
+        - remediation
+        declared_manual_variants: []
+        state: partial
+      manuel_eleve:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+      manuel_professeur:
+        artifacts: []
+        declared_chapter_variants: []
+        declared_manual_variants: []
+        state: absent
+source_digest: sha256:c45c38df27743a7ed86ccae1f86d434879d1877d45125dc29c1f2f0edf27536e
