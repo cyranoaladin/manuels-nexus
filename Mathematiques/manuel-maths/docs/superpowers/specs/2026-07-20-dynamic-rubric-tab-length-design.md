@@ -37,9 +37,11 @@ par la règle :
 longueur = max(16 mm, largeur_typographique(libellé) + 6 mm)
 ```
 
-Les 6 mm correspondent à 3 mm de respiration avant et après le texte. La
-mesure est locale au rendu de l'en-tête ; aucun état global de rubrique n'est
-introduit et le mécanisme de marks reste la source du libellé.
+Les 6 mm correspondent à un minimum de 3 mm de respiration avant et après le
+texte dans la branche auto-dimensionnée. Lorsqu'un libellé court reste soumis au
+minimum de 16 mm, le surplus est réparti également par le centrage. La mesure
+est locale au rendu de l'en-tête ; aucun état global de rubrique n'est introduit
+et le mécanisme de marks reste la source du libellé.
 
 ## Géométrie et rendu
 
@@ -53,9 +55,12 @@ introduit et le mécanisme de marks reste la source du libellé.
   `90` degrés ;
 - page paire : miroir depuis `current page.north west`, rotation `-90` degrés.
 
-Le rectangle et le centre du nœud texte doivent dériver de la même longueur
-calculée. Une duplication de calcul entre le fond et le texte serait considérée
-comme un défaut, car elle pourrait recréer un décalage.
+Dans un groupe local, le libellé uppercase est composé et mesuré une seule fois,
+après sélection de `\titrefont\fontsize{6}{6}\selectfont`. Une unique longueur
+résultante pilote à la fois l'extension verticale du rectangle et son
+demi-décalage pour le centre du nœud, dont `inner sep` reste nul. Une duplication
+de calcul entre le fond et le texte serait considérée comme un défaut, car elle
+pourrait recréer un décalage.
 
 ## Cas limites
 
@@ -69,23 +74,43 @@ taille maintenues manuellement.
 
 La correction suit un cycle test-first.
 
-1. Un contrat source exige une longueur mesurée, un minimum de 16 mm, un
-   padding total de 6 mm et l'utilisation de la même dimension pour le rectangle
-   et le centrage du texte.
+1. Un contrat source exige une composition/mesure unique, un minimum de 16 mm,
+   un padding total de 6 mm et l'utilisation de la même dimension pour le
+   rectangle et le centrage du texte.
 2. Une fixture LaTeX réelle rend au moins un libellé court (`COURS`) et le
    libellé long (`AUTO-ÉVALUATION`) sur pages impaire et paire. Elle prouve que :
    - la longueur courte reste à 16 mm ;
    - la longueur longue est strictement supérieure ;
    - les deux côtés utilisent la même valeur pour un même libellé ;
    - aucun `Overfull` ou avertissement de géométrie n'est émis.
+   La preuve de contenance ne repose pas sur le log : TikZ en `overlay` peut
+   dépasser sans `Overfull`. Le test combine la boîte du mot tournée issue de
+   `pdftotext -bbox-layout` et la composante colorée de l'onglet détectée dans un
+   raster à 300 dpi. Après conversion points/pixels, il exige sur les deux
+   parités que la boîte du texte soit entièrement incluse dans le rectangle,
+   que la branche auto-dimensionnée conserve au moins 3 mm à chaque extrémité
+   (avec une tolérance de rasterisation d'au plus 0,5 pt) et que l'écart entre
+   les deux respirations ne dépasse pas 0,5 mm. Pour la branche minimale de
+   16 mm, il exige l'inclusion et un surplus réparti symétriquement.
 3. La maquette complète est recompilée en trois passes. Les pages 11 et 12 sont
    inspectées à 150 dpi et à pleine résolution : texte entièrement contenu,
    centrage, padding visible et symétrie recto-verso.
-4. Les anciennes pages 11 et 12 sont conservées comme références historiques
-   dans `validations/v5-it1/`. Les rendus corrigés sont figés dans
-   `validations/v5-it2/`, puis comparés avec une métrique AE égale à zéro.
-5. Les pages 1–10 et 13–15 restent protégées par leurs SHA-256 canoniques. La
-   page 13 et son oracle itération 2 ne doivent pas changer.
+4. Avant recompilation, les rendus actuels `validations/v5/page-11.png` et
+   `page-12.png` sont copiés dans `validations/v5-it1/` et leurs SHA-256
+   historiques sont figés. Après inspection, les nouveaux rendus remplacent
+   `validations/v5/page-11.png` et `page-12.png` et sont copiés dans
+   `validations/v5-it2/`. Le contrôleur vérifie le SHA des deux oracles itération
+   2 puis exige `AE=0` entre chacun d'eux et le PNG généré.
+5. Seules les entrées 11 et 12 de `NON_DIAGNOSTICS_PAGE_SHA256` sont remplacées
+   par leurs nouvelles valeurs. Les pages 1–10 et 14–15 conservent leurs
+   SHA-256 canoniques ; la page 13 reste régie par son oracle dédié.
+6. La source QCM
+   `chapitres/1SPE-DERIVATION-LOCAL/qcm/1SPE-DERIVATION-LOCAL-QCM.tex` est
+   strictement interdite de modification et conserve le SHA-256 canonique
+   `cb34cb2351761e1c60d15eb5b95bcbc656c718fb19b6dca15290e3df3384b9e3`.
+   Les bornes BBox et intervalles de log sans débordement des diagnostics p.13
+   restent actifs ; son oracle itération 2 conserve le SHA-256
+   `2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23`.
 
 ## Livrables et garde-fous
 
