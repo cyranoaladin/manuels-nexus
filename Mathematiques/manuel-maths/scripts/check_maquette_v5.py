@@ -1,0 +1,623 @@
+#!/usr/bin/env python3
+"""Compile and inspect the isolated v5 validation mock-up."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import math
+import re
+import subprocess
+import sys
+import unicodedata
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+from build_maquette_v5 import MetaError, load_manifest
+
+
+PAGE_13_REFERENCE_SHA256 = (
+    "2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23"
+)
+HISTORICAL_PAGE_13_REFERENCE_SHA256 = (
+    "ea1750a0f56ecd3b2761614709f96f9b267569ece45bc4103aa11dc2007dacf1"
+)
+NON_DIAGNOSTICS_PAGE_SHA256 = {
+    1: "1e065c44ee1cd031aad570b4f4c5a98aa7ced55bceba78f418ff3ba31d63a24d",
+    2: "83eaaf15bad92a303ce8c367c3dffd498fea505930aaf4be6b06322bd2d07d10",
+    3: "4247bbe4325551dd26164476f9773fc8a11f1a131f3481a8da39e60b8e95c1c1",
+    4: "8229c5aaa4bcec461bf8442c4c448655315a4fb2fedf11a0052dcebdfb8c93c2",
+    5: "54d58a7128379386bfb32f79f6e8b0a3e8ea1916cdd785df748044fac2fcd30a",
+    6: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+    7: "b3499d26ce3c43b206b1913bc3a3bc6960bd0827e131a4634d8807f4f7ecd233",
+    8: "7dc9d309b149ce5717e1f7aeab803c45f282c6cb4a4973668ffb3d1d267764ac",
+    9: "fbe900adaa69d7374e0be7ead78dcc2295e03d35671281e4c7e0890d656e726e",
+    10: "50aec5774963497bdf290b68c571dfa3d13336ded825e5969a3aee66834497be",
+    11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
+    12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
+    14: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
+    15: "988b636d4f82ae6fcad93a4651cb43639744aa9094e1d31a4e190a36da1e91b4",
+}
+
+
+class AcceptanceError(RuntimeError):
+    """Report compilation or PDF acceptance failures."""
+
+
+def normalize_text(value: str) -> str:
+    """Normalize extracted PDF text for stable content comparisons."""
+    normalized = unicodedata.normalize("NFKC", value).replace("\ufeff", "")
+    normalized = normalized.replace("’", "'").replace("‘", "'")
+    return " ".join(normalized.split())
+
+
+def page_text_is_empty(value: str) -> bool:
+    return normalize_text(value) == ""
+
+
+def required_strings_present(value: str, required: list[str]) -> bool:
+    normalized = normalize_text(value)
+    return all(normalize_text(expected) in normalized for expected in required)
+
+
+def assert_no_two_column_marginnotes(log: str) -> None:
+    marker = "NEXUS-V5-MARGINNOTE-COLUMNS-EMITTED"
+    if marker in log:
+        raise AcceptanceError(marker)
+
+
+def assert_no_compact_correction_overfull(log: str) -> None:
+    """Reject horizontal collisions inside the p.15 three-column block."""
+    start = "NEXUS-V5-COMPACT-CORRECTIONS-START"
+    end = "NEXUS-V5-COMPACT-CORRECTIONS-END"
+    if start not in log or end not in log:
+        return
+    compact_log = log[log.index(start) : log.index(end)]
+    if "Overfull \\hbox" in compact_log:
+        raise AcceptanceError("débordement horizontal des corrigés compacts")
+
+
+def assert_diagnostics_log_clean(log: str, expected_passes: int = 3) -> None:
+    """Require one balanced, overflow-free diagnostics interval per TeX pass."""
+    start = "NEXUS-V5-DIAGNOSTICS-START"
+    end = "NEXUS-V5-DIAGNOSTICS-END"
+    marker_pattern = re.compile(r"NEXUS-V5-DIAGNOSTICS-[A-Z][A-Z0-9_-]*")
+    markers = list(marker_pattern.finditer(log))
+    expected_sequence = [
+        marker for _ in range(expected_passes) for marker in (start, end)
+    ]
+    if [marker.group(0) for marker in markers] != expected_sequence:
+        raise AcceptanceError("marqueurs diagnostics absents, parasites ou déséquilibrés")
+
+    for pass_number in range(expected_passes):
+        interval_start = markers[2 * pass_number].end()
+        interval_end = markers[2 * pass_number + 1].start()
+        interval = log[interval_start:interval_end]
+        if "Overfull \\hbox" in interval or "Overfull \\vbox" in interval:
+            raise AcceptanceError(
+                f"débordement dans les diagnostics, passe {pass_number + 1}"
+            )
+
+
+def assert_diagnostics_bbox_layout(xhtml: str) -> None:
+    """Validate the semantic regions and geometry of diagnostics page XHTML."""
+    xml = re.sub(r"[\x00-\x08\x0B\x0C\x0E-\x1F]", "", xhtml)
+    try:
+        document = ET.fromstring(xml)
+    except (ET.ParseError, ValueError) as exc:
+        raise AcceptanceError(f"XHTML diagnostics invalide: {exc}") from exc
+
+    lines: list[dict[str, object]] = []
+    for element in document.findall(".//{*}line"):
+        text = normalize_text(" ".join(element.itertext()))
+        if not text:
+            continue
+        try:
+            line = {
+                "text": text,
+                "x_min": float(element.attrib["xMin"]),
+                "y_min": float(element.attrib["yMin"]),
+                "x_max": float(element.attrib["xMax"]),
+                "y_max": float(element.attrib["yMax"]),
+            }
+        except (KeyError, ValueError) as exc:
+            raise AcceptanceError("boîte de ligne diagnostics invalide") from exc
+        coordinates = [
+            float(line[coordinate])
+            for coordinate in ("x_min", "y_min", "x_max", "y_max")
+        ]
+        if not all(math.isfinite(coordinate) for coordinate in coordinates):
+            raise AcceptanceError("coordonnée diagnostics non finie")
+        if (
+            float(line["x_min"]) > float(line["x_max"])
+            or float(line["y_min"]) > float(line["y_max"])
+        ):
+            raise AcceptanceError("boîte de ligne diagnostics incohérente")
+        lines.append(line)
+
+    def anchor_index(label: str, *, prefix: bool = False) -> int:
+        matches = [
+            index
+            for index, line in enumerate(lines)
+            if (
+                str(line["text"]).startswith(label)
+                if prefix
+                else label in str(line["text"])
+            )
+        ]
+        if len(matches) != 1:
+            raise AcceptanceError(f"ancre diagnostics invalide: {label}")
+        return matches[0]
+
+    title_index = anchor_index("Correction et diagnostics")
+    responses_index = anchor_index("Réponses correctes")
+    score_index = anchor_index("Score", prefix=True)
+    title_anchor = lines[title_index]
+    responses_anchor = lines[responses_index]
+    score_anchor = lines[score_index]
+    if not (
+        float(title_anchor["y_max"]) < float(responses_anchor["y_min"])
+        and float(responses_anchor["y_max"]) < float(score_anchor["y_min"])
+    ):
+        raise AcceptanceError("ordre des régions diagnostics invalide")
+
+    def is_header_or_footer(line: dict[str, object]) -> bool:
+        text = str(line["text"])
+        return (
+            text == "Corrigés"
+            or text == "NEXUS RÉUSSITE"
+            or (re.fullmatch(r"\d+", text) is not None and float(line["y_min"]) > 768.0)
+        )
+
+    for line in lines:
+        if is_header_or_footer(line):
+            continue
+        if (
+            float(line["x_min"]) < 56.0
+            or float(line["x_max"]) > 459.5
+            or float(line["y_max"]) > 768.0
+        ):
+            raise AcceptanceError(f"ligne hors corps diagnostics: {line['text']}")
+
+    anchors = {id(title_anchor), id(responses_anchor), id(score_anchor)}
+    body_lines = [
+        line
+        for line in lines
+        if id(line) not in anchors and not is_header_or_footer(line)
+    ]
+    table_lines = [
+        line
+        for line in body_lines
+        if float(line["y_min"]) >= float(title_anchor["y_max"])
+        and float(line["y_max"]) <= float(responses_anchor["y_min"])
+    ]
+    response_lines = [
+        line
+        for line in body_lines
+        if float(line["y_min"]) >= float(responses_anchor["y_max"])
+        and float(line["y_max"]) <= float(score_anchor["y_min"])
+    ]
+    score_lines = [score_anchor] + [
+        line
+        for line in body_lines
+        if float(line["y_min"]) >= float(score_anchor["y_min"])
+    ]
+    assigned = {
+        id(line) for line in table_lines + response_lines + score_lines[1:]
+    }
+    if any(id(line) not in assigned for line in body_lines):
+        raise AcceptanceError("ligne hors régions diagnostics")
+    question_numbers = [
+        int(match.group(1))
+        for line in table_lines
+        for match in re.finditer(r"\bQ(1[0-5]|[1-9])\b", str(line["text"]))
+    ]
+    if len(question_numbers) != 15 or set(question_numbers) != set(range(1, 16)):
+        raise AcceptanceError("lignes Q1–Q15 diagnostics incomplètes")
+
+    diagnostics = [
+        line
+        for line in table_lines
+        if re.match(r"^[A-D]\s*:", str(line["text"])) is not None
+    ]
+    if len(diagnostics) != 45:
+        raise AcceptanceError(
+            f"diagnostics distracteurs: attendu 45, obtenu {len(diagnostics)}"
+        )
+    final_diagnostic = [
+        line for line in diagnostics if "placement de la virgule" in str(line["text"])
+    ]
+    if len(final_diagnostic) != 1:
+        raise AcceptanceError("dernier diagnostic absent: placement de la virgule")
+
+    grid_numbers = [
+        int(match.group(1))
+        for line in response_lines
+        for match in re.finditer(r"\bQ(1[0-5]|[1-9])\b", str(line["text"]))
+    ]
+    if len(grid_numbers) != 15 or set(grid_numbers) != set(range(1, 16)):
+        raise AcceptanceError("grille Q1–Q15 incomplète")
+    final_grid_lines = [
+        line
+        for line in response_lines
+        if any(
+            int(match.group(1)) in range(11, 16)
+            for match in re.finditer(
+                r"\bQ(1[0-5]|[1-9])\b", str(line["text"])
+            )
+        )
+    ]
+    if not final_grid_lines:
+        raise AcceptanceError("lignes Q11–Q15 absentes")
+
+    if any(
+        float(line["y_min"]) < float(title_anchor["y_max"])
+        or float(line["y_max"]) > float(responses_anchor["y_min"])
+        for line in table_lines
+    ):
+        raise AcceptanceError("ligne hors région tableau diagnostics")
+    if any(
+        float(line["y_min"]) < float(responses_anchor["y_max"])
+        or float(line["y_max"]) > float(score_anchor["y_min"])
+        for line in response_lines
+    ):
+        raise AcceptanceError("ligne hors région réponses diagnostics")
+    if any(
+        float(line["y_min"]) < float(score_anchor["y_min"])
+        for line in score_lines[1:]
+    ):
+        raise AcceptanceError("ligne hors région score diagnostics")
+
+    def assert_region_rectangles_disjoint(
+        region_name: str, region_lines: list[dict[str, object]]
+    ) -> None:
+        tolerance = 0.25
+        for index, first in enumerate(region_lines):
+            for second in region_lines[index + 1 :]:
+                horizontal_overlap = min(
+                    float(first["x_max"]), float(second["x_max"])
+                ) - max(float(first["x_min"]), float(second["x_min"]))
+                vertical_overlap = min(
+                    float(first["y_max"]), float(second["y_max"])
+                ) - max(float(first["y_min"]), float(second["y_min"]))
+                if horizontal_overlap > tolerance and vertical_overlap > tolerance:
+                    raise AcceptanceError(
+                        f"collision interne dans la région {region_name} diagnostics"
+                    )
+
+    assert_region_rectangles_disjoint("tableau", table_lines)
+    assert_region_rectangles_disjoint("réponses", response_lines)
+    assert_region_rectangles_disjoint("score", score_lines)
+
+    table_bottom = max(float(line["y_max"]) for line in table_lines)
+    if float(responses_anchor["y_min"]) - table_bottom < 6.0:
+        raise AcceptanceError("collision tableau diagnostics / réponses correctes")
+    grid_top = min(float(line["y_min"]) for line in response_lines)
+    if grid_top < float(responses_anchor["y_max"]):
+        raise AcceptanceError("collision réponses correctes / grille diagnostics")
+    grid_bottom = max(float(line["y_max"]) for line in response_lines)
+    if float(score_anchor["y_min"]) - grid_bottom < 6.0:
+        raise AcceptanceError("collision grille diagnostics / score")
+
+
+def run_checked(
+    command: list[str],
+    cwd: Path,
+    *,
+    meta_exit_code: bool = False,
+    accepted_returncodes: tuple[int, ...] = (0,),
+) -> subprocess.CompletedProcess[str]:
+    try:
+        result = subprocess.run(
+            command,
+            cwd=cwd,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError as exc:
+        raise AcceptanceError(f"commande impossible: {command[0]}: {exc}") from exc
+    if meta_exit_code and result.returncode == 2:
+        detail = (result.stderr or result.stdout).strip()
+        if detail.startswith("META V5:"):
+            detail = detail.removeprefix("META V5:").strip()
+        raise MetaError(detail or "générateur META en échec")
+    if result.returncode not in accepted_returncodes:
+        raise AcceptanceError(
+            f"commande en échec ({result.returncode}): {' '.join(command)}"
+        )
+    return result
+
+
+def _assert_clean_tex_output(output: str) -> None:
+    if "Undefined control sequence" in output:
+        raise AcceptanceError("Undefined control sequence")
+    if re.search(r"(?m)^!", output):
+        raise AcceptanceError("ligne d'erreur TeX")
+    if "Missing character" in output:
+        raise AcceptanceError("glyphe manquant")
+    assert_no_two_column_marginnotes(output)
+    assert_no_compact_correction_overfull(output)
+
+
+def _assert_no_undefined_references(output: str) -> None:
+    if re.search(r"undefined (?:references?|citations?)", output, re.IGNORECASE):
+        raise AcceptanceError("références indéfinies")
+    if re.search(r"Reference .* undefined", output, re.IGNORECASE):
+        raise AcceptanceError("référence indéfinie")
+    if re.search(r"Citation (?:'.*?'|`.*?'|\S+).* undefined", output, re.IGNORECASE):
+        raise AcceptanceError("citation indéfinie")
+
+
+def compile_maquette(manifest_path: Path, root: Path) -> dict[str, str]:
+    """Generate references, run three TeX passes, then extract PDF metadata/text."""
+    try:
+        safe_root = root.resolve(strict=True)
+    except OSError as exc:
+        raise AcceptanceError(f"racine absente: {root}") from exc
+    try:
+        manifest = manifest_path.resolve(strict=True)
+    except OSError as exc:
+        raise MetaError(f"manifest absent: {manifest_path}") from exc
+    try:
+        manifest.relative_to(safe_root)
+    except ValueError as exc:
+        raise AcceptanceError("manifeste hors racine") from exc
+
+    generator = safe_root / "scripts" / "build_maquette_v5.py"
+    output_dir = Path("build/maquette-v5")
+    run_checked(
+        [
+            "python3",
+            str(generator),
+            "--manifest",
+            str(manifest),
+            "--output",
+            str(output_dir / "renvois.tex"),
+        ],
+        safe_root,
+        meta_exit_code=True,
+    )
+
+    tex_command = [
+        "lualatex",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        f"-output-directory={output_dir}",
+        str(output_dir / "maquette.tex"),
+    ]
+    tex_output: list[str] = []
+    for _ in range(3):
+        result = run_checked(tex_command, safe_root)
+        combined = result.stdout + result.stderr
+        _assert_clean_tex_output(combined)
+        tex_output.append(combined)
+    _assert_no_undefined_references(tex_output[-1])
+    combined_log = "".join(tex_output)
+    assert_diagnostics_log_clean(combined_log)
+
+    pdf = output_dir / "maquette.pdf"
+    pdfinfo = run_checked(["pdfinfo", str(pdf)], safe_root)
+    extracted = run_checked(["pdftotext", "-layout", str(pdf), "-"], safe_root)
+    diagnostics_bbox = run_checked(
+        [
+            "pdftotext",
+            "-bbox-layout",
+            "-f",
+            "13",
+            "-l",
+            "13",
+            str(pdf),
+            "-",
+        ],
+        safe_root,
+    )
+    if "??" in extracted.stdout:
+        raise AcceptanceError("?? dans le texte PDF extrait")
+    return {
+        "log": combined_log,
+        "pdfinfo": pdfinfo.stdout,
+        "text": extracted.stdout,
+        "diagnostics_bbox": diagnostics_bbox.stdout,
+    }
+
+
+def _page_text(pdf: Path, page: int, root: Path, *, layout: bool = False) -> str:
+    command = ["pdftotext"]
+    if layout:
+        command.append("-layout")
+    command.extend(["-f", str(page), "-l", str(page), str(pdf), "-"])
+    return run_checked(command, root).stdout
+
+
+def _assert_page_count(pdfinfo: str, expected: int) -> None:
+    match = re.search(r"(?m)^Pages:\s+(\d+)\s*$", pdfinfo)
+    if match is None or int(match.group(1)) != expected:
+        actual = match.group(1) if match is not None else "absent"
+        raise AcceptanceError(f"pages: attendu {expected}, obtenu {actual}")
+
+
+def _render_validation_pngs(pdf: Path, root: Path, expected_pages: int) -> list[Path]:
+    destination = root / "validations/v5"
+    destination.mkdir(parents=True, exist_ok=True)
+    for stale in destination.glob("page-[0-9][0-9].png"):
+        stale.unlink()
+    run_checked(
+        ["pdftoppm", "-png", "-r", "150", str(pdf), str(destination / "page")],
+        root,
+    )
+    expected = [destination / f"page-{page:02d}.png" for page in range(1, expected_pages + 1)]
+    actual = sorted(destination.glob("page-[0-9][0-9].png"))
+    if actual != expected:
+        raise AcceptanceError("jeu de PNG 150 dpi incomplet")
+    for image in expected:
+        dimensions = run_checked(
+            ["identify", "-format", "%w %h", str(image)], root
+        ).stdout.strip()
+        if dimensions != "1241 1754":
+            raise AcceptanceError(f"dimensions PNG invalides: {image.name}: {dimensions}")
+    return expected
+
+
+def assert_non_diagnostics_page_hashes(images: list[Path]) -> None:
+    """Reject any raster change outside the corrected diagnostics page."""
+    if len(images) != 15:
+        raise AcceptanceError("jeu de PNG à protéger incomplet")
+    for page, expected_sha in NON_DIAGNOSTICS_PAGE_SHA256.items():
+        image = images[page - 1]
+        if not image.is_file():
+            raise AcceptanceError(f"page {page} absente")
+        actual_sha = hashlib.sha256(image.read_bytes()).hexdigest()
+        if actual_sha != expected_sha:
+            raise AcceptanceError(f"page {page} altérée")
+
+
+def accept_maquette(
+    manifest: dict, compiled: dict[str, str], root: Path
+) -> str:
+    """Apply the page-level v5 acceptance contract and render validation PNGs."""
+    expected_pages = manifest["expected_pages"]
+    _assert_page_count(compiled["pdfinfo"], expected_pages)
+    assert_no_two_column_marginnotes(compiled["log"])
+    assert_diagnostics_bbox_layout(compiled["diagnostics_bbox"])
+
+    pdf = root / manifest["output_pdf"]
+    if not pdf.is_file():
+        raise AcceptanceError(f"PDF absent: {pdf}")
+    raw_pages = {
+        page: _page_text(pdf, page, root, layout=True)
+        for page in range(1, expected_pages + 1)
+    }
+    pages = {page: normalize_text(text) for page, text in raw_pages.items()}
+
+    for page in manifest["blank_pages"]:
+        if not page_text_is_empty(raw_pages[page]):
+            raise AcceptanceError(f"page blanche {page} non vide")
+
+    expected_rubrics = {
+        1: "OUVERTURE",
+        2: "Cours",
+        3: "Cours",
+        4: "Cours",
+        5: "Cours",
+        7: "Méthodes",
+        8: "Méthodes",
+        9: "Exercices",
+        10: "Exercices",
+        11: "Auto-évaluation",
+        12: "Auto-évaluation",
+        13: "Corrigés",
+        15: "Corrigés",
+    }
+    for page, rubric in expected_rubrics.items():
+        if normalize_text(rubric) not in pages[page]:
+            raise AcceptanceError(f"rubrique {rubric} absente p. {page}")
+
+    diagnostic_strings = (
+        "Correction et diagnostics",
+        "Réponses correctes",
+        "Score",
+        "Capacités à retravailler",
+    )
+    for expected in diagnostic_strings:
+        normalized = normalize_text(expected)
+        if normalized not in pages[13]:
+            raise AcceptanceError(f"diagnostics absents p. 13: {expected}")
+        for page in (12, 14, 15):
+            if normalized in pages[page]:
+                raise AcceptanceError(f"diagnostics présents hors p. 13: p. {page}")
+    if pages[13].count("Corrigés") != 1:
+        raise AcceptanceError("onglet Corrigés p. 13 dupliqué ou absent")
+
+    opening = raw_pages[1]
+    for label, folio in manifest["chapter_toc"]:
+        if re.search(
+            rf"(?m)^\s*{re.escape(label)}\b.*\b{folio}\s*$", opening
+        ) is None:
+            raise AcceptanceError(f"sommaire absent: {label} {folio}")
+
+    combined = " ".join(pages.values())
+    if not required_strings_present(combined, manifest["required_strings"]):
+        raise AcceptanceError("renvoi généré absent")
+    for object_id in manifest["exercise_order"]:
+        if object_id in combined:
+            raise AcceptanceError(f"ID technique visible: {object_id}")
+    page_counts = manifest["exercise_page_counts"]
+    for page in (9, 10):
+        actual = pages[page].count("Corrigé p. 15")
+        expected = page_counts[str(page)]
+        if actual != expected:
+            raise AcceptanceError(
+                f"badges p. {page}: attendu {expected}, obtenu {actual}"
+            )
+    if "REPÈRES DE RÉSOLUTION" not in pages[7] or "À VOUS DE JOUER" not in pages[8]:
+        raise AcceptanceError("méthode appariée incomplète")
+    for question in range(1, 9):
+        if f"[Q{question}]" not in pages[11] or f"[Q{question}]" in pages[12]:
+            raise AcceptanceError(f"QCM mal paginé: Q{question}")
+    for question in range(9, 16):
+        if f"[Q{question}]" in pages[11] or f"[Q{question}]" not in pages[12]:
+            raise AcceptanceError(f"QCM mal paginé: Q{question}")
+    if pages[15].count("Corrigés") != 2:
+        raise AcceptanceError("titre Corrigés dupliqué ou absent")
+    if re.search(r"Corrigé[ \t]{1,3}[0-9]+\s*\.", raw_pages[15]) is not None:
+        raise AcceptanceError("numéro de corrigé désynchronisé p. 15")
+
+    images = _render_validation_pngs(pdf, root, expected_pages)
+    assert_non_diagnostics_page_hashes(images)
+
+    historical = root / "validations/v5-it1/page-13.png"
+    if not historical.is_file():
+        raise AcceptanceError("référence it1 p.13 absente")
+    historical_sha = hashlib.sha256(historical.read_bytes()).hexdigest()
+    if historical_sha != HISTORICAL_PAGE_13_REFERENCE_SHA256:
+        raise AcceptanceError("référence it1 p.13 altérée")
+
+    reference = root / "validations/v5-it2/page-13.png"
+    if not reference.is_file():
+        raise AcceptanceError("référence it2 p.13 absente")
+    reference_sha = hashlib.sha256(reference.read_bytes()).hexdigest()
+    if reference_sha != PAGE_13_REFERENCE_SHA256:
+        raise AcceptanceError("référence it2 p.13 altérée")
+    comparison = run_checked(
+        ["compare", "-metric", "AE", str(reference), str(images[12]), "null:"],
+        root,
+        accepted_returncodes=(0, 1),
+    )
+    if comparison.stderr.strip() != "0":
+        raise AcceptanceError(
+            f"page 13 différente de l'oracle it2: AE={comparison.stderr.strip()}"
+        )
+
+    return (
+        "MAQUETTE V5: PASS — 15 pages; blanches 6,14; "
+        "renvois 2/2; marginnote colonnes 0"
+    )
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--manifest", required=True, type=Path)
+    args = parser.parse_args(argv)
+    root = Path.cwd()
+
+    try:
+        manifest = load_manifest(args.manifest, root)
+    except MetaError as exc:
+        print(f"META V5: {exc}", file=sys.stderr)
+        return 2
+    try:
+        compiled = compile_maquette(args.manifest, root)
+        summary = accept_maquette(manifest, compiled, root)
+    except MetaError as exc:
+        print(f"META V5: {exc}", file=sys.stderr)
+        return 2
+    except AcceptanceError as exc:
+        print(f"MAQUETTE V5: {exc}", file=sys.stderr)
+        return 1
+    print(summary)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
