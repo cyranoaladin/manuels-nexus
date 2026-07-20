@@ -1562,6 +1562,297 @@ def test_navigation_opening_and_blank_source_contract():
         assert unchanged in maquette_source
 
 
+def test_rubric_tab_dynamic_source_contract():
+    class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
+        encoding="utf-8"
+    )
+    tab_start = class_source.index(r"\newcommand{\nxOngletRubrique}")
+    tab_end = class_source.index("% Injecter l'onglet", tab_start)
+    tab_source = class_source[tab_start:tab_end]
+
+    assert r"\newsavebox{\nxVOngletTextBox}" in class_source[:tab_start]
+    assert r"\newlength{\nxVOngletLength}" in class_source[:tab_start]
+    assert r"\newlength{\nxVOngletHalfLength}" in class_source[:tab_start]
+    assert r"\begingroup" in tab_source
+    assert r"\endgroup" in tab_source
+    assert re.search(
+        r"\\sbox\{\\nxVOngletTextBox\}\{\{\s*"
+        r"\\titrefont\\fontsize\{6\}\{6\}\\selectfont",
+        tab_source,
+    )
+    assert tab_source.count(r"\MakeUppercase{\nxRubriquePage}") == 1
+    assert (
+        r"\dimexpr\wd\nxVOngletTextBox+6mm\relax" in tab_source
+    )
+    assert re.search(
+        r"\\ifdim\\nxVOngletLength<16mm\s*"
+        r"\\setlength\{\\nxVOngletLength\}\{16mm\}\\fi",
+        tab_source,
+    )
+    assert (
+        r"\setlength{\nxVOngletHalfLength}{\nxVOngletLength}"
+        in tab_source
+    )
+    assert r"\divide\nxVOngletHalfLength by 2" in tab_source
+    assert r"rectangle +(-12mm,-\nxVOngletLength);" in tab_source
+    assert r"rectangle +(12mm,-\nxVOngletLength);" in tab_source
+    assert tab_source.count(
+        r"yshift=\ongletY mm-\nxVOngletHalfLength"
+    ) == 2
+    assert tab_source.count(r"\usebox{\nxVOngletTextBox}") == 2
+    assert tab_source.count("inner sep=0pt") == 2
+    assert "-16mm" not in tab_source
+    assert "-8mm" not in tab_source
+
+
+def _rubric_tab_word_bbox(xhtml: str, page_number: int, label: str) -> dict:
+    document = ET.fromstring(xhtml)
+    pages = document.findall(".//{*}page")
+    assert len(pages) == 4
+    page = pages[page_number - 1]
+    page_width = float(page.attrib["width"])
+    expected = label.upper()
+    candidates = []
+    for word in page.findall(".//{*}word"):
+        text = "".join(word.itertext()).strip()
+        if text.upper() != expected:
+            continue
+        bounds = {
+            "x_min": float(word.attrib["xMin"]),
+            "y_min": float(word.attrib["yMin"]),
+            "x_max": float(word.attrib["xMax"]),
+            "y_max": float(word.attrib["yMax"]),
+        }
+        width = bounds["x_max"] - bounds["x_min"]
+        height = bounds["y_max"] - bounds["y_min"]
+        at_outer_edge = (
+            bounds["x_min"] < 48.0 or bounds["x_max"] > page_width - 48.0
+        )
+        if height > width and at_outer_edge:
+            candidates.append(bounds)
+    assert len(candidates) == 1, (page_number, label, candidates)
+    return candidates[0]
+
+
+def _rubric_tab_component_bbox(image_path: Path, page_number: int) -> dict:
+    from PIL import Image
+
+    image = Image.open(image_path).convert("RGB")
+    pixels = image.load()
+    pixels_per_mm = 300.0 / 25.4
+    band_width = round(15.0 * pixels_per_mm)
+    high_zone = min(image.height, round(80.0 * pixels_per_mm))
+    if page_number % 2:
+        x_start, x_end = image.width - band_width, image.width
+    else:
+        x_start, x_end = 0, band_width
+
+    # chapcolor!85 = 85 % mathsAccent (#3A2BD4) sur fond blanc.
+    target = (88, 75, 218)
+
+    def is_tab_color(x, y):
+        rgb = pixels[x, y]
+        return all(
+            abs(channel - wanted) <= 12
+            for channel, wanted in zip(rgb, target)
+        )
+
+    candidates = []
+    seen = set()
+    for y in range(high_zone):
+        for x in range(x_start, x_end):
+            if (x, y) in seen or not is_tab_color(x, y):
+                continue
+            stack = [(x, y)]
+            seen.add((x, y))
+            x_min = x_max = x
+            y_min = y_max = y
+            area = 0
+            while stack:
+                current_x, current_y = stack.pop()
+                area += 1
+                x_min = min(x_min, current_x)
+                x_max = max(x_max, current_x)
+                y_min = min(y_min, current_y)
+                y_max = max(y_max, current_y)
+                for neighbor_x, neighbor_y in (
+                    (current_x - 1, current_y),
+                    (current_x + 1, current_y),
+                    (current_x, current_y - 1),
+                    (current_x, current_y + 1),
+                ):
+                    if not (
+                        x_start <= neighbor_x < x_end
+                        and 0 <= neighbor_y < high_zone
+                    ):
+                        continue
+                    if (neighbor_x, neighbor_y) in seen:
+                        continue
+                    if is_tab_color(neighbor_x, neighbor_y):
+                        seen.add((neighbor_x, neighbor_y))
+                        stack.append((neighbor_x, neighbor_y))
+            if area >= 1000:
+                candidates.append(
+                    {
+                        "x_min": x_min,
+                        "y_min": y_min,
+                        "x_max": x_max + 1,
+                        "y_max": y_max + 1,
+                        "area": area,
+                    }
+                )
+
+    assert candidates, (page_number, image_path)
+    return max(candidates, key=lambda component: component["area"])
+
+
+def test_rubric_tab_dynamic_fixture_pdf(tmp_path):
+    fixture = tmp_path / "rubric-tabs-v5.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel-v5}
+\matiere{Mathématiques}\niveau{Première spécialité}
+\begin{document}
+\pagestyle{scrheadings}
+\setcounter{chapter}{1}
+\rubrique{Cours}
+\noindent PAGE COURS IMPAIRE\vfill\newpage
+\noindent PAGE COURS PAIRE\vfill\clearpage
+\rubrique{Auto-évaluation}
+\noindent PAGE AUTO IMPAIRE\vfill\newpage
+\noindent PAGE AUTO PAIRE\vfill
+\end{document}
+""",
+        encoding="utf-8",
+    )
+    command = [
+        "lualatex",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        f"-output-directory={tmp_path}",
+        str(fixture),
+    ]
+    outputs = []
+    for _ in range(3):
+        result = subprocess.run(
+            command,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        assert result.returncode == 0, result.stdout[-5000:] + result.stderr
+        outputs.append(result.stdout + result.stderr)
+    combined_output = "\n".join(outputs)
+    assert "Overfull \\hbox" not in combined_output
+    assert "Overfull \\vbox" not in combined_output
+
+    pdf = tmp_path / "rubric-tabs-v5.pdf"
+    info = subprocess.run(
+        ["pdfinfo", str(pdf)],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    assert re.search(r"(?m)^Pages:\s+4$", info)
+    xhtml = subprocess.run(
+        ["pdftotext", "-bbox-layout", str(pdf), "-"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    raster_prefix = tmp_path / "rubric-tab"
+    subprocess.run(
+        [
+            "pdftoppm",
+            "-png",
+            "-r",
+            "300",
+            str(pdf),
+            str(raster_prefix),
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+
+    pixels_per_point = 300.0 / 72.0
+    half_point = 0.5 * pixels_per_point
+    half_mm = 0.5 * 300.0 / 25.4
+    minimum_padding = 3.0 * 300.0 / 25.4 - half_point
+    lengths = {"Cours": [], "Auto-évaluation": []}
+    for page_number, label in enumerate(
+        ("Cours", "Cours", "Auto-évaluation", "Auto-évaluation"), start=1
+    ):
+        word_points = _rubric_tab_word_bbox(xhtml, page_number, label)
+        word = {
+            key: word_points[key] * pixels_per_point
+            for key in ("x_min", "y_min", "x_max", "y_max")
+        }
+        component = _rubric_tab_component_bbox(
+            tmp_path / f"rubric-tab-{page_number}.png", page_number
+        )
+        assert word["x_min"] >= component["x_min"] - half_point, (
+            page_number,
+            label,
+            "débordement transversal gauche",
+        )
+        assert word["x_max"] <= component["x_max"] + half_point, (
+            page_number,
+            label,
+            "débordement transversal droit",
+        )
+        assert word["y_min"] >= component["y_min"] - half_point, (
+            page_number,
+            label,
+            "débordement longitudinal haut",
+            word["y_min"],
+            component["y_min"],
+        )
+        assert word["y_max"] <= component["y_max"] + half_point, (
+            page_number,
+            label,
+            "débordement longitudinal bas",
+            word["y_max"],
+            component["y_max"],
+        )
+
+        start_padding = word["y_min"] - component["y_min"]
+        end_padding = component["y_max"] - word["y_max"]
+        assert abs(start_padding - end_padding) <= half_mm, (
+            page_number,
+            label,
+            start_padding,
+            end_padding,
+        )
+        length = component["y_max"] - component["y_min"]
+        lengths[label].append(length)
+        if label == "Auto-évaluation":
+            assert length > 16.0 * 300.0 / 25.4
+            assert start_padding >= minimum_padding, (
+                page_number,
+                label,
+                "padding haut",
+                start_padding,
+            )
+            assert end_padding >= minimum_padding, (
+                page_number,
+                label,
+                "padding bas",
+                end_padding,
+            )
+
+    sixteen_mm = 16.0 * 300.0 / 25.4
+    for length in lengths["Cours"]:
+        assert abs(length - sixteen_mm) <= half_point
+    assert abs(lengths["Cours"][0] - lengths["Cours"][1]) <= half_point
+    assert abs(
+        lengths["Auto-évaluation"][0] - lengths["Auto-évaluation"][1]
+    ) <= half_point
+
+
 def test_navigation_blank_fixture_pdf(tmp_path):
     checker = importlib.import_module("check_maquette_v5")
     fixture = tmp_path / "navigation-v5.tex"
@@ -2136,6 +2427,14 @@ def test_validation_png_reference_hashes():
     for page, expected_sha in expected.items():
         rendered = ROOT / f"validations/v5/page-{page:02d}.png"
         assert hashlib.sha256(rendered.read_bytes()).hexdigest() == expected_sha
+
+    historical_tabs = {
+        11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
+        12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
+    }
+    for page, expected_sha in historical_tabs.items():
+        historical_tab = ROOT / f"validations/v5-it1/page-{page:02d}.png"
+        assert hashlib.sha256(historical_tab.read_bytes()).hexdigest() == expected_sha
 
     historical = ROOT / "validations/v5-it1/page-13.png"
     current = ROOT / "validations/v5/page-13.png"
