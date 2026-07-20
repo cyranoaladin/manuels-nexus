@@ -1,0 +1,44 @@
+% META: {"id": "TSPE-DERCONV-ME-001", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M1"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M1}{Deriver une fonction composee}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque la fonction a deriver fait intervenir une composition : $\mathrm{e}^{u(x)}$, $\ln(u(x))$, $(u(x))^n$, $\sqrt{u(x)}$, ou plus generalement $v(u(x))$.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier la fonction exterieure $v$ et la fonction interieure $u$.}
+    \item \textbf{Calculer $u'(x)$.}
+    \item \textbf{Calculer $v'(t)$.}
+    \item \textbf{Appliquer la formule :} $(v \circ u)'(x) = u'(x) \times v'(u(x))$.
+    \item \textbf{Simplifier} l'expression obtenue.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Deriver $f(x) = \mathrm{e}^{x^2 - 3x}$.
+
+  \medskip
+  \commentaireMarge{Identifier : $v(t) = \mathrm{e}^t$, $u(x) = x^2 - 3x$.}%
+  Fonction interieure : $u(x) = x^2 - 3x$, donc $u'(x) = 2x - 3$.
+
+  \commentaireMarge{Appliquer $(e^u)' = u' \cdot e^u$.}%
+  Fonction exterieure : $v(t) = \mathrm{e}^t$, donc $v'(t) = \mathrm{e}^t$.
+
+  $f'(x) = u'(x) \times \mathrm{e}^{u(x)} = (2x-3)\,\mathrm{e}^{x^2 - 3x}$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier $u'(x)$ : ecrire $(\mathrm{e}^{u})' = \mathrm{e}^u$ au lieu de $u'\,\mathrm{e}^u$.
+    \item \textbf{Piege 2.} Pour $(\ln u)'$, oublier le signe de $u$ : verifier que $u > 0$ sur l'intervalle d'etude.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier sur un cas simple : si $u(x) = 2x$, alors $(\mathrm{e}^{2x})' = 2\mathrm{e}^{2x}$ (et non $\mathrm{e}^{2x}$).
+}
+
+\sEntrainer{\refExos{M1}}
+
+\end{fichemethode}

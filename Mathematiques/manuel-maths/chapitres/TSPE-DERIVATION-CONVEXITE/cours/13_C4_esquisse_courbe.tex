@@ -1,0 +1,77 @@
+% META: {"id": "TSPE-DERCONV-CR-013", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+
+\section{Esquisse de courbe a partir de f, f' et f''}
+
+% ============================================================
+% STRATE 1 — Liens entre f, f', f''
+% ============================================================
+
+\propriete{
+Soit $f$ une fonction deux fois derivable sur un intervalle $I$.
+
+\begin{itemize}
+  \item $f'(x) > 0$ : $f$ est strictement croissante.
+  \item $f'(x) < 0$ : $f$ est strictement decroissante.
+  \item $f''(x) > 0$ : $f'$ est strictement croissante, la courbe de $f$ « tourne vers le haut » (convexe).
+  \item $f''(x) < 0$ : $f'$ est strictement decroissante, la courbe de $f$ « tourne vers le bas » (concave).
+\end{itemize}
+}
+
+\definition[1]{
+Un \textbf{point d'inflexion} de la courbe de $f$ est un point ou la courbe change de convexite (passage de convexe a concave ou inversement). En ce point, la tangente traverse la courbe.
+}
+
+\propriete{
+Si $f$ est deux fois derivable et si $f''$ s'annule en $a$ en changeant de signe, alors le point $(a, f(a))$ est un point d'inflexion de la courbe.
+}
+
+\subsection{Construire une esquisse}
+
+\propriete{
+Pour esquisser la courbe de $f$ a partir des tableaux de $f'$ et $f''$ :
+\begin{enumerate}
+  \item Placer les extremums (la ou $f'$ s'annule en changeant de signe) et les points d'inflexion (la ou $f''$ s'annule en changeant de signe).
+  \item Dans chaque intervalle, tracer la courbe en respectant :
+    \begin{itemize}
+      \item le sens de variation (donne par le signe de $f'$),
+      \item la courbure (donnee par le signe de $f''$).
+    \end{itemize}
+  \item Tracer les tangentes aux points d'inflexion (la courbe les traverse).
+\end{enumerate}
+}
+
+\exemple{
+Soit $f(x) = x^3 - 3x$.
+
+$f'(x) = 3x^2 - 3 = 3(x-1)(x+1)$.
+
+$f''(x) = 6x$.
+
+$f'$ s'annule en $x = -1$ (maximum local) et $x = 1$ (minimum local).
+
+$f''$ s'annule en $x = 0$ et change de signe : point d'inflexion en $(0, 0)$.
+
+Pour $x < 0$ : $f'' < 0$ (concave). Pour $x > 0$ : $f'' > 0$ (convexe).
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre extremum et point d'inflexion.} Un extremum est un point ou $f'$ s'annule en changeant de signe. Un point d'inflexion est un point ou $f''$ s'annule en changeant de signe. Ce ne sont pas les memes objets.
+}
+
+\erreurFrequente{
+\textbf{Croire que $f''(a) = 0$ suffit pour un point d'inflexion.} Il faut que $f''$ change de signe en $a$. Par exemple, $f(x) = x^4$ verifie $f''(0) = 0$ mais $(0, 0)$ n'est pas un point d'inflexion (la fonction reste convexe).
+}
+
+\margeAppui{
+\textbf{Resume visuel :}
+
+$f'' > 0$ : courbe en forme de bol (convexe, « souriante »).
+
+$f'' < 0$ : courbe en forme de chapeau (concave, « triste »).
+
+Point d'inflexion : passage de l'un a l'autre.
+}

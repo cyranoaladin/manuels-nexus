@@ -1,0 +1,45 @@
+% META: {"id": "TSPE-DERCONV-ME-002", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Mener une etude complete de fonction}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsque l'enonce demande une « etude complete » d'une fonction $f$ : domaine, limites, derivee, signe, variations, extremums, courbe.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Domaine de definition.} Verifier les contraintes (denominateur non nul, argument du logarithme positif, etc.).
+    \item \textbf{Limites aux bornes.} Calculer $\lim f(x)$ en chaque borne du domaine. Identifier les formes indeterminees et les lever (croissances comparees, factorisation).
+    \item \textbf{Derivee.} Calculer $f'(x)$ (utiliser les regles de derivation et la formule de composition si necessaire).
+    \item \textbf{Signe de $f'$.} Resoudre $f'(x) = 0$ et determiner les intervalles ou $f' > 0$ ou $f' < 0$.
+    \item \textbf{Tableau de variations.} Inclure les limites, les extremums (valeurs atteintes).
+    \item \textbf{Asymptotes.} Horizontales ($\lim f = \ell$), verticales ($\lim f = \pm\infty$).
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Etudier $f(x) = (x-1)\,\mathrm{e}^{-x}$ sur $\mathbb{R}$.
+
+  \medskip
+  \commentaireMarge{Domaine : $\mathbb{R}$ (pas de restriction).}%
+  \textbf{Limites :} $\lim_{x \to +\infty} (x-1)\mathrm{e}^{-x} = 0$ (croissances comparees). $\lim_{x \to -\infty} f(x) = -\infty$.
+
+  \commentaireMarge{Deriver un produit : $(uv)' = u'v + uv'$.}%
+  \textbf{Derivee :} $f'(x) = \mathrm{e}^{-x} + (x-1)(-\mathrm{e}^{-x}) = (2-x)\,\mathrm{e}^{-x}$.
+
+  $f'(x) > 0 \iff x < 2$. Maximum en $x = 2$ : $f(2) = \mathrm{e}^{-2}$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Oublier une asymptote horizontale. Si $\lim f(x) = \ell$, la droite $y = \ell$ est asymptote.
+    \item \textbf{Piege 2.} Conclure « pas de maximum » quand la fonction tend vers $+\infty$ : verifier si un maximum local existe.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier la coherence : les valeurs aux extremums doivent correspondre aux limites (pas de valeur plus grande que la limite a l'infini si $f \to 0^+$).
+}
+
+\sEntrainer{\refExos{M2}}
+
+\end{fichemethode}

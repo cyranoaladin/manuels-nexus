@@ -38,24 +38,7 @@ Le bloc VERIFY est obligatoire pour exercices/corrigés/évaluations à résulta
 - `\\` pour sauter des lignes en mode texte ; utiliser des paragraphes.
 - Packages non chargés par la classe (demander l'ajout).
 - Contenu hors macro dans les strates (tout passe par les environnements : c'est ce qui permet les déclinaisons F06).
+- `rsync --delete` sur `gabarits/` : les extensions NSI (`nexus-code.tex`, `nexus-figures-nsi.tex`) n'existent que côté NSI et seraient détruites.
 
-## Conventions NSI (extensions nexus-code / nexus-figures-nsi)
-| Usage | Macro/environnement |
-|---|---|
-| Code Python élève | `\begin{python} ... \end{python}` (ruff clean obligatoire) |
-| Session interactive | `\begin{console} >>> ... \end{console}` — jamais mélangée au code |
-| Implémentation commentée du cours | `\begin{codereference}{titre} ... \end{codereference}` |
-| Rubrique pratique | `\alamachine{...}` (une par section minimum) |
-| Mini-projet | `\begin{miniprojet}{titre}` + `\jalon{n}{...}` + `\criteresValidation{...}` |
-| Épreuve pratique | `\begin{sujetECE}{ID}{durée}` |
-| Figure normalisée | `\begin{nxfigure}[largeur]{légende}` + styles nxnode/nxcell/nxarrow/nxref, `\memtable{...}{i0}` |
-
-## Blocs de vérification NSI
-```
-% BEGIN-VERIFY          |  % BEGIN-TRACE
-% def f(x): ...         |  % t = [1, 2]; u = t; u.append(3); print(t)
-% assert f(3) == 9      |  % EXPECTED
-% END-VERIFY            |  % [1, 2, 3]
-                        |  % END-TRACE
-```
-TRACE : la sortie affichée dans le manuel est celle du bloc EXPECTED, vérifiée par exécution.
+## Synchronisation de la charte
+La synchro entre projets se fait UNIQUEMENT par `python scripts/check_charte_sync.py` (7 fichiers du tronc commun) ou le rsync fichier-par-fichier de `SYNC_CHARTE.md`. Voir `docs/06_charte_graphique.md` §12.

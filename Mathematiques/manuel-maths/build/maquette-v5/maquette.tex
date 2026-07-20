@@ -1,13 +1,12 @@
-% Maquette v5 — 12 pages prototype
-% Chapitre source : 1SPE-DERIVATION-LOCAL
-% Contenu réel, zéro contenu réécrit.
+% Maquette v5 itération 2 — 12-15 pages prototype
+% Chapitre source : 1SPE-DERIVATION-LOCAL (contenu réel, zéro réécriture)
 \documentclass{gabarits/nexus-manuel-v5}
 \matiere{Mathématiques}\niveau{Première spécialité}
-\title{Maquette éditoriale v5 — Prototype 12 pages}
+\title{Maquette éditoriale v5 — Itération 2}
 \begin{document}
 
 % ============================================================
-% PAGE 1 : OUVERTURE (belle page recto)
+% PAGE 1 : OUVERTURE
 % ============================================================
 \ouverturechapitre{Dérivation locale}{\begin{itemize}
 \item \textbf{C1} — Je sais calculer un taux de variation et interpréter un nombre dérivé.
@@ -19,7 +18,7 @@
 \parcoursUn~12 h \quad \parcoursDeux~10 h \quad \parcoursTrois~8 h}
 
 % ============================================================
-% PAGES 2-3 : COURS (grille cours, 1 colonne + marge active)
+% PAGES 2-3 : COURS (grille 1 col + marge active)
 % ============================================================
 \rubrique{Cours}
 \input{chapitres/1SPE-DERIVATION-LOCAL/cours/10_C1_taux_variation.tex}
@@ -27,38 +26,141 @@
 \input{chapitres/1SPE-DERIVATION-LOCAL/cours/11_C2_nombre_derive.tex}
 
 % ============================================================
-% PAGES 4-5 : MÉTHODES (double page appariée)
+% PAGES 4-5 : MÉTHODES (double page appariée avec call-outs)
 % ============================================================
 \begin{methodeDoublePage}{1}{Calculer un taux de variation et un nombre dérivé}
-\input{chapitres/1SPE-DERIVATION-LOCAL/methodes/1SPE-DERLOCAL-ME-001.tex}
+
+\exerciceResolu
+
+\callout{Identifier la fonction $f$ et les valeurs $a$, $b$ (ou $a$ et $h$).}
+
+\callout{Appliquer la formule $\tau = \dfrac{f(b)-f(a)}{b-a}$ pour le taux de variation.}
+
+\callout{Pour le nombre dérivé, calculer $\lim_{h\to 0}\dfrac{f(a+h)-f(a)}{h}$.}
+
+\medskip
+\textbf{Exemple.} Soit $f(x)=x^2$. Calculer le taux de variation entre 1 et 3, puis $f'(2)$.
+
+\callout{$\tau = \dfrac{3^2-1^2}{3-1}=\dfrac{8}{2}=4$.}
+
+\callout{$\dfrac{f(2+h)-f(2)}{h}=\dfrac{(2+h)^2-4}{h}=\dfrac{4h+h^2}{h}=4+h\to 4$.}
+
+Donc $f'(2)=4$.
+
+\medskip
+\avousDeJouer
+
+\begin{enumerate}
+  \item Calculer le taux de variation de $g(x)=3x+1$ entre 0 et 4.
+  \item Calculer $g'(2)$ pour $g(x)=x^2+1$.
+  \item Calculer $h'(1)$ pour $h(x)=\dfrac{1}{x}$.
+\end{enumerate}
+
+\renvoiExercices{1, 2, 7 p.\,9}
 \end{methodeDoublePage}
+
 \clearpage
+\rubrique{Méthodes}
 \input{chapitres/1SPE-DERIVATION-LOCAL/methodes/1SPE-DERLOCAL-ME-002.tex}
 
 % ============================================================
-% PAGES 6-9 : EXERCICES (grille 2 colonnes)
+% PAGES 6-9 : EXERCICES (grille 2 colonnes, exerciceCompact)
 % ============================================================
 \begin{grilleExercices}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-003.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-004.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-006.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-007.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-008.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-009.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-010.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-011.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-012.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-013.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-014.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-015.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-016.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-017.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-018.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-019.tex}
-\input{chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-020.tex}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-001}{1}{8}
+Soit $f(x)=x^2+1$. Calculer le taux de variation de $f$ entre 1 et 4.
+\par\renvoiMethode{1}{4}\quad\renvoiCorrige{15}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-002}{1}{8}
+Pour $g(x)=2x+1$, calculer le taux de variation entre 0 et 4.
+\par\renvoiMethode{1}{4}\quad\renvoiCorrige{15}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-003}{2}{12}
+Un véhicule part de l'arrêt. On note $d(t)$ la distance parcourue, en kilomètres, après $t$ heures de trajet. On relève $d(0)=0$, $d(2)=80$ et $d(5)=275$.
+\begin{enumerate}
+  \item Calculer le taux de variation de $d$ entre 0 et 2. Interpréter.
+  \item Calculer le taux de variation entre 2 et 5.
+  \item Le véhicule a-t-il roulé plus vite en moyenne sur les deux premières heures ou sur les trois suivantes ?
+\end{enumerate}
+\par\renvoiMethode{1}{4}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-004}{2}{10}
+Une entreprise fabrique des pièces. Le coût total de production, en euros, pour $q$ pièces fabriquées est modélisé par la fonction $C$ définie sur $[0\,;\,500]$. On sait que $C(100)=850$ et $C(200)=1500$.
+\begin{enumerate}
+  \item Calculer le taux de variation de $C$ entre 100 et 200.
+  \item Ce taux s'appelle le \textbf{coût moyen par pièce supplémentaire}. Interpréter.
+\end{enumerate}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-005}{3}{15}
+Soit $f(x)=x^2$ et $g(x)=2x$. On fixe $a=1$.
+\begin{enumerate}
+  \item Pour $h=1$, $h=0{,}5$ et $h=0{,}1$, calculer le taux de variation de $f$ entre $a$ et $a+h$, puis celui de $g$.
+  \item Que semble-t-il se passer lorsque $h$ se rapproche de 0 ? Comparer.
+  \item Pour tout $h\neq 0$, exprimer le taux de variation de $f$ entre 1 et $1+h$ en fonction de $h$.
+\end{enumerate}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-006}{3}{18}
+On pose $f(x)=x^2$ et $g(x)=2x$. On fixe $a=1$.
+\begin{enumerate}
+  \item Pour $h=1$, $h=0{,}5$ et $h=0{,}1$, calculer le taux de variation de $f$ entre $a$ et $a+h$, puis celui de $g$ entre $a$ et $a+h$.
+  \item Que semble-t-il se passer lorsque $h$ se rapproche de 0 ? Formuler une conjecture.
+  \item Exprimer, pour tout $h\neq 0$, le taux de variation de $f$ entre 1 et $1+h$ en fonction de $h$.
+  \item Justifier sans calcul que ces taux se rapprochent de 2 lorsque $h$ se rapproche de 0. Comparer avec le résultat obtenu pour $g$.
+  \item Interpréter géométriquement.
+\end{enumerate}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-007}{1}{6}
+Soit $f(x)=x^2+2x$.
+\begin{enumerate}
+  \item Calculer le taux de variation de $f$ entre 3 et $3+h$ pour $h\neq 0$.
+  \item Vers quelle valeur semble tendre ce taux lorsque $h$ se rapproche de 0 ?
+  \item En déduire $f'(3)$.
+\end{enumerate}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-008}{2}{10}
+Soit $f(x)=3x^2$.
+\begin{enumerate}
+  \item Exprimer $\dfrac{f(2+h)-f(2)}{h}$ en fonction de $h$ pour $h\neq 0$.
+  \item En déduire la valeur de $f'(2)$.
+\end{enumerate}
+\par\renvoiMethode{1}{4}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-009}{2}{12}
+Un objet en chute libre a parcouru une distance $d(t)=5t^2$ mètres après $t$ secondes.
+\begin{enumerate}
+  \item Calculer $d(3)$ et $d(3{,}1)$. En déduire le taux de variation entre 3 et 3,1.
+  \item Exprimer $\dfrac{d(3+h)-d(3)}{h}$ en fonction de $h$ pour $h\neq 0$.
+  \item En déduire $d'(3)$.
+  \item Interpréter $d'(3)$ dans le contexte de la chute libre.
+\end{enumerate}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-010}{2}{10}
+Soit $f(x)=x^2+2x$.
+\begin{enumerate}
+  \item Développer $(1+h)^3$.
+  \item En déduire l'expression de $\dfrac{f(1+h)-f(1)}{h}$ en fonction de $h$ pour $h\neq 0$.
+  \item Déterminer $f'(1)$.
+\end{enumerate}
+\end{exerciceCompact}
+
+\begin{exerciceCompact}{1SPE-DERLOCAL-EX-011}{1}{8}
+Sur un graphique, la tangente à la courbe de $f$ au point $A(2\,;\,5)$ passe aussi par le point $B(4\,;\,9)$. Alors $f'(2)$ vaut :
+\begin{enumerate}
+  \item Calculer la pente de $(AB)$.
+  \item En déduire $f'(2)$.
+\end{enumerate}
+\end{exerciceCompact}
+
 \end{grilleExercices}
 
 % ============================================================

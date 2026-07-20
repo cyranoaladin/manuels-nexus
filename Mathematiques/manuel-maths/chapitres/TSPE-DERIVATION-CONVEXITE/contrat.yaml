@@ -1,0 +1,28 @@
+chapitre: TSPE-DERIVATION-CONVEXITE
+niveau: TSPE
+theme: DERIVATION-CONVEXITE
+titre: "Complements sur la derivation — Convexite"
+statut: draft
+
+capacites:
+  - { code: C1, ref_capacite: TSPE-DERCONV-C1, libelle_eleve: "Je sais calculer la derivee d'une fonction composee en utilisant la relation (v o u)' = (v' o u) * u'." }
+  - { code: C2, ref_capacite: TSPE-DERCONV-C2, libelle_eleve: "Je sais mener une etude complete d'une fonction (derivee, limites, variations) construite a partir des fonctions de reference." }
+  - { code: C3, ref_capacite: TSPE-DERCONV-C3, libelle_eleve: "Je sais demontrer des inegalites en exploitant la convexite d'une fonction." }
+  - { code: C4, ref_capacite: TSPE-DERCONV-C4, libelle_eleve: "Je sais esquisser l'allure d'une courbe a partir des tableaux de variations de f, f' ou f''." }
+  - { code: C5, ref_capacite: TSPE-DERCONV-C5, libelle_eleve: "Je sais lire graphiquement les intervalles de convexite/concavite et les points d'inflexion, et utiliser la convexite pour resoudre un probleme." }
+  - { code: C6, ref_capacite: TSPE-DERCONV-C6, libelle_eleve: "Je sais demontrer que si f'' est positive, la courbe de f est au-dessus de ses tangentes." }
+
+prerequis:
+  - { code: R1, libelle: "Derivation : derivees de reference, regles de derivation, etude de variations", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
+  - { code: R2, libelle: "Derivation locale : nombre derive, tangente", chapitre_origine: "1SPE-DERIVATION-LOCAL" }
+  - { code: R3, libelle: "Fonction exponentielle : definition, proprietes, derivee", chapitre_origine: "1SPE-EXPONENTIELLE" }
+  - { code: R4, libelle: "Limites de fonctions : limites en l'infini, croissances comparees", chapitre_origine: "TSPE-LIMITES-FONCTIONS" }
+  - { code: R5, libelle: "Fonction logarithme neperien : definition, proprietes, derivee", chapitre_origine: "TSPE-LOGARITHME" }
+
+situation_accroche: >
+  Un fabricant de boites de conserve cherche a minimiser la quantite de metal utilisee
+  pour un volume fixe. La fonction cout depend de plusieurs parametres lies par des
+  compositions. La convexite de cette fonction garantit-elle que le minimum trouve est
+  bien global ? Les outils de ce chapitre permettent de repondre rigoureusement.
+
+temps_estime_h: { parcours1: 14, parcours2: 12, parcours3: 10 }

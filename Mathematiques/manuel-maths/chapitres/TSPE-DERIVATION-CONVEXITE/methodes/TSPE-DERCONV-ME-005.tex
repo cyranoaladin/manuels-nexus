@@ -1,0 +1,52 @@
+% META: {"id": "TSPE-DERCONV-ME-005", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "methode", "capacites_codes": ["C1", "C2"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M5}{Deriver et etudier les fonctions usuelles composees}
+
+\quandUtiliser{%
+  Utiliser cette methode pour deriver rapidement $\mathrm{e}^{u}$, $\ln u$, $u^n$, $\sqrt{u}$, $\dfrac{1}{u}$ puis etudier les variations.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Reconnaitre le type} : $\mathrm{e}^u$, $\ln u$, $u^n$, $\sqrt{u}$, $1/u$.
+    \item \textbf{Appliquer la formule} correspondante :
+      \begin{itemize}
+        \item $(\mathrm{e}^u)' = u'\,\mathrm{e}^u$
+        \item $(\ln u)' = u'/u$
+        \item $(u^n)' = n\,u'\,u^{n-1}$
+        \item $(\sqrt{u})' = u'/(2\sqrt{u})$
+        \item $(1/u)' = -u'/u^2$
+      \end{itemize}
+    \item \textbf{Factoriser} pour etudier le signe.
+    \item \textbf{Conclure} sur les variations.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Etudier les variations de $f(x) = \ln(x^2 + 1)$ sur $\mathbb{R}$.
+
+  \medskip
+  \commentaireMarge{$u(x) = x^2 + 1 > 0$ pour tout $x$.}%
+  $f'(x) = \dfrac{2x}{x^2 + 1}$.
+
+  Pour tout $x$ : $x^2 + 1 > 0$.
+
+  \commentaireMarge{Le signe de $f'$ est celui de $2x$.}%
+  $f'(x) > 0 \iff x > 0$ : $f$ decroissante sur $]-\infty, 0]$, croissante sur $[0, +\infty[$.
+
+  Minimum en $x = 0$ : $f(0) = \ln 1 = 0$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre $(\mathrm{e}^u)' = u'\,\mathrm{e}^u$ et $(\mathrm{e}^x)' = \mathrm{e}^x$ (le facteur $u'$ est absent dans le second cas car $u = x$, $u' = 1$).
+    \item \textbf{Piege 2.} Ecrire $(\ln(x^2))' = \dfrac{1}{x^2}$ au lieu de $\dfrac{2x}{x^2} = \dfrac{2}{x}$.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que le signe de la derivee est coherent avec les valeurs de $f$ calculees en quelques points.
+}
+
+\sEntrainer{\refExos{M5}}
+
+\end{fichemethode}

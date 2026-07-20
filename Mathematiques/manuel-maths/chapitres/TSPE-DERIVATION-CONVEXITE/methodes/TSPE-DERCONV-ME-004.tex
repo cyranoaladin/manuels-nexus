@@ -1,0 +1,51 @@
+% META: {"id": "TSPE-DERCONV-ME-004", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "methode", "capacites_codes": ["C4", "C5"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Esquisser une courbe et lire la convexite}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'on dispose du tableau de variations de $f$, $f'$ ou $f''$, et que l'on doit esquisser la courbe ou identifier les zones de convexite/concavite.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Reperer les extremums de $f$} (changements de signe de $f'$).
+    \item \textbf{Reperer les points d'inflexion} (changements de signe de $f''$, ou extremums de $f'$).
+    \item \textbf{Dans chaque intervalle}, determiner :
+      \begin{itemize}
+        \item sens de variation : $f' > 0$ (croissant) ou $f' < 0$ (decroissant),
+        \item courbure : $f'' > 0$ (convexe) ou $f'' < 0$ (concave).
+      \end{itemize}
+    \item \textbf{Placer les points remarquables} (extremums, points d'inflexion, limites).
+    \item \textbf{Tracer} en respectant la courbure dans chaque zone.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} On sait que $f'(x) > 0$ sur $]0, 3[$, $f'(x) < 0$ sur $]3, +\infty[$. On sait que $f''(x) > 0$ sur $]0, 1[$ et $f''(x) < 0$ sur $]1, +\infty[$.
+
+  \medskip
+  \commentaireMarge{Maximum en $x = 3$, point d'inflexion en $x = 1$.}%
+  -- Maximum local en $x = 3$.
+
+  -- Point d'inflexion en $x = 1$ ($f''$ change de signe).
+
+  -- Sur $]0, 1[$ : $f$ croissante et convexe (courbe « creusee vers le haut »).
+
+  -- Sur $]1, 3[$ : $f$ croissante et concave (courbe « bombee vers le haut »).
+
+  -- Sur $]3, +\infty[$ : $f$ decroissante et concave.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Confondre le graphe de $f'$ et celui de $f$. Les zeros de $f'$ sont les extremums de $f$, pas de $f'$.
+    \item \textbf{Piege 2.} Oublier que la tangente au point d'inflexion \emph{traverse} la courbe.
+  \end{itemize}
+}
+
+\verifier{%
+  Verifier que la courbure dessinee est coherente : sur un intervalle convexe, la courbe est sous les cordes et au-dessus des tangentes.
+}
+
+\sEntrainer{\refExos{M4}}
+
+\end{fichemethode}

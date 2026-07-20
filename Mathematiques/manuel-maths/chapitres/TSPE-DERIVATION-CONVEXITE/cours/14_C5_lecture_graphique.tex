@@ -1,0 +1,61 @@
+% META: {"id": "TSPE-DERCONV-CR-014", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+
+\section{Lecture graphique de la convexite}
+
+% ============================================================
+% STRATE 1 — Methodes de lecture
+% ============================================================
+
+\propriete{
+A partir de la representation graphique de $f$ :
+\begin{itemize}
+  \item $f$ est \textbf{convexe} sur un intervalle $I$ si la courbe est au-dessous de chaque corde reliant deux points de la courbe sur $I$.
+  \item $f$ est \textbf{concave} sur un intervalle $I$ si la courbe est au-dessus de chaque corde.
+  \item Un \textbf{point d'inflexion} est un point ou la courbe change de position par rapport a ses tangentes (elle passe « d'un cote a l'autre »).
+\end{itemize}
+}
+
+\propriete{
+A partir de la representation graphique de $f'$ :
+\begin{itemize}
+  \item $f$ est convexe sur $I$ si et seulement si $f'$ est \textbf{croissante} sur $I$.
+  \item $f$ est concave sur $I$ si et seulement si $f'$ est \textbf{decroissante} sur $I$.
+  \item Les points d'inflexion de $f$ correspondent aux extremums de $f'$.
+\end{itemize}
+}
+
+\propriete{
+A partir de la representation graphique de $f''$ :
+\begin{itemize}
+  \item $f$ est convexe sur les intervalles ou $f'' \geq 0$ (courbe de $f''$ au-dessus de l'axe des abscisses).
+  \item $f$ est concave sur les intervalles ou $f'' \leq 0$.
+  \item Les points d'inflexion de $f$ correspondent aux changements de signe de $f''$.
+\end{itemize}
+}
+
+\exemple{
+On observe le graphique de $f'$ : $f'$ est croissante sur $]-\infty, 2[$ et decroissante sur $]2, +\infty[$.
+
+On en deduit que $f$ est convexe sur $]-\infty, 2[$ et concave sur $]2, +\infty[$, avec un point d'inflexion d'abscisse $x = 2$.
+}
+
+% ============================================================
+% STRATE 2 — Applications
+% ============================================================
+
+\margeAppui{
+\textbf{Correspondances a retenir :}
+
+\medskip
+\begin{tabular}{lll}
+\textbf{Sur $f''$} & \textbf{Sur $f'$} & \textbf{Sur $f$} \\
+\hline
+$f'' > 0$ & $f'$ croissante & convexe \\
+$f'' < 0$ & $f'$ decroissante & concave \\
+$f'' = 0$ (chgt signe) & extremum de $f'$ & point d'inflexion \\
+\end{tabular}
+}
+
+\erreurFrequente{
+\textbf{Confondre le graphe de $f$ et celui de $f'$.} Sur le graphe de $f'$, les zeros donnent les extremums de $f$, et les extremums de $f'$ donnent les points d'inflexion de $f$.
+}

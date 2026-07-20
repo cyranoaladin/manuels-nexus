@@ -1,0 +1,48 @@
+% META: {"id": "TSPE-DERCONV-ME-003", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "methode", "capacites_codes": ["C3", "C6"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Demontrer une inegalite par convexite}
+
+\quandUtiliser{%
+  Utiliser cette methode lorsqu'une inegalite fait intervenir une fonction connue pour etre convexe ou concave ($\mathrm{e}^x$, $\ln x$, $x^2$, etc.).
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier la fonction $f$} qui apparait dans l'inegalite.
+    \item \textbf{Calculer $f''(x)$} et verifier son signe sur le domaine.
+    \item \textbf{Si $f'' \geq 0$ (convexe) :} appliquer le theoreme « courbe au-dessus des tangentes » :
+      \[
+        f(x) \geq f(a) + f'(a)(x - a) \quad \text{pour tout } x.
+      \]
+      Ou bien appliquer la definition de convexite.
+    \item \textbf{Si $f'' \leq 0$ (concave) :} l'inegalite est inversee : $f(x) \leq f(a) + f'(a)(x-a)$.
+    \item \textbf{Conclure} en specialisant a des valeurs de $a$ ou $x$.
+  \end{enumerate}
+}
+
+\exempleRedige{%
+  \textbf{Exemple.} Montrer que $\mathrm{e}^x \geq 1 + x$ pour tout $x \in \mathbb{R}$.
+
+  \medskip
+  \commentaireMarge{$f(x) = \mathrm{e}^x$, $f''(x) = \mathrm{e}^x > 0$ : convexe.}%
+  Soit $f(x) = \mathrm{e}^x$. On a $f''(x) = \mathrm{e}^x > 0$ : $f$ est convexe sur $\mathbb{R}$.
+
+  \commentaireMarge{Tangente en $a = 0$ : $y = 1 + x$.}%
+  La tangente en $a = 0$ : $T(x) = f(0) + f'(0)(x - 0) = 1 + x$.
+
+  Par le theoreme (courbe au-dessus des tangentes), $\mathrm{e}^x \geq 1 + x$ pour tout $x$.
+}
+
+\pieges{%
+  \begin{itemize}
+    \item \textbf{Piege 1.} Inverser le sens de l'inegalite pour une fonction concave.
+    \item \textbf{Piege 2.} Appliquer le theoreme en dehors du domaine de convexite (par exemple, $f$ est convexe sur $[0, +\infty[$ mais pas sur $\mathbb{R}$).
+  \end{itemize}
+}
+
+\verifier{%
+  Tester l'inegalite sur une valeur numerique : $\mathrm{e}^{-1} \approx 0{,}37$ et $1 + (-1) = 0$. On a bien $0{,}37 \geq 0$.
+}
+
+\sEntrainer{\refExos{M3}}
+
+\end{fichemethode}

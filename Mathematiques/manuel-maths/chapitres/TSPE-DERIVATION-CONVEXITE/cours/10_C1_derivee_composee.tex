@@ -1,0 +1,75 @@
+% META: {"id": "TSPE-DERCONV-CR-010", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+
+\section{Derivee d'une fonction composee}
+
+% ============================================================
+% STRATE 1 — Formule generale
+% ============================================================
+
+\theoreme{
+Soient $u$ et $v$ deux fonctions derivables telles que la composee $v \circ u$ soit definie. Alors $v \circ u$ est derivable et :
+\[
+  (v \circ u)'(x) = u'(x) \times v'(u(x)).
+\]
+En notation condensee : $(v \circ u)' = u' \times (v' \circ u)$.
+}
+
+\margeAppui{
+\textbf{Lire de droite a gauche :} on derive la fonction « exterieure » $v$ evaluee en $u(x)$, puis on multiplie par la derivee de la fonction « interieure » $u$.
+}
+
+\subsection{Cas particuliers fondamentaux}
+
+\propriete{
+Soit $u$ une fonction derivable. On a les formules suivantes :
+\begin{itemize}
+  \item $\left(\mathrm{e}^{u}\right)' = u' \, \mathrm{e}^{u}$
+  \item $\left(\ln u\right)' = \dfrac{u'}{u}$ \quad (sur tout intervalle ou $u > 0$)
+  \item $\left(u^n\right)' = n \, u' \, u^{n-1}$ \quad pour $n \in \mathbb{Z}$, $n \neq 0$
+  \item $\left(\sqrt{u}\right)' = \dfrac{u'}{2\sqrt{u}}$ \quad (sur tout intervalle ou $u > 0$)
+\end{itemize}
+}
+
+\exemple{
+Calculons la derivee de $f(x) = \mathrm{e}^{3x+1}$.
+
+On pose $u(x) = 3x + 1$ et $v(t) = \mathrm{e}^t$. Alors $u'(x) = 3$ et $v'(t) = \mathrm{e}^t$.
+
+$f'(x) = u'(x) \times v'(u(x)) = 3\,\mathrm{e}^{3x+1}$.
+}
+
+\exemple{
+Calculons la derivee de $g(x) = \ln(x^2 + 1)$.
+
+On pose $u(x) = x^2 + 1$. Comme $u(x) > 0$ pour tout $x \in \mathbb{R}$ :
+
+$g'(x) = \dfrac{u'(x)}{u(x)} = \dfrac{2x}{x^2 + 1}$.
+}
+
+\exemple{
+Calculons la derivee de $h(x) = (2x - 5)^7$.
+
+On pose $u(x) = 2x - 5$. Alors :
+
+$h'(x) = 7 \times u'(x) \times u(x)^6 = 7 \times 2 \times (2x-5)^6 = 14(2x-5)^6$.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier le facteur $u'$.} La derivee de $\mathrm{e}^{x^2}$ n'est pas $\mathrm{e}^{x^2}$ mais $2x\,\mathrm{e}^{x^2}$. Le facteur $u'(x) = 2x$ ne doit jamais etre omis.
+}
+
+\erreurFrequente{
+\textbf{Confondre $(u^2)' = 2u \cdot u'$ et $(u')^2$.} La derivee de $u^2$ contient $u'$ en facteur ; elle n'est pas le carre de $u'$.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+\textbf{Derivee logarithmique.} Pour une fonction $f > 0$ et derivable, $(\ln f)' = \dfrac{f'}{f}$. Cette technique est utile pour deriver des produits compliques : on prend le logarithme, on derive, puis on multiplie par $f$.
+}

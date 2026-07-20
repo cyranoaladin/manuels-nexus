@@ -1,0 +1,131 @@
+% META: {"id": "TSPE-DERCONV-COURS-07-FR", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "cours", "sous_type": "td_fil_rouge", "titre": "TD fil rouge -- Etude complete de f(x) = x^2 e^{-x}", "temps_gabarit": 7, "capacites": ["C1", "C2", "C3", "C4", "C5", "C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2 * exp(-x)
+% fp = diff(f, x)
+% assert simplify(fp - x*(2-x)*exp(-x)) == 0
+% fpp = diff(f, x, 2)
+% assert simplify(fpp - (x**2 - 4*x + 2)*exp(-x)) == 0
+% # Zeros de f'': x^2-4x+2=0 => x = 2 +/- sqrt(2)
+% inflx = solve(x**2 - 4*x + 2, x)
+% assert 2 - sqrt(2) in inflx
+% assert 2 + sqrt(2) in inflx
+% # f(0) = 0, f(2) = 4*exp(-2)
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, 2) == 4*exp(-2)
+% # Limites
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == oo
+% # Tangente en a=0 : f(0)+f'(0)*(x-0) = 0 (car f(0)=f'(0)=0)
+% assert fp.subs(x, 0) == 0
+% # Tangente en a=2: f(2)+f'(2)*(x-2) = 4*e^{-2}
+% assert fp.subs(x, 2) == 0
+% END-VERIFY
+
+\section*{Temps 7 -- TD fil rouge : Etude complete de $f(x) = x^2\,\mathrm{e}^{-x}$}
+
+\textbf{Situation.} On considere la fonction $f$ definie sur $\mathbb{R}$ par $f(x) = x^2\,\mathrm{e}^{-x}$.
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE A — Derivee composee et derivee premiere (C1, C2)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-DERCONV-COURS-07-FR-EX1}{2}{15}
+
+\textbf{Partie A -- Derivation et variations}
+
+\begin{enumerate}
+  \item Calculer $f'(x)$ en utilisant la formule de derivation d'un produit et la derivee de $\mathrm{e}^{-x}$.
+  \item Montrer que $f'(x) = x(2-x)\,\mathrm{e}^{-x}$.
+  \item Etudier le signe de $f'(x)$ et dresser le tableau de variations de $f$.
+  \item Determiner $\lim_{x \to +\infty} f(x)$ et $\lim_{x \to -\infty} f(x)$.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-DERCONV-COURS-07-FR-EX1}
+
+\textbf{Question 1.} $f(x) = x^2 \cdot \mathrm{e}^{-x}$, avec $u(x) = x^2$ et $v(x) = \mathrm{e}^{-x}$.
+
+$f'(x) = 2x \cdot \mathrm{e}^{-x} + x^2 \cdot (-\mathrm{e}^{-x}) = (2x - x^2)\,\mathrm{e}^{-x}$.
+
+\textbf{Question 2.} $f'(x) = x(2-x)\,\mathrm{e}^{-x}$.
+
+\textbf{Question 3.} $\mathrm{e}^{-x} > 0$ pour tout $x$. Le signe de $f'$ est celui de $x(2-x)$.
+
+$f'(x) > 0 \iff 0 < x < 2$. Donc $f$ est decroissante sur $]-\infty, 0]$, croissante sur $[0, 2]$, decroissante sur $[2, +\infty[$.
+
+Minimum local en $x = 0$ : $f(0) = 0$. Maximum local en $x = 2$ : $f(2) = 4\,\mathrm{e}^{-2}$.
+
+\textbf{Question 4.} $\lim_{x \to +\infty} x^2 \mathrm{e}^{-x} = 0$ (croissances comparees). $\lim_{x \to -\infty} f(x) = +\infty$ (car $x^2 \to +\infty$ et $\mathrm{e}^{-x} \to +\infty$).
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE B — Derivee seconde et convexite (C4, C5)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-DERCONV-COURS-07-FR-EX2}{2}{15}
+
+\textbf{Partie B -- Convexite et points d'inflexion}
+
+\begin{enumerate}
+  \item Calculer $f''(x)$ et montrer que $f''(x) = (x^2 - 4x + 2)\,\mathrm{e}^{-x}$.
+  \item Resoudre $f''(x) = 0$ et montrer que les solutions sont $x_1 = 2 - \sqrt{2}$ et $x_2 = 2 + \sqrt{2}$.
+  \item Etudier le signe de $f''(x)$ et en deduire les intervalles de convexite et de concavite de $f$.
+  \item Preciser les coordonnees des deux points d'inflexion.
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-DERCONV-COURS-07-FR-EX2}
+
+\textbf{Question 1.} $f'(x) = (2x - x^2)\mathrm{e}^{-x}$. On derive :
+
+$f''(x) = (2 - 2x)\mathrm{e}^{-x} + (2x - x^2)(-\mathrm{e}^{-x}) = (2 - 2x - 2x + x^2)\mathrm{e}^{-x} = (x^2 - 4x + 2)\mathrm{e}^{-x}$.
+
+\textbf{Question 2.} $f''(x) = 0 \iff x^2 - 4x + 2 = 0$ (car $\mathrm{e}^{-x} \neq 0$). $\Delta = 16 - 8 = 8$, $x = \dfrac{4 \pm 2\sqrt{2}}{2} = 2 \pm \sqrt{2}$.
+
+\textbf{Question 3.} $x^2 - 4x + 2 > 0$ si $x < 2 - \sqrt{2}$ ou $x > 2 + \sqrt{2}$ (convexe). $x^2 - 4x + 2 < 0$ si $2 - \sqrt{2} < x < 2 + \sqrt{2}$ (concave).
+
+\textbf{Question 4.} Points d'inflexion : $(2 - \sqrt{2},\; f(2-\sqrt{2}))$ et $(2 + \sqrt{2},\; f(2+\sqrt{2}))$.
+
+$f(2-\sqrt{2}) = (2-\sqrt{2})^2\,\mathrm{e}^{-(2-\sqrt{2})} = (6-4\sqrt{2})\,\mathrm{e}^{\sqrt{2}-2}$.
+
+$f(2+\sqrt{2}) = (2+\sqrt{2})^2\,\mathrm{e}^{-(2+\sqrt{2})} = (6+4\sqrt{2})\,\mathrm{e}^{-2-\sqrt{2}}$.
+
+\end{corrige}
+
+\bigskip
+
+%---------------------------------------------------------------
+% PARTIE C — Position par rapport aux tangentes (C6)
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-DERCONV-COURS-07-FR-EX3}{2}{10}
+
+\textbf{Partie C -- Position par rapport aux tangentes}
+
+\begin{enumerate}
+  \item Ecrire l'equation de la tangente $T_0$ a la courbe au point d'abscisse $0$.
+  \item Sur l'intervalle $]-\infty, 2 - \sqrt{2}]$, $f$ est-elle convexe ou concave ? En deduire la position de la courbe par rapport a $T_0$.
+  \item En deduire que $f(x) \geq 0$ pour tout $x \in \mathbb{R}$ (ce que l'on savait deja par la formule).
+\end{enumerate}
+
+\end{exercice}
+
+\begin{corrige}{TSPE-DERCONV-COURS-07-FR-EX3}
+
+\textbf{Question 1.} $f(0) = 0$ et $f'(0) = 0$. La tangente est $T_0 : y = 0$ (l'axe des abscisses).
+
+\textbf{Question 2.} Sur $]-\infty, 2 - \sqrt{2}]$, on a $f''(x) \geq 0$ (partie B), donc $f$ est convexe. La courbe est au-dessus de ses tangentes. En particulier, la courbe est au-dessus de $T_0$, donc $f(x) \geq 0$ sur cet intervalle.
+
+\textbf{Question 3.} Par la formule, $f(x) = x^2 \mathrm{e}^{-x}$ avec $x^2 \geq 0$ et $\mathrm{e}^{-x} > 0$, donc $f(x) \geq 0$ pour tout $x$.
+
+\end{corrige}

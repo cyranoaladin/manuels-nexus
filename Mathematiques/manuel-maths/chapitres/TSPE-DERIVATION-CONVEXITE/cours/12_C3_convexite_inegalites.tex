@@ -1,0 +1,92 @@
+% META: {"id": "TSPE-DERCONV-CR-012", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+
+\section{Convexite et inegalites}
+
+% ============================================================
+% STRATE 1 — Definitions
+% ============================================================
+
+\definition[1]{
+Soit $f$ une fonction definie sur un intervalle $I$. On dit que $f$ est \textbf{convexe} sur $I$ si, pour tous $a, b \in I$ et tout $t \in [0, 1]$ :
+\[
+  f\bigl(t\,a + (1-t)\,b\bigr) \leq t\,f(a) + (1-t)\,f(b).
+\]
+Geometriquement, le segment $[M_a, M_b]$ reliant deux points de la courbe est au-dessus de la courbe.
+}
+
+\definition[2]{
+On dit que $f$ est \textbf{concave} sur $I$ si $-f$ est convexe sur $I$, c'est-a-dire si l'inegalite precedente est inversee.
+}
+
+\subsection{Convexite et derivee seconde}
+
+\theoreme{
+Soit $f$ une fonction deux fois derivable sur un intervalle $I$.
+\begin{itemize}
+  \item $f$ est convexe sur $I$ si et seulement si $f''(x) \geq 0$ pour tout $x \in I$.
+  \item $f$ est concave sur $I$ si et seulement si $f''(x) \leq 0$ pour tout $x \in I$.
+\end{itemize}
+}
+
+\exemple{
+La fonction $f(x) = \mathrm{e}^x$ est convexe sur $\mathbb{R}$ car $f''(x) = \mathrm{e}^x > 0$ pour tout $x$.
+}
+
+\exemple{
+La fonction $g(x) = \ln x$ est concave sur $]0, +\infty[$ car $g''(x) = -\dfrac{1}{x^2} < 0$ pour tout $x > 0$.
+}
+
+\exemple{
+La fonction $h(x) = x^2$ est convexe sur $\mathbb{R}$ car $h''(x) = 2 > 0$.
+}
+
+% ============================================================
+% Application aux inegalites
+% ============================================================
+
+\subsection{Demontrer des inegalites par convexite}
+
+\propriete{
+Si $f$ est convexe sur $I$, alors pour tous $x_1, x_2 \in I$ :
+\[
+  f\!\left(\frac{x_1 + x_2}{2}\right) \leq \frac{f(x_1) + f(x_2)}{2}.
+\]
+}
+
+\exemple{
+\textbf{Montrer que $\mathrm{e}^{(a+b)/2} \leq \dfrac{\mathrm{e}^a + \mathrm{e}^b}{2}$ pour tous reels $a, b$.}
+
+La fonction $x \mapsto \mathrm{e}^x$ est convexe sur $\mathbb{R}$. On applique l'inegalite de convexite avec $x_1 = a$ et $x_2 = b$.
+}
+
+\exemple{
+\textbf{Montrer que $\ln\!\left(\dfrac{a+b}{2}\right) \geq \dfrac{\ln a + \ln b}{2}$ pour tous $a, b > 0$.}
+
+La fonction $\ln$ est concave sur $]0, +\infty[$. L'inegalite de convexite est donc inversee.
+
+On obtient $\ln\!\left(\dfrac{a+b}{2}\right) \geq \dfrac{\ln a + \ln b}{2}$, soit $\dfrac{a+b}{2} \geq \sqrt{ab}$ (inegalite arithmetico-geometrique).
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre convexe et concave.} Retenir : convexe = « en forme de bol » ($f'' \geq 0$), concave = « en forme de chapeau » ($f'' \leq 0$).
+}
+
+\margeAppui{
+\textbf{Astuce.} Pour demontrer une inegalite du type $f(a) + f(b) \geq 2f\!\left(\dfrac{a+b}{2}\right)$, identifier si la fonction $f$ est convexe (regarder le signe de $f''$) et appliquer la definition.
+}
+
+% ============================================================
+% STRATE 3 — Approfondissement
+% ============================================================
+
+\approfondissement{
+\textbf{Inegalite de Jensen.} Si $f$ est convexe sur $I$ et $t_1, \dots, t_n \geq 0$ avec $t_1 + \cdots + t_n = 1$, alors :
+\[
+  f(t_1 x_1 + \cdots + t_n x_n) \leq t_1 f(x_1) + \cdots + t_n f(x_n).
+\]
+Le cas $n = 2$ est la definition de la convexite.
+}

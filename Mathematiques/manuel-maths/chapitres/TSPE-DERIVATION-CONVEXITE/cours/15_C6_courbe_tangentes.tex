@@ -1,0 +1,70 @@
+% META: {"id": "TSPE-DERCONV-CR-015", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+
+\section{Courbe au-dessus de ses tangentes}
+
+% ============================================================
+% STRATE 1 — Theoreme et demonstration exigible
+% ============================================================
+
+\theoreme{
+Soit $f$ une fonction deux fois derivable sur un intervalle $I$. Si $f''(x) \geq 0$ pour tout $x \in I$ (i.e. $f$ est convexe), alors la courbe representative de $f$ est au-dessus de chacune de ses tangentes.
+
+Autrement dit, pour tous $a, x \in I$ :
+\[
+  f(x) \geq f(a) + f'(a)(x - a).
+\]
+}
+
+\demonstration{
+Soit $a \in I$ fixe. Posons $\varphi(x) = f(x) - f(a) - f'(a)(x - a)$ pour tout $x \in I$.
+
+On a $\varphi(a) = 0$ et $\varphi'(x) = f'(x) - f'(a)$.
+
+Puisque $f''(x) \geq 0$ pour tout $x \in I$, la fonction $f'$ est croissante sur $I$.
+
+\begin{itemize}
+  \item Si $x \geq a$ : $f'(x) \geq f'(a)$, donc $\varphi'(x) \geq 0$. La fonction $\varphi$ est croissante sur $[a, +\infty[ \cap I$.
+
+  Comme $\varphi(a) = 0$ et $\varphi$ est croissante sur $[a, +\infty[ \cap I$, on a $\varphi(x) \geq \varphi(a) = 0$ pour tout $x \geq a$.
+
+  \item Si $x \leq a$ : $f'(x) \leq f'(a)$, donc $\varphi'(x) \leq 0$. La fonction $\varphi$ est decroissante sur $]-\infty, a] \cap I$.
+
+  Comme $\varphi(a) = 0$ et $\varphi$ est decroissante sur $]-\infty, a] \cap I$, on a $\varphi(x) \geq \varphi(a) = 0$ pour tout $x \leq a$.
+\end{itemize}
+
+Dans les deux cas, $\varphi(x) \geq 0$, c'est-a-dire $f(x) \geq f(a) + f'(a)(x - a)$.
+}
+
+\subsection{Applications}
+
+\exemple{
+\textbf{Montrer que $\mathrm{e}^x \geq 1 + x$ pour tout $x \in \mathbb{R}$.}
+
+La fonction $f(x) = \mathrm{e}^x$ verifie $f''(x) = \mathrm{e}^x > 0$ pour tout $x$ : elle est convexe sur $\mathbb{R}$.
+
+La tangente en $a = 0$ est $y = f(0) + f'(0)(x - 0) = 1 + x$.
+
+Par le theoreme, $\mathrm{e}^x \geq 1 + x$ pour tout $x \in \mathbb{R}$.
+}
+
+\exemple{
+\textbf{Montrer que $\ln x \leq x - 1$ pour tout $x > 0$.}
+
+La fonction $g(x) = \ln x$ verifie $g''(x) = -\dfrac{1}{x^2} < 0$ : elle est concave.
+
+Donc $-g$ est convexe, et $-\ln x \geq -\ln(1) + (-1/1)(x-1) = -(x-1)$.
+
+En multipliant par $-1$ : $\ln x \leq x - 1$.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Appliquer le theoreme avec le mauvais sens d'inegalite.} Si $f$ est \emph{concave} ($f'' \leq 0$), alors la courbe est \emph{au-dessous} de ses tangentes : $f(x) \leq f(a) + f'(a)(x-a)$.
+}
+
+\margeAppui{
+\textbf{Reciproque.} Si $f$ est concave ($f'' \leq 0$), la courbe est en dessous de ses tangentes. C'est le cas de $\ln$ : sa courbe est sous toutes ses tangentes.
+}
