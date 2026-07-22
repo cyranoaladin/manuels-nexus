@@ -605,29 +605,42 @@ def test_control_schemas_require_a_content_digest(schema_name: str) -> None:
     }
 
 
-def _accepted_exception_dispositions_payload() -> dict[str, object]:
-    fingerprint = "a" * 16
+def _qualified_disposition_record(
+    disposition: str, fingerprint: str
+) -> dict[str, object]:
+    return {
+        "approved_by": "Responsable éditorial",
+        "decision_ref": "DEC-2026-07-22-01",
+        "disposition": disposition,
+        "fingerprint": fingerprint,
+        "justification": "Qualification humaine documentée.",
+        "owner": "équipe éditoriale",
+    }
+
+
+def _dispositions_payload(record: dict[str, object]) -> dict[str, object]:
+    fingerprint = str(record["fingerprint"])
     return {
         "artifact_type": "anomaly_dispositions",
         "control_digest": "sha256:" + "b" * 64,
-        "dispositions": {
-            fingerprint: {
-                "approved_by": "Responsable éditorial",
-                "blocking": False,
-                "decision_ref": "DEC-2026-07-22-01",
-                "disposition": "accepted_exception",
-                "evidence": ["audit/decisions/DEC-2026-07-22-01.md"],
-                "expiry": "2026-12-31",
-                "fingerprint": fingerprint,
-                "justification": "Réutilisation limitée à la maquette de contrôle.",
-                "owner": "équipe éditoriale",
-                "scope": {"manual": "1SPE", "variant": "maquette"},
-            }
-        },
+        "dispositions": {fingerprint: record},
         "fingerprint_schema_version": 1,
         "schema_ref": "audit/schemas/v1/anomaly-dispositions.schema.json",
         "schema_version": 1,
     }
+
+
+def _accepted_exception_dispositions_payload() -> dict[str, object]:
+    fingerprint = "a" * 16
+    record = {
+        **_qualified_disposition_record("accepted_exception", fingerprint),
+        "author": "Autrice de la décision",
+        "blocking": False,
+        "evidence": ["audit/decisions/DEC-2026-07-22-01.md"],
+        "expiry": "2026-12-31",
+        "scope": {"manual": "1SPE", "variant": "maquette"},
+    }
+    return _dispositions_payload(record)
 
 
 def test_anomaly_dispositions_schema_accepts_contractual_accepted_exception() -> None:
@@ -642,26 +655,16 @@ def test_anomaly_dispositions_schema_accepts_contractual_accepted_exception() ->
     )
 
 
-def test_anomaly_dispositions_schema_keeps_open_debt_minimal() -> None:
+def test_anomaly_dispositions_schema_accepts_qualified_open_debt() -> None:
     schema = json.loads(
         (
             ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json"
         ).read_text(encoding="utf-8")
     )
     fingerprint = "c" * 16
-    payload = {
-        "artifact_type": "anomaly_dispositions",
-        "control_digest": "sha256:" + "d" * 64,
-        "dispositions": {
-            fingerprint: {
-                "disposition": "open_debt",
-                "fingerprint": fingerprint,
-            }
-        },
-        "fingerprint_schema_version": 1,
-        "schema_ref": "audit/schemas/v1/anomaly-dispositions.schema.json",
-        "schema_version": 1,
-    }
+    payload = _dispositions_payload(
+        _qualified_disposition_record("open_debt", fingerprint)
+    )
 
     jsonschema.Draft202012Validator(schema).validate(payload)
 
@@ -670,6 +673,40 @@ def test_anomaly_dispositions_schema_keeps_open_debt_minimal() -> None:
     "missing_field",
     [
         "approved_by",
+        "decision_ref",
+        "disposition",
+        "fingerprint",
+        "justification",
+        "owner",
+    ],
+)
+def test_anomaly_dispositions_schema_rejects_record_missing_common_field(
+    missing_field: str,
+) -> None:
+    schema = json.loads(
+        (
+            ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+    fingerprint = "c" * 16
+    record = _qualified_disposition_record("open_debt", fingerprint)
+    record.pop(missing_field)
+    if missing_field == "fingerprint":
+        record["fingerprint"] = fingerprint
+        payload = _dispositions_payload(record)
+        record.pop("fingerprint")
+    else:
+        payload = _dispositions_payload(record)
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize(
+    "missing_field",
+    [
+        "approved_by",
+        "author",
         "blocking",
         "decision_ref",
         "evidence",
@@ -696,6 +733,46 @@ def test_anomaly_dispositions_schema_rejects_incomplete_accepted_exception(
 
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize(
+    "disposition",
+    ["false_positive", "generated_dependency", "intentional_reuse", "fixed"],
+)
+def test_anomaly_dispositions_schema_rejects_evidentiary_record_without_proof(
+    disposition: str,
+) -> None:
+    schema = json.loads(
+        (
+            ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+    fingerprint = "e" * 16
+    payload = _dispositions_payload(
+        _qualified_disposition_record(disposition, fingerprint)
+    )
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize(
+    "disposition",
+    ["false_positive", "generated_dependency", "intentional_reuse", "fixed"],
+)
+def test_anomaly_dispositions_schema_documents_proof_alias(
+    disposition: str,
+) -> None:
+    schema = json.loads(
+        (
+            ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+    fingerprint = "f" * 16
+    record = _qualified_disposition_record(disposition, fingerprint)
+    record["proof"] = "audit/preuves/qualification.md"
+
+    jsonschema.Draft202012Validator(schema).validate(_dispositions_payload(record))
 
 
 def _baseline_contract_payload() -> dict[str, object]:

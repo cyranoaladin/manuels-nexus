@@ -30,7 +30,14 @@
     "disposition": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["disposition", "fingerprint"],
+      "required": [
+        "approved_by",
+        "decision_ref",
+        "disposition",
+        "fingerprint",
+        "justification",
+        "owner"
+      ],
       "properties": {
         "approved_by": { "$ref": "#/$defs/non_empty_string" },
         "author": { "$ref": "#/$defs/non_empty_string" },
@@ -68,21 +75,8 @@
             "required": ["disposition"]
           },
           "then": {
-            "required": [
-              "blocking",
-              "decision_ref",
-              "fingerprint",
-              "justification",
-              "owner",
-              "scope"
-            ],
+            "required": ["author", "blocking", "scope"],
             "allOf": [
-              {
-                "anyOf": [
-                  { "required": ["approved_by"] },
-                  { "required": ["author"] }
-                ]
-              },
               {
                 "anyOf": [
                   { "required": ["evidence"] },
@@ -96,6 +90,27 @@
                   { "required": ["review_condition"] }
                 ]
               }
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "enum": [
+                  "false_positive",
+                  "generated_dependency",
+                  "intentional_reuse",
+                  "fixed"
+                ]
+              }
+            },
+            "required": ["disposition"]
+          },
+          "then": {
+            "anyOf": [
+              { "required": ["evidence"] },
+              { "required": ["proof"] }
             ]
           }
         }
