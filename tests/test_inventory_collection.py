@@ -6,6 +6,7 @@ import subprocess
 from pathlib import Path
 
 import pytest
+import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -90,6 +91,24 @@ def test_git_tracked_files_excludes_untracked_sources(
     _track(tmp_path, tracked)
 
     assert inventory_module.git_tracked_files(tmp_path) == (tracked,)
+
+
+def test_source_roles_fall_back_when_configuration_is_absent(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        f"{base}/cours/c1.tex": _meta(status="approved"),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert list(inventory["manuals"]["1SPE"]["chapters"]) == ["1SPE-TEST"]
 
 
 def test_load_contract_reads_yaml_without_losing_capacity_order(
@@ -367,6 +386,91 @@ def test_build_inventory_reports_metadata_ids_and_blocking_statuses(
             "status": "generated",
         },
     ]
+
+
+def test_build_inventory_keeps_raw_anomalies_unqualified(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    missing_meta = f"{base}/cours/no-meta.tex"
+    _write(tmp_path / contract, _contract("1SPE-TEST", "1SPE", capacities=1))
+    _write(tmp_path / missing_meta, "Contenu sans en-tete META\n")
+    _track(tmp_path, contract, missing_meta)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    anomaly = inventory["anomalies"]["metadata_missing"][0]
+
+    assert anomaly == {"path": missing_meta, "reason": "en-tete % META absent"}
+    assert {"source", "fingerprint", "disposition", "blocking"}.isdisjoint(anomaly)
+
+
+def test_build_inventory_artifacts_renders_markdown_without_parsing_it_as_yaml(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        f"{base}/cours/c1.tex": _meta(status="approved"),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    result = inventory_module.build_inventory_artifacts(tmp_path)
+
+    assert set(result["artifacts"]) == {
+        "audit",
+        "ecarts",
+        "etat",
+        "json",
+        "markdown",
+        "matrice",
+    }
+    for relative_path in result["artifacts"].values():
+        artifact = tmp_path / relative_path
+        assert artifact.is_file()
+        content = artifact.read_text(encoding="utf-8")
+        assert content.strip()
+        if artifact.suffix == ".json":
+            assert isinstance(json.loads(content), dict)
+        elif artifact.suffix in {".yaml", ".yml"}:
+            assert isinstance(yaml.safe_load(content), dict)
+
+
+def test_metadata_errors_are_not_duplicated_as_orphan_files(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    missing_meta = f"{base}/cours/missing-meta.tex"
+    malformed_meta = f"{base}/cours/malformed-meta.tex"
+    orphan = "NSI/extras/orphan.tex"
+    sources = {
+        contract: _contract("1SPE-TEST", "1SPE", capacities=1),
+        missing_meta: "Contenu sans en-tete META\n",
+        malformed_meta: "% META: {json invalide}\n",
+        orphan: "Contenu LaTeX valide mais non reference\n",
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    orphan_paths = {
+        anomaly["cible"] for anomaly in inventory["anomalies"]["orphan_files"]
+    }
+
+    assert {anomaly["path"] for anomaly in inventory["anomalies"]["metadata_missing"]} == {
+        missing_meta
+    }
+    assert {anomaly["path"] for anomaly in inventory["anomalies"]["metadata_invalid"]} == {
+        malformed_meta
+    }
+    assert orphan_paths == {orphan}
 
 
 def test_only_explicitly_approved_status_is_publishable(

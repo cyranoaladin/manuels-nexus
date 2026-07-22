@@ -292,6 +292,7 @@ def add_orphan_files(
     root: Path,
     tracked: frozenset[str],
     *,
+    skipped_paths: set[str] | None = None,
     is_relevant_tex: Any,
     is_known_latex_root: Any,
     chapter_context: Any,
@@ -317,8 +318,13 @@ def add_orphan_files(
     reachable = reachable_latex_files(
         inventory["reference_graph"], assembly_roots | production_roots
     )
+    ignore = skipped_paths or set()
     for path in sorted(
-        item for item in tracked if is_relevant_tex(item) and item.endswith(".tex")
+        item
+        for item in tracked
+        if is_relevant_tex(item)
+        and item.endswith(".tex")
+        and item not in ignore
     ):
         if path in object_paths or path in reachable:
             continue
