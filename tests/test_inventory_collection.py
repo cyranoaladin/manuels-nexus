@@ -5,6 +5,8 @@ import hashlib
 import json
 import shutil
 import subprocess
+import sys
+from copy import deepcopy
 from pathlib import Path
 
 import jsonschema
@@ -84,6 +86,59 @@ def _chapter_path(manual: str, chapter: str) -> str:
 
 def _install_audit_schemas(repository: Path) -> None:
     shutil.copytree(ROOT / "audit/schemas", repository / "audit/schemas")
+
+
+def _commit_repository(repository: Path, message: str = "fixture") -> str:
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "-c",
+            "user.name=Phase 0.1 Tests",
+            "-c",
+            "user.email=phase01-tests@example.invalid",
+            "commit",
+            "--allow-empty",
+            "-qm",
+            message,
+        ],
+        check=True,
+    )
+    return subprocess.run(
+        ["git", "-C", str(repository), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def _run_inventory_cli(repository: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [sys.executable, str(SCRIPT), "--root", str(repository), *arguments],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+def _seed_cli_repository(repository: Path) -> tuple[str, ...]:
+    _init_repository(repository)
+    _install_audit_schemas(repository)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        f"{base}/cours/c1.tex": _meta(status="approved"),
+    }
+    for path, content in sources.items():
+        _write(repository / path, content)
+    schema_paths = tuple(
+        path.relative_to(repository).as_posix()
+        for path in sorted((repository / "audit/schemas").rglob("*.json"))
+    )
+    tracked = (*sources, *schema_paths)
+    _track(repository, *tracked)
+    return tracked
 
 
 def _minimal_inventory(repository: Path, inventory_module):
@@ -3020,6 +3075,330 @@ def test_deliverable_matrix_blocks_needs_review_and_checks_model_coherence(
             "scope": "manual",
         }
     ]
+
+
+def test_real_object_count_is_not_the_sum_of_overlapping_metrics(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        f"{base}/cours/diagnostic.tex": _meta(
+            id="1SPE-TEST-DIAG",
+            sous_type="diagnostic",
+            status="approved",
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    manual = inventory["manuals"]["1SPE"]
+    report = inventory_module._render_inventory_markdown(inventory)
+
+    assert manual["object_count"] == 1
+    assert manual["content_file_count"] == 1
+    assert sum(manual["totals"].values()) == 2
+    row = next(line for line in report.splitlines() if "| 1SPE |" in line)
+    assert "| 1 | — |" in row
+    assert "| 2 | — |" not in row
+
+
+def test_human_reports_use_real_anomaly_fields_and_keep_etat_bounded(
+    tmp_path: Path, inventory_module
+) -> None:
+    inventory = _minimal_inventory(tmp_path, inventory_module)
+    inventory["anomalies"]["broken_meta_references"] = [
+        {
+            "id": None,
+            "detail": None,
+            "code": None,
+            "source": "chapitres/source.tex",
+            "champ": "corrige_tex",
+            "cible": "chapitres/correction.tex",
+            "raison": "chemin absent",
+        }
+    ]
+    inventory["deliverable_matrix"] = inventory_module.build_deliverable_matrix(
+        inventory
+    )
+
+    reports = {
+        "inventory": inventory_module._render_inventory_markdown(inventory),
+        "audit": inventory_module._render_audit_consolide(inventory),
+        "etat": inventory_module._render_etat_collection(inventory),
+    }
+
+    for report in reports.values():
+        assert "id=—, detail=—, code=—" not in report
+        assert "=—" not in report
+    assert "source=chapitres/source.tex" in reports["inventory"]
+    assert "champ=corrige_tex" in reports["audit"]
+    assert len(reports["etat"].splitlines()) < 250
+    for target in (
+        "audit/INVENTAIRE_COLLECTION.json",
+        "audit/ECARTS_ET_CONTRADICTIONS.yaml",
+        "audit/MATRICE_LIVRABLES.yaml",
+    ):
+        assert target in reports["etat"]
+
+
+def test_gate_result_contract_exposes_exact_dimensions_and_sorted_reasons(
+    inventory_module,
+) -> None:
+    assert (
+        inventory_module.GATE_USAGE_CODE,
+        inventory_module.GATE_CHECK_CODE,
+        inventory_module.GATE_CLEAN_CODE,
+        inventory_module.GATE_BASELINE_CODE,
+        inventory_module.GATE_VALIDATE_CODE,
+        inventory_module.GATE_RELEASE_CODE,
+        inventory_module.GATE_BASELINE_UPDATE_CODE,
+    ) == (2, 3, 4, 5, 6, 7, 8)
+    result = inventory_module._gate_result(
+        "example",
+        success=False,
+        failure_code=7,
+        dimensions={"structure": "failed"},
+        reasons=["zeta", "alpha"],
+    )
+
+    assert result == {
+        "blocker_count": 2,
+        "dimensions": {
+            "execution": "not_covered",
+            "mathematics": "not_covered",
+            "pedagogy": "not_covered",
+            "print": "not_covered",
+            "regulation": "not_covered",
+            "structure": "failed",
+            "visual": "not_covered",
+        },
+        "exit_code": 7,
+        "gate": "example",
+        "reasons": ["alpha", "zeta"],
+        "success": False,
+    }
+    assert all(
+        status != "passed"
+        for dimension, status in result["dimensions"].items()
+        if dimension != "structure"
+    )
+
+
+def test_missing_corrections_is_a_structural_publication_blocker(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        f"{base}/exercices/e1.tex": _meta(
+            id="1SPE-TEST-EX-001",
+            type_objet="exercice",
+            status="approved",
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    matrix = inventory["deliverable_matrix"]["manuals"]["1SPE"]
+
+    assert len(inventory["anomalies"]["missing_corrections"]) == 1
+    assert "anomalie:missing_corrections" in matrix["structural_blockers"]
+    assert matrix["phase0_structural_eligible"] is False
+    assert matrix["publication_eligible"] is False
+
+
+def test_structurally_eligible_manual_stays_unpublishable_without_gate_proofs(
+    tmp_path: Path, inventory_module, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    inventory = _minimal_inventory(tmp_path, inventory_module)
+    for values in inventory["anomalies"].values():
+        values.clear()
+    specifications = deepcopy(inventory_module.DELIVERABLE_SPECS)
+    for manual_id, specification in specifications.items():
+        specification["target_chapters"] = len(
+            inventory["manuals"][manual_id]["chapters"]
+        )
+    monkeypatch.setattr(inventory_module, "DELIVERABLE_SPECS", specifications)
+
+    matrix = inventory_module.build_deliverable_matrix(inventory)["manuals"]["1SPE"]
+
+    assert matrix["phase0_structural_eligible"] is True
+    assert matrix["publication_eligible"] is False
+
+
+def test_check_gate_reports_drift_without_writing_any_managed_output(
+    tmp_path: Path, inventory_module
+) -> None:
+    _seed_cli_repository(tmp_path)
+    result = inventory_module.build_inventory_artifacts(tmp_path)
+    managed = sorted(
+        tmp_path / relative
+        for relative in result["artifacts"].values()
+    )
+    drifted = tmp_path / result["artifacts"]["audit"]
+    drifted.write_text(drifted.read_text(encoding="utf-8") + "\nDÉRIVE\n", encoding="utf-8")
+    before = {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in managed}
+
+    completed = _run_inventory_cli(tmp_path, "--check")
+    after = {path: hashlib.sha256(path.read_bytes()).hexdigest() for path in managed}
+    payload = json.loads(completed.stdout)
+
+    assert completed.returncode == 3
+    assert payload["gate"] == "check"
+    assert payload["exit_code"] == 3
+    assert payload["success"] is False
+    assert payload["reasons"] == sorted(payload["reasons"])
+    assert before == after
+
+
+def test_validate_model_gate_accepts_valid_outputs_and_rejects_digest_drift(
+    tmp_path: Path, inventory_module
+) -> None:
+    _seed_cli_repository(tmp_path)
+    inventory_module.build_inventory_artifacts(tmp_path)
+
+    valid = _run_inventory_cli(tmp_path, "--validate-model")
+    valid_payload = json.loads(valid.stdout)
+
+    assert valid.returncode == 0
+    assert valid_payload["gate"] == "validate-model"
+    assert valid_payload["success"] is True
+    assert valid_payload["reasons"] == []
+
+    inventory_path = tmp_path / "audit/INVENTAIRE_COLLECTION.json"
+    payload = json.loads(inventory_path.read_text(encoding="utf-8"))
+    payload["model_digest"] = "sha256:" + "0" * 64
+    inventory_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+
+    invalid = _run_inventory_cli(tmp_path, "--validate-model")
+    invalid_payload = json.loads(invalid.stdout)
+
+    assert invalid.returncode == 6
+    assert invalid_payload["gate"] == "validate-model"
+    assert invalid_payload["success"] is False
+    assert invalid_payload["reasons"] == sorted(invalid_payload["reasons"])
+    assert any("model_digest" in reason for reason in invalid_payload["reasons"])
+
+
+def test_release_and_debt_gates_have_independent_documented_failures(
+    tmp_path: Path
+) -> None:
+    _seed_cli_repository(tmp_path)
+
+    release = _run_inventory_cli(tmp_path, "--release-strict")
+    release_payload = json.loads(release.stdout)
+    missing = _run_inventory_cli(tmp_path, "--fail-on-new")
+    missing_payload = json.loads(missing.stdout)
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps({"provisional": True}),
+    )
+    provisional = _run_inventory_cli(tmp_path, "--fail-on-new")
+    provisional_payload = json.loads(provisional.stdout)
+
+    assert release.returncode == 7
+    assert release_payload["gate"] == "release-strict"
+    assert release_payload["blocker_count"] > 0
+    assert release_payload["reasons"] == sorted(release_payload["reasons"])
+    assert set(release_payload["dimensions"]) == {
+        "structure",
+        "pedagogy",
+        "regulation",
+        "mathematics",
+        "execution",
+        "visual",
+        "print",
+    }
+    assert missing.returncode == 5
+    assert missing_payload["gate"] == "fail-on-new"
+    assert any("absente" in reason for reason in missing_payload["reasons"])
+    assert provisional.returncode == 5
+    assert provisional_payload["gate"] == "fail-on-new"
+    assert any("provisoire" in reason for reason in provisional_payload["reasons"])
+
+
+def test_require_clean_handles_dirty_unborn_and_detached_repositories(
+    tmp_path: Path
+) -> None:
+    unborn = tmp_path / "unborn"
+    _init_repository(unborn)
+    unborn_result = _run_inventory_cli(unborn, "--require-clean")
+
+    detached = tmp_path / "detached"
+    _init_repository(detached)
+    detached_sha = _commit_repository(detached)
+    (detached / ".git/HEAD").write_text(f"{detached_sha}\n", encoding="utf-8")
+    detached_result = _run_inventory_cli(detached, "--require-clean")
+
+    dirty = tmp_path / "dirty"
+    tracked = _seed_cli_repository(dirty)
+    _commit_repository(dirty)
+    source = dirty / tracked[0]
+    source.write_text(source.read_text(encoding="utf-8") + "# dirty\n", encoding="utf-8")
+    dirty_result = _run_inventory_cli(dirty, "--require-clean")
+    dirty_payload = json.loads(dirty_result.stdout)
+
+    assert unborn_result.returncode == 0
+    assert json.loads(unborn_result.stdout)["success"] is True
+    assert unborn_result.stderr == ""
+    assert detached_result.returncode == 0
+    assert json.loads(detached_result.stdout)["success"] is True
+    assert detached_result.stderr == ""
+    assert dirty_result.returncode == 4
+    assert dirty_payload["gate"] == "require-clean"
+    assert f"modified_tracked:{tracked[0]}" in dirty_payload["reasons"]
+
+
+def test_require_clean_rejects_relevant_untracked_sources(tmp_path: Path) -> None:
+    _init_repository(tmp_path)
+    _commit_repository(tmp_path)
+    untracked = "NSI/chapitres/1NSI-TEST/cours/new.tex"
+    _write(tmp_path / untracked, _meta(chapitre="1NSI-TEST", status="approved"))
+
+    completed = _run_inventory_cli(tmp_path, "--require-clean")
+    payload = json.loads(completed.stdout)
+
+    assert completed.returncode == 4
+    assert payload["reasons"] == [f"untracked_relevant:{untracked}"]
+
+
+def test_combined_gate_order_is_clean_model_check_debt_release(tmp_path: Path) -> None:
+    tracked = _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path)
+    source = tmp_path / tracked[0]
+    source.write_text(source.read_text(encoding="utf-8") + "# dirty\n", encoding="utf-8")
+    arguments = (
+        "--release-strict",
+        "--fail-on-new",
+        "--check",
+        "--validate-model",
+        "--require-clean",
+    )
+
+    dirty = _run_inventory_cli(tmp_path, *arguments)
+    dirty_payload = json.loads(dirty.stdout)
+    subprocess.run(
+        ["git", "-C", str(tmp_path), "add", "--", tracked[0]],
+        check=True,
+    )
+    _commit_repository(tmp_path, "clean fixture")
+    invalid_model = _run_inventory_cli(tmp_path, *arguments)
+    invalid_model_payload = json.loads(invalid_model.stdout)
+
+    assert dirty.returncode == 4
+    assert dirty_payload["gate"] == "require-clean"
+    assert invalid_model.returncode == 6
+    assert invalid_model_payload["gate"] == "validate-model"
 
 
 def test_report_continuation_scope_does_not_leak_after_a_blank_line(
