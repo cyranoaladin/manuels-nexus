@@ -149,7 +149,7 @@ Run the untouched HEAD snapshot suite already recorded in the audit. Expected:
 `73 passed`.
 
 Run: `pytest -q tests/test_inventory_collection.py`
-Expected: `77 passed` (the 73 historical cases plus four named regression tests).
+Expected: the 73 historical cases plus the parameterized regression cases pass.
 
 Run: `ruff check scripts/inventory_collection.py scripts/inventory_graph.py tests/test_inventory_collection.py`
 Expected: no findings.

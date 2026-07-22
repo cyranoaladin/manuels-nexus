@@ -104,6 +104,10 @@ def test_git_tracked_files_excludes_untracked_sources(
             "roles:\n  production_object: []\n",
             id="role-without-usable-pattern",
         ),
+        pytest.param(
+            "roles:\n  fixture:\n    - '**/fixtures/**'\n",
+            id="roles-without-production",
+        ),
     ],
 )
 def test_source_roles_fall_back_when_configuration_is_absent(
