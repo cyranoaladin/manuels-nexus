@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:anomalies-baseline",
+  "title": "Nexus anomaly debt baseline v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "active",
+    "artifact_type",
+    "fingerprint_schema_version",
+    "generated_at_utc",
+    "generated_by",
+    "git_sha",
+    "model_digest",
+    "previous_baseline_digest",
+    "provenance",
+    "provisional",
+    "resolved",
+    "schema_ref",
+    "schema_version",
+    "source_digest",
+    "summary",
+    "updates"
+  ],
+  "properties": {
+    "active": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/active_entry" }
+    },
+    "artifact_type": { "const": "anomalies_baseline" },
+    "entries": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
+    "fingerprint_schema_version": { "type": "integer", "minimum": 1 },
+    "generated_at_utc": { "$ref": "#/$defs/non_empty_string" },
+    "generated_by": { "const": "inventory_collection.py" },
+    "git_sha": { "$ref": "#/$defs/git_sha" },
+    "model_digest": { "$ref": "#/$defs/sha256" },
+    "previous_baseline_digest": {
+      "oneOf": [
+        { "$ref": "#/$defs/sha256" },
+        { "type": "null" }
+      ]
+    },
+    "provenance": { "type": "object" },
+    "provisional": { "type": "boolean" },
+    "resolved": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/resolved_entry" }
+    },
+    "resolved_fingerprints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fingerprint" },
+      "uniqueItems": true
+    },
+    "schema_ref": { "const": "audit/schemas/v1/anomalies-baseline.schema.json" },
+    "schema_version": { "const": 1 },
+    "source_digest": { "$ref": "#/$defs/sha256" },
+    "summary": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+    "updates": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/update" }
+    }
+  },
+  "$defs": {
+    "active_entry": {
+      "type": "object",
+      "required": [
+        "blocking",
+        "category",
+        "disposition",
+        "fingerprint",
+        "justification",
+        "occurrence_count",
+        "owner",
+        "severity"
+      ],
+      "properties": {
+        "blocking": { "type": "boolean" },
+        "category": { "$ref": "#/$defs/non_empty_string" },
+        "disposition": {
+          "enum": [
+            "open_debt",
+            "false_positive",
+            "generated_dependency",
+            "intentional_reuse",
+            "accepted_exception"
+          ]
+        },
+        "fingerprint": { "$ref": "#/$defs/fingerprint" },
+        "justification": { "$ref": "#/$defs/non_empty_string" },
+        "occurrence_count": { "type": "integer", "minimum": 1 },
+        "owner": { "$ref": "#/$defs/non_empty_string" },
+        "severity": { "enum": ["info", "warning", "error", "blocking"] }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "required": ["category", "disposition", "fingerprint"],
+      "properties": {
+        "blocking": { "type": "boolean" },
+        "category": { "type": "string", "minLength": 1 },
+        "disposition": {
+          "enum": [
+            "open_debt",
+            "false_positive",
+            "generated_dependency",
+            "intentional_reuse",
+            "accepted_exception",
+            "fixed"
+          ]
+        },
+        "fingerprint": { "$ref": "#/$defs/fingerprint" },
+        "manual": { "type": ["string", "null"] },
+        "path": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] }
+      }
+    },
+    "fingerprint": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{16,64}$"
+    },
+    "git_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "non_empty_string": { "type": "string", "minLength": 1 },
+    "resolved_entry": {
+      "type": "object",
+      "required": [
+        "blocking",
+        "category",
+        "disposition",
+        "fingerprint",
+        "resolved_at",
+        "resolved_git_sha"
+      ],
+      "properties": {
+        "blocking": { "type": "boolean" },
+        "category": { "$ref": "#/$defs/non_empty_string" },
+        "disposition": { "const": "fixed" },
+        "fingerprint": { "$ref": "#/$defs/fingerprint" },
+        "resolved_at": { "$ref": "#/$defs/non_empty_string" },
+        "resolved_git_sha": { "$ref": "#/$defs/git_sha" }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "update": {
+      "type": "object",
+      "required": [
+        "approved_by",
+        "git_sha",
+        "new_baseline_digest",
+        "previous_baseline_digest",
+        "reason",
+        "timestamp"
+      ],
+      "properties": {
+        "approved_by": { "$ref": "#/$defs/non_empty_string" },
+        "git_sha": { "$ref": "#/$defs/git_sha" },
+        "new_baseline_digest": { "$ref": "#/$defs/sha256" },
+        "previous_baseline_digest": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        },
+        "reason": { "$ref": "#/$defs/non_empty_string" },
+        "timestamp": { "$ref": "#/$defs/non_empty_string" }
+      }
+    }
+  }
+}

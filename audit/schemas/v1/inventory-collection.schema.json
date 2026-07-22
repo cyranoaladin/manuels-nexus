@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:inventory-collection",
+  "title": "Nexus collection inventory artifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "anomalies",
+    "artifact_type",
+    "assemblies",
+    "coherence_checks",
+    "correction_links",
+    "deliverable_matrix",
+    "generated_by",
+    "manuals",
+    "model_digest",
+    "pdfs",
+    "provenance",
+    "reference_graph",
+    "report_reconciliation",
+    "schema_ref",
+    "schema_version",
+    "source_digest",
+    "source_file_count",
+    "source_files"
+  ],
+  "properties": {
+    "anomalies": { "type": "object", "additionalProperties": { "type": "array" } },
+    "artifact_type": { "const": "inventory_collection" },
+    "assemblies": { "type": "array" },
+    "coherence_checks": { "type": "object" },
+    "correction_links": { "type": "array" },
+    "deliverable_matrix": { "type": "object" },
+    "generated_by": { "const": "inventory_collection.py" },
+    "manuals": { "type": "object" },
+    "model_digest": { "$ref": "#/$defs/sha256" },
+    "pdfs": { "type": "array" },
+    "provenance": { "type": "object" },
+    "reference_graph": { "type": "array" },
+    "report_reconciliation": { "type": "object" },
+    "schema_ref": { "const": "audit/schemas/v1/inventory-collection.schema.json" },
+    "schema_version": { "const": 1 },
+    "source_digest": { "$ref": "#/$defs/sha256" },
+    "source_file_count": { "type": "integer", "minimum": 0 },
+    "source_files": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
+import jsonschema
 import pytest
 import yaml
 
@@ -77,6 +80,23 @@ def _chapter_path(manual: str, chapter: str) -> str:
     if manual in {"1SPE", "TSPE"}:
         return f"Mathematiques/manuel-maths/chapitres/{chapter}"
     return f"NSI/chapitres/{chapter}"
+
+
+def _install_audit_schemas(repository: Path) -> None:
+    shutil.copytree(ROOT / "audit/schemas", repository / "audit/schemas")
+
+
+def _minimal_inventory(repository: Path, inventory_module):
+    _init_repository(repository)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        f"{base}/cours/c1.tex": _meta(status="approved"),
+    }
+    for path, content in sources.items():
+        _write(repository / path, content)
+    _track(repository, *sources)
+    return inventory_module.build_inventory(repository)
 
 
 def test_git_tracked_files_excludes_untracked_sources(
@@ -446,6 +466,7 @@ def test_build_inventory_artifacts_renders_markdown_without_parsing_it_as_yaml(
     tmp_path: Path, inventory_module
 ) -> None:
     _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
     base = _chapter_path("1SPE", "1SPE-TEST")
     sources = {
         f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
@@ -474,6 +495,551 @@ def test_build_inventory_artifacts_renders_markdown_without_parsing_it_as_yaml(
             assert isinstance(json.loads(content), dict)
         elif artifact.suffix in {".yaml", ".yml"}:
             assert isinstance(yaml.safe_load(content), dict)
+
+
+@pytest.mark.parametrize(
+    ("basename", "artifact_type", "loader"),
+    [
+        pytest.param(
+            "INVENTAIRE_COLLECTION.json",
+            "inventory_collection",
+            json.loads,
+            id="inventory-json",
+        ),
+        pytest.param(
+            "ECARTS_ET_CONTRADICTIONS.yaml",
+            "ecarts_et_contradictions",
+            yaml.safe_load,
+            id="ecarts-yaml",
+        ),
+        pytest.param(
+            "MATRICE_LIVRABLES.yaml",
+            "matrice_livrables",
+            yaml.safe_load,
+            id="matrice-yaml",
+        ),
+    ],
+)
+def test_machine_artifacts_parse_and_validate_against_their_versioned_schema(
+    tmp_path: Path,
+    inventory_module,
+    basename: str,
+    artifact_type: str,
+    loader,
+) -> None:
+    inventory = _minimal_inventory(tmp_path, inventory_module)
+    rendered = inventory_module._render_inventory_artifacts(
+        inventory,
+        repo_root=ROOT,
+        audit_root=tmp_path / "rendered",
+    )
+
+    content = next(value for path, value in rendered.items() if path.name == basename)
+    payload = loader(content)
+
+    assert payload["schema_version"] == 1
+    assert payload["artifact_type"] == artifact_type
+    assert payload["schema_ref"] == inventory_module._schema_ref_for(
+        artifact_type, 1
+    )
+    assert payload["source_digest"] == inventory["source_digest"]
+    assert payload["model_digest"].startswith("sha256:")
+    assert payload["provenance"] == inventory["provenance"]
+    schema = inventory_module._load_artifact_schema(
+        ROOT,
+        artifact_type=artifact_type,
+        schema_version=payload["schema_version"],
+        schema_ref=payload["schema_ref"],
+    )
+    jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize(
+    "schema_name",
+    [
+        "inventory-collection.schema.json",
+        "ecarts-et-contradictions.schema.json",
+        "matrice-livrables.schema.json",
+        "source-roles.schema.json",
+        "anomaly-dispositions.schema.json",
+        "anomalies-baseline.schema.json",
+        "build-manifest.schema.json",
+    ],
+)
+def test_v1_json_schemas_are_valid_draft_2020_12(schema_name: str) -> None:
+    schema_path = ROOT / "audit/schemas/v1" / schema_name
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+
+    assert schema["$schema"] == "https://json-schema.org/draft/2020-12/schema"
+    jsonschema.Draft202012Validator.check_schema(schema)
+
+
+def test_v1_schema_directory_contains_exactly_the_registered_contracts(
+    inventory_module,
+) -> None:
+    registered = {
+        Path(schema_ref).name
+        for versions in inventory_module.SCHEMA_REGISTRY.values()
+        for schema_ref in versions.values()
+    }
+    present = {
+        path.name for path in (ROOT / "audit/schemas/v1").glob("*.schema.json")
+    }
+
+    assert present == registered
+
+
+@pytest.mark.parametrize(
+    "schema_name",
+    ["source-roles.schema.json", "anomaly-dispositions.schema.json"],
+)
+def test_control_schemas_require_a_content_digest(schema_name: str) -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1" / schema_name).read_text(encoding="utf-8")
+    )
+
+    assert "control_digest" in schema["required"]
+    assert schema["properties"]["control_digest"] == {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$",
+    }
+
+
+def _accepted_exception_dispositions_payload() -> dict[str, object]:
+    fingerprint = "a" * 16
+    return {
+        "artifact_type": "anomaly_dispositions",
+        "control_digest": "sha256:" + "b" * 64,
+        "dispositions": {
+            fingerprint: {
+                "approved_by": "Responsable éditorial",
+                "blocking": False,
+                "decision_ref": "DEC-2026-07-22-01",
+                "disposition": "accepted_exception",
+                "evidence": ["audit/decisions/DEC-2026-07-22-01.md"],
+                "expiry": "2026-12-31",
+                "fingerprint": fingerprint,
+                "justification": "Réutilisation limitée à la maquette de contrôle.",
+                "owner": "équipe éditoriale",
+                "scope": {"manual": "1SPE", "variant": "maquette"},
+            }
+        },
+        "fingerprint_schema_version": 1,
+        "schema_ref": "audit/schemas/v1/anomaly-dispositions.schema.json",
+        "schema_version": 1,
+    }
+
+
+def test_anomaly_dispositions_schema_accepts_contractual_accepted_exception() -> None:
+    schema = json.loads(
+        (
+            ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    jsonschema.Draft202012Validator(schema).validate(
+        _accepted_exception_dispositions_payload()
+    )
+
+
+def test_anomaly_dispositions_schema_keeps_open_debt_minimal() -> None:
+    schema = json.loads(
+        (
+            ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+    fingerprint = "c" * 16
+    payload = {
+        "artifact_type": "anomaly_dispositions",
+        "control_digest": "sha256:" + "d" * 64,
+        "dispositions": {
+            fingerprint: {
+                "disposition": "open_debt",
+                "fingerprint": fingerprint,
+            }
+        },
+        "fingerprint_schema_version": 1,
+        "schema_ref": "audit/schemas/v1/anomaly-dispositions.schema.json",
+        "schema_version": 1,
+    }
+
+    jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize(
+    "missing_field",
+    [
+        "approved_by",
+        "blocking",
+        "decision_ref",
+        "evidence",
+        "expiry",
+        "fingerprint",
+        "justification",
+        "owner",
+        "scope",
+    ],
+)
+def test_anomaly_dispositions_schema_rejects_incomplete_accepted_exception(
+    missing_field: str,
+) -> None:
+    schema = json.loads(
+        (
+            ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+    payload = _accepted_exception_dispositions_payload()
+    fingerprint = "a" * 16
+    disposition = dict(payload["dispositions"][fingerprint])  # type: ignore[index]
+    disposition.pop(missing_field)
+    payload["dispositions"] = {fingerprint: disposition}
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def _baseline_contract_payload() -> dict[str, object]:
+    git_sha = "a" * 40
+    return {
+        "active": [
+            {
+                "blocking": True,
+                "category": "missing_corrections",
+                "disposition": "open_debt",
+                "fingerprint": "b" * 16,
+                "justification": "Dette historique qualifiée avant publication.",
+                "occurrence_count": 2,
+                "owner": "équipe mathématiques",
+                "severity": "blocking",
+            }
+        ],
+        "artifact_type": "anomalies_baseline",
+        "fingerprint_schema_version": 1,
+        "generated_at_utc": "2026-07-22T10:00:00Z",
+        "generated_by": "inventory_collection.py",
+        "git_sha": git_sha,
+        "model_digest": "sha256:" + "c" * 64,
+        "previous_baseline_digest": None,
+        "provenance": {"head_sha": git_sha},
+        "provisional": True,
+        "resolved": [
+            {
+                "blocking": False,
+                "category": "metadata_missing",
+                "disposition": "fixed",
+                "fingerprint": "d" * 16,
+                "resolved_at": "2026-07-22T09:00:00Z",
+                "resolved_git_sha": git_sha,
+            }
+        ],
+        "schema_ref": "audit/schemas/v1/anomalies-baseline.schema.json",
+        "schema_version": 1,
+        "source_digest": "sha256:" + "e" * 64,
+        "summary": {"active": 1, "resolved": 1},
+        "updates": [
+            {
+                "approved_by": "Responsable éditorial",
+                "git_sha": git_sha,
+                "new_baseline_digest": "sha256:" + "f" * 64,
+                "previous_baseline_digest": None,
+                "reason": "Création de la baseline provisoire après qualification.",
+                "timestamp": "2026-07-22T10:00:00Z",
+            }
+        ],
+    }
+
+
+def test_anomalies_baseline_schema_accepts_provisional_active_resolved_history() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/anomalies-baseline.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    jsonschema.Draft202012Validator(schema).validate(_baseline_contract_payload())
+
+
+@pytest.mark.parametrize(
+    "missing_field",
+    [
+        "active",
+        "git_sha",
+        "previous_baseline_digest",
+        "provisional",
+        "resolved",
+        "updates",
+    ],
+)
+def test_anomalies_baseline_schema_rejects_missing_debt_history_field(
+    missing_field: str,
+) -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/anomalies-baseline.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _baseline_contract_payload()
+    payload.pop(missing_field)
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def test_anomalies_baseline_schema_rejects_non_fixed_resolved_entry() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/anomalies-baseline.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _baseline_contract_payload()
+    resolved = dict(payload["resolved"][0])  # type: ignore[index]
+    resolved["disposition"] = "open_debt"
+    payload["resolved"] = [resolved]
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def _build_manifest_contract_payload() -> dict[str, object]:
+    return {
+        "artifact_type": "build_manifest",
+        "build_state_digest": "sha256:" + "1" * 64,
+        "builds": [
+            {
+                "gate_results": {
+                    "release_strict": {"blocker_count": 42, "passed": False},
+                    "validate_model": {"passed": True},
+                },
+                "git_sha": "2" * 40,
+                "included_objects": ["OBJ-SECOND", "OBJ-FIRST"],
+                "model_digest": "sha256:" + "3" * 64,
+                "page_count": 128,
+                "pdf": "build/manuels/1SPE-professeur.pdf",
+                "sha256": "sha256:" + "4" * 64,
+                "source_digest": "sha256:" + "5" * 64,
+                "tool_versions": {"latexmk": "4.86a", "pdflatex": "3.141592653"},
+                "variant": "manuel_professeur",
+            }
+        ],
+        "generated_by": "inventory_collection.py",
+        "provenance": {"branch": "finalisation/collection-v1"},
+        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
+        "schema_version": 1,
+    }
+
+
+def test_build_manifest_schema_accepts_envelope_with_ordered_build_objects() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/build-manifest.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _build_manifest_contract_payload()
+
+    jsonschema.Draft202012Validator(schema).validate(payload)
+
+    assert payload["builds"][0]["included_objects"] == [  # type: ignore[index]
+        "OBJ-SECOND",
+        "OBJ-FIRST",
+    ]
+
+
+@pytest.mark.parametrize(
+    "missing_field",
+    ["build_state_digest", "builds"],
+)
+def test_build_manifest_schema_rejects_missing_envelope_field(
+    missing_field: str,
+) -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/build-manifest.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _build_manifest_contract_payload()
+    payload.pop(missing_field)
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize(
+    "missing_field",
+    [
+        "gate_results",
+        "git_sha",
+        "included_objects",
+        "model_digest",
+        "page_count",
+        "pdf",
+        "sha256",
+        "source_digest",
+        "tool_versions",
+        "variant",
+    ],
+)
+def test_build_manifest_schema_rejects_incomplete_observed_build(
+    missing_field: str,
+) -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/build-manifest.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _build_manifest_contract_payload()
+    build = dict(payload["builds"][0])  # type: ignore[index]
+    build.pop(missing_field)
+    payload["builds"] = [build]
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def test_artifact_schema_loading_fails_when_the_registered_schema_is_absent(
+    tmp_path: Path, inventory_module
+) -> None:
+    schema_ref = inventory_module._schema_ref_for("inventory_collection", 1)
+
+    with pytest.raises(inventory_module.InventoryError, match="schéma absent"):
+        inventory_module._load_artifact_schema(
+            tmp_path,
+            artifact_type="inventory_collection",
+            schema_version=1,
+            schema_ref=schema_ref,
+        )
+
+
+def test_artifact_schema_loading_fails_for_an_unknown_version(
+    inventory_module,
+) -> None:
+    with pytest.raises(inventory_module.InventoryError, match="version de schéma inconnue"):
+        inventory_module._schema_ref_for("inventory_collection", 999)
+
+
+def test_canonical_model_payload_is_compact_stable_and_excludes_envelope_fields(
+    inventory_module,
+) -> None:
+    inventory = {
+        "source_digest": "sha256:" + "a" * 64,
+        "source_files": ["z.tex", "a.tex"],
+        "manuals": {"1SPE": {"objects": ["second", "first"]}},
+        "anomalies": {"missing_corrections": [{"id": "EX-1"}]},
+        "reference_graph": [{"source": "z.tex", "cible": "a.tex"}],
+        "correction_links": [{"exercise_id": "EX-1"}],
+        "assemblies": [{"assembly_id": "second"}, {"assembly_id": "first"}],
+        "pdfs": [{"path": "manual.pdf"}],
+        "report_reconciliation": {"claims": []},
+        "coherence_checks": {"status_distribution": {"ok": True}},
+        "deliverable_matrix": {"manuals": {}},
+        "schema_version": 1,
+        "schema_ref": "ignored",
+        "artifact_type": "ignored",
+        "model_digest": "sha256:" + "b" * 64,
+        "provenance": {"generated_at_utc": "ignored"},
+        "observed_builds": [{"pdf": "ignored.pdf"}],
+    }
+
+    payload = inventory_module.canonical_model_payload(inventory)
+    serialized = inventory_module._serialize_canonical_model(payload)
+
+    assert list(payload) == [
+        "anomalies",
+        "coherence_checks",
+        "correction_links",
+        "declared_assemblies",
+        "deliverable_matrix",
+        "manuals",
+        "pdfs",
+        "reference_graph",
+        "report_reconciliation",
+        "source_digest",
+        "source_files",
+    ]
+    assert payload["source_files"] == ["z.tex", "a.tex"]
+    assert payload["declared_assemblies"] == [
+        {"assembly_id": "second"},
+        {"assembly_id": "first"},
+    ]
+    assert "assemblies" not in payload
+    assert serialized == json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    assert inventory_module._model_digest(inventory) == (
+        "sha256:" + hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+    )
+
+
+def test_canonical_model_payload_accepts_declared_assemblies_without_legacy_key(
+    inventory_module,
+) -> None:
+    declared = [{"assembly_id": "manual-professeur"}]
+    inventory = {
+        "anomalies": {},
+        "coherence_checks": {},
+        "correction_links": [],
+        "declared_assemblies": declared,
+        "deliverable_matrix": {},
+        "manuals": {},
+        "pdfs": [],
+        "reference_graph": [],
+        "report_reconciliation": {},
+        "source_digest": "sha256:" + "a" * 64,
+        "source_files": [],
+    }
+
+    payload = inventory_module.canonical_model_payload(inventory)
+
+    assert payload["declared_assemblies"] == declared
+    assert "assemblies" not in payload
+
+
+def test_rendering_the_same_inventory_twice_is_byte_identical_by_basename(
+    tmp_path: Path, inventory_module
+) -> None:
+    inventory = _minimal_inventory(tmp_path, inventory_module)
+
+    first = inventory_module._render_inventory_artifacts(
+        inventory,
+        repo_root=ROOT,
+        audit_root=tmp_path / "first",
+    )
+    second = inventory_module._render_inventory_artifacts(
+        inventory,
+        repo_root=ROOT,
+        audit_root=tmp_path / "second",
+    )
+    first_by_name = {path.name: content for path, content in first.items()}
+    second_by_name = {path.name: content for path, content in second.items()}
+
+    assert first_by_name == second_by_name
+    machine_names = {
+        "INVENTAIRE_COLLECTION.json",
+        "ECARTS_ET_CONTRADICTIONS.yaml",
+        "MATRICE_LIVRABLES.yaml",
+    }
+    parsed = {
+        name: (
+            json.loads(first_by_name[name])
+            if name.endswith(".json")
+            else yaml.safe_load(first_by_name[name])
+        )
+        for name in machine_names
+    }
+    for common_field in (
+        "generated_by",
+        "model_digest",
+        "provenance",
+        "schema_version",
+        "source_digest",
+    ):
+        serialized_values = {
+            json.dumps(payload[common_field], ensure_ascii=False, sort_keys=True)
+            for payload in parsed.values()
+        }
+        assert len(serialized_values) == 1
 
 
 def test_metadata_errors_are_not_duplicated_as_orphan_files(

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:build-manifest",
+  "title": "Nexus observed build manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "build_state_digest",
+    "builds",
+    "generated_by",
+    "provenance",
+    "schema_ref",
+    "schema_version"
+  ],
+  "properties": {
+    "artifact_type": { "const": "build_manifest" },
+    "build_state_digest": { "$ref": "#/$defs/sha256" },
+    "builds": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/build" }
+    },
+    "generated_by": { "const": "inventory_collection.py" },
+    "provenance": { "type": "object" },
+    "schema_ref": { "const": "audit/schemas/v1/build-manifest.schema.json" },
+    "schema_version": { "const": 1 }
+  },
+  "$defs": {
+    "build": {
+      "type": "object",
+      "required": [
+        "gate_results",
+        "git_sha",
+        "included_objects",
+        "model_digest",
+        "page_count",
+        "pdf",
+        "sha256",
+        "source_digest",
+        "tool_versions",
+        "variant"
+      ],
+      "properties": {
+        "gate_results": { "type": "object", "minProperties": 1 },
+        "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "included_objects": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "model_digest": { "$ref": "#/$defs/sha256" },
+        "page_count": { "type": "integer", "minimum": 1 },
+        "pdf": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "source_digest": { "$ref": "#/$defs/sha256" },
+        "tool_versions": { "type": "object", "minProperties": 1 },
+        "variant": { "type": "string", "minLength": 1 }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

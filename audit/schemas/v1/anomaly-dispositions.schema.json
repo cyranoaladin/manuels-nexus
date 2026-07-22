@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:anomaly-dispositions",
+  "title": "Nexus anomaly dispositions control file v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "control_digest",
+    "dispositions",
+    "fingerprint_schema_version",
+    "schema_ref",
+    "schema_version"
+  ],
+  "properties": {
+    "artifact_type": { "const": "anomaly_dispositions" },
+    "control_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "dispositions": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/disposition" }
+    },
+    "fingerprint_schema_version": { "type": "integer", "minimum": 1 },
+    "schema_ref": { "const": "audit/schemas/v1/anomaly-dispositions.schema.json" },
+    "schema_version": { "const": 1 }
+  },
+  "$defs": {
+    "disposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposition", "fingerprint"],
+      "properties": {
+        "approved_by": { "$ref": "#/$defs/non_empty_string" },
+        "author": { "$ref": "#/$defs/non_empty_string" },
+        "blocking": { "type": "boolean" },
+        "date": { "$ref": "#/$defs/non_empty_string" },
+        "decision_ref": { "$ref": "#/$defs/non_empty_string" },
+        "decision_reference": { "$ref": "#/$defs/non_empty_string" },
+        "disposition": {
+          "enum": [
+            "open_debt",
+            "false_positive",
+            "generated_dependency",
+            "intentional_reuse",
+            "accepted_exception",
+            "fixed"
+          ]
+        },
+        "evidence": { "$ref": "#/$defs/evidence" },
+        "expires_at": { "$ref": "#/$defs/non_empty_string" },
+        "expiry": { "$ref": "#/$defs/non_empty_string" },
+        "fingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16,64}$"
+        },
+        "justification": { "$ref": "#/$defs/non_empty_string" },
+        "owner": { "$ref": "#/$defs/non_empty_string" },
+        "proof": { "$ref": "#/$defs/evidence" },
+        "review_condition": { "$ref": "#/$defs/non_empty_string" },
+        "scope": { "$ref": "#/$defs/scope" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "disposition": { "const": "accepted_exception" } },
+            "required": ["disposition"]
+          },
+          "then": {
+            "required": [
+              "blocking",
+              "decision_ref",
+              "fingerprint",
+              "justification",
+              "owner",
+              "scope"
+            ],
+            "allOf": [
+              {
+                "anyOf": [
+                  { "required": ["approved_by"] },
+                  { "required": ["author"] }
+                ]
+              },
+              {
+                "anyOf": [
+                  { "required": ["evidence"] },
+                  { "required": ["proof"] }
+                ]
+              },
+              {
+                "anyOf": [
+                  { "required": ["expires_at"] },
+                  { "required": ["expiry"] },
+                  { "required": ["review_condition"] }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "evidence": {
+      "oneOf": [
+        { "$ref": "#/$defs/non_empty_string" },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/non_empty_string" }
+        },
+        { "type": "object", "minProperties": 1 }
+      ]
+    },
+    "non_empty_string": { "type": "string", "minLength": 1 },
+    "scope": {
+      "oneOf": [
+        { "$ref": "#/$defs/non_empty_string" },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/non_empty_string" }
+        },
+        { "type": "object", "minProperties": 1 }
+      ]
+    }
+  }
+}

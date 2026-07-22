@@ -73,8 +73,33 @@ GENERIC_LOCK_FILE = ".inventory_collection.lock"
 
 SOURCE_ROLES_FILE = "audit/SOURCE_ROLES.yaml"
 ANOMALY_DISPOSITIONS_FILE = "audit/ANOMALY_DISPOSITIONS.yaml"
-INVENTORY_SCHEMA_FILE = "audit/inventory_collection.schema.json"
 ANOMALIES_BASELINE_FILE = "audit/ANOMALIES_BASELINE.json"
+
+SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
+    {
+        "inventory_collection": MappingProxyType(
+            {1: "audit/schemas/v1/inventory-collection.schema.json"}
+        ),
+        "ecarts_et_contradictions": MappingProxyType(
+            {1: "audit/schemas/v1/ecarts-et-contradictions.schema.json"}
+        ),
+        "matrice_livrables": MappingProxyType(
+            {1: "audit/schemas/v1/matrice-livrables.schema.json"}
+        ),
+        "source_roles": MappingProxyType(
+            {1: "audit/schemas/v1/source-roles.schema.json"}
+        ),
+        "anomaly_dispositions": MappingProxyType(
+            {1: "audit/schemas/v1/anomaly-dispositions.schema.json"}
+        ),
+        "anomalies_baseline": MappingProxyType(
+            {1: "audit/schemas/v1/anomalies-baseline.schema.json"}
+        ),
+        "build_manifest": MappingProxyType(
+            {1: "audit/schemas/v1/build-manifest.schema.json"}
+        ),
+    }
+)
 
 OUTPUT_FILES = (
     "INVENTAIRE_COLLECTION.json",
@@ -82,16 +107,31 @@ OUTPUT_FILES = (
     "ECARTS_ET_CONTRADICTIONS.yaml",
     "MATRICE_LIVRABLES.yaml",
 )
-OUTPUT_STABLE_FIELDS = {"generated_at_utc", "modified_tracked", "untracked_relevant"}
-OUTPUT_STABLE_FIELDS.update({"provenance"})
 REQUIRED_ARTIFACT_FIELDS = {
+    "artifact_type",
     "generated_by",
+    "model_digest",
+    "schema_ref",
     "schema_version",
     "source_digest",
     "provenance",
 }
-REQUIRED_YAML_FIELDS = REQUIRED_ARTIFACT_FIELDS | {"provenance"}
-REQUIRED_JSON_FIELDS = REQUIRED_ARTIFACT_FIELDS | {"provenance"}
+REQUIRED_YAML_FIELDS = REQUIRED_ARTIFACT_FIELDS
+REQUIRED_JSON_FIELDS = REQUIRED_ARTIFACT_FIELDS
+
+CANONICAL_MODEL_FIELDS = (
+    "anomalies",
+    "coherence_checks",
+    "correction_links",
+    "declared_assemblies",
+    "deliverable_matrix",
+    "manuals",
+    "pdfs",
+    "reference_graph",
+    "report_reconciliation",
+    "source_digest",
+    "source_files",
+)
 
 ANOMALY_DISPOSITIONS = (
     "open_debt",
@@ -162,7 +202,7 @@ DEFAULT_SOURCE_ROLE_PATTERNS: Mapping[str, tuple[str, ...]] = MappingProxyType(
             "audit/ANOMALIES_BASELINE.json",
             "audit/SOURCE_ROLES.yaml",
             "audit/ANOMALY_DISPOSITIONS.yaml",
-            "audit/inventory_collection.schema.json",
+            "audit/schemas/**/*.schema.json",
         ),
         "fixture": ("**/_*/**", "**/fixtures/**"),
         "archive": ("**/archive/**", "**/historique/**"),
@@ -370,39 +410,94 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
     return raw_dispositions
 
 
-def _load_json_schema(root: Path) -> Any:
-    schema_path = root / INVENTORY_SCHEMA_FILE
+def _schema_ref_for(artifact_type: str, schema_version: int) -> str:
+    versions = SCHEMA_REGISTRY.get(artifact_type)
+    if versions is None:
+        raise InventoryError(f"type d'artefact inconnu: {artifact_type}")
+    schema_ref = versions.get(schema_version)
+    if schema_ref is None:
+        raise InventoryError(
+            "version de schéma inconnue "
+            f"pour {artifact_type}: {schema_version}"
+        )
+    return schema_ref
+
+
+def _load_artifact_schema(
+    root: Path,
+    *,
+    artifact_type: str,
+    schema_version: int,
+    schema_ref: str,
+) -> dict[str, Any]:
+    expected_ref = _schema_ref_for(artifact_type, schema_version)
+    if schema_ref != expected_ref:
+        raise InventoryError(
+            f"schema_ref incohérent pour {artifact_type}: "
+            f"attendu {expected_ref}, reçu {schema_ref}"
+        )
+    schema_path = root / expected_ref
     if not schema_path.is_file():
-        return None
+        raise InventoryError(f"schéma absent pour {artifact_type}: {schema_path}")
     try:
-        payload_text = schema_path.read_text(encoding="utf-8")
-    except (OSError, UnicodeError):
-        return None
-    try:
-        schema_payload = json.loads(payload_text)
-    except (TypeError, ValueError):
-        schema_payload = _load_yaml_payload(schema_path, default=None)
-    if schema_payload is None:
-        return None
-    if isinstance(schema_payload, Mapping):
-        return dict(schema_payload)
-    return None
-
-
-def _schema_validate_json(payload: Mapping[str, Any], root: Path) -> list[str]:
-    schema = _load_json_schema(root)
-    if schema is None:
-        return []
+        schema_payload = json.loads(schema_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise InventoryError(
+            f"schéma JSON invalide pour {artifact_type}: {schema_path}: {exc}"
+        ) from exc
+    if not isinstance(schema_payload, Mapping):
+        raise InventoryError(
+            f"schéma JSON invalide pour {artifact_type}: racine non objet"
+        )
     try:
         import jsonschema
-    except ImportError:
-        return ["jsonschema indisponible"]
-
+    except ImportError as exc:
+        raise InventoryError("jsonschema indisponible") from exc
     try:
-        jsonschema.validate(instance=payload, schema=schema)
-        return []
-    except jsonschema.ValidationError as exc:
-        return [str(exc.message)]
+        jsonschema.Draft202012Validator.check_schema(schema_payload)
+    except jsonschema.SchemaError as exc:
+        raise InventoryError(
+            f"schéma Draft 2020-12 invalide pour {artifact_type}: {exc.message}"
+        ) from exc
+    return dict(schema_payload)
+
+
+def _validate_artifact_schema(
+    payload: Mapping[str, Any],
+    *,
+    root: Path,
+    path: Path,
+) -> None:
+    artifact_type = payload.get("artifact_type")
+    schema_version = payload.get("schema_version")
+    schema_ref = payload.get("schema_ref")
+    if not isinstance(artifact_type, str) or not artifact_type:
+        raise InventoryError(f"artifact_type invalide dans {path}")
+    if not isinstance(schema_version, int) or isinstance(schema_version, bool):
+        raise InventoryError(f"schema_version invalide dans {path}")
+    if not isinstance(schema_ref, str) or not schema_ref:
+        raise InventoryError(f"schema_ref invalide dans {path}")
+    schema = _load_artifact_schema(
+        root,
+        artifact_type=artifact_type,
+        schema_version=schema_version,
+        schema_ref=schema_ref,
+    )
+    try:
+        import jsonschema
+    except ImportError as exc:
+        raise InventoryError("jsonschema indisponible") from exc
+    errors = sorted(
+        jsonschema.Draft202012Validator(schema).iter_errors(payload),
+        key=lambda error: tuple(str(part) for part in error.absolute_path),
+    )
+    if errors:
+        details = "; ".join(
+            f"{'.'.join(str(part) for part in error.absolute_path) or '<root>'}: "
+            f"{error.message}"
+            for error in errors
+        )
+        raise InventoryError(f"artefact non conforme au schéma {path}: {details}")
 
 
 def _build_anomaly_fingerprint_table(
@@ -569,25 +664,39 @@ def _evaluate_baseline(
     return failures
 
 
-def _normalize_payload_for_digest(payload: Any) -> Any:
-    if isinstance(payload, Mapping):
-        return {
-            str(key): _normalize_payload_for_digest(value)
-            for key, value in sorted(payload.items())
-            if key not in OUTPUT_STABLE_FIELDS
-        }
-    if isinstance(payload, list):
-        return [_normalize_payload_for_digest(value) for value in payload]
-    return payload
+def canonical_model_payload(inventory: Mapping[str, Any]) -> dict[str, Any]:
+    missing = [
+        field
+        for field in CANONICAL_MODEL_FIELDS
+        if field not in inventory
+        and not (field == "declared_assemblies" and "assemblies" in inventory)
+    ]
+    if missing:
+        raise InventoryError(
+            "modèle canonique incomplet: " + ", ".join(sorted(missing))
+        )
+    return {
+        field: _canonicalize(
+            inventory[field]
+            if field in inventory
+            else inventory["assemblies"]
+        )
+        for field in CANONICAL_MODEL_FIELDS
+    }
 
 
-def _serialized_canonical_json(payload: Mapping[str, Any]) -> str:
+def _serialize_canonical_model(payload: Mapping[str, Any]) -> str:
     return json.dumps(
-        _normalize_payload_for_digest(payload),
+        payload,
         ensure_ascii=False,
-        indent=2,
         sort_keys=True,
+        separators=(",", ":"),
     )
+
+
+def _model_digest(inventory: Mapping[str, Any]) -> str:
+    serialized = _serialize_canonical_model(canonical_model_payload(inventory))
+    return f"sha256:{hashlib.sha256(_utf8_bytes(serialized)).hexdigest()}"
 
 
 def _now_utc() -> str:
@@ -2841,46 +2950,47 @@ def _reference_sort_key(item: Mapping[str, Any]) -> tuple[str, ...]:
     return tuple(str(item.get(key, "")) for key in ("source", "champ", "cible", "kind"))
 
 
-def _render_inventory_artifacts(
-    inventory: Mapping[str, Any],
-    *,
-    repo_root: Path,
-    audit_root: Path,
-    include_generated_marker: bool = True,
-) -> dict[Path, str]:
-    marker = AUTOGEN_MARKER if include_generated_marker else ""
-    shared_payload = {
+def _artifact_envelope(
+    inventory: Mapping[str, Any], artifact_type: str, model_digest: str
+) -> dict[str, Any]:
+    return {
+        "artifact_type": artifact_type,
         "generated_by": "inventory_collection.py",
+        "model_digest": model_digest,
+        "provenance": inventory.get("provenance", {}),
+        "schema_ref": _schema_ref_for(artifact_type, SCHEMA_VERSION),
         "schema_version": SCHEMA_VERSION,
         "source_digest": inventory["source_digest"],
-        "provenance": inventory.get("provenance", {}),
     }
+
+
+def _machine_artifact_payloads(
+    inventory: Mapping[str, Any],
+) -> dict[str, dict[str, Any]]:
+    model_digest = _model_digest(inventory)
+    claims = inventory["report_reconciliation"]["claims"]
     json_payload = {
         **_canonicalize(inventory),
-        **shared_payload,
+        **_artifact_envelope(inventory, "inventory_collection", model_digest),
     }
     ecarts_payload = {
-        **shared_payload,
+        **_artifact_envelope(
+            inventory, "ecarts_et_contradictions", model_digest
+        ),
         "claims": {
-            "contredits": [
-                claim for claim in inventory["report_reconciliation"]["claims"] if claim["etat"] == "contredit"
-            ],
-            "ouvertes": [
-                claim for claim in inventory["report_reconciliation"]["claims"] if claim["etat"] == "ouvert"
-            ],
-            "confirmes": [
-                claim for claim in inventory["report_reconciliation"]["claims"] if claim["etat"] == "confirme"
-            ],
+            "contredits": [claim for claim in claims if claim["etat"] == "contredit"],
+            "ouvertes": [claim for claim in claims if claim["etat"] == "ouvert"],
+            "confirmes": [claim for claim in claims if claim["etat"] == "confirme"],
         },
         "counts": {
             "claims_ouverts": len(
-                [claim for claim in inventory["report_reconciliation"]["claims"] if claim["etat"] == "ouvert"]
+                [claim for claim in claims if claim["etat"] == "ouvert"]
             ),
             "claims_contredits": len(
-                [claim for claim in inventory["report_reconciliation"]["claims"] if claim["etat"] == "contredit"]
+                [claim for claim in claims if claim["etat"] == "contredit"]
             ),
             "claims_confirme": len(
-                [claim for claim in inventory["report_reconciliation"]["claims"] if claim["etat"] == "confirme"]
+                [claim for claim in claims if claim["etat"] == "confirme"]
             ),
         },
         "anomalies": {
@@ -2889,13 +2999,29 @@ def _render_inventory_artifacts(
         },
     }
     matrix_payload = {
-        **shared_payload,
+        **_artifact_envelope(inventory, "matrice_livrables", model_digest),
         "manuals": inventory["deliverable_matrix"]["manuals"],
     }
+    return {
+        "ECARTS_ET_CONTRADICTIONS.yaml": _canonicalize(ecarts_payload),
+        "INVENTAIRE_COLLECTION.json": _canonicalize(json_payload),
+        "MATRICE_LIVRABLES.yaml": _canonicalize(matrix_payload),
+    }
+
+
+def _render_inventory_artifacts(
+    inventory: Mapping[str, Any],
+    *,
+    repo_root: Path,
+    audit_root: Path,
+    include_generated_marker: bool = True,
+) -> dict[Path, str]:
+    marker = AUTOGEN_MARKER if include_generated_marker else ""
+    machine_payloads = _machine_artifact_payloads(inventory)
 
     payloads: dict[Path, str] = {
         audit_root / "INVENTAIRE_COLLECTION.json": json.dumps(
-            json_payload,
+            machine_payloads["INVENTAIRE_COLLECTION.json"],
             ensure_ascii=False,
             indent=2,
             sort_keys=True,
@@ -2907,13 +3033,13 @@ def _render_inventory_artifacts(
             inventory, marker=marker, root=repo_root
         ),
         audit_root / "ECARTS_ET_CONTRADICTIONS.yaml": yaml.safe_dump(
-            ecarts_payload,
+            machine_payloads["ECARTS_ET_CONTRADICTIONS.yaml"],
             allow_unicode=True,
             sort_keys=True,
             width=120,
         ),
         audit_root / "MATRICE_LIVRABLES.yaml": yaml.safe_dump(
-            matrix_payload,
+            machine_payloads["MATRICE_LIVRABLES.yaml"],
             allow_unicode=True,
             sort_keys=True,
             width=120,
@@ -2925,18 +3051,15 @@ def _render_inventory_artifacts(
             parsed = _validate_output_payload(
                 payload_path, content, required_fields=REQUIRED_JSON_FIELDS
             )
-            issues = _schema_validate_json(parsed, repo_root)
-            if issues:
-                raise InventoryError(
-                    f"schéma JSON invalide pour {payload_path}: {', '.join(issues)}"
-                )
+            _validate_artifact_schema(parsed, root=repo_root, path=payload_path)
         elif suffix in {".yaml", ".yml"}:
             if include_generated_marker:
                 content = f"{marker}\n{content}"
                 payloads[payload_path] = content
-            _validate_output_payload(
+            parsed = _validate_output_payload(
                 payload_path, content, required_fields=REQUIRED_YAML_FIELDS
             )
+            _validate_artifact_schema(parsed, root=repo_root, path=payload_path)
         else:
             _validate_output_payload(payload_path, content)
 
@@ -3390,25 +3513,9 @@ def _to_text(value: Any) -> str:
 
 
 def _render_ecarts_yaml(inventory: Mapping[str, Any], marker: bool = True) -> str:
-    claims = inventory["report_reconciliation"]["claims"]
-    payload = {
-        "generated_by": "inventory_collection.py",
-        "source_digest": inventory["source_digest"],
-        "anomalies": {
-            category: sorted((item for item in values), key=_anomaly_sort_key)
-            for category, values in sorted(inventory["anomalies"].items())
-        },
-        "claims": {
-            "contredits": [claim for claim in claims if claim["etat"] == "contredit"],
-            "ouvertes": [claim for claim in claims if claim["etat"] == "ouvert"],
-            "confirmes": [claim for claim in claims if claim["etat"] == "confirme"],
-        },
-        "counts": {
-            "claims_ouverts": len([c for c in claims if c["etat"] == "ouvert"]),
-            "claims_contredits": len([c for c in claims if c["etat"] == "contredit"]),
-            "claims_confirme": len([c for c in claims if c["etat"] == "confirme"]),
-        },
-    }
+    payload = _machine_artifact_payloads(inventory)[
+        "ECARTS_ET_CONTRADICTIONS.yaml"
+    ]
     serialized = yaml.safe_dump(
         _canonicalize(payload),
         allow_unicode=True,
@@ -3421,12 +3528,7 @@ def _render_ecarts_yaml(inventory: Mapping[str, Any], marker: bool = True) -> st
 
 
 def _render_matrice_livrables(inventory: Mapping[str, Any]) -> str:
-    matrix = inventory["deliverable_matrix"]["manuals"]
-    payload = {
-        "generated_by": "inventory_collection.py",
-        "source_digest": inventory["source_digest"],
-        "manuals": matrix,
-    }
+    payload = _machine_artifact_payloads(inventory)["MATRICE_LIVRABLES.yaml"]
     return yaml.safe_dump(
         _canonicalize(payload),
         allow_unicode=True,

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:matrice-livrables",
+  "title": "Nexus deliverables matrix artifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "generated_by",
+    "manuals",
+    "model_digest",
+    "provenance",
+    "schema_ref",
+    "schema_version",
+    "source_digest"
+  ],
+  "properties": {
+    "artifact_type": { "const": "matrice_livrables" },
+    "generated_by": { "const": "inventory_collection.py" },
+    "manuals": { "type": "object" },
+    "model_digest": { "$ref": "#/$defs/sha256" },
+    "provenance": { "type": "object" },
+    "schema_ref": { "const": "audit/schemas/v1/matrice-livrables.schema.json" },
+    "schema_version": { "const": 1 },
+    "source_digest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

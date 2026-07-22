@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:ecarts-et-contradictions",
+  "title": "Nexus discrepancies and contradictions artifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "anomalies",
+    "artifact_type",
+    "claims",
+    "counts",
+    "generated_by",
+    "model_digest",
+    "provenance",
+    "schema_ref",
+    "schema_version",
+    "source_digest"
+  ],
+  "properties": {
+    "anomalies": { "type": "object", "additionalProperties": { "type": "array" } },
+    "artifact_type": { "const": "ecarts_et_contradictions" },
+    "claims": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["confirmes", "contredits", "ouvertes"],
+      "properties": {
+        "confirmes": { "type": "array" },
+        "contredits": { "type": "array" },
+        "ouvertes": { "type": "array" }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claims_confirme", "claims_contredits", "claims_ouverts"],
+      "properties": {
+        "claims_confirme": { "type": "integer", "minimum": 0 },
+        "claims_contredits": { "type": "integer", "minimum": 0 },
+        "claims_ouverts": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "generated_by": { "const": "inventory_collection.py" },
+    "model_digest": { "$ref": "#/$defs/sha256" },
+    "provenance": { "type": "object" },
+    "schema_ref": { "const": "audit/schemas/v1/ecarts-et-contradictions.schema.json" },
+    "schema_version": { "const": 1 },
+    "source_digest": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}
