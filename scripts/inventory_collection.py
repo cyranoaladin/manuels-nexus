@@ -282,9 +282,10 @@ def _collect_role_patterns(root: Path) -> tuple[dict[str, list[str]], str, list[
             if role in role_patterns
         ]
 
-    if not role_patterns.get("production_object"):
-        return _default_role_patterns()
-    if not any(role_patterns.get(role) for role in role_order):
+    if (
+        not role_patterns.get("production_object")
+        or "production_object" not in role_order
+    ):
         return _default_role_patterns()
 
     return role_patterns, default_role, role_order

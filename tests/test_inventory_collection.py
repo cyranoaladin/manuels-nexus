@@ -108,6 +108,17 @@ def test_git_tracked_files_excludes_untracked_sources(
             "roles:\n  fixture:\n    - '**/fixtures/**'\n",
             id="roles-without-production",
         ),
+        pytest.param(
+            "roles:\n"
+            "  production_object:\n"
+            "    - 'Mathematiques/manuel-maths/chapitres/**'\n"
+            "    - 'NSI/chapitres/**'\n"
+            "  fixture:\n"
+            "    - '**/fixtures/**'\n"
+            "role_order:\n"
+            "  - fixture\n",
+            id="production-omitted-from-role-order",
+        ),
     ],
 )
 def test_source_roles_fall_back_when_configuration_is_absent(
