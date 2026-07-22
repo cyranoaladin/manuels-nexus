@@ -93,10 +93,27 @@ def test_git_tracked_files_excludes_untracked_sources(
     assert inventory_module.git_tracked_files(tmp_path) == (tracked,)
 
 
+@pytest.mark.parametrize(
+    "source_roles_payload",
+    [
+        pytest.param(None, id="absent"),
+        pytest.param("", id="empty-file"),
+        pytest.param("null\n", id="yaml-null"),
+        pytest.param("roles: {}\n", id="empty-roles-mapping"),
+        pytest.param(
+            "roles:\n  production_object: []\n",
+            id="role-without-usable-pattern",
+        ),
+    ],
+)
 def test_source_roles_fall_back_when_configuration_is_absent(
-    tmp_path: Path, inventory_module
+    tmp_path: Path,
+    inventory_module,
+    source_roles_payload: str | None,
 ) -> None:
     _init_repository(tmp_path)
+    if source_roles_payload is not None:
+        _write(tmp_path / "audit/SOURCE_ROLES.yaml", source_roles_payload)
     base = _chapter_path("1SPE", "1SPE-TEST")
     sources = {
         f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
@@ -106,8 +123,10 @@ def test_source_roles_fall_back_when_configuration_is_absent(
         _write(tmp_path / path, content)
     _track(tmp_path, *sources)
 
-    inventory = inventory_module.build_inventory(tmp_path)
+    fallback = inventory_module._default_role_patterns()
+    assert inventory_module._collect_role_patterns(tmp_path) == fallback
 
+    inventory = inventory_module.build_inventory(tmp_path)
     assert list(inventory["manuals"]["1SPE"]["chapters"]) == ["1SPE-TEST"]
 
 
@@ -395,9 +414,11 @@ def test_build_inventory_keeps_raw_anomalies_unqualified(
     base = _chapter_path("1SPE", "1SPE-TEST")
     contract = f"{base}/contrat.yaml"
     missing_meta = f"{base}/cours/no-meta.tex"
+    dispositions = "audit/ANOMALY_DISPOSITIONS.yaml"
     _write(tmp_path / contract, _contract("1SPE-TEST", "1SPE", capacities=1))
     _write(tmp_path / missing_meta, "Contenu sans en-tete META\n")
-    _track(tmp_path, contract, missing_meta)
+    _write(tmp_path / dispositions, "{}\n")
+    _track(tmp_path, contract, missing_meta, dispositions)
 
     inventory = inventory_module.build_inventory(tmp_path)
     anomaly = inventory["anomalies"]["metadata_missing"][0]

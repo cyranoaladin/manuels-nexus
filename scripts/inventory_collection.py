@@ -1358,8 +1358,6 @@ def build_inventory(repository: Path | str) -> dict[str, Any]:
     tracked_set = frozenset(tracked)
     role_patterns, default_role, role_order = _collect_role_patterns(root)
     source_roles = _load_source_roles(root, tracked)
-    dispositions = _load_dispositions(root)
-    enable_dispositions = (root / ANOMALY_DISPOSITIONS_FILE).is_file()
 
     def _is_production(path: str) -> bool:
         return _classify_is_production(
@@ -1743,8 +1741,6 @@ def build_inventory(repository: Path | str) -> dict[str, Any]:
         key=lambda item: (item["exercise_path"], item["correction_path"])
     )
     inventory["assemblies"].sort(key=lambda item: item["assembly_id"])
-    if enable_dispositions:
-        _attach_dispositions(inventory, dispositions)
     return inventory
 
 
