@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-DERIVATION-CONVEXITE-FR-R3", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "remediation", "capacites_codes": ["R3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMISE A NIVEAU -- R3 : Fonction exponentielle : proprietes et derivee
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Fonction exponentielle : proprietes et derivee}
+
+\textbf{Proprietes :} $\mathrm{e}^{a+b} = \mathrm{e}^a \mathrm{e}^b$, $\mathrm{e}^0 = 1$, $\mathrm{e}^x > 0$.
+
+\textbf{Derivee :} $(\mathrm{e}^x)' = \mathrm{e}^x$. \textbf{Limite :} $\lim_{x \to +\infty} \mathrm{e}^x = +\infty$, $\lim_{x \to -\infty} \mathrm{e}^x = 0$.
+
+\begin{exercice}{TSPE-DERCONV-FR-R3-EX1}{1}{8}
+\begin{enumerate}
+  \item Simplifier $\mathrm{e}^{\ln 3}$ et $\mathrm{e}^{2x + 1} \cdot \mathrm{e}^{-x}$.
+  \item Resoudre $\mathrm{e}^{2x} = \mathrm{e}^{x+2}$.
+  \item Determiner $\lim_{x \to +\infty} \dfrac{\mathrm{e}^x}{x^2}$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% assert exp(log(3)) == 3
+% assert simplify(exp(2*x + 1) * exp(-x) - exp(x + 1)) == 0
+% assert solve(exp(2*x) - exp(x + 2), x) == [2]
+% assert limit(exp(x)/x**2, x, oo) == oo
+% END-VERIFY

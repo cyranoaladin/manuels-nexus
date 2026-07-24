@@ -1,0 +1,38 @@
+% META: {"id": "TSPE-DERIVATION-CONVEXITE-RE-C5", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "remediation", "capacites_codes": ["C5","C6"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION -- C5,C6 : Erreurs de lecture graphique et position courbe/tangente
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Erreurs de lecture graphique et position courbe/tangente}
+
+\textbf{Erreur 1 :} Inverser la position courbe/tangente selon la convexite.
+
+\textbf{Erreur 2 :} Croire que toute tangente est traversée (seuls les points d'inflexion traversent la tangente).
+
+\textbf{Erreur 3 :} Confondre l'inegalite de convexite avec l'inegalite des accroissements.
+
+\begin{exercice}{TSPE-DERCONV-RE-C5-EX1}{1}{12}
+Soit $f(x) = \ln x$ sur $]0, +\infty[$.
+\begin{enumerate}
+  \item Determiner la tangente en $x = 1$.
+  \item La courbe est-elle au-dessus ou au-dessous de cette tangente ?
+  \item En quel point la courbe traverse-t-elle sa tangente ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x', positive=True)
+% f = ln(x)
+% fp = diff(f, x)
+% assert fp.subs(x, 1) == 1
+% assert f.subs(x, 1) == 0
+% # tangente: y = x - 1
+% g = f - (x - 1)
+% gpp = diff(g, x, 2)
+% assert gpp == -1/x**2  # < 0, concave => courbe sous la tangente
+% assert g.subs(x, 2) == ln(2) - 1
+% # f'' = -1/x^2 never zero, no inflexion point
+% assert solve(diff(f, x, 2), x) == []
+% END-VERIFY
