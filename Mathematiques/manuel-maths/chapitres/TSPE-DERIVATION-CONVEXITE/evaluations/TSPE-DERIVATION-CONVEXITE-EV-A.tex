@@ -1,0 +1,85 @@
+% META: {"id": "TSPE-DERIVATION-CONVEXITE-EV-A", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "competences": ["chercher","modeliser","representer","calculer","raisonner","communiquer"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+%
+% # ---- Exercice 1 (5 pts) : Derivee de composee (C1) ----
+% f1 = exp(2*x**2 + 1)
+% assert diff(f1, x) == 4*x*exp(2*x**2 + 1)
+% f2 = ln(x**2 + 3)
+% assert simplify(diff(f2, x)) == 2*x/(x**2 + 3)
+%
+% # ---- Exercice 2 (5 pts) : Etude complete (C2) ----
+% g = x**2 * exp(-x)
+% gp = diff(g, x)
+% assert simplify(gp) == (2 - x)*x*exp(-x)
+% assert solve(gp, x) == [0, 2]
+% assert g.subs(x, 2) == 4*exp(-2)
+% assert limit(g, x, oo) == 0
+% assert limit(g, x, -oo) == oo
+%
+% # ---- Exercice 3 (5 pts) : Convexite et inegalites (C3, C6) ----
+% h = exp(x) - 1 - x
+% assert diff(h, x, 2) == exp(x)  # > 0, convexe
+% assert h.subs(x, 0) == 0
+% assert diff(h, x).subs(x, 0) == 0
+% # h convexe + min en 0 => h >= 0 => e^x >= 1+x
+%
+% # ---- Exercice 4 (5 pts) : Esquisse et inflexion (C4, C5) ----
+% k = x**3 - 6*x**2 + 9*x + 1
+% kp = diff(k, x)
+% kpp = diff(k, x, 2)
+% assert expand(kp) == 3*x**2 - 12*x + 9
+% assert expand(kpp) == 6*x - 12
+% assert solve(kpp, x) == [2]
+% assert k.subs(x, 2) == 3
+% assert kp.subs(x, 2) == -3
+% # tangente en 2: y = -3x + 9, k traverse sa tangente (inflexion)
+% END-VERIFY
+
+\textbf{Evaluation A -- TSPE-DERIVATION-CONVEXITE}
+
+\begin{center}
+\textit{Duree : 55 min -- Bareme : 20 points}
+\end{center}
+
+\textbf{Exercice 1.} \textit{(5 points)} -- \textbf{Derivee de fonctions composeees (C1)}
+
+Calculer les derivees des fonctions suivantes en precisant le domaine de derivation :
+\begin{enumerate}
+  \item $f_1(x) = \mathrm{e}^{2x^2 + 1}$ sur $\mathbb{R}$.
+  \item $f_2(x) = \ln(x^2 + 3)$ sur $\mathbb{R}$.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 2.} \textit{(5 points)} -- \textbf{Etude complete (C2)}
+
+Soit $g(x) = x^2\,\mathrm{e}^{-x}$ definie sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Calculer $g'(x)$ et etudier son signe.
+  \item Determiner les limites de $g$ en $+\infty$ et $-\infty$.
+  \item Dresser le tableau de variations et preciser l'extremum.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 3.} \textit{(5 points)} -- \textbf{Convexite et inegalites (C3, C6)}
+
+\begin{enumerate}
+  \item Soit $h(x) = \mathrm{e}^x - 1 - x$. Calculer $h''(x)$ et en deduire la convexite de $h$.
+  \item Determiner le minimum de $h$ et en deduire l'inegalite $\mathrm{e}^x \geq 1 + x$.
+  \item En utilisant la convexite de $\mathrm{e}^x$, determiner la position de la courbe par rapport a sa tangente en $0$.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 4.} \textit{(5 points)} -- \textbf{Esquisse et points d'inflexion (C4, C5)}
+
+Soit $k(x) = x^3 - 6x^2 + 9x + 1$.
+\begin{enumerate}
+  \item Calculer $k'(x)$ et $k''(x)$.
+  \item Determiner les intervalles de convexite et le point d'inflexion.
+  \item Determiner l'equation de la tangente au point d'abscisse $2$ et preciser si la courbe la traverse.
+\end{enumerate}
+

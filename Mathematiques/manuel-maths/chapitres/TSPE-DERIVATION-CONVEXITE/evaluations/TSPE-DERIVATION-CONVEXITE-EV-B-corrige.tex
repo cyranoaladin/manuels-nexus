@@ -1,0 +1,79 @@
+% META: {"id": "TSPE-DERIVATION-CONVEXITE-EV-B-corrige", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-DERIVATION-CONVEXITE-EV-B", "version": "B", "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+%
+% # ---- Exercice 1 (5 pts) : Derivee de composee (C1) ----
+% f1 = exp(3*x**2 + 2)
+% assert diff(f1, x) == 6*x*exp(3*x**2 + 2)
+% f2 = ln(x**2 + 5)
+% assert simplify(diff(f2, x)) == 2*x/(x**2 + 5)
+%
+% # ---- Exercice 2 (5 pts) : Etude complete (C2) ----
+% g = x**3 * exp(-x)
+% gp = diff(g, x)
+% assert simplify(gp) == x**2*(3 - x)*exp(-x)
+% assert solve(gp, x) == [0, 3]
+% assert g.subs(x, 3) == 27*exp(-3)
+% assert limit(g, x, oo) == 0
+% assert limit(g, x, -oo) == -oo
+%
+% # ---- Exercice 3 (5 pts) : Convexite et inegalites (C3, C6) ----
+% h = exp(x) - 2*x - 1
+% assert diff(h, x, 2) == exp(x)  # > 0, convexe
+% assert h.subs(x, 0) == 0
+% assert diff(h, x).subs(x, 0) == -1  # h'(0) = e^0 - 2 = -1, min en x=ln2
+% # min en x = ln(2): h(ln2) = 2 - 2ln2 - 1 = 1 - 2ln2
+% assert simplify(h.subs(x, log(2)) - (1 - 2*log(2))) == 0
+%
+% # ---- Exercice 4 (5 pts) : Esquisse et inflexion (C4, C5) ----
+% k = x**3 - 9*x**2 + 24*x + 2
+% kp = diff(k, x)
+% kpp = diff(k, x, 2)
+% assert expand(kp) == 3*x**2 - 18*x + 24
+% assert expand(kpp) == 6*x - 18
+% assert solve(kpp, x) == [3]
+% assert k.subs(x, 3) == 20
+% 
+% assert kp.subs(x, 3) == -3
+% # tangente en 3: y = 20 + (-3)(x-3) = -3x + 29
+% END-VERIFY
+
+\textbf{Corrige de l'evaluation B -- TSPE-DERIVATION-CONVEXITE-EV-B}
+
+\textbf{Exercice 1.}
+
+\textbf{1.} $u(x) = 3x^2 + 2$, $u'(x) = 6x$. $f_1'(x) = 6x\,\mathrm{e}^{3x^2+2}$.
+
+\textbf{2.} $u(x) = x^2 + 5 > 0$. $f_2'(x) = \dfrac{2x}{x^2 + 5}$.
+
+\bigskip
+
+\textbf{Exercice 2.}
+
+\textbf{1.} $g'(x) = 3x^2\,\mathrm{e}^{-x} - x^3\,\mathrm{e}^{-x} = x^2(3-x)\,\mathrm{e}^{-x}$. Signe de $x^2(3-x)$ : $g' > 0$ sur $]-\infty, 3[$ (sauf en 0), $g' < 0$ sur $]3, +\infty[$.
+
+\textbf{2.} $\lim_{+\infty} x^3\,\mathrm{e}^{-x} = 0$ (croissances comparees), $\lim_{-\infty} x^3\,\mathrm{e}^{-x} = -\infty$.
+
+\textbf{3.} Maximum local en $x = 3$ : $g(3) = 27\mathrm{e}^{-3}$.
+
+\bigskip
+
+\textbf{Exercice 3.}
+
+\textbf{1.} $h'(x) = \mathrm{e}^x - 2$, $h''(x) = \mathrm{e}^x > 0$ : $h$ est convexe.
+
+\textbf{2.} $h'(x) = 0 \iff x = \ln 2$. $h(\ln 2) = 2 - 2\ln 2 - 1 = 1 - 2\ln 2 \approx -0{,}39$.
+
+\textbf{3.} La tangente en $\ln 2$ est $y = 2 + 2(x - \ln 2)$. Par convexite, la courbe est au-dessus de cette tangente.
+
+\bigskip
+
+\textbf{Exercice 4.}
+
+\textbf{1.} $k'(x) = 3x^2 - 18x + 24 = 3(x-2)(x-4)$. $k''(x) = 6x - 18$.
+
+\textbf{2.} $k'' > 0$ sur $]3, +\infty[$ (convexe), $k'' < 0$ sur $]-\infty, 3[$ (concave). Point d'inflexion en $x = 3$, $k(3) = 20$.
+
+\textbf{3.} $k(3) = 20$ et $k'(3) = 3(1)(-1) = -3$. Tangente : $y = -3x + 29$. La courbe traverse sa tangente en $x = 3$ (inflexion).
+
