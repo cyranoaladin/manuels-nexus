@@ -1,0 +1,30 @@
+% META: {"id": "TSPE-DERCONV-CO-018", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-018", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # boite de base carree 20x20, hauteur x, volume V = x(20-2x)^2 sur [0,10]
+% V = x*(20 - 2*x)**2
+% Vp = diff(V, x)
+% crit = solve(Vp, x)
+% assert Rational(10,3) in crit
+% Vmax = V.subs(x, Rational(10,3))
+% assert Vmax == Rational(16000, 27)
+% assert V.subs(x, 0) == 0
+% assert V.subs(x, 10) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-018}
+
+\textbf{Question 1.} La base de la boite est un carre de cote $(20 - 2x)$ et la hauteur est $x$.
+
+\commentaireMarge{Base $(20-2x)^2$, hauteur $x$, donc $V = x(20-2x)^2$.}
+
+\[ V(x) = x(20 - 2x)^2 \quad \text{pour } x \in [0, 10]. \]
+
+\textbf{Question 2.} $V'(x) = (20-2x)^2 + x \times 2(20-2x)(-2) = (20-2x)\bigl[(20-2x) - 4x\bigr] = (20-2x)(20-6x)$.
+
+$V'(x) = 0 \iff x = 10$ ou $x = \dfrac{10}{3}$ (dans $[0,10]$).
+
+Le maximum est atteint en $x = \dfrac{10}{3}$ cm et vaut :
+\[ V\!\left(\dfrac{10}{3}\right) = \dfrac{10}{3} \times \left(\dfrac{40}{3}\right)^2 = \dfrac{16000}{27} \approx 593 \text{ cm}^3. \]
+
+\end{corrige}

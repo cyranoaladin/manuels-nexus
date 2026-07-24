@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-DERCONV-EX-002", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "exercice", "capacites": ["TSPE-DERCONV-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/exercices/TSPE-DERCONV-EX-002.tex", "corrige_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% u = x**2 + 3*x + 2
+% du = diff(u, x)
+% f = ln(u)
+% fp = diff(f, x)
+% assert simplify(fp) == (2*x + 3)/(x**2 + 3*x + 2)
+% # domaine: u > 0, i.e. x < -2 ou x > -1
+% assert u.subs(x, 0) == 2
+% assert u.subs(x, -3) == 2
+% END-VERIFY
+\begin{exercice}{TSPE-DERCONV-EX-002}{1}{10}
+Soit $f$ la fonction definie par $f(x) = \ln(x^2 + 3x + 2)$.
+\begin{enumerate}
+  \item Determiner l'ensemble de definition de $f$.
+  \item Calculer $f'(x)$.
+\end{enumerate}
+
+\end{exercice}

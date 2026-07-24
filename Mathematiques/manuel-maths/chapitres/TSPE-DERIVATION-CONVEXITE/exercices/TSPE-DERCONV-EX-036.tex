@@ -1,0 +1,24 @@
+% META: {"id": "TSPE-DERCONV-EX-036", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "exercice", "capacites": ["TSPE-DERCONV-C5"], "capacites_codes": ["C5"], "methodes": ["M4"], "parcours": 1, "competences": ["communiquer","raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/exercices/TSPE-DERCONV-EX-036.tex", "corrige_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-036.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)
+% fp = diff(f, x)
+% assert fp.subs(x, 0) == 1
+% # tangente en 0: y = x + 1
+% # f(x) - (x+1) = e^x - x - 1 >= 0 (convexite)
+% g = exp(x) - x - 1
+% assert g.subs(x, 0) == 0
+% assert diff(g, x).subs(x, 0) == 0
+% assert diff(g, x, 2) == exp(x)  # > 0, convexe
+% assert g.subs(x, 1) == exp(1) - 2 > 0
+% assert g.subs(x, -1) == exp(-1) > 0
+% END-VERIFY
+\begin{exercice}{TSPE-DERCONV-EX-036}{1}{10}
+Soit $f(x) = \mathrm{e}^x$.
+\begin{enumerate}
+  \item Determiner l'equation de la tangente a la courbe en $x = 0$.
+  \item La courbe est-elle au-dessus ou au-dessous de cette tangente ?
+\end{enumerate}
+
+\end{exercice}

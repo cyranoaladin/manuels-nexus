@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-DERCONV-CO-043", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-043", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2
+% fp = diff(f, x)
+% assert fp.subs(x, 1) == 2
+% # tangente en 1: y = 2(x-1)+1 = 2x-1
+% # f(x) - (2x-1) = x^2 - 2x + 1 = (x-1)^2 >= 0
+% g = f - (2*x - 1)
+% assert expand(g - (x-1)**2) == 0
+% assert g.subs(x, 1) == 0
+% assert g.subs(x, 0) == 1
+% assert g.subs(x, 2) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-043}
+
+\textbf{Question 1.} $f(1) = 1$ et $f'(1) = 2$. La tangente est $y = 2x - 1$.
+
+\commentaireMarge{$g=(x-1)^2 \geq 0$ : la courbe est au-dessus de la tangente.}
+
+\textbf{Question 2.} $g(x) = x^2 - (2x-1) = (x-1)^2 \geq 0$ pour tout $x$.
+
+La courbe est donc \textbf{au-dessus} de la tangente, avec contact en $x = 1$.
+
+\end{corrige}

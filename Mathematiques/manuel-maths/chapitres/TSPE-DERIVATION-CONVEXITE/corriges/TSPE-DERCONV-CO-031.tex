@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-DERCONV-CO-031", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-031", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f''(x) = 6(x-1)(x-3)
+% fpp = 6*(x-1)*(x-3)
+% # f' = x^3 - 6x^2 + 9x + C, f = x^4/4 - 2x^3 + 9x^2/2 + Cx + D
+% fp = integrate(fpp, x)
+% assert simplify(fp - (2*x**3 - 12*x**2 + 18*x)) == 0
+% f = integrate(fp, x)
+% assert simplify(f - (x**4/2 - 4*x**3 + 9*x**2)) == 0
+% assert solve(fpp, x) == [1, 3]
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-031}
+
+\textbf{Question 1.} En integrant deux fois avec $f(0)=0$ et $f'(0)=0$ :
+\[ f'(x) = \int_0^x 6(t-1)(t-3)\,dt = 2x^3 - 12x^2 + 18x, \]
+\[ f(x) = \int_0^x (2t^3 - 12t^2 + 18t)\,dt = \frac{x^4}{2} - 4x^3 + 9x^2. \]
+
+\commentaireMarge{Integrer $f''$ deux fois avec $f(0)=f'(0)=0$.}
+
+\textbf{Question 2.} $f'' > 0$ sur $\left]-\infty, 1\right[ \cup \left]3, +\infty\right[$ (convexe) et $f'' < 0$ sur $\left]1, 3\right[$ (concave).
+
+Points d'inflexion en $x = 1$ et $x = 3$.
+
+\end{corrige}

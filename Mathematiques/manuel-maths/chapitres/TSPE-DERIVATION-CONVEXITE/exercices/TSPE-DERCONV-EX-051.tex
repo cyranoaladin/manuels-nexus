@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-DERCONV-EX-051", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "exercice", "capacites": ["TSPE-DERCONV-C1"], "capacites_codes": ["C1"], "methodes": ["M1","M5"], "parcours": 3, "competences": ["modeliser","raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/exercices/TSPE-DERCONV-EX-051.tex", "corrige_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-051.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = (3x^2+1)^2 * ln(x) sur ]0,+inf[
+% f = (3*x**2 + 1)**2 * ln(x)
+% fp = diff(f, x)
+% # f' = 2*(3x^2+1)*6x*ln(x) + (3x^2+1)^2/x
+% # = 12x*(3x^2+1)*ln(x) + (3x^2+1)^2/x
+% assert fp.subs(x, 1) == 12*4*0 + 16/1
+% assert fp.subs(x, 1) == 16
+% assert simplify(fp - (12*x*(3*x**2+1)*ln(x) + (3*x**2+1)**2/x)) == 0
+% # f(1) = 16*0 = 0
+% assert f.subs(x, 1) == 0
+% assert limit(f, x, oo) == oo
+% END-VERIFY
+\begin{exercice}{TSPE-DERCONV-EX-051}{3}{25}
+Soit $f(x) = (3x^2 + 1)^2 \, \ln x$ definie sur $\left]0, +\infty\right[$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ en appliquant la regle de la derivation des fonctions composees et du produit.
+  \item Etudier le signe de $f'(x)$ au voisinage de $x = 1$ et interpreter.
+  \item Determiner $\lim_{x \to +\infty} f(x)$.
+\end{enumerate}
+
+\end{exercice}

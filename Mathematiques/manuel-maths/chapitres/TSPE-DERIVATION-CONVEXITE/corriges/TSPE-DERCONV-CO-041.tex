@@ -1,0 +1,32 @@
+% META: {"id": "TSPE-DERCONV-CO-041", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-041", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 6*x**2 + 9*x + 1
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert expand(fp) == 3*x**2 - 12*x + 9
+% assert expand(fpp) == 6*x - 12
+% assert solve(fp, x) == [1, 3]
+% assert solve(fpp, x) == [2]
+% assert f.subs(x, 1) == 5
+% assert f.subs(x, 2) == 3
+% assert f.subs(x, 3) == 1
+% assert fpp.subs(x, 0) == -12  # concave
+% assert fpp.subs(x, 4) == 12   # convexe
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-041}
+
+$f'(x) = 3x^2 - 12x + 9 = 3(x-1)(x-3)$. $f''(x) = 6x - 12 = 6(x-2)$.
+
+\commentaireMarge{Etude complete : $f'$, $f''$, variations, convexite, inflexion.}
+
+\textbf{Variations} : max local $f(1)=5$, min local $f(3)=1$.
+
+\textbf{Convexite} : $f''<0$ sur $\left]-\infty,2\right[$ (concave), $f''>0$ sur $\left]2,+\infty\right[$ (convexe).
+
+\textbf{Point d'inflexion} : $x=2$, $f(2)=3$. La tangente en $2$ a pour pente $f'(2) = 3(1)(-1) = -3$, soit $y = -3x+9$.
+
+La courbe est concave puis convexe, traverse sa tangente en $(2,3)$.
+
+\end{corrige}

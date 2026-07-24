@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-DERCONV-CO-014", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-014", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**2 * exp(-x)
+% fp = diff(f, x)
+% assert simplify(fp) == (2 - x)*x*exp(-x)
+% assert solve(fp, x) == [0, 2]
+% assert f.subs(x, 2) == 4*exp(-2)
+% assert limit(f, x, oo) == 0
+% assert limit(f, x, -oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-014}
+
+\textbf{Question 1.} $f'(x) = 2x\,\mathrm{e}^{-x} - x^2\,\mathrm{e}^{-x} = x(2-x)\,\mathrm{e}^{-x}$.
+
+\commentaireMarge{Factoriser $f'(x)$ par $x\,\mathrm{e}^{-x}$.}
+
+Comme $\mathrm{e}^{-x} > 0$, le signe de $f'$ est celui de $x(2-x)$ :
+$f' > 0$ sur $[0,2]$, $f' < 0$ sur $\left]-\infty,0\right[ \cup \left]2,+\infty\right[$.
+
+\textbf{Question 2.} $\lim_{x \to +\infty} x^2\,\mathrm{e}^{-x} = 0$ (croissances compareees) et $\lim_{x \to -\infty} x^2\,\mathrm{e}^{-x} = +\infty$.
+
+\textbf{Question 3.} $f$ admet un minimum local $f(0) = 0$ et un maximum local $f(2) = 4\mathrm{e}^{-2}$.
+
+\end{corrige}

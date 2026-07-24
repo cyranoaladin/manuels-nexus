@@ -1,0 +1,24 @@
+% META: {"id": "TSPE-DERCONV-EX-039", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "exercice", "capacites": ["TSPE-DERCONV-C5"], "capacites_codes": ["C5"], "methodes": ["M4"], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/exercices/TSPE-DERCONV-EX-039.tex", "corrige_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = ln(x)
+% fp = diff(f, x)
+% # tangente en x=1: f(1)=0, f'(1)=1, y=x-1
+% # ln(x) - (x-1) = ln(x) - x + 1 <= 0 (concavite)
+% g = ln(x) - x + 1
+% g2 = diff(g, x, 2)
+% assert g2 == -1/x**2  # < 0, concave
+% assert g.subs(x, 1) == 0
+% assert g.subs(x, 2) == ln(2) - 1 < 0
+% assert simplify(g.subs(x, Rational(1,2)) - (-ln(2) + Rational(1,2))) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-DERCONV-EX-039}{2}{15}
+Soit $f(x) = \ln x$ sur $\left]0, +\infty\right[$.
+\begin{enumerate}
+  \item Determiner la tangente a la courbe au point d'abscisse $1$.
+  \item Montrer que la courbe est au-dessous de cette tangente.
+  \item En deduire une inegalite connue.
+\end{enumerate}
+
+\end{exercice}

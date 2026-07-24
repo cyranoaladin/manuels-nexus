@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-DERCONV-EX-027", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "exercice", "capacites": ["TSPE-DERCONV-C4"], "capacites_codes": ["C4"], "methodes": ["M4"], "parcours": 1, "competences": ["communiquer","calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/exercices/TSPE-DERCONV-EX-027.tex", "corrige_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-027.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x)=x^4-2x^2, f'=4x^3-4x, f''=12x^2-4
+% f = x**4 - 2*x**2
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert expand(fp) == 4*x**3 - 4*x
+% assert expand(fpp) == 12*x**2 - 4
+% assert solve(fpp, x) == [-sqrt(3)/3, sqrt(3)/3]
+% assert f.subs(x, 0) == 0
+% assert f.subs(x, sqrt(3)/3) == Rational(-5, 9)
+% END-VERIFY
+\begin{exercice}{TSPE-DERCONV-EX-027}{1}{10}
+Soit $f(x) = x^4 - 2x^2$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et $f''(x)$.
+  \item Determiner les points d'inflexion de la courbe.
+  \item Esquisser l'allure de la courbe.
+\end{enumerate}
+
+\end{exercice}

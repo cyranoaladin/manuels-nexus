@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-DERCONV-EX-019", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "exercice", "capacites": ["TSPE-DERCONV-C2"], "capacites_codes": ["C2"], "methodes": ["M2","M5"], "parcours": 3, "competences": ["modeliser","raisonner"], "duree_min": 25, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/exercices/TSPE-DERCONV-EX-019.tex", "corrige_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-019.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% C = x**3/3 - 5*x**2 + 30*x
+% Cp = diff(C, x)
+% assert expand(Cp) == x**2 - 10*x + 30
+% # discriminant: 100 - 120 = -20 < 0, pas de racine reelle
+% disc = 100 - 120
+% assert disc < 0
+% assert Cp.subs(x, 0) == 30
+% assert Cp.subs(x, 5) == 5
+% assert C.subs(x, 0) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-DERCONV-EX-019}{3}{25}
+Le cout de production de $x$ unites est modelise par $C(x) = \dfrac{x^3}{3} - 5x^2 + 30x$.
+\begin{enumerate}
+  \item Calculer le cout marginal $C'(x)$. Son signe permet-il d'identifier un cout minimum ?
+  \item Calculer le cout moyen $\dfrac{C(x)}{x}$ et determiner s'il admet un minimum.
+  \item Comparer les deux resultats.
+\end{enumerate}
+
+\end{exercice}

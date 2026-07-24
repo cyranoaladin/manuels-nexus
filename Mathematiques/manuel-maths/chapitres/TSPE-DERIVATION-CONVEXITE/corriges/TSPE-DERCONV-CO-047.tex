@@ -1,0 +1,32 @@
+% META: {"id": "TSPE-DERCONV-CO-047", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-047", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = ln(x), concave => f(x) <= f(a) + f'(a)(x-a) pour tout a
+% # en a=1: f(1)=0, f'(1)=1, tangente y=x-1 => ln(x) <= x-1
+% # application: ln(1.1) <= 0.1
+% import math
+% assert math.log(1.1) < 0.1
+% assert math.log(1.1) > 0.05  # approximation x/2
+% # f(x) = -x^2 convexe? Non, concave. f''=-2 < 0
+% # En a=0: tangente y=0, -x^2 <= 0 toujours vrai
+% g = -x**2 - 0  # f - tangente
+% assert expand(g) == -x**2
+% assert g.subs(x, 0) == 0
+% assert g.subs(x, 1) == -1
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-047}
+
+\textbf{Majoration.} $\ln$ est concave, donc la courbe est \textbf{sous} sa tangente en $1$ : $\ln x \leq x - 1$.
+
+\commentaireMarge{$\ln$ concave : la courbe est sous la tangente en $1$ ($y=x-1$).}
+
+Pour $x = 1{,}1$ : $\ln(1{,}1) \leq 0{,}1$.
+
+\textbf{Minoration.} La tangente en $\mathrm{e}$ a pour equation $y = \dfrac{x}{\mathrm{e}}$ (car $f(\mathrm{e})=1$, $f'(\mathrm{e})=\mathrm{e}^{-1}$), et $\ln x \leq \dfrac{x}{\mathrm{e}}$ ne sert pas ici.
+
+En revanche, la convexite de $\ln$ n'existant pas, on utilise une autre methode : $\ln(1{,}1) = \int_1^{1{,}1} \dfrac{dt}{t} \geq \dfrac{0{,}1}{1{,}1} \approx 0{,}0909$.
+
+Ainsi $\dfrac{1}{11} \leq \ln(1{,}1) \leq \dfrac{1}{10}$.
+
+\end{corrige}
