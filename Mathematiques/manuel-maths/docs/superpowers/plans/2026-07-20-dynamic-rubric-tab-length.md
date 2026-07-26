@@ -225,7 +225,7 @@ Attendu : codes 0.
   p.13 conserve son SHA/oracle `2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23` ;
   aucun fichier TSPE/NSI n'est modifié ; aucune branche principale, aucun push et
   aucun déploiement ne sont effectués.
-- [ ] **Step 6: demander une revue indépendante du diff complet.** Résoudre tout finding P0/P1/P2, relancer les validations affectées et faire confirmer visuellement les deux parités.
+- [x] **Step 6: demander une revue indépendante du diff complet.** Résoudre tout finding P0/P1/P2, relancer les validations affectées et faire confirmer visuellement les deux parités. Le finding P2 de recomposition a été corrigé puis re-approuvé.
 - [x] **Step 7: cocher le plan et créer le commit documentaire final.**
 
 ```bash
