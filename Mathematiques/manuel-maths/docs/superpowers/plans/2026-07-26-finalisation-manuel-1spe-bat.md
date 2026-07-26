@@ -144,26 +144,26 @@ git commit -m "[1SPE][BAT] epingle la chaine de fabrication"
 - Create: `validations/release-1spe/baseline.json`
 - Create: `validations/release-1spe/baseline.md`
 
-- [ ] **Step 1: écrire le test rouge de capture**
+- [x] **Step 1: écrire le test rouge de capture**
 
 Le test exige l'inventaire et les SHA-256 des sources 1SPE, référentiels,
 contrats, directives, rapports, tags Git et attestations. Chaque attestation
 reçoit `reusable`, `stale` ou `review_required` avec justification et empreintes.
 
-- [ ] **Step 2: vérifier l'échec**
+- [x] **Step 2: vérifier l'échec**
 
 Run: `.venv/bin/python -m pytest tests/test_capture_initial_state_1spe.py -q`
 
 Expected: FAIL car le capteur et le schéma n'existent pas.
 
-- [ ] **Step 3: implémenter et exécuter avant toute correction**
+- [x] **Step 3: implémenter et exécuter avant toute correction**
 
 Run: `.venv/bin/python scripts/capture_initial_state_1spe.py --root . --json validations/release-1spe/baseline.json --markdown validations/release-1spe/baseline.md`
 
 Expected: code 0, état `initial_snapshot`, zéro fichier 1SPE, directive, rapport,
 tag ou validation non classé.
 
-- [ ] **Step 4: tester et commit**
+- [x] **Step 4: tester et commit**
 
 Run: `.venv/bin/python -m pytest tests/test_capture_initial_state_1spe.py -q`
 

@@ -1,0 +1,764 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "baseline_1spe.schema.json",
+  "title": "Capture immuable de la baseline 1SPE",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "scope",
+    "origin",
+    "current",
+    "remediation_history",
+    "capture_context",
+    "completeness"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "status": {
+      "const": "initial_snapshot"
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "origin": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/snapshot"
+        },
+        {
+          "properties": {
+            "label": {
+              "const": "origin_immutable"
+            },
+            "test_execution": {
+              "properties": {
+                "kind": {
+                  "const": "historical_observation"
+                },
+                "exit_code": {
+                  "const": 1
+                },
+                "passed": {
+                  "const": 1873
+                },
+                "failed": {
+                  "const": 7
+                },
+                "skipped": {
+                  "const": 5
+                },
+                "state": {
+                  "const": "historical_red"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "current": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/snapshot"
+        },
+        {
+          "properties": {
+            "label": {
+              "const": "current_preflight"
+            },
+            "test_execution": {
+              "properties": {
+                "kind": {
+                  "const": "direct_execution"
+                },
+                "exit_code": {
+                  "const": 0
+                },
+                "passed": {
+                  "const": 1946
+                },
+                "failed": {
+                  "const": 0
+                },
+                "skipped": {
+                  "const": 5
+                },
+                "state": {
+                  "const": "green"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "remediation_history": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/remediation"
+      }
+    },
+    "capture_context": {
+      "$ref": "#/$defs/captureContext"
+    },
+    "completeness": {
+      "$ref": "#/$defs/completeness"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "gitOid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "safePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_path",
+        "categories",
+        "changed_paths_between_snapshots"
+      ],
+      "properties": {
+        "project_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "categories": {
+          "const": [
+            "source_1spe",
+            "referential",
+            "contract",
+            "directive",
+            "report",
+            "attestation"
+          ]
+        },
+        "changed_paths_between_snapshots": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/safePath"
+          }
+        }
+      }
+    },
+    "inventoryEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "category",
+        "file_type",
+        "git_mode",
+        "git_blob_oid",
+        "byte_size",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "category": {
+          "enum": [
+            "source_1spe",
+            "referential",
+            "contract",
+            "directive",
+            "report",
+            "attestation"
+          ]
+        },
+        "file_type": {
+          "enum": [
+            "regular",
+            "symlink"
+          ]
+        },
+        "git_mode": {
+          "type": "string",
+          "pattern": "^[0-7]{6}$"
+        },
+        "git_blob_oid": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "byte_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "symlink_target": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "file_type": {
+                "const": "symlink"
+              }
+            },
+            "required": [
+              "file_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "symlink_target"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "symlink_target"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "countsByCategory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_1spe",
+        "referential",
+        "contract",
+        "directive",
+        "report",
+        "attestation"
+      ],
+      "properties": {
+        "source_1spe": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "referential": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "contract": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "directive": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "report": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "attestation": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entries",
+        "counts_by_category",
+        "sha256"
+      ],
+      "properties": {
+        "entries": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/inventoryEntry"
+          }
+        },
+        "counts_by_category": {
+          "$ref": "#/$defs/countsByCategory"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "declaredFingerprint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "json_pointer",
+        "sha256"
+      ],
+      "properties": {
+        "json_pointer": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "verifiedBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "json_pointer",
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "json_pointer": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "mismatchedBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "json_pointer",
+        "path",
+        "sha256",
+        "current_sha256",
+        "reason"
+      ],
+      "properties": {
+        "json_pointer": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "current_sha256": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "enum": [
+            "unsafe_path",
+            "missing_or_hash_mismatch"
+          ]
+        }
+      }
+    },
+    "fingerprints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attestation_sha256",
+        "comparison_attestation_sha256",
+        "declared",
+        "verified_bindings",
+        "mismatched_bindings"
+      ],
+      "properties": {
+        "attestation_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "comparison_attestation_sha256": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "declared": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/declaredFingerprint"
+          }
+        },
+        "verified_bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/verifiedBinding"
+          }
+        },
+        "mismatched_bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/mismatchedBinding"
+          }
+        }
+      }
+    },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "classification",
+        "justification",
+        "fingerprints"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "classification": {
+          "enum": [
+            "reusable",
+            "stale",
+            "review_required"
+          ]
+        },
+        "justification": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fingerprints": {
+          "$ref": "#/$defs/fingerprints"
+        }
+      }
+    },
+    "tag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "ref_object_oid",
+        "target_commit_sha",
+        "object_type",
+        "created_at",
+        "object_sha256",
+        "reachable_from_snapshot"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "1SPE"
+        },
+        "ref_object_oid": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "target_commit_sha": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "object_type": {
+          "enum": [
+            "commit",
+            "tag"
+          ]
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "object_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "reachable_from_snapshot": {
+          "const": true
+        }
+      }
+    },
+    "testExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "commit_sha",
+        "command",
+        "exit_code",
+        "passed",
+        "failed",
+        "skipped",
+        "summary",
+        "provenance",
+        "state"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "historical_observation",
+            "direct_execution"
+          ]
+        },
+        "commit_sha": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exit_code": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "passed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "state": {
+          "enum": [
+            "historical_red",
+            "green"
+          ]
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "commit_sha",
+        "git_tree_oid",
+        "authored_at",
+        "committed_at",
+        "subject",
+        "inventory",
+        "tags",
+        "attestations",
+        "test_execution"
+      ],
+      "properties": {
+        "label": {
+          "enum": [
+            "origin_immutable",
+            "current_preflight"
+          ]
+        },
+        "commit_sha": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "git_tree_oid": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "authored_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "committed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "subject": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inventory": {
+          "$ref": "#/$defs/inventory"
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/tag"
+          }
+        },
+        "attestations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/attestation"
+          }
+        },
+        "test_execution": {
+          "$ref": "#/$defs/testExecution"
+        }
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit_sha",
+        "parent_commit_sha",
+        "kind",
+        "authored_at",
+        "committed_at",
+        "subject"
+      ],
+      "properties": {
+        "commit_sha": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "parent_commit_sha": {
+          "$ref": "#/$defs/gitOid"
+        },
+        "kind": {
+          "enum": [
+            "baseline_remediation",
+            "release_preflight"
+          ]
+        },
+        "authored_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "committed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "subject": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "workingTreePath": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "status"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "status": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        }
+      }
+    },
+    "workingTree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "paths"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "clean",
+            "dirty"
+          ]
+        },
+        "paths": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/workingTreePath"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "clean"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "paths": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "paths": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "captureContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dirty_policy",
+        "working_tree"
+      ],
+      "properties": {
+        "dirty_policy": {
+          "enum": [
+            "record",
+            "fail"
+          ]
+        },
+        "working_tree": {
+          "$ref": "#/$defs/workingTree"
+        }
+      }
+    },
+    "completeness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "duplicate_classifications",
+        "unclassified_paths"
+      ],
+      "properties": {
+        "duplicate_classifications": {
+          "type": "array",
+          "maxItems": 0,
+          "items": {
+            "$ref": "#/$defs/safePath"
+          }
+        },
+        "unclassified_paths": {
+          "type": "array",
+          "maxItems": 0,
+          "items": {
+            "$ref": "#/$defs/safePath"
+          }
+        }
+      }
+    }
+  }
+}
