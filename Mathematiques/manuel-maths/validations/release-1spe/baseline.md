@@ -5,7 +5,7 @@
 - Origine immuable : `41eaa745d000953654f7f07f6760c675cdae91d5` — 7 failed, 1873 passed, 5 skipped (historical_observation, historique non rejoué).
 - État courant préflight : `ca16edbb51d7f0122fcbbfea5cccfa7e2066cd63` — 1946 passed, 5 skipped (direct_execution).
 - Arbre de travail au moment de la capture : `clean` (politique `record`).
-- HEAD matériel de capture : `f1e2e0cb343ddbe30db1c860947b7979d481223c`.
+- HEAD matériel de capture : `0f5013f3895a2847e1b009a34b7290e44e818040`.
 
 L'état courant n'est jamais présenté comme l'état initial intact.
 
@@ -29,8 +29,8 @@ L'état courant n'est jamais présenté comme l'état initial intact.
 
 | Vue | Entrées | SHA-256 inventaire | Tags 1SPE |
 |---|---:|---|---:|
-| Origine | 3171 | `70c230ff5865f769471cb84bb5afee49b4e451f9eed10934fff6e94a565018dc` | 13 |
-| Courant | 3189 | `929a5f53a4d8328ce55c327e76b63d87d7c138abc54cbeb99ce7a5acea5b54ea` | 13 |
+| Origine | 3176 | `43d033a9a2857355ba4b4c6defd75feb24d224ad5c383a280783a64a62873bd4` | 13 |
+| Courant | 3194 | `191b11571d8ad1aa282705cc465331635b633e7ab5758d26efe9443afb08a5dd` | 13 |
 
 ## Attestations
 
