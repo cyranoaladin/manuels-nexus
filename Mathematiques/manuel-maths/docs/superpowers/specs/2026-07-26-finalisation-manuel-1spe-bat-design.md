@@ -42,6 +42,32 @@ rapproché du document publié en ligne par empreinte et par extraction textuell
 Les formulations `libelle_bo` des référentiels doivent être des citations
 exactes ou être explicitement marquées comme reformulations en langage élève.
 
+La matrice réglementaire classe chaque item sans les confondre :
+
+- `mandatory_content` : contenus, capacités attendues, parties transversales et
+  « Expérimentations » ; couverture obligatoire à 100 % ;
+- `prescribed_teaching` : démonstrations et exemples d'algorithmes proposés par
+  le programme ; présence obligatoire dans l'enseignement ou le guide, sans les
+  transformer automatiquement en attendus évaluables ;
+- `optional_extension` : approfondissements possibles ; inclusion facultative,
+  toujours signalée comme telle ;
+- `contextual_guidance` : objectifs, histoire des mathématiques et indications
+  de mise en œuvre ; traçabilité éditoriale sans création d'un faux attendu.
+
+Le gate « conformité B.O. » exige 100 % de `mandatory_content` et de
+`prescribed_teaching`. Il publie séparément le taux d'inclusion des
+`optional_extension` et ne l'agrège jamais au taux obligatoire.
+
+Le B.O. 2026 introduit explicitement les notations `u(n)`, `u_n`, `(u(n))` et
+`(u_n)`. La règle éditoriale devient :
+
+- `u_n` et `(u_n)` sont privilégiés dans la prose mathématique ;
+- `u(n)` est autorisé dans un contexte de fonction, d'algorithme, de code ou de
+  comparaison explicite des notations ;
+- les citations exactes du B.O. conservent leur notation ;
+- les contrôleurs ne peuvent interdire `u(n)` globalement : ils vérifient son
+  contexte et la cohérence locale.
+
 ### 2.2 Exigences internes
 
 Les sources internes applicables restent :
@@ -92,6 +118,26 @@ reproduit en Tunisie auprès de la Bibliothèque nationale dans le délai légal
 - obtention d'un ISBN ;
 - allégation d'homologation ou d'approbation par le ministère français.
 
+### 3.3 Réconciliation de l'état initial
+
+Les rapports et tags antérieurs sont des preuves historiques, pas des preuves
+automatiques pour la nouvelle release.
+
+Avant toute correction, un inventaire de migration produit :
+
+- le nombre réel d'objets par chapitre et par type ;
+- les empreintes SHA-256 des sources ;
+- la présence et la version de chaque preuve ;
+- les divergences entre rapports, tags, directives et fichiers courants ;
+- les attestations conservables, invalidées ou à rejouer ;
+- le nombre réel d'exercices par chapitre, avec gate minimal de 50 ;
+- la pagination et les diagnostics LaTeX actuels des deux livres.
+
+Une preuve antérieure n'est réutilisable que si l'empreinte de l'objet, la
+version du gate, le référentiel et les dépendances correspondent à la release
+courante. Sinon, le gate est rejoué. Le rapport de référence est
+`validations/release-1spe/baseline.json`, accompagné d'une synthèse lisible.
+
 ## 4. Architecture éditoriale
 
 Le manuel conserve dix chapitres regroupés selon les quatre parties thématiques
@@ -127,11 +173,18 @@ matrice annuelle et synthétisées dans les annexes :
 - vocabulaire ensembliste et logique ;
 - algorithmique, programmation et listes ;
 - automatismes : évolutions et variations, calcul numérique et algébrique,
-  fonctions et représentations, statistiques, probabilités.
+  fonctions et représentations, statistiques, probabilités ;
+- expérimentations : simulation d'échantillons, estimation d'une espérance par
+  une moyenne observée et étude de l'écart entre moyenne et espérance.
 
 Elles ne forment pas de chapitres isolés. Chaque item possède un emplacement
 d'introduction, au moins un réinvestissement et un renvoi dans la banque
 d'automatismes ou le mémo correspondant.
+
+La rubrique « Expérimentations » est affectée au chapitre 10 « Variables
+aléatoires réelles » et à la matrice transversale d'algorithmique. Elle comprend
+les quatre attendus des lignes 627 à 638 de l'annexe officielle, notamment la
+simulation de variables aléatoires et d'échantillons avec Python ou un tableur.
 
 ## 5. Architecture d'un chapitre
 
@@ -173,10 +226,36 @@ Il reprend le parcours et les repères du manuel élève et ajoute :
 - réponses aux diagnostics, QCM et évaluations ;
 - cartes de couverture et tableaux de correspondance.
 
-Tout renvoi à une page élève doit rester fiable dans la version professeur. Le
-générateur utilise des identifiants d'objets et une table de renvois, jamais des
-numéros saisis manuellement. Si une pagination strictement identique ne peut
-être maintenue, chaque renvoi professeur affiche explicitement le folio élève.
+### 6.1 Architecture de pagination retenue
+
+Les deux ouvrages ont des paginations indépendantes. Les pages professeur ne
+sont pas intercalées dans l'espace de folios élève.
+
+Le manuel élève est construit en premier. Il exporte une table canonique :
+
+`object_id → folio_eleve`
+
+Le livre du professeur est ensuite construit à partir de cette table et exporte :
+
+`object_id → folio_professeur`
+
+Tout renvoi professeur vers le manuel élève utilise la forme explicite
+`Élève p. <folio_eleve>`. Un renvoi interne au livre du professeur utilise
+`Prof. p. <folio_professeur>`. Aucun numéro de page n'est saisi directement dans
+un objet source.
+
+### 6.2 Cardinalités et gates
+
+- chaque objet visible dans le manuel élève possède exactement un
+  `folio_eleve` canonique ;
+- chaque objet élève possède au moins une occurrence repérable dans le livre du
+  professeur ;
+- un objet exclusivement professeur a `folio_eleve: null` et exactement un
+  `folio_professeur` canonique ;
+- aucun identifiant canonique n'est dupliqué ;
+- 100 % des renvois générés se résolvent ;
+- la table de correspondance est publiée dans le manifeste de release et testée
+  après chaque changement de pagination.
 
 ## 7. Chaîne de certification
 
@@ -193,6 +272,22 @@ Un objet ou un assemblage possède un seul des états suivants :
 Les statuts vagues, les dérogations silencieuses et les restes « à revoir » sont
 interdits dans une version candidate au BAT.
 
+Chaque verdict est un document conforme à schéma contenant au minimum :
+
+- identifiant et type d'objet ;
+- empreinte SHA-256 de l'objet et de ses dépendances ;
+- identifiant et version du gate ;
+- référentiel réglementaire et empreinte utilisés ;
+- date, acteur de vérification et commande reproductible ;
+- statut, constats et pièces de preuve.
+
+Un objet est `certified` seulement si tous ses gates obligatoires sont
+`certified` sur les mêmes empreintes. Un chapitre est `certified` seulement si
+tous ses objets obligatoires le sont. Une release est `certified` seulement si
+les dix chapitres, les blocs transversaux, les assemblages et les contrôles
+prépresse numériques sont certifiés et qu'aucun `needs_fix` ou `blocked`
+numérique ne subsiste.
+
 ### 7.1 Audit réglementaire
 
 Une matrice relie chaque item officiel à :
@@ -203,6 +298,12 @@ Une matrice relie chaque item officiel à :
 - le ou les objets du manuel qui le couvrent ;
 - les folios élève et professeur ;
 - la preuve de contrôle.
+
+Les colonnes `obligation_class`, `bo_page`, `bo_quote`,
+`manual_object_ids`, `student_folios`, `teacher_folios` et `verdict` sont
+obligatoires. Les approfondissements possibles ont un verdict éditorial
+`included`, `excluded_with_rationale` ou `not_applicable`, jamais
+`missing_mandatory`.
 
 ### 7.2 Audit mathématique
 
@@ -230,6 +331,9 @@ Une matrice relie chaque item officiel à :
 - absence de doublons, de texte provisoire et d'identifiants techniques visibles ;
 - index, sommaires et renvois reconstruits et contrôlés.
 
+L'audit met à jour `docs/05_conventions_latex.md` et les contrôleurs de notation
+pour la règle contextuelle `u(n)` / `u_n` définie en section 2.1.
+
 ### 7.5 Propriété intellectuelle
 
 Chaque objet conserve ses métadonnées de création et ses sources d'inspiration.
@@ -251,6 +355,12 @@ La grille doit :
   l'exigent ;
 - réserver une marge intérieure compatible avec un ouvrage épais et cousu ;
 - assurer une taille de lecture confortable sans réduction locale abusive.
+
+Le budget de pagination cible est de 448 à 480 pages pour l'élève et de 512 à
+544 pages pour le professeur. Les maxima de release sont respectivement 480 et
+560 pages, pages techniques de cahiers comprises. Une réduction de corps ou une
+compression locale n'est jamais utilisée pour respecter le budget. Un
+dépassement rouvre la conception de pagination et le façonnage.
 
 ### 8.2 Système intérieur
 
@@ -290,6 +400,8 @@ formulation laissant croire à une approbation ministérielle.
 - images continues à 300 ppp à leur taille finale ;
 - dessins, courbes et formules en vectoriel ;
 - traits techniques d'épaisseur imprimable.
+- intention de sortie par défaut PSO Uncoated v3 / FOGRA52, adaptée au papier
+  intérieur non couché, sous réserve du profil fourni par l'imprimeur.
 
 ### 9.2 Couverture
 
@@ -297,13 +409,15 @@ formulation laissant croire à une approbation ministérielle.
 - quadrichromie recto ;
 - pelliculage mat anti-rayures ;
 - dos calculé après pagination finale et mesure du papier réel ;
-- fichiers séparés première, dos, quatrième ou gabarit à plat selon l'imprimeur.
+- intention de sortie par défaut PSO Coated v3 / FOGRA51 ;
+- couverture livrée à plat, composée sur le gabarit validé de l'imprimeur.
 
 ### 9.3 Façonnage
 
 - cahiers cousus ;
 - collage PUR ;
 - plan de cahiers déterminé avec l'imprimeur à partir du nombre final de pages ;
+- sens du grain parallèle au dos ;
 - prototype façonné obligatoire avant signature du BAT.
 
 ### 9.4 Fichiers prépresse
@@ -316,8 +430,10 @@ formulation laissant croire à une approbation ministérielle.
 - noir de texte en noir seul ;
 - noir enrichi réservé aux grands aplats de couverture ;
 - taux d'encrage maximal 300 % ;
-- master PDF/X-4 avec intention de sortie PSO Coated v3 / FOGRA51 ;
-- export de compatibilité PDF/X-1a / FOGRA39 si demandé par l'imprimeur ;
+- master intérieur PDF/X-4 avec intention de sortie PSO Uncoated v3 / FOGRA52 ;
+- master couverture PDF/X-4 avec intention de sortie PSO Coated v3 / FOGRA51 ;
+- export de compatibilité PDF/X-1a uniquement avec les profils explicitement
+  acceptés par l'imprimeur ;
 - aucun contenu RVB non géré dans les masters ;
 - surimpressions et transparences contrôlées.
 
@@ -325,13 +441,34 @@ Le profil final et le gabarit de couverture sont des paramètres d'interface
 imprimeur. Toute substitution doit être déclarée dans le manifeste de
 publication et repasser les contrôles prépresse.
 
+### 9.5 Interface imprimeur et solution de repli
+
+Nexus Réussite nomme l'imprimeur principal au plus tard le 3 août 2026 et un
+prestataire de repli au plus tard le 5 août. Pour chacun, le dossier technique
+doit fournir :
+
+- procédé d'impression ;
+- références, grammage, main, opacité et certifications du papier ;
+- profils ICC acceptés ;
+- taux d'encrage maximal ;
+- gabarit de couverture et formule du dos ;
+- contraintes de cahiers, sens du grain et reliure ;
+- format PDF/X accepté ;
+- calendrier d'épreuves et de façonnage.
+
+Sans dossier imprimeur au 5 août, le pipeline produit les masters génériques
+FOGRA52 intérieur et FOGRA51 couverture, mais le jalon reste
+`blocked_external_printer` : ces fichiers sont des candidats prépresse, pas un
+BAT signé.
+
 ## 10. Mentions légales et métadonnées de publication
 
 La page légale contient au minimum :
 
 - titre et version de l'ouvrage ;
 - auteur : Alaeddine BEN RHOUMA ;
-- éditeur : Nexus Réussite ;
+- éditeur légal : M&M ACADEMY SUARL ;
+- marque éditoriale : Nexus Réussite ;
 - raison sociale et adresse de l'éditeur ;
 - copyright et année ;
 - nom, adresse et pays de l'imprimeur ;
@@ -344,6 +481,23 @@ Les données variables sont fournies au générateur par un fichier de métadonn
 de publication validé par schéma. Une construction `release` échoue si un champ
 légal obligatoire manque. Les valeurs d'imprimeur, de date et de tirage sont
 renseignées après choix du prestataire et avant le BAT.
+
+Sauf instruction juridique écrite contraire, la formulation éditoriale est :
+« Édité par M&M ACADEMY SUARL sous la marque Nexus Réussite ». M&M ACADEMY
+SUARL est responsable de l'inscription au registre, du dépôt légal et de la
+conservation des preuves.
+
+Le fichier de suivi légal contient :
+
+- numéro et date d'inscription de chaque ouvrage ;
+- date de mise à disposition du public ;
+- preuve du dépôt de quatre exemplaires élève et quatre exemplaires professeur ;
+- récépissé de la Bibliothèque nationale ;
+- calcul et suivi du délai légal d'un mois.
+
+L'adresse légale complète est fournie par Nexus Réussite au plus tard le
+3 août. Le nom et l'adresse de l'imprimeur, le tirage et la date d'impression
+sont gelés au plus tard lors de l'acceptation du gabarit de couverture.
 
 ## 11. Architecture de construction
 
@@ -360,6 +514,14 @@ Chaque build produit :
 - un manifeste d'objets et de renvois ;
 - un rapport de conformité PDF ;
 - les empreintes SHA-256.
+
+L'ordre de construction est bloquant :
+
+1. construire l'élève et exporter `folios-eleve.json` ;
+2. valider l'unicité et la complétude des folios ;
+3. construire le professeur en injectant cette table ;
+4. exporter `folios-professeur.json` et la table croisée ;
+5. refuser la release au moindre renvoi non résolu.
 
 Les masters d'impression et les PDF écran sont des sorties distinctes. Le PDF
 écran privilégie les signets, liens et l'accessibilité ; le master privilégie
@@ -385,6 +547,27 @@ Les gates bloquants couvrent :
   familles de pages ;
 - reconstruction reproductible depuis un environnement propre.
 
+Les seuils numériques minimaux sont :
+
+- 0 référence LaTeX non résolue ;
+- 0 `Overfull \hbox` ou `Overfull \vbox` dans les masters ;
+- 0 objet obligatoire sans preuve sur l'empreinte courante ;
+- 0 page dont une boite de contenu franchit la zone de sécurité déclarée ;
+- 0 police non incorporée ;
+- 0 image continue sous 300 ppp à taille finale ;
+- 0 trait technique sous 0,25 pt ;
+- 0 couleur RVB non gérée dans un master ;
+- taux d'encrage inférieur ou égal à 300 % ;
+- 100 % des pages rasterisées et contrôlées automatiquement ;
+- 100 % des pages parcourues visuellement à taille lisible par un agent de
+  relecture, puis par le signataire du BAT sur l'épreuve ;
+- 100 % des familles de pages comparées aux références visuelles approuvées.
+
+Le contrôle PDF/X comprend la génération normalisée, les inspections
+`pdfinfo`/`pdffonts`/images/couleurs et un préflight indépendant fourni par
+l'imprimeur ou un outil certifié. Le simple marquage `GTS_PDFXVersion` ne vaut
+pas preuve de conformité.
+
 Chaque correction d'un défaut reproductible ajoute ou renforce un test. Une
 modification postérieure au gel éditorial invalide automatiquement les preuves
 portant sur les objets ou assemblages affectés.
@@ -393,7 +576,8 @@ portant sur les objets ou assemblages affectés.
 
 Le BAT n'est proposé que si :
 
-1. 100 % des items du B.O. sont couverts et tracés ;
+1. 100 % des `mandatory_content` et `prescribed_teaching` du B.O. sont couverts
+   et tracés, tandis que les `optional_extension` sont séparés ;
 2. aucune erreur mathématique connue ne subsiste ;
 3. aucune divergence énoncé-corrigé-barème ne subsiste ;
 4. toutes les dimensions transversales sont couvertes sur l'année ;
@@ -412,18 +596,43 @@ Les validations non automatisables sont explicites :
 - validation de l'épreuve et du prototype par l'éditeur et l'imprimeur ;
 - signature du procès-verbal de BAT.
 
+Les jalons ont des sens distincts :
+
+1. `digital_candidate` : sources, PDF écran et contrôles éditoriaux verts ;
+2. `printer_package` : masters génériques et dossier technique complet ;
+3. `printer_accepted` : profils et gabarits acceptés par l'imprimeur ;
+4. `prototype_approved` : épreuve et prototype façonné approuvés ;
+5. `bat_signed` : procès-verbal signé ;
+6. `legal_deposit_completed` : mise à disposition datée, huit exemplaires
+   déposés et récépissés archivés.
+
+Aucun jalon n'est présenté comme équivalent au suivant.
+
 ## 14. Calendrier cible
 
-- 27 juillet–2 août 2026 : inventaire, matrice B.O. et audit initial ;
+- 27 juillet–1er août 2026 : inventaire, matrice B.O. et audit initial ;
+- 2 août : gel de la baseline et estimation révisée de charge ;
+- 3 août : adresse légale et imprimeur principal nommés ;
+- 5 août : imprimeur de repli et dossiers techniques reçus ;
 - 3–16 août : corrections mathématiques, pédagogiques et transversales ;
 - 10–20 août : format 195 × 270, système intérieur et couvertures ;
-- 17–23 août : assemblages, relectures et gates ;
-- 24–27 août : épreuves imprimeur et prototype ;
-- 28–30 août : corrections finales, BAT et archivage.
+- 17–20 août : première release candidate numérique ;
+- 21 août : première épreuve et premier prototype ;
+- 22–25 août : corrections et seconde release candidate ;
+- 26–28 août : seconde épreuve ou prototype de repli si nécessaire ;
+- 29 août : gel du paquet imprimeur final ;
+- 30 août : validation finale ;
+- **31 août 2026 à 18 h 00, heure de Tunis : échéance contractuelle du BAT
+  signé**, avec une journée de marge après le gel final.
 
 Les travaux éditoriaux et graphiques peuvent se chevaucher uniquement lorsque
 leurs interfaces sont gelées. Un changement de contenu qui modifie la pagination
 réouvre les contrôles de renvois et de prépresse.
+
+Si la baseline du 2 août révèle une charge incompatible avec la date, la règle
+de décision est : conformité et exactitude priment sur la quantité
+d'approfondissements facultatifs, puis sur les enrichissements non demandés.
+Aucun contenu obligatoire ni gate n'est supprimé pour tenir le calendrier.
 
 ## 15. Livrables finaux
 
@@ -457,3 +666,23 @@ La version n'est déclarée « prête pour impression » qu'après disparition d
 les bloqueurs numériques et remise du paquet complet à l'imprimeur. Elle n'est
 déclarée « bon à tirer signé » qu'après validation du prototype physique par les
 parties responsables.
+
+### 16.1 RACI
+
+| Activité | Responsable | Approbateur | Consultés / informés |
+|---|---|---|---|
+| Baseline, sources et builds | agent de production | Alaeddine BEN RHOUMA | agents de revue |
+| Conformité B.O. | agent de conformité indépendant | Alaeddine BEN RHOUMA | relecteur pédagogique |
+| Mathématiques et corrigés | agents mathématiques indépendants | Alaeddine BEN RHOUMA | agent adversarial |
+| Langue et maquette | agents éditorial et visuel | Alaeddine BEN RHOUMA | agent prépresse |
+| Données légales | M&M ACADEMY SUARL | représentant légal | agent de production |
+| Profils, dos et prototype | imprimeur | M&M ACADEMY SUARL | agent prépresse |
+| BAT | M&M ACADEMY SUARL | signataire habilité | imprimeur et auteur |
+| Dépôt légal | M&M ACADEMY SUARL | représentant légal | Bibliothèque nationale |
+
+### 16.2 Versionnement des candidats
+
+Chaque release candidate reçoit un identifiant immuable `1SPE-RC<n>`, un
+commit Git et un manifeste signé par empreintes SHA-256. Toutes les preuves
+référencent l'identifiant et les empreintes du candidat. Une modification crée
+un nouveau candidat ; aucune preuve n'est transférée sans contrôle d'impact.
