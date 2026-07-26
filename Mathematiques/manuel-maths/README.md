@@ -137,6 +137,25 @@ contrôle. Le chemin et le SHA-256 du manifeste, les compteurs candidats ainsi
 que les compteurs de chemins exclus sont revérifiés ; ces derniers sont
 adossés à la liste triée des exclusions et à leurs justifications.
 
+Cette validation interne contrôle la cohérence du document au moment de sa
+génération. Elle est complétée par une validation externe, indépendante des
+champs déclarés dans le rapport :
+
+```bash
+.venv/bin/python scripts/capture_initial_state_1spe.py \
+  --root . \
+  --verify-existing validations/release-1spe/baseline.json
+```
+
+Ce mode ne crée ni ne modifie aucun fichier. Il relit dans Git le manifeste et
+le code au `capture_head_commit`, recalcule les deux arbres, blobs,
+inventaires, tags, remédiations et attestations depuis les références et
+preuves épinglées, puis exige leur égalité profonde avec le JSON. Il vérifie
+enfin que le dernier commit commun aux artefacts JSON et Markdown a le
+`capture_head_commit` pour parent et que leurs contenus versionnés sont
+identiques aux contenus contrôlés. Les commits ultérieurs qui ne touchent pas
+ces artefacts n'invalident donc pas cette provenance.
+
 ## Cartographie du dépôt
 
 | Chemin | Contenu |

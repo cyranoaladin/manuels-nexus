@@ -15,6 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "capture_initial_state_1spe.py"
 SCHEMA = ROOT / "schemas" / "baseline_1spe.schema.json"
 SCOPE_MANIFEST = ROOT / "release" / "baseline-scope-1spe.json"
+BASELINE_JSON = ROOT / "validations" / "release-1spe" / "baseline.json"
+BASELINE_MARKDOWN = ROOT / "validations" / "release-1spe" / "baseline.md"
 
 
 def test_capture_components_exist() -> None:
@@ -62,6 +64,17 @@ def baseline_repository(tmp_path: Path) -> tuple[Path, str, str]:
     _write(root, "referentiel/capacites_1SPE_TEST.json", '{"items": []}\n')
     _write(root, "DIRECTIVES_EN_COURS.md", "# Directive\n")
     _write(root, "RAPPORT_FINAL_1SPE.md", "# Rapport\n")
+    _write(root, "docs/03_architecture_technique.md", "# Architecture\n")
+    _write(
+        root,
+        "release/baseline-scope-1spe.json",
+        SCOPE_MANIFEST.read_text(encoding="utf-8"),
+    )
+    _write(
+        root,
+        "scripts/capture_initial_state_1spe.py",
+        "# capteur présent dans le commit de fixture\n",
+    )
     source_sha = hashlib.sha256(b"origine\n").hexdigest()
     _write(
         root,
@@ -729,6 +742,172 @@ def test_scope_metadata_contains_recalculable_exclusion_proof(
             and all(exclusion["justification"] for exclusion in item["exclusions"])
             for item in proofs[label]
         )
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "excluded_paths_and_count",
+        "changed_paths",
+        "coordinated_inventory_removal",
+        "tag",
+        "tree_and_subject",
+        "coordinated_blob_metadata",
+        "coordinated_remediation_chain",
+        "coordinated_attestation",
+    ],
+)
+def test_external_repository_validation_rejects_coordinated_falsifications(
+    baseline_repository: tuple[Path, str, str],
+    mutation: str,
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+    candidate = copy.deepcopy(report)
+
+    if mutation == "excluded_paths_and_count":
+        candidate["scope"]["excluded_paths"]["current"].pop()
+        candidate["scope"]["excluded_counts"]["current"] -= 1
+    elif mutation == "changed_paths":
+        candidate["scope"]["changed_paths_between_snapshots"] = []
+    elif mutation == "coordinated_inventory_removal":
+        inventory = candidate["current"]["inventory"]
+        entry = next(
+            item
+            for item in inventory["entries"]
+            if item["path"] == "docs/03_architecture_technique.md"
+        )
+        inventory["entries"].remove(entry)
+        inventory["counts_by_category"][entry["category"]] -= 1
+        inventory["sha256"] = module._sha256(
+            module._canonical_bytes(inventory["entries"])
+        )
+        candidate["scope"]["candidate_counts"]["current"] -= 1
+    elif mutation == "tag":
+        candidate["origin"]["tags"] = []
+    elif mutation == "tree_and_subject":
+        candidate["current"]["git_tree_oid"] = "f" * 40
+        candidate["current"]["subject"] = "Sujet substitué"
+    elif mutation == "coordinated_blob_metadata":
+        inventory = candidate["current"]["inventory"]
+        entry = next(
+            item
+            for item in inventory["entries"]
+            if item["path"] == "docs/03_architecture_technique.md"
+        )
+        entry.update(
+            {
+                "git_mode": "100755",
+                "git_blob_oid": "f" * 40,
+                "byte_size": 0,
+                "sha256": "0" * 64,
+            }
+        )
+        inventory["sha256"] = module._sha256(
+            module._canonical_bytes(inventory["entries"])
+        )
+    elif mutation == "coordinated_remediation_chain":
+        candidate["remediation_history"][0]["commit_sha"] = "f" * 40
+        candidate["remediation_history"][1]["parent_commit_sha"] = "f" * 40
+    elif mutation == "coordinated_attestation":
+        attestation = candidate["current"]["attestations"].pop()
+        inventory = candidate["current"]["inventory"]
+        entry = next(
+            item
+            for item in inventory["entries"]
+            if item["path"] == attestation["path"]
+        )
+        entry["category"] = "report"
+        inventory["counts_by_category"]["attestation"] -= 1
+        inventory["counts_by_category"]["report"] += 1
+        inventory["sha256"] = module._sha256(
+            module._canonical_bytes(inventory["entries"])
+        )
+    else:  # pragma: no cover
+        raise AssertionError(mutation)
+
+    with pytest.raises(module.CaptureError, match="validation externe"):
+        module.validate_report_against_repository(
+            candidate,
+            root=root,
+            trusted_test_evidence=_test_evidence(),
+            origin_ref=origin,
+            current_ref=current,
+        )
+
+
+def test_external_repository_validation_accepts_an_authentic_fixture_report(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+
+    module.validate_report_against_repository(
+        report,
+        root=root,
+        trusted_test_evidence=_test_evidence(),
+        origin_ref=origin,
+        current_ref=current,
+    )
+
+
+def test_external_validation_rejects_capture_head_without_artifact_parentage() -> None:
+    module = _load_module()
+    report = json.loads(BASELINE_JSON.read_text(encoding="utf-8"))
+    report["capture_context"]["capture_head_commit"] = _git(ROOT, "rev-parse", "HEAD")
+
+    with pytest.raises(module.CaptureError, match="parent.*artefact"):
+        module.validate_report_against_repository(
+            report,
+            root=ROOT,
+            trusted_test_evidence=module.DEFAULT_TEST_EVIDENCE,
+            artifact_paths=(
+                "validations/release-1spe/baseline.json",
+                "validations/release-1spe/baseline.md",
+            ),
+        )
+
+
+def test_cli_verifies_existing_artifact_read_only() -> None:
+    before_json = BASELINE_JSON.read_bytes()
+    before_markdown = BASELINE_MARKDOWN.read_bytes()
+    before_status = _git(ROOT, "status", "--porcelain")
+
+    completed = subprocess.run(
+        [
+            str(SCRIPT),
+            "--root",
+            str(ROOT),
+            "--verify-existing",
+            "validations/release-1spe/baseline.json",
+        ],
+        cwd=ROOT.parent,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(completed.stdout) == {
+        "json": "validations/release-1spe/baseline.json",
+        "status": "externally_verified",
+    }
+    assert BASELINE_JSON.read_bytes() == before_json
+    assert BASELINE_MARKDOWN.read_bytes() == before_markdown
+    assert _git(ROOT, "status", "--porcelain") == before_status
 
 
 def test_test_evidence_derives_summary_from_valid_counters() -> None:
