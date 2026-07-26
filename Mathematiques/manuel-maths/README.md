@@ -27,10 +27,12 @@ Une release des manuels 1SPE exige le contrat reproductible
   en version 24.02.0 minimum ;
 - Ghostscript 10.02 minimum.
 
-Le contrôle versionné dans
-`validations/release-1spe/toolchain.json` distingue l'état observé de la cible :
+Le JSON régénéré par `make release-toolchain` dans
+`validations/release-1spe/toolchain.json` est la seule source de vérité sur
+l'exécution contrôlée. Le tableau suivant est l'instantané initial du
+26 juillet 2026 ; il devient historique dès qu'un outil est mis à niveau :
 
-| Composant | Environnement courant contrôlé | Exigence de release |
+| Composant | Instantané initial du 26 juillet 2026 | Exigence de release |
 |---|---|---|
 | Python | 3.12.3, conforme | 3.12.x |
 | Java | 21.0.11, conforme | 21 minimum |
@@ -49,6 +51,16 @@ ce smoke-test sont supprimées automatiquement et aucun chemin temporaire
 n'entre dans le rapport. Chaque PDF de production devra encore réussir sa
 propre validation PDF/UA-1.
 
+Chaque binaire est résolu une seule fois en chemin absolu avant les contrôles ;
+les commandes de version et le smoke-test réutilisent strictement cette même
+identité. Le smoke-test lance LuaLaTeX et veraPDF depuis son répertoire
+temporaire. Il reçoit une copie explicite de l'environnement dans laquelle les
+variables d'override TeX `TEXINPUTS`, `LUAINPUTS`, `TEXMFCNF`, `TEXMFHOME`,
+`TEXMFVAR`, `TEXMFCONFIG`, `BIBINPUTS`, `BSTINPUTS`, `MFINPUTS`, `MPINPUTS`,
+`TFMFONTS`, `VFFONTS`, `T1FONTS`, `OPENTYPEFONTS`, `TTFONTS`, `LUA_PATH` et
+`LUA_CPATH` sont supprimées. Les variables neutres, dont `PATH` nécessaire aux
+wrappers, sont conservées.
+
 Le préflight ne tente aucune installation :
 
 ```bash
@@ -59,7 +71,10 @@ Il écrit un rapport déterministe dans
 `validations/release-1spe/toolchain.json`. Un code retour `0` signifie que
 tout le contrat d'outillage a été prouvé (`certified`). Le code `2` signifie
 `blocked` et énumère les outils absents ou insuffisants. Ce code `2` est un
-diagnostic honnête de l'environnement courant, jamais un succès implicite.
+diagnostic honnête de l'exécution contrôlée, jamais un succès implicite. Même
+si le manifeste est inaccessible ou invalide, l'ancien rapport est remplacé
+atomiquement par un rapport `blocked` déterministe. Le fichier final reçoit
+explicitement le mode documentaire `0644`.
 
 Après mise à niveau explicite de l'environnement, relancer le préflight puis
 la suite complète :

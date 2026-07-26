@@ -1,6 +1,7 @@
 import copy
 import json
 import os
+import stat
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -57,6 +58,25 @@ VALID_OUTPUTS = {
     "pdftoppm": ("", "pdftoppm version 24.02.0\n"),
     "gs": ("10.02.1\n", ""),
 }
+TEX_OVERRIDE_VARIABLES = [
+    "TEXINPUTS",
+    "LUAINPUTS",
+    "TEXMFCNF",
+    "TEXMFHOME",
+    "TEXMFVAR",
+    "TEXMFCONFIG",
+    "BIBINPUTS",
+    "BSTINPUTS",
+    "MFINPUTS",
+    "MPINPUTS",
+    "TFMFONTS",
+    "VFFONTS",
+    "T1FONTS",
+    "OPENTYPEFONTS",
+    "TTFONTS",
+    "LUA_PATH",
+    "LUA_CPATH",
+]
 
 
 class ScenarioRunner:
@@ -73,12 +93,15 @@ class ScenarioRunner:
         self.create_pdf = create_pdf
         self.validation_returncode = validation_returncode
         self.calls = []
+        self.call_records = []
         self.smoke_source = None
         self.smoke_directory = None
 
-    def __call__(self, command, **_kwargs):
+    def __call__(self, command, **kwargs):
         self.calls.append(command)
-        if command[0] == "lualatex" and "--version" not in command:
+        self.call_records.append((command, kwargs))
+        binary = Path(command[0]).name
+        if binary == "lualatex" and "--version" not in command:
             source = Path(command[-1])
             self.smoke_source = source.read_text(encoding="utf-8")
             output_argument = next(
@@ -92,13 +115,13 @@ class ScenarioRunner:
                 stdout="",
                 stderr="",
             )
-        if command[0] == "verapdf" and "--version" not in command:
+        if binary == "verapdf" and "--version" not in command:
             return SimpleNamespace(
                 returncode=self.validation_returncode,
                 stdout="",
                 stderr="",
             )
-        stdout, stderr = self.outputs[command[0]]
+        stdout, stderr = self.outputs[binary]
         return SimpleNamespace(returncode=0, stdout=stdout, stderr=stderr)
 
     @property
@@ -107,12 +130,27 @@ class ScenarioRunner:
             command
             for command in self.calls
             if (
-                command[0] == "lualatex"
+                Path(command[0]).name == "lualatex"
                 and "--version" not in command
             )
             or (
-                command[0] == "verapdf"
+                Path(command[0]).name == "verapdf"
                 and "--version" not in command
+            )
+        ]
+
+    @property
+    def smoke_records(self):
+        return [
+            record
+            for record in self.call_records
+            if (
+                Path(record[0][0]).name == "lualatex"
+                and "--version" not in record[0]
+            )
+            or (
+                Path(record[0][0]).name == "verapdf"
+                and "--version" not in record[0]
             )
         ]
 
@@ -122,7 +160,7 @@ def fake_runner(outputs=None, **kwargs):
 
 
 def available(binary):
-    return f"/usr/bin/{binary}"
+    return f"/opt/nexus-tools/{binary}"
 
 
 def check_by_id(result, check_id):
@@ -349,6 +387,44 @@ def test_versions_are_parsed_from_realistic_stdout_and_stderr(toolchain):
     assert check_by_id(result, "ghostscript")["detected"] == "10.02.1"
 
 
+@pytest.mark.parametrize("prefix", ["veraPDF ", "veraPDF CLI "])
+def test_official_verapdf_version_forms_are_accepted(prefix, toolchain):
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=fake_runner({"verapdf": (f"{prefix}1.30.1\n", "")}),
+        python_version=(3, 12, 3),
+    )
+
+    assert check_by_id(result, "verapdf")["status"] == "certified"
+
+
+@pytest.mark.parametrize(
+    "token",
+    ["1.30.1-SNAPSHOT", "1.30.1-RC1", "1.30.1.1", "1.30.1+local"],
+)
+def test_verapdf_rejects_any_non_exact_version_token(token, toolchain):
+    runner = fake_runner({"verapdf": (f"veraPDF CLI {token}\n", "")})
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    verapdf = check_by_id(result, "verapdf")
+    assert verapdf["status"] == "blocked"
+    assert verapdf["detected"] == token
+    assert verapdf["reason"] == (
+        f"veraPDF 1.30.1 exigé; version détectée: {token}"
+    )
+    assert check_by_id(result, "latex.tagged_pdf")["reason"] == (
+        "smoke Tagged PDF non exécuté: veraPDF 1.30.1 exigé, "
+        f"version détectée: {token}"
+    )
+    assert runner.smoke_calls == []
+
+
 def test_tagged_pdf_is_blocked_when_verapdf_is_absent_despite_tex_live_2026(
     toolchain,
 ):
@@ -425,7 +501,12 @@ def test_tagged_pdf_smoke_failures_are_blocking(runner_options, reason, toolchai
     assert result.exit_code == 2
 
 
-def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(toolchain):
+def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(
+    monkeypatch, toolchain
+):
+    for variable in TEX_OVERRIDE_VARIABLES:
+        monkeypatch.setenv(variable, f"malicious-{variable}")
+    monkeypatch.setenv("NEXUS_NEUTRAL_SMOKE_TEST", "preserved")
     runner = fake_runner()
     result = check_toolchain(
         toolchain,
@@ -448,7 +529,7 @@ def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(toolchain)
     assert len(runner.smoke_calls) == 2
     compile_command, validate_command = runner.smoke_calls
     assert compile_command[:3] == [
-        "lualatex",
+        "/opt/nexus-tools/lualatex",
         "-interaction=nonstopmode",
         "-halt-on-error",
     ]
@@ -456,7 +537,7 @@ def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(toolchain)
     smoke_directory = Path(compile_command[3].split("=", 1)[1])
     assert Path(compile_command[4]) == smoke_directory / "tagged-smoke.tex"
     assert validate_command == [
-        "verapdf",
+        "/opt/nexus-tools/verapdf",
         "-f",
         "ua1",
         "--format",
@@ -472,7 +553,54 @@ def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(toolchain)
     assert "tagging=on" in runner.smoke_source
     assert "pdftitle=" in runner.smoke_source
     assert "pdfauthor=" in runner.smoke_source
+    compile_record, validate_record = runner.smoke_records
+    compile_environment = compile_record[1]["env"]
+    validation_environment = validate_record[1]["env"]
+    assert compile_record[1]["cwd"] == smoke_directory
+    assert validate_record[1]["cwd"] == smoke_directory
+    assert compile_environment == validation_environment
+    assert compile_environment["PATH"] == os.environ["PATH"]
+    assert compile_environment["NEXUS_NEUTRAL_SMOKE_TEST"] == "preserved"
+    assert all(
+        variable not in compile_environment for variable in TEX_OVERRIDE_VARIABLES
+    )
     assert not smoke_directory.exists()
+
+
+def test_each_binary_is_resolved_once_and_exact_identity_is_executed(toolchain):
+    resolutions = {}
+
+    def relative_locator(binary):
+        resolutions[binary] = resolutions.get(binary, 0) + 1
+        return f"review-toolchain/bin/{binary}"
+
+    runner = fake_runner()
+    result = check_toolchain(
+        toolchain,
+        which=relative_locator,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    binaries = [
+        "java",
+        "lualatex",
+        "verapdf",
+        "pdfinfo",
+        "pdffonts",
+        "pdftotext",
+        "pdftoppm",
+        "gs",
+    ]
+    assert result.status == "certified"
+    assert resolutions == {binary: 1 for binary in binaries}
+    expected_paths = {
+        binary: str((Path.cwd() / "review-toolchain" / "bin" / binary).resolve())
+        for binary in binaries
+    }
+    for command in runner.calls:
+        binary = Path(command[0]).name
+        assert command[0] == expected_paths[binary]
 
 
 @pytest.mark.parametrize(
@@ -523,7 +651,7 @@ def test_insufficient_version_reason_names_the_detected_version(toolchain):
 
 def test_nonzero_command_and_unparseable_version_are_blocking(toolchain):
     def runner(command, **_kwargs):
-        if command[0] == "java":
+        if Path(command[0]).name == "java":
             return SimpleNamespace(returncode=1, stdout="", stderr="java failure")
         return fake_runner()(command)
 
@@ -602,6 +730,7 @@ def test_write_report_is_atomic(tmp_path, monkeypatch):
     assert observed["target"] == destination
     assert not observed["source"].exists()
     assert json.loads(destination.read_text(encoding="utf-8"))["status"] == "blocked"
+    assert stat.S_IMODE(destination.stat().st_mode) == 0o644
 
 
 def test_cli_writes_blocked_report_and_returns_2(tmp_path, toolchain, monkeypatch):
@@ -622,24 +751,68 @@ def test_cli_writes_blocked_report_and_returns_2(tmp_path, toolchain, monkeypatc
 
 
 @pytest.mark.parametrize(
-    "invalid_yaml",
+    ("invalid_yaml", "expected_reason"),
     [
-        "schema_version: 2\n",
-        "schema_version: 1\npython: 3.12\n",
-        "schema_version: 1\npython: '3.12'\njava: {}\n",
-        "[]\n",
-        ":\n",
+        (
+            ":\n",
+            (
+                "manifeste YAML invalide; corriger la syntaxe du "
+                "manifeste d'outillage"
+            ),
+        ),
+        (
+            "schema_version: 2\n",
+            (
+                "contrat d'outillage invalide; corriger les clés "
+                "et valeurs épinglées"
+            ),
+        ),
+        (
+            None,
+            (
+                "manifeste inaccessible; vérifier sa présence "
+                "et ses permissions"
+            ),
+        ),
     ],
 )
-def test_invalid_manifest_returns_2_with_diagnostic(
-    tmp_path, invalid_yaml, capsys
+def test_invalid_manifest_replaces_stale_certified_report_deterministically(
+    tmp_path, invalid_yaml, expected_reason, capsys, monkeypatch
 ):
     manifest = tmp_path / "invalid.yaml"
     report = tmp_path / "report.json"
-    manifest.write_text(invalid_yaml, encoding="utf-8")
+    if invalid_yaml is not None:
+        manifest.write_text(invalid_yaml, encoding="utf-8")
+    report.write_text('{"status":"certified"}\n', encoding="utf-8")
+    monkeypatch.setenv("MANIFEST_REPORT_SECRET", "do-not-copy")
 
     code = main(["--manifest", str(manifest), "--output", str(report)])
+    first_bytes = report.read_bytes()
+    payload = json.loads(first_bytes)
 
     assert code == 2
     assert "manifeste invalide" in capsys.readouterr().err.lower()
-    assert not report.exists()
+    assert payload == {
+        "schema_version": 1,
+        "status": "blocked",
+        "checks": [
+            {
+                "id": "manifest",
+                "required": "manifeste d'outillage valide (schema_version 1)",
+                "detected": None,
+                "status": "blocked",
+                "reason": expected_reason,
+            }
+        ],
+        "blockers": [{"tool": "manifest", "reason": expected_reason}],
+    }
+    serialized = first_bytes.decode("utf-8")
+    assert str(tmp_path) not in serialized
+    assert "do-not-copy" not in serialized
+    assert "timestamp" not in serialized.lower()
+    assert stat.S_IMODE(report.stat().st_mode) == 0o644
+
+    second_code = main(["--manifest", str(manifest), "--output", str(report)])
+
+    assert second_code == 2
+    assert report.read_bytes() == first_bytes

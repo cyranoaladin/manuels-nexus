@@ -16,6 +16,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from collections.abc import Mapping
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Sequence
@@ -24,6 +25,25 @@ import yaml
 
 
 DEFAULT_REPORT = Path("validations/release-1spe/toolchain.json")
+TEX_ENVIRONMENT_OVERRIDES = {
+    "TEXINPUTS",
+    "LUAINPUTS",
+    "TEXMFCNF",
+    "TEXMFHOME",
+    "TEXMFVAR",
+    "TEXMFCONFIG",
+    "BIBINPUTS",
+    "BSTINPUTS",
+    "MFINPUTS",
+    "MPINPUTS",
+    "TFMFONTS",
+    "VFFONTS",
+    "T1FONTS",
+    "OPENTYPEFONTS",
+    "TTFONTS",
+    "LUA_PATH",
+    "LUA_CPATH",
+}
 TAGGED_PDF_SMOKE_SOURCE = r"""\DocumentMetadata{
   lang=fr,
   pdfversion=1.7,
@@ -48,6 +68,10 @@ Ce document minimal contrôle la production PDF/UA-1.
 
 class ManifestError(ValueError):
     """Signale un manifeste incomplet ou incohérent."""
+
+    def __init__(self, message: str, *, category: str = "contract"):
+        super().__init__(message)
+        self.category = category
 
 
 @dataclass(frozen=True)
@@ -186,9 +210,19 @@ def validate_manifest(data: Any) -> dict[str, Any]:
 def load_manifest(path: Path | str) -> dict[str, Any]:
     source = Path(path)
     try:
-        data = yaml.safe_load(source.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
-        raise ManifestError(f"lecture impossible de {source}: {exc}") from exc
+        serialized = source.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        raise ManifestError(
+            f"lecture impossible de {source}: {exc}",
+            category="access",
+        ) from exc
+    try:
+        data = yaml.safe_load(serialized)
+    except yaml.YAMLError as exc:
+        raise ManifestError(
+            f"syntaxe YAML invalide dans {source}: {exc}",
+            category="yaml",
+        ) from exc
     return validate_manifest(data)
 
 
@@ -221,15 +255,33 @@ def _check(
     }
 
 
-def _run_version(
+def _resolve_binary(
     binary: str,
-    arguments: list[str],
     *,
     which: Callable[[str], str | None],
+) -> tuple[str | None, str | None]:
+    try:
+        located = which(binary)
+    except (OSError, TypeError, ValueError) as exc:
+        return None, f"résolution impossible: {type(exc).__name__}"
+    if located is None:
+        return None, f"binaire absent: {binary}"
+    try:
+        resolved = Path(located).expanduser().resolve(strict=False)
+    except (OSError, TypeError, ValueError) as exc:
+        return None, f"résolution impossible: {type(exc).__name__}"
+    return str(resolved), None
+
+
+def _run_version(
+    binary: str | None,
+    arguments: list[str],
+    *,
+    resolution_error: str | None,
     runner: Callable[..., Any],
 ) -> tuple[str | None, str | None]:
-    if which(binary) is None:
-        return None, f"binaire absent: {binary}"
+    if binary is None:
+        return None, resolution_error or "binaire non résolu"
     try:
         process = runner(
             [binary, *arguments],
@@ -253,6 +305,17 @@ def _extract(pattern: str, output: str) -> str | None:
     return match.group(1) if match else None
 
 
+def _smoke_environment(
+    environ: Mapping[str, str] | None = None,
+) -> dict[str, str]:
+    """Copie l'environnement en neutralisant les entrées TeX configurables."""
+
+    sanitized = dict(os.environ if environ is None else environ)
+    for variable in TEX_ENVIRONMENT_OVERRIDES:
+        sanitized.pop(variable, None)
+    return sanitized
+
+
 def run_tagged_pdf_smoke(
     *,
     latex_binary: str,
@@ -268,6 +331,7 @@ def run_tagged_pdf_smoke(
             smoke_directory = Path(directory)
             source = smoke_directory / "tagged-smoke.tex"
             pdf = smoke_directory / "tagged-smoke.pdf"
+            smoke_environment = _smoke_environment()
             source.write_text(TAGGED_PDF_SMOKE_SOURCE, encoding="utf-8")
 
             compile_process = runner(
@@ -282,6 +346,8 @@ def run_tagged_pdf_smoke(
                 text=True,
                 check=False,
                 timeout=60,
+                cwd=smoke_directory,
+                env=smoke_environment,
             )
             if compile_process.returncode != 0:
                 return SmokeResult(
@@ -310,6 +376,8 @@ def run_tagged_pdf_smoke(
                 text=True,
                 check=False,
                 timeout=60,
+                cwd=smoke_directory,
+                env=smoke_environment,
             )
             if validation_process.returncode == 0:
                 return SmokeResult(
@@ -377,7 +445,7 @@ def _tagged_prerequisite_reason(
         failures.append("commande veraPDF indisponible")
     elif verapdf_version is None:
         failures.append("version veraPDF illisible")
-    elif _version_tuple(verapdf_version) != _version_tuple(required_verapdf):
+    elif verapdf_version != required_verapdf:
         failures.append(
             f"veraPDF {required_verapdf} exigé, version détectée: {verapdf_version}"
         )
@@ -416,10 +484,14 @@ def check_toolchain(
         )
     )
 
-    java_output, java_error = _run_version(
+    java_binary, java_resolution_error = _resolve_binary(
         "java",
-        ["-version"],
         which=binary_locator,
+    )
+    java_output, java_error = _run_version(
+        java_binary,
+        ["-version"],
+        resolution_error=java_resolution_error,
         runner=command_runner,
     )
     java_version = (
@@ -442,11 +514,15 @@ def check_toolchain(
         _check("java", f">={required_java}", java_version, java_ok, java_reason)
     )
 
-    latex_binary = manifest["latex"]["engine"]
+    latex_engine = manifest["latex"]["engine"]
+    latex_binary, latex_resolution_error = _resolve_binary(
+        latex_engine,
+        which=binary_locator,
+    )
     latex_output, latex_error = _run_version(
         latex_binary,
         ["--version"],
-        which=binary_locator,
+        resolution_error=latex_resolution_error,
         runner=command_runner,
     )
     texlive_year = (
@@ -467,27 +543,31 @@ def check_toolchain(
     checks.append(
         _check(
             "latex.engine",
-            f"{latex_binary}, TeX Live >={required_texlive}",
+            f"{latex_engine}, TeX Live >={required_texlive}",
             latex_detected,
             latex_ok,
             latex_reason,
         )
     )
-    verapdf_output, verapdf_error = _run_version(
+    verapdf_binary, verapdf_resolution_error = _resolve_binary(
         "verapdf",
-        ["--version"],
         which=binary_locator,
+    )
+    verapdf_output, verapdf_error = _run_version(
+        verapdf_binary,
+        ["--version"],
+        resolution_error=verapdf_resolution_error,
         runner=command_runner,
     )
     verapdf_version = (
-        _extract(r"veraPDF(?:\s+CLI)?\s+(\d+\.\d+\.\d+)", verapdf_output)
+        _extract(r"veraPDF(?:\s+CLI)?\s+([^\s]+)", verapdf_output)
         if verapdf_output
         else None
     )
     required_verapdf = manifest["verapdf"]["version"]
     verapdf_ok = (
         verapdf_version is not None
-        and _version_tuple(verapdf_version) == _version_tuple(required_verapdf)
+        and verapdf_version == required_verapdf
     )
     verapdf_reason = verapdf_error or (
         f"veraPDF {required_verapdf} détecté"
@@ -515,9 +595,11 @@ def check_toolchain(
     )
 
     if latex_ok and verapdf_ok:
+        assert latex_binary is not None
+        assert verapdf_binary is not None
         tagged_smoke = run_tagged_pdf_smoke(
             latex_binary=latex_binary,
-            verapdf_binary="verapdf",
+            verapdf_binary=verapdf_binary,
             profile=manifest["verapdf"]["profile"],
             report_format=manifest["verapdf"]["report_format"],
             runner=command_runner,
@@ -528,7 +610,7 @@ def check_toolchain(
     else:
         tagged_detected = None
         tagged_reason = _tagged_prerequisite_reason(
-            latex_binary=latex_binary,
+            latex_binary=latex_engine,
             latex_error=latex_error,
             texlive_year=texlive_year,
             required_texlive=required_texlive,
@@ -552,10 +634,14 @@ def check_toolchain(
 
     required_poppler = manifest["poppler"]["minimum_version"]
     for command in manifest["poppler"]["commands"]:
-        output, error = _run_version(
+        resolved_command, command_resolution_error = _resolve_binary(
             command,
-            ["-v"],
             which=binary_locator,
+        )
+        output, error = _run_version(
+            resolved_command,
+            ["-v"],
+            resolution_error=command_resolution_error,
             runner=command_runner,
         )
         version = _extract(r"version\s+(\d+\.\d+(?:\.\d+)?)", output) if output else None
@@ -576,10 +662,14 @@ def check_toolchain(
             _check(command, f">={required_poppler}", version, ok, reason)
         )
 
-    gs_output, gs_error = _run_version(
+    gs_binary, gs_resolution_error = _resolve_binary(
         "gs",
-        ["--version"],
         which=binary_locator,
+    )
+    gs_output, gs_error = _run_version(
+        gs_binary,
+        ["--version"],
+        resolution_error=gs_resolution_error,
         runner=command_runner,
     )
     gs_version = _extract(r"(\d+\.\d+(?:\.\d+)?)", gs_output) if gs_output else None
@@ -629,6 +719,7 @@ def write_report_atomic(path: Path | str, report: dict[str, Any]) -> None:
             json.dump(report, stream, ensure_ascii=False, indent=2)
             stream.write("\n")
             stream.flush()
+            os.fchmod(stream.fileno(), 0o644)
             os.fsync(stream.fileno())
         os.replace(temporary_name, destination)
         temporary_name = None
@@ -649,12 +740,43 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _blocked_manifest_report(error: ManifestError) -> dict[str, Any]:
+    reasons = {
+        "access": (
+            "manifeste inaccessible; vérifier sa présence et ses permissions"
+        ),
+        "yaml": (
+            "manifeste YAML invalide; corriger la syntaxe du "
+            "manifeste d'outillage"
+        ),
+        "contract": (
+            "contrat d'outillage invalide; corriger les clés "
+            "et valeurs épinglées"
+        ),
+    }
+    reason = reasons.get(error.category, reasons["contract"])
+    check = {
+        "id": "manifest",
+        "required": "manifeste d'outillage valide (schema_version 1)",
+        "detected": None,
+        "status": "blocked",
+        "reason": reason,
+    }
+    return {
+        "schema_version": 1,
+        "status": "blocked",
+        "checks": [check],
+        "blockers": [{"tool": "manifest", "reason": reason}],
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     arguments = _parser().parse_args(argv)
     try:
         manifest = load_manifest(arguments.manifest)
         result = check_toolchain(manifest)
     except ManifestError as exc:
+        write_report_atomic(arguments.output, _blocked_manifest_report(exc))
         print(f"Manifeste invalide: {exc}", file=sys.stderr)
         return 2
 

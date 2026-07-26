@@ -88,6 +88,12 @@ validation des versions, le contrôleur compile un document éphémère avec
 `\DocumentMetadata{lang=fr,pdfversion=1.7,pdfstandard=ua-1,tagging=on}`, exige
 le PDF puis obtient le code 0 de `verapdf -f ua1 --format mrr`. Tout autre
 résultat reste `blocked` et le répertoire temporaire est supprimé.
+Les binaires sont résolus une seule fois en chemins absolus, puis réutilisés
+pour les versions et le smoke-test. Celui-ci s'exécute depuis son répertoire
+temporaire avec une copie de l'environnement débarrassée des variables
+d'override TeX. Un manifeste inaccessible ou invalide remplace lui aussi
+atomiquement tout ancien rapport par un rapport déterministe `blocked` en mode
+`0644`.
 
 - [x] **Step 5: ajouter les cibles Make**
 
