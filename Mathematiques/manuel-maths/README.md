@@ -93,6 +93,43 @@ make release-toolchain
 make release-test
 ```
 
+## Baseline immuable 1SPE
+
+La capture de départ distingue trois repères qui ne doivent jamais être
+confondus :
+
+- `origin.commit_sha` est l'origine historique immuable et conserve sa preuve
+  de tests historique, sans prétendre l'avoir rejouée ;
+- `current.commit_sha` est le snapshot préflight épinglé et sa preuve de tests
+  directe ;
+- `capture_context.capture_head_commit` est le HEAD réellement observé au
+  moment où les deux artefacts sont générés. Il identifie le commit du code de
+  capture ; le commit documentaire qui ajoute ensuite les artefacts est donc
+  nécessairement son successeur.
+
+Le périmètre versionné
+[`release/baseline-scope-1spe.json`](release/baseline-scope-1spe.json) définit
+explicitement l'univers, ses exclusions et l'unique catégorie de chaque
+chemin. La génération est bloquée par tout chemin candidat non classé, tout
+double classement ou toute règle qui capte un chemin hors univers. Les objets
+Git exclus ou non classés ne sont pas lus.
+
+La commande de référence est :
+
+```bash
+.venv/bin/python scripts/capture_initial_state_1spe.py \
+  --root . \
+  --json validations/release-1spe/baseline.json \
+  --markdown validations/release-1spe/baseline.md
+```
+
+Les deux sorties sont exclusivement publiées sous
+`validations/release-1spe/`. Leurs composants sont contrôlés sans suivre les
+liens symboliques et la paire est restaurée intégralement si sa seconde
+publication échoue. Le JSON est validé à la fois par le schéma fermé, par un
+contrôleur de formats RFC 3339 et par les invariants croisés (inventaires,
+compteurs, chaîne de remédiation, preuves de tests et attestations).
+
 ## Cartographie du dépôt
 
 | Chemin | Contenu |

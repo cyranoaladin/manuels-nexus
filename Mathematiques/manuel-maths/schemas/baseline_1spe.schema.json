@@ -128,13 +128,23 @@
       "additionalProperties": false,
       "required": [
         "project_path",
+        "manifest_path",
+        "manifest_sha256",
         "categories",
-        "changed_paths_between_snapshots"
+        "changed_paths_between_snapshots",
+        "candidate_counts",
+        "excluded_counts"
       ],
       "properties": {
         "project_path": {
           "type": "string",
           "minLength": 1
+        },
+        "manifest_path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "manifest_sha256": {
+          "$ref": "#/$defs/sha256"
         },
         "categories": {
           "const": [
@@ -152,6 +162,30 @@
           "items": {
             "$ref": "#/$defs/safePath"
           }
+        },
+        "candidate_counts": {
+          "$ref": "#/$defs/snapshotCounts"
+        },
+        "excluded_counts": {
+          "$ref": "#/$defs/snapshotCounts"
+        }
+      }
+    },
+    "snapshotCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "origin",
+        "current"
+      ],
+      "properties": {
+        "origin": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "current": {
+          "type": "integer",
+          "minimum": 0
         }
       }
     },
@@ -317,11 +351,16 @@
       "additionalProperties": false,
       "required": [
         "json_pointer",
+        "fingerprint_json_pointer",
         "path",
         "sha256"
       ],
       "properties": {
         "json_pointer": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "fingerprint_json_pointer": {
           "type": "string",
           "pattern": "^/"
         },
@@ -338,6 +377,7 @@
       "additionalProperties": false,
       "required": [
         "json_pointer",
+        "fingerprint_json_pointer",
         "path",
         "sha256",
         "current_sha256",
@@ -345,6 +385,10 @@
       ],
       "properties": {
         "json_pointer": {
+          "type": "string",
+          "pattern": "^/"
+        },
+        "fingerprint_json_pointer": {
           "type": "string",
           "pattern": "^/"
         },
@@ -380,6 +424,7 @@
         "attestation_sha256",
         "comparison_attestation_sha256",
         "declared",
+        "unbound_declared",
         "verified_bindings",
         "mismatched_bindings"
       ],
@@ -398,6 +443,12 @@
           ]
         },
         "declared": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/declaredFingerprint"
+          }
+        },
+        "unbound_declared": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/declaredFingerprint"
@@ -653,7 +704,8 @@
       "additionalProperties": false,
       "required": [
         "path",
-        "status"
+        "status",
+        "role"
       ],
       "properties": {
         "path": {
@@ -663,6 +715,15 @@
           "type": "string",
           "minLength": 2,
           "maxLength": 2
+        },
+        "role": {
+          "enum": [
+            "changed",
+            "rename_destination",
+            "rename_source",
+            "copy_destination",
+            "copy_source"
+          ]
         }
       }
     },
@@ -721,10 +782,14 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
+        "capture_head_commit",
         "dirty_policy",
         "working_tree"
       ],
       "properties": {
+        "capture_head_commit": {
+          "$ref": "#/$defs/gitOid"
+        },
         "dirty_policy": {
           "enum": [
             "record",
@@ -741,14 +806,15 @@
       "additionalProperties": false,
       "required": [
         "duplicate_classifications",
-        "unclassified_paths"
+        "unclassified_paths",
+        "out_of_scope_pollution"
       ],
       "properties": {
         "duplicate_classifications": {
           "type": "array",
           "maxItems": 0,
           "items": {
-            "$ref": "#/$defs/safePath"
+            "$ref": "#/$defs/duplicateClassification"
           }
         },
         "unclassified_paths": {
@@ -756,6 +822,41 @@
           "maxItems": 0,
           "items": {
             "$ref": "#/$defs/safePath"
+          }
+        },
+        "out_of_scope_pollution": {
+          "type": "array",
+          "maxItems": 0,
+          "items": {
+            "$ref": "#/$defs/safePath"
+          }
+        }
+      }
+    },
+    "duplicateClassification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "categories"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "categories": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "source_1spe",
+              "referential",
+              "contract",
+              "directive",
+              "report",
+              "attestation"
+            ]
           }
         }
       }

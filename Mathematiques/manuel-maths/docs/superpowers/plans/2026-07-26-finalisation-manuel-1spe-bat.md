@@ -141,6 +141,7 @@ git commit -m "[1SPE][BAT] epingle la chaine de fabrication"
 - Create: `schemas/baseline_1spe.schema.json`
 - Create: `scripts/capture_initial_state_1spe.py`
 - Create: `tests/test_capture_initial_state_1spe.py`
+- Create: `release/baseline-scope-1spe.json`
 - Create: `validations/release-1spe/baseline.json`
 - Create: `validations/release-1spe/baseline.md`
 
@@ -170,7 +171,7 @@ Run: `.venv/bin/python -m pytest tests/test_capture_initial_state_1spe.py -q`
 Expected: PASS.
 
 ```bash
-git add schemas/baseline_1spe.schema.json scripts/capture_initial_state_1spe.py tests/test_capture_initial_state_1spe.py validations/release-1spe/baseline.json validations/release-1spe/baseline.md
+git add release/baseline-scope-1spe.json schemas/baseline_1spe.schema.json scripts/capture_initial_state_1spe.py tests/test_capture_initial_state_1spe.py validations/release-1spe/baseline.json validations/release-1spe/baseline.md README.md
 git commit -m "[1SPE][BAT] capture l etat initial immuable"
 ```
 

@@ -7,10 +7,13 @@ import argparse
 import hashlib
 import json
 import os
+import re
+import stat
 import subprocess
 import sys
 import tempfile
 from collections import Counter
+from datetime import datetime
 from pathlib import Path, PurePosixPath
 from typing import Any
 
@@ -26,6 +29,9 @@ CATEGORIES = (
 ATTESTATION_CLASSES = ("reusable", "stale", "review_required")
 DEFAULT_ORIGIN_REF = "41eaa74"
 DEFAULT_CURRENT_REF = "ca16edb"
+DEFAULT_SCOPE_MANIFEST_PATH = (
+    Path(__file__).resolve().parents[1] / "release" / "baseline-scope-1spe.json"
+)
 DEFAULT_REMEDIATION_COMMITS = (
     ("11dd437", "baseline_remediation"),
     ("44904f4", "baseline_remediation"),
@@ -73,6 +79,25 @@ class CaptureError(RuntimeError):
     """Raised when an immutable snapshot cannot be established."""
 
 
+def _git_environment(git_root: Path) -> dict[str, str]:
+    """Return a minimal deterministic environment for every Git subprocess."""
+
+    return {
+        "PATH": os.environ.get("PATH", "/usr/bin:/bin"),
+        "HOME": str(git_root),
+        "LANG": "C",
+        "LC_ALL": "C",
+        "TZ": "UTC",
+        "GIT_CONFIG_GLOBAL": os.devnull,
+        "GIT_CONFIG_NOSYSTEM": "1",
+        "GIT_NO_REPLACE_OBJECTS": "1",
+        "GIT_OPTIONAL_LOCKS": "0",
+        "GIT_TERMINAL_PROMPT": "0",
+        "GIT_ASKPASS": "/bin/false",
+        "SSH_ASKPASS": "/bin/false",
+    }
+
+
 def _run_git(
     git_root: Path,
     arguments: list[str],
@@ -85,6 +110,7 @@ def _run_git(
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         check=False,
+        env=_git_environment(git_root),
     )
     if check and completed.returncode:
         diagnostic = completed.stderr.decode("utf-8", errors="replace").strip()
@@ -118,7 +144,7 @@ def _sha256(value: bytes) -> str:
 def _resolve_commit(git_root: Path, ref: str, *, label: str) -> str:
     completed = _run_git(
         git_root,
-        ["rev-parse", "--verify", f"{ref}^{{commit}}"],
+        ["rev-parse", "--verify", "--end-of-options", f"{ref}^{{commit}}"],
         check=False,
     )
     if completed.returncode:
@@ -208,6 +234,7 @@ def _read_blobs(git_root: Path, oids: set[str]) -> dict[str, bytes]:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         check=False,
+        env=_git_environment(git_root),
     )
     if completed.returncode:
         raise CaptureError(
@@ -273,63 +300,129 @@ def _changed_paths(
     return sorted(set(changed))
 
 
-def _is_intrinsic_scope(path: str) -> bool:
-    folded = path.casefold()
-    parts = PurePosixPath(path).parts
-    filename = parts[-1].casefold()
-    if "1spe" in folded:
-        return True
-    if parts[0] == "validations":
-        return True
-    if "rapport" in filename:
-        return True
-    return path in {
-        "A_VALIDER_HUMAIN.md",
-        "CAHIER_DES_CHARGES.md",
-        "CLAUDE.md",
-        "DIRECTIVES_EN_COURS.md",
-        "ETAT_COLLECTION.md",
-        "MISSION_LOG.md",
+def _glob_regex(pattern: str) -> re.Pattern[str]:
+    _safe_relative_path(pattern.replace("*", "x"))
+    escaped = re.escape(pattern)
+    expression = escaped.replace(r"\*\*", ".*").replace(r"\*", "[^/]*")
+    return re.compile(f"^{expression}$")
+
+
+def _matches(path: str, patterns: list[str]) -> bool:
+    return any(_glob_regex(pattern).fullmatch(path) for pattern in patterns)
+
+
+def load_scope_manifest(path: Path = DEFAULT_SCOPE_MANIFEST_PATH) -> dict[str, Any]:
+    manifest_path = Path(path)
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise CaptureError(
+            f"manifeste de périmètre inaccessible ou invalide : {manifest_path}"
+        ) from error
+    return load_scope_manifest_from_value(manifest)
+
+
+def load_scope_manifest_from_value(manifest: Any) -> dict[str, Any]:
+    if not isinstance(manifest, dict):
+        raise CaptureError("le manifeste de périmètre doit être un objet JSON")
+    if manifest.get("schema_version") != 1:
+        raise CaptureError("version du manifeste de périmètre non prise en charge")
+    universe = manifest.get("universe")
+    rules = manifest.get("categories")
+    if not isinstance(universe, dict) or not isinstance(rules, list):
+        raise CaptureError("structure du manifeste de périmètre invalide")
+    if set(universe) != {"include", "exclude"}:
+        raise CaptureError("clés de l'univers du manifeste invalides")
+    if not all(
+        isinstance(universe[key], list)
+        and all(isinstance(item, str) for item in universe[key])
+        for key in ("include", "exclude")
+    ):
+        raise CaptureError("motifs d'univers invalides")
+    seen_categories: list[str] = []
+    for rule in rules:
+        if not isinstance(rule, dict) or set(rule) != {
+            "category",
+            "include",
+            "exclude",
+        }:
+            raise CaptureError("règle de catégorie invalide")
+        category = rule["category"]
+        if category not in CATEGORIES:
+            raise CaptureError(f"catégorie de périmètre inconnue : {category}")
+        if not all(
+            isinstance(rule[key], list)
+            and all(isinstance(item, str) for item in rule[key])
+            for key in ("include", "exclude")
+        ):
+            raise CaptureError(f"motifs invalides pour la catégorie {category}")
+        seen_categories.append(category)
+    if sorted(seen_categories) != sorted(CATEGORIES):
+        raise CaptureError("les six catégories doivent être déclarées exactement une fois")
+    for pattern in [
+        *universe["include"],
+        *universe["exclude"],
+        *[
+            pattern
+            for rule in rules
+            for key in ("include", "exclude")
+            for pattern in rule[key]
+        ],
+    ]:
+        _glob_regex(pattern)
+    return manifest
+
+
+def _scope_analysis(
+    records: list[dict[str, str]],
+    manifest: dict[str, Any],
+) -> dict[str, Any]:
+    universe = manifest["universe"]
+    classification: dict[str, str] = {}
+    candidate_records: list[dict[str, str]] = []
+    unclassified: list[str] = []
+    duplicates: list[dict[str, Any]] = []
+    pollution: list[str] = []
+    excluded: list[str] = []
+
+    for record in records:
+        path = record["path"]
+        explicitly_excluded = _matches(path, universe["exclude"])
+        included = _matches(path, universe["include"])
+        candidate = included and not explicitly_excluded
+        matching_categories = sorted(
+            rule["category"]
+            for rule in manifest["categories"]
+            if _matches(path, rule["include"])
+            and not _matches(path, rule["exclude"])
+        )
+        if explicitly_excluded:
+            excluded.append(path)
+        if not candidate:
+            if matching_categories and not explicitly_excluded:
+                pollution.append(path)
+            continue
+        candidate_records.append(record)
+        if not matching_categories:
+            unclassified.append(path)
+        elif len(matching_categories) > 1:
+            duplicates.append(
+                {"path": path, "categories": matching_categories}
+            )
+        else:
+            classification[path] = matching_categories[0]
+
+    return {
+        "candidate_records": candidate_records,
+        "classification": classification,
+        "unclassified_paths": sorted(unclassified),
+        "duplicate_classifications": sorted(
+            duplicates,
+            key=lambda item: item["path"],
+        ),
+        "out_of_scope_pollution": sorted(pollution),
+        "excluded_paths": sorted(excluded),
     }
-
-
-def _category(path: str) -> str:
-    parts = PurePosixPath(path).parts
-    folded = path.casefold()
-    filename = parts[-1].casefold()
-    if "validations" in parts:
-        return "attestation"
-    if filename == "contrat.yaml" or parts[0] == "release":
-        return "contract"
-    if parts[0] in {"referentiel", "sources"}:
-        return "referential"
-    if (
-        "rapport" in filename
-        or filename.startswith("lot-")
-        or path
-        in {
-            "A_VALIDER_HUMAIN.md",
-            "ETAT_COLLECTION.md",
-            "MISSION_LOG.md",
-            "RAPPORT_FINAL_1SPE.md",
-        }
-    ):
-        return "report"
-    if (
-        parts[0] == "docs"
-        or path
-        in {
-            "CAHIER_DES_CHARGES.md",
-            "CLAUDE.md",
-            "DIRECTIVES_EN_COURS.md",
-            "Makefile",
-            "README.md",
-        }
-    ):
-        return "directive"
-    if "1spe" in folded or parts[0] in {"gabarits", "scripts", "tests"}:
-        return "source_1spe"
-    return "source_1spe"
 
 
 def _safe_symlink_target(path: str, target_bytes: bytes) -> str:
@@ -355,19 +448,19 @@ def _safe_symlink_target(path: str, target_bytes: bytes) -> str:
 def _inventory(
     records: list[dict[str, str]],
     blobs: dict[str, bytes],
-    changed_scope: set[str],
+    classifications: dict[str, str],
 ) -> tuple[dict[str, Any], dict[str, bytes]]:
     entries: list[dict[str, Any]] = []
     scoped_blobs: dict[str, bytes] = {}
     for record in records:
         path = record["path"]
-        if not (_is_intrinsic_scope(path) or path in changed_scope):
+        if path not in classifications:
             continue
         content = blobs[record["oid"]]
         file_type = "symlink" if record["mode"] == "120000" else "regular"
         entry: dict[str, Any] = {
             "path": path,
-            "category": _category(path),
+            "category": classifications[path],
             "file_type": file_type,
             "git_mode": record["mode"],
             "git_blob_oid": record["oid"],
@@ -420,29 +513,43 @@ def _declared_fingerprints(value: Any, pointer: str = "") -> list[dict[str, str]
 def _fingerprint_bindings(value: Any, pointer: str = "") -> list[dict[str, str]]:
     bindings: list[dict[str, str]] = []
     if isinstance(value, dict):
-        paths = [
-            item
-            for key, item in value.items()
-            if str(key).casefold()
-            in {"object_path", "source_path", "path", "fichier", "evidence_path"}
-            and isinstance(item, str)
-        ]
-        hashes = [
-            item.casefold()
-            for key, item in value.items()
-            if ("sha256" in str(key).casefold() or str(key).casefold() == "hash")
-            and isinstance(item, str)
-            and len(item) == 64
-            and all(character in "0123456789abcdefABCDEF" for character in item)
-        ]
-        if len(paths) == 1 and len(hashes) == 1:
-            bindings.append(
-                {
-                    "json_pointer": pointer or "/",
-                    "path": paths[0],
-                    "sha256": hashes[0],
-                }
+        for raw_key, raw_hash in value.items():
+            key = str(raw_key)
+            folded_key = key.casefold()
+            if not (
+                isinstance(raw_hash, str)
+                and len(raw_hash) == 64
+                and all(
+                    character in "0123456789abcdefABCDEF"
+                    for character in raw_hash
+                )
+                and ("sha256" in folded_key or folded_key == "hash")
+            ):
+                continue
+            if folded_key in {"sha256", "hash"}:
+                candidate_path_keys = ("path", "fichier")
+            elif folded_key.endswith("_sha256"):
+                stem = folded_key[: -len("_sha256")]
+                candidate_path_keys = (f"{stem}_path", f"{stem}_file")
+            else:
+                candidate_path_keys = ()
+            matching_path_key = next(
+                (
+                    path_key
+                    for path_key in candidate_path_keys
+                    if isinstance(value.get(path_key), str)
+                ),
+                None,
             )
+            if matching_path_key is not None:
+                bindings.append(
+                    {
+                        "json_pointer": pointer or "/",
+                        "fingerprint_json_pointer": _json_pointer(pointer, key),
+                        "path": value[matching_path_key],
+                        "sha256": raw_hash.casefold(),
+                    }
+                )
         for key in sorted(value):
             bindings.extend(
                 _fingerprint_bindings(
@@ -510,6 +617,14 @@ def _attestations(
         comparison_attestation_sha = (
             comparison_entry["sha256"] if comparison_entry is not None else None
         )
+        bound_pointers = {
+            binding["fingerprint_json_pointer"] for binding in bindings
+        }
+        unbound_declared = [
+            fingerprint
+            for fingerprint in declared
+            if fingerprint["json_pointer"] not in bound_pointers
+        ]
         if comparison_attestation_sha != entry["sha256"]:
             classification = "stale"
             justification = (
@@ -520,10 +635,16 @@ def _attestations(
             justification = (
                 "Au moins une empreinte déclarée ne correspond pas à l'objet courant."
             )
-        elif verified:
+        elif unbound_declared:
+            classification = "review_required"
+            justification = (
+                "Au moins une empreinte déclarée ne possède pas de liaison "
+                "chemin–SHA-256 vérifiable."
+            )
+        elif declared and len(verified) == len(declared):
             classification = "reusable"
             justification = (
-                "L'attestation et toutes ses liaisons d'empreinte vérifiables "
+                "L'attestation et toutes ses empreintes déclarées "
                 "correspondent à l'état courant."
             )
         else:
@@ -541,6 +662,7 @@ def _attestations(
                     "attestation_sha256": entry["sha256"],
                     "comparison_attestation_sha256": comparison_attestation_sha,
                     "declared": declared,
+                    "unbound_declared": unbound_declared,
                     "verified_bindings": verified,
                     "mismatched_bindings": mismatched,
                 },
@@ -705,6 +827,17 @@ def _working_tree(
     raw_records = _run_git(git_root, arguments).stdout.split(b"\0")
     prefix = f"{project_prefix}/" if project_prefix else ""
     entries: list[dict[str, str]] = []
+
+    def project_path(full_path: str) -> str | None:
+        if prefix:
+            if not full_path.startswith(prefix):
+                return None
+            path = full_path[len(prefix) :]
+        else:
+            path = full_path
+        _safe_relative_path(path)
+        return path
+
     index = 0
     while index < len(raw_records):
         raw_record = raw_records[index]
@@ -715,20 +848,37 @@ def _working_tree(
             raise CaptureError("sortie git status illisible")
         status = _decode_utf8(raw_record[:2], description="statut Git")
         full_path = _decode_utf8(raw_record[3:], description="chemin de statut Git")
-        if prefix:
-            if not full_path.startswith(prefix):
-                continue
-            path = full_path[len(prefix) :]
-        else:
-            path = full_path
-        _safe_relative_path(path)
+        path = project_path(full_path)
         if status[0] in {"R", "C"}:
             if index >= len(raw_records) or not raw_records[index]:
                 raise CaptureError("renommage Git incomplet dans le statut")
+            source_full_path = _decode_utf8(
+                raw_records[index],
+                description="ancien chemin de statut Git",
+            )
             index += 1
-        if path not in excluded_paths:
-            entries.append({"path": path, "status": status})
-    entries.sort(key=lambda item: (item["path"], item["status"]))
+            source_path = project_path(source_full_path)
+            operation = "rename" if status[0] == "R" else "copy"
+            for candidate_path, role in (
+                (path, f"{operation}_destination"),
+                (source_path, f"{operation}_source"),
+            ):
+                if (
+                    candidate_path is not None
+                    and candidate_path not in excluded_paths
+                ):
+                    entries.append(
+                        {
+                            "path": candidate_path,
+                            "status": status,
+                            "role": role,
+                        }
+                    )
+        elif path is not None and path not in excluded_paths:
+            entries.append(
+                {"path": path, "status": status, "role": "changed"}
+            )
+    entries.sort(key=lambda item: (item["path"], item["status"], item["role"]))
     return {
         "status": "dirty" if entries else "clean",
         "paths": entries,
@@ -743,11 +893,18 @@ def capture_repository(
     test_evidence: dict[str, dict[str, Any]],
     dirty_policy: str = "record",
     excluded_dirty_paths: tuple[str, ...] = (),
+    scope_manifest: dict[str, Any] | None = None,
+    scope_manifest_path: Path = DEFAULT_SCOPE_MANIFEST_PATH,
 ) -> dict[str, Any]:
     """Build deterministic origin/current snapshots from immutable Git objects."""
 
     root = Path(root).resolve(strict=True)
     git_root, project_prefix = _git_context(root)
+    capture_head_commit = _resolve_commit(
+        git_root,
+        "HEAD",
+        label="HEAD de capture",
+    )
     if dirty_policy not in {"record", "fail"}:
         raise CaptureError(f"politique de dépôt sale inconnue : {dirty_policy}")
     excluded = {
@@ -774,22 +931,32 @@ def capture_repository(
         origin_commit,
         current_commit,
     )
-    changed_scope = set(changed_paths)
     origin_records = _tree_records(git_root, project_prefix, origin_commit)
     current_records = _tree_records(git_root, project_prefix, current_commit)
+    if scope_manifest is None:
+        scope_manifest = load_scope_manifest(scope_manifest_path)
+        manifest_bytes = Path(scope_manifest_path).read_bytes()
+    else:
+        manifest_bytes = _canonical_bytes(scope_manifest)
+        scope_manifest = load_scope_manifest_from_value(scope_manifest)
+    origin_scope = _scope_analysis(origin_records, scope_manifest)
+    current_scope = _scope_analysis(current_records, scope_manifest)
     all_oids = {
-        record["oid"] for record in [*origin_records, *current_records]
+        record["oid"]
+        for analysis in (origin_scope, current_scope)
+        for record in analysis["candidate_records"]
+        if record["path"] in analysis["classification"]
     }
     blobs = _read_blobs(git_root, all_oids)
     origin_inventory, origin_blobs = _inventory(
-        origin_records,
+        origin_scope["candidate_records"],
         blobs,
-        changed_scope,
+        origin_scope["classification"],
     )
     current_inventory, current_blobs = _inventory(
-        current_records,
+        current_scope["candidate_records"],
         blobs,
-        changed_scope,
+        current_scope["classification"],
     )
 
     origin_attestations = _attestations(
@@ -802,13 +969,6 @@ def capture_repository(
         current_blobs,
         current_inventory,
     )
-    duplicate_paths: list[str] = []
-    for inventory in (origin_inventory, current_inventory):
-        counts = Counter(entry["path"] for entry in inventory["entries"])
-        duplicate_paths.extend(
-            path for path, count in counts.items() if count != 1
-        )
-
     origin_metadata = _commit_metadata(git_root, origin_commit)
     current_metadata = _commit_metadata(git_root, current_commit)
     remediation_history = _remediation_history(
@@ -831,8 +991,18 @@ def capture_repository(
         "status": "initial_snapshot",
         "scope": {
             "project_path": project_prefix or ".",
+            "manifest_path": "release/baseline-scope-1spe.json",
+            "manifest_sha256": _sha256(manifest_bytes),
             "categories": list(CATEGORIES),
             "changed_paths_between_snapshots": changed_paths,
+            "candidate_counts": {
+                "origin": len(origin_scope["candidate_records"]),
+                "current": len(current_scope["candidate_records"]),
+            },
+            "excluded_counts": {
+                "origin": len(origin_scope["excluded_paths"]),
+                "current": len(current_scope["excluded_paths"]),
+            },
         },
         "origin": {
             "label": "origin_immutable",
@@ -858,12 +1028,34 @@ def capture_repository(
         },
         "remediation_history": remediation_history,
         "capture_context": {
+            "capture_head_commit": capture_head_commit,
             "dirty_policy": dirty_policy,
             "working_tree": working_tree,
         },
         "completeness": {
-            "duplicate_classifications": sorted(set(duplicate_paths)),
-            "unclassified_paths": [],
+            "duplicate_classifications": sorted(
+                [
+                    *origin_scope["duplicate_classifications"],
+                    *current_scope["duplicate_classifications"],
+                ],
+                key=lambda item: (item["path"], item["categories"]),
+            ),
+            "unclassified_paths": sorted(
+                set(
+                    [
+                        *origin_scope["unclassified_paths"],
+                        *current_scope["unclassified_paths"],
+                    ]
+                )
+            ),
+            "out_of_scope_pollution": sorted(
+                set(
+                    [
+                        *origin_scope["out_of_scope_pollution"],
+                        *current_scope["out_of_scope_pollution"],
+                    ]
+                )
+            ),
         },
     }
     return report
@@ -893,6 +1085,10 @@ def render_markdown(report: dict[str, Any]) -> str:
             "- Arbre de travail au moment de la capture : "
             f"`{report['capture_context']['working_tree']['status']}` "
             f"(politique `{report['capture_context']['dirty_policy']}`)."
+        ),
+        (
+            "- HEAD matériel de capture : "
+            f"`{report['capture_context']['capture_head_commit']}`."
         ),
         "",
         "L'état courant n'est jamais présenté comme l'état initial intact.",
@@ -937,33 +1133,116 @@ def render_markdown(report: dict[str, Any]) -> str:
             f"| {label} | {counts['reusable']} | {counts['stale']} | "
             f"{counts['review_required']} |"
         )
-    lines.extend(
-        [
-            "",
-            "Zéro chemin du périmètre non classé et zéro double classement.",
-            "",
-        ]
-    )
+    completeness = report["completeness"]
+    lines.append("")
+    if not any(completeness.values()):
+        lines.append(
+            "Zéro chemin du périmètre non classé, zéro double classement "
+            "et zéro pollution hors univers."
+        )
+    else:
+        lines.append(
+            "Capture bloquée par la complétude : "
+            f"{len(completeness['unclassified_paths'])} non classé(s), "
+            f"{len(completeness['duplicate_classifications'])} double(s) "
+            "classement(s), "
+            f"{len(completeness['out_of_scope_pollution'])} pollution(s) "
+            "hors univers."
+        )
+    lines.append("")
     return "\n".join(lines)
 
 
-def _safe_output(root: Path, requested: Path) -> tuple[Path, str]:
-    root = root.resolve(strict=True)
+def _lexical_output(root: Path, requested: Path) -> Path:
+    if ".." in requested.parts:
+        raise CaptureError(f"chemin de sortie non sûr : {requested}")
     candidate = requested if requested.is_absolute() else root / requested
-    resolved = candidate.resolve(strict=False)
+    candidate = Path(os.path.abspath(candidate))
+    evidence_directory = root / "validations" / "release-1spe"
     try:
-        relative = resolved.relative_to(root).as_posix()
+        candidate.relative_to(evidence_directory)
     except ValueError as error:
-        raise CaptureError(f"sortie hors projet interdite : {requested}") from error
-    if resolved.exists() and resolved.is_dir():
-        raise CaptureError(f"la sortie désigne un répertoire : {requested}")
-    return resolved, relative
+        raise CaptureError(
+            "les sorties sont limitées à validations/release-1spe : "
+            f"{requested}"
+        ) from error
+    return candidate
 
 
-def _atomic_write(path: Path, content: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+def _reject_unsafe_output_components(root: Path, output: Path) -> None:
+    relative = output.relative_to(root)
+    current = root
+    for index, component in enumerate(relative.parts):
+        current /= component
+        try:
+            mode = os.lstat(current).st_mode
+        except FileNotFoundError:
+            if index != len(relative.parts) - 1:
+                raise CaptureError(
+                    f"répertoire parent de sortie absent : {current}"
+                )
+            continue
+        if stat.S_ISLNK(mode):
+            raise CaptureError(
+                f"composant symbolique interdit dans une sortie : {current}"
+            )
+        if index == len(relative.parts) - 1:
+            if not stat.S_ISREG(mode):
+                raise CaptureError(
+                    f"la sortie existante n'est pas un fichier régulier : {current}"
+                )
+        elif not stat.S_ISDIR(mode):
+            raise CaptureError(
+                f"le parent de sortie n'est pas un répertoire : {current}"
+            )
+
+
+def _ensure_evidence_directory(root: Path) -> None:
+    current = root
+    for component in ("validations", "release-1spe"):
+        current /= component
+        try:
+            mode = os.lstat(current).st_mode
+        except FileNotFoundError:
+            os.mkdir(current, mode=0o755)
+            mode = os.lstat(current).st_mode
+        if stat.S_ISLNK(mode):
+            raise CaptureError(
+                f"composant symbolique interdit dans une sortie : {current}"
+            )
+        if not stat.S_ISDIR(mode):
+            raise CaptureError(
+                f"le parent de sortie n'est pas un répertoire : {current}"
+            )
+
+
+def _validate_output_pair(
+    root: Path,
+    json_requested: Path,
+    markdown_requested: Path,
+) -> tuple[Path, Path]:
+    """Validate two publication targets without following any symlink."""
+
+    root = root.resolve(strict=True)
+    json_output = _lexical_output(root, json_requested)
+    markdown_output = _lexical_output(root, markdown_requested)
+    if json_output == markdown_output:
+        raise CaptureError("les sorties JSON et Markdown doivent être distinctes")
+    if (
+        json_output in markdown_output.parents
+        or markdown_output in json_output.parents
+    ):
+        raise CaptureError(
+            "une sortie ne peut pas être l'ancêtre de l'autre sortie"
+        )
+    for output in (json_output, markdown_output):
+        _reject_unsafe_output_components(root, output)
+    return json_output, markdown_output
+
+
+def _prepared_file(path: Path, content: bytes, *, prefix: str) -> Path:
     descriptor, temporary_name = tempfile.mkstemp(
-        prefix=f".{path.name}.",
+        prefix=prefix,
         suffix=".tmp",
         dir=path.parent,
     )
@@ -974,15 +1253,316 @@ def _atomic_write(path: Path, content: bytes) -> None:
             stream.flush()
             os.fsync(stream.fileno())
         os.chmod(temporary, 0o644)
-        os.replace(temporary, path)
-        directory_descriptor = os.open(path.parent, os.O_RDONLY)
-        try:
-            os.fsync(directory_descriptor)
-        finally:
-            os.close(directory_descriptor)
+        return temporary
+    except BaseException:
+        temporary.unlink(missing_ok=True)
+        raise
+
+
+def _fsync_directory(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
     finally:
-        if temporary.exists():
-            temporary.unlink()
+        os.close(descriptor)
+
+
+def _atomic_write_pair(
+    first_path: Path,
+    first_content: bytes,
+    second_path: Path,
+    second_content: bytes,
+) -> None:
+    """Publish a pair atomically from the caller's point of view.
+
+    Both new files and any recovery copies are durable before the first
+    replacement.  If either replacement fails, the complete prior pair is
+    restored (or both newly-created destinations are removed).
+    """
+
+    paths = (first_path, second_path)
+    contents = (first_content, second_content)
+    existed: list[bool] = []
+    for path in paths:
+        try:
+            mode = os.lstat(path).st_mode
+        except FileNotFoundError:
+            existed.append(False)
+            continue
+        existed.append(True)
+        if stat.S_ISLNK(mode) or not stat.S_ISREG(mode):
+            raise CaptureError(
+                f"la sortie existante n'est pas un fichier régulier : {path}"
+            )
+    prepared: list[Path] = []
+    backups: list[Path | None] = []
+    try:
+        for path, content in zip(paths, contents, strict=True):
+            prepared.append(
+                _prepared_file(path, content, prefix=f".{path.name}.new.")
+            )
+        for path, was_present in zip(paths, existed, strict=True):
+            backups.append(
+                _prepared_file(
+                    path,
+                    path.read_bytes(),
+                    prefix=f".{path.name}.backup.",
+                )
+                if was_present
+                else None
+            )
+        published = 0
+        try:
+            for temporary, destination in zip(
+                prepared,
+                paths,
+                strict=True,
+            ):
+                os.replace(temporary, destination)
+                published += 1
+            for directory in {path.parent for path in paths}:
+                _fsync_directory(directory)
+        except BaseException:
+            for index in range(published - 1, -1, -1):
+                destination = paths[index]
+                backup = backups[index]
+                if backup is None:
+                    destination.unlink(missing_ok=True)
+                else:
+                    os.replace(backup, destination)
+            for directory in {path.parent for path in paths}:
+                _fsync_directory(directory)
+            raise
+    finally:
+        for temporary in [*prepared, *backups]:
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
+
+
+RFC3339_PATTERN = re.compile(
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:"
+    r"\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
+)
+
+
+def _is_rfc3339(value: object) -> bool:
+    if not isinstance(value, str) or not RFC3339_PATTERN.fullmatch(value):
+        return False
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    return parsed.tzinfo is not None
+
+
+def _require_rfc3339(value: str, *, field: str) -> None:
+    if not _is_rfc3339(value):
+        raise CaptureError(f"date RFC 3339 invalide pour {field} : {value!r}")
+
+
+def _validate_attestation_semantics(
+    snapshot: dict[str, Any],
+    comparison: dict[str, Any],
+    *,
+    label: str,
+) -> None:
+    entries = snapshot["inventory"]["entries"]
+    inventory_by_path = {entry["path"]: entry for entry in entries}
+    comparison_by_path = {
+        entry["path"]: entry for entry in comparison["inventory"]["entries"]
+    }
+    expected_paths = sorted(
+        entry["path"]
+        for entry in entries
+        if entry["category"] == "attestation"
+    )
+    attestations = snapshot["attestations"]
+    actual_paths = [item["path"] for item in attestations]
+    if actual_paths != expected_paths or len(actual_paths) != len(set(actual_paths)):
+        raise CaptureError(
+            f"couverture des attestations incohérente pour {label}"
+        )
+
+    for attestation in attestations:
+        path = attestation["path"]
+        fingerprints = attestation["fingerprints"]
+        entry = inventory_by_path[path]
+        comparison_entry = comparison_by_path.get(path)
+        comparison_sha = (
+            comparison_entry["sha256"] if comparison_entry is not None else None
+        )
+        if fingerprints["attestation_sha256"] != entry["sha256"]:
+            raise CaptureError(
+                f"empreinte d'attestation incohérente pour {label}:{path}"
+            )
+        if fingerprints["comparison_attestation_sha256"] != comparison_sha:
+            raise CaptureError(
+                f"empreinte de comparaison incohérente pour {label}:{path}"
+            )
+
+        declared = fingerprints["declared"]
+        declared_by_pointer = {
+            item["json_pointer"]: item["sha256"] for item in declared
+        }
+        if len(declared_by_pointer) != len(declared):
+            raise CaptureError(
+                f"pointeurs d'empreintes déclarées dupliqués pour {label}:{path}"
+            )
+        bound_pointers: set[str] = set()
+        for key in ("verified_bindings", "mismatched_bindings"):
+            bindings = fingerprints[key]
+            for binding in bindings:
+                pointer = binding["fingerprint_json_pointer"]
+                if (
+                    pointer not in declared_by_pointer
+                    or pointer in bound_pointers
+                ):
+                    raise CaptureError(
+                        f"partition des empreintes incohérente pour {label}:{path}"
+                    )
+                bound_pointers.add(pointer)
+        expected_unbound = [
+            item
+            for item in declared
+            if item["json_pointer"] not in bound_pointers
+        ]
+        if fingerprints["unbound_declared"] != expected_unbound:
+            raise CaptureError(
+                f"partition des empreintes incohérente pour {label}:{path}"
+            )
+
+        for binding in fingerprints["verified_bindings"]:
+            current_entry = comparison_by_path.get(binding["path"])
+            if (
+                declared_by_pointer[binding["fingerprint_json_pointer"]]
+                != binding["sha256"]
+                or current_entry is None
+                or current_entry["sha256"] != binding["sha256"]
+            ):
+                raise CaptureError(
+                    f"liaison vérifiée incohérente pour {label}:{path}"
+                )
+        for binding in fingerprints["mismatched_bindings"]:
+            if (
+                declared_by_pointer[binding["fingerprint_json_pointer"]]
+                != binding["sha256"]
+            ):
+                raise CaptureError(
+                    f"liaison périmée incohérente pour {label}:{path}"
+                )
+            if binding["reason"] == "unsafe_path":
+                try:
+                    _safe_relative_path(binding["path"])
+                except CaptureError:
+                    path_is_unsafe = True
+                else:
+                    path_is_unsafe = False
+                if not path_is_unsafe or binding["current_sha256"] is not None:
+                    raise CaptureError(
+                        f"liaison périmée incohérente pour {label}:{path}"
+                    )
+                continue
+            try:
+                _safe_relative_path(binding["path"])
+            except CaptureError as error:
+                raise CaptureError(
+                    f"liaison périmée incohérente pour {label}:{path}"
+                ) from error
+            current_entry = comparison_by_path.get(binding["path"])
+            current_sha = (
+                current_entry["sha256"] if current_entry is not None else None
+            )
+            if (
+                binding["current_sha256"] != current_sha
+                or binding["sha256"] == current_sha
+            ):
+                raise CaptureError(
+                    f"liaison périmée incohérente pour {label}:{path}"
+                )
+
+        if comparison_sha != entry["sha256"]:
+            expected_classification = "stale"
+        elif fingerprints["mismatched_bindings"]:
+            expected_classification = "stale"
+        elif fingerprints["unbound_declared"]:
+            expected_classification = "review_required"
+        elif declared and len(fingerprints["verified_bindings"]) == len(declared):
+            expected_classification = "reusable"
+        else:
+            expected_classification = "review_required"
+        if attestation["classification"] != expected_classification:
+            raise CaptureError(
+                f"verdict d'attestation incohérent pour {label}:{path}"
+            )
+
+
+def validate_report_semantics(report: dict[str, Any]) -> None:
+    """Validate invariants that JSON Schema cannot express across fields."""
+
+    for label in ("origin", "current"):
+        snapshot = report[label]
+        for field in ("authored_at", "committed_at"):
+            _require_rfc3339(snapshot[field], field=f"{label}.{field}")
+        for index, tag in enumerate(snapshot["tags"]):
+            _require_rfc3339(
+                tag["created_at"],
+                field=f"{label}.tags[{index}].created_at",
+            )
+        if snapshot["test_execution"]["commit_sha"] != snapshot["commit_sha"]:
+            raise CaptureError(
+                f"preuve de test non rattachée au snapshot {label}"
+            )
+
+        entries = snapshot["inventory"]["entries"]
+        paths = [entry["path"] for entry in entries]
+        if paths != sorted(paths) or len(paths) != len(set(paths)):
+            raise CaptureError(
+                f"chemins d'inventaire non uniques ou non triés pour {label}"
+            )
+        expected_counts = Counter(entry["category"] for entry in entries)
+        if snapshot["inventory"]["counts_by_category"] != {
+            category: expected_counts.get(category, 0)
+            for category in CATEGORIES
+        }:
+            raise CaptureError(f"compteurs d'inventaire incohérents pour {label}")
+        if snapshot["inventory"]["sha256"] != _sha256(
+            _canonical_bytes(entries)
+        ):
+            raise CaptureError(
+                f"empreinte canonique d'inventaire incohérente pour {label}"
+            )
+
+    history = report["remediation_history"]
+    expected_parent = report["origin"]["commit_sha"]
+    seen_commits: set[str] = set()
+    for index, item in enumerate(history):
+        for field in ("authored_at", "committed_at"):
+            _require_rfc3339(
+                item[field],
+                field=f"remediation_history[{index}].{field}",
+            )
+        if (
+            item["parent_commit_sha"] != expected_parent
+            or item["commit_sha"] in seen_commits
+        ):
+            raise CaptureError("chaîne de remédiation parentale incohérente")
+        seen_commits.add(item["commit_sha"])
+        expected_parent = item["commit_sha"]
+    if expected_parent != report["current"]["commit_sha"]:
+        raise CaptureError(
+            "chaîne de remédiation non raccordée au commit courant"
+        )
+
+    _validate_attestation_semantics(
+        report["origin"],
+        report["current"],
+        label="origin",
+    )
+    _validate_attestation_semantics(
+        report["current"],
+        report["current"],
+        label="current",
+    )
 
 
 def _validate_report(report: dict[str, Any], schema_path: Path) -> None:
@@ -992,7 +1572,13 @@ def _validate_report(report: dict[str, Any], schema_path: Path) -> None:
         raise CaptureError("jsonschema est requis pour valider la baseline") from error
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
     jsonschema.Draft202012Validator.check_schema(schema)
-    jsonschema.Draft202012Validator(schema).validate(report)
+    format_checker = jsonschema.FormatChecker()
+    format_checker.checkers["date-time"] = (_is_rfc3339, ())
+    jsonschema.Draft202012Validator(
+        schema,
+        format_checker=format_checker,
+    ).validate(report)
+    validate_report_semantics(report)
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -1031,13 +1617,14 @@ def main(argv: list[str] | None = None) -> int:
     arguments = _parser().parse_args(argv)
     try:
         root = arguments.root.resolve(strict=True)
-        json_output, json_relative = _safe_output(root, arguments.json_output)
-        markdown_output, markdown_relative = _safe_output(
+        _ensure_evidence_directory(root)
+        json_output, markdown_output = _validate_output_pair(
             root,
+            arguments.json_output,
             arguments.markdown_output,
         )
-        if json_output == markdown_output:
-            raise CaptureError("les sorties JSON et Markdown doivent être distinctes")
+        json_relative = json_output.relative_to(root).as_posix()
+        markdown_relative = markdown_output.relative_to(root).as_posix()
         evidence = DEFAULT_TEST_EVIDENCE
         if arguments.evidence_json is not None:
             evidence = json.loads(
@@ -1065,8 +1652,12 @@ def main(argv: list[str] | None = None) -> int:
             + "\n"
         ).encode("utf-8")
         markdown_content = render_markdown(report).encode("utf-8")
-        _atomic_write(json_output, json_content)
-        _atomic_write(markdown_output, markdown_content)
+        _atomic_write_pair(
+            json_output,
+            json_content,
+            markdown_output,
+            markdown_content,
+        )
         print(
             json.dumps(
                 {

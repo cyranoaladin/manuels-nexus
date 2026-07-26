@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "description": "Univers explicite et règles de classement de la baseline immuable 1SPE.",
+  "universe": {
+    "include": [
+      ".github/workflows/ci.yml",
+      "A_VALIDER_HUMAIN.md",
+      "CAHIER_DES_CHARGES.md",
+      "CLAUDE.md",
+      "DIRECTIVES_EN_COURS.md",
+      "ETAT_COLLECTION.md",
+      "LF-*_rapport.md",
+      "LOT-*_rapport.md",
+      "MAQUETTE_V5_A_VALIDER.md",
+      "MISSION_LOG.md",
+      "Makefile",
+      "RAPPORT_FINAL_1SPE.md",
+      "README.md",
+      "SPECIMEN_A_VALIDER.md",
+      "backlog_tspe_v2/1SPE-*/**",
+      "chapitres/1SPE-*/**",
+      "docs/01_conception_manuel.md",
+      "docs/02_workflow_production.md",
+      "docs/05_conventions_latex.md",
+      "docs/06_charte_graphique.md",
+      "docs/07_ligne_editoriale.md",
+      "docs/superpowers/plans/*1spe*",
+      "docs/superpowers/specs/*1spe*",
+      "gabarits/**",
+      "referentiel/*1SPE*",
+      "referentiel/CONFORMITE_BO2026.md",
+      "release/**",
+      "schemas/**",
+      "scripts/**",
+      "sources/*1SPE*",
+      "sources/registry.yaml",
+      "sources/txt/*1SPE*",
+      "tests/**",
+      "transversal/**",
+      "validations/**"
+    ],
+    "exclude": [
+      "backlog_tspe_v2/TSPE-*/**",
+      "chapitres/TSPE-*/**",
+      "gabarits/nexus-code.tex",
+      "gabarits/nexus-figures-nsi.tex",
+      "gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex",
+      "validations/E2/**"
+    ]
+  },
+  "categories": [
+    {
+      "category": "attestation",
+      "include": [
+        "chapitres/1SPE-*/validations/**",
+        "validations/**"
+      ],
+      "exclude": [
+        "validations/E2/**"
+      ]
+    },
+    {
+      "category": "contract",
+      "include": [
+        "chapitres/1SPE-*/contrat.yaml",
+        "release/**",
+        "schemas/**"
+      ],
+      "exclude": []
+    },
+    {
+      "category": "referential",
+      "include": [
+        "referentiel/*1SPE*",
+        "referentiel/CONFORMITE_BO2026.md",
+        "sources/*1SPE*",
+        "sources/registry.yaml",
+        "sources/txt/*1SPE*"
+      ],
+      "exclude": []
+    },
+    {
+      "category": "directive",
+      "include": [
+        ".github/workflows/ci.yml",
+        "CAHIER_DES_CHARGES.md",
+        "CLAUDE.md",
+        "DIRECTIVES_EN_COURS.md",
+        "Makefile",
+        "README.md",
+        "docs/01_conception_manuel.md",
+        "docs/02_workflow_production.md",
+        "docs/05_conventions_latex.md",
+        "docs/06_charte_graphique.md",
+        "docs/07_ligne_editoriale.md",
+        "docs/superpowers/plans/*1spe*",
+        "docs/superpowers/specs/*1spe*"
+      ],
+      "exclude": []
+    },
+    {
+      "category": "report",
+      "include": [
+        "A_VALIDER_HUMAIN.md",
+        "ETAT_COLLECTION.md",
+        "LF-*_rapport.md",
+        "LOT-*_rapport.md",
+        "MAQUETTE_V5_A_VALIDER.md",
+        "MISSION_LOG.md",
+        "RAPPORT_FINAL_1SPE.md",
+        "SPECIMEN_A_VALIDER.md",
+        "chapitres/1SPE-*/LOT-*.md"
+      ],
+      "exclude": []
+    },
+    {
+      "category": "source_1spe",
+      "include": [
+        "backlog_tspe_v2/1SPE-*/**",
+        "chapitres/1SPE-*/**",
+        "gabarits/**",
+        "scripts/**",
+        "tests/**",
+        "transversal/**"
+      ],
+      "exclude": [
+        "chapitres/1SPE-*/LOT-*.md",
+        "chapitres/1SPE-*/contrat.yaml",
+        "chapitres/1SPE-*/validations/**",
+        "gabarits/nexus-code.tex",
+        "gabarits/nexus-figures-nsi.tex",
+        "gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex"
+      ]
+    }
+  ]
+}

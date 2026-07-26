@@ -14,6 +14,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "capture_initial_state_1spe.py"
 SCHEMA = ROOT / "schemas" / "baseline_1spe.schema.json"
+SCOPE_MANIFEST = ROOT / "release" / "baseline-scope-1spe.json"
 
 
 def test_capture_components_exist() -> None:
@@ -56,7 +57,8 @@ def baseline_repository(tmp_path: Path) -> tuple[Path, str, str]:
     _git(tmp_path / "collection", "config", "user.email", "baseline@example.invalid")
 
     _write(root, "chapitres/1SPE-TEST/cours/01.tex", "origine\n")
-    _write(root, "chapitres/1SPE-TEST/contrat.yaml", "chapitre: 1SPE-TEST\n")
+    contract_content = "chapitre: 1SPE-TEST\n"
+    _write(root, "chapitres/1SPE-TEST/contrat.yaml", contract_content)
     _write(root, "referentiel/capacites_1SPE_TEST.json", '{"items": []}\n')
     _write(root, "DIRECTIVES_EN_COURS.md", "# Directive\n")
     _write(root, "RAPPORT_FINAL_1SPE.md", "# Rapport\n")
@@ -76,11 +78,26 @@ def baseline_repository(tmp_path: Path) -> tuple[Path, str, str]:
         "chapitres/1SPE-TEST/validations/unbound.json",
         '{"verdict": "pass"}\n',
     )
+    contract_sha = hashlib.sha256(contract_content.encode()).hexdigest()
+    _write(
+        root,
+        "chapitres/1SPE-TEST/validations/partially-bound.json",
+        json.dumps(
+            {
+                "object": {
+                    "path": "chapitres/1SPE-TEST/contrat.yaml",
+                    "sha256": contract_sha,
+                },
+                "gate_sha256": "f" * 64,
+            }
+        ),
+    )
     _write(
         root,
         "chapitres/TSPE-HORS-PERIMETRE/validations/tspe.json",
         '{"verdict": "pass"}\n',
     )
+    _write(root, "validations/E2/nsi.png", "preuve NSI hors 1SPE\n")
     _git(tmp_path / "collection", "add", ".")
     _git(
         tmp_path / "collection",
@@ -192,6 +209,7 @@ def test_inventory_is_exhaustive_hashed_and_uniquely_classified(
     assert report["completeness"] == {
         "duplicate_classifications": [],
         "unclassified_paths": [],
+        "out_of_scope_pollution": [],
     }
     assert {
         "source_1spe",
@@ -240,6 +258,188 @@ def test_attestations_have_one_conservative_verdict_and_fingerprints(
         assert len(attestation["fingerprints"]["attestation_sha256"]) == 64
 
 
+def test_unbound_declared_fingerprint_prevents_reuse(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+
+    attestation = next(
+        item
+        for item in report["current"]["attestations"]
+        if item["path"].endswith("partially-bound.json")
+    )
+    assert attestation["classification"] == "review_required"
+    assert attestation["fingerprints"]["verified_bindings"]
+    assert attestation["fingerprints"]["unbound_declared"] == [
+        {
+            "json_pointer": "/gate_sha256",
+            "sha256": "f" * 64,
+        }
+    ]
+
+
+def test_scope_manifest_is_explicit_versioned_and_has_required_sentinels() -> None:
+    assert SCOPE_MANIFEST.is_file()
+    manifest = json.loads(SCOPE_MANIFEST.read_text(encoding="utf-8"))
+
+    assert manifest["schema_version"] == 1
+    includes = set(manifest["universe"]["include"])
+    excludes = set(manifest["universe"]["exclude"])
+    assert {
+        "docs/01_conception_manuel.md",
+        "docs/02_workflow_production.md",
+        "docs/05_conventions_latex.md",
+        "docs/06_charte_graphique.md",
+        "docs/07_ligne_editoriale.md",
+        "referentiel/CONFORMITE_BO2026.md",
+        "sources/registry.yaml",
+    } <= includes
+    assert {"chapitres/TSPE-*/**", "validations/E2/**"} <= excludes
+    assert {rule["category"] for rule in manifest["categories"]} == {
+        "source_1spe",
+        "referential",
+        "contract",
+        "directive",
+        "report",
+        "attestation",
+    }
+
+
+def test_scope_excludes_tspe_and_nsi_e2_pollution(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+
+    paths = {
+        item["path"] for item in report["current"]["inventory"]["entries"]
+    }
+    assert "chapitres/TSPE-HORS-PERIMETRE/validations/tspe.json" not in paths
+    assert "validations/E2/nsi.png" not in paths
+
+
+def test_scope_reports_candidate_without_category() -> None:
+    module = _load_module()
+    manifest = copy.deepcopy(module.load_scope_manifest(SCOPE_MANIFEST))
+    manifest["universe"]["include"].append("inconnu/**")
+    analysis = module._scope_analysis(
+        [
+            {
+                "path": "inconnu/objet.dat",
+                "mode": "100644",
+                "oid": "0" * 40,
+            }
+        ],
+        manifest,
+    )
+
+    assert analysis["unclassified_paths"] == ["inconnu/objet.dat"]
+    assert analysis["classification"] == {}
+
+
+def test_scope_reports_every_overlapping_category() -> None:
+    module = _load_module()
+    manifest = copy.deepcopy(module.load_scope_manifest(SCOPE_MANIFEST))
+    directive = next(
+        rule
+        for rule in manifest["categories"]
+        if rule["category"] == "directive"
+    )
+    directive["include"].append("chapitres/1SPE-*/cours/**")
+    analysis = module._scope_analysis(
+        [
+            {
+                "path": "chapitres/1SPE-TEST/cours/01.tex",
+                "mode": "100644",
+                "oid": "0" * 40,
+            }
+        ],
+        manifest,
+    )
+
+    assert analysis["duplicate_classifications"] == [
+        {
+            "path": "chapitres/1SPE-TEST/cours/01.tex",
+            "categories": ["directive", "source_1spe"],
+        }
+    ]
+    assert analysis["classification"] == {}
+
+
+def test_scope_reports_category_pollution_outside_universe() -> None:
+    module = _load_module()
+    manifest = copy.deepcopy(module.load_scope_manifest(SCOPE_MANIFEST))
+    directive = next(
+        rule
+        for rule in manifest["categories"]
+        if rule["category"] == "directive"
+    )
+    directive["include"].append("pollution/**")
+    analysis = module._scope_analysis(
+        [
+            {
+                "path": "pollution/objet.md",
+                "mode": "100644",
+                "oid": "0" * 40,
+            }
+        ],
+        manifest,
+    )
+
+    assert analysis["out_of_scope_pollution"] == ["pollution/objet.md"]
+
+
+def test_capture_reads_only_classified_candidate_blobs(
+    baseline_repository: tuple[Path, str, str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    git_root, prefix = module._git_context(root)
+    records = module._tree_records(git_root, prefix, current)
+    origin_records = module._tree_records(git_root, prefix, origin)
+    excluded_oid = next(
+        item["oid"]
+        for item in records
+        if item["path"] == "validations/E2/nsi.png"
+    )
+    all_tree_oids = {
+        item["oid"] for item in [*origin_records, *records]
+    }
+    captured_oids: set[str] = set()
+    real_reader = module._read_blobs
+
+    def spy_reader(git_root: Path, oids: set[str]) -> dict[str, bytes]:
+        captured_oids.update(oids)
+        return real_reader(git_root, oids)
+
+    monkeypatch.setattr(module, "_read_blobs", spy_reader)
+    module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+
+    assert excluded_oid not in captured_oids
+    assert captured_oids < all_tree_oids
+
+
 def test_report_validates_against_closed_schema(
     baseline_repository: tuple[Path, str, str],
 ) -> None:
@@ -266,6 +466,25 @@ def test_schema_closes_nested_release_objects() -> None:
         "enum"
     ] == ["reusable", "stale", "review_required"]
     assert schema["properties"]["status"]["const"] == "initial_snapshot"
+
+
+def test_markdown_never_claims_zero_when_completeness_has_findings(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+    report["completeness"]["unclassified_paths"] = ["inconnu/objet.dat"]
+
+    markdown = module.render_markdown(report)
+
+    assert "Zéro chemin du périmètre non classé" not in markdown
+    assert "1 non classé" in markdown
 
 
 def test_schema_rejects_invalid_nested_mutations(
@@ -310,6 +529,92 @@ def test_schema_rejects_invalid_nested_mutations(
     assert all(not validator.is_valid(candidate) for candidate in invalid_reports)
 
 
+@pytest.mark.parametrize(
+    ("mutation", "diagnostic"),
+    [
+        ("date", "RFC 3339"),
+        ("counter", "compteurs"),
+        ("inventory_sha", "empreinte canonique"),
+        ("test_commit", "preuve de test"),
+        ("remediation_chain", "chaîne de remédiation"),
+        ("duplicate_inventory_path", "chemins d'inventaire"),
+        ("attestation_coverage", "couverture des attestations"),
+        ("binding_hash", "liaison vérifiée"),
+        ("unbound_partition", "partition des empreintes"),
+    ],
+)
+def test_semantic_validator_rejects_cross_field_mutations(
+    baseline_repository: tuple[Path, str, str],
+    mutation: str,
+    diagnostic: str,
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+    candidate = copy.deepcopy(report)
+
+    if mutation == "date":
+        candidate["current"]["committed_at"] = "2026-07-26"
+    elif mutation == "counter":
+        candidate["current"]["inventory"]["counts_by_category"][
+            "source_1spe"
+        ] += 1
+    elif mutation == "inventory_sha":
+        candidate["origin"]["inventory"]["sha256"] = "0" * 64
+    elif mutation == "test_commit":
+        candidate["current"]["test_execution"]["commit_sha"] = origin
+    elif mutation == "remediation_chain":
+        candidate["remediation_history"][0]["parent_commit_sha"] = "0" * 40
+    elif mutation == "duplicate_inventory_path":
+        candidate["current"]["inventory"]["entries"].append(
+            copy.deepcopy(candidate["current"]["inventory"]["entries"][0])
+        )
+    elif mutation == "attestation_coverage":
+        candidate["current"]["attestations"].pop()
+    elif mutation == "binding_hash":
+        attestation = next(
+            item
+            for item in candidate["current"]["attestations"]
+            if item["fingerprints"]["verified_bindings"]
+        )
+        attestation["fingerprints"]["verified_bindings"][0]["sha256"] = "0" * 64
+    elif mutation == "unbound_partition":
+        attestation = next(
+            item
+            for item in candidate["current"]["attestations"]
+            if item["fingerprints"]["unbound_declared"]
+        )
+        attestation["fingerprints"]["unbound_declared"] = []
+    else:  # pragma: no cover - protects the parameter table itself
+        raise AssertionError(mutation)
+
+    with pytest.raises(module.CaptureError, match=diagnostic):
+        module.validate_report_semantics(candidate)
+
+
+def test_schema_validation_uses_a_date_time_format_checker(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+    report["origin"]["tags"][0]["created_at"] = "date-invalide"
+
+    with pytest.raises(jsonschema.ValidationError) as caught:
+        module._validate_report(report, SCHEMA)
+    assert caught.value.validator == "format"
+
+
 def test_dirty_worktree_is_recorded_or_rejected_explicitly(
     baseline_repository: tuple[Path, str, str],
 ) -> None:
@@ -327,7 +632,13 @@ def test_dirty_worktree_is_recorded_or_rejected_explicitly(
 
     assert report["capture_context"]["working_tree"] == {
         "status": "dirty",
-        "paths": [{"path": "notes-locales.tmp", "status": "??"}],
+        "paths": [
+            {
+                "path": "notes-locales.tmp",
+                "status": "??",
+                "role": "changed",
+            }
+        ],
     }
     with pytest.raises(module.CaptureError, match="dépôt sale"):
         module.capture_repository(
@@ -337,6 +648,66 @@ def test_dirty_worktree_is_recorded_or_rejected_explicitly(
             test_evidence=_test_evidence(),
             dirty_policy="fail",
         )
+
+
+def test_capture_records_head_separately_from_the_pinned_current_snapshot(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    _write(root, "hors-snapshot.txt", "commit postérieur au snapshot\n")
+    _git(root, "add", "hors-snapshot.txt")
+    _git(root, "commit", "-q", "-m", "[LOCAL] commit de capture")
+    capture_head = _git(root, "rev-parse", "HEAD")
+
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+
+    assert report["current"]["commit_sha"] == current
+    assert report["capture_context"]["capture_head_commit"] == capture_head
+    assert capture_head != current
+
+
+def test_dirty_rename_records_source_and_destination_without_arrow_syntax(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    source = "chapitres/1SPE-TEST/cours/01.tex"
+    destination = "chapitres/1SPE-TEST/cours/01-renomme.tex"
+    _git(root, "mv", source, destination)
+
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+        dirty_policy="record",
+    )
+
+    assert report["capture_context"]["working_tree"] == {
+        "status": "dirty",
+        "paths": [
+            {
+                "path": destination,
+                "status": "R ",
+                "role": "rename_destination",
+            },
+            {
+                "path": source,
+                "status": "R ",
+                "role": "rename_source",
+            },
+        ],
+    }
+    assert all(
+        " -> " not in item["path"]
+        for item in report["capture_context"]["working_tree"]["paths"]
+    )
 
 
 def test_missing_origin_commit_fails_loudly(
@@ -352,6 +723,104 @@ def test_missing_origin_commit_fails_loudly(
             current_ref=current,
             test_evidence=_test_evidence(),
         )
+
+
+def test_git_calls_ignore_hostile_parent_environment_and_protect_refs(
+    baseline_repository: tuple[Path, str, str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    hostile = {
+        "GIT_DIR": "/tmp/depot-detourne",
+        "GIT_WORK_TREE": "/tmp/arbre-detourne",
+        "GIT_OBJECT_DIRECTORY": "/tmp/objets-detournes",
+        "GIT_ALTERNATE_OBJECT_DIRECTORIES": "/tmp/objets-alternatifs",
+        "GIT_CONFIG_GLOBAL": "/tmp/config-globale-hostile",
+        "GIT_CONFIG_SYSTEM": "/tmp/config-systeme-hostile",
+        "GIT_CONFIG_COUNT": "1",
+        "GIT_CONFIG_KEY_0": "alias.rev-parse",
+        "GIT_CONFIG_VALUE_0": "!false",
+        "GIT_NO_REPLACE_OBJECTS": "0",
+        "GIT_OPTIONAL_LOCKS": "1",
+        "GIT_TERMINAL_PROMPT": "1",
+    }
+    for key, value in hostile.items():
+        monkeypatch.setenv(key, value)
+    real_run = module.subprocess.run
+    environments: list[dict[str, str] | None] = []
+    commands: list[list[str]] = []
+
+    def spy_run(*args: object, **kwargs: object) -> subprocess.CompletedProcess:
+        command = args[0]
+        assert isinstance(command, list)
+        commands.append(command)
+        environment = kwargs.get("env")
+        assert environment is None or isinstance(environment, dict)
+        environments.append(environment)
+        return real_run(*args, **kwargs)
+
+    monkeypatch.setattr(module.subprocess, "run", spy_run)
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+
+    assert report["origin"]["commit_sha"] == origin
+    assert environments and all(environment is not None for environment in environments)
+    trusted_git_keys = {
+        "GIT_CONFIG_GLOBAL",
+        "GIT_CONFIG_NOSYSTEM",
+        "GIT_NO_REPLACE_OBJECTS",
+        "GIT_OPTIONAL_LOCKS",
+        "GIT_TERMINAL_PROMPT",
+        "GIT_ASKPASS",
+    }
+    for environment in environments:
+        assert environment is not None
+        assert {
+            key for key in environment if key.startswith("GIT_")
+        } == trusted_git_keys
+        assert environment["GIT_NO_REPLACE_OBJECTS"] == "1"
+        assert environment["GIT_OPTIONAL_LOCKS"] == "0"
+        assert environment["GIT_TERMINAL_PROMPT"] == "0"
+    assert any(
+        command[1:4] == ["rev-parse", "--verify", "--end-of-options"]
+        for command in commands
+    )
+
+
+def test_capture_ignores_real_git_replace_refs(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    replacement_tree = _git(root, "rev-parse", f"{current}^{{tree}}")
+    replacement = _git(
+        root,
+        "commit-tree",
+        replacement_tree,
+        "-m",
+        "objet de remplacement hostile",
+    )
+    _git(root, "replace", origin, replacement)
+
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+
+    origin_source = next(
+        item
+        for item in report["origin"]["inventory"]["entries"]
+        if item["path"] == "chapitres/1SPE-TEST/cours/01.tex"
+    )
+    assert origin_source["sha256"] == hashlib.sha256(b"origine\n").hexdigest()
+    assert report["origin"]["subject"] == "[BASELINE] origine"
 
 
 def test_unsafe_symlink_is_rejected_without_following_it(
@@ -381,8 +850,8 @@ def test_cli_is_cwd_independent_schema_valid_and_deterministic(
     root, origin, current = baseline_repository
     evidence = tmp_path / "evidence.json"
     evidence.write_text(json.dumps(_test_evidence()), encoding="utf-8")
-    json_output = root / "out" / "baseline.json"
-    markdown_output = root / "out" / "baseline.md"
+    json_output = root / "validations" / "release-1spe" / "baseline.json"
+    markdown_output = root / "validations" / "release-1spe" / "baseline.md"
     command = [
         str(SCRIPT),
         "--root",
@@ -394,9 +863,9 @@ def test_cli_is_cwd_independent_schema_valid_and_deterministic(
         "--evidence-json",
         str(evidence),
         "--json",
-        "out/baseline.json",
+        "validations/release-1spe/baseline.json",
         "--markdown",
-        "out/baseline.md",
+        "validations/release-1spe/baseline.md",
     ]
 
     first = subprocess.run(
@@ -430,6 +899,123 @@ def test_cli_is_cwd_independent_schema_valid_and_deterministic(
     assert origin in first_markdown.decode()
     assert current in first_markdown.decode()
     assert "historique" in first_markdown.decode().casefold()
+
+
+def test_output_pair_is_restricted_to_release_evidence_directory(
+    tmp_path: Path,
+) -> None:
+    module = _load_module()
+    root = tmp_path / "project"
+    (root / "validations" / "release-1spe").mkdir(parents=True)
+
+    valid = module._validate_output_pair(
+        root,
+        Path("validations/release-1spe/baseline.json"),
+        Path("validations/release-1spe/baseline.md"),
+    )
+    assert valid[0] == root / "validations" / "release-1spe" / "baseline.json"
+    with pytest.raises(module.CaptureError, match="validations/release-1spe"):
+        module._validate_output_pair(
+            root,
+            Path("out/baseline.json"),
+            Path("validations/release-1spe/baseline.md"),
+        )
+
+
+@pytest.mark.parametrize("link_kind", ["final-internal", "final-external", "parent"])
+def test_output_pair_rejects_every_symlink_component(
+    tmp_path: Path,
+    link_kind: str,
+) -> None:
+    module = _load_module()
+    root = tmp_path / "project"
+    evidence = root / "validations" / "release-1spe"
+    evidence.mkdir(parents=True)
+    json_relative = Path("validations/release-1spe/baseline.json")
+    if link_kind == "final-internal":
+        (evidence / "real.json").write_text("ancien", encoding="utf-8")
+        os.symlink("real.json", evidence / "baseline.json")
+    elif link_kind == "final-external":
+        external = tmp_path / "external.json"
+        external.write_text("extérieur", encoding="utf-8")
+        os.symlink(external, evidence / "baseline.json")
+    else:
+        (root / "validations" / "release-1spe").rmdir()
+        target = root / "real-evidence"
+        target.mkdir()
+        os.symlink(target, root / "validations" / "release-1spe")
+
+    with pytest.raises(module.CaptureError, match="symbolique"):
+        module._validate_output_pair(
+            root,
+            json_relative,
+            Path("validations/release-1spe/baseline.md"),
+        )
+
+
+def test_output_pair_rejects_non_regular_final_and_ancestor_collision(
+    tmp_path: Path,
+) -> None:
+    module = _load_module()
+    root = tmp_path / "project"
+    evidence = root / "validations" / "release-1spe"
+    evidence.mkdir(parents=True)
+    (evidence / "directory.json").mkdir()
+
+    with pytest.raises(module.CaptureError, match="fichier régulier"):
+        module._validate_output_pair(
+            root,
+            Path("validations/release-1spe/directory.json"),
+            Path("validations/release-1spe/baseline.md"),
+        )
+    with pytest.raises(module.CaptureError, match="ancêtre"):
+        module._validate_output_pair(
+            root,
+            Path("validations/release-1spe/a"),
+            Path("validations/release-1spe/a/b"),
+        )
+
+
+@pytest.mark.parametrize("old_pair_exists", [False, True])
+def test_pair_publication_rolls_back_when_second_replace_fails(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    old_pair_exists: bool,
+) -> None:
+    module = _load_module()
+    root = tmp_path / "project"
+    evidence = root / "validations" / "release-1spe"
+    evidence.mkdir(parents=True)
+    json_output = evidence / "baseline.json"
+    markdown_output = evidence / "baseline.md"
+    if old_pair_exists:
+        json_output.write_bytes(b"old-json")
+        markdown_output.write_bytes(b"old-markdown")
+    real_replace = module.os.replace
+    calls = 0
+
+    def fail_second_replace(source: object, destination: object) -> None:
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise OSError("publication simulée interrompue")
+        real_replace(source, destination)
+
+    monkeypatch.setattr(module.os, "replace", fail_second_replace)
+    with pytest.raises(OSError, match="interrompue"):
+        module._atomic_write_pair(
+            json_output,
+            b"new-json",
+            markdown_output,
+            b"new-markdown",
+        )
+
+    if old_pair_exists:
+        assert json_output.read_bytes() == b"old-json"
+        assert markdown_output.read_bytes() == b"old-markdown"
+    else:
+        assert not json_output.exists()
+        assert not markdown_output.exists()
 
 
 def test_real_baseline_evidence_is_exact_and_never_calls_head_initial() -> None:
