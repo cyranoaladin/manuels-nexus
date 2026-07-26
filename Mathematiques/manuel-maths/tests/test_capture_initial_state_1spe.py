@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "capture_initial_state_1spe.py"
 SCHEMA = ROOT / "schemas" / "baseline_1spe.schema.json"
 SCOPE_MANIFEST = ROOT / "release" / "baseline-scope-1spe.json"
+TAGS_ANCHOR = ROOT / "release" / "baseline-tags-1spe.json"
 BASELINE_JSON = ROOT / "validations" / "release-1spe" / "baseline.json"
 BASELINE_MARKDOWN = ROOT / "validations" / "release-1spe" / "baseline.md"
 
@@ -174,6 +175,88 @@ def _test_evidence() -> dict[str, dict[str, object]]:
             "provenance": "Exécution directe sur le commit courant propre.",
         },
     }
+
+
+def _tags_anchor_from_report(
+    module: ModuleType,
+    report: dict[str, object],
+) -> dict[str, object]:
+    snapshots = {}
+    for label in ("origin", "current"):
+        tags = report[label]["tags"]
+        snapshots[label] = {
+            "tags": tags,
+            "tags_sha256": module._sha256(module._canonical_bytes(tags)),
+        }
+    return {
+        "schema_version": 1,
+        "origin_commit_sha": report["origin"]["commit_sha"],
+        "current_commit_sha": report["current"]["commit_sha"],
+        "snapshots": snapshots,
+    }
+
+
+@pytest.fixture
+def historical_artifact_repository(
+    baseline_repository: tuple[Path, str, str],
+) -> tuple[Path, str, str]:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    draft = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=module.DEFAULT_TEST_EVIDENCE,
+    )
+    anchor = _tags_anchor_from_report(module, draft)
+    anchor_bytes = module._canonical_bytes(anchor) + b"\n"
+    runtime = SCRIPT.read_text(encoding="utf-8")
+    runtime = runtime.replace(
+        f'DEFAULT_ORIGIN_REF = "{module.DEFAULT_ORIGIN_REF}"',
+        f'DEFAULT_ORIGIN_REF = "{origin}"',
+    ).replace(
+        f'DEFAULT_CURRENT_REF = "{module.DEFAULT_CURRENT_REF}"',
+        f'DEFAULT_CURRENT_REF = "{current}"',
+    )
+    assert f'DEFAULT_ORIGIN_REF = "{origin}"' in runtime
+    assert f'DEFAULT_CURRENT_REF = "{current}"' in runtime
+    _write(root, "scripts/capture_initial_state_1spe.py", runtime)
+    _write(
+        root,
+        "release/baseline-tags-1spe.json",
+        anchor_bytes.decode("utf-8"),
+    )
+    _git(root, "add", "scripts/capture_initial_state_1spe.py")
+    _git(root, "add", "release/baseline-tags-1spe.json")
+    _git(root, "commit", "-q", "-m", "[CAPTURE] runtime historique fixture")
+
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=module.DEFAULT_TEST_EVIDENCE,
+        tags_anchor=anchor,
+        tags_anchor_bytes=anchor_bytes,
+    )
+    _write(
+        root,
+        "validations/release-1spe/baseline.json",
+        json.dumps(
+            report,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+    )
+    _write(
+        root,
+        "validations/release-1spe/baseline.md",
+        module.render_markdown(report),
+    )
+    _git(root, "add", "validations/release-1spe")
+    _git(root, "commit", "-q", "-m", "[ARTIFACT] baseline historique fixture")
+    return root, origin, current
 
 
 def test_capture_builds_two_traceable_snapshots(
@@ -918,35 +1001,11 @@ def test_cli_verifies_existing_artifact_read_only() -> None:
 
 
 def test_dispatch_executes_capture_head_runtime_not_current_functions(
-    baseline_repository: tuple[Path, str, str],
+    historical_artifact_repository: tuple[Path, str, str],
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     module = _load_module()
-    root, origin, current = baseline_repository
-    report = module.capture_repository(
-        root=root,
-        origin_ref=origin,
-        current_ref=current,
-        test_evidence=_test_evidence(),
-    )
-    _write(
-        root,
-        "validations/release-1spe/baseline.json",
-        json.dumps(
-            report,
-            ensure_ascii=False,
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n",
-    )
-    _write(
-        root,
-        "validations/release-1spe/baseline.md",
-        module.render_markdown(report),
-    )
-    _git(root, "add", "validations/release-1spe")
-    _git(root, "commit", "-q", "-m", "[ARTIFACT] baseline fixture")
+    root, _, _ = historical_artifact_repository
 
     def current_runtime_must_not_run(*args: object, **kwargs: object) -> None:
         raise AssertionError("le runtime courant a été exécuté")
@@ -959,9 +1018,6 @@ def test_dispatch_executes_capture_head_runtime_not_current_functions(
     completed = module._dispatch_historical_verification(
         root=root,
         report_path=root / "validations/release-1spe/baseline.json",
-        trusted_test_evidence=_test_evidence(),
-        origin_ref=origin,
-        current_ref=current,
     )
 
     assert completed.returncode == 0, completed.stderr.decode()
@@ -969,6 +1025,66 @@ def test_dispatch_executes_capture_head_runtime_not_current_functions(
         "json": "validations/release-1spe/baseline.json",
         "status": "externally_verified",
     }
+
+
+def test_dispatch_ignores_shadow_refs_and_current_bootstrap_constants(
+    historical_artifact_repository: tuple[Path, str, str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_module()
+    root, _, _ = historical_artifact_repository
+    shadow_branch = "refs/heads/41eaa74"
+    shadow_tag = "refs/tags/ca16edb"
+    _git(root, "update-ref", shadow_branch, "HEAD")
+    _git(root, "update-ref", shadow_tag, "HEAD")
+    monkeypatch.setattr(module, "DEFAULT_ORIGIN_REF", "HEAD")
+    monkeypatch.setattr(module, "DEFAULT_CURRENT_REF", "HEAD")
+    monkeypatch.setattr(
+        module,
+        "DEFAULT_TEST_EVIDENCE",
+        {
+            "origin": {"kind": "hostile-bootstrap"},
+            "current": {"kind": "hostile-bootstrap"},
+        },
+    )
+    try:
+        completed = module._dispatch_historical_verification(
+            root=root,
+            report_path=root / "validations/release-1spe/baseline.json",
+        )
+    finally:
+        _git(root, "update-ref", "-d", shadow_branch)
+        _git(root, "update-ref", "-d", shadow_tag)
+
+    assert completed.returncode == 0, completed.stderr.decode()
+    assert json.loads(completed.stdout)["status"] == "externally_verified"
+
+
+def test_internal_runtime_rejects_free_refs_and_evidence(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    module = _load_module()
+
+    exit_code = module.main(
+        [
+            "--historical-runtime",
+            "--historical-schema",
+            str(SCHEMA),
+            "--root",
+            str(ROOT),
+            "--verify-existing",
+            "validations/release-1spe/baseline.json",
+            "--origin-ref",
+            "HEAD",
+            "--current-ref",
+            "HEAD",
+            "--evidence-json",
+            str(BASELINE_JSON),
+        ]
+    )
+
+    assert exit_code == 2
+    assert "références et preuves libres interdites" in capsys.readouterr().err
 
 
 def test_historical_dispatch_rejects_unknown_schema_version() -> None:
@@ -1013,6 +1129,139 @@ def test_historical_artifact_survives_later_tag_ref_changes() -> None:
     finally:
         if tag in _git(ROOT, "tag", "--list", tag):
             _git(ROOT, "tag", "-d", tag)
+
+
+def test_versioned_tags_anchor_matches_the_authenticated_report(
+    historical_artifact_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = historical_artifact_repository
+    report_path = root / "validations/release-1spe/baseline.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+
+    anchor, anchor_bytes = module.load_tags_anchor(
+        root / "release/baseline-tags-1spe.json"
+    )
+
+    assert anchor["origin_commit_sha"] == origin
+    assert anchor["current_commit_sha"] == current
+    assert module._sha256(anchor_bytes) == report["scope"][
+        "tags_anchor_sha256"
+    ]
+    for label in ("origin", "current"):
+        assert anchor["snapshots"][label]["tags"] == report[label]["tags"]
+
+
+def test_official_tags_anchor_pins_full_commits() -> None:
+    module = _load_module()
+    anchor, _ = module.load_tags_anchor(TAGS_ANCHOR)
+
+    assert anchor["origin_commit_sha"] == module.OFFICIAL_ORIGIN_COMMIT
+    assert anchor["current_commit_sha"] == module.OFFICIAL_CURRENT_COMMIT
+
+
+def test_tags_anchor_rejects_an_inconsistent_snapshot_hash() -> None:
+    module = _load_module()
+    report = json.loads(BASELINE_JSON.read_text(encoding="utf-8"))
+    anchor = _tags_anchor_from_report(module, report)
+    anchor["snapshots"]["origin"]["tags_sha256"] = "0" * 64
+
+    with pytest.raises(module.CaptureError, match="empreinte.*tags.*origin"):
+        module.load_tags_anchor_from_value(anchor)
+
+
+def test_coordinated_artifact_tag_forgery_is_rejected_by_capture_anchor(
+    historical_artifact_repository: tuple[Path, str, str],
+    tmp_path: Path,
+) -> None:
+    module = _load_module()
+    root, _, _ = historical_artifact_repository
+    report_path = root / "validations/release-1spe/baseline.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    capture_head = report["capture_context"]["capture_head_commit"]
+    git_root = Path(_git(root, "rev-parse", "--show-toplevel"))
+    project_prefix = root.relative_to(git_root)
+    sibling_git_root = tmp_path / "sibling-worktree"
+    _git(git_root, "worktree", "add", "--detach", str(sibling_git_root), capture_head)
+    sibling_root = sibling_git_root / project_prefix
+    try:
+        report["origin"]["tags"].pop()
+        _write(
+            sibling_root,
+            "validations/release-1spe/baseline.json",
+            json.dumps(
+                report,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n",
+        )
+        _write(
+            sibling_root,
+            "validations/release-1spe/baseline.md",
+            module.render_markdown(report),
+        )
+        _git(
+            sibling_git_root,
+            "add",
+            str(
+                project_prefix
+                / "validations/release-1spe/baseline.json"
+            ),
+            str(
+                project_prefix
+                / "validations/release-1spe/baseline.md"
+            ),
+        )
+        _git(
+            sibling_git_root,
+            "commit",
+            "-q",
+            "-m",
+            "[ARTIFACT] falsification coordonnée des tags",
+        )
+
+        completed = module._dispatch_historical_verification(
+            root=sibling_root,
+            report_path=(
+                sibling_root / "validations/release-1spe/baseline.json"
+            ),
+        )
+        assert completed.returncode == 2
+        assert "ancre de tags" in completed.stderr.decode()
+    finally:
+        _git(git_root, "worktree", "remove", "--force", str(sibling_git_root))
+
+
+def test_worktree_tags_anchor_mutation_does_not_change_historical_verdict(
+    historical_artifact_repository: tuple[Path, str, str],
+) -> None:
+    root, _, _ = historical_artifact_repository
+    tags_anchor = root / "release/baseline-tags-1spe.json"
+    original = tags_anchor.read_bytes()
+    try:
+        tags_anchor.write_text('{"hostile": true}\n', encoding="utf-8")
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                "--root",
+                str(root),
+                "--verify-existing",
+                "validations/release-1spe/baseline.json",
+            ],
+            cwd=root,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+    finally:
+        tags_anchor.write_bytes(original)
+
+    assert completed.returncode == 0, completed.stderr
+    assert json.loads(completed.stdout)["status"] == "externally_verified"
 
 
 def test_worktree_tag_mutation_is_rejected_against_committed_json() -> None:
@@ -1088,6 +1337,7 @@ def test_generic_external_api_treats_dirty_worktree_as_capture_time_claim(
     "path",
     [
         "release/baseline-scope-1spe.json",
+        "release/baseline-tags-1spe.json",
         "scripts/capture_initial_state_1spe.py",
         "schemas/baseline_1spe.schema.json",
         "validations/release-1spe/baseline.json",
@@ -1108,6 +1358,7 @@ def test_historical_runtime_inputs_require_git_mode_100644(
     _git(root, "config", "user.email", "mode@example.invalid")
     paths = (
         "release/baseline-scope-1spe.json",
+        "release/baseline-tags-1spe.json",
         "scripts/capture_initial_state_1spe.py",
         "schemas/baseline_1spe.schema.json",
         "validations/release-1spe/baseline.json",
@@ -1134,6 +1385,48 @@ def test_historical_runtime_inputs_require_git_mode_100644(
             prefix,
             commit,
             paths,
+        )
+
+
+def test_historical_runtime_inputs_reject_a_missing_tags_anchor(
+    tmp_path: Path,
+) -> None:
+    module = _load_module()
+    root = tmp_path / "project"
+    root.mkdir()
+    _git(root, "init", "-q")
+    for path in (
+        "release/baseline-scope-1spe.json",
+        "scripts/capture_initial_state_1spe.py",
+        "schemas/baseline_1spe.schema.json",
+    ):
+        _write(root, path, f"contenu {path}\n")
+    _git(root, "add", ".")
+    _git(
+        root,
+        "-c",
+        "user.name=Anchor Test",
+        "-c",
+        "user.email=anchor@example.invalid",
+        "commit",
+        "-q",
+        "-m",
+        "capture sans ancre",
+    )
+    git_root, prefix = module._git_context(root)
+    commit = module._resolve_commit(git_root, "HEAD", label="ancre absente")
+
+    with pytest.raises(module.CaptureError, match="fichier absent.*ancre|fichier absent"):
+        module._committed_project_files(
+            git_root,
+            prefix,
+            commit,
+            (
+                "release/baseline-scope-1spe.json",
+                "release/baseline-tags-1spe.json",
+                "scripts/capture_initial_state_1spe.py",
+                "schemas/baseline_1spe.schema.json",
+            ),
         )
 
 
@@ -1605,8 +1898,14 @@ def test_pair_publication_rolls_back_when_second_replace_fails(
 def test_real_baseline_evidence_is_exact_and_never_calls_head_initial() -> None:
     module = _load_module()
 
-    assert module.DEFAULT_ORIGIN_REF == "41eaa74"
-    assert module.DEFAULT_CURRENT_REF == "ca16edb"
+    assert (
+        module.DEFAULT_ORIGIN_REF
+        == "41eaa745d000953654f7f07f6760c675cdae91d5"
+    )
+    assert (
+        module.DEFAULT_CURRENT_REF
+        == "ca16edbb51d7f0122fcbbfea5cccfa7e2066cd63"
+    )
     assert module.DEFAULT_TEST_EVIDENCE["origin"] == {
         "kind": "historical_observation",
         "command": ".venv/bin/python -m pytest -q",

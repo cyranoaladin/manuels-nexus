@@ -27,13 +27,19 @@ CATEGORIES = (
     "attestation",
 )
 ATTESTATION_CLASSES = ("reusable", "stale", "review_required")
-DEFAULT_ORIGIN_REF = "41eaa74"
-DEFAULT_CURRENT_REF = "ca16edb"
+OFFICIAL_ORIGIN_COMMIT = "41eaa745d000953654f7f07f6760c675cdae91d5"
+OFFICIAL_CURRENT_COMMIT = "ca16edbb51d7f0122fcbbfea5cccfa7e2066cd63"
+DEFAULT_ORIGIN_REF = "41eaa745d000953654f7f07f6760c675cdae91d5"
+DEFAULT_CURRENT_REF = "ca16edbb51d7f0122fcbbfea5cccfa7e2066cd63"
 SUPPORTED_SCHEMA_VERSIONS = frozenset({1})
 OFFICIAL_JSON_RELATIVE = "validations/release-1spe/baseline.json"
 OFFICIAL_MARKDOWN_RELATIVE = "validations/release-1spe/baseline.md"
+OFFICIAL_TAGS_ANCHOR_RELATIVE = "release/baseline-tags-1spe.json"
 DEFAULT_SCOPE_MANIFEST_PATH = (
     Path(__file__).resolve().parents[1] / "release" / "baseline-scope-1spe.json"
+)
+DEFAULT_TAGS_ANCHOR_PATH = (
+    Path(__file__).resolve().parents[1] / OFFICIAL_TAGS_ANCHOR_RELATIVE
 )
 DEFAULT_REMEDIATION_COMMITS = (
     ("11dd437", "baseline_remediation"),
@@ -888,6 +894,131 @@ def _tags(git_root: Path, snapshot_commit: str) -> list[dict[str, Any]]:
     return sorted(tags, key=lambda item: item["name"])
 
 
+def load_tags_anchor_from_value(anchor: Any) -> dict[str, Any]:
+    if not isinstance(anchor, dict) or set(anchor) != {
+        "schema_version",
+        "origin_commit_sha",
+        "current_commit_sha",
+        "snapshots",
+    }:
+        raise CaptureError("structure de l'ancre de tags invalide")
+    if anchor["schema_version"] != 1:
+        raise CaptureError("version de l'ancre de tags inconnue")
+    for field in ("origin_commit_sha", "current_commit_sha"):
+        if (
+            not isinstance(anchor[field], str)
+            or re.fullmatch(r"[0-9a-f]{40}", anchor[field]) is None
+        ):
+            raise CaptureError(f"SHA Git invalide dans l'ancre : {field}")
+    snapshots = anchor["snapshots"]
+    if not isinstance(snapshots, dict) or set(snapshots) != {
+        "origin",
+        "current",
+    }:
+        raise CaptureError("snapshots de l'ancre de tags invalides")
+    tag_fields = {
+        "created_at",
+        "name",
+        "object_sha256",
+        "object_type",
+        "reachable_from_snapshot",
+        "ref_object_oid",
+        "target_commit_sha",
+    }
+    for label in ("origin", "current"):
+        snapshot = snapshots[label]
+        if not isinstance(snapshot, dict) or set(snapshot) != {
+            "tags",
+            "tags_sha256",
+        }:
+            raise CaptureError(
+                f"snapshot de l'ancre de tags invalide : {label}"
+            )
+        tags = snapshot["tags"]
+        if not isinstance(tags, list):
+            raise CaptureError(
+                f"tableau de tags invalide dans l'ancre : {label}"
+            )
+        names: list[str] = []
+        for index, tag in enumerate(tags):
+            if not isinstance(tag, dict) or set(tag) != tag_fields:
+                raise CaptureError(
+                    "entrée de tag invalide dans l'ancre : "
+                    f"{label}[{index}]"
+                )
+            name = tag["name"]
+            if not isinstance(name, str) or not name:
+                raise CaptureError(
+                    f"nom de tag invalide dans l'ancre : {label}[{index}]"
+                )
+            names.append(name)
+            if tag["object_type"] not in {"commit", "tag"}:
+                raise CaptureError(
+                    f"type d'objet de tag invalide : {label}[{index}]"
+                )
+            if tag["reachable_from_snapshot"] is not True:
+                raise CaptureError(
+                    f"accessibilité de tag invalide : {label}[{index}]"
+                )
+            for field in ("ref_object_oid", "target_commit_sha"):
+                if (
+                    not isinstance(tag[field], str)
+                    or re.fullmatch(r"[0-9a-f]{40}", tag[field]) is None
+                ):
+                    raise CaptureError(
+                        f"SHA Git de tag invalide : {label}[{index}].{field}"
+                    )
+            if (
+                not isinstance(tag["object_sha256"], str)
+                or re.fullmatch(r"[0-9a-f]{64}", tag["object_sha256"]) is None
+            ):
+                raise CaptureError(
+                    f"SHA-256 de tag invalide : {label}[{index}]"
+                )
+            _require_rfc3339(
+                tag["created_at"],
+                field=f"ancre.{label}.tags[{index}].created_at",
+            )
+        if names != sorted(names) or len(names) != len(set(names)):
+            raise CaptureError(
+                f"tags non uniques ou non triés dans l'ancre : {label}"
+            )
+        expected_hash = _sha256(_canonical_bytes(tags))
+        if snapshot["tags_sha256"] != expected_hash:
+            raise CaptureError(
+                f"empreinte du tableau de tags incohérente pour {label}"
+            )
+    return anchor
+
+
+def _load_tags_anchor_bytes(
+    anchor_bytes: bytes,
+) -> tuple[dict[str, Any], bytes]:
+    try:
+        anchor_value = json.loads(
+            _decode_utf8(anchor_bytes, description="ancre de tags")
+        )
+    except json.JSONDecodeError as error:
+        raise CaptureError("ancre de tags JSON invalide") from error
+    anchor = load_tags_anchor_from_value(anchor_value)
+    canonical_bytes = _canonical_bytes(anchor) + b"\n"
+    if anchor_bytes != canonical_bytes:
+        raise CaptureError("ancre de tags non canonique")
+    return anchor, anchor_bytes
+
+
+def load_tags_anchor(path: Path) -> tuple[dict[str, Any], bytes]:
+    path = Path(path)
+    try:
+        mode = os.lstat(path).st_mode
+        anchor_bytes = path.read_bytes()
+    except OSError as error:
+        raise CaptureError("ancre de tags inaccessible") from error
+    if not stat.S_ISREG(mode):
+        raise CaptureError("l'ancre de tags doit être un fichier régulier")
+    return _load_tags_anchor_bytes(anchor_bytes)
+
+
 def _remediation_history(
     git_root: Path,
     origin_commit: str,
@@ -1014,6 +1145,8 @@ def capture_repository(
     scope_manifest: dict[str, Any] | None = None,
     scope_manifest_bytes: bytes | None = None,
     scope_manifest_path: Path = DEFAULT_SCOPE_MANIFEST_PATH,
+    tags_anchor: dict[str, Any] | None = None,
+    tags_anchor_bytes: bytes | None = None,
 ) -> dict[str, Any]:
     """Build deterministic origin/current snapshots from immutable Git objects."""
 
@@ -1043,6 +1176,26 @@ def capture_repository(
         raise CaptureError(
             "le commit origine n'est pas un ancêtre du commit courant"
         )
+    if tags_anchor is None:
+        if tags_anchor_bytes is not None:
+            raise CaptureError("octets d'ancre fournis sans ancre de tags")
+        anchored_tags: dict[str, list[dict[str, Any]]] | None = None
+    else:
+        tags_anchor = load_tags_anchor_from_value(tags_anchor)
+        if tags_anchor["origin_commit_sha"] != origin_commit:
+            raise CaptureError(
+                "le commit origine diverge de l'ancre de tags"
+            )
+        if tags_anchor["current_commit_sha"] != current_commit:
+            raise CaptureError(
+                "le commit courant diverge de l'ancre de tags"
+            )
+        if tags_anchor_bytes is None:
+            tags_anchor_bytes = _canonical_bytes(tags_anchor) + b"\n"
+        anchored_tags = {
+            label: tags_anchor["snapshots"][label]["tags"]
+            for label in ("origin", "current")
+        }
 
     changed_paths = _changed_paths(
         git_root,
@@ -1100,8 +1253,9 @@ def capture_repository(
         origin_commit,
         current_commit,
     )
-    if origin_commit.startswith(DEFAULT_ORIGIN_REF) and current_commit.startswith(
-        DEFAULT_CURRENT_REF
+    if (
+        origin_commit == OFFICIAL_ORIGIN_COMMIT
+        and current_commit == OFFICIAL_CURRENT_COMMIT
     ):
         actual_remediations = tuple(
             (item["commit_sha"][:7], item["kind"]) for item in remediation_history
@@ -1117,6 +1271,14 @@ def capture_repository(
             "project_path": project_prefix or ".",
             "manifest_path": "release/baseline-scope-1spe.json",
             "manifest_sha256": _sha256(manifest_bytes),
+            **(
+                {
+                    "tags_anchor_path": OFFICIAL_TAGS_ANCHOR_RELATIVE,
+                    "tags_anchor_sha256": _sha256(tags_anchor_bytes),
+                }
+                if tags_anchor_bytes is not None
+                else {}
+            ),
             "categories": list(CATEGORIES),
             "changed_paths_between_snapshots": changed_paths,
             "candidate_counts": {
@@ -1136,7 +1298,11 @@ def capture_repository(
             "label": "origin_immutable",
             **origin_metadata,
             "inventory": origin_inventory,
-            "tags": _tags(git_root, origin_commit),
+            "tags": (
+                anchored_tags["origin"]
+                if anchored_tags is not None
+                else _tags(git_root, origin_commit)
+            ),
             "attestations": origin_attestations,
             "test_execution": _test_execution(
                 test_evidence["origin"],
@@ -1147,7 +1313,11 @@ def capture_repository(
             "label": "current_preflight",
             **current_metadata,
             "inventory": current_inventory,
-            "tags": _tags(git_root, current_commit),
+            "tags": (
+                anchored_tags["current"]
+                if anchored_tags is not None
+                else _tags(git_root, current_commit)
+            ),
             "attestations": current_attestations,
             "test_execution": _test_execution(
                 test_evidence["current"],
@@ -1629,6 +1799,7 @@ def validate_report_semantics(
     *,
     manifest_path: Path = DEFAULT_SCOPE_MANIFEST_PATH,
     manifest_bytes: bytes | None = None,
+    tags_anchor_bytes: bytes | None = None,
 ) -> None:
     """Validate invariants that JSON Schema cannot express across fields."""
 
@@ -1651,6 +1822,20 @@ def validate_report_semantics(
     except json.JSONDecodeError as error:
         raise CaptureError("manifeste de périmètre réel invalide") from error
     manifest = load_scope_manifest_from_value(manifest_value)
+    anchor_fields = {"tags_anchor_path", "tags_anchor_sha256"}
+    present_anchor_fields = anchor_fields.intersection(scope)
+    if present_anchor_fields and present_anchor_fields != anchor_fields:
+        raise CaptureError("provenance de l'ancre de tags incomplète")
+    if present_anchor_fields:
+        if scope["tags_anchor_path"] != OFFICIAL_TAGS_ANCHOR_RELATIVE:
+            raise CaptureError("chemin canonique de l'ancre de tags invalide")
+        if tags_anchor_bytes is None:
+            try:
+                tags_anchor_bytes = DEFAULT_TAGS_ANCHOR_PATH.read_bytes()
+            except OSError as error:
+                raise CaptureError("ancre de tags réelle inaccessible") from error
+        if scope["tags_anchor_sha256"] != _sha256(tags_anchor_bytes):
+            raise CaptureError("empreinte de l'ancre de tags incohérente")
 
     for label in ("origin", "current"):
         excluded_proof = scope["excluded_paths"][label]
@@ -1940,9 +2125,6 @@ def _dispatch_historical_verification(
     *,
     root: Path,
     report_path: Path,
-    trusted_test_evidence: dict[str, dict[str, Any]],
-    origin_ref: str = DEFAULT_ORIGIN_REF,
-    current_ref: str = DEFAULT_CURRENT_REF,
 ) -> subprocess.CompletedProcess[bytes]:
     """Bootstrap the verifier committed at the artifact capture parent."""
 
@@ -2033,11 +2215,17 @@ def _dispatch_historical_verification(
     runtime_relative = "scripts/capture_initial_state_1spe.py"
     schema_relative = "schemas/baseline_1spe.schema.json"
     manifest_relative = "release/baseline-scope-1spe.json"
+    tags_anchor_relative = OFFICIAL_TAGS_ANCHOR_RELATIVE
     historical_inputs = _committed_project_files(
         git_root,
         project_prefix,
         capture_head,
-        (runtime_relative, schema_relative, manifest_relative),
+        (
+            runtime_relative,
+            schema_relative,
+            manifest_relative,
+            tags_anchor_relative,
+        ),
     )
 
     with tempfile.TemporaryDirectory(
@@ -2047,16 +2235,18 @@ def _dispatch_historical_verification(
         runtime_path = temporary_root / "capture_initial_state_1spe.py"
         schema_path = temporary_root / "baseline_1spe.schema.json"
         manifest_path = temporary_root / "baseline-scope-1spe.json"
-        evidence_path = temporary_root / "trusted-test-evidence.json"
+        tags_anchor_path = temporary_root / "baseline-tags-1spe.json"
         runtime_path.write_bytes(historical_inputs[runtime_relative])
         schema_path.write_bytes(historical_inputs[schema_relative])
         manifest_path.write_bytes(historical_inputs[manifest_relative])
-        evidence_path.write_bytes(_canonical_bytes(trusted_test_evidence))
+        tags_anchor_path.write_bytes(
+            historical_inputs[tags_anchor_relative]
+        )
         for temporary_file in (
             runtime_path,
             schema_path,
             manifest_path,
-            evidence_path,
+            tags_anchor_path,
         ):
             temporary_file.chmod(0o600)
 
@@ -2068,14 +2258,10 @@ def _dispatch_historical_verification(
                 "--historical-runtime",
                 "--historical-schema",
                 str(schema_path),
+                "--historical-tags-anchor",
+                str(tags_anchor_path),
                 "--root",
                 str(root),
-                "--origin-ref",
-                origin_ref,
-                "--current-ref",
-                current_ref,
-                "--evidence-json",
-                str(evidence_path),
                 "--verify-existing",
                 OFFICIAL_JSON_RELATIVE,
             ],
@@ -2097,6 +2283,7 @@ def validate_report_against_repository(
     current_ref: str = DEFAULT_CURRENT_REF,
     artifact_paths: tuple[str, ...] = (),
     schema_path: Path | None = None,
+    tags_anchor_path: Path | None = None,
 ) -> None:
     """Recalculate release evidence from Git objects and trusted inputs."""
 
@@ -2123,11 +2310,18 @@ def validate_report_against_repository(
     manifest_relative = "release/baseline-scope-1spe.json"
     code_relative = "scripts/capture_initial_state_1spe.py"
     schema_relative = "schemas/baseline_1spe.schema.json"
+    tags_anchor_relative = OFFICIAL_TAGS_ANCHOR_RELATIVE
+    official_inputs = bool(artifact_paths) or tags_anchor_path is not None
     committed_inputs = _committed_project_files(
         git_root,
         project_prefix,
         capture_head,
-        (manifest_relative, code_relative, schema_relative),
+        (
+            manifest_relative,
+            code_relative,
+            schema_relative,
+            *((tags_anchor_relative,) if official_inputs else ()),
+        ),
     )
     manifest_bytes = committed_inputs[manifest_relative]
     try:
@@ -2157,10 +2351,37 @@ def validate_report_against_repository(
         schema_path.read_bytes(),
         committed_inputs[schema_relative],
     )
+    tags_anchor: dict[str, Any] | None = None
+    tags_anchor_bytes: bytes | None = None
+    if official_inputs:
+        tags_anchor, tags_anchor_bytes = _load_tags_anchor_bytes(
+            committed_inputs[tags_anchor_relative]
+        )
+        for label in ("origin", "current"):
+            _external_assert_equal(
+                f"ancre de tags {label}",
+                report[label]["tags"],
+                tags_anchor["snapshots"][label]["tags"],
+            )
+        if tags_anchor_path is not None:
+            supplied_anchor, supplied_anchor_bytes = load_tags_anchor(
+                tags_anchor_path
+            )
+            _external_assert_equal(
+                "ancre de tags historique",
+                supplied_anchor,
+                tags_anchor,
+            )
+            _external_assert_equal(
+                "octets de l'ancre de tags historique",
+                supplied_anchor_bytes,
+                tags_anchor_bytes,
+            )
     _validate_report(
         report,
         schema_path,
         manifest_bytes=manifest_bytes,
+        tags_anchor_bytes=tags_anchor_bytes,
     )
     if artifact_paths:
         if report["capture_context"]["working_tree"] != {
@@ -2186,10 +2407,9 @@ def validate_report_against_repository(
         dirty_policy="record",
         scope_manifest=manifest,
         scope_manifest_bytes=manifest_bytes,
+        tags_anchor=tags_anchor,
+        tags_anchor_bytes=tags_anchor_bytes,
     )
-    if artifact_paths:
-        for label in ("origin", "current"):
-            expected[label]["tags"] = report[label]["tags"]
     for field in (
         "schema_version",
         "status",
@@ -2211,6 +2431,7 @@ def _validate_report(
     schema_path: Path,
     *,
     manifest_bytes: bytes | None = None,
+    tags_anchor_bytes: bytes | None = None,
 ) -> None:
     try:
         import jsonschema
@@ -2224,7 +2445,11 @@ def _validate_report(
         schema,
         format_checker=format_checker,
     ).validate(report)
-    validate_report_semantics(report, manifest_bytes=manifest_bytes)
+    validate_report_semantics(
+        report,
+        manifest_bytes=manifest_bytes,
+        tags_anchor_bytes=tags_anchor_bytes,
+    )
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -2236,8 +2461,8 @@ def _parser() -> argparse.ArgumentParser:
         type=Path,
         default=Path(__file__).resolve().parents[1],
     )
-    parser.add_argument("--origin-ref", default=DEFAULT_ORIGIN_REF)
-    parser.add_argument("--current-ref", default=DEFAULT_CURRENT_REF)
+    parser.add_argument("--origin-ref")
+    parser.add_argument("--current-ref")
     parser.add_argument("--evidence-json", type=Path)
     parser.add_argument(
         "--json",
@@ -2261,6 +2486,11 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--historical-schema",
+        type=Path,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--historical-tags-anchor",
         type=Path,
         help=argparse.SUPPRESS,
     )
@@ -2294,13 +2524,16 @@ def main(argv: list[str] | None = None) -> int:
                 )
             _reject_unsafe_output_components(root, requested)
             if not arguments.historical_runtime:
-                if arguments.historical_schema is not None:
+                if (
+                    arguments.historical_schema is not None
+                    or arguments.historical_tags_anchor is not None
+                ):
                     raise CaptureError(
-                        "--historical-schema est une option interne"
+                        "les chemins historiques sont des options internes"
                     )
                 if (
-                    arguments.origin_ref != DEFAULT_ORIGIN_REF
-                    or arguments.current_ref != DEFAULT_CURRENT_REF
+                    arguments.origin_ref is not None
+                    or arguments.current_ref is not None
                     or arguments.evidence_json is not None
                 ):
                     raise CaptureError(
@@ -2310,7 +2543,6 @@ def main(argv: list[str] | None = None) -> int:
                 completed = _dispatch_historical_verification(
                     root=root,
                     report_path=requested,
-                    trusted_test_evidence=DEFAULT_TEST_EVIDENCE,
                 )
                 sys.stdout.write(
                     _decode_utf8(
@@ -2323,17 +2555,23 @@ def main(argv: list[str] | None = None) -> int:
                 )
                 return completed.returncode
             if (
-                arguments.historical_schema is None
-                or arguments.evidence_json is None
+                arguments.origin_ref is not None
+                or arguments.current_ref is not None
+                or arguments.evidence_json is not None
             ):
                 raise CaptureError(
-                    "le runtime historique exige son schéma et ses preuves"
+                    "références et preuves libres interdites dans le "
+                    "runtime historique"
+                )
+            if (
+                arguments.historical_schema is None
+                or arguments.historical_tags_anchor is None
+            ):
+                raise CaptureError(
+                    "le runtime historique exige son schéma et son ancre"
                 )
             try:
                 report = json.loads(requested.read_text(encoding="utf-8"))
-                evidence = json.loads(
-                    arguments.evidence_json.read_text(encoding="utf-8")
-                )
             except (OSError, UnicodeError, json.JSONDecodeError) as error:
                 raise CaptureError(
                     "entrée du runtime historique inaccessible ou invalide"
@@ -2342,14 +2580,15 @@ def main(argv: list[str] | None = None) -> int:
             validate_report_against_repository(
                 report,
                 root=root,
-                trusted_test_evidence=evidence,
-                origin_ref=arguments.origin_ref,
-                current_ref=arguments.current_ref,
+                trusted_test_evidence=DEFAULT_TEST_EVIDENCE,
+                origin_ref=DEFAULT_ORIGIN_REF,
+                current_ref=DEFAULT_CURRENT_REF,
                 artifact_paths=(
                     canonical_relative.as_posix(),
                     OFFICIAL_MARKDOWN_RELATIVE,
                 ),
                 schema_path=arguments.historical_schema,
+                tags_anchor_path=arguments.historical_tags_anchor,
             )
             print(
                 json.dumps(
@@ -2365,6 +2604,7 @@ def main(argv: list[str] | None = None) -> int:
         if (
             arguments.historical_runtime
             or arguments.historical_schema is not None
+            or arguments.historical_tags_anchor is not None
         ):
             raise CaptureError(
                 "les options historiques exigent --verify-existing"
@@ -2389,18 +2629,34 @@ def main(argv: list[str] | None = None) -> int:
             evidence = json.loads(
                 arguments.evidence_json.read_text(encoding="utf-8")
             )
+        tags_anchor: dict[str, Any] | None = None
+        tags_anchor_bytes: bytes | None = None
+        if (
+            arguments.origin_ref is None
+            and arguments.current_ref is None
+            and arguments.evidence_json is None
+        ):
+            tags_anchor, tags_anchor_bytes = load_tags_anchor(
+                root / OFFICIAL_TAGS_ANCHOR_RELATIVE
+            )
         report = capture_repository(
             root=root,
-            origin_ref=arguments.origin_ref,
-            current_ref=arguments.current_ref,
+            origin_ref=arguments.origin_ref or DEFAULT_ORIGIN_REF,
+            current_ref=arguments.current_ref or DEFAULT_CURRENT_REF,
             test_evidence=evidence,
             dirty_policy=arguments.dirty_policy,
             excluded_dirty_paths=(json_relative, markdown_relative),
+            tags_anchor=tags_anchor,
+            tags_anchor_bytes=tags_anchor_bytes,
         )
         schema_path = Path(__file__).resolve().parents[1] / "schemas" / (
             "baseline_1spe.schema.json"
         )
-        _validate_report(report, schema_path)
+        _validate_report(
+            report,
+            schema_path,
+            tags_anchor_bytes=tags_anchor_bytes,
+        )
         json_content = (
             json.dumps(
                 report,

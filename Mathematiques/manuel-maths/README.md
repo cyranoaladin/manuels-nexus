@@ -98,10 +98,11 @@ make release-test
 La capture de départ distingue trois repères qui ne doivent jamais être
 confondus :
 
-- `origin.commit_sha` est l'origine historique immuable et conserve sa preuve
-  de tests historique, sans prétendre l'avoir rejouée ;
-- `current.commit_sha` est le snapshot préflight épinglé et sa preuve de tests
-  directe ;
+- `origin.commit_sha` est l'origine historique immuable
+  `41eaa745d000953654f7f07f6760c675cdae91d5` et conserve sa preuve de tests
+  historique, sans prétendre l'avoir rejouée ;
+- `current.commit_sha` est le snapshot préflight épinglé
+  `ca16edbb51d7f0122fcbbfea5cccfa7e2066cd63` et sa preuve de tests directe ;
 - `capture_context.capture_head_commit` est le HEAD réellement observé au
   moment où les deux artefacts sont générés. Il identifie le commit du code de
   capture ; le commit documentaire qui ajoute ensuite les artefacts est donc
@@ -150,23 +151,32 @@ champs déclarés dans le rapport :
 Ce mode ne crée ni ne modifie aucun fichier. Son amorce courante authentifie
 d'abord le JSON versionné, le commit documentaire et son parent unique. Elle
 refuse toute version de schéma hors de l'allowlist explicite (actuellement la
-version 1), puis extrait depuis ce parent le script, le schéma et le manifeste
-historiques. Ces trois entrées, comme les artefacts JSON et Markdown, doivent
-être des blobs Git réguliers de mode exact `100644`. Le script extrait est
-exécuté par un sous-processus isolé dans un répertoire temporaire ; aucune
-fonction de recalcul ou règle de schéma de la version courante n'intervient
-dans le verdict historique.
+version 1), puis extrait depuis ce parent le script, le schéma, le manifeste
+et [`release/baseline-tags-1spe.json`](release/baseline-tags-1spe.json),
+l'ancre historique des tags. Ces quatre entrées, comme les artefacts JSON et
+Markdown, doivent être des blobs Git réguliers de mode exact `100644`. Le
+script extrait est exécuté par un sous-processus isolé dans un répertoire
+temporaire ; aucune fonction de recalcul, constante de référence, preuve de
+tests ou règle de schéma de la version courante n'intervient dans le verdict
+historique. Le bootstrap ne transmet notamment aucun `--origin-ref`,
+`--current-ref` ou `--evidence-json` : le runtime v1 extrait utilise
+exclusivement ses SHA Git complets et ses preuves versionnées.
 
 Le runtime historique recalcule les deux arbres, blobs, inventaires,
 remédiations et attestations depuis les références et preuves épinglées, puis
 exige leur égalité profonde avec le JSON. La capture officielle impose en
 outre `capture_context.working_tree.status = clean` et une liste `paths` vide ;
 l'API générique conserve, elle, un éventuel état sale comme une déclaration
-authentifiée du seul instant de capture. La liste des tags est authentifiée par
-le JSON du commit documentaire et n'est pas recalculée depuis les références
-de tags vivantes : l'ajout, le déplacement ou la suppression ultérieurs d'un
-tag ne peuvent donc pas invalider un artefact historique. Toute mutation de
-cette liste dans le fichier de travail reste refusée.
+authentifiée du seul instant de capture. L'ancre de tags contient les SHA
+complets des deux snapshots, leurs tableaux canoniques et le SHA-256 de chaque
+tableau. Son chemin et son SHA-256 de blob sont aussi consignés dans la
+provenance du rapport. Le runtime compare directement les tags du rapport à
+cette ancre extraite du `capture_head_commit` et ne consulte jamais
+`refs/tags` pendant la vérification : l'ajout, le déplacement ou la suppression
+ultérieurs d'un tag ne peuvent donc pas invalider un artefact historique. Une
+falsification coordonnée des JSON/Markdown, ou une mutation de la copie de
+travail de l'ancre, ne peut pas déplacer cette racine de confiance. L'ancre
+appartient au périmètre de fabrication `release/**` du manifeste de baseline.
 
 Le dernier commit commun aux artefacts JSON et Markdown doit avoir le
 `capture_head_commit` pour parent unique, et leurs contenus versionnés doivent
