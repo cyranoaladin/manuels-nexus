@@ -1,4 +1,4 @@
-.PHONY: setup setup-fonts db crawl ingest index verify similarity coverage chapter check-latex specimen test
+.PHONY: setup setup-fonts db crawl ingest index verify similarity coverage chapter check-latex specimen test release-toolchain release-test
 
 PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 CHAP ?= 1SPE-SUITES
@@ -52,4 +52,10 @@ specimen:
 	PYTHONPATH=scripts $(PY) -c "from pathlib import Path; from pdf_integrity import verify_pdf; raise SystemExit(verify_pdf(Path('build/specimen/specimen.pdf'), Path('build/specimen/specimen.log')))"
 
 test:
+	$(PY) -m pytest tests/ -q
+
+release-toolchain:
+	$(PY) scripts/check_toolchain.py --manifest release/toolchain.yaml
+
+release-test:
 	$(PY) -m pytest tests/ -q

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "status": "blocked",
+  "checks": [
+    {
+      "id": "python",
+      "required": "3.12",
+      "detected": "3.12.3",
+      "status": "certified",
+      "reason": "Python 3.12.x détecté"
+    },
+    {
+      "id": "java",
+      "required": ">=21",
+      "detected": "21.0.11",
+      "status": "certified",
+      "reason": "Java >= 21 détecté"
+    },
+    {
+      "id": "latex.engine",
+      "required": "lualatex, TeX Live >=2026",
+      "detected": "TeX Live 2023",
+      "status": "blocked",
+      "reason": "TeX Live >= 2026 exigé; version détectée: 2023"
+    },
+    {
+      "id": "latex.tagged_pdf",
+      "required": "true (TeX Live >=2026 + validation veraPDF PDF/UA-1)",
+      "detected": null,
+      "status": "blocked",
+      "reason": "Tagged PDF exige TeX Live 2026 minimum avant validation veraPDF"
+    },
+    {
+      "id": "verapdf",
+      "required": "1.30.1, profil ua1, rapport mrr",
+      "detected": null,
+      "status": "blocked",
+      "reason": "binaire absent: verapdf"
+    },
+    {
+      "id": "pdfinfo",
+      "required": ">=24.02.0",
+      "detected": "24.02.0",
+      "status": "certified",
+      "reason": "pdfinfo >= 24.02.0 détecté"
+    },
+    {
+      "id": "pdffonts",
+      "required": ">=24.02.0",
+      "detected": "24.02.0",
+      "status": "certified",
+      "reason": "pdffonts >= 24.02.0 détecté"
+    },
+    {
+      "id": "pdftotext",
+      "required": ">=24.02.0",
+      "detected": "24.02.0",
+      "status": "certified",
+      "reason": "pdftotext >= 24.02.0 détecté"
+    },
+    {
+      "id": "pdftoppm",
+      "required": ">=24.02.0",
+      "detected": "24.02.0",
+      "status": "certified",
+      "reason": "pdftoppm >= 24.02.0 détecté"
+    },
+    {
+      "id": "ghostscript",
+      "required": ">=10.02",
+      "detected": "10.02.1",
+      "status": "certified",
+      "reason": "Ghostscript >= 10.02 détecté"
+    }
+  ],
+  "blockers": [
+    {
+      "tool": "latex.engine",
+      "reason": "TeX Live >= 2026 exigé; version détectée: 2023"
+    },
+    {
+      "tool": "latex.tagged_pdf",
+      "reason": "Tagged PDF exige TeX Live 2026 minimum avant validation veraPDF"
+    },
+    {
+      "tool": "verapdf",
+      "reason": "binaire absent: verapdf"
+    }
+  ]
+}

@@ -33,7 +33,7 @@
 - Modify: `Makefile`
 - Modify: `README.md`
 
-- [ ] **Step 1: écrire les tests rouges du contrat d'outillage**
+- [x] **Step 1: écrire les tests rouges du contrat d'outillage**
 
 ```python
 def test_toolchain_pins_accessibility_validator(toolchain):
@@ -48,13 +48,13 @@ def test_missing_blocking_binary_fails(monkeypatch, toolchain):
     assert result.exit_code != 0
 ```
 
-- [ ] **Step 2: vérifier l'échec ciblé**
+- [x] **Step 2: vérifier l'échec ciblé**
 
 Run: `.venv/bin/python -m pytest tests/test_toolchain.py -q`
 
 Expected: FAIL car `release/toolchain.yaml` et `scripts/check_toolchain.py` n'existent pas.
 
-- [ ] **Step 3: créer le manifeste d'outillage**
+- [x] **Step 3: créer le manifeste d'outillage**
 
 ```yaml
 schema_version: 1
@@ -76,14 +76,14 @@ ghostscript:
   minimum_version: "10.02"
 ```
 
-- [ ] **Step 4: implémenter `check_toolchain.py`**
+- [x] **Step 4: implémenter `check_toolchain.py`**
 
 Le contrôleur lit les versions réelles, y compris `java -version`, refuse une
 version inférieure au contrat, produit
 `validations/release-1spe/toolchain.json` et ne tente aucune installation
 implicite. Un état `blocked` retourne le code 2.
 
-- [ ] **Step 5: ajouter les cibles Make**
+- [x] **Step 5: ajouter les cibles Make**
 
 ```make
 release-toolchain:
@@ -93,11 +93,11 @@ release-test:
 	$(PY) -m pytest tests/ -q
 ```
 
-- [ ] **Step 6: documenter l'installation reproductible**
+- [x] **Step 6: documenter l'installation reproductible**
 
 `README.md` doit distinguer l'environnement courant de l'environnement exigé pour une release, y compris Java 21 et veraPDF 1.30.1.
 
-- [ ] **Step 7: exécuter les tests et le contrôleur**
+- [x] **Step 7: exécuter les tests et le contrôleur**
 
 Run: `.venv/bin/python -m pytest tests/test_toolchain.py -q`
 
@@ -108,7 +108,7 @@ Run: `make release-toolchain`
 Expected: code 0 et `certified`, ou code 2 et `blocked` avec la liste exacte
 des outils à installer ; jamais un faux PASS.
 
-- [ ] **Step 8: commit**
+- [x] **Step 8: commit**
 
 ```bash
 git add release/toolchain.yaml scripts/check_toolchain.py tests/test_toolchain.py validations/release-1spe/toolchain.json Makefile README.md
