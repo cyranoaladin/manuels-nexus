@@ -88,40 +88,20 @@
   \divide\nxVOngletHalfLength by 2
   \begin{tikzpicture}[remember picture, overlay]
     \pgfmathsetmacro{\ongletY}{-25 - (\value{chapter}-1)*18}
-    \ifdim\nxVOngletLength=16mm
-      \ifodd\value{page}%
-        \fill[chapcolor!85] ([yshift=\ongletY mm]current page.north east)
-          rectangle +(-12mm,-16mm);
-        \node[rotate=90, text=white,
-              font=\titrefont\fontsize{6}{6}\selectfont,
-              anchor=south, inner sep=0pt]
-          at ([yshift=\ongletY mm-8mm, xshift=-6mm]current page.north east)
-          {\MakeUppercase{\nxRubriquePage}};
-      \else
-        \fill[chapcolor!85] ([yshift=\ongletY mm]current page.north west)
-          rectangle +(12mm,-16mm);
-        \node[rotate=-90, text=white,
-              font=\titrefont\fontsize{6}{6}\selectfont,
-              anchor=south, inner sep=0pt]
-          at ([yshift=\ongletY mm-8mm, xshift=6mm]current page.north west)
-          {\MakeUppercase{\nxRubriquePage}};
-      \fi
+    \ifodd\value{page}%
+      \fill[chapcolor!85] ([yshift=\ongletY mm]current page.north east)
+        rectangle +(-12mm,-\nxVOngletLength);
+      \node[rotate=90, anchor=south, inner sep=0pt]
+        at ([yshift=\ongletY mm-\nxVOngletHalfLength,
+             xshift=-6mm]current page.north east)
+        {\usebox{\nxVOngletTextBox}};
     \else
-      \ifodd\value{page}%
-        \fill[chapcolor!85] ([yshift=\ongletY mm]current page.north east)
-          rectangle +(-12mm,-\nxVOngletLength);
-        \node[rotate=90, anchor=south, inner sep=0pt]
-          at ([yshift=\ongletY mm-\nxVOngletHalfLength,
-               xshift=-6mm]current page.north east)
-          {\usebox{\nxVOngletTextBox}};
-      \else
-        \fill[chapcolor!85] ([yshift=\ongletY mm]current page.north west)
-          rectangle +(12mm,-\nxVOngletLength);
-        \node[rotate=-90, anchor=south, inner sep=0pt]
-          at ([yshift=\ongletY mm-\nxVOngletHalfLength,
-               xshift=6mm]current page.north west)
-          {\usebox{\nxVOngletTextBox}};
-      \fi
+      \fill[chapcolor!85] ([yshift=\ongletY mm]current page.north west)
+        rectangle +(12mm,-\nxVOngletLength);
+      \node[rotate=-90, anchor=south, inner sep=0pt]
+        at ([yshift=\ongletY mm-\nxVOngletHalfLength,
+             xshift=6mm]current page.north west)
+        {\usebox{\nxVOngletTextBox}};
     \fi
   \end{tikzpicture}%
   \endgroup

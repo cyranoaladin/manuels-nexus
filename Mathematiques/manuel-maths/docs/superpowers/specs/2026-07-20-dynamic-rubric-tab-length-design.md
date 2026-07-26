@@ -44,7 +44,7 @@ longueur = max(16 mm, largeur_typographique(libellé) + 6 mm)
 ```
 
 Les 6 mm correspondent à un minimum de 3 mm de respiration avant et après le
-texte dans la branche auto-dimensionnée. Lorsqu'un libellé court reste soumis au
+texte lorsque la mesure dépasse 16 mm. Lorsqu'un libellé court reste soumis au
 minimum de 16 mm, le surplus est réparti également par le centrage. La mesure
 est locale au rendu de l'en-tête ; aucun état global de rubrique n'est introduit
 et le mécanisme de marks reste la source du libellé.
@@ -101,10 +101,10 @@ La correction suit un cycle test-first.
    `pdftotext -bbox-layout` et la composante colorée de l'onglet détectée dans un
    raster à 300 dpi. Après conversion points/pixels, il exige sur les deux
    parités que la boîte du texte soit entièrement incluse dans le rectangle,
-   que la branche auto-dimensionnée conserve au moins 3 mm à chaque extrémité
+   que tout onglet mesuré au-delà de 16 mm conserve au moins 3 mm à chaque extrémité
    (avec une tolérance de rasterisation d'au plus 0,5 pt) et que l'écart entre
-   les deux respirations ne dépasse pas 0,5 mm. Pour la branche minimale de
-   16 mm, il exige l'inclusion et un surplus réparti symétriquement.
+   les deux respirations ne dépasse pas 0,5 mm. Pour le cas minimal de 16 mm,
+   il exige l'inclusion et un surplus réparti symétriquement.
 3. La maquette complète est recompilée en trois passes. Les pages 1, 7–12 et 15
    sont inspectées à 150 dpi, en détail original et par crops 100 % : texte
    entièrement contenu, centrage, padding visible, absence de contact avec le

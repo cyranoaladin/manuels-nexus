@@ -1606,7 +1606,7 @@ def test_rubric_tab_dynamic_source_contract():
         r"\\titrefont\\fontsize\{6\}\{6\}\\selectfont",
         tab_source,
     )
-    assert tab_source.count(r"\MakeUppercase{\nxRubriquePage}") == 3
+    assert tab_source.count(r"\MakeUppercase{\nxRubriquePage}") == 1
     assert (
         r"\dimexpr\wd\nxVOngletTextBox+6mm\relax" in tab_source
     )
@@ -1627,14 +1627,12 @@ def test_rubric_tab_dynamic_source_contract():
         r"yshift=\ongletY mm-\nxVOngletHalfLength"
     ) == 2
     assert tab_source.count(r"\usebox{\nxVOngletTextBox}") == 2
-    assert tab_source.count("inner sep=0pt") == 4
-    assert r"\ifdim\nxVOngletLength=16mm" in tab_source
-    assert tab_source.count("rectangle +(-12mm,-16mm);") == 1
-    assert tab_source.count("rectangle +(12mm,-16mm);") == 1
-    assert tab_source.count(r"yshift=\ongletY mm-8mm") == 2
-    assert tab_source.count(
-        r"font=\titrefont\fontsize{6}{6}\selectfont"
-    ) == 2
+    assert tab_source.count("inner sep=0pt") == 2
+    assert tab_source.count(r"\ifodd\value{page}") == 1
+    assert r"\ifdim\nxVOngletLength=16mm" not in tab_source
+    assert "rectangle +(-12mm,-16mm);" not in tab_source
+    assert "rectangle +(12mm,-16mm);" not in tab_source
+    assert r"yshift=\ongletY mm-8mm" not in tab_source
 
 
 def _rubric_tab_word_bbox(xhtml: str, page_number: int, label: str) -> dict:

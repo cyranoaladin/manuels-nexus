@@ -5,10 +5,11 @@
 **Goal:** Adapter automatiquement la longueur des onglets latéraux au libellé afin que `AUTO-ÉVALUATION` reste entièrement lisible sur les pages 11 et 12, sans modifier les autres contenus.
 
 **Architecture:** `\nxOngletRubrique` compose une seule fois le mark résolu dans
-une boîte locale et mesure `max(16 mm, largeur + 6 mm)`. Les libellés dont la
-mesure atteint exactement le minimum restent sur la branche raster canonique de
-16 mm ; dès que la mesure dépasse 16 mm, sa valeur exacte pilote le rectangle
-et le centre du texte sur les deux parités. Une fixture PDF teste la contenance par
+une boîte locale et mesure `max(16 mm, largeur + 6 mm)`. Une voie de rendu
+unique réutilise ensuite cette boîte, la longueur calculée et sa demi-longueur
+sur les deux parités. Les libellés minimaux restent ainsi à 16 mm sans être
+recomposés ; dès que la mesure dépasse 16 mm, sa valeur exacte pilote le
+rectangle et le centre du texte. Une fixture PDF teste la contenance par
 corrélation entre BBox Poppler et composante colorée raster ; l'acceptation
 complète conserve les huit rendus d'onglets it1, consacre les huit oracles it2
 et protège toutes les pages par hash/AE.
@@ -96,10 +97,9 @@ git commit -m "[CHARTE][V5.B-it2] reproduit onglets trop courts"
 ```
 
 Fermer le groupe après le TikZ. Ne pas créer de globale de rubrique et ne pas
-contourner `\nxRubriquePage`. La branche raster historique ne s'applique que
-lorsque ce maximum vaut exactement 16 mm ; aucune autre quantification ou
-valeur seuil n'est permise.
-- [x] **Step 3: piloter fond et texte avec les mêmes longueurs sans consacrer de régression.** Pour la branche longue, remplacer `-16mm` par `-\nxVOngletLength` sur les deux rectangles ; remplacer le `-8mm` vertical du nœud par `-\nxVOngletHalfLength` ; rendre `\usebox{\nxVOngletTextBox}` dans le nœud avec `inner sep=0pt`. Pour la branche courte, conserver exactement le rectangle 16 mm et la composition directe historiques, sur les deux parités. Conserver 12 mm, les rotations, le côté, l'ancrage extérieur et `\ongletY`.
+contourner `\nxRubriquePage`. Aucune recomposition conditionnelle, autre
+quantification ou valeur seuil n'est permise.
+- [x] **Step 3: piloter fond et texte avec une voie unique sans consacrer de régression.** Remplacer `-16mm` par `-\nxVOngletLength` sur les deux rectangles ; remplacer le `-8mm` vertical du nœud par `-\nxVOngletHalfLength` ; rendre la boîte unique avec `\usebox{\nxVOngletTextBox}` et `inner sep=0pt` sur les deux parités. Conserver 12 mm, les rotations, le côté, l'ancrage extérieur et `\ongletY`.
 - [x] **Step 4: exécuter le contrat source.** Attendu : PASS.
 - [x] **Step 5: exécuter la fixture réelle.** Attendu : PASS sur les six pages et aucun `Overfull` dans la sortie LuaLaTeX.
 - [x] **Step 6: exécuter les tests de navigation existants.**
