@@ -5,7 +5,7 @@
 - Origine immuable : `41eaa745d000953654f7f07f6760c675cdae91d5` — 7 failed, 1873 passed, 5 skipped (historical_observation, historique non rejoué).
 - État courant préflight : `ca16edbb51d7f0122fcbbfea5cccfa7e2066cd63` — 1946 passed, 5 skipped (direct_execution).
 - Arbre de travail au moment de la capture : `clean` (politique `record`).
-- HEAD matériel de capture : `7d7dcdd77ec244163770c32762b98c79a3fc9c5f`.
+- HEAD matériel de capture : `6f776905f99a70483eb02632a1e818e45a9ce8ee`.
 
 L'état courant n'est jamais présenté comme l'état initial intact.
 
