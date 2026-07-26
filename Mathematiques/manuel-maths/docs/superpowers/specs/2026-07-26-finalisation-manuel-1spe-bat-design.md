@@ -89,7 +89,7 @@ tunisienne n° 2015-37 du 22 septembre 2015 :
 
 <https://www.bibliotheque.nat.tn/BNT/basicfilesdownload.ashx?itemGuid=2921A14E-04F7-457A-8AE5-2AEB9DA545CA>
 
-Nexus Réussite devra déposer quatre exemplaires de chaque livre produit ou
+M&M ACADEMY SUARL devra déposer quatre exemplaires de chaque livre produit ou
 reproduit en Tunisie auprès de la Bibliothèque nationale dans le délai légal.
 
 ## 3. Périmètre
@@ -256,6 +256,10 @@ un objet source.
 - 100 % des renvois générés se résolvent ;
 - la table de correspondance est publiée dans le manifeste de release et testée
   après chaque changement de pagination.
+
+Lorsqu'un objet s'étend sur plusieurs pages, son folio canonique est la première
+page sur laquelle commence son contenu principal. La plage complète reste
+disponible dans les champs `first_page` et `last_page` du manifeste.
 
 ## 7. Chaîne de certification
 
@@ -527,6 +531,40 @@ Les masters d'impression et les PDF écran sont des sorties distinctes. Le PDF
 écran privilégie les signets, liens et l'accessibilité ; le master privilégie
 PDF/X, la colorimétrie et le façonnage.
 
+### 11.1 Contrat des PDF écran accessibles
+
+Les PDF écran ciblent PDF/UA-1 et les critères WCAG 2.2 niveau AA applicables
+aux documents :
+
+- PDF balisé et arbre de structure complet ;
+- langue principale `fr-FR`, titre, auteur et métadonnées renseignés ;
+- ordre de lecture logique sur chaque page ;
+- hiérarchie de titres et signets cohérente ;
+- texte sélectionnable et recherchable ;
+- tableaux avec en-têtes et associations de cellules ;
+- figures informatives avec texte alternatif, décors marqués comme artefacts ;
+- liens nommés et annotations correctement balisées ;
+- formules importantes avec texte de remplacement ou représentation accessible
+  permettant une lecture non ambiguë ;
+- contraste minimal de 4,5:1 pour le texte courant, 3:1 pour le grand texte et
+  les éléments graphiques porteurs d'information ;
+- navigation clavier sans piège dans les éléments interactifs.
+
+Le gate exige :
+
+- zéro échec dans un validateur PDF/UA indépendant tel que PAC ou veraPDF, avec
+  version de l'outil consignée ;
+- zéro incohérence de langue, titre, signets ou balises dans les contrôles
+  automatisés ;
+- 100 % des pages contrôlées pour l'ordre d'extraction textuelle ;
+- 100 % des figures et tableaux présents dans l'inventaire d'accessibilité ;
+- validation manuelle des points non automatisables avec lecteur d'écran et
+  navigation clavier sur chaque famille de pages.
+
+Si l'outil de composition ne permet pas de satisfaire PDF/UA-1, le PDF écran
+reste `needs_fix` ou `blocked` ; il n'est jamais qualifié d'accessible par
+simple présence de texte sélectionnable.
+
 ## 12. Contrôles et prévention des régressions
 
 Les gates bloquants couvrent :
@@ -543,6 +581,7 @@ Les gates bloquants couvrent :
 - pages blanches uniquement si déclarées ;
 - intégrité des polices, images et profils colorimétriques ;
 - conformité PDF/X ;
+- conformité PDF/UA-1 et WCAG 2.2 AA applicable pour les PDF écran ;
 - comparaison visuelle sur pages témoins et échantillonnage de toutes les
   familles de pages ;
 - reconstruction reproductible depuis un environnement propre.
