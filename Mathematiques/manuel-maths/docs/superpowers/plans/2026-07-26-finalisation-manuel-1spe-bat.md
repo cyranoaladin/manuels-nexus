@@ -189,7 +189,7 @@ git commit -m "[1SPE][BAT] capture l etat initial immuable"
 - Regenerate: `sources/txt/BO2026_1SPE_specialite.txt`
 - Create: `validations/release-1spe/revue-programme.md`
 
-- [ ] **Step 1: écrire les tests rouges de provenance et de cardinalité**
+- [x] **Step 1: écrire les tests rouges de provenance et de cardinalité**
 
 ```python
 def test_every_program_item_is_traceable(programme):
@@ -219,13 +219,13 @@ def test_expected_cardinalities_are_exact(programme, expected_counts):
     assert counts_by_type_and_class(programme) == expected_counts
 ```
 
-- [ ] **Step 2: vérifier l'échec ciblé**
+- [x] **Step 2: vérifier l'échec ciblé**
 
 Run: `.venv/bin/python -m pytest tests/test_official_source_extraction.py tests/test_programme_1spe_2026.py -q`
 
 Expected: FAIL par absence du schéma, de l'extracteur et du référentiel.
 
-- [ ] **Step 3: écrire et tester l'extracteur de source**
+- [x] **Step 3: écrire et tester l'extracteur de source**
 
 `extract_official_source.py` exécute `pdftotext -layout` sur
 `sources/BO2026_1SPE_specialite.pdf`, normalise uniquement les fins de ligne et
@@ -237,21 +237,21 @@ Run: `.venv/bin/python -m pytest tests/test_official_source_extraction.py -q`
 
 Expected: PASS après implémentation de l'extracteur.
 
-- [ ] **Step 4: écrire le schéma fermé**
+- [x] **Step 4: écrire le schéma fermé**
 
 Le schéma impose `additionalProperties: false`, l'unicité des identifiants, les quatre thèmes, les types `contenu|capacite|demonstration|algorithme|approfondissement|transversal`, les citations, pages, classes d'obligation et affectations de chapitre.
 
-- [ ] **Step 5: figer les cardinalités officielles attendues**
+- [x] **Step 5: figer les cardinalités officielles attendues**
 
 Une fixture versionnée dans `tests/test_programme_1spe_2026.py` donne le nombre
 exact d'items par `type × obligation_class`, obtenu par double lecture
 indépendante du PDF. Le test compare l'égalité stricte, pas un minimum.
 
-- [ ] **Step 6: transcrire exhaustivement le PDF officiel**
+- [x] **Step 6: transcrire exhaustivement le PDF officiel**
 
 `referentiel/programme_1SPE_2026.json` reprend sans reformulation les contenus, capacités, démonstrations, algorithmes, expérimentations et approfondissements possibles de `sources/BO2026_1SPE_specialite.pdf`. Chaque citation est contrôlée contre `sources/txt/BO2026_1SPE_specialite.txt`.
 
-- [ ] **Step 7: encoder les choix éditoriaux sans les confondre avec le B.O.**
+- [x] **Step 7: encoder les choix éditoriaux sans les confondre avec le B.O.**
 
 ```json
 {
@@ -263,25 +263,25 @@ indépendante du PDF. Le test compare l'égalité stricte, pas un minimum.
 }
 ```
 
-- [ ] **Step 8: implémenter le contrôleur**
+- [x] **Step 8: implémenter le contrôleur**
 
 `check_programme_1spe_2026.py` valide le schéma, les identifiants, la source SHA-256, la présence de chaque citation dans le texte officiel normalisé et l'affectation unique ou explicitement distribuée.
 
-- [ ] **Step 9: mettre à jour la documentation et le registre**
+- [x] **Step 9: mettre à jour la documentation et le registre**
 
 La documentation doit nommer l'arrêté du 26 février 2026, son NOR, sa date d'application et le SHA-256 local du PDF. Le registre ne conserve le PDF 2019 qu'en archive non normative.
 
-- [ ] **Step 10: exécuter les tests**
+- [x] **Step 10: exécuter les tests**
 
 Run: `.venv/bin/python -m pytest tests/test_official_source_extraction.py tests/test_programme_1spe_2026.py -q`
 
 Expected: PASS, cardinalités exactes et 0 citation orpheline.
 
-- [ ] **Step 11: revue réglementaire indépendante**
+- [x] **Step 11: revue réglementaire indépendante**
 
 Un agent distinct compare chaque entrée au PDF officiel, consigne ses écarts dans `validations/release-1spe/revue-programme.md`, et n'édite pas le référentiel pendant sa revue.
 
-- [ ] **Step 12: commit**
+- [x] **Step 12: commit**
 
 ```bash
 git add schemas/programme_1spe_2026.schema.json referentiel/programme_1SPE_2026.json scripts/extract_official_source.py scripts/check_programme_1spe_2026.py tests/test_official_source_extraction.py tests/test_programme_1spe_2026.py referentiel/CONFORMITE_BO2026.md sources/registry.yaml sources/txt/BO2026_1SPE_specialite.txt validations/release-1spe/revue-programme.md

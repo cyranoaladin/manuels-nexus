@@ -4,6 +4,46 @@
 
 sources:
   # ---------- T1 : Officiel ----------
+  - id: SRC-BO2026-1SPE-MATHS
+    name: "Programme de spécialité de mathématiques de première générale — rentrée 2026"
+    authority: "Ministère de l’Éducation nationale"
+    legal_instrument: "Arrêté du 26 février 2026"
+    nor: MENE2602917A
+    decree_date: "2026-02-26"
+    publication_date: "2026-03-27"
+    bo_issue: 14
+    bo_date: "2026-04-02"
+    bo_url: "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A"
+    pdf_url: "https://www.education.gouv.fr/sites/default/files/document/Annexe%20%E2%80%93%20Programme%20d%26%23039%3Benseignement%20de%20sp%C3%A9cialit%C3%A9%20de%20math%C3%A9matiques%20de%20la%20classe%20de%20premi%C3%A8re%20de%20la%20voie%20g%C3%A9n%C3%A9rale-515408.pdf"
+    local_path: "sources/BO2026_1SPE_specialite.pdf"
+    text_path: "sources/txt/BO2026_1SPE_specialite.txt"
+    sha256: "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
+    pages: 11
+    pdf_version: "1.7"
+    tier: T1
+    license: "information publique"
+    usage_policy: verbatim
+    crawl: { method: manual, frequency: once }
+    normative: true
+    normative_from: "2026-09-01"
+    active: true
+    notes: "Annexe qui remplace à la rentrée 2026 l’annexe du programme publiée en 2019."
+
+  - id: SRC-BO2019-1SPE-MATHS-ARCHIVE
+    name: "Programme de spécialité de mathématiques de première générale — archive 2019"
+    authority: "Ministère de l’Éducation nationale"
+    local_path: "sources/BO2019_1SPE_specialite.pdf"
+    text_path: "sources/txt/BO2019_1SPE_specialite.txt"
+    sha256: "80b8ef1440548faeb5861adc764e6c9740cc2d2c806685287b72eabb5aeeea73"
+    tier: T1
+    license: "information publique"
+    usage_policy: verbatim
+    crawl: { method: manual, frequency: never }
+    normative: false
+    status: archive
+    active: false
+    notes: "Annexe 2019 remplacée pour la classe de première à compter de la rentrée 2026 ; conservée uniquement pour l’historique."
+
   - id: SRC-0001
     name: "Eduscol — Mathématiques lycée"
     url: "https://eduscol.education.fr/1723/programmes-et-ressources-en-mathematiques-voie-gt"

@@ -1,0 +1,339 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-reussite.tn/schemas/programme_1spe_2026.schema.json",
+  "title": "Référentiel canonique du programme 1SPE applicable à la rentrée 2026",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source",
+    "selection_policy",
+    "thematic_domains",
+    "transversal_domains",
+    "chapters",
+    "expected_cardinalities",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "selection_policy": {
+      "$ref": "#/$defs/selection_policy"
+    },
+    "thematic_domains": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "Algèbre"},
+        {"const": "Analyse"},
+        {"const": "Géométrie"},
+        {"const": "Probabilités et statistiques"}
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "transversal_domains": {
+      "type": "array",
+      "prefixItems": [
+        {"const": "Vocabulaire ensembliste et logique"},
+        {"const": "Algorithmique et programmation"},
+        {"const": "Automatismes"}
+      ],
+      "items": false,
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "1SPE-SUITES",
+          "1SPE-SECOND-DEGRE",
+          "1SPE-DERIVATION-LOCAL",
+          "1SPE-DERIVATION-GLOBAL",
+          "1SPE-EXPONENTIELLE",
+          "1SPE-TRIGONOMETRIE",
+          "1SPE-PRODUIT-SCALAIRE",
+          "1SPE-GEOMETRIE-REPEREE",
+          "1SPE-PROBA-COND",
+          "1SPE-VARIABLES-ALEATOIRES"
+        ]
+      },
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true
+    },
+    "expected_cardinalities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/cardinality"
+      },
+      "minItems": 10,
+      "maxItems": 10,
+      "uniqueItems": true
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/item"
+      },
+      "minItems": 175,
+      "maxItems": 175,
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "selection_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "objective_paragraphs",
+        "excluded_objective_material"
+      ],
+      "properties": {
+        "objective_paragraphs": {
+          "const": "include_explicit_prescriptions_and_scope_boundaries"
+        },
+        "excluded_objective_material": {
+          "type": "array",
+          "prefixItems": [
+            {"const": "descriptive_context"},
+            {"const": "history_of_mathematics"}
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registry_id",
+        "title",
+        "legal_instrument",
+        "nor",
+        "decree_date",
+        "publication_date",
+        "bo_issue",
+        "bo_date",
+        "normative_from",
+        "bo_url",
+        "pdf_url",
+        "local_path",
+        "text_path",
+        "pdf_sha256",
+        "text_sha256",
+        "pages"
+      ],
+      "properties": {
+        "registry_id": {"const": "SRC-BO2026-1SPE-MATHS"},
+        "title": {"type": "string", "minLength": 1},
+        "legal_instrument": {"const": "Arrêté du 26 février 2026"},
+        "nor": {"const": "MENE2602917A"},
+        "decree_date": {"const": "2026-02-26"},
+        "publication_date": {"const": "2026-03-27"},
+        "bo_issue": {"const": 14},
+        "bo_date": {"const": "2026-04-02"},
+        "normative_from": {"const": "2026-09-01"},
+        "bo_url": {"type": "string", "format": "uri"},
+        "pdf_url": {"type": "string", "format": "uri"},
+        "local_path": {"const": "sources/BO2026_1SPE_specialite.pdf"},
+        "text_path": {"const": "sources/txt/BO2026_1SPE_specialite.txt"},
+        "pdf_sha256": {
+          "const": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
+        },
+        "text_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "pages": {"const": 11}
+      }
+    },
+    "cardinality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "obligation_class", "count"],
+      "properties": {
+        "type": {"$ref": "#/$defs/type"},
+        "obligation_class": {"$ref": "#/$defs/obligation_class"},
+        "count": {"type": "integer", "minimum": 1}
+      }
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "contenu",
+        "capacite",
+        "demonstration",
+        "algorithme",
+        "approfondissement",
+        "transversal"
+      ]
+    },
+    "obligation_class": {
+      "type": "string",
+      "enum": [
+        "mandatory_content",
+        "prescribed_teaching",
+        "optional_extension",
+        "contextual_guidance"
+      ]
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "domain_kind",
+        "domain",
+        "theme",
+        "type",
+        "obligation_class",
+        "bo_page",
+        "bo_quote",
+        "source_sha256",
+        "assigned_chapters",
+        "distribution_justification",
+        "editorial_verdict",
+        "editorial_rationale"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+        },
+        "domain_kind": {
+          "type": "string",
+          "enum": ["thematic", "transversal"]
+        },
+        "domain": {
+          "type": "string",
+          "enum": [
+            "Algèbre",
+            "Analyse",
+            "Géométrie",
+            "Probabilités et statistiques",
+            "Vocabulaire ensembliste et logique",
+            "Algorithmique et programmation",
+            "Automatismes"
+          ]
+        },
+        "theme": {"type": "string", "minLength": 1},
+        "type": {"$ref": "#/$defs/type"},
+        "obligation_class": {"$ref": "#/$defs/obligation_class"},
+        "bo_page": {"type": "integer", "minimum": 1, "maximum": 11},
+        "bo_quote": {"type": "string", "minLength": 2},
+        "source_sha256": {
+          "const": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
+        },
+        "assigned_chapters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "1SPE-SUITES",
+              "1SPE-SECOND-DEGRE",
+              "1SPE-DERIVATION-LOCAL",
+              "1SPE-DERIVATION-GLOBAL",
+              "1SPE-EXPONENTIELLE",
+              "1SPE-TRIGONOMETRIE",
+              "1SPE-PRODUIT-SCALAIRE",
+              "1SPE-GEOMETRIE-REPEREE",
+              "1SPE-PROBA-COND",
+              "1SPE-VARIABLES-ALEATOIRES"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "distribution_justification": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "editorial_verdict": {
+          "type": "string",
+          "enum": [
+            "included",
+            "excluded_with_rationale",
+            "not_applicable"
+          ]
+        },
+        "editorial_rationale": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "domain_kind": {"const": "thematic"}
+            },
+            "required": ["domain_kind"]
+          },
+          "then": {
+            "properties": {
+              "domain": {
+                "enum": [
+                  "Algèbre",
+                  "Analyse",
+                  "Géométrie",
+                  "Probabilités et statistiques"
+                ]
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "domain": {
+                "enum": [
+                  "Vocabulaire ensembliste et logique",
+                  "Algorithmique et programmation",
+                  "Automatismes"
+                ]
+              },
+              "type": {"const": "transversal"}
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "assigned_chapters": {"minItems": 2}
+            },
+            "required": ["assigned_chapters"]
+          },
+          "then": {
+            "properties": {
+              "distribution_justification": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "editorial_verdict": {"const": "excluded_with_rationale"}
+            },
+            "required": ["editorial_verdict"]
+          },
+          "then": {
+            "properties": {
+              "editorial_rationale": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      ]
+    }
+  }
+}

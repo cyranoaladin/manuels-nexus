@@ -1,0 +1,3386 @@
+{
+  "schema_version": 1,
+  "source": {
+    "registry_id": "SRC-BO2026-1SPE-MATHS",
+    "title": "Programme de spécialité de mathématiques de la classe de première de la voie générale",
+    "legal_instrument": "Arrêté du 26 février 2026",
+    "nor": "MENE2602917A",
+    "decree_date": "2026-02-26",
+    "publication_date": "2026-03-27",
+    "bo_issue": 14,
+    "bo_date": "2026-04-02",
+    "normative_from": "2026-09-01",
+    "bo_url": "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A",
+    "pdf_url": "https://www.education.gouv.fr/sites/default/files/document/Annexe%20%E2%80%93%20Programme%20d%26%23039%3Benseignement%20de%20sp%C3%A9cialit%C3%A9%20de%20math%C3%A9matiques%20de%20la%20classe%20de%20premi%C3%A8re%20de%20la%20voie%20g%C3%A9n%C3%A9rale-515408.pdf",
+    "local_path": "sources/BO2026_1SPE_specialite.pdf",
+    "text_path": "sources/txt/BO2026_1SPE_specialite.txt",
+    "pdf_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+    "text_sha256": "4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df",
+    "pages": 11
+  },
+  "selection_policy": {
+    "objective_paragraphs": "include_explicit_prescriptions_and_scope_boundaries",
+    "excluded_objective_material": [
+      "descriptive_context",
+      "history_of_mathematics"
+    ]
+  },
+  "thematic_domains": [
+    "Algèbre",
+    "Analyse",
+    "Géométrie",
+    "Probabilités et statistiques"
+  ],
+  "transversal_domains": [
+    "Vocabulaire ensembliste et logique",
+    "Algorithmique et programmation",
+    "Automatismes"
+  ],
+  "chapters": [
+    "1SPE-SUITES",
+    "1SPE-SECOND-DEGRE",
+    "1SPE-DERIVATION-LOCAL",
+    "1SPE-DERIVATION-GLOBAL",
+    "1SPE-EXPONENTIELLE",
+    "1SPE-TRIGONOMETRIE",
+    "1SPE-PRODUIT-SCALAIRE",
+    "1SPE-GEOMETRIE-REPEREE",
+    "1SPE-PROBA-COND",
+    "1SPE-VARIABLES-ALEATOIRES"
+  ],
+  "expected_cardinalities": [
+    {
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "count": 11
+    },
+    {
+      "type": "algorithme",
+      "obligation_class": "mandatory_content",
+      "count": 4
+    },
+    {
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "count": 17
+    },
+    {
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "count": 44
+    },
+    {
+      "type": "contenu",
+      "obligation_class": "contextual_guidance",
+      "count": 5
+    },
+    {
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "count": 42
+    },
+    {
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "count": 11
+    },
+    {
+      "type": "transversal",
+      "obligation_class": "contextual_guidance",
+      "count": 4
+    },
+    {
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "count": 8
+    },
+    {
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "count": 29
+    }
+  ],
+  "items": [
+    {
+      "id": "OBJ-ALG-SUITES-BORNE-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "contenu",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 5,
+      "bo_quote": "D’autres types simples peuvent être abordés, mais aucune connaissance spécifique à leur sujet n’est au programme.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": "Borne officielle conservée comme garde-fou : les autres familles de suites ne deviennent pas des connaissances exigibles."
+    },
+    {
+      "id": "OBJ-ALG-LIMITE-BORNE-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "contenu",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 5,
+      "bo_quote": "Toute formalisation est exclue, mais sur des exemples, on s’attachera à en développer une intuition en s'appuyant sur des calculs numériques, des algorithmes de recherche de seuil.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": "Borne pédagogique explicite : le manuel développe l’intuition sans formaliser la notion de limite."
+    },
+    {
+      "id": "OBJ-ALG-SD-BORNE-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "contenu",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 5,
+      "bo_quote": "Le calcul effectif de la forme canonique dans le cas général n’est pas un attendu du programme.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": "Borne pédagogique explicite : le cas général ne peut pas devenir un attendu élève obligatoire."
+    },
+    {
+      "id": "OBJ-ANA-DERIVEE-BORNE-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "contenu",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 7,
+      "bo_quote": "On n’en donne pas de définition formelle, mais on s’appuie sur :",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": "Borne pédagogique explicite : le nombre dérivé est introduit intuitivement, sans définition formelle de limite."
+    },
+    {
+      "id": "OBJ-GEO-VECTEURS-PRESC-001",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Les élèves doivent conserver une pratique du calcul vectoriel en géométrie non repérée.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": "Prescription explicite « doivent conserver », intégrée aux activités de calcul vectoriel non repéré."
+    },
+    {
+      "id": "OBJ-PROB-UNIVERS-BORNE-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "contenu",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 10,
+      "bo_quote": "Le programme ne considère que des univers finis et des variables aléatoires réelles.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": "Borne de périmètre explicite : univers finis et variables aléatoires réelles uniquement dans le socle."
+    },
+    {
+      "id": "TR-LOG-CONTEXTE-001",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Progressivité de l’apprentissage",
+      "type": "transversal",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 3,
+      "bo_quote": "L’apprentissage des notations mathématiques et de la logique est transversal à tous les chapitres du programme. Aussi, il importe d’y travailler d’abord dans des contextes où ils se présentent naturellement, puis de prévoir des temps où les concepts et types de raisonnement sont étudiés, après avoir été rencontrés plusieurs fois en situation.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-NOTIONS-001",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Ensembles et notations",
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "bo_page": 4,
+      "bo_quote": "Les élèves doivent connaitre les notions d’élément d’un ensemble, de sous-ensemble, d’ensemble vide, d’appartenance et d’inclusion, de réunion, d’intersection et de complémentaire et savoir utiliser les symboles de base correspondants : Ø, ∈, ⊂, ∩, ∪, { … }, ainsi que la notation des ensembles de nombres et des intervalles. Ils rencontrent également la notion de couple et celle de produit cartésien de deux ensembles.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-NOTIONS-002",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Complémentaire et cardinal",
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "bo_page": 4,
+      "bo_quote": "Pour le complémentaire d’un sous-ensemble A de E, on utilise la notation A ̅ des probabilités, ou la notation E \\ A. On utilise la notation Card(A) pour le cardinal (nombre d’éléments) d’un ensemble fini A.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-001",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "lire et écrire des propositions contenant les connecteurs logiques « et », « ou » ;",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-002",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "mobiliser un contre-exemple pour montrer qu’une proposition est fausse ;",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-003",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "formuler une implication, une équivalence logique, et à les mobiliser dans un raisonnement simple;",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-004",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "formuler la réciproque d'une implication, la contraposée ;",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-005",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "employer les expressions « condition nécessaire », « condition suffisante » ;",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-006",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "identifier le statut des égalités (identité, équation) et celui des lettres utilisées (variable, inconnue, paramètre) ;",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-007",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "utiliser les quantificateurs (les symboles ∀ et ∃ ne sont pas exigibles) et repérer les quantifications implicites dans certaines propositions, particulièrement dans les propositions conditionnelles ;",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-008",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "formuler la négation de propositions quantifiées.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LOG-CAP-009",
+      "domain_kind": "transversal",
+      "domain": "Vocabulaire ensembliste et logique",
+      "theme": "Logique et raisonnement",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "Par ailleurs, les élèves produisent des raisonnements par disjonction des cas, par l'absurde, par contraposée, et en découvrent la structure.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Dimension transversale prescrite dans tous les chapitres ; la distribution éditoriale sera détaillée par objets d’introduction, de réinvestissement et de référence.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-ALGO-NOTIONS-001",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Consolidation algorithmique",
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "bo_page": 4,
+      "bo_quote": "L’enseignement de spécialité de mathématiques de classe de première vise la consolidation des notions de variable, d’instruction conditionnelle et de boucle ainsi que l’utilisation des fonctions. La seule notion nouvelle est celle de liste qui trouve naturellement sa place dans de nombreuses parties du programme et aide à la compréhension de notions mathématiques telles que les suites numériques, les tableaux de valeurs, les séries statistiques, etc.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-ALGO-CONTEXTE-001",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Langages de description",
+      "type": "transversal",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 4,
+      "bo_quote": "Comme en classe de seconde, les algorithmes peuvent être écrits en langage naturel ou utiliser le langage Python.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-ALGO-NOTIONS-002",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Types et affectation",
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "bo_page": 4,
+      "bo_quote": "Les notions relatives aux types de variables et à l’affectation sont consolidées. Comme en classe de seconde, on utilise le symbole « ← » pour désigner l’affectation dans un algorithme écrit en langage naturel.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-ALGO-CAP-001",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Programmation modulaire",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "L’accent est mis sur la programmation modulaire qui permet de découper une tâche complexe en tâches plus simples.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LISTE-CONTEXTE-001",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Notion de liste",
+      "type": "transversal",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 4,
+      "bo_quote": "La génération des listes en compréhension et en extension est mise en lien avec la notion d’ensemble. Les conditions apparaissant dans les listes définies en compréhension permettent de travailler la logique. Afin d’éviter des confusions, on se limite aux listes sans présenter d’autres types de collections.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LISTE-NOTIONS-001",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Notion de liste",
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "bo_page": 4,
+      "bo_quote": "Générer une liste (en extension, par ajouts successifs ou en compréhension).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LISTE-NOTIONS-002",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Notion de liste",
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "bo_page": 4,
+      "bo_quote": "Manipuler des éléments d’une liste (ajouter, supprimer, etc.) et leurs indices.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LISTE-NOTIONS-003",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Notion de liste",
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "bo_page": 4,
+      "bo_quote": "Parcourir une liste.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-LISTE-NOTIONS-004",
+      "domain_kind": "transversal",
+      "domain": "Algorithmique et programmation",
+      "theme": "Notion de liste",
+      "type": "transversal",
+      "obligation_class": "mandatory_content",
+      "bo_page": 4,
+      "bo_quote": "Itérer sur les éléments d’une liste.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Prescription algorithmique distribuée entre suites, probabilités conditionnelles et variables aléatoires, avec réinvestissements dans les autres chapitres.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CONTEXTE-001",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Finalité des automatismes",
+      "type": "transversal",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 4,
+      "bo_quote": "Cette partie du programme vise à construire et à entretenir des habiletés dans les domaines du calcul, de l’information chiffrée et des représentations graphiques. Il s’agit d’automatiser le recours à des connaissances, des procédures, des méthodes et des stratégies, afin de permettre aux élèves de les mobiliser plus rapidement. Leur acquisition permet aux élèves une meilleure réussite dans l’apprentissage des mathématiques, participe du développement de leur esprit critique par une meilleure maitrise des nombres et du calcul et leur permet une meilleure lecture et compréhension des représentations de données dont les graphiques.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-001",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Mise en œuvre annuelle",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "Les capacités attendues énoncées ci-dessous n’ont pas vocation à faire l’objet d’un chapitre d’enseignement spécifique car les notions qui les sous-tendent ont été travaillées dans les classes antérieures et doivent être entretenues et consolidées au cours de l’année. Cependant les nouvelles notions du programme peuvent donner lieu également à un travail d’automatisation tout le long de l’année. Elles relèvent d’un entrainement régulier sur l’ensemble du cycle terminal privilégiant l’activité mentale. Les différents thèmes proposés doivent être travaillés tout au long de l’année et la présentation par blocs thématiques ne signifie pas, bien au contraire, qu’il faille les aborder les uns après les autres. Les modalités de mise en œuvre peuvent être variées et prendre appui sur différents supports : à l’oral, à l’écrit, individuellement ou en groupe, utilisant éventuellement des outils numériques de vidéoprojection, de recensement instantané des réponses, etc.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-002",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Continuité avec la seconde",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 4,
+      "bo_quote": "À la liste ci-dessous s’ajoute la liste des automatismes travaillés en classe de seconde, qui doivent être entretenus en classe de première.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-003",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Évolutions et variations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Appliquer un taux d’évolution pour calculer une valeur finale ou initiale.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-004",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Évolutions et variations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Calculer un taux d’évolution, l’exprimer en pourcentage.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-005",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Évolutions et variations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Calculer le taux d’évolution équivalent à plusieurs évolutions successives.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-006",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Évolutions et variations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Calculer un taux d’évolution réciproque.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-007",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Calcul numérique et algébrique",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Déterminer les solutions d’une équation produit nul.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-008",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Calcul numérique et algébrique",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Déterminer le signe d’une expression du premier degré, d’une expression factorisée du second degré.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-009",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Calcul numérique et algébrique",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Développer, factoriser, réduire une expression algébrique simple.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-010",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Fonctions et représentations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Résoudre graphiquement une équation, une inéquation du type : ƒ (𝑥) = k, ƒ (𝑥) < k, etc.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-011",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Fonctions et représentations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Déterminer graphiquement le signe d’une fonction ou son tableau de variations.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-012",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Fonctions et représentations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Tracer une droite donnée par son équation réduite ou par un point et son coefficient directeur.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-013",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Fonctions et représentations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Lire graphiquement l’équation réduite d’une droite.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-014",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Fonctions et représentations",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Déterminer le coefficient directeur d’une droite à partir des coordonnées de deux de ses points.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-015",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Statistiques",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Lire un graphique, un histogramme, un diagramme en barres ou circulaire, un diagramme en boite ou toute autre représentation (repérer l’origine du repère, les unités de graduations ou les échelles, etc.).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-016",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Statistiques",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Passer du graphique aux données et vice-versa.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-017",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Statistiques",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Calculer et interpréter des indicateurs statistiques pour une série statistique.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-018",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Probabilités",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Calculer des probabilités conditionnelles lorsque les évènements sont présentés sous forme de tableau croisé d’effectifs ou d’arbres pondérés.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "TR-AUTO-CAP-019",
+      "domain_kind": "transversal",
+      "domain": "Automatismes",
+      "theme": "Probabilités",
+      "type": "transversal",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 5,
+      "bo_quote": "Distinguer P(A ∩ B), PA (B), PB (A).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES",
+        "1SPE-SECOND-DEGRE",
+        "1SPE-DERIVATION-LOCAL",
+        "1SPE-DERIVATION-GLOBAL",
+        "1SPE-EXPONENTIELLE",
+        "1SPE-TRIGONOMETRIE",
+        "1SPE-PRODUIT-SCALAIRE",
+        "1SPE-GEOMETRIE-REPEREE",
+        "1SPE-PROBA-COND",
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": "Automatisme à entretenir tout au long de l’année dans plusieurs chapitres, conformément à la prescription transversale du programme.",
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 6,
+      "bo_quote": "Exemples de modes de génération d’une suite : explicite 𝑢𝑛 = ƒ (𝑛), par une relation de récurrence 𝑢𝑛 + 1 = ƒ (𝑢𝑛), par un algorithme, par des motifs géométriques.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 6,
+      "bo_quote": "Notations : 𝑢(𝑛), 𝑢𝑛, (𝑢(𝑛)), (𝑢𝑛).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 6,
+      "bo_quote": "Suites arithmétiques : exemples, définition, calcul du terme général. Lien avec l’étude d’évolutions successives à accroissements constants. Lien avec les fonctions affines. Calcul de 1 + 2 + … + 𝑛.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CONT-004",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 6,
+      "bo_quote": "Suites géométriques : exemples, définition, calcul du terme général. Lien avec l’étude d’évolutions successives à taux constant. Lien avec la fonction exponentielle. Calcul de 1 + 𝑞 + … + 𝑞𝑛.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CONT-005",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 6,
+      "bo_quote": "Sens de variation d’une suite.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CONT-006",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 6,
+      "bo_quote": "Sur des exemples, introduction intuitive de la notion de limite, finie ou infinie, ou l’absence de limite d’une suite.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Dans le cadre de l’étude d’une suite, utiliser le registre de la langue naturelle, le registre algébrique, le registre graphique, et passer de l’un à l’autre.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Proposer, modéliser une situation permettant de générer une suite de nombres. Déterminer une relation explicite ou une relation de récurrence pour une suite définie par un motif géométrique, par une question de dénombrement.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Calculer des termes d’une suite définie explicitement, par récurrence ou par un algorithme.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CAP-004",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Pour une suite arithmétique ou géométrique, calculer le terme général, la somme de termes consécutifs, déterminer le sens de variation.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CAP-005",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Modéliser un phénomène discret à croissance linéaire par une suite arithmétique, un phénomène discret à croissance exponentielle par une suite géométrique.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-CAP-006",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Conjecturer, dans des cas simples, la limite éventuelle d’une suite.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-DEM-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Calcul du terme général d’une suite arithmétique, d’une suite géométrique.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-DEM-002",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Calcul de 1 + 2 + … + 𝑛.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-DEM-003",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Calcul de 1 + 𝑞 + … + 𝑞𝑛.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-ALG-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 6,
+      "bo_quote": "Calcul de termes d’une suite, de sommes de termes, de seuil.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-ALG-002",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 6,
+      "bo_quote": "Calcul de factorielle.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-ALG-003",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 6,
+      "bo_quote": "Liste des premiers termes d’une suite : suites de Syracuse, suite de Fibonacci.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SUI-APP-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 6,
+      "bo_quote": "Tour de Hanoï.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ALG-SUI-APP-002",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 6,
+      "bo_quote": "Somme des n premiers carrés, des n premiers cubes.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ALG-SUI-APP-003",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Suites numériques, modèles discrets",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 6,
+      "bo_quote": "Remboursement d’un emprunt par annuités constantes.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ALG-SD-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 6,
+      "bo_quote": "Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SD-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 6,
+      "bo_quote": "Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SD-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SD-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SD-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SD-CAP-004",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SD-DEM-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 6,
+      "bo_quote": "Résolution de l’équation du second degré.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ALG-SD-APP-001",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 6,
+      "bo_quote": "Factorisation d’un polynôme du troisième degré admettant une racine et résolution de l’équation associée.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ALG-SD-APP-002",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 6,
+      "bo_quote": "Factorisation de 𝑥𝑛 – 1 par 𝑥 – 1, de 𝑥𝑛 – a𝑛 par 𝑥 – a.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ALG-SD-APP-003",
+      "domain_kind": "thematic",
+      "domain": "Algèbre",
+      "theme": "Équations, fonctions polynômes du second degré",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 6,
+      "bo_quote": "Déterminer deux nombres réels connaissant leur somme s et leur produit p comme racines de la fonction polynôme 𝑥 ↦ 𝑥² – s𝑥 + p.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ANA-DERLOC-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Taux de variation. Sécantes à la courbe représentative d’une fonction en un point donné.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Nombre dérivé d’une fonction en un point, comme limite du taux de variation. Notation ƒ ’(a).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Tangente à la courbe représentative d’une fonction en un point, comme « limite des sécantes ». Pente. Équation : la tangente à la courbe représentative de ƒ au point d’abscisse a est la droite d’équation 𝑦 = ƒ (a) + ƒ ‘(a)(𝑥 – a).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-CONT-004",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Approximation linéaire : fonction affine tangente 𝑥 ↦ ƒ (a) + ƒ ‘(a)(𝑥 – a) et approximation de ƒ (a + h) par ƒ (a) + ƒ ‘(a)h.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERGLOB-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue global",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Fonction dérivable sur un intervalle. Fonction dérivée.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERGLOB-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue global",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Fonction dérivée des fonctions carré, cube, inverse, racine carrée.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERGLOB-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue global",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Opérations sur les fonctions dérivables : somme, produit, inverse, quotient.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERGLOB-CONT-004",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue global",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Pour 𝑛 dans ℤ, fonction dérivée de la fonction 𝑥 ↦ 𝑥 𝑛.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERGLOB-CONT-005",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue global",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 7,
+      "bo_quote": "Fonction valeur absolue : étude de la dérivabilité en 0.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 7,
+      "bo_quote": "Calculer un taux de variation, la pente d’une sécante.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 7,
+      "bo_quote": "Interpréter le nombre dérivé en contexte : pente d’une tangente, vitesse instantanée, cout marginal, etc.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 7,
+      "bo_quote": "Déterminer graphiquement un nombre dérivé par la pente de la tangente. Construire la tangente en un point à une courbe représentative connaissant le nombre dérivé.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-CAP-004",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 7,
+      "bo_quote": "Déterminer l’équation de la tangente en un point à la courbe représentative d’une fonction.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-CAP-005",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 7,
+      "bo_quote": "Calculer une valeur approchée de ƒ (a + h).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERGLOB-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue global",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 7,
+      "bo_quote": "Dans des cas simples, calculer une fonction dérivée en utilisant les propriétés des opérations sur les fonctions dérivables.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-DEM-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Équation de la tangente en un point à une courbe représentative.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-DEM-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "La fonction racine carrée n’est pas dérivable en 0.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERGLOB-DEM-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue global",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Fonction dérivée de la fonction carrée, de la fonction inverse.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERGLOB-DEM-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue global",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Fonction dérivée d’un produit.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-DERLOC-ALG-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Dérivation — point de vue local",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 8,
+      "bo_quote": "Écrire la liste des coefficients directeurs des sécantes pour un pas donné.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-VAR-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Variations et courbes représentatives des fonctions",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Représentation algébrique et graphique de fonctions paires, impaires. Traduction géométrique.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-VAR-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Variations et courbes représentatives des fonctions",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Lien entre le sens de variation d’une fonction dérivable sur un intervalle et signe de sa fonction dérivée ; caractérisation des fonctions constantes.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-VAR-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Variations et courbes représentatives des fonctions",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Nombre dérivé en un extrémum, tangente à la courbe représentative.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-VAR-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Variations et courbes représentatives des fonctions",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Étudier les variations d’une fonction. Déterminer les extrémums.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-VAR-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Variations et courbes représentatives des fonctions",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Résoudre un problème d’optimisation.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-VAR-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Variations et courbes représentatives des fonctions",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Exploiter les variations d’une fonction pour établir une inégalité. Étudier la position relative de deux courbes représentatives.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-VAR-CAP-004",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Variations et courbes représentatives des fonctions",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Étudier, en lien avec la dérivation, une fonction polynôme du second degré : variations, extrémum, allure selon le signe du coefficient de 𝑥².",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-VAR-ALG-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Variations et courbes représentatives des fonctions",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 8,
+      "bo_quote": "Méthode de Newton, en se limitant à des cas favorables.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-DERIVATION-GLOBAL"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant ƒ ‘ = ƒ et ƒ (0) = 1. L’existence et l’unicité sont admises. Notation exp(𝑥).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Pour tous réels 𝑥 et 𝑦, exp(𝑥 + 𝑦) = exp(𝑥) exp(𝑦) et exp(𝑥) exp(–𝑥) = 1. Nombre e. Notation e 𝑥.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Signe, sens de variation et courbe représentative de la fonction exponentielle. Lien avec les suites géométriques.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Transformer une expression en utilisant les propriétés algébriques de la fonction exponentielle.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Pour a réel, dérivée de la fonction t ↦ eat.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Pour une valeur numérique strictement positive de k, représenter graphiquement les fonctions t ↦ e–kt et t ↦ ekt.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-CAP-004",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Modéliser une situation par une croissance, une décroissance exponentielle (par exemple évolution d’un capital à taux fixe, décroissance radioactive).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-ALG-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 8,
+      "bo_quote": "Construction de l’exponentielle par la méthode d’Euler.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-ALG-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 8,
+      "bo_quote": "1 𝑛 − Détermination d’une valeur approchée de e à l’aide de la suite ((1 + ) ). 𝑛",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-EXP-APP-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 8,
+      "bo_quote": "Unicité d’une fonction ƒ dérivable sur ℝ telle que vérifiant ƒ ‘ = ƒ et ƒ (0) = 1.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ANA-EXP-APP-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 8,
+      "bo_quote": "Pour tous réels 𝑥 et 𝑦, exp(𝑥 + 𝑦) = exp(𝑥) exp(𝑦).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ANA-EXP-APP-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Fonction exponentielle",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 8,
+      "bo_quote": "La fonction exponentielle est strictement positive et croissante.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-EXPONENTIELLE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "ANA-TRIG-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Trigonométrie",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Cercle trigonométrique. Longueur d’arc. Radian.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-TRIGONOMETRIE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-TRIG-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Trigonométrie",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Enroulement de la droite sur le cercle trigonométrique. Image d’un nombre réel.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-TRIGONOMETRIE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-TRIG-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Trigonométrie",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 8,
+      "bo_quote": "Cosinus et sinus d’un nombre réel. Lien avec le sinus et le cosinus dans un triangle rectangle. Valeurs remarquables.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-TRIGONOMETRIE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-TRIG-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Trigonométrie",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Placer un point sur le cercle trigonométrique.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-TRIGONOMETRIE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-TRIG-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Trigonométrie",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "Par lecture du cercle trigonométrique, déterminer, pour des valeurs remarquables de 𝑥, les cosinus et sinus d’angles associés à 𝑥.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-TRIGONOMETRIE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-TRIG-DEM-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Trigonométrie",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 8,
+      "bo_quote": "𝜋 𝜋 𝜋 𝜋 − Calcul de cos , sin , cos , sin . 4 4 3 3",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-TRIGONOMETRIE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "ANA-TRIG-ALG-001",
+      "domain_kind": "thematic",
+      "domain": "Analyse",
+      "theme": "Trigonométrie",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 8,
+      "bo_quote": "Approximation de π par la méthode d’Archimède.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-TRIGONOMETRIE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 9,
+      "bo_quote": "Produit scalaire à partir de la projection orthogonale et de la formule avec le cosinus. Caractérisation de l’orthogonalité.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 9,
+      "bo_quote": "Bilinéarité, symétrie. En base orthonormée, expression du produit scalaire et de la norme, critère d’orthogonalité. Expression des coordonnées dans une base orthonormée en termes de produits scalaires avec les vecteurs de la base.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 9,
+      "bo_quote": "Développement de ‖𝑢 ⃗ + 𝑣‖2 et ‖𝑢 ⃗ − 𝑣 ‖2 . Formule d’Al-Kashi.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-CONT-004",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 9,
+      "bo_quote": "Transformation de l’expression M ⃗⃗⃗⃗⃗⃗B. ⃗⃗⃗⃗⃗⃗⃗A ⋅ M",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Utiliser le produit scalaire pour démontrer une orthogonalité, pour calculer un angle, une longueur dans le plan.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "En vue de la résolution d’un problème, calculer le produit scalaire de deux vecteurs en choisissant une méthode adaptée (en utilisant la projection orthogonale, à l’aide des coordonnées, à l’aide des normes et d’un angle, à l’aide de normes).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Utiliser le produit scalaire pour résoudre un problème géométrique.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-DEM-001",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Formule d’Al-Kashi (démonstration avec le produit scalaire).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-DEM-002",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "demonstration",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Ensemble des points M tels que M ⃗⃗⃗⃗⃗⃗B = 0 (démonstration avec le produit scalaire). ⃗⃗⃗⃗⃗⃗⃗A ⋅ M",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-PS-APP-001",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 9,
+      "bo_quote": "Loi des sinus.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "GEO-PS-APP-002",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 9,
+      "bo_quote": "Concourance des hauteurs d’un triangle.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "GEO-PS-APP-003",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Calcul vectoriel et produit scalaire",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 9,
+      "bo_quote": "Les médianes d’un triangle concourent au centre de gravité.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PRODUIT-SCALAIRE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "GEO-REP-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 9,
+      "bo_quote": "Vecteur normal à une droite. Le vecteur de coordonnées (a, b) est normal à la droite d’équation a𝑥 + b𝑦 + c = 0.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-REP-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 9,
+      "bo_quote": "Projection orthogonale d’un point sur une droite.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-REP-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 9,
+      "bo_quote": "Équation de cercle.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-REP-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Déterminer une équation cartésienne d’une droite connaissant un point et un vecteur normal.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-REP-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Déterminer les coordonnées du projeté orthogonal d’un point sur une droite.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-REP-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Déterminer et utiliser l’équation d’un cercle donné par son centre et son rayon.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-REP-CAP-004",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Reconnaitre une équation de cercle, déterminer centre et rayon.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-REP-CAP-005",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 9,
+      "bo_quote": "Utiliser un repère pour étudier une configuration.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "GEO-REP-APP-001",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 9,
+      "bo_quote": "Recherche de l’ensemble des points équidistants de l’axe des abscisses et d’un point donné.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "GEO-REP-APP-002",
+      "domain_kind": "thematic",
+      "domain": "Géométrie",
+      "theme": "Géométrie repérée",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 9,
+      "bo_quote": "Déterminer l’intersection d’un cercle ou d’une parabole d’équation 𝑦 = a𝑥2 + b𝑥 + c avec une droite parallèle à un axe.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-GEOMETRIE-REPEREE"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "PROB-COND-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 10,
+      "bo_quote": "Indépendance de deux évènements.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 10,
+      "bo_quote": "Partition de l’univers (systèmes complets d’évènements). Formule des probabilités totales.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 10,
+      "bo_quote": "Succession de deux épreuves indépendantes. Représentation par un arbre ou un tableau.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-CONT-004",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 10,
+      "bo_quote": "Pour 𝑛 ⩽ 4, répétition de 𝑛 épreuves de Bernoulli indépendantes et identiques.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 10,
+      "bo_quote": "Dans des cas simples, calculer une probabilité à l’aide de la formule des probabilités totales.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 10,
+      "bo_quote": "Savoir utiliser ou justifier l’indépendance de deux évènements.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 10,
+      "bo_quote": "Représenter la succession de deux épreuves indépendantes par un arbre ou un tableau.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-CAP-004",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 10,
+      "bo_quote": "Pour 𝑛 ⩽ 4, représenter l’arbre associé à la répétition de 𝑛 épreuves de Bernoulli indépendantes et identiques afin de calculer des probabilités.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-ALG-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 10,
+      "bo_quote": "Méthode de Monte-Carlo : estimation de l’aire sous la parabole, estimation du nombre π.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-COND-APP-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 10,
+      "bo_quote": "Exemples de succession de plusieurs épreuves indépendantes.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "PROB-COND-APP-002",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Probabilités conditionnelles et indépendance",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 10,
+      "bo_quote": "Exemples de marches aléatoires.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-PROBA-COND"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "PROB-VA-CONT-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 10,
+      "bo_quote": "Variable aléatoire réelle : modélisation du résultat numérique d’une expérience aléatoire ; formalisation comme fonction définie sur l’univers et à valeurs réelles.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CONT-002",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 10,
+      "bo_quote": "Loi d’une variable aléatoire.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CONT-003",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 10,
+      "bo_quote": "Espérance, variance, écart type d’une variable aléatoire.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CONT-004",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 10,
+      "bo_quote": "Linéarité de l’espérance.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CONT-005",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "contenu",
+      "obligation_class": "mandatory_content",
+      "bo_page": 11,
+      "bo_quote": "Formule de König-Huygens.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CAP-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 11,
+      "bo_quote": "Interpréter en situation et utiliser les notations {X = a}, {X ⩽ a}, P(X = a), P(X ⩽ a). Passer du registre de la langue naturelle au registre symbolique et inversement.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CAP-002",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 11,
+      "bo_quote": "Modéliser une situation à l’aide d’une variable aléatoire.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CAP-003",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 11,
+      "bo_quote": "Déterminer la loi de probabilité d’une variable aléatoire.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CAP-004",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 11,
+      "bo_quote": "Calculer une espérance, une variance, un écart type.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-CAP-005",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "capacite",
+      "obligation_class": "prescribed_teaching",
+      "bo_page": 11,
+      "bo_quote": "Utiliser la notion d’espérance dans une résolution de problème (mise pour un jeu équitable, etc.).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-ALG-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 11,
+      "bo_quote": "Algorithme renvoyant l’espérance, la variance ou l‘écart type d’une variable aléatoire.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-ALG-002",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "algorithme",
+      "obligation_class": "contextual_guidance",
+      "bo_page": 11,
+      "bo_quote": "Fréquence d’apparition des lettres d’un texte donné, en français, en anglais.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "PROB-VA-APP-001",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Variables aléatoires réelles",
+      "type": "approfondissement",
+      "obligation_class": "optional_extension",
+      "bo_page": 11,
+      "bo_quote": "Pour X variable aléatoire, étude de la fonction du second degré 𝑥 ↦ E((X – 𝑥)²).",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "excluded_with_rationale",
+      "editorial_rationale": "Approfondissement officiellement facultatif, exclu du socle de conformité obligatoire ; réintégration possible comme enrichissement explicitement signalé."
+    },
+    {
+      "id": "VA-EXP-SIMULER",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Expérimentations",
+      "type": "algorithme",
+      "obligation_class": "mandatory_content",
+      "bo_page": 11,
+      "bo_quote": "Simuler une variable aléatoire avec Python ou un tableur.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "VA-EXP-FONCTION-MOYENNE",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Expérimentations",
+      "type": "algorithme",
+      "obligation_class": "mandatory_content",
+      "bo_page": 11,
+      "bo_quote": "Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "VA-EXP-DISTANCE-MOYENNE-ESPERANCE",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Expérimentations",
+      "type": "algorithme",
+      "obligation_class": "mandatory_content",
+      "bo_page": 11,
+      "bo_quote": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire.",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    },
+    {
+      "id": "VA-EXP-PROPORTION-2SIGMA",
+      "domain_kind": "thematic",
+      "domain": "Probabilités et statistiques",
+      "theme": "Expérimentations",
+      "type": "algorithme",
+      "obligation_class": "mandatory_content",
+      "bo_page": 11,
+      "bo_quote": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n",
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "assigned_chapters": [
+        "1SPE-VARIABLES-ALEATOIRES"
+      ],
+      "distribution_justification": null,
+      "editorial_verdict": "included",
+      "editorial_rationale": null
+    }
+  ]
+}
