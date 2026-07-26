@@ -25,25 +25,6 @@ import yaml
 
 
 DEFAULT_REPORT = Path("validations/release-1spe/toolchain.json")
-TEX_ENVIRONMENT_OVERRIDES = {
-    "TEXINPUTS",
-    "LUAINPUTS",
-    "TEXMFCNF",
-    "TEXMFHOME",
-    "TEXMFVAR",
-    "TEXMFCONFIG",
-    "BIBINPUTS",
-    "BSTINPUTS",
-    "MFINPUTS",
-    "MPINPUTS",
-    "TFMFONTS",
-    "VFFONTS",
-    "T1FONTS",
-    "OPENTYPEFONTS",
-    "TTFONTS",
-    "LUA_PATH",
-    "LUA_CPATH",
-}
 TAGGED_PDF_SMOKE_SOURCE = r"""\DocumentMetadata{
   lang=fr,
   pdfversion=1.7,
@@ -102,6 +83,8 @@ def _require_keys(
 ) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ManifestError(f"{path} doit être un objet")
+    if any(not isinstance(key, str) for key in value):
+        raise ManifestError(f"{path}: toutes les clés doivent être des chaînes")
     missing = sorted(required - set(value))
     if missing:
         raise ManifestError(f"{path}: clé(s) manquante(s): {', '.join(missing)}")
@@ -267,10 +250,10 @@ def _resolve_binary(
     if located is None:
         return None, f"binaire absent: {binary}"
     try:
-        resolved = Path(located).expanduser().resolve(strict=False)
+        resolved = os.path.abspath(os.path.expanduser(located))
     except (OSError, TypeError, ValueError) as exc:
         return None, f"résolution impossible: {type(exc).__name__}"
-    return str(resolved), None
+    return resolved, None
 
 
 def _run_version(
@@ -306,13 +289,36 @@ def _extract(pattern: str, output: str) -> str | None:
 
 
 def _smoke_environment(
+    smoke_directory: Path,
     environ: Mapping[str, str] | None = None,
 ) -> dict[str, str]:
-    """Copie l'environnement en neutralisant les entrées TeX configurables."""
+    """Construit l'environnement en liste blanche et ses caches éphémères."""
 
-    sanitized = dict(os.environ if environ is None else environ)
-    for variable in TEX_ENVIRONMENT_OVERRIDES:
-        sanitized.pop(variable, None)
+    parent = os.environ if environ is None else environ
+    sanitized = {
+        "PATH": parent.get("PATH", os.defpath),
+        "LANG": "C.UTF-8",
+        "LC_ALL": "C.UTF-8",
+        "TZ": "UTC",
+    }
+    if "JAVA_HOME" in parent:
+        sanitized["JAVA_HOME"] = parent["JAVA_HOME"]
+
+    redirections = {
+        "HOME": "home",
+        "TMPDIR": "tmp",
+        "XDG_CACHE_HOME": "xdg/cache",
+        "XDG_CONFIG_HOME": "xdg/config",
+        "XDG_DATA_HOME": "xdg/data",
+        "TEXMFHOME": "texmf/home",
+        "TEXMFVAR": "texmf/var",
+        "TEXMFCONFIG": "texmf/config",
+        "TEXMFCACHE": "texmf/cache",
+    }
+    for variable, relative_path in redirections.items():
+        destination = smoke_directory / relative_path
+        destination.mkdir(parents=True, exist_ok=True)
+        sanitized[variable] = str(destination)
     return sanitized
 
 
@@ -331,7 +337,7 @@ def run_tagged_pdf_smoke(
             smoke_directory = Path(directory)
             source = smoke_directory / "tagged-smoke.tex"
             pdf = smoke_directory / "tagged-smoke.pdf"
-            smoke_environment = _smoke_environment()
+            smoke_environment = _smoke_environment(smoke_directory)
             source.write_text(TAGGED_PDF_SMOKE_SOURCE, encoding="utf-8")
 
             compile_process = runner(

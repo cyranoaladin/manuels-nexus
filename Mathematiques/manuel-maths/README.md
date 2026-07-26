@@ -51,15 +51,16 @@ ce smoke-test sont supprimées automatiquement et aucun chemin temporaire
 n'entre dans le rapport. Chaque PDF de production devra encore réussir sa
 propre validation PDF/UA-1.
 
-Chaque binaire est résolu une seule fois en chemin absolu avant les contrôles ;
-les commandes de version et le smoke-test réutilisent strictement cette même
-identité. Le smoke-test lance LuaLaTeX et veraPDF depuis son répertoire
-temporaire. Il reçoit une copie explicite de l'environnement dans laquelle les
-variables d'override TeX `TEXINPUTS`, `LUAINPUTS`, `TEXMFCNF`, `TEXMFHOME`,
-`TEXMFVAR`, `TEXMFCONFIG`, `BIBINPUTS`, `BSTINPUTS`, `MFINPUTS`, `MPINPUTS`,
-`TFMFONTS`, `VFFONTS`, `T1FONTS`, `OPENTYPEFONTS`, `TTFONTS`, `LUA_PATH` et
-`LUA_CPATH` sont supprimées. Les variables neutres, dont `PATH` nécessaire aux
-wrappers, sont conservées.
+Chaque binaire est résolu une seule fois en chemin absolu avant les contrôles,
+sans suivre le dernier lien symbolique : l'identité du lanceur trouvée par
+`PATH` reste donc l'`argv[0]` des commandes de version et du smoke-test.
+Celui-ci lance LuaLaTeX et veraPDF depuis son répertoire temporaire avec une
+liste blanche d'environnement. Seuls `PATH` et, s'il existe, `JAVA_HOME`
+proviennent du parent ; `LANG=C.UTF-8`, `LC_ALL=C.UTF-8` et `TZ=UTC` sont
+fixés. `HOME`, `TMPDIR`, les trois répertoires XDG, `TEXMFHOME`, `TEXMFVAR`,
+`TEXMFCONFIG` et `TEXMFCACHE` pointent vers des sous-répertoires créés dans le
+smoke-test puis supprimés avec lui. Aucune autre variable du parent — option
+TeX/Kpathsea, option Java ou secret — n'est transmise.
 
 Le préflight ne tente aucune installation :
 

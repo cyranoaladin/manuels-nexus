@@ -58,27 +58,6 @@ VALID_OUTPUTS = {
     "pdftoppm": ("", "pdftoppm version 24.02.0\n"),
     "gs": ("10.02.1\n", ""),
 }
-TEX_OVERRIDE_VARIABLES = [
-    "TEXINPUTS",
-    "LUAINPUTS",
-    "TEXMFCNF",
-    "TEXMFHOME",
-    "TEXMFVAR",
-    "TEXMFCONFIG",
-    "BIBINPUTS",
-    "BSTINPUTS",
-    "MFINPUTS",
-    "MPINPUTS",
-    "TFMFONTS",
-    "VFFONTS",
-    "T1FONTS",
-    "OPENTYPEFONTS",
-    "TTFONTS",
-    "LUA_PATH",
-    "LUA_CPATH",
-]
-
-
 class ScenarioRunner:
     def __init__(
         self,
@@ -87,11 +66,13 @@ class ScenarioRunner:
         compile_returncode=0,
         create_pdf=True,
         validation_returncode=0,
+        binary_aliases=None,
     ):
         self.outputs = VALID_OUTPUTS | (outputs or {})
         self.compile_returncode = compile_returncode
         self.create_pdf = create_pdf
         self.validation_returncode = validation_returncode
+        self.binary_aliases = binary_aliases or {}
         self.calls = []
         self.call_records = []
         self.smoke_source = None
@@ -100,7 +81,8 @@ class ScenarioRunner:
     def __call__(self, command, **kwargs):
         self.calls.append(command)
         self.call_records.append((command, kwargs))
-        binary = Path(command[0]).name
+        command_name = Path(command[0]).name
+        binary = self.binary_aliases.get(command_name, command_name)
         if binary == "lualatex" and "--version" not in command:
             source = Path(command[-1])
             self.smoke_source = source.read_text(encoding="utf-8")
@@ -501,12 +483,7 @@ def test_tagged_pdf_smoke_failures_are_blocking(runner_options, reason, toolchai
     assert result.exit_code == 2
 
 
-def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(
-    monkeypatch, toolchain
-):
-    for variable in TEX_OVERRIDE_VARIABLES:
-        monkeypatch.setenv(variable, f"malicious-{variable}")
-    monkeypatch.setenv("NEXUS_NEUTRAL_SMOKE_TEST", "preserved")
+def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(toolchain):
     runner = fake_runner()
     result = check_toolchain(
         toolchain,
@@ -554,16 +531,8 @@ def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(
     assert "pdftitle=" in runner.smoke_source
     assert "pdfauthor=" in runner.smoke_source
     compile_record, validate_record = runner.smoke_records
-    compile_environment = compile_record[1]["env"]
-    validation_environment = validate_record[1]["env"]
     assert compile_record[1]["cwd"] == smoke_directory
     assert validate_record[1]["cwd"] == smoke_directory
-    assert compile_environment == validation_environment
-    assert compile_environment["PATH"] == os.environ["PATH"]
-    assert compile_environment["NEXUS_NEUTRAL_SMOKE_TEST"] == "preserved"
-    assert all(
-        variable not in compile_environment for variable in TEX_OVERRIDE_VARIABLES
-    )
     assert not smoke_directory.exists()
 
 
@@ -601,6 +570,142 @@ def test_each_binary_is_resolved_once_and_exact_identity_is_executed(toolchain):
     for command in runner.calls:
         binary = Path(command[0]).name
         assert command[0] == expected_paths[binary]
+
+
+def test_symlink_launcher_identity_is_preserved_for_version_and_smoke(
+    tmp_path, toolchain
+):
+    target = tmp_path / "luahbtex"
+    launcher = tmp_path / "lualatex"
+    target.write_text("#!/bin/sh\n", encoding="utf-8")
+    launcher.symlink_to(target.name)
+
+    def locator(binary):
+        if binary == "lualatex":
+            return str(launcher)
+        return available(binary)
+
+    runner = fake_runner(binary_aliases={"luahbtex": "lualatex"})
+    result = check_toolchain(
+        toolchain,
+        which=locator,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    assert result.status == "certified"
+    latex_calls = [
+        command
+        for command in runner.calls
+        if Path(command[0]).parent == tmp_path
+    ]
+    assert len(latex_calls) == 2
+    assert all(command[0] == str(launcher.absolute()) for command in latex_calls)
+    assert all(command[0] != str(target.absolute()) for command in latex_calls)
+
+
+def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
+    monkeypatch, toolchain
+):
+    hostile_variables = [
+        "HOME",
+        "TMPDIR",
+        "XDG_CACHE_HOME",
+        "XDG_CONFIG_HOME",
+        "XDG_DATA_HOME",
+        "TEXFORMATS",
+        "TEXMFOUTPUT",
+        "TEXMFDBS",
+        "WEB2C",
+        "TEXINPUTS",
+        "TEXMFCNF",
+        "LUAINPUTS",
+        "TEXMFHOME",
+        "TEXMFVAR",
+        "TEXMFCONFIG",
+        "TEXMFCACHE",
+        "JAVA_TOOL_OPTIONS",
+        "_JAVA_OPTIONS",
+        "NEXUS_HOST_SECRET",
+    ]
+    for variable in hostile_variables:
+        monkeypatch.setenv(variable, f"hostile-{variable}")
+    monkeypatch.setenv("PATH", "/controlled/bin")
+    monkeypatch.setenv("JAVA_HOME", "/controlled/java")
+    monkeypatch.setenv("LANG", "hostile-locale")
+    scenario = fake_runner()
+    directory_states = []
+
+    def observing_runner(command, **kwargs):
+        if "env" in kwargs:
+            directory_keys = [
+                "HOME",
+                "TMPDIR",
+                "XDG_CACHE_HOME",
+                "XDG_CONFIG_HOME",
+                "XDG_DATA_HOME",
+                "TEXMFHOME",
+                "TEXMFVAR",
+                "TEXMFCONFIG",
+                "TEXMFCACHE",
+            ]
+            directory_states.append(
+                {
+                    key: Path(kwargs["env"][key]).is_dir()
+                    for key in directory_keys
+                }
+            )
+        return scenario(command, **kwargs)
+
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=observing_runner,
+        python_version=(3, 12, 3),
+    )
+
+    assert result.status == "certified"
+    assert len(scenario.smoke_records) == 2
+    compile_environment = scenario.smoke_records[0][1]["env"]
+    validate_environment = scenario.smoke_records[1][1]["env"]
+    assert compile_environment == validate_environment
+    redirected_keys = {
+        "HOME",
+        "TMPDIR",
+        "XDG_CACHE_HOME",
+        "XDG_CONFIG_HOME",
+        "XDG_DATA_HOME",
+        "TEXMFHOME",
+        "TEXMFVAR",
+        "TEXMFCONFIG",
+        "TEXMFCACHE",
+    }
+    assert set(compile_environment) == {
+        "PATH",
+        "JAVA_HOME",
+        "LANG",
+        "LC_ALL",
+        "TZ",
+        *redirected_keys,
+    }
+    assert compile_environment["PATH"] == "/controlled/bin"
+    assert compile_environment["JAVA_HOME"] == "/controlled/java"
+    assert compile_environment["LANG"] == "C.UTF-8"
+    assert compile_environment["LC_ALL"] == "C.UTF-8"
+    assert compile_environment["TZ"] == "UTC"
+    smoke_directory = scenario.smoke_directory
+    for key in redirected_keys:
+        redirected = Path(compile_environment[key])
+        assert redirected.is_relative_to(smoke_directory)
+        assert not redirected.exists()
+    assert all(all(state.values()) for state in directory_states)
+    assert not smoke_directory.exists()
+    serialized_report = json.dumps(result.report, ensure_ascii=False)
+    assert str(smoke_directory) not in serialized_report
+    assert not any(
+        f"hostile-{variable}" in serialized_report
+        for variable in hostile_variables
+    )
 
 
 @pytest.mark.parametrize(
@@ -816,3 +921,34 @@ def test_invalid_manifest_replaces_stale_certified_report_deterministically(
 
     assert second_code == 2
     assert report.read_bytes() == first_bytes
+
+
+def test_non_string_yaml_key_replaces_stale_report_without_traceback(
+    tmp_path, capsys, monkeypatch
+):
+    manifest = tmp_path / "numeric-key.yaml"
+    report = tmp_path / "report.json"
+    manifest.write_text(
+        (ROOT / "release" / "toolchain.yaml").read_text(encoding="utf-8")
+        + "\n1: unexpected\n",
+        encoding="utf-8",
+    )
+    report.write_text('{"status":"certified"}\n', encoding="utf-8")
+    monkeypatch.setenv("NON_STRING_KEY_SECRET", "never-copy")
+
+    code = main(["--manifest", str(manifest), "--output", str(report)])
+    captured = capsys.readouterr()
+    payload = json.loads(report.read_text(encoding="utf-8"))
+
+    assert code == 2
+    assert "manifeste invalide" in captured.err.lower()
+    assert "traceback" not in captured.err.lower()
+    assert payload["status"] == "blocked"
+    assert payload["checks"][0]["id"] == "manifest"
+    assert payload["checks"][0]["reason"] == (
+        "contrat d'outillage invalide; corriger les clés et valeurs épinglées"
+    )
+    serialized = json.dumps(payload, ensure_ascii=False)
+    assert str(tmp_path) not in serialized
+    assert "never-copy" not in serialized
+    assert stat.S_IMODE(report.stat().st_mode) == 0o644
