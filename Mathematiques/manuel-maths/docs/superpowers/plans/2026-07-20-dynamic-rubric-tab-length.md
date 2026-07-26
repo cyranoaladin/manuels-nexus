@@ -57,7 +57,10 @@ python3 -m pytest \
   tests/test_maquette_v5.py::test_rubric_tab_dynamic_fixture_pdf -q -x
 ```
 
-Attendu : le contrat source échoue sur l'absence de mesure automatique ; en l'exécutant seul après confirmation, la fixture échoue sur la contenance/padding de `AUTO-ÉVALUATION`. Aucun fichier de classe ne doit avoir changé.
+Attendu : le contrat source échoue sur l'absence de mesure automatique ou la
+présence d'un seuil parasite ; en l'exécutant seul après confirmation, la
+fixture échoue d'abord sur le padding de l'intermédiaire `OUVERTURE`, avant le
+cas long `AUTO-ÉVALUATION`. Aucun fichier de classe ne doit avoir changé.
 - [x] **Step 6: exécuter le test des SHA historiques.** Étendre `test_validation_png_reference_hashes` pour vérifier les deux copies it1, puis exécuter ce test. Attendu : PASS.
 - [x] **Step 7: commit.**
 
@@ -148,7 +151,10 @@ branchement dans le contrôleur n'existent pas encore.
 python3 scripts/check_maquette_v5.py --manifest build/maquette-v5/manifest.json
 ```
 
-Attendu : échec uniquement sur `page 11 altérée` ou `page 12 altérée` après que les contrôles structurels ont passé. Conserver les PNG générés dans `validations/v5/`.
+Attendu : après réussite des contrôles structurels, échec d'abord sur
+`page 1 altérée`, puis potentiellement sur les pages 7–12 et 15 à mesure que
+leurs SHA sont vérifiés. Conserver les quinze PNG générés dans
+`validations/v5/` sans modifier de constante avant l'inspection.
 - [x] **Step 4: prouver l'isolation avant consécration.** Calculer les SHA des quinze PNG et identifier les pages intermédiaires p.1,7–10,15 en plus des p.11–12 ; vérifier que les pages réellement minimales p.2–6,14 restent canoniques et que p.13 vaut toujours `2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23`.
 - [x] **Step 5: inspecter p.1,7–12,15 à pleine résolution.** Utiliser `view_image` en détail original et des crops 100 %. Vérifier le libellé complet, le padding, le centrage, la symétrie, l'absence de contact avec le corps et la continuité de la couleur. Ne pas créer d'oracle si l'inspection échoue.
 - [x] **Step 6: créer mécaniquement les références it1/it2.** Conserver les huit anciens PNG dans `validations/v5-it1/`, copier les huit PNG inspectés vers `validations/v5-it2/`, calculer leurs SHA, puis renseigner `HISTORICAL_TAB_PAGE_REFERENCE_SHA256` et `TAB_PAGE_REFERENCE_SHA256`. Mettre à jour les seules entrées affectées de `NON_DIAGNOSTICS_PAGE_SHA256`.
@@ -168,10 +174,15 @@ Attendu : tous PASS ; AE p.1,7–13,15 = 0 ; 15 pages ; p.14 vide ; QCM canoniqu
 - [x] **Step 10: commit.**
 
 ```bash
-git add scripts/check_maquette_v5.py tests/test_maquette_v5.py \
-  validations/v5/page-11.png validations/v5/page-12.png \
-  validations/v5-it2/page-11.png validations/v5-it2/page-12.png
-git commit -m "[CHARTE][V5.B-it2] fige onglets auto-evaluation"
+git add requirements.txt gabarits/nexus-manuel-v5.cls \
+  scripts/check_maquette_v5.py tests/test_maquette_v5.py \
+  MAQUETTE_V5_A_VALIDER.md \
+  docs/superpowers/specs/2026-07-20-dynamic-rubric-tab-length-design.md \
+  docs/superpowers/plans/2026-07-20-dynamic-rubric-tab-length.md \
+  validations/v5/page-{01,07,08,09,10,11,12,15}.png \
+  validations/v5-it1/page-{01,07,08,09,10,11,12,15}.png \
+  validations/v5-it2/page-{01,07,08,09,10,11,12,15}.png
+git commit -m "[CHARTE][V5.B-it2] respecte la longueur mathematique"
 ```
 
 ### Task 4: Rapport, vérification complète et revue
