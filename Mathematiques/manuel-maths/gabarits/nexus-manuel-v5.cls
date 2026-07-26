@@ -84,10 +84,6 @@
     \dimexpr\wd\nxVOngletTextBox+6mm\relax}%
   \ifdim\nxVOngletLength<16mm
     \setlength{\nxVOngletLength}{16mm}\fi
-  % Conserver le rendu v5 canonique des libellés courts ; seuls les libellés
-  % exigeant nettement plus de place activent l'allongement automatique.
-  \ifdim\nxVOngletLength<20mm
-    \setlength{\nxVOngletLength}{16mm}\fi
   \setlength{\nxVOngletHalfLength}{\nxVOngletLength}%
   \divide\nxVOngletHalfLength by 2
   \begin{tikzpicture}[remember picture, overlay]
