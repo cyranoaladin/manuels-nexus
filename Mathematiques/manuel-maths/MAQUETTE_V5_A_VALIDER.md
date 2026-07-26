@@ -7,7 +7,7 @@ réécriture des objets source et sans modification de la production v4.1/TSPE.
 La maquette compte 15 pages et reste strictement locale : aucun push ni
 déploiement v5 n'est autorisé avant le verdict humain.
 
-Date : 19 juillet 2026.
+Date de clôture technique de l’itération : 26 juillet 2026.
 
 ## Livrables
 
@@ -16,8 +16,10 @@ Date : 19 juillet 2026.
 - Manifeste META : `build/maquette-v5/manifest.json`
 - PDF local non versionné : `build/maquette-v5/maquette.pdf`
 - PNG 150 dpi : `validations/v5/page-01.png` à `page-15.png`
-- Référence immuable itération 1 : `validations/v5-it1/page-13.png`
-- Référence corrigée itération 2 : `validations/v5-it2/page-13.png`
+- Références immuables itération 1 :
+  `validations/v5-it1/page-11.png` à `page-13.png`
+- Références corrigées itération 2 :
+  `validations/v5-it2/page-11.png` à `page-13.png`
 - Générateur : `scripts/build_maquette_v5.py`
 - Contrôleur : `scripts/check_maquette_v5.py`
 - Régressions : `tests/test_maquette_v5.py`
@@ -33,13 +35,18 @@ Date : 19 juillet 2026.
 | 5 | Renvois | Placeholders `S'entraîner`, aucun lien Méthode/Corrigé. | Renvois générés depuis les META : `S'entraîner : ex. 1, 2, 7 p. 9` et `→ M1 · Corrigé p. 15`. | Chaînes exactes exigées dans le PDF après trois passes LuaLaTeX. | CORRIGÉ |
 | 6 | Badges exercices | IDs bruts visibles, difficulté et pictogrammes absents. | IDs réservés aux META/labels ; difficulté à trois losanges plein/contour ; pictos Python et calculatrice ; 11 badges p.9 et 9 p.10 avec filet central. | Extraction des 20 badges, rejet des 20 IDs et test raster des filets. | CORRIGÉ |
 | 7 | QCM étroit | Fractions disloquées et items susceptibles d'être coupés. | `\tfrac` local, chaque question principale boxée, répartition complète Q1–Q8 p.11 / Q9–Q15 p.12. | Extraction question par question ; Q12 et ses quatre réponses restent dans la même colonne. | CORRIGÉ |
-| 8 | Diagnostics QCM p.13 | Le tableau quatre colonnes était composé dans une demi-page : débordements de 314.99474 pt et 54.94688 pt, superpositions avec les réponses et le score. | Page pleine largeur hors `multicols`, typographie locale 6,6/7,6 pt, tableau puis réponses puis score sans collision. | Bornes et marges contrôlées par `pdftotext -bbox-layout` ; trois intervalles de log sans `Overfull`; référence it2 SHA-256 `2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23`, `compare -metric AE = 0`. | CORRIGÉ |
-| 9 | Corrigés finaux | En-tête/onglet `COURS`, titre doublé et numéros de badges désynchronisés. | Mark et onglet `CORRIGÉS`, un seul titre de contenu, cinq badges neutres et style math étroit dans la grille trois colonnes. | Extraction p.15, aucun ID technique et zéro `Overfull \hbox` dans le bloc. | CORRIGÉ |
+| 8 | Onglet `AUTO-ÉVALUATION` p.11–12 | Fond fixe 16 mm : le libellé blanc dépassait du bandeau. | Mesure en 6 pt et longueur `max(16 mm, largeur + 6 mm)` pour le libellé long ; épaisseur 12 mm, centrage identique sur les deux parités et au moins 3 mm de padding à chaque extrémité. Les libellés courts conservent leur rendu canonique. | Fixture quatre pages à 300 dpi : texte inclus, asymétrie ≤ 0,5 mm, padding ≥ 3 mm − 0,5 pt et parités à ± 0,5 pt. Inspection `view_image` en détail original des p.11–12 et de crops 100 %. Oracles SHA-256 p.11 `7f114a2b9d958da28ec7eb8d3a7b568ba7bd755cc872c9721ba388fc93e0f130`, p.12 `3517dc008fd517f5c9c3858c2e5ba7bd3ce39ac677d4522d1e524d3e20d9f44f` ; `compare -metric AE = 0` séparément. | CORRIGÉ |
+| 9 | Diagnostics QCM p.13 | Le tableau quatre colonnes était composé dans une demi-page : débordements de 314.99474 pt et 54.94688 pt, superpositions avec les réponses et le score. | Page pleine largeur hors `multicols`, typographie locale 6,6/7,6 pt, tableau puis réponses puis score sans collision. | Bornes et marges contrôlées par `pdftotext -bbox-layout` ; trois intervalles de log sans `Overfull`; référence it2 SHA-256 `2edeb64a24a83e38a88a0aefab83e54452eec3c9270cbeee3dc3afefb201af23`, `compare -metric AE = 0`. | CORRIGÉ |
+| 10 | Corrigés finaux | En-tête/onglet `COURS`, titre doublé et numéros de badges désynchronisés. | Mark et onglet `CORRIGÉS`, un seul titre de contenu, cinq badges neutres et style math étroit dans la grille trois colonnes. | Extraction p.15, aucun ID technique et zéro `Overfull \hbox` dans le bloc. | CORRIGÉ |
 
 La référence de l'itération 1 reste conservée comme preuve du défaut initial,
 avec le SHA-256
 `ea1750a0f56ecd3b2761614709f96f9b267569ece45bc4103aa11dc2007dacf1` ;
 elle n'est plus utilisée comme oracle d'acceptation.
+Les références historiques des onglets p.11–12 restent également immuables :
+`91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d`
+et
+`eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093`.
 
 ## Contrôle automatique
 
@@ -60,6 +67,9 @@ contrôle les 15 pages, les marks, le sommaire, les pages blanches, les chaînes
 META, l'absence d'IDs et de `\marginnote` émis en colonnes, les débordements
 des corrigés compacts, les bornes, marges et collisions de la page 13, ainsi que
 le hash de la référence it2, puis régénère exactement les 15 PNG en 150 dpi.
+Il vérifie aussi les SHA historiques et it2 des p.11–12, puis compare
+indépendamment chaque page courante à son oracle (`AE = 0`). Un oracle remplacé
+sans modification explicite de sa constante est donc rejeté.
 
 ## Verdict attendu
 

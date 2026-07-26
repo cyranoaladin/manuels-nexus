@@ -22,6 +22,14 @@ PAGE_13_REFERENCE_SHA256 = (
 HISTORICAL_PAGE_13_REFERENCE_SHA256 = (
     "ea1750a0f56ecd3b2761614709f96f9b267569ece45bc4103aa11dc2007dacf1"
 )
+HISTORICAL_TAB_PAGE_REFERENCE_SHA256 = {
+    11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
+    12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
+}
+TAB_PAGE_REFERENCE_SHA256 = {
+    11: "7f114a2b9d958da28ec7eb8d3a7b568ba7bd755cc872c9721ba388fc93e0f130",
+    12: "3517dc008fd517f5c9c3858c2e5ba7bd3ce39ac677d4522d1e524d3e20d9f44f",
+}
 NON_DIAGNOSTICS_PAGE_SHA256 = {
     1: "1e065c44ee1cd031aad570b4f4c5a98aa7ced55bceba78f418ff3ba31d63a24d",
     2: "83eaaf15bad92a303ce8c367c3dffd498fea505930aaf4be6b06322bd2d07d10",
@@ -33,8 +41,8 @@ NON_DIAGNOSTICS_PAGE_SHA256 = {
     8: "7dc9d309b149ce5717e1f7aeab803c45f282c6cb4a4973668ffb3d1d267764ac",
     9: "fbe900adaa69d7374e0be7ead78dcc2295e03d35671281e4c7e0890d656e726e",
     10: "50aec5774963497bdf290b68c571dfa3d13336ded825e5969a3aee66834497be",
-    11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
-    12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
+    11: "7f114a2b9d958da28ec7eb8d3a7b568ba7bd755cc872c9721ba388fc93e0f130",
+    12: "3517dc008fd517f5c9c3858c2e5ba7bd3ce39ac677d4522d1e524d3e20d9f44f",
     14: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
     15: "988b636d4f82ae6fcad93a4651cb43639744aa9094e1d31a4e190a36da1e91b4",
 }
@@ -565,6 +573,41 @@ def accept_maquette(
 
     images = _render_validation_pngs(pdf, root, expected_pages)
     assert_non_diagnostics_page_hashes(images)
+
+    for page, expected_sha in HISTORICAL_TAB_PAGE_REFERENCE_SHA256.items():
+        historical_tab = root / f"validations/v5-it1/page-{page:02d}.png"
+        if not historical_tab.is_file():
+            raise AcceptanceError(f"référence it1 p.{page} absente")
+        historical_tab_sha = hashlib.sha256(
+            historical_tab.read_bytes()
+        ).hexdigest()
+        if historical_tab_sha != expected_sha:
+            raise AcceptanceError(f"référence it1 p.{page} altérée")
+
+    for page, expected_sha in TAB_PAGE_REFERENCE_SHA256.items():
+        reference_tab = root / f"validations/v5-it2/page-{page:02d}.png"
+        if not reference_tab.is_file():
+            raise AcceptanceError(f"référence it2 p.{page} absente")
+        reference_tab_sha = hashlib.sha256(reference_tab.read_bytes()).hexdigest()
+        if reference_tab_sha != expected_sha:
+            raise AcceptanceError(f"référence it2 p.{page} altérée")
+        tab_comparison = run_checked(
+            [
+                "compare",
+                "-metric",
+                "AE",
+                str(reference_tab),
+                str(images[page - 1]),
+                "null:",
+            ],
+            root,
+            accepted_returncodes=(0, 1),
+        )
+        if tab_comparison.stderr.strip() != "0":
+            raise AcceptanceError(
+                f"page {page} différente de l'oracle it2: "
+                f"AE={tab_comparison.stderr.strip()}"
+            )
 
     historical = root / "validations/v5-it1/page-13.png"
     if not historical.is_file():

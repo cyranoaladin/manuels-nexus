@@ -1255,10 +1255,11 @@ elif [ "$tool" = "pdftoppm" ]; then
 elif [ "$tool" = "identify" ]; then
   printf '%s' '1241 1754'
 elif [ "$tool" = "compare" ]; then
-  if [ "$NXV_FAKE_MODE" = "compare_diff" ]; then
-    printf '%s' '42' >&2
-    exit 1
-  fi
+  case "$NXV_FAKE_MODE:$*" in
+    compare_diff_tab_11:*page-11.png*) printf '%s' '42' >&2; exit 1 ;;
+    compare_diff_tab_12:*page-12.png*) printf '%s' '42' >&2; exit 1 ;;
+    compare_diff_page_13:*page-13.png*) printf '%s' '42' >&2; exit 1 ;;
+  esac
   printf '%s' '0' >&2
 fi
 """
@@ -1369,6 +1370,12 @@ def test_checker_cli_synthetic_exit_codes(tmp_path, monkeypatch):
     reference = synthetic_root / "validations/v5-it2/page-13.png"
     reference.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(ROOT / "validations/v5-it2/page-13.png", reference)
+    for iteration in ("v5-it1", "v5-it2"):
+        for page in (11, 12):
+            source = ROOT / f"validations/{iteration}/page-{page:02d}.png"
+            destination = synthetic_root / source.relative_to(ROOT)
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source, destination)
     output_cases = []
 
     invalid_manifest = tmp_path / "invalid.json"
@@ -1411,7 +1418,9 @@ def test_checker_cli_synthetic_exit_codes(tmp_path, monkeypatch):
         "diagnostics_leak_p15",
         "diagnostics_duplicate_rubric",
         "bad_p15_rubric",
-        "compare_diff",
+        "compare_diff_tab_11",
+        "compare_diff_tab_12",
+        "compare_diff_page_13",
         "success",
     ):
         monkeypatch.setenv("NXV_FAKE_MODE", mode)
@@ -1430,7 +1439,15 @@ def test_checker_cli_synthetic_exit_codes(tmp_path, monkeypatch):
             )
         )
 
-    invalid, question_marks, *diagnostics_cases, compare_diff, success = output_cases
+    (
+        invalid,
+        question_marks,
+        *diagnostics_cases,
+        compare_diff_tab_11,
+        compare_diff_tab_12,
+        compare_diff_page_13,
+        success,
+    ) = output_cases
     assert invalid.returncode == 2
     assert "META V5:" in invalid.stderr
     assert question_marks.returncode == 1
@@ -1438,8 +1455,15 @@ def test_checker_cli_synthetic_exit_codes(tmp_path, monkeypatch):
     for rejected in diagnostics_cases:
         assert rejected.returncode == 1
         assert "MAQUETTE V5:" in rejected.stderr
-    assert compare_diff.returncode == 1
-    assert "page 13 différente de l'oracle it2: AE=42" in compare_diff.stderr
+    assert compare_diff_tab_11.returncode == 1
+    assert "page 11 différente de l'oracle it2: AE=42" in compare_diff_tab_11.stderr
+    assert compare_diff_tab_12.returncode == 1
+    assert "page 12 différente de l'oracle it2: AE=42" in compare_diff_tab_12.stderr
+    assert compare_diff_page_13.returncode == 1
+    assert (
+        "page 13 différente de l'oracle it2: AE=42"
+        in compare_diff_page_13.stderr
+    )
     assert success.returncode == 0
     assert success.stdout == (
         "MAQUETTE V5: PASS — 15 pages; blanches 6,14; "
@@ -1580,12 +1604,17 @@ def test_rubric_tab_dynamic_source_contract():
         r"\\titrefont\\fontsize\{6\}\{6\}\\selectfont",
         tab_source,
     )
-    assert tab_source.count(r"\MakeUppercase{\nxRubriquePage}") == 1
+    assert tab_source.count(r"\MakeUppercase{\nxRubriquePage}") == 3
     assert (
         r"\dimexpr\wd\nxVOngletTextBox+6mm\relax" in tab_source
     )
     assert re.search(
         r"\\ifdim\\nxVOngletLength<16mm\s*"
+        r"\\setlength\{\\nxVOngletLength\}\{16mm\}\\fi",
+        tab_source,
+    )
+    assert re.search(
+        r"\\ifdim\\nxVOngletLength<20mm\s*"
         r"\\setlength\{\\nxVOngletLength\}\{16mm\}\\fi",
         tab_source,
     )
@@ -1600,9 +1629,14 @@ def test_rubric_tab_dynamic_source_contract():
         r"yshift=\ongletY mm-\nxVOngletHalfLength"
     ) == 2
     assert tab_source.count(r"\usebox{\nxVOngletTextBox}") == 2
-    assert tab_source.count("inner sep=0pt") == 2
-    assert "-16mm" not in tab_source
-    assert "-8mm" not in tab_source
+    assert tab_source.count("inner sep=0pt") == 4
+    assert r"\ifdim\nxVOngletLength=16mm" in tab_source
+    assert tab_source.count("rectangle +(-12mm,-16mm);") == 1
+    assert tab_source.count("rectangle +(12mm,-16mm);") == 1
+    assert tab_source.count(r"yshift=\ongletY mm-8mm") == 2
+    assert tab_source.count(
+        r"font=\titrefont\fontsize{6}{6}\selectfont"
+    ) == 2
 
 
 def _rubric_tab_word_bbox(xhtml: str, page_number: int, label: str) -> dict:
@@ -2413,8 +2447,8 @@ def test_validation_png_reference_hashes():
         8: "7dc9d309b149ce5717e1f7aeab803c45f282c6cb4a4973668ffb3d1d267764ac",
         9: "fbe900adaa69d7374e0be7ead78dcc2295e03d35671281e4c7e0890d656e726e",
         10: "50aec5774963497bdf290b68c571dfa3d13336ded825e5969a3aee66834497be",
-        11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
-        12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
+        11: "7f114a2b9d958da28ec7eb8d3a7b568ba7bd755cc872c9721ba388fc93e0f130",
+        12: "3517dc008fd517f5c9c3858c2e5ba7bd3ce39ac677d4522d1e524d3e20d9f44f",
         14: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
         15: "988b636d4f82ae6fcad93a4651cb43639744aa9094e1d31a4e190a36da1e91b4",
     }
@@ -2432,9 +2466,21 @@ def test_validation_png_reference_hashes():
         11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
         12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
     }
+    assert checker.HISTORICAL_TAB_PAGE_REFERENCE_SHA256 == historical_tabs
     for page, expected_sha in historical_tabs.items():
         historical_tab = ROOT / f"validations/v5-it1/page-{page:02d}.png"
         assert hashlib.sha256(historical_tab.read_bytes()).hexdigest() == expected_sha
+
+    corrected_tabs = {
+        11: "7f114a2b9d958da28ec7eb8d3a7b568ba7bd755cc872c9721ba388fc93e0f130",
+        12: "3517dc008fd517f5c9c3858c2e5ba7bd3ce39ac677d4522d1e524d3e20d9f44f",
+    }
+    assert checker.TAB_PAGE_REFERENCE_SHA256 == corrected_tabs
+    for page, expected_sha in corrected_tabs.items():
+        corrected_tab = ROOT / f"validations/v5-it2/page-{page:02d}.png"
+        rendered_tab = ROOT / f"validations/v5/page-{page:02d}.png"
+        assert hashlib.sha256(corrected_tab.read_bytes()).hexdigest() == expected_sha
+        assert rendered_tab.read_bytes() == corrected_tab.read_bytes()
 
     historical = ROOT / "validations/v5-it1/page-13.png"
     current = ROOT / "validations/v5/page-13.png"
