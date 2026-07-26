@@ -311,6 +311,17 @@ def _matches(path: str, patterns: list[str]) -> bool:
     return any(_glob_regex(pattern).fullmatch(path) for pattern in patterns)
 
 
+def _matching_exclusions(
+    path: str,
+    exclusions: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    return [
+        exclusion
+        for exclusion in exclusions
+        if _glob_regex(exclusion["pattern"]).fullmatch(path)
+    ]
+
+
 def load_scope_manifest(path: Path = DEFAULT_SCOPE_MANIFEST_PATH) -> dict[str, Any]:
     manifest_path = Path(path)
     try:
@@ -325,7 +336,7 @@ def load_scope_manifest(path: Path = DEFAULT_SCOPE_MANIFEST_PATH) -> dict[str, A
 def load_scope_manifest_from_value(manifest: Any) -> dict[str, Any]:
     if not isinstance(manifest, dict):
         raise CaptureError("le manifeste de périmètre doit être un objet JSON")
-    if manifest.get("schema_version") != 1:
+    if manifest.get("schema_version") != 2:
         raise CaptureError("version du manifeste de périmètre non prise en charge")
     universe = manifest.get("universe")
     rules = manifest.get("categories")
@@ -333,10 +344,18 @@ def load_scope_manifest_from_value(manifest: Any) -> dict[str, Any]:
         raise CaptureError("structure du manifeste de périmètre invalide")
     if set(universe) != {"include", "exclude"}:
         raise CaptureError("clés de l'univers du manifeste invalides")
-    if not all(
-        isinstance(universe[key], list)
-        and all(isinstance(item, str) for item in universe[key])
-        for key in ("include", "exclude")
+    if not (
+        isinstance(universe["include"], list)
+        and all(isinstance(item, str) for item in universe["include"])
+        and isinstance(universe["exclude"], list)
+        and all(
+            isinstance(item, dict)
+            and set(item) == {"pattern", "justification"}
+            and isinstance(item["pattern"], str)
+            and isinstance(item["justification"], str)
+            and bool(item["justification"].strip())
+            for item in universe["exclude"]
+        )
     ):
         raise CaptureError("motifs d'univers invalides")
     seen_categories: list[str] = []
@@ -350,10 +369,18 @@ def load_scope_manifest_from_value(manifest: Any) -> dict[str, Any]:
         category = rule["category"]
         if category not in CATEGORIES:
             raise CaptureError(f"catégorie de périmètre inconnue : {category}")
-        if not all(
-            isinstance(rule[key], list)
-            and all(isinstance(item, str) for item in rule[key])
-            for key in ("include", "exclude")
+        if not (
+            isinstance(rule["include"], list)
+            and all(isinstance(item, str) for item in rule["include"])
+            and isinstance(rule["exclude"], list)
+            and all(
+                isinstance(item, dict)
+                and set(item) == {"pattern", "justification"}
+                and isinstance(item["pattern"], str)
+                and isinstance(item["justification"], str)
+                and bool(item["justification"].strip())
+                for item in rule["exclude"]
+            )
         ):
             raise CaptureError(f"motifs invalides pour la catégorie {category}")
         seen_categories.append(category)
@@ -361,9 +388,13 @@ def load_scope_manifest_from_value(manifest: Any) -> dict[str, Any]:
         raise CaptureError("les six catégories doivent être déclarées exactement une fois")
     for pattern in [
         *universe["include"],
-        *universe["exclude"],
+        *[item["pattern"] for item in universe["exclude"]],
         *[
-            pattern
+            (
+                pattern
+                if key == "include"
+                else pattern["pattern"]
+            )
             for rule in rules
             for key in ("include", "exclude")
             for pattern in rule[key]
@@ -371,6 +402,44 @@ def load_scope_manifest_from_value(manifest: Any) -> dict[str, Any]:
     ]:
         _glob_regex(pattern)
     return manifest
+
+
+def _changed_path_coverage(
+    changed_paths: list[str],
+    manifest: dict[str, Any],
+) -> list[dict[str, Any]]:
+    coverage: list[dict[str, Any]] = []
+    universe = manifest["universe"]
+    for path in changed_paths:
+        exclusions = _matching_exclusions(path, universe["exclude"])
+        if exclusions:
+            coverage.append(
+                {
+                    "path": path,
+                    "disposition": "explicitly_excluded",
+                    "exclusions": exclusions,
+                }
+            )
+            continue
+        included = _matches(path, universe["include"])
+        categories = sorted(
+            rule["category"]
+            for rule in manifest["categories"]
+            if _matches(path, rule["include"])
+            and not _matching_exclusions(path, rule["exclude"])
+        )
+        if not included or len(categories) != 1:
+            raise CaptureError(
+                f"chemin modifié non couvert exactement une fois : {path}"
+            )
+        coverage.append(
+            {
+                "path": path,
+                "disposition": "classified",
+                "category": categories[0],
+            }
+        )
+    return coverage
 
 
 def _scope_analysis(
@@ -383,21 +452,30 @@ def _scope_analysis(
     unclassified: list[str] = []
     duplicates: list[dict[str, Any]] = []
     pollution: list[str] = []
-    excluded: list[str] = []
+    excluded: list[dict[str, Any]] = []
 
     for record in records:
         path = record["path"]
-        explicitly_excluded = _matches(path, universe["exclude"])
+        matching_universe_exclusions = _matching_exclusions(
+            path,
+            universe["exclude"],
+        )
+        explicitly_excluded = bool(matching_universe_exclusions)
         included = _matches(path, universe["include"])
         candidate = included and not explicitly_excluded
         matching_categories = sorted(
             rule["category"]
             for rule in manifest["categories"]
             if _matches(path, rule["include"])
-            and not _matches(path, rule["exclude"])
+            and not _matching_exclusions(path, rule["exclude"])
         )
         if explicitly_excluded:
-            excluded.append(path)
+            excluded.append(
+                {
+                    "path": path,
+                    "exclusions": matching_universe_exclusions,
+                }
+            )
         if not candidate:
             if matching_categories and not explicitly_excluded:
                 pollution.append(path)
@@ -421,7 +499,7 @@ def _scope_analysis(
             key=lambda item: item["path"],
         ),
         "out_of_scope_pollution": sorted(pollution),
-        "excluded_paths": sorted(excluded),
+        "excluded_paths": sorted(excluded, key=lambda item: item["path"]),
     }
 
 
@@ -692,6 +770,26 @@ def _commit_metadata(git_root: Path, commit: str) -> dict[str, str]:
     }
 
 
+def _canonical_test_summary(*, passed: int, failed: int, skipped: int) -> str:
+    parts: list[str] = []
+    if failed:
+        parts.append(f"{failed} failed")
+    parts.append(f"{passed} passed")
+    if skipped:
+        parts.append(f"{skipped} skipped")
+    return ", ".join(parts)
+
+
+def _evidence_text(value: Any, *, field: str) -> str:
+    if not isinstance(value, str) or not value:
+        raise CaptureError(f"champ texte de preuve invalide : {field}")
+    if any(ord(character) < 32 or ord(character) == 127 for character in value):
+        raise CaptureError(
+            f"caractère de contrôle interdit dans la preuve : {field}"
+        )
+    return value
+
+
 def _test_execution(evidence: dict[str, Any], commit: str) -> dict[str, Any]:
     required = {
         "kind",
@@ -706,19 +804,36 @@ def _test_execution(evidence: dict[str, Any], commit: str) -> dict[str, Any]:
     missing = sorted(required - evidence.keys())
     if missing:
         raise CaptureError(f"preuve de tests incomplète : {', '.join(missing)}")
+    texts = {
+        field: _evidence_text(evidence[field], field=field)
+        for field in ("kind", "command", "summary", "provenance")
+    }
+    passed = int(evidence["passed"])
     failed = int(evidence["failed"])
+    skipped = int(evidence["skipped"])
     exit_code = int(evidence["exit_code"])
+    if min(passed, failed, skipped, exit_code) < 0:
+        raise CaptureError("compteurs de preuve de tests négatifs interdits")
+    canonical_summary = _canonical_test_summary(
+        passed=passed,
+        failed=failed,
+        skipped=skipped,
+    )
+    if texts["summary"] != canonical_summary:
+        raise CaptureError(
+            "le résumé de tests ne correspond pas aux compteurs canoniques"
+        )
     state = "green" if failed == 0 and exit_code == 0 else "historical_red"
     return {
-        "kind": evidence["kind"],
+        "kind": texts["kind"],
         "commit_sha": commit,
-        "command": evidence["command"],
+        "command": texts["command"],
         "exit_code": exit_code,
-        "passed": int(evidence["passed"]),
+        "passed": passed,
         "failed": failed,
-        "skipped": int(evidence["skipped"]),
-        "summary": evidence["summary"],
-        "provenance": evidence["provenance"],
+        "skipped": skipped,
+        "summary": canonical_summary,
+        "provenance": texts["provenance"],
         "state": state,
     }
 
@@ -939,6 +1054,7 @@ def capture_repository(
     else:
         manifest_bytes = _canonical_bytes(scope_manifest)
         scope_manifest = load_scope_manifest_from_value(scope_manifest)
+    _changed_path_coverage(changed_paths, scope_manifest)
     origin_scope = _scope_analysis(origin_records, scope_manifest)
     current_scope = _scope_analysis(current_records, scope_manifest)
     all_oids = {
@@ -1002,6 +1118,10 @@ def capture_repository(
             "excluded_counts": {
                 "origin": len(origin_scope["excluded_paths"]),
                 "current": len(current_scope["excluded_paths"]),
+            },
+            "excluded_paths": {
+                "origin": origin_scope["excluded_paths"],
+                "current": current_scope["excluded_paths"],
             },
         },
         "origin": {
@@ -1496,8 +1616,44 @@ def _validate_attestation_semantics(
             )
 
 
-def validate_report_semantics(report: dict[str, Any]) -> None:
+def validate_report_semantics(
+    report: dict[str, Any],
+    *,
+    manifest_path: Path = DEFAULT_SCOPE_MANIFEST_PATH,
+) -> None:
     """Validate invariants that JSON Schema cannot express across fields."""
+
+    scope = report["scope"]
+    canonical_manifest_path = "release/baseline-scope-1spe.json"
+    if scope["manifest_path"] != canonical_manifest_path:
+        raise CaptureError("chemin canonique du manifeste de périmètre invalide")
+    try:
+        manifest_bytes = Path(manifest_path).read_bytes()
+    except OSError as error:
+        raise CaptureError("manifeste de périmètre réel inaccessible") from error
+    if scope["manifest_sha256"] != _sha256(manifest_bytes):
+        raise CaptureError("empreinte du manifeste de périmètre incohérente")
+    manifest = load_scope_manifest(Path(manifest_path))
+
+    for label in ("origin", "current"):
+        excluded_proof = scope["excluded_paths"][label]
+        excluded_proof_paths = [item["path"] for item in excluded_proof]
+        if (
+            excluded_proof_paths != sorted(excluded_proof_paths)
+            or len(excluded_proof_paths) != len(set(excluded_proof_paths))
+        ):
+            raise CaptureError(f"preuve des exclusions incohérente pour {label}")
+        for item in excluded_proof:
+            expected_exclusions = _matching_exclusions(
+                item["path"],
+                manifest["universe"]["exclude"],
+            )
+            if not expected_exclusions or item["exclusions"] != expected_exclusions:
+                raise CaptureError(
+                    f"preuve des exclusions incohérente pour {label}"
+                )
+        if scope["excluded_counts"][label] != len(excluded_proof):
+            raise CaptureError(f"compteurs exclus incohérents pour {label}")
 
     for label in ("origin", "current"):
         snapshot = report[label]
@@ -1512,6 +1668,18 @@ def validate_report_semantics(report: dict[str, Any]) -> None:
             raise CaptureError(
                 f"preuve de test non rattachée au snapshot {label}"
             )
+        execution = snapshot["test_execution"]
+        expected_summary = _canonical_test_summary(
+            passed=execution["passed"],
+            failed=execution["failed"],
+            skipped=execution["skipped"],
+        )
+        if execution["summary"] != expected_summary:
+            raise CaptureError(
+                f"résumé canonique de tests incohérent pour {label}"
+            )
+        for field in ("kind", "command", "summary", "provenance"):
+            _evidence_text(execution[field], field=f"{label}.{field}")
 
         entries = snapshot["inventory"]["entries"]
         paths = [entry["path"] for entry in entries]
@@ -1531,6 +1699,14 @@ def validate_report_semantics(report: dict[str, Any]) -> None:
             raise CaptureError(
                 f"empreinte canonique d'inventaire incohérente pour {label}"
             )
+
+    if not any(report["completeness"].values()):
+        expected_candidate_counts = {
+            label: len(report[label]["inventory"]["entries"])
+            for label in ("origin", "current")
+        }
+        if scope["candidate_counts"] != expected_candidate_counts:
+            raise CaptureError("compteurs candidats incohérents")
 
     history = report["remediation_history"]
     expected_parent = report["origin"]["commit_sha"]

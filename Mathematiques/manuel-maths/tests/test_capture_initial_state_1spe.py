@@ -290,16 +290,24 @@ def test_scope_manifest_is_explicit_versioned_and_has_required_sentinels() -> No
     assert SCOPE_MANIFEST.is_file()
     manifest = json.loads(SCOPE_MANIFEST.read_text(encoding="utf-8"))
 
-    assert manifest["schema_version"] == 1
+    assert manifest["schema_version"] == 2
     includes = set(manifest["universe"]["include"])
-    excludes = set(manifest["universe"]["exclude"])
+    excludes = {
+        item["pattern"] for item in manifest["universe"]["exclude"]
+    }
     assert {
+        "requirements.txt",
         "docs/01_conception_manuel.md",
         "docs/02_workflow_production.md",
+        "docs/03_architecture_technique.md",
+        "docs/04_guide_agents.md",
         "docs/05_conventions_latex.md",
         "docs/06_charte_graphique.md",
         "docs/07_ligne_editoriale.md",
+        "docs/superpowers/plans/2026-07-20-dynamic-rubric-tab-length.md",
+        "docs/superpowers/specs/2026-07-20-dynamic-rubric-tab-length-design.md",
         "referentiel/CONFORMITE_BO2026.md",
+        "sources/SOURCES.md",
         "sources/registry.yaml",
     } <= includes
     assert {"chapitres/TSPE-*/**", "validations/E2/**"} <= excludes
@@ -311,6 +319,92 @@ def test_scope_manifest_is_explicit_versioned_and_has_required_sentinels() -> No
         "report",
         "attestation",
     }
+
+
+def test_scope_manifest_classifies_every_new_shared_sentinel() -> None:
+    module = _load_module()
+    manifest = module.load_scope_manifest(SCOPE_MANIFEST)
+    expected = {
+        "requirements.txt": "contract",
+        "docs/03_architecture_technique.md": "directive",
+        "docs/04_guide_agents.md": "directive",
+        "docs/superpowers/plans/2026-07-20-dynamic-rubric-tab-length.md": (
+            "directive"
+        ),
+        "docs/superpowers/specs/2026-07-20-dynamic-rubric-tab-length-design.md": (
+            "directive"
+        ),
+        "sources/SOURCES.md": "referential",
+        "gabarits/nexus-code.tex": "source_1spe",
+        "gabarits/nexus-figures-nsi.tex": "source_1spe",
+    }
+    analysis = module._scope_analysis(
+        [
+            {"path": path, "mode": "100644", "oid": "0" * 40}
+            for path in expected
+        ],
+        manifest,
+    )
+
+    assert analysis["classification"] == expected
+    assert analysis["unclassified_paths"] == []
+    assert analysis["duplicate_classifications"] == []
+
+
+def test_scope_manifest_exclusions_are_justified_and_precise() -> None:
+    manifest = json.loads(SCOPE_MANIFEST.read_text(encoding="utf-8"))
+    exclusion_lists = [
+        manifest["universe"]["exclude"],
+        *[rule["exclude"] for rule in manifest["categories"]],
+    ]
+    assert all(
+        set(exclusion) == {"pattern", "justification"}
+        and exclusion["pattern"]
+        and exclusion["justification"].strip()
+        for exclusions in exclusion_lists
+        for exclusion in exclusions
+    )
+    universe_exclusions = {
+        item["pattern"] for item in manifest["universe"]["exclude"]
+    }
+    assert {
+        "gabarits/reference-v4/manuel-kit/main.tex",
+        "gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex",
+        "gabarits/reference-v4/manuel-kit/chapitres/chap-physique.tex",
+        "gabarits/reference-v4/manuel-kit/chapitres/chap-suites.tex",
+    } <= universe_exclusions
+    assert "gabarits/nexus-code.tex" not in universe_exclusions
+    assert "gabarits/nexus-figures-nsi.tex" not in universe_exclusions
+
+
+def test_changed_path_gate_rejects_an_undeclared_path() -> None:
+    module = _load_module()
+    manifest = module.load_scope_manifest(SCOPE_MANIFEST)
+
+    with pytest.raises(module.CaptureError, match="chemin modifié.*non couvert"):
+        module._changed_path_coverage(
+            ["inconnu/changement.dat"],
+            manifest,
+        )
+
+
+def test_capture_blocks_a_real_changed_path_missing_from_scope(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, _ = baseline_repository
+    _write(root, "inconnu/changement.dat", "hors déclaration\n")
+    _git(root, "add", "inconnu/changement.dat")
+    _git(root, "commit", "-q", "-m", "[1SPE][BAT] chemin inconnu")
+    current = _git(root, "rev-parse", "HEAD")
+
+    with pytest.raises(module.CaptureError, match="chemin modifié.*non couvert"):
+        module.capture_repository(
+            root=root,
+            origin_ref=origin,
+            current_ref=current,
+            test_evidence=_test_evidence(),
+        )
 
 
 def test_scope_excludes_tspe_and_nsi_e2_pollution(
@@ -536,6 +630,11 @@ def test_schema_rejects_invalid_nested_mutations(
         ("counter", "compteurs"),
         ("inventory_sha", "empreinte canonique"),
         ("test_commit", "preuve de test"),
+        ("test_summary", "résumé canonique"),
+        ("scope_manifest_path", "chemin canonique du manifeste"),
+        ("scope_manifest_sha", "empreinte du manifeste"),
+        ("scope_candidate_count", "compteurs candidats"),
+        ("scope_excluded_count", "compteurs exclus"),
         ("remediation_chain", "chaîne de remédiation"),
         ("duplicate_inventory_path", "chemins d'inventaire"),
         ("attestation_coverage", "couverture des attestations"),
@@ -568,6 +667,16 @@ def test_semantic_validator_rejects_cross_field_mutations(
         candidate["origin"]["inventory"]["sha256"] = "0" * 64
     elif mutation == "test_commit":
         candidate["current"]["test_execution"]["commit_sha"] = origin
+    elif mutation == "test_summary":
+        candidate["current"]["test_execution"]["summary"] = "Tout est parfait"
+    elif mutation == "scope_manifest_path":
+        candidate["scope"]["manifest_path"] = "release/autre-scope.json"
+    elif mutation == "scope_manifest_sha":
+        candidate["scope"]["manifest_sha256"] = "0" * 64
+    elif mutation == "scope_candidate_count":
+        candidate["scope"]["candidate_counts"]["current"] += 1
+    elif mutation == "scope_excluded_count":
+        candidate["scope"]["excluded_counts"]["origin"] += 1
     elif mutation == "remediation_chain":
         candidate["remediation_history"][0]["parent_commit_sha"] = "0" * 40
     elif mutation == "duplicate_inventory_path":
@@ -595,6 +704,74 @@ def test_semantic_validator_rejects_cross_field_mutations(
 
     with pytest.raises(module.CaptureError, match=diagnostic):
         module.validate_report_semantics(candidate)
+
+
+def test_scope_metadata_contains_recalculable_exclusion_proof(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+
+    proofs = report["scope"]["excluded_paths"]
+    for label in ("origin", "current"):
+        assert report["scope"]["excluded_counts"][label] == len(proofs[label])
+        paths = [item["path"] for item in proofs[label]]
+        assert paths == sorted(paths)
+        assert len(paths) == len(set(paths))
+        assert all(
+            item["exclusions"]
+            and all(exclusion["justification"] for exclusion in item["exclusions"])
+            for item in proofs[label]
+        )
+
+
+def test_test_evidence_derives_summary_from_valid_counters() -> None:
+    module = _load_module()
+    evidence = _test_evidence()["origin"]
+
+    execution = module._test_execution(evidence, "a" * 40)
+
+    assert execution["summary"] == "7 failed, 1873 passed, 5 skipped"
+    assert module._canonical_test_summary(
+        passed=1946,
+        failed=0,
+        skipped=5,
+    ) == "1946 passed, 5 skipped"
+
+
+def test_test_evidence_rejects_a_misleading_supplied_summary() -> None:
+    module = _load_module()
+    evidence = copy.deepcopy(_test_evidence()["current"])
+    evidence["summary"] = "9999 passed"
+
+    with pytest.raises(module.CaptureError, match="résumé.*compteurs"):
+        module._test_execution(evidence, "a" * 40)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("summary", "1946 passed, 5 skipped\0"),
+        ("command", "pytest\n--quiet"),
+        ("provenance", "preuve\u0007injectée"),
+    ],
+)
+def test_test_evidence_rejects_control_characters(
+    field: str,
+    value: str,
+) -> None:
+    module = _load_module()
+    evidence = copy.deepcopy(_test_evidence()["current"])
+    evidence[field] = value
+
+    with pytest.raises(module.CaptureError, match="caractère de contrôle"):
+        module._test_execution(evidence, "a" * 40)
 
 
 def test_schema_validation_uses_a_date_time_format_checker(

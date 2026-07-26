@@ -110,9 +110,12 @@ confondus :
 Le périmètre versionné
 [`release/baseline-scope-1spe.json`](release/baseline-scope-1spe.json) définit
 explicitement l'univers, ses exclusions et l'unique catégorie de chaque
-chemin. La génération est bloquée par tout chemin candidat non classé, tout
-double classement ou toute règle qui capte un chemin hors univers. Les objets
-Git exclus ou non classés ne sont pas lus.
+chemin. Chaque exclusion porte une justification contrôlée. La génération est
+bloquée par tout chemin candidat non classé, tout double classement ou toute
+règle qui capte un chemin hors univers. Indépendamment de cette déclaration,
+chaque chemin réellement modifié entre l'origine et le snapshot courant doit
+être classé exactement une fois ou correspondre à une exclusion justifiée.
+Les objets Git exclus ou non classés ne sont pas lus.
 
 La commande de référence est :
 
@@ -128,7 +131,11 @@ Les deux sorties sont exclusivement publiées sous
 liens symboliques et la paire est restaurée intégralement si sa seconde
 publication échoue. Le JSON est validé à la fois par le schéma fermé, par un
 contrôleur de formats RFC 3339 et par les invariants croisés (inventaires,
-compteurs, chaîne de remédiation, preuves de tests et attestations).
+compteurs, chaîne de remédiation, preuves de tests et attestations). Les
+résumés de tests sont dérivés de leurs compteurs et refusent tout caractère de
+contrôle. Le chemin et le SHA-256 du manifeste, les compteurs candidats ainsi
+que les compteurs de chemins exclus sont revérifiés ; ces derniers sont
+adossés à la liste triée des exclusions et à leurs justifications.
 
 ## Cartographie du dépôt
 

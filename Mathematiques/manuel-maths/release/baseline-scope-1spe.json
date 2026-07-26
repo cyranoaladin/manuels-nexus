@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "description": "Univers explicite et règles de classement de la baseline immuable 1SPE.",
   "universe": {
     "include": [
@@ -16,15 +16,20 @@
       "Makefile",
       "RAPPORT_FINAL_1SPE.md",
       "README.md",
+      "requirements.txt",
       "SPECIMEN_A_VALIDER.md",
       "backlog_tspe_v2/1SPE-*/**",
       "chapitres/1SPE-*/**",
       "docs/01_conception_manuel.md",
       "docs/02_workflow_production.md",
+      "docs/03_architecture_technique.md",
+      "docs/04_guide_agents.md",
       "docs/05_conventions_latex.md",
       "docs/06_charte_graphique.md",
       "docs/07_ligne_editoriale.md",
+      "docs/superpowers/plans/2026-07-20-dynamic-rubric-tab-length.md",
       "docs/superpowers/plans/*1spe*",
+      "docs/superpowers/specs/2026-07-20-dynamic-rubric-tab-length-design.md",
       "docs/superpowers/specs/*1spe*",
       "gabarits/**",
       "referentiel/*1SPE*",
@@ -32,6 +37,7 @@
       "release/**",
       "schemas/**",
       "scripts/**",
+      "sources/SOURCES.md",
       "sources/*1SPE*",
       "sources/registry.yaml",
       "sources/txt/*1SPE*",
@@ -40,12 +46,34 @@
       "validations/**"
     ],
     "exclude": [
-      "backlog_tspe_v2/TSPE-*/**",
-      "chapitres/TSPE-*/**",
-      "gabarits/nexus-code.tex",
-      "gabarits/nexus-figures-nsi.tex",
-      "gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex",
-      "validations/E2/**"
+      {
+        "pattern": "backlog_tspe_v2/TSPE-*/**",
+        "justification": "Backlog explicitement réservé au manuel de terminale."
+      },
+      {
+        "pattern": "chapitres/TSPE-*/**",
+        "justification": "Chapitres du manuel de terminale, hors release 1SPE."
+      },
+      {
+        "pattern": "gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex",
+        "justification": "Spécimen NSI du kit de référence, non chargé par le manuel 1SPE."
+      },
+      {
+        "pattern": "gabarits/reference-v4/manuel-kit/chapitres/chap-physique.tex",
+        "justification": "Spécimen de physique du kit de référence, hors mathématiques 1SPE."
+      },
+      {
+        "pattern": "gabarits/reference-v4/manuel-kit/chapitres/chap-suites.tex",
+        "justification": "Spécimen de suites explicitement rédigé pour la terminale dans le kit de référence."
+      },
+      {
+        "pattern": "gabarits/reference-v4/manuel-kit/main.tex",
+        "justification": "Démonstrateur de manuel terminale chargeant des chapitres NSI et physique hors 1SPE."
+      },
+      {
+        "pattern": "validations/E2/**",
+        "justification": "Preuves du manuel NSI E2, distinctes de la release mathématiques 1SPE."
+      }
     ]
   },
   "categories": [
@@ -56,13 +84,17 @@
         "validations/**"
       ],
       "exclude": [
-        "validations/E2/**"
+        {
+          "pattern": "validations/E2/**",
+          "justification": "Preuves NSI E2 explicitement hors release mathématiques 1SPE."
+        }
       ]
     },
     {
       "category": "contract",
       "include": [
         "chapitres/1SPE-*/contrat.yaml",
+        "requirements.txt",
         "release/**",
         "schemas/**"
       ],
@@ -73,6 +105,7 @@
       "include": [
         "referentiel/*1SPE*",
         "referentiel/CONFORMITE_BO2026.md",
+        "sources/SOURCES.md",
         "sources/*1SPE*",
         "sources/registry.yaml",
         "sources/txt/*1SPE*"
@@ -90,10 +123,14 @@
         "README.md",
         "docs/01_conception_manuel.md",
         "docs/02_workflow_production.md",
+        "docs/03_architecture_technique.md",
+        "docs/04_guide_agents.md",
         "docs/05_conventions_latex.md",
         "docs/06_charte_graphique.md",
         "docs/07_ligne_editoriale.md",
+        "docs/superpowers/plans/2026-07-20-dynamic-rubric-tab-length.md",
         "docs/superpowers/plans/*1spe*",
+        "docs/superpowers/specs/2026-07-20-dynamic-rubric-tab-length-design.md",
         "docs/superpowers/specs/*1spe*"
       ],
       "exclude": []
@@ -124,12 +161,34 @@
         "transversal/**"
       ],
       "exclude": [
-        "chapitres/1SPE-*/LOT-*.md",
-        "chapitres/1SPE-*/contrat.yaml",
-        "chapitres/1SPE-*/validations/**",
-        "gabarits/nexus-code.tex",
-        "gabarits/nexus-figures-nsi.tex",
-        "gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex"
+        {
+          "pattern": "chapitres/1SPE-*/LOT-*.md",
+          "justification": "Rapports de lots classés dans la catégorie report."
+        },
+        {
+          "pattern": "chapitres/1SPE-*/contrat.yaml",
+          "justification": "Contrats de chapitre classés dans la catégorie contract."
+        },
+        {
+          "pattern": "chapitres/1SPE-*/validations/**",
+          "justification": "Preuves de chapitre classées dans la catégorie attestation."
+        },
+        {
+          "pattern": "gabarits/reference-v4/manuel-kit/chapitres/chap-nsi.tex",
+          "justification": "Spécimen NSI du kit de référence, explicitement hors univers."
+        },
+        {
+          "pattern": "gabarits/reference-v4/manuel-kit/chapitres/chap-physique.tex",
+          "justification": "Spécimen de physique du kit de référence, explicitement hors univers."
+        },
+        {
+          "pattern": "gabarits/reference-v4/manuel-kit/chapitres/chap-suites.tex",
+          "justification": "Spécimen de terminale du kit de référence, explicitement hors univers."
+        },
+        {
+          "pattern": "gabarits/reference-v4/manuel-kit/main.tex",
+          "justification": "Démonstrateur terminale multidisciplinaire, explicitement hors univers."
+        }
       ]
     }
   ]
