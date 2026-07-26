@@ -5,6 +5,7 @@
 - Origine immuable : `41eaa745d000953654f7f07f6760c675cdae91d5` — 7 failed, 1873 passed, 5 skipped (historical_observation, historique non rejoué).
 - État courant préflight : `ca16edbb51d7f0122fcbbfea5cccfa7e2066cd63` — 1946 passed, 5 skipped (direct_execution).
 - Arbre de travail au moment de la capture : `clean` (politique `record`).
+- HEAD matériel de capture : `f1e2e0cb343ddbe30db1c860947b7979d481223c`.
 
 L'état courant n'est jamais présenté comme l'état initial intact.
 
@@ -28,14 +29,14 @@ L'état courant n'est jamais présenté comme l'état initial intact.
 
 | Vue | Entrées | SHA-256 inventaire | Tags 1SPE |
 |---|---:|---|---:|
-| Origine | 3154 | `682067897de4e8879be1a6370111bb8e9c12e9d9d0ea1d03d13513b175835083` | 13 |
-| Courant | 3172 | `5e857bfa3790f16e4e596bdb53af60dbd4e3b32cda12e218df5ab51775e044a3` | 13 |
+| Origine | 3171 | `70c230ff5865f769471cb84bb5afee49b4e451f9eed10934fff6e94a565018dc` | 13 |
+| Courant | 3189 | `929a5f53a4d8328ce55c327e76b63d87d7c138abc54cbeb99ce7a5acea5b54ea` | 13 |
 
 ## Attestations
 
 | Vue | Réutilisables | Périmées | Revue requise |
 |---|---:|---:|---:|
-| Origine | 0 | 0 | 1568 |
-| Courant | 0 | 0 | 1583 |
+| Origine | 0 | 0 | 1537 |
+| Courant | 0 | 0 | 1552 |
 
-Zéro chemin du périmètre non classé et zéro double classement.
+Zéro chemin du périmètre non classé, zéro double classement et zéro pollution hors univers.
