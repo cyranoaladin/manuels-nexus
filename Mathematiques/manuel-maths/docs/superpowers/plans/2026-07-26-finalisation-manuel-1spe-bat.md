@@ -92,8 +92,10 @@ Les binaires sont résolus une seule fois en chemins absolus sans suivre le
 dernier lien symbolique, puis le lanceur exact est réutilisé pour les versions
 et le smoke-test. Celui-ci s'exécute depuis son répertoire temporaire avec une
 liste blanche d'environnement : seul le `PATH` parent est repris après mise en
-tête du répertoire Java certifié. `JAVACMD` fixe ce Java, un `JAVA_OPTS` de
-confiance redirige ses écritures et aucune option Java parente n'est transmise.
+tête du répertoire Java certifié. `JAVACMD` fixe ce Java ; aucun `JAVA_OPTS`
+n'est transmis. Un `JAVA_TOOL_OPTIONS` de confiance et compatible avec les
+chemins comportant des espaces redirige les écritures Java et désactive
+PerfData ; aucune option Java parente n'est transmise.
 La locale POSIX et le fuseau sont fixés, tandis que HOME, TMP, XDG,
 `VARTEXFONTS` et les caches TeX sont redirigés sous le répertoire éphémère.
 Cette politique isole `java -version`, sert à `verapdf --version` et le smoke

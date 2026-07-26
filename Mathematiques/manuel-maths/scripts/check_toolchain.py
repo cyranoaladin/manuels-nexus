@@ -338,8 +338,10 @@ def _smoke_environment(
     java_home = smoke_directory / "java/home"
     java_tmp.mkdir(parents=True, exist_ok=True)
     java_home.mkdir(parents=True, exist_ok=True)
-    sanitized["JAVA_OPTS"] = (
-        f"-Djava.io.tmpdir={java_tmp} -Duser.home={java_home}"
+    sanitized["JAVA_TOOL_OPTIONS"] = (
+        f'-Djava.io.tmpdir="{java_tmp}" '
+        f'-Duser.home="{java_home}" '
+        "-XX:-UsePerfData"
     )
     return sanitized
 

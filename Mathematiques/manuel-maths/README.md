@@ -58,9 +58,12 @@ Celui-ci lance LuaLaTeX et veraPDF depuis son répertoire temporaire avec une
 liste blanche d'environnement. Seul le `PATH` du parent est repris, après
 avoir placé en tête le répertoire du Java 21 résolu et supprimé les doublons.
 `JAVACMD` désigne exactement ce Java ; aucun `JAVA_HOME`, `JAVACMD` ou réglage
-Java parent n'est hérité. Le `JAVA_OPTS` de confiance redirige
-`java.io.tmpdir` et `user.home` sous le temporaire. `LANG=C`, `LC_ALL=C` et
-`TZ=UTC` sont fixés. `HOME`, `TMPDIR`, les trois répertoires XDG,
+Java parent n'est hérité. Aucun `JAVA_OPTS` n'est transmis : un
+`JAVA_TOOL_OPTIONS` de confiance, consommé directement par la JVM, redirige
+`java.io.tmpdir` et `user.home` sous le temporaire et désactive PerfData avec
+`-XX:-UsePerfData`. Ses chemins sont guillemetés afin de rester valides s'ils
+contiennent des espaces. `LANG=C`, `LC_ALL=C` et `TZ=UTC` sont fixés.
+`HOME`, `TMPDIR`, les trois répertoires XDG,
 `TEXMFHOME`, `TEXMFVAR`, `TEXMFCONFIG`, `TEXMFCACHE` et `VARTEXFONTS`
 pointent eux aussi vers des sous-répertoires éphémères. Cette politique sert
 à `java -version`, à `verapdf --version` comme à la validation ; le smoke-test

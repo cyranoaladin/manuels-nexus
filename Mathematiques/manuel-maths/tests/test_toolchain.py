@@ -1,7 +1,9 @@
 import copy
 import json
 import os
+import re
 import shlex
+import shutil
 import stat
 import subprocess
 import sys
@@ -15,6 +17,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from check_toolchain import (  # noqa: E402
     ManifestError,
+    _smoke_environment,
     check_toolchain,
     load_manifest,
     main,
@@ -660,7 +663,7 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
                 "TEXMFCACHE",
                 "VARTEXFONTS",
             ]
-            options = shlex.split(environment["JAVA_OPTS"])
+            options = shlex.split(environment["JAVA_TOOL_OPTIONS"])
             java_tmp = Path(options[0].split("=", 1)[1])
             java_home = Path(options[1].split("=", 1)[1])
             directories = [
@@ -701,7 +704,7 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
     assert set(compile_environment) == {
         "PATH",
         "JAVACMD",
-        "JAVA_OPTS",
+        "JAVA_TOOL_OPTIONS",
         "LANG",
         "LC_ALL",
         "TZ",
@@ -710,6 +713,7 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
     assert compile_environment["JAVACMD"] == "/opt/nexus-tools/java"
     assert compile_environment["PATH"] == "/opt/nexus-tools:/controlled/bin"
     assert "JAVA_HOME" not in compile_environment
+    assert "JAVA_OPTS" not in compile_environment
     assert compile_environment["LANG"] == "C"
     assert compile_environment["LC_ALL"] == "C"
     assert compile_environment["TZ"] == "UTC"
@@ -718,13 +722,14 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
         redirected = Path(compile_environment[key])
         assert redirected.is_relative_to(smoke_directory)
         assert not redirected.exists()
-    java_options = shlex.split(compile_environment["JAVA_OPTS"])
-    assert len(java_options) == 2
+    java_options = shlex.split(compile_environment["JAVA_TOOL_OPTIONS"])
+    assert len(java_options) == 3
     assert java_options[0].startswith("-Djava.io.tmpdir=")
     assert java_options[1].startswith("-Duser.home=")
+    assert java_options[2] == "-XX:-UsePerfData"
     assert all(
         Path(option.split("=", 1)[1]).is_relative_to(smoke_directory)
-        for option in java_options
+        for option in java_options[:2]
     )
     assert all(all(state) for state in directory_states)
     assert all(not directory.exists() for directory in isolated_directories)
@@ -739,6 +744,8 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
     assert version_environment["JAVACMD"] == "/opt/nexus-tools/java"
     assert version_environment["PATH"].startswith("/opt/nexus-tools:")
     assert "JAVA_HOME" not in version_environment
+    assert "JAVA_OPTS" not in version_environment
+    assert "-XX:-UsePerfData" in version_environment["JAVA_TOOL_OPTIONS"]
     assert "hostile" not in json.dumps(version_environment)
     java_version_records = [
         record
@@ -749,6 +756,8 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
     java_version_environment = java_version_records[0][1]["env"]
     assert java_version_environment["JAVACMD"] == "/opt/nexus-tools/java"
     assert "JAVA_HOME" not in java_version_environment
+    assert "JAVA_OPTS" not in java_version_environment
+    assert "-XX:-UsePerfData" in java_version_environment["JAVA_TOOL_OPTIONS"]
     assert "hostile" not in json.dumps(java_version_environment)
     serialized_report = json.dumps(result.report, ensure_ascii=False)
     assert str(smoke_directory) not in serialized_report
@@ -756,6 +765,84 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
         f"hostile-{variable}" in serialized_report
         for variable in hostile_variables
     )
+
+
+def test_java_tool_options_quote_space_paths_and_override_parent(tmp_path):
+    smoke_directory = tmp_path / "smoke directory with spaces"
+    smoke_directory.mkdir()
+    environment = _smoke_environment(
+        smoke_directory,
+        "/opt/nexus-tools/java",
+        {
+            "PATH": "/controlled/bin",
+            "JAVA_OPTS": "-Duser.home=/hostile/java-opts",
+            "JAVA_TOOL_OPTIONS": "-javaagent:/hostile/agent.jar",
+            "_JAVA_OPTIONS": "-Djava.io.tmpdir=/hostile/tmp",
+        },
+    )
+
+    assert "JAVA_OPTS" not in environment
+    assert "_JAVA_OPTIONS" not in environment
+    options = shlex.split(environment["JAVA_TOOL_OPTIONS"])
+    assert options == [
+        f"-Djava.io.tmpdir={smoke_directory / 'java/tmp'}",
+        f"-Duser.home={smoke_directory / 'java/home'}",
+        "-XX:-UsePerfData",
+    ]
+    assert 'java.io.tmpdir="' in environment["JAVA_TOOL_OPTIONS"]
+    assert 'user.home="' in environment["JAVA_TOOL_OPTIONS"]
+    assert "/hostile/" not in environment["JAVA_TOOL_OPTIONS"]
+    assert (smoke_directory / "java/tmp").is_dir()
+    assert (smoke_directory / "java/home").is_dir()
+
+
+def test_java21_consumes_trusted_tool_options_under_space_path(tmp_path):
+    java = shutil.which("java")
+    if java is None:
+        pytest.skip("Java absent")
+    probe = subprocess.run(
+        [java, "-version"],
+        env={
+            "PATH": os.environ.get("PATH", os.defpath),
+            "LANG": "C",
+            "LC_ALL": "C",
+        },
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    match = re.search(r'version\s+"?(\d+)', probe.stderr + probe.stdout)
+    if match is None or int(match.group(1)) < 21:
+        pytest.skip("Java 21 minimum absent")
+
+    smoke_directory = tmp_path / "java smoke with spaces"
+    smoke_directory.mkdir()
+    environment = _smoke_environment(
+        smoke_directory,
+        os.path.abspath(java),
+        {
+            "PATH": os.environ.get("PATH", os.defpath),
+            "JAVA_OPTS": "-Duser.home=/hostile/java-opts",
+            "JAVA_TOOL_OPTIONS": "-javaagent:/hostile/agent.jar",
+        },
+    )
+
+    process = subprocess.run(
+        [os.path.abspath(java), "-XshowSettings:properties", "-version"],
+        cwd=smoke_directory,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert process.returncode == 0
+    assert (
+        f"java.io.tmpdir = {smoke_directory / 'java/tmp'}"
+        in process.stderr
+    )
+    assert f"user.home = {smoke_directory / 'java/home'}" in process.stderr
+    assert not list(smoke_directory.rglob("hsperfdata*"))
 
 
 def test_verapdf_wrapper_consumes_certified_java_and_trusted_options(
@@ -774,7 +861,7 @@ else
   selected="$(command -v java)"
 fi
 printf 'SELECTED_JAVA=%s\\n' "$selected"
-printf 'USED_JAVA_OPTS=%s\\n' "${JAVA_OPTS:-}"
+printf 'USED_JAVA_TOOL_OPTIONS=%s\\n' "${JAVA_TOOL_OPTIONS:-}"
 case " $* " in
   *" --version "*) printf 'veraPDF CLI 1.30.1\\n' ;;
 esac
@@ -805,7 +892,7 @@ exit 0
             for line in process.stdout.splitlines():
                 if line.startswith("SELECTED_JAVA="):
                     consumed_java.append(line.split("=", 1)[1])
-                if line.startswith("USED_JAVA_OPTS="):
+                if line.startswith("USED_JAVA_TOOL_OPTIONS="):
                     consumed_options.append(line.split("=", 1)[1])
             return process
         return scenario(command, **kwargs)
@@ -822,9 +909,10 @@ exit 0
     assert len(consumed_options) == 2
     for options in consumed_options:
         parsed = shlex.split(options)
-        assert len(parsed) == 2
+        assert len(parsed) == 3
         assert parsed[0].startswith("-Djava.io.tmpdir=")
         assert parsed[1].startswith("-Duser.home=")
+        assert parsed[2] == "-XX:-UsePerfData"
         assert "/hostile/" not in options
 
 
