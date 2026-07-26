@@ -59,14 +59,66 @@ VALID_OUTPUTS = {
 }
 
 
-def fake_runner(outputs=None):
-    resolved = VALID_OUTPUTS | (outputs or {})
+class ScenarioRunner:
+    def __init__(
+        self,
+        outputs=None,
+        *,
+        compile_returncode=0,
+        create_pdf=True,
+        validation_returncode=0,
+    ):
+        self.outputs = VALID_OUTPUTS | (outputs or {})
+        self.compile_returncode = compile_returncode
+        self.create_pdf = create_pdf
+        self.validation_returncode = validation_returncode
+        self.calls = []
+        self.smoke_source = None
+        self.smoke_directory = None
 
-    def run(command, **_kwargs):
-        stdout, stderr = resolved[command[0]]
+    def __call__(self, command, **_kwargs):
+        self.calls.append(command)
+        if command[0] == "lualatex" and "--version" not in command:
+            source = Path(command[-1])
+            self.smoke_source = source.read_text(encoding="utf-8")
+            output_argument = next(
+                item for item in command if item.startswith("-output-directory=")
+            )
+            self.smoke_directory = Path(output_argument.split("=", 1)[1])
+            if self.compile_returncode == 0 and self.create_pdf:
+                (self.smoke_directory / "tagged-smoke.pdf").write_bytes(b"%PDF-1.7")
+            return SimpleNamespace(
+                returncode=self.compile_returncode,
+                stdout="",
+                stderr="",
+            )
+        if command[0] == "verapdf" and "--version" not in command:
+            return SimpleNamespace(
+                returncode=self.validation_returncode,
+                stdout="",
+                stderr="",
+            )
+        stdout, stderr = self.outputs[command[0]]
         return SimpleNamespace(returncode=0, stdout=stdout, stderr=stderr)
 
-    return run
+    @property
+    def smoke_calls(self):
+        return [
+            command
+            for command in self.calls
+            if (
+                command[0] == "lualatex"
+                and "--version" not in command
+            )
+            or (
+                command[0] == "verapdf"
+                and "--version" not in command
+            )
+        ]
+
+
+def fake_runner(outputs=None, **kwargs):
+    return ScenarioRunner(outputs, **kwargs)
 
 
 def available(binary):
@@ -155,20 +207,69 @@ def test_each_missing_blocking_binary_is_reported(missing, toolchain):
 
 
 @pytest.mark.parametrize(
-    ("binary", "output", "check_id"),
+    ("binary", "output", "check_id", "detected", "reason"),
     [
-        ("java", ("", 'openjdk version "20.0.2" 2023-07-18\n'), "java"),
+        (
+            "java",
+            ("", 'openjdk version "20.0.2" 2023-07-18\n'),
+            "java",
+            "20.0.2",
+            "Java >= 21 exigé; version détectée: 20.0.2",
+        ),
         (
             "lualatex",
             ("This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\n", ""),
             "latex.engine",
+            "TeX Live 2023",
+            "TeX Live >= 2026 exigé; version détectée: 2023",
         ),
-        ("verapdf", ("veraPDF CLI 1.29.7\n", ""), "verapdf"),
-        ("pdfinfo", ("", "pdfinfo version 23.11.0\n"), "pdfinfo"),
-        ("gs", ("10.01.2\n", ""), "ghostscript"),
+        (
+            "verapdf",
+            ("veraPDF CLI 1.29.7\n", ""),
+            "verapdf",
+            "1.29.7",
+            "veraPDF 1.30.1 exigé; version détectée: 1.29.7",
+        ),
+        (
+            "pdfinfo",
+            ("", "pdfinfo version 23.11.0\n"),
+            "pdfinfo",
+            "23.11.0",
+            "pdfinfo >= 24.02.0 exigé; version détectée: 23.11.0",
+        ),
+        (
+            "pdffonts",
+            ("", "pdffonts version 23.11.0\n"),
+            "pdffonts",
+            "23.11.0",
+            "pdffonts >= 24.02.0 exigé; version détectée: 23.11.0",
+        ),
+        (
+            "pdftotext",
+            ("", "pdftotext version 23.11.0\n"),
+            "pdftotext",
+            "23.11.0",
+            "pdftotext >= 24.02.0 exigé; version détectée: 23.11.0",
+        ),
+        (
+            "pdftoppm",
+            ("", "pdftoppm version 23.11.0\n"),
+            "pdftoppm",
+            "23.11.0",
+            "pdftoppm >= 24.02.0 exigé; version détectée: 23.11.0",
+        ),
+        (
+            "gs",
+            ("10.01.2\n", ""),
+            "ghostscript",
+            "10.01.2",
+            "Ghostscript >= 10.02 exigé; version détectée: 10.01.2",
+        ),
     ],
 )
-def test_insufficient_or_wrong_version_blocks(binary, output, check_id, toolchain):
+def test_insufficient_version_cites_detected_value(
+    binary, output, check_id, detected, reason, toolchain
+):
     result = check_toolchain(
         toolchain,
         which=available,
@@ -179,7 +280,43 @@ def test_insufficient_or_wrong_version_blocks(binary, output, check_id, toolchai
     assert result.status == "blocked"
     assert result.exit_code == 2
     assert check_by_id(result, check_id)["status"] == "blocked"
-    assert "exig" in check_by_id(result, check_id)["reason"]
+    assert check_by_id(result, check_id)["detected"] == detected
+    assert check_by_id(result, check_id)["reason"] == reason
+
+
+@pytest.mark.parametrize(
+    ("binary", "check_id", "reason"),
+    [
+        ("java", "java", "Java >= 21 exigé; version illisible"),
+        ("verapdf", "verapdf", "veraPDF 1.30.1 exigé; version illisible"),
+        ("pdfinfo", "pdfinfo", "pdfinfo >= 24.02.0 exigé; version illisible"),
+        ("pdffonts", "pdffonts", "pdffonts >= 24.02.0 exigé; version illisible"),
+        (
+            "pdftotext",
+            "pdftotext",
+            "pdftotext >= 24.02.0 exigé; version illisible",
+        ),
+        ("pdftoppm", "pdftoppm", "pdftoppm >= 24.02.0 exigé; version illisible"),
+        (
+            "gs",
+            "ghostscript",
+            "Ghostscript >= 10.02 exigé; version illisible",
+        ),
+    ],
+)
+def test_unparseable_version_is_distinct_from_insufficient_version(
+    binary, check_id, reason, toolchain
+):
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=fake_runner({binary: ("not-a-version\n", "")}),
+        python_version=(3, 12, 3),
+    )
+
+    assert result.status == "blocked"
+    assert check_by_id(result, check_id)["detected"] is None
+    assert check_by_id(result, check_id)["reason"] == reason
 
 
 @pytest.mark.parametrize("python_version", [(3, 11, 9), (3, 13, 0)])
@@ -212,31 +349,157 @@ def test_versions_are_parsed_from_realistic_stdout_and_stderr(toolchain):
     assert check_by_id(result, "ghostscript")["detected"] == "10.02.1"
 
 
-def test_tagged_pdf_gate_is_tied_to_tex_live_2026_and_verapdf(toolchain):
-    old_tex = check_toolchain(
+def test_tagged_pdf_is_blocked_when_verapdf_is_absent_despite_tex_live_2026(
+    toolchain,
+):
+    runner = fake_runner()
+    result = check_toolchain(
         toolchain,
-        which=available,
-        runner=fake_runner(
-            {
-                "lualatex": (
-                    "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\n",
-                    "",
-                )
-            }
-        ),
-        python_version=(3, 12, 3),
-    )
-    current_tex = check_toolchain(
-        toolchain,
-        which=available,
-        runner=fake_runner(),
+        which=lambda binary: None if binary == "verapdf" else available(binary),
+        runner=runner,
         python_version=(3, 12, 3),
     )
 
-    assert check_by_id(old_tex, "latex.tagged_pdf")["status"] == "blocked"
-    assert "TeX Live 2026" in check_by_id(old_tex, "latex.tagged_pdf")["reason"]
-    assert check_by_id(current_tex, "latex.tagged_pdf")["status"] == "certified"
-    assert "veraPDF" in check_by_id(current_tex, "latex.tagged_pdf")["reason"]
+    tagged = check_by_id(result, "latex.tagged_pdf")
+    assert tagged["status"] == "blocked"
+    assert tagged["detected"] is None
+    assert tagged["reason"] == "smoke Tagged PDF non exécuté: binaire veraPDF absent"
+    assert runner.smoke_calls == []
+
+
+def test_tagged_pdf_is_blocked_when_verapdf_version_is_wrong(toolchain):
+    runner = fake_runner({"verapdf": ("veraPDF CLI 1.29.7\n", "")})
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    tagged = check_by_id(result, "latex.tagged_pdf")
+    assert tagged["status"] == "blocked"
+    assert tagged["reason"] == (
+        "smoke Tagged PDF non exécuté: veraPDF 1.30.1 exigé, "
+        "version détectée: 1.29.7"
+    )
+    assert runner.smoke_calls == []
+
+
+@pytest.mark.parametrize(
+    ("runner_options", "reason"),
+    [
+        (
+            {"compile_returncode": 1},
+            "smoke Tagged PDF: compilation LuaLaTeX échouée (code 1)",
+        ),
+        (
+            {"create_pdf": False},
+            "smoke Tagged PDF: PDF absent après compilation LuaLaTeX",
+        ),
+        (
+            {"validation_returncode": 1},
+            "smoke Tagged PDF: veraPDF signale un PDF/UA-1 non conforme (code 1)",
+        ),
+        (
+            {"validation_returncode": 2},
+            (
+                "smoke Tagged PDF: veraPDF rejette le profil ua1 "
+                "ou le format mrr (code 2)"
+            ),
+        ),
+    ],
+)
+def test_tagged_pdf_smoke_failures_are_blocking(runner_options, reason, toolchain):
+    runner = fake_runner(**runner_options)
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    tagged = check_by_id(result, "latex.tagged_pdf")
+    assert tagged["status"] == "blocked"
+    assert tagged["reason"] == reason
+    assert result.status == "blocked"
+    assert result.exit_code == 2
+
+
+def test_tagged_pdf_success_uses_exact_commands_and_official_metadata(toolchain):
+    runner = fake_runner()
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    tagged = check_by_id(result, "latex.tagged_pdf")
+    assert tagged == {
+        "id": "latex.tagged_pdf",
+        "required": (
+            "smoke LuaLaTeX TeX Live >=2026 + veraPDF 1.30.1 "
+            "-f ua1 --format mrr"
+        ),
+        "detected": "smoke PDF/UA-1 conforme",
+        "status": "certified",
+        "reason": "compilation Tagged PDF et validation veraPDF PDF/UA-1 réussies",
+    }
+    assert len(runner.smoke_calls) == 2
+    compile_command, validate_command = runner.smoke_calls
+    assert compile_command[:3] == [
+        "lualatex",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+    ]
+    assert compile_command[3].startswith("-output-directory=")
+    smoke_directory = Path(compile_command[3].split("=", 1)[1])
+    assert Path(compile_command[4]) == smoke_directory / "tagged-smoke.tex"
+    assert validate_command == [
+        "verapdf",
+        "-f",
+        "ua1",
+        "--format",
+        "mrr",
+        str(smoke_directory / "tagged-smoke.pdf"),
+    ]
+    assert runner.smoke_source.startswith("\\DocumentMetadata{")
+    assert runner.smoke_source.index("\\DocumentMetadata{") < runner.smoke_source.index(
+        "\\documentclass{article}"
+    )
+    assert "pdfversion=1.7" in runner.smoke_source
+    assert "pdfstandard=ua-1" in runner.smoke_source
+    assert "tagging=on" in runner.smoke_source
+    assert "pdftitle=" in runner.smoke_source
+    assert "pdfauthor=" in runner.smoke_source
+    assert not smoke_directory.exists()
+
+
+@pytest.mark.parametrize(
+    "outputs",
+    [
+        {
+            "lualatex": (
+                "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)\n",
+                "",
+            )
+        },
+        {"verapdf": ("veraPDF CLI 1.29.7\n", "")},
+    ],
+)
+def test_tagged_pdf_smoke_is_not_run_when_version_prerequisite_fails(
+    outputs, toolchain
+):
+    runner = fake_runner(outputs)
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    assert check_by_id(result, "latex.tagged_pdf")["status"] == "blocked"
+    assert runner.smoke_calls == []
 
 
 def test_insufficient_version_reason_names_the_detected_version(toolchain):
@@ -294,16 +557,18 @@ def test_report_is_deterministic_structured_and_contains_no_environment_secret(
     monkeypatch, toolchain
 ):
     monkeypatch.setenv("TOOLCHAIN_TEST_SECRET", "never-copy-this-value")
+    first_runner = fake_runner()
     first = check_toolchain(
         toolchain,
         which=available,
-        runner=fake_runner(),
+        runner=first_runner,
         python_version=(3, 12, 3),
     ).report
+    second_runner = fake_runner()
     second = check_toolchain(
         toolchain,
         which=available,
-        runner=fake_runner(),
+        runner=second_runner,
         python_version=(3, 12, 3),
     ).report
     payload = json.dumps(first, ensure_ascii=False, sort_keys=True)
@@ -312,6 +577,8 @@ def test_report_is_deterministic_structured_and_contains_no_environment_secret(
     assert list(first) == ["schema_version", "status", "checks", "blockers"]
     assert "never-copy-this-value" not in payload
     assert "timestamp" not in payload.lower()
+    assert str(first_runner.smoke_directory) not in payload
+    assert str(second_runner.smoke_directory) not in payload
     assert all(set(check) == {"id", "required", "detected", "status", "reason"}
                for check in first["checks"])
 

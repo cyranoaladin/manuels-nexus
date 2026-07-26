@@ -2,8 +2,8 @@
 """Contrôle reproductible de la chaîne de fabrication d'une release 1SPE.
 
 Le contrôle ne modifie ni n'installe aucun outil. La capacité Tagged PDF est
-liée ici au contrat TeX Live 2026 minimum ; la conformité des documents
-produits reste ensuite à prouver avec veraPDF et le profil PDF/UA-1.
+prouvée par la compilation isolée d'un document minimal puis par sa validation
+veraPDF PDF/UA-1 ; la seule présence de LuaLaTeX ne peut pas la certifier.
 """
 
 from __future__ import annotations
@@ -24,6 +24,26 @@ import yaml
 
 
 DEFAULT_REPORT = Path("validations/release-1spe/toolchain.json")
+TAGGED_PDF_SMOKE_SOURCE = r"""\DocumentMetadata{
+  lang=fr,
+  pdfversion=1.7,
+  pdfstandard=ua-1,
+  tagging=on
+}
+\documentclass{article}
+\usepackage{hyperref}
+\hypersetup{
+  pdftitle={Contrôle Tagged PDF Nexus Réussite},
+  pdfauthor={Nexus Réussite}
+}
+\title{Contrôle Tagged PDF}
+\author{Nexus Réussite}
+\begin{document}
+\maketitle
+\section{Contenu}
+Ce document minimal contrôle la production PDF/UA-1.
+\end{document}
+"""
 
 
 class ManifestError(ValueError):
@@ -41,6 +61,12 @@ class ToolchainResult:
     @property
     def exit_code(self) -> int:
         return 0 if self.status == "certified" else 2
+
+
+@dataclass(frozen=True)
+class SmokeResult:
+    ok: bool
+    reason: str
 
 
 def _require_keys(
@@ -227,6 +253,137 @@ def _extract(pattern: str, output: str) -> str | None:
     return match.group(1) if match else None
 
 
+def run_tagged_pdf_smoke(
+    *,
+    latex_binary: str,
+    verapdf_binary: str,
+    profile: str,
+    report_format: str,
+    runner: Callable[..., Any],
+) -> SmokeResult:
+    """Compile et valide un PDF/UA-1 éphémère, sans exposer son chemin."""
+
+    try:
+        with tempfile.TemporaryDirectory(prefix="nexus-tagged-pdf-") as directory:
+            smoke_directory = Path(directory)
+            source = smoke_directory / "tagged-smoke.tex"
+            pdf = smoke_directory / "tagged-smoke.pdf"
+            source.write_text(TAGGED_PDF_SMOKE_SOURCE, encoding="utf-8")
+
+            compile_process = runner(
+                [
+                    latex_binary,
+                    "-interaction=nonstopmode",
+                    "-halt-on-error",
+                    f"-output-directory={smoke_directory}",
+                    str(source),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=60,
+            )
+            if compile_process.returncode != 0:
+                return SmokeResult(
+                    False,
+                    (
+                        "smoke Tagged PDF: compilation LuaLaTeX échouée "
+                        f"(code {compile_process.returncode})"
+                    ),
+                )
+            if not pdf.is_file():
+                return SmokeResult(
+                    False,
+                    "smoke Tagged PDF: PDF absent après compilation LuaLaTeX",
+                )
+
+            validation_process = runner(
+                [
+                    verapdf_binary,
+                    "-f",
+                    profile,
+                    "--format",
+                    report_format,
+                    str(pdf),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=60,
+            )
+            if validation_process.returncode == 0:
+                return SmokeResult(
+                    True,
+                    (
+                        "compilation Tagged PDF et validation veraPDF "
+                        "PDF/UA-1 réussies"
+                    ),
+                )
+            if validation_process.returncode == 1:
+                return SmokeResult(
+                    False,
+                    (
+                        "smoke Tagged PDF: veraPDF signale un PDF/UA-1 "
+                        "non conforme (code 1)"
+                    ),
+                )
+            if validation_process.returncode == 2:
+                return SmokeResult(
+                    False,
+                    (
+                        "smoke Tagged PDF: veraPDF rejette le profil ua1 "
+                        "ou le format mrr (code 2)"
+                    ),
+                )
+            return SmokeResult(
+                False,
+                (
+                    "smoke Tagged PDF: validation veraPDF échouée "
+                    f"(code {validation_process.returncode})"
+                ),
+            )
+    except (OSError, subprocess.SubprocessError) as exc:
+        return SmokeResult(
+            False,
+            f"smoke Tagged PDF: exécution impossible ({type(exc).__name__})",
+        )
+
+
+def _tagged_prerequisite_reason(
+    *,
+    latex_binary: str,
+    latex_error: str | None,
+    texlive_year: str | None,
+    required_texlive: int,
+    verapdf_error: str | None,
+    verapdf_version: str | None,
+    required_verapdf: str,
+) -> str:
+    failures: list[str] = []
+    if latex_error == f"binaire absent: {latex_binary}":
+        failures.append(f"binaire {latex_binary} absent")
+    elif latex_error is not None:
+        failures.append("commande LuaLaTeX indisponible")
+    elif texlive_year is None:
+        failures.append("version TeX Live illisible")
+    elif int(texlive_year) < required_texlive:
+        failures.append(
+            f"TeX Live {required_texlive} requis, version détectée: {texlive_year}"
+        )
+
+    if verapdf_error == "binaire absent: verapdf":
+        failures.append("binaire veraPDF absent")
+    elif verapdf_error is not None:
+        failures.append("commande veraPDF indisponible")
+    elif verapdf_version is None:
+        failures.append("version veraPDF illisible")
+    elif _version_tuple(verapdf_version) != _version_tuple(required_verapdf):
+        failures.append(
+            f"veraPDF {required_verapdf} exigé, version détectée: {verapdf_version}"
+        )
+    return "smoke Tagged PDF non exécuté: " + "; ".join(failures)
+
+
 def check_toolchain(
     manifest: dict[str, Any],
     *,
@@ -275,7 +432,11 @@ def check_toolchain(
     java_reason = java_error or (
         f"Java >= {required_java} détecté"
         if java_ok
-        else f"Java >= {required_java} exigé; version illisible ou insuffisante"
+        else (
+            f"Java >= {required_java} exigé; version détectée: {java_version}"
+            if java_version is not None
+            else f"Java >= {required_java} exigé; version illisible"
+        )
     )
     checks.append(
         _check("java", f">={required_java}", java_version, java_ok, java_reason)
@@ -312,22 +473,6 @@ def check_toolchain(
             latex_reason,
         )
     )
-    tagged_reason = (
-        "contrat Tagged PDF activé par TeX Live 2026 minimum; "
-        "la conformité documentaire reste contrôlée par veraPDF PDF/UA-1"
-        if latex_ok
-        else "Tagged PDF exige TeX Live 2026 minimum avant validation veraPDF"
-    )
-    checks.append(
-        _check(
-            "latex.tagged_pdf",
-            "true (TeX Live >=2026 + validation veraPDF PDF/UA-1)",
-            "contract-enabled" if latex_ok else None,
-            latex_ok,
-            tagged_reason,
-        )
-    )
-
     verapdf_output, verapdf_error = _run_version(
         "verapdf",
         ["--version"],
@@ -347,7 +492,14 @@ def check_toolchain(
     verapdf_reason = verapdf_error or (
         f"veraPDF {required_verapdf} détecté"
         if verapdf_ok
-        else f"veraPDF {required_verapdf} exigé; version illisible ou différente"
+        else (
+            (
+                f"veraPDF {required_verapdf} exigé; "
+                f"version détectée: {verapdf_version}"
+            )
+            if verapdf_version is not None
+            else f"veraPDF {required_verapdf} exigé; version illisible"
+        )
     )
     checks.append(
         _check(
@@ -359,6 +511,42 @@ def check_toolchain(
             verapdf_version,
             verapdf_ok,
             verapdf_reason,
+        )
+    )
+
+    if latex_ok and verapdf_ok:
+        tagged_smoke = run_tagged_pdf_smoke(
+            latex_binary=latex_binary,
+            verapdf_binary="verapdf",
+            profile=manifest["verapdf"]["profile"],
+            report_format=manifest["verapdf"]["report_format"],
+            runner=command_runner,
+        )
+        tagged_detected = "smoke PDF/UA-1 conforme" if tagged_smoke.ok else None
+        tagged_reason = tagged_smoke.reason
+        tagged_ok = tagged_smoke.ok
+    else:
+        tagged_detected = None
+        tagged_reason = _tagged_prerequisite_reason(
+            latex_binary=latex_binary,
+            latex_error=latex_error,
+            texlive_year=texlive_year,
+            required_texlive=required_texlive,
+            verapdf_error=verapdf_error,
+            verapdf_version=verapdf_version,
+            required_verapdf=required_verapdf,
+        )
+        tagged_ok = False
+    checks.append(
+        _check(
+            "latex.tagged_pdf",
+            (
+                "smoke LuaLaTeX TeX Live >=2026 + veraPDF 1.30.1 "
+                "-f ua1 --format mrr"
+            ),
+            tagged_detected,
+            tagged_ok,
+            tagged_reason,
         )
     )
 
@@ -375,7 +563,14 @@ def check_toolchain(
         reason = error or (
             f"{command} >= {required_poppler} détecté"
             if ok
-            else f"{command} >= {required_poppler} exigé; version illisible ou insuffisante"
+            else (
+                (
+                    f"{command} >= {required_poppler} exigé; "
+                    f"version détectée: {version}"
+                )
+                if version is not None
+                else f"{command} >= {required_poppler} exigé; version illisible"
+            )
         )
         checks.append(
             _check(command, f">={required_poppler}", version, ok, reason)
@@ -393,7 +588,11 @@ def check_toolchain(
     gs_reason = gs_error or (
         f"Ghostscript >= {required_gs} détecté"
         if gs_ok
-        else f"Ghostscript >= {required_gs} exigé; version illisible ou insuffisante"
+        else (
+            f"Ghostscript >= {required_gs} exigé; version détectée: {gs_version}"
+            if gs_version is not None
+            else f"Ghostscript >= {required_gs} exigé; version illisible"
+        )
     )
     checks.append(
         _check("ghostscript", f">={required_gs}", gs_version, gs_ok, gs_reason)

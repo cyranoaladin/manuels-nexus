@@ -35,15 +35,19 @@ Le contrôle versionné dans
 | Python | 3.12.3, conforme | 3.12.x |
 | Java | 21.0.11, conforme | 21 minimum |
 | LuaLaTeX | TeX Live 2023, bloquant | TeX Live 2026 minimum |
-| Tagged PDF | porte non démontrée, bloquante | contrat activé sous TeX Live 2026 |
+| Tagged PDF | porte non démontrée, bloquante | smoke-test LuaLaTeX + veraPDF PDF/UA-1 |
 | veraPDF | absent, bloquant | CLI 1.30.1, profil `ua1`, rapport `mrr` |
 | Poppler | 24.02.0, conforme | 24.02.0 minimum |
 | Ghostscript | 10.02.1, conforme | 10.02 minimum |
 
-La version minimale TeX Live 2026 est le seuil de capacité retenu pour le
-Tagged PDF. Elle ne certifie pas à elle seule un document : les PDF produits
-doivent encore réussir la validation PDF/UA-1 avec la version épinglée de
-veraPDF.
+TeX Live 2026 est un prérequis, jamais une preuve de capacité à lui seul. Le
+contrôleur ne certifie `latex.tagged_pdf` qu'après avoir compilé, dans un
+répertoire temporaire isolé, un document minimal dont `\DocumentMetadata`
+active `pdfstandard=ua-1` et `tagging=on`, constaté la présence du PDF, puis
+obtenu le code `0` de `verapdf -f ua1 --format mrr`. Les sources et sorties de
+ce smoke-test sont supprimées automatiquement et aucun chemin temporaire
+n'entre dans le rapport. Chaque PDF de production devra encore réussir sa
+propre validation PDF/UA-1.
 
 Le préflight ne tente aucune installation :
 

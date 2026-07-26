@@ -83,6 +83,12 @@ version inférieure au contrat, produit
 `validations/release-1spe/toolchain.json` et ne tente aucune installation
 implicite. Un état `blocked` retourne le code 2.
 
+La capacité Tagged PDF n'est jamais déduite de la seule année TeX Live : après
+validation des versions, le contrôleur compile un document éphémère avec
+`\DocumentMetadata{lang=fr,pdfversion=1.7,pdfstandard=ua-1,tagging=on}`, exige
+le PDF puis obtient le code 0 de `verapdf -f ua1 --format mrr`. Tout autre
+résultat reste `blocked` et le répertoire temporaire est supprimé.
+
 - [x] **Step 5: ajouter les cibles Make**
 
 ```make

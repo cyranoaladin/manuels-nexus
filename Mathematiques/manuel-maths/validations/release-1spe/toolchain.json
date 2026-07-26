@@ -24,18 +24,18 @@
       "reason": "TeX Live >= 2026 exigé; version détectée: 2023"
     },
     {
-      "id": "latex.tagged_pdf",
-      "required": "true (TeX Live >=2026 + validation veraPDF PDF/UA-1)",
-      "detected": null,
-      "status": "blocked",
-      "reason": "Tagged PDF exige TeX Live 2026 minimum avant validation veraPDF"
-    },
-    {
       "id": "verapdf",
       "required": "1.30.1, profil ua1, rapport mrr",
       "detected": null,
       "status": "blocked",
       "reason": "binaire absent: verapdf"
+    },
+    {
+      "id": "latex.tagged_pdf",
+      "required": "smoke LuaLaTeX TeX Live >=2026 + veraPDF 1.30.1 -f ua1 --format mrr",
+      "detected": null,
+      "status": "blocked",
+      "reason": "smoke Tagged PDF non exécuté: TeX Live 2026 requis, version détectée: 2023; binaire veraPDF absent"
     },
     {
       "id": "pdfinfo",
@@ -79,12 +79,12 @@
       "reason": "TeX Live >= 2026 exigé; version détectée: 2023"
     },
     {
-      "tool": "latex.tagged_pdf",
-      "reason": "Tagged PDF exige TeX Live 2026 minimum avant validation veraPDF"
-    },
-    {
       "tool": "verapdf",
       "reason": "binaire absent: verapdf"
+    },
+    {
+      "tool": "latex.tagged_pdf",
+      "reason": "smoke Tagged PDF non exécuté: TeX Live 2026 requis, version détectée: 2023; binaire veraPDF absent"
     }
   ]
 }
