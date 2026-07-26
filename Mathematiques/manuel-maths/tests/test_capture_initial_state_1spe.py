@@ -1170,6 +1170,111 @@ def test_tags_anchor_rejects_an_inconsistent_snapshot_hash() -> None:
         module.load_tags_anchor_from_value(anchor)
 
 
+@pytest.mark.parametrize("target_location", ["internal", "external"])
+def test_tags_anchor_rejects_a_final_symlink_before_any_read(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    target_location: str,
+) -> None:
+    module = _load_module()
+    anchor_directory = tmp_path / "anchor-directory"
+    anchor_directory.mkdir()
+    if target_location == "internal":
+        target = anchor_directory / "target.json"
+    else:
+        target = tmp_path / "external-target.json"
+    target.write_bytes(TAGS_ANCHOR.read_bytes())
+    link = anchor_directory / "baseline-tags-1spe.json"
+    os.symlink(target, link)
+
+    def forbidden_read_bytes(self: Path) -> bytes:
+        raise AssertionError(f"lecture préalable interdite : {self}")
+
+    monkeypatch.setattr(Path, "read_bytes", forbidden_read_bytes)
+    with pytest.raises(module.CaptureError, match="ancre de tags"):
+        module.load_tags_anchor(link)
+
+
+def test_tags_anchor_rejects_a_directory_before_any_read(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_module()
+    directory = tmp_path / "baseline-tags-1spe.json"
+    directory.mkdir()
+
+    def forbidden_read_bytes(self: Path) -> bytes:
+        raise AssertionError(f"lecture préalable interdite : {self}")
+
+    monkeypatch.setattr(Path, "read_bytes", forbidden_read_bytes)
+    with pytest.raises(module.CaptureError, match="fichier régulier"):
+        module.load_tags_anchor(directory)
+
+
+def test_tags_anchor_rejects_a_fifo_without_blocking(tmp_path: Path) -> None:
+    fifo = tmp_path / "baseline-tags-1spe.json"
+    os.mkfifo(fifo)
+    code = f"""
+import importlib.util
+from pathlib import Path
+spec = importlib.util.spec_from_file_location("capture", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+try:
+    module.load_tags_anchor(Path({str(fifo)!r}))
+except module.CaptureError:
+    raise SystemExit(0)
+raise SystemExit(1)
+"""
+
+    completed = subprocess.run(
+        [sys.executable, "-I", "-c", code],
+        cwd=tmp_path,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+        timeout=2,
+    )
+
+    assert completed.returncode == 0, completed.stderr.decode()
+
+
+def test_tags_anchor_blocks_when_nofollow_is_unavailable(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_module()
+    monkeypatch.delattr(module.os, "O_NOFOLLOW", raising=False)
+
+    with pytest.raises(module.CaptureError, match="O_NOFOLLOW|plateforme"):
+        module.load_tags_anchor(TAGS_ANCHOR)
+
+
+def test_tags_anchor_reads_the_opened_inode_if_path_is_exchanged(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_module()
+    anchor = tmp_path / "baseline-tags-1spe.json"
+    replacement = tmp_path / "replacement.json"
+    expected_bytes = TAGS_ANCHOR.read_bytes()
+    hostile_bytes = b'{"hostile":true}\n'
+    anchor.write_bytes(expected_bytes)
+    replacement.write_bytes(hostile_bytes)
+    real_open = module.os.open
+
+    def open_then_exchange(path: object, flags: int, *args: object) -> int:
+        descriptor = real_open(path, flags, *args)
+        os.replace(replacement, anchor)
+        return descriptor
+
+    monkeypatch.setattr(module.os, "open", open_then_exchange)
+    loaded, loaded_bytes = module.load_tags_anchor(anchor)
+
+    assert loaded["schema_version"] == 1
+    assert loaded_bytes == expected_bytes
+    assert anchor.read_bytes() == hostile_bytes
+
+
 def test_coordinated_artifact_tag_forgery_is_rejected_by_capture_anchor(
     historical_artifact_repository: tuple[Path, str, str],
     tmp_path: Path,

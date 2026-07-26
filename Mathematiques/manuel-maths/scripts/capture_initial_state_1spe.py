@@ -1009,13 +1009,39 @@ def _load_tags_anchor_bytes(
 
 def load_tags_anchor(path: Path) -> tuple[dict[str, Any], bytes]:
     path = Path(path)
+    required_flags = ("O_NOFOLLOW", "O_NONBLOCK")
+    missing_flags = [
+        flag for flag in required_flags if not hasattr(os, flag)
+    ]
+    if missing_flags:
+        raise CaptureError(
+            "plateforme non sûre pour l'ancre de tags : "
+            + ", ".join(missing_flags)
+            + " indisponible(s)"
+        )
+    flags = (
+        os.O_RDONLY
+        | os.O_NOFOLLOW
+        | os.O_NONBLOCK
+        | getattr(os, "O_CLOEXEC", 0)
+    )
     try:
-        mode = os.lstat(path).st_mode
-        anchor_bytes = path.read_bytes()
+        descriptor = os.open(path, flags)
     except OSError as error:
         raise CaptureError("ancre de tags inaccessible") from error
-    if not stat.S_ISREG(mode):
-        raise CaptureError("l'ancre de tags doit être un fichier régulier")
+    try:
+        if not stat.S_ISREG(os.fstat(descriptor).st_mode):
+            raise CaptureError(
+                "l'ancre de tags doit être un fichier régulier"
+            )
+        chunks: list[bytes] = []
+        while chunk := os.read(descriptor, 1024 * 1024):
+            chunks.append(chunk)
+        anchor_bytes = b"".join(chunks)
+    except OSError as error:
+        raise CaptureError("ancre de tags inaccessible") from error
+    finally:
+        os.close(descriptor)
     return _load_tags_anchor_bytes(anchor_bytes)
 
 
