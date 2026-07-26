@@ -262,17 +262,23 @@ def _run_version(
     *,
     resolution_error: str | None,
     runner: Callable[..., Any],
+    environment: Mapping[str, str] | None = None,
+    cwd: Path | None = None,
 ) -> tuple[str | None, str | None]:
     if binary is None:
         return None, resolution_error or "binaire non résolu"
+    run_options: dict[str, Any] = {
+        "capture_output": True,
+        "text": True,
+        "check": False,
+        "timeout": 15,
+    }
+    if environment is not None:
+        run_options["env"] = dict(environment)
+    if cwd is not None:
+        run_options["cwd"] = cwd
     try:
-        process = runner(
-            [binary, *arguments],
-            capture_output=True,
-            text=True,
-            check=False,
-            timeout=15,
-        )
+        process = runner([binary, *arguments], **run_options)
     except (OSError, subprocess.SubprocessError) as exc:
         return None, f"exécution impossible: {type(exc).__name__}"
     if process.returncode != 0:
@@ -290,19 +296,26 @@ def _extract(pattern: str, output: str) -> str | None:
 
 def _smoke_environment(
     smoke_directory: Path,
+    java_binary: str,
     environ: Mapping[str, str] | None = None,
 ) -> dict[str, str]:
     """Construit l'environnement en liste blanche et ses caches éphémères."""
 
     parent = os.environ if environ is None else environ
+    java_directory = str(Path(java_binary).parent)
+    parent_path = parent.get("PATH", os.defpath)
+    path_entries = [java_directory, *parent_path.split(os.pathsep)]
+    unique_path_entries: list[str] = []
+    for entry in path_entries:
+        if entry and entry not in unique_path_entries:
+            unique_path_entries.append(entry)
     sanitized = {
-        "PATH": parent.get("PATH", os.defpath),
-        "LANG": "C.UTF-8",
-        "LC_ALL": "C.UTF-8",
+        "PATH": os.pathsep.join(unique_path_entries),
+        "JAVACMD": java_binary,
+        "LANG": "C",
+        "LC_ALL": "C",
         "TZ": "UTC",
     }
-    if "JAVA_HOME" in parent:
-        sanitized["JAVA_HOME"] = parent["JAVA_HOME"]
 
     redirections = {
         "HOME": "home",
@@ -314,18 +327,98 @@ def _smoke_environment(
         "TEXMFVAR": "texmf/var",
         "TEXMFCONFIG": "texmf/config",
         "TEXMFCACHE": "texmf/cache",
+        "VARTEXFONTS": "texmf/fonts",
     }
     for variable, relative_path in redirections.items():
         destination = smoke_directory / relative_path
         destination.mkdir(parents=True, exist_ok=True)
         sanitized[variable] = str(destination)
+
+    java_tmp = smoke_directory / "java/tmp"
+    java_home = smoke_directory / "java/home"
+    java_tmp.mkdir(parents=True, exist_ok=True)
+    java_home.mkdir(parents=True, exist_ok=True)
+    sanitized["JAVA_OPTS"] = (
+        f"-Djava.io.tmpdir={java_tmp} -Duser.home={java_home}"
+    )
     return sanitized
+
+
+def _run_verapdf_version(
+    *,
+    verapdf_binary: str | None,
+    verapdf_resolution_error: str | None,
+    java_binary: str | None,
+    java_resolution_error: str | None,
+    runner: Callable[..., Any],
+) -> tuple[str | None, str | None]:
+    if verapdf_binary is None:
+        return None, verapdf_resolution_error or "binaire veraPDF non résolu"
+    if java_binary is None:
+        if java_resolution_error == "binaire absent: java":
+            return None, "contrôle veraPDF impossible: binaire Java absent"
+        return None, "contrôle veraPDF impossible: binaire Java non résolu"
+    try:
+        with tempfile.TemporaryDirectory(
+            prefix="nexus-verapdf-version-"
+        ) as directory:
+            version_directory = Path(directory)
+            environment = _smoke_environment(
+                version_directory,
+                java_binary,
+            )
+            return _run_version(
+                verapdf_binary,
+                ["--version"],
+                resolution_error=None,
+                runner=runner,
+                environment=environment,
+                cwd=version_directory,
+            )
+    except OSError as exc:
+        return (
+            None,
+            f"contrôle veraPDF isolé impossible: {type(exc).__name__}",
+        )
+
+
+def _run_java_version(
+    *,
+    java_binary: str | None,
+    java_resolution_error: str | None,
+    runner: Callable[..., Any],
+) -> tuple[str | None, str | None]:
+    if java_binary is None:
+        return None, java_resolution_error or "binaire Java non résolu"
+    try:
+        with tempfile.TemporaryDirectory(
+            prefix="nexus-java-version-"
+        ) as directory:
+            version_directory = Path(directory)
+            environment = _smoke_environment(
+                version_directory,
+                java_binary,
+            )
+            return _run_version(
+                java_binary,
+                ["-version"],
+                resolution_error=None,
+                runner=runner,
+                environment=environment,
+                cwd=version_directory,
+            )
+    except OSError as exc:
+        return (
+            None,
+            f"contrôle Java isolé impossible: {type(exc).__name__}",
+        )
 
 
 def run_tagged_pdf_smoke(
     *,
     latex_binary: str,
     verapdf_binary: str,
+    java_binary: str,
     profile: str,
     report_format: str,
     runner: Callable[..., Any],
@@ -337,7 +430,10 @@ def run_tagged_pdf_smoke(
             smoke_directory = Path(directory)
             source = smoke_directory / "tagged-smoke.tex"
             pdf = smoke_directory / "tagged-smoke.pdf"
-            smoke_environment = _smoke_environment(smoke_directory)
+            smoke_environment = _smoke_environment(
+                smoke_directory,
+                java_binary,
+            )
             source.write_text(TAGGED_PDF_SMOKE_SOURCE, encoding="utf-8")
 
             compile_process = runner(
@@ -425,6 +521,9 @@ def run_tagged_pdf_smoke(
 
 def _tagged_prerequisite_reason(
     *,
+    java_error: str | None,
+    java_version: str | None,
+    required_java: int,
     latex_binary: str,
     latex_error: str | None,
     texlive_year: str | None,
@@ -434,6 +533,17 @@ def _tagged_prerequisite_reason(
     required_verapdf: str,
 ) -> str:
     failures: list[str] = []
+    if java_error == "binaire absent: java":
+        failures.append("Java absent")
+    elif java_error is not None:
+        failures.append("commande Java indisponible")
+    elif java_version is None:
+        failures.append("version Java illisible")
+    elif int(java_version.split(".")[0]) < required_java:
+        failures.append(
+            f"Java >= {required_java} requis, version détectée: {java_version}"
+        )
+
     if latex_error == f"binaire absent: {latex_binary}":
         failures.append(f"binaire {latex_binary} absent")
     elif latex_error is not None:
@@ -494,10 +604,9 @@ def check_toolchain(
         "java",
         which=binary_locator,
     )
-    java_output, java_error = _run_version(
-        java_binary,
-        ["-version"],
-        resolution_error=java_resolution_error,
+    java_output, java_error = _run_java_version(
+        java_binary=java_binary,
+        java_resolution_error=java_resolution_error,
         runner=command_runner,
     )
     java_version = (
@@ -559,10 +668,11 @@ def check_toolchain(
         "verapdf",
         which=binary_locator,
     )
-    verapdf_output, verapdf_error = _run_version(
-        verapdf_binary,
-        ["--version"],
-        resolution_error=verapdf_resolution_error,
+    verapdf_output, verapdf_error = _run_verapdf_version(
+        verapdf_binary=verapdf_binary,
+        verapdf_resolution_error=verapdf_resolution_error,
+        java_binary=java_binary,
+        java_resolution_error=java_resolution_error,
         runner=command_runner,
     )
     verapdf_version = (
@@ -600,12 +710,14 @@ def check_toolchain(
         )
     )
 
-    if latex_ok and verapdf_ok:
+    if java_ok and latex_ok and verapdf_ok:
+        assert java_binary is not None
         assert latex_binary is not None
         assert verapdf_binary is not None
         tagged_smoke = run_tagged_pdf_smoke(
             latex_binary=latex_binary,
             verapdf_binary=verapdf_binary,
+            java_binary=java_binary,
             profile=manifest["verapdf"]["profile"],
             report_format=manifest["verapdf"]["report_format"],
             runner=command_runner,
@@ -616,6 +728,9 @@ def check_toolchain(
     else:
         tagged_detected = None
         tagged_reason = _tagged_prerequisite_reason(
+            java_error=java_error,
+            java_version=java_version,
+            required_java=required_java,
             latex_binary=latex_engine,
             latex_error=latex_error,
             texlive_year=texlive_year,

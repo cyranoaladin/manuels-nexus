@@ -1,7 +1,9 @@
 import copy
 import json
 import os
+import shlex
 import stat
+import subprocess
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -624,20 +626,28 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
         "TEXMFVAR",
         "TEXMFCONFIG",
         "TEXMFCACHE",
+        "VARTEXFONTS",
+        "JAVACMD",
+        "JAVA_OPTS",
         "JAVA_TOOL_OPTIONS",
         "_JAVA_OPTIONS",
         "NEXUS_HOST_SECRET",
     ]
     for variable in hostile_variables:
         monkeypatch.setenv(variable, f"hostile-{variable}")
-    monkeypatch.setenv("PATH", "/controlled/bin")
-    monkeypatch.setenv("JAVA_HOME", "/controlled/java")
+    monkeypatch.setenv(
+        "PATH",
+        "/controlled/bin:/opt/nexus-tools:/controlled/bin",
+    )
+    monkeypatch.setenv("JAVA_HOME", "/hostile/java17")
     monkeypatch.setenv("LANG", "hostile-locale")
     scenario = fake_runner()
     directory_states = []
+    isolated_directories = []
 
     def observing_runner(command, **kwargs):
         if "env" in kwargs:
+            environment = kwargs["env"]
             directory_keys = [
                 "HOME",
                 "TMPDIR",
@@ -648,13 +658,20 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
                 "TEXMFVAR",
                 "TEXMFCONFIG",
                 "TEXMFCACHE",
+                "VARTEXFONTS",
+            ]
+            options = shlex.split(environment["JAVA_OPTS"])
+            java_tmp = Path(options[0].split("=", 1)[1])
+            java_home = Path(options[1].split("=", 1)[1])
+            directories = [
+                *(Path(environment[key]) for key in directory_keys),
+                java_tmp,
+                java_home,
             ]
             directory_states.append(
-                {
-                    key: Path(kwargs["env"][key]).is_dir()
-                    for key in directory_keys
-                }
+                [directory.is_dir() for directory in directories]
             )
+            isolated_directories.extend(directories)
         return scenario(command, **kwargs)
 
     result = check_toolchain(
@@ -679,33 +696,174 @@ def test_smoke_environment_is_allowlisted_and_redirected_under_temp(
         "TEXMFVAR",
         "TEXMFCONFIG",
         "TEXMFCACHE",
+        "VARTEXFONTS",
     }
     assert set(compile_environment) == {
         "PATH",
-        "JAVA_HOME",
+        "JAVACMD",
+        "JAVA_OPTS",
         "LANG",
         "LC_ALL",
         "TZ",
         *redirected_keys,
     }
-    assert compile_environment["PATH"] == "/controlled/bin"
-    assert compile_environment["JAVA_HOME"] == "/controlled/java"
-    assert compile_environment["LANG"] == "C.UTF-8"
-    assert compile_environment["LC_ALL"] == "C.UTF-8"
+    assert compile_environment["JAVACMD"] == "/opt/nexus-tools/java"
+    assert compile_environment["PATH"] == "/opt/nexus-tools:/controlled/bin"
+    assert "JAVA_HOME" not in compile_environment
+    assert compile_environment["LANG"] == "C"
+    assert compile_environment["LC_ALL"] == "C"
     assert compile_environment["TZ"] == "UTC"
     smoke_directory = scenario.smoke_directory
     for key in redirected_keys:
         redirected = Path(compile_environment[key])
         assert redirected.is_relative_to(smoke_directory)
         assert not redirected.exists()
-    assert all(all(state.values()) for state in directory_states)
+    java_options = shlex.split(compile_environment["JAVA_OPTS"])
+    assert len(java_options) == 2
+    assert java_options[0].startswith("-Djava.io.tmpdir=")
+    assert java_options[1].startswith("-Duser.home=")
+    assert all(
+        Path(option.split("=", 1)[1]).is_relative_to(smoke_directory)
+        for option in java_options
+    )
+    assert all(all(state) for state in directory_states)
+    assert all(not directory.exists() for directory in isolated_directories)
     assert not smoke_directory.exists()
+    verapdf_version_records = [
+        record
+        for record in scenario.call_records
+        if Path(record[0][0]).name == "verapdf" and "--version" in record[0]
+    ]
+    assert len(verapdf_version_records) == 1
+    version_environment = verapdf_version_records[0][1]["env"]
+    assert version_environment["JAVACMD"] == "/opt/nexus-tools/java"
+    assert version_environment["PATH"].startswith("/opt/nexus-tools:")
+    assert "JAVA_HOME" not in version_environment
+    assert "hostile" not in json.dumps(version_environment)
+    java_version_records = [
+        record
+        for record in scenario.call_records
+        if Path(record[0][0]).name == "java" and "-version" in record[0]
+    ]
+    assert len(java_version_records) == 1
+    java_version_environment = java_version_records[0][1]["env"]
+    assert java_version_environment["JAVACMD"] == "/opt/nexus-tools/java"
+    assert "JAVA_HOME" not in java_version_environment
+    assert "hostile" not in json.dumps(java_version_environment)
     serialized_report = json.dumps(result.report, ensure_ascii=False)
     assert str(smoke_directory) not in serialized_report
     assert not any(
         f"hostile-{variable}" in serialized_report
         for variable in hostile_variables
     )
+
+
+def test_verapdf_wrapper_consumes_certified_java_and_trusted_options(
+    tmp_path, monkeypatch, toolchain
+):
+    java21 = tmp_path / "java21"
+    wrapper = tmp_path / "verapdf-wrapper"
+    java21.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+    wrapper.write_text(
+        """#!/bin/sh
+if [ -n "${JAVACMD:-}" ]; then
+  selected="$JAVACMD"
+elif [ -n "${JAVA_HOME:-}" ]; then
+  selected="$JAVA_HOME/bin/java"
+else
+  selected="$(command -v java)"
+fi
+printf 'SELECTED_JAVA=%s\\n' "$selected"
+printf 'USED_JAVA_OPTS=%s\\n' "${JAVA_OPTS:-}"
+case " $* " in
+  *" --version "*) printf 'veraPDF CLI 1.30.1\\n' ;;
+esac
+exit 0
+""",
+        encoding="utf-8",
+    )
+    java21.chmod(0o755)
+    wrapper.chmod(0o755)
+    monkeypatch.setenv("JAVACMD", "/hostile/java17")
+    monkeypatch.setenv("JAVA_HOME", "/hostile/jdk17")
+    monkeypatch.setenv("JAVA_OPTS", "-Duser.home=/hostile/home")
+    monkeypatch.setenv("JAVA_TOOL_OPTIONS", "-javaagent:/hostile/agent.jar")
+    consumed_java = []
+    consumed_options = []
+    scenario = fake_runner(binary_aliases={"java21": "java"})
+
+    def locator(binary):
+        if binary == "java":
+            return str(java21)
+        if binary == "verapdf":
+            return str(wrapper)
+        return available(binary)
+
+    def runner(command, **kwargs):
+        if Path(command[0]) == wrapper:
+            process = subprocess.run(command, **kwargs)
+            for line in process.stdout.splitlines():
+                if line.startswith("SELECTED_JAVA="):
+                    consumed_java.append(line.split("=", 1)[1])
+                if line.startswith("USED_JAVA_OPTS="):
+                    consumed_options.append(line.split("=", 1)[1])
+            return process
+        return scenario(command, **kwargs)
+
+    result = check_toolchain(
+        toolchain,
+        which=locator,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    assert result.status == "certified"
+    assert consumed_java == [str(java21.absolute()), str(java21.absolute())]
+    assert len(consumed_options) == 2
+    for options in consumed_options:
+        parsed = shlex.split(options)
+        assert len(parsed) == 2
+        assert parsed[0].startswith("-Djava.io.tmpdir=")
+        assert parsed[1].startswith("-Duser.home=")
+        assert "/hostile/" not in options
+
+
+def test_tagged_smoke_never_runs_when_java_is_insufficient(toolchain):
+    runner = fake_runner(
+        {"java": ("", 'openjdk version "20.0.2" 2023-07-18\n')}
+    )
+    result = check_toolchain(
+        toolchain,
+        which=available,
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    assert check_by_id(result, "java")["status"] == "blocked"
+    assert check_by_id(result, "verapdf")["status"] == "certified"
+    assert check_by_id(result, "latex.tagged_pdf")["reason"] == (
+        "smoke Tagged PDF non exécuté: Java >= 21 requis, "
+        "version détectée: 20.0.2"
+    )
+    assert runner.smoke_calls == []
+
+
+def test_verapdf_version_and_smoke_are_skipped_when_java_is_absent(toolchain):
+    runner = fake_runner()
+    result = check_toolchain(
+        toolchain,
+        which=lambda binary: None if binary == "java" else available(binary),
+        runner=runner,
+        python_version=(3, 12, 3),
+    )
+
+    assert check_by_id(result, "java")["reason"] == "binaire absent: java"
+    assert check_by_id(result, "verapdf")["reason"] == (
+        "contrôle veraPDF impossible: binaire Java absent"
+    )
+    assert "Java absent" in check_by_id(result, "latex.tagged_pdf")["reason"]
+    assert all(Path(call[0]).name != "verapdf" for call in runner.calls)
+    assert runner.smoke_calls == []
 
 
 @pytest.mark.parametrize(

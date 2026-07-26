@@ -91,11 +91,15 @@ résultat reste `blocked` et le répertoire temporaire est supprimé.
 Les binaires sont résolus une seule fois en chemins absolus sans suivre le
 dernier lien symbolique, puis le lanceur exact est réutilisé pour les versions
 et le smoke-test. Celui-ci s'exécute depuis son répertoire temporaire avec une
-liste blanche d'environnement : seuls `PATH` et l'éventuel `JAVA_HOME`
-proviennent du parent ; locale et fuseau sont fixés, tandis que HOME, TMP, XDG
-et les caches TeX sont redirigés sous le répertoire éphémère. Un manifeste
-inaccessible ou invalide remplace lui aussi atomiquement tout ancien rapport
-par un rapport déterministe `blocked` en mode `0644`.
+liste blanche d'environnement : seul le `PATH` parent est repris après mise en
+tête du répertoire Java certifié. `JAVACMD` fixe ce Java, un `JAVA_OPTS` de
+confiance redirige ses écritures et aucune option Java parente n'est transmise.
+La locale POSIX et le fuseau sont fixés, tandis que HOME, TMP, XDG,
+`VARTEXFONTS` et les caches TeX sont redirigés sous le répertoire éphémère.
+Cette politique isole `java -version`, sert à `verapdf --version` et le smoke
+ne s'exécute pas si Java 21 n'est pas prouvé. Un manifeste inaccessible ou
+invalide remplace lui aussi atomiquement tout ancien rapport par un rapport
+déterministe `blocked` en mode `0644`.
 
 - [x] **Step 5: ajouter les cibles Make**
 

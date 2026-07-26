@@ -55,12 +55,17 @@ Chaque binaire est résolu une seule fois en chemin absolu avant les contrôles,
 sans suivre le dernier lien symbolique : l'identité du lanceur trouvée par
 `PATH` reste donc l'`argv[0]` des commandes de version et du smoke-test.
 Celui-ci lance LuaLaTeX et veraPDF depuis son répertoire temporaire avec une
-liste blanche d'environnement. Seuls `PATH` et, s'il existe, `JAVA_HOME`
-proviennent du parent ; `LANG=C.UTF-8`, `LC_ALL=C.UTF-8` et `TZ=UTC` sont
-fixés. `HOME`, `TMPDIR`, les trois répertoires XDG, `TEXMFHOME`, `TEXMFVAR`,
-`TEXMFCONFIG` et `TEXMFCACHE` pointent vers des sous-répertoires créés dans le
-smoke-test puis supprimés avec lui. Aucune autre variable du parent — option
-TeX/Kpathsea, option Java ou secret — n'est transmise.
+liste blanche d'environnement. Seul le `PATH` du parent est repris, après
+avoir placé en tête le répertoire du Java 21 résolu et supprimé les doublons.
+`JAVACMD` désigne exactement ce Java ; aucun `JAVA_HOME`, `JAVACMD` ou réglage
+Java parent n'est hérité. Le `JAVA_OPTS` de confiance redirige
+`java.io.tmpdir` et `user.home` sous le temporaire. `LANG=C`, `LC_ALL=C` et
+`TZ=UTC` sont fixés. `HOME`, `TMPDIR`, les trois répertoires XDG,
+`TEXMFHOME`, `TEXMFVAR`, `TEXMFCONFIG`, `TEXMFCACHE` et `VARTEXFONTS`
+pointent eux aussi vers des sous-répertoires éphémères. Cette politique sert
+à `java -version`, à `verapdf --version` comme à la validation ; le smoke-test
+ne démarre jamais si Java 21 n'est pas prouvé. Aucune autre variable du parent
+— option TeX/Kpathsea, option Java ou secret — n'est transmise.
 
 Le préflight ne tente aucune installation :
 
