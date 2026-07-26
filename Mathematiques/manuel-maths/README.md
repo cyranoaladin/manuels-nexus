@@ -147,14 +147,31 @@ champs déclarés dans le rapport :
   --verify-existing validations/release-1spe/baseline.json
 ```
 
-Ce mode ne crée ni ne modifie aucun fichier. Il relit dans Git le manifeste et
-le code au `capture_head_commit`, recalcule les deux arbres, blobs,
-inventaires, tags, remédiations et attestations depuis les références et
-preuves épinglées, puis exige leur égalité profonde avec le JSON. Il vérifie
-enfin que le dernier commit commun aux artefacts JSON et Markdown a le
-`capture_head_commit` pour parent et que leurs contenus versionnés sont
-identiques aux contenus contrôlés. Les commits ultérieurs qui ne touchent pas
-ces artefacts n'invalident donc pas cette provenance.
+Ce mode ne crée ni ne modifie aucun fichier. Son amorce courante authentifie
+d'abord le JSON versionné, le commit documentaire et son parent unique. Elle
+refuse toute version de schéma hors de l'allowlist explicite (actuellement la
+version 1), puis extrait depuis ce parent le script, le schéma et le manifeste
+historiques. Ces trois entrées, comme les artefacts JSON et Markdown, doivent
+être des blobs Git réguliers de mode exact `100644`. Le script extrait est
+exécuté par un sous-processus isolé dans un répertoire temporaire ; aucune
+fonction de recalcul ou règle de schéma de la version courante n'intervient
+dans le verdict historique.
+
+Le runtime historique recalcule les deux arbres, blobs, inventaires,
+remédiations et attestations depuis les références et preuves épinglées, puis
+exige leur égalité profonde avec le JSON. La capture officielle impose en
+outre `capture_context.working_tree.status = clean` et une liste `paths` vide ;
+l'API générique conserve, elle, un éventuel état sale comme une déclaration
+authentifiée du seul instant de capture. La liste des tags est authentifiée par
+le JSON du commit documentaire et n'est pas recalculée depuis les références
+de tags vivantes : l'ajout, le déplacement ou la suppression ultérieurs d'un
+tag ne peuvent donc pas invalider un artefact historique. Toute mutation de
+cette liste dans le fichier de travail reste refusée.
+
+Le dernier commit commun aux artefacts JSON et Markdown doit avoir le
+`capture_head_commit` pour parent unique, et leurs contenus versionnés doivent
+être identiques aux contenus contrôlés. Les commits ultérieurs qui ne touchent
+pas ces artefacts n'invalident donc pas cette provenance.
 
 ## Cartographie du dépôt
 

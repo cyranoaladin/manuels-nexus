@@ -4,6 +4,7 @@ import importlib.util
 import json
 import os
 import subprocess
+import sys
 from pathlib import Path
 from types import ModuleType
 
@@ -73,7 +74,12 @@ def baseline_repository(tmp_path: Path) -> tuple[Path, str, str]:
     _write(
         root,
         "scripts/capture_initial_state_1spe.py",
-        "# capteur présent dans le commit de fixture\n",
+        SCRIPT.read_text(encoding="utf-8"),
+    )
+    _write(
+        root,
+        "schemas/baseline_1spe.schema.json",
+        SCHEMA.read_text(encoding="utf-8"),
     )
     source_sha = hashlib.sha256(b"origine\n").hexdigest()
     _write(
@@ -887,6 +893,7 @@ def test_cli_verifies_existing_artifact_read_only() -> None:
 
     completed = subprocess.run(
         [
+            sys.executable,
             str(SCRIPT),
             "--root",
             str(ROOT),
@@ -908,6 +915,226 @@ def test_cli_verifies_existing_artifact_read_only() -> None:
     assert BASELINE_JSON.read_bytes() == before_json
     assert BASELINE_MARKDOWN.read_bytes() == before_markdown
     assert _git(ROOT, "status", "--porcelain") == before_status
+
+
+def test_dispatch_executes_capture_head_runtime_not_current_functions(
+    baseline_repository: tuple[Path, str, str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+    _write(
+        root,
+        "validations/release-1spe/baseline.json",
+        json.dumps(
+            report,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+    )
+    _write(
+        root,
+        "validations/release-1spe/baseline.md",
+        module.render_markdown(report),
+    )
+    _git(root, "add", "validations/release-1spe")
+    _git(root, "commit", "-q", "-m", "[ARTIFACT] baseline fixture")
+
+    def current_runtime_must_not_run(*args: object, **kwargs: object) -> None:
+        raise AssertionError("le runtime courant a été exécuté")
+
+    monkeypatch.setattr(
+        module,
+        "validate_report_against_repository",
+        current_runtime_must_not_run,
+    )
+    completed = module._dispatch_historical_verification(
+        root=root,
+        report_path=root / "validations/release-1spe/baseline.json",
+        trusted_test_evidence=_test_evidence(),
+        origin_ref=origin,
+        current_ref=current,
+    )
+
+    assert completed.returncode == 0, completed.stderr.decode()
+    assert json.loads(completed.stdout) == {
+        "json": "validations/release-1spe/baseline.json",
+        "status": "externally_verified",
+    }
+
+
+def test_historical_dispatch_rejects_unknown_schema_version() -> None:
+    module = _load_module()
+
+    with pytest.raises(module.CaptureError, match="schema_version.*inconnue"):
+        module._require_supported_schema_version({"schema_version": 999})
+
+
+def test_historical_artifact_survives_later_tag_ref_changes() -> None:
+    module = _load_module()
+    report = json.loads(BASELINE_JSON.read_text(encoding="utf-8"))
+    tag = "manuel/1SPE-validation-externe-temporaire"
+    artifact_paths = (
+        "validations/release-1spe/baseline.json",
+        "validations/release-1spe/baseline.md",
+    )
+    if _git(ROOT, "tag", "--list", tag):
+        _git(ROOT, "tag", "-d", tag)
+    try:
+        _git(ROOT, "tag", tag, report["origin"]["commit_sha"])
+        module.validate_report_against_repository(
+            report,
+            root=ROOT,
+            trusted_test_evidence=module.DEFAULT_TEST_EVIDENCE,
+            artifact_paths=artifact_paths,
+        )
+        _git(ROOT, "tag", "-f", tag, report["current"]["commit_sha"])
+        module.validate_report_against_repository(
+            report,
+            root=ROOT,
+            trusted_test_evidence=module.DEFAULT_TEST_EVIDENCE,
+            artifact_paths=artifact_paths,
+        )
+        _git(ROOT, "tag", "-d", tag)
+        module.validate_report_against_repository(
+            report,
+            root=ROOT,
+            trusted_test_evidence=module.DEFAULT_TEST_EVIDENCE,
+            artifact_paths=artifact_paths,
+        )
+    finally:
+        if tag in _git(ROOT, "tag", "--list", tag):
+            _git(ROOT, "tag", "-d", tag)
+
+
+def test_worktree_tag_mutation_is_rejected_against_committed_json() -> None:
+    module = _load_module()
+    report = json.loads(BASELINE_JSON.read_text(encoding="utf-8"))
+    report["origin"]["tags"].pop()
+
+    with pytest.raises(module.CaptureError, match="validation externe"):
+        module.validate_report_against_repository(
+            report,
+            root=ROOT,
+            trusted_test_evidence=module.DEFAULT_TEST_EVIDENCE,
+            artifact_paths=(
+                "validations/release-1spe/baseline.json",
+                "validations/release-1spe/baseline.md",
+            ),
+        )
+
+
+def test_official_external_validation_requires_clean_recorded_worktree() -> None:
+    module = _load_module()
+    report = json.loads(BASELINE_JSON.read_text(encoding="utf-8"))
+    report["capture_context"]["working_tree"] = {
+        "status": "dirty",
+        "paths": [
+            {
+                "path": "notes-locales.tmp",
+                "status": "??",
+                "role": "changed",
+            }
+        ],
+    }
+
+    with pytest.raises(
+        module.CaptureError,
+        match="working_tree officiel.*clean",
+    ):
+        module.validate_report_against_repository(
+            report,
+            root=ROOT,
+            trusted_test_evidence=module.DEFAULT_TEST_EVIDENCE,
+            artifact_paths=(
+                "validations/release-1spe/baseline.json",
+                "validations/release-1spe/baseline.md",
+            ),
+        )
+
+
+def test_generic_external_api_treats_dirty_worktree_as_capture_time_claim(
+    baseline_repository: tuple[Path, str, str],
+) -> None:
+    module = _load_module()
+    root, origin, current = baseline_repository
+    _write(root, "notes-locales.tmp", "sale au moment de la capture\n")
+    report = module.capture_repository(
+        root=root,
+        origin_ref=origin,
+        current_ref=current,
+        test_evidence=_test_evidence(),
+    )
+    assert report["capture_context"]["working_tree"]["status"] == "dirty"
+
+    module.validate_report_against_repository(
+        report,
+        root=root,
+        trusted_test_evidence=_test_evidence(),
+        origin_ref=origin,
+        current_ref=current,
+    )
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "release/baseline-scope-1spe.json",
+        "scripts/capture_initial_state_1spe.py",
+        "schemas/baseline_1spe.schema.json",
+        "validations/release-1spe/baseline.json",
+        "validations/release-1spe/baseline.md",
+    ],
+)
+@pytest.mark.parametrize("git_kind", ["executable", "symlink"])
+def test_historical_runtime_inputs_require_git_mode_100644(
+    tmp_path: Path,
+    path: str,
+    git_kind: str,
+) -> None:
+    module = _load_module()
+    root = tmp_path / "project"
+    root.mkdir()
+    _git(root, "init", "-q")
+    _git(root, "config", "user.name", "Mode Test")
+    _git(root, "config", "user.email", "mode@example.invalid")
+    paths = (
+        "release/baseline-scope-1spe.json",
+        "scripts/capture_initial_state_1spe.py",
+        "schemas/baseline_1spe.schema.json",
+        "validations/release-1spe/baseline.json",
+        "validations/release-1spe/baseline.md",
+    )
+    for candidate in paths:
+        _write(root, candidate, f"contenu {candidate}\n")
+    _git(root, "add", ".")
+    _git(root, "commit", "-q", "-m", "fichiers réguliers")
+    target = root / path
+    if git_kind == "executable":
+        target.chmod(0o755)
+    else:
+        target.unlink()
+        os.symlink("cible-interdite", target)
+    _git(root, "add", path)
+    _git(root, "commit", "-q", "-m", f"mode interdit {git_kind}")
+    git_root, prefix = module._git_context(root)
+    commit = module._resolve_commit(git_root, "HEAD", label="mode test")
+
+    with pytest.raises(module.CaptureError, match="mode Git 100644"):
+        module._committed_project_files(
+            git_root,
+            prefix,
+            commit,
+            paths,
+        )
 
 
 def test_test_evidence_derives_summary_from_valid_counters() -> None:
@@ -1209,6 +1436,7 @@ def test_cli_is_cwd_independent_schema_valid_and_deterministic(
     json_output = root / "validations" / "release-1spe" / "baseline.json"
     markdown_output = root / "validations" / "release-1spe" / "baseline.md"
     command = [
+        sys.executable,
         str(SCRIPT),
         "--root",
         str(root),

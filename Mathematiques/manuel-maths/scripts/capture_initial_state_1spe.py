@@ -29,6 +29,9 @@ CATEGORIES = (
 ATTESTATION_CLASSES = ("reusable", "stale", "review_required")
 DEFAULT_ORIGIN_REF = "41eaa74"
 DEFAULT_CURRENT_REF = "ca16edb"
+SUPPORTED_SCHEMA_VERSIONS = frozenset({1})
+OFFICIAL_JSON_RELATIVE = "validations/release-1spe/baseline.json"
+OFFICIAL_MARKDOWN_RELATIVE = "validations/release-1spe/baseline.md"
 DEFAULT_SCOPE_MANIFEST_PATH = (
     Path(__file__).resolve().parents[1] / "release" / "baseline-scope-1spe.json"
 )
@@ -1773,13 +1776,17 @@ def _committed_project_files(
             "validation externe : fichier absent du commit "
             f"{commit} : {', '.join(missing)}"
         )
-    non_regular = sorted(
-        path for path, record in records.items() if record["mode"] == "120000"
+    invalid_modes = sorted(
+        (path, record["mode"])
+        for path, record in records.items()
+        if record["mode"] != "100644"
     )
-    if non_regular:
+    if invalid_modes:
         raise CaptureError(
-            "validation externe : fichier suivi comme lien symbolique : "
-            + ", ".join(non_regular)
+            "validation externe : mode Git 100644 requis : "
+            + ", ".join(
+                f"{path}={mode}" for path, mode in invalid_modes
+            )
         )
     blobs = _read_blobs(
         git_root,
@@ -1831,6 +1838,256 @@ def _artifact_commit(
     return commits.pop()
 
 
+def _authenticate_versioned_artifacts(
+    report: dict[str, Any],
+    *,
+    git_root: Path,
+    project_prefix: str,
+    capture_head: str,
+    artifact_paths: tuple[str, ...],
+) -> str:
+    artifact_commit = _artifact_commit(
+        git_root,
+        project_prefix,
+        artifact_paths,
+    )
+    parents_raw = _run_git(
+        git_root,
+        ["show", "-s", "--format=%P", artifact_commit],
+    ).stdout
+    parents = _decode_utf8(
+        parents_raw,
+        description="parents du commit d'artefacts",
+    ).split()
+    if len(parents) != 1 or parents[0] != capture_head:
+        raise CaptureError(
+            "validation externe : capture_head_commit n'est pas le "
+            "parent unique du dernier commit d'artefacts"
+        )
+    committed_artifacts = _committed_project_files(
+        git_root,
+        project_prefix,
+        artifact_commit,
+        artifact_paths,
+    )
+    json_paths = [
+        path for path in artifact_paths if path.casefold().endswith(".json")
+    ]
+    if len(json_paths) != 1:
+        raise CaptureError(
+            "validation externe : un artefact JSON unique est requis"
+        )
+    try:
+        committed_report = json.loads(
+            _decode_utf8(
+                committed_artifacts[json_paths[0]],
+                description="artefact JSON versionné",
+            )
+        )
+    except json.JSONDecodeError as error:
+        raise CaptureError(
+            "validation externe : artefact JSON versionné invalide"
+        ) from error
+    _external_assert_equal(
+        "artefact JSON versionné",
+        report,
+        committed_report,
+    )
+    markdown_paths = [
+        path for path in artifact_paths if path.casefold().endswith(".md")
+    ]
+    if markdown_paths:
+        if len(markdown_paths) != 1:
+            raise CaptureError(
+                "validation externe : un artefact Markdown unique est requis"
+            )
+        _external_assert_equal(
+            "artefact Markdown versionné",
+            committed_artifacts[markdown_paths[0]],
+            render_markdown(report).encode("utf-8"),
+        )
+    return artifact_commit
+
+
+def _require_supported_schema_version(report: dict[str, Any]) -> int:
+    version = report.get("schema_version")
+    if (
+        isinstance(version, bool)
+        or not isinstance(version, int)
+        or version not in SUPPORTED_SCHEMA_VERSIONS
+    ):
+        raise CaptureError(
+            f"schema_version inconnue ou non prise en charge : {version!r}"
+        )
+    return version
+
+
+def _historical_runtime_environment(temporary_root: Path) -> dict[str, str]:
+    return {
+        "PATH": os.environ.get("PATH", "/usr/bin:/bin"),
+        "HOME": str(temporary_root),
+        "TMPDIR": str(temporary_root),
+        "LANG": "C",
+        "LC_ALL": "C",
+        "TZ": "UTC",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONNOUSERSITE": "1",
+        "PYTHONHASHSEED": "0",
+    }
+
+
+def _dispatch_historical_verification(
+    *,
+    root: Path,
+    report_path: Path,
+    trusted_test_evidence: dict[str, dict[str, Any]],
+    origin_ref: str = DEFAULT_ORIGIN_REF,
+    current_ref: str = DEFAULT_CURRENT_REF,
+) -> subprocess.CompletedProcess[bytes]:
+    """Bootstrap the verifier committed at the artifact capture parent."""
+
+    root = Path(root).resolve(strict=True)
+    requested = _lexical_output(root, report_path)
+    canonical_report = root / OFFICIAL_JSON_RELATIVE
+    if requested != canonical_report:
+        raise CaptureError(
+            "la vérification historique est limitée à "
+            f"{OFFICIAL_JSON_RELATIVE}"
+        )
+    _reject_unsafe_output_components(root, requested)
+    try:
+        report_bytes = requested.read_bytes()
+        report = json.loads(
+            _decode_utf8(
+                report_bytes,
+                description="baseline JSON existante",
+            )
+        )
+    except (OSError, json.JSONDecodeError) as error:
+        raise CaptureError(
+            "baseline JSON existante inaccessible ou invalide"
+        ) from error
+
+    git_root, project_prefix = _git_context(root)
+    artifact_paths = (
+        OFFICIAL_JSON_RELATIVE,
+        OFFICIAL_MARKDOWN_RELATIVE,
+    )
+    artifact_commit = _artifact_commit(
+        git_root,
+        project_prefix,
+        artifact_paths,
+    )
+    committed_artifacts = _committed_project_files(
+        git_root,
+        project_prefix,
+        artifact_commit,
+        artifact_paths,
+    )
+    try:
+        committed_report = json.loads(
+            _decode_utf8(
+                committed_artifacts[OFFICIAL_JSON_RELATIVE],
+                description="artefact JSON versionné",
+            )
+        )
+    except json.JSONDecodeError as error:
+        raise CaptureError(
+            "validation externe : artefact JSON versionné invalide"
+        ) from error
+    _external_assert_equal(
+        "artefact JSON versionné",
+        report,
+        committed_report,
+    )
+    _require_supported_schema_version(committed_report)
+
+    parents_raw = _run_git(
+        git_root,
+        ["show", "-s", "--format=%P", artifact_commit],
+    ).stdout
+    parents = _decode_utf8(
+        parents_raw,
+        description="parents du commit d'artefacts",
+    ).split()
+    if len(parents) != 1:
+        raise CaptureError(
+            "validation externe : le commit d'artefacts doit avoir un "
+            "parent unique"
+        )
+    capture_head = parents[0]
+    try:
+        recorded_capture_head = committed_report["capture_context"][
+            "capture_head_commit"
+        ]
+    except (KeyError, TypeError) as error:
+        raise CaptureError(
+            "validation externe : capture_head_commit absent"
+        ) from error
+    _external_assert_equal(
+        "capture_context.capture_head_commit",
+        recorded_capture_head,
+        capture_head,
+    )
+
+    runtime_relative = "scripts/capture_initial_state_1spe.py"
+    schema_relative = "schemas/baseline_1spe.schema.json"
+    manifest_relative = "release/baseline-scope-1spe.json"
+    historical_inputs = _committed_project_files(
+        git_root,
+        project_prefix,
+        capture_head,
+        (runtime_relative, schema_relative, manifest_relative),
+    )
+
+    with tempfile.TemporaryDirectory(
+        prefix=".baseline-1spe-history-"
+    ) as temporary_name:
+        temporary_root = Path(temporary_name)
+        runtime_path = temporary_root / "capture_initial_state_1spe.py"
+        schema_path = temporary_root / "baseline_1spe.schema.json"
+        manifest_path = temporary_root / "baseline-scope-1spe.json"
+        evidence_path = temporary_root / "trusted-test-evidence.json"
+        runtime_path.write_bytes(historical_inputs[runtime_relative])
+        schema_path.write_bytes(historical_inputs[schema_relative])
+        manifest_path.write_bytes(historical_inputs[manifest_relative])
+        evidence_path.write_bytes(_canonical_bytes(trusted_test_evidence))
+        for temporary_file in (
+            runtime_path,
+            schema_path,
+            manifest_path,
+            evidence_path,
+        ):
+            temporary_file.chmod(0o600)
+
+        return subprocess.run(
+            [
+                sys.executable,
+                "-I",
+                str(runtime_path),
+                "--historical-runtime",
+                "--historical-schema",
+                str(schema_path),
+                "--root",
+                str(root),
+                "--origin-ref",
+                origin_ref,
+                "--current-ref",
+                current_ref,
+                "--evidence-json",
+                str(evidence_path),
+                "--verify-existing",
+                OFFICIAL_JSON_RELATIVE,
+            ],
+            cwd=temporary_root,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+            env=_historical_runtime_environment(temporary_root),
+        )
+
+
 def validate_report_against_repository(
     report: dict[str, Any],
     *,
@@ -1839,6 +2096,7 @@ def validate_report_against_repository(
     origin_ref: str = DEFAULT_ORIGIN_REF,
     current_ref: str = DEFAULT_CURRENT_REF,
     artifact_paths: tuple[str, ...] = (),
+    schema_path: Path | None = None,
 ) -> None:
     """Recalculate release evidence from Git objects and trusted inputs."""
 
@@ -1864,11 +2122,12 @@ def validate_report_against_repository(
 
     manifest_relative = "release/baseline-scope-1spe.json"
     code_relative = "scripts/capture_initial_state_1spe.py"
+    schema_relative = "schemas/baseline_1spe.schema.json"
     committed_inputs = _committed_project_files(
         git_root,
         project_prefix,
         capture_head,
-        (manifest_relative, code_relative),
+        (manifest_relative, code_relative, schema_relative),
     )
     manifest_bytes = committed_inputs[manifest_relative]
     try:
@@ -1884,14 +2143,41 @@ def validate_report_against_repository(
         ) from error
     manifest = load_scope_manifest_from_value(manifest_value)
 
-    schema_path = Path(__file__).resolve().parents[1] / "schemas" / (
-        "baseline_1spe.schema.json"
+    if schema_path is None:
+        schema_path = Path(__file__).resolve().parents[1] / "schemas" / (
+            "baseline_1spe.schema.json"
+        )
+    _external_assert_equal(
+        "runtime de capture versionné",
+        Path(__file__).read_bytes(),
+        committed_inputs[code_relative],
+    )
+    _external_assert_equal(
+        "schéma de capture versionné",
+        schema_path.read_bytes(),
+        committed_inputs[schema_relative],
     )
     _validate_report(
         report,
         schema_path,
         manifest_bytes=manifest_bytes,
     )
+    if artifact_paths:
+        if report["capture_context"]["working_tree"] != {
+            "status": "clean",
+            "paths": [],
+        }:
+            raise CaptureError(
+                "validation externe : le working_tree officiel doit être "
+                "clean avec paths=[]"
+            )
+        _authenticate_versioned_artifacts(
+            report,
+            git_root=git_root,
+            project_prefix=project_prefix,
+            capture_head=capture_head,
+            artifact_paths=artifact_paths,
+        )
     expected = capture_repository(
         root=root,
         origin_ref=origin_ref,
@@ -1901,6 +2187,9 @@ def validate_report_against_repository(
         scope_manifest=manifest,
         scope_manifest_bytes=manifest_bytes,
     )
+    if artifact_paths:
+        for label in ("origin", "current"):
+            expected[label]["tags"] = report[label]["tags"]
     for field in (
         "schema_version",
         "status",
@@ -1916,67 +2205,6 @@ def validate_report_against_repository(
         report["capture_context"]["dirty_policy"],
         "record",
     )
-    if artifact_paths:
-        artifact_commit = _artifact_commit(
-            git_root,
-            project_prefix,
-            artifact_paths,
-        )
-        parents_raw = _run_git(
-            git_root,
-            ["show", "-s", "--format=%P", artifact_commit],
-        ).stdout
-        parents = _decode_utf8(
-            parents_raw,
-            description="parents du commit d'artefacts",
-        ).split()
-        if not parents or parents[0] != capture_head:
-            raise CaptureError(
-                "validation externe : capture_head_commit n'est pas le "
-                "parent du dernier commit d'artefacts"
-            )
-        committed_artifacts = _committed_project_files(
-            git_root,
-            project_prefix,
-            artifact_commit,
-            artifact_paths,
-        )
-        json_paths = [
-            path for path in artifact_paths if path.casefold().endswith(".json")
-        ]
-        if len(json_paths) != 1:
-            raise CaptureError(
-                "validation externe : un artefact JSON unique est requis"
-            )
-        try:
-            committed_report = json.loads(
-                _decode_utf8(
-                    committed_artifacts[json_paths[0]],
-                    description="artefact JSON versionné",
-                )
-            )
-        except json.JSONDecodeError as error:
-            raise CaptureError(
-                "validation externe : artefact JSON versionné invalide"
-            ) from error
-        _external_assert_equal(
-            "artefact JSON versionné",
-            report,
-            committed_report,
-        )
-        markdown_paths = [
-            path for path in artifact_paths if path.casefold().endswith(".md")
-        ]
-        if markdown_paths:
-            if len(markdown_paths) != 1:
-                raise CaptureError(
-                    "validation externe : un artefact Markdown unique est requis"
-                )
-            _external_assert_equal(
-                "artefact Markdown versionné",
-                committed_artifacts[markdown_paths[0]],
-                render_markdown(report).encode("utf-8"),
-            )
 
 def _validate_report(
     report: dict[str, Any],
@@ -2027,6 +2255,16 @@ def _parser() -> argparse.ArgumentParser:
         help="Vérifie en lecture seule la baseline JSON versionnée.",
     )
     parser.add_argument(
+        "--historical-runtime",
+        action="store_true",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--historical-schema",
+        type=Path,
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
         "--dirty-policy",
         choices=("record", "fail"),
         default="record",
@@ -2046,9 +2284,7 @@ def main(argv: list[str] | None = None) -> int:
                 raise CaptureError(
                     "--verify-existing est incompatible avec --json/--markdown"
                 )
-            canonical_relative = Path(
-                "validations/release-1spe/baseline.json"
-            )
+            canonical_relative = Path(OFFICIAL_JSON_RELATIVE)
             requested = _lexical_output(root, arguments.verify_existing)
             expected = root / canonical_relative
             if requested != expected:
@@ -2057,29 +2293,63 @@ def main(argv: list[str] | None = None) -> int:
                     "validations/release-1spe/baseline.json"
                 )
             _reject_unsafe_output_components(root, requested)
-            try:
-                report = json.loads(requested.read_text(encoding="utf-8"))
-            except (OSError, UnicodeError, json.JSONDecodeError) as error:
-                raise CaptureError(
-                    "baseline JSON existante inaccessible ou invalide"
-                ) from error
+            if not arguments.historical_runtime:
+                if arguments.historical_schema is not None:
+                    raise CaptureError(
+                        "--historical-schema est une option interne"
+                    )
+                if (
+                    arguments.origin_ref != DEFAULT_ORIGIN_REF
+                    or arguments.current_ref != DEFAULT_CURRENT_REF
+                    or arguments.evidence_json is not None
+                ):
+                    raise CaptureError(
+                        "la vérification officielle utilise exclusivement les "
+                        "références et preuves épinglées"
+                    )
+                completed = _dispatch_historical_verification(
+                    root=root,
+                    report_path=requested,
+                    trusted_test_evidence=DEFAULT_TEST_EVIDENCE,
+                )
+                sys.stdout.write(
+                    _decode_utf8(
+                        completed.stdout,
+                        description="sortie du runtime historique",
+                    )
+                )
+                sys.stderr.write(
+                    completed.stderr.decode("utf-8", errors="replace")
+                )
+                return completed.returncode
             if (
-                arguments.origin_ref != DEFAULT_ORIGIN_REF
-                or arguments.current_ref != DEFAULT_CURRENT_REF
-                or arguments.evidence_json is not None
+                arguments.historical_schema is None
+                or arguments.evidence_json is None
             ):
                 raise CaptureError(
-                    "la vérification officielle utilise exclusivement les "
-                    "références et preuves épinglées"
+                    "le runtime historique exige son schéma et ses preuves"
                 )
+            try:
+                report = json.loads(requested.read_text(encoding="utf-8"))
+                evidence = json.loads(
+                    arguments.evidence_json.read_text(encoding="utf-8")
+                )
+            except (OSError, UnicodeError, json.JSONDecodeError) as error:
+                raise CaptureError(
+                    "entrée du runtime historique inaccessible ou invalide"
+                ) from error
+            _require_supported_schema_version(report)
             validate_report_against_repository(
                 report,
                 root=root,
-                trusted_test_evidence=DEFAULT_TEST_EVIDENCE,
+                trusted_test_evidence=evidence,
+                origin_ref=arguments.origin_ref,
+                current_ref=arguments.current_ref,
                 artifact_paths=(
                     canonical_relative.as_posix(),
-                    "validations/release-1spe/baseline.md",
+                    OFFICIAL_MARKDOWN_RELATIVE,
                 ),
+                schema_path=arguments.historical_schema,
             )
             print(
                 json.dumps(
@@ -2092,6 +2362,13 @@ def main(argv: list[str] | None = None) -> int:
                 )
             )
             return 0
+        if (
+            arguments.historical_runtime
+            or arguments.historical_schema is not None
+        ):
+            raise CaptureError(
+                "les options historiques exigent --verify-existing"
+            )
         if (
             arguments.json_output is None
             or arguments.markdown_output is None
