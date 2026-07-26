@@ -255,6 +255,36 @@ def test_symlink_output_parent_is_rejected_without_touching_external_directory(
     assert "symbolique" in result.stderr.lower()
 
 
+def test_missing_parents_are_never_created_behind_a_nested_symlink(
+    tmp_path: Path,
+) -> None:
+    external = tmp_path / "external"
+    external.mkdir()
+    output_root = tmp_path / "output-root"
+    output_root.mkdir()
+    (output_root / "linked").symlink_to(external, target_is_directory=True)
+    output = output_root / "linked" / "created" / "nested" / "programme.txt"
+
+    result = run_extractor(SOURCE, output, tmp_path)
+
+    assert result.returncode == 2
+    assert not (external / "created").exists()
+    assert "Traceback" not in result.stderr
+
+
+def test_symlink_loop_output_is_a_controlled_failure_without_traceback(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "programme.txt"
+    output.symlink_to(output.name)
+
+    result = run_extractor(SOURCE, output, tmp_path)
+
+    assert result.returncode == 2
+    assert output.is_symlink()
+    assert "Traceback" not in result.stderr
+
+
 def test_source_symlink_is_allowed_only_at_the_registered_lexical_path(
     tmp_path: Path,
 ) -> None:

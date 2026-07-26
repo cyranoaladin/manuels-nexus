@@ -545,6 +545,21 @@ def test_every_required_item_is_assigned_once_or_declared_distributed(matrix):
 def test_every_transversal_has_introduction_reinvestment_and_reference(matrix):
     assert matrix.incomplete_transversals == []
 
+def test_every_release_gated_objective_has_targets_in_both_variants(
+    programme, matrix
+):
+    required = {
+        row["id"] for row in programme["objective_coverage"]
+        if row["release_gate"] is True
+    }
+    assert matrix.release_gated_objective_ids == required
+    for objective_id in required:
+        row = matrix.objective(objective_id)
+        assert row["manual_object_ids"]
+        assert row["assigned_chapters"]
+        assert row["student_proof_object_ids"]
+        assert row["teacher_proof_object_ids"]
+
 def test_all_ten_contracts_match_schema(contracts, release_schema):
     assert len(contracts) == 10
     for contract in contracts:
@@ -562,7 +577,12 @@ Expected: FAIL tant que le contrôleur et la matrice n'existent pas.
 Run: `.venv/bin/python scripts/check_contract_coverage.py --programme referentiel/programme_1SPE_2026.json --output validations/release-1spe/contract-coverage.json`
 
 Expected: code 0, 100 % des items `mandatory_content|prescribed_teaching`
-affectés, aucun doublon injustifié et tous les transversaux structurés.
+affectés, aucun doublon injustifié et tous les transversaux structurés. Le
+contrôleur exige aussi 100 % des entrées `objective_coverage` dont
+`release_gate=true` : chacune possède des `manual_object_ids`, des
+`assigned_chapters` et des objets de preuve distinctement planifiés pour les
+ouvrages élève et professeur. Une cible manquante dans une seule variante est
+bloquante.
 
 - [ ] **Step 4: exécuter le test et commit**
 
@@ -2427,6 +2447,22 @@ def test_mandatory_programme_is_fully_covered(matrix):
     assert matrix.coverage("prescribed_teaching") == 1.0
     assert matrix.missing_mandatory == []
 
+def test_release_gated_objectives_have_explicit_proofs_in_both_books(
+    programme, matrix
+):
+    required = {
+        row["id"] for row in programme["objective_coverage"]
+        if row["release_gate"] is True
+    }
+    rows = {row["objective_id"]: row for row in matrix["objective_coverage"]}
+    assert rows.keys() == required
+    for objective_id in required:
+        row = rows[objective_id]
+        assert row["manual_object_ids"]
+        assert row["assigned_chapters"]
+        assert row["student_proofs"] and row["student_folios"]
+        assert row["teacher_proofs"] and row["teacher_folios"]
+
 def test_release_id_binds_commit_and_hashes(manifest):
     assert manifest["release_id"] == "1SPE-RC1"
     assert manifest["git_commit"]
@@ -2441,11 +2477,20 @@ Expected: FAIL car la matrice finale et RC1 n'existent pas.
 
 - [ ] **Step 3: implémenter et construire la matrice B.O.**
 
-Chaque ligne contient `obligation_class`, `bo_page`, `bo_quote`, `manual_object_ids`, `student_folios`, `teacher_folios`, `verdict` et preuves. Les options valent `included`, `excluded_with_rationale` ou `not_applicable`.
+Chaque ligne d'item contient `obligation_class`, `bo_page`, `bo_quote`,
+`manual_object_ids`, `student_folios`, `teacher_folios`, `verdict` et preuves.
+La matrice contient en outre 100 % des entrées `objective_coverage` dont
+`release_gate=true`. Pour chacune, elle exige `manual_object_ids`,
+`assigned_chapters`, des preuves explicites élève et professeur, ainsi que
+`student_folios` et `teacher_folios` non vides. Une preuve générique, un folio
+dans une seule variante ou un simple identifiant de contrat ne satisfait pas ce
+gate. Les options valent `included`, `excluded_with_rationale` ou
+`not_applicable`.
 
 Run: `.venv/bin/python scripts/build_bo_matrix.py --programme referentiel/programme_1SPE_2026.json --student-folios build/MANUEL_1SPE/folios-eleve.json --teacher-folios build/MANUEL_1SPE/folios-professeur.json --json validations/release-1spe/matrice-bo.json --csv validations/release-1spe/matrice-bo.csv`
 
-Expected: code 0, schéma valide et 100 % de couverture obligatoire.
+Expected: code 0, schéma valide, 100 % de couverture obligatoire des items et
+100 % des objectifs à gate prouvés dans les deux ouvrages.
 
 - [ ] **Step 4: agréger les rapports**
 
@@ -2694,6 +2739,12 @@ def test_no_known_digital_defect_can_pass(release):
     release["proofs"][0]["status"] = "needs_fix"
     assert final_gate(release, stage="digital").digital_candidate == "needs_fix"
 
+def test_digital_gate_requires_both_folio_sets_for_every_gated_objective(
+    release
+):
+    release["bo_matrix"]["objective_coverage"][0]["teacher_folios"] = []
+    assert final_gate(release, stage="digital").digital_candidate == "needs_fix"
+
 def test_immutable_digital_gate_does_not_claim_external_milestones(report):
     assert report["scope"] == "digital_immutable"
     assert "printer_accepted" not in report["statuses"]
@@ -2730,7 +2781,11 @@ Expected: FAIL car les trois schémas et le gate n'existent pas.
 - [ ] **Step 3: implémenter le gate numérique et les registres dynamiques**
 
 Le mode `digital` vérifie programme, preuves, commit, sommes, deux variantes,
-couvertures, accessibilité, prépresse local, pages et mentions légales. Son
+couvertures, accessibilité, prépresse local, pages et mentions légales. Il
+recalcule aussi le gate sur 100 % des entrées `objective_coverage` dont
+`release_gate=true` : `manual_object_ids`, `assigned_chapters`, preuves
+explicites dans les deux variantes, `student_folios` et `teacher_folios` non
+vides sont obligatoires. Toute lacune force `digital_candidate=needs_fix`. Son
 rapport immuable ne prétend jamais connaître le paquet imprimeur. Les modes
 `physical`, `publication` et `legal-deposit` mettent à jour des preuves
 distinctes, toujours liées à `release_id` et au SHA-256 du manifeste courant.
@@ -2843,14 +2898,16 @@ Expected: refus si le worktree est sale ; sinon l'arborescence RC2 contient
 exactement les deux PDF écran, deux intérieurs, deux couvertures de contrôle,
 six rapports dont `final-gate.json`, le manifeste source, `manifest.json` et
 `SHA256SUMS` listés ci-dessus. Le gate porte `scope=digital_immutable` et
-`digital_candidate=certified`, sans statut physique.
+`digital_candidate=certified`, sans statut physique, uniquement si la matrice
+d'objectifs satisfait les deux variantes.
 
 - [ ] **Step 9: vérifier intégralement RC2 avant promotion**
 
 Run: `.venv/bin/python scripts/check_release_candidate.py build/release/1SPE-RC2 --require-head && make release-test && make check-latex && .venv/bin/python -m pytest tests/test_final_release_gate.py tests/test_release_candidate.py -q`
 
 Expected: tous les artefacts exacts présents, empreintes correctes, commit égal
-à `HEAD`, zéro preuve périmée et suite complète verte.
+à `HEAD`, zéro preuve périmée, gate bilatéral des objectifs à 100 % et suite
+complète verte.
 
 - [ ] **Step 10: promouvoir RC2 seulement après les contrôles**
 

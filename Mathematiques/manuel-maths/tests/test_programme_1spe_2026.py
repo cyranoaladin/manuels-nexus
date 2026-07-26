@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import Counter
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -26,6 +27,13 @@ REGISTRY_PATH = ROOT / "sources" / "registry.yaml"
 COMPLIANCE_PATH = ROOT / "referentiel" / "CONFORMITE_BO2026.md"
 SOURCE_PATH = ROOT / "sources" / "BO2026_1SPE_specialite.pdf"
 TEXT_PATH = ROOT / "sources" / "txt" / "BO2026_1SPE_specialite.txt"
+PLAN_PATH = (
+    ROOT
+    / "docs"
+    / "superpowers"
+    / "plans"
+    / "2026-07-26-finalisation-manuel-1spe-bat.md"
+)
 EXPECTED_PDF_SHA256 = (
     "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
 )
@@ -200,6 +208,325 @@ def swap_chapter_assignments(value: dict) -> None:
     )
 
 
+def swap_citation_anchors(value: dict) -> None:
+    fields = (
+        "bo_page",
+        "bo_quote",
+        "bo_section",
+        "bo_occurrence",
+        "bo_offset",
+    )
+    first = value["items"][0]
+    second = value["items"][1]
+    for field in fields:
+        first[field], second[field] = second[field], first[field]
+
+
+def run_checker(
+    tmp_path: Path,
+    *,
+    env: dict[str, str] | None = None,
+    timeout: float | None = None,
+    **overrides: Path,
+) -> subprocess.CompletedProcess[str]:
+    paths = {
+        "programme": PROGRAMME_PATH,
+        "schema": SCHEMA_PATH,
+        "source": SOURCE_PATH,
+        "text": TEXT_PATH,
+        "attestation": ATTESTATION_PATH,
+        "attestation-schema": ATTESTATION_SCHEMA_PATH,
+        "review": REVIEW_PATH,
+        "registry": REGISTRY_PATH,
+        "compliance": COMPLIANCE_PATH,
+    }
+    paths.update(overrides)
+    command = [sys.executable, str(CHECKER_PATH)]
+    for option, path in paths.items():
+        command.extend((f"--{option}", str(path)))
+    return subprocess.run(
+        command,
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+        env=env,
+        timeout=timeout,
+    )
+
+
+def write_refreshed_attestation(
+    tmp_path: Path,
+    *,
+    programme_path: Path = PROGRAMME_PATH,
+    compliance_path: Path = COMPLIANCE_PATH,
+) -> Path:
+    attestation = json.loads(ATTESTATION_PATH.read_text(encoding="utf-8"))
+    attestation["programme_sha256"] = hashlib.sha256(
+        programme_path.read_bytes()
+    ).hexdigest()
+    attestation["compliance_sha256"] = hashlib.sha256(
+        compliance_path.read_bytes()
+    ).hexdigest()
+    path = tmp_path / "attestation.json"
+    path.write_text(
+        json.dumps(attestation, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return path
+
+
+def test_checker_never_certifies_a_two_line_temporary_review(tmp_path: Path) -> None:
+    review = tmp_path / "review.md"
+    review.write_text(
+        "Statut : `approved`\n"
+        "SHA-256 du référentiel revu : "
+        f"`{hashlib.sha256(PROGRAMME_PATH.read_bytes()).hexdigest()}`\n",
+        encoding="utf-8",
+    )
+
+    result = run_checker(tmp_path, review=review)
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "review_required"
+    assert "review" in report["noncanonical_inputs"]
+    assert report["review_errors"]
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        swap_content_obligation_classes,
+        swap_chapter_assignments,
+        swap_citation_anchors,
+    ],
+)
+def test_checker_never_certifies_coordinated_semantic_and_review_mutations(
+    tmp_path: Path,
+    mutation,
+) -> None:
+    programme = json.loads(PROGRAMME_PATH.read_text(encoding="utf-8"))
+    mutation(programme)
+    altered_programme = tmp_path / "programme.json"
+    altered_programme.write_text(
+        json.dumps(programme, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    attestation = write_refreshed_attestation(
+        tmp_path,
+        programme_path=altered_programme,
+    )
+    review_text = REVIEW_PATH.read_text(encoding="utf-8")
+    review_text = review_text.replace(
+        hashlib.sha256(PROGRAMME_PATH.read_bytes()).hexdigest(),
+        hashlib.sha256(altered_programme.read_bytes()).hexdigest(),
+    ).replace(
+        hashlib.sha256(ATTESTATION_PATH.read_bytes()).hexdigest(),
+        hashlib.sha256(attestation.read_bytes()).hexdigest(),
+    )
+    review = tmp_path / "review.md"
+    review.write_text(review_text, encoding="utf-8")
+
+    result = run_checker(
+        tmp_path,
+        programme=altered_programme,
+        attestation=attestation,
+        review=review,
+    )
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "review_required"
+    assert {"programme", "attestation", "review"} <= set(
+        report["noncanonical_inputs"]
+    )
+
+
+def test_checker_never_certifies_refreshed_compliance_without_new_review(
+    tmp_path: Path,
+) -> None:
+    compliance = tmp_path / "CONFORMITE_BO2026.md"
+    compliance.write_text(
+        COMPLIANCE_PATH.read_text(encoding="utf-8") + "\nAltération.\n",
+        encoding="utf-8",
+    )
+    attestation = write_refreshed_attestation(
+        tmp_path,
+        compliance_path=compliance,
+    )
+
+    result = run_checker(
+        tmp_path,
+        compliance=compliance,
+        attestation=attestation,
+    )
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "review_required"
+    assert {"compliance", "attestation"} <= set(report["noncanonical_inputs"])
+    assert report["review_errors"]
+
+
+@pytest.mark.parametrize(
+    ("option", "report_name", "canonical"),
+    [
+        ("programme", "programme", PROGRAMME_PATH),
+        ("schema", "schema", SCHEMA_PATH),
+        ("source", "source", SOURCE_PATH),
+        ("text", "text", TEXT_PATH),
+        ("attestation", "attestation", ATTESTATION_PATH),
+        (
+            "attestation-schema",
+            "attestation_schema",
+            ATTESTATION_SCHEMA_PATH,
+        ),
+        ("review", "review", REVIEW_PATH),
+        ("registry", "registry", REGISTRY_PATH),
+        ("compliance", "compliance", COMPLIANCE_PATH),
+    ],
+)
+def test_checker_never_certifies_a_noncanonical_input_path(
+    tmp_path: Path,
+    option: str,
+    report_name: str,
+    canonical: Path,
+) -> None:
+    copied = tmp_path / canonical.name
+    copied.write_bytes(canonical.read_bytes())
+
+    result = run_checker(tmp_path, **{option: copied})
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "review_required"
+    assert report["noncanonical_inputs"] == [report_name]
+
+
+def test_noncanonical_input_is_review_required_even_on_early_read_error(
+    tmp_path: Path,
+) -> None:
+    missing = tmp_path / "missing-programme.json"
+
+    result = run_checker(tmp_path, programme=missing)
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "review_required"
+    assert report["noncanonical_inputs"] == ["programme"]
+    assert report["schema_errors"]
+
+
+def write_fake_pdftotext(tmp_path: Path, body: str) -> tuple[Path, dict[str, str]]:
+    fake_bin = tmp_path / "fake-bin"
+    fake_bin.mkdir()
+    fake = fake_bin / "pdftotext"
+    fake.write_text("#!/bin/sh\n" + body, encoding="utf-8")
+    fake.chmod(0o755)
+    env = os.environ.copy()
+    env["PATH"] = str(fake_bin)
+    return fake, env
+
+
+def test_checker_rejects_pdftotext_below_minimum_poppler_version(
+    tmp_path: Path,
+) -> None:
+    _, env = write_fake_pdftotext(
+        tmp_path,
+        "if [ \"$1\" = \"-v\" ]; then\n"
+        "  echo 'pdftotext version 23.01.0' >&2\n"
+        "  exit 0\n"
+        "fi\n"
+        "exec /usr/bin/pdftotext \"$@\"\n",
+    )
+
+    result = run_checker(tmp_path, env=env)
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "needs_fix"
+    assert any("version Poppler" in error for error in report["errors"])
+
+
+def test_checker_bounds_a_blocking_pdftotext_version_probe(tmp_path: Path) -> None:
+    _, env = write_fake_pdftotext(
+        tmp_path,
+        "if [ \"$1\" = \"-v\" ]; then\n"
+        "  /bin/sleep 10\n"
+        "  exit 0\n"
+        "fi\n"
+        "exec /usr/bin/pdftotext \"$@\"\n",
+    )
+
+    result = run_checker(tmp_path, env=env, timeout=4)
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "needs_fix"
+    assert any("version" in error for error in report["errors"])
+
+
+def test_checker_bounds_a_blocking_pdftotext_extraction(tmp_path: Path) -> None:
+    _, env = write_fake_pdftotext(
+        tmp_path,
+        "if [ \"$1\" = \"-v\" ]; then\n"
+        "  echo 'pdftotext version 24.02.0' >&2\n"
+        "  exit 0\n"
+        "fi\n"
+        "/bin/sleep 10\n",
+    )
+
+    result = run_checker(tmp_path, env=env, timeout=4)
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "needs_fix"
+    assert any("pdftotext" in error for error in report["errors"])
+
+
+def test_checker_rejects_a_fake_pdftotext_from_path(tmp_path: Path) -> None:
+    fake_bin = tmp_path / "fake-bin"
+    fake_bin.mkdir()
+    (fake_bin / "pdftotext").symlink_to("/bin/echo")
+    env = os.environ.copy()
+    env["PATH"] = str(fake_bin)
+
+    result = run_checker(tmp_path, env=env)
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "needs_fix"
+    assert any("version" in error for error in report["errors"])
+
+
+def test_checker_uses_private_source_snapshot_and_allowlisted_environment(
+    tmp_path: Path,
+) -> None:
+    observed_input = tmp_path / "observed-input.txt"
+    observed_env = tmp_path / "observed-env.txt"
+    _, env = write_fake_pdftotext(
+        tmp_path,
+        "if [ \"$1\" = \"-v\" ]; then\n"
+        "  echo 'pdftotext version 24.02.0' >&2\n"
+        "  exit 0\n"
+        "fi\n"
+        f"printf '%s' \"$2\" > '{observed_input}'\n"
+        f"printf '%s|%s|%s|%s' \"$LANG\" \"$LC_ALL\" \"$TZ\" "
+        f"\"$UNTRUSTED_MARKER\" > '{observed_env}'\n"
+        "exec /usr/bin/pdftotext \"$@\"\n",
+    )
+    env["UNTRUSTED_MARKER"] = "must-not-leak"
+
+    result = run_checker(tmp_path, env=env)
+
+    assert result.returncode == 0, result.stderr
+    snapshot = Path(observed_input.read_text(encoding="utf-8"))
+    assert snapshot != SOURCE_PATH.resolve()
+    assert not snapshot.exists()
+    assert observed_env.read_text(encoding="utf-8") == "C|C|UTC|"
+
+
 def test_schema_is_closed_recursively(schema: dict) -> None:
     Draft202012Validator.check_schema(schema)
 
@@ -297,7 +624,8 @@ def test_checker_requires_review_when_the_compliance_document_changes(
     report = json.loads(result.stdout)
     assert report["status"] == "review_required"
     assert report["attestation_errors"] == ["compliance_sha256"]
-    assert report["review_errors"] == []
+    assert report["review_errors"]
+    assert set(report["noncanonical_inputs"]) == {"compliance", "review"}
 
 
 def test_programme_matches_closed_schema(programme: dict, schema: dict) -> None:
@@ -409,6 +737,30 @@ def test_objective_prescriptions_have_explicit_machine_readable_coverage(
             set(by_id[item_id]["assigned_chapters"]) & expected["assigned_chapters"]
             for item_id in expected["covered_by_item_ids"]
         )
+
+
+def test_release_plan_gates_every_objective_in_both_manual_variants() -> None:
+    plan = PLAN_PATH.read_text(encoding="utf-8")
+    task_4d = plan.split("### Task 4D:", 1)[1].split("### Task 5:", 1)[0]
+    task_18 = plan.split("### Task 18:", 1)[1].split("### Task 19:", 1)[0]
+    task_20 = plan.split("### Task 20:", 1)[1]
+    required_scope = (
+        "100 % des entrées `objective_coverage` dont `release_gate=true`"
+    )
+
+    assert required_scope in " ".join(task_4d.split())
+    assert "`manual_object_ids`" in task_4d
+    assert "`assigned_chapters`" in task_4d
+    assert required_scope in " ".join(task_18.split())
+    assert (
+        "`student_folios` et `teacher_folios` non vides"
+        in " ".join(task_18.split())
+    )
+    assert required_scope in " ".join(task_20.split())
+    assert (
+        "`student_folios` et `teacher_folios` non vides"
+        in " ".join(task_20.split())
+    )
 
 
 @pytest.mark.parametrize(
@@ -604,7 +956,8 @@ def test_attestation_blocks_semantic_mutations_even_when_counts_are_preserved(
 
     assert result.returncode == 2
     report = json.loads(result.stdout)
-    assert report["status"] == "stale"
+    assert report["status"] == "review_required"
+    assert report["noncanonical_inputs"] == ["programme"]
     assert report["attestation_errors"]
 
 

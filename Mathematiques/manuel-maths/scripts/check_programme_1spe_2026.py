@@ -7,17 +7,42 @@ import argparse
 from collections import Counter
 import hashlib
 import json
+import os
 from pathlib import Path
 import re
-import shutil
-import subprocess
 import sys
+import tempfile
 from typing import Any
 
 from jsonschema import Draft202012Validator, FormatChecker
 
+SCRIPT_DIRECTORY = Path(__file__).resolve().parent
+if os.fspath(SCRIPT_DIRECTORY) not in sys.path:
+    sys.path.insert(0, os.fspath(SCRIPT_DIRECTORY))
+
+from extract_official_source import (
+    ExtractionError,
+    load_source_entry,
+    open_registered_source,
+    resolve_pdftotext,
+    run_pdftotext,
+    snapshot_source,
+)
+
 
 ROOT = Path(__file__).resolve().parents[1]
+APPROVED_PROGRAMME_SHA256 = (
+    "79357aebc60c2c53d82c62760175c97bfb8069c82b3300c52e3fe438b8faf91a"
+)
+APPROVED_SCHEMA_SHA256 = (
+    "61e3c2c4a7093c5c38af1d6c3fd2a791804d9d2980e616c860dc7a36242e1140"
+)
+APPROVED_COMPLIANCE_SHA256 = (
+    "66ba2770e23cd8fe1f1c5bd44a6cfff5190af54e5a5e6b7a93995fc963e00c8a"
+)
+APPROVED_ATTESTATION_SHA256 = (
+    "4d8b6bbc670c3387dd9684f26e294f4079317c645ec9277a259cedd28ba5a071"
+)
 EXPECTED_PDF_SHA256 = (
     "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
 )
@@ -118,6 +143,33 @@ SECTION_HEADINGS = {
     "Expérimentations",
     "Variables aléatoires réelles",
 }
+CANONICAL_PATHS = {
+    "programme": ROOT / "referentiel" / "programme_1SPE_2026.json",
+    "schema": ROOT / "schemas" / "programme_1spe_2026.schema.json",
+    "source": ROOT / "sources" / "BO2026_1SPE_specialite.pdf",
+    "text": ROOT / "sources" / "txt" / "BO2026_1SPE_specialite.txt",
+    "attestation": (
+        ROOT
+        / "validations"
+        / "release-1spe"
+        / "programme-1spe-2026.attestation.json"
+    ),
+    "attestation_schema": (
+        ROOT / "schemas" / "programme_1spe_2026.attestation.schema.json"
+    ),
+    "review": ROOT / "validations" / "release-1spe" / "revue-programme.md",
+    "registry": ROOT / "sources" / "registry.yaml",
+    "compliance": ROOT / "referentiel" / "CONFORMITE_BO2026.md",
+}
+APPROVED_ASSETS = {
+    "programme": (CANONICAL_PATHS["programme"], APPROVED_PROGRAMME_SHA256),
+    "schema": (CANONICAL_PATHS["schema"], APPROVED_SCHEMA_SHA256),
+    "compliance": (CANONICAL_PATHS["compliance"], APPROVED_COMPLIANCE_SHA256),
+    "attestation": (
+        CANONICAL_PATHS["attestation"],
+        APPROVED_ATTESTATION_SHA256,
+    ),
+}
 
 
 def sha256(path: Path) -> str:
@@ -136,6 +188,39 @@ def canonical_sha256(value: object) -> str:
         separators=(",", ":"),
     ).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
+
+
+def same_resolved_path(candidate: Path, canonical: Path) -> bool:
+    try:
+        return candidate.resolve(strict=True) == canonical.resolve(strict=True)
+    except (OSError, RuntimeError):
+        return False
+
+
+def approved_asset_errors() -> list[str]:
+    findings: list[str] = []
+    for name, (path, expected_hash) in APPROVED_ASSETS.items():
+        try:
+            actual_hash = sha256(path)
+        except OSError as exc:
+            findings.append(f"{name}: actif approuvé inaccessible : {exc}")
+            continue
+        if actual_hash != expected_hash:
+            findings.append(
+                f"{name}: SHA-256 approuvé {expected_hash}, obtenu {actual_hash}"
+            )
+    return findings
+
+
+def unique_review_value(
+    review_text: str,
+    label_pattern: str,
+) -> str | None:
+    matches = re.findall(
+        rf"{label_pattern}\s*:\s*`([0-9a-f]{{64}})`",
+        review_text,
+    )
+    return matches[0] if len(matches) == 1 else None
 
 
 def normalize_whitespace(value: str) -> str:
@@ -218,23 +303,18 @@ def has_valid_citation_anchor(
     return bool(preceding_sections) and preceding_sections[-1] == expected_section
 
 
-def extract_pdf_text(source: Path) -> bytes:
-    executable = shutil.which("pdftotext")
-    if executable is None:
-        raise RuntimeError("pdftotext absent")
-    result = subprocess.run(
-        [str(Path(executable).absolute()), "-layout", str(source), "-"],
-        cwd=source.parent,
-        stdin=subprocess.DEVNULL,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-    )
-    if result.returncode != 0:
-        diagnostic = result.stderr.decode("utf-8", errors="replace").strip()
-        raise RuntimeError(f"pdftotext code {result.returncode}: {diagnostic}")
-    decoded = result.stdout.decode("utf-8")
-    return decoded.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+def extract_pdf_text(source: Path, registry: Path) -> bytes:
+    entry = load_source_entry(registry)
+    opened_source = open_registered_source(source, entry)
+    try:
+        executable = resolve_pdftotext()
+        with tempfile.TemporaryDirectory(
+            prefix="nexus-bo2026-check-"
+        ) as raw_directory:
+            snapshot = snapshot_source(opened_source, Path(raw_directory))
+            return run_pdftotext(executable, snapshot)
+    finally:
+        os.close(opened_source.descriptor)
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -268,6 +348,23 @@ def check(
     registry_path: Path,
     compliance_path: Path,
 ) -> dict[str, Any]:
+    supplied_paths = {
+        "programme": programme_path,
+        "schema": schema_path,
+        "source": source_path,
+        "text": text_path,
+        "attestation": attestation_path,
+        "attestation_schema": attestation_schema_path,
+        "review": review_path,
+        "registry": registry_path,
+        "compliance": compliance_path,
+    }
+    noncanonical_inputs = sorted(
+        name
+        for name, path in supplied_paths.items()
+        if not same_resolved_path(path, CANONICAL_PATHS[name])
+    )
+    approval_errors = approved_asset_errors()
     errors: list[str] = []
     schema_errors: list[str] = []
     duplicate_ids: list[str] = []
@@ -286,7 +383,11 @@ def check(
         schema = load_json(schema_path)
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         return {
-            "status": "needs_fix",
+            "status": (
+                "review_required"
+                if noncanonical_inputs or approval_errors
+                else "needs_fix"
+            ),
             "item_count": 0,
             "source_sha256": None,
             "text_sha256": None,
@@ -304,6 +405,8 @@ def check(
             "objective_coverage_errors": [],
             "attestation_errors": [],
             "review_errors": [],
+            "noncanonical_inputs": noncanonical_inputs,
+            "approved_asset_errors": approval_errors,
             "errors": ["référentiel ou schéma illisible"],
         }
 
@@ -329,6 +432,7 @@ def check(
 
     try:
         attestation = load_json(attestation_path)
+        attestation_hash = sha256(attestation_path)
         attestation_schema = load_json(attestation_schema_path)
         Draft202012Validator.check_schema(attestation_schema)
         attestation_schema_errors = sorted(
@@ -342,9 +446,11 @@ def check(
         )
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         attestation = {}
+        attestation_hash = None
         attestation_errors.append(f"attestation illisible : {exc}")
     except Exception as exc:
         attestation = {}
+        attestation_hash = None
         attestation_errors.append(f"schéma attestation invalide : {exc}")
 
     try:
@@ -387,8 +493,8 @@ def check(
 
     if source_hash == EXPECTED_PDF_SHA256 and text_hash is not None:
         try:
-            regenerated = extract_pdf_text(source_path)
-        except (RuntimeError, UnicodeError, OSError) as exc:
+            regenerated = extract_pdf_text(source_path, registry_path)
+        except (ExtractionError, UnicodeError, OSError) as exc:
             errors.append(f"recoupement PDF/TXT impossible : {exc}")
         else:
             if regenerated != text_bytes:
@@ -600,22 +706,55 @@ def check(
     except (OSError, UnicodeError) as exc:
         review_errors.append(f"rapport de revue illisible : {exc}")
     else:
-        status_match = re.search(
+        status_matches = re.findall(
             r"(?m)^Statut\s*:\s*`([^`]+)`\s*$",
             review_text,
         )
-        reviewed_sha_match = re.search(
-            r"SHA-256 du référentiel revu\s*:\s*"
-            r"`([0-9a-f]{64})`",
-            review_text,
-        )
-        if status_match is None or status_match.group(1) != "approved":
+        if status_matches != ["approved"]:
             review_errors.append("statut de revue non approuvé")
-        if (
-            reviewed_sha_match is None
-            or reviewed_sha_match.group(1) != programme_hash
-        ):
-            review_errors.append("rapport de revue périmé pour le référentiel courant")
+        reviewed_assets = {
+            "référentiel": (
+                unique_review_value(
+                    review_text,
+                    r"SHA-256 du référentiel revu",
+                ),
+                programme_hash,
+                APPROVED_PROGRAMME_SHA256,
+            ),
+            "schéma": (
+                unique_review_value(
+                    review_text,
+                    r"SHA-256 du schéma revu",
+                ),
+                schema_hash,
+                APPROVED_SCHEMA_SHA256,
+            ),
+            "documentation": (
+                unique_review_value(
+                    review_text,
+                    r"SHA-256 de la documentation revue",
+                ),
+                compliance_hash,
+                APPROVED_COMPLIANCE_SHA256,
+            ),
+            "attestation": (
+                unique_review_value(
+                    review_text,
+                    r"SHA-256 de l[’']attestation revue",
+                ),
+                attestation_hash,
+                APPROVED_ATTESTATION_SHA256,
+            ),
+        }
+        for name, (reviewed_hash, active_hash, approved_hash) in reviewed_assets.items():
+            if reviewed_hash is None:
+                review_errors.append(
+                    f"empreinte de revue absente ou ambiguë pour {name}"
+                )
+            elif reviewed_hash != active_hash or reviewed_hash != approved_hash:
+                review_errors.append(
+                    f"rapport de revue périmé pour {name}"
+                )
 
     all_findings = (
         errors
@@ -633,8 +772,11 @@ def check(
         + objective_coverage_errors
         + attestation_errors
         + review_errors
+        + approval_errors
     )
-    if attestation_errors == ["compliance_sha256"]:
+    if noncanonical_inputs or approval_errors:
+        status = "review_required"
+    elif attestation_errors == ["compliance_sha256"]:
         status = "review_required"
     elif attestation_errors:
         status = "stale"
@@ -673,6 +815,8 @@ def check(
         "objective_coverage_errors": sorted(set(objective_coverage_errors)),
         "attestation_errors": sorted(set(attestation_errors)),
         "review_errors": sorted(set(review_errors)),
+        "noncanonical_inputs": noncanonical_inputs,
+        "approved_asset_errors": approval_errors,
         "errors": errors,
     }
 

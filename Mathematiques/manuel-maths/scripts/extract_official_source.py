@@ -26,8 +26,8 @@ EXPECTED_TEXT_SHA256 = (
 )
 MINIMUM_POPPLER_VERSION = (24, 2)
 PROCESS_ENV = {"LANG": "C", "LC_ALL": "C", "TZ": "UTC"}
-VERSION_TIMEOUT_SECONDS = 10
-EXTRACTION_TIMEOUT_SECONDS = 60
+VERSION_TIMEOUT_SECONDS = 2
+EXTRACTION_TIMEOUT_SECONDS = 2
 
 
 class ExtractionError(RuntimeError):
@@ -218,12 +218,6 @@ def run_pdftotext(executable: Path, snapshot: Path) -> bytes:
 
 def open_output_directory(output: Path) -> tuple[Path, int]:
     output = lexical_absolute(output)
-    try:
-        output.parent.mkdir(parents=True, exist_ok=True)
-    except OSError as exc:
-        raise ExtractionError(
-            f"répertoire de sortie inaccessible : {output.parent}: {exc}"
-        ) from exc
     flags = (
         os.O_RDONLY
         | getattr(os, "O_DIRECTORY", 0)
@@ -233,7 +227,22 @@ def open_output_directory(output: Path) -> tuple[Path, int]:
     descriptor = os.open("/", flags)
     try:
         for component in output.parent.parts[1:]:
-            next_descriptor = os.open(component, flags, dir_fd=descriptor)
+            try:
+                next_descriptor = os.open(
+                    component,
+                    flags,
+                    dir_fd=descriptor,
+                )
+            except FileNotFoundError:
+                try:
+                    os.mkdir(component, mode=0o755, dir_fd=descriptor)
+                except FileExistsError:
+                    pass
+                next_descriptor = os.open(
+                    component,
+                    flags,
+                    dir_fd=descriptor,
+                )
             os.close(descriptor)
             descriptor = next_descriptor
     except OSError as exc:
@@ -249,7 +258,7 @@ def check_output_alias(
     directory_descriptor: int,
     source: OpenSource,
 ) -> os.stat_result | None:
-    if output.resolve(strict=False) == source.resolved_path:
+    if lexical_absolute(output) == source.resolved_path:
         raise ExtractionError("la sortie ne peut pas remplacer la source")
     try:
         output_stat = os.stat(
