@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-reussite.tn/schemas/programme_1spe_2026.attestation.schema.json",
+  "title": "Attestation machine du référentiel 1SPE 2026",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "attestation_version",
+    "programme_path",
+    "programme_sha256",
+    "schema_path",
+    "schema_sha256",
+    "source_pdf_path",
+    "source_pdf_sha256",
+    "source_text_path",
+    "source_text_sha256",
+    "registry_path",
+    "registry_sha256",
+    "compliance_path",
+    "compliance_sha256",
+    "review_report_path",
+    "required_review_status",
+    "item_count",
+    "item_ids_sha256",
+    "matrix_sha256"
+  ],
+  "properties": {
+    "attestation_version": {"const": 1},
+    "programme_path": {
+      "const": "referentiel/programme_1SPE_2026.json"
+    },
+    "programme_sha256": {"$ref": "#/$defs/sha256"},
+    "schema_path": {
+      "const": "schemas/programme_1spe_2026.schema.json"
+    },
+    "schema_sha256": {"$ref": "#/$defs/sha256"},
+    "source_pdf_path": {
+      "const": "sources/BO2026_1SPE_specialite.pdf"
+    },
+    "source_pdf_sha256": {
+      "const": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
+    },
+    "source_text_path": {
+      "const": "sources/txt/BO2026_1SPE_specialite.txt"
+    },
+    "source_text_sha256": {
+      "const": "4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df"
+    },
+    "registry_path": {"const": "sources/registry.yaml"},
+    "registry_sha256": {"$ref": "#/$defs/sha256"},
+    "compliance_path": {
+      "const": "referentiel/CONFORMITE_BO2026.md"
+    },
+    "compliance_sha256": {"$ref": "#/$defs/sha256"},
+    "review_report_path": {
+      "const": "validations/release-1spe/revue-programme.md"
+    },
+    "required_review_status": {"const": "approved"},
+    "item_count": {"const": 175},
+    "item_ids_sha256": {"$ref": "#/$defs/sha256"},
+    "matrix_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

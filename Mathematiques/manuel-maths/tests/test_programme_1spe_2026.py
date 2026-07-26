@@ -7,7 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 import pytest
 
 
@@ -15,6 +15,15 @@ ROOT = Path(__file__).resolve().parents[1]
 PROGRAMME_PATH = ROOT / "referentiel" / "programme_1SPE_2026.json"
 SCHEMA_PATH = ROOT / "schemas" / "programme_1spe_2026.schema.json"
 CHECKER_PATH = ROOT / "scripts" / "check_programme_1spe_2026.py"
+ATTESTATION_PATH = (
+    ROOT / "validations" / "release-1spe" / "programme-1spe-2026.attestation.json"
+)
+ATTESTATION_SCHEMA_PATH = (
+    ROOT / "schemas" / "programme_1spe_2026.attestation.schema.json"
+)
+REVIEW_PATH = ROOT / "validations" / "release-1spe" / "revue-programme.md"
+REGISTRY_PATH = ROOT / "sources" / "registry.yaml"
+COMPLIANCE_PATH = ROOT / "referentiel" / "CONFORMITE_BO2026.md"
 SOURCE_PATH = ROOT / "sources" / "BO2026_1SPE_specialite.pdf"
 TEXT_PATH = ROOT / "sources" / "txt" / "BO2026_1SPE_specialite.txt"
 EXPECTED_PDF_SHA256 = (
@@ -23,14 +32,64 @@ EXPECTED_PDF_SHA256 = (
 EXPECTED_COUNTS = {
     ("contenu", "mandatory_content"): 42,
     ("contenu", "contextual_guidance"): 5,
-    ("capacite", "prescribed_teaching"): 44,
+    ("capacite", "mandatory_content"): 44,
     ("demonstration", "prescribed_teaching"): 11,
     ("algorithme", "mandatory_content"): 4,
-    ("algorithme", "contextual_guidance"): 11,
+    ("algorithme", "prescribed_teaching"): 11,
     ("approfondissement", "optional_extension"): 17,
     ("transversal", "mandatory_content"): 8,
     ("transversal", "prescribed_teaching"): 29,
     ("transversal", "contextual_guidance"): 4,
+}
+OBJECTIVE_COVERAGE = {
+    "OBJ-COV-SUITES-TAUX-FIXE": {
+        "covered_by_item_ids": {"ALG-SUI-CONT-004", "ALG-SUI-CAP-005"},
+        "assigned_chapters": {"1SPE-SUITES"},
+        "coverage_kind": "required_learning_outcome",
+    },
+    "OBJ-COV-SD-COMPLETION-CARRE": {
+        "covered_by_item_ids": {"ALG-SD-CONT-002"},
+        "assigned_chapters": {"1SPE-SECOND-DEGRE"},
+        "coverage_kind": "required_learning_outcome",
+    },
+    "OBJ-COV-SD-FACTORISATION-DIRECTE": {
+        "covered_by_item_ids": {"ALG-SD-CAP-003"},
+        "assigned_chapters": {"1SPE-SECOND-DEGRE"},
+        "coverage_kind": "required_learning_outcome",
+    },
+    "OBJ-COV-DERIVEE-GRAPHIQUE": {
+        "covered_by_item_ids": {
+            "ANA-DERLOC-CONT-001",
+            "ANA-DERLOC-CONT-003",
+        },
+        "assigned_chapters": {"1SPE-DERIVATION-LOCAL"},
+        "coverage_kind": "required_introduction_modality",
+    },
+    "OBJ-COV-DERIVEE-ALGEBRIQUE": {
+        "covered_by_item_ids": {"ANA-DERLOC-CAP-001"},
+        "assigned_chapters": {"1SPE-DERIVATION-LOCAL"},
+        "coverage_kind": "required_introduction_modality",
+    },
+    "OBJ-COV-DERIVEE-NUMERIQUE": {
+        "covered_by_item_ids": {
+            "ANA-DERLOC-CONT-004",
+            "ANA-DERLOC-CAP-005",
+        },
+        "assigned_chapters": {"1SPE-DERIVATION-LOCAL"},
+        "coverage_kind": "required_introduction_modality",
+    },
+}
+EXACT_SECTION_ANCHORS = {
+    "ANA-DERLOC-ALG-001": ("Exemple d’algorithme", "Démonstrations"),
+    "ANA-VAR-ALG-001": ("Exemple d’algorithme", "Capacités attendues"),
+    "ANA-EXP-ALG-001": ("Exemple d’algorithme", "Capacités attendues"),
+    "ANA-EXP-ALG-002": ("Exemple d’algorithme", "Capacités attendues"),
+    "PROB-COND-ALG-001": ("Exemple d’algorithme", "Capacités attendues"),
+    "ANA-TRIG-ALG-001": ("Exemple d’algorithme", "Démonstration"),
+    "OBJ-PROB-UNIVERS-BORNE-001": (
+        "Variables aléatoires réelles",
+        "Approfondissements possibles",
+    ),
 }
 OFFICIAL_DOMAINS = {
     "Algèbre",
@@ -71,7 +130,7 @@ OBJECTIVE_BOUNDARIES = {
     ),
     "OBJ-GEO-VECTEURS-PRESC-001": (
         "capacite",
-        "prescribed_teaching",
+        "mandatory_content",
         9,
         "Les élèves doivent conserver une pratique du calcul vectoriel en géométrie non repérée",
     ),
@@ -103,6 +162,44 @@ def counts_by_type_and_class(programme: dict) -> dict[tuple[str, str], int]:
     )
 
 
+def canonical_sha256(value: object) -> str:
+    encoded = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def swap_content_obligation_classes(value: dict) -> None:
+    mandatory = next(
+        item
+        for item in value["items"]
+        if item["type"] == "contenu"
+        and item["obligation_class"] == "mandatory_content"
+    )
+    contextual = next(
+        item
+        for item in value["items"]
+        if item["type"] == "contenu"
+        and item["obligation_class"] == "contextual_guidance"
+    )
+    mandatory["obligation_class"], contextual["obligation_class"] = (
+        contextual["obligation_class"],
+        mandatory["obligation_class"],
+    )
+
+
+def swap_chapter_assignments(value: dict) -> None:
+    first = value["items"][10]
+    second = value["items"][100]
+    first["assigned_chapters"], second["assigned_chapters"] = (
+        second["assigned_chapters"],
+        first["assigned_chapters"],
+    )
+
+
 def test_schema_is_closed_recursively(schema: dict) -> None:
     Draft202012Validator.check_schema(schema)
 
@@ -119,14 +216,101 @@ def test_schema_is_closed_recursively(schema: dict) -> None:
     visit(schema)
 
 
+def test_machine_attestation_is_closed_and_pins_the_exact_semantic_state(
+    programme: dict,
+) -> None:
+    attestation_schema = json.loads(
+        ATTESTATION_SCHEMA_PATH.read_text(encoding="utf-8")
+    )
+    attestation = json.loads(ATTESTATION_PATH.read_text(encoding="utf-8"))
+    Draft202012Validator.check_schema(attestation_schema)
+    Draft202012Validator(attestation_schema).validate(attestation)
+    assert attestation["compliance_path"] == "referentiel/CONFORMITE_BO2026.md"
+    assert attestation["compliance_sha256"] == hashlib.sha256(
+        COMPLIANCE_PATH.read_bytes()
+    ).hexdigest()
+    assert attestation["programme_sha256"] == hashlib.sha256(
+        PROGRAMME_PATH.read_bytes()
+    ).hexdigest()
+    assert attestation["schema_sha256"] == hashlib.sha256(
+        SCHEMA_PATH.read_bytes()
+    ).hexdigest()
+    assert attestation["source_pdf_sha256"] == EXPECTED_PDF_SHA256
+    assert attestation["source_text_sha256"] == hashlib.sha256(
+        TEXT_PATH.read_bytes()
+    ).hexdigest()
+    assert attestation["registry_sha256"] == hashlib.sha256(
+        REGISTRY_PATH.read_bytes()
+    ).hexdigest()
+    assert attestation["item_count"] == 175
+    assert attestation["item_ids_sha256"] == canonical_sha256(
+        [item["id"] for item in programme["items"]]
+    )
+    assert attestation["matrix_sha256"] == canonical_sha256(
+        programme["expected_cardinalities"]
+    )
+
+
+def test_checker_requires_review_when_the_compliance_document_changes(
+    tmp_path: Path,
+) -> None:
+    altered_compliance = tmp_path / "CONFORMITE_BO2026.md"
+    altered_compliance.write_text(
+        COMPLIANCE_PATH.read_text(encoding="utf-8") + "\nAltération non revue.\n",
+        encoding="utf-8",
+    )
+    current_programme_sha256 = hashlib.sha256(
+        PROGRAMME_PATH.read_bytes()
+    ).hexdigest()
+    current_review = tmp_path / "review.md"
+    current_review.write_text(
+        "Statut : `approved`\n\n"
+        "SHA-256 du référentiel revu : "
+        f"`{current_programme_sha256}`\n",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CHECKER_PATH),
+            "--programme",
+            str(PROGRAMME_PATH),
+            "--schema",
+            str(SCHEMA_PATH),
+            "--source",
+            str(SOURCE_PATH),
+            "--text",
+            str(TEXT_PATH),
+            "--compliance",
+            str(altered_compliance),
+            "--review",
+            str(current_review),
+        ],
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "review_required"
+    assert report["attestation_errors"] == ["compliance_sha256"]
+    assert report["review_errors"] == []
+
+
 def test_programme_matches_closed_schema(programme: dict, schema: dict) -> None:
-    Draft202012Validator(schema).validate(programme)
+    Draft202012Validator(schema, format_checker=FormatChecker()).validate(programme)
 
 
 def test_every_program_item_is_traceable(programme: dict) -> None:
     for item in programme["items"]:
         assert item["bo_page"] >= 1
         assert item["bo_quote"].strip()
+        assert item["bo_section"].strip()
+        assert item["bo_occurrence"] >= 1
+        assert item["bo_offset"] >= 0
         assert item["source_sha256"] == EXPECTED_PDF_SHA256
         assert item["obligation_class"] in {
             "mandatory_content",
@@ -134,6 +318,19 @@ def test_every_program_item_is_traceable(programme: dict) -> None:
             "optional_extension",
             "contextual_guidance",
         }
+
+
+def test_canonical_ambiguous_sections_use_the_exact_nearest_heading(
+    programme: dict,
+) -> None:
+    by_id = {item["id"]: item for item in programme["items"]}
+    assert {
+        item_id: by_id[item_id]["bo_section"]
+        for item_id in EXACT_SECTION_ANCHORS
+    } == {
+        item_id: expected_and_old[0]
+        for item_id, expected_and_old in EXACT_SECTION_ANCHORS.items()
+    }
 
 
 def test_official_experiments_are_present_and_mandatory(programme: dict) -> None:
@@ -149,6 +346,120 @@ def test_official_experiments_are_present_and_mandatory(programme: dict) -> None
 def test_expected_cardinalities_are_exact(programme: dict) -> None:
     assert len(programme["items"]) == 175
     assert counts_by_type_and_class(programme) == EXPECTED_COUNTS
+
+
+def test_taxonomy_matches_the_approved_compliance_gate(programme: dict) -> None:
+    capacities = [item for item in programme["items"] if item["type"] == "capacite"]
+    thematic_algorithms = [
+        item
+        for item in programme["items"]
+        if item["type"] == "algorithme" and item["id"] not in EXPERIMENT_IDS
+    ]
+    assert len(capacities) == 44
+    assert all(
+        item["obligation_class"] == "mandatory_content" for item in capacities
+    )
+    assert len(thematic_algorithms) == 11
+    assert all(
+        item["obligation_class"] == "prescribed_teaching"
+        for item in thematic_algorithms
+    )
+
+
+def test_compliance_document_matches_taxonomy_matrix_and_objective_gate() -> None:
+    text = COMPLIANCE_PATH.read_text(encoding="utf-8")
+    assert "| Capacités attendues | `capacite` | `mandatory_content` |" in text
+    assert (
+        "| Exemples d’algorithmes | `algorithme` | "
+        "`prescribed_teaching` |"
+    ) in text
+    assert "| Expérimentations | `algorithme` | `mandatory_content` |" in text
+    for row in (
+        "| `capacite` | `mandatory_content` | 44 |",
+        "| `algorithme` | `prescribed_teaching` | 11 |",
+        "| `algorithme` | `mandatory_content` | 4 |",
+    ):
+        assert row in text
+    assert "preuve de couverture explicite" in text
+    for coverage_id in OBJECTIVE_COVERAGE:
+        assert f"`{coverage_id}`" in text
+
+
+def test_objective_prescriptions_have_explicit_machine_readable_coverage(
+    programme: dict,
+) -> None:
+    by_id = {item["id"]: item for item in programme["items"]}
+    coverage = {
+        entry["id"]: entry for entry in programme["objective_coverage"]
+    }
+    assert coverage.keys() == OBJECTIVE_COVERAGE.keys()
+    for coverage_id, expected in OBJECTIVE_COVERAGE.items():
+        entry = coverage[coverage_id]
+        assert entry["bo_page"] >= 1
+        assert entry["bo_quote"].strip()
+        assert entry["bo_section"] == "Objectifs"
+        assert entry["bo_occurrence"] >= 1
+        assert entry["bo_offset"] >= 0
+        assert set(entry["covered_by_item_ids"]) == expected["covered_by_item_ids"]
+        assert set(entry["assigned_chapters"]) == expected["assigned_chapters"]
+        assert entry["coverage_kind"] == expected["coverage_kind"]
+        assert entry["release_gate"] is True
+        assert expected["covered_by_item_ids"] <= by_id.keys()
+        assert all(
+            set(by_id[item_id]["assigned_chapters"]) & expected["assigned_chapters"]
+            for item_id in expected["covered_by_item_ids"]
+        )
+
+
+@pytest.mark.parametrize(
+    ("field", "invalid_value"),
+    [
+        ("covered_by_item_ids", ["ALG-SUI-CONT-004"]),
+        ("assigned_chapters", ["1SPE-SECOND-DEGRE"]),
+        ("coverage_kind", "required_introduction_modality"),
+        ("release_gate", False),
+    ],
+)
+def test_checker_rejects_every_mutated_objective_coverage_dimension(
+    tmp_path: Path,
+    field: str,
+    invalid_value,
+) -> None:
+    programme = json.loads(PROGRAMME_PATH.read_text(encoding="utf-8"))
+    coverage = next(
+        entry
+        for entry in programme["objective_coverage"]
+        if entry["id"] == "OBJ-COV-SUITES-TAUX-FIXE"
+    )
+    coverage[field] = invalid_value
+    altered = tmp_path / "programme.json"
+    altered.write_text(
+        json.dumps(programme, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CHECKER_PATH),
+            "--programme",
+            str(altered),
+            "--schema",
+            str(SCHEMA_PATH),
+            "--source",
+            str(SOURCE_PATH),
+            "--text",
+            str(TEXT_PATH),
+        ],
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert "OBJ-COV-SUITES-TAUX-FIXE" in report["objective_coverage_errors"]
 
 
 def test_prescriptive_objective_boundaries_are_traceable(programme: dict) -> None:
@@ -227,6 +538,76 @@ def test_checker_accepts_the_canonical_programme_from_an_unrelated_cwd(
     assert report["source_sha256"] == EXPECTED_PDF_SHA256
 
 
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        lambda value: (
+            value["items"][0].__setitem__(
+                "bo_quote", value["items"][1]["bo_quote"]
+            ),
+            value["items"][0].__setitem__(
+                "bo_page", value["items"][1]["bo_page"]
+            ),
+            value["items"][0].__setitem__(
+                "bo_section", value["items"][1]["bo_section"]
+            ),
+            value["items"][0].__setitem__(
+                "bo_occurrence", value["items"][1]["bo_occurrence"]
+            ),
+            value["items"][0].__setitem__(
+                "bo_offset", value["items"][1]["bo_offset"]
+            ),
+        ),
+        swap_content_obligation_classes,
+        swap_chapter_assignments,
+        lambda value: value["items"][20].__setitem__(
+            "theme", "Thème sémantiquement altéré"
+        ),
+    ],
+)
+def test_attestation_blocks_semantic_mutations_even_when_counts_are_preserved(
+    tmp_path: Path,
+    mutation,
+) -> None:
+    programme = json.loads(PROGRAMME_PATH.read_text(encoding="utf-8"))
+    mutation(programme)
+    altered = tmp_path / "programme.json"
+    altered.write_text(
+        json.dumps(programme, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CHECKER_PATH),
+            "--programme",
+            str(altered),
+            "--schema",
+            str(SCHEMA_PATH),
+            "--source",
+            str(SOURCE_PATH),
+            "--text",
+            str(TEXT_PATH),
+            "--attestation",
+            str(ATTESTATION_PATH),
+            "--review",
+            str(REVIEW_PATH),
+            "--registry",
+            str(REGISTRY_PATH),
+        ],
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "stale"
+    assert report["attestation_errors"]
+
+
 def test_checker_rejects_a_quote_on_the_wrong_page(tmp_path: Path) -> None:
     programme = json.loads(PROGRAMME_PATH.read_text(encoding="utf-8"))
     programme["items"][0]["bo_page"] = 11
@@ -257,6 +638,89 @@ def test_checker_rejects_a_quote_on_the_wrong_page(tmp_path: Path) -> None:
     assert result.returncode == 2
     report = json.loads(result.stdout)
     assert programme["items"][0]["id"] in report["orphan_quotes"]
+
+
+@pytest.mark.parametrize("field", ["bo_occurrence", "bo_section"])
+def test_checker_rejects_a_wrong_positional_citation_anchor(
+    tmp_path: Path,
+    field: str,
+) -> None:
+    programme = json.loads(PROGRAMME_PATH.read_text(encoding="utf-8"))
+    item = programme["items"][0]
+    if field == "bo_occurrence":
+        item[field] = item[field] + 1
+    else:
+        item[field] = "Contenus"
+    altered = tmp_path / "programme.json"
+    altered.write_text(
+        json.dumps(programme, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CHECKER_PATH),
+            "--programme",
+            str(altered),
+            "--schema",
+            str(SCHEMA_PATH),
+            "--source",
+            str(SOURCE_PATH),
+            "--text",
+            str(TEXT_PATH),
+        ],
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert item["id"] in report["orphan_quotes"]
+
+
+@pytest.mark.parametrize(
+    ("item_id", "expected_and_old"),
+    EXACT_SECTION_ANCHORS.items(),
+)
+def test_checker_rejects_the_previous_inexact_section_heading(
+    tmp_path: Path,
+    item_id: str,
+    expected_and_old: tuple[str, str],
+) -> None:
+    programme = json.loads(PROGRAMME_PATH.read_text(encoding="utf-8"))
+    item = next(item for item in programme["items"] if item["id"] == item_id)
+    item["bo_section"] = expected_and_old[1]
+    altered = tmp_path / "programme.json"
+    altered.write_text(
+        json.dumps(programme, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CHECKER_PATH),
+            "--programme",
+            str(altered),
+            "--schema",
+            str(SCHEMA_PATH),
+            "--source",
+            str(SOURCE_PATH),
+            "--text",
+            str(TEXT_PATH),
+        ],
+        cwd=tmp_path,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["orphan_quotes"] == [item_id]
 
 
 def test_checker_rejects_duplicate_and_unjustified_distributed_assignments(
@@ -302,3 +766,49 @@ def test_checker_rejects_duplicate_and_unjustified_distributed_assignments(
 def test_canonical_text_hash_is_recorded(programme: dict) -> None:
     actual = hashlib.sha256(TEXT_PATH.read_bytes()).hexdigest()
     assert programme["source"]["text_sha256"] == actual
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_fragment"),
+    [
+        (lambda value: value["items"][0].__setitem__("bo_quote", "   "), "bo_quote"),
+        (lambda value: value["source"].__setitem__("title", "   "), "title"),
+        (
+            lambda value: value["source"].__setitem__("bo_url", "not a URI"),
+            "bo_url",
+        ),
+        (
+            lambda value: value["source"].__setitem__("pdf_url", "relative/path"),
+            "pdf_url",
+        ),
+        (
+            lambda value: next(
+                item
+                for item in value["items"]
+                if item["editorial_verdict"] == "excluded_with_rationale"
+            ).__setitem__("editorial_rationale", "   "),
+            "editorial_rationale",
+        ),
+    ],
+)
+def test_schema_rejects_blank_editorial_fields_and_invalid_uris(
+    programme: dict,
+    schema: dict,
+    mutation,
+    expected_fragment: str,
+) -> None:
+    altered = json.loads(json.dumps(programme))
+    mutation(altered)
+
+    errors = list(
+        Draft202012Validator(
+            schema,
+            format_checker=FormatChecker(),
+        ).iter_errors(altered)
+    )
+
+    assert errors
+    assert expected_fragment in " ".join(
+        "/".join(str(part) for part in error.absolute_path)
+        for error in errors
+    )

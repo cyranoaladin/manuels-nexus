@@ -5,20 +5,31 @@ Statut : `approved`
 ## Identification de la revue
 
 - acteur : Codex, agent distinct `task2_regulatory_review` ;
-- nature : revue indépendante en lecture seule du référentiel ;
-- date : 2026-07-26, fuseau `Africa/Tunis` ;
+- nature : seconde revue indépendante complète après corrections ;
+- date : 2026-07-27, fuseau `Africa/Tunis` ;
 - référentiel revu :
   `referentiel/programme_1SPE_2026.json` ;
 - SHA-256 du référentiel revu :
-  `eea0e86615b7d4541f2054bf9cdd39b8409dfddb79f4020a8026d6515c618f13` ;
-- items comparés individuellement : **175 / 175** ;
-- re-revue de correction : les six nouveaux items `OBJ-*` ont été contrôlés
-  individuellement, puis les 175 items ont été recoupés de nouveau ;
+  `79357aebc60c2c53d82c62760175c97bfb8069c82b3300c52e3fe438b8faf91a` ;
+- schéma revu :
+  `schemas/programme_1spe_2026.schema.json` ;
+- SHA-256 du schéma revu :
+  `61e3c2c4a7093c5c38af1d6c3fd2a791804d9d2980e616c860dc7a36242e1140` ;
+- documentation de conformité revue :
+  `referentiel/CONFORMITE_BO2026.md` ;
+- SHA-256 de la documentation revue :
+  `66ba2770e23cd8fe1f1c5bd44a6cfff5190af54e5a5e6b7a93995fc963e00c8a` ;
+- attestation machine revue :
+  `validations/release-1spe/programme-1spe-2026.attestation.json` ;
+- SHA-256 de l’attestation revue :
+  `4d8b6bbc670c3387dd9684f26e294f4079317c645ec9277a259cedd28ba5a071` ;
+- enregistrements comparés individuellement : **181 / 181**, soit
+  **175 items** et **6 couvertures d’objectifs** ;
 - verdict : **`approved`** ; aucun écart P0, P1 ou P2 ouvert.
 
-Ce verdict porte sur l’état exact identifié par l’empreinte ci-dessus. Il ne
-constitue ni une validation humaine, ni une validation d’une version
-ultérieure du référentiel.
+Ce verdict porte uniquement sur l’état exact identifié par les empreintes
+ci-dessus. Une modification ultérieure du référentiel, du schéma, de la
+documentation de conformité ou de l’attestation exige une nouvelle revue.
 
 ## Autorité et sources contrôlées
 
@@ -33,7 +44,7 @@ publié au Journal officiel du 27 mars 2026 et au Bulletin officiel n° 14 du
   <https://www.education.gouv.fr/sites/default/files/document/Annexe%20%E2%80%93%20Programme%20d%26%23039%3Benseignement%20de%20sp%C3%A9cialit%C3%A9%20de%20math%C3%A9matiques%20de%20la%20classe%20de%20premi%C3%A8re%20de%20la%20voie%20g%C3%A9n%C3%A9rale-515408.pdf> ;
 - copie locale de l’annexe :
   `sources/BO2026_1SPE_specialite.pdf` ;
-- SHA-256 du PDF local et du PDF téléchargé depuis l’URL officielle :
+- SHA-256 du PDF local et du PDF retéléchargé depuis l’URL officielle :
   `5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08` ;
 - nombre de pages PDF : 11 ;
 - extraction locale :
@@ -42,66 +53,61 @@ publié au Journal officiel du 27 mars 2026 et au Bulletin officiel n° 14 du
   `pdftotext -layout` :
   `4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df`.
 
+Le PDF officiel retéléchargé est identique octet par octet à la copie locale.
+Sa nouvelle extraction `pdftotext -layout` est identique octet par octet au
+TXT canonique.
+
 ## Méthode indépendante
 
-La revue n’a pas modifié le référentiel, le schéma, les scripts ni les tests.
-Elle a combiné quatre contrôles distincts :
+La revue a laissé inchangés le référentiel, le schéma, la conformité, les
+scripts et les tests. Seul le présent rapport a été actualisé après les
+contrôles indépendants.
 
-1. lecture visuelle des 11 pages du PDF et repérage des rubriques ;
-2. nouvelle extraction directe du PDF avec `pdftotext -layout`, comparée
-   octet par octet au TXT versionné ;
-3. comparaison des 175 citations après la seule normalisation
-   `normalize = " ".join(value.split())`, sur chacune des 11 pages 1-based ;
-4. reconstruction manuelle, par titres et puces du PDF, des rubriques
-   « Contenus », « Capacités attendues », « Démonstrations », « Exemples
-   d’algorithmes », « Approfondissements possibles », des prescriptions
-   transversales et des quatre « Expérimentations ».
+Les preuves combinent :
 
-Commandes de preuve exécutées depuis la racine du projet :
+1. lecture des 11 pages du PDF et repérage des rubriques officielles ;
+2. téléchargement direct du PDF officiel, contrôle SHA-256 et nouvelle
+   extraction avec `pdftotext -layout` ;
+3. comparaison indépendante des 181 citations après la seule normalisation
+   `normalize = " ".join(value.split())`, page par page ;
+4. recalcul, pour chaque citation, de `bo_occurrence`, `bo_offset` et de la
+   dernière rubrique officielle applicable, y compris lorsque le tableau se
+   poursuit sur la page suivante ;
+5. reconstruction des types, classes d’obligation, domaines, affectations,
+   cardinalités et portes de diffusion ;
+6. validation du schéma fermé, de l’attestation et des tests du projet.
 
-```bash
-sha256sum \
-  sources/BO2026_1SPE_specialite.pdf \
-  sources/txt/BO2026_1SPE_specialite.txt \
-  referentiel/programme_1SPE_2026.json
-
-pdfinfo sources/BO2026_1SPE_specialite.pdf
-
-pdftotext -layout sources/BO2026_1SPE_specialite.pdf - \
-  | sha256sum
-
-curl -fsSL \
-  'https://www.education.gouv.fr/sites/default/files/document/Annexe%20%E2%80%93%20Programme%20d%26%23039%3Benseignement%20de%20sp%C3%A9cialit%C3%A9%20de%20math%C3%A9matiques%20de%20la%20classe%20de%20premi%C3%A8re%20de%20la%20voie%20g%C3%A9n%C3%A9rale-515408.pdf' \
-  | sha256sum
-
-jq -r '.items[] | [.type, .obligation_class] | @tsv' \
-  referentiel/programme_1SPE_2026.json \
-  | sort | uniq -c
-
-python3.12 scripts/check_programme_1spe_2026.py
-
-.venv/bin/python -m pytest \
-  tests/test_official_source_extraction.py \
-  tests/test_programme_1spe_2026.py -q
-```
-
-Le recoupement indépendant page/citation a produit :
+Le recalcul indépendant a produit :
 
 ```text
-items 175
 pdf_pages 11
-byte_identical True
-missing 0 []
-wrong_page 0 []
-multi_page 0 []
-unique_ids 175
-duplicate_exact_quotes 0
+items 175
+objective_coverage 6
+records_checked 181
+missing_quotes 0
+wrong_pages 0
+wrong_occurrences 0
+wrong_offsets 0
+wrong_sections 0
+duplicate_item_ids 0
+item_ids_sha256 ccc2928bf78c5872b2c9d434bc34f5e5e66b5b04e4a17fab7e80ba87b83fd7a8
+matrix_sha256 ed08ca8997ccdfd55ffdf5ed023859fc81f320304779ebc0f8b524b109fe7d59
 ```
 
-Le contrôleur du projet a également retourné `status: certified`, sans erreur,
-et les tests ciblés ont donné `22 passed`. Le SHA-256 du référentiel est resté
-`eea0e86615b7d4541f2054bf9cdd39b8409dfddb79f4020a8026d6515c618f13`
-avant et après ces exécutions.
+Deux citations ont plusieurs occurrences dans leur page source :
+`ALG-SUI-DEM-002` et `ALG-SUI-DEM-003`. Elles ciblent correctement la
+deuxième occurrence, respectivement aux offsets `2439` et `2466`.
+
+Avant l’actualisation du présent rapport, le contrôleur retournait
+`status: review_required` pour l’unique motif
+`rapport de revue périmé pour le référentiel courant`. Toutes les autres
+catégories d’erreur étaient vides. Les tests ciblés donnaient
+`55 passed, 1 failed`, l’unique échec étant le test qui exige un contrôleur
+certifié et donc un rapport à jour.
+
+Après actualisation, le contrôleur retourne `status: certified`, avec
+`item_count: 175` et toutes les listes d’erreurs vides. Les deux fichiers de
+tests ciblés donnent `56 passed`.
 
 ## Recompte indépendant
 
@@ -111,24 +117,23 @@ avant et après ces exécutions.
 |---|---|---:|
 | `contenu` | `mandatory_content` | 42 |
 | `contenu` | `contextual_guidance` | 5 |
-| `capacite` | `prescribed_teaching` | 44 |
+| `capacite` | `mandatory_content` | 44 |
 | `demonstration` | `prescribed_teaching` | 11 |
 | `algorithme` | `mandatory_content` | 4 |
-| `algorithme` | `contextual_guidance` | 11 |
+| `algorithme` | `prescribed_teaching` | 11 |
 | `approfondissement` | `optional_extension` | 17 |
 | `transversal` | `mandatory_content` | 8 |
 | `transversal` | `prescribed_teaching` | 29 |
 | `transversal` | `contextual_guidance` | 4 |
 | **Total** |  | **175** |
 
-Ces cardinalités sont exactes pour la granularité actuellement déclarée dans
-le référentiel : 128 items issus des rubriques thématiques explicites, six
-prescriptions ou bornes issues des rubriques « Objectifs » et 41 items
-transversaux. Le B.O. ne publie pas lui-même le nombre « 175 ».
+Le total se répartit en **134 items thématiques** et **41 items
+transversaux**. Le B.O. ne publie pas lui-même le nombre « 175 » : il résulte
+de la granularité explicite du référentiel, revue citation par citation.
 
 ### Reconstruction par rubrique thématique
 
-| Rubrique | Rubriques structurées | Ajouts « Objectifs » | Total |
+| Rubrique | Rubriques structurées | Ajouts ciblés | Total |
 |---|---:|---:|---:|
 | Suites numériques | 21 | 2 | 23 |
 | Second degré | 10 | 1 | 11 |
@@ -143,56 +148,76 @@ transversaux. Le B.O. ne publie pas lui-même le nombre « 175 ».
 | Expérimentations | 4 | 0 | 4 |
 | **Total** | **128** | **6** | **134** |
 
-### Prescriptions et bornes des rubriques « Objectifs »
+### Six prescriptions ou bornes ciblées
 
-Les six ajouts corrigent l’écart P1 de la première lecture :
+| ID | Page | Section | Type × classe | Affectation |
+|---|---:|---|---|---|
+| `OBJ-ALG-SUITES-BORNE-001` | 5 | `Objectifs` | `contenu × contextual_guidance` | `1SPE-SUITES` |
+| `OBJ-ALG-LIMITE-BORNE-001` | 5 | `Objectifs` | `contenu × contextual_guidance` | `1SPE-SUITES` |
+| `OBJ-ALG-SD-BORNE-001` | 5 | `Objectifs` | `contenu × contextual_guidance` | `1SPE-SECOND-DEGRE` |
+| `OBJ-ANA-DERIVEE-BORNE-001` | 7 | `Objectifs` | `contenu × contextual_guidance` | `1SPE-DERIVATION-LOCAL` |
+| `OBJ-GEO-VECTEURS-PRESC-001` | 9 | `Objectifs` | `capacite × mandatory_content` | `1SPE-PRODUIT-SCALAIRE` |
+| `OBJ-PROB-UNIVERS-BORNE-001` | 10 | `Variables aléatoires réelles` | `contenu × contextual_guidance` | `1SPE-VARIABLES-ALEATOIRES` |
 
-| ID | Page | Type × classe | Affectation |
-|---|---:|---|---|
-| `OBJ-ALG-SUITES-BORNE-001` | 5 | `contenu × contextual_guidance` | `1SPE-SUITES` |
-| `OBJ-ALG-LIMITE-BORNE-001` | 5 | `contenu × contextual_guidance` | `1SPE-SUITES` |
-| `OBJ-ALG-SD-BORNE-001` | 5 | `contenu × contextual_guidance` | `1SPE-SECOND-DEGRE` |
-| `OBJ-ANA-DERIVEE-BORNE-001` | 7 | `contenu × contextual_guidance` | `1SPE-DERIVATION-LOCAL` |
-| `OBJ-GEO-VECTEURS-PRESC-001` | 9 | `capacite × prescribed_teaching` | `1SPE-PRODUIT-SCALAIRE` |
-| `OBJ-PROB-UNIVERS-BORNE-001` | 10 | `contenu × contextual_guidance` | `1SPE-VARIABLES-ALEATOIRES` |
+Les cinq bornes décrivent le périmètre ou le niveau d’exigibilité et sont
+correctement conservées comme `contextual_guidance`. La prescription de
+calcul vectoriel en géométrie non repérée relève d’une capacité obligatoire
+et est correctement classée `capacite × mandatory_content`. Les six verdicts
+éditoriaux sont distincts et valent `included`.
 
-Les cinq bornes décrivent le périmètre ou le niveau d’exigibilité et ne créent
-pas de nouveau contenu obligatoire ; `contextual_guidance` est donc cohérent.
-La phrase « Les élèves doivent conserver une pratique… » prescrit une activité
-élève et relève correctement de `capacite × prescribed_teaching`. Les six
-verdicts éditoriaux sont séparés et valent `included`.
+### Six couvertures d’objectifs bloquantes
 
-### Quatre expérimentations
+Les six prescriptions d’objectifs déjà portées par des items structurés ne
+sont pas dupliquées. Elles sont enregistrées comme portes de diffusion :
 
-Les quatre entrées sont présentes, distinctes, situées page 11, affectées à
-`1SPE-VARIABLES-ALEATOIRES`, classées `algorithme × mandatory_content` et
-portent un verdict éditorial séparé `included` :
+| ID | Items porteurs | Chapitre | Nature |
+|---|---|---|---|
+| `OBJ-COV-SUITES-TAUX-FIXE` | `ALG-SUI-CONT-004`, `ALG-SUI-CAP-005` | `1SPE-SUITES` | `required_learning_outcome` |
+| `OBJ-COV-SD-COMPLETION-CARRE` | `ALG-SD-CONT-002` | `1SPE-SECOND-DEGRE` | `required_learning_outcome` |
+| `OBJ-COV-SD-FACTORISATION-DIRECTE` | `ALG-SD-CAP-003` | `1SPE-SECOND-DEGRE` | `required_learning_outcome` |
+| `OBJ-COV-DERIVEE-GRAPHIQUE` | `ANA-DERLOC-CONT-001`, `ANA-DERLOC-CONT-003` | `1SPE-DERIVATION-LOCAL` | `required_introduction_modality` |
+| `OBJ-COV-DERIVEE-ALGEBRIQUE` | `ANA-DERLOC-CAP-001` | `1SPE-DERIVATION-LOCAL` | `required_introduction_modality` |
+| `OBJ-COV-DERIVEE-NUMERIQUE` | `ANA-DERLOC-CONT-004`, `ANA-DERLOC-CAP-005` | `1SPE-DERIVATION-LOCAL` | `required_introduction_modality` |
 
-- `VA-EXP-SIMULER` ;
-- `VA-EXP-FONCTION-MOYENNE` ;
-- `VA-EXP-DISTANCE-MOYENNE-ESPERANCE` ;
-- `VA-EXP-PROPORTION-2SIGMA`.
+Chaque enregistrement porte `release_gate: true`, une citation officielle
+exacte, un chapitre cohérent et au moins un item porteur affecté à ce même
+chapitre. Le schéma et le contrôleur interdisent leur omission silencieuse.
 
-## Contrôles des 175 entrées
+### Rubriques algorithmiques corrigées
 
-- citation exacte après normalisation des espaces : 175 conformes sur 175 ;
-- page PDF 1-based : 175 conformes sur 175 ;
-- identifiants : 175 uniques, aucune rupture dans les familles numérotées ;
-- doublons de citations exactes : aucun ;
-- types et classes selon les rubriques explicitement transcrites : conformes ;
-- domaines : quatre thématiques et trois transversaux, conformes aux titres du
-  B.O. ;
-- affectations : chaque item thématique est affecté à son chapitre ; chaque
-  item transversal a une affectation non vide et une justification quand elle
-  est distribuée ;
-- verdict éditorial : champ distinct de la classe réglementaire ; les
-  obligations sont `included` et les 17 approfondissements facultatifs sont
-  `excluded_with_rationale` avec une justification non vide ;
-- texte de préambule présenté à tort comme item prescriptif : aucun ; aucun
-  item n’est porté par les pages 1 ou 2, et l’unique item de page 3 commence
-  sous le titre « Programme — Vocabulaire ensembliste et logique » ;
-- découpages artificiels dans les puces des rubriques transcrites : aucun
-  constaté.
+Les six entrées suivantes sont toutes rattachées exactement à
+`Exemple d’algorithme` et classées
+`algorithme × prescribed_teaching` :
+
+- `ANA-DERLOC-ALG-001` ;
+- `ANA-VAR-ALG-001` ;
+- `ANA-EXP-ALG-001` ;
+- `ANA-EXP-ALG-002` ;
+- `ANA-TRIG-ALG-001` ;
+- `PROB-COND-ALG-001`.
+
+Les trois entrées sous `Exemples d’algorithme` et les deux sous
+`Exemples d’algorithmes` portent la même classe. Les quatre
+`Expérimentations` restent, elles, classées
+`algorithme × mandatory_content`.
+
+## Contrôles des 175 items
+
+- citations exactes après normalisation des espaces : 175 conformes sur 175 ;
+- pages PDF 1-based : 175 conformes sur 175 ;
+- occurrences et offsets : 175 conformes sur 175 ;
+- rubriques `bo_section` : 175 conformes sur 175 ;
+- identifiants : 175 uniques, aucune collision avec les six IDs de
+  couverture ;
+- types et classes : conformes aux rubriques officielles ;
+- domaines : quatre thématiques et trois transversaux, conformes au B.O. ;
+- affectations : chaque item porte au moins un chapitre cohérent ;
+- verdict éditorial : toutes les obligations sont `included` ; les
+  17 approfondissements facultatifs sont `excluded_with_rationale` avec une
+  justification non vide ;
+- quatre expérimentations : présentes, distinctes, page 11, affectées à
+  `1SPE-VARIABLES-ALEATOIRES`, classées
+  `algorithme × mandatory_content`.
 
 ## Écarts
 
@@ -200,47 +225,42 @@ portent un verdict éditorial séparé `included` :
 
 Aucun.
 
-### P1 — bloquant
+### P1
 
-**Aucun écart ouvert.**
-
-Historique clos : `P1-OBJ-LIMITES-001`, signalé sur le référentiel
-`ad91ada4a316ba63c2cf8513c434d0e4c58cc338cafb72c69b65f41d6c3bf465`,
-est corrigé. Le référentiel porte désormais une politique explicite :
-`include_explicit_prescriptions_and_scope_boundaries`, avec exclusion du
-contexte descriptif et de l’histoire des mathématiques. Les six citations,
-pages, classes, affectations et verdicts demandés sont présents et ont été
-relus indépendamment.
+Aucun écart ouvert.
 
 ### P2
 
-Aucun. Les limites d’extraction mathématique de `pdftotext` sont décrites
-ci-dessous mais ne constituent pas une divergence entre le JSON et
-l’extraction canonique.
+Aucun écart ouvert.
+
+Les écarts des passes précédentes sont clos : prescriptions d’objectifs
+manquantes, sept rubriques `bo_section` incorrectes, taxonomie documentaire
+périmée, attestation ne couvrant pas la conformité et couverture d’objectifs
+insuffisamment bloquante.
 
 ## Limites de la preuve
 
-- La normalisation des espaces préserve fidèlement la sortie `pdftotext`, mais
-  certaines formules disposées en deux dimensions ont un ordre textuel peu
-  lisible, notamment `ANA-EXP-ALG-002`, `ANA-TRIG-DEM-001`,
-  `GEO-PS-CONT-004`, `GEO-PS-DEM-002` et
-  `VA-EXP-PROPORTION-2SIGMA`. Leur concordance textuelle a été recoupée
-  visuellement avec le PDF ; la citation ne doit pas être réutilisée comme
-  texte mathématique prêt à publier.
-- Les affectations de chapitres sont des choix éditoriaux et non des données
-  publiées par le B.O. La revue vérifie leur cohérence et leur justification,
-  mais pas encore leur réalisation effective dans les deux manuscrits.
-- La revue ne valide ni le contenu mathématique des manuscrits, ni la
-  conformité d’un futur PDF élève ou professeur ; elle porte uniquement sur
-  le référentiel identifié par son SHA-256.
+- La normalisation des espaces préserve la sortie `pdftotext`, mais certaines
+  formules disposées en deux dimensions ont un ordre textuel peu lisible,
+  notamment `ANA-EXP-ALG-002`, `ANA-TRIG-DEM-001`, `GEO-PS-CONT-004`,
+  `GEO-PS-DEM-002` et `VA-EXP-PROPORTION-2SIGMA`. Leur concordance a été
+  recoupée avec le PDF ; ces citations ne sont pas du texte mathématique prêt
+  à publier.
+- Les affectations de chapitres sont des choix éditoriaux, non des données
+  publiées par le B.O.
+- Les six `objective_coverage` imposent un audit futur de la réalisation
+  effective dans les manuscrits. La présente revue certifie la qualité du
+  référentiel et du gate, pas encore la preuve de couverture dans les deux
+  ouvrages.
+- La revue ne valide ni le contenu mathématique des manuscrits ni la
+  conformité d’un futur PDF élève ou professeur.
 
 ## Verdict
 
 **`approved`**
 
-Les 175 entrées sont fidèles au PDF officiel dans le périmètre de sélection
-explicite. Les dix cardinalités, les six prescriptions ou bornes des rubriques
-« Objectifs » et les quatre expérimentations sont correctement recomptées.
-Aucune citation n’est orpheline, dupliquée ou décalée ; aucun écart P0, P1 ou
-P2 ne reste ouvert sur le référentiel identifié par le SHA-256
-`eea0e86615b7d4541f2054bf9cdd39b8409dfddb79f4020a8026d6515c618f13`.
+Les 175 items et les six couvertures d’objectifs sont fidèles à l’annexe
+officielle dans le périmètre de sélection explicite. Les dix cardinalités,
+les occurrences, les offsets, les rubriques et les portes de diffusion ont
+été recomptés indépendamment. Aucun écart P0, P1 ou P2 ne reste ouvert sur
+l’état exact identifié en tête du présent rapport.

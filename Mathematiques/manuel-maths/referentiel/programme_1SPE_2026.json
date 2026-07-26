@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "source": {
     "registry_id": "SRC-BO2026-1SPE-MATHS",
     "title": "Programme de spécialité de mathématiques de la classe de première de la voie générale",
@@ -51,13 +51,13 @@
   "expected_cardinalities": [
     {
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
-      "count": 11
+      "obligation_class": "mandatory_content",
+      "count": 4
     },
     {
       "type": "algorithme",
-      "obligation_class": "mandatory_content",
-      "count": 4
+      "obligation_class": "prescribed_teaching",
+      "count": 11
     },
     {
       "type": "approfondissement",
@@ -66,7 +66,7 @@
     },
     {
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "count": 44
     },
     {
@@ -110,6 +110,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 5,
       "bo_quote": "D’autres types simples peuvent être abordés, mais aucune connaissance spécifique à leur sujet n’est au programme.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 2258,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -127,6 +130,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 5,
       "bo_quote": "Toute formalisation est exclue, mais sur des exemples, on s’attachera à en développer une intuition en s'appuyant sur des calculs numériques, des algorithmes de recherche de seuil.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 3362,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -144,6 +150,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 5,
       "bo_quote": "Le calcul effectif de la forme canonique dans le cas général n’est pas un attendu du programme.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 4509,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -161,6 +170,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 7,
       "bo_quote": "On n’en donne pas de définition formelle, mais on s’appuie sur :",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 457,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -175,9 +187,12 @@
       "domain": "Géométrie",
       "theme": "Calcul vectoriel et produit scalaire",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Les élèves doivent conserver une pratique du calcul vectoriel en géométrie non repérée.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 583,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -195,6 +210,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 10,
       "bo_quote": "Le programme ne considère que des univers finis et des variables aléatoires réelles.",
+      "bo_section": "Variables aléatoires réelles",
+      "bo_occurrence": 1,
+      "bo_offset": 4032,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -212,6 +230,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 3,
       "bo_quote": "L’apprentissage des notations mathématiques et de la logique est transversal à tous les chapitres du programme. Aussi, il importe d’y travailler d’abord dans des contextes où ils se présentent naturellement, puis de prévoir des temps où les concepts et types de raisonnement sont étudiés, après avoir été rencontrés plusieurs fois en situation.",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 5403,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -238,6 +259,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 4,
       "bo_quote": "Les élèves doivent connaitre les notions d’élément d’un ensemble, de sous-ensemble, d’ensemble vide, d’appartenance et d’inclusion, de réunion, d’intersection et de complémentaire et savoir utiliser les symboles de base correspondants : Ø, ∈, ⊂, ∩, ∪, { … }, ainsi que la notation des ensembles de nombres et des intervalles. Ils rencontrent également la notion de couple et celle de produit cartésien de deux ensembles.",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 0,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -264,6 +288,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 4,
       "bo_quote": "Pour le complémentaire d’un sous-ensemble A de E, on utilise la notation A ̅ des probabilités, ou la notation E \\ A. On utilise la notation Card(A) pour le cardinal (nombre d’éléments) d’un ensemble fini A.",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 421,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -290,6 +317,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "lire et écrire des propositions contenant les connecteurs logiques « et », « ou » ;",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 669,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -316,6 +346,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "mobiliser un contre-exemple pour montrer qu’une proposition est fausse ;",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 755,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -342,6 +375,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "formuler une implication, une équivalence logique, et à les mobiliser dans un raisonnement simple;",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 830,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -368,6 +404,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "formuler la réciproque d'une implication, la contraposée ;",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 931,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -394,6 +433,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "employer les expressions « condition nécessaire », « condition suffisante » ;",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 992,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -420,6 +462,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "identifier le statut des égalités (identité, équation) et celui des lettres utilisées (variable, inconnue, paramètre) ;",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 1072,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -446,6 +491,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "utiliser les quantificateurs (les symboles ∀ et ∃ ne sont pas exigibles) et repérer les quantifications implicites dans certaines propositions, particulièrement dans les propositions conditionnelles ;",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 1194,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -472,6 +520,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "formuler la négation de propositions quantifiées.",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 1397,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -498,6 +549,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "Par ailleurs, les élèves produisent des raisonnements par disjonction des cas, par l'absurde, par contraposée, et en découvrent la structure.",
+      "bo_section": "Vocabulaire ensembliste et logique",
+      "bo_occurrence": 1,
+      "bo_offset": 1447,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -524,6 +578,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 4,
       "bo_quote": "L’enseignement de spécialité de mathématiques de classe de première vise la consolidation des notions de variable, d’instruction conditionnelle et de boucle ainsi que l’utilisation des fonctions. La seule notion nouvelle est celle de liste qui trouve naturellement sa place dans de nombreuses parties du programme et aide à la compréhension de notions mathématiques telles que les suites numériques, les tableaux de valeurs, les séries statistiques, etc.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 2071,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -543,6 +600,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 4,
       "bo_quote": "Comme en classe de seconde, les algorithmes peuvent être écrits en langage naturel ou utiliser le langage Python.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 2526,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -562,6 +622,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 4,
       "bo_quote": "Les notions relatives aux types de variables et à l’affectation sont consolidées. Comme en classe de seconde, on utilise le symbole « ← » pour désigner l’affectation dans un algorithme écrit en langage naturel.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 2640,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -581,6 +644,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "L’accent est mis sur la programmation modulaire qui permet de découper une tâche complexe en tâches plus simples.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 2851,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -600,6 +666,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 4,
       "bo_quote": "La génération des listes en compréhension et en extension est mise en lien avec la notion d’ensemble. Les conditions apparaissant dans les listes définies en compréhension permettent de travailler la logique. Afin d’éviter des confusions, on se limite aux listes sans présenter d’autres types de collections.",
+      "bo_section": "Notion de liste",
+      "bo_occurrence": 1,
+      "bo_offset": 3351,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -619,6 +688,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 4,
       "bo_quote": "Générer une liste (en extension, par ajouts successifs ou en compréhension).",
+      "bo_section": "Notion de liste",
+      "bo_occurrence": 1,
+      "bo_offset": 3662,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -638,6 +710,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 4,
       "bo_quote": "Manipuler des éléments d’une liste (ajouter, supprimer, etc.) et leurs indices.",
+      "bo_section": "Notion de liste",
+      "bo_occurrence": 1,
+      "bo_offset": 3741,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -657,6 +732,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 4,
       "bo_quote": "Parcourir une liste.",
+      "bo_section": "Notion de liste",
+      "bo_occurrence": 1,
+      "bo_offset": 3823,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -676,6 +754,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 4,
       "bo_quote": "Itérer sur les éléments d’une liste.",
+      "bo_section": "Notion de liste",
+      "bo_occurrence": 1,
+      "bo_offset": 3846,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -695,6 +776,9 @@
       "obligation_class": "contextual_guidance",
       "bo_page": 4,
       "bo_quote": "Cette partie du programme vise à construire et à entretenir des habiletés dans les domaines du calcul, de l’information chiffrée et des représentations graphiques. Il s’agit d’automatiser le recours à des connaissances, des procédures, des méthodes et des stratégies, afin de permettre aux élèves de les mobiliser plus rapidement. Leur acquisition permet aux élèves une meilleure réussite dans l’apprentissage des mathématiques, participe du développement de leur esprit critique par une meilleure maitrise des nombres et du calcul et leur permet une meilleure lecture et compréhension des représentations de données dont les graphiques.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 3896,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -721,6 +805,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "Les capacités attendues énoncées ci-dessous n’ont pas vocation à faire l’objet d’un chapitre d’enseignement spécifique car les notions qui les sous-tendent ont été travaillées dans les classes antérieures et doivent être entretenues et consolidées au cours de l’année. Cependant les nouvelles notions du programme peuvent donner lieu également à un travail d’automatisation tout le long de l’année. Elles relèvent d’un entrainement régulier sur l’ensemble du cycle terminal privilégiant l’activité mentale. Les différents thèmes proposés doivent être travaillés tout au long de l’année et la présentation par blocs thématiques ne signifie pas, bien au contraire, qu’il faille les aborder les uns après les autres. Les modalités de mise en œuvre peuvent être variées et prendre appui sur différents supports : à l’oral, à l’écrit, individuellement ou en groupe, utilisant éventuellement des outils numériques de vidéoprojection, de recensement instantané des réponses, etc.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 4534,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -747,6 +834,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 4,
       "bo_quote": "À la liste ci-dessous s’ajoute la liste des automatismes travaillés en classe de seconde, qui doivent être entretenus en classe de première.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 5507,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -773,6 +863,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Appliquer un taux d’évolution pour calculer une valeur finale ou initiale.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 27,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -799,6 +892,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Calculer un taux d’évolution, l’exprimer en pourcentage.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 104,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -825,6 +921,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Calculer le taux d’évolution équivalent à plusieurs évolutions successives.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 163,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -851,6 +950,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Calculer un taux d’évolution réciproque.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 241,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -877,6 +979,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Déterminer les solutions d’une équation produit nul.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 315,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -903,6 +1008,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Déterminer le signe d’une expression du premier degré, d’une expression factorisée du second degré.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 370,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -929,6 +1037,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Développer, factoriser, réduire une expression algébrique simple.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 472,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -955,6 +1066,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Résoudre graphiquement une équation, une inéquation du type : ƒ (𝑥) = k, ƒ (𝑥) < k, etc.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 569,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -981,6 +1095,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Déterminer graphiquement le signe d’une fonction ou son tableau de variations.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 660,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1007,6 +1124,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Tracer une droite donnée par son équation réduite ou par un point et son coefficient directeur.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 741,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1033,6 +1153,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Lire graphiquement l’équation réduite d’une droite.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 839,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1059,6 +1182,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Déterminer le coefficient directeur d’une droite à partir des coordonnées de deux de ses points.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 893,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1085,6 +1211,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Lire un graphique, un histogramme, un diagramme en barres ou circulaire, un diagramme en boite ou toute autre représentation (repérer l’origine du repère, les unités de graduations ou les échelles, etc.).",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 1005,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1111,6 +1240,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Passer du graphique aux données et vice-versa.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 1212,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1137,6 +1269,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Calculer et interpréter des indicateurs statistiques pour une série statistique.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 1261,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1163,6 +1298,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Calculer des probabilités conditionnelles lorsque les évènements sont présentés sous forme de tableau croisé d’effectifs ou d’arbres pondérés.",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 1357,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1189,6 +1327,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 5,
       "bo_quote": "Distinguer P(A ∩ B), PA (B), PB (A).",
+      "bo_section": "Automatismes",
+      "bo_occurrence": 1,
+      "bo_offset": 1502,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES",
@@ -1215,6 +1356,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Exemples de modes de génération d’une suite : explicite 𝑢𝑛 = ƒ (𝑛), par une relation de récurrence 𝑢𝑛 + 1 = ƒ (𝑢𝑛), par un algorithme, par des motifs géométriques.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 725,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1232,6 +1376,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Notations : 𝑢(𝑛), 𝑢𝑛, (𝑢(𝑛)), (𝑢𝑛).",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 891,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1249,6 +1396,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Suites arithmétiques : exemples, définition, calcul du terme général. Lien avec l’étude d’évolutions successives à accroissements constants. Lien avec les fonctions affines. Calcul de 1 + 2 + … + 𝑛.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 929,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1266,6 +1416,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Suites géométriques : exemples, définition, calcul du terme général. Lien avec l’étude d’évolutions successives à taux constant. Lien avec la fonction exponentielle. Calcul de 1 + 𝑞 + … + 𝑞𝑛.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 1130,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1283,6 +1436,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Sens de variation d’une suite.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 1324,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1300,6 +1456,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Sur des exemples, introduction intuitive de la notion de limite, finie ou infinie, ou l’absence de limite d’une suite.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 1357,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1314,9 +1473,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Dans le cadre de l’étude d’une suite, utiliser le registre de la langue naturelle, le registre algébrique, le registre graphique, et passer de l’un à l’autre.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 1498,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1331,9 +1493,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Proposer, modéliser une situation permettant de générer une suite de nombres. Déterminer une relation explicite ou une relation de récurrence pour une suite définie par un motif géométrique, par une question de dénombrement.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 1659,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1348,9 +1513,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Calculer des termes d’une suite définie explicitement, par récurrence ou par un algorithme.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 1886,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1365,9 +1533,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Pour une suite arithmétique ou géométrique, calculer le terme général, la somme de termes consécutifs, déterminer le sens de variation.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 1980,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1382,9 +1553,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Modéliser un phénomène discret à croissance linéaire par une suite arithmétique, un phénomène discret à croissance exponentielle par une suite géométrique.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 2118,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1399,9 +1573,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Conjecturer, dans des cas simples, la limite éventuelle d’une suite.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 2276,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1419,6 +1596,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 6,
       "bo_quote": "Calcul du terme général d’une suite arithmétique, d’une suite géométrique.",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 1,
+      "bo_offset": 2362,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1436,6 +1616,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 6,
       "bo_quote": "Calcul de 1 + 2 + … + 𝑛.",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 2,
+      "bo_offset": 2439,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1453,6 +1636,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 6,
       "bo_quote": "Calcul de 1 + 𝑞 + … + 𝑞𝑛.",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 2,
+      "bo_offset": 2466,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1467,9 +1653,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 6,
       "bo_quote": "Calcul de termes d’une suite, de sommes de termes, de seuil.",
+      "bo_section": "Exemples d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 2516,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1484,9 +1673,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 6,
       "bo_quote": "Calcul de factorielle.",
+      "bo_section": "Exemples d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 2579,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1501,9 +1693,12 @@
       "domain": "Algèbre",
       "theme": "Suites numériques, modèles discrets",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 6,
       "bo_quote": "Liste des premiers termes d’une suite : suites de Syracuse, suite de Fibonacci.",
+      "bo_section": "Exemples d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 2604,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1521,6 +1716,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 6,
       "bo_quote": "Tour de Hanoï.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2715,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1538,6 +1736,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 6,
       "bo_quote": "Somme des n premiers carrés, des n premiers cubes.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2732,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1555,6 +1756,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 6,
       "bo_quote": "Remboursement d’un emprunt par annuités constantes.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2785,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SUITES"
@@ -1572,6 +1776,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Fonction polynôme du second degré donnée sous forme factorisée. Racines, signe, expression de la somme et du produit des racines.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 2895,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1589,6 +1796,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Forme canonique d’une fonction polynôme du second degré. Discriminant. Factorisation éventuelle. Résolution d’une équation du second degré. Signe.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3027,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1603,9 +1813,12 @@
       "domain": "Algèbre",
       "theme": "Équations, fonctions polynômes du second degré",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Étudier le signe d’une fonction polynôme du second degré donnée sous forme factorisée.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3196,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1620,9 +1833,12 @@
       "domain": "Algèbre",
       "theme": "Équations, fonctions polynômes du second degré",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Déterminer les fonctions polynômes du second degré s’annulant en deux nombres réels distincts.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3285,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1637,9 +1853,12 @@
       "domain": "Algèbre",
       "theme": "Équations, fonctions polynômes du second degré",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Factoriser une fonction polynôme du second degré, en diversifiant les stratégies : racine évidente, détection des racines par leur somme et leur produit, identité remarquable, application des formules générales.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3382,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1654,9 +1873,12 @@
       "domain": "Algèbre",
       "theme": "Équations, fonctions polynômes du second degré",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 6,
       "bo_quote": "Choisir une forme adaptée (développée réduite, canonique, factorisée) d’une fonction polynôme du second degré dans le cadre de la résolution d’un problème (équation, inéquation, optimisation, variations).",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3596,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1674,6 +1896,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 6,
       "bo_quote": "Résolution de l’équation du second degré.",
+      "bo_section": "Démonstration",
+      "bo_occurrence": 1,
+      "bo_offset": 3817,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1691,6 +1916,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 6,
       "bo_quote": "Factorisation d’un polynôme du troisième degré admettant une racine et résolution de l’équation associée.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 3890,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1708,6 +1936,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 6,
       "bo_quote": "Factorisation de 𝑥𝑛 – 1 par 𝑥 – 1, de 𝑥𝑛 – a𝑛 par 𝑥 – a.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 3998,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1725,6 +1956,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 6,
       "bo_quote": "Déterminer deux nombres réels connaissant leur somme s et leur produit p comme racines de la fonction polynôme 𝑥 ↦ 𝑥² – s𝑥 + p.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 4057,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-SECOND-DEGRE"
@@ -1742,6 +1976,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Taux de variation. Sécantes à la courbe représentative d’une fonction en un point donné.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3551,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1759,6 +1996,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Nombre dérivé d’une fonction en un point, comme limite du taux de variation. Notation ƒ ’(a).",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3642,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1776,6 +2016,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Tangente à la courbe représentative d’une fonction en un point, comme « limite des sécantes ». Pente. Équation : la tangente à la courbe représentative de ƒ au point d’abscisse a est la droite d’équation 𝑦 = ƒ (a) + ƒ ‘(a)(𝑥 – a).",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3738,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1793,6 +2036,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Approximation linéaire : fonction affine tangente 𝑥 ↦ ƒ (a) + ƒ ‘(a)(𝑥 – a) et approximation de ƒ (a + h) par ƒ (a) + ƒ ‘(a)h.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3971,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1810,6 +2056,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Fonction dérivable sur un intervalle. Fonction dérivée.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4120,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -1827,6 +2076,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Fonction dérivée des fonctions carré, cube, inverse, racine carrée.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4178,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -1844,6 +2096,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Opérations sur les fonctions dérivables : somme, produit, inverse, quotient.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4248,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -1861,6 +2116,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Pour 𝑛 dans ℤ, fonction dérivée de la fonction 𝑥 ↦ 𝑥 𝑛.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4327,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -1878,6 +2136,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Fonction valeur absolue : étude de la dérivabilité en 0.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4385,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -1892,9 +2153,12 @@
       "domain": "Analyse",
       "theme": "Dérivation — point de vue local",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Calculer un taux de variation, la pente d’une sécante.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 4464,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1909,9 +2173,12 @@
       "domain": "Analyse",
       "theme": "Dérivation — point de vue local",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Interpréter le nombre dérivé en contexte : pente d’une tangente, vitesse instantanée, cout marginal, etc.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 4521,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1926,9 +2193,12 @@
       "domain": "Analyse",
       "theme": "Dérivation — point de vue local",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Déterminer graphiquement un nombre dérivé par la pente de la tangente. Construire la tangente en un point à une courbe représentative connaissant le nombre dérivé.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 4629,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1943,9 +2213,12 @@
       "domain": "Analyse",
       "theme": "Dérivation — point de vue local",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Déterminer l’équation de la tangente en un point à la courbe représentative d’une fonction.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 4795,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1960,9 +2233,12 @@
       "domain": "Analyse",
       "theme": "Dérivation — point de vue local",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Calculer une valeur approchée de ƒ (a + h).",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 4889,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -1977,9 +2253,12 @@
       "domain": "Analyse",
       "theme": "Dérivation — point de vue global",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 7,
       "bo_quote": "Dans des cas simples, calculer une fonction dérivée en utilisant les propriétés des opérations sur les fonctions dérivables.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 4935,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -1997,6 +2276,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "Équation de la tangente en un point à une courbe représentative.",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 1,
+      "bo_offset": 17,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -2014,6 +2296,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "La fonction racine carrée n’est pas dérivable en 0.",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 1,
+      "bo_offset": 84,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -2031,6 +2316,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "Fonction dérivée de la fonction carrée, de la fonction inverse.",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 1,
+      "bo_offset": 138,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2048,6 +2336,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "Fonction dérivée d’un produit.",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 1,
+      "bo_offset": 204,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2062,9 +2353,12 @@
       "domain": "Analyse",
       "theme": "Dérivation — point de vue local",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "Écrire la liste des coefficients directeurs des sécantes pour un pas donné.",
+      "bo_section": "Exemple d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 258,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-LOCAL"
@@ -2082,6 +2376,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Représentation algébrique et graphique de fonctions paires, impaires. Traduction géométrique.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 397,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2099,6 +2396,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Lien entre le sens de variation d’une fonction dérivable sur un intervalle et signe de sa fonction dérivée ; caractérisation des fonctions constantes.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 493,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2116,6 +2416,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Nombre dérivé en un extrémum, tangente à la courbe représentative.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 646,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2130,9 +2433,12 @@
       "domain": "Analyse",
       "theme": "Variations et courbes représentatives des fonctions",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Étudier les variations d’une fonction. Déterminer les extrémums.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 735,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2147,9 +2453,12 @@
       "domain": "Analyse",
       "theme": "Variations et courbes représentatives des fonctions",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Résoudre un problème d’optimisation.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 802,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2164,9 +2473,12 @@
       "domain": "Analyse",
       "theme": "Variations et courbes représentatives des fonctions",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Exploiter les variations d’une fonction pour établir une inégalité. Étudier la position relative de deux courbes représentatives.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 841,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2181,9 +2493,12 @@
       "domain": "Analyse",
       "theme": "Variations et courbes représentatives des fonctions",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Étudier, en lien avec la dérivation, une fonction polynôme du second degré : variations, extrémum, allure selon le signe du coefficient de 𝑥².",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 973,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2198,9 +2513,12 @@
       "domain": "Analyse",
       "theme": "Variations et courbes représentatives des fonctions",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "Méthode de Newton, en se limitant à des cas favorables.",
+      "bo_section": "Exemple d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 1139,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-DERIVATION-GLOBAL"
@@ -2218,6 +2536,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant ƒ ‘ = ƒ et ƒ (0) = 1. L’existence et l’unicité sont admises. Notation exp(𝑥).",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 1229,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2235,6 +2556,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Pour tous réels 𝑥 et 𝑦, exp(𝑥 + 𝑦) = exp(𝑥) exp(𝑦) et exp(𝑥) exp(–𝑥) = 1. Nombre e. Notation e 𝑥.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 1397,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2252,6 +2576,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Signe, sens de variation et courbe représentative de la fonction exponentielle. Lien avec les suites géométriques.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 1497,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2266,9 +2593,12 @@
       "domain": "Analyse",
       "theme": "Fonction exponentielle",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Transformer une expression en utilisant les propriétés algébriques de la fonction exponentielle.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 1634,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2283,9 +2613,12 @@
       "domain": "Analyse",
       "theme": "Fonction exponentielle",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Pour a réel, dérivée de la fonction t ↦ eat.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 1733,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2300,9 +2633,12 @@
       "domain": "Analyse",
       "theme": "Fonction exponentielle",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Pour une valeur numérique strictement positive de k, représenter graphiquement les fonctions t ↦ e–kt et t ↦ ekt.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 1780,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2317,9 +2653,12 @@
       "domain": "Analyse",
       "theme": "Fonction exponentielle",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Modéliser une situation par une croissance, une décroissance exponentielle (par exemple évolution d’un capital à taux fixe, décroissance radioactive).",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 1896,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2334,9 +2673,12 @@
       "domain": "Analyse",
       "theme": "Fonction exponentielle",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "Construction de l’exponentielle par la méthode d’Euler.",
+      "bo_section": "Exemple d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 2070,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2351,9 +2693,12 @@
       "domain": "Analyse",
       "theme": "Fonction exponentielle",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "1 𝑛 − Détermination d’une valeur approchée de e à l’aide de la suite ((1 + ) ). 𝑛",
+      "bo_section": "Exemple d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 2126,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2371,6 +2716,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 8,
       "bo_quote": "Unicité d’une fonction ƒ dérivable sur ℝ telle que vérifiant ƒ ‘ = ƒ et ƒ (0) = 1.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2239,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2388,6 +2736,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 8,
       "bo_quote": "Pour tous réels 𝑥 et 𝑦, exp(𝑥 + 𝑦) = exp(𝑥) exp(𝑦).",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2324,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2405,6 +2756,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 8,
       "bo_quote": "La fonction exponentielle est strictement positive et croissante.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2378,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-EXPONENTIELLE"
@@ -2422,6 +2776,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Cercle trigonométrique. Longueur d’arc. Radian.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 2469,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-TRIGONOMETRIE"
@@ -2439,6 +2796,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Enroulement de la droite sur le cercle trigonométrique. Image d’un nombre réel.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 2519,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-TRIGONOMETRIE"
@@ -2456,6 +2816,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Cosinus et sinus d’un nombre réel. Lien avec le sinus et le cosinus dans un triangle rectangle. Valeurs remarquables.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 2601,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-TRIGONOMETRIE"
@@ -2470,9 +2833,12 @@
       "domain": "Analyse",
       "theme": "Trigonométrie",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Placer un point sur le cercle trigonométrique.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 2741,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-TRIGONOMETRIE"
@@ -2487,9 +2853,12 @@
       "domain": "Analyse",
       "theme": "Trigonométrie",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 8,
       "bo_quote": "Par lecture du cercle trigonométrique, déterminer, pour des valeurs remarquables de 𝑥, les cosinus et sinus d’angles associés à 𝑥.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 2790,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-TRIGONOMETRIE"
@@ -2507,6 +2876,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "𝜋 𝜋 𝜋 𝜋 − Calcul de cos , sin , cos , sin . 4 4 3 3",
+      "bo_section": "Démonstration",
+      "bo_occurrence": 1,
+      "bo_offset": 2935,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-TRIGONOMETRIE"
@@ -2521,9 +2893,12 @@
       "domain": "Analyse",
       "theme": "Trigonométrie",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 8,
       "bo_quote": "Approximation de π par la méthode d’Archimède.",
+      "bo_section": "Exemple d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 3010,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-TRIGONOMETRIE"
@@ -2541,6 +2916,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Produit scalaire à partir de la projection orthogonale et de la formule avec le cosinus. Caractérisation de l’orthogonalité.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 1709,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2558,6 +2936,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Bilinéarité, symétrie. En base orthonormée, expression du produit scalaire et de la norme, critère d’orthogonalité. Expression des coordonnées dans une base orthonormée en termes de produits scalaires avec les vecteurs de la base.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 1836,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2575,6 +2956,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Développement de ‖𝑢 ⃗ + 𝑣‖2 et ‖𝑢 ⃗ − 𝑣 ‖2 . Formule d’Al-Kashi.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 2069,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2592,6 +2976,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Transformation de l’expression M ⃗⃗⃗⃗⃗⃗B. ⃗⃗⃗⃗⃗⃗⃗A ⋅ M",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 2136,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2606,9 +2993,12 @@
       "domain": "Géométrie",
       "theme": "Calcul vectoriel et produit scalaire",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Utiliser le produit scalaire pour démontrer une orthogonalité, pour calculer un angle, une longueur dans le plan.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 2213,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2623,9 +3013,12 @@
       "domain": "Géométrie",
       "theme": "Calcul vectoriel et produit scalaire",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "En vue de la résolution d’un problème, calculer le produit scalaire de deux vecteurs en choisissant une méthode adaptée (en utilisant la projection orthogonale, à l’aide des coordonnées, à l’aide des normes et d’un angle, à l’aide de normes).",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 2329,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2640,9 +3033,12 @@
       "domain": "Géométrie",
       "theme": "Calcul vectoriel et produit scalaire",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Utiliser le produit scalaire pour résoudre un problème géométrique.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 2574,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2660,6 +3056,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 9,
       "bo_quote": "Formule d’Al-Kashi (démonstration avec le produit scalaire).",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 1,
+      "bo_offset": 2659,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2677,6 +3076,9 @@
       "obligation_class": "prescribed_teaching",
       "bo_page": 9,
       "bo_quote": "Ensemble des points M tels que M ⃗⃗⃗⃗⃗⃗B = 0 (démonstration avec le produit scalaire). ⃗⃗⃗⃗⃗⃗⃗A ⋅ M",
+      "bo_section": "Démonstrations",
+      "bo_occurrence": 1,
+      "bo_offset": 2722,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2694,6 +3096,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 9,
       "bo_quote": "Loi des sinus.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2853,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2711,6 +3116,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 9,
       "bo_quote": "Concourance des hauteurs d’un triangle.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2870,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2728,6 +3136,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 9,
       "bo_quote": "Les médianes d’un triangle concourent au centre de gravité.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 2912,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PRODUIT-SCALAIRE"
@@ -2745,6 +3156,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Vecteur normal à une droite. Le vecteur de coordonnées (a, b) est normal à la droite d’équation a𝑥 + b𝑦 + c = 0.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3066,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2762,6 +3176,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Projection orthogonale d’un point sur une droite.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3181,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2779,6 +3196,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Équation de cercle.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3233,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2793,9 +3213,12 @@
       "domain": "Géométrie",
       "theme": "Géométrie repérée",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Déterminer une équation cartésienne d’une droite connaissant un point et un vecteur normal.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3275,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2810,9 +3233,12 @@
       "domain": "Géométrie",
       "theme": "Géométrie repérée",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Déterminer les coordonnées du projeté orthogonal d’un point sur une droite.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3369,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2827,9 +3253,12 @@
       "domain": "Géométrie",
       "theme": "Géométrie repérée",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Déterminer et utiliser l’équation d’un cercle donné par son centre et son rayon.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3447,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2844,9 +3273,12 @@
       "domain": "Géométrie",
       "theme": "Géométrie repérée",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Reconnaitre une équation de cercle, déterminer centre et rayon.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3530,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2861,9 +3293,12 @@
       "domain": "Géométrie",
       "theme": "Géométrie repérée",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 9,
       "bo_quote": "Utiliser un repère pour étudier une configuration.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3596,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2881,6 +3316,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 9,
       "bo_quote": "Recherche de l’ensemble des points équidistants de l’axe des abscisses et d’un point donné.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 3678,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2898,6 +3336,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 9,
       "bo_quote": "Déterminer l’intersection d’un cercle ou d’une parabole d’équation 𝑦 = a𝑥2 + b𝑥 + c avec une droite parallèle à un axe.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 3772,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-GEOMETRIE-REPEREE"
@@ -2915,6 +3356,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Indépendance de deux évènements.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3053,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -2932,6 +3376,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Partition de l’univers (systèmes complets d’évènements). Formule des probabilités totales.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3088,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -2949,6 +3396,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Succession de deux épreuves indépendantes. Représentation par un arbre ou un tableau.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3181,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -2966,6 +3416,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Pour 𝑛 ⩽ 4, répétition de 𝑛 épreuves de Bernoulli indépendantes et identiques.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 3269,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -2980,9 +3433,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Probabilités conditionnelles et indépendance",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Dans des cas simples, calculer une probabilité à l’aide de la formule des probabilités totales.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3370,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -2997,9 +3453,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Probabilités conditionnelles et indépendance",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Savoir utiliser ou justifier l’indépendance de deux évènements.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3468,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -3014,9 +3473,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Probabilités conditionnelles et indépendance",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Représenter la succession de deux épreuves indépendantes par un arbre ou un tableau.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3534,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -3031,9 +3493,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Probabilités conditionnelles et indépendance",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Pour 𝑛 ⩽ 4, représenter l’arbre associé à la répétition de 𝑛 épreuves de Bernoulli indépendantes et identiques afin de calculer des probabilités.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 3621,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -3048,9 +3513,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Probabilités conditionnelles et indépendance",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 10,
       "bo_quote": "Méthode de Monte-Carlo : estimation de l’aire sous la parabole, estimation du nombre π.",
+      "bo_section": "Exemple d’algorithme",
+      "bo_occurrence": 1,
+      "bo_offset": 3790,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -3068,6 +3536,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 10,
       "bo_quote": "Exemples de succession de plusieurs épreuves indépendantes.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 3909,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -3085,6 +3556,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 10,
       "bo_quote": "Exemples de marches aléatoires.",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 3971,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-PROBA-COND"
@@ -3102,6 +3576,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Variable aléatoire réelle : modélisation du résultat numérique d’une expérience aléatoire ; formalisation comme fonction définie sur l’univers et à valeurs réelles.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4420,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3119,6 +3596,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Loi d’une variable aléatoire.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4587,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3136,6 +3616,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Espérance, variance, écart type d’une variable aléatoire.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4619,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3153,6 +3636,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 10,
       "bo_quote": "Linéarité de l’espérance.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 4679,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3170,6 +3656,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Formule de König-Huygens.",
+      "bo_section": "Contenus",
+      "bo_occurrence": 1,
+      "bo_offset": 2,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3184,9 +3673,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Variables aléatoires réelles",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Interpréter en situation et utiliser les notations {X = a}, {X ⩽ a}, P(X = a), P(X ⩽ a). Passer du registre de la langue naturelle au registre symbolique et inversement.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 50,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3201,9 +3693,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Variables aléatoires réelles",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Modéliser une situation à l’aide d’une variable aléatoire.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 222,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3218,9 +3713,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Variables aléatoires réelles",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Déterminer la loi de probabilité d’une variable aléatoire.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 283,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3235,9 +3733,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Variables aléatoires réelles",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Calculer une espérance, une variance, un écart type.",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 344,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3252,9 +3753,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Variables aléatoires réelles",
       "type": "capacite",
-      "obligation_class": "prescribed_teaching",
+      "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Utiliser la notion d’espérance dans une résolution de problème (mise pour un jeu équitable, etc.).",
+      "bo_section": "Capacités attendues",
+      "bo_occurrence": 1,
+      "bo_offset": 399,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3269,9 +3773,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Variables aléatoires réelles",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 11,
       "bo_quote": "Algorithme renvoyant l’espérance, la variance ou l‘écart type d’une variable aléatoire.",
+      "bo_section": "Exemples d’algorithmes",
+      "bo_occurrence": 1,
+      "bo_offset": 523,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3286,9 +3793,12 @@
       "domain": "Probabilités et statistiques",
       "theme": "Variables aléatoires réelles",
       "type": "algorithme",
-      "obligation_class": "contextual_guidance",
+      "obligation_class": "prescribed_teaching",
       "bo_page": 11,
       "bo_quote": "Fréquence d’apparition des lettres d’un texte donné, en français, en anglais.",
+      "bo_section": "Exemples d’algorithmes",
+      "bo_occurrence": 1,
+      "bo_offset": 613,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3306,6 +3816,9 @@
       "obligation_class": "optional_extension",
       "bo_page": 11,
       "bo_quote": "Pour X variable aléatoire, étude de la fonction du second degré 𝑥 ↦ E((X – 𝑥)²).",
+      "bo_section": "Approfondissements possibles",
+      "bo_occurrence": 1,
+      "bo_offset": 722,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3323,6 +3836,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Simuler une variable aléatoire avec Python ou un tableur.",
+      "bo_section": "Expérimentations",
+      "bo_occurrence": 1,
+      "bo_offset": 1125,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3340,6 +3856,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Lire, comprendre et écrire une fonction Python renvoyant la moyenne d’un échantillon de taille n d’une variable aléatoire.",
+      "bo_section": "Expérimentations",
+      "bo_occurrence": 1,
+      "bo_offset": 1185,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3357,6 +3876,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Étudier sur des exemples la distance entre la moyenne d’un échantillon simulé de taille n d’une variable aléatoire et l’espérance de cette variable aléatoire.",
+      "bo_section": "Expérimentations",
+      "bo_occurrence": 1,
+      "bo_offset": 1310,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3374,6 +3896,9 @@
       "obligation_class": "mandatory_content",
       "bo_page": 11,
       "bo_quote": "Simuler, avec Python ou un tableur, N échantillons de taille n d’une variable aléatoire, d’espérance μ et d’écart type σ. Si m 2𝜎 désigne la moyenne d’un échantillon, calculer la proportion des cas où l’écart entre m et μ est inférieur ou égal à . √n",
+      "bo_section": "Expérimentations",
+      "bo_occurrence": 1,
+      "bo_offset": 1471,
       "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
       "assigned_chapters": [
         "1SPE-VARIABLES-ALEATOIRES"
@@ -3381,6 +3906,113 @@
       "distribution_justification": null,
       "editorial_verdict": "included",
       "editorial_rationale": null
+    }
+  ],
+  "objective_coverage": [
+    {
+      "id": "OBJ-COV-SUITES-TAUX-FIXE",
+      "bo_page": 5,
+      "bo_quote": "L’élève doit automatiser le fait qu’une évolution à taux fixe est modélisée par une suite géométrique et percevoir l’intérêt de considérer le rapport de deux termes consécutifs.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 2894,
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "covered_by_item_ids": [
+        "ALG-SUI-CONT-004",
+        "ALG-SUI-CAP-005"
+      ],
+      "assigned_chapters": [
+        "1SPE-SUITES"
+      ],
+      "coverage_kind": "required_learning_outcome",
+      "release_gate": true
+    },
+    {
+      "id": "OBJ-COV-SD-COMPLETION-CARRE",
+      "bo_page": 5,
+      "bo_quote": "Les élèves doivent savoir qu’une fonction polynôme du second degré admet une forme canonique, et être capables de la déterminer dans des cas simples à l’aide de l’identité 𝑥² + 2a𝑥 = (𝑥 + a)² – a² (méthode de complétion du carré).",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 4278,
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "covered_by_item_ids": [
+        "ALG-SD-CONT-002"
+      ],
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "coverage_kind": "required_learning_outcome",
+      "release_gate": true
+    },
+    {
+      "id": "OBJ-COV-SD-FACTORISATION-DIRECTE",
+      "bo_page": 5,
+      "bo_quote": "Les élèves sont entrainés à reconnaitre et pratiquer la factorisation directe dans les cas qui s’y prêtent : racines apparentes, coefficient de 𝑥 nul, racines entières détectées par calcul mental à partir de leur somme et de leur produit.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 4605,
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "covered_by_item_ids": [
+        "ALG-SD-CAP-003"
+      ],
+      "assigned_chapters": [
+        "1SPE-SECOND-DEGRE"
+      ],
+      "coverage_kind": "required_learning_outcome",
+      "release_gate": true
+    },
+    {
+      "id": "OBJ-COV-DERIVEE-GRAPHIQUE",
+      "bo_page": 7,
+      "bo_quote": "des représentations graphiques fournies par les outils logiciels (calculatrice, tableur, logiciel de géométrie dynamique) ;",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 524,
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "covered_by_item_ids": [
+        "ANA-DERLOC-CONT-001",
+        "ANA-DERLOC-CONT-003"
+      ],
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "coverage_kind": "required_introduction_modality",
+      "release_gate": true
+    },
+    {
+      "id": "OBJ-COV-DERIVEE-ALGEBRIQUE",
+      "bo_page": 7,
+      "bo_quote": "le calcul algébrique du taux de variation dans des cas qui s’y prêtent : fonctions du second degré, fonction inverse ;",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 650,
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "covered_by_item_ids": [
+        "ANA-DERLOC-CAP-001"
+      ],
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "coverage_kind": "required_introduction_modality",
+      "release_gate": true
+    },
+    {
+      "id": "OBJ-COV-DERIVEE-NUMERIQUE",
+      "bo_page": 7,
+      "bo_quote": "le calcul numérique d’expressions ƒ (a + h) – ƒ (a), où h prend des valeurs proches de 0, faisant apparaitre une approximation linéaire, par exemple avec a = 1 et ƒ étant une des fonctions carré, inverse, racine carrée.",
+      "bo_section": "Objectifs",
+      "bo_occurrence": 1,
+      "bo_offset": 771,
+      "source_sha256": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08",
+      "covered_by_item_ids": [
+        "ANA-DERLOC-CONT-004",
+        "ANA-DERLOC-CAP-005"
+      ],
+      "assigned_chapters": [
+        "1SPE-DERIVATION-LOCAL"
+      ],
+      "coverage_kind": "required_introduction_modality",
+      "release_gate": true
     }
   ]
 }

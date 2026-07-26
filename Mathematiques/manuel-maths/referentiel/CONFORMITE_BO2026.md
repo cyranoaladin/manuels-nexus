@@ -61,6 +61,23 @@ les rubriques structurées :
 - univers finis et variables aléatoires réelles :
   `OBJ-PROB-UNIVERS-BORNE-001`.
 
+Six autres prescriptions des rubriques « Objectifs » sont reliées, sans créer
+de nouveaux items, aux items structurés qui portent déjà l’apprentissage :
+
+| Couverture | Items porteurs | Chapitre | Nature |
+|---|---|---|---|
+| `OBJ-COV-SUITES-TAUX-FIXE` | `ALG-SUI-CONT-004`, `ALG-SUI-CAP-005` | `1SPE-SUITES` | `required_learning_outcome` |
+| `OBJ-COV-SD-COMPLETION-CARRE` | `ALG-SD-CONT-002` | `1SPE-SECOND-DEGRE` | `required_learning_outcome` |
+| `OBJ-COV-SD-FACTORISATION-DIRECTE` | `ALG-SD-CAP-003` | `1SPE-SECOND-DEGRE` | `required_learning_outcome` |
+| `OBJ-COV-DERIVEE-GRAPHIQUE` | `ANA-DERLOC-CONT-001`, `ANA-DERLOC-CONT-003` | `1SPE-DERIVATION-LOCAL` | `required_introduction_modality` |
+| `OBJ-COV-DERIVEE-ALGEBRIQUE` | `ANA-DERLOC-CAP-001` | `1SPE-DERIVATION-LOCAL` | `required_introduction_modality` |
+| `OBJ-COV-DERIVEE-NUMERIQUE` | `ANA-DERLOC-CONT-004`, `ANA-DERLOC-CAP-005` | `1SPE-DERIVATION-LOCAL` | `required_introduction_modality` |
+
+Ces six enregistrements ont `release_gate: true`. Le futur audit manuel doit
+produire une preuve de couverture explicite pour chacun d’eux dans le chapitre
+affecté. Ils ne constituent pas de simples notes contextuelles et ne peuvent
+pas être ignorés par le gate de diffusion.
+
 Le programme comporte exactement quatre domaines thématiques :
 
 1. Algèbre ;
@@ -80,9 +97,9 @@ décrit séparément le choix de fabrication du manuel.
 | Rubrique officielle | Type | Classe d’obligation |
 |---|---|---|
 | Contenus | `contenu` | `mandatory_content` |
-| Capacités attendues | `capacite` | `prescribed_teaching` |
+| Capacités attendues | `capacite` | `mandatory_content` |
 | Démonstrations | `demonstration` | `prescribed_teaching` |
-| Exemples d’algorithmes | `algorithme` | `contextual_guidance` |
+| Exemples d’algorithmes | `algorithme` | `prescribed_teaching` |
 | Expérimentations | `algorithme` | `mandatory_content` |
 | Approfondissements possibles | `approfondissement` | `optional_extension` |
 | Prescriptions transversales | `transversal` | selon le libellé officiel |
@@ -107,10 +124,10 @@ prescriptives dans les objectifs, fixe 175 items :
 |---|---|---:|
 | `contenu` | `mandatory_content` | 42 |
 | `contenu` | `contextual_guidance` | 5 |
-| `capacite` | `prescribed_teaching` | 44 |
+| `capacite` | `mandatory_content` | 44 |
 | `demonstration` | `prescribed_teaching` | 11 |
 | `algorithme` | `mandatory_content` | 4 |
-| `algorithme` | `contextual_guidance` | 11 |
+| `algorithme` | `prescribed_teaching` | 11 |
 | `approfondissement` | `optional_extension` | 17 |
 | `transversal` | `mandatory_content` | 8 |
 | `transversal` | `prescribed_teaching` | 29 |

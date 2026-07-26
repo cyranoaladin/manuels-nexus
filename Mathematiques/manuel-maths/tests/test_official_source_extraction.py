@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import os
 from pathlib import Path
 import shutil
@@ -9,6 +10,7 @@ import subprocess
 import sys
 
 import yaml
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,6 +19,9 @@ REGISTRY = ROOT / "sources" / "registry.yaml"
 SOURCE = ROOT / "sources" / "BO2026_1SPE_specialite.pdf"
 EXPECTED_PDF_SHA256 = (
     "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
+)
+EXPECTED_TEXT_SHA256 = (
+    "4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df"
 )
 EXPERIMENT_LINES = (
     "Simuler une variable aléatoire avec Python ou un tableur.",
@@ -39,11 +44,22 @@ def official_entry() -> dict:
     )
 
 
+@pytest.fixture
+def extractor_module():
+    spec = importlib.util.spec_from_file_location("extract_official_source", SCRIPT)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def run_extractor(
     source: Path,
     output: Path,
     cwd: Path,
     registry: Path = REGISTRY,
+    env: dict[str, str] | None = None,
 ) -> subprocess.CompletedProcess:
     return subprocess.run(
         [
@@ -60,6 +76,7 @@ def run_extractor(
         text=True,
         capture_output=True,
         check=False,
+        env=env,
     )
 
 
@@ -153,6 +170,59 @@ def test_output_cannot_replace_a_regular_registered_source(tmp_path: Path) -> No
     assert "source" in result.stderr.lower()
 
 
+def test_output_cannot_replace_the_resolved_target_of_registered_source_symlink(
+    tmp_path: Path,
+) -> None:
+    resolved_source = tmp_path / "official-target.pdf"
+    shutil.copyfile(SOURCE, resolved_source)
+    registered_source = tmp_path / "official-link.pdf"
+    registered_source.symlink_to(resolved_source)
+    registry = tmp_path / "registry.yaml"
+    entry = official_entry()
+    entry["local_path"] = str(registered_source)
+    registry.write_text(
+        yaml.safe_dump({"sources": [entry]}, allow_unicode=True),
+        encoding="utf-8",
+    )
+    before = resolved_source.read_bytes()
+
+    result = run_extractor(
+        registered_source,
+        registered_source.resolve(),
+        tmp_path,
+        registry,
+    )
+
+    assert result.returncode == 2
+    assert resolved_source.read_bytes() == before
+    assert registered_source.is_symlink()
+    assert "source" in result.stderr.lower()
+
+
+def test_output_hardlink_alias_of_registered_source_is_rejected(
+    tmp_path: Path,
+) -> None:
+    registered_source = tmp_path / "official.pdf"
+    shutil.copyfile(SOURCE, registered_source)
+    output_alias = tmp_path / "programme.txt"
+    os.link(registered_source, output_alias)
+    registry = tmp_path / "registry.yaml"
+    entry = official_entry()
+    entry["local_path"] = str(registered_source)
+    registry.write_text(
+        yaml.safe_dump({"sources": [entry]}, allow_unicode=True),
+        encoding="utf-8",
+    )
+    before = registered_source.read_bytes()
+
+    result = run_extractor(registered_source, output_alias, tmp_path, registry)
+
+    assert result.returncode == 2
+    assert registered_source.read_bytes() == before
+    assert output_alias.read_bytes() == before
+    assert "source" in result.stderr.lower()
+
+
 def test_symlink_output_is_rejected_without_touching_target(tmp_path: Path) -> None:
     assert sha256(SOURCE) == EXPECTED_PDF_SHA256
     target = tmp_path / "target.txt"
@@ -210,3 +280,148 @@ def test_extractor_does_not_leave_temporary_files(tmp_path: Path) -> None:
     assert result.returncode == 0, result.stderr
     assert sorted(path.name for path in output.parent.iterdir()) == [output.name]
     assert os.path.isfile(output)
+
+
+def test_fake_pdftotext_from_path_cannot_publish_noncanonical_text(
+    tmp_path: Path,
+) -> None:
+    fake_bin = tmp_path / "fake-bin"
+    fake_bin.mkdir()
+    (fake_bin / "pdftotext").symlink_to("/bin/echo")
+    output = tmp_path / "programme.txt"
+    output.write_text("last known valid output\n", encoding="utf-8")
+    env = os.environ.copy()
+    env["PATH"] = str(fake_bin)
+
+    result = run_extractor(SOURCE, output, tmp_path, env=env)
+
+    assert result.returncode == 2
+    assert output.read_text(encoding="utf-8") == "last known valid output\n"
+    assert "pdftotext" in result.stderr.lower()
+
+
+def test_extraction_uses_a_private_snapshot_and_allowlisted_environment(
+    tmp_path: Path,
+) -> None:
+    source_copy = tmp_path / "official.pdf"
+    shutil.copyfile(SOURCE, source_copy)
+    registry = tmp_path / "registry.yaml"
+    entry = official_entry()
+    entry["local_path"] = str(source_copy)
+    registry.write_text(
+        yaml.safe_dump({"sources": [entry]}, allow_unicode=True),
+        encoding="utf-8",
+    )
+    observed_input = tmp_path / "observed-input.txt"
+    observed_env = tmp_path / "observed-env.txt"
+    fake_bin = tmp_path / "fake-bin"
+    fake_bin.mkdir()
+    fake = fake_bin / "pdftotext"
+    fake.write_text(
+        "#!/bin/sh\n"
+        "if [ \"$1\" = \"-v\" ]; then\n"
+        "  echo 'pdftotext version 24.02.0' >&2\n"
+        "  exit 0\n"
+        "fi\n"
+        f"printf '%s' \"$2\" > '{observed_input}'\n"
+        f"printf '%s|%s|%s|%s' \"$LANG\" \"$LC_ALL\" \"$TZ\" "
+        f"\"$UNTRUSTED_MARKER\" > '{observed_env}'\n"
+        f"printf '%%s' '%%PDF-1.7\\nchanged after validation\\n' > '{source_copy}'\n"
+        "exec /usr/bin/pdftotext \"$@\"\n",
+        encoding="utf-8",
+    )
+    fake.chmod(0o755)
+    output = tmp_path / "programme.txt"
+    env = os.environ.copy()
+    env["PATH"] = str(fake_bin)
+    env["UNTRUSTED_MARKER"] = "must-not-leak"
+
+    result = run_extractor(source_copy, output, tmp_path, registry, env)
+
+    assert result.returncode == 0, result.stderr
+    assert sha256(output) == EXPECTED_TEXT_SHA256
+    snapshot = Path(observed_input.read_text(encoding="utf-8"))
+    assert snapshot != source_copy.resolve()
+    assert not snapshot.exists()
+    assert observed_env.read_text(encoding="utf-8") == "C|C|UTC|"
+
+
+def test_directory_fsync_failure_before_commit_rolls_back_previous_output(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    extractor_module,
+) -> None:
+    source_copy = tmp_path / "official.pdf"
+    shutil.copyfile(SOURCE, source_copy)
+    entry = official_entry()
+    entry["local_path"] = str(source_copy)
+    source = extractor_module.open_registered_source(source_copy, entry)
+    output = tmp_path / "programme.txt"
+    previous = b"last known valid output\n"
+    output.write_bytes(previous)
+    output, directory_descriptor = extractor_module.open_output_directory(output)
+    real_fsync = extractor_module._fsync_directory
+    calls = 0
+
+    def fail_first_directory_fsync(descriptor: int) -> None:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise OSError("injected directory fsync failure")
+        real_fsync(descriptor)
+
+    monkeypatch.setattr(
+        extractor_module,
+        "_fsync_directory",
+        fail_first_directory_fsync,
+    )
+    try:
+        with pytest.raises(extractor_module.ExtractionError, match="avant commit"):
+            extractor_module.atomic_write(
+                output,
+                directory_descriptor,
+                b"new canonical output\n",
+                source,
+            )
+    finally:
+        os.close(directory_descriptor)
+        os.close(source.descriptor)
+
+    assert output.read_bytes() == previous
+
+
+def test_rename_failure_before_commit_rolls_back_previous_output(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    extractor_module,
+) -> None:
+    source_copy = tmp_path / "official.pdf"
+    shutil.copyfile(SOURCE, source_copy)
+    entry = official_entry()
+    entry["local_path"] = str(source_copy)
+    source = extractor_module.open_registered_source(source_copy, entry)
+    output = tmp_path / "programme.txt"
+    previous = b"last known valid output\n"
+    output.write_bytes(previous)
+    output, directory_descriptor = extractor_module.open_output_directory(output)
+    real_replace = extractor_module.os.replace
+
+    def fail_new_output_rename(src, dst, *args, **kwargs):
+        if str(src).endswith(".tmp"):
+            raise OSError("injected rename failure")
+        return real_replace(src, dst, *args, **kwargs)
+
+    monkeypatch.setattr(extractor_module.os, "replace", fail_new_output_rename)
+    try:
+        with pytest.raises(extractor_module.ExtractionError, match="avant commit"):
+            extractor_module.atomic_write(
+                output,
+                directory_descriptor,
+                b"new canonical output\n",
+                source,
+            )
+    finally:
+        os.close(directory_descriptor)
+        os.close(source.descriptor)
+
+    assert output.read_bytes() == previous

@@ -8,6 +8,7 @@
     "schema_version",
     "source",
     "selection_policy",
+    "objective_coverage",
     "thematic_domains",
     "transversal_domains",
     "chapters",
@@ -16,13 +17,22 @@
   ],
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "source": {
       "$ref": "#/$defs/source"
     },
     "selection_policy": {
       "$ref": "#/$defs/selection_policy"
+    },
+    "objective_coverage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/objective_coverage"
+      },
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true
     },
     "thematic_domains": {
       "type": "array",
@@ -134,7 +144,7 @@
       ],
       "properties": {
         "registry_id": {"const": "SRC-BO2026-1SPE-MATHS"},
-        "title": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1, "pattern": "\\S"},
         "legal_instrument": {"const": "Arrêté du 26 février 2026"},
         "nor": {"const": "MENE2602917A"},
         "decree_date": {"const": "2026-02-26"},
@@ -142,8 +152,16 @@
         "bo_issue": {"const": 14},
         "bo_date": {"const": "2026-04-02"},
         "normative_from": {"const": "2026-09-01"},
-        "bo_url": {"type": "string", "format": "uri"},
-        "pdf_url": {"type": "string", "format": "uri"},
+        "bo_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://\\S+$"
+        },
+        "pdf_url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://\\S+$"
+        },
         "local_path": {"const": "sources/BO2026_1SPE_specialite.pdf"},
         "text_path": {"const": "sources/txt/BO2026_1SPE_specialite.txt"},
         "pdf_sha256": {
@@ -164,6 +182,74 @@
         "type": {"$ref": "#/$defs/type"},
         "obligation_class": {"$ref": "#/$defs/obligation_class"},
         "count": {"type": "integer", "minimum": 1}
+      }
+    },
+    "objective_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "bo_page",
+        "bo_quote",
+        "bo_section",
+        "bo_occurrence",
+        "bo_offset",
+        "source_sha256",
+        "covered_by_item_ids",
+        "assigned_chapters",
+        "coverage_kind",
+        "release_gate"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^OBJ-COV-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+        },
+        "bo_page": {"type": "integer", "minimum": 1, "maximum": 11},
+        "bo_quote": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "bo_section": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "bo_occurrence": {"type": "integer", "minimum": 1},
+        "bo_offset": {"type": "integer", "minimum": 0},
+        "source_sha256": {
+          "const": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
+        },
+        "covered_by_item_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "assigned_chapters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "1SPE-SUITES",
+              "1SPE-SECOND-DEGRE",
+              "1SPE-DERIVATION-LOCAL",
+              "1SPE-DERIVATION-GLOBAL",
+              "1SPE-EXPONENTIELLE",
+              "1SPE-TRIGONOMETRIE",
+              "1SPE-PRODUIT-SCALAIRE",
+              "1SPE-GEOMETRIE-REPEREE",
+              "1SPE-PROBA-COND",
+              "1SPE-VARIABLES-ALEATOIRES"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "coverage_kind": {
+          "type": "string",
+          "enum": [
+            "required_learning_outcome",
+            "required_introduction_modality"
+          ]
+        },
+        "release_gate": {"const": true}
       }
     },
     "type": {
@@ -198,6 +284,9 @@
         "obligation_class",
         "bo_page",
         "bo_quote",
+        "bo_section",
+        "bo_occurrence",
+        "bo_offset",
         "source_sha256",
         "assigned_chapters",
         "distribution_justification",
@@ -225,11 +314,14 @@
             "Automatismes"
           ]
         },
-        "theme": {"type": "string", "minLength": 1},
+        "theme": {"type": "string", "minLength": 1, "pattern": "\\S"},
         "type": {"$ref": "#/$defs/type"},
         "obligation_class": {"$ref": "#/$defs/obligation_class"},
         "bo_page": {"type": "integer", "minimum": 1, "maximum": 11},
-        "bo_quote": {"type": "string", "minLength": 2},
+        "bo_quote": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "bo_section": {"type": "string", "minLength": 1, "pattern": "\\S"},
+        "bo_occurrence": {"type": "integer", "minimum": 1},
+        "bo_offset": {"type": "integer", "minimum": 0},
         "source_sha256": {
           "const": "5303df0fcf6335f06d00c969a61dcd82cc3fdfd105271ae5c2ef580ff49b6c08"
         },
@@ -255,7 +347,8 @@
         },
         "distribution_justification": {
           "type": ["string", "null"],
-          "minLength": 1
+          "minLength": 1,
+          "pattern": "\\S"
         },
         "editorial_verdict": {
           "type": "string",
@@ -267,7 +360,8 @@
         },
         "editorial_rationale": {
           "type": ["string", "null"],
-          "minLength": 1
+          "minLength": 1,
+          "pattern": "\\S"
         }
       },
       "allOf": [
@@ -329,7 +423,11 @@
           },
           "then": {
             "properties": {
-              "editorial_rationale": {"type": "string", "minLength": 1}
+              "editorial_rationale": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              }
             }
           }
         }

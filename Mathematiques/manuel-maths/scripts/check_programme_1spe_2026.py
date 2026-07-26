@@ -8,12 +8,13 @@ from collections import Counter
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
 from typing import Any
 
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,14 +24,52 @@ EXPECTED_PDF_SHA256 = (
 EXPECTED_COUNTS = {
     ("contenu", "mandatory_content"): 42,
     ("contenu", "contextual_guidance"): 5,
-    ("capacite", "prescribed_teaching"): 44,
+    ("capacite", "mandatory_content"): 44,
     ("demonstration", "prescribed_teaching"): 11,
     ("algorithme", "mandatory_content"): 4,
-    ("algorithme", "contextual_guidance"): 11,
+    ("algorithme", "prescribed_teaching"): 11,
     ("approfondissement", "optional_extension"): 17,
     ("transversal", "mandatory_content"): 8,
     ("transversal", "prescribed_teaching"): 29,
     ("transversal", "contextual_guidance"): 4,
+}
+EXPECTED_OBJECTIVE_COVERAGE = {
+    "OBJ-COV-SUITES-TAUX-FIXE": {
+        "covered_by_item_ids": {"ALG-SUI-CONT-004", "ALG-SUI-CAP-005"},
+        "assigned_chapters": {"1SPE-SUITES"},
+        "coverage_kind": "required_learning_outcome",
+    },
+    "OBJ-COV-SD-COMPLETION-CARRE": {
+        "covered_by_item_ids": {"ALG-SD-CONT-002"},
+        "assigned_chapters": {"1SPE-SECOND-DEGRE"},
+        "coverage_kind": "required_learning_outcome",
+    },
+    "OBJ-COV-SD-FACTORISATION-DIRECTE": {
+        "covered_by_item_ids": {"ALG-SD-CAP-003"},
+        "assigned_chapters": {"1SPE-SECOND-DEGRE"},
+        "coverage_kind": "required_learning_outcome",
+    },
+    "OBJ-COV-DERIVEE-GRAPHIQUE": {
+        "covered_by_item_ids": {
+            "ANA-DERLOC-CONT-001",
+            "ANA-DERLOC-CONT-003",
+        },
+        "assigned_chapters": {"1SPE-DERIVATION-LOCAL"},
+        "coverage_kind": "required_introduction_modality",
+    },
+    "OBJ-COV-DERIVEE-ALGEBRIQUE": {
+        "covered_by_item_ids": {"ANA-DERLOC-CAP-001"},
+        "assigned_chapters": {"1SPE-DERIVATION-LOCAL"},
+        "coverage_kind": "required_introduction_modality",
+    },
+    "OBJ-COV-DERIVEE-NUMERIQUE": {
+        "covered_by_item_ids": {
+            "ANA-DERLOC-CONT-004",
+            "ANA-DERLOC-CAP-005",
+        },
+        "assigned_chapters": {"1SPE-DERIVATION-LOCAL"},
+        "coverage_kind": "required_introduction_modality",
+    },
 }
 REQUIRED_EXPERIMENTS = {
     "VA-EXP-SIMULER",
@@ -57,6 +96,28 @@ OFFICIAL_TRANSVERSAL_DOMAINS = {
     "Algorithmique et programmation",
     "Automatismes",
 }
+SECTION_HEADINGS = {
+    "Vocabulaire ensembliste et logique",
+    "Algorithmique et programmation",
+    "Objectifs",
+    "Histoire des mathématiques",
+    "Notion de liste",
+    "Automatismes",
+    "Algèbre",
+    "Analyse",
+    "Géométrie",
+    "Probabilités et statistiques",
+    "Contenus",
+    "Capacités attendues",
+    "Démonstration",
+    "Démonstrations",
+    "Exemples d’algorithme",
+    "Exemples d’algorithmes",
+    "Exemple d’algorithme",
+    "Approfondissements possibles",
+    "Expérimentations",
+    "Variables aléatoires réelles",
+}
 
 
 def sha256(path: Path) -> str:
@@ -67,15 +128,94 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def canonical_sha256(value: object) -> str:
+    encoded = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
 def normalize_whitespace(value: str) -> str:
     return " ".join(value.split())
 
 
-def normalized_pages(text: str) -> list[str]:
-    pages = text.split("\f")
-    if pages and not pages[-1].strip():
-        pages.pop()
-    return [normalize_whitespace(page) for page in pages]
+def citation_index(
+    text: str,
+) -> tuple[list[str], list[int], list[tuple[int, str]]]:
+    raw_pages = text.split("\f")
+    if raw_pages and not raw_pages[-1].strip():
+        raw_pages.pop()
+    pages = [normalize_whitespace(page) for page in raw_pages]
+    page_bases: list[int] = []
+    section_positions: list[tuple[int, str]] = []
+    base = 0
+    for raw_page, page in zip(raw_pages, pages):
+        page_bases.append(base)
+        for match in re.finditer(r"(?m)^([^\r\n]+?)\s*$", raw_page):
+            heading = match.group(1).strip()
+            if heading not in SECTION_HEADINGS:
+                continue
+            prefix = normalize_whitespace(raw_page[: match.start()])
+            local_offset = len(prefix) + (1 if prefix else 0)
+            section_positions.append((base + local_offset, heading))
+        base += len(page) + 1
+    return pages, page_bases, section_positions
+
+
+def quote_offsets(page: str, quote: str) -> list[int]:
+    offsets: list[int] = []
+    start = 0
+    while True:
+        position = page.find(quote, start)
+        if position < 0:
+            return offsets
+        offsets.append(position)
+        start = position + 1
+
+
+def has_valid_citation_anchor(
+    record: dict[str, Any],
+    pages: list[str],
+    page_bases: list[int],
+    section_positions: list[tuple[int, str]],
+) -> bool:
+    page_number = record.get("bo_page")
+    quote = record.get("bo_quote")
+    occurrence = record.get("bo_occurrence")
+    expected_offset = record.get("bo_offset")
+    expected_section = record.get("bo_section")
+    if (
+        not isinstance(page_number, int)
+        or not isinstance(quote, str)
+        or not normalize_whitespace(quote)
+        or not isinstance(occurrence, int)
+        or occurrence < 1
+        or not isinstance(expected_offset, int)
+        or expected_offset < 0
+        or not isinstance(expected_section, str)
+        or not normalize_whitespace(expected_section)
+        or not (1 <= page_number <= len(pages))
+    ):
+        return False
+    offsets = quote_offsets(
+        pages[page_number - 1],
+        normalize_whitespace(quote),
+    )
+    if occurrence > len(offsets):
+        return False
+    actual_offset = offsets[occurrence - 1]
+    if expected_offset != actual_offset:
+        return False
+    absolute_offset = page_bases[page_number - 1] + actual_offset
+    preceding_sections = [
+        section
+        for position, section in section_positions
+        if position <= absolute_offset
+    ]
+    return bool(preceding_sections) and preceding_sections[-1] == expected_section
 
 
 def extract_pdf_text(source: Path) -> bytes:
@@ -122,6 +262,11 @@ def check(
     schema_path: Path,
     source_path: Path,
     text_path: Path,
+    attestation_path: Path,
+    attestation_schema_path: Path,
+    review_path: Path,
+    registry_path: Path,
+    compliance_path: Path,
 ) -> dict[str, Any]:
     errors: list[str] = []
     schema_errors: list[str] = []
@@ -132,6 +277,9 @@ def check(
     obligation_errors: list[str] = []
     editorial_errors: list[str] = []
     domain_errors: list[str] = []
+    objective_coverage_errors: list[str] = []
+    attestation_errors: list[str] = []
+    review_errors: list[str] = []
 
     try:
         programme = load_json(programme_path)
@@ -153,6 +301,9 @@ def check(
             "cardinality_errors": [],
             "experiment_errors": [],
             "objective_boundary_errors": [],
+            "objective_coverage_errors": [],
+            "attestation_errors": [],
+            "review_errors": [],
             "errors": ["référentiel ou schéma illisible"],
         }
 
@@ -160,10 +311,52 @@ def check(
         Draft202012Validator.check_schema(schema)
         schema_errors = sorted(
             compact_schema_error(error)
-            for error in Draft202012Validator(schema).iter_errors(programme)
+            for error in Draft202012Validator(
+                schema,
+                format_checker=FormatChecker(),
+            ).iter_errors(programme)
         )
     except Exception as exc:
         schema_errors = [f"schéma invalide : {exc}"]
+
+    try:
+        programme_hash = sha256(programme_path)
+        schema_hash = sha256(schema_path)
+    except OSError as exc:
+        programme_hash = None
+        schema_hash = None
+        attestation_errors.append(f"empreinte programme/schéma inaccessible : {exc}")
+
+    try:
+        attestation = load_json(attestation_path)
+        attestation_schema = load_json(attestation_schema_path)
+        Draft202012Validator.check_schema(attestation_schema)
+        attestation_schema_errors = sorted(
+            compact_schema_error(error)
+            for error in Draft202012Validator(attestation_schema).iter_errors(
+                attestation
+            )
+        )
+        attestation_errors.extend(
+            f"schéma attestation : {error}" for error in attestation_schema_errors
+        )
+    except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
+        attestation = {}
+        attestation_errors.append(f"attestation illisible : {exc}")
+    except Exception as exc:
+        attestation = {}
+        attestation_errors.append(f"schéma attestation invalide : {exc}")
+
+    try:
+        registry_hash = sha256(registry_path)
+    except OSError as exc:
+        registry_hash = None
+        attestation_errors.append(f"registre inaccessible : {exc}")
+    try:
+        compliance_hash = sha256(compliance_path)
+    except OSError as exc:
+        compliance_hash = None
+        attestation_errors.append(f"document de conformité inaccessible : {exc}")
 
     try:
         source_hash = sha256(source_path)
@@ -201,7 +394,7 @@ def check(
             if regenerated != text_bytes:
                 errors.append("le TXT n’est pas l’extraction déterministe du PDF")
 
-    pages = normalized_pages(text_value)
+    pages, page_bases, section_positions = citation_index(text_value)
     if len(pages) != 11:
         errors.append(f"nombre de pages texte attendu 11, obtenu {len(pages)}")
 
@@ -231,13 +424,11 @@ def check(
         if key is not None:
             counts[key] += 1
 
-        page = raw_item.get("bo_page")
-        quote = raw_item.get("bo_quote")
-        if (
-            not isinstance(page, int)
-            or not isinstance(quote, str)
-            or not (1 <= page <= len(pages))
-            or normalize_whitespace(quote) not in pages[page - 1]
+        if not has_valid_citation_anchor(
+            raw_item,
+            pages,
+            page_bases,
+            section_positions,
         ):
             orphan_quotes.append(display_id)
 
@@ -261,6 +452,14 @@ def check(
         if (
             item_type == "approfondissement"
             and obligation != "optional_extension"
+        ):
+            obligation_errors.append(display_id)
+        if item_type == "capacite" and obligation != "mandatory_content":
+            obligation_errors.append(display_id)
+        if (
+            item_type == "algorithme"
+            and item_id not in REQUIRED_EXPERIMENTS
+            and obligation != "prescribed_teaching"
         ):
             obligation_errors.append(display_id)
         if (
@@ -309,10 +508,114 @@ def check(
     objective_boundary_errors = sorted(
         REQUIRED_OBJECTIVE_BOUNDARIES - by_id.keys()
     )
+    raw_coverage = programme.get("objective_coverage")
+    coverage = raw_coverage if isinstance(raw_coverage, list) else []
+    seen_coverage_ids: set[str] = set()
+    for position, raw_entry in enumerate(coverage):
+        if not isinstance(raw_entry, dict):
+            objective_coverage_errors.append(f"index-{position}")
+            continue
+        coverage_id = raw_entry.get("id")
+        display_id = (
+            coverage_id if isinstance(coverage_id, str) else f"index-{position}"
+        )
+        if not isinstance(coverage_id, str) or coverage_id in seen_coverage_ids:
+            objective_coverage_errors.append(display_id)
+            continue
+        seen_coverage_ids.add(coverage_id)
+        expected = EXPECTED_OBJECTIVE_COVERAGE.get(coverage_id)
+        covered_ids = raw_entry.get("covered_by_item_ids")
+        assigned_chapters = raw_entry.get("assigned_chapters")
+        expected_ids = (
+            expected.get("covered_by_item_ids")
+            if isinstance(expected, dict)
+            else None
+        )
+        expected_chapters = (
+            expected.get("assigned_chapters")
+            if isinstance(expected, dict)
+            else None
+        )
+        if (
+            not isinstance(expected_ids, set)
+            or not isinstance(expected_chapters, set)
+            or not isinstance(covered_ids, list)
+            or set(covered_ids) != expected_ids
+            or not expected_ids <= by_id.keys()
+            or not isinstance(assigned_chapters, list)
+            or set(assigned_chapters) != expected_chapters
+            or raw_entry.get("coverage_kind") != expected.get("coverage_kind")
+            or raw_entry.get("release_gate") is not True
+            or any(
+                not (
+                    set(by_id[item_id].get("assigned_chapters", []))
+                    & expected_chapters
+                )
+                for item_id in expected_ids
+            )
+            or raw_entry.get("bo_section") != "Objectifs"
+            or not has_valid_citation_anchor(
+                raw_entry,
+                pages,
+                page_bases,
+                section_positions,
+            )
+        ):
+            objective_coverage_errors.append(display_id)
+    if seen_coverage_ids != EXPECTED_OBJECTIVE_COVERAGE.keys():
+        objective_coverage_errors.append("objective_coverage")
     if set(programme.get("thematic_domains", [])) != OFFICIAL_THEMATIC_DOMAINS:
         domain_errors.append("thematic_domains")
     if set(programme.get("transversal_domains", [])) != OFFICIAL_TRANSVERSAL_DOMAINS:
         domain_errors.append("transversal_domains")
+
+    expected_attestation = {
+        "attestation_version": 1,
+        "programme_path": "referentiel/programme_1SPE_2026.json",
+        "programme_sha256": programme_hash,
+        "schema_path": "schemas/programme_1spe_2026.schema.json",
+        "schema_sha256": schema_hash,
+        "source_pdf_path": "sources/BO2026_1SPE_specialite.pdf",
+        "source_pdf_sha256": source_hash,
+        "source_text_path": "sources/txt/BO2026_1SPE_specialite.txt",
+        "source_text_sha256": text_hash,
+        "registry_path": "sources/registry.yaml",
+        "registry_sha256": registry_hash,
+        "compliance_path": "referentiel/CONFORMITE_BO2026.md",
+        "compliance_sha256": compliance_hash,
+        "review_report_path": "validations/release-1spe/revue-programme.md",
+        "required_review_status": "approved",
+        "item_count": len(items),
+        "item_ids_sha256": canonical_sha256(identifiers),
+        "matrix_sha256": canonical_sha256(
+            programme.get("expected_cardinalities")
+        ),
+    }
+    for field, expected_value in expected_attestation.items():
+        if attestation.get(field) != expected_value:
+            attestation_errors.append(field)
+
+    try:
+        review_text = review_path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        review_errors.append(f"rapport de revue illisible : {exc}")
+    else:
+        status_match = re.search(
+            r"(?m)^Statut\s*:\s*`([^`]+)`\s*$",
+            review_text,
+        )
+        reviewed_sha_match = re.search(
+            r"SHA-256 du référentiel revu\s*:\s*"
+            r"`([0-9a-f]{64})`",
+            review_text,
+        )
+        if status_match is None or status_match.group(1) != "approved":
+            review_errors.append("statut de revue non approuvé")
+        if (
+            reviewed_sha_match is None
+            or reviewed_sha_match.group(1) != programme_hash
+        ):
+            review_errors.append("rapport de revue périmé pour le référentiel courant")
 
     all_findings = (
         errors
@@ -327,9 +630,22 @@ def check(
         + cardinality_errors
         + experiment_errors
         + objective_boundary_errors
+        + objective_coverage_errors
+        + attestation_errors
+        + review_errors
     )
+    if attestation_errors == ["compliance_sha256"]:
+        status = "review_required"
+    elif attestation_errors:
+        status = "stale"
+    elif review_errors:
+        status = "review_required"
+    elif all_findings:
+        status = "needs_fix"
+    else:
+        status = "certified"
     return {
-        "status": "certified" if not all_findings else "needs_fix",
+        "status": status,
         "item_count": len(items),
         "source_sha256": source_hash,
         "text_sha256": text_hash,
@@ -354,6 +670,9 @@ def check(
         "cardinality_errors": cardinality_errors,
         "experiment_errors": experiment_errors,
         "objective_boundary_errors": objective_boundary_errors,
+        "objective_coverage_errors": sorted(set(objective_coverage_errors)),
+        "attestation_errors": sorted(set(attestation_errors)),
+        "review_errors": sorted(set(review_errors)),
         "errors": errors,
     }
 
@@ -380,6 +699,36 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         type=Path,
         default=ROOT / "sources" / "txt" / "BO2026_1SPE_specialite.txt",
     )
+    parser.add_argument(
+        "--attestation",
+        type=Path,
+        default=(
+            ROOT
+            / "validations"
+            / "release-1spe"
+            / "programme-1spe-2026.attestation.json"
+        ),
+    )
+    parser.add_argument(
+        "--attestation-schema",
+        type=Path,
+        default=ROOT / "schemas" / "programme_1spe_2026.attestation.schema.json",
+    )
+    parser.add_argument(
+        "--review",
+        type=Path,
+        default=ROOT / "validations" / "release-1spe" / "revue-programme.md",
+    )
+    parser.add_argument(
+        "--registry",
+        type=Path,
+        default=ROOT / "sources" / "registry.yaml",
+    )
+    parser.add_argument(
+        "--compliance",
+        type=Path,
+        default=ROOT / "referentiel" / "CONFORMITE_BO2026.md",
+    )
     return parser.parse_args(argv)
 
 
@@ -390,6 +739,11 @@ def main(argv: list[str] | None = None) -> int:
         args.schema.absolute(),
         args.source.absolute(),
         args.text.absolute(),
+        args.attestation.absolute(),
+        args.attestation_schema.absolute(),
+        args.review.absolute(),
+        args.registry.absolute(),
+        args.compliance.absolute(),
     )
     print(json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True))
     return 0 if report["status"] == "certified" else 2
