@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import os
 from pathlib import Path
+import signal
 import shutil
 import stat
 import subprocess
@@ -393,17 +394,17 @@ def test_directory_fsync_failure_before_commit_rolls_back_previous_output(
     real_fsync = extractor_module._fsync_directory
     calls = 0
 
-    def fail_first_directory_fsync(descriptor: int) -> None:
+    def fail_post_publish_directory_fsync(descriptor: int) -> None:
         nonlocal calls
         calls += 1
-        if calls == 1:
+        if calls == 2:
             raise OSError("injected directory fsync failure")
         real_fsync(descriptor)
 
     monkeypatch.setattr(
         extractor_module,
         "_fsync_directory",
-        fail_first_directory_fsync,
+        fail_post_publish_directory_fsync,
     )
     try:
         with pytest.raises(extractor_module.ExtractionError, match="avant commit"):
@@ -418,6 +419,7 @@ def test_directory_fsync_failure_before_commit_rolls_back_previous_output(
         os.close(source.descriptor)
 
     assert output.read_bytes() == previous
+    assert calls >= 3
 
 
 def test_rename_failure_before_commit_rolls_back_previous_output(
@@ -455,3 +457,142 @@ def test_rename_failure_before_commit_rolls_back_previous_output(
         os.close(source.descriptor)
 
     assert output.read_bytes() == previous
+
+
+def test_process_killed_after_first_replace_never_removes_existing_output(
+    tmp_path: Path,
+    extractor_module,
+) -> None:
+    source_copy = tmp_path / "official.pdf"
+    shutil.copyfile(SOURCE, source_copy)
+    entry = official_entry()
+    entry["local_path"] = str(source_copy)
+    source = extractor_module.open_registered_source(source_copy, entry)
+    output = tmp_path / "programme.txt"
+    output.write_bytes(b"last known valid output\n")
+    output, directory_descriptor = extractor_module.open_output_directory(output)
+
+    child = os.fork()
+    if child == 0:
+        real_replace = extractor_module.os.replace
+        replace_calls = 0
+
+        def kill_after_first_replace(src, dst, *args, **kwargs):
+            nonlocal replace_calls
+            result = real_replace(src, dst, *args, **kwargs)
+            replace_calls += 1
+            if replace_calls == 1:
+                os.kill(os.getpid(), signal.SIGKILL)
+            return result
+
+        extractor_module.os.replace = kill_after_first_replace
+        try:
+            extractor_module.atomic_write(
+                output,
+                directory_descriptor,
+                b"new canonical output\n",
+                source,
+            )
+        finally:
+            os._exit(97)
+
+    try:
+        _, status = os.waitpid(child, 0)
+    finally:
+        os.close(directory_descriptor)
+        os.close(source.descriptor)
+
+    assert os.WIFSIGNALED(status)
+    assert os.WTERMSIG(status) == signal.SIGKILL
+    assert output.exists()
+    assert output.read_bytes() in {
+        b"last known valid output\n",
+        b"new canonical output\n",
+    }
+
+
+def test_initial_output_stays_published_if_post_replace_fsync_fails(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    extractor_module,
+) -> None:
+    source_copy = tmp_path / "official.pdf"
+    shutil.copyfile(SOURCE, source_copy)
+    entry = official_entry()
+    entry["local_path"] = str(source_copy)
+    source = extractor_module.open_registered_source(source_copy, entry)
+    output = tmp_path / "programme.txt"
+    output, directory_descriptor = extractor_module.open_output_directory(output)
+    calls = 0
+
+    def fail_first_directory_fsync(descriptor: int) -> None:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            raise OSError("injected directory fsync failure")
+        os.fsync(descriptor)
+
+    monkeypatch.setattr(
+        extractor_module,
+        "_fsync_directory",
+        fail_first_directory_fsync,
+    )
+    try:
+        with pytest.raises(extractor_module.ExtractionError, match="durabilité"):
+            extractor_module.atomic_write(
+                output,
+                directory_descriptor,
+                b"new canonical output\n",
+                source,
+            )
+    finally:
+        os.close(directory_descriptor)
+        os.close(source.descriptor)
+
+    assert output.read_bytes() == b"new canonical output\n"
+
+
+def test_atomic_write_retries_temporary_and_backup_name_collisions(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    extractor_module,
+) -> None:
+    source_copy = tmp_path / "official.pdf"
+    shutil.copyfile(SOURCE, source_copy)
+    entry = official_entry()
+    entry["local_path"] = str(source_copy)
+    source = extractor_module.open_registered_source(source_copy, entry)
+    output = tmp_path / "programme.txt"
+    output.write_bytes(b"last known valid output\n")
+    temp_collision = tmp_path / f".{output.name}.temp-collision.tmp"
+    backup_collision = tmp_path / f".{output.name}.backup-collision.bak"
+    temp_collision.write_bytes(b"foreign temp\n")
+    backup_collision.write_bytes(b"foreign backup\n")
+    candidates = iter(
+        (
+            "temp-collision",
+            "fresh-temp",
+            "backup-collision",
+            "fresh-backup",
+        )
+    )
+    monkeypatch.setattr(
+        extractor_module.tempfile,
+        "_get_candidate_names",
+        lambda: candidates,
+    )
+    output, directory_descriptor = extractor_module.open_output_directory(output)
+    try:
+        extractor_module.atomic_write(
+            output,
+            directory_descriptor,
+            b"new canonical output\n",
+            source,
+        )
+    finally:
+        os.close(directory_descriptor)
+        os.close(source.descriptor)
+
+    assert output.read_bytes() == b"new canonical output\n"
+    assert temp_collision.read_bytes() == b"foreign temp\n"
+    assert backup_collision.read_bytes() == b"foreign backup\n"

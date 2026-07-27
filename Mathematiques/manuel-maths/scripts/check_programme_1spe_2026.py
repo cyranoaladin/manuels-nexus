@@ -190,11 +190,12 @@ def canonical_sha256(value: object) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
-def same_resolved_path(candidate: Path, canonical: Path) -> bool:
-    try:
-        return candidate.resolve(strict=True) == canonical.resolve(strict=True)
-    except (OSError, RuntimeError):
-        return False
+def lexical_absolute(path: Path) -> Path:
+    return Path(os.path.abspath(os.fspath(path)))
+
+
+def same_canonical_path(candidate: Path, canonical: Path) -> bool:
+    return lexical_absolute(candidate) == lexical_absolute(canonical)
 
 
 def approved_asset_errors() -> list[str]:
@@ -362,7 +363,7 @@ def check(
     noncanonical_inputs = sorted(
         name
         for name, path in supplied_paths.items()
-        if not same_resolved_path(path, CANONICAL_PATHS[name])
+        if not same_canonical_path(path, CANONICAL_PATHS[name])
     )
     approval_errors = approved_asset_errors()
     errors: list[str] = []

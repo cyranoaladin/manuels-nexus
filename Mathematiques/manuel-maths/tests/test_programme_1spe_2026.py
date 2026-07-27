@@ -404,6 +404,41 @@ def test_checker_never_certifies_a_noncanonical_input_path(
     assert report["noncanonical_inputs"] == [report_name]
 
 
+@pytest.mark.parametrize(
+    ("option", "report_name", "canonical"),
+    [
+        ("programme", "programme", PROGRAMME_PATH),
+        ("schema", "schema", SCHEMA_PATH),
+        ("source", "source", SOURCE_PATH),
+        ("text", "text", TEXT_PATH),
+        ("attestation", "attestation", ATTESTATION_PATH),
+        (
+            "attestation-schema",
+            "attestation_schema",
+            ATTESTATION_SCHEMA_PATH,
+        ),
+        ("review", "review", REVIEW_PATH),
+        ("registry", "registry", REGISTRY_PATH),
+        ("compliance", "compliance", COMPLIANCE_PATH),
+    ],
+)
+def test_checker_rejects_every_symlink_alias_of_a_canonical_input(
+    tmp_path: Path,
+    option: str,
+    report_name: str,
+    canonical: Path,
+) -> None:
+    alias = tmp_path / f"alias-{canonical.name}"
+    alias.symlink_to(canonical)
+
+    result = run_checker(tmp_path, **{option: alias})
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "review_required"
+    assert report["noncanonical_inputs"] == [report_name]
+
+
 def test_noncanonical_input_is_review_required_even_on_early_read_error(
     tmp_path: Path,
 ) -> None:

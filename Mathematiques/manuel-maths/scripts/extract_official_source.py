@@ -283,17 +283,60 @@ def _fsync_directory(directory_descriptor: int) -> None:
     os.fsync(directory_descriptor)
 
 
+def _create_temporary_file(
+    output: Path,
+    directory_descriptor: int,
+    flags: int,
+) -> tuple[str, int]:
+    for _ in range(128):
+        candidate = next(tempfile._get_candidate_names())
+        name = f".{output.name}.{candidate}.tmp"
+        try:
+            descriptor = os.open(
+                name,
+                flags,
+                0o600,
+                dir_fd=directory_descriptor,
+            )
+        except FileExistsError:
+            continue
+        return name, descriptor
+    raise ExtractionError("impossible d’allouer un nom temporaire sûr")
+
+
+def _create_backup_link(
+    output: Path,
+    directory_descriptor: int,
+) -> str:
+    for _ in range(128):
+        candidate = next(tempfile._get_candidate_names())
+        name = f".{output.name}.{candidate}.bak"
+        try:
+            os.link(
+                output.name,
+                name,
+                src_dir_fd=directory_descriptor,
+                dst_dir_fd=directory_descriptor,
+                follow_symlinks=False,
+            )
+        except FileExistsError:
+            continue
+        return name
+    raise ExtractionError("impossible d’allouer un backup sûr")
+
+
 def atomic_write(
     output: Path,
     directory_descriptor: int,
     content: bytes,
     source: OpenSource,
 ) -> None:
-    temporary_name = f".{output.name}.{next(tempfile._get_candidate_names())}.tmp"
-    backup_name = f".{output.name}.{next(tempfile._get_candidate_names())}.bak"
+    temporary_name: str | None = None
+    backup_name: str | None = None
     temporary_exists = False
     backup_exists = False
     published = False
+    preserve_backup = False
     flags = (
         os.O_WRONLY
         | os.O_CREAT
@@ -302,7 +345,11 @@ def atomic_write(
         | getattr(os, "O_NOFOLLOW", 0)
     )
     try:
-        descriptor = os.open(temporary_name, flags, 0o600, dir_fd=directory_descriptor)
+        temporary_name, descriptor = _create_temporary_file(
+            output,
+            directory_descriptor,
+            flags,
+        )
         temporary_exists = True
         try:
             view = memoryview(content)
@@ -316,13 +363,14 @@ def atomic_write(
 
         existing = check_output_alias(output, directory_descriptor, source)
         if existing is not None:
-            os.replace(
-                output.name,
-                backup_name,
-                src_dir_fd=directory_descriptor,
-                dst_dir_fd=directory_descriptor,
-            )
+            backup_name = _create_backup_link(output, directory_descriptor)
             backup_exists = True
+            try:
+                _fsync_directory(directory_descriptor)
+            except OSError as exc:
+                raise ExtractionError(
+                    f"écriture atomique annulée avant commit : {exc}"
+                ) from exc
         try:
             os.replace(
                 temporary_name,
@@ -334,11 +382,12 @@ def atomic_write(
             published = True
             _fsync_directory(directory_descriptor)
         except OSError as publication_error:
-            try:
-                if published:
-                    os.unlink(output.name, dir_fd=directory_descriptor)
-                    published = False
-                if backup_exists:
+            if not published:
+                raise ExtractionError(
+                    f"écriture atomique annulée avant commit : {publication_error}"
+                ) from publication_error
+            if backup_exists and backup_name is not None:
+                try:
                     os.replace(
                         backup_name,
                         output.name,
@@ -346,19 +395,26 @@ def atomic_write(
                         dst_dir_fd=directory_descriptor,
                     )
                     backup_exists = False
-                _fsync_directory(directory_descriptor)
-            except OSError as rollback_error:
+                    published = False
+                    _fsync_directory(directory_descriptor)
+                except OSError as rollback_error:
+                    preserve_backup = backup_exists
+                    raise ExtractionError(
+                        "écriture atomique échouée et état de sortie indéterminé : "
+                        f"publication={publication_error}; "
+                        f"rollback={rollback_error}"
+                    ) from rollback_error
                 raise ExtractionError(
-                    "écriture atomique échouée et état de sortie indéterminé : "
-                    f"publication={publication_error}; rollback={rollback_error}"
-                ) from rollback_error
+                    f"écriture atomique annulée avant commit : {publication_error}"
+                ) from publication_error
             raise ExtractionError(
-                f"écriture atomique annulée avant commit : {publication_error}"
+                "sortie initiale publiée, durabilité indéterminée : "
+                f"{publication_error}"
             ) from publication_error
 
         # Commit point: the rename of the fully synced 0644 file and the
         # directory entry are durable. Cleanup errors cannot invalidate output.
-        if backup_exists:
+        if backup_exists and backup_name is not None:
             try:
                 os.unlink(backup_name, dir_fd=directory_descriptor)
                 backup_exists = False
@@ -370,19 +426,14 @@ def atomic_write(
     except OSError as exc:
         raise ExtractionError(f"écriture atomique impossible : {output}: {exc}") from exc
     finally:
-        if temporary_exists:
+        if temporary_exists and temporary_name is not None:
             try:
                 os.unlink(temporary_name, dir_fd=directory_descriptor)
             except OSError:
                 pass
-        if backup_exists and not published:
+        if backup_exists and backup_name is not None and not preserve_backup:
             try:
-                os.replace(
-                    backup_name,
-                    output.name,
-                    src_dir_fd=directory_descriptor,
-                    dst_dir_fd=directory_descriptor,
-                )
+                os.unlink(backup_name, dir_fd=directory_descriptor)
             except OSError:
                 pass
 
