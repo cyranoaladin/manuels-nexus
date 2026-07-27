@@ -191,10 +191,11 @@ def canonical_sha256(value: object) -> str:
 
 
 def lexical_absolute(path: Path) -> Path:
-    return Path(os.path.abspath(os.fspath(path)))
+    return path.absolute()
 
 
 def same_canonical_path(candidate: Path, canonical: Path) -> bool:
+    """Comparer le chemin exact, sans effacer un alias explicite ``a/../a``."""
     return lexical_absolute(candidate) == lexical_absolute(canonical)
 
 

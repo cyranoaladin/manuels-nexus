@@ -85,7 +85,7 @@ def open_registered_source(source: Path, entry: dict[str, Any]) -> OpenSource:
         raise ExtractionError("SHA-256 attendu absent ou invalide dans le registre")
     try:
         resolved = candidate.resolve(strict=True)
-    except OSError as exc:
+    except (OSError, RuntimeError) as exc:
         raise ExtractionError(f"source inaccessible : {candidate}: {exc}") from exc
     flags = os.O_RDONLY | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NOFOLLOW", 0)
     try:
@@ -152,7 +152,7 @@ def resolve_pdftotext() -> Path:
     try:
         resolved = Path(executable).resolve(strict=True)
         executable_stat = resolved.stat()
-    except OSError as exc:
+    except (OSError, RuntimeError) as exc:
         raise ExtractionError(f"binaire pdftotext inaccessible : {exc}") from exc
     if not stat.S_ISREG(executable_stat.st_mode) or not os.access(resolved, os.X_OK):
         raise ExtractionError(f"binaire pdftotext non exécutable régulier : {resolved}")

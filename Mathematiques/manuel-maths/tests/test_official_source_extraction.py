@@ -302,6 +302,48 @@ def test_source_symlink_is_allowed_only_at_the_registered_lexical_path(
     assert "source" in result.stderr.lower()
 
 
+def test_registered_source_symlink_loop_is_a_controlled_failure(
+    tmp_path: Path,
+) -> None:
+    source_loop = tmp_path / "official-loop.pdf"
+    source_loop.symlink_to(source_loop.name)
+    registry = tmp_path / "registry.yaml"
+    entry = official_entry()
+    entry["local_path"] = str(source_loop)
+    registry.write_text(
+        yaml.safe_dump({"sources": [entry]}, allow_unicode=True),
+        encoding="utf-8",
+    )
+    output = tmp_path / "programme.txt"
+
+    result = run_extractor(source_loop, output, tmp_path, registry)
+
+    assert result.returncode == 2
+    assert not output.exists()
+    assert "Traceback" not in result.stderr
+    assert "source" in result.stderr.lower()
+
+
+def test_pdftotext_symlink_loop_is_a_controlled_resolution_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    extractor_module,
+) -> None:
+    executable_loop = tmp_path / "pdftotext"
+    executable_loop.symlink_to(executable_loop.name)
+    monkeypatch.setattr(
+        extractor_module.shutil,
+        "which",
+        lambda _name: str(executable_loop),
+    )
+
+    with pytest.raises(
+        extractor_module.ExtractionError,
+        match="pdftotext",
+    ):
+        extractor_module.resolve_pdftotext()
+
+
 def test_extractor_does_not_leave_temporary_files(tmp_path: Path) -> None:
     assert sha256(SOURCE) == EXPECTED_PDF_SHA256
     output = tmp_path / "nested" / "programme.txt"

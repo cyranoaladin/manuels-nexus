@@ -439,6 +439,47 @@ def test_checker_rejects_every_symlink_alias_of_a_canonical_input(
     assert report["noncanonical_inputs"] == [report_name]
 
 
+@pytest.mark.parametrize(
+    ("option", "report_name", "canonical"),
+    [
+        ("programme", "programme", PROGRAMME_PATH),
+        ("schema", "schema", SCHEMA_PATH),
+        ("source", "source", SOURCE_PATH),
+        ("text", "text", TEXT_PATH),
+        ("attestation", "attestation", ATTESTATION_PATH),
+        (
+            "attestation-schema",
+            "attestation_schema",
+            ATTESTATION_SCHEMA_PATH,
+        ),
+        ("review", "review", REVIEW_PATH),
+        ("registry", "registry", REGISTRY_PATH),
+        ("compliance", "compliance", COMPLIANCE_PATH),
+    ],
+)
+def test_checker_rejects_symlink_pivot_dotdot_paths_to_canonical_inputs(
+    tmp_path: Path,
+    option: str,
+    report_name: str,
+    canonical: Path,
+) -> None:
+    pivot = tmp_path / "pivot"
+    pivot.symlink_to("/", target_is_directory=True)
+    candidate = pivot.joinpath(
+        *([".."] * 64),
+        *canonical.parts[1:],
+    )
+    assert candidate.resolve(strict=True) == canonical.resolve(strict=True)
+    assert "/../" in str(candidate)
+
+    result = run_checker(tmp_path, **{option: candidate})
+
+    assert result.returncode == 2
+    report = json.loads(result.stdout)
+    assert report["status"] == "review_required"
+    assert report["noncanonical_inputs"] == [report_name]
+
+
 def test_noncanonical_input_is_review_required_even_on_early_read_error(
     tmp_path: Path,
 ) -> None:
