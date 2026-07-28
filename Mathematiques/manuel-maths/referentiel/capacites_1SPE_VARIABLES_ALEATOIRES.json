@@ -1,7 +1,7 @@
 {
   "niveau": "1SPE",
   "theme": "VARIABLES-ALEATOIRES",
-  "bo_reference": "Programme d'enseignement de spécialité de mathématiques de la classe de première de la voie générale, BO n° 14 du 2 avril 2026, probabilités et statistiques : variables aléatoires (application à la rentrée 2026-2027).",
+  "bo_reference": "Programme de spécialité mathématiques de première générale — Arrêté du 26 février 2026 (NOR MENE2602917A), B.O. spécial n°14 du 2 avril 2026",
   "source_officielle": "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A",
   "note_R7": "Capacités extraites du BO 2026. Vérification humaine recommandée (A_VALIDER_HUMAIN).",
   "capacites": [
@@ -9,32 +9,26 @@
       "id": "1SPE-VARIABLES-ALEATOIRES-C1",
       "libelle_bo": "Déterminer la loi de probabilité d'une variable aléatoire discrète finie.",
       "libelle_eleve": "Je sais déterminer la loi de probabilité d'une variable aléatoire.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "PROB-VA-CAP-003",
+      "bo_quote_2026": "Déterminer la loi de probabilité d’une variable aléatoire."
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C2",
       "libelle_bo": "Calculer l'espérance, la variance et l'écart type d'une variable aléatoire.",
       "libelle_eleve": "Je sais calculer E(X), V(X) et σ(X).",
-      "demonstration_exigible": false
-    },
-    {
-      "id": "1SPE-VARIABLES-ALEATOIRES-C3",
-      "libelle_bo": "Connaître et utiliser la loi de Bernoulli et la loi binomiale.",
-      "libelle_eleve": "Je sais reconnaître et utiliser les lois de Bernoulli et binomiale.",
-      "demonstration_exigible": false
-    },
-    {
-      "id": "1SPE-VARIABLES-ALEATOIRES-C4",
-      "libelle_bo": "Calculer E(X) et V(X) pour une loi binomiale B(n,p).",
-      "libelle_eleve": "Je sais que E(X)=np et V(X)=np(1-p) pour X~B(n,p).",
-      "demonstration_exigible": true,
-      "demonstration": "Démonstration de E(X)=np par linéarité de l'espérance."
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "PROB-VA-CAP-004",
+      "bo_quote_2026": "Calculer une espérance, une variance, un écart type."
     },
     {
       "id": "1SPE-VARIABLES-ALEATOIRES-C5",
       "libelle_bo": "Résoudre des problèmes contextualisés faisant intervenir des variables aléatoires.",
       "libelle_eleve": "Je sais modéliser une situation par une variable aléatoire et interpréter E(X).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "PROB-VA-CAP-005",
+      "bo_quote_2026": "Utiliser la notion d’espérance dans une résolution de problème (mise pour un jeu équitable, etc.)."
     }
-  ]
+  ],
+  "gap_task8": "Les items VA-EXP-SIMULER, VA-EXP-FONCTION-MOYENNE, VA-EXP-DISTANCE-MOYENNE-ESPERANCE et VA-EXP-PROPORTION-2SIGMA (mandatory_content) n'ont pas encore de capacité/contenu dans ce chapitre : à créer en Task 8."
 }

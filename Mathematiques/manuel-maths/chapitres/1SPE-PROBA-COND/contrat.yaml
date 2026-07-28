@@ -2,14 +2,91 @@ chapitre: 1SPE-PROBA-COND
 niveau: 1SPE
 theme: PROBA-COND
 titre: "Probabilites conditionnelles et independance"
-statut: draft
+statut: valide   # draft -> valide (migration BO2026, Task 4C)
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-PROBA-COND-C1, libelle_eleve: "Je sais calculer une probabilite conditionnelle $P_A(B) = P(A \\cap B) / P(A)$." }
-  - { code: C2, ref_capacite: 1SPE-PROBA-COND-C2, libelle_eleve: "Je sais construire et lire un arbre pondere." }
-  - { code: C3, ref_capacite: 1SPE-PROBA-COND-C3, libelle_eleve: "Je sais appliquer la formule des probabilites totales." }
-  - { code: C4, ref_capacite: 1SPE-PROBA-COND-C4, libelle_eleve: "Je sais determiner si deux evenements sont independants." }
-  - { code: C5, ref_capacite: 1SPE-PROBA-COND-C5, libelle_eleve: "Je sais resoudre un probleme contextualise de probabilites conditionnelles." }
+  - code: C1
+    ref_capacite: PROB-COND-CONT-001
+    libelle_eleve: "Je sais calculer une probabilite conditionnelle $P_A(B) = P(A \\cap B) / P(A)$."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PROBCOND-EX-001
+      - 1SPE-PROBCOND-EX-002
+      - 1SPE-PROBCOND-EX-003
+      - 1SPE-PROBCOND-EX-004
+      - 1SPE-PROBCOND-EX-005
+      - 1SPE-PROBCOND-EX-006
+      - 1SPE-PROBCOND-EX-007
+      - 1SPE-PROBCOND-EX-008
+      - 1SPE-PROBCOND-EX-009
+      - 1SPE-PROBCOND-EX-010
+    transversal_ids:
+      - TR-AUTO-CAP-018
+  - code: C2
+    ref_capacite: PROB-COND-CAP-003
+    libelle_eleve: "Je sais construire et lire un arbre pondere."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PROBCOND-EX-011
+      - 1SPE-PROBCOND-EX-012
+      - 1SPE-PROBCOND-EX-013
+      - 1SPE-PROBCOND-EX-014
+      - 1SPE-PROBCOND-EX-015
+      - 1SPE-PROBCOND-EX-016
+      - 1SPE-PROBCOND-EX-017
+      - 1SPE-PROBCOND-EX-018
+      - 1SPE-PROBCOND-EX-019
+      - 1SPE-PROBCOND-EX-020
+    transversal_ids:
+      - TR-AUTO-CAP-018
+  - code: C3
+    ref_capacite: PROB-COND-CAP-001
+    libelle_eleve: "Je sais appliquer la formule des probabilites totales."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PROBCOND-EX-021
+      - 1SPE-PROBCOND-EX-022
+      - 1SPE-PROBCOND-EX-023
+      - 1SPE-PROBCOND-EX-024
+      - 1SPE-PROBCOND-EX-025
+      - 1SPE-PROBCOND-EX-026
+      - 1SPE-PROBCOND-EX-027
+      - 1SPE-PROBCOND-EX-028
+      - 1SPE-PROBCOND-EX-029
+      - 1SPE-PROBCOND-EX-030
+    transversal_ids: []
+  - code: C4
+    ref_capacite: PROB-COND-CAP-002
+    libelle_eleve: "Je sais determiner si deux evenements sont independants."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PROBCOND-EX-031
+      - 1SPE-PROBCOND-EX-032
+      - 1SPE-PROBCOND-EX-033
+      - 1SPE-PROBCOND-EX-034
+      - 1SPE-PROBCOND-EX-035
+      - 1SPE-PROBCOND-EX-036
+      - 1SPE-PROBCOND-EX-037
+      - 1SPE-PROBCOND-EX-038
+      - 1SPE-PROBCOND-EX-039
+      - 1SPE-PROBCOND-EX-040
+    transversal_ids: []
+  - code: C5
+    ref_capacite: PROB-COND-CAP-004
+    libelle_eleve: "Je sais resoudre un probleme contextualise de probabilites conditionnelles."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PROBCOND-EX-041
+      - 1SPE-PROBCOND-EX-042
+      - 1SPE-PROBCOND-EX-043
+      - 1SPE-PROBCOND-EX-044
+      - 1SPE-PROBCOND-EX-045
+      - 1SPE-PROBCOND-EX-046
+      - 1SPE-PROBCOND-EX-047
+      - 1SPE-PROBCOND-EX-048
+      - 1SPE-PROBCOND-EX-049
+      - 1SPE-PROBCOND-EX-050
+    transversal_ids: []
 
 prerequis:
   - { code: R1, libelle: "Probabilites de base : vocabulaire, union, intersection, complementaire", chapitre_origine: "2GT" }
@@ -19,10 +96,6 @@ prerequis:
   - { code: R5, libelle: "Tableaux de donnees : lecture, frequences, effectifs", chapitre_origine: "2GT" }
 
 situation_accroche: >
-  Un test de depistage detecte correctement 95 % des personnes malades,
-  mais donne aussi un resultat positif chez 3 % des personnes saines.
-  Si 1 % de la population est atteinte, quelle est la probabilite
-  d'etre reellement malade quand le test est positif ?
-  Un probleme qui necessite les probabilites conditionnelles.
+  Un test de depistage detecte correctement 95 % des personnes malades, mais donne aussi un resultat positif chez 3 % des personnes saines. Si 1 % de la population est atteinte, quelle est la probabilite d'etre reellement malade quand le test est positif ? Un probleme qui necessite les probabilites conditionnelles.
 
 temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

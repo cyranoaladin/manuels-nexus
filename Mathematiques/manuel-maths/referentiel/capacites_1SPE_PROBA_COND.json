@@ -1,7 +1,7 @@
 {
   "niveau": "1SPE",
   "theme": "PROBA-COND",
-  "bo_reference": "Programme d'enseignement de spécialité de mathématiques de la classe de première de la voie générale, BO n° 14 du 2 avril 2026, probabilités et statistiques : probabilités conditionnelles (application à la rentrée 2026-2027).",
+  "bo_reference": "Programme de spécialité mathématiques de première générale — Arrêté du 26 février 2026 (NOR MENE2602917A), B.O. spécial n°14 du 2 avril 2026",
   "source_officielle": "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A",
   "note_R7": "Capacités extraites du BO 2026. Vérification humaine recommandée (A_VALIDER_HUMAIN).",
   "capacites": [
@@ -9,32 +9,42 @@
       "id": "1SPE-PROBA-COND-C1",
       "libelle_bo": "Calculer des probabilités conditionnelles P_A(B).",
       "libelle_eleve": "Je sais calculer P_A(B) = P(A∩B)/P(A).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "PROB-COND-CONT-001",
+      "bo_quote_2026": "Indépendance de deux évènements."
     },
     {
       "id": "1SPE-PROBA-COND-C2",
       "libelle_bo": "Construire et exploiter un arbre pondéré.",
       "libelle_eleve": "Je sais construire un arbre de probabilités et lire les probabilités sur les branches.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "PROB-COND-CAP-003",
+      "bo_quote_2026": "Représenter la succession de deux épreuves indépendantes par un arbre ou un tableau."
     },
     {
       "id": "1SPE-PROBA-COND-C3",
       "libelle_bo": "Appliquer la formule des probabilités totales.",
       "libelle_eleve": "Je sais appliquer P(B)=P(A)P_A(B)+P(Ā)P_Ā(B).",
       "demonstration_exigible": true,
-      "demonstration": "Démonstration de la formule des probabilités totales à partir de la partition."
+      "demonstration": "Démonstration de la formule des probabilités totales à partir de la partition.",
+      "ref_capacite_bo2026": "PROB-COND-CAP-001",
+      "bo_quote_2026": "Dans des cas simples, calculer une probabilité à l’aide de la formule des probabilités totales."
     },
     {
       "id": "1SPE-PROBA-COND-C4",
       "libelle_bo": "Reconnaître et utiliser l'indépendance de deux événements.",
       "libelle_eleve": "Je sais reconnaître deux événements indépendants et utiliser P(A∩B)=P(A)P(B).",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "PROB-COND-CAP-002",
+      "bo_quote_2026": "Savoir utiliser ou justifier l’indépendance de deux évènements."
     },
     {
       "id": "1SPE-PROBA-COND-C5",
       "libelle_bo": "Résoudre des problèmes contextualisés faisant intervenir des probabilités conditionnelles.",
       "libelle_eleve": "Je sais modéliser et résoudre un problème concret avec des probabilités conditionnelles.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "PROB-COND-CAP-004",
+      "bo_quote_2026": "Pour 𝑛 ⩽ 4, représenter l’arbre associé à la répétition de 𝑛 épreuves de Bernoulli indépendantes et identiques afin de calculer des probabilités."
     }
   ]
 }

@@ -2,14 +2,89 @@ chapitre: 1SPE-PRODUIT-SCALAIRE
 niveau: 1SPE
 theme: PRODUIT-SCALAIRE
 titre: "Produit scalaire"
-statut: complete
+statut: valide   # draft -> valide (migration BO2026, Task 4C)
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C1, libelle_eleve: "Je sais calculer un produit scalaire (definition geometrique, projection, expression analytique)." }
-  - { code: C2, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C2, libelle_eleve: "Je sais utiliser les proprietes du produit scalaire (bilinearite, symetrie, norme)." }
-  - { code: C3, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C3, libelle_eleve: "Je sais determiner l'orthogonalite de deux vecteurs et calculer un angle." }
-  - { code: C4, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C4, libelle_eleve: "Je sais utiliser le produit scalaire dans des problemes geometriques (mediatrice, hauteurs, aires)." }
-  - { code: C5, ref_capacite: 1SPE-PRODUIT-SCALAIRE-C5, libelle_eleve: "Je sais appliquer la formule d'Al-Kashi et en connais la demonstration." }
+  - code: C1
+    ref_capacite: GEO-PS-CAP-002
+    libelle_eleve: "Je sais calculer un produit scalaire (definition geometrique, projection, expression analytique)."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PRODSCAL-EX-001
+      - 1SPE-PRODSCAL-EX-002
+      - 1SPE-PRODSCAL-EX-003
+      - 1SPE-PRODSCAL-EX-004
+      - 1SPE-PRODSCAL-EX-005
+      - 1SPE-PRODSCAL-EX-006
+      - 1SPE-PRODSCAL-EX-007
+      - 1SPE-PRODSCAL-EX-008
+      - 1SPE-PRODSCAL-EX-009
+      - 1SPE-PRODSCAL-EX-010
+    transversal_ids: []
+  - code: C2
+    ref_capacite: GEO-PS-CONT-002
+    libelle_eleve: "Je sais utiliser les proprietes du produit scalaire (bilinearite, symetrie, norme)."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PRODSCAL-EX-011
+      - 1SPE-PRODSCAL-EX-012
+      - 1SPE-PRODSCAL-EX-013
+      - 1SPE-PRODSCAL-EX-014
+      - 1SPE-PRODSCAL-EX-015
+      - 1SPE-PRODSCAL-EX-016
+      - 1SPE-PRODSCAL-EX-017
+      - 1SPE-PRODSCAL-EX-018
+      - 1SPE-PRODSCAL-EX-019
+      - 1SPE-PRODSCAL-EX-020
+    transversal_ids: []
+  - code: C3
+    ref_capacite: GEO-PS-CAP-001
+    libelle_eleve: "Je sais determiner l'orthogonalite de deux vecteurs et calculer un angle."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PRODSCAL-EX-021
+      - 1SPE-PRODSCAL-EX-022
+      - 1SPE-PRODSCAL-EX-023
+      - 1SPE-PRODSCAL-EX-024
+      - 1SPE-PRODSCAL-EX-025
+      - 1SPE-PRODSCAL-EX-026
+      - 1SPE-PRODSCAL-EX-027
+      - 1SPE-PRODSCAL-EX-028
+      - 1SPE-PRODSCAL-EX-029
+      - 1SPE-PRODSCAL-EX-030
+    transversal_ids: []
+  - code: C4
+    ref_capacite: GEO-PS-CAP-003
+    libelle_eleve: "Je sais utiliser le produit scalaire dans des problemes geometriques (mediatrice, hauteurs, aires)."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-PRODSCAL-EX-031
+      - 1SPE-PRODSCAL-EX-032
+      - 1SPE-PRODSCAL-EX-033
+      - 1SPE-PRODSCAL-EX-034
+      - 1SPE-PRODSCAL-EX-035
+      - 1SPE-PRODSCAL-EX-036
+      - 1SPE-PRODSCAL-EX-037
+      - 1SPE-PRODSCAL-EX-038
+      - 1SPE-PRODSCAL-EX-039
+      - 1SPE-PRODSCAL-EX-040
+    transversal_ids: []
+  - code: C5
+    ref_capacite: GEO-PS-DEM-001
+    libelle_eleve: "Je sais appliquer la formule d'Al-Kashi et en connais la demonstration."
+    obligation_class: prescribed_teaching
+    proof_object_ids:
+      - 1SPE-PRODSCAL-EX-041
+      - 1SPE-PRODSCAL-EX-042
+      - 1SPE-PRODSCAL-EX-043
+      - 1SPE-PRODSCAL-EX-044
+      - 1SPE-PRODSCAL-EX-045
+      - 1SPE-PRODSCAL-EX-046
+      - 1SPE-PRODSCAL-EX-047
+      - 1SPE-PRODSCAL-EX-048
+      - 1SPE-PRODSCAL-EX-049
+      - 1SPE-PRODSCAL-EX-050
+    transversal_ids: []
 
 prerequis:
   - { code: R1, libelle: "Vecteurs et coordonnees dans le plan", chapitre_origine: "2GT" }
@@ -19,8 +94,6 @@ prerequis:
   - { code: R5, libelle: "Theoreme de Pythagore", chapitre_origine: "2GT" }
 
 situation_accroche: >
-  Un randonneur se deplace de 5 km vers le nord-est puis de 3 km vers le sud-est.
-  Quelle distance le separe de son point de depart ?
-  Comment calculer l'angle entre deux trajets dans le plan ?
+  Un randonneur se deplace de 5 km vers le nord-est puis de 3 km vers le sud-est. Quelle distance le separe de son point de depart ? Comment calculer l'angle entre deux trajets dans le plan ?
 
 temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

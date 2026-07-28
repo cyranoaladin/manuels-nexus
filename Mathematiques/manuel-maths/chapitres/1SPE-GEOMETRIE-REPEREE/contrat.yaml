@@ -2,14 +2,101 @@ chapitre: 1SPE-GEOMETRIE-REPEREE
 niveau: 1SPE
 theme: GEOMETRIE-REPEREE
 titre: "Géométrie repérée"
-statut: draft   # draft -> valide (validation humaine LOT 0)
+statut: valide   # draft -> valide (migration BO2026, Task 4C)
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-GEOREP-C1, libelle_eleve: "Je sais déterminer une équation cartésienne d'une droite ax+by+c=0 et l'exploiter." }
-  - { code: C2, ref_capacite: 1SPE-GEOREP-C2, libelle_eleve: "Je sais utiliser un vecteur normal à une droite, passer d'une équation cartésienne à un vecteur directeur/normal et réciproquement." }
-  - { code: C3, ref_capacite: 1SPE-GEOREP-C3, libelle_eleve: "Je sais déterminer et exploiter l'équation d'un cercle (x-a)²+(y-b)²=r²." }
-  - { code: C4, ref_capacite: 1SPE-GEOREP-C4, libelle_eleve: "Je sais étudier les positions relatives de droites et de cercles (parallélisme, intersection, tangence)." }
-  - { code: C5, ref_capacite: 1SPE-GEOREP-C5, libelle_eleve: "Je sais résoudre des problèmes géométriques dans un repère orthonormé." }
+  - code: C1
+    ref_capacite: GEO-REP-CAP-001
+    libelle_eleve: "Je sais déterminer une équation cartésienne d'une droite ax+by+c=0 et l'exploiter."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-GEOREP-COURS-00
+      - 1SPE-GEOREP-COURS-07-FR
+      - 1SPE-GEOREP-EX-001
+      - 1SPE-GEOREP-EX-002
+      - 1SPE-GEOREP-EX-003
+      - 1SPE-GEOREP-EX-004
+      - 1SPE-GEOREP-EX-005
+      - 1SPE-GEOREP-EX-006
+      - 1SPE-GEOREP-EX-007
+      - 1SPE-GEOREP-EX-008
+      - 1SPE-GEOREP-EX-009
+      - 1SPE-GEOREP-EX-010
+    transversal_ids: []
+  - code: C2
+    ref_capacite: GEO-REP-CONT-001
+    libelle_eleve: "Je sais utiliser un vecteur normal à une droite, passer d'une équation cartésienne à un vecteur directeur/normal et réciproquement."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-GEOREP-COURS-00
+      - 1SPE-GEOREP-EX-011
+      - 1SPE-GEOREP-EX-012
+      - 1SPE-GEOREP-EX-013
+      - 1SPE-GEOREP-EX-014
+      - 1SPE-GEOREP-EX-015
+      - 1SPE-GEOREP-EX-016
+      - 1SPE-GEOREP-EX-017
+      - 1SPE-GEOREP-EX-018
+      - 1SPE-GEOREP-EX-019
+      - 1SPE-GEOREP-EX-020
+    transversal_ids: []
+  - code: C3
+    ref_capacite: GEO-REP-CAP-003
+    libelle_eleve: "Je sais déterminer et exploiter l'équation d'un cercle (x-a)²+(y-b)²=r²."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-GEOREP-COURS-00
+      - 1SPE-GEOREP-COURS-07-FR
+      - 1SPE-GEOREP-COURS-07-TC
+      - 1SPE-GEOREP-EX-021
+      - 1SPE-GEOREP-EX-022
+      - 1SPE-GEOREP-EX-023
+      - 1SPE-GEOREP-EX-024
+      - 1SPE-GEOREP-EX-025
+      - 1SPE-GEOREP-EX-026
+      - 1SPE-GEOREP-EX-027
+      - 1SPE-GEOREP-EX-028
+      - 1SPE-GEOREP-EX-029
+      - 1SPE-GEOREP-EX-030
+    transversal_ids: []
+  - code: C4
+    ref_capacite: GEO-REP-CAP-004
+    libelle_eleve: "Je sais étudier les positions relatives de droites et de cercles (parallélisme, intersection, tangence)."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-GEOREP-COURS-00
+      - 1SPE-GEOREP-COURS-07-FR
+      - 1SPE-GEOREP-COURS-07-TC
+      - 1SPE-GEOREP-EX-031
+      - 1SPE-GEOREP-EX-032
+      - 1SPE-GEOREP-EX-033
+      - 1SPE-GEOREP-EX-034
+      - 1SPE-GEOREP-EX-035
+      - 1SPE-GEOREP-EX-036
+      - 1SPE-GEOREP-EX-037
+      - 1SPE-GEOREP-EX-038
+      - 1SPE-GEOREP-EX-039
+      - 1SPE-GEOREP-EX-040
+    transversal_ids: []
+  - code: C5
+    ref_capacite: GEO-REP-CAP-005
+    libelle_eleve: "Je sais résoudre des problèmes géométriques dans un repère orthonormé."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-GEOREP-COURS-00
+      - 1SPE-GEOREP-COURS-07-FR
+      - 1SPE-GEOREP-COURS-07-TC
+      - 1SPE-GEOREP-EX-041
+      - 1SPE-GEOREP-EX-042
+      - 1SPE-GEOREP-EX-043
+      - 1SPE-GEOREP-EX-044
+      - 1SPE-GEOREP-EX-045
+      - 1SPE-GEOREP-EX-046
+      - 1SPE-GEOREP-EX-047
+      - 1SPE-GEOREP-EX-048
+      - 1SPE-GEOREP-EX-049
+      - 1SPE-GEOREP-EX-050
+    transversal_ids: []
 
 prerequis:
   - { code: R1, libelle: "Repérage dans le plan : coordonnées, milieu, distance", chapitre_origine: "2GT" }
@@ -19,9 +106,6 @@ prerequis:
   - { code: R5, libelle: "Systèmes d'équations linéaires à deux inconnues", chapitre_origine: "2GT" }
 
 situation_accroche: >
-  Un ingénieur doit vérifier si un câble rectiligne (modélisé par une droite) traverse
-  une zone circulaire interdite (modélisée par un cercle) dans un plan cartographique.
-  Comment traduire ce problème en équations et le résoudre par le calcul ?
-  Résolu au TD fil rouge avec les outils du chapitre (C1, C3, C4, C5).
+  Un ingénieur doit vérifier si un câble rectiligne (modélisé par une droite) traverse une zone circulaire interdite (modélisée par un cercle) dans un plan cartographique. Comment traduire ce problème en équations et le résoudre par le calcul ? Résolu au TD fil rouge avec les outils du chapitre (C1, C3, C4, C5).
 
 temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 9 }
