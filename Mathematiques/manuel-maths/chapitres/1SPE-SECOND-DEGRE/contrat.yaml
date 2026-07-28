@@ -2,15 +2,103 @@ chapitre: 1SPE-SECOND-DEGRE
 niveau: 1SPE
 theme: SECOND-DEGRE
 titre: "Fonctions polynomes du second degre"
-statut: draft
+statut: valide   # draft -> valide (migration BO2026, Task 4B)
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-SECOND-DEGRE-C1, libelle_eleve: "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre." }
-  - { code: C2, ref_capacite: 1SPE-SECOND-DEGRE-C2, libelle_eleve: "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations." }
-  - { code: C3, ref_capacite: 1SPE-SECOND-DEGRE-C3, libelle_eleve: "Je sais calculer le discriminant et resoudre une equation du second degre." }
-  - { code: C4, ref_capacite: 1SPE-SECOND-DEGRE-C4, libelle_eleve: "Je sais factoriser un trinome et etudier son signe." }
-  - { code: C5, ref_capacite: 1SPE-SECOND-DEGRE-C5, libelle_eleve: "Je sais resoudre une inequation du second degre." }
-  - { code: C6, ref_capacite: 1SPE-SECOND-DEGRE-C6, libelle_eleve: "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum." }
+  - code: C1
+    ref_capacite: ALG-SD-CAP-004
+    libelle_eleve: "Je sais reconnaitre un polynome du second degre et passer d'une forme a une autre."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SECDEG-CR-000
+      - 1SPE-SECDEG-EX-001
+      - 1SPE-SECDEG-EX-002
+      - 1SPE-SECDEG-EX-003
+      - 1SPE-SECDEG-EX-019
+      - 1SPE-SECDEG-EX-020
+      - 1SPE-SECDEG-EX-021
+      - 1SPE-SECDEG-EX-022
+      - 1SPE-SECDEG-EX-031
+      - 1SPE-SECDEG-EX-032
+    transversal_ids: []
+  - code: C2
+    ref_capacite: ALG-SD-CONT-002
+    libelle_eleve: "Je sais determiner le sommet, l'axe de symetrie et dresser le tableau de variations."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SECDEG-CR-000
+      - 1SPE-SECDEG-EX-004
+      - 1SPE-SECDEG-EX-005
+      - 1SPE-SECDEG-EX-006
+      - 1SPE-SECDEG-EX-019
+      - 1SPE-SECDEG-EX-020
+      - 1SPE-SECDEG-EX-027
+      - 1SPE-SECDEG-EX-028
+    transversal_ids: []
+  - code: C3
+    ref_capacite: ALG-SD-CONT-002
+    libelle_eleve: "Je sais calculer le discriminant et resoudre une equation du second degre."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SECDEG-CR-000
+      - 1SPE-SECDEG-EX-007
+      - 1SPE-SECDEG-EX-008
+      - 1SPE-SECDEG-EX-009
+      - 1SPE-SECDEG-EX-021
+      - 1SPE-SECDEG-EX-022
+      - 1SPE-SECDEG-EX-023
+      - 1SPE-SECDEG-EX-024
+      - 1SPE-SECDEG-EX-029
+      - 1SPE-SECDEG-EX-030
+    transversal_ids: []
+  - code: C4
+    ref_capacite: ALG-SD-CAP-003
+    libelle_eleve: "Je sais factoriser un trinome et etudier son signe."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SECDEG-CR-000
+      - 1SPE-SECDEG-EX-010
+      - 1SPE-SECDEG-EX-011
+      - 1SPE-SECDEG-EX-012
+      - 1SPE-SECDEG-EX-023
+      - 1SPE-SECDEG-EX-024
+      - 1SPE-SECDEG-EX-025
+      - 1SPE-SECDEG-EX-026
+      - 1SPE-SECDEG-EX-031
+      - 1SPE-SECDEG-EX-032
+    transversal_ids:
+      - TR-AUTO-CAP-008
+  - code: C5
+    ref_capacite: ALG-SD-CAP-001
+    libelle_eleve: "Je sais resoudre une inequation du second degre."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SECDEG-CR-000
+      - 1SPE-SECDEG-EX-013
+      - 1SPE-SECDEG-EX-014
+      - 1SPE-SECDEG-EX-015
+      - 1SPE-SECDEG-EX-025
+      - 1SPE-SECDEG-EX-026
+      - 1SPE-SECDEG-EX-029
+      - 1SPE-SECDEG-EX-030
+      - 1SPE-SECDEG-EX-033
+      - 1SPE-SECDEG-EX-034
+    transversal_ids:
+      - TR-AUTO-CAP-008
+  - code: C6
+    ref_capacite: ALG-SD-CAP-004
+    libelle_eleve: "Je sais modeliser un probleme concret par un polynome du second degre et trouver un optimum."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SECDEG-CR-000
+      - 1SPE-SECDEG-EX-016
+      - 1SPE-SECDEG-EX-017
+      - 1SPE-SECDEG-EX-018
+      - 1SPE-SECDEG-EX-027
+      - 1SPE-SECDEG-EX-028
+      - 1SPE-SECDEG-EX-033
+      - 1SPE-SECDEG-EX-034
+    transversal_ids: []
 
 prerequis:
   - { code: R1, libelle: "Calcul litteral : developper, factoriser, identites remarquables", chapitre_origine: "2GT" }
@@ -20,8 +108,6 @@ prerequis:
   - { code: R5, libelle: "Inegalites : regles de calcul, tableau de signes", chapitre_origine: "2GT" }
 
 situation_accroche: >
-  Un artisan fabrique des boites en carton en decoupant des carres aux coins d'une feuille rectangulaire.
-  Quel cote de carre maximise le volume de la boite ? Un probleme d'optimisation
-  qui se ramene a l'etude d'un polynome du second degre.
+  Un artisan fabrique des boites en carton en decoupant des carres aux coins d'une feuille rectangulaire. Quel cote de carre maximise le volume de la boite ? Un probleme d'optimisation qui se ramene a l'etude d'un polynome du second degre.
 
 temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

@@ -2,14 +2,100 @@ chapitre: 1SPE-DERIVATION-GLOBAL
 niveau: 1SPE
 theme: DERIVATION-GLOBAL
 titre: "Dérivation : applications aux variations"
-statut: draft
+statut: valide   # draft -> valide (migration BO2026, Task 4B)
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-DERIVATION-GLOBAL-C1, libelle_eleve: "Je sais dériver les fonctions de référence (puissances, inverse, racine carrée)." }
-  - { code: C2, ref_capacite: 1SPE-DERIVATION-GLOBAL-C2, libelle_eleve: "Je sais utiliser les règles de dérivation (somme, produit, quotient)." }
-  - { code: C3, ref_capacite: 1SPE-DERIVATION-GLOBAL-C3, libelle_eleve: "Je sais utiliser le signe de la dérivée pour dresser le tableau de variations." }
-  - { code: C4, ref_capacite: 1SPE-DERIVATION-GLOBAL-C4, libelle_eleve: "Je sais trouver les extremums d'une fonction en annulant sa dérivée." }
-  - { code: C5, ref_capacite: 1SPE-DERIVATION-GLOBAL-C5, libelle_eleve: "Je sais modéliser et résoudre un problème d'optimisation à l'aide de la dérivation." }
+  - code: C1
+    ref_capacite: ANA-DERGLOB-CAP-001
+    libelle_eleve: "Je sais dériver les fonctions de référence (puissances, inverse, racine carrée)."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERGLOBAL-EX-001
+      - 1SPE-DERGLOBAL-EX-002
+      - 1SPE-DERGLOBAL-EX-003
+      - 1SPE-DERGLOBAL-EX-004
+      - 1SPE-DERGLOBAL-EX-005
+      - 1SPE-DERGLOBAL-EX-006
+      - 1SPE-DERGLOBAL-EX-007
+      - 1SPE-DERGLOBAL-EX-008
+      - 1SPE-DERGLOBAL-EX-009
+      - 1SPE-DERGLOBAL-EX-010
+      - 1SPE-DERGLOBAL-EX-047
+      - 1SPE-DERGLOBAL-EX-050
+      - 1SPE-DERGLOBAL-EX-052
+      - 1SPE-DERGLOBAL-EX-053
+    transversal_ids: []
+  - code: C2
+    ref_capacite: ANA-DERGLOB-CAP-001
+    libelle_eleve: "Je sais utiliser les règles de dérivation (somme, produit, quotient)."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERGLOBAL-EX-011
+      - 1SPE-DERGLOBAL-EX-012
+      - 1SPE-DERGLOBAL-EX-013
+      - 1SPE-DERGLOBAL-EX-014
+      - 1SPE-DERGLOBAL-EX-015
+      - 1SPE-DERGLOBAL-EX-016
+      - 1SPE-DERGLOBAL-EX-017
+      - 1SPE-DERGLOBAL-EX-018
+      - 1SPE-DERGLOBAL-EX-019
+      - 1SPE-DERGLOBAL-EX-020
+      - 1SPE-DERGLOBAL-EX-047
+      - 1SPE-DERGLOBAL-EX-048
+      - 1SPE-DERGLOBAL-EX-050
+    transversal_ids: []
+  - code: C3
+    ref_capacite: ANA-VAR-CAP-001
+    libelle_eleve: "Je sais utiliser le signe de la dérivée pour dresser le tableau de variations."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERGLOBAL-EX-021
+      - 1SPE-DERGLOBAL-EX-022
+      - 1SPE-DERGLOBAL-EX-023
+      - 1SPE-DERGLOBAL-EX-024
+      - 1SPE-DERGLOBAL-EX-025
+      - 1SPE-DERGLOBAL-EX-026
+      - 1SPE-DERGLOBAL-EX-027
+      - 1SPE-DERGLOBAL-EX-028
+      - 1SPE-DERGLOBAL-EX-029
+      - 1SPE-DERGLOBAL-EX-030
+      - 1SPE-DERGLOBAL-EX-047
+      - 1SPE-DERGLOBAL-EX-048
+      - 1SPE-DERGLOBAL-EX-049
+      - 1SPE-DERGLOBAL-EX-051
+    transversal_ids: []
+  - code: C4
+    ref_capacite: ANA-VAR-CAP-001
+    libelle_eleve: "Je sais trouver les extremums d'une fonction en annulant sa dérivée."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERGLOBAL-EX-031
+      - 1SPE-DERGLOBAL-EX-032
+      - 1SPE-DERGLOBAL-EX-033
+      - 1SPE-DERGLOBAL-EX-034
+      - 1SPE-DERGLOBAL-EX-035
+      - 1SPE-DERGLOBAL-EX-036
+      - 1SPE-DERGLOBAL-EX-037
+      - 1SPE-DERGLOBAL-EX-038
+      - 1SPE-DERGLOBAL-EX-039
+      - 1SPE-DERGLOBAL-EX-040
+      - 1SPE-DERGLOBAL-EX-048
+      - 1SPE-DERGLOBAL-EX-049
+    transversal_ids: []
+  - code: C5
+    ref_capacite: ANA-VAR-CAP-002
+    libelle_eleve: "Je sais modéliser et résoudre un problème d'optimisation à l'aide de la dérivation."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERGLOBAL-EX-041
+      - 1SPE-DERGLOBAL-EX-042
+      - 1SPE-DERGLOBAL-EX-043
+      - 1SPE-DERGLOBAL-EX-044
+      - 1SPE-DERGLOBAL-EX-045
+      - 1SPE-DERGLOBAL-EX-046
+      - 1SPE-DERGLOBAL-EX-049
+      - 1SPE-DERGLOBAL-EX-050
+    transversal_ids: []
 
 prerequis:
   - { code: R1, libelle: "Taux de variation et nombre dérivé", chapitre_origine: "1SPE-DERIVATION-LOCAL" }
@@ -19,8 +105,6 @@ prerequis:
   - { code: R5, libelle: "Sens de variation d'une fonction (définition, croissante/décroissante)", chapitre_origine: "2GT" }
 
 situation_accroche: >
-  Un fabricant de boîtes de conserve veut minimiser la quantité de métal utilisée
-  pour un volume donné de 500 mL. Quelles dimensions de la boîte cylindrique
-  choisir ? La dérivation permet de répondre à ce problème d'optimisation.
+  Un fabricant de boîtes de conserve veut minimiser la quantité de métal utilisée pour un volume donné de 500 mL. Quelles dimensions de la boîte cylindrique choisir ? La dérivation permet de répondre à ce problème d'optimisation.
 
 temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

@@ -2,14 +2,97 @@ chapitre: 1SPE-EXPONENTIELLE
 niveau: 1SPE
 theme: EXPONENTIELLE
 titre: "Fonction exponentielle"
-statut: complete
+statut: valide   # draft -> valide (migration BO2026, Task 4B)
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-EXPONENTIELLE-C1, libelle_eleve: "Je sais que la fonction exponentielle est l'unique fonction égale à sa dérivée valant 1 en 0." }
-  - { code: C2, ref_capacite: 1SPE-EXPONENTIELLE-C2, libelle_eleve: "Je sais utiliser les propriétés algébriques de l'exponentielle (somme, produit, puissance)." }
-  - { code: C3, ref_capacite: 1SPE-EXPONENTIELLE-C3, libelle_eleve: "Je sais que l'exponentielle est strictement croissante sur R et connaître ses limites." }
-  - { code: C4, ref_capacite: 1SPE-EXPONENTIELLE-C4, libelle_eleve: "Je sais dériver une fonction de la forme $\\mathrm{e}^{u(x)}$." }
-  - { code: C5, ref_capacite: 1SPE-EXPONENTIELLE-C5, libelle_eleve: "Je sais résoudre des équations et inéquations avec l'exponentielle." }
+  - code: C1
+    ref_capacite: ANA-EXP-CONT-001
+    libelle_eleve: "Je sais que la fonction exponentielle est l'unique fonction égale à sa dérivée valant 1 en 0."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-EXPO-EX-001
+      - 1SPE-EXPO-EX-002
+      - 1SPE-EXPO-EX-003
+      - 1SPE-EXPO-EX-004
+      - 1SPE-EXPO-EX-005
+      - 1SPE-EXPO-EX-006
+      - 1SPE-EXPO-EX-007
+      - 1SPE-EXPO-EX-008
+      - 1SPE-EXPO-EX-009
+      - 1SPE-EXPO-EX-010
+      - 1SPE-EXPO-EX-047
+      - 1SPE-EXPO-EX-050
+    transversal_ids: []
+  - code: C2
+    ref_capacite: ANA-EXP-CAP-001
+    libelle_eleve: "Je sais utiliser les propriétés algébriques de l'exponentielle (somme, produit, puissance)."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-EXPO-EX-011
+      - 1SPE-EXPO-EX-012
+      - 1SPE-EXPO-EX-013
+      - 1SPE-EXPO-EX-014
+      - 1SPE-EXPO-EX-015
+      - 1SPE-EXPO-EX-016
+      - 1SPE-EXPO-EX-017
+      - 1SPE-EXPO-EX-018
+      - 1SPE-EXPO-EX-019
+      - 1SPE-EXPO-EX-020
+      - 1SPE-EXPO-EX-047
+      - 1SPE-EXPO-EX-048
+      - 1SPE-EXPO-EX-050
+    transversal_ids: []
+  - code: C3
+    ref_capacite: ANA-EXP-CONT-003
+    libelle_eleve: "Je sais que l'exponentielle est strictement croissante sur R et connaître ses limites."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-EXPO-EX-021
+      - 1SPE-EXPO-EX-022
+      - 1SPE-EXPO-EX-023
+      - 1SPE-EXPO-EX-024
+      - 1SPE-EXPO-EX-025
+      - 1SPE-EXPO-EX-026
+      - 1SPE-EXPO-EX-027
+      - 1SPE-EXPO-EX-028
+      - 1SPE-EXPO-EX-029
+      - 1SPE-EXPO-EX-030
+      - 1SPE-EXPO-EX-047
+      - 1SPE-EXPO-EX-048
+      - 1SPE-EXPO-EX-049
+    transversal_ids: []
+  - code: C4
+    ref_capacite: ANA-EXP-CAP-002
+    libelle_eleve: "Je sais dériver une fonction de la forme $\\mathrm{e}^{u(x)}$."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-EXPO-EX-031
+      - 1SPE-EXPO-EX-032
+      - 1SPE-EXPO-EX-033
+      - 1SPE-EXPO-EX-034
+      - 1SPE-EXPO-EX-035
+      - 1SPE-EXPO-EX-036
+      - 1SPE-EXPO-EX-037
+      - 1SPE-EXPO-EX-038
+      - 1SPE-EXPO-EX-039
+      - 1SPE-EXPO-EX-040
+      - 1SPE-EXPO-EX-048
+      - 1SPE-EXPO-EX-049
+    transversal_ids: []
+  - code: C5
+    ref_capacite: ANA-EXP-CAP-001
+    libelle_eleve: "Je sais résoudre des équations et inéquations avec l'exponentielle."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-EXPO-EX-041
+      - 1SPE-EXPO-EX-042
+      - 1SPE-EXPO-EX-043
+      - 1SPE-EXPO-EX-044
+      - 1SPE-EXPO-EX-045
+      - 1SPE-EXPO-EX-046
+      - 1SPE-EXPO-EX-049
+      - 1SPE-EXPO-EX-050
+    transversal_ids: []
 
 prerequis:
   - { code: R1, libelle: "Dérivée d'une somme, d'un produit, d'un quotient", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
@@ -19,8 +102,6 @@ prerequis:
   - { code: R5, libelle: "Suites géométriques et coefficient multiplicateur", chapitre_origine: "1SPE-SUITES" }
 
 situation_accroche: >
-  La population d'une culture bactérienne double toutes les 20 minutes.
-  Combien de bactéries y aura-t-il après 3 heures si l'on part de 1000 ?
-  Comment modéliser cette croissance exponentielle ?
+  La population d'une culture bactérienne double toutes les 20 minutes. Combien de bactéries y aura-t-il après 3 heures si l'on part de 1000 ? Comment modéliser cette croissance exponentielle ?
 
 temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

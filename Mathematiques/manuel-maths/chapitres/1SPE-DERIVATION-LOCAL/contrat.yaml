@@ -2,14 +2,97 @@ chapitre: 1SPE-DERIVATION-LOCAL
 niveau: 1SPE
 theme: DERIVATION-LOCAL
 titre: "Dérivation : point de vue local"
-statut: draft
+statut: valide   # draft -> valide (migration BO2026, Task 4B)
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-DERIVATION-LOCAL-C1, libelle_eleve: "Je sais calculer et interpréter un taux de variation et la pente d'une sécante." }
-  - { code: C2, ref_capacite: 1SPE-DERIVATION-LOCAL-C2, libelle_eleve: "Je sais interpréter un nombre dérivé comme une pente ou une vitesse instantanée." }
-  - { code: C3, ref_capacite: 1SPE-DERIVATION-LOCAL-C3, libelle_eleve: "Je sais lire un nombre dérivé sur un graphique et construire la tangente correspondante." }
-  - { code: C4, ref_capacite: 1SPE-DERIVATION-LOCAL-C4, libelle_eleve: "Je sais écrire l'équation d'une tangente à partir de l'abscisse, de l'image et du nombre dérivé." }
-  - { code: C5, ref_capacite: 1SPE-DERIVATION-LOCAL-C5, libelle_eleve: "Je sais approcher f(a+h) avec l'approximation linéaire au voisinage de a." }
+  - code: C1
+    ref_capacite: ANA-DERLOC-CAP-001
+    libelle_eleve: "Je sais calculer et interpréter un taux de variation et la pente d'une sécante."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERLOCAL-EX-001
+      - 1SPE-DERLOCAL-EX-002
+      - 1SPE-DERLOCAL-EX-003
+      - 1SPE-DERLOCAL-EX-004
+      - 1SPE-DERLOCAL-EX-005
+      - 1SPE-DERLOCAL-EX-006
+      - 1SPE-DERLOCAL-EX-031
+      - 1SPE-DERLOCAL-EX-032
+      - 1SPE-DERLOCAL-EX-039
+      - 1SPE-DERLOCAL-EX-040
+      - 1SPE-DERLOCAL-EX-047
+      - 1SPE-DERLOCAL-EX-049
+    transversal_ids: []
+  - code: C2
+    ref_capacite: ANA-DERLOC-CAP-002
+    libelle_eleve: "Je sais interpréter un nombre dérivé comme une pente ou une vitesse instantanée."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERLOCAL-EX-007
+      - 1SPE-DERLOCAL-EX-008
+      - 1SPE-DERLOCAL-EX-009
+      - 1SPE-DERLOCAL-EX-010
+      - 1SPE-DERLOCAL-EX-011
+      - 1SPE-DERLOCAL-EX-012
+      - 1SPE-DERLOCAL-EX-033
+      - 1SPE-DERLOCAL-EX-034
+      - 1SPE-DERLOCAL-EX-041
+      - 1SPE-DERLOCAL-EX-042
+      - 1SPE-DERLOCAL-EX-047
+      - 1SPE-DERLOCAL-EX-048
+      - 1SPE-DERLOCAL-EX-050
+    transversal_ids: []
+  - code: C3
+    ref_capacite: ANA-DERLOC-CAP-003
+    libelle_eleve: "Je sais lire un nombre dérivé sur un graphique et construire la tangente correspondante."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERLOCAL-EX-013
+      - 1SPE-DERLOCAL-EX-014
+      - 1SPE-DERLOCAL-EX-015
+      - 1SPE-DERLOCAL-EX-016
+      - 1SPE-DERLOCAL-EX-017
+      - 1SPE-DERLOCAL-EX-018
+      - 1SPE-DERLOCAL-EX-035
+      - 1SPE-DERLOCAL-EX-036
+      - 1SPE-DERLOCAL-EX-043
+      - 1SPE-DERLOCAL-EX-048
+      - 1SPE-DERLOCAL-EX-050
+    transversal_ids: []
+  - code: C4
+    ref_capacite: ANA-DERLOC-CAP-004
+    libelle_eleve: "Je sais écrire l'équation d'une tangente à partir de l'abscisse, de l'image et du nombre dérivé."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERLOCAL-EX-019
+      - 1SPE-DERLOCAL-EX-020
+      - 1SPE-DERLOCAL-EX-021
+      - 1SPE-DERLOCAL-EX-022
+      - 1SPE-DERLOCAL-EX-023
+      - 1SPE-DERLOCAL-EX-024
+      - 1SPE-DERLOCAL-EX-037
+      - 1SPE-DERLOCAL-EX-044
+      - 1SPE-DERLOCAL-EX-047
+      - 1SPE-DERLOCAL-EX-049
+      - 1SPE-DERLOCAL-EX-050
+    transversal_ids: []
+  - code: C5
+    ref_capacite: ANA-DERLOC-CAP-005
+    libelle_eleve: "Je sais approcher f(a+h) avec l'approximation linéaire au voisinage de a."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-DERLOCAL-EX-025
+      - 1SPE-DERLOCAL-EX-026
+      - 1SPE-DERLOCAL-EX-027
+      - 1SPE-DERLOCAL-EX-028
+      - 1SPE-DERLOCAL-EX-029
+      - 1SPE-DERLOCAL-EX-030
+      - 1SPE-DERLOCAL-EX-038
+      - 1SPE-DERLOCAL-EX-045
+      - 1SPE-DERLOCAL-EX-046
+      - 1SPE-DERLOCAL-EX-048
+      - 1SPE-DERLOCAL-EX-049
+    transversal_ids: []
 
 prerequis:
   - { code: R1, libelle: "Calculer une image et lire une image sur une courbe", chapitre_origine: "2GT" }
@@ -19,8 +102,6 @@ prerequis:
   - { code: R5, libelle: "Calculer une vitesse moyenne à partir d'une distance et d'une durée", chapitre_origine: "2GT" }
 
 situation_accroche: >
-  Un vélo équipé d'un capteur fournit la distance parcourue en fonction du temps.
-  Comment déterminer sa vitesse exacte à l'instant t = 12 s, alors que les mesures
-  disponibles donnent seulement des vitesses moyennes sur de courts intervalles ?
+  Un vélo équipé d'un capteur fournit la distance parcourue en fonction du temps. Comment déterminer sa vitesse exacte à l'instant t = 12 s, alors que les mesures disponibles donnent seulement des vitesses moyennes sur de courts intervalles ?
 
 temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 7 }

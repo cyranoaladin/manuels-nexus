@@ -1,7 +1,7 @@
 {
   "niveau": "1SPE",
   "theme": "EXPONENTIELLE",
-  "bo_reference": "Programme d'enseignement de spécialité de mathématiques de la classe de première de la voie générale, BO n° 14 du 2 avril 2026, analyse : fonction exponentielle (application à la rentrée 2026-2027).",
+  "bo_reference": "Programme de spécialité mathématiques de première générale — Arrêté du 26 février 2026 (NOR MENE2602917A), B.O. spécial n°14 du 2 avril 2026",
   "source_officielle": "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A",
   "note_R7": "Capacités extraites du BO 2026. Vérification humaine recommandée (A_VALIDER_HUMAIN).",
   "capacites": [
@@ -9,32 +9,42 @@
       "id": "1SPE-EXPONENTIELLE-C1",
       "libelle_bo": "Connaître la définition de la fonction exponentielle comme unique solution de y'=y, y(0)=1.",
       "libelle_eleve": "Je sais que la fonction exponentielle est l'unique fonction égale à sa dérivée valant 1 en 0.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "ANA-EXP-CONT-001",
+      "bo_quote_2026": "Définition de la fonction exponentielle comme unique fonction dérivable sur ℝ vérifiant ƒ ‘ = ƒ et ƒ (0) = 1. L’existence et l’unicité sont admises. Notation exp(𝑥)."
     },
     {
       "id": "1SPE-EXPONENTIELLE-C2",
       "libelle_bo": "Connaître et utiliser les propriétés algébriques de la fonction exponentielle : exp(a+b)=exp(a)exp(b), exp(-a)=1/exp(a), exp(na)=(exp(a))^n.",
       "libelle_eleve": "Je sais utiliser les propriétés algébriques de l'exponentielle (somme, produit, puissance).",
       "demonstration_exigible": true,
-      "demonstration": "Démonstration de exp(a+b)=exp(a)exp(b) à partir de la relation fonctionnelle."
+      "demonstration": "Démonstration de exp(a+b)=exp(a)exp(b) à partir de la relation fonctionnelle.",
+      "ref_capacite_bo2026": "ANA-EXP-CAP-001",
+      "bo_quote_2026": "Transformer une expression en utilisant les propriétés algébriques de la fonction exponentielle."
     },
     {
       "id": "1SPE-EXPONENTIELLE-C3",
       "libelle_bo": "Étudier les variations de la fonction exponentielle, connaître ses limites en ±∞.",
       "libelle_eleve": "Je sais que l'exponentielle est strictement croissante sur R et connaître ses limites.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "ANA-EXP-CONT-003",
+      "bo_quote_2026": "Signe, sens de variation et courbe représentative de la fonction exponentielle. Lien avec les suites géométriques."
     },
     {
       "id": "1SPE-EXPONENTIELLE-C4",
       "libelle_bo": "Dériver des fonctions du type x → e^{u(x)} où u est une fonction dérivable.",
       "libelle_eleve": "Je sais dériver une fonction de la forme e^{u(x)}.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "ANA-EXP-CAP-002",
+      "bo_quote_2026": "Pour a réel, dérivée de la fonction t ↦ eat."
     },
     {
       "id": "1SPE-EXPONENTIELLE-C5",
       "libelle_bo": "Résoudre des équations et inéquations faisant intervenir la fonction exponentielle.",
       "libelle_eleve": "Je sais résoudre des équations et inéquations avec l'exponentielle.",
-      "demonstration_exigible": false
+      "demonstration_exigible": false,
+      "ref_capacite_bo2026": "ANA-EXP-CAP-001",
+      "bo_quote_2026": "Transformer une expression en utilisant les propriétés algébriques de la fonction exponentielle."
     }
   ]
 }

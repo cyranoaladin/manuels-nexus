@@ -2,16 +2,158 @@ chapitre: 1SPE-SUITES
 niveau: 1SPE
 theme: SUITES
 titre: "Suites numériques"
-statut: draft   # draft -> valide (validation humaine LOT 0)
+statut: valide   # draft -> valide (migration BO2026, Task 4B)
 
 capacites:
-  - { code: C1, ref_capacite: 1SPE-SUITES-C1, libelle_eleve: "Je sais calculer les termes d'une suite (explicite/récurrence), à la main et en Python." }
-  - { code: C2, ref_capacite: 1SPE-SUITES-C2, libelle_eleve: "Je sais montrer qu'une suite est arithmétique et exprimer son terme général." }
-  - { code: C3, ref_capacite: 1SPE-SUITES-C3, libelle_eleve: "Je sais montrer qu'une suite est géométrique et exprimer son terme général." }
-  - { code: C4, ref_capacite: 1SPE-SUITES-C4, libelle_eleve: "Je sais calculer la somme des premiers entiers et d'une suite géométrique." }
-  - { code: C5, ref_capacite: 1SPE-SUITES-C5, libelle_eleve: "Je sais étudier le sens de variation d'une suite par la méthode adaptée." }
-  - { code: C6, ref_capacite: 1SPE-SUITES-C6, libelle_eleve: "Je sais modéliser une situation concrète par une suite." }
-  - { code: C7, ref_capacite: 1SPE-SUITES-C7, libelle_eleve: "Je sais écrire et lire un programme Python (terme, somme, seuil)." }
+  - code: C1
+    ref_capacite: ALG-SUI-CAP-003
+    libelle_eleve: "Je sais calculer les termes d'une suite (explicite/récurrence), à la main et en Python."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SUITES-COURS-00
+      - 1SPE-SUITES-EX-002
+      - 1SPE-SUITES-EX-003
+      - 1SPE-SUITES-EX-004
+      - 1SPE-SUITES-EX-005
+      - 1SPE-SUITES-EX-022
+      - 1SPE-SUITES-EX-023
+      - 1SPE-SUITES-EX-036
+      - 1SPE-SUITES-EX-037
+      - 1SPE-SUITES-EX-040
+      - 1SPE-SUITES-EX-045
+      - 1SPE-SUITES-EX-048
+    transversal_ids:
+      - TR-ALGO-NOTIONS-001
+      - TR-ALGO-NOTIONS-002
+  - code: C2
+    ref_capacite: ALG-SUI-CAP-004
+    libelle_eleve: "Je sais montrer qu'une suite est arithmétique et exprimer son terme général."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SUITES-COURS-00
+      - 1SPE-SUITES-COURS-07-FR
+      - 1SPE-SUITES-EX-006
+      - 1SPE-SUITES-EX-007
+      - 1SPE-SUITES-EX-008
+      - 1SPE-SUITES-EX-022
+      - 1SPE-SUITES-EX-023
+      - 1SPE-SUITES-EX-024
+      - 1SPE-SUITES-EX-025
+      - 1SPE-SUITES-EX-028
+      - 1SPE-SUITES-EX-029
+      - 1SPE-SUITES-EX-041
+      - 1SPE-SUITES-EX-045
+      - 1SPE-SUITES-EX-047
+    transversal_ids: []
+  - code: C3
+    ref_capacite: ALG-SUI-CAP-004
+    libelle_eleve: "Je sais montrer qu'une suite est géométrique et exprimer son terme général."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SUITES-COURS-00
+      - 1SPE-SUITES-COURS-07-FR
+      - 1SPE-SUITES-COURS-07-TC
+      - 1SPE-SUITES-EX-001
+      - 1SPE-SUITES-EX-009
+      - 1SPE-SUITES-EX-010
+      - 1SPE-SUITES-EX-026
+      - 1SPE-SUITES-EX-027
+      - 1SPE-SUITES-EX-030
+      - 1SPE-SUITES-EX-031
+      - 1SPE-SUITES-EX-038
+      - 1SPE-SUITES-EX-039
+      - 1SPE-SUITES-EX-041
+      - 1SPE-SUITES-EX-044
+      - 1SPE-SUITES-EX-046
+      - 1SPE-SUITES-EX-048
+    transversal_ids: []
+  - code: C4
+    ref_capacite: ALG-SUI-CAP-004
+    libelle_eleve: "Je sais calculer la somme des premiers entiers et d'une suite géométrique."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SUITES-COURS-00
+      - 1SPE-SUITES-EX-011
+      - 1SPE-SUITES-EX-012
+      - 1SPE-SUITES-EX-013
+      - 1SPE-SUITES-EX-024
+      - 1SPE-SUITES-EX-025
+      - 1SPE-SUITES-EX-026
+      - 1SPE-SUITES-EX-027
+      - 1SPE-SUITES-EX-041
+      - 1SPE-SUITES-EX-042
+      - 1SPE-SUITES-EX-046
+      - 1SPE-SUITES-EX-049
+    transversal_ids: []
+  - code: C5
+    ref_capacite: ALG-SUI-CONT-005
+    libelle_eleve: "Je sais étudier le sens de variation d'une suite par la méthode adaptée."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SUITES-COURS-00
+      - 1SPE-SUITES-COURS-07-TC
+      - 1SPE-SUITES-EX-014
+      - 1SPE-SUITES-EX-015
+      - 1SPE-SUITES-EX-016
+      - 1SPE-SUITES-EX-028
+      - 1SPE-SUITES-EX-029
+      - 1SPE-SUITES-EX-030
+      - 1SPE-SUITES-EX-031
+      - 1SPE-SUITES-EX-032
+      - 1SPE-SUITES-EX-033
+      - 1SPE-SUITES-EX-036
+      - 1SPE-SUITES-EX-037
+      - 1SPE-SUITES-EX-040
+      - 1SPE-SUITES-EX-042
+      - 1SPE-SUITES-EX-043
+      - 1SPE-SUITES-EX-045
+      - 1SPE-SUITES-EX-047
+      - 1SPE-SUITES-EX-048
+    transversal_ids: []
+  - code: C6
+    ref_capacite: ALG-SUI-CAP-005
+    libelle_eleve: "Je sais modéliser une situation concrète par une suite."
+    obligation_class: mandatory_content
+    proof_object_ids:
+      - 1SPE-SUITES-COURS-00
+      - 1SPE-SUITES-COURS-07-FR
+      - 1SPE-SUITES-COURS-07-TC
+      - 1SPE-SUITES-EX-017
+      - 1SPE-SUITES-EX-018
+      - 1SPE-SUITES-EX-019
+      - 1SPE-SUITES-EX-032
+      - 1SPE-SUITES-EX-033
+      - 1SPE-SUITES-EX-034
+      - 1SPE-SUITES-EX-035
+      - 1SPE-SUITES-EX-038
+      - 1SPE-SUITES-EX-039
+      - 1SPE-SUITES-EX-043
+      - 1SPE-SUITES-EX-044
+      - 1SPE-SUITES-EX-046
+      - 1SPE-SUITES-EX-049
+    transversal_ids:
+      - TR-AUTO-CAP-003
+      - TR-AUTO-CAP-004
+      - TR-AUTO-CAP-005
+  - code: C7
+    ref_capacite: ALG-SUI-ALG-001
+    libelle_eleve: "Je sais écrire et lire un programme Python (terme, somme, seuil)."
+    obligation_class: prescribed_teaching
+    proof_object_ids:
+      - 1SPE-SUITES-COURS-00
+      - 1SPE-SUITES-COURS-07-FR
+      - 1SPE-SUITES-COURS-07-TC
+      - 1SPE-SUITES-EX-020
+      - 1SPE-SUITES-EX-021
+      - 1SPE-SUITES-EX-034
+      - 1SPE-SUITES-EX-035
+      - 1SPE-SUITES-EX-044
+      - 1SPE-SUITES-EX-047
+      - 1SPE-SUITES-EX-049
+    transversal_ids:
+      - TR-ALGO-NOTIONS-001
+      - TR-ALGO-CAP-001
+      - TR-LISTE-NOTIONS-003
 
 prerequis:
   - { code: R1, libelle: "Calcul littéral : développer, factoriser, réduire", chapitre_origine: "2GT" }
@@ -21,8 +163,6 @@ prerequis:
   - { code: R5, libelle: "Python : variables, boucle for, boucle while (SNT)", chapitre_origine: "SNT" }
 
 situation_accroche: >
-  Deux offres d'épargne : versement fixe mensuel (modèle linéaire) contre intérêts composés
-  (modèle exponentiel). À partir de quand la seconde dépasse-t-elle la première ?
-  Résolue au TD fil rouge avec les outils du chapitre (C2, C3, C6, C7).
+  Deux offres d'épargne : versement fixe mensuel (modèle linéaire) contre intérêts composés (modèle exponentiel). À partir de quand la seconde dépasse-t-elle la première ? Résolue au TD fil rouge avec les outils du chapitre (C2, C3, C6, C7).
 
 temps_estime_h: { parcours1: 14, parcours2: 11, parcours3: 10 }
