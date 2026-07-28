@@ -47,3 +47,17 @@ def test_capacity_proof_object_ids_and_transversal_ids_are_string_arrays(schema)
     assert capacity["properties"]["proof_object_ids"]["items"]["type"] == "string"
     assert capacity["properties"]["transversal_ids"]["type"] == "array"
     assert capacity["properties"]["transversal_ids"]["items"]["type"] == "string"
+
+
+def test_ref_capacite_pattern_accepts_every_real_official_id(schema):
+    """Garde-fou : le motif ref_capacite doit accepter TOUS les identifiants
+    réellement présents dans referentiel/programme_1SPE_2026.json, pas
+    seulement un sous-ensemble supposé (ex. seul le préfixe OBJ-)."""
+    import re
+
+    pattern = re.compile(schema["$defs"]["capacity"]["properties"]["ref_capacite"]["pattern"])
+    referentiel = json.loads(
+        (ROOT / "referentiel" / "programme_1SPE_2026.json").read_text(encoding="utf-8")
+    )
+    rejected = [item["id"] for item in referentiel["items"] if not pattern.match(item["id"])]
+    assert not rejected, f"{len(rejected)} identifiants officiels rejetés par le motif : {rejected[:5]}"

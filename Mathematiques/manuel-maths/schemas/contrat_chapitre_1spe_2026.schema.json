@@ -61,8 +61,8 @@
         },
         "ref_capacite": {
           "type": "string",
-          "pattern": "^OBJ-[A-Z0-9-]+$",
-          "description": "Filiation obligatoire vers referentiel/programme_1SPE_2026.json : items[].id de l'item officiel (type=capacite ou contenu) dont cette capacité découle."
+          "pattern": "^(ALG|ANA|GEO|PROB|VA|TR|OBJ)-[A-Z0-9-]+$",
+          "description": "Filiation obligatoire vers referentiel/programme_1SPE_2026.json : items[].id de l'item officiel (type=capacite ou contenu) dont cette capacité découle. Préfixes observés dans le référentiel : ALG, ANA, GEO, PROB, VA (thématiques), TR (transversal), OBJ (bornes de programme)."
         },
         "libelle_eleve": {
           "type": "string",
