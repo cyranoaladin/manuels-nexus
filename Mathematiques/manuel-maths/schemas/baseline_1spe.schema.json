@@ -107,6 +107,9 @@
     },
     "completeness": {
       "$ref": "#/$defs/completeness"
+    },
+    "historical_build_baseline": {
+      "$ref": "#/$defs/historicalBuildBaseline"
     }
   },
   "$defs": {
@@ -903,6 +906,339 @@
             "$ref": "#/$defs/safePath"
           }
         }
+      }
+    },
+    "historicalBuildBaseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "exercise_threshold",
+        "allowed_object_statuses",
+        "chapter_count",
+        "chapters",
+        "object_count",
+        "family_counts",
+        "objects",
+        "proofs",
+        "builds",
+        "unclassified_1spe_files"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "exercise_threshold": {
+          "const": 50
+        },
+        "allowed_object_statuses": {
+          "const": [
+            "keep",
+            "fix",
+            "replace",
+            "remove_from_release",
+            "review_required"
+          ]
+        },
+        "chapter_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "chapters": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^1SPE-[A-Z0-9]+(?:-[A-Z0-9]+)*$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/historicalChapter"
+          }
+        },
+        "object_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "family_counts": {
+          "$ref": "#/$defs/countMap"
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/historicalObject"
+          }
+        },
+        "proofs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/historicalProof"
+          }
+        },
+        "builds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eleve",
+            "professeur"
+          ],
+          "properties": {
+            "eleve": {
+              "$ref": "#/$defs/historicalBuild"
+            },
+            "professeur": {
+              "$ref": "#/$defs/historicalBuild"
+            }
+          }
+        },
+        "unclassified_1spe_files": {
+          "type": "array",
+          "maxItems": 0,
+          "items": {
+            "$ref": "#/$defs/safePath"
+          }
+        }
+      }
+    },
+    "historicalChapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exercise_count",
+        "exercise_gate",
+        "family_counts",
+        "object_ids"
+      ],
+      "properties": {
+        "exercise_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "exercise_gate": {
+          "enum": [
+            "certified",
+            "needs_fix"
+          ]
+        },
+        "family_counts": {
+          "$ref": "#/$defs/countMap"
+        },
+        "object_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "countMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "historicalObject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "canonical_id",
+        "chapter_id",
+        "family",
+        "sha256",
+        "dependencies",
+        "folios",
+        "latex_diagnostics",
+        "status",
+        "reasons"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "canonical_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chapter_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family": {
+          "enum": [
+            "course",
+            "method",
+            "exercise",
+            "aid",
+            "solution",
+            "qcm_tex",
+            "qcm_json",
+            "assessment",
+            "grading_scale",
+            "remediation",
+            "transversal",
+            "figure",
+            "font",
+            "validation",
+            "chapter_contract",
+            "chapter_metadata",
+            "report",
+            "outside_program",
+            "supporting_file"
+          ]
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "dependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "folios": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eleve",
+            "professeur"
+          ],
+          "properties": {
+            "eleve": {
+              "$ref": "#/$defs/folioList"
+            },
+            "professeur": {
+              "$ref": "#/$defs/folioList"
+            }
+          }
+        },
+        "latex_diagnostics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "enum": [
+            "keep",
+            "fix",
+            "replace",
+            "remove_from_release",
+            "review_required"
+          ]
+        },
+        "reasons": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "outside_program",
+              "stale_proof",
+              "missing_solution",
+              "duplicate_canonical_id",
+              "invalid_metadata",
+              "compilation_failure"
+            ]
+          }
+        }
+      }
+    },
+    "folioList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "historicalProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "object_id",
+        "object_sha256",
+        "current_object_sha256",
+        "current"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/safePath"
+        },
+        "object_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object_sha256": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{64})?$"
+        },
+        "current_object_sha256": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{64})?$"
+        },
+        "current": {
+          "type": "boolean"
+        }
+      }
+    },
+    "historicalBuild": {
+      "type": "object",
+      "required": [
+        "variant",
+        "status",
+        "pages",
+        "errors",
+        "warnings",
+        "references",
+        "overflows",
+        "command"
+      ],
+      "properties": {
+        "variant": {
+          "enum": [
+            "eleve",
+            "professeur"
+          ]
+        },
+        "status": {
+          "enum": [
+            "succeeded",
+            "failed",
+            "not_run"
+          ]
+        },
+        "pages": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "errors": {
+          "$ref": "#/$defs/diagnosticLines"
+        },
+        "warnings": {
+          "$ref": "#/$defs/diagnosticLines"
+        },
+        "references": {
+          "$ref": "#/$defs/diagnosticLines"
+        },
+        "overflows": {
+          "$ref": "#/$defs/diagnosticLines"
+        },
+        "command": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "diagnosticLines": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
     "duplicateClassification": {
