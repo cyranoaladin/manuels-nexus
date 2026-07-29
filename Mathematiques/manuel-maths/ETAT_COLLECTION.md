@@ -31,12 +31,48 @@ Date de mise a jour : 29 juillet 2026.
 
 | Gate | Statut |
 |---|---|
-| Compilation 2 variantes | reattestee 29/07/2026 (eleve 369p, professeur 410p), 0 erreur LaTeX |
+| Compilation 2 variantes | reattestee 29/07/2026 (eleve 369p, professeur ~410p), 0 erreur LaTeX |
 | verify_pdf | PASS sur derniers builds |
 | SymPy residuel | **0 FAIL** — relance complete des 13 chapitres 1SPE/TSPE le 29/07/2026 |
+| Chevauchement des notes de marge | corrige structurellement dans le gabarit (voir ci-dessous) |
 | Tests (`make test`) | 1936 passed / 5 skipped ; 3 echecs preexistants sans rapport (`test_maquette_v5.py`, comparaison visuelle page 13 de la maquette V5, chantier CHARTE distinct) |
 | BAT commercial (plan 2026-07-26) | non demarre (0/241 etapes) ; seule la conception (specs) est commitee |
 | Validation humaine BO / specimen | en attente (`A_VALIDER_HUMAIN.md`) |
+
+### Correctif du 29/07/2026 (soir) — chevauchement des notes de marge
+
+Relecture visuelle demandee apres compilation : plusieurs pages montraient
+des notes de marge (`\commentaireMarge`, `\margeAppui`) illisibles,
+superposees les unes aux autres ou a l'etiquette Exercice/Corrige suivante.
+Cause racine : le package `marginnote` ne gere aucune anti-collision entre
+notes (comportement documente, pas un bug d'usage) — probleme structurel du
+gabarit present depuis l'origine, constate y compris sur du contenu de
+cours jamais retouche (Second degre §1.1/§1.5, Derivation locale §1.2/1.3),
+donc independant des sessions de production precedentes.
+
+Correctif dans `gabarits/nexus-manuel.cls` (partage Maths/NSI, synchronise) :
+chaque note de marge et chaque etiquette Exercice/Corrige passe desormais
+par `\nx@safemarginnote`, qui decale automatiquement une nouvelle note du
+"passif" cumule des notes precedentes non absorbees, remis a zero aux
+frontieres chapitre/section/sous-section/fiche methode, avec un plafond de
+securite (espace restant sur la page) pour ne jamais pousser une note hors
+de la zone imprimable. Corrige automatiquement des dizaines d'occurrences
+sur 1SPE et TSPE (verifie visuellement sur Suites, Second degre, Derivation
+locale, Derivation globale, Produit scalaire, Exponentielle, Variables
+aleatoires) sans toucher au contenu source de ces chapitres.
+
+Trois notes (Suites : `07_td_fil_rouge`, `07_td_contextualise`, `FR-R3`)
+tombaient a des endroits ou la page est deja pleine ; meme reduites au
+minimum elles n'avaient pas la place. Contenu retire de la marge (et pour
+un cas, reintegre dans le corps du texte) plutot que de forcer un
+chevauchement residuel.
+
+**Reserve** : seuls 7 des 10 chapitres 1SPE ont ete verifies visuellement
+page par page apres ce correctif (Suites, Second degre, Derivation locale,
+Derivation globale, Produit scalaire, Exponentielle, Variables aleatoires).
+Trigonometrie, Geometrie reperee, Proba conditionnelles et les 3 chapitres
+TSPE n'ont ete verifies que par compilation (pas d'erreur LaTeX) et par le
+mecanisme generique du correctif, pas par relecture visuelle exhaustive.
 
 ### Correctifs du 29/07/2026 — regressions SymPy (upgrade sympy 1.14)
 
