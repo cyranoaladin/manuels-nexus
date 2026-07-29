@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import ast
 import importlib.util
 import hashlib
+import inspect
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -597,6 +600,7 @@ def test_build_inventory_artifacts_renders_markdown_without_parsing_it_as_yaml(
     for path, content in sources.items():
         _write(tmp_path / path, content)
     _track(tmp_path, *sources)
+    _commit_repository(tmp_path, "sources")
 
     result = inventory_module.build_inventory_artifacts(tmp_path)
 
@@ -3306,6 +3310,7 @@ def test_check_gate_reports_drift_without_writing_any_managed_output(
     tmp_path: Path, inventory_module
 ) -> None:
     _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
     result = inventory_module.build_inventory_artifacts(tmp_path)
     managed = sorted(
         tmp_path / relative
@@ -3359,6 +3364,112 @@ def test_two_normal_generations_are_stable_without_a_valid_source_date_epoch(
     assert first_provenance["dirty"] is False
     assert first_provenance["modified_tracked"] == []
     assert first_provenance["untracked_relevant"] == []
+
+
+def test_complete_generations_in_two_isolated_git_roots_are_byte_identical(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    roots = (tmp_path / "first", tmp_path / "second")
+    commit_environment = os.environ.copy()
+    commit_environment.update(
+        {
+            "GIT_AUTHOR_DATE": "2026-07-29T12:00:00+00:00",
+            "GIT_COMMITTER_DATE": "2026-07-29T12:00:00+00:00",
+        }
+    )
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", "1785326400")
+    heads: list[str] = []
+    generated: list[dict[str, bytes]] = []
+    for root in roots:
+        _seed_cli_repository(root)
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(root),
+                "-c",
+                "user.name=Phase 0.1 Tests",
+                "-c",
+                "user.email=phase01-tests@example.invalid",
+                "commit",
+                "-qm",
+                "sources identiques",
+            ],
+            check=True,
+            env=commit_environment,
+        )
+        heads.append(
+            subprocess.run(
+                ["git", "-C", str(root), "rev-parse", "HEAD"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+        )
+        result = inventory_module.build_inventory_artifacts(root)
+        generated.append(
+            {
+                relative: (root / relative).read_bytes()
+                for relative in sorted(result["artifacts"].values())
+            }
+        )
+
+    assert heads[0] == heads[1]
+    assert generated[0] == generated[1]
+
+
+def test_artifact_generation_rejects_a_non_git_root_explicitly(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    with pytest.raises(
+        inventory_module.InventoryError, match="Git provenance unavailable"
+    ):
+        inventory_module.build_inventory_artifacts(tmp_path)
+
+
+@pytest.mark.parametrize("failed_git_command", ["status", "ls-files"])
+def test_artifact_generation_rejects_git_command_failure(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    failed_git_command: str,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
+    original_run = inventory_module.subprocess.run
+
+    def fail_git_status(command: list[str], *args: object, **kwargs: object):
+        if (
+            command[:3] == ["git", "-C", str(tmp_path)]
+            and failed_git_command in command
+        ):
+            raise subprocess.CalledProcessError(128, command)
+        return original_run(command, *args, **kwargs)
+
+    monkeypatch.setattr(inventory_module.subprocess, "run", fail_git_status)
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="Git provenance unavailable"
+    ):
+        inventory_module.build_inventory_artifacts(tmp_path)
+
+
+def test_unborn_in_memory_inventory_marks_git_provenance_unavailable(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    inventory = _minimal_inventory(tmp_path, inventory_module)
+    provenance = inventory["provenance"]
+
+    assert provenance["git_available"] is False
+    assert provenance["dirty"] is None
+    assert provenance["head_sha"] is None
+    assert provenance["branch"] is None
+    assert provenance["generated_at_utc"] is None
+    assert provenance["errors"]
 
 
 def test_generation_uses_valid_source_date_epoch_for_provenance(
@@ -3514,6 +3625,7 @@ def test_generation_lock_covers_render_compare_clean_and_apply(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
     active = False
     observed: list[tuple[str, bool]] = []
 
@@ -3710,6 +3822,156 @@ def test_atomic_batch_failure_restores_every_target_byte_for_byte(
     assert not new_target.exists()
 
 
+def test_failed_rollback_preserves_and_reports_recoverable_backup(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    existing = tmp_path / "audit/a-existing.txt"
+    _write(existing, "octets historiques\n")
+    original_replace = inventory_module.os.replace
+    replacements = 0
+
+    def fail_apply_then_rollback(source: Path | str, target: Path | str) -> None:
+        nonlocal replacements
+        replacements += 1
+        if replacements in {2, 3}:
+            raise OSError(f"injection replace {replacements}")
+        original_replace(source, target)
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        fail_apply_then_rollback,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="recoverable backup"
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {
+                Path("audit/a-existing.txt"): "nouveaux octets\n",
+                Path("audit/z-new.txt"): "nouveau fichier\n",
+            },
+        )
+
+    match = re.search(r"recoverable backup: ([^;]+)", str(captured.value))
+    assert match is not None
+    backup_path = Path(match.group(1))
+    assert backup_path.read_bytes() == b"octets historiques\n"
+    assert existing.read_bytes() == b"nouveaux octets\n"
+
+
+def test_lock_write_failure_never_unlinks_a_replacement_inode(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    lock_path = tmp_path / inventory_module.GENERIC_LOCK_FILE
+    foreign_record = b"foreign lock owner\n"
+
+    def replace_lock_then_fail(_fd: int, _payload: bytes) -> int:
+        lock_path.unlink()
+        lock_path.write_bytes(foreign_record)
+        raise OSError("injection écriture verrou")
+
+    monkeypatch.setattr(inventory_module.os, "write", replace_lock_then_fail)
+
+    with pytest.raises(OSError, match="injection écriture verrou"):
+        with inventory_module._lock_generation(tmp_path):
+            pytest.fail("l'acquisition doit échouer")
+
+    assert lock_path.read_bytes() == foreign_record
+
+
+def test_forward_replace_revalidates_symlink_confinement_after_staging(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    audit = repository / "audit"
+    audit.mkdir(parents=True)
+    outside.mkdir()
+    original_fsync = inventory_module.os.fsync
+    swapped = False
+
+    def swap_parent_after_stage(fd: int) -> None:
+        nonlocal swapped
+        original_fsync(fd)
+        if not swapped:
+            swapped = True
+            audit.rename(repository / "audit-original")
+            audit.symlink_to(outside, target_is_directory=True)
+
+    monkeypatch.setattr(inventory_module.os, "fsync", swap_parent_after_stage)
+
+    with pytest.raises(inventory_module.InventoryError, match="symlink escape"):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {Path("audit/output.txt"): "contenu\n"},
+        )
+
+    assert list(outside.iterdir()) == []
+
+
+def test_rollback_revalidates_symlink_and_preserves_backup(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    existing = repository / "audit/a-existing.txt"
+    _write(existing, "octets historiques\n")
+    outside.mkdir()
+    original_replace = inventory_module.os.replace
+    replacements = 0
+
+    def swap_parent_on_apply_failure(
+        source: Path | str,
+        target: Path | str,
+    ) -> None:
+        nonlocal replacements
+        replacements += 1
+        if replacements == 2:
+            (repository / "audit").rename(repository / "audit-original")
+            (repository / "audit").symlink_to(
+                outside,
+                target_is_directory=True,
+            )
+            raise OSError("injection avant rollback")
+        original_replace(source, target)
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        swap_parent_on_apply_failure,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="symlink escape.*recoverable backup",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-existing.txt"): "nouveaux octets\n",
+                Path("audit/z-new.txt"): "nouveau fichier\n",
+            },
+        )
+
+    backup_match = re.search(
+        r"recoverable backup: ([^;]+)",
+        str(captured.value),
+    )
+    assert backup_match is not None
+    assert Path(backup_match.group(1)).read_bytes() == b"octets historiques\n"
+    assert list(outside.iterdir()) == []
+
+
 def test_atomic_staging_failure_leaves_no_temporary_or_target(
     tmp_path: Path,
     inventory_module,
@@ -3858,12 +4120,34 @@ def test_check_reuses_stored_generation_provenance_and_changes_nothing(
     assert stored_inventory["provenance"]["head_sha"] == generation_sha
 
 
+def test_stored_provenance_reuse_has_no_dead_assignment(
+    inventory_module,
+) -> None:
+    tree = ast.parse(
+        inspect.getsource(
+            inventory_module._reuse_stored_generation_provenance
+        )
+    )
+    reused_assignments = [
+        node
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Assign)
+        and any(
+            isinstance(target, ast.Name) and target.id == "reused"
+            for target in node.targets
+        )
+    ]
+
+    assert len(reused_assignments) == 1
+
+
 def test_check_only_never_takes_generation_lock_or_creates_temporary_files(
     tmp_path: Path,
     inventory_module,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
     inventory_module.build_inventory_artifacts(tmp_path)
     before_status = _git_status_bytes(tmp_path)
 
@@ -4000,6 +4284,7 @@ def test_validate_model_gate_accepts_valid_outputs_and_rejects_digest_drift(
     tmp_path: Path, inventory_module
 ) -> None:
     _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
     inventory_module.build_inventory_artifacts(tmp_path)
 
     valid = _run_inventory_cli(tmp_path, "--validate-model")
@@ -4060,6 +4345,7 @@ def test_validate_model_rejects_schema_valid_projection_falsification(
     projection: str,
 ) -> None:
     _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
     inventory_module.build_inventory_artifacts(tmp_path)
     artifact_path = tmp_path / relative_path
     payload = yaml.safe_load(artifact_path.read_text(encoding="utf-8"))

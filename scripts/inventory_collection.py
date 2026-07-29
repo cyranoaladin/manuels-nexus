@@ -758,7 +758,11 @@ def _format_epoch_utc(epoch: int) -> str:
     return instant.replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
-def _generation_timestamp(root: Path) -> str:
+def _generation_timestamp(
+    root: Path,
+    *,
+    required: bool = False,
+) -> str | None:
     source_date_epoch = os.environ.get("SOURCE_DATE_EPOCH")
     if source_date_epoch is not None:
         try:
@@ -768,12 +772,28 @@ def _generation_timestamp(root: Path) -> str:
             return _format_epoch_utc(epoch)
         except (InventoryError, ValueError):
             pass
-    commit_epoch = _git_value(root, ("show", "-s", "--format=%ct", "HEAD"), "0")
+    commit_epoch = (
+        _git_required_value(
+            root,
+            ("show", "-s", "--format=%ct", "HEAD"),
+            description="git commit timestamp",
+        )
+        if required
+        else _git_value(root, ("show", "-s", "--format=%ct", "HEAD"), "")
+    )
+    if not commit_epoch:
+        return None
     try:
         epoch = int(commit_epoch)
-    except ValueError:
-        epoch = 0
-    return _format_epoch_utc(max(epoch, 0))
+        if epoch < 0:
+            raise ValueError
+    except ValueError as exc:
+        if required:
+            raise InventoryError(
+                f"git commit timestamp unavailable: {commit_epoch!r}"
+            ) from exc
+        return None
+    return _format_epoch_utc(epoch)
 
 
 def _git_value(repository: Path, args: tuple[str, ...], default: str = "") -> str:
@@ -790,6 +810,27 @@ def _git_value(repository: Path, args: tuple[str, ...], default: str = "") -> st
         )
     except (subprocess.CalledProcessError, OSError):
         return default
+
+
+def _git_required_value(
+    repository: Path,
+    args: tuple[str, ...],
+    *,
+    description: str,
+) -> str:
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(repository), *args],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+    except (subprocess.CalledProcessError, OSError) as exc:
+        raise InventoryError(f"{description} unavailable") from exc
+    value = completed.stdout.decode("utf-8", errors="replace").strip()
+    if not value:
+        raise InventoryError(f"{description} unavailable")
+    return value
 
 
 GitStatusEntry = tuple[str, tuple[str, ...]]
@@ -821,7 +862,11 @@ def _parse_git_status_z(payload: bytes) -> list[GitStatusEntry]:
     return entries
 
 
-def _git_status(repository: Path) -> list[GitStatusEntry]:
+def _git_status(
+    repository: Path,
+    *,
+    required: bool = False,
+) -> list[GitStatusEntry]:
     try:
         completed = subprocess.run(
             [
@@ -837,7 +882,9 @@ def _git_status(repository: Path) -> list[GitStatusEntry]:
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
         )
-    except (subprocess.CalledProcessError, OSError):
+    except (subprocess.CalledProcessError, OSError) as exc:
+        if required:
+            raise InventoryError("git status unavailable") from exc
         return []
     return _parse_git_status_z(completed.stdout)
 
@@ -917,6 +964,7 @@ def _git_generation_status(
     repository: Path,
     *,
     managed_output_paths: Iterable[str] = (),
+    required: bool = False,
 ) -> list[GitStatusEntry]:
     excluded_outputs = frozenset(
         DEFAULT_MANAGED_OUTPUT_PATHS
@@ -927,7 +975,7 @@ def _git_generation_status(
     )
     return [
         entry
-        for entry in _git_status(repository)
+        for entry in _git_status(repository, required=required)
         if not _status_paths(entry)
         or not all(
             _is_generation_internal_path(path, excluded_outputs)
@@ -936,13 +984,38 @@ def _git_generation_status(
     ]
 
 
-def _repo_branch(root: Path) -> str:
-    branch = _git_value(root, ("rev-parse", "--abbrev-ref", "HEAD"), "")
-    return branch or "HEAD"
+def _repo_branch(root: Path, *, required: bool = False) -> str | None:
+    branch = (
+        _git_required_value(
+            root,
+            ("rev-parse", "--abbrev-ref", "HEAD"),
+            description="git branch",
+        )
+        if required
+        else _git_value(root, ("rev-parse", "--abbrev-ref", "HEAD"), "")
+    )
+    if not branch or branch == "HEAD":
+        if required:
+            raise InventoryError("git branch unavailable or detached")
+        return None
+    return branch
 
 
-def _repo_head_sha(root: Path) -> str:
-    return _git_value(root, ("rev-parse", "HEAD"), "")
+def _repo_head_sha(root: Path, *, required: bool = False) -> str | None:
+    head = (
+        _git_required_value(
+            root,
+            ("rev-parse", "HEAD"),
+            description="git HEAD",
+        )
+        if required
+        else _git_value(root, ("rev-parse", "HEAD"), "")
+    )
+    if not head:
+        if required:
+            raise InventoryError("git HEAD unavailable")
+        return None
+    return head
 
 
 def _file_sha256(path: Path) -> str:
@@ -1018,14 +1091,45 @@ def _build_provenance(
     role_patterns: Mapping[str, list[str]],
     role_order: list[str],
     managed_output_paths: Iterable[str] = (),
+    require_git: bool = False,
 ) -> dict[str, Any]:
-    generation_status = _git_generation_status(
-        root, managed_output_paths=managed_output_paths
-    )
     generator_files = _generator_file_digests()
+    common = {
+        "generator_version": SCHEMA_VERSION,
+        "generator_sha256": _aggregate_generator_digest(generator_files),
+        "generator_files": generator_files,
+        "tool_versions": _file_version_signature(root),
+    }
+    try:
+        head_sha = _repo_head_sha(root, required=True)
+        branch = _repo_branch(root, required=True)
+        generation_status = _git_generation_status(
+            root,
+            managed_output_paths=managed_output_paths,
+            required=True,
+        )
+        generated_at_utc = _generation_timestamp(root, required=True)
+    except InventoryError as exc:
+        if require_git:
+            raise InventoryError(
+                f"Git provenance unavailable: {exc}"
+            ) from exc
+        return {
+            **common,
+            "git_available": False,
+            "head_sha": None,
+            "branch": None,
+            "dirty": None,
+            "modified_tracked": [],
+            "untracked_relevant": [],
+            "generated_at_utc": None,
+            "errors": [str(exc)],
+        }
     return {
-        "head_sha": _repo_head_sha(root),
-        "branch": _repo_branch(root),
+        **common,
+        "git_available": True,
+        "head_sha": head_sha,
+        "branch": branch,
         "dirty": bool(generation_status),
         "modified_tracked": _git_modified_tracked(root, status=generation_status),
         "untracked_relevant": _git_relevant_untracked(
@@ -1035,11 +1139,8 @@ def _build_provenance(
             role_order=role_order,
             status=generation_status,
         ),
-        "generator_version": SCHEMA_VERSION,
-        "generator_sha256": _aggregate_generator_digest(generator_files),
-        "generator_files": generator_files,
-        "generated_at_utc": _generation_timestamp(root),
-        "tool_versions": _file_version_signature(root),
+        "generated_at_utc": generated_at_utc,
+        "errors": [],
     }
 
 
@@ -1349,9 +1450,9 @@ def _lock_generation(root: Path):
                 os.O_CREAT | os.O_EXCL | os.O_WRONLY,
                 0o600,
             )
+            owner_stat = os.fstat(fd)
             os.write(fd, owner_record)
             os.fsync(fd)
-            owner_stat = os.fstat(fd)
             break
         except FileExistsError:
             if _quarantine_stale_lock(lock_path):
@@ -1365,7 +1466,15 @@ def _lock_generation(root: Path):
                 os.close(fd)
                 fd = None
             try:
-                lock_path.unlink()
+                current_stat = lock_path.stat(follow_symlinks=False)
+                if owner_stat is not None and (
+                    current_stat.st_dev,
+                    current_stat.st_ino,
+                ) == (
+                    owner_stat.st_dev,
+                    owner_stat.st_ino,
+                ):
+                    lock_path.unlink()
             except OSError:
                 pass
             raise
@@ -1888,11 +1997,29 @@ def build_inventory(
     repository: Path | str,
     *,
     managed_output_paths: Iterable[str] = (),
+    require_git_provenance: bool = False,
 ) -> dict[str, Any]:
     """Build a deterministic canonical model from tracked chapter sources."""
 
     root = Path(repository).resolve()
-    tracked = git_tracked_files(root)
+    if require_git_provenance:
+        try:
+            _repo_head_sha(root, required=True)
+            _repo_branch(root, required=True)
+            _git_status(root, required=True)
+            _generation_timestamp(root, required=True)
+        except InventoryError as exc:
+            raise InventoryError(
+                f"Git provenance unavailable: {exc}"
+            ) from exc
+    try:
+        tracked = git_tracked_files(root)
+    except (OSError, subprocess.CalledProcessError) as exc:
+        if require_git_provenance:
+            raise InventoryError(
+                "Git provenance unavailable: git tracked files unavailable"
+            ) from exc
+        raise
     tracked_set = frozenset(tracked)
     role_patterns, default_role, role_order = _collect_role_patterns(root)
     source_roles = _load_source_roles(root, tracked)
@@ -2252,6 +2379,7 @@ def build_inventory(
         role_patterns=role_patterns,
         role_order=role_order,
         managed_output_paths=managed_output_paths,
+        require_git=require_git_provenance,
     )
     report_sources = report_source_paths(root, tracked)
     inventory["report_reconciliation"] = reconcile_reports(
@@ -3510,6 +3638,21 @@ def _compare_rendered_artifacts(
     return mismatches
 
 
+def _validate_transaction_target(
+    root: Path,
+    target: Path,
+    *,
+    role: str,
+) -> None:
+    try:
+        relative = target.relative_to(root)
+    except ValueError as exc:
+        raise InventoryError(
+            f"{role}: outside repository ({target})"
+        ) from exc
+    _clean_path(relative.as_posix(), role=role, repository=root)
+
+
 def _apply_atomic_payloads(
     root: Path,
     rendered_artifacts: dict[Path, str],
@@ -3534,6 +3677,7 @@ def _apply_atomic_payloads(
 
     staged: dict[Path, Path] = {}
     backups: dict[Path, Path] = {}
+    preserved_backups: set[Path] = set()
     replaced: list[Path] = []
     legacy_temp_root = root / ".inventory-collection-apply"
     if (
@@ -3574,27 +3718,48 @@ def _apply_atomic_payloads(
                     backup.close()
 
         for target, temp_path in sorted(staged.items(), key=lambda item: str(item[0])):
+            _validate_transaction_target(
+                root,
+                target,
+                role="output replace",
+            )
             os.replace(temp_path, target)
             replaced.append(target)
     except Exception as exc:
         rollback_errors: list[str] = []
+        recoverable_backups: list[Path] = []
         for target in sorted(replaced, reverse=True):
             try:
+                _validate_transaction_target(
+                    root,
+                    target,
+                    role="rollback output",
+                )
                 if target in backups and backups[target].exists():
                     os.replace(backups[target], target)
                 else:
                     target.unlink(missing_ok=True)
-            except OSError as rollback_exc:
-                rollback_errors.append(f"{target}: {rollback_exc}")
+            except Exception as rollback_exc:
+                backup = backups.get(target)
+                if backup is not None and backup.exists():
+                    preserved_backups.add(backup)
+                    recoverable_backups.append(backup)
+                rollback_errors.append(str(rollback_exc))
         message = "transaction rolled back"
         if rollback_errors:
             message += " incompletely: " + "; ".join(rollback_errors)
-        raise InventoryError(f"{message}: {exc}") from exc
+        if recoverable_backups:
+            message += "; " + "; ".join(
+                f"recoverable backup: {path}"
+                for path in recoverable_backups
+            )
+        raise InventoryError(f"{message}; cause: {exc}") from exc
     finally:
         for temp_path in staged.values():
             temp_path.unlink(missing_ok=True)
         for backup in backups.values():
-            backup.unlink(missing_ok=True)
+            if backup not in preserved_backups:
+                backup.unlink(missing_ok=True)
         if temp_root.exists() and not any(temp_root.iterdir()):
             temp_root.rmdir()
 
@@ -3626,7 +3791,6 @@ def _reuse_stored_generation_provenance(
     # inclut éventuellement le commit des artefacts et créerait une boucle.
     # Le fingerprint du générateur reste toutefois courant pour détecter toute
     # dérive du code de génération.
-    reused = dict(stored_provenance)
     reused = dict(current_provenance)
     for field in ("generated_at_utc", "head_sha"):
         reused[field] = stored_provenance.get(field)
@@ -3685,7 +3849,9 @@ def build_inventory_artifacts(
 
     if check_only:
         inventory = build_inventory(
-            root, managed_output_paths=managed_output_paths
+            root,
+            managed_output_paths=managed_output_paths,
+            require_git_provenance=True,
         )
         _reuse_stored_generation_provenance(root, audit_root, inventory)
         rendered = _render_managed_artifacts(
@@ -3701,7 +3867,11 @@ def build_inventory_artifacts(
     with _lock_generation(root) as lock_identity:
         if baseline_path:
             baseline_failures = _evaluate_baseline(
-                build_inventory(root, managed_output_paths=managed_output_paths),
+                build_inventory(
+                    root,
+                    managed_output_paths=managed_output_paths,
+                    require_git_provenance=True,
+                ),
                 Path(baseline_path),
             )
             if baseline_failures:
@@ -3709,7 +3879,9 @@ def build_inventory_artifacts(
                     "baseline invalide: " + ", ".join(baseline_failures)
                 )
         inventory = build_inventory(
-            root, managed_output_paths=managed_output_paths
+            root,
+            managed_output_paths=managed_output_paths,
+            require_git_provenance=True,
         )
         rendered = _render_managed_artifacts(
             inventory,

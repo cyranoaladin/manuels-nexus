@@ -432,3 +432,24 @@ octet pour octet sans créer les nouvelles.
 | Statut Git textuel ambigu | chemins Unicode/espaces et renommages faux | `scripts/inventory_collection.py` | parsing NUL et représentation structurée des entrées | `test_git_status_preserves_unicode_spaces_and_both_rename_paths` | Corrigé |
 | Provenance de `--check` trop largement réutilisée | nouveau source non suivi invisible | `scripts/inventory_collection.py` | réutilisation limitée au SHA et à l'horodatage attestés | `test_check_recomputes_untracked_provenance_instead_of_reusing_stored_status` | Corrigé |
 | Versions d'outils et UTC incorrects | fausse preuve de toolchain, warnings | `scripts/inventory_collection.py` | interrogation de chaque exécutable et UTC aware | `test_tool_versions_come_from_each_real_executable`, `test_now_utc_is_timezone_aware_without_deprecation_warning` | Corrigé |
+
+### Correctif de revue de conformité
+
+- La génération d'artefacts exige désormais un dépôt Git exploitable : `HEAD`,
+  branche attachée, statut, fichiers suivis et horodatage doivent être
+  disponibles. Les inventaires en mémoire conservent leur compatibilité avec un
+  dépôt non initialisé, mais déclarent explicitement `git_available: false` et
+  des valeurs nulles au lieu d'une fausse propreté.
+- Deux générations complètes, lancées dans deux dépôts Git isolés avec le même
+  contenu et le même `SOURCE_DATE_EPOCH`, produisent des octets identiques.
+- La libération d'un verrou après erreur revalide son inode. Chaque remplacement
+  et chaque rollback revalident aussi le confinement des symlinks ; il s'agit
+  d'une réduction déterministe de la fenêtre TOCTOU, pas d'une protection
+  absolue contre un adversaire privilégié contrôlant le système de fichiers.
+- Si un rollback échoue, la sauvegarde récupérable est conservée et son chemin
+  est inclus dans l'`InventoryError`, au lieu d'être supprimée au nettoyage.
+
+Tests de conformité ajoutés : échecs des commandes Git, dépôt non Git, dépôt
+sans commit, reproductibilité inter-dépôts, remplacement d'inode du verrou,
+courses symlink avant remplacement et rollback, sauvegarde après rollback
+incomplet, et absence d'affectation morte dans la réutilisation de provenance.
