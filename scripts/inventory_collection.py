@@ -3685,23 +3685,17 @@ def _compare_rendered_artifacts(
     return mismatches
 
 
-def _validate_transaction_target(
-    root: Path,
-    target: Path,
-    *,
-    role: str,
-) -> None:
-    try:
-        relative = target.relative_to(root)
-    except ValueError as exc:
-        raise InventoryError(
-            f"{role}: outside repository ({target})"
-        ) from exc
-    _clean_path(relative.as_posix(), role=role, repository=root)
-
-
 def _stat_identity(value: os.stat_result) -> tuple[int, int]:
     return value.st_dev, value.st_ino
+
+
+def _directory_open_flags() -> int:
+    return (
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_DIRECTORY", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
 
 
 def _path_matches_directory_identity(
@@ -3717,19 +3711,31 @@ def _path_matches_directory_identity(
     ) == _stat_identity(expected)
 
 
+def _directory_entry_matches_identity(
+    parent_fd: int,
+    name: str,
+    expected: os.stat_result,
+) -> bool:
+    try:
+        current = os.stat(
+            name,
+            dir_fd=parent_fd,
+            follow_symlinks=False,
+        )
+    except OSError:
+        return False
+    return stat.S_ISDIR(current.st_mode) and _stat_identity(
+        current
+    ) == _stat_identity(expected)
+
+
 def _open_pinned_directory(
     path: Path,
     *,
     role: str,
 ) -> tuple[int, os.stat_result]:
-    flags = (
-        os.O_RDONLY
-        | getattr(os, "O_CLOEXEC", 0)
-        | getattr(os, "O_DIRECTORY", 0)
-        | getattr(os, "O_NOFOLLOW", 0)
-    )
     try:
-        fd = os.open(path, flags)
+        fd = os.open(path, _directory_open_flags())
     except OSError as exc:
         raise InventoryError(f"{role}: cannot pin directory ({path})") from exc
     try:
@@ -3742,6 +3748,226 @@ def _open_pinned_directory(
         os.close(fd)
         raise
     return fd, pinned
+
+
+def _create_transaction_directory(
+    root_fd: int,
+) -> tuple[str, int, os.stat_result]:
+    name = ""
+    for _ in range(128):
+        name = f".inventory-collection-apply-{secrets.token_hex(12)}"
+        try:
+            os.mkdir(name, 0o700, dir_fd=root_fd)
+            break
+        except FileExistsError:
+            continue
+        except OSError as exc:
+            raise InventoryError(
+                "transaction directory cannot be created safely"
+            ) from exc
+    else:
+        raise InventoryError("cannot allocate transaction directory")
+    try:
+        created = os.stat(
+            name,
+            dir_fd=root_fd,
+            follow_symlinks=False,
+        )
+    except OSError as exc:
+        raise InventoryError(
+            "transaction directory identity unavailable"
+        ) from exc
+    if not stat.S_ISDIR(created.st_mode):
+        raise InventoryError("transaction directory is not a directory")
+    try:
+        fd = os.open(
+            name,
+            _directory_open_flags(),
+            dir_fd=root_fd,
+        )
+    except OSError as exc:
+        if _directory_entry_matches_identity(root_fd, name, created):
+            try:
+                os.rmdir(name, dir_fd=root_fd)
+            except OSError:
+                pass
+        raise InventoryError(
+            "transaction directory cannot be pinned"
+        ) from exc
+    pinned: os.stat_result | None = None
+    try:
+        pinned = os.fstat(fd)
+        if not stat.S_ISDIR(pinned.st_mode):
+            raise InventoryError("transaction directory is not a directory")
+        if _stat_identity(pinned) != _stat_identity(created):
+            raise InventoryError("transaction directory identity changed")
+        if not _directory_entry_matches_identity(root_fd, name, pinned):
+            raise InventoryError("transaction directory identity changed")
+        os.fsync(root_fd)
+        return name, fd, pinned
+    except Exception:
+        os.close(fd)
+        if pinned is not None and _directory_entry_matches_identity(
+            root_fd,
+            name,
+            pinned,
+        ):
+            try:
+                os.rmdir(name, dir_fd=root_fd)
+            except OSError:
+                pass
+        raise
+
+
+def _open_destination_parent(
+    root_fd: int,
+    relative: PurePosixPath,
+    *,
+    create: bool,
+) -> tuple[int, os.stat_result]:
+    current_fd = os.dup(root_fd)
+    try:
+        for component in relative.parent.parts:
+            try:
+                next_fd = os.open(
+                    component,
+                    _directory_open_flags(),
+                    dir_fd=current_fd,
+                )
+            except FileNotFoundError as exc:
+                if not create:
+                    raise InventoryError(
+                        "destination parent identity changed or disappeared: "
+                        f"{relative.parent}"
+                    ) from exc
+                try:
+                    os.mkdir(component, 0o755, dir_fd=current_fd)
+                except FileExistsError:
+                    pass
+                except OSError as mkdir_exc:
+                    raise InventoryError(
+                        "destination parent cannot be created safely: "
+                        f"{relative.parent}"
+                    ) from mkdir_exc
+                try:
+                    next_fd = os.open(
+                        component,
+                        _directory_open_flags(),
+                        dir_fd=current_fd,
+                    )
+                except OSError as open_exc:
+                    raise InventoryError(
+                        "destination parent: symlink escape or "
+                        f"non-directory component ({relative.parent})"
+                    ) from open_exc
+            except OSError as exc:
+                raise InventoryError(
+                    "destination parent: symlink escape or "
+                    f"non-directory component ({relative.parent})"
+                ) from exc
+            os.close(current_fd)
+            current_fd = next_fd
+        parent_stat = os.fstat(current_fd)
+        if not stat.S_ISDIR(parent_stat.st_mode):
+            raise InventoryError(
+                f"destination parent is not a directory: {relative.parent}"
+            )
+        return current_fd, parent_stat
+    except Exception:
+        os.close(current_fd)
+        raise
+
+
+def _revalidate_destination_parent(
+    root_fd: int,
+    relative: PurePosixPath,
+    expected: os.stat_result,
+) -> None:
+    current_fd, current_stat = _open_destination_parent(
+        root_fd,
+        relative,
+        create=False,
+    )
+    try:
+        if _stat_identity(current_stat) != _stat_identity(expected):
+            raise InventoryError(
+                f"destination parent identity changed: {relative.parent}"
+            )
+    finally:
+        os.close(current_fd)
+
+
+def _read_destination_backup(
+    parent_fd: int,
+    basename: str,
+) -> tuple[bytes, os.stat_result] | None:
+    flags = (
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+        | getattr(os, "O_NONBLOCK", 0)
+    )
+    try:
+        fd = os.open(basename, flags, dir_fd=parent_fd)
+    except FileNotFoundError:
+        return None
+    except OSError as exc:
+        raise InventoryError(
+            f"destination target: symlink or unavailable regular file ({basename})"
+        ) from exc
+    try:
+        target_stat = os.fstat(fd)
+        if not stat.S_ISREG(target_stat.st_mode):
+            raise InventoryError(
+                f"destination target is not a regular file: {basename}"
+            )
+        chunks: list[bytes] = []
+        while True:
+            chunk = os.read(fd, 1024 * 1024)
+            if not chunk:
+                break
+            chunks.append(chunk)
+        return b"".join(chunks), target_stat
+    finally:
+        os.close(fd)
+
+
+def _revalidate_destination_entry(
+    parent_fd: int,
+    basename: str,
+    expected: os.stat_result | None,
+) -> None:
+    try:
+        current = os.stat(
+            basename,
+            dir_fd=parent_fd,
+            follow_symlinks=False,
+        )
+    except FileNotFoundError:
+        if expected is None:
+            return
+        raise InventoryError(
+            f"destination target identity changed or disappeared: {basename}"
+        )
+    if expected is None:
+        raise InventoryError(
+            f"destination target appeared during transaction: {basename}"
+        )
+    if (
+        not stat.S_ISREG(current.st_mode)
+        or _stat_identity(current) != _stat_identity(expected)
+    ):
+        raise InventoryError(
+            f"destination target identity changed: {basename}"
+        )
+
+
+def _require_repository_root_identity(
+    root: Path,
+    expected: os.stat_result,
+) -> None:
+    if not _path_matches_directory_identity(root, expected):
+        raise InventoryError("repository root identity changed")
 
 
 def _write_all(fd: int, payload: bytes) -> None:
@@ -3757,7 +3983,7 @@ def _write_transaction_entry(
     directory_fd: int,
     name: str,
     payload: bytes,
-) -> None:
+) -> os.stat_result:
     flags = (
         os.O_CREAT
         | os.O_EXCL
@@ -3770,6 +3996,7 @@ def _write_transaction_entry(
     try:
         _write_all(fd, payload)
         os.fsync(fd)
+        return identity
     except Exception:
         try:
             current = os.stat(
@@ -3881,28 +4108,40 @@ def _apply_atomic_payloads(
     rendered_artifacts: dict[Path, str],
 ) -> None:
     root = root.resolve()
-    targets: dict[Path, str] = {}
+    targets: dict[PurePosixPath, str] = {}
     for path, content in rendered_artifacts.items():
         if path.is_absolute():
             try:
-                relative = path.relative_to(root)
+                relative_path = path.relative_to(root)
             except ValueError as exc:
                 raise InventoryError(
                     f"output: outside repository ({path})"
                 ) from exc
         else:
-            relative = path
+            relative_path = path
+        relative = PurePosixPath(relative_path.as_posix())
         _clean_path(relative.as_posix(), role="output", repository=root)
-        target = root / relative
-        if target in targets:
+        if not relative.name:
+            raise InventoryError("output: missing destination basename")
+        if relative in targets:
             raise InventoryError(f"duplicate output target: {relative}")
-        targets[target] = content
+        targets[relative] = content
 
-    staged: dict[Path, str] = {}
-    backups: dict[Path, str] = {}
+    destination_parents: dict[
+        PurePosixPath,
+        tuple[int, os.stat_result],
+    ] = {}
+    destination_snapshots: dict[
+        PurePosixPath,
+        os.stat_result | None,
+    ] = {}
+    stage_snapshots: dict[PurePosixPath, os.stat_result] = {}
+    applied_snapshots: dict[PurePosixPath, os.stat_result] = {}
+    staged: dict[PurePosixPath, str] = {}
+    backups: dict[PurePosixPath, str] = {}
     transaction_entries: set[str] = set()
     preserved_transaction_entries: set[str] = set()
-    replaced: list[Path] = []
+    replaced: list[PurePosixPath] = []
     legacy_temp_root = root / ".inventory-collection-apply"
     if (
         legacy_temp_root.is_symlink()
@@ -3911,96 +4150,139 @@ def _apply_atomic_payloads(
         raise InventoryError(
             "transaction directory: symlink escape outside repository"
         )
-    root_fd, _root_stat = _open_pinned_directory(
+    root_fd, root_stat = _open_pinned_directory(
         root,
         role="repository transaction root",
     )
     try:
-        temp_root = Path(
-            tempfile.mkdtemp(
-                prefix=".inventory-collection-apply-",
-                dir=str(root),
+        temp_name, temp_fd, temp_stat = _create_transaction_directory(
+            root_fd
+        )
+    except Exception:
+        os.close(root_fd)
+        raise
+    try:
+        _require_repository_root_identity(root, root_stat)
+        for relative in targets:
+            destination_parents[relative] = _open_destination_parent(
+                root_fd,
+                relative,
+                create=True,
             )
-        )
-        created_temp_stat = temp_root.stat(follow_symlinks=False)
-    except Exception:
-        os.close(root_fd)
-        raise
-    try:
-        temp_fd, temp_stat = _open_pinned_directory(
-            temp_root,
-            role="transaction directory",
-        )
-    except Exception:
-        if _path_matches_directory_identity(temp_root, created_temp_stat):
-            try:
-                os.rmdir(temp_root)
-            except OSError:
-                pass
-        os.close(root_fd)
-        raise
-    try:
-        for index, (target, content) in enumerate(targets.items()):
-            target.parent.mkdir(parents=True, exist_ok=True)
+        for index, (relative, content) in enumerate(targets.items()):
+            parent_fd, _parent_stat = destination_parents[relative]
             stage_name = f"stage-{index:08d}"
-            _write_transaction_entry(
+            stage_snapshots[relative] = _write_transaction_entry(
                 temp_fd,
                 stage_name,
                 _utf8_bytes(content),
             )
-            staged[target] = stage_name
+            staged[relative] = stage_name
             transaction_entries.add(stage_name)
-            if target.exists():
-                _validate_transaction_target(
-                    root,
-                    target,
-                    role="backup source",
-                )
+            backup = _read_destination_backup(
+                parent_fd,
+                relative.name,
+            )
+            if backup is None:
+                destination_snapshots[relative] = None
+            else:
+                backup_payload, target_stat = backup
+                destination_snapshots[relative] = target_stat
                 backup_name = f"backup-{index:08d}"
                 _write_transaction_entry(
                     temp_fd,
                     backup_name,
-                    target.read_bytes(),
+                    backup_payload,
                 )
-                backups[target] = backup_name
+                backups[relative] = backup_name
                 transaction_entries.add(backup_name)
 
         os.fsync(temp_fd)
-        for target, stage_name in sorted(
+        _require_repository_root_identity(root, root_stat)
+        for relative, stage_name in sorted(
             staged.items(),
             key=lambda item: str(item[0]),
         ):
-            _validate_transaction_target(
-                root,
-                target,
-                role="output replace",
+            _require_repository_root_identity(root, root_stat)
+            parent_fd, parent_stat = destination_parents[relative]
+            _revalidate_destination_parent(
+                root_fd,
+                relative,
+                parent_stat,
             )
-            os.replace(stage_name, target, src_dir_fd=temp_fd)
-            replaced.append(target)
+            _revalidate_destination_entry(
+                parent_fd,
+                relative.name,
+                destination_snapshots[relative],
+            )
+            os.replace(
+                stage_name,
+                relative.name,
+                src_dir_fd=temp_fd,
+                dst_dir_fd=parent_fd,
+            )
+            replaced.append(relative)
+            applied_stat = os.stat(
+                relative.name,
+                dir_fd=parent_fd,
+                follow_symlinks=False,
+            )
+            if not stat.S_ISREG(applied_stat.st_mode):
+                raise InventoryError(
+                    f"applied destination is not regular: {relative}"
+                )
+            if _stat_identity(applied_stat) != _stat_identity(
+                stage_snapshots[relative]
+            ):
+                raise InventoryError(
+                    f"applied destination identity changed: {relative}"
+                )
+            applied_snapshots[relative] = applied_stat
+            os.fsync(parent_fd)
+        _require_repository_root_identity(root, root_stat)
+        for relative, (parent_fd, parent_stat) in destination_parents.items():
+            _revalidate_destination_parent(
+                root_fd,
+                relative,
+                parent_stat,
+            )
+            _revalidate_destination_entry(
+                parent_fd,
+                relative.name,
+                applied_snapshots[relative],
+            )
     except Exception as exc:
         rollback_errors: list[str] = []
         recoverable_backups: list[Path] = []
-        for target in sorted(replaced, reverse=True):
+        for relative in sorted(replaced, reverse=True):
+            parent_fd, _parent_stat = destination_parents[relative]
             try:
-                _validate_transaction_target(
-                    root,
-                    target,
-                    role="rollback output",
+                applied_stat = applied_snapshots.get(relative)
+                if applied_stat is None:
+                    raise InventoryError(
+                        f"applied destination identity unavailable: {relative}"
+                    )
+                _revalidate_destination_entry(
+                    parent_fd,
+                    relative.name,
+                    applied_stat,
                 )
-                backup_name = backups.get(target)
+                backup_name = backups.get(relative)
                 if backup_name and _transaction_entry_is_regular(
                     temp_fd,
                     backup_name,
                 ):
                     os.replace(
                         backup_name,
-                        target,
+                        relative.name,
                         src_dir_fd=temp_fd,
+                        dst_dir_fd=parent_fd,
                     )
                 else:
-                    target.unlink(missing_ok=True)
+                    os.unlink(relative.name, dir_fd=parent_fd)
+                os.fsync(parent_fd)
             except Exception as rollback_exc:
-                backup_name = backups.get(target)
+                backup_name = backups.get(relative)
                 if backup_name and _transaction_entry_is_regular(
                     temp_fd,
                     backup_name,
@@ -4048,15 +4330,30 @@ def _apply_atomic_payloads(
                 cleanup_errors.append(f"fsync transaction directory: {cleanup_exc}")
             if (
                 not preserved_transaction_entries
-                and _path_matches_directory_identity(temp_root, temp_stat)
+                and _directory_entry_matches_identity(
+                    root_fd,
+                    temp_name,
+                    temp_stat,
+                )
             ):
                 try:
-                    os.rmdir(temp_root)
+                    os.rmdir(temp_name, dir_fd=root_fd)
                 except OSError as cleanup_exc:
                     cleanup_errors.append(
                         f"rmdir transaction directory: {cleanup_exc}"
                     )
         finally:
+            for relative, (parent_fd, _parent_stat) in sorted(
+                destination_parents.items(),
+                key=lambda item: str(item[0]),
+            ):
+                try:
+                    os.close(parent_fd)
+                except OSError as cleanup_exc:
+                    cleanup_errors.append(
+                        f"close destination parent {relative.parent}: "
+                        f"{cleanup_exc}"
+                    )
             try:
                 os.close(temp_fd)
             except OSError as cleanup_exc:

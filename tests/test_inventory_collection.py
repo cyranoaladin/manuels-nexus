@@ -4109,7 +4109,246 @@ def test_transaction_uses_pinned_temp_directory_after_path_substitution(
     assert substitution["temp_root"].is_symlink()
 
 
-def test_transaction_revalidates_target_before_reading_backup(
+def test_transaction_fails_if_repository_root_path_is_substituted_after_staging(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    moved_repository = tmp_path / "repository-original"
+    outside = tmp_path / "outside"
+    original_target = repository / "audit/existing.txt"
+    external_target = outside / "audit/existing.txt"
+    _write(original_target, "octets historiques\n")
+    _write(external_target, "octets externes\n")
+    original_fsync = inventory_module.os.fsync
+    substituted = False
+
+    def substitute_repository_after_stage(fd: int) -> None:
+        nonlocal substituted
+        original_fsync(fd)
+        if substituted:
+            return
+        try:
+            open_path = Path(os.readlink(f"/proc/self/fd/{fd}"))
+        except OSError:
+            return
+        if not open_path.parent.name.startswith(
+            ".inventory-collection-apply-"
+        ):
+            return
+        repository.rename(moved_repository)
+        repository.symlink_to(outside, target_is_directory=True)
+        substituted = True
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "fsync",
+        substitute_repository_after_stage,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="repository root identity changed",
+    ):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {Path("audit/existing.txt"): "nouveaux octets\n"},
+        )
+
+    assert substituted
+    assert (
+        moved_repository / "audit/existing.txt"
+    ).read_bytes() == b"octets historiques\n"
+    assert external_target.read_bytes() == b"octets externes\n"
+    assert list(moved_repository.glob(".inventory-collection-apply-*")) == []
+
+
+def test_transaction_temp_directory_creation_uses_pinned_repository_fd(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    moved_repository = tmp_path / "repository-original"
+    outside = tmp_path / "outside"
+    original_target = repository / "audit/existing.txt"
+    _write(original_target, "octets historiques\n")
+    outside.mkdir()
+    original_open_pinned = inventory_module._open_pinned_directory
+    substituted = False
+
+    def substitute_after_root_pin(path: Path, *, role: str):
+        nonlocal substituted
+        fd, identity = original_open_pinned(path, role=role)
+        if role == "repository transaction root" and not substituted:
+            repository.rename(moved_repository)
+            repository.symlink_to(outside, target_is_directory=True)
+            substituted = True
+        return fd, identity
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_open_pinned_directory",
+        substitute_after_root_pin,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="repository root identity changed",
+    ):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {Path("audit/existing.txt"): "nouveaux octets\n"},
+        )
+
+    assert substituted
+    assert (
+        moved_repository / "audit/existing.txt"
+    ).read_bytes() == b"octets historiques\n"
+    assert list(outside.glob(".inventory-collection-apply-*")) == []
+    assert list(moved_repository.glob(".inventory-collection-apply-*")) == []
+
+
+def test_transaction_refuses_internal_symlink_parent_component(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    repository = tmp_path / "repository"
+    real_parent = repository / "real-audit"
+    real_parent.mkdir(parents=True)
+    (repository / "audit").symlink_to(
+        real_parent,
+        target_is_directory=True,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="destination parent.*symlink|destination parent.*directory",
+    ):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {Path("audit/output.txt"): "contenu\n"},
+        )
+
+    assert not (real_parent / "output.txt").exists()
+
+
+def test_transaction_refuses_symlink_destination_entry(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    repository = tmp_path / "repository"
+    real_target = repository / "audit/real.txt"
+    symlink_target = repository / "audit/output.txt"
+    _write(real_target, "octets historiques\n")
+    symlink_target.symlink_to(real_target)
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="destination target.*regular file|destination target.*symlink",
+    ):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {Path("audit/output.txt"): "nouveaux octets\n"},
+        )
+
+    assert symlink_target.is_symlink()
+    assert real_target.read_bytes() == b"octets historiques\n"
+
+
+def test_transaction_rejects_destination_inode_substituted_after_replace(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "audit/existing.txt"
+    _write(target, "octets historiques\n")
+    original_replace = inventory_module.os.replace
+    substituted = False
+
+    def replace_then_substitute(
+        source: Path | str,
+        destination: Path | str,
+        **kwargs: object,
+    ) -> None:
+        nonlocal substituted
+        original_replace(source, destination, **kwargs)
+        if substituted or not str(source).startswith("stage-"):
+            return
+        destination_fd = kwargs.get("dst_dir_fd")
+        assert isinstance(destination_fd, int)
+        os.unlink(destination, dir_fd=destination_fd)
+        foreign_fd = os.open(
+            destination,
+            os.O_CREAT | os.O_EXCL | os.O_WRONLY,
+            0o600,
+            dir_fd=destination_fd,
+        )
+        try:
+            os.write(foreign_fd, b"octets concurrents\n")
+        finally:
+            os.close(foreign_fd)
+        substituted = True
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        replace_then_substitute,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="recoverable backup.*applied destination identity changed",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/existing.txt"): "nouveaux octets\n"},
+        )
+
+    recovery_match = re.search(
+        r"recoverable backup: ([^;]+)",
+        str(captured.value),
+    )
+    assert recovery_match is not None
+    assert Path(
+        recovery_match.group(1)
+    ).read_bytes() == b"octets historiques\n"
+    assert target.read_bytes() == b"octets concurrents\n"
+
+
+def test_successful_replace_fsyncs_destination_parent(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    parent = tmp_path / "audit"
+    parent.mkdir()
+    parent_identity = parent.stat()
+    fsynced_parent = False
+    original_fsync = inventory_module.os.fsync
+
+    def observe_fsync(fd: int) -> None:
+        nonlocal fsynced_parent
+        value = os.fstat(fd)
+        if (value.st_dev, value.st_ino) == (
+            parent_identity.st_dev,
+            parent_identity.st_ino,
+        ):
+            fsynced_parent = True
+        original_fsync(fd)
+
+    monkeypatch.setattr(inventory_module.os, "fsync", observe_fsync)
+
+    inventory_module._apply_atomic_payloads(
+        tmp_path,
+        {Path("audit/output.txt"): "contenu\n"},
+    )
+
+    assert fsynced_parent
+
+
+def test_transaction_reads_backup_through_pinned_parent_fd(
     tmp_path: Path,
     inventory_module,
     monkeypatch: pytest.MonkeyPatch,
@@ -4126,15 +4365,16 @@ def test_transaction_revalidates_target_before_reading_backup(
         directory_fd: int,
         name: str,
         payload: bytes,
-    ) -> None:
+    ) -> os.stat_result:
         captured_payloads.append(payload)
-        original_write_entry(directory_fd, name, payload)
+        identity = original_write_entry(directory_fd, name, payload)
         if name.startswith("stage-"):
             (repository / "audit").rename(repository / "audit-original")
             (repository / "audit").symlink_to(
                 outside,
                 target_is_directory=True,
             )
+        return identity
 
     monkeypatch.setattr(
         inventory_module,
@@ -4148,7 +4388,10 @@ def test_transaction_revalidates_target_before_reading_backup(
             {Path("audit/existing.txt"): "nouveaux octets\n"},
         )
 
-    assert captured_payloads == [b"nouveaux octets\n"]
+    assert captured_payloads == [
+        b"nouveaux octets\n",
+        b"octets historiques\n",
+    ]
     assert (outside / "existing.txt").read_bytes() == b"octets externes secrets\n"
 
 
@@ -4249,8 +4492,8 @@ def test_transaction_root_fd_is_closed_when_temp_creation_fails(
         closed_fds.append(fd)
         original_close(fd)
 
-    def fail_temp_creation(*_args: object, **_kwargs: object) -> str:
-        raise OSError("injection mkdtemp")
+    def fail_temp_creation(_root_fd: int):
+        raise OSError("injection transaction directory")
 
     monkeypatch.setattr(
         inventory_module,
@@ -4259,12 +4502,12 @@ def test_transaction_root_fd_is_closed_when_temp_creation_fails(
     )
     monkeypatch.setattr(inventory_module.os, "close", close)
     monkeypatch.setattr(
-        inventory_module.tempfile,
-        "mkdtemp",
+        inventory_module,
+        "_create_transaction_directory",
         fail_temp_creation,
     )
 
-    with pytest.raises(OSError, match="injection mkdtemp"):
+    with pytest.raises(OSError, match="injection transaction directory"):
         inventory_module._apply_atomic_payloads(
             tmp_path,
             {Path("audit/output.txt"): "contenu\n"},
@@ -4272,6 +4515,45 @@ def test_transaction_root_fd_is_closed_when_temp_creation_fails(
 
     assert len(root_fds) == 1
     assert root_fds[0] in closed_fds
+
+
+def test_transaction_directory_open_failure_removes_created_directory(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    original_open = inventory_module.os.open
+
+    def fail_transaction_directory_open(
+        path: Path | str,
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        if (
+            dir_fd is not None
+            and str(path).startswith(".inventory-collection-apply-")
+        ):
+            raise PermissionError("injection open transaction directory")
+        return original_open(path, flags, mode, dir_fd=dir_fd)
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "open",
+        fail_transaction_directory_open,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction directory cannot be pinned",
+    ):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/output.txt"): "contenu\n"},
+        )
+
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
 
 
 def test_failed_rollback_copies_backup_out_of_a_substituted_temp_root(
@@ -4393,7 +4675,7 @@ def test_forward_replace_revalidates_symlink_confinement_after_staging(
     assert list(outside.iterdir()) == []
 
 
-def test_rollback_revalidates_symlink_and_preserves_backup(
+def test_rollback_uses_pinned_parent_after_path_symlink_substitution(
     tmp_path: Path,
     inventory_module,
     monkeypatch: pytest.MonkeyPatch,
@@ -4430,8 +4712,8 @@ def test_rollback_revalidates_symlink_and_preserves_backup(
 
     with pytest.raises(
         inventory_module.InventoryError,
-        match="symlink escape.*recoverable backup",
-    ) as captured:
+        match="transaction rolled back.*injection avant rollback",
+    ):
         inventory_module._apply_atomic_payloads(
             repository,
             {
@@ -4440,16 +4722,11 @@ def test_rollback_revalidates_symlink_and_preserves_backup(
             },
         )
 
-    backup_match = re.search(
-        r"recoverable backup: ([^;]+)",
-        str(captured.value),
-    )
-    assert backup_match is not None
-    backup_path = Path(backup_match.group(1))
-    assert backup_path.parent == repository
-    assert backup_path.name.startswith(".inventory-collection-recovery-")
-    assert backup_path.read_bytes() == b"octets historiques\n"
+    assert (
+        repository / "audit-original/a-existing.txt"
+    ).read_bytes() == b"octets historiques\n"
     assert list(outside.iterdir()) == []
+    assert list(repository.glob(".inventory-collection-recovery-*")) == []
 
 
 def test_atomic_staging_failure_leaves_no_temporary_or_target(

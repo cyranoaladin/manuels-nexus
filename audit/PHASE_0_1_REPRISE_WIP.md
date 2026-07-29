@@ -473,3 +473,24 @@ incomplet, et absence d'affectation morte dans la réutilisation de provenance.
   en présence d'une erreur transactionnelle antérieure, il est joint en note
   sans masquer la cause primaire. Le test d'outillage tolère désormais les
   exécutables absents et vérifie séparément le routage de chaque commande.
+
+### Confinement des destinations par descripteur
+
+Après l'épinglage de la racine, aucune opération de destination n'utilise plus
+un chemin absolu. Chaque parent est ouvert ou créé composant par composant
+depuis `root_fd` avec `O_DIRECTORY|O_NOFOLLOW`, puis son FD reste ouvert jusqu'à
+la fin. Les backups lisent la cible avec `O_NOFOLLOW`, refusent tout objet non
+régulier, et les remplacements, rollbacks et suppressions emploient
+`src_dir_fd`/`dst_dir_fd`.
+
+Le contrat retenu est l'échec explicite : si le chemin de la racine est renommé
+puis substitué après son épinglage, la transaction échoue, restaure par FD les
+cibles déjà remplacées et ne touche jamais l'extérieur. Le staging lui-même est
+créé par `mkdirat` sous `root_fd`, puis nettoyé par `rmdirat`. L'inode du stage
+doit être celui observé à destination après `replace`, et chaque parent
+destination est synchronisé par `fsync`.
+
+Les mutations couvrent la substitution de la racine avant création du staging
+et après écriture du stage, les parents symlink internes, une cible symlink, la
+substitution d'inode juste après `replace`, la synchronisation du parent et
+l'échec d'ouverture du répertoire transactionnel après sa création.
