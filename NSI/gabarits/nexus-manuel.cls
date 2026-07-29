@@ -8,7 +8,7 @@
 % ===========================================================================
 %  BASE KOMA-SCRIPT
 % ===========================================================================
-\LoadClass[a4paper,fontsize=9.5pt,twoside,open=right,headings=normal,
+\LoadClass[a4paper,fontsize=9.5pt,twoside,open=any,headings=normal,
   chapterprefix=false,numbers=noenddot]{scrbook}
 
 % ===========================================================================
@@ -25,8 +25,8 @@
 % ===========================================================================
 %  MATIÈRE ET NIVEAU (paramétrage du sous-titre de couverture)
 % ===========================================================================
-\newcommand{\nexus@matiere}{NSI}
-\newcommand{\nexus@niveau}{Première}
+\newcommand{\nexus@matiere}{Mathématiques}
+\newcommand{\nexus@niveau}{Première spécialité}
 \RequirePackage{etoolbox}
 \newcommand{\matiere}[1]{%
   \renewcommand{\nexus@matiere}{#1}%
@@ -68,6 +68,7 @@
 \widowpenalty=10000
 \clubpenalty=10000
 \setlength{\parskip}{0.45em}
+\emergencystretch=2em
 
 % ===========================================================================
 %  COULEURS — Kit v2 « Éditorial premium »
@@ -105,10 +106,11 @@
 \geometry{%
   a4paper,
   top=2.4cm, bottom=2.6cm,
-  inner=2.0cm, outer=4.8cm,
-  marginparwidth=3.5cm, marginparsep=0.6cm,
+  inner=2.0cm, outer=4.4cm,
+  marginparwidth=2.8cm, marginparsep=0.45cm,
   headsep=0.7cm,
 }
+\setlength{\marginparpush}{6pt}
 
 % ===========================================================================
 %  MARGE PÉDAGOGIQUE (colonne de design)
@@ -118,26 +120,53 @@
 \renewcommand*{\raggedleftmarginnote}{}
 \renewcommand*{\raggedrightmarginnote}{\raggedright}
 
+% ---------------------------------------------------------------------------
+% Anti-collision des notes de marge.
+% \marginnote (package) n'empile pas les notes : chaque note est ancree a
+% l'endroit exact de son appel dans le flux principal, sans tenir compte de
+% la hauteur des notes precedentes. Deux notes proches (ou une note longue
+% suivie de peu de texte) se chevauchent alors visuellement.
+% On simule un empilement en decalant chaque nouvelle note du "passif"
+% (hauteur cumulee des notes non encore "absorbees"), remis a zero aux
+% frontieres sures (chapitre/section/sous-section/sous-sous-section), ce qui
+% suffit car aucune note ne traverse ce genre de rupture en pratique.
+% ---------------------------------------------------------------------------
+\newlength{\nx@margindebt}
+\setlength{\nx@margindebt}{0pt}
+\newlength{\nx@marginmeasure}
+\newsavebox{\nx@marginbox}
+
+\newcommand{\nx@resetmargindebt}{\global\setlength{\nx@margindebt}{0pt}}
+
+\newcommand{\nx@safemarginnote}[1]{%
+  \sbox{\nx@marginbox}{\parbox{\marginparwidth}{#1}}%
+  \setlength{\nx@marginmeasure}{\ht\nx@marginbox}%
+  \addtolength{\nx@marginmeasure}{\dp\nx@marginbox}%
+  \marginnote{#1}[\nx@margindebt]%
+  \global\addtolength{\nx@margindebt}{\nx@marginmeasure}%
+  \global\addtolength{\nx@margindebt}{3pt}%
+}
+
 \newcommand{\margeAppui}[1]{%
-  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont
+  \nx@safemarginnote{\sffamily\fontsize{7.5}{10}\selectfont
     \color{encre!50}\rule[-0.5ex]{0.4pt}{2.5ex}\kern4pt #1}%
 }
 \newcommand{\commentaireMarge}[1]{%
-  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont\color{chapcolor}#1}%
+  \nx@safemarginnote{\sffamily\fontsize{7.5}{10}\selectfont\color{chapcolor}#1}%
 }
 % Vocabulaire en marge (kit v2)
 \newcommand{\vocab}[2]{%
   \textcolor{chapcolor}{\textbf{#1}}%
-  \marginnote{\textcolor{chapcolor}{\rule{2.6cm}{2pt}}\\[2pt]
+  \nx@safemarginnote{\textcolor{chapcolor}{\rule{2.6cm}{2pt}}\\[2pt]
     {\titrefont\color{chapcolor}#1}\\[2pt]\itshape\small #2}}
 
 % ===========================================================================
 %  HIÉRARCHIE TYPOGRAPHIQUE (KOMA-Script RedeclareSectionCommand)
 % ===========================================================================
 \addtokomafont{chapter}{\titrefont\color{encre}\fontsize{22}{27}\selectfont}
-\addtokomafont{section}{\titrefont\color{encre}\fontsize{13}{17}\selectfont}
-\addtokomafont{subsection}{\titrefont\color{encre!85!black}\fontsize{11}{14}\selectfont}
-\addtokomafont{subsubsection}{\titrefont\color{encre!70!black}\fontsize{10}{13}\selectfont}
+\addtokomafont{section}{\titrefont\color{encre}\fontsize{12.2}{15.5}\selectfont\raggedright}
+\addtokomafont{subsection}{\titrefont\color{encre!85!black}\fontsize{10.8}{13.5}\selectfont\raggedright}
+\addtokomafont{subsubsection}{\titrefont\color{encre!70!black}\fontsize{10}{13}\selectfont\raggedright}
 
 % Espacement multiples de 4.5pt (tiers de ligne)
 \RedeclareSectionCommand[
@@ -149,6 +178,14 @@
 \RedeclareSectionCommand[
   beforeskip=9pt, afterskip=4.5pt
 ]{subsubsection}
+
+% Un chapitre/section/sous-section/sous-sous-section marque une rupture
+% visuelle large : on y remet a zero le passif de notes de marge (voir plus
+% haut), aucune note ne devant "sauter" par-dessus un titre.
+\pretocmd{\chapter}{\nx@resetmargindebt}{}{}
+\pretocmd{\section}{\nx@resetmargindebt}{}{}
+\pretocmd{\subsection}{\nx@resetmargindebt}{}{}
+\pretocmd{\subsubsection}{\nx@resetmargindebt}{}{}
 
 \newcommand{\sectionCapacite}[2]{%
   \section{#1}\margeAppui{\textbf{Je sais\ldots} #2}%
@@ -266,7 +303,7 @@
   colback=white, colframe=filetgris, boxrule=1.2pt,
   colbacktitle=white,
   title={\nxboxtitle{chapcolor}{Méthode #1 --- #2}}}
-\newenvironment{fichemethode}[2]{\begin{fmbox}{#1}{#2}}{\end{fmbox}}
+\newenvironment{fichemethode}[2]{\nx@resetmargindebt\begin{fmbox}{#1}{#2}}{\end{fmbox}}
 \newcommand{\quandUtiliser}[1]{\paragraph{Quand l'utiliser.}#1}
 \newcommand{\pasApas}[1]{\paragraph{La méthode pas à pas.}#1}
 \newcommand{\exempleRedige}[1]{\paragraph{Exemple rédigé.}#1}
@@ -297,7 +334,7 @@
   \ifnum#2=1\relax\parcoursUn\fi
   \ifnum#2=2\relax\parcoursDeux\fi
   \ifnum#2=3\relax\parcoursTrois\fi
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}\\\icnChrono~#3~min}%
+  \nx@safemarginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}\\\icnChrono~#3~min}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
@@ -306,7 +343,7 @@
   \tikz[baseline=(n.base)]\node[fill=chapcolor!70!black, text=white,
     rounded corners=2pt, inner xsep=7pt, inner ysep=3.5pt](n)
     {\titrefont\small Corrigé};%
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
+  \nx@safemarginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
@@ -381,7 +418,10 @@
 %  TABLES (booktabs)
 % ===========================================================================
 \RequirePackage{booktabs}
+\RequirePackage{array}
 \RequirePackage{eurosym}
+\AtBeginEnvironment{tabular}{\footnotesize\setlength{\tabcolsep}{3.4pt}\renewcommand{\arraystretch}{0.94}}
+\AtBeginEnvironment{tabularx}{\footnotesize\setlength{\tabcolsep}{3.4pt}\renewcommand{\arraystretch}{0.94}}
 
 % ===========================================================================
 %  FIGURES (définies dans nexus-figures.tex ; fallback si absent)
@@ -396,16 +436,25 @@
 \usetikzlibrary{backgrounds}
 
 \newlength{\nxBandHeight}
-\setlength{\nxBandHeight}{0.56\paperheight}
+\setlength{\nxBandHeight}{0.48\paperheight}
+\newsavebox{\nxTitreChapBox}
+\newlength{\nxTitreChapHeight}
 
 % Usage : \ouverturechapitre[motif]{Titre}{capacites}{accroche}{temps}
 \newcommand{\ouverturechapitre}[5][motifGenerique]{%
   \stepcounter{nxChapNum}%
   \refstepcounter{chapter}%
   \chaptermark{#2}%
-  \addcontentsline{toc}{chapter}{#2}%
+  \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#2}%
   % --- PAGE VISUELLE (recto, bandeau accent haut 56%) ---
   \thispagestyle{empty}%
+  % Hauteur réelle du titre (1 ou plusieurs lignes) : l'étiquette « Chapitre N »
+  % se positionne au-dessus de cette hauteur pour ne jamais chevaucher un
+  % titre qui se replie sur 2 lignes ou plus.
+  \sbox{\nxTitreChapBox}{\begin{minipage}{0.60\paperwidth}%
+    \titrefont\fontsize{27}{31}\selectfont#2\end{minipage}}%
+  \setlength{\nxTitreChapHeight}{\ht\nxTitreChapBox}%
+  \addtolength{\nxTitreChapHeight}{\dp\nxTitreChapBox}%
   \noindent\begin{tikzpicture}[remember picture, overlay]
     % Bandeau plein accent (haut de page)
     \fill[chapcolor] (current page.north west)
@@ -415,23 +464,23 @@
     % Étiquette matière · niveau
     \node[anchor=north west, text=white, opacity=0.9,
           font=\titrefont\small, inner sep=0pt]
-      at ([shift={(20mm,-17mm)}]current page.north west)
+      at ([shift={(14mm,-16mm)}]current page.north west)
       {\MakeUppercase{\nexus@matiere}\ \ $\cdot$\ \ \nexus@niveau};
     % Numéro géant fantôme
     \node[anchor=south west, text=white, opacity=0.15, inner sep=0pt,
           font=\titrefont\fontsize{210}{210}\selectfont]
       at ([shift={(16mm,-\nxBandHeight+2mm)}]current page.north west)
       {\ifnum\value{chapter}>0 \thechapter\fi};
-    % « Chapitre N »
+    % « Chapitre N » (positionné au-dessus du titre, quelle que soit sa hauteur)
     \node[anchor=south west, text=white, align=left, inner sep=0pt,
           font=\titrefont]
-      at ([shift={(20mm,-\nxBandHeight+24mm)}]current page.north west)
+      at ([shift={(14mm,-\nxBandHeight+13mm+\nxTitreChapHeight+6mm)}]current page.north west)
       {\fontsize{15}{15}\selectfont\MakeUppercase{Chapitre~\thechapter}};
     % Titre géant
     \node[anchor=south west, text=white, align=left, inner sep=0pt,
-          text width=0.66\paperwidth,
-          font=\titrefont\fontsize{34}{40}\selectfont]
-      at ([shift={(20mm,-\nxBandHeight+13mm)}]current page.north west)
+          text width=0.60\paperwidth,
+          font=\titrefont\fontsize{27}{31}\selectfont]
+      at ([shift={(14mm,-\nxBandHeight+13mm)}]current page.north west)
       {#2\par};
   \end{tikzpicture}\par
   % Espace sous le bandeau

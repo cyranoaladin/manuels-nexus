@@ -120,17 +120,65 @@
 \renewcommand*{\raggedleftmarginnote}{}
 \renewcommand*{\raggedrightmarginnote}{\raggedright}
 
+% ---------------------------------------------------------------------------
+% Anti-collision des notes de marge.
+% \marginnote (package) n'empile pas les notes : chaque note est ancree a
+% l'endroit exact de son appel dans le flux principal, sans tenir compte de
+% la hauteur des notes precedentes. Deux notes proches (ou une note longue
+% suivie de peu de texte) se chevauchent alors visuellement.
+% On simule un empilement en decalant chaque nouvelle note du "passif"
+% (hauteur cumulee des notes non encore "absorbees"), remis a zero aux
+% frontieres sures (chapitre/section/sous-section/sous-sous-section), ce qui
+% suffit car aucune note ne traverse ce genre de rupture en pratique.
+% ---------------------------------------------------------------------------
+\newlength{\nx@margindebt}
+\setlength{\nx@margindebt}{0pt}
+\newlength{\nx@marginmeasure}
+\newlength{\nx@marginroom}
+\newsavebox{\nx@marginbox}
+
+\newcommand{\nx@resetmargindebt}{\global\setlength{\nx@margindebt}{0pt}}
+
+% Plafond de securite : un decalage cumule ne doit jamais depasser l'espace
+% restant sur la page courante (sans quoi la note sortirait de la zone
+% imprimable et deviendrait invisible, ce qui est pire qu'un chevauchement).
+% \pagegoal vaut \maxdimen tant que la page n'a pas commence a se remplir :
+% dans ce cas le plafond est sans effet.
+\newcommand{\nx@capmargindebt}{%
+  \ifdim\pagegoal=\maxdimen\relax
+    % page pas encore amorcee : pas de plafond fiable, on ne touche a rien
+  \else
+    \setlength{\nx@marginroom}{\pagegoal}%
+    \addtolength{\nx@marginroom}{-\pagetotal}%
+    \addtolength{\nx@marginroom}{-40pt}% marge de securite (pied de page)
+    \ifdim\nx@marginroom<0pt\relax\setlength{\nx@marginroom}{0pt}\fi
+    \ifdim\nx@margindebt>\nx@marginroom\relax
+      \global\setlength{\nx@margindebt}{\nx@marginroom}%
+    \fi
+  \fi
+}
+
+\newcommand{\nx@safemarginnote}[1]{%
+  \sbox{\nx@marginbox}{\parbox{\marginparwidth}{#1}}%
+  \setlength{\nx@marginmeasure}{\ht\nx@marginbox}%
+  \addtolength{\nx@marginmeasure}{\dp\nx@marginbox}%
+  \nx@capmargindebt
+  \marginnote{#1}[\nx@margindebt]%
+  \global\addtolength{\nx@margindebt}{\nx@marginmeasure}%
+  \global\addtolength{\nx@margindebt}{3pt}%
+}
+
 \newcommand{\margeAppui}[1]{%
-  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont
+  \nx@safemarginnote{\sffamily\fontsize{7.5}{10}\selectfont
     \color{encre!50}\rule[-0.5ex]{0.4pt}{2.5ex}\kern4pt #1}%
 }
 \newcommand{\commentaireMarge}[1]{%
-  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont\color{chapcolor}#1}%
+  \nx@safemarginnote{\sffamily\fontsize{7.5}{10}\selectfont\color{chapcolor}#1}%
 }
 % Vocabulaire en marge (kit v2)
 \newcommand{\vocab}[2]{%
   \textcolor{chapcolor}{\textbf{#1}}%
-  \marginnote{\textcolor{chapcolor}{\rule{2.6cm}{2pt}}\\[2pt]
+  \nx@safemarginnote{\textcolor{chapcolor}{\rule{2.6cm}{2pt}}\\[2pt]
     {\titrefont\color{chapcolor}#1}\\[2pt]\itshape\small #2}}
 
 % ===========================================================================
@@ -151,6 +199,14 @@
 \RedeclareSectionCommand[
   beforeskip=9pt, afterskip=4.5pt
 ]{subsubsection}
+
+% Un chapitre/section/sous-section/sous-sous-section marque une rupture
+% visuelle large : on y remet a zero le passif de notes de marge (voir plus
+% haut), aucune note ne devant "sauter" par-dessus un titre.
+\pretocmd{\chapter}{\nx@resetmargindebt}{}{}
+\pretocmd{\section}{\nx@resetmargindebt}{}{}
+\pretocmd{\subsection}{\nx@resetmargindebt}{}{}
+\pretocmd{\subsubsection}{\nx@resetmargindebt}{}{}
 
 \newcommand{\sectionCapacite}[2]{%
   \section{#1}\margeAppui{\textbf{Je sais\ldots} #2}%
@@ -268,7 +324,7 @@
   colback=white, colframe=filetgris, boxrule=1.2pt,
   colbacktitle=white,
   title={\nxboxtitle{chapcolor}{Méthode #1 --- #2}}}
-\newenvironment{fichemethode}[2]{\begin{fmbox}{#1}{#2}}{\end{fmbox}}
+\newenvironment{fichemethode}[2]{\nx@resetmargindebt\begin{fmbox}{#1}{#2}}{\end{fmbox}}
 \newcommand{\quandUtiliser}[1]{\paragraph{Quand l'utiliser.}#1}
 \newcommand{\pasApas}[1]{\paragraph{La méthode pas à pas.}#1}
 \newcommand{\exempleRedige}[1]{\paragraph{Exemple rédigé.}#1}
@@ -299,7 +355,7 @@
   \ifnum#2=1\relax\parcoursUn\fi
   \ifnum#2=2\relax\parcoursDeux\fi
   \ifnum#2=3\relax\parcoursTrois\fi
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}\\\icnChrono~#3~min}%
+  \nx@safemarginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}\\\icnChrono~#3~min}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
@@ -308,7 +364,7 @@
   \tikz[baseline=(n.base)]\node[fill=chapcolor!70!black, text=white,
     rounded corners=2pt, inner xsep=7pt, inner ysep=3.5pt](n)
     {\titrefont\small Corrigé};%
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
+  \nx@safemarginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
