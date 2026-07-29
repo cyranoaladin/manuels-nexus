@@ -67,7 +67,7 @@ Soit $g(x) = 2x^2 - x - 3$.
 \end{exercice}
 
 % BEGIN-VERIFY
-% from sympy import symbols, solve
+% from sympy import symbols, solve, Rational
 % x = symbols('x')
 % g = 2*x**2 - x - 3
 % assert g.subs(x, -1) == 0
@@ -76,7 +76,7 @@ Soit $g(x) = 2x^2 - x - 3$.
 % assert g.subs(x, 2) == 3
 % # g(x) = 0
 % sols0 = sorted(solve(g, x))
-% assert sols0 == [-1, 3/2]
+% assert sols0 == [-1, Rational(3, 2)]
 % # g(x) = -3 <=> 2x^2 - x = 0 <=> x(2x-1) = 0
 % from sympy import Rational
 % sols3 = sorted(solve(g + 3, x))

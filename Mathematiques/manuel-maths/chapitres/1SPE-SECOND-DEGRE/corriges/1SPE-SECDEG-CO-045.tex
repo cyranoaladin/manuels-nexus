@@ -1,0 +1,52 @@
+% META: {"id": "1SPE-SECDEG-CO-045", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-045", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational
+% t = symbols('t')
+% h = -5*t**2 + 10*t + 1
+% ts = Rational(-10, 2*(-5))
+% assert ts == 1
+% beta = h.subs(t, ts)
+% assert beta == 6
+% assert h.subs(t, 0) == 1
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-045}
+
+\textbf{1. Sommet de la parabole.}
+
+\commentaireMarge{$a = -5$, $b = 10$, $c = 1$.}
+
+\[
+t_S = -\frac{b}{2a} = -\frac{10}{2 \times (-5)} = 1.
+\]
+\[
+h(1) = -5 \times 1^2 + 10 \times 1 + 1 = -5 + 10 + 1 = 6.
+\]
+Le sommet est $S(1\,;\,6)$.
+
+\medskip
+\textbf{2. Hauteur maximale.}
+
+Comme $a = -5 < 0$, la parabole est tournée vers le bas : le sommet correspond à un maximum. La hauteur maximale est donc $\mathbf{6}$~m, atteinte à l'instant $t = 1$~s.
+
+\medskip
+\textbf{3. Tableau de variations.}
+
+\begin{center}
+\begin{tabular}{|c|ccccc|}
+\hline
+$t$ & $0$ & & $1$ & & $2$ \\
+\hline
+$h(t)$ & $1$ & $\nearrow$ & $6$ & $\searrow$ & $1$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+\textbf{4. Interprétation de $h(0)$.}
+
+\[
+h(0) = -5 \times 0 + 10 \times 0 + 1 = 1.
+\]
+$h(0) = 1$~m correspond à la hauteur de la main du jongleur au moment du lancer.
+
+\end{corrige}

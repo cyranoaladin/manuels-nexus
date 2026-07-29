@@ -1,0 +1,42 @@
+% META: {"id": "1SPE-SECDEG-CO-046", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-046", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, sqrt
+% x = symbols('x')
+% eq = x**2 - 40*x + 200
+% Delta = (-40)**2 - 4*1*200
+% assert Delta == 800
+% sols = sorted(solve(eq, x), key=float)
+% assert sols == [20 - 10*sqrt(2), 10*sqrt(2) + 20]
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-046}
+
+\textbf{1. Mise en équation.}
+
+\commentaireMarge{« Coût de $300$~€ » se traduit par $C(x) = 300$.}
+
+On cherche $x$ tel que $C(x) = 300$, soit :
+\[
+x^2 - 40x + 500 = 300 \quad \Longleftrightarrow \quad x^2 - 40x + 200 = 0.
+\]
+
+\medskip
+\textbf{2. Discriminant.}
+
+Avec $a = 1$, $b = -40$, $c = 200$ :
+\[
+\Delta = b^2 - 4ac = (-40)^2 - 4 \times 1 \times 200 = 1\,600 - 800 = 800.
+\]
+
+\medskip
+\textbf{3. Résolution et conclusion.}
+
+\commentaireMarge{$\Delta > 0$ : deux solutions distinctes.}
+
+$\Delta > 0$, donc l'équation admet deux solutions :
+\[
+x_1 = \frac{40 - \sqrt{800}}{2} = 20 - 10\sqrt{2} \approx 5{,}86, \qquad x_2 = \frac{40 + \sqrt{800}}{2} = 20 + 10\sqrt{2} \approx 34{,}14.
+\]
+
+Les deux solutions appartiennent à l'intervalle $[0\,;\,60]$. Dans le contexte, le nombre de bracelets étant un entier, l'entreprise atteint un coût de $300$~€ pour environ $6$ bracelets ou pour environ $34$ bracelets produits.
+
+\end{corrige}

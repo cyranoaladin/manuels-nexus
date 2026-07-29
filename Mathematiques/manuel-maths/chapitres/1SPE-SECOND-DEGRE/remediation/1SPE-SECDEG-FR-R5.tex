@@ -41,17 +41,16 @@ Resoudre les inegalites du premier degre suivantes.
 \end{exercice}
 
 % BEGIN-VERIFY
-% from sympy import symbols, solve
+% from sympy import symbols, solveset, S, Interval, oo
 % x = symbols('x')
-% from sympy import S
-% sol1 = solve(3*x - 6 > 0, x)
-% assert sol1 == (2 < x)
-% sol2 = solve(-2*x + 4 >= 0, x)
-% assert sol2 == (x <= 2)
-% sol3 = solve(5*x + 10 <= 0, x)
-% assert sol3 == (x <= -2)
-% sol4 = solve(-x + 3 > 1, x)
-% assert sol4 == (x < 2)
+% sol1 = solveset(3*x - 6 > 0, x, domain=S.Reals)
+% assert sol1 == Interval.open(2, oo)
+% sol2 = solveset(-2*x + 4 >= 0, x, domain=S.Reals)
+% assert sol2 == Interval(-oo, 2)
+% sol3 = solveset(5*x + 10 <= 0, x, domain=S.Reals)
+% assert sol3 == Interval(-oo, -2)
+% sol4 = solveset(-x + 3 > 1, x, domain=S.Reals)
+% assert sol4 == Interval.open(-oo, 2)
 % END-VERIFY
 
 \begin{corrige}{1SPE-SECDEG-FR-R5-EX1}
@@ -171,7 +170,7 @@ Etudier le signe des expressions suivantes a l'aide d'un tableau.
 % from sympy import factor
 % assert factor(x**2 - 1) == (x-1)*(x+1)
 % assert C.subs(x, 0) == 2    # positif ((-1)(1)(-2) = 2)
-% assert C.subs(x, 3) == 16   # positif
+% assert C.subs(x, 3) == 8    # positif
 % assert C.subs(x, 1.5) < 0  # negatif entre 1 et 2
 % END-VERIFY
 

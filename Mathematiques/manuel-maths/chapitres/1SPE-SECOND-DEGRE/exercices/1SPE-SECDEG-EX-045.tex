@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-SECDEG-EX-045", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-045.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-045.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, diff, solve
+% t = symbols('t')
+% h = -5*t**2 + 10*t + 1
+% ts = Rational(-10, 2*(-5))
+% assert ts == 1
+% beta = h.subs(t, ts)
+% assert beta == 6
+% assert h.subs(t, 0) == 1
+% assert h.subs(t, 2) == 1
+% assert diff(h, t).subs(t, 0) > 0
+% assert diff(h, t).subs(t, 2) < 0
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-045}{2}{15}
+Un jongleur lance une balle. La hauteur $h(t)$ (en mètres) atteinte par la balle $t$ secondes après le lancer est modélisée par :
+\[
+h(t) = -5t^2 + 10t + 1, \qquad t \in [0\,;\,2].
+\]
+
+\begin{enumerate}
+  \item Déterminer les coordonnées du sommet de la parabole représentant $h$.
+  \item En déduire la hauteur maximale atteinte par la balle et l'instant auquel elle est atteinte.
+  \item Dresser le tableau de variations de $h$ sur $[0\,;\,2]$.
+  \item Calculer $h(0)$ et interpréter cette valeur dans le contexte.
+\end{enumerate}
+\end{exercice}

@@ -135,7 +135,7 @@ Parmi les expressions suivantes, identifier celles qui sont des polynomes du sec
 % assert alpha_f == -1
 % assert expand(f).subs(x, -1) == -4
 % g = x**2 - x + Rational(1,4)
-% assert expand(g) == (x - Rational(1,2))**2
+% assert expand(g) == expand((x - Rational(1,2))**2)
 % h = (x+2)**2 - (x-1)**2
 % assert expand(h) == 6*x + 3   # degre 1 !
 % # k est degre 3, pas second degre

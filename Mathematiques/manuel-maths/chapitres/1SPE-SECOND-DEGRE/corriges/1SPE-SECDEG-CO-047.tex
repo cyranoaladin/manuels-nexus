@@ -1,0 +1,37 @@
+% META: {"id": "1SPE-SECDEG-CO-047", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-047", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, S, solveset, Interval
+% x = symbols('x')
+% B = -2*x**2 + 80*x - 600
+% assert sorted(solve(B, x)) == [10, 30]
+% assert solveset(B >= 0, x, domain=S.Reals) == Interval(10, 30)
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-047}
+
+\textbf{1. Résolution de $B(x) = 0$.}
+
+\commentaireMarge{$a = -2$, $b = 80$, $c = -600$.}
+
+\[
+\Delta = 80^2 - 4 \times (-2) \times (-600) = 6\,400 - 4\,800 = 1\,600 = 40^2.
+\]
+\[
+x_1 = \frac{-80 - 40}{2 \times (-2)} = \frac{-120}{-4} = 30, \qquad x_2 = \frac{-80 + 40}{2 \times (-2)} = \frac{-40}{-4} = 10.
+\]
+
+\medskip
+\textbf{2. Signe de $B(x)$.}
+
+\commentaireMarge{$a = -2 < 0$ : positif entre les racines, négatif à l'extérieur.}
+
+Comme $a = -2 < 0$, $B(x)$ est positif entre les racines et négatif à l'extérieur :
+\[
+B(x) \geqslant 0 \text{ pour } x \in [10\,;\,30], \qquad B(x) < 0 \text{ pour } x \in [0\,;\,10[\,\cup\,]30\,;\,40].
+\]
+
+\medskip
+\textbf{3. Interprétation.}
+
+L'inéquation $B(x) \geqslant 0$ a pour ensemble de solutions $[10\,;\,30]$. L'événement est donc bénéficiaire (strictement, $B(x) > 0$) pour $x \in \,]10\,;\,30[$, c'est-à-dire pour un nombre de billets vendus strictement compris entre $10$ et $30$.
+
+\end{corrige}
