@@ -6,6 +6,7 @@
   "additionalProperties": false,
   "required": [
     "anomalies",
+    "anomaly_qualifications",
     "artifact_type",
     "assemblies",
     "coherence_checks",
@@ -26,6 +27,10 @@
   ],
   "properties": {
     "anomalies": { "type": "object", "additionalProperties": { "type": "array" } },
+    "anomaly_qualifications": {
+      "type": "object",
+      "additionalProperties": { "type": "object" }
+    },
     "artifact_type": { "const": "inventory_collection" },
     "assemblies": { "type": "array" },
     "coherence_checks": { "type": "object" },

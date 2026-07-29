@@ -130,6 +130,7 @@ REQUIRED_JSON_FIELDS = REQUIRED_ARTIFACT_FIELDS
 
 CANONICAL_MODEL_FIELDS = (
     "anomalies",
+    "anomaly_qualifications",
     "coherence_checks",
     "correction_links",
     "declared_assemblies",
@@ -238,7 +239,10 @@ DEFAULT_SOURCE_ROLE_PATTERNS: Mapping[str, tuple[str, ...]] = MappingProxyType(
             "**/fixtures/**",
             "**/testdata/**",
         ),
-        "harvest_candidate": ("**/*_harvest/**/*.candidate.tex",),
+        "harvest_candidate": (
+            "**/_harvest/*.candidate.tex",
+            "**/_harvest/**/*.candidate.tex",
+        ),
         "visual_reference": (
             "**/gabarits/reference-*/**",
             "**/reference-*/**",
@@ -247,6 +251,7 @@ DEFAULT_SOURCE_ROLE_PATTERNS: Mapping[str, tuple[str, ...]] = MappingProxyType(
             "**/validations/**/*.visual.json",
             "**/validations/diff_visuel*.md",
             "**/validations/**/diff_visuel*.md",
+            "**/validations/v5-it*/**",
         ),
         "archive": (
             "**/archive/**",
@@ -255,6 +260,9 @@ DEFAULT_SOURCE_ROLE_PATTERNS: Mapping[str, tuple[str, ...]] = MappingProxyType(
         ),
         "generated_dependency": (
             "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex",
+            "**/build/*.pdf",
+            "**/build/*.tex",
+            "**/build/*.cls",
             "**/build/**/*.pdf",
             "**/build/**/*.tex",
             "**/build/**/*.cls",
@@ -300,6 +308,55 @@ def _load_yaml_payload(path: Path, *, default: Any = None) -> Any:
         return yaml.safe_load(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, yaml.YAMLError):
         return default
+
+
+class _UniqueKeySafeLoader(yaml.SafeLoader):
+    """Safe YAML loader that rejects duplicate mapping keys."""
+
+
+def _construct_unique_mapping(
+    loader: _UniqueKeySafeLoader,
+    node: yaml.nodes.MappingNode,
+    deep: bool = False,
+) -> dict[Any, Any]:
+    loader.flatten_mapping(node)
+    mapping: dict[Any, Any] = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        try:
+            duplicate = key in mapping
+        except TypeError as exc:
+            raise yaml.constructor.ConstructorError(
+                "construction du contrôle versionné",
+                node.start_mark,
+                "clé YAML non hachable",
+                key_node.start_mark,
+            ) from exc
+        if duplicate:
+            raise yaml.constructor.ConstructorError(
+                "construction du contrôle versionné",
+                node.start_mark,
+                f"clé YAML dupliquée: {key}",
+                key_node.start_mark,
+            )
+        mapping[key] = loader.construct_object(value_node, deep=deep)
+    return mapping
+
+
+_UniqueKeySafeLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+    _construct_unique_mapping,
+)
+
+
+def _load_control_yaml_payload(path: Path, *, default: Any = None) -> Any:
+    if not path.is_file():
+        return default
+    try:
+        content = path.read_text(encoding="utf-8")
+        return yaml.load(content, Loader=_UniqueKeySafeLoader)
+    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        raise InventoryError(f"contrôle YAML invalide {path}: {exc}") from exc
 
 
 def _load_json_payload(path: Path, *, default: Any = None) -> Any:
@@ -390,8 +447,72 @@ def _default_role_patterns() -> tuple[dict[str, list[str]], str, list[str]]:
     )
 
 
+def _validate_source_role_invariants(
+    role_patterns: Mapping[str, list[str]],
+    default_role: str,
+    role_order: list[str],
+) -> None:
+    expected_roles = set(DEFAULT_SOURCE_ROLE_ORDER)
+    if default_role != DEFAULT_SOURCE_ROLE:
+        raise InventoryError(
+            f"invariant SOURCE_ROLES: default doit valoir {DEFAULT_SOURCE_ROLE}"
+        )
+    if set(role_patterns) != expected_roles:
+        raise InventoryError(
+            "invariant SOURCE_ROLES: rôles canoniques incomplets ou inattendus"
+        )
+    empty_roles = sorted(
+        role
+        for role in expected_roles
+        if not role_patterns.get(role)
+        or any(not isinstance(pattern, str) or not pattern for pattern in role_patterns[role])
+    )
+    if empty_roles:
+        raise InventoryError(
+            "invariant SOURCE_ROLES: rôles sans motif valide: "
+            + ", ".join(empty_roles)
+        )
+    if role_order != list(DEFAULT_SOURCE_ROLE_ORDER):
+        raise InventoryError(
+            f"role_order non canonique dans {SOURCE_ROLES_FILE}"
+        )
+    sentinels = {
+        ".github/actions/cache/item": "excluded",
+        "tests/fixtures/case.tex": "fixture",
+        "NSI/chapitres/1NSI-X/_harvest/direct.candidate.tex": "harvest_candidate",
+        "NSI/chapitres/1NSI-X/_harvest/P04/one.candidate.tex": "harvest_candidate",
+        "NSI/chapitres/1NSI-X/_harvest/P04/deep/n.candidate.tex": "harvest_candidate",
+        "Mathematiques/manuel-maths/validations/v5-it1/page-13.png": "visual_reference",
+        "audit/historique/ancien.md": "archive",
+        "NSI/build/direct.tex": "generated_dependency",
+        "NSI/build/deep/generated.pdf": "generated_dependency",
+        "NSI/chapitres/1NSI-X/validations/check.json": "validation_reference",
+        "NSI/chapitres/1NSI-X/cours/c1.tex": "production_object",
+        "scripts/inventory_collection.py": "transversal",
+    }
+    failures = [
+        f"{path}={actual} (attendu {expected})"
+        for path, expected in sentinels.items()
+        if (
+            actual := _classify_source_path(
+                path,
+                {},
+                default=default_role,
+                role_patterns=role_patterns,
+                role_order=role_order,
+            )
+        )
+        != expected
+    ]
+    if failures:
+        raise InventoryError(
+            "invariant SOURCE_ROLES: sentinelles mal classées: "
+            + "; ".join(failures)
+        )
+
+
 def _collect_role_patterns(root: Path) -> tuple[dict[str, list[str]], str, list[str]]:
-    payload = _load_yaml_payload(root / SOURCE_ROLES_FILE, default=None)
+    payload = _load_control_yaml_payload(root / SOURCE_ROLES_FILE, default=None)
     versioned_control_required = _versioned_control_required(
         root,
         SOURCE_ROLES_FILE,
@@ -447,9 +568,11 @@ def _collect_role_patterns(root: Path) -> tuple[dict[str, list[str]], str, list[
             for role in DEFAULT_SOURCE_ROLE_ORDER
             if role in role_patterns
         ]
-    if strict_control and role_order != list(DEFAULT_SOURCE_ROLE_ORDER):
-        raise InventoryError(
-            f"role_order non canonique dans {SOURCE_ROLES_FILE}"
+    if strict_control:
+        _validate_source_role_invariants(
+            role_patterns,
+            default_role,
+            role_order,
         )
 
     if (
@@ -516,7 +639,10 @@ def _classify_is_production(
 
 
 def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
-    payload = _load_yaml_payload(root / ANOMALY_DISPOSITIONS_FILE, default={})
+    payload = _load_control_yaml_payload(
+        root / ANOMALY_DISPOSITIONS_FILE,
+        default={},
+    )
     versioned_control_required = _versioned_control_required(
         root,
         ANOMALY_DISPOSITIONS_FILE,
@@ -540,6 +666,12 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
         payload,
         artifact_type="anomaly_dispositions",
     )
+    if validated.get("fingerprint_schema_version") != SCHEMA_VERSION:
+        raise InventoryError(
+            "fingerprint_schema_version non supportée dans "
+            f"{ANOMALY_DISPOSITIONS_FILE}: "
+            f"{validated.get('fingerprint_schema_version')}"
+        )
     dispositions = validated.get("dispositions")
     if not isinstance(dispositions, Mapping):
         raise InventoryError(
@@ -566,6 +698,9 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
             raise InventoryError(
                 f"disposition inconnue pour fingerprint={fingerprint}: {disposition}"
             )
+        for expiry_field in ("expires_at", "expiry"):
+            if expiry_field in value:
+                _parse_disposition_expiry(value[expiry_field])
         raw_dispositions[fingerprint] = _canonicalize(dict(value))
     return raw_dispositions
 
@@ -1041,6 +1176,7 @@ def _git_relevant_untracked(
             "generated_dependency",
             "validation_reference",
             "harvest_candidate",
+            "visual_reference",
         }
     ]
     return sorted(untracked)
@@ -2181,6 +2317,7 @@ def build_inventory(
     tracked_set = frozenset(tracked)
     role_patterns, default_role, role_order = _collect_role_patterns(root)
     source_roles = _load_source_roles(root, tracked)
+    dispositions = _load_dispositions(root)
 
     def _is_production(path: str) -> bool:
         return _classify_is_production(
@@ -2506,6 +2643,7 @@ def build_inventory(
     ]
     inventory = {
         "anomalies": anomalies,
+        "anomaly_qualifications": {},
         "assemblies": [],
         "correction_links": [],
         "manuals": manuals,
@@ -2528,6 +2666,18 @@ def build_inventory(
     )
     inventory["pdfs"] = _inventory_pdfs(root, tracked, inventory)
     _aggregate_pdf_artifacts(inventory)
+    inventory["anomalies"] = {
+        key: sorted(values, key=_anomaly_sort_key)
+        for key, values in anomalies.items()
+    }
+    inventory["anomaly_qualifications"] = _build_anomaly_qualification_view(
+        inventory["anomalies"],
+        dispositions,
+        today=_qualification_evaluation_date(
+            root,
+            require_git=require_git_provenance,
+        ),
+    )
     inventory["coherence_checks"] = validate_inventory_coherence(inventory)
     inventory["deliverable_matrix"] = build_deliverable_matrix(inventory)
     inventory["generated_by"] = "inventory_collection.py"
@@ -3175,10 +3325,18 @@ def _chapter_directory(manual: str, chapter: str) -> str:
     return f"{_project_for_manual(manual)}/chapitres/{chapter}"
 
 
-def _anomaly_is_blocking(anomaly: Mapping[str, Any], *, manual_id: str) -> bool:
+def _anomaly_is_blocking(
+    anomaly: Mapping[str, Any],
+    *,
+    manual_id: str,
+    qualifications: Mapping[str, Mapping[str, Any]],
+) -> bool:
     if _anomaly_manual(anomaly) != manual_id:
         return False
-    return bool(anomaly.get("blocking", True))
+    qualification = qualifications.get(_anomaly_fingerprint(anomaly))
+    if qualification is None:
+        return True
+    return bool(qualification.get("blocking", True))
 
 
 def _manual_blockers(
@@ -3187,6 +3345,9 @@ def _manual_blockers(
     specification: Mapping[str, Any],
 ) -> list[dict[str, str]]:
     manual = inventory["manuals"][manual_id]
+    qualifications = inventory.get("anomaly_qualifications", {})
+    if not isinstance(qualifications, Mapping):
+        raise InventoryError("vue de qualification absente ou invalide")
     blockers: list[dict[str, str]] = []
     target = specification["target_chapters"]
     chapter_count = len(manual["chapters"])
@@ -3226,7 +3387,11 @@ def _manual_blockers(
         affected = [
             anomaly
             for anomaly in inventory["anomalies"].get(category, [])
-            if _anomaly_is_blocking(anomaly, manual_id=manual_id)
+            if _anomaly_is_blocking(
+                anomaly,
+                manual_id=manual_id,
+                qualifications=qualifications,
+            )
         ]
         if affected:
             blockers.append(
@@ -3633,6 +3798,17 @@ def _anomaly_disposition(anomaly: Mapping[str, Any], defaults: dict[str, dict[st
     return resolved
 
 
+def _parse_disposition_expiry(value: Any) -> datetime.date:
+    if not isinstance(value, str):
+        raise InventoryError("expiration de disposition non textuelle")
+    try:
+        return datetime.date.fromisoformat(value)
+    except ValueError as exc:
+        raise InventoryError(
+            f"expiration de disposition invalide: {value}"
+        ) from exc
+
+
 def _accepted_exception_is_expired(
     record: Mapping[str, Any],
     *,
@@ -3641,15 +3817,25 @@ def _accepted_exception_is_expired(
     expiry = record.get("expires_at", record.get("expiry"))
     if expiry is None:
         return False
-    if not isinstance(expiry, str):
-        raise InventoryError("expiration de disposition non textuelle")
+    return _parse_disposition_expiry(expiry) < today
+
+
+def _qualification_evaluation_date(
+    root: Path,
+    *,
+    require_git: bool,
+) -> datetime.date:
+    timestamp = _generation_timestamp(root, required=require_git)
+    if timestamp is None:
+        return datetime.date.min
     try:
-        expiry_date = datetime.date.fromisoformat(expiry)
+        return datetime.datetime.fromisoformat(
+            timestamp.replace("Z", "+00:00")
+        ).date()
     except ValueError as exc:
         raise InventoryError(
-            f"expiration de disposition invalide: {expiry}"
+            f"date de qualification invalide: {timestamp}"
         ) from exc
-    return expiry_date < today
 
 
 def _anomaly_fingerprint(item: Mapping[str, Any]) -> str:
@@ -3662,6 +3848,19 @@ def _anomaly_fingerprint(item: Mapping[str, Any]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
 
 
+def _raw_anomaly_identity(category: str, anomaly: Mapping[str, Any]) -> str:
+    payload = json.dumps(
+        {
+            "anomaly": _canonicalize(anomaly),
+            "category": category,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return hashlib.sha256(_utf8_bytes(payload)).hexdigest()
+
+
 def _build_anomaly_qualification_view(
     anomalies: Mapping[str, list[dict[str, Any]]],
     dispositions: Mapping[str, dict[str, Any]],
@@ -3669,48 +3868,67 @@ def _build_anomaly_qualification_view(
     today: datetime.date | None = None,
 ) -> dict[str, dict[str, Any]]:
     evaluation_date = today or datetime.datetime.now(datetime.UTC).date()
-    qualifications: dict[str, dict[str, Any]] = {}
+    grouped: dict[str, list[tuple[str, Mapping[str, Any], str]]] = defaultdict(list)
     for category, values in sorted(anomalies.items()):
         for anomaly in values:
             fingerprint = _anomaly_fingerprint(anomaly)
-            configured = dispositions.get(fingerprint)
-            if configured is None:
-                record = {
-                    "blocking": True,
-                    "category": category,
-                    "disposition": "open_debt",
-                    "fingerprint": fingerprint,
-                    "qualified": False,
-                }
-            else:
-                disposition = str(configured["disposition"])
-                expired = (
-                    _accepted_exception_is_expired(
-                        configured,
-                        today=evaluation_date,
-                    )
-                    if disposition == "accepted_exception"
-                    else False
+            grouped[fingerprint].append(
+                (
+                    category,
+                    anomaly,
+                    _raw_anomaly_identity(category, anomaly),
                 )
-                blocking = (
-                    bool(configured.get("blocking", False))
-                    if disposition == "accepted_exception"
-                    else ANOMALY_DISPOSITION_BLOCKS[disposition]
+            )
+
+    qualifications: dict[str, dict[str, Any]] = {}
+    for fingerprint, occurrences in sorted(grouped.items()):
+        categories = sorted({category for category, _, _ in occurrences})
+        raw_identities = sorted({identity for _, _, identity in occurrences})
+        configured = dispositions.get(fingerprint)
+        if configured is not None and len(raw_identities) > 1:
+            raise InventoryError(
+                "disposition ambiguë: fingerprint configuré partagé par "
+                f"{len(raw_identities)} anomalies brutes distinctes: {fingerprint}"
+            )
+        common = {
+            "categories": categories,
+            "category": categories[0] if len(categories) == 1 else None,
+            "fingerprint": fingerprint,
+            "occurrence_count": len(occurrences),
+            "raw_identities": raw_identities,
+        }
+        if configured is None:
+            record = {
+                **common,
+                "blocking": True,
+                "disposition": "open_debt",
+                "qualified": False,
+            }
+        else:
+            disposition = str(configured["disposition"])
+            expired = (
+                _accepted_exception_is_expired(
+                    configured,
+                    today=evaluation_date,
                 )
-                record = {
-                    **_canonicalize(configured),
-                    "blocking": blocking or expired,
-                    "category": category,
-                    "expired": expired,
-                    "fingerprint": fingerprint,
-                    "qualified": True,
-                }
-            previous = qualifications.setdefault(fingerprint, record)
-            if previous != record:
-                raise InventoryError(
-                    "collision de fingerprint dans la vue de qualification: "
-                    f"{fingerprint}"
-                )
+                if disposition == "accepted_exception"
+                else False
+            )
+            regression = disposition == "fixed"
+            blocking = (
+                bool(configured.get("blocking", False))
+                if disposition == "accepted_exception"
+                else ANOMALY_DISPOSITION_BLOCKS[disposition]
+            )
+            record = {
+                **_canonicalize(configured),
+                **common,
+                "blocking": blocking or expired or regression,
+                "expired": expired,
+                "qualified": True,
+                "regression": regression,
+            }
+        qualifications[fingerprint] = record
     return dict(sorted(qualifications.items()))
 
 

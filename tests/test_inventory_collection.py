@@ -296,14 +296,39 @@ def test_source_roles_fall_back_when_configuration_is_absent(
     ("path", "expected_role"),
     [
         pytest.param(
+            "NSI/chapitres/1NSI-TEST/_harvest/direct.candidate.tex",
+            "harvest_candidate",
+            id="harvest-direct-before-production",
+        ),
+        pytest.param(
             "NSI/chapitres/1NSI-TEST/_harvest/P04/cours.candidate.tex",
             "harvest_candidate",
-            id="harvest-before-production",
+            id="harvest-one-level-before-production",
+        ),
+        pytest.param(
+            "NSI/chapitres/1NSI-TEST/_harvest/P04/nested/cours.candidate.tex",
+            "harvest_candidate",
+            id="harvest-deep-before-production",
         ),
         pytest.param(
             "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex",
             "generated_dependency",
             id="generated-renvois",
+        ),
+        pytest.param(
+            "NSI/build/direct.tex",
+            "generated_dependency",
+            id="generated-build-direct",
+        ),
+        pytest.param(
+            "NSI/build/one/dependency.cls",
+            "generated_dependency",
+            id="generated-build-one-level",
+        ),
+        pytest.param(
+            "NSI/build/one/deep/dependency.pdf",
+            "generated_dependency",
+            id="generated-build-deep",
         ),
         pytest.param(
             "Mathematiques/manuel-maths/chapitres/1SPE-TEST/tests/fixtures/cas.tex",
@@ -314,6 +339,16 @@ def test_source_roles_fall_back_when_configuration_is_absent(
             "Mathematiques/manuel-maths/validations/charte.visual.json",
             "visual_reference",
             id="visual-before-validation",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/validations/v5-it1/page-13.png",
+            "visual_reference",
+            id="visual-v5-it1-png",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/validations/v5-it2/page-13.png",
+            "visual_reference",
+            id="visual-v5-it2-png",
         ),
         pytest.param(
             "Mathematiques/manuel-maths/gabarits/reference-v4/manuel-kit/main.tex",
@@ -361,6 +396,33 @@ def test_default_source_role_precedence_is_most_specific_first(
         role_patterns=patterns,
         role_order=order,
     ) == expected_role
+
+
+def test_direct_harvest_candidate_never_enters_production_inventory(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    course = f"{base}/cours/c1.tex"
+    candidate = f"{base}/_harvest/direct.candidate.tex"
+    _write(tmp_path / contract, _contract("1SPE-TEST", "1SPE", capacities=1))
+    _write(tmp_path / course, _meta(status="approved"))
+    _write(
+        tmp_path / candidate,
+        _meta(id="1SPE-TEST-HARVEST-C1", status="approved"),
+    )
+    _track(tmp_path, contract, course, candidate)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    object_paths = {
+        item["path"]
+        for item in inventory["manuals"]["1SPE"]["chapters"]["1SPE-TEST"]["objects"]
+    }
+
+    assert object_paths == {course}
+    assert candidate not in object_paths
 
 
 def test_source_roles_control_file_is_schema_valid_and_digest_verified(
@@ -457,6 +519,45 @@ def test_source_roles_control_rejects_schema_valid_precedence_weakening(
         inventory_module._collect_role_patterns(tmp_path)
 
 
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        pytest.param("default", id="default-not-transversal"),
+        pytest.param("missing-role", id="missing-canonical-role"),
+        pytest.param("empty-role", id="empty-canonical-role"),
+        pytest.param("broken-sentinel", id="harvest-sentinel-not-protected"),
+    ],
+)
+def test_source_roles_control_rejects_digest_valid_invariant_weakening(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/SOURCE_ROLES.yaml").read_text(encoding="utf-8")
+    )
+    if mutation == "default":
+        payload["default"] = "production_object"
+    elif mutation == "missing-role":
+        payload["roles"].pop("fixture")
+    elif mutation == "empty-role":
+        payload["roles"]["fixture"] = []
+    else:
+        payload["roles"]["harvest_candidate"] = [
+            "**/_harvest/reviewed-only/*.candidate.tex"
+        ]
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/SOURCE_ROLES.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="invariant"):
+        inventory_module._collect_role_patterns(tmp_path)
+
+
 def test_source_roles_control_cannot_downgrade_to_legacy_when_schema_is_installed(
     tmp_path: Path,
     inventory_module,
@@ -470,6 +571,29 @@ def test_source_roles_control_cannot_downgrade_to_legacy_when_schema_is_installe
 
     with pytest.raises(inventory_module.InventoryError, match="contrôle versionné"):
         inventory_module._collect_role_patterns(tmp_path)
+
+
+def test_visual_reference_is_relevant_to_provenance_and_require_clean(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _commit_repository(tmp_path, "clean")
+    visual = "Mathematiques/manuel-maths/validations/v5-it2/page-13.png"
+    _write(tmp_path / visual, "visual fixture\n")
+    patterns, _, order = inventory_module._default_role_patterns()
+
+    relevant = inventory_module._git_relevant_untracked(
+        tmp_path,
+        tracked={},
+        role_patterns=patterns,
+        role_order=order,
+    )
+    gate = inventory_module._require_clean_gate(tmp_path)
+
+    assert relevant == [visual]
+    assert gate["exit_code"] == 4
+    assert gate["reasons"] == [f"untracked_relevant:{visual}"]
 
 
 def test_load_contract_reads_yaml_without_losing_capacity_order(
@@ -1120,6 +1244,36 @@ def test_dispositions_control_file_is_schema_valid_and_digest_verified(
     )
 
 
+def test_repository_build_applies_qualification_view_without_mutating_raw_anomalies(
+    inventory_module,
+) -> None:
+    inventory = inventory_module.build_inventory(ROOT)
+    raw_duplicates = inventory["anomalies"]["duplicate_assembly_objects"]
+    qualifications = inventory["anomaly_qualifications"]
+    intentional_fingerprints = {
+        "18b3408901ac268d",
+        "298756cbdf41f6a5",
+        "766e1f54806282ec",
+    }
+
+    assert len(raw_duplicates) == 3
+    assert all(
+        {"fingerprint", "disposition", "blocking"}.isdisjoint(anomaly)
+        for anomaly in raw_duplicates
+    )
+    assert {
+        fingerprint
+        for fingerprint in intentional_fingerprints
+        if qualifications[fingerprint]["disposition"] == "intentional_reuse"
+        and qualifications[fingerprint]["blocking"] is False
+    } == intentional_fingerprints
+    blockers = inventory["deliverable_matrix"]["manuals"]["1SPE"]["blockers"]
+    assert not any(
+        blocker["code"] == "anomalie:duplicate_assembly_objects"
+        for blocker in blockers
+    )
+
+
 def test_load_dispositions_rejects_envelope_digest_drift(
     tmp_path: Path,
     inventory_module,
@@ -1137,6 +1291,85 @@ def test_load_dispositions_rejects_envelope_digest_drift(
 
     with pytest.raises(inventory_module.InventoryError, match="control_digest"):
         inventory_module._load_dispositions(tmp_path)
+
+
+def test_load_dispositions_rejects_unsupported_fingerprint_schema_version(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/ANOMALY_DISPOSITIONS.yaml").read_text(encoding="utf-8")
+    )
+    payload["fingerprint_schema_version"] = 2
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="fingerprint_schema_version",
+    ):
+        inventory_module._load_dispositions(tmp_path)
+
+
+@pytest.mark.parametrize("expiry_field", ["expires_at", "expiry"])
+def test_load_dispositions_rejects_invalid_expiry_at_load_time(
+    tmp_path: Path,
+    inventory_module,
+    expiry_field: str,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    fingerprint = "a" * 16
+    record = {
+        **_qualified_disposition_record("accepted_exception", fingerprint),
+        "author": "Responsable éditorial",
+        "blocking": False,
+        "proof": "audit/proofs/accepted-exception.md",
+        "scope": {"manual": "1SPE"},
+        expiry_field: "jamais",
+    }
+    payload = _dispositions_payload(record)
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="expiration"):
+        inventory_module._load_dispositions(tmp_path)
+
+
+def test_invalid_expiry_blocks_inventory_generation_and_validate_model(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    fingerprint = "a" * 16
+    record = {
+        **_qualified_disposition_record("accepted_exception", fingerprint),
+        "author": "Responsable éditorial",
+        "blocking": False,
+        "proof": "audit/proofs/accepted-exception.md",
+        "scope": {"manual": "1SPE"},
+        "expires_at": "date-invalide",
+    }
+    payload = _dispositions_payload(record)
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="expiration"):
+        inventory_module.build_inventory(tmp_path)
+    gate = inventory_module._validate_model_gate(tmp_path)
+    assert gate["success"] is False
+    assert any("expiration" in reason for reason in gate["reasons"])
 
 
 def test_dispositions_control_cannot_downgrade_to_legacy_when_schema_is_installed(
@@ -1173,6 +1406,50 @@ def test_load_dispositions_rejects_key_fingerprint_mismatch(
 
     with pytest.raises(inventory_module.InventoryError, match="fingerprint"):
         inventory_module._load_dispositions(tmp_path)
+
+
+@pytest.mark.parametrize(
+    ("relative_path", "content", "loader_name"),
+    [
+        pytest.param(
+            "audit/SOURCE_ROLES.yaml",
+            "default: transversal\ndefault: transversal\n",
+            "_collect_role_patterns",
+            id="source-roles-top-level",
+        ),
+        pytest.param(
+            "audit/SOURCE_ROLES.yaml",
+            "roles:\n  fixture:\n    - tests/**\n  fixture:\n    - '**/fixtures/**'\n",
+            "_collect_role_patterns",
+            id="source-roles-nested",
+        ),
+        pytest.param(
+            "audit/ANOMALY_DISPOSITIONS.yaml",
+            "schema_version: 1\nschema_version: 1\n",
+            "_load_dispositions",
+            id="dispositions-top-level",
+        ),
+        pytest.param(
+            "audit/ANOMALY_DISPOSITIONS.yaml",
+            "dispositions:\n  aaaaaaaaaaaaaaaa:\n    disposition: open_debt\n    disposition: fixed\n",
+            "_load_dispositions",
+            id="dispositions-nested",
+        ),
+    ],
+)
+def test_versioned_control_yaml_rejects_duplicate_keys_at_every_level(
+    tmp_path: Path,
+    inventory_module,
+    relative_path: str,
+    content: str,
+    loader_name: str,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    _write(tmp_path / relative_path, content)
+
+    with pytest.raises(inventory_module.InventoryError, match="clé YAML dupliquée"):
+        getattr(inventory_module, loader_name)(tmp_path)
 
 
 def test_qualification_view_is_separate_from_raw_anomalies_and_covers_all_dispositions(
@@ -1255,11 +1532,85 @@ def test_qualification_view_is_separate_from_raw_anomalies_and_covers_all_dispos
     )
     assert qualifications[unqualified_fingerprint] == {
         "blocking": True,
+        "categories": ["unqualified"],
         "category": "unqualified",
         "disposition": "open_debt",
         "fingerprint": unqualified_fingerprint,
+        "occurrence_count": 1,
         "qualified": False,
+        "raw_identities": [
+            inventory_module._raw_anomaly_identity(
+                "unqualified",
+                anomalies["unqualified"][0],
+            )
+        ],
     }
+    fixed = next(
+        record
+        for record in qualifications.values()
+        if record["disposition"] == "fixed"
+    )
+    assert fixed["blocking"] is True
+    assert fixed["regression"] is True
+
+
+def test_configured_fingerprint_collision_across_four_raw_anomalies_is_rejected(
+    inventory_module,
+) -> None:
+    anomalies = {
+        "broken_latex_references": [
+            {
+                "champ": "input",
+                "cible": "build/generated.tex",
+                "raison": "cible absente",
+                "source": f"manual-{index}.tex",
+            }
+            for index in range(4)
+        ]
+    }
+    fingerprint = inventory_module._anomaly_fingerprint(
+        anomalies["broken_latex_references"][0]
+    )
+    disposition = _qualified_disposition_record(
+        "generated_dependency",
+        fingerprint,
+    )
+    disposition["proof"] = "scripts/generate.py"
+
+    with pytest.raises(inventory_module.InventoryError, match="ambigu"):
+        inventory_module._build_anomaly_qualification_view(
+            anomalies,
+            {fingerprint: disposition},
+        )
+
+
+def test_unqualified_fingerprint_collision_preserves_four_raw_identities(
+    inventory_module,
+) -> None:
+    anomalies = {
+        "broken_latex_references": [
+            {
+                "champ": "input",
+                "cible": "build/generated.tex",
+                "raison": "cible absente",
+                "source": f"manual-{index}.tex",
+            }
+            for index in range(4)
+        ]
+    }
+    fingerprint = inventory_module._anomaly_fingerprint(
+        anomalies["broken_latex_references"][0]
+    )
+
+    qualifications = inventory_module._build_anomaly_qualification_view(
+        anomalies,
+        {},
+    )
+
+    assert qualifications[fingerprint]["occurrence_count"] == 4
+    assert len(qualifications[fingerprint]["raw_identities"]) == 4
+    assert qualifications[fingerprint]["qualified"] is False
+    assert qualifications[fingerprint]["blocking"] is True
 
 
 def _baseline_contract_payload() -> dict[str, object]:
@@ -1488,6 +1839,9 @@ def test_canonical_model_payload_is_compact_stable_and_excludes_envelope_fields(
         "source_files": ["z.tex", "a.tex"],
         "manuals": {"1SPE": {"objects": ["second", "first"]}},
         "anomalies": {"missing_corrections": [{"id": "EX-1"}]},
+        "anomaly_qualifications": {
+            "abc": {"blocking": True, "disposition": "open_debt"}
+        },
         "reference_graph": [{"source": "z.tex", "cible": "a.tex"}],
         "correction_links": [{"exercise_id": "EX-1"}],
         "assemblies": [{"assembly_id": "second"}, {"assembly_id": "first"}],
@@ -1508,6 +1862,7 @@ def test_canonical_model_payload_is_compact_stable_and_excludes_envelope_fields(
 
     assert list(payload) == [
         "anomalies",
+        "anomaly_qualifications",
         "coherence_checks",
         "correction_links",
         "declared_assemblies",
@@ -1542,6 +1897,7 @@ def test_canonical_model_payload_accepts_declared_assemblies_without_legacy_key(
     declared = [{"assembly_id": "manual-professeur"}]
     inventory = {
         "anomalies": {},
+        "anomaly_qualifications": {},
         "coherence_checks": {},
         "correction_links": [],
         "declared_assemblies": declared,

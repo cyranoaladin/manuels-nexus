@@ -1,5 +1,5 @@
 artifact_type: source_roles
-control_digest: sha256:662e87f7d6d557f13deaca05364234281c65f7b61bdcf1d75b1b2e817e7a501c
+control_digest: sha256:dee3fadb4f715f82af9377bae946017d60f129d551a563b3c7f401ccbfcc93cb
 default: transversal
 role_order:
   - excluded
@@ -21,7 +21,8 @@ roles:
     - '**/fixtures/**'
     - '**/testdata/**'
   harvest_candidate:
-    - '**/*_harvest/**/*.candidate.tex'
+    - '**/_harvest/*.candidate.tex'
+    - '**/_harvest/**/*.candidate.tex'
   visual_reference:
     - '**/gabarits/reference-*/**'
     - '**/reference-*/**'
@@ -30,12 +31,16 @@ roles:
     - '**/validations/**/*.visual.json'
     - '**/validations/diff_visuel*.md'
     - '**/validations/**/diff_visuel*.md'
+    - '**/validations/v5-it*/**'
   archive:
     - '**/archive/**'
     - '**/archives/**'
     - '**/historique/**'
   generated_dependency:
     - Mathematiques/manuel-maths/build/maquette-v5/renvois.tex
+    - '**/build/*.pdf'
+    - '**/build/*.tex'
+    - '**/build/*.cls'
     - '**/build/**/*.pdf'
     - '**/build/**/*.tex'
     - '**/build/**/*.cls'
