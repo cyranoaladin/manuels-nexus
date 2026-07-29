@@ -436,31 +436,27 @@ manuals:
 model_digest: sha256:da1d71c8fac0031afb59003cf38b7785c8bf3652b0a1eef9f00c27fc08e99fa3
 provenance:
   branch: finalisation/collection-v1
-  dirty: true
-  generated_at_utc: '2026-07-29T21:39:23Z'
+  dirty: false
+  errors: []
+  generated_at_utc: '2026-07-29T23:14:02Z'
   generator_files:
     scripts/inventory_assembly.py: sha256:01c814e0e51d1fcb487c679a151380e2234e681a5b826b55659d024b717e3b20
-    scripts/inventory_collection.py: sha256:897f9bd3b42bbfa8cec6327d24077091fa099018bd145a5c05d597f0399babd2
+    scripts/inventory_collection.py: sha256:75992e14a00f01eacc49ea985146d6947b931266ddd209dd9e07c9aaf91d433e
     scripts/inventory_graph.py: sha256:f3f5178224e54f4fb13455ebff017aa56efd8fa8b8806fde3f1a745b92073658
     scripts/inventory_pdf.py: sha256:ff2cc19d380685c1c93caada6c5c340b05972c9972213b68ea4f8cf9433ca298
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:0395b4e2500c034ff62431624b21d8e2101570566f3904a1fa6c8b579b9631b7
+  generator_sha256: sha256:680a1b3ccab9e991f865c99a72a56c58e5e0c5e9310243c4b865025865ccb4c7
   generator_version: 1
-  head_sha: 427f938b275c2cd3e980be6174e0564ff12ecd0f
-  modified_tracked:
-  - audit/PHASE_0_1_REPRISE_WIP.md
-  - scripts/inventory_collection.py
-  - scripts/inventory_reports.py
-  - tests/test_inventory_collection.py
+  git_available: true
+  head_sha: 159d49ccb96e122aeed0c98512d51104d84292c9
+  modified_tracked: []
   tool_versions:
     git: git version 2.43.0
     latexmk: Latexmk, John Collins, 31 Jan. 2024. Version 4.83
     pdfinfo: pdfinfo version 24.02.0
     python: Python 3.12.3
     texlive: pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)
-  untracked_relevant:
-  - audit/PHASE_0_1_START_STATE.md
-  - audit/chutes/2026-07-29-phase0-smoke-and-consultations.md
+  untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
 source_digest: sha256:31c8ea9430e0fe5b65a641aa490018a5e45a3a9bfd6a4bbc5ab894e25267874b
