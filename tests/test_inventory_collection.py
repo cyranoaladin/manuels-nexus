@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import datetime
 import importlib.util
 import hashlib
 import inspect
@@ -289,6 +290,186 @@ def test_source_roles_fall_back_when_configuration_is_absent(
 
     inventory = inventory_module.build_inventory(tmp_path)
     assert list(inventory["manuals"]["1SPE"]["chapters"]) == ["1SPE-TEST"]
+
+
+@pytest.mark.parametrize(
+    ("path", "expected_role"),
+    [
+        pytest.param(
+            "NSI/chapitres/1NSI-TEST/_harvest/P04/cours.candidate.tex",
+            "harvest_candidate",
+            id="harvest-before-production",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex",
+            "generated_dependency",
+            id="generated-renvois",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/chapitres/1SPE-TEST/tests/fixtures/cas.tex",
+            "fixture",
+            id="fixture-before-production",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/validations/charte.visual.json",
+            "visual_reference",
+            id="visual-before-validation",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/gabarits/reference-v4/manuel-kit/main.tex",
+            "visual_reference",
+            id="visual-reference-kit",
+        ),
+        pytest.param(
+            "audit/historique/ETAT_COLLECTION_AVANT_P0.md",
+            "archive",
+            id="archive-before-validation",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/chapitres/1SPE-TEST/validations/c1.json",
+            "validation_reference",
+            id="validation-before-production",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/chapitres/1SPE-TEST/cours/c1.tex",
+            "production_object",
+            id="production",
+        ),
+        pytest.param(
+            ".github/actions/cache/entry.json",
+            "excluded",
+            id="excluded-first",
+        ),
+        pytest.param(
+            "scripts/inventory_collection.py",
+            "transversal",
+            id="transversal-fallback",
+        ),
+    ],
+)
+def test_default_source_role_precedence_is_most_specific_first(
+    inventory_module,
+    path: str,
+    expected_role: str,
+) -> None:
+    patterns, default, order = inventory_module._default_role_patterns()
+
+    assert inventory_module._classify_source_path(
+        path,
+        {},
+        default=default,
+        role_patterns=patterns,
+        role_order=order,
+    ) == expected_role
+
+
+def test_source_roles_control_file_is_schema_valid_and_digest_verified(
+    inventory_module,
+) -> None:
+    path = ROOT / "audit/SOURCE_ROLES.yaml"
+    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/source-roles.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    jsonschema.Draft202012Validator(schema).validate(payload)
+    assert payload["control_digest"] == inventory_module._control_digest(payload)
+    patterns, default, order = inventory_module._collect_role_patterns(ROOT)
+    assert (patterns, default, order) == inventory_module._default_role_patterns()
+    assert default == "transversal"
+    assert order == [
+        "excluded",
+        "fixture",
+        "harvest_candidate",
+        "visual_reference",
+        "archive",
+        "generated_dependency",
+        "validation_reference",
+        "production_object",
+        "transversal",
+    ]
+    assert patterns["generated_dependency"][0].endswith(
+        "build/maquette-v5/renvois.tex"
+    )
+    tracked = inventory_module.git_tracked_files(ROOT)
+    assignments = inventory_module._load_source_roles(ROOT, tracked)
+    harvest = [
+        path
+        for path in tracked
+        if "/_harvest/" in path and path.endswith(".candidate.tex")
+    ]
+    assert len(harvest) == 19
+    assert {assignments[path] for path in harvest} == {"harvest_candidate"}
+    assert inventory_module._classify_source_path(
+        "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex",
+        assignments,
+        default=default,
+        role_patterns=patterns,
+        role_order=order,
+    ) == "generated_dependency"
+
+
+def test_source_roles_control_rejects_digest_drift(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/SOURCE_ROLES.yaml").read_text(encoding="utf-8")
+    )
+    payload["default"] = "production_object"
+    _write(
+        tmp_path / "audit/SOURCE_ROLES.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="control_digest"):
+        inventory_module._collect_role_patterns(tmp_path)
+
+
+def test_source_roles_control_rejects_schema_valid_precedence_weakening(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/SOURCE_ROLES.yaml").read_text(encoding="utf-8")
+    )
+    payload["role_order"] = [
+        "production_object",
+        *[
+            role
+            for role in payload["role_order"]
+            if role != "production_object"
+        ],
+    ]
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/SOURCE_ROLES.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="role_order"):
+        inventory_module._collect_role_patterns(tmp_path)
+
+
+def test_source_roles_control_cannot_downgrade_to_legacy_when_schema_is_installed(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    _write(
+        tmp_path / "audit/SOURCE_ROLES.yaml",
+        "roles:\n  production_object:\n    - 'NSI/chapitres/**'\n",
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="contrôle versionné"):
+        inventory_module._collect_role_patterns(tmp_path)
 
 
 def test_load_contract_reads_yaml_without_losing_capacity_order(
@@ -900,6 +1081,185 @@ def test_anomaly_dispositions_schema_documents_proof_alias(
     record["proof"] = "audit/preuves/qualification.md"
 
     jsonschema.Draft202012Validator(schema).validate(_dispositions_payload(record))
+
+
+def test_dispositions_control_file_is_schema_valid_and_digest_verified(
+    inventory_module,
+) -> None:
+    path = ROOT / "audit/ANOMALY_DISPOSITIONS.yaml"
+    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+
+    jsonschema.Draft202012Validator(schema).validate(payload)
+    assert payload["control_digest"] == inventory_module._control_digest(payload)
+    dispositions = inventory_module._load_dispositions(ROOT)
+    intentional = {
+        fingerprint: record
+        for fingerprint, record in dispositions.items()
+        if record["disposition"] == "intentional_reuse"
+    }
+    generated = {
+        fingerprint: record
+        for fingerprint, record in dispositions.items()
+        if record["disposition"] == "generated_dependency"
+    }
+    assert set(intentional) == {
+        "18b3408901ac268d",
+        "298756cbdf41f6a5",
+        "766e1f54806282ec",
+    }
+    assert set(generated) == {"7255993a79a46b32"}
+    assert all(
+        "Mathematiques/manuel-maths/build/maquette-v5/manifest.json"
+        in str(record["proof"])
+        for record in intentional.values()
+    )
+
+
+def test_load_dispositions_rejects_envelope_digest_drift(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/ANOMALY_DISPOSITIONS.yaml").read_text(encoding="utf-8")
+    )
+    payload["fingerprint_schema_version"] = 2
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="control_digest"):
+        inventory_module._load_dispositions(tmp_path)
+
+
+def test_dispositions_control_cannot_downgrade_to_legacy_when_schema_is_installed(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        "dispositions: {}\n",
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="contrôle versionné"):
+        inventory_module._load_dispositions(tmp_path)
+
+
+def test_load_dispositions_rejects_key_fingerprint_mismatch(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    record = {
+        **_qualified_disposition_record("open_debt", "b" * 16),
+    }
+    payload = _dispositions_payload(record)
+    payload["dispositions"] = {"a" * 16: record}
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="fingerprint"):
+        inventory_module._load_dispositions(tmp_path)
+
+
+def test_qualification_view_is_separate_from_raw_anomalies_and_covers_all_dispositions(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    anomalies = {
+        "sample": [
+            {"path": f"cas-{index}.tex", "reason": disposition}
+            for index, disposition in enumerate(
+                inventory_module.ANOMALY_DISPOSITIONS,
+                start=1,
+            )
+        ],
+        "unqualified": [{"path": "dette-sans-decision.tex", "reason": "active"}],
+    }
+    raw_before = deepcopy(anomalies)
+    records: dict[str, dict[str, object]] = {}
+    for anomaly, disposition in zip(
+        anomalies["sample"],
+        inventory_module.ANOMALY_DISPOSITIONS,
+        strict=True,
+    ):
+        fingerprint = inventory_module._anomaly_fingerprint(anomaly)
+        record = _qualified_disposition_record(disposition, fingerprint)
+        if disposition in {
+            "false_positive",
+            "generated_dependency",
+            "intentional_reuse",
+            "fixed",
+        }:
+            record["proof"] = f"audit/proofs/{disposition}.md"
+        elif disposition == "accepted_exception":
+            record.update(
+                {
+                    "author": "Responsable éditorial",
+                    "blocking": False,
+                    "proof": "audit/proofs/accepted-exception.md",
+                    "scope": {"manual": "1SPE"},
+                    "expires_at": "2000-01-01",
+                }
+            )
+        records[fingerprint] = record
+    payload = {
+        "artifact_type": "anomaly_dispositions",
+        "control_digest": "sha256:" + "0" * 64,
+        "dispositions": records,
+        "fingerprint_schema_version": 1,
+        "schema_ref": "audit/schemas/v1/anomaly-dispositions.schema.json",
+        "schema_version": 1,
+    }
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    dispositions = inventory_module._load_dispositions(tmp_path)
+    qualifications = inventory_module._build_anomaly_qualification_view(
+        anomalies,
+        dispositions,
+        today=datetime.date(2026, 7, 30),
+    )
+
+    assert anomalies == raw_before
+    assert {
+        record["disposition"] for record in qualifications.values()
+    } == set(inventory_module.ANOMALY_DISPOSITIONS)
+    expired = next(
+        record
+        for record in qualifications.values()
+        if record["disposition"] == "accepted_exception"
+    )
+    assert expired["expired"] is True
+    assert expired["blocking"] is True
+    unqualified_fingerprint = inventory_module._anomaly_fingerprint(
+        anomalies["unqualified"][0]
+    )
+    assert qualifications[unqualified_fingerprint] == {
+        "blocking": True,
+        "category": "unqualified",
+        "disposition": "open_debt",
+        "fingerprint": unqualified_fingerprint,
+        "qualified": False,
+    }
 
 
 def _baseline_contract_payload() -> dict[str, object]:

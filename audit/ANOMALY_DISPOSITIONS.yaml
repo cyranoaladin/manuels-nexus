@@ -1,0 +1,64 @@
+artifact_type: anomaly_dispositions
+control_digest: sha256:aba4343dc9c746a5d89a6b13297af17d2e1b12b5bb433c2e06f96deff0ff6b5d
+dispositions:
+  18b3408901ac268d:
+    approved_by: Alaeddine Ben Rhouma
+    decision_ref: git:67d979b3b5932a8e47a2b5a7d7309dbb962a11da:Mathematiques/manuel-maths/build/maquette-v5/manifest.json
+    disposition: intentional_reuse
+    fingerprint: 18b3408901ac268d
+    justification: Le manifeste versionné place explicitement EX-001 dans les applications de la méthode rendue et dans l'ordre d'entraînement.
+    owner: équipe éditoriale Nexus
+    proof:
+      commit: 67d979b3b5932a8e47a2b5a7d7309dbb962a11da
+      manifest: Mathematiques/manuel-maths/build/maquette-v5/manifest.json
+      manifest_sha256: sha256:ee9f145f15385a1dd1e4694d3fe5a3ec8859f252af98e77c6292007d18cd244b
+      object_id: 1SPE-DERLOCAL-EX-001
+      placements:
+        - rendered_method.applications
+        - exercise_order
+  298756cbdf41f6a5:
+    approved_by: Alaeddine Ben Rhouma
+    decision_ref: git:67d979b3b5932a8e47a2b5a7d7309dbb962a11da:Mathematiques/manuel-maths/build/maquette-v5/manifest.json
+    disposition: intentional_reuse
+    fingerprint: 298756cbdf41f6a5
+    justification: Le manifeste versionné place explicitement EX-002 dans les applications de la méthode rendue et dans l'ordre d'entraînement.
+    owner: équipe éditoriale Nexus
+    proof:
+      commit: 67d979b3b5932a8e47a2b5a7d7309dbb962a11da
+      manifest: Mathematiques/manuel-maths/build/maquette-v5/manifest.json
+      manifest_sha256: sha256:ee9f145f15385a1dd1e4694d3fe5a3ec8859f252af98e77c6292007d18cd244b
+      object_id: 1SPE-DERLOCAL-EX-002
+      placements:
+        - rendered_method.applications
+        - exercise_order
+  7255993a79a46b32:
+    approved_by: Alaeddine Ben Rhouma
+    decision_ref: git:67d979b3b5932a8e47a2b5a7d7309dbb962a11da:Mathematiques/manuel-maths/scripts/build_maquette_v5.py
+    disposition: generated_dependency
+    fingerprint: 7255993a79a46b32
+    justification: La maquette charge renvois.tex, fichier produit par le générateur versionné de la maquette v5 et ignoré comme sortie de build.
+    owner: équipe outillage éditorial Nexus
+    proof:
+      commit: 67d979b3b5932a8e47a2b5a7d7309dbb962a11da
+      generator: Mathematiques/manuel-maths/scripts/build_maquette_v5.py
+      ignored_by: Mathematiques/manuel-maths/.gitignore
+      input_site: Mathematiques/manuel-maths/build/maquette-v5/maquette.tex
+      output: Mathematiques/manuel-maths/build/maquette-v5/renvois.tex
+  766e1f54806282ec:
+    approved_by: Alaeddine Ben Rhouma
+    decision_ref: git:67d979b3b5932a8e47a2b5a7d7309dbb962a11da:Mathematiques/manuel-maths/build/maquette-v5/manifest.json
+    disposition: intentional_reuse
+    fingerprint: 766e1f54806282ec
+    justification: Le manifeste versionné place explicitement EX-005 dans les applications de la méthode rendue et dans l'ordre d'entraînement.
+    owner: équipe éditoriale Nexus
+    proof:
+      commit: 67d979b3b5932a8e47a2b5a7d7309dbb962a11da
+      manifest: Mathematiques/manuel-maths/build/maquette-v5/manifest.json
+      manifest_sha256: sha256:ee9f145f15385a1dd1e4694d3fe5a3ec8859f252af98e77c6292007d18cd244b
+      object_id: 1SPE-DERLOCAL-EX-005
+      placements:
+        - rendered_method.applications
+        - exercise_order
+fingerprint_schema_version: 1
+schema_ref: audit/schemas/v1/anomaly-dispositions.schema.json
+schema_version: 1

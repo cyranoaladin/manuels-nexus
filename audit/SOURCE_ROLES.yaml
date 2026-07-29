@@ -1,0 +1,54 @@
+artifact_type: source_roles
+control_digest: sha256:662e87f7d6d557f13deaca05364234281c65f7b61bdcf1d75b1b2e817e7a501c
+default: transversal
+role_order:
+  - excluded
+  - fixture
+  - harvest_candidate
+  - visual_reference
+  - archive
+  - generated_dependency
+  - validation_reference
+  - production_object
+  - transversal
+roles:
+  excluded:
+    - .github/**/cache/**
+    - '**/__pycache__/**'
+  fixture:
+    - tests/**
+    - '**/tests/**'
+    - '**/fixtures/**'
+    - '**/testdata/**'
+  harvest_candidate:
+    - '**/*_harvest/**/*.candidate.tex'
+  visual_reference:
+    - '**/gabarits/reference-*/**'
+    - '**/reference-*/**'
+    - '**/baselines/visual/**'
+    - '**/validations/*.visual.json'
+    - '**/validations/**/*.visual.json'
+    - '**/validations/diff_visuel*.md'
+    - '**/validations/**/diff_visuel*.md'
+  archive:
+    - '**/archive/**'
+    - '**/archives/**'
+    - '**/historique/**'
+  generated_dependency:
+    - Mathematiques/manuel-maths/build/maquette-v5/renvois.tex
+    - '**/build/**/*.pdf'
+    - '**/build/**/*.tex'
+    - '**/build/**/*.cls'
+  validation_reference:
+    - '**/validations/**'
+    - audit/**
+    - audit/schemas/**/*.schema.json
+  production_object:
+    - Mathematiques/manuel-maths/chapitres/**
+    - NSI/chapitres/**
+  transversal:
+    - '**/transversal/**'
+    - '**/build/**/*.log'
+    - '**/build/**/*.aux'
+schema_ref: audit/schemas/v1/source-roles.schema.json
+schema_version: 1
