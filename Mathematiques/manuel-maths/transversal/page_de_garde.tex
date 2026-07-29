@@ -3,26 +3,91 @@
 
 \thispagestyle{empty}
 
-\vspace*{\stretch{2}}
+% --- Logo Nexus Réussite, en tête de page sur fond blanc ---
+\newsavebox{\nxGardeLogoBox}
+\sbox{\nxGardeLogoBox}{\includegraphics[width=6cm]{gabarits/logo_nexus}}
+\newlength{\nxGardeTop}
+\setlength{\nxGardeTop}{1.6cm}
+\addtolength{\nxGardeTop}{\ht\nxGardeLogoBox}
+\addtolength{\nxGardeTop}{\dp\nxGardeLogoBox}
+\addtolength{\nxGardeTop}{1.0cm}% respiration entre logo et bandeau
+
+% --- Contenu du bandeau, composé UNE SEULE FOIS dans une boîte. La même
+% boîte sert à la fois à mesurer la hauteur du bandeau colore (overlay
+% TikZ) et à afficher le texte (\usebox) : les deux ne peuvent donc jamais
+% diverger, contrairement à une double composition (mesure + affichage
+% séparés) qui désynchronise dès que l'un des deux environnements de
+% centrage diffère de l'autre.
+\newsavebox{\nxGardeBox}
+\newlength{\nxGardeHauteur}
+\newlength{\nxGardePadding}
+\setlength{\nxGardePadding}{1.7cm}% marge haute = marge basse à l'intérieur du bandeau
+\sbox{\nxGardeBox}{%
+  \begin{minipage}{\textwidth}
+  \centering
+  {\fontsize{24}{28}\selectfont\sffamily\bfseries\color{white} Manuel de mathématiques}
+
+  \vspace{0.8cm}
+
+  {\fontsize{18}{22}\selectfont\sffamily\color{white!90} Première spécialité}
+
+  \vspace{1.4cm}
+
+  {\Large\sffamily\color{white} Nexus Réussite}
+
+  \vspace{0.9cm}
+
+  {\large\sffamily\color{white!85} Programme 2026 \quad\textbullet\quad Parcours de réussite}
+
+  \vspace{1.6cm}
+
+  \begin{minipage}{0.78\textwidth}
+  \centering
+  \color{white!92}
+  \itshape Un manuel structuré pour apprendre, s'entraîner, se tester et progresser
+  avec une progression claire, des méthodes explicites et des ressources de remédiation.
+  \end{minipage}
+
+  \vspace{1.6cm}
+
+  {\small\sffamily\color{white!80} \,Mathématiques\,\textbar\, Spécialité\,\textbar\, Première générale}%
+  \end{minipage}%
+}
+\setlength{\nxGardeHauteur}{\ht\nxGardeBox}
+\addtolength{\nxGardeHauteur}{\dp\nxGardeBox}
+\addtolength{\nxGardeHauteur}{2\nxGardePadding}
+\addtolength{\nxGardeHauteur}{2.0cm}% marge de sécurité (glue résiduelle de \par/\parskip)
+
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[chapcolor!95!black]
+    ([yshift=-\nxGardeTop]current page.north west)
+    rectangle
+    ([yshift=-\nxGardeTop-\nxGardeHauteur]current page.north east);
+  \draw[white,opacity=0.16,line width=1pt]
+    ([xshift=0.6cm,yshift=-\nxGardeTop-0.6cm]current page.north west) --
+    ([xshift=-0.6cm,yshift=-\nxGardeTop-0.6cm]current page.north east);
+  \draw[white,opacity=0.10,line width=1pt]
+    ([xshift=-1.0cm,yshift=-\nxGardeTop-1.2cm]current page.north east)
+    circle (1.8cm);
+\end{tikzpicture}
+
+% NB : \centering (déclaration + \par) est utilisé plutôt que
+% l'environnement `center`, qui insère un espacement vertical propre à la
+% liste (topsep/parskip) non comptabilisé dans \nxGardeHauteur et qui
+% désynchronisait le bandeau colore du texte réellement affiché.
+\vspace*{1.6cm}
+{\centering\usebox{\nxGardeLogoBox}\par}
+\vspace*{1.0cm}
+\vspace*{\nxGardePadding}
+
+{\centering\usebox{\nxGardeBox}\par}
+
+\vspace*{\nxGardePadding}
+
+\vfill
 
 \begin{center}
-
-{\Huge\bfseries Manuel de Mathématiques}
-
-\vspace{0.8cm}
-
-{\LARGE Première Spécialité}
-
-\vspace{1.5cm}
-
-{\Large\itshape Nexus Réussite}
-
-\vspace{2cm}
-
-{\large Programme 2026}
-
+{\small\sffamily\color{encre!70} Conçu pour l'enseignement de spécialité en classe de première}
 \end{center}
-
-\vspace{\stretch{3}}
 
 \newpage
