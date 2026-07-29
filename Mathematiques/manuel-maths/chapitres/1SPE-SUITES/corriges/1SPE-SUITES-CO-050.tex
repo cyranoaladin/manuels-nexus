@@ -1,0 +1,41 @@
+% META: {"id": "1SPE-SUITES-CO-050", "chapitre": "1SPE-SUITES", "type_objet": "corrige", "exercice_ref": "1SPE-SUITES-EX-050", "capacites_codes": ["C7"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% v = 500
+% n = 0
+% while v <= 2000:
+%     n = n + 1
+%     v = 1.08 * v
+% assert n == 19
+% assert abs(500 * 1.08**18 - 1998.01) < 0.01
+% assert abs(500 * 1.08**19 - 2157.85) < 0.01
+% END-VERIFY
+\begin{corrige}{1SPE-SUITES-EX-050}
+
+\textbf{1. Expression de $v_n$.}
+
+\commentaireMarge{Augmentation de $8\,\%$ : coefficient multiplicateur $1{,}08$.}
+
+$(v_n)$ est géométrique de premier terme $v_0 = 500$ et de raison $q = 1{,}08$, donc :
+\[
+v_n = 500 \times 1{,}08^n.
+\]
+
+\medskip
+\textbf{2. Analyse du programme.}
+
+La variable \texttt{v} est initialisée à $500$ (valeur de $v_0$) et \texttt{n} à $0$. La boucle \texttt{while v <= 2000} applique à chaque itération la relation $v \leftarrow 1{,}08 \times v$ et incrémente \texttt{n}. La boucle s'arrête dès que \texttt{v > 2000}, c'est-à-dire dès que $v_n$ dépasse $2\,000$~€.
+
+\medskip
+\textbf{3. Calcul à la main.}
+
+\[
+v_{17} = 500 \times 1{,}08^{17} \approx 1\,850{,}01 \text{ €}, \qquad v_{18} = 500 \times 1{,}08^{18} \approx 1\,998{,}01 \text{ €}, \qquad v_{19} = 500 \times 1{,}08^{19} \approx 2\,157{,}85 \text{ €}.
+\]
+On a bien $v_{18} \leqslant 2\,000 < v_{19}$, donc le programme affiche $n = 19$.
+
+\medskip
+\textbf{4. Interprétation.}
+
+Il faut attendre $19$ ans pour que le placement dépasse $2\,000$~€.
+
+\end{corrige}

@@ -34,7 +34,7 @@ On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = 2x^2 - 3x + 
 \end{exercice}
 
 % BEGIN-VERIFY
-% from sympy import symbols, solve, factor
+% from sympy import symbols, solve, factor, Rational
 % x = symbols('x')
 % f = 2*x**2 - 3*x + 1
 % assert f.subs(x, 0) == 1
@@ -42,7 +42,7 @@ On considère la fonction $f$ définie sur $\mathbb{R}$ par $f(x) = 2x^2 - 3x + 
 % assert f.subs(x, 2) == 3
 % assert f.subs(x, 3) == 10
 % sols = solve(f, x)
-% assert set(sols) == {1, 1/2} or set(sols) == {1, 0.5}
+% assert set(sols) == {1, Rational(1, 2)}
 % # Pour n >= 2, f est croissante (sommet en x=3/4 < 2)
 % assert f.subs(x, 2) < f.subs(x, 3)
 % assert f.subs(x, 3) < f.subs(x, 4)
@@ -143,7 +143,7 @@ On considère la suite $(v_n)$ définie pour tout $n \in \mathbb{N}$ par $v_n = 
 \end{exercice}
 
 % BEGIN-VERIFY
-% from sympy import symbols, solve
+% from sympy import symbols, solve, Rational
 % n = symbols('n')
 % v = 3*n - 7
 % assert v.subs(n, 0) == -7
@@ -151,7 +151,7 @@ On considère la suite $(v_n)$ définie pour tout $n \in \mathbb{N}$ par $v_n = 
 % assert v.subs(n, 2) == -1
 % assert v.subs(n, 5) == 8
 % sol = solve(v, n)
-% assert sol == [7/3]
+% assert sol == [Rational(7, 3)]
 % # v_n > 0 iff n > 7/3 iff n >= 3
 % assert v.subs(n, 3) > 0
 % assert v.subs(n, 2) < 0

@@ -11,22 +11,22 @@
 % # Demi-vie : M_n <= 50 <=> 0.9879^n <= 0.5
 % # n >= ln(0.5) / ln(0.9879)
 % demi_vie_exacte = math.log(0.5) / math.log(q)
-% assert abs(demi_vie_exacte - 57.23) < 0.1
+% assert abs(demi_vie_exacte - 56.94) < 0.01
 % # Verification par algorithme
 % n = 0
 % m = 100.0
 % while m > 50:
 %     m = q * m
 %     n += 1
-% assert n == 58
-% assert M(57) > 50
-% assert M(58) <= 50
+% assert n == 57
+% assert M(56) > 50
+% assert M(57) <= 50
 % # Variations : q < 1 donc suite strictement decroissante
 % assert q < 1
 % assert M(1) < M(0)
 % # Quelques valeurs
-% assert abs(M(10) - 100 * q**10) < 1e-9
-% assert abs(M(100) - 100 * q**100) < 1e-9
+% assert abs(M(10) - 88.54) < 0.01
+% assert abs(M(100) - 29.60) < 0.01
 % END-VERIFY
 
 \section*{Temps 7 — TD contextualisé : Décroissance radioactive}
@@ -77,15 +77,15 @@ D'où la relation de récurrence :
   M_1 = 100 \times 0{,}9879 = 98{,}79 \text{ g},
 \]
 \[
-  M_{10} = 100 \times 0{,}9879^{10} \approx 100 \times 0{,}8845 \approx 88{,}45 \text{ g},
+  M_{10} = 100 \times 0{,}9879^{10} \approx 100 \times 0{,}8854 \approx 88{,}54 \text{ g},
 \]
 \[
-  M_{100} = 100 \times 0{,}9879^{100} \approx 100 \times 0{,}2980 \approx 29{,}80 \text{ g.}
+  M_{100} = 100 \times 0{,}9879^{100} \approx 100 \times 0{,}2960 \approx 29{,}60 \text{ g.}
 \]
 
 \commentaireMarge{Après 100 siècles (10 000 ans), l'échantillon a perdu environ 70\,\% de sa masse initiale.}
 
-Après $100$ siècles (soit $10\,000$ ans), il ne reste plus qu'environ $29{,}80$~g sur les $100$~g initiaux.
+Après $100$ siècles (soit $10\,000$ ans), il ne reste plus qu'environ $29{,}60$~g sur les $100$~g initiaux.
 
 \end{corrige}
 
@@ -102,14 +102,14 @@ Après $100$ siècles (soit $10\,000$ ans), il ne reste plus qu'environ $29{,}80
 \begin{enumerate}
   \item Montrer que la suite $(M_n)$ est strictement décroissante. Justifier à partir de la valeur de la raison.
   \item La \textbf{demi-vie} est le rang $n$ à partir duquel la masse est inférieure ou égale à la moitié de la masse initiale. Formuler l'inégalité à résoudre : $M_n \leq 50$.
-  \item Compléter le tableau de valeurs ci-dessous pour $n \in \{50, 55, 57, 58, 60\}$.
+  \item Compléter le tableau de valeurs ci-dessous pour $n \in \{50, 55, 56, 57, 60\}$.
   \item En déduire la demi-vie du carbone-14 exprimée en siècles, puis en années.
 \end{enumerate}
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
-$n$ & $50$ & $55$ & $57$ & $58$ & $60$ \\
+$n$ & $50$ & $55$ & $56$ & $57$ & $60$ \\
 \hline
 $M_n$ (arrondi à 0,01 g) & \phantom{xxx} & \phantom{xxx} & \phantom{xxx} & \phantom{xxx} & \phantom{xxx} \\
 \hline
@@ -140,20 +140,20 @@ puisque $M_n > 0$. Donc $M_{n+1} < M_n$ pour tout $n \in \mathbb{N}$ : la suite 
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|}
 \hline
-$n$ & $50$ & $55$ & $57$ & $58$ & $60$ \\
+$n$ & $50$ & $55$ & $56$ & $57$ & $60$ \\
 \hline
-$M_n$ (g) & $54{,}57$ & $51{,}32$ & $50{,}08$ & $49{,}47$ & $48{,}29$ \\
+$M_n$ (g) & $54{,}41$ & $51{,}19$ & $50{,}57$ & $49{,}96$ & $48{,}17$ \\
 \hline
 $M_n \leq 50$ ? & Non & Non & Non & Oui & Oui \\
 \hline
 \end{tabular}
 \end{center}
 
-\textit{Détail :} $M_{57} = 100 \times 0{,}9879^{57} \approx 50{,}08$~g et $M_{58} = 100 \times 0{,}9879^{58} \approx 49{,}47$~g.
+\textit{Détail :} $M_{56} = 100 \times 0{,}9879^{56} \approx 50{,}57$~g et $M_{57} = 100 \times 0{,}9879^{57} \approx 49{,}96$~g.
 
-\textbf{Question 4.} Le plus petit entier $n$ tel que $M_n \leq 50$ est $n = 58$. La demi-vie est donc de $\mathbf{58}$ siècles, soit $\mathbf{5\,800}$ ans.
+\textbf{Question 4.} Le plus petit entier $n$ tel que $M_n \leq 50$ est $n = 57$. La demi-vie est donc de $\mathbf{57}$ siècles, soit $\mathbf{5\,700}$ ans.
 
-\commentaireMarge{La demi-vie réelle du carbone-14 est de 5 730 ans. Notre modèle avec $q = 0{,}9879$ donne 5 800 ans, ce qui est une très bonne approximation.}
+\commentaireMarge{La demi-vie réelle du carbone-14 est de 5 730 ans. Notre modèle avec $q = 0{,}9879$ donne 5 700 ans, ce qui est une excellente approximation.}
 
 \end{corrige}
 
@@ -220,21 +220,21 @@ print("Masse atteinte :", round(M, 2), "g")
 
 Le programme affiche :
 \begin{itemize}
-  \item \texttt{Demi-vie : 58 siecles, soit 5800 ans}
-  \item \texttt{Masse atteinte : 49.47 g}
+  \item \texttt{Demi-vie : 57 siecles, soit 5700 ans}
+  \item \texttt{Masse atteinte : 49.96 g}
 \end{itemize}
 
 \textbf{Question 3.} Analyse du programme donné :
 
 La variable \texttt{M} est initialisée à $100$ (valeur de $M_0$) et \texttt{n} à $0$. La boucle \texttt{while M > 50} applique à chaque itération la relation $M \leftarrow 0{,}9879 \times M$ et incrémente \texttt{n}. La boucle s'arrête dès que \texttt{M <= 50}.
 
-D'après les résultats de la partie B, cela se produit pour $n = 58$.
+D'après les résultats de la partie B, cela se produit pour $n = 57$.
 
 Le programme affiche :
 
 \begin{center}
-\texttt{Demi-vie : 58 siecles}\\
-\texttt{Masse : 49.47 g}
+\texttt{Demi-vie : 57 siecles}\\
+\texttt{Masse : 49.96 g}
 \end{center}
 
 \end{corrige}
@@ -262,7 +262,7 @@ Le programme affiche :
 
 \begin{itemize}
   \item Au rang $0$ : la perte est $100 \times 0{,}0121 = 1{,}21$~g.
-  \item Au rang $50$ : la perte est environ $54{,}57 \times 0{,}0121 \approx 0{,}66$~g.
+  \item Au rang $50$ : la perte est environ $54{,}41 \times 0{,}0121 \approx 0{,}66$~g.
 \end{itemize}
 
 La quantité perdue diminue au fil du temps car elle est proportionnelle à la masse restante. C'est une \textbf{évolution relative constante} (taux constant de $-1{,}21\,\%$), ce qui caractérise une \textbf{suite géométrique}.

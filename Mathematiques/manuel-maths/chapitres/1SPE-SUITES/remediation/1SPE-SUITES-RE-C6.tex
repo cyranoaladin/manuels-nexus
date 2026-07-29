@@ -76,10 +76,10 @@ Une ville comptait $20\,000$ habitants en 2020. Sa population diminue de $1{,}5\
 % P0 = 20000
 % q = 0.985
 % Pn = lambda n: P0 * q**n
-% assert abs(Pn(5) - 18528) < 10
+% assert abs(Pn(5) - 18544) < 1
 % # Seuil 18000
-% assert Pn(7) > 18000
-% assert Pn(8) < 18000
+% assert Pn(6) > 18000
+% assert Pn(7) < 18000
 % END-VERIFY
 
 \begin{corrige}{1SPE-SUITES-RE-C6-EX2}
@@ -90,7 +90,7 @@ Une ville comptait $20\,000$ habitants en 2020. Sa population diminue de $1{,}5\
 
 \textbf{Question 3.}
 \[
-P_5 = 20\,000 \times 0{,}985^5 \approx 20\,000 \times 0{,}9264 \approx 18\,528 \text{ habitants.}
+P_5 = 20\,000 \times 0{,}985^5 \approx 20\,000 \times 0{,}9272 \approx 18\,544 \text{ habitants.}
 \]
 
 \commentaireMarge{On calcule les valeurs successives jusqu'à passer sous le seuil de $18\,000$.}
@@ -101,14 +101,14 @@ P_5 = 20\,000 \times 0{,}985^5 \approx 20\,000 \times 0{,}9264 \approx 18\,528 \
 \hline
 $n$ & $P_n$ (arrondi) \\
 \hline
-$5$ & $18\,528$ \\
-$6$ & $18\,250$ \\
-$7$ & $17\,976$ \\
+$5$ & $18\,544$ \\
+$6$ & $18\,266$ \\
+$7$ & $17\,992$ \\
 \hline
 \end{tabular}
 \end{center}
 
-$P_7 \approx 17\,976 < 18\,000$ et $P_6 \approx 18\,250 > 18\,000$.
+$P_7 \approx 17\,992 < 18\,000$ et $P_6 \approx 18\,266 > 18\,000$.
 
 La population passe sous $18\,000$ à partir de $n = 7$, c'est-à-dire en 2027.
 
@@ -140,9 +140,9 @@ On note $A_n$ le salaire annuel (mensuel) chez l'entreprise A après $n$ années
 % assert B(0) == 1600
 % assert B(1) == 1630
 % assert B(5) == 1750
-% # A depasse B vers n=7
-% assert A(6) < B(6)
-% assert A(7) > B(7)
+% # A depasse B des le rang n=6
+% assert A(5) < B(5)
+% assert A(6) > B(6)
 % END-VERIFY
 
 \begin{corrige}{1SPE-SUITES-RE-C6-EX3}
