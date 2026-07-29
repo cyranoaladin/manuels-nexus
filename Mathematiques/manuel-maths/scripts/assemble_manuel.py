@@ -84,13 +84,15 @@ def main(variant: str) -> int:
 
     # Transversal front matter
     parts.append("\\input{transversal/page_de_garde}")
-    parts.append("\\clearpage")
+    parts.append("\\newpage")
     parts.append("\\input{transversal/avant_propos}")
-    parts.append("\\clearpage")
+    parts.append("\\newpage")
     parts.append("\\input{transversal/mode_emploi}")
-    parts.append("\\clearpage")
+    parts.append("\\newpage")
     parts.append("\\tableofcontents")
-    parts.append("\\clearpage")
+    parts.append("\\newpage")
+    parts.append("\\input{transversal/index_capacites}")
+    parts.append("\\newpage")
 
     # Chapters
     for chap in CHAPITRES:
@@ -112,8 +114,6 @@ def main(variant: str) -> int:
     parts.append("\\input{transversal/formulaire}")
     parts.append("\\clearpage")
     parts.append("\\input{transversal/memo_python}")
-    parts.append("\\clearpage")
-    parts.append("\\input{transversal/index_capacites}")
 
     content = "\n".join(parts)
 
@@ -121,8 +121,8 @@ def main(variant: str) -> int:
     master = f"""% Manuel 1SPE — variante {titre_var}
 % Assemble par scripts/assemble_manuel.py
 \\documentclass{{gabarits/nexus-manuel}}
-\\matiere{{Mathematiques}}\\niveau{{Premiere specialite}}
-\\title{{Manuel de mathematiques — Premiere specialite — Edition {titre_var}}}
+\\matiere{{Mathématiques}}\\niveau{{Première spécialité}}
+\\title{{Manuel de mathématiques — Première spécialité — Édition {titre_var}}}
 \\begin{{document}}
 {content}
 \\end{{document}}
