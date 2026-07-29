@@ -69,6 +69,8 @@ except ModuleNotFoundError:  # direct execution: python scripts/inventory_collec
 SCHEMA_VERSION = 1
 PDFINFO_TIMEOUT_SECONDS = 10
 LOCK_TIMEOUT_SECONDS = 20
+LOCK_STALE_SECONDS = 20
+LOCK_POLL_SECONDS = 0.1
 GENERIC_LOCK_FILE = ".inventory_collection.lock"
 
 SOURCE_ROLES_FILE = "audit/SOURCE_ROLES.yaml"
@@ -198,6 +200,23 @@ MODEL_ARTIFACTS: Mapping[str, str] = MappingProxyType(
         "audit/ECARTS_ET_CONTRADICTIONS.yaml": "ecarts_et_contradictions",
         "audit/MATRICE_LIVRABLES.yaml": "matrice_livrables",
     }
+)
+DEFAULT_MANAGED_OUTPUT_PATHS = frozenset(
+    {
+        "ETAT_COLLECTION.md",
+        "audit/AUDIT_CONSOLIDE.md",
+        "audit/ECARTS_ET_CONTRADICTIONS.yaml",
+        "audit/INVENTAIRE_COLLECTION.json",
+        "audit/INVENTAIRE_COLLECTION.md",
+        "audit/MATRICE_LIVRABLES.yaml",
+    }
+)
+GENERATOR_COMPONENT_PATHS = (
+    "inventory_collection.py",
+    "inventory_reports.py",
+    "inventory_graph.py",
+    "inventory_assembly.py",
+    "inventory_pdf.py",
 )
 
 DEFAULT_SOURCE_ROLE_PATTERNS: Mapping[str, tuple[str, ...]] = MappingProxyType(
@@ -723,7 +742,38 @@ def _model_digest(inventory: Mapping[str, Any]) -> str:
 
 
 def _now_utc() -> str:
-    return datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+    return (
+        datetime.datetime.now(datetime.UTC)
+        .replace(microsecond=0)
+        .isoformat()
+        .replace("+00:00", "Z")
+    )
+
+
+def _format_epoch_utc(epoch: int) -> str:
+    try:
+        instant = datetime.datetime.fromtimestamp(epoch, tz=datetime.UTC)
+    except (OverflowError, OSError, ValueError) as exc:
+        raise InventoryError(f"timestamp hors plage: {epoch}") from exc
+    return instant.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def _generation_timestamp(root: Path) -> str:
+    source_date_epoch = os.environ.get("SOURCE_DATE_EPOCH")
+    if source_date_epoch is not None:
+        try:
+            epoch = int(source_date_epoch)
+            if epoch < 0:
+                raise ValueError
+            return _format_epoch_utc(epoch)
+        except (InventoryError, ValueError):
+            pass
+    commit_epoch = _git_value(root, ("show", "-s", "--format=%ct", "HEAD"), "0")
+    try:
+        epoch = int(commit_epoch)
+    except ValueError:
+        epoch = 0
+    return _format_epoch_utc(max(epoch, 0))
 
 
 def _git_value(repository: Path, args: tuple[str, ...], default: str = "") -> str:
@@ -742,7 +792,36 @@ def _git_value(repository: Path, args: tuple[str, ...], default: str = "") -> st
         return default
 
 
-def _git_status(repository: Path) -> list[str]:
+GitStatusEntry = tuple[str, tuple[str, ...]]
+
+
+def _parse_git_status_z(payload: bytes) -> list[GitStatusEntry]:
+    entries: list[GitStatusEntry] = []
+    fields = payload.split(b"\0")
+    index = 0
+    while index < len(fields):
+        field = fields[index]
+        index += 1
+        if not field:
+            continue
+        if len(field) < 4 or field[2:3] != b" ":
+            continue
+        marker = field[:2].decode("ascii", errors="replace")
+        current_path = field[3:].decode("utf-8", errors="surrogateescape")
+        paths = (current_path,)
+        if "R" in marker or "C" in marker:
+            if index >= len(fields) or not fields[index]:
+                continue
+            original_path = fields[index].decode(
+                "utf-8", errors="surrogateescape"
+            )
+            index += 1
+            paths = (original_path, current_path)
+        entries.append((marker, paths))
+    return entries
+
+
+def _git_status(repository: Path) -> list[GitStatusEntry]:
     try:
         completed = subprocess.run(
             [
@@ -752,6 +831,7 @@ def _git_status(repository: Path) -> list[str]:
                 "status",
                 "--porcelain=v1",
                 "--untracked-files=all",
+                "-z",
             ],
             check=True,
             stdout=subprocess.PIPE,
@@ -759,24 +839,17 @@ def _git_status(repository: Path) -> list[str]:
         )
     except (subprocess.CalledProcessError, OSError):
         return []
-    return completed.stdout.decode(
-        "utf-8", errors="surrogateescape"
-    ).splitlines()
+    return _parse_git_status_z(completed.stdout)
 
 
-def _git_modified_tracked(repository: Path) -> list[str]:
-    modified = []
-    for line in _git_status(repository):
-        if not line:
+def _git_modified_tracked(
+    repository: Path, *, status: Iterable[GitStatusEntry] | None = None
+) -> list[str]:
+    modified: set[str] = set()
+    for marker, paths in _git_status(repository) if status is None else status:
+        if marker == "??" or not marker.strip():
             continue
-        if line.startswith("??"):
-            continue
-        if len(line) < 3:
-            continue
-        marker = line[:2]
-        if marker.strip() == "":
-            continue
-        modified.append(line[3:])
+        modified.update(paths)
     return sorted(modified)
 
 
@@ -786,10 +859,11 @@ def _git_relevant_untracked(
     tracked: Mapping[str, str],
     role_patterns: Mapping[str, list[str]],
     role_order: list[str],
+    status: Iterable[GitStatusEntry] | None = None,
 ) -> list[str]:
     untracked = [
         path
-        for path in _git_untracked(repository)
+        for path in _git_untracked(repository, status=status)
         if _classify_source_path(
             path,
             tracked,
@@ -807,12 +881,59 @@ def _git_relevant_untracked(
     return sorted(untracked)
 
 
-def _git_untracked(repository: Path) -> list[str]:
+def _git_untracked(
+    repository: Path, *, status: Iterable[GitStatusEntry] | None = None
+) -> list[str]:
     return sorted(
-        line[3:]
-        for line in _git_status(repository)
-        if line.startswith("??") and len(line) > 3
+        path
+        for marker, paths in (
+            _git_status(repository) if status is None else status
+        )
+        if marker == "??"
+        for path in paths
     )
+
+
+def _status_paths(entry: GitStatusEntry) -> tuple[str, ...]:
+    return entry[1]
+
+
+def _is_generation_internal_path(
+    path: str, managed_output_paths: frozenset[str]
+) -> bool:
+    normalized = _normalize_path_for_match(path)
+    return (
+        normalized in managed_output_paths
+        or _is_active_generation_internal_path(normalized)
+    )
+
+
+def _is_active_generation_internal_path(path: str) -> bool:
+    normalized = _normalize_path_for_match(path)
+    return normalized == GENERIC_LOCK_FILE
+
+
+def _git_generation_status(
+    repository: Path,
+    *,
+    managed_output_paths: Iterable[str] = (),
+) -> list[GitStatusEntry]:
+    excluded_outputs = frozenset(
+        DEFAULT_MANAGED_OUTPUT_PATHS
+        | {
+            _normalize_path_for_match(path)
+            for path in managed_output_paths
+        }
+    )
+    return [
+        entry
+        for entry in _git_status(repository)
+        if not _status_paths(entry)
+        or not all(
+            _is_generation_internal_path(path, excluded_outputs)
+            for path in _status_paths(entry)
+        )
+    ]
 
 
 def _repo_branch(root: Path) -> str:
@@ -830,16 +951,64 @@ def _file_sha256(path: Path) -> str:
     return _sha256_file(path)
 
 
-def _file_version_signature(root: Path) -> dict[str, Any]:
+def _command_version(command: list[str]) -> str:
+    executable = (
+        command[0]
+        if Path(command[0]).is_absolute()
+        else shutil.which(command[0])
+    )
+    if not executable:
+        return "unavailable"
+    try:
+        completed = subprocess.run(
+            [str(executable), *command[1:]],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            timeout=PDFINFO_TIMEOUT_SECONDS,
+        )
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
+        return "unavailable"
+    return next(
+        (line.strip() for line in completed.stdout.splitlines() if line.strip()),
+        "unavailable",
+    )
+
+
+def _file_version_signature(root: Path) -> dict[str, str]:
+    del root
     return {
-        "python": sys.version.split()[0],
-        "git": shutil.which("git") is not None,
-        "texlive": _git_value(root, ("--version",), ""),
+        "git": _command_version(["git", "--version"]),
+        "latexmk": _command_version(["latexmk", "-version"]),
+        "pdfinfo": _command_version(["pdfinfo", "-v"]),
+        "python": _command_version([sys.executable, "--version"]),
+        "texlive": _command_version(["pdflatex", "--version"]),
     }
 
 
+def _generator_file_digests() -> dict[str, str]:
+    digests: dict[str, str] = {}
+    for filename in GENERATOR_COMPONENT_PATHS:
+        path = _SCRIPTS_ROOT / filename
+        if not path.is_file():
+            raise InventoryError(f"composant du générateur absent: scripts/{filename}")
+        digests[f"scripts/{filename}"] = _sha256_file(path)
+    return dict(sorted(digests.items()))
+
+
+def _aggregate_generator_digest(generator_files: Mapping[str, str]) -> str:
+    payload = json.dumps(
+        dict(sorted(generator_files.items())),
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return f"sha256:{hashlib.sha256(_utf8_bytes(payload)).hexdigest()}"
+
+
 def _generator_sha256() -> str:
-    return _sha256_file(Path(__file__))
+    return _aggregate_generator_digest(_generator_file_digests())
 
 
 def _build_provenance(
@@ -848,41 +1017,56 @@ def _build_provenance(
     source_roles: Mapping[str, str],
     role_patterns: Mapping[str, list[str]],
     role_order: list[str],
+    managed_output_paths: Iterable[str] = (),
 ) -> dict[str, Any]:
+    generation_status = _git_generation_status(
+        root, managed_output_paths=managed_output_paths
+    )
+    generator_files = _generator_file_digests()
     return {
         "head_sha": _repo_head_sha(root),
         "branch": _repo_branch(root),
-        "dirty": bool(_git_status(root)),
-        "modified_tracked": _git_modified_tracked(root),
+        "dirty": bool(generation_status),
+        "modified_tracked": _git_modified_tracked(root, status=generation_status),
         "untracked_relevant": _git_relevant_untracked(
             root,
             tracked=source_roles,
             role_patterns=role_patterns,
             role_order=role_order,
+            status=generation_status,
         ),
         "generator_version": SCHEMA_VERSION,
-        "generator_sha256": _generator_sha256(),
-        "generated_at_utc": _now_utc(),
-        "tool_versions": {
-            "python_version": sys.version.split()[0],
-            "script": _file_version_signature(root),
-        },
+        "generator_sha256": _aggregate_generator_digest(generator_files),
+        "generator_files": generator_files,
+        "generated_at_utc": _generation_timestamp(root),
+        "tool_versions": _file_version_signature(root),
     }
 
 
 def _clean_path(path: str, *, role: str, repository: Path) -> None:
     if path is None:
         return
-    if "://" in path:
-        raise InventoryError(f"{role} path non autorise: chemin absolu")
-    if path.startswith("/"):
-        raise InventoryError(f"{role} path non autorise: chemin absolu")
+    repository = repository.resolve()
+    if "://" in path or Path(path).is_absolute():
+        raise InventoryError(f"{role}: outside repository (absolute path)")
     parsed = PurePosixPath(path)
     if ".." in parsed.parts:
-        raise InventoryError(f"{role} path non autorise: traversal ..")
-    absolute = (repository / path).resolve()
+        raise InventoryError(f"{role}: outside repository (parent traversal)")
+    candidate = repository / path
+    absolute = candidate.resolve()
     if not absolute.is_relative_to(repository):
-        raise InventoryError(f"{role} path en dehors du dépôt")
+        current = repository
+        escaped_by_symlink = False
+        for part in parsed.parts:
+            current /= part
+            if current.is_symlink():
+                escaped_by_symlink = True
+                break
+            if not current.exists():
+                break
+        if escaped_by_symlink:
+            raise InventoryError(f"{role}: symlink escape outside repository")
+        raise InventoryError(f"{role}: outside repository")
 
 
 def _ensure_output_paths(*, root: Path, audit_dir: str, etat_path: str) -> tuple[Path, Path]:
@@ -964,51 +1148,250 @@ def _validate_output_payload(
     return payload
 
 
-def _ensure_clean_tree(repository: Path, *, mode: str | None = None) -> None:
+def _ensure_clean_tree(
+    repository: Path,
+    *,
+    mode: str | None = None,
+    allowed_generation_paths: Mapping[str, tuple[int, int]] | None = None,
+) -> None:
     if mode is None:
         return
-    status = _git_status(repository)
-    if not status:
-        return
-    if mode == "worktree":
-        raise InventoryError("mode worktree non propre: modifications locales détectées")
+    if mode not in {"worktree", "head"}:
+        raise InventoryError(f"unknown clean mode: {mode}")
     if mode == "head":
-        if status:
-            raise InventoryError("mode head non propre: checkout sale détecté")
         if _git_value(repository, ("rev-parse", "--is-inside-work-tree"), "") != "true":
-            raise InventoryError("mode head non applicable: dépôt git invalide")
-        branch = _repo_branch(repository)
-        if branch == "HEAD":
-            raise InventoryError("mode head exige un HEAD non detached")
+            raise InventoryError("head clean mode requires a Git repository")
         head = _repo_head_sha(repository)
         if not head:
-            raise InventoryError("mode head exige un commit HEAD résolu")
-        return
-    raise InventoryError(f"mode de contrôle inconnu: {mode}")
+            raise InventoryError("head clean mode requires a resolved HEAD")
+        branch = _git_value(
+            repository, ("symbolic-ref", "--quiet", "--short", "HEAD"), ""
+        )
+        if not branch:
+            raise InventoryError("head clean mode requires an attached branch")
+    status = _git_status(repository)
+    if allowed_generation_paths:
+        allowed = {
+            _normalize_path_for_match(path): identity
+            for path, identity in allowed_generation_paths.items()
+        }
+
+        def has_allowed_identity(path: str) -> bool:
+            normalized = _normalize_path_for_match(path)
+            expected = allowed.get(normalized)
+            if expected is None:
+                return False
+            try:
+                stat = (repository / normalized).stat(follow_symlinks=False)
+            except OSError:
+                return False
+            return (stat.st_dev, stat.st_ino) == expected
+
+        status = [
+            entry
+            for entry in status
+            if not _status_paths(entry)
+            or not all(
+                has_allowed_identity(path)
+                for path in _status_paths(entry)
+            )
+        ]
+    if status:
+        raise InventoryError(f"{mode} clean mode found local modifications")
+
+
+def _process_start_token(pid: int) -> str | None:
+    try:
+        stat = Path(f"/proc/{pid}/stat").read_text(encoding="utf-8")
+        fields = stat.rsplit(")", 1)[1].strip().split()
+        return fields[19]
+    except (IndexError, OSError, UnicodeError):
+        pass
+    try:
+        completed = subprocess.run(
+            ["ps", "-o", "lstart=", "-p", str(pid)],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            text=True,
+            timeout=1,
+        )
+    except (OSError, subprocess.CalledProcessError, subprocess.TimeoutExpired):
+        return None
+    started = completed.stdout.strip()
+    if not started:
+        return None
+    return hashlib.sha256(_utf8_bytes(started)).hexdigest()
+
+
+def _parse_lock_timestamp(value: object) -> datetime.datetime | None:
+    if not isinstance(value, str):
+        return None
+    try:
+        timestamp = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if timestamp.tzinfo is None:
+        return None
+    return timestamp.astimezone(datetime.UTC)
+
+
+def _read_lock_record(lock_path: Path) -> dict[str, Any] | None:
+    try:
+        raw = lock_path.read_bytes()
+        if len(raw) > 64 * 1024:
+            return None
+        payload = json.loads(raw.decode("utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError):
+        return None
+    if not isinstance(payload, dict):
+        return None
+    pid = payload.get("pid")
+    token = payload.get("process_start_token")
+    created = _parse_lock_timestamp(payload.get("created_at_utc"))
+    if (
+        not isinstance(pid, int)
+        or isinstance(pid, bool)
+        or pid <= 0
+        or not isinstance(token, str)
+        or not token
+        or created is None
+    ):
+        return None
+    return payload
+
+
+def _lock_owner_is_live(record: Mapping[str, Any]) -> bool:
+    pid = int(record["pid"])
+    expected_token = str(record["process_start_token"])
+    current_token = _process_start_token(pid)
+    if current_token is not None:
+        return current_token == expected_token
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def _quarantine_stale_lock(lock_path: Path) -> bool:
+    record = _read_lock_record(lock_path)
+    if record is None:
+        return False
+    created = _parse_lock_timestamp(record["created_at_utc"])
+    if created is None:
+        return False
+    age = (datetime.datetime.now(datetime.UTC) - created).total_seconds()
+    if age < LOCK_STALE_SECONDS or _lock_owner_is_live(record):
+        return False
+    try:
+        stale_stat = lock_path.stat(follow_symlinks=False)
+    except OSError:
+        return False
+    quarantine_path = lock_path.with_name(
+        f"{lock_path.name}.stale.{stale_stat.st_dev:x}-{stale_stat.st_ino:x}"
+    )
+    try:
+        os.link(
+            lock_path,
+            quarantine_path,
+            follow_symlinks=False,
+        )
+    except FileExistsError:
+        pass
+    except OSError:
+        return False
+    try:
+        current_stat = lock_path.stat(follow_symlinks=False)
+        quarantine_stat = quarantine_path.stat(follow_symlinks=False)
+        if (
+            current_stat.st_dev,
+            current_stat.st_ino,
+        ) != (
+            quarantine_stat.st_dev,
+            quarantine_stat.st_ino,
+        ):
+            return False
+        lock_path.unlink()
+    except OSError:
+        return False
+    return True
 
 
 @contextmanager
 def _lock_generation(root: Path):
     lock_path = root / GENERIC_LOCK_FILE
-    end = datetime.datetime.utcnow() + datetime.timedelta(seconds=LOCK_TIMEOUT_SECONDS)
+    deadline = time.monotonic() + LOCK_TIMEOUT_SECONDS
+    start_token = _process_start_token(os.getpid())
+    if start_token is None:
+        raise InventoryError("cannot identify generation lock owner")
+    owner_record = _utf8_bytes(
+        json.dumps(
+            {
+                "created_at_utc": _now_utc(),
+                "pid": os.getpid(),
+                "process_start_token": start_token,
+            },
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        + "\n"
+    )
     fd: int | None = None
+    owner_stat: os.stat_result | None = None
     while True:
         try:
-            fd = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            fd = os.open(
+                lock_path,
+                os.O_CREAT | os.O_EXCL | os.O_WRONLY,
+                0o600,
+            )
+            os.write(fd, owner_record)
+            os.fsync(fd)
+            owner_stat = os.fstat(fd)
             break
         except FileExistsError:
-            if datetime.datetime.utcnow() > end:
-                raise InventoryError("timeout d'attente de verrou d'ecriture")
-            time.sleep(0.1)
+            if _quarantine_stale_lock(lock_path):
+                continue
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise InventoryError("generation lock timeout")
+            time.sleep(min(LOCK_POLL_SECONDS, remaining))
+        except Exception:
+            if fd is not None:
+                os.close(fd)
+                fd = None
+            try:
+                lock_path.unlink()
+            except OSError:
+                pass
+            raise
     try:
-        yield
+        assert owner_stat is not None
+        yield {
+            GENERIC_LOCK_FILE: (
+                owner_stat.st_dev,
+                owner_stat.st_ino,
+            )
+        }
     finally:
-        if fd is not None:
-            os.close(fd)
         try:
-            lock_path.unlink()
+            current_stat = lock_path.stat(follow_symlinks=False)
+            if owner_stat is not None and (
+                current_stat.st_dev,
+                current_stat.st_ino,
+            ) == (
+                owner_stat.st_dev,
+                owner_stat.st_ino,
+            ):
+                lock_path.unlink()
         except OSError:
             pass
+        if fd is not None:
+            os.close(fd)
 
 MANUALS: dict[str, dict[str, str]] = {
     "1NSI": {
@@ -1501,7 +1884,11 @@ def reconcile_reports(
     )
 
 
-def build_inventory(repository: Path | str) -> dict[str, Any]:
+def build_inventory(
+    repository: Path | str,
+    *,
+    managed_output_paths: Iterable[str] = (),
+) -> dict[str, Any]:
     """Build a deterministic canonical model from tracked chapter sources."""
 
     root = Path(repository).resolve()
@@ -1864,6 +2251,7 @@ def build_inventory(repository: Path | str) -> dict[str, Any]:
         source_roles=source_roles,
         role_patterns=role_patterns,
         role_order=role_order,
+        managed_output_paths=managed_output_paths,
     )
     report_sources = report_source_paths(root, tracked)
     inventory["report_reconciliation"] = reconcile_reports(
@@ -3126,40 +3514,82 @@ def _apply_atomic_payloads(
     root: Path,
     rendered_artifacts: dict[Path, str],
 ) -> None:
+    root = root.resolve()
+    targets: dict[Path, str] = {}
+    for path, content in rendered_artifacts.items():
+        if path.is_absolute():
+            try:
+                relative = path.relative_to(root)
+            except ValueError as exc:
+                raise InventoryError(
+                    f"output: outside repository ({path})"
+                ) from exc
+        else:
+            relative = path
+        _clean_path(relative.as_posix(), role="output", repository=root)
+        target = root / relative
+        if target in targets:
+            raise InventoryError(f"duplicate output target: {relative}")
+        targets[target] = content
+
     staged: dict[Path, Path] = {}
     backups: dict[Path, Path] = {}
     replaced: list[Path] = []
-    temp_root = root / ".inventory-collection-apply"
-    temp_root.mkdir(parents=True, exist_ok=True)
+    legacy_temp_root = root / ".inventory-collection-apply"
+    if (
+        legacy_temp_root.is_symlink()
+        and not legacy_temp_root.resolve().is_relative_to(root)
+    ):
+        raise InventoryError(
+            "transaction directory: symlink escape outside repository"
+        )
+    temp_root = Path(
+        tempfile.mkdtemp(prefix=".inventory-collection-apply-", dir=str(root))
+    )
     try:
-        for path, content in rendered_artifacts.items():
-            target = path if path.is_absolute() else (root / path)
+        for target, content in targets.items():
             target.parent.mkdir(parents=True, exist_ok=True)
             token = tempfile.NamedTemporaryFile(
                 "w", encoding="utf-8", dir=str(temp_root), delete=False
             )
-            token.write(content)
-            token.close()
             temp_path = Path(token.name)
             staged[target] = temp_path
+            try:
+                token.write(content)
+                token.flush()
+                os.fsync(token.fileno())
+            finally:
+                token.close()
             if target.exists():
                 backup = tempfile.NamedTemporaryFile(
-                    "w", encoding="utf-8", dir=str(temp_root), delete=False
+                    "wb", dir=str(temp_root), delete=False
                 )
-                backup.close()
-                backups[target] = Path(backup.name)
-                backups[target].write_bytes(target.read_bytes())
+                backup_path = Path(backup.name)
+                backups[target] = backup_path
+                try:
+                    backup.write(target.read_bytes())
+                    backup.flush()
+                    os.fsync(backup.fileno())
+                finally:
+                    backup.close()
 
         for target, temp_path in sorted(staged.items(), key=lambda item: str(item[0])):
             os.replace(temp_path, target)
             replaced.append(target)
-    except Exception:
+    except Exception as exc:
+        rollback_errors: list[str] = []
         for target in sorted(replaced, reverse=True):
-            if target in backups and backups[target].exists():
-                os.replace(backups[target], target)
-            else:
-                target.unlink(missing_ok=True)
-        raise
+            try:
+                if target in backups and backups[target].exists():
+                    os.replace(backups[target], target)
+                else:
+                    target.unlink(missing_ok=True)
+            except OSError as rollback_exc:
+                rollback_errors.append(f"{target}: {rollback_exc}")
+        message = "transaction rolled back"
+        if rollback_errors:
+            message += " incompletely: " + "; ".join(rollback_errors)
+        raise InventoryError(f"{message}: {exc}") from exc
     finally:
         for temp_path in staged.values():
             temp_path.unlink(missing_ok=True)
@@ -3167,6 +3597,62 @@ def _apply_atomic_payloads(
             backup.unlink(missing_ok=True)
         if temp_root.exists() and not any(temp_root.iterdir()):
             temp_root.rmdir()
+
+
+def _reuse_stored_generation_provenance(
+    root: Path,
+    audit_root: Path,
+    inventory: dict[str, Any],
+) -> None:
+    inventory_path = audit_root / "INVENTAIRE_COLLECTION.json"
+    if not inventory_path.is_file():
+        return
+    relative_path = inventory_path.relative_to(root).as_posix()
+    stored_inventory = _load_model_artifact(root, relative_path)
+    if stored_inventory.get("model_digest") != _model_digest(stored_inventory):
+        raise InventoryError(
+            f"inventaire existant invalide pour --check: {relative_path}"
+        )
+    stored_provenance = stored_inventory.get("provenance")
+    current_provenance = inventory.get("provenance")
+    if not isinstance(stored_provenance, Mapping) or not isinstance(
+        current_provenance, Mapping
+    ):
+        raise InventoryError(
+            f"provenance existante invalide pour --check: {relative_path}"
+        )
+    # A check reproduit l'instant de génération attesté. En particulier,
+    # head_sha reste le SHA stocké de cette génération, pas le HEAD courant qui
+    # inclut éventuellement le commit des artefacts et créerait une boucle.
+    # Le fingerprint du générateur reste toutefois courant pour détecter toute
+    # dérive du code de génération.
+    reused = dict(stored_provenance)
+    reused = dict(current_provenance)
+    for field in ("generated_at_utc", "head_sha"):
+        reused[field] = stored_provenance.get(field)
+    inventory["provenance"] = _canonicalize_mapping(reused)
+
+
+def _render_managed_artifacts(
+    inventory: Mapping[str, Any],
+    *,
+    root: Path,
+    audit_root: Path,
+    etat_file: Path,
+    include_generated_marker: bool,
+) -> dict[Path, str]:
+    rendered = _render_inventory_artifacts(
+        inventory,
+        repo_root=root,
+        audit_root=audit_root,
+        include_generated_marker=include_generated_marker,
+    )
+    rendered[etat_file.relative_to(root)] = _render_etat_collection(
+        inventory,
+        marker=AUTOGEN_MARKER if include_generated_marker else "",
+        root=root,
+    )
+    return rendered
 
 
 def build_inventory_artifacts(
@@ -3184,35 +3670,61 @@ def build_inventory_artifacts(
     _clean_path(etat_path, role="--etat-path", repository=root)
     audit_root = root / audit_directory
     etat_file = root / etat_path
+    managed_output_paths = tuple(
+        path.relative_to(root).as_posix()
+        for path in (
+            etat_file,
+            audit_root / "AUDIT_CONSOLIDE.md",
+            audit_root / "ECARTS_ET_CONTRADICTIONS.yaml",
+            audit_root / "INVENTAIRE_COLLECTION.json",
+            audit_root / "INVENTAIRE_COLLECTION.md",
+            audit_root / "MATRICE_LIVRABLES.yaml",
+        )
+    )
     _ensure_clean_tree(root, mode=require_clean)
 
-    if not check_only and baseline_path:
-        baseline_failures = _evaluate_baseline(
-            build_inventory(root), Path(baseline_path)
+    if check_only:
+        inventory = build_inventory(
+            root, managed_output_paths=managed_output_paths
         )
-        if baseline_failures:
-            raise InventoryError("baseline invalide: " + ", ".join(baseline_failures))
-
-    with _lock_generation(root):
-        inventory = build_inventory(root)
-        rendered = _render_inventory_artifacts(
+        _reuse_stored_generation_provenance(root, audit_root, inventory)
+        rendered = _render_managed_artifacts(
             inventory,
-            repo_root=root,
+            root=root,
             audit_root=audit_root,
+            etat_file=etat_file,
             include_generated_marker=include_generated_marker,
         )
-        rendered[etat_file.relative_to(root)] = _render_etat_collection(
-            inventory,
-            marker=AUTOGEN_MARKER if include_generated_marker else "",
-            root=root,
-        )
-
-    diffs = _compare_rendered_artifacts(root, rendered)
-    if check_only:
+        diffs = _compare_rendered_artifacts(root, rendered)
         return {"inventory": inventory, "artifacts": rendered, "diffs": diffs}
 
-    _ensure_clean_tree(root, mode=require_clean)
-    _apply_atomic_payloads(root, rendered)
+    with _lock_generation(root) as lock_identity:
+        if baseline_path:
+            baseline_failures = _evaluate_baseline(
+                build_inventory(root, managed_output_paths=managed_output_paths),
+                Path(baseline_path),
+            )
+            if baseline_failures:
+                raise InventoryError(
+                    "baseline invalide: " + ", ".join(baseline_failures)
+                )
+        inventory = build_inventory(
+            root, managed_output_paths=managed_output_paths
+        )
+        rendered = _render_managed_artifacts(
+            inventory,
+            root=root,
+            audit_root=audit_root,
+            etat_file=etat_file,
+            include_generated_marker=include_generated_marker,
+        )
+        diffs = _compare_rendered_artifacts(root, rendered)
+        _ensure_clean_tree(
+            root,
+            mode=require_clean,
+            allowed_generation_paths=lock_identity,
+        )
+        _apply_atomic_payloads(root, rendered)
     return {
         "audit_directory": str(audit_root.relative_to(root)),
         "artifacts": {
@@ -3720,6 +4232,19 @@ def _validate_model_gate(root: Path) -> dict[str, Any]:
                     f"reçu={inventory_payload.get('model_digest')}"
                 )
         try:
+            expected_payloads = _machine_artifact_payloads(inventory_payload)
+        except (InventoryError, KeyError, TypeError) as exc:
+            reasons.append(f"inventaire:projections_impossibles:{exc}")
+        else:
+            for relative_path, payload in payloads.items():
+                expected = expected_payloads.get(Path(relative_path).name)
+                if expected is None:
+                    continue
+                if _canonicalize(payload) != _canonicalize(expected):
+                    reasons.append(
+                        f"{relative_path}:projection canonique incohérente"
+                    )
+        try:
             current_inventory = build_inventory(root)
         except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
             reasons.append(f"inventaire:recalcul_impossible:{_stable_gate_reason(exc, root)}")
@@ -3733,6 +4258,16 @@ def _validate_model_gate(root: Path) -> dict[str, Any]:
                 reasons.append(
                     "inventaire:model_digest différent du modèle courant"
                 )
+            artifact_provenance = inventory_payload.get("provenance")
+            current_provenance = current_inventory.get("provenance")
+            if isinstance(artifact_provenance, Mapping) and isinstance(
+                current_provenance, Mapping
+            ):
+                for field in ("generator_files", "generator_sha256"):
+                    if artifact_provenance.get(field) != current_provenance.get(field):
+                        reasons.append(
+                            f"inventaire:{field} différent du générateur courant"
+                        )
 
     return _gate_result(
         "validate-model",

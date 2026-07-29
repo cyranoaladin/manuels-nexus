@@ -3,9 +3,13 @@ from __future__ import annotations
 import importlib.util
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
+import time
+import warnings
+from contextlib import contextmanager
 from copy import deepcopy
 from pathlib import Path
 
@@ -16,6 +20,13 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "inventory_collection.py"
+GENERATOR_COMPONENTS = (
+    "inventory_collection.py",
+    "inventory_reports.py",
+    "inventory_graph.py",
+    "inventory_assembly.py",
+    "inventory_pdf.py",
+)
 
 
 def _load_inventory_module():
@@ -122,6 +133,36 @@ def _run_inventory_cli(repository: Path, *arguments: str) -> subprocess.Complete
     )
 
 
+def _run_repository_inventory_cli(
+    repository: Path, *arguments: str
+) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [
+            sys.executable,
+            str(repository / "scripts/inventory_collection.py"),
+            "--root",
+            str(repository),
+            *arguments,
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+def _install_generator_components(repository: Path) -> tuple[str, ...]:
+    relative_paths = tuple(
+        f"scripts/{component}" for component in GENERATOR_COMPONENTS
+    )
+    for relative_path in relative_paths:
+        source = ROOT / relative_path
+        destination = repository / relative_path
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+    _track(repository, *relative_paths)
+    return relative_paths
+
+
 def _seed_cli_repository(repository: Path) -> tuple[str, ...]:
     _init_repository(repository)
     _install_audit_schemas(repository)
@@ -139,6 +180,32 @@ def _seed_cli_repository(repository: Path) -> tuple[str, ...]:
     tracked = (*sources, *schema_paths)
     _track(repository, *tracked)
     return tracked
+
+
+def _managed_output_paths(
+    repository: Path, result: dict[str, object]
+) -> tuple[Path, ...]:
+    artifacts = result["artifacts"]
+    assert isinstance(artifacts, dict)
+    return tuple(
+        sorted(repository / str(relative) for relative in artifacts.values())
+    )
+
+
+def _git_status_bytes(repository: Path) -> bytes:
+    return subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all",
+            "-z",
+        ],
+        check=True,
+        capture_output=True,
+    ).stdout
 
 
 def _minimal_inventory(repository: Path, inventory_module):
@@ -3258,6 +3325,675 @@ def test_check_gate_reports_drift_without_writing_any_managed_output(
     assert before == after
 
 
+@pytest.mark.parametrize("source_date_epoch", [None, "date-invalide"])
+def test_two_normal_generations_are_stable_without_a_valid_source_date_epoch(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    source_date_epoch: str | None,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
+    if source_date_epoch is None:
+        monkeypatch.delenv("SOURCE_DATE_EPOCH", raising=False)
+    else:
+        monkeypatch.setenv("SOURCE_DATE_EPOCH", source_date_epoch)
+
+    first = inventory_module.build_inventory_artifacts(tmp_path)
+    paths = _managed_output_paths(tmp_path, first)
+    first_bytes = {path: path.read_bytes() for path in paths}
+    first_provenance = json.loads(
+        (tmp_path / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
+    )["provenance"]
+    time.sleep(1.1)
+    inventory_module.build_inventory_artifacts(tmp_path)
+    second_bytes = {path: path.read_bytes() for path in paths}
+    second_provenance = json.loads(
+        (tmp_path / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
+    )["provenance"]
+
+    assert first_bytes == second_bytes
+    assert first_provenance == second_provenance
+    assert first_provenance["dirty"] is False
+    assert first_provenance["modified_tracked"] == []
+    assert first_provenance["untracked_relevant"] == []
+
+
+def test_generation_uses_valid_source_date_epoch_for_provenance(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", "1700000000")
+
+    inventory_module.build_inventory_artifacts(tmp_path)
+    provenance = json.loads(
+        (tmp_path / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
+    )["provenance"]
+
+    assert provenance["generated_at_utc"] == "2023-11-14T22:13:20Z"
+
+
+def test_now_utc_is_timezone_aware_without_deprecation_warning(
+    inventory_module,
+) -> None:
+    with warnings.catch_warnings():
+        warnings.simplefilter("error", DeprecationWarning)
+        timestamp = inventory_module._now_utc()
+
+    assert timestamp.endswith("Z")
+    assert "+00:00" not in timestamp
+
+
+def test_git_status_preserves_unicode_spaces_and_both_rename_paths(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    old_path = "NSI/chapitres/1NSI-TEST/cours/ancien fichier é.tex"
+    new_path = "NSI/chapitres/1NSI-TEST/cours/nouveau → fichier.tex"
+    untracked_path = "NSI/chapitres/1NSI-TEST/cours/brouillon été.tex"
+    _write(tmp_path / old_path, _meta(id="1NSI-TEST-ANCIEN"))
+    _track(tmp_path, old_path)
+    _commit_repository(tmp_path, "source Unicode")
+    subprocess.run(
+        ["git", "-C", str(tmp_path), "mv", "--", old_path, new_path],
+        check=True,
+    )
+    _write(tmp_path / untracked_path, _meta(id="1NSI-TEST-BROUILLON"))
+
+    status = inventory_module._git_status(tmp_path)
+
+    assert inventory_module._git_modified_tracked(
+        tmp_path, status=status
+    ) == sorted([old_path, new_path])
+    assert inventory_module._git_untracked(
+        tmp_path, status=status
+    ) == [untracked_path]
+
+
+def test_tool_versions_come_from_each_real_executable(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+
+    versions = inventory_module._file_version_signature(tmp_path)
+
+    expected_commands = {
+        "git": ["git", "--version"],
+        "latexmk": ["latexmk", "-version"],
+        "pdfinfo": ["pdfinfo", "-v"],
+        "python": [sys.executable, "--version"],
+        "texlive": ["pdflatex", "--version"],
+    }
+    expected: dict[str, str] = {}
+    for name, command in expected_commands.items():
+        completed = subprocess.run(
+            command,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+        )
+        expected[name] = completed.stdout.splitlines()[0].strip()
+
+    assert versions == expected
+    assert not isinstance(versions["git"], bool)
+    assert versions["texlive"] != versions["git"]
+
+
+def test_ensure_clean_tree_validates_mode_and_head_on_a_clean_tree(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+
+    with pytest.raises(inventory_module.InventoryError, match="unknown clean mode"):
+        inventory_module._ensure_clean_tree(tmp_path, mode="inconnu")
+    with pytest.raises(inventory_module.InventoryError, match="resolved HEAD"):
+        inventory_module._ensure_clean_tree(tmp_path, mode="head")
+
+    _commit_repository(tmp_path)
+    head = _commit_repository(tmp_path, "second commit")
+    (tmp_path / ".git/HEAD").write_text(f"{head}\n", encoding="utf-8")
+    with pytest.raises(inventory_module.InventoryError, match="attached branch"):
+        inventory_module._ensure_clean_tree(tmp_path, mode="head")
+
+
+@pytest.mark.parametrize(
+    ("audit_directory", "etat_path"),
+    [
+        ("/tmp/nexus-audit-absolu", "ETAT_COLLECTION.md"),
+        ("../audit-hors-depot", "ETAT_COLLECTION.md"),
+    ],
+)
+def test_generation_rejects_absolute_and_parent_output_paths(
+    tmp_path: Path,
+    inventory_module,
+    audit_directory: str,
+    etat_path: str,
+) -> None:
+    _seed_cli_repository(tmp_path)
+
+    with pytest.raises(inventory_module.InventoryError, match="outside repository"):
+        inventory_module.build_inventory_artifacts(
+            tmp_path,
+            audit_directory=audit_directory,
+            etat_path=etat_path,
+        )
+
+
+def test_generation_rejects_symlink_escape_before_any_write(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    _seed_cli_repository(repository)
+    (repository / "evidence").symlink_to(outside, target_is_directory=True)
+
+    with pytest.raises(inventory_module.InventoryError, match="symlink escape"):
+        inventory_module.build_inventory_artifacts(
+            repository,
+            audit_directory="evidence/audit",
+            etat_path="ETAT_COLLECTION.md",
+        )
+
+    assert list(outside.iterdir()) == []
+
+
+def test_generation_lock_covers_render_compare_clean_and_apply(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    active = False
+    observed: list[tuple[str, bool]] = []
+
+    @contextmanager
+    def observed_lock(_root: Path):
+        nonlocal active
+        active = True
+        try:
+            yield
+        finally:
+            active = False
+
+    original_render = inventory_module._render_managed_artifacts
+    original_compare = inventory_module._compare_rendered_artifacts
+    original_clean = inventory_module._ensure_clean_tree
+    original_apply = inventory_module._apply_atomic_payloads
+
+    def render(*args: object, **kwargs: object):
+        observed.append(("render", active))
+        return original_render(*args, **kwargs)
+
+    def compare(*args: object, **kwargs: object):
+        observed.append(("compare", active))
+        return original_compare(*args, **kwargs)
+
+    def clean(*args: object, **kwargs: object):
+        observed.append(("clean", active))
+        return original_clean(*args, **kwargs)
+
+    def apply(*args: object, **kwargs: object):
+        observed.append(("apply", active))
+        return original_apply(*args, **kwargs)
+
+    monkeypatch.setattr(inventory_module, "_lock_generation", observed_lock)
+    monkeypatch.setattr(inventory_module, "_render_managed_artifacts", render)
+    monkeypatch.setattr(inventory_module, "_compare_rendered_artifacts", compare)
+    monkeypatch.setattr(inventory_module, "_ensure_clean_tree", clean)
+    monkeypatch.setattr(inventory_module, "_apply_atomic_payloads", apply)
+
+    inventory_module.build_inventory_artifacts(tmp_path)
+
+    transactional = [
+        state
+        for operation, state in observed
+        if operation in {"render", "compare", "apply"}
+    ]
+    assert transactional == [True, True, True]
+    assert observed[-2:] == [("clean", True), ("apply", True)]
+
+
+def test_live_generation_lock_times_out_without_removing_owner_record(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(inventory_module, "LOCK_TIMEOUT_SECONDS", 0.05)
+    lock_path = tmp_path / inventory_module.GENERIC_LOCK_FILE
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            "-c",
+            (
+                "import importlib.util,time;"
+                f"spec=importlib.util.spec_from_file_location('inventory_collection',{str(SCRIPT)!r});"
+                "m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);"
+                f"from pathlib import Path;"
+                f"root=Path({str(tmp_path)!r});"
+                "ctx=m._lock_generation(root);ctx.__enter__();"
+                "print('LOCKED',flush=True);time.sleep(0.5);ctx.__exit__(None,None,None)"
+            ),
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    try:
+        assert process.stdout is not None
+        assert process.stdout.readline().strip() == "LOCKED"
+        owner_record = lock_path.read_bytes()
+
+        with pytest.raises(
+            inventory_module.InventoryError, match="generation lock timeout"
+        ):
+            with inventory_module._lock_generation(tmp_path):
+                pytest.fail("un verrou vivant ne doit jamais être repris")
+
+        assert lock_path.read_bytes() == owner_record
+        assert process.poll() is None
+    finally:
+        process.communicate(timeout=2)
+
+
+def test_stale_dead_generation_lock_is_quarantined_once(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(inventory_module, "LOCK_TIMEOUT_SECONDS", 0.1)
+    monkeypatch.setattr(
+        inventory_module, "LOCK_STALE_SECONDS", 0.01, raising=False
+    )
+    lock_path = tmp_path / inventory_module.GENERIC_LOCK_FILE
+    stale_record = {
+        "created_at_utc": "2000-01-01T00:00:00Z",
+        "pid": 999_999_999,
+        "process_start_token": "dead-process",
+    }
+    lock_path.write_text(
+        json.dumps(stale_record, sort_keys=True),
+        encoding="utf-8",
+    )
+
+    with inventory_module._lock_generation(tmp_path):
+        current = json.loads(lock_path.read_text(encoding="utf-8"))
+        assert current["pid"] == os.getpid()
+        assert current["process_start_token"]
+
+    assert not lock_path.exists()
+    quarantines = list(
+        tmp_path.glob(f"{inventory_module.GENERIC_LOCK_FILE}.stale.*")
+    )
+    assert len(quarantines) == 1
+    assert json.loads(quarantines[0].read_text(encoding="utf-8")) == stale_record
+
+
+@pytest.mark.parametrize(
+    "record",
+    [
+        "{pas-json",
+        json.dumps(
+            {
+                "created_at_utc": "2999-01-01T00:00:00Z",
+                "pid": 999_999_999,
+                "process_start_token": "dead-process",
+            }
+        ),
+    ],
+)
+def test_malformed_or_young_generation_lock_times_out_unchanged(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    record: str,
+) -> None:
+    monkeypatch.setattr(inventory_module, "LOCK_TIMEOUT_SECONDS", 0.03)
+    monkeypatch.setattr(
+        inventory_module, "LOCK_STALE_SECONDS", 20, raising=False
+    )
+    lock_path = tmp_path / inventory_module.GENERIC_LOCK_FILE
+    lock_path.write_text(record, encoding="utf-8")
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="generation lock timeout"
+    ):
+        with inventory_module._lock_generation(tmp_path):
+            pytest.fail("un verrou non récupérable ne doit jamais être remplacé")
+
+    assert lock_path.read_text(encoding="utf-8") == record
+
+
+def test_atomic_batch_failure_restores_every_target_byte_for_byte(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    existing = tmp_path / "audit/existing.txt"
+    new_target = tmp_path / "audit/new.txt"
+    _write(existing, "contenu historique\n")
+    before = hashlib.sha256(existing.read_bytes()).hexdigest()
+    original_replace = inventory_module.os.replace
+    replacements = 0
+
+    def fail_second_replace(source: Path | str, target: Path | str) -> None:
+        nonlocal replacements
+        replacements += 1
+        if replacements == 2:
+            raise OSError("injection échec remplacement 2")
+        original_replace(source, target)
+
+    monkeypatch.setattr(inventory_module.os, "replace", fail_second_replace)
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="transaction rolled back"
+    ):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {
+                Path("audit/existing.txt"): "nouveau contenu\n",
+                Path("audit/new.txt"): "nouveau fichier\n",
+            },
+        )
+
+    assert hashlib.sha256(existing.read_bytes()).hexdigest() == before
+    assert not new_target.exists()
+
+
+def test_atomic_staging_failure_leaves_no_temporary_or_target(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    target = tmp_path / "audit/invalid.txt"
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="transaction rolled back"
+    ):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/invalid.txt"): "\ud800"},
+        )
+
+    assert not target.exists()
+    assert not (tmp_path / ".inventory-collection-apply").exists()
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
+def test_atomic_batch_rejects_transaction_directory_symlink_escape(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    repository.mkdir()
+    outside.mkdir()
+    (repository / ".inventory-collection-apply").symlink_to(
+        outside,
+        target_is_directory=True,
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="symlink escape"):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {Path("audit/output.txt"): "contenu\n"},
+        )
+
+    assert not (repository / "audit/output.txt").exists()
+    assert list(outside.iterdir()) == []
+
+
+def test_require_clean_generation_ignores_only_its_own_transaction_files(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "clean sources")
+
+    result = inventory_module.build_inventory_artifacts(
+        tmp_path,
+        require_clean="worktree",
+    )
+
+    assert set(result["artifacts"]) == {
+        "audit",
+        "ecarts",
+        "etat",
+        "json",
+        "markdown",
+        "matrice",
+    }
+    assert not (tmp_path / inventory_module.GENERIC_LOCK_FILE).exists()
+
+
+def test_second_clean_check_rejects_transaction_lookalike_created_after_preflight(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "clean sources")
+    lookalike = tmp_path / ".inventory-collection-apply-user-notes"
+
+    @contextmanager
+    def inject_user_wip(_root: Path):
+        _write(lookalike, "WIP utilisateur\n")
+        yield {inventory_module.GENERIC_LOCK_FILE: (-1, -1)}
+
+    monkeypatch.setattr(inventory_module, "_lock_generation", inject_user_wip)
+
+    with pytest.raises(
+        inventory_module.InventoryError, match="local modifications"
+    ):
+        inventory_module.build_inventory_artifacts(
+            tmp_path,
+            require_clean="worktree",
+        )
+
+    assert lookalike.read_text(encoding="utf-8") == "WIP utilisateur\n"
+    assert not (tmp_path / "audit/INVENTAIRE_COLLECTION.json").exists()
+
+
+def test_check_recomputes_untracked_provenance_instead_of_reusing_stored_status(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "clean sources")
+    inventory_module.build_inventory_artifacts(tmp_path)
+    untracked = "NSI/chapitres/1NSI-TEST/cours/nouvelle source.tex"
+    _write(
+        tmp_path / untracked,
+        _meta(id="1NSI-TEST-NOUVELLE", chapitre="1NSI-TEST"),
+    )
+
+    result = inventory_module.build_inventory_artifacts(
+        tmp_path,
+        check_only=True,
+    )
+
+    provenance = result["inventory"]["provenance"]
+    assert provenance["dirty"] is True
+    assert provenance["untracked_relevant"] == [untracked]
+    assert any(
+        "INVENTAIRE_COLLECTION.json" in difference
+        for difference in result["diffs"]
+    )
+
+
+def test_check_reuses_stored_generation_provenance_and_changes_nothing(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    generation_sha = _commit_repository(tmp_path, "sources")
+    result = inventory_module.build_inventory_artifacts(tmp_path)
+    paths = _managed_output_paths(tmp_path, result)
+    relative_paths = tuple(path.relative_to(tmp_path).as_posix() for path in paths)
+    _track(tmp_path, *relative_paths)
+    checked_in_sha = _commit_repository(tmp_path, "generated outputs")
+    stored_inventory = json.loads(
+        (tmp_path / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
+    )
+    before_status = _git_status_bytes(tmp_path)
+    before_contents = {path: path.read_bytes() for path in paths}
+    time.sleep(1.1)
+
+    completed = _run_inventory_cli(tmp_path, "--check")
+
+    assert completed.returncode == 0
+    assert json.loads(completed.stdout)["success"] is True
+    assert _git_status_bytes(tmp_path) == before_status
+    assert {path: path.read_bytes() for path in paths} == before_contents
+    assert generation_sha != checked_in_sha
+    assert stored_inventory["provenance"]["head_sha"] == generation_sha
+
+
+def test_check_only_never_takes_generation_lock_or_creates_temporary_files(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    inventory_module.build_inventory_artifacts(tmp_path)
+    before_status = _git_status_bytes(tmp_path)
+
+    def forbidden(*args: object, **kwargs: object) -> None:
+        raise AssertionError("check_only ne doit ni verrouiller ni écrire")
+
+    monkeypatch.setattr(inventory_module, "_lock_generation", forbidden)
+    monkeypatch.setattr(inventory_module.tempfile, "NamedTemporaryFile", forbidden)
+
+    result = inventory_module.build_inventory_artifacts(tmp_path, check_only=True)
+
+    assert result["diffs"] == []
+    assert _git_status_bytes(tmp_path) == before_status
+
+
+def test_custom_managed_outputs_are_stable_excluded_and_checked_without_writes(
+    tmp_path: Path,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
+    arguments = (
+        "--audit-dir",
+        "evidence/custom-audit",
+        "--etat-path",
+        "evidence/custom-state.md",
+    )
+    first = _run_inventory_cli(tmp_path, *arguments)
+    managed = tuple(
+        tmp_path / relative
+        for relative in (
+            "evidence/custom-state.md",
+            "evidence/custom-audit/AUDIT_CONSOLIDE.md",
+            "evidence/custom-audit/ECARTS_ET_CONTRADICTIONS.yaml",
+            "evidence/custom-audit/INVENTAIRE_COLLECTION.json",
+            "evidence/custom-audit/INVENTAIRE_COLLECTION.md",
+            "evidence/custom-audit/MATRICE_LIVRABLES.yaml",
+        )
+    )
+    first_bytes = {path: path.read_bytes() for path in managed}
+    first_provenance = json.loads(
+        (tmp_path / "evidence/custom-audit/INVENTAIRE_COLLECTION.json").read_text(
+            encoding="utf-8"
+        )
+    )["provenance"]
+    time.sleep(1.1)
+
+    second = _run_inventory_cli(tmp_path, *arguments)
+    second_bytes = {path: path.read_bytes() for path in managed}
+    before_check_status = _git_status_bytes(tmp_path)
+    check = _run_inventory_cli(tmp_path, *arguments, "--check")
+
+    assert first.returncode == 0
+    assert second.returncode == 0
+    assert first_bytes == second_bytes
+    assert first_provenance["dirty"] is False
+    assert first_provenance["modified_tracked"] == []
+    assert first_provenance["untracked_relevant"] == []
+    assert check.returncode == 0
+    assert json.loads(check.stdout)["success"] is True
+    assert _git_status_bytes(tmp_path) == before_check_status
+    assert {path: path.read_bytes() for path in managed} == second_bytes
+
+
+def test_generator_fingerprint_covers_support_modules_and_gates_the_model(
+    tmp_path: Path,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    components = _install_generator_components(tmp_path)
+    _commit_repository(tmp_path, "sources and generator")
+    generated = _run_repository_inventory_cli(tmp_path)
+    inventory_path = tmp_path / "audit/INVENTAIRE_COLLECTION.json"
+    stored = json.loads(inventory_path.read_text(encoding="utf-8"))
+    before_outputs = {
+        path: path.read_bytes()
+        for path in (
+            tmp_path / "ETAT_COLLECTION.md",
+            tmp_path / "audit/AUDIT_CONSOLIDE.md",
+            tmp_path / "audit/ECARTS_ET_CONTRADICTIONS.yaml",
+            inventory_path,
+            tmp_path / "audit/INVENTAIRE_COLLECTION.md",
+            tmp_path / "audit/MATRICE_LIVRABLES.yaml",
+        )
+    }
+
+    assert generated.returncode == 0
+    assert set(stored["provenance"]["generator_files"]) == {
+        f"scripts/{component}" for component in GENERATOR_COMPONENTS
+    }
+    assert stored["provenance"]["generator_sha256"] == (
+        _load_inventory_module()._aggregate_generator_digest(
+            stored["provenance"]["generator_files"]
+        )
+    )
+
+    support_path = tmp_path / components[1]
+    support_path.write_text(
+        support_path.read_text(encoding="utf-8") + "\n# dérive support testée\n",
+        encoding="utf-8",
+    )
+    check = _run_repository_inventory_cli(tmp_path, "--check")
+    validate = _run_repository_inventory_cli(tmp_path, "--validate-model")
+
+    assert check.returncode == 3
+    assert any("INVENTAIRE_COLLECTION.json" in reason for reason in json.loads(check.stdout)["reasons"])
+    assert validate.returncode == 6
+    assert any("generator_sha256" in reason for reason in json.loads(validate.stdout)["reasons"])
+    assert {path: path.read_bytes() for path in before_outputs} == before_outputs
+
+
+def test_check_detects_tracked_source_drift_without_writing_outputs(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    tracked = _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
+    result = inventory_module.build_inventory_artifacts(tmp_path)
+    managed = _managed_output_paths(tmp_path, result)
+    before = {path: path.read_bytes() for path in managed}
+    source = tmp_path / tracked[1]
+    source.write_text(
+        source.read_text(encoding="utf-8") + "\nContenu source modifié.\n",
+        encoding="utf-8",
+    )
+
+    check = _run_inventory_cli(tmp_path, "--check")
+
+    assert check.returncode == 3
+    reasons = json.loads(check.stdout)["reasons"]
+    assert any("INVENTAIRE_COLLECTION.json" in reason for reason in reasons)
+    assert {path: path.read_bytes() for path in managed} == before
+
+
 def test_validate_model_gate_accepts_valid_outputs_and_rejects_digest_drift(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -3288,6 +4024,69 @@ def test_validate_model_gate_accepts_valid_outputs_and_rejects_digest_drift(
     assert invalid_payload["success"] is False
     assert invalid_payload["reasons"] == sorted(invalid_payload["reasons"])
     assert any("model_digest" in reason for reason in invalid_payload["reasons"])
+
+
+@pytest.mark.parametrize(
+    ("relative_path", "projection"),
+    [
+        pytest.param(
+            "audit/ECARTS_ET_CONTRADICTIONS.yaml",
+            "counts",
+            id="ecarts-counts",
+        ),
+        pytest.param(
+            "audit/ECARTS_ET_CONTRADICTIONS.yaml",
+            "anomalies",
+            id="ecarts-anomalies",
+        ),
+        pytest.param(
+            "audit/ECARTS_ET_CONTRADICTIONS.yaml",
+            "claims",
+            id="ecarts-claims",
+        ),
+        pytest.param(
+            "audit/MATRICE_LIVRABLES.yaml",
+            "manuals",
+            id="matrix-manuals",
+        ),
+    ],
+)
+def test_validate_model_rejects_schema_valid_projection_falsification(
+    tmp_path: Path,
+    inventory_module,
+    relative_path: str,
+    projection: str,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    inventory_module.build_inventory_artifacts(tmp_path)
+    artifact_path = tmp_path / relative_path
+    payload = yaml.safe_load(artifact_path.read_text(encoding="utf-8"))
+    if projection == "counts":
+        payload["counts"]["claims_ouverts"] += 1
+    elif projection == "anomalies":
+        first_category = next(iter(payload["anomalies"]))
+        payload["anomalies"][first_category].append({})
+    elif projection == "claims":
+        payload["claims"]["ouvertes"].append({})
+    else:
+        payload["manuals"]["1SPE"]["publication_eligible"] = True
+    artifact_path.write_text(
+        "# generated by inventory_collection.py\n"
+        + yaml.safe_dump(payload, allow_unicode=True, sort_keys=True, width=120),
+        encoding="utf-8",
+    )
+    inventory_module._validate_artifact_schema(
+        payload,
+        root=tmp_path,
+        path=Path(relative_path),
+    )
+
+    completed = _run_inventory_cli(tmp_path, "--validate-model")
+    result = json.loads(completed.stdout)
+
+    assert completed.returncode == 6
+    assert result["gate"] == "validate-model"
+    assert any("projection" in reason for reason in result["reasons"])
 
 
 def test_release_and_debt_gates_have_independent_documented_failures(

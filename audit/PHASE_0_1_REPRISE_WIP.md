@@ -405,3 +405,30 @@ filtrage si les tests de modèle établissent qu'un double signalement est requi
 mission Phase 0.1, mais les régressions P0/P1 empêchent toute génération fiable.
 La reprise doit conserver les modifications, les stabiliser d'abord contre la
 suite existante, puis compléter les exigences par petits commits testés.
+
+## Stabilisation provenance et transactions — 2026-07-29
+
+La Task 6 a été reprise par cycles RED/GREEN. La provenance emploie désormais le
+statut Git NUL (`--porcelain=v1 -z`), conserve sans guillemets les chemins
+Unicode ou contenant des espaces, et expose les deux chemins d'un renommage. Les
+versions de Python, Git, TeX Live, Latexmk et pdfinfo proviennent chacune de son
+exécutable réel. `SOURCE_DATE_EPOCH`, ou à défaut la date du commit, fixe
+l'horodatage reproductible.
+
+Le verrou couvre maintenant rendu, validation, comparaison, second contrôle de
+propreté et remplacement du lot. Son enregistrement JSON contient PID, jeton de
+démarrage du processus et date UTC. Seul un propriétaire mort ou dont le jeton
+ne correspond plus, âgé d'au moins 20 secondes, est mis en quarantaine ; un
+verrou vivant, jeune ou illisible expire sans être supprimé. Les stages et
+sauvegardes utilisent un répertoire privé sous la racine, les symlinks sortants
+sont refusés, et un échec de remplacement restaure les cibles préexistantes
+octet pour octet sans créer les nouvelles.
+
+| Cause racine | Tests affectés | Fichier | Correction | Test de régression | Statut |
+|---|---|---|---|---|---|
+| Verrou relâché avant comparaison et écriture | concurrence, TOCTOU, lot partiel | `scripts/inventory_collection.py` | verrou unique sur toute la transaction et second contrôle sous verrou | `test_generation_lock_covers_render_compare_clean_and_apply`, `test_require_clean_generation_ignores_only_its_own_transaction_files` | Corrigé |
+| Verrou sans propriétaire ni politique stale | timeout permanent après arrêt brutal | `scripts/inventory_collection.py` | record JSON PID/jeton/date, détection live, quarantaine atomique | `test_live_generation_lock_times_out_without_removing_owner_record`, `test_stale_dead_generation_lock_is_quarantined_once`, `test_malformed_or_young_generation_lock_times_out_unchanged` | Corrigé |
+| Écriture et rollback insuffisamment confinés | perte d'anciens artefacts, sortie hors dépôt | `scripts/inventory_collection.py` | validation des cibles, répertoire privé, sauvegardes fsync, rollback typé | `test_generation_rejects_symlink_escape_before_any_write`, `test_atomic_batch_failure_restores_every_target_byte_for_byte`, `test_atomic_staging_failure_leaves_no_temporary_or_target`, `test_atomic_batch_rejects_transaction_directory_symlink_escape` | Corrigé |
+| Statut Git textuel ambigu | chemins Unicode/espaces et renommages faux | `scripts/inventory_collection.py` | parsing NUL et représentation structurée des entrées | `test_git_status_preserves_unicode_spaces_and_both_rename_paths` | Corrigé |
+| Provenance de `--check` trop largement réutilisée | nouveau source non suivi invisible | `scripts/inventory_collection.py` | réutilisation limitée au SHA et à l'horodatage attestés | `test_check_recomputes_untracked_provenance_instead_of_reusing_stored_status` | Corrigé |
+| Versions d'outils et UTC incorrects | fausse preuve de toolchain, warnings | `scripts/inventory_collection.py` | interrogation de chaque exécutable et UTC aware | `test_tool_versions_come_from_each_real_executable`, `test_now_utc_is_timezone_aware_without_deprecation_warning` | Corrigé |
