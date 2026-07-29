@@ -7,7 +7,6 @@
 % fp = diff(f, x)
 % # f' = 2*(3x^2+1)*6x*ln(x) + (3x^2+1)^2/x
 % # = 12x*(3x^2+1)*ln(x) + (3x^2+1)^2/x
-% assert fp.subs(x, 1) == 12*4*0 + 16/1
 % assert fp.subs(x, 1) == 16
 % assert simplify(fp - (12*x*(3*x**2+1)*ln(x) + (3*x**2+1)**2/x)) == 0
 % # f(1) = 16*0 = 0
