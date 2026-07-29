@@ -1,0 +1,80 @@
+# Project-local Codex command rules for the Nexus manuals repository.
+# Rules are experimental. They load only from a trusted project .codex layer.
+
+prefix_rule(
+    pattern = ["git", "reset", "--hard"],
+    decision = "forbidden",
+    justification = "Destructive history/worktree reset is prohibited. Preserve WIP and use an audited recovery plan.",
+)
+
+prefix_rule(
+    pattern = ["git", "clean"],
+    decision = "forbidden",
+    justification = "Do not delete untracked files; they may contain agent or editorial work.",
+)
+
+prefix_rule(
+    pattern = ["git", "checkout", "--"],
+    decision = "forbidden",
+    justification = "Do not discard local changes. Audit and preserve them.",
+)
+
+prefix_rule(
+    pattern = ["git", "restore"],
+    decision = "forbidden",
+    justification = "Do not discard local changes. Use a reviewed patch or explicit human decision.",
+)
+
+prefix_rule(
+    pattern = ["git", "rebase"],
+    decision = "forbidden",
+    justification = "History rewriting is prohibited in this editorial production workflow.",
+)
+
+prefix_rule(
+    pattern = ["git", "merge"],
+    decision = "prompt",
+    justification = "Merges require explicit review of branch, conflicts, tests, and release state.",
+)
+
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "prompt",
+    justification = "Review branch, commits, tests and absence of force flags before pushing.",
+)
+
+prefix_rule(
+    pattern = ["gh", "pr", "create"],
+    decision = "prompt",
+    justification = "Opening a PR is allowed only after reviewing the diff, tests, gates and PR body.",
+)
+
+prefix_rule(
+    pattern = ["gh", "pr", "merge"],
+    decision = "forbidden",
+    justification = "Codex must not merge the manuals release into main autonomously.",
+)
+
+prefix_rule(
+    pattern = ["rm", "-rf"],
+    decision = "forbidden",
+    justification = "Recursive forced deletion is prohibited. Use targeted, reviewed changes.",
+)
+
+prefix_rule(
+    pattern = ["sudo"],
+    decision = "forbidden",
+    justification = "System-level privilege escalation is not required for repository work.",
+)
+
+prefix_rule(
+    pattern = ["pip", "install"],
+    decision = "prompt",
+    justification = "Dependency changes must be justified, pinned and reflected in the reproducible environment.",
+)
+
+prefix_rule(
+    pattern = ["npm", "install"],
+    decision = "prompt",
+    justification = "Dependency changes must be justified, pinned and reflected in the reproducible environment.",
+)
