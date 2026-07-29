@@ -17,6 +17,8 @@ import re
 import subprocess
 import sys
 import os
+import secrets
+import stat
 import unicodedata
 import shutil
 import tempfile
@@ -31,6 +33,11 @@ from types import MappingProxyType
 from typing import Any, Mapping
 
 import yaml
+
+try:
+    import fcntl
+except ImportError:  # pragma: no cover - non-POSIX platforms cannot reclaim locks
+    fcntl = None
 
 _SCRIPTS_ROOT = Path(__file__).resolve().parent
 _REPO_ROOT = _SCRIPTS_ROOT.parent
@@ -1337,13 +1344,12 @@ def _parse_lock_timestamp(value: object) -> datetime.datetime | None:
     return timestamp.astimezone(datetime.UTC)
 
 
-def _read_lock_record(lock_path: Path) -> dict[str, Any] | None:
+def _parse_lock_record(raw: bytes) -> dict[str, Any] | None:
     try:
-        raw = lock_path.read_bytes()
         if len(raw) > 64 * 1024:
             return None
         payload = json.loads(raw.decode("utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError):
+    except (UnicodeError, json.JSONDecodeError):
         return None
     if not isinstance(payload, dict):
         return None
@@ -1362,6 +1368,15 @@ def _read_lock_record(lock_path: Path) -> dict[str, Any] | None:
     return payload
 
 
+def _read_lock_record_fd(fd: int) -> dict[str, Any] | None:
+    try:
+        os.lseek(fd, 0, os.SEEK_SET)
+        raw = os.read(fd, 64 * 1024 + 1)
+    except OSError:
+        return None
+    return _parse_lock_record(raw)
+
+
 def _lock_owner_is_live(record: Mapping[str, Any]) -> bool:
     pid = int(record["pid"])
     expected_token = str(record["process_start_token"])
@@ -1378,47 +1393,74 @@ def _lock_owner_is_live(record: Mapping[str, Any]) -> bool:
 
 
 def _quarantine_stale_lock(lock_path: Path) -> bool:
-    record = _read_lock_record(lock_path)
-    if record is None:
+    if fcntl is None:
         return False
-    created = _parse_lock_timestamp(record["created_at_utc"])
-    if created is None:
-        return False
-    age = (datetime.datetime.now(datetime.UTC) - created).total_seconds()
-    if age < LOCK_STALE_SECONDS or _lock_owner_is_live(record):
-        return False
-    try:
-        stale_stat = lock_path.stat(follow_symlinks=False)
-    except OSError:
-        return False
-    quarantine_path = lock_path.with_name(
-        f"{lock_path.name}.stale.{stale_stat.st_dev:x}-{stale_stat.st_ino:x}"
+    open_flags = (
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+        | getattr(os, "O_NONBLOCK", 0)
     )
     try:
-        os.link(
-            lock_path,
-            quarantine_path,
-            follow_symlinks=False,
-        )
-    except FileExistsError:
-        pass
+        fd = os.open(lock_path, open_flags)
     except OSError:
         return False
     try:
-        current_stat = lock_path.stat(follow_symlinks=False)
-        quarantine_stat = quarantine_path.stat(follow_symlinks=False)
+        stale_stat = os.fstat(fd)
+        if not stat.S_ISREG(stale_stat.st_mode):
+            return False
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            return False
+        record = _read_lock_record_fd(fd)
+        if record is None:
+            return False
+        created = _parse_lock_timestamp(record["created_at_utc"])
+        if created is None:
+            return False
+        age = (datetime.datetime.now(datetime.UTC) - created).total_seconds()
+        if age < LOCK_STALE_SECONDS or _lock_owner_is_live(record):
+            return False
+        snapshot_identity = (stale_stat.st_dev, stale_stat.st_ino)
+        try:
+            current_stat = lock_path.stat(follow_symlinks=False)
+        except OSError:
+            return False
         if (
-            current_stat.st_dev,
-            current_stat.st_ino,
-        ) != (
-            quarantine_stat.st_dev,
-            quarantine_stat.st_ino,
+            not stat.S_ISREG(current_stat.st_mode)
+            or (current_stat.st_dev, current_stat.st_ino) != snapshot_identity
+        ):
+            return False
+        quarantine_path = lock_path.with_name(
+            f"{lock_path.name}.stale.{stale_stat.st_dev:x}-{stale_stat.st_ino:x}"
+        )
+        try:
+            os.link(
+                lock_path,
+                quarantine_path,
+                follow_symlinks=False,
+            )
+        except FileExistsError:
+            pass
+        except OSError:
+            return False
+        try:
+            current_stat = lock_path.stat(follow_symlinks=False)
+            quarantine_stat = quarantine_path.stat(follow_symlinks=False)
+        except OSError:
+            return False
+        if (
+            not stat.S_ISREG(current_stat.st_mode)
+            or (current_stat.st_dev, current_stat.st_ino) != snapshot_identity
+            or (quarantine_stat.st_dev, quarantine_stat.st_ino)
+            != snapshot_identity
         ):
             return False
         lock_path.unlink()
-    except OSError:
-        return False
-    return True
+        return True
+    finally:
+        os.close(fd)
 
 
 @contextmanager
@@ -1447,11 +1489,16 @@ def _lock_generation(root: Path):
         try:
             fd = os.open(
                 lock_path,
-                os.O_CREAT | os.O_EXCL | os.O_WRONLY,
+                os.O_CREAT
+                | os.O_EXCL
+                | os.O_WRONLY
+                | getattr(os, "O_CLOEXEC", 0),
                 0o600,
             )
             owner_stat = os.fstat(fd)
-            os.write(fd, owner_record)
+            if fcntl is not None:
+                fcntl.flock(fd, fcntl.LOCK_EX)
+            _write_all(fd, owner_record)
             os.fsync(fd)
             break
         except FileExistsError:
@@ -3653,6 +3700,182 @@ def _validate_transaction_target(
     _clean_path(relative.as_posix(), role=role, repository=root)
 
 
+def _stat_identity(value: os.stat_result) -> tuple[int, int]:
+    return value.st_dev, value.st_ino
+
+
+def _path_matches_directory_identity(
+    path: Path,
+    expected: os.stat_result,
+) -> bool:
+    try:
+        current = path.stat(follow_symlinks=False)
+    except OSError:
+        return False
+    return stat.S_ISDIR(current.st_mode) and _stat_identity(
+        current
+    ) == _stat_identity(expected)
+
+
+def _open_pinned_directory(
+    path: Path,
+    *,
+    role: str,
+) -> tuple[int, os.stat_result]:
+    flags = (
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_DIRECTORY", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
+    try:
+        fd = os.open(path, flags)
+    except OSError as exc:
+        raise InventoryError(f"{role}: cannot pin directory ({path})") from exc
+    try:
+        pinned = os.fstat(fd)
+        if not stat.S_ISDIR(pinned.st_mode):
+            raise InventoryError(f"{role}: not a directory ({path})")
+        if not _path_matches_directory_identity(path, pinned):
+            raise InventoryError(f"{role}: directory identity changed ({path})")
+    except Exception:
+        os.close(fd)
+        raise
+    return fd, pinned
+
+
+def _write_all(fd: int, payload: bytes) -> None:
+    offset = 0
+    while offset < len(payload):
+        written = os.write(fd, payload[offset:])
+        if written <= 0:
+            raise OSError("short write")
+        offset += written
+
+
+def _write_transaction_entry(
+    directory_fd: int,
+    name: str,
+    payload: bytes,
+) -> None:
+    flags = (
+        os.O_CREAT
+        | os.O_EXCL
+        | os.O_WRONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
+    fd = os.open(name, flags, 0o600, dir_fd=directory_fd)
+    identity = os.fstat(fd)
+    try:
+        _write_all(fd, payload)
+        os.fsync(fd)
+    except Exception:
+        try:
+            current = os.stat(
+                name,
+                dir_fd=directory_fd,
+                follow_symlinks=False,
+            )
+            if _stat_identity(current) == _stat_identity(identity):
+                os.unlink(name, dir_fd=directory_fd)
+        except OSError:
+            pass
+        raise
+    finally:
+        os.close(fd)
+
+
+def _transaction_entry_is_regular(directory_fd: int, name: str) -> bool:
+    try:
+        value = os.stat(
+            name,
+            dir_fd=directory_fd,
+            follow_symlinks=False,
+        )
+    except OSError:
+        return False
+    return stat.S_ISREG(value.st_mode)
+
+
+def _copy_recovery_backup(
+    root: Path,
+    *,
+    root_fd: int,
+    transaction_fd: int,
+    backup_name: str,
+) -> Path:
+    source_flags = (
+        os.O_RDONLY
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
+    source_fd = os.open(backup_name, source_flags, dir_fd=transaction_fd)
+    try:
+        source_stat = os.fstat(source_fd)
+        if not stat.S_ISREG(source_stat.st_mode):
+            raise InventoryError("rollback backup is not a regular file")
+        destination_fd: int | None = None
+        recovery_name = ""
+        for _ in range(128):
+            recovery_name = (
+                f".inventory-collection-recovery-{secrets.token_hex(16)}.bak"
+            )
+            try:
+                destination_fd = os.open(
+                    recovery_name,
+                    os.O_CREAT
+                    | os.O_EXCL
+                    | os.O_WRONLY
+                    | getattr(os, "O_CLOEXEC", 0)
+                    | getattr(os, "O_NOFOLLOW", 0),
+                    0o600,
+                    dir_fd=root_fd,
+                )
+                break
+            except FileExistsError:
+                continue
+        if destination_fd is None:
+            raise InventoryError("cannot allocate recovery backup")
+        destination_stat = os.fstat(destination_fd)
+        try:
+            os.lseek(source_fd, 0, os.SEEK_SET)
+            while True:
+                chunk = os.read(source_fd, 1024 * 1024)
+                if not chunk:
+                    break
+                _write_all(destination_fd, chunk)
+            os.fsync(destination_fd)
+        except Exception:
+            try:
+                current = os.stat(
+                    recovery_name,
+                    dir_fd=root_fd,
+                    follow_symlinks=False,
+                )
+                if _stat_identity(current) == _stat_identity(destination_stat):
+                    os.unlink(recovery_name, dir_fd=root_fd)
+            except OSError:
+                pass
+            raise
+        finally:
+            os.close(destination_fd)
+        current = os.stat(
+            recovery_name,
+            dir_fd=root_fd,
+            follow_symlinks=False,
+        )
+        if (
+            not stat.S_ISREG(current.st_mode)
+            or _stat_identity(current) != _stat_identity(destination_stat)
+        ):
+            raise InventoryError("recovery backup identity changed")
+        os.fsync(root_fd)
+        return root / recovery_name
+    finally:
+        os.close(source_fd)
+
+
 def _apply_atomic_payloads(
     root: Path,
     rendered_artifacts: dict[Path, str],
@@ -3675,9 +3898,10 @@ def _apply_atomic_payloads(
             raise InventoryError(f"duplicate output target: {relative}")
         targets[target] = content
 
-    staged: dict[Path, Path] = {}
-    backups: dict[Path, Path] = {}
-    preserved_backups: set[Path] = set()
+    staged: dict[Path, str] = {}
+    backups: dict[Path, str] = {}
+    transaction_entries: set[str] = set()
+    preserved_transaction_entries: set[str] = set()
     replaced: list[Path] = []
     legacy_temp_root = root / ".inventory-collection-apply"
     if (
@@ -3687,43 +3911,71 @@ def _apply_atomic_payloads(
         raise InventoryError(
             "transaction directory: symlink escape outside repository"
         )
-    temp_root = Path(
-        tempfile.mkdtemp(prefix=".inventory-collection-apply-", dir=str(root))
+    root_fd, _root_stat = _open_pinned_directory(
+        root,
+        role="repository transaction root",
     )
     try:
-        for target, content in targets.items():
-            target.parent.mkdir(parents=True, exist_ok=True)
-            token = tempfile.NamedTemporaryFile(
-                "w", encoding="utf-8", dir=str(temp_root), delete=False
+        temp_root = Path(
+            tempfile.mkdtemp(
+                prefix=".inventory-collection-apply-",
+                dir=str(root),
             )
-            temp_path = Path(token.name)
-            staged[target] = temp_path
+        )
+        created_temp_stat = temp_root.stat(follow_symlinks=False)
+    except Exception:
+        os.close(root_fd)
+        raise
+    try:
+        temp_fd, temp_stat = _open_pinned_directory(
+            temp_root,
+            role="transaction directory",
+        )
+    except Exception:
+        if _path_matches_directory_identity(temp_root, created_temp_stat):
             try:
-                token.write(content)
-                token.flush()
-                os.fsync(token.fileno())
-            finally:
-                token.close()
+                os.rmdir(temp_root)
+            except OSError:
+                pass
+        os.close(root_fd)
+        raise
+    try:
+        for index, (target, content) in enumerate(targets.items()):
+            target.parent.mkdir(parents=True, exist_ok=True)
+            stage_name = f"stage-{index:08d}"
+            _write_transaction_entry(
+                temp_fd,
+                stage_name,
+                _utf8_bytes(content),
+            )
+            staged[target] = stage_name
+            transaction_entries.add(stage_name)
             if target.exists():
-                backup = tempfile.NamedTemporaryFile(
-                    "wb", dir=str(temp_root), delete=False
+                _validate_transaction_target(
+                    root,
+                    target,
+                    role="backup source",
                 )
-                backup_path = Path(backup.name)
-                backups[target] = backup_path
-                try:
-                    backup.write(target.read_bytes())
-                    backup.flush()
-                    os.fsync(backup.fileno())
-                finally:
-                    backup.close()
+                backup_name = f"backup-{index:08d}"
+                _write_transaction_entry(
+                    temp_fd,
+                    backup_name,
+                    target.read_bytes(),
+                )
+                backups[target] = backup_name
+                transaction_entries.add(backup_name)
 
-        for target, temp_path in sorted(staged.items(), key=lambda item: str(item[0])):
+        os.fsync(temp_fd)
+        for target, stage_name in sorted(
+            staged.items(),
+            key=lambda item: str(item[0]),
+        ):
             _validate_transaction_target(
                 root,
                 target,
                 role="output replace",
             )
-            os.replace(temp_path, target)
+            os.replace(stage_name, target, src_dir_fd=temp_fd)
             replaced.append(target)
     except Exception as exc:
         rollback_errors: list[str] = []
@@ -3735,15 +3987,38 @@ def _apply_atomic_payloads(
                     target,
                     role="rollback output",
                 )
-                if target in backups and backups[target].exists():
-                    os.replace(backups[target], target)
+                backup_name = backups.get(target)
+                if backup_name and _transaction_entry_is_regular(
+                    temp_fd,
+                    backup_name,
+                ):
+                    os.replace(
+                        backup_name,
+                        target,
+                        src_dir_fd=temp_fd,
+                    )
                 else:
                     target.unlink(missing_ok=True)
             except Exception as rollback_exc:
-                backup = backups.get(target)
-                if backup is not None and backup.exists():
-                    preserved_backups.add(backup)
-                    recoverable_backups.append(backup)
+                backup_name = backups.get(target)
+                if backup_name and _transaction_entry_is_regular(
+                    temp_fd,
+                    backup_name,
+                ):
+                    try:
+                        recoverable_backups.append(
+                            _copy_recovery_backup(
+                                root,
+                                root_fd=root_fd,
+                                transaction_fd=temp_fd,
+                                backup_name=backup_name,
+                            )
+                        )
+                    except Exception as recovery_exc:
+                        preserved_transaction_entries.add(backup_name)
+                        rollback_errors.append(
+                            f"recovery backup failed: {recovery_exc}"
+                        )
                 rollback_errors.append(str(rollback_exc))
         message = "transaction rolled back"
         if rollback_errors:
@@ -3755,13 +4030,49 @@ def _apply_atomic_payloads(
             )
         raise InventoryError(f"{message}; cause: {exc}") from exc
     finally:
-        for temp_path in staged.values():
-            temp_path.unlink(missing_ok=True)
-        for backup in backups.values():
-            if backup not in preserved_backups:
-                backup.unlink(missing_ok=True)
-        if temp_root.exists() and not any(temp_root.iterdir()):
-            temp_root.rmdir()
+        active_error = sys.exc_info()[1]
+        cleanup_errors: list[str] = []
+        try:
+            for name in sorted(
+                transaction_entries - preserved_transaction_entries
+            ):
+                try:
+                    os.unlink(name, dir_fd=temp_fd)
+                except FileNotFoundError:
+                    pass
+                except OSError as cleanup_exc:
+                    cleanup_errors.append(f"unlink {name}: {cleanup_exc}")
+            try:
+                os.fsync(temp_fd)
+            except OSError as cleanup_exc:
+                cleanup_errors.append(f"fsync transaction directory: {cleanup_exc}")
+            if (
+                not preserved_transaction_entries
+                and _path_matches_directory_identity(temp_root, temp_stat)
+            ):
+                try:
+                    os.rmdir(temp_root)
+                except OSError as cleanup_exc:
+                    cleanup_errors.append(
+                        f"rmdir transaction directory: {cleanup_exc}"
+                    )
+        finally:
+            try:
+                os.close(temp_fd)
+            except OSError as cleanup_exc:
+                cleanup_errors.append(f"close transaction directory: {cleanup_exc}")
+            try:
+                os.close(root_fd)
+            except OSError as cleanup_exc:
+                cleanup_errors.append(f"close repository root: {cleanup_exc}")
+        if cleanup_errors:
+            detail = "; ".join(cleanup_errors)
+            if active_error is not None:
+                active_error.add_note(f"transaction cleanup failed: {detail}")
+            else:
+                raise InventoryError(
+                    f"transaction cleanup failed: {detail}"
+                )
 
 
 def _reuse_stored_generation_provenance(

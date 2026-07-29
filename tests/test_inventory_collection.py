@@ -10,6 +10,7 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import time
 import warnings
 from contextlib import contextmanager
@@ -3544,8 +3545,16 @@ def test_tool_versions_come_from_each_real_executable(
     }
     expected: dict[str, str] = {}
     for name, command in expected_commands.items():
+        executable = (
+            command[0]
+            if Path(command[0]).is_absolute()
+            else shutil.which(command[0])
+        )
+        if executable is None:
+            expected[name] = "unavailable"
+            continue
         completed = subprocess.run(
-            command,
+            [str(executable), *command[1:]],
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
@@ -3555,7 +3564,39 @@ def test_tool_versions_come_from_each_real_executable(
 
     assert versions == expected
     assert not isinstance(versions["git"], bool)
-    assert versions["texlive"] != versions["git"]
+
+
+def test_tool_version_routing_uses_each_expected_command(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    routed: list[list[str]] = []
+
+    def resolve(executable: str) -> str:
+        return f"/resolved/{executable}"
+
+    def run(command: list[str], **_kwargs: object):
+        routed.append(command)
+        return subprocess.CompletedProcess(
+            command,
+            0,
+            stdout=f"version for {Path(command[0]).name}\n",
+        )
+
+    monkeypatch.setattr(inventory_module.shutil, "which", resolve)
+    monkeypatch.setattr(inventory_module.subprocess, "run", run)
+
+    versions = inventory_module._file_version_signature(tmp_path)
+
+    assert routed == [
+        ["/resolved/git", "--version"],
+        ["/resolved/latexmk", "-version"],
+        ["/resolved/pdfinfo", "-v"],
+        [sys.executable, "--version"],
+        ["/resolved/pdflatex", "--version"],
+    ]
+    assert set(versions) == {"git", "latexmk", "pdfinfo", "python", "texlive"}
 
 
 def test_ensure_clean_tree_validates_mode_and_head_on_a_clean_tree(
@@ -3751,6 +3792,119 @@ def test_stale_dead_generation_lock_is_quarantined_once(
     assert json.loads(quarantines[0].read_text(encoding="utf-8")) == stale_record
 
 
+def test_stale_snapshot_never_unlinks_a_replacement_lock_owner(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(inventory_module, "LOCK_TIMEOUT_SECONDS", 0.03)
+    lock_path = tmp_path / inventory_module.GENERIC_LOCK_FILE
+    stale_record = {
+        "created_at_utc": "2000-01-01T00:00:00Z",
+        "pid": 999_999_999,
+        "process_start_token": "dead-process",
+    }
+    lock_path.write_text(json.dumps(stale_record), encoding="utf-8")
+    stale_read = threading.Event()
+    resume_reclaimer = threading.Event()
+    result: list[bool] = []
+    failures: list[BaseException] = []
+    original_owner_is_live = inventory_module._lock_owner_is_live
+
+    def pause_after_stale_read(record: dict[str, object]) -> bool:
+        if record.get("process_start_token") == "dead-process":
+            stale_read.set()
+            if not resume_reclaimer.wait(timeout=2):
+                raise AssertionError("barrière de reprise stale expirée")
+            return False
+        return original_owner_is_live(record)
+
+    def reclaim_snapshot() -> None:
+        try:
+            result.append(inventory_module._quarantine_stale_lock(lock_path))
+        except BaseException as exc:
+            failures.append(exc)
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_lock_owner_is_live",
+        pause_after_stale_read,
+    )
+    reclaimer = threading.Thread(target=reclaim_snapshot)
+    reclaimer.start()
+    assert stale_read.wait(timeout=2)
+
+    lock_path.unlink()
+    with inventory_module._lock_generation(tmp_path):
+        replacement_stat = lock_path.stat(follow_symlinks=False)
+        resume_reclaimer.set()
+        reclaimer.join(timeout=2)
+        assert not reclaimer.is_alive()
+        assert failures == []
+        assert result == [False]
+        current_stat = lock_path.stat(follow_symlinks=False)
+        assert (current_stat.st_dev, current_stat.st_ino) == (
+            replacement_stat.st_dev,
+            replacement_stat.st_ino,
+        )
+        with pytest.raises(
+            inventory_module.InventoryError, match="generation lock timeout"
+        ):
+            with inventory_module._lock_generation(tmp_path):
+                pytest.fail("le verrou de remplacement doit rester exclusif")
+
+
+@pytest.mark.parametrize("lock_kind", ["symlink", "directory"])
+def test_stale_reclaimer_refuses_symlink_and_nonregular_lock(
+    tmp_path: Path,
+    inventory_module,
+    lock_kind: str,
+) -> None:
+    lock_path = tmp_path / inventory_module.GENERIC_LOCK_FILE
+    if lock_kind == "symlink":
+        target = tmp_path / "stale-record.json"
+        target.write_text(
+            json.dumps(
+                {
+                    "created_at_utc": "2000-01-01T00:00:00Z",
+                    "pid": 999_999_999,
+                    "process_start_token": "dead-process",
+                }
+            ),
+            encoding="utf-8",
+        )
+        lock_path.symlink_to(target)
+    else:
+        lock_path.mkdir()
+
+    assert inventory_module._quarantine_stale_lock(lock_path) is False
+    assert lock_path.exists()
+    if lock_kind == "symlink":
+        assert lock_path.is_symlink()
+
+
+def test_stale_reclaimer_is_disabled_without_fcntl(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    lock_path = tmp_path / inventory_module.GENERIC_LOCK_FILE
+    lock_path.write_text(
+        json.dumps(
+            {
+                "created_at_utc": "2000-01-01T00:00:00Z",
+                "pid": 999_999_999,
+                "process_start_token": "dead-process",
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(inventory_module, "fcntl", None, raising=False)
+
+    assert inventory_module._quarantine_stale_lock(lock_path) is False
+    assert lock_path.exists()
+
+
 @pytest.mark.parametrize(
     "record",
     [
@@ -3798,12 +3952,16 @@ def test_atomic_batch_failure_restores_every_target_byte_for_byte(
     original_replace = inventory_module.os.replace
     replacements = 0
 
-    def fail_second_replace(source: Path | str, target: Path | str) -> None:
+    def fail_second_replace(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
         nonlocal replacements
         replacements += 1
         if replacements == 2:
             raise OSError("injection échec remplacement 2")
-        original_replace(source, target)
+        original_replace(source, target, **kwargs)
 
     monkeypatch.setattr(inventory_module.os, "replace", fail_second_replace)
 
@@ -3832,12 +3990,16 @@ def test_failed_rollback_preserves_and_reports_recoverable_backup(
     original_replace = inventory_module.os.replace
     replacements = 0
 
-    def fail_apply_then_rollback(source: Path | str, target: Path | str) -> None:
+    def fail_apply_then_rollback(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
         nonlocal replacements
         replacements += 1
         if replacements in {2, 3}:
             raise OSError(f"injection replace {replacements}")
-        original_replace(source, target)
+        original_replace(source, target, **kwargs)
 
     monkeypatch.setattr(
         inventory_module.os,
@@ -3859,6 +4021,8 @@ def test_failed_rollback_preserves_and_reports_recoverable_backup(
     match = re.search(r"recoverable backup: ([^;]+)", str(captured.value))
     assert match is not None
     backup_path = Path(match.group(1))
+    assert backup_path.parent == tmp_path
+    assert backup_path.name.startswith(".inventory-collection-recovery-")
     assert backup_path.read_bytes() == b"octets historiques\n"
     assert existing.read_bytes() == b"nouveaux octets\n"
 
@@ -3883,6 +4047,318 @@ def test_lock_write_failure_never_unlinks_a_replacement_inode(
             pytest.fail("l'acquisition doit échouer")
 
     assert lock_path.read_bytes() == foreign_record
+
+
+def test_transaction_uses_pinned_temp_directory_after_path_substitution(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    existing = repository / "audit/existing.txt"
+    _write(existing, "octets historiques\n")
+    outside.mkdir()
+    sentinel = outside / "sentinel.txt"
+    sentinel.write_bytes(b"ne pas supprimer\n")
+    original_fsync = inventory_module.os.fsync
+    substitution: dict[str, Path] = {}
+
+    def substitute_real_temp_root(fd: int) -> None:
+        original_fsync(fd)
+        if substitution:
+            return
+        try:
+            open_path = Path(os.readlink(f"/proc/self/fd/{fd}"))
+        except OSError:
+            return
+        temp_root = open_path.parent
+        if (
+            temp_root.parent != repository
+            or not temp_root.name.startswith(".inventory-collection-apply-")
+        ):
+            return
+        moved_root = repository / f"{temp_root.name}.moved"
+        temp_root.rename(moved_root)
+        temp_root.symlink_to(outside, target_is_directory=True)
+        external_stage = outside / open_path.name
+        external_stage.write_bytes(b"octets externes\n")
+        substitution.update(
+            {
+                "temp_root": temp_root,
+                "moved_root": moved_root,
+                "external_stage": external_stage,
+            }
+        )
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "fsync",
+        substitute_real_temp_root,
+    )
+
+    inventory_module._apply_atomic_payloads(
+        repository,
+        {Path("audit/existing.txt"): "nouveaux octets\n"},
+    )
+
+    assert substitution
+    assert existing.read_bytes() == b"nouveaux octets\n"
+    assert substitution["external_stage"].read_bytes() == b"octets externes\n"
+    assert sentinel.read_bytes() == b"ne pas supprimer\n"
+    assert substitution["temp_root"].is_symlink()
+
+
+def test_transaction_revalidates_target_before_reading_backup(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    target = repository / "audit/existing.txt"
+    _write(target, "octets historiques\n")
+    _write(outside / "existing.txt", "octets externes secrets\n")
+    captured_payloads: list[bytes] = []
+    original_write_entry = inventory_module._write_transaction_entry
+
+    def swap_parent_after_stage(
+        directory_fd: int,
+        name: str,
+        payload: bytes,
+    ) -> None:
+        captured_payloads.append(payload)
+        original_write_entry(directory_fd, name, payload)
+        if name.startswith("stage-"):
+            (repository / "audit").rename(repository / "audit-original")
+            (repository / "audit").symlink_to(
+                outside,
+                target_is_directory=True,
+            )
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_write_transaction_entry",
+        swap_parent_after_stage,
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="symlink escape"):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {Path("audit/existing.txt"): "nouveaux octets\n"},
+        )
+
+    assert captured_payloads == [b"nouveaux octets\n"]
+    assert (outside / "existing.txt").read_bytes() == b"octets externes secrets\n"
+
+
+def test_cleanup_failure_on_success_is_explicit_inventory_error(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "audit/existing.txt"
+    _write(target, "octets historiques\n")
+    original_unlink = inventory_module.os.unlink
+
+    def fail_backup_cleanup(
+        path: Path | str,
+        *args: object,
+        dir_fd: int | None = None,
+        **kwargs: object,
+    ) -> None:
+        if dir_fd is not None and str(path).startswith("backup-"):
+            raise PermissionError("injection cleanup backup")
+        original_unlink(path, *args, dir_fd=dir_fd, **kwargs)
+
+    monkeypatch.setattr(inventory_module.os, "unlink", fail_backup_cleanup)
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction cleanup failed.*injection cleanup backup",
+    ):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/existing.txt"): "nouveaux octets\n"},
+        )
+
+    assert target.read_bytes() == b"nouveaux octets\n"
+
+
+def test_cleanup_failure_never_masks_primary_transaction_error(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "audit/existing.txt"
+    _write(target, "octets historiques\n")
+    original_unlink = inventory_module.os.unlink
+
+    def fail_apply(
+        _source: Path | str,
+        _target: Path | str,
+        **_kwargs: object,
+    ) -> None:
+        raise OSError("injection cause primaire")
+
+    def fail_backup_cleanup(
+        path: Path | str,
+        *args: object,
+        dir_fd: int | None = None,
+        **kwargs: object,
+    ) -> None:
+        if dir_fd is not None and str(path).startswith("backup-"):
+            raise PermissionError("injection cleanup secondaire")
+        original_unlink(path, *args, dir_fd=dir_fd, **kwargs)
+
+    monkeypatch.setattr(inventory_module.os, "replace", fail_apply)
+    monkeypatch.setattr(inventory_module.os, "unlink", fail_backup_cleanup)
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back.*injection cause primaire",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/existing.txt"): "nouveaux octets\n"},
+        )
+
+    assert any(
+        "injection cleanup secondaire" in note
+        for note in getattr(captured.value, "__notes__", [])
+    )
+
+
+def test_transaction_root_fd_is_closed_when_temp_creation_fails(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root_fds: list[int] = []
+    closed_fds: list[int] = []
+    original_open_pinned = inventory_module._open_pinned_directory
+    original_close = inventory_module.os.close
+
+    def capture_root_fd(path: Path, *, role: str):
+        fd, identity = original_open_pinned(path, role=role)
+        if role == "repository transaction root":
+            root_fds.append(fd)
+        return fd, identity
+
+    def close(fd: int) -> None:
+        closed_fds.append(fd)
+        original_close(fd)
+
+    def fail_temp_creation(*_args: object, **_kwargs: object) -> str:
+        raise OSError("injection mkdtemp")
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_open_pinned_directory",
+        capture_root_fd,
+    )
+    monkeypatch.setattr(inventory_module.os, "close", close)
+    monkeypatch.setattr(
+        inventory_module.tempfile,
+        "mkdtemp",
+        fail_temp_creation,
+    )
+
+    with pytest.raises(OSError, match="injection mkdtemp"):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/output.txt"): "contenu\n"},
+        )
+
+    assert len(root_fds) == 1
+    assert root_fds[0] in closed_fds
+
+
+def test_failed_rollback_copies_backup_out_of_a_substituted_temp_root(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    _write(first, "premiers octets historiques\n")
+    _write(second, "seconds octets historiques\n")
+    outside.mkdir()
+    original_fsync = inventory_module.os.fsync
+    original_replace = inventory_module.os.replace
+    substitution: dict[str, Path] = {}
+    replacements = 0
+
+    def substitute_real_temp_root(fd: int) -> None:
+        original_fsync(fd)
+        if substitution:
+            return
+        try:
+            open_path = Path(os.readlink(f"/proc/self/fd/{fd}"))
+        except OSError:
+            return
+        temp_root = open_path.parent
+        if (
+            temp_root.parent != repository
+            or not temp_root.name.startswith(".inventory-collection-apply-")
+        ):
+            return
+        moved_root = repository / f"{temp_root.name}.moved"
+        temp_root.rename(moved_root)
+        temp_root.symlink_to(outside, target_is_directory=True)
+        external_stage = outside / open_path.name
+        external_stage.write_bytes(b"octets externes\n")
+        substitution.update(
+            {
+                "temp_root": temp_root,
+                "external_stage": external_stage,
+            }
+        )
+
+    def fail_apply_then_rollback(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        nonlocal replacements
+        replacements += 1
+        if replacements in {2, 3}:
+            raise OSError(f"injection replace {replacements}")
+        original_replace(source, target, **kwargs)
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "fsync",
+        substitute_real_temp_root,
+    )
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        fail_apply_then_rollback,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="recoverable backup",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "nouveaux premiers octets\n",
+                Path("audit/z-second.txt"): "nouveaux seconds octets\n",
+            },
+        )
+
+    match = re.search(r"recoverable backup: ([^;]+)", str(captured.value))
+    assert match is not None
+    recovery_path = Path(match.group(1))
+    assert recovery_path.parent == repository
+    assert recovery_path.name.startswith(".inventory-collection-recovery-")
+    assert recovery_path.read_bytes() == b"premiers octets historiques\n"
+    assert substitution["external_stage"].read_bytes() == b"octets externes\n"
+    assert substitution["temp_root"].is_symlink()
 
 
 def test_forward_replace_revalidates_symlink_confinement_after_staging(
@@ -3933,6 +4409,7 @@ def test_rollback_revalidates_symlink_and_preserves_backup(
     def swap_parent_on_apply_failure(
         source: Path | str,
         target: Path | str,
+        **kwargs: object,
     ) -> None:
         nonlocal replacements
         replacements += 1
@@ -3943,7 +4420,7 @@ def test_rollback_revalidates_symlink_and_preserves_backup(
                 target_is_directory=True,
             )
             raise OSError("injection avant rollback")
-        original_replace(source, target)
+        original_replace(source, target, **kwargs)
 
     monkeypatch.setattr(
         inventory_module.os,
@@ -3968,7 +4445,10 @@ def test_rollback_revalidates_symlink_and_preserves_backup(
         str(captured.value),
     )
     assert backup_match is not None
-    assert Path(backup_match.group(1)).read_bytes() == b"octets historiques\n"
+    backup_path = Path(backup_match.group(1))
+    assert backup_path.parent == repository
+    assert backup_path.name.startswith(".inventory-collection-recovery-")
+    assert backup_path.read_bytes() == b"octets historiques\n"
     assert list(outside.iterdir()) == []
 
 

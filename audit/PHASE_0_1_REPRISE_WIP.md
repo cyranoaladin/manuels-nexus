@@ -453,3 +453,23 @@ Tests de conformité ajoutés : échecs des commandes Git, dépôt non Git, dép
 sans commit, reproductibilité inter-dépôts, remplacement d'inode du verrou,
 courses symlink avant remplacement et rollback, sauvegarde après rollback
 incomplet, et absence d'affectation morte dans la réutilisation de provenance.
+
+### Fermeture des courses de verrou et de staging
+
+- Sous Linux, le propriétaire conserve un `flock` exclusif pendant toute la
+  transaction. La reprise stale ouvre sans suivre les symlinks, refuse les
+  fichiers non réguliers, verrouille le FD snapshot en non-bloquant, lit le JSON
+  par ce FD et compare les identités snapshot/chemin/quarantaine avant unlink.
+  Sans `fcntl`, aucune reprise stale n'est tentée.
+- Le répertoire temporaire aléatoire et la racine sont épinglés par FD. Stages,
+  backups, remplacements et nettoyages emploient des noms relatifs avec
+  `dir_fd`; un chemin de staging substitué ne permet donc ni de consommer ni de
+  supprimer un fichier externe. Le `rmdir` n'est tenté qu'après revalidation de
+  l'identité du répertoire réel.
+- Un rollback incomplet recopie son backup vers un fichier recovery stable,
+  créé `O_EXCL` sous le FD racine, et publie ce chemin dans l'erreur. La cible
+  est aussi revalidée immédiatement avant la lecture du backup.
+- Un échec de nettoyage devient une `InventoryError` explicite après succès ;
+  en présence d'une erreur transactionnelle antérieure, il est joint en note
+  sans masquer la cause primaire. Le test d'outillage tolère désormais les
+  exécutables absents et vérifie séparément le routage de chaque commande.
