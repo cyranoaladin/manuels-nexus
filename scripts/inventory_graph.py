@@ -292,6 +292,7 @@ def add_orphan_files(
     root: Path,
     tracked: frozenset[str],
     *,
+    candidate_paths: frozenset[str],
     skipped_paths: set[str] | None = None,
     is_relevant_tex: Any,
     is_known_latex_root: Any,
@@ -321,7 +322,8 @@ def add_orphan_files(
     ignore = skipped_paths or set()
     for path in sorted(
         item
-        for item in tracked
+        for item in candidate_paths
+        if item in tracked
         if is_relevant_tex(item)
         and item.endswith(".tex")
         and item not in ignore

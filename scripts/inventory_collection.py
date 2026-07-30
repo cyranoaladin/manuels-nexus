@@ -2713,6 +2713,9 @@ def build_inventory(
         inventory,
         root,
         tracked_set,
+        production_paths=frozenset(
+            path for path in tracked_set if _is_production(path)
+        ),
         skipped_paths=metadata_error_paths,
     )
     inventory["pdfs"] = _inventory_pdfs(root, tracked, inventory)
@@ -3137,12 +3140,14 @@ def _add_orphan_files(
     root: Path,
     tracked: frozenset[str],
     *,
+    production_paths: frozenset[str],
     skipped_paths: set[str] | None = None,
 ) -> None:
     _graph_core.add_orphan_files(
         inventory,
         root,
         tracked,
+        candidate_paths=production_paths,
         skipped_paths=skipped_paths or set(),
         is_relevant_tex=_is_relevant_tex,
         is_known_latex_root=_is_known_latex_root,

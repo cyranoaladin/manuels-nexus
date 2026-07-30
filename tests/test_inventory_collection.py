@@ -409,10 +409,7 @@ def test_direct_harvest_candidate_never_enters_production_inventory(
     candidate = f"{base}/_harvest/direct.candidate.tex"
     _write(tmp_path / contract, _contract("1SPE-TEST", "1SPE", capacities=1))
     _write(tmp_path / course, _meta(status="approved"))
-    _write(
-        tmp_path / candidate,
-        _meta(id="1SPE-TEST-HARVEST-C1", status="approved"),
-    )
+    _write(tmp_path / candidate, "Candidate de collecte sans META\n")
     _track(tmp_path, contract, course, candidate)
 
     inventory = inventory_module.build_inventory(tmp_path)
@@ -423,6 +420,43 @@ def test_direct_harvest_candidate_never_enters_production_inventory(
 
     assert object_paths == {course}
     assert candidate not in object_paths
+    assert candidate not in {
+        anomaly["path"]
+        for anomaly in inventory["anomalies"]["metadata_missing"]
+    }
+    assert candidate not in {
+        anomaly["cible"]
+        for anomaly in inventory["anomalies"]["orphan_files"]
+    }
+
+
+def test_real_harvest_candidates_never_produce_blocking_production_anomalies(
+    inventory_module,
+) -> None:
+    tracked = inventory_module.git_tracked_files(ROOT)
+    harvest = {
+        path
+        for path in tracked
+        if inventory_module._is_intrinsic_harvest_candidate(path)
+    }
+    inventory = inventory_module.build_inventory(ROOT)
+    object_paths = {
+        item["path"]
+        for manual in inventory["manuals"].values()
+        for chapter in manual["chapters"].values()
+        for item in chapter["objects"]
+    }
+
+    assert len(harvest) == 19
+    assert harvest.isdisjoint(object_paths)
+    for category in inventory_module.BLOCKING_ANOMALY_CATEGORIES:
+        assert not any(
+            any(
+                path in json.dumps(anomaly, ensure_ascii=False, sort_keys=True)
+                for path in harvest
+            )
+            for anomaly in inventory["anomalies"][category]
+        ), category
 
 
 def test_source_roles_control_file_is_schema_valid_and_digest_verified(
@@ -2122,7 +2156,7 @@ def test_metadata_errors_are_not_duplicated_as_orphan_files(
     contract = f"{base}/contrat.yaml"
     missing_meta = f"{base}/cours/missing-meta.tex"
     malformed_meta = f"{base}/cours/malformed-meta.tex"
-    orphan = "NSI/extras/orphan.tex"
+    orphan = "NSI/chapitres/UNKNOWN/orphan.tex"
     sources = {
         contract: _contract("1SPE-TEST", "1SPE", capacities=1),
         missing_meta: "Contenu sans en-tete META\n",
@@ -2946,7 +2980,7 @@ def test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correct
     root_tex = "Mathematiques/manuel-maths/build/maquette-v5/maquette.tex"
     section = "Mathematiques/manuel-maths/parts/section.tex"
     template = "Mathematiques/manuel-maths/gabarits/chapitre_master.tex"
-    orphan = "Mathematiques/manuel-maths/extras/perdu.tex"
+    orphan = "Mathematiques/manuel-maths/chapitres/UNKNOWN/perdu.tex"
     sources = {
         f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
         exercise: _meta(
@@ -3033,12 +3067,12 @@ def test_orphan_reachability_ignores_edges_from_unreachable_sources_and_cycles(
     tmp_path: Path, inventory_module
 ) -> None:
     _init_repository(tmp_path)
-    first = "NSI/extras/cycle-a.tex"
-    second = "NSI/extras/cycle-b.tex"
-    leaf = "NSI/extras/leaf.tex"
+    first = "NSI/chapitres/UNKNOWN/cycle-a.tex"
+    second = "NSI/chapitres/UNKNOWN/cycle-b.tex"
+    leaf = "NSI/chapitres/UNKNOWN/leaf.tex"
     sources = {
-        first: "\\input{extras/cycle-b}\n",
-        second: "\\input{extras/cycle-a}\n",
+        first: "\\input{chapitres/UNKNOWN/cycle-b}\n",
+        second: "\\input{chapitres/UNKNOWN/cycle-a}\n",
         leaf: "Contenu sans racine\n",
     }
     for path, content in sources.items():
