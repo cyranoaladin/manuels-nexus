@@ -18,7 +18,6 @@
 | blocking_statuses | 1796 |
 | unassembled_objects | 614 |
 | broken_meta_references | 24 |
-| metadata_missing | 19 |
 | unavailable_inspiration_sources | 15 |
 | chapters_not_in_manual | 4 |
 | duplicate_assembly_objects | 3 |
@@ -45,11 +44,6 @@
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
-- metadata_missing: path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/P04_fiche_cours_dictionnaires.candidate.tex, reason=en-tete % META absent
-- metadata_missing: path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/P04_fiche_cours_listes.candidate.tex, reason=en-tete % META absent
-- metadata_missing: path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/P04_fiche_cours_tuples.candidate.tex, reason=en-tete % META absent
-- metadata_missing: path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/bareme.candidate.tex, reason=en-tete % META absent
-- metadata_missing: path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/bareme_complement.candidate.tex, reason=en-tete % META absent
 - missing_assemblers: source=Mathematiques/manuel-maths/scripts/assemble_manuel.py, cible=TSPE_2026_2027, champ=manuel, raison=aucun assembleur de manuel suivi
 - missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=1NSI, champ=manuel, raison=aucun assembleur de manuel suivi
 - missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=TNSI, champ=manuel, raison=aucun assembleur de manuel suivi

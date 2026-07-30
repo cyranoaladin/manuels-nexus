@@ -10,9 +10,6 @@ manuals:
     - code: anomalie:chapters_not_in_manual
       detail: '1'
       source: anomalies.chapters_not_in_manual
-    - code: anomalie:metadata_missing
-      detail: '19'
-      source: anomalies.metadata_missing
     - code: anomalie:unassembled_objects
       detail: '55'
       source: anomalies.unassembled_objects
@@ -80,7 +77,6 @@ manuals:
     structural_blockers:
     - anomalie:blocking_statuses
     - anomalie:chapters_not_in_manual
-    - anomalie:metadata_missing
     - anomalie:unassembled_objects
     - chapitres_manquants
     - statuts_non_approuves
@@ -133,9 +129,6 @@ manuals:
     - code: anomalie:broken_meta_references
       detail: '24'
       source: anomalies.broken_meta_references
-    - code: anomalie:duplicate_assembly_objects
-      detail: '3'
-      source: anomalies.duplicate_assembly_objects
     - code: anomalie:unassembled_objects
       detail: '459'
       source: anomalies.unassembled_objects
@@ -433,22 +426,22 @@ manuals:
         declared_chapter_variants: []
         declared_manual_variants: []
         state: absent
-model_digest: sha256:da1d71c8fac0031afb59003cf38b7785c8bf3652b0a1eef9f00c27fc08e99fa3
+model_digest: sha256:bbf1143726c7cef128d95830324c9fc90ba8f85b023a579bbd8b87013470fd5c
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-07-29T23:14:02Z'
+  generated_at_utc: '2026-07-30T02:00:02Z'
   generator_files:
-    scripts/inventory_assembly.py: sha256:01c814e0e51d1fcb487c679a151380e2234e681a5b826b55659d024b717e3b20
-    scripts/inventory_collection.py: sha256:75992e14a00f01eacc49ea985146d6947b931266ddd209dd9e07c9aaf91d433e
-    scripts/inventory_graph.py: sha256:f3f5178224e54f4fb13455ebff017aa56efd8fa8b8806fde3f1a745b92073658
-    scripts/inventory_pdf.py: sha256:ff2cc19d380685c1c93caada6c5c340b05972c9972213b68ea4f8cf9433ca298
+    scripts/inventory_assembly.py: sha256:0152e2523723678b6333a9a2738cad373150f4d908612bfba7d5b506edf4b339
+    scripts/inventory_collection.py: sha256:ac4ee982f2f0073f2df1af6d09dc065731a96dc3b1896eb7f263c6c5bc6e5890
+    scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
+    scripts/inventory_pdf.py: sha256:f0e03a40741446d4f02276b6a51dfef5107eb3e04fb622108db8bae432726526
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:680a1b3ccab9e991f865c99a72a56c58e5e0c5e9310243c4b865025865ccb4c7
+  generator_sha256: sha256:eac212b5dcdd45de61602c05dfd61bffd5a0ac50d0662c69cea550a34ac21e57
   generator_version: 1
   git_available: true
-  head_sha: 159d49ccb96e122aeed0c98512d51104d84292c9
+  head_sha: a6b0ebd702de45d5f2c1c722bc8a2a3d06af67c7
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -459,4 +452,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:31c8ea9430e0fe5b65a641aa490018a5e45a3a9bfd6a4bbc5ab894e25267874b
+source_digest: sha256:56d5e383759c37ca18be631ba176524c1a3344caae428026ff8f4af0d696c96b

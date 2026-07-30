@@ -117,26 +117,8 @@
 ### metadata_invalid (0)
 - Aucune.
 
-### metadata_missing (19)
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/P04_fiche_cours_dictionnaires.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/P04_fiche_cours_listes.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/P04_fiche_cours_tuples.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/bareme.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/bareme_complement.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/corrige.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/corrige_complement.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/cours.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/cours_complement.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/evaluation.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/evaluation_complement.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/remediation.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/td.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/td_complement.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/tp.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/tp_complement.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/trace.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/trace_complement.candidate.tex, reason=en-tete % META absent
-- path=NSI/chapitres/1NSI-TYPES-CONSTRUITS/_harvest/P04/version_amenagee.candidate.tex, reason=en-tete % META absent
+### metadata_missing (0)
+- Aucune.
 
 ### missing_assemblers (3)
 - source=Mathematiques/manuel-maths/scripts/assemble_manuel.py, cible=TSPE_2026_2027, champ=manuel, raison=aucun assembleur de manuel suivi
