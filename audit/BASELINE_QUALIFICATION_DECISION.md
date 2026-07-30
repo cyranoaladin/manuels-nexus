@@ -1,88 +1,189 @@
-# Décision requise — qualification de la baseline Phase 0
+# Décision humaine — qualification de la baseline Phase 0
 
-## État observé
+<a id="decision-baseline-debt-regression-control-2026-07-30"></a>
 
-Ce dossier ne vaut pas approbation. Il décrit le dernier verrou humain avant le
-gel de la baseline de dette.
+## Décision approuvée
+
+| Champ | Valeur |
+|---|---|
+| Identifiant | `baseline-debt-regression-control-2026-07-30` |
+| Date | 30 juillet 2026 |
+| `baseline_purpose` | `debt_regression_control` |
+| `release_acceptance` | `false` |
+| `provisional` demandé après gel | `false` |
+| Représentation | une disposition individuelle par fingerprint |
+| Approbateur | Alaeddine Ben Rhouma |
+| Rôle | Direction scientifique et éditoriale Nexus Réussite |
+
+Cette approbation autorise uniquement le gel d’un état de dette comme référence
+de non-régression. Elle ne constitue ni une autorisation de publication ou de
+release, ni une validation mathématique, visuelle ou réglementaire.
+
+Référence durable de la décision :
+
+`audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-debt-regression-control-2026-07-30`
+
+## État approuvé
 
 | Élément | Valeur |
 |---|---|
-| HEAD observé | `9e3fe7c34a9968c4145d5922afbb3d9818d21ec6` |
+| HEAD observé | `27082043c45fc405299e335f6eb7475f01288e27` |
 | Branche | `finalisation/collection-v1` |
 | `source_digest` | `sha256:7160cd1f547a33f39d2e951da46bccd08731c7d000a40468a44d9cfc727e5033` |
 | `model_digest` | `sha256:1f20bea5812f4428a9d2c5616df8eb1492e4298f27e8fbb4a9da128fa9e3b846` |
-| Baseline actuelle | provisoire |
 | Fingerprints actifs | 2 461 |
-| Déjà qualifiés par une preuve versionnée | 4 |
-| À qualifier | 2 457 |
+| Déjà qualifiés par preuve versionnée | 4 |
+| Lot à qualifier | 2 457 |
 | `baseline_ready` | 9 contrôles verts sur 10 |
 | Seul contrôle rouge | `disposition_coverage` |
 | `--fail-on-new` | code 5, baseline provisoire |
 | `--release-strict` | code 7, 69 raisons déterministes |
 
-L’identité du lot à qualifier est le SHA-256 du tableau JSON minifié, encodé
-en UTF-8, des 2 457 fingerprints non qualifiés triés :
+L’identité approuvée du lot est le SHA-256 du tableau JSON minifié, encodé en
+UTF-8, des 2 457 fingerprints non qualifiés triés :
 
 `sha256:ee6220cca262a6d5f331e7e86c514960c859f3b452c46ce24ac714ad521f13e8`
 
-Cette empreinte doit être recalculée et rester identique avant toute
-matérialisation de la décision.
+Le nombre, cette empreinte et les digests du modèle doivent être recalculés et
+rester identiques avant toute matérialisation. Toute variation doit produire un
+nouveau rapport explicatif avant le gel.
 
-## Répartition de la dette
+## Propriétaires autorisés
 
-| Catégorie | Fingerprints |
-|---|---:|
-| `blocking_statuses` | 1 796 |
-| `unassembled_objects` | 614 |
-| `broken_meta_references` | 24 |
-| `unavailable_inspiration_sources` | 15 |
-| `chapters_not_in_manual` | 4 |
-| `missing_assemblers` | 3 |
-| `unattributed_pdfs` | 1 |
-| **Total** | **2 457** |
+```yaml
+owners:
+  direction_scientifique_programme:
+    scope:
+      - mathematics
+      - official_programme
+      - demonstrations
+      - qcm
+      - corrections
+      - numerical_results
+  direction_editoriale_pedagogique:
+    scope:
+      - pedagogy
+      - nexus_mastery_loop
+      - student_teacher_variants
+      - remediation
+      - editorial_content
+      - terminology
+  ingenierie_build_qualite:
+    scope:
+      - metadata
+      - inventory
+      - assemblies
+      - latex
+      - python
+      - ci
+      - pdf
+      - visual_baselines
+```
 
-Chaque entrée est actuellement une dette ouverte bloquante. Sa qualification
-ne la corrige pas et ne la rend pas publiable : elle autorise uniquement la
-comparaison future entre dette nouvelle, inchangée, modifiée, disparue ou
-réapparue.
+## Contrat de non-régression
 
-## Décisions à fournir
+La baseline définitive doit :
 
-1. Choisir la représentation :
-   - **fichier explicite recommandé** : une disposition `open_debt` versionnée
-     par fingerprint ;
-   - politique de lot : évolution préalable du schéma et des tests, sans
-     qualification implicite par défaut.
-2. Valider les libellés de propriétaires pour les dettes Mathématiques, NSI et
-   outillage éditorial transversal.
-3. Fournir l’identité réelle de l’approbateur et une référence de décision
-   durable pour la qualification de ce lot exact.
-4. Fournir séparément la raison et l’approbateur du gel définitif passé à
+- enregistrer chaque fingerprint individuel ;
+- interdire toute anomalie nouvelle ou augmentation d’occurrences ;
+- interdire la réapparition d’une anomalie `fixed` ;
+- interdire l’aggravation de sévérité ;
+- détecter une substitution à total constant ;
+- signaler une disparition comme amélioration sans faire échouer le gate ;
+- conserver les fingerprints résolus dans l’historique.
+
+Une baseline connue ne rend jamais une dette acceptable pour une release.
+`--fail-on-new` contrôle les régressions ; `--release-strict` demeure
+l’autorité de publication.
+
+## Dispositions autorisées
+
+Les seules valeurs autorisées sont :
+
+- `open_debt` ;
+- `generated_dependency` ;
+- `harvest_candidate` ;
+- `intentional_reuse` ;
+- `false_positive` ;
+- `accepted_exception` ;
+- `fixed`.
+
+Contraintes :
+
+- `false_positive` exige une reproduction et une preuve ;
+- `accepted_exception` est interdite dans la politique initiale et nécessite
+  une nouvelle décision humaine explicite ;
+- `fixed` exige un test de régression ;
+- `intentional_reuse` exige une preuve éditoriale et l’identification de la
+  variante ;
+- une anomalie inconnue reste bloquante et non qualifiée ;
+- aucune disposition ne supprime l’anomalie brute.
+
+## Politique de qualification approuvée
+
+La politique est versionnée dans
+`audit/BASELINE_QUALIFICATION_POLICY.yaml`. Elle matérialise une entrée
+individuelle dans `audit/ANOMALY_DISPOSITIONS.yaml` et ne modifie jamais les
+anomalies brutes.
+
+Règles initiales :
+
+1. Les statuts `generated`, `draft`, `needs_review`, `needs_math_review`,
+   `needs_program_review`, `needs_editorial_review` et
+   `needs_visual_review` restent `open_debt`.
+2. Le propriétaire d’un contenu mathématique, QCM, résultat numérique ou
+   corrigé est `direction_scientifique_programme`.
+3. Le propriétaire d’un objet pédagogique, d’une remédiation ou d’une variante
+   élève/professeur est `direction_editoriale_pedagogique`.
+4. Le propriétaire d’un contrat, d’une métadonnée, d’un assemblage, d’un
+   artefact, d’un PDF ou d’une référence technique est
+   `ingenierie_build_qualite`.
+5. Un chapitre ou livrable manquant est `open_debt`, propriétaire
+   `direction_editoriale_pedagogique`; si seul l’assembleur manque, le
+   propriétaire est `ingenierie_build_qualite`.
+6. Une correction absente est `open_debt`, propriétaire
+   `direction_scientifique_programme`.
+7. Une référence META ou LaTeX réellement cassée est `open_debt`,
+   propriétaire `ingenierie_build_qualite`.
+8. Un `_harvest/**/*.candidate.tex` est `harvest_candidate`, propriétaire
+   `direction_editoriale_pedagogique`, `release_blocking: false`, mais demeure
+   contrôlé séparément et non publiable.
+9. Une dépendance générée n’est `generated_dependency` que si son producteur
+   est identifié et testé. Sinon elle reste `open_debt`.
+10. Une répétition n’est `intentional_reuse` qu’avec preuve éditoriale,
+    absence de doublon involontaire dans le PDF et variante identifiée. Sinon
+    elle reste `open_debt`.
+
+Tout fingerprint ne correspondant à aucune règle doit être écrit dans
+`audit/UNQUALIFIED_ANOMALIES.json` et
+`audit/UNQUALIFIED_ANOMALIES.md`. Tant que ce registre n’est pas vide,
+`baseline_ready` et le gel doivent échouer.
+
+## Ordre d’exécution obligatoire
+
+1. Recalculer le nombre et l’empreinte du jeu encore non qualifié, puis les
+   comparer à la présente décision avant toute écriture.
+2. Matérialiser exactement ce jeu par règles déterministes.
+3. Prouver que les fingerprints dispositionnés sont exactement ceux du jeu
+   approuvé, sans doublon ni fingerprint inconnu.
+4. Vérifier les propriétaires, dispositions, preuves conditionnelles et
+   anomalies non qualifiées.
+5. Tester et committer la politique et les dispositions sans appeler
    `--update-baseline`.
+6. Depuis un worktree propre, exécuter les dix préconditions et produire
+   `audit/BASELINE_FREEZE_REPORT.md`.
+7. Appeler explicitement `--update-baseline` avec la raison et l’approbateur
+   ci-dessous.
+8. Démontrer `--validate-model = 0`, `--fail-on-new = 0` et
+   `--release-strict = 7`.
 
-## Formulaire de décision
+Raison du gel :
 
-| Champ | Décision humaine attendue |
-|---|---|
-| Représentation | fichier explicite / politique de lot |
-| Propriétaire Mathématiques | à fournir |
-| Propriétaire NSI | à fournir |
-| Propriétaire outillage transversal | à fournir |
-| `approved_by` de la qualification | à fournir |
-| `decision_ref` de la qualification | à fournir |
-| Raison du gel définitif | à fournir |
-| `approved_by` du gel définitif | à fournir |
+> État initial qualifié de la dette existante après stabilisation de la Phase
+> 0, utilisé exclusivement pour détecter les régressions et les nouvelles
+> anomalies.
 
-Après réception, l’exécution doit rester atomique :
+Approbateur du gel : `Alaeddine Ben Rhouma`.
 
-1. recalculer le nombre et l’empreinte du jeu encore non qualifié, puis les
-   comparer à la décision avant toute écriture ;
-2. matérialiser exactement ce jeu ;
-3. prouver que les fingerprints dispositionnés sont exactement ceux du jeu
-   approuvé ;
-4. tester et committer les dispositions, puis revenir à un worktree propre ;
-5. exécuter les dix préconditions et seulement alors appeler
-   `--update-baseline` ;
-6. démontrer `--fail-on-new = 0` et `--release-strict = 7`.
-
-La CI ne met jamais à jour la baseline.
+La CI ne met jamais à jour la baseline. La baseline visuelle reste un processus
+distinct et aucune empreinte visuelle n’est approuvée par la présente décision.
