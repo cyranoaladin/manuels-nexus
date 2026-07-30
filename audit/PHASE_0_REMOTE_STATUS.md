@@ -1,61 +1,148 @@
 # État distant de la Phase 0
 
-Observation du 30 juillet 2026.
+Observation arrêtée au `2026-07-30T09:54:05Z`.
+
+Statut global : **branche sauvegardée et draft PR conforme, CI distante
+inexécutable — NO-GO CI, NO-GO MERGE, NO-GO RELEASE**.
 
 ## Sauvegarde distante
+
+Les commandes imposées ont été exécutées après `git fetch origin --prune`.
 
 | Élément | Valeur observée |
 |---|---|
 | Branche locale | `finalisation/collection-v1` |
-| HEAD lors de la tentative | `298d1194eb248361a3eaf12b342ce170383dd384` |
+| HEAD local | `d88e0bf752082abd96c738f30285a059b1e249fb` |
 | Branche distante | `origin/finalisation/collection-v1` |
-| SHA distant | `20679de69a25d694196a2153f6f4d16fe4c4aa91` |
-| Avance locale lors de la tentative | 37 commits |
-| Commande | `git push -u origin finalisation/collection-v1` |
-| Résultat | **NON EXÉCUTÉ — push non réalisé** |
+| HEAD distant | `d88e0bf752082abd96c738f30285a059b1e249fb` |
+| Décompte `origin/finalisation/collection-v1...HEAD` | `0 0` |
+| Worktree avant production documentaire | propre |
+| Conclusion | sauvegarde distante attestée pour `d88e0bf752082abd96c738f30285a059b1e249fb` |
 
-Erreur exacte renvoyée avant création du processus :
-
-```text
-Rejected("approval required by policy, but AskForApproval is set to Never")
-```
-
-Aucun `--force`, tag, changement de `main` ou release n'a été exécuté.
+Aucun push, `--force`, tag, changement de `main`, merge ou release n'a été
+exécuté pendant cette reprise.
 
 ## Draft PR
 
-GitHub CLI est authentifié avec le compte actif `cyranoaladin`, mais aucune
-draft PR n'a été ouverte : la branche distante ne contient pas les commits
-locaux et une PR sur son ancien SHA serait trompeuse.
+| Champ | Valeur observée |
+|---|---|
+| Dépôt | `cyranoaladin/manuels-nexus` |
+| Numéro | `#1` |
+| URL | <https://github.com/cyranoaladin/manuels-nexus/pull/1> |
+| Titre | `[Draft][Audit] Stabilisation Phase 0 de la collection Nexus` |
+| État | `OPEN` |
+| Draft | `true` |
+| Base | `main` |
+| Tête | `finalisation/collection-v1` |
+| SHA de tête | `d88e0bf752082abd96c738f30285a059b1e249fb` |
 
-Après un push réussi, exécuter :
+Le corps contient littéralement :
 
-```bash
-gh pr create \
-  --repo cyranoaladin/manuels-nexus \
-  --draft \
-  --base main \
-  --head finalisation/collection-v1 \
-  --title "[Draft][Audit] Stabilisation Phase 0 de la collection Nexus" \
-  --body "$(cat <<'EOF'
-NO-GO merge.
-NO-GO release.
-
-- `--validate-model` : vert.
-- `--fail-on-new` : vert après qualification et gel de la baseline.
-- Cinq tests visuels : rouges, décision humaine requise sur huit pages.
-- `--release-strict` : rouge, code 7, 69 raisons déterministes.
-- Baseline : contrôle de non-régression uniquement ; `release_acceptance: false`.
-- Aucun P0 mathématique traité.
-
-Cette PR doit rester en draft et ne doit pas être fusionnée tant que les
-divergences visuelles et la CI Phase 0 ne sont pas résolues.
-EOF
-)"
+```text
+DRAFT — NO-GO MERGE — NO-GO RELEASE
 ```
 
-## CI distante
+Il rappelle aussi que les cinq tests visuels, les cinq tests RAG, les dettes
+disciplinaires et `--release-strict` bloquent la publication. La PR satisfait
+donc le contrat de gouvernance demandé et doit rester en draft.
 
-`gh run list --branch finalisation/collection-v1` ne retourne aucune exécution.
-La CI distante du SHA local n'existe donc pas encore et ne peut pas être
-qualifiée. Le workflow ne pourra démarrer qu'après sauvegarde de la branche.
+## CI distante associée au SHA
+
+### Workflows enregistrés
+
+| Workflow | État GitHub | Déclenchement pour ce SHA | Motif |
+|---|---|---|---|
+| `.github/workflows/ci-audit-collection.yml` | actif | **oui**, événement `push` | la branche figure explicitement dans `push.branches` |
+| `CI manuel mathématiques` | actif | non | aucun des 99 fichiers de la PR ne correspond à ses filtres `paths` |
+| `CI manuels NSI` | actif | non | aucun des 99 fichiers de la PR ne correspond à ses filtres `paths` |
+
+Le déclencheur `pull_request` du nouveau workflow d'audit n'a produit aucune
+seconde exécution. Le fichier n'existe pas encore sur la branche de base
+`main`; seule l'exécution `push` de la branche de tête est observée.
+
+### Exécution déclenchée
+
+| Champ | Valeur |
+|---|---|
+| Run | `30530258247` |
+| URL | <https://github.com/cyranoaladin/manuels-nexus/actions/runs/30530258247> |
+| Événement | `push` |
+| Création | `2026-07-30T09:19:57Z` |
+| Statut | `completed` |
+| Conclusion | **failure** |
+| Jobs créés | **0** |
+| Artefacts | **0** |
+| Check-runs GitHub Actions | **0** |
+| Check-suite GitHub Actions | `failure` |
+
+GitHub affiche une annotation de configuration unique :
+
+```text
+Invalid workflow file: .github/workflows/ci-audit-collection.yml#L1
+(Line: 18, Col: 24): Unrecognized named-value: 'runner'.
+Located at position 1 within expression: runner.temp,
+(Line: 19, Col: 22): Unrecognized named-value: 'runner'.
+Located at position 1 within expression: runner.temp
+```
+
+Cause racine : `runner.temp` est évalué dans
+`jobs.audit-phase-0.env`, avant qu'un runner et le contexte `runner` soient
+disponibles. Les variables `CI_ARTIFACT_DIR` et `COVERAGE_FILE` rendent ainsi le
+workflow invalide avant création du job. Les tests locaux de contrat ne
+détectent pas cette erreur : ils exigent actuellement que
+`CI_ARTIFACT_DIR.startswith("${{ runner.temp }}/")`.
+
+### Checks et suites externes
+
+| Élément | État observé |
+|---|---|
+| `GitGuardian Security Checks` | **vert**, `success`, 3 s |
+| Check-suite `GitHub Actions` | **rouge**, `failure`, aucun check-run |
+| Vercel, Railway App, Cursor, SonarQubeCloud, Greptile Apps, cubic-dev-ai, Claude | suites créées mais sans check-run ni conclusion exploitable au moment du constat |
+| Statuts de commit classiques | aucun ; état agrégé API `pending` |
+
+`gh pr checks 1` n'affiche que GitGuardian. L'indication synthétique
+« Checks passing » de `gh pr status` est donc incomplète : elle ne reflète pas
+la check-suite Actions rouge sans check-run.
+
+## Différence entre CI locale et distante
+
+La commande locale équivalente à l'étape Pytest/couverture du workflow a été
+relancée au HEAD :
+
+```text
+2 540 tests collectés
+2 530 passed
+5 failed
+5 skipped
+couverture lignes + branches : 76,83 %
+durée : 712,22 s
+```
+
+Les cinq échecs sont exactement les contrôles visuels connus de
+`test_maquette_v5.py`; les cinq skips sont exactement les cas RAG de
+`test_retrieval.py`.
+
+Le commit documentaire courant a aussi été simulé dans un clone temporaire
+propre avant création du vrai commit :
+
+```text
+--check --validate-model : code 0
+--check --fail-on-new    : code 0
+--check --release-strict : code 7, 69 raisons
+```
+
+| Preuve | Locale | Distante |
+|---|---|---|
+| Parsing du workflow par GitHub | non reproduit par les tests de dépôt | **rouge** aux lignes 18–19 |
+| Job `audit-phase-0` | logique exercée localement par les tests | absent |
+| Pytest | 2 530 verts, 5 rouges, 5 ignorés | non exécuté |
+| Couverture | 76,83 %, plancher atteint | non calculée |
+| Gates modèle/baseline/release | codes frais `0 / 0 / 7` dans un clone propre simulant le commit | non exécutés |
+| Artefacts d'audit | disponibles localement dans le dépôt | aucun artefact CI |
+
+La CI distante ne prouve donc ni les 2 530 tests verts, ni les cinq échecs
+attendus, ni la couverture, ni les gates. La correction du contexte
+`runner.temp` et un test de régression de syntaxe/contexte GitHub Actions
+constituent un prochain lot `[CI]` séparé ; aucune correction du workflow n'est
+incluse dans le présent lot documentaire.

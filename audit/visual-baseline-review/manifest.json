@@ -1,7 +1,24 @@
 {
   "artifact_type": "visual_baseline_review",
   "baseline_updated": false,
+  "contact_sheets": {
+    "full": {
+      "dimensions": "3879x15024",
+      "path": "contact-sheet-full.png",
+      "sha256": "37bda20b9092a51fac59b3f1483ceb959d67c59f387349c40a94f688eac74203"
+    },
+    "legacy": {
+      "dimensions": "966x3600",
+      "path": "contact-sheet.png"
+    },
+    "zooms": {
+      "dimensions": "2076x7392",
+      "path": "contact-sheet-zooms.png",
+      "sha256": "521bf813547cab818acf245e77ae33f50dad15fd2d0c67aa8b83cc67830c8d6f"
+    }
+  },
   "current_pdf": "Mathematiques/manuel-maths/build/maquette-v5/maquette.pdf",
+  "current_pdf_sha256_at_review": "d40d154386fe406b641a8ed09aab59c47b13dcf50429c1ed038e7675e1a8eb87",
   "current_png_commit": "63c497edc5021ae80d69739fdf18adf512142c22",
   "generated_at": "2026-07-30",
   "old_oracle_commit": "60d04601e8cbbcdc4e6c10f12468c2fc7e84ab59",
@@ -11,6 +28,7 @@
       "bbox": [1169, 157, 1240, 257],
       "changed_pixels_percent": 0.078605,
       "diff": "pages/page-01/diff.png",
+      "diff_sha256": "a1bf435f0ba345e726efe01c85fcc18b7093480232590c27667ff2a413b950ea",
       "hypothesis": "onglet latéral adaptatif introduit par f071d37",
       "new": "pages/page-01/new.png",
       "new_sha256": "a3a5ea8b94c92028fad069d3ac11708bbfb51c883efbc2b6a011e69ff0592fd2",
@@ -24,6 +42,7 @@
       "bbox": [1169, 161, 1240, 249],
       "changed_pixels_percent": 0.049524,
       "diff": "pages/page-07/diff.png",
+      "diff_sha256": "8ae1311200561149e259248970bd83dad44172d43483c36f8635505cd63ecda2",
       "hypothesis": "onglet latéral adaptatif introduit par f071d37",
       "new": "pages/page-07/new.png",
       "new_sha256": "0f091b2b8488f89de66884cc22b238450264791875568f8116e4e0bc65cf6280",
@@ -37,6 +56,7 @@
       "bbox": [0, 161, 71, 249],
       "changed_pixels_percent": 0.052418,
       "diff": "pages/page-08/diff.png",
+      "diff_sha256": "4aa8bfc9d74ec809ccc1a1d88c1313611516e05304ce263060dbffcdd5d02eb0",
       "hypothesis": "onglet latéral adaptatif introduit par f071d37",
       "new": "pages/page-08/new.png",
       "new_sha256": "13ff6daab5f2d5fbd999af3e3f433f7bc92f2fc89f2adfd39f72bdf368e2b70f",
@@ -50,6 +70,7 @@
       "bbox": [1169, 160, 1240, 251],
       "changed_pixels_percent": 0.056461,
       "diff": "pages/page-09/diff.png",
+      "diff_sha256": "5e6cc04c60a6a05e86a9e36a99ef9cf856d99780bf1d0ffd3ec43edf300bfe8e",
       "hypothesis": "onglet latéral adaptatif introduit par f071d37",
       "new": "pages/page-09/new.png",
       "new_sha256": "ccda0af7007a15ecf3b895b5cb60a2f658bcee78e7a725acad4d6590f54135c3",
@@ -63,6 +84,7 @@
       "bbox": [0, 161, 71, 251],
       "changed_pixels_percent": 0.058253,
       "diff": "pages/page-10/diff.png",
+      "diff_sha256": "40347a2d84bbd0bf5dd2332e1bada1a3a86bff4bb2d63e983b9c579f308dc2bd",
       "hypothesis": "onglet latéral adaptatif introduit par f071d37",
       "new": "pages/page-10/new.png",
       "new_sha256": "4466330daf59618c2ab25947e244e08da3fcca1f446516af378f8884778e52d1",
@@ -76,6 +98,7 @@
       "bbox": [1169, 148, 1240, 293],
       "changed_pixels_percent": 0.199107,
       "diff": "pages/page-11/diff.png",
+      "diff_sha256": "4ff3271a8d8f7b6a7c88f27a008274fff38fca78d129f9f94a226fbda6c3fa76",
       "hypothesis": "onglet latéral adaptatif introduit par f071d37",
       "new": "pages/page-11/new.png",
       "new_sha256": "7f114a2b9d958da28ec7eb8d3a7b568ba7bd755cc872c9721ba388fc93e0f130",
@@ -89,6 +112,7 @@
       "bbox": [0, 148, 71, 293],
       "changed_pixels_percent": 0.200624,
       "diff": "pages/page-12/diff.png",
+      "diff_sha256": "40000e2aadd49d9d79bc0b633fbe7e670d3e0d9afbc94e058a99920612e17173",
       "hypothesis": "onglet latéral adaptatif introduit par f071d37",
       "new": "pages/page-12/new.png",
       "new_sha256": "3517dc008fd517f5c9c3858c2e5ba7bd3ce39ac677d4522d1e524d3e20d9f44f",
@@ -102,6 +126,7 @@
       "bbox": [1169, 163, 1240, 245],
       "changed_pixels_percent": 0.033996,
       "diff": "pages/page-15/diff.png",
+      "diff_sha256": "c12a8e2b43733f96f84b72e7409acaf5a2540ecb7afec226fecc7b7c41421e84",
       "hypothesis": "onglet latéral adaptatif introduit par f071d37",
       "new": "pages/page-15/new.png",
       "new_sha256": "11de1dad17368d27af7bf1ead77d3afad27188785806821bd01bdc5a1b1a9141",
@@ -111,6 +136,78 @@
       "proposed_verdict": "expected_change"
     }
   ],
+  "font_environment": {
+    "all_pdf_fonts_embedded": true,
+    "packages": {
+      "fonts-texgyre": "20180621-6",
+      "fonts-texgyre-math": "20180621-6",
+      "texlive-base": "2023.20240207-1",
+      "texlive-binaries": "2023.20230311.66589-9build3"
+    },
+    "pdf_unicode_exception": "MSAM7 est incorporée mais pdffonts indique uni=no ; dette préexistante sans changement dans les bboxes de diff.",
+    "source_fonts": [
+      {
+        "font": "TeXGyreHeros-Bold",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyreheros-bold.otf",
+        "version": "2.004",
+        "sha256": "b170162835f4efc288886dd4231406dc47e19b614cf4416836635599d44a7d60"
+      },
+      {
+        "font": "TeXGyreHeros-Regular",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyreheros-regular.otf",
+        "version": "2.004",
+        "sha256": "6ae1a09d5a940367b7aaaa91ee8bd8a2c333bfe193e7096e23f931357d62081f"
+      },
+      {
+        "font": "TeXGyreHeros-BoldItalic",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyreheros-bolditalic.otf",
+        "version": "2.004",
+        "sha256": "166fc6d068d9c9974281555cb3d730365537a9b676ab269bb5163f5a75496505"
+      },
+      {
+        "font": "TeXGyreHeros-Italic",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyreheros-italic.otf",
+        "version": "2.004",
+        "sha256": "6473df7fa107b3fb4be38973710afe22b0640c2ac076d5337cf126bed9aa108c"
+      },
+      {
+        "font": "TeXGyrePagella-Bold",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyrepagella-bold.otf",
+        "version": "2.501",
+        "sha256": "dd4f9b69f0b24f1fb9be8634abf1fce2009e5c68a30842a3e9f5d6e535900abd"
+      },
+      {
+        "font": "TeXGyrePagella-Regular",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyrepagella-regular.otf",
+        "version": "2.501",
+        "sha256": "44e64260716d8f2bbe412baa1ee99b7c995190ac4573177c24def0b9200438c7"
+      },
+      {
+        "font": "TeXGyrePagella-Italic",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyrepagella-italic.otf",
+        "version": "2.501",
+        "sha256": "069bb27f48eb98a741715227fc6e4b7baf3639c29fc13925f70d1ed8884ac29a"
+      },
+      {
+        "font": "TeXGyrePagella-BoldItalic",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre/texgyrepagella-bolditalic.otf",
+        "version": "2.501",
+        "sha256": "556fd64655a92bd9f5485ae2c03f7b9cdaf745a27a91d7edb3c3abde997206d2"
+      },
+      {
+        "font": "TeXGyrePagellaMath-Regular",
+        "source_file": "/usr/share/texmf/fonts/opentype/public/tex-gyre-math/texgyrepagella-math.otf",
+        "version": "1.632",
+        "sha256": "1f9e010f60e947d0e925910009b2ea85ad54edc7cefb106f8cdefb9ffd1d5f2f"
+      },
+      {
+        "font": "MSAM7",
+        "source_file": "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb",
+        "version": "003.002",
+        "sha256": "c96c9138119d9879757ad8c1ecb2cc25b0cac303ba3ee13d25d117fdbc71d2f3"
+      }
+    ]
+  },
   "render": {
     "dimensions": "1241x1754",
     "imagemagick": "6.9.12-98 Q16",
@@ -118,6 +215,33 @@
     "pillow": "12.3.0",
     "poppler": "24.02.0",
     "resolution_dpi": 150
+  },
+  "text_layer": [
+    {"page": 1, "characters": 2215, "words_bbox": 362},
+    {"page": 7, "characters": 1901, "words_bbox": 243},
+    {"page": 8, "characters": 949, "words_bbox": 143},
+    {"page": 9, "characters": 8310, "words_bbox": 868},
+    {"page": 10, "characters": 7769, "words_bbox": 792},
+    {"page": 11, "characters": 3849, "words_bbox": 466},
+    {"page": 12, "characters": 3196, "words_bbox": 329},
+    {"page": 15, "characters": 6214, "words_bbox": 479}
+  ],
+  "verification": {
+    "all_diffs_confined_to_declared_bbox": true,
+    "current_pdf_reraster_ae_by_page": {
+      "1": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "11": 0,
+      "12": 0,
+      "15": 0
+    },
+    "environment_only_difference": false,
+    "new_images_match_tracked_head_png": true,
+    "old_images_match_old_oracle_commit": true,
+    "source_change_matches_bbox": true
   },
   "source_change_commit": "f071d37ae122fcb0661dc5f0ef429a6c18f2ffec",
   "tests": [

@@ -1,0 +1,205 @@
+schema_version: 1
+manual: 1SPE
+edition: 2026-2027
+chapter: 1SPE-SUITES
+recorded_at: "2026-07-30"
+implementation_authorized: false
+release_status: NO-GO
+authority:
+  contract: CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md
+  contract_items:
+    - MATH-001
+    - MATH-002
+    - MATH-003
+    - MATH-007
+owners:
+  primary: direction_scientifique_programme
+  propagation:
+    - direction_editoriale_pedagogique
+    - ingenierie_build_qualite
+independent_math_review_required: true
+defects:
+  - id: 1SPE-SUITES-MATH-001-DEFINITION
+    parent_contract_id: MATH-001
+    fingerprint: suites-geometriques-definition-recurrence-sans-restriction-artificielle
+    severity: P0
+    status: reproduced
+    title: Définition des suites géométriques artificiellement restreinte
+    observed:
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/12_C3_suites_geometriques.tex
+        lines: "10-16"
+        fact: "La définition impose q != 0 puis suppose u_0 != 0."
+    expected: "Définir par u_{n+1}=q u_n pour un réel q, sans imposer q != 0 ni u_0 != 0."
+    propagation_scope:
+      - cours
+      - méthodes
+      - QCM
+      - exercices
+      - remédiations
+      - évaluations
+      - corrigés
+    regression_test_plan:
+      - "Accepter q=0 dans la définition."
+      - "Accepter u_0=0 et la suite nulle."
+      - "Refuser qu'un oracle de contenu réintroduise q != 0 dans la définition."
+    implementation: not_started
+
+  - id: 1SPE-SUITES-MATH-001-Q-ZERO
+    parent_contract_id: MATH-001
+    fingerprint: suites-geometriques-cas-q-zero
+    severity: P0
+    status: reproduced
+    title: Cas q = 0 exclu
+    observed:
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/12_C3_suites_geometriques.tex
+        lines: "10-16, 34"
+        fact: "La raison est déclarée non nulle dans la définition et la propriété."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json
+        lines: "234"
+        fact: "Le diagnostic affirme que la raison est n'importe quel réel non nul."
+    expected: "Traiter q=0 : après le premier terme, tous les termes suivants sont nuls."
+    regression_test_plan:
+      - "Vérifier u_0=a, q=0 => u_1=u_2=0."
+      - "Ajouter un cas QCM où q=0 est une raison valide."
+    implementation: not_started
+
+  - id: 1SPE-SUITES-MATH-001-ZERO-SEQUENCE
+    parent_contract_id: MATH-001
+    fingerprint: suites-geometriques-suite-nulle-et-termes-nuls
+    severity: P0
+    status: reproduced
+    title: Suite nulle et termes nuls déclarés impossibles
+    observed:
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/12_C3_suites_geometriques.tex
+        lines: "82-86"
+        fact: "Le cours affirme qu'une suite géométrique ne peut pas avoir de terme nul."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex
+        lines: "152, 467"
+        fact: "Le distracteur et son diagnostic déclarent le terme nul impossible."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json
+        lines: "219-234"
+        fact: "L'oracle JSON classe comme fausse l'existence d'un terme nul."
+    expected: "Reconnaître la suite nulle et les suites de raison 0 ; réserver la non-nullité à l'usage d'un quotient."
+    regression_test_plan:
+      - "Tester la suite identiquement nulle."
+      - "Tester une suite qui devient nulle avec q=0."
+      - "Vérifier la cohérence QCM/distracteur/diagnostic/remédiation."
+    implementation: not_started
+
+  - id: 1SPE-SUITES-MATH-001-QUOTIENT
+    parent_contract_id: MATH-001
+    fingerprint: suites-geometriques-quotient-caracterisation-conditionnelle
+    severity: P0
+    status: reproduced
+    title: Caractérisation par quotient présentée comme définition générale
+    observed:
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-003.tex
+        lines: "8-16"
+        fact: "La méthode impose de former u_{n+1}/u_n pour montrer le caractère géométrique."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C3.tex
+        lines: "41-69"
+        fact: "Le quotient constant est appelé définition, avec non-nullité de tous les termes."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A-corrige.tex
+        lines: "164-170"
+        fact: "Le corrigé appelle définition le quotient constant et non nul."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex
+        lines: "164-170"
+        fact: "Le corrigé duplique la même caractérisation."
+    expected: "Distinguer la définition u_{n+1}=q u_n de la caractérisation par quotient, utilisable seulement si u_n != 0."
+    regression_test_plan:
+      - "Tester que la récurrence multiplicative suffit, même si un quotient est impossible."
+      - "Tester que la méthode quotient annonce explicitement sa condition de domaine."
+    implementation: not_started
+
+  - id: 1SPE-SUITES-MATH-002-MINUS-ONE
+    parent_contract_id: MATH-002
+    fingerprint: suites-geometriques-moins-un-puissance-n
+    severity: P0
+    status: reproduced
+    title: Contradiction sur la suite (-1)^n
+    observed:
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/13_C4_sommes.tex
+        lines: "62"
+        fact: "La phrase dit à la fois que la suite n'est pas géométrique et que le rapport constant -1 permet la formule géométrique."
+    expected: "Affirmer que ((-1)^n) est géométrique de raison -1 et de premier terme 1."
+    regression_test_plan:
+      - "Vérifier symboliquement u_{n+1}=-u_n."
+      - "Vérifier la somme finie pour q=-1."
+      - "Interdire la phrase contradictoire dans le rendu."
+    implementation: not_started
+
+  - id: 1SPE-SUITES-MATH-007-NOTATION-U-N
+    parent_contract_id: MATH-007
+    fingerprint: suites-notation-fonctionnelle-u-parentheses-n
+    severity: P0
+    status: reproduced
+    title: Notation u(n) déclarée non mathématique et interdite
+    observed:
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/cours/10_C1_generalites_suites.tex
+        lines: "74-77"
+        fact: "Le cours affirme que u(n) n'est pas une notation mathématique et qu'on ne l'écrit jamais."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json
+        lines: "65-78"
+        fact: "Le diagnostic réduit u(n) à une notation algorithmique/fonctionnelle non standard."
+    expected: "Présenter u_n comme convention scolaire privilégiée sans déclarer u(n) non mathématique ou interdite."
+    regression_test_plan:
+      - "Vérifier que le cours reconnaît la notation fonctionnelle u(n)."
+      - "Aligner le QCM et son diagnostic sur cette nuance."
+    implementation: not_started
+
+  - id: 1SPE-SUITES-MATH-003-CAPITAL-4-PERCENT
+    parent_contract_id: MATH-003
+    fingerprint: suites-capital-1500-taux-4-pourcent
+    severity: P0
+    status: open_reproduction
+    title: Audit exhaustif des valeurs du capital à 4 %
+    observed:
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-007.tex
+        lines: "54-91"
+        fact: "Le contrôle ponctuel retrouve des valeurs cohérentes : u_10=2220,37 ; u_17=2923,55 ; u_18=3040,49 et seuil minimal n=18."
+    expected: "Toutes les occurrences de 1500*1,04^n, sorties Python, arrondis et rangs de seuil doivent être dérivées d'une source exécutable unique et comparées."
+    propagation_scope:
+      - méthodes
+      - exercices
+      - évaluations
+      - remédiations
+      - corrigés
+      - sorties Python
+    regression_test_plan:
+      - "Calculer avec Decimal ou rationnel exact 1500*(104/100)^n."
+      - "Comparer u_10, u_17, u_18 et le rang minimal de dépassement de 3000."
+      - "Rechercher et tester toutes les sorties publiées à 4 %."
+    note: "Le défaut contractuel reste ouvert faute d'inventaire exhaustif ; aucune valeur erronée n'a été confirmée dans ME-007 lors de cette reprise."
+    implementation: not_started
+
+  - id: 1SPE-SUITES-MATH-001-PROPAGATION
+    parent_contract_id: MATH-001
+    fingerprint: suites-geometriques-propagation-qcm-methodes-remediations-corriges
+    severity: P0
+    status: reproduced
+    title: Propagation transversale des prémisses erronées
+    observed:
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.tex
+        lines: "145-158, 461-470"
+        fact: "Question, bonne réponse et diagnostics reposent sur l'impossibilité d'un terme nul."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/qcm/1SPE-SUITES-QCM.json
+        lines: "211-236"
+        fact: "L'oracle structuré propage la même prémisse."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/methodes/1SPE-SUITES-ME-003.tex
+        lines: "8-57"
+        fact: "La méthode et ses pièges imposent le quotient comme voie générale."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/remediation/1SPE-SUITES-RE-C3.tex
+        lines: "41-69"
+        fact: "La remédiation appelle le quotient la définition."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-A-corrige.tex
+        lines: "164-170"
+        fact: "Le corrigé A duplique la caractérisation fautive."
+      - path: Mathematiques/manuel-maths/chapitres/1SPE-SUITES/evaluations/1SPE-SUITES-EV-B-corrige.tex
+        lines: "164-170"
+        fact: "Le corrigé B duplique la caractérisation fautive."
+    expected: "Corriger atomiquement le réseau cours-QCM-distracteurs-diagnostics-méthodes-exercices-remédiations-corrigés sans contradiction résiduelle."
+    regression_test_plan:
+      - "Inventorier les assertions sémantiques sur q=0, termes nuls, quotient, (-1)^n et u(n)."
+      - "Tester la cohérence des réponses QCM, diagnostics et renvois."
+      - "Ajouter une mutation qui réintroduit 'terme nul impossible' et doit échouer."
+    implementation: not_started

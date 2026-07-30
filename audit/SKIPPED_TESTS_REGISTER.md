@@ -19,13 +19,19 @@ que l'oracle de recherche et l'index ne sont pas disponibles et validés.
 Fichier commun :
 `Mathematiques/manuel-maths/tests/test_retrieval.py`.
 
-| Test paramétré | Type attendu | Raison | Propriétaire | Réactivation | Phase 0 | Release |
+La raison exacte portée par le marqueur Pytest est identique pour les cinq cas :
+
+```text
+MODE FICHIERS : index RAG non disponible
+```
+
+| Nom | Raison exacte | Dépendance manquante | Condition de réactivation | Propriétaire | Impact release | Solution prévue |
 |---|---|---|---|---|---|---|
-| `montrer qu'une suite est géométrique` | `exercice` | index RAG absent | `ingenierie_build_qualite` | index reproductible disponible et oracle scientifique relu | non bloquant | bloquant |
-| `somme des premiers termes suite géométrique démonstration` | `cours` | index RAG absent | `ingenierie_build_qualite` | index reproductible disponible et oracle scientifique relu | non bloquant | bloquant |
-| `erreur fréquente suites arithmétiques rapport jury` | `erreur_type` | index RAG absent | `ingenierie_build_qualite` | index reproductible disponible et oracle scientifique relu | non bloquant | bloquant |
-| `algorithme seuil boucle while suite` | `exercice` | index RAG absent | `ingenierie_build_qualite` | index reproductible disponible et oracle scientifique relu | non bloquant | bloquant |
-| `activité introduction suites intérêts composés` | `activite` | index RAG absent | `ingenierie_build_qualite` | index reproductible disponible et oracle scientifique relu | non bloquant | bloquant |
+| `test_topk_contains_type[montrer qu'une suite est géométrique-exercice]` | `MODE FICHIERS : index RAG non disponible` | PostgreSQL 16+, extension `pgvector`, corpus Suites indexé avec BGE-M3 et dépendances Python RAG figées | index reproductible disponible ; résultat top 10 de type `exercice` ; oracle relu par la direction scientifique | `ingenierie_build_qualite` | **bloquant** : aucune preuve de rappel d'un exercice adapté | job CI RAG dédié, service PostgreSQL/pgvector, construction puis empreinte de l'index, exécution sans skip |
+| `test_topk_contains_type[somme des premiers termes suite géométrique démonstration-cours]` | `MODE FICHIERS : index RAG non disponible` | PostgreSQL 16+, extension `pgvector`, corpus Suites indexé avec BGE-M3 et dépendances Python RAG figées | index reproductible disponible ; résultat top 10 de type `cours` ; oracle relu par la direction scientifique | `ingenierie_build_qualite` | **bloquant** : aucune preuve de rappel du cours/démonstration attendu | job CI RAG dédié, service PostgreSQL/pgvector, construction puis empreinte de l'index, exécution sans skip |
+| `test_topk_contains_type[erreur fréquente suites arithmétiques rapport jury-erreur_type]` | `MODE FICHIERS : index RAG non disponible` | PostgreSQL 16+, extension `pgvector`, corpus qualifié incluant les sources institutionnelles, index BGE-M3 et dépendances Python RAG figées | index reproductible disponible ; résultat top 10 de type `erreur_type` ; provenance des sources et oracle relus | `ingenierie_build_qualite` | **bloquant** : aucune preuve de rappel d'une erreur-type sourcée | job CI RAG dédié, corpus qualifié et empreinté, contrôle de provenance, exécution sans skip |
+| `test_topk_contains_type[algorithme seuil boucle while suite-exercice]` | `MODE FICHIERS : index RAG non disponible` | PostgreSQL 16+, extension `pgvector`, corpus Suites/Python indexé avec BGE-M3 et dépendances Python RAG figées | index reproductible disponible ; résultat top 10 de type `exercice` contenant un algorithme de seuil exécutable ; oracle relu | `ingenierie_build_qualite` | **bloquant** : aucune preuve de rappel d'un exercice Python pertinent et exécutable | job CI RAG dédié, index versionné, oracle enrichi d'un contrôle de code source, exécution sans skip |
+| `test_topk_contains_type[activité introduction suites intérêts composés-activite]` | `MODE FICHIERS : index RAG non disponible` | PostgreSQL 16+, extension `pgvector`, corpus Suites indexé avec BGE-M3 et dépendances Python RAG figées | index reproductible disponible ; résultat top 10 de type `activite` ; pertinence pédagogique relue | `ingenierie_build_qualite` | **bloquant** : aucune preuve de rappel d'une activité d'introduction pertinente | job CI RAG dédié, index versionné, validation pédagogique de l'oracle, exécution sans skip |
 
 La `direction_scientifique_programme` doit relire les types attendus et la
 pertinence des résultats avant réactivation ; la responsabilité primaire de
@@ -46,6 +52,10 @@ l'infrastructure et de la reproductibilité reste
    `direction_scientifique_programme`.
 6. Le skip de module est retiré ; une absence d'infrastructure produit alors un
    échec explicite du job dédié.
+
+La `direction_editoriale_pedagogique` relit en plus le cas de type `activite`.
+Le propriétaire primaire du rétablissement technique reste
+`ingenierie_build_qualite`.
 
 Preuve de reproduction :
 
