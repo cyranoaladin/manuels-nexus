@@ -108,12 +108,19 @@ def source_digest(root: Path, paths: tuple[str, ...]) -> str:
 def reachable_latex_files(
     reference_graph: list[dict[str, Any]],
     roots: set[str],
+    *,
+    source_roles: Mapping[str, str],
+    traversal_source_roles: frozenset[str],
 ) -> set[str]:
-    """Compute reachability only from production roots and assembly inputs."""
+    """Compute reachability without traversing non-publishable sources."""
 
     adjacency: dict[str, list[str]] = defaultdict(list)
     for edge in reference_graph:
-        if edge["kind"] == "latex" and edge["resolved"]:
+        if (
+            edge["kind"] == "latex"
+            and edge["resolved"]
+            and source_roles.get(edge["source"]) in traversal_source_roles
+        ):
             adjacency[edge["source"]].append(edge["cible"])
     reachable = set(roots)
     pending = list(sorted(roots, reverse=True))
@@ -188,6 +195,7 @@ def add_static_latex_assemblies(
     *,
     source_roles: Mapping[str, str],
     root_source_roles: frozenset[str],
+    traversal_source_roles: frozenset[str],
     is_relevant_tex: Any,
     chapter_id_from_source: Any,
     manual_for_chapter: Any,
@@ -202,7 +210,11 @@ def add_static_latex_assemblies(
     }
     adjacency: dict[str, list[str]] = defaultdict(list)
     for edge in inventory["reference_graph"]:
-        if edge["kind"] == "latex" and edge["resolved"]:
+        if (
+            edge["kind"] == "latex"
+            and edge["resolved"]
+            and source_roles.get(edge["source"]) in traversal_source_roles
+        ):
             adjacency[edge["source"]].append(edge["cible"])
 
     roots: list[str] = []
@@ -304,6 +316,9 @@ def add_orphan_files(
     tracked: frozenset[str],
     *,
     candidate_paths: frozenset[str],
+    source_roles: Mapping[str, str],
+    root_source_roles: frozenset[str],
+    traversal_source_roles: frozenset[str],
     skipped_paths: set[str] | None = None,
     is_relevant_tex: Any,
     is_known_latex_root: Any,
@@ -325,10 +340,15 @@ def add_orphan_files(
     production_roots = {
         path
         for path in tracked
-        if is_relevant_tex(path) and is_known_latex_root(root, path)
+        if source_roles[path] in root_source_roles
+        and is_relevant_tex(path)
+        and is_known_latex_root(root, path)
     }
     reachable = reachable_latex_files(
-        inventory["reference_graph"], assembly_roots | production_roots
+        inventory["reference_graph"],
+        assembly_roots | production_roots,
+        source_roles=source_roles,
+        traversal_source_roles=traversal_source_roles,
     )
     ignore = skipped_paths or set()
     for path in sorted(

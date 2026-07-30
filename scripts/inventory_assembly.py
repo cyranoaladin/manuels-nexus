@@ -430,6 +430,8 @@ def add_declared_assemblies(
     root: Path,
     tracked: frozenset[str],
     *,
+    source_roles: Mapping[str, str],
+    assembler_source_roles: frozenset[str],
     manual_ids: tuple[str, ...],
     manual_for_chapter: Callable[[str], str | None],
     supported_manuals: Callable[[str], tuple[str, ...]],
@@ -451,8 +453,11 @@ def add_declared_assemblies(
     assembler_paths = sorted(
         path
         for path in tracked
-        if path.endswith("/scripts/assemble.py")
-        or path.endswith("/scripts/assemble_manuel.py")
+        if source_roles[path] in assembler_source_roles
+        and (
+            path.endswith("/scripts/assemble.py")
+            or path.endswith("/scripts/assemble_manuel.py")
+        )
     )
     analyses: dict[str, dict[str, Any]] = {}
     for path in assembler_paths:

@@ -299,8 +299,20 @@ BLOCKING_LATEX_REFERENCE_SOURCE_ROLES = frozenset(
     {"generated_dependency", "production_object", "transversal"}
 )
 ORPHAN_SOURCE_ROLES = frozenset({"production_object", "transversal"})
+ORPHAN_ROOT_SOURCE_ROLES = frozenset(
+    {"generated_dependency", "production_object", "transversal"}
+)
+ORPHAN_TRAVERSAL_SOURCE_ROLES = frozenset(
+    {"generated_dependency", "production_object", "transversal"}
+)
 STATIC_ASSEMBLY_ROOT_SOURCE_ROLES = frozenset(
     {"generated_dependency", "production_object", "transversal"}
+)
+STATIC_ASSEMBLY_TRAVERSAL_SOURCE_ROLES = frozenset(
+    {"generated_dependency", "production_object", "transversal"}
+)
+DECLARED_ASSEMBLER_SOURCE_ROLES = frozenset(
+    {"production_object", "transversal"}
 )
 RELEVANT_UNTRACKED_SOURCE_ROLES = frozenset(
     {
@@ -1240,6 +1252,10 @@ def _git_relevant_untracked(
         if (
             configured_role in RELEVANT_UNTRACKED_SOURCE_ROLES
             or canonical_role in RELEVANT_UNTRACKED_SOURCE_ROLES
+            or (
+                "transversal" in {configured_role, canonical_role}
+                and _is_model_source(path)
+            )
         ):
             untracked.append(path)
     return sorted(untracked)
@@ -2731,6 +2747,7 @@ def build_inventory(
         inventory,
         root,
         tracked_set,
+        source_roles=source_roles,
         candidate_paths=frozenset(
             path
             for path in tracked_set
@@ -3157,6 +3174,7 @@ def _add_static_latex_assemblies(
         tracked,
         source_roles=source_roles,
         root_source_roles=STATIC_ASSEMBLY_ROOT_SOURCE_ROLES,
+        traversal_source_roles=STATIC_ASSEMBLY_TRAVERSAL_SOURCE_ROLES,
         is_relevant_tex=_is_relevant_tex,
         chapter_id_from_source=_chapter_id_from_source,
         manual_for_chapter=_manual_for_chapter,
@@ -3168,6 +3186,7 @@ def _add_orphan_files(
     root: Path,
     tracked: frozenset[str],
     *,
+    source_roles: Mapping[str, str],
     candidate_paths: frozenset[str],
     skipped_paths: set[str] | None = None,
 ) -> None:
@@ -3176,6 +3195,9 @@ def _add_orphan_files(
         root,
         tracked,
         candidate_paths=candidate_paths,
+        source_roles=source_roles,
+        root_source_roles=ORPHAN_ROOT_SOURCE_ROLES,
+        traversal_source_roles=ORPHAN_TRAVERSAL_SOURCE_ROLES,
         skipped_paths=skipped_paths or set(),
         is_relevant_tex=_is_relevant_tex,
         is_known_latex_root=_is_known_latex_root,
@@ -3194,6 +3216,8 @@ def _add_assemblies(
         inventory,
         root,
         tracked,
+        source_roles=source_roles,
+        assembler_source_roles=DECLARED_ASSEMBLER_SOURCE_ROLES,
         manual_ids=tuple(MANUALS),
         manual_for_chapter=_manual_for_chapter,
         supported_manuals=_supported_manuals_for_assembler,

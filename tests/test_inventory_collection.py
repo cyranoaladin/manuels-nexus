@@ -3118,6 +3118,18 @@ def test_graph_source_role_policies_are_explicit(
     assert inventory_module.STATIC_ASSEMBLY_ROOT_SOURCE_ROLES == frozenset(
         {"generated_dependency", "production_object", "transversal"}
     )
+    assert inventory_module.STATIC_ASSEMBLY_TRAVERSAL_SOURCE_ROLES == frozenset(
+        {"generated_dependency", "production_object", "transversal"}
+    )
+    assert inventory_module.ORPHAN_ROOT_SOURCE_ROLES == frozenset(
+        {"generated_dependency", "production_object", "transversal"}
+    )
+    assert inventory_module.ORPHAN_TRAVERSAL_SOURCE_ROLES == frozenset(
+        {"generated_dependency", "production_object", "transversal"}
+    )
+    assert inventory_module.DECLARED_ASSEMBLER_SOURCE_ROLES == frozenset(
+        {"production_object", "transversal"}
+    )
 
 
 @pytest.mark.parametrize(
@@ -3231,6 +3243,195 @@ def test_non_publishable_document_root_cannot_assemble_production_object(
     assert not any(
         assembly.get("assembler") == static_root
         for assembly in inventory["assemblies"]
+    )
+    assert inventory["anomalies"]["unassembled_objects"] == [
+        {
+            "champ": "assemblages_declares",
+            "cible": course,
+            "raison": "objet META exclu de tous les assemblages declares",
+            "source": course,
+        }
+    ]
+
+
+@pytest.mark.parametrize(
+    "non_publishable_root",
+    [
+        pytest.param(
+            "NSI/chapitres/1NSI-TEST/_harvest/root.candidate.tex",
+            id="harvest",
+        ),
+        pytest.param("NSI/tests/fixtures/root.tex", id="fixture"),
+        pytest.param("NSI/historique/root.tex", id="archive"),
+        pytest.param("NSI/validations/root.tex", id="validation"),
+    ],
+)
+def test_non_publishable_document_root_cannot_hide_transversal_orphan(
+    tmp_path: Path,
+    inventory_module,
+    non_publishable_root: str,
+) -> None:
+    _init_repository(tmp_path)
+    orphan = "NSI/extras/hidden.tex"
+    sources = {
+        non_publishable_root: (
+            "\\documentclass{article}\n"
+            "\\begin{document}\n"
+            "\\input{extras/hidden}\n"
+            "\\end{document}\n"
+        ),
+        orphan: "Contenu LaTeX non référencé par une racine publiable\n",
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert {
+        anomaly["cible"] for anomaly in inventory["anomalies"]["orphan_files"]
+    } == {orphan}
+
+
+@pytest.mark.parametrize(
+    "non_publishable_bridge",
+    [
+        pytest.param(
+            "NSI/chapitres/1NSI-TEST/_harvest/bridge.candidate.tex",
+            id="harvest",
+        ),
+        pytest.param("NSI/tests/fixtures/bridge.tex", id="fixture"),
+        pytest.param("NSI/historique/bridge.tex", id="archive"),
+        pytest.param("NSI/validations/bridge.tex", id="validation"),
+    ],
+)
+def test_non_publishable_source_cannot_extend_orphan_reachability(
+    tmp_path: Path,
+    inventory_module,
+    non_publishable_bridge: str,
+) -> None:
+    _init_repository(tmp_path)
+    production_root = "NSI/extras/master.tex"
+    orphan = "NSI/extras/hidden.tex"
+    sources = {
+        production_root: (
+            "\\documentclass{article}\n"
+            "\\begin{document}\n"
+            f"\\input{{{non_publishable_bridge.removeprefix('NSI/')}}}\n"
+            "\\end{document}\n"
+        ),
+        non_publishable_bridge: "\\input{extras/hidden}\n",
+        orphan: "Contenu LaTeX derrière une source non publiable\n",
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert {
+        anomaly["cible"] for anomaly in inventory["anomalies"]["orphan_files"]
+    } == {orphan}
+
+
+@pytest.mark.parametrize(
+    "non_publishable_bridge",
+    [
+        pytest.param(
+            "Mathematiques/manuel-maths/chapitres/"
+            "1SPE-TEST/_harvest/bridge.candidate.tex",
+            id="harvest",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/tests/fixtures/bridge.tex",
+            id="fixture",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/historique/bridge.tex",
+            id="archive",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/validations/bridge.tex",
+            id="validation",
+        ),
+    ],
+)
+def test_non_publishable_source_cannot_extend_static_assembly(
+    tmp_path: Path,
+    inventory_module,
+    non_publishable_bridge: str,
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    course = f"{base}/cours/c1.tex"
+    static_root = "Mathematiques/manuel-maths/build/root.tex"
+    bridge_target = non_publishable_bridge.removeprefix(
+        "Mathematiques/manuel-maths/"
+    )
+    sources = {
+        contract: _contract("1SPE-TEST", "1SPE", capacities=1),
+        course: _meta(status="approved"),
+        static_root: (
+            "\\documentclass{article}\n"
+            "\\begin{document}\n"
+            f"\\input{{{bridge_target}}}\n"
+            "\\end{document}\n"
+        ),
+        non_publishable_bridge: (
+            "\\input{chapitres/1SPE-TEST/cours/c1}\n"
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    assembly = next(
+        item
+        for item in inventory["assemblies"]
+        if item["assembler"] == static_root
+    )
+
+    assert non_publishable_bridge in assembly["included_files"]
+    assert course not in assembly["included_files"]
+    assert assembly["included_objects"] == []
+    assert inventory["anomalies"]["unassembled_objects"] == [
+        {
+            "champ": "assemblages_declares",
+            "cible": course,
+            "raison": "objet META exclu de tous les assemblages declares",
+            "source": course,
+        }
+    ]
+
+
+def test_fixture_assembler_cannot_assemble_production_objects(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1NSI", "1NSI-TEST")
+    contract = f"{base}/contrat.yaml"
+    course = f"{base}/cours/10_cours.tex"
+    assembler = "NSI/tests/fixtures/scripts/assemble.py"
+    sources = {
+        contract: _contract("1NSI-TEST", "1NSI", capacities=1),
+        course: _meta(
+            id="1NSI-TEST-COURS-C1",
+            chapitre="1NSI-TEST",
+            status="approved",
+        ),
+        assembler: 'ORDER = [("cours", "*")]\nVARIANTS = ["complet"]\n',
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert not any(
+        assembly["assembler"] == assembler for assembly in inventory["assemblies"]
     )
     assert inventory["anomalies"]["unassembled_objects"] == [
         {
@@ -6373,6 +6574,47 @@ def test_require_clean_rejects_relevant_untracked_sources(tmp_path: Path) -> Non
 
     assert completed.returncode == 4
     assert payload["reasons"] == [f"untracked_relevant:{untracked}"]
+
+
+@pytest.mark.parametrize(
+    "untracked",
+    [
+        pytest.param("NSI/extras/orphan.tex", id="transversal-tex"),
+        pytest.param("NSI/scripts/assemble.py", id="transversal-assembler"),
+        pytest.param(
+            "Mathematiques/manuel-maths/gabarits/new-root.tex",
+            id="transversal-latex-root",
+        ),
+    ],
+)
+def test_require_clean_rejects_untracked_transversal_model_sources(
+    tmp_path: Path,
+    untracked: str,
+) -> None:
+    _init_repository(tmp_path)
+    _commit_repository(tmp_path)
+    _write(tmp_path / untracked, "contenu non suivi\n")
+
+    completed = _run_inventory_cli(tmp_path, "--require-clean")
+    payload = json.loads(completed.stdout)
+
+    assert completed.returncode == 4
+    assert payload["reasons"] == [f"untracked_relevant:{untracked}"]
+
+
+def test_require_clean_ignores_untracked_transversal_non_model_file(
+    tmp_path: Path,
+) -> None:
+    _init_repository(tmp_path)
+    _commit_repository(tmp_path)
+    _write(tmp_path / "NSI/notes/wip.txt", "note locale hors modèle\n")
+
+    completed = _run_inventory_cli(tmp_path, "--require-clean")
+    payload = json.loads(completed.stdout)
+
+    assert completed.returncode == 0
+    assert payload["success"] is True
+    assert payload["reasons"] == []
 
 
 def test_combined_gate_order_is_clean_model_check_debt_release(tmp_path: Path) -> None:
