@@ -587,7 +587,8 @@ def _collect_role_patterns(root: Path) -> tuple[dict[str, list[str]], str, list[
 def _load_source_roles(root: Path, tracked_files: Iterable[str] | None = None) -> dict[str, str]:
     role_patterns, default_role, ordered_roles = _collect_role_patterns(root)
     assignments: dict[str, str] = {}
-    for rel in sorted(set(tracked_files or [])):
+    tracked = git_tracked_files(root) if tracked_files is None else tracked_files
+    for rel in sorted(set(tracked)):
         normalized = _normalize_path_for_match(rel)
         role = default_role
         for candidate in ordered_roles:
@@ -598,7 +599,47 @@ def _load_source_roles(root: Path, tracked_files: Iterable[str] | None = None) -
             if role != default_role:
                 break
         assignments[normalized] = role
+    _validate_tracked_harvest_assignments(assignments)
     return assignments
+
+
+def _is_intrinsic_harvest_candidate(path: str) -> bool:
+    normalized = PurePosixPath(_normalize_path_for_match(path))
+    return (
+        "_harvest" in normalized.parts
+        and normalized.name.endswith(".candidate.tex")
+    )
+
+
+def _validate_tracked_harvest_assignments(
+    assignments: Mapping[str, str],
+) -> None:
+    canonical_patterns, canonical_default, canonical_order = _default_role_patterns()
+    failures: list[str] = []
+    for path, assigned_role in sorted(assignments.items()):
+        if not _is_intrinsic_harvest_candidate(path):
+            continue
+        canonical_role = _classify_source_path(
+            path,
+            {},
+            default=canonical_default,
+            role_patterns=canonical_patterns,
+            role_order=canonical_order,
+        )
+        expected_role = (
+            canonical_role
+            if canonical_role in {"excluded", "fixture"}
+            else "harvest_candidate"
+        )
+        if assigned_role != expected_role:
+            failures.append(
+                f"{path}={assigned_role} (attendu {expected_role})"
+            )
+    if failures:
+        raise InventoryError(
+            "invariant harvest des fichiers suivis violé: "
+            + "; ".join(failures)
+        )
 
 
 def _classify_source_path(
@@ -697,6 +738,15 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
         if disposition not in ANOMALY_DISPOSITIONS:
             raise InventoryError(
                 f"disposition inconnue pour fingerprint={fingerprint}: {disposition}"
+            )
+        if (
+            disposition == "accepted_exception"
+            and "expires_at" in value
+            and "expiry" in value
+        ):
+            raise InventoryError(
+                "alias d'expiration mutuellement exclusifs pour "
+                f"fingerprint={fingerprint}: expires_at, expiry"
             )
         for expiry_field in ("expires_at", "expiry"):
             if expiry_field in value:
@@ -2292,6 +2342,7 @@ def build_inventory(
     *,
     managed_output_paths: Iterable[str] = (),
     require_git_provenance: bool = False,
+    qualification_today: datetime.date | None = None,
 ) -> dict[str, Any]:
     """Build a deterministic canonical model from tracked chapter sources."""
 
@@ -2673,9 +2724,13 @@ def build_inventory(
     inventory["anomaly_qualifications"] = _build_anomaly_qualification_view(
         inventory["anomalies"],
         dispositions,
-        today=_qualification_evaluation_date(
-            root,
-            require_git=require_git_provenance,
+        today=(
+            qualification_today
+            if qualification_today is not None
+            else _qualification_evaluation_date(
+                root,
+                require_git=require_git_provenance,
+            )
         ),
     )
     inventory["coherence_checks"] = validate_inventory_coherence(inventory)
@@ -3555,6 +3610,9 @@ def _chapter_publication_eligible(
     inventory: Mapping[str, Any], manual_id: str, chapter_id: str
 ) -> bool:
     chapter = inventory["manuals"][manual_id]["chapters"][chapter_id]
+    qualifications = inventory.get("anomaly_qualifications", {})
+    if not isinstance(qualifications, Mapping):
+        raise InventoryError("vue de qualification absente ou invalide")
     if (
         chapter.get("contract_status") != "approved"
         or not chapter.get("contract_status_valid", False)
@@ -3563,8 +3621,11 @@ def _chapter_publication_eligible(
     ):
         return False
     return not any(
-        _anomaly_manual(anomaly) == manual_id
-        and bool(anomaly.get("blocking", True))
+        _anomaly_is_blocking(
+            anomaly,
+            manual_id=manual_id,
+            qualifications=qualifications,
+        )
         and (
             anomaly.get("chapter") == chapter_id
             or _chapter_context(str(anomaly.get("path", ""))) == (manual_id, chapter_id)
@@ -5356,13 +5417,18 @@ def _load_model_artifact(root: Path, relative_path: str) -> dict[str, Any]:
     return payload
 
 
-def _validate_model_gate(root: Path) -> dict[str, Any]:
+def _validate_model_gate(
+    root: Path,
+    *,
+    today: datetime.date | None = None,
+) -> dict[str, Any]:
+    evaluation_date = today or datetime.datetime.now(datetime.UTC).date()
     reasons: list[str] = []
     payloads: dict[str, dict[str, Any]] = {}
     try:
-        _collect_role_patterns(root)
+        _load_source_roles(root, git_tracked_files(root))
         _load_dispositions(root)
-    except InventoryError as exc:
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
         reasons.append(f"contrôles_versionnés:{_stable_gate_reason(exc, root)}")
     for relative_path, expected_type in MODEL_ARTIFACTS.items():
         try:
@@ -5414,10 +5480,24 @@ def _validate_model_gate(root: Path) -> dict[str, Any]:
                         f"{relative_path}:projection canonique incohérente"
                     )
         try:
-            current_inventory = build_inventory(root)
+            current_inventory = build_inventory(
+                root,
+                qualification_today=evaluation_date,
+            )
         except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
             reasons.append(f"inventaire:recalcul_impossible:{_stable_gate_reason(exc, root)}")
         else:
+            for fingerprint, qualification in current_inventory.get(
+                "anomaly_qualifications",
+                {},
+            ).items():
+                if (
+                    qualification.get("disposition") == "accepted_exception"
+                    and qualification.get("expired") is True
+                ):
+                    reasons.append(
+                        f"inventaire:accepted_exception_expirée:{fingerprint}"
+                    )
             if inventory_payload.get("source_digest") != current_inventory["source_digest"]:
                 reasons.append(
                     "inventaire:source_digest différent des sources courantes"
@@ -5529,9 +5609,17 @@ def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     )
 
 
-def _release_strict_gate_for_root(root: Path) -> dict[str, Any]:
+def _release_strict_gate_for_root(
+    root: Path,
+    *,
+    today: datetime.date | None = None,
+) -> dict[str, Any]:
+    evaluation_date = today or datetime.datetime.now(datetime.UTC).date()
     try:
-        inventory = build_inventory(root)
+        inventory = build_inventory(
+            root,
+            qualification_today=evaluation_date,
+        )
     except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
         return _gate_result(
             "release-strict",

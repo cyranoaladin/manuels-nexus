@@ -558,6 +558,72 @@ def test_source_roles_control_rejects_digest_valid_invariant_weakening(
         inventory_module._collect_role_patterns(tmp_path)
 
 
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        pytest.param("literal-sentinels", id="harvest-pattern-limited-to-sentinels"),
+        pytest.param("targeted-fixture", id="real-harvest-hidden-as-fixture"),
+    ],
+)
+def test_source_roles_rejects_digest_valid_harvest_bypass_on_all_tracked_candidates(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/SOURCE_ROLES.yaml").read_text(encoding="utf-8")
+    )
+    tracked_harvest = [
+        path
+        for path in inventory_module.git_tracked_files(ROOT)
+        if "/_harvest/" in path and path.endswith(".candidate.tex")
+    ]
+    assert len(tracked_harvest) == 19
+    for path in tracked_harvest:
+        _write(tmp_path / path, "% candidate de collecte\n")
+    if mutation == "literal-sentinels":
+        payload["roles"]["harvest_candidate"] = [
+            "NSI/chapitres/1NSI-X/_harvest/direct.candidate.tex",
+            "NSI/chapitres/1NSI-X/_harvest/P04/one.candidate.tex",
+            "NSI/chapitres/1NSI-X/_harvest/P04/deep/n.candidate.tex",
+        ]
+    else:
+        payload["roles"]["fixture"].append(tracked_harvest[0])
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/SOURCE_ROLES.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+    tracked = [*tracked_harvest, "audit/SOURCE_ROLES.yaml"]
+    _track(tmp_path, *tracked)
+
+    with pytest.raises(inventory_module.InventoryError, match="harvest"):
+        inventory_module._load_source_roles(tmp_path)
+    with pytest.raises(inventory_module.InventoryError, match="harvest"):
+        inventory_module._load_source_roles(tmp_path, tracked)
+    with pytest.raises(inventory_module.InventoryError, match="harvest"):
+        inventory_module.build_inventory(tmp_path)
+    gate = inventory_module._validate_model_gate(tmp_path)
+    assert gate["success"] is False
+    assert any("harvest" in reason for reason in gate["reasons"])
+
+
+def test_source_roles_preserves_fixture_precedence_for_canonical_harvest_fixture(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    fixture = "tests/fixtures/_harvest/P04/example.candidate.tex"
+    _write(tmp_path / fixture, "% fixture candidate\n")
+    _track(tmp_path, fixture)
+
+    assignments = inventory_module._load_source_roles(tmp_path, [fixture])
+
+    assert assignments[fixture] == "fixture"
+
+
 def test_source_roles_control_cannot_downgrade_to_legacy_when_schema_is_installed(
     tmp_path: Path,
     inventory_module,
@@ -1344,6 +1410,38 @@ def test_load_dispositions_rejects_invalid_expiry_at_load_time(
         inventory_module._load_dispositions(tmp_path)
 
 
+def test_accepted_exception_rejects_both_expiry_aliases_in_loader_and_gates(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    fingerprint = "a" * 16
+    record = {
+        **_qualified_disposition_record("accepted_exception", fingerprint),
+        "author": "Responsable éditorial",
+        "blocking": False,
+        "proof": "audit/proofs/accepted-exception.md",
+        "scope": {"manual": "1SPE"},
+        "expires_at": "2026-12-31",
+        "expiry": "2026-12-31",
+    }
+    payload = _dispositions_payload(record)
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="alias d.expiration"):
+        inventory_module._load_dispositions(tmp_path)
+    validate = inventory_module._validate_model_gate(tmp_path)
+    release = inventory_module._release_strict_gate_for_root(tmp_path)
+    assert validate["success"] is False
+    assert any("alias d'expiration" in reason for reason in validate["reasons"])
+    assert release["success"] is False
+    assert any("alias d'expiration" in reason for reason in release["reasons"])
+
+
 def test_invalid_expiry_blocks_inventory_generation_and_validate_model(
     tmp_path: Path,
     inventory_module,
@@ -1552,6 +1650,60 @@ def test_qualification_view_is_separate_from_raw_anomalies_and_covers_all_dispos
     )
     assert fixed["blocking"] is True
     assert fixed["regression"] is True
+
+
+def test_live_gates_recheck_expiry_after_deterministic_artifact_date(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    initial = inventory_module.build_inventory(tmp_path)
+    anomaly = initial["anomalies"]["unassembled_objects"][0]
+    fingerprint = inventory_module._anomaly_fingerprint(anomaly)
+    record = {
+        **_qualified_disposition_record("accepted_exception", fingerprint),
+        "author": "Responsable éditorial",
+        "blocking": False,
+        "proof": "audit/proofs/accepted-exception.md",
+        "scope": {"manual": "1SPE"},
+        "expires_at": "2026-07-15",
+    }
+    payload = _dispositions_payload(record)
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+    _track(tmp_path, "audit/ANOMALY_DISPOSITIONS.yaml")
+    _commit_repository(tmp_path, "exception temporaire")
+    artifact_date = datetime.datetime(2026, 7, 1, tzinfo=datetime.UTC)
+    monkeypatch.setenv("SOURCE_DATE_EPOCH", str(int(artifact_date.timestamp())))
+
+    result = inventory_module.build_inventory_artifacts(tmp_path)
+    artifact = result["inventory"]
+    artifact_qualification = artifact["anomaly_qualifications"][fingerprint]
+
+    assert artifact["provenance"]["generated_at_utc"].startswith("2026-07-01")
+    assert artifact_qualification["expired"] is False
+    assert artifact_qualification["blocking"] is False
+
+    live_date = datetime.date(2026, 7, 30)
+    validate = inventory_module._validate_model_gate(tmp_path, today=live_date)
+    release = inventory_module._release_strict_gate_for_root(
+        tmp_path,
+        today=live_date,
+    )
+
+    assert validate["success"] is False
+    assert any(
+        f"accepted_exception_expirée:{fingerprint}" in reason
+        for reason in validate["reasons"]
+    )
+    assert any(
+        "1SPE:anomalie:unassembled_objects" in reason
+        for reason in release["reasons"]
+    )
 
 
 def test_configured_fingerprint_collision_across_four_raw_anomalies_is_rejected(
@@ -3865,6 +4017,61 @@ def test_deliverable_matrix_blocks_needs_review_and_checks_model_coherence(
             "scope": "manual",
         }
     ]
+
+
+def test_chapter_and_manual_blockers_use_the_same_qualification_view(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    inventory = _minimal_inventory(tmp_path, inventory_module)
+    for values in inventory["anomalies"].values():
+        values.clear()
+    anomaly = {
+        "chapter": "1SPE-TEST",
+        "id": "1SPE-TEST-EX-001",
+        "manual": "1SPE",
+    }
+    inventory["anomalies"]["missing_corrections"] = [anomaly]
+    fingerprint = inventory_module._anomaly_fingerprint(anomaly)
+    inventory["anomaly_qualifications"] = {
+        fingerprint: {
+            "blocking": False,
+            "disposition": "accepted_exception",
+            "fingerprint": fingerprint,
+        }
+    }
+    specification = deepcopy(inventory_module.DELIVERABLE_SPECS["1SPE"])
+    specification["target_chapters"] = 1
+
+    assert inventory_module._chapter_publication_eligible(
+        inventory,
+        "1SPE",
+        "1SPE-TEST",
+    ) is True
+    assert not any(
+        blocker["code"] == "anomalie:missing_corrections"
+        for blocker in inventory_module._manual_blockers(
+            inventory,
+            "1SPE",
+            specification,
+        )
+    )
+
+    inventory["anomaly_qualifications"][fingerprint]["blocking"] = True
+
+    assert inventory_module._chapter_publication_eligible(
+        inventory,
+        "1SPE",
+        "1SPE-TEST",
+    ) is False
+    assert any(
+        blocker["code"] == "anomalie:missing_corrections"
+        for blocker in inventory_module._manual_blockers(
+            inventory,
+            "1SPE",
+            specification,
+        )
+    )
 
 
 def test_real_object_count_is_not_the_sum_of_overlapping_metrics(
