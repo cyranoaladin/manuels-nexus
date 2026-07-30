@@ -1990,6 +1990,32 @@ def _baseline_contract_payload() -> dict[str, object]:
     }
 
 
+def _append_baseline_update(
+    payload: dict[str, object],
+    inventory_module,
+    *,
+    reason: str,
+    timestamp: str,
+) -> str:
+    previous_digest = inventory_module._baseline_payload_digest(payload)
+    payload["previous_baseline_digest"] = previous_digest
+    payload["provisional"] = False
+    updates = payload["updates"]
+    assert isinstance(updates, list)
+    update = {
+        "approved_by": "Responsable éditorial",
+        "git_sha": payload["git_sha"],
+        "new_baseline_digest": "sha256:" + "0" * 64,
+        "previous_baseline_digest": previous_digest,
+        "reason": reason,
+        "timestamp": timestamp,
+    }
+    updates.append(update)
+    new_digest = inventory_module._baseline_payload_digest(payload)
+    update["new_baseline_digest"] = new_digest
+    return new_digest
+
+
 def test_anomalies_baseline_schema_accepts_provisional_active_resolved_history() -> None:
     schema = json.loads(
         (ROOT / "audit/schemas/v1/anomalies-baseline.schema.json").read_text(
@@ -2039,6 +2065,106 @@ def test_anomalies_baseline_schema_rejects_non_fixed_resolved_entry() -> None:
 
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def test_validated_baseline_rejects_tampered_historical_update_digest(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = _baseline_contract_payload()
+    payload["updates"] = []
+    payload["provisional"] = True
+    _append_baseline_update(
+        payload,
+        inventory_module,
+        reason="Premier gel audité",
+        timestamp="2026-07-22T10:00:00Z",
+    )
+    _append_baseline_update(
+        payload,
+        inventory_module,
+        reason="Second gel audité",
+        timestamp="2026-07-23T10:00:00Z",
+    )
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(payload, ensure_ascii=False),
+    )
+
+    assert inventory_module._load_validated_baseline(tmp_path)
+
+    updates = payload["updates"]
+    assert isinstance(updates, list)
+    assert isinstance(updates[0], dict)
+    updates[0]["new_baseline_digest"] = "sha256:" + "9" * 64
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(payload, ensure_ascii=False),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="empreinte|chaîne"):
+        inventory_module._load_validated_baseline(tmp_path)
+
+
+def test_validated_baseline_rejects_final_state_without_audited_update(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = _baseline_contract_payload()
+    payload["provisional"] = False
+    payload["updates"] = []
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(payload, ensure_ascii=False),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="audit"):
+        inventory_module._load_validated_baseline(tmp_path)
+
+
+def test_baseline_gate_refuses_tracked_symlink_to_external_payload(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    outside = tmp_path.parent / f"{tmp_path.name}-external-baseline.json"
+    payload = _baseline_contract_payload()
+    payload["updates"] = []
+    payload["provisional"] = True
+    _write(outside, json.dumps(payload, ensure_ascii=False))
+    baseline_path = tmp_path / "audit/ANOMALIES_BASELINE.json"
+    baseline_path.symlink_to(outside)
+    schema_paths = tuple(
+        path.relative_to(tmp_path).as_posix()
+        for path in (tmp_path / "audit/schemas").rglob("*.json")
+    )
+    _track(
+        tmp_path,
+        "audit/ANOMALIES_BASELINE.json",
+        *schema_paths,
+    )
+    _commit_repository(tmp_path, "tracked external baseline symlink")
+
+    assert inventory_module._require_clean_gate(tmp_path)["success"] is True
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="symlink|regular",
+    ):
+        inventory_module._load_validated_baseline(tmp_path)
+
+    gate = inventory_module._fail_on_new_gate(tmp_path)
+
+    assert gate["success"] is False
+    assert any(
+        "symlink" in reason or "regular" in reason
+        for reason in gate["reasons"]
+    )
 
 
 @pytest.mark.parametrize("missing_field", ["locator_key", "qualified"])
@@ -2206,6 +2332,115 @@ def test_fingerprint_v1_sorts_non_semantic_mapping_and_list_identity_values(
     )
 
 
+def test_fingerprint_v1_uses_semantic_reason_when_reason_code_is_absent(
+    inventory_module,
+) -> None:
+    previous = {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/objet.tex",
+        "reason": "en-tete % META absent",
+        "scope": "source",
+        "status": "generated",
+    }
+    current = {
+        **previous,
+        "reason": "JSON META doit etre un objet",
+        "status": "draft",
+    }
+    category = "metadata_invalid"
+    previous_fingerprint = inventory_module._anomaly_fingerprint(
+        previous,
+        category=category,
+    )
+    current_fingerprint = inventory_module._anomaly_fingerprint(
+        current,
+        category=category,
+    )
+
+    assert previous_fingerprint != current_fingerprint
+    assert inventory_module._anomaly_locator_key(
+        previous,
+        category=category,
+    ) == inventory_module._anomaly_locator_key(
+        current,
+        category=category,
+    )
+
+    disposition = _qualified_disposition_record(
+        "open_debt",
+        previous_fingerprint,
+    )
+    qualifications = inventory_module._build_anomaly_qualification_view(
+        {category: [current]},
+        {previous_fingerprint: disposition},
+    )
+
+    assert current_fingerprint in qualifications
+    assert qualifications[current_fingerprint]["qualified"] is False
+    assert previous_fingerprint not in qualifications
+
+
+def test_fingerprint_v1_normalizes_volatile_noise_inside_fallback_reason(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    root_a = tmp_path / "clone-a"
+    root_b = tmp_path / "clone-b"
+    first = {
+        "path": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/objet.tex",
+        "reason": (
+            f"JSON META invalide dans {root_a}/objet.tex: "
+            "ligne 14, colonne 3, caractère 221 à 2026-07-29T08:00:00Z"
+        ),
+        "scope": "source",
+        "status": "generated",
+    }
+    second = {
+        **first,
+        "reason": (
+            f"JSON META invalide dans {root_b}/objet.tex: "
+            "ligne 912, colonne 17, caractère 9921 à 2032-01-01T00:00:00Z"
+        ),
+    }
+
+    assert inventory_module._anomaly_fingerprint(
+        first,
+        category="metadata_invalid",
+        repository_root=root_a,
+    ) == inventory_module._anomaly_fingerprint(
+        second,
+        category="metadata_invalid",
+        repository_root=root_b,
+    )
+
+
+def test_fingerprint_v1_does_not_inherit_non_metadata_reason_change(
+    inventory_module,
+) -> None:
+    previous = {
+        "champ": "methodes[0]",
+        "cible": "M1",
+        "raison": "alias absent",
+        "source": "chapitre.tex",
+    }
+    current = {**previous, "raison": "alias ambigu"}
+    category = "broken_meta_references"
+
+    assert inventory_module._anomaly_fingerprint(
+        previous,
+        category=category,
+    ) != inventory_module._anomaly_fingerprint(
+        current,
+        category=category,
+    )
+    assert inventory_module._anomaly_locator_key(
+        previous,
+        category=category,
+    ) == inventory_module._anomaly_locator_key(
+        current,
+        category=category,
+    )
+
+
 def _active_debt(
     fingerprint: str,
     *,
@@ -2331,6 +2566,38 @@ def test_debt_comparison_detects_modified_severity_and_lost_disposition(
     assert any("disposition" in value for value in comparison["failures"])
 
 
+def test_debt_comparison_treats_error_false_to_blocking_true_as_escalation(
+    inventory_module,
+) -> None:
+    previous = _active_debt(
+        "a" * 16,
+        severity="error",
+    )
+    previous["blocking"] = False
+    current = dict(
+        previous,
+        severity="blocking",
+        blocking=True,
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [current],
+        [previous],
+        [],
+    )
+
+    assert inventory_module._ANOMALY_SEVERITY_RANK["blocking"] > (
+        inventory_module._ANOMALY_SEVERITY_RANK["error"]
+    )
+    assert comparison["success"] is False
+    assert any("sévérité" in reason for reason in comparison["failures"])
+    assert any(
+        "caractère bloquant" in reason
+        and "False→True" in reason
+        for reason in comparison["failures"]
+    )
+
+
 def test_debt_comparison_detects_resolved_recurrence_and_preserves_history(
     inventory_module,
 ) -> None:
@@ -2364,6 +2631,97 @@ def test_debt_comparison_detects_resolved_recurrence_and_preserves_history(
     assert comparison["regressions"] == ["a" * 16]
     assert comparison["resolved_history"] == resolved
     assert any("réapparition" in value for value in comparison["failures"])
+
+
+def test_fixed_disposition_reappearance_flows_to_active_regression_and_gate(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    category = "missing_corrections"
+    anomaly = _fingerprint_case()
+    fingerprint = inventory_module._anomaly_fingerprint(
+        anomaly,
+        category=category,
+    )
+    fixed = _qualified_disposition_record("fixed", fingerprint)
+    fixed["proof"] = "audit/proofs/correction.md"
+    anomalies = {category: [anomaly]}
+    qualifications = inventory_module._build_anomaly_qualification_view(
+        anomalies,
+        {fingerprint: fixed},
+    )
+    inventory = {
+        "anomalies": anomalies,
+        "anomaly_qualifications": qualifications,
+    }
+
+    active = inventory_module._current_active_debt(inventory)
+
+    assert qualifications[fingerprint]["regression"] is True
+    assert qualifications[fingerprint]["blocking"] is True
+    assert active == [
+        {
+            "blocking": True,
+            "category": category,
+            "disposition": "fixed",
+            "fingerprint": fingerprint,
+            "justification": fixed["justification"],
+            "locator_key": inventory_module._anomaly_locator_key(
+                anomaly,
+                category=category,
+            ),
+            "occurrence_count": 1,
+            "owner": fixed["owner"],
+            "qualified": True,
+            "severity": "regression",
+        }
+    ]
+
+    resolved = {
+        "blocking": False,
+        "category": category,
+        "disposition": "fixed",
+        "fingerprint": fingerprint,
+        "resolved_at": "2026-07-22T09:00:00Z",
+        "resolved_git_sha": "a" * 40,
+    }
+    comparison = inventory_module._compare_anomaly_debt(
+        active,
+        [],
+        [resolved],
+    )
+    assert comparison["success"] is False
+    assert comparison["regressions"] == [fingerprint]
+
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    baseline = _baseline_contract_payload()
+    baseline["active"] = []
+    baseline["provisional"] = True
+    baseline["resolved"] = [resolved]
+    baseline["updates"] = []
+    _append_baseline_update(
+        baseline,
+        inventory_module,
+        reason="Correction auditée avant test de réapparition",
+        timestamp="2026-07-23T10:00:00Z",
+    )
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(baseline, ensure_ascii=False),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "build_inventory",
+        lambda _root: inventory,
+    )
+
+    gate = inventory_module._fail_on_new_gate(tmp_path)
+
+    assert gate["success"] is False
+    assert gate["exit_code"] == 5
+    assert any("réapparition" in reason for reason in gate["reasons"])
 
 
 @pytest.mark.parametrize(
@@ -2572,7 +2930,13 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
     inventory = {
         "anomalies": {},
         "anomaly_qualifications": {},
-        "provenance": {"head_sha": head_sha},
+        "provenance": {
+            "generated_at_utc": inventory_module._generation_timestamp(
+                tmp_path,
+                required=True,
+            ),
+            "head_sha": head_sha,
+        },
         "source_digest": "sha256:" + "e" * 64,
     }
     monkeypatch.setattr(
@@ -2651,6 +3015,198 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
     assert head_sha in report
     assert "aaaaaaaaaaaaaaaa" in report
     assert "bbbbbbbbbbbbbbbb" in report
+
+
+def test_update_baseline_rejects_head_change_immediately_before_replace(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    _write(tmp_path / "tracked.txt", "source\n")
+    schema_paths = tuple(
+        path.relative_to(tmp_path).as_posix()
+        for path in (tmp_path / "audit/schemas").rglob("*.json")
+    )
+    _track(tmp_path, "tracked.txt", *schema_paths)
+    _commit_repository(tmp_path)
+    baseline = _baseline_contract_payload()
+    baseline["updates"] = []
+    baseline["provisional"] = True
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(baseline, ensure_ascii=False),
+    )
+    _track(tmp_path, "audit/ANOMALIES_BASELINE.json")
+    head_sha = _commit_repository(tmp_path, "baseline")
+    generated_at = inventory_module._generation_timestamp(
+        tmp_path,
+        required=True,
+    )
+    inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "provenance": {
+            "generated_at_utc": generated_at,
+            "head_sha": head_sha,
+        },
+        "source_digest": "sha256:" + "e" * 64,
+    }
+    monkeypatch.setattr(
+        inventory_module,
+        "_model_digest",
+        lambda _inventory: "sha256:" + "c" * 64,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_validate_model_gate",
+        lambda _root: inventory_module._gate_result(
+            "validate-model",
+            success=True,
+            failure_code=6,
+            dimensions={"structure": "passed"},
+            reasons=[],
+        ),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_ready_gate",
+        lambda _root: {
+            **inventory_module._gate_result(
+                "baseline-ready",
+                success=True,
+                failure_code=8,
+                dimensions={"structure": "passed"},
+                reasons=[],
+            ),
+            "checks": [
+                _ready_check(name)
+                for name in inventory_module.BASELINE_READY_CHECK_NAMES
+            ],
+        },
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "build_inventory",
+        lambda _root, **_kwargs: inventory,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_current_active_debt",
+        lambda _inventory: [],
+    )
+    real_ensure_clean = inventory_module._ensure_clean_tree
+    ensure_calls = 0
+
+    def change_head_after_second_clean_check(
+        *args: object,
+        **kwargs: object,
+    ) -> None:
+        nonlocal ensure_calls
+        real_ensure_clean(*args, **kwargs)
+        ensure_calls += 1
+        if ensure_calls == 2:
+            _commit_repository(tmp_path, "concurrent HEAD change")
+
+    apply_calls = 0
+
+    def record_apply(*_args: object, **_kwargs: object) -> None:
+        nonlocal apply_calls
+        apply_calls += 1
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_ensure_clean_tree",
+        change_head_after_second_clean_check,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_apply_atomic_payloads",
+        record_apply,
+    )
+
+    result = inventory_module._safe_update_baseline_gate(
+        tmp_path,
+        reason="Gel contrôlé",
+        approved_by="Responsable éditorial",
+    )
+
+    assert result["success"] is False
+    assert result["exit_code"] == 8
+    assert any("HEAD modifié" in reason for reason in result["reasons"])
+    assert apply_calls == 0
+
+
+def test_update_baseline_recovers_interrupted_write_before_clean_preflight(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    baseline = tmp_path / "audit/ANOMALIES_BASELINE.json"
+    report = tmp_path / "audit/BASELINE_UPDATE_REPORT.md"
+    _write(baseline, "baseline historique\n")
+    _write(report, "rapport historique\n")
+    child_code = f"""
+import importlib.util
+import os
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("inventory_collection", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+original_replace = module.os.replace
+
+def crash_after_replace(source, destination, **kwargs):
+    original_replace(source, destination, **kwargs)
+    if str(source).startswith("stage-"):
+        os._exit(95)
+
+module.os.replace = crash_after_replace
+module._apply_atomic_payloads(
+    Path({str(tmp_path)!r}),
+    {{
+        Path("audit/ANOMALIES_BASELINE.json"): "baseline nouvelle\\n",
+        Path("audit/BASELINE_UPDATE_REPORT.md"): "rapport nouveau\\n",
+    }},
+)
+"""
+    crashed = subprocess.run(
+        [sys.executable, "-c", child_code],
+        check=False,
+    )
+    assert crashed.returncode == 95
+
+    restored_before_clean: list[bool] = []
+
+    def observe_clean(_root: Path) -> dict[str, object]:
+        restored_before_clean.append(
+            baseline.read_text(encoding="utf-8") == "baseline historique\n"
+            and report.read_text(encoding="utf-8") == "rapport historique\n"
+        )
+        return inventory_module._gate_result(
+            "require-clean",
+            success=False,
+            failure_code=4,
+            dimensions={"structure": "failed"},
+            reasons=["arrêt contrôlé après observation"],
+        )
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_require_clean_gate",
+        observe_clean,
+    )
+
+    result = inventory_module._update_baseline_gate(
+        tmp_path,
+        reason="Gel contrôlé",
+        approved_by="Responsable éditorial",
+    )
+
+    assert result["success"] is False
+    assert restored_before_clean == [True]
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
 
 
 def test_update_baseline_cli_boundary_maps_transaction_error_to_code_8(
@@ -6692,6 +7248,391 @@ def test_atomic_batch_failure_restores_every_target_byte_for_byte(
     assert not new_target.exists()
 
 
+def test_next_transaction_recovers_batch_after_process_crash(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    first = tmp_path / "audit/a-first.txt"
+    second = tmp_path / "audit/z-second.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    child_code = f"""
+import importlib.util
+import os
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("inventory_collection", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+original_replace = module.os.replace
+
+def crash_after_first_replace(source, target, **kwargs):
+    original_replace(source, target, **kwargs)
+    if str(source).startswith("stage-"):
+        os._exit(91)
+
+module.os.replace = crash_after_first_replace
+module._apply_atomic_payloads(
+    Path({str(tmp_path)!r}),
+    {{
+        Path("audit/a-first.txt"): "premier nouveau\\n",
+        Path("audit/z-second.txt"): "second nouveau\\n",
+    }},
+)
+"""
+
+    crashed = subprocess.run(
+        [sys.executable, "-c", child_code],
+        check=False,
+    )
+
+    assert crashed.returncode == 91
+    assert first.read_text(encoding="utf-8") == "premier nouveau\n"
+    assert second.read_text(encoding="utf-8") == "second historique\n"
+    assert list(tmp_path.glob(".inventory-collection-apply-*"))
+
+    def fail_new_transaction(_root_fd: int):
+        raise OSError("arrêt après récupération")
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_create_transaction_directory",
+        fail_new_transaction,
+    )
+
+    with pytest.raises(OSError, match="arrêt après récupération"):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/irrelevant.txt"): "non écrit\n"},
+        )
+
+    assert first.read_text(encoding="utf-8") == "premier historique\n"
+    assert second.read_text(encoding="utf-8") == "second historique\n"
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
+def test_next_transaction_discards_partial_journal_before_any_replace(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "audit/existing.txt"
+    _write(target, "historique\n")
+    child_code = f"""
+import importlib.util
+import os
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("inventory_collection", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+original_write_entry = module._write_transaction_entry
+
+def crash_during_journal(directory_fd, name, payload):
+    if name == "journal.tmp":
+        fd = os.open(
+            name,
+            os.O_CREAT | os.O_EXCL | os.O_WRONLY,
+            0o600,
+            dir_fd=directory_fd,
+        )
+        os.write(fd, payload[:17])
+        os.fsync(fd)
+        os._exit(93)
+    return original_write_entry(directory_fd, name, payload)
+
+module._write_transaction_entry = crash_during_journal
+module._apply_atomic_payloads(
+    Path({str(tmp_path)!r}),
+    {{Path("audit/existing.txt"): "nouveau\\n"}},
+)
+"""
+
+    crashed = subprocess.run(
+        [sys.executable, "-c", child_code],
+        check=False,
+    )
+
+    assert crashed.returncode == 93
+    assert target.read_text(encoding="utf-8") == "historique\n"
+
+    def fail_new_transaction(_root_fd: int):
+        raise OSError("arrêt après abandon pré-journal")
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_create_transaction_directory",
+        fail_new_transaction,
+    )
+
+    with pytest.raises(OSError, match="abandon pré-journal"):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/irrelevant.txt"): "non écrit\n"},
+        )
+
+    assert target.read_text(encoding="utf-8") == "historique\n"
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
+def test_next_transaction_discards_partial_preparing_marker(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    child_code = f"""
+import importlib.util
+import os
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("inventory_collection", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+original_write_entry = module._write_transaction_entry
+
+def crash_during_preparing(directory_fd, name, payload):
+    if name == "preparing.tmp":
+        fd = os.open(
+            name,
+            os.O_CREAT | os.O_EXCL | os.O_WRONLY,
+            0o600,
+            dir_fd=directory_fd,
+        )
+        os.write(fd, payload[:11])
+        os.fsync(fd)
+        os._exit(96)
+    return original_write_entry(directory_fd, name, payload)
+
+module._write_transaction_entry = crash_during_preparing
+module._apply_atomic_payloads(
+    Path({str(tmp_path)!r}),
+    {{Path("audit/output.txt"): "nouveau\\n"}},
+)
+"""
+
+    crashed = subprocess.run(
+        [sys.executable, "-c", child_code],
+        check=False,
+    )
+
+    assert crashed.returncode == 96
+    assert not (tmp_path / "audit/output.txt").exists()
+
+    def fail_new_transaction(_root_fd: int):
+        raise OSError("arrêt après abandon preparing")
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_create_transaction_directory",
+        fail_new_transaction,
+    )
+
+    with pytest.raises(OSError, match="abandon preparing"):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/irrelevant.txt"): "non écrit\n"},
+        )
+
+    assert not (tmp_path / "audit/output.txt").exists()
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
+def test_next_transaction_discards_empty_directory_left_after_mkdir_crash(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    child_code = f"""
+import importlib.util
+import os
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("inventory_collection", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+original_mkdir = module.os.mkdir
+
+def crash_after_mkdir(path, *args, **kwargs):
+    original_mkdir(path, *args, **kwargs)
+    if str(path).startswith(".inventory-collection-apply-"):
+        os._exit(97)
+
+module.os.mkdir = crash_after_mkdir
+module._apply_atomic_payloads(
+    Path({str(tmp_path)!r}),
+    {{Path("audit/output.txt"): "nouveau\\n"}},
+)
+"""
+
+    crashed = subprocess.run(
+        [sys.executable, "-c", child_code],
+        check=False,
+    )
+
+    assert crashed.returncode == 97
+    assert not (tmp_path / "audit/output.txt").exists()
+
+    def fail_new_transaction(_root_fd: int):
+        raise OSError("arrêt après abandon mkdir")
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_create_transaction_directory",
+        fail_new_transaction,
+    )
+
+    with pytest.raises(OSError, match="abandon mkdir"):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/irrelevant.txt"): "non écrit\n"},
+        )
+
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
+def test_recovery_refuses_target_substituted_after_snapshot(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "audit/existing.txt"
+    _write(target, "historique\n")
+    child_code = f"""
+import importlib.util
+import os
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("inventory_collection", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+original_replace = module.os.replace
+
+def crash_after_replace(source, destination, **kwargs):
+    original_replace(source, destination, **kwargs)
+    if str(source).startswith("stage-"):
+        os._exit(94)
+
+module.os.replace = crash_after_replace
+module._apply_atomic_payloads(
+    Path({str(tmp_path)!r}),
+    {{Path("audit/existing.txt"): "nouveau\\n"}},
+)
+"""
+    crashed = subprocess.run(
+        [sys.executable, "-c", child_code],
+        check=False,
+    )
+    assert crashed.returncode == 94
+
+    original_read = inventory_module._read_destination_backup
+    substituted = False
+
+    def substitute_after_snapshot(
+        parent_fd: int,
+        basename: str,
+    ):
+        nonlocal substituted
+        value = original_read(parent_fd, basename)
+        if basename == "existing.txt" and not substituted:
+            os.unlink(basename, dir_fd=parent_fd)
+            foreign_fd = os.open(
+                basename,
+                os.O_CREAT | os.O_EXCL | os.O_WRONLY,
+                0o600,
+                dir_fd=parent_fd,
+            )
+            try:
+                os.write(foreign_fd, b"concurrent\n")
+            finally:
+                os.close(foreign_fd)
+            substituted = True
+        return value
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_read_destination_backup",
+        substitute_after_snapshot,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="identity changed",
+    ):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/irrelevant.txt"): "non écrit\n"},
+        )
+
+    assert substituted is True
+    assert target.read_text(encoding="utf-8") == "concurrent\n"
+    assert list(tmp_path.glob(".inventory-collection-apply-*"))
+
+
+def test_next_transaction_finishes_cleanup_after_committed_process_crash(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    first = tmp_path / "audit/a-first.txt"
+    second = tmp_path / "audit/z-second.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    child_code = f"""
+import importlib.util
+import os
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("inventory_collection", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+original_unlink = module.os.unlink
+
+def crash_during_cleanup(path, *args, **kwargs):
+    original_unlink(path, *args, **kwargs)
+    if str(path).startswith("backup-"):
+        os._exit(92)
+
+module.os.unlink = crash_during_cleanup
+module._apply_atomic_payloads(
+    Path({str(tmp_path)!r}),
+    {{
+        Path("audit/a-first.txt"): "premier nouveau\\n",
+        Path("audit/z-second.txt"): "second nouveau\\n",
+    }},
+)
+"""
+
+    crashed = subprocess.run(
+        [sys.executable, "-c", child_code],
+        check=False,
+    )
+
+    assert crashed.returncode == 92
+    assert first.read_text(encoding="utf-8") == "premier nouveau\n"
+    assert second.read_text(encoding="utf-8") == "second nouveau\n"
+    assert list(tmp_path.glob(".inventory-collection-apply-*"))
+
+    def fail_new_transaction(_root_fd: int):
+        raise OSError("arrêt après finalisation")
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_create_transaction_directory",
+        fail_new_transaction,
+    )
+
+    with pytest.raises(OSError, match="arrêt après finalisation"):
+        inventory_module._apply_atomic_payloads(
+            tmp_path,
+            {Path("audit/irrelevant.txt"): "non écrit\n"},
+        )
+
+    assert first.read_text(encoding="utf-8") == "premier nouveau\n"
+    assert second.read_text(encoding="utf-8") == "second nouveau\n"
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
 def test_failed_rollback_preserves_and_reports_recoverable_backup(
     tmp_path: Path,
     inventory_module,
@@ -7078,7 +8019,8 @@ def test_transaction_reads_backup_through_pinned_parent_fd(
         name: str,
         payload: bytes,
     ) -> os.stat_result:
-        captured_payloads.append(payload)
+        if name.startswith(("stage-", "backup-")):
+            captured_payloads.append(payload)
         identity = original_write_entry(directory_fd, name, payload)
         if name.startswith("stage-"):
             (repository / "audit").rename(repository / "audit-original")
@@ -7855,9 +8797,12 @@ def test_release_and_debt_gates_have_independent_documented_failures(
     release_payload = json.loads(release.stdout)
     missing = _run_inventory_cli(tmp_path, "--fail-on-new")
     missing_payload = json.loads(missing.stdout)
+    provisional_baseline = _baseline_contract_payload()
+    provisional_baseline["updates"] = []
+    provisional_baseline["provisional"] = True
     _write(
         tmp_path / "audit/ANOMALIES_BASELINE.json",
-        json.dumps({"provisional": True}),
+        json.dumps(provisional_baseline, ensure_ascii=False),
     )
     provisional = _run_inventory_cli(tmp_path, "--fail-on-new")
     provisional_payload = json.loads(provisional.stdout)
@@ -7896,10 +8841,16 @@ def test_fail_on_new_uses_fingerprint_v1_and_accepts_disappearance(
         locator_key="missing|1SPE|disparu",
     )
     baseline = _baseline_contract_payload()
-    baseline["provisional"] = False
+    baseline["provisional"] = True
     baseline["active"] = [retained, disappeared]
     baseline["resolved"] = []
     baseline["updates"] = []
+    _append_baseline_update(
+        baseline,
+        inventory_module,
+        reason="Gel audité avant comparaison de dette",
+        timestamp="2026-07-23T10:00:00Z",
+    )
     _write(
         tmp_path / "audit/ANOMALIES_BASELINE.json",
         json.dumps(baseline, ensure_ascii=False),

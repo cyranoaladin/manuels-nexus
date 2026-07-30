@@ -28,7 +28,7 @@ from fnmatch import fnmatch
 from contextlib import contextmanager
 from pathlib import Path, PurePosixPath
 from collections import Counter, defaultdict
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from types import MappingProxyType
 from typing import Any, Mapping
 
@@ -1009,12 +1009,11 @@ def _load_baseline_payload(path: Path) -> Mapping[str, Any] | None:
 
 
 def _load_validated_baseline(root: Path) -> dict[str, Any]:
-    path = root / ANOMALIES_BASELINE_FILE
-    payload = _load_baseline_payload(path)
-    if payload is None:
-        raise InventoryError(
-            f"baseline absente ou JSON invalide: {ANOMALIES_BASELINE_FILE}"
-        )
+    payload = _read_confined_json_mapping(
+        root,
+        PurePosixPath(ANOMALIES_BASELINE_FILE),
+        role="baseline",
+    )
     _validate_artifact_schema(
         payload,
         root=root,
@@ -1026,10 +1025,28 @@ def _load_validated_baseline(root: Path) -> dict[str, Any]:
             f"{payload.get('fingerprint_schema_version')}"
         )
     updates = payload.get("updates")
-    if isinstance(updates, list) and updates:
+    if not isinstance(updates, list):
+        raise InventoryError("historique d'audit de baseline invalide")
+    if payload.get("provisional") is False and not updates:
+        raise InventoryError(
+            "baseline finale sans mise à jour d'audit approuvée"
+        )
+    if updates:
+        for previous, current in zip(updates, updates[1:]):
+            if (
+                not isinstance(previous, Mapping)
+                or not isinstance(current, Mapping)
+                or current.get("previous_baseline_digest")
+                != previous.get("new_baseline_digest")
+            ):
+                raise InventoryError(
+                    "chaîne d'empreintes de baseline incohérente"
+                )
         last_update = updates[-1]
         if (
             not isinstance(last_update, Mapping)
+            or payload.get("previous_baseline_digest")
+            != last_update.get("previous_baseline_digest")
             or last_update.get("new_baseline_digest")
             != _baseline_payload_digest(payload)
         ):
@@ -1042,8 +1059,8 @@ _ANOMALY_SEVERITY_RANK = MappingProxyType(
         "info": 0,
         "warning": 1,
         "error": 2,
-        "blocking": 2,
-        "regression": 3,
+        "blocking": 3,
+        "regression": 4,
     }
 )
 
@@ -1167,6 +1184,14 @@ def _compare_anomaly_debt(
                 "aggravation de sévérité "
                 f"fp={fingerprint}: {previous_severity}→{current_severity}"
             )
+        if (
+            previous_entry.get("blocking") is False
+            and current_entry.get("blocking") is True
+        ):
+            failures.append(
+                "aggravation du caractère bloquant "
+                f"fp={fingerprint}: False→True"
+            )
         current_disposition = str(
             current_entry.get("disposition", "open_debt")
         )
@@ -1228,6 +1253,14 @@ def _compare_anomaly_debt(
                 failures.append(
                     "aggravation de sévérité sur anomalie modifiée "
                     f"locator={locator}: {old_severity}→{new_severity}"
+                )
+            if (
+                old_entry.get("blocking") is False
+                and new_entry.get("blocking") is True
+            ):
+                failures.append(
+                    "aggravation du caractère bloquant sur anomalie modifiée "
+                    f"locator={locator}: False→True"
                 )
             old_disposition = str(
                 old_entry.get("disposition", "open_debt")
@@ -4287,6 +4320,99 @@ def _fingerprint_source(
     return normalized
 
 
+def _normalize_fallback_reason(
+    value: Any,
+    *,
+    repository_root: Path | None,
+) -> str:
+    if not isinstance(value, str) or not value.strip():
+        return ""
+    normalized = unicodedata.normalize("NFKC", value).casefold()
+    if repository_root is not None:
+        normalized = normalized.replace(
+            repository_root.as_posix().casefold(),
+            "<repository>",
+        )
+    normalized = re.sub(
+        r"\b\d{4}-\d{2}-\d{2}t\d{2}:\d{2}:\d{2}(?:\.\d+)?z\b",
+        "<timestamp>",
+        normalized,
+    )
+    normalized = re.sub(
+        r"\b(?:line|ligne|column|colonne|char|caractère)\s*[:#]?\s*\d+\b",
+        lambda match: re.sub(r"\d+", "<position>", match.group(0)),
+        normalized,
+    )
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    return normalized
+
+
+_LEGACY_REASONLESS_IDENTITIES = frozenset(
+    {
+        (
+            "broken_latex_references",
+            "cible latex absente des sources suivies",
+        ),
+        (
+            "duplicate_assembly_objects",
+            "objet inclus 2 fois dans le meme assemblage latex",
+        ),
+    }
+)
+
+
+def _fallback_reason_code(
+    item: Mapping[str, Any],
+    *,
+    category: str,
+    repository_root: Path | None,
+) -> Any:
+    explicit = item.get(
+        "reason_code",
+        item.get("raison_code", item.get("code", "")),
+    )
+    if explicit not in (None, ""):
+        return explicit
+
+    reason = next(
+        (
+            item[key]
+            for key in ("reason", "raison", "detail")
+            if key in item and item[key] not in (None, "")
+        ),
+        "",
+    )
+    normalized_reason = _normalize_fallback_reason(
+        reason,
+        repository_root=repository_root,
+    )
+    if (category, normalized_reason) in _LEGACY_REASONLESS_IDENTITIES:
+        normalized_reason = ""
+    stable_reason = ""
+    reason_families = (
+        ("en-tete % meta absent", "meta_header_absent"),
+        ("json meta invalide", "meta_json_invalid"),
+        ("json meta doit etre un objet", "meta_json_not_object"),
+        ("champs meta absents ou invalides", "meta_fields_missing_or_invalid"),
+        ("champ meta sous_type invalide", "meta_subtype_invalid"),
+        ("lecture meta impossible", "meta_read_failed"),
+    )
+    for marker, code in reason_families:
+        if marker in normalized_reason:
+            stable_reason = code
+            break
+    if not stable_reason and normalized_reason:
+        stable_reason = f"fallback:{normalized_reason}"
+
+    semantic: dict[str, Any] = {}
+    if stable_reason:
+        semantic["reason"] = stable_reason
+    for key in ("scope", "status"):
+        if item.get(key) not in (None, ""):
+            semantic[key] = item[key]
+    return semantic if semantic else ""
+
+
 def _anomaly_identity_fields(
     item: Mapping[str, Any],
     *,
@@ -4306,9 +4432,14 @@ def _anomaly_identity_fields(
         "chapter": item.get("chapter", item.get("chapitre", "")),
         "field": item.get("field", item.get("champ", "")),
         "manual": item.get("manual", item.get("manuel", "")),
-        "reason_code": item.get(
-            "reason_code",
-            item.get("raison_code", item.get("code", "")),
+        "reason_code": _fallback_reason_code(
+            item,
+            category=str(
+                category
+                if category is not None
+                else item.get("category", "")
+            ),
+            repository_root=repository_root,
         ),
         "source": _fingerprint_source(
             item.get("source", item.get("path", "")),
@@ -4389,6 +4520,8 @@ def _anomaly_severity(
     anomaly: Mapping[str, Any],
     qualification: Mapping[str, Any],
 ) -> str:
+    if qualification.get("regression") is True:
+        return "regression"
     severity = str(anomaly.get("severity", "")).lower()
     if severity in _ANOMALY_SEVERITY_RANK:
         return severity
@@ -4426,7 +4559,10 @@ def _current_active_debt(
             raise InventoryError(
                 f"qualification invalide: {fingerprint}"
             )
-        if qualification.get("disposition") == "fixed":
+        if (
+            qualification.get("disposition") == "fixed"
+            and qualification.get("regression") is not True
+        ):
             continue
         case = representative.get(str(fingerprint))
         if case is None:
@@ -4805,9 +4941,19 @@ def _create_transaction_directory(
             raise InventoryError("transaction directory identity changed")
         if not _directory_entry_matches_identity(root_fd, name, pinned):
             raise InventoryError("transaction directory identity changed")
+        _write_transaction_entry(
+            fd,
+            "transaction-owner",
+            b"",
+        )
+        os.fsync(fd)
         os.fsync(root_fd)
         return name, fd, pinned
     except Exception:
+        try:
+            os.unlink("transaction-owner", dir_fd=fd)
+        except OSError:
+            pass
         os.close(fd)
         if pinned is not None and _directory_entry_matches_identity(
             root_fd,
@@ -4934,6 +5080,51 @@ def _read_destination_backup(
         os.close(fd)
 
 
+def _read_confined_json_mapping(
+    root: Path,
+    relative: PurePosixPath,
+    *,
+    role: str,
+) -> dict[str, Any]:
+    root = root.resolve()
+    _clean_path(relative.as_posix(), role=role, repository=root)
+    root_fd, root_stat = _open_pinned_directory(
+        root,
+        role=f"{role} repository root",
+    )
+    parent_fd: int | None = None
+    try:
+        parent_fd, parent_stat = _open_destination_parent(
+            root_fd,
+            relative,
+            create=False,
+        )
+        value = _read_destination_backup(parent_fd, relative.name)
+        if value is None:
+            raise InventoryError(f"{role} absente: {relative}")
+        payload, target_stat = value
+        _require_repository_root_identity(root, root_stat)
+        _revalidate_destination_parent(root_fd, relative, parent_stat)
+        _revalidate_destination_entry(
+            parent_fd,
+            relative.name,
+            target_stat,
+        )
+        try:
+            decoded = json.loads(payload.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise InventoryError(
+                f"{role} absente ou JSON invalide: {relative}"
+            ) from exc
+        if not isinstance(decoded, Mapping):
+            raise InventoryError(f"{role} JSON doit être un objet: {relative}")
+        return dict(decoded)
+    finally:
+        if parent_fd is not None:
+            os.close(parent_fd)
+        os.close(root_fd)
+
+
 def _revalidate_destination_entry(
     parent_fd: int,
     basename: str,
@@ -5013,6 +5204,34 @@ def _write_transaction_entry(
         raise
     finally:
         os.close(fd)
+
+
+def _publish_transaction_entry(
+    directory_fd: int,
+    *,
+    temporary_name: str,
+    final_name: str,
+    payload: bytes,
+) -> None:
+    _write_transaction_entry(
+        directory_fd,
+        temporary_name,
+        payload,
+    )
+    try:
+        os.rename(
+            temporary_name,
+            final_name,
+            src_dir_fd=directory_fd,
+            dst_dir_fd=directory_fd,
+        )
+        os.fsync(directory_fd)
+    except Exception:
+        try:
+            os.unlink(temporary_name, dir_fd=directory_fd)
+        except FileNotFoundError:
+            pass
+        raise
 
 
 def _transaction_entry_is_regular(directory_fd: int, name: str) -> bool:
@@ -5105,9 +5324,432 @@ def _copy_recovery_backup(
         os.close(source_fd)
 
 
+_TRANSACTION_DIRECTORY_RE = re.compile(
+    r"^\.inventory-collection-apply-[0-9a-f]{24}$"
+)
+_TRANSACTION_ENTRY_RE = re.compile(r"^(?:stage|backup)-[0-9]{8}$")
+
+
+def _transaction_payload_digest(payload: bytes) -> str:
+    return f"sha256:{hashlib.sha256(payload).hexdigest()}"
+
+
+def _recover_interrupted_transactions(
+    root: Path,
+    *,
+    root_fd: int,
+    root_stat: os.stat_result,
+) -> None:
+    candidates: list[tuple[int, str, os.stat_result]] = []
+    for name in os.listdir(root_fd):
+        if not _TRANSACTION_DIRECTORY_RE.fullmatch(name):
+            continue
+        value = os.stat(name, dir_fd=root_fd, follow_symlinks=False)
+        if not stat.S_ISDIR(value.st_mode):
+            raise InventoryError(
+                f"interrupted transaction is not a directory: {name}"
+            )
+        candidates.append((value.st_mtime_ns, name, value))
+
+    for _mtime, name, expected_directory in sorted(
+        candidates,
+        reverse=True,
+    ):
+        _require_repository_root_identity(root, root_stat)
+        transaction_fd = os.open(
+            name,
+            _directory_open_flags(),
+            dir_fd=root_fd,
+        )
+        try:
+            pinned = os.fstat(transaction_fd)
+            if (
+                _stat_identity(pinned)
+                != _stat_identity(expected_directory)
+                or not _directory_entry_matches_identity(
+                    root_fd,
+                    name,
+                    pinned,
+                )
+            ):
+                raise InventoryError(
+                    f"interrupted transaction identity changed: {name}"
+                )
+            if not os.listdir(transaction_fd):
+                os.rmdir(name, dir_fd=root_fd)
+                os.fsync(root_fd)
+                continue
+            preparing_value = _read_destination_backup(
+                transaction_fd,
+                "preparing.json",
+            )
+            preparing_record = (
+                _parse_lock_record(preparing_value[0])
+                if preparing_value is not None
+                else None
+            )
+            ready_value = _read_destination_backup(
+                transaction_fd,
+                "journal-ready",
+            )
+            transaction_owner = _read_destination_backup(
+                transaction_fd,
+                "transaction-owner",
+            )
+            if transaction_owner is None or transaction_owner[0] != b"":
+                raise InventoryError(
+                    f"interrupted transaction owner marker is invalid: {name}"
+                )
+            if ready_value is not None and ready_value[0] != b"":
+                raise InventoryError(
+                    f"interrupted transaction ready marker is invalid: {name}"
+                )
+            journal_value = _read_destination_backup(
+                transaction_fd,
+                "journal.json",
+            )
+            if journal_value is None:
+                remaining = set(os.listdir(transaction_fd))
+                if remaining.issubset({"committed"}):
+                    for entry_name in remaining:
+                        if not _transaction_entry_is_regular(
+                            transaction_fd,
+                            entry_name,
+                        ):
+                            raise InventoryError(
+                                "interrupted transaction contains a "
+                                f"non-regular entry: {entry_name}"
+                            )
+                        os.unlink(entry_name, dir_fd=transaction_fd)
+                    os.fsync(transaction_fd)
+                    if not _directory_entry_matches_identity(
+                        root_fd,
+                        name,
+                        expected_directory,
+                    ):
+                        raise InventoryError(
+                            "interrupted transaction identity changed: "
+                            f"{name}"
+                        )
+                    os.rmdir(name, dir_fd=root_fd)
+                    os.fsync(root_fd)
+                    continue
+            journal: Any = None
+            owner_record: dict[str, Any] | None = None
+            if journal_value is not None:
+                journal_bytes, _journal_stat = journal_value
+                try:
+                    journal = json.loads(journal_bytes.decode("utf-8"))
+                except (UnicodeDecodeError, json.JSONDecodeError):
+                    pass
+                owner_record = _parse_lock_record(journal_bytes)
+            published = (
+                ready_value is not None
+                and isinstance(journal, Mapping)
+                and journal.get("schema_version") == 1
+                and isinstance(journal.get("entries"), list)
+                and bool(journal["entries"])
+                and owner_record is not None
+            )
+            if not published:
+                if (
+                    ready_value is not None
+                    or (
+                        preparing_record is not None
+                        and _lock_owner_is_live(preparing_record)
+                    )
+                ):
+                    raise InventoryError(
+                        f"interrupted transaction journal is invalid: {name}"
+                    )
+                actual_entries = set(os.listdir(transaction_fd))
+                if any(
+                    entry
+                    not in {
+                        "journal.json",
+                        "journal.tmp",
+                        "preparing.json",
+                        "preparing.tmp",
+                        "transaction-owner",
+                    }
+                    and not _TRANSACTION_ENTRY_RE.fullmatch(entry)
+                    for entry in actual_entries
+                ):
+                    raise InventoryError(
+                        "unpublished transaction contains unexpected entries: "
+                        + ", ".join(sorted(actual_entries))
+                    )
+                for entry_name in sorted(actual_entries):
+                    if not _transaction_entry_is_regular(
+                        transaction_fd,
+                        entry_name,
+                    ):
+                        raise InventoryError(
+                            "unpublished transaction contains a non-regular "
+                            f"entry: {entry_name}"
+                        )
+                    os.unlink(entry_name, dir_fd=transaction_fd)
+                os.fsync(transaction_fd)
+                if not _directory_entry_matches_identity(
+                    root_fd,
+                    name,
+                    expected_directory,
+                ):
+                    raise InventoryError(
+                        f"interrupted transaction identity changed: {name}"
+                    )
+                os.rmdir(name, dir_fd=root_fd)
+                os.fsync(root_fd)
+                continue
+            assert isinstance(journal, Mapping)
+            assert owner_record is not None
+            if _lock_owner_is_live(owner_record):
+                raise InventoryError(
+                    f"transaction owner is still active: {name}"
+                )
+
+            committed_value = _read_destination_backup(
+                transaction_fd,
+                "committed",
+            )
+            if (
+                committed_value is not None
+                and committed_value[0] != b""
+            ):
+                raise InventoryError(
+                    f"interrupted transaction commit marker is invalid: {name}"
+                )
+            committed = committed_value is not None
+            allowed_entries = {
+                "committed",
+                "journal-ready",
+                "journal.json",
+                "preparing.json",
+                "transaction-owner",
+            }
+            seen_targets: set[PurePosixPath] = set()
+            for raw_entry in journal["entries"]:
+                if not isinstance(raw_entry, Mapping):
+                    raise InventoryError(
+                        f"interrupted transaction entry is invalid: {name}"
+                    )
+                relative_text = raw_entry.get("relative")
+                stage_name = raw_entry.get("stage_name")
+                stage_digest = raw_entry.get("stage_digest")
+                backup_name = raw_entry.get("backup_name")
+                backup_digest = raw_entry.get("backup_digest")
+                if (
+                    not isinstance(relative_text, str)
+                    or not isinstance(stage_name, str)
+                    or not _TRANSACTION_ENTRY_RE.fullmatch(stage_name)
+                    or not isinstance(stage_digest, str)
+                    or not re.fullmatch(r"sha256:[0-9a-f]{64}", stage_digest)
+                    or (
+                        backup_name is not None
+                        and (
+                            not isinstance(backup_name, str)
+                            or not _TRANSACTION_ENTRY_RE.fullmatch(backup_name)
+                            or not isinstance(backup_digest, str)
+                            or not re.fullmatch(
+                                r"sha256:[0-9a-f]{64}",
+                                backup_digest,
+                            )
+                        )
+                    )
+                    or (backup_name is None and backup_digest is not None)
+                ):
+                    raise InventoryError(
+                        f"interrupted transaction entry is invalid: {name}"
+                    )
+                relative = PurePosixPath(relative_text)
+                _clean_path(
+                    relative.as_posix(),
+                    role="transaction recovery target",
+                    repository=root,
+                )
+                if not relative.name or relative in seen_targets:
+                    raise InventoryError(
+                        f"interrupted transaction target is invalid: {relative}"
+                    )
+                seen_targets.add(relative)
+                allowed_entries.add(stage_name)
+                if isinstance(backup_name, str):
+                    allowed_entries.add(backup_name)
+
+                stage = _read_destination_backup(
+                    transaction_fd,
+                    stage_name,
+                )
+                if (
+                    stage is not None
+                    and _transaction_payload_digest(stage[0]) != stage_digest
+                ):
+                    raise InventoryError(
+                        f"staged recovery payload is corrupted: {relative}"
+                    )
+                backup = (
+                    _read_destination_backup(transaction_fd, backup_name)
+                    if isinstance(backup_name, str)
+                    else None
+                )
+                if (
+                    backup is not None
+                    and _transaction_payload_digest(backup[0]) != backup_digest
+                ):
+                    raise InventoryError(
+                        f"recovery backup is corrupted: {relative}"
+                    )
+
+                parent_fd, parent_stat = _open_destination_parent(
+                    root_fd,
+                    relative,
+                    create=False,
+                )
+                try:
+                    _revalidate_destination_parent(
+                        root_fd,
+                        relative,
+                        parent_stat,
+                    )
+                    current = _read_destination_backup(
+                        parent_fd,
+                        relative.name,
+                    )
+                    current_digest = (
+                        _transaction_payload_digest(current[0])
+                        if current is not None
+                        else None
+                    )
+                    _revalidate_destination_entry(
+                        parent_fd,
+                        relative.name,
+                        current[1] if current is not None else None,
+                    )
+                    expected_digest: str | None
+                    if committed:
+                        if current_digest != stage_digest:
+                            raise InventoryError(
+                                "committed recovery target is incoherent: "
+                                f"{relative}"
+                            )
+                        expected_digest = stage_digest
+                    elif isinstance(backup_name, str):
+                        if current_digest == stage_digest:
+                            if backup is None:
+                                raise InventoryError(
+                                    "recovery backup unavailable for applied "
+                                    f"target: {relative}"
+                                )
+                            os.replace(
+                                backup_name,
+                                relative.name,
+                                src_dir_fd=transaction_fd,
+                                dst_dir_fd=parent_fd,
+                            )
+                        elif current_digest != backup_digest:
+                            raise InventoryError(
+                                "recovery target was modified concurrently: "
+                                    f"{relative}"
+                                )
+                        expected_digest = str(backup_digest)
+                    elif current_digest == stage_digest:
+                        os.unlink(relative.name, dir_fd=parent_fd)
+                        expected_digest = None
+                    elif current_digest is not None:
+                        raise InventoryError(
+                            "recovery target was modified concurrently: "
+                            f"{relative}"
+                        )
+                    else:
+                        expected_digest = None
+                    os.fsync(parent_fd)
+                    recovered = _read_destination_backup(
+                        parent_fd,
+                        relative.name,
+                    )
+                    recovered_digest = (
+                        _transaction_payload_digest(recovered[0])
+                        if recovered is not None
+                        else None
+                    )
+                    if recovered_digest != expected_digest:
+                        raise InventoryError(
+                            f"recovery postcondition failed: {relative}"
+                        )
+                    _revalidate_destination_entry(
+                        parent_fd,
+                        relative.name,
+                        recovered[1] if recovered is not None else None,
+                    )
+                    _require_repository_root_identity(root, root_stat)
+                    _revalidate_destination_parent(
+                        root_fd,
+                        relative,
+                        parent_stat,
+                    )
+                finally:
+                    os.close(parent_fd)
+
+            actual_entries = set(os.listdir(transaction_fd))
+            unexpected = actual_entries - allowed_entries
+            if unexpected:
+                raise InventoryError(
+                    "interrupted transaction contains unexpected entries: "
+                    + ", ".join(sorted(unexpected))
+                )
+            for entry_name in sorted(
+                actual_entries,
+                key=lambda value: (
+                    value == "committed",
+                    value == "journal.json",
+                    value,
+                ),
+            ):
+                if not _transaction_entry_is_regular(
+                    transaction_fd,
+                    entry_name,
+                ):
+                    raise InventoryError(
+                        "interrupted transaction contains a non-regular entry: "
+                        f"{entry_name}"
+                    )
+                os.unlink(entry_name, dir_fd=transaction_fd)
+            os.fsync(transaction_fd)
+        finally:
+            os.close(transaction_fd)
+        if not _directory_entry_matches_identity(
+            root_fd,
+            name,
+            expected_directory,
+        ):
+            raise InventoryError(
+                f"interrupted transaction identity changed: {name}"
+            )
+        os.rmdir(name, dir_fd=root_fd)
+        os.fsync(root_fd)
+
+
+def _recover_repository_transactions(root: Path) -> None:
+    root = root.resolve()
+    root_fd, root_stat = _open_pinned_directory(
+        root,
+        role="repository recovery root",
+    )
+    try:
+        _recover_interrupted_transactions(
+            root,
+            root_fd=root_fd,
+            root_stat=root_stat,
+        )
+    finally:
+        os.close(root_fd)
+
+
 def _apply_atomic_payloads(
     root: Path,
     rendered_artifacts: dict[Path, str],
+    *,
+    validate_state: Callable[[], None] | None = None,
 ) -> None:
     root = root.resolve()
     targets: dict[PurePosixPath, str] = {}
@@ -5140,7 +5782,9 @@ def _apply_atomic_payloads(
     stage_snapshots: dict[PurePosixPath, os.stat_result] = {}
     applied_snapshots: dict[PurePosixPath, os.stat_result] = {}
     staged: dict[PurePosixPath, str] = {}
+    stage_digests: dict[PurePosixPath, str] = {}
     backups: dict[PurePosixPath, str] = {}
+    backup_digests: dict[PurePosixPath, str] = {}
     transaction_entries: set[str] = set()
     preserved_transaction_entries: set[str] = set()
     replaced: list[PurePosixPath] = []
@@ -5157,14 +5801,49 @@ def _apply_atomic_payloads(
         role="repository transaction root",
     )
     try:
+        _recover_interrupted_transactions(
+            root,
+            root_fd=root_fd,
+            root_stat=root_stat,
+        )
         temp_name, temp_fd, temp_stat = _create_transaction_directory(
             root_fd
         )
+        transaction_entries.add("transaction-owner")
     except Exception:
         os.close(root_fd)
         raise
     try:
         _require_repository_root_identity(root, root_stat)
+        if validate_state is not None:
+            validate_state()
+        process_start_token = _process_start_token(os.getpid())
+        if not process_start_token:
+            raise InventoryError(
+                "cannot identify transaction journal owner"
+            )
+        owner_record = {
+            "created_at_utc": datetime.datetime.now(datetime.UTC)
+            .isoformat()
+            .replace("+00:00", "Z"),
+            "pid": os.getpid(),
+            "process_start_token": process_start_token,
+            "schema_version": 1,
+        }
+        _publish_transaction_entry(
+            temp_fd,
+            temporary_name="preparing.tmp",
+            final_name="preparing.json",
+            payload=_utf8_bytes(
+                json.dumps(
+                    owner_record,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                )
+            ),
+        )
+        transaction_entries.add("preparing.json")
         for relative in targets:
             destination_parents[relative] = _open_destination_parent(
                 root_fd,
@@ -5174,12 +5853,16 @@ def _apply_atomic_payloads(
         for index, (relative, content) in enumerate(targets.items()):
             parent_fd, _parent_stat = destination_parents[relative]
             stage_name = f"stage-{index:08d}"
+            stage_payload = _utf8_bytes(content)
             stage_snapshots[relative] = _write_transaction_entry(
                 temp_fd,
                 stage_name,
-                _utf8_bytes(content),
+                stage_payload,
             )
             staged[relative] = stage_name
+            stage_digests[relative] = _transaction_payload_digest(
+                stage_payload
+            )
             transaction_entries.add(stage_name)
             backup = _read_destination_backup(
                 parent_fd,
@@ -5197,8 +5880,44 @@ def _apply_atomic_payloads(
                     backup_payload,
                 )
                 backups[relative] = backup_name
+                backup_digests[relative] = _transaction_payload_digest(
+                    backup_payload
+                )
                 transaction_entries.add(backup_name)
 
+        journal = {
+            **owner_record,
+            "entries": [
+                {
+                    "backup_digest": backup_digests.get(relative),
+                    "backup_name": backups.get(relative),
+                    "relative": relative.as_posix(),
+                    "stage_digest": stage_digests[relative],
+                    "stage_name": staged[relative],
+                }
+                for relative in sorted(targets, key=str)
+            ],
+        }
+        _publish_transaction_entry(
+            temp_fd,
+            temporary_name="journal.tmp",
+            final_name="journal.json",
+            payload=_utf8_bytes(
+                json.dumps(
+                    journal,
+                    ensure_ascii=False,
+                    sort_keys=True,
+                    separators=(",", ":"),
+                )
+            ),
+        )
+        transaction_entries.add("journal.json")
+        _write_transaction_entry(
+            temp_fd,
+            "journal-ready",
+            b"",
+        )
+        transaction_entries.add("journal-ready")
         os.fsync(temp_fd)
         _require_repository_root_identity(root, root_stat)
         for relative, stage_name in sorted(
@@ -5206,6 +5925,8 @@ def _apply_atomic_payloads(
             key=lambda item: str(item[0]),
         ):
             _require_repository_root_identity(root, root_stat)
+            if validate_state is not None:
+                validate_state()
             parent_fd, parent_stat = destination_parents[relative]
             _revalidate_destination_parent(
                 root_fd,
@@ -5241,6 +5962,8 @@ def _apply_atomic_payloads(
                 )
             applied_snapshots[relative] = applied_stat
             os.fsync(parent_fd)
+            if validate_state is not None:
+                validate_state()
         _require_repository_root_identity(root, root_stat)
         for relative, (parent_fd, parent_stat) in destination_parents.items():
             _revalidate_destination_parent(
@@ -5253,6 +5976,17 @@ def _apply_atomic_payloads(
                 relative.name,
                 applied_snapshots[relative],
             )
+        if validate_state is not None:
+            validate_state()
+        _write_transaction_entry(
+            temp_fd,
+            "committed",
+            b"",
+        )
+        transaction_entries.add("committed")
+        os.fsync(temp_fd)
+        if validate_state is not None:
+            validate_state()
     except Exception as exc:
         rollback_errors: list[str] = []
         recoverable_backups: list[Path] = []
@@ -5304,6 +6038,8 @@ def _apply_atomic_payloads(
                             f"recovery backup failed: {recovery_exc}"
                         )
                 rollback_errors.append(str(rollback_exc))
+        if preserved_transaction_entries:
+            preserved_transaction_entries.add("journal.json")
         message = "transaction rolled back"
         if rollback_errors:
             message += " incompletely: " + "; ".join(rollback_errors)
@@ -5318,7 +6054,12 @@ def _apply_atomic_payloads(
         cleanup_errors: list[str] = []
         try:
             for name in sorted(
-                transaction_entries - preserved_transaction_entries
+                transaction_entries - preserved_transaction_entries,
+                key=lambda value: (
+                    value == "committed",
+                    value == "journal.json",
+                    value,
+                ),
             ):
                 try:
                     os.unlink(name, dir_fd=temp_fd)
@@ -5455,9 +6196,8 @@ def build_inventory_artifacts(
             audit_root / "MATRICE_LIVRABLES.yaml",
         )
     )
-    _ensure_clean_tree(root, mode=require_clean)
-
     if check_only:
+        _ensure_clean_tree(root, mode=require_clean)
         inventory = build_inventory(
             root,
             managed_output_paths=managed_output_paths,
@@ -5475,6 +6215,12 @@ def build_inventory_artifacts(
         return {"inventory": inventory, "artifacts": rendered, "diffs": diffs}
 
     with _lock_generation(root) as lock_identity:
+        _recover_repository_transactions(root)
+        _ensure_clean_tree(
+            root,
+            mode=require_clean,
+            allowed_generation_paths=lock_identity,
+        )
         if baseline_path:
             baseline_failures = _evaluate_baseline(
                 build_inventory(
@@ -5534,8 +6280,9 @@ def _manual_name(manual_id: str) -> str:
 
 
 def _read_baseline_anomaly_summary(root: Path) -> dict[str, int]:
-    payload = _load_json_payload(root / ANOMALIES_BASELINE_FILE, default=None)
-    if not isinstance(payload, Mapping):
+    try:
+        payload = _load_validated_baseline(root)
+    except InventoryError:
         return {}
     summary = payload.get("summary")
     if isinstance(summary, Mapping):
@@ -6399,21 +7146,14 @@ def _check_gate(root: Path, *, audit_directory: str, etat_path: str) -> dict[str
 
 
 def _fail_on_new_gate(root: Path) -> dict[str, Any]:
-    baseline_path = root / ANOMALIES_BASELINE_FILE
-    baseline = _load_baseline_payload(baseline_path)
     comparison: dict[str, Any] | None = None
-    if baseline is None:
-        reasons = [f"baseline absente ou invalide:{ANOMALIES_BASELINE_FILE}"]
-    elif baseline.get("provisional") is True:
-        reasons = ["baseline provisoire: comparaison de dette non obligatoire"]
-    elif baseline.get("fingerprint_schema_version") != FINGERPRINT_SCHEMA_VERSION:
-        reasons = [
-            "fingerprint_schema_version baseline non supportée:"
-            f"{baseline.get('fingerprint_schema_version')}"
-        ]
-    else:
-        try:
-            baseline = _load_validated_baseline(root)
+    try:
+        baseline = _load_validated_baseline(root)
+        if baseline.get("provisional") is True:
+            reasons = [
+                "baseline provisoire: comparaison de dette non obligatoire"
+            ]
+        else:
             inventory = build_inventory(root)
             comparison = _compare_anomaly_debt(
                 _current_active_debt(inventory),
@@ -6421,11 +7161,11 @@ def _fail_on_new_gate(root: Path) -> dict[str, Any]:
                 baseline.get("resolved", []),
             )
             reasons = list(comparison["failures"])
-        except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
-            reasons = [
-                "comparaison fingerprint-v1 impossible:"
-                f"{_stable_gate_reason(exc, root)}"
-            ]
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        reasons = [
+            "comparaison fingerprint-v1 impossible:"
+            f"{_stable_gate_reason(exc, root)}"
+        ]
     result = _gate_result(
         "fail-on-new",
         success=not reasons,
@@ -6441,10 +7181,13 @@ def _fail_on_new_gate(root: Path) -> dict[str, Any]:
 def _baseline_payload_digest(payload: Mapping[str, Any]) -> str:
     normalized = _canonicalize(dict(payload))
     updates = normalized.get("updates")
-    if isinstance(updates, list):
-        for update in updates:
-            if isinstance(update, dict) and "new_baseline_digest" in update:
-                update["new_baseline_digest"] = "sha256:" + "0" * 64
+    if isinstance(updates, list) and updates:
+        last_update = updates[-1]
+        if (
+            isinstance(last_update, dict)
+            and "new_baseline_digest" in last_update
+        ):
+            last_update["new_baseline_digest"] = "sha256:" + "0" * 64
     serialized = json.dumps(
         normalized,
         ensure_ascii=False,
@@ -6548,6 +7291,8 @@ def _update_baseline_gate(
             reasons=reasons,
         )
 
+    with _lock_generation(root):
+        _recover_repository_transactions(root)
     clean = _require_clean_gate(root)
     if not clean["success"]:
         return _gate_result(
@@ -6613,6 +7358,26 @@ def _update_baseline_gate(
             root,
             require_git_provenance=True,
         )
+        provenance = inventory.get("provenance")
+        if not isinstance(provenance, Mapping):
+            raise InventoryError(
+                "provenance absente pendant la mise à jour de baseline"
+            )
+        git_sha = provenance.get("head_sha")
+        timestamp = provenance.get("generated_at_utc")
+        if (
+            not isinstance(git_sha, str)
+            or not re.fullmatch(r"[0-9a-f]{40}", git_sha)
+            or not isinstance(timestamp, str)
+            or not timestamp
+        ):
+            raise InventoryError(
+                "provenance Git incohérente pendant la mise à jour de baseline"
+            )
+        if git_sha != validated_head:
+            raise InventoryError(
+                "HEAD modifié pendant la construction de la provenance"
+            )
         current_active = _current_active_debt(inventory)
         old_payload = _load_validated_baseline(root)
         if _baseline_payload_digest(old_payload) != validated_baseline_digest:
@@ -6640,12 +7405,6 @@ def _update_baseline_gate(
             old_active,
             old_resolved,
         )
-        timestamp = _generation_timestamp(root, required=True)
-        if timestamp is None:  # defensive: required=True already raises
-            raise InventoryError("timestamp Git indisponible")
-        git_sha = _repo_head_sha(root, required=True)
-        if git_sha is None:  # defensive: required=True already raises
-            raise InventoryError("SHA Git indisponible")
         resolved_by_fingerprint = {
             str(entry.get("fingerprint", "")): dict(entry)
             for entry in old_resolved
@@ -6744,6 +7503,14 @@ def _update_baseline_gate(
             mode="head",
             allowed_generation_paths=lock_identity,
         )
+
+        def require_unchanged_head() -> None:
+            if _repo_head_sha(root, required=True) != git_sha:
+                raise InventoryError(
+                    "HEAD modifié avant l'écriture de la baseline"
+                )
+
+        require_unchanged_head()
         _apply_atomic_payloads(
             root,
             {
@@ -6758,6 +7525,7 @@ def _update_baseline_gate(
                 ),
                 root / BASELINE_UPDATE_REPORT_FILE: report,
             },
+            validate_state=require_unchanged_head,
         )
 
     result = _gate_result(
