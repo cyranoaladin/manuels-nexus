@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import stat
 import subprocess
 from collections import defaultdict
 from pathlib import Path, PurePosixPath
@@ -187,18 +188,39 @@ def inventory_pdfs(
                     "source": path,
                 }
             )
-        if not (root / path).is_file():
+        pdf_path = root / path
+        try:
+            pdf_stat = pdf_path.lstat()
+        except FileNotFoundError:
+            rejection_reason = "fichier PDF suivi absent du checkout"
+        except OSError as exc:
+            rejection_reason = (
+                "statut du fichier PDF suivi indisponible: "
+                f"{type(exc).__name__}"
+            )
+        else:
+            if stat.S_ISLNK(pdf_stat.st_mode):
+                rejection_reason = (
+                    "fichier PDF suivi non régulier: lien symbolique interdit"
+                )
+            elif not stat.S_ISREG(pdf_stat.st_mode):
+                rejection_reason = (
+                    "fichier PDF suivi non régulier: type de fichier interdit"
+                )
+            else:
+                rejection_reason = None
+        if rejection_reason is not None:
             artifacts.append(
                 base
                 | {
                     "page_count": None,
                     "page_count_method": None,
-                    "reason": "fichier PDF suivi absent du checkout",
+                    "reason": rejection_reason,
                     "status": "page_count_unavailable",
                 }
             )
             continue
-        count, pdfinfo_reason = pdfinfo_counter(root / path)
+        count, pdfinfo_reason = pdfinfo_counter(pdf_path)
         if count is not None:
             artifacts.append(
                 base
@@ -210,7 +232,7 @@ def inventory_pdfs(
                 }
             )
             continue
-        count, python_reason = python_counter(root / path)
+        count, python_reason = python_counter(pdf_path)
         if count is not None:
             artifacts.append(
                 base

@@ -3202,6 +3202,130 @@ def test_missing_tracked_pdf_has_deterministic_checkout_status(
 
 
 @pytest.mark.parametrize(
+    "link_kind",
+    [
+        pytest.param("absolute-external", id="absolute-external"),
+        pytest.param("relative-external", id="relative-external"),
+        pytest.param("relative-internal", id="relative-internal"),
+        pytest.param("broken", id="broken"),
+    ],
+)
+def test_tracked_pdf_symlink_is_not_read_or_counted(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    link_kind: str,
+) -> None:
+    _init_repository(tmp_path)
+    pdf = "NSI/build/MANUEL_1NSI_eleve.pdf"
+    link = tmp_path / pdf
+    link.parent.mkdir(parents=True)
+    if link_kind in {"absolute-external", "relative-external"}:
+        target = tmp_path.parent / f"{tmp_path.name}-{link_kind}.pdf"
+        _write(target, "contenu PDF externe simule")
+        link_target = (
+            str(target)
+            if link_kind == "absolute-external"
+            else os.path.relpath(target, link.parent)
+        )
+    elif link_kind == "relative-internal":
+        target = tmp_path / "evidence/real.pdf"
+        _write(target, "contenu PDF interne simule")
+        link_target = os.path.relpath(target, link.parent)
+    else:
+        target = tmp_path / "missing.pdf"
+        link_target = os.path.relpath(target, link.parent)
+    link.symlink_to(link_target)
+    _track(tmp_path, pdf)
+    counter_calls: list[Path] = []
+
+    def unexpected_counter(path: Path) -> tuple[int | None, str | None]:
+        counter_calls.append(path)
+        return 9, None
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        unexpected_counter,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_python",
+        unexpected_counter,
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+
+    assert link.is_symlink()
+    assert counter_calls == []
+    assert artifact == {
+        "chapter": None,
+        "manual": "1NSI",
+        "page_count": None,
+        "page_count_method": None,
+        "path": pdf,
+        "reason": "fichier PDF suivi non régulier: lien symbolique interdit",
+        "scope": "manual",
+        "source_role": "generated_dependency",
+        "status": "page_count_unavailable",
+        "variant": "eleve",
+    }
+    assert inventory["manuals"]["1NSI"]["compiled_artifacts"] == []
+    assert inventory["manuals"]["1NSI"]["compiled_variants"]["manual"] == []
+    assert inventory["coherence_checks"]["artifact_cardinality"] == {
+        "ok": True,
+        "violations": [],
+    }
+    assert "observed_builds" not in inventory
+
+
+@pytest.mark.skipif(not hasattr(os, "mkfifo"), reason="FIFO indisponible")
+def test_nonregular_tracked_pdf_is_not_read_or_counted(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    pdf = "NSI/build/MANUEL_1NSI_eleve.pdf"
+    fifo = tmp_path / pdf
+    fifo.parent.mkdir(parents=True)
+    os.mkfifo(fifo)
+    counter_calls: list[Path] = []
+
+    def unexpected_counter(path: Path) -> tuple[int | None, str | None]:
+        counter_calls.append(path)
+        return 9, None
+
+    inventory = {
+        "anomalies": {"unattributed_pdfs": []},
+        "manuals": {"1NSI": {"chapters": {}}},
+    }
+    artifacts = inventory_module._pdf_core.inventory_pdfs(
+        tmp_path,
+        (pdf,),
+        inventory,
+        source_roles={pdf: "generated_dependency"},
+        pdfinfo_counter=unexpected_counter,
+        python_counter=unexpected_counter,
+    )
+
+    assert counter_calls == []
+    assert artifacts == [
+        {
+            "chapter": None,
+            "manual": "1NSI",
+            "page_count": None,
+            "page_count_method": None,
+            "path": pdf,
+            "reason": "fichier PDF suivi non régulier: type de fichier interdit",
+            "scope": "manual",
+            "source_role": "generated_dependency",
+            "status": "page_count_unavailable",
+            "variant": "eleve",
+        }
+    ]
+
+
+@pytest.mark.parametrize(
     ("pdf", "expected_role"),
     [
         pytest.param(
