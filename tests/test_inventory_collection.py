@@ -1459,11 +1459,11 @@ def test_dispositions_control_file_is_schema_valid_and_digest_verified(
         if record["disposition"] == "generated_dependency"
     }
     assert set(intentional) == {
-        "18b3408901ac268d",
-        "298756cbdf41f6a5",
-        "766e1f54806282ec",
+        "19669084dffa5d5b",
+        "2695d63b022fe9f0",
+        "b912c1041392a181",
     }
-    assert set(generated) == {"7255993a79a46b32"}
+    assert set(generated) == {"62c72a29cc4eedb7"}
     assert all(
         "Mathematiques/manuel-maths/build/maquette-v5/manifest.json"
         in str(record["proof"])
@@ -1478,9 +1478,9 @@ def test_repository_build_applies_qualification_view_without_mutating_raw_anomal
     raw_duplicates = inventory["anomalies"]["duplicate_assembly_objects"]
     qualifications = inventory["anomaly_qualifications"]
     intentional_fingerprints = {
-        "18b3408901ac268d",
-        "298756cbdf41f6a5",
-        "766e1f54806282ec",
+        "19669084dffa5d5b",
+        "2695d63b022fe9f0",
+        "b912c1041392a181",
     }
 
     assert len(raw_duplicates) == 3
@@ -1734,7 +1734,10 @@ def test_qualification_view_is_separate_from_raw_anomalies_and_covers_all_dispos
         inventory_module.ANOMALY_DISPOSITIONS,
         strict=True,
     ):
-        fingerprint = inventory_module._anomaly_fingerprint(anomaly)
+        fingerprint = inventory_module._anomaly_fingerprint(
+            anomaly,
+            category="sample",
+        )
         record = _qualified_disposition_record(disposition, fingerprint)
         if disposition in {
             "false_positive",
@@ -1787,7 +1790,8 @@ def test_qualification_view_is_separate_from_raw_anomalies_and_covers_all_dispos
     assert expired["expired"] is True
     assert expired["blocking"] is True
     unqualified_fingerprint = inventory_module._anomaly_fingerprint(
-        anomalies["unqualified"][0]
+        anomalies["unqualified"][0],
+        category="unqualified",
     )
     assert qualifications[unqualified_fingerprint] == {
         "blocking": True,
@@ -1821,7 +1825,10 @@ def test_live_gates_recheck_expiry_after_deterministic_artifact_date(
     _seed_cli_repository(tmp_path)
     initial = inventory_module.build_inventory(tmp_path)
     anomaly = initial["anomalies"]["unassembled_objects"][0]
-    fingerprint = inventory_module._anomaly_fingerprint(anomaly)
+    fingerprint = inventory_module._anomaly_fingerprint(
+        anomaly,
+        category="unassembled_objects",
+    )
     record = {
         **_qualified_disposition_record("accepted_exception", fingerprint),
         "author": "Responsable éditorial",
@@ -1875,14 +1882,16 @@ def test_configured_fingerprint_collision_across_four_raw_anomalies_is_rejected(
             {
                 "champ": "input",
                 "cible": "build/generated.tex",
+                "line": index + 1,
                 "raison": "cible absente",
-                "source": f"manual-{index}.tex",
+                "source": "manual.tex",
             }
             for index in range(4)
         ]
     }
     fingerprint = inventory_module._anomaly_fingerprint(
-        anomalies["broken_latex_references"][0]
+        anomalies["broken_latex_references"][0],
+        category="broken_latex_references",
     )
     disposition = _qualified_disposition_record(
         "generated_dependency",
@@ -1905,14 +1914,16 @@ def test_unqualified_fingerprint_collision_preserves_four_raw_identities(
             {
                 "champ": "input",
                 "cible": "build/generated.tex",
+                "line": index + 1,
                 "raison": "cible absente",
-                "source": f"manual-{index}.tex",
+                "source": "manual.tex",
             }
             for index in range(4)
         ]
     }
     fingerprint = inventory_module._anomaly_fingerprint(
-        anomalies["broken_latex_references"][0]
+        anomalies["broken_latex_references"][0],
+        category="broken_latex_references",
     )
 
     qualifications = inventory_module._build_anomaly_qualification_view(
@@ -1936,8 +1947,10 @@ def _baseline_contract_payload() -> dict[str, object]:
                 "disposition": "open_debt",
                 "fingerprint": "b" * 16,
                 "justification": "Dette historique qualifiée avant publication.",
+                "locator_key": "missing_corrections|1SPE|chapitre|source|champ|id",
                 "occurrence_count": 2,
                 "owner": "équipe mathématiques",
+                "qualified": True,
                 "severity": "blocking",
             }
         ],
@@ -2026,6 +2039,639 @@ def test_anomalies_baseline_schema_rejects_non_fixed_resolved_entry() -> None:
 
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize("missing_field", ["locator_key", "qualified"])
+def test_anomalies_baseline_schema_requires_active_qualification_identity(
+    missing_field: str,
+) -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/anomalies-baseline.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _baseline_contract_payload()
+    active = dict(payload["active"][0])  # type: ignore[index]
+    active.pop(missing_field)
+    payload["active"] = [active]
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def test_repository_baseline_is_provisional_schema_valid_and_gate_blocking(
+    inventory_module,
+) -> None:
+    path = ROOT / "audit/ANOMALIES_BASELINE.json"
+    payload = json.loads(path.read_text(encoding="utf-8"))
+
+    inventory_module._validate_artifact_schema(
+        payload,
+        root=ROOT,
+        path=Path("audit/ANOMALIES_BASELINE.json"),
+    )
+    gate = inventory_module._fail_on_new_gate(ROOT)
+
+    assert payload["provisional"] is True
+    assert payload["fingerprint_schema_version"] == 1
+    assert gate["success"] is False
+    assert gate["exit_code"] == 5
+    assert gate["reasons"] == [
+        "baseline provisoire: comparaison de dette non obligatoire"
+    ]
+
+
+def _fingerprint_case(**overrides: object) -> dict[str, object]:
+    anomaly: dict[str, object] = {
+        "chapter": "1SPE-SUITES",
+        "field": "corrige_tex",
+        "manual": "1SPE",
+        "reason_code": "missing_correction",
+        "source": "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/exercices/e1.tex",
+        "target": "1SPE-SUITES-EX-001",
+    }
+    anomaly.update(overrides)
+    return anomaly
+
+
+def test_fingerprint_v1_is_stable_across_non_semantic_noise(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    root_a = tmp_path / "clone-a"
+    root_b = tmp_path / "clone-b"
+    relative = (
+        "Mathematiques/manuel-maths/chapitres/"
+        "1SPE-SUITES/exercices/e1.tex"
+    )
+    first = _fingerprint_case(
+        source=str(root_a / relative),
+        line=14,
+        generated_at="2026-07-29T08:00:00Z",
+        tool_message="latexmk: ligne 14",
+        details={"labels": ["b", "a"], "counts": {"z": 2, "a": 1}},
+    )
+    second = _fingerprint_case(
+        source=str(root_b / relative),
+        line=912,
+        generated_at="2032-01-01T00:00:00Z",
+        tool_message="outil différent et chemin absolu différent",
+        details={"counts": {"a": 1, "z": 2}, "labels": ["a", "b"]},
+    )
+
+    assert inventory_module.FINGERPRINT_SCHEMA_VERSION == 1
+    assert inventory_module._anomaly_fingerprint(
+        first,
+        category="missing_corrections",
+        repository_root=root_a,
+    ) == inventory_module._anomaly_fingerprint(
+        second,
+        category="missing_corrections",
+        repository_root=root_b,
+    )
+
+
+@pytest.mark.parametrize(
+    ("field", "replacement"),
+    [
+        ("category", "broken_latex_references"),
+        ("manual", "1NSI"),
+        ("chapter", "1SPE-SECOND-DEGRE"),
+        (
+            "source",
+            "Mathematiques/manuel-maths/chapitres/"
+            "1SPE-SUITES/exercices/e2.tex",
+        ),
+        ("field", "enonce_tex"),
+        ("target", "1SPE-SUITES-EX-002"),
+        ("reason_code", "invalid_correction"),
+    ],
+)
+def test_fingerprint_v1_changes_for_each_contractual_identity_field(
+    inventory_module,
+    field: str,
+    replacement: str,
+) -> None:
+    anomaly = _fingerprint_case()
+    category = "missing_corrections"
+    changed = dict(anomaly)
+    if field == "category":
+        changed_category = replacement
+    else:
+        changed[field] = replacement
+        changed_category = category
+
+    assert inventory_module._anomaly_fingerprint(
+        anomaly,
+        category=category,
+    ) != inventory_module._anomaly_fingerprint(
+        changed,
+        category=changed_category,
+    )
+
+
+def test_fingerprint_v1_treats_target_id_as_the_same_explicit_slot(
+    inventory_module,
+) -> None:
+    with_target = _fingerprint_case(target="1SPE-SUITES-EX-001")
+    with_id = _fingerprint_case()
+    with_id.pop("target")
+    with_id["id"] = "1SPE-SUITES-EX-001"
+
+    assert inventory_module._anomaly_fingerprint(
+        with_target,
+        category="missing_corrections",
+    ) == inventory_module._anomaly_fingerprint(
+        with_id,
+        category="missing_corrections",
+    )
+
+
+def test_fingerprint_v1_sorts_non_semantic_mapping_and_list_identity_values(
+    inventory_module,
+) -> None:
+    first = _fingerprint_case(
+        target={"ids": ["EX-002", "EX-001"], "scope": {"z": 2, "a": 1}}
+    )
+    second = _fingerprint_case(
+        target={"scope": {"a": 1, "z": 2}, "ids": ["EX-001", "EX-002"]}
+    )
+
+    assert inventory_module._anomaly_fingerprint(
+        first,
+        category="missing_corrections",
+    ) == inventory_module._anomaly_fingerprint(
+        second,
+        category="missing_corrections",
+    )
+
+
+def _active_debt(
+    fingerprint: str,
+    *,
+    locator_key: str = "missing_corrections|1SPE|1SPE-SUITES|e1.tex|corrige_tex|EX-001",
+    occurrence_count: int = 1,
+    severity: str = "blocking",
+    disposition: str = "open_debt",
+    owner: str = "équipe mathématiques",
+    justification: str = "Dette qualifiée et suivie avant publication.",
+    qualified: bool = True,
+) -> dict[str, object]:
+    return {
+        "blocking": severity in {"blocking", "regression"},
+        "category": "missing_corrections",
+        "disposition": disposition,
+        "fingerprint": fingerprint,
+        "justification": justification,
+        "locator_key": locator_key,
+        "occurrence_count": occurrence_count,
+        "owner": owner,
+        "qualified": qualified,
+        "severity": severity,
+    }
+
+
+def test_debt_comparison_is_multiset_aware_and_disappearance_is_improvement(
+    inventory_module,
+) -> None:
+    unchanged = _active_debt("a" * 16, occurrence_count=2)
+    disappeared = _active_debt(
+        "b" * 16,
+        locator_key="missing_corrections|1SPE|1SPE-SUITES|e2.tex|corrige_tex|EX-002",
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [unchanged],
+        [unchanged, disappeared],
+        [],
+    )
+
+    assert comparison["success"] is True
+    assert comparison["unchanged"] == ["a" * 16]
+    assert comparison["resolved"] == ["b" * 16]
+    assert comparison["new"] == []
+    assert comparison["modified"] == []
+    assert comparison["regressions"] == []
+    assert any("disparition" in value for value in comparison["improvements"])
+
+
+def test_debt_comparison_detects_new_growth_and_stable_total_replacement(
+    inventory_module,
+) -> None:
+    retained = _active_debt("a" * 16)
+    grown = _active_debt(
+        "b" * 16,
+        locator_key="missing_corrections|1SPE|1SPE-SUITES|e2.tex|corrige_tex|EX-002",
+        occurrence_count=2,
+    )
+    replacement = _active_debt(
+        "c" * 16,
+        locator_key="missing_corrections|1SPE|1SPE-SUITES|e3.tex|corrige_tex|EX-003",
+    )
+    baseline = [
+        retained,
+        _active_debt(
+            "b" * 16,
+            locator_key=grown["locator_key"],  # type: ignore[arg-type]
+        ),
+        _active_debt(
+            "d" * 16,
+            locator_key="missing_corrections|1SPE|1SPE-SUITES|old.tex|corrige_tex|EX-004",
+        ),
+    ]
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [retained, grown, replacement],
+        baseline,
+        [],
+    )
+
+    assert comparison["success"] is False
+    assert comparison["new"] == ["c" * 16]
+    assert "d" * 16 in comparison["resolved"]
+    assert any("croissance" in value for value in comparison["failures"])
+    assert any("nouvelle" in value for value in comparison["failures"])
+
+
+def test_debt_comparison_detects_modified_severity_and_lost_disposition(
+    inventory_module,
+) -> None:
+    old_modified = _active_debt("a" * 16)
+    new_modified = _active_debt(
+        "b" * 16,
+        locator_key=old_modified["locator_key"],  # type: ignore[arg-type]
+    )
+    severity_old = _active_debt(
+        "c" * 16,
+        locator_key="metadata_invalid|1SPE|1SPE-SUITES|m.tex|status|OBJ-1",
+        severity="warning",
+    )
+    severity_new = dict(severity_old, severity="blocking", blocking=True)
+    disposition_old = _active_debt(
+        "d" * 16,
+        locator_key="duplicate|1SPE|1SPE-SUITES|manifest.json|object|OBJ-2",
+        disposition="intentional_reuse",
+    )
+    disposition_new = dict(
+        disposition_old,
+        disposition="open_debt",
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [new_modified, severity_new, disposition_new],
+        [old_modified, severity_old, disposition_old],
+        [],
+    )
+
+    assert comparison["success"] is False
+    assert comparison["modified"] == [
+        {"current": "b" * 16, "previous": "a" * 16}
+    ]
+    assert any("sévérité" in value for value in comparison["failures"])
+    assert any("disposition" in value for value in comparison["failures"])
+
+
+def test_debt_comparison_detects_resolved_recurrence_and_preserves_history(
+    inventory_module,
+) -> None:
+    recurring = _active_debt("a" * 16)
+    resolved = [
+        {
+            "blocking": False,
+            "category": "missing_corrections",
+            "disposition": "fixed",
+            "fingerprint": "a" * 16,
+            "resolved_at": "2026-07-22T09:00:00Z",
+            "resolved_git_sha": "b" * 40,
+        },
+        {
+            "blocking": False,
+            "category": "metadata_missing",
+            "disposition": "fixed",
+            "fingerprint": "c" * 16,
+            "resolved_at": "2026-07-21T09:00:00Z",
+            "resolved_git_sha": "d" * 40,
+        },
+    ]
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [recurring],
+        [recurring],
+        resolved,
+    )
+
+    assert comparison["success"] is False
+    assert comparison["regressions"] == ["a" * 16]
+    assert comparison["resolved_history"] == resolved
+    assert any("réapparition" in value for value in comparison["failures"])
+
+
+@pytest.mark.parametrize(
+    ("missing", "replacement"),
+    [
+        ("owner", ""),
+        ("justification", ""),
+        ("qualified", False),
+    ],
+)
+def test_debt_comparison_rejects_active_anomaly_without_qualification(
+    inventory_module,
+    missing: str,
+    replacement: object,
+) -> None:
+    active = _active_debt("a" * 16)
+    active[missing] = replacement
+
+    comparison = inventory_module._compare_anomaly_debt([active], [], [])
+
+    assert comparison["success"] is False
+    assert any("qualification" in value for value in comparison["failures"])
+
+
+def _ready_check(name: str, success: bool = True) -> dict[str, object]:
+    return {
+        "name": name,
+        "reasons": [] if success else [f"{name}: échec injecté"],
+        "success": success,
+    }
+
+
+def test_baseline_ready_reports_all_ten_stabilization_checks(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    expected_names = [
+        "phase0_tests",
+        "artifact_schemas",
+        "renderers",
+        "object_counts",
+        "harvest_candidates",
+        "generated_renvois",
+        "intentional_reuse_decisions",
+        "disposition_coverage",
+        "fingerprint_determinism",
+        "validate_model",
+    ]
+    monkeypatch.setattr(
+        inventory_module,
+        "_run_baseline_readiness_check",
+        lambda _root, name: _ready_check(
+            name,
+            success=name != "object_counts",
+        ),
+    )
+
+    result = inventory_module._baseline_ready_gate(tmp_path)
+
+    assert [check["name"] for check in result["checks"]] == expected_names
+    assert result["success"] is False
+    assert result["exit_code"] == 8
+    assert result["reasons"] == ["object_counts: échec injecté"]
+
+
+@pytest.mark.parametrize(
+    ("arguments", "expected_reason"),
+    [
+        (
+            ("--update-baseline", "--reason", "", "--approved-by", "Responsable"),
+            "justification",
+        ),
+        (
+            (
+                "--update-baseline",
+                "--reason",
+                "Gel contrôlé",
+                "--approved-by",
+                "",
+            ),
+            "approbateur",
+        ),
+    ],
+)
+def test_update_baseline_cli_rejects_empty_audit_fields(
+    tmp_path: Path,
+    arguments: tuple[str, ...],
+    expected_reason: str,
+) -> None:
+    _seed_cli_repository(tmp_path)
+
+    completed = _run_inventory_cli(tmp_path, *arguments)
+    result = json.loads(completed.stdout)
+
+    assert completed.returncode == 8
+    assert result["gate"] == "update-baseline"
+    assert any(expected_reason in reason for reason in result["reasons"])
+    assert not (tmp_path / "audit/BASELINE_UPDATE_REPORT.md").exists()
+
+
+def test_update_baseline_cli_rejects_ci_dirty_repo_and_invalid_model(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    ci_repository = tmp_path / "ci"
+    _seed_cli_repository(ci_repository)
+    ci_environment = dict(os.environ, CI="true")
+    ci = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--root",
+            str(ci_repository),
+            "--update-baseline",
+            "--reason",
+            "Gel contrôlé",
+            "--approved-by",
+            "Responsable",
+        ],
+        capture_output=True,
+        text=True,
+        check=False,
+        env=ci_environment,
+    )
+
+    dirty_repository = tmp_path / "dirty"
+    tracked = _seed_cli_repository(dirty_repository)
+    _commit_repository(dirty_repository)
+    _write(dirty_repository / tracked[0], "modification locale\n")
+    dirty = _run_inventory_cli(
+        dirty_repository,
+        "--update-baseline",
+        "--reason",
+        "Gel contrôlé",
+        "--approved-by",
+        "Responsable",
+    )
+
+    invalid_repository = tmp_path / "invalid"
+    _seed_cli_repository(invalid_repository)
+    _commit_repository(invalid_repository)
+    invalid = _run_inventory_cli(
+        invalid_repository,
+        "--update-baseline",
+        "--reason",
+        "Gel contrôlé",
+        "--approved-by",
+        "Responsable",
+    )
+
+    assert ci.returncode == 8
+    assert any("CI" in reason for reason in json.loads(ci.stdout)["reasons"])
+    assert dirty.returncode == 8
+    assert any("propre" in reason for reason in json.loads(dirty.stdout)["reasons"])
+    assert invalid.returncode == 8
+    assert any(
+        "modèle" in reason for reason in json.loads(invalid.stdout)["reasons"]
+    )
+
+
+def test_update_baseline_writes_audited_transition_and_preserves_resolved_history(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    _write(tmp_path / "tracked.txt", "source\n")
+    schema_paths = tuple(
+        path.relative_to(tmp_path).as_posix()
+        for path in (tmp_path / "audit/schemas").rglob("*.json")
+    )
+    _track(tmp_path, "tracked.txt", *schema_paths)
+    head_sha = _commit_repository(tmp_path)
+    old_baseline = _baseline_contract_payload()
+    old_baseline["git_sha"] = head_sha
+    old_baseline["active"] = [
+        _active_debt(
+            "a" * 16,
+            locator_key="missing|1SPE|old",
+        )
+    ]
+    old_baseline["resolved"] = [
+        {
+            "blocking": False,
+            "category": "metadata_missing",
+            "disposition": "fixed",
+            "fingerprint": "d" * 16,
+            "resolved_at": "2026-07-22T09:00:00Z",
+            "resolved_git_sha": head_sha,
+        }
+    ]
+    old_baseline["updates"] = []
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(old_baseline, ensure_ascii=False),
+    )
+    _track(tmp_path, "audit/ANOMALIES_BASELINE.json")
+    head_sha = _commit_repository(tmp_path, "baseline")
+
+    current = _active_debt(
+        "b" * 16,
+        locator_key="missing|1SPE|new",
+    )
+    inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "provenance": {"head_sha": head_sha},
+        "source_digest": "sha256:" + "e" * 64,
+    }
+    monkeypatch.setattr(
+        inventory_module,
+        "_model_digest",
+        lambda _inventory: "sha256:" + "c" * 64,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_validate_model_gate",
+        lambda _root: inventory_module._gate_result(
+            "validate-model",
+            success=True,
+            failure_code=6,
+            dimensions={"structure": "passed"},
+            reasons=[],
+        ),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_ready_gate",
+        lambda _root: {
+            **inventory_module._gate_result(
+                "baseline-ready",
+                success=True,
+                failure_code=8,
+                dimensions={"structure": "passed"},
+                reasons=[],
+            ),
+            "checks": [
+                _ready_check(name)
+                for name in inventory_module.BASELINE_READY_CHECK_NAMES
+            ],
+        },
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "build_inventory",
+        lambda _root, **_kwargs: inventory,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_current_active_debt",
+        lambda _inventory: [current],
+    )
+
+    result = inventory_module._update_baseline_gate(
+        tmp_path,
+        reason="Gel contrôlé après stabilisation",
+        approved_by="Responsable éditorial",
+    )
+
+    payload = json.loads(
+        (tmp_path / "audit/ANOMALIES_BASELINE.json").read_text(encoding="utf-8")
+    )
+    report = (tmp_path / "audit/BASELINE_UPDATE_REPORT.md").read_text(
+        encoding="utf-8"
+    )
+    assert result["success"] is True
+    assert payload["provisional"] is False
+    assert payload["git_sha"] == head_sha
+    assert payload["active"] == [current]
+    assert {entry["fingerprint"] for entry in payload["resolved"]} == {
+        "a" * 16,
+        "d" * 16,
+    }
+    assert payload["previous_baseline_digest"].startswith("sha256:")
+    update = payload["updates"][-1]
+    assert update["approved_by"] == "Responsable éditorial"
+    assert update["reason"] == "Gel contrôlé après stabilisation"
+    assert update["previous_baseline_digest"].startswith("sha256:")
+    assert update["new_baseline_digest"].startswith("sha256:")
+    assert update["git_sha"] == head_sha
+    assert "Empreinte précédente" in report
+    assert "Nouvelle empreinte" in report
+    assert head_sha in report
+    assert "aaaaaaaaaaaaaaaa" in report
+    assert "bbbbbbbbbbbbbbbb" in report
+
+
+def test_update_baseline_cli_boundary_maps_transaction_error_to_code_8(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def fail(*_args: object, **_kwargs: object) -> dict[str, object]:
+        raise inventory_module.InventoryError("transaction injectée")
+
+    monkeypatch.setattr(inventory_module, "_update_baseline_gate", fail)
+
+    result = inventory_module._safe_update_baseline_gate(
+        tmp_path,
+        reason="Gel contrôlé",
+        approved_by="Responsable",
+    )
+
+    assert result["success"] is False
+    assert result["exit_code"] == 8
+    assert result["reasons"] == ["update_error:transaction injectée"]
 
 
 def _build_manifest_contract_payload() -> dict[str, object]:
@@ -5172,7 +5818,10 @@ def test_chapter_and_manual_blockers_use_the_same_qualification_view(
         "manual": "1SPE",
     }
     inventory["anomalies"]["missing_corrections"] = [anomaly]
-    fingerprint = inventory_module._anomaly_fingerprint(anomaly)
+    fingerprint = inventory_module._anomaly_fingerprint(
+        anomaly,
+        category="missing_corrections",
+    )
     inventory["anomaly_qualifications"] = {
         fingerprint: {
             "blocking": False,
@@ -7232,6 +7881,63 @@ def test_release_and_debt_gates_have_independent_documented_failures(
     assert provisional.returncode == 5
     assert provisional_payload["gate"] == "fail-on-new"
     assert any("provisoire" in reason for reason in provisional_payload["reasons"])
+
+
+def test_fail_on_new_uses_fingerprint_v1_and_accepts_disappearance(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    retained = _active_debt("a" * 16)
+    disappeared = _active_debt(
+        "b" * 16,
+        locator_key="missing|1SPE|disparu",
+    )
+    baseline = _baseline_contract_payload()
+    baseline["provisional"] = False
+    baseline["active"] = [retained, disappeared]
+    baseline["resolved"] = []
+    baseline["updates"] = []
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(baseline, ensure_ascii=False),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "build_inventory",
+        lambda _root: {
+            "anomalies": {},
+            "anomaly_qualifications": {},
+        },
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_current_active_debt",
+        lambda _inventory: [retained],
+    )
+
+    improvement = inventory_module._fail_on_new_gate(tmp_path)
+
+    assert improvement["success"] is True
+    assert improvement["exit_code"] == 0
+
+    new_debt = _active_debt(
+        "c" * 16,
+        locator_key="missing|1SPE|nouveau",
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_current_active_debt",
+        lambda _inventory: [retained, new_debt],
+    )
+
+    regression = inventory_module._fail_on_new_gate(tmp_path)
+
+    assert regression["success"] is False
+    assert regression["exit_code"] == 5
+    assert any("nouvelle" in reason for reason in regression["reasons"])
 
 
 def test_require_clean_handles_dirty_unborn_and_detached_repositories(

@@ -69,8 +69,10 @@
         "disposition",
         "fingerprint",
         "justification",
+        "locator_key",
         "occurrence_count",
         "owner",
+        "qualified",
         "severity"
       ],
       "properties": {
@@ -87,9 +89,13 @@
         },
         "fingerprint": { "$ref": "#/$defs/fingerprint" },
         "justification": { "$ref": "#/$defs/non_empty_string" },
+        "locator_key": { "$ref": "#/$defs/non_empty_string" },
         "occurrence_count": { "type": "integer", "minimum": 1 },
         "owner": { "$ref": "#/$defs/non_empty_string" },
-        "severity": { "enum": ["info", "warning", "error", "blocking"] }
+        "qualified": { "const": true },
+        "severity": {
+          "enum": ["info", "warning", "error", "blocking", "regression"]
+        }
       }
     },
     "entry": {

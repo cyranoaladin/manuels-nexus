@@ -1,0 +1,104 @@
+{
+  "active": [
+    {
+      "blocking": false,
+      "category": "duplicate_assembly_objects",
+      "disposition": "intentional_reuse",
+      "fingerprint": "19669084dffa5d5b",
+      "justification": "Le manifeste versionné place explicitement EX-001 dans les applications de la méthode rendue et dans l'ordre d'entraînement.",
+      "locator_key": "{\"category\":\"duplicate_assembly_objects\",\"chapter\":\"\",\"field\":\"math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex\",\"manual\":\"\",\"source\":\"Mathematiques/manuel-maths/build/maquette-v5/maquette.tex\",\"target_or_id\":\"Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex\"}",
+      "occurrence_count": 1,
+      "owner": "équipe éditoriale Nexus",
+      "qualified": true,
+      "severity": "warning"
+    },
+    {
+      "blocking": false,
+      "category": "duplicate_assembly_objects",
+      "disposition": "intentional_reuse",
+      "fingerprint": "2695d63b022fe9f0",
+      "justification": "Le manifeste versionné place explicitement EX-005 dans les applications de la méthode rendue et dans l'ordre d'entraînement.",
+      "locator_key": "{\"category\":\"duplicate_assembly_objects\",\"chapter\":\"\",\"field\":\"math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex\",\"manual\":\"\",\"source\":\"Mathematiques/manuel-maths/build/maquette-v5/maquette.tex\",\"target_or_id\":\"Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex\"}",
+      "occurrence_count": 1,
+      "owner": "équipe éditoriale Nexus",
+      "qualified": true,
+      "severity": "warning"
+    },
+    {
+      "blocking": false,
+      "category": "broken_latex_references",
+      "disposition": "generated_dependency",
+      "fingerprint": "62c72a29cc4eedb7",
+      "justification": "La maquette charge renvois.tex, fichier produit par le générateur versionné de la maquette v5 et ignoré comme sortie de build.",
+      "locator_key": "{\"category\":\"broken_latex_references\",\"chapter\":\"\",\"field\":\"input\",\"manual\":\"\",\"source\":\"Mathematiques/manuel-maths/build/maquette-v5/maquette.tex\",\"target_or_id\":\"Mathematiques/manuel-maths/build/maquette-v5/renvois.tex\"}",
+      "occurrence_count": 1,
+      "owner": "équipe outillage éditorial Nexus",
+      "qualified": true,
+      "severity": "warning"
+    },
+    {
+      "blocking": false,
+      "category": "duplicate_assembly_objects",
+      "disposition": "intentional_reuse",
+      "fingerprint": "b912c1041392a181",
+      "justification": "Le manifeste versionné place explicitement EX-002 dans les applications de la méthode rendue et dans l'ordre d'entraînement.",
+      "locator_key": "{\"category\":\"duplicate_assembly_objects\",\"chapter\":\"\",\"field\":\"math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex\",\"manual\":\"\",\"source\":\"Mathematiques/manuel-maths/build/maquette-v5/maquette.tex\",\"target_or_id\":\"Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex\"}",
+      "occurrence_count": 1,
+      "owner": "équipe éditoriale Nexus",
+      "qualified": true,
+      "severity": "warning"
+    }
+  ],
+  "artifact_type": "anomalies_baseline",
+  "fingerprint_schema_version": 1,
+  "generated_at_utc": "2026-07-30T02:06:00Z",
+  "generated_by": "inventory_collection.py",
+  "git_sha": "4be55db74e1b916f0a815c3f726c14657d2e1df3",
+  "model_digest": "sha256:718a764ccbdfee279894c819e33f7d8aa4c7189373f757cc1de16b9793389046",
+  "previous_baseline_digest": null,
+  "provenance": {
+    "branch": "finalisation/collection-v1",
+    "dirty": true,
+    "errors": [],
+    "generated_at_utc": "2026-07-30T02:06:00Z",
+    "generator_files": {
+      "scripts/inventory_assembly.py": "sha256:0152e2523723678b6333a9a2738cad373150f4d908612bfba7d5b506edf4b339",
+      "scripts/inventory_collection.py": "sha256:a20642744485249bb28350f82d3c37eb3a8f4f8ffaa7db53f940b374e46ae601",
+      "scripts/inventory_graph.py": "sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb",
+      "scripts/inventory_pdf.py": "sha256:f0e03a40741446d4f02276b6a51dfef5107eb3e04fb622108db8bae432726526",
+      "scripts/inventory_reports.py": "sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce"
+    },
+    "generator_sha256": "sha256:2a59ae2ba1cbd583456cdc3ec7b402215c595dcb172357ab675ce995204a171d",
+    "generator_version": 1,
+    "git_available": true,
+    "head_sha": "4be55db74e1b916f0a815c3f726c14657d2e1df3",
+    "modified_tracked": [
+      "audit/ANOMALY_DISPOSITIONS.yaml",
+      "audit/schemas/v1/anomalies-baseline.schema.json",
+      "scripts/inventory_collection.py",
+      "tests/test_inventory_collection.py"
+    ],
+    "tool_versions": {
+      "git": "git version 2.43.0",
+      "latexmk": "Latexmk, John Collins, 31 Jan. 2024. Version 4.83",
+      "pdfinfo": "pdfinfo version 24.02.0",
+      "python": "Python 3.12.3",
+      "texlive": "pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)"
+    },
+    "untracked_relevant": [
+      "audit/ANOMALIES_BASELINE.json",
+      "audit/BASELINE_UPDATE_REPORT.md"
+    ]
+  },
+  "provisional": true,
+  "resolved": [],
+  "schema_ref": "audit/schemas/v1/anomalies-baseline.schema.json",
+  "schema_version": 1,
+  "source_digest": "sha256:7160cd1f547a33f39d2e951da46bccd08731c7d000a40468a44d9cfc727e5033",
+  "summary": {
+    "active_qualified": 4,
+    "active_unqualified": 2457,
+    "resolved": 0
+  },
+  "updates": []
+}

@@ -74,6 +74,7 @@ except ModuleNotFoundError:  # direct execution: python scripts/inventory_collec
 
 
 SCHEMA_VERSION = 1
+FINGERPRINT_SCHEMA_VERSION = 1
 PDFINFO_TIMEOUT_SECONDS = 10
 LOCK_TIMEOUT_SECONDS = 20
 LOCK_STALE_SECONDS = 20
@@ -83,6 +84,7 @@ GENERIC_LOCK_FILE = ".inventory_collection.lock"
 SOURCE_ROLES_FILE = "audit/SOURCE_ROLES.yaml"
 ANOMALY_DISPOSITIONS_FILE = "audit/ANOMALY_DISPOSITIONS.yaml"
 ANOMALIES_BASELINE_FILE = "audit/ANOMALIES_BASELINE.json"
+BASELINE_UPDATE_REPORT_FILE = "audit/BASELINE_UPDATE_REPORT.md"
 
 SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
     {
@@ -179,6 +181,18 @@ GATE_VALIDATE_CODE = 6
 GATE_RELEASE_CODE = 7
 GATE_BASELINE_UPDATE_CODE = 8
 GATE_VALID_CLEAN_STATES = frozenset({"worktree", "head"})
+BASELINE_READY_CHECK_NAMES = (
+    "phase0_tests",
+    "artifact_schemas",
+    "renderers",
+    "object_counts",
+    "harvest_candidates",
+    "generated_renvois",
+    "intentional_reuse_decisions",
+    "disposition_coverage",
+    "fingerprint_determinism",
+    "validate_model",
+)
 
 GATE_DIMENSIONS = (
     "structure",
@@ -911,7 +925,9 @@ def _build_anomaly_fingerprint_table(
     for category, values in anomalies.items():
         signatures[category] = []
         for anomaly in values:
-            signatures[category].append(_anomaly_fingerprint(anomaly))
+            signatures[category].append(
+                _anomaly_fingerprint(anomaly, category=category)
+            )
         signatures[category].sort()
     return signatures
 
@@ -922,7 +938,7 @@ def _build_anomaly_signature_index(
     index: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for category, values in anomalies.items():
         for value in values:
-            fingerprint = _anomaly_fingerprint(value)
+            fingerprint = _anomaly_fingerprint(value, category=category)
             index.setdefault((category, fingerprint), []).append(value)
     return index
 
@@ -930,36 +946,40 @@ def _build_anomaly_signature_index(
 def _build_baseline_payload(
     inventory: Mapping[str, Any], source_digest: str
 ) -> dict[str, Any]:
-    entries: list[dict[str, Any]] = []
-    for category, values in inventory["anomalies"].items():
-        for anomaly in values:
-            entry = dict(
-                {
-                    "fingerprint": _anomaly_fingerprint(anomaly),
-                    "category": category,
-                    "manual": _anomaly_manual(anomaly),
-                    "path": anomaly.get("path"),
-                    "source": anomaly.get("source"),
-                }
-            )
-            entry["disposition"] = str(anomaly.get("disposition", "open_debt"))
-            entry["blocking"] = bool(anomaly.get("blocking", True))
-            entries.append(entry)
+    active = _current_active_debt(inventory)
+    qualified_active = [
+        entry for entry in active if entry.get("qualified") is True
+    ]
+    provenance = inventory.get("provenance")
+    if not isinstance(provenance, Mapping):
+        raise InventoryError("provenance absente pour la baseline")
+    git_sha = provenance.get("head_sha")
+    generated_at = provenance.get("generated_at_utc")
+    if not isinstance(git_sha, str) or not re.fullmatch(r"[0-9a-f]{40}", git_sha):
+        raise InventoryError("SHA Git absent pour la baseline")
+    if not isinstance(generated_at, str) or not generated_at:
+        raise InventoryError("horodatage absent pour la baseline")
     return {
-        "schema_version": SCHEMA_VERSION,
-        "generated_at_utc": _now_utc(),
+        "active": qualified_active,
+        "artifact_type": "anomalies_baseline",
+        "fingerprint_schema_version": FINGERPRINT_SCHEMA_VERSION,
+        "generated_at_utc": generated_at,
         "generated_by": "inventory_collection.py",
-        "provenance": inventory.get("provenance", {}),
+        "git_sha": git_sha,
+        "model_digest": _model_digest(inventory),
+        "previous_baseline_digest": None,
+        "provenance": dict(provenance),
+        "provisional": True,
+        "resolved": [],
+        "schema_ref": "audit/schemas/v1/anomalies-baseline.schema.json",
+        "schema_version": SCHEMA_VERSION,
         "source_digest": source_digest,
-        "entries": sorted(
-            entries, key=lambda item: (item["category"], item["fingerprint"], item["path"] or "")
-        ),
         "summary": {
-            category: len(values)
-            for category, values in _build_anomaly_fingerprint_table(
-                inventory["anomalies"]
-            ).items()
+            "active_qualified": len(qualified_active),
+            "active_unqualified": len(active) - len(qualified_active),
+            "resolved": 0,
         },
+        "updates": [],
     }
 
 
@@ -988,6 +1008,270 @@ def _load_baseline_payload(path: Path) -> Mapping[str, Any] | None:
     return payload
 
 
+def _load_validated_baseline(root: Path) -> dict[str, Any]:
+    path = root / ANOMALIES_BASELINE_FILE
+    payload = _load_baseline_payload(path)
+    if payload is None:
+        raise InventoryError(
+            f"baseline absente ou JSON invalide: {ANOMALIES_BASELINE_FILE}"
+        )
+    _validate_artifact_schema(
+        payload,
+        root=root,
+        path=Path(ANOMALIES_BASELINE_FILE),
+    )
+    if payload.get("fingerprint_schema_version") != FINGERPRINT_SCHEMA_VERSION:
+        raise InventoryError(
+            "fingerprint_schema_version baseline non supportée:"
+            f"{payload.get('fingerprint_schema_version')}"
+        )
+    updates = payload.get("updates")
+    if isinstance(updates, list) and updates:
+        last_update = updates[-1]
+        if (
+            not isinstance(last_update, Mapping)
+            or last_update.get("new_baseline_digest")
+            != _baseline_payload_digest(payload)
+        ):
+            raise InventoryError("empreinte de baseline incohérente")
+    return dict(payload)
+
+
+_ANOMALY_SEVERITY_RANK = MappingProxyType(
+    {
+        "info": 0,
+        "warning": 1,
+        "error": 2,
+        "blocking": 2,
+        "regression": 3,
+    }
+)
+
+
+def _coalesce_active_debt(
+    entries: Iterable[Mapping[str, Any]],
+) -> dict[str, dict[str, Any]]:
+    coalesced: dict[str, dict[str, Any]] = {}
+    for raw_entry in entries:
+        entry = dict(raw_entry)
+        fingerprint = str(entry.get("fingerprint", ""))
+        if not fingerprint:
+            continue
+        occurrence_count = entry.get("occurrence_count", 1)
+        if not isinstance(occurrence_count, int) or isinstance(
+            occurrence_count, bool
+        ):
+            occurrence_count = 0
+        if fingerprint in coalesced:
+            previous = coalesced[fingerprint]
+            if str(previous.get("locator_key", "")) != str(
+                entry.get("locator_key", "")
+            ):
+                raise InventoryError(
+                    "fingerprint partagé par des locators distincts: "
+                    f"{fingerprint}"
+                )
+            previous["occurrence_count"] = (
+                int(previous.get("occurrence_count", 0)) + occurrence_count
+            )
+            continue
+        entry["occurrence_count"] = occurrence_count
+        coalesced[fingerprint] = entry
+    return coalesced
+
+
+def _active_debt_qualification_failures(
+    entries: Mapping[str, Mapping[str, Any]],
+) -> list[str]:
+    failures: list[str] = []
+    for fingerprint, entry in sorted(entries.items()):
+        owner = entry.get("owner")
+        justification = entry.get("justification")
+        qualified = entry.get("qualified")
+        if (
+            not isinstance(owner, str)
+            or not owner.strip()
+            or not isinstance(justification, str)
+            or not justification.strip()
+            or qualified is not True
+        ):
+            failures.append(
+                "qualification active incomplète "
+                f"fp={fingerprint}: owner/justification/qualified requis"
+            )
+    return failures
+
+
+def _compare_anomaly_debt(
+    current_active: Iterable[Mapping[str, Any]],
+    baseline_active: Iterable[Mapping[str, Any]],
+    resolved_history: Iterable[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Compare two anomaly multisets without mutating either registry."""
+    current = _coalesce_active_debt(current_active)
+    previous = _coalesce_active_debt(baseline_active)
+    history = [
+        _canonicalize(dict(entry))
+        for entry in resolved_history
+        if isinstance(entry, Mapping)
+    ]
+    history.sort(
+        key=lambda entry: (
+            str(entry.get("fingerprint", "")),
+            str(entry.get("resolved_at", "")),
+        )
+    )
+    resolved_fingerprints = {
+        str(entry.get("fingerprint", ""))
+        for entry in history
+        if entry.get("fingerprint")
+    }
+
+    failures = _active_debt_qualification_failures(current)
+    improvements: list[str] = []
+    unchanged: list[str] = []
+    new: list[str] = []
+    resolved: list[str] = []
+    regressions: list[str] = []
+    modified: list[dict[str, str]] = []
+
+    for fingerprint in sorted(set(current) & resolved_fingerprints):
+        regressions.append(fingerprint)
+        failures.append(
+            f"réapparition d'une anomalie résolue fp={fingerprint}"
+        )
+
+    exact = sorted(set(current) & set(previous))
+    for fingerprint in exact:
+        current_entry = current[fingerprint]
+        previous_entry = previous[fingerprint]
+        unchanged.append(fingerprint)
+        current_count = int(current_entry.get("occurrence_count", 0))
+        previous_count = int(previous_entry.get("occurrence_count", 0))
+        if current_count > previous_count:
+            failures.append(
+                "croissance d'occurrences "
+                f"fp={fingerprint}: {previous_count}→{current_count}"
+            )
+        elif current_count < previous_count:
+            improvements.append(
+                "diminution d'occurrences "
+                f"fp={fingerprint}: {previous_count}→{current_count}"
+            )
+        current_severity = str(current_entry.get("severity", "blocking"))
+        previous_severity = str(previous_entry.get("severity", "blocking"))
+        if _ANOMALY_SEVERITY_RANK.get(
+            current_severity, len(_ANOMALY_SEVERITY_RANK)
+        ) > _ANOMALY_SEVERITY_RANK.get(previous_severity, -1):
+            failures.append(
+                "aggravation de sévérité "
+                f"fp={fingerprint}: {previous_severity}→{current_severity}"
+            )
+        current_disposition = str(
+            current_entry.get("disposition", "open_debt")
+        )
+        previous_disposition = str(
+            previous_entry.get("disposition", "open_debt")
+        )
+        if current_disposition != previous_disposition:
+            failures.append(
+                "perte ou modification de disposition "
+                f"fp={fingerprint}: "
+                f"{previous_disposition}→{current_disposition}"
+            )
+
+    unmatched_current = set(current) - set(exact)
+    unmatched_previous = set(previous) - set(exact)
+    previous_by_locator: dict[str, list[str]] = defaultdict(list)
+    current_by_locator: dict[str, list[str]] = defaultdict(list)
+    for fingerprint in unmatched_previous:
+        locator = str(previous[fingerprint].get("locator_key", ""))
+        if locator:
+            previous_by_locator[locator].append(fingerprint)
+    for fingerprint in unmatched_current:
+        locator = str(current[fingerprint].get("locator_key", ""))
+        if locator:
+            current_by_locator[locator].append(fingerprint)
+    for locator in sorted(set(previous_by_locator) & set(current_by_locator)):
+        old_values = sorted(previous_by_locator[locator])
+        new_values = sorted(current_by_locator[locator])
+        for old_fingerprint, new_fingerprint in zip(old_values, new_values):
+            old_entry = previous[old_fingerprint]
+            new_entry = current[new_fingerprint]
+            modified.append(
+                {
+                    "current": new_fingerprint,
+                    "previous": old_fingerprint,
+                }
+            )
+            failures.append(
+                "anomalie modifiée "
+                f"locator={locator}: {old_fingerprint}→{new_fingerprint}"
+            )
+            old_count = int(old_entry.get("occurrence_count", 0))
+            new_count = int(new_entry.get("occurrence_count", 0))
+            if new_count > old_count:
+                failures.append(
+                    "croissance d'occurrences sur anomalie modifiée "
+                    f"locator={locator}: {old_count}→{new_count}"
+                )
+            elif new_count < old_count:
+                improvements.append(
+                    "diminution d'occurrences sur anomalie modifiée "
+                    f"locator={locator}: {old_count}→{new_count}"
+                )
+            old_severity = str(old_entry.get("severity", "blocking"))
+            new_severity = str(new_entry.get("severity", "blocking"))
+            if _ANOMALY_SEVERITY_RANK.get(
+                new_severity, len(_ANOMALY_SEVERITY_RANK)
+            ) > _ANOMALY_SEVERITY_RANK.get(old_severity, -1):
+                failures.append(
+                    "aggravation de sévérité sur anomalie modifiée "
+                    f"locator={locator}: {old_severity}→{new_severity}"
+                )
+            old_disposition = str(
+                old_entry.get("disposition", "open_debt")
+            )
+            new_disposition = str(
+                new_entry.get("disposition", "open_debt")
+            )
+            if old_disposition != new_disposition:
+                failures.append(
+                    "perte ou modification de disposition sur anomalie modifiée "
+                    f"locator={locator}: "
+                    f"{old_disposition}→{new_disposition}"
+                )
+            unmatched_previous.discard(old_fingerprint)
+            unmatched_current.discard(new_fingerprint)
+
+    for fingerprint in sorted(unmatched_previous):
+        resolved.append(fingerprint)
+        improvements.append(f"disparition fp={fingerprint}")
+
+    for fingerprint in sorted(unmatched_current):
+        if fingerprint in resolved_fingerprints:
+            if fingerprint not in regressions:
+                regressions.append(fingerprint)
+                failures.append(
+                    f"réapparition d'une anomalie résolue fp={fingerprint}"
+                )
+        else:
+            new.append(fingerprint)
+            failures.append(f"anomalie nouvelle fp={fingerprint}")
+
+    return {
+        "failures": sorted(set(failures)),
+        "improvements": sorted(set(improvements)),
+        "modified": modified,
+        "new": new,
+        "regressions": regressions,
+        "resolved": resolved,
+        "resolved_history": history,
+        "success": not failures,
+        "unchanged": unchanged,
+    }
+
+
 def _evaluate_baseline(
     inventory: Mapping[str, Any], baseline_path: Path
 ) -> list[str]:
@@ -996,76 +1280,21 @@ def _evaluate_baseline(
         return [f"baseline introuvable ou invalide: {baseline_path}"]
     if payload.get("schema_version") != SCHEMA_VERSION:
         return ["schema_version baseline inattendu"]
-    if not isinstance(payload.get("entries"), list):
-        return ["champ baseline entries invalide"]
-
-    current_signature = _build_anomaly_signature_index(inventory["anomalies"])
-    baseline_index: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
-    for entry in payload.get("entries", []):
-        if not isinstance(entry, Mapping):
-            continue
-        category = str(entry.get("category", ""))
-        fingerprint = str(entry.get("fingerprint", ""))
-        if not category or not fingerprint:
-            continue
-        key = (category, fingerprint)
-        baseline_index[key].append(dict(entry))
-
-    failures: list[str] = []
-    for key, current_items in current_signature.items():
-        category, fingerprint = key
-        current_count = len(current_items)
-        baseline_entries = baseline_index.get(key, [])
-        baseline_count = len(baseline_entries)
-        baseline_dispositions = {
-            str(value.get("disposition", "open_debt")) for value in baseline_entries
-            if isinstance(value, Mapping)
-        }
-
-        if baseline_count == 0:
-            failures.append(f"anomalie nouvelle [{category}] fp={fingerprint}")
-            continue
-
-        if current_count > baseline_count:
-            failures.append(
-                f"croissance d'occurrences [{category}] fp={fingerprint}: "
-                f"{baseline_count}→{current_count}"
-            )
-            continue
-
-        if not current_items:
-            continue
-        if len(baseline_dispositions) != 1:
-            failures.append(
-                f"disposition ambigue dans le baseline [{category}] fp={fingerprint}"
-            )
-            continue
-        baseline_disposition = next(iter(baseline_dispositions))
-        for anomaly in current_items:
-            current_disposition = str(anomaly.get("disposition", "open_debt"))
-            if current_disposition != baseline_disposition:
-                failures.append(
-                    "disposition modifiée sans justification "
-                    f"[{category}] fp={fingerprint}: "
-                    f"{baseline_disposition}→{current_disposition}"
-                )
-                break
-
-    for key, baseline_entries in baseline_index.items():
-        if key in current_signature:
-            baseline_disposition = str(
-                baseline_entries[0].get("disposition", "open_debt")
-            )
-            if baseline_disposition == "fixed" and current_signature[key]:
-                failures.append(
-                    f"anomalie corrigée réapparue [{key[0]}] fp={key[1]}"
-                )
-            continue
-        baseline_disposition = str(baseline_entries[0].get("disposition", "open_debt"))
-        if baseline_disposition == "fixed":
-            continue
-        failures.append(f"anomalie supprimée inattendue ({key[0]}::{key[1]})")
-    return failures
+    if payload.get("provisional") is True:
+        return ["baseline provisoire"]
+    if payload.get("fingerprint_schema_version") != FINGERPRINT_SCHEMA_VERSION:
+        return ["fingerprint_schema_version baseline inattendue"]
+    if not isinstance(payload.get("active"), list) or not isinstance(
+        payload.get("resolved"), list
+    ):
+        return ["champs active/resolved baseline invalides"]
+    return list(
+        _compare_anomaly_debt(
+            _current_active_debt(inventory),
+            payload["active"],
+            payload["resolved"],
+        )["failures"]
+    )
 
 
 def canonical_model_payload(inventory: Mapping[str, Any]) -> dict[str, Any]:
@@ -3504,12 +3733,15 @@ def _chapter_directory(manual: str, chapter: str) -> str:
 def _anomaly_is_blocking(
     anomaly: Mapping[str, Any],
     *,
+    category: str,
     manual_id: str,
     qualifications: Mapping[str, Mapping[str, Any]],
 ) -> bool:
     if _anomaly_manual(anomaly) != manual_id:
         return False
-    qualification = qualifications.get(_anomaly_fingerprint(anomaly))
+    qualification = qualifications.get(
+        _anomaly_fingerprint(anomaly, category=category)
+    )
     if qualification is None:
         return True
     return bool(qualification.get("blocking", True))
@@ -3565,6 +3797,7 @@ def _manual_blockers(
             for anomaly in inventory["anomalies"].get(category, [])
             if _anomaly_is_blocking(
                 anomaly,
+                category=category,
                 manual_id=manual_id,
                 qualifications=qualifications,
             )
@@ -3744,6 +3977,7 @@ def _chapter_publication_eligible(
     return not any(
         _anomaly_is_blocking(
             anomaly,
+            category=category,
             manual_id=manual_id,
             qualifications=qualifications,
         )
@@ -3963,8 +4197,13 @@ def _anomaly_sort_key(item: Mapping[str, Any]) -> tuple[str, ...]:
     )
 
 
-def _anomaly_disposition(anomaly: Mapping[str, Any], defaults: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    fingerprint = _anomaly_fingerprint(anomaly)
+def _anomaly_disposition(
+    anomaly: Mapping[str, Any],
+    defaults: dict[str, dict[str, Any]],
+    *,
+    category: str | None = None,
+) -> dict[str, Any]:
+    fingerprint = _anomaly_fingerprint(anomaly, category=category)
     disposition = defaults.get(fingerprint, {}).copy()
     disposition_value = str(disposition.get("disposition", "open_debt"))
     if disposition_value not in ANOMALY_DISPOSITIONS:
@@ -4020,14 +4259,208 @@ def _qualification_evaluation_date(
         ) from exc
 
 
-def _anomaly_fingerprint(item: Mapping[str, Any]) -> str:
-    normalized = {
-        str(key): item[key]
-        for key in sorted(item)
-        if key not in {"fingerprint", "disposition", "blocking", "provenance", "source"}
+def _fingerprint_source(
+    value: Any,
+    *,
+    repository_root: Path | None,
+) -> str:
+    if not isinstance(value, str) or not value.strip():
+        return ""
+    normalized = posixpath.normpath(value.strip().replace("\\", "/"))
+    if repository_root is not None:
+        root_text = posixpath.normpath(repository_root.as_posix())
+        prefix = f"{root_text.rstrip('/')}/"
+        if normalized.startswith(prefix):
+            return normalized[len(prefix) :]
+    if normalized.startswith("/"):
+        for anchor in (
+            "Mathematiques/",
+            "NSI/",
+            "audit/",
+            "docs/",
+            "scripts/",
+            "tests/",
+        ):
+            marker = f"/{anchor}"
+            if marker in normalized:
+                return normalized.split(marker, 1)[1].join((anchor, ""))
+    return normalized
+
+
+def _anomaly_identity_fields(
+    item: Mapping[str, Any],
+    *,
+    category: str | None = None,
+    repository_root: Path | None = None,
+) -> dict[str, Any]:
+    target = next(
+        (
+            item[key]
+            for key in ("target", "cible", "id", "object_id")
+            if key in item and item[key] not in (None, "")
+        ),
+        "",
+    )
+    return {
+        "category": category if category is not None else item.get("category", ""),
+        "chapter": item.get("chapter", item.get("chapitre", "")),
+        "field": item.get("field", item.get("champ", "")),
+        "manual": item.get("manual", item.get("manuel", "")),
+        "reason_code": item.get(
+            "reason_code",
+            item.get("raison_code", item.get("code", "")),
+        ),
+        "source": _fingerprint_source(
+            item.get("source", item.get("path", "")),
+            repository_root=repository_root,
+        ),
+        "target_or_id": target,
     }
-    payload = json.dumps(normalized, ensure_ascii=False, sort_keys=True)
+
+
+def _canonicalize_fingerprint_value(value: Any) -> Any:
+    if isinstance(value, Mapping):
+        return {
+            str(key): _canonicalize_fingerprint_value(item)
+            for key, item in sorted(
+                value.items(),
+                key=lambda pair: str(pair[0]),
+            )
+        }
+    if isinstance(value, (list, tuple, set, frozenset)):
+        normalized = [
+            _canonicalize_fingerprint_value(item)
+            for item in value
+        ]
+        return sorted(
+            normalized,
+            key=lambda item: json.dumps(
+                item,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ),
+        )
+    return value
+
+
+def _anomaly_fingerprint(
+    item: Mapping[str, Any],
+    *,
+    category: str | None = None,
+    repository_root: Path | None = None,
+) -> str:
+    payload = json.dumps(
+        _canonicalize_fingerprint_value(
+            _anomaly_identity_fields(
+                item,
+                category=category,
+                repository_root=repository_root,
+            )
+        ),
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
+
+
+def _anomaly_locator_key(
+    item: Mapping[str, Any],
+    *,
+    category: str,
+    repository_root: Path | None = None,
+) -> str:
+    identity = _anomaly_identity_fields(
+        item,
+        category=category,
+        repository_root=repository_root,
+    )
+    identity.pop("reason_code", None)
+    return json.dumps(
+        _canonicalize(identity),
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _anomaly_severity(
+    anomaly: Mapping[str, Any],
+    qualification: Mapping[str, Any],
+) -> str:
+    severity = str(anomaly.get("severity", "")).lower()
+    if severity in _ANOMALY_SEVERITY_RANK:
+        return severity
+    return "blocking" if qualification.get("blocking", True) else "warning"
+
+
+def _current_active_debt(
+    inventory: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    anomalies = inventory.get("anomalies")
+    qualifications = inventory.get("anomaly_qualifications")
+    if not isinstance(anomalies, Mapping) or not isinstance(
+        qualifications, Mapping
+    ):
+        raise InventoryError("modèle d'anomalies/qualifications invalide")
+    representative: dict[str, tuple[str, Mapping[str, Any]]] = {}
+    for category, values in sorted(anomalies.items()):
+        if not isinstance(values, list):
+            raise InventoryError(f"catégorie d'anomalie invalide: {category}")
+        for anomaly in values:
+            if not isinstance(anomaly, Mapping):
+                raise InventoryError(f"anomalie brute invalide: {category}")
+            fingerprint = _anomaly_fingerprint(
+                anomaly,
+                category=str(category),
+            )
+            representative.setdefault(
+                fingerprint,
+                (str(category), anomaly),
+            )
+
+    active: list[dict[str, Any]] = []
+    for fingerprint, qualification in sorted(qualifications.items()):
+        if not isinstance(qualification, Mapping):
+            raise InventoryError(
+                f"qualification invalide: {fingerprint}"
+            )
+        if qualification.get("disposition") == "fixed":
+            continue
+        case = representative.get(str(fingerprint))
+        if case is None:
+            raise InventoryError(
+                f"qualification sans anomalie brute: {fingerprint}"
+            )
+        category, anomaly = case
+        entry = {
+            "blocking": bool(qualification.get("blocking", True)),
+            "category": category,
+            "disposition": str(
+                qualification.get("disposition", "open_debt")
+            ),
+            "fingerprint": str(fingerprint),
+            "justification": str(qualification.get("justification", "")),
+            "locator_key": _anomaly_locator_key(
+                anomaly,
+                category=category,
+            ),
+            "occurrence_count": int(
+                qualification.get("occurrence_count", 1)
+            ),
+            "owner": str(qualification.get("owner", "")),
+            "qualified": qualification.get("qualified") is True,
+            "severity": _anomaly_severity(anomaly, qualification),
+        }
+        active.append(entry)
+    return sorted(
+        active,
+        key=lambda entry: (
+            entry["fingerprint"],
+            entry["locator_key"],
+        ),
+    )
 
 
 def _raw_anomaly_identity(category: str, anomaly: Mapping[str, Any]) -> str:
@@ -4053,7 +4486,10 @@ def _build_anomaly_qualification_view(
     grouped: dict[str, list[tuple[str, Mapping[str, Any], str]]] = defaultdict(list)
     for category, values in sorted(anomalies.items()):
         for anomaly in values:
-            fingerprint = _anomaly_fingerprint(anomaly)
+            fingerprint = _anomaly_fingerprint(
+                anomaly,
+                category=category,
+            )
             grouped[fingerprint].append(
                 (
                     category,
@@ -5648,6 +6084,298 @@ def _validate_model_gate(
     )
 
 
+def _baseline_check_phase0_tests(root: Path) -> list[str]:
+    test_path = root / "tests/test_inventory_collection.py"
+    if not test_path.is_file():
+        return ["suite Phase 0 absente: tests/test_inventory_collection.py"]
+    try:
+        completed = subprocess.run(
+            [
+                sys.executable,
+                "-m",
+                "pytest",
+                str(test_path),
+                "-q",
+            ],
+            cwd=root,
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            timeout=300,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return [f"suite Phase 0 inexécutable: {exc}"]
+    if completed.returncode:
+        tail = " | ".join(completed.stdout.splitlines()[-3:])
+        return [f"suite Phase 0 rouge: {tail}"]
+    return []
+
+
+def _baseline_check_artifact_schemas(root: Path) -> list[str]:
+    reasons: list[str] = []
+    try:
+        import jsonschema
+    except ImportError:
+        return ["jsonschema indisponible"]
+    for schema_path in sorted((root / "audit/schemas").rglob("*.json")):
+        try:
+            schema = json.loads(schema_path.read_text(encoding="utf-8"))
+            jsonschema.Draft202012Validator.check_schema(schema)
+        except (
+            OSError,
+            UnicodeError,
+            json.JSONDecodeError,
+            jsonschema.SchemaError,
+        ) as exc:
+            reasons.append(
+                f"schéma invalide:{schema_path.relative_to(root)}:{exc}"
+            )
+    if not list((root / "audit/schemas").rglob("*.json")):
+        reasons.append("aucun schéma versionné")
+    try:
+        _load_source_roles(root, git_tracked_files(root))
+        _load_dispositions(root)
+        for relative_path in MODEL_ARTIFACTS:
+            _load_model_artifact(root, relative_path)
+        if (root / ANOMALIES_BASELINE_FILE).is_file():
+            _load_validated_baseline(root)
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        reasons.append(f"artefact/contrôle invalide:{_stable_gate_reason(exc, root)}")
+    return reasons
+
+
+def _baseline_check_renderers(root: Path) -> list[str]:
+    result = _check_gate(
+        root,
+        audit_directory="audit",
+        etat_path="ETAT_COLLECTION.md",
+    )
+    reasons = list(result["reasons"])
+    for relative in (
+        "ETAT_COLLECTION.md",
+        "audit/AUDIT_CONSOLIDE.md",
+        "audit/INVENTAIRE_COLLECTION.md",
+    ):
+        path = root / relative
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as exc:
+            reasons.append(f"renderer illisible:{relative}:{exc}")
+            continue
+        if "=—" in text or "id=—, detail=—, code=—" in text:
+            reasons.append(f"placeholder interdit:{relative}")
+        if relative == "ETAT_COLLECTION.md" and len(text.splitlines()) >= 250:
+            reasons.append(
+                f"ETAT_COLLECTION.md non synthétique:{len(text.splitlines())} lignes"
+            )
+    return reasons
+
+
+def _baseline_check_object_counts(root: Path) -> list[str]:
+    try:
+        inventory = build_inventory(root)
+        checks = validate_inventory_coherence(inventory)
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        return [f"compteurs non recalculables:{_stable_gate_reason(exc, root)}"]
+    reasons: list[str] = []
+    for name, value in sorted(checks.items()):
+        if isinstance(value, Mapping) and value.get("ok") is not True:
+            reasons.append(f"compteurs incohérents:{name}")
+    return reasons
+
+
+def _baseline_check_harvest_candidates(root: Path) -> list[str]:
+    try:
+        assignments = _load_source_roles(root, git_tracked_files(root))
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        return [f"classification indisponible:{_stable_gate_reason(exc, root)}"]
+    candidates = sorted(
+        path
+        for path in assignments
+        if _is_intrinsic_harvest_candidate(path)
+    )
+    reasons: list[str] = []
+    if len(candidates) != 19:
+        reasons.append(f"candidats _harvest attendus=19 observés={len(candidates)}")
+    invalid = [
+        path
+        for path in candidates
+        if assignments.get(path) != "harvest_candidate"
+    ]
+    reasons.extend(
+        f"candidat mal classé:{path}={assignments.get(path)}"
+        for path in invalid
+    )
+    return reasons
+
+
+def _baseline_check_generated_renvois(root: Path) -> list[str]:
+    target = "Mathematiques/manuel-maths/build/maquette-v5/renvois.tex"
+    try:
+        assignments = _load_source_roles(root, git_tracked_files(root))
+        dispositions = _load_dispositions(root)
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        return [f"preuve renvois indisponible:{_stable_gate_reason(exc, root)}"]
+    reasons: list[str] = []
+    role_patterns, default_role, role_order = _collect_role_patterns(root)
+    role = _classify_source_path(
+        target,
+        assignments,
+        default=default_role,
+        role_patterns=role_patterns,
+        role_order=role_order,
+    )
+    if role != "generated_dependency":
+        reasons.append(f"renvois.tex={role} (attendu generated_dependency)")
+    qualified = [
+        value
+        for value in dispositions.values()
+        if value.get("disposition") == "generated_dependency"
+        and isinstance(value.get("proof"), (str, Mapping))
+        and target
+        in json.dumps(value.get("proof"), ensure_ascii=False, sort_keys=True)
+    ]
+    if len(qualified) != 1:
+        reasons.append(
+            f"preuve generated_dependency renvois attendue=1 observée={len(qualified)}"
+        )
+    return reasons
+
+
+def _baseline_check_intentional_reuse_decisions(root: Path) -> list[str]:
+    try:
+        dispositions = _load_dispositions(root)
+    except InventoryError as exc:
+        return [f"dispositions invalides:{_stable_gate_reason(exc, root)}"]
+    records = [
+        value
+        for value in dispositions.values()
+        if value.get("disposition") == "intentional_reuse"
+    ]
+    reasons: list[str] = []
+    expected_ids = {
+        "1SPE-DERLOCAL-EX-001",
+        "1SPE-DERLOCAL-EX-002",
+        "1SPE-DERLOCAL-EX-005",
+    }
+    observed_ids = {
+        str(value.get("proof", {}).get("object_id", ""))
+        for value in records
+        if isinstance(value.get("proof"), Mapping)
+    }
+    if observed_ids != expected_ids:
+        reasons.append(
+            "réutilisations intentionnelles non prouvées:"
+            f"attendu={sorted(expected_ids)} observé={sorted(observed_ids)}"
+        )
+    for record in records:
+        if not all(
+            isinstance(record.get(field), str) and record[field].strip()
+            for field in ("approved_by", "decision_ref", "justification")
+        ) or not isinstance(record.get("proof"), (str, Mapping)):
+            reasons.append(
+                "réutilisation sans preuve/décision:"
+                f"{record.get('fingerprint', '')}"
+            )
+    return reasons
+
+
+def _baseline_check_disposition_coverage(root: Path) -> list[str]:
+    try:
+        inventory = build_inventory(root)
+        dispositions = _load_dispositions(root)
+        active = _current_active_debt(inventory)
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        return [f"couverture non recalculable:{_stable_gate_reason(exc, root)}"]
+    reasons = _active_debt_qualification_failures(
+        _coalesce_active_debt(active)
+    )
+    for fingerprint, record in sorted(dispositions.items()):
+        if record.get("disposition") == "false_positive" and (
+            not isinstance(record.get("justification"), str)
+            or not record["justification"].strip()
+            or not isinstance(record.get("proof"), (str, Mapping))
+        ):
+            reasons.append(
+                f"faux positif non prouvé:{fingerprint}"
+            )
+    return reasons
+
+
+def _baseline_check_fingerprint_determinism(root: Path) -> list[str]:
+    try:
+        first = build_inventory(root)
+        second = build_inventory(root)
+        first_active = _current_active_debt(first)
+        second_active = _current_active_debt(second)
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        return [f"fingerprints non recalculables:{_stable_gate_reason(exc, root)}"]
+    reasons: list[str] = []
+    if FINGERPRINT_SCHEMA_VERSION != 1:
+        reasons.append(
+            f"fingerprint_schema_version non supportée:{FINGERPRINT_SCHEMA_VERSION}"
+        )
+    if first_active != second_active:
+        reasons.append("recalcul de fingerprints non déterministe")
+    return reasons
+
+
+def _run_baseline_readiness_check(
+    root: Path,
+    name: str,
+) -> dict[str, Any]:
+    checkers = {
+        "phase0_tests": _baseline_check_phase0_tests,
+        "artifact_schemas": _baseline_check_artifact_schemas,
+        "renderers": _baseline_check_renderers,
+        "object_counts": _baseline_check_object_counts,
+        "harvest_candidates": _baseline_check_harvest_candidates,
+        "generated_renvois": _baseline_check_generated_renvois,
+        "intentional_reuse_decisions": _baseline_check_intentional_reuse_decisions,
+        "disposition_coverage": _baseline_check_disposition_coverage,
+        "fingerprint_determinism": _baseline_check_fingerprint_determinism,
+        "validate_model": lambda repository: list(
+            _validate_model_gate(repository)["reasons"]
+        ),
+    }
+    if name not in checkers:
+        raise InventoryError(f"check baseline_ready inconnu: {name}")
+    reasons = sorted(
+        {
+            str(reason)
+            for reason in checkers[name](root)
+            if str(reason)
+        }
+    )
+    return {
+        "name": name,
+        "reasons": reasons,
+        "success": not reasons,
+    }
+
+
+def _baseline_ready_gate(root: Path) -> dict[str, Any]:
+    checks = [
+        _run_baseline_readiness_check(root, name)
+        for name in BASELINE_READY_CHECK_NAMES
+    ]
+    reasons = [
+        reason
+        for check in checks
+        for reason in check["reasons"]
+    ]
+    result = _gate_result(
+        "baseline-ready",
+        success=not reasons,
+        failure_code=GATE_BASELINE_UPDATE_CODE,
+        dimensions={"structure": "passed" if not reasons else "failed"},
+        reasons=reasons,
+    )
+    result["checks"] = checks
+    return result
+
+
 def _check_gate(root: Path, *, audit_directory: str, etat_path: str) -> dict[str, Any]:
     try:
         result = build_inventory_artifacts(
@@ -5673,22 +6401,403 @@ def _check_gate(root: Path, *, audit_directory: str, etat_path: str) -> dict[str
 def _fail_on_new_gate(root: Path) -> dict[str, Any]:
     baseline_path = root / ANOMALIES_BASELINE_FILE
     baseline = _load_baseline_payload(baseline_path)
+    comparison: dict[str, Any] | None = None
     if baseline is None:
         reasons = [f"baseline absente ou invalide:{ANOMALIES_BASELINE_FILE}"]
     elif baseline.get("provisional") is True:
         reasons = ["baseline provisoire: comparaison de dette non obligatoire"]
+    elif baseline.get("fingerprint_schema_version") != FINGERPRINT_SCHEMA_VERSION:
+        reasons = [
+            "fingerprint_schema_version baseline non supportée:"
+            f"{baseline.get('fingerprint_schema_version')}"
+        ]
     else:
-        # Task 5 replaces this explicit boundary with the fingerprint-v1 pure
-        # comparison.  Returning red is safer than pretending a final baseline
-        # has been compared by the legacy aggregate algorithm.
-        reasons = ["comparaison fingerprint-v1 non encore stabilisée"]
-    return _gate_result(
+        try:
+            baseline = _load_validated_baseline(root)
+            inventory = build_inventory(root)
+            comparison = _compare_anomaly_debt(
+                _current_active_debt(inventory),
+                baseline.get("active", []),
+                baseline.get("resolved", []),
+            )
+            reasons = list(comparison["failures"])
+        except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+            reasons = [
+                "comparaison fingerprint-v1 impossible:"
+                f"{_stable_gate_reason(exc, root)}"
+            ]
+    result = _gate_result(
         "fail-on-new",
         success=not reasons,
         failure_code=GATE_BASELINE_CODE,
         dimensions={"structure": "passed" if not reasons else "failed"},
         reasons=reasons,
     )
+    if comparison is not None:
+        result["comparison"] = comparison
+    return result
+
+
+def _baseline_payload_digest(payload: Mapping[str, Any]) -> str:
+    normalized = _canonicalize(dict(payload))
+    updates = normalized.get("updates")
+    if isinstance(updates, list):
+        for update in updates:
+            if isinstance(update, dict) and "new_baseline_digest" in update:
+                update["new_baseline_digest"] = "sha256:" + "0" * 64
+    serialized = json.dumps(
+        normalized,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return f"sha256:{hashlib.sha256(_utf8_bytes(serialized)).hexdigest()}"
+
+
+def _resolved_entry(
+    active: Mapping[str, Any],
+    *,
+    timestamp: str,
+    git_sha: str,
+) -> dict[str, Any]:
+    return {
+        "blocking": False,
+        "category": str(active.get("category", "unknown")),
+        "disposition": "fixed",
+        "fingerprint": str(active["fingerprint"]),
+        "resolved_at": timestamp,
+        "resolved_git_sha": git_sha,
+    }
+
+
+def _render_baseline_update_report(
+    *,
+    approved_by: str,
+    comparison: Mapping[str, Any],
+    git_sha: str,
+    new_digest: str,
+    previous_digest: str | None,
+    reason: str,
+    readiness: Mapping[str, Any],
+    timestamp: str,
+) -> str:
+    lines = [
+        "<!-- AUTO-GENÉRÉ PAR inventory_collection.py -->",
+        "# Mise à jour de la baseline d’anomalies",
+        "",
+        f"- Date : `{timestamp}`",
+        f"- Approbateur : {approved_by}",
+        f"- Raison : {reason}",
+        f"- SHA Git : `{git_sha}`",
+        f"- Empreinte précédente : `{previous_digest or 'aucune'}`",
+        f"- Nouvelle empreinte : `{new_digest}`",
+        "",
+        "## Transition",
+        "",
+    ]
+    for key in (
+        "new",
+        "unchanged",
+        "resolved",
+        "regressions",
+    ):
+        values = comparison.get(key, [])
+        lines.append(f"- {key} : {len(values) if isinstance(values, list) else 0}")
+        if isinstance(values, list):
+            lines.extend(f"  - `{value}`" for value in values)
+    modified = comparison.get("modified", [])
+    lines.append(
+        f"- modified : {len(modified) if isinstance(modified, list) else 0}"
+    )
+    if isinstance(modified, list):
+        for value in modified:
+            if isinstance(value, Mapping):
+                lines.append(
+                    "  - "
+                    f"`{value.get('previous', '')}` → "
+                    f"`{value.get('current', '')}`"
+                )
+    lines.extend(["", "## Préconditions baseline_ready", ""])
+    for check in readiness.get("checks", []):
+        if not isinstance(check, Mapping):
+            continue
+        status = "VERT" if check.get("success") is True else "ROUGE"
+        lines.append(f"- {check.get('name', 'inconnu')} : {status}")
+    return "\n".join(lines) + "\n"
+
+
+def _update_baseline_gate(
+    root: Path,
+    *,
+    reason: str,
+    approved_by: str,
+) -> dict[str, Any]:
+    reasons: list[str] = []
+    if os.environ.get("CI"):
+        reasons.append("mise à jour de baseline interdite en CI")
+    if not isinstance(reason, str) or not reason.strip():
+        reasons.append("justification non vide requise")
+    if not isinstance(approved_by, str) or not approved_by.strip():
+        reasons.append("approbateur non vide requis")
+    if reasons:
+        return _gate_result(
+            "update-baseline",
+            success=False,
+            failure_code=GATE_BASELINE_UPDATE_CODE,
+            dimensions={"structure": "failed"},
+            reasons=reasons,
+        )
+
+    clean = _require_clean_gate(root)
+    if not clean["success"]:
+        return _gate_result(
+            "update-baseline",
+            success=False,
+            failure_code=GATE_BASELINE_UPDATE_CODE,
+            dimensions={"structure": "failed"},
+            reasons=[
+                "dépôt propre requis: " + value
+                for value in clean["reasons"]
+            ],
+        )
+    model = _validate_model_gate(root)
+    if not model["success"]:
+        return _gate_result(
+            "update-baseline",
+            success=False,
+            failure_code=GATE_BASELINE_UPDATE_CODE,
+            dimensions={"structure": "failed"},
+            reasons=[
+                "modèle invalide: " + value
+                for value in model["reasons"]
+            ],
+        )
+    try:
+        validated_baseline = _load_validated_baseline(root)
+    except InventoryError as exc:
+        return _gate_result(
+            "update-baseline",
+            success=False,
+            failure_code=GATE_BASELINE_UPDATE_CODE,
+            dimensions={"structure": "failed"},
+            reasons=[
+                "baseline invalide: " + _stable_gate_reason(exc, root)
+            ],
+        )
+    validated_baseline_digest = _baseline_payload_digest(
+        validated_baseline
+    )
+    validated_head = _repo_head_sha(root, required=True)
+    readiness = _baseline_ready_gate(root)
+    if not readiness["success"]:
+        result = _gate_result(
+            "update-baseline",
+            success=False,
+            failure_code=GATE_BASELINE_UPDATE_CODE,
+            dimensions={"structure": "failed"},
+            reasons=[
+                "baseline_ready: " + value
+                for value in readiness["reasons"]
+            ],
+        )
+        result["checks"] = readiness["checks"]
+        return result
+
+    with _lock_generation(root) as lock_identity:
+        _ensure_clean_tree(
+            root,
+            mode="head",
+            allowed_generation_paths=lock_identity,
+        )
+        inventory = build_inventory(
+            root,
+            require_git_provenance=True,
+        )
+        current_active = _current_active_debt(inventory)
+        old_payload = _load_validated_baseline(root)
+        if _baseline_payload_digest(old_payload) != validated_baseline_digest:
+            raise InventoryError(
+                "baseline modifiée pendant les préconditions"
+            )
+        if _repo_head_sha(root, required=True) != validated_head:
+            raise InventoryError(
+                "HEAD modifié pendant les préconditions"
+            )
+        old_active = (
+            old_payload.get("active", [])
+            if isinstance(old_payload, Mapping)
+            and isinstance(old_payload.get("active"), list)
+            else []
+        )
+        old_resolved = (
+            old_payload.get("resolved", [])
+            if isinstance(old_payload, Mapping)
+            and isinstance(old_payload.get("resolved"), list)
+            else []
+        )
+        comparison = _compare_anomaly_debt(
+            current_active,
+            old_active,
+            old_resolved,
+        )
+        timestamp = _generation_timestamp(root, required=True)
+        if timestamp is None:  # defensive: required=True already raises
+            raise InventoryError("timestamp Git indisponible")
+        git_sha = _repo_head_sha(root, required=True)
+        if git_sha is None:  # defensive: required=True already raises
+            raise InventoryError("SHA Git indisponible")
+        resolved_by_fingerprint = {
+            str(entry.get("fingerprint", "")): dict(entry)
+            for entry in old_resolved
+            if isinstance(entry, Mapping) and entry.get("fingerprint")
+        }
+        old_active_by_fingerprint = {
+            str(entry.get("fingerprint", "")): entry
+            for entry in old_active
+            if isinstance(entry, Mapping) and entry.get("fingerprint")
+        }
+        newly_resolved = list(comparison["resolved"]) + [
+            str(value["previous"])
+            for value in comparison["modified"]
+            if isinstance(value, Mapping) and value.get("previous")
+        ]
+        for fingerprint in sorted(set(newly_resolved)):
+            previous_entry = old_active_by_fingerprint.get(fingerprint)
+            if previous_entry is not None:
+                resolved_by_fingerprint.setdefault(
+                    fingerprint,
+                    _resolved_entry(
+                        previous_entry,
+                        timestamp=timestamp,
+                        git_sha=git_sha,
+                    ),
+                )
+        previous_digest = (
+            _baseline_payload_digest(old_payload)
+            if isinstance(old_payload, Mapping)
+            else None
+        )
+        updates = (
+            [
+                dict(value)
+                for value in old_payload.get("updates", [])
+                if isinstance(value, Mapping)
+            ]
+            if isinstance(old_payload, Mapping)
+            and isinstance(old_payload.get("updates"), list)
+            else []
+        )
+        payload: dict[str, Any] = {
+            "active": current_active,
+            "artifact_type": "anomalies_baseline",
+            "fingerprint_schema_version": FINGERPRINT_SCHEMA_VERSION,
+            "generated_at_utc": timestamp,
+            "generated_by": "inventory_collection.py",
+            "git_sha": git_sha,
+            "model_digest": _model_digest(inventory),
+            "previous_baseline_digest": previous_digest,
+            "provenance": inventory["provenance"],
+            "provisional": False,
+            "resolved": [
+                resolved_by_fingerprint[fingerprint]
+                for fingerprint in sorted(resolved_by_fingerprint)
+            ],
+            "schema_ref": (
+                "audit/schemas/v1/anomalies-baseline.schema.json"
+            ),
+            "schema_version": SCHEMA_VERSION,
+            "source_digest": inventory["source_digest"],
+            "summary": {
+                "active": len(current_active),
+                "resolved": len(resolved_by_fingerprint),
+            },
+            "updates": updates,
+        }
+        update = {
+            "approved_by": approved_by.strip(),
+            "git_sha": git_sha,
+            "new_baseline_digest": "sha256:" + "0" * 64,
+            "previous_baseline_digest": previous_digest,
+            "reason": reason.strip(),
+            "timestamp": timestamp,
+        }
+        payload["updates"].append(update)
+        new_digest = _baseline_payload_digest(payload)
+        update["new_baseline_digest"] = new_digest
+        _validate_artifact_schema(
+            payload,
+            root=root,
+            path=Path(ANOMALIES_BASELINE_FILE),
+        )
+        report = _render_baseline_update_report(
+            approved_by=approved_by.strip(),
+            comparison=comparison,
+            git_sha=git_sha,
+            new_digest=new_digest,
+            previous_digest=previous_digest,
+            reason=reason.strip(),
+            readiness=readiness,
+            timestamp=timestamp,
+        )
+        _ensure_clean_tree(
+            root,
+            mode="head",
+            allowed_generation_paths=lock_identity,
+        )
+        _apply_atomic_payloads(
+            root,
+            {
+                root / ANOMALIES_BASELINE_FILE: (
+                    json.dumps(
+                        payload,
+                        ensure_ascii=False,
+                        indent=2,
+                        sort_keys=True,
+                    )
+                    + "\n"
+                ),
+                root / BASELINE_UPDATE_REPORT_FILE: report,
+            },
+        )
+
+    result = _gate_result(
+        "update-baseline",
+        success=True,
+        failure_code=GATE_BASELINE_UPDATE_CODE,
+        dimensions={"structure": "passed"},
+        reasons=[],
+    )
+    result["checks"] = readiness["checks"]
+    result["comparison"] = comparison
+    result["new_baseline_digest"] = new_digest
+    result["previous_baseline_digest"] = previous_digest
+    return result
+
+
+def _safe_update_baseline_gate(
+    root: Path,
+    *,
+    reason: str,
+    approved_by: str,
+) -> dict[str, Any]:
+    try:
+        return _update_baseline_gate(
+            root,
+            reason=reason,
+            approved_by=approved_by,
+        )
+    except (
+        InventoryError,
+        OSError,
+        subprocess.CalledProcessError,
+    ) as exc:
+        return _gate_result(
+            "update-baseline",
+            success=False,
+            failure_code=GATE_BASELINE_UPDATE_CODE,
+            dimensions={"structure": "failed"},
+            reasons=[f"update_error:{_stable_gate_reason(exc, root)}"],
+        )
 
 
 def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
@@ -5808,6 +6917,21 @@ def _run() -> int:
         action="store_true",
         help="Refuser les modifications suivies et les fichiers non suivis pertinents.",
     )
+    parser.add_argument(
+        "--update-baseline",
+        action="store_true",
+        help="Mettre à jour explicitement la baseline après les dix préconditions.",
+    )
+    parser.add_argument(
+        "--reason",
+        default="",
+        help="Justification auditée de la mise à jour de baseline.",
+    )
+    parser.add_argument(
+        "--approved-by",
+        default="",
+        help="Responsable humain approuvant la mise à jour de baseline.",
+    )
     args = parser.parse_args()
 
     requested_gates = (
@@ -5816,6 +6940,7 @@ def _run() -> int:
         args.check,
         args.fail_on_new,
         args.release_strict,
+        args.update_baseline,
     )
     if any(requested_gates):
         if args.strict:
@@ -5831,6 +6956,11 @@ def _run() -> int:
                     (args.check, "check", GATE_CHECK_CODE),
                     (args.fail_on_new, "fail-on-new", GATE_BASELINE_CODE),
                     (args.release_strict, "release-strict", GATE_RELEASE_CODE),
+                    (
+                        args.update_baseline,
+                        "update-baseline",
+                        GATE_BASELINE_UPDATE_CODE,
+                    ),
                 )
                 if enabled
             )
@@ -5861,6 +6991,14 @@ def _run() -> int:
             evaluations.append(_fail_on_new_gate(root))
         if args.release_strict:
             evaluations.append(_release_strict_gate_for_root(root))
+        if args.update_baseline:
+            evaluations.append(
+                _safe_update_baseline_gate(
+                    root,
+                    reason=args.reason,
+                    approved_by=args.approved_by,
+                )
+            )
         result = next(
             (evaluation for evaluation in evaluations if not evaluation["success"]),
             evaluations[-1],
