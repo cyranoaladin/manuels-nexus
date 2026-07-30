@@ -1,0 +1,41 @@
+[tool.pytest.ini_options]
+addopts = "--import-mode=importlib"
+testpaths = [
+  "Mathematiques/manuel-maths/tests",
+  "NSI/tests",
+  "tests",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["scripts"]
+
+[tool.coverage.report]
+fail_under = 74
+precision = 1
+show_missing = true
+skip_covered = true
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "."
+explicit_package_bases = true
+files = [
+  "scripts/check_charte_sync.py",
+  "scripts/ci_audit_collection.py",
+  "scripts/inventory_graph.py",
+  "scripts/inventory_pdf.py",
+  "scripts/inventory_reports.py",
+]
+# Dette de typage hors gate Phase 0 : inventory_collection.py,
+# inventory_assembly.py et build_manifest.py nécessitent un lot dédié.
+# Ils ne sont ni masqués par ignore_errors, ni déclarés comme déjà typés.
+check_untyped_defs = true
+no_implicit_optional = true
+show_error_codes = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.ruff]
+target-version = "py312"
