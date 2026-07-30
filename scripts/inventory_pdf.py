@@ -70,10 +70,16 @@ def attribute_pdf(path: str, inventory: Mapping[str, Any]) -> dict[str, Any]:
     return {"chapter": None, "manual": None, "scope": None, "variant": None}
 
 
-def aggregate_artifacts(inventory: dict[str, Any]) -> None:
+def aggregate_artifacts(
+    inventory: dict[str, Any],
+    *,
+    compiled_source_roles: frozenset[str],
+) -> None:
     manual_variants: dict[tuple[str, str], set[str]] = defaultdict(set)
     chapter_variants: dict[tuple[str, str, str], set[str]] = defaultdict(set)
     for artifact in inventory["pdfs"]:
+        if artifact["source_role"] not in compiled_source_roles:
+            continue
         manual_id = artifact["manual"]
         if manual_id is None or manual_id not in inventory["manuals"]:
             continue
@@ -106,6 +112,7 @@ def inventory_pdfs(
     tracked: tuple[str, ...],
     inventory: dict[str, Any],
     *,
+    source_roles: Mapping[str, str],
     pdfinfo_counter: Callable[[Path], tuple[int | None, str | None]],
     python_counter: Callable[[Path], tuple[int | None, str | None]],
 ) -> list[dict[str, Any]]:
@@ -119,6 +126,7 @@ def inventory_pdfs(
             "manual": attribution["manual"],
             "path": path,
             "scope": attribution["scope"],
+            "source_role": source_roles[path],
             "variant": attribution["variant"],
         }
         if attribution["manual"] is None:

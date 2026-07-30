@@ -314,6 +314,14 @@ STATIC_ASSEMBLY_TRAVERSAL_SOURCE_ROLES = frozenset(
 DECLARED_ASSEMBLER_SOURCE_ROLES = frozenset(
     {"production_object", "transversal"}
 )
+DECLARED_ASSEMBLER_PATH_ALLOWLIST = frozenset(
+    {
+        "Mathematiques/manuel-maths/scripts/assemble.py",
+        "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        "NSI/scripts/assemble.py",
+    }
+)
+COMPILED_PDF_SOURCE_ROLES = frozenset({"generated_dependency"})
 RELEVANT_UNTRACKED_SOURCE_ROLES = frozenset(
     {
         "generated_dependency",
@@ -2234,7 +2242,9 @@ def validate_inventory_coherence(inventory: Mapping[str, Any]) -> dict[str, Any]
         expected_manual_paths = [
             artifact["path"]
             for artifact in inventory.get("pdfs", [])
-            if isinstance(artifact, Mapping) and artifact.get("manual") == manual_id
+            if isinstance(artifact, Mapping)
+            and artifact.get("manual") == manual_id
+            and artifact.get("source_role") in COMPILED_PDF_SOURCE_ROLES
         ]
         if len(manual_paths) != len(expected_manual_paths):
             artifact_violations.append(
@@ -2755,7 +2765,12 @@ def build_inventory(
         ),
         skipped_paths=metadata_error_paths,
     )
-    inventory["pdfs"] = _inventory_pdfs(root, tracked, inventory)
+    inventory["pdfs"] = _inventory_pdfs(
+        root,
+        tracked,
+        inventory,
+        source_roles=source_roles,
+    )
     _aggregate_pdf_artifacts(inventory)
     inventory["anomalies"] = {
         key: sorted(values, key=_anomaly_sort_key)
@@ -3218,6 +3233,7 @@ def _add_assemblies(
         tracked,
         source_roles=source_roles,
         assembler_source_roles=DECLARED_ASSEMBLER_SOURCE_ROLES,
+        assembler_path_allowlist=DECLARED_ASSEMBLER_PATH_ALLOWLIST,
         manual_ids=tuple(MANUALS),
         manual_for_chapter=_manual_for_chapter,
         supported_manuals=_supported_manuals_for_assembler,
@@ -3239,11 +3255,14 @@ def _inventory_pdfs(
     root: Path,
     tracked: tuple[str, ...],
     inventory: dict[str, Any],
+    *,
+    source_roles: Mapping[str, str],
 ) -> list[dict[str, Any]]:
     return _pdf_core.inventory_pdfs(
         root,
         tracked,
         inventory,
+        source_roles=source_roles,
         pdfinfo_counter=_page_count_with_pdfinfo,
         python_counter=_page_count_with_python,
     )
@@ -3284,7 +3303,10 @@ def _aggregate_declared_variants(inventory: dict[str, Any]) -> None:
 
 
 def _aggregate_pdf_artifacts(inventory: dict[str, Any]) -> None:
-    _pdf_core.aggregate_artifacts(inventory)
+    _pdf_core.aggregate_artifacts(
+        inventory,
+        compiled_source_roles=COMPILED_PDF_SOURCE_ROLES,
+    )
 
 
 def _page_count_with_pdfinfo(path: Path) -> tuple[int | None, str | None]:

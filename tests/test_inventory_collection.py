@@ -2964,6 +2964,7 @@ def test_pdf_inventory_uses_only_tracked_files_and_reports_unavailable_page_coun
             "path": tracked_pdf,
             "reason": ("pdfinfo indisponible; lecteur PDF Python indisponible"),
             "scope": None,
+            "source_role": "generated_dependency",
             "status": "page_count_unavailable",
             "variant": None,
         }
@@ -3002,10 +3003,14 @@ def test_pdf_inventory_prefers_pdfinfo_page_count(
             "path": tracked_pdf,
             "reason": None,
             "scope": "manual",
+            "source_role": "generated_dependency",
             "status": "counted",
             "variant": "eleve",
         }
     ]
+    assert inventory["manuals"]["1NSI"]["compiled_artifacts"] == inventory["pdfs"]
+    assert inventory["manuals"]["1NSI"]["compiled_variants"]["manual"] == ["eleve"]
+    assert "observed_builds" not in inventory
 
 
 def test_missing_tracked_pdf_has_deterministic_checkout_status(
@@ -3028,10 +3033,69 @@ def test_missing_tracked_pdf_has_deterministic_checkout_status(
             "path": tracked_pdf,
             "reason": "fichier PDF suivi absent du checkout",
             "scope": None,
+            "source_role": "generated_dependency",
             "status": "page_count_unavailable",
             "variant": None,
         }
     ]
+
+
+@pytest.mark.parametrize(
+    ("pdf", "expected_role"),
+    [
+        pytest.param(
+            "NSI/tests/fixtures/MANUEL_1NSI_eleve.pdf",
+            "fixture",
+            id="fixture",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/gabarits/"
+            "reference-v4/MANUEL_1NSI_eleve.pdf",
+            "visual_reference",
+            id="visual-reference",
+        ),
+        pytest.param(
+            "NSI/historique/MANUEL_1NSI_eleve.pdf",
+            "archive",
+            id="archive",
+        ),
+    ],
+)
+def test_non_publishable_pdf_is_inventoried_without_compiled_evidence(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    pdf: str,
+    expected_role: str,
+) -> None:
+    _init_repository(tmp_path)
+    _write(tmp_path / pdf, "contenu simule")
+    _track(tmp_path, pdf)
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        lambda _path: (12, None),
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+    manual = inventory["manuals"]["1NSI"]
+
+    assert artifact["path"] == pdf
+    assert artifact["manual"] == "1NSI"
+    assert artifact["variant"] == "eleve"
+    assert artifact["source_role"] == expected_role
+    assert manual["compiled_artifacts"] == []
+    assert manual["compiled_variants"] == {
+        "chapter": [],
+        "manual": [],
+        "static": [],
+    }
+    assert inventory["coherence_checks"]["artifact_cardinality"] == {
+        "ok": True,
+        "violations": [],
+    }
+    assert "observed_builds" not in inventory
 
 
 def test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correction(
@@ -3129,6 +3193,16 @@ def test_graph_source_role_policies_are_explicit(
     )
     assert inventory_module.DECLARED_ASSEMBLER_SOURCE_ROLES == frozenset(
         {"production_object", "transversal"}
+    )
+    assert inventory_module.DECLARED_ASSEMBLER_PATH_ALLOWLIST == frozenset(
+        {
+            "Mathematiques/manuel-maths/scripts/assemble.py",
+            "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+            "NSI/scripts/assemble.py",
+        }
+    )
+    assert inventory_module.COMPILED_PDF_SOURCE_ROLES == frozenset(
+        {"generated_dependency"}
     )
 
 
@@ -3441,6 +3515,83 @@ def test_fixture_assembler_cannot_assemble_production_objects(
             "source": course,
         }
     ]
+
+
+@pytest.mark.parametrize(
+    "assembler",
+    [
+        pytest.param(
+            "NSI/chapitres/1NSI-TEST/scripts/assemble.py",
+            id="production-role",
+        ),
+        pytest.param(
+            "NSI/extras/scripts/assemble.py",
+            id="transversal-role",
+        ),
+    ],
+)
+def test_noncanonical_assembler_cannot_prove_declared_assembly(
+    tmp_path: Path,
+    inventory_module,
+    assembler: str,
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1NSI", "1NSI-TEST")
+    contract = f"{base}/contrat.yaml"
+    course = f"{base}/cours/10_cours.tex"
+    sources = {
+        contract: _contract("1NSI-TEST", "1NSI", capacities=1),
+        course: _meta(
+            id="1NSI-TEST-COURS-C1",
+            chapitre="1NSI-TEST",
+            status="approved",
+        ),
+        assembler: 'ORDER = [("cours", "*")]\nVARIANTS = ["complet"]\n',
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert not any(
+        assembly["assembler"] == assembler for assembly in inventory["assemblies"]
+    )
+    assert inventory["anomalies"]["unassembled_objects"] == [
+        {
+            "champ": "assemblages_declares",
+            "cible": course,
+            "raison": "objet META exclu de tous les assemblages declares",
+            "source": course,
+        }
+    ]
+    assert {
+        anomaly["cible"]
+        for anomaly in inventory["anomalies"]["missing_assemblers"]
+        if anomaly["champ"] == "chapitre"
+    } >= {"1NSI", "TNSI"}
+
+
+def test_declared_assembler_allowlist_preserves_three_real_engines(
+    inventory_module,
+) -> None:
+    tracked = inventory_module.git_tracked_files(ROOT)
+    source_roles = inventory_module._load_source_roles(ROOT, tracked)
+    expected = inventory_module.DECLARED_ASSEMBLER_PATH_ALLOWLIST
+
+    assert expected <= set(tracked)
+    assert {
+        source_roles[path] for path in expected
+    } <= inventory_module.DECLARED_ASSEMBLER_SOURCE_ROLES
+
+    inventory = inventory_module.build_inventory(ROOT)
+    observed = {
+        assembly["assembler"]
+        for assembly in inventory["assemblies"]
+        if assembly["scope"] in {"chapter", "manual"}
+    }
+
+    assert observed == expected
 
 
 @pytest.mark.parametrize(
@@ -4440,6 +4591,7 @@ def test_deliverable_matrix_blocks_needs_review_and_checks_model_coherence(
             "path": "MANUEL_1NSI_v1.pdf",
             "reason": None,
             "scope": "manual",
+            "source_role": "generated_dependency",
             "status": "counted",
             "variant": "eleve",
         }
