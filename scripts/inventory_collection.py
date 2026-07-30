@@ -322,6 +322,14 @@ DECLARED_ASSEMBLER_PATH_ALLOWLIST = frozenset(
     }
 )
 COMPILED_PDF_SOURCE_ROLES = frozenset({"generated_dependency"})
+COMPILED_PDF_BUILD_ROOTS: Mapping[str, str] = MappingProxyType(
+    {
+        "1NSI": "NSI/build",
+        "1SPE": "Mathematiques/manuel-maths/build",
+        "TNSI": "NSI/build",
+        "TSPE_2026_2027": "Mathematiques/manuel-maths/build",
+    }
+)
 RELEVANT_UNTRACKED_SOURCE_ROLES = frozenset(
     {
         "generated_dependency",
@@ -2269,6 +2277,7 @@ def validate_inventory_coherence(inventory: Mapping[str, Any]) -> dict[str, Any]
             and _pdf_core.is_compilation_evidence(
                 artifact,
                 compiled_source_roles=COMPILED_PDF_SOURCE_ROLES,
+                manual_build_roots=COMPILED_PDF_BUILD_ROOTS,
             )
         ]
         if len(manual_paths) != len(expected_manual_paths):
@@ -3331,6 +3340,7 @@ def _aggregate_pdf_artifacts(inventory: dict[str, Any]) -> None:
     _pdf_core.aggregate_artifacts(
         inventory,
         compiled_source_roles=COMPILED_PDF_SOURCE_ROLES,
+        manual_build_roots=COMPILED_PDF_BUILD_ROOTS,
     )
 
 

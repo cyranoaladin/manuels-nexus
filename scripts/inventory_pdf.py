@@ -74,6 +74,7 @@ def aggregate_artifacts(
     inventory: dict[str, Any],
     *,
     compiled_source_roles: frozenset[str],
+    manual_build_roots: Mapping[str, str],
 ) -> None:
     manual_variants: dict[tuple[str, str], set[str]] = defaultdict(set)
     chapter_variants: dict[tuple[str, str, str], set[str]] = defaultdict(set)
@@ -81,6 +82,7 @@ def aggregate_artifacts(
         if not is_compilation_evidence(
             artifact,
             compiled_source_roles=compiled_source_roles,
+            manual_build_roots=manual_build_roots,
         ):
             continue
         manual_id = artifact["manual"]
@@ -114,6 +116,7 @@ def is_compilation_evidence(
     artifact: Mapping[str, Any],
     *,
     compiled_source_roles: frozenset[str],
+    manual_build_roots: Mapping[str, str],
 ) -> bool:
     page_count = artifact.get("page_count")
     return (
@@ -122,7 +125,35 @@ def is_compilation_evidence(
         and isinstance(page_count, int)
         and not isinstance(page_count, bool)
         and page_count > 0
+        and _is_canonical_manual_pdf_path(
+            artifact,
+            manual_build_roots=manual_build_roots,
+        )
     )
+
+
+def _is_canonical_manual_pdf_path(
+    artifact: Mapping[str, Any],
+    *,
+    manual_build_roots: Mapping[str, str],
+) -> bool:
+    path = artifact.get("path")
+    manual = artifact.get("manual")
+    build_root = manual_build_roots.get(manual) if isinstance(manual, str) else None
+    if not isinstance(path, str) or not isinstance(build_root, str):
+        return False
+    if "\\" in path:
+        return False
+    raw_parts = path.split("/")
+    if any(part in {"", ".", ".."} for part in raw_parts):
+        return False
+    pure_path = PurePosixPath(path)
+    pure_root = PurePosixPath(build_root)
+    try:
+        relative = pure_path.relative_to(pure_root)
+    except ValueError:
+        return False
+    return bool(relative.parts) and relative.suffix.lower() == ".pdf"
 
 
 def inventory_pdfs(

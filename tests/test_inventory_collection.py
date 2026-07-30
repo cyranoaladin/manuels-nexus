@@ -3259,6 +3259,130 @@ def test_non_publishable_pdf_is_inventoried_without_compiled_evidence(
     assert "observed_builds" not in inventory
 
 
+@pytest.mark.parametrize(
+    ("pdf", "manual_id"),
+    [
+        pytest.param(
+            r"NSI\build/MANUEL_1NSI_eleve.pdf",
+            "1NSI",
+            id="literal-backslash-root",
+        ),
+        pytest.param(
+            "evil/build/MANUEL_1NSI_eleve.pdf",
+            "1NSI",
+            id="untrusted-generated-root",
+        ),
+        pytest.param(
+            "NSІ/build/MANUEL_1NSI_eleve.pdf",
+            "1NSI",
+            id="unicode-confusable-root",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/build/MANUEL_1NSI_eleve.pdf",
+            "1NSI",
+            id="nsi-manual-under-math-root",
+        ),
+        pytest.param(
+            "NSI/build/MANUEL_1SPE_eleve.pdf",
+            "1SPE",
+            id="math-manual-under-nsi-root",
+        ),
+    ],
+)
+def test_generated_pdf_outside_manual_project_is_not_compiled_evidence(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    pdf: str,
+    manual_id: str,
+) -> None:
+    _init_repository(tmp_path)
+    _write(tmp_path / pdf, "contenu simule")
+    _track(tmp_path, pdf)
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        lambda _path: (9, None),
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+    manual = inventory["manuals"][manual_id]
+
+    assert artifact["path"] == pdf
+    assert artifact["manual"] == manual_id
+    assert artifact["source_role"] == "generated_dependency"
+    assert artifact["status"] == "counted"
+    assert artifact["page_count"] == 9
+    assert manual["compiled_artifacts"] == []
+    assert manual["compiled_variants"]["manual"] == []
+    assert inventory["coherence_checks"]["artifact_cardinality"] == {
+        "ok": True,
+        "violations": [],
+    }
+    assert "observed_builds" not in inventory
+
+
+@pytest.mark.parametrize(
+    ("pdf", "manual_id"),
+    [
+        pytest.param(
+            "NSI/build/MANUEL_1NSI_eleve.pdf",
+            "1NSI",
+            id="1nsi",
+        ),
+        pytest.param(
+            "NSI/build/MANUEL_TNSI_eleve.pdf",
+            "TNSI",
+            id="tnsi",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/build/MANUEL_1SPE_eleve.pdf",
+            "1SPE",
+            id="1spe",
+        ),
+        pytest.param(
+            "Mathematiques/manuel-maths/build/"
+            "MANUEL_TSPE_2026-2027_eleve.pdf",
+            "TSPE_2026_2027",
+            id="tspe",
+        ),
+    ],
+)
+def test_valid_pdf_under_canonical_manual_project_is_compiled_evidence(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    pdf: str,
+    manual_id: str,
+) -> None:
+    _init_repository(tmp_path)
+    _write(tmp_path / pdf, "contenu simule")
+    _track(tmp_path, pdf)
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        lambda _path: (9, None),
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+    manual = inventory["manuals"][manual_id]
+
+    assert artifact["path"] == pdf
+    assert artifact["manual"] == manual_id
+    assert artifact["source_role"] == "generated_dependency"
+    assert artifact["status"] == "counted"
+    assert artifact["page_count"] == 9
+    assert manual["compiled_artifacts"] == [artifact]
+    assert manual["compiled_variants"]["manual"] == ["eleve"]
+    assert inventory["coherence_checks"]["artifact_cardinality"] == {
+        "ok": True,
+        "violations": [],
+    }
+    assert "observed_builds" not in inventory
+
+
 def test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correction(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -3365,6 +3489,12 @@ def test_graph_source_role_policies_are_explicit(
     assert inventory_module.COMPILED_PDF_SOURCE_ROLES == frozenset(
         {"generated_dependency"}
     )
+    assert dict(inventory_module.COMPILED_PDF_BUILD_ROOTS) == {
+        "1NSI": "NSI/build",
+        "1SPE": "Mathematiques/manuel-maths/build",
+        "TNSI": "NSI/build",
+        "TSPE_2026_2027": "Mathematiques/manuel-maths/build",
+    }
 
 
 @pytest.mark.parametrize(
@@ -4749,7 +4879,7 @@ def test_deliverable_matrix_blocks_needs_review_and_checks_model_coherence(
             "manual": "1NSI",
             "page_count": 10,
             "page_count_method": "pdfinfo",
-            "path": "MANUEL_1NSI_v1.pdf",
+            "path": "NSI/build/MANUEL_1NSI_v1.pdf",
             "reason": None,
             "scope": "manual",
             "source_role": "generated_dependency",
