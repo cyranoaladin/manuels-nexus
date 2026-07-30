@@ -130,7 +130,10 @@ Règles initiales :
 
 1. Les statuts `generated`, `draft`, `needs_review`, `needs_math_review`,
    `needs_program_review`, `needs_editorial_review` et
-   `needs_visual_review` restent `open_debt`.
+   `needs_visual_review` restent `open_debt`. Les trois contrats actuellement
+   marqués `complete`, mais non `approved`, restent également `open_debt` sous
+   la responsabilité `ingenierie_build_qualite`; cette règle stricte ne
+   reconnaît pas `complete` comme publiable.
 2. Le propriétaire d’un contenu mathématique, QCM, résultat numérique ou
    corrigé est `direction_scientifique_programme`.
 3. Le propriétaire d’un objet pédagogique, d’une remédiation ou d’une variante
