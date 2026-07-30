@@ -3326,6 +3326,142 @@ def test_nonregular_tracked_pdf_is_not_read_or_counted(
 
 
 @pytest.mark.parametrize(
+    "mutation",
+    [
+        pytest.param("leaf-new-inode", id="leaf-new-inode"),
+        pytest.param("leaf-switch-back", id="leaf-switch-back"),
+        pytest.param("parent-switch-back", id="parent-switch-back"),
+        pytest.param("in-place", id="in-place"),
+    ],
+)
+def test_pdf_mutation_during_counting_invalidates_private_snapshot_evidence(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+) -> None:
+    _init_repository(tmp_path)
+    pdf = "NSI/build/MANUEL_1NSI_eleve.pdf"
+    repository_pdf = tmp_path / pdf
+    invalid_blob = b"invalid PDF bytes at secure open"
+    _write(repository_pdf, invalid_blob.decode("ascii"))
+    _track(tmp_path, pdf)
+    initial_inode = repository_pdf.stat().st_ino
+    external_pdf = tmp_path.parent / f"{tmp_path.name}-{mutation}-external.pdf"
+    external_pdf.write_bytes(b"%PDF-1.7 external valid replacement")
+    snapshot_paths: list[Path] = []
+    snapshot_blobs: list[bytes] = []
+
+    def mutating_counter(snapshot: Path) -> tuple[int | None, str | None]:
+        snapshot_paths.append(snapshot)
+        snapshot_blobs.append(snapshot.read_bytes())
+        if mutation == "leaf-new-inode":
+            parked = repository_pdf.with_suffix(".old")
+            repository_pdf.rename(parked)
+            repository_pdf.symlink_to(external_pdf)
+            assert repository_pdf.read_bytes().startswith(b"%PDF")
+            repository_pdf.unlink()
+            repository_pdf.write_bytes(invalid_blob)
+            assert repository_pdf.stat().st_ino != initial_inode
+            parked.unlink()
+        elif mutation == "leaf-switch-back":
+            parked = repository_pdf.with_suffix(".parked")
+            repository_pdf.rename(parked)
+            repository_pdf.symlink_to(external_pdf)
+            assert repository_pdf.read_bytes().startswith(b"%PDF")
+            repository_pdf.unlink()
+            parked.rename(repository_pdf)
+            assert repository_pdf.stat().st_ino == initial_inode
+        elif mutation == "parent-switch-back":
+            build = repository_pdf.parent
+            parked = build.with_name("build-parked")
+            external_build = tmp_path.parent / f"{tmp_path.name}-external-build"
+            _write(
+                external_build / repository_pdf.name,
+                "%PDF-1.7 external parent replacement",
+            )
+            build.rename(parked)
+            build.symlink_to(external_build, target_is_directory=True)
+            assert repository_pdf.read_bytes().startswith(b"%PDF")
+            build.unlink()
+            parked.rename(build)
+            assert repository_pdf.stat().st_ino == initial_inode
+        else:
+            repository_pdf.write_bytes(b"X" * len(invalid_blob))
+            assert repository_pdf.stat().st_ino == initial_inode
+        return 9, None
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        mutating_counter,
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+
+    assert len(snapshot_paths) == 1
+    assert snapshot_paths[0] != repository_pdf
+    assert snapshot_blobs == [invalid_blob]
+    assert not snapshot_paths[0].exists()
+    assert not snapshot_paths[0].parent.exists()
+    assert artifact["status"] == "page_count_unavailable"
+    assert artifact["page_count"] is None
+    assert artifact["page_count_method"] is None
+    assert artifact["reason"] == (
+        "fichier PDF modifié pendant le comptage sécurisé"
+    )
+    assert inventory["manuals"]["1NSI"]["compiled_artifacts"] == []
+    assert inventory["manuals"]["1NSI"]["compiled_variants"]["manual"] == []
+    assert inventory["coherence_checks"]["artifact_cardinality"] == {
+        "ok": True,
+        "violations": [],
+    }
+    assert "observed_builds" not in inventory
+
+
+def test_regular_pdf_is_counted_from_private_snapshot_then_snapshot_is_removed(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _init_repository(tmp_path)
+    pdf = "NSI/build/MANUEL_1NSI_eleve.pdf"
+    repository_pdf = tmp_path / pdf
+    blob = b"%PDF-1.7 stable canonical bytes"
+    repository_pdf.parent.mkdir(parents=True)
+    repository_pdf.write_bytes(blob)
+    _track(tmp_path, pdf)
+    snapshots: list[Path] = []
+
+    def snapshot_counter(snapshot: Path) -> tuple[int | None, str | None]:
+        snapshots.append(snapshot)
+        assert snapshot != repository_pdf
+        assert snapshot.read_bytes() == blob
+        assert snapshot.stat().st_mode & 0o777 == 0o600
+        assert snapshot.parent.stat().st_mode & 0o777 == 0o700
+        return 11, None
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        snapshot_counter,
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+
+    assert artifact["status"] == "counted"
+    assert artifact["page_count"] == 11
+    assert artifact["page_count_method"] == "pdfinfo"
+    assert inventory["manuals"]["1NSI"]["compiled_artifacts"] == [artifact]
+    assert len(snapshots) == 1
+    assert not snapshots[0].exists()
+    assert not snapshots[0].parent.exists()
+    assert repository_pdf.read_bytes() == blob
+
+
+@pytest.mark.parametrize(
     ("pdf", "expected_role"),
     [
         pytest.param(
