@@ -90,6 +90,7 @@ BASELINE_QUALIFICATION_POLICY_FILE = "audit/BASELINE_QUALIFICATION_POLICY.yaml"
 UNQUALIFIED_ANOMALIES_JSON_FILE = "audit/UNQUALIFIED_ANOMALIES.json"
 UNQUALIFIED_ANOMALIES_MD_FILE = "audit/UNQUALIFIED_ANOMALIES.md"
 BASELINE_UPDATE_REPORT_FILE = "audit/BASELINE_UPDATE_REPORT.md"
+BASELINE_FREEZE_REPORT_FILE = "audit/BASELINE_FREEZE_REPORT.md"
 BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
 _EMPTY_MANIFEST_REFRESH_CAPABILITY = object()
 
@@ -1590,6 +1591,7 @@ def _build_baseline_payload(
     return {
         "active": qualified_active,
         "artifact_type": "anomalies_baseline",
+        "baseline_purpose": "debt_regression_control",
         "fingerprint_schema_version": FINGERPRINT_SCHEMA_VERSION,
         "generated_at_utc": generated_at,
         "generated_by": "inventory_collection.py",
@@ -1598,6 +1600,7 @@ def _build_baseline_payload(
         "previous_baseline_digest": None,
         "provenance": dict(provenance),
         "provisional": True,
+        "release_acceptance": False,
         "resolved": [],
         "schema_ref": "audit/schemas/v1/anomalies-baseline.schema.json",
         "schema_version": SCHEMA_VERSION,
@@ -1647,6 +1650,12 @@ def _load_validated_baseline(root: Path) -> dict[str, Any]:
         root=root,
         path=Path(ANOMALIES_BASELINE_FILE),
     )
+    if payload.get("baseline_purpose") != "debt_regression_control":
+        raise InventoryError(
+            "baseline_purpose doit valoir debt_regression_control"
+        )
+    if payload.get("release_acceptance") is not False:
+        raise InventoryError("release_acceptance doit rester false")
     if payload.get("fingerprint_schema_version") != FINGERPRINT_SCHEMA_VERSION:
         raise InventoryError(
             "fingerprint_schema_version baseline non supportée:"
@@ -7702,6 +7711,14 @@ def _validate_model_gate(
         _load_dispositions(root)
     except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
         reasons.append(f"contrôles_versionnés:{_stable_gate_reason(exc, root)}")
+    if (root / ANOMALIES_BASELINE_FILE).is_file():
+        try:
+            _load_validated_baseline(root)
+        except InventoryError as exc:
+            reasons.append(
+                "baseline_non_regression:"
+                f"{_stable_gate_reason(exc, root)}"
+            )
     for relative_path, expected_type in MODEL_ARTIFACTS.items():
         try:
             payload = _load_model_artifact(root, relative_path)
@@ -8243,6 +8260,132 @@ def _render_baseline_update_report(
     return "\n".join(lines) + "\n"
 
 
+def _freeze_report_count_table(
+    title: str,
+    values: Mapping[str, int],
+) -> list[str]:
+    lines = [
+        f"## {title}",
+        "",
+        "| Valeur | Nombre |",
+        "|---|---:|",
+    ]
+    lines.extend(
+        f"| `{key}` | {values[key]} |" for key in sorted(values)
+    )
+    return lines + [""]
+
+
+def _render_baseline_freeze_report(
+    *,
+    approved_by: str,
+    dispositions: Mapping[str, Mapping[str, Any]],
+    git_sha: str,
+    new_digest: str,
+    payload: Mapping[str, Any],
+    previous_digest: str | None,
+    reason: str,
+    timestamp: str,
+) -> str:
+    raw_active = payload.get("active", [])
+    active = [
+        dict(entry)
+        for entry in raw_active
+        if isinstance(entry, Mapping)
+    ] if isinstance(raw_active, list) else []
+    active_fingerprints = {
+        str(entry.get("fingerprint", "")) for entry in active
+    }
+    policy_fingerprints = {
+        str(fingerprint)
+        for fingerprint, record in dispositions.items()
+        if (
+            fingerprint in active_fingerprints
+            and isinstance(record.get("qualification_policy_digest"), str)
+            and bool(record["qualification_policy_digest"])
+        )
+    }
+    policy_entries = [
+        entry
+        for entry in active
+        if str(entry.get("fingerprint", "")) in policy_fingerprints
+    ]
+    category_counts = Counter(
+        str(entry.get("category", "unknown")) for entry in active
+    )
+    disposition_counts = Counter(
+        str(entry.get("disposition", "unknown")) for entry in active
+    )
+    owner_counts = Counter(
+        str(entry.get("owner", "unknown")) for entry in active
+    )
+    policy_owner_counts = Counter(
+        str(entry.get("owner", "unknown")) for entry in policy_entries
+    )
+    blocking_counts = {
+        "Bloquantes": sum(
+            1 for entry in active if entry.get("blocking") is True
+        ),
+        "Non bloquantes": sum(
+            1 for entry in active if entry.get("blocking") is not True
+        ),
+    }
+    unqualified_count = sum(
+        1 for entry in active if entry.get("qualified") is not True
+    )
+    lines = [
+        "<!-- AUTO-GENÉRÉ PAR inventory_collection.py -->",
+        "# Rapport de gel de la baseline de non-régression",
+        "",
+        f"- Date : `{timestamp}`",
+        f"- SHA Git : `{git_sha}`",
+        f"- Approbateur : {approved_by}",
+        f"- Raison du gel : {reason}",
+        "- baseline_purpose: `debt_regression_control`",
+        "- release_acceptance: `false`",
+        f"- Empreinte précédente : `{previous_digest or 'aucune'}`",
+        f"- Nouvelle empreinte : `{new_digest}`",
+        f"- Fingerprints actifs : `{len(active)}`",
+        (
+            "- Anomalies qualifiées par la politique : "
+            f"`{len(policy_entries)}`"
+        ),
+        f"- Anomalies non qualifiées : `{unqualified_count}`",
+        "",
+    ]
+    lines.extend(
+        _freeze_report_count_table(
+            "Décompte par catégorie",
+            category_counts,
+        )
+    )
+    lines.extend(
+        _freeze_report_count_table(
+            "Décompte par disposition",
+            disposition_counts,
+        )
+    )
+    lines.extend(
+        _freeze_report_count_table(
+            "Décompte par propriétaire — registre complet",
+            owner_counts,
+        )
+    )
+    lines.extend(
+        _freeze_report_count_table(
+            "Décompte par propriétaire — lot politique",
+            policy_owner_counts,
+        )
+    )
+    lines.extend(
+        _freeze_report_count_table(
+            "Caractère bloquant",
+            blocking_counts,
+        )
+    )
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def _update_baseline_gate(
     root: Path,
     *,
@@ -8423,6 +8566,7 @@ def _update_baseline_gate(
         payload: dict[str, Any] = {
             "active": current_active,
             "artifact_type": "anomalies_baseline",
+            "baseline_purpose": "debt_regression_control",
             "fingerprint_schema_version": FINGERPRINT_SCHEMA_VERSION,
             "generated_at_utc": timestamp,
             "generated_by": "inventory_collection.py",
@@ -8431,6 +8575,7 @@ def _update_baseline_gate(
             "previous_baseline_digest": previous_digest,
             "provenance": inventory["provenance"],
             "provisional": False,
+            "release_acceptance": False,
             "resolved": [
                 resolved_by_fingerprint[fingerprint]
                 for fingerprint in sorted(resolved_by_fingerprint)
@@ -8472,6 +8617,17 @@ def _update_baseline_gate(
             readiness=readiness,
             timestamp=timestamp,
         )
+        dispositions = _load_dispositions(root)
+        freeze_report = _render_baseline_freeze_report(
+            approved_by=approved_by.strip(),
+            dispositions=dispositions,
+            git_sha=git_sha,
+            new_digest=new_digest,
+            payload=payload,
+            previous_digest=previous_digest,
+            reason=reason.strip(),
+            timestamp=timestamp,
+        )
         _ensure_clean_tree(
             root,
             mode="head",
@@ -8498,6 +8654,7 @@ def _update_baseline_gate(
                     + "\n"
                 ),
                 root / BASELINE_UPDATE_REPORT_FILE: report,
+                root / BASELINE_FREEZE_REPORT_FILE: freeze_report,
             },
             validate_state=require_unchanged_head,
         )

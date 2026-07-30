@@ -7,6 +7,7 @@
   "required": [
     "active",
     "artifact_type",
+    "baseline_purpose",
     "fingerprint_schema_version",
     "generated_at_utc",
     "generated_by",
@@ -15,6 +16,7 @@
     "previous_baseline_digest",
     "provenance",
     "provisional",
+    "release_acceptance",
     "resolved",
     "schema_ref",
     "schema_version",
@@ -28,6 +30,7 @@
       "items": { "$ref": "#/$defs/active_entry" }
     },
     "artifact_type": { "const": "anomalies_baseline" },
+    "baseline_purpose": { "const": "debt_regression_control" },
     "entries": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
     "fingerprint_schema_version": { "type": "integer", "minimum": 1 },
     "generated_at_utc": { "$ref": "#/$defs/non_empty_string" },
@@ -42,6 +45,7 @@
     },
     "provenance": { "type": "object" },
     "provisional": { "type": "boolean" },
+    "release_acceptance": { "const": false },
     "resolved": {
       "type": "array",
       "items": { "$ref": "#/$defs/resolved_entry" }

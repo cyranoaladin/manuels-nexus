@@ -2479,6 +2479,7 @@ def _baseline_contract_payload() -> dict[str, object]:
             }
         ],
         "artifact_type": "anomalies_baseline",
+        "baseline_purpose": "debt_regression_control",
         "fingerprint_schema_version": 1,
         "generated_at_utc": "2026-07-22T10:00:00Z",
         "generated_by": "inventory_collection.py",
@@ -2487,6 +2488,7 @@ def _baseline_contract_payload() -> dict[str, object]:
         "previous_baseline_digest": None,
         "provenance": {"head_sha": git_sha},
         "provisional": True,
+        "release_acceptance": False,
         "resolved": [
             {
                 "blocking": False,
@@ -2554,9 +2556,11 @@ def test_anomalies_baseline_schema_accepts_provisional_active_resolved_history()
     "missing_field",
     [
         "active",
+        "baseline_purpose",
         "git_sha",
         "previous_baseline_digest",
         "provisional",
+        "release_acceptance",
         "resolved",
         "updates",
     ],
@@ -2589,6 +2593,83 @@ def test_anomalies_baseline_schema_rejects_non_fixed_resolved_entry() -> None:
 
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def test_anomalies_baseline_schema_rejects_release_acceptance_true() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/anomalies-baseline.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _baseline_contract_payload()
+    payload["release_acceptance"] = True
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("baseline_purpose", "release_acceptance"),
+        ("release_acceptance", True),
+    ],
+)
+def test_validated_baseline_rejects_non_regression_contract_mutation(
+    tmp_path: Path,
+    inventory_module,
+    field: str,
+    value: object,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = _baseline_contract_payload()
+    payload[field] = value
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(payload, ensure_ascii=False),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match=field):
+        inventory_module._load_validated_baseline(tmp_path)
+
+
+def test_validate_model_rejects_release_acceptance_before_debt_comparison(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = _baseline_contract_payload()
+    payload["release_acceptance"] = True
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(payload, ensure_ascii=False),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_qualification_policy_control_failures",
+        lambda _root, inventory: [],
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_source_roles",
+        lambda _root, _tracked: {},
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_dispositions",
+        lambda _root: {},
+    )
+    monkeypatch.setattr(inventory_module, "MODEL_ARTIFACTS", {})
+
+    result = inventory_module._validate_model_gate(tmp_path)
+
+    assert result["success"] is False
+    assert any(
+        "release_acceptance" in reason for reason in result["reasons"]
+    )
 
 
 def test_validated_baseline_rejects_tampered_historical_update_digest(
@@ -3641,6 +3722,15 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
         "_current_active_debt",
         lambda _inventory: [current],
     )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_dispositions",
+        lambda _root: {
+            str(current["fingerprint"]): {
+                "qualification_policy_digest": "sha256:" + "f" * 64,
+            }
+        },
+    )
 
     result = inventory_module._update_baseline_gate(
         tmp_path,
@@ -3654,8 +3744,13 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
     report = (tmp_path / "audit/BASELINE_UPDATE_REPORT.md").read_text(
         encoding="utf-8"
     )
+    freeze_report = (
+        tmp_path / "audit/BASELINE_FREEZE_REPORT.md"
+    ).read_text(encoding="utf-8")
     assert result["success"] is True
     assert payload["provisional"] is False
+    assert payload["baseline_purpose"] == "debt_regression_control"
+    assert payload["release_acceptance"] is False
     assert payload["git_sha"] == head_sha
     assert payload["active"] == [current]
     assert {entry["fingerprint"] for entry in payload["resolved"]} == {
@@ -3674,6 +3769,99 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
     assert head_sha in report
     assert "aaaaaaaaaaaaaaaa" in report
     assert "bbbbbbbbbbbbbbbb" in report
+    assert "# Rapport de gel de la baseline de non-régression" in freeze_report
+    assert "baseline_purpose: `debt_regression_control`" in freeze_report
+    assert "release_acceptance: `false`" in freeze_report
+    assert "Fingerprints actifs : `1`" in freeze_report
+    assert "Anomalies non qualifiées : `0`" in freeze_report
+    assert "Responsable éditorial" in freeze_report
+    assert "Gel contrôlé après stabilisation" in freeze_report
+    assert head_sha in freeze_report
+    assert payload["previous_baseline_digest"] in freeze_report
+    assert update["new_baseline_digest"] in freeze_report
+
+
+def test_baseline_freeze_report_is_deterministic_and_counts_payload_debt(
+    inventory_module,
+) -> None:
+    active = [
+        _active_debt("1" * 16),
+        {
+            **_active_debt(
+                "2" * 16,
+                owner="direction_editoriale_pedagogique",
+            ),
+            "category": "chapters_not_in_manual",
+        },
+        {
+            **_active_debt(
+                "3" * 16,
+                disposition="generated_dependency",
+                owner="ingenierie_build_qualite",
+                severity="warning",
+            ),
+            "category": "broken_latex_references",
+        },
+        {
+            **_active_debt(
+                "4" * 16,
+                disposition="intentional_reuse",
+                owner="direction_editoriale_pedagogique",
+                severity="warning",
+            ),
+            "category": "duplicate_assembly_objects",
+        },
+    ]
+    dispositions = {
+        "1" * 16: {
+            "qualification_policy_digest": "sha256:" + "d" * 64,
+        },
+        "2" * 16: {
+            "qualification_policy_digest": "sha256:" + "d" * 64,
+        },
+        "3" * 16: {"policy_rule": "historical-evidence"},
+        "4" * 16: {"policy_rule": "historical-evidence"},
+    }
+    payload = {
+        "active": active,
+        "baseline_purpose": "debt_regression_control",
+        "release_acceptance": False,
+    }
+    keyword_arguments = {
+        "approved_by": "Alaeddine Ben Rhouma",
+        "dispositions": dispositions,
+        "git_sha": "a" * 40,
+        "new_digest": "sha256:" + "b" * 64,
+        "payload": payload,
+        "previous_digest": "sha256:" + "c" * 64,
+        "reason": (
+            "État initial qualifié de la dette existante après stabilisation "
+            "de la Phase 0, utilisé exclusivement pour détecter les "
+            "régressions et les nouvelles anomalies."
+        ),
+        "timestamp": "2026-07-30T10:00:00Z",
+    }
+
+    first = inventory_module._render_baseline_freeze_report(
+        **keyword_arguments
+    )
+    second = inventory_module._render_baseline_freeze_report(
+        **keyword_arguments
+    )
+
+    assert first == second
+    assert "Fingerprints actifs : `4`" in first
+    assert "Anomalies qualifiées par la politique : `2`" in first
+    assert "Anomalies non qualifiées : `0`" in first
+    assert "| `open_debt` | 2 |" in first
+    assert "| `intentional_reuse` | 1 |" in first
+    assert "| `generated_dependency` | 1 |" in first
+    assert first.count("| `direction_scientifique_programme` | 1 |") == 2
+    assert "| `direction_editoriale_pedagogique` | 2 |" in first
+    assert "| `direction_editoriale_pedagogique` | 1 |" in first
+    assert "| `ingenierie_build_qualite` | 1 |" in first
+    assert "| `Bloquantes` | 2 |" in first
+    assert "| `Non bloquantes` | 2 |" in first
 
 
 def test_update_baseline_rejects_head_change_immediately_before_replace(
@@ -3804,8 +3992,10 @@ def test_update_baseline_recovers_interrupted_write_before_clean_preflight(
 ) -> None:
     baseline = tmp_path / "audit/ANOMALIES_BASELINE.json"
     report = tmp_path / "audit/BASELINE_UPDATE_REPORT.md"
+    freeze_report = tmp_path / "audit/BASELINE_FREEZE_REPORT.md"
     _write(baseline, "baseline historique\n")
     _write(report, "rapport historique\n")
+    _write(freeze_report, "rapport de gel historique\n")
     child_code = f"""
 import importlib.util
 import os
@@ -3827,6 +4017,7 @@ module._apply_atomic_payloads(
     {{
         Path("audit/ANOMALIES_BASELINE.json"): "baseline nouvelle\\n",
         Path("audit/BASELINE_UPDATE_REPORT.md"): "rapport nouveau\\n",
+        Path("audit/BASELINE_FREEZE_REPORT.md"): "rapport gel nouveau\\n",
     }},
 )
 """
@@ -3842,6 +4033,8 @@ module._apply_atomic_payloads(
         restored_before_clean.append(
             baseline.read_text(encoding="utf-8") == "baseline historique\n"
             and report.read_text(encoding="utf-8") == "rapport historique\n"
+            and freeze_report.read_text(encoding="utf-8")
+            == "rapport de gel historique\n"
         )
         return inventory_module._gate_result(
             "require-clean",
