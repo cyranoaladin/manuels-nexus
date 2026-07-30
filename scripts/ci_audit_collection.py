@@ -31,6 +31,13 @@ SUCCESS_GATES = (
     "fail-on-new",
 )
 RELEASE_GATE = "release-strict"
+EXPECTED_GATE_EXIT_CODES = {
+    "require-clean": 0,
+    "check": 0,
+    "validate-model": 0,
+    "fail-on-new": 0,
+    "release-strict": 7,
+}
 GATE_DIMENSIONS = frozenset(
     {
         "execution",
@@ -311,6 +318,10 @@ def _decode_gate_payload(stdout: bytes) -> tuple[dict[str, Any] | None, list[str
     return payload, []
 
 
+def _decode_gate_stream(content: bytes) -> str:
+    return content.decode("utf-8", errors="replace")
+
+
 def validate_gate_result(
     gate: str,
     return_code: int,
@@ -323,7 +334,7 @@ def validate_gate_result(
     payload, errors = _decode_gate_payload(stdout)
     if payload is None:
         return errors
-    expected_code = 7 if gate == RELEASE_GATE else 0
+    expected_code = EXPECTED_GATE_EXIT_CODES[gate]
     expected_success = gate != RELEASE_GATE
     for field, expected in (
         ("gate", gate),
@@ -430,6 +441,8 @@ def run_gates(root: Path, output_dir: Path) -> dict[str, Any]:
         completed = _run_gate(root, gate)
         repeated = _run_gate(root, gate) if gate == RELEASE_GATE else None
         (output_dir / f"{gate}.json").write_bytes(completed.stdout)
+        gate_stdout = _decode_gate_stream(completed.stdout)
+        gate_stderr = _decode_gate_stream(completed.stderr)
         if completed.stderr:
             failures.append(
                 f"{gate}: stderr non vide: "
@@ -437,6 +450,8 @@ def run_gates(root: Path, output_dir: Path) -> dict[str, Any]:
             )
         if repeated is not None:
             (output_dir / f"{gate}.repeat.json").write_bytes(repeated.stdout)
+            repeated_stdout = _decode_gate_stream(repeated.stdout)
+            repeated_stderr = _decode_gate_stream(repeated.stderr)
             if repeated.stderr:
                 failures.append(
                     f"{gate} répété: stderr non vide: "
@@ -463,7 +478,15 @@ def run_gates(root: Path, output_dir: Path) -> dict[str, Any]:
             "contract_errors": decode_errors + gate_failures,
             "payload": payload,
             "process_code": completed.returncode,
+            "stdout": gate_stdout,
+            "stderr": gate_stderr,
         }
+        if repeated is not None:
+            results[gate]["repeat"] = {
+                "process_code": repeated.returncode,
+                "stdout": repeated_stdout,
+                "stderr": repeated_stderr,
+            }
     report = {
         "failure_count": len(failures),
         "failures": failures,

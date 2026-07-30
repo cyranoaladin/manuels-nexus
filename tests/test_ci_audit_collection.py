@@ -5,6 +5,7 @@ import json
 import re
 import tomllib
 from pathlib import Path
+from subprocess import CompletedProcess
 
 import pytest
 import yaml
@@ -379,6 +380,23 @@ def _gate_payload(
     ).encode()
 
 
+def _gate_payload_decoded(
+    gate: str,
+    *,
+    exit_code: int,
+    success: bool,
+    reasons: list[str] | None = None,
+) -> dict[str, object]:
+    return json.loads(
+        _gate_payload(
+            gate,
+            success=success,
+            exit_code=exit_code,
+            reasons=reasons,
+        ).decode("utf-8")
+    )
+
+
 def test_gate_contract_requires_exact_success_codes(ci_module) -> None:
     for gate in ("require-clean", "check", "validate-model", "fail-on-new"):
         payload = _gate_payload(gate, success=True, exit_code=0)
@@ -433,6 +451,137 @@ def test_gate_contract_rejects_a_missing_known_dimension(ci_module) -> None:
     del payload["dimensions"]["mathematics"]
     stdout = (json.dumps(payload, sort_keys=True) + "\n").encode()
     assert ci_module.validate_gate_result("check", 0, stdout)
+
+
+def test_run_gates_records_process_stdout_stderr_and_release_repeat(
+    ci_module, monkeypatch, tmp_path
+) -> None:
+    events: list[str] = []
+
+    payloads: dict[str, dict[str, object]] = {
+        "require-clean": _gate_payload_decoded(
+            "require-clean",
+            exit_code=0,
+            success=True,
+        ),
+        "check": _gate_payload_decoded(
+            "check",
+            exit_code=0,
+            success=True,
+        ),
+        "validate-model": _gate_payload_decoded(
+            "validate-model",
+            exit_code=0,
+            success=True,
+        ),
+        "fail-on-new": _gate_payload_decoded(
+            "fail-on-new",
+            exit_code=0,
+            success=True,
+            reasons=[],
+        ),
+        "release-strict": _gate_payload_decoded(
+            "release-strict",
+            exit_code=7,
+            success=False,
+            reasons=[
+                "build_receipt_producteurs_non_intégrés",
+                "1SPE:anomalie:blocking_statuses:anomalies.blocking_statuses:1",
+                "dimension_non_couverte:mathematics",
+                "dimension_non_couverte:pedagogy",
+                "dimension_non_couverte:print",
+                "dimension_non_couverte:regulation",
+                "dimension_non_couverte:visual",
+            ],
+        ),
+    }
+
+    def fake_gate(_: Path, gate: str) -> CompletedProcess[bytes]:
+        events.append(gate)
+        payload = payloads[gate]
+        payload_text = json.dumps(payload, sort_keys=True) + "\n"
+        return CompletedProcess(
+            args=["gate", gate],
+            returncode=payload["exit_code"],
+            stdout=payload_text.encode("utf-8"),
+            stderr=b"",
+        )
+
+    monkeypatch.setattr(ci_module, "_run_gate", fake_gate)
+    report = ci_module.run_gates(Path("."), tmp_path / "gates")
+
+    expected_order = (
+        "require-clean",
+        "check",
+        "validate-model",
+        "fail-on-new",
+        "release-strict",
+    )
+    assert events == list(expected_order) + ["release-strict"]
+    assert report["success"] is True
+    assert report["gates"]["check"]["process_code"] == 0
+    assert isinstance(report["gates"]["check"]["stdout"], str)
+    assert report["gates"]["check"]["stderr"] == ""
+    assert report["gates"]["release-strict"]["repeat"]["process_code"] == 7
+
+
+def test_run_gates_fails_if_expected_gate_code_is_drifted(
+    ci_module, monkeypatch, tmp_path
+) -> None:
+    payloads: dict[str, dict[str, object]] = {
+        "require-clean": _gate_payload_decoded(
+            "require-clean",
+            exit_code=0,
+            success=True,
+        ),
+        "check": _gate_payload_decoded(
+            "check",
+            exit_code=3,
+            success=False,
+            reasons=["diff: artifact.yaml"],
+        ),
+        "validate-model": _gate_payload_decoded(
+            "validate-model",
+            exit_code=0,
+            success=True,
+        ),
+        "fail-on-new": _gate_payload_decoded(
+            "fail-on-new",
+            exit_code=0,
+            success=True,
+            reasons=[],
+        ),
+        "release-strict": _gate_payload_decoded(
+            "release-strict",
+            exit_code=7,
+            success=False,
+            reasons=[
+                "1SPE:anomalie:blocking_statuses:anomalies.blocking_statuses:1",
+                "build_receipt_producteurs_non_intégrés",
+                "dimension_non_couverte:mathematics",
+                "dimension_non_couverte:pedagogy",
+                "dimension_non_couverte:print",
+                "dimension_non_couverte:regulation",
+                "dimension_non_couverte:visual",
+            ],
+        ),
+    }
+    for payload in payloads.values():
+        payload["gate"] = str(payload["gate"])
+
+    def fake_gate(_: Path, gate: str) -> CompletedProcess[bytes]:
+        payload = payloads[gate]
+        payload_text = json.dumps(payload, sort_keys=True) + "\n"
+        return CompletedProcess(
+            args=["gate", gate],
+            returncode=payload["exit_code"],
+            stdout=payload_text.encode("utf-8"),
+            stderr=b"",
+        )
+
+    monkeypatch.setattr(ci_module, "_run_gate", fake_gate)
+    with pytest.raises(ci_module.CIAuditError, match="contrat des gates"):
+        ci_module.run_gates(Path("."), tmp_path / "gates")
 
 
 @pytest.mark.parametrize(
