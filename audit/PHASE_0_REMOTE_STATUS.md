@@ -99,3 +99,13 @@ Ils correspondent au plan visuel déjà documenté dans `audit/VISUAL_BASELINE_D
 - `python -m ruff check scripts/ci_audit_collection.py tests/test_ci_audit_collection.py` ✅
 - `python -m mypy scripts/ci_audit_collection.py` ✅
 - `python scripts/ci_audit_collection.py run-gates --root . --output-dir <tmp> --require-clean --check --validate-model --fail-on-new --release-strict` ❌ en local attendu en dépôt propre (`require-clean=4`) ; les écarts observés viennent du statut local modifié.
+
+## Mission atomique -- correction de la cause réelle de check=3 (prochaine passe)
+
+- Date locale d'analyse locale : 2026-07-30.
+- Hypothèse confirmée : le premier échec du run 30546406535 est un diff de `tool_versions` dans la provenance ré-utilisée.
+- Changement appliqué : `_reuse_stored_generation_provenance` réutilise désormais `tool_versions` en plus de `head_sha` et `generated_at_utc`.
+- Nouvelle régression ajoutée : `test_check_reuses_stored_tool_versions_instead_of_current_runtime_signature` dans `tests/test_inventory_collection.py`.
+- Vérification en clone propre (CI-like) via `run-gates` sur `--require-clean --check --validate-model --fail-on-new --release-strict` :
+  - `check=0`, `validate-model=0`, `require-clean=0`, `fail-on-new=0`, `release-strict=7`, `failure_count=0`.
+- La divergence visuelle CI connue reste inchangée (5 nœuds visuels déjà documentés dans `audit/VISUAL_BASELINE_DECISION_REQUIRED.md`).

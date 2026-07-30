@@ -6969,7 +6969,10 @@ def _reuse_stored_generation_provenance(
     # Le fingerprint du générateur reste toutefois courant pour détecter toute
     # dérive du code de génération.
     reused = dict(current_provenance)
-    for field in ("generated_at_utc", "head_sha"):
+    # Les versions d'outils sont dépendantes de l'environnement d'exécution.
+    # On réutilise les versions enregistrées pour que --check reste stable entre
+    # CI et exécutions locales hors-différence de machine.
+    for field in ("generated_at_utc", "head_sha", "tool_versions"):
         reused[field] = stored_provenance.get(field)
     inventory["provenance"] = _canonicalize_mapping(reused)
 

@@ -9524,6 +9524,49 @@ def test_check_reuses_stored_generation_provenance_and_changes_nothing(
     assert stored_inventory["provenance"]["head_sha"] == generation_sha
 
 
+def test_check_reuses_stored_tool_versions_instead_of_current_runtime_signature(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    _commit_repository(tmp_path, "sources")
+    inventory_module.build_inventory_artifacts(tmp_path)
+    paths = _managed_output_paths(
+        tmp_path,
+        inventory_module.build_inventory_artifacts(tmp_path),
+    )
+    _track(tmp_path, *(path.relative_to(tmp_path).as_posix() for path in paths))
+    _commit_repository(tmp_path, "generated outputs")
+    stored_inventory = json.loads(
+        (tmp_path / "audit/INVENTAIRE_COLLECTION.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    stored_versions = dict(
+        stored_inventory["provenance"]["tool_versions"],  # type: ignore[arg-type]
+    )
+    before_status = _git_status_bytes(tmp_path)
+    before_contents = {path: path.read_bytes() for path in paths}
+
+    def alternate_signature(_root: Path) -> dict[str, str]:
+        return {name: f"runtime:{value}" for name, value in stored_versions.items()}
+
+    monkeypatch.setattr(
+        inventory_module, "_file_version_signature", alternate_signature
+    )
+    time.sleep(1.0)
+
+    completed = _run_inventory_cli(tmp_path, "--check")
+    check_payload = json.loads(completed.stdout)
+
+    assert completed.returncode == 0
+    assert check_payload["success"] is True
+    assert check_payload["reasons"] == []
+    assert _git_status_bytes(tmp_path) == before_status
+    assert {path: path.read_bytes() for path in paths} == before_contents
+
+
 def test_stored_provenance_reuse_has_no_dead_assignment(
     inventory_module,
 ) -> None:
