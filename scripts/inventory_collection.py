@@ -295,6 +295,22 @@ DEFAULT_SOURCE_ROLE_ORDER = (
     "production_object",
     "transversal",
 )
+BLOCKING_LATEX_REFERENCE_SOURCE_ROLES = frozenset(
+    {"generated_dependency", "production_object", "transversal"}
+)
+ORPHAN_SOURCE_ROLES = frozenset({"production_object", "transversal"})
+STATIC_ASSEMBLY_ROOT_SOURCE_ROLES = frozenset(
+    {"generated_dependency", "production_object", "transversal"}
+)
+RELEVANT_UNTRACKED_SOURCE_ROLES = frozenset(
+    {
+        "generated_dependency",
+        "harvest_candidate",
+        "production_object",
+        "validation_reference",
+        "visual_reference",
+    }
+)
 
 
 def _utf8_bytes(text: str) -> bytes:
@@ -599,7 +615,7 @@ def _load_source_roles(root: Path, tracked_files: Iterable[str] | None = None) -
             if role != default_role:
                 break
         assignments[normalized] = role
-    _validate_tracked_harvest_assignments(assignments)
+    _validate_tracked_source_role_assignments(assignments)
     return assignments
 
 
@@ -611,14 +627,12 @@ def _is_intrinsic_harvest_candidate(path: str) -> bool:
     )
 
 
-def _validate_tracked_harvest_assignments(
+def _validate_tracked_source_role_assignments(
     assignments: Mapping[str, str],
 ) -> None:
     canonical_patterns, canonical_default, canonical_order = _default_role_patterns()
     failures: list[str] = []
     for path, assigned_role in sorted(assignments.items()):
-        if not _is_intrinsic_harvest_candidate(path):
-            continue
         canonical_role = _classify_source_path(
             path,
             {},
@@ -626,18 +640,13 @@ def _validate_tracked_harvest_assignments(
             role_patterns=canonical_patterns,
             role_order=canonical_order,
         )
-        expected_role = (
-            canonical_role
-            if canonical_role in {"excluded", "fixture"}
-            else "harvest_candidate"
-        )
-        if assigned_role != expected_role:
+        if assigned_role != canonical_role:
             failures.append(
-                f"{path}={assigned_role} (attendu {expected_role})"
+                f"{path}={assigned_role} (attendu {canonical_role})"
             )
     if failures:
         raise InventoryError(
-            "invariant harvest des fichiers suivis violé: "
+            "invariant de classification canonique des fichiers suivis violé: "
             + "; ".join(failures)
         )
 
@@ -1211,24 +1220,28 @@ def _git_relevant_untracked(
     role_order: list[str],
     status: Iterable[GitStatusEntry] | None = None,
 ) -> list[str]:
-    untracked = [
-        path
-        for path in _git_untracked(repository, status=status)
-        if _classify_source_path(
+    canonical_patterns, canonical_default, canonical_order = _default_role_patterns()
+    untracked: list[str] = []
+    for path in _git_untracked(repository, status=status):
+        configured_role = _classify_source_path(
             path,
             tracked,
             default="transversal",
             role_patterns=role_patterns,
             role_order=role_order,
         )
-        in {
-            "production_object",
-            "generated_dependency",
-            "validation_reference",
-            "harvest_candidate",
-            "visual_reference",
-        }
-    ]
+        canonical_role = _classify_source_path(
+            path,
+            {},
+            default=canonical_default,
+            role_patterns=canonical_patterns,
+            role_order=canonical_order,
+        )
+        if (
+            configured_role in RELEVANT_UNTRACKED_SOURCE_ROLES
+            or canonical_role in RELEVANT_UNTRACKED_SOURCE_ROLES
+        ):
+            untracked.append(path)
     return sorted(untracked)
 
 
@@ -2706,15 +2719,22 @@ def build_inventory(
         "source_files": [],
     }
     _add_reference_graph(inventory, root, tracked_set)
-    _add_latex_graph(inventory, root, tracked_set)
-    _add_assemblies(inventory, root, tracked_set)
+    _add_latex_graph(inventory, root, tracked_set, source_roles=source_roles)
+    _add_assemblies(
+        inventory,
+        root,
+        tracked_set,
+        source_roles=source_roles,
+    )
     _aggregate_declared_variants(inventory)
     _add_orphan_files(
         inventory,
         root,
         tracked_set,
-        production_paths=frozenset(
-            path for path in tracked_set if _is_production(path)
+        candidate_paths=frozenset(
+            path
+            for path in tracked_set
+            if source_roles[path] in ORPHAN_SOURCE_ROLES
         ),
         skipped_paths=metadata_error_paths,
     )
@@ -3110,11 +3130,15 @@ def _add_latex_graph(
     inventory: dict[str, Any],
     root: Path,
     tracked: frozenset[str],
+    *,
+    source_roles: Mapping[str, str],
 ) -> None:
     _graph_core.add_latex_graph(
         inventory,
         root,
         tracked,
+        source_roles=source_roles,
+        blocking_source_roles=BLOCKING_LATEX_REFERENCE_SOURCE_ROLES,
         is_relevant_tex=_is_relevant_tex,
         resolve_latex_target=_resolve_latex_target,
     )
@@ -3124,11 +3148,15 @@ def _add_static_latex_assemblies(
     inventory: dict[str, Any],
     root: Path,
     tracked: frozenset[str],
+    *,
+    source_roles: Mapping[str, str],
 ) -> None:
     _graph_core.add_static_latex_assemblies(
         inventory,
         root,
         tracked,
+        source_roles=source_roles,
+        root_source_roles=STATIC_ASSEMBLY_ROOT_SOURCE_ROLES,
         is_relevant_tex=_is_relevant_tex,
         chapter_id_from_source=_chapter_id_from_source,
         manual_for_chapter=_manual_for_chapter,
@@ -3140,14 +3168,14 @@ def _add_orphan_files(
     root: Path,
     tracked: frozenset[str],
     *,
-    production_paths: frozenset[str],
+    candidate_paths: frozenset[str],
     skipped_paths: set[str] | None = None,
 ) -> None:
     _graph_core.add_orphan_files(
         inventory,
         root,
         tracked,
-        candidate_paths=production_paths,
+        candidate_paths=candidate_paths,
         skipped_paths=skipped_paths or set(),
         is_relevant_tex=_is_relevant_tex,
         is_known_latex_root=_is_known_latex_root,
@@ -3159,6 +3187,8 @@ def _add_assemblies(
     inventory: dict[str, Any],
     root: Path,
     tracked: frozenset[str],
+    *,
+    source_roles: Mapping[str, str],
 ) -> None:
     _assembly_core.add_declared_assemblies(
         inventory,
@@ -3172,7 +3202,12 @@ def _add_assemblies(
         chapter_directory=_chapter_directory,
         resolve_latex_target=_resolve_latex_target,
     )
-    _add_static_latex_assemblies(inventory, root, tracked)
+    _add_static_latex_assemblies(
+        inventory,
+        root,
+        tracked,
+        source_roles=source_roles,
+    )
     _assembly_core.add_unassembled_objects(inventory)
 
 

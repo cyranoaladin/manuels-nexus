@@ -141,10 +141,12 @@ def add_latex_graph(
     root: Path,
     tracked: frozenset[str],
     *,
+    source_roles: Mapping[str, str],
+    blocking_source_roles: frozenset[str],
     is_relevant_tex: Any,
     resolve_latex_target: Any,
 ) -> None:
-    """Scan all production TeX/class sources and append their dependency edges."""
+    """Scan relevant TeX/class sources; block only configured source roles."""
 
     for source in sorted(path for path in tracked if is_relevant_tex(path)):
         try:
@@ -165,7 +167,10 @@ def add_latex_graph(
                     "source": source,
                 }
             )
-            if not resolved:
+            if (
+                not resolved
+                and source_roles[source] in blocking_source_roles
+            ):
                 inventory["anomalies"]["broken_latex_references"].append(
                     _anomaly(
                         source,
@@ -181,11 +186,13 @@ def add_static_latex_assemblies(
     root: Path,
     tracked: frozenset[str],
     *,
+    source_roles: Mapping[str, str],
+    root_source_roles: frozenset[str],
     is_relevant_tex: Any,
     chapter_id_from_source: Any,
     manual_for_chapter: Any,
 ) -> None:
-    """Build deterministic static assemblies by traversing the LaTeX graph."""
+    """Build static assemblies only from explicitly eligible source roles."""
 
     objects_by_path = {
         item["path"]: item
@@ -200,7 +207,11 @@ def add_static_latex_assemblies(
 
     roots: list[str] = []
     for path in sorted(
-        item for item in tracked if is_relevant_tex(item) and item.endswith(".tex")
+        item
+        for item in tracked
+        if source_roles[item] in root_source_roles
+        and is_relevant_tex(item)
+        and item.endswith(".tex")
     ):
         try:
             source = (root / path).read_text(encoding="utf-8")
@@ -298,7 +309,7 @@ def add_orphan_files(
     is_known_latex_root: Any,
     chapter_context: Any,
 ) -> None:
-    """Report only files outside the closure of genuine production roots."""
+    """Report eligible candidates outside genuine LaTeX-root closures."""
 
     object_paths = {
         item["path"]

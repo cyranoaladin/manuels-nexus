@@ -658,6 +658,70 @@ def test_source_roles_preserves_fixture_precedence_for_canonical_harvest_fixture
     assert assignments[fixture] == "fixture"
 
 
+def test_source_roles_rejects_digest_valid_reclassification_of_tracked_object(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/SOURCE_ROLES.yaml").read_text(encoding="utf-8")
+    )
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    course = f"{base}/cours/c1.tex"
+    _write(tmp_path / contract, _contract("1SPE-TEST", "1SPE", capacities=1))
+    _write(tmp_path / course, _meta(status="approved"))
+    payload["roles"]["fixture"].append(course)
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/SOURCE_ROLES.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+    _track(tmp_path, contract, course, "audit/SOURCE_ROLES.yaml")
+
+    with pytest.raises(inventory_module.InventoryError, match="classification canonique"):
+        inventory_module._load_source_roles(tmp_path)
+    with pytest.raises(inventory_module.InventoryError, match="classification canonique"):
+        inventory_module.build_inventory(tmp_path)
+    gate = inventory_module._validate_model_gate(tmp_path)
+    assert gate["success"] is False
+    assert any("classification canonique" in reason for reason in gate["reasons"])
+
+
+def test_require_clean_uses_canonical_union_for_untracked_source_roles(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    payload = yaml.safe_load(
+        (ROOT / "audit/SOURCE_ROLES.yaml").read_text(encoding="utf-8")
+    )
+    hidden = (
+        "Mathematiques/manuel-maths/chapitres/"
+        "1SPE-TEST/cours/untracked.tex"
+    )
+    payload["roles"]["fixture"].append(hidden)
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/SOURCE_ROLES.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=True),
+    )
+    schema_paths = [
+        path.relative_to(tmp_path).as_posix()
+        for path in (tmp_path / "audit/schemas").rglob("*.json")
+    ]
+    _track(tmp_path, "audit/SOURCE_ROLES.yaml", *schema_paths)
+    _commit_repository(tmp_path, "contrôle versionné")
+    _write(tmp_path / hidden, _meta(status="approved"))
+
+    gate = inventory_module._require_clean_gate(tmp_path)
+
+    assert gate["exit_code"] == 4
+    assert gate["reasons"] == [f"untracked_relevant:{hidden}"]
+
+
 def test_source_roles_control_cannot_downgrade_to_legacy_when_schema_is_installed(
     tmp_path: Path,
     inventory_module,
@@ -2156,7 +2220,7 @@ def test_metadata_errors_are_not_duplicated_as_orphan_files(
     contract = f"{base}/contrat.yaml"
     missing_meta = f"{base}/cours/missing-meta.tex"
     malformed_meta = f"{base}/cours/malformed-meta.tex"
-    orphan = "NSI/chapitres/UNKNOWN/orphan.tex"
+    orphan = "NSI/extras/orphan.tex"
     sources = {
         contract: _contract("1SPE-TEST", "1SPE", capacities=1),
         missing_meta: "Contenu sans en-tete META\n",
@@ -2980,7 +3044,7 @@ def test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correct
     root_tex = "Mathematiques/manuel-maths/build/maquette-v5/maquette.tex"
     section = "Mathematiques/manuel-maths/parts/section.tex"
     template = "Mathematiques/manuel-maths/gabarits/chapitre_master.tex"
-    orphan = "Mathematiques/manuel-maths/chapitres/UNKNOWN/perdu.tex"
+    orphan = "Mathematiques/manuel-maths/extras/perdu.tex"
     sources = {
         f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
         exercise: _meta(
@@ -3042,11 +3106,76 @@ def test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correct
     assert inventory_module.build_inventory(tmp_path)["source_digest"] != first_digest
 
 
-def test_all_relevant_tracked_tex_sources_are_scanned_for_broken_inputs(
-    tmp_path: Path, inventory_module
+def test_graph_source_role_policies_are_explicit(
+    inventory_module,
+) -> None:
+    assert inventory_module.BLOCKING_LATEX_REFERENCE_SOURCE_ROLES == frozenset(
+        {"generated_dependency", "production_object", "transversal"}
+    )
+    assert inventory_module.ORPHAN_SOURCE_ROLES == frozenset(
+        {"production_object", "transversal"}
+    )
+    assert inventory_module.STATIC_ASSEMBLY_ROOT_SOURCE_ROLES == frozenset(
+        {"generated_dependency", "production_object", "transversal"}
+    )
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        pytest.param(
+            "NSI/chapitres/1NSI-TEST/_harvest/P04/bad.candidate.tex",
+            id="harvest",
+        ),
+        pytest.param("NSI/tests/fixtures/bad.tex", id="fixture"),
+        pytest.param(
+            "Mathematiques/manuel-maths/gabarits/reference-v4/bad.tex",
+            id="visual-reference",
+        ),
+        pytest.param("NSI/historique/bad.tex", id="archive"),
+        pytest.param("NSI/validations/bad.tex", id="validation-reference"),
+        pytest.param("NSI/__pycache__/bad.tex", id="excluded"),
+    ],
+)
+def test_non_publishable_latex_source_keeps_edge_without_broken_blocker(
+    tmp_path: Path,
+    inventory_module,
+    source: str,
 ) -> None:
     _init_repository(tmp_path)
-    master = "NSI/gabarits/master.tex"
+    _write(tmp_path / source, "\\input{absent}\n")
+    _track(tmp_path, source)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert inventory["anomalies"]["broken_latex_references"] == []
+    assert any(
+        edge["source"] == source
+        and edge["resolved"] is False
+        and edge["cible"].endswith("/absent.tex")
+        for edge in inventory["reference_graph"]
+    )
+    assert not any(
+        source in json.dumps(anomaly, ensure_ascii=False, sort_keys=True)
+        for category in inventory_module.BLOCKING_ANOMALY_CATEGORIES
+        for anomaly in inventory["anomalies"][category]
+    )
+
+
+@pytest.mark.parametrize(
+    "master",
+    [
+        pytest.param("NSI/extras/master.tex", id="transversal"),
+        pytest.param("NSI/chapitres/UNKNOWN/master.tex", id="production"),
+        pytest.param("NSI/build/master.tex", id="generated-dependency"),
+    ],
+)
+def test_publishable_latex_sources_still_report_broken_inputs(
+    tmp_path: Path,
+    inventory_module,
+    master: str,
+) -> None:
+    _init_repository(tmp_path)
     _write(tmp_path / master, "\\input{transversal/absent}\n")
     _track(tmp_path, master)
 
@@ -3063,16 +3192,89 @@ def test_all_relevant_tracked_tex_sources_are_scanned_for_broken_inputs(
     assert master in inventory["source_files"]
 
 
+@pytest.mark.parametrize(
+    "static_root",
+    [
+        pytest.param(
+            "Mathematiques/manuel-maths/chapitres/"
+            "1SPE-TEST/_harvest/root.candidate.tex",
+            id="harvest-root",
+        ),
+        pytest.param("NSI/tests/fixtures/root.tex", id="fixture-root"),
+    ],
+)
+def test_non_publishable_document_root_cannot_assemble_production_object(
+    tmp_path: Path,
+    inventory_module,
+    static_root: str,
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    contract = f"{base}/contrat.yaml"
+    course = f"{base}/cours/c1.tex"
+    sources = {
+        contract: _contract("1SPE-TEST", "1SPE", capacities=1),
+        course: _meta(status="approved"),
+        static_root: (
+            "\\documentclass{article}\n"
+            "\\begin{document}\n"
+            f"\\input{{{course.removesuffix('.tex')}}}\n"
+            "\\end{document}\n"
+        ),
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert not any(
+        assembly.get("assembler") == static_root
+        for assembly in inventory["assemblies"]
+    )
+    assert inventory["anomalies"]["unassembled_objects"] == [
+        {
+            "champ": "assemblages_declares",
+            "cible": course,
+            "raison": "objet META exclu de tous les assemblages declares",
+            "source": course,
+        }
+    ]
+
+
+@pytest.mark.parametrize(
+    "orphan",
+    [
+        pytest.param("NSI/extras/orphan.tex", id="default-transversal"),
+        pytest.param("NSI/transversal/orphan.tex", id="explicit-transversal"),
+    ],
+)
+def test_transversal_tex_without_root_remains_a_real_orphan(
+    tmp_path: Path,
+    inventory_module,
+    orphan: str,
+) -> None:
+    _init_repository(tmp_path)
+    _write(tmp_path / orphan, "Contenu LaTeX non référencé\n")
+    _track(tmp_path, orphan)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert {
+        anomaly["cible"] for anomaly in inventory["anomalies"]["orphan_files"]
+    } == {orphan}
+
+
 def test_orphan_reachability_ignores_edges_from_unreachable_sources_and_cycles(
     tmp_path: Path, inventory_module
 ) -> None:
     _init_repository(tmp_path)
-    first = "NSI/chapitres/UNKNOWN/cycle-a.tex"
-    second = "NSI/chapitres/UNKNOWN/cycle-b.tex"
-    leaf = "NSI/chapitres/UNKNOWN/leaf.tex"
+    first = "NSI/extras/cycle-a.tex"
+    second = "NSI/extras/cycle-b.tex"
+    leaf = "NSI/extras/leaf.tex"
     sources = {
-        first: "\\input{chapitres/UNKNOWN/cycle-b}\n",
-        second: "\\input{chapitres/UNKNOWN/cycle-a}\n",
+        first: "\\input{extras/cycle-b}\n",
+        second: "\\input{extras/cycle-a}\n",
         leaf: "Contenu sans racine\n",
     }
     for path, content in sources.items():
