@@ -431,44 +431,28 @@ provenance:
   branch: finalisation/collection-v1
   dirty: true
   errors: []
-  generated_at_utc: '2026-07-30T06:09:39Z'
+  generated_at_utc: '2026-07-30T08:11:48Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:abcd7be592273bfa37c832ca948f0154adad4514764ca8709cc851e3c726a24c
     scripts/build_manifest.py: sha256:0e914f9ec1071e5941ef954e5dd9396e7910a05fa068c63cb08e975f1293fce7
     scripts/inventory_assembly.py: sha256:0152e2523723678b6333a9a2738cad373150f4d908612bfba7d5b506edf4b339
-    scripts/inventory_collection.py: sha256:c099951a4e017652befe3fad8d67311c416d3b68cc63bd1adba12be8860cdbc9
+    scripts/inventory_collection.py: sha256:0398e0b9d9dec06486819b0140fe4d8d87eb9c3ff67a15e624a05830be03120f
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:d35af02bcf165276be9a76adea722813cd7376f4166b9ab1ab9bc91e226ebce9
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:29dbb13f73e6670a39a537701af046167157a7ffedfd287b5e39768d98d2aeab
+  generator_sha256: sha256:547c3593738e10ab4e10cb973163c2e5d8e57eb63ac9bd96e09cc74e476740d6
   generator_version: 1
   git_available: true
-  head_sha: 0f8326097982e924b96a89b063d24b61ccfc63af
+  head_sha: b46d17d8b24ba733ec0cb91c0dc0755335ca36eb
   modified_tracked:
-  - audit/ANOMALIES_BASELINE.json
-  - audit/ANOMALY_DISPOSITIONS.yaml
   - audit/BUILD_MANIFEST.json
-  - audit/schemas/v1/anomalies-baseline.schema.json
-  - audit/schemas/v1/anomaly-dispositions.schema.json
-  - docs/codex/QUALITY_GATES.md
-  - pyproject.toml
-  - scripts/build_manifest.py
-  - scripts/inventory_collection.py
-  - tests/test_build_manifest.py
-  - tests/test_ci_audit_collection.py
-  - tests/test_inventory_collection.py
   tool_versions:
     git: git version 2.43.0
     latexmk: Latexmk, John Collins, 31 Jan. 2024. Version 4.83
     pdfinfo: pdfinfo version 24.02.0
     python: Python 3.12.3
     texlive: pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)
-  untracked_relevant:
-  - audit/BASELINE_QUALIFICATION_POLICY.yaml
-  - audit/UNQUALIFIED_ANOMALIES.json
-  - audit/UNQUALIFIED_ANOMALIES.md
-  - audit/schemas/v1/baseline-qualification-policy.schema.json
-  - audit/schemas/v1/unqualified-anomalies.schema.json
+  untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
 source_digest: sha256:00b734105ffb4ec0f85cabb58b0d1ec095ae4ecc4506281ab6e56c02fa5ca9b8
