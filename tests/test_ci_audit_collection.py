@@ -69,6 +69,9 @@ def test_ci_configuration_is_explicit_and_pinned() -> None:
     assert "mypy_path = \".\"" in pyproject
     assert "explicit_package_bases = true" in pyproject
     config = tomllib.loads(pyproject)
+    coverage_report = config["tool"]["coverage"]["report"]
+    assert coverage_report["precision"] == 2
+    assert coverage_report["fail_under"] == 76.83
     assert "ignore_errors" not in config["tool"]["mypy"]
     typed_files = set(config["tool"]["mypy"]["files"])
     assert typed_files == {
@@ -175,7 +178,15 @@ def test_audit_workflow_runs_the_complete_unweakened_contract() -> None:
 
 @pytest.fixture()
 def ci_module():
-    return importlib.import_module("scripts.ci_audit_collection")
+    path = ROOT / "scripts/ci_audit_collection.py"
+    spec = importlib.util.spec_from_file_location(
+        "ci_audit_collection_tests",
+        path,
+    )
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def _gate_payload(
