@@ -63,11 +63,13 @@ def _import_legacy_module(name: str):
 
 try:
     from scripts import inventory_assembly as _assembly_core
+    from scripts import baseline_qualification as _baseline_qualification
     from scripts import inventory_graph as _graph_core
     from scripts import inventory_pdf as _pdf_core
     from scripts import inventory_reports as _report_core
 except ModuleNotFoundError:  # direct execution: python scripts/inventory_collection.py
     _assembly_core = _import_legacy_module("inventory_assembly")
+    _baseline_qualification = _import_legacy_module("baseline_qualification")
     _graph_core = _import_legacy_module("inventory_graph")
     _pdf_core = _import_legacy_module("inventory_pdf")
     _report_core = _import_legacy_module("inventory_reports")
@@ -84,8 +86,12 @@ GENERIC_LOCK_FILE = ".inventory_collection.lock"
 SOURCE_ROLES_FILE = "audit/SOURCE_ROLES.yaml"
 ANOMALY_DISPOSITIONS_FILE = "audit/ANOMALY_DISPOSITIONS.yaml"
 ANOMALIES_BASELINE_FILE = "audit/ANOMALIES_BASELINE.json"
+BASELINE_QUALIFICATION_POLICY_FILE = "audit/BASELINE_QUALIFICATION_POLICY.yaml"
+UNQUALIFIED_ANOMALIES_JSON_FILE = "audit/UNQUALIFIED_ANOMALIES.json"
+UNQUALIFIED_ANOMALIES_MD_FILE = "audit/UNQUALIFIED_ANOMALIES.md"
 BASELINE_UPDATE_REPORT_FILE = "audit/BASELINE_UPDATE_REPORT.md"
 BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
+_EMPTY_MANIFEST_REFRESH_CAPABILITY = object()
 
 SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
     {
@@ -103,6 +109,12 @@ SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
         ),
         "anomaly_dispositions": MappingProxyType(
             {1: "audit/schemas/v1/anomaly-dispositions.schema.json"}
+        ),
+        "baseline_qualification_policy": MappingProxyType(
+            {1: "audit/schemas/v1/baseline-qualification-policy.schema.json"}
+        ),
+        "unqualified_anomalies": MappingProxyType(
+            {1: "audit/schemas/v1/unqualified-anomalies.schema.json"}
         ),
         "anomalies_baseline": MappingProxyType(
             {1: "audit/schemas/v1/anomalies-baseline.schema.json"}
@@ -150,6 +162,7 @@ ANOMALY_DISPOSITIONS = (
     "open_debt",
     "false_positive",
     "generated_dependency",
+    "harvest_candidate",
     "intentional_reuse",
     "accepted_exception",
     "fixed",
@@ -159,6 +172,7 @@ ANOMALY_DISPOSITION_BLOCKS = {
     "open_debt": True,
     "false_positive": False,
     "generated_dependency": False,
+    "harvest_candidate": False,
     "intentional_reuse": False,
     "accepted_exception": False,
     "fixed": False,
@@ -235,6 +249,7 @@ DEFAULT_MANAGED_OUTPUT_PATHS = frozenset(
     }
 )
 GENERATOR_COMPONENT_PATHS = (
+    "baseline_qualification.py",
     "build_manifest.py",
     "inventory_collection.py",
     "inventory_reports.py",
@@ -814,6 +829,31 @@ def _load_dispositions(root: Path) -> dict[str, dict[str, Any]]:
             raise InventoryError(
                 f"disposition inconnue pour fingerprint={fingerprint}: {disposition}"
             )
+        policy_managed = (
+            "qualification_policy_digest" in value
+            or (
+                value.get("policy_rule")
+                and value.get("policy_rule") != "historical-evidence"
+            )
+        )
+        stored_qualification_digest = value.get("qualification_digest")
+        if policy_managed and not isinstance(
+            stored_qualification_digest,
+            str,
+        ):
+            raise InventoryError(
+                "qualification_digest absent pour disposition de politique "
+                f"fingerprint={fingerprint}"
+            )
+        if (
+            stored_qualification_digest is not None
+            and stored_qualification_digest
+            != _baseline_qualification.qualification_digest(value)
+        ):
+            raise InventoryError(
+                "qualification_digest incohérent pour "
+                f"fingerprint={fingerprint}"
+            )
         if (
             disposition == "accepted_exception"
             and "expires_at" in value
@@ -1145,6 +1185,7 @@ def _load_observed_build_manifest(
     pdfinfo_counter: Any,
     python_counter: Any,
     source_files: tuple[str, ...] | None = None,
+    empty_manifest_refresh_capability: object | None = None,
 ) -> list[dict[str, Any]]:
     manifest_path = root / BUILD_MANIFEST_FILE
     if not manifest_path.exists() and not manifest_path.is_symlink():
@@ -1165,15 +1206,26 @@ def _load_observed_build_manifest(
         ) from exc
     try:
         _validate_artifact_schema(payload, root=root, path=Path(BUILD_MANIFEST_FILE))
-        if payload.get("source_digest") != source_digest:
-            raise InventoryError("source_digest du manifeste de build incohérent")
-        if payload.get("model_digest") != model_digest:
-            raise InventoryError("model_digest du manifeste de build incohérent")
         builds = payload.get("builds")
         if not isinstance(builds, list):
             raise InventoryError("builds du manifeste invalide")
         if payload.get("build_state_digest") != _build_state_digest(builds):
             raise InventoryError("build_state_digest incohérent")
+        may_refresh_empty = (
+            empty_manifest_refresh_capability
+            is _EMPTY_MANIFEST_REFRESH_CAPABILITY
+            and not builds
+        )
+        if (
+            not may_refresh_empty
+            and payload.get("source_digest") != source_digest
+        ):
+            raise InventoryError("source_digest du manifeste de build incohérent")
+        if (
+            not may_refresh_empty
+            and payload.get("model_digest") != model_digest
+        ):
+            raise InventoryError("model_digest du manifeste de build incohérent")
 
         initial_git_state = _observed_git_state(root)
         initial_tracked_source_set = _tracked_source_set_digest(root)
@@ -1680,17 +1732,26 @@ def _active_debt_qualification_failures(
     for fingerprint, entry in sorted(entries.items()):
         owner = entry.get("owner")
         justification = entry.get("justification")
+        qualification_digest = entry.get("qualification_digest")
         qualified = entry.get("qualified")
         if (
             not isinstance(owner, str)
             or not owner.strip()
+            or owner not in _baseline_qualification.APPROVED_OWNERS
             or not isinstance(justification, str)
             or not justification.strip()
+            or not isinstance(qualification_digest, str)
+            or not re.fullmatch(
+                r"sha256:[0-9a-f]{64}",
+                qualification_digest,
+            )
             or qualified is not True
         ):
             failures.append(
                 "qualification active incomplète "
-                f"fp={fingerprint}: owner/justification/qualified requis"
+                f"fp={fingerprint}: owner/justification/"
+                "qualification_digest/qualified requis; "
+                "owner logique inconnu ou absent"
             )
     return failures
 
@@ -1779,6 +1840,13 @@ def _compare_anomaly_debt(
                 "perte ou modification de disposition "
                 f"fp={fingerprint}: "
                 f"{previous_disposition}→{current_disposition}"
+            )
+        if current_entry.get("qualification_digest") != previous_entry.get(
+            "qualification_digest"
+        ):
+            failures.append(
+                f"qualification modifiée fp={fingerprint}: "
+                "qualification_digest différent"
             )
 
     unmatched_current = set(current) - set(exact)
@@ -3256,12 +3324,13 @@ def reconcile_reports(
     )
 
 
-def build_inventory(
+def _build_inventory(
     repository: Path | str,
     *,
     managed_output_paths: Iterable[str] = (),
     require_git_provenance: bool = False,
     qualification_today: datetime.date | None = None,
+    empty_manifest_refresh_capability: object | None = None,
 ) -> dict[str, Any]:
     """Build a deterministic canonical model from tracked chapter sources."""
 
@@ -3724,6 +3793,7 @@ def build_inventory(
         pdfinfo_counter=_page_count_with_pdfinfo,
         python_counter=_page_count_with_python,
         source_files=model_sources,
+        empty_manifest_refresh_capability=empty_manifest_refresh_capability,
     )
     inventory["observed_build_coverage"] = _observed_build_coverage(
         inventory["declared_assemblies"],
@@ -3736,6 +3806,35 @@ def build_inventory(
         "status": "not_integrated",
     }
     return inventory
+
+
+def build_inventory(
+    repository: Path | str,
+    *,
+    managed_output_paths: Iterable[str] = (),
+    require_git_provenance: bool = False,
+    qualification_today: datetime.date | None = None,
+) -> dict[str, Any]:
+    """Build the strict deterministic canonical model."""
+
+    return _build_inventory(
+        repository,
+        managed_output_paths=managed_output_paths,
+        require_git_provenance=require_git_provenance,
+        qualification_today=qualification_today,
+    )
+
+
+def _build_inventory_for_empty_manifest_refresh(
+    repository: Path | str,
+) -> dict[str, Any]:
+    """Build digests while tolerating only a validated stale empty manifest."""
+
+    return _build_inventory(
+        repository,
+        require_git_provenance=True,
+        empty_manifest_refresh_capability=_EMPTY_MANIFEST_REFRESH_CAPABILITY,
+    )
 
 
 def analyze_assembler(path: Path | str) -> dict[str, Any]:
@@ -5199,6 +5298,9 @@ def _current_active_debt(
                 qualification.get("occurrence_count", 1)
             ),
             "owner": str(qualification.get("owner", "")),
+            "qualification_digest": str(
+                qualification.get("qualification_digest", "")
+            ),
             "qualified": qualification.get("qualified") is True,
             "severity": _anomaly_severity(anomaly, qualification),
         }
@@ -5210,6 +5312,105 @@ def _current_active_debt(
             entry["locator_key"],
         ),
     )
+
+
+def _baseline_qualification_records(
+    inventory: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    """Project the raw anomaly model into the pure policy input contract."""
+
+    anomalies = inventory.get("anomalies")
+    qualifications = inventory.get("anomaly_qualifications")
+    manuals = inventory.get("manuals")
+    if (
+        not isinstance(anomalies, Mapping)
+        or not isinstance(qualifications, Mapping)
+        or not isinstance(manuals, Mapping)
+    ):
+        raise InventoryError("modèle incomplet pour la qualification baseline")
+
+    object_types: dict[str, str] = {}
+    for manual in manuals.values():
+        if not isinstance(manual, Mapping):
+            continue
+        chapters = manual.get("chapters", {})
+        if not isinstance(chapters, Mapping):
+            continue
+        for chapter in chapters.values():
+            if not isinstance(chapter, Mapping):
+                continue
+            objects = chapter.get("objects", [])
+            if not isinstance(objects, list):
+                continue
+            for value in objects:
+                if (
+                    isinstance(value, Mapping)
+                    and isinstance(value.get("path"), str)
+                    and isinstance(value.get("source_type"), str)
+                ):
+                    object_types[str(value["path"])] = str(value["source_type"])
+
+    representatives: dict[str, tuple[str, Mapping[str, Any]]] = {}
+    for category, values in sorted(anomalies.items()):
+        if not isinstance(values, list):
+            continue
+        for anomaly in values:
+            if not isinstance(anomaly, Mapping):
+                continue
+            fingerprint = _anomaly_fingerprint(
+                anomaly,
+                category=str(category),
+            )
+            representatives.setdefault(
+                fingerprint,
+                (str(category), anomaly),
+            )
+
+    records: list[dict[str, Any]] = []
+    for fingerprint, qualification in sorted(qualifications.items()):
+        if not isinstance(qualification, Mapping):
+            raise InventoryError(f"qualification invalide: {fingerprint}")
+        representative = representatives.get(str(fingerprint))
+        if representative is None:
+            raise InventoryError(
+                f"qualification sans anomalie brute: {fingerprint}"
+            )
+        category, raw_anomaly = representative
+        anomaly = dict(raw_anomaly)
+        object_path = anomaly.get("path", anomaly.get("source"))
+        if (
+            anomaly.get("scope") == "object"
+            and isinstance(object_path, str)
+            and object_path in object_types
+        ):
+            anomaly["object_type"] = object_types[object_path]
+        source = anomaly.get("source", anomaly.get("path"))
+        records.append(
+            {
+                "anomaly": _canonicalize(anomaly),
+                "category": category,
+                "chapter": anomaly.get("chapter")
+                or (
+                    _chapter_context(str(source))[1]
+                    if isinstance(source, str)
+                    and _chapter_context(str(source)) is not None
+                    else None
+                ),
+                "fingerprint": str(fingerprint),
+                "fingerprint_schema_version": FINGERPRINT_SCHEMA_VERSION,
+                "manual": anomaly.get("manual")
+                or (
+                    _chapter_context(str(source))[0]
+                    if isinstance(source, str)
+                    and _chapter_context(str(source)) is not None
+                    else None
+                ),
+                "qualified": qualification.get("qualified") is True,
+                "severity": _anomaly_severity(anomaly, qualification),
+                "source": source if isinstance(source, str) else None,
+            }
+        )
+    return records
 
 
 def _raw_anomaly_identity(category: str, anomaly: Mapping[str, Any]) -> str:
@@ -6362,6 +6563,7 @@ def _apply_atomic_payloads(
     root: Path,
     rendered_artifacts: dict[Path, str],
     *,
+    validate_before_apply: Callable[[], None] | None = None,
     validate_state: Callable[[], None] | None = None,
 ) -> None:
     root = root.resolve()
@@ -6533,6 +6735,8 @@ def _apply_atomic_payloads(
         transaction_entries.add("journal-ready")
         os.fsync(temp_fd)
         _require_repository_root_identity(root, root_stat)
+        if validate_before_apply is not None:
+            validate_before_apply()
         for relative, stage_name in sorted(
             staged.items(),
             key=lambda item: str(item[0]),
@@ -7334,6 +7538,154 @@ def _load_model_artifact(root: Path, relative_path: str) -> dict[str, Any]:
     return payload
 
 
+def _qualification_unqualified_report_failures(
+    root: Path,
+    policy: Mapping[str, Any],
+) -> list[str]:
+    failures: list[str] = []
+    json_path = root / UNQUALIFIED_ANOMALIES_JSON_FILE
+    markdown_path = root / UNQUALIFIED_ANOMALIES_MD_FILE
+    if not json_path.is_file():
+        failures.append("UNQUALIFIED_ANOMALIES.json absent")
+    if not markdown_path.is_file():
+        failures.append("UNQUALIFIED_ANOMALIES.md absent")
+    if failures:
+        return failures
+    try:
+        payload = _read_confined_json_mapping(
+            root,
+            PurePosixPath(UNQUALIFIED_ANOMALIES_JSON_FILE),
+            role="unqualified anomalies",
+        )
+        if (
+            root
+            / "audit/schemas/v1/unqualified-anomalies.schema.json"
+        ).is_file():
+            _validate_artifact_schema(
+                payload,
+                root=root,
+                path=Path(UNQUALIFIED_ANOMALIES_JSON_FILE),
+            )
+        markdown = markdown_path.read_text(encoding="utf-8")
+    except (InventoryError, OSError, UnicodeError) as exc:
+        return [f"rapports anomalies non qualifiées invalides:{exc}"]
+    anomalies = payload.get("anomalies")
+    summary = payload.get("summary")
+    values = anomalies if isinstance(anomalies, list) else []
+    if not isinstance(anomalies, list):
+        failures.append("UNQUALIFIED_ANOMALIES.json anomalies invalide")
+    if not isinstance(summary, Mapping) or summary.get(
+        "unqualified"
+    ) != len(values):
+        failures.append("UNQUALIFIED_ANOMALIES.json compteur incohérent")
+    if payload.get("policy_digest") != policy.get("control_digest"):
+        failures.append("UNQUALIFIED_ANOMALIES.json policy digest différent")
+    expected_markdown = (
+        _baseline_qualification.render_unqualified_markdown(
+            [
+                value
+                for value in values
+                if isinstance(value, Mapping)
+            ],
+            policy_digest=str(policy.get("control_digest", "")),
+        )
+    )
+    if markdown != expected_markdown:
+        failures.append("UNQUALIFIED_ANOMALIES.md non canonique")
+    if values:
+        failures.append(f"anomalies_non_qualifiées:{len(values)}")
+    return failures
+
+
+def _qualification_policy_control_failures(
+    root: Path,
+    *,
+    inventory: Mapping[str, Any] | None = None,
+) -> list[str]:
+    policy_path = root / BASELINE_QUALIFICATION_POLICY_FILE
+    if not policy_path.is_file():
+        activated = any(
+            (root / relative).is_file()
+            for relative in (
+                UNQUALIFIED_ANOMALIES_JSON_FILE,
+                UNQUALIFIED_ANOMALIES_MD_FILE,
+            )
+        )
+        try:
+            tracked = subprocess.run(
+                [
+                    "git",
+                    "-C",
+                    str(root),
+                    "ls-files",
+                    "--error-unmatch",
+                    "--",
+                    BASELINE_QUALIFICATION_POLICY_FILE,
+                ],
+                check=False,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            ).returncode == 0
+        except OSError:
+            tracked = False
+        if activated or tracked:
+            return ["policy_gate:politique absente après activation du contrat"]
+        return []
+    try:
+        policy = _baseline_qualification.load_policy(policy_path)
+        _validate_artifact_schema(
+            policy,
+            root=root,
+            path=Path(BASELINE_QUALIFICATION_POLICY_FILE),
+        )
+        dispositions = _load_dispositions(root)
+    except (
+        InventoryError,
+        OSError,
+        UnicodeError,
+        _baseline_qualification.QualificationError,
+    ) as exc:
+        return [f"policy_gate:contrôle invalide:{_stable_gate_reason(exc, root)}"]
+    failures = _baseline_qualification.validate_materialized_registry(
+        policy,
+        dispositions,
+    )
+    failures.extend(
+        _qualification_unqualified_report_failures(root, policy)
+    )
+    try:
+        current_inventory = (
+            inventory if inventory is not None else build_inventory(root)
+        )
+        active_records = _baseline_qualification_records(
+            current_inventory
+        )
+        active = _coalesce_active_debt(
+            _current_active_debt(current_inventory)
+        )
+    except (InventoryError, OSError, subprocess.CalledProcessError) as exc:
+        failures.append(
+            "couverture active non recalculable:"
+            f"{_stable_gate_reason(exc, root)}"
+        )
+    else:
+        failures.extend(
+            _baseline_qualification.validate_materialized_registry(
+                policy,
+                dispositions,
+                active_records=active_records,
+            )
+        )
+        failures.extend(_active_debt_qualification_failures(active))
+    return sorted(
+        {
+            f"policy_gate:{failure}"
+            for failure in failures
+            if failure
+        }
+    )
+
+
 def _validate_model_gate(
     root: Path,
     *,
@@ -7342,6 +7694,9 @@ def _validate_model_gate(
     evaluation_date = today or datetime.datetime.now(datetime.UTC).date()
     reasons: list[str] = []
     payloads: dict[str, dict[str, Any]] = {}
+    reasons.extend(
+        _qualification_policy_control_failures(root, inventory=None)
+    )
     try:
         _load_source_roles(root, git_tracked_files(root))
         _load_dispositions(root)
@@ -7650,6 +8005,12 @@ def _baseline_check_disposition_coverage(root: Path) -> list[str]:
         return [f"couverture non recalculable:{_stable_gate_reason(exc, root)}"]
     reasons = _active_debt_qualification_failures(
         _coalesce_active_debt(active)
+    )
+    reasons.extend(
+        _qualification_policy_control_failures(
+            root,
+            inventory=inventory,
+        )
     )
     for fingerprint, record in sorted(dispositions.items()):
         if record.get("disposition") == "false_positive" and (
@@ -8181,6 +8542,223 @@ def _safe_update_baseline_gate(
         )
 
 
+def _baseline_materialization_plan(root: Path) -> dict[str, Any]:
+    policy = _baseline_qualification.load_policy(
+        root / BASELINE_QUALIFICATION_POLICY_FILE
+    )
+    _validate_artifact_schema(
+        policy,
+        root=root,
+        path=Path(BASELINE_QUALIFICATION_POLICY_FILE),
+    )
+    inventory = build_inventory(root)
+    plan = _baseline_qualification.plan_materialization(
+        policy,
+        _baseline_qualification_records(inventory),
+        _load_dispositions(root),
+        observed_source_digest=str(inventory["source_digest"]),
+        observed_model_digest=_model_digest(inventory),
+        allow_unqualified=True,
+    )
+    dispositions = plan["dispositions_payload"]
+    unqualified = plan["unqualified_json"]
+    _validate_artifact_schema(
+        dispositions,
+        root=root,
+        path=Path(ANOMALY_DISPOSITIONS_FILE),
+    )
+    _validate_artifact_schema(
+        unqualified,
+        root=root,
+        path=Path(UNQUALIFIED_ANOMALIES_JSON_FILE),
+    )
+    rendered = {
+        Path(UNQUALIFIED_ANOMALIES_JSON_FILE): (
+            json.dumps(
+                unqualified,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        ),
+        Path(UNQUALIFIED_ANOMALIES_MD_FILE): plan[
+            "unqualified_markdown"
+        ],
+    }
+    if not plan["unqualified"]:
+        rendered[Path(ANOMALY_DISPOSITIONS_FILE)] = yaml.safe_dump(
+            dispositions,
+            allow_unicode=True,
+            sort_keys=True,
+        )
+    plan["rendered"] = rendered
+    plan["policy_file_digest"] = _sha256_file(
+        root / BASELINE_QUALIFICATION_POLICY_FILE
+    )
+    disposition_path = root / ANOMALY_DISPOSITIONS_FILE
+    plan["dispositions_file_digest"] = (
+        _sha256_file(disposition_path)
+        if disposition_path.is_file()
+        else None
+    )
+    return plan
+
+
+def _materialization_plan_identity(plan: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        key: _canonicalize(plan.get(key))
+        for key in (
+            "approved_fingerprint_count",
+            "approved_fingerprint_digest",
+            "dispositions_file_digest",
+            "observed_model_digest",
+            "observed_source_digest",
+            "owner_counts",
+            "policy_file_digest",
+            "rendered",
+            "unqualified",
+        )
+    }
+
+
+def _validate_materialization_destinations(
+    root: Path,
+    rendered: Mapping[Path, str],
+) -> None:
+    for relative in rendered:
+        target = root / relative
+        try:
+            metadata = target.lstat()
+        except FileNotFoundError:
+            continue
+        if (
+            not stat.S_ISREG(metadata.st_mode)
+            or metadata.st_nlink != 1
+        ):
+            raise InventoryError(
+                "materialization destination must be a regular file "
+                f"without symlink or hardlink: {relative}"
+            )
+
+
+def _materialize_baseline_qualifications(
+    root: Path,
+    *,
+    check_only: bool,
+) -> dict[str, Any]:
+    initial_head = _repo_head_sha(root, required=True)
+    plan = _baseline_materialization_plan(root)
+    rendered = plan["rendered"]
+    _validate_materialization_destinations(root, rendered)
+    diffs = _compare_rendered_artifacts(root, rendered)
+
+    def revalidate_plan() -> None:
+        if _repo_head_sha(root, required=True) != initial_head:
+            raise InventoryError(
+                "HEAD modifié pendant la validation de matérialisation"
+            )
+        revalidated = _baseline_materialization_plan(root)
+        if _materialization_plan_identity(
+            revalidated
+        ) != _materialization_plan_identity(plan):
+            raise InventoryError(
+                "jeu approuvé ou digests modifiés avant matérialisation"
+            )
+        _validate_materialization_destinations(
+            root,
+            revalidated["rendered"],
+        )
+
+    if check_only:
+        revalidate_plan()
+        success = not diffs and not plan["unqualified"]
+        reasons: list[str] = []
+        if diffs:
+            reasons.append("matérialisation requise")
+        if plan["unqualified"]:
+            reasons.append(
+                f"anomalies_non_qualifiées:{len(plan['unqualified'])}"
+            )
+        result = _gate_result(
+            "materialize-baseline-qualifications",
+            success=success,
+            failure_code=GATE_CHECK_CODE,
+            dimensions={"structure": "passed" if success else "failed"},
+            reasons=reasons,
+        )
+    else:
+        with _lock_generation(root):
+            _recover_repository_transactions(root)
+            revalidate_plan()
+
+            def require_unchanged_head() -> None:
+                if _repo_head_sha(root, required=True) != initial_head:
+                    raise InventoryError(
+                        "HEAD modifié pendant la matérialisation"
+                    )
+
+            _apply_atomic_payloads(
+                root,
+                rendered,
+                validate_before_apply=revalidate_plan,
+                validate_state=require_unchanged_head,
+            )
+        success = not plan["unqualified"]
+        result = _gate_result(
+            "materialize-baseline-qualifications",
+            success=success,
+            failure_code=GATE_CHECK_CODE,
+            dimensions={"structure": "passed" if success else "failed"},
+            reasons=(
+                []
+                if success
+                else [
+                    f"anomalies_non_qualifiées:{len(plan['unqualified'])}; "
+                    "registre dispositions inchangé"
+                ]
+            ),
+        )
+    result["approved_fingerprint_count"] = plan[
+        "approved_fingerprint_count"
+    ]
+    result["approved_fingerprint_digest"] = plan[
+        "approved_fingerprint_digest"
+    ]
+    result["diffs"] = [
+        reason.split(": ", 1)[1] if ": " in reason else reason
+        for reason in diffs
+    ]
+    result["owner_counts"] = plan["owner_counts"]
+    result["unqualified"] = len(plan["unqualified"])
+    return result
+
+
+def _safe_materialize_baseline_qualifications(
+    root: Path,
+    *,
+    check_only: bool,
+) -> dict[str, Any]:
+    try:
+        return _materialize_baseline_qualifications(
+            root,
+            check_only=check_only,
+        )
+    except (
+        InventoryError,
+        OSError,
+        subprocess.CalledProcessError,
+        _baseline_qualification.QualificationError,
+    ) as exc:
+        return _gate_result(
+            "materialize-baseline-qualifications",
+            success=False,
+            failure_code=GATE_CHECK_CODE,
+            dimensions={"structure": "failed"},
+            reasons=[_stable_gate_reason(exc, root)],
+        )
+
+
 def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     reasons: list[str] = []
     matrix = inventory["deliverable_matrix"]["manuals"]
@@ -8336,6 +8914,11 @@ def _run() -> int:
         help="Mettre à jour explicitement la baseline après les dix préconditions.",
     )
     parser.add_argument(
+        "--materialize-baseline-qualifications",
+        action="store_true",
+        help="Matérialiser explicitement le lot de dette approuvé par politique.",
+    )
+    parser.add_argument(
         "--reason",
         default="",
         help="Justification auditée de la mise à jour de baseline.",
@@ -8346,6 +8929,37 @@ def _run() -> int:
         help="Responsable humain approuvant la mise à jour de baseline.",
     )
     args = parser.parse_args()
+
+    if args.materialize_baseline_qualifications:
+        incompatible = (
+            args.require_clean
+            or args.validate_model
+            or args.fail_on_new
+            or args.release_strict
+            or args.update_baseline
+            or args.strict
+        )
+        if incompatible:
+            parser.error(
+                "--materialize-baseline-qualifications accepte seulement --check"
+            )
+        try:
+            root = _repo_root_path(args.root)
+        except InventoryError as exc:
+            result = _gate_result(
+                "materialize-baseline-qualifications",
+                success=False,
+                failure_code=GATE_CHECK_CODE,
+                dimensions={"structure": "failed"},
+                reasons=[str(exc)],
+            )
+        else:
+            result = _safe_materialize_baseline_qualifications(
+                root,
+                check_only=args.check,
+            )
+        _print_gate_result(result)
+        return int(result["exit_code"])
 
     requested_gates = (
         args.require_clean,

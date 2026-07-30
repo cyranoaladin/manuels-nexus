@@ -26,6 +26,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "inventory_collection.py"
 GENERATOR_COMPONENTS = (
+    "baseline_qualification.py",
     "build_manifest.py",
     "inventory_collection.py",
     "inventory_reports.py",
@@ -1249,6 +1250,478 @@ def test_v1_schema_directory_contains_exactly_the_registered_contracts(
     assert present == registered
 
 
+def test_qualification_schemas_are_registered(inventory_module) -> None:
+    assert inventory_module._schema_ref_for(
+        "baseline_qualification_policy",
+        1,
+    ) == "audit/schemas/v1/baseline-qualification-policy.schema.json"
+    assert inventory_module._schema_ref_for(
+        "unqualified_anomalies",
+        1,
+    ) == "audit/schemas/v1/unqualified-anomalies.schema.json"
+
+
+def test_harvest_candidate_is_a_non_blocking_disposition(
+    inventory_module,
+) -> None:
+    assert "harvest_candidate" in inventory_module.ANOMALY_DISPOSITIONS
+    assert (
+        inventory_module.ANOMALY_DISPOSITION_BLOCKS["harvest_candidate"]
+        is False
+    )
+
+
+def test_materialize_baseline_qualifications_check_is_read_only(
+    tmp_path: Path,
+) -> None:
+    repository = tmp_path / "repository"
+    subprocess.run(
+        [
+            "git",
+            "clone",
+            "-q",
+            "--no-hardlinks",
+            str(ROOT),
+            str(repository),
+        ],
+        check=True,
+    )
+    for relative in (
+        "audit/BASELINE_QUALIFICATION_POLICY.yaml",
+        "audit/schemas/v1/anomaly-dispositions.schema.json",
+        "audit/schemas/v1/baseline-qualification-policy.schema.json",
+        "audit/schemas/v1/unqualified-anomalies.schema.json",
+    ):
+        destination = repository / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, destination)
+    # Le manifeste observé est hors du contrat one-shot de cette fixture. Le
+    # retirer du clone évite qu'un digest historique du worktree réel rende le
+    # test CLI dépendant de l'ordre des lots locaux.
+    (repository / "audit/BUILD_MANIFEST.json").unlink(missing_ok=True)
+    destinations = (
+        repository / "audit/ANOMALY_DISPOSITIONS.yaml",
+        repository / "audit/UNQUALIFIED_ANOMALIES.json",
+        repository / "audit/UNQUALIFIED_ANOMALIES.md",
+    )
+    before_destinations = {
+        path: path.read_bytes() if path.exists() else None
+        for path in destinations
+    }
+    before = _git_status_bytes(repository)
+
+    result = _run_inventory_cli(
+        repository,
+        "--materialize-baseline-qualifications",
+        "--check",
+    )
+
+    payload = json.loads(result.stdout)
+    assert payload["gate"] == "materialize-baseline-qualifications"
+    assert payload["approved_fingerprint_count"] == 2457
+    assert payload["unqualified"] == 0
+    assert result.returncode in {0, 3}
+    assert (result.returncode == 0) is (payload["diffs"] == [])
+    assert set(payload["diffs"]) <= {
+        "audit/ANOMALY_DISPOSITIONS.yaml",
+        "audit/UNQUALIFIED_ANOMALIES.json",
+        "audit/UNQUALIFIED_ANOMALIES.md",
+    }
+    assert {
+        path: path.read_bytes() if path.exists() else None
+        for path in destinations
+    } == before_destinations
+    assert _git_status_bytes(repository) == before
+
+
+def _synthetic_materialization_plan(
+    *,
+    marker: str = "stable",
+    unqualified: int = 0,
+) -> dict[str, object]:
+    anomalies = [
+        {
+            "category": "unknown",
+            "chapter": None,
+            "fingerprint": f"{index:016x}",
+            "manual": None,
+            "reason": "no_policy_rule",
+            "source": "unknown.tex",
+        }
+        for index in range(unqualified)
+    ]
+    rendered = {
+        Path("audit/UNQUALIFIED_ANOMALIES.json"): (
+            json.dumps({"marker": marker, "anomalies": anomalies}) + "\n"
+        ),
+        Path("audit/UNQUALIFIED_ANOMALIES.md"): (
+            f"# Non qualifiées\n\n{marker}: {unqualified}\n"
+        ),
+    }
+    if not anomalies:
+        rendered[Path("audit/ANOMALY_DISPOSITIONS.yaml")] = (
+            f"marker: {marker}\n"
+        )
+    return {
+        "approved_fingerprint_count": 2457,
+        "approved_fingerprint_digest": "sha256:" + "a" * 64,
+        "observed_model_digest": "sha256:" + "b" * 64,
+        "observed_source_digest": "sha256:" + "c" * 64,
+        "owner_counts": {
+            "direction_editoriale_pedagogique": 328,
+            "direction_scientifique_programme": 1473,
+            "ingenierie_build_qualite": 656,
+        },
+        "rendered": rendered,
+        "unqualified": anomalies,
+    }
+
+
+@pytest.mark.parametrize("unqualified", [1, 2])
+def test_materialization_writes_only_unqualified_reports_when_policy_cannot_decide(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    unqualified: int,
+) -> None:
+    plan = _synthetic_materialization_plan(
+        marker="ambiguous" if unqualified == 2 else "absent",
+        unqualified=unqualified,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_materialization_plan",
+        lambda _root: deepcopy(plan),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_repo_head_sha",
+        lambda _root, *, required: "a" * 40,
+    )
+
+    result = inventory_module._safe_materialize_baseline_qualifications(
+        tmp_path,
+        check_only=False,
+    )
+
+    assert result["success"] is False
+    assert result["exit_code"] == 3
+    assert not (tmp_path / "audit/ANOMALY_DISPOSITIONS.yaml").exists()
+    assert (tmp_path / "audit/UNQUALIFIED_ANOMALIES.json").is_file()
+    assert (tmp_path / "audit/UNQUALIFIED_ANOMALIES.md").is_file()
+
+
+def test_materialization_check_revalidates_changed_head(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    plan = _synthetic_materialization_plan()
+    for relative, content in plan["rendered"].items():  # type: ignore[union-attr]
+        _write(tmp_path / relative, content)
+    heads = iter(["a" * 40, "b" * 40])
+    monkeypatch.setattr(
+        inventory_module,
+        "_repo_head_sha",
+        lambda _root, *, required: next(heads),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_materialization_plan",
+        lambda _root: deepcopy(plan),
+    )
+
+    result = inventory_module._safe_materialize_baseline_qualifications(
+        tmp_path,
+        check_only=True,
+    )
+
+    assert result["success"] is False
+    assert any("HEAD" in reason for reason in result["reasons"])
+
+
+@pytest.mark.parametrize(
+    ("field", "changed"),
+    [
+        ("observed_source_digest", "sha256:" + "d" * 64),
+        ("observed_model_digest", "sha256:" + "e" * 64),
+        ("approved_fingerprint_digest", "sha256:" + "f" * 64),
+    ],
+)
+def test_materialization_check_revalidates_all_approved_digests(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    field: str,
+    changed: str,
+) -> None:
+    first = _synthetic_materialization_plan()
+    second = deepcopy(first)
+    second[field] = changed
+    for relative, content in first["rendered"].items():  # type: ignore[union-attr]
+        _write(tmp_path / relative, content)
+    plans = iter([first, second])
+    monkeypatch.setattr(
+        inventory_module,
+        "_repo_head_sha",
+        lambda _root, *, required: "a" * 40,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_materialization_plan",
+        lambda _root: deepcopy(next(plans)),
+    )
+
+    result = inventory_module._safe_materialize_baseline_qualifications(
+        tmp_path,
+        check_only=True,
+    )
+
+    assert result["success"] is False
+    assert any("modifié" in reason for reason in result["reasons"])
+
+
+@pytest.mark.parametrize("attack", ["symlink", "hardlink", "directory"])
+def test_materialization_cli_transaction_rejects_path_substitution(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    attack: str,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    repository.mkdir()
+    outside.mkdir()
+    sentinel = outside / "sentinel.txt"
+    sentinel.write_text("historique\n", encoding="utf-8")
+    target = repository / "audit/ANOMALY_DISPOSITIONS.yaml"
+    if attack == "directory":
+        (repository / "audit").symlink_to(outside, target_is_directory=True)
+    else:
+        target.parent.mkdir()
+        if attack == "symlink":
+            target.symlink_to(sentinel)
+        else:
+            os.link(sentinel, target)
+    plan = _synthetic_materialization_plan()
+    monkeypatch.setattr(
+        inventory_module,
+        "_repo_head_sha",
+        lambda _root, *, required: "a" * 40,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_materialization_plan",
+        lambda _root: deepcopy(plan),
+    )
+
+    result = inventory_module._safe_materialize_baseline_qualifications(
+        repository,
+        check_only=False,
+    )
+
+    assert result["success"] is False
+    assert sentinel.read_text(encoding="utf-8") == "historique\n"
+    assert not (outside / "UNQUALIFIED_ANOMALIES.json").exists()
+    assert not (outside / "UNQUALIFIED_ANOMALIES.md").exists()
+
+
+def test_materialization_cli_rolls_back_all_outputs_on_apply_failure(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    for name in (
+        "ANOMALY_DISPOSITIONS.yaml",
+        "UNQUALIFIED_ANOMALIES.json",
+        "UNQUALIFIED_ANOMALIES.md",
+    ):
+        _write(tmp_path / "audit" / name, f"historique {name}\n")
+    before = {
+        path: path.read_bytes() for path in sorted((tmp_path / "audit").iterdir())
+    }
+    plan = _synthetic_materialization_plan(marker="nouveau")
+    monkeypatch.setattr(
+        inventory_module,
+        "_repo_head_sha",
+        lambda _root, *, required: "a" * 40,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_materialization_plan",
+        lambda _root: deepcopy(plan),
+    )
+    original_replace = inventory_module.os.replace
+    forward_replacements = 0
+
+    def fail_second_forward_replace(
+        source: str,
+        destination: str,
+        **kwargs: object,
+    ) -> None:
+        nonlocal forward_replacements
+        if str(source).startswith("stage-"):
+            forward_replacements += 1
+            if forward_replacements == 2:
+                raise OSError("injection crash matérialisation")
+        original_replace(source, destination, **kwargs)
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        fail_second_forward_replace,
+    )
+
+    result = inventory_module._safe_materialize_baseline_qualifications(
+        tmp_path,
+        check_only=False,
+    )
+
+    assert result["success"] is False
+    assert {
+        path: path.read_bytes() for path in sorted((tmp_path / "audit").iterdir())
+    } == before
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
+def test_materialization_transaction_revalidates_digests_after_staging(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    for name in (
+        "ANOMALY_DISPOSITIONS.yaml",
+        "UNQUALIFIED_ANOMALIES.json",
+        "UNQUALIFIED_ANOMALIES.md",
+    ):
+        _write(tmp_path / "audit" / name, f"historique {name}\n")
+    before = {
+        path: path.read_bytes()
+        for path in sorted((tmp_path / "audit").iterdir())
+    }
+    stable = _synthetic_materialization_plan(marker="stable")
+    changed = deepcopy(stable)
+    changed["observed_source_digest"] = "sha256:" + "f" * 64
+    drifted = False
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_repo_head_sha",
+        lambda _root, *, required: "a" * 40,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_materialization_plan",
+        lambda _root: deepcopy(changed if drifted else stable),
+    )
+    real_write_entry = inventory_module._write_transaction_entry
+
+    def mutate_after_staging(
+        directory_fd: int,
+        name: str,
+        payload: bytes,
+    ):
+        nonlocal drifted
+        result = real_write_entry(directory_fd, name, payload)
+        if name == "journal-ready":
+            drifted = True
+        return result
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_write_transaction_entry",
+        mutate_after_staging,
+    )
+
+    result = inventory_module._safe_materialize_baseline_qualifications(
+        tmp_path,
+        check_only=False,
+    )
+
+    assert result["success"] is False
+    assert any("digests" in reason or "modifiés" in reason for reason in result["reasons"])
+    assert {
+        path: path.read_bytes()
+        for path in sorted((tmp_path / "audit").iterdir())
+    } == before
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
+def test_materialization_cli_recovers_previous_process_crash_before_writing(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    historical = {
+        "ANOMALY_DISPOSITIONS.yaml": "dispositions historiques\n",
+        "UNQUALIFIED_ANOMALIES.json": "json historique\n",
+        "UNQUALIFIED_ANOMALIES.md": "markdown historique\n",
+    }
+    for name, content in historical.items():
+        _write(tmp_path / "audit" / name, content)
+    child_code = f"""
+import importlib.util
+import os
+from pathlib import Path
+
+spec = importlib.util.spec_from_file_location("inventory_collection", {str(SCRIPT)!r})
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+original_replace = module.os.replace
+
+def crash_after_first_replace(source, target, **kwargs):
+    original_replace(source, target, **kwargs)
+    if str(source).startswith("stage-"):
+        os._exit(98)
+
+module.os.replace = crash_after_first_replace
+module._apply_atomic_payloads(
+    Path({str(tmp_path)!r}),
+    {{
+        Path("audit/ANOMALY_DISPOSITIONS.yaml"): "dispositions crash\\n",
+        Path("audit/UNQUALIFIED_ANOMALIES.json"): "json crash\\n",
+        Path("audit/UNQUALIFIED_ANOMALIES.md"): "markdown crash\\n",
+    }},
+)
+"""
+    crashed = subprocess.run([sys.executable, "-c", child_code], check=False)
+    assert crashed.returncode == 98
+    assert list(tmp_path.glob(".inventory-collection-apply-*"))
+
+    plan = _synthetic_materialization_plan(marker="après récupération")
+    monkeypatch.setattr(
+        inventory_module,
+        "_repo_head_sha",
+        lambda _root, *, required: "a" * 40,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_materialization_plan",
+        lambda _root: deepcopy(plan),
+    )
+
+    def stop_before_new_write(*_args: object, **_kwargs: object) -> None:
+        raise OSError("arrêt après récupération CLI")
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_apply_atomic_payloads",
+        stop_before_new_write,
+    )
+
+    result = inventory_module._safe_materialize_baseline_qualifications(
+        tmp_path,
+        check_only=False,
+    )
+
+    assert result["success"] is False
+    assert all(
+        (tmp_path / "audit" / name).read_text(encoding="utf-8") == content
+        for name, content in historical.items()
+    )
+    assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
+
+
 @pytest.mark.parametrize(
     "schema_name",
     ["source-roles.schema.json", "anomaly-dispositions.schema.json"],
@@ -1327,6 +1800,55 @@ def test_anomaly_dispositions_schema_accepts_qualified_open_debt() -> None:
     )
 
     jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+@pytest.mark.parametrize(
+    "missing_field",
+    [
+        "baseline_sha",
+        "category",
+        "chapter",
+        "fingerprint_schema_version",
+        "manual",
+        "policy_rule",
+        "qualification_digest",
+        "qualification_policy_digest",
+        "reason",
+        "release_blocking",
+        "severity",
+        "source",
+    ],
+)
+def test_policy_generated_disposition_requires_materialization_contract(
+    missing_field: str,
+) -> None:
+    schema = json.loads(
+        (
+            ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json"
+        ).read_text(encoding="utf-8")
+    )
+    fingerprint = "c" * 16
+    record = {
+        **_qualified_disposition_record("open_debt", fingerprint),
+        "baseline_sha": "a" * 40,
+        "category": "blocking_statuses",
+        "chapter": None,
+        "fingerprint_schema_version": 1,
+        "manual": "1SPE",
+        "policy_rule": "blocking-scientific-object",
+        "qualification_digest": "sha256:" + "e" * 64,
+        "qualification_policy_digest": "sha256:" + "d" * 64,
+        "reason": "Dette active qualifiée par politique.",
+        "release_blocking": True,
+        "severity": "blocking",
+        "source": "chapitres/C/cours/c.tex",
+    }
+    record.pop(missing_field)
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(
+            _dispositions_payload(record)
+        )
 
 
 @pytest.mark.parametrize(
@@ -1950,7 +2472,8 @@ def _baseline_contract_payload() -> dict[str, object]:
                 "justification": "Dette historique qualifiée avant publication.",
                 "locator_key": "missing_corrections|1SPE|chapitre|source|champ|id",
                 "occurrence_count": 2,
-                "owner": "équipe mathématiques",
+                "owner": "direction_scientifique_programme",
+                "qualification_digest": "sha256:" + "1" * 64,
                 "qualified": True,
                 "severity": "blocking",
             }
@@ -2449,9 +2972,10 @@ def _active_debt(
     occurrence_count: int = 1,
     severity: str = "blocking",
     disposition: str = "open_debt",
-    owner: str = "équipe mathématiques",
+    owner: str = "direction_scientifique_programme",
     justification: str = "Dette qualifiée et suivie avant publication.",
     qualified: bool = True,
+    qualification_digest: str = "sha256:" + "1" * 64,
 ) -> dict[str, object]:
     return {
         "blocking": severity in {"blocking", "regression"},
@@ -2462,6 +2986,7 @@ def _active_debt(
         "locator_key": locator_key,
         "occurrence_count": occurrence_count,
         "owner": owner,
+        "qualification_digest": qualification_digest,
         "qualified": qualified,
         "severity": severity,
     }
@@ -2567,6 +3092,132 @@ def test_debt_comparison_detects_modified_severity_and_lost_disposition(
     assert any("disposition" in value for value in comparison["failures"])
 
 
+def test_fail_on_new_rejects_a_changed_qualification_digest(
+    inventory_module,
+) -> None:
+    previous = _active_debt(
+        "a" * 16,
+        qualification_digest="sha256:" + "1" * 64,
+    )
+    current = _active_debt(
+        "a" * 16,
+        qualification_digest="sha256:" + "2" * 64,
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [current],
+        [previous],
+        [],
+    )
+
+    assert comparison["success"] is False
+    assert any(
+        "qualification modifiée" in reason
+        for reason in comparison["failures"]
+    )
+
+
+def test_disposition_coverage_policy_gate_requires_zero_unqualified_reports(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    policy = {"control_digest": "sha256:" + "a" * 64}
+
+    missing = inventory_module._qualification_unqualified_report_failures(
+        tmp_path,
+        policy,
+    )
+
+    assert any("UNQUALIFIED_ANOMALIES.json absent" in reason for reason in missing)
+    assert any("UNQUALIFIED_ANOMALIES.md absent" in reason for reason in missing)
+
+    payload = {
+        "anomalies": [
+            {
+                "category": "blocking_statuses",
+                "chapter": "1SPE-SUITES",
+                "fingerprint": "b" * 16,
+                "manual": "1SPE",
+                "reason": "no_policy_rule",
+                "source": "chapitres/1SPE-SUITES/cours/cours.tex",
+            }
+        ],
+        "artifact_type": "unqualified_anomalies",
+        "fingerprint_schema_version": 1,
+        "generated_by": "baseline_qualification.py",
+        "policy_digest": policy["control_digest"],
+        "schema_ref": "audit/schemas/v1/unqualified-anomalies.schema.json",
+        "schema_version": 1,
+        "summary": {"unqualified": 1},
+    }
+    _write(
+        tmp_path / "audit/UNQUALIFIED_ANOMALIES.json",
+        json.dumps(payload, ensure_ascii=False),
+    )
+    _write(
+        tmp_path / "audit/UNQUALIFIED_ANOMALIES.md",
+        inventory_module._baseline_qualification.render_unqualified_markdown(
+            payload["anomalies"],
+            policy_digest=str(policy["control_digest"]),
+        ),
+    )
+
+    nonempty = inventory_module._qualification_unqualified_report_failures(
+        tmp_path,
+        policy,
+    )
+
+    assert any("anomalies_non_qualifiées:1" in reason for reason in nonempty)
+
+
+def test_validate_model_includes_policy_gate_failures(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        inventory_module,
+        "_qualification_policy_control_failures",
+        lambda _root, *, inventory=None: ["policy_gate:altération injectée"],
+    )
+
+    result = inventory_module._validate_model_gate(tmp_path)
+
+    assert result["success"] is False
+    assert "policy_gate:altération injectée" in result["reasons"]
+
+
+def test_policy_gate_rejects_missing_policy_after_contract_activation(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _write(
+        tmp_path / "audit/UNQUALIFIED_ANOMALIES.json",
+        "{}\n",
+    )
+
+    failures = inventory_module._qualification_policy_control_failures(
+        tmp_path,
+    )
+
+    assert any("politique absente" in reason for reason in failures)
+
+
+def test_disposition_coverage_rejects_arbitrary_historical_active_owner(
+    inventory_module,
+) -> None:
+    active = _active_debt(
+        "a" * 16,
+        owner="équipe historique arbitraire",
+    )
+
+    failures = inventory_module._active_debt_qualification_failures(
+        {"a" * 16: active}
+    )
+
+    assert any("owner logique inconnu" in reason for reason in failures)
+
+
 def test_debt_comparison_treats_error_false_to_blocking_true_as_escalation(
     inventory_module,
 ) -> None:
@@ -2647,6 +3298,9 @@ def test_fixed_disposition_reappearance_flows_to_active_regression_and_gate(
     )
     fixed = _qualified_disposition_record("fixed", fingerprint)
     fixed["proof"] = "audit/proofs/correction.md"
+    fixed["qualification_digest"] = (
+        inventory_module._baseline_qualification.qualification_digest(fixed)
+    )
     anomalies = {category: [anomaly]}
     qualifications = inventory_module._build_anomaly_qualification_view(
         anomalies,
@@ -2672,9 +3326,13 @@ def test_fixed_disposition_reappearance_flows_to_active_regression_and_gate(
                 anomaly,
                 category=category,
             ),
-            "occurrence_count": 1,
-            "owner": fixed["owner"],
-            "qualified": True,
+                "occurrence_count": 1,
+                "owner": fixed["owner"],
+                "qualification_digest": (
+                    inventory_module._baseline_qualification
+                    .qualification_digest(fixed)
+                ),
+                "qualified": True,
             "severity": "regression",
         }
     ]

@@ -50,6 +50,7 @@
             "open_debt",
             "false_positive",
             "generated_dependency",
+            "harvest_candidate",
             "intentional_reuse",
             "accepted_exception",
             "fixed"
@@ -62,13 +63,65 @@
           "type": "string",
           "pattern": "^[0-9a-f]{16,64}$"
         },
+        "baseline_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "category": { "$ref": "#/$defs/non_empty_string" },
+        "chapter": { "type": ["string", "null"] },
+        "fingerprint_schema_version": { "type": "integer", "minimum": 1 },
         "justification": { "$ref": "#/$defs/non_empty_string" },
+        "manual": { "type": ["string", "null"] },
         "owner": { "$ref": "#/$defs/non_empty_string" },
+        "policy_rule": { "$ref": "#/$defs/non_empty_string" },
         "proof": { "$ref": "#/$defs/evidence" },
+        "qualification_policy_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "qualification_digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "reason": { "$ref": "#/$defs/non_empty_string" },
+        "release_blocking": { "type": "boolean" },
         "review_condition": { "$ref": "#/$defs/non_empty_string" },
+        "severity": {
+          "enum": ["info", "warning", "error", "blocking", "regression"]
+        },
+        "source": { "type": ["string", "null"] },
         "scope": { "$ref": "#/$defs/scope" }
       },
       "allOf": [
+        {
+          "if": {
+            "anyOf": [
+              { "required": ["qualification_policy_digest"] },
+              {
+                "required": ["policy_rule"],
+                "properties": {
+                  "policy_rule": { "not": { "const": "historical-evidence" } }
+                }
+              }
+            ]
+          },
+          "then": {
+            "required": [
+              "baseline_sha",
+              "category",
+              "chapter",
+              "fingerprint_schema_version",
+              "manual",
+              "policy_rule",
+              "qualification_digest",
+              "qualification_policy_digest",
+              "reason",
+              "release_blocking",
+              "severity",
+              "source"
+            ]
+          }
+        },
         {
           "if": {
             "properties": { "disposition": { "const": "accepted_exception" } },

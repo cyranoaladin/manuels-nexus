@@ -19,6 +19,23 @@
 - [ ] manifests cohérents
 - [ ] provenance complète
 
+### Qualification et baseline de dette
+
+- `disposition_coverage` contrôle la politique approuvée, son empreinte, le
+  registre matérialisé, les propriétaires, les dispositions et les rapports
+  `UNQUALIFIED_ANOMALIES.{json,md}` ; il n’existe pas de précondition parallèle
+  contournable.
+- Le `qualification_digest` canonique couvre propriétaire, justification,
+  cause, approbateur, décision, preuve, règle et empreinte de politique. Sa
+  modification à fingerprint brut inchangé est une régression pour
+  `--fail-on-new`.
+- La matérialisation est une opération locale explicite et ponctuelle. La CI
+  n’exécute ni `--materialize-baseline-qualifications` ni
+  `--update-baseline`; une anomalie future reste non qualifiée et bloquante.
+- Après le gel, une disparition est une amélioration non bloquante et reste
+  dans l’historique ; une réapparition `fixed` ou une substitution à total
+  constant échoue.
+
 ## Gate G2 — Mathématiques
 
 - [ ] zéro P0

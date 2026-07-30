@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:baseline-qualification-policy",
+  "title": "Nexus baseline qualification policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "allowed_dispositions",
+    "approved_set",
+    "artifact_type",
+    "control_digest",
+    "decision",
+    "initial_policy",
+    "owners",
+    "rules",
+    "schema_ref",
+    "schema_version"
+  ],
+  "properties": {
+    "allowed_dispositions": {
+      "type": "array",
+      "prefixItems": [
+        { "const": "open_debt" },
+        { "const": "generated_dependency" },
+        { "const": "harvest_candidate" },
+        { "const": "intentional_reuse" },
+        { "const": "false_positive" },
+        { "const": "accepted_exception" },
+        { "const": "fixed" }
+      ],
+      "items": false
+    },
+    "approved_set": { "$ref": "#/$defs/approved_set" },
+    "artifact_type": { "const": "baseline_qualification_policy" },
+    "control_digest": { "$ref": "#/$defs/sha256" },
+    "decision": { "$ref": "#/$defs/decision" },
+    "initial_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prohibited_outputs"],
+      "properties": {
+        "prohibited_outputs": {
+          "const": ["accepted_exception", "false_positive", "fixed"]
+        }
+      }
+    },
+    "owners": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "direction_editoriale_pedagogique",
+        "direction_scientifique_programme",
+        "ingenierie_build_qualite"
+      ],
+      "properties": {
+        "direction_editoriale_pedagogique": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["scope"],
+          "properties": {
+            "scope": {
+              "const": [
+                "pedagogy",
+                "nexus_mastery_loop",
+                "student_teacher_variants",
+                "remediation",
+                "editorial_content",
+                "terminology"
+              ]
+            }
+          }
+        },
+        "direction_scientifique_programme": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["scope"],
+          "properties": {
+            "scope": {
+              "const": [
+                "mathematics",
+                "official_programme",
+                "demonstrations",
+                "qcm",
+                "corrections",
+                "numerical_results"
+              ]
+            }
+          }
+        },
+        "ingenierie_build_qualite": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["scope"],
+          "properties": {
+            "scope": {
+              "const": [
+                "metadata",
+                "inventory",
+                "assemblies",
+                "latex",
+                "python",
+                "ci",
+                "pdf",
+                "visual_baselines"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/rule" }
+    },
+    "schema_ref": {
+      "const": "audit/schemas/v1/baseline-qualification-policy.schema.json"
+    },
+    "schema_version": { "const": 1 }
+  },
+  "$defs": {
+    "approved_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baseline_sha",
+        "category_counts",
+        "fingerprint_count",
+        "fingerprint_digest",
+        "observed_model_digest_before_materialization",
+        "observed_source_digest_before_materialization",
+        "owner_counts"
+      ],
+      "properties": {
+        "baseline_sha": { "$ref": "#/$defs/git_sha" },
+        "category_counts": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "fingerprint_count": { "const": 2457 },
+        "fingerprint_digest": { "$ref": "#/$defs/sha256" },
+        "observed_model_digest_before_materialization": { "$ref": "#/$defs/sha256" },
+        "observed_source_digest_before_materialization": { "$ref": "#/$defs/sha256" },
+        "owner_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "direction_editoriale_pedagogique",
+            "direction_scientifique_programme",
+            "ingenierie_build_qualite"
+          ],
+          "properties": {
+            "direction_editoriale_pedagogique": { "const": 328 },
+            "direction_scientifique_programme": { "const": 1473 },
+            "ingenierie_build_qualite": { "const": 656 }
+          }
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "approved_by",
+        "approver_role",
+        "baseline_purpose",
+        "id",
+        "provisional_after_freeze",
+        "ref",
+        "release_acceptance"
+      ],
+      "properties": {
+        "approved_by": { "const": "Alaeddine Ben Rhouma" },
+        "approver_role": {
+          "const": "Direction scientifique et éditoriale Nexus Réussite"
+        },
+        "baseline_purpose": { "const": "debt_regression_control" },
+        "id": { "const": "baseline-debt-regression-control-2026-07-30" },
+        "provisional_after_freeze": { "const": false },
+        "ref": { "$ref": "#/$defs/non_empty_string" },
+        "release_acceptance": { "const": false }
+      }
+    },
+    "decision_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposition", "owner", "reason", "release_blocking"],
+      "properties": {
+        "disposition": {
+          "enum": [
+            "open_debt",
+            "generated_dependency",
+            "harvest_candidate",
+            "intentional_reuse"
+          ]
+        },
+        "owner": {
+          "enum": [
+            "direction_editoriale_pedagogique",
+            "direction_scientifique_programme",
+            "ingenierie_build_qualite"
+          ]
+        },
+        "reason": { "$ref": "#/$defs/non_empty_string" },
+        "release_blocking": { "type": "boolean" }
+      }
+    },
+    "git_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["categories"],
+      "properties": {
+        "all_true": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/non_empty_string" },
+          "uniqueItems": true
+        },
+        "categories": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/non_empty_string" },
+          "uniqueItems": true
+        },
+        "field_equals": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["boolean", "integer", "number", "string", "null"]
+          }
+        },
+        "field_in": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": ["boolean", "integer", "number", "string", "null"]
+            },
+            "uniqueItems": true
+          }
+        },
+        "not_all_true": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/non_empty_string" },
+          "uniqueItems": true
+        },
+        "source_glob": { "$ref": "#/$defs/non_empty_string" }
+      },
+      "allOf": [
+        {
+          "not": {
+            "required": ["all_true", "not_all_true"]
+          }
+        }
+      ]
+    },
+    "non_empty_string": { "type": "string", "minLength": 1 },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope"],
+      "properties": {
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/non_empty_string" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision", "id", "match", "order"],
+      "properties": {
+        "decision": { "$ref": "#/$defs/decision_output" },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "match": { "$ref": "#/$defs/match" },
+        "order": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

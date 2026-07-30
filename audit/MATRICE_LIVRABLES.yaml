@@ -426,31 +426,49 @@ manuals:
         declared_chapter_variants: []
         declared_manual_variants: []
         state: absent
-model_digest: sha256:1f20bea5812f4428a9d2c5616df8eb1492e4298f27e8fbb4a9da128fa9e3b846
+model_digest: sha256:70fa7c74a718f3c8c985a14d8d82d5e4813d264e1dc509cb576ae1a032c51d0a
 provenance:
   branch: finalisation/collection-v1
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-07-30T04:19:46Z'
+  generated_at_utc: '2026-07-30T06:09:39Z'
   generator_files:
-    scripts/build_manifest.py: sha256:fa2d6c5a06b4b1f2fd481503556596cef624006a3d6a5502333edf5030b72aae
+    scripts/baseline_qualification.py: sha256:abcd7be592273bfa37c832ca948f0154adad4514764ca8709cc851e3c726a24c
+    scripts/build_manifest.py: sha256:0e914f9ec1071e5941ef954e5dd9396e7910a05fa068c63cb08e975f1293fce7
     scripts/inventory_assembly.py: sha256:0152e2523723678b6333a9a2738cad373150f4d908612bfba7d5b506edf4b339
-    scripts/inventory_collection.py: sha256:d143196d99280b2b6409a7c0edaecfd2811a99096f912e44fb6dfa65eb84fa79
+    scripts/inventory_collection.py: sha256:c099951a4e017652befe3fad8d67311c416d3b68cc63bd1adba12be8860cdbc9
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:d35af02bcf165276be9a76adea722813cd7376f4166b9ab1ab9bc91e226ebce9
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:43dcc0823927317c52c65540c31c29351fbd920708a6a9aa4ea3675852870a13
+  generator_sha256: sha256:29dbb13f73e6670a39a537701af046167157a7ffedfd287b5e39768d98d2aeab
   generator_version: 1
   git_available: true
-  head_sha: 6de0a4d89d73a2c9ca3cfc54695f4b8a2b0606ff
-  modified_tracked: []
+  head_sha: 0f8326097982e924b96a89b063d24b61ccfc63af
+  modified_tracked:
+  - audit/ANOMALIES_BASELINE.json
+  - audit/ANOMALY_DISPOSITIONS.yaml
+  - audit/BUILD_MANIFEST.json
+  - audit/schemas/v1/anomalies-baseline.schema.json
+  - audit/schemas/v1/anomaly-dispositions.schema.json
+  - docs/codex/QUALITY_GATES.md
+  - pyproject.toml
+  - scripts/build_manifest.py
+  - scripts/inventory_collection.py
+  - tests/test_build_manifest.py
+  - tests/test_ci_audit_collection.py
+  - tests/test_inventory_collection.py
   tool_versions:
     git: git version 2.43.0
     latexmk: Latexmk, John Collins, 31 Jan. 2024. Version 4.83
     pdfinfo: pdfinfo version 24.02.0
     python: Python 3.12.3
     texlive: pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)
-  untracked_relevant: []
+  untracked_relevant:
+  - audit/BASELINE_QUALIFICATION_POLICY.yaml
+  - audit/UNQUALIFIED_ANOMALIES.json
+  - audit/UNQUALIFIED_ANOMALIES.md
+  - audit/schemas/v1/baseline-qualification-policy.schema.json
+  - audit/schemas/v1/unqualified-anomalies.schema.json
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:7160cd1f547a33f39d2e951da46bccd08731c7d000a40468a44d9cfc727e5033
+source_digest: sha256:00b734105ffb4ec0f85cabb58b0d1ec095ae4ecc4506281ab6e56c02fa5ca9b8

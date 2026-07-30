@@ -205,6 +205,364 @@ def test_empty_manifest_is_model_valid_and_yields_no_observed_build(
     assert _load(inventory_module, tmp_path) == []
 
 
+def test_stale_empty_manifest_requires_explicit_refresh(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    stale = _manifest(head, [])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    stale["model_digest"] = "sha256:" + "1" * 64
+    _write_manifest(tmp_path, stale)
+
+    with pytest.raises(inventory_module.InventoryError, match="source_digest"):
+        _load(inventory_module, tmp_path)
+    with pytest.raises(inventory_module.InventoryError, match="source_digest"):
+        inventory_module._load_observed_build_manifest(
+            tmp_path,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=True,
+        )
+
+
+def test_bounded_refresh_loader_never_ignores_nonempty_manifest_digests(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    stale = _manifest(head, [build])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale)
+
+    with pytest.raises(inventory_module.InventoryError, match="source_digest"):
+        inventory_module._load_observed_build_manifest(
+            tmp_path,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=True,
+        )
+
+
+def test_empty_refresh_derivation_uses_only_the_bounded_inventory_path(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[Path, dict[str, object]]] = []
+
+    def build_inventory(root: Path) -> dict[str, object]:
+        calls.append((root, {}))
+        return {"source_digest": SHA256_A}
+
+    fake_inventory = SimpleNamespace(
+        _model_digest=lambda _inventory: SHA256_B,
+        _build_inventory_for_empty_manifest_refresh=build_inventory,
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: fake_inventory,
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_git_state",
+        lambda _root: ("a" * 40, "fixture", True),
+    )
+
+    envelope = manifest_module._derive_empty_refresh_envelope(tmp_path)
+
+    assert calls == [
+        (tmp_path, {})
+    ]
+    assert envelope == {
+        "artifact_type": "build_manifest",
+        "build_state_digest": _state_digest([]),
+        "builds": [],
+        "generated_by": "build_manifest.py",
+        "model_digest": SHA256_B,
+        "provenance": {
+            "branch": "fixture",
+            "dirty": True,
+            "head_sha": "a" * 40,
+        },
+        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
+        "schema_version": 1,
+        "source_digest": SHA256_A,
+    }
+
+
+def test_refresh_empty_manifest_restores_strict_inventory_loading(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    stale = _manifest(head, [])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    stale["model_digest"] = "sha256:" + "1" * 64
+    _write_manifest(tmp_path, stale)
+    expected = _manifest(head, [])
+    monkeypatch.setattr(
+        manifest_module,
+        "_derive_empty_refresh_envelope",
+        lambda _root: expected,
+    )
+
+    manifest_module.refresh_empty_manifest(
+        tmp_path / "audit/BUILD_MANIFEST.json"
+    )
+
+    payload = json.loads(
+        (tmp_path / "audit/BUILD_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    assert payload == expected
+    assert _load(inventory_module, tmp_path) == []
+
+
+def test_refresh_empty_manifest_refuses_nonempty_manifest_without_changes(
+    tmp_path: Path,
+    manifest_module,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    _write_manifest(tmp_path, _manifest(head, [build]))
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    original = path.read_bytes()
+
+    with pytest.raises(manifest_module.BuildManifestError, match="vide"):
+        manifest_module.refresh_empty_manifest(path)
+
+    assert path.read_bytes() == original
+
+
+@pytest.mark.parametrize("kind", ["symlink", "hardlink"])
+def test_refresh_empty_manifest_rejects_linked_destination(
+    tmp_path: Path,
+    manifest_module,
+    kind: str,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    external = tmp_path.parent / f"{tmp_path.name}-{kind}-manifest.json"
+    external.write_text(
+        json.dumps(_manifest(head, [])),
+        encoding="utf-8",
+    )
+    if kind == "symlink":
+        path.symlink_to(external)
+    else:
+        os.link(external, path)
+    original = external.read_bytes()
+
+    with pytest.raises(manifest_module.BuildManifestError, match="non sûr|invalide"):
+        manifest_module.refresh_empty_manifest(path)
+
+    assert external.read_bytes() == original
+
+
+def test_refresh_empty_manifest_rejects_parent_substitution(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    stale = _manifest(head, [])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale)
+    expected = _manifest(head, [])
+    monkeypatch.setattr(
+        manifest_module,
+        "_derive_empty_refresh_envelope",
+        lambda _root: expected,
+    )
+    audit = tmp_path / "audit"
+    path = audit / "BUILD_MANIFEST.json"
+    original = path.read_bytes()
+    external_audit = tmp_path.parent / f"{tmp_path.name}-refresh-external"
+    external_audit.mkdir()
+    external_manifest = external_audit / "BUILD_MANIFEST.json"
+    external_manifest.write_bytes(original)
+    external_original = external_manifest.read_bytes()
+    parked = tmp_path / "audit-refresh-parked"
+    real_replace = manifest_module.os.replace
+    attacked = False
+
+    def substitute_parent(
+        source: str,
+        destination: str,
+        *,
+        src_dir_fd: int,
+        dst_dir_fd: int,
+    ) -> None:
+        nonlocal attacked
+        if destination == "BUILD_MANIFEST.json" and not attacked:
+            attacked = True
+            audit.rename(parked)
+            audit.symlink_to(external_audit, target_is_directory=True)
+        real_replace(
+            source,
+            destination,
+            src_dir_fd=src_dir_fd,
+            dst_dir_fd=dst_dir_fd,
+        )
+
+    monkeypatch.setattr(manifest_module.os, "replace", substitute_parent)
+
+    with pytest.raises(manifest_module.BuildManifestError, match="parent modifié"):
+        manifest_module.refresh_empty_manifest(path)
+
+    assert attacked is True
+    assert external_manifest.read_bytes() == external_original
+    assert (parked / "BUILD_MANIFEST.json").read_bytes() == original
+
+
+@pytest.mark.parametrize("drift", ["head", "source"])
+def test_refresh_empty_manifest_rejects_drift_after_staging(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    drift: str,
+) -> None:
+    _git_repository(tmp_path)
+    source = tmp_path / "tracked-source.tex"
+    source.write_text("initial", encoding="utf-8")
+    subprocess.run(
+        ["git", "-C", str(tmp_path), "add", "tracked-source.tex"],
+        check=True,
+    )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(tmp_path),
+            "-c",
+            "user.name=Observed Build Tests",
+            "-c",
+            "user.email=observed@example.invalid",
+            "commit",
+            "-qm",
+            "tracked source",
+        ],
+        check=True,
+    )
+    head = subprocess.run(
+        ["git", "-C", str(tmp_path), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    _install_schema(tmp_path)
+    stale = _manifest(head, [])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale)
+    expected = _manifest(head, [])
+    monkeypatch.setattr(
+        manifest_module,
+        "_derive_empty_refresh_envelope",
+        lambda _root: expected,
+    )
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    original = path.read_bytes()
+    real_write_all = manifest_module._write_all
+    attacked = False
+
+    def drift_after_staging(descriptor: int, payload: bytes) -> None:
+        nonlocal attacked
+        real_write_all(descriptor, payload)
+        if attacked:
+            return
+        attacked = True
+        if drift == "source":
+            source.write_text("mutated", encoding="utf-8")
+        else:
+            subprocess.run(
+                [
+                    "git",
+                    "-C",
+                    str(tmp_path),
+                    "-c",
+                    "user.name=Observed Build Tests",
+                    "-c",
+                    "user.email=observed@example.invalid",
+                    "commit",
+                    "--allow-empty",
+                    "-qm",
+                    "concurrent head",
+                ],
+                check=True,
+            )
+
+    monkeypatch.setattr(manifest_module, "_write_all", drift_after_staging)
+
+    with pytest.raises(manifest_module.BuildManifestError, match="destination"):
+        manifest_module.refresh_empty_manifest(path)
+
+    assert attacked is True
+    assert path.read_bytes() == original
+
+
+def test_refresh_empty_manifest_rolls_back_and_recovers_after_fsync_failure(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    stale = _manifest(head, [])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale)
+    expected = _manifest(head, [])
+    monkeypatch.setattr(
+        manifest_module,
+        "_derive_empty_refresh_envelope",
+        lambda _root: expected,
+    )
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    original = path.read_bytes()
+    real_fsync = manifest_module.os.fsync
+    failed = False
+
+    def fail_first_directory_fsync(descriptor: int) -> None:
+        nonlocal failed
+        metadata = os.fstat(descriptor)
+        if stat.S_ISDIR(metadata.st_mode) and not failed:
+            failed = True
+            raise OSError(errno.EIO, "simulated directory fsync failure")
+        real_fsync(descriptor)
+
+    monkeypatch.setattr(
+        manifest_module.os,
+        "fsync",
+        fail_first_directory_fsync,
+    )
+
+    with pytest.raises(manifest_module.BuildManifestError, match="transaction"):
+        manifest_module.refresh_empty_manifest(path)
+
+    assert failed is True
+    assert path.read_bytes() == original
+    assert not list(path.parent.glob(f".{path.name}.*"))
+
+    manifest_module.refresh_empty_manifest(path)
+
+    assert json.loads(path.read_text(encoding="utf-8")) == expected
+
+
 def test_complete_manifest_is_loaded_with_order_preserved(
     tmp_path: Path,
     inventory_module,
@@ -1675,6 +2033,54 @@ def test_receipt_cli_rejects_failed_build_without_writing(
     assert completed.returncode == 2
     assert "compilation" in completed.stderr
     assert manifest_path.read_bytes() == original
+
+
+def test_refresh_cli_subprocess_reports_success_without_receipt(
+    tmp_path: Path,
+) -> None:
+    loader = (
+        "import importlib.util, pathlib; "
+        f"p=pathlib.Path({str(MANIFEST_SCRIPT)!r}); "
+        "s=importlib.util.spec_from_file_location('refresh_cli_test', p); "
+        "m=importlib.util.module_from_spec(s); s.loader.exec_module(m); "
+        "m.refresh_empty_manifest=lambda _path: None; "
+        "raise SystemExit(m._run(['--refresh-empty']))"
+    )
+
+    completed = subprocess.run(
+        [sys.executable, "-c", loader],
+        cwd=tmp_path,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+    assert completed.returncode == 0
+    assert completed.stdout.strip() == "build manifest vide rafraîchi"
+    assert completed.stderr == ""
+
+
+def test_refresh_cli_is_mutually_exclusive_with_receipt(
+    tmp_path: Path,
+) -> None:
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(MANIFEST_SCRIPT),
+            "--refresh-empty",
+            "--receipt",
+            "build/receipt.json",
+        ],
+        cwd=tmp_path,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+    assert completed.returncode == 2
+    assert "not allowed with argument" in completed.stderr
 
 
 @pytest.mark.parametrize(

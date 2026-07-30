@@ -72,6 +72,7 @@ def test_ci_configuration_is_explicit_and_pinned() -> None:
     assert "ignore_errors" not in config["tool"]["mypy"]
     typed_files = set(config["tool"]["mypy"]["files"])
     assert typed_files == {
+        "scripts/baseline_qualification.py",
         "scripts/check_charte_sync.py",
         "scripts/ci_audit_collection.py",
         "scripts/inventory_graph.py",
@@ -132,6 +133,7 @@ def test_audit_workflow_has_minimal_permissions_and_immutable_actions() -> None:
 def test_audit_workflow_runs_the_complete_unweakened_contract() -> None:
     workflow, text = _workflow()
     forbidden = (
+        "--materialize-baseline-qualifications",
         "--update-baseline",
         "continue-on-error",
         "pytest.mark.skip",

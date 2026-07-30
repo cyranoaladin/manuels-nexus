@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:unqualified-anomalies",
+  "title": "Nexus unqualified anomaly report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "anomalies",
+    "artifact_type",
+    "fingerprint_schema_version",
+    "generated_by",
+    "policy_digest",
+    "schema_ref",
+    "schema_version",
+    "summary"
+  ],
+  "properties": {
+    "anomalies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/anomaly" }
+    },
+    "artifact_type": { "const": "unqualified_anomalies" },
+    "fingerprint_schema_version": { "const": 1 },
+    "generated_by": { "const": "baseline_qualification.py" },
+    "policy_digest": { "$ref": "#/$defs/sha256" },
+    "schema_ref": {
+      "const": "audit/schemas/v1/unqualified-anomalies.schema.json"
+    },
+    "schema_version": { "const": 1 },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unqualified"],
+      "properties": {
+        "unqualified": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "$defs": {
+    "anomaly": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "category",
+        "chapter",
+        "fingerprint",
+        "manual",
+        "reason",
+        "source"
+      ],
+      "properties": {
+        "category": { "type": "string", "minLength": 1 },
+        "chapter": { "type": ["string", "null"] },
+        "fingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16,64}$"
+        },
+        "manual": { "type": ["string", "null"] },
+        "reason": {
+          "enum": ["ambiguous_policy_rules", "no_policy_rule"]
+        },
+        "source": { "type": ["string", "null"] }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

@@ -481,36 +481,31 @@ def _restore_bytes(
             pass
 
 
-def record_successful_build(
+def _replace_manifest_transactionally(
     manifest_path: Path,
-    build: Mapping[str, Any],
     *,
-    envelope: Mapping[str, Any],
-    compile_succeeded: bool,
-    preflight_succeeded: bool,
-    validator: Callable[[dict[str, Any]], None],
+    transform: Callable[
+        [dict[str, Any], tuple[str, str, bool]],
+        dict[str, Any],
+    ],
+    expected_git_state: tuple[str, str, bool] | None = None,
+    expected_evidence_fingerprint: str | None = None,
 ) -> None:
-    """Merge one proved build under a Git-private lock and descriptor-pinned write."""
+    """Replace the canonical manifest under a pinned, recoverable transaction."""
 
-    if not compile_succeeded:
-        raise BuildManifestError("compilation non réussie")
-    if not preflight_succeeded:
-        raise BuildManifestError("préflight non réussi")
-    _validate_build_shape(build)
     root = _repository_root(manifest_path)
     initial_git_state = _git_state(root)
     initial_evidence_fingerprint = _git_evidence_fingerprint(root)
-    current_head, current_branch, current_dirty = initial_git_state
-    provenance = envelope.get("provenance")
     if (
-        not isinstance(provenance, Mapping)
-        or provenance.get("head_sha") != current_head
-        or provenance.get("branch") != current_branch
-        or provenance.get("dirty") is not current_dirty
+        expected_git_state is not None
+        and initial_git_state != expected_git_state
     ):
-        raise BuildManifestError("provenance de l'enveloppe périmée ou forgée")
-    if build.get("git_sha") != current_head:
-        raise BuildManifestError("git_sha du build périmé")
+        raise BuildManifestError("état Git modifié avant la transaction")
+    if (
+        expected_evidence_fingerprint is not None
+        and initial_evidence_fingerprint != expected_evidence_fingerprint
+    ):
+        raise BuildManifestError("sources modifiées avant la transaction")
     lock_path = _git_lock_path(root)
     lock_descriptor = os.open(
         lock_path,
@@ -557,38 +552,13 @@ def record_successful_build(
             )
         original = _read_descriptor(manifest_descriptor)
         current = _load_manifest_bytes(original)
-        if not _same_envelope(current, envelope):
-            raise BuildManifestError("enveloppe incompatible")
-        builds = [dict(value) for value in current["builds"]]
-        if current.get("build_state_digest") != build_state_digest(builds):
-            raise BuildManifestError("build_state_digest courant incohérent")
-        identity = (build.get("manual"), build.get("variant"))
-        if any((value.get("manual"), value.get("variant")) == identity for value in builds):
-            raise BuildManifestError(
-                f"build observé en doublon: {identity[0]}:{identity[1]}"
-            )
-        if any(
-            value.get("pdf_path") == build.get("pdf_path")
-            or value.get("pdf_sha256") == build.get("pdf_sha256")
-            for value in builds
-        ):
-            raise BuildManifestError("PDF ou digest déjà associé à un autre build")
-        builds.append(dict(build))
-        builds.sort(
-            key=lambda value: (
-                str(value.get("manual", "")),
-                str(value.get("variant", "")),
-                str(value.get("pdf_path", "")),
-            )
-        )
-        updated = dict(envelope)
-        updated["builds"] = builds
-        updated["build_state_digest"] = build_state_digest(builds)
         try:
-            validator(updated)
+            updated = transform(current, initial_git_state)
+        except BuildManifestError:
+            raise
         except Exception as exc:
             raise BuildManifestError(
-                f"validation du manifeste refusée: {type(exc).__name__}"
+                f"préparation du manifeste refusée: {type(exc).__name__}"
             ) from exc
         serialized = (
             json.dumps(updated, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
@@ -684,6 +654,89 @@ def record_successful_build(
             fcntl.flock(lock_descriptor, fcntl.LOCK_UN)
         finally:
             os.close(lock_descriptor)
+
+
+def record_successful_build(
+    manifest_path: Path,
+    build: Mapping[str, Any],
+    *,
+    envelope: Mapping[str, Any],
+    compile_succeeded: bool,
+    preflight_succeeded: bool,
+    validator: Callable[[dict[str, Any]], None],
+) -> None:
+    """Merge one proved build under a Git-private lock and descriptor-pinned write."""
+
+    if not compile_succeeded:
+        raise BuildManifestError("compilation non réussie")
+    if not preflight_succeeded:
+        raise BuildManifestError("préflight non réussi")
+    _validate_build_shape(build)
+    root = _repository_root(manifest_path)
+    initial_git_state = _git_state(root)
+    initial_evidence_fingerprint = _git_evidence_fingerprint(root)
+    current_head, current_branch, current_dirty = initial_git_state
+    provenance = envelope.get("provenance")
+    if (
+        not isinstance(provenance, Mapping)
+        or provenance.get("head_sha") != current_head
+        or provenance.get("branch") != current_branch
+        or provenance.get("dirty") is not current_dirty
+    ):
+        raise BuildManifestError("provenance de l'enveloppe périmée ou forgée")
+    if build.get("git_sha") != current_head:
+        raise BuildManifestError("git_sha du build périmé")
+
+    def merge_build(
+        current: dict[str, Any],
+        _git_state_snapshot: tuple[str, str, bool],
+    ) -> dict[str, Any]:
+        if not _same_envelope(current, envelope):
+            raise BuildManifestError("enveloppe incompatible")
+        builds = [dict(value) for value in current["builds"]]
+        if current.get("build_state_digest") != build_state_digest(builds):
+            raise BuildManifestError("build_state_digest courant incohérent")
+        identity = (build.get("manual"), build.get("variant"))
+        if any(
+            (value.get("manual"), value.get("variant")) == identity
+            for value in builds
+        ):
+            raise BuildManifestError(
+                f"build observé en doublon: {identity[0]}:{identity[1]}"
+            )
+        if any(
+            value.get("pdf_path") == build.get("pdf_path")
+            or value.get("pdf_sha256") == build.get("pdf_sha256")
+            for value in builds
+        ):
+            raise BuildManifestError(
+                "PDF ou digest déjà associé à un autre build"
+            )
+        builds.append(dict(build))
+        builds.sort(
+            key=lambda value: (
+                str(value.get("manual", "")),
+                str(value.get("variant", "")),
+                str(value.get("pdf_path", "")),
+            )
+        )
+        updated = dict(envelope)
+        updated["builds"] = builds
+        updated["build_state_digest"] = build_state_digest(builds)
+        try:
+            validator(updated)
+        except Exception as exc:
+            raise BuildManifestError(
+                f"validation du manifeste refusée: {type(exc).__name__}"
+            ) from exc
+        return updated
+
+    _replace_manifest_transactionally(
+        manifest_path,
+        transform=merge_build,
+        expected_git_state=initial_git_state,
+        expected_evidence_fingerprint=initial_evidence_fingerprint,
+    )
 
 
 def _git_root_from_path(path: Path) -> Path:
@@ -1162,23 +1215,163 @@ def record_from_receipt(receipt_path: Path) -> None:
     )
 
 
+def _validate_refresh_source_is_empty(root: Path) -> None:
+    inventory_module = _load_inventory_module()
+    try:
+        snapshot = inventory_module._ConfinedJsonSnapshot(
+            root=root,
+            relative=inventory_module.PurePosixPath(
+                _MANIFEST_RELATIVE.as_posix()
+            ),
+            role="manifeste de build",
+        )
+        snapshot.__enter__()
+        payload = snapshot.json_mapping()
+        inventory_module._validate_artifact_schema(
+            payload,
+            root=root,
+            path=_MANIFEST_RELATIVE,
+        )
+        builds = payload.get("builds")
+        if not isinstance(builds, list):
+            raise BuildManifestError("builds du manifeste invalide")
+        if builds:
+            raise BuildManifestError(
+                "refresh interdit: le manifeste doit être strictement vide"
+            )
+        if payload.get("build_state_digest") != build_state_digest([]):
+            raise BuildManifestError("build_state_digest vide incohérent")
+        snapshot.verify()
+    except BuildManifestError:
+        raise
+    except Exception as exc:
+        raise BuildManifestError(
+            f"manifeste vide non sûr ou invalide: {type(exc).__name__}"
+        ) from exc
+    finally:
+        if "snapshot" in locals():
+            snapshot.close()
+
+
+def _derive_empty_refresh_envelope(root: Path) -> dict[str, Any]:
+    inventory_module = _load_inventory_module()
+    try:
+        inventory = (
+            inventory_module._build_inventory_for_empty_manifest_refresh(
+                root
+            )
+        )
+        source_digest = str(inventory["source_digest"])
+        model_digest = str(inventory_module._model_digest(inventory))
+    except Exception as exc:
+        raise BuildManifestError(
+            f"calcul borné des digests impossible: {type(exc).__name__}"
+        ) from exc
+    head, branch, dirty = _git_state(root)
+    return {
+        "artifact_type": "build_manifest",
+        "build_state_digest": build_state_digest([]),
+        "builds": [],
+        "generated_by": "build_manifest.py",
+        "model_digest": model_digest,
+        "provenance": {
+            "branch": branch,
+            "dirty": dirty,
+            "head_sha": head,
+        },
+        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
+        "schema_version": 1,
+        "source_digest": source_digest,
+    }
+
+
+def refresh_empty_manifest(manifest_path: Path) -> None:
+    """Refresh only the stale envelope of a validated empty manifest."""
+
+    root = _repository_root(manifest_path)
+    initial_git_state = _git_state(root)
+    initial_evidence_fingerprint = _git_evidence_fingerprint(root)
+    _validate_refresh_source_is_empty(root)
+    envelope = _derive_empty_refresh_envelope(root)
+    if (
+        _git_state(root) != initial_git_state
+        or _git_evidence_fingerprint(root) != initial_evidence_fingerprint
+    ):
+        raise BuildManifestError("sources modifiées pendant le calcul des digests")
+    provenance = envelope.get("provenance")
+    if (
+        not isinstance(provenance, Mapping)
+        or provenance.get("head_sha") != initial_git_state[0]
+        or provenance.get("branch") != initial_git_state[1]
+        or provenance.get("dirty") is not initial_git_state[2]
+    ):
+        raise BuildManifestError("provenance rafraîchie incohérente")
+
+    def replace_empty(
+        current: dict[str, Any],
+        _git_state_snapshot: tuple[str, str, bool],
+    ) -> dict[str, Any]:
+        builds = current.get("builds")
+        if builds != []:
+            raise BuildManifestError(
+                "refresh interdit: le manifeste doit être strictement vide"
+            )
+        if current.get("build_state_digest") != build_state_digest([]):
+            raise BuildManifestError("build_state_digest vide incohérent")
+        inventory_module = _load_inventory_module()
+        try:
+            inventory_module._validate_artifact_schema(
+                current,
+                root=root,
+                path=_MANIFEST_RELATIVE,
+            )
+            inventory_module._validate_artifact_schema(
+                envelope,
+                root=root,
+                path=_MANIFEST_RELATIVE,
+            )
+        except Exception as exc:
+            raise BuildManifestError(
+                f"validation du manifeste refusée: {type(exc).__name__}"
+            ) from exc
+        return dict(envelope)
+
+    _replace_manifest_transactionally(
+        manifest_path,
+        transform=replace_empty,
+        expected_git_state=initial_git_state,
+        expected_evidence_fingerprint=initial_evidence_fingerprint,
+    )
+
+
 def _run(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(
         description="Enregistre une preuve de build Nexus validée localement."
     )
-    parser.add_argument(
+    actions = parser.add_mutually_exclusive_group(required=True)
+    actions.add_argument(
         "--receipt",
         type=Path,
-        required=True,
         help="receipt JSON post-compilation et post-préflight",
+    )
+    actions.add_argument(
+        "--refresh-empty",
+        action="store_true",
+        help="rafraîchit uniquement l'enveloppe du manifeste vide canonique",
     )
     arguments = parser.parse_args(argv)
     try:
-        record_from_receipt(arguments.receipt)
+        if arguments.refresh_empty:
+            refresh_empty_manifest(Path.cwd() / _MANIFEST_RELATIVE)
+        else:
+            record_from_receipt(arguments.receipt)
     except BuildManifestError as exc:
         print(f"build manifest refusé: {exc}", file=sys.stderr)
         return 2
-    print("build manifest enregistré")
+    if arguments.refresh_empty:
+        print("build manifest vide rafraîchi")
+    else:
+        print("build manifest enregistré")
     return 0
 
 

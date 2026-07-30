@@ -72,6 +72,7 @@
         "locator_key",
         "occurrence_count",
         "owner",
+        "qualification_digest",
         "qualified",
         "severity"
       ],
@@ -83,6 +84,7 @@
             "open_debt",
             "false_positive",
             "generated_dependency",
+            "harvest_candidate",
             "intentional_reuse",
             "accepted_exception"
           ]
@@ -92,6 +94,7 @@
         "locator_key": { "$ref": "#/$defs/non_empty_string" },
         "occurrence_count": { "type": "integer", "minimum": 1 },
         "owner": { "$ref": "#/$defs/non_empty_string" },
+        "qualification_digest": { "$ref": "#/$defs/sha256" },
         "qualified": { "const": true },
         "severity": {
           "enum": ["info", "warning", "error", "blocking", "regression"]
@@ -109,6 +112,7 @@
             "open_debt",
             "false_positive",
             "generated_dependency",
+            "harvest_candidate",
             "intentional_reuse",
             "accepted_exception",
             "fixed"
