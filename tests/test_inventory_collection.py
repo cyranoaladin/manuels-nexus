@@ -658,6 +658,69 @@ def test_source_roles_preserves_fixture_precedence_for_canonical_harvest_fixture
     assert assignments[fixture] == "fixture"
 
 
+def test_source_roles_preserve_literal_backslash_git_path(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    literal = r"NSI\scripts\assemble.py"
+    _write(
+        tmp_path / literal,
+        'ORDER = [("cours", "*")]\nVARIANTS = ["complet"]\n',
+    )
+    _track(tmp_path, literal)
+
+    tracked = inventory_module.git_tracked_files(tmp_path)
+    assignments = inventory_module._load_source_roles(tmp_path, tracked)
+
+    assert tracked == (literal,)
+    assert assignments == {literal: "transversal"}
+    assert inventory_module._classify_source_path(literal, assignments) == "transversal"
+    assert (
+        inventory_module._classify_source_path(
+            literal,
+            {"NSI/scripts/assemble.py": "fixture"},
+        )
+        == "fixture"
+    )
+    inventory = inventory_module.build_inventory(tmp_path)
+    assert not any(
+        assembly["assembler"] == literal for assembly in inventory["assemblies"]
+    )
+
+
+def test_source_roles_reject_normalized_git_path_collision_deterministically(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    canonical = "NSI/scripts/assemble.py"
+    literal = r"NSI\scripts\assemble.py"
+    source = 'ORDER = [("cours", "*")]\nVARIANTS = ["complet"]\n'
+    _write(tmp_path / canonical, source)
+    _write(tmp_path / literal, source)
+    _track(tmp_path, canonical, literal)
+    tracked = inventory_module.git_tracked_files(tmp_path)
+
+    errors: list[str] = []
+    for paths in (tracked, tuple(reversed(tracked))):
+        with pytest.raises(
+            inventory_module.InventoryError,
+            match="collision.*NSI/scripts/assemble.py",
+        ) as exc_info:
+            inventory_module._load_source_roles(tmp_path, paths)
+        errors.append(str(exc_info.value))
+
+    assert errors[0] == errors[1]
+    assert canonical in errors[0]
+    assert literal in errors[0]
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="collision.*NSI/scripts/assemble.py",
+    ):
+        inventory_module.build_inventory(tmp_path)
+
+
 def test_source_roles_rejects_digest_valid_reclassification_of_tracked_object(
     tmp_path: Path,
     inventory_module,
@@ -3011,6 +3074,104 @@ def test_pdf_inventory_prefers_pdfinfo_page_count(
     assert inventory["manuals"]["1NSI"]["compiled_artifacts"] == inventory["pdfs"]
     assert inventory["manuals"]["1NSI"]["compiled_variants"]["manual"] == ["eleve"]
     assert "observed_builds" not in inventory
+
+
+@pytest.mark.parametrize(
+    "page_count",
+    [
+        pytest.param(0, id="zero"),
+        pytest.param(True, id="bool"),
+    ],
+)
+def test_generated_pdf_with_invalid_count_is_not_compiled_evidence(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    page_count: int | bool,
+) -> None:
+    _init_repository(tmp_path)
+    pdf = "NSI/build/MANUEL_1NSI_eleve.pdf"
+    _write(tmp_path / pdf, "contenu simule")
+    _track(tmp_path, pdf)
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        lambda _path: (page_count, None),
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+    manual = inventory["manuals"]["1NSI"]
+
+    assert artifact["path"] == pdf
+    assert artifact["status"] == "counted"
+    assert artifact["page_count"] is page_count or artifact["page_count"] == page_count
+    assert manual["compiled_artifacts"] == []
+    assert manual["compiled_variants"]["manual"] == []
+    assert inventory["coherence_checks"]["artifact_cardinality"] == {
+        "ok": True,
+        "violations": [],
+    }
+
+
+def test_unreadable_generated_pdf_is_not_compiled_evidence(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _init_repository(tmp_path)
+    pdf = "NSI/build/MANUEL_1NSI_eleve.pdf"
+    _write(tmp_path / pdf, "contenu invalide")
+    _track(tmp_path, pdf)
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        lambda _path: (None, "pdfinfo invalide"),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_python",
+        lambda _path: (None, "lecteur Python invalide"),
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+    manual = inventory["manuals"]["1NSI"]
+
+    assert artifact["path"] == pdf
+    assert artifact["status"] == "page_count_unavailable"
+    assert artifact["page_count"] is None
+    assert manual["compiled_artifacts"] == []
+    assert manual["compiled_variants"]["manual"] == []
+    assert inventory["coherence_checks"]["artifact_cardinality"] == {
+        "ok": True,
+        "violations": [],
+    }
+
+
+def test_missing_generated_pdf_is_not_compiled_evidence(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _init_repository(tmp_path)
+    pdf = "NSI/build/MANUEL_1NSI_eleve.pdf"
+    _write(tmp_path / pdf, "contenu indexe puis supprime")
+    _track(tmp_path, pdf)
+    (tmp_path / pdf).unlink()
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    artifact = inventory["pdfs"][0]
+    manual = inventory["manuals"]["1NSI"]
+
+    assert artifact["path"] == pdf
+    assert artifact["status"] == "page_count_unavailable"
+    assert artifact["page_count"] is None
+    assert manual["compiled_artifacts"] == []
+    assert manual["compiled_variants"]["manual"] == []
+    assert inventory["coherence_checks"]["artifact_cardinality"] == {
+        "ok": True,
+        "violations": [],
+    }
 
 
 def test_missing_tracked_pdf_has_deterministic_checkout_status(

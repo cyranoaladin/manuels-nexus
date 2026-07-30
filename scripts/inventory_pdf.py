@@ -78,7 +78,10 @@ def aggregate_artifacts(
     manual_variants: dict[tuple[str, str], set[str]] = defaultdict(set)
     chapter_variants: dict[tuple[str, str, str], set[str]] = defaultdict(set)
     for artifact in inventory["pdfs"]:
-        if artifact["source_role"] not in compiled_source_roles:
+        if not is_compilation_evidence(
+            artifact,
+            compiled_source_roles=compiled_source_roles,
+        ):
             continue
         manual_id = artifact["manual"]
         if manual_id is None or manual_id not in inventory["manuals"]:
@@ -105,6 +108,21 @@ def aggregate_artifacts(
                 chapter["compiled_variants"][scope] = sorted(
                     chapter_variants[(manual_id, chapter_id, scope)]
                 )
+
+
+def is_compilation_evidence(
+    artifact: Mapping[str, Any],
+    *,
+    compiled_source_roles: frozenset[str],
+) -> bool:
+    page_count = artifact.get("page_count")
+    return (
+        artifact.get("source_role") in compiled_source_roles
+        and artifact.get("status") == "counted"
+        and isinstance(page_count, int)
+        and not isinstance(page_count, bool)
+        and page_count > 0
+    )
 
 
 def inventory_pdfs(

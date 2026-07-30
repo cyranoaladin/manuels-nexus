@@ -620,11 +620,31 @@ def _collect_role_patterns(root: Path) -> tuple[dict[str, list[str]], str, list[
     return role_patterns, default_role, role_order
 
 
-def _load_source_roles(root: Path, tracked_files: Iterable[str] | None = None) -> dict[str, str]:
+def _load_source_roles(
+    root: Path,
+    tracked_files: Iterable[str] | None = None,
+) -> dict[str, str]:
     role_patterns, default_role, ordered_roles = _collect_role_patterns(root)
     assignments: dict[str, str] = {}
     tracked = git_tracked_files(root) if tracked_files is None else tracked_files
-    for rel in sorted(set(tracked)):
+    raw_paths = sorted(set(tracked))
+    normalized_paths: dict[str, list[str]] = defaultdict(list)
+    for rel in raw_paths:
+        normalized_paths[_normalize_path_for_match(rel)].append(rel)
+    collisions = [
+        (normalized, raw_group)
+        for normalized, raw_group in sorted(normalized_paths.items())
+        if len(raw_group) > 1
+    ]
+    if collisions:
+        details = "; ".join(
+            f"{normalized} <- {', '.join(raw_group)}"
+            for normalized, raw_group in collisions
+        )
+        raise InventoryError(
+            "collision de chemins Git après normalisation: " + details
+        )
+    for rel in raw_paths:
         normalized = _normalize_path_for_match(rel)
         role = default_role
         for candidate in ordered_roles:
@@ -634,7 +654,7 @@ def _load_source_roles(root: Path, tracked_files: Iterable[str] | None = None) -
                     break
             if role != default_role:
                 break
-        assignments[normalized] = role
+        assignments[rel] = role
     _validate_tracked_source_role_assignments(assignments)
     return assignments
 
@@ -679,6 +699,8 @@ def _classify_source_path(
     role_patterns: Mapping[str, list[str]] | None = None,
     role_order: list[str] | None = None,
 ) -> str:
+    if path in roles:
+        return roles[path]
     normalized = _normalize_path_for_match(path)
     if normalized in roles:
         return roles[normalized]
@@ -2244,7 +2266,10 @@ def validate_inventory_coherence(inventory: Mapping[str, Any]) -> dict[str, Any]
             for artifact in inventory.get("pdfs", [])
             if isinstance(artifact, Mapping)
             and artifact.get("manual") == manual_id
-            and artifact.get("source_role") in COMPILED_PDF_SOURCE_ROLES
+            and _pdf_core.is_compilation_evidence(
+                artifact,
+                compiled_source_roles=COMPILED_PDF_SOURCE_ROLES,
+            )
         ]
         if len(manual_paths) != len(expected_manual_paths):
             artifact_violations.append(
