@@ -2790,7 +2790,7 @@ def test_anomalies_baseline_schema_requires_active_qualification_identity(
         jsonschema.Draft202012Validator(schema).validate(payload)
 
 
-def test_repository_baseline_is_provisional_schema_valid_and_gate_blocking(
+def test_repository_baseline_is_frozen_schema_valid_and_gate_green(
     inventory_module,
 ) -> None:
     path = ROOT / "audit/ANOMALIES_BASELINE.json"
@@ -2803,13 +2803,13 @@ def test_repository_baseline_is_provisional_schema_valid_and_gate_blocking(
     )
     gate = inventory_module._fail_on_new_gate(ROOT)
 
-    assert payload["provisional"] is True
+    assert payload["provisional"] is False
+    assert payload["baseline_purpose"] == "debt_regression_control"
+    assert payload["release_acceptance"] is False
     assert payload["fingerprint_schema_version"] == 1
-    assert gate["success"] is False
-    assert gate["exit_code"] == 5
-    assert gate["reasons"] == [
-        "baseline provisoire: comparaison de dette non obligatoire"
-    ]
+    assert gate["success"] is True
+    assert gate["exit_code"] == 0
+    assert gate["reasons"] == []
 
 
 def _fingerprint_case(**overrides: object) -> dict[str, object]:
