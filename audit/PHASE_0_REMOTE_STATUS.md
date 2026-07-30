@@ -3,109 +3,86 @@
 ## Mission
 
 - Branche locale observée : `finalisation/collection-v1`
-- SHA local observé : `363c8352695792e532574160873d0f391348667a`
-- SHA distant observé : `origin/finalisation/collection-v1` = `363c8352695792e532574160873d0f391348667a`
+- SHA local observé : `e6c2f70d4b12e1eb80cd37177874e986abf95a1a`
+- SHA distant observé : `origin/finalisation/collection-v1` = `e6c2f70d4b12e1eb80cd37177874e986abf95a1a`
 - `git rev-list --left-right --count origin/finalisation/collection-v1...HEAD` : `0 0`
-- Worktree de départ propre.
+- Worktree propre.
 
-## Run CI analysé
+## PR et run analysé
 
-- `run`: `30546406535`
-- `job`: `90883561872`
-- URL: <https://github.com/cyranoaladin/manuels-nexus/actions/runs/30546406535>
-- Résumé : échec aux deux étapes `Gates Phase 0 aux codes exacts` et `Suite complète avec couverture lignes et branches`.
-- Les artefacts du run ont été téléchargés dans `/tmp/manuels-ci-30546406535.*` sans modification du dépôt.
+- PR : [#1](https://github.com/cyranoaladin/manuels-nexus/pull/1), `OPEN`, `isDraft: true`, `headRefOid: e6c2f70d4b12e1eb80cd37177874e986abf95a1a`
+- Run CI ciblé : `30555858436`
+- Job: `90916003021`
+- SHA: `e6c2f70d4b12e1eb80cd37177874e986abf95a1a`
+- Événement: `push`
+- Statut: `completed`, conclusion: `failure`
+- Artefacts téléchargés dans `/tmp/manuels-ci-30555858436.6hfPBb`
 
-## Sub-gate(s) en cause
+## Sous-gates Phase 0 aux codes exacts
 
-- Sous-gate défaillante principale : `check`
-- Résultat réel observé en CI : `3`
-- Résultat attendu dans le contrat de phase 0 : `0`
-- Cause technique : diff détectés dans `audit/ECARTS_ET_CONTRADICTIONS.yaml`, `audit/INVENTAIRE_COLLECTION.json`, `audit/MATRICE_LIVRABLES.yaml`.
-- Payload (stdout de gate `check`) extrait de `gate-summary.json` :
-  - `exit_code`: `3`
-  - `success`: `false`
-  - `reasons`: `[
-      "diff: audit/ECARTS_ET_CONTRADICTIONS.yaml",
-      "diff: audit/INVENTAIRE_COLLECTION.json",
-      "diff: audit/MATRICE_LIVRABLES.yaml"
-    ]`
-  - `blocker_count`: `3`
-
-## Exécution des gates
-
-Ordre d’exécution (CI et local via script) :
-
-1. `require-clean`
-2. `check`
-3. `validate-model`
-4. `fail-on-new`
-5. `release-strict`
+Ordre observé: `require-clean`, `check`, `validate-model`, `fail-on-new`, `release-strict`.
 
 | Gate | Réel | Attendu |
-|---|---|---|
+|---|---:|---:|
 | require-clean | `0` | `0` |
 | check | `3` | `0` |
-| validate-model | `0` | `0` |
+| validate-model | `6` | `0` |
 | fail-on-new | `0` | `0` |
 | release-strict | `7` | `7` |
 
-`release-strict` en échec contrôlé reste attendu à `7` en phase NO-GO.
+Cause globale: `failure_count = 12` dans `gate-summary.json`.
 
-### Preuves gate
+- `check` (`3`) : `diff: audit/ECARTS_ET_CONTRADICTIONS.yaml`, `diff: audit/INVENTAIRE_COLLECTION.json`, `diff: audit/MATRICE_LIVRABLES.yaml`
+  - confirmée identique au run précédent (artifact `30546406535`, `check.json` inchangé).
+- `validate-model` (`6`) :
+  - `inventaire:generator_files différent du générateur courant`
+  - `inventaire:generator_sha256 différent du générateur courant`
 
-- `scripts/ci_audit_collection.py run-gates` conserve désormais pour chaque gate : `process_code`, `stdout`, `stderr`, bloc `repeat` pour `release-strict`.
-- Le wrapper échoue explicitement si `check` retourne un code différent de `0`.
+`release-strict` reste au contrat attendu (`7`) sans régression de ce poste.
 
-## Échec pytest en CI (run 30546406535)
+## Preuves observées (run 30555858436)
 
-Vingt-deux nœuds `FAILED` relevés dans `--log-failed`.
+- `gates/check.json`
+- `gates/validate-model.json`
+- `gates/require-clean.json`
+- `gates/fail-on-new.json`
+- `gates/release-strict.json`
+- `gates/release-strict.repeat.json`
+- `gates/gate-summary.json`
+- `coverage.xml`
+- `generation/generated-a/...` et `generation/generated-b/...`
+- `manuels-nexus/manuels-nexus/audit/BUILD_MANIFEST.json`
 
-Node IDs (extrait) :
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_checker_cli_synthetic_exit_codes`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_rubric_tab_dynamic_fixture_pdf`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_navigation_blank_fixture_pdf`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_method_pairing_fixtures[0..3]`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_multicols_marginnote_is_redirected`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_exercise_grid_fixture_pdf`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_validation_png_reference_hashes`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_non_diagnostics_page_hashes_reject_a_changed_page`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_page13_diagnostics_layout_pdf`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_qcm_diagnostics_and_corrections_pdf`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_maquette_v5_acceptance`
-- `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_course_fixture_pdf`
-- `Mathematiques/manuel-maths/tests/test_pdf_integrity.py::test_missing_asset_produces_warning_in_real_compilation`
-- `Mathematiques/manuel-maths/tests/test_pdf_integrity.py::test_specimen_compiles_with_exit_zero`
-- `tests/test_inventory_collection.py::test_update_baseline_cli_rejects_ci_dirty_repo_and_invalid_model`
-- `tests/test_inventory_collection.py::test_update_baseline_writes_audited_transition_and_preserves_resolved_history`
-- `tests/test_inventory_collection.py::test_update_baseline_rejects_head_change_immediately_before_replace`
-- `tests/test_inventory_collection.py::test_update_baseline_recovers_interrupted_write_before_clean_preflight`
+`release-strict.json` = `7` (contrat), `gate-summary.json` encode bien le mode non conforme.
 
-## Cinq tests visuels connus
+## Tool versions / preuve runtime
 
-Les cinq nœuds visuels confirmés dans `CI` sont :
-1. `test_validation_png_reference_hashes`
-2. `test_non_diagnostics_page_hashes_reject_a_changed_page`
-3. `test_page13_diagnostics_layout_pdf`
-4. `test_qcm_diagnostics_and_corrections_pdf`
-5. `test_maquette_v5_acceptance`
+- Versions runtime observées dans artefacts de génération, ex. `generation/generated-a/audit/INVENTAIRE_COLLECTION.json -> provenance.tool_versions` :
+  - `python: Python 3.12.11`
+  - `git: git version 2.54.0`
+  - `texlive: pdfTeX ... TeX Live 2023/Debian`
+  - `pdfinfo: pdfinfo version 24.02.0`
+- `audit/BUILD_MANIFEST.json` ne contient pas de champ explicite `canonical_tool_versions` / `observed_runtime_tool_versions`.
+- Le test `_reuse_stored_generation_provenance` a bien permis la réutilisation de `generator_files` + `generator_sha256`, mais la séparation canonique/runtime n’est pas encore formalisée en champ séparé.
 
-Ils correspondent au plan visuel déjà documenté dans `audit/VISUAL_BASELINE_DECISION_REQUIRED.md` (divergences sur les onglets de pages 1, 7, 8, 9, 10, 11, 12, 15) et aux décisions NO-GO déjà en place.
+## Résultats pytest CI (22 échecs)
 
-## Checks locaux exécutés après modification
+| Catégorie | Nombre | Node IDs | Cause |
+|---|---:|---|---|
+| visuel connu | 5 | `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_validation_png_reference_hashes` ; `...::test_non_diagnostics_page_hashes_reject_a_changed_page` ; `...::test_page13_diagnostics_layout_pdf` ; `...::test_qcm_diagnostics_and_corrections_pdf` ; `...::test_maquette_v5_acceptance` | Écarts visuels attendus déjà suivis |
+| PDF/LaTeX | 13 | `Mathematiques/manuel-maths/tests/test_maquette_v5.py::test_checker_cli_synthetic_exit_codes` ; `...::test_rubric_tab_dynamic_fixture_pdf` ; `...::test_navigation_blank_fixture_pdf` ; `...::test_method_pairing_fixtures[0]` ; `...::test_method_pairing_fixtures[1]` ; `...::test_method_pairing_fixtures[2]` ; `...::test_method_pairing_fixtures[3]` ; `...::test_multicols_marginnote_is_redirected` ; `...::test_exercise_grid_fixture_pdf` ; `...::test_course_fixture_pdf` ; `...::test_course_trailing_float_fixture_pdf` ; `...::test_pdf_integrity.py::test_missing_asset_produces_warning_in_real_compilation` ; `...::test_pdf_integrity.py::test_specimen_compiles_with_exit_zero` | `lualatex` échoue (TeX Gyre Pagella non trouvable), production PDF non conforme |
+| inventaire/check | 0 | *(none)* | — |
+| transactions/baseline | 4 | `tests/test_inventory_collection.py::test_update_baseline_cli_rejects_ci_dirty_repo_and_invalid_model` ; `...::test_update_baseline_writes_audited_transition_and_preserves_resolved_history` ; `...::test_update_baseline_rejects_head_change_immediately_before_replace` ; `...::test_update_baseline_recovers_interrupted_write_before_clean_preflight` | Vérifications d’update baseline en erreur |
+| environnement CI | 0 | *(none)* | — |
+| autre | 0 | *(none)* | — |
 
-- `python -m pytest tests/test_ci_audit_collection.py -q` ✅ 41 passed
-- `python -m pytest tests/test_build_manifest.py tests/test_ci_audit_collection.py tests/test_inventory_collection.py -q` ✅ 539 passed
-- `python -m ruff check scripts/ci_audit_collection.py tests/test_ci_audit_collection.py` ✅
-- `python -m mypy scripts/ci_audit_collection.py` ✅
-- `python scripts/ci_audit_collection.py run-gates --root . --output-dir <tmp> --require-clean --check --validate-model --fail-on-new --release-strict` ❌ en local attendu en dépôt propre (`require-clean=4`) ; les écarts observés viennent du statut local modifié.
+Les 22 échecs ne sont donc pas limités aux 5 visuels connus.
 
-## Mission atomique -- correction de la cause réelle de check=3 (prochaine passe)
+## Remarque de gouvernance
 
-- Date locale d'analyse locale : 2026-07-30.
-- Hypothèse confirmée : le premier échec du run 30546406535 est un diff de `tool_versions` dans la provenance ré-utilisée.
-- Changement appliqué : `_reuse_stored_generation_provenance` réutilise désormais `tool_versions` en plus de `head_sha` et `generated_at_utc`.
-- Nouvelle régression ajoutée : `test_check_reuses_stored_tool_versions_instead_of_current_runtime_signature` dans `tests/test_inventory_collection.py`.
-- Vérification en clone propre (CI-like) via `run-gates` sur `--require-clean --check --validate-model --fail-on-new --release-strict` :
-  - `check=0`, `validate-model=0`, `require-clean=0`, `fail-on-new=0`, `release-strict=7`, `failure_count=0`.
-- La divergence visuelle CI connue reste inchangée (5 nœuds visuels déjà documentés dans `audit/VISUAL_BASELINE_DECISION_REQUIRED.md`).
+Le run valide donc :
+- `check` toujours `3` (cause résiduelle)
+- `validate-model` désormais bloquant (`6`)
+- gates déjà non exploitables pour release.
+
+Tests RAG ignorés : `5`.
