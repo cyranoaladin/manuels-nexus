@@ -26,6 +26,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "inventory_collection.py"
 GENERATOR_COMPONENTS = (
+    "build_manifest.py",
     "inventory_collection.py",
     "inventory_reports.py",
     "inventory_graph.py",
@@ -3236,25 +3237,40 @@ def _build_manifest_contract_payload() -> dict[str, object]:
         "build_state_digest": "sha256:" + "1" * 64,
         "builds": [
             {
-                "gate_results": {
+                "excluded_objects": ["OBJ-EXCLUDED"],
+                "gates": {
+                    "compile": {"passed": True},
+                    "preflight": {"passed": True},
                     "release_strict": {"blocker_count": 42, "passed": False},
                     "validate_model": {"passed": True},
                 },
+                "generated_dependencies": ["build/generated-index.tex"],
+                "generated_dependency_digests": {
+                    "build/generated-index.tex": "sha256:" + "6" * 64
+                },
                 "git_sha": "2" * 40,
                 "included_objects": ["OBJ-SECOND", "OBJ-FIRST"],
+                "manual": "1SPE",
                 "model_digest": "sha256:" + "3" * 64,
+                "ordered_trace": ["OBJ-SECOND", "OBJ-FIRST"],
                 "page_count": 128,
-                "pdf": "build/manuels/1SPE-professeur.pdf",
-                "sha256": "sha256:" + "4" * 64,
+                "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.pdf",
+                "pdf_sha256": "sha256:" + "4" * 64,
                 "source_digest": "sha256:" + "5" * 64,
                 "tool_versions": {"latexmk": "4.86a", "pdflatex": "3.141592653"},
-                "variant": "manuel_professeur",
+                "variant": "professeur",
             }
         ],
-        "generated_by": "inventory_collection.py",
-        "provenance": {"branch": "finalisation/collection-v1"},
+        "generated_by": "build_manifest.py",
+        "model_digest": "sha256:" + "3" * 64,
+        "provenance": {
+            "branch": "finalisation/collection-v1",
+            "dirty": False,
+            "head_sha": "2" * 40,
+        },
         "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
         "schema_version": 1,
+        "source_digest": "sha256:" + "5" * 64,
     }
 
 
@@ -3296,13 +3312,17 @@ def test_build_manifest_schema_rejects_missing_envelope_field(
 @pytest.mark.parametrize(
     "missing_field",
     [
-        "gate_results",
+        "excluded_objects",
+        "gates",
+        "generated_dependencies",
         "git_sha",
         "included_objects",
+        "manual",
         "model_digest",
+        "ordered_trace",
         "page_count",
-        "pdf",
-        "sha256",
+        "pdf_path",
+        "pdf_sha256",
         "source_digest",
         "tool_versions",
         "variant",
@@ -3319,6 +3339,37 @@ def test_build_manifest_schema_rejects_incomplete_observed_build(
     payload = _build_manifest_contract_payload()
     build = dict(payload["builds"][0])  # type: ignore[index]
     build.pop(missing_field)
+    payload["builds"] = [build]
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def test_build_manifest_schema_rejects_unknown_build_field() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/build-manifest.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _build_manifest_contract_payload()
+    build = dict(payload["builds"][0])  # type: ignore[index]
+    build["proof_by_filename_only"] = True
+    payload["builds"] = [build]
+
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.Draft202012Validator(schema).validate(payload)
+
+
+def test_build_manifest_schema_rejects_empty_observed_trace() -> None:
+    schema = json.loads(
+        (ROOT / "audit/schemas/v1/build-manifest.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    payload = _build_manifest_contract_payload()
+    build = dict(payload["builds"][0])  # type: ignore[index]
+    build["included_objects"] = []
+    build["ordered_trace"] = []
     payload["builds"] = [build]
 
     with pytest.raises(jsonschema.ValidationError):
@@ -3429,6 +3480,96 @@ def test_canonical_model_payload_accepts_declared_assemblies_without_legacy_key(
 
     assert payload["declared_assemblies"] == declared
     assert "assemblies" not in payload
+
+
+def test_canonical_model_rejects_divergent_assembly_alias(
+    inventory_module,
+) -> None:
+    inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "assemblies": [{"assembly_id": "legacy"}],
+        "coherence_checks": {},
+        "correction_links": [],
+        "declared_assemblies": [{"assembly_id": "canonical"}],
+        "deliverable_matrix": {},
+        "manuals": {},
+        "pdfs": [],
+        "reference_graph": [],
+        "report_reconciliation": {},
+        "source_digest": "sha256:" + "a" * 64,
+        "source_files": [],
+    }
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="alias assemblies",
+    ):
+        inventory_module.canonical_model_payload(inventory)
+
+
+def test_observed_builds_do_not_change_the_static_model_digest(
+    inventory_module,
+) -> None:
+    inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "assemblies": [{"assembly_id": "manual-professeur"}],
+        "coherence_checks": {},
+        "correction_links": [],
+        "declared_assemblies": [{"assembly_id": "manual-professeur"}],
+        "deliverable_matrix": {},
+        "manuals": {},
+        "pdfs": [],
+        "reference_graph": [],
+        "report_reconciliation": {},
+        "source_digest": "sha256:" + "a" * 64,
+        "source_files": [],
+    }
+    before = inventory_module._model_digest(inventory)
+    inventory["observed_builds"] = [{"manual": "1SPE", "variant": "professeur"}]
+    inventory["observed_build_coverage"] = {
+        "1SPE": {"professeur": {"observed": True}}
+    }
+
+    assert inventory_module._model_digest(inventory) == before
+
+
+def test_build_manifest_is_excluded_from_source_and_model_digests(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    before = inventory_module.build_inventory(tmp_path)
+    head_sha = _commit_repository(tmp_path, "before build manifest")
+    manifest = {
+        "artifact_type": "build_manifest",
+        "build_state_digest": inventory_module._build_state_digest([]),
+        "builds": [],
+        "generated_by": "build_manifest.py",
+        "model_digest": inventory_module._model_digest(before),
+        "provenance": {
+            "branch": "fixture",
+            "dirty": False,
+            "head_sha": head_sha,
+        },
+        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
+        "schema_version": 1,
+        "source_digest": before["source_digest"],
+    }
+    _write(
+        tmp_path / inventory_module.BUILD_MANIFEST_FILE,
+        json.dumps(manifest, ensure_ascii=False, sort_keys=True),
+    )
+    _track(tmp_path, inventory_module.BUILD_MANIFEST_FILE)
+
+    after = inventory_module.build_inventory(tmp_path)
+
+    assert inventory_module.BUILD_MANIFEST_FILE not in after["source_files"]
+    assert after["source_digest"] == before["source_digest"]
+    assert inventory_module._model_digest(after) == inventory_module._model_digest(
+        before
+    )
 
 
 def test_rendering_the_same_inventory_twice_is_byte_identical_by_basename(
@@ -4275,7 +4416,7 @@ def test_pdf_inventory_prefers_pdfinfo_page_count(
     ]
     assert inventory["manuals"]["1NSI"]["compiled_artifacts"] == inventory["pdfs"]
     assert inventory["manuals"]["1NSI"]["compiled_variants"]["manual"] == ["eleve"]
-    assert "observed_builds" not in inventory
+    assert inventory["observed_builds"] == []
 
 
 @pytest.mark.parametrize(
@@ -4479,7 +4620,7 @@ def test_tracked_pdf_symlink_is_not_read_or_counted(
         "ok": True,
         "violations": [],
     }
-    assert "observed_builds" not in inventory
+    assert inventory["observed_builds"] == []
 
 
 @pytest.mark.skipif(not hasattr(os, "mkfifo"), reason="FIFO indisponible")
@@ -4619,7 +4760,7 @@ def test_pdf_mutation_during_counting_invalidates_private_snapshot_evidence(
         "ok": True,
         "violations": [],
     }
-    assert "observed_builds" not in inventory
+    assert inventory["observed_builds"] == []
 
 
 def test_regular_pdf_is_counted_from_private_snapshot_then_snapshot_is_removed(
@@ -4718,7 +4859,7 @@ def test_non_publishable_pdf_is_inventoried_without_compiled_evidence(
         "ok": True,
         "violations": [],
     }
-    assert "observed_builds" not in inventory
+    assert inventory["observed_builds"] == []
 
 
 @pytest.mark.parametrize(
@@ -4782,7 +4923,7 @@ def test_generated_pdf_outside_manual_project_is_not_compiled_evidence(
         "ok": True,
         "violations": [],
     }
-    assert "observed_builds" not in inventory
+    assert inventory["observed_builds"] == []
 
 
 @pytest.mark.parametrize(
@@ -4842,7 +4983,7 @@ def test_valid_pdf_under_canonical_manual_project_is_compiled_evidence(
         "ok": True,
         "violations": [],
     }
-    assert "observed_builds" not in inventory
+    assert inventory["observed_builds"] == []
 
 
 def test_recursive_static_latex_assembly_counts_duplicates_and_assembles_correction(
@@ -5338,6 +5479,7 @@ def test_declared_assembler_allowlist_preserves_three_real_engines(
     } <= inventory_module.DECLARED_ASSEMBLER_SOURCE_ROLES
 
     inventory = inventory_module.build_inventory(ROOT)
+    assert inventory["declared_assemblies"] == inventory["assemblies"]
     observed = {
         assembly["assembler"]
         for assembly in inventory["assemblies"]

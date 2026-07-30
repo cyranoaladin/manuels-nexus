@@ -85,6 +85,7 @@ SOURCE_ROLES_FILE = "audit/SOURCE_ROLES.yaml"
 ANOMALY_DISPOSITIONS_FILE = "audit/ANOMALY_DISPOSITIONS.yaml"
 ANOMALIES_BASELINE_FILE = "audit/ANOMALIES_BASELINE.json"
 BASELINE_UPDATE_REPORT_FILE = "audit/BASELINE_UPDATE_REPORT.md"
+BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
 
 SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
     {
@@ -234,6 +235,7 @@ DEFAULT_MANAGED_OUTPUT_PATHS = frozenset(
     }
 )
 GENERATOR_COMPONENT_PATHS = (
+    "build_manifest.py",
     "inventory_collection.py",
     "inventory_reports.py",
     "inventory_graph.py",
@@ -918,6 +920,580 @@ def _validate_artifact_schema(
         raise InventoryError(f"artefact non conforme au schéma {path}: {details}")
 
 
+def _build_state_digest(builds: list[Mapping[str, Any]]) -> str:
+    canonical = json.dumps(
+        builds,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return f"sha256:{hashlib.sha256(_utf8_bytes(canonical)).hexdigest()}"
+
+
+def _observed_deliverable_variant(manual: str, raw_variant: str) -> str:
+    specification = DELIVERABLE_SPECS.get(manual)
+    if specification is None:
+        raise InventoryError(f"manual inconnu dans le manifeste: {manual}")
+    matches = [
+        deliverable
+        for deliverable, aliases in specification["variants"].items()
+        if raw_variant in aliases
+    ]
+    if len(matches) != 1:
+        raise InventoryError(
+            "variant de build sans mapping explicite ou ambigu: "
+            f"{manual}:{raw_variant}"
+        )
+    return matches[0]
+
+
+def _control_file_fingerprint(
+    value: os.stat_result,
+) -> tuple[int, int, int, int, int, int, int]:
+    return (
+        value.st_dev,
+        value.st_ino,
+        stat.S_IFMT(value.st_mode),
+        value.st_size,
+        value.st_mtime_ns,
+        value.st_ctime_ns,
+        value.st_nlink,
+    )
+
+
+class _ConfinedJsonSnapshot:
+    def __init__(
+        self,
+        *,
+        root: Path,
+        relative: PurePosixPath,
+        role: str,
+    ) -> None:
+        self.root = root.resolve()
+        self.relative = relative
+        self.role = role
+        self.root_fd = -1
+        self.parent_fd = -1
+        self.target_fd = -1
+        self.root_stat: os.stat_result | None = None
+        self.parent_stat: os.stat_result | None = None
+        self.target_fingerprint: tuple[int, int, int, int, int, int, int] | None = None
+        self.payload = b""
+
+    def __enter__(self) -> "_ConfinedJsonSnapshot":
+        try:
+            _clean_path(
+                self.relative.as_posix(),
+                role=self.role,
+                repository=self.root,
+            )
+            self.root_fd, self.root_stat = _open_pinned_directory(
+                self.root,
+                role=f"{self.role} repository root",
+            )
+            self.parent_fd, self.parent_stat = _open_destination_parent(
+                self.root_fd,
+                self.relative,
+                create=False,
+            )
+            flags = (
+                os.O_RDONLY
+                | getattr(os, "O_CLOEXEC", 0)
+                | getattr(os, "O_NOFOLLOW", 0)
+                | getattr(os, "O_NONBLOCK", 0)
+            )
+            self.target_fd = os.open(
+                self.relative.name,
+                flags,
+                dir_fd=self.parent_fd,
+            )
+        except Exception as exc:
+            self.close()
+            if isinstance(exc, InventoryError):
+                raise
+            raise InventoryError(
+                f"{self.role} symbolique ou inaccessible"
+            ) from exc
+        metadata = os.fstat(self.target_fd)
+        if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink != 1:
+            self.close()
+            raise InventoryError(
+                f"{self.role} doit être un fichier régulier sans hardlink"
+            )
+        self.target_fingerprint = _control_file_fingerprint(metadata)
+        self.payload = self._read_current_bytes()
+        self.verify()
+        return self
+
+    def _read_current_bytes(self) -> bytes:
+        os.lseek(self.target_fd, 0, os.SEEK_SET)
+        chunks: list[bytes] = []
+        while chunk := os.read(self.target_fd, 1024 * 1024):
+            chunks.append(chunk)
+        return b"".join(chunks)
+
+    def verify(self) -> None:
+        if (
+            self.root_stat is None
+            or self.parent_stat is None
+            or self.target_fingerprint is None
+        ):
+            raise InventoryError(f"snapshot {self.role} non initialisé")
+        metadata = os.fstat(self.target_fd)
+        if (
+            metadata.st_nlink != 1
+            or _control_file_fingerprint(metadata) != self.target_fingerprint
+            or self._read_current_bytes() != self.payload
+            or _control_file_fingerprint(os.fstat(self.target_fd))
+            != self.target_fingerprint
+        ):
+            raise InventoryError(f"{self.role} modifié pendant la validation")
+        _require_repository_root_identity(self.root, self.root_stat)
+        _revalidate_destination_parent(
+            self.root_fd,
+            self.relative,
+            self.parent_stat,
+        )
+        current = os.stat(
+            self.relative.name,
+            dir_fd=self.parent_fd,
+            follow_symlinks=False,
+        )
+        if _control_file_fingerprint(current) != self.target_fingerprint:
+            raise InventoryError(f"{self.role} remplacé pendant la validation")
+
+    def json_mapping(self) -> dict[str, Any]:
+        try:
+            decoded = json.loads(self.payload.decode("utf-8"))
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise InventoryError(f"{self.role} JSON invalide") from exc
+        if not isinstance(decoded, Mapping):
+            raise InventoryError(f"{self.role} JSON doit être un objet")
+        return dict(decoded)
+
+    def close(self) -> None:
+        for descriptor in (self.target_fd, self.parent_fd, self.root_fd):
+            if descriptor >= 0:
+                os.close(descriptor)
+        self.target_fd = self.parent_fd = self.root_fd = -1
+
+    def __exit__(self, *_args: object) -> None:
+        self.close()
+
+
+def _observed_git_state(root: Path) -> tuple[str, str, bool]:
+    status = _git_status(root, required=True)
+    dirty_outside_manifest = any(
+        any(path != BUILD_MANIFEST_FILE for path in paths)
+        for _marker, paths in status
+    )
+    return (
+        _git_required_value(
+            root,
+            ("rev-parse", "HEAD"),
+            description="git HEAD",
+        ),
+        _git_required_value(
+            root,
+            ("branch", "--show-current"),
+            description="git branch",
+        ),
+        dirty_outside_manifest,
+    )
+
+
+def _pdf_matches_observed_identity(
+    pdf_path: str,
+    manual: str,
+    variant: str,
+) -> bool:
+    attribution = _pdf_core.attribute_pdf(
+        pdf_path,
+        {
+            "manuals": {
+                manual_id: {"chapters": {}}
+                for manual_id in DELIVERABLE_SPECS
+            }
+        },
+    )
+    return (
+        attribution.get("scope") == "manual"
+        and attribution.get("manual") == manual
+        and attribution.get("variant") == variant
+    )
+
+
+def _tracked_source_set_digest(root: Path) -> str:
+    try:
+        payload = subprocess.run(
+            ["git", "-C", str(root), "ls-files", "-z"],
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        ).stdout
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise InventoryError("ensemble des sources suivies Git indisponible") from exc
+    return hashlib.sha256(payload).hexdigest()
+
+
+def _load_observed_build_manifest(
+    root: Path,
+    *,
+    source_digest: str,
+    model_digest: str,
+    declared_assemblies: list[Mapping[str, Any]],
+    pdfinfo_counter: Any,
+    python_counter: Any,
+    source_files: tuple[str, ...] | None = None,
+) -> list[dict[str, Any]]:
+    manifest_path = root / BUILD_MANIFEST_FILE
+    if not manifest_path.exists() and not manifest_path.is_symlink():
+        return []
+    try:
+        snapshot = _ConfinedJsonSnapshot(
+            root=root,
+            relative=PurePosixPath(BUILD_MANIFEST_FILE),
+            role="manifeste de build",
+        )
+        snapshot.__enter__()
+        payload = snapshot.json_mapping()
+    except InventoryError as exc:
+        raise InventoryError(f"manifeste de build non sûr: {exc}") from exc
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise InventoryError(
+            f"manifeste de build illisible: {type(exc).__name__}"
+        ) from exc
+    try:
+        _validate_artifact_schema(payload, root=root, path=Path(BUILD_MANIFEST_FILE))
+        if payload.get("source_digest") != source_digest:
+            raise InventoryError("source_digest du manifeste de build incohérent")
+        if payload.get("model_digest") != model_digest:
+            raise InventoryError("model_digest du manifeste de build incohérent")
+        builds = payload.get("builds")
+        if not isinstance(builds, list):
+            raise InventoryError("builds du manifeste invalide")
+        if payload.get("build_state_digest") != _build_state_digest(builds):
+            raise InventoryError("build_state_digest incohérent")
+
+        initial_git_state = _observed_git_state(root)
+        initial_tracked_source_set = _tracked_source_set_digest(root)
+        head_sha, branch, dirty = initial_git_state
+        provenance = payload.get("provenance")
+        provenance_head = (
+            provenance.get("head_sha")
+            if isinstance(provenance, Mapping)
+            else None
+        )
+        if builds:
+            expected_provenance = {
+                "head_sha": head_sha,
+                "branch": branch,
+                "dirty": dirty,
+            }
+            if not isinstance(provenance, Mapping) or any(
+                provenance.get(key) != value
+                for key, value in expected_provenance.items()
+            ):
+                raise InventoryError(
+                    "provenance du manifeste incohérente pour des builds observés"
+                )
+        else:
+            try:
+                ancestry = subprocess.run(
+                    [
+                        "git",
+                        "-C",
+                        str(root),
+                        "merge-base",
+                        "--is-ancestor",
+                        str(provenance_head),
+                        head_sha,
+                    ],
+                    check=False,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            except OSError as exc:
+                raise InventoryError(
+                    "provenance du manifeste invérifiable"
+                ) from exc
+            if ancestry.returncode != 0:
+                raise InventoryError(
+                    "provenance du manifeste sans ancêtre Git valide"
+                )
+
+        def revalidate_state() -> None:
+            snapshot.verify()
+            if _observed_git_state(root) != initial_git_state:
+                raise InventoryError(
+                    "état Git modifié pendant la validation du manifeste"
+                )
+            if _tracked_source_set_digest(root) != initial_tracked_source_set:
+                raise InventoryError(
+                    "ensemble des sources suivies modifié pendant la validation"
+                )
+            if (
+                source_files is not None
+                and _source_digest(root, source_files) != source_digest
+            ):
+                raise InventoryError(
+                    "source_digest modifié pendant la validation du manifeste"
+                )
+
+        revalidate_state()
+        declared = {
+            (str(value.get("manual")), str(value.get("variant"))): value
+            for value in declared_assemblies
+            if value.get("scope") == "manual"
+        }
+        observed: list[dict[str, Any]] = []
+        identities: set[tuple[str, str]] = set()
+        pdf_paths: set[str] = set()
+        pdf_digests: set[str] = set()
+        dependency_snapshots: dict[
+            str,
+            list[tuple[str, tuple[int, int, int, int, int, int, int]]],
+        ] = {}
+
+        def revalidate_dependencies() -> None:
+            for dependency, snapshots in dependency_snapshots.items():
+                for relative, expected in snapshots:
+                    try:
+                        metadata = (root / relative).lstat()
+                    except OSError as exc:
+                        raise InventoryError(
+                            f"generated_dependencies modifiée: {dependency}"
+                        ) from exc
+                    if (
+                        stat.S_ISLNK(metadata.st_mode)
+                        or _control_file_fingerprint(metadata) != expected
+                    ):
+                        raise InventoryError(
+                            f"generated_dependencies modifiée: {dependency}"
+                        )
+
+        original_revalidate_state = revalidate_state
+
+        def revalidate_state() -> None:
+            original_revalidate_state()
+            revalidate_dependencies()
+
+        for index, raw_build in enumerate(builds):
+            if not isinstance(raw_build, Mapping):
+                raise InventoryError(f"build[{index}] non objet")
+            build = dict(raw_build)
+            manual = str(build["manual"])
+            variant = str(build["variant"])
+            identity = (manual, variant)
+            if identity in identities:
+                raise InventoryError(
+                    f"build observé en doublon: {manual}:{variant}"
+                )
+            identities.add(identity)
+            _observed_deliverable_variant(manual, variant)
+            if identity not in declared:
+                raise InventoryError(
+                    f"variant non déclaré dans les assemblages: {manual}:{variant}"
+                )
+            if build["git_sha"] != head_sha:
+                raise InventoryError(
+                    f"git_sha périmé pour {manual}:{variant}"
+                )
+            if build["source_digest"] != source_digest:
+                raise InventoryError(
+                    f"source_digest périmé pour {manual}:{variant}"
+                )
+            if build["model_digest"] != model_digest:
+                raise InventoryError(
+                    f"model_digest périmé pour {manual}:{variant}"
+                )
+            included = build["included_objects"]
+            excluded = build["excluded_objects"]
+            trace = build["ordered_trace"]
+            if trace != included:
+                raise InventoryError(
+                    f"ordered_trace incohérente pour {manual}:{variant}"
+                )
+            if set(included) & set(excluded):
+                raise InventoryError(
+                    f"included_objects et excluded_objects se chevauchent "
+                    f"pour {manual}:{variant}"
+                )
+            declared_objects = declared[identity].get("included_objects")
+            if (
+                isinstance(declared_objects, list)
+                and (set(included) | set(excluded)) != set(declared_objects)
+            ):
+                raise InventoryError(
+                    f"included_objects/excluded_objects ne couvrent pas "
+                    f"l'assemblage déclaré pour {manual}:{variant}"
+                )
+            dependency_digests = build["generated_dependency_digests"]
+            if set(dependency_digests) != set(build["generated_dependencies"]):
+                raise InventoryError(
+                    f"generated_dependency_digests incomplet pour "
+                    f"{manual}:{variant}"
+                )
+            for dependency in build["generated_dependencies"]:
+                if (
+                    "\\" in dependency
+                    or dependency.startswith("/")
+                    or any(
+                        part in {"", ".", ".."}
+                        for part in dependency.split("/")
+                    )
+                ):
+                    raise InventoryError(
+                        f"generated_dependencies non canonique pour "
+                        f"{manual}:{variant}"
+                    )
+                current = root
+                relative_parts: list[str] = []
+                snapshots: list[
+                    tuple[
+                        str,
+                        tuple[int, int, int, int, int, int, int],
+                    ]
+                ] = []
+                try:
+                    for part in PurePosixPath(dependency).parts:
+                        relative_parts.append(part)
+                        current = current / part
+                        metadata = current.lstat()
+                        if stat.S_ISLNK(metadata.st_mode):
+                            raise InventoryError(
+                                "generated_dependencies symbolique interdite "
+                                f"pour {manual}:{variant}"
+                            )
+                        snapshots.append(
+                            (
+                                "/".join(relative_parts),
+                                _control_file_fingerprint(metadata),
+                            )
+                        )
+                    if (
+                        not stat.S_ISREG(metadata.st_mode)
+                        or metadata.st_nlink != 1
+                    ):
+                        raise InventoryError(
+                            "generated_dependencies non régulière ou hardlink "
+                            f"pour {manual}:{variant}"
+                        )
+                except FileNotFoundError as exc:
+                    raise InventoryError(
+                        f"generated_dependencies absente pour {manual}:{variant}"
+                    ) from exc
+                try:
+                    dependency_payload = current.read_bytes()
+                except OSError as exc:
+                    raise InventoryError(
+                        f"generated_dependencies illisible pour "
+                        f"{manual}:{variant}"
+                    ) from exc
+                if _control_file_fingerprint(current.lstat()) != snapshots[-1][1]:
+                    raise InventoryError(
+                        f"generated_dependencies modifiée pour "
+                        f"{manual}:{variant}"
+                    )
+                actual_dependency_digest = (
+                    "sha256:"
+                    + hashlib.sha256(dependency_payload).hexdigest()
+                )
+                if dependency_digests[dependency] != actual_dependency_digest:
+                    raise InventoryError(
+                        f"generated_dependency_digests incohérent pour "
+                        f"{manual}:{variant}"
+                    )
+                dependency_snapshots[dependency] = snapshots
+            gates = build["gates"]
+            for gate in ("compile", "preflight"):
+                if gates[gate].get("passed") is not True:
+                    raise InventoryError(
+                        f"gate {gate} rouge pour {manual}:{variant}"
+                    )
+            pdf_path = str(build["pdf_path"])
+            pdf_digest = str(build["pdf_sha256"])
+            if not _pdf_core._is_canonical_manual_pdf_path(
+                {"manual": manual, "path": pdf_path},
+                manual_build_roots=COMPILED_PDF_BUILD_ROOTS,
+            ):
+                raise InventoryError(
+                    f"chemin PDF non canonique pour {manual}:{variant}"
+                )
+            if not _pdf_matches_observed_identity(
+                pdf_path,
+                manual,
+                variant,
+            ):
+                raise InventoryError(
+                    f"PDF sans preuve de manual/variante pour {manual}:{variant}"
+                )
+            if pdf_path in pdf_paths or pdf_digest in pdf_digests:
+                raise InventoryError(
+                    f"PDF ou digest réutilisé entre variantes: {pdf_path}"
+                )
+            pdf_paths.add(pdf_path)
+            pdf_digests.add(pdf_digest)
+            revalidate_state()
+            digest, page_count, _method, reason = _pdf_core.inspect_stable_pdf(
+                root,
+                pdf_path,
+                pdfinfo_counter=pdfinfo_counter,
+                python_counter=python_counter,
+            )
+            revalidate_state()
+            if reason:
+                raise InventoryError(
+                    f"PDF invalide pour {manual}:{variant}: {reason}"
+                )
+            if digest != build["pdf_sha256"]:
+                raise InventoryError(
+                    f"pdf_sha256 incohérent pour {manual}:{variant}"
+                )
+            if page_count != build["page_count"]:
+                raise InventoryError(
+                    f"page_count incohérent pour {manual}:{variant}"
+                )
+            observed.append(_canonicalize(build))
+        revalidate_state()
+        return observed
+    finally:
+        snapshot.close()
+
+
+def _observed_build_coverage(
+    declared_assemblies: list[Mapping[str, Any]],
+    observed_builds: list[Mapping[str, Any]],
+) -> dict[str, Any]:
+    declared: dict[str, set[str]] = defaultdict(set)
+    for assembly in declared_assemblies:
+        if assembly.get("scope") == "manual":
+            declared[str(assembly.get("manual"))].add(
+                str(assembly.get("variant"))
+            )
+    observed: dict[str, set[str]] = defaultdict(set)
+    for build in observed_builds:
+        observed[str(build["manual"])].add(str(build["variant"]))
+
+    coverage: dict[str, Any] = {}
+    for manual, specification in sorted(DELIVERABLE_SPECS.items()):
+        variants: dict[str, Any] = {}
+        for deliverable, aliases in sorted(specification["variants"].items()):
+            declared_aliases = sorted(declared[manual] & set(aliases))
+            observed_aliases = sorted(observed[manual] & set(aliases))
+            variants[deliverable] = {
+                "declared_variants": declared_aliases,
+                "observed_variants": observed_aliases,
+                "ready": bool(declared_aliases and observed_aliases),
+            }
+        coverage[manual] = {
+            "observed_build_ready": bool(variants)
+            and all(value["ready"] for value in variants.values()),
+            "variants": variants,
+        }
+    return coverage
+
+
 def _build_anomaly_fingerprint_table(
     anomalies: Mapping[str, list[dict[str, Any]]]
 ) -> dict[str, list[str]]:
@@ -1331,6 +1907,15 @@ def _evaluate_baseline(
 
 
 def canonical_model_payload(inventory: Mapping[str, Any]) -> dict[str, Any]:
+    if (
+        "assemblies" in inventory
+        and "declared_assemblies" in inventory
+        and _canonicalize(inventory["assemblies"])
+        != _canonicalize(inventory["declared_assemblies"])
+    ):
+        raise InventoryError(
+            "alias assemblies divergent de declared_assemblies"
+        )
     missing = [
         field
         for field in CANONICAL_MODEL_FIELDS
@@ -2650,7 +3235,6 @@ def build_deliverable_matrix(inventory: Mapping[str, Any]) -> dict[str, Any]:
                     for dimension in publication_coverage
                 )
                 and structural_compile_ready
-                and bool(inventory.get("observed_builds"))
             ),
             "variants": variants,
         }
@@ -3031,6 +3615,7 @@ def build_inventory(
         "anomalies": anomalies,
         "anomaly_qualifications": {},
         "assemblies": [],
+        "declared_assemblies": [],
         "correction_links": [],
         "manuals": manuals,
         "pdfs": [],
@@ -3107,7 +3692,14 @@ def build_inventory(
         and item["cible"] in tracked_set
     }
     model_sources = tuple(
-        sorted(set(model_sources) | graph_targets | set(report_sources))
+        sorted(
+            (
+                set(model_sources)
+                | graph_targets
+                | set(report_sources)
+            )
+            - {BUILD_MANIFEST_FILE}
+        )
     )
     inventory["source_digest"] = _source_digest(root, model_sources)
     inventory["source_file_count"] = len(model_sources)
@@ -3122,6 +3714,27 @@ def build_inventory(
         key=lambda item: (item["exercise_path"], item["correction_path"])
     )
     inventory["assemblies"].sort(key=lambda item: item["assembly_id"])
+    inventory["declared_assemblies"] = inventory["assemblies"]
+    static_model_digest = _model_digest(inventory)
+    inventory["observed_builds"] = _load_observed_build_manifest(
+        root,
+        source_digest=inventory["source_digest"],
+        model_digest=static_model_digest,
+        declared_assemblies=inventory["declared_assemblies"],
+        pdfinfo_counter=_page_count_with_pdfinfo,
+        python_counter=_page_count_with_python,
+        source_files=model_sources,
+    )
+    inventory["observed_build_coverage"] = _observed_build_coverage(
+        inventory["declared_assemblies"],
+        inventory["observed_builds"],
+    )
+    inventory["observed_build_integration"] = {
+        "entrypoint": (
+            "python scripts/build_manifest.py --receipt <build-receipt.json>"
+        ),
+        "status": "not_integrated",
+    }
     return inventory
 
 
@@ -7571,14 +8184,41 @@ def _safe_update_baseline_gate(
 def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     reasons: list[str] = []
     matrix = inventory["deliverable_matrix"]["manuals"]
+    observed_coverage = inventory.get("observed_build_coverage", {})
+    observed_integration = inventory.get("observed_build_integration")
+    integration_ready = (
+        not isinstance(observed_integration, Mapping)
+        or observed_integration.get("status") == "integrated"
+    )
+    if not integration_ready:
+        reasons.append("build_receipt_producteurs_non_intégrés")
     for manual_id, manual in sorted(matrix.items()):
         for blocker in manual["blockers"]:
             reasons.append(
                 f"{manual_id}:{blocker['code']}:"
                 f"{blocker['source']}:{blocker['detail']}"
             )
-        if not manual.get("observed_build_ready", False):
-            for variant in sorted(manual["variants"]):
+        manual_coverage = (
+            observed_coverage.get(manual_id, {})
+            if isinstance(observed_coverage, Mapping)
+            else {}
+        )
+        variant_coverage = (
+            manual_coverage.get("variants", {})
+            if isinstance(manual_coverage, Mapping)
+            else {}
+        )
+        for variant in sorted(manual["variants"]):
+            coverage = (
+                variant_coverage.get(variant, {})
+                if isinstance(variant_coverage, Mapping)
+                else {}
+            )
+            if not coverage.get("declared_variants"):
+                reasons.append(
+                    f"{manual_id}:assemblage_déclaré_absent:{variant}"
+                )
+            elif not coverage.get("observed_variants"):
                 reasons.append(f"{manual_id}:build_observé_absent:{variant}")
 
     dimensions = dict(GATE_DIMENSION_TEMPLATE)
@@ -7589,7 +8229,12 @@ def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     )
     dimensions["execution"] = (
         "passed"
-        if all(manual.get("observed_build_ready", False) for manual in matrix.values())
+        if all(
+            isinstance(observed_coverage.get(manual_id), Mapping)
+            and observed_coverage[manual_id].get("observed_build_ready") is True
+            for manual_id in matrix
+        )
+        and integration_ready
         else "failed"
     )
     for dimension, status in dimensions.items():

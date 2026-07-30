@@ -426,30 +426,37 @@ manuals:
         declared_chapter_variants: []
         declared_manual_variants: []
         state: absent
-model_digest: sha256:bbf1143726c7cef128d95830324c9fc90ba8f85b023a579bbd8b87013470fd5c
+model_digest: sha256:1f20bea5812f4428a9d2c5616df8eb1492e4298f27e8fbb4a9da128fa9e3b846
 provenance:
   branch: finalisation/collection-v1
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-07-30T02:00:02Z'
+  generated_at_utc: '2026-07-30T03:19:48Z'
   generator_files:
+    scripts/build_manifest.py: sha256:fa2d6c5a06b4b1f2fd481503556596cef624006a3d6a5502333edf5030b72aae
     scripts/inventory_assembly.py: sha256:0152e2523723678b6333a9a2738cad373150f4d908612bfba7d5b506edf4b339
-    scripts/inventory_collection.py: sha256:ac4ee982f2f0073f2df1af6d09dc065731a96dc3b1896eb7f263c6c5bc6e5890
+    scripts/inventory_collection.py: sha256:d143196d99280b2b6409a7c0edaecfd2811a99096f912e44fb6dfa65eb84fa79
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
-    scripts/inventory_pdf.py: sha256:f0e03a40741446d4f02276b6a51dfef5107eb3e04fb622108db8bae432726526
+    scripts/inventory_pdf.py: sha256:d35af02bcf165276be9a76adea722813cd7376f4166b9ab1ab9bc91e226ebce9
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:eac212b5dcdd45de61602c05dfd61bffd5a0ac50d0662c69cea550a34ac21e57
+  generator_sha256: sha256:43dcc0823927317c52c65540c31c29351fbd920708a6a9aa4ea3675852870a13
   generator_version: 1
   git_available: true
-  head_sha: a6b0ebd702de45d5f2c1c722bc8a2a3d06af67c7
-  modified_tracked: []
+  head_sha: bf7c15646ba15c5434b6d04d82975e8610c079a0
+  modified_tracked:
+  - audit/schemas/v1/build-manifest.schema.json
+  - audit/schemas/v1/inventory-collection.schema.json
+  - scripts/inventory_collection.py
+  - scripts/inventory_pdf.py
+  - tests/test_inventory_collection.py
   tool_versions:
     git: git version 2.43.0
     latexmk: Latexmk, John Collins, 31 Jan. 2024. Version 4.83
     pdfinfo: pdfinfo version 24.02.0
     python: Python 3.12.3
     texlive: pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)
-  untracked_relevant: []
+  untracked_relevant:
+  - audit/BUILD_MANIFEST.json
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:56d5e383759c37ca18be631ba176524c1a3344caae428026ff8f4af0d696c96b
+source_digest: sha256:7160cd1f547a33f39d2e951da46bccd08731c7d000a40468a44d9cfc727e5033

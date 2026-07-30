@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import errno
+import hashlib
 import os
 import re
 import stat
@@ -171,7 +172,9 @@ def _is_canonical_manual_pdf_path(
     return bool(relative.parts) and relative.suffix.lower() == ".pdf"
 
 
-def _stat_fingerprint(value: os.stat_result) -> tuple[int, int, int, int, int, int]:
+def _stat_fingerprint(
+    value: os.stat_result,
+) -> tuple[int, int, int, int, int, int, int]:
     return (
         value.st_dev,
         value.st_ino,
@@ -179,6 +182,7 @@ def _stat_fingerprint(value: os.stat_result) -> tuple[int, int, int, int, int, i
         value.st_size,
         value.st_mtime_ns,
         value.st_ctime_ns,
+        value.st_nlink,
     )
 
 
@@ -217,10 +221,15 @@ def _open_error_reason(exc: OSError, *, leaf: bool) -> str:
 def _open_pinned_pdf(
     root: Path,
     path: str,
-) -> tuple[tuple[str, ...], list[int], list[tuple[int, int, int, int, int, int]], int]:
+) -> tuple[
+    tuple[str, ...],
+    list[int],
+    list[tuple[int, int, int, int, int, int, int]],
+    int,
+]:
     components = _pdf_path_components(path)
     parent_descriptors: list[int] = []
-    parent_fingerprints: list[tuple[int, int, int, int, int, int]] = []
+    parent_fingerprints: list[tuple[int, int, int, int, int, int, int]] = []
     try:
         try:
             current = os.open(root, _DIRECTORY_OPEN_FLAGS)
@@ -263,7 +272,7 @@ def _open_pinned_pdf(
 
 def _copy_pdf_to_private_snapshot(
     source_descriptor: int,
-    source_fingerprint: tuple[int, int, int, int, int, int],
+    source_fingerprint: tuple[int, int, int, int, int, int, int],
     snapshot_descriptor: int,
 ) -> bool:
     if _stat_fingerprint(os.fstat(source_descriptor)) != source_fingerprint:
@@ -291,9 +300,9 @@ def _copy_pdf_to_private_snapshot(
 def _pinned_pdf_is_unchanged(
     components: tuple[str, ...],
     parent_descriptors: list[int],
-    parent_fingerprints: list[tuple[int, int, int, int, int, int]],
+    parent_fingerprints: list[tuple[int, int, int, int, int, int, int]],
     source_descriptor: int,
-    source_fingerprint: tuple[int, int, int, int, int, int],
+    source_fingerprint: tuple[int, int, int, int, int, int, int],
 ) -> bool:
     try:
         if _stat_fingerprint(os.fstat(source_descriptor)) != source_fingerprint:
@@ -333,13 +342,15 @@ def _pinned_pdf_is_unchanged(
         _close_file_descriptors(reopened_descriptors)
 
 
-def _count_stable_pdf(
+def inspect_stable_pdf(
     root: Path,
     path: str,
     *,
     pdfinfo_counter: Callable[[Path], tuple[int | None, str | None]],
     python_counter: Callable[[Path], tuple[int | None, str | None]],
-) -> tuple[int | None, str | None, str | None]:
+) -> tuple[str | None, int | None, str | None, str | None]:
+    """Hash and count one PDF from the same private, pinned snapshot."""
+
     try:
         (
             components,
@@ -348,7 +359,7 @@ def _count_stable_pdf(
             source_descriptor,
         ) = _open_pinned_pdf(root, path)
     except _PdfAccessError as exc:
-        return None, None, str(exc)
+        return None, None, None, str(exc)
 
     try:
         source_fingerprint = _stat_fingerprint(os.fstat(source_descriptor))
@@ -356,7 +367,15 @@ def _count_stable_pdf(
             return (
                 None,
                 None,
+                None,
                 "fichier PDF suivi non régulier: type de fichier interdit",
+            )
+        if source_fingerprint[6] != 1:
+            return (
+                None,
+                None,
+                None,
+                "fichier PDF suivi hardlink interdit",
             )
         try:
             with tempfile.TemporaryDirectory(
@@ -386,9 +405,12 @@ def _count_stable_pdf(
                 finally:
                     os.close(temporary_descriptor)
                 if not stable_copy:
-                    return None, None, PDF_MUTATION_REASON
+                    return None, None, None, PDF_MUTATION_REASON
 
                 snapshot_path = temporary_path / "snapshot.pdf"
+                digest = "sha256:" + hashlib.sha256(
+                    snapshot_path.read_bytes()
+                ).hexdigest()
                 count, pdfinfo_reason = pdfinfo_counter(snapshot_path)
                 if count is not None:
                     method = "pdfinfo"
@@ -411,10 +433,11 @@ def _count_stable_pdf(
                     source_descriptor,
                     source_fingerprint,
                 ):
-                    return None, None, PDF_MUTATION_REASON
-                return count, method, reason
+                    return None, None, None, PDF_MUTATION_REASON
+                return digest, count, method, reason
         except OSError as exc:
             return (
+                None,
                 None,
                 None,
                 "snapshot PDF privé indisponible: " f"{type(exc).__name__}",
@@ -422,6 +445,22 @@ def _count_stable_pdf(
     finally:
         os.close(source_descriptor)
         _close_file_descriptors(parent_descriptors)
+
+
+def _count_stable_pdf(
+    root: Path,
+    path: str,
+    *,
+    pdfinfo_counter: Callable[[Path], tuple[int | None, str | None]],
+    python_counter: Callable[[Path], tuple[int | None, str | None]],
+) -> tuple[int | None, str | None, str | None]:
+    _digest, count, method, reason = inspect_stable_pdf(
+        root,
+        path,
+        pdfinfo_counter=pdfinfo_counter,
+        python_counter=python_counter,
+    )
+    return count, method, reason
 
 
 def inventory_pdfs(

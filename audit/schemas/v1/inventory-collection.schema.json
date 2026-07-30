@@ -11,10 +11,14 @@
     "assemblies",
     "coherence_checks",
     "correction_links",
+    "declared_assemblies",
     "deliverable_matrix",
     "generated_by",
     "manuals",
     "model_digest",
+    "observed_build_coverage",
+    "observed_build_integration",
+    "observed_builds",
     "pdfs",
     "provenance",
     "reference_graph",
@@ -35,10 +39,24 @@
     "assemblies": { "type": "array" },
     "coherence_checks": { "type": "object" },
     "correction_links": { "type": "array" },
+    "declared_assemblies": { "type": "array" },
     "deliverable_matrix": { "type": "object" },
     "generated_by": { "const": "inventory_collection.py" },
     "manuals": { "type": "object" },
     "model_digest": { "$ref": "#/$defs/sha256" },
+    "observed_build_coverage": { "type": "object" },
+    "observed_build_integration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entrypoint", "status"],
+      "properties": {
+        "entrypoint": {
+          "const": "python scripts/build_manifest.py --receipt <build-receipt.json>"
+        },
+        "status": { "const": "not_integrated" }
+      }
+    },
+    "observed_builds": { "type": "array" },
     "pdfs": { "type": "array" },
     "provenance": { "type": "object" },
     "reference_graph": { "type": "array" },

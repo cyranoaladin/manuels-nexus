@@ -9,9 +9,11 @@
     "build_state_digest",
     "builds",
     "generated_by",
+    "model_digest",
     "provenance",
     "schema_ref",
-    "schema_version"
+    "schema_version",
+    "source_digest"
   ],
   "properties": {
     "artifact_type": { "const": "build_manifest" },
@@ -20,45 +22,94 @@
       "type": "array",
       "items": { "$ref": "#/$defs/build" }
     },
-    "generated_by": { "const": "inventory_collection.py" },
-    "provenance": { "type": "object" },
+    "generated_by": { "const": "build_manifest.py" },
+    "model_digest": { "$ref": "#/$defs/sha256" },
+    "provenance": { "$ref": "#/$defs/provenance" },
     "schema_ref": { "const": "audit/schemas/v1/build-manifest.schema.json" },
-    "schema_version": { "const": 1 }
+    "schema_version": { "const": 1 },
+    "source_digest": { "$ref": "#/$defs/sha256" }
   },
   "$defs": {
     "build": {
       "type": "object",
+      "additionalProperties": false,
       "required": [
-        "gate_results",
+        "excluded_objects",
+        "gates",
+        "generated_dependencies",
+        "generated_dependency_digests",
         "git_sha",
         "included_objects",
+        "manual",
         "model_digest",
+        "ordered_trace",
         "page_count",
-        "pdf",
-        "sha256",
+        "pdf_path",
+        "pdf_sha256",
         "source_digest",
         "tool_versions",
         "variant"
       ],
       "properties": {
-        "gate_results": { "type": "object", "minProperties": 1 },
-        "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
-        "included_objects": {
-          "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+        "excluded_objects": { "$ref": "#/$defs/stringList" },
+        "gates": {
+          "type": "object",
+          "minProperties": 2,
+          "additionalProperties": {
+            "type": "object",
+            "required": ["passed"],
+            "properties": {
+              "passed": { "type": "boolean" }
+            }
+          },
+          "required": ["compile", "preflight"]
         },
+        "generated_dependencies": { "$ref": "#/$defs/stringList" },
+        "generated_dependency_digests": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/sha256" }
+        },
+        "git_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "included_objects": { "$ref": "#/$defs/nonEmptyStringList" },
+        "manual": { "type": "string", "minLength": 1 },
         "model_digest": { "$ref": "#/$defs/sha256" },
+        "ordered_trace": { "$ref": "#/$defs/nonEmptyStringList" },
         "page_count": { "type": "integer", "minimum": 1 },
-        "pdf": { "type": "string", "minLength": 1 },
-        "sha256": { "$ref": "#/$defs/sha256" },
+        "pdf_path": { "type": "string", "minLength": 1 },
+        "pdf_sha256": { "$ref": "#/$defs/sha256" },
         "source_digest": { "$ref": "#/$defs/sha256" },
-        "tool_versions": { "type": "object", "minProperties": 1 },
+        "tool_versions": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
         "variant": { "type": "string", "minLength": 1 }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["branch", "dirty", "head_sha"],
+      "properties": {
+        "branch": { "type": "string", "minLength": 1 },
+        "dirty": { "type": "boolean" },
+        "head_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
       }
     },
     "sha256": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nonEmptyStringList": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "stringList": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
     }
   }
 }
