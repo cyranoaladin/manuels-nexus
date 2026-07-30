@@ -85,12 +85,17 @@ Located at position 1 within expression: runner.temp,
 Located at position 1 within expression: runner.temp
 ```
 
-Cause racine : `runner.temp` est évalué dans
-`jobs.audit-phase-0.env`, avant qu'un runner et le contexte `runner` soient
-disponibles. Les variables `CI_ARTIFACT_DIR` et `COVERAGE_FILE` rendent ainsi le
-workflow invalide avant création du job. Les tests locaux de contrat ne
-détectent pas cette erreur : ils exigent actuellement que
-`CI_ARTIFACT_DIR.startswith("${{ runner.temp }}/")`.
+Cause racine : le contexte `runner` n'est pas accepté dans
+`jobs.audit-phase-0.env` lors de la validation statique du workflow. Le contexte
+runner n'est pas accepté dans `jobs.<job_id>.env` lors de la validation statique
+du workflow. Les chemins dépendant du runner doivent être initialisés après
+attribution du runner.
+
+Les variables `CI_ARTIFACT_DIR` et `COVERAGE_FILE` rendaient ainsi le workflow
+invalide avant création du job. Le contrat local est étendu pour interdire
+`${{ runner.* }}` dans `jobs.*.env`, imposer l'initialisation via
+`$RUNNER_TEMP`, et conserver l'upload des preuves au niveau d'une étape où le
+contexte `runner` est disponible.
 
 ### Checks et suites externes
 

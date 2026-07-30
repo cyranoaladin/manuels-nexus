@@ -61,6 +61,171 @@ def _workflow() -> tuple[dict[object, object], str]:
     return payload, text
 
 
+def _runner_context_in_job_env(workflow: dict[object, object]) -> list[str]:
+    jobs = workflow.get("jobs")
+    assert isinstance(jobs, dict)
+    violations: list[str] = []
+    for job_name, job in jobs.items():
+        assert isinstance(job_name, str)
+        assert isinstance(job, dict)
+        env = job.get("env", {})
+        assert isinstance(env, dict)
+        for key, value in env.items():
+            if isinstance(value, str) and "${{ runner." in value:
+                violations.append(f"jobs.{job_name}.env.{key}")
+    return violations
+
+
+def _run_step(step: dict[object, object]) -> str:
+    run = step.get("run")
+    assert isinstance(run, str)
+    return run
+
+
+def _named_step(
+    workflow: dict[object, object],
+    name: str,
+) -> dict[object, object]:
+    steps = workflow["jobs"]["audit-phase-0"]["steps"]
+    assert isinstance(steps, list)
+    matches = [
+        step
+        for step in steps
+        if isinstance(step, dict) and step.get("name") == name
+    ]
+    assert len(matches) == 1
+    return matches[0]
+
+
+def test_audit_workflow_yaml_is_valid() -> None:
+    workflow, _ = _workflow()
+    assert workflow["name"] == "CI audit collection Phase 0"
+    assert "audit-phase-0" in workflow["jobs"]
+
+
+def test_runner_context_is_forbidden_in_job_env() -> None:
+    workflow, _ = _workflow()
+    assert _runner_context_in_job_env(workflow) == []
+
+
+def test_runner_context_detector_rejects_adversarial_job_env() -> None:
+    workflow, _ = _workflow()
+    jobs = workflow["jobs"]
+    assert isinstance(jobs, dict)
+    audit_job = jobs["audit-phase-0"]
+    assert isinstance(audit_job, dict)
+    env = dict(audit_job.get("env", {}))
+    env["BROKEN_ARTIFACT_DIR"] = "${{ runner.temp }}/broken"
+    adversarial = dict(workflow)
+    adversarial_jobs = dict(jobs)
+    adversarial_jobs["audit-phase-0"] = {**audit_job, "env": env}
+    adversarial["jobs"] = adversarial_jobs
+    assert _runner_context_in_job_env(adversarial) == [
+        "jobs.audit-phase-0.env.BROKEN_ARTIFACT_DIR"
+    ]
+
+
+def test_audit_workflow_keeps_static_job_environment_only() -> None:
+    workflow, _ = _workflow()
+    env = workflow["jobs"]["audit-phase-0"]["env"]
+    assert env == {
+        "LC_ALL": "C.UTF-8",
+        "PYTHONHASHSEED": "0",
+        "TZ": "UTC",
+    }
+
+
+def test_audit_workflow_initializes_runner_artifact_paths_after_checkout() -> None:
+    workflow, _ = _workflow()
+    steps = workflow["jobs"]["audit-phase-0"]["steps"]
+    assert isinstance(steps, list)
+    checkout_index = next(
+        index
+        for index, step in enumerate(steps)
+        if isinstance(step, dict)
+        and str(step.get("uses", "")).startswith("actions/checkout@")
+    )
+    init_step = _named_step(
+        workflow,
+        "Initialiser les chemins temporaires du runner",
+    )
+    init_index = steps.index(init_step)
+    assert init_index > checkout_index
+
+    run = _run_step(init_step)
+    assert 'test -n "${RUNNER_TEMP:-}"' in run
+    assert 'artifact_dir="${RUNNER_TEMP}/ci-audit-artifacts"' in run
+    assert 'mkdir --parents "$artifact_dir"' in run
+    assert 'printf \'CI_ARTIFACT_DIR=%s\\n\' "$artifact_dir"' in run
+    assert 'printf \'COVERAGE_FILE=%s\\n\' "$artifact_dir/.coverage"' in run
+    assert '} >> "$GITHUB_ENV"' in run
+    assert "Répertoire des preuves" in run
+
+
+def test_artifact_directory_is_created_before_use() -> None:
+    workflow, _ = _workflow()
+    steps = workflow["jobs"]["audit-phase-0"]["steps"]
+    assert isinstance(steps, list)
+    init_step = _named_step(
+        workflow,
+        "Initialiser les chemins temporaires du runner",
+    )
+    init_index = steps.index(init_step)
+    first_usage = min(
+        index
+        for index, step in enumerate(steps)
+        if isinstance(step, dict)
+        and index != init_index
+        and "$CI_ARTIFACT_DIR" in str(step.get("run", ""))
+    )
+    assert init_index < first_usage
+
+
+def test_mypy_cache_uses_runner_temp_shell_expansion() -> None:
+    _, text = _workflow()
+    assert '--cache-dir "$RUNNER_TEMP/mypy-cache"' in text
+    assert '--cache-dir "${{ runner.temp }}/mypy-cache"' not in text
+
+
+def test_artifact_upload_uses_step_runner_context_not_dynamic_env() -> None:
+    workflow, text = _workflow()
+    upload = _named_step(workflow, "Publier toutes les preuves Phase 0")
+    assert upload["if"] == "always()"
+    assert upload["uses"] == (
+        "actions/upload-artifact@"
+        "ea165f8d65b6e75b540449e92b4886f43607fa02"
+    )
+    assert upload["with"]["path"] == (
+        "${{ runner.temp }}/ci-audit-artifacts\n"
+        "audit/BUILD_MANIFEST.json\n"
+    )
+    assert upload["with"]["if-no-files-found"] == "error"
+    assert "${{ env.CI_ARTIFACT_DIR }}" not in text
+
+
+def test_audit_workflow_triggers_remain_phase_0_only() -> None:
+    workflow, _ = _workflow()
+    triggers = workflow["on"]
+    assert set(triggers) == {"pull_request", "push", "workflow_dispatch"}
+    assert triggers["push"] == {
+        "branches": ["finalisation/collection-v1"],
+    }
+
+
+def test_audit_workflow_does_not_turn_red_tests_into_silent_success() -> None:
+    _, text = _workflow()
+    forbidden = (
+        "continue-on-error",
+        "pytest.mark.skip",
+        "pytest.mark.xfail",
+        "--ignore=",
+        "|| true",
+        "exit 0",
+        "set +e",
+    )
+    assert all(token not in text for token in forbidden)
+
+
 def test_ci_configuration_is_explicit_and_pinned() -> None:
     pyproject = PYPROJECT.read_text(encoding="utf-8")
     assert 'addopts = "--import-mode=importlib"' in pyproject
@@ -171,9 +336,6 @@ def test_audit_workflow_runs_the_complete_unweakened_contract() -> None:
     assert '"generated-a"' in helper
     assert '"generated-b"' in helper
     assert "audit/BUILD_MANIFEST.json" in text
-    artifact_dir = workflow["jobs"]["audit-phase-0"]["env"]["CI_ARTIFACT_DIR"]
-    assert artifact_dir.startswith("${{ runner.temp }}/")
-    assert "github.workspace" not in artifact_dir
 
 
 @pytest.fixture()

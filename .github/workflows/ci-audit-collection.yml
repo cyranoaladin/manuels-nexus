@@ -15,8 +15,6 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:
-      CI_ARTIFACT_DIR: ${{ runner.temp }}/ci-audit-artifacts
-      COVERAGE_FILE: ${{ runner.temp }}/ci-audit-artifacts/.coverage
       LC_ALL: C.UTF-8
       PYTHONHASHSEED: "0"
       TZ: UTC
@@ -26,6 +24,23 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           fetch-depth: 0
+
+      - name: Initialiser les chemins temporaires du runner
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -n "${RUNNER_TEMP:-}"
+          artifact_dir="${RUNNER_TEMP}/ci-audit-artifacts"
+
+          mkdir --parents "$artifact_dir"
+
+          {
+            printf 'CI_ARTIFACT_DIR=%s\n' "$artifact_dir"
+            printf 'COVERAGE_FILE=%s\n' "$artifact_dir/.coverage"
+          } >> "$GITHUB_ENV"
+
+          printf 'Répertoire des preuves : %s\n' "$artifact_dir"
 
       - name: Attacher le SHA audité sans changer de commit
         shell: bash
@@ -62,9 +77,6 @@ jobs:
             --requirement requirements-ci-audit.txt
           python -m pip check
 
-      - name: Préparer les preuves hors du worktree
-        run: mkdir --parents "$CI_ARTIFACT_DIR"
-
       - name: Lint Phase 0
         run: |
           python -m ruff check \
@@ -77,7 +89,7 @@ jobs:
       - name: Typage Phase 0
         run: |
           python -m mypy \
-            --cache-dir "${{ runner.temp }}/mypy-cache"
+            --cache-dir "$RUNNER_TEMP/mypy-cache"
 
       - name: Parser tous les JSON et YAML suivis
         run: |
@@ -120,7 +132,7 @@ jobs:
         with:
           name: audit-collection-${{ github.sha }}
           path: |
-            ${{ env.CI_ARTIFACT_DIR }}
+            ${{ runner.temp }}/ci-audit-artifacts
             audit/BUILD_MANIFEST.json
           if-no-files-found: error
           retention-days: 14
