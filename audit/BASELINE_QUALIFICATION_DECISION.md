@@ -29,8 +29,8 @@ Référence durable de la décision :
 |---|---|
 | HEAD observé | `27082043c45fc405299e335f6eb7475f01288e27` |
 | Branche | `finalisation/collection-v1` |
-| `source_digest` | `sha256:7160cd1f547a33f39d2e951da46bccd08731c7d000a40468a44d9cfc727e5033` |
-| `model_digest` | `sha256:1f20bea5812f4428a9d2c5616df8eb1492e4298f27e8fbb4a9da128fa9e3b846` |
+| `source_digest` | `sha256:13f39224d54e05eead87e36d08ccf660e4925902ab30381a5104a4256622da8a` |
+| `model_digest` | `sha256:be9f9565253225a3ba194b1b81039f847067a809066fd72124263876b04a0e60` |
 | Fingerprints actifs | 2 461 |
 | Déjà qualifiés par preuve versionnée | 4 |
 | Lot à qualifier | 2 457 |
