@@ -426,12 +426,12 @@ manuals:
         declared_chapter_variants: []
         declared_manual_variants: []
         state: absent
-model_digest: sha256:70fa7c74a718f3c8c985a14d8d82d5e4813d264e1dc509cb576ae1a032c51d0a
+model_digest: sha256:80d5fc066ee0f41419d7008dc16eef87d0b1664faf80182c9d2239a88451d6d2
 provenance:
   branch: finalisation/collection-v1
-  dirty: false
+  dirty: true
   errors: []
-  generated_at_utc: '2026-07-30T20:20:29Z'
+  generated_at_utc: '2026-07-31T19:04:52Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:abcd7be592273bfa37c832ca948f0154adad4514764ca8709cc851e3c726a24c
     scripts/build_manifest.py: sha256:0e914f9ec1071e5941ef954e5dd9396e7910a05fa068c63cb08e975f1293fce7
@@ -443,8 +443,9 @@ provenance:
   generator_sha256: sha256:f297e0f52ddb4a9d8ecd362ac9fbafea03854b0221d950a62316c8216eb9f31a
   generator_version: 1
   git_available: true
-  head_sha: d21ddef9ce142860d85c01f62570234e8abdbb1b
-  modified_tracked: []
+  head_sha: 87f32e3e108736b9f8467e50b0b49163f6413b32
+  modified_tracked:
+  - audit/BUILD_MANIFEST.json
   tool_versions:
     git: git version 2.43.0
     latexmk: Latexmk, John Collins, 31 Jan. 2024. Version 4.83
@@ -454,4 +455,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:00b734105ffb4ec0f85cabb58b0d1ec095ae4ecc4506281ab6e56c02fa5ca9b8
+source_digest: sha256:dd7846fc879bb769ffec5153e70dcd960e7446f4b763ce36c27a7ef6e81bfb8b
