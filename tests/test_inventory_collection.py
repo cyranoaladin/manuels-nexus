@@ -131,12 +131,19 @@ def _commit_repository(repository: Path, message: str = "fixture") -> str:
     ).stdout.strip()
 
 
+def _local_cli_environment() -> dict[str, str]:
+    environment = os.environ.copy()
+    environment.pop("CI", None)
+    return environment
+
+
 def _run_inventory_cli(repository: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [sys.executable, str(SCRIPT), "--root", str(repository), *arguments],
         capture_output=True,
         text=True,
         check=False,
+        env=_local_cli_environment(),
     )
 
 
@@ -154,6 +161,7 @@ def _run_repository_inventory_cli(
         capture_output=True,
         text=True,
         check=False,
+        env=_local_cli_environment(),
     )
 
 
@@ -3628,6 +3636,7 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
     inventory_module,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    monkeypatch.delenv("CI", raising=False)
     _init_repository(tmp_path)
     _install_audit_schemas(tmp_path)
     _write(tmp_path / "tracked.txt", "source\n")
@@ -3869,6 +3878,7 @@ def test_update_baseline_rejects_head_change_immediately_before_replace(
     inventory_module,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    monkeypatch.delenv("CI", raising=False)
     _init_repository(tmp_path)
     _install_audit_schemas(tmp_path)
     _write(tmp_path / "tracked.txt", "source\n")
@@ -3990,6 +4000,7 @@ def test_update_baseline_recovers_interrupted_write_before_clean_preflight(
     inventory_module,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    monkeypatch.delenv("CI", raising=False)
     baseline = tmp_path / "audit/ANOMALIES_BASELINE.json"
     report = tmp_path / "audit/BASELINE_UPDATE_REPORT.md"
     freeze_report = tmp_path / "audit/BASELINE_FREEZE_REPORT.md"
