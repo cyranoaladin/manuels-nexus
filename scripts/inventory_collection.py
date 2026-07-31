@@ -28,7 +28,7 @@ from fnmatch import fnmatch
 from contextlib import contextmanager
 from pathlib import Path, PurePosixPath
 from collections import Counter, defaultdict
-from collections.abc import Callable, Iterable
+from collections.abc import Callable, Iterable, Sequence
 from types import MappingProxyType
 from typing import Any, Mapping
 
@@ -1956,6 +1956,72 @@ def _compare_anomaly_debt(
         "success": not failures,
         "unchanged": unchanged,
     }
+
+
+_QUALIFICATION_DIGEST_FAILURE_PREFIX = "qualification modifiée fp="
+_QUALIFICATION_DIGEST_FAILURE_SUFFIX = ": qualification_digest différent"
+_QUALIFICATION_DIGEST_BOOTSTRAP_EXEMPT_FIELDS = frozenset({"qualification_digest"})
+
+
+def _qualification_digest_bootstrap_diagnosis(
+    current_active: Sequence[Mapping[str, Any]],
+    baseline_active: Sequence[Mapping[str, Any]],
+    comparison: Mapping[str, Any],
+) -> tuple[bool, list[str]]:
+    """Decide whether a fail-on-new drift is exclusively a mechanical
+    qualification_digest realignment (e.g. after a reviewed policy
+    control_digest change) with zero other change of any kind.
+
+    ``_compare_anomaly_debt`` does not itself compare every field (notably
+    ``owner`` and ``category`` are outside its regression contract), so this
+    function independently re-verifies every field of every matched
+    fingerprint — not just the failures ``_compare_anomaly_debt`` happened to
+    report — before a bootstrap is allowed to bypass any precondition.
+
+    Returns ``(True, [])`` only when the active fingerprint set is byte-for-
+    byte identical before and after except for ``qualification_digest``, and
+    every reported failure is a ``qualification_digest`` mismatch. Anything
+    else — a new anomaly, a resolved/regressed fingerprint, an occurrence/
+    severity/blocking/disposition/owner/category change, a locator-based
+    substitution — is surfaced verbatim in the second element and makes the
+    diagnosis impure.
+    """
+
+    offending = [
+        str(failure)
+        for failure in comparison.get("failures", [])
+        if not (
+            str(failure).startswith(_QUALIFICATION_DIGEST_FAILURE_PREFIX)
+            and str(failure).endswith(_QUALIFICATION_DIGEST_FAILURE_SUFFIX)
+        )
+    ]
+    for key in ("new", "resolved", "regressions", "modified", "improvements"):
+        if comparison.get(key):
+            offending.append(f"jeu non vide de type '{key}' pendant un bootstrap")
+
+    current = _coalesce_active_debt(current_active)
+    previous = _coalesce_active_debt(baseline_active)
+    if set(current) != set(previous):
+        offending.append(
+            "ensemble de fingerprints modifié pendant un bootstrap"
+        )
+    else:
+        for fingerprint in sorted(current):
+            current_entry = current[fingerprint]
+            previous_entry = previous[fingerprint]
+            fields = (
+                set(current_entry)
+                | set(previous_entry)
+            ) - _QUALIFICATION_DIGEST_BOOTSTRAP_EXEMPT_FIELDS
+            for field in sorted(fields):
+                if current_entry.get(field) != previous_entry.get(field):
+                    offending.append(
+                        "champ non cryptographique modifié "
+                        f"fp={fingerprint}:{field}"
+                    )
+
+    pure = not offending and bool(comparison.get("failures"))
+    return pure, sorted(set(offending))
 
 
 def _evaluate_baseline(
@@ -8096,9 +8162,16 @@ def _run_baseline_readiness_check(
     }
 
 
-def _baseline_ready_gate(root: Path) -> dict[str, Any]:
+def _baseline_ready_gate(
+    root: Path,
+    *,
+    override_checks: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    overrides = override_checks or {}
     checks = [
-        _run_baseline_readiness_check(root, name)
+        dict(overrides[name])
+        if name in overrides
+        else _run_baseline_readiness_check(root, name)
         for name in BASELINE_READY_CHECK_NAMES
     ]
     reasons = [
@@ -8260,6 +8333,9 @@ def _render_baseline_update_report(
             continue
         status = "VERT" if check.get("success") is True else "ROUGE"
         lines.append(f"- {check.get('name', 'inconnu')} : {status}")
+        bypass = check.get("bootstrap_bypass")
+        if isinstance(bypass, str) and bypass:
+            lines.append(f"  - bootstrap : {bypass}")
     return "\n".join(lines) + "\n"
 
 
@@ -8394,6 +8470,7 @@ def _update_baseline_gate(
     *,
     reason: str,
     approved_by: str,
+    allow_qualification_digest_bootstrap: bool = False,
 ) -> dict[str, Any]:
     reasons: list[str] = []
     if os.environ.get("CI"):
@@ -8453,7 +8530,74 @@ def _update_baseline_gate(
         validated_baseline
     )
     validated_head = _repo_head_sha(root, required=True)
-    readiness = _baseline_ready_gate(root)
+    override_checks: dict[str, dict[str, Any]] = {}
+    if (
+        allow_qualification_digest_bootstrap
+        and validated_baseline.get("provisional") is not True
+    ):
+        try:
+            probe_inventory = build_inventory(root)
+            probe_current_active = _current_active_debt(probe_inventory)
+        except (
+            InventoryError,
+            OSError,
+            subprocess.CalledProcessError,
+        ) as exc:
+            return _gate_result(
+                "update-baseline",
+                success=False,
+                failure_code=GATE_BASELINE_UPDATE_CODE,
+                dimensions={"structure": "failed"},
+                reasons=[
+                    "bootstrap_digest_realignment: inventaire indisponible:"
+                    f"{_stable_gate_reason(exc, root)}"
+                ],
+            )
+        probe_old_active = validated_baseline.get("active", [])
+        probe_old_resolved = validated_baseline.get("resolved", [])
+        probe_comparison = _compare_anomaly_debt(
+            probe_current_active,
+            probe_old_active,
+            probe_old_resolved,
+        )
+        if probe_comparison["failures"]:
+            pure, offending = _qualification_digest_bootstrap_diagnosis(
+                probe_current_active,
+                probe_old_active,
+                probe_comparison,
+            )
+            if not pure:
+                return _gate_result(
+                    "update-baseline",
+                    success=False,
+                    failure_code=GATE_BASELINE_UPDATE_CODE,
+                    dimensions={"structure": "failed"},
+                    reasons=[
+                        "bootstrap_digest_realignment refusé: dérive non "
+                        "exclusivement liée à qualification_digest"
+                    ]
+                    + [
+                        f"bootstrap_digest_realignment:{value}"
+                        for value in offending
+                    ],
+                )
+            override_checks["phase0_tests"] = {
+                "name": "phase0_tests",
+                "reasons": [],
+                "success": True,
+                "bootstrap_bypass": (
+                    "qualification_digest_bootstrap: dérive fail-on-new "
+                    "vérifiée structurellement comme exclusivement "
+                    "constituée de qualification_digest (mêmes "
+                    "fingerprints, catégories, owners, dispositions, "
+                    "sévérités)"
+                ),
+            }
+    readiness = (
+        _baseline_ready_gate(root, override_checks=override_checks)
+        if override_checks
+        else _baseline_ready_gate(root)
+    )
     if not readiness["success"]:
         result = _gate_result(
             "update-baseline",
@@ -8525,6 +8669,18 @@ def _update_baseline_gate(
             old_active,
             old_resolved,
         )
+        if allow_qualification_digest_bootstrap and comparison["failures"]:
+            pure, offending = _qualification_digest_bootstrap_diagnosis(
+                current_active,
+                old_active,
+                comparison,
+            )
+            if not pure:
+                raise InventoryError(
+                    "bootstrap_digest_realignment refusé pendant "
+                    "l'écriture: dérive non exclusivement liée à "
+                    "qualification_digest (" + "; ".join(offending[:5]) + ")"
+                )
         resolved_by_fingerprint = {
             str(entry.get("fingerprint", "")): dict(entry)
             for entry in old_resolved
@@ -8681,12 +8837,16 @@ def _safe_update_baseline_gate(
     *,
     reason: str,
     approved_by: str,
+    allow_qualification_digest_bootstrap: bool = False,
 ) -> dict[str, Any]:
     try:
         return _update_baseline_gate(
             root,
             reason=reason,
             approved_by=approved_by,
+            allow_qualification_digest_bootstrap=(
+                allow_qualification_digest_bootstrap
+            ),
         )
     except (
         InventoryError,
@@ -9074,6 +9234,18 @@ def _run() -> int:
         help="Mettre à jour explicitement la baseline après les dix préconditions.",
     )
     parser.add_argument(
+        "--allow-qualification-digest-bootstrap",
+        action="store_true",
+        help=(
+            "Avec --update-baseline uniquement : autorise le bootstrap "
+            "quand l'unique dérive fail-on-new est un réalignement "
+            "mécanique de qualification_digest (nouveau control_digest de "
+            "politique), vérifié structurellement comme n'ajoutant, "
+            "supprimant ni modifiant aucun fingerprint, disposition, "
+            "owner, catégorie ou sévérité."
+        ),
+    )
+    parser.add_argument(
         "--materialize-baseline-qualifications",
         action="store_true",
         help="Matérialiser explicitement le lot de dette approuvé par politique.",
@@ -9089,6 +9261,11 @@ def _run() -> int:
         help="Responsable humain approuvant la mise à jour de baseline.",
     )
     args = parser.parse_args()
+
+    if args.allow_qualification_digest_bootstrap and not args.update_baseline:
+        parser.error(
+            "--allow-qualification-digest-bootstrap exige --update-baseline"
+        )
 
     if args.materialize_baseline_qualifications:
         incompatible = (
@@ -9184,6 +9361,9 @@ def _run() -> int:
                     root,
                     reason=args.reason,
                     approved_by=args.approved_by,
+                    allow_qualification_digest_bootstrap=(
+                        args.allow_qualification_digest_bootstrap
+                    ),
                 )
             )
         result = next(

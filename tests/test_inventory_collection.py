@@ -3206,6 +3206,189 @@ def test_fail_on_new_rejects_a_changed_qualification_digest(
     )
 
 
+def test_qualification_digest_bootstrap_diagnosis_allows_pure_digest_drift(
+    inventory_module,
+) -> None:
+    previous = _active_debt("a" * 16, qualification_digest="sha256:" + "1" * 64)
+    current = _active_debt("a" * 16, qualification_digest="sha256:" + "2" * 64)
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [current],
+        [previous],
+        [],
+    )
+    pure, offending = inventory_module._qualification_digest_bootstrap_diagnosis(
+        [current],
+        [previous],
+        comparison,
+    )
+
+    assert pure is True
+    assert offending == []
+
+
+def test_qualification_digest_bootstrap_diagnosis_rejects_new_fingerprint(
+    inventory_module,
+) -> None:
+    previous = _active_debt("a" * 16, qualification_digest="sha256:" + "1" * 64)
+    current = _active_debt("a" * 16, qualification_digest="sha256:" + "2" * 64)
+    added = _active_debt(
+        "b" * 16,
+        locator_key="missing_corrections|1SPE|1SPE-SUITES|e2.tex|corrige_tex|EX-002",
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [current, added],
+        [previous],
+        [],
+    )
+    pure, offending = inventory_module._qualification_digest_bootstrap_diagnosis(
+        [current, added],
+        [previous],
+        comparison,
+    )
+
+    assert pure is False
+    assert any("new" in value for value in offending)
+
+
+def test_qualification_digest_bootstrap_diagnosis_rejects_removed_fingerprint(
+    inventory_module,
+) -> None:
+    previous = _active_debt("a" * 16, qualification_digest="sha256:" + "1" * 64)
+    current = _active_debt("a" * 16, qualification_digest="sha256:" + "2" * 64)
+    removed = _active_debt(
+        "b" * 16,
+        locator_key="missing_corrections|1SPE|1SPE-SUITES|e2.tex|corrige_tex|EX-002",
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [current],
+        [previous, removed],
+        [],
+    )
+    pure, offending = inventory_module._qualification_digest_bootstrap_diagnosis(
+        [current],
+        [previous, removed],
+        comparison,
+    )
+
+    assert pure is False
+    assert any("resolved" in value for value in offending)
+
+
+def test_qualification_digest_bootstrap_diagnosis_rejects_disposition_change(
+    inventory_module,
+) -> None:
+    previous = _active_debt(
+        "a" * 16,
+        qualification_digest="sha256:" + "1" * 64,
+        disposition="open_debt",
+    )
+    current = _active_debt(
+        "a" * 16,
+        qualification_digest="sha256:" + "2" * 64,
+        disposition="intentional_reuse",
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [current],
+        [previous],
+        [],
+    )
+    pure, offending = inventory_module._qualification_digest_bootstrap_diagnosis(
+        [current],
+        [previous],
+        comparison,
+    )
+
+    assert pure is False
+    assert any("modification de disposition" in value for value in offending)
+
+
+def test_qualification_digest_bootstrap_diagnosis_rejects_owner_change(
+    inventory_module,
+) -> None:
+    previous = _active_debt(
+        "a" * 16,
+        qualification_digest="sha256:" + "1" * 64,
+        owner="direction_scientifique_programme",
+    )
+    current = _active_debt(
+        "a" * 16,
+        qualification_digest="sha256:" + "2" * 64,
+        owner="ingenierie_build_qualite",
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [current],
+        [previous],
+        [],
+    )
+    pure, offending = inventory_module._qualification_digest_bootstrap_diagnosis(
+        [current],
+        [previous],
+        comparison,
+    )
+
+    assert pure is False
+    assert any("owner" in value for value in offending)
+
+
+def test_qualification_digest_bootstrap_diagnosis_rejects_severity_change(
+    inventory_module,
+) -> None:
+    previous = _active_debt(
+        "a" * 16,
+        qualification_digest="sha256:" + "1" * 64,
+        severity="warning",
+    )
+    current = dict(
+        _active_debt(
+            "a" * 16,
+            qualification_digest="sha256:" + "2" * 64,
+        ),
+        severity="blocking",
+    )
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [current],
+        [previous],
+        [],
+    )
+    pure, offending = inventory_module._qualification_digest_bootstrap_diagnosis(
+        [current],
+        [previous],
+        comparison,
+    )
+
+    assert pure is False
+    assert any("aggravation" in value for value in offending) or any(
+        "severity" in value for value in offending
+    )
+
+
+def test_qualification_digest_bootstrap_diagnosis_rejects_when_no_drift_at_all(
+    inventory_module,
+) -> None:
+    unchanged = _active_debt("a" * 16, qualification_digest="sha256:" + "1" * 64)
+
+    comparison = inventory_module._compare_anomaly_debt(
+        [unchanged],
+        [unchanged],
+        [],
+    )
+    pure, offending = inventory_module._qualification_digest_bootstrap_diagnosis(
+        [unchanged],
+        [unchanged],
+        comparison,
+    )
+
+    assert comparison["success"] is True
+    assert pure is False
+    assert offending == []
+
+
 def test_disposition_coverage_policy_gate_requires_zero_unqualified_reports(
     tmp_path: Path,
     inventory_module,
@@ -3788,6 +3971,304 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
     assert head_sha in freeze_report
     assert payload["previous_baseline_digest"] in freeze_report
     assert update["new_baseline_digest"] in freeze_report
+
+
+def _prepare_bootstrap_repository(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    old_active: list[dict[str, object]],
+    current_active: list[dict[str, object]],
+) -> str:
+    monkeypatch.delenv("CI", raising=False)
+    _init_repository(tmp_path)
+    _install_audit_schemas(tmp_path)
+    _write(tmp_path / "tracked.txt", "source\n")
+    schema_paths = tuple(
+        path.relative_to(tmp_path).as_posix()
+        for path in (tmp_path / "audit/schemas").rglob("*.json")
+    )
+    _track(tmp_path, "tracked.txt", *schema_paths)
+    head_sha = _commit_repository(tmp_path)
+    old_baseline = _baseline_contract_payload()
+    old_baseline["git_sha"] = head_sha
+    old_baseline["active"] = old_active
+    old_baseline["resolved"] = []
+    old_baseline["provisional"] = False
+    old_baseline["previous_baseline_digest"] = None
+    placeholder_update = {
+        "approved_by": "Alaeddine Ben Rhouma",
+        "git_sha": head_sha,
+        "new_baseline_digest": "sha256:" + "0" * 64,
+        "previous_baseline_digest": None,
+        "reason": "Gel initial",
+        "timestamp": "2026-07-30T08:00:00Z",
+    }
+    old_baseline["updates"] = [placeholder_update]
+    placeholder_update["new_baseline_digest"] = (
+        inventory_module._baseline_payload_digest(old_baseline)
+    )
+    _write(
+        tmp_path / "audit/ANOMALIES_BASELINE.json",
+        json.dumps(old_baseline, ensure_ascii=False),
+    )
+    _track(tmp_path, "audit/ANOMALIES_BASELINE.json")
+    head_sha = _commit_repository(tmp_path, "baseline")
+
+    inventory = {
+        "anomalies": {},
+        "anomaly_qualifications": {},
+        "provenance": {
+            "generated_at_utc": inventory_module._generation_timestamp(
+                tmp_path,
+                required=True,
+            ),
+            "head_sha": head_sha,
+        },
+        "source_digest": "sha256:" + "e" * 64,
+    }
+    monkeypatch.setattr(
+        inventory_module,
+        "_model_digest",
+        lambda _inventory: "sha256:" + "c" * 64,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_validate_model_gate",
+        lambda _root: inventory_module._gate_result(
+            "validate-model",
+            success=True,
+            failure_code=6,
+            dimensions={"structure": "passed"},
+            reasons=[],
+        ),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_run_baseline_readiness_check",
+        lambda _root, name: _ready_check(
+            name, success=(name != "phase0_tests")
+        ),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "build_inventory",
+        lambda _root, **_kwargs: inventory,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_current_active_debt",
+        lambda _inventory: current_active,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_dispositions",
+        lambda _root: {
+            str(entry["fingerprint"]): {
+                "qualification_policy_digest": "sha256:" + "f" * 64,
+            }
+            for entry in current_active
+        },
+    )
+    return head_sha
+
+
+def test_update_baseline_bootstrap_allows_pure_qualification_digest_realignment(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old_entry = _active_debt("a" * 16, qualification_digest="sha256:" + "1" * 64)
+    current = _active_debt("a" * 16, qualification_digest="sha256:" + "2" * 64)
+    _prepare_bootstrap_repository(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        old_active=[old_entry],
+        current_active=[current],
+    )
+
+    result = inventory_module._update_baseline_gate(
+        tmp_path,
+        reason="Réalignement mécanique de qualification_digest",
+        approved_by="Responsable éditorial",
+        allow_qualification_digest_bootstrap=True,
+    )
+
+    assert result["success"] is True
+    phase0 = next(
+        check for check in result["checks"] if check["name"] == "phase0_tests"
+    )
+    assert phase0["success"] is True
+    assert "bootstrap_bypass" in phase0
+    payload = json.loads(
+        (tmp_path / "audit/ANOMALIES_BASELINE.json").read_text(encoding="utf-8")
+    )
+    assert payload["active"] == [current]
+
+
+def test_update_baseline_without_bootstrap_flag_still_requires_phase0_tests(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old_entry = _active_debt("a" * 16, qualification_digest="sha256:" + "1" * 64)
+    current = _active_debt("a" * 16, qualification_digest="sha256:" + "2" * 64)
+    _prepare_bootstrap_repository(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        old_active=[old_entry],
+        current_active=[current],
+    )
+    original_payload = (
+        tmp_path / "audit/ANOMALIES_BASELINE.json"
+    ).read_text(encoding="utf-8")
+
+    result = inventory_module._update_baseline_gate(
+        tmp_path,
+        reason="Réalignement mécanique de qualification_digest",
+        approved_by="Responsable éditorial",
+        allow_qualification_digest_bootstrap=False,
+    )
+
+    assert result["success"] is False
+    assert any("phase0_tests" in reason for reason in result["reasons"])
+    assert (
+        tmp_path / "audit/ANOMALIES_BASELINE.json"
+    ).read_text(encoding="utf-8") == original_payload
+
+
+@pytest.mark.parametrize(
+    ("old_entry", "current"),
+    [
+        pytest.param(
+            [_active_debt("a" * 16, qualification_digest="sha256:" + "1" * 64)],
+            [
+                _active_debt("a" * 16, qualification_digest="sha256:" + "2" * 64),
+                _active_debt(
+                    "b" * 16,
+                    locator_key=(
+                        "missing_corrections|1SPE|1SPE-SUITES|e2.tex|"
+                        "corrige_tex|EX-002"
+                    ),
+                ),
+            ],
+            id="added_anomaly",
+        ),
+        pytest.param(
+            [
+                _active_debt("a" * 16, qualification_digest="sha256:" + "1" * 64),
+                _active_debt(
+                    "b" * 16,
+                    locator_key=(
+                        "missing_corrections|1SPE|1SPE-SUITES|e2.tex|"
+                        "corrige_tex|EX-002"
+                    ),
+                ),
+            ],
+            [_active_debt("a" * 16, qualification_digest="sha256:" + "2" * 64)],
+            id="removed_anomaly",
+        ),
+        pytest.param(
+            [
+                _active_debt(
+                    "a" * 16,
+                    qualification_digest="sha256:" + "1" * 64,
+                    disposition="open_debt",
+                )
+            ],
+            [
+                _active_debt(
+                    "a" * 16,
+                    qualification_digest="sha256:" + "2" * 64,
+                    disposition="intentional_reuse",
+                )
+            ],
+            id="disposition_change",
+        ),
+        pytest.param(
+            [
+                _active_debt(
+                    "a" * 16,
+                    qualification_digest="sha256:" + "1" * 64,
+                    owner="direction_scientifique_programme",
+                )
+            ],
+            [
+                _active_debt(
+                    "a" * 16,
+                    qualification_digest="sha256:" + "2" * 64,
+                    owner="ingenierie_build_qualite",
+                )
+            ],
+            id="owner_change",
+        ),
+    ],
+)
+def test_update_baseline_bootstrap_refuses_any_non_digest_drift(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    old_entry: list[dict[str, object]],
+    current: list[dict[str, object]],
+) -> None:
+    _prepare_bootstrap_repository(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        old_active=old_entry,
+        current_active=current,
+    )
+    original_payload = (
+        tmp_path / "audit/ANOMALIES_BASELINE.json"
+    ).read_text(encoding="utf-8")
+
+    result = inventory_module._update_baseline_gate(
+        tmp_path,
+        reason="Réalignement mécanique de qualification_digest",
+        approved_by="Responsable éditorial",
+        allow_qualification_digest_bootstrap=True,
+    )
+
+    assert result["success"] is False
+    assert any(
+        "bootstrap_digest_realignment" in reason for reason in result["reasons"]
+    )
+    assert (
+        tmp_path / "audit/ANOMALIES_BASELINE.json"
+    ).read_text(encoding="utf-8") == original_payload
+
+
+@pytest.mark.parametrize(
+    ("reason", "approved_by"),
+    [
+        pytest.param("", "Responsable éditorial", id="missing_reason"),
+        pytest.param("Réalignement mécanique", "", id="missing_approved_by"),
+    ],
+)
+def test_update_baseline_bootstrap_still_requires_reason_and_approver(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    reason: str,
+    approved_by: str,
+) -> None:
+    monkeypatch.delenv("CI", raising=False)
+
+    result = inventory_module._update_baseline_gate(
+        tmp_path,
+        reason=reason,
+        approved_by=approved_by,
+        allow_qualification_digest_bootstrap=True,
+    )
+
+    assert result["success"] is False
+    assert any(
+        "justification" in reason_value or "approbateur" in reason_value
+        for reason_value in result["reasons"]
+    )
 
 
 def test_baseline_freeze_report_is_deterministic_and_counts_payload_debt(
