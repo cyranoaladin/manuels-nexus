@@ -78,29 +78,45 @@
 \newcommand{\nxOngletRubrique}{%
   \ifnxVSuppressTab\else
   \begingroup
-  \sbox{\nxVOngletTextBox}{{\titrefont\fontsize{6}{6}\selectfont\color{white}%
-    \MakeUppercase{\nxRubriquePage}}}%
+  \sbox{\nxVOngletTextBox}{{\titrefont\fontsize{5.5}{5.5}\selectfont
+    \color{white}\MakeUppercase{\nxRubriquePage}}}%
   \setlength{\nxVOngletLength}{%
-    \dimexpr\wd\nxVOngletTextBox+6mm\relax}%
-  \ifdim\nxVOngletLength<16mm
-    \setlength{\nxVOngletLength}{16mm}\fi
+    \dimexpr\wd\nxVOngletTextBox+5mm\relax}%
+  \ifdim\nxVOngletLength<14mm
+    \setlength{\nxVOngletLength}{14mm}\fi
   \setlength{\nxVOngletHalfLength}{\nxVOngletLength}%
   \divide\nxVOngletHalfLength by 2
   \begin{tikzpicture}[remember picture, overlay]
     \pgfmathsetmacro{\ongletY}{-25 - (\value{chapter}-1)*18}
     \ifodd\value{page}%
-      \fill[chapcolor!85] ([yshift=\ongletY mm]current page.north east)
-        rectangle +(-12mm,-\nxVOngletLength);
-      \node[rotate=90, anchor=south, inner sep=0pt]
+      \path[fill=encre,rounded corners=1.1mm]
+        ([xshift=-10mm,yshift=\ongletY mm]current page.north east)
+        rectangle
+        ([xshift=1mm,yshift=\ongletY mm-\nxVOngletLength]
+          current page.north east);
+      \draw[chapcolor,line width=0.7pt]
+        ([xshift=-10mm,yshift=\ongletY mm]current page.north east)
+        --
+        ([xshift=-10mm,yshift=\ongletY mm-\nxVOngletLength]
+          current page.north east);
+      \node[rotate=90,anchor=center,inner sep=0pt]
         at ([yshift=\ongletY mm-\nxVOngletHalfLength,
-             xshift=-6mm]current page.north east)
+             xshift=-5mm]current page.north east)
         {\usebox{\nxVOngletTextBox}};
     \else
-      \fill[chapcolor!85] ([yshift=\ongletY mm]current page.north west)
-        rectangle +(12mm,-\nxVOngletLength);
-      \node[rotate=-90, anchor=south, inner sep=0pt]
+      \path[fill=encre,rounded corners=1.1mm]
+        ([xshift=-1mm,yshift=\ongletY mm]current page.north west)
+        rectangle
+        ([xshift=10mm,yshift=\ongletY mm-\nxVOngletLength]
+          current page.north west);
+      \draw[chapcolor,line width=0.7pt]
+        ([xshift=10mm,yshift=\ongletY mm]current page.north west)
+        --
+        ([xshift=10mm,yshift=\ongletY mm-\nxVOngletLength]
+          current page.north west);
+      \node[rotate=-90,anchor=center,inner sep=0pt]
         at ([yshift=\ongletY mm-\nxVOngletHalfLength,
-             xshift=6mm]current page.north west)
+             xshift=5mm]current page.north west)
         {\usebox{\nxVOngletTextBox}};
     \fi
   \end{tikzpicture}%

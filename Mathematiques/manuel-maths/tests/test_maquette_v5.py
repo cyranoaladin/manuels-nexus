@@ -1577,16 +1577,16 @@ def test_rubric_tab_dynamic_source_contract():
     assert r"\endgroup" in tab_source
     assert re.search(
         r"\\sbox\{\\nxVOngletTextBox\}\{\{\s*"
-        r"\\titrefont\\fontsize\{6\}\{6\}\\selectfont",
+        r"\\titrefont\\fontsize\{5\.5\}\{5\.5\}\\selectfont",
         tab_source,
     )
     assert tab_source.count(r"\MakeUppercase{\nxRubriquePage}") == 1
     assert (
-        r"\dimexpr\wd\nxVOngletTextBox+6mm\relax" in tab_source
+        r"\dimexpr\wd\nxVOngletTextBox+5mm\relax" in tab_source
     )
     assert re.search(
-        r"\\ifdim\\nxVOngletLength<16mm\s*"
-        r"\\setlength\{\\nxVOngletLength\}\{16mm\}\\fi",
+        r"\\ifdim\\nxVOngletLength<14mm\s*"
+        r"\\setlength\{\\nxVOngletLength\}\{14mm\}\\fi",
         tab_source,
     )
     assert (
@@ -1594,13 +1594,23 @@ def test_rubric_tab_dynamic_source_contract():
         in tab_source
     )
     assert r"\divide\nxVOngletHalfLength by 2" in tab_source
-    assert r"rectangle +(-12mm,-\nxVOngletLength);" in tab_source
-    assert r"rectangle +(12mm,-\nxVOngletLength);" in tab_source
+    assert (
+        r"xshift=-10mm,yshift=\ongletY mm-\nxVOngletLength"
+        in tab_source
+    )
+    assert (
+        r"xshift=10mm,yshift=\ongletY mm-\nxVOngletLength"
+        in tab_source
+    )
     assert tab_source.count(
         r"yshift=\ongletY mm-\nxVOngletHalfLength"
     ) == 2
     assert tab_source.count(r"\usebox{\nxVOngletTextBox}") == 2
     assert tab_source.count("inner sep=0pt") == 2
+    assert tab_source.count("rounded corners=1.1mm") == 2
+    assert tab_source.count("fill=encre") == 2
+    assert tab_source.count("line width=0.7pt") == 2
+    assert "chapcolor!85" not in tab_source
     assert "-16mm" not in tab_source
     assert "-8mm" not in tab_source
 
@@ -1640,15 +1650,15 @@ def _rubric_tab_component_bbox(image_path: Path, page_number: int) -> dict:
     image = Image.open(image_path).convert("RGB")
     pixels = image.load()
     pixels_per_mm = 300.0 / 25.4
-    band_width = round(15.0 * pixels_per_mm)
+    band_width = round(12.0 * pixels_per_mm)
     high_zone = min(image.height, round(80.0 * pixels_per_mm))
     if page_number % 2:
         x_start, x_end = image.width - band_width, image.width
     else:
         x_start, x_end = 0, band_width
 
-    # chapcolor!85 = 85 % mathsAccent (#3A2BD4) sur fond blanc.
-    target = (88, 75, 218)
+    # Fond bleu nuit vectoriel défini par encre (#16233B).
+    target = (22, 35, 59)
 
     def is_tab_color(x, y):
         rgb = pixels[x, y]
@@ -1781,7 +1791,7 @@ def test_rubric_tab_dynamic_fixture_pdf(tmp_path):
     pixels_per_point = 300.0 / 72.0
     half_point = 0.5 * pixels_per_point
     half_mm = 0.5 * 300.0 / 25.4
-    minimum_padding = 3.0 * 300.0 / 25.4 - half_point
+    minimum_padding = 2.0 * 300.0 / 25.4 - half_point
     lengths = {"Cours": [], "Auto-évaluation": []}
     for page_number, label in enumerate(
         ("Cours", "Cours", "Auto-évaluation", "Auto-évaluation"), start=1
@@ -1830,7 +1840,7 @@ def test_rubric_tab_dynamic_fixture_pdf(tmp_path):
         length = component["y_max"] - component["y_min"]
         lengths[label].append(length)
         if label == "Auto-évaluation":
-            assert length > 16.0 * 300.0 / 25.4
+            assert length > 14.0 * 300.0 / 25.4
             assert start_padding >= minimum_padding, (
                 page_number,
                 label,
@@ -1844,9 +1854,9 @@ def test_rubric_tab_dynamic_fixture_pdf(tmp_path):
                 end_padding,
             )
 
-    sixteen_mm = 16.0 * 300.0 / 25.4
+    fourteen_mm = 14.0 * 300.0 / 25.4
     for length in lengths["Cours"]:
-        assert abs(length - sixteen_mm) <= half_point
+        assert abs(length - fourteen_mm) <= half_point
     assert abs(lengths["Cours"][0] - lengths["Cours"][1]) <= half_point
     assert abs(
         lengths["Auto-évaluation"][0] - lengths["Auto-évaluation"][1]
@@ -2403,20 +2413,20 @@ def test_qcm_hash_is_immutable():
 def test_validation_png_reference_hashes():
     checker = importlib.import_module("check_maquette_v5")
     expected = {
-        1: "1e065c44ee1cd031aad570b4f4c5a98aa7ced55bceba78f418ff3ba31d63a24d",
-        2: "83eaaf15bad92a303ce8c367c3dffd498fea505930aaf4be6b06322bd2d07d10",
-        3: "4247bbe4325551dd26164476f9773fc8a11f1a131f3481a8da39e60b8e95c1c1",
-        4: "8229c5aaa4bcec461bf8442c4c448655315a4fb2fedf11a0052dcebdfb8c93c2",
-        5: "54d58a7128379386bfb32f79f6e8b0a3e8ea1916cdd785df748044fac2fcd30a",
+        1: "f6e8e2f7fd212f2c2a30e157e1ca54c04e07e99989e4973d97d166bf8aa29f21",
+        2: "fdb7d7be2aba4ecbe0b6384216ac99225e4d9134f89fd0ec78bd5600045e1c8d",
+        3: "929de90de73fd84b374d3a9532127412b2d7b84f567a2a05496ad53e45a23b28",
+        4: "ea0c65d97887080748e086f8f28d320bc9e275353913d5fd4ce1ab0518661efa",
+        5: "5af5aa84251dda5ed60b939150e9d7d54d29ab685940b6dc6e6013adc1af456b",
         6: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
-        7: "b3499d26ce3c43b206b1913bc3a3bc6960bd0827e131a4634d8807f4f7ecd233",
-        8: "7dc9d309b149ce5717e1f7aeab803c45f282c6cb4a4973668ffb3d1d267764ac",
-        9: "fbe900adaa69d7374e0be7ead78dcc2295e03d35671281e4c7e0890d656e726e",
-        10: "50aec5774963497bdf290b68c571dfa3d13336ded825e5969a3aee66834497be",
-        11: "91f971e7ae61251c03e023fcd680982667810e2639d0d5aec02a66140129684d",
-        12: "eeb87208366ce9f12da4cd478040ad417bcfea65d9b65c591cad477555832093",
+        7: "8c074523fc9a748d600cab68f2a39f6160c3a0b16c573c40e44e8a77c5c4fa26",
+        8: "aaa00f8b119290b299796bf5aa46d4be57ce73fcc353149a449d1bfb0b64a1b9",
+        9: "9194d44098884daa94903d15e30aa9b64c6ea6a8d6f7828e617986d5228daafe",
+        10: "874bf8e82ba491b6ec1cda722a83eb9004b8d92b435cb69550f689b45c96bff5",
+        11: "9cf0230785abda7d7c5b6bd402f5c5e39346c2bf25936f674e9004c079e7c5be",
+        12: "d4bd8e068b34160549a731272de8d9285a276018ed507bede03e1dbcfe2350c7",
         14: "c9ab92b231ec622b7e0312355cd5168dc3e7c678fdcfb9cf994cf9db389a5e71",
-        15: "988b636d4f82ae6fcad93a4651cb43639744aa9094e1d31a4e190a36da1e91b4",
+        15: "d47612afe936bbc82576388107f34ebce8d547344c93176019cc7462a4677591",
     }
 
     assert checker.NON_DIAGNOSTICS_PAGE_SHA256 == expected
