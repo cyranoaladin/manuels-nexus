@@ -177,12 +177,10 @@ def validate_materialized_registry(
         for fingerprint, record in dispositions.items()
         if (
             isinstance(record, Mapping)
+            and record.get("policy_rule") != "historical-evidence"
             and (
                 "qualification_policy_digest" in record
-                or (
-                    record.get("policy_rule")
-                    and record.get("policy_rule") != "historical-evidence"
-                )
+                or record.get("policy_rule")
             )
         )
     }

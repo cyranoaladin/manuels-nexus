@@ -74,42 +74,37 @@ def test_qualification_policy_schema_and_approved_contract(
         "approved_by": "Alaeddine Ben Rhouma",
         "approver_role": "Direction scientifique et éditoriale Nexus Réussite",
         "baseline_purpose": "debt_regression_control",
-        "id": "baseline-debt-regression-control-2026-07-30",
+        "id": "baseline-debt-extension-origin-main-2026-08-02",
         "provisional_after_freeze": False,
         "ref": (
             "audit/BASELINE_QUALIFICATION_DECISION.md"
-            "#decision-baseline-debt-regression-control-2026-07-30"
+            "#decision-baseline-debt-extension-origin-main-2026-08-02"
         ),
         "release_acceptance": False,
     }
     assert payload["approved_set"] == {
-        "baseline_sha": "27082043c45fc405299e335f6eb7475f01288e27",
+        "baseline_sha": "fb90e5c7cabb16c29c61bf4bdc1d5abae3f0121a",
         "category_counts": {
-            "blocking_statuses": 1796,
-            "broken_meta_references": 24,
-            "chapters_not_in_manual": 4,
-            "missing_assemblers": 3,
-            "unassembled_objects": 614,
-            "unattributed_pdfs": 1,
-            "unavailable_inspiration_sources": 15,
+            "blocking_statuses": 134,
+            "unassembled_objects": 52,
         },
-        "fingerprint_count": 2457,
+        "fingerprint_count": 186,
         "fingerprint_digest": (
             "sha256:"
-            "ee6220cca262a6d5f331e7e86c514960c859f3b452c46ce24ac714ad521f13e8"
+            "ac046f9784e3a492dbcb83dca74292ff0b503a19b52d09ebef51e5e94a299fe8"
         ),
         "observed_model_digest_before_materialization": (
             "sha256:"
-            "be9f9565253225a3ba194b1b81039f847067a809066fd72124263876b04a0e60"
+            "606142c55324affad412521536f294a913c4ba45d0d0e10e7fb785238cba58aa"
         ),
         "observed_source_digest_before_materialization": (
             "sha256:"
-            "13f39224d54e05eead87e36d08ccf660e4925902ab30381a5104a4256622da8a"
+            "f2b46f25776ce98e2a52a422581532911045d861613ab652625a08b838d07545"
         ),
         "owner_counts": {
-            "direction_editoriale_pedagogique": 328,
-            "direction_scientifique_programme": 1473,
-            "ingenierie_build_qualite": 656,
+            "direction_editoriale_pedagogique": 25,
+            "direction_scientifique_programme": 109,
+            "ingenierie_build_qualite": 52,
         },
     }
     assert set(payload["owners"]) == {
@@ -397,7 +392,7 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
     ]
     fingerprints = [record["fingerprint"] for record in approved_records]
 
-    assert len(approved_records) == 2457
+    assert len(approved_records) == 186
     assert len(fingerprints) == len(set(fingerprints))
     assert _digest_fingerprints(fingerprints) == policy["approved_set"][
         "fingerprint_digest"
@@ -460,13 +455,13 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
         observed_model_digest=inventory_module._model_digest(inventory),
     )
 
-    assert plan["approved_fingerprint_count"] == 2457
+    assert plan["approved_fingerprint_count"] == 186
     assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
     ]
     assert plan["unqualified"] == []
     payload = plan["dispositions_payload"]
-    assert len(payload["dispositions"]) == 2461
+    assert len(payload["dispositions"]) == 2647
     required = {
         "approved_by",
         "baseline_sha",
@@ -509,6 +504,27 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
     assert payload["control_digest"] == qualification_module.control_digest(payload)
     assert plan["unqualified_json"]["summary"]["unqualified"] == 0
     assert plan["unqualified_markdown"].endswith("\n")
+
+
+def test_repository_registry_excludes_historical_evidence_from_current_policy(
+    qualification_module,
+    inventory_module,
+    policy,
+) -> None:
+    inventory = inventory_module.build_inventory(ROOT)
+    records = inventory_module._baseline_qualification_records(inventory)
+    dispositions = inventory_module._load_dispositions(ROOT)
+
+    assert any(
+        record.get("policy_rule") == "historical-evidence"
+        and record.get("qualification_policy_digest") != policy["control_digest"]
+        for record in dispositions.values()
+    )
+    assert qualification_module.validate_materialized_registry(
+        policy,
+        dispositions,
+        active_records=records,
+    ) == []
 
 
 @pytest.mark.parametrize(
@@ -991,7 +1007,7 @@ def test_materialization_plan_is_idempotent_after_policy_entries_exist(
         qualification["qualified"] is True
         for qualification in post_inventory["anomaly_qualifications"].values()
     )
-    assert second["approved_fingerprint_count"] == 2457
+    assert second["approved_fingerprint_count"] == 186
     assert second["approved_fingerprint_digest"] == first[
         "approved_fingerprint_digest"
     ]
@@ -1056,7 +1072,7 @@ def test_materialization_refuses_approved_set_drift_without_partial_payload(
         next(
             index
             for index, record in enumerate(changed)
-            if record["fingerprint"] in managed
+            if not record["qualified"] or record["fingerprint"] in managed
         )
     )
 

@@ -138,7 +138,7 @@
           "minProperties": 1,
           "additionalProperties": { "type": "integer", "minimum": 0 }
         },
-        "fingerprint_count": { "const": 2457 },
+        "fingerprint_count": { "const": 186 },
         "fingerprint_digest": { "$ref": "#/$defs/sha256" },
         "observed_model_digest_before_materialization": { "$ref": "#/$defs/sha256" },
         "observed_source_digest_before_materialization": { "$ref": "#/$defs/sha256" },
@@ -151,9 +151,9 @@
             "ingenierie_build_qualite"
           ],
           "properties": {
-            "direction_editoriale_pedagogique": { "const": 328 },
-            "direction_scientifique_programme": { "const": 1473 },
-            "ingenierie_build_qualite": { "const": 656 }
+            "direction_editoriale_pedagogique": { "const": 25 },
+            "direction_scientifique_programme": { "const": 109 },
+            "ingenierie_build_qualite": { "const": 52 }
           }
         }
       }
@@ -176,7 +176,7 @@
           "const": "Direction scientifique et éditoriale Nexus Réussite"
         },
         "baseline_purpose": { "const": "debt_regression_control" },
-        "id": { "const": "baseline-debt-regression-control-2026-07-30" },
+        "id": { "const": "baseline-debt-extension-origin-main-2026-08-02" },
         "provisional_after_freeze": { "const": false },
         "ref": { "$ref": "#/$defs/non_empty_string" },
         "release_acceptance": { "const": false }

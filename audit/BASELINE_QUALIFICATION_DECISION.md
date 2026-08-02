@@ -190,3 +190,42 @@ Approbateur du gel : `Alaeddine Ben Rhouma`.
 
 La CI ne met jamais à jour la baseline. La baseline visuelle reste un processus
 distinct et aucune empreinte visuelle n’est approuvée par la présente décision.
+
+---
+
+<a id="decision-baseline-debt-extension-origin-main-2026-08-02"></a>
+
+## Extension approuvée après fusion de `origin/main`
+
+| Champ | Valeur |
+|---|---|
+| Identifiant | `baseline-debt-extension-origin-main-2026-08-02` |
+| Date | 2 août 2026 |
+| Branche | `finalisation/collection-v1` |
+| HEAD observé | `fb90e5c7cabb16c29c61bf4bdc1d5abae3f0121a` |
+| `baseline_purpose` | `debt_regression_control` |
+| `release_acceptance` | `false` |
+| Approbateur | Alaeddine Ben Rhouma |
+| Rôle | Direction scientifique et éditoriale Nexus Réussite |
+
+L’approbateur autorise l’extension de la baseline Phase 0 aux 186 fingerprints
+importés par la fusion de `origin/main`, exclusivement comme dette ouverte. Le
+lot approuvé est identifié par :
+
+- empreinte : `sha256:ac046f9784e3a492dbcb83dca74292ff0b503a19b52d09ebef51e5e94a299fe8` ;
+- `blocking_statuses` : 134 ;
+- `unassembled_objects` : 52 ;
+- `direction_scientifique_programme` : 109 ;
+- `direction_editoriale_pedagogique` : 25 ;
+- `ingenierie_build_qualite` : 52.
+
+Les 186 dispositions sont `open_debt` et restent bloquantes pour la release.
+Cette décision n’approuve aucun contenu scientifique, éditorial, pédagogique,
+visuel ou réglementaire. Elle autorise uniquement la matérialisation, la mise à
+jour de la baseline de non-régression, les commits et le push sur
+`finalisation/collection-v1`. Le manuel demeure **NO-GO publication**.
+
+Digests observés avant matérialisation :
+
+- source : `sha256:f2b46f25776ce98e2a52a422581532911045d861613ab652625a08b838d07545` ;
+- modèle : `sha256:606142c55324affad412521536f294a913c4ba45d0d0e10e7fb785238cba58aa`.
