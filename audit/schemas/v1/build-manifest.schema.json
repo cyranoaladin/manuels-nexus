@@ -46,6 +46,7 @@
         "page_count",
         "pdf_path",
         "pdf_sha256",
+        "reproducibility",
         "source_digest",
         "tool_versions",
         "variant"
@@ -77,6 +78,7 @@
         "page_count": { "type": "integer", "minimum": 1 },
         "pdf_path": { "type": "string", "minLength": 1 },
         "pdf_sha256": { "$ref": "#/$defs/sha256" },
+        "reproducibility": { "$ref": "#/$defs/reproducibility" },
         "source_digest": { "$ref": "#/$defs/sha256" },
         "tool_versions": {
           "type": "object",
@@ -84,6 +86,36 @@
           "additionalProperties": { "type": "string", "minLength": 1 }
         },
         "variant": { "type": "string", "minLength": 1 }
+      }
+    },
+    "reproducibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "config_path",
+        "force_source_date",
+        "locale",
+        "pythonhashseed",
+        "source_commit",
+        "source_date_epoch",
+        "timezone"
+      ],
+      "properties": {
+        "config_path": {
+          "const": "Mathematiques/manuel-maths/config/reproducible-build.json"
+        },
+        "force_source_date": { "const": "1" },
+        "locale": { "const": "C.UTF-8" },
+        "pythonhashseed": { "const": "0" },
+        "source_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "source_date_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timezone": { "const": "UTC" }
       }
     },
     "provenance": {

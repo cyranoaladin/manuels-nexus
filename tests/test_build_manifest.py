@@ -22,6 +22,16 @@ INVENTORY_SCRIPT = ROOT / "scripts" / "inventory_collection.py"
 MANIFEST_SCRIPT = ROOT / "scripts" / "build_manifest.py"
 SHA256_A = "sha256:" + "a" * 64
 SHA256_B = "sha256:" + "b" * 64
+RUN_ID = "0123456789abcdef0123456789abcdef"
+REPRO_CONFIG_PATH = (
+    "Mathematiques/manuel-maths/config/reproducible-build.json"
+)
+TOOL_VERSIONS = {
+    "lualatex": "LuaHBTeX, Version 1.17.0",
+    "pdfinfo": "pdfinfo version 24.02.0",
+    "pdffonts": "pdffonts version 24.02.0",
+    "python": f"Python {sys.version.split()[0]}",
+}
 
 
 def _load_module(path: Path, name: str):
@@ -120,9 +130,22 @@ def _build(head: str, pdf_path: str, pdf_bytes: bytes) -> dict[str, object]:
         "page_count": 7,
         "pdf_path": pdf_path,
         "pdf_sha256": "sha256:" + hashlib.sha256(pdf_bytes).hexdigest(),
+        "reproducibility": _reproducibility("c" * 40, 1),
         "source_digest": SHA256_A,
-        "tool_versions": {"lualatex": "1.17.0", "pdfinfo": "24.02.0"},
+        "tool_versions": dict(TOOL_VERSIONS),
         "variant": "professeur",
+    }
+
+
+def _reproducibility(source_commit: str, epoch: int) -> dict[str, object]:
+    return {
+        "config_path": REPRO_CONFIG_PATH,
+        "source_commit": source_commit,
+        "source_date_epoch": epoch,
+        "force_source_date": "1",
+        "timezone": "UTC",
+        "locale": "C.UTF-8",
+        "pythonhashseed": "0",
     }
 
 
@@ -133,17 +156,29 @@ def _receipt(
 ) -> dict[str, object]:
     return {
         "compile_succeeded": compile_succeeded,
+        "evidence_sha256": {
+            "master": SHA256_A,
+            "log": SHA256_A,
+            "fls": SHA256_A,
+            "pdf": SHA256_A,
+            "preflight": SHA256_A,
+        },
         "fls_path": "build/manual.fls",
         "gates": {"release_strict": {"blocker_count": 3, "passed": False}},
         "generated_dependencies": ["build/generated-index.tex"],
         "log_path": "build/manual.log",
         "manual": "1SPE",
+        "master_path": (
+            "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.tex"
+        ),
         "pdf_path": (
             "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.pdf"
         ),
         "preflight_report": "build/preflight.json",
         "preflight_succeeded": preflight_succeeded,
-        "tool_versions": {"lualatex": "1.17.0", "pdfinfo": "24.02.0"},
+        "reproducibility": _reproducibility("c" * 40, 1),
+        "run_id": RUN_ID,
+        "tool_versions": dict(TOOL_VERSIONS),
         "variant": "professeur",
     }
 
@@ -154,6 +189,215 @@ def _trace_token(path: str) -> str:
 
 def _trace_marker(kind: str, path: str) -> str:
     return f"NEXUS_OBJECT_{kind}:{_trace_token(path)}"
+
+
+def _git_timestamp(repository: Path, commit: str) -> int:
+    return int(
+        subprocess.run(
+            ["git", "-C", str(repository), "show", "-s", "--format=%ct", commit],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+
+
+def _write_reproducibility_config(
+    repository: Path,
+    *,
+    source_commit: str,
+    source_date_epoch: int,
+    tracked: bool = True,
+) -> Path:
+    path = repository / REPRO_CONFIG_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_commit": source_commit,
+                "source_date_epoch": source_date_epoch,
+            }
+        ),
+        encoding="utf-8",
+    )
+    if tracked:
+        subprocess.run(
+            ["git", "-C", str(repository), "add", REPRO_CONFIG_PATH],
+            check=True,
+        )
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(repository),
+                "-c",
+                "user.name=Observed Build Tests",
+                "-c",
+                "user.email=observed@example.invalid",
+                "commit",
+                "-qm",
+                "reproducibility control",
+            ],
+            check=True,
+        )
+    return path
+
+
+def _install_receipt_evidence(
+    repository: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> tuple[dict[str, object], dict[str, Path], str, int]:
+    source_commit = _git_repository(repository)
+    source_date_epoch = _git_timestamp(repository, source_commit)
+    config_path = _write_reproducibility_config(
+        repository,
+        source_commit=source_commit,
+        source_date_epoch=source_date_epoch,
+    )
+    master_relative = (
+        "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.tex"
+    )
+    pdf_relative = (
+        "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.pdf"
+    )
+    master = repository / master_relative
+    pdf = repository / pdf_relative
+    log = repository / "build/manual.log"
+    fls = repository / "build/manual.fls"
+    preflight = repository / "build/preflight.json"
+    dependency = repository / "build/generated-index.tex"
+    for path in (master, pdf, log, fls, preflight, dependency):
+        path.parent.mkdir(parents=True, exist_ok=True)
+    master.write_text(
+        f"\\typeout{{NEXUS_BUILD_RUN:{RUN_ID}}}\n",
+        encoding="utf-8",
+    )
+    pdf_bytes = b"%PDF closed receipt evidence"
+    pdf.write_bytes(pdf_bytes)
+    log.write_text(
+        "\n".join(
+            [
+                f"NEXUS_BUILD_RUN:{RUN_ID}",
+                _trace_marker("BEGIN", "OBJ-2"),
+                _trace_marker("END", "OBJ-2"),
+                _trace_marker("BEGIN", "OBJ-1"),
+                _trace_marker("END", "OBJ-1"),
+                "Output written on MANUEL_1SPE_professeur.pdf (11 pages).",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    fls.write_text(
+        "\n".join(
+            [
+                f"INPUT {master_relative}",
+                "INPUT OBJ-2",
+                "INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls",
+                "INPUT OBJ-1",
+                "OUTPUT build/generated-index.tex",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    dependency.write_text("% generated", encoding="utf-8")
+    reproducibility = _reproducibility(source_commit, source_date_epoch)
+    preflight.write_text(
+        json.dumps(
+            {
+                "run_id": RUN_ID,
+                "pdf_path": pdf_relative,
+                "pdf_sha256": (
+                    "sha256:" + hashlib.sha256(pdf_bytes).hexdigest()
+                ),
+                "page_count": 11,
+                "passed": True,
+                "checks": {
+                    "verify_pdf": {"passed": True},
+                    "pdfinfo": {"passed": True},
+                    "pdffonts": {"passed": True},
+                },
+                "tool_versions": dict(TOOL_VERSIONS),
+                "reproducibility": reproducibility,
+            }
+        ),
+        encoding="utf-8",
+    )
+    paths = {
+        "master": master,
+        "log": log,
+        "fls": fls,
+        "pdf": pdf,
+        "preflight": preflight,
+        "config": config_path,
+    }
+    receipt = {
+        **_receipt(),
+        "generated_dependencies": ["build/generated-index.tex"],
+        "master_path": master_relative,
+        "pdf_path": pdf_relative,
+        "reproducibility": reproducibility,
+        "evidence_sha256": {
+            name: "sha256:" + hashlib.sha256(paths[name].read_bytes()).hexdigest()
+            for name in ("master", "log", "fls", "pdf", "preflight")
+        },
+    }
+    pdf_digest = receipt["evidence_sha256"]["pdf"]  # type: ignore[index]
+    fake_pdf = SimpleNamespace(
+        _is_canonical_manual_pdf_path=lambda *_args, **_kwargs: True,
+        inspect_stable_pdf=lambda *_args, **_kwargs: (
+            pdf_digest,
+            11,
+            "pdfinfo",
+            None,
+        ),
+    )
+    fake_inventory = SimpleNamespace(
+        COMPILED_PDF_BUILD_ROOTS={
+            "1SPE": "Mathematiques/manuel-maths/build"
+        },
+        _model_digest=lambda _inventory: SHA256_B,
+        _observed_deliverable_variant=lambda _manual, _variant: (
+            "manuel_professeur"
+        ),
+        _page_count_with_pdfinfo=lambda _path: (11, None),
+        _page_count_with_python=lambda _path: (None, "unused"),
+        _pdf_core=fake_pdf,
+        _pdf_matches_observed_identity=lambda _path, _manual, _variant: True,
+        _validate_artifact_schema=lambda *_args, **_kwargs: None,
+        build_inventory=lambda _root: {
+            "declared_assemblies": [
+                {
+                    "included_objects": ["OBJ-2", "OBJ-1", "OBJ-EXCLUDED"],
+                    "manual": "1SPE",
+                    "scope": "manual",
+                    "variant": "professeur",
+                }
+            ],
+            "source_digest": SHA256_A,
+        },
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: fake_inventory,
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_run_local_pdf_preflight",
+        lambda _path, *, expected_pages: {
+            "pdffonts": "passed",
+            "pdfinfo": f"passed:{expected_pages}",
+        },
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_collect_local_tool_versions",
+        lambda _reproducibility: dict(TOOL_VERSIONS),
+        raising=False,
+    )
+    return receipt, paths, source_commit, source_date_epoch
 
 
 def _install_schema(repository: Path) -> None:
@@ -751,6 +995,7 @@ def test_release_keeps_unintegrated_build_receipt_as_explicit_debt(
         ("overlap", "included_objects"),
         ("dependency", "generated_dependencies"),
         ("coverage", "excluded_objects"),
+        ("reproducibility", "reproducibility"),
     ],
 )
 def test_manifest_rejects_stale_or_corrupt_build(
@@ -799,9 +1044,52 @@ def test_manifest_rejects_stale_or_corrupt_build(
         }
     elif mutation == "coverage":
         build["excluded_objects"] = []
+    elif mutation == "reproducibility":
+        del build["reproducibility"]
     _write_manifest(tmp_path, _manifest(head, [build]))
 
     with pytest.raises(inventory_module.InventoryError, match=expected):
+        _load(inventory_module, tmp_path)
+
+
+@pytest.mark.parametrize(
+    ("mutation", "value"),
+    [
+        ("missing", None),
+        ("extra", True),
+        ("config_path", "config/repro.json"),
+        ("source_commit", "A" * 40),
+        ("source_date_epoch", True),
+        ("source_date_epoch", 0),
+        ("force_source_date", "0"),
+        ("timezone", "Europe/Paris"),
+        ("locale", "fr_FR.UTF-8"),
+        ("pythonhashseed", "random"),
+    ],
+)
+def test_manifest_schema_rejects_noncanonical_reproducibility(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+    value: object,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    pdf_path = "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.pdf"
+    pdf_bytes = b"%PDF-1.7 observed build"
+    target = tmp_path / pdf_path
+    target.parent.mkdir(parents=True)
+    target.write_bytes(pdf_bytes)
+    build = _build(head, pdf_path, pdf_bytes)
+    reproducibility = build["reproducibility"]
+    assert isinstance(reproducibility, dict)
+    if mutation == "missing":
+        del reproducibility["config_path"]
+    else:
+        reproducibility[mutation] = value
+    _write_manifest(tmp_path, _manifest(head, [build]))
+
+    with pytest.raises(inventory_module.InventoryError, match="reproducibility"):
         _load(inventory_module, tmp_path)
 
 
@@ -1871,98 +2159,19 @@ def test_receipt_derivation_recomputes_all_derived_evidence(
     manifest_module,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    head = _git_repository(tmp_path)
-    dependency = tmp_path / "build/generated-index.tex"
-    dependency.parent.mkdir()
-    dependency.write_text("% generated", encoding="utf-8")
-    pdf_bytes = b"%PDF derived evidence"
-    pdf_path = (
-        tmp_path
-        / "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.pdf"
+    receipt, _paths, source_commit, source_date_epoch = (
+        _install_receipt_evidence(tmp_path, manifest_module, monkeypatch)
     )
-    pdf_path.parent.mkdir(parents=True)
-    pdf_path.write_bytes(pdf_bytes)
-    (tmp_path / "build/manual.log").write_text(
-        "\n".join(
-            [
-                _trace_marker("BEGIN", "OBJ-2"),
-                _trace_marker("END", "OBJ-2"),
-                _trace_marker("BEGIN", "OBJ-1"),
-                _trace_marker("END", "OBJ-1"),
-                "Output written on MANUEL_1SPE_professeur.pdf (11 pages).",
-            ]
-        ),
-        encoding="utf-8",
-    )
-    (tmp_path / "build/manual.fls").write_text(
-        "\n".join(
-            [
-                "INPUT OBJ-2",
-                "INPUT OBJ-1",
-                "OUTPUT build/generated-index.tex",
-            ]
-        ),
-        encoding="utf-8",
-    )
-    (tmp_path / "build/preflight.json").write_text(
-        json.dumps(
-            {
-                "passed": True,
-                "pdf_sha256": (
-                    "sha256:" + hashlib.sha256(pdf_bytes).hexdigest()
-                ),
-            }
-        ),
-        encoding="utf-8",
-    )
-
-    fake_pdf = SimpleNamespace(
-        _is_canonical_manual_pdf_path=lambda *_args, **_kwargs: True,
-        inspect_stable_pdf=lambda *_args, **_kwargs: (
-            "sha256:" + hashlib.sha256(pdf_bytes).hexdigest(),
-            11,
-            "pdfinfo",
-            None,
-        ),
-    )
-    fake_inventory = SimpleNamespace(
-        COMPILED_PDF_BUILD_ROOTS={"1SPE": "Mathematiques/manuel-maths/build"},
-        _model_digest=lambda _inventory: SHA256_B,
-        _observed_deliverable_variant=lambda _manual, _variant: "manuel_professeur",
-        _page_count_with_pdfinfo=lambda _path: (11, None),
-        _page_count_with_python=lambda _path: (None, "unused"),
-        _pdf_core=fake_pdf,
-        _pdf_matches_observed_identity=lambda _path, _manual, _variant: True,
-        _validate_artifact_schema=lambda *_args, **_kwargs: None,
-        build_inventory=lambda _root: {
-            "declared_assemblies": [
-                {
-                    "included_objects": ["OBJ-2", "OBJ-1", "OBJ-EXCLUDED"],
-                    "manual": "1SPE",
-                    "scope": "manual",
-                    "variant": "professeur",
-                }
-            ],
-            "source_digest": SHA256_A,
-        },
-    )
-    monkeypatch.setattr(
-        manifest_module,
-        "_load_inventory_module",
-        lambda: fake_inventory,
-    )
-    monkeypatch.setattr(
-        manifest_module,
-        "_run_local_pdf_preflight",
-        lambda _path, *, expected_pages: {
-            "pdffonts": "passed",
-            "pdfinfo": f"passed:{expected_pages}",
-        },
-    )
+    head = subprocess.run(
+        ["git", "-C", str(tmp_path), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
 
     envelope, build, validator = manifest_module._derive_receipt_evidence(
         tmp_path,
-        _receipt(),
+        receipt,
     )
 
     assert envelope["source_digest"] == SHA256_A
@@ -1975,17 +2184,593 @@ def test_receipt_derivation_recomputes_all_derived_evidence(
     assert build["git_sha"] == head
     assert build["source_digest"] == SHA256_A
     assert build["model_digest"] == SHA256_B
-    assert build["pdf_sha256"] == (
-        "sha256:" + hashlib.sha256(pdf_bytes).hexdigest()
-    )
+    assert build["pdf_sha256"] == receipt["evidence_sha256"]["pdf"]
     assert build["page_count"] == 11
     assert build["included_objects"] == ["OBJ-2", "OBJ-1"]
     assert build["excluded_objects"] == ["OBJ-EXCLUDED"]
     assert build["ordered_trace"] == ["OBJ-2", "OBJ-1"]
+    assert build["tool_versions"] == TOOL_VERSIONS
+    assert build["reproducibility"] == _reproducibility(
+        source_commit,
+        source_date_epoch,
+    )
     proposed = dict(envelope)
     proposed["builds"] = [build]
     proposed["build_state_digest"] = _state_digest([build])
     validator(proposed)
+
+
+def _refresh_receipt_digest(
+    receipt: dict[str, object],
+    paths: dict[str, Path],
+    name: str,
+) -> None:
+    digests = receipt["evidence_sha256"]
+    assert isinstance(digests, dict)
+    digests[name] = "sha256:" + hashlib.sha256(paths[name].read_bytes()).hexdigest()
+
+
+def _rewrite_preflight_reproducibility(
+    receipt: dict[str, object],
+    paths: dict[str, Path],
+    reproducibility: dict[str, object],
+) -> None:
+    preflight = json.loads(paths["preflight"].read_text(encoding="utf-8"))
+    preflight["reproducibility"] = reproducibility
+    paths["preflight"].write_text(json.dumps(preflight), encoding="utf-8")
+    _refresh_receipt_digest(receipt, paths, "preflight")
+
+
+@pytest.mark.parametrize("mutation", ["missing", "extra"])
+def test_receipt_reader_requires_exact_closed_shape(
+    tmp_path: Path,
+    manifest_module,
+    mutation: str,
+) -> None:
+    _git_repository(tmp_path)
+    payload = _receipt()
+    if mutation == "missing":
+        del payload["run_id"]
+    else:
+        payload["unexpected"] = True
+    receipt = tmp_path / "receipt.json"
+    receipt.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(manifest_module.BuildManifestError, match="champs"):
+        manifest_module._read_receipt(receipt, tmp_path)
+
+
+def test_receipt_reader_accepts_new_closed_shape(
+    tmp_path: Path,
+    manifest_module,
+) -> None:
+    _git_repository(tmp_path)
+    payload = _receipt()
+    receipt = tmp_path / "receipt.json"
+    receipt.write_text(json.dumps(payload), encoding="utf-8")
+
+    assert manifest_module._read_receipt(receipt, tmp_path) == payload
+
+
+@pytest.mark.parametrize(
+    ("mutation", "name"),
+    [
+        ("missing", "master"),
+        ("missing", "log"),
+        ("missing", "fls"),
+        ("missing", "pdf"),
+        ("missing", "preflight"),
+        ("malformed", "master"),
+        ("malformed", "log"),
+        ("malformed", "fls"),
+        ("malformed", "pdf"),
+        ("malformed", "preflight"),
+        ("wrong", "master"),
+        ("wrong", "log"),
+        ("wrong", "fls"),
+        ("wrong", "pdf"),
+        ("wrong", "preflight"),
+        ("extra", "foreign"),
+    ],
+)
+def test_receipt_rejects_incomplete_or_forged_evidence_digests(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+    name: str,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    digests = receipt["evidence_sha256"]
+    assert isinstance(digests, dict)
+    if mutation == "missing":
+        del digests[name]
+    elif mutation == "extra":
+        digests[name] = SHA256_A
+    elif mutation == "malformed":
+        digests[name] = "SHA256:" + "0" * 64
+    else:
+        digests[name] = "sha256:" + "0" * 64
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="empreinte|digest|evidence",
+    ):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+@pytest.mark.parametrize("run_id", ["0" * 31, "0" * 33, "G" * 32, 7, True])
+def test_receipt_rejects_malformed_run_id(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    run_id: object,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    receipt["run_id"] = run_id
+
+    with pytest.raises(manifest_module.BuildManifestError, match="run_id"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+@pytest.mark.parametrize(
+    ("surface", "mutation"),
+    [
+        ("master", "missing"),
+        ("master", "duplicate"),
+        ("master", "foreign"),
+        ("log", "missing"),
+        ("log", "duplicate"),
+        ("log", "foreign"),
+        ("preflight", "missing"),
+        ("preflight", "foreign"),
+    ],
+)
+def test_receipt_rejects_run_marker_mismatch_or_duplication(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    surface: str,
+    mutation: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    if surface == "preflight":
+        report = json.loads(paths["preflight"].read_text(encoding="utf-8"))
+        if mutation == "missing":
+            del report["run_id"]
+        else:
+            report["run_id"] = "f" * 32
+        paths["preflight"].write_text(json.dumps(report), encoding="utf-8")
+    else:
+        marker = f"NEXUS_BUILD_RUN:{RUN_ID}"
+        payload = paths[surface].read_text(encoding="utf-8")
+        if mutation == "missing":
+            payload = payload.replace(marker, "")
+        elif mutation == "duplicate":
+            payload += f"\n{marker}\n"
+        else:
+            payload += f"\nNEXUS_BUILD_RUN:{'f' * 32}\n"
+        paths[surface].write_text(payload, encoding="utf-8")
+    _refresh_receipt_digest(receipt, paths, surface)
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="run_id|marqueur|préflight",
+    ):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+def test_receipt_requires_master_in_fls_inputs(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    master_line = f"INPUT {receipt['master_path']}\n"
+    fls = paths["fls"].read_text(encoding="utf-8")
+    paths["fls"].write_text(fls.replace(master_line, ""), encoding="utf-8")
+    _refresh_receipt_digest(receipt, paths, "fls")
+
+    with pytest.raises(manifest_module.BuildManifestError, match="master|maître"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+def test_external_absolute_texlive_fls_input_is_ignored(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+
+    _envelope, build, _validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+
+    assert build["included_objects"] == ["OBJ-2", "OBJ-1"]
+    assert not any(
+        str(value).startswith("/usr/share/texlive")
+        for value in build["included_objects"]
+    )
+
+
+@pytest.mark.parametrize("field", ["master_path", "log_path"])
+@pytest.mark.parametrize(
+    "kind",
+    ["symlink", "hardlink", "absolute", "backslash", "dot", "parent"],
+)
+def test_receipt_rejects_unsafe_master_and_proof_paths(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    field: str,
+    kind: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    name = "master" if field == "master_path" else "log"
+    target = paths[name]
+    if kind in {"symlink", "hardlink"}:
+        payload = target.read_bytes()
+        target.unlink()
+        external = tmp_path / f"external-{name}"
+        external.write_bytes(payload)
+        if kind == "symlink":
+            target.symlink_to(external)
+        else:
+            os.link(external, target)
+    elif kind == "absolute":
+        receipt[field] = str(target)
+    elif kind == "backslash":
+        receipt[field] = str(receipt[field]).replace("/", "\\")
+    elif kind == "dot":
+        raw = str(receipt[field])
+        parent, separator, leaf = raw.rpartition("/")
+        receipt[field] = f"{parent}{separator}./{leaf}"
+    else:
+        raw = str(receipt[field])
+        parent, separator, leaf = raw.rpartition("/")
+        receipt[field] = f"{parent}{separator}../{parent.rsplit('/', 1)[-1]}/{leaf}"
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="canonique|symbolique|hardlink|régulier|inaccessible",
+    ):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["missing", "extra", "receipt_mismatch", "preflight_mismatch"],
+)
+def test_receipt_rejects_missing_forged_or_mismatched_tool_versions(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    report = json.loads(paths["preflight"].read_text(encoding="utf-8"))
+    if mutation == "missing":
+        del receipt["tool_versions"]["pdffonts"]  # type: ignore[index]
+        del report["tool_versions"]["pdffonts"]
+    elif mutation == "extra":
+        receipt["tool_versions"]["foreign"] = "forged"  # type: ignore[index]
+        report["tool_versions"]["foreign"] = "forged"
+    elif mutation == "receipt_mismatch":
+        receipt["tool_versions"]["pdfinfo"] = "forged"  # type: ignore[index]
+    else:
+        report["tool_versions"]["pdfinfo"] = "forged"
+    paths["preflight"].write_text(json.dumps(report), encoding="utf-8")
+    _refresh_receipt_digest(receipt, paths, "preflight")
+
+    with pytest.raises(manifest_module.BuildManifestError, match="tool|outil|version"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+def test_tool_version_collection_uses_exact_commands_and_sanitized_environment(
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[list[str], dict[str, str], int]] = []
+    outputs = {
+        "lualatex": "  LuaHBTeX,   Version 1.17.0\nsecond line",
+        "pdfinfo": "pdfinfo version 24.02.0",
+        "pdffonts": "pdffonts version 24.02.0",
+        sys.executable: f"Python {sys.version.split()[0]}",
+    }
+
+    def run(command: list[str], **kwargs):
+        calls.append((command, kwargs["env"], kwargs["timeout"]))
+        return SimpleNamespace(
+            returncode=0,
+            stdout=outputs[command[0]],
+            stderr="",
+        )
+
+    monkeypatch.setattr(manifest_module.subprocess, "run", run)
+    monkeypatch.setenv("UNSAFE_BUILD_FLAG", "forged")
+    monkeypatch.setenv("GIT_CONFIG_COUNT", "1")
+
+    versions = manifest_module._collect_local_tool_versions(
+        _reproducibility("c" * 40, 123456789)
+    )
+
+    assert versions == TOOL_VERSIONS
+    assert [command for command, _env, _timeout in calls] == [
+        ["lualatex", "--version"],
+        ["pdfinfo", "-v"],
+        ["pdffonts", "-v"],
+        [sys.executable, "--version"],
+    ]
+    for _command, environment, timeout in calls:
+        assert timeout == 20
+        assert environment == {
+            name: value
+            for name, value in {
+                "PATH": os.environ.get("PATH"),
+                "HOME": os.environ.get("HOME"),
+                "FORCE_SOURCE_DATE": "1",
+                "TZ": "UTC",
+                "LC_ALL": "C.UTF-8",
+                "PYTHONHASHSEED": "0",
+                "SOURCE_DATE_EPOCH": "123456789",
+            }.items()
+            if value is not None
+        }
+
+
+def test_git_commands_strip_override_environment(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    environments: list[dict[str, str] | None] = []
+
+    def run(_command: list[str], **kwargs):
+        environments.append(kwargs.get("env"))
+        return SimpleNamespace(returncode=0, stdout="c" * 40, stderr="")
+
+    monkeypatch.setattr(manifest_module.subprocess, "run", run)
+    monkeypatch.setenv("GIT_DIR", "/forged")
+    monkeypatch.setenv("GIT_CONFIG_COUNT", "1")
+
+    assert manifest_module._git_head(tmp_path) == "c" * 40
+    assert environments == [
+        {
+            name: os.environ[name]
+            for name in ("PATH", "HOME")
+            if name in os.environ
+        }
+    ]
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "absent",
+        "unsafe",
+        "malformed",
+        "untracked",
+        "receipt_mismatch",
+        "preflight_mismatch",
+        "source_commit_missing",
+        "source_commit_absent",
+        "source_commit_nonancestor",
+        "epoch_mismatch",
+    ],
+)
+def test_receipt_rejects_invalid_reproducibility_control(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+) -> None:
+    receipt, paths, source_commit, epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    config = paths["config"]
+    if mutation == "absent":
+        config.unlink()
+    elif mutation == "unsafe":
+        payload = config.read_bytes()
+        config.unlink()
+        external = tmp_path / "external-reproducibility.json"
+        external.write_bytes(payload)
+        config.symlink_to(external)
+    elif mutation == "malformed":
+        config.write_text(
+            json.dumps(
+                {
+                    "schema_version": True,
+                    "source_commit": source_commit,
+                    "source_date_epoch": epoch,
+                }
+            ),
+            encoding="utf-8",
+        )
+    elif mutation == "untracked":
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(tmp_path),
+                "update-index",
+                "--force-remove",
+                REPRO_CONFIG_PATH,
+            ],
+            check=True,
+        )
+    elif mutation == "receipt_mismatch":
+        receipt["reproducibility"] = {
+            **receipt["reproducibility"],  # type: ignore[arg-type]
+            "timezone": "Europe/Paris",
+        }
+    elif mutation == "preflight_mismatch":
+        _rewrite_preflight_reproducibility(
+            receipt,
+            paths,
+            {
+                **receipt["reproducibility"],  # type: ignore[arg-type]
+                "timezone": "Europe/Paris",
+            },
+        )
+    else:
+        control = json.loads(config.read_text(encoding="utf-8"))
+        if mutation == "source_commit_missing":
+            del control["source_commit"]
+        elif mutation == "source_commit_absent":
+            control["source_commit"] = "0" * 40
+        elif mutation == "source_commit_nonancestor":
+            foreign = subprocess.run(
+                [
+                    "git",
+                    "-C",
+                    str(tmp_path),
+                    "-c",
+                    "user.name=Observed Build Tests",
+                    "-c",
+                    "user.email=observed@example.invalid",
+                    "commit-tree",
+                    "HEAD^{tree}",
+                    "-m",
+                    "foreign commit",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+            control["source_commit"] = foreign
+            control["source_date_epoch"] = _git_timestamp(tmp_path, foreign)
+        else:
+            control["source_date_epoch"] = epoch + 1
+        config.write_text(json.dumps(control), encoding="utf-8")
+        if mutation != "source_commit_missing":
+            reproducibility = _reproducibility(
+                control["source_commit"],
+                control["source_date_epoch"],
+            )
+            receipt["reproducibility"] = reproducibility
+            _rewrite_preflight_reproducibility(receipt, paths, reproducibility)
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="reproductibilité|source_commit|source_date_epoch|suivi|config",
+    ):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+@pytest.mark.parametrize("mutation", ["missing", "extra"])
+def test_preflight_report_requires_exact_closed_shape(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    mutation: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    report = json.loads(paths["preflight"].read_text(encoding="utf-8"))
+    if mutation == "missing":
+        del report["page_count"]
+    else:
+        report["unexpected"] = True
+    paths["preflight"].write_text(json.dumps(report), encoding="utf-8")
+    _refresh_receipt_digest(receipt, paths, "preflight")
+
+    with pytest.raises(manifest_module.BuildManifestError, match="préflight|champs"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+@pytest.mark.parametrize(
+    "name",
+    ["master", "log", "fls", "pdf", "preflight", "config"],
+)
+def test_final_validator_rejects_any_proof_drift(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    name: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    envelope, build, validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+    paths[name].write_bytes(paths[name].read_bytes() + b"\nforged")
+    proposed = dict(envelope)
+    proposed["builds"] = [build]
+    proposed["build_state_digest"] = _state_digest([build])
+
+    with pytest.raises(manifest_module.BuildManifestError, match="modifié|preuve"):
+        validator(proposed)
+
+
+def test_final_validator_rejects_tool_version_drift(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    calls = 0
+
+    def versions(_reproducibility: dict[str, object]) -> dict[str, str]:
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            return dict(TOOL_VERSIONS)
+        return {**TOOL_VERSIONS, "pdfinfo": "pdfinfo version forged"}
+
+    monkeypatch.setattr(manifest_module, "_collect_local_tool_versions", versions)
+    envelope, build, validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+    proposed = dict(envelope)
+    proposed["builds"] = [build]
+    proposed["build_state_digest"] = _state_digest([build])
+
+    with pytest.raises(manifest_module.BuildManifestError, match="outil|version"):
+        validator(proposed)
 
 
 def test_ordered_object_trace_uses_markers_not_fls_order(

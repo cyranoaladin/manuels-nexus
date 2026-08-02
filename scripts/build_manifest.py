@@ -20,6 +20,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 import secrets
 import stat
 import subprocess
@@ -32,16 +33,67 @@ _DIRECTORY_FLAGS = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | os.O_CLOEXEC
 _FILE_FLAGS = os.O_RDONLY | os.O_NOFOLLOW | os.O_CLOEXEC | os.O_NONBLOCK
 _TEMP_FLAGS = os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_CLOEXEC
 _MANIFEST_RELATIVE = Path("audit/BUILD_MANIFEST.json")
+_REPRODUCIBILITY_CONFIG = (
+    "Mathematiques/manuel-maths/config/reproducible-build.json"
+)
+_REPRODUCIBILITY_CONFIG_FIELDS = {
+    "schema_version",
+    "source_commit",
+    "source_date_epoch",
+}
+_REPRODUCIBILITY_FIELDS = {
+    "config_path",
+    "force_source_date",
+    "locale",
+    "pythonhashseed",
+    "source_commit",
+    "source_date_epoch",
+    "timezone",
+}
+_REPRODUCIBILITY_CONSTANTS = {
+    "force_source_date": "1",
+    "timezone": "UTC",
+    "locale": "C.UTF-8",
+    "pythonhashseed": "0",
+}
+_CONTROLLED_ENVIRONMENT = {
+    "FORCE_SOURCE_DATE": "1",
+    "TZ": "UTC",
+    "LC_ALL": "C.UTF-8",
+    "PYTHONHASHSEED": "0",
+}
+_EVIDENCE_FIELDS = {"master", "log", "fls", "pdf", "preflight"}
+_TOOL_VERSION_COMMANDS = {
+    "lualatex": ["lualatex", "--version"],
+    "pdfinfo": ["pdfinfo", "-v"],
+    "pdffonts": ["pdffonts", "-v"],
+    "python": [sys.executable, "--version"],
+}
+_PREFLIGHT_FIELDS = {
+    "run_id",
+    "pdf_path",
+    "pdf_sha256",
+    "page_count",
+    "passed",
+    "checks",
+    "tool_versions",
+    "reproducibility",
+}
+_PREFLIGHT_CHECKS = {"verify_pdf", "pdfinfo", "pdffonts"}
 _RECEIPT_FIELDS = {
     "compile_succeeded",
+    "evidence_sha256",
     "fls_path",
     "gates",
     "generated_dependencies",
     "log_path",
     "manual",
+    "master_path",
     "pdf_path",
     "preflight_report",
     "preflight_succeeded",
+    "reproducibility",
+    "run_id",
     "tool_versions",
     "variant",
 }
@@ -61,6 +113,14 @@ def build_state_digest(builds: list[Mapping[str, Any]]) -> str:
     return "sha256:" + hashlib.sha256(canonical).hexdigest()
 
 
+def _sanitized_git_environment() -> dict[str, str]:
+    return {
+        name: os.environ[name]
+        for name in ("PATH", "HOME")
+        if name in os.environ
+    }
+
+
 def _repository_root(manifest_path: Path) -> Path:
     try:
         completed = subprocess.run(
@@ -71,6 +131,7 @@ def _repository_root(manifest_path: Path) -> Path:
                 "rev-parse",
                 "--show-toplevel",
             ],
+            env=_sanitized_git_environment(),
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -92,6 +153,7 @@ def _git_lock_path(root: Path) -> Path:
     try:
         completed = subprocess.run(
             ["git", "-C", str(root), "rev-parse", "--git-path", "nexus-build.lock"],
+            env=_sanitized_git_environment(),
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -107,6 +169,7 @@ def _git_head(root: Path) -> str:
     try:
         completed = subprocess.run(
             ["git", "-C", str(root), "rev-parse", "HEAD"],
+            env=_sanitized_git_environment(),
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -155,6 +218,7 @@ def _git_state(root: Path) -> tuple[str, str, bool]:
         head = _git_head(root)
         branch = subprocess.run(
             ["git", "-C", str(root), "branch", "--show-current"],
+            env=_sanitized_git_environment(),
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -170,6 +234,7 @@ def _git_state(root: Path) -> tuple[str, str, bool]:
                 "--untracked-files=all",
                 "-z",
             ],
+            env=_sanitized_git_environment(),
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -193,6 +258,7 @@ def _git_evidence_fingerprint(root: Path) -> str:
                 "--untracked-files=all",
                 "-z",
             ],
+            env=_sanitized_git_environment(),
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -315,6 +381,7 @@ def _validate_build_shape(build: Mapping[str, Any]) -> None:
         "page_count",
         "pdf_path",
         "pdf_sha256",
+        "reproducibility",
         "source_digest",
         "tool_versions",
         "variant",
@@ -348,6 +415,10 @@ def _validate_build_shape(build: Mapping[str, Any]) -> None:
         raise BuildManifestError("generated_dependency_digests invalide")
     if build["ordered_trace"] != build["included_objects"]:
         raise BuildManifestError("ordered_trace incohérente")
+    _validate_reproducibility(
+        build.get("reproducibility"),
+        role="du build",
+    )
     gates = build.get("gates")
     if not isinstance(gates, Mapping):
         raise BuildManifestError("gates invalides")
@@ -743,6 +814,7 @@ def _git_root_from_path(path: Path) -> Path:
     try:
         completed = subprocess.run(
             ["git", "-C", str(path.parent), "rev-parse", "--show-toplevel"],
+            env=_sanitized_git_environment(),
             check=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -797,6 +869,288 @@ def _receipt_string_list(
     ):
         raise BuildManifestError(f"{field} invalide dans le receipt")
     return list(value)
+
+
+def _sha256_payload(payload: bytes) -> str:
+    return "sha256:" + hashlib.sha256(payload).hexdigest()
+
+
+def _validate_sha256(value: object, *, role: str) -> str:
+    if not isinstance(value, str) or re.fullmatch(
+        r"sha256:[0-9a-f]{64}",
+        value,
+    ) is None:
+        raise BuildManifestError(f"empreinte {role} invalide")
+    return value
+
+
+def _validate_run_id(value: object) -> str:
+    if not isinstance(value, str) or re.fullmatch(r"[0-9a-f]{32}", value) is None:
+        raise BuildManifestError("run_id invalide")
+    return value
+
+
+def _validate_tool_versions(value: object, *, role: str) -> dict[str, str]:
+    if (
+        not isinstance(value, Mapping)
+        or set(value) != set(_TOOL_VERSION_COMMANDS)
+        or any(
+            not isinstance(version, str) or not version
+            for version in value.values()
+        )
+    ):
+        raise BuildManifestError(f"versions d'outils {role} invalides")
+    return {name: str(value[name]) for name in _TOOL_VERSION_COMMANDS}
+
+
+def _validate_reproducibility(
+    value: object,
+    *,
+    role: str,
+) -> dict[str, object]:
+    if not isinstance(value, Mapping) or set(value) != _REPRODUCIBILITY_FIELDS:
+        raise BuildManifestError(f"reproductibilité {role} non fermée")
+    config_path = value.get("config_path")
+    source_commit = value.get("source_commit")
+    source_date_epoch = value.get("source_date_epoch")
+    if config_path != _REPRODUCIBILITY_CONFIG:
+        raise BuildManifestError(f"config de reproductibilité {role} invalide")
+    if not isinstance(source_commit, str) or re.fullmatch(
+        r"[0-9a-f]{40}",
+        source_commit,
+    ) is None:
+        raise BuildManifestError(f"source_commit de reproductibilité {role} invalide")
+    if type(source_date_epoch) is not int or source_date_epoch <= 0:
+        raise BuildManifestError(
+            f"source_date_epoch de reproductibilité {role} invalide"
+        )
+    for name, expected in _REPRODUCIBILITY_CONSTANTS.items():
+        if value.get(name) != expected:
+            raise BuildManifestError(
+                f"constante {name} de reproductibilité {role} invalide"
+            )
+    return {
+        "config_path": _REPRODUCIBILITY_CONFIG,
+        "source_commit": source_commit,
+        "source_date_epoch": source_date_epoch,
+        **_REPRODUCIBILITY_CONSTANTS,
+    }
+
+
+def _sanitized_build_environment(
+    reproducibility: Mapping[str, object],
+) -> dict[str, str]:
+    environment = {
+        name: os.environ[name]
+        for name in ("PATH", "HOME")
+        if name in os.environ
+    }
+    environment.update(_CONTROLLED_ENVIRONMENT)
+    environment["SOURCE_DATE_EPOCH"] = str(
+        reproducibility["source_date_epoch"]
+    )
+    return environment
+
+
+def _first_version_line(completed: Any, *, tool: str) -> str:
+    if completed.returncode != 0:
+        raise BuildManifestError(f"collecte de version {tool} en échec")
+    output = "\n".join(
+        value
+        for value in (
+            getattr(completed, "stdout", ""),
+            getattr(completed, "stderr", ""),
+        )
+        if isinstance(value, str) and value
+    )
+    for line in output.splitlines():
+        normalized = " ".join(line.split())
+        if normalized:
+            return normalized
+    raise BuildManifestError(f"version {tool} absente")
+
+
+def _collect_local_tool_versions(
+    reproducibility: Mapping[str, object],
+) -> dict[str, str]:
+    environment = _sanitized_build_environment(reproducibility)
+    versions: dict[str, str] = {}
+    for tool, command in _TOOL_VERSION_COMMANDS.items():
+        try:
+            completed = subprocess.run(
+                command,
+                env=environment,
+                capture_output=True,
+                text=True,
+                errors="replace",
+                check=False,
+                timeout=20,
+            )
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            raise BuildManifestError(
+                f"collecte de version {tool} indisponible"
+            ) from exc
+        versions[tool] = _first_version_line(completed, tool=tool)
+    return versions
+
+
+def _run_reproducibility_git(
+    root: Path,
+    command: list[str],
+    *,
+    text: bool,
+) -> subprocess.CompletedProcess[Any]:
+    try:
+        return subprocess.run(
+            ["git", "-C", str(root), *command],
+            env=_sanitized_git_environment(),
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=text,
+            errors="replace" if text else None,
+            timeout=20,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise BuildManifestError(
+            "validation Git de reproductibilité indisponible"
+        ) from exc
+
+
+def _load_reproducibility_control(
+    root: Path,
+) -> tuple[dict[str, object], bytes]:
+    payload_bytes = _read_proof_file(
+        root,
+        _REPRODUCIBILITY_CONFIG,
+        role="config de reproductibilité",
+    )
+    try:
+        payload = json.loads(payload_bytes.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise BuildManifestError("config de reproductibilité JSON invalide") from exc
+    if (
+        not isinstance(payload, Mapping)
+        or set(payload) != _REPRODUCIBILITY_CONFIG_FIELDS
+    ):
+        raise BuildManifestError("config de reproductibilité non fermée")
+    schema_version = payload.get("schema_version")
+    source_commit = payload.get("source_commit")
+    source_date_epoch = payload.get("source_date_epoch")
+    if type(schema_version) is not int or schema_version != 1:
+        raise BuildManifestError("schema_version de reproductibilité invalide")
+    if not isinstance(source_commit, str) or re.fullmatch(
+        r"[0-9a-f]{40}",
+        source_commit,
+    ) is None:
+        raise BuildManifestError("source_commit de reproductibilité invalide")
+    if type(source_date_epoch) is not int or source_date_epoch <= 0:
+        raise BuildManifestError("source_date_epoch de reproductibilité invalide")
+
+    tracked = _run_reproducibility_git(root, ["ls-files", "-z"], text=False)
+    if tracked.returncode != 0:
+        raise BuildManifestError("inventaire Git de reproductibilité indisponible")
+    tracked_paths = {
+        path.decode("utf-8", errors="surrogateescape")
+        for path in tracked.stdout.split(b"\0")
+        if path
+    }
+    if _REPRODUCIBILITY_CONFIG not in tracked_paths:
+        raise BuildManifestError("config de reproductibilité non suivie par Git")
+
+    commit = _run_reproducibility_git(
+        root,
+        ["cat-file", "-e", f"{source_commit}^{{commit}}"],
+        text=True,
+    )
+    if commit.returncode != 0:
+        raise BuildManifestError("source_commit absent du dépôt")
+    ancestor = _run_reproducibility_git(
+        root,
+        ["merge-base", "--is-ancestor", source_commit, "HEAD"],
+        text=True,
+    )
+    if ancestor.returncode != 0:
+        raise BuildManifestError("source_commit non ancêtre de HEAD")
+    timestamp = _run_reproducibility_git(
+        root,
+        ["show", "-s", "--format=%ct", source_commit],
+        text=True,
+    )
+    if timestamp.returncode != 0:
+        raise BuildManifestError("timestamp Git du source_commit indisponible")
+    try:
+        git_timestamp = int(timestamp.stdout.strip())
+    except (AttributeError, ValueError) as exc:
+        raise BuildManifestError("timestamp Git du source_commit invalide") from exc
+    if git_timestamp != source_date_epoch:
+        raise BuildManifestError("source_date_epoch différent du timestamp Git")
+    reproducibility = _validate_reproducibility(
+        {
+            "config_path": _REPRODUCIBILITY_CONFIG,
+            "source_commit": source_commit,
+            "source_date_epoch": source_date_epoch,
+            **_REPRODUCIBILITY_CONSTANTS,
+        },
+        role="locale",
+    )
+    return reproducibility, payload_bytes
+
+
+def _validate_preflight_report(
+    value: object,
+    *,
+    run_id: str,
+    pdf_path: str,
+    pdf_sha256: str,
+    page_count: int,
+    tool_versions: Mapping[str, str],
+    reproducibility: Mapping[str, object],
+) -> dict[str, Any]:
+    if not isinstance(value, Mapping) or set(value) != _PREFLIGHT_FIELDS:
+        raise BuildManifestError("rapport de préflight incomplet ou champs inattendus")
+    if value.get("run_id") != run_id:
+        raise BuildManifestError("run_id du rapport de préflight incohérent")
+    if value.get("pdf_path") != pdf_path:
+        raise BuildManifestError("pdf_path du rapport de préflight incohérent")
+    if value.get("pdf_sha256") != pdf_sha256:
+        raise BuildManifestError("digest PDF du rapport de préflight incohérent")
+    if type(value.get("page_count")) is not int or value.get("page_count") != page_count:
+        raise BuildManifestError("pagination du rapport de préflight incohérente")
+    if value.get("passed") is not True:
+        raise BuildManifestError("rapport de préflight sans réussite")
+    checks = value.get("checks")
+    if (
+        not isinstance(checks, Mapping)
+        or set(checks) != _PREFLIGHT_CHECKS
+        or any(
+            not isinstance(check, Mapping)
+            or set(check) != {"passed"}
+            or check.get("passed") is not True
+            for check in checks.values()
+        )
+    ):
+        raise BuildManifestError("checks du rapport de préflight invalides")
+    report_tools = _validate_tool_versions(
+        value.get("tool_versions"),
+        role="du rapport de préflight",
+    )
+    if report_tools != dict(tool_versions):
+        raise BuildManifestError("versions d'outils du préflight incohérentes")
+    report_reproducibility = _validate_reproducibility(
+        value.get("reproducibility"),
+        role="du rapport de préflight",
+    )
+    if report_reproducibility != dict(reproducibility):
+        raise BuildManifestError("reproductibilité du préflight incohérente")
+    return dict(value)
+
+
+def _validate_run_marker(payload: bytes, *, run_id: str, role: str) -> None:
+    text = payload.decode("utf-8", errors="replace")
+    markers = re.findall(r"NEXUS_BUILD_RUN:([0-9A-Za-z]+)", text)
+    if markers != [run_id]:
+        raise BuildManifestError(f"marqueur run_id {role} invalide")
 
 
 def _read_proof_file(root: Path, raw_path: object, *, role: str) -> bytes:
@@ -1088,6 +1442,38 @@ def _derive_receipt_evidence(
     ):
         raise BuildManifestError("chemin PDF non canonique")
 
+    run_id = _validate_run_id(receipt.get("run_id"))
+    evidence_sha256 = receipt.get("evidence_sha256")
+    if not isinstance(evidence_sha256, Mapping) or set(
+        evidence_sha256
+    ) != _EVIDENCE_FIELDS:
+        raise BuildManifestError("evidence_sha256 incomplet ou champs inattendus")
+    expected_evidence = {
+        name: _validate_sha256(
+            evidence_sha256[name],
+            role=f"de preuve {name}",
+        )
+        for name in _EVIDENCE_FIELDS
+    }
+    receipt_reproducibility = _validate_reproducibility(
+        receipt.get("reproducibility"),
+        role="du receipt",
+    )
+    reproducibility, config_payload = _load_reproducibility_control(root)
+    if receipt_reproducibility != reproducibility:
+        raise BuildManifestError(
+            "reproductibilité du receipt différente de la config"
+        )
+    receipt_tool_versions = _validate_tool_versions(
+        receipt.get("tool_versions"),
+        role="du receipt",
+    )
+    local_tool_versions = _collect_local_tool_versions(reproducibility)
+    if receipt_tool_versions != local_tool_versions:
+        raise BuildManifestError(
+            "versions d'outils du receipt différentes des versions locales"
+        )
+
     dependencies = _receipt_string_list(
         receipt,
         "generated_dependencies",
@@ -1097,11 +1483,40 @@ def _derive_receipt_evidence(
     if not isinstance(declared_objects, list) or not declared_objects:
         raise BuildManifestError("assemblage déclaré sans objets traçables")
 
-    log_payload = _read_proof_file(
-        root,
-        receipt.get("log_path"),
-        role="journal LaTeX",
+    proof_specs = {
+        "master": (receipt.get("master_path"), "master LaTeX"),
+        "log": (receipt.get("log_path"), "journal LaTeX"),
+        "fls": (receipt.get("fls_path"), "traceur FLS"),
+        "pdf": (pdf_path, "PDF"),
+        "preflight": (
+            receipt.get("preflight_report"),
+            "rapport de préflight",
+        ),
+    }
+    proof_payloads = {
+        name: _read_proof_file(root, path, role=role)
+        for name, (path, role) in proof_specs.items()
+    }
+    proof_hashes = {
+        name: _sha256_payload(payload)
+        for name, payload in proof_payloads.items()
+    }
+    for name, expected in expected_evidence.items():
+        if proof_hashes[name] != expected:
+            raise BuildManifestError(f"digest de preuve {name} incohérent")
+    proof_hashes["config"] = _sha256_payload(config_payload)
+
+    _validate_run_marker(
+        proof_payloads["master"],
+        run_id=run_id,
+        role="du master",
     )
+    _validate_run_marker(
+        proof_payloads["log"],
+        run_id=run_id,
+        role="du journal",
+    )
+    log_payload = proof_payloads["log"]
     log_text = log_payload.decode("utf-8", errors="replace")
     if (
         "Output written on " not in log_text
@@ -1109,11 +1524,7 @@ def _derive_receipt_evidence(
         or "! Emergency stop" in log_text
     ):
         raise BuildManifestError("journal LaTeX sans compilation prouvée")
-    fls_payload = _read_proof_file(
-        root,
-        receipt.get("fls_path"),
-        role="traceur FLS",
-    )
+    fls_payload = proof_payloads["fls"]
     fls_text = fls_payload.decode("utf-8", errors="replace")
     traced_inputs: list[str] = []
     traced_outputs: set[str] = set()
@@ -1128,6 +1539,9 @@ def _derive_receipt_evidence(
             traced_inputs.append(normalized)
         else:
             traced_outputs.add(normalized)
+    master_path = receipt.get("master_path")
+    if master_path not in traced_inputs:
+        raise BuildManifestError("master absent des INPUT du traceur FLS")
     declared_set = set(declared_objects)
     ordered_trace = _ordered_object_trace(
         log_text,
@@ -1162,29 +1576,33 @@ def _derive_receipt_evidence(
         pdfinfo_counter=inventory_module._page_count_with_pdfinfo,
         python_counter=inventory_module._page_count_with_python,
     )
-    if reason or digest is None or pages is None:
+    if (
+        reason
+        or digest is None
+        or pages is None
+        or type(pages) is not int
+        or pages <= 0
+        or digest != proof_hashes["pdf"]
+    ):
         raise BuildManifestError(f"PDF non prouvé: {reason or 'preuve absente'}")
     local_preflight = _run_local_pdf_preflight(
         root / pdf_path,
         expected_pages=pages,
     )
-    preflight_payload = _read_proof_file(
-        root,
-        receipt.get("preflight_report"),
-        role="rapport de préflight",
-    )
+    preflight_payload = proof_payloads["preflight"]
     try:
         preflight = json.loads(preflight_payload.decode("utf-8"))
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise BuildManifestError("rapport de préflight JSON invalide") from exc
-    if (
-        not isinstance(preflight, Mapping)
-        or preflight.get("passed") is not True
-        or preflight.get("pdf_sha256") != digest
-    ):
-        raise BuildManifestError(
-            "rapport de préflight sans réussite liée au PDF observé"
-        )
+    _validate_preflight_report(
+        preflight,
+        run_id=run_id,
+        pdf_path=pdf_path,
+        pdf_sha256=digest,
+        page_count=pages,
+        tool_versions=local_tool_versions,
+        reproducibility=reproducibility,
+    )
     gates = receipt.get("gates")
     if not isinstance(gates, Mapping):
         raise BuildManifestError("gates invalides dans le receipt")
@@ -1200,19 +1618,6 @@ def _derive_receipt_evidence(
         "passed": True,
         "checks": local_preflight,
     }
-    tool_versions = receipt.get("tool_versions")
-    if (
-        not isinstance(tool_versions, Mapping)
-        or not tool_versions
-        or any(
-            not isinstance(name, str)
-            or not name
-            or not isinstance(value, str)
-            or not value
-            for name, value in tool_versions.items()
-        )
-    ):
-        raise BuildManifestError("tool_versions invalides")
     build = {
         "excluded_objects": excluded,
         "gates": normalized_gates,
@@ -1226,8 +1631,9 @@ def _derive_receipt_evidence(
         "page_count": pages,
         "pdf_path": pdf_path,
         "pdf_sha256": digest,
+        "reproducibility": dict(reproducibility),
         "source_digest": source_digest,
-        "tool_versions": dict(tool_versions),
+        "tool_versions": dict(local_tool_versions),
         "variant": variant,
     }
     envelope = {
@@ -1260,6 +1666,31 @@ def _derive_receipt_evidence(
             or proposed.get("build_state_digest") != build_state_digest(builds)
         ):
             raise BuildManifestError("état des builds proposé incohérent")
+        for name, (path, role) in proof_specs.items():
+            current_payload = _read_proof_file(root, path, role=role)
+            if _sha256_payload(current_payload) != proof_hashes[name]:
+                raise BuildManifestError(
+                    f"preuve {name} modifiée avant publication du manifeste"
+                )
+        current_config_payload = _read_proof_file(
+            root,
+            _REPRODUCIBILITY_CONFIG,
+            role="config de reproductibilité",
+        )
+        if _sha256_payload(current_config_payload) != proof_hashes["config"]:
+            raise BuildManifestError(
+                "preuve config modifiée avant publication du manifeste"
+            )
+        current_reproducibility, _payload = _load_reproducibility_control(root)
+        if current_reproducibility != reproducibility:
+            raise BuildManifestError(
+                "reproductibilité modifiée avant publication du manifeste"
+            )
+        current_tool_versions = _collect_local_tool_versions(reproducibility)
+        if current_tool_versions != local_tool_versions:
+            raise BuildManifestError(
+                "versions d'outils modifiées avant publication du manifeste"
+            )
         current_digest, current_pages, _method, current_reason = (
             inventory_module._pdf_core.inspect_stable_pdf(
                 root,
@@ -1279,6 +1710,28 @@ def _derive_receipt_evidence(
         _run_local_pdf_preflight(
             root / pdf_path,
             expected_pages=pages,
+        )
+        current_preflight_payload = _read_proof_file(
+            root,
+            receipt.get("preflight_report"),
+            role="rapport de préflight",
+        )
+        try:
+            current_preflight = json.loads(
+                current_preflight_payload.decode("utf-8")
+            )
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise BuildManifestError(
+                "rapport de préflight JSON invalide avant publication"
+            ) from exc
+        _validate_preflight_report(
+            current_preflight,
+            run_id=run_id,
+            pdf_path=pdf_path,
+            pdf_sha256=digest,
+            page_count=pages,
+            tool_versions=current_tool_versions,
+            reproducibility=current_reproducibility,
         )
 
     return envelope, build, validate
