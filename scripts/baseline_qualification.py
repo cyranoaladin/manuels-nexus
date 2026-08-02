@@ -153,6 +153,20 @@ def qualification_digest(record: Mapping[str, Any]) -> str:
     return f"sha256:{hashlib.sha256(serialized).hexdigest()}"
 
 
+def _is_managed_by_policy(
+    record: Mapping[str, Any],
+    *,
+    policy_digest: str,
+    decision_ref: str,
+) -> bool:
+    """Identify this policy's records without absorbing prior decisions."""
+
+    return (
+        record.get("qualification_policy_digest") == policy_digest
+        or record.get("decision_ref") == decision_ref
+    )
+
+
 def validate_materialized_registry(
     policy: Mapping[str, Any],
     dispositions: Mapping[str, Mapping[str, Any]],
@@ -172,15 +186,17 @@ def validate_materialized_registry(
     if not isinstance(approved, Mapping) or not isinstance(initial, Mapping):
         return ["policy contract missing approved_set or initial_policy"]
     prohibited = set(initial.get("prohibited_outputs", []))
+    decision_ref = str(policy.get("decision", {}).get("ref", ""))
     managed = {
         str(fingerprint): record
         for fingerprint, record in dispositions.items()
         if (
             isinstance(record, Mapping)
             and record.get("policy_rule") != "historical-evidence"
-            and (
-                "qualification_policy_digest" in record
-                or record.get("policy_rule")
+            and _is_managed_by_policy(
+                record,
+                policy_digest=policy_digest,
+                decision_ref=decision_ref,
             )
         )
     }
@@ -296,7 +312,14 @@ def validate_materialized_registry(
         if not isinstance(actual, Mapping):
             failures.append(f"active disposition missing:{fingerprint}")
             continue
-        if actual.get("policy_rule") == "historical-evidence":
+        if (
+            actual.get("policy_rule") == "historical-evidence"
+            or not _is_managed_by_policy(
+                actual,
+                policy_digest=policy_digest,
+                decision_ref=decision_ref,
+            )
+        ):
             continue
         category = str(active.get("category", ""))
         anomaly = active.get("anomaly")
@@ -477,12 +500,6 @@ def _unqualified_entry(
     }
 
 
-def _historical_owner(disposition: str) -> str:
-    if disposition == "intentional_reuse":
-        return "direction_editoriale_pedagogique"
-    return "ingenierie_build_qualite"
-
-
 def _materialized_record(
     *,
     policy: Mapping[str, Any],
@@ -530,10 +547,15 @@ def _normalize_historical_record(
     record: Mapping[str, Any],
     historical: Mapping[str, Any],
 ) -> dict[str, Any]:
+    del policy
     disposition = str(historical.get("disposition", ""))
     if disposition not in ALLOWED_DISPOSITIONS:
         raise QualificationError(
             f"historical disposition invalid for {record['fingerprint']}"
+        )
+    if historical.get("fingerprint") != record.get("fingerprint"):
+        raise QualificationError(
+            f"historical fingerprint mismatch for {record['fingerprint']}"
         )
     if disposition in {"generated_dependency", "intentional_reuse"} and not (
         historical.get("proof") or historical.get("evidence")
@@ -541,30 +563,7 @@ def _normalize_historical_record(
         raise QualificationError(
             f"historical proof missing for {record['fingerprint']}"
         )
-    normalized = _canonical(historical)
-    normalized.update(
-        {
-            "baseline_sha": str(policy["approved_set"]["baseline_sha"]),
-            "blocking": DISPOSITION_BLOCKS[disposition],
-            "category": str(record["category"]),
-            "chapter": record.get("chapter"),
-            "fingerprint_schema_version": int(
-                record.get(
-                    "fingerprint_schema_version",
-                    FINGERPRINT_SCHEMA_VERSION,
-                )
-            ),
-            "manual": record.get("manual"),
-            "owner": _historical_owner(disposition),
-            "policy_rule": "historical-evidence",
-            "reason": str(historical["justification"]),
-            "release_blocking": DISPOSITION_BLOCKS[disposition],
-            "severity": str(record["severity"]),
-            "source": record.get("source"),
-        }
-    )
-    normalized["qualification_digest"] = qualification_digest(normalized)
-    return normalized
+    return _canonical(historical)
 
 
 def _unqualified_payload(

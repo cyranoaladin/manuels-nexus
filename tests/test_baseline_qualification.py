@@ -488,25 +488,71 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
     assert Counter(
         record["owner"]
         for record in payload["dispositions"].values()
-        if record["policy_rule"] != "historical-evidence"
+        if record.get("qualification_policy_digest") == policy["control_digest"]
     ) == Counter(policy["approved_set"]["owner_counts"])
     assert all(
         record["disposition"] == "open_debt"
         and record["release_blocking"] is True
         for record in payload["dispositions"].values()
-        if record["policy_rule"] != "historical-evidence"
+        if record.get("qualification_policy_digest") == policy["control_digest"]
     )
     assert all(
         record["disposition"] not in {"accepted_exception", "false_positive", "fixed"}
         for record in payload["dispositions"].values()
-        if record["policy_rule"] != "historical-evidence"
+        if record.get("qualification_policy_digest") == policy["control_digest"]
     )
     assert payload["control_digest"] == qualification_module.control_digest(payload)
     assert plan["unqualified_json"]["summary"]["unqualified"] == 0
     assert plan["unqualified_markdown"].endswith("\n")
 
 
-def test_repository_registry_excludes_historical_evidence_from_current_policy(
+def test_materialization_preserves_prior_policy_records_verbatim(
+    qualification_module,
+    policy,
+) -> None:
+    historical = {
+        "approved_by": "Décision antérieure",
+        "baseline_sha": "1" * 40,
+        "blocking": True,
+        "category": "blocking_statuses",
+        "chapter": "1SPE-SUITES",
+        "decision_ref": "audit/DECISION_ANTERIEURE.md#decision",
+        "disposition": "open_debt",
+        "fingerprint": "a" * 16,
+        "fingerprint_schema_version": 1,
+        "justification": "Dette ouverte par une décision antérieure.",
+        "manual": "1SPE",
+        "owner": "direction_scientifique_programme",
+        "policy_rule": "blocking-scientific-object",
+        "qualification_policy_digest": "sha256:" + "1" * 64,
+        "reason": "Dette ouverte par une décision antérieure.",
+        "release_blocking": True,
+        "severity": "blocking",
+        "source": "chapitres/1SPE-SUITES/cours/cours.tex",
+    }
+    historical["qualification_digest"] = (
+        qualification_module.qualification_digest(historical)
+    )
+    active = {
+        "category": historical["category"],
+        "chapter": historical["chapter"],
+        "fingerprint": historical["fingerprint"],
+        "fingerprint_schema_version": 1,
+        "manual": historical["manual"],
+        "severity": historical["severity"],
+        "source": historical["source"],
+    }
+
+    preserved = qualification_module._normalize_historical_record(
+        policy=policy,
+        record=active,
+        historical=historical,
+    )
+
+    assert preserved == historical
+
+
+def test_repository_registry_excludes_prior_policy_from_current_policy(
     qualification_module,
     inventory_module,
     policy,
@@ -516,8 +562,9 @@ def test_repository_registry_excludes_historical_evidence_from_current_policy(
     dispositions = inventory_module._load_dispositions(ROOT)
 
     assert any(
-        record.get("policy_rule") == "historical-evidence"
-        and record.get("qualification_policy_digest") != policy["control_digest"]
+        record.get("qualification_policy_digest")
+        not in {None, policy["control_digest"]}
+        and record.get("policy_rule") != "historical-evidence"
         for record in dispositions.values()
     )
     assert qualification_module.validate_materialized_registry(
@@ -1036,7 +1083,7 @@ def test_materialization_plan_corrects_policy_entry_drift_after_materialization(
     fingerprint = next(
         fingerprint
         for fingerprint, record in drifted.items()
-        if record["policy_rule"] != "historical-evidence"
+        if record.get("qualification_policy_digest") == policy["control_digest"]
     )
     drifted[fingerprint]["owner"] = "ingenierie_build_qualite"
 
