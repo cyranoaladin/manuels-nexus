@@ -401,7 +401,7 @@ def _install_receipt_evidence(
     monkeypatch.setattr(
         manifest_module,
         "_run_local_pdf_preflight",
-        lambda _path, *, expected_pages: {
+        lambda _path, *, expected_pages, reproducibility: {
             "pdffonts": "passed",
             "pdfinfo": f"passed:{expected_pages}",
         },
@@ -1105,6 +1105,32 @@ def test_manifest_schema_rejects_noncanonical_reproducibility(
     _write_manifest(tmp_path, _manifest(head, [build]))
 
     with pytest.raises(inventory_module.InventoryError, match="reproducibility"):
+        _load(inventory_module, tmp_path)
+
+
+@pytest.mark.parametrize("mutation", ["missing", "extra"])
+def test_manifest_schema_requires_exact_tool_versions(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    pdf_path = "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.pdf"
+    pdf_bytes = b"%PDF-1.7 observed build"
+    target = tmp_path / pdf_path
+    target.parent.mkdir(parents=True)
+    target.write_bytes(pdf_bytes)
+    build = _build(head, pdf_path, pdf_bytes)
+    tool_versions = build["tool_versions"]
+    assert isinstance(tool_versions, dict)
+    if mutation == "missing":
+        del tool_versions["pdffonts"]
+    else:
+        tool_versions["foreign"] = "forged"
+    _write_manifest(tmp_path, _manifest(head, [build]))
+
+    with pytest.raises(inventory_module.InventoryError, match="tool_versions"):
         _load(inventory_module, tmp_path)
 
 
@@ -2215,6 +2241,147 @@ def test_receipt_derivation_recomputes_all_derived_evidence(
     validator(proposed)
 
 
+def _commit_tracked_source(repository: Path) -> Path:
+    source = repository / "tracked-source.tex"
+    source.write_text("source initiale", encoding="utf-8")
+    subprocess.run(
+        ["git", "-C", str(repository), "add", source.name],
+        check=True,
+    )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "-c",
+            "user.name=Observed Build Tests",
+            "-c",
+            "user.email=observed@example.invalid",
+            "commit",
+            "-qm",
+            "tracked receipt source",
+        ],
+        check=True,
+    )
+    return source
+
+
+def test_receipt_rejects_source_mutation_during_inventory_derivation(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    source = _commit_tracked_source(tmp_path)
+    inventory_module = manifest_module._load_inventory_module()
+    original_build_inventory = inventory_module.build_inventory
+
+    def mutate_after_inventory(root: Path) -> dict[str, object]:
+        inventory = original_build_inventory(root)
+        source.write_text("source forgée", encoding="utf-8")
+        return inventory
+
+    inventory_module.build_inventory = mutate_after_inventory
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="source|Git|modifié",
+    ):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+def test_receipt_accepts_prevalidated_inventory_without_rederiving_it(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    inventory_module = manifest_module._load_inventory_module()
+    inventory = inventory_module.build_inventory(tmp_path)
+    inventory_module.build_inventory = lambda _root: pytest.fail(
+        "l'inventaire prévalidé ne doit pas être recalculé"
+    )
+
+    _envelope, build, _validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+        inventory=inventory,
+    )
+
+    assert build["source_digest"] == SHA256_A
+
+
+def test_receipt_rejects_source_mutation_during_pdf_preflight(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    source = _commit_tracked_source(tmp_path)
+
+    def mutate_during_preflight(
+        _path: Path,
+        *,
+        expected_pages: int,
+        reproducibility: dict[str, object],
+    ) -> dict[str, str]:
+        assert expected_pages == 11
+        assert reproducibility["source_commit"]
+        source.write_text("source forgée", encoding="utf-8")
+        return {"pdffonts": "passed", "pdfinfo": "passed:11"}
+
+    monkeypatch.setattr(
+        manifest_module,
+        "_run_local_pdf_preflight",
+        mutate_during_preflight,
+    )
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="source|Git|modifié",
+    ):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+def test_final_validator_rejects_tracked_source_drift(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    source = _commit_tracked_source(tmp_path)
+    envelope, build, validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+    source.write_text("source forgée", encoding="utf-8")
+    proposed = dict(envelope)
+    proposed["builds"] = [build]
+    proposed["build_state_digest"] = _state_digest([build])
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="source|Git|modifié",
+    ):
+        validator(proposed)
+
+
 def _refresh_receipt_digest(
     receipt: dict[str, object],
     paths: dict[str, Path],
@@ -2649,6 +2816,62 @@ def test_tool_version_collection_uses_exact_commands_and_sanitized_environment(
         }
 
 
+def test_local_pdf_preflight_uses_controlled_reproducibility_environment(
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[list[str], dict[str, str] | None]] = []
+
+    def run(command: list[str], **kwargs):
+        calls.append((command, kwargs.get("env")))
+        if command[0] == "pdfinfo":
+            return SimpleNamespace(returncode=0, stdout="Pages: 11\n", stderr="")
+        return SimpleNamespace(
+            returncode=0,
+            stdout=(
+                "name type encoding emb sub uni object ID\n"
+                "----------------------------------------\n"
+                "Font Type Enc yes no yes 1 0\n"
+            ),
+            stderr="",
+        )
+
+    monkeypatch.setattr(manifest_module.subprocess, "run", run)
+    monkeypatch.setenv("BUILD_SECRET", "forged")
+    monkeypatch.setenv("LD_PRELOAD", "/forged/library.so")
+    monkeypatch.setenv("LC_ALL", "fr_FR.UTF-8")
+    reproducibility = _reproducibility("c" * 40, 123456789)
+
+    checks = manifest_module._run_local_pdf_preflight(
+        Path("manual.pdf"),
+        expected_pages=11,
+        reproducibility=reproducibility,
+    )
+
+    assert checks == {"pdffonts": "passed", "pdfinfo": "passed"}
+    expected_environment = {
+        name: value
+        for name, value in {
+            "PATH": os.environ.get("PATH"),
+            "HOME": os.environ.get("HOME"),
+            "FORCE_SOURCE_DATE": "1",
+            "TZ": "UTC",
+            "LC_ALL": "C.UTF-8",
+            "PYTHONHASHSEED": "0",
+            "SOURCE_DATE_EPOCH": "123456789",
+        }.items()
+        if value is not None
+    }
+    assert [command[0] for command, _environment in calls] == [
+        "pdfinfo",
+        "pdffonts",
+    ]
+    assert [environment for _command, environment in calls] == [
+        expected_environment,
+        expected_environment,
+    ]
+
+
 def test_git_commands_strip_override_environment(
     tmp_path: Path,
     manifest_module,
@@ -2672,6 +2895,83 @@ def test_git_commands_strip_override_environment(
             if name in os.environ
         }
     ]
+
+
+@pytest.mark.parametrize(
+    ("helper", "message"),
+    [
+        ("repository_root", "dépôt Git indisponible"),
+        ("git_lock_path", "chemin de verrou Git indisponible"),
+        ("git_head", "HEAD Git indisponible"),
+        ("git_state", "HEAD Git indisponible"),
+        ("git_evidence_fingerprint", "état détaillé Git indisponible"),
+        ("git_root_from_path", "receipt hors dépôt Git"),
+    ],
+)
+def test_git_helpers_convert_timeout_to_stable_error(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    helper: str,
+    message: str,
+) -> None:
+    def timeout(*_args, **_kwargs):
+        raise subprocess.TimeoutExpired(["git"], 20)
+
+    monkeypatch.setattr(manifest_module.subprocess, "run", timeout)
+    calls = {
+        "repository_root": lambda: manifest_module._repository_root(
+            tmp_path / "audit/BUILD_MANIFEST.json"
+        ),
+        "git_lock_path": lambda: manifest_module._git_lock_path(tmp_path),
+        "git_head": lambda: manifest_module._git_head(tmp_path),
+        "git_state": lambda: manifest_module._git_state(tmp_path),
+        "git_evidence_fingerprint": lambda: (
+            manifest_module._git_evidence_fingerprint(tmp_path)
+        ),
+        "git_root_from_path": lambda: manifest_module._git_root_from_path(
+            tmp_path / "receipt.json"
+        ),
+    }
+
+    with pytest.raises(manifest_module.BuildManifestError, match=message):
+        calls[helper]()
+
+
+def test_git_helpers_use_finite_timeout(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    timeouts: list[int | None] = []
+
+    def run(_command: list[str], **kwargs):
+        timeouts.append(kwargs.get("timeout"))
+        return SimpleNamespace(returncode=0, stdout="c" * 40, stderr="")
+
+    monkeypatch.setattr(manifest_module.subprocess, "run", run)
+
+    assert manifest_module._git_head(tmp_path) == "c" * 40
+    assert timeouts == [20]
+
+
+def test_receipt_cli_reports_git_timeout_without_traceback(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    receipt = tmp_path / "receipt.json"
+
+    def timeout(*_args, **_kwargs):
+        raise subprocess.TimeoutExpired(["git"], 20)
+
+    monkeypatch.setattr(manifest_module.subprocess, "run", timeout)
+
+    assert manifest_module._run(["--receipt", str(receipt)]) == 2
+    captured = capsys.readouterr()
+    assert "receipt hors dépôt Git" in captured.err
+    assert "Traceback" not in captured.err
 
 
 @pytest.mark.parametrize(

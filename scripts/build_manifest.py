@@ -121,24 +121,39 @@ def _sanitized_git_environment() -> dict[str, str]:
     }
 
 
-def _repository_root(manifest_path: Path) -> Path:
+def _run_git(
+    root: Path,
+    command: list[str],
+    *,
+    role: str,
+    check: bool = True,
+    text: bool = True,
+) -> subprocess.CompletedProcess[Any]:
     try:
-        completed = subprocess.run(
-            [
-                "git",
-                "-C",
-                str(manifest_path.parent),
-                "rev-parse",
-                "--show-toplevel",
-            ],
+        return subprocess.run(
+            ["git", "-C", str(root), *command],
             env=_sanitized_git_environment(),
-            check=True,
+            check=check,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True,
+            text=text,
+            errors="replace" if text else None,
+            timeout=20,
         )
-    except (OSError, subprocess.CalledProcessError) as exc:
-        raise BuildManifestError("dépôt Git indisponible") from exc
+    except (
+        OSError,
+        subprocess.TimeoutExpired,
+        subprocess.CalledProcessError,
+    ) as exc:
+        raise BuildManifestError(role) from exc
+
+
+def _repository_root(manifest_path: Path) -> Path:
+    completed = _run_git(
+        manifest_path.parent,
+        ["rev-parse", "--show-toplevel"],
+        role="dépôt Git indisponible",
+    )
     root = Path(completed.stdout.strip()).resolve(strict=True)
     requested = Path(os.path.abspath(manifest_path))
     expected = root / _MANIFEST_RELATIVE
@@ -150,33 +165,21 @@ def _repository_root(manifest_path: Path) -> Path:
 
 
 def _git_lock_path(root: Path) -> Path:
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), "rev-parse", "--git-path", "nexus-build.lock"],
-            env=_sanitized_git_environment(),
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
-    except (OSError, subprocess.CalledProcessError) as exc:
-        raise BuildManifestError("chemin de verrou Git indisponible") from exc
+    completed = _run_git(
+        root,
+        ["rev-parse", "--git-path", "nexus-build.lock"],
+        role="chemin de verrou Git indisponible",
+    )
     path = Path(completed.stdout.strip())
     return path if path.is_absolute() else root / path
 
 
 def _git_head(root: Path) -> str:
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(root), "rev-parse", "HEAD"],
-            env=_sanitized_git_environment(),
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
-    except (OSError, subprocess.CalledProcessError) as exc:
-        raise BuildManifestError("HEAD Git indisponible") from exc
+    completed = _run_git(
+        root,
+        ["rev-parse", "HEAD"],
+        role="HEAD Git indisponible",
+    )
     return completed.stdout.strip()
 
 
@@ -214,57 +217,30 @@ def _status_is_dirty_outside_manifest(payload: bytes) -> bool:
 
 
 def _git_state(root: Path) -> tuple[str, str, bool]:
-    try:
-        head = _git_head(root)
-        branch = subprocess.run(
-            ["git", "-C", str(root), "branch", "--show-current"],
-            env=_sanitized_git_environment(),
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        ).stdout.strip()
-        status_payload = subprocess.run(
-            [
-                "git",
-                "-C",
-                str(root),
-                "status",
-                "--porcelain=v1",
-                "--untracked-files=all",
-                "-z",
-            ],
-            env=_sanitized_git_environment(),
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        ).stdout
-    except (OSError, subprocess.CalledProcessError) as exc:
-        raise BuildManifestError("état Git indisponible") from exc
+    head = _git_head(root)
+    branch = _run_git(
+        root,
+        ["branch", "--show-current"],
+        role="état Git indisponible",
+    ).stdout.strip()
+    status_payload = _run_git(
+        root,
+        ["status", "--porcelain=v1", "--untracked-files=all", "-z"],
+        role="état Git indisponible",
+        text=False,
+    ).stdout
     if not branch:
         raise BuildManifestError("branche Git détachée ou indisponible")
     return head, branch, _status_is_dirty_outside_manifest(status_payload)
 
 
 def _git_evidence_fingerprint(root: Path) -> str:
-    try:
-        payload = subprocess.run(
-            [
-                "git",
-                "-C",
-                str(root),
-                "status",
-                "--porcelain=v1",
-                "--untracked-files=all",
-                "-z",
-            ],
-            env=_sanitized_git_environment(),
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        ).stdout
-    except (OSError, subprocess.CalledProcessError) as exc:
-        raise BuildManifestError("état détaillé Git indisponible") from exc
+    payload = _run_git(
+        root,
+        ["status", "--porcelain=v1", "--untracked-files=all", "-z"],
+        role="état détaillé Git indisponible",
+        text=False,
+    ).stdout
     fields = payload.split(b"\0")
     entries: list[tuple[str, str, str]] = []
     index = 0
@@ -317,6 +293,22 @@ def _git_evidence_fingerprint(root: Path) -> str:
         separators=(",", ":"),
     ).encode("utf-8", errors="surrogateescape")
     return hashlib.sha256(canonical).hexdigest()
+
+
+def _capture_git_snapshot(
+    root: Path,
+) -> tuple[tuple[str, str, bool], str]:
+    return _git_state(root), _git_evidence_fingerprint(root)
+
+
+def _require_git_snapshot(
+    root: Path,
+    expected: tuple[tuple[str, str, bool], str],
+    *,
+    phase: str,
+) -> None:
+    if _capture_git_snapshot(root) != expected:
+        raise BuildManifestError(f"état Git ou sources modifiés {phase}")
 
 
 def _fingerprint(
@@ -811,17 +803,11 @@ def record_successful_build(
 
 
 def _git_root_from_path(path: Path) -> Path:
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(path.parent), "rev-parse", "--show-toplevel"],
-            env=_sanitized_git_environment(),
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
-    except (OSError, subprocess.CalledProcessError) as exc:
-        raise BuildManifestError("receipt hors dépôt Git") from exc
+    completed = _run_git(
+        path.parent,
+        ["rev-parse", "--show-toplevel"],
+        role="receipt hors dépôt Git",
+    )
     return Path(completed.stdout.strip()).resolve(strict=True)
 
 
@@ -1000,21 +986,13 @@ def _run_reproducibility_git(
     *,
     text: bool,
 ) -> subprocess.CompletedProcess[Any]:
-    try:
-        return subprocess.run(
-            ["git", "-C", str(root), *command],
-            env=_sanitized_git_environment(),
-            check=False,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=text,
-            errors="replace" if text else None,
-            timeout=20,
-        )
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        raise BuildManifestError(
-            "validation Git de reproductibilité indisponible"
-        ) from exc
+    return _run_git(
+        root,
+        command,
+        role="validation Git de reproductibilité indisponible",
+        check=False,
+        text=text,
+    )
 
 
 def _load_reproducibility_control(
@@ -1368,10 +1346,13 @@ def _run_local_pdf_preflight(
     pdf_path: Path,
     *,
     expected_pages: int,
+    reproducibility: Mapping[str, object],
 ) -> dict[str, str]:
+    environment = _sanitized_build_environment(reproducibility)
     try:
         pdfinfo = subprocess.run(
             ["pdfinfo", str(pdf_path)],
+            env=environment,
             check=False,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -1381,6 +1362,7 @@ def _run_local_pdf_preflight(
         )
         pdffonts = subprocess.run(
             ["pdffonts", str(pdf_path)],
+            env=environment,
             check=False,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -1423,12 +1405,21 @@ def _run_local_pdf_preflight(
 def _derive_receipt_evidence(
     root: Path,
     receipt: Mapping[str, Any],
+    *,
+    inventory: Mapping[str, Any] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], Callable[[dict[str, Any]], None]]:
     inventory_module = _load_inventory_module()
-    inventory = inventory_module.build_inventory(root)
+    initial_git_snapshot = _capture_git_snapshot(root)
+    if inventory is None:
+        inventory = inventory_module.build_inventory(root)
     source_digest = str(inventory["source_digest"])
     model_digest = str(inventory_module._model_digest(inventory))
-    head, branch, dirty = _git_state(root)
+    _require_git_snapshot(
+        root,
+        initial_git_snapshot,
+        phase="pendant la dérivation de l'inventaire",
+    )
+    head, branch, dirty = initial_git_snapshot[0]
     manual = receipt.get("manual")
     variant = receipt.get("variant")
     pdf_path = receipt.get("pdf_path")
@@ -1597,6 +1588,12 @@ def _derive_receipt_evidence(
             "sha256:" + hashlib.sha256(dependency_payload).hexdigest()
         )
 
+    _require_git_snapshot(
+        root,
+        initial_git_snapshot,
+        phase="pendant la capture des preuves",
+    )
+
     digest, pages, _method, reason = inventory_module._pdf_core.inspect_stable_pdf(
         root,
         pdf_path,
@@ -1615,6 +1612,7 @@ def _derive_receipt_evidence(
     local_preflight = _run_local_pdf_preflight(
         root / pdf_path,
         expected_pages=pages,
+        reproducibility=reproducibility,
     )
     preflight_payload = proof_payloads["preflight"]
     try:
@@ -1678,6 +1676,11 @@ def _derive_receipt_evidence(
     }
 
     def validate(proposed: dict[str, Any]) -> None:
+        _require_git_snapshot(
+            root,
+            initial_git_snapshot,
+            phase="avant la validation finale",
+        )
         inventory_module._validate_artifact_schema(
             proposed,
             root=root,
@@ -1747,6 +1750,7 @@ def _derive_receipt_evidence(
         _run_local_pdf_preflight(
             root / pdf_path,
             expected_pages=pages,
+            reproducibility=reproducibility,
         )
         current_preflight_payload = _read_proof_file(
             root,
@@ -1770,7 +1774,17 @@ def _derive_receipt_evidence(
             tool_versions=current_tool_versions,
             reproducibility=current_reproducibility,
         )
+        _require_git_snapshot(
+            root,
+            initial_git_snapshot,
+            phase="pendant la validation finale",
+        )
 
+    _require_git_snapshot(
+        root,
+        initial_git_snapshot,
+        phase="avant le retour des preuves dérivées",
+    )
     return envelope, build, validate
 
 
