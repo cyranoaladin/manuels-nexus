@@ -8,8 +8,13 @@
 % ===========================================================================
 %  BASE KOMA-SCRIPT
 % ===========================================================================
-\LoadClass[a4paper,fontsize=9.5pt,twoside,open=right,headings=normal,
-  chapterprefix=false,numbers=noenddot]{scrbook}
+\ifdefined\nxVBaseCompatibility
+  \LoadClass[a4paper,fontsize=9.5pt,twoside,open=right,headings=normal,
+    chapterprefix=false,numbers=noenddot]{scrbook}
+\else
+  \LoadClass[a4paper,fontsize=9.5pt,twoside,open=any,headings=normal,
+    chapterprefix=false,numbers=noenddot]{scrbook}
+\fi
 
 % ===========================================================================
 %  MOTEUR ET LANGUE
@@ -25,8 +30,13 @@
 % ===========================================================================
 %  MATIÈRE ET NIVEAU (paramétrage du sous-titre de couverture)
 % ===========================================================================
-\newcommand{\nexus@matiere}{NSI}
-\newcommand{\nexus@niveau}{Première}
+\ifdefined\nxVBaseCompatibility
+  \newcommand{\nexus@matiere}{NSI}
+  \newcommand{\nexus@niveau}{Première}
+\else
+  \newcommand{\nexus@matiere}{Mathématiques}
+  \newcommand{\nexus@niveau}{Première spécialité}
+\fi
 \RequirePackage{etoolbox}
 \newcommand{\matiere}[1]{%
   \renewcommand{\nexus@matiere}{#1}%
@@ -68,6 +78,9 @@
 \widowpenalty=10000
 \clubpenalty=10000
 \setlength{\parskip}{0.45em}
+\ifdefined\nxVBaseCompatibility\else
+  \emergencystretch=2em
+\fi
 
 % ===========================================================================
 %  COULEURS — Kit v2 « Éditorial premium »
@@ -102,13 +115,24 @@
 %  GRILLE DE PAGE — Kit v2 : marge ext. large pour notes marginales
 % ===========================================================================
 \RequirePackage{geometry}
-\geometry{%
-  a4paper,
-  top=2.4cm, bottom=2.6cm,
-  inner=2.0cm, outer=4.8cm,
-  marginparwidth=3.5cm, marginparsep=0.6cm,
-  headsep=0.7cm,
-}
+\ifdefined\nxVBaseCompatibility
+  \geometry{%
+    a4paper,
+    top=2.4cm, bottom=2.6cm,
+    inner=2.0cm, outer=4.8cm,
+    marginparwidth=3.5cm, marginparsep=0.6cm,
+    headsep=0.7cm,
+  }
+\else
+  \geometry{%
+    a4paper,
+    top=2.4cm, bottom=2.6cm,
+    inner=2.0cm, outer=4.4cm,
+    marginparwidth=2.8cm, marginparsep=0.45cm,
+    headsep=0.7cm,
+  }
+  \setlength{\marginparpush}{6pt}
+\fi
 
 % ===========================================================================
 %  MARGE PÉDAGOGIQUE (colonne de design)
@@ -135,9 +159,15 @@
 %  HIÉRARCHIE TYPOGRAPHIQUE (KOMA-Script RedeclareSectionCommand)
 % ===========================================================================
 \addtokomafont{chapter}{\titrefont\color{encre}\fontsize{22}{27}\selectfont}
-\addtokomafont{section}{\titrefont\color{encre}\fontsize{13}{17}\selectfont}
-\addtokomafont{subsection}{\titrefont\color{encre!85!black}\fontsize{11}{14}\selectfont}
-\addtokomafont{subsubsection}{\titrefont\color{encre!70!black}\fontsize{10}{13}\selectfont}
+\ifdefined\nxVBaseCompatibility
+  \addtokomafont{section}{\titrefont\color{encre}\fontsize{13}{17}\selectfont}
+  \addtokomafont{subsection}{\titrefont\color{encre!85!black}\fontsize{11}{14}\selectfont}
+  \addtokomafont{subsubsection}{\titrefont\color{encre!70!black}\fontsize{10}{13}\selectfont}
+\else
+  \addtokomafont{section}{\titrefont\color{encre}\fontsize{12.2}{15.5}\selectfont\raggedright}
+  \addtokomafont{subsection}{\titrefont\color{encre!85!black}\fontsize{10.8}{13.5}\selectfont\raggedright}
+  \addtokomafont{subsubsection}{\titrefont\color{encre!70!black}\fontsize{10}{13}\selectfont\raggedright}
+\fi
 
 % Espacement multiples de 4.5pt (tiers de ligne)
 \RedeclareSectionCommand[
@@ -381,7 +411,23 @@
 %  TABLES (booktabs)
 % ===========================================================================
 \RequirePackage{booktabs}
+\RequirePackage{array}
 \RequirePackage{eurosym}
+\newif\ifnxCompactTables
+\ifdefined\nxVBaseCompatibility
+  \nxCompactTablesfalse
+\else
+  \nxCompactTablestrue
+\fi
+\newcommand{\nxApplyCompactTableStyle}{%
+  \ifnxCompactTables
+    \footnotesize
+    \setlength{\tabcolsep}{3.4pt}%
+    \renewcommand{\arraystretch}{0.94}%
+  \fi
+}
+\AtBeginEnvironment{tabular}{\nxApplyCompactTableStyle}
+\AtBeginEnvironment{tabularx}{\nxApplyCompactTableStyle}
 
 % ===========================================================================
 %  FIGURES (définies dans nexus-figures.tex ; fallback si absent)
@@ -396,16 +442,34 @@
 \usetikzlibrary{backgrounds}
 
 \newlength{\nxBandHeight}
-\setlength{\nxBandHeight}{0.56\paperheight}
+\ifdefined\nxVBaseCompatibility
+  \setlength{\nxBandHeight}{0.56\paperheight}
+\else
+  \setlength{\nxBandHeight}{0.48\paperheight}
+\fi
+\newsavebox{\nxTitreChapBox}
+\newlength{\nxTitreChapHeight}
 
 % Usage : \ouverturechapitre[motif]{Titre}{capacites}{accroche}{temps}
 \newcommand{\ouverturechapitre}[5][motifGenerique]{%
   \stepcounter{nxChapNum}%
   \refstepcounter{chapter}%
   \chaptermark{#2}%
-  \addcontentsline{toc}{chapter}{#2}%
+  \ifdefined\nxVBaseCompatibility
+    \addcontentsline{toc}{chapter}{#2}%
+  \else
+    \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#2}%
+  \fi
   % --- PAGE VISUELLE (recto, bandeau accent haut 56%) ---
   \thispagestyle{empty}%
+  \ifdefined\nxVBaseCompatibility\else
+    % Hauteur réelle du titre (1 ou plusieurs lignes) : l'étiquette
+    % « Chapitre N » se place au-dessus du titre replié.
+    \sbox{\nxTitreChapBox}{\begin{minipage}{0.60\paperwidth}%
+      \titrefont\fontsize{27}{31}\selectfont#2\end{minipage}}%
+    \setlength{\nxTitreChapHeight}{\ht\nxTitreChapBox}%
+    \addtolength{\nxTitreChapHeight}{\dp\nxTitreChapBox}%
+  \fi
   \noindent\begin{tikzpicture}[remember picture, overlay]
     % Bandeau plein accent (haut de page)
     \fill[chapcolor] (current page.north west)
@@ -413,26 +477,49 @@
     % Décor TikZ du chapitre (dans le bandeau, moitié droite)
     \csname #1\endcsname
     % Étiquette matière · niveau
-    \node[anchor=north west, text=white, opacity=0.9,
-          font=\titrefont\small, inner sep=0pt]
-      at ([shift={(20mm,-17mm)}]current page.north west)
-      {\MakeUppercase{\nexus@matiere}\ \ $\cdot$\ \ \nexus@niveau};
+    \ifdefined\nxVBaseCompatibility
+      \node[anchor=north west, text=white, opacity=0.9,
+            font=\titrefont\small, inner sep=0pt]
+        at ([shift={(20mm,-17mm)}]current page.north west)
+        {\MakeUppercase{\nexus@matiere}\ \ $\cdot$\ \ \nexus@niveau};
+    \else
+      \node[anchor=north west, text=white, opacity=0.9,
+            font=\titrefont\small, inner sep=0pt]
+        at ([shift={(14mm,-16mm)}]current page.north west)
+        {\MakeUppercase{\nexus@matiere}\ \ $\cdot$\ \ \nexus@niveau};
+    \fi
     % Numéro géant fantôme
     \node[anchor=south west, text=white, opacity=0.15, inner sep=0pt,
           font=\titrefont\fontsize{210}{210}\selectfont]
       at ([shift={(16mm,-\nxBandHeight+2mm)}]current page.north west)
       {\ifnum\value{chapter}>0 \thechapter\fi};
     % « Chapitre N »
-    \node[anchor=south west, text=white, align=left, inner sep=0pt,
-          font=\titrefont]
-      at ([shift={(20mm,-\nxBandHeight+24mm)}]current page.north west)
-      {\fontsize{15}{15}\selectfont\MakeUppercase{Chapitre~\thechapter}};
+    \ifdefined\nxVBaseCompatibility
+      \node[anchor=south west, text=white, align=left, inner sep=0pt,
+            font=\titrefont]
+        at ([shift={(20mm,-\nxBandHeight+24mm)}]current page.north west)
+        {\fontsize{15}{15}\selectfont\MakeUppercase{Chapitre~\thechapter}};
+    \else
+      \node[anchor=south west, text=white, align=left, inner sep=0pt,
+            font=\titrefont]
+        at ([shift={(14mm,-\nxBandHeight+13mm+\nxTitreChapHeight+6mm)}]
+          current page.north west)
+        {\fontsize{15}{15}\selectfont\MakeUppercase{Chapitre~\thechapter}};
+    \fi
     % Titre géant
-    \node[anchor=south west, text=white, align=left, inner sep=0pt,
-          text width=0.66\paperwidth,
-          font=\titrefont\fontsize{34}{40}\selectfont]
-      at ([shift={(20mm,-\nxBandHeight+13mm)}]current page.north west)
-      {#2\par};
+    \ifdefined\nxVBaseCompatibility
+      \node[anchor=south west, text=white, align=left, inner sep=0pt,
+            text width=0.66\paperwidth,
+            font=\titrefont\fontsize{34}{40}\selectfont]
+        at ([shift={(20mm,-\nxBandHeight+13mm)}]current page.north west)
+        {#2\par};
+    \else
+      \node[anchor=south west, text=white, align=left, inner sep=0pt,
+            text width=0.60\paperwidth,
+            font=\titrefont\fontsize{27}{31}\selectfont]
+        at ([shift={(14mm,-\nxBandHeight+13mm)}]current page.north west)
+        {#2\par};
+    \fi
   \end{tikzpicture}\par
   % Espace sous le bandeau
   \vspace*{\dimexpr\nxBandHeight-\topskip-1.4cm\relax}%

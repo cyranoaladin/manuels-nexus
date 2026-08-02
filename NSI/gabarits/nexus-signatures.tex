@@ -11,17 +11,49 @@
 \newcounter{nxChapNum}
 \setcounter{nxChapNum}{0}
 
-\newcommand{\nxOngletHauteur}{1.5cm}
-\newcommand{\nxOngletLargeur}{0.6cm}
+\newlength{\nxOngletHauteur}
+\newlength{\nxOngletLargeur}
+\setlength{\nxOngletHauteur}{1.5cm}
+\setlength{\nxOngletLargeur}{0.6cm}
+\newsavebox{\nxOngletTextBox}
+\newlength{\nxOngletTextHeight}% étendue le long de la tranche (= largeur du texte avant rotation)
+\newlength{\nxOngletHalfTextHeight}
+\newlength{\nxOngletVerticalShift}
+\newlength{\nxOngletHalfLargeur}
 
+% L'onglet affiche « CHAPITRE N » sur UNE SEULE ligne (pas de retour à la
+% ligne). C'est un choix délibéré, pas une limite de mise en page : un texte
+% multi-lignes composé dans une colonne étroite puis pivoté à 90° dans l'en-
+% tête de page ne s'affiche pas correctement avec ce moteur (LuaTeX/pgf) —
+% la boîte est correctement composée (vérifié via \showbox) mais le rendu
+% final n'affiche qu'une fraction des lignes, de façon non déterministe.
+% Le titre complet du chapitre reste consultable dans le fil d'Ariane
+% horizontal (\headmark) juste à côté.
 \newcommand{\nxOnglet}{%
+  \begingroup
+  \sbox{\nxOngletTextBox}{\titrefont\fontsize{7}{8}\selectfont\color{white}\MakeUppercase{Chapitre~\thechapter}}%
+  \setlength{\nxOngletTextHeight}{\wd\nxOngletTextBox}%
+  \addtolength{\nxOngletTextHeight}{4mm}% padding gauche/droite (le long de la tranche)
+  \ifdim\nxOngletTextHeight<\nxOngletHauteur
+    \setlength{\nxOngletTextHeight}{\nxOngletHauteur}% minimum
+  \fi
+  \setlength{\nxOngletHalfTextHeight}{0.5\nxOngletTextHeight}%
+  \setlength{\nxOngletHalfLargeur}{0.5\nxOngletLargeur}%
+  \setlength{\nxOngletVerticalShift}{%
+    \dimexpr 2cm + \nxOngletHauteur*\value{nxChapNum} + 0.3cm*\value{nxChapNum}\relax
+  }%
   \begin{tikzpicture}[remember picture,overlay]
     \fill[chapcolor]
       (current page.north east)
-      ++(-\nxOngletLargeur, -2cm - \value{nxChapNum}*\nxOngletHauteur - \value{nxChapNum}*0.3cm)
+      ++(-\nxOngletLargeur, -\nxOngletVerticalShift)
       rectangle
-      +(\nxOngletLargeur, -\nxOngletHauteur);
+      +(\nxOngletLargeur, -\nxOngletTextHeight);
+    \node[rotate=90, anchor=center, inner sep=0pt]
+      at ([yshift=-\nxOngletVerticalShift-\nxOngletHalfTextHeight,
+           xshift=-\nxOngletHalfLargeur]current page.north east)
+      {\usebox{\nxOngletTextBox}};
   \end{tikzpicture}%
+  \endgroup
 }
 
 % ============================================================
