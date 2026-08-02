@@ -9,14 +9,14 @@
 | 1NSI | NSI Première | NSI | Premiere | courante | 1 | 5 | 55 | 153 | 153 | — |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 464 | 1334 | 1334 | — |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 0 | 0 | 0 | 0 | 0 | — |
-| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 3 | 16 | 100 | 295 | 295 | — |
+| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 3 | 16 | 152 | 429 | 429 | — |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 1796 |
-| unassembled_objects | 614 |
+| blocking_statuses | 1930 |
+| unassembled_objects | 666 |
 | broken_meta_references | 24 |
 | unavailable_inspiration_sources | 15 |
 | chapters_not_in_manual | 4 |
@@ -61,9 +61,9 @@
 
 ## Réconciliation des rapports
 
-- Assertions lues: 96
+- Assertions lues: 108
 - Ouvertes: 46
-- Contradictoires: 16
+- Contradictoires: 18
 
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 16 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 36 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | exercices_principaux | 30 | None | ouvert
@@ -74,13 +74,11 @@
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 44 | chapter:1SPE-TRIGONOMETRIE | exercices_principaux | 50 | 20 | contredit
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 50 | manual:1SPE | completude | True | False | contredit
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 53 | manual:TSPE_2026_2027 | chapitres | 13 | 3 | contredit
-- Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 72 | directive:collection | seuil_exercices_declares | 2 | None | ouvert
-- Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 72 | directive:collection | seuil_exercices_declares | 50 | None | ouvert
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 4 | manual:1SPE | completude | True | False | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 5 | manual:1SPE | exercices_principaux | 471 | 464 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 6 | manual:1SPE | pages_compilees | 445 | None | ouvert
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 7 | manual:1SPE | pages_compilees | 399 | None | ouvert
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 13 | manual:TSPE_2026_2027 | chapitres | 12 | 3 | contredit
+- Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 73 | directive:collection | seuil_exercices_declares | 2 | None | ouvert
+- Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 73 | directive:collection | seuil_exercices_declares | 50 | None | ouvert
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 18 | chapter:1SPE-SUITES | exercices_principaux | 1 | 49 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 19 | chapter:1SPE-SECOND-DEGRE | exercices_principaux | 8 | 42 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 44 | manual:1SPE | chapitres | 4 | 10 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | corriges | 49 | 51 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 10 | chapter:1SPE-SUITES | pages_compilees | 82 | None | ouvert
 - Mathematiques/manuel-maths/MISSION_LOG.md | 17 | chapter:1SPE-SUITES | chapitres | 3 | None | ouvert
@@ -89,9 +87,11 @@
 - Mathematiques/manuel-maths/MISSION_LOG.md | 27 | manual:1SPE | tests_passes | 214 | None | ouvert
 - Mathematiques/manuel-maths/MISSION_LOG.md | 28 | chapter:1SPE-DERIVATION-GLOBAL | exercices_principaux | 50 | 53 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 28 | chapter:1SPE-DERIVATION-GLOBAL | remediations_items_declares | 10 | None | ouvert
+- Mathematiques/manuel-maths/MISSION_LOG.md | 32 | chapter:TSPE-SUITES-LIMITES | remediations_items_declares | 10 | None | ouvert
+- Mathematiques/manuel-maths/MISSION_LOG.md | 33 | chapter:TSPE-LIMITES-FONCTIONS | remediations_items_declares | 10 | None | ouvert
+- Mathematiques/manuel-maths/MISSION_LOG.md | 36 | chapter:TSPE-DERIVATION-CONVEXITE | coups_de_pouce | 16 | 15 | contredit
+- Mathematiques/manuel-maths/MISSION_LOG.md | 36 | chapter:TSPE-DERIVATION-CONVEXITE | exercices_principaux | 2 | 52 | contredit
 - Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 13 | chapter:1SPE-SUITES | pages_compilees | 82 | None | ouvert
 - Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 13 | chapter:1SPE-SUITES | verify_assertions | 140 | None | ouvert
 - Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 14 | chapter:1SPE-SECOND-DEGRE | pages_compilees | 65 | None | ouvert
 - Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 14 | chapter:1SPE-SECOND-DEGRE | verify_assertions | 140 | None | ouvert
-- Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 15 | chapter:1SPE-DERIVATION-LOCAL | exercices_principaux | 30 | 50 | contredit
-- Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 15 | chapter:1SPE-DERIVATION-LOCAL | pages_compilees | 39 | None | ouvert

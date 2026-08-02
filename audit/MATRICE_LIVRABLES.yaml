@@ -327,13 +327,13 @@ manuals:
   TSPE_2026_2027:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '298'
+      detail: '432'
       source: anomalies.blocking_statuses
     - code: anomalie:chapters_not_in_manual
       detail: '3'
       source: anomalies.chapters_not_in_manual
     - code: anomalie:unassembled_objects
-      detail: '100'
+      detail: '152'
       source: anomalies.unassembled_objects
     - code: livrable_non_compile
       detail: absent
@@ -354,7 +354,7 @@ manuals:
       detail: cible a figer en Phase 1
       source: MISSION_PRIORITAIRE §10
     - code: statuts_non_approuves
-      detail: objets=295; contrats=3
+      detail: objets=429; contrats=3
       source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts: []
@@ -364,18 +364,18 @@ manuals:
       - TSPE-LIMITES-FONCTIONS
       - TSPE-SUITES-LIMITES
       statuses:
-        generated: 295
+        generated: 429
       totals:
         capacites: 16
-        corriges: 104
-        coups_de_pouce: 32
+        corriges: 158
+        coups_de_pouce: 47
         diagnostics: 0
-        evaluations: 4
-        exercices_principaux: 100
+        evaluations: 6
+        exercices_principaux: 152
         methodes: 13
         projets: 0
-        qcm: 2
-        remediations: 18
+        qcm: 3
+        remediations: 28
         sections_cours: 16
         td: 6
     objective:
@@ -426,24 +426,24 @@ manuals:
         declared_chapter_variants: []
         declared_manual_variants: []
         state: absent
-model_digest: sha256:80d5fc066ee0f41419d7008dc16eef87d0b1664faf80182c9d2239a88451d6d2
+model_digest: sha256:5947d4bdd790802392c02479d36688667bd7af4d833a17d6b3e211725e8e9943
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-02T11:17:16Z'
+  generated_at_utc: '2026-08-02T13:04:05Z'
   generator_files:
-    scripts/baseline_qualification.py: sha256:abcd7be592273bfa37c832ca948f0154adad4514764ca8709cc851e3c726a24c
+    scripts/baseline_qualification.py: sha256:c85dae1d53c901a75c8b24d2d6634668bd41a0bf34306eaea266a497b3da5444
     scripts/build_manifest.py: sha256:0e914f9ec1071e5941ef954e5dd9396e7910a05fa068c63cb08e975f1293fce7
     scripts/inventory_assembly.py: sha256:0152e2523723678b6333a9a2738cad373150f4d908612bfba7d5b506edf4b339
     scripts/inventory_collection.py: sha256:adb6d334329b3c6cb8aec8606c2cbf9572965e94177f6c2730484f54492f186d
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:d35af02bcf165276be9a76adea722813cd7376f4166b9ab1ab9bc91e226ebce9
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:4a9d078860579a9b833ccc39b808064fc9593385dc23472dc2fcf506b1b66d5b
+  generator_sha256: sha256:bcfab39970f66c0c14de71a23820140058459da48c62455a5c76e1908db30721
   generator_version: 1
   git_available: true
-  head_sha: ca5241c04bcc462b01fee7fd1b0b98330a705249
+  head_sha: 1ea3d0fd83e191eabc6ff54580c95f5f8a295713
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -454,4 +454,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:dd7846fc879bb769ffec5153e70dcd960e7446f4b763ce36c27a7ef6e81bfb8b
+source_digest: sha256:37ed6d2c846ab3793a03485849d1ed57460112fc99340b7457f1357b27c13de3
