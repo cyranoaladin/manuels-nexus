@@ -268,7 +268,18 @@ def _install_receipt_evidence(
     fls = repository / "build/manual.fls"
     preflight = repository / "build/preflight.json"
     dependency = repository / "build/generated-index.tex"
-    for path in (master, pdf, log, fls, preflight, dependency):
+    object_2 = repository / "OBJ-2"
+    object_1 = repository / "OBJ-1"
+    for path in (
+        master,
+        pdf,
+        log,
+        fls,
+        preflight,
+        dependency,
+        object_2,
+        object_1,
+    ):
         path.parent.mkdir(parents=True, exist_ok=True)
     master.write_text(
         f"\\typeout{{NEXUS_BUILD_RUN:{RUN_ID}}}\n",
@@ -302,6 +313,8 @@ def _install_receipt_evidence(
         encoding="utf-8",
     )
     dependency.write_text("% generated", encoding="utf-8")
+    object_2.write_text("objet 2", encoding="utf-8")
+    object_1.write_text("objet 1", encoding="utf-8")
     reproducibility = _reproducibility(source_commit, source_date_epoch)
     preflight.write_text(
         json.dumps(
@@ -331,6 +344,8 @@ def _install_receipt_evidence(
         "pdf": pdf,
         "preflight": preflight,
         "config": config_path,
+        "object_2": object_2,
+        "object_1": object_1,
     }
     receipt = {
         **_receipt(),
@@ -2372,6 +2387,40 @@ def test_receipt_rejects_run_marker_mismatch_or_duplication(
         manifest_module._derive_receipt_evidence(tmp_path, receipt)
 
 
+@pytest.mark.parametrize("surface", ["master", "log"])
+@pytest.mark.parametrize(
+    "mutation",
+    ["underscore_suffix", "hyphen_suffix", "line_prefix", "line_suffix"],
+)
+def test_receipt_requires_exact_full_run_marker_line(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    surface: str,
+    mutation: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    marker = f"NEXUS_BUILD_RUN:{RUN_ID}"
+    payload = paths[surface].read_text(encoding="utf-8")
+    if mutation == "underscore_suffix":
+        payload = payload.replace(marker, f"{marker}_forged")
+    elif mutation == "hyphen_suffix":
+        payload = payload.replace(marker, f"{marker}-forged")
+    elif mutation == "line_prefix":
+        payload = payload.replace(marker, f"forged {marker}")
+    else:
+        payload = payload.replace(marker, f"{marker} forged")
+    paths[surface].write_text(payload, encoding="utf-8")
+    _refresh_receipt_digest(receipt, paths, surface)
+
+    with pytest.raises(manifest_module.BuildManifestError, match="marqueur|run_id"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
 def test_receipt_requires_master_in_fls_inputs(
     tmp_path: Path,
     manifest_module,
@@ -2412,6 +2461,59 @@ def test_external_absolute_texlive_fls_input_is_ignored(
         str(value).startswith("/usr/share/texlive")
         for value in build["included_objects"]
     )
+
+
+@pytest.mark.parametrize("kind", ["missing", "symlink", "hardlink"])
+def test_receipt_confines_every_traced_object_proof(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    kind: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    target = paths["object_2"]
+    payload = target.read_bytes()
+    target.unlink()
+    if kind != "missing":
+        external = tmp_path / "external-object-2.tex"
+        external.write_bytes(payload)
+        if kind == "symlink":
+            target.symlink_to(external)
+        else:
+            os.link(external, target)
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="objet|inaccessible|symbolique|hardlink",
+    ):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
+def test_final_validator_rejects_traced_object_drift(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    envelope, build, validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+    paths["object_2"].write_text("objet 2 forgé", encoding="utf-8")
+    proposed = dict(envelope)
+    proposed["builds"] = [build]
+    proposed["build_state_digest"] = _state_digest([build])
+
+    with pytest.raises(manifest_module.BuildManifestError, match="objet|modifié"):
+        validator(proposed)
 
 
 @pytest.mark.parametrize("field", ["master_path", "log_path"])

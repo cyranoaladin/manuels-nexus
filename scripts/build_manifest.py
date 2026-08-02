@@ -1146,10 +1146,25 @@ def _validate_preflight_report(
     return dict(value)
 
 
-def _validate_run_marker(payload: bytes, *, run_id: str, role: str) -> None:
+def _validate_run_marker(
+    payload: bytes,
+    *,
+    run_id: str,
+    role: str,
+    tex_line: bool,
+) -> None:
     text = payload.decode("utf-8", errors="replace")
-    markers = re.findall(r"NEXUS_BUILD_RUN:([0-9A-Za-z]+)", text)
-    if markers != [run_id]:
+    expected = (
+        f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}"
+        if tex_line
+        else f"NEXUS_BUILD_RUN:{run_id}"
+    )
+    marker_lines = [
+        line if tex_line else line.strip()
+        for line in text.splitlines()
+        if "NEXUS_BUILD_RUN:" in line
+    ]
+    if marker_lines != [expected]:
         raise BuildManifestError(f"marqueur run_id {role} invalide")
 
 
@@ -1510,11 +1525,13 @@ def _derive_receipt_evidence(
         proof_payloads["master"],
         run_id=run_id,
         role="du master",
+        tex_line=True,
     )
     _validate_run_marker(
         proof_payloads["log"],
         run_id=run_id,
         role="du journal",
+        tex_line=False,
     )
     log_payload = proof_payloads["log"]
     log_text = log_payload.decode("utf-8", errors="replace")
@@ -1550,6 +1567,16 @@ def _derive_receipt_evidence(
     )
     included = list(ordered_trace)
     excluded = sorted(declared_set - set(included))
+    object_proof_hashes = {
+        path: _sha256_payload(
+            _read_proof_file(
+                root,
+                path,
+                role=f"objet inclus {path}",
+            )
+        )
+        for path in included
+    }
     dependency_digests: dict[str, str] = {}
     for dependency in dependencies:
         if (
@@ -1671,6 +1698,16 @@ def _derive_receipt_evidence(
             if _sha256_payload(current_payload) != proof_hashes[name]:
                 raise BuildManifestError(
                     f"preuve {name} modifiée avant publication du manifeste"
+                )
+        for object_path, expected_digest in object_proof_hashes.items():
+            current_object = _read_proof_file(
+                root,
+                object_path,
+                role=f"objet inclus {object_path}",
+            )
+            if _sha256_payload(current_object) != expected_digest:
+                raise BuildManifestError(
+                    f"objet inclus {object_path} modifié avant publication"
                 )
         current_config_payload = _read_proof_file(
             root,
