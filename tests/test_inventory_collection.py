@@ -5753,6 +5753,7 @@ ORDER = [("cours", "1*"), ("exercices", "*")]
 CHAPITRES = ["1SPE-TEST", "1SPE-AUTRE"]
 VARIANTES = ["complet", "methodes"]
 ELEVE_EXCLUDES = {"corriges", "evaluations"}
+ELEVE_ALLOWED_TYPES = {"cours", "evaluation", "exercice"}
 parser.add_argument("--variant", choices=["eleve", "professeur"])
 """,
     )
@@ -5761,6 +5762,7 @@ parser.add_argument("--variant", choices=["eleve", "professeur"])
 
     assert analysis["constants"] == {
         "CHAPITRES": ["1SPE-TEST", "1SPE-AUTRE"],
+        "ELEVE_ALLOWED_TYPES": ["cours", "evaluation", "exercice"],
         "ELEVE_EXCLUDES": ["corriges", "evaluations"],
         "ORDER": [["cours", "1*"], ["exercices", "*"]],
         "VARIANTES": ["complet", "methodes"],
@@ -5770,6 +5772,64 @@ parser.add_argument("--variant", choices=["eleve", "professeur"])
         "eleve",
         "methodes",
         "professeur",
+    ]
+
+
+def test_manual_student_assembly_filters_teacher_objects_by_metadata(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    assembler = "Mathematiques/manuel-maths/scripts/assemble_manuel.py"
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        f"{base}/cours/10_cours.tex": _meta(
+            id="1SPE-TEST-COURS-C1", type_objet="cours", status="approved"
+        ),
+        f"{base}/exercices/1SPE-TEST-EX-001.tex": _meta(
+            id="1SPE-TEST-EX-001", type_objet="exercice", status="approved"
+        ),
+        f"{base}/corriges/1SPE-TEST-CO-001.tex": _meta(
+            id="1SPE-TEST-CO-001",
+            type_objet="corrige",
+            exercice_id="1SPE-TEST-EX-001",
+            status="approved",
+        ),
+        f"{base}/evaluations/1SPE-TEST-EV-A.tex": _meta(
+            id="1SPE-TEST-EV-A", type_objet="evaluation", status="approved"
+        ),
+        f"{base}/evaluations/1SPE-TEST-EV-A-corrige.tex": _meta(
+            id="1SPE-TEST-EV-A-corrige",
+            type_objet="corrige_evaluation",
+            status="approved",
+        ),
+        assembler: """CHAPITRES = ["1SPE-TEST"]
+ORDER = [("cours", "1*"), ("exercices", "*"), ("evaluations", "*"), ("corriges", "*")]
+VARIANTS = ["professeur", "eleve"]
+ELEVE_EXCLUDES = {"corriges"}
+ELEVE_ALLOWED_TYPES = {"cours", "evaluation", "exercice"}
+""",
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    assemblies = {item["assembly_id"]: item for item in inventory["assemblies"]}
+    professor = assemblies["math:manual:1SPE:professeur"]
+    student = assemblies["math:manual:1SPE:eleve"]
+
+    assert professor["included_objects"] == [
+        f"{base}/cours/10_cours.tex",
+        f"{base}/exercices/1SPE-TEST-EX-001.tex",
+        f"{base}/evaluations/1SPE-TEST-EV-A-corrige.tex",
+        f"{base}/evaluations/1SPE-TEST-EV-A.tex",
+        f"{base}/corriges/1SPE-TEST-CO-001.tex",
+    ]
+    assert student["included_objects"] == [
+        f"{base}/cours/10_cours.tex",
+        f"{base}/exercices/1SPE-TEST-EX-001.tex",
+        f"{base}/evaluations/1SPE-TEST-EV-A.tex",
     ]
 
 

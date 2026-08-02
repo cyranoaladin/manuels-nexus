@@ -65,6 +65,7 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
     constants: dict[str, Any] = {}
     accepted_names = {
         "CHAPITRES",
+        "ELEVE_ALLOWED_TYPES",
         "ELEVE_EXCLUDES",
         "ORDER",
         "VARIANTS",
@@ -166,6 +167,18 @@ def validate_analysis(
             or not all(isinstance(chapter, str) and chapter for chapter in chapters)
         ):
             errors.append(("CHAPITRES", "CHAPITRES absent ou invalide"))
+        student_types = analysis["constants"].get("ELEVE_ALLOWED_TYPES")
+        if (
+            not isinstance(student_types, list)
+            or not student_types
+            or not all(isinstance(value, str) and value for value in student_types)
+        ):
+            errors.append(
+                (
+                    "ELEVE_ALLOWED_TYPES",
+                    "filtre metadata eleve absent ou invalide",
+                )
+            )
     return errors
 
 
@@ -175,6 +188,7 @@ def select_items(
     variant: str,
     *,
     exclusions: Any,
+    allowed_source_types: Any = None,
 ) -> tuple[list[dict[str, Any]], Counter[str]]:
     if variant == "methodes":
         rules: list[list[str]] = [["methodes", "*"]]
@@ -189,6 +203,11 @@ def select_items(
         if isinstance(exclusions, list)
         else set()
     )
+    allowed_types = (
+        {item for item in allowed_source_types if isinstance(item, str)}
+        if isinstance(allowed_source_types, list)
+        else None
+    )
     selected_candidates: list[dict[str, Any]] = []
     counts: Counter[str] = Counter()
     for directory, pattern in rules:
@@ -200,6 +219,10 @@ def select_items(
                 item
                 for item in objects
                 if PurePosixPath(item["path"]).parent.name == directory
+                and (
+                    allowed_types is None
+                    or item.get("source_type") in allowed_types
+                )
                 and fnmatch.fnmatchcase(
                     PurePosixPath(item["path"]).name, filename_pattern
                 )
@@ -335,6 +358,7 @@ def _build_manual_assemblies(
 ) -> None:
     constants = analysis["constants"]
     student_excludes = constants.get("ELEVE_EXCLUDES", [])
+    student_allowed_types = constants.get("ELEVE_ALLOWED_TYPES")
     for variant in analysis["variants"]:
         selected: list[dict[str, Any]] = []
         duplicate_counts: Counter[str] = Counter()
@@ -349,6 +373,9 @@ def _build_manual_assemblies(
                 constants.get("ORDER", []),
                 variant,
                 exclusions=exclusions,
+                allowed_source_types=(
+                    student_allowed_types if variant == "eleve" else None
+                ),
             )
             selected.extend(chapter_selected)
             inclusion_counts.update(item["path"] for item in chapter_selected)

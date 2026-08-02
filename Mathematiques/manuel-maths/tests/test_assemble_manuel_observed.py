@@ -330,6 +330,17 @@ def _professor_paths() -> list[str]:
     ]
 
 
+def _student_paths() -> list[str]:
+    return [
+        path.relative_to(GIT_ROOT).as_posix()
+        for chapter in assemble_manuel.CHAPITRES
+        for path in assemble_manuel.collect_chapter(
+            MANUAL_ROOT / "chapitres" / chapter,
+            "eleve",
+        )
+    ]
+
+
 def _marked_blocks(master: str) -> list[tuple[str, str, str]]:
     return re.findall(
         r"\\typeout\{NEXUS_OBJECT_BEGIN:([0-9a-f]{40})\}\n"
@@ -519,11 +530,48 @@ def test_real_professor_order_matches_declared_inventory() -> None:
     )
     professor_paths = _professor_paths()
 
-    assert len(professor_paths) == 870
+    assert len(professor_paths) == 1334
     assert all(
         path.startswith("Mathematiques/manuel-maths/") for path in professor_paths
     )
     assert professor_paths == assembly["included_objects"]
+
+
+def test_real_student_order_keeps_evaluations_and_excludes_teacher_objects() -> None:
+    inventory = json.loads(
+        (GIT_ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")
+    )
+    assembly = next(
+        item
+        for item in inventory["assemblies"]
+        if item["assembly_id"] == "math:manual:1SPE:eleve"
+    )
+    student_paths = _student_paths()
+
+    assert len(student_paths) == 852
+    assert student_paths == assembly["included_objects"]
+    assert sum("/evaluations/" in path for path in student_paths) == 18
+    assert all("/corriges/" not in path for path in student_paths)
+    assert all(not path.endswith("-corrige.tex") for path in student_paths)
+    assert all(
+        assemble_manuel.object_type(MANUAL_ROOT / path.removeprefix(
+            "Mathematiques/manuel-maths/"
+        ))
+        in assemble_manuel.ELEVE_ALLOWED_TYPES
+        for path in student_paths
+    )
+
+
+def test_student_selection_fails_closed_without_valid_object_metadata(
+    tmp_path: Path,
+) -> None:
+    chapter = tmp_path / "1SPE-TEST"
+    course = chapter / "cours/10_C1_test.tex"
+    course.parent.mkdir(parents=True)
+    course.write_text("Contenu sans META\n", encoding="utf-8")
+
+    with pytest.raises(assemble_manuel.AssemblyError, match="META"):
+        assemble_manuel.collect_chapter(chapter, "eleve")
 
 
 def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(

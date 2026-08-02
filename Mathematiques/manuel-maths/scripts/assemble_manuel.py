@@ -43,9 +43,20 @@ ORDER = [
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"),
     ("cours", "07_td*"), ("qcm", "*"), ("evaluations", "*"), ("remediation", "*"),
+    ("corriges", "*"),
 ]
 
-ELEVE_EXCLUDES = {"corriges", "evaluations"}
+ELEVE_EXCLUDES = {"corriges"}
+ELEVE_ALLOWED_TYPES = {
+    "cours",
+    "coup_de_pouce",
+    "evaluation",
+    "exercice",
+    "methode",
+    "qcm",
+    "remediation",
+    "td",
+}
 
 REPRODUCIBILITY_CONFIG = Path(
     "Mathematiques/manuel-maths/config/reproducible-build.json"
@@ -668,7 +679,33 @@ def wrap_object_input(input_path: str, canonical_path: str) -> str:
     )
 
 
+def object_type(path: Path) -> str:
+    """Read the closed student/professor routing discriminator from META."""
+
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()[:10]
+    except (OSError, UnicodeError) as error:
+        raise AssemblyError(f"META illisible: {path}") from error
+    meta_lines = [
+        line.removeprefix("% META:").strip()
+        for line in lines
+        if line.startswith("% META:")
+    ]
+    if len(meta_lines) != 1:
+        raise AssemblyError(f"META absente ou ambiguë: {path}")
+    try:
+        payload = json.loads(meta_lines[0])
+    except json.JSONDecodeError as error:
+        raise AssemblyError(f"META JSON invalide: {path}") from error
+    value = payload.get("type_objet") if isinstance(payload, dict) else None
+    if not isinstance(value, str) or not value:
+        raise AssemblyError(f"type_objet META invalide: {path}")
+    return value
+
+
 def collect_chapter(chap_dir: Path, variant: str) -> list[Path]:
+    if variant not in {"eleve", "professeur"}:
+        raise AssemblyError("variante inconnue")
     files = []
     for sub, pat in ORDER:
         if variant == "eleve" and sub in ELEVE_EXCLUDES:
@@ -681,6 +718,12 @@ def collect_chapter(chap_dir: Path, variant: str) -> list[Path]:
             files += [f for f in candidats if "corrige" not in f.name]
         else:
             files += candidats
+    if variant == "eleve":
+        files = [
+            path
+            for path in files
+            if object_type(path) in ELEVE_ALLOWED_TYPES
+        ]
     seen, out = set(), []
     for f in files:
         if f not in seen:
