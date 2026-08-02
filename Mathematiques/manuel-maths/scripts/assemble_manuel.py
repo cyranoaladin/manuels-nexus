@@ -5,6 +5,11 @@ Variantes :
   --variant eleve       (sans corriges ni baremes d'evaluation)
 """
 import argparse
+import hashlib
+import os
+import re
+import secrets
+import stat
 import subprocess
 import sys
 from pathlib import Path
@@ -34,6 +39,67 @@ ORDER = [
 ]
 
 ELEVE_EXCLUDES = {"corriges", "evaluations"}
+
+
+def resolve_git_root(start: Path) -> Path:
+    completed = subprocess.run(
+        ["git", "-C", str(start), "rev-parse", "--show-toplevel"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return Path(completed.stdout.strip()).resolve(strict=True)
+
+
+def canonical_tracked_path(raw_path: str | Path, git_root: Path) -> str:
+    raw = os.fspath(raw_path)
+    candidate_path = Path(raw)
+    if (
+        not raw
+        or raw != raw.strip()
+        or candidate_path.is_absolute()
+        or "\\" in raw
+        or any(part in {"", ".", ".."} for part in raw.split("/"))
+    ):
+        raise ValueError("chemin suivi non canonique")
+
+    root = git_root.resolve(strict=True)
+    candidate = root
+    for part in raw.split("/"):
+        candidate /= part
+        try:
+            mode = candidate.lstat().st_mode
+        except FileNotFoundError as error:
+            raise ValueError("chemin suivi absent") from error
+        if stat.S_ISLNK(mode):
+            raise ValueError("chemin symbolique interdit")
+    if not stat.S_ISREG(candidate.stat().st_mode):
+        raise ValueError("chemin suivi non régulier")
+
+    tracked = subprocess.run(
+        ["git", "-C", str(root), "ls-files", "--error-unmatch", "--", raw],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if tracked.returncode != 0:
+        raise ValueError("chemin non suivi par Git")
+    return raw
+
+
+def object_trace_token(canonical_path: str) -> str:
+    return hashlib.sha256(canonical_path.encode("utf-8")).hexdigest()[:40]
+
+
+def wrap_object_input(input_path: str, canonical_path: str) -> str:
+    token = object_trace_token(canonical_path)
+    return "\n".join(
+        [
+            f"\\typeout{{NEXUS_OBJECT_BEGIN:{token}}}",
+            f"\\input{{{input_path}}}",
+            f"\\typeout{{NEXUS_OBJECT_END:{token}}}",
+        ]
+    )
 
 
 def collect_chapter(chap_dir: Path, variant: str) -> list[Path]:
@@ -76,10 +142,12 @@ def ouverture_depuis_contrat(chap_dir: Path) -> str:
     )
 
 
-def main(variant: str) -> int:
-    build = ROOT / "build" / "MANUEL_1SPE"
-    build.mkdir(parents=True, exist_ok=True)
-
+def render_master(variant: str, run_id: str) -> str:
+    if variant not in {"eleve", "professeur"}:
+        raise ValueError("variante inconnue")
+    if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
+        raise ValueError("identifiant de build invalide")
+    git_root = resolve_git_root(ROOT)
     parts = []
 
     # Transversal front matter
@@ -103,7 +171,16 @@ def main(variant: str) -> int:
 
         opening = ouverture_depuis_contrat(chap_dir)
         files = collect_chapter(chap_dir, variant)
-        inputs = "\n".join(f"\\input{{{f.relative_to(ROOT)}}}" for f in files)
+        inputs = "\n".join(
+            wrap_object_input(
+                f.relative_to(ROOT).as_posix(),
+                canonical_tracked_path(
+                    f.relative_to(git_root).as_posix(),
+                    git_root,
+                ),
+            )
+            for f in files
+        )
         parts.append(f"% ===== {chap} =====")
         parts.append(opening)
         parts.append(inputs)
@@ -124,9 +201,18 @@ def main(variant: str) -> int:
 \\matiere{{Mathématiques}}\\niveau{{Première spécialité}}
 \\title{{Manuel de mathématiques — Première spécialité — Édition {titre_var}}}
 \\begin{{document}}
+\\typeout{{NEXUS_BUILD_RUN:{run_id}}}
 {content}
 \\end{{document}}
 """
+    return master
+
+
+def main(variant: str) -> int:
+    build = ROOT / "build" / "MANUEL_1SPE"
+    build.mkdir(parents=True, exist_ok=True)
+
+    master = render_master(variant, secrets.token_hex(16))
     tex_name = f"MANUEL_1SPE_{variant}"
     tex_path = build / f"{tex_name}.tex"
     tex_path.write_text(master, encoding="utf-8")
