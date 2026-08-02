@@ -95,7 +95,6 @@ _RECEIPT_FIELDS = {
     "tool_versions",
     "variant",
 }
-_EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY = object()
 
 
 class BuildManifestError(RuntimeError):
@@ -553,6 +552,7 @@ def _replace_manifest_transactionally(
     ],
     expected_git_state: tuple[str, str, bool] | None = None,
     expected_evidence_fingerprint: str | None = None,
+    expected_manifest_digest: str | None = None,
 ) -> None:
     """Replace the canonical manifest under a pinned, recoverable transaction."""
 
@@ -614,6 +614,13 @@ def _replace_manifest_transactionally(
                 "manifeste non régulier ou lien dur interdit"
             )
         original = _read_descriptor(manifest_descriptor)
+        if (
+            expected_manifest_digest is not None
+            and _sha256_payload(original) != expected_manifest_digest
+        ):
+            raise BuildManifestError(
+                "manifeste vide modifié depuis sa validation"
+            )
         current = _load_manifest_bytes(original)
         try:
             updated = transform(current, initial_git_state)
@@ -727,7 +734,6 @@ def record_successful_build(
     compile_succeeded: bool,
     preflight_succeeded: bool,
     validator: Callable[[dict[str, Any]], None],
-    _bootstrap_capability: object | None = None,
 ) -> None:
     """Merge one proved build under a Git-private lock and descriptor-pinned write."""
 
@@ -755,32 +761,7 @@ def record_successful_build(
         current: dict[str, Any],
         _git_state_snapshot: tuple[str, str, bool],
     ) -> dict[str, Any]:
-        if (
-            _bootstrap_capability
-            is _EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
-        ):
-            inventory_module = _load_inventory_module()
-            try:
-                inventory_module._validate_artifact_schema(
-                    current,
-                    root=root,
-                    path=_MANIFEST_RELATIVE,
-                )
-            except Exception as exc:
-                raise BuildManifestError(
-                    "manifeste bootstrap non conforme au schéma: "
-                    f"{type(exc).__name__}"
-                ) from exc
-            if current.get("builds") != []:
-                raise BuildManifestError(
-                    "bootstrap interdit: le manifeste doit être "
-                    "strictement vide"
-                )
-            if current.get("build_state_digest") != build_state_digest([]):
-                raise BuildManifestError(
-                    "build_state_digest vide incohérent"
-                )
-        elif not _same_envelope(current, envelope):
+        if not _same_envelope(current, envelope):
             raise BuildManifestError("enveloppe incompatible")
         builds = [dict(value) for value in current["builds"]]
         if current.get("build_state_digest") != build_state_digest(builds):
@@ -1814,7 +1795,9 @@ def _derive_receipt_evidence(
     return envelope, build, validate
 
 
-def _read_schema_valid_manifest(root: Path) -> dict[str, Any]:
+def _read_schema_valid_manifest(
+    root: Path,
+) -> tuple[dict[str, Any], str]:
     inventory_module = _load_inventory_module()
     try:
         snapshot = inventory_module._ConfinedJsonSnapshot(
@@ -1835,7 +1818,7 @@ def _read_schema_valid_manifest(root: Path) -> dict[str, Any]:
         if not isinstance(builds, list):
             raise BuildManifestError("builds du manifeste invalide")
         snapshot.verify()
-        return dict(payload)
+        return dict(payload), _sha256_payload(snapshot.payload)
     except BuildManifestError:
         raise
     except Exception as exc:
@@ -1847,14 +1830,17 @@ def _read_schema_valid_manifest(root: Path) -> dict[str, Any]:
             snapshot.close()
 
 
-def _validate_refresh_source_is_empty(root: Path) -> None:
-    payload = _read_schema_valid_manifest(root)
+def _validate_refresh_source_is_empty(
+    root: Path,
+) -> tuple[dict[str, Any], str]:
+    payload, manifest_digest = _read_schema_valid_manifest(root)
     if payload.get("builds") != []:
         raise BuildManifestError(
             "refresh interdit: le manifeste doit être strictement vide"
         )
     if payload.get("build_state_digest") != build_state_digest([]):
         raise BuildManifestError("build_state_digest vide incohérent")
+    return payload, manifest_digest
 
 
 def record_from_receipt(receipt_path: Path) -> None:
@@ -1873,11 +1859,12 @@ def record_from_receipt(receipt_path: Path) -> None:
         raise BuildManifestError("receipt sans compilation réussie")
     if not preflight_succeeded:
         raise BuildManifestError("receipt sans préflight réussi")
-    current = _read_schema_valid_manifest(root)
-    bootstrap_capability: object | None = None
+    current, _current_manifest_digest = _read_schema_valid_manifest(root)
     try:
         if current["builds"] == []:
-            _validate_refresh_source_is_empty(root)
+            _empty_manifest, empty_manifest_digest = (
+                _validate_refresh_source_is_empty(root)
+            )
             inventory_module = _load_inventory_module()
             inventory = (
                 inventory_module._build_inventory_for_empty_manifest_refresh(
@@ -1894,7 +1881,6 @@ def record_from_receipt(receipt_path: Path) -> None:
                 receipt,
                 inventory=inventory,
             )
-            bootstrap_capability = _EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
         else:
             envelope, build, validator = _derive_receipt_evidence(
                 root,
@@ -1911,15 +1897,84 @@ def record_from_receipt(receipt_path: Path) -> None:
         initial_git_snapshot,
         phase="avant l'enregistrement du receipt",
     )
-    record_successful_build(
-        root / _MANIFEST_RELATIVE,
-        build,
-        envelope=envelope,
-        compile_succeeded=compile_succeeded,
-        preflight_succeeded=preflight_succeeded,
-        validator=validator,
-        _bootstrap_capability=bootstrap_capability,
-    )
+    manifest_path = root / _MANIFEST_RELATIVE
+    if current["builds"] != []:
+        record_successful_build(
+            manifest_path,
+            build,
+            envelope=envelope,
+            compile_succeeded=compile_succeeded,
+            preflight_succeeded=preflight_succeeded,
+            validator=validator,
+        )
+        return
+
+    def publish_bootstrap() -> None:
+        _validate_build_shape(build)
+        current_head, current_branch, current_dirty = initial_git_snapshot[0]
+        provenance = envelope.get("provenance")
+        if (
+            not isinstance(provenance, Mapping)
+            or provenance.get("head_sha") != current_head
+            or provenance.get("branch") != current_branch
+            or provenance.get("dirty") is not current_dirty
+        ):
+            raise BuildManifestError(
+                "provenance de l'enveloppe périmée ou forgée"
+            )
+        if build.get("git_sha") != current_head:
+            raise BuildManifestError("git_sha du build périmé")
+        inventory_module = _load_inventory_module()
+
+        def replace_empty(
+            current_manifest: dict[str, Any],
+            transaction_git_state: tuple[str, str, bool],
+        ) -> dict[str, Any]:
+            if transaction_git_state != initial_git_snapshot[0]:
+                raise BuildManifestError(
+                    "état Git modifié avant le bootstrap"
+                )
+            try:
+                inventory_module._validate_artifact_schema(
+                    current_manifest,
+                    root=root,
+                    path=_MANIFEST_RELATIVE,
+                )
+            except Exception as exc:
+                raise BuildManifestError(
+                    "manifeste bootstrap non conforme au schéma: "
+                    f"{type(exc).__name__}"
+                ) from exc
+            if current_manifest.get("builds") != []:
+                raise BuildManifestError(
+                    "bootstrap interdit: le manifeste doit être "
+                    "strictement vide"
+                )
+            if current_manifest.get("build_state_digest") != build_state_digest([]):
+                raise BuildManifestError(
+                    "build_state_digest vide incohérent"
+                )
+            builds = [dict(build)]
+            updated = dict(envelope)
+            updated["builds"] = builds
+            updated["build_state_digest"] = build_state_digest(builds)
+            try:
+                validator(updated)
+            except Exception as exc:
+                raise BuildManifestError(
+                    f"validation du manifeste refusée: {type(exc).__name__}"
+                ) from exc
+            return updated
+
+        _replace_manifest_transactionally(
+            manifest_path,
+            transform=replace_empty,
+            expected_git_state=initial_git_snapshot[0],
+            expected_evidence_fingerprint=initial_git_snapshot[1],
+            expected_manifest_digest=empty_manifest_digest,
+        )
+
+    publish_bootstrap()
 
 
 def _derive_empty_refresh_envelope(root: Path) -> dict[str, Any]:

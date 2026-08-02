@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import importlib.util
+import inspect
 import json
 import errno
 import os
@@ -2139,7 +2140,7 @@ def test_record_helper_rejects_source_mutation_while_worktree_stays_dirty(
     assert source.read_text(encoding="utf-8") == "dirty-after"
 
 
-def test_record_helper_rejects_stale_envelope_without_bootstrap_capability(
+def test_record_helper_strictly_rejects_stale_envelope(
     tmp_path: Path,
     manifest_module,
 ) -> None:
@@ -2165,108 +2166,16 @@ def test_record_helper_rejects_stale_envelope_without_bootstrap_capability(
     assert path.read_bytes() == original
 
 
-@pytest.mark.parametrize("mutation", ["nonempty", "digest", "schema"])
-def test_private_bootstrap_capability_rejects_nonempty_or_invalid_manifest(
-    tmp_path: Path,
+def test_record_helper_exposes_no_bootstrap_authority(
     manifest_module,
-    mutation: str,
 ) -> None:
-    head = _git_repository(tmp_path)
-    current_builds: list[dict[str, object]] = []
-    if mutation == "nonempty":
-        current_builds = [_build(head, "build/existing.pdf", b"%PDF existing")]
-    current = _manifest(head, current_builds)
-    current["source_digest"] = "sha256:" + "0" * 64
-    if mutation == "digest":
-        current["build_state_digest"] = "sha256:" + "0" * 64
-    elif mutation == "schema":
-        current["unexpected"] = True
-    _install_schema(tmp_path)
-    _write_manifest(tmp_path, current)
-    path = tmp_path / "audit/BUILD_MANIFEST.json"
-    original = path.read_bytes()
-    fresh_envelope = _manifest(head, [])
-    build = _build(head, "build/new.pdf", b"%PDF new")
+    signature = inspect.signature(manifest_module.record_successful_build)
 
-    with pytest.raises(manifest_module.BuildManifestError):
-        manifest_module.record_successful_build(
-            path,
-            build,
-            envelope=fresh_envelope,
-            compile_succeeded=True,
-            preflight_succeeded=True,
-            validator=lambda _payload: None,
-            _bootstrap_capability=(
-                manifest_module._EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
-            ),
-        )
-
-    assert path.read_bytes() == original
-
-
-def test_private_bootstrap_rejects_concurrent_nonempty_matching_envelope(
-    tmp_path: Path,
-    inventory_module,
-    manifest_module,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    head = _git_repository(tmp_path)
-    _install_schema(tmp_path)
-    stale_empty = _manifest(head, [])
-    stale_empty["source_digest"] = "sha256:" + "0" * 64
-    _write_manifest(tmp_path, stale_empty)
-    path = tmp_path / "audit/BUILD_MANIFEST.json"
-    fresh_envelope = _manifest(head, [])
-    proposed = _build(head, "build/professeur.pdf", b"%PDF professor")
-    concurrent = _build(head, "build/eleve.pdf", b"%PDF student")
-    concurrent["variant"] = "eleve"
-    concurrent_payload = _manifest(head, [concurrent])
-    concurrent_bytes = (
-        json.dumps(
-            concurrent_payload,
-            ensure_ascii=False,
-            indent=2,
-            sort_keys=True,
-        )
-        + "\n"
-    ).encode("utf-8")
-    real_transaction = manifest_module._replace_manifest_transactionally
-    monkeypatch.setattr(
+    assert "_bootstrap_capability" not in signature.parameters
+    assert not hasattr(
         manifest_module,
-        "_load_inventory_module",
-        lambda: inventory_module,
+        "_EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY",
     )
-
-    def replace_before_transform(
-        manifest_path: Path,
-        **kwargs,
-    ) -> None:
-        manifest_path.write_bytes(concurrent_bytes)
-        real_transaction(manifest_path, **kwargs)
-
-    monkeypatch.setattr(
-        manifest_module,
-        "_replace_manifest_transactionally",
-        replace_before_transform,
-    )
-
-    with pytest.raises(
-        manifest_module.BuildManifestError,
-        match="bootstrap|strictement vide",
-    ):
-        manifest_module.record_successful_build(
-            path,
-            proposed,
-            envelope=fresh_envelope,
-            compile_succeeded=True,
-            preflight_succeeded=True,
-            validator=lambda _payload: None,
-            _bootstrap_capability=(
-                manifest_module._EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
-            ),
-        )
-
-    assert path.read_bytes() == concurrent_bytes
 
 
 def test_record_helper_rejects_corrupt_current_state_digest(
@@ -3612,9 +3521,9 @@ def test_receipt_cli_activates_first_build_from_clean_stale_empty_manifest(
     calls: list[str] = []
     real_validate_empty = manifest_module._validate_refresh_source_is_empty
 
-    def validate_empty(root: Path) -> None:
+    def validate_empty(root: Path):
         calls.append("validate_empty")
-        real_validate_empty(root)
+        return real_validate_empty(root)
 
     def bounded_builder(root: Path) -> dict[str, object]:
         assert root == tmp_path
@@ -3688,6 +3597,96 @@ def test_receipt_cli_activates_first_build_from_clean_stale_empty_manifest(
     assert payload["build_state_digest"] == _state_digest([build])
 
 
+@pytest.mark.parametrize("replacement", ["empty-reencoded", "nonempty"])
+def test_receipt_bootstrap_binds_exact_empty_manifest_snapshot(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    replacement: str,
+) -> None:
+    head, receipt_path, manifest_path, _tracked_source = (
+        _install_clean_receipt_entrypoint_fixture(tmp_path)
+    )
+    envelope = _fresh_receipt_envelope(head)
+    proposed = _build(head, "build/professeur.pdf", b"%PDF professor")
+    concurrent_builds: list[dict[str, object]] = []
+    if replacement == "nonempty":
+        concurrent = _build(head, "build/eleve.pdf", b"%PDF student")
+        concurrent["variant"] = "eleve"
+        concurrent_builds.append(concurrent)
+    concurrent_payload = {
+        **envelope,
+        "build_state_digest": _state_digest(concurrent_builds),
+        "builds": concurrent_builds,
+    }
+    if replacement == "empty-reencoded":
+        concurrent_bytes = json.dumps(
+            concurrent_payload,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        ).encode("utf-8")
+    else:
+        concurrent_bytes = (
+            json.dumps(
+                concurrent_payload,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+            + "\n"
+        ).encode("utf-8")
+    bootstrap_inventory = {
+        "declared_assemblies": [],
+        "source_digest": SHA256_A,
+    }
+    fake_inventory = _bootstrap_inventory_module(
+        inventory_module,
+        bounded_builder=lambda _root: bootstrap_inventory,
+        strict_builder=lambda _root: pytest.fail(
+            "le bootstrap vide ne doit pas appeler build_inventory"
+        ),
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: fake_inventory,
+    )
+
+    def derive(
+        _root: Path,
+        _receipt_payload: dict[str, object],
+        *,
+        inventory: dict[str, object] | None = None,
+    ):
+        assert inventory is bootstrap_inventory
+        manifest_path.write_bytes(concurrent_bytes)
+
+        def validate(payload: dict[str, object]) -> None:
+            inventory_module._validate_artifact_schema(
+                payload,
+                root=tmp_path,
+                path=Path("audit/BUILD_MANIFEST.json"),
+            )
+
+        return envelope, proposed, validate
+
+    monkeypatch.setattr(
+        manifest_module,
+        "_derive_receipt_evidence",
+        derive,
+    )
+
+    assert manifest_module._run(["--receipt", str(receipt_path)]) == 2
+
+    captured = capsys.readouterr()
+    assert "manifeste vide modifié" in captured.err
+    assert "Traceback" not in captured.err
+    assert manifest_path.read_bytes() == concurrent_bytes
+
+
 def test_receipt_rejects_dirty_repository_before_derivation_or_write(
     tmp_path: Path,
     manifest_module,
@@ -3757,25 +3756,34 @@ def test_receipt_rechecks_clean_snapshot_after_bounded_bootstrap_inventory(
     assert manifest_path.read_bytes() == original
 
 
-def test_receipt_never_grants_bootstrap_to_stale_nonempty_manifest(
+def test_nonempty_receipt_path_uses_real_strict_inventory_derivation(
     tmp_path: Path,
     inventory_module,
     manifest_module,
     monkeypatch: pytest.MonkeyPatch,
-    capsys: pytest.CaptureFixture[str],
 ) -> None:
-    head, receipt_path, manifest_path, _tracked_source = (
+    _head, receipt_path, manifest_path, _tracked_source = (
         _install_clean_receipt_entrypoint_fixture(tmp_path, nonempty=True)
     )
     original = manifest_path.read_bytes()
-    envelope = _fresh_receipt_envelope(head)
-    build = _build(head, "build/new.pdf", b"%PDF new")
+    calls: list[str] = []
+
+    def bounded_builder(_root: Path) -> dict[str, object]:
+        calls.append("bounded")
+        pytest.fail("un manifeste non vide ne doit pas utiliser le bootstrap")
+
+    def strict_builder(root: Path) -> dict[str, object]:
+        assert root == tmp_path
+        calls.append("strict")
+        return {
+            "declared_assemblies": [],
+            "source_digest": SHA256_A,
+        }
+
     fake_inventory = _bootstrap_inventory_module(
         inventory_module,
-        bounded_builder=lambda _root: pytest.fail(
-            "un manifeste non vide ne doit pas utiliser le bootstrap"
-        ),
-        strict_builder=lambda _root: {"strict": True},
+        bounded_builder=bounded_builder,
+        strict_builder=strict_builder,
     )
     monkeypatch.setattr(
         manifest_module,
@@ -3783,22 +3791,13 @@ def test_receipt_never_grants_bootstrap_to_stale_nonempty_manifest(
         lambda: fake_inventory,
     )
 
-    def derive(
-        _root: Path,
-        _receipt_payload: dict[str, object],
-        *,
-        inventory: dict[str, object] | None = None,
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="assemblage manuel non déclaré",
     ):
-        assert inventory is None
-        return envelope, build, lambda _payload: None
+        manifest_module.record_from_receipt(receipt_path)
 
-    monkeypatch.setattr(manifest_module, "_derive_receipt_evidence", derive)
-
-    assert manifest_module._run(["--receipt", str(receipt_path)]) == 2
-
-    captured = capsys.readouterr()
-    assert "enveloppe" in captured.err
-    assert "Traceback" not in captured.err
+    assert calls == ["strict"]
     assert manifest_path.read_bytes() == original
 
 
