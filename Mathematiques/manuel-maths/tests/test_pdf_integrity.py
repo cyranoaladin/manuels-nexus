@@ -1,5 +1,9 @@
+import shutil
 import sys
 from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -54,8 +58,47 @@ def test_missing_asset_in_log_triggers_verify_failure(tmp_path):
     assert pdf_integrity.verify_pdf(pdf, log) == 1
 
 
-import shutil
-import pytest
+def test_verify_pdf_accepts_explicit_runner_and_copied_environment(tmp_path):
+    import pdf_integrity
+
+    pdf = tmp_path / "manual.pdf"
+    log = tmp_path / "manual.log"
+    pdf.write_bytes(b"%PDF fixture")
+    log.write_text("Output written on manual.pdf\n", encoding="utf-8")
+    environment = {"PATH": "/controlled/bin", "SOURCE_DATE_EPOCH": "1720000000"}
+    calls = []
+
+    def runner(command, **kwargs):
+        calls.append((command, kwargs))
+        return SimpleNamespace(
+            returncode=0,
+            stdout=(
+                "name type emb sub uni object ID\n"
+                "--------------------------------\n"
+                "Fixture Type1 yes yes yes 1 0\n"
+            ),
+            stderr="",
+        )
+
+    assert pdf_integrity.verify_pdf(
+        pdf,
+        log,
+        runner=runner,
+        environment=environment,
+    ) == 0
+    assert calls == [
+        (
+            ["pdffonts", str(pdf)],
+            {
+                "capture_output": True,
+                "text": True,
+                "check": True,
+                "env": environment,
+            },
+        )
+    ]
+    assert calls[0][1]["env"] is not environment
+
 
 _HAS_LUALATEX = shutil.which("lualatex") is not None
 

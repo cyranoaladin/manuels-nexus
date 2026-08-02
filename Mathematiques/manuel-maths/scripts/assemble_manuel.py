@@ -5,6 +5,7 @@ Variantes :
   --variant eleve       (sans corriges ni baremes d'evaluation)
 """
 import argparse
+import fcntl
 import hashlib
 import json
 import os
@@ -15,8 +16,8 @@ import subprocess
 import sys
 import tempfile
 from collections.abc import Callable, Mapping
+from contextlib import contextmanager
 from pathlib import Path
-from types import FunctionType
 from typing import Any
 
 import yaml
@@ -59,10 +60,14 @@ CONTROLLED_ENVIRONMENT = {
     "LC_ALL": "C.UTF-8",
     "PYTHONHASHSEED": "0",
 }
+PASSTHROUGH_ENVIRONMENT = ("PATH", "HOME")
 
 
 class AssemblyError(RuntimeError):
     """Failure that prevents a compiled PDF from becoming observed evidence."""
+
+
+FileFingerprint = tuple[int, int, int, int, int, int, int]
 
 
 def _active_runner(runner: Callable[..., Any] | None) -> Callable[..., Any]:
@@ -76,6 +81,32 @@ def _run_with_environment(
     **kwargs: Any,
 ) -> Any:
     return runner(command, env=dict(environment), **kwargs)
+
+
+def _allowlisted_environment(
+    source: Mapping[str, str] | None = None,
+) -> dict[str, str]:
+    values = os.environ if source is None else source
+    return {
+        name: values[name]
+        for name in PASSTHROUGH_ENVIRONMENT
+        if name in values
+    }
+
+
+def _git_environment(
+    environment: Mapping[str, str] | None = None,
+) -> dict[str, str]:
+    if environment is None:
+        return _allowlisted_environment()
+    allowed = set(PASSTHROUGH_ENVIRONMENT) | set(CONTROLLED_ENVIRONMENT) | {
+        "SOURCE_DATE_EPOCH"
+    }
+    return {
+        name: value
+        for name, value in environment.items()
+        if name in allowed and not name.startswith("GIT_")
+    }
 
 
 def _load_reproducibility_control(
@@ -104,7 +135,7 @@ def _load_reproducibility_control(
     if type(source_date_epoch) is not int or source_date_epoch <= 0:
         raise AssemblyError("source_date_epoch de reproductibilité invalide")
 
-    environment = os.environ.copy()
+    environment = _allowlisted_environment()
     environment.update(CONTROLLED_ENVIRONMENT)
     environment["SOURCE_DATE_EPOCH"] = str(source_date_epoch)
 
@@ -117,7 +148,7 @@ def _load_reproducibility_control(
     try:
         commit = _run_with_environment(
             runner,
-            environment,
+            _git_environment(environment),
             [
                 "git",
                 "-C",
@@ -130,7 +161,7 @@ def _load_reproducibility_control(
         )
         ancestor = _run_with_environment(
             runner,
-            environment,
+            _git_environment(environment),
             [
                 "git",
                 "-C",
@@ -144,7 +175,7 @@ def _load_reproducibility_control(
         )
         timestamp = _run_with_environment(
             runner,
-            environment,
+            _git_environment(environment),
             [
                 "git",
                 "-C",
@@ -219,6 +250,17 @@ def _atomic_write_json(destination: Path, payload: Mapping[str, object]) -> None
             stream.flush()
             os.fsync(stream.fileno())
         temporary.replace(destination)
+        if os.name == "posix":
+            directory_descriptor = os.open(
+                destination.parent,
+                os.O_RDONLY
+                | getattr(os, "O_DIRECTORY", 0)
+                | getattr(os, "O_CLOEXEC", 0),
+            )
+            try:
+                os.fsync(directory_descriptor)
+            finally:
+                os.close(directory_descriptor)
     finally:
         if descriptor >= 0:
             os.close(descriptor)
@@ -240,56 +282,148 @@ def _git_relative_path(path: Path, git_root: Path, *, exists: bool) -> str:
     return relative.as_posix()
 
 
-class _ControlledSubprocessProxy:
-    def __init__(
-        self,
-        runner: Callable[..., Any],
-        environment: Mapping[str, str],
-    ) -> None:
-        self._runner = runner
-        self._environment = environment
+def _secure_build_directory(manual_root: Path) -> Path:
+    try:
+        root_metadata = manual_root.lstat()
+    except OSError as error:
+        raise AssemblyError("racine du manuel indisponible") from error
+    if stat.S_ISLNK(root_metadata.st_mode) or not stat.S_ISDIR(
+        root_metadata.st_mode
+    ):
+        raise AssemblyError("racine du manuel non sûre")
 
-    def run(self, command: list[str], **kwargs: Any) -> Any:
-        kwargs.pop("env", None)
-        completed = _run_with_environment(
-            self._runner,
-            self._environment,
-            command,
-            **kwargs,
-        )
-        if kwargs.get("check") and completed.returncode != 0:
-            raise subprocess.CalledProcessError(
-                completed.returncode,
-                command,
-                output=getattr(completed, "stdout", None),
-                stderr=getattr(completed, "stderr", None),
-            )
-        return completed
+    current = manual_root
+    for component in ("build", "MANUEL_1SPE"):
+        candidate = current / component
+        try:
+            candidate.mkdir(mode=0o755)
+        except FileExistsError:
+            pass
+        except OSError as error:
+            raise AssemblyError("création du répertoire de build impossible") from error
+        try:
+            metadata = candidate.lstat()
+        except OSError as error:
+            raise AssemblyError("répertoire de build indisponible") from error
+        if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISDIR(metadata.st_mode):
+            raise AssemblyError("composant symbolique ou non répertoire du build")
+        current = candidate
+    return current
 
 
-def _verify_pdf_with_environment(
-    pdf_path: Path,
-    log_path: Path,
+@contextmanager
+def _exclusive_build_lock(build: Path, variant: str) -> Any:
+    lock_path = build / f".MANUEL_1SPE_{variant}.lock"
+    flags = (
+        os.O_RDWR
+        | os.O_CREAT
+        | getattr(os, "O_CLOEXEC", 0)
+        | getattr(os, "O_NOFOLLOW", 0)
+    )
+    try:
+        descriptor = os.open(lock_path, flags, 0o600)
+    except OSError as error:
+        raise AssemblyError("verrou de build indisponible") from error
+    locked = False
+    try:
+        metadata = os.fstat(descriptor)
+        if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink != 1:
+            raise AssemblyError("verrou de build non sûr")
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise AssemblyError("build concurrent déjà actif") from error
+        locked = True
+        yield
+    finally:
+        if locked:
+            fcntl.flock(descriptor, fcntl.LOCK_UN)
+        os.close(descriptor)
+
+
+def _invalidate_outputs(paths: tuple[Path, ...]) -> None:
+    for path in paths:
+        try:
+            metadata = path.lstat()
+        except FileNotFoundError:
+            continue
+        except OSError as error:
+            raise AssemblyError(f"sortie périmée inaccessible: {path.name}") from error
+        if stat.S_ISDIR(metadata.st_mode):
+            raise AssemblyError(f"sortie périmée non fichier: {path.name}")
+        try:
+            path.unlink()
+        except OSError as error:
+            raise AssemblyError(f"sortie périmée non invalidée: {path.name}") from error
+
+
+def _fingerprint_regular_file(path: Path, role: str) -> FileFingerprint:
+    try:
+        metadata = path.lstat()
+    except OSError as error:
+        raise AssemblyError(f"{role} frais absent") from error
+    if (
+        stat.S_ISLNK(metadata.st_mode)
+        or not stat.S_ISREG(metadata.st_mode)
+        or metadata.st_nlink != 1
+    ):
+        raise AssemblyError(f"{role} non régulier, symbolique ou multi-lié")
+    return (
+        metadata.st_dev,
+        metadata.st_ino,
+        stat.S_IFMT(metadata.st_mode),
+        metadata.st_nlink,
+        metadata.st_size,
+        metadata.st_mtime_ns,
+        metadata.st_ctime_ns,
+    )
+
+
+def _compiled_output_fingerprints(
     *,
-    runner: Callable[..., Any],
-    environment: Mapping[str, str],
-) -> int:
-    callback = verify_pdf
-    if isinstance(callback, FunctionType) and callback.__module__ == "pdf_integrity":
-        controlled_globals = dict(callback.__globals__)
-        controlled_globals["subprocess"] = _ControlledSubprocessProxy(
-            runner,
-            environment,
-        )
-        callback = FunctionType(
-            callback.__code__,
-            controlled_globals,
-            callback.__name__,
-            callback.__defaults__,
-            callback.__closure__,
-        )
-        callback.__kwdefaults__ = verify_pdf.__kwdefaults__
-    return callback(pdf_path, log_path)
+    root: Path,
+    tex_path: Path,
+    log_path: Path,
+    fls_path: Path,
+    pdf_path: Path,
+    run_id: str,
+) -> dict[Path, FileFingerprint]:
+    fingerprints = {
+        tex_path: _fingerprint_regular_file(tex_path, "maître"),
+        log_path: _fingerprint_regular_file(log_path, "journal"),
+        fls_path: _fingerprint_regular_file(fls_path, "trace FLS"),
+        pdf_path: _fingerprint_regular_file(pdf_path, "PDF"),
+    }
+    log = log_path.read_text(encoding="utf-8", errors="replace")
+    if f"NEXUS_BUILD_RUN:{run_id}" not in log:
+        raise AssemblyError("journal sans run_id courant")
+
+    master = tex_path.resolve(strict=True)
+    master_opened = False
+    for line in fls_path.read_text(encoding="utf-8", errors="replace").splitlines():
+        kind, separator, raw_path = line.partition(" ")
+        if kind != "INPUT" or not separator:
+            continue
+        candidate = Path(raw_path.strip())
+        if not candidate.is_absolute():
+            candidate = root / candidate
+        try:
+            master_opened = candidate.resolve(strict=True) == master
+        except OSError:
+            master_opened = False
+        if master_opened:
+            break
+    if not master_opened:
+        raise AssemblyError("trace FLS sans maître courant")
+    return fingerprints
+
+
+def _revalidate_fingerprints(
+    expected: Mapping[Path, FileFingerprint],
+) -> None:
+    for path, fingerprint in expected.items():
+        if _fingerprint_regular_file(path, path.name) != fingerprint:
+            raise AssemblyError(f"preuve modifiée pendant le préflight: {path.name}")
 
 
 def resolve_git_root(
@@ -304,8 +438,7 @@ def resolve_git_root(
         "capture_output": True,
         "text": True,
     }
-    if environment is not None:
-        options["env"] = dict(environment)
+    options["env"] = _git_environment(environment)
     completed = active_runner(
         ["git", "-C", str(start), "rev-parse", "--show-toplevel"],
         **options,
@@ -325,8 +458,7 @@ def load_tracked_paths(
         "capture_output": True,
         "encoding": "utf-8",
     }
-    if environment is not None:
-        options["env"] = dict(environment)
+    options["env"] = _git_environment(environment)
     completed = active_runner(
         ["git", "-C", str(git_root), "ls-files", "-z"],
         **options,
@@ -590,7 +722,9 @@ def _publish_observed_evidence(
     page_count: int,
     tool_versions: Mapping[str, str],
     reproducibility: Mapping[str, object],
+    compiled_fingerprints: Mapping[Path, FileFingerprint],
 ) -> None:
+    _revalidate_fingerprints(compiled_fingerprints)
     canonical = {
         "master": _git_relative_path(tex_path, git_root, exists=True),
         "pdf": _git_relative_path(pdf_path, git_root, exists=True),
@@ -615,6 +749,7 @@ def _publish_observed_evidence(
     }
     _atomic_write_json(report_path, report)
 
+    _revalidate_fingerprints(compiled_fingerprints)
     evidence_sha256 = {
         "master": _sha256_path(tex_path),
         "log": _sha256_path(log_path),
@@ -622,6 +757,7 @@ def _publish_observed_evidence(
         "preflight": _sha256_path(report_path),
         "pdf": _sha256_path(pdf_path),
     }
+    _revalidate_fingerprints(compiled_fingerprints)
     if evidence_sha256["pdf"] != preflight_pdf_digest:
         raise AssemblyError("PDF modifié après le préflight")
     receipt = {
@@ -647,15 +783,13 @@ def _publish_observed_evidence(
     _atomic_write_json(receipt_path, receipt)
 
 
-def main(
+def _main_locked(
     variant: str,
     record_observed: bool = False,
     *,
-    runner: Callable[..., Any] | None = None,
+    active_runner: Callable[..., Any],
+    build: Path,
 ) -> int:
-    build = ROOT / "build" / "MANUEL_1SPE"
-    build.mkdir(parents=True, exist_ok=True)
-
     tex_name = f"MANUEL_1SPE_{variant}"
     tex_path = build / f"{tex_name}.tex"
     pdf_path = build / f"{tex_name}.pdf"
@@ -664,15 +798,16 @@ def main(
     report_path = build / f"{tex_name}.preflight.json"
     receipt_path = build / f"{tex_name}.receipt.json"
 
-    if record_observed:
-        try:
-            receipt_path.unlink(missing_ok=True)
-            report_path.unlink(missing_ok=True)
-        except OSError as error:
-            print(f"Impossible d'invalider les preuves périmées : {error}")
-            return 1
-
-    active_runner = _active_runner(runner)
+    _invalidate_outputs(
+        (
+            tex_path,
+            log_path,
+            fls_path,
+            pdf_path,
+            report_path,
+            receipt_path,
+        )
+    )
     try:
         git_root = ROOT.parents[1].resolve(strict=True)
         _control, reproducibility, environment = _load_reproducibility_control(
@@ -725,7 +860,15 @@ def main(
             return 1
 
     try:
-        if _verify_pdf_with_environment(
+        compiled_fingerprints = _compiled_output_fingerprints(
+            root=ROOT,
+            tex_path=tex_path,
+            log_path=log_path,
+            fls_path=fls_path,
+            pdf_path=pdf_path,
+            run_id=run_id,
+        )
+        if verify_pdf(
             pdf_path,
             log_path,
             runner=active_runner,
@@ -741,6 +884,7 @@ def main(
             runner=active_runner,
             environment=environment,
         )
+        _revalidate_fingerprints(compiled_fingerprints)
     except (AssemblyError, OSError, subprocess.SubprocessError, ValueError) as error:
         print(f"Préflight refusé : {error}")
         return 1
@@ -763,6 +907,7 @@ def main(
             page_count=page_count,
             tool_versions=tool_versions,
             reproducibility=reproducibility,
+            compiled_fingerprints=compiled_fingerprints,
         )
     except (AssemblyError, OSError, ValueError) as error:
         receipt_path.unlink(missing_ok=True)
@@ -803,6 +948,27 @@ def main(
 
     print(f"PDF : {pdf_path}")
     return 0
+
+
+def main(
+    variant: str,
+    record_observed: bool = False,
+    *,
+    runner: Callable[..., Any] | None = None,
+) -> int:
+    active_runner = _active_runner(runner)
+    try:
+        build = _secure_build_directory(ROOT)
+        with _exclusive_build_lock(build, variant):
+            return _main_locked(
+                variant,
+                record_observed,
+                active_runner=active_runner,
+                build=build,
+            )
+    except (AssemblyError, OSError, ValueError) as error:
+        print(f"Build refusé : {error}")
+        return 1
 
 
 def build_argument_parser() -> argparse.ArgumentParser:

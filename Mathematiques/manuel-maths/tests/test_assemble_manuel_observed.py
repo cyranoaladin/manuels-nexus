@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import fcntl
 import json
+import os
 import re
+import stat
 import subprocess
 import sys
 from pathlib import Path
@@ -36,6 +39,10 @@ class FakeProductionRunner:
         source_commit_is_ancestor: bool = True,
         git_timestamp: int = SOURCE_DATE_EPOCH,
         recorder_status: int = 0,
+        publish_outputs: bool = True,
+        log_has_run_id: bool = True,
+        fls_has_master: bool = True,
+        hardlink_pdf: bool = False,
     ) -> None:
         self.calls: list[tuple[list[str], dict[str, Any]]] = []
         self.events: list[str] = []
@@ -45,6 +52,10 @@ class FakeProductionRunner:
         self.source_commit_is_ancestor = source_commit_is_ancestor
         self.git_timestamp = git_timestamp
         self.recorder_status = recorder_status
+        self.publish_outputs = publish_outputs
+        self.log_has_run_id = log_has_run_id
+        self.fls_has_master = fls_has_master
+        self.hardlink_pdf = hardlink_pdf
         self.receipt_existed_at_recorder = False
 
     def __call__(self, command: list[str], **kwargs: Any) -> SimpleNamespace:
@@ -69,7 +80,8 @@ class FakeProductionRunner:
             pass_number = sum(event == "lualatex" for event in self.events)
             if pass_number == self.failing_lualatex_pass:
                 return self._completed(returncode=3, stdout="compile failed")
-            self._publish_lualatex_fixture(command)
+            if self.publish_outputs:
+                self._publish_lualatex_fixture(command)
             return self._completed(stdout="compiled")
 
         if command == ["lualatex", "--version"]:
@@ -127,8 +139,7 @@ class FakeProductionRunner:
             return self._completed(returncode=5, stderr="version failed")
         return self._completed(stdout=stdout, stderr=stderr)
 
-    @staticmethod
-    def _publish_lualatex_fixture(command: list[str]) -> None:
+    def _publish_lualatex_fixture(self, command: list[str]) -> None:
         output_argument = next(
             part for part in command if part.startswith("-output-directory=")
         )
@@ -140,16 +151,26 @@ class FakeProductionRunner:
         )
         assert run_match is not None
         stem = master_path.stem
-        (build / f"{stem}.pdf").write_bytes(b"%PDF-1.7\nfixture\n")
-        (build / f"{stem}.log").write_text(
+        pdf_path = build / f"{stem}.pdf"
+        pdf_path.write_bytes(b"%PDF-1.7\nfixture\n")
+        run_marker = (
             f"NEXUS_BUILD_RUN:{run_match.group(1)}\n"
-            f"Output written on {stem}.pdf (17 pages).\n",
+            if self.log_has_run_id
+            else ""
+        )
+        (build / f"{stem}.log").write_text(
+            run_marker + f"Output written on {stem}.pdf (17 pages).\n",
             encoding="utf-8",
         )
+        fls_input = str(master_path) if self.fls_has_master else "/wrong/master.tex"
         (build / f"{stem}.fls").write_text(
-            f"INPUT {master_path}\nOUTPUT {build / f'{stem}.pdf'}\n",
+            f"INPUT {fls_input}\nOUTPUT {pdf_path}\n",
             encoding="utf-8",
         )
+        if self.hardlink_pdf:
+            hardlink = pdf_path.with_suffix(".hardlink.pdf")
+            hardlink.unlink(missing_ok=True)
+            os.link(pdf_path, hardlink)
 
 
 def _write_control(
@@ -201,7 +222,11 @@ def _install_orchestration_fixture(
     selected_runner = runner or FakeProductionRunner()
     verify_pass_counts: list[int] = []
 
-    def fake_verify(pdf_path: Path, log_path: Path) -> int:
+    def fake_verify(
+        pdf_path: Path,
+        log_path: Path,
+        **_kwargs: Any,
+    ) -> int:
         del pdf_path, log_path
         count = sum(
             command[0] == "lualatex" and "--version" not in command
@@ -480,6 +505,10 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
     monkeypatch.setenv("LC_ALL", "host-locale")
     monkeypatch.setenv("PYTHONHASHSEED", "random")
     monkeypatch.setenv("OPENROUTER_API_KEY", "must-not-leak")
+    monkeypatch.setenv("DATABASE_URL", "postgresql://must-not-leak")
+    monkeypatch.setenv("GIT_DIR", "/hostile/git-dir")
+    monkeypatch.setenv("GIT_WORK_TREE", "/hostile/work-tree")
+    monkeypatch.setenv("GIT_INDEX_FILE", "/hostile/index")
 
     assert assemble_manuel.main(
         "professeur",
@@ -523,6 +552,17 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
     )
     assert len({id(environment) for environment in subprocess_environments}) == len(
         subprocess_environments
+    )
+    allowed_environment = {"PATH", "HOME", *controlled}
+    assert all(
+        set(environment) <= allowed_environment
+        for environment in subprocess_environments
+    )
+    assert all(
+        "OPENROUTER_API_KEY" not in environment
+        and "DATABASE_URL" not in environment
+        and not any(key.startswith("GIT_") for key in environment)
+        for environment in subprocess_environments
     )
 
     report = json.loads(paths["report"].read_text(encoding="utf-8"))
@@ -736,6 +776,9 @@ def test_ordinary_mode_builds_and_preflights_without_writing_or_recording_proofs
         tmp_path,
         monkeypatch,
     )
+    paths["build"].mkdir(parents=True, exist_ok=True)
+    paths["report"].write_text("stale report", encoding="utf-8")
+    paths["receipt"].write_text("stale receipt", encoding="utf-8")
 
     assert assemble_manuel.main(
         "professeur",
@@ -747,6 +790,25 @@ def test_ordinary_mode_builds_and_preflights_without_writing_or_recording_proofs
     assert not paths["report"].exists()
     assert not paths["receipt"].exists()
     assert not any("--receipt" in command for command, _kwargs in runner.calls)
+
+
+def test_ordinary_compile_failure_invalidates_stale_proofs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner = FakeProductionRunner(failing_lualatex_pass=1)
+    _manual_root, runner, _verify_calls, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+        runner=runner,
+    )
+    paths["build"].mkdir(parents=True, exist_ok=True)
+    paths["report"].write_text("stale report", encoding="utf-8")
+    paths["receipt"].write_text("stale receipt", encoding="utf-8")
+
+    assert assemble_manuel.main("professeur", runner=runner) == 1
+    assert not paths["report"].exists()
+    assert not paths["receipt"].exists()
 
 
 def test_recorder_failure_status_is_propagated_and_success_receipt_is_removed(
@@ -860,6 +922,154 @@ def test_unproved_reproducibility_commit_is_rejected_before_lualatex(
     assert not any(command[0] == "lualatex" for command, _kwargs in runner.calls)
 
 
+def test_git_root_resolution_strips_hostile_git_environment(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: list[dict[str, str]] = []
+    monkeypatch.setenv("OPENROUTER_API_KEY", "secret")
+    monkeypatch.setenv("GIT_DIR", "/hostile/git-dir")
+    monkeypatch.setenv("GIT_WORK_TREE", "/hostile/work-tree")
+    monkeypatch.setenv("GIT_INDEX_FILE", "/hostile/index")
+
+    def runner(_command: list[str], **kwargs: Any) -> SimpleNamespace:
+        captured.append(kwargs["env"])
+        return SimpleNamespace(returncode=0, stdout=f"{tmp_path}\n", stderr="")
+
+    assert assemble_manuel.resolve_git_root(tmp_path, runner=runner) == tmp_path
+    assert len(captured) == 1
+    assert "OPENROUTER_API_KEY" not in captured[0]
+    assert not any(key.startswith("GIT_") for key in captured[0])
+
+
+def test_symlinked_build_directory_is_rejected_before_subprocess_or_write(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    manual_root, runner, _verify_calls, _paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+    )
+    external = tmp_path / "external-build"
+    external.mkdir()
+    (manual_root / "build").symlink_to(external, target_is_directory=True)
+
+    assert assemble_manuel.main("professeur", runner=runner) == 1
+    assert runner.calls == []
+    assert list(external.iterdir()) == []
+
+
+def test_success_status_without_fresh_compiler_outputs_is_rejected(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner = FakeProductionRunner(publish_outputs=False)
+    _manual_root, runner, verify_calls, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+        runner=runner,
+    )
+    paths["build"].mkdir(parents=True, exist_ok=True)
+    for role in ("pdf", "log", "fls", "report", "receipt"):
+        paths[role].write_text(f"stale {role}", encoding="utf-8")
+
+    assert assemble_manuel.main(
+        "professeur",
+        record_observed=True,
+        runner=runner,
+    ) == 1
+    assert verify_calls == []
+    assert not paths["pdf"].exists()
+    assert not paths["log"].exists()
+    assert not paths["fls"].exists()
+    assert not paths["report"].exists()
+    assert not paths["receipt"].exists()
+
+
+@pytest.mark.parametrize(
+    "runner",
+    [
+        FakeProductionRunner(log_has_run_id=False),
+        FakeProductionRunner(fls_has_master=False),
+        FakeProductionRunner(hardlink_pdf=True),
+    ],
+    ids=["wrong-run-id", "master-not-in-fls", "hardlinked-pdf"],
+)
+def test_invalid_compiler_evidence_is_rejected_before_preflight(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    runner: FakeProductionRunner,
+) -> None:
+    _manual_root, runner, verify_calls, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+        runner=runner,
+    )
+
+    assert assemble_manuel.main(
+        "professeur",
+        record_observed=True,
+        runner=runner,
+    ) == 1
+    assert verify_calls == []
+    assert not paths["report"].exists()
+    assert not paths["receipt"].exists()
+
+
+def test_concurrent_build_lock_refuses_second_build_before_invalidation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _manual_root, runner, _verify_calls, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+    )
+    paths["build"].mkdir(parents=True, exist_ok=True)
+    paths["receipt"].write_text("preserve while locked", encoding="utf-8")
+    lock_path = paths["build"] / ".MANUEL_1SPE_professeur.lock"
+    with lock_path.open("w", encoding="utf-8") as stream:
+        fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        assert assemble_manuel.main(
+            "professeur",
+            record_observed=True,
+            runner=runner,
+        ) == 1
+
+    assert paths["receipt"].read_text(encoding="utf-8") == "preserve while locked"
+    assert runner.calls == []
+
+
+def test_mutation_during_preflight_invalidates_observed_evidence(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _manual_root, runner, _verify_calls, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+    )
+
+    def mutating_verify(
+        _pdf_path: Path,
+        log_path: Path,
+        **_kwargs: Any,
+    ) -> int:
+        log_path.write_text(
+            log_path.read_text(encoding="utf-8") + "mutated\n",
+            encoding="utf-8",
+        )
+        return 0
+
+    monkeypatch.setattr(assemble_manuel, "verify_pdf", mutating_verify)
+
+    assert assemble_manuel.main(
+        "professeur",
+        record_observed=True,
+        runner=runner,
+    ) == 1
+    assert not paths["report"].exists()
+    assert not paths["receipt"].exists()
+
+
 def test_pdf_digest_is_recomputed_after_published_preflight_and_before_receipt(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -905,6 +1115,26 @@ def test_atomic_json_replace_failure_preserves_old_destination_and_cleans_temp(
     assert list(tmp_path.glob(".proof.json.*.tmp")) == []
 
 
+def test_atomic_json_fsyncs_file_then_parent_directory(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    real_fsync = os.fsync
+    synced_modes: list[int] = []
+
+    def recording_fsync(descriptor: int) -> None:
+        synced_modes.append(os.fstat(descriptor).st_mode)
+        real_fsync(descriptor)
+
+    monkeypatch.setattr(os, "fsync", recording_fsync)
+    destination = tmp_path / "proof.json"
+
+    assemble_manuel._atomic_write_json(destination, {"passed": True})
+
+    assert [stat.S_ISREG(mode) for mode in synced_modes] == [True, False]
+    assert [stat.S_ISDIR(mode) for mode in synced_modes] == [False, True]
+
+
 def test_cli_parser_exposes_record_observed_flag() -> None:
     arguments = assemble_manuel.build_argument_parser().parse_args(
         ["--variant", "professeur", "--record-observed"]
@@ -912,74 +1142,3 @@ def test_cli_parser_exposes_record_observed_flag() -> None:
 
     assert arguments.variant == "professeur"
     assert arguments.record_observed is True
-
-
-def test_verify_pdf_internal_pdffonts_receives_controlled_environment(
-    tmp_path: Path,
-) -> None:
-    pdf_path = tmp_path / "manual.pdf"
-    log_path = tmp_path / "manual.log"
-    pdf_path.write_bytes(b"%PDF fixture")
-    log_path.write_text("Output written on manual.pdf\n", encoding="utf-8")
-    calls: list[tuple[list[str], dict[str, Any]]] = []
-
-    def runner(command: list[str], **kwargs: Any) -> SimpleNamespace:
-        calls.append((command, kwargs))
-        return SimpleNamespace(
-            returncode=0,
-            stdout=(
-                "name type emb sub uni object ID\n"
-                "--------------------------------\n"
-                "Fixture Type1 yes yes yes 1 0\n"
-            ),
-            stderr="",
-        )
-
-    environment = {
-        "SOURCE_DATE_EPOCH": str(SOURCE_DATE_EPOCH),
-        "FORCE_SOURCE_DATE": "1",
-        "TZ": "UTC",
-        "LC_ALL": "C.UTF-8",
-        "PYTHONHASHSEED": "0",
-    }
-
-    assert assemble_manuel._verify_pdf_with_environment(
-        pdf_path,
-        log_path,
-        runner=runner,
-        environment=environment,
-    ) == 0
-    assert calls == [
-        (["pdffonts", str(pdf_path)], {"capture_output": True, "text": True, "check": True, "env": environment})
-    ]
-
-
-def test_verify_pdf_internal_pdffonts_nonzero_status_is_not_ignored(
-    tmp_path: Path,
-) -> None:
-    pdf_path = tmp_path / "manual.pdf"
-    log_path = tmp_path / "manual.log"
-    pdf_path.write_bytes(b"%PDF fixture")
-    log_path.write_text("Output written on manual.pdf\n", encoding="utf-8")
-
-    def failing_runner(command: list[str], **_kwargs: Any) -> SimpleNamespace:
-        return SimpleNamespace(
-            args=command,
-            returncode=6,
-            stdout=(
-                "name type emb sub uni object ID\n"
-                "--------------------------------\n"
-                "Fixture Type1 yes yes yes 1 0\n"
-            ),
-            stderr="pdffonts failed",
-        )
-
-    with pytest.raises(subprocess.CalledProcessError) as caught:
-        assemble_manuel._verify_pdf_with_environment(
-            pdf_path,
-            log_path,
-            runner=failing_runner,
-            environment={"SOURCE_DATE_EPOCH": str(SOURCE_DATE_EPOCH)},
-        )
-
-    assert caught.value.returncode == 6
