@@ -11,6 +11,7 @@ import json
 import os
 import re
 import secrets
+import shutil
 import stat
 import subprocess
 import sys
@@ -68,6 +69,7 @@ class AssemblyError(RuntimeError):
 
 
 FileFingerprint = tuple[int, int, int, int, int, int, int]
+DirectoryFingerprint = tuple[int, int]
 
 
 def _active_runner(runner: Callable[..., Any] | None) -> Callable[..., Any]:
@@ -222,6 +224,21 @@ def _sha256_path(path: Path) -> str:
     return "sha256:" + digest.hexdigest()
 
 
+def _fsync_directory(directory: Path) -> None:
+    if os.name != "posix":
+        return
+    descriptor = os.open(
+        directory,
+        os.O_RDONLY
+        | getattr(os, "O_DIRECTORY", 0)
+        | getattr(os, "O_CLOEXEC", 0),
+    )
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
 def _atomic_write_json(destination: Path, payload: Mapping[str, object]) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     descriptor, raw_temporary = tempfile.mkstemp(
@@ -250,17 +267,34 @@ def _atomic_write_json(destination: Path, payload: Mapping[str, object]) -> None
             stream.flush()
             os.fsync(stream.fileno())
         temporary.replace(destination)
-        if os.name == "posix":
-            directory_descriptor = os.open(
-                destination.parent,
-                os.O_RDONLY
-                | getattr(os, "O_DIRECTORY", 0)
-                | getattr(os, "O_CLOEXEC", 0),
-            )
-            try:
-                os.fsync(directory_descriptor)
-            finally:
-                os.close(directory_descriptor)
+        _fsync_directory(destination.parent)
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+        temporary.unlink(missing_ok=True)
+
+
+def _atomic_write_text(destination: Path, content: str) -> None:
+    descriptor, raw_temporary = tempfile.mkstemp(
+        dir=destination.parent,
+        prefix=f".{destination.name}.",
+        suffix=".tmp",
+    )
+    temporary = Path(raw_temporary)
+    try:
+        stream = os.fdopen(
+            descriptor,
+            "w",
+            encoding="utf-8",
+            newline="\n",
+        )
+        descriptor = -1
+        with stream:
+            stream.write(content)
+            stream.flush()
+            os.fsync(stream.fileno())
+        temporary.replace(destination)
+        _fsync_directory(destination.parent)
     finally:
         if descriptor >= 0:
             os.close(descriptor)
@@ -341,6 +375,65 @@ def _exclusive_build_lock(build: Path, variant: str) -> Any:
         os.close(descriptor)
 
 
+def _remove_private_run_directory(
+    run_directory: Path,
+    expected: DirectoryFingerprint,
+) -> None:
+    try:
+        metadata = run_directory.lstat()
+    except FileNotFoundError:
+        return
+    except OSError as error:
+        raise AssemblyError("répertoire privé de build inaccessible") from error
+    if (
+        stat.S_ISLNK(metadata.st_mode)
+        or not stat.S_ISDIR(metadata.st_mode)
+        or (metadata.st_dev, metadata.st_ino) != expected
+    ):
+        raise AssemblyError("répertoire privé de build remplacé")
+    try:
+        shutil.rmtree(run_directory)
+        _fsync_directory(run_directory.parent)
+    except OSError as error:
+        raise AssemblyError("nettoyage du build privé impossible") from error
+
+
+@contextmanager
+def _private_run_directory(
+    build: Path,
+    tex_name: str,
+    run_id: str,
+) -> Any:
+    if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
+        raise AssemblyError("run_id du build privé invalide")
+    run_directory = build / f".{tex_name}.{run_id}.run"
+    try:
+        run_directory.mkdir(mode=0o700)
+    except FileExistsError as error:
+        raise AssemblyError("répertoire privé de build déjà présent") from error
+    except OSError as error:
+        raise AssemblyError("création du build privé impossible") from error
+
+    created = False
+    fingerprint: DirectoryFingerprint | None = None
+    try:
+        created = True
+        os.chmod(run_directory, 0o700, follow_symlinks=False)
+        metadata = run_directory.lstat()
+        if (
+            stat.S_ISLNK(metadata.st_mode)
+            or not stat.S_ISDIR(metadata.st_mode)
+            or stat.S_IMODE(metadata.st_mode) != 0o700
+        ):
+            raise AssemblyError("répertoire privé de build non sûr")
+        fingerprint = (metadata.st_dev, metadata.st_ino)
+        _fsync_directory(build)
+        yield run_directory
+    finally:
+        if created and fingerprint is not None:
+            _remove_private_run_directory(run_directory, fingerprint)
+
+
 def _invalidate_outputs(paths: tuple[Path, ...]) -> None:
     for path in paths:
         try:
@@ -377,6 +470,64 @@ def _fingerprint_regular_file(path: Path, role: str) -> FileFingerprint:
         metadata.st_mtime_ns,
         metadata.st_ctime_ns,
     )
+
+
+def _atomic_promote_file(source: Path, destination: Path) -> None:
+    source_fingerprint = _fingerprint_regular_file(source, source.name)
+    source_descriptor = -1
+    destination_descriptor = -1
+    temporary: Path | None = None
+    try:
+        source_descriptor = os.open(
+            source,
+            os.O_RDONLY
+            | getattr(os, "O_CLOEXEC", 0)
+            | getattr(os, "O_NOFOLLOW", 0),
+        )
+        source_metadata = os.fstat(source_descriptor)
+        if (
+            not stat.S_ISREG(source_metadata.st_mode)
+            or source_metadata.st_nlink != 1
+            or (
+                source_metadata.st_dev,
+                source_metadata.st_ino,
+                stat.S_IFMT(source_metadata.st_mode),
+                source_metadata.st_nlink,
+                source_metadata.st_size,
+                source_metadata.st_mtime_ns,
+                source_metadata.st_ctime_ns,
+            )
+            != source_fingerprint
+        ):
+            raise AssemblyError(f"source de promotion modifiée: {source.name}")
+
+        destination_descriptor, raw_temporary = tempfile.mkstemp(
+            dir=destination.parent,
+            prefix=f".{destination.name}.",
+            suffix=".tmp",
+        )
+        temporary = Path(raw_temporary)
+        with (
+            os.fdopen(source_descriptor, "rb") as source_stream,
+            os.fdopen(destination_descriptor, "wb") as destination_stream,
+        ):
+            source_descriptor = -1
+            destination_descriptor = -1
+            shutil.copyfileobj(source_stream, destination_stream)
+            destination_stream.flush()
+            os.fsync(destination_stream.fileno())
+
+        if _fingerprint_regular_file(source, source.name) != source_fingerprint:
+            raise AssemblyError(f"source de promotion modifiée: {source.name}")
+        temporary.replace(destination)
+        _fsync_directory(destination.parent)
+    finally:
+        if source_descriptor >= 0:
+            os.close(source_descriptor)
+        if destination_descriptor >= 0:
+            os.close(destination_descriptor)
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def _compiled_output_fingerprints(
@@ -798,16 +949,7 @@ def _main_locked(
     report_path = build / f"{tex_name}.preflight.json"
     receipt_path = build / f"{tex_name}.receipt.json"
 
-    _invalidate_outputs(
-        (
-            tex_path,
-            log_path,
-            fls_path,
-            pdf_path,
-            report_path,
-            receipt_path,
-        )
-    )
+    _invalidate_outputs((report_path, receipt_path))
     try:
         git_root = ROOT.parents[1].resolve(strict=True)
         _control, reproducibility, environment = _load_reproducibility_control(
@@ -826,67 +968,90 @@ def _main_locked(
             git_root=git_root,
             tracked_paths=tracked_paths,
         )
-        tex_path.write_text(master, encoding="utf-8")
     except (AssemblyError, OSError, subprocess.SubprocessError, ValueError) as error:
         print(f"Assemblage refusé : {error}")
         return 1
 
-    command = [
-        "lualatex",
-        "-interaction=nonstopmode",
-        "-halt-on-error",
-        "-recorder",
-        f"-output-directory={build}",
-        str(tex_path),
-    ]
-    for _pass_number in range(1, 4):
-        try:
-            proc = _run_with_environment(
-                active_runner,
-                environment,
-                command,
-                capture_output=True,
-                text=True,
-                cwd=ROOT,
-                errors="replace",
-                check=False,
-            )
-        except OSError as error:
-            print(f"LuaLaTeX indisponible : {error}")
-            return 1
-        if proc.returncode != 0:
-            output = getattr(proc, "stdout", "") or ""
-            print(output[-3000:])
-            return 1
-
     try:
-        compiled_fingerprints = _compiled_output_fingerprints(
-            root=ROOT,
-            tex_path=tex_path,
-            log_path=log_path,
-            fls_path=fls_path,
-            pdf_path=pdf_path,
-            run_id=run_id,
-        )
-        if verify_pdf(
-            pdf_path,
-            log_path,
-            runner=active_runner,
-            environment=environment,
-        ):
-            return 1
-        page_count = _pdf_page_count(
-            pdf_path,
-            runner=active_runner,
-            environment=environment,
-        )
-        tool_versions = _collect_tool_versions(
-            runner=active_runner,
-            environment=environment,
-        )
-        _revalidate_fingerprints(compiled_fingerprints)
+        with _private_run_directory(build, tex_name, run_id) as run_directory:
+            _atomic_write_text(tex_path, master)
+            run_pdf_path = run_directory / pdf_path.name
+            run_log_path = run_directory / log_path.name
+            run_fls_path = run_directory / fls_path.name
+            command = [
+                "lualatex",
+                "-interaction=nonstopmode",
+                "-halt-on-error",
+                "-recorder",
+                f"-output-directory={run_directory}",
+                str(tex_path),
+            ]
+            for pass_number in range(1, 4):
+                try:
+                    proc = _run_with_environment(
+                        active_runner,
+                        environment,
+                        command,
+                        capture_output=True,
+                        text=True,
+                        cwd=ROOT,
+                        errors="replace",
+                        check=False,
+                    )
+                except OSError as error:
+                    raise AssemblyError("LuaLaTeX indisponible") from error
+                if proc.returncode != 0:
+                    output = getattr(proc, "stdout", "") or ""
+                    detail = output[-3000:].strip()
+                    message = f"LuaLaTeX en échec à la passe {pass_number}"
+                    if detail:
+                        message += f" : {detail}"
+                    raise AssemblyError(message)
+
+            candidate_fingerprints = _compiled_output_fingerprints(
+                root=ROOT,
+                tex_path=tex_path,
+                log_path=run_log_path,
+                fls_path=run_fls_path,
+                pdf_path=run_pdf_path,
+                run_id=run_id,
+            )
+            if verify_pdf(
+                run_pdf_path,
+                run_log_path,
+                runner=active_runner,
+                environment=environment,
+            ):
+                raise AssemblyError("préflight PDF en échec")
+            page_count = _pdf_page_count(
+                run_pdf_path,
+                runner=active_runner,
+                environment=environment,
+            )
+            tool_versions = _collect_tool_versions(
+                runner=active_runner,
+                environment=environment,
+            )
+            _revalidate_fingerprints(candidate_fingerprints)
+
+            for source, destination in (
+                (run_log_path, log_path),
+                (run_fls_path, fls_path),
+                (run_pdf_path, pdf_path),
+            ):
+                _revalidate_fingerprints(candidate_fingerprints)
+                _atomic_promote_file(source, destination)
+            _revalidate_fingerprints(candidate_fingerprints)
+            compiled_fingerprints = _compiled_output_fingerprints(
+                root=ROOT,
+                tex_path=tex_path,
+                log_path=log_path,
+                fls_path=fls_path,
+                pdf_path=pdf_path,
+                run_id=run_id,
+            )
     except (AssemblyError, OSError, subprocess.SubprocessError, ValueError) as error:
-        print(f"Préflight refusé : {error}")
+        print(f"Build candidat refusé : {error}")
         return 1
 
     if not record_observed:

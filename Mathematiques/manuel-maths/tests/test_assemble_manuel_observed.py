@@ -43,6 +43,7 @@ class FakeProductionRunner:
         log_has_run_id: bool = True,
         fls_has_master: bool = True,
         hardlink_pdf: bool = False,
+        lualatex_unavailable: bool = False,
     ) -> None:
         self.calls: list[tuple[list[str], dict[str, Any]]] = []
         self.events: list[str] = []
@@ -56,7 +57,9 @@ class FakeProductionRunner:
         self.log_has_run_id = log_has_run_id
         self.fls_has_master = fls_has_master
         self.hardlink_pdf = hardlink_pdf
+        self.lualatex_unavailable = lualatex_unavailable
         self.receipt_existed_at_recorder = False
+        self.compile_output_modes: list[int] = []
 
     def __call__(self, command: list[str], **kwargs: Any) -> SimpleNamespace:
         command = [str(part) for part in command]
@@ -76,7 +79,18 @@ class FakeProductionRunner:
             raise AssertionError(f"commande Git inattendue: {command}")
 
         if command[0] == "lualatex" and "--version" not in command:
+            if self.lualatex_unavailable:
+                raise OSError("lualatex unavailable")
             self.events.append("lualatex")
+            output_argument = next(
+                part
+                for part in command
+                if part.startswith("-output-directory=")
+            )
+            output_directory = Path(output_argument.partition("=")[2])
+            self.compile_output_modes.append(
+                stat.S_IMODE(output_directory.lstat().st_mode)
+            )
             pass_number = sum(event == "lualatex" for event in self.events)
             if pass_number == self.failing_lualatex_pass:
                 return self._completed(returncode=3, stdout="compile failed")
@@ -206,6 +220,25 @@ def _proof_paths(manual_root: Path) -> dict[str, Path]:
         "report": build / f"{stem}.preflight.json",
         "receipt": build / f"{stem}.receipt.json",
     }
+
+
+def _seed_prior_canonical_outputs(paths: dict[str, Path]) -> dict[str, bytes]:
+    paths["build"].mkdir(parents=True, exist_ok=True)
+    previous = {
+        "master": b"old canonical master\n",
+        "pdf": b"%PDF-1.7\nold canonical pdf\n",
+        "log": b"old canonical log\n",
+        "fls": b"INPUT /old/canonical/master.tex\n",
+        "report": b"old preflight proof\n",
+        "receipt": b"old receipt proof\n",
+    }
+    for role, payload in previous.items():
+        paths[role].write_bytes(payload)
+    return previous
+
+
+def _private_run_directories(paths: dict[str, Path]) -> list[Path]:
+    return list(paths["build"].glob(".MANUEL_1SPE_professeur.*.run"))
 
 
 def _install_orchestration_fixture(
@@ -500,6 +533,7 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
         tmp_path,
         monkeypatch,
     )
+    previous = _seed_prior_canonical_outputs(paths)
     monkeypatch.setenv("SOURCE_DATE_EPOCH", "999")
     monkeypatch.setenv("TZ", "Africa/Tunis")
     monkeypatch.setenv("LC_ALL", "host-locale")
@@ -522,12 +556,30 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
         if command[0] == "lualatex" and "--version" not in command
     ]
     assert len(lualatex_calls) == 3
+    output_directories = {
+        Path(
+            next(
+                part.partition("=")[2]
+                for part in command
+                if part.startswith("-output-directory=")
+            )
+        )
+        for command, _kwargs in lualatex_calls
+    }
+    assert len(output_directories) == 1
+    run_directory = output_directories.pop()
+    assert run_directory.parent == paths["build"]
+    assert re.fullmatch(
+        r"\.MANUEL_1SPE_professeur\.[0-9a-f]{32}\.run",
+        run_directory.name,
+    )
+    assert runner.compile_output_modes == [0o700, 0o700, 0o700]
     expected_command = [
         "lualatex",
         "-interaction=nonstopmode",
         "-halt-on-error",
         "-recorder",
-        f"-output-directory={paths['build']}",
+        f"-output-directory={run_directory}",
         str(paths["master"]),
     ]
     assert [command for command, _kwargs in lualatex_calls] == [
@@ -656,6 +708,12 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
         for digest in receipt["evidence_sha256"].values()
     )
     assert receipt["evidence_sha256"]["pdf"] == report["pdf_sha256"]
+    assert paths["pdf"].read_bytes() != previous["pdf"]
+    assert paths["pdf"].read_bytes() == b"%PDF-1.7\nfixture\n"
+    assert f"INPUT {paths['master']}\n" in paths["fls"].read_text(
+        encoding="utf-8"
+    )
+    assert _private_run_directories(paths) == []
 
     recorder_command = [
         sys.executable,
@@ -677,7 +735,7 @@ def test_observed_build_runs_three_strict_passes_then_publishes_closed_proofs(
     assert manual_root == assemble_manuel.ROOT
 
 
-@pytest.mark.parametrize("failing_pass", [1, 2])
+@pytest.mark.parametrize("failing_pass", [1, 2, 3])
 def test_compile_failure_stops_immediately_and_invalidates_only_exact_stale_proofs(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -689,9 +747,7 @@ def test_compile_failure_stops_immediately_and_invalidates_only_exact_stale_proo
         monkeypatch,
         runner=runner,
     )
-    paths["build"].mkdir(parents=True, exist_ok=True)
-    paths["receipt"].write_text("stale receipt", encoding="utf-8")
-    paths["report"].write_text("stale report", encoding="utf-8")
+    previous = _seed_prior_canonical_outputs(paths)
     neighbour = paths["receipt"].with_name("other.receipt.json")
     neighbour.write_text("keep", encoding="utf-8")
 
@@ -711,7 +767,38 @@ def test_compile_failure_stops_immediately_and_invalidates_only_exact_stale_proo
     assert not any(command[0] == "pdfinfo" for command, _kwargs in runner.calls)
     assert not paths["receipt"].exists()
     assert not paths["report"].exists()
+    assert paths["pdf"].read_bytes() == previous["pdf"]
+    assert paths["log"].read_bytes() == previous["log"]
+    assert paths["fls"].read_bytes() == previous["fls"]
+    assert _private_run_directories(paths) == []
     assert neighbour.read_text(encoding="utf-8") == "keep"
+
+
+def test_missing_lualatex_preserves_previous_canonical_outputs(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner = FakeProductionRunner(lualatex_unavailable=True)
+    _manual_root, runner, verify_pass_counts, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+        runner=runner,
+    )
+    previous = _seed_prior_canonical_outputs(paths)
+
+    assert assemble_manuel.main(
+        "professeur",
+        record_observed=True,
+        runner=runner,
+    ) == 1
+
+    assert verify_pass_counts == []
+    assert paths["pdf"].read_bytes() == previous["pdf"]
+    assert paths["log"].read_bytes() == previous["log"]
+    assert paths["fls"].read_bytes() == previous["fls"]
+    assert not paths["report"].exists()
+    assert not paths["receipt"].exists()
+    assert _private_run_directories(paths) == []
 
 
 @pytest.mark.parametrize(
@@ -748,6 +835,7 @@ def test_preflight_or_version_failure_never_writes_report_or_receipt(
         runner=runner,
         verify_status=verify_status,
     )
+    previous = _seed_prior_canonical_outputs(paths)
 
     assert assemble_manuel.main(
         "professeur",
@@ -765,6 +853,10 @@ def test_preflight_or_version_failure_never_writes_report_or_receipt(
     assert verify_pass_counts == [3]
     assert not paths["report"].exists()
     assert not paths["receipt"].exists()
+    assert paths["pdf"].read_bytes() == previous["pdf"]
+    assert paths["log"].read_bytes() == previous["log"]
+    assert paths["fls"].read_bytes() == previous["fls"]
+    assert _private_run_directories(paths) == []
     assert not any("--receipt" in command for command, _kwargs in runner.calls)
 
 
@@ -802,13 +894,15 @@ def test_ordinary_compile_failure_invalidates_stale_proofs(
         monkeypatch,
         runner=runner,
     )
-    paths["build"].mkdir(parents=True, exist_ok=True)
-    paths["report"].write_text("stale report", encoding="utf-8")
-    paths["receipt"].write_text("stale receipt", encoding="utf-8")
+    previous = _seed_prior_canonical_outputs(paths)
 
     assert assemble_manuel.main("professeur", runner=runner) == 1
     assert not paths["report"].exists()
     assert not paths["receipt"].exists()
+    assert paths["pdf"].read_bytes() == previous["pdf"]
+    assert paths["log"].read_bytes() == previous["log"]
+    assert paths["fls"].read_bytes() == previous["fls"]
+    assert _private_run_directories(paths) == []
 
 
 def test_recorder_failure_status_is_propagated_and_success_receipt_is_removed(
@@ -876,15 +970,23 @@ def test_invalid_reproducibility_control_is_rejected_before_lualatex(
     monkeypatch: pytest.MonkeyPatch,
     payload: dict[str, object],
 ) -> None:
-    manual_root, runner, _verify_calls, _paths = _install_orchestration_fixture(
+    manual_root, runner, _verify_calls, paths = _install_orchestration_fixture(
         tmp_path,
         monkeypatch,
         control_payload=payload,
     )
     del manual_root
+    previous = _seed_prior_canonical_outputs(paths)
 
     assert assemble_manuel.main("professeur", runner=runner) == 1
     assert not any(command[0] == "lualatex" for command, _kwargs in runner.calls)
+    assert paths["master"].read_bytes() == previous["master"]
+    assert paths["pdf"].read_bytes() == previous["pdf"]
+    assert paths["log"].read_bytes() == previous["log"]
+    assert paths["fls"].read_bytes() == previous["fls"]
+    assert not paths["report"].exists()
+    assert not paths["receipt"].exists()
+    assert _private_run_directories(paths) == []
 
 
 def test_missing_reproducibility_control_is_rejected_before_any_subprocess(
@@ -959,6 +1061,86 @@ def test_symlinked_build_directory_is_rejected_before_subprocess_or_write(
     assert list(external.iterdir()) == []
 
 
+@pytest.mark.parametrize("existing_kind", ["directory", "symlink"])
+def test_preexisting_private_run_directory_is_rejected_without_reuse(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    existing_kind: str,
+) -> None:
+    _manual_root, runner, _verify_calls, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+    )
+    previous = _seed_prior_canonical_outputs(paths)
+    run_id = "0123456789abcdef" * 2
+    monkeypatch.setattr(assemble_manuel.secrets, "token_hex", lambda _size: run_id)
+    run_directory = (
+        paths["build"] / f".MANUEL_1SPE_professeur.{run_id}.run"
+    )
+    if existing_kind == "directory":
+        run_directory.mkdir(mode=0o700)
+        sentinel = run_directory / "sentinel"
+        sentinel.write_text("do not reuse", encoding="utf-8")
+    else:
+        external = tmp_path / "external-run"
+        external.mkdir()
+        sentinel = external / "sentinel"
+        sentinel.write_text("do not follow", encoding="utf-8")
+        run_directory.symlink_to(external, target_is_directory=True)
+
+    assert assemble_manuel.main(
+        "professeur",
+        record_observed=True,
+        runner=runner,
+    ) == 1
+
+    assert not any(
+        command[0] == "lualatex" and "--version" not in command
+        for command, _kwargs in runner.calls
+    )
+    assert paths["pdf"].read_bytes() == previous["pdf"]
+    assert not paths["report"].exists()
+    assert not paths["receipt"].exists()
+    assert sentinel.read_text(encoding="utf-8") in {"do not reuse", "do not follow"}
+
+
+def test_promotion_failure_before_pdf_preserves_previous_pdf_and_cleans_run(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _manual_root, runner, _verify_calls, paths = _install_orchestration_fixture(
+        tmp_path,
+        monkeypatch,
+    )
+    previous = _seed_prior_canonical_outputs(paths)
+    promotion_destinations: list[Path] = []
+
+    def fail_before_pdf(source: Path, destination: Path) -> None:
+        promotion_destinations.append(destination)
+        if destination == paths["fls"]:
+            raise OSError("simulated FLS promotion failure")
+        destination.write_bytes(source.read_bytes())
+
+    monkeypatch.setattr(
+        assemble_manuel,
+        "_atomic_promote_file",
+        fail_before_pdf,
+        raising=False,
+    )
+
+    assert assemble_manuel.main(
+        "professeur",
+        record_observed=True,
+        runner=runner,
+    ) == 1
+
+    assert promotion_destinations == [paths["log"], paths["fls"]]
+    assert paths["pdf"].read_bytes() == previous["pdf"]
+    assert not paths["report"].exists()
+    assert not paths["receipt"].exists()
+    assert _private_run_directories(paths) == []
+
+
 def test_success_status_without_fresh_compiler_outputs_is_rejected(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -969,9 +1151,7 @@ def test_success_status_without_fresh_compiler_outputs_is_rejected(
         monkeypatch,
         runner=runner,
     )
-    paths["build"].mkdir(parents=True, exist_ok=True)
-    for role in ("pdf", "log", "fls", "report", "receipt"):
-        paths[role].write_text(f"stale {role}", encoding="utf-8")
+    previous = _seed_prior_canonical_outputs(paths)
 
     assert assemble_manuel.main(
         "professeur",
@@ -979,11 +1159,12 @@ def test_success_status_without_fresh_compiler_outputs_is_rejected(
         runner=runner,
     ) == 1
     assert verify_calls == []
-    assert not paths["pdf"].exists()
-    assert not paths["log"].exists()
-    assert not paths["fls"].exists()
+    assert paths["pdf"].read_bytes() == previous["pdf"]
+    assert paths["log"].read_bytes() == previous["log"]
+    assert paths["fls"].read_bytes() == previous["fls"]
     assert not paths["report"].exists()
     assert not paths["receipt"].exists()
+    assert _private_run_directories(paths) == []
 
 
 @pytest.mark.parametrize(
