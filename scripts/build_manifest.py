@@ -6,10 +6,8 @@ Assembler integration contract::
 
 The receipt must be emitted only after the assembler has completed compilation
 and preflight.  This entrypoint distrusts all derived assertions: it recomputes
-Git provenance, source/model digests, PDF digest and page count.  Because no
-current assembler lets this process directly observe the compilation command,
-the production entrypoint deliberately refuses publication after validation.
-That integration remains a release debt while the manifest stays empty.
+Git provenance, source/model digests, PDF digest and page count before recording
+the observed build transactionally.
 """
 
 from __future__ import annotations
@@ -97,6 +95,7 @@ _RECEIPT_FIELDS = {
     "tool_versions",
     "variant",
 }
+_EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY = object()
 
 
 class BuildManifestError(RuntimeError):
@@ -352,6 +351,7 @@ def _same_envelope(current: Mapping[str, Any], expected: Mapping[str, Any]) -> b
         "artifact_type",
         "generated_by",
         "model_digest",
+        "provenance",
         "schema_ref",
         "schema_version",
         "source_digest",
@@ -727,6 +727,7 @@ def record_successful_build(
     compile_succeeded: bool,
     preflight_succeeded: bool,
     validator: Callable[[dict[str, Any]], None],
+    _bootstrap_capability: object | None = None,
 ) -> None:
     """Merge one proved build under a Git-private lock and descriptor-pinned write."""
 
@@ -755,7 +756,32 @@ def record_successful_build(
         _git_state_snapshot: tuple[str, str, bool],
     ) -> dict[str, Any]:
         if not _same_envelope(current, envelope):
-            raise BuildManifestError("enveloppe incompatible")
+            if (
+                _bootstrap_capability
+                is not _EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
+            ):
+                raise BuildManifestError("enveloppe incompatible")
+            inventory_module = _load_inventory_module()
+            try:
+                inventory_module._validate_artifact_schema(
+                    current,
+                    root=root,
+                    path=_MANIFEST_RELATIVE,
+                )
+            except Exception as exc:
+                raise BuildManifestError(
+                    "manifeste bootstrap non conforme au schéma: "
+                    f"{type(exc).__name__}"
+                ) from exc
+            if current.get("builds") != []:
+                raise BuildManifestError(
+                    "bootstrap interdit: le manifeste doit être "
+                    "strictement vide"
+                )
+            if current.get("build_state_digest") != build_state_digest([]):
+                raise BuildManifestError(
+                    "build_state_digest vide incohérent"
+                )
         builds = [dict(value) for value in current["builds"]]
         if current.get("build_state_digest") != build_state_digest(builds):
             raise BuildManifestError("build_state_digest courant incohérent")
@@ -1788,25 +1814,7 @@ def _derive_receipt_evidence(
     return envelope, build, validate
 
 
-def record_from_receipt(receipt_path: Path) -> None:
-    """Validate a receipt but refuse publication until build wrapping exists."""
-
-    root = _git_root_from_path(receipt_path)
-    receipt = _read_receipt(receipt_path, root)
-    compile_succeeded = receipt.get("compile_succeeded") is True
-    preflight_succeeded = receipt.get("preflight_succeeded") is True
-    if not compile_succeeded:
-        raise BuildManifestError("receipt sans compilation réussie")
-    if not preflight_succeeded:
-        raise BuildManifestError("receipt sans préflight réussi")
-    _derive_receipt_evidence(root, receipt)
-    raise BuildManifestError(
-        "intégration assembleur non activée: la commande de compilation "
-        "n'est pas observée par cet entrypoint"
-    )
-
-
-def _validate_refresh_source_is_empty(root: Path) -> None:
+def _read_schema_valid_manifest(root: Path) -> dict[str, Any]:
     inventory_module = _load_inventory_module()
     try:
         snapshot = inventory_module._ConfinedJsonSnapshot(
@@ -1826,13 +1834,8 @@ def _validate_refresh_source_is_empty(root: Path) -> None:
         builds = payload.get("builds")
         if not isinstance(builds, list):
             raise BuildManifestError("builds du manifeste invalide")
-        if builds:
-            raise BuildManifestError(
-                "refresh interdit: le manifeste doit être strictement vide"
-            )
-        if payload.get("build_state_digest") != build_state_digest([]):
-            raise BuildManifestError("build_state_digest vide incohérent")
         snapshot.verify()
+        return dict(payload)
     except BuildManifestError:
         raise
     except Exception as exc:
@@ -1842,6 +1845,81 @@ def _validate_refresh_source_is_empty(root: Path) -> None:
     finally:
         if "snapshot" in locals():
             snapshot.close()
+
+
+def _validate_refresh_source_is_empty(root: Path) -> None:
+    payload = _read_schema_valid_manifest(root)
+    if payload.get("builds") != []:
+        raise BuildManifestError(
+            "refresh interdit: le manifeste doit être strictement vide"
+        )
+    if payload.get("build_state_digest") != build_state_digest([]):
+        raise BuildManifestError("build_state_digest vide incohérent")
+
+
+def record_from_receipt(receipt_path: Path) -> None:
+    """Validate and transactionally record one closed build receipt."""
+
+    root = _git_root_from_path(receipt_path)
+    initial_git_snapshot = _capture_git_snapshot(root)
+    if initial_git_snapshot[0][2]:
+        raise BuildManifestError(
+            "dépôt Git sale hors manifeste canonique"
+        )
+    receipt = _read_receipt(receipt_path, root)
+    compile_succeeded = receipt.get("compile_succeeded") is True
+    preflight_succeeded = receipt.get("preflight_succeeded") is True
+    if not compile_succeeded:
+        raise BuildManifestError("receipt sans compilation réussie")
+    if not preflight_succeeded:
+        raise BuildManifestError("receipt sans préflight réussi")
+    current = _read_schema_valid_manifest(root)
+    bootstrap_capability: object | None = None
+    try:
+        if current["builds"] == []:
+            _validate_refresh_source_is_empty(root)
+            inventory_module = _load_inventory_module()
+            inventory = (
+                inventory_module._build_inventory_for_empty_manifest_refresh(
+                    root
+                )
+            )
+            _require_git_snapshot(
+                root,
+                initial_git_snapshot,
+                phase="pendant le calcul borné de l'inventaire",
+            )
+            envelope, build, validator = _derive_receipt_evidence(
+                root,
+                receipt,
+                inventory=inventory,
+            )
+            bootstrap_capability = _EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
+        else:
+            envelope, build, validator = _derive_receipt_evidence(
+                root,
+                receipt,
+            )
+    except BuildManifestError:
+        raise
+    except Exception as exc:
+        raise BuildManifestError(
+            f"dérivation du receipt refusée: {type(exc).__name__}"
+        ) from exc
+    _require_git_snapshot(
+        root,
+        initial_git_snapshot,
+        phase="avant l'enregistrement du receipt",
+    )
+    record_successful_build(
+        root / _MANIFEST_RELATIVE,
+        build,
+        envelope=envelope,
+        compile_succeeded=compile_succeeded,
+        preflight_succeeded=preflight_succeeded,
+        validator=validator,
+        _bootstrap_capability=bootstrap_capability,
+    )
 
 
 def _derive_empty_refresh_envelope(root: Path) -> dict[str, Any]:
