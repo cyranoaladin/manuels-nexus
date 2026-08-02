@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import fcntl
+import hashlib
 import json
 import os
 import re
@@ -1022,6 +1023,176 @@ def test_unproved_reproducibility_commit_is_rejected_before_lualatex(
 
     assert assemble_manuel.main("professeur", runner=runner) == 1
     assert not any(command[0] == "lualatex" for command, _kwargs in runner.calls)
+
+
+def test_real_lualatex_reproducible_run_id(tmp_path: Path) -> None:
+    repository = tmp_path / "repository"
+    repository.mkdir()
+
+    def git(*arguments: str, timestamp: int | None = None) -> str:
+        environment = assemble_manuel._allowlisted_environment()
+        if timestamp is not None:
+            git_date = f"{timestamp} +0000"
+            environment["GIT_AUTHOR_DATE"] = git_date
+            environment["GIT_COMMITTER_DATE"] = git_date
+        completed = subprocess.run(
+            ["git", "-C", str(repository), *arguments],
+            check=True,
+            capture_output=True,
+            text=True,
+            env=environment,
+        )
+        return completed.stdout.strip()
+
+    git("init", "-q")
+    git("config", "user.name", "Observed Assembler Tests")
+    git("config", "user.email", "observed@example.invalid")
+    source = repository / "source.txt"
+    source.write_text("source A\n", encoding="utf-8")
+    git("add", "--", source.name)
+    source_timestamp = 1_700_000_000
+    git("commit", "-qm", "source A", timestamp=source_timestamp)
+    source_commit = git("rev-parse", "HEAD")
+    assert int(git("show", "-s", "--format=%ct", source_commit)) == source_timestamp
+
+    control = repository / CONTROL_RELATIVE
+    control.parent.mkdir(parents=True)
+    control.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_commit": source_commit,
+                "source_date_epoch": source_timestamp,
+            }
+        ),
+        encoding="utf-8",
+    )
+    git("add", "--", CONTROL_RELATIVE.as_posix())
+    git("commit", "-qm", "reproducibility control", timestamp=source_timestamp + 60)
+
+    run_ids = ("a" * 32, "b" * 32)
+    build_directories = (repository / "build-a", repository / "build-b")
+    documents: list[Path] = []
+    for build_directory, run_id in zip(build_directories, run_ids, strict=True):
+        build_directory.mkdir()
+        document = build_directory / "document.tex"
+        document.write_text(
+            "\\documentclass{article}\n"
+            "\\begin{document}\n"
+            f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}\n"
+            "Deterministic fixture.\n"
+            "\\end{document}\n",
+            encoding="utf-8",
+        )
+        documents.append(document)
+    normalized_documents = [
+        document.read_text(encoding="utf-8").replace(run_id, "<run_id>")
+        for document, run_id in zip(documents, run_ids, strict=True)
+    ]
+    assert normalized_documents[0] == normalized_documents[1]
+
+    def compile_document(
+        document: Path,
+        output_directory: Path,
+        environment: dict[str, str],
+    ) -> subprocess.CompletedProcess[str]:
+        command = [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "-recorder",
+            f"-output-directory={output_directory}",
+            str(document),
+        ]
+        return assemble_manuel._run_with_environment(
+            subprocess.run,
+            environment,
+            command,
+            capture_output=True,
+            text=True,
+            cwd=repository,
+            errors="replace",
+            check=False,
+        )
+
+    payload_a, _reproducibility_a, environment_a = (
+        assemble_manuel._load_reproducibility_control(
+            repository,
+            runner=subprocess.run,
+        )
+    )
+    head_a = git("rev-parse", "HEAD")
+    head_timestamp_a = int(git("show", "-s", "--format=%ct", head_a))
+    result_a = compile_document(documents[0], build_directories[0], environment_a)
+
+    artifact = repository / "artifact.txt"
+    artifact.write_text("changes HEAD only\n", encoding="utf-8")
+    git("add", "--", artifact.name)
+    git("commit", "-qm", "dummy artifact", timestamp=source_timestamp + 120)
+
+    payload_b, _reproducibility_b, environment_b = (
+        assemble_manuel._load_reproducibility_control(
+            repository,
+            runner=subprocess.run,
+        )
+    )
+    head_b = git("rev-parse", "HEAD")
+    head_timestamp_b = int(git("show", "-s", "--format=%ct", head_b))
+    result_b = compile_document(documents[1], build_directories[1], environment_b)
+
+    assert result_a.returncode == 0, result_a.stdout + result_a.stderr
+    assert result_b.returncode == 0, result_b.stdout + result_b.stderr
+    assert head_a != head_b
+    assert head_timestamp_a != head_timestamp_b
+    assert payload_a == payload_b
+    assert payload_a["source_commit"] == source_commit
+    assert payload_a["source_date_epoch"] == source_timestamp
+    assert environment_a["SOURCE_DATE_EPOCH"] == str(source_timestamp)
+    assert environment_b["SOURCE_DATE_EPOCH"] == str(source_timestamp)
+
+    logs = [
+        build_directory.joinpath("document.log").read_text(
+            encoding="utf-8",
+            errors="replace",
+        )
+        for build_directory in build_directories
+    ]
+    assert run_ids[0] in logs[0] and run_ids[1] not in logs[0]
+    assert run_ids[1] in logs[1] and run_ids[0] not in logs[1]
+
+    pdfs = [build_directory / "document.pdf" for build_directory in build_directories]
+    pdf_bytes = [pdf.read_bytes() for pdf in pdfs]
+    pdf_sha256 = [hashlib.sha256(content).hexdigest() for content in pdf_bytes]
+    assert pdf_sha256[0] == pdf_sha256[1]
+    assert pdf_bytes[0] == pdf_bytes[1]
+    assert all(
+        run_id.encode("ascii") not in pdf
+        for run_id in run_ids
+        for pdf in pdf_bytes
+    )
+
+    pdfinfo_results = [
+        assemble_manuel._run_with_environment(
+            subprocess.run,
+            environment,
+            ["pdfinfo", str(pdf)],
+            capture_output=True,
+            text=True,
+            errors="replace",
+            check=False,
+        )
+        for pdf, environment in zip(pdfs, (environment_a, environment_b), strict=True)
+    ]
+    assert all(result.returncode == 0 for result in pdfinfo_results)
+    assert pdfinfo_results[0].stdout == pdfinfo_results[1].stdout
+
+    variable_pdf_metadata = re.compile(
+        rb"/(?:CreationDate|ModDate)\s*\([^)]*\)|/ID\s*\[[^]]*\]",
+        re.DOTALL,
+    )
+    assert variable_pdf_metadata.findall(pdf_bytes[0]) == (
+        variable_pdf_metadata.findall(pdf_bytes[1])
+    )
 
 
 def test_git_root_resolution_strips_hostile_git_environment(
