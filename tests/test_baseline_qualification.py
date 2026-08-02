@@ -977,6 +977,7 @@ def test_materialization_plan_is_idempotent_after_policy_entries_exist(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     repository = tmp_path / "repository"
+    approved_sha = policy["approved_set"]["baseline_sha"]
     subprocess.run(
         [
             "git",
@@ -988,11 +989,29 @@ def test_materialization_plan_is_idempotent_after_policy_entries_exist(
         ],
         check=True,
     )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "switch",
+            "--create",
+            "baseline-materialization-fixture",
+            approved_sha,
+        ],
+        check=True,
+        capture_output=True,
+    )
+    assert subprocess.run(
+        ["git", "-C", str(repository), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip() == approved_sha
     shutil.copyfile(
         ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json",
         repository / "audit/schemas/v1/anomaly-dispositions.schema.json",
     )
-    approved_sha = policy["approved_set"]["baseline_sha"]
     historical_control = subprocess.run(
         [
             "git",
