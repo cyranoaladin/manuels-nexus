@@ -4781,8 +4781,25 @@ def _build_manifest_contract_payload() -> dict[str, object]:
                 "page_count": 128,
                 "pdf_path": "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.pdf",
                 "pdf_sha256": "sha256:" + "4" * 64,
+                "reproducibility": {
+                    "config_path": (
+                        "Mathematiques/manuel-maths/config/"
+                        "reproducible-build.json"
+                    ),
+                    "force_source_date": "1",
+                    "locale": "C.UTF-8",
+                    "pythonhashseed": "0",
+                    "source_commit": "2" * 40,
+                    "source_date_epoch": 1,
+                    "timezone": "UTC",
+                },
                 "source_digest": "sha256:" + "5" * 64,
-                "tool_versions": {"latexmk": "4.86a", "pdflatex": "3.141592653"},
+                "tool_versions": {
+                    "lualatex": "LuaHBTeX, Version 1.17.0",
+                    "pdfinfo": "pdfinfo version 24.02.0",
+                    "pdffonts": "pdffonts version 24.02.0",
+                    "python": "Python 3.12.3",
+                },
                 "variant": "professeur",
             }
         ],
@@ -5067,6 +5084,12 @@ def test_build_manifest_is_excluded_from_source_and_model_digests(
     _seed_cli_repository(tmp_path)
     before = inventory_module.build_inventory(tmp_path)
     head_sha = _commit_repository(tmp_path, "before build manifest")
+    branch = subprocess.run(
+        ["git", "-C", str(tmp_path), "branch", "--show-current"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
     manifest = {
         "artifact_type": "build_manifest",
         "build_state_digest": inventory_module._build_state_digest([]),
@@ -5074,7 +5097,7 @@ def test_build_manifest_is_excluded_from_source_and_model_digests(
         "generated_by": "build_manifest.py",
         "model_digest": inventory_module._model_digest(before),
         "provenance": {
-            "branch": "fixture",
+            "branch": branch,
             "dirty": False,
             "head_sha": head_sha,
         },
@@ -5087,6 +5110,7 @@ def test_build_manifest_is_excluded_from_source_and_model_digests(
         json.dumps(manifest, ensure_ascii=False, sort_keys=True),
     )
     _track(tmp_path, inventory_module.BUILD_MANIFEST_FILE)
+    _commit_repository(tmp_path, "empty build manifest")
 
     after = inventory_module.build_inventory(tmp_path)
 
