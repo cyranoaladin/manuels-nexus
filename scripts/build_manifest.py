@@ -1242,13 +1242,60 @@ def _read_proof_file(root: Path, raw_path: object, *, role: str) -> bytes:
             os.close(descriptor)
 
 
-def _canonical_fls_path(root: Path, raw: str) -> str | None:
+def _fls_working_directory(root: Path, fls_text: str) -> Path:
+    pwd_records: list[str] = []
+    for line in fls_text.splitlines():
+        if line == "PWD" or line.startswith("PWD "):
+            kind, separator, raw = line.partition(" ")
+            if kind != "PWD" or not separator:
+                raise BuildManifestError("PWD du traceur FLS invalide")
+            pwd_records.append(raw)
+        elif line.startswith("PWD"):
+            raise BuildManifestError("PWD du traceur FLS invalide")
+    if not pwd_records:
+        return root.resolve(strict=True)
+    if len(pwd_records) != 1:
+        raise BuildManifestError("PWD du traceur FLS ambigu")
+
+    raw = pwd_records[0]
     candidate = Path(raw)
-    if candidate.is_absolute():
-        try:
-            candidate = candidate.resolve(strict=False).relative_to(root)
-        except ValueError:
-            return None
+    if (
+        not raw
+        or raw != raw.strip()
+        or "\\" in raw
+        or not candidate.is_absolute()
+        or candidate.as_posix() != raw
+    ):
+        raise BuildManifestError("PWD du traceur FLS non canonique")
+    try:
+        canonical_root = root.resolve(strict=True)
+        resolved = candidate.resolve(strict=True)
+        resolved.relative_to(canonical_root)
+    except (OSError, RuntimeError, ValueError) as exc:
+        raise BuildManifestError(
+            "PWD du traceur FLS hors dépôt ou inaccessible"
+        ) from exc
+    if resolved != candidate or not resolved.is_dir():
+        raise BuildManifestError("PWD du traceur FLS symbolique ou non canonique")
+    return resolved
+
+
+def _canonical_fls_path(
+    root: Path,
+    raw: str,
+    *,
+    working_directory: Path | None = None,
+) -> str | None:
+    candidate = Path(raw)
+    base = root if working_directory is None else working_directory
+    if not candidate.is_absolute():
+        candidate = base / candidate
+    try:
+        candidate = candidate.resolve(strict=False).relative_to(
+            root.resolve(strict=True)
+        )
+    except (OSError, RuntimeError, ValueError):
+        return None
     normalized = candidate.as_posix()
     if (
         normalized.startswith("/")
@@ -1339,7 +1386,9 @@ def _ordered_object_trace(
         if path is None:
             raise BuildManifestError("objet marqué non déclaré")
         if path not in opened_by_tex:
-            raise BuildManifestError("objet marqué absent du traceur FLS")
+            raise BuildManifestError(
+                f"objet marqué absent du traceur FLS: {path}"
+            )
         trace.append(path)
         completed.add(token)
         current = None
@@ -1541,13 +1590,18 @@ def _derive_receipt_evidence(
         raise BuildManifestError("journal LaTeX sans compilation prouvée")
     fls_payload = proof_payloads["fls"]
     fls_text = fls_payload.decode("utf-8", errors="replace")
+    fls_working_directory = _fls_working_directory(root, fls_text)
     traced_inputs: list[str] = []
     traced_outputs: set[str] = set()
     for line in fls_text.splitlines():
         kind, separator, raw = line.partition(" ")
         if not separator or kind not in {"INPUT", "OUTPUT"}:
             continue
-        normalized = _canonical_fls_path(root, raw.strip())
+        normalized = _canonical_fls_path(
+            root,
+            raw.strip(),
+            working_directory=fls_working_directory,
+        )
         if normalized is None:
             continue
         if kind == "INPUT":

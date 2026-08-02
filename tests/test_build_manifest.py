@@ -2969,6 +2969,123 @@ def test_external_absolute_texlive_fls_input_is_ignored(
     )
 
 
+def test_receipt_resolves_relative_fls_paths_from_nested_pwd(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    manual_prefix = "Mathematiques/manuel-maths"
+    manual_root = tmp_path / manual_prefix
+    objects = [
+        f"{manual_prefix}/chapitres/objet-2.tex",
+        f"{manual_prefix}/chapitres/objet-1.tex",
+    ]
+    excluded = f"{manual_prefix}/chapitres/objet-exclu.tex"
+    dependency = f"{manual_prefix}/build/generated-index.tex"
+    for number, relative in enumerate(objects, start=1):
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(f"objet imbriqué {number}", encoding="utf-8")
+    (tmp_path / dependency).write_text("% dépendance imbriquée", encoding="utf-8")
+
+    paths["log"].write_text(
+        "\n".join(
+            [
+                f"NEXUS_BUILD_RUN:{RUN_ID}",
+                _trace_marker("BEGIN", objects[0]),
+                _trace_marker("END", objects[0]),
+                _trace_marker("BEGIN", objects[1]),
+                _trace_marker("END", objects[1]),
+                "Output written on MANUEL_1SPE_professeur.pdf (11 pages).",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    paths["fls"].write_text(
+        "\n".join(
+            [
+                f"PWD {manual_root}",
+                "INPUT build/MANUEL_1SPE_professeur.tex",
+                "INPUT ./chapitres/objet-2.tex",
+                "INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls",
+                "INPUT ./chapitres/objet-1.tex",
+                "OUTPUT build/generated-index.tex",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    receipt["generated_dependencies"] = [dependency]
+    _refresh_receipt_digest(receipt, paths, "log")
+    _refresh_receipt_digest(receipt, paths, "fls")
+    inventory_module = manifest_module._load_inventory_module()
+    inventory_module.build_inventory = lambda _root: {
+        "declared_assemblies": [
+            {
+                "included_objects": [*objects, excluded],
+                "manual": "1SPE",
+                "scope": "manual",
+                "variant": "professeur",
+            }
+        ],
+        "source_digest": SHA256_A,
+    }
+
+    _envelope, build, _validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+
+    assert build["included_objects"] == objects
+    assert build["ordered_trace"] == objects
+    assert build["excluded_objects"] == [excluded]
+    assert build["generated_dependencies"] == [dependency]
+
+
+@pytest.mark.parametrize(
+    "kind",
+    ["multiple", "relative", "outside", "noncanonical", "symlink"],
+)
+def test_receipt_rejects_unsafe_or_ambiguous_fls_pwd(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    kind: str,
+) -> None:
+    receipt, paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    if kind == "multiple":
+        pwd_lines = [f"PWD {tmp_path}", f"PWD {tmp_path}"]
+    elif kind == "relative":
+        pwd_lines = ["PWD Mathematiques/manuel-maths"]
+    elif kind == "outside":
+        pwd_lines = [f"PWD {tmp_path.parent}"]
+    elif kind == "noncanonical":
+        pwd_lines = [f"PWD {tmp_path}/./Mathematiques/manuel-maths"]
+    else:
+        target = tmp_path / "Mathematiques/manuel-maths"
+        target.mkdir(parents=True, exist_ok=True)
+        link = tmp_path / "manuel-pwd-link"
+        link.symlink_to(target, target_is_directory=True)
+        pwd_lines = [f"PWD {link}"]
+    fls = paths["fls"].read_text(encoding="utf-8")
+    paths["fls"].write_text(
+        "\n".join([*pwd_lines, fls]),
+        encoding="utf-8",
+    )
+    _refresh_receipt_digest(receipt, paths, "fls")
+
+    with pytest.raises(manifest_module.BuildManifestError, match="PWD"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+
 @pytest.mark.parametrize("kind", ["missing", "symlink", "hardlink"])
 def test_receipt_confines_every_traced_object_proof(
     tmp_path: Path,
@@ -3544,6 +3661,27 @@ def test_ordered_object_trace_uses_markers_not_fls_order(
         "chapitres/objet-2.tex",
         "chapitres/objet-1.tex",
     ]
+
+
+def test_ordered_object_trace_names_object_missing_from_fls(
+    manifest_module,
+) -> None:
+    missing = "chapitres/objet-manquant.tex"
+    log = "\n".join(
+        [
+            _trace_marker("BEGIN", missing),
+            _trace_marker("END", missing),
+        ]
+    )
+
+    with pytest.raises(manifest_module.BuildManifestError) as error:
+        manifest_module._ordered_object_trace(
+            log,
+            traced_inputs=[],
+            declared_objects=[missing],
+        )
+
+    assert missing in str(error.value)
 
 
 def test_ordered_object_trace_accepts_real_lualatex_log_for_long_paths(
