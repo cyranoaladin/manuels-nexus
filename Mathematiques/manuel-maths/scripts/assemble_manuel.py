@@ -51,7 +51,21 @@ def resolve_git_root(start: Path) -> Path:
     return Path(completed.stdout.strip()).resolve(strict=True)
 
 
-def canonical_tracked_path(raw_path: str | Path, git_root: Path) -> str:
+def load_tracked_paths(git_root: Path) -> frozenset[str]:
+    completed = subprocess.run(
+        ["git", "-C", str(git_root), "ls-files", "-z"],
+        check=True,
+        capture_output=True,
+        encoding="utf-8",
+    )
+    return frozenset(path for path in completed.stdout.split("\0") if path)
+
+
+def canonical_tracked_path(
+    raw_path: str | Path,
+    git_root: Path,
+    tracked_paths: frozenset[str] | None = None,
+) -> str:
     raw = os.fspath(raw_path)
     candidate_path = Path(raw)
     if (
@@ -76,13 +90,9 @@ def canonical_tracked_path(raw_path: str | Path, git_root: Path) -> str:
     if not stat.S_ISREG(candidate.stat().st_mode):
         raise ValueError("chemin suivi non régulier")
 
-    tracked = subprocess.run(
-        ["git", "-C", str(root), "ls-files", "--error-unmatch", "--", raw],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    if tracked.returncode != 0:
+    if tracked_paths is None:
+        tracked_paths = load_tracked_paths(root)
+    if raw not in tracked_paths:
         raise ValueError("chemin non suivi par Git")
     return raw
 
@@ -148,6 +158,7 @@ def render_master(variant: str, run_id: str) -> str:
     if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
         raise ValueError("identifiant de build invalide")
     git_root = resolve_git_root(ROOT)
+    tracked_paths = load_tracked_paths(git_root)
     parts = []
 
     # Transversal front matter
@@ -177,6 +188,7 @@ def render_master(variant: str, run_id: str) -> str:
                 canonical_tracked_path(
                     f.relative_to(git_root).as_posix(),
                     git_root,
+                    tracked_paths,
                 ),
             )
             for f in files

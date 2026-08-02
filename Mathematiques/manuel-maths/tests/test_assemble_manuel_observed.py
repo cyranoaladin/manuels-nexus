@@ -119,6 +119,23 @@ def test_canonical_tracked_path_rejects_untracked_file(tmp_path: Path) -> None:
         )
 
 
+def test_canonical_tracked_path_treats_git_metacharacters_literally(
+    tmp_path: Path,
+) -> None:
+    tracked = tmp_path / "Mathematiques/manuel-maths/objects/object1.tex"
+    tracked.parent.mkdir(parents=True)
+    tracked.write_text("Objet suivi\n", encoding="utf-8")
+    _commit_fixture(tmp_path, tracked.relative_to(tmp_path))
+    untracked_pathspec = tracked.with_name("object?.tex")
+    untracked_pathspec.write_text("Objet non suivi\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="non suivi"):
+        assemble_manuel.canonical_tracked_path(
+            untracked_pathspec.relative_to(tmp_path).as_posix(),
+            tmp_path,
+        )
+
+
 def test_assembler_trace_token_is_the_manifest_protocol_token() -> None:
     canonical = (
         "Mathematiques/manuel-maths/chapitres/1SPE-SUITES/"
@@ -147,6 +164,24 @@ def test_wrap_object_input_uses_exact_balanced_markers() -> None:
             f"\\typeout{{NEXUS_OBJECT_END:{token}}}",
         ]
     )
+
+
+def test_render_master_loads_tracked_inventory_once(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    real_loader = assemble_manuel.load_tracked_paths
+    calls: list[Path] = []
+
+    def recording_loader(git_root: Path) -> frozenset[str]:
+        calls.append(git_root)
+        return real_loader(git_root)
+
+    monkeypatch.setattr(assemble_manuel, "load_tracked_paths", recording_loader)
+
+    master = assemble_manuel.render_master("professeur", "b" * 32)
+
+    assert master.count("NEXUS_OBJECT_BEGIN:") > 1
+    assert calls == [GIT_ROOT]
 
 
 def test_render_master_marks_every_object_once_in_collection_order() -> None:
