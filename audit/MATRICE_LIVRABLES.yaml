@@ -129,9 +129,6 @@ manuals:
     - code: anomalie:broken_meta_references
       detail: '24'
       source: anomalies.broken_meta_references
-    - code: anomalie:unassembled_objects
-      detail: '459'
-      source: anomalies.unassembled_objects
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.1SPE.variants.banque_evaluations
@@ -193,7 +190,6 @@ manuals:
     structural_blockers:
     - anomalie:blocking_statuses
     - anomalie:broken_meta_references
-    - anomalie:unassembled_objects
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -425,24 +421,24 @@ manuals:
         declared_chapter_variants: []
         declared_manual_variants: []
         state: absent
-model_digest: sha256:d460ad17c892cd415f2c5df77057dac62dd795f255273215486dce7a3fa96835
+model_digest: sha256:c8ff098f2c427e8108de1f101ef8bb6f5aa08695e120793a06d2cbac1f5d0f4a
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-02T23:14:30Z'
+  generated_at_utc: '2026-08-02T23:55:41Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:4ea000c6cb7b03f8b7ed76532fe8f9ec27f47ce82b12b67ca7440454aa9d281e
     scripts/build_manifest.py: sha256:f7db32d6e16b43ba7506e5a84d3b0016466c0d22cabd690eb61f7e575f6b6a82
-    scripts/inventory_assembly.py: sha256:0152e2523723678b6333a9a2738cad373150f4d908612bfba7d5b506edf4b339
+    scripts/inventory_assembly.py: sha256:e5350f563d0813b0a433c69ed87e879aed8861c64fe732e829c4d8c08a34f138
     scripts/inventory_collection.py: sha256:5b170cc59c3f0da420c5c833b985ff4fac9af7c8efec4c589967e089b6e0690f
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:d35af02bcf165276be9a76adea722813cd7376f4166b9ab1ab9bc91e226ebce9
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:d6f4e503b5dc8575e029bdc4a0d366190ca5c66b4ed1f3c69e9966fcd8f747d3
+  generator_sha256: sha256:7100bee38834e8e26270bb4bedb07f98d60091f73a09cf3e3611e623b759263d
   generator_version: 1
   git_available: true
-  head_sha: cb42f41c42632e9ab9d2f2c33ee73d400b05b7ff
+  head_sha: eaec77fb4f462d79bde41ccd772ec7147341f45c
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -453,4 +449,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:b985ef309087f2afb415c6810a08b198a35b86702cc13cc0ed2d4952f3b95779
+source_digest: sha256:fed673b4c3f850a756c2baf0e9409ef114aa71aca5838dc0528841dd8f5feaef

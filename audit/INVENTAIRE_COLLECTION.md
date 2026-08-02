@@ -16,7 +16,7 @@
 | Catégorie | Nombre |
 |---|---|
 | blocking_statuses | 1930 |
-| unassembled_objects | 666 |
+| unassembled_objects | 207 |
 | broken_meta_references | 24 |
 | unavailable_inspiration_sources | 15 |
 | chapters_not_in_manual | 4 |
@@ -47,11 +47,11 @@
 - missing_assemblers: source=Mathematiques/manuel-maths/scripts/assemble_manuel.py, cible=TSPE_2026_2027, champ=manuel, raison=aucun assembleur de manuel suivi
 - missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=1NSI, champ=manuel, raison=aucun assembleur de manuel suivi
 - missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=TNSI, champ=manuel, raison=aucun assembleur de manuel suivi
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unattributed_pdfs: source=Mathematiques/manuel-maths/build/specimen.pdf, cible=Mathematiques/manuel-maths/build/specimen.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td1_station_meteo.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_td_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
