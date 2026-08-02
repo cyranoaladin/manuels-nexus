@@ -144,14 +144,12 @@ manuals:
     - code: livrable_non_compile
       detail: declared
       source: deliverable_matrix.1SPE.variants.manuel_eleve
-    - code: livrable_non_compile
-      detail: declared
-      source: deliverable_matrix.1SPE.variants.manuel_professeur
     - code: statuts_non_approuves
       detail: objets=1334; contrats=10
       source: manuals.1SPE.statuses
     current:
-      artifacts: []
+      artifacts:
+      - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf
       chapter_count: 10
       chapters:
       - 1SPE-DERIVATION-GLOBAL
@@ -223,11 +221,12 @@ manuals:
         - eleve
         state: declared
       manuel_professeur:
-        artifacts: []
+        artifacts:
+        - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf
         declared_chapter_variants: []
         declared_manual_variants:
         - professeur
-        state: declared
+        state: compiled
   TNSI:
     blockers:
     - code: chapitres_manquants
@@ -426,24 +425,24 @@ manuals:
         declared_chapter_variants: []
         declared_manual_variants: []
         state: absent
-model_digest: sha256:0334c19cbe8acaff3fd119065d05e3cd624bd35a1863ea473da9682b9dfba3a2
+model_digest: sha256:d460ad17c892cd415f2c5df77057dac62dd795f255273215486dce7a3fa96835
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-02T16:47:32Z'
+  generated_at_utc: '2026-08-02T23:14:30Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:4ea000c6cb7b03f8b7ed76532fe8f9ec27f47ce82b12b67ca7440454aa9d281e
-    scripts/build_manifest.py: sha256:8486407034da4acc95d4b6b3d7336879c1ef299561f496d47c041f894405837c
+    scripts/build_manifest.py: sha256:f7db32d6e16b43ba7506e5a84d3b0016466c0d22cabd690eb61f7e575f6b6a82
     scripts/inventory_assembly.py: sha256:0152e2523723678b6333a9a2738cad373150f4d908612bfba7d5b506edf4b339
-    scripts/inventory_collection.py: sha256:249dd40fa7e6f8a569cd2153280bb87fe70fd0d7b4940bdf505fbfaaab6bbc00
+    scripts/inventory_collection.py: sha256:5b170cc59c3f0da420c5c833b985ff4fac9af7c8efec4c589967e089b6e0690f
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:d35af02bcf165276be9a76adea722813cd7376f4166b9ab1ab9bc91e226ebce9
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:7f629ac9b78885f414bc9374baac27ae2da7c31da99e96740a5ae72062eb5c81
+  generator_sha256: sha256:d6f4e503b5dc8575e029bdc4a0d366190ca5c66b4ed1f3c69e9966fcd8f747d3
   generator_version: 1
   git_available: true
-  head_sha: 3737df30d9506a38c96884961beb7d0a00b224e6
+  head_sha: cb42f41c42632e9ab9d2f2c33ee73d400b05b7ff
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -454,4 +453,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:f315e7b06348ed966df97650356fa86c6d1396e4cd828435e5a0f10fe55a9501
+source_digest: sha256:b985ef309087f2afb415c6810a08b198a35b86702cc13cc0ed2d4952f3b95779

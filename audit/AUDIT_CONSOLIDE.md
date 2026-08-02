@@ -207,7 +207,7 @@
 - livret_methodes : partial (artifacts=0)
 - livret_remediation : partial (artifacts=0)
 - manuel_eleve : declared (artifacts=0)
-- manuel_professeur : declared (artifacts=0)
+- manuel_professeur : compiled (artifacts=1)
 
 ### NSI Terminale
 - Éligible publication: False

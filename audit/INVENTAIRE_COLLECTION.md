@@ -7,7 +7,7 @@
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1NSI | NSI Première | NSI | Premiere | courante | 1 | 5 | 55 | 153 | 153 | — |
-| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 464 | 1334 | 1334 | — |
+| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 464 | 1334 | 1334 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 0 | 0 | 0 | 0 | 0 | — |
 | TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 3 | 16 | 152 | 429 | 429 | — |
 
@@ -62,8 +62,8 @@
 ## Réconciliation des rapports
 
 - Assertions lues: 108
-- Ouvertes: 46
-- Contradictoires: 18
+- Ouvertes: 45
+- Contradictoires: 19
 
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 16 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 36 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | exercices_principaux | 30 | None | ouvert
