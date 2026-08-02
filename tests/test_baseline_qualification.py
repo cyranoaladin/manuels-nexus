@@ -431,10 +431,44 @@ def _refresh_empty_build_manifest(
     assert manifest["builds"] == []
     manifest["source_digest"] = candidate["source_digest"]
     manifest["model_digest"] = inventory_module._model_digest(candidate)
+    manifest["provenance"] = {
+        "branch": subprocess.run(
+            ["git", "-C", str(repository), "branch", "--show-current"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip(),
+        "dirty": False,
+        "head_sha": subprocess.run(
+            ["git", "-C", str(repository), "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip(),
+    }
     manifest_path.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True)
         + "\n",
         encoding="utf-8",
+    )
+    subprocess.run(
+        ["git", "-C", str(repository), "add", "-A"],
+        check=True,
+    )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "-c",
+            "user.name=Nexus Fixture",
+            "-c",
+            "user.email=nexus-fixture@example.invalid",
+            "commit",
+            "-qm",
+            "refresh empty build manifest fixture",
+        ],
+        check=True,
     )
     return inventory_module.build_inventory(repository)
 
