@@ -2204,6 +2204,71 @@ def test_private_bootstrap_capability_rejects_nonempty_or_invalid_manifest(
     assert path.read_bytes() == original
 
 
+def test_private_bootstrap_rejects_concurrent_nonempty_matching_envelope(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    stale_empty = _manifest(head, [])
+    stale_empty["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale_empty)
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    fresh_envelope = _manifest(head, [])
+    proposed = _build(head, "build/professeur.pdf", b"%PDF professor")
+    concurrent = _build(head, "build/eleve.pdf", b"%PDF student")
+    concurrent["variant"] = "eleve"
+    concurrent_payload = _manifest(head, [concurrent])
+    concurrent_bytes = (
+        json.dumps(
+            concurrent_payload,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n"
+    ).encode("utf-8")
+    real_transaction = manifest_module._replace_manifest_transactionally
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: inventory_module,
+    )
+
+    def replace_before_transform(
+        manifest_path: Path,
+        **kwargs,
+    ) -> None:
+        manifest_path.write_bytes(concurrent_bytes)
+        real_transaction(manifest_path, **kwargs)
+
+    monkeypatch.setattr(
+        manifest_module,
+        "_replace_manifest_transactionally",
+        replace_before_transform,
+    )
+
+    with pytest.raises(
+        manifest_module.BuildManifestError,
+        match="bootstrap|strictement vide",
+    ):
+        manifest_module.record_successful_build(
+            path,
+            proposed,
+            envelope=fresh_envelope,
+            compile_succeeded=True,
+            preflight_succeeded=True,
+            validator=lambda _payload: None,
+            _bootstrap_capability=(
+                manifest_module._EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
+            ),
+        )
+
+    assert path.read_bytes() == concurrent_bytes
+
+
 def test_record_helper_rejects_corrupt_current_state_digest(
     tmp_path: Path,
     manifest_module,

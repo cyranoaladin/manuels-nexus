@@ -755,12 +755,10 @@ def record_successful_build(
         current: dict[str, Any],
         _git_state_snapshot: tuple[str, str, bool],
     ) -> dict[str, Any]:
-        if not _same_envelope(current, envelope):
-            if (
-                _bootstrap_capability
-                is not _EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
-            ):
-                raise BuildManifestError("enveloppe incompatible")
+        if (
+            _bootstrap_capability
+            is _EMPTY_MANIFEST_BOOTSTRAP_CAPABILITY
+        ):
             inventory_module = _load_inventory_module()
             try:
                 inventory_module._validate_artifact_schema(
@@ -782,6 +780,8 @@ def record_successful_build(
                 raise BuildManifestError(
                     "build_state_digest vide incohérent"
                 )
+        elif not _same_envelope(current, envelope):
+            raise BuildManifestError("enveloppe incompatible")
         builds = [dict(value) for value in current["builds"]]
         if current.get("build_state_digest") != build_state_digest(builds):
             raise BuildManifestError("build_state_digest courant incohérent")
