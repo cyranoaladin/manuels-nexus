@@ -95,14 +95,16 @@ artefact d'audit suivi par Git.
 L'interface de commande ajoute un mode de type `--record-observed`. Dans ce
 mode, l'assembleur :
 
-1. invalide tout reçu temporaire antérieur à l'exécution ;
-2. écrit les marqueurs dans le maître généré ;
+1. génère un `run_id` aléatoire de 128 bits, encodé par 32 caractères
+   hexadécimaux minuscules, et invalide tout reçu temporaire antérieur ;
+2. écrit ce `run_id` et les marqueurs dans le maître généré ;
 3. exécute chaque passe avec `-recorder` ;
 4. arrête le pipeline dès qu'une passe échoue ;
 5. exécute le préflight PDF ;
 6. écrit atomiquement le rapport de préflight puis le reçu ;
 7. appelle `scripts/build_manifest.py --receipt ...` comme frontière CLI
-   séparée ;
+   séparée ; lors du premier build, cette transaction remplace l'enveloppe vide
+   périmée par l'enveloppe courante et ajoute le build en une seule écriture ;
 8. propage tout échec sans déclarer le build observé.
 
 Le mode ordinaire peut produire le PDF, mais il ne produit pas de preuve
@@ -115,9 +117,12 @@ est le SHA-256 tronqué à 40 caractères hexadécimaux du chemin canonique rela
 à la racine Git :
 
 ```text
-NEXUS-BUILD-OBJECT-BEGIN <token>
-NEXUS-BUILD-OBJECT-END <token>
+NEXUS_OBJECT_BEGIN:<token>
+NEXUS_OBJECT_END:<token>
 ```
+
+Ce protocole est celui déjà contractualisé par `scripts/build_manifest.py` et
+ses tests ; ce lot ne crée pas de second format ni de migration de marqueurs.
 
 Le chemin hashé inclut donc le préfixe
 `Mathematiques/manuel-maths/...`, et non le seul chemin relatif au sous-projet.
@@ -131,8 +136,8 @@ La validation exige simultanément :
   `math:manual:1SPE:professeur` ;
 - aucune duplication, omission ou inversion ;
 - la présence de chaque source correspondante dans les entrées du `.fls` ;
-- des chemins résolus sous la racine du dépôt, y compris en présence de liens
-  symboliques ou de segments `..`.
+- des chemins d'objets canoniques, sans lien symbolique ni segment `..`, résolus
+  sous la racine du dépôt.
 
 Les marqueurs prouvent l'ordre sémantique demandé ; le `.fls` prouve l'ouverture
 effective des fichiers par le moteur. Aucun des deux signaux ne remplace l'autre.
@@ -152,14 +157,17 @@ lisibilité, d'absence d'actifs manquants et d'incorporation des polices.
 Le rapport de préflight est une sortie machine atomique qui contient au
 minimum :
 
+- le `run_id` commun au maître, au journal et au reçu ;
 - le chemin canonique du PDF ;
 - son SHA-256 et son nombre de pages ;
 - l'état des contrôles exécutés ;
 - les versions observées de LuaLaTeX, `pdfinfo`, `pdffonts` et Python.
 
-Le digest est recalculé juste avant l'écriture du reçu. Le recorder recalcule
-également les preuves depuis les fichiers ; il ne fait pas confiance à un
-simple booléen fourni par l'assembleur.
+Le maître contient `NEXUS_BUILD_RUN:<run_id>`. LuaLaTeX l'inscrit dans le
+journal et le `.fls` prouve l'ouverture de ce maître. Le digest du PDF est
+recalculé juste avant l'écriture du reçu. Le recorder recalcule également les
+preuves depuis les fichiers ; il ne fait pas confiance à un simple booléen
+fourni par l'assembleur.
 
 ### Reçu post-préflight
 
@@ -171,6 +179,29 @@ Le reçu respecte le contrat déjà défini dans `scripts/build_manifest.py` :
 - `generated_dependencies` ;
 - `tool_versions` ;
 - `gates`.
+
+Le contrat est étendu par les champs obligatoires exacts suivants :
+
+- `run_id` : 32 caractères hexadécimaux minuscules ;
+- `master_path` : chemin canonique du maître LaTeX sous la racine Git ;
+- `evidence_sha256` : objet fermé contenant exactement `master`, `log`, `fls`,
+  `pdf` et `preflight`, chacun sous la forme `sha256:<64 hex>`.
+
+Le rapport de préflight contient le même `run_id`, le même chemin PDF, le même
+digest, la pagination, les contrôles et les versions d'outils. Le recorder :
+
+1. ouvre chaque preuve par les primitives confinées existantes ;
+2. compare son digest au champ `evidence_sha256` ;
+3. vérifie le `run_id` dans le maître, le journal et le préflight ;
+4. vérifie que le maître figure parmi les `INPUT` du `.fls` ;
+5. recalcule localement les versions de LuaLaTeX, `pdfinfo`, `pdffonts` et
+   Python, puis exige leur égalité avec le rapport et le reçu ;
+6. relit et re-hashe toutes les preuves dans le validateur transactionnel juste
+   avant le remplacement du manifeste.
+
+Le digest du rapport est placé dans le reçu après l'écriture atomique du
+rapport ; le rapport ne se hashe pas lui-même. Le reçu est ensuite écrit
+atomiquement. Cette direction unique évite tout cycle cryptographique.
 
 Pour ce premier producteur, `generated_dependencies` peut être vide : le maître
 LaTeX généré par Python n'est pas une sortie déclarée par le `.fls` et n'entre
@@ -195,17 +226,25 @@ La transaction refuse notamment :
 - un reçu antérieur au journal, au `.fls`, au PDF ou au préflight ;
 - un digest ou un nombre de pages incohérent ;
 - un objet manquant, surnuméraire ou désordonné ;
-- une source ouverte hors racine ;
+- un objet déclaré, le maître ou une dépendance générée qui sort de la racine ;
 - un `.fls`, journal ou rapport modifié pendant la validation ;
 - une version d'outil absente ;
 - un préflight qui ne couvre pas le digest du PDF courant.
 
-L'intégration globale des producteurs reste partielle. Le schéma et
-l'inventaire distinguent `not_integrated`, `partial` et `integrated`, ainsi que
-les producteurs intégrés et ceux restant à raccorder. Le gate de release ne
-considère la dimension intégrée que lorsque tous les producteurs requis ont le
-statut `integrated`. Le raccordement du seul professeur 1SPE ne supprime donc
-pas le bloqueur collection.
+Les entrées TeX Live et autres dépendances système absolues du `.fls` ne sont
+pas des objets du dépôt : elles sont ignorées par le rapprochement des objets,
+comme dans le recorder actuel. Leur environnement est représenté par les
+versions d'outils. Cette tolérance ne s'applique jamais aux objets déclarés, au
+maître ou aux dépendances générées explicitement revendiquées par le reçu.
+
+L'intégration globale des producteurs conserve dans ce lot le statut
+`not_integrated` et son schéma existant. Le professeur 1SPE est attesté dans
+`observed_builds` et `observed_build_coverage`, mais ce premier raccordement ne
+prétend pas définir l'univers exhaustif de tous les producteurs de la
+collection. Le gate `build_receipt_producteurs_non_intégrés` reste donc rouge.
+Une tâche ultérieure devra introduire un registre versionné des producteurs
+requis et ne pourra calculer `integrated` que par égalité entre l'ensemble
+requis et l'ensemble effectivement instrumenté — jamais par un scalaire libre.
 
 ## Provenance Git sans cycle auto-référentiel
 
@@ -226,6 +265,13 @@ Un SHA non ancêtre, une branche différente, une dérive de source, du modèle 
 du PDF invalide le build. Cette règle permet de commiter le manifeste après le
 build sans affaiblir son rattachement au commit source.
 
+Pour le premier build seulement, `record_from_receipt()` accepte comme état de
+départ un manifeste valide dont `builds` est vide, même si son enveloppe est
+périmée. La transaction démarre depuis un dépôt propre, dérive l'enveloppe
+courante, ajoute le build et remplace le manifeste une seule fois. Un manifeste
+non vide ou un état Git modifié conserve les contrôles stricts existants ; aucun
+rafraîchissement intermédiaire sale n'est autorisé.
+
 ## Séquence de matérialisation
 
 La séquence évite toute preuve construite depuis un état Git non versionné :
@@ -235,10 +281,10 @@ La séquence évite toute preuve construite depuis un état Git non versionné :
 3. ajouter explicitement le PDF ignoré, puis le commiter seul — commit B ;
 4. depuis B propre, recompiler en mode observé ;
 5. exiger que le PDF regénéré soit octet pour octet identique à celui de B ;
-6. rafraîchir, si nécessaire, l'enveloppe vide du manifeste au SHA B ;
-7. enregistrer le reçu contre B ;
-8. commiter séparément `audit/BUILD_MANIFEST.json` — commit C ;
-9. régénérer les rapports dérivés et les commiter séparément si leur contenu
+6. enregistrer le reçu contre B en remplaçant transactionnellement le manifeste
+   vide périmé par l'enveloppe B et le premier build ;
+7. commiter séparément `audit/BUILD_MANIFEST.json` — commit C ;
+8. régénérer les rapports dérivés et les commiter séparément si leur contenu
    change — commit D.
 
 Le PDF est refusé avant ajout si sa taille atteint 90 Mio, plafond conservateur
@@ -263,15 +309,20 @@ décision humaine, pas un contournement automatique.
 
 - succès nominal depuis un commit propre ;
 - rejet des marqueurs manquants, dupliqués, inversés ou parasites ;
-- rejet d'une ouverture `.fls` manquante, externe ou ambiguë ;
-- chemins imbriqués, normalisés et liens symboliques testés ;
+- rejet d'une ouverture d'objet revendiquée manquante, externe ou ambiguë dans
+  le `.fls` ;
+- chemins imbriqués et normalisés acceptés, liens symboliques et segments `..`
+  rejetés pour les preuves du dépôt ;
+- entrées TeX Live absolues ignorées sans être confondues avec des objets ;
 - rejet d'un reçu ou rapport périmé ;
 - rejet d'une modification entre préflight et enregistrement ;
+- rejet d'un `run_id`, d'un digest de preuve ou d'une version d'outil
+  incohérent ;
 - rollback complet si l'écriture du manifeste échoue ;
 - acceptation d'un SHA ancêtre avec digests et PDF identiques ;
 - rejet d'un SHA non ancêtre, d'une branche différente et de toute dérive de
   source, modèle ou PDF ;
-- maintien du gate release rouge tant que l'intégration globale est partielle ;
+- maintien du statut global `not_integrated` et du gate release rouge ;
 - blocage d'une publication si le PDF suivi n'a pas de build observé valide.
 
 ### Artefacts
@@ -302,7 +353,8 @@ Le lot est terminé uniquement si :
 2. le PDF professeur réel est suivi par Git et son second build est identique ;
 3. un build observé valide figure dans `audit/BUILD_MANIFEST.json` ;
 4. le reçu est postérieur à un préflight réussi et croisé avec le `.fls` ;
-5. l'état d'intégration indique explicitement qu'il reste des producteurs ;
+5. l'état global d'intégration reste `not_integrated` jusqu'à la définition
+   déterministe de tous les producteurs requis ;
 6. aucune baseline visuelle n'a changé ;
 7. les gates de non-régression restent verts et `release-strict` reste rouge ;
 8. les commits sont atomiques et poussés sur
