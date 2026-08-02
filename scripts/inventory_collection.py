@@ -1177,6 +1177,42 @@ def _tracked_source_set_digest(root: Path) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
+def _require_git_ancestor(
+    root: Path,
+    recorded_sha: object,
+    current_head: object,
+    *,
+    role: str,
+) -> None:
+    if (
+        not isinstance(recorded_sha, str)
+        or re.fullmatch(r"[0-9a-f]{40}", recorded_sha) is None
+        or not isinstance(current_head, str)
+        or re.fullmatch(r"[0-9a-f]{40}", current_head) is None
+    ):
+        raise InventoryError(f"{role} Git invalide")
+    try:
+        ancestry = subprocess.run(
+            [
+                "git",
+                "-C",
+                str(root),
+                "merge-base",
+                "--is-ancestor",
+                recorded_sha,
+                current_head,
+            ],
+            check=False,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            timeout=20,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise InventoryError(f"{role} Git invérifiable") from exc
+    if ancestry.returncode != 0:
+        raise InventoryError(f"{role} sans ancêtre Git valide")
+
+
 def _load_observed_build_manifest(
     root: Path,
     *,
@@ -1232,48 +1268,20 @@ def _load_observed_build_manifest(
         initial_tracked_source_set = _tracked_source_set_digest(root)
         head_sha, branch, dirty = initial_git_state
         provenance = payload.get("provenance")
-        provenance_head = (
-            provenance.get("head_sha")
-            if isinstance(provenance, Mapping)
-            else None
+        if not isinstance(provenance, Mapping):
+            raise InventoryError("provenance du manifeste invalide")
+        if provenance.get("branch") != branch:
+            raise InventoryError("branche de provenance du manifeste incohérente")
+        if builds and (provenance.get("dirty") is not False or dirty):
+            raise InventoryError(
+                "provenance du manifeste sale pour des builds observés"
+            )
+        _require_git_ancestor(
+            root,
+            provenance.get("head_sha"),
+            head_sha,
+            role="provenance du manifeste",
         )
-        if builds:
-            expected_provenance = {
-                "head_sha": head_sha,
-                "branch": branch,
-                "dirty": dirty,
-            }
-            if not isinstance(provenance, Mapping) or any(
-                provenance.get(key) != value
-                for key, value in expected_provenance.items()
-            ):
-                raise InventoryError(
-                    "provenance du manifeste incohérente pour des builds observés"
-                )
-        else:
-            try:
-                ancestry = subprocess.run(
-                    [
-                        "git",
-                        "-C",
-                        str(root),
-                        "merge-base",
-                        "--is-ancestor",
-                        str(provenance_head),
-                        head_sha,
-                    ],
-                    check=False,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                )
-            except OSError as exc:
-                raise InventoryError(
-                    "provenance du manifeste invérifiable"
-                ) from exc
-            if ancestry.returncode != 0:
-                raise InventoryError(
-                    "provenance du manifeste sans ancêtre Git valide"
-                )
 
         def revalidate_state() -> None:
             snapshot.verify()
@@ -1348,10 +1356,12 @@ def _load_observed_build_manifest(
                 raise InventoryError(
                     f"variant non déclaré dans les assemblages: {manual}:{variant}"
                 )
-            if build["git_sha"] != head_sha:
-                raise InventoryError(
-                    f"git_sha périmé pour {manual}:{variant}"
-                )
+            _require_git_ancestor(
+                root,
+                build["git_sha"],
+                head_sha,
+                role=f"git_sha pour {manual}:{variant}",
+            )
             if build["source_digest"] != source_digest:
                 raise InventoryError(
                     f"source_digest périmé pour {manual}:{variant}"

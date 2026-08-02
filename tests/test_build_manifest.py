@@ -80,6 +80,61 @@ def _git_repository(path: Path) -> str:
     ).stdout.strip()
 
 
+def _commit_all(repository: Path, message: str) -> str:
+    subprocess.run(
+        ["git", "-C", str(repository), "add", "--all"],
+        check=True,
+    )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "-c",
+            "user.name=Observed Build Tests",
+            "-c",
+            "user.email=observed@example.invalid",
+            "commit",
+            "-qm",
+            message,
+        ],
+        check=True,
+    )
+    return subprocess.run(
+        ["git", "-C", str(repository), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def _unrelated_commit(repository: Path) -> str:
+    tree = subprocess.run(
+        ["git", "-C", str(repository), "rev-parse", "HEAD^{tree}"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    return subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "-c",
+            "user.name=Observed Build Tests",
+            "-c",
+            "user.email=observed@example.invalid",
+            "commit-tree",
+            tree,
+            "-m",
+            "unrelated fixture",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
 def _state_digest(builds: list[dict[str, object]]) -> str:
     canonical = json.dumps(
         builds,
@@ -99,7 +154,7 @@ def _manifest(head: str, builds: list[dict[str, object]]) -> dict[str, object]:
         "model_digest": SHA256_B,
         "provenance": {
             "branch": "master",
-            "dirty": True,
+            "dirty": not bool(builds),
             "head_sha": head,
         },
         "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
@@ -424,6 +479,15 @@ def _install_schema(repository: Path) -> None:
 
 
 def _write_manifest(repository: Path, payload: dict[str, object]) -> None:
+    if payload.get("builds"):
+        exclude = repository / ".git/info/exclude"
+        existing = exclude.read_text(encoding="utf-8")
+        exclude.write_text(
+            existing
+            + "\n/audit/schemas/\n/bad/\n/build/\n"
+            + "/Mathematiques/manuel-maths/build/\n",
+            encoding="utf-8",
+        )
     marker = repository / "build/.fixture-dirty"
     marker.parent.mkdir(parents=True, exist_ok=True)
     marker.write_text("fixture", encoding="utf-8")
@@ -460,6 +524,209 @@ def _load(
         pdfinfo_counter=lambda _path: (7, None),
         python_counter=lambda _path: (None, "unused"),
     )
+
+
+def _committed_observed_manifest_repository(
+    repository: Path,
+) -> tuple[dict[str, object], dict[str, object], str, str]:
+    _git_repository(repository)
+    _install_schema(repository)
+    pdf_path = "Mathematiques/manuel-maths/build/MANUEL_1SPE_professeur.pdf"
+    pdf_bytes = b"%PDF-1.7 committed observed build"
+    pdf = repository / pdf_path
+    pdf.parent.mkdir(parents=True, exist_ok=True)
+    pdf.write_bytes(pdf_bytes)
+    dependency = repository / "build/generated-index.tex"
+    dependency.parent.mkdir(parents=True, exist_ok=True)
+    dependency.write_bytes(b"% generated dependency")
+    build_commit = _commit_all(repository, "B: observed build")
+
+    build = _build(build_commit, pdf_path, pdf_bytes)
+    payload = _manifest(build_commit, [build])
+    provenance = payload["provenance"]
+    assert isinstance(provenance, dict)
+    provenance["dirty"] = False
+    provenance["branch"] = subprocess.run(
+        ["git", "-C", str(repository), "branch", "--show-current"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    manifest = repository / "audit/BUILD_MANIFEST.json"
+    manifest.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    manifest_commit = _commit_all(repository, "C: observed manifest")
+    return payload, build, build_commit, manifest_commit
+
+
+def _commit_manifest_payload(
+    repository: Path,
+    payload: dict[str, object],
+    message: str,
+) -> str:
+    builds = payload["builds"]
+    assert isinstance(builds, list)
+    payload["build_state_digest"] = _state_digest(builds)
+    (repository / "audit/BUILD_MANIFEST.json").write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    return _commit_all(repository, message)
+
+
+def test_committed_manifest_accepts_ancestor_through_managed_report_commit(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _payload, build, build_commit, manifest_commit = (
+        _committed_observed_manifest_repository(tmp_path)
+    )
+
+    observed_at_c = _load(inventory_module, tmp_path)
+    report = tmp_path / "audit/INVENTAIRE_COLLECTION.md"
+    report.write_text("# Rapport géré\n", encoding="utf-8")
+    report_commit = _commit_all(tmp_path, "D: managed report")
+    observed_at_d = _load(inventory_module, tmp_path)
+
+    assert manifest_commit != build_commit
+    assert report_commit != manifest_commit
+    assert observed_at_c == observed_at_d == [build]
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected"),
+    [
+        ("provenance-nonancestor", "ancêtre"),
+        ("build-nonancestor", "ancêtre"),
+        ("branch", "branche|provenance"),
+        ("dirty", "provenance"),
+        ("worktree-dirty", "provenance|sale"),
+        ("source", "source_digest"),
+        ("model", "model_digest"),
+        ("pdf", "pdf_sha256"),
+        ("page", "page_count"),
+        ("dependency", "generated_dependency_digests"),
+    ],
+)
+def test_committed_manifest_rejects_ancestor_or_content_drift(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+    expected: str,
+) -> None:
+    payload, _build, _build_commit, _manifest_commit = (
+        _committed_observed_manifest_repository(tmp_path)
+    )
+    builds = payload["builds"]
+    assert isinstance(builds, list) and isinstance(builds[0], dict)
+    build = builds[0]
+    provenance = payload["provenance"]
+    assert isinstance(provenance, dict)
+    if mutation == "provenance-nonancestor":
+        provenance["head_sha"] = _unrelated_commit(tmp_path)
+        _commit_manifest_payload(tmp_path, payload, "forge provenance ancestry")
+    elif mutation == "build-nonancestor":
+        build["git_sha"] = _unrelated_commit(tmp_path)
+        _commit_manifest_payload(tmp_path, payload, "forge build ancestry")
+    elif mutation == "branch":
+        provenance["branch"] = "other-branch"
+        _commit_manifest_payload(tmp_path, payload, "forge branch")
+    elif mutation == "dirty":
+        provenance["dirty"] = True
+        _commit_manifest_payload(tmp_path, payload, "forge dirty provenance")
+    elif mutation == "worktree-dirty":
+        (tmp_path / "untracked-source.tex").write_text(
+            "dirty worktree",
+            encoding="utf-8",
+        )
+    elif mutation == "source":
+        payload["source_digest"] = "sha256:" + "0" * 64
+        _commit_manifest_payload(tmp_path, payload, "drift source digest")
+    elif mutation == "model":
+        payload["model_digest"] = "sha256:" + "0" * 64
+        _commit_manifest_payload(tmp_path, payload, "drift model digest")
+    elif mutation == "pdf":
+        (tmp_path / str(build["pdf_path"])).write_bytes(b"%PDF drifted")
+        _commit_all(tmp_path, "drift PDF")
+    elif mutation == "page":
+        build["page_count"] = 8
+        _commit_manifest_payload(tmp_path, payload, "drift page count")
+    else:
+        (tmp_path / "build/generated-index.tex").write_text(
+            "% dependency drifted",
+            encoding="utf-8",
+        )
+        _commit_all(tmp_path, "drift dependency")
+
+    with pytest.raises(inventory_module.InventoryError, match=expected):
+        _load(inventory_module, tmp_path)
+
+
+def test_committed_manifest_rejects_head_changed_during_ancestor_validation(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _committed_observed_manifest_repository(tmp_path)
+    inspected = False
+
+    def advance_head(_path: Path) -> tuple[int, None]:
+        nonlocal inspected
+        inspected = True
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(tmp_path),
+                "-c",
+                "user.name=Observed Build Tests",
+                "-c",
+                "user.email=observed@example.invalid",
+                "commit",
+                "--allow-empty",
+                "-qm",
+                "advance HEAD during validation",
+            ],
+            check=True,
+        )
+        return 7, None
+
+    with pytest.raises(inventory_module.InventoryError, match="état Git modifié"):
+        inventory_module._load_observed_build_manifest(
+            tmp_path,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[
+                {
+                    "manual": "1SPE",
+                    "scope": "manual",
+                    "variant": "professeur",
+                    "included_objects": ["OBJ-2", "OBJ-1", "OBJ-EXCLUDED"],
+                }
+            ],
+            pdfinfo_counter=advance_head,
+            python_counter=lambda _path: (None, "unused"),
+        )
+    assert inspected is True
+
+
+def test_observed_build_integration_remains_exactly_not_integrated(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _git_repository(tmp_path)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    assert inventory["observed_build_integration"] == {
+        "entrypoint": (
+            "python scripts/build_manifest.py --receipt <build-receipt.json>"
+        ),
+        "status": "not_integrated",
+    }
+    gate = inventory_module._release_strict_gate(inventory)
+    assert "build_receipt_producteurs_non_intégrés" in gate["reasons"]
 
 
 def test_empty_manifest_is_model_valid_and_yields_no_observed_build(
@@ -1155,7 +1422,7 @@ def test_manifest_rejects_duplicate_manual_variant(
 
 @pytest.mark.parametrize(
     "mutation",
-    ["unrelated-head", "forged-branch", "clean-observed-build"],
+    ["unrelated-head", "forged-branch", "dirty-observed-build"],
 )
 def test_manifest_rejects_incoherent_envelope_provenance(
     tmp_path: Path,
@@ -1175,7 +1442,7 @@ def test_manifest_rejects_incoherent_envelope_provenance(
     elif mutation == "forged-branch":
         payload["provenance"]["branch"] = "forged"  # type: ignore[index]
     else:
-        payload["provenance"]["dirty"] = False  # type: ignore[index]
+        payload["provenance"]["dirty"] = True  # type: ignore[index]
     _write_manifest(tmp_path, payload)
 
     with pytest.raises(inventory_module.InventoryError, match="provenance"):
@@ -1511,7 +1778,10 @@ def test_manifest_rejects_tracked_source_set_changed_during_pdf_inspection(
         )
         return 7, None
 
-    with pytest.raises(inventory_module.InventoryError, match="sources suivies"):
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="état Git modifié|sources suivies",
+    ):
         inventory_module._load_observed_build_manifest(
             tmp_path,
             source_digest=SHA256_A,
