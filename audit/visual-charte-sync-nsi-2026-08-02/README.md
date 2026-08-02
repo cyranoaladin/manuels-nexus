@@ -1,6 +1,17 @@
 # Revue visuelle — synchronisation de la charte NSI
 
-Statut : **PREUVES PRODUITES — VALIDATION HUMAINE EN ATTENTE**.
+Statut : **REFLOW VISUEL NSI APPROUVÉ HUMAINEMENT — BASELINE INCHANGÉE**.
+
+## Décision humaine
+
+Le 2 août 2026, Alaeddine Ben Rhouma a validé le reflow visuel NSI présenté
+dans les deux planches avant/après de ce dossier, par la déclaration explicite
+« je valide ».
+
+Cette décision approuve comme changement attendu la redistribution visuelle
+produite par la synchronisation de la charte. Elle clôt la revue visuelle de ce
+lot, mais n'autorise aucune publication et ne constitue aucune validation
+scientifique, pédagogique ou éditoriale globale.
 
 Cette revue compare le rendu NSI au commit `e20adcd05105832504041fb2f9aa0e116e5bbdee`
 avec le rendu obtenu après synchronisation exacte de :
@@ -49,12 +60,12 @@ redistribution matérielle du contenu, notamment entre les pages 29 et 36. Cette
 ## Portée de la décision
 
 Aucune image de baseline existante n'a été modifiée. Le manifeste porte
-`baseline_updated=false`, `human_visual_decision=pending` et
+`baseline_updated=false`, `human_visual_decision=approved` et
 `release_acceptance=false`.
 
-Une approbation humaine future pourrait valider ce rendu comme changement
-attendu pour NSI. Elle ne vaudrait ni validation scientifique, ni validation
-éditoriale globale, ni autorisation de publication.
+Cette approbation vaut uniquement pour le reflow visuel NSI documenté par les
+preuves et empreintes de ce dossier. Elle ne vaut ni validation scientifique,
+ni validation éditoriale globale, ni autorisation de publication.
 
 ## Outils
 
