@@ -1,16 +1,17 @@
 <!-- AUTO-GENÉRÉ PAR inventory_collection.py -->
 # Mise à jour de la baseline d’anomalies
 
-- Date : `2026-07-30T08:22:11Z`
+- Date : `2026-07-31T19:59:48Z`
 - Approbateur : Alaeddine Ben Rhouma
-- Raison : État initial qualifié de la dette existante après stabilisation de la Phase 0, utilisé exclusivement pour détecter les régressions et les nouvelles anomalies.
-- SHA Git : `73bdaa2650eaaa1957b07f804516f9eafc933b67`
-- Empreinte précédente : `sha256:78528395d76290d20f0207c7e4b2b124e1c3d978d97296c81741c455496d6862`
-- Nouvelle empreinte : `sha256:e4b7a080cd8cefee11882d712fed9d1bceead5932a24e9c1291016cbc4093028`
+- Raison : Réalignement mécanique des qualification_digest après mise à jour des digests pré-matérialisation de la politique de qualification ; jeu approuvé inchangé : 2457 fingerprints, fingerprint digest et répartitions catégories/owners strictement conservés, aucun unqualified.
+- SHA Git : `0b48fe8984b9b44e3163b8fbd39704bdceead722`
+- Empreinte précédente : `sha256:e4b7a080cd8cefee11882d712fed9d1bceead5932a24e9c1291016cbc4093028`
+- Nouvelle empreinte : `sha256:9a9fc14bdf99751e6b10c2e8b8b603b4c4e10ac9fc1c58d23ce2d15e3984c0d7`
 
 ## Transition
 
-- new : 2457
+- new : 0
+- unchanged : 2461
   - `0039a2dd21589133`
   - `004bbf93370edfde`
   - `0051e512462af811`
@@ -267,6 +268,7 @@
   - `1953ee68eac0f457`
   - `19552e0820032663`
   - `196271dea0cc668e`
+  - `19669084dffa5d5b`
   - `1973e2179af732a0`
   - `19843e6165d7a60d`
   - `198ba78ee86e86d1`
@@ -372,6 +374,7 @@
   - `255b1892f79d909c`
   - `2570d1be3236b546`
   - `25f7d93662b4338a`
+  - `2695d63b022fe9f0`
   - `26a3b765fb67ad50`
   - `26a90712d8a30911`
   - `26d46b0911294336`
@@ -992,6 +995,7 @@
   - `62be33d13236cc45`
   - `62c3b5d2fedde328`
   - `62c4545b7e21a5b9`
+  - `62c72a29cc4eedb7`
   - `62ce4d36dfadbba4`
   - `62f10baafc7cd94e`
   - `62f3180cb289349f`
@@ -1806,6 +1810,7 @@
   - `b8ad05c30eed34f4`
   - `b8bc8b91e75b658f`
   - `b8fc6080763b26e5`
+  - `b912c1041392a181`
   - `b94a9b7b2551d867`
   - `b96c632038213851`
   - `b994e1da857e5e52`
@@ -2468,11 +2473,6 @@
   - `ffbed5423ba71796`
   - `ffc16f2950f758a0`
   - `ffdfa1fc8869ba1b`
-- unchanged : 4
-  - `19669084dffa5d5b`
-  - `2695d63b022fe9f0`
-  - `62c72a29cc4eedb7`
-  - `b912c1041392a181`
 - resolved : 0
 - regressions : 0
 - modified : 0
@@ -2480,6 +2480,7 @@
 ## Préconditions baseline_ready
 
 - phase0_tests : VERT
+  - bootstrap : qualification_digest_bootstrap: dérive fail-on-new vérifiée structurellement comme exclusivement constituée de qualification_digest (mêmes fingerprints, catégories, owners, dispositions, sévérités)
 - artifact_schemas : VERT
 - renderers : VERT
 - object_counts : VERT
