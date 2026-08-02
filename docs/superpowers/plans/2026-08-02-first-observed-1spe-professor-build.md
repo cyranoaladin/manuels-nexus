@@ -150,6 +150,10 @@ Avec un runner de subprocess factice, tester :
 - absence de reçu si `verify_pdf`, `pdfinfo` ou `pdffonts` échoue ;
 - collecte déterministe des versions de LuaLaTeX, `pdfinfo`, `pdffonts` et
   Python ;
+- environnement de chaque subprocessus avec `SOURCE_DATE_EPOCH` dérivé par
+  `git show -s --format=%ct HEAD`, `FORCE_SOURCE_DATE=1`, `TZ=UTC`,
+  `LC_ALL=C.UTF-8` et `PYTHONHASHSEED=0`, même si l'appelant fournit d'autres
+  valeurs ;
 - le mode sans `--record-observed` ne lance jamais le recorder racine.
 
 - [ ] **Step 2: Vérifier RED**
@@ -181,6 +185,10 @@ command = [
 
 Retourner immédiatement `1` sur tout échec. Ne créer le rapport et le reçu que
 si les trois passes et le préflight ont réussi.
+
+Ajouter un helper qui construit une copie de `os.environ` et remplace toujours
+les cinq variables reproductibles. Refuser une date de commit absente ou non
+entière avant le premier appel LuaLaTeX.
 
 - [ ] **Step 4: Écrire les tests RED du rapport et du reçu atomiques**
 
@@ -348,6 +356,9 @@ famille qui exige :
 
 - refus si le dépôt est sale avant la commande ;
 - succès depuis un dépôt propre et un manifeste valide vide mais périmé ;
+- appel de `_build_inventory_for_empty_manifest_refresh()` seulement après
+  `_validate_refresh_source_is_empty()` ;
+- aucun appel initial à `build_inventory()` dans ce chemin de bootstrap ;
 - enveloppe proposée au HEAD courant avec `dirty=false` ;
 - ajout exact d'un seul build ;
 - refus d'une enveloppe périmée si le manifeste contient déjà un build ;
@@ -370,11 +381,16 @@ Dans `record_from_receipt()` :
 
 1. résoudre la racine et refuser un état Git sale ;
 2. lire et valider le reçu ;
-3. dériver enveloppe, build et validateur ;
-4. appeler `record_successful_build()` avec une capacité interne explicite qui
+3. appeler `_validate_refresh_source_is_empty()` ;
+4. construire l'inventaire par
+   `_build_inventory_for_empty_manifest_refresh()` et le transmettre
+   explicitement à `_derive_receipt_evidence()` afin d'éviter tout second appel
+   au chargeur strict ;
+5. dériver enveloppe, build et validateur ;
+6. appeler `record_successful_build()` avec une capacité interne explicite qui
    autorise uniquement le remplacement d'un manifeste valide et vide ;
-5. pour tout manifeste non vide, conserver `_same_envelope` strict ;
-6. ne jamais exposer cette capacité dans la CLI.
+7. pour tout manifeste non vide, conserver `_same_envelope` strict ;
+8. ne jamais exposer cette capacité dans la CLI.
 
 La vérification propreté intervient avant toute écriture. La transaction doit
 continuer à épingler l'état Git et le fingerprint des preuves.
@@ -495,6 +511,60 @@ git status --short
 
 Expected: PASS et worktree propre. Si un test impose une correction, appliquer
 TDD et créer un commit de code ciblé avant le build réel.
+
+### Task 6 bis: Prouver la reproductibilité LuaLaTeX minimale
+
+**Files:**
+- Modify: `Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py`
+- Modify only if the RED test proves it necessary:
+  `Mathematiques/manuel-maths/scripts/assemble_manuel.py`
+
+- [ ] **Step 1: Écrire et lancer le test RED réel**
+
+Créer deux répertoires temporaires contenant le même document LuaLaTeX minimal,
+avec deux `run_id` distincts émis uniquement par `\typeout`. Compiler chacun
+avec la fonction et l'environnement exacts de l'assembleur.
+
+```bash
+python -m pytest \
+  Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py \
+  -q -k 'real_lualatex_reproducible_run_id'
+```
+
+Le test exige :
+
+- code `0` pour les deux builds ;
+- `run_id` A seulement dans le journal A et B seulement dans le journal B ;
+- SHA-256 identique pour les deux PDF ;
+- aucune date, heure ou ID de remorque variable extrait par `pdfinfo` ou
+  comparaison binaire.
+
+Expected initial: FAIL si la distribution TeX conserve une métadonnée variable.
+Un PASS immédiat est acceptable comme preuve que l'environnement suffit ;
+consigner ce résultat dans le commit de test.
+
+- [ ] **Step 2: Normaliser uniquement si RED**
+
+Si le test échoue, identifier avec `pdfinfo`, `qpdf --show-object=trailer` si
+disponible, et une comparaison hexadécimale la métadonnée variable. Ajouter au
+maître la primitive LuaTeX minimale qui supprime ou fixe uniquement cette
+information. Ne pas post-traiter le PDF et ne pas modifier le gabarit ou une
+baseline visuelle.
+
+- [ ] **Step 3: Vérifier GREEN et committer la preuve**
+
+```bash
+python -m pytest \
+  Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py -q
+git diff --check
+git add \
+  Mathematiques/manuel-maths/scripts/assemble_manuel.py \
+  Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py
+git commit -m "[TESTS] prouve le build LuaLaTeX déterministe"
+```
+
+Si le script n'a pas changé, ne le stage pas. Expected: test réel vert et
+worktree propre avant la matérialisation.
 
 ---
 

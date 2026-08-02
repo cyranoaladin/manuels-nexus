@@ -92,6 +92,23 @@ LaTeX, lancer LuaLaTeX et vérifier le PDF. Le mode d'enregistrement observé es
 explicite afin qu'un build de développement ordinaire ne modifie jamais un
 artefact d'audit suivi par Git.
 
+Chaque subprocessus de production reçoit un environnement reproductible dérivé
+du commit courant :
+
+- `SOURCE_DATE_EPOCH` vaut la date Unix du commit HEAD ;
+- `FORCE_SOURCE_DATE=1` ;
+- `TZ=UTC` ;
+- `LC_ALL=C.UTF-8` ;
+- `PYTHONHASHSEED=0`.
+
+L'environnement du processus appelant ne peut pas remplacer ces cinq valeurs.
+Un test LuaLaTeX minimal compile deux maîtres ne différant que par leur
+`run_id` et exige des PDF octet-identiques tout en retrouvant les deux IDs
+distincts dans les journaux. Si la distribution TeX conserve encore une
+métadonnée optionnelle variable, celle-ci doit être supprimée ou normalisée
+dans le maître avant la matérialisation ; aucun post-traitement opaque du PDF
+n'est autorisé.
+
 L'interface de commande ajoute un mode de type `--record-observed`. Dans ce
 mode, l'assembleur :
 
@@ -272,6 +289,16 @@ courante, ajoute le build et remplace le manifeste une seule fois. Un manifeste
 non vide ou un état Git modifié conserve les contrôles stricts existants ; aucun
 rafraîchissement intermédiaire sale n'est autorisé.
 
+La dérivation ne passe pas d'abord par le chargeur strict, qui rejetterait
+l'enveloppe vide périmée avant que la transaction puisse la remplacer. Après
+`_validate_refresh_source_is_empty()` et la preuve d'un dépôt propre,
+`record_from_receipt()` emploie explicitement
+`_build_inventory_for_empty_manifest_refresh()`. Cette capacité interne est la
+seule autorisée à ignorer les anciens digests d'un manifeste strictement vide.
+Elle reste inaccessible aux manifestes non vides ou invalides et à la CLI
+publique. L'inventaire borné ainsi obtenu est transmis à la dérivation des
+preuves ; il n'est pas recalculé par le chemin strict avant l'écriture.
+
 ## Séquence de matérialisation
 
 La séquence évite toute preuve construite depuis un état Git non versionné :
@@ -304,10 +331,17 @@ décision humaine, pas un contournement automatique.
 - l'écriture du rapport et du reçu est atomique ;
 - le mode ordinaire ne modifie pas le manifeste d'audit ;
 - le mode observé invoque la frontière CLI avec le reçu exact.
+- l'environnement des subprocessus écrase les cinq variables reproductibles
+  par les valeurs dérivées du HEAD ;
+- deux fixtures LuaLaTeX avec des `run_id` différents produisent des PDF
+  octet-identiques et des journaux portant chacun leur propre ID.
 
 ### Recorder et provenance
 
 - succès nominal depuis un commit propre ;
+- usage exclusif de `_build_inventory_for_empty_manifest_refresh()` après
+  validation d'un manifeste strictement vide ;
+- rejet d'un manifeste non vide ou invalide avant toute dérivation permissive ;
 - rejet des marqueurs manquants, dupliqués, inversés ou parasites ;
 - rejet d'une ouverture d'objet revendiquée manquante, externe ou ambiguë dans
   le `.fls` ;
