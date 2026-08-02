@@ -8676,6 +8676,133 @@ def test_generation_lock_covers_render_compare_clean_and_apply(
     assert observed[-2:] == [("clean", True), ("apply", True)]
 
 
+def test_generation_with_observed_manifest_accepts_only_its_owned_lock(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _seed_cli_repository(tmp_path)
+    observed_manifest = tmp_path / inventory_module.BUILD_MANIFEST_FILE
+    _write(
+        observed_manifest,
+        json.dumps(
+            {
+                "builds": [
+                    {"manual": "1SPE", "variant": "professeur"},
+                ]
+            }
+        ),
+    )
+    _track(tmp_path, inventory_module.BUILD_MANIFEST_FILE)
+    _commit_repository(tmp_path, "sources and observed manifest")
+    observed_build = {"manual": "1SPE", "variant": "professeur"}
+    received_lock_identities: list[dict[str, tuple[int, int]]] = []
+
+    def load_observed(
+        root: Path,
+        *,
+        owned_generation_lock: dict[str, tuple[int, int]] | None = None,
+        **_kwargs: object,
+    ) -> list[dict[str, str]]:
+        assert json.loads(observed_manifest.read_text(encoding="utf-8"))["builds"]
+        assert owned_generation_lock is not None
+        received_lock_identities.append(owned_generation_lock)
+        assert inventory_module._observed_git_state(root)[2] is True
+        assert inventory_module._observed_git_state(
+            root,
+            allowed_generation_paths=owned_generation_lock,
+        )[2] is False
+        return [observed_build]
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_observed_build_manifest",
+        load_observed,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_render_managed_artifacts",
+        lambda *_args, **_kwargs: {},
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_compare_rendered_artifacts",
+        lambda *_args, **_kwargs: [],
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_apply_atomic_payloads",
+        lambda *_args, **_kwargs: None,
+    )
+
+    result = inventory_module.build_inventory_artifacts(tmp_path)
+
+    assert result["inventory"]["observed_builds"] == [observed_build]
+    assert len(received_lock_identities) == 1
+    assert set(received_lock_identities[0]) == {
+        inventory_module.GENERIC_LOCK_FILE,
+    }
+    assert all(
+        value > 0
+        for value in received_lock_identities[0][
+            inventory_module.GENERIC_LOCK_FILE
+        ]
+    )
+    assert "owned_generation_lock" not in inspect.signature(
+        inventory_module.build_inventory
+    ).parameters
+    assert not (tmp_path / inventory_module.GENERIC_LOCK_FILE).exists()
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["arbitrary", "unowned", "substituted", "other-dirty"],
+)
+def test_observed_git_state_never_hides_unowned_generation_paths(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+) -> None:
+    _init_repository(tmp_path)
+    _commit_repository(tmp_path, "clean repository")
+    lock_path = tmp_path / inventory_module.GENERIC_LOCK_FILE
+
+    if mutation == "arbitrary":
+        arbitrary = tmp_path / "notes-utilisateur.txt"
+        _write(arbitrary, "WIP utilisateur\n")
+        metadata = arbitrary.stat(follow_symlinks=False)
+        assert inventory_module._observed_git_state(
+            tmp_path,
+            allowed_generation_paths={
+                arbitrary.name: (metadata.st_dev, metadata.st_ino),
+            },
+        )[2] is True
+        return
+
+    if mutation == "unowned":
+        _write(lock_path, "foreign lock\n")
+        owned_generation_lock = {
+            inventory_module.GENERIC_LOCK_FILE: (-1, -1),
+        }
+        assert inventory_module._observed_git_state(
+            tmp_path,
+            allowed_generation_paths=owned_generation_lock,
+        )[2] is True
+        return
+
+    with inventory_module._lock_generation(tmp_path) as owned_generation_lock:
+        if mutation == "substituted":
+            lock_path.unlink()
+            _write(lock_path, "replacement lock\n")
+        else:
+            _write(tmp_path / "notes-utilisateur.txt", "WIP utilisateur\n")
+
+        assert inventory_module._observed_git_state(
+            tmp_path,
+            allowed_generation_paths=owned_generation_lock,
+        )[2] is True
+
+
 def test_live_generation_lock_times_out_without_removing_owner_record(
     tmp_path: Path,
     inventory_module,

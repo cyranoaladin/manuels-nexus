@@ -1126,8 +1126,13 @@ def _observed_git_state(
     root: Path,
     *,
     ignore_manifest: bool = False,
+    allowed_generation_paths: Mapping[str, tuple[int, int]] | None = None,
 ) -> tuple[str, str, bool]:
-    status = _git_status(root, required=True)
+    status = _exclude_owned_generation_paths(
+        root,
+        _git_status(root, required=True),
+        allowed_generation_paths,
+    )
     dirty = bool(status) and not (
         ignore_manifest
         and all(
@@ -1230,6 +1235,7 @@ def _load_observed_build_manifest(
     python_counter: Any,
     source_files: tuple[str, ...] | None = None,
     empty_manifest_refresh_capability: object | None = None,
+    owned_generation_lock: Mapping[str, tuple[int, int]] | None = None,
 ) -> list[dict[str, Any]]:
     manifest_path = root / BUILD_MANIFEST_FILE
     if not manifest_path.exists() and not manifest_path.is_symlink():
@@ -1275,6 +1281,7 @@ def _load_observed_build_manifest(
         initial_git_state = _observed_git_state(
             root,
             ignore_manifest=ignore_manifest_dirty,
+            allowed_generation_paths=owned_generation_lock,
         )
         initial_tracked_source_set = _tracked_source_set_digest(root)
         head_sha, branch, dirty = initial_git_state
@@ -1302,6 +1309,7 @@ def _load_observed_build_manifest(
                 _observed_git_state(
                     root,
                     ignore_manifest=ignore_manifest_dirty,
+                    allowed_generation_paths=owned_generation_lock,
                 )
                 != initial_git_state
             ):
@@ -2486,6 +2494,52 @@ def _git_generation_status(
     ]
 
 
+def _path_matches_identity(
+    repository: Path,
+    path: str,
+    expected: tuple[int, int],
+) -> bool:
+    normalized = _normalize_path_for_match(path)
+    try:
+        metadata = (repository / normalized).stat(follow_symlinks=False)
+    except OSError:
+        return False
+    return (metadata.st_dev, metadata.st_ino) == expected
+
+
+def _exclude_owned_generation_paths(
+    repository: Path,
+    status: Iterable[GitStatusEntry],
+    allowed_generation_paths: Mapping[str, tuple[int, int]] | None,
+) -> list[GitStatusEntry]:
+    entries = list(status)
+    if not allowed_generation_paths:
+        return entries
+    allowed = {
+        _normalize_path_for_match(path): identity
+        for path, identity in allowed_generation_paths.items()
+    }
+
+    def is_owned_generation_lock(path: str) -> bool:
+        normalized = _normalize_path_for_match(path)
+        expected = allowed.get(normalized)
+        return (
+            normalized == GENERIC_LOCK_FILE
+            and expected is not None
+            and _path_matches_identity(repository, normalized, expected)
+        )
+
+    return [
+        entry
+        for entry in entries
+        if not _status_paths(entry)
+        or not all(
+            is_owned_generation_lock(path)
+            for path in _status_paths(entry)
+        )
+    ]
+
+
 def _repo_branch(root: Path, *, required: bool = False) -> str | None:
     branch = (
         _git_required_value(
@@ -2773,32 +2827,11 @@ def _ensure_clean_tree(
         if not branch:
             raise InventoryError("head clean mode requires an attached branch")
     status = _git_status(repository)
-    if allowed_generation_paths:
-        allowed = {
-            _normalize_path_for_match(path): identity
-            for path, identity in allowed_generation_paths.items()
-        }
-
-        def has_allowed_identity(path: str) -> bool:
-            normalized = _normalize_path_for_match(path)
-            expected = allowed.get(normalized)
-            if expected is None:
-                return False
-            try:
-                stat = (repository / normalized).stat(follow_symlinks=False)
-            except OSError:
-                return False
-            return (stat.st_dev, stat.st_ino) == expected
-
-        status = [
-            entry
-            for entry in status
-            if not _status_paths(entry)
-            or not all(
-                has_allowed_identity(path)
-                for path in _status_paths(entry)
-            )
-        ]
+    status = _exclude_owned_generation_paths(
+        repository,
+        status,
+        allowed_generation_paths,
+    )
     if status:
         raise InventoryError(f"{mode} clean mode found local modifications")
 
@@ -3547,6 +3580,7 @@ def _build_inventory(
     require_git_provenance: bool = False,
     qualification_today: datetime.date | None = None,
     empty_manifest_refresh_capability: object | None = None,
+    owned_generation_lock: Mapping[str, tuple[int, int]] | None = None,
 ) -> dict[str, Any]:
     """Build a deterministic canonical model from tracked chapter sources."""
 
@@ -4010,6 +4044,7 @@ def _build_inventory(
         python_counter=_page_count_with_python,
         source_files=model_sources,
         empty_manifest_refresh_capability=empty_manifest_refresh_capability,
+        owned_generation_lock=owned_generation_lock,
     )
     inventory["observed_build_coverage"] = _observed_build_coverage(
         inventory["declared_assemblies"],
@@ -7259,10 +7294,11 @@ def build_inventory_artifacts(
         )
         if baseline_path:
             baseline_failures = _evaluate_baseline(
-                build_inventory(
+                _build_inventory(
                     root,
                     managed_output_paths=managed_output_paths,
                     require_git_provenance=True,
+                    owned_generation_lock=lock_identity,
                 ),
                 Path(baseline_path),
             )
@@ -7270,10 +7306,11 @@ def build_inventory_artifacts(
                 raise InventoryError(
                     "baseline invalide: " + ", ".join(baseline_failures)
                 )
-        inventory = build_inventory(
+        inventory = _build_inventory(
             root,
             managed_output_paths=managed_output_paths,
             require_git_provenance=True,
+            owned_generation_lock=lock_identity,
         )
         rendered = _render_managed_artifacts(
             inventory,
