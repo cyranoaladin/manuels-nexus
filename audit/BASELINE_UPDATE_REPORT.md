@@ -1,16 +1,202 @@
 <!-- AUTO-GENÉRÉ PAR inventory_collection.py -->
 # Mise à jour de la baseline d’anomalies
 
-- Date : `2026-07-31T19:59:48Z`
+- Date : `2026-08-02T13:30:16Z`
 - Approbateur : Alaeddine Ben Rhouma
-- Raison : Réalignement mécanique des qualification_digest après mise à jour des digests pré-matérialisation de la politique de qualification ; jeu approuvé inchangé : 2457 fingerprints, fingerprint digest et répartitions catégories/owners strictement conservés, aucun unqualified.
-- SHA Git : `0b48fe8984b9b44e3163b8fbd39704bdceead722`
-- Empreinte précédente : `sha256:e4b7a080cd8cefee11882d712fed9d1bceead5932a24e9c1291016cbc4093028`
-- Nouvelle empreinte : `sha256:9a9fc14bdf99751e6b10c2e8b8b603b4c4e10ac9fc1c58d23ce2d15e3984c0d7`
+- Raison : Extension de la baseline Phase 0 aux 186 fingerprints importés par la fusion de origin/main, exclusivement comme open_debt pour le contrôle de non-régression; release_acceptance=false.
+- SHA Git : `c3ada696582306916704b211dcac8d43489ba4dd`
+- Empreinte précédente : `sha256:9a9fc14bdf99751e6b10c2e8b8b603b4c4e10ac9fc1c58d23ce2d15e3984c0d7`
+- Nouvelle empreinte : `sha256:714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff`
 
 ## Transition
 
-- new : 0
+- new : 186
+  - `0358c119f7c54727`
+  - `04461bdbd7644c20`
+  - `0707ac25002a78b2`
+  - `0911380ab77cf7cc`
+  - `092c5991e8bdcd19`
+  - `0b2f44a576c189d0`
+  - `0cf6657adc812e42`
+  - `0d1aee76c43678c9`
+  - `0e5d826e0447c071`
+  - `0f721d996ab31423`
+  - `13add6058709c8e7`
+  - `14a4565f105dd51f`
+  - `151d579d96f818ec`
+  - `15db1c4d87676590`
+  - `176abfd5db19805a`
+  - `1828171f0d270cd0`
+  - `185f95de7adc90c7`
+  - `185fc2d7ef2b3e72`
+  - `188a4868d0a5299d`
+  - `18adb81bc85debda`
+  - `190b570d0490e1ee`
+  - `1c990baa2e59eee0`
+  - `1d2fef8ba192a43d`
+  - `1f586591f4d217c7`
+  - `21c3ed0ba7d01391`
+  - `21c41b4852dfe8ed`
+  - `22633b0b80d45f8f`
+  - `232efd405673fe09`
+  - `24d2baadd930660c`
+  - `26464e4fd51a5c15`
+  - `27ca9571248c061d`
+  - `2a92e59e1df235d3`
+  - `2c1e39882f23f8c4`
+  - `2e64d04200c04b03`
+  - `2f2f2747eb43f2a8`
+  - `2f703d8d416d56ae`
+  - `3181d65079c05033`
+  - `3324c3f5fe96d88b`
+  - `33e81aac96186d33`
+  - `34653a930ff22020`
+  - `355954df347c807b`
+  - `35fc2093fe4e7fb2`
+  - `36575f01663ad73f`
+  - `377ead368c326336`
+  - `392f12d8a44da57a`
+  - `3c295a547bb5eac8`
+  - `3c912e00de40feae`
+  - `3ec632c82cf98584`
+  - `3ed4af37b8b1874b`
+  - `3fe0d4752447cf86`
+  - `4013a4182e6b0439`
+  - `40532b23b42d06b3`
+  - `41c5340fe5650e8a`
+  - `43c38ca91780e9c9`
+  - `45d47722f571a559`
+  - `4665d64fce90ee5d`
+  - `46a1728464f85c8b`
+  - `4796eab5d183f95c`
+  - `4835f618d534313d`
+  - `4c88c2bab3301635`
+  - `4ccd6d3705650caf`
+  - `4dc14c0d3fa6767b`
+  - `4e09fd00fb986d2b`
+  - `4e0b874c85dfe54c`
+  - `5146a8c57f06f468`
+  - `516a69f4c0b462a2`
+  - `55b42f69a1c98425`
+  - `571af2becac0c729`
+  - `5865fe0095d760c7`
+  - `5b3e7302f0b7221a`
+  - `5c0bef0a9d5d0f4c`
+  - `5c189df24a83ee55`
+  - `5e42e67b591ee464`
+  - `5f2fbf0baea95975`
+  - `6068dd5ddf27f888`
+  - `60ee8a32d69b9a62`
+  - `61ec5d7e66030eac`
+  - `61fd75db12929014`
+  - `63d1da52edacb10f`
+  - `6539147f3f7b7aa3`
+  - `659289cf3b7cf2ec`
+  - `65a53552a607051a`
+  - `66c49946c6cd30cb`
+  - `66df96f7e93d70e5`
+  - `673a52bf4ee59b6e`
+  - `69451b09df5cf410`
+  - `6be416f34cdda15d`
+  - `6c32552d1f34d18d`
+  - `703c11493495b701`
+  - `7226a44ea62de067`
+  - `731a7990341915a0`
+  - `7343e18331d5af4d`
+  - `734eeeaff08e55f2`
+  - `73f79d51cd05f184`
+  - `773eee742327005c`
+  - `7a0e24caea9e29b5`
+  - `7a15dcc5a2d2cdb9`
+  - `7ab098cd3adf8dec`
+  - `7abd332728cd545d`
+  - `7abf7a52542ac8f1`
+  - `7bed694641ba8955`
+  - `7d9920d36df36a5c`
+  - `7e43a7bf0e52b053`
+  - `7ed7dfbf775e1ad6`
+  - `80f4e1d64b3e40eb`
+  - `81d969ef641a0c8b`
+  - `82afa3ccefc9611a`
+  - `83f5ad1d46b08835`
+  - `8573b356f26038a4`
+  - `886c6853cf5db1b6`
+  - `8fdcfc798a5c1494`
+  - `90032d61832adf34`
+  - `91a3167946827aa9`
+  - `929e8b14e2b7cfe0`
+  - `940c2a763733afa9`
+  - `965509e3d28232cd`
+  - `9a6938cdc84bd099`
+  - `9dbc047e4c7d4b84`
+  - `9e14c8ac59275f19`
+  - `9eb6a433d9dc9dad`
+  - `a23cbd1262c2ce39`
+  - `a3d8028f3f119334`
+  - `a4f0ce6133b1c265`
+  - `aae3ad3b02f938bf`
+  - `ad6646f8d69d8daa`
+  - `ae22e1d6effc02a8`
+  - `ae4eec44d93ae5a1`
+  - `b31b045dc409980b`
+  - `b386b240c6c27d71`
+  - `b438beba0c2702ba`
+  - `b61762e7fcb06dcc`
+  - `b72d81713515f16e`
+  - `ba6aaedbf2b6aab7`
+  - `bce9f9a332718916`
+  - `bfc5a6cf4002cfd5`
+  - `c0058a98096a8682`
+  - `c01684f2c448d1a6`
+  - `c060f89d9eb56d90`
+  - `c08ce52cdaf32c2d`
+  - `c16b536651b52f7b`
+  - `c16ffd2c4b5ddac4`
+  - `c1a65776dc2757c8`
+  - `c1d692cfd810dd1b`
+  - `c1e9c9377c8aeb94`
+  - `c29919cd56483c7a`
+  - `c7e857927f2cadf6`
+  - `c91b00a142582579`
+  - `c99cb9859619660e`
+  - `ca4d8a0a77abe275`
+  - `ca7fe3d8f8045ed4`
+  - `cb50dfce7cc2eb10`
+  - `cc050bbd320a0c01`
+  - `ccc6b115417f96ae`
+  - `cfd9c27d2385ebea`
+  - `d074b58324d59790`
+  - `d2cddaa993acf77f`
+  - `d32400ea80b8df98`
+  - `d36a8acd256123c6`
+  - `d4f37fc58ece14e5`
+  - `d82374b2cf03d186`
+  - `d82a804a40744c5e`
+  - `d9ee524ca65532ef`
+  - `db05a9b05279e165`
+  - `db17baf90b130a59`
+  - `dbb1e7ee91e59e6f`
+  - `de7dbd86ad33fede`
+  - `df835024bd36269b`
+  - `dff4ab660dea5fa3`
+  - `e22c59e3fd0a4dcc`
+  - `eaf2333e0893a969`
+  - `ee73bf0d74eb4911`
+  - `f09df5056452b08c`
+  - `f0c8688d237ed1df`
+  - `f4995694ce0acad8`
+  - `f57dd4e8f0861d7c`
+  - `f5aa9798c8b40e04`
+  - `f65492f4f0006c11`
+  - `f733c5b63cbb4911`
+  - `f8a3729f976dafcb`
+  - `f8aa2d9315185d5e`
+  - `f9a22abdc6c43912`
+  - `fa912a3efae992e1`
+  - `fa9cb0f6646acfdf`
+  - `fb073f7b98b7a96a`
+  - `fb3d1d1491cde736`
+  - `ffd500c3348d0105`
 - unchanged : 2461
   - `0039a2dd21589133`
   - `004bbf93370edfde`
@@ -2480,7 +2666,6 @@
 ## Préconditions baseline_ready
 
 - phase0_tests : VERT
-  - bootstrap : qualification_digest_bootstrap: dérive fail-on-new vérifiée structurellement comme exclusivement constituée de qualification_digest (mêmes fingerprints, catégories, owners, dispositions, sévérités)
 - artifact_schemas : VERT
 - renderers : VERT
 - object_counts : VERT
