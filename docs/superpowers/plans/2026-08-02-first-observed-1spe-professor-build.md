@@ -151,9 +151,11 @@ Avec un runner de subprocess factice, tester :
 - collecte déterministe des versions de LuaLaTeX, `pdfinfo`, `pdffonts` et
   Python ;
 - environnement de chaque subprocessus avec `SOURCE_DATE_EPOCH` dérivé par
-  `git show -s --format=%ct HEAD`, `FORCE_SOURCE_DATE=1`, `TZ=UTC`,
-  `LC_ALL=C.UTF-8` et `PYTHONHASHSEED=0`, même si l'appelant fournit d'autres
-  valeurs ;
+  le contrôle versionné, `FORCE_SOURCE_DATE=1`, `TZ=UTC`, `LC_ALL=C.UTF-8` et
+  `PYTHONHASHSEED=0`, même si l'appelant fournit d'autres valeurs ;
+- rejet du contrôle absent, mal formé, d'un `source_commit` inexistant ou non
+  ancêtre, et d'un epoch différent de `git show -s --format=%ct
+  <source_commit>` ;
 - le mode sans `--record-observed` ne lance jamais le recorder racine.
 
 - [ ] **Step 2: Vérifier RED**
@@ -186,9 +188,11 @@ command = [
 Retourner immédiatement `1` sur tout échec. Ne créer le rapport et le reçu que
 si les trois passes et le préflight ont réussi.
 
-Ajouter un helper qui construit une copie de `os.environ` et remplace toujours
-les cinq variables reproductibles. Refuser une date de commit absente ou non
-entière avant le premier appel LuaLaTeX.
+Ajouter un helper qui charge
+`Mathematiques/manuel-maths/config/reproducible-build.json`, exige exactement
+`schema_version`, `source_commit` et `source_date_epoch`, vérifie le commit et
+construit une copie de `os.environ` en remplaçant toujours les cinq variables
+reproductibles. Refuser le contrôle avant le premier appel LuaLaTeX.
 
 - [ ] **Step 4: Écrire les tests RED du rapport et du reçu atomiques**
 
@@ -218,6 +222,15 @@ et le reçu étendu par :
     "fls": "sha256:<64 hex>",
     "pdf": "sha256:<64 hex>",
     "preflight": "sha256:<64 hex>"
+  },
+  "reproducibility": {
+    "config_path": "Mathematiques/manuel-maths/config/reproducible-build.json",
+    "source_commit": "<40 hex>",
+    "source_date_epoch": 1,
+    "force_source_date": "1",
+    "timezone": "UTC",
+    "locale": "C.UTF-8",
+    "pythonhashseed": "0"
   }
 }
 ```
@@ -279,6 +292,7 @@ git commit -m "[PDF] produit le reçu post-préflight 1SPE"
 
 **Files:**
 - Modify: `scripts/build_manifest.py`
+- Modify: `audit/schemas/v1/build-manifest.schema.json`
 - Modify: `tests/test_build_manifest.py`
 
 - [ ] **Step 1: Mettre les fixtures au nouveau contrat et écrire les tests RED**
@@ -294,6 +308,9 @@ git commit -m "[PDF] produit le reçu post-préflight 1SPE"
 - maître absent des `INPUT` du `.fls` ;
 - maître, preuve ou objet via symlink / `..` / chemin absolu ;
 - version d'outil manquante, forgée ou différente du recalcul local ;
+- contrôle de reproductibilité absent ou différent entre config, reçu et
+  préflight ;
+- `source_commit` non ancêtre ou epoch différent du timestamp Git ;
 - entrée TeX Live absolue supplémentaire ignorée ;
 - preuve modifiée pendant la validation finale.
 
@@ -321,6 +338,8 @@ Ajouter des helpers purs pour :
 - exiger `master_path` dans les entrées Git-canoniques du `.fls` ;
 - capturer les digests initiaux de toutes les preuves et les recalculer dans le
   callback `validator` avant publication du manifeste.
+- copier l'objet `reproducibility` validé dans le build observé et le rendre
+  obligatoire dans le schéma du manifeste.
 
 Les entrées absolues externes du `.fls` restent ignorées. Un objet déclaré, le
 maître ou une dépendance générée revendiquée ne peut jamais être externe.
@@ -338,7 +357,10 @@ Expected: tous les tests du module passent.
 
 ```bash
 git diff --check
-git add scripts/build_manifest.py tests/test_build_manifest.py
+git add \
+  scripts/build_manifest.py \
+  audit/schemas/v1/build-manifest.schema.json \
+  tests/test_build_manifest.py
 git commit -m "[AUDIT] lie le reçu aux preuves de compilation"
 ```
 
@@ -521,9 +543,12 @@ TDD et créer un commit de code ciblé avant le build réel.
 
 - [ ] **Step 1: Écrire et lancer le test RED réel**
 
-Créer deux répertoires temporaires contenant le même document LuaLaTeX minimal,
-avec deux `run_id` distincts émis uniquement par `\typeout`. Compiler chacun
-avec la fonction et l'environnement exacts de l'assembleur.
+Dans un dépôt Git temporaire, créer un commit source A et un contrôle qui pointe
+vers A et son timestamp, puis commiter ce contrôle. Créer deux répertoires
+contenant le même document LuaLaTeX minimal, avec deux `run_id` distincts émis
+uniquement par `\typeout`. Compiler le premier, commiter un artefact factice
+pour changer HEAD et son timestamp sans modifier le contrôle, puis compiler le
+second avec la fonction et l'environnement exacts de l'assembleur.
 
 ```bash
 python -m pytest \
@@ -534,6 +559,8 @@ python -m pytest \
 Le test exige :
 
 - code `0` pour les deux builds ;
+- HEAD et timestamps différents mais `SOURCE_DATE_EPOCH` identique, issu du
+  contrôle ;
 - `run_id` A seulement dans le journal A et B seulement dans le journal B ;
 - SHA-256 identique pour les deux PDF ;
 - aucune date, heure ou ID de remorque variable extrait par `pdfinfo` ou
@@ -565,6 +592,49 @@ git commit -m "[TESTS] prouve le build LuaLaTeX déterministe"
 
 Si le script n'a pas changé, ne le stage pas. Expected: test réel vert et
 worktree propre avant la matérialisation.
+
+### Task 6 ter: Versionner l'epoch canonique du build réel
+
+**Files:**
+- Create: `Mathematiques/manuel-maths/config/reproducible-build.json`
+
+- [ ] **Step 1: Dériver le contrôle du HEAD d'instrumentation**
+
+Depuis un worktree propre, capturer :
+
+```bash
+git rev-parse HEAD
+git show -s --format=%ct HEAD
+```
+
+Écrire avec `apply_patch` le JSON exact :
+
+```json
+{
+  "schema_version": 1,
+  "source_commit": "<HEAD capturé>",
+  "source_date_epoch": 1
+}
+```
+
+Remplacer `1` par le timestamp capturé. Le fichier ne contient aucune date
+murale produite au runtime ni secret.
+
+- [ ] **Step 2: Valider puis committer le contrôle seul**
+
+```bash
+python -m json.tool \
+  Mathematiques/manuel-maths/config/reproducible-build.json >/dev/null
+python -m pytest \
+  Mathematiques/manuel-maths/tests/test_assemble_manuel_observed.py \
+  -q -k 'reproducibility_config or real_lualatex_reproducible_run_id'
+git diff --check
+git add Mathematiques/manuel-maths/config/reproducible-build.json
+git commit -m "[PDF] fixe l'epoch reproductible du manuel 1SPE"
+```
+
+Expected: le `source_commit` reste l'ancêtre immédiat du commit de contrôle et
+son timestamp correspond à `source_date_epoch`.
 
 ---
 

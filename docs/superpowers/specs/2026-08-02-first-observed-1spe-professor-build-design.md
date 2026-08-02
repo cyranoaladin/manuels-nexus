@@ -92,22 +92,31 @@ LaTeX, lancer LuaLaTeX et vérifier le PDF. Le mode d'enregistrement observé es
 explicite afin qu'un build de développement ordinaire ne modifie jamais un
 artefact d'audit suivi par Git.
 
-Chaque subprocessus de production reçoit un environnement reproductible dérivé
-du commit courant :
+Chaque subprocessus de production reçoit un environnement reproductible défini
+par le contrôle versionné
+`Mathematiques/manuel-maths/config/reproducible-build.json`. Ce fichier fermé
+contient exactement `schema_version=1`, un `source_commit` Git de 40 caractères
+hexadécimaux et son `source_date_epoch` entier positif. Il est créé et commité
+après l'instrumentation, avant le premier PDF. L'assembleur vérifie que le
+commit existe, qu'il est ancêtre de HEAD et que son timestamp Git est exactement
+l'epoch déclaré.
 
-- `SOURCE_DATE_EPOCH` vaut la date Unix du commit HEAD ;
+Le contrôle fournit les valeurs suivantes :
+
+- `SOURCE_DATE_EPOCH` vaut le `source_date_epoch` versionné ;
 - `FORCE_SOURCE_DATE=1` ;
 - `TZ=UTC` ;
 - `LC_ALL=C.UTF-8` ;
 - `PYTHONHASHSEED=0`.
 
 L'environnement du processus appelant ne peut pas remplacer ces cinq valeurs.
-Un test LuaLaTeX minimal compile deux maîtres ne différant que par leur
-`run_id` et exige des PDF octet-identiques tout en retrouvant les deux IDs
-distincts dans les journaux. Si la distribution TeX conserve encore une
-métadonnée optionnelle variable, celle-ci doit être supprimée ou normalisée
-dans le maître avant la matérialisation ; aucun post-traitement opaque du PDF
-n'est autorisé.
+Le commit qui ajoute le PDF ne modifie jamais le contrôle : les deux builds
+utilisent donc la même valeur, même si leurs HEAD et timestamps diffèrent. Un
+test LuaLaTeX minimal reproduit cette séquence avec deux commits et deux
+`run_id`, exige des PDF octet-identiques et retrouve les deux IDs distincts dans
+les journaux. Si la distribution TeX conserve encore une métadonnée optionnelle
+variable, celle-ci doit être supprimée ou normalisée dans le maître avant la
+matérialisation ; aucun post-traitement opaque du PDF n'est autorisé.
 
 L'interface de commande ajoute un mode de type `--record-observed`. Dans ce
 mode, l'assembleur :
@@ -203,6 +212,9 @@ Le contrat est étendu par les champs obligatoires exacts suivants :
 - `master_path` : chemin canonique du maître LaTeX sous la racine Git ;
 - `evidence_sha256` : objet fermé contenant exactement `master`, `log`, `fls`,
   `pdf` et `preflight`, chacun sous la forme `sha256:<64 hex>`.
+- `reproducibility` : objet fermé contenant le chemin constant du contrôle,
+  `source_commit`, `source_date_epoch` et les quatre valeurs constantes
+  `FORCE_SOURCE_DATE`, `TZ`, `LC_ALL`, `PYTHONHASHSEED`.
 
 Le rapport de préflight contient le même `run_id`, le même chemin PDF, le même
 digest, la pagination, les contrôles et les versions d'outils. Le recorder :
@@ -211,14 +223,21 @@ digest, la pagination, les contrôles et les versions d'outils. Le recorder :
 2. compare son digest au champ `evidence_sha256` ;
 3. vérifie le `run_id` dans le maître, le journal et le préflight ;
 4. vérifie que le maître figure parmi les `INPUT` du `.fls` ;
-5. recalcule localement les versions de LuaLaTeX, `pdfinfo`, `pdffonts` et
+5. recharge le contrôle de reproductibilité, revérifie le commit, l'epoch et
+   l'égalité avec le préflight et le reçu ;
+6. recalcule localement les versions de LuaLaTeX, `pdfinfo`, `pdffonts` et
    Python, puis exige leur égalité avec le rapport et le reçu ;
-6. relit et re-hashe toutes les preuves dans le validateur transactionnel juste
+7. relit et re-hashe toutes les preuves dans le validateur transactionnel juste
    avant le remplacement du manifeste.
 
 Le digest du rapport est placé dans le reçu après l'écriture atomique du
 rapport ; le rapport ne se hashe pas lui-même. Le reçu est ensuite écrit
 atomiquement. Cette direction unique évite tout cycle cryptographique.
+
+Le build enregistré dans `audit/BUILD_MANIFEST.json` conserve le même objet
+`reproducibility`. Le schéma du manifeste le rend obligatoire pour chaque build
+observé, afin que l'identité binaire puisse être reliée à un epoch auditable et
+non à l'environnement implicite de l'appelant.
 
 Pour ce premier producteur, `generated_dependencies` peut être vide : le maître
 LaTeX généré par Python n'est pas une sortie déclarée par le `.fls` et n'entre
@@ -304,14 +323,16 @@ preuves ; il n'est pas recalculé par le chemin strict avant l'écriture.
 La séquence évite toute preuve construite depuis un état Git non versionné :
 
 1. commiter l'instrumentation et ses tests — commit A ;
-2. compiler depuis A et contrôler la taille du PDF ;
-3. ajouter explicitement le PDF ignoré, puis le commiter seul — commit B ;
-4. depuis B propre, recompiler en mode observé ;
-5. exiger que le PDF regénéré soit octet pour octet identique à celui de B ;
-6. enregistrer le reçu contre B en remplaçant transactionnellement le manifeste
+2. écrire le contrôle de reproductibilité à partir du SHA et du timestamp de A,
+   puis le commiter seul — commit E ;
+3. compiler depuis E et contrôler la taille du PDF ;
+4. ajouter explicitement le PDF ignoré, puis le commiter seul — commit B ;
+5. depuis B propre, recompiler en mode observé avec le contrôle inchangé ;
+6. exiger que le PDF regénéré soit octet pour octet identique à celui de B ;
+7. enregistrer le reçu contre B en remplaçant transactionnellement le manifeste
    vide périmé par l'enveloppe B et le premier build ;
-7. commiter séparément `audit/BUILD_MANIFEST.json` — commit C ;
-8. régénérer les rapports dérivés et les commiter séparément si leur contenu
+8. commiter séparément `audit/BUILD_MANIFEST.json` — commit C ;
+9. régénérer les rapports dérivés et les commiter séparément si leur contenu
    change — commit D.
 
 Le PDF est refusé avant ajout si sa taille atteint 90 Mio, plafond conservateur
@@ -332,9 +353,12 @@ décision humaine, pas un contournement automatique.
 - le mode ordinaire ne modifie pas le manifeste d'audit ;
 - le mode observé invoque la frontière CLI avec le reçu exact.
 - l'environnement des subprocessus écrase les cinq variables reproductibles
-  par les valeurs dérivées du HEAD ;
-- deux fixtures LuaLaTeX avec des `run_id` différents produisent des PDF
-  octet-identiques et des journaux portant chacun leur propre ID.
+  par les valeurs du contrôle versionné ;
+- un contrôle invalide, un commit absent/non ancêtre ou un epoch différent du
+  timestamp Git est rejeté avant LuaLaTeX ;
+- deux fixtures LuaLaTeX séparées par un commit d'artefact, avec des `run_id`
+  différents mais le même contrôle, produisent des PDF octet-identiques et des
+  journaux portant chacun leur propre ID.
 
 ### Recorder et provenance
 
