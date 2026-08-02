@@ -503,12 +503,50 @@ def _write_manifest(repository: Path, payload: dict[str, object]) -> None:
         json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True),
         encoding="utf-8",
     )
+    if payload.get("builds"):
+        subprocess.run(
+            ["git", "-C", str(repository), "add", "audit/BUILD_MANIFEST.json"],
+            check=True,
+        )
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(repository),
+                "-c",
+                "user.name=Observed Build Tests",
+                "-c",
+                "user.email=observed@example.invalid",
+                "commit",
+                "-qm",
+                "tracked observed manifest fixture",
+            ],
+            check=True,
+        )
 
 
 def _load(
     inventory_module,
     repository: Path,
 ) -> list[dict[str, object]]:
+    manifest = repository / "audit/BUILD_MANIFEST.json"
+    tracked = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "ls-files",
+            "--error-unmatch",
+            "audit/BUILD_MANIFEST.json",
+        ],
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).returncode == 0
+    if not tracked:
+        metadata = manifest.lstat()
+        if stat.S_ISREG(metadata.st_mode) and metadata.st_nlink == 1:
+            _commit_all(repository, "tracked manifest loader fixture")
     return inventory_module._load_observed_build_manifest(
         repository,
         source_digest=SHA256_A,
@@ -709,6 +747,28 @@ def test_committed_manifest_rejects_head_changed_during_ancestor_validation(
             python_counter=lambda _path: (None, "unused"),
         )
     assert inspected is True
+
+
+@pytest.mark.parametrize("index_state", ["unstaged", "staged"])
+def test_committed_manifest_rejects_canonical_manifest_only_dirty(
+    tmp_path: Path,
+    inventory_module,
+    index_state: str,
+) -> None:
+    _committed_observed_manifest_repository(tmp_path)
+    manifest = tmp_path / "audit/BUILD_MANIFEST.json"
+    modified = manifest.read_bytes().replace(b"\n", b"\r\n")
+    manifest.write_bytes(modified)
+    if index_state == "staged":
+        subprocess.run(
+            ["git", "-C", str(tmp_path), "add", "audit/BUILD_MANIFEST.json"],
+            check=True,
+        )
+
+    with pytest.raises(inventory_module.InventoryError, match="provenance|sale"):
+        _load(inventory_module, tmp_path)
+
+    assert manifest.read_bytes() == modified
 
 
 def test_observed_build_integration_remains_exactly_not_integrated(

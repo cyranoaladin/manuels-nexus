@@ -1122,11 +1122,18 @@ class _ConfinedJsonSnapshot:
         self.close()
 
 
-def _observed_git_state(root: Path) -> tuple[str, str, bool]:
+def _observed_git_state(
+    root: Path,
+    *,
+    ignore_manifest: bool = False,
+) -> tuple[str, str, bool]:
     status = _git_status(root, required=True)
-    dirty_outside_manifest = any(
-        any(path != BUILD_MANIFEST_FILE for path in paths)
-        for _marker, paths in status
+    dirty = bool(status) and not (
+        ignore_manifest
+        and all(
+            all(path == BUILD_MANIFEST_FILE for path in paths)
+            for _marker, paths in status
+        )
     )
     return (
         _git_required_value(
@@ -1139,7 +1146,7 @@ def _observed_git_state(root: Path) -> tuple[str, str, bool]:
             ("branch", "--show-current"),
             description="git branch",
         ),
-        dirty_outside_manifest,
+        dirty,
     )
 
 
@@ -1264,7 +1271,11 @@ def _load_observed_build_manifest(
         ):
             raise InventoryError("model_digest du manifeste de build incohérent")
 
-        initial_git_state = _observed_git_state(root)
+        ignore_manifest_dirty = may_refresh_empty
+        initial_git_state = _observed_git_state(
+            root,
+            ignore_manifest=ignore_manifest_dirty,
+        )
         initial_tracked_source_set = _tracked_source_set_digest(root)
         head_sha, branch, dirty = initial_git_state
         provenance = payload.get("provenance")
@@ -1272,7 +1283,9 @@ def _load_observed_build_manifest(
             raise InventoryError("provenance du manifeste invalide")
         if provenance.get("branch") != branch:
             raise InventoryError("branche de provenance du manifeste incohérente")
-        if builds and (provenance.get("dirty") is not False or dirty):
+        if dirty:
+            raise InventoryError("dépôt Git sale pour le manifeste observé")
+        if builds and provenance.get("dirty") is not False:
             raise InventoryError(
                 "provenance du manifeste sale pour des builds observés"
             )
@@ -1285,7 +1298,13 @@ def _load_observed_build_manifest(
 
         def revalidate_state() -> None:
             snapshot.verify()
-            if _observed_git_state(root) != initial_git_state:
+            if (
+                _observed_git_state(
+                    root,
+                    ignore_manifest=ignore_manifest_dirty,
+                )
+                != initial_git_state
+            ):
                 raise InventoryError(
                     "état Git modifié pendant la validation du manifeste"
                 )
