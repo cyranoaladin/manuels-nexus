@@ -148,6 +148,14 @@ def _receipt(
     }
 
 
+def _trace_token(path: str) -> str:
+    return hashlib.sha256(path.encode("utf-8")).hexdigest()[:40]
+
+
+def _trace_marker(kind: str, path: str) -> str:
+    return f"NEXUS_OBJECT_{kind}:{_trace_token(path)}"
+
+
 def _install_schema(repository: Path) -> None:
     schema = ROOT / "audit/schemas/v1/build-manifest.schema.json"
     target = repository / "audit/schemas/v1/build-manifest.schema.json"
@@ -1875,7 +1883,15 @@ def test_receipt_derivation_recomputes_all_derived_evidence(
     pdf_path.parent.mkdir(parents=True)
     pdf_path.write_bytes(pdf_bytes)
     (tmp_path / "build/manual.log").write_text(
-        "Output written on MANUEL_1SPE_professeur.pdf (11 pages).",
+        "\n".join(
+            [
+                _trace_marker("BEGIN", "OBJ-2"),
+                _trace_marker("END", "OBJ-2"),
+                _trace_marker("BEGIN", "OBJ-1"),
+                _trace_marker("END", "OBJ-1"),
+                "Output written on MANUEL_1SPE_professeur.pdf (11 pages).",
+            ]
+        ),
         encoding="utf-8",
     )
     (tmp_path / "build/manual.fls").write_text(
@@ -1963,10 +1979,235 @@ def test_receipt_derivation_recomputes_all_derived_evidence(
         "sha256:" + hashlib.sha256(pdf_bytes).hexdigest()
     )
     assert build["page_count"] == 11
+    assert build["included_objects"] == ["OBJ-2", "OBJ-1"]
+    assert build["excluded_objects"] == ["OBJ-EXCLUDED"]
+    assert build["ordered_trace"] == ["OBJ-2", "OBJ-1"]
     proposed = dict(envelope)
     proposed["builds"] = [build]
     proposed["build_state_digest"] = _state_digest([build])
     validator(proposed)
+
+
+def test_ordered_object_trace_uses_markers_not_fls_order(
+    manifest_module,
+) -> None:
+    log = "\n".join(
+        [
+            _trace_marker("BEGIN", "chapitres/objet-2.tex"),
+            _trace_marker("END", "chapitres/objet-2.tex"),
+            _trace_marker("BEGIN", "chapitres/objet-1.tex"),
+            _trace_marker("END", "chapitres/objet-1.tex"),
+        ]
+    )
+
+    trace = manifest_module._ordered_object_trace(
+        log,
+        traced_inputs=[
+            "chapitres/objet-1.tex",
+            "chapitres/non-marque.tex",
+            "chapitres/objet-2.tex",
+        ],
+        declared_objects=[
+            "chapitres/objet-1.tex",
+            "chapitres/objet-2.tex",
+            "chapitres/non-marque.tex",
+        ],
+    )
+
+    assert trace == [
+        "chapitres/objet-2.tex",
+        "chapitres/objet-1.tex",
+    ]
+
+
+def test_ordered_object_trace_accepts_real_lualatex_log_for_long_paths(
+    tmp_path: Path,
+    manifest_module,
+) -> None:
+    objects = [
+        (
+            "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/"
+            "exercices/1SPE-DERLOCAL-EX-001.tex"
+        ),
+        (
+            "Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/"
+            "exercices/1SPE-DERLOCAL-EX-002.tex"
+        ),
+    ]
+    for number, relative in enumerate(objects, start=1):
+        source = tmp_path / relative
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(f"Objet {number}.\n", encoding="utf-8")
+    master = tmp_path / "trace-longue.tex"
+    blocks = "\n".join(
+        "\n".join(
+            [
+                rf"\typeout{{NEXUS_OBJECT_BEGIN:{_trace_token(path)}}}",
+                rf"\input{{{path}}}",
+                rf"\typeout{{NEXUS_OBJECT_END:{_trace_token(path)}}}",
+            ]
+        )
+        for path in reversed(objects)
+    )
+    master.write_text(
+        "\n".join(
+            [
+                r"\documentclass{article}",
+                r"\begin{document}",
+                blocks,
+                r"\end{document}",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    build = tmp_path / "build"
+    build.mkdir()
+
+    completed = subprocess.run(
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            "-recorder",
+            f"-output-directory={build}",
+            str(master),
+        ],
+        cwd=tmp_path,
+        check=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    log = (build / "trace-longue.log").read_text(encoding="utf-8")
+    traced_inputs = []
+    for line in (build / "trace-longue.fls").read_text(
+        encoding="utf-8"
+    ).splitlines():
+        kind, separator, raw = line.partition(" ")
+        if kind != "INPUT" or not separator:
+            continue
+        normalized = manifest_module._canonical_fls_path(tmp_path, raw.strip())
+        if normalized is not None:
+            traced_inputs.append(normalized)
+    assert set(objects) <= set(traced_inputs)
+
+    trace = manifest_module._ordered_object_trace(
+        log,
+        traced_inputs=traced_inputs,
+        declared_objects=objects,
+    )
+
+    assert trace == list(reversed(objects))
+
+
+@pytest.mark.parametrize(
+    ("log", "traced_inputs", "declared_objects", "message"),
+    [
+        ("journal sans marqueur", ["objet.tex"], ["objet.tex"], "absents"),
+        (
+            _trace_marker("END", "objet.tex"),
+            ["objet.tex"],
+            ["objet.tex"],
+            "ordre",
+        ),
+        (
+            "\n".join(
+                [
+                    _trace_marker("BEGIN", "objet.tex"),
+                    _trace_marker("BEGIN", "autre.tex"),
+                    _trace_marker("END", "autre.tex"),
+                    _trace_marker("END", "objet.tex"),
+                ]
+            ),
+            ["objet.tex", "autre.tex"],
+            ["objet.tex", "autre.tex"],
+            "ordre",
+        ),
+        (
+            "\n".join(
+                [
+                    _trace_marker("BEGIN", "objet.tex"),
+                    _trace_marker("END", "autre.tex"),
+                ]
+            ),
+            ["objet.tex", "autre.tex"],
+            ["objet.tex", "autre.tex"],
+            "identité",
+        ),
+        (
+            "\n".join(
+                [
+                    _trace_marker("BEGIN", "objet.tex"),
+                    _trace_marker("END", "objet.tex"),
+                    _trace_marker("BEGIN", "objet.tex"),
+                    _trace_marker("END", "objet.tex"),
+                ]
+            ),
+            ["objet.tex"],
+            ["objet.tex"],
+            "dupliqué",
+        ),
+        (
+            "\n".join(
+                [
+                    _trace_marker("BEGIN", "objet.tex"),
+                    _trace_marker("END", "objet.tex"),
+                ]
+            ),
+            ["autre.tex"],
+            ["objet.tex", "autre.tex"],
+            "FLS",
+        ),
+        (
+            "\n".join(
+                [
+                    _trace_marker("BEGIN", "objet.tex"),
+                    _trace_marker("END", "objet.tex"),
+                ]
+            ),
+            ["objet.tex"],
+            ["autre.tex"],
+            "déclaré",
+        ),
+        (
+            "\n".join(
+                [
+                    "NEXUS_OBJECT_BEGIN:identifiant-invalide",
+                    "NEXUS_OBJECT_END:identifiant-invalide",
+                ]
+            ),
+            ["objet.tex"],
+            ["objet.tex"],
+            "identifiant",
+        ),
+        (
+            "\n".join(
+                [
+                    _trace_marker("BEGIN", "../objet.tex"),
+                    _trace_marker("END", "../objet.tex"),
+                ]
+            ),
+            ["../objet.tex"],
+            ["../objet.tex"],
+            "canonique",
+        ),
+    ],
+)
+def test_ordered_object_trace_rejects_invalid_evidence(
+    manifest_module,
+    log: str,
+    traced_inputs: list[str],
+    declared_objects: list[str],
+    message: str,
+) -> None:
+    with pytest.raises(manifest_module.BuildManifestError, match=message):
+        manifest_module._ordered_object_trace(
+            log,
+            traced_inputs=traced_inputs,
+            declared_objects=declared_objects,
+        )
 
 
 def test_receipt_entrypoint_refuses_publication_without_build_wrapper(

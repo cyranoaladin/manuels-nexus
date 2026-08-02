@@ -905,6 +905,96 @@ def _canonical_fls_path(root: Path, raw: str) -> str | None:
     return normalized
 
 
+def _canonical_object_path(raw: object) -> str:
+    if (
+        not isinstance(raw, str)
+        or not raw
+        or raw != raw.strip()
+        or raw.startswith("/")
+        or "\\" in raw
+        or any(part in {"", ".", ".."} for part in raw.split("/"))
+    ):
+        raise BuildManifestError("chemin d'objet non canonique")
+    return raw
+
+
+def _object_trace_token(path: str) -> str:
+    """Return a one-line TeX-safe identifier bound to a canonical path."""
+
+    canonical = _canonical_object_path(path)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:40]
+
+
+def _ordered_object_trace(
+    log_text: str,
+    *,
+    traced_inputs: list[str],
+    declared_objects: list[str],
+) -> list[str]:
+    """Cross balanced log markers with declared objects opened by TeX."""
+
+    prefixes = {
+        "NEXUS_OBJECT_BEGIN:": "begin",
+        "NEXUS_OBJECT_END:": "end",
+    }
+    markers: list[tuple[str, str]] = []
+    for line in log_text.splitlines():
+        stripped = line.strip()
+        for prefix, kind in prefixes.items():
+            if stripped.startswith(prefix):
+                markers.append((kind, stripped.removeprefix(prefix)))
+                break
+    if not markers:
+        raise BuildManifestError("marqueurs de trace objets absents")
+
+    if not declared_objects:
+        raise BuildManifestError("objets déclarés invalides")
+    canonical_declared = [
+        _canonical_object_path(path) for path in declared_objects
+    ]
+    if len(canonical_declared) != len(set(canonical_declared)):
+        raise BuildManifestError("objets déclarés invalides")
+    declared_by_token: dict[str, str] = {}
+    for path in canonical_declared:
+        token = _object_trace_token(path)
+        if token in declared_by_token:
+            raise BuildManifestError("collision d'identifiants de trace objets")
+        declared_by_token[token] = path
+    opened_by_tex = set(traced_inputs)
+    trace: list[str] = []
+    completed: set[str] = set()
+    current: str | None = None
+
+    for kind, token in markers:
+        if len(token) != 40 or any(
+            character not in "0123456789abcdef" for character in token
+        ):
+            raise BuildManifestError("identifiant de marqueur invalide")
+        if kind == "begin":
+            if current is not None:
+                raise BuildManifestError("ordre des marqueurs objets invalide")
+            if token in completed:
+                raise BuildManifestError("bloc objet marqué dupliqué")
+            current = token
+            continue
+        if current is None:
+            raise BuildManifestError("ordre des marqueurs objets invalide")
+        if token != current:
+            raise BuildManifestError("identité BEGIN/END incohérente")
+        path = declared_by_token.get(token)
+        if path is None:
+            raise BuildManifestError("objet marqué non déclaré")
+        if path not in opened_by_tex:
+            raise BuildManifestError("objet marqué absent du traceur FLS")
+        trace.append(path)
+        completed.add(token)
+        current = None
+
+    if current is not None:
+        raise BuildManifestError("marqueurs de trace objets déséquilibrés")
+    return trace
+
+
 def _run_local_pdf_preflight(
     pdf_path: Path,
     *,
@@ -1039,16 +1129,13 @@ def _derive_receipt_evidence(
         else:
             traced_outputs.add(normalized)
     declared_set = set(declared_objects)
-    included = []
-    seen: set[str] = set()
-    for path in traced_inputs:
-        if path in declared_set and path not in seen:
-            included.append(path)
-            seen.add(path)
-    if not included:
-        raise BuildManifestError("traceur FLS sans objet déclaré inclus")
-    excluded = sorted(declared_set - seen)
-    ordered_trace = list(included)
+    ordered_trace = _ordered_object_trace(
+        log_text,
+        traced_inputs=traced_inputs,
+        declared_objects=declared_objects,
+    )
+    included = list(ordered_trace)
+    excluded = sorted(declared_set - set(included))
     dependency_digests: dict[str, str] = {}
     for dependency in dependencies:
         if (
