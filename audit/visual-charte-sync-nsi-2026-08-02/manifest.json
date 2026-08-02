@@ -1,0 +1,135 @@
+{
+  "artifact_type": "visual_charter_sync_review",
+  "schema_version": 1,
+  "generated_at": "2026-08-02T15:40:00+01:00",
+  "repository": {
+    "branch": "finalisation/collection-v1",
+    "before_sha": "e20adcd05105832504041fb2f9aa0e116e5bbdee"
+  },
+  "scope": {
+    "manual": "1NSI",
+    "source_files": [
+      {
+        "path": "NSI/gabarits/nexus-manuel.cls",
+        "before_sha256": "40591afc92ec1801655215efed24b6b7508d16124f1a1b4245bee77e1ebdf015",
+        "after_sha256": "4f1d30e460f48ee94414000ac543465430c2b042728f1c7c4624ae23cec23097",
+        "canonical_source": "Mathematiques/manuel-maths/gabarits/nexus-manuel.cls"
+      },
+      {
+        "path": "NSI/gabarits/nexus-signatures.tex",
+        "before_sha256": "714f949befc6aae05fceaf21bc02293088013f4e7130d619dc670f2f4cde0e3f",
+        "after_sha256": "bbf81c1368d7be1b067597803e1429dd94e19c0585dbf0981d408f8f5ea3cc74",
+        "canonical_source": "Mathematiques/manuel-maths/gabarits/nexus-signatures.tex"
+      }
+    ]
+  },
+  "decision": {
+    "source_sync_authorized_by": "Alaeddine Ben Rhouma",
+    "human_visual_decision": "pending",
+    "baseline_updated": false,
+    "release_acceptance": false,
+    "publication_status": "NO-GO"
+  },
+  "specimen": {
+    "pages_before": 9,
+    "pages_after": 9,
+    "pdf_before_sha256": "7a0fe5ffd00d233cbc1677b57cadb32482b50bdd96374d019ffbd6a5b98fbc3f",
+    "pdf_after_sha256": "099aee8535af9077eacb7c612644878c134f4f4aa2e4d6e4e835875725ffcb79",
+    "raster_dpi": 150,
+    "absolute_error_pixels": {
+      "1": 413240,
+      "2": 61660,
+      "3": 46523,
+      "4": 30440,
+      "5": 16904,
+      "6": 23513,
+      "7": 18573,
+      "8": 25008,
+      "9": 12364
+    }
+  },
+  "chapter": {
+    "id": "1NSI-TYPES-CONSTRUITS",
+    "variant": "complet",
+    "pages_before": 36,
+    "pages_after": 36,
+    "pdf_before_sha256": "edd6c627c7cb8134fa5fb033b54d6f881aa98d6c661b34455e0fa242b6f9be92",
+    "pdf_after_sha256": "1fe435db93d841b9c69a0e313291604397f209eedefb37a8bcee6b9e27f47466",
+    "raster_dpi": 100,
+    "absolute_error_pixels": {
+      "1": 49203,
+      "2": 101727,
+      "3": 35773,
+      "4": 143810,
+      "5": 433772,
+      "6": 378216,
+      "7": 495611,
+      "8": 286400,
+      "9": 256103,
+      "10": 250448,
+      "11": 304232,
+      "12": 343347,
+      "13": 318651,
+      "14": 338369,
+      "15": 369519,
+      "16": 363368,
+      "17": 292891,
+      "18": 292133,
+      "19": 322494,
+      "20": 266420,
+      "21": 328503,
+      "22": 230698,
+      "23": 212309,
+      "24": 266429,
+      "25": 195660,
+      "26": 156761,
+      "27": 225993,
+      "28": 217838,
+      "29": 431742,
+      "30": 176771,
+      "31": 97041,
+      "32": 168767,
+      "33": 303674,
+      "34": 297648,
+      "35": 233624,
+      "36": 161752
+    },
+    "preexisting_missing_glyphs_before": 3,
+    "preexisting_missing_glyphs_after": 3
+  },
+  "proofs": [
+    {
+      "path": "specimen-avant-apres.png",
+      "sha256": "e1dd548707c2776ff75f1558a609641822ea45f6bcbfb04db71a9f1c4fa816ef",
+      "dimensions": "900x1306"
+    },
+    {
+      "path": "chapitre-avant-apres.png",
+      "sha256": "6fd85336f6e8b410f8b8236b49af27344f62a79b601a9844506b87cdc7bc65a8",
+      "dimensions": "900x1959"
+    }
+  ],
+  "verification": {
+    "charter_sync": "7/7 identical",
+    "specimen_a4": true,
+    "chapter_a4": true,
+    "page_counts_stable": true,
+    "all_fonts_embedded": true,
+    "new_tex_errors": 0,
+    "new_overfull_boxes": 0,
+    "representative_visual_inspection": "no collision, clipping or overflow detected",
+    "material_reflow": true
+  },
+  "toolchain": {
+    "luahbtex": "1.17.0",
+    "tex_live": "2023/Debian",
+    "poppler": "24.02.0",
+    "imagemagick": "6.9.12-98 Q16"
+  },
+  "independent_consultation": {
+    "provider": "Chutes",
+    "status": "unavailable",
+    "reason": "HTTP 402 quota exceeded",
+    "recommendations_used": false
+  }
+}
