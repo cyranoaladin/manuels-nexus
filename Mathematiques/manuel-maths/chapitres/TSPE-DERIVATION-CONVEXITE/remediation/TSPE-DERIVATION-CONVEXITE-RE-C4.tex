@@ -1,0 +1,36 @@
+% META: {"id": "TSPE-DERIVATION-CONVEXITE-RE-C4", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION -- C4 : Erreurs dans l'esquisse de courbe
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Erreurs dans l'esquisse de courbe}
+
+\textbf{Erreur 1 :} Confondre le signe de $f'$ (variations) et celui de $f''$ (convexite).
+
+\textbf{Erreur 2 :} Considerer que $f'' = 0$ implique toujours un point d'inflexion (il faut aussi un changement de signe).
+
+\textbf{Erreur 3 :} Oublier de placer les points d'inflexion sur l'esquisse.
+
+\begin{exercice}{TSPE-DERCONV-RE-C4-EX1}{1}{12}
+Soit $f(x) = x^4 - 6x^2$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et $f''(x)$.
+  \item La courbe admet-elle des points d'inflexion ?
+  \item Sur quels intervalles la courbe est-elle convexe ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**4 - 6*x**2
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert expand(fp) == 4*x**3 - 12*x
+% assert expand(fpp) == 12*x**2 - 12
+% assert solve(fpp, x) == [-1, 1]
+% # f'' changes sign at x = -1 and x = 1: two inflexion points
+% assert fpp.subs(x, 0) == -12  # concave
+% assert fpp.subs(x, 2) == 36   # convexe
+% END-VERIFY

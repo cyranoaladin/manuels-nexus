@@ -1,0 +1,202 @@
+% META: {"id": "TSPE-DERIVATION-CONVEXITE-QCM", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5","C6"], "status": "generated"}
+
+\section*{QCM d'auto-evaluation -- Complements sur la derivation, convexite}
+
+\begin{center}
+\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\end{center}
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C1 -- Derivee d'une fonction composee}
+% ------------------------------------------------------------
+
+\begin{enumerate}
+
+\item \textbf{[Q1]} La derivee de $f(x) = \mathrm{e}^{x^2}$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\mathrm{e}^{x^2}$
+    \item $2x\,\mathrm{e}^{x^2}$
+    \item $x\,\mathrm{e}^{x^2}$
+    \item $2\,\mathrm{e}^{x^2}$
+  \end{enumerate}
+  % Reponse correcte : B. Piege A (oubli de $u'$), C (facteur $x$ au lieu de $2x$), D (facteur $2$ sans $x$).
+
+\bigskip
+
+\item \textbf{[Q2]} La derivee de $f(x) = \ln(x^2 + 1)$ sur $\mathbb{R}$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\dfrac{1}{x^2 + 1}$
+    \item $\dfrac{2x}{x^2 + 1}$
+    \item $\dfrac{2}{x^2 + 1}$
+    \item $\dfrac{x}{x^2 + 1}$
+  \end{enumerate}
+  % Reponse correcte : B. Piege A (oubli de $u'$), C ($2$ sans $x$), D ($x$ sans $2$).
+
+\bigskip
+
+\item \textbf{[Q3]} La derivee de $f(x) = (3x - 2)^4$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $4(3x-2)^3$
+    \item $12(3x-2)^3$
+    \item $3(3x-2)^4$
+    \item $4 \cdot 3 \cdot (3x-2)^3$
+  \end{enumerate}
+  % Reponse correcte : B. Piege A (oubli du $3$ de $u'$), C (puissance non diminuee), D (doublement du facteur $3$).
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C2 -- Etude complete de fonction}
+% ------------------------------------------------------------
+
+\item \textbf{[Q4]} Soit $f(x) = x\,\mathrm{e}^{-x}$. La derivee $f'(x)$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\mathrm{e}^{-x} - x\,\mathrm{e}^{-x}$
+    \item $\mathrm{e}^{-x} + x\,\mathrm{e}^{-x}$
+    \item $-\mathrm{e}^{-x}$
+    \item $x\,\mathrm{e}^{-x}$
+  \end{enumerate}
+  % Reponse correcte : A (= $(1-x)\mathrm{e}^{-x}$). Piege B (signe $+$ au lieu de $-$), C (oubli du produit), D (oubli de la derivee de $\mathrm{e}^{-x}$).
+
+\bigskip
+
+\item \textbf{[Q5]} La limite de $f(x) = \dfrac{\ln x}{x}$ en $+\infty$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item $+\infty$
+    \item $1$
+    \item $0$
+    \item $-\infty$
+  \end{enumerate}
+  % Reponse correcte : C (croissances comparees). Piege A (croissance de $\ln$ domine), B (quotient de termes croissants), D (signe erronee).
+
+\bigskip
+
+\item \textbf{[Q6]} La fonction $f(x) = x^3 - 3x$ admet :
+  \begin{enumerate}[label=\Alph*.]
+    \item un maximum en $x = 1$ et un minimum en $x = -1$
+    \item un maximum en $x = -1$ et un minimum en $x = 1$
+    \item un maximum en $x = 0$
+    \item aucun extremum
+  \end{enumerate}
+  % Reponse correcte : B ($f' = 3(x^2-1)$, $f' = 0$ en $\pm 1$). Piege A (inversion), C ($f'(0) \neq 0$), D.
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C3 -- Inegalites par convexite}
+% ------------------------------------------------------------
+
+\item \textbf{[Q7]} La fonction $f(x) = \mathrm{e}^x$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item convexe sur $\mathbb{R}$
+    \item concave sur $\mathbb{R}$
+    \item convexe sur $\mathbb{R}^+$ et concave sur $\mathbb{R}^-$
+    \item ni convexe ni concave
+  \end{enumerate}
+  % Reponse correcte : A ($f'' = \mathrm{e}^x > 0$). Piege B, C, D.
+
+\bigskip
+
+\item \textbf{[Q8]} L'inegalite $\mathrm{e}^x \geq 1 + x$ est valable :
+  \begin{enumerate}[label=\Alph*.]
+    \item pour tout $x \geq 0$
+    \item pour tout $x \leq 0$
+    \item pour tout $x \in \mathbb{R}$
+    \item seulement en $x = 0$
+  \end{enumerate}
+  % Reponse correcte : C (convexite globale de $\mathrm{e}^x$). Piege A, B (restriction erronee), D.
+
+\bigskip
+
+\item \textbf{[Q9]} La fonction $f(x) = \ln x$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item convexe sur $]0, +\infty[$
+    \item concave sur $]0, +\infty[$
+    \item convexe puis concave
+    \item ni convexe ni concave
+  \end{enumerate}
+  % Reponse correcte : B ($f'' = -1/x^2 < 0$). Piege A (confusion convexite/concavite), C, D.
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C4 -- Esquisse de courbe}
+% ------------------------------------------------------------
+
+\item \textbf{[Q10]} Si $f''(x) > 0$ sur un intervalle $I$, alors la courbe de $f$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item convexe (en forme de $\cup$)
+    \item concave (en forme de $\cap$)
+    \item croissante
+    \item decroissante
+  \end{enumerate}
+  % Reponse correcte : A. Piege B (inversion), C/D (confusion $f''$ et $f'$).
+
+\bigskip
+
+\item \textbf{[Q11]} Un point d'inflexion est un point ou :
+  \begin{enumerate}[label=\Alph*.]
+    \item $f'(x) = 0$
+    \item $f''(x) = 0$ et $f''$ change de signe
+    \item $f''(x) = 0$ seulement
+    \item $f(x) = 0$
+  \end{enumerate}
+  % Reponse correcte : B. Piege A (confusion avec extremum), C (oubli du changement de signe), D.
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C5 -- Lecture graphique et convexite}
+% ------------------------------------------------------------
+
+\item \textbf{[Q12]} Si $f$ est convexe, alors la courbe est :
+  \begin{enumerate}[label=\Alph*.]
+    \item au-dessus de ses tangentes
+    \item au-dessous de ses tangentes
+    \item au-dessus de ses cordes
+    \item au-dessous de ses cordes
+  \end{enumerate}
+  % Reponse correcte : A. Piege B (inversion), C/D (confusion tangente/corde).
+
+\bigskip
+
+\item \textbf{[Q13]} La courbe de $f(x) = x^3$ traverse sa tangente en $x = 0$ car :
+  \begin{enumerate}[label=\Alph*.]
+    \item $f'(0) = 0$
+    \item $f''(0) = 0$ et $f''$ change de signe
+    \item $f(0) = 0$
+    \item $f$ est decroissante
+  \end{enumerate}
+  % Reponse correcte : B. Piege A, C (conditions necessaires mais non suffisantes), D.
+
+\bigskip
+
+% ------------------------------------------------------------
+\subsection*{C6 -- Courbe au-dessus des tangentes}
+% ------------------------------------------------------------
+
+\item \textbf{[Q14]} Si $f''(x) \geq 0$ sur $I$, alors pour tout $a, x \in I$ :
+  \begin{enumerate}[label=\Alph*.]
+    \item $f(x) \geq f(a) + f'(a)(x - a)$
+    \item $f(x) \leq f(a) + f'(a)(x - a)$
+    \item $f(x) = f(a) + f'(a)(x - a)$
+    \item $f(x) \geq f(a)$
+  \end{enumerate}
+  % Reponse correcte : A (theoreme du cours). Piege B (inversion), C (egalite = tangente), D (inegalite trop faible).
+
+\bigskip
+
+\item \textbf{[Q15]} L'approximation $\mathrm{e}^{0{,}1} \approx 1{,}1$ obtenue par tangente en $0$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item par defaut (la vraie valeur est plus grande)
+    \item par exces (la vraie valeur est plus petite)
+    \item exacte
+    \item impossible a determiner
+  \end{enumerate}
+  % Reponse correcte : B (convexite de $\mathrm{e}^x$ : tangente en dessous). Piege A (inversion), C, D.
+
+\bigskip
+
+\end{enumerate}

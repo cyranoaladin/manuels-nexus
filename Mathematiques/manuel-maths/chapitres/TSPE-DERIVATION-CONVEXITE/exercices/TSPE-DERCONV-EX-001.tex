@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-DERCONV-EX-001", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "exercice", "capacites": ["TSPE-DERCONV-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/exercices/TSPE-DERCONV-EX-001.tex", "corrige_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(3*x**2 + 1)
+% fp = diff(f, x)
+% assert fp == 6*x*exp(3*x**2 + 1)
+% assert fp.subs(x, 0) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-DERCONV-EX-001}{1}{8}
+Calculer la derivee de la fonction $f$ definie sur $\mathbb{R}$ par :
+\[ f(x) = \mathrm{e}^{3x^2 + 1}. \]
+
+\end{exercice}

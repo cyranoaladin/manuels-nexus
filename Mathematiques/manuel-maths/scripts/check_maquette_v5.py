@@ -584,9 +584,14 @@ def accept_maquette(
         root,
         accepted_returncodes=(0, 1),
     )
-    if comparison.stderr.strip() != "0":
+    comparison_error = comparison.stderr.strip()
+    if comparison.returncode == 1 and comparison_error:
+        comparison_error = comparison_error.splitlines()[-1].strip()
+    elif comparison.returncode == 0:
+        comparison_error = "0"
+    if comparison_error != "0":
         raise AcceptanceError(
-            f"page 13 différente de l'oracle it2: AE={comparison.stderr.strip()}"
+            f"page 13 différente de l'oracle it2: AE={comparison_error}"
         )
 
     return (

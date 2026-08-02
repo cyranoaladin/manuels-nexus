@@ -1,0 +1,34 @@
+% META: {"id": "TSPE-DERIVATION-CONVEXITE-RE-C2", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION -- C2 : Erreurs dans l'etude complete d'une fonction
+%---------------------------------------------------------------
+
+\subsection*{Rappel -- Erreurs dans l'etude complete d'une fonction}
+
+\textbf{Erreur 1 :} Oublier de verifier le domaine avant de deriver.
+
+\textbf{Erreur 2 :} Ne pas factoriser $f'(x)$ avant d'etudier son signe.
+
+\textbf{Erreur 3 :} Confondre les limites en $+\infty$ et $-\infty$ pour les fonctions avec exponentielle.
+
+\begin{exercice}{TSPE-DERCONV-RE-C2-EX1}{1}{12}
+Soit $f(x) = \dfrac{\mathrm{e}^x}{x}$ definie sur $\mathbb{R}^*$.
+\begin{enumerate}
+  \item Pourquoi doit-on exclure $0$ du domaine ?
+  \item Calculer $f'(x)$ en factorisant.
+  \item Etudier le signe de $f'(x)$ sur $]0, +\infty[$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = exp(x)/x
+% fp = diff(f, x)
+% assert simplify(fp) == (x - 1)*exp(x)/x**2
+% assert fp.subs(x, 2) == exp(2)/4
+% # f' > 0 for x > 1, f' < 0 for 0 < x < 1
+% assert fp.subs(x, 2) > 0
+% assert fp.subs(x, Rational(1,2)) < 0
+% END-VERIFY

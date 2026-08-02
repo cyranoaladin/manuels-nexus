@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-DERCONV-CO-023", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-023", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x, y = symbols('x y')
+% # e^x + e^y >= 2*e^((x+y)/2) par Jensen
+% lhs = exp(x) + exp(y)
+% rhs = 2*exp((x+y)/2)
+% # verifier numeriquement
+% assert (lhs - rhs).subs({x: 0, y: 2}) == 1 + exp(2) - 2*exp(1)
+% assert (lhs - rhs).subs({x: 1, y: 3}) > 0
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-023}
+
+La fonction $\mathrm{e}^t$ est convexe sur $\mathbb{R}$. Par l'inegalite de Jensen avec $t = \dfrac{1}{2}$ :
+\[ \mathrm{e}^{\frac{x+y}{2}} \leq \frac{\mathrm{e}^x + \mathrm{e}^y}{2}. \]
+
+\commentaireMarge{Convexite de $\mathrm{e}^t$ + Jensen avec $t = \frac{1}{2}$.}
+
+En multipliant par $2$ :
+\[ 2\,\mathrm{e}^{\frac{x+y}{2}} \leq \mathrm{e}^x + \mathrm{e}^y. \]
+
+\end{corrige}

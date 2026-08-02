@@ -10,6 +10,7 @@
 \ProvidesClass{nexus-manuel-v5}[2026/07/18 v5.0-proto Maquette editoriale Nexus]
 
 % Charger la v4.1 comme base
+\def\nxVBaseCompatibility{1}
 \LoadClass{gabarits/nexus-manuel}
 
 % Conserver l'unique voie autorisée vers la vraie marge. Les gabarits à marge
@@ -578,6 +579,7 @@
     \nxVSuppressTabtrue
     \nxVQcmDiagnosticstrue
     \typeout{NEXUS-V5-DIAGNOSTICS-START}%
+    \nxCompactTablesfalse
     \let\newpage\nxVQcmOriginalNewpage
     \fontsize{6.6}{7.6}\selectfont
     \setlength{\tabcolsep}{2pt}%

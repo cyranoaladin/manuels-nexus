@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-DERCONV-EX-041", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "exercice", "capacites": ["TSPE-DERCONV-C5"], "capacites_codes": ["C5"], "methodes": ["M4"], "parcours": 3, "competences": ["modeliser","raisonner"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/exercices/TSPE-DERCONV-EX-041.tex", "corrige_tex": "chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-041.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% f = x**3 - 6*x**2 + 9*x + 1
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert expand(fp) == 3*x**2 - 12*x + 9
+% assert expand(fpp) == 6*x - 12
+% assert solve(fp, x) == [1, 3]
+% assert solve(fpp, x) == [2]
+% assert f.subs(x, 1) == 5
+% assert f.subs(x, 2) == 3
+% assert f.subs(x, 3) == 1
+% assert fpp.subs(x, 0) == -12  # concave
+% assert fpp.subs(x, 4) == 12   # convexe
+% END-VERIFY
+\begin{exercice}{TSPE-DERCONV-EX-041}{3}{20}
+Soit $f(x) = x^3 - 6x^2 + 9x + 1$. Realiser une etude complete : variations, convexite, points d'inflexion, tangentes remarquables, puis esquisser la courbe.
+
+\end{exercice}

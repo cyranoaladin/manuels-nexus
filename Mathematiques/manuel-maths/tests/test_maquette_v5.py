@@ -1500,6 +1500,9 @@ def test_compile_maquette_classifies_missing_paths(tmp_path):
 
 
 def test_navigation_opening_and_blank_source_contract():
+    base_class_source = (ROOT / "gabarits/nexus-manuel.cls").read_text(
+        encoding="utf-8"
+    )
     class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
         encoding="utf-8"
     )
@@ -1507,6 +1510,12 @@ def test_navigation_opening_and_blank_source_contract():
         encoding="utf-8"
     )
 
+    compatibility = r"\def\nxVBaseCompatibility{1}"
+    assert compatibility in class_source
+    assert class_source.index(compatibility) < class_source.index(
+        r"\LoadClass{gabarits/nexus-manuel}"
+    )
+    assert base_class_source.count(r"\ifdefined\nxVBaseCompatibility") >= 6
     assert r"\newmarks\nxRubriqueMarks" in class_source
     assert r"\marks\nxRubriqueMarks{#1}" in class_source
     assert r"\firstmarks\nxRubriqueMarks" in class_source
@@ -2481,6 +2490,9 @@ def test_non_diagnostics_page_hashes_reject_a_changed_page(tmp_path):
 
 
 def test_qcm_and_corrections_source_contract():
+    base_class_source = (ROOT / "gabarits/nexus-manuel.cls").read_text(
+        encoding="utf-8"
+    )
     class_source = (ROOT / "gabarits/nexus-manuel-v5.cls").read_text(
         encoding="utf-8"
     )
@@ -2507,8 +2519,18 @@ def test_qcm_and_corrections_source_contract():
     )
     diagnostics_start = qcm_source.index(r"\rubrique{Corrigés}")
     diagnostics_source = qcm_source[diagnostics_start:]
+    assert r"\newif\ifnxCompactTables" in base_class_source
+    assert (
+        r"\AtBeginEnvironment{tabular}{\nxApplyCompactTableStyle}"
+        in base_class_source
+    )
+    assert (
+        r"\AtBeginEnvironment{tabularx}{\nxApplyCompactTableStyle}"
+        in base_class_source
+    )
     assert "NEXUS-V5-DIAGNOSTICS-START" in diagnostics_source
     assert "NEXUS-V5-DIAGNOSTICS-END" in diagnostics_source
+    assert r"\nxCompactTablesfalse" in diagnostics_source
     assert r"\fontsize{6.6}{7.6}\selectfont" in diagnostics_source
     assert r"\setlength{\tabcolsep}{2pt}" in diagnostics_source
     assert r"\renewcommand{\arraystretch}{1.08}" in diagnostics_source

@@ -1,0 +1,35 @@
+% META: {"id": "TSPE-DERCONV-CO-052", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-052", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = x^4, strictement convexe
+% # Jensen generalise: f(tx + (1-t)y) <= t*f(x) + (1-t)*f(y)
+% # pour t=1/3, x=1, y=2: f(4/3) <= (f(1) + 2*f(2))/3
+% f = x**4
+% fpp = diff(f, x, 2)
+% assert expand(fpp) == 12*x**2
+% assert fpp.subs(x, 0) == 0
+% assert fpp.subs(x, 1) == 12
+% # Jensen: f(4/3) = (4/3)^4 = 256/81
+% lhs = f.subs(x, Rational(5,3))
+% rhs = (f.subs(x, 1) + 2*f.subs(x, 2))/3
+% assert lhs == Rational(625, 81)
+% assert rhs == (1 + 2*16)/3
+% assert rhs == Rational(33, 3)
+% assert rhs == 11
+% assert lhs < rhs  # 625/81 ~ 7.7 < 11
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-052}
+
+\textbf{Question 1.} $f''(x) = 12x^2 \geq 0$ : $f$ est convexe sur $\mathbb{R}$.
+
+\commentaireMarge{$f'' = 12x^2 \geq 0$ : convexe. Jensen avec $t=1/3$.}
+
+\textbf{Question 2.} Par Jensen avec $t = \dfrac{1}{3}$ :
+\[ f\!\left(\frac{1}{3} \times 1 + \frac{2}{3} \times 2\right) \leq \frac{1}{3} f(1) + \frac{2}{3} f(2). \]
+
+Soit $f\!\left(\dfrac{5}{3}\right) \leq \dfrac{1 + 32}{3} = 11$. On verifie : $\left(\dfrac{5}{3}\right)^4 = \dfrac{625}{81} \approx 7{,}7 \leq 11$. \checkmark
+
+\textbf{Question 3.} L'egalite dans Jensen a lieu si et seulement si $x = y$ (cas de stricte convexite), c'est-a-dire pour tout $t \in [0,1]$ lorsque $x = y$.
+
+\end{corrige}

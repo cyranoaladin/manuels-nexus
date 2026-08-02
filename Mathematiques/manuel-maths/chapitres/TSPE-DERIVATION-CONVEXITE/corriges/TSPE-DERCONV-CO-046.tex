@@ -1,0 +1,31 @@
+% META: {"id": "TSPE-DERCONV-CO-046", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-046", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% a = symbols('a')
+% f = symbols('f', cls=Function)
+% # Theoreme: si f'' >= 0 sur I, alors f(x) >= f(a) + f'(a)(x-a)
+% # Demonstration: g(x) = f(x) - f(a) - f'(a)(x-a)
+% # g(a) = 0, g'(a) = 0, g''(x) = f''(x) >= 0 => g convexe => g >= 0
+% # Verification sur f(x) = x^2, a = 2
+% fx = x**2
+% fa = 4
+% fpa = 4
+% tangente = fa + fpa*(x - 2)
+% g = fx - tangente
+% assert expand(g - (x - 2)**2) == 0
+% assert g.subs(x, 2) == 0
+% assert g.subs(x, 0) == 4
+% assert g.subs(x, 5) == 9
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-046}
+
+\textbf{Question 1.} $g(a) = f(a) - f(a) - 0 = 0$ et $g'(x) = f'(x) - f'(a)$, donc $g'(a) = 0$.
+
+\commentaireMarge{$g(a)=0$, $g'(a)=0$, $g''=f'' \geq 0$ : $g$ convexe de minimum $0$.}
+
+\textbf{Question 2.} $g''(x) = f''(x) \geq 0$ sur $I$ : $g$ est convexe. Comme $g'(a) = 0$ et $g$ convexe, $a$ est un minimum global, donc $g(x) \geq g(a) = 0$.
+
+\textbf{Question 3.} Ainsi $f(x) \geq f(a) + f'(a)(x-a)$ : la courbe est au-dessus de sa tangente en $a$.
+
+\end{corrige}

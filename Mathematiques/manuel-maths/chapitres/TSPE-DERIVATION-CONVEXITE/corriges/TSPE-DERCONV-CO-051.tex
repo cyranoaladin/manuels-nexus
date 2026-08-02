@@ -1,0 +1,31 @@
+% META: {"id": "TSPE-DERCONV-CO-051", "chapitre": "TSPE-DERIVATION-CONVEXITE", "type_objet": "corrige", "exercice_ref": "TSPE-DERCONV-EX-051", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import *
+% x = symbols('x')
+% # f(x) = (3x^2+1)^2 * ln(x) sur ]0,+inf[
+% f = (3*x**2 + 1)**2 * ln(x)
+% fp = diff(f, x)
+% # f' = 2*(3x^2+1)*6x*ln(x) + (3x^2+1)^2/x
+% # = 12x*(3x^2+1)*ln(x) + (3x^2+1)^2/x
+% assert fp.subs(x, 1) == 12*4*0 + 16/1
+% assert fp.subs(x, 1) == 16
+% assert simplify(fp - (12*x*(3*x**2+1)*ln(x) + (3*x**2+1)**2/x)) == 0
+% # f(1) = 16*0 = 0
+% assert f.subs(x, 1) == 0
+% assert limit(f, x, oo) == oo
+% END-VERIFY
+\begin{corrige}{TSPE-DERCONV-EX-051}
+
+\textbf{Question 1.} On ecrit $f = u \times v$ avec $u = (3x^2+1)^2$ et $v = \ln x$.
+
+\commentaireMarge{Produit de deux fonctions, dont $u$ est elle-meme une composition.}
+
+$u' = 2 \times 6x \times (3x^2+1) = 12x(3x^2+1)$ et $v' = \dfrac{1}{x}$.
+
+\[ f'(x) = 12x(3x^2+1)\ln x + \frac{(3x^2+1)^2}{x}. \]
+
+\textbf{Question 2.} En $x = 1$ : $f'(1) = 0 + 16 = 16 > 0$. La fonction est croissante au voisinage de $1$.
+
+\textbf{Question 3.} $\lim_{x \to +\infty} (3x^2+1)^2 \ln x = +\infty$ (produit de termes tendant vers $+\infty$).
+
+\end{corrige}
