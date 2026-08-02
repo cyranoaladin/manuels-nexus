@@ -2024,6 +2024,118 @@ def _qualification_digest_bootstrap_diagnosis(
     return pure, sorted(set(offending))
 
 
+def _approved_baseline_extension_diagnosis(
+    root: Path,
+    current_active: Sequence[Mapping[str, Any]],
+    baseline_active: Sequence[Mapping[str, Any]],
+    comparison: Mapping[str, Any],
+    *,
+    approved_by: str,
+) -> tuple[bool, list[str]]:
+    """Verify that baseline drift is exactly the human-approved policy lot."""
+
+    offending: list[str] = []
+    try:
+        policy = _baseline_qualification.load_policy(
+            root / BASELINE_QUALIFICATION_POLICY_FILE
+        )
+        dispositions = _load_dispositions(root)
+    except (
+        InventoryError,
+        OSError,
+        _baseline_qualification.QualificationError,
+    ) as exc:
+        return False, [f"politique ou dispositions indisponibles:{exc}"]
+
+    decision = policy.get("decision")
+    approved_set = policy.get("approved_set")
+    if not isinstance(decision, Mapping) or not isinstance(
+        approved_set,
+        Mapping,
+    ):
+        return False, ["contrat de décision ou jeu approuvé absent"]
+    if decision.get("approved_by") != approved_by.strip():
+        offending.append("approbateur différent de la décision de politique")
+    if decision.get("baseline_purpose") != "debt_regression_control":
+        offending.append("baseline_purpose non limité au contrôle de dette")
+    if decision.get("release_acceptance") is not False:
+        offending.append("release_acceptance doit rester false")
+
+    current = _coalesce_active_debt(current_active)
+    previous = _coalesce_active_debt(baseline_active)
+    new_fingerprints = sorted(set(current) - set(previous))
+    if set(previous) - set(current):
+        offending.append("fingerprint historique supprimé pendant l'extension")
+    if comparison.get("modified"):
+        offending.append("anomalie historique modifiée pendant l'extension")
+    if comparison.get("resolved"):
+        offending.append("anomalie résolue pendant l'extension")
+    if comparison.get("regressions"):
+        offending.append("anomalie résolue réapparue pendant l'extension")
+    if sorted(str(value) for value in comparison.get("new", [])) != (
+        new_fingerprints
+    ):
+        offending.append("jeu new incohérent avec les fingerprints ajoutés")
+    expected_failures = {
+        f"anomalie nouvelle fp={fingerprint}"
+        for fingerprint in new_fingerprints
+    }
+    if {
+        str(value) for value in comparison.get("failures", [])
+    } != expected_failures:
+        offending.append("dérive non exclusivement constituée d'ajouts")
+
+    if len(new_fingerprints) != approved_set.get("fingerprint_count"):
+        offending.append("nombre de fingerprints différent du jeu approuvé")
+    if _baseline_qualification.fingerprint_set_digest(
+        new_fingerprints
+    ) != approved_set.get("fingerprint_digest"):
+        offending.append("digest des fingerprints différent du jeu approuvé")
+
+    added_records = [current[fingerprint] for fingerprint in new_fingerprints]
+    category_counts = Counter(
+        str(record.get("category", "")) for record in added_records
+    )
+    owner_counts = Counter(
+        str(record.get("owner", "")) for record in added_records
+    )
+    if dict(sorted(category_counts.items())) != dict(
+        sorted(approved_set.get("category_counts", {}).items())
+    ):
+        offending.append("catégories différentes du jeu approuvé")
+    if dict(sorted(owner_counts.items())) != dict(
+        sorted(approved_set.get("owner_counts", {}).items())
+    ):
+        offending.append("propriétaires différents du jeu approuvé")
+
+    policy_digest = str(policy.get("control_digest", ""))
+    for record in added_records:
+        fingerprint = str(record.get("fingerprint", ""))
+        disposition = dispositions.get(fingerprint)
+        if (
+            record.get("qualified") is not True
+            or record.get("disposition") != "open_debt"
+            or record.get("blocking") is not True
+        ):
+            offending.append(f"ajout non qualifié comme open_debt:{fingerprint}")
+        if not isinstance(disposition, Mapping):
+            offending.append(f"disposition ajoutée absente:{fingerprint}")
+            continue
+        if (
+            disposition.get("fingerprint") != fingerprint
+            or disposition.get("qualification_policy_digest") != policy_digest
+            or disposition.get("disposition") != "open_debt"
+            or disposition.get("release_blocking") is not True
+            or disposition.get("owner") != record.get("owner")
+        ):
+            offending.append(
+                f"disposition ajoutée non conforme à open_debt:{fingerprint}"
+            )
+
+    approved = not offending and bool(new_fingerprints)
+    return approved, sorted(set(offending))
+
+
 def _evaluate_baseline(
     inventory: Mapping[str, Any], baseline_path: Path
 ) -> list[str]:
@@ -8471,6 +8583,7 @@ def _update_baseline_gate(
     reason: str,
     approved_by: str,
     allow_qualification_digest_bootstrap: bool = False,
+    allow_approved_baseline_extension: bool = False,
 ) -> dict[str, Any]:
     reasons: list[str] = []
     if os.environ.get("CI"):
@@ -8479,6 +8592,11 @@ def _update_baseline_gate(
         reasons.append("justification non vide requise")
     if not isinstance(approved_by, str) or not approved_by.strip():
         reasons.append("approbateur non vide requis")
+    if (
+        allow_qualification_digest_bootstrap
+        and allow_approved_baseline_extension
+    ):
+        reasons.append("les deux dérogations de baseline sont incompatibles")
     if reasons:
         return _gate_result(
             "update-baseline",
@@ -8593,6 +8711,68 @@ def _update_baseline_gate(
                     "sévérités)"
                 ),
             }
+    if (
+        allow_approved_baseline_extension
+        and validated_baseline.get("provisional") is not True
+    ):
+        try:
+            probe_inventory = build_inventory(root)
+            probe_current_active = _current_active_debt(probe_inventory)
+        except (
+            InventoryError,
+            OSError,
+            subprocess.CalledProcessError,
+        ) as exc:
+            return _gate_result(
+                "update-baseline",
+                success=False,
+                failure_code=GATE_BASELINE_UPDATE_CODE,
+                dimensions={"structure": "failed"},
+                reasons=[
+                    "approved_baseline_extension: inventaire indisponible:"
+                    f"{_stable_gate_reason(exc, root)}"
+                ],
+            )
+        probe_old_active = validated_baseline.get("active", [])
+        probe_old_resolved = validated_baseline.get("resolved", [])
+        probe_comparison = _compare_anomaly_debt(
+            probe_current_active,
+            probe_old_active,
+            probe_old_resolved,
+        )
+        if probe_comparison["failures"]:
+            approved, offending = _approved_baseline_extension_diagnosis(
+                root,
+                probe_current_active,
+                probe_old_active,
+                probe_comparison,
+                approved_by=approved_by,
+            )
+            if not approved:
+                return _gate_result(
+                    "update-baseline",
+                    success=False,
+                    failure_code=GATE_BASELINE_UPDATE_CODE,
+                    dimensions={"structure": "failed"},
+                    reasons=[
+                        "approved_baseline_extension refusée: dérive hors "
+                        "du jeu explicitement approuvé"
+                    ]
+                    + [
+                        f"approved_baseline_extension:{value}"
+                        for value in offending
+                    ],
+                )
+            override_checks["phase0_tests"] = {
+                "name": "phase0_tests",
+                "reasons": [],
+                "success": True,
+                "approved_extension_bypass": (
+                    "extension vérifiée comme exclusivement constituée du "
+                    "jeu de fingerprints approuvé, tous open_debt et "
+                    "release_acceptance=false"
+                ),
+            }
     readiness = (
         _baseline_ready_gate(root, override_checks=override_checks)
         if override_checks
@@ -8680,6 +8860,19 @@ def _update_baseline_gate(
                     "bootstrap_digest_realignment refusé pendant "
                     "l'écriture: dérive non exclusivement liée à "
                     "qualification_digest (" + "; ".join(offending[:5]) + ")"
+                )
+        if allow_approved_baseline_extension and comparison["failures"]:
+            approved, offending = _approved_baseline_extension_diagnosis(
+                root,
+                current_active,
+                old_active,
+                comparison,
+                approved_by=approved_by,
+            )
+            if not approved:
+                raise InventoryError(
+                    "approved_baseline_extension refusée pendant l'écriture: "
+                    + "; ".join(offending[:5])
                 )
         resolved_by_fingerprint = {
             str(entry.get("fingerprint", "")): dict(entry)
@@ -8838,6 +9031,7 @@ def _safe_update_baseline_gate(
     reason: str,
     approved_by: str,
     allow_qualification_digest_bootstrap: bool = False,
+    allow_approved_baseline_extension: bool = False,
 ) -> dict[str, Any]:
     try:
         return _update_baseline_gate(
@@ -8846,6 +9040,9 @@ def _safe_update_baseline_gate(
             approved_by=approved_by,
             allow_qualification_digest_bootstrap=(
                 allow_qualification_digest_bootstrap
+            ),
+            allow_approved_baseline_extension=(
+                allow_approved_baseline_extension
             ),
         )
     except (
@@ -9246,6 +9443,17 @@ def _run() -> int:
         ),
     )
     parser.add_argument(
+        "--allow-approved-baseline-extension",
+        action="store_true",
+        help=(
+            "Avec --update-baseline uniquement : autorise l'ajout exact du "
+            "jeu de fingerprints défini par la politique approuvée, après "
+            "preuve qu'aucune dette historique n'est supprimée ou modifiée "
+            "et que chaque ajout reste open_debt avec "
+            "release_acceptance=false."
+        ),
+    )
+    parser.add_argument(
         "--materialize-baseline-qualifications",
         action="store_true",
         help="Matérialiser explicitement le lot de dette approuvé par politique.",
@@ -9266,6 +9474,15 @@ def _run() -> int:
         parser.error(
             "--allow-qualification-digest-bootstrap exige --update-baseline"
         )
+    if args.allow_approved_baseline_extension and not args.update_baseline:
+        parser.error(
+            "--allow-approved-baseline-extension exige --update-baseline"
+        )
+    if (
+        args.allow_qualification_digest_bootstrap
+        and args.allow_approved_baseline_extension
+    ):
+        parser.error("les deux dérogations de baseline sont incompatibles")
 
     if args.materialize_baseline_qualifications:
         incompatible = (
@@ -9363,6 +9580,9 @@ def _run() -> int:
                     approved_by=args.approved_by,
                     allow_qualification_digest_bootstrap=(
                         args.allow_qualification_digest_bootstrap
+                    ),
+                    allow_approved_baseline_extension=(
+                        args.allow_approved_baseline_extension
                     ),
                 )
             )

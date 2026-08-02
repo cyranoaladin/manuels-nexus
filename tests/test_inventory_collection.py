@@ -3335,6 +3335,145 @@ def test_qualification_digest_bootstrap_diagnosis_rejects_owner_change(
     assert any("owner" in value for value in offending)
 
 
+def test_approved_baseline_extension_diagnosis_accepts_only_policy_set(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    previous = _active_debt("a" * 16)
+    added = _active_debt(
+        "b" * 16,
+        locator_key="blocking_statuses|1SPE|1SPE-SUITES|cours.tex|status|OBJ-1",
+    )
+    added["category"] = "blocking_statuses"
+    current = [previous, added]
+    comparison = inventory_module._compare_anomaly_debt(
+        current,
+        [previous],
+        [],
+    )
+    policy_digest = "sha256:" + "f" * 64
+    policy = {
+        "control_digest": policy_digest,
+        "decision": {
+            "approved_by": "Alaeddine Ben Rhouma",
+            "baseline_purpose": "debt_regression_control",
+            "release_acceptance": False,
+        },
+        "approved_set": {
+            "category_counts": {"blocking_statuses": 1},
+            "fingerprint_count": 1,
+            "fingerprint_digest": (
+                inventory_module._baseline_qualification.fingerprint_set_digest(
+                    [str(added["fingerprint"])]
+                )
+            ),
+            "owner_counts": {"direction_scientifique_programme": 1},
+        },
+    }
+    monkeypatch.setattr(
+        inventory_module._baseline_qualification,
+        "load_policy",
+        lambda _path: policy,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_dispositions",
+        lambda _root: {
+            str(added["fingerprint"]): {
+                "disposition": "open_debt",
+                "fingerprint": added["fingerprint"],
+                "owner": added["owner"],
+                "qualification_policy_digest": policy_digest,
+                "release_blocking": True,
+            }
+        },
+    )
+
+    approved, offending = (
+        inventory_module._approved_baseline_extension_diagnosis(
+            tmp_path,
+            current,
+            [previous],
+            comparison,
+            approved_by="Alaeddine Ben Rhouma",
+        )
+    )
+
+    assert approved is True
+    assert offending == []
+
+
+def test_approved_baseline_extension_diagnosis_rejects_non_open_debt(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    previous = _active_debt("a" * 16)
+    added = _active_debt(
+        "b" * 16,
+        locator_key="blocking_statuses|1SPE|1SPE-SUITES|cours.tex|status|OBJ-1",
+        disposition="intentional_reuse",
+    )
+    added["category"] = "blocking_statuses"
+    current = [previous, added]
+    comparison = inventory_module._compare_anomaly_debt(
+        current,
+        [previous],
+        [],
+    )
+    policy_digest = "sha256:" + "f" * 64
+    policy = {
+        "control_digest": policy_digest,
+        "decision": {
+            "approved_by": "Alaeddine Ben Rhouma",
+            "baseline_purpose": "debt_regression_control",
+            "release_acceptance": False,
+        },
+        "approved_set": {
+            "category_counts": {"blocking_statuses": 1},
+            "fingerprint_count": 1,
+            "fingerprint_digest": (
+                inventory_module._baseline_qualification.fingerprint_set_digest(
+                    [str(added["fingerprint"])]
+                )
+            ),
+            "owner_counts": {"direction_scientifique_programme": 1},
+        },
+    }
+    monkeypatch.setattr(
+        inventory_module._baseline_qualification,
+        "load_policy",
+        lambda _path: policy,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_dispositions",
+        lambda _root: {
+            str(added["fingerprint"]): {
+                "disposition": "intentional_reuse",
+                "fingerprint": added["fingerprint"],
+                "owner": added["owner"],
+                "qualification_policy_digest": policy_digest,
+                "release_blocking": False,
+            }
+        },
+    )
+
+    approved, offending = (
+        inventory_module._approved_baseline_extension_diagnosis(
+            tmp_path,
+            current,
+            [previous],
+            comparison,
+            approved_by="Alaeddine Ben Rhouma",
+        )
+    )
+
+    assert approved is False
+    assert any("open_debt" in value for value in offending)
+
+
 def test_qualification_digest_bootstrap_diagnosis_rejects_severity_change(
     inventory_module,
 ) -> None:
@@ -4106,6 +4245,49 @@ def test_update_baseline_bootstrap_allows_pure_qualification_digest_realignment(
         (tmp_path / "audit/ANOMALIES_BASELINE.json").read_text(encoding="utf-8")
     )
     assert payload["active"] == [current]
+
+
+def test_update_baseline_allows_verified_approved_extension(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    old_entry = _active_debt("a" * 16)
+    added = _active_debt(
+        "b" * 16,
+        locator_key="blocking_statuses|1SPE|1SPE-SUITES|cours.tex|status|OBJ-1",
+    )
+    current = [old_entry, added]
+    _prepare_bootstrap_repository(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        old_active=[old_entry],
+        current_active=current,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_approved_baseline_extension_diagnosis",
+        lambda *_args, **_kwargs: (True, []),
+    )
+
+    result = inventory_module._update_baseline_gate(
+        tmp_path,
+        reason="Extension approuvée de la dette de non-régression",
+        approved_by="Alaeddine Ben Rhouma",
+        allow_approved_baseline_extension=True,
+    )
+
+    assert result["success"] is True
+    phase0 = next(
+        check for check in result["checks"] if check["name"] == "phase0_tests"
+    )
+    assert phase0["success"] is True
+    assert "approved_extension_bypass" in phase0
+    payload = json.loads(
+        (tmp_path / "audit/ANOMALIES_BASELINE.json").read_text(encoding="utf-8")
+    )
+    assert payload["active"] == current
 
 
 def test_update_baseline_without_bootstrap_flag_still_requires_phase0_tests(
