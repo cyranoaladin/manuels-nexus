@@ -167,18 +167,19 @@ def validate_analysis(
             or not all(isinstance(chapter, str) and chapter for chapter in chapters)
         ):
             errors.append(("CHAPITRES", "CHAPITRES absent ou invalide"))
-        student_types = analysis["constants"].get("ELEVE_ALLOWED_TYPES")
-        if (
-            not isinstance(student_types, list)
-            or not student_types
-            or not all(isinstance(value, str) and value for value in student_types)
-        ):
-            errors.append(
-                (
-                    "ELEVE_ALLOWED_TYPES",
-                    "filtre metadata eleve absent ou invalide",
+        if isinstance(variants, list) and "eleve" in variants:
+            student_types = analysis["constants"].get("ELEVE_ALLOWED_TYPES")
+            if (
+                not isinstance(student_types, list)
+                or not student_types
+                or not all(isinstance(value, str) and value for value in student_types)
+            ):
+                errors.append(
+                    (
+                        "ELEVE_ALLOWED_TYPES",
+                        "filtre metadata eleve absent ou invalide",
+                    )
                 )
-            )
     return errors
 
 

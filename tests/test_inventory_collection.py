@@ -5775,6 +5775,73 @@ parser.add_argument("--variant", choices=["eleve", "professeur"])
     ]
 
 
+def test_professor_only_manual_assembler_does_not_require_student_filter(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''CHAPITRES = ["1SPE-TEST"]
+ORDER = [("cours", "1*")]
+VARIANTS = ["professeur"]
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
+@pytest.mark.parametrize(
+    ("variant_declaration", "student_filter_declaration"),
+    [
+        ('VARIANTS = ["professeur", "eleve"]\n', ""),
+        (
+            'parser.add_argument("--variant", choices=["professeur", "eleve"])\n',
+            "ELEVE_ALLOWED_TYPES = set()\n",
+        ),
+        (
+            'VARIANTS = ["eleve"]\n',
+            "ELEVE_ALLOWED_TYPES = build_student_filter()\n",
+        ),
+        (
+            'parser.add_argument("--variant", choices=["eleve"])\n',
+            'ELEVE_ALLOWED_TYPES = ["cours", 3]\n',
+        ),
+    ],
+    ids=("missing", "empty-via-argparse", "dynamic", "malformed-via-argparse"),
+)
+def test_student_manual_assembler_requires_a_literal_non_empty_filter(
+    tmp_path: Path,
+    inventory_module,
+    variant_declaration: str,
+    student_filter_declaration: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        'CHAPITRES = ["1SPE-TEST"]\n'
+        'ORDER = [("cours", "1*")]\n'
+        + variant_declaration
+        + student_filter_declaration,
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        analysis,
+    ) == [
+        (
+            "ELEVE_ALLOWED_TYPES",
+            "filtre metadata eleve absent ou invalide",
+        )
+    ]
+
+
 def test_manual_student_assembly_filters_teacher_objects_by_metadata(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -5859,6 +5926,7 @@ VARIANTS = ["complet"]
 ORDER = [("cours", "1*"), ("exercices", "*")]
 VARIANTS = ["professeur", "eleve"]
 ELEVE_EXCLUDES = {"evaluations", "corriges"}
+ELEVE_ALLOWED_TYPES = {"cours", "exercice"}
 """,
     }
     for path, content in sources.items():
