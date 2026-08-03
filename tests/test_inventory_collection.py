@@ -1233,6 +1233,7 @@ def test_machine_artifacts_parse_and_validate_against_their_versioned_schema(
         "anomaly-dispositions.schema.json",
         "anomalies-baseline.schema.json",
         "build-manifest.schema.json",
+        "build-producers.schema.json",
     ],
 )
 def test_v1_json_schemas_are_valid_draft_2020_12(schema_name: str) -> None:
@@ -1267,6 +1268,151 @@ def test_qualification_schemas_are_registered(inventory_module) -> None:
         "unqualified_anomalies",
         1,
     ) == "audit/schemas/v1/unqualified-anomalies.schema.json"
+
+
+def test_build_producers_schema_is_registered(inventory_module) -> None:
+    assert inventory_module._schema_ref_for("build_producers", 1) == (
+        "audit/schemas/v1/build-producers.schema.json"
+    )
+
+
+def _build_producers_payload(inventory_module, producers=None):
+    payload = {
+        "artifact_type": "build_producers",
+        "control_digest": "sha256:" + "0" * 64,
+        "producers": producers
+        or [
+            {
+                "producer_id": "math-1spe-manual",
+                "assembler": (
+                    "Mathematiques/manuel-maths/scripts/assemble_manuel.py"
+                ),
+                "recorder": "scripts/build_manifest.py",
+                "assembly_ids": [
+                    "math:manual:1SPE:eleve",
+                    "math:manual:1SPE:professeur",
+                ],
+            }
+        ],
+        "schema_ref": "audit/schemas/v1/build-producers.schema.json",
+        "schema_version": 1,
+    }
+    payload["control_digest"] = inventory_module._control_digest(payload)
+    return payload
+
+
+def _write_build_producers_fixture(repository, inventory_module, producers=None):
+    _init_repository(repository)
+    _install_audit_schemas(repository)
+    paths = {
+        "Mathematiques/manuel-maths/scripts/assemble_manuel.py": "# assembler\n",
+        "scripts/build_manifest.py": "# recorder\n",
+    }
+    for relative, content in paths.items():
+        _write(repository / relative, content)
+    payload = _build_producers_payload(inventory_module, producers)
+    _write(
+        repository / "audit/BUILD_PRODUCERS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=False),
+    )
+    _track(
+        repository,
+        *paths,
+        "audit/BUILD_PRODUCERS.yaml",
+        "audit/schemas/v1/build-producers.schema.json",
+    )
+    return payload
+
+
+def test_build_producers_control_loads_canonical_tracked_producer(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    payload = _write_build_producers_fixture(tmp_path, inventory_module)
+
+    assert inventory_module._load_build_producers(tmp_path) == payload["producers"]
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected"),
+    [
+        pytest.param("digest", "control_digest", id="digest-drift"),
+        pytest.param("duplicate-id", "producer_id", id="duplicate-producer-id"),
+        pytest.param(
+            "duplicate-assembly",
+            "assembly_id",
+            id="duplicate-assembly-coverage",
+        ),
+        pytest.param("absolute", "assembler", id="absolute-assembler"),
+        pytest.param("traversal", "assembler", id="traversing-assembler"),
+        pytest.param("missing", "assembleur", id="missing-assembler"),
+        pytest.param("untracked", "suivi", id="untracked-assembler"),
+        pytest.param("symlink", "symbolique", id="symlink-assembler"),
+        pytest.param("recorder", "recorder", id="non-canonical-recorder"),
+        pytest.param("producer-order", "ordre", id="producer-order"),
+        pytest.param("assembly-order", "ordre", id="assembly-order"),
+    ],
+)
+def test_build_producers_control_rejects_invalid_or_unproved_producer(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+    expected: str,
+) -> None:
+    second = {
+        "producer_id": "math-1spe-secondary",
+        "assembler": "scripts/secondary_assembler.py",
+        "recorder": "scripts/build_manifest.py",
+        "assembly_ids": ["math:manual:1SPE:secondary"],
+    }
+    producers = _build_producers_payload(inventory_module)["producers"]
+    if mutation in {"duplicate-id", "duplicate-assembly", "producer-order"}:
+        producers.append(second)
+    payload = _write_build_producers_fixture(
+        tmp_path,
+        inventory_module,
+        producers,
+    )
+    if mutation in {"duplicate-id", "producer-order"}:
+        _write(tmp_path / "scripts/secondary_assembler.py", "# secondary\n")
+        _track(tmp_path, "scripts/secondary_assembler.py")
+    if mutation == "digest":
+        payload["control_digest"] = "sha256:" + "f" * 64
+    elif mutation == "duplicate-id":
+        payload["producers"][1]["producer_id"] = "math-1spe-manual"
+    elif mutation == "duplicate-assembly":
+        payload["producers"][1]["assembly_ids"] = [
+            "math:manual:1SPE:eleve"
+        ]
+    elif mutation == "absolute":
+        payload["producers"][0]["assembler"] = "/tmp/assembler.py"
+    elif mutation == "traversal":
+        payload["producers"][0]["assembler"] = "../assembler.py"
+    elif mutation == "missing":
+        payload["producers"][0]["assembler"] = "scripts/missing.py"
+    elif mutation == "untracked":
+        _write(tmp_path / "scripts/untracked.py", "# untracked\n")
+        payload["producers"][0]["assembler"] = "scripts/untracked.py"
+    elif mutation == "symlink":
+        symlink = tmp_path / "scripts/symlink.py"
+        symlink.symlink_to("build_manifest.py")
+        _track(tmp_path, "scripts/symlink.py")
+        payload["producers"][0]["assembler"] = "scripts/symlink.py"
+    elif mutation == "recorder":
+        payload["producers"][0]["recorder"] = "scripts/other_recorder.py"
+    elif mutation == "producer-order":
+        payload["producers"].reverse()
+    elif mutation == "assembly-order":
+        payload["producers"][0]["assembly_ids"].reverse()
+    if mutation != "digest":
+        payload["control_digest"] = inventory_module._control_digest(payload)
+    _write(
+        tmp_path / "audit/BUILD_PRODUCERS.yaml",
+        yaml.safe_dump(payload, allow_unicode=True, sort_keys=False),
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match=expected):
+        inventory_module._load_build_producers(tmp_path)
 
 
 def test_harvest_candidate_is_a_non_blocking_disposition(

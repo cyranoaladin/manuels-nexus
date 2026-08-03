@@ -92,6 +92,8 @@ UNQUALIFIED_ANOMALIES_MD_FILE = "audit/UNQUALIFIED_ANOMALIES.md"
 BASELINE_UPDATE_REPORT_FILE = "audit/BASELINE_UPDATE_REPORT.md"
 BASELINE_FREEZE_REPORT_FILE = "audit/BASELINE_FREEZE_REPORT.md"
 BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
+BUILD_PRODUCERS_FILE = "audit/BUILD_PRODUCERS.yaml"
+CANONICAL_BUILD_RECORDER = "scripts/build_manifest.py"
 _EMPTY_MANIFEST_REFRESH_CAPABILITY = object()
 
 SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
@@ -122,6 +124,9 @@ SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
         ),
         "build_manifest": MappingProxyType(
             {1: "audit/schemas/v1/build-manifest.schema.json"}
+        ),
+        "build_producers": MappingProxyType(
+            {1: "audit/schemas/v1/build-producers.schema.json"}
         ),
     }
 )
@@ -658,6 +663,82 @@ def _collect_role_patterns(root: Path) -> tuple[dict[str, list[str]], str, list[
         return _default_role_patterns()
 
     return role_patterns, default_role, role_order
+
+
+def _load_build_producers(root: Path) -> list[dict[str, Any]]:
+    payload = _load_control_yaml_payload(
+        root / BUILD_PRODUCERS_FILE,
+        default=None,
+    )
+    if not isinstance(payload, Mapping) or not payload:
+        raise InventoryError(
+            f"contrôle versionné absent ou invalide: {BUILD_PRODUCERS_FILE}"
+        )
+    validated = _validate_control_payload(
+        root,
+        BUILD_PRODUCERS_FILE,
+        payload,
+        artifact_type="build_producers",
+    )
+    raw_producers = validated.get("producers")
+    if not isinstance(raw_producers, list) or not raw_producers:
+        raise InventoryError(f"producteurs invalides dans {BUILD_PRODUCERS_FILE}")
+
+    producers = [dict(producer) for producer in raw_producers]
+    producer_ids = [str(producer["producer_id"]) for producer in producers]
+    if producer_ids != sorted(producer_ids):
+        raise InventoryError(f"ordre des producteurs invalide dans {BUILD_PRODUCERS_FILE}")
+    if len(set(producer_ids)) != len(producer_ids):
+        raise InventoryError(f"producer_id dupliqué dans {BUILD_PRODUCERS_FILE}")
+
+    claimed_assemblies: set[str] = set()
+    for producer in producers:
+        assembly_ids = [str(value) for value in producer["assembly_ids"]]
+        if assembly_ids != sorted(assembly_ids):
+            raise InventoryError(
+                "ordre des assembly_ids invalide pour "
+                f"producer_id={producer['producer_id']}"
+            )
+        duplicates = claimed_assemblies & set(assembly_ids)
+        if duplicates:
+            raise InventoryError(
+                "assembly_id couvert par plusieurs producteurs: "
+                + ", ".join(sorted(duplicates))
+            )
+        claimed_assemblies.update(assembly_ids)
+
+    tracked = set(git_tracked_files(root))
+
+    def validate_program_path(path: str, *, role: str) -> None:
+        _clean_path(path, role=role, repository=root)
+        if path not in tracked:
+            raise InventoryError(f"{role} non suivi par Git: {path}")
+        target = root / path
+        try:
+            metadata = target.lstat()
+        except OSError as exc:
+            raise InventoryError(f"{role} absent: {path}") from exc
+        if stat.S_ISLNK(metadata.st_mode):
+            raise InventoryError(f"{role} symbolique interdit: {path}")
+        if not stat.S_ISREG(metadata.st_mode) or metadata.st_nlink != 1:
+            raise InventoryError(
+                f"{role} doit être un fichier régulier sans hardlink: {path}"
+            )
+
+    for producer in producers:
+        recorder = str(producer["recorder"])
+        if recorder != CANONICAL_BUILD_RECORDER:
+            raise InventoryError(
+                "recorder non canonique pour "
+                f"producer_id={producer['producer_id']}: {recorder}"
+            )
+        validate_program_path(
+            str(producer["assembler"]),
+            role="assembleur de build",
+        )
+        validate_program_path(recorder, role="recorder de build")
+
+    return [_canonicalize(producer) for producer in producers]
 
 
 def _load_source_roles(
@@ -1582,6 +1663,110 @@ def _observed_build_coverage(
             "variants": variants,
         }
     return coverage
+
+
+def _observed_build_integration(
+    declared_assemblies: list[Mapping[str, Any]],
+    observed_builds: list[Mapping[str, Any]],
+    producers: list[Mapping[str, Any]],
+) -> dict[str, Any]:
+    declared_by_id: dict[str, Mapping[str, Any]] = {}
+    declared_by_identity: dict[tuple[str, str], str] = {}
+    for assembly in declared_assemblies:
+        if assembly.get("scope") != "manual":
+            continue
+        assembly_id = str(assembly.get("assembly_id", ""))
+        manual = str(assembly.get("manual", ""))
+        variant = str(assembly.get("variant", ""))
+        if not assembly_id or not manual or not variant:
+            continue
+        declared_by_id[assembly_id] = assembly
+        declared_by_identity[(manual, variant)] = assembly_id
+
+    observed_ids = {
+        assembly_id
+        for build in observed_builds
+        if (
+            assembly_id := declared_by_identity.get(
+                (str(build.get("manual", "")), str(build.get("variant", "")))
+            )
+        )
+        is not None
+    }
+    claims: dict[str, list[str]] = defaultdict(list)
+    producer_by_id: dict[str, Mapping[str, Any]] = {}
+    for producer in producers:
+        producer_id = str(producer.get("producer_id", ""))
+        if producer_id:
+            producer_by_id[producer_id] = producer
+        for assembly_id in producer.get("assembly_ids", []):
+            claims[str(assembly_id)].append(producer_id)
+
+    required_ids = set(declared_by_id)
+    registered_ids = set(claims)
+    duplicate_ids = sorted(
+        assembly_id
+        for assembly_id, producer_ids in claims.items()
+        if len(producer_ids) != 1
+    )
+    missing_ids = sorted(required_ids - registered_ids)
+    unexpected_ids = sorted(registered_ids - required_ids)
+    unobserved_ids = sorted(required_ids - observed_ids)
+    assembler_mismatches = sorted(
+        assembly_id
+        for assembly_id in required_ids & registered_ids
+        if len(claims[assembly_id]) == 1
+        and str(declared_by_id[assembly_id].get("assembler", ""))
+        != str(producer_by_id[claims[assembly_id][0]].get("assembler", ""))
+    )
+    recorder_mismatches = sorted(
+        producer_id
+        for producer_id, producer in producer_by_id.items()
+        if producer.get("recorder") != CANONICAL_BUILD_RECORDER
+    )
+
+    integrated_producers: list[str] = []
+    for producer_id, producer in sorted(producer_by_id.items()):
+        assembly_ids = {str(value) for value in producer.get("assembly_ids", [])}
+        if (
+            assembly_ids
+            and assembly_ids <= required_ids
+            and assembly_ids <= observed_ids
+            and not (assembly_ids & set(duplicate_ids))
+            and not (assembly_ids & set(assembler_mismatches))
+            and producer_id not in recorder_mismatches
+        ):
+            integrated_producers.append(producer_id)
+
+    required_producers = sorted(producer_by_id)
+    diagnostics = (
+        duplicate_ids
+        + missing_ids
+        + unexpected_ids
+        + unobserved_ids
+        + assembler_mismatches
+        + recorder_mismatches
+    )
+    status = (
+        "integrated"
+        if not diagnostics
+        and integrated_producers == required_producers
+        else "not_integrated"
+    )
+    return {
+        "assembler_mismatches": assembler_mismatches,
+        "duplicate_assembly_ids": duplicate_ids,
+        "entrypoint": (
+            "python scripts/build_manifest.py --receipt <build-receipt.json>"
+        ),
+        "integrated_producers": integrated_producers,
+        "missing_assembly_ids": missing_ids,
+        "recorder_mismatches": recorder_mismatches,
+        "required_producers": required_producers,
+        "status": status,
+        "unexpected_assembly_ids": unexpected_ids,
+        "unobserved_assembly_ids": unobserved_ids,
+    }
 
 
 def _build_anomaly_fingerprint_table(
@@ -4050,12 +4235,19 @@ def _build_inventory(
         inventory["declared_assemblies"],
         inventory["observed_builds"],
     )
-    inventory["observed_build_integration"] = {
-        "entrypoint": (
-            "python scripts/build_manifest.py --receipt <build-receipt.json>"
-        ),
-        "status": "not_integrated",
-    }
+    producer_path = root / BUILD_PRODUCERS_FILE
+    producers = (
+        _load_build_producers(root)
+        if BUILD_PRODUCERS_FILE in tracked_set
+        or producer_path.exists()
+        or producer_path.is_symlink()
+        else []
+    )
+    inventory["observed_build_integration"] = _observed_build_integration(
+        inventory["declared_assemblies"],
+        inventory["observed_builds"],
+        producers,
+    )
     return inventory
 
 
@@ -5022,7 +5214,12 @@ def _is_relevant_source(path: str) -> bool:
 
 def _is_model_source(path: str) -> bool:
     return (
-        path in {SOURCE_ROLES_FILE, ANOMALY_DISPOSITIONS_FILE}
+        path
+        in {
+            SOURCE_ROLES_FILE,
+            ANOMALY_DISPOSITIONS_FILE,
+            BUILD_PRODUCERS_FILE,
+        }
         or
         _is_relevant_source(path)
         or _is_relevant_tex(path)
@@ -9348,8 +9545,8 @@ def _release_strict_gate(inventory: Mapping[str, Any]) -> dict[str, Any]:
     observed_coverage = inventory.get("observed_build_coverage", {})
     observed_integration = inventory.get("observed_build_integration")
     integration_ready = (
-        not isinstance(observed_integration, Mapping)
-        or observed_integration.get("status") == "integrated"
+        isinstance(observed_integration, Mapping)
+        and observed_integration.get("status") == "integrated"
     )
     if not integration_ready:
         reasons.append("build_receipt_producteurs_non_intégrés")

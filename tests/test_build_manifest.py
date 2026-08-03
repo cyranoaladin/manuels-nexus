@@ -800,22 +800,141 @@ def test_committed_manifest_rejects_canonical_manifest_only_dirty(
     assert manifest.read_bytes() == modified
 
 
-def test_observed_build_integration_remains_exactly_not_integrated(
-    tmp_path: Path,
+def _declared_1spe_build_assemblies() -> list[dict[str, object]]:
+    assembler = "Mathematiques/manuel-maths/scripts/assemble_manuel.py"
+    return [
+        {
+            "assembler": assembler,
+            "assembly_id": "math:manual:1SPE:eleve",
+            "manual": "1SPE",
+            "scope": "manual",
+            "variant": "eleve",
+        },
+        {
+            "assembler": assembler,
+            "assembly_id": "math:manual:1SPE:professeur",
+            "manual": "1SPE",
+            "scope": "manual",
+            "variant": "professeur",
+        },
+    ]
+
+
+def _registered_1spe_build_producer() -> list[dict[str, object]]:
+    return [
+        {
+            "assembler": "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+            "assembly_ids": [
+                "math:manual:1SPE:eleve",
+                "math:manual:1SPE:professeur",
+            ],
+            "producer_id": "math-1spe-manual",
+            "recorder": "scripts/build_manifest.py",
+        }
+    ]
+
+
+def test_observed_build_integration_is_derived_from_complete_evidence(
     inventory_module,
 ) -> None:
-    _git_repository(tmp_path)
+    integration = inventory_module._observed_build_integration(
+        _declared_1spe_build_assemblies(),
+        [
+            {"manual": "1SPE", "variant": "eleve"},
+            {"manual": "1SPE", "variant": "professeur"},
+        ],
+        _registered_1spe_build_producer(),
+    )
 
-    inventory = inventory_module.build_inventory(tmp_path)
-
-    assert inventory["observed_build_integration"] == {
+    assert integration == {
+        "assembler_mismatches": [],
+        "duplicate_assembly_ids": [],
         "entrypoint": (
             "python scripts/build_manifest.py --receipt <build-receipt.json>"
         ),
-        "status": "not_integrated",
+        "integrated_producers": ["math-1spe-manual"],
+        "missing_assembly_ids": [],
+        "recorder_mismatches": [],
+        "required_producers": ["math-1spe-manual"],
+        "status": "integrated",
+        "unexpected_assembly_ids": [],
+        "unobserved_assembly_ids": [],
     }
-    gate = inventory_module._release_strict_gate(inventory)
-    assert "build_receipt_producteurs_non_intégrés" in gate["reasons"]
+
+
+@pytest.mark.parametrize(
+    ("mutation", "field", "value"),
+    [
+        pytest.param(
+            "unobserved",
+            "unobserved_assembly_ids",
+            ["math:manual:1SPE:eleve"],
+            id="student-build-unobserved",
+        ),
+        pytest.param(
+            "missing",
+            "missing_assembly_ids",
+            ["math:manual:1SPE:professeur"],
+            id="assembly-unregistered",
+        ),
+        pytest.param(
+            "unexpected",
+            "unexpected_assembly_ids",
+            ["math:manual:1SPE:unknown"],
+            id="unknown-registered-assembly",
+        ),
+        pytest.param(
+            "duplicate",
+            "duplicate_assembly_ids",
+            ["math:manual:1SPE:eleve"],
+            id="duplicate-registry-coverage",
+        ),
+        pytest.param(
+            "assembler",
+            "assembler_mismatches",
+            ["math:manual:1SPE:eleve"],
+            id="assembler-mismatch",
+        ),
+    ],
+)
+def test_observed_build_integration_fails_closed_on_incomplete_evidence(
+    inventory_module,
+    mutation: str,
+    field: str,
+    value: list[str],
+) -> None:
+    declared = _declared_1spe_build_assemblies()
+    observed = [
+        {"manual": "1SPE", "variant": "eleve"},
+        {"manual": "1SPE", "variant": "professeur"},
+    ]
+    producers = _registered_1spe_build_producer()
+    if mutation == "unobserved":
+        observed = observed[1:]
+    elif mutation == "missing":
+        producers[0]["assembly_ids"] = ["math:manual:1SPE:eleve"]
+    elif mutation == "unexpected":
+        producers[0]["assembly_ids"].append("math:manual:1SPE:unknown")
+    elif mutation == "duplicate":
+        producers.append(
+            {
+                "assembler": producers[0]["assembler"],
+                "assembly_ids": ["math:manual:1SPE:eleve"],
+                "producer_id": "math-1spe-duplicate",
+                "recorder": "scripts/build_manifest.py",
+            }
+        )
+    else:
+        declared[0]["assembler"] = "scripts/other_assembler.py"
+
+    integration = inventory_module._observed_build_integration(
+        declared,
+        observed,
+        producers,
+    )
+
+    assert integration["status"] == "not_integrated"
+    assert integration[field] == value
 
 
 def test_empty_manifest_is_model_valid_and_yields_no_observed_build(
@@ -1304,16 +1423,32 @@ def test_release_execution_dimension_passes_when_static_and_observed_are_ready(
                 },
             }
         },
+        "observed_build_integration": {"status": "integrated"},
     }
 
     gate = inventory_module._release_strict_gate(inventory)
 
     assert gate["dimensions"]["execution"] == "passed"
+    assert "build_receipt_producteurs_non_intégrés" not in gate["reasons"]
     assert not any(
         "build_observé_absent" in reason
         or "assemblage_déclaré_absent" in reason
         for reason in gate["reasons"]
     )
+
+
+def test_release_missing_build_integration_proof_fails_closed(
+    inventory_module,
+) -> None:
+    inventory = {
+        "deliverable_matrix": {"manuals": {}},
+        "observed_build_coverage": {},
+    }
+
+    gate = inventory_module._release_strict_gate(inventory)
+
+    assert gate["dimensions"]["execution"] == "failed"
+    assert "build_receipt_producteurs_non_intégrés" in gate["reasons"]
 
 
 def test_release_keeps_unintegrated_build_receipt_as_explicit_debt(

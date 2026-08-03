@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:build-producers",
+  "title": "Nexus observed-build producer registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "control_digest",
+    "producers",
+    "schema_ref",
+    "schema_version"
+  ],
+  "properties": {
+    "artifact_type": { "const": "build_producers" },
+    "control_digest": { "$ref": "#/$defs/sha256" },
+    "producers": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/producer" }
+    },
+    "schema_ref": {
+      "const": "audit/schemas/v1/build-producers.schema.json"
+    },
+    "schema_version": { "const": 1 }
+  },
+  "$defs": {
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assembler",
+        "assembly_ids",
+        "producer_id",
+        "recorder"
+      ],
+      "properties": {
+        "assembler": { "$ref": "#/$defs/repositoryPath" },
+        "assembly_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+:manual:[A-Z0-9_-]+:[a-z0-9_-]+$"
+          }
+        },
+        "producer_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "recorder": { "$ref": "#/$defs/repositoryPath" }
+      }
+    },
+    "repositoryPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\)[^\\n]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

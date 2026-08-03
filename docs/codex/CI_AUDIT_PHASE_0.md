@@ -15,8 +15,10 @@ complet :
 - `--require-clean`, `--check`, `--validate-model` et `--fail-on-new` avec un
   code de sortie exactement nul ;
 - `--release-strict` avec un code exactement égal à 7, une sortie identique sur
-  deux exécutions et des dettes réelles d’intégration, de 1SPE et de dimensions
-  non couvertes.
+  deux exécutions, des dettes réelles de 1SPE et des dimensions non couvertes ;
+- la concordance entre `observed_build_integration.status` dans l’inventaire
+  généré et la présence de `build_receipt_producteurs_non_intégrés` : la dette
+  est exigée pour `not_integrated` et interdite pour `integrated`.
 
 Les preuves sont écrites sous `${{ runner.temp }}`, donc hors du worktree avant
 `--require-clean`. La CI n’appelle jamais `--update-baseline`. Les actions sont
@@ -48,7 +50,7 @@ humaine et un diff avant/après.
   CI.
 - Le runner est fixé à `ubuntu-24.04` et Python à `3.12.11`, mais les paquets
   TeX/Poppler installés par APT ne sont pas verrouillés octet par octet.
-- Le workflow restera rouge tant que `--fail-on-new` refuse la baseline
-  provisoire. Ce refus est volontaire et n’est ni masqué ni converti en succès.
-- `--release-strict` reste rouge de manière contrôlée tant que les 69 dettes
-  déterministes observées ne sont pas résolues.
+- `--release-strict` reste rouge de manière contrôlée tant que les dettes
+  déterministes observées ne sont pas résolues. La résolution de l’intégration
+  des producteurs ne vaut ni acceptation scientifique, ni acceptation
+  éditoriale, ni autorisation de publication.

@@ -99,6 +99,22 @@ def parse_structured_file(path: Path) -> Any:
     raise CIAuditError(f"format structuré non pris en charge: {path}")
 
 
+def load_observed_build_integration_status(root: Path) -> str:
+    """Read the generated integration proof and reject missing evidence."""
+
+    path = root / "audit/INVENTAIRE_COLLECTION.json"
+    payload = parse_structured_file(path)
+    if not isinstance(payload, dict):
+        raise CIAuditError("preuve d’intégration des builds invalide")
+    integration = payload.get("observed_build_integration")
+    if not isinstance(integration, dict):
+        raise CIAuditError("preuve d’intégration des builds absente")
+    status = integration.get("status")
+    if status not in {"integrated", "not_integrated"}:
+        raise CIAuditError("statut d’intégration des builds invalide")
+    return status
+
+
 def _tracked_structured_files(root: Path) -> list[Path]:
     try:
         result = subprocess.run(
@@ -328,6 +344,7 @@ def validate_gate_result(
     stdout: bytes,
     *,
     repeated_stdout: bytes | None = None,
+    integration_status: str | None = None,
 ) -> list[str]:
     """Validate exact gate exit/payload semantics without accepting soft failures."""
 
@@ -390,7 +407,15 @@ def validate_gate_result(
             errors.append("release-strict: sortie non déterministe")
         if not reasons:
             errors.append("release-strict: aucune dette réelle")
-        if "build_receipt_producteurs_non_intégrés" not in reasons:
+        integration_debt = "build_receipt_producteurs_non_intégrés"
+        if integration_status not in {"integrated", "not_integrated"}:
+            errors.append("release-strict: preuve d'intégration invalide")
+        elif integration_status == "integrated" and integration_debt in reasons:
+            errors.append("release-strict: dette d'intégration obsolète")
+        elif (
+            integration_status == "not_integrated"
+            and integration_debt not in reasons
+        ):
             errors.append("release-strict: dette d'intégration absente")
         if not any(reason.startswith("1SPE:") for reason in reasons):
             errors.append("release-strict: dette 1SPE absente")
@@ -435,6 +460,7 @@ def run_gates(root: Path, output_dir: Path) -> dict[str, Any]:
     """Run all Phase 0 gates and verify their exact expected contracts."""
 
     output_dir.mkdir(parents=True, exist_ok=True)
+    integration_status = load_observed_build_integration_status(root)
     failures: list[str] = []
     results: dict[str, dict[str, Any]] = {}
     for gate in (*SUCCESS_GATES, RELEASE_GATE):
@@ -470,6 +496,9 @@ def run_gates(root: Path, output_dir: Path) -> dict[str, Any]:
             completed.stdout,
             repeated_stdout=(
                 repeated.stdout if repeated is not None else None
+            ),
+            integration_status=(
+                integration_status if gate == RELEASE_GATE else None
             ),
         )
         failures.extend(gate_failures)

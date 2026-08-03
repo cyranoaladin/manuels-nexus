@@ -48,12 +48,31 @@
     "observed_build_integration": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["entrypoint", "status"],
+      "required": [
+        "assembler_mismatches",
+        "duplicate_assembly_ids",
+        "entrypoint",
+        "integrated_producers",
+        "missing_assembly_ids",
+        "recorder_mismatches",
+        "required_producers",
+        "status",
+        "unexpected_assembly_ids",
+        "unobserved_assembly_ids"
+      ],
       "properties": {
+        "assembler_mismatches": { "$ref": "#/$defs/stringList" },
+        "duplicate_assembly_ids": { "$ref": "#/$defs/stringList" },
         "entrypoint": {
           "const": "python scripts/build_manifest.py --receipt <build-receipt.json>"
         },
-        "status": { "const": "not_integrated" }
+        "integrated_producers": { "$ref": "#/$defs/stringList" },
+        "missing_assembly_ids": { "$ref": "#/$defs/stringList" },
+        "recorder_mismatches": { "$ref": "#/$defs/stringList" },
+        "required_producers": { "$ref": "#/$defs/stringList" },
+        "status": { "enum": ["integrated", "not_integrated"] },
+        "unexpected_assembly_ids": { "$ref": "#/$defs/stringList" },
+        "unobserved_assembly_ids": { "$ref": "#/$defs/stringList" }
       }
     },
     "observed_builds": { "type": "array" },
@@ -68,6 +87,11 @@
     "source_files": { "type": "array", "items": { "type": "string" } }
   },
   "$defs": {
+    "stringList": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
     "sha256": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"

@@ -397,6 +397,19 @@ def _gate_payload_decoded(
     )
 
 
+def _write_inventory_integration_proof(root: Path, status: str) -> None:
+    path = root / "audit/INVENTAIRE_COLLECTION.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {"observed_build_integration": {"status": status}},
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+
 def test_gate_contract_requires_exact_success_codes(ci_module) -> None:
     for gate in ("require-clean", "check", "validate-model", "fail-on-new"):
         payload = _gate_payload(gate, success=True, exit_code=0)
@@ -424,6 +437,30 @@ def test_gate_contract_rejects_json_scalar_type_confusion(
     payload[field] = invalid
     stdout = (json.dumps(payload, sort_keys=True) + "\n").encode()
     assert ci_module.validate_gate_result("check", 0, stdout)
+
+
+def test_generated_inventory_build_integration_proof_is_fail_closed(
+    ci_module, tmp_path: Path
+) -> None:
+    _write_inventory_integration_proof(tmp_path, "integrated")
+    assert ci_module.load_observed_build_integration_status(tmp_path) == (
+        "integrated"
+    )
+
+    _write_inventory_integration_proof(tmp_path, "not_integrated")
+    assert ci_module.load_observed_build_integration_status(tmp_path) == (
+        "not_integrated"
+    )
+
+    for payload in (
+        {},
+        {"observed_build_integration": {}},
+        {"observed_build_integration": {"status": "unknown"}},
+    ):
+        path = tmp_path / "audit/INVENTAIRE_COLLECTION.json"
+        path.write_text(json.dumps(payload) + "\n", encoding="utf-8")
+        with pytest.raises(ci_module.CIAuditError, match="intégration"):
+            ci_module.load_observed_build_integration_status(tmp_path)
 
 
 @pytest.mark.parametrize(
@@ -646,6 +683,7 @@ def test_release_contract_requires_exact_deterministic_real_debt(ci_module) -> N
             7,
             payload,
             repeated_stdout=payload,
+            integration_status="not_integrated",
         )
         == []
     )
@@ -654,6 +692,7 @@ def test_release_contract_requires_exact_deterministic_real_debt(ci_module) -> N
         7,
         payload,
         repeated_stdout=payload + b" ",
+        integration_status="not_integrated",
     )
     missing_integration = _gate_payload(
         "release-strict",
@@ -666,6 +705,7 @@ def test_release_contract_requires_exact_deterministic_real_debt(ci_module) -> N
         7,
         missing_integration,
         repeated_stdout=missing_integration,
+        integration_status="not_integrated",
     )
     wrong_code = _gate_payload(
         "release-strict",
@@ -678,6 +718,54 @@ def test_release_contract_requires_exact_deterministic_real_debt(ci_module) -> N
         7,
         wrong_code,
         repeated_stdout=wrong_code,
+        integration_status="not_integrated",
+    )
+
+
+def test_release_contract_matches_generated_build_integration_proof(
+    ci_module,
+) -> None:
+    remaining_reasons = [
+        "1SPE:anomalie:blocking_statuses:anomalies.blocking_statuses:1344",
+        "dimension_non_couverte:mathematics",
+        "dimension_non_couverte:pedagogy",
+        "dimension_non_couverte:print",
+        "dimension_non_couverte:regulation",
+        "dimension_non_couverte:visual",
+    ]
+    integrated = _gate_payload(
+        "release-strict",
+        success=False,
+        exit_code=7,
+        reasons=remaining_reasons,
+    )
+    assert ci_module.validate_gate_result(
+        "release-strict",
+        7,
+        integrated,
+        repeated_stdout=integrated,
+        integration_status="integrated",
+    ) == []
+
+    stale_debt = _gate_payload(
+        "release-strict",
+        success=False,
+        exit_code=7,
+        reasons=remaining_reasons + ["build_receipt_producteurs_non_intégrés"],
+    )
+    assert ci_module.validate_gate_result(
+        "release-strict",
+        7,
+        stale_debt,
+        repeated_stdout=stale_debt,
+        integration_status="integrated",
+    )
+    assert ci_module.validate_gate_result(
+        "release-strict",
+        7,
+        integrated,
+        repeated_stdout=integrated,
+        integration_status="not_integrated",
     )
 
 
