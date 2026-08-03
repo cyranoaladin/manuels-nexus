@@ -383,14 +383,11 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
             and disposition.get("policy_rule") != "historical-evidence"
         )
     }
-    active_managed = managed & {
-        str(record["fingerprint"]) for record in records
-    }
-    resolved_fingerprint = min(active_managed)
+    resolved_fingerprint = min(managed)
     records_after_resolution = [
         record
         for record in records
-        if record["fingerprint"] != resolved_fingerprint
+        if str(record["fingerprint"]) not in managed
     ]
     plan = qualification_module.plan_materialization(
         policy,
@@ -411,10 +408,11 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
         )
     }
 
-    assert resolved_fingerprint not in {
+    assert managed.isdisjoint(
         str(record["fingerprint"]) for record in records_after_resolution
-    }
+    )
     assert resolved_fingerprint in current_entries
+    assert set(current_entries) == managed
     assert plan["approved_fingerprint_count"] == 186
     assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
