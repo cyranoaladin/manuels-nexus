@@ -3,7 +3,9 @@ from __future__ import annotations
 import copy
 import importlib.util
 import json
+import shutil
 import subprocess
+import time
 from pathlib import Path
 
 import pytest
@@ -795,6 +797,87 @@ def test_carry_in_starts_at_safe_top_and_precedes_native_notes(tmp_path: Path) -
     assert notes["native"]["target_y_sp"] == 56 * SP_PER_PT
 
 
+def test_depth_two_report_is_placed_only_on_its_final_target_page(
+    tmp_path: Path,
+) -> None:
+    layout = _layout_with_identical_anchors()
+    reported = layout["notes"][0]
+    reported["id"] = "reported"
+    reported["target_shipout_index"] = 3
+    reported["target_y_sp"] = 10 * SP_PER_PT
+    reported["report_decoration_height_sp"] = 5 * SP_PER_PT
+    reported["effective_height_sp"] = 35 * SP_PER_PT
+    reported["report_depth"] = 2
+    reported["requires_marker"] = True
+    layout["notes"] = [reported]
+    layout["state"] = "stable"
+    layout["read_digest"] = layout["computed_digest"]
+    first_page = layout["pages"][0]
+    first_page["native_note_ids"] = ["reported"]
+    first_page["reported_note_ids"] = ["reported"]
+    second_page = {
+        **copy.deepcopy(first_page),
+        "shipout_index": 2,
+        "folio": "2",
+        "rail_side": "left",
+        "native_note_ids": [],
+        "carry_in_note_ids": ["reported"],
+        "placed_note_ids": [],
+    }
+    third_page = {
+        **copy.deepcopy(first_page),
+        "shipout_index": 3,
+        "folio": "3",
+        "rail_side": "right",
+        "native_note_ids": [],
+        "carry_in_note_ids": ["reported"],
+        "placed_note_ids": ["reported"],
+        "reported_note_ids": [],
+    }
+    layout["pages"] = [first_page, second_page, third_page]
+    _load_margin_contract().validate_margin_layout(layout)
+    source = tmp_path / "depth-two.json"
+    driver = tmp_path / "depth-two-driver.lua"
+    _write_json(source, layout)
+    driver.write_text(
+        """
+local json = assert(loadfile(arg[1]))()
+local solver = assert(loadfile(arg[2]))()
+local file = assert(io.open(arg[3], "rb"))
+local current = json.decode(file:read("*a"))
+assert(file:close())
+io.write(json.encode(solver.solve(current, nil)))
+""".strip(),
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            "texlua",
+            str(driver),
+            str(JSON_CODEC),
+            str(MANUAL_ROOT / "gabarits" / "nexus-margin-layout.lua"),
+            str(source),
+        ],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    solved = json.loads(result.stdout)
+    _load_margin_contract().validate_margin_layout(solved)
+    assert solved["pages"][0]["placed_note_ids"] == []
+    assert solved["pages"][1]["carry_in_note_ids"] == ["reported"]
+    assert solved["pages"][1]["reported_note_ids"] == ["reported"]
+    assert solved["pages"][1]["placed_note_ids"] == []
+    assert solved["pages"][2]["carry_in_note_ids"] == ["reported"]
+    assert solved["pages"][2]["placed_note_ids"] == ["reported"]
+    assert solved["notes"][0]["target_shipout_index"] == 3
+    assert solved["notes"][0]["report_depth"] == 2
+
+
 @pytest.mark.parametrize(
     "case",
     [
@@ -1102,3 +1185,79 @@ os.rename = real_rename
     assert f"simulated {failure_stage} failure" in result.stderr
     assert output.read_bytes() == b"old-output"
     assert {path.name for path in tmp_path.iterdir()} == entries_before
+
+
+def test_cli_serializes_real_concurrent_publishers_without_lost_update(
+    tmp_path: Path,
+) -> None:
+    strace = shutil.which("strace")
+    assert strace is not None, "the concurrency regression requires strace"
+    first_source = tmp_path / "first.json"
+    second_source = tmp_path / "second.json"
+    output = tmp_path / "output.json"
+    trace = tmp_path / "first.strace"
+    first_layout = _layout_with_identical_anchors()
+    second_layout = copy.deepcopy(first_layout)
+    second_layout["run_nonce"] = "fedcba9876543210fedcba9876543210"
+    second_layout["variant"] = "professeur"
+    _write_json(first_source, first_layout)
+    _write_json(second_source, second_layout)
+    output.write_bytes(b"old-output")
+    first_payload = (
+        tmp_path
+        / ".output.json.nexus-margin-tmp-0123456789abcdef0123456789abcdef-01"
+        / "payload"
+    )
+    command = [
+        strace,
+        "-qq",
+        "-e",
+        "trace=rename",
+        "-e",
+        "inject=rename:delay_enter=2s",
+        "-o",
+        str(trace),
+        "texlua",
+        str(SOLVER),
+        "--solve",
+        str(first_source),
+        "--output",
+        str(output),
+    ]
+    first = subprocess.Popen(
+        command,
+        cwd=tmp_path,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    try:
+        deadline = time.monotonic() + 5
+        while time.monotonic() < deadline:
+            if first_payload.exists() and first_payload.stat().st_size > 0:
+                break
+            if first.poll() is not None:
+                break
+            time.sleep(0.005)
+        assert first_payload.exists() and first_payload.stat().st_size > 0
+        time.sleep(0.1)
+        assert first.poll() is None
+
+        second = _run_solver(second_source, output, cwd=tmp_path)
+        output_after_second = output.read_bytes()
+        first_stdout, first_stderr = first.communicate(timeout=5)
+    finally:
+        if first.poll() is None:
+            first.kill()
+            first.communicate()
+
+    assert first.returncode == 0, first_stderr
+    assert first_stdout == ""
+    assert second.returncode != 0
+    assert "output publication is locked" in second.stderr
+    assert output_after_second == b"old-output"
+    solved = json.loads(output.read_text(encoding="utf-8"))
+    _load_margin_contract().validate_margin_layout(solved)
+    assert solved["variant"] == "eleve"
+    assert not (tmp_path / ".output.json.nexus-margin-lock").exists()
+    assert not list(tmp_path.glob(".output.json.nexus-margin-tmp-*"))

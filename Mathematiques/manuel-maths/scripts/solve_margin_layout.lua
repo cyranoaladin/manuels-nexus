@@ -128,6 +128,47 @@ local function validate_output_parent(path)
   return parent, basename
 end
 
+local function acquire_output_lock(parent, basename)
+  local lfs = require("lfs")
+  local path = parent .. "/." .. basename .. ".nexus-margin-lock"
+  local ok, lock_error = lfs.mkdir(path)
+  if not ok then
+    if lfs.symlinkattributes(path) then
+      fail("output publication is locked: " .. path)
+    end
+    fail("cannot acquire output publication lock: " .. tostring(lock_error))
+  end
+  local attributes = lfs.symlinkattributes(path)
+  if not attributes or attributes.mode ~= "directory"
+      or attributes.dev == nil or attributes.ino == nil then
+    lfs.rmdir(path)
+    fail("cannot identify output publication lock: " .. path)
+  end
+  return {
+    path = path,
+    dev = attributes.dev,
+    ino = attributes.ino,
+  }
+end
+
+local function require_owned_output_lock(lock)
+  local lfs = require("lfs")
+  local attributes = lfs.symlinkattributes(lock.path)
+  if not attributes or attributes.mode ~= "directory"
+      or attributes.dev ~= lock.dev or attributes.ino ~= lock.ino then
+    fail("output publication lock changed: " .. lock.path)
+  end
+end
+
+local function release_output_lock(lock)
+  local lfs = require("lfs")
+  require_owned_output_lock(lock)
+  local ok, release_error = lfs.rmdir(lock.path)
+  if not ok then
+    fail("cannot release output publication lock: " .. tostring(release_error))
+  end
+end
+
 
 local function output_is_unchanged(path, expected)
   local current = output_snapshot(path)
@@ -169,7 +210,7 @@ local function write_file(path, content)
   end
 end
 
-local function publish_output(path, content, run_nonce, initial_snapshot)
+local function publish_output(path, content, run_nonce, initial_snapshot, lock)
   local lfs = require("lfs")
   local parent, basename = validate_output_parent(path)
   local temporary_directory = nil
@@ -207,7 +248,9 @@ local function publish_output(path, content, run_nonce, initial_snapshot)
 
   local ok, publication_error = pcall(function()
     write_file(temporary_payload, content)
+    require_owned_output_lock(lock)
     output_is_unchanged(path, initial_snapshot)
+    require_owned_output_lock(lock)
     local renamed, rename_error = os.rename(temporary_payload, path)
     if not renamed then
       fail("cannot publish output: " .. tostring(rename_error))
@@ -228,17 +271,29 @@ local function main()
       or (previous_path and paths_alias(output_path, previous_path)) then
     fail("output must differ from every input")
   end
-  validate_output_parent(output_path)
-  local initial_output = output_snapshot(output_path)
-
-  local root = script_directory() .. "/.."
-  local json = load_module(root .. "/gabarits/nexus-margin-json.lua", "JSON codec")
-  local layout = load_module(root .. "/gabarits/nexus-margin-layout.lua", "layout solver")
-  local current = json.decode(read_file(input_path))
-  local previous = previous_path and json.decode(read_file(previous_path)) or nil
-  local solved = layout.solve(current, previous)
-  local encoded = json.encode(solved)
-  publish_output(output_path, encoded, current.run_nonce, initial_output)
+  local parent, basename = validate_output_parent(output_path)
+  local lock = acquire_output_lock(parent, basename)
+  local operation_ok, operation_error = pcall(function()
+    local initial_output = output_snapshot(output_path)
+    local root = script_directory() .. "/.."
+    local json = load_module(root .. "/gabarits/nexus-margin-json.lua", "JSON codec")
+    local layout = load_module(root .. "/gabarits/nexus-margin-layout.lua", "layout solver")
+    local current = json.decode(read_file(input_path))
+    local previous = previous_path and json.decode(read_file(previous_path)) or nil
+    local solved = layout.solve(current, previous)
+    local encoded = json.encode(solved)
+    publish_output(output_path, encoded, current.run_nonce, initial_output, lock)
+  end)
+  local release_ok, release_error = pcall(release_output_lock, lock)
+  if not operation_ok then
+    if not release_ok then
+      error(tostring(operation_error) .. "; " .. tostring(release_error), 0)
+    end
+    error(operation_error, 0)
+  end
+  if not release_ok then
+    error(release_error, 0)
+  end
 end
 
 local ok, message = pcall(main)

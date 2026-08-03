@@ -663,10 +663,11 @@ function M.solve(current_layout, previous_layout_or_nil)
     page.carry_in_note_ids = new_array_like(page.carry_in_note_ids)
     for _, note in ipairs(carry) do
       page.carry_in_note_ids[#page.carry_in_note_ids + 1] = note.id
-      note.target_shipout_index = page.shipout_index
-      note.target_y_sp = cursor
-      cursor = cursor + note.effective_height_sp + GAP_SP
-      placed_ids[#placed_ids + 1] = note.id
+      if note.target_shipout_index == page.shipout_index then
+        note.target_y_sp = cursor
+        cursor = cursor + note.effective_height_sp + GAP_SP
+        placed_ids[#placed_ids + 1] = note.id
+      end
     end
 
     local native = {}
