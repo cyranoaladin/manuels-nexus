@@ -15,6 +15,14 @@ def test_log_with_missing_nexus_asset_is_rejected():
     assert log_has_missing_asset_warning("ClassWarning: Nexus asset missing: icons")
 
 
+def test_log_with_missing_character_is_rejected():
+    import pdf_integrity
+
+    assert pdf_integrity.log_has_missing_character_warning(
+        "Missing character: There is no ◆ (U+25C6) in font TeXGyreHeros!"
+    )
+
+
 def test_pdffonts_output_requires_every_font_to_be_embedded():
     output = """name                                 type              encoding         emb sub uni object ID
 ------------------------------------ ----------------- ---------------- --- --- --- ---------
@@ -160,3 +168,4 @@ def test_specimen_compiles_with_exit_zero():
         cwd=ROOT,
     )
     assert result.returncode == 0, f"make specimen failed:\n{result.stdout[-2000:]}\n{result.stderr[-2000:]}"
+    assert "Missing character:" not in result.stdout + result.stderr

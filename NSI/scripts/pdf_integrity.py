@@ -9,10 +9,15 @@ from typing import Any
 
 
 MISSING_ASSET = "Nexus asset missing:"
+MISSING_CHARACTER = "Missing character:"
 
 
 def log_has_missing_asset_warning(log: str) -> bool:
     return MISSING_ASSET in log
+
+
+def log_has_missing_character_warning(log: str) -> bool:
+    return MISSING_CHARACTER in log
 
 
 def fonts_are_embedded(output: str) -> bool:
@@ -32,8 +37,12 @@ def verify_pdf(
     runner: Callable[..., Any] | None = None,
     environment: Mapping[str, str] | None = None,
 ) -> int:
-    if log_has_missing_asset_warning(log.read_text(encoding="utf-8", errors="replace")):
+    log_text = log.read_text(encoding="utf-8", errors="replace")
+    if log_has_missing_asset_warning(log_text):
         print(f"Gabarit Nexus absent : {log}")
+        return 1
+    if log_has_missing_character_warning(log_text):
+        print(f"Glyphe manquant dans le PDF : {log}")
         return 1
     try:
         active_runner = subprocess.run if runner is None else runner
