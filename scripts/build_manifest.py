@@ -345,17 +345,50 @@ def _load_manifest_bytes(payload: bytes) -> dict[str, Any]:
     return value
 
 
-def _same_envelope(current: Mapping[str, Any], expected: Mapping[str, Any]) -> bool:
+def _same_envelope(
+    current: Mapping[str, Any],
+    expected: Mapping[str, Any],
+    *,
+    root: Path | None = None,
+) -> bool:
     fields = (
         "artifact_type",
         "generated_by",
         "model_digest",
-        "provenance",
         "schema_ref",
         "schema_version",
         "source_digest",
     )
-    return all(current.get(field) == expected.get(field) for field in fields)
+    if not all(current.get(field) == expected.get(field) for field in fields):
+        return False
+    current_provenance = current.get("provenance")
+    expected_provenance = expected.get("provenance")
+    if current_provenance == expected_provenance:
+        return True
+    if root is None or not current.get("builds"):
+        return False
+    if not isinstance(current_provenance, Mapping) or not isinstance(
+        expected_provenance, Mapping
+    ):
+        return False
+    if (
+        current_provenance.get("branch") != expected_provenance.get("branch")
+        or current_provenance.get("dirty") is not False
+        or expected_provenance.get("dirty") is not False
+    ):
+        return False
+    old_head = current_provenance.get("head_sha")
+    new_head = expected_provenance.get("head_sha")
+    if not isinstance(old_head, str) or not isinstance(new_head, str):
+        return False
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", old_head, new_head],
+        cwd=root,
+        check=False,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    return ancestor.returncode == 0
 
 
 def _validate_build_shape(build: Mapping[str, Any]) -> None:
@@ -768,7 +801,7 @@ def record_successful_build(
         current: dict[str, Any],
         _git_state_snapshot: tuple[str, str, bool],
     ) -> dict[str, Any]:
-        if not _same_envelope(current, envelope):
+        if not _same_envelope(current, envelope, root=root):
             raise BuildManifestError("enveloppe incompatible")
         builds = [dict(value) for value in current["builds"]]
         if current.get("build_state_digest") != build_state_digest(builds):

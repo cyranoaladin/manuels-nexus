@@ -2071,6 +2071,48 @@ def test_record_helper_rejects_stale_provenance_from_clean_checkout(
     assert path.read_bytes() == original
 
 
+def test_record_helper_advances_provenance_when_appending_after_commit(
+    tmp_path: Path,
+    manifest_module,
+) -> None:
+    old_head = _git_repository(tmp_path)
+    professor = _build(old_head, "build/professeur.pdf", b"%PDF professor")
+    current = _manifest(old_head, [professor])
+    _write_manifest(tmp_path, current)
+    new_head = subprocess.run(
+        ["git", "-C", str(tmp_path), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    envelope = deepcopy(current)
+    envelope["provenance"] = {
+        "branch": "master",
+        "dirty": False,
+        "head_sha": new_head,
+    }
+    student = _build(new_head, "build/eleve.pdf", b"%PDF student")
+    student["variant"] = "eleve"
+    student["gates"]["student_separation"] = {"passed": True}  # type: ignore[index]
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+
+    manifest_module.record_successful_build(
+        path,
+        student,
+        envelope=envelope,
+        compile_succeeded=True,
+        preflight_succeeded=True,
+        validator=lambda _payload: None,
+    )
+
+    recorded = json.loads(path.read_text(encoding="utf-8"))
+    assert [build["variant"] for build in recorded["builds"]] == [
+        "eleve",
+        "professeur",
+    ]
+    assert recorded["provenance"] == envelope["provenance"]
+
+
 def test_record_helper_serializes_concurrent_distinct_variants(
     tmp_path: Path,
     manifest_module,
