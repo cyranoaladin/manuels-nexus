@@ -519,6 +519,40 @@ def test_render_master_has_one_run_marker_and_no_marked_transversal_input() -> N
         )
 
 
+def test_render_master_configures_closed_student_redaction() -> None:
+    student = assemble_manuel.render_master("eleve", "1" * 32)
+    professor = assemble_manuel.render_master("professeur", "2" * 32)
+
+    assert "\\nxVersionProfesseurfalse" in student
+    assert "\\RenewDocumentEnvironment{corrige}{m +b}{}{}" in student
+    assert "\\renewcommand{\\baremeIndicatif}[1]{}" in student
+    assert "\\nxVersionProfesseurtrue" in professor
+    assert "\\RenewDocumentEnvironment{corrige}{m +b}{}{}" not in professor
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("Exercice 2 1SPE-SUITES-EX-001", "identifiant interne"),
+        ("Corrigé — Évaluation A", "corrigé"),
+        ("CORRIGES", "corrigé"),
+        ("Barème indicatif : 4 points", "barème enseignant"),
+        ("Note professeur : relancer", "note enseignant"),
+    ],
+)
+def test_student_pdf_text_gate_rejects_teacher_leaks(
+    text: str,
+    expected: str,
+) -> None:
+    assert expected in assemble_manuel.student_text_violations(text)
+
+
+def test_student_pdf_text_gate_accepts_student_instructions() -> None:
+    assert assemble_manuel.student_text_violations(
+        "Compléter le programme. Solution : x appartient à [0 ; 1]."
+    ) == []
+
+
 def test_real_professor_order_matches_declared_inventory() -> None:
     inventory = json.loads(
         (GIT_ROOT / "audit/INVENTAIRE_COLLECTION.json").read_text(encoding="utf-8")

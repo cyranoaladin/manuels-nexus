@@ -814,9 +814,21 @@ def render_master(
     content = "\n".join(parts)
 
     titre_var = "professeur" if variant == "professeur" else "eleve"
+    variant_configuration = (
+        "\\nxVersionProfesseurtrue"
+        if variant == "professeur"
+        else "\n".join(
+            (
+                "\\nxVersionProfesseurfalse",
+                "\\RenewDocumentEnvironment{corrige}{m +b}{}{}",
+                "\\renewcommand{\\baremeIndicatif}[1]{}",
+            )
+        )
+    )
     master = f"""% Manuel 1SPE — variante {titre_var}
 % Assemble par scripts/assemble_manuel.py
 \\documentclass{{gabarits/nexus-manuel}}
+{variant_configuration}
 \\matiere{{Mathématiques}}\\niveau{{Première spécialité}}
 \\title{{Manuel de mathématiques — Première spécialité — Édition {titre_var}}}
 \\begin{{document}}
@@ -852,6 +864,49 @@ def _pdf_page_count(
     if match is None or int(match.group(1)) <= 0:
         raise AssemblyError("pagination PDF invalide")
     return int(match.group(1))
+
+
+def student_text_violations(text: str) -> list[str]:
+    """Return stable P0 reasons found in extracted student PDF text."""
+
+    checks = (
+        ("identifiant interne", r"\b1SPE-[A-Z0-9]+(?:-[A-Z0-9]+)*"),
+        ("corrigé", r"(?i:\bcorrig[ée]s?\b)"),
+        ("barème enseignant", r"(?i:\bbar[èe]me indicatif\b)"),
+        (
+            "note enseignant",
+            r"(?i:\b(?:note|réponse|reponse)\s+(?:professeur|enseignant)\b)",
+        ),
+    )
+    return [reason for reason, pattern in checks if re.search(pattern, text)]
+
+
+def _verify_student_pdf_text(
+    pdf_path: Path,
+    *,
+    runner: Callable[..., Any],
+    environment: Mapping[str, str],
+) -> None:
+    try:
+        completed = _run_with_environment(
+            runner,
+            environment,
+            ["pdftotext", "-layout", str(pdf_path), "-"],
+            capture_output=True,
+            text=True,
+            errors="replace",
+            check=False,
+            timeout=60,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise AssemblyError("contrôle textuel élève indisponible") from error
+    if completed.returncode != 0:
+        raise AssemblyError("extraction textuelle élève en échec")
+    violations = student_text_violations(completed.stdout)
+    if violations:
+        raise AssemblyError(
+            "séparation élève rouge: " + ", ".join(violations)
+        )
 
 
 def _first_version_line(completed: Any, tool: str) -> str:
@@ -954,13 +1009,16 @@ def _publish_observed_evidence(
     _revalidate_fingerprints(compiled_fingerprints)
     if evidence_sha256["pdf"] != preflight_pdf_digest:
         raise AssemblyError("PDF modifié après le préflight")
+    gates: dict[str, object] = {
+        "compile": {"passed": True},
+        "preflight": {"passed": True},
+    }
+    if variant == "eleve":
+        gates["student_separation"] = {"passed": True}
     receipt = {
         "compile_succeeded": True,
         "fls_path": canonical["fls"],
-        "gates": {
-            "compile": {"passed": True},
-            "preflight": {"passed": True},
-        },
+        "gates": gates,
         "generated_dependencies": [],
         "log_path": canonical["log"],
         "manual": "1SPE",
@@ -1066,6 +1124,12 @@ def _main_locked(
                 environment=environment,
             ):
                 raise AssemblyError("préflight PDF en échec")
+            if variant == "eleve":
+                _verify_student_pdf_text(
+                    run_pdf_path,
+                    runner=active_runner,
+                    environment=environment,
+                )
             page_count = _pdf_page_count(
                 run_pdf_path,
                 runner=active_runner,
