@@ -5801,7 +5801,7 @@ VARIANTS = ["professeur"]
         ('VARIANTS = ["professeur", "eleve"]\n', ""),
         (
             'parser.add_argument("--variant", choices=["professeur", "eleve"])\n',
-            "ELEVE_ALLOWED_TYPES = set()\n",
+            "ELEVE_ALLOWED_TYPES = []\n",
         ),
         (
             'VARIANTS = ["eleve"]\n',
