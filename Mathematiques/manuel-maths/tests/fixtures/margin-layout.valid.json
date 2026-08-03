@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "run_nonce": "0123456789abcdef0123456789abcdef",
+  "variant": "eleve",
+  "geometry_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "semantic_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+  "state": "stable",
+  "pass_number": 3,
+  "max_passes": 6,
+  "read_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "computed_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+  "error_code": null,
+  "notes": [
+    {
+      "id": "nxm:eleve:appui:00000001",
+      "role": "appui",
+      "global_order": 1,
+      "origin_shipout_index": 1,
+      "origin_folio": "1",
+      "origin_y_sp": 200000,
+      "target_shipout_index": 1,
+      "target_y_sp": 200000,
+      "width_sp": 200000,
+      "base_height_sp": 100000,
+      "report_decoration_height_sp": 0,
+      "effective_height_sp": 100000,
+      "report_depth": 0,
+      "requires_marker": false,
+      "semantic_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "nxm:eleve:vocab:00000002",
+      "role": "vocab",
+      "global_order": 2,
+      "origin_shipout_index": 1,
+      "origin_folio": "1",
+      "origin_y_sp": 1700000,
+      "target_shipout_index": 2,
+      "target_y_sp": 200000,
+      "width_sp": 200000,
+      "base_height_sp": 100000,
+      "report_decoration_height_sp": 20000,
+      "effective_height_sp": 120000,
+      "report_depth": 1,
+      "requires_marker": true,
+      "semantic_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    }
+  ],
+  "pages": [
+    {
+      "shipout_index": 1,
+      "folio": "1",
+      "page_width_sp": 1200000,
+      "page_height_sp": 2000000,
+      "rail_side": "right",
+      "safe_rect": {
+        "left_sp": 900000,
+        "top_sp": 100000,
+        "right_sp": 1100000,
+        "bottom_sp": 1900000
+      },
+      "native_note_ids": [
+        "nxm:eleve:appui:00000001",
+        "nxm:eleve:vocab:00000002"
+      ],
+      "carry_in_note_ids": [],
+      "placed_note_ids": ["nxm:eleve:appui:00000001"],
+      "reported_note_ids": ["nxm:eleve:vocab:00000002"],
+      "obstacles": [
+        {
+          "id": "page-1-header",
+          "left_sp": 900000,
+          "top_sp": 100000,
+          "right_sp": 1100000,
+          "bottom_sp": 150000
+        }
+      ]
+    },
+    {
+      "shipout_index": 2,
+      "folio": "2",
+      "page_width_sp": 1200000,
+      "page_height_sp": 2000000,
+      "rail_side": "left",
+      "safe_rect": {
+        "left_sp": 100000,
+        "top_sp": 100000,
+        "right_sp": 300000,
+        "bottom_sp": 1900000
+      },
+      "native_note_ids": [],
+      "carry_in_note_ids": ["nxm:eleve:vocab:00000002"],
+      "placed_note_ids": ["nxm:eleve:vocab:00000002"],
+      "reported_note_ids": [],
+      "obstacles": [
+        {
+          "id": "page-2-footer",
+          "left_sp": 100000,
+          "top_sp": 1850000,
+          "right_sp": 300000,
+          "bottom_sp": 1900000
+        }
+      ]
+    }
+  ]
+}

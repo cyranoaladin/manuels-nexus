@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-reussite.fr/schemas/margin-layout.schema.json",
+  "title": "Nexus private margin layout envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_nonce",
+    "variant",
+    "geometry_digest",
+    "semantic_digest",
+    "state",
+    "pass_number",
+    "max_passes",
+    "read_digest",
+    "computed_digest",
+    "error_code",
+    "notes",
+    "pages"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "run_nonce": { "$ref": "#/$defs/run_nonce" },
+    "variant": { "$ref": "#/$defs/variant" },
+    "geometry_digest": { "$ref": "#/$defs/sha256" },
+    "semantic_digest": { "$ref": "#/$defs/sha256" },
+    "state": {
+      "enum": ["collecting", "changed", "stable", "failed"]
+    },
+    "pass_number": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6
+    },
+    "max_passes": { "const": 6 },
+    "read_digest": {
+      "oneOf": [
+        { "$ref": "#/$defs/sha256" },
+        { "type": "null" }
+      ]
+    },
+    "computed_digest": { "$ref": "#/$defs/sha256" },
+    "error_code": {
+      "oneOf": [
+        { "$ref": "#/$defs/error_code" },
+        { "type": "null" }
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/note" }
+    },
+    "pages": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/page" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "state": { "const": "collecting" } },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": {
+          "read_digest": { "type": "null" },
+          "error_code": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "state": { "enum": ["changed", "stable"] } },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": {
+          "read_digest": { "$ref": "#/$defs/sha256" },
+          "error_code": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "state": { "const": "failed" } },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": {
+          "error_code": { "$ref": "#/$defs/error_code" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "run_nonce": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "variant": {
+      "enum": ["eleve", "professeur"]
+    },
+    "error_code": {
+      "enum": [
+        "margin-note-too-tall",
+        "margin-note-too-wide",
+        "margin-report-impossible",
+        "margin-layout-oscillation",
+        "foreign-margin-layout",
+        "malformed-margin-layout",
+        "unsupported-margin-mode"
+      ]
+    },
+    "rect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["left_sp", "top_sp", "right_sp", "bottom_sp"],
+      "properties": {
+        "left_sp": { "type": "integer", "minimum": 0 },
+        "top_sp": { "type": "integer", "minimum": 0 },
+        "right_sp": { "type": "integer", "minimum": 0 },
+        "bottom_sp": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "obstacle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "left_sp", "top_sp", "right_sp", "bottom_sp"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "left_sp": { "type": "integer", "minimum": 0 },
+        "top_sp": { "type": "integer", "minimum": 0 },
+        "right_sp": { "type": "integer", "minimum": 0 },
+        "bottom_sp": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "note_id_list": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shipout_index",
+        "folio",
+        "page_width_sp",
+        "page_height_sp",
+        "rail_side",
+        "safe_rect",
+        "native_note_ids",
+        "carry_in_note_ids",
+        "placed_note_ids",
+        "reported_note_ids",
+        "obstacles"
+      ],
+      "properties": {
+        "shipout_index": { "type": "integer", "minimum": 1 },
+        "folio": { "type": "string", "minLength": 1 },
+        "page_width_sp": { "type": "integer", "minimum": 1 },
+        "page_height_sp": { "type": "integer", "minimum": 1 },
+        "rail_side": { "enum": ["left", "right"] },
+        "safe_rect": { "$ref": "#/$defs/rect" },
+        "native_note_ids": { "$ref": "#/$defs/note_id_list" },
+        "carry_in_note_ids": { "$ref": "#/$defs/note_id_list" },
+        "placed_note_ids": { "$ref": "#/$defs/note_id_list" },
+        "reported_note_ids": { "$ref": "#/$defs/note_id_list" },
+        "obstacles": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/obstacle" }
+        }
+      }
+    },
+    "note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "role",
+        "global_order",
+        "origin_shipout_index",
+        "origin_folio",
+        "origin_y_sp",
+        "target_shipout_index",
+        "target_y_sp",
+        "width_sp",
+        "base_height_sp",
+        "report_decoration_height_sp",
+        "effective_height_sp",
+        "report_depth",
+        "requires_marker",
+        "semantic_digest"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "global_order": { "type": "integer", "minimum": 1 },
+        "origin_shipout_index": { "type": "integer", "minimum": 1 },
+        "origin_folio": { "type": "string", "minLength": 1 },
+        "origin_y_sp": { "type": "integer", "minimum": 0 },
+        "target_shipout_index": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "null" }
+          ]
+        },
+        "target_y_sp": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "null" }
+          ]
+        },
+        "width_sp": { "type": "integer", "minimum": 1 },
+        "base_height_sp": { "type": "integer", "minimum": 1 },
+        "report_decoration_height_sp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "effective_height_sp": { "type": "integer", "minimum": 1 },
+        "report_depth": { "type": "integer", "minimum": 0 },
+        "requires_marker": { "type": "boolean" },
+        "semantic_digest": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}

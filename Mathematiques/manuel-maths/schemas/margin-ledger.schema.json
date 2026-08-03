@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexus-reussite.fr/schemas/margin-ledger.schema.json",
+  "title": "Nexus PDF-derived margin ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "variant",
+    "pdf_sha256",
+    "capture_inventory_digest",
+    "stable_layout_digest",
+    "rendered_stream_digest",
+    "notes"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "variant": { "$ref": "#/$defs/variant" },
+    "pdf_sha256": { "$ref": "#/$defs/sha256" },
+    "capture_inventory_digest": { "$ref": "#/$defs/sha256" },
+    "stable_layout_digest": { "$ref": "#/$defs/sha256" },
+    "rendered_stream_digest": { "$ref": "#/$defs/sha256" },
+    "notes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/ledger_note" }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "variant": {
+      "enum": ["eleve", "professeur"]
+    },
+    "ledger_note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "note_id",
+        "role",
+        "global_order",
+        "origin_shipout_index",
+        "origin_folio",
+        "target_shipout_index",
+        "target_folio",
+        "bbox_sp",
+        "semantic_digest",
+        "rendered_stream_digest",
+        "form_xref",
+        "anchor_count",
+        "note_count",
+        "report_depth",
+        "requires_marker"
+      ],
+      "properties": {
+        "note_id": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "global_order": { "type": "integer", "minimum": 1 },
+        "origin_shipout_index": { "type": "integer", "minimum": 1 },
+        "origin_folio": { "type": "string", "minLength": 1 },
+        "target_shipout_index": { "type": "integer", "minimum": 1 },
+        "target_folio": { "type": "string", "minLength": 1 },
+        "bbox_sp": {
+          "type": "array",
+          "items": { "type": "integer" },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "semantic_digest": { "$ref": "#/$defs/sha256" },
+        "rendered_stream_digest": { "$ref": "#/$defs/sha256" },
+        "form_xref": { "type": "integer", "minimum": 1 },
+        "anchor_count": { "type": "integer", "minimum": 0 },
+        "note_count": { "type": "integer", "minimum": 0 },
+        "report_depth": { "type": "integer", "minimum": 0 },
+        "requires_marker": { "type": "boolean" }
+      }
+    }
+  }
+}
