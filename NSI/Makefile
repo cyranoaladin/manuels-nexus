@@ -1,4 +1,4 @@
-.PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter test gates-corpus gates-corpus-strict lot-gates
+.PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter specimen test gates-corpus gates-corpus-strict lot-gates
 
 PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 CHAP ?= 1NSI-TYPES-CONSTRUITS
@@ -37,6 +37,11 @@ accents:
 
 chapter:
 	$(PY) scripts/assemble.py --chap $(CHAP) --variant complet
+
+specimen:
+	mkdir -p build/specimen
+	TEXINPUTS=gabarits: lualatex -interaction=nonstopmode -halt-on-error -output-directory=build/specimen gabarits/specimen.tex
+	PYTHONPATH=scripts $(PY) -c "from pathlib import Path; from pdf_integrity import verify_pdf; raise SystemExit(verify_pdf(Path('build/specimen/specimen.pdf'), Path('build/specimen/specimen.log')))"
 
 gates-corpus:
 	$(PY) scripts/gates_corpus/check_eleve_no_corrige.py

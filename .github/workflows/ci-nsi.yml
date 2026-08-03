@@ -45,14 +45,17 @@ jobs:
       - name: Gate accents (R10)
         working-directory: NSI
         run: make accents
+      - name: Compilation specimen (gate charte)
+        working-directory: NSI
+        run: make specimen
       - name: Gates d'exécution + compilation des chapitres modifiés
         working-directory: NSI
         run: |
           base="${{ github.event.pull_request.base.sha || github.event.before }}"
-          for chap in $(git diff --name-only "$base" "$GITHUB_SHA" -- chapitres | cut -d/ -f2 | sort -u); do
-            python scripts/verify_python.py --chap "$chap"
-            python scripts/coverage_report.py --chap "$chap"
-            python scripts/assemble.py --chap "$chap" --variant complet
+          for chap in $(git diff --name-only "$base" "$GITHUB_SHA" -- ':(top)NSI/chapitres' | cut -d/ -f3 | sort -u); do
+            [ -d "chapitres/$chap/." ] && python scripts/verify_python.py --chap "$chap"
+            [ -d "chapitres/$chap/." ] && python scripts/coverage_report.py --chap "$chap"
+            [ -d "chapitres/$chap/." ] && python scripts/assemble.py --chap "$chap" --variant complet
           done
       - name: Publier les PDF de preuve
         if: always()
@@ -60,4 +63,4 @@ jobs:
         with:
           name: pdf-nsi-${{ github.sha }}
           path: NSI/build/**/*.pdf
-          if-no-files-found: warn
+          if-no-files-found: error
