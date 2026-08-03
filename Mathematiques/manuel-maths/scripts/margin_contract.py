@@ -11,6 +11,7 @@ from typing import Any, Callable
 from jsonschema import Draft202012Validator
 
 SCHEMA_ROOT = Path(__file__).resolve().parents[1] / "schemas"
+MARGIN_GAP_SP = 6 * 65536
 
 
 class MarginContractError(ValueError):
@@ -56,6 +57,11 @@ def _require_unique(values: list[Any], label: str) -> None:
         _reject(f"duplicate {label}")
 
 
+def _require_canonical_order(keys: list[tuple[Any, ...]], label: str) -> None:
+    if any(current >= following for current, following in zip(keys, keys[1:])):
+        _reject(f"noncanonical {label} order")
+
+
 def _validate_rect(rect: dict[str, Any], page: dict[str, Any], label: str) -> None:
     left = rect["left_sp"]
     top = rect["top_sp"]
@@ -68,7 +74,7 @@ def _validate_rect(rect: dict[str, Any], page: dict[str, Any], label: str) -> No
 
 
 def _expected_page_memberships(
-    note: dict[str, Any], ordered_page_indexes: list[int]
+    note: dict[str, Any],
 ) -> tuple[set[int], set[int], set[int], set[int]]:
     origin = note["origin_shipout_index"]
     target = note["target_shipout_index"]
@@ -79,18 +85,16 @@ def _expected_page_memberships(
     if target is None:
         return native, carry, placed, reported
 
-    origin_position = ordered_page_indexes.index(origin)
-    target_position = ordered_page_indexes.index(target)
-    if target_position < origin_position:
+    if target < origin:
         _reject(f"note {note['id']} targets a page before its origin")
-    expected_depth = target_position - origin_position
+    expected_depth = target - origin
     if note["report_depth"] != expected_depth:
         _reject(f"note {note['id']} has an incoherent report_depth")
 
     placed.add(target)
     if expected_depth:
-        carry.update(ordered_page_indexes[origin_position + 1 : target_position + 1])
-        reported.update(ordered_page_indexes[origin_position:target_position])
+        carry.update(range(origin + 1, target + 1))
+        reported.update(range(origin, target))
     return native, carry, placed, reported
 
 
@@ -144,26 +148,43 @@ def _validate_stable_placed_geometry(
             for other_note_id, other_rectangle in placed_rectangles:
                 if _rectangles_intersect_with_positive_area(rectangle, other_rectangle):
                     _reject(f"placed notes {other_note_id} and {note_id} intersect")
+            if placed_rectangles:
+                previous_note_id, previous_rectangle = placed_rectangles[-1]
+                vertical_gap = rectangle[1] - previous_rectangle[3]
+                if vertical_gap < MARGIN_GAP_SP:
+                    _reject(
+                        f"placed notes {previous_note_id} and {note_id} "
+                        "have less than 6pt vertical gap"
+                    )
             placed_rectangles.append((note_id, rectangle))
 
 
 def _validate_layout_semantics(
     document: dict[str, Any], *, require_complete: bool
 ) -> None:
+    # Canonical arrays are fail-closed: pages by shipout index; notes by
+    # (global_order, id); obstacles by geometry then id; native IDs by origin
+    # y/order/id; carry/report IDs by order/id; placed IDs by target y/order/id.
     notes = document["notes"]
     pages = document["pages"]
 
     _require_unique([note["id"] for note in notes], "note id")
     _require_unique([note["global_order"] for note in notes], "global_order")
-    _require_unique([page["shipout_index"] for page in pages], "shipout_index")
+    _require_canonical_order(
+        [(note["global_order"], note["id"]) for note in notes],
+        "notes",
+    )
+    page_indexes = [page["shipout_index"] for page in pages]
+    _require_unique(page_indexes, "shipout_index")
+    if page_indexes != list(range(1, len(pages) + 1)):
+        _reject("pages must be ordered and contiguous from shipout_index 1")
 
     obstacle_ids = [obstacle["id"] for page in pages for obstacle in page["obstacles"]]
     _require_unique(obstacle_ids, "obstacle id")
 
     notes_by_id = {note["id"]: note for note in notes}
     pages_by_index = {page["shipout_index"]: page for page in pages}
-    ordered_page_indexes = sorted(pages_by_index)
-    memberships = {
+    memberships: dict[str, dict[str, set[int]]] = {
         field: {note_id: set() for note_id in notes_by_id}
         for field in (
             "native_note_ids",
@@ -185,6 +206,19 @@ def _validate_layout_semantics(
                 page,
                 f"obstacle {obstacle['id']}",
             )
+        _require_canonical_order(
+            [
+                (
+                    obstacle["top_sp"],
+                    obstacle["bottom_sp"],
+                    obstacle["left_sp"],
+                    obstacle["right_sp"],
+                    obstacle["id"],
+                )
+                for obstacle in page["obstacles"]
+            ],
+            f"page {page['shipout_index']} obstacles",
+        )
         for field in memberships:
             for note_id in page[field]:
                 if note_id not in notes_by_id:
@@ -193,6 +227,38 @@ def _validate_layout_semantics(
                         f"unknown note {note_id}"
                     )
                 memberships[field][note_id].add(page["shipout_index"])
+
+        _require_canonical_order(
+            [
+                (
+                    notes_by_id[note_id]["origin_y_sp"],
+                    notes_by_id[note_id]["global_order"],
+                    note_id,
+                )
+                for note_id in page["native_note_ids"]
+            ],
+            f"page {page['shipout_index']} native_note_ids",
+        )
+        for field in ("carry_in_note_ids", "reported_note_ids"):
+            _require_canonical_order(
+                [
+                    (notes_by_id[note_id]["global_order"], note_id)
+                    for note_id in page[field]
+                ],
+                f"page {page['shipout_index']} {field}",
+            )
+        placed_keys: list[tuple[Any, ...]] = []
+        for note_id in page["placed_note_ids"]:
+            target_y = notes_by_id[note_id]["target_y_sp"]
+            if target_y is None:
+                _reject(f"placed note {note_id} has no target_y_sp")
+            placed_keys.append(
+                (target_y, notes_by_id[note_id]["global_order"], note_id)
+            )
+        _require_canonical_order(
+            placed_keys,
+            f"page {page['shipout_index']} placed_note_ids",
+        )
 
     for note in notes:
         note_id = note["id"]
@@ -234,9 +300,7 @@ def _validate_layout_semantics(
             if note["width_sp"] > safe_rect["right_sp"] - safe_rect["left_sp"]:
                 _reject(f"note {note_id} is wider than the target safe rectangle")
 
-        native, carry, placed, reported = _expected_page_memberships(
-            note, ordered_page_indexes
-        )
+        native, carry, placed, reported = _expected_page_memberships(note)
         expected = {
             "native_note_ids": native,
             "carry_in_note_ids": carry,
@@ -281,8 +345,7 @@ def validate_margin_ledger(document: Any) -> dict[str, Any]:
     _require_unique([note["global_order"] for note in notes], "ledger global_order")
     _require_unique([note["form_xref"] for note in notes], "ledger form_xref")
 
-    origin_folios: dict[int, str] = {}
-    target_folios: dict[int, str] = {}
+    folio_by_shipout_index: dict[int, str] = {}
     for note in notes:
         note_id = note["note_id"]
         left, top, right, bottom = note["bbox_sp"]
@@ -302,15 +365,13 @@ def validate_margin_ledger(document: Any) -> dict[str, Any]:
         if note["report_depth"] > 0 and not note["requires_marker"]:
             _reject(f"reported ledger note {note_id} lacks its marker")
 
-        for mapping, index_field, folio_field, label in (
+        for index_field, folio_field, label in (
             (
-                origin_folios,
                 "origin_shipout_index",
                 "origin_folio",
                 "origin",
             ),
             (
-                target_folios,
                 "target_shipout_index",
                 "target_folio",
                 "target",
@@ -318,9 +379,12 @@ def validate_margin_ledger(document: Any) -> dict[str, Any]:
         ):
             index = note[index_field]
             folio = note[folio_field]
-            if index in mapping and mapping[index] != folio:
+            if (
+                index in folio_by_shipout_index
+                and folio_by_shipout_index[index] != folio
+            ):
                 _reject(f"ledger has inconsistent {label} folios for page {index}")
-            mapping[index] = folio
+            folio_by_shipout_index[index] = folio
     return ledger
 
 
@@ -369,10 +433,7 @@ def canonical_capture_projection(layout: Any) -> dict[str, Any]:
     )
     notes = [
         {key: deepcopy(note[key]) for key in capture_fields}
-        for note in sorted(
-            validated["notes"],
-            key=lambda item: (item["global_order"], item["id"]),
-        )
+        for note in validated["notes"]
     ]
     return {
         "schema_version": validated["schema_version"],

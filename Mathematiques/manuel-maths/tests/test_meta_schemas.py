@@ -63,6 +63,80 @@ MARGIN_PROOFS = (
         margin_contract.validate_margin_ledger,
     ),
 )
+MARGIN_GAP_SP = 6 * 65536
+
+DIGEST_PATHS = (
+    (
+        "margin-layout.valid.json",
+        margin_contract.validate_margin_layout,
+        ("geometry_digest",),
+    ),
+    (
+        "margin-layout.valid.json",
+        margin_contract.validate_margin_layout,
+        ("semantic_digest",),
+    ),
+    (
+        "margin-layout.valid.json",
+        margin_contract.validate_margin_layout,
+        ("read_digest",),
+    ),
+    (
+        "margin-layout.valid.json",
+        margin_contract.validate_margin_layout,
+        ("computed_digest",),
+    ),
+    (
+        "margin-layout.valid.json",
+        margin_contract.validate_margin_layout,
+        ("notes", 0, "semantic_digest"),
+    ),
+    (
+        "margin-stable-layout.valid.json",
+        margin_contract.validate_stable_layout,
+        ("geometry_digest",),
+    ),
+    (
+        "margin-stable-layout.valid.json",
+        margin_contract.validate_stable_layout,
+        ("semantic_digest",),
+    ),
+    (
+        "margin-stable-layout.valid.json",
+        margin_contract.validate_stable_layout,
+        ("notes", 0, "semantic_digest"),
+    ),
+    (
+        "margin-ledger.valid.json",
+        margin_contract.validate_margin_ledger,
+        ("pdf_sha256",),
+    ),
+    (
+        "margin-ledger.valid.json",
+        margin_contract.validate_margin_ledger,
+        ("capture_inventory_digest",),
+    ),
+    (
+        "margin-ledger.valid.json",
+        margin_contract.validate_margin_ledger,
+        ("stable_layout_digest",),
+    ),
+    (
+        "margin-ledger.valid.json",
+        margin_contract.validate_margin_ledger,
+        ("rendered_stream_digest",),
+    ),
+    (
+        "margin-ledger.valid.json",
+        margin_contract.validate_margin_ledger,
+        ("notes", 0, "semantic_digest"),
+    ),
+    (
+        "margin-ledger.valid.json",
+        margin_contract.validate_margin_ledger,
+        ("notes", 0, "rendered_stream_digest"),
+    ),
+)
 
 
 def _margin_proof_fixture(name: str) -> dict:
@@ -233,8 +307,49 @@ def test_margin_proof_schemas_reject_malformed_sha256(
     _margin_proof_assert_rejected(validator, document)
 
 
+def test_margin_proof_schema_patterns_have_exact_lengths() -> None:
+    for schema_name in (
+        "margin-layout.schema.json",
+        "margin-stable-layout.schema.json",
+        "margin-ledger.schema.json",
+    ):
+        schema = json.loads((SCHEMAS / schema_name).read_text(encoding="utf-8"))
+        assert schema["$defs"]["sha256"]["minLength"] == 71
+        assert schema["$defs"]["sha256"]["maxLength"] == 71
+
+    private_schema = json.loads(
+        (SCHEMAS / "margin-layout.schema.json").read_text(encoding="utf-8")
+    )
+    assert private_schema["$defs"]["run_nonce"]["minLength"] == 32
+    assert private_schema["$defs"]["run_nonce"]["maxLength"] == 32
+
+
+@pytest.mark.parametrize("fixture_name,validator,path", DIGEST_PATHS)
+@pytest.mark.parametrize("suffix", ["\n", "\r", "\u2028", "\u2029", "\u00a0"])
+def test_margin_proof_digest_fields_reject_trailing_unicode(
+    fixture_name: str,
+    validator,
+    path: tuple[str | int, ...],
+    suffix: str,
+) -> None:
+    document = _margin_proof_fixture(fixture_name)
+    target = document
+    for component in path[:-1]:
+        target = target[component]
+    target[path[-1]] += suffix
+
+    _margin_proof_assert_rejected(validator, document)
+
+
 def test_margin_proof_private_envelope_requires_a_lowercase_32_hex_nonce() -> None:
-    for bad_nonce in ("short", "A" * 32, "g" * 32, "0" * 33):
+    trailing_unicode = ("\n", "\r", "\u2028", "\u2029", "\u00a0")
+    for bad_nonce in (
+        "short",
+        "A" * 32,
+        "g" * 32,
+        "0" * 33,
+        *("0" * 32 + suffix for suffix in trailing_unicode),
+    ):
         document = _margin_proof_fixture("margin-layout.valid.json")
         document["run_nonce"] = bad_nonce
         _margin_proof_assert_rejected(margin_contract.validate_margin_layout, document)
@@ -301,6 +416,149 @@ def test_margin_proof_layout_rejects_duplicate_shipouts_and_obstacles(
     obstacle = deepcopy(duplicate_obstacle["pages"][0]["obstacles"][0])
     duplicate_obstacle["pages"][1]["obstacles"].append(obstacle)
     _margin_proof_assert_rejected(validator, duplicate_obstacle)
+
+
+def _margin_proof_empty_three_page_layout(fixture_name: str) -> dict:
+    layout = _margin_proof_fixture(fixture_name)
+    layout["notes"] = []
+    for page in layout["pages"]:
+        page["native_note_ids"] = []
+        page["carry_in_note_ids"] = []
+        page["placed_note_ids"] = []
+        page["reported_note_ids"] = []
+        page["obstacles"] = []
+    third_page = deepcopy(layout["pages"][0])
+    third_page["shipout_index"] = 3
+    third_page["folio"] = "3"
+    layout["pages"].append(third_page)
+    return layout
+
+
+@pytest.mark.parametrize(
+    "fixture_name,validator",
+    [
+        ("margin-layout.valid.json", margin_contract.validate_margin_layout),
+        (
+            "margin-stable-layout.valid.json",
+            margin_contract.validate_stable_layout,
+        ),
+    ],
+)
+def test_margin_proof_pages_must_be_contiguous_from_one(
+    fixture_name: str, validator
+) -> None:
+    layout = _margin_proof_empty_three_page_layout(fixture_name)
+    assert validator(layout) == layout
+
+    del layout["pages"][1]
+
+    _margin_proof_assert_rejected(validator, layout)
+
+
+def _margin_proof_prepare_two_reported_notes(layout: dict) -> None:
+    first_note, second_note = layout["notes"]
+    first_note["target_shipout_index"] = 2
+    first_note["target_y_sp"] = 800000
+    first_note["report_decoration_height_sp"] = 20000
+    first_note["effective_height_sp"] = 120000
+    first_note["report_depth"] = 1
+    first_note["requires_marker"] = True
+
+    first_page, second_page = layout["pages"]
+    first_page["placed_note_ids"] = []
+    first_page["reported_note_ids"] = [first_note["id"], second_note["id"]]
+    second_page["carry_in_note_ids"] = [first_note["id"], second_note["id"]]
+    second_page["placed_note_ids"] = [second_note["id"], first_note["id"]]
+
+
+def _margin_proof_add_second_obstacle(layout: dict) -> None:
+    layout["pages"][0]["obstacles"].append(
+        {
+            "id": "page-1-middle",
+            "left_sp": 900000,
+            "top_sp": 800000,
+            "right_sp": 1100000,
+            "bottom_sp": 850000,
+        }
+    )
+
+
+def _margin_proof_permute_canonical_category(layout: dict, category: str) -> None:
+    if category == "pages":
+        layout["pages"].reverse()
+    elif category == "notes":
+        layout["notes"].reverse()
+    elif category == "obstacles":
+        layout["pages"][0]["obstacles"].reverse()
+    elif category == "native_note_ids":
+        layout["pages"][0]["native_note_ids"].reverse()
+    else:
+        page_index = 0 if category == "reported_note_ids" else 1
+        layout["pages"][page_index][category].reverse()
+
+
+@pytest.mark.parametrize(
+    "fixture_name,validator",
+    [
+        ("margin-layout.valid.json", margin_contract.validate_margin_layout),
+        (
+            "margin-stable-layout.valid.json",
+            margin_contract.validate_stable_layout,
+        ),
+    ],
+)
+@pytest.mark.parametrize(
+    "category",
+    [
+        "pages",
+        "notes",
+        "obstacles",
+        "native_note_ids",
+        "carry_in_note_ids",
+        "reported_note_ids",
+        "placed_note_ids",
+    ],
+)
+def test_margin_proof_layout_rejects_noncanonical_array_order(
+    fixture_name: str, validator, category: str
+) -> None:
+    layout = _margin_proof_fixture(fixture_name)
+    if category == "obstacles":
+        _margin_proof_add_second_obstacle(layout)
+        assert validator(layout) == layout
+    if category in {"carry_in_note_ids", "reported_note_ids", "placed_note_ids"}:
+        _margin_proof_prepare_two_reported_notes(layout)
+        assert validator(layout) == layout
+
+    canonical_bytes = margin_contract.canonical_json_bytes(layout)
+    _margin_proof_permute_canonical_category(layout, category)
+
+    assert margin_contract.canonical_json_bytes(layout) != canonical_bytes
+    _margin_proof_assert_rejected(validator, layout)
+
+
+def test_margin_proof_report_depth_is_the_shipout_index_difference() -> None:
+    layout = _margin_proof_fixture("margin-stable-layout.valid.json")
+    third_page = deepcopy(layout["pages"][0])
+    third_page["shipout_index"] = 3
+    third_page["folio"] = "3"
+    third_page["native_note_ids"] = []
+    third_page["carry_in_note_ids"] = [layout["notes"][1]["id"]]
+    third_page["placed_note_ids"] = [layout["notes"][1]["id"]]
+    third_page["reported_note_ids"] = []
+    third_page["obstacles"] = []
+    layout["pages"].append(third_page)
+
+    reported_note = layout["notes"][1]
+    reported_note["target_shipout_index"] = 3
+    reported_note["target_y_sp"] = 200000
+    reported_note["report_depth"] = 2
+    layout["pages"][1]["placed_note_ids"] = []
+    layout["pages"][1]["reported_note_ids"] = [reported_note["id"]]
+    assert margin_contract.validate_stable_layout(layout) == layout
+
+    reported_note["report_depth"] = 1
+    _margin_proof_assert_rejected(margin_contract.validate_stable_layout, layout)
 
 
 @pytest.mark.parametrize(
@@ -427,14 +685,37 @@ def test_margin_proof_stable_geometry_rejects_note_obstacle_intersection() -> No
     )
 
 
-def test_margin_proof_stable_geometry_allows_tangent_edges() -> None:
+def test_margin_proof_stable_geometry_allows_tangent_obstacle_edge() -> None:
     obstacle_tangent = _margin_proof_fixture("margin-stable-layout.valid.json")
     obstacle_tangent["notes"][0]["target_y_sp"] = 150000
     assert margin_contract.validate_stable_layout(obstacle_tangent) == obstacle_tangent
 
-    notes_tangent = _margin_proof_fixture("margin-stable-layout.valid.json")
-    _margin_proof_place_both_notes_on_first_page(notes_tangent, second_y_sp=300000)
-    assert margin_contract.validate_stable_layout(notes_tangent) == notes_tangent
+
+def test_margin_proof_stable_geometry_accepts_exactly_six_point_note_gap() -> None:
+    layout = _margin_proof_fixture("margin-stable-layout.valid.json")
+    _margin_proof_place_both_notes_on_first_page(
+        layout,
+        second_y_sp=200000 + 100000 + MARGIN_GAP_SP,
+    )
+
+    assert margin_contract.validate_stable_layout(layout) == layout
+
+
+def test_margin_proof_stable_geometry_rejects_gap_one_sp_too_short() -> None:
+    layout = _margin_proof_fixture("margin-stable-layout.valid.json")
+    _margin_proof_place_both_notes_on_first_page(
+        layout,
+        second_y_sp=200000 + 100000 + MARGIN_GAP_SP - 1,
+    )
+
+    _margin_proof_assert_rejected(margin_contract.validate_stable_layout, layout)
+
+
+def test_margin_proof_stable_geometry_rejects_tangent_notes() -> None:
+    layout = _margin_proof_fixture("margin-stable-layout.valid.json")
+    _margin_proof_place_both_notes_on_first_page(layout, second_y_sp=300000)
+
+    _margin_proof_assert_rejected(margin_contract.validate_stable_layout, layout)
 
 
 def test_margin_proof_stable_geometry_keeps_the_valid_fixture_green() -> None:
@@ -539,6 +820,13 @@ def test_margin_proof_ledger_rejects_duplicate_ids_orders_and_xrefs() -> None:
     )
 
 
+def test_margin_proof_ledger_rejects_cross_role_folio_conflicts() -> None:
+    ledger = _margin_proof_fixture("margin-ledger.valid.json")
+    ledger["notes"][0]["target_folio"] = "WRONG"
+
+    _margin_proof_assert_rejected(margin_contract.validate_margin_ledger, ledger)
+
+
 @pytest.mark.parametrize(
     "requires_marker,anchor_count,note_count",
     [
@@ -614,13 +902,14 @@ def test_margin_proof_projection_and_stable_layout_ignore_pass_metadata() -> Non
     ) == margin_contract.canonical_json_bytes(second_stable)
 
 
-def test_margin_proof_projection_sorts_notes_and_omits_volatile_fields() -> None:
+def test_margin_proof_projection_preserves_validated_note_order() -> None:
     layout = _margin_proof_fixture("margin-stable-layout.valid.json")
-    layout["notes"].reverse()
 
     projection = margin_contract.canonical_capture_projection(layout)
 
-    assert [note["global_order"] for note in projection["notes"]] == [1, 2]
+    assert [note["id"] for note in projection["notes"]] == [
+        note["id"] for note in layout["notes"]
+    ]
     assert set(projection) == {
         "schema_version",
         "variant",

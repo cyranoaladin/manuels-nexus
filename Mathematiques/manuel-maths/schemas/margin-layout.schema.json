@@ -96,10 +96,14 @@
   "$defs": {
     "sha256": {
       "type": "string",
+      "minLength": 71,
+      "maxLength": 71,
       "pattern": "^sha256:[0-9a-f]{64}$"
     },
     "run_nonce": {
       "type": "string",
+      "minLength": 32,
+      "maxLength": 32,
       "pattern": "^[0-9a-f]{32}$"
     },
     "variant": {
