@@ -260,6 +260,7 @@ def validate_materialized_registry(
             expected_decision_fields = {
                 "approved_by": policy.get("decision", {}).get("approved_by"),
                 "baseline_sha": approved.get("baseline_sha"),
+                "blocking": decision.get("release_blocking"),
                 "decision_ref": policy.get("decision", {}).get("ref"),
                 "disposition": decision.get("disposition"),
                 "justification": decision.get("reason"),

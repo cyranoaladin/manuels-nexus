@@ -383,31 +383,50 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
             and disposition.get("policy_rule") != "historical-evidence"
         )
     }
-    approved_records = [
+    active_managed = managed & {
+        str(record["fingerprint"]) for record in records
+    }
+    resolved_fingerprint = min(active_managed)
+    records_after_resolution = [
         record
         for record in records
-        if not record["qualified"] or record["fingerprint"] in managed
+        if record["fingerprint"] != resolved_fingerprint
     ]
-    fingerprints = [record["fingerprint"] for record in approved_records]
+    plan = qualification_module.plan_materialization(
+        policy,
+        records_after_resolution,
+        dispositions,
+        observed_source_digest=inventory["source_digest"],
+        observed_model_digest=inventory_module._model_digest(inventory),
+    )
+    current_entries = {
+        fingerprint: entry
+        for fingerprint, entry in plan["dispositions_payload"][
+            "dispositions"
+        ].items()
+        if (
+            entry.get("qualification_policy_digest")
+            == policy["control_digest"]
+            and entry.get("policy_rule") != "historical-evidence"
+        )
+    }
 
-    assert len(approved_records) == 186
-    assert len(fingerprints) == len(set(fingerprints))
-    assert _digest_fingerprints(fingerprints) == policy["approved_set"][
+    assert resolved_fingerprint not in {
+        str(record["fingerprint"]) for record in records_after_resolution
+    }
+    assert resolved_fingerprint in current_entries
+    assert plan["approved_fingerprint_count"] == 186
+    assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
     ]
-    assert Counter(record["category"] for record in approved_records) == Counter(
+    assert Counter(
+        entry["category"] for entry in current_entries.values()
+    ) == Counter(
         policy["approved_set"]["category_counts"]
     )
-    decisions = [
-        qualification_module.classify_anomaly(
-            policy,
-            record["category"],
-            record["anomaly"],
-        )
-        for record in approved_records
-    ]
-    assert all(decision is not None for decision in decisions)
-    assert Counter(decision["owner"] for decision in decisions if decision) == Counter(
+    assert Counter(
+        entry["owner"] for entry in current_entries.values()
+    ) == Counter(
         policy["approved_set"]["owner_counts"]
     )
 
@@ -1020,6 +1039,44 @@ def test_policy_gate_rejects_tampered_disappeared_entry_at_constant_counts(
     )
 
 
+def test_policy_gate_rejects_tampered_blocking_on_resolved_entry(
+    qualification_module,
+    policy,
+) -> None:
+    record = _synthetic_policy_record(
+        qualification_module,
+        policy,
+        fingerprint="a" * 16,
+        owner="direction_scientifique_programme",
+        policy_rule="blocking-scientific-object",
+        reason=(
+            "Contenu disciplinaire ou corrigé sans statut de publication "
+            "approuvé."
+        ),
+    )
+    synthetic_policy = _synthetic_policy_contract(
+        qualification_module,
+        policy,
+        [record],
+    )
+    tampered = deepcopy(record)
+    tampered["blocking"] = False
+    tampered["qualification_digest"] = (
+        qualification_module.qualification_digest(tampered)
+    )
+
+    failures = qualification_module.validate_materialized_registry(
+        synthetic_policy,
+        {str(record["fingerprint"]): tampered},
+        active_records=[],
+    )
+
+    assert any(
+        "managed decision mismatch" in failure and failure.endswith(":blocking")
+        for failure in failures
+    )
+
+
 @pytest.mark.parametrize(
     ("field", "replacement"),
     [
@@ -1270,10 +1327,17 @@ def test_materialization_plan_corrects_policy_entry_drift_after_materialization(
     for record in materialized_records:
         record["qualified"] = True
     drifted = deepcopy(first["dispositions_payload"]["dispositions"])
+    active_fingerprints = {
+        str(record["fingerprint"]) for record in materialized_records
+    }
     fingerprint = next(
         fingerprint
         for fingerprint, record in drifted.items()
-        if record.get("qualification_policy_digest") == policy["control_digest"]
+        if (
+            fingerprint in active_fingerprints
+            and record.get("qualification_policy_digest")
+            == policy["control_digest"]
+        )
     )
     drifted[fingerprint]["owner"] = "ingenierie_build_qualite"
 
