@@ -3,8 +3,6 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
-import shutil
-import subprocess
 from collections import Counter
 from copy import deepcopy
 from pathlib import Path
@@ -414,65 +412,6 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
     )
 
 
-def _refresh_empty_build_manifest(
-    repository: Path,
-    inventory_module,
-    monkeypatch: pytest.MonkeyPatch,
-):
-    with monkeypatch.context() as isolated:
-        isolated.setattr(
-            inventory_module,
-            "_load_observed_build_manifest",
-            lambda *_args, **_kwargs: [],
-        )
-        candidate = inventory_module.build_inventory(repository)
-    manifest_path = repository / "audit/BUILD_MANIFEST.json"
-    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    assert manifest["builds"] == []
-    manifest["source_digest"] = candidate["source_digest"]
-    manifest["model_digest"] = inventory_module._model_digest(candidate)
-    manifest["provenance"] = {
-        "branch": subprocess.run(
-            ["git", "-C", str(repository), "branch", "--show-current"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip(),
-        "dirty": False,
-        "head_sha": subprocess.run(
-            ["git", "-C", str(repository), "rev-parse", "HEAD"],
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout.strip(),
-    }
-    manifest_path.write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True)
-        + "\n",
-        encoding="utf-8",
-    )
-    subprocess.run(
-        ["git", "-C", str(repository), "add", "-A"],
-        check=True,
-    )
-    subprocess.run(
-        [
-            "git",
-            "-C",
-            str(repository),
-            "-c",
-            "user.name=Nexus Fixture",
-            "-c",
-            "user.email=nexus-fixture@example.invalid",
-            "commit",
-            "-qm",
-            "refresh empty build manifest fixture",
-        ],
-        check=True,
-    )
-    return inventory_module.build_inventory(repository)
-
-
 def test_materialization_plan_preserves_history_and_emits_all_required_fields(
     qualification_module,
     inventory_module,
@@ -772,6 +711,152 @@ def _synthetic_policy_contract(
     return mutated
 
 
+def test_materialization_preserves_resolved_policy_history_after_freeze(
+    qualification_module,
+    policy,
+) -> None:
+    active = _synthetic_policy_record(
+        qualification_module,
+        policy,
+        fingerprint="a" * 16,
+        owner="direction_scientifique_programme",
+        policy_rule="blocking-scientific-object",
+        reason=(
+            "Contenu disciplinaire ou corrigé sans statut de publication "
+            "approuvé."
+        ),
+    )
+    resolved_current = _synthetic_policy_record(
+        qualification_module,
+        policy,
+        fingerprint="b" * 16,
+        owner="ingenierie_build_qualite",
+        policy_rule="unassembled-object",
+        reason="Le contenu existe mais aucun assemblage déclaré ne l'inclut.",
+        category="unassembled_objects",
+        source="chapitres/1SPE-SUITES/exercices/resolu.tex",
+    )
+    synthetic_policy = _synthetic_policy_contract(
+        qualification_module,
+        policy,
+        [active, resolved_current],
+    )
+    resolved_prior = deepcopy(resolved_current)
+    resolved_prior.update(
+        {
+            "approved_by": "Décision antérieure",
+            "baseline_sha": "1" * 40,
+            "decision_ref": "audit/DECISION_ANTERIEURE.md#decision",
+            "fingerprint": "c" * 16,
+            "qualification_policy_digest": "sha256:" + "1" * 64,
+        }
+    )
+    resolved_prior["qualification_digest"] = (
+        qualification_module.qualification_digest(resolved_prior)
+    )
+    historical = {
+        str(active["fingerprint"]): active,
+        str(resolved_current["fingerprint"]): resolved_current,
+        str(resolved_prior["fingerprint"]): resolved_prior,
+    }
+    active_records = [
+        {
+            "anomaly": {
+                "object_type": "cours",
+                "scope": "object",
+                "status": "generated",
+            },
+            "category": "blocking_statuses",
+            "chapter": active["chapter"],
+            "fingerprint": active["fingerprint"],
+            "fingerprint_schema_version": 1,
+            "manual": active["manual"],
+            "qualified": True,
+            "severity": active["severity"],
+            "source": active["source"],
+        }
+    ]
+
+    plan = qualification_module.plan_materialization(
+        synthetic_policy,
+        active_records,
+        historical,
+        observed_source_digest="sha256:" + "d" * 64,
+        observed_model_digest="sha256:" + "e" * 64,
+    )
+
+    entries = plan["dispositions_payload"]["dispositions"]
+    assert plan["approved_fingerprint_count"] == 2
+    assert plan["approved_fingerprint_digest"] == synthetic_policy[
+        "approved_set"
+    ]["fingerprint_digest"]
+    assert entries[str(resolved_current["fingerprint"])] == resolved_current
+    assert entries[str(resolved_prior["fingerprint"])] == resolved_prior
+    assert {
+        str(record["fingerprint"])
+        for record in active_records
+        if record["qualified"] is True
+    } <= set(entries)
+
+    missing_active_disposition = deepcopy(historical)
+    del missing_active_disposition[str(active["fingerprint"])]
+    with pytest.raises(
+        qualification_module.QualificationError,
+        match="active qualified.*registered",
+    ):
+        qualification_module.plan_materialization(
+            synthetic_policy,
+            active_records,
+            missing_active_disposition,
+            observed_source_digest="sha256:" + "d" * 64,
+            observed_model_digest="sha256:" + "e" * 64,
+        )
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_fragment"),
+    [
+        ({"fingerprint": "b" * 16}, "fingerprint"),
+        ({"disposition": "unknown"}, "disposition"),
+        ({"disposition": "fixed", "proof": None}, "proof"),
+        ({"qualification_digest": "sha256:" + "f" * 64}, "qualification_digest"),
+    ],
+)
+def test_resolved_historical_entry_must_remain_valid(
+    qualification_module,
+    policy,
+    mutation: dict[str, object],
+    expected_fragment: str,
+) -> None:
+    fingerprint = "a" * 16
+    historical = _synthetic_policy_record(
+        qualification_module,
+        policy,
+        fingerprint=fingerprint,
+        owner="direction_scientifique_programme",
+        policy_rule="blocking-scientific-object",
+        reason=(
+            "Contenu disciplinaire ou corrigé sans statut de publication "
+            "approuvé."
+        ),
+    )
+    historical.update(mutation)
+    if "qualification_digest" not in mutation:
+        historical["qualification_digest"] = (
+            qualification_module.qualification_digest(historical)
+        )
+
+    with pytest.raises(
+        qualification_module.QualificationError,
+        match=expected_fragment,
+    ):
+        qualification_module._normalize_historical_record(
+            policy=policy,
+            record={"fingerprint": fingerprint},
+            historical=historical,
+        )
+
+
 def test_policy_gate_rejects_complete_removal_of_policy_entries(
     qualification_module,
     policy,
@@ -1005,114 +1090,166 @@ def test_policy_gate_rejects_altered_decision_or_context(
 
 def test_materialization_plan_is_idempotent_after_policy_entries_exist(
     qualification_module,
-    inventory_module,
     policy,
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    repository = tmp_path / "repository"
-    approved_sha = policy["approved_set"]["baseline_sha"]
-    subprocess.run(
-        [
-            "git",
-            "clone",
-            "-q",
-            "--no-hardlinks",
-            str(ROOT),
-            str(repository),
-        ],
-        check=True,
+    active = _synthetic_policy_record(
+        qualification_module,
+        policy,
+        fingerprint="a" * 16,
+        owner="direction_scientifique_programme",
+        policy_rule="blocking-scientific-object",
+        reason=(
+            "Contenu disciplinaire ou corrigé sans statut de publication "
+            "approuvé."
+        ),
     )
-    subprocess.run(
-        [
-            "git",
-            "-C",
-            str(repository),
-            "switch",
-            "--create",
-            "baseline-materialization-fixture",
-            approved_sha,
-        ],
-        check=True,
-        capture_output=True,
+    to_resolve = _synthetic_policy_record(
+        qualification_module,
+        policy,
+        fingerprint="b" * 16,
+        owner="ingenierie_build_qualite",
+        policy_rule="unassembled-object",
+        reason="Le contenu existe mais aucun assemblage déclaré ne l'inclut.",
+        category="unassembled_objects",
+        source="chapitres/1SPE-SUITES/exercices/a.tex",
     )
-    assert subprocess.run(
-        ["git", "-C", str(repository), "rev-parse", "HEAD"],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip() == approved_sha
-    shutil.copyfile(
-        ROOT / "audit/schemas/v1/anomaly-dispositions.schema.json",
-        repository / "audit/schemas/v1/anomaly-dispositions.schema.json",
+    synthetic_policy = _synthetic_policy_contract(
+        qualification_module,
+        policy,
+        [active, to_resolve],
     )
-    historical_control = subprocess.run(
-        [
-            "git",
-            "-C",
-            str(ROOT),
-            "show",
-            f"{approved_sha}:audit/ANOMALY_DISPOSITIONS.yaml",
-        ],
-        check=True,
-        capture_output=True,
-    ).stdout
-    (repository / "audit/ANOMALY_DISPOSITIONS.yaml").write_bytes(
-        historical_control
-    )
-    pre_inventory = _refresh_empty_build_manifest(
-        repository,
-        inventory_module,
-        monkeypatch,
-    )
-    pre_model_digest = inventory_module._model_digest(pre_inventory)
-    assert pre_inventory["source_digest"] == policy["approved_set"][
+    pre_source_digest = "sha256:" + "1" * 64
+    pre_model_digest = "sha256:" + "2" * 64
+    synthetic_policy["approved_set"][
         "observed_source_digest_before_materialization"
-    ]
-    assert pre_model_digest == policy["approved_set"][
+    ] = pre_source_digest
+    synthetic_policy["approved_set"][
         "observed_model_digest_before_materialization"
+    ] = pre_model_digest
+    prior = deepcopy(to_resolve)
+    prior.update(
+        {
+            "approved_by": "Décision antérieure",
+            "baseline_sha": "1" * 40,
+            "decision_ref": "audit/DECISION_ANTERIEURE.md#decision",
+            "fingerprint": "c" * 16,
+            "qualification_policy_digest": "sha256:" + "3" * 64,
+        }
+    )
+    prior["qualification_digest"] = qualification_module.qualification_digest(
+        prior
+    )
+    active_records = [
+        {
+            "anomaly": {
+                "object_type": "cours",
+                "scope": "object",
+                "status": "generated",
+            },
+            "category": active["category"],
+            "chapter": active["chapter"],
+            "fingerprint": active["fingerprint"],
+            "fingerprint_schema_version": 1,
+            "manual": active["manual"],
+            "qualified": False,
+            "severity": active["severity"],
+            "source": active["source"],
+        },
+        {
+            "anomaly": {"source": to_resolve["source"]},
+            "category": to_resolve["category"],
+            "chapter": to_resolve["chapter"],
+            "fingerprint": to_resolve["fingerprint"],
+            "fingerprint_schema_version": 1,
+            "manual": to_resolve["manual"],
+            "qualified": False,
+            "severity": to_resolve["severity"],
+            "source": to_resolve["source"],
+        },
     ]
     first = qualification_module.plan_materialization(
-        policy,
-        inventory_module._baseline_qualification_records(pre_inventory),
-        inventory_module._load_dispositions(repository),
-        observed_source_digest=pre_inventory["source_digest"],
+        synthetic_policy,
+        active_records,
+        {str(prior["fingerprint"]): prior},
+        observed_source_digest=pre_source_digest,
         observed_model_digest=pre_model_digest,
     )
-    (repository / "audit/ANOMALY_DISPOSITIONS.yaml").write_text(
-        yaml.safe_dump(
-            first["dispositions_payload"],
-            allow_unicode=True,
-            sort_keys=True,
-        ),
-        encoding="utf-8",
-    )
-    post_inventory = _refresh_empty_build_manifest(
-        repository,
-        inventory_module,
-        monkeypatch,
-    )
-    post_model_digest = inventory_module._model_digest(post_inventory)
+    still_active = deepcopy(active_records[:1])
+    still_active[0]["qualified"] = True
 
     second = qualification_module.plan_materialization(
-        policy,
-        inventory_module._baseline_qualification_records(post_inventory),
-        inventory_module._load_dispositions(repository),
-        observed_source_digest=post_inventory["source_digest"],
-        observed_model_digest=post_model_digest,
+        synthetic_policy,
+        still_active,
+        first["dispositions_payload"]["dispositions"],
+        observed_source_digest="sha256:" + "4" * 64,
+        observed_model_digest="sha256:" + "5" * 64,
     )
 
-    assert post_model_digest != pre_model_digest
-    assert all(
-        qualification["qualified"] is True
-        for qualification in post_inventory["anomaly_qualifications"].values()
-    )
-    assert second["approved_fingerprint_count"] == 186
+    assert second["approved_fingerprint_count"] == 2
     assert second["approved_fingerprint_digest"] == first[
         "approved_fingerprint_digest"
     ]
     assert second["dispositions_payload"] == first["dispositions_payload"]
     assert second["unqualified"] == []
+
+
+@pytest.mark.parametrize(
+    ("source_digest", "model_digest"),
+    [
+        ("sha256:" + "9" * 64, "sha256:" + "2" * 64),
+        ("sha256:" + "1" * 64, "sha256:" + "9" * 64),
+    ],
+)
+def test_materialization_refuses_pre_freeze_source_or_model_drift(
+    qualification_module,
+    policy,
+    source_digest: str,
+    model_digest: str,
+) -> None:
+    record = {
+        "anomaly": {
+            "object_type": "cours",
+            "scope": "object",
+            "status": "generated",
+        },
+        "category": "blocking_statuses",
+        "chapter": "1SPE-SUITES",
+        "fingerprint": "a" * 16,
+        "fingerprint_schema_version": 1,
+        "manual": "1SPE",
+        "qualified": False,
+        "severity": "blocking",
+        "source": "chapitres/1SPE-SUITES/cours/cours.tex",
+    }
+    synthetic_policy = deepcopy(policy)
+    synthetic_policy["approved_set"].update(
+        {
+            "category_counts": {"blocking_statuses": 1},
+            "fingerprint_count": 1,
+            "fingerprint_digest": qualification_module.fingerprint_set_digest(
+                [str(record["fingerprint"])]
+            ),
+            "observed_model_digest_before_materialization": (
+                "sha256:" + "2" * 64
+            ),
+            "observed_source_digest_before_materialization": (
+                "sha256:" + "1" * 64
+            ),
+            "owner_counts": {"direction_scientifique_programme": 1},
+        }
+    )
+
+    with pytest.raises(
+        qualification_module.QualificationError,
+        match="source/model digest drift",
+    ):
+        qualification_module.plan_materialization(
+            synthetic_policy,
+            [record],
+            {},
+            observed_source_digest=source_digest,
+            observed_model_digest=model_digest,
+        )
 
 
 def test_materialization_plan_corrects_policy_entry_drift_after_materialization(
@@ -1168,13 +1305,15 @@ def test_materialization_refuses_approved_set_drift_without_partial_payload(
         == policy["control_digest"]
     }
     changed = deepcopy(records)
-    changed.pop(
+    removed = changed.pop(
         next(
             index
             for index, record in enumerate(changed)
             if not record["qualified"] or record["fingerprint"] in managed
         )
     )
+    changed_historical = deepcopy(historical)
+    del changed_historical[str(removed["fingerprint"])]
 
     with pytest.raises(
         qualification_module.QualificationError,
@@ -1183,7 +1322,7 @@ def test_materialization_refuses_approved_set_drift_without_partial_payload(
         qualification_module.plan_materialization(
             policy,
             changed,
-            historical,
+            changed_historical,
             observed_source_digest=inventory["source_digest"],
             observed_model_digest=inventory_module._model_digest(inventory),
         )

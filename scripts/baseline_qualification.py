@@ -12,6 +12,7 @@ from __future__ import annotations
 import fnmatch
 import hashlib
 import json
+import re
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -51,6 +52,16 @@ DISPOSITION_BLOCKS = {
     "intentional_reuse": False,
     "open_debt": True,
 }
+EVIDENCE_REQUIRED_DISPOSITIONS = frozenset(
+    {
+        "accepted_exception",
+        "false_positive",
+        "fixed",
+        "generated_dependency",
+        "intentional_reuse",
+    }
+)
+FINGERPRINT_PATTERN = re.compile(r"^[0-9a-f]{16,64}$")
 QUALIFICATION_DIGEST_FIELDS = (
     "approved_by",
     "decision_ref",
@@ -548,20 +559,36 @@ def _normalize_historical_record(
     historical: Mapping[str, Any],
 ) -> dict[str, Any]:
     del policy
+    fingerprint = record.get("fingerprint")
+    if (
+        not isinstance(fingerprint, str)
+        or FINGERPRINT_PATTERN.fullmatch(fingerprint) is None
+        or historical.get("fingerprint") != fingerprint
+    ):
+        raise QualificationError(
+            f"historical fingerprint mismatch for {fingerprint}"
+        )
     disposition = str(historical.get("disposition", ""))
     if disposition not in ALLOWED_DISPOSITIONS:
         raise QualificationError(
-            f"historical disposition invalid for {record['fingerprint']}"
+            f"historical disposition invalid for {fingerprint}"
         )
-    if historical.get("fingerprint") != record.get("fingerprint"):
+    owner = str(historical.get("owner", ""))
+    if owner not in APPROVED_OWNERS:
         raise QualificationError(
-            f"historical fingerprint mismatch for {record['fingerprint']}"
+            f"historical owner invalid for {fingerprint}"
         )
-    if disposition in {"generated_dependency", "intentional_reuse"} and not (
+    if disposition in EVIDENCE_REQUIRED_DISPOSITIONS and not (
         historical.get("proof") or historical.get("evidence")
     ):
         raise QualificationError(
-            f"historical proof missing for {record['fingerprint']}"
+            f"historical proof missing for {fingerprint}"
+        )
+    if historical.get("qualification_digest") != qualification_digest(
+        historical
+    ):
+        raise QualificationError(
+            f"historical qualification_digest mismatch for {fingerprint}"
         )
     return _canonical(historical)
 
@@ -632,22 +659,50 @@ def plan_materialization(
         raise QualificationError("approved_set missing from policy")
     by_fingerprint: dict[str, Mapping[str, Any]] = {}
     for record in records:
-        fingerprint = str(record.get("fingerprint", ""))
-        if not fingerprint or fingerprint in by_fingerprint:
+        fingerprint = record.get("fingerprint")
+        if (
+            not isinstance(fingerprint, str)
+            or FINGERPRINT_PATTERN.fullmatch(fingerprint) is None
+            or fingerprint in by_fingerprint
+        ):
             raise QualificationError(
                 f"jeu approuvé: fingerprint dupliqué ou vide: {fingerprint}"
             )
         by_fingerprint[fingerprint] = record
 
     policy_digest = str(policy.get("control_digest", ""))
-    policy_generated_fingerprints = {
-        str(fingerprint)
-        for fingerprint, disposition in historical_dispositions.items()
+    decision_ref = str(policy.get("decision", {}).get("ref", ""))
+    active_fingerprints = set(by_fingerprint)
+    registered_fingerprints: set[str] = set()
+    policy_generated_fingerprints: set[str] = set()
+    normalized_history: dict[str, dict[str, Any]] = {}
+    for key, disposition in historical_dispositions.items():
         if (
-            disposition.get("qualification_policy_digest") == policy_digest
-            and disposition.get("policy_rule") != "historical-evidence"
+            not isinstance(key, str)
+            or FINGERPRINT_PATTERN.fullmatch(key) is None
+            or not isinstance(disposition, Mapping)
+            or disposition.get("fingerprint") != key
+        ):
+            raise QualificationError(
+                f"historical fingerprint key mismatch: {key}"
+            )
+        registered_fingerprints.add(key)
+        managed = (
+            disposition.get("policy_rule") != "historical-evidence"
+            and _is_managed_by_policy(
+                disposition,
+                policy_digest=policy_digest,
+                decision_ref=decision_ref,
+            )
         )
-    }
+        if managed:
+            policy_generated_fingerprints.add(key)
+        if not managed or key not in active_fingerprints:
+            normalized_history[key] = _normalize_historical_record(
+                policy=policy,
+                record={"fingerprint": key},
+                historical=disposition,
+            )
     if not policy_generated_fingerprints and (
         observed_source_digest
         != approved.get("observed_source_digest_before_materialization")
@@ -657,24 +712,40 @@ def plan_materialization(
         raise QualificationError(
             "jeu approuvé pré-matérialisation: source/model digest drift"
         )
-    unknown_policy_fingerprints = (
-        policy_generated_fingerprints - set(by_fingerprint)
-    )
-    if unknown_policy_fingerprints:
+    qualified_fingerprints = {
+        fingerprint
+        for fingerprint, record in by_fingerprint.items()
+        if record.get("qualified") is True
+    }
+    if qualified_fingerprints - registered_fingerprints:
         raise QualificationError(
-            "jeu approuvé: policy disposition without active raw anomaly"
+            "jeu approuvé: active qualified fingerprints are not registered"
         )
-    approved_records = [
-        record
-        for record in records
+    unqualified_active_fingerprints = {
+        fingerprint
+        for fingerprint, record in by_fingerprint.items()
         if record.get("qualified") is not True
-        or str(record["fingerprint"]) in policy_generated_fingerprints
-    ]
-    fingerprints = [str(record["fingerprint"]) for record in approved_records]
+    }
+    foreign_registered = unqualified_active_fingerprints & (
+        registered_fingerprints - policy_generated_fingerprints
+    )
+    if foreign_registered:
+        raise QualificationError(
+            "jeu approuvé: active unqualified fingerprints belong to prior policy"
+        )
+    approved_fingerprints = (
+        policy_generated_fingerprints | unqualified_active_fingerprints
+    )
+    fingerprints = sorted(approved_fingerprints)
     approved_count = len(fingerprints)
     approved_digest = fingerprint_set_digest(fingerprints)
     category_counts = Counter(
-        str(record["category"]) for record in approved_records
+        str(
+            by_fingerprint[fingerprint]["category"]
+            if fingerprint in by_fingerprint
+            else normalized_history[fingerprint].get("category", "")
+        )
+        for fingerprint in fingerprints
     )
     if (
         approved_count != approved.get("fingerprint_count")
@@ -686,27 +757,14 @@ def plan_materialization(
             "jeu approuvé: count, fingerprint digest or category counts drift"
         )
 
-    qualified_fingerprints = {
-        str(record["fingerprint"])
-        for record in records
-        if record.get("qualified") is True
-    }
-    registered_fingerprints = set(historical_dispositions)
-    historical_fingerprints = (
-        registered_fingerprints - policy_generated_fingerprints
-    )
-    if qualified_fingerprints != registered_fingerprints:
-        raise QualificationError(
-            "jeu approuvé: historical disposition set does not match active records"
-        )
-
-    entries: dict[str, dict[str, Any]] = {}
+    entries = dict(normalized_history)
     unqualified: list[dict[str, Any]] = []
-    generated_decisions: list[dict[str, Any]] = []
-    for record in sorted(
-        approved_records,
-        key=lambda value: str(value["fingerprint"]),
-    ):
+    active_approved_records = [
+        by_fingerprint[fingerprint]
+        for fingerprint in fingerprints
+        if fingerprint in by_fingerprint
+    ]
+    for record in active_approved_records:
         matches = _matching_rules(
             policy,
             str(record["category"]),
@@ -739,7 +797,6 @@ def plan_materialization(
             raise QualificationError(
                 f"prohibited initial disposition for {record['fingerprint']}"
             )
-        generated_decisions.append(decision)
         entries[str(record["fingerprint"])] = _materialized_record(
             policy=policy,
             record=record,
@@ -747,7 +804,9 @@ def plan_materialization(
         )
 
     owner_counts = Counter(
-        str(decision["owner"]) for decision in generated_decisions
+        str(entries[fingerprint]["owner"])
+        for fingerprint in fingerprints
+        if fingerprint in entries
     )
     if not unqualified and dict(sorted(owner_counts.items())) != dict(
         sorted(approved.get("owner_counts", {}).items())
@@ -757,13 +816,16 @@ def plan_materialization(
         raise QualificationError(
             f"{len(unqualified)} anomalies remain unqualified"
         )
-
-    for fingerprint in sorted(historical_fingerprints):
-        entries[fingerprint] = _normalize_historical_record(
-            policy=policy,
-            record=by_fingerprint[fingerprint],
-            historical=historical_dispositions[fingerprint],
+    if not unqualified:
+        registry_failures = validate_materialized_registry(
+            policy,
+            entries,
         )
+        if registry_failures:
+            raise QualificationError(
+                "jeu approuvé: invalid materialized registry: "
+                + registry_failures[0]
+            )
 
     dispositions_payload: dict[str, Any] = {
         "artifact_type": "anomaly_dispositions",
