@@ -378,6 +378,96 @@ def test_margin_proof_layout_rejects_incoherent_rectangles_and_heights() -> None
     )
 
 
+def _margin_proof_place_both_notes_on_first_page(
+    layout: dict, *, second_y_sp: int
+) -> None:
+    second_note = layout["notes"][1]
+    second_note["target_shipout_index"] = 1
+    second_note["target_y_sp"] = second_y_sp
+    second_note["report_decoration_height_sp"] = 0
+    second_note["effective_height_sp"] = second_note["base_height_sp"]
+    second_note["report_depth"] = 0
+
+    first_page, second_page = layout["pages"]
+    first_page["placed_note_ids"].append(second_note["id"])
+    first_page["reported_note_ids"] = []
+    second_page["carry_in_note_ids"] = []
+    second_page["placed_note_ids"] = []
+
+
+@pytest.mark.parametrize(
+    "fixture_name,validator",
+    [
+        (
+            "margin-stable-layout.valid.json",
+            margin_contract.validate_stable_layout,
+        ),
+        ("margin-layout.valid.json", margin_contract.validate_margin_layout),
+    ],
+)
+def test_margin_proof_stable_geometry_rejects_overlapping_notes(
+    fixture_name: str, validator
+) -> None:
+    layout = _margin_proof_fixture(fixture_name)
+    _margin_proof_place_both_notes_on_first_page(layout, second_y_sp=200000)
+
+    _margin_proof_assert_rejected(
+        validator,
+        layout,
+    )
+
+
+def test_margin_proof_stable_geometry_rejects_note_obstacle_intersection() -> None:
+    layout = _margin_proof_fixture("margin-stable-layout.valid.json")
+    layout["notes"][0]["target_y_sp"] = 149999
+
+    _margin_proof_assert_rejected(
+        margin_contract.validate_stable_layout,
+        layout,
+    )
+
+
+def test_margin_proof_stable_geometry_allows_tangent_edges() -> None:
+    obstacle_tangent = _margin_proof_fixture("margin-stable-layout.valid.json")
+    obstacle_tangent["notes"][0]["target_y_sp"] = 150000
+    assert margin_contract.validate_stable_layout(obstacle_tangent) == obstacle_tangent
+
+    notes_tangent = _margin_proof_fixture("margin-stable-layout.valid.json")
+    _margin_proof_place_both_notes_on_first_page(notes_tangent, second_y_sp=300000)
+    assert margin_contract.validate_stable_layout(notes_tangent) == notes_tangent
+
+
+def test_margin_proof_stable_geometry_keeps_the_valid_fixture_green() -> None:
+    layout = _margin_proof_fixture("margin-stable-layout.valid.json")
+
+    assert margin_contract.validate_stable_layout(layout) == layout
+
+
+@pytest.mark.parametrize("state", ["collecting", "changed"])
+def test_margin_proof_nonstable_unplaced_notes_need_no_final_geometry(
+    state: str,
+) -> None:
+    layout = _margin_proof_fixture("margin-layout.valid.json")
+    layout["state"] = state
+    if state == "collecting":
+        layout["pass_number"] = 1
+        layout["read_digest"] = None
+    else:
+        layout["computed_digest"] = "sha256:" + "f" * 64
+    for note in layout["notes"]:
+        note["target_shipout_index"] = None
+        note["target_y_sp"] = None
+        note["report_decoration_height_sp"] = 0
+        note["effective_height_sp"] = note["base_height_sp"]
+        note["report_depth"] = 0
+    for page in layout["pages"]:
+        page["carry_in_note_ids"] = []
+        page["placed_note_ids"] = []
+        page["reported_note_ids"] = []
+
+    assert margin_contract.validate_margin_layout(layout) == layout
+
+
 def test_margin_proof_layout_enforces_state_digest_transitions() -> None:
     stable = _margin_proof_fixture("margin-layout.valid.json")
 
@@ -506,6 +596,12 @@ def test_margin_proof_projection_and_stable_layout_ignore_pass_metadata() -> Non
     second_stable = margin_contract.materialize_stable_layout(second)
 
     assert first_projection == second_projection
+    assert first_projection == margin_contract.canonical_capture_projection(
+        first_stable
+    )
+    assert second_projection == margin_contract.canonical_capture_projection(
+        second_stable
+    )
     assert margin_contract.canonical_json_bytes(
         first_projection
     ) == margin_contract.canonical_json_bytes(second_projection)

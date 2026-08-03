@@ -94,6 +94,59 @@ def _expected_page_memberships(
     return native, carry, placed, reported
 
 
+def _rectangles_intersect_with_positive_area(
+    first: tuple[int, int, int, int],
+    second: tuple[int, int, int, int],
+) -> bool:
+    first_left, first_top, first_right, first_bottom = first
+    second_left, second_top, second_right, second_bottom = second
+    return max(first_left, second_left) < min(first_right, second_right) and max(
+        first_top, second_top
+    ) < min(first_bottom, second_bottom)
+
+
+def _validate_stable_placed_geometry(
+    pages: list[dict[str, Any]], notes_by_id: dict[str, dict[str, Any]]
+) -> None:
+    for page in pages:
+        page_index = page["shipout_index"]
+        safe_rect = page["safe_rect"]
+        placed_rectangles: list[tuple[str, tuple[int, int, int, int]]] = []
+        obstacle_rectangles = [
+            (
+                obstacle["id"],
+                (
+                    obstacle["left_sp"],
+                    obstacle["top_sp"],
+                    obstacle["right_sp"],
+                    obstacle["bottom_sp"],
+                ),
+            )
+            for obstacle in page["obstacles"]
+        ]
+
+        for note_id in page["placed_note_ids"]:
+            note = notes_by_id[note_id]
+            target_y = note["target_y_sp"]
+            if note["target_shipout_index"] != page_index or target_y is None:
+                _reject(f"placed note {note_id} does not target page {page_index}")
+            rectangle = (
+                safe_rect["left_sp"],
+                target_y,
+                safe_rect["left_sp"] + note["width_sp"],
+                target_y + note["effective_height_sp"],
+            )
+            for obstacle_id, obstacle_rectangle in obstacle_rectangles:
+                if _rectangles_intersect_with_positive_area(
+                    rectangle, obstacle_rectangle
+                ):
+                    _reject(f"placed note {note_id} intersects obstacle {obstacle_id}")
+            for other_note_id, other_rectangle in placed_rectangles:
+                if _rectangles_intersect_with_positive_area(rectangle, other_rectangle):
+                    _reject(f"placed notes {other_note_id} and {note_id} intersect")
+            placed_rectangles.append((note_id, rectangle))
+
+
 def _validate_layout_semantics(
     document: dict[str, Any], *, require_complete: bool
 ) -> None:
@@ -193,6 +246,9 @@ def _validate_layout_semantics(
         for field, expected_pages in expected.items():
             if memberships[field][note_id] != expected_pages:
                 _reject(f"note {note_id} has incoherent {field}")
+
+    if require_complete:
+        _validate_stable_placed_geometry(pages, notes_by_id)
 
 
 def validate_margin_layout(document: Any) -> dict[str, Any]:
