@@ -131,30 +131,43 @@ end
 local function acquire_output_lock(parent, basename)
   local lfs = require("lfs")
   local path = parent .. "/." .. basename .. ".nexus-margin-lock"
-  local ok, lock_error = lfs.mkdir(path)
-  if not ok then
-    if lfs.symlinkattributes(path) then
-      fail("output publication is locked: " .. path)
-    end
-    fail("cannot acquire output publication lock: " .. tostring(lock_error))
+  local previous_attributes = lfs.symlinkattributes(path)
+  if previous_attributes and previous_attributes.mode ~= "file" then
+    fail("output publication lock must be a regular file: " .. path)
+  end
+  local handle, open_error = io.open(path, "a+b")
+  if not handle then
+    fail("cannot open output publication lock: " .. tostring(open_error))
   end
   local attributes = lfs.symlinkattributes(path)
-  if not attributes or attributes.mode ~= "directory"
+  if not attributes or attributes.mode ~= "file"
       or attributes.dev == nil or attributes.ino == nil then
-    lfs.rmdir(path)
+    handle:close()
     fail("cannot identify output publication lock: " .. path)
+  end
+  if previous_attributes
+      and (attributes.dev ~= previous_attributes.dev
+        or attributes.ino ~= previous_attributes.ino) then
+    handle:close()
+    fail("output publication lock changed while opening: " .. path)
+  end
+  local locked, lock_error = lfs.lock(handle, "w", 0, 0)
+  if not locked then
+    handle:close()
+    fail("output publication is locked: " .. path .. ": " .. tostring(lock_error))
   end
   return {
     path = path,
     dev = attributes.dev,
     ino = attributes.ino,
+    handle = handle,
   }
 end
 
 local function require_owned_output_lock(lock)
   local lfs = require("lfs")
   local attributes = lfs.symlinkattributes(lock.path)
-  if not attributes or attributes.mode ~= "directory"
+  if not lock.handle or not attributes or attributes.mode ~= "file"
       or attributes.dev ~= lock.dev or attributes.ino ~= lock.ino then
     fail("output publication lock changed: " .. lock.path)
   end
@@ -162,10 +175,18 @@ end
 
 local function release_output_lock(lock)
   local lfs = require("lfs")
-  require_owned_output_lock(lock)
-  local ok, release_error = lfs.rmdir(lock.path)
-  if not ok then
-    fail("cannot release output publication lock: " .. tostring(release_error))
+  local ownership_ok, ownership_error = pcall(require_owned_output_lock, lock)
+  local unlocked, unlock_error = lfs.unlock(lock.handle, 0, 0)
+  local closed, close_error = lock.handle:close()
+  lock.handle = nil
+  if not ownership_ok then
+    error(ownership_error, 0)
+  end
+  if not unlocked then
+    fail("cannot unlock output publication lock: " .. tostring(unlock_error))
+  end
+  if not closed then
+    fail("cannot close output publication lock: " .. tostring(close_error))
   end
 end
 

@@ -3,7 +3,9 @@ from __future__ import annotations
 import copy
 import importlib.util
 import json
+import os
 import shutil
+import signal
 import subprocess
 import time
 from pathlib import Path
@@ -1063,7 +1065,12 @@ def test_cli_never_follows_unrelated_output_symlink(tmp_path: Path) -> None:
     assert "symbolic link" in result.stderr
     assert output.is_symlink()
     assert victim.read_bytes() == b"third-party-bytes"
-    assert {path.name for path in tmp_path.iterdir()} == entries_before
+    assert {
+        path.name
+        for path in tmp_path.iterdir()
+        if path.name != ".output.json.nexus-margin-lock"
+    } == entries_before
+    assert (tmp_path / ".output.json.nexus-margin-lock").is_file()
 
 
 def test_cli_preserves_existing_output_when_temp_creation_fails(tmp_path: Path) -> None:
@@ -1097,7 +1104,12 @@ def test_cli_rejects_directory_output_without_temp_residue(tmp_path: Path) -> No
     assert result.returncode != 0
     assert "regular file" in result.stderr
     assert output.is_dir()
-    assert {path.name for path in tmp_path.iterdir()} == entries_before
+    assert {
+        path.name
+        for path in tmp_path.iterdir()
+        if path.name != ".output.json.nexus-margin-lock"
+    } == entries_before
+    assert (tmp_path / ".output.json.nexus-margin-lock").is_file()
 
 
 def test_cli_rejects_missing_output_parent_without_residue(tmp_path: Path) -> None:
@@ -1184,7 +1196,12 @@ os.rename = real_rename
     assert result.returncode != 0
     assert f"simulated {failure_stage} failure" in result.stderr
     assert output.read_bytes() == b"old-output"
-    assert {path.name for path in tmp_path.iterdir()} == entries_before
+    assert {
+        path.name
+        for path in tmp_path.iterdir()
+        if path.name != ".output.json.nexus-margin-lock"
+    } == entries_before
+    assert (tmp_path / ".output.json.nexus-margin-lock").is_file()
 
 
 def test_cli_serializes_real_concurrent_publishers_without_lost_update(
@@ -1259,5 +1276,75 @@ def test_cli_serializes_real_concurrent_publishers_without_lost_update(
     solved = json.loads(output.read_text(encoding="utf-8"))
     _load_margin_contract().validate_margin_layout(solved)
     assert solved["variant"] == "eleve"
-    assert not (tmp_path / ".output.json.nexus-margin-lock").exists()
+    assert (tmp_path / ".output.json.nexus-margin-lock").is_file()
     assert not list(tmp_path.glob(".output.json.nexus-margin-tmp-*"))
+
+
+def test_cli_releases_publication_lock_after_process_is_killed(
+    tmp_path: Path,
+) -> None:
+    strace = shutil.which("strace")
+    assert strace is not None, "the interruption regression requires strace"
+    source = tmp_path / "input.json"
+    output = tmp_path / "output.json"
+    trace = tmp_path / "killed.strace"
+    layout = _layout_with_identical_anchors()
+    _write_json(source, layout)
+    output.write_bytes(b"old-output")
+    payload = (
+        tmp_path
+        / ".output.json.nexus-margin-tmp-0123456789abcdef0123456789abcdef-01"
+        / "payload"
+    )
+    interrupted = subprocess.Popen(
+        [
+            strace,
+            "-qq",
+            "-e",
+            "trace=rename",
+            "-e",
+            "inject=rename:delay_enter=5s",
+            "-o",
+            str(trace),
+            "texlua",
+            str(SOLVER),
+            "--solve",
+            str(source),
+            "--output",
+            str(output),
+        ],
+        cwd=tmp_path,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        start_new_session=True,
+    )
+    try:
+        deadline = time.monotonic() + 5
+        while time.monotonic() < deadline:
+            if payload.exists() and payload.stat().st_size > 0:
+                break
+            if interrupted.poll() is not None:
+                break
+            time.sleep(0.005)
+        assert payload.exists() and payload.stat().st_size > 0
+        time.sleep(0.1)
+        assert interrupted.poll() is None
+        os.killpg(interrupted.pid, signal.SIGKILL)
+        interrupted.communicate(timeout=5)
+    finally:
+        if interrupted.poll() is None:
+            os.killpg(interrupted.pid, signal.SIGKILL)
+            interrupted.communicate()
+
+    assert interrupted.returncode != 0
+    assert output.read_bytes() == b"old-output"
+
+    retry = _run_solver(source, output, cwd=tmp_path)
+
+    assert retry.returncode == 0, retry.stderr
+    solved = json.loads(output.read_text(encoding="utf-8"))
+    _load_margin_contract().validate_margin_layout(solved)
+    assert solved["run_nonce"] == layout["run_nonce"]
+    lock_path = tmp_path / ".output.json.nexus-margin-lock"
+    assert not lock_path.is_dir()
