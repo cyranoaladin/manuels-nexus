@@ -344,6 +344,10 @@ def validate_margin_ledger(document: Any) -> dict[str, Any]:
     _require_unique([note["note_id"] for note in notes], "ledger note id")
     _require_unique([note["global_order"] for note in notes], "ledger global_order")
     _require_unique([note["form_xref"] for note in notes], "ledger form_xref")
+    _require_canonical_order(
+        [(note["global_order"], note["note_id"]) for note in notes],
+        "ledger notes",
+    )
 
     folio_by_shipout_index: dict[int, str] = {}
     for note in notes:

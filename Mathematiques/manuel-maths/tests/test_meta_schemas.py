@@ -827,6 +827,16 @@ def test_margin_proof_ledger_rejects_cross_role_folio_conflicts() -> None:
     _margin_proof_assert_rejected(margin_contract.validate_margin_ledger, ledger)
 
 
+def test_margin_proof_ledger_rejects_noncanonical_note_order() -> None:
+    ledger = _margin_proof_fixture("margin-ledger.valid.json")
+    canonical_bytes = margin_contract.canonical_json_bytes(ledger)
+
+    ledger["notes"].reverse()
+
+    assert margin_contract.canonical_json_bytes(ledger) != canonical_bytes
+    _margin_proof_assert_rejected(margin_contract.validate_margin_ledger, ledger)
+
+
 @pytest.mark.parametrize(
     "requires_marker,anchor_count,note_count",
     [
