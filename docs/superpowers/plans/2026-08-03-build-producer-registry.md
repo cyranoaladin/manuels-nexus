@@ -302,7 +302,7 @@ Do not stage any visual baseline path.
 
 ## Chunk 4: Re-attestation of observed PDFs
 
-### Task 5: Re-attest the professor variant
+### Task 5: Materialize both reproducible PDFs before any receipt
 
 **Files:**
 - Modify: `Mathematiques/manuel-maths/config/reproducible-build.json`
@@ -313,21 +313,23 @@ Do not stage any visual baseline path.
 commit that configuration alone.
 - [ ] Build the professor variant normally and record its SHA/page count.
 - [ ] Version the PDF only if bytes changed, in a `[PDF]` commit.
-- [ ] Rebuild with `--record-observed`; require recorder exit `0`, preflight
-success, `-recorder` evidence and byte identity with the versioned PDF.
-- [ ] Commit only the professor receipt/manifest update as `[AUDIT]`.
-
-### Task 6: Re-attest the student variant
-
-**Files:**
-- Modify if reproducibly changed: student PDF
-- Modify: `audit/BUILD_MANIFEST.json`
-
 - [ ] Build the student variant normally and record its SHA/page count.
 - [ ] Prove the student-separation gate passes and no professor object leaks.
 - [ ] Version the PDF only if bytes changed, in a `[PDF]` commit.
+- [ ] Invalidate and refresh the empty manifest after both PDF commits so no
+  later source change can stale the first observed receipt.
+
+### Task 6: Re-attest professor then student from the fixed source state
+
+**Files:**
+- Modify: `audit/BUILD_MANIFEST.json`
+
+- [ ] Rebuild the professor variant with `--record-observed`; require recorder
+exit `0`, preflight success, `-recorder` evidence and byte identity with the
+versioned PDF.
+- [ ] Commit only the professor receipt/manifest update as `[AUDIT]`.
 - [ ] Rebuild with `--record-observed`; require byte identity and recorder exit
-`0`.
+`0` for the student variant and preserve the professor receipt.
 - [ ] Commit only the student receipt/manifest update as `[AUDIT]`.
 
 ### Task 7: Regenerate and verify the final inventory
