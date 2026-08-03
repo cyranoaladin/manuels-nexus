@@ -85,6 +85,15 @@ def _layout_with_identical_anchors() -> dict[str, object]:
     }
 
 
+def _layout_whose_stack_overflows_safe_rect() -> dict[str, object]:
+    layout = _layout_with_identical_anchors()
+    layout["notes"] = layout["notes"][:2]
+    page = layout["pages"][0]
+    page["native_note_ids"] = ["note-a", "note-b"]
+    page["safe_rect"]["bottom_sp"] = 80 * SP_PER_PT
+    return layout
+
+
 def test_identical_anchors_are_placed_top_down(tmp_path: Path) -> None:
     source = tmp_path / "layout.json"
     output = tmp_path / "solved.json"
@@ -119,6 +128,71 @@ def test_identical_anchors_are_placed_top_down(tmp_path: Path) -> None:
         2,
         3,
     ]
+
+
+def test_layout_solve_rejects_a_candidate_below_the_safe_rect(tmp_path: Path) -> None:
+    source = tmp_path / "overflow.json"
+    driver = tmp_path / "overflow-driver.lua"
+    overflowing = _layout_whose_stack_overflows_safe_rect()
+    _load_margin_contract().validate_margin_layout(overflowing)
+    _write_json(source, overflowing)
+    driver.write_text(
+        """
+local json = assert(loadfile(arg[1]))()
+local layout = assert(loadfile(arg[2]))()
+local file = assert(io.open(arg[3], "rb"))
+local current = json.decode(file:read("*a"))
+assert(file:close())
+local ok, result = pcall(layout.solve, current, nil)
+if ok then
+  io.write(json.encode(result))
+  os.exit(0)
+end
+io.stderr:write(tostring(result), "\\n")
+os.exit(1)
+""".strip(),
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            "texlua",
+            str(driver),
+            str(JSON_CODEC),
+            str(MANUAL_ROOT / "gabarits" / "nexus-margin-layout.lua"),
+            str(source),
+        ],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert "invalid margin layout at result.notes[note-b].target_y_sp" in result.stderr
+
+
+@pytest.mark.parametrize("existing_output", [False, True])
+def test_cli_rejects_an_overflowing_candidate_without_publishing_output(
+    tmp_path: Path, existing_output: bool
+) -> None:
+    source = tmp_path / "overflow.json"
+    output = tmp_path / "output.json"
+    overflowing = _layout_whose_stack_overflows_safe_rect()
+    _load_margin_contract().validate_margin_layout(overflowing)
+    _write_json(source, overflowing)
+    if existing_output:
+        output.write_bytes(b"old-output")
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode != 0
+    assert result.stderr.startswith("margin-layout-cli:")
+    assert "result.notes[note-b].target_y_sp" in result.stderr
+    if existing_output:
+        assert output.read_bytes() == b"old-output"
+    else:
+        assert not output.exists()
 
 
 def _run_codec(tmp_path: Path, payload: bytes) -> subprocess.CompletedProcess[bytes]:
@@ -505,6 +579,9 @@ def test_solver_is_byte_deterministic_for_explicit_outputs(tmp_path: Path) -> No
     assert first_run.returncode == 0, first_run.stderr
     assert second_run.returncode == 0, second_run.stderr
     assert first.read_bytes() == second.read_bytes()
+    contract = _load_margin_contract()
+    contract.validate_margin_layout(json.loads(first.read_text(encoding="utf-8")))
+    contract.validate_margin_layout(json.loads(second.read_text(encoding="utf-8")))
 
 
 def test_solver_does_not_mutate_current_or_previous_tables(tmp_path: Path) -> None:
@@ -555,7 +632,9 @@ io.write(json.encode(solved))
     )
 
     assert result.returncode == 0, result.stderr
-    assert json.loads(result.stdout)["pages"][0]["placed_note_ids"] == [
+    solved = json.loads(result.stdout)
+    _load_margin_contract().validate_margin_layout(solved)
+    assert solved["pages"][0]["placed_note_ids"] == [
         "note-a",
         "note-b",
         "note-c",
@@ -709,6 +788,7 @@ def test_carry_in_starts_at_safe_top_and_precedes_native_notes(tmp_path: Path) -
 
     assert result.returncode == 0, result.stderr
     solved = json.loads(output.read_text(encoding="utf-8"))
+    _load_margin_contract().validate_margin_layout(solved)
     assert solved["pages"][1]["placed_note_ids"] == ["carried", "native"]
     notes = {note["id"]: note for note in solved["notes"]}
     assert notes["carried"]["target_y_sp"] == 15 * SP_PER_PT

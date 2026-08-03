@@ -686,6 +686,7 @@ function M.solve(current_layout, previous_layout_or_nil)
     end
     page.placed_note_ids = placed_ids
   end
+  validate_layout(result, "result")
   return result
 end
 
