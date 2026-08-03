@@ -81,6 +81,65 @@ local function paths_alias(first, second)
     and first_attributes.ino == second_attributes.ino
 end
 
+local function split_path(path)
+  local parent, basename = path:match("^(.*)/([^/]*)$")
+  if not parent then
+    return ".", path
+  end
+  if parent == "" then
+    parent = "/"
+  end
+  return parent, basename
+end
+
+local function output_snapshot(path)
+  local lfs = require("lfs")
+  local attributes = lfs.symlinkattributes(path)
+  if not attributes then
+    return { exists = false }
+  end
+  if attributes.mode == "link" then
+    fail("output must not be a symbolic link: " .. path)
+  end
+  if attributes.mode ~= "file" then
+    fail("output must be a regular file: " .. path)
+  end
+  if attributes.dev == nil or attributes.ino == nil then
+    fail("cannot identify output file: " .. path)
+  end
+  return {
+    exists = true,
+    dev = attributes.dev,
+    ino = attributes.ino,
+  }
+end
+
+
+local function validate_output_parent(path)
+  local lfs = require("lfs")
+  local parent, basename = split_path(path)
+  if basename == "" or basename == "." or basename == ".." then
+    fail("output path must name a regular file")
+  end
+  local attributes = lfs.attributes(parent)
+  if not attributes or attributes.mode ~= "directory" then
+    fail("output parent must be an existing directory: " .. parent)
+  end
+  return parent, basename
+end
+
+
+local function output_is_unchanged(path, expected)
+  local current = output_snapshot(path)
+  if current.exists ~= expected.exists then
+    fail("output changed before publication: " .. path)
+  end
+  if current.exists
+      and (current.dev ~= expected.dev or current.ino ~= expected.ino) then
+    fail("output changed before publication: " .. path)
+  end
+end
+
 local function read_file(path)
   local handle, open_error = io.open(path, "rb")
   if not handle then
@@ -110,6 +169,56 @@ local function write_file(path, content)
   end
 end
 
+local function publish_output(path, content, run_nonce, initial_snapshot)
+  local lfs = require("lfs")
+  local parent, basename = validate_output_parent(path)
+  local temporary_directory = nil
+  local temporary_payload = nil
+  local last_mkdir_error = nil
+
+  for attempt = 1, 64 do
+    local candidate = string.format(
+      "%s/.%s.nexus-margin-tmp-%s-%02d",
+      parent,
+      basename,
+      run_nonce,
+      attempt
+    )
+    local ok, mkdir_error = lfs.mkdir(candidate)
+    if ok then
+      temporary_directory = candidate
+      temporary_payload = candidate .. "/payload"
+      break
+    end
+    last_mkdir_error = mkdir_error
+  end
+  if not temporary_directory then
+    fail("cannot create sibling temporary directory: " .. tostring(last_mkdir_error))
+  end
+
+  local function cleanup()
+    if temporary_payload then
+      os.remove(temporary_payload)
+    end
+    if temporary_directory then
+      lfs.rmdir(temporary_directory)
+    end
+  end
+
+  local ok, publication_error = pcall(function()
+    write_file(temporary_payload, content)
+    output_is_unchanged(path, initial_snapshot)
+    local renamed, rename_error = os.rename(temporary_payload, path)
+    if not renamed then
+      fail("cannot publish output: " .. tostring(rename_error))
+    end
+  end)
+  cleanup()
+  if not ok then
+    error(publication_error, 0)
+  end
+end
+
 local function main()
   local options = parse_options(arg)
   local input_path = options["--solve"]
@@ -119,6 +228,8 @@ local function main()
       or (previous_path and paths_alias(output_path, previous_path)) then
     fail("output must differ from every input")
   end
+  validate_output_parent(output_path)
+  local initial_output = output_snapshot(output_path)
 
   local root = script_directory() .. "/.."
   local json = load_module(root .. "/gabarits/nexus-margin-json.lua", "JSON codec")
@@ -127,7 +238,7 @@ local function main()
   local previous = previous_path and json.decode(read_file(previous_path)) or nil
   local solved = layout.solve(current, previous)
   local encoded = json.encode(solved)
-  write_file(output_path, encoded)
+  publish_output(output_path, encoded, current.run_nonce, initial_output)
 end
 
 local ok, message = pcall(main)

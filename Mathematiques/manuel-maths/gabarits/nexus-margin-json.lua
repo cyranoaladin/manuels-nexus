@@ -1,18 +1,23 @@
 local M = {}
 
 local SAFE_INTEGER = 9007199254740991
-local ARRAY_MT = { __nexus_json_type = "array" }
-local OBJECT_MT = { __nexus_json_type = "object" }
-local NULL_MT = { __nexus_json_type = "null" }
 
-M.JSON_NULL = setmetatable({}, NULL_MT)
+local function new_container(container_type)
+  return setmetatable({}, { __nexus_json_type = container_type })
+end
+
+local function new_null()
+  return new_container("null")
+end
+
+M.JSON_NULL = new_null()
 
 function M.new_array()
-  return setmetatable({}, ARRAY_MT)
+  return new_container("array")
 end
 
 function M.new_object()
-  return setmetatable({}, OBJECT_MT)
+  return new_container("object")
 end
 
 function M.container_type(value)
@@ -342,11 +347,17 @@ function Parser:parse_value()
   if byte == 0x2D or (byte and byte >= 0x30 and byte <= 0x39) then
     return self:parse_number()
   end
-  for literal, value in pairs({ ["true"] = true, ["false"] = false, ["null"] = M.JSON_NULL }) do
-    if self.text:sub(self.position, self.position + #literal - 1) == literal then
-      self.position = self.position + #literal
-      return value
-    end
+  if self.text:sub(self.position, self.position + 3) == "true" then
+    self.position = self.position + 4
+    return true
+  end
+  if self.text:sub(self.position, self.position + 4) == "false" then
+    self.position = self.position + 5
+    return false
+  end
+  if self.text:sub(self.position, self.position + 3) == "null" then
+    self.position = self.position + 4
+    return new_null()
   end
   fail("decode", self.position, "expected a JSON value")
 end

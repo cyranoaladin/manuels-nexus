@@ -12,6 +12,7 @@ import pytest
 MANUAL_ROOT = Path(__file__).resolve().parents[1]
 SOLVER = MANUAL_ROOT / "scripts" / "solve_margin_layout.lua"
 JSON_CODEC = MANUAL_ROOT / "gabarits" / "nexus-margin-json.lua"
+LAYOUT_FIXTURE = MANUAL_ROOT / "tests" / "fixtures" / "margin-layout.valid.json"
 SP_PER_PT = 65536
 
 
@@ -27,7 +28,7 @@ def _load_margin_contract():
 def _layout_with_identical_anchors() -> dict[str, object]:
     anchor_sp = 20 * SP_PER_PT
     height_sp = 30 * SP_PER_PT
-    note_ids = ["note-c", "note-a", "note-b"]
+    note_ids = ["note-a", "note-b", "note-c"]
     notes = [
         {
             "id": note_id,
@@ -46,7 +47,7 @@ def _layout_with_identical_anchors() -> dict[str, object]:
             "requires_marker": False,
             "semantic_digest": f"sha256:{global_order:064x}",
         }
-        for note_id, global_order in zip(note_ids, (3, 1, 2), strict=True)
+        for note_id, global_order in zip(note_ids, (1, 2, 3), strict=True)
     ]
     return {
         "schema_version": 1,
@@ -232,7 +233,8 @@ assert(json.container_type(value.array) == "array")
 assert(json.container_type(value.nested) == "array")
 assert(json.container_type(value.nested[1]) == "object")
 assert(json.container_type(value.nested[2]) == "array")
-assert(value.null == json.JSON_NULL)
+assert(json.container_type(value.null) == "null")
+assert(not rawequal(value.null, json.JSON_NULL))
 io.write(json.encode(value))
 """.strip(),
     )
@@ -311,6 +313,171 @@ def _run_solver(
 
 def _write_json(path: Path, value: object) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False), encoding="utf-8")
+
+
+def _stable_identical_layout() -> dict[str, object]:
+    layout = _layout_with_identical_anchors()
+    layout["state"] = "stable"
+    layout["pass_number"] = 2
+    layout["read_digest"] = layout["computed_digest"]
+    target_positions = [20 * SP_PER_PT, 56 * SP_PER_PT, 92 * SP_PER_PT]
+    for note, target_y in zip(layout["notes"], target_positions, strict=True):
+        note["target_shipout_index"] = 1
+        note["target_y_sp"] = target_y
+    layout["pages"][0]["placed_note_ids"] = ["note-a", "note-b", "note-c"]
+    return layout
+
+
+def _mutate_contract_case(layout: dict[str, object], case: str) -> None:
+    if case == "unexpected_root":
+        layout["unexpected"] = True
+    elif case == "unexpected_page":
+        layout["pages"][0]["unexpected"] = True
+    elif case == "unexpected_safe_rect":
+        layout["pages"][0]["safe_rect"]["unexpected"] = True
+    elif case == "unexpected_obstacle":
+        layout["pages"][0]["obstacles"][0]["unexpected"] = True
+    elif case == "unexpected_note":
+        layout["notes"][0]["unexpected"] = True
+    elif case == "stable_read_null":
+        layout["read_digest"] = None
+    elif case == "collecting_read_digest":
+        layout["state"] = "collecting"
+    elif case == "collecting_error":
+        layout["state"] = "collecting"
+        layout["read_digest"] = None
+        layout["error_code"] = "malformed-margin-layout"
+    elif case == "changed_equal_digests":
+        layout["state"] = "changed"
+    elif case == "stable_unequal_digests":
+        layout["computed_digest"] = f"sha256:{4:064x}"
+    elif case == "failed_without_error":
+        layout["state"] = "failed"
+        layout["error_code"] = None
+    elif case == "noncanonical_notes":
+        layout["notes"].reverse()
+    elif case == "noncanonical_pages":
+        layout["pages"].reverse()
+    elif case == "noncanonical_native_ids":
+        layout["pages"][0]["native_note_ids"].reverse()
+    elif case == "noncanonical_obstacles":
+        existing = layout["pages"][0]["obstacles"][0]
+        later = {
+            "id": "page-1-later",
+            "left_sp": existing["left_sp"],
+            "top_sp": 400000,
+            "right_sp": existing["right_sp"],
+            "bottom_sp": 450000,
+        }
+        layout["pages"][0]["obstacles"] = [later, existing]
+    elif case == "duplicate_obstacle_id":
+        layout["pages"][1]["obstacles"][0]["id"] = layout["pages"][0][
+            "obstacles"
+        ][0]["id"]
+    elif case == "noncontiguous_pages":
+        layout["pages"][1]["shipout_index"] = 3
+    elif case == "wrong_rail_side":
+        layout["pages"][0]["rail_side"] = "left"
+    elif case == "invalid_safe_rect":
+        layout["pages"][0]["safe_rect"]["right_sp"] = layout["pages"][0][
+            "safe_rect"
+        ]["left_sp"]
+    elif case == "invalid_obstacle_rect":
+        layout["pages"][0]["obstacles"][0]["bottom_sp"] = layout["pages"][0][
+            "page_height_sp"
+        ] + 1
+    elif case == "unknown_page_note_reference":
+        layout["pages"][0]["native_note_ids"][0] = "unknown"
+    elif case == "unknown_target_page":
+        layout["notes"][0]["target_shipout_index"] = 3
+    elif case == "half_null_target":
+        layout["notes"][0]["target_y_sp"] = None
+    elif case == "incoherent_effective_height":
+        layout["notes"][0]["effective_height_sp"] += 1
+    elif case == "incoherent_membership":
+        layout["pages"][1]["placed_note_ids"] = []
+    elif case == "obstacle_intersection":
+        layout["pages"][0]["obstacles"][0].update(
+            {"top_sp": 200000, "bottom_sp": 250000}
+        )
+    elif case == "insufficient_gap":
+        layout.clear()
+        layout.update(_stable_identical_layout())
+        layout["notes"][1]["target_y_sp"] -= 1
+    else:  # pragma: no cover - keeps the mutation table fail-closed.
+        raise AssertionError(f"unknown contract mutation {case}")
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        "unexpected_root",
+        "unexpected_page",
+        "unexpected_safe_rect",
+        "unexpected_obstacle",
+        "unexpected_note",
+        "stable_read_null",
+        "collecting_read_digest",
+        "collecting_error",
+        "changed_equal_digests",
+        "stable_unequal_digests",
+        "failed_without_error",
+        "noncanonical_notes",
+        "noncanonical_pages",
+        "noncanonical_native_ids",
+        "noncanonical_obstacles",
+        "duplicate_obstacle_id",
+        "noncontiguous_pages",
+        "wrong_rail_side",
+        "invalid_safe_rect",
+        "invalid_obstacle_rect",
+        "unknown_page_note_reference",
+        "unknown_target_page",
+        "half_null_target",
+        "incoherent_effective_height",
+        "incoherent_membership",
+        "obstacle_intersection",
+        "insufficient_gap",
+    ],
+)
+def test_lua_and_python_contracts_reject_the_same_layout_mutations(
+    tmp_path: Path, case: str
+) -> None:
+    layout = json.loads(LAYOUT_FIXTURE.read_text(encoding="utf-8"))
+    _mutate_contract_case(layout, case)
+    contract = _load_margin_contract()
+    with pytest.raises(contract.MarginContractError):
+        contract.validate_margin_layout(layout)
+    source = tmp_path / f"{case}.json"
+    output = tmp_path / "must-not-exist.json"
+    _write_json(source, layout)
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode != 0
+    assert result.stderr.startswith("margin-layout-cli:")
+    assert not output.exists()
+
+
+def test_previous_stable_layout_with_null_read_digest_is_rejected(
+    tmp_path: Path,
+) -> None:
+    current = tmp_path / "current.json"
+    previous = tmp_path / "previous.json"
+    output = tmp_path / "must-not-exist.json"
+    _write_json(current, _layout_with_identical_anchors())
+    invalid_previous = json.loads(LAYOUT_FIXTURE.read_text(encoding="utf-8"))
+    invalid_previous["read_digest"] = None
+    contract = _load_margin_contract()
+    with pytest.raises(contract.MarginContractError):
+        contract.validate_margin_layout(invalid_previous)
+    _write_json(previous, invalid_previous)
+
+    result = _run_solver(current, output, previous=previous, cwd=tmp_path)
+
+    assert result.returncode != 0
+    assert "previous.read_digest" in result.stderr
+    assert not output.exists()
 
 
 def test_solver_is_byte_deterministic_for_explicit_outputs(tmp_path: Path) -> None:
@@ -395,6 +562,92 @@ io.write(json.encode(solved))
     ]
 
 
+def test_solver_deep_copies_every_json_metatable_including_null(tmp_path: Path) -> None:
+    current_path = tmp_path / "current.json"
+    previous_path = tmp_path / "previous.json"
+    _write_json(current_path, _layout_with_identical_anchors())
+    _write_json(previous_path, _layout_with_identical_anchors())
+    driver = tmp_path / "metatable-driver.lua"
+    driver.write_text(
+        """
+local json = assert(loadfile(arg[1]))()
+local layout = assert(loadfile(arg[2]))()
+local function read(path)
+  local file = assert(io.open(path, "rb"))
+  local value = json.decode(file:read("*a"))
+  assert(file:close())
+  return value
+end
+local function collect_metatables(value, found)
+  found = found or {}
+  if type(value) ~= "table" then
+    return found
+  end
+  local metatable = getmetatable(value)
+  assert(type(metatable) == "table", "JSON table lacks a metatable")
+  found[metatable] = true
+  if json.container_type(value) ~= "null" then
+    for _, child in next, value do
+      collect_metatables(child, found)
+    end
+  end
+  return found
+end
+local function assert_disjoint(first, second, label)
+  for metatable in next, first do
+    assert(not second[metatable], label .. " shares a metatable")
+  end
+end
+local current = read(arg[3])
+local previous = read(arg[4])
+local solved = layout.solve(current, previous)
+local current_metatables = collect_metatables(current)
+local previous_metatables = collect_metatables(previous)
+local solved_metatables = collect_metatables(solved)
+assert_disjoint(current_metatables, previous_metatables, "current/previous")
+assert_disjoint(current_metatables, solved_metatables, "current/result")
+assert_disjoint(previous_metatables, solved_metatables, "previous/result")
+assert(not rawequal(solved.read_digest, current.read_digest), "result reused current null")
+assert(not rawequal(solved.read_digest, previous.read_digest), "result reused previous null")
+getmetatable(solved).__result_mutation = true
+getmetatable(solved.notes).__result_array_mutation = true
+getmetatable(solved.notes[1]).__result_record_mutation = true
+getmetatable(solved.read_digest).__result_null_mutation = true
+assert(getmetatable(current).__result_mutation == nil)
+assert(getmetatable(previous).__result_mutation == nil)
+assert(getmetatable(current.notes).__result_array_mutation == nil)
+assert(getmetatable(previous.notes).__result_array_mutation == nil)
+assert(getmetatable(current.notes[1]).__result_record_mutation == nil)
+assert(getmetatable(previous.notes[1]).__result_record_mutation == nil)
+assert(getmetatable(current.read_digest).__result_null_mutation == nil)
+assert(getmetatable(previous.read_digest).__result_null_mutation == nil)
+getmetatable(current.pages).__current_mutation = true
+assert(getmetatable(previous.pages).__current_mutation == nil)
+assert(getmetatable(solved.pages).__current_mutation == nil)
+io.write(json.encode(solved))
+""".strip(),
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            "texlua",
+            str(driver),
+            str(JSON_CODEC),
+            str(MANUAL_ROOT / "gabarits" / "nexus-margin-layout.lua"),
+            str(current_path),
+            str(previous_path),
+        ],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    _load_margin_contract().validate_margin_layout(json.loads(result.stdout))
+
+
 def test_layout_module_exposes_only_the_pure_solve_api(tmp_path: Path) -> None:
     result = _run_lua_source(
         tmp_path,
@@ -419,11 +672,20 @@ def test_carry_in_starts_at_safe_top_and_precedes_native_notes(tmp_path: Path) -
     carried["id"] = "carried"
     carried["global_order"] = 1
     carried["origin_shipout_index"] = 1
+    carried["target_shipout_index"] = 2
+    carried["target_y_sp"] = 15 * SP_PER_PT
+    carried["report_decoration_height_sp"] = 5 * SP_PER_PT
+    carried["effective_height_sp"] = 35 * SP_PER_PT
+    carried["report_depth"] = 1
+    carried["requires_marker"] = True
     native = layout["notes"][1]
     native["id"] = "native"
     native["global_order"] = 2
     native["origin_shipout_index"] = 2
-    layout["notes"] = [native, carried]
+    native["origin_folio"] = "2"
+    native["target_shipout_index"] = 2
+    native["target_y_sp"] = 56 * SP_PER_PT
+    layout["notes"] = [carried, native]
     first_page = layout["pages"][0]
     first_page["native_note_ids"] = ["carried"]
     first_page["reported_note_ids"] = ["carried"]
@@ -434,7 +696,7 @@ def test_carry_in_starts_at_safe_top_and_precedes_native_notes(tmp_path: Path) -
         "rail_side": "left",
         "native_note_ids": ["native"],
         "carry_in_note_ids": ["carried"],
-        "placed_note_ids": [],
+        "placed_note_ids": ["carried", "native"],
         "reported_note_ids": [],
         "safe_rect": {**first_page["safe_rect"], "top_sp": 15 * SP_PER_PT},
     }
@@ -450,7 +712,7 @@ def test_carry_in_starts_at_safe_top_and_precedes_native_notes(tmp_path: Path) -
     assert solved["pages"][1]["placed_note_ids"] == ["carried", "native"]
     notes = {note["id"]: note for note in solved["notes"]}
     assert notes["carried"]["target_y_sp"] == 15 * SP_PER_PT
-    assert notes["native"]["target_y_sp"] == 51 * SP_PER_PT
+    assert notes["native"]["target_y_sp"] == 56 * SP_PER_PT
 
 
 @pytest.mark.parametrize(
@@ -506,6 +768,9 @@ def test_solver_rejects_missing_duplicate_and_badly_typed_data(
         layout["notes"][0]["semantic_digest"] = "not-a-digest"
     elif case == "bad_state":
         layout["state"] = "finished"
+    contract = _load_margin_contract()
+    with pytest.raises(contract.MarginContractError):
+        contract.validate_margin_layout(layout)
     source = tmp_path / "invalid.json"
     output = tmp_path / "must-not-exist.json"
     _write_json(source, layout)
@@ -618,3 +883,142 @@ def test_cli_leaves_existing_output_untouched_on_invalid_json(tmp_path: Path) ->
     assert result.stderr.startswith("margin-layout-cli:")
     assert "stack traceback" not in result.stderr
     assert output.read_bytes() == b"preserve-me"
+
+
+def test_cli_never_follows_unrelated_output_symlink(tmp_path: Path) -> None:
+    source = tmp_path / "input.json"
+    victim = tmp_path / "unrelated.txt"
+    output = tmp_path / "output.json"
+    _write_json(source, _layout_with_identical_anchors())
+    victim.write_bytes(b"third-party-bytes")
+    output.symlink_to(victim)
+    entries_before = {path.name for path in tmp_path.iterdir()}
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode != 0
+    assert "symbolic link" in result.stderr
+    assert output.is_symlink()
+    assert victim.read_bytes() == b"third-party-bytes"
+    assert {path.name for path in tmp_path.iterdir()} == entries_before
+
+
+def test_cli_preserves_existing_output_when_temp_creation_fails(tmp_path: Path) -> None:
+    source = tmp_path / "input.json"
+    locked_parent = tmp_path / "locked"
+    locked_parent.mkdir()
+    output = locked_parent / "output.json"
+    _write_json(source, _layout_with_identical_anchors())
+    output.write_bytes(b"old-output")
+    locked_parent.chmod(0o500)
+
+    try:
+        result = _run_solver(source, output, cwd=tmp_path)
+    finally:
+        locked_parent.chmod(0o700)
+
+    assert result.returncode != 0
+    assert output.read_bytes() == b"old-output"
+    assert [path.name for path in locked_parent.iterdir()] == ["output.json"]
+
+
+def test_cli_rejects_directory_output_without_temp_residue(tmp_path: Path) -> None:
+    source = tmp_path / "input.json"
+    output = tmp_path / "output.json"
+    _write_json(source, _layout_with_identical_anchors())
+    output.mkdir()
+    entries_before = {path.name for path in tmp_path.iterdir()}
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode != 0
+    assert "regular file" in result.stderr
+    assert output.is_dir()
+    assert {path.name for path in tmp_path.iterdir()} == entries_before
+
+
+def test_cli_rejects_missing_output_parent_without_residue(tmp_path: Path) -> None:
+    source = tmp_path / "input.json"
+    missing_parent = tmp_path / "missing"
+    output = missing_parent / "output.json"
+    _write_json(source, _layout_with_identical_anchors())
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode != 0
+    assert not missing_parent.exists()
+
+
+@pytest.mark.parametrize("failure_stage", ["write", "close", "rename"])
+def test_cli_preserves_existing_output_on_publication_failure(
+    tmp_path: Path, failure_stage: str
+) -> None:
+    source = tmp_path / "input.json"
+    output = tmp_path / "output.json"
+    driver = tmp_path / "publication-failure-driver.lua"
+    _write_json(source, _layout_with_identical_anchors())
+    output.write_bytes(b"old-output")
+    driver.write_text(
+        """
+local stage = arg[1]
+local solver = arg[2]
+local input = arg[3]
+local output = arg[4]
+local real_open = io.open
+local real_rename = os.rename
+if stage == "write" or stage == "close" then
+  io.open = function(path, mode)
+    if mode == "wb" and path:match("/payload$") then
+      local fake = {}
+      function fake:write(_)
+        if stage == "write" then
+          return nil, "simulated write failure"
+        end
+        return self
+      end
+      function fake:close()
+        if stage == "close" then
+          return nil, "simulated close failure"
+        end
+        return true
+      end
+      return fake
+    end
+    return real_open(path, mode)
+  end
+elseif stage == "rename" then
+  os.rename = function(_, _)
+    return nil, "simulated rename failure"
+  end
+end
+arg = {
+  [0] = solver,
+  "--solve", input,
+  "--output", output,
+}
+dofile(solver)
+os.rename = real_rename
+""".strip(),
+        encoding="utf-8",
+    )
+    entries_before = {path.name for path in tmp_path.iterdir()}
+
+    result = subprocess.run(
+        [
+            "texlua",
+            str(driver),
+            failure_stage,
+            str(SOLVER),
+            str(source),
+            str(output),
+        ],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode != 0
+    assert f"simulated {failure_stage} failure" in result.stderr
+    assert output.read_bytes() == b"old-output"
+    assert {path.name for path in tmp_path.iterdir()} == entries_before
