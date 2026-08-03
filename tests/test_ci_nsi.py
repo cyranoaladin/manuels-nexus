@@ -40,6 +40,18 @@ def test_nsi_workflow_always_builds_a_specimen_and_rejects_an_empty_upload():
     assert upload["with"]["if-no-files-found"] == "error"
 
 
+def test_nsi_workflow_installs_the_pinned_audit_dependencies():
+    dependencies = _named_step("Dépendances")
+    command = dependencies["run"]
+
+    assert "python -m pip install" in command
+    assert "--disable-pip-version-check" in command
+    assert "--no-deps" in command
+    assert "--requirement requirements-ci-audit.txt" in command
+    assert "python -m pip check" in command
+    assert "pip install pyyaml jsonschema pytest ruff python-dotenv" not in command
+
+
 def test_nsi_changed_chapters_are_detected_from_the_git_root():
     compilation = _named_step(
         "Gates d'exécution + compilation des chapitres modifiés"
