@@ -13217,15 +13217,6 @@ claims:
     path: Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md
     raw: '| | **Total** | **~471** | **~1221** | **442** | |'
     scope: manual:1SPE
-  - calculated: 406
-    declared: 442
-    etat: contredit
-    evidence: manuals.1SPE.compiled_artifacts[0].page_count
-    line: 23
-    metric: pages_compilees
-    path: Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md
-    raw: '| | **Total** | **~471** | **~1221** | **442** | |'
-    scope: manual:1SPE
   - calculated: false
     declared: true
     etat: contredit
@@ -13602,6 +13593,16 @@ claims:
     reason: unite ou preuve machine non disponible dans le modele
     scope: chapter:1SPE-VARIABLES-ALEATOIRES
   - calculated: null
+    declared: 442
+    etat: ouvert
+    evidence: null
+    line: 23
+    metric: pages_compilees
+    path: Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md
+    raw: '| | **Total** | **~471** | **~1221** | **442** | |'
+    reason: aucun artefact manuel unique suivi et attribue
+    scope: manual:1SPE
+  - calculated: null
     declared: 1221
     etat: ouvert
     evidence: null
@@ -13719,27 +13720,27 @@ claims:
     scope: manual:TSPE_2026_2027
 counts:
   claims_confirme: 44
-  claims_contredits: 19
-  claims_ouverts: 45
+  claims_contredits: 18
+  claims_ouverts: 46
 generated_by: inventory_collection.py
-model_digest: sha256:c8ff098f2c427e8108de1f101ef8bb6f5aa08695e120793a06d2cbac1f5d0f4a
+model_digest: sha256:3fa68dc196d516e0001aeb62dc250b535f053321f0d4b25b9ca59b670d05839a
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-02T23:55:41Z'
+  generated_at_utc: '2026-08-03T01:14:05Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:4ea000c6cb7b03f8b7ed76532fe8f9ec27f47ce82b12b67ca7440454aa9d281e
-    scripts/build_manifest.py: sha256:f7db32d6e16b43ba7506e5a84d3b0016466c0d22cabd690eb61f7e575f6b6a82
+    scripts/build_manifest.py: sha256:1f2e739e8fd860a65158614e7dc43b15bda5413425a6991fb9ffee925ffce9b8
     scripts/inventory_assembly.py: sha256:e5350f563d0813b0a433c69ed87e879aed8861c64fe732e829c4d8c08a34f138
     scripts/inventory_collection.py: sha256:5b170cc59c3f0da420c5c833b985ff4fac9af7c8efec4c589967e089b6e0690f
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:d35af02bcf165276be9a76adea722813cd7376f4166b9ab1ab9bc91e226ebce9
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:7100bee38834e8e26270bb4bedb07f98d60091f73a09cf3e3611e623b759263d
+  generator_sha256: sha256:f55b3ee716c4117bcd94170651fa43f563aec7f9bca1c63eef4ef6dee3c56549
   generator_version: 1
   git_available: true
-  head_sha: eaec77fb4f462d79bde41ccd772ec7147341f45c
+  head_sha: d55e63a9c2970acf75e02d2bba8df6fc980c3a14
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -13750,4 +13751,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/ecarts-et-contradictions.schema.json
 schema_version: 1
-source_digest: sha256:fed673b4c3f850a756c2baf0e9409ef114aa71aca5838dc0528841dd8f5feaef
+source_digest: sha256:f84b30461cf3d3d5cc9ffba827db948cbcd5d2b36f58698e1dee121d75706c13

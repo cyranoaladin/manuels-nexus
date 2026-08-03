@@ -62,8 +62,8 @@
 ## Réconciliation des rapports
 
 - Assertions lues: 108
-- Ouvertes: 45
-- Contradictoires: 19
+- Ouvertes: 46
+- Contradictoires: 18
 
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 16 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 36 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | exercices_principaux | 30 | None | ouvert
