@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import subprocess
+from collections.abc import Callable, Mapping
 from pathlib import Path
+from typing import Any
 
 
 MISSING_ASSET = "Nexus asset missing:"
@@ -23,12 +25,26 @@ def fonts_are_embedded(output: str) -> bool:
     return bool(lines)
 
 
-def verify_pdf(pdf: Path, log: Path) -> int:
+def verify_pdf(
+    pdf: Path,
+    log: Path,
+    *,
+    runner: Callable[..., Any] | None = None,
+    environment: Mapping[str, str] | None = None,
+) -> int:
     if log_has_missing_asset_warning(log.read_text(encoding="utf-8", errors="replace")):
         print(f"Gabarit Nexus absent : {log}")
         return 1
     try:
-        result = subprocess.run(["pdffonts", str(pdf)], capture_output=True, text=True, check=True)
+        active_runner = subprocess.run if runner is None else runner
+        options: dict[str, Any] = {
+            "capture_output": True,
+            "text": True,
+            "check": True,
+        }
+        if environment is not None:
+            options["env"] = dict(environment)
+        result = active_runner(["pdffonts", str(pdf)], **options)
     except FileNotFoundError:
         print("Gate polices : pdffonts (poppler-utils) introuvable")
         return 1

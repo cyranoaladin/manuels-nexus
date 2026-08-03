@@ -310,6 +310,8 @@
 % ===========================================================================
 \newcounter{exo}[chapter]
 \RequirePackage{graphicx}
+\newif\ifnxVersionProfesseur
+\nxVersionProfesseurtrue
 
 % Pictogrammes parcours (redéfinis par nexus-icons.tex si présent)
 \newcommand{\parcoursUn}{}
@@ -327,7 +329,8 @@
   \ifnum#2=1\relax\parcoursUn\fi
   \ifnum#2=2\relax\parcoursDeux\fi
   \ifnum#2=3\relax\parcoursTrois\fi
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}\\\icnChrono~#3~min}%
+  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}%
+    \ifnxVersionProfesseur\texttt{#1}\\\fi\icnChrono~#3~min}%
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
@@ -336,7 +339,9 @@
   \tikz[baseline=(n.base)]\node[fill=chapcolor!70!black, text=white,
     rounded corners=2pt, inner xsep=7pt, inner ysep=3.5pt](n)
     {\titrefont\small Corrigé};%
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
+  \ifnxVersionProfesseur
+    \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
+  \fi
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
@@ -353,7 +358,8 @@
 % ===========================================================================
 \newenvironment{evaluation}[2]{%
   \par\bigskip\noindent
-  \textbf{\textcolor{chapcolor}{\large\sffamily Évaluation \texttt{#1}}}\quad
+  \textbf{\textcolor{chapcolor}{\large\sffamily Évaluation%
+    \ifnxVersionProfesseur~\texttt{#1}\fi}}\quad
   {\sffamily\fontsize{8}{10}\selectfont #2~min}\par\nopagebreak\medskip
 }{\par\bigskip}
 
