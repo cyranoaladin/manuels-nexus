@@ -545,7 +545,9 @@ def test_run_gates_records_process_stdout_stderr_and_release_repeat(
         )
 
     monkeypatch.setattr(ci_module, "_run_gate", fake_gate)
-    report = ci_module.run_gates(Path("."), tmp_path / "gates")
+    repository = tmp_path / "repository"
+    _write_inventory_integration_proof(repository, "not_integrated")
+    report = ci_module.run_gates(repository, tmp_path / "gates")
 
     expected_order = (
         "require-clean",
@@ -617,8 +619,10 @@ def test_run_gates_fails_if_expected_gate_code_is_drifted(
         )
 
     monkeypatch.setattr(ci_module, "_run_gate", fake_gate)
+    repository = tmp_path / "repository"
+    _write_inventory_integration_proof(repository, "not_integrated")
     with pytest.raises(ci_module.CIAuditError, match="contrat des gates"):
-        ci_module.run_gates(Path("."), tmp_path / "gates")
+        ci_module.run_gates(repository, tmp_path / "gates")
 
 
 @pytest.mark.parametrize(
