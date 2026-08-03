@@ -239,6 +239,35 @@ def _receipt(
     }
 
 
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("1SPE-SUITES-EX-001", "identifiant interne"),
+        ("Corrigé", "corrigé"),
+        ("corriges", "corrigé"),
+        ("Barème indicatif", "barème enseignant"),
+        ("Réponse professeur", "note enseignant"),
+    ],
+)
+def test_recorder_student_text_gate_rejects_teacher_leaks(
+    manifest_module, text: str, expected: str
+) -> None:
+    assert expected in manifest_module._student_text_violations(text)
+
+
+def test_student_build_shape_requires_locally_recomputed_separation_gate(
+    manifest_module,
+) -> None:
+    build = _build("a" * 40, "build/manual.pdf", b"%PDF")
+    build["variant"] = "eleve"
+
+    with pytest.raises(manifest_module.BuildManifestError, match="séparation"):
+        manifest_module._validate_build_shape(build)
+
+    build["gates"]["student_separation"] = {"passed": True}
+    manifest_module._validate_build_shape(build)
+
+
 def _trace_token(path: str) -> str:
     return hashlib.sha256(path.encode("utf-8")).hexdigest()[:40]
 
@@ -2057,6 +2086,7 @@ def test_record_helper_serializes_concurrent_distinct_variants(
     )
     student = deepcopy(professor)
     student["variant"] = "eleve"
+    student["gates"]["student_separation"] = {"passed": True}
     student["pdf_path"] = (
         "Mathematiques/manuel-maths/build/MANUEL_1SPE_eleve.pdf"
     )
@@ -2108,6 +2138,7 @@ def test_record_helper_detects_lock_substitution_without_lost_update(
     )
     student = deepcopy(professor)
     student["variant"] = "eleve"
+    student["gates"]["student_separation"] = {"passed": True}
     student["pdf_path"] = (
         "Mathematiques/manuel-maths/build/MANUEL_1SPE_eleve.pdf"
     )

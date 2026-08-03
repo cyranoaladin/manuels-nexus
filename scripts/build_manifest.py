@@ -417,6 +417,13 @@ def _validate_build_shape(build: Mapping[str, Any]) -> None:
         value = gates.get(gate)
         if not isinstance(value, Mapping) or value.get("passed") is not True:
             raise BuildManifestError(f"preuve {gate} absente ou rouge")
+    if build.get("variant") == "eleve":
+        student_gate = gates.get("student_separation")
+        if (
+            not isinstance(student_gate, Mapping)
+            or student_gate.get("passed") is not True
+        ):
+            raise BuildManifestError("preuve de séparation élève absente ou rouge")
 
 
 def _write_all(descriptor: int, payload: bytes) -> None:
@@ -1458,6 +1465,49 @@ def _run_local_pdf_preflight(
     }
 
 
+def _student_text_violations(text: str) -> list[str]:
+    checks = (
+        ("identifiant interne", r"\b1SPE-[A-Z0-9]+(?:-[A-Z0-9]+)*"),
+        ("corrigé", r"(?i:\bcorrig[ée]s?\b)"),
+        ("barème enseignant", r"(?i:\bbar[èe]me indicatif\b)"),
+        (
+            "note enseignant",
+            r"(?i:\b(?:note|réponse|reponse)\s+(?:professeur|enseignant)\b)",
+        ),
+    )
+    return [reason for reason, pattern in checks if re.search(pattern, text)]
+
+
+def _run_local_student_separation(
+    pdf_path: Path,
+    *,
+    reproducibility: Mapping[str, object],
+) -> None:
+    environment = _sanitized_build_environment(reproducibility)
+    try:
+        extracted = subprocess.run(
+            ["pdftotext", "-layout", str(pdf_path), "-"],
+            env=environment,
+            check=False,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            errors="replace",
+            timeout=60,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise BuildManifestError(
+            "contrôle local de séparation élève indisponible"
+        ) from exc
+    if extracted.returncode != 0:
+        raise BuildManifestError("extraction textuelle élève en échec")
+    violations = _student_text_violations(extracted.stdout)
+    if violations:
+        raise BuildManifestError(
+            "séparation élève rouge: " + ", ".join(violations)
+        )
+
+
 def _derive_receipt_evidence(
     root: Path,
     receipt: Mapping[str, Any],
@@ -1675,6 +1725,11 @@ def _derive_receipt_evidence(
         expected_pages=pages,
         reproducibility=reproducibility,
     )
+    if variant == "eleve":
+        _run_local_student_separation(
+            root / pdf_path,
+            reproducibility=reproducibility,
+        )
     preflight_payload = proof_payloads["preflight"]
     try:
         preflight = json.loads(preflight_payload.decode("utf-8"))
@@ -1704,6 +1759,16 @@ def _derive_receipt_evidence(
         "passed": True,
         "checks": local_preflight,
     }
+    if variant == "eleve":
+        receipt_student_gate = gates.get("student_separation")
+        if (
+            not isinstance(receipt_student_gate, Mapping)
+            or receipt_student_gate.get("passed") is not True
+        ):
+            raise BuildManifestError(
+                "receipt sans preuve de séparation élève"
+            )
+        normalized_gates["student_separation"] = {"passed": True}
     build = {
         "excluded_objects": excluded,
         "gates": normalized_gates,
@@ -1813,6 +1878,11 @@ def _derive_receipt_evidence(
             expected_pages=pages,
             reproducibility=reproducibility,
         )
+        if variant == "eleve":
+            _run_local_student_separation(
+                root / pdf_path,
+                reproducibility=reproducibility,
+            )
         current_preflight_payload = _read_proof_file(
             root,
             receipt.get("preflight_report"),
