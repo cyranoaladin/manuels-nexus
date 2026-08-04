@@ -45,7 +45,6 @@ local captures = {}
 local capture_order = {}
 local anchors = {}
 local pages = {}
-local obstacle_ids = {}
 local configured = false
 local finalized = false
 local shipout_index = 0
@@ -324,19 +323,114 @@ local function collect_link_metadata(head, records)
   end
 end
 
-local function find_oversized_horizontal(head, limit_sp)
+local horizontal_list_extent
+local vertical_list_extent
+
+local function materialized_advance(current, parent)
+  local glue_set = parent and parent.glue_set or 0
+  local glue_sign = parent and parent.glue_sign or 0
+  local glue_order = parent and parent.glue_order or 0
+  local width = node.dimensions(
+    glue_set,
+    glue_sign,
+    glue_order,
+    current,
+    current.next
+  )
+  if type(width) ~= "number" then
+    fail("cannot measure horizontal node advance")
+  end
+  return width
+end
+
+local function box_horizontal_extent(box)
+  local left_sp = 0
+  local right_sp = math.max(0, box.width or 0)
+  if not box.list then
+    return left_sp, right_sp
+  end
+  local content_left_sp, content_right_sp
+  if node.type(box.id) == "hlist" then
+    content_left_sp, content_right_sp = horizontal_list_extent(box.list, box)
+  else
+    content_left_sp, content_right_sp = vertical_list_extent(box.list)
+  end
+  return math.min(left_sp, content_left_sp), math.max(right_sp, content_right_sp)
+end
+
+horizontal_list_extent = function(head, parent)
+  local cursor_sp = 0
+  local left_sp = 0
+  local right_sp = 0
+  local leading_protrusion_sp = 0
+  local trailing_protrusion_sp = 0
   for current in node.traverse(head) do
     local kind = node.type(current.id)
-    if (kind == "hlist" or kind == "rule")
-        and type(current.width) == "number" and current.width > limit_sp then
-      return math.tointeger(current.width)
+    if kind == "hlist" or kind == "vlist" then
+      local child_left_sp, child_right_sp = box_horizontal_extent(current)
+      left_sp = math.min(left_sp, cursor_sp + child_left_sp)
+      right_sp = math.max(right_sp, cursor_sp + child_right_sp)
+    elseif kind == "disc" and current.replace then
+      local child_left_sp, child_right_sp = horizontal_list_extent(
+        current.replace,
+        nil
+      )
+      left_sp = math.min(left_sp, cursor_sp + child_left_sp)
+      right_sp = math.max(right_sp, cursor_sp + child_right_sp)
     end
-    if (kind == "hlist" or kind == "vlist") and current.list then
-      local descendant = find_oversized_horizontal(current.list, limit_sp)
-      if descendant then
-        return descendant
+    local advance_sp = materialized_advance(current, parent)
+    if kind == "margin_kern" and advance_sp < 0 then
+      if current.subtype == 0 and cursor_sp == 0 then
+        leading_protrusion_sp = math.max(
+          leading_protrusion_sp,
+          -advance_sp
+        )
+      elseif current.subtype == 1 then
+        trailing_protrusion_sp = math.max(
+          trailing_protrusion_sp,
+          -advance_sp
+        )
       end
     end
+    cursor_sp = cursor_sp + advance_sp
+    left_sp = math.min(left_sp, cursor_sp)
+    right_sp = math.max(right_sp, cursor_sp)
+  end
+  -- Microtype uses boundary margin_kern nodes for optical protrusion.  Their
+  -- allowances belong to the adjacent glyph/box, not to a true overfull run.
+  left_sp = math.min(0, left_sp + leading_protrusion_sp)
+  right_sp = math.max(cursor_sp, right_sp - trailing_protrusion_sp)
+  return left_sp, right_sp
+end
+
+vertical_list_extent = function(head)
+  local left_sp = 0
+  local right_sp = 0
+  for current in node.traverse(head) do
+    local kind = node.type(current.id)
+    if kind == "hlist" or kind == "vlist" then
+      local child_left_sp, child_right_sp = box_horizontal_extent(current)
+      local horizontal_shift_sp = current.shift or 0
+      left_sp = math.min(left_sp, horizontal_shift_sp + child_left_sp)
+      right_sp = math.max(right_sp, horizontal_shift_sp + child_right_sp)
+    elseif kind == "rule" then
+      left_sp = math.min(left_sp, 0)
+      right_sp = math.max(right_sp, current.width or 0)
+    elseif kind == "whatsit" then
+      local width_sp = safe_node_field(current, "width")
+      if type(width_sp) == "number" and width_sp > 0
+          and width_sp < 0x3fffffff then
+        right_sp = math.max(right_sp, width_sp)
+      end
+    end
+  end
+  return left_sp, right_sp
+end
+
+local function find_oversized_horizontal(head, limit_sp)
+  local left_sp, right_sp = vertical_list_extent(head)
+  if left_sp < -1 or right_sp > limit_sp + 1 then
+    return math.ceil(right_sp - left_sp)
   end
   return nil
 end
@@ -542,7 +636,13 @@ local function decode_obstacle(value)
   }
 end
 
-local function visit_page_whatsits(head, page_index, folio, page_obstacles)
+local function visit_page_whatsits(
+  head,
+  page_index,
+  folio,
+  page_obstacles,
+  page_obstacle_ids
+)
   for current in node.traverse(head) do
     local kind = node.type(current.id)
     if kind == "whatsit" and current.subtype == node.subtype("user_defined")
@@ -563,14 +663,25 @@ local function visit_page_whatsits(head, page_index, folio, page_obstacles)
     elseif kind == "whatsit" and current.subtype == node.subtype("user_defined")
         and current.user_id == OBSTACLE_WHATSIT_ID then
       local obstacle = decode_obstacle(current.value)
-      if not obstacle or obstacle_ids[obstacle.id] then
-        margin_error("placement", obstacle and obstacle.id or "invalid-obstacle")
+      local base_identifier = obstacle and obstacle.id or "invalid-obstacle"
+      local qualified_identifier = string.format(
+        "%s-p%08d", base_identifier, page_index
+      )
+      if not obstacle or page_obstacle_ids[base_identifier] then
+        margin_error("placement", qualified_identifier)
       end
-      obstacle_ids[obstacle.id] = true
+      page_obstacle_ids[base_identifier] = true
+      obstacle.id = qualified_identifier
       page_obstacles[#page_obstacles + 1] = obstacle
     end
     if (kind == "hlist" or kind == "vlist") and current.list then
-      visit_page_whatsits(current.list, page_index, folio, page_obstacles)
+      visit_page_whatsits(
+        current.list,
+        page_index,
+        folio,
+        page_obstacles,
+        page_obstacle_ids
+      )
     end
   end
 end
@@ -585,6 +696,7 @@ local function pre_shipout(head)
   local rail_left = rail_side == "right"
       and configuration.odd_rail_left_sp or configuration.even_rail_left_sp
   local page_obstacles = {}
+  local page_obstacle_ids = {}
   pages[shipout_index] = {
     shipout_index = shipout_index,
     folio = folio,
@@ -594,7 +706,13 @@ local function pre_shipout(head)
     rail_left_sp = rail_left,
     obstacles = page_obstacles,
   }
-  visit_page_whatsits(head, shipout_index, folio, page_obstacles)
+  visit_page_whatsits(
+    head,
+    shipout_index,
+    folio,
+    page_obstacles,
+    page_obstacle_ids
+  )
   table.sort(page_obstacles, function(first, second)
     if first.top_sp ~= second.top_sp then
       return first.top_sp < second.top_sp

@@ -425,7 +425,7 @@ Page de report disponible.
         page = layout["pages"][0]
         assert len(page["obstacles"]) == 1
         obstacle = page["obstacles"][0]
-        assert obstacle["id"] == "fixture-middle"
+        assert obstacle["id"] == "fixture-middle-p00000001"
         assert page["safe_rect"]["left_sp"] <= obstacle["left_sp"]
         assert obstacle["right_sp"] <= page["safe_rect"]["right_sp"]
         assert page["safe_rect"]["top_sp"] < obstacle["top_sp"]
@@ -472,6 +472,125 @@ Texte\nxMarginRailNote{appui}{\hbox{\rule{2\marginparwidth}{1pt}}}.
     output = result.stdout + result.stderr
     assert result.returncode != 0
     assert "NEXUS-MARGIN-ERROR:width:nxm:eleve:appui:00000001" in output
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_unbreakable_word_effective_extent_fails_with_exact_width_error(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "unbreakable-word.tex"
+    unbreakable_word = "NEXUS" + "W" * 160
+    fixture.write_text(
+        rf"""\documentclass{{gabarits/nexus-manuel}}
+\nxVersionProfesseurfalse
+\begin{{document}}
+Texte\nxMarginRailNote{{appui}}{{\texttt{{{unbreakable_word}}}}}.
+\end{{document}}
+""",
+        encoding="utf-8",
+    )
+    environment = os.environ.copy()
+    environment["NEXUS_MARGIN_VARIANT"] = "eleve"
+
+    result = subprocess.run(
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            f"-output-directory={tmp_path}",
+            str(fixture),
+        ],
+        cwd=MANUAL_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    output = result.stdout + result.stderr
+    assert "Overfull \\hbox" in output
+    assert result.returncode != 0
+    assert "NEXUS-MARGIN-ERROR:width:nxm:eleve:appui:00000001" in output
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_repeated_obstacle_base_id_is_qualified_by_absolute_shipout(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "repeated-page-obstacle.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\begin{document}
+\nxMarginReserveRect{header}{%
+  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax}{0pt}{%
+  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep+\marginparwidth\relax}{1cm}
+Recto\margeAppui{Note recto.}
+\newpage
+\nxMarginReserveRect{header}{%
+  \dimexpr1in+\hoffset+\evensidemargin-\marginparsep-\marginparwidth\relax}{0pt}{%
+  \dimexpr1in+\hoffset+\evensidemargin-\marginparsep\relax}{1cm}
+Verso\margeAppui{Note verso.}
+\end{document}
+""",
+        encoding="utf-8",
+    )
+
+    passes = _run_private_passes(fixture, tmp_path)
+
+    for observed in passes:
+        pages = observed["layout"]["pages"]
+        assert [page["shipout_index"] for page in pages] == [1, 2]
+        assert [[item["id"] for item in page["obstacles"]] for page in pages] == [
+            ["header-p00000001"],
+            ["header-p00000002"],
+        ]
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_duplicate_obstacle_base_id_on_same_shipout_stays_fail_closed(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "duplicate-page-obstacle.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\begin{document}
+\nxMarginReserveRect{header}{1cm}{1cm}{2cm}{2cm}
+\nxMarginReserveRect{header}{2cm}{2cm}{3cm}{3cm}
+Texte\margeAppui{Note témoin.}
+\end{document}
+""",
+        encoding="utf-8",
+    )
+    environment = os.environ.copy()
+    environment.update(
+        {
+            "NEXUS_MARGIN_VARIANT": "eleve",
+            "NEXUS_MARGIN_RUN_NONCE": RUN_NONCE,
+            "NEXUS_MARGIN_PASS_NUMBER": "1",
+            "NEXUS_MARGIN_LAYOUT_NEXT": str(tmp_path / "margin-layout.next.json"),
+        }
+    )
+
+    result = subprocess.run(
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            f"-output-directory={tmp_path}",
+            str(fixture),
+        ],
+        cwd=MANUAL_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    output = result.stdout + result.stderr
+    assert result.returncode != 0
+    assert "NEXUS-MARGIN-ERROR:placement:header-p00000001" in output
 
 
 @pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
