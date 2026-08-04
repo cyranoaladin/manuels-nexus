@@ -2,6 +2,8 @@ local M = {}
 
 local GAP_SP = 6 * 65536
 local MAX_PASSES = 6
+-- The closed schema reserves this code for rollback, replay and skipped passes.
+local INVALID_PASS_SEQUENCE_ERROR = "malformed-margin-layout"
 
 local function fail(path, message)
   error(string.format("invalid margin layout at %s: %s", path, message), 0)
@@ -1097,14 +1099,26 @@ function M.solve(current_layout, previous_layout_or_nil)
 
   result.computed_digest = canonical_digest(result)
   if previous_layout_or_nil == nil then
-    result.state = "collecting"
     result.read_digest = new_json_null()
-    result.error_code = new_json_null()
+    if current_layout.pass_number == 1 then
+      result.state = "collecting"
+      result.error_code = new_json_null()
+    elseif current_layout.pass_number == MAX_PASSES then
+      result.state = "failed"
+      result.error_code = "margin-layout-oscillation"
+    else
+      result.state = "failed"
+      result.error_code = INVALID_PASS_SEQUENCE_ERROR
+    end
   else
     result.read_digest = read_digest
     if current_layout.run_nonce ~= previous_layout_or_nil.run_nonce then
       result.state = "failed"
       result.error_code = "foreign-margin-layout"
+    elseif current_layout.pass_number ~= previous_layout_or_nil.pass_number + 1 then
+      result.state = "failed"
+      result.error_code = current_layout.pass_number == MAX_PASSES
+        and "margin-layout-oscillation" or INVALID_PASS_SEQUENCE_ERROR
     elseif result.computed_digest == read_digest then
       result.state = "stable"
       result.error_code = new_json_null()

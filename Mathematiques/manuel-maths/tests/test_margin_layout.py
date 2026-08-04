@@ -557,6 +557,7 @@ def test_convergence_identical_canonical_placement_is_stable(tmp_path: Path) -> 
 
 def test_convergence_sixth_non_stable_pass_fails_closed(tmp_path: Path) -> None:
     previous = _stable_identical_layout()
+    previous["pass_number"] = 5
     current = _layout_with_identical_anchors()
     current["pass_number"] = 6
     for note in current["notes"]:
@@ -567,6 +568,114 @@ def test_convergence_sixth_non_stable_pass_fails_closed(tmp_path: Path) -> None:
     assert solved["state"] == "failed"
     assert solved["error_code"] == "margin-layout-oscillation"
     assert solved["read_digest"] != solved["computed_digest"]
+
+
+def test_convergence_pass_progression_six_without_previous_is_oscillation(
+    tmp_path: Path,
+) -> None:
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 6
+
+    solved = _run_convergence_case(tmp_path, current)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "margin-layout-oscillation"
+    assert solved["read_digest"] is None
+
+
+def test_convergence_pass_progression_only_pass_one_can_collect(
+    tmp_path: Path,
+) -> None:
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 2
+
+    solved = _run_convergence_case(tmp_path, current)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "malformed-margin-layout"
+    assert solved["read_digest"] is None
+
+
+@pytest.mark.parametrize(
+    ("previous_pass", "current_pass"),
+    [
+        (6, 5),  # rollback
+        (5, 5),  # replay
+        (3, 5),  # skipped pass
+    ],
+)
+def test_convergence_pass_progression_rejects_nonconsecutive_passes(
+    tmp_path: Path,
+    previous_pass: int,
+    current_pass: int,
+) -> None:
+    previous = _stable_identical_layout()
+    previous["pass_number"] = previous_pass
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = current_pass
+
+    solved = _run_convergence_case(tmp_path, current, previous)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "malformed-margin-layout"
+    assert solved["read_digest"] == solved["computed_digest"]
+
+
+def test_convergence_pass_progression_jump_to_six_is_oscillation(
+    tmp_path: Path,
+) -> None:
+    previous = _stable_identical_layout()
+    previous["pass_number"] = 4
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 6
+
+    solved = _run_convergence_case(tmp_path, current, previous)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "margin-layout-oscillation"
+    assert solved["read_digest"] == solved["computed_digest"]
+
+
+@pytest.mark.parametrize("previous_pass", range(1, 6))
+def test_convergence_pass_progression_accepts_every_consecutive_pair(
+    tmp_path: Path,
+    previous_pass: int,
+) -> None:
+    previous = _stable_identical_layout()
+    previous["pass_number"] = previous_pass
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = previous_pass + 1
+
+    solved = _run_convergence_case(tmp_path, current, previous)
+
+    assert solved["state"] == "stable"
+    assert solved["error_code"] is None
+    assert solved["read_digest"] == solved["computed_digest"]
+
+
+def test_convergence_pass_progression_failure_is_byte_deterministic(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "current.json"
+    previous_path = tmp_path / "previous.json"
+    first_output = tmp_path / "first-invalid-output.json"
+    second_output = tmp_path / "second-invalid-output.json"
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 5
+    previous = _stable_identical_layout()
+    previous["pass_number"] = 6
+    _write_json(source, current)
+    _write_json(previous_path, previous)
+
+    first = _run_solver(source, first_output, previous=previous_path, cwd=tmp_path)
+    second = _run_solver(source, second_output, previous=previous_path, cwd=tmp_path)
+
+    assert first.returncode == 0, first.stderr
+    assert second.returncode == 0, second.stderr
+    assert first_output.read_bytes() == second_output.read_bytes()
+    failed = json.loads(first_output.read_text(encoding="utf-8"))
+    assert failed["state"] == "failed"
+    assert failed["error_code"] == "malformed-margin-layout"
 
 
 def test_convergence_foreign_run_nonce_fails_closed(tmp_path: Path) -> None:
@@ -645,7 +754,8 @@ assert(json.encode(aliased) == before, "aliased input mutated")
 assert(solved ~= aliased, "solver returned caller-owned root")
 assert(solved.notes ~= aliased.notes, "solver reused caller-owned notes")
 assert(solved.pages ~= aliased.pages, "solver reused caller-owned pages")
-assert(solved.state == "changed", "aliased input caused false stable")
+assert(solved.state == "failed", "aliased replay was not rejected")
+assert(solved.error_code == "malformed-margin-layout", "wrong replay error")
 assert(solved.read_digest ~= solved.computed_digest, "aliased digests falsely agree")
 io.write(json.encode(solved))
 """.strip(),
