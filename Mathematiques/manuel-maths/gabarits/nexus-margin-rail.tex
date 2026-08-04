@@ -106,7 +106,7 @@
   \fi
 }
 
-\NewDocumentCommand\nxMarginRailNote{m m}{%
+\NewDocumentCommand\nxMarginRailNote{m +m}{%
   \stepcounter{nxMarginGlobalOrder}%
   \edef\nxMarginCurrentId{%
     \nxMarginStableId{#1}{\arabic{nxMarginGlobalOrder}}}%

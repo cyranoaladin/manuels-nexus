@@ -256,6 +256,33 @@ Seconde page témoin.
 
 
 @pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_blank_line_paragraph_break_inside_note_content_compiles(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "multi-paragraph-note.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\begin{document}
+Ancre\nxMarginRailNote{appui}{%
+Premier paragraphe de la note.
+
+Second paragraphe de la note, apr\`es une ligne vide.}%
+\end{document}
+""",
+        encoding="utf-8",
+    )
+
+    passes = _run_private_passes(fixture, tmp_path)
+    expected_id = "nxm:eleve:appui:00000001"
+
+    for observed in passes:
+        assert [note["id"] for note in observed["layout"]["notes"]] == [expected_id]
+        assert observed["capture_ids"] == [expected_id]
+        assert observed["anchor_ids"] == [expected_id]
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
 def test_breakable_fichemethode_captures_local_rich_note_once_in_all_modes(
     tmp_path: Path,
 ) -> None:
