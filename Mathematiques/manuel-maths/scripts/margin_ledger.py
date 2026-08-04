@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.util
 import json
+import math
 import os
 import re
 import subprocess
@@ -14,6 +15,7 @@ import sys
 import tempfile
 from collections import Counter
 from dataclasses import asdict, dataclass
+from decimal import Decimal
 from pathlib import Path
 from types import ModuleType
 from typing import Any, Iterable, Mapping, Sequence
@@ -190,6 +192,24 @@ def _check_form_bbox_dimensions(
         _reject(f"Form /BBox coordinate frame differs from stable note {note_id}")
 
 
+def _check_form_matrix(form: Any, note_id: str) -> None:
+    matrix = form.get("/Matrix")
+    if matrix is None:
+        return
+    if not isinstance(matrix, pikepdf.Array) or len(matrix) != 6:
+        _reject(f"Form /Matrix for {note_id} must contain six numbers")
+    values: list[float] = []
+    for value in matrix:
+        if isinstance(value, bool) or not isinstance(value, (int, float, Decimal)):
+            _reject(f"Form /Matrix for {note_id} must contain only PDF numbers")
+        numeric = float(value)
+        if not math.isfinite(numeric):
+            _reject(f"Form /Matrix for {note_id} must contain finite numbers")
+        values.append(numeric)
+    if tuple(values) != (1.0, 0.0, 0.0, 1.0, 0.0, 0.0):
+        _reject(f"Form /Matrix for {note_id} must be the identity transform")
+
+
 def _expected_bbox(note: Mapping[str, Any], pages: Mapping[int, Mapping[str, Any]]) -> tuple[int, int, int, int]:
     target_index = note["target_shipout_index"]
     page = pages.get(target_index)
@@ -298,11 +318,23 @@ def _annotation_action(annotation: Any) -> tuple[str, str] | None:
     action = annotation.get("/A")
     if not isinstance(action, pikepdf.Dictionary):
         return None
-    action_kind = str(action.get("/S", "")).removeprefix("/")
+    raw_kind = action.get("/S")
+    if not isinstance(raw_kind, pikepdf.Name):
+        return None
+    action_kind = str(raw_kind).removeprefix("/")
+    action_keys = {str(key) for key in action.keys()}
     if action_kind == "URI":
+        if action_keys != {"/Type", "/S", "/URI"}:
+            return None
+        if not isinstance(action.get("/Type"), pikepdf.Name) or str(
+            action["/Type"]
+        ) != "/Action":
+            return None
         target = action.get("/URI")
         return ("URI", str(target)) if isinstance(target, pikepdf.String) else None
     if action_kind == "GoTo":
+        if action_keys != {"/S", "/D"}:
+            return None
         target = action.get("/D")
         return ("GoTo", str(target)) if isinstance(target, pikepdf.String) else None
     return None
@@ -663,6 +695,7 @@ def _entry_from_occurrence(
         _reject(f"NXMarginNote {note_id} does not reference a /Form")
     form_bbox = _form_bbox(form, note_id)
     _check_form_bbox_dimensions(form_bbox, stable_note)
+    _check_form_matrix(form, note_id)
     if "/Annots" in form:
         _reject(f"Form for {note_id} illegally contains annotations")
     if _pdf_exact_string(form.get("/NXMarginID"), "Form /NXMarginID") != note_id:
@@ -783,6 +816,24 @@ def reconstruct_margin_ledger(
                 _reject("PDF note encounter order differs from stable global order")
             if set(anchors) - set(stable_ids):
                 _reject("an anchor exists without a captured note")
+            expected_anchor_order = sorted(
+                (
+                    note["origin_shipout_index"],
+                    note["global_order"],
+                    note["id"],
+                )
+                for note in stable_notes
+                if _stable_requires_marker(
+                    note,
+                    link_notes_by_id[note["id"]]["marker_threshold_sp"],
+                )
+            )
+            encountered_anchor_order = [
+                (anchor["page_index"], anchor["order"], anchor["note_id"])
+                for anchor in anchor_occurrences
+            ]
+            if encountered_anchor_order != expected_anchor_order:
+                _reject("PDF anchor encounter order differs from stable global order")
             for anchor in anchor_occurrences:
                 stable_note = stable_by_id[anchor["note_id"]]
                 if anchor["order"] != stable_note["global_order"]:

@@ -328,6 +328,40 @@ def _reverse_margin_note_segments(instructions: list[Any]) -> list[Any]:
     return remainder + [item for segment in reversed(segments) for item in segment]
 
 
+def _reverse_margin_anchor_segments(instructions: list[Any]) -> list[Any]:
+    remainder: list[Any] = []
+    segments: list[list[Any]] = []
+    index = 0
+    while index < len(instructions):
+        operands, operator = instructions[index]
+        if (
+            str(operator) == "BDC"
+            and operands
+            and str(operands[0]) == "/NXMarginAnchor"
+        ):
+            segment: list[Any] = []
+            depth = 0
+            while index < len(instructions):
+                instruction = instructions[index]
+                operation = str(instruction[1])
+                segment.append(instruction)
+                if operation in {"BDC", "BMC"}:
+                    depth += 1
+                elif operation == "EMC":
+                    depth -= 1
+                    if depth == 0:
+                        index += 1
+                        break
+                index += 1
+            assert depth == 0
+            segments.append(segment)
+            continue
+        remainder.append(instructions[index])
+        index += 1
+    assert len(segments) >= 2
+    return remainder + [item for segment in reversed(segments) for item in segment]
+
+
 def _first_margin_form(pdf: pikepdf.Pdf) -> tuple[Any, Any]:
     for page in pdf.pages:
         xobjects = page.obj["/Resources"].get("/XObject", {})
@@ -693,7 +727,7 @@ Liens\nxMarginRailNote{appui}{%
 
 
 @pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
-def test_pdf_bijection_rejects_seven_independent_mutations(tmp_path: Path) -> None:
+def test_pdf_bijection_rejects_independent_mutations(tmp_path: Path) -> None:
     fixture = tmp_path / "complete-bijection-adversaries.tex"
     fixture.write_text(
         r"""\documentclass{gabarits/nexus-manuel}
@@ -795,6 +829,42 @@ def test_pdf_bijection_rejects_seven_independent_mutations(tmp_path: Path) -> No
         form.write(b"/NXMarginBogus BMC EMC\n" + form.read_bytes())
         pdf.save(bogus_form_tag_pdf)
     mutations["bogus-form-tag"] = bogus_form_tag_pdf
+
+    zero_matrix_pdf = tmp_path / "mutation-8-zero-matrix.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        _, form = _first_margin_form(pdf)
+        form["/Matrix"] = pikepdf.Array([0, 0, 0, 0, 0, 0])
+        pdf.save(zero_matrix_pdf)
+    mutations["zero-matrix"] = zero_matrix_pdf
+
+    chained_uri_pdf = tmp_path / "mutation-9-chained-uri-action.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        mutated = False
+        for page in pdf.pages:
+            for annotation in page.obj.get("/Annots", []):
+                action = annotation.get("/A")
+                if action is not None and str(action.get("/S", "")) == "/URI":
+                    action["/Next"] = pikepdf.Dictionary(
+                        {
+                            "/S": pikepdf.Name("/JavaScript"),
+                            "/JS": pikepdf.String("app.alert('mutation')"),
+                        }
+                    )
+                    mutated = True
+                    break
+            if mutated:
+                break
+        assert mutated
+        pdf.save(chained_uri_pdf)
+    mutations["chained-uri-action"] = chained_uri_pdf
+
+    reversed_anchors_pdf = tmp_path / "mutation-10-anchor-order.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        page = pdf.pages[0]
+        instructions = list(pikepdf.parse_content_stream(page))
+        _replace_page_instructions(pdf, page, _reverse_margin_anchor_segments(instructions))
+        pdf.save(reversed_anchors_pdf)
+    mutations["anchor-order"] = reversed_anchors_pdf
 
     accepted: list[str] = []
     for name, mutation in mutations.items():
