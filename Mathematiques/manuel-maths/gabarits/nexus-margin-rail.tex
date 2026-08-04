@@ -57,6 +57,7 @@
       1in+\voffset+\topmargin+\headheight+\headsep\relax,
     rail_bottom_sp = \number\dimexpr
       1in+\voffset+\topmargin+\headheight+\headsep+\textheight\relax,
+    report_box_number = \number\nxMarginReportDecorationBox,
     report_decoration_height_sp = \number\dimexpr
       \ht\nxMarginReportDecorationBox+\dp\nxMarginReportDecorationBox\relax
   })}%
@@ -66,9 +67,15 @@
   \savepos
   \directlua{nexus_margin.write_anchor_whatsit(
     "\luaescapestring{#1}")}%
+  \directlua{nexus_margin.write_anchor_marked_content(
+    "\luaescapestring{#1}")}%
   \edef\nxMarginAnchorLua{%
     nexus_margin.resolve_anchor("\luaescapestring{#1}")}%
   \expandafter\latelua\expandafter{\nxMarginAnchorLua}%
+}
+
+\AddToHook{shipout/foreground}{%
+  \directlua{nexus_margin.render_foreground()}%
 }
 
 \newcommand{\nxMarginDeferredAnchor}[1]{%

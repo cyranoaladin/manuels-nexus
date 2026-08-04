@@ -48,7 +48,11 @@ local pages = {}
 local configured = false
 local finalized = false
 local shipout_index = 0
+local render_shipout_index = 0
 local configuration = nil
+local previous_for_render = nil
+local previous_notes_by_id = {}
+local previous_pages_by_index = {}
 
 local function json_object(fields)
   local result = json.new_object()
@@ -191,6 +195,73 @@ end
 
 local function digest(message)
   return "sha256:" .. sha256_hex(message)
+end
+
+local function pdf_hex_string(value)
+  local pieces = {}
+  for index = 1, #value do
+    pieces[index] = string.format("%02x", value:byte(index))
+  end
+  return "<" .. table.concat(pieces) .. ">"
+end
+
+local function read_json_file(path)
+  if not path or path == "" then
+    return nil
+  end
+  local handle = io.open(path, "rb")
+  if not handle then
+    return nil
+  end
+  local bytes = handle:read("*a")
+  local closed, close_error = handle:close()
+  if not closed then
+    fail("cannot close previous layout: " .. tostring(close_error))
+  end
+  local ok, document = pcall(json.decode, bytes)
+  if not ok then
+    return nil
+  end
+  return document
+end
+
+local function index_previous_for_render(document, values, run_nonce, pass_number)
+  previous_for_render = nil
+  previous_notes_by_id = {}
+  previous_pages_by_index = {}
+  if type(document) ~= "table"
+      or document.variant ~= values.variant
+      or document.run_nonce ~= run_nonce
+      or document.state == "failed"
+      or type(document.pass_number) ~= "number"
+      or document.pass_number + 1 ~= pass_number
+      or type(document.notes) ~= "table"
+      or type(document.pages) ~= "table" then
+    return
+  end
+  local previous_order = 0
+  for _, note in ipairs(document.notes) do
+    if type(note) ~= "table"
+        or type(note.id) ~= "string"
+        or type(note.global_order) ~= "number"
+        or note.global_order <= previous_order
+        or type(note.target_shipout_index) ~= "number"
+        or type(note.target_y_sp) ~= "number"
+        or type(note.width_sp) ~= "number"
+        or type(note.effective_height_sp) ~= "number" then
+      return
+    end
+    previous_order = note.global_order
+    previous_notes_by_id[note.id] = note
+  end
+  for _, page in ipairs(document.pages) do
+    if type(page) ~= "table" or type(page.shipout_index) ~= "number"
+        or type(page.folio) ~= "string" then
+      return
+    end
+    previous_pages_by_index[page.shipout_index] = page
+  end
+  previous_for_render = document
 end
 
 local function append_scalar(pieces, label, value)
@@ -343,6 +414,148 @@ local function materialized_advance(current, parent)
   return width
 end
 
+local function controlled_link_action(current)
+  local action = current.action
+  if not action then
+    fail("link start has no action")
+  end
+  local record = {
+    action_type = safe_node_field(action, "action_type"),
+    action_id = safe_node_field(action, "action_id"),
+    named_id = safe_node_field(action, "named_id"),
+    data = safe_node_field(action, "data"),
+    file = safe_node_field(action, "file"),
+    new_window = safe_node_field(action, "new_window"),
+  }
+  if type(record.action_type) ~= "number" then
+    fail("link action lacks a numeric type")
+  end
+  return record
+end
+
+local function horizontal_link_events(head, parent, base_x_sp, events)
+  local cursor_sp = 0
+  for current in node.traverse(head) do
+    local kind = node.type(current.id)
+    if kind == "whatsit" then
+      local subtype_name = WHATSIT_SUBTYPE_NAMES[current.subtype]
+        or tostring(current.subtype)
+      if subtype_name == "pdf_start_link" then
+        events[#events + 1] = {
+          kind = "start",
+          x_sp = base_x_sp + cursor_sp,
+          action = controlled_link_action(current),
+        }
+      elseif subtype_name == "pdf_end_link" then
+        events[#events + 1] = {
+          kind = "stop",
+          x_sp = base_x_sp + cursor_sp,
+        }
+      end
+    elseif (kind == "hlist" or kind == "vlist") and current.list then
+      horizontal_link_events(
+        current.list,
+        current,
+        base_x_sp + cursor_sp + (current.shift or 0),
+        events
+      )
+    end
+    cursor_sp = cursor_sp + materialized_advance(current, parent)
+  end
+  return cursor_sp
+end
+
+local function append_link_rectangle(
+  records,
+  action,
+  left_sp,
+  right_sp,
+  top_sp,
+  bottom_sp
+)
+  if right_sp <= left_sp then
+    return
+  end
+  records[#records + 1] = {
+    action = action,
+    left_sp = math.floor(left_sp + 0.5),
+    top_sp = math.floor(top_sp + 0.5),
+    right_sp = math.floor(right_sp + 0.5),
+    bottom_sp = math.floor(bottom_sp + 0.5),
+  }
+end
+
+local function collect_link_rectangles(head)
+  local records = {}
+  local active_action = nil
+  local cursor_y_sp = 0
+  for current in node.traverse(head) do
+    local kind = node.type(current.id)
+    if kind == "hlist" then
+      local line_top_sp = cursor_y_sp
+      local line_bottom_sp = cursor_y_sp + current.height + current.depth
+      local events = {}
+      local line_width_sp = current.list
+        and horizontal_link_events(current.list, current, 0, events) or 0
+      local segment_left_sp = active_action and 0 or nil
+      for _, event in ipairs(events) do
+        if event.kind == "start" then
+          if active_action then
+            fail("nested links are unsupported in a marginal note")
+          end
+          active_action = event.action
+          segment_left_sp = event.x_sp
+        else
+          if not active_action or segment_left_sp == nil then
+            fail("link end lacks a matching start in a marginal note")
+          end
+          append_link_rectangle(
+            records,
+            active_action,
+            segment_left_sp,
+            event.x_sp,
+            line_top_sp,
+            line_bottom_sp
+          )
+          active_action = nil
+          segment_left_sp = nil
+        end
+      end
+      if active_action and segment_left_sp ~= nil then
+        append_link_rectangle(
+          records,
+          active_action,
+          segment_left_sp,
+          line_width_sp,
+          line_top_sp,
+          line_bottom_sp
+        )
+      end
+      cursor_y_sp = line_bottom_sp
+    elseif kind == "vlist" then
+      if current.list then
+        local nested = collect_link_rectangles(current.list)
+        for _, record in ipairs(nested) do
+          record.top_sp = record.top_sp + cursor_y_sp
+          record.bottom_sp = record.bottom_sp + cursor_y_sp
+          records[#records + 1] = record
+        end
+      end
+      cursor_y_sp = cursor_y_sp + current.height + current.depth
+    elseif kind == "glue" then
+      cursor_y_sp = cursor_y_sp + (current.width or 0)
+    elseif kind == "kern" then
+      cursor_y_sp = cursor_y_sp + (current.kern or current.width or 0)
+    elseif kind == "rule" then
+      cursor_y_sp = cursor_y_sp + current.height + current.depth
+    end
+  end
+  if active_action then
+    fail("unclosed link in a marginal note")
+  end
+  return records
+end
+
 local function box_horizontal_extent(box)
   local left_sp = 0
   local right_sp = math.max(0, box.width or 0)
@@ -476,6 +689,7 @@ function M.configure(values)
     "even_rail_left_sp",
     "rail_top_sp",
     "rail_bottom_sp",
+    "report_box_number",
     "report_decoration_height_sp",
   }) do
     local value = values[field]
@@ -513,10 +727,156 @@ function M.configure(values)
     even_rail_left_sp = values.even_rail_left_sp,
     rail_top_sp = values.rail_top_sp,
     rail_bottom_sp = values.rail_bottom_sp,
+    report_box_number = values.report_box_number,
     report_decoration_height_sp = values.report_decoration_height_sp,
     marker_metadata = marker_metadata_value == "1",
   }
+  index_previous_for_render(
+    read_json_file(configuration.previous_path), values, run_nonce, pass_number
+  )
   configured = true
+end
+
+local function neutralize_link_whatsits(head)
+  local current = head
+  while current do
+    local following = current.next
+    local kind = node.type(current.id)
+    if kind == "whatsit" then
+      local subtype_name = WHATSIT_SUBTYPE_NAMES[current.subtype]
+        or tostring(current.subtype)
+      if subtype_name == "pdf_start_link" or subtype_name == "pdf_end_link" then
+        head = node.remove(head, current, true)
+      end
+    elseif (kind == "hlist" or kind == "vlist") and current.list then
+      current.list = neutralize_link_whatsits(current.list)
+    end
+    current = following
+  end
+  return head
+end
+
+local function measured_interline_sp(head)
+  if not head then
+    return 12 * 65536
+  end
+  local cursor_y_sp = 0
+  local previous_baseline_sp = nil
+  for current in node.traverse(head) do
+    local kind = node.type(current.id)
+    if kind == "hlist" then
+      local baseline_sp = cursor_y_sp + current.height
+      if previous_baseline_sp and baseline_sp > previous_baseline_sp then
+        return baseline_sp - previous_baseline_sp
+      end
+      previous_baseline_sp = baseline_sp
+      cursor_y_sp = cursor_y_sp + current.height + current.depth
+    elseif kind == "vlist" or kind == "rule" then
+      cursor_y_sp = cursor_y_sp + current.height + current.depth
+    elseif kind == "glue" then
+      cursor_y_sp = cursor_y_sp + (current.width or 0)
+    elseif kind == "kern" then
+      cursor_y_sp = cursor_y_sp + (current.kern or current.width or 0)
+    end
+  end
+  -- A one-line box exposes no pair of baselines.  Use the class's normal
+  -- 12pt line pitch only for that intrinsically unmeasurable fallback.
+  return 12 * 65536
+end
+
+local function marker_required(note, capture)
+  if note.requires_marker or note.report_depth > 0
+      or note.target_shipout_index ~= note.origin_shipout_index then
+    return true
+  end
+  local interline_sp = capture and capture.interline_sp or 12 * 65536
+  return math.abs(note.target_y_sp - note.origin_y_sp) > 2 * interline_sp
+end
+
+local function report_decoration_with_folio(head, folio)
+  require_ascii_fragment(folio, "origin folio")
+  if #folio > 4 then
+    fail("origin folio exceeds the measured report decoration capacity")
+  end
+
+  local function replace_in_list(list_head)
+    local zero_run = {}
+    local current = list_head
+    while current do
+      local kind = node.type(current.id)
+      if kind == "glyph" and current.char == 48 then
+        zero_run[#zero_run + 1] = current
+        if #zero_run == 4 then
+          local excess = 4 - #folio
+          for index = 1, excess do
+            list_head = node.remove(list_head, zero_run[index], true)
+          end
+          for index = 1, #folio do
+            zero_run[excess + index].char = folio:byte(index)
+          end
+          return list_head, true
+        end
+      else
+        zero_run = {}
+      end
+      if (kind == "hlist" or kind == "vlist") and current.list then
+        local replaced
+        current.list, replaced = replace_in_list(current.list)
+        if replaced then
+          return list_head, true
+        end
+      end
+      current = current.next
+    end
+    return list_head, false
+  end
+
+  local replaced
+  head, replaced = replace_in_list(head)
+  if not replaced then
+    fail("measured report decoration lacks its controlled folio slot")
+  end
+  return head
+end
+
+local function save_captured_form(capture, source_box, placement)
+  local form_box = node.copy(source_box)
+  form_box.list = capture.list and node.copy_list(capture.list) or nil
+  form_box.list = neutralize_link_whatsits(form_box.list)
+  if placement.report_depth > 0 then
+    local report_box = tex.box[configuration.report_box_number]
+    if not report_box or not report_box.list then
+      fail("reported note lacks its measured decoration box " .. capture.id)
+    end
+    local decorated_head = report_decoration_with_folio(
+      node.copy_list(report_box.list), placement.origin_folio
+    )
+    local decorated_tail = node.tail(decorated_head)
+    if form_box.list then
+      decorated_tail.next = form_box.list
+      form_box.list.prev = decorated_tail
+    end
+    form_box.list = decorated_head
+  end
+  form_box.width = placement.width_sp
+  form_box.height = placement.effective_height_sp
+  form_box.depth = 0
+  local attributes = table.concat({
+    "/NXMarginID", pdf_hex_string(capture.id),
+    "/NXMarginRole", pdf_hex_string(capture.role),
+    "/NXMarginOrder", string.format("%d", capture.global_order),
+  }, " ")
+  local form_index = tex.saveboxresource(form_box, attributes, nil, true, 0)
+  if type(form_index) ~= "number" or form_index < 1 then
+    fail("cannot save Form XObject for " .. capture.id)
+  end
+  capture.form_index = form_index
+  capture.placement = placement
+  capture.requires_marker = marker_required(placement, capture)
+  texio.write_nl(
+    "term and log",
+    "NEXUS-MARGIN-FORM:" .. capture.id .. ":" .. form_index
+  )
 end
 
 function M.capture_box(identifier, role, global_order, box_number)
@@ -549,9 +909,11 @@ function M.capture_box(identifier, role, global_order, box_number)
   if base_height_sp > configuration.rail_bottom_sp - configuration.rail_top_sp then
     margin_error("height", identifier)
   end
+  local link_metadata = {}
   local links = {}
   if copied_list then
-    collect_link_metadata(copied_list, links)
+    collect_link_metadata(copied_list, link_metadata)
+    links = collect_link_rectangles(copied_list)
   end
   captures[identifier] = {
     id = identifier,
@@ -561,15 +923,21 @@ function M.capture_box(identifier, role, global_order, box_number)
     width_sp = width_sp,
     base_height_sp = base_height_sp,
     semantic_digest = semantic_digest(copied_list),
+    interline_sp = measured_interline_sp(copied_list),
     links = links,
     capture_count = 1,
   }
+  local placement = previous_notes_by_id[identifier]
+  if previous_for_render and placement
+      and placement.global_order == global_order and placement.role == role then
+    save_captured_form(captures[identifier], box, placement)
+  end
   capture_order[#capture_order + 1] = identifier
   texio.write_nl("term and log", "NEXUS-MARGIN-CAPTURE:" .. identifier)
-  if #links > 0 then
+  if #link_metadata > 0 then
     texio.write_nl(
       "term and log",
-      "NEXUS-MARGIN-LINKS:" .. identifier .. ":" .. #links
+      "NEXUS-MARGIN-LINKS:" .. identifier .. ":" .. #link_metadata
     )
   end
 end
@@ -589,6 +957,128 @@ function M.write_anchor_whatsit(identifier)
     texio.write_nl(
       "term and log", "NEXUS-MARGIN-MARKER-METADATA:" .. identifier
     )
+  end
+end
+
+local function marked_note_properties(capture)
+  local note = capture.placement
+  local target_page = previous_pages_by_index[note.target_shipout_index]
+  if not target_page then
+    fail("render placement references an unknown target page for " .. capture.id)
+  end
+  local target_left_sp = target_page.safe_rect.left_sp
+  local target_top_sp = note.target_y_sp
+  local target_right_sp = target_left_sp + note.width_sp
+  local target_bottom_sp = target_top_sp + note.effective_height_sp
+  return table.concat({
+    "/ID", pdf_hex_string(capture.id),
+    "/Role", pdf_hex_string(capture.role),
+    "/Order", string.format("%d", capture.global_order),
+    "/OriginPage", string.format("%d", note.origin_shipout_index),
+    "/OriginFolio", pdf_hex_string(note.origin_folio),
+    "/TargetPage", string.format("%d", note.target_shipout_index),
+    "/TargetFolio", pdf_hex_string(target_page.folio),
+    "/ReportDepth", string.format("%d", note.report_depth),
+    "/RequiresMarker", capture.requires_marker and "true" or "false",
+    "/BBoxSP", string.format(
+      "[%d %d %d %d]",
+      target_left_sp,
+      target_top_sp,
+      target_right_sp,
+      target_bottom_sp
+    ),
+  }, " ")
+end
+
+local function link_annotation_data(action)
+  if action.action_type == 3 then
+    if type(action.data) ~= "string"
+        or not action.data:match("^/Subtype/Link/A<<")
+        or not action.data:find("/S/URI", 1, true) then
+      fail("unsupported user link action in marginal note")
+    end
+    return action.data
+  end
+  if action.action_type == 1 then
+    local destination = action.action_id or action.data
+    if type(destination) ~= "string" then
+      fail("internal margin link lacks a named destination")
+    end
+    destination = destination:match("^([%w%._:%-]+)")
+    if not destination or destination == "" then
+      fail("internal margin link has an invalid named destination")
+    end
+    return "/Subtype/Link/Border[0 0 0]/A<</S/GoTo/D"
+      .. pdf_hex_string(destination) .. ">>"
+  end
+  fail("unsupported marginal link action type " .. tostring(action.action_type))
+end
+
+local function render_link_annotations(capture, note, page)
+  local decoration_offset_sp = note.report_depth > 0
+    and configuration.report_decoration_height_sp or 0
+  for _, link in ipairs(capture.links) do
+    local absolute_left_sp = page.safe_rect.left_sp + link.left_sp
+    local absolute_top_sp = note.target_y_sp + decoration_offset_sp + link.top_sp
+    local width_sp = link.right_sp - link.left_sp
+    local height_sp = link.bottom_sp - link.top_sp
+    local baseline_from_top_sp = absolute_top_sp + height_sp
+    tex.sprint(string.format(
+      "\\put(%dsp,-%dsp){\\hbox{"
+        .. "\\pdfextension annot width %dsp height %dsp depth 0sp { %s }}}",
+      absolute_left_sp,
+      baseline_from_top_sp,
+      width_sp,
+      height_sp,
+      link_annotation_data(link.action)
+    ))
+  end
+end
+
+function M.write_anchor_marked_content(identifier)
+  local capture = captures[identifier]
+  local placement = previous_notes_by_id[identifier]
+  if not previous_for_render or not placement
+      or not marker_required(placement, capture) then
+    return
+  end
+  local properties = table.concat({
+    "/ID", pdf_hex_string(identifier),
+    "/Order", string.format("%d", placement.global_order),
+  }, " ")
+  tex.sprint(
+    "\\pdfextension literal page { /NXMarginAnchor << "
+      .. properties .. " >> BDC EMC }"
+  )
+end
+
+function M.render_foreground()
+  render_shipout_index = render_shipout_index + 1
+  if not previous_for_render then
+    return
+  end
+  for _, identifier in ipairs(capture_order) do
+    local capture = captures[identifier]
+    local note = capture.placement
+    if note and capture.form_index
+        and note.target_shipout_index == render_shipout_index then
+      local page = previous_pages_by_index[note.target_shipout_index]
+      local left_sp = page.safe_rect.left_sp
+      local baseline_from_top_sp = note.target_y_sp + note.effective_height_sp
+      local begin_mark = "/NXMarginNote << "
+        .. marked_note_properties(capture) .. " >> BDC"
+      tex.sprint(string.format(
+        "\\put(%dsp,-%dsp){\\hbox{"
+          .. "\\pdfextension literal page { %s }"
+          .. "\\useboxresource%d\\relax"
+          .. "\\pdfextension literal page { EMC }}}",
+        left_sp,
+        baseline_from_top_sp,
+        begin_mark,
+        capture.form_index
+      ))
+      render_link_annotations(capture, note, page)
+    end
   end
 end
 
