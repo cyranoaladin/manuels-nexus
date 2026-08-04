@@ -305,13 +305,43 @@ def _annotation_rect(annotation: Any) -> tuple[float, float, float, float]:
     rect = annotation.get("/Rect")
     if not isinstance(rect, pikepdf.Array) or len(rect) != 4:
         _reject("link annotation has no four-coordinate /Rect")
-    try:
-        values = tuple(float(value) for value in rect)
-    except (TypeError, ValueError, OverflowError) as exc:
-        raise MarginLedgerError("link annotation /Rect must be numeric") from exc
+    if any(
+        isinstance(value, bool) or not isinstance(value, (int, float, Decimal))
+        for value in rect
+    ):
+        _reject("link annotation /Rect must contain only PDF numbers")
+    values = tuple(float(value) for value in rect)
+    if not all(math.isfinite(value) for value in values):
+        _reject("link annotation /Rect must contain finite numbers")
     if values[0] >= values[2] or values[1] >= values[3]:
         _reject("link annotation has an invalid /Rect")
     return values
+
+
+def _annotation_dictionary_is_exact(annotation: Any, action_kind: str) -> bool:
+    expected_keys = {"/Type", "/Subtype", "/Rect", "/A"}
+    if action_kind == "GoTo":
+        expected_keys.add("/Border")
+    if {str(key) for key in annotation.keys()} != expected_keys:
+        return False
+    annotation_type = annotation.get("/Type")
+    subtype = annotation.get("/Subtype")
+    if (
+        not isinstance(annotation_type, pikepdf.Name)
+        or str(annotation_type) != "/Annot"
+        or not isinstance(subtype, pikepdf.Name)
+        or str(subtype) != "/Link"
+    ):
+        return False
+    if action_kind == "GoTo":
+        border = annotation.get("/Border")
+        if not isinstance(border, pikepdf.Array) or len(border) != 3:
+            return False
+        if any(isinstance(value, bool) or not isinstance(value, int) for value in border):
+            return False
+        if tuple(border) != (0, 0, 0):
+            return False
+    return True
 
 
 def _annotation_action(annotation: Any) -> tuple[str, str] | None:
@@ -324,6 +354,8 @@ def _annotation_action(annotation: Any) -> tuple[str, str] | None:
     action_kind = str(raw_kind).removeprefix("/")
     action_keys = {str(key) for key in action.keys()}
     if action_kind == "URI":
+        if not _annotation_dictionary_is_exact(annotation, action_kind):
+            return None
         if action_keys != {"/Type", "/S", "/URI"}:
             return None
         if not isinstance(action.get("/Type"), pikepdf.Name) or str(
@@ -333,6 +365,8 @@ def _annotation_action(annotation: Any) -> tuple[str, str] | None:
         target = action.get("/URI")
         return ("URI", str(target)) if isinstance(target, pikepdf.String) else None
     if action_kind == "GoTo":
+        if not _annotation_dictionary_is_exact(annotation, action_kind):
+            return None
         if action_keys != {"/S", "/D"}:
             return None
         target = action.get("/D")

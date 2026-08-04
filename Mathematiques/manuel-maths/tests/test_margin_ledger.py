@@ -866,6 +866,31 @@ def test_pdf_bijection_rejects_independent_mutations(tmp_path: Path) -> None:
         pdf.save(reversed_anchors_pdf)
     mutations["anchor-order"] = reversed_anchors_pdf
 
+    additional_action_pdf = tmp_path / "mutation-11-annotation-aa.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        mutated = False
+        for page in pdf.pages:
+            for annotation in page.obj.get("/Annots", []):
+                action = annotation.get("/A")
+                if action is not None and str(action.get("/S", "")) == "/URI":
+                    annotation["/AA"] = pikepdf.Dictionary(
+                        {
+                            "/E": pikepdf.Dictionary(
+                                {
+                                    "/S": pikepdf.Name("/JavaScript"),
+                                    "/JS": pikepdf.String("app.alert('annotation')"),
+                                }
+                            )
+                        }
+                    )
+                    mutated = True
+                    break
+            if mutated:
+                break
+        assert mutated
+        pdf.save(additional_action_pdf)
+    mutations["annotation-aa"] = additional_action_pdf
+
     accepted: list[str] = []
     for name, mutation in mutations.items():
         _assert_qpdf_valid(mutation)
