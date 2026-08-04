@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import os
 import re
@@ -26,6 +27,9 @@ CAPTURE_RECORD = re.compile(r"NEXUS-MARGIN-CAPTURE:(nxm:[^:\s]+:[^:\s]+:\d{8})")
 FORM_RECORD = re.compile(
     r"NEXUS-MARGIN-FORM:(nxm:[^:\s]+:[^:\s]+:\d{8}):(\d+)"
 )
+FIXTURE_ROOT = MANUAL_ROOT / "tests" / "fixtures"
+SP_PER_PT = 65536
+SP_TO_BP = 72 / (72.27 * SP_PER_PT)
 
 
 def _load_module(path: Path, name: str) -> ModuleType:
@@ -380,6 +384,370 @@ def _assert_qpdf_valid(pdf_path: Path) -> None:
         check=False,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def _sha256(data: bytes) -> str:
+    return "sha256:" + hashlib.sha256(data).hexdigest()
+
+
+def _geometry_evidence(*, same_page: bool = False) -> tuple[dict[str, Any], ...]:
+    capture = json.loads((FIXTURE_ROOT / "margin-layout.valid.json").read_text())
+    stable = json.loads(
+        (FIXTURE_ROOT / "margin-stable-layout.valid.json").read_text()
+    )
+    ledger = json.loads((FIXTURE_ROOT / "margin-ledger.valid.json").read_text())
+    if same_page:
+        for layout in (capture, stable):
+            note = layout["notes"][1]
+            note.update(
+                {
+                    "target_shipout_index": 1,
+                    "target_y_sp": 800000,
+                    "effective_height_sp": note["base_height_sp"],
+                    "report_depth": 0,
+                    "requires_marker": False,
+                }
+            )
+            layout["pages"][0]["placed_note_ids"] = [
+                layout["notes"][0]["id"],
+                note["id"],
+            ]
+            layout["pages"][0]["reported_note_ids"] = []
+            layout["pages"][1]["carry_in_note_ids"] = []
+            layout["pages"][1]["placed_note_ids"] = []
+        ledger["notes"][1].update(
+            {
+                "target_shipout_index": 1,
+                "target_folio": "1",
+                "bbox_sp": [900000, 800000, 1100000, 900000],
+                "anchor_count": 0,
+                "report_depth": 0,
+                "requires_marker": False,
+            }
+        )
+    contract = _load_contract()
+    ledger["capture_inventory_digest"] = contract.canonical_digest(
+        contract.canonical_capture_projection(capture)
+    )
+    ledger["stable_layout_digest"] = contract.canonical_digest(stable)
+    return capture, stable, ledger
+
+
+def _write_geometry_pdf(
+    path: Path,
+    stable: dict[str, Any],
+    ledger: dict[str, Any],
+    *,
+    crop_origin: tuple[float, float] = (0.0, 0.0),
+    user_unit: float = 1.0,
+    rotate: int = 0,
+    rendered_bboxes: dict[str, list[int]] | None = None,
+) -> None:
+    rendered_bboxes = rendered_bboxes or {}
+    notes_by_page: dict[int, list[dict[str, Any]]] = {}
+    for note in ledger["notes"]:
+        notes_by_page.setdefault(note["target_shipout_index"], []).append(note)
+
+    pdf = pikepdf.Pdf.new()
+    llx, lly = crop_origin
+    for page_record in stable["pages"]:
+        width = page_record["page_width_sp"] * SP_TO_BP / user_unit
+        height = page_record["page_height_sp"] * SP_TO_BP / user_unit
+        urx, ury = llx + width, lly + height
+        page = pdf.add_blank_page(
+            page_size=(max(100.0, urx + 5.0), max(100.0, ury + 5.0))
+        )
+        page.obj["/CropBox"] = pikepdf.Array([llx, lly, urx, ury])
+        page.obj["/UserUnit"] = user_unit
+        page.obj["/Rotate"] = rotate
+        xobjects = pikepdf.Dictionary()
+        page.obj["/Resources"] = pikepdf.Dictionary({"/XObject": xobjects})
+        chunks: list[str] = []
+        for note in ledger["notes"]:
+            if note["requires_marker"] and note["origin_shipout_index"] == page_record[
+                "shipout_index"
+            ]:
+                chunks.append(
+                    "/NXMarginAnchor << "
+                    f"/ID ({note['note_id']}) /Order {note['global_order']} "
+                    ">> BDC EMC"
+                )
+        for index, note in enumerate(
+            notes_by_page.get(page_record["shipout_index"], []), start=1
+        ):
+            form_name = f"/Fm{page_record['shipout_index']}_{index}"
+            expected = note["bbox_sp"]
+            width_user = (expected[2] - expected[0]) * SP_TO_BP / user_unit
+            height_user = (expected[3] - expected[1]) * SP_TO_BP / user_unit
+            fx0, fy0 = -1.25, 2.5
+            form = pikepdf.Stream(pdf, b"")
+            form["/Type"] = pikepdf.Name("/XObject")
+            form["/Subtype"] = pikepdf.Name("/Form")
+            form["/BBox"] = pikepdf.Array(
+                [fx0, fy0, fx0 + width_user, fy0 + height_user]
+            )
+            form["/Matrix"] = pikepdf.Array([1, 0, 0, 1, 0, 0])
+            form["/Resources"] = pikepdf.Dictionary()
+            form["/NXMarginID"] = pikepdf.String(note["note_id"])
+            form["/NXMarginRole"] = pikepdf.String(note["role"])
+            form["/NXMarginOrder"] = note["global_order"]
+            xobjects[form_name] = form
+
+            actual = rendered_bboxes.get(note["note_id"], expected)
+            pdf_left = llx + actual[0] * SP_TO_BP / user_unit
+            pdf_bottom = ury - actual[3] * SP_TO_BP / user_unit
+            tx, ty = pdf_left - fx0, pdf_bottom - fy0
+            chunks.extend(
+                [
+                    "/NXMarginNote << "
+                    f"/BBoxSP [{' '.join(str(value) for value in expected)}] "
+                    f"/ID ({note['note_id']}) /Order {note['global_order']} "
+                    f"/OriginPage {note['origin_shipout_index']} "
+                    f"/OriginFolio ({note['origin_folio']}) "
+                    f"/TargetPage {note['target_shipout_index']} "
+                    f"/TargetFolio ({note['target_folio']}) "
+                    f"/ReportDepth {note['report_depth']} "
+                    f"/RequiresMarker {'true' if note['requires_marker'] else 'false'} "
+                    f"/Role ({note['role']}) >> BDC",
+                    "q",
+                    f"1 0 0 1 {tx:.12f} {ty:.12f} cm",
+                    f"{form_name} Do",
+                    "Q",
+                    "EMC",
+                ]
+            )
+        page.obj["/Contents"] = pikepdf.Stream(
+            pdf, ("\n".join(chunks) + "\n").encode("ascii")
+        )
+    pdf.save(path, min_version="1.6")
+
+    rendered_projection = []
+    with pikepdf.Pdf.open(path) as reopened:
+        forms_by_id = {
+            str(xobjects[name]["/NXMarginID"]): xobjects[name]
+            for page in reopened.pages
+            for xobjects in (page.obj["/Resources"]["/XObject"],)
+            for name in xobjects
+        }
+        for note in ledger["notes"]:
+            form = forms_by_id[note["note_id"]]
+            note["form_xref"] = form.objgen[0]
+            note["rendered_stream_digest"] = _sha256(form.read_bytes())
+            rendered_projection.append(
+                {
+                    "note_id": note["note_id"],
+                    "rendered_stream_digest": note["rendered_stream_digest"],
+                }
+            )
+    contract = _load_contract()
+    ledger["rendered_stream_digest"] = contract.canonical_digest(rendered_projection)
+    ledger["pdf_sha256"] = _sha256(path.read_bytes())
+
+
+def _refresh_pdf_digest(path: Path, ledger: dict[str, Any]) -> None:
+    ledger["pdf_sha256"] = _sha256(path.read_bytes())
+
+
+def test_margin_geometry_recto_verso_cropbox_userunit_and_actual_form_bbox_ctm(
+    tmp_path: Path,
+) -> None:
+    capture, stable, ledger = _geometry_evidence()
+    pdf = tmp_path / "shifted-crop-userunit.pdf"
+    _write_geometry_pdf(
+        pdf,
+        stable,
+        ledger,
+        crop_origin=(17.0, 23.0),
+        user_unit=2.0,
+    )
+
+    result = _load_ledger().verify_margin_layout(pdf, capture, stable, ledger)
+
+    assert result.passed is True
+    assert result.variant == "eleve"
+    assert result.note_count == 2
+
+
+def test_margin_gate_propagates_runner_environment_and_timeout_to_qpdf_poppler(
+    tmp_path: Path,
+) -> None:
+    capture, stable, ledger = _geometry_evidence()
+    pdf_path = tmp_path / "controlled-tools.pdf"
+    _write_geometry_pdf(pdf_path, stable, ledger)
+    with pikepdf.Pdf.open(pdf_path) as pdf:
+        dimensions = [
+            (
+                float(page.obj["/CropBox"][2] - page.obj["/CropBox"][0]),
+                float(page.obj["/CropBox"][3] - page.obj["/CropBox"][1]),
+            )
+            for page in pdf.pages
+        ]
+    bbox_xml = "<doc>" + "".join(
+        f'<page width="{width:.12f}" height="{height:.12f}" />'
+        for width, height in dimensions
+    ) + "</doc>"
+    environment = {"PATH": "/controlled/bin", "TZ": "UTC"}
+    calls = []
+
+    def runner(command, **kwargs):
+        calls.append((command, kwargs))
+        stdout = bbox_xml if "-bbox-layout" in command else ""
+        return type(
+            "Completed",
+            (),
+            {"returncode": 0, "stdout": stdout, "stderr": ""},
+        )()
+
+    result = _load_ledger().verify_margin_layout(
+        pdf_path,
+        capture,
+        stable,
+        ledger,
+        runner=runner,
+        environment=environment,
+    )
+
+    assert result.qpdf_checked is True
+    assert result.poppler_checked is True
+    assert [call[0][0] for call in calls] == ["qpdf", "pdftotext", "pdftotext"]
+    assert all(call[1]["timeout"] == 20 for call in calls)
+    assert all(call[1]["env"] == environment for call in calls)
+    assert all(call[1]["env"] is not environment for call in calls)
+
+
+@pytest.mark.parametrize(
+    ("case", "rendered_bboxes", "reason"),
+    [
+        (
+            "overlap",
+            {"nxm:eleve:vocab:00000002": [900000, 250000, 1100000, 350000]},
+            "rendered notes nxm:eleve:appui:00000001 and "
+            "nxm:eleve:vocab:00000002 intersect",
+        ),
+        (
+            "spacing",
+            {
+                "nxm:eleve:vocab:00000002": [
+                    900000,
+                    300000 + 6 * SP_PER_PT - 1,
+                    1100000,
+                    400000 + 6 * SP_PER_PT - 1,
+                ]
+            },
+            "have less than 6pt vertical gap",
+        ),
+        (
+            "rail",
+            {"nxm:eleve:appui:00000001": [700000, 200000, 900000, 300000]},
+            "escapes the effective outer rail",
+        ),
+        (
+            "obstacle",
+            {"nxm:eleve:appui:00000001": [900000, 110000, 1100000, 210000]},
+            "intersects obstacle page-1-header",
+        ),
+    ],
+)
+def test_margin_geometry_rejects_collisions_spacing_rail_and_obstacles(
+    tmp_path: Path,
+    case: str,
+    rendered_bboxes: dict[str, list[int]],
+    reason: str,
+) -> None:
+    capture, stable, ledger = _geometry_evidence(same_page=True)
+    pdf = tmp_path / f"{case}.pdf"
+    _write_geometry_pdf(pdf, stable, ledger, rendered_bboxes=rendered_bboxes)
+    ledger_module = _load_ledger()
+
+    with pytest.raises(ledger_module.MarginLedgerError, match=re.escape(reason)):
+        ledger_module.verify_margin_layout(pdf, capture, stable, ledger)
+
+
+def test_margin_geometry_allows_one_sp_but_rejects_two_sp_coordinate_error(
+    tmp_path: Path,
+) -> None:
+    note_id = "nxm:eleve:appui:00000001"
+    capture, stable, ledger = _geometry_evidence()
+    within = tmp_path / "within-one-sp.pdf"
+    _write_geometry_pdf(
+        within,
+        stable,
+        ledger,
+        rendered_bboxes={note_id: [900000, 199999, 1100000, 299999]},
+    )
+    ledger_module = _load_ledger()
+    assert ledger_module.verify_margin_layout(within, capture, stable, ledger).passed
+
+    outside = tmp_path / "outside-one-sp.pdf"
+    _write_geometry_pdf(
+        outside,
+        stable,
+        ledger,
+        rendered_bboxes={note_id: [900000, 200002, 1100000, 300002]},
+    )
+    with pytest.raises(ledger_module.MarginLedgerError, match="differs by more than 1sp"):
+        ledger_module.verify_margin_layout(outside, capture, stable, ledger)
+
+
+def test_margin_geometry_rejects_fractional_error_above_one_sp(tmp_path: Path) -> None:
+    note_id = "nxm:eleve:appui:00000001"
+    capture, stable, ledger = _geometry_evidence()
+    pdf = tmp_path / "fractional-error.pdf"
+    _write_geometry_pdf(
+        pdf,
+        stable,
+        ledger,
+        rendered_bboxes={note_id: [900000, 200001.4, 1100000, 300001.4]},
+    )
+    ledger_module = _load_ledger()
+
+    with pytest.raises(ledger_module.MarginLedgerError, match="differs by more than 1sp"):
+        ledger_module.verify_margin_layout(pdf, capture, stable, ledger)
+
+
+def test_margin_geometry_uses_inherited_cropbox_and_rejects_inherited_rotate(
+    tmp_path: Path,
+) -> None:
+    capture, stable, ledger = _geometry_evidence()
+    inherited_crop = tmp_path / "inherited-crop.pdf"
+    _write_geometry_pdf(inherited_crop, stable, ledger, crop_origin=(11.0, 13.0))
+    with pikepdf.Pdf.open(inherited_crop, allow_overwriting_input=True) as pdf:
+        crop = pikepdf.Array(pdf.pages[0].obj["/CropBox"])
+        parent = pdf.pages[0].obj["/Parent"]
+        parent["/CropBox"] = crop
+        for page in pdf.pages:
+            del page.obj["/CropBox"]
+        pdf.save(inherited_crop)
+    _refresh_pdf_digest(inherited_crop, ledger)
+    ledger_module = _load_ledger()
+    assert ledger_module.verify_margin_layout(
+        inherited_crop, capture, stable, ledger
+    ).passed
+
+    inherited_rotate = tmp_path / "inherited-rotate.pdf"
+    _write_geometry_pdf(inherited_rotate, stable, ledger)
+    with pikepdf.Pdf.open(inherited_rotate, allow_overwriting_input=True) as pdf:
+        parent = pdf.pages[0].obj["/Parent"]
+        parent["/Rotate"] = 90
+        for page in pdf.pages:
+            del page.obj["/Rotate"]
+        pdf.save(inherited_rotate)
+    _refresh_pdf_digest(inherited_rotate, ledger)
+
+    with pytest.raises(ledger_module.MarginLedgerError, match="/Rotate must be 0"):
+        ledger_module.verify_margin_layout(
+            inherited_rotate, capture, stable, ledger
+        )
+
+
+def test_margin_geometry_fails_closed_on_nonzero_rotate(tmp_path: Path) -> None:
+    capture, stable, ledger = _geometry_evidence()
+    pdf = tmp_path / "rotated.pdf"
+    _write_geometry_pdf(pdf, stable, ledger, rotate=90)
+    ledger_module = _load_ledger()
+
+    with pytest.raises(ledger_module.MarginLedgerError, match="/Rotate must be 0"):
+        ledger_module.verify_margin_layout(pdf, capture, stable, ledger)
 
 
 def _first_margin_note_segment(instructions: list[Any]) -> list[Any]:

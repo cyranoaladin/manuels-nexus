@@ -13,9 +13,11 @@ import re
 import subprocess
 import sys
 import tempfile
+import xml.etree.ElementTree as ET
 from collections import Counter
 from dataclasses import asdict, dataclass
 from decimal import Decimal
+from fractions import Fraction
 from pathlib import Path
 from types import ModuleType
 from typing import Any, Iterable, Mapping, Sequence
@@ -40,8 +42,13 @@ NOTE_PROPERTY_KEYS = {
     "/TargetPage",
 }
 BP_TO_SP = 72.27 * 65536 / 72
+SP_TO_BP_EXACT = Fraction(7200, 7227 * 65536)
+BP_TO_SP_EXACT = 1 / SP_TO_BP_EXACT
 FORM_BBOX_ROUNDING_TOLERANCE_SP = 32
+MARGIN_GEOMETRY_TOLERANCE_SP = 1
+MARGIN_GAP_SP = 6 * 65536
 LINK_RECT_TOLERANCE_BP = 0.002
+COMMAND_TIMEOUT_SECONDS = 20
 
 
 class MarginLedgerError(ValueError):
@@ -65,6 +72,21 @@ class MarginLedgerEntry:
     note_count: int
     report_depth: int
     requires_marker: bool
+
+
+@dataclass(frozen=True)
+class MarginVerificationResult:
+    """Closed, machine-consumable result of the composed margin gate."""
+
+    passed: bool
+    variant: str
+    page_count: int
+    note_count: int
+    qpdf_checked: bool
+    poppler_checked: bool
+    capture_inventory_digest: str
+    stable_layout_digest: str
+    ledger_digest: str
 
 
 def _load_margin_contract() -> ModuleType:
@@ -492,14 +514,30 @@ def _check_link_duplicates(pdf: pikepdf.Pdf) -> None:
             signatures.add(signature)
 
 
-def _check_extracted_text(pdf_path: Path, variant: str) -> None:
+def _command_options(environment: Mapping[str, str] | None) -> dict[str, Any]:
+    options: dict[str, Any] = {
+        "capture_output": True,
+        "text": True,
+        "timeout": COMMAND_TIMEOUT_SECONDS,
+        "check": False,
+    }
+    if environment is not None:
+        options["env"] = dict(environment)
+    return options
+
+
+def _check_extracted_text(
+    pdf_path: Path,
+    variant: str,
+    *,
+    runner: Any = None,
+    environment: Mapping[str, str] | None = None,
+) -> None:
+    active_runner = subprocess.run if runner is None else runner
     try:
-        result = subprocess.run(
+        result = active_runner(
             ["pdftotext", str(pdf_path), "-"],
-            capture_output=True,
-            text=True,
-            timeout=20,
-            check=False,
+            **_command_options(environment),
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise MarginLedgerError(f"cannot extract PDF text: {exc}") from exc
@@ -622,14 +660,17 @@ def _check_form_margin_tags(forms: Mapping[int, Any]) -> None:
             _reject(f"unclosed marked content in marginal Form {xref}")
 
 
-def _run_qpdf_check(pdf_path: Path) -> None:
+def _run_qpdf_check(
+    pdf_path: Path,
+    *,
+    runner: Any = None,
+    environment: Mapping[str, str] | None = None,
+) -> None:
+    active_runner = subprocess.run if runner is None else runner
     try:
-        result = subprocess.run(
+        result = active_runner(
             ["qpdf", "--check", str(pdf_path)],
-            capture_output=True,
-            text=True,
-            timeout=20,
-            check=False,
+            **_command_options(environment),
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise MarginLedgerError(f"qpdf unavailable or timed out: {exc}") from exc
@@ -957,6 +998,545 @@ def reconstruct_margin_ledger(
         "notes": note_documents,
     }
     return validate_ledger_document(ledger)
+
+
+def _pdf_fraction(value: Any, label: str) -> Fraction:
+    if isinstance(value, bool) or not isinstance(value, (int, float, Decimal)):
+        _reject(f"{label} must be a finite PDF number")
+    try:
+        number = Fraction(str(value)) if isinstance(value, float) else Fraction(value)
+    except (ValueError, TypeError, ZeroDivisionError) as exc:
+        raise MarginLedgerError(f"{label} must be a finite PDF number") from exc
+    return number
+
+
+def _pdf_box(value: Any, label: str) -> tuple[Fraction, Fraction, Fraction, Fraction]:
+    if not isinstance(value, (list, pikepdf.Array)) or len(value) != 4:
+        _reject(f"{label} must contain four coordinates")
+    box = tuple(
+        _pdf_fraction(coordinate, f"{label}[{index}]")
+        for index, coordinate in enumerate(value)
+    )
+    if box[0] >= box[2] or box[1] >= box[3]:
+        _reject(f"{label} must have positive width and height")
+    return box
+
+
+def _page_frame(
+    page: Any, page_index: int
+) -> tuple[tuple[Fraction, Fraction, Fraction, Fraction], Fraction]:
+    crop_value = page.obj.get("/CropBox") or page.obj.get("/MediaBox")
+    crop = _pdf_box(crop_value, f"page {page_index} /CropBox")
+    user_unit = _pdf_fraction(page.obj.get("/UserUnit", 1), f"page {page_index} /UserUnit")
+    if user_unit <= 0:
+        _reject(f"page {page_index} /UserUnit must be positive")
+    rotate = _pdf_fraction(page.obj.get("/Rotate", 0), f"page {page_index} /Rotate")
+    if rotate != 0:
+        _reject(f"page {page_index} /Rotate must be 0")
+    return crop, user_unit
+
+
+def _compose_affine(
+    current: tuple[Fraction, Fraction, Fraction, Fraction, Fraction, Fraction],
+    following: tuple[Fraction, Fraction, Fraction, Fraction, Fraction, Fraction],
+) -> tuple[Fraction, Fraction, Fraction, Fraction, Fraction, Fraction]:
+    a, b, c, d, e, f = current
+    aa, bb, cc, dd, ee, ff = following
+    return (
+        a * aa + c * bb,
+        b * aa + d * bb,
+        a * cc + c * dd,
+        b * cc + d * dd,
+        a * ee + c * ff + e,
+        b * ee + d * ff + f,
+    )
+
+
+def _rendered_margin_occurrences(pdf: pikepdf.Pdf) -> list[dict[str, Any]]:
+    identity = (
+        Fraction(1),
+        Fraction(0),
+        Fraction(0),
+        Fraction(1),
+        Fraction(0),
+        Fraction(0),
+    )
+    rendered: list[dict[str, Any]] = []
+    for page_index, page in enumerate(pdf.pages, start=1):
+        ctm = identity
+        graphics_stack: list[
+            tuple[Fraction, Fraction, Fraction, Fraction, Fraction, Fraction]
+        ] = []
+        marked_stack: list[tuple[str, str | None]] = []
+        resources = page.obj.get("/Resources")
+        xobjects = resources and resources.get("/XObject")
+        try:
+            instructions = pikepdf.parse_content_stream(page)
+        except pikepdf.PdfError as exc:
+            raise MarginLedgerError(
+                f"cannot parse page {page_index} geometry: {exc}"
+            ) from exc
+        for operands, operator in instructions:
+            operation = str(operator)
+            if operation == "q":
+                graphics_stack.append(ctm)
+            elif operation == "Q":
+                if not graphics_stack:
+                    _reject(f"unbalanced Q on page {page_index}")
+                ctm = graphics_stack.pop()
+            elif operation == "cm":
+                if len(operands) != 6:
+                    _reject(f"malformed cm on page {page_index}")
+                matrix = tuple(
+                    _pdf_fraction(value, f"page {page_index} cm[{position}]")
+                    for position, value in enumerate(operands)
+                )
+                ctm = _compose_affine(ctm, matrix)
+            elif operation in {"BMC", "BDC"}:
+                tag = _pdf_name(operands[0]) if operands else ""
+                note_id: str | None = None
+                if tag == "NXMarginNote" and len(operands) == 2:
+                    note_id = _pdf_exact_string(
+                        operands[1].get("/ID"), "NXMarginNote /ID"
+                    )
+                marked_stack.append((tag, note_id))
+            elif operation == "Do":
+                active = next(
+                    (
+                        item
+                        for item in reversed(marked_stack)
+                        if item[0] == "NXMarginNote"
+                    ),
+                    None,
+                )
+                if active is None:
+                    continue
+                if len(operands) != 1 or xobjects is None or operands[0] not in xobjects:
+                    _reject(f"NXMarginNote {active[1]} invokes an unknown Form")
+                rendered.append(
+                    {
+                        "note_id": active[1],
+                        "page_index": page_index,
+                        "form": xobjects[operands[0]],
+                        "ctm": ctm,
+                    }
+                )
+            elif operation == "EMC":
+                if not marked_stack:
+                    _reject(f"unbalanced EMC on page {page_index}")
+                marked_stack.pop()
+        if graphics_stack:
+            _reject(f"unclosed graphics state on page {page_index}")
+        if marked_stack:
+            _reject(f"unclosed marked content on page {page_index}")
+    return rendered
+
+
+def _canonical_rendered_bbox_sp(
+    occurrence: Mapping[str, Any],
+    crop: tuple[Fraction, Fraction, Fraction, Fraction],
+    user_unit: Fraction,
+) -> tuple[Fraction, Fraction, Fraction, Fraction]:
+    note_id = occurrence["note_id"]
+    form_bbox = _pdf_box(occurrence["form"].get("/BBox"), f"Form {note_id} /BBox")
+    _check_form_matrix(occurrence["form"], note_id)
+    a, b, c, d, e, f = occurrence["ctm"]
+    if (a, b, c, d) != (1, 0, 0, 1):
+        _reject(f"NXMarginNote {note_id} must use a translation-only CTM")
+    pdf_left = form_bbox[0] + e
+    pdf_bottom = form_bbox[1] + f
+    pdf_right = form_bbox[2] + e
+    pdf_top = form_bbox[3] + f
+    llx, _lly, _urx, ury = crop
+    return (
+        (pdf_left - llx) * user_unit * BP_TO_SP_EXACT,
+        (ury - pdf_top) * user_unit * BP_TO_SP_EXACT,
+        (pdf_right - llx) * user_unit * BP_TO_SP_EXACT,
+        (ury - pdf_bottom) * user_unit * BP_TO_SP_EXACT,
+    )
+
+
+def _rectangles_intersect(
+    first: Sequence[Fraction], second: Sequence[Fraction]
+) -> bool:
+    return max(first[0], second[0]) < min(first[2], second[2]) and max(
+        first[1], second[1]
+    ) < min(first[3], second[3])
+
+
+def _check_poppler_cropboxes(
+    pdf_path: Path,
+    frames: Sequence[
+        tuple[tuple[Fraction, Fraction, Fraction, Fraction], Fraction]
+    ],
+    *,
+    runner: Any = None,
+    environment: Mapping[str, str] | None = None,
+) -> None:
+    active_runner = subprocess.run if runner is None else runner
+    try:
+        result = active_runner(
+            ["pdftotext", "-cropbox", "-bbox-layout", str(pdf_path), "-"],
+            **_command_options(environment),
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise MarginLedgerError(f"cannot obtain Poppler crop coordinates: {exc}") from exc
+    if result.returncode != 0:
+        _reject(f"Poppler rejected PDF geometry: {result.stderr.strip()}")
+    try:
+        root = ET.fromstring(result.stdout)
+    except ET.ParseError as exc:
+        raise MarginLedgerError(f"Poppler returned malformed bbox XML: {exc}") from exc
+    page_elements = [element for element in root.iter() if element.tag.endswith("page")]
+    if len(page_elements) != len(frames):
+        _reject("Poppler page inventory differs from the PDF CropBox inventory")
+    for page_index, (element, frame) in enumerate(
+        zip(page_elements, frames, strict=True), start=1
+    ):
+        crop, user_unit = frame
+        try:
+            poppler_width = Fraction(element.attrib["width"])
+            poppler_height = Fraction(element.attrib["height"])
+        except (KeyError, ValueError, ZeroDivisionError) as exc:
+            raise MarginLedgerError(
+                f"Poppler page {page_index} lacks normalized dimensions"
+            ) from exc
+        expected_width = crop[2] - crop[0]
+        expected_height = crop[3] - crop[1]
+        for actual, expected in (
+            (poppler_width, expected_width),
+            (poppler_height, expected_height),
+        ):
+            difference_sp = abs(actual - expected) * user_unit * BP_TO_SP_EXACT
+            if difference_sp > MARGIN_GEOMETRY_TOLERANCE_SP:
+                _reject(
+                    f"Poppler page {page_index} coordinates differ from its CropBox"
+                )
+
+
+def _check_margin_payload_policy(
+    variant: str,
+    stable_notes: Sequence[Mapping[str, Any]],
+) -> None:
+    for note in stable_notes:
+        expected_prefix = f"nxm:{variant}:{note['role']}:"
+        if not note["id"].startswith(expected_prefix):
+            _reject(f"margin note {note['id']} violates variant/role identity policy")
+        if variant == "eleve" and note["role"] == "professor-id":
+            _reject("student margin evidence contains a professor-only payload")
+
+
+def verify_margin_layout(
+    pdf: str | Path,
+    capture_inventory: Mapping[str, Any] | str | Path,
+    stable_layout: Mapping[str, Any] | str | Path,
+    ledger: Mapping[str, Any] | str | Path,
+    *,
+    runner: Any = None,
+    environment: Mapping[str, str] | None = None,
+) -> MarginVerificationResult:
+    """Verify contract, identity and physical geometry of every marginal note.
+
+    Canonical boxes are TeX scaled points relative to the CropBox upper-left;
+    x increases right and y increases down. PDF user coordinates are converted
+    through the page's positive /UserUnit. Nonzero /Rotate is intentionally
+    rejected by this first closed coordinate convention.
+    """
+
+    pdf_file = Path(pdf)
+    if not pdf_file.is_file():
+        _reject(f"PDF does not exist: {pdf_file}")
+    capture, stable, contract = _validate_inputs(capture_inventory, stable_layout)
+    ledger = _load_document(ledger, "margin ledger")
+    try:
+        contract.validate_margin_ledger(ledger)
+    except contract.MarginContractError as exc:
+        raise MarginLedgerError(f"invalid margin ledger: {exc}") from exc
+
+    capture_projection = contract.canonical_capture_projection(capture)
+    stable_projection = contract.canonical_capture_projection(stable)
+    if contract.canonical_json_bytes(capture_projection) != contract.canonical_json_bytes(
+        stable_projection
+    ):
+        _reject("capture inventory and stable layout projections differ")
+    capture_digest = contract.canonical_digest(capture_projection)
+    stable_digest = contract.canonical_digest(stable)
+    if ledger["capture_inventory_digest"] != capture_digest:
+        _reject("ledger capture inventory digest differs from validated evidence")
+    if ledger["stable_layout_digest"] != stable_digest:
+        _reject("ledger stable layout digest differs from validated evidence")
+    if ledger["pdf_sha256"] != _sha256_bytes(pdf_file.read_bytes()):
+        _reject("ledger PDF digest differs from the inspected PDF")
+    if ledger["variant"] != stable["variant"]:
+        _reject("ledger variant differs from stable layout")
+
+    stable_notes = stable["notes"]
+    stable_by_id = {note["id"]: note for note in stable_notes}
+    ledger_notes = ledger["notes"]
+    ledger_by_id = {note["note_id"]: note for note in ledger_notes}
+    stable_ids = [note["id"] for note in stable_notes]
+    ledger_ids = [note["note_id"] for note in ledger_notes]
+    if set(stable_ids) != set(ledger_ids):
+        _reject("ledger note IDs differ from stable capture IDs")
+    stable_cardinality = Counter((stable["variant"], note["role"]) for note in stable_notes)
+    ledger_cardinality = Counter((ledger["variant"], note["role"]) for note in ledger_notes)
+    if stable_cardinality != ledger_cardinality:
+        _reject("ledger role/variant cardinalities differ from stable capture")
+    _check_margin_payload_policy(stable["variant"], stable_notes)
+
+    pages = {page["shipout_index"]: page for page in stable["pages"]}
+    for note_id in stable_ids:
+        stable_note = stable_by_id[note_id]
+        ledger_note = ledger_by_id[note_id]
+        expected_bbox = _expected_bbox(stable_note, pages)
+        expected_fields = {
+            "role": stable_note["role"],
+            "global_order": stable_note["global_order"],
+            "origin_shipout_index": stable_note["origin_shipout_index"],
+            "origin_folio": stable_note["origin_folio"],
+            "target_shipout_index": stable_note["target_shipout_index"],
+            "target_folio": pages[stable_note["target_shipout_index"]]["folio"],
+            "bbox_sp": list(expected_bbox),
+            "semantic_digest": stable_note["semantic_digest"],
+            "report_depth": stable_note["report_depth"],
+        }
+        for field, expected in expected_fields.items():
+            if ledger_note[field] != expected:
+                _reject(f"ledger note {note_id} has incoherent {field}")
+        if stable_note["requires_marker"] and not ledger_note["requires_marker"]:
+            _reject(f"ledger note {note_id} drops a stable required marker")
+
+    _run_qpdf_check(pdf_file, runner=runner, environment=environment)
+    _check_extracted_text(
+        pdf_file,
+        stable["variant"],
+        runner=runner,
+        environment=environment,
+    )
+    try:
+        with pikepdf.Pdf.open(pdf_file) as pdf:
+            _check_pdf_page_sequence(pdf, stable)
+            _check_pdf_text_operators(pdf, stable["variant"])
+            frames = [
+                _page_frame(page, page_index)
+                for page_index, page in enumerate(pdf.pages, start=1)
+            ]
+            for page_index, (frame, stable_page) in enumerate(
+                zip(frames, stable["pages"], strict=True), start=1
+            ):
+                crop, user_unit = frame
+                dimensions_sp = (
+                    (crop[2] - crop[0]) * user_unit * BP_TO_SP_EXACT,
+                    (crop[3] - crop[1]) * user_unit * BP_TO_SP_EXACT,
+                )
+                expected_dimensions = (
+                    stable_page["page_width_sp"],
+                    stable_page["page_height_sp"],
+                )
+                if any(
+                    abs(actual - expected) > MARGIN_GEOMETRY_TOLERANCE_SP
+                    for actual, expected in zip(
+                        dimensions_sp, expected_dimensions, strict=True
+                    )
+                ):
+                    _reject(f"page {page_index} CropBox differs from stable geometry")
+
+            forms = _margin_forms(pdf)
+            _check_form_margin_tags(forms)
+            occurrences, anchors = _marked_occurrences(pdf)
+            rendered = _rendered_margin_occurrences(pdf)
+            occurrence_counts = Counter(item["note_id"] for item in occurrences)
+            rendered_counts = Counter(item["note_id"] for item in rendered)
+            if set(occurrence_counts) != set(stable_ids) or set(rendered_counts) != set(
+                stable_ids
+            ):
+                _reject("rendered PDF note IDs differ from stable capture IDs")
+            if any(occurrence_counts[note_id] != 1 for note_id in stable_ids) or any(
+                rendered_counts[note_id] != 1 for note_id in stable_ids
+            ):
+                _reject("each captured margin note must render exactly once")
+            encountered_order = [
+                (item["order"], item["note_id"]) for item in occurrences
+            ]
+            expected_order = [
+                (note["global_order"], note["id"]) for note in stable_notes
+            ]
+            if encountered_order != expected_order:
+                _reject("rendered margin note order differs from stable global order")
+            anchor_counts = Counter(item["note_id"] for item in anchors)
+            if set(anchor_counts) - set(stable_ids):
+                _reject("an anchor exists without a captured note")
+            for anchor in anchors:
+                stable_note = stable_by_id[anchor["note_id"]]
+                if anchor["order"] != stable_note["global_order"]:
+                    _reject(f"rendered anchor {anchor['note_id']} has the wrong order")
+                if anchor["page_index"] != stable_note["origin_shipout_index"]:
+                    _reject(f"rendered anchor {anchor['note_id']} is on the wrong page")
+
+            rendered_by_id = {item["note_id"]: item for item in rendered}
+            occurrence_by_id = {item["note_id"]: item for item in occurrences}
+            actual_bboxes: dict[str, tuple[Fraction, Fraction, Fraction, Fraction]] = {}
+            rendered_projection = []
+            for note_id in stable_ids:
+                ledger_note = ledger_by_id[note_id]
+                occurrence = occurrence_by_id[note_id]
+                rendered_occurrence = rendered_by_id[note_id]
+                form = rendered_occurrence["form"]
+                if rendered_occurrence["page_index"] != ledger_note[
+                    "target_shipout_index"
+                ]:
+                    _reject(f"rendered note {note_id} is on the wrong page")
+                if form.objgen[0] != ledger_note["form_xref"]:
+                    _reject(f"rendered note {note_id} references the wrong Form XObject")
+                if _pdf_exact_string(form.get("/NXMarginID"), "Form /NXMarginID") != note_id:
+                    _reject(f"Form identity differs for {note_id}")
+                if _pdf_exact_string(form.get("/NXMarginRole"), "Form /NXMarginRole") != ledger_note[
+                    "role"
+                ]:
+                    _reject(f"Form role differs for {note_id}")
+                if _pdf_exact_integer(form.get("/NXMarginOrder"), "Form /NXMarginOrder") != ledger_note[
+                    "global_order"
+                ]:
+                    _reject(f"Form order differs for {note_id}")
+                if _bbox_sp(
+                    occurrence["properties"].get("/BBoxSP"),
+                    f"NXMarginNote {note_id} /BBoxSP",
+                ) != tuple(ledger_note["bbox_sp"]):
+                    _reject(f"NXMarginNote {note_id} /BBoxSP differs from ledger")
+                expected_properties: tuple[tuple[str, Any], ...] = (
+                    ("/Role", ledger_note["role"]),
+                    ("/Order", ledger_note["global_order"]),
+                    ("/OriginPage", ledger_note["origin_shipout_index"]),
+                    ("/OriginFolio", ledger_note["origin_folio"]),
+                    ("/TargetPage", ledger_note["target_shipout_index"]),
+                    ("/TargetFolio", ledger_note["target_folio"]),
+                    ("/ReportDepth", ledger_note["report_depth"]),
+                    ("/RequiresMarker", ledger_note["requires_marker"]),
+                )
+                for key, expected in expected_properties:
+                    actual = occurrence["properties"].get(key)
+                    if isinstance(expected, bool):
+                        actual = _pdf_boolean(actual, f"NXMarginNote {note_id} {key}")
+                    elif isinstance(expected, int):
+                        actual = _pdf_exact_integer(
+                            actual, f"NXMarginNote {note_id} {key}"
+                        )
+                    else:
+                        actual = _pdf_exact_string(
+                            actual, f"NXMarginNote {note_id} {key}"
+                        )
+                    if actual != expected:
+                        _reject(f"NXMarginNote {note_id} has incoherent {key}")
+                if anchor_counts[note_id] != ledger_note["anchor_count"]:
+                    _reject(f"rendered note {note_id} has an incoherent anchor count")
+                try:
+                    stream_digest = _sha256_bytes(form.read_bytes())
+                except pikepdf.PdfError as exc:
+                    raise MarginLedgerError(f"cannot decode Form for {note_id}: {exc}") from exc
+                if stream_digest != ledger_note["rendered_stream_digest"]:
+                    _reject(f"rendered stream digest differs for {note_id}")
+                rendered_projection.append(
+                    {"note_id": note_id, "rendered_stream_digest": stream_digest}
+                )
+                frame = frames[rendered_occurrence["page_index"] - 1]
+                actual_bboxes[note_id] = _canonical_rendered_bbox_sp(
+                    rendered_occurrence, *frame
+                )
+            if contract.canonical_digest(rendered_projection) != ledger[
+                "rendered_stream_digest"
+            ]:
+                _reject("aggregate rendered stream digest differs from ledger")
+            if set(forms) != {ledger_by_id[note_id]["form_xref"] for note_id in stable_ids}:
+                _reject("marginal Form inventory is not bijective with ledger notes")
+
+            for page_index in range(1, len(stable["pages"]) + 1):
+                page_note_ids = [
+                    note_id
+                    for note_id in stable_ids
+                    if rendered_by_id[note_id]["page_index"] == page_index
+                ]
+                for position, note_id in enumerate(page_note_ids):
+                    for other_id in page_note_ids[position + 1 :]:
+                        if _rectangles_intersect(
+                            actual_bboxes[note_id], actual_bboxes[other_id]
+                        ):
+                            _reject(f"rendered notes {note_id} and {other_id} intersect")
+                vertically_sorted = sorted(
+                    page_note_ids,
+                    key=lambda note_id: (
+                        actual_bboxes[note_id][1],
+                        ledger_by_id[note_id]["global_order"],
+                        note_id.encode("utf-8"),
+                    ),
+                )
+                for first_id, second_id in zip(
+                    vertically_sorted, vertically_sorted[1:]
+                ):
+                    gap = actual_bboxes[second_id][1] - actual_bboxes[first_id][3]
+                    if gap < MARGIN_GAP_SP:
+                        _reject(
+                            f"rendered notes {first_id} and {second_id} "
+                            "have less than 6pt vertical gap"
+                        )
+                stable_page = pages[page_index]
+                safe = stable_page["safe_rect"]
+                safe_box = (
+                    Fraction(safe["left_sp"]),
+                    Fraction(safe["top_sp"]),
+                    Fraction(safe["right_sp"]),
+                    Fraction(safe["bottom_sp"]),
+                )
+                for note_id in page_note_ids:
+                    box = actual_bboxes[note_id]
+                    if (
+                        box[0] < safe_box[0] - MARGIN_GEOMETRY_TOLERANCE_SP
+                        or box[1] < safe_box[1] - MARGIN_GEOMETRY_TOLERANCE_SP
+                        or box[2] > safe_box[2] + MARGIN_GEOMETRY_TOLERANCE_SP
+                        or box[3] > safe_box[3] + MARGIN_GEOMETRY_TOLERANCE_SP
+                    ):
+                        _reject(f"rendered note {note_id} escapes the effective outer rail")
+                    for obstacle in stable_page["obstacles"]:
+                        obstacle_box = (
+                            Fraction(obstacle["left_sp"]),
+                            Fraction(obstacle["top_sp"]),
+                            Fraction(obstacle["right_sp"]),
+                            Fraction(obstacle["bottom_sp"]),
+                        )
+                        if _rectangles_intersect(box, obstacle_box):
+                            _reject(
+                                f"rendered note {note_id} intersects obstacle "
+                                f"{obstacle['id']}"
+                            )
+                    expected_box = ledger_by_id[note_id]["bbox_sp"]
+                    if any(
+                        abs(actual - Fraction(expected))
+                        > MARGIN_GEOMETRY_TOLERANCE_SP
+                        for actual, expected in zip(box, expected_box, strict=True)
+                    ):
+                        _reject(
+                            f"rendered note {note_id} differs by more than 1sp "
+                            "from ledger coordinates"
+                        )
+    except pikepdf.PdfError as exc:
+        raise MarginLedgerError(f"cannot inspect PDF: {exc}") from exc
+
+    _check_poppler_cropboxes(
+        pdf_file,
+        frames,
+        runner=runner,
+        environment=environment,
+    )
+    return MarginVerificationResult(
+        passed=True,
+        variant=stable["variant"],
+        page_count=len(stable["pages"]),
+        note_count=len(stable_notes),
+        qpdf_checked=True,
+        poppler_checked=True,
+        capture_inventory_digest=capture_digest,
+        stable_layout_digest=stable_digest,
+        ledger_digest=contract.canonical_digest(ledger),
+    )
 
 
 def write_margin_ledger(

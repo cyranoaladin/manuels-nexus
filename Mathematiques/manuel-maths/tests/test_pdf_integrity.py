@@ -1,5 +1,6 @@
 import shutil
 import sys
+import builtins
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -101,11 +102,187 @@ def test_verify_pdf_accepts_explicit_runner_and_copied_environment(tmp_path):
                 "capture_output": True,
                 "text": True,
                 "check": True,
+                "timeout": 20,
                 "env": environment,
             },
         )
     ]
     assert calls[0][1]["env"] is not environment
+
+
+def test_margin_proof_mode_is_backward_compatible_but_fails_closed_when_required(
+    tmp_path, capsys
+):
+    import pdf_integrity
+
+    pdf = tmp_path / "manual.pdf"
+    log = tmp_path / "manual.log"
+    pdf.write_bytes(b"%PDF fixture")
+    log.write_text("", encoding="utf-8")
+
+    def runner(_command, **_kwargs):
+        return SimpleNamespace(
+            returncode=0,
+            stdout=(
+                "name type emb sub uni object ID\n"
+                "--------------------------------\n"
+                "Fixture Type1 yes yes yes 1 0\n"
+            ),
+            stderr="",
+        )
+
+    assert pdf_integrity.verify_pdf(pdf, log, runner=runner) == 0
+    assert (
+        pdf_integrity.verify_pdf(
+            pdf,
+            log,
+            require_margin_proof=True,
+            runner=runner,
+        )
+        == 1
+    )
+    assert "preuve marginale requise mais absente" in capsys.readouterr().out
+
+
+def test_margin_proof_rejects_a_missing_ledger(tmp_path, capsys):
+    import pdf_integrity
+
+    pdf = tmp_path / "manual.pdf"
+    log = tmp_path / "manual.log"
+    pdf.write_bytes(b"%PDF fixture")
+    log.write_text("", encoding="utf-8")
+    evidence = pdf_integrity.MarginEvidence(
+        capture_inventory=tmp_path / "capture.json",
+        stable_layout=tmp_path / "stable.json",
+        ledger=tmp_path / "missing-ledger.json",
+    )
+    evidence.capture_inventory.write_text("{}", encoding="utf-8")
+    evidence.stable_layout.write_text("{}", encoding="utf-8")
+
+    def runner(_command, **_kwargs):
+        return SimpleNamespace(
+            returncode=0,
+            stdout=(
+                "name type emb sub uni object ID\n"
+                "--------------------------------\n"
+                "Fixture Type1 yes yes yes 1 0\n"
+            ),
+            stderr="",
+        )
+
+    assert (
+        pdf_integrity.verify_pdf(
+            pdf,
+            log,
+            require_margin_proof=True,
+            margin_evidence=evidence,
+            runner=runner,
+        )
+        == 1
+    )
+    assert "ledger marginal absent" in capsys.readouterr().out
+
+
+def test_margin_proof_fails_closed_when_pikepdf_parser_is_unavailable(
+    tmp_path, monkeypatch, capsys
+):
+    import pdf_integrity
+
+    pdf = tmp_path / "manual.pdf"
+    log = tmp_path / "manual.log"
+    pdf.write_bytes(b"%PDF fixture")
+    log.write_text("", encoding="utf-8")
+    paths = [tmp_path / name for name in ("capture.json", "stable.json", "ledger.json")]
+    for path in paths:
+        path.write_text("{}", encoding="utf-8")
+    evidence = pdf_integrity.MarginEvidence(*paths)
+    sys.modules.pop("margin_ledger", None)
+    original_import = builtins.__import__
+
+    def unavailable_import(name, *args, **kwargs):
+        if name == "pikepdf":
+            raise ModuleNotFoundError("pikepdf intentionally unavailable")
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", unavailable_import)
+
+    def runner(_command, **_kwargs):
+        return SimpleNamespace(
+            returncode=0,
+            stdout=(
+                "name type emb sub uni object ID\n"
+                "--------------------------------\n"
+                "Fixture Type1 yes yes yes 1 0\n"
+            ),
+            stderr="",
+        )
+
+    assert (
+        pdf_integrity.verify_pdf(
+            pdf,
+            log,
+            require_margin_proof=True,
+            margin_evidence=evidence,
+            runner=runner,
+        )
+        == 1
+    )
+    assert "parseur PDF pikepdf indisponible" in capsys.readouterr().out
+
+
+def test_margin_proof_passes_runner_environment_and_twenty_second_timeout(
+    tmp_path, monkeypatch
+):
+    import pdf_integrity
+
+    pdf = tmp_path / "manual.pdf"
+    log = tmp_path / "manual.log"
+    pdf.write_bytes(b"%PDF fixture")
+    log.write_text("", encoding="utf-8")
+    evidence = pdf_integrity.MarginEvidence({}, {}, {})
+    environment = {"PATH": "/controlled/bin"}
+    proof_calls = []
+
+    fake_margin_ledger = SimpleNamespace(
+        MarginLedgerError=ValueError,
+        verify_margin_layout=lambda *args, **kwargs: (
+            proof_calls.append((args, kwargs))
+            or SimpleNamespace(passed=True, variant="eleve", note_count=2)
+        ),
+    )
+    monkeypatch.setitem(sys.modules, "margin_ledger", fake_margin_ledger)
+    runner_calls = []
+
+    def runner(command, **kwargs):
+        runner_calls.append((command, kwargs))
+        return SimpleNamespace(
+            returncode=0,
+            stdout=(
+                "name type emb sub uni object ID\n"
+                "--------------------------------\n"
+                "Fixture Type1 yes yes yes 1 0\n"
+            ),
+            stderr="",
+        )
+
+    assert (
+        pdf_integrity.verify_pdf(
+            pdf,
+            log,
+            require_margin_proof=True,
+            margin_evidence=evidence,
+            runner=runner,
+            environment=environment,
+        )
+        == 0
+    )
+    assert runner_calls[0][1]["timeout"] == 20
+    assert proof_calls == [
+        (
+            (pdf, {}, {}, {}),
+            {"runner": runner, "environment": environment},
+        )
+    ]
 
 
 _HAS_LUALATEX = shutil.which("lualatex") is not None
