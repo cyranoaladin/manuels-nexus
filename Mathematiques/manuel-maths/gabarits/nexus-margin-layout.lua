@@ -558,12 +558,13 @@ local function validate_layout(layout, label)
     if require_complete and target_index_is_null then
       fail(note_path, "stable note has no target")
     end
-    if note.effective_height_sp
-        ~= note.base_height_sp + note.report_decoration_height_sp then
-      fail(note_path .. ".effective_height_sp", "incoherent effective height")
+    local expected_effective_height = note.base_height_sp
+    if note.report_depth > 0 then
+      expected_effective_height = expected_effective_height
+        + note.report_decoration_height_sp
     end
-    if note.report_depth == 0 and note.report_decoration_height_sp ~= 0 then
-      fail(note_path, "unreported note has report decoration")
+    if note.effective_height_sp ~= expected_effective_height then
+      fail(note_path .. ".effective_height_sp", "incoherent effective height")
     end
     if note.report_depth > 0 then
       if note.report_decoration_height_sp <= 0 then
@@ -629,6 +630,41 @@ local function new_array_like(array)
   return setmetatable({}, { __nexus_json_type = "array" })
 end
 
+local function skip_obstacles(y_sp, height_sp, obstacles)
+  local candidate = y_sp
+  local changed = true
+  while changed do
+    changed = false
+    for _, obstacle in ipairs(obstacles) do
+      local bottom = candidate + height_sp
+      if candidate < obstacle.bottom_sp and bottom > obstacle.top_sp then
+        candidate = obstacle.bottom_sp + GAP_SP
+        changed = true
+      end
+    end
+  end
+  return candidate
+end
+
+local function longest_fitting_prefix(notes, safe_bottom_sp)
+  local keep = 0
+  for index, note in ipairs(notes) do
+    if note.target_y_sp + note.effective_height_sp <= safe_bottom_sp then
+      keep = index
+    else
+      break
+    end
+  end
+  return keep
+end
+
+local function effective_height(note)
+  if note.report_depth > 0 then
+    return note.base_height_sp + note.report_decoration_height_sp
+  end
+  return note.base_height_sp
+end
+
 function M.solve(current_layout, previous_layout_or_nil)
   validate_layout(current_layout, "current")
   if previous_layout_or_nil ~= nil then
@@ -642,33 +678,33 @@ function M.solve(current_layout, previous_layout_or_nil)
   end)
 
   local notes_by_id = {}
+  local minimum_target_by_id = {}
   for _, note in ipairs(result.notes) do
     notes_by_id[note.id] = note
-  end
-  local carry_target = {}
-  for _, page in ipairs(result.pages) do
-    for _, note_id in ipairs(page.carry_in_note_ids) do
-      carry_target[note_id] = page.shipout_index
+    if json_container_type(note.target_shipout_index) == "null" then
+      minimum_target_by_id[note.id] = note.origin_shipout_index
+    else
+      minimum_target_by_id[note.id] = note.target_shipout_index
     end
+    note.effective_height_sp = effective_height(note)
   end
 
-  for _, page in ipairs(result.pages) do
+  local incoming_by_page = {}
+  for page_index = 1, #result.pages do
+    incoming_by_page[page_index] = {}
+  end
+
+  for page_index, page in ipairs(result.pages) do
     local cursor = page.safe_rect.top_sp
     local placed_ids = new_array_like(page.placed_note_ids)
-    local carry = {}
-    for _, note_id in ipairs(page.carry_in_note_ids) do
-      carry[#carry + 1] = notes_by_id[note_id]
-    end
+    local reported_ids = new_array_like(page.reported_note_ids)
+    local carry_ids = new_array_like(page.carry_in_note_ids)
+    local carry = incoming_by_page[page_index]
     table.sort(carry, order_less)
-    page.carry_in_note_ids = new_array_like(page.carry_in_note_ids)
     for _, note in ipairs(carry) do
-      page.carry_in_note_ids[#page.carry_in_note_ids + 1] = note.id
-      if note.target_shipout_index == page.shipout_index then
-        note.target_y_sp = cursor
-        cursor = cursor + note.effective_height_sp + GAP_SP
-        placed_ids[#placed_ids + 1] = note.id
-      end
+      carry_ids[#carry_ids + 1] = note.id
     end
+    page.carry_in_note_ids = carry_ids
 
     local native = {}
     for _, note_id in ipairs(page.native_note_ids) do
@@ -678,14 +714,75 @@ function M.solve(current_layout, previous_layout_or_nil)
     page.native_note_ids = new_array_like(page.native_note_ids)
     for _, note in ipairs(native) do
       page.native_note_ids[#page.native_note_ids + 1] = note.id
-      if not carry_target[note.id] then
-        note.target_shipout_index = page.shipout_index
-        note.target_y_sp = math.max(note.origin_y_sp, cursor)
-        cursor = note.target_y_sp + note.effective_height_sp + GAP_SP
-        placed_ids[#placed_ids + 1] = note.id
+    end
+
+    local candidates = {}
+    for _, note in ipairs(carry) do
+      candidates[#candidates + 1] = { note = note, is_carry = true }
+    end
+    for _, note in ipairs(native) do
+      candidates[#candidates + 1] = { note = note, is_carry = false }
+    end
+
+    local placements = {}
+    local forced_suffix = false
+    for _, candidate in ipairs(candidates) do
+      local note = candidate.note
+      local y_sp
+      if forced_suffix or minimum_target_by_id[note.id] > page.shipout_index then
+        forced_suffix = true
+        y_sp = page.safe_rect.bottom_sp + 1
+      else
+        y_sp = cursor
+        if not candidate.is_carry then
+          y_sp = math.max(note.origin_y_sp, y_sp)
+        end
+        y_sp = skip_obstacles(y_sp, note.effective_height_sp, page.obstacles)
+        cursor = y_sp + note.effective_height_sp + GAP_SP
+      end
+      placements[#placements + 1] = {
+        note = note,
+        target_y_sp = y_sp,
+        effective_height_sp = note.effective_height_sp,
+      }
+    end
+
+    local keep = longest_fitting_prefix(placements, page.safe_rect.bottom_sp)
+    for index = 1, keep do
+      local placement = placements[index]
+      local note = placement.note
+      note.target_shipout_index = page.shipout_index
+      note.target_y_sp = placement.target_y_sp
+      note.report_depth = page.shipout_index - note.origin_shipout_index
+      note.effective_height_sp = effective_height(note)
+      placed_ids[#placed_ids + 1] = note.id
+    end
+
+    if keep < #placements then
+      if page_index == #result.pages then
+        local note = placements[keep + 1].note
+        fail(
+          "result.notes[" .. note.id .. "].target_y_sp",
+          "margin-report-impossible: no following page"
+        )
+      end
+      local next_incoming = incoming_by_page[page_index + 1]
+      for index = keep + 1, #placements do
+        local note = placements[index].note
+        reported_ids[#reported_ids + 1] = note.id
+        next_incoming[#next_incoming + 1] = note
+        if json_container_type(note.target_shipout_index) == "null"
+            or note.target_shipout_index <= page.shipout_index then
+          note.target_shipout_index = page.shipout_index + 1
+          note.report_depth = note.report_depth + 1
+        end
+        note.target_y_sp = page.safe_rect.top_sp
+        note.requires_marker = true
+        note.effective_height_sp = effective_height(note)
       end
     end
     page.placed_note_ids = placed_ids
+    page.reported_note_ids = reported_ids
   end
   validate_layout(result, "result")
   return result

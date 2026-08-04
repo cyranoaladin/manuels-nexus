@@ -98,6 +98,65 @@ def _layout_whose_stack_overflows_safe_rect() -> dict[str, object]:
     return layout
 
 
+def _empty_page_from(
+    template: dict[str, object],
+    shipout_index: int,
+    *,
+    top_pt: int = 10,
+    bottom_pt: int = 190,
+) -> dict[str, object]:
+    page = copy.deepcopy(template)
+    page.update(
+        {
+            "shipout_index": shipout_index,
+            "folio": str(shipout_index),
+            "rail_side": "right" if shipout_index % 2 else "left",
+            "native_note_ids": [],
+            "carry_in_note_ids": [],
+            "placed_note_ids": [],
+            "reported_note_ids": [],
+            "obstacles": [],
+        }
+    )
+    page["safe_rect"]["top_sp"] = top_pt * SP_PER_PT
+    page["safe_rect"]["bottom_sp"] = bottom_pt * SP_PER_PT
+    return page
+
+
+def _cartouche_cascade_layout(report_depth: int) -> dict[str, object]:
+    layout = _layout_with_identical_anchors()
+    blocker, reported = layout["notes"][:2]
+    blocker.update(
+        {
+            "id": "blocker",
+            "global_order": 1,
+            "origin_y_sp": 10 * SP_PER_PT,
+            "base_height_sp": 50 * SP_PER_PT,
+            "effective_height_sp": 50 * SP_PER_PT,
+        }
+    )
+    reported.update(
+        {
+            "id": "reported",
+            "global_order": 2,
+            "origin_y_sp": 10 * SP_PER_PT,
+            "base_height_sp": 30 * SP_PER_PT,
+            "report_decoration_height_sp": 10 * SP_PER_PT,
+            "effective_height_sp": 30 * SP_PER_PT,
+        }
+    )
+    layout["notes"] = [blocker, reported]
+    first_page = layout["pages"][0]
+    first_page["native_note_ids"] = ["blocker", "reported"]
+    first_page["safe_rect"]["bottom_sp"] = 95 * SP_PER_PT
+    pages = [first_page]
+    for page_index in range(2, report_depth + 2):
+        bottom_pt = 60 if page_index == report_depth + 1 else 45
+        pages.append(_empty_page_from(first_page, page_index, bottom_pt=bottom_pt))
+    layout["pages"] = pages
+    return layout
+
+
 def test_identical_anchors_are_placed_top_down(tmp_path: Path) -> None:
     source = tmp_path / "layout.json"
     output = tmp_path / "solved.json"
@@ -749,40 +808,69 @@ assert(count == 1, "expected exactly one public API entry")
     assert result.returncode == 0, result.stderr
 
 
+def test_shortest_suffix_is_reported_without_reversing_order(tmp_path: Path) -> None:
+    layout = _layout_with_identical_anchors()
+    note_template = layout["notes"][0]
+    notes = []
+    for global_order in range(1, 5):
+        note = copy.deepcopy(note_template)
+        note.update(
+            {
+                "id": f"n{global_order}",
+                "global_order": global_order,
+                "origin_y_sp": 10 * SP_PER_PT,
+                "base_height_sp": 20 * SP_PER_PT,
+                "effective_height_sp": 20 * SP_PER_PT,
+                "semantic_digest": f"sha256:{global_order:064x}",
+            }
+        )
+        notes.append(note)
+    notes[-1]["report_decoration_height_sp"] = 5 * SP_PER_PT
+    layout["notes"] = notes
+    first_page = layout["pages"][0]
+    first_page["native_note_ids"] = ["n1", "n2", "n3", "n4"]
+    first_page["safe_rect"]["bottom_sp"] = 100 * SP_PER_PT
+    layout["pages"] = [first_page, _empty_page_from(first_page, 2)]
+    source = tmp_path / "suffix-input.json"
+    output = tmp_path / "suffix-output.json"
+    _write_json(source, layout)
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode == 0, result.stderr
+    solved = json.loads(output.read_text(encoding="utf-8"))
+    _load_margin_contract().validate_margin_layout(solved)
+    first, second = solved["pages"]
+    assert first["placed_note_ids"] == ["n1", "n2", "n3"]
+    assert first["reported_note_ids"] == ["n4"]
+    assert second["carry_in_note_ids"] == ["n4"]
+    assert second["placed_note_ids"] == ["n4"]
+    notes_by_id = {note["id"]: note for note in solved["notes"]}
+    assert notes_by_id["n4"]["target_y_sp"] == second["safe_rect"]["top_sp"]
+    assert notes_by_id["n4"]["report_depth"] == 1
+
+
 def test_carry_in_starts_at_safe_top_and_precedes_native_notes(tmp_path: Path) -> None:
     layout = _layout_with_identical_anchors()
     carried = layout["notes"][0]
     carried["id"] = "carried"
     carried["global_order"] = 1
-    carried["origin_shipout_index"] = 1
-    carried["target_shipout_index"] = 2
-    carried["target_y_sp"] = 15 * SP_PER_PT
+    carried["origin_y_sp"] = 10 * SP_PER_PT
+    carried["base_height_sp"] = 25 * SP_PER_PT
     carried["report_decoration_height_sp"] = 5 * SP_PER_PT
-    carried["effective_height_sp"] = 35 * SP_PER_PT
-    carried["report_depth"] = 1
-    carried["requires_marker"] = True
+    carried["effective_height_sp"] = 25 * SP_PER_PT
     native = layout["notes"][1]
     native["id"] = "native"
     native["global_order"] = 2
     native["origin_shipout_index"] = 2
     native["origin_folio"] = "2"
-    native["target_shipout_index"] = 2
-    native["target_y_sp"] = 56 * SP_PER_PT
+    native["origin_y_sp"] = 20 * SP_PER_PT
     layout["notes"] = [carried, native]
     first_page = layout["pages"][0]
     first_page["native_note_ids"] = ["carried"]
-    first_page["reported_note_ids"] = ["carried"]
-    second_page = {
-        **first_page,
-        "shipout_index": 2,
-        "folio": "2",
-        "rail_side": "left",
-        "native_note_ids": ["native"],
-        "carry_in_note_ids": ["carried"],
-        "placed_note_ids": ["carried", "native"],
-        "reported_note_ids": [],
-        "safe_rect": {**first_page["safe_rect"], "top_sp": 15 * SP_PER_PT},
-    }
+    first_page["safe_rect"]["bottom_sp"] = 30 * SP_PER_PT
+    second_page = _empty_page_from(first_page, 2, top_pt=15)
+    second_page["native_note_ids"] = ["native"]
     layout["pages"] = [first_page, second_page]
     source = tmp_path / "input.json"
     output = tmp_path / "output.json"
@@ -796,7 +884,86 @@ def test_carry_in_starts_at_safe_top_and_precedes_native_notes(tmp_path: Path) -
     assert solved["pages"][1]["placed_note_ids"] == ["carried", "native"]
     notes = {note["id"]: note for note in solved["notes"]}
     assert notes["carried"]["target_y_sp"] == 15 * SP_PER_PT
-    assert notes["native"]["target_y_sp"] == 56 * SP_PER_PT
+    assert notes["native"]["target_y_sp"] == 51 * SP_PER_PT
+    assert notes["carried"]["report_depth"] == 1
+
+
+def test_middle_obstacle_pushes_candidate_below_bottom_plus_gap(
+    tmp_path: Path,
+) -> None:
+    layout = _layout_with_identical_anchors()
+    note = layout["notes"][0]
+    note.update(
+        {
+            "id": "obstacle-note",
+            "global_order": 1,
+            "origin_y_sp": 20 * SP_PER_PT,
+            "base_height_sp": 20 * SP_PER_PT,
+            "effective_height_sp": 20 * SP_PER_PT,
+        }
+    )
+    layout["notes"] = [note]
+    page = layout["pages"][0]
+    page["native_note_ids"] = ["obstacle-note"]
+    page["obstacles"] = [
+        {
+            "id": "middle-obstacle",
+            "left_sp": 80 * SP_PER_PT,
+            "top_sp": 25 * SP_PER_PT,
+            "right_sp": 95 * SP_PER_PT,
+            "bottom_sp": 45 * SP_PER_PT,
+        }
+    ]
+    source = tmp_path / "obstacle-input.json"
+    output = tmp_path / "obstacle-output.json"
+    _write_json(source, layout)
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode == 0, result.stderr
+    solved = json.loads(output.read_text(encoding="utf-8"))
+    _load_margin_contract().validate_margin_layout(solved)
+    solved_note = solved["notes"][0]
+    assert solved_note["target_y_sp"] == 51 * SP_PER_PT
+
+
+def test_report_cartouche_height_triggers_non_cumulative_three_page_cascade(
+    tmp_path: Path,
+) -> None:
+    depths = []
+    effective_heights = []
+    deepest = None
+    for expected_depth in (1, 2, 3):
+        source = tmp_path / f"cartouche-{expected_depth}-input.json"
+        output = tmp_path / f"cartouche-{expected_depth}-output.json"
+        layout = _cartouche_cascade_layout(expected_depth)
+        _write_json(source, layout)
+
+        result = _run_solver(source, output, cwd=tmp_path)
+
+        assert result.returncode == 0, result.stderr
+        solved = json.loads(output.read_text(encoding="utf-8"))
+        _load_margin_contract().validate_margin_layout(solved)
+        reported = next(note for note in solved["notes"] if note["id"] == "reported")
+        depths.append(reported["report_depth"])
+        effective_heights.append(reported["effective_height_sp"])
+        if expected_depth == 3:
+            deepest = solved
+
+    assert depths == [1, 2, 3]
+    assert effective_heights == [40 * SP_PER_PT] * 3
+    assert deepest is not None
+    assert [page["reported_note_ids"] for page in deepest["pages"][:3]] == [
+        ["reported"],
+        ["reported"],
+        ["reported"],
+    ]
+    assert [page["carry_in_note_ids"] for page in deepest["pages"][1:]] == [
+        ["reported"],
+        ["reported"],
+        ["reported"],
+    ]
+    assert deepest["pages"][3]["placed_note_ids"] == ["reported"]
 
 
 def test_depth_two_report_is_placed_only_on_its_final_target_page(
