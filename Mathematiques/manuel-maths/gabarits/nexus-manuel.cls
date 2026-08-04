@@ -143,16 +143,17 @@
 \renewcommand*{\raggedrightmarginnote}{\raggedright}
 
 \newcommand{\margeAppui}[1]{%
-  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont
+  \nxMarginRailNote{appui}{\sffamily\fontsize{7.5}{10}\selectfont
     \color{encre!50}\rule[-0.5ex]{0.4pt}{2.5ex}\kern4pt #1}%
 }
 \newcommand{\commentaireMarge}[1]{%
-  \marginnote{\sffamily\fontsize{7.5}{10}\selectfont\color{chapcolor}#1}%
+  \nxMarginRailNote{commentaire}{%
+    \sffamily\fontsize{7.5}{10}\selectfont\color{chapcolor}#1}%
 }
 % Vocabulaire en marge (kit v2)
 \newcommand{\vocab}[2]{%
   \textcolor{chapcolor}{\textbf{#1}}%
-  \marginnote{\textcolor{chapcolor}{\rule{2.6cm}{2pt}}\\[2pt]
+  \nxMarginRailNote{vocab}{\textcolor{chapcolor}{\rule{2.6cm}{2pt}}\\[2pt]
     {\titrefont\color{chapcolor}#1}\\[2pt]\itshape\small #2}}
 
 % ===========================================================================
@@ -312,6 +313,7 @@
 \RequirePackage{graphicx}
 \newif\ifnxVersionProfesseur
 \nxVersionProfesseurtrue
+\input{gabarits/nexus-margin-rail.tex}
 
 % Pictogrammes parcours (redéfinis par nexus-icons.tex si présent)
 \newcommand{\parcoursUn}{}
@@ -329,8 +331,12 @@
   \ifnum#2=1\relax\parcoursUn\fi
   \ifnum#2=2\relax\parcoursDeux\fi
   \ifnum#2=3\relax\parcoursTrois\fi
-  \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}%
-    \ifnxVersionProfesseur\texttt{#1}\\\fi\icnChrono~#3~min}%
+  \nxMarginRailNote{chrono}{%
+    \sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\icnChrono~#3~min}%
+  \ifnxVersionProfesseur
+    \nxMarginRailNote{professor-id}{%
+      \sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
+  \fi
   \par\nopagebreak\smallskip
 }{\par\medskip}
 
@@ -340,7 +346,8 @@
     rounded corners=2pt, inner xsep=7pt, inner ysep=3.5pt](n)
     {\titrefont\small Corrigé};%
   \ifnxVersionProfesseur
-    \marginnote{\sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
+    \nxMarginRailNote{professor-id}{%
+      \sffamily\fontsize{6.5}{8}\selectfont\color{encre!50}\texttt{#1}}%
   \fi
   \par\nopagebreak\smallskip
 }{\par\medskip}

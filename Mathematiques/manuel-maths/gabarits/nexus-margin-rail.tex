@@ -1,0 +1,81 @@
+% NEXUS-MARGIN-COMPOSITOR-SCHEMA:1
+% Unique TeX adapter for managed marginal annotations.
+\RequirePackage{luatexbase}
+\newcounter{nxMarginGlobalOrder}
+\newbox\nxMarginCaptureBox
+
+\newcommand{\nxMarginEightDigits}[1]{%
+  \ifnum#1<10000000 0\fi
+  \ifnum#1<1000000 0\fi
+  \ifnum#1<100000 0\fi
+  \ifnum#1<10000 0\fi
+  \ifnum#1<1000 0\fi
+  \ifnum#1<100 0\fi
+  \ifnum#1<10 0\fi
+  \number#1}
+\newcommand{\nxMarginVariant}{professeur}
+\newcommand{\nxMarginStableId}[2]{%
+  nxm:\nxMarginVariant:#1:\nxMarginEightDigits{#2}}
+
+\directlua{%
+  local path = kpse.find_file("nexus-margin-shipout.lua", "lua")
+    or "gabarits/nexus-margin-shipout.lua"
+  local chunk, load_error = loadfile(path)
+  if not chunk then
+    error("cannot load nexus-margin-shipout.lua: " .. tostring(load_error))
+  end
+  nexus_margin = chunk()
+}
+
+\AtBeginDocument{%
+  \ifnxVersionProfesseur
+    \gdef\nxMarginVariant{professeur}%
+  \else
+    \gdef\nxMarginVariant{eleve}%
+  \fi
+  \directlua{nexus_margin.configure({
+    variant = "\luaescapestring{\nxMarginVariant}",
+    page_width_sp = \number\paperwidth,
+    page_height_sp = \number\paperheight,
+    rail_width_sp = \number\marginparwidth
+  })}%
+}
+
+\newcommand{\nxMarginAnchorMaterial}[1]{%
+  \savepos
+  \directlua{nexus_margin.write_anchor_whatsit(
+    "\luaescapestring{#1}")}%
+  \edef\nxMarginAnchorLua{%
+    nexus_margin.resolve_anchor("\luaescapestring{#1}")}%
+  \expandafter\latelua\expandafter{\nxMarginAnchorLua}%
+}
+
+\newcommand{\nxMarginDeferredAnchor}[1]{%
+  \ifhmode
+    \vadjust{\hbox to 0pt{\nxMarginAnchorMaterial{#1}\hss}}%
+  \else
+    \hbox to 0pt{\nxMarginAnchorMaterial{#1}\hss}%
+  \fi
+}
+
+\NewDocumentCommand\nxMarginRailNote{m m}{%
+  \stepcounter{nxMarginGlobalOrder}%
+  \edef\nxMarginCurrentId{%
+    \nxMarginStableId{#1}{\arabic{nxMarginGlobalOrder}}}%
+  \setbox\nxMarginCaptureBox=\vbox{%
+    \hsize=\marginparwidth
+    \linewidth=\hsize
+    #2}%
+  \directlua{nexus_margin.capture_box(
+    "\luaescapestring{\nxMarginCurrentId}",
+    "\luaescapestring{#1}",
+    \number\value{nxMarginGlobalOrder},
+    \number\nxMarginCaptureBox)}%
+  \edef\nxMarginDeferredCall{%
+    \noexpand\nxMarginDeferredAnchor{\nxMarginCurrentId}}%
+  \nxMarginDeferredCall
+}
+
+\AddToHook{enddocument/afterlastpage}{%
+  \directlua{nexus_margin.finalize()}%
+}
