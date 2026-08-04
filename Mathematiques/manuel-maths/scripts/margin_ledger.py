@@ -291,9 +291,11 @@ def _run_qpdf_check(pdf_path: Path) -> None:
         _reject(f"qpdf rejected PDF: {(result.stdout + result.stderr).strip()}")
 
 
-def _marked_occurrences(pdf: pikepdf.Pdf) -> tuple[list[dict[str, Any]], Counter[str]]:
+def _marked_occurrences(
+    pdf: pikepdf.Pdf,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     notes: list[dict[str, Any]] = []
-    anchors: Counter[str] = Counter()
+    anchors: list[dict[str, Any]] = []
     for page_index, page in enumerate(pdf.pages, start=1):
         stack: list[dict[str, Any]] = []
         try:
@@ -315,12 +317,34 @@ def _marked_occurrences(pdf: pikepdf.Pdf) -> tuple[list[dict[str, Any]], Counter
                     ):
                         _reject(f"{tag} requires one inline property dictionary")
                     properties = operands[1]
-                    note_id = _pdf_string(properties.get("/ID"), f"{tag} /ID")
-                    order = _pdf_integer(properties.get("/Order"), f"{tag} /Order")
-                    record.update({"properties": properties, "note_id": note_id, "order": order})
                     if tag == "NXMarginAnchor":
-                        anchors[note_id] += 1
+                        property_keys = {str(key) for key in properties.keys()}
+                        if property_keys != {"/ID", "/Order"}:
+                            _reject("NXMarginAnchor has unexpected or missing properties")
+                        raw_note_id = properties.get("/ID")
+                        if not isinstance(raw_note_id, pikepdf.String):
+                            _reject("NXMarginAnchor /ID must be one PDF string")
+                        raw_order = properties.get("/Order")
+                        if isinstance(raw_order, bool) or not isinstance(raw_order, int):
+                            _reject("NXMarginAnchor /Order must be one PDF integer")
+                        record.update(
+                            {
+                                "properties": properties,
+                                "note_id": str(raw_note_id),
+                                "order": raw_order,
+                            }
+                        )
+                        anchors.append(record)
                     else:
+                        note_id = _pdf_string(properties.get("/ID"), f"{tag} /ID")
+                        order = _pdf_integer(properties.get("/Order"), f"{tag} /Order")
+                        record.update(
+                            {
+                                "properties": properties,
+                                "note_id": note_id,
+                                "order": order,
+                            }
+                        )
                         record.update(
                             {
                                 "page_index": page_index,
@@ -460,8 +484,9 @@ def reconstruct_margin_ledger(
     try:
         with pikepdf.Pdf.open(pdf_file) as pdf:
             _check_pdf_text_operators(pdf, stable["variant"])
-            occurrences, anchors = _marked_occurrences(pdf)
+            occurrences, anchor_occurrences = _marked_occurrences(pdf)
             occurrence_counts = Counter(item["note_id"] for item in occurrences)
+            anchors = Counter(item["note_id"] for item in anchor_occurrences)
             stable_ids = [note["id"] for note in stable_notes]
             if set(occurrence_counts) != set(stable_ids):
                 _reject("PDF note IDs differ from stable capture IDs")
@@ -472,6 +497,13 @@ def reconstruct_margin_ledger(
                 _reject(f"PDF note IDs are duplicated: {', '.join(sorted(duplicate_ids))}")
             if set(anchors) - set(stable_ids):
                 _reject("an anchor exists without a captured note")
+            for anchor in anchor_occurrences:
+                stable_note = stable_by_id[anchor["note_id"]]
+                if anchor["order"] != stable_note["global_order"]:
+                    _reject(
+                        f"NXMarginAnchor {anchor['note_id']} /Order differs "
+                        "from stable global_order"
+                    )
             by_id = {item["note_id"]: item for item in occurrences}
             entries = [
                 _entry_from_occurrence(by_id[note_id], stable_by_id[note_id], anchors[note_id], pages)

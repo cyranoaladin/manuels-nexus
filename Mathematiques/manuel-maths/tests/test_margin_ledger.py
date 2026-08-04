@@ -224,6 +224,24 @@ def _without_first_margin_anchor(instructions: list[Any]) -> list[Any]:
     return result
 
 
+def _with_first_margin_anchor_property(
+    instructions: list[Any], key: str, value: Any
+) -> list[Any]:
+    mutated = False
+    for operands, operator in instructions:
+        if (
+            not mutated
+            and str(operator) == "BDC"
+            and len(operands) == 2
+            and str(operands[0]) == "/NXMarginAnchor"
+        ):
+            operands[1][key] = value
+            mutated = True
+            break
+    assert mutated
+    return instructions
+
+
 def _first_margin_note_segment(instructions: list[Any]) -> list[Any]:
     segment: list[Any] = []
     collecting = False
@@ -488,6 +506,40 @@ Liens\nxMarginRailNote{appui}{%
         instructions = list(pikepdf.parse_content_stream(page))
         _replace_page_instructions(pdf, page, _without_first_margin_anchor(instructions))
         pdf.save(missing_anchor_pdf)
+
+    anchor_order_pdf = tmp_path / "mutated-anchor-order.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        page = pdf.pages[0]
+        instructions = list(pikepdf.parse_content_stream(page))
+        mutated = _with_first_margin_anchor_property(instructions, "/Order", 999)
+        _replace_page_instructions(pdf, page, mutated)
+        pdf.save(anchor_order_pdf)
+
+    with pytest.raises(ledger_module.MarginLedgerError):
+        ledger_module.reconstruct_margin_ledger(
+            anchor_order_pdf, build["capture"], build["stable"]
+        )
+
+    malformed_anchor_pdfs: list[Path] = []
+    for suffix, key, value in (
+        ("order-string", "/Order", pikepdf.String("1")),
+        ("order-multiple", "/Order", pikepdf.Array([1, 999])),
+        ("unexpected-key", "/Unexpected", 1),
+    ):
+        mutation = tmp_path / f"mutated-anchor-{suffix}.pdf"
+        with pikepdf.Pdf.open(build["pdf"]) as pdf:
+            page = pdf.pages[0]
+            instructions = list(pikepdf.parse_content_stream(page))
+            mutated = _with_first_margin_anchor_property(instructions, key, value)
+            _replace_page_instructions(pdf, page, mutated)
+            pdf.save(mutation)
+        malformed_anchor_pdfs.append(mutation)
+
+    for mutation in malformed_anchor_pdfs:
+        with pytest.raises(ledger_module.MarginLedgerError):
+            ledger_module.reconstruct_margin_ledger(
+                mutation, build["capture"], build["stable"]
+            )
 
     duplicate_note_pdf = tmp_path / "mutated-duplicate-note.pdf"
     with pikepdf.Pdf.open(build["pdf"]) as pdf:
