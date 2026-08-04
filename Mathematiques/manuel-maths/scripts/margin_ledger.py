@@ -444,19 +444,25 @@ def _check_expected_links(
         if len(matches) != 1:
             _reject("captured marginal link action or rectangle did not survive exactly")
         used.add(matches[0])
-    marginal_actual: set[int] = set()
+    marginal_actual: set[int] = set(used)
     for index, candidate in enumerate(actual):
         page = pages.get(candidate["page"])
         if page is None:
             continue
-        center_x = (candidate["rect"][0] + candidate["rect"][2]) / 2
-        center_y = (candidate["rect"][1] + candidate["rect"][3]) / 2
         safe = page["safe_rect"]
-        left = safe["left_sp"] / BP_TO_SP
-        right = safe["right_sp"] / BP_TO_SP
-        bottom = (page["page_height_sp"] - safe["bottom_sp"]) / BP_TO_SP
-        top = (page["page_height_sp"] - safe["top_sp"]) / BP_TO_SP
-        if left <= center_x <= right and bottom <= center_y <= top:
+        rail_rect = (
+            safe["left_sp"] / BP_TO_SP,
+            (page["page_height_sp"] - safe["bottom_sp"]) / BP_TO_SP,
+            safe["right_sp"] / BP_TO_SP,
+            (page["page_height_sp"] - safe["top_sp"]) / BP_TO_SP,
+        )
+        candidate_rect = candidate["rect"]
+        intersects_rail = max(candidate_rect[0], rail_rect[0]) < min(
+            candidate_rect[2], rail_rect[2]
+        ) and max(candidate_rect[1], rail_rect[1]) < min(
+            candidate_rect[3], rail_rect[3]
+        )
+        if intersects_rail:
             marginal_actual.add(index)
     if marginal_actual != used:
         _reject("page margin link inventory is not exhaustive")

@@ -891,6 +891,25 @@ def test_pdf_bijection_rejects_independent_mutations(tmp_path: Path) -> None:
         pdf.save(additional_action_pdf)
     mutations["annotation-aa"] = additional_action_pdf
 
+    intersecting_javascript_pdf = tmp_path / "mutation-12-intersecting-javascript.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        annotation = pikepdf.Dictionary(
+            {
+                "/Type": pikepdf.Name("/Annot"),
+                "/Subtype": pikepdf.Name("/Link"),
+                "/Rect": pikepdf.Array([0, 700, 520, 770]),
+                "/A": pikepdf.Dictionary(
+                    {
+                        "/S": pikepdf.Name("/JavaScript"),
+                        "/JS": pikepdf.String("app.alert('intersection')"),
+                    }
+                ),
+            }
+        )
+        pdf.pages[0].obj["/Annots"].append(pdf.make_indirect(annotation))
+        pdf.save(intersecting_javascript_pdf)
+    mutations["intersecting-javascript"] = intersecting_javascript_pdf
+
     accepted: list[str] = []
     for name, mutation in mutations.items():
         _assert_qpdf_valid(mutation)
