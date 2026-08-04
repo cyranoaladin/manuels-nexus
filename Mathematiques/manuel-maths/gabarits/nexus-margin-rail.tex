@@ -3,6 +3,7 @@
 \RequirePackage{luatexbase}
 \newcounter{nxMarginGlobalOrder}
 \newbox\nxMarginCaptureBox
+\newbox\nxMarginReportDecorationBox
 
 \newcommand{\nxMarginEightDigits}[1]{%
   \ifnum#1<10000000 0\fi
@@ -33,11 +34,31 @@
   \else
     \gdef\nxMarginVariant{eleve}%
   \fi
+  \setbox\nxMarginReportDecorationBox=\vbox{%
+    \hsize=\marginparwidth
+    \parindent=0pt
+    \sffamily\fontsize{6.5}{8}\selectfont
+    \color{encre!65}%
+    \noindent\fboxsep=2pt\fboxrule=.4pt
+    \fcolorbox{encre!25}{white}{suite de la page 0000}%
+    \par\vskip3pt}%
+  \typeout{NEXUS-MARGIN-REPORT-DECORATION-SP:%
+    \number\dimexpr\ht\nxMarginReportDecorationBox+\dp\nxMarginReportDecorationBox\relax}%
   \directlua{nexus_margin.configure({
     variant = "\luaescapestring{\nxMarginVariant}",
     page_width_sp = \number\paperwidth,
     page_height_sp = \number\paperheight,
-    rail_width_sp = \number\marginparwidth
+    rail_width_sp = \number\marginparwidth,
+    odd_rail_left_sp = \number\dimexpr
+      1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax,
+    even_rail_left_sp = \number\dimexpr
+      1in+\hoffset+\evensidemargin-\marginparsep-\marginparwidth\relax,
+    rail_top_sp = \number\dimexpr
+      1in+\voffset+\topmargin+\headheight+\headsep\relax,
+    rail_bottom_sp = \number\dimexpr
+      1in+\voffset+\topmargin+\headheight+\headsep+\textheight\relax,
+    report_decoration_height_sp = \number\dimexpr
+      \ht\nxMarginReportDecorationBox+\dp\nxMarginReportDecorationBox\relax
   })}%
 }
 
@@ -55,6 +76,26 @@
     \vadjust{\hbox to 0pt{\nxMarginAnchorMaterial{#1}\hss}}%
   \else
     \nxMarginAnchorMaterial{#1}%
+  \fi
+}
+
+\newcommand{\nxMarginReserveMaterial}[5]{%
+  \directlua{nexus_margin.write_obstacle_whatsit(
+    "\luaescapestring{#1}", #2, #3, #4, #5)}%
+}
+
+\NewDocumentCommand\nxMarginReserveRect{m m m m m}{%
+  \edef\nxMarginReserveCall{%
+    \noexpand\nxMarginReserveMaterial
+      {#1}%
+      {\number\dimexpr#2\relax}%
+      {\number\dimexpr#3\relax}%
+      {\number\dimexpr#4\relax}%
+      {\number\dimexpr#5\relax}}%
+  \ifhmode
+    \vadjust{\nxMarginReserveCall}%
+  \else
+    \nxMarginReserveCall
   \fi
 }
 

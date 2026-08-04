@@ -17,6 +17,12 @@ local ZERO_DIGEST = "sha256:" .. string.rep("0", 64)
 local ANCHOR_WHATSIT_ID = luatexbase.newuserwhatsitid(
   "anchor", "nexus-margin-compositor"
 )
+local OBSTACLE_WHATSIT_ID = luatexbase.newuserwhatsitid(
+  "obstacle", "nexus-margin-compositor"
+)
+local MARKER_METADATA_WHATSIT_ID = luatexbase.newuserwhatsitid(
+  "marker-metadata", "nexus-margin-compositor"
+)
 local WHATSIT_SUBTYPE_NAMES = {}
 for _, name in ipairs({
   "user_defined",
@@ -39,6 +45,7 @@ local captures = {}
 local capture_order = {}
 local anchors = {}
 local pages = {}
+local obstacle_ids = {}
 local configured = false
 local finalized = false
 local shipout_index = 0
@@ -62,6 +69,12 @@ end
 
 local function fail(message)
   error("NEXUS-MARGIN-ERROR:capture:" .. message, 0)
+end
+
+local function margin_error(code, identifier)
+  local message = "NEXUS-MARGIN-ERROR:" .. code .. ":" .. identifier
+  texio.write_nl("term and log", message)
+  error(message, 0)
 end
 
 local function require_ascii_fragment(value, label)
@@ -186,6 +199,45 @@ local function append_scalar(pieces, label, value)
   pieces[#pieces + 1] = label .. "=" .. #rendered .. ":" .. rendered .. ";"
 end
 
+local function safe_node_field(value, field)
+  local ok, result = pcall(function()
+    return value[field]
+  end)
+  if not ok then
+    return nil
+  end
+  local result_type = type(result)
+  if result_type == "string" or result_type == "number"
+      or result_type == "boolean" then
+    return result
+  end
+  return nil
+end
+
+local CONTROLLED_LINK_ACTION_FIELDS = {
+  "action_type",
+  "named_id",
+  "file",
+  "data",
+  "new_window",
+  "struct_id",
+}
+
+local function append_controlled_link_action(pieces, current)
+  local ok, action = pcall(function()
+    return current.action
+  end)
+  if not ok or not action then
+    return
+  end
+  for _, field in ipairs(CONTROLLED_LINK_ACTION_FIELDS) do
+    local value = safe_node_field(action, field)
+    if value ~= nil then
+      append_scalar(pieces, "link_" .. field, value)
+    end
+  end
+end
+
 local function walk_normalized(head, pieces)
   for current in node.traverse(head) do
     local kind = node.type(current.id)
@@ -247,9 +299,46 @@ local function walk_normalized(head, pieces)
         append_scalar(pieces, "value", current.value)
       elseif subtype_name == "late_lua" then
         append_scalar(pieces, "data", current.data or current.token)
+      elseif subtype_name == "pdf_start_link" then
+        append_controlled_link_action(pieces, current)
       end
     end
   end
+end
+
+local function collect_link_metadata(head, records)
+  for current in node.traverse(head) do
+    local kind = node.type(current.id)
+    if kind == "whatsit" then
+      local subtype_name = WHATSIT_SUBTYPE_NAMES[current.subtype]
+        or tostring(current.subtype)
+      if subtype_name == "pdf_start_link" then
+        local fields = {}
+        append_controlled_link_action(fields, current)
+        records[#records + 1] = table.concat(fields)
+      end
+    end
+    if (kind == "hlist" or kind == "vlist") and current.list then
+      collect_link_metadata(current.list, records)
+    end
+  end
+end
+
+local function find_oversized_horizontal(head, limit_sp)
+  for current in node.traverse(head) do
+    local kind = node.type(current.id)
+    if (kind == "hlist" or kind == "rule")
+        and type(current.width) == "number" and current.width > limit_sp then
+      return math.tointeger(current.width)
+    end
+    if (kind == "hlist" or kind == "vlist") and current.list then
+      local descendant = find_oversized_horizontal(current.list, limit_sp)
+      if descendant then
+        return descendant
+      end
+    end
+  end
+  return nil
 end
 
 local function semantic_digest(head)
@@ -285,11 +374,37 @@ function M.configure(values)
   if not run_nonce:match("^[0-9a-f]+$") or #run_nonce ~= 32 then
     fail("invalid NEXUS_MARGIN_RUN_NONCE")
   end
-  for _, field in ipairs({ "page_width_sp", "page_height_sp", "rail_width_sp" }) do
+  for _, field in ipairs({
+    "page_width_sp",
+    "page_height_sp",
+    "rail_width_sp",
+    "odd_rail_left_sp",
+    "even_rail_left_sp",
+    "rail_top_sp",
+    "rail_bottom_sp",
+    "report_decoration_height_sp",
+  }) do
     local value = values[field]
-    if type(value) ~= "number" or math.type(value) ~= "integer" or value < 1 then
-      fail(field .. " must be a positive integer")
+    if type(value) ~= "number" or math.type(value) ~= "integer" or value < 0 then
+      fail(field .. " must be a non-negative integer")
     end
+  end
+  if values.page_width_sp < 1 or values.page_height_sp < 1
+      or values.rail_width_sp < 1 or values.report_decoration_height_sp < 1 then
+    fail("page, rail and report dimensions must be positive")
+  end
+  if values.rail_top_sp >= values.rail_bottom_sp
+      or values.rail_bottom_sp > values.page_height_sp then
+    fail("invalid vertical rail geometry")
+  end
+  for _, left_sp in ipairs({ values.odd_rail_left_sp, values.even_rail_left_sp }) do
+    if left_sp < 0 or left_sp + values.rail_width_sp > values.page_width_sp then
+      fail("invalid horizontal rail geometry")
+    end
+  end
+  local marker_metadata_value = os.getenv("NEXUS_MARGIN_MARKER_METADATA") or "1"
+  if marker_metadata_value ~= "0" and marker_metadata_value ~= "1" then
+    fail("invalid NEXUS_MARGIN_MARKER_METADATA")
   end
   configuration = {
     variant = variant,
@@ -300,6 +415,12 @@ function M.configure(values)
     page_width_sp = values.page_width_sp,
     page_height_sp = values.page_height_sp,
     rail_width_sp = values.rail_width_sp,
+    odd_rail_left_sp = values.odd_rail_left_sp,
+    even_rail_left_sp = values.even_rail_left_sp,
+    rail_top_sp = values.rail_top_sp,
+    rail_bottom_sp = values.rail_bottom_sp,
+    report_decoration_height_sp = values.report_decoration_height_sp,
+    marker_metadata = marker_metadata_value == "1",
   }
   configured = true
 end
@@ -328,6 +449,16 @@ function M.capture_box(identifier, role, global_order, box_number)
   if not width_sp or width_sp < 1 or not base_height_sp or base_height_sp < 1 then
     fail("invalid captured dimensions for " .. identifier)
   end
+  if find_oversized_horizontal(copied_list, configuration.rail_width_sp) then
+    margin_error("width", identifier)
+  end
+  if base_height_sp > configuration.rail_bottom_sp - configuration.rail_top_sp then
+    margin_error("height", identifier)
+  end
+  local links = {}
+  if copied_list then
+    collect_link_metadata(copied_list, links)
+  end
   captures[identifier] = {
     id = identifier,
     role = role,
@@ -336,10 +467,17 @@ function M.capture_box(identifier, role, global_order, box_number)
     width_sp = width_sp,
     base_height_sp = base_height_sp,
     semantic_digest = semantic_digest(copied_list),
+    links = links,
     capture_count = 1,
   }
   capture_order[#capture_order + 1] = identifier
   texio.write_nl("term and log", "NEXUS-MARGIN-CAPTURE:" .. identifier)
+  if #links > 0 then
+    texio.write_nl(
+      "term and log",
+      "NEXUS-MARGIN-LINKS:" .. identifier .. ":" .. #links
+    )
+  end
 end
 
 function M.write_anchor_whatsit(identifier)
@@ -348,9 +486,63 @@ function M.write_anchor_whatsit(identifier)
   marker.type = 115
   marker.value = identifier
   node.write(marker)
+  if configuration.marker_metadata then
+    local metadata = node.new("whatsit", "user_defined")
+    metadata.user_id = MARKER_METADATA_WHATSIT_ID
+    metadata.type = 115
+    metadata.value = identifier
+    node.write(metadata)
+    texio.write_nl(
+      "term and log", "NEXUS-MARGIN-MARKER-METADATA:" .. identifier
+    )
+  end
 end
 
-local function visit_anchor_whatsits(head, page_index, folio)
+function M.write_obstacle_whatsit(identifier, left_sp, top_sp, right_sp, bottom_sp)
+  require_ascii_fragment(identifier, "obstacle id")
+  for _, value in ipairs({ left_sp, top_sp, right_sp, bottom_sp }) do
+    if type(value) ~= "number" or math.type(value) ~= "integer" or value < 0 then
+      margin_error("placement", identifier)
+    end
+  end
+  if left_sp >= right_sp or top_sp >= bottom_sp
+      or right_sp > configuration.page_width_sp
+      or bottom_sp > configuration.page_height_sp then
+    margin_error("placement", identifier)
+  end
+  local marker = node.new("whatsit", "user_defined")
+  marker.user_id = OBSTACLE_WHATSIT_ID
+  marker.type = 115
+  marker.value = table.concat({
+    identifier,
+    string.format("%d", left_sp),
+    string.format("%d", top_sp),
+    string.format("%d", right_sp),
+    string.format("%d", bottom_sp),
+  }, "|")
+  node.write(marker)
+end
+
+local function decode_obstacle(value)
+  if type(value) ~= "string" then
+    return nil
+  end
+  local identifier, left, top, right, bottom = value:match(
+    "^([^|]+)|(%d+)|(%d+)|(%d+)|(%d+)$"
+  )
+  if not identifier then
+    return nil
+  end
+  return {
+    id = identifier,
+    left_sp = math.tointeger(left),
+    top_sp = math.tointeger(top),
+    right_sp = math.tointeger(right),
+    bottom_sp = math.tointeger(bottom),
+  }
+end
+
+local function visit_page_whatsits(head, page_index, folio, page_obstacles)
   for current in node.traverse(head) do
     local kind = node.type(current.id)
     if kind == "whatsit" and current.subtype == node.subtype("user_defined")
@@ -368,9 +560,17 @@ local function visit_anchor_whatsits(head, page_index, folio)
       anchor.shipout_index = page_index
       anchor.folio = folio
       anchors[identifier] = anchor
+    elseif kind == "whatsit" and current.subtype == node.subtype("user_defined")
+        and current.user_id == OBSTACLE_WHATSIT_ID then
+      local obstacle = decode_obstacle(current.value)
+      if not obstacle or obstacle_ids[obstacle.id] then
+        margin_error("placement", obstacle and obstacle.id or "invalid-obstacle")
+      end
+      obstacle_ids[obstacle.id] = true
+      page_obstacles[#page_obstacles + 1] = obstacle
     end
     if (kind == "hlist" or kind == "vlist") and current.list then
-      visit_anchor_whatsits(current.list, page_index, folio)
+      visit_page_whatsits(current.list, page_index, folio, page_obstacles)
     end
   end
 end
@@ -383,7 +583,8 @@ local function pre_shipout(head)
   local folio = tostring(tex.count["c@page"] or tex.count[0] or shipout_index)
   local rail_side = shipout_index % 2 == 1 and "right" or "left"
   local rail_left = rail_side == "right"
-      and configuration.page_width_sp - configuration.rail_width_sp or 0
+      and configuration.odd_rail_left_sp or configuration.even_rail_left_sp
+  local page_obstacles = {}
   pages[shipout_index] = {
     shipout_index = shipout_index,
     folio = folio,
@@ -391,8 +592,24 @@ local function pre_shipout(head)
     page_height_sp = configuration.page_height_sp,
     rail_side = rail_side,
     rail_left_sp = rail_left,
+    obstacles = page_obstacles,
   }
-  visit_anchor_whatsits(head, shipout_index, folio)
+  visit_page_whatsits(head, shipout_index, folio, page_obstacles)
+  table.sort(page_obstacles, function(first, second)
+    if first.top_sp ~= second.top_sp then
+      return first.top_sp < second.top_sp
+    end
+    if first.bottom_sp ~= second.bottom_sp then
+      return first.bottom_sp < second.bottom_sp
+    end
+    if first.left_sp ~= second.left_sp then
+      return first.left_sp < second.left_sp
+    end
+    if first.right_sp ~= second.right_sp then
+      return first.right_sp < second.right_sp
+    end
+    return first.id < second.id
+  end)
   return head
 end
 
@@ -459,7 +676,7 @@ local function current_envelope()
       target_y_sp = json.JSON_NULL,
       width_sp = capture.width_sp,
       base_height_sp = capture.base_height_sp,
-      report_decoration_height_sp = 0,
+      report_decoration_height_sp = configuration.report_decoration_height_sp,
       effective_height_sp = capture.base_height_sp,
       report_depth = 0,
       requires_marker = false,
@@ -489,6 +706,16 @@ local function current_envelope()
     for native_index, note in ipairs(native_notes) do
       native_ids[native_index] = note.id
     end
+    local obstacle_records = json_array()
+    for obstacle_index, obstacle in ipairs(page.obstacles) do
+      obstacle_records[obstacle_index] = json_object({
+        id = obstacle.id,
+        left_sp = obstacle.left_sp,
+        top_sp = obstacle.top_sp,
+        right_sp = obstacle.right_sp,
+        bottom_sp = obstacle.bottom_sp,
+      })
+    end
     page_records[index] = json_object({
       shipout_index = page.shipout_index,
       folio = page.folio,
@@ -497,15 +724,15 @@ local function current_envelope()
       rail_side = page.rail_side,
       safe_rect = json_object({
         left_sp = page.rail_left_sp,
-        top_sp = 0,
+        top_sp = configuration.rail_top_sp,
         right_sp = page.rail_left_sp + configuration.rail_width_sp,
-        bottom_sp = page.page_height_sp,
+        bottom_sp = configuration.rail_bottom_sp,
       }),
       native_note_ids = native_ids,
       carry_in_note_ids = json_array(),
       placed_note_ids = json_array(),
       reported_note_ids = json_array(),
-      obstacles = json_array(),
+      obstacles = obstacle_records,
     })
   end
 
@@ -517,8 +744,19 @@ local function current_envelope()
       page.page_height_sp,
       page.rail_side,
       page.safe_rect.left_sp,
+      page.safe_rect.top_sp,
       page.safe_rect.right_sp,
+      page.safe_rect.bottom_sp,
     }, ":")
+    for _, obstacle in ipairs(page.obstacles) do
+      geometry_parts[#geometry_parts + 1] = table.concat({
+        obstacle.id,
+        obstacle.left_sp,
+        obstacle.top_sp,
+        obstacle.right_sp,
+        obstacle.bottom_sp,
+      }, ":")
+    end
   end
   return json_object({
     schema_version = 1,
@@ -566,7 +804,15 @@ function M.finalize()
       or configuration.next_path == "" then
     return
   end
-  local solved = layout_solver.solve(current_envelope(), read_previous())
+  local ok, solved = pcall(layout_solver.solve, current_envelope(), read_previous())
+  if not ok then
+    local message = tostring(solved)
+    local identifier = message:match("result%.notes%[([^%]]+)%]")
+    if identifier and message:find("margin%-report%-impossible") then
+      margin_error("placement", identifier)
+    end
+    error(message, 0)
+  end
   write_next(solved)
 end
 

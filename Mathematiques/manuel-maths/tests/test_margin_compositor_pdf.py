@@ -20,6 +20,20 @@ MAX_PASSES = 6
 RUN_NONCE = "0123456789abcdef0123456789abcdef"
 CAPTURE_RECORD = re.compile(r"NEXUS-MARGIN-CAPTURE:(nxm:[^:\s]+:[^:\s]+:\d{8})")
 ANCHOR_RECORD = re.compile(r"NEXUS-MARGIN-ANCHOR:(nxm:[^:\s]+:[^:\s]+:\d{8})")
+LINK_RECORD = re.compile(
+    r"NEXUS-MARGIN-LINKS:(nxm:[^:\s]+:[^:\s]+:\d{8}):(\d+)"
+)
+MARKER_METADATA_RECORD = re.compile(
+    r"NEXUS-MARGIN-MARKER-METADATA:(nxm:[^:\s]+:[^:\s]+:\d{8})"
+)
+EVALUATION_RECORD = re.compile(r"NEXUS-MARGIN-EVALUATIONS:(\d+)")
+INTERNAL_ID_EVALUATION_RECORD = re.compile(
+    r"NEXUS-MARGIN-INTERNAL-ID-EVALUATIONS:(\d+)"
+)
+REPORT_DECORATION_RECORD = re.compile(r"NEXUS-MARGIN-REPORT-DECORATION-SP:(\d+)")
+BODY_SENTINEL_RECORD = re.compile(
+    r"NEXUS-MARGIN-BODY-SENTINEL:([^:\s]+):(-?\d+):(-?\d+)"
+)
 VMODE_HLIST_RECORD = re.compile(r"NEXUS-MARGIN-VMODE-HLISTS:(\d+)")
 VMODE_PREVDEPTH_BEFORE = re.compile(r"NEXUS-MARGIN-VMODE-PREVDEPTH-BEFORE:(-?\d+)")
 VMODE_PREVDEPTH_AFTER = re.compile(r"NEXUS-MARGIN-VMODE-PREVDEPTH-AFTER:(-?\d+)")
@@ -57,7 +71,13 @@ def _assert_nonempty_capture_inventory(layout: dict[str, Any]) -> None:
     assert layout["notes"], "zero annotation capturée doit faire échouer la fixture"
 
 
-def _run_private_passes(source: Path, output_directory: Path) -> list[dict[str, Any]]:
+def _run_private_passes(
+    source: Path,
+    output_directory: Path,
+    *,
+    variant: str = "eleve",
+    marker_metadata: bool = True,
+) -> list[dict[str, Any]]:
     contract = _load_margin_contract()
     previous = output_directory / "margin-layout.previous.json"
     next_layout = output_directory / "margin-layout.next.json"
@@ -70,10 +90,11 @@ def _run_private_passes(source: Path, output_directory: Path) -> list[dict[str, 
         environment.update(
             {
                 "NEXUS_MARGIN_RUN_NONCE": RUN_NONCE,
-                "NEXUS_MARGIN_VARIANT": "eleve",
+                "NEXUS_MARGIN_VARIANT": variant,
                 "NEXUS_MARGIN_PASS_NUMBER": str(pass_number),
                 "NEXUS_MARGIN_LAYOUT_PREVIOUS": str(previous),
                 "NEXUS_MARGIN_LAYOUT_NEXT": str(next_layout),
+                "NEXUS_MARGIN_MARKER_METADATA": "1" if marker_metadata else "0",
             }
         )
         result = subprocess.run(
@@ -97,7 +118,7 @@ def _run_private_passes(source: Path, output_directory: Path) -> list[dict[str, 
         contract.validate_margin_layout(layout)
         _assert_nonempty_capture_inventory(layout)
         assert layout["run_nonce"] == RUN_NONCE
-        assert layout["variant"] == "eleve"
+        assert layout["variant"] == variant
         assert layout["pass_number"] == pass_number
 
         capture_ids = CAPTURE_RECORD.findall(result.stdout)
@@ -232,6 +253,365 @@ Seconde page témoin.
         assert [note["id"] for note in observed["layout"]["notes"]] == [expected_id]
         assert observed["capture_ids"] == [expected_id]
         assert observed["anchor_ids"] == [expected_id]
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_breakable_fichemethode_captures_local_rich_note_once_in_all_modes(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "breakable-fichemethode.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\usepackage{hyperref}
+\newcounter{nxMarginFixtureEvaluations}
+\newcount\nxFixtureRow
+\newcommand{\nxBodySentinel}[1]{%
+  \savepos
+  \latelua{local x, y = pdf.getpos(); texio.write_nl("term and log",
+    "NEXUS-MARGIN-BODY-SENTINEL:#1:" .. math.floor(x + 0.5) .. ":" ..
+    math.floor(y + 0.5))}%
+}
+\begin{document}
+\noindent Début du flux\nxBodySentinel{before}.
+\nxMarginRailNote{appui}{Appui capturé en mode vertical.}
+\noindent Ancre horizontale\nxMarginRailNote{commentaire}{Note horizontale.}
+\begin{fichemethode}{T6}{Encadré cassable réel}
+  \newcommand{\nxLocalRichPayload}{Macro locale $x^2+1$,
+    \textcolor{coulRetenir}{couleur contrôlée} et
+    \href{https://example.invalid/nexus-t8}{lien contrôlé}.}
+  \nxFixtureRow=0
+  \loop
+    \par Ligne de méthode \the\nxFixtureRow\ : un contenu assez long force la
+    coupure réelle de l'encadré sans saut de page manuel.
+    \advance\nxFixtureRow by 1
+  \ifnum\nxFixtureRow<38
+  \repeat
+  \commentaireMarge{\stepcounter{nxMarginFixtureEvaluations}\nxLocalRichPayload}
+  \nxFixtureRow=0
+  \loop
+    \par Suite de méthode \the\nxFixtureRow\ : le contenu continue après la
+    note capturée et maintient l'encadré sur sa seconde page.
+    \advance\nxFixtureRow by 1
+  \ifnum\nxFixtureRow<12
+  \repeat
+\end{fichemethode}
+\noindent Fin du flux\nxBodySentinel{after}.
+\typeout{NEXUS-MARGIN-EVALUATIONS:\arabic{nxMarginFixtureEvaluations}}
+\end{document}
+""",
+        encoding="utf-8",
+    )
+
+    metadata_on_directory = tmp_path / "metadata-on"
+    metadata_off_directory = tmp_path / "metadata-off"
+    metadata_on_directory.mkdir()
+    metadata_off_directory.mkdir()
+    passes = _run_private_passes(
+        fixture, metadata_on_directory, marker_metadata=True
+    )
+    passes_without_metadata = _run_private_passes(
+        fixture, metadata_off_directory, marker_metadata=False
+    )
+    expected_ids = [
+        "nxm:eleve:appui:00000001",
+        "nxm:eleve:commentaire:00000002",
+        "nxm:eleve:commentaire:00000003",
+    ]
+
+    assert len(passes) >= 2
+    for observed in passes:
+        layout = observed["layout"]
+        assert len(layout["pages"]) == 2
+        assert [note["id"] for note in layout["notes"]] == expected_ids
+        assert observed["capture_ids"] == expected_ids
+        assert observed["anchor_ids"] == expected_ids
+        assert EVALUATION_RECORD.findall(observed["stdout"]) == ["1"]
+        assert dict(LINK_RECORD.findall(observed["stdout"])) == {
+            expected_ids[-1]: "1"
+        }
+        decoration_records = REPORT_DECORATION_RECORD.findall(observed["stdout"])
+        assert len(decoration_records) == 1
+        decoration_height_sp = int(decoration_records[0])
+        assert decoration_height_sp > 0
+        assert {
+            note["report_decoration_height_sp"] for note in layout["notes"]
+        } == {decoration_height_sp}
+        assert MARKER_METADATA_RECORD.findall(observed["stdout"]) == expected_ids
+
+    for observed in passes_without_metadata:
+        assert [note["id"] for note in observed["layout"]["notes"]] == expected_ids
+        assert observed["capture_ids"] == expected_ids
+        assert observed["anchor_ids"] == expected_ids
+        assert MARKER_METADATA_RECORD.findall(observed["stdout"]) == []
+
+    assert len(passes[-1]["layout"]["pages"]) == len(
+        passes_without_metadata[-1]["layout"]["pages"]
+    )
+    sentinels_with_metadata = BODY_SENTINEL_RECORD.findall(passes[-1]["stdout"])
+    sentinels_without_metadata = BODY_SENTINEL_RECORD.findall(
+        passes_without_metadata[-1]["stdout"]
+    )
+    assert [sentinel[0] for sentinel in sentinels_with_metadata] == [
+        "before",
+        "after",
+    ]
+    assert sentinels_with_metadata == sentinels_without_metadata
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_blank_page_and_reset_folio_keep_absolute_shipout_rail_parity(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "absolute-shipout-parity.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\begin{document}
+Première page\margeAppui{Note physique 1, folio logique 1.}
+\newpage
+\thispagestyle{empty}\null
+\newpage
+\setcounter{page}{1}
+Troisième page physique\margeAppui{Note physique 3, folio logique réinitialisé à 1.}
+\end{document}
+""",
+        encoding="utf-8",
+    )
+
+    passes = _run_private_passes(fixture, tmp_path)
+
+    for observed in passes:
+        pages = observed["layout"]["pages"]
+        assert [page["shipout_index"] for page in pages] == [1, 2, 3]
+        assert [page["folio"] for page in pages] == ["1", "2", "1"]
+        assert [page["rail_side"] for page in pages] == ["right", "left", "right"]
+        for page in pages:
+            safe = page["safe_rect"]
+            assert 0 < safe["left_sp"] < safe["right_sp"] < page["page_width_sp"]
+            assert 0 < safe["top_sp"] < safe["bottom_sp"] < page["page_height_sp"]
+
+        notes = observed["layout"]["notes"]
+        assert [note["origin_shipout_index"] for note in notes] == [1, 3]
+        assert [note["origin_folio"] for note in notes] == ["1", "1"]
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_declared_middle_reserve_rectangle_moves_note_below_obstacle(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "reserved-middle-obstacle.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\providecommand{\nxMarginReserveRect}[5]{}
+\begin{document}
+\nxMarginReserveRect{fixture-middle}{%
+  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax}{5cm}{%
+  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep+\marginparwidth\relax}{15cm}
+\vspace*{7cm}
+Obstacle médian\margeAppui{Cette note doit contourner le rectangle réservé.}
+\newpage
+Page de report disponible.
+\end{document}
+""",
+        encoding="utf-8",
+    )
+
+    passes = _run_private_passes(fixture, tmp_path)
+
+    for observed in passes:
+        layout = observed["layout"]
+        page = layout["pages"][0]
+        assert len(page["obstacles"]) == 1
+        obstacle = page["obstacles"][0]
+        assert obstacle["id"] == "fixture-middle"
+        assert page["safe_rect"]["left_sp"] <= obstacle["left_sp"]
+        assert obstacle["right_sp"] <= page["safe_rect"]["right_sp"]
+        assert page["safe_rect"]["top_sp"] < obstacle["top_sp"]
+        assert obstacle["bottom_sp"] < page["safe_rect"]["bottom_sp"]
+
+        note = layout["notes"][0]
+        assert note["origin_y_sp"] < obstacle["bottom_sp"]
+        assert note["target_shipout_index"] == 1
+        assert note["target_y_sp"] == obstacle["bottom_sp"] + 6 * 65536
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_oversized_unbreakable_horizontal_note_fails_with_exact_error(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "oversized-unbreakable.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\begin{document}
+Texte\nxMarginRailNote{appui}{\hbox{\rule{2\marginparwidth}{1pt}}}.
+\end{document}
+""",
+        encoding="utf-8",
+    )
+    environment = os.environ.copy()
+    environment["NEXUS_MARGIN_VARIANT"] = "eleve"
+
+    result = subprocess.run(
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            f"-output-directory={tmp_path}",
+            str(fixture),
+        ],
+        cwd=MANUAL_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    output = result.stdout + result.stderr
+    assert result.returncode != 0
+    assert "NEXUS-MARGIN-ERROR:width:nxm:eleve:appui:00000001" in output
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_oversized_vertical_note_fails_with_exact_height_error(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "oversized-vertical.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\begin{document}
+Texte\nxMarginRailNote{appui}{\vbox to 2\textheight{\hbox{Hauteur}\vfil}}.
+\end{document}
+""",
+        encoding="utf-8",
+    )
+    environment = os.environ.copy()
+    environment["NEXUS_MARGIN_VARIANT"] = "eleve"
+
+    result = subprocess.run(
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            f"-output-directory={tmp_path}",
+            str(fixture),
+        ],
+        cwd=MANUAL_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    output = result.stdout + result.stderr
+    assert result.returncode != 0
+    assert "NEXUS-MARGIN-ERROR:height:nxm:eleve:appui:00000001" in output
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_unplaceable_note_fails_with_exact_placement_error(tmp_path: Path) -> None:
+    fixture = tmp_path / "unplaceable-note.tex"
+    next_layout = tmp_path / "margin-layout.next.json"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\begin{document}
+\nxMarginReserveRect{fixture-full-rail}{%
+  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep\relax}{%
+  \dimexpr1in+\voffset+\topmargin+\headheight+\headsep\relax}{%
+  \dimexpr1in+\hoffset+\oddsidemargin+\textwidth+\marginparsep+\marginparwidth\relax}{%
+  \dimexpr1in+\voffset+\topmargin+\headheight+\headsep+\textheight\relax}
+Texte\nxMarginRailNote{appui}{Note sans placement possible.}.
+\end{document}
+""",
+        encoding="utf-8",
+    )
+    environment = os.environ.copy()
+    environment.update(
+        {
+            "NEXUS_MARGIN_VARIANT": "eleve",
+            "NEXUS_MARGIN_RUN_NONCE": RUN_NONCE,
+            "NEXUS_MARGIN_PASS_NUMBER": "1",
+            "NEXUS_MARGIN_LAYOUT_NEXT": str(next_layout),
+        }
+    )
+
+    result = subprocess.run(
+        [
+            "lualatex",
+            "-interaction=nonstopmode",
+            "-halt-on-error",
+            f"-output-directory={tmp_path}",
+            str(fixture),
+        ],
+        cwd=MANUAL_ROOT,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    output = result.stdout + result.stderr
+    assert result.returncode != 0
+    assert "NEXUS-MARGIN-ERROR:placement:nxm:eleve:appui:00000001" in output
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_variant_exercise_metadata_filters_internal_id_before_student_capture(
+    tmp_path: Path,
+) -> None:
+    def build_variant(variant: str) -> list[dict[str, Any]]:
+        is_professor = variant == "professeur"
+        output_directory = tmp_path / variant
+        output_directory.mkdir()
+        fixture = output_directory / f"exercise-metadata-{variant}.tex"
+        fixture.write_text(
+            rf"""\documentclass{{gabarits/nexus-manuel}}
+\nxVersionProfesseur{'true' if is_professor else 'false'}
+\providecommand{{\icnChrono}}{{Chrono}}
+\newcounter{{nxMarginInternalIdEvaluations}}
+\newcommand{{\nxFixtureInternalId}}{{\stepcounter{{nxMarginInternalIdEvaluations}}1SPE-T6-INTERNAL}}
+\begin{{document}}
+\begin{{exercice}}{{\nxFixtureInternalId}}{{1}}{{7}}
+Un exercice témoin pour la variante {variant}.
+\end{{exercice}}
+\typeout{{NEXUS-MARGIN-INTERNAL-ID-EVALUATIONS:\arabic{{nxMarginInternalIdEvaluations}}}}
+\end{{document}}
+""",
+            encoding="utf-8",
+        )
+        return _run_private_passes(fixture, output_directory, variant=variant)
+
+    student_passes = build_variant("eleve")
+    professor_passes = build_variant("professeur")
+
+    for observed in student_passes:
+        notes = observed["layout"]["notes"]
+        assert [note["role"] for note in notes] == ["chrono"]
+        assert [note["id"] for note in notes] == ["nxm:eleve:chrono:00000001"]
+        assert INTERNAL_ID_EVALUATION_RECORD.findall(observed["stdout"]) == ["0"]
+        assert all(note["report_decoration_height_sp"] > 0 for note in notes)
+
+    for observed in professor_passes:
+        notes = observed["layout"]["notes"]
+        assert [note["role"] for note in notes] == ["chrono", "professor-id"]
+        assert [note["id"] for note in notes] == [
+            "nxm:professeur:chrono:00000001",
+            "nxm:professeur:professor-id:00000002",
+        ]
+        assert INTERNAL_ID_EVALUATION_RECORD.findall(observed["stdout"]) == ["1"]
+        assert all(note["report_decoration_height_sp"] > 0 for note in notes)
+
+    student_chrono_digest = student_passes[-1]["layout"]["notes"][0][
+        "semantic_digest"
+    ]
+    professor_chrono_digest = professor_passes[-1]["layout"]["notes"][0][
+        "semantic_digest"
+    ]
+    assert student_chrono_digest == professor_chrono_digest
 
 
 def test_capture_inventory_oracle_rejects_zero_notes() -> None:
