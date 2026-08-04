@@ -68,6 +68,7 @@ jobs:
             fonts-texgyre-math \
             imagemagick-6.q16 \
             poppler-utils \
+            qpdf \
             texlive-fonts-recommended \
             texlive-lang-french \
             texlive-latex-extra \
@@ -81,6 +82,14 @@ jobs:
             --no-deps \
             --requirement requirements-ci-audit.txt
           python -m pip check
+
+      - name: Vérifier les outils figés de preuve PDF
+        run: |
+          python - <<'PY'
+          import pikepdf
+          assert pikepdf.__version__ == "8.7.1"
+          PY
+          qpdf --version
 
       - name: Lint Phase 0
         run: |

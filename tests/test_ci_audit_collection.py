@@ -13,7 +13,9 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/ci-audit-collection.yml"
+MATH_WORKFLOW = ROOT / ".github/workflows/ci-mathematiques.yml"
 REQUIREMENTS = ROOT / "requirements-ci-audit.txt"
+MANUAL_REQUIREMENTS = ROOT / "Mathematiques/manuel-maths/requirements.txt"
 PYPROJECT = ROOT / "pyproject.toml"
 DIMENSION_NAMES = {
     "execution",
@@ -56,10 +58,43 @@ _UniqueKeyLoader.add_constructor(
 
 
 def _workflow() -> tuple[dict[object, object], str]:
-    text = WORKFLOW.read_text(encoding="utf-8")
+    return _load_workflow(WORKFLOW)
+
+
+def _load_workflow(path: Path) -> tuple[dict[object, object], str]:
+    text = path.read_text(encoding="utf-8")
     payload = yaml.load(text, Loader=_UniqueKeyLoader)
     assert isinstance(payload, dict)
     return payload, text
+
+
+def _pinned_requirements(path: Path) -> dict[str, str]:
+    lines = [
+        line
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line and not line.startswith("#")
+    ]
+    assert all(re.fullmatch(r"[A-Za-z0-9_.-]+==[^=\s]+", line) for line in lines)
+    return {
+        name.lower(): version
+        for name, version in (line.split("==", 1) for line in lines)
+    }
+
+
+def _pytest_jobs(workflow: dict[object, object]) -> list[dict[object, object]]:
+    jobs = workflow.get("jobs")
+    assert isinstance(jobs, dict)
+    selected = []
+    for job in jobs.values():
+        assert isinstance(job, dict)
+        steps = job.get("steps")
+        assert isinstance(steps, list)
+        if any(
+            isinstance(step, dict) and "pytest" in str(step.get("run", ""))
+            for step in steps
+        ):
+            selected.append(job)
+    return selected
 
 
 def _runner_context_in_job_env(workflow: dict[object, object]) -> list[str]:
@@ -102,6 +137,72 @@ def test_audit_workflow_yaml_is_valid() -> None:
     workflow, _ = _workflow()
     assert workflow["name"] == "CI audit collection Phase 0"
     assert "audit-phase-0" in workflow["jobs"]
+
+
+def test_pikepdf_dependency_closure_is_fully_pinned() -> None:
+    manual = MANUAL_REQUIREMENTS.read_text(encoding="utf-8").splitlines()
+    assert "pikepdf==8.7.1" in manual
+
+    requirements = _pinned_requirements(REQUIREMENTS)
+    assert {
+        "pikepdf": "8.7.1",
+        "deprecated": "1.3.1",
+        "wrapt": "2.3.0",
+        "lxml": "6.1.1",
+        "packaging": "25.0",
+        "pillow": "12.3.0",
+    }.items() <= requirements.items()
+
+
+def test_qpdf_is_installed_by_both_test_workflows() -> None:
+    for path in (WORKFLOW, MATH_WORKFLOW):
+        workflow, _ = _load_workflow(path)
+        jobs = _pytest_jobs(workflow)
+        assert jobs
+        for job in jobs:
+            steps = job["steps"]
+            apt_commands = "\n".join(
+                str(step.get("run", ""))
+                for step in steps
+                if isinstance(step, dict) and "apt-get install" in str(step.get("run", ""))
+            )
+            assert re.search(r"(?m)^\s*qpdf(?:\s|$|\\)", apt_commands)
+
+
+def test_math_runner_is_frozen_to_ubuntu_24_04() -> None:
+    workflow, _ = _load_workflow(MATH_WORKFLOW)
+    assert workflow["jobs"]["gates"]["runs-on"] == "ubuntu-24.04"
+
+
+def test_pikepdf_and_qpdf_are_probed_before_pytest_in_both_workflows() -> None:
+    for path in (WORKFLOW, MATH_WORKFLOW):
+        workflow, _ = _load_workflow(path)
+        jobs = _pytest_jobs(workflow)
+        assert jobs
+        for job in jobs:
+            steps = job["steps"]
+            pytest_index = next(
+                index
+                for index, step in enumerate(steps)
+                if isinstance(step, dict) and "pytest" in str(step.get("run", ""))
+            )
+            install_index = next(
+                index
+                for index, step in enumerate(steps)
+                if isinstance(step, dict)
+                and "--requirement requirements-ci-audit.txt"
+                in str(step.get("run", ""))
+                and "--no-deps" in str(step.get("run", ""))
+                and "python -m pip check" in str(step.get("run", ""))
+            )
+            probe_index = next(
+                index
+                for index, step in enumerate(steps)
+                if isinstance(step, dict)
+                and "import pikepdf" in str(step.get("run", ""))
+                and "qpdf --version" in str(step.get("run", ""))
+            )
+            assert install_index < probe_index < pytest_index
 
 
 def test_runner_context_is_forbidden_in_job_env() -> None:

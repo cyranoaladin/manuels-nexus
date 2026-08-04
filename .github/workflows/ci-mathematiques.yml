@@ -25,7 +25,7 @@ on:
 
 jobs:
   gates:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
@@ -34,11 +34,31 @@ jobs:
       - name: Gate de synchronisation de charte
         run: python scripts/check_charte_sync.py
       - name: Dépendances (gates légers, sans embeddings)
-        run: pip install sympy pyyaml jsonschema pytest python-dotenv
+        run: |
+          python -m pip install --disable-pip-version-check \
+            --no-deps \
+            --requirement requirements-ci-audit.txt
+          python -m pip check
       - name: Installation TeX + polices
         run: |
-          sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-luatex texlive-lang-french texlive-fonts-recommended texlive-fonts-extra texlive-science poppler-utils
+          sudo apt-get update
+          sudo apt-get install -y \
+            poppler-utils \
+            qpdf \
+            texlive-fonts-extra \
+            texlive-fonts-recommended \
+            texlive-lang-french \
+            texlive-latex-extra \
+            texlive-luatex \
+            texlive-science
           mkdir -p ~/.local/share/fonts && cp Mathematiques/manuel-maths/gabarits/fonts/JetBrainsMono*.otf ~/.local/share/fonts/ && fc-cache -f ~/.local/share/fonts
+      - name: Vérifier les outils figés de preuve PDF
+        run: |
+          python - <<'PY'
+          import pikepdf
+          assert pikepdf.__version__ == "8.7.1"
+          PY
+          qpdf --version
       - name: Schémas des métadonnées
         working-directory: Mathematiques/manuel-maths
         run: python -m pytest tests/test_meta_schemas.py -q
