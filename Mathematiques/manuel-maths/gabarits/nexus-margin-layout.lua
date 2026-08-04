@@ -630,14 +630,17 @@ local function new_array_like(array)
   return setmetatable({}, { __nexus_json_type = "array" })
 end
 
-local function skip_obstacles(y_sp, height_sp, obstacles)
+local function skip_obstacles(y_sp, height_sp, left_sp, right_sp, obstacles)
   local candidate = y_sp
   local changed = true
   while changed do
     changed = false
     for _, obstacle in ipairs(obstacles) do
       local bottom = candidate + height_sp
-      if candidate < obstacle.bottom_sp and bottom > obstacle.top_sp then
+      local horizontal_intersection = left_sp < obstacle.right_sp
+        and right_sp > obstacle.left_sp
+      if horizontal_intersection
+          and candidate < obstacle.bottom_sp and bottom > obstacle.top_sp then
         candidate = obstacle.bottom_sp + GAP_SP
         changed = true
       end
@@ -663,6 +666,12 @@ local function effective_height(note)
     return note.base_height_sp + note.report_decoration_height_sp
   end
   return note.base_height_sp
+end
+
+local function sort_note_ids_by_order(note_ids, notes_by_id)
+  table.sort(note_ids, function(first_id, second_id)
+    return order_less(notes_by_id[first_id], notes_by_id[second_id])
+  end)
 end
 
 function M.solve(current_layout, previous_layout_or_nil)
@@ -704,6 +713,7 @@ function M.solve(current_layout, previous_layout_or_nil)
     for _, note in ipairs(carry) do
       carry_ids[#carry_ids + 1] = note.id
     end
+    sort_note_ids_by_order(carry_ids, notes_by_id)
     page.carry_in_note_ids = carry_ids
 
     local native = {}
@@ -737,7 +747,15 @@ function M.solve(current_layout, previous_layout_or_nil)
         if not candidate.is_carry then
           y_sp = math.max(note.origin_y_sp, y_sp)
         end
-        y_sp = skip_obstacles(y_sp, note.effective_height_sp, page.obstacles)
+        local note_left_sp = page.safe_rect.left_sp
+        local note_right_sp = note_left_sp + note.width_sp
+        y_sp = skip_obstacles(
+          y_sp,
+          note.effective_height_sp,
+          note_left_sp,
+          note_right_sp,
+          page.obstacles
+        )
         cursor = y_sp + note.effective_height_sp + GAP_SP
       end
       placements[#placements + 1] = {
@@ -782,6 +800,7 @@ function M.solve(current_layout, previous_layout_or_nil)
       end
     end
     page.placed_note_ids = placed_ids
+    sort_note_ids_by_order(reported_ids, notes_by_id)
     page.reported_note_ids = reported_ids
   end
   validate_layout(result, "result")

@@ -850,6 +850,81 @@ def test_shortest_suffix_is_reported_without_reversing_order(tmp_path: Path) -> 
     assert notes_by_id["n4"]["report_depth"] == 1
 
 
+def test_solver_and_python_contract_accept_premeasured_decoration_at_depth_zero(
+    tmp_path: Path,
+) -> None:
+    layout = _layout_with_identical_anchors()
+    note = layout["notes"][0]
+    note["report_decoration_height_sp"] = 5 * SP_PER_PT
+    layout["notes"] = [note]
+    layout["pages"][0]["native_note_ids"] = [note["id"]]
+    source = tmp_path / "contract-parity-input.json"
+    output = tmp_path / "contract-parity-output.json"
+    _write_json(source, layout)
+
+    contract = _load_margin_contract()
+    python_error = None
+    try:
+        contract.validate_margin_layout(layout)
+    except contract.MarginContractError as exc:
+        python_error = str(exc)
+    lua_result = _run_solver(source, output, cwd=tmp_path)
+
+    assert python_error is None
+    assert lua_result.returncode == 0, lua_result.stderr
+    solved = json.loads(output.read_text(encoding="utf-8"))
+    assert contract.validate_margin_layout(solved) == solved
+    assert solved["notes"][0]["effective_height_sp"] == 30 * SP_PER_PT
+
+
+def test_report_and_carry_lists_are_canonical_when_anchor_order_differs(
+    tmp_path: Path,
+) -> None:
+    layout = _layout_with_identical_anchors()
+    first, second = layout["notes"][:2]
+    first.update(
+        {
+            "id": "n1",
+            "global_order": 1,
+            "origin_y_sp": 20 * SP_PER_PT,
+            "report_decoration_height_sp": 5 * SP_PER_PT,
+        }
+    )
+    second.update(
+        {
+            "id": "n2",
+            "global_order": 2,
+            "origin_y_sp": 10 * SP_PER_PT,
+            "target_shipout_index": 2,
+            "target_y_sp": 10 * SP_PER_PT,
+            "report_decoration_height_sp": 5 * SP_PER_PT,
+            "effective_height_sp": 35 * SP_PER_PT,
+            "report_depth": 1,
+            "requires_marker": True,
+        }
+    )
+    layout["notes"] = [first, second]
+    first_page = layout["pages"][0]
+    first_page["native_note_ids"] = ["n2", "n1"]
+    first_page["reported_note_ids"] = ["n2"]
+    second_page = _empty_page_from(first_page, 2)
+    second_page["carry_in_note_ids"] = ["n2"]
+    second_page["placed_note_ids"] = ["n2"]
+    layout["pages"] = [first_page, second_page]
+    source = tmp_path / "canonical-report-input.json"
+    output = tmp_path / "canonical-report-output.json"
+    _write_json(source, layout)
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode == 0, result.stderr
+    solved = json.loads(output.read_text(encoding="utf-8"))
+    _load_margin_contract().validate_margin_layout(solved)
+    assert solved["pages"][0]["native_note_ids"] == ["n2", "n1"]
+    assert solved["pages"][0]["reported_note_ids"] == ["n1", "n2"]
+    assert solved["pages"][1]["carry_in_note_ids"] == ["n1", "n2"]
+
+
 def test_carry_in_starts_at_safe_top_and_precedes_native_notes(tmp_path: Path) -> None:
     layout = _layout_with_identical_anchors()
     carried = layout["notes"][0]
@@ -925,6 +1000,44 @@ def test_middle_obstacle_pushes_candidate_below_bottom_plus_gap(
     _load_margin_contract().validate_margin_layout(solved)
     solved_note = solved["notes"][0]
     assert solved_note["target_y_sp"] == 51 * SP_PER_PT
+
+
+def test_horizontally_disjoint_obstacle_does_not_move_candidate(
+    tmp_path: Path,
+) -> None:
+    layout = _layout_with_identical_anchors()
+    note = layout["notes"][0]
+    note.update(
+        {
+            "id": "rail-note",
+            "global_order": 1,
+            "origin_y_sp": 20 * SP_PER_PT,
+            "base_height_sp": 20 * SP_PER_PT,
+            "effective_height_sp": 20 * SP_PER_PT,
+        }
+    )
+    layout["notes"] = [note]
+    page = layout["pages"][0]
+    page["native_note_ids"] = ["rail-note"]
+    page["obstacles"] = [
+        {
+            "id": "body-only-obstacle",
+            "left_sp": 0,
+            "top_sp": 25 * SP_PER_PT,
+            "right_sp": 50 * SP_PER_PT,
+            "bottom_sp": 45 * SP_PER_PT,
+        }
+    ]
+    source = tmp_path / "horizontal-obstacle-input.json"
+    output = tmp_path / "horizontal-obstacle-output.json"
+    _write_json(source, layout)
+
+    result = _run_solver(source, output, cwd=tmp_path)
+
+    assert result.returncode == 0, result.stderr
+    solved = json.loads(output.read_text(encoding="utf-8"))
+    _load_margin_contract().validate_margin_layout(solved)
+    assert solved["notes"][0]["target_y_sp"] == 20 * SP_PER_PT
 
 
 def test_report_cartouche_height_triggers_non_cumulative_three_page_cascade(

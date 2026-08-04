@@ -636,6 +636,25 @@ def test_margin_proof_layout_rejects_incoherent_rectangles_and_heights() -> None
     )
 
 
+@pytest.mark.parametrize(
+    "fixture_name,validator",
+    [
+        ("margin-layout.valid.json", margin_contract.validate_margin_layout),
+        ("margin-stable-layout.valid.json", margin_contract.validate_stable_layout),
+    ],
+)
+def test_margin_proof_accepts_premeasured_report_decoration_at_depth_zero(
+    fixture_name: str, validator
+) -> None:
+    layout = _margin_proof_fixture(fixture_name)
+    unreported = layout["notes"][0]
+    assert unreported["report_depth"] == 0
+    unreported["report_decoration_height_sp"] = 20000
+    unreported["effective_height_sp"] = unreported["base_height_sp"]
+
+    assert validator(layout) == layout
+
+
 def _margin_proof_place_both_notes_on_first_page(
     layout: dict, *, second_y_sp: int
 ) -> None:

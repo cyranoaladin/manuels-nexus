@@ -278,12 +278,11 @@ def _validate_layout_semantics(
             _reject(f"note {note_id} references an unknown target page")
         if require_complete and target_index is None:
             _reject(f"stable note {note_id} has no target")
-        if note["effective_height_sp"] != (
-            note["base_height_sp"] + note["report_decoration_height_sp"]
-        ):
+        expected_effective_height = note["base_height_sp"]
+        if note["report_depth"] > 0:
+            expected_effective_height += note["report_decoration_height_sp"]
+        if note["effective_height_sp"] != expected_effective_height:
             _reject(f"note {note_id} has an incoherent effective height")
-        if note["report_depth"] == 0 and note["report_decoration_height_sp"] != 0:
-            _reject(f"unreported note {note_id} has report decoration")
         if note["report_depth"] > 0:
             if note["report_decoration_height_sp"] <= 0:
                 _reject(f"reported note {note_id} lacks report decoration")
