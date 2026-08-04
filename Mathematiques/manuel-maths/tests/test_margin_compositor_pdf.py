@@ -20,6 +20,9 @@ MAX_PASSES = 6
 RUN_NONCE = "0123456789abcdef0123456789abcdef"
 CAPTURE_RECORD = re.compile(r"NEXUS-MARGIN-CAPTURE:(nxm:[^:\s]+:[^:\s]+:\d{8})")
 ANCHOR_RECORD = re.compile(r"NEXUS-MARGIN-ANCHOR:(nxm:[^:\s]+:[^:\s]+:\d{8})")
+VMODE_HLIST_RECORD = re.compile(r"NEXUS-MARGIN-VMODE-HLISTS:(\d+)")
+VMODE_PREVDEPTH_BEFORE = re.compile(r"NEXUS-MARGIN-VMODE-PREVDEPTH-BEFORE:(-?\d+)")
+VMODE_PREVDEPTH_AFTER = re.compile(r"NEXUS-MARGIN-VMODE-PREVDEPTH-AFTER:(-?\d+)")
 
 
 def _load_margin_contract():
@@ -104,6 +107,7 @@ def _run_private_passes(source: Path, output_directory: Path) -> list[dict[str, 
                 "layout": layout,
                 "capture_ids": capture_ids,
                 "anchor_ids": anchor_ids,
+                "stdout": result.stdout,
             }
         )
 
@@ -167,6 +171,67 @@ Seconde page témoin.
     assert [[note["id"] for note in item["layout"]["notes"]] for item in passes] == [
         expected_ids
     ] * len(passes)
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_vertical_mode_anchor_adds_no_hlist_and_preserves_prevdepth(
+    tmp_path: Path,
+) -> None:
+    fixture = tmp_path / "vertical-anchor.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\newdimen\nxPrevdepthBefore
+\newdimen\nxPrevdepthAfter
+\begin{document}
+\setbox0=\vbox{%
+  \hbox{Ligne avec descendantes gjpq}%
+  \global\nxPrevdepthBefore=\prevdepth
+  \penalty12345
+  \nxMarginRailNote{appui}{Appui vertical unique}%
+  \penalty12346
+  \global\nxPrevdepthAfter=\prevdepth
+  \hbox{Ligne suivante}%
+}%
+\directlua{
+  local between = false
+  local hlists = 0
+  for current in node.traverse(tex.box[0].list) do
+    local kind = node.type(current.id)
+    if kind == "penalty" and current.penalty == 12345 then
+      between = true
+    elseif kind == "penalty" and current.penalty == 12346 then
+      between = false
+    elseif between and kind == "hlist" then
+      hlists = hlists + 1
+    end
+  end
+  texio.write_nl("term and log", "NEXUS-MARGIN-VMODE-HLISTS:" .. hlists)
+}
+\typeout{NEXUS-MARGIN-VMODE-PREVDEPTH-BEFORE:\number\nxPrevdepthBefore}
+\typeout{NEXUS-MARGIN-VMODE-PREVDEPTH-AFTER:\number\nxPrevdepthAfter}
+\box0
+\newpage
+Seconde page témoin.
+\end{document}
+""",
+        encoding="utf-8",
+    )
+
+    passes = _run_private_passes(fixture, tmp_path)
+    expected_id = "nxm:eleve:appui:00000001"
+
+    for observed in passes:
+        stdout = observed["stdout"]
+        assert VMODE_HLIST_RECORD.findall(stdout) == ["0"]
+        before = VMODE_PREVDEPTH_BEFORE.findall(stdout)
+        after = VMODE_PREVDEPTH_AFTER.findall(stdout)
+        assert len(before) == len(after) == 1
+        assert int(before[0]) > 0
+        assert before == after
+        assert [note["id"] for note in observed["layout"]["notes"]] == [expected_id]
+        assert observed["capture_ids"] == [expected_id]
+        assert observed["anchor_ids"] == [expected_id]
 
 
 def test_capture_inventory_oracle_rejects_zero_notes() -> None:
