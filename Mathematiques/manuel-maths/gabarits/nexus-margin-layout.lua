@@ -1112,7 +1112,11 @@ function M.solve(current_layout, previous_layout_or_nil)
     end
   else
     result.read_digest = read_digest
-    if current_layout.run_nonce ~= previous_layout_or_nil.run_nonce then
+    -- A validated failed envelope is terminal, even across a foreign nonce.
+    if previous_layout_or_nil.state == "failed" then
+      result.state = "failed"
+      result.error_code = previous_layout_or_nil.error_code
+    elseif current_layout.run_nonce ~= previous_layout_or_nil.run_nonce then
       result.state = "failed"
       result.error_code = "foreign-margin-layout"
     elseif current_layout.pass_number ~= previous_layout_or_nil.pass_number + 1 then

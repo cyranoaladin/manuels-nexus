@@ -678,6 +678,69 @@ def test_convergence_pass_progression_failure_is_byte_deterministic(
     assert failed["error_code"] == "malformed-margin-layout"
 
 
+def _failed_replay_envelope(tmp_path: Path) -> dict[str, object]:
+    failed_run = tmp_path / "failed-replay"
+    failed_run.mkdir()
+    previous = _stable_identical_layout()
+    previous["pass_number"] = 5
+    replay = _layout_with_identical_anchors()
+    replay["pass_number"] = 5
+
+    failed = _run_convergence_case(failed_run, replay, previous)
+
+    assert failed["state"] == "failed"
+    assert failed["error_code"] == "malformed-margin-layout"
+    return failed
+
+
+def test_convergence_terminal_failed_state_cannot_heal_to_stable(
+    tmp_path: Path,
+) -> None:
+    failed = _failed_replay_envelope(tmp_path)
+    next_run = tmp_path / "next-pass"
+    next_run.mkdir()
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 6
+
+    solved = _run_convergence_case(next_run, current, failed)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "malformed-margin-layout"
+    assert solved["read_digest"] == solved["computed_digest"]
+
+
+def test_convergence_terminal_failed_state_preserves_valid_error_code(
+    tmp_path: Path,
+) -> None:
+    failed = _failed_replay_envelope(tmp_path)
+    failed["error_code"] = "margin-note-too-wide"
+    next_run = tmp_path / "next-pass"
+    next_run.mkdir()
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 6
+
+    solved = _run_convergence_case(next_run, current, failed)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "margin-note-too-wide"
+
+
+def test_convergence_terminal_failed_state_precedes_foreign_nonce(
+    tmp_path: Path,
+) -> None:
+    failed = _failed_replay_envelope(tmp_path)
+    next_run = tmp_path / "foreign-next-pass"
+    next_run.mkdir()
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 6
+    current["run_nonce"] = "fedcba9876543210fedcba9876543210"
+
+    solved = _run_convergence_case(next_run, current, failed)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "malformed-margin-layout"
+
+
 def test_convergence_foreign_run_nonce_fails_closed(tmp_path: Path) -> None:
     previous = _stable_identical_layout()
     current = _layout_with_identical_anchors()
