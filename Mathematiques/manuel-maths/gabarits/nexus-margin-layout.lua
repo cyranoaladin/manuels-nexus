@@ -1,6 +1,7 @@
 local M = {}
 
 local GAP_SP = 6 * 65536
+local MAX_PASSES = 6
 
 local function fail(path, message)
   error(string.format("invalid margin layout at %s: %s", path, message), 0)
@@ -361,12 +362,12 @@ local function validate_layout(layout, label)
     failed = true,
   })
   require_integer(layout.pass_number, label .. ".pass_number", 1)
-  if layout.pass_number > 6 then
-    fail(label .. ".pass_number", "expected an integer <= 6")
+  if layout.pass_number > MAX_PASSES then
+    fail(label .. ".pass_number", "expected an integer <= " .. MAX_PASSES)
   end
   require_integer(layout.max_passes, label .. ".max_passes", 1)
-  if layout.max_passes ~= 6 then
-    fail(label .. ".max_passes", "expected 6")
+  if layout.max_passes ~= MAX_PASSES then
+    fail(label .. ".max_passes", "expected " .. MAX_PASSES)
   end
   if json_container_type(layout.read_digest) ~= "null" then
     require_sha256(layout.read_digest, label .. ".read_digest")
@@ -674,13 +675,302 @@ local function sort_note_ids_by_order(note_ids, notes_by_id)
   end)
 end
 
+local function new_json_object(fields)
+  return setmetatable(fields or {}, { __nexus_json_type = "object" })
+end
+
+local function new_json_null()
+  return setmetatable({}, { __nexus_json_type = "null" })
+end
+
+local function utf8_sequence_end(text, position)
+  local first = text:byte(position)
+  if first < 0x80 then
+    return position + 1
+  end
+  local second = text:byte(position + 1)
+  local third = text:byte(position + 2)
+  local fourth = text:byte(position + 3)
+  local continuation = function(byte)
+    return byte and byte >= 0x80 and byte <= 0xBF
+  end
+  if first >= 0xC2 and first <= 0xDF and continuation(second) then
+    return position + 2
+  end
+  if first == 0xE0 and second and second >= 0xA0 and second <= 0xBF
+      and continuation(third) then
+    return position + 3
+  end
+  if first >= 0xE1 and first <= 0xEC
+      and continuation(second) and continuation(third) then
+    return position + 3
+  end
+  if first == 0xED and second and second >= 0x80 and second <= 0x9F
+      and continuation(third) then
+    return position + 3
+  end
+  if first >= 0xEE and first <= 0xEF
+      and continuation(second) and continuation(third) then
+    return position + 3
+  end
+  if first == 0xF0 and second and second >= 0x90 and second <= 0xBF
+      and continuation(third) and continuation(fourth) then
+    return position + 4
+  end
+  if first >= 0xF1 and first <= 0xF3
+      and continuation(second) and continuation(third) and continuation(fourth) then
+    return position + 4
+  end
+  if first == 0xF4 and second and second >= 0x80 and second <= 0x8F
+      and continuation(third) and continuation(fourth) then
+    return position + 4
+  end
+  fail("canonical_identity", "invalid UTF-8 string")
+end
+
+local CANONICAL_ESCAPES = {
+  [0x08] = "\\b",
+  [0x09] = "\\t",
+  [0x0A] = "\\n",
+  [0x0C] = "\\f",
+  [0x0D] = "\\r",
+  [0x22] = '\\"',
+  [0x5C] = "\\\\",
+}
+
+local function canonical_encode_string(value)
+  local pieces = { '"' }
+  local position = 1
+  while position <= #value do
+    local byte = value:byte(position)
+    local escaped = CANONICAL_ESCAPES[byte]
+    if escaped then
+      pieces[#pieces + 1] = escaped
+      position = position + 1
+    elseif byte < 0x20 then
+      pieces[#pieces + 1] = string.format("\\u%04x", byte)
+      position = position + 1
+    elseif byte < 0x80 then
+      pieces[#pieces + 1] = string.char(byte)
+      position = position + 1
+    else
+      local following = utf8_sequence_end(value, position)
+      pieces[#pieces + 1] = value:sub(position, following - 1)
+      position = following
+    end
+  end
+  pieces[#pieces + 1] = '"'
+  return table.concat(pieces)
+end
+
+local function canonical_encode_value(value, active)
+  local value_type = type(value)
+  if value_type == "string" then
+    return canonical_encode_string(value)
+  end
+  if value_type == "boolean" then
+    return value and "true" or "false"
+  end
+  if value_type == "number" then
+    if math.type(value) ~= "integer" then
+      fail("canonical_identity", "numbers must be integers")
+    end
+    return string.format("%d", value)
+  end
+  if value_type ~= "table" then
+    fail("canonical_identity", "unsupported value type " .. value_type)
+  end
+
+  local container_type = json_container_type(value)
+  if container_type == "null" then
+    return "null"
+  end
+  if container_type ~= "array" and container_type ~= "object" then
+    fail("canonical_identity", "table lacks a JSON container tag")
+  end
+  if active[value] then
+    fail("canonical_identity", "cyclic table")
+  end
+  active[value] = true
+
+  local pieces = {}
+  if container_type == "array" then
+    local count = 0
+    local maximum = 0
+    for key in next, value do
+      if type(key) ~= "number" or math.type(key) ~= "integer" or key < 1 then
+        fail("canonical_identity", "array key must be a positive integer")
+      end
+      count = count + 1
+      maximum = math.max(maximum, key)
+    end
+    if count ~= maximum then
+      fail("canonical_identity", "array must not contain holes")
+    end
+    for index = 1, maximum do
+      pieces[index] = canonical_encode_value(value[index], active)
+    end
+    active[value] = nil
+    return "[" .. table.concat(pieces, ",") .. "]"
+  end
+
+  local keys = {}
+  for key in next, value do
+    if type(key) ~= "string" then
+      fail("canonical_identity", "object key must be a string")
+    end
+    keys[#keys + 1] = key
+  end
+  table.sort(keys, bytewise_less)
+  for index, key in ipairs(keys) do
+    pieces[index] = canonical_encode_string(key)
+      .. ":" .. canonical_encode_value(value[key], active)
+  end
+  active[value] = nil
+  return "{" .. table.concat(pieces, ",") .. "}"
+end
+
+local SHA256_CONSTANTS = {
+  0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
+  0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+  0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
+  0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+  0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc,
+  0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+  0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7,
+  0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+  0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
+  0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+  0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3,
+  0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+  0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5,
+  0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+  0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
+  0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
+}
+
+local function uint32(value)
+  return value & 0xffffffff
+end
+
+local function rotate_right(value, count)
+  return uint32((value >> count) | (value << (32 - count)))
+end
+
+local function sha256_hex(message)
+  local bit_length = #message * 8
+  local high_length = math.floor(bit_length / 0x100000000)
+  local low_length = bit_length % 0x100000000
+  local padding_length = (56 - (#message + 1) % 64) % 64
+  local padded = message .. string.char(0x80) .. string.rep("\0", padding_length)
+    .. string.char(
+      (high_length >> 24) & 0xff,
+      (high_length >> 16) & 0xff,
+      (high_length >> 8) & 0xff,
+      high_length & 0xff,
+      (low_length >> 24) & 0xff,
+      (low_length >> 16) & 0xff,
+      (low_length >> 8) & 0xff,
+      low_length & 0xff
+    )
+  local hash = {
+    0x6a09e667,
+    0xbb67ae85,
+    0x3c6ef372,
+    0xa54ff53a,
+    0x510e527f,
+    0x9b05688c,
+    0x1f83d9ab,
+    0x5be0cd19,
+  }
+
+  for offset = 1, #padded, 64 do
+    local words = {}
+    for index = 1, 16 do
+      local word_offset = offset + (index - 1) * 4
+      local first, second, third, fourth = padded:byte(word_offset, word_offset + 3)
+      words[index] = uint32(
+        (first << 24) | (second << 16) | (third << 8) | fourth
+      )
+    end
+    for index = 17, 64 do
+      local earlier = words[index - 15]
+      local later = words[index - 2]
+      local sigma_zero = rotate_right(earlier, 7)
+        ~ rotate_right(earlier, 18) ~ (earlier >> 3)
+      local sigma_one = rotate_right(later, 17)
+        ~ rotate_right(later, 19) ~ (later >> 10)
+      words[index] = uint32(
+        words[index - 16] + sigma_zero + words[index - 7] + sigma_one
+      )
+    end
+
+    local a, b, c, d, e, f, g, h = table.unpack(hash)
+    for index = 1, 64 do
+      local capital_sigma_one = rotate_right(e, 6)
+        ~ rotate_right(e, 11) ~ rotate_right(e, 25)
+      local choice = (e & f) ~ ((~e) & g)
+      local temporary_one = uint32(
+        h + capital_sigma_one + choice + SHA256_CONSTANTS[index] + words[index]
+      )
+      local capital_sigma_zero = rotate_right(a, 2)
+        ~ rotate_right(a, 13) ~ rotate_right(a, 22)
+      local majority = (a & b) ~ (a & c) ~ (b & c)
+      local temporary_two = uint32(capital_sigma_zero + majority)
+      h = g
+      g = f
+      f = e
+      e = uint32(d + temporary_one)
+      d = c
+      c = b
+      b = a
+      a = uint32(temporary_one + temporary_two)
+    end
+    hash[1] = uint32(hash[1] + a)
+    hash[2] = uint32(hash[2] + b)
+    hash[3] = uint32(hash[3] + c)
+    hash[4] = uint32(hash[4] + d)
+    hash[5] = uint32(hash[5] + e)
+    hash[6] = uint32(hash[6] + f)
+    hash[7] = uint32(hash[7] + g)
+    hash[8] = uint32(hash[8] + h)
+  end
+
+  local pieces = {}
+  for index, word in ipairs(hash) do
+    pieces[index] = string.format("%08x", word)
+  end
+  return table.concat(pieces)
+end
+
+local function canonical_identity(layout)
+  return new_json_object({
+    schema_version = layout.schema_version,
+    variant = layout.variant,
+    geometry_digest = layout.geometry_digest,
+    semantic_digest = layout.semantic_digest,
+    max_passes = MAX_PASSES,
+    notes = layout.notes,
+    pages = layout.pages,
+  })
+end
+
+local function canonical_digest(layout)
+  local bytes = canonical_encode_value(canonical_identity(layout), {})
+  return "sha256:" .. sha256_hex(bytes)
+end
+
 function M.solve(current_layout, previous_layout_or_nil)
   validate_layout(current_layout, "current")
   if previous_layout_or_nil ~= nil then
     validate_layout(previous_layout_or_nil, "previous")
   end
 
+  local read_digest = previous_layout_or_nil
+    and canonical_digest(previous_layout_or_nil) or nil
+
   local result = deep_copy(current_layout)
+  result.max_passes = MAX_PASSES
   table.sort(result.notes, order_less)
   table.sort(result.pages, function(first, second)
     return first.shipout_index < second.shipout_index
@@ -802,6 +1092,29 @@ function M.solve(current_layout, previous_layout_or_nil)
     page.placed_note_ids = placed_ids
     sort_note_ids_by_order(reported_ids, notes_by_id)
     page.reported_note_ids = reported_ids
+  end
+
+
+  result.computed_digest = canonical_digest(result)
+  if previous_layout_or_nil == nil then
+    result.state = "collecting"
+    result.read_digest = new_json_null()
+    result.error_code = new_json_null()
+  else
+    result.read_digest = read_digest
+    if current_layout.run_nonce ~= previous_layout_or_nil.run_nonce then
+      result.state = "failed"
+      result.error_code = "foreign-margin-layout"
+    elseif result.computed_digest == read_digest then
+      result.state = "stable"
+      result.error_code = new_json_null()
+    elseif current_layout.pass_number == MAX_PASSES then
+      result.state = "failed"
+      result.error_code = "margin-layout-oscillation"
+    else
+      result.state = "changed"
+      result.error_code = new_json_null()
+    end
   end
   validate_layout(result, "result")
   return result

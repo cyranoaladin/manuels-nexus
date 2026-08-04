@@ -465,6 +465,211 @@ def _stable_identical_layout() -> dict[str, object]:
     return layout
 
 
+def _canonical_layout_identity(layout: dict[str, object]) -> dict[str, object]:
+    return {
+        key: copy.deepcopy(layout[key])
+        for key in (
+            "schema_version",
+            "variant",
+            "geometry_digest",
+            "semantic_digest",
+            "max_passes",
+            "notes",
+            "pages",
+        )
+    }
+
+
+def _run_convergence_case(
+    tmp_path: Path,
+    current_layout: dict[str, object],
+    previous_layout: dict[str, object] | None = None,
+) -> dict[str, object]:
+    source = tmp_path / "current.json"
+    previous = tmp_path / "previous.json"
+    output = tmp_path / "output.json"
+    _write_json(source, current_layout)
+    if previous_layout is not None:
+        _write_json(previous, previous_layout)
+
+    result = _run_solver(
+        source,
+        output,
+        previous=previous if previous_layout is not None else None,
+        cwd=tmp_path,
+    )
+
+    assert result.returncode == 0, result.stderr
+    solved = json.loads(output.read_text(encoding="utf-8"))
+    _load_margin_contract().validate_margin_layout(solved)
+    return solved
+
+
+def test_convergence_without_previous_layout_is_collecting(tmp_path: Path) -> None:
+    current = _layout_with_identical_anchors()
+    current["pages"][0]["folio"] = "déjà 😀"
+    for note in current["notes"]:
+        note["origin_folio"] = "déjà 😀"
+    solved = _run_convergence_case(tmp_path, current)
+    contract = _load_margin_contract()
+
+    assert solved["state"] == "collecting"
+    assert solved["read_digest"] is None
+    assert solved["computed_digest"] == contract.canonical_digest(
+        _canonical_layout_identity(solved)
+    )
+    assert solved["error_code"] is None
+    assert solved["max_passes"] == 6
+
+
+def test_convergence_different_canonical_placement_is_changed(tmp_path: Path) -> None:
+    previous = _stable_identical_layout()
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 3
+    for note in current["notes"]:
+        note["origin_y_sp"] += 5 * SP_PER_PT
+
+    solved = _run_convergence_case(tmp_path, current, previous)
+    contract = _load_margin_contract()
+
+    assert solved["state"] == "changed"
+    assert solved["read_digest"] == contract.canonical_digest(
+        _canonical_layout_identity(previous)
+    )
+    assert solved["computed_digest"] == contract.canonical_digest(
+        _canonical_layout_identity(solved)
+    )
+    assert solved["read_digest"] != solved["computed_digest"]
+    assert solved["error_code"] is None
+
+
+def test_convergence_identical_canonical_placement_is_stable(tmp_path: Path) -> None:
+    previous = _stable_identical_layout()
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 3
+
+    solved = _run_convergence_case(tmp_path, current, previous)
+
+    assert solved["state"] == "stable"
+    assert solved["read_digest"] == solved["computed_digest"]
+    assert solved["error_code"] is None
+
+
+def test_convergence_sixth_non_stable_pass_fails_closed(tmp_path: Path) -> None:
+    previous = _stable_identical_layout()
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 6
+    for note in current["notes"]:
+        note["origin_y_sp"] += 5 * SP_PER_PT
+
+    solved = _run_convergence_case(tmp_path, current, previous)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "margin-layout-oscillation"
+    assert solved["read_digest"] != solved["computed_digest"]
+
+
+def test_convergence_foreign_run_nonce_fails_closed(tmp_path: Path) -> None:
+    previous = _stable_identical_layout()
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 3
+    current["run_nonce"] = "fedcba9876543210fedcba9876543210"
+
+    solved = _run_convergence_case(tmp_path, current, previous)
+
+    assert solved["state"] == "failed"
+    assert solved["error_code"] == "foreign-margin-layout"
+
+
+def test_convergence_nonce_does_not_contaminate_canonical_digest(tmp_path: Path) -> None:
+    first = _layout_with_identical_anchors()
+    second = copy.deepcopy(first)
+    second["run_nonce"] = "fedcba9876543210fedcba9876543210"
+    first_run = tmp_path / "first"
+    second_run = tmp_path / "second"
+    first_run.mkdir()
+    second_run.mkdir()
+
+    first_solved = _run_convergence_case(first_run, first)
+    second_solved = _run_convergence_case(second_run, second)
+    contract = _load_margin_contract()
+
+    assert first_solved["computed_digest"] == contract.canonical_digest(
+        _canonical_layout_identity(first_solved)
+    )
+    assert second_solved["computed_digest"] == contract.canonical_digest(
+        _canonical_layout_identity(second_solved)
+    )
+    assert first_solved["computed_digest"] == second_solved["computed_digest"]
+
+
+def test_convergence_cli_is_byte_identical_for_two_explicit_outputs(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "current.json"
+    previous_path = tmp_path / "previous.json"
+    first_output = tmp_path / "first-output.json"
+    second_output = tmp_path / "second-output.json"
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 3
+    _write_json(source, current)
+    _write_json(previous_path, _stable_identical_layout())
+
+    first = _run_solver(source, first_output, previous=previous_path, cwd=tmp_path)
+    second = _run_solver(source, second_output, previous=previous_path, cwd=tmp_path)
+
+    assert first.returncode == 0, first.stderr
+    assert second.returncode == 0, second.stderr
+    assert first_output.read_bytes() == second_output.read_bytes()
+    assert json.loads(first_output.read_text(encoding="utf-8"))["state"] == "stable"
+
+
+def test_convergence_alias_cannot_create_false_stable_or_mutate_input(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "aliased.json"
+    current = _layout_with_identical_anchors()
+    current["pass_number"] = 2
+    _write_json(source, current)
+    driver = tmp_path / "alias-convergence-driver.lua"
+    driver.write_text(
+        """
+local json = assert(loadfile(arg[1]))()
+local layout = assert(loadfile(arg[2]))()
+local file = assert(io.open(arg[3], "rb"))
+local aliased = json.decode(file:read("*a"))
+assert(file:close())
+local before = json.encode(aliased)
+local solved = layout.solve(aliased, aliased)
+assert(json.encode(aliased) == before, "aliased input mutated")
+assert(solved ~= aliased, "solver returned caller-owned root")
+assert(solved.notes ~= aliased.notes, "solver reused caller-owned notes")
+assert(solved.pages ~= aliased.pages, "solver reused caller-owned pages")
+assert(solved.state == "changed", "aliased input caused false stable")
+assert(solved.read_digest ~= solved.computed_digest, "aliased digests falsely agree")
+io.write(json.encode(solved))
+""".strip(),
+        encoding="utf-8",
+    )
+
+    result = subprocess.run(
+        [
+            "texlua",
+            str(driver),
+            str(JSON_CODEC),
+            str(MANUAL_ROOT / "gabarits" / "nexus-margin-layout.lua"),
+            str(source),
+        ],
+        cwd=tmp_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    _load_margin_contract().validate_margin_layout(json.loads(result.stdout))
+
+
 def _mutate_contract_case(layout: dict[str, object], case: str) -> None:
     if case == "unexpected_root":
         layout["unexpected"] = True
