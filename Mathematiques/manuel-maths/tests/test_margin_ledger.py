@@ -73,11 +73,13 @@ def _run_private_passes(
     output_directory.mkdir(parents=True, exist_ok=True)
     previous = output_directory / "margin-layout.previous.json"
     next_layout = output_directory / "margin-layout.next.json"
+    next_links = output_directory / "margin-links.next.json"
     stable_path = output_directory / "margin-stable-layout.json"
     observations: list[dict[str, Any]] = []
 
     for pass_number in range(1, MAX_PASSES + 1):
         next_layout.unlink(missing_ok=True)
+        next_links.unlink(missing_ok=True)
         environment = os.environ.copy()
         environment.update(
             {
@@ -86,6 +88,7 @@ def _run_private_passes(
                 "NEXUS_MARGIN_PASS_NUMBER": str(pass_number),
                 "NEXUS_MARGIN_LAYOUT_PREVIOUS": str(previous),
                 "NEXUS_MARGIN_LAYOUT_NEXT": str(next_layout),
+                "NEXUS_MARGIN_LINK_INVENTORY_NEXT": str(next_links),
                 "NEXUS_MARGIN_MARKER_METADATA": "1",
                 "SOURCE_DATE_EPOCH": "1704067200",
                 "TZ": "UTC",
@@ -107,7 +110,9 @@ def _run_private_passes(
         )
         assert result.returncode == 0, result.stdout[-10000:] + result.stderr
         assert next_layout.is_file(), "margin-layout.next.json absent"
+        assert next_links.is_file(), "margin-links.next.json absent"
         layout = json.loads(next_layout.read_text(encoding="utf-8"))
+        link_inventory = json.loads(next_links.read_text(encoding="utf-8"))
         contract.validate_margin_layout(layout)
         assert layout["notes"], "zéro capture ne constitue pas une preuve PDF"
         observations.append(
@@ -134,6 +139,7 @@ def _run_private_passes(
         "capture": json.loads(previous.read_text(encoding="utf-8")),
         "stable": json.loads(stable_path.read_text(encoding="utf-8")),
         "stable_bytes": stable_path.read_bytes(),
+        "links": link_inventory,
         "pdf": pdf_path,
         "observations": observations,
     }
@@ -242,6 +248,106 @@ def _with_first_margin_anchor_property(
     return instructions
 
 
+def _with_margin_note_property(
+    instructions: list[Any], note_id: str, key: str, value: Any
+) -> list[Any]:
+    mutated = False
+    for operands, operator in instructions:
+        if (
+            not mutated
+            and str(operator) == "BDC"
+            and len(operands) == 2
+            and str(operands[0]) == "/NXMarginNote"
+            and str(operands[1].get("/ID", "")) == note_id
+        ):
+            operands[1][key] = value
+            mutated = True
+            break
+    assert mutated
+    return instructions
+
+
+def _first_margin_anchor_segment(instructions: list[Any]) -> list[Any]:
+    segment: list[Any] = []
+    collecting = False
+    nested = 0
+    for instruction in instructions:
+        operands, operator = instruction
+        operation = str(operator)
+        if (
+            not collecting
+            and operation == "BDC"
+            and operands
+            and str(operands[0]) == "/NXMarginAnchor"
+        ):
+            collecting = True
+            nested = 1
+        if collecting:
+            segment.append(instruction)
+            if operation in {"BDC", "BMC"} and len(segment) > 1:
+                nested += 1
+            elif operation == "EMC":
+                nested -= 1
+                if nested == 0:
+                    break
+    assert segment and nested == 0
+    return segment
+
+
+def _reverse_margin_note_segments(instructions: list[Any]) -> list[Any]:
+    remainder: list[Any] = []
+    segments: list[list[Any]] = []
+    index = 0
+    while index < len(instructions):
+        operands, operator = instructions[index]
+        if (
+            str(operator) == "BDC"
+            and operands
+            and str(operands[0]) == "/NXMarginNote"
+        ):
+            segment: list[Any] = []
+            depth = 0
+            while index < len(instructions):
+                instruction = instructions[index]
+                operation = str(instruction[1])
+                segment.append(instruction)
+                if operation in {"BDC", "BMC"}:
+                    depth += 1
+                elif operation == "EMC":
+                    depth -= 1
+                    if depth == 0:
+                        index += 1
+                        break
+                index += 1
+            assert depth == 0
+            segments.append(segment)
+            continue
+        remainder.append(instructions[index])
+        index += 1
+    assert len(segments) >= 2
+    return remainder + [item for segment in reversed(segments) for item in segment]
+
+
+def _first_margin_form(pdf: pikepdf.Pdf) -> tuple[Any, Any]:
+    for page in pdf.pages:
+        xobjects = page.obj["/Resources"].get("/XObject", {})
+        for name in xobjects:
+            form = xobjects[name]
+            if form.get("/NXMarginID"):
+                return xobjects, form
+    raise AssertionError("Form marginale absente")
+
+
+def _assert_qpdf_valid(pdf_path: Path) -> None:
+    result = subprocess.run(
+        ["qpdf", "--check", str(pdf_path)],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
 def _first_margin_note_segment(instructions: list[Any]) -> list[Any]:
     segment: list[Any] = []
     collecting = False
@@ -305,7 +411,7 @@ Page de report disponible.
 
     ledger_module = _load_ledger()
     ledger = ledger_module.reconstruct_margin_ledger(
-        build["pdf"], build["capture"], build["stable"]
+        build["pdf"], build["capture"], build["stable"], build["links"]
     )
     assert [note["note_id"] for note in ledger["notes"]] == expected_ids
     assert [note["note_count"] for note in ledger["notes"]] == [1, 1, 1]
@@ -369,7 +475,7 @@ Page cible du report.\vfill
     assert counts["NXMarginAnchor"] == 2
 
     ledger = _load_ledger().reconstruct_margin_ledger(
-        build["pdf"], build["capture"], build["stable"]
+        build["pdf"], build["capture"], build["stable"], build["links"]
     )
     assert [note["note_id"] for note in ledger["notes"]] == expected_ids
     by_id = {note["note_id"]: note for note in ledger["notes"]}
@@ -417,7 +523,7 @@ Page témoin.
     assert _marked_content_counts(build["pdf"])["NXMarginNote"] == 1
 
     _load_ledger().reconstruct_margin_ledger(
-        build["pdf"], build["capture"], build["stable"]
+        build["pdf"], build["capture"], build["stable"], build["links"]
     )
     links = _link_annotations(build["pdf"])
     uri_links = [link for link in links if "nexus-margin-ledger" in link["uri"]]
@@ -484,7 +590,7 @@ Liens\nxMarginRailNote{appui}{%
     build = _run_private_passes(fixture, tmp_path / "build")
     ledger_module = _load_ledger()
     original = ledger_module.reconstruct_margin_ledger(
-        build["pdf"], build["capture"], build["stable"]
+        build["pdf"], build["capture"], build["stable"], build["links"]
     )
     assert original["notes"][0]["anchor_count"] == 1
     assert len(_link_annotations(build["pdf"])) >= 3
@@ -517,7 +623,7 @@ Liens\nxMarginRailNote{appui}{%
 
     with pytest.raises(ledger_module.MarginLedgerError):
         ledger_module.reconstruct_margin_ledger(
-            anchor_order_pdf, build["capture"], build["stable"]
+            anchor_order_pdf, build["capture"], build["stable"], build["links"]
         )
 
     malformed_anchor_pdfs: list[Path] = []
@@ -538,7 +644,7 @@ Liens\nxMarginRailNote{appui}{%
     for mutation in malformed_anchor_pdfs:
         with pytest.raises(ledger_module.MarginLedgerError):
             ledger_module.reconstruct_margin_ledger(
-                mutation, build["capture"], build["stable"]
+                mutation, build["capture"], build["stable"], build["links"]
             )
 
     duplicate_note_pdf = tmp_path / "mutated-duplicate-note.pdf"
@@ -578,12 +684,134 @@ Liens\nxMarginRailNote{appui}{%
     ):
         with pytest.raises(ledger_module.MarginLedgerError):
             ledger_module.reconstruct_margin_ledger(
-                mutation, build["capture"], build["stable"]
+                mutation, build["capture"], build["stable"], build["links"]
             )
 
     assert ledger_module.reconstruct_margin_ledger(
-        build["pdf"], build["capture"], build["stable"]
+        build["pdf"], build["capture"], build["stable"], build["links"]
     ) == original
+
+
+@pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
+def test_pdf_bijection_rejects_seven_independent_mutations(tmp_path: Path) -> None:
+    fixture = tmp_path / "complete-bijection-adversaries.tex"
+    fixture.write_text(
+        r"""\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\usepackage{hyperref}
+\begin{document}
+\hypertarget{nx-complete-target}{Destination interne}
+\noindent Ancre commune\nxMarginRailNote{appui}{%
+  \href{https://example.invalid/nexus-complete-bijection}{%
+    Lien URI multiligne pour la mutation des annotations de page.}%
+  Puis \hyperlink{nx-complete-target}{lien interne}.}%
+\nxMarginRailNote{commentaire}{Deuxième note au même ancrage.}%
+\nxMarginRailNote{vocab}{Troisième note au même ancrage.} Fin.
+\newpage Page cible disponible.
+\end{document}
+""",
+        encoding="utf-8",
+    )
+    build = _run_private_passes(fixture, tmp_path / "build")
+    ledger_module = _load_ledger()
+    original_bytes = build["pdf"].read_bytes()
+    original = ledger_module.reconstruct_margin_ledger(
+        build["pdf"], build["capture"], build["stable"], build["links"]
+    )
+    marker_id = next(note["note_id"] for note in original["notes"] if note["requires_marker"])
+    assert len(original["notes"]) == 3
+    assert _link_annotations(build["pdf"])
+
+    mutations: dict[str, Path] = {}
+
+    marker_pdf = tmp_path / "mutation-1-marker-self-justified.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        page = pdf.pages[0]
+        instructions = list(pikepdf.parse_content_stream(page))
+        instructions = _with_margin_note_property(
+            instructions, marker_id, "/RequiresMarker", False
+        )
+        instructions = _without_first_margin_anchor(instructions)
+        _replace_page_instructions(pdf, page, instructions)
+        pdf.save(marker_pdf)
+    mutations["requires-marker-self-justified"] = marker_pdf
+
+    moved_anchor_pdf = tmp_path / "mutation-2-anchor-wrong-page.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        origin_page = pdf.pages[0]
+        target_page = pdf.pages[1]
+        origin_instructions = list(pikepdf.parse_content_stream(origin_page))
+        anchor_segment = _first_margin_anchor_segment(origin_instructions)
+        _replace_page_instructions(
+            pdf, origin_page, _without_first_margin_anchor(origin_instructions)
+        )
+        target_instructions = list(pikepdf.parse_content_stream(target_page))
+        _replace_page_instructions(pdf, target_page, target_instructions + anchor_segment)
+        pdf.save(moved_anchor_pdf)
+    mutations["anchor-wrong-page"] = moved_anchor_pdf
+
+    missing_links_pdf = tmp_path / "mutation-3-links-deleted.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        for page in pdf.pages:
+            annotations = [
+                item
+                for item in page.obj.get("/Annots", [])
+                if str(item.get("/Subtype", "")) != "/Link"
+            ]
+            page.obj["/Annots"] = pikepdf.Array(annotations)
+        pdf.save(missing_links_pdf)
+    mutations["links-deleted"] = missing_links_pdf
+
+    translated_bbox_pdf = tmp_path / "mutation-4-bbox-translated.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        _, form = _first_margin_form(pdf)
+        for index in range(4):
+            form["/BBox"][index] = float(form["/BBox"][index]) + 1
+        pdf.save(translated_bbox_pdf)
+    mutations["bbox-translated"] = translated_bbox_pdf
+
+    orphan_form_pdf = tmp_path / "mutation-5-orphan-form.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        xobjects, form = _first_margin_form(pdf)
+        orphan = pikepdf.Stream(pdf, form.read_bytes())
+        for key, value in form.items():
+            if str(key) not in {"/Length", "/Filter", "/DecodeParms"}:
+                orphan[key] = value
+        xobjects["/NXMarginOrphan"] = orphan
+        pdf.save(orphan_form_pdf)
+    mutations["orphan-form"] = orphan_form_pdf
+
+    reversed_notes_pdf = tmp_path / "mutation-6-note-order.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        page = pdf.pages[0]
+        instructions = list(pikepdf.parse_content_stream(page))
+        _replace_page_instructions(pdf, page, _reverse_margin_note_segments(instructions))
+        pdf.save(reversed_notes_pdf)
+    mutations["note-order"] = reversed_notes_pdf
+
+    bogus_form_tag_pdf = tmp_path / "mutation-7-bogus-form-tag.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        _, form = _first_margin_form(pdf)
+        form.write(b"/NXMarginBogus BMC EMC\n" + form.read_bytes())
+        pdf.save(bogus_form_tag_pdf)
+    mutations["bogus-form-tag"] = bogus_form_tag_pdf
+
+    accepted: list[str] = []
+    for name, mutation in mutations.items():
+        _assert_qpdf_valid(mutation)
+        try:
+            ledger_module.reconstruct_margin_ledger(
+                mutation, build["capture"], build["stable"], build["links"]
+            )
+        except ledger_module.MarginLedgerError:
+            continue
+        accepted.append(name)
+
+    assert build["pdf"].read_bytes() == original_bytes
+    assert ledger_module.reconstruct_margin_ledger(
+        build["pdf"], build["capture"], build["stable"], build["links"]
+    ) == original
+    assert accepted == [], f"mutations PDF acceptées: {accepted}"
 
 
 @pytest.mark.skipif(shutil.which("lualatex") is None, reason="lualatex absent")
@@ -611,10 +839,10 @@ Texte\margeAppui{Note déterministe.}
     )
     ledger_module = _load_ledger()
     first_ledger = ledger_module.reconstruct_margin_ledger(
-        first["pdf"], first["capture"], first["stable"]
+        first["pdf"], first["capture"], first["stable"], first["links"]
     )
     second_ledger = ledger_module.reconstruct_margin_ledger(
-        second["pdf"], second["capture"], second["stable"]
+        second["pdf"], second["capture"], second["stable"], second["links"]
     )
     contract = _load_contract()
 

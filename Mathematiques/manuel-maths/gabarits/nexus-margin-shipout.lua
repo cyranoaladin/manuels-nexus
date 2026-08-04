@@ -433,6 +433,92 @@ local function controlled_link_action(current)
   return record
 end
 
+local function pdf_literal_string(data, marker)
+  if type(data) ~= "string" then
+    fail("link action data must be a string")
+  end
+  local _, opening = data:find(marker .. "%s*%(")
+  if not opening then
+    fail("link action lacks its controlled literal string")
+  end
+  local pieces = {}
+  local depth = 1
+  local index = opening + 1
+  while index <= #data do
+    local byte = data:byte(index)
+    if byte == 92 then
+      local escaped = data:byte(index + 1)
+      if not escaped then
+        fail("unterminated escape in link action")
+      end
+      if escaped == 10 then
+        index = index + 2
+      elseif escaped == 13 then
+        index = index + (data:byte(index + 2) == 10 and 3 or 2)
+      elseif escaped >= 48 and escaped <= 55 then
+        local digits = data:sub(index + 1, index + 1)
+        local following = index + 2
+        while #digits < 3 and following <= #data do
+          local candidate = data:byte(following)
+          if candidate < 48 or candidate > 55 then
+            break
+          end
+          digits = digits .. data:sub(following, following)
+          following = following + 1
+        end
+        pieces[#pieces + 1] = string.char(tonumber(digits, 8))
+        index = following
+      else
+        local replacements = {
+          [98] = "\b", [102] = "\f", [110] = "\n", [114] = "\r", [116] = "\t",
+        }
+        pieces[#pieces + 1] = replacements[escaped] or string.char(escaped)
+        index = index + 2
+      end
+    elseif byte == 40 then
+      depth = depth + 1
+      pieces[#pieces + 1] = "("
+      index = index + 1
+    elseif byte == 41 then
+      depth = depth - 1
+      if depth == 0 then
+        return table.concat(pieces)
+      end
+      pieces[#pieces + 1] = ")"
+      index = index + 1
+    else
+      pieces[#pieces + 1] = string.char(byte)
+      index = index + 1
+    end
+  end
+  fail("unterminated literal string in link action")
+end
+
+local function controlled_link_inventory_action(action)
+  if action.action_type == 3 then
+    if type(action.data) ~= "string"
+        or not action.data:find("/S/URI", 1, true) then
+      fail("unsupported user link action in marginal note")
+    end
+    return json_object({
+      kind = "URI",
+      target = pdf_literal_string(action.data, "/URI"),
+    })
+  end
+  if action.action_type == 1 then
+    local destination = action.action_id or action.data
+    if type(destination) ~= "string" then
+      fail("internal margin link lacks a named destination")
+    end
+    destination = destination:match("^([%w%._:%-]+)")
+    if not destination or destination == "" then
+      fail("internal margin link has an invalid named destination")
+    end
+    return json_object({ kind = "GoTo", target = destination })
+  end
+  fail("unsupported marginal link action type " .. tostring(action.action_type))
+end
+
 local function horizontal_link_events(head, parent, base_x_sp, events)
   local cursor_sp = 0
   for current in node.traverse(head) do
@@ -719,6 +805,7 @@ function M.configure(values)
     pass_number = pass_number,
     run_nonce = run_nonce,
     next_path = os.getenv("NEXUS_MARGIN_LAYOUT_NEXT"),
+    link_inventory_path = os.getenv("NEXUS_MARGIN_LINK_INVENTORY_NEXT"),
     previous_path = os.getenv("NEXUS_MARGIN_LAYOUT_PREVIOUS"),
     page_width_sp = values.page_width_sp,
     page_height_sp = values.page_height_sp,
@@ -1383,24 +1470,59 @@ local function current_envelope()
   })
 end
 
-local function write_next(layout)
-  local path = configuration.next_path
+local function current_link_inventory()
+  local note_records = json_array()
+  for note_index, identifier in ipairs(capture_order) do
+    local capture = captures[identifier]
+    local link_records = json_array()
+    for link_index, link in ipairs(capture.links) do
+      link_records[link_index] = json_object({
+        rect_sp = json_array({
+          link.left_sp,
+          link.top_sp,
+          link.right_sp,
+          link.bottom_sp,
+        }),
+        action = controlled_link_inventory_action(link.action),
+      })
+    end
+    note_records[note_index] = json_object({
+      note_id = capture.id,
+      global_order = capture.global_order,
+      marker_threshold_sp = 2 * capture.interline_sp,
+      links = link_records,
+    })
+  end
+  return json_object({
+    schema_version = 1,
+    variant = configuration.variant,
+    run_nonce = configuration.run_nonce,
+    pass_number = configuration.pass_number,
+    notes = note_records,
+  })
+end
+
+local function write_json_document(path, label, document)
   if not path or path == "" then
     return
   end
   local handle, open_error = io.open(path, "wb")
   if not handle then
-    fail("cannot open next layout: " .. tostring(open_error))
+    fail("cannot open " .. label .. ": " .. tostring(open_error))
   end
-  local ok, write_error = handle:write(json.encode(layout))
+  local ok, write_error = handle:write(json.encode(document))
   if not ok then
     handle:close()
-    fail("cannot write next layout: " .. tostring(write_error))
+    fail("cannot write " .. label .. ": " .. tostring(write_error))
   end
   local closed, close_error = handle:close()
   if not closed then
-    fail("cannot close next layout: " .. tostring(close_error))
+    fail("cannot close " .. label .. ": " .. tostring(close_error))
   end
+end
+
+local function write_next(layout)
+  write_json_document(configuration.next_path, "next layout", layout)
 end
 
 function M.finalize()
@@ -1421,6 +1543,11 @@ function M.finalize()
     end
     error(message, 0)
   end
+  write_json_document(
+    configuration.link_inventory_path,
+    "next link inventory",
+    current_link_inventory()
+  )
   write_next(solved)
 end
 

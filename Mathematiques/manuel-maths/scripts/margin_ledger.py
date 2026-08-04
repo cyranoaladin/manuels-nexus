@@ -25,8 +25,21 @@ SCRIPT_DIRECTORY = Path(__file__).resolve().parent
 CONTROL_ID_PATTERN = re.compile(r"\bnxm:[^\s]+")
 STUDENT_INTERNAL_ID_PATTERN = re.compile(r"\b1SPE-[A-Z0-9][A-Z0-9-]*\b")
 KNOWN_MARGIN_TAGS = {"NXMarginNote", "NXMarginAnchor"}
+NOTE_PROPERTY_KEYS = {
+    "/BBoxSP",
+    "/ID",
+    "/Order",
+    "/OriginFolio",
+    "/OriginPage",
+    "/ReportDepth",
+    "/RequiresMarker",
+    "/Role",
+    "/TargetFolio",
+    "/TargetPage",
+}
 BP_TO_SP = 72.27 * 65536 / 72
 FORM_BBOX_ROUNDING_TOLERANCE_SP = 32
+LINK_RECT_TOLERANCE_BP = 0.002
 
 
 class MarginLedgerError(ValueError):
@@ -116,25 +129,19 @@ def _pdf_name(value: Any) -> str:
     return str(value).removeprefix("/")
 
 
-def _pdf_string(value: Any, label: str) -> str:
-    if value is None:
-        _reject(f"missing {label}")
+def _pdf_exact_string(value: Any, label: str) -> str:
+    if not isinstance(value, pikepdf.String):
+        _reject(f"{label} must be one PDF string")
     rendered = str(value)
     if not rendered:
         _reject(f"empty {label}")
     return rendered
 
 
-def _pdf_integer(value: Any, label: str) -> int:
-    if isinstance(value, bool):
-        _reject(f"{label} must be an integer")
-    try:
-        integer = int(value)
-    except (TypeError, ValueError, OverflowError) as exc:
-        raise MarginLedgerError(f"{label} must be an integer") from exc
-    if float(value) != integer:
-        _reject(f"{label} must be an integer")
-    return integer
+def _pdf_exact_integer(value: Any, label: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        _reject(f"{label} must be one PDF integer")
+    return value
 
 
 def _pdf_boolean(value: Any, label: str) -> bool:
@@ -147,7 +154,7 @@ def _bbox_sp(value: Any, label: str) -> tuple[int, int, int, int]:
     if not isinstance(value, (list, pikepdf.Array)) or len(value) != 4:
         _reject(f"{label} must contain four coordinates")
     coordinates = tuple(
-        _pdf_integer(coordinate, f"{label}[{index}]")
+        _pdf_exact_integer(coordinate, f"{label}[{index}]")
         for index, coordinate in enumerate(value)
     )
     left, top, right, bottom = coordinates
@@ -173,16 +180,14 @@ def _check_form_bbox_dimensions(
     bbox: tuple[float, float, float, float],
     stable_note: Mapping[str, Any],
 ) -> None:
-    width_sp = round((bbox[2] - bbox[0]) * BP_TO_SP)
-    height_sp = round((bbox[3] - bbox[1]) * BP_TO_SP)
     note_id = stable_note["id"]
-    if abs(width_sp - stable_note["width_sp"]) > FORM_BBOX_ROUNDING_TOLERANCE_SP:
-        _reject(f"Form /BBox width differs from stable note {note_id}")
-    if (
-        abs(height_sp - stable_note["effective_height_sp"])
-        > FORM_BBOX_ROUNDING_TOLERANCE_SP
+    expected_sp = (0, 0, stable_note["width_sp"], stable_note["effective_height_sp"])
+    actual_sp = tuple(round(coordinate * BP_TO_SP) for coordinate in bbox)
+    if any(
+        abs(actual - expected) > FORM_BBOX_ROUNDING_TOLERANCE_SP
+        for actual, expected in zip(actual_sp, expected_sp, strict=True)
     ):
-        _reject(f"Form /BBox height differs from stable note {note_id}")
+        _reject(f"Form /BBox coordinate frame differs from stable note {note_id}")
 
 
 def _expected_bbox(note: Mapping[str, Any], pages: Mapping[int, Mapping[str, Any]]) -> tuple[int, int, int, int]:
@@ -195,10 +200,204 @@ def _expected_bbox(note: Mapping[str, Any], pages: Mapping[int, Mapping[str, Any
     return left, top, left + note["width_sp"], top + note["effective_height_sp"]
 
 
-def _annotation_signature(annotation: Any) -> tuple[str, ...]:
+def _validate_link_inventory(
+    value: Mapping[str, Any] | str | Path,
+    capture: Mapping[str, Any],
+) -> dict[str, Any]:
+    document = _load_document(value, "private link inventory")
+    if set(document) != {
+        "schema_version",
+        "variant",
+        "run_nonce",
+        "pass_number",
+        "notes",
+    }:
+        _reject("private link inventory has unexpected or missing root fields")
+    if (
+        isinstance(document["schema_version"], bool)
+        or not isinstance(document["schema_version"], int)
+        or document["schema_version"] != 1
+    ):
+        _reject("private link inventory has an unsupported schema version")
+    for key in ("variant", "run_nonce"):
+        if not isinstance(document[key], str) or document[key] != capture[key]:
+            _reject(f"private link inventory has an incoherent {key}")
+    if (
+        isinstance(document["pass_number"], bool)
+        or not isinstance(document["pass_number"], int)
+        or document["pass_number"] != capture["pass_number"]
+    ):
+        _reject("private link inventory has an incoherent pass_number")
+    notes = document["notes"]
+    if not isinstance(notes, list) or len(notes) != len(capture["notes"]):
+        _reject("private link inventory note count differs from capture")
+    for record, captured in zip(notes, capture["notes"], strict=True):
+        if not isinstance(record, dict) or set(record) != {
+            "note_id",
+            "global_order",
+            "marker_threshold_sp",
+            "links",
+        }:
+            _reject("private link inventory note has an invalid structure")
+        if not isinstance(record["note_id"], str) or record["note_id"] != captured["id"]:
+            _reject("private link inventory note ID differs from capture")
+        if (
+            isinstance(record["global_order"], bool)
+            or not isinstance(record["global_order"], int)
+            or record["global_order"] != captured["global_order"]
+        ):
+            _reject("private link inventory order differs from capture")
+        if (
+            isinstance(record["marker_threshold_sp"], bool)
+            or not isinstance(record["marker_threshold_sp"], int)
+            or record["marker_threshold_sp"] < 1
+        ):
+            _reject("private link inventory marker threshold is invalid")
+        links = record["links"]
+        if not isinstance(links, list):
+            _reject("private link inventory links must be an array")
+        for link in links:
+            if not isinstance(link, dict) or set(link) != {"rect_sp", "action"}:
+                _reject("private link inventory entry has an invalid structure")
+            rect = link["rect_sp"]
+            if (
+                not isinstance(rect, list)
+                or len(rect) != 4
+                or any(isinstance(item, bool) or not isinstance(item, int) for item in rect)
+                or rect[0] >= rect[2]
+                or rect[1] >= rect[3]
+            ):
+                _reject("private link inventory rectangle is invalid")
+            action = link["action"]
+            if not isinstance(action, dict) or set(action) != {"kind", "target"}:
+                _reject("private link inventory action has an invalid structure")
+            if not isinstance(action["kind"], str) or action["kind"] not in {
+                "URI",
+                "GoTo",
+            }:
+                _reject("private link inventory action kind is unsupported")
+            if not isinstance(action["target"], str) or not action["target"]:
+                _reject("private link inventory action target is invalid")
+    return document
+
+
+def _annotation_rect(annotation: Any) -> tuple[float, float, float, float]:
     rect = annotation.get("/Rect")
     if not isinstance(rect, pikepdf.Array) or len(rect) != 4:
         _reject("link annotation has no four-coordinate /Rect")
+    try:
+        values = tuple(float(value) for value in rect)
+    except (TypeError, ValueError, OverflowError) as exc:
+        raise MarginLedgerError("link annotation /Rect must be numeric") from exc
+    if values[0] >= values[2] or values[1] >= values[3]:
+        _reject("link annotation has an invalid /Rect")
+    return values
+
+
+def _annotation_action(annotation: Any) -> tuple[str, str] | None:
+    action = annotation.get("/A")
+    if not isinstance(action, pikepdf.Dictionary):
+        return None
+    action_kind = str(action.get("/S", "")).removeprefix("/")
+    if action_kind == "URI":
+        target = action.get("/URI")
+        return ("URI", str(target)) if isinstance(target, pikepdf.String) else None
+    if action_kind == "GoTo":
+        target = action.get("/D")
+        return ("GoTo", str(target)) if isinstance(target, pikepdf.String) else None
+    return None
+
+
+def _expected_link_records(
+    inventory: Mapping[str, Any],
+    stable_notes: Mapping[str, Mapping[str, Any]],
+    pages: Mapping[int, Mapping[str, Any]],
+) -> list[dict[str, Any]]:
+    expected: list[dict[str, Any]] = []
+    for note_record in inventory["notes"]:
+        note = stable_notes[note_record["note_id"]]
+        page = pages[note["target_shipout_index"]]
+        decoration_sp = (
+            note["report_decoration_height_sp"] if note["report_depth"] > 0 else 0
+        )
+        for link in note_record["links"]:
+            left, top, right, bottom = link["rect_sp"]
+            absolute_left = page["safe_rect"]["left_sp"] + left
+            absolute_right = page["safe_rect"]["left_sp"] + right
+            absolute_top = note["target_y_sp"] + decoration_sp + top
+            absolute_bottom = note["target_y_sp"] + decoration_sp + bottom
+            expected.append(
+                {
+                    "page": note["target_shipout_index"],
+                    "rect": (
+                        absolute_left / BP_TO_SP,
+                        (page["page_height_sp"] - absolute_bottom) / BP_TO_SP,
+                        absolute_right / BP_TO_SP,
+                        (page["page_height_sp"] - absolute_top) / BP_TO_SP,
+                    ),
+                    "action": (link["action"]["kind"], link["action"]["target"]),
+                }
+            )
+    return expected
+
+
+def _check_expected_links(
+    pdf: pikepdf.Pdf,
+    inventory: Mapping[str, Any],
+    stable_notes: Mapping[str, Mapping[str, Any]],
+    pages: Mapping[int, Mapping[str, Any]],
+) -> None:
+    actual: list[dict[str, Any]] = []
+    for page_index, page in enumerate(pdf.pages, start=1):
+        annotations = page.obj.get("/Annots", [])
+        if not isinstance(annotations, (list, pikepdf.Array)):
+            _reject(f"page {page_index} /Annots must be an array")
+        for annotation in annotations:
+            if str(annotation.get("/Subtype", "")) != "/Link":
+                continue
+            actual.append(
+                {
+                    "page": page_index,
+                    "rect": _annotation_rect(annotation),
+                    "action": _annotation_action(annotation),
+                }
+            )
+    used: set[int] = set()
+    for expected in _expected_link_records(inventory, stable_notes, pages):
+        matches = [
+            index
+            for index, candidate in enumerate(actual)
+            if index not in used
+            and candidate["page"] == expected["page"]
+            and candidate["action"] == expected["action"]
+            and all(
+                abs(left - right) <= LINK_RECT_TOLERANCE_BP
+                for left, right in zip(candidate["rect"], expected["rect"], strict=True)
+            )
+        ]
+        if len(matches) != 1:
+            _reject("captured marginal link action or rectangle did not survive exactly")
+        used.add(matches[0])
+    marginal_actual: set[int] = set()
+    for index, candidate in enumerate(actual):
+        page = pages.get(candidate["page"])
+        if page is None:
+            continue
+        center_x = (candidate["rect"][0] + candidate["rect"][2]) / 2
+        center_y = (candidate["rect"][1] + candidate["rect"][3]) / 2
+        safe = page["safe_rect"]
+        left = safe["left_sp"] / BP_TO_SP
+        right = safe["right_sp"] / BP_TO_SP
+        bottom = (page["page_height_sp"] - safe["bottom_sp"]) / BP_TO_SP
+        top = (page["page_height_sp"] - safe["top_sp"]) / BP_TO_SP
+        if left <= center_x <= right and bottom <= center_y <= top:
+            marginal_actual.add(index)
+    if marginal_actual != used:
+        _reject("page margin link inventory is not exhaustive")
+
+
+def _annotation_signature(annotation: Any) -> tuple[str, ...]:
+    rect = _annotation_rect(annotation)
     action = annotation.get("/A")
     return (
         *(str(value) for value in rect),
@@ -276,6 +475,61 @@ def _check_pdf_text_operators(pdf: pikepdf.Pdf, variant: str) -> None:
                 _reject("an internal 1SPE ID is present in a student PDF text operator")
 
 
+def _margin_forms(pdf: pikepdf.Pdf) -> dict[int, Any]:
+    forms: dict[int, Any] = {}
+    visited: set[int] = set()
+
+    def visit_resources(resources: Any) -> None:
+        if not isinstance(resources, pikepdf.Dictionary):
+            _reject("PDF /Resources must be a dictionary")
+        xobjects = resources.get("/XObject")
+        if xobjects is None:
+            return
+        if not isinstance(xobjects, pikepdf.Dictionary):
+            _reject("PDF /XObject resources must be a dictionary")
+        for name in xobjects:
+            candidate = xobjects[name]
+            xref = candidate.objgen[0]
+            if xref in visited:
+                continue
+            visited.add(xref)
+            is_form = str(candidate.get("/Subtype", "")) == "/Form"
+            if candidate.get("/NXMarginID") is not None:
+                if not is_form or xref < 1:
+                    _reject("an NXMarginID resource is not an indirect Form XObject")
+                forms[xref] = candidate
+            if is_form and candidate.get("/Resources") is not None:
+                visit_resources(candidate["/Resources"])
+
+    for page in pdf.pages:
+        visit_resources(page.obj.get("/Resources"))
+    return forms
+
+
+def _check_form_margin_tags(forms: Mapping[int, Any]) -> None:
+    for xref, form in forms.items():
+        try:
+            instructions = pikepdf.parse_content_stream(form)
+        except pikepdf.PdfError as exc:
+            raise MarginLedgerError(f"cannot parse marginal Form {xref}: {exc}") from exc
+        stack: list[str] = []
+        for operands, operator in instructions:
+            operation = str(operator)
+            if operation in {"BMC", "BDC"}:
+                if not operands:
+                    _reject(f"empty marked-content operator in marginal Form {xref}")
+                tag = _pdf_name(operands[0])
+                if tag.startswith("NXMargin"):
+                    _reject(f"margin marked-content tag {tag} is forbidden inside Form {xref}")
+                stack.append(tag)
+            elif operation == "EMC":
+                if not stack:
+                    _reject(f"unbalanced EMC in marginal Form {xref}")
+                stack.pop()
+        if stack:
+            _reject(f"unclosed marked content in marginal Form {xref}")
+
+
 def _run_qpdf_check(pdf_path: Path) -> None:
     try:
         result = subprocess.run(
@@ -321,23 +575,26 @@ def _marked_occurrences(
                         property_keys = {str(key) for key in properties.keys()}
                         if property_keys != {"/ID", "/Order"}:
                             _reject("NXMarginAnchor has unexpected or missing properties")
-                        raw_note_id = properties.get("/ID")
-                        if not isinstance(raw_note_id, pikepdf.String):
-                            _reject("NXMarginAnchor /ID must be one PDF string")
-                        raw_order = properties.get("/Order")
-                        if isinstance(raw_order, bool) or not isinstance(raw_order, int):
-                            _reject("NXMarginAnchor /Order must be one PDF integer")
                         record.update(
                             {
                                 "properties": properties,
-                                "note_id": str(raw_note_id),
-                                "order": raw_order,
+                                "note_id": _pdf_exact_string(
+                                    properties.get("/ID"), "NXMarginAnchor /ID"
+                                ),
+                                "order": _pdf_exact_integer(
+                                    properties.get("/Order"), "NXMarginAnchor /Order"
+                                ),
+                                "page_index": page_index,
                             }
                         )
                         anchors.append(record)
                     else:
-                        note_id = _pdf_string(properties.get("/ID"), f"{tag} /ID")
-                        order = _pdf_integer(properties.get("/Order"), f"{tag} /Order")
+                        if {str(key) for key in properties.keys()} != NOTE_PROPERTY_KEYS:
+                            _reject("NXMarginNote has unexpected or missing properties")
+                        note_id = _pdf_exact_string(properties.get("/ID"), f"{tag} /ID")
+                        order = _pdf_exact_integer(
+                            properties.get("/Order"), f"{tag} /Order"
+                        )
                         record.update(
                             {
                                 "properties": properties,
@@ -372,9 +629,22 @@ def _marked_occurrences(
     return notes, anchors
 
 
+def _stable_requires_marker(
+    note: Mapping[str, Any], marker_threshold_sp: int
+) -> bool:
+    return bool(
+        note["requires_marker"]
+        or note["report_depth"] > 0
+        or note["target_shipout_index"] != note["origin_shipout_index"]
+        or abs(note["target_y_sp"] - note["origin_y_sp"])
+        > marker_threshold_sp
+    )
+
+
 def _entry_from_occurrence(
     occurrence: Mapping[str, Any],
     stable_note: Mapping[str, Any],
+    marker_threshold_sp: int,
     anchor_count: int,
     pages: Mapping[int, Mapping[str, Any]],
 ) -> MarginLedgerEntry:
@@ -395,13 +665,15 @@ def _entry_from_occurrence(
     _check_form_bbox_dimensions(form_bbox, stable_note)
     if "/Annots" in form:
         _reject(f"Form for {note_id} illegally contains annotations")
-    if _pdf_string(form.get("/NXMarginID"), "Form /NXMarginID") != note_id:
+    if _pdf_exact_string(form.get("/NXMarginID"), "Form /NXMarginID") != note_id:
         _reject(f"Form identity differs for {note_id}")
-    if _pdf_string(form.get("/NXMarginRole"), "Form /NXMarginRole") != stable_note["role"]:
-        _reject(f"Form role differs for {note_id}")
-    if _pdf_integer(form.get("/NXMarginOrder"), "Form /NXMarginOrder") != stable_note[
-        "global_order"
+    if _pdf_exact_string(form.get("/NXMarginRole"), "Form /NXMarginRole") != stable_note[
+        "role"
     ]:
+        _reject(f"Form role differs for {note_id}")
+    if _pdf_exact_integer(
+        form.get("/NXMarginOrder"), "Form /NXMarginOrder"
+    ) != stable_note["global_order"]:
         _reject(f"Form order differs for {note_id}")
 
     bbox = _bbox_sp(properties.get("/BBoxSP"), f"NXMarginNote {note_id} /BBoxSP")
@@ -419,15 +691,18 @@ def _entry_from_occurrence(
     for key, expected in expected_properties:
         actual = properties.get(key)
         if isinstance(expected, int):
-            actual = _pdf_integer(actual, f"NXMarginNote {note_id} {key}")
+            actual = _pdf_exact_integer(actual, f"NXMarginNote {note_id} {key}")
         else:
-            actual = _pdf_string(actual, f"NXMarginNote {note_id} {key}")
+            actual = _pdf_exact_string(actual, f"NXMarginNote {note_id} {key}")
         if actual != expected:
             _reject(f"NXMarginNote {note_id} has incoherent {key}")
     requires_marker = _pdf_boolean(
         properties.get("/RequiresMarker"), f"NXMarginNote {note_id} /RequiresMarker"
     )
-    expected_anchor_count = 1 if requires_marker else 0
+    expected_requires_marker = _stable_requires_marker(stable_note, marker_threshold_sp)
+    if requires_marker != expected_requires_marker:
+        _reject(f"NXMarginNote {note_id} has self-justified /RequiresMarker")
+    expected_anchor_count = 1 if expected_requires_marker else 0
     if anchor_count != expected_anchor_count:
         _reject(f"NXMarginNote {note_id} has an incoherent anchor count")
 
@@ -450,7 +725,7 @@ def _entry_from_occurrence(
         anchor_count=anchor_count,
         note_count=1,
         report_depth=stable_note["report_depth"],
-        requires_marker=requires_marker,
+        requires_marker=expected_requires_marker,
     )
 
 
@@ -468,11 +743,13 @@ def reconstruct_margin_ledger(
     pdf_path: str | Path,
     capture_inventory: Mapping[str, Any] | str | Path,
     stable_layout: Mapping[str, Any] | str | Path,
+    link_inventory: Mapping[str, Any] | str | Path,
 ) -> dict[str, Any]:
     """Return the sorted canonical ledger reconstructed from actual PDF objects."""
 
     pdf_file = Path(pdf_path)
     capture, stable, contract = _validate_inputs(capture_inventory, stable_layout)
+    expected_links = _validate_link_inventory(link_inventory, capture)
     if not pdf_file.is_file():
         _reject(f"PDF does not exist: {pdf_file}")
     _run_qpdf_check(pdf_file)
@@ -480,10 +757,13 @@ def reconstruct_margin_ledger(
 
     stable_notes = stable["notes"]
     stable_by_id = {note["id"]: note for note in stable_notes}
+    link_notes_by_id = {note["note_id"]: note for note in expected_links["notes"]}
     pages = {page["shipout_index"]: page for page in stable["pages"]}
     try:
         with pikepdf.Pdf.open(pdf_file) as pdf:
             _check_pdf_text_operators(pdf, stable["variant"])
+            forms = _margin_forms(pdf)
+            _check_form_margin_tags(forms)
             occurrences, anchor_occurrences = _marked_occurrences(pdf)
             occurrence_counts = Counter(item["note_id"] for item in occurrences)
             anchors = Counter(item["note_id"] for item in anchor_occurrences)
@@ -495,6 +775,12 @@ def reconstruct_margin_ledger(
             ]
             if duplicate_ids:
                 _reject(f"PDF note IDs are duplicated: {', '.join(sorted(duplicate_ids))}")
+            encountered = [(item["order"], item["note_id"]) for item in occurrences]
+            stable_encountered = [
+                (note["global_order"], note["id"]) for note in stable_notes
+            ]
+            if encountered != stable_encountered:
+                _reject("PDF note encounter order differs from stable global order")
             if set(anchors) - set(stable_ids):
                 _reject("an anchor exists without a captured note")
             for anchor in anchor_occurrences:
@@ -504,11 +790,31 @@ def reconstruct_margin_ledger(
                         f"NXMarginAnchor {anchor['note_id']} /Order differs "
                         "from stable global_order"
                     )
+                if anchor["page_index"] != stable_note["origin_shipout_index"]:
+                    _reject(
+                        f"NXMarginAnchor {anchor['note_id']} is not on its origin page"
+                    )
             by_id = {item["note_id"]: item for item in occurrences}
             entries = [
-                _entry_from_occurrence(by_id[note_id], stable_by_id[note_id], anchors[note_id], pages)
+                _entry_from_occurrence(
+                    by_id[note_id],
+                    stable_by_id[note_id],
+                    link_notes_by_id[note_id]["marker_threshold_sp"],
+                    anchors[note_id],
+                    pages,
+                )
                 for note_id in stable_ids
             ]
+            entry_xrefs = {entry.form_xref for entry in entries}
+            if set(forms) != entry_xrefs:
+                _reject("marginal Form inventory is not bijective with rendered notes")
+            form_ids = [
+                _pdf_exact_string(form.get("/NXMarginID"), "Form /NXMarginID")
+                for form in forms.values()
+            ]
+            if len(set(form_ids)) != len(form_ids):
+                _reject("marginal Form IDs are duplicated")
+            _check_expected_links(pdf, expected_links, stable_by_id, pages)
             _check_link_duplicates(pdf)
     except pikepdf.PdfError as exc:
         raise MarginLedgerError(f"cannot inspect PDF: {exc}") from exc
@@ -545,12 +851,15 @@ def write_margin_ledger(
     pdf_path: str | Path,
     capture_inventory: Mapping[str, Any] | str | Path,
     stable_layout: Mapping[str, Any] | str | Path,
+    link_inventory: Mapping[str, Any] | str | Path,
     output_path: str | Path,
 ) -> dict[str, Any]:
     """Atomically write deterministic canonical ledger bytes."""
 
     contract = _load_margin_contract()
-    ledger = reconstruct_margin_ledger(pdf_path, capture_inventory, stable_layout)
+    ledger = reconstruct_margin_ledger(
+        pdf_path, capture_inventory, stable_layout, link_inventory
+    )
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
     descriptor, temporary_name = tempfile.mkstemp(
@@ -578,6 +887,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--pdf", required=True, type=Path)
     parser.add_argument("--capture-inventory", required=True, type=Path)
     parser.add_argument("--stable-layout", required=True, type=Path)
+    parser.add_argument("--link-inventory", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     return parser
 
@@ -589,6 +899,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             arguments.pdf,
             arguments.capture_inventory,
             arguments.stable_layout,
+            arguments.link_inventory,
             arguments.output,
         )
     except MarginLedgerError as exc:
