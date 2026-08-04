@@ -547,6 +547,26 @@ def _check_pdf_text_operators(pdf: pikepdf.Pdf, variant: str) -> None:
                 _reject("an internal 1SPE ID is present in a student PDF text operator")
 
 
+def _check_pdf_page_sequence(pdf: pikepdf.Pdf, stable: Mapping[str, Any]) -> None:
+    stable_pages = stable["pages"]
+    if len(pdf.pages) != len(stable_pages):
+        _reject("PDF page count differs from stable layout")
+    pages_by_index: dict[int, Mapping[str, Any]] = {}
+    for expected_index, page in enumerate(stable_pages, start=1):
+        if page["shipout_index"] != expected_index:
+            _reject("stable page shipout indices are not contiguous and ordered")
+        if not isinstance(page["folio"], str) or not page["folio"]:
+            _reject(f"stable page {expected_index} has an invalid folio")
+        pages_by_index[expected_index] = page
+    for note in stable["notes"]:
+        origin = pages_by_index.get(note["origin_shipout_index"])
+        target = pages_by_index.get(note["target_shipout_index"])
+        if origin is None or target is None:
+            _reject(f"stable note {note['id']} references a non-PDF page")
+        if note["origin_folio"] != origin["folio"]:
+            _reject(f"stable note {note['id']} origin folio differs from its page")
+
+
 def _margin_forms(pdf: pikepdf.Pdf) -> dict[int, Any]:
     forms: dict[int, Any] = {}
     visited: set[int] = set()
@@ -834,6 +854,7 @@ def reconstruct_margin_ledger(
     pages = {page["shipout_index"]: page for page in stable["pages"]}
     try:
         with pikepdf.Pdf.open(pdf_file) as pdf:
+            _check_pdf_page_sequence(pdf, stable)
             _check_pdf_text_operators(pdf, stable["variant"])
             forms = _margin_forms(pdf)
             _check_form_margin_tags(forms)

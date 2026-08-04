@@ -910,6 +910,26 @@ def test_pdf_bijection_rejects_independent_mutations(tmp_path: Path) -> None:
         pdf.save(intersecting_javascript_pdf)
     mutations["intersecting-javascript"] = intersecting_javascript_pdf
 
+    extra_page_pdf = tmp_path / "mutation-13-extra-page.pdf"
+    with pikepdf.Pdf.open(build["pdf"]) as pdf:
+        page = pdf.add_blank_page(page_size=(595, 842))
+        annotation = pikepdf.Dictionary(
+            {
+                "/Type": pikepdf.Name("/Annot"),
+                "/Subtype": pikepdf.Name("/Link"),
+                "/Rect": pikepdf.Array([0, 700, 520, 770]),
+                "/A": pikepdf.Dictionary(
+                    {
+                        "/S": pikepdf.Name("/JavaScript"),
+                        "/JS": pikepdf.String("app.alert('extra-page')"),
+                    }
+                ),
+            }
+        )
+        page.obj["/Annots"] = pikepdf.Array([pdf.make_indirect(annotation)])
+        pdf.save(extra_page_pdf)
+    mutations["extra-page"] = extra_page_pdf
+
     accepted: list[str] = []
     for name, mutation in mutations.items():
         _assert_qpdf_valid(mutation)
