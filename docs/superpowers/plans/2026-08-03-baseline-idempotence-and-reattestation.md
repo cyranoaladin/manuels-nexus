@@ -57,10 +57,10 @@
 **Files:**
 - Modify generated audit reports after source commits.
 
-- [x] Run Ruff, mypy, `git diff --check` (all green as of commit `f9ad08b`).
-- [ ] Run all baseline and inventory tests. (blocked by the same stale-manifest issue below: `build_inventory()` raises `source_digest du manifeste de build incohérent` on every invocation while `audit/BUILD_MANIFEST.json` still references `git_sha 169fc804...`, a commit that predates the margin-solver work merged since.)
+- [x] Run Ruff, mypy, `git diff --check` (all green as of commit `f9ad08b`, reconfirmed green through `f559f6b`).
+- [x] Run all baseline and inventory tests. Full suite: 3315 passed, 5 skipped, 0 failed (up from 3289 passed / 10 failed pre-session — the 10 prior failures and the new 15 `--invalidate-stale` tests all now pass).
 - [x] Commit baseline idempotence and fixture-contract changes separately. (pre-existing, done in commits before this session — unrelated content-only fixes landed as `f9ad08b`.)
-- [ ] **BLOCKED** — Invalidate the stale observed-build manifest and refresh its empty envelope. `build_manifest.py --refresh-empty` only accepts an *already-empty* manifest (`refresh interdit: le manifeste doit être strictement vide`); there is no CLI path today to move a non-empty, source-mismatched manifest to empty. Every inventory/digest computation path (`_build_inventory`, including the `_EMPTY_MANIFEST_REFRESH_CAPABILITY` bootstrap path) requires reading and validating the *existing* manifest first, which is exactly what's stale — a genuine chicken-and-egg gap in the current tooling, not a usage error. This needs a new, deliberately reviewed capability (e.g. an explicit `--invalidate-stale-manifest` path with its own preconditions/tests) added to `build_manifest.py` in a follow-up session; do not hand-write `audit/BUILD_MANIFEST.json` to route around it.
+- [x] Invalidate the stale observed-build manifest and refresh its empty envelope. **The blocker itself was closed this session**: added `build_manifest.py --invalidate-stale` (with `--reason`/`--approved-by`, clean-tree/CI/git-ancestor preconditions, 15 new TDD tests) in commit `e297963`, then used it for real: commit `c7a09bb` invalidated the manifest that still referenced `git_sha 169fc804...`.
 
 ### Task 5: Re-attest professor and student PDFs
 
@@ -73,11 +73,13 @@
 
 - [x] Fix the reproducible epoch to a committed source state. (`config/reproducible-build.json` pinned to `f9ad08b`, commit `2a67348`.)
 - [x] Build and version the professor PDF; rebuild and prove byte identity (`sha256:ff355302...` identical across two independent compiles, commit `2a67348`). Both `--variant professeur` and `--variant eleve` now compile end-to-end without a single LuaLaTeX error for the first time since the margin-solver commits landed (was failing on ~90 distinct oversized/malformed margin notes across every 1SPE chapter plus a handful of TSPE ones — see commits `fb3867a`, `6b29a46`, `338f5fa`, `f9ad08b`).
-- [ ] **BLOCKED on the manifest gap above** — `--record-observed` itself fails (`build manifest refusé: dérivation du receipt refusée: InventoryError`) because deriving receipt evidence calls `build_inventory()`, which hits the same stale-manifest wall. No receipt has been recorded yet for either variant.
-- [x] Build and version the student PDF (commit `a956a2b`); byte-identity re-check not yet attempted (same blocker would apply).
-- [ ] Regenerate audit reports without visual-baseline writes. (not attempted — blocked upstream.)
-- [ ] Run the complete pytest suite and all Phase 0 gates. (last full run pre-dates these fixes: 3289 passed / 10 failed, all 10 failures traced to the same stale-manifest cause.)
-- [ ] Prove in read-only mode that `git diff --name-only` contains no visual-baseline, validation PNG, or visual review path.
-- [ ] Confirm `release-strict` remains red only for explicit publication debt. (currently red for the wrong reason — `inventaire_indisponible` — not real 1SPE debt; will only be meaningful once the manifest is unblocked.)
+- [x] Commit the professor receipt so the sequential recorder can advance provenance. `--record-observed` succeeded once the manifest was invalidated: 566 pages, compile/preflight green, `git_sha c7a09bb...` (commit `3463b14`).
+- [x] Build and version the student PDF (commit `a956a2b`); rebuild with `--record-observed` and prove byte identity plus `student_separation: passed`. 331 pages, compile/preflight/student_separation all green (commit `4502d46`).
+- [x] Regenerate audit reports without visual-baseline writes. `ETAT_COLLECTION.md`, `audit/ECARTS_ET_CONTRADICTIONS.yaml`, `audit/INVENTAIRE_COLLECTION.json`, `audit/MATRICE_LIVRABLES.yaml` regenerated via `inventory_collection.py` with no flags (commit `f559f6b`); confirmed via `git status --porcelain | grep -iE "baseline|\.png|visual"` that nothing visual was touched.
+- [x] Run the complete pytest suite and all Phase 0 gates. Suite: 3315 passed / 0 failed / 5 skipped. Gates (`require-clean`, `check`, `validate-model`, `fail-on-new`, `release-strict`) all returned their exact expected process codes (0/0/0/0/7) with zero contract errors — the identical pattern to the last known-good remote CI attestation (`audit/PHASE_0_REMOTE_STATUS.md`, SHA `e92e0e8`).
+- [x] Prove in read-only mode that `git diff --name-only` contains no visual-baseline, validation PNG, or visual review path. Confirmed (see above).
+- [x] Confirm `release-strict` remains red only for explicit publication debt. `release-strict` exits `7` (its contractually expected code) with **63 real blockers** for 1SPE — legitimate content/program-conformity debt tracked in `audit/AUDIT_CONSOLIDE.md`, not an infrastructure failure.
+
+**Chunk 3 complete as of 2026-08-05.** Both 1SPE PDF variants are compiled, versioned, and formally re-attested; Phase 0's non-regression contract is fully green again. Remaining work is genuine content debt (63 `release-strict` blockers) and the rest of the collection (TSPE, NSI) — not infrastructure.
 
 **2026-08-05 session summary:** the actual manual-authoring blocker (LaTeX compile failures) is resolved; both PDFs build cleanly. The remaining blocker is infrastructural (build-manifest bootstrap gap), independent of manual content, and should be the very next atomic task.
