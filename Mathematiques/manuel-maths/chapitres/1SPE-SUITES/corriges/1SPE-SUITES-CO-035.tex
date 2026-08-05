@@ -29,7 +29,7 @@ La population augmente de $50$ habitants par an, donc :
 
 Pour tout $n \in \mathbb{N}$, $N_{n+1} - N_n = 50$.
 
-\commentaireMarge{La différence est constante : $(N_n)$ est arithmétique de raison $r = 50$ et de premier terme $N_0 = 1\,200$.}
+\commentaireMarge{Différence constante $r=50$ : suite arithmétique.}
 
 $(N_n)$ est une suite arithmétique de raison $r = 50$ et de premier terme $N_0 = 1\,200$, d'où :
 \[
@@ -49,7 +49,7 @@ L'année 2031 correspond à $n = 2031 - 2020 = 11$.
 
 La somme porte sur $12$ termes (de rang $0$ à $11$), de premier terme $N_0 = 1\,200$ et de dernier terme $N_{11} = 1\,750$.
 
-\commentaireMarge{Formule : somme de $p$ termes en progression arithmétique $= \dfrac{p \times (\text{premier} + \text{dernier})}{2}$.}
+\commentaireMarge{Somme : $\frac{p \times (u_1+u_p)}{2}$.}
 
 \[
   S = \frac{12 \times (N_0 + N_{11})}{2} = \frac{12 \times (1\,200 + 1\,750)}{2} = \frac{12 \times 2\,950}{2} = 6 \times 2\,950 = 17\,700.
@@ -79,7 +79,7 @@ On cherche le plus petit entier $n$ tel que $N_n \geq 2\,000$ :
   1\,200 + 50n \geq 2\,000 \iff 50n \geq 800 \iff n \geq 16.
 \]
 
-\commentaireMarge{Le plus petit entier $n$ est $n = 16$ : le programme s'arrête à $n = 16$ et affiche l'année $2020 + 16 = 2036$.}
+\commentaireMarge{Arrêt à $n=16$, affiche $2036$.}
 
 Le plus petit entier $n$ vérifiant cette condition est $n = 16$.
 

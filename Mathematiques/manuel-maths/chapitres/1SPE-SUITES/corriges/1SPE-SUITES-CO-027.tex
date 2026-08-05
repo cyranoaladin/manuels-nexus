@@ -35,7 +35,7 @@ On peut donc calculer :
   \frac{u_{n+1}}{u_n} = \frac{256 \times \left(\dfrac{1}{2}\right)^{n+1}}{256 \times \left(\dfrac{1}{2}\right)^n} = \left(\frac{1}{2}\right)^{n+1-n} = \frac{1}{2}.
 \]
 
-\commentaireMarge{Le quotient est constant et égal à $\dfrac{1}{2}$ : $(u_n)$ est bien géométrique de raison $q = \dfrac{1}{2}$.}
+\commentaireMarge{Quotient constant $\frac{1}{2}$ : suite géométrique.}
 
 Ce quotient est constant, ce qui confirme que $(u_n)$ est une suite géométrique de raison $q = \dfrac{1}{2}$.
 
@@ -61,7 +61,7 @@ Ce quotient est constant, ce qui confirme que $(u_n)$ est une suite géométriqu
 
 La somme $S = u_0 + u_1 + \cdots + u_7$ porte sur $8$ termes d'une suite géométrique de raison $q = \dfrac{1}{2} \neq 1$ :
 
-\commentaireMarge{Formule : $S_N = u_0 \dfrac{1 - q^{N+1}}{1 - q}$ (avec $N+1$ termes, de rang $0$ à $N$).}
+\commentaireMarge{Formule : $S_N = u_0 \frac{1 - q^{N+1}}{1 - q}$.}
 
 \[
   S = u_0 \, \frac{1 - q^{8}}{1 - q} = 256 \times \frac{1 - \left(\dfrac{1}{2}\right)^8}{1 - \dfrac{1}{2}} = 256 \times \frac{1 - \dfrac{1}{256}}{\dfrac{1}{2}} = 256 \times 2 \times \frac{255}{256} = 2 \times 255 = 510.

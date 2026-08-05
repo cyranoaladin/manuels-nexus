@@ -81,7 +81,7 @@ Tour & \verb|k| & \verb|u| \\
 \end{tabular}
 \end{center}
 
-\commentaireMarge{La valeur initiale est $u_0 = 3$ et on ajoute $2$ à chaque étape : c'est une suite arithmétique de raison $2$.}
+\commentaireMarge{Suite arithmétique de raison $2$.}
 
 \textbf{Question 3.} Ce programme calcule les termes de la suite arithmétique $(u_n)$ de premier terme $u_0 = 3$ et de raison $r = 2$. La formule explicite est $u_n = 3 + 2n$.
 
@@ -180,7 +180,7 @@ On souhaite trouver le plus petit entier $n$ tel que $2^n > 1000$.
 
 \begin{corrige}{1SPE-SUITES-FR-R5-EX3}
 
-\commentaireMarge{On initialise les variables avant la boucle, puis on met à jour les deux à chaque tour.}
+\commentaireMarge{Initialiser avant la boucle, mettre à jour à chaque tour.}
 
 \textbf{Question 1.}
 \begin{itemize}
@@ -209,7 +209,7 @@ Tour & \verb|n| & \verb|u| \\
 
 \textbf{Question 3.} Le programme affiche $n = 10$ et $u = 1024$. Vérification : $2^9 = 512 \leq 1000$ et $2^{10} = 1024 > 1000$. \checkmark
 
-\commentaireMarge{Sans mise à jour de \texttt{n}, la variable de condition \texttt{u} est bien modifiée, mais on ne saurait pas quel rang a été atteint. Si on oubliait \texttt{u = 2*u}, la boucle serait infinie.}
+\commentaireMarge{Sans mise à jour de \texttt{n}, on ne connaît pas le rang atteint. Sans mise à jour de \texttt{u}, boucle infinie.}
 
 \textbf{Question 4.} Si on oublie \verb|n = n + 1|, la variable \verb|u| continue d'être mise à jour (la boucle se termine), mais \verb|n| reste à $0$ à la fin : on afficherait le mauvais rang.
 
