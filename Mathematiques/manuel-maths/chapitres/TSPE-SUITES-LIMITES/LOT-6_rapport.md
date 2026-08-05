@@ -82,3 +82,8 @@ C7 est mobilisee dans le cours sur les limites de q^n (exercice 1) et par les cr
 **Ex 4.4** : l=3.
 
 0 divergence constatee.
+# LOT-6 — Evaluations A/B (audit 2026-08-05)
+
+EV-A et EV-B : 55 min, bareme /20, 4 exercices chacune, couverture C1-C7,
+enonces distincts (valeurs et contextes differents), blocs VERIFY presents
+et passants. Corriges EV-A/EV-B presents et verifies. Statut : valide.

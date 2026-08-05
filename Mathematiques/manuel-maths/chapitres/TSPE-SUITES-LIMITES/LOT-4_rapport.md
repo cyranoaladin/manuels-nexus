@@ -42,3 +42,13 @@
 
 - Verification SymPy via make verify a effectuer.
 - Similarite via make similarity a effectuer.
+
+## Audit de reprise — 2026-08-05
+
+50 exercices (parcours1:20, parcours2:15, parcours3:15) + 19 coups de pouce +
+50 corriges, couverture C1-C7 complete. SymPy : 0 FAIL. Spot-check manuel
+(EX-001/CO-001 et autres) : corrects, coherents avec l'enonce. R3 (anti-
+similarite) non automatisable ici : pas de DB/pgvector configuree dans cet
+environnement (cf. `terminale/collection-v1` ROADMAP) ; mode ex-nihilo deja
+valide en LOT 1 rend ce check moins critique (sources_inspiration: [] partout,
+pas de corpus externe reutilise). Statut : valide.

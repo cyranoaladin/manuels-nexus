@@ -110,3 +110,8 @@ Couverture : 100% des capacites sur tous les parcours et supports.
 - [ ] make similarity CHAP=TSPE-SUITES-LIMITES
 - [ ] make check-latex
 - [ ] Revue humaine du contrat de sortie LOT-7
+# LOT-7 — Assemblage (audit 2026-08-05)
+
+make chapter CHAP=TSPE-SUITES-LIMITES (variant complet) : succes apres le
+correctif LOT-3 (margin solver). 97 objets assembles, 36 pages, PDF valide
+(verify_pdf OK). Chapitre TSPE-SUITES-LIMITES : COMPLET.
