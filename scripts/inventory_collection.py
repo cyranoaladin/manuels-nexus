@@ -95,6 +95,7 @@ BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
 BUILD_PRODUCERS_FILE = "audit/BUILD_PRODUCERS.yaml"
 CANONICAL_BUILD_RECORDER = "scripts/build_manifest.py"
 _EMPTY_MANIFEST_REFRESH_CAPABILITY = object()
+_STALE_MANIFEST_INVALIDATION_CAPABILITY = object()
 
 SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
     {
@@ -1347,18 +1348,24 @@ def _load_observed_build_manifest(
             is _EMPTY_MANIFEST_REFRESH_CAPABILITY
             and not builds
         )
+        may_invalidate_stale = (
+            empty_manifest_refresh_capability
+            is _STALE_MANIFEST_INVALIDATION_CAPABILITY
+            and bool(builds)
+        )
+        tolerate_digest_mismatch = may_refresh_empty or may_invalidate_stale
         if (
-            not may_refresh_empty
+            not tolerate_digest_mismatch
             and payload.get("source_digest") != source_digest
         ):
             raise InventoryError("source_digest du manifeste de build incohérent")
         if (
-            not may_refresh_empty
+            not tolerate_digest_mismatch
             and payload.get("model_digest") != model_digest
         ):
             raise InventoryError("model_digest du manifeste de build incohérent")
 
-        ignore_manifest_dirty = may_refresh_empty
+        ignore_manifest_dirty = may_refresh_empty or may_invalidate_stale
         initial_git_state = _observed_git_state(
             root,
             ignore_manifest=ignore_manifest_dirty,
@@ -1446,6 +1453,9 @@ def _load_observed_build_manifest(
         def revalidate_state() -> None:
             original_revalidate_state()
             revalidate_dependencies()
+
+        if may_invalidate_stale:
+            builds = []
 
         for index, raw_build in enumerate(builds):
             if not isinstance(raw_build, Mapping):
@@ -4277,6 +4287,26 @@ def _build_inventory_for_empty_manifest_refresh(
         repository,
         require_git_provenance=True,
         empty_manifest_refresh_capability=_EMPTY_MANIFEST_REFRESH_CAPABILITY,
+    )
+
+
+def _build_inventory_for_stale_manifest_invalidation(
+    repository: Path | str,
+) -> dict[str, Any]:
+    """Build digests while discarding a validated but source-mismatched manifest.
+
+    Unlike :func:`_build_inventory_for_empty_manifest_refresh`, this tolerates a
+    *non-empty* ``builds`` list on disk, provided every other manifest
+    invariant (schema, branch, clean tree, provenance ancestry) still holds.
+    The discarded observed builds are treated as ``[]`` for this computation;
+    callers are responsible for the higher-level preconditions (explicit
+    human reason/approver, CI refusal) before invoking this.
+    """
+
+    return _build_inventory(
+        repository,
+        require_git_provenance=True,
+        empty_manifest_refresh_capability=_STALE_MANIFEST_INVALIDATION_CAPABILITY,
     )
 
 

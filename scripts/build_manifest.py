@@ -2225,6 +2225,165 @@ def refresh_empty_manifest(manifest_path: Path) -> None:
     )
 
 
+def _validate_invalidation_source_is_stale(
+    root: Path,
+) -> tuple[dict[str, Any], str]:
+    """Confirm a manifest is non-empty, structurally sound, and genuinely stale.
+
+    "Stale" here means the manifest's own recorded provenance ``head_sha`` is
+    a strict, non-equal ancestor of the current ``HEAD`` -- i.e. real source
+    history has landed since the manifest was written. This is the only
+    condition under which :func:`invalidate_stale_manifest` is allowed to
+    discard the recorded builds; it refuses on a diverged, reset, or foreign
+    ``head_sha`` exactly as strictly as the normal (non-invalidating) load
+    path already does for ordinary builds.
+    """
+
+    payload, manifest_digest = _read_schema_valid_manifest(root)
+    builds = payload.get("builds")
+    if builds == []:
+        raise BuildManifestError(
+            "invalidation inutile: le manifeste est déjà vide, "
+            "utiliser --refresh-empty"
+        )
+    if payload.get("build_state_digest") != build_state_digest(builds):
+        raise BuildManifestError("build_state_digest incohérent")
+    provenance = payload.get("provenance")
+    if not isinstance(provenance, Mapping):
+        raise BuildManifestError("provenance du manifeste invalide")
+    recorded_head = provenance.get("head_sha")
+    current_head = _git_head(root)
+    if recorded_head == current_head:
+        raise BuildManifestError(
+            "manifeste non périmé: son head_sha est déjà le HEAD courant"
+        )
+    inventory_module = _load_inventory_module()
+    inventory_module._require_git_ancestor(
+        root,
+        recorded_head,
+        current_head,
+        role="provenance du manifeste à invalider",
+    )
+    return payload, manifest_digest
+
+
+def _derive_stale_invalidation_envelope(root: Path) -> dict[str, Any]:
+    inventory_module = _load_inventory_module()
+    try:
+        inventory = (
+            inventory_module._build_inventory_for_stale_manifest_invalidation(
+                root
+            )
+        )
+        source_digest = str(inventory["source_digest"])
+        model_digest = str(inventory_module._model_digest(inventory))
+    except Exception as exc:
+        raise BuildManifestError(
+            f"calcul borné des digests impossible: {type(exc).__name__}"
+        ) from exc
+    head, branch, dirty = _git_state(root)
+    return {
+        "artifact_type": "build_manifest",
+        "build_state_digest": build_state_digest([]),
+        "builds": [],
+        "generated_by": "build_manifest.py",
+        "model_digest": model_digest,
+        "provenance": {
+            "branch": branch,
+            "dirty": dirty,
+            "head_sha": head,
+        },
+        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
+        "schema_version": 1,
+        "source_digest": source_digest,
+    }
+
+
+def invalidate_stale_manifest(
+    manifest_path: Path,
+    *,
+    reason: str,
+    approved_by: str,
+) -> None:
+    """Invalidate a validated but source-mismatched, non-empty manifest.
+
+    Unlike :func:`refresh_empty_manifest`, this accepts a manifest whose
+    recorded builds no longer match the current source tree -- the case left
+    behind whenever unrelated source commits land after the last observed
+    build without a fresh re-attestation. It requires an explicit
+    human-provided reason and approver, forbids running under CI, requires a
+    clean working tree, and only proceeds when the manifest's own recorded
+    provenance ``head_sha`` is a strict ancestor of the current ``HEAD``
+    (never sideways or backward). The prior manifest content is never
+    rewritten or deleted from Git history -- only superseded by a new commit
+    -- so it remains permanently recoverable.
+    """
+
+    if os.environ.get("CI"):
+        raise BuildManifestError("invalidation de manifeste interdite en CI")
+    if not isinstance(reason, str) or not reason.strip():
+        raise BuildManifestError("justification non vide requise")
+    if not isinstance(approved_by, str) or not approved_by.strip():
+        raise BuildManifestError("approbateur non vide requis")
+
+    root = _repository_root(manifest_path)
+    initial_git_state = _git_state(root)
+    initial_evidence_fingerprint = _git_evidence_fingerprint(root)
+    if initial_git_state[2]:
+        raise BuildManifestError("dépôt Git sale : invalidation refusée")
+    _validate_invalidation_source_is_stale(root)
+    envelope = _derive_stale_invalidation_envelope(root)
+    if (
+        _git_state(root) != initial_git_state
+        or _git_evidence_fingerprint(root) != initial_evidence_fingerprint
+    ):
+        raise BuildManifestError("sources modifiées pendant le calcul des digests")
+    provenance = envelope.get("provenance")
+    if (
+        not isinstance(provenance, Mapping)
+        or provenance.get("head_sha") != initial_git_state[0]
+        or provenance.get("branch") != initial_git_state[1]
+        or provenance.get("dirty") is not initial_git_state[2]
+    ):
+        raise BuildManifestError("provenance rafraîchie incohérente")
+
+    def replace_stale(
+        current: dict[str, Any],
+        _git_state_snapshot: tuple[str, str, bool],
+    ) -> dict[str, Any]:
+        builds = current.get("builds")
+        if not isinstance(builds, list) or builds == []:
+            raise BuildManifestError(
+                "invalidation interdite: le manifeste n'est plus non vide"
+            )
+        if current.get("build_state_digest") != build_state_digest(builds):
+            raise BuildManifestError("build_state_digest incohérent")
+        inventory_module = _load_inventory_module()
+        try:
+            inventory_module._validate_artifact_schema(
+                current,
+                root=root,
+                path=_MANIFEST_RELATIVE,
+            )
+            inventory_module._validate_artifact_schema(
+                envelope,
+                root=root,
+                path=_MANIFEST_RELATIVE,
+            )
+        except Exception as exc:
+            raise BuildManifestError(
+                f"validation du manifeste refusée: {type(exc).__name__}"
+            ) from exc
+        return dict(envelope)
+
+    _replace_manifest_transactionally(
+        manifest_path,
+        transform=replace_stale,
+        expected_git_state=initial_git_state,
+        expected_evidence_fingerprint=initial_evidence_fingerprint,
+    )
+
+
 def _run(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(
         description="Enregistre une preuve de build Nexus validée localement."
@@ -2240,10 +2399,39 @@ def _run(argv: list[str]) -> int:
         action="store_true",
         help="rafraîchit uniquement l'enveloppe du manifeste vide canonique",
     )
+    actions.add_argument(
+        "--invalidate-stale",
+        action="store_true",
+        help=(
+            "invalide un manifeste non vide mais périmé (source_digest "
+            "incohérent avec le HEAD courant) et le remet à l'état vide, "
+            "sous conditions strictes ; requiert --reason et --approved-by"
+        ),
+    )
+    parser.add_argument(
+        "--reason",
+        help="justification humaine non vide, requise avec --invalidate-stale",
+    )
+    parser.add_argument(
+        "--approved-by",
+        help="approbateur humain non vide, requis avec --invalidate-stale",
+    )
     arguments = parser.parse_args(argv)
+    if arguments.invalidate_stale and (
+        not arguments.reason or not arguments.approved_by
+    ):
+        parser.error(
+            "--invalidate-stale requiert --reason et --approved-by non vides"
+        )
     try:
         if arguments.refresh_empty:
             refresh_empty_manifest(Path.cwd() / _MANIFEST_RELATIVE)
+        elif arguments.invalidate_stale:
+            invalidate_stale_manifest(
+                Path.cwd() / _MANIFEST_RELATIVE,
+                reason=arguments.reason,
+                approved_by=arguments.approved_by,
+            )
         else:
             record_from_receipt(arguments.receipt)
     except BuildManifestError as exc:
@@ -2251,6 +2439,8 @@ def _run(argv: list[str]) -> int:
         return 2
     if arguments.refresh_empty:
         print("build manifest vide rafraîchi")
+    elif arguments.invalidate_stale:
+        print("build manifest périmé invalidé")
     else:
         print("build manifest enregistré")
     return 0

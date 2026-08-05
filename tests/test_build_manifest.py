@@ -1306,6 +1306,348 @@ def test_refresh_empty_manifest_rolls_back_and_recovers_after_fsync_failure(
     assert json.loads(path.read_text(encoding="utf-8")) == expected
 
 
+def test_invalidation_capability_tolerates_stale_nonempty_manifest_when_ancestor(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    stale = _manifest(head, [build])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale)
+    (tmp_path / "unrelated-later-work.txt").write_text(
+        "later commits", encoding="utf-8"
+    )
+    _commit_all(tmp_path, "unrelated later work")
+
+    observed = inventory_module._load_observed_build_manifest(
+        tmp_path,
+        source_digest=SHA256_A,
+        model_digest=SHA256_B,
+        declared_assemblies=[],
+        pdfinfo_counter=lambda _path: (7, None),
+        python_counter=lambda _path: (None, "unused"),
+        empty_manifest_refresh_capability=(
+            inventory_module._STALE_MANIFEST_INVALIDATION_CAPABILITY
+        ),
+    )
+
+    assert observed == []
+
+
+def test_invalidation_capability_still_refuses_mismatch_without_the_capability(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    stale = _manifest(head, [build])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale)
+    (tmp_path / "unrelated-later-work.txt").write_text(
+        "later commits", encoding="utf-8"
+    )
+    _commit_all(tmp_path, "unrelated later work")
+
+    with pytest.raises(inventory_module.InventoryError, match="source_digest"):
+        inventory_module._load_observed_build_manifest(
+            tmp_path,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+        )
+
+
+def test_invalidation_capability_still_enforces_manifest_ancestor_check(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    foreign_head = _unrelated_commit(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    stale = _manifest(foreign_head, [build])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    stale["provenance"]["dirty"] = False
+    _write_manifest(tmp_path, stale)
+
+    with pytest.raises(inventory_module.InventoryError, match="ancêtre|ancetre"):
+        inventory_module._load_observed_build_manifest(
+            tmp_path,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=(
+                inventory_module._STALE_MANIFEST_INVALIDATION_CAPABILITY
+            ),
+        )
+
+
+def test_derive_stale_invalidation_envelope_uses_only_the_bounded_inventory_path(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[Path, dict[str, object]]] = []
+
+    def build_inventory(root: Path) -> dict[str, object]:
+        calls.append((root, {}))
+        return {"source_digest": SHA256_A}
+
+    fake_inventory = SimpleNamespace(
+        _model_digest=lambda _inventory: SHA256_B,
+        _build_inventory_for_stale_manifest_invalidation=build_inventory,
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: fake_inventory,
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_git_state",
+        lambda _root: ("a" * 40, "fixture", True),
+    )
+
+    envelope = manifest_module._derive_stale_invalidation_envelope(tmp_path)
+
+    assert calls == [(tmp_path, {})]
+    assert envelope == {
+        "artifact_type": "build_manifest",
+        "build_state_digest": _state_digest([]),
+        "builds": [],
+        "generated_by": "build_manifest.py",
+        "model_digest": SHA256_B,
+        "provenance": {
+            "branch": "fixture",
+            "dirty": True,
+            "head_sha": "a" * 40,
+        },
+        "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
+        "schema_version": 1,
+        "source_digest": SHA256_A,
+    }
+
+
+def test_invalidate_stale_manifest_replaces_nonempty_manifest_with_fresh_envelope(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    stale = _manifest(head, [build])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale)
+    (tmp_path / "unrelated-later-work.txt").write_text(
+        "later commits", encoding="utf-8"
+    )
+    new_head = _commit_all(tmp_path, "unrelated later work")
+    expected = _manifest(new_head, [])
+    expected["provenance"]["dirty"] = False
+    monkeypatch.setattr(
+        manifest_module,
+        "_derive_stale_invalidation_envelope",
+        lambda _root: expected,
+    )
+
+    manifest_module.invalidate_stale_manifest(
+        tmp_path / "audit/BUILD_MANIFEST.json",
+        reason="synchronisation apres travaux de marge",
+        approved_by="reviewer@example.invalid",
+    )
+
+    payload = json.loads(
+        (tmp_path / "audit/BUILD_MANIFEST.json").read_text(encoding="utf-8")
+    )
+    assert payload == expected
+    # The invalidation itself never commits -- that stays a deliberate,
+    # human-authored Git action, matching refresh_empty_manifest and the
+    # repository's non-destruction rules. Commit here to exercise the
+    # normal strict load path against the freshly invalidated manifest.
+    _commit_all(tmp_path, "invalidate stale manifest fixture")
+    assert _load(inventory_module, tmp_path) == []
+
+
+def test_invalidate_stale_manifest_refuses_when_already_empty(
+    tmp_path: Path,
+    manifest_module,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    _write_manifest(tmp_path, _manifest(head, []))
+    _commit_all(tmp_path, "tracked empty manifest fixture")
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    original = path.read_bytes()
+
+    with pytest.raises(manifest_module.BuildManifestError, match="refresh-empty"):
+        manifest_module.invalidate_stale_manifest(
+            path, reason="raison", approved_by="quelqu'un"
+        )
+
+    assert path.read_bytes() == original
+
+
+@pytest.mark.parametrize(
+    ("reason", "approved_by"),
+    [
+        ("", "quelqu'un"),
+        ("   ", "quelqu'un"),
+        ("raison valide", ""),
+        ("raison valide", "   "),
+    ],
+)
+def test_invalidate_stale_manifest_requires_nonblank_reason_and_approver(
+    tmp_path: Path,
+    manifest_module,
+    reason: str,
+    approved_by: str,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    _write_manifest(tmp_path, _manifest(head, [build]))
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    original = path.read_bytes()
+
+    with pytest.raises(manifest_module.BuildManifestError):
+        manifest_module.invalidate_stale_manifest(
+            path, reason=reason, approved_by=approved_by
+        )
+
+    assert path.read_bytes() == original
+
+
+def test_invalidate_stale_manifest_refuses_in_ci(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    _write_manifest(tmp_path, _manifest(head, [build]))
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    original = path.read_bytes()
+    monkeypatch.setenv("CI", "true")
+
+    with pytest.raises(manifest_module.BuildManifestError, match="CI"):
+        manifest_module.invalidate_stale_manifest(
+            path, reason="raison", approved_by="quelqu'un"
+        )
+
+    assert path.read_bytes() == original
+
+
+def test_invalidate_stale_manifest_refuses_dirty_tree(
+    tmp_path: Path,
+    manifest_module,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    _write_manifest(tmp_path, _manifest(head, [build]))
+    (tmp_path / "uncommitted.txt").write_text("wip", encoding="utf-8")
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    original = path.read_bytes()
+
+    with pytest.raises(manifest_module.BuildManifestError, match="sale"):
+        manifest_module.invalidate_stale_manifest(
+            path, reason="raison", approved_by="quelqu'un"
+        )
+
+    assert path.read_bytes() == original
+
+
+def test_invalidate_stale_manifest_refuses_when_head_sha_is_current_head(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    head = _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    build = _build(head, "build/MANUEL_1SPE_professeur.pdf", b"%PDF")
+    stale = _manifest(head, [build])
+    stale["source_digest"] = "sha256:" + "0" * 64
+    _write_manifest(tmp_path, stale)
+    path = tmp_path / "audit/BUILD_MANIFEST.json"
+    original = path.read_bytes()
+    # Simulate a checkout back onto the exact commit the manifest already
+    # records: nothing is actually stale relative to it, so invalidation
+    # must refuse even though the manifest's own source_digest is mismatched
+    # (e.g. an unrelated local corruption, not real forward progress).
+    monkeypatch.setattr(manifest_module, "_git_head", lambda _root: head)
+
+    with pytest.raises(manifest_module.BuildManifestError, match="périmé|perime"):
+        manifest_module.invalidate_stale_manifest(
+            path, reason="raison", approved_by="quelqu'un"
+        )
+
+    assert path.read_bytes() == original
+
+
+def test_run_invalidate_stale_wires_reason_and_approver(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    calls: list[dict[str, object]] = []
+    monkeypatch.setattr(
+        manifest_module,
+        "invalidate_stale_manifest",
+        lambda path, *, reason, approved_by: calls.append(
+            {"path": path, "reason": reason, "approved_by": approved_by}
+        ),
+    )
+    monkeypatch.chdir(tmp_path)
+
+    assert (
+        manifest_module._run(
+            [
+                "--invalidate-stale",
+                "--reason",
+                "synchronisation",
+                "--approved-by",
+                "reviewer",
+            ]
+        )
+        == 0
+    )
+
+    captured = capsys.readouterr()
+    assert "invalidé" in captured.out
+    assert captured.err == ""
+    assert calls == [
+        {
+            "path": tmp_path / manifest_module._MANIFEST_RELATIVE,
+            "reason": "synchronisation",
+            "approved_by": "reviewer",
+        }
+    ]
+
+
+def test_run_invalidate_stale_requires_reason_and_approved_by(
+    manifest_module,
+) -> None:
+    with pytest.raises(SystemExit):
+        manifest_module._run(["--invalidate-stale"])
+    with pytest.raises(SystemExit):
+        manifest_module._run(["--invalidate-stale", "--reason", "raison"])
+    with pytest.raises(SystemExit):
+        manifest_module._run(
+            ["--invalidate-stale", "--approved-by", "reviewer"]
+        )
+
+
 def test_complete_manifest_is_loaded_with_order_preserved(
     tmp_path: Path,
     inventory_module,
