@@ -21,3 +21,7 @@
 - Piste Grand Oral : optimisation de formes (C1+C2+C3)
 
 ## Cout API estime : ~0 $
+
+## Audit 2026-08-05 (branche terminale/collection-v1) — LOT 0
+Contrat conforme au referentiel (6/6 capacites, id a id, 1 demonstration
+exigible C6). Statut : draft -> valide.

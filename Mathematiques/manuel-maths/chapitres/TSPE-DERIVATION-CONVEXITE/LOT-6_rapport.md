@@ -67,3 +67,6 @@ Chaque assertion a été exécutée sans accès au corrigé source, puis compar�
 - R6 (compilation) : PDF 28 pages — PASS
 
 ## Coût API estimé : ~0 $
+
+## Audit 2026-08-05 (branche terminale/collection-v1) — LOT 6
+Evaluations A/B presentes avec corriges, enonces distincts.

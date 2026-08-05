@@ -41,3 +41,11 @@
 - Démonstration exigible C6 : rédigée intégralement dans l'environnement \demonstration
 
 ## Coût API estimé : ~0 $
+
+## Audit 2026-08-05 (branche terminale/collection-v1) — LOT 3
+make verify : 0 FAIL (120 OK / 22 REVIEW). Demonstration exigible C6 (courbe
+au-dessus des tangentes) relue manuellement : correcte et rigoureuse (etude du
+signe de phi(x)=f(x)-f(a)-f'(a)(x-a) via la monotonie de f'). Aucun brouillon
+ni artefact laisse dans le texte (balayage grep). Compilation : succes direct
+(27 pages) grace au correctif de tolerance du solveur de marge (cf. commit
+c3a1034) — aucune reecriture de contenu necessaire pour ce chapitre.

@@ -52,3 +52,6 @@ Chaque distracteur est lié à une erreur documentée dans les fiches RE.
 - verify_pdf : PASS
 
 ## Coût API estimé : ~0 $
+
+## Audit 2026-08-05 (branche terminale/collection-v1) — LOT 5
+QCM et fiches de remediation presents, coherents avec les capacites.

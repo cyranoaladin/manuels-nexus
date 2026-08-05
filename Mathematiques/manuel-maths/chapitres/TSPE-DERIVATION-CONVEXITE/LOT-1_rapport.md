@@ -13,3 +13,7 @@
 - Demonstration exigible identifiee : C6
 
 ## Cout API estime : ~0 $
+
+## Audit 2026-08-05 (branche terminale/collection-v1) — LOT 1
+Mode ex nihilo (deja valide pour ce type de chapitre). dossier_curation.json
+present et coherent.
