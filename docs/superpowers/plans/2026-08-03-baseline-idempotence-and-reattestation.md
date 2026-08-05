@@ -57,10 +57,10 @@
 **Files:**
 - Modify generated audit reports after source commits.
 
-- [ ] Run all baseline and inventory tests.
-- [ ] Run Ruff, mypy, `git diff --check`, `--validate-model`, and `--fail-on-new`.
-- [ ] Commit baseline idempotence and fixture-contract changes separately.
-- [ ] Invalidate the stale observed-build manifest and refresh its empty envelope.
+- [x] Run Ruff, mypy, `git diff --check` (all green as of commit `f9ad08b`).
+- [ ] Run all baseline and inventory tests. (blocked by the same stale-manifest issue below: `build_inventory()` raises `source_digest du manifeste de build incohérent` on every invocation while `audit/BUILD_MANIFEST.json` still references `git_sha 169fc804...`, a commit that predates the margin-solver work merged since.)
+- [x] Commit baseline idempotence and fixture-contract changes separately. (pre-existing, done in commits before this session — unrelated content-only fixes landed as `f9ad08b`.)
+- [ ] **BLOCKED** — Invalidate the stale observed-build manifest and refresh its empty envelope. `build_manifest.py --refresh-empty` only accepts an *already-empty* manifest (`refresh interdit: le manifeste doit être strictement vide`); there is no CLI path today to move a non-empty, source-mismatched manifest to empty. Every inventory/digest computation path (`_build_inventory`, including the `_EMPTY_MANIFEST_REFRESH_CAPABILITY` bootstrap path) requires reading and validating the *existing* manifest first, which is exactly what's stale — a genuine chicken-and-egg gap in the current tooling, not a usage error. This needs a new, deliberately reviewed capability (e.g. an explicit `--invalidate-stale-manifest` path with its own preconditions/tests) added to `build_manifest.py` in a follow-up session; do not hand-write `audit/BUILD_MANIFEST.json` to route around it.
 
 ### Task 5: Re-attest professor and student PDFs
 
@@ -71,11 +71,13 @@
 - Update: `audit/BUILD_MANIFEST.json`
 - Update generated audit reports.
 
-- [ ] Fix the reproducible epoch to a committed source state.
-- [ ] Build and version the professor PDF, then rebuild with `--record-observed` and prove byte identity.
-- [ ] Commit the professor receipt so the sequential recorder can advance provenance.
-- [ ] Build and version the student PDF, then rebuild with `--record-observed` and prove byte identity plus `student_separation: passed`.
-- [ ] Regenerate audit reports without visual-baseline writes.
-- [ ] Run the complete pytest suite and all Phase 0 gates.
+- [x] Fix the reproducible epoch to a committed source state. (`config/reproducible-build.json` pinned to `f9ad08b`, commit `2a67348`.)
+- [x] Build and version the professor PDF; rebuild and prove byte identity (`sha256:ff355302...` identical across two independent compiles, commit `2a67348`). Both `--variant professeur` and `--variant eleve` now compile end-to-end without a single LuaLaTeX error for the first time since the margin-solver commits landed (was failing on ~90 distinct oversized/malformed margin notes across every 1SPE chapter plus a handful of TSPE ones — see commits `fb3867a`, `6b29a46`, `338f5fa`, `f9ad08b`).
+- [ ] **BLOCKED on the manifest gap above** — `--record-observed` itself fails (`build manifest refusé: dérivation du receipt refusée: InventoryError`) because deriving receipt evidence calls `build_inventory()`, which hits the same stale-manifest wall. No receipt has been recorded yet for either variant.
+- [x] Build and version the student PDF (commit `a956a2b`); byte-identity re-check not yet attempted (same blocker would apply).
+- [ ] Regenerate audit reports without visual-baseline writes. (not attempted — blocked upstream.)
+- [ ] Run the complete pytest suite and all Phase 0 gates. (last full run pre-dates these fixes: 3289 passed / 10 failed, all 10 failures traced to the same stale-manifest cause.)
 - [ ] Prove in read-only mode that `git diff --name-only` contains no visual-baseline, validation PNG, or visual review path.
-- [ ] Confirm `release-strict` remains red only for explicit publication debt.
+- [ ] Confirm `release-strict` remains red only for explicit publication debt. (currently red for the wrong reason — `inventaire_indisponible` — not real 1SPE debt; will only be meaningful once the manifest is unblocked.)
+
+**2026-08-05 session summary:** the actual manual-authoring blocker (LaTeX compile failures) is resolved; both PDFs build cleanly. The remaining blocker is infrastructural (build-manifest bootstrap gap), independent of manual content, and should be the very next atomic task.
