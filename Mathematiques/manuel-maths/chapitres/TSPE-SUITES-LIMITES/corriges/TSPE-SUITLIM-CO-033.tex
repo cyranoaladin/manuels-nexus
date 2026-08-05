@@ -2,18 +2,36 @@
 % BEGIN-VERIFY
 % from sympy import *
 % n = symbols('n', integer=True, nonnegative=True)
-% assert limit(n * Rational(9,10)**n, n, oo) == 0
+% a = Rational(1, 9)
+% # Q2 : borne binomiale d'ordre 2, valable pour n >= 2
+% for k in range(2, 30):
+%     assert (1 + a)**k >= Rational(k*(k-1), 2) * a**2
+% # Q3 : majoration de u_n = n*q^n, valable pour n >= 2
+% q = Rational(9, 10)
+% for k in range(2, 30):
+%     u_k = k * q**k
+%     assert u_k <= Rational(162, k - 1)
+% assert limit(n * q**n, n, oo) == 0
+% assert limit(Rational(162, 1) / (n - 1), n, oo) == 0
 % END-VERIFY
 \begin{corrige}{TSPE-SUITLIM-EX-033}
 
 \textbf{Q1.} $u_1=0{,}9$, $u_5 = 5 \times 0{,}9^5 \approx 2{,}95$, $u_{10} = 10 \times 0{,}9^{10} \approx 3{,}49$.
 
-\textbf{Q2.} $1/q = 10/9 = 1+1/9$. Par Bernoulli : $(1+1/9)^n \geq 1+n/9$.
+\commentaireMarge{La formule du binome : $(1+a)^n = \displaystyle\sum_{k=0}^{n}\binom{n}{k}a^k$. Pour $a>0$, chaque terme est positif : on peut en garder un seul comme minorant.}
 
-\textbf{Q3.} $q^n = 1/(1/q)^n \leq 1/(1+n/9) = 9/(9+n)$. Donc $u_n = n \times q^n \leq 9n/(9+n)$. Or $9n/(9+n) = 9/(1+9/n) \to 9$. Mais on veut montrer $\to 0$... Corrigeons : $u_n = n \times q^n \leq n/(1+n/9) = 9n/(9+n) \to 9 \neq 0$.
+\textbf{Q2.} Par la formule du binome, pour $a = \dfrac{1}{9} > 0$ et $n \geq 2$ :
+\[
+  (1+a)^n = \sum_{k=0}^{n}\binom{n}{k}a^k \geq \binom{n}{2}a^2 = \frac{n(n-1)}{2}a^2,
+\]
+car tous les termes de la somme sont positifs. D'ou $\left(\dfrac{1}{q}\right)^n \geq \dfrac{n(n-1)}{2}a^2$.
 
-Methode correcte : $(1/q)^n \geq 1+n/9$, donc $q^n \leq \dfrac{1}{1+n/9}$. Ainsi $nq^n \leq \dfrac{n}{1+n/9} = \dfrac{9n}{9+n} = \dfrac{9}{1+9/n} \to 9$. Ceci ne donne pas $0$.
+\textbf{Q3.} En inversant l'inegalite precedente (tous les termes sont strictement positifs) :
+\[
+  q^n \leq \frac{2}{n(n-1)a^2} = \frac{2 \times 81}{n(n-1)} = \frac{162}{n(n-1)}.
+\]
+Donc $0 \leq u_n = n \times q^n \leq \dfrac{162\,n}{n(n-1)} = \dfrac{162}{n-1}$ pour $n \geq 2$.
 
-Il faut utiliser Bernoulli amelioree : $(1/q)^n \geq (n/9)^2/2$ (pour $n$ grand) ou une autre methode. Plus simplement : $q^n = (0{,}9)^n$. On ecrit $0{,}9^n = (0{,}9^{n/2})^2 \leq (...)$. En fait par les croissances comparees, $n \times q^n \to 0$ pour $|q|<1$. $\boxed{\lim u_n = 0}$.
+Or $\lim_{n \to +\infty} \dfrac{162}{n-1} = 0$. Par le theoreme des gendarmes, $\boxed{\lim_{n \to +\infty} u_n = 0}$.
 
 \end{corrige}

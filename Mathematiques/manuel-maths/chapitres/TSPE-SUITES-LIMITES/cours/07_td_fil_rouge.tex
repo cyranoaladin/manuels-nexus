@@ -113,6 +113,21 @@ Par recurrence, $1 \leq u_n \leq 2$ pour tout $n$.
 % PARTIE C — Convergence (C1, C4, C6)
 %---------------------------------------------------------------
 
+% BEGIN-VERIFY
+% from sympy import symbols, simplify, Rational, limit, oo
+% n = symbols('n', integer=True, nonnegative=True)
+% un = symbols('u_n', positive=True)
+% vn = un**2 - 3
+% un1 = (un + 3)/(un + 1)
+% vn1 = un1**2 - 3
+% assert simplify(vn1 - (-2*vn)/(un+1)**2) == 0
+% # borne : (u_n+1)^2 >= 4 sur [1,2] => |v_{n+1}| <= (1/2)|v_n|
+% assert Rational(2, 4) == Rational(1, 2)
+% # |v_n| <= 2/2^n par recurrence (v_0 = 1 - 3 = -2)
+% v0 = 1 - 3
+% assert abs(v0) == 2
+% assert limit(Rational(2)/2**n, n, oo) == 0
+% END-VERIFY
 \begin{exercice}{TSPE-SUITLIM-COURS-07-FR-EX3}{2}{15}
 
 \textbf{Partie C — Convergence}
@@ -120,9 +135,9 @@ Par recurrence, $1 \leq u_n \leq 2$ pour tout $n$.
 On pose $v_n = u_n^2 - 3$ pour tout $n \in \mathbb{N}$.
 
 \begin{enumerate}
-  \item Montrer que $v_{n+1} = \dfrac{(u_n - 1)^2(u_n^2 - 3)}{(u_n + 1)^2}$.
-  \item En deduire que $|v_{n+1}| \leq \dfrac{1}{4}\,|v_n|$ pour tout $n$.
-  \item Montrer que $|v_n| \leq \dfrac{2}{4^n}$ pour tout $n \in \mathbb{N}$.
+  \item Montrer que $v_{n+1} = \dfrac{-2\,v_n}{(u_n + 1)^2}$.
+  \item En deduire que $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n|$ pour tout $n$.
+  \item Montrer que $|v_n| \leq \dfrac{2}{2^n}$ pour tout $n \in \mathbb{N}$.
   \item En deduire que la suite $(u_n)$ converge vers $\sqrt{3}$.
 \end{enumerate}
 
@@ -134,23 +149,17 @@ On pose $v_n = u_n^2 - 3$ pour tout $n \in \mathbb{N}$.
 
 Developpons le numerateur :
 \[
-(u_n+3)^2 - 3(u_n+1)^2 = u_n^2 + 6u_n + 9 - 3u_n^2 - 6u_n - 3 = -2u_n^2 + 6 = -2(u_n^2 - 3).
+(u_n+3)^2 - 3(u_n+1)^2 = u_n^2 + 6u_n + 9 - 3(u_n^2 + 2u_n + 1) = -2u_n^2 + 6 = -2(u_n^2 - 3).
 \]
 
-Attendons -- verifions : $(u_n + 3)^2 - 3(u_n+1)^2 = u_n^2 + 6u_n + 9 - 3(u_n^2 + 2u_n + 1) = -2u_n^2 + 6 = -2(u_n^2 - 3)$.
-
-Donc $v_{n+1} = \dfrac{-2 v_n}{(u_n+1)^2}$. L'enonce proposait une autre forme ; calculons plutot :
-
-En fait, recalculons directement. On a :
+Donc :
 \[
-v_{n+1} = u_{n+1}^2 - 3 = \frac{(u_n+3)^2 - 3(u_n+1)^2}{(u_n+1)^2} = \frac{-2(u_n^2 - 3)}{(u_n+1)^2} = \frac{-2\,v_n}{(u_n+1)^2}.
+v_{n+1} = u_{n+1}^2 - 3 = \frac{-2(u_n^2 - 3)}{(u_n+1)^2} = \frac{-2\,v_n}{(u_n+1)^2}.
 \]
 
 \textbf{Question 2.} Puisque $1 \leq u_n \leq 2$, on a $u_n + 1 \geq 2$, donc $(u_n+1)^2 \geq 4$.
 
-Ainsi $|v_{n+1}| = \dfrac{2\,|v_n|}{(u_n+1)^2} \leq \dfrac{2\,|v_n|}{4} = \dfrac{|v_n|}{2}$.
-
-Plus precisement $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n|$ (et a fortiori $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n| \leq \dfrac{1}{4}\,|v_n|$ n'est pas garanti). Corrigeons l'enonce : on a $|v_{n+1}| \leq \dfrac{1}{2}\,|v_n|$.
+Ainsi $|v_{n+1}| = \dfrac{2\,|v_n|}{(u_n+1)^2} \leq \dfrac{2\,|v_n|}{4} = \dfrac{1}{2}\,|v_n|$.
 
 \textbf{Question 3.} Par recurrence, $|v_n| \leq |v_0| \times \left(\dfrac{1}{2}\right)^n = \dfrac{2}{2^n}$. (Car $v_0 = 1 - 3 = -2$, donc $|v_0| = 2$.)
 
