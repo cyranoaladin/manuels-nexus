@@ -726,9 +726,21 @@ vertical_list_extent = function(head)
   return left_sp, right_sp
 end
 
+-- R6 : tolerance de mesure. `vertical_list_extent` recalcule la largeur d'un
+-- paragraphe deja justifie par TeX a `\hsize`; l'arithmetique en points fixes
+-- du glue-setting laisse un residu de quelques scaled points (mesure : jusqu'a
+-- 2sp sur des paragraphes de marge parfaitement valides, sans "Overfull
+-- \hbox" signale par TeX). Un seuil a +1sp transforme ce residu d'arrondi en
+-- echec fatal. On tolere 1pt (65536sp) : nul par rapport a la largeur de la
+-- colonne de marge (~79pt), donc un veritable depassement de contenu (liste,
+-- formule large non coupable, cf. incident 2026-08 sur un `\[...\]` de
+-- hierarchie de croissances comparees, ~11pt de depassement) reste detecte.
+local MARGIN_WIDTH_TOLERANCE_SP = 65536  -- 1pt
+
 local function find_oversized_horizontal(head, limit_sp)
   local left_sp, right_sp = vertical_list_extent(head)
-  if left_sp < -1 or right_sp > limit_sp + 1 then
+  if left_sp < -1 - MARGIN_WIDTH_TOLERANCE_SP
+      or right_sp > limit_sp + 1 + MARGIN_WIDTH_TOLERANCE_SP then
     return math.ceil(right_sp - left_sp)
   end
   return nil
