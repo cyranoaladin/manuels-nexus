@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-CONTIN-EX-008", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["raisonner", "chercher"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-008.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq, Rational, sqrt
+% x = symbols('x')
+% f = 1/(1+x)
+% assert f.subs(x, 0) == 1
+% assert f.subs(x, 1) == Rational(1, 2)
+% sols = solve(Eq(x, f), x)
+% golden = (-1 + sqrt(5))/2
+% assert golden in sols
+% assert 0 < float(golden) < 1
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-008}{3}{18}
+Soit $(u_n)$ definie par $u_0 = 1$ et $u_{n+1} = \dfrac{1}{1+u_n}$.
+\begin{enumerate}
+  \item Montrer par recurrence que $u_n \in [0, 1]$ pour tout $n$.
+  \item On admet que les suites extraites $(u_{2n})$ et $(u_{2n+1})$ sont respectivement decroissante et croissante, et convergent vers une meme limite $\ell \in [0,1]$ (on ne demande pas de le prouver). Justifier que $\ell$ verifie $\ell = \dfrac{1}{1+\ell}$.
+  \item En deduire que $\ell$ est solution de $\ell^2 + \ell - 1 = 0$, puis determiner la valeur exacte de $\ell$.
+  \item Justifier que $(u_n)$ converge vers $\ell$.
+\end{enumerate}
+\end{exercice}

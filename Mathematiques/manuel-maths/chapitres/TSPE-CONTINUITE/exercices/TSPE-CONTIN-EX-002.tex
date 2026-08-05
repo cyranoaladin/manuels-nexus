@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-CONTIN-EX-002", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-002.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp
+% x = symbols('x')
+% f = exp(x) - 2*x - 1
+% assert f.subs(x, 0) == 0
+% assert float(f.subs(x, 2)) > 0
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-002}{1}{8}
+Soit $f(x) = \mathrm{e}^x - 2x - 1$ sur $[0, 2]$.
+\begin{enumerate}
+  \item Justifier que $f$ est continue sur $[0, 2]$.
+  \item Calculer $f(0)$. Que peut-on en deduire sur l'equation $f(x) = 0$ ?
+  \item Montrer que l'equation $f(x) = 2$ admet au moins une solution dans $[0, 2]$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-CONTINUITE-RE-C2", "chapitre": "TSPE-CONTINUITE", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : suites recurrentes et continuite
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-CONTIN-RE-C2-EX1}{1}{12}
+Soit $(u_n)$ definie par $u_0 = 4$ et $u_{n+1} = \dfrac{1}{2}u_n + 1$. On admet que $(u_n)$ converge vers un reel $\ell$.
+\begin{enumerate}
+  \item Justifier que la fonction $f(x)=\dfrac{1}{2}x+1$ est continue sur $\mathbb{R}$.
+  \item En deduire l'equation verifiee par $\ell$, puis calculer $\ell$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve, Eq
+% x = symbols('x')
+% f = Rational(1,2)*x + 1
+% sols = solve(Eq(x, f), x)
+% assert sols == [2]
+% END-VERIFY
+
+\begin{corrige}{TSPE-CONTIN-RE-C2-EX1}
+\textbf{a.} $f$ est affine, donc continue sur $\mathbb{R}$.
+
+\textbf{b.} $(u_n)$ converge vers $\ell$ et $u_{n+1}=f(u_n)$ ; par continuite de $f$, $\ell = f(\ell) = \dfrac{1}{2}\ell + 1$, soit $\dfrac{1}{2}\ell = 1$, donc $\ell = 2$.
+\end{corrige}

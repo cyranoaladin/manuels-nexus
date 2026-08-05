@@ -1,0 +1,37 @@
+% META: {"id": "TSPE-CONTIN-CO-005", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-005", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, limit, oo
+% x = symbols('x')
+% f = x**5 + x - 1
+% assert limit(f, x, oo) == oo
+% assert limit(f, x, -oo) == -oo
+% assert f.subs(x, 0) == -1
+% assert f.subs(x, 1) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-005}
+
+\textbf{Q1.} $f'(x) = 5x^4 + 1$. Comme $x^4 \geq 0$ pour tout $x$, on a $f'(x) \geq 1 > 0$ : $f$ est strictement croissante sur $\mathbb{R}$.
+
+\textbf{Q2.} $\lim_{x \to -\infty} f(x) = -\infty$ et $\lim_{x \to +\infty} f(x) = +\infty$ (terme de plus haut degre $x^5$). $f$ est continue et strictement croissante sur $\mathbb{R}$, et $0$ est compris entre ces deux limites. Par le TVI (cas strictement monotone, applique sur un intervalle $[-M, M]$ suffisamment grand), l'equation $f(x) = 0$ admet une unique solution reelle $\alpha$.
+
+\textbf{Q3.} $f(0) = -1 < 0$ et $f(1) = 1 > 0$. Comme $f$ est strictement croissante, $\alpha$ est le seul reel ou $f$ s'annule ; puisque $f(0)<0<f(1)$, on a $\alpha \in [0,1]$.
+
+\textbf{Q4.}
+\begin{python}
+def f(x):
+    return x**5 + x - 1
+
+def dichotomie(a, b, precision):
+    while b - a > precision:
+        m = (a + b) / 2
+        if f(a) * f(m) <= 0:
+            b = m
+        else:
+            a = m
+    return (a, b)
+
+encadrement = dichotomie(0, 1, 1e-3)
+print(encadrement)
+\end{python}
+
+\end{corrige}

@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-CONTIN-CO-006", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-006", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, solve
+% x = symbols('x')
+% assert solve(x**2 - x - 2, x) == [-1, 2]
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-006}
+
+\textbf{Q1.} $f(x) = \sqrt{x+2}$ est continue sur $[0,2]$ comme composee de la fonction affine $x \mapsto x+2$ (continue, a valeurs dans $[2,4] \subset \mathbb{R}_+$) et de la racine carree (continue sur $\mathbb{R}_+$). Pour $x \in [0,2]$, $x+2 \in [2,4]$ donc $f(x) = \sqrt{x+2} \in [\sqrt{2}, 2] \subset [0,2]$ : on a bien $f([0,2]) \subset [0,2]$.
+
+\textbf{Q2.} $(u_n)$ est croissante et majoree par $2$ : par le theoreme de la limite monotone, elle converge vers un reel $\ell$, et comme $u_n \in [0,2]$ pour tout $n$ (stabilite de l'intervalle), $\ell \in [0,2]$.
+
+\textbf{Q3.} $f$ est continue en $\ell$, donc $\ell = f(\ell) = \sqrt{\ell+2}$. En elevant au carre (les deux membres sont positifs) : $\ell^2 = \ell + 2$, soit $\ell^2 - \ell - 2 = 0$, c'est-a-dire $(\ell-2)(\ell+1) = 0$. Comme $\ell \geq 0$, on a $\boxed{\ell = 2}$.
+
+\end{corrige}

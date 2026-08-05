@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-CONTIN-EV-B-corrige", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-CONTIN-EV-B", "version": "B", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, sqrt
+% x = symbols('x')
+% f = ln(x) + 2*x - 5
+% assert f.subs(x, 1) == -3
+% assert round(float(f.subs(x, 3)), 2) == 2.10
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EV-B-EX1}
+\textbf{Q1.} $f'(x) = \dfrac{1}{x} + 2$. Pour $x \in [1,3]$, $\dfrac{1}{x} > 0$, donc $f'(x) > 2 > 0$ : $f$ est strictement croissante sur $[1,3]$.
+
+\textbf{Q2.} $f(1) = \ln(1) + 2 - 5 = -3$. $f(3) = \ln(3) + 6 - 5 = \ln(3) + 1 \approx 2{,}10$.
+
+\textbf{Q3.} $f$ est continue et strictement croissante sur $[1,3]$, et $0$ est compris entre $f(1)=-3$ et $f(3)\approx 2{,}10$. Par le TVI (cas strictement monotone), il existe un unique $\alpha \in [1,3]$ tel que $f(\alpha)=0$.
+\end{corrige}
+
+\begin{corrige}{TSPE-CONTIN-EV-B-EX2}
+\textbf{Q1.} Initialisation : $u_0 = 1 \in [1,3]$.
+
+Heredite : si $1 \leq u_n \leq 3$, comme $f$ est croissante, $f(1) \leq f(u_n) \leq f(3)$, soit $\sqrt{3} \leq u_{n+1} \leq 3$. Comme $\sqrt{3} \geq 1$, on a $1 \leq u_{n+1} \leq 3$.
+
+\textbf{Q2.} $u_1 = f(1) = \sqrt{3} \approx 1{,}73 \geq u_0 = 1$. Si $u_{n+1} \geq u_n$, comme $f$ est croissante, $f(u_{n+1}) \geq f(u_n)$, soit $u_{n+2} \geq u_{n+1}$. Par recurrence, $(u_n)$ est croissante.
+
+\textbf{Q3.} $(u_n)$ croissante et majoree par $3$ : elle converge vers $\ell \in [1,3]$. Par continuite de $f$, $\ell = f(\ell) = \sqrt{3\ell}$, soit $\ell^2 = 3\ell$ (les deux membres sont positifs), donc $\ell(\ell-3)=0$. Comme $\ell \geq 1 > 0$, on a $\ell = 3$.
+\end{corrige}

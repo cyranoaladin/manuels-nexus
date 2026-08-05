@@ -1,0 +1,32 @@
+% META: {"id": "TSPE-CONTINUITE-RE-C1", "chapitre": "TSPE-CONTINUITE", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : TVI, existence et unicite
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-CONTIN-RE-C1-EX1}{1}{10}
+Soit $f(x) = x^3 + 2x - 5$ sur $[1, 2]$.
+\begin{enumerate}
+  \item Justifier la continuite de $f$ sur $[1,2]$, calculer $f(1)$ et $f(2)$.
+  \item Etudier le signe de $f'$ sur $[1,2]$.
+  \item Justifier que l'equation $f(x)=0$ admet une unique solution dans $[1,2]$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x')
+% f = x**3 + 2*x - 5
+% assert f.subs(x, 1) == -2
+% assert f.subs(x, 2) == 7
+% fp = diff(f, x)
+% assert fp == 3*x**2 + 2
+% END-VERIFY
+
+\begin{corrige}{TSPE-CONTIN-RE-C1-EX1}
+\textbf{a.} $f$ polynome, continue sur $\mathbb{R}$. $f(1) = 1+2-5=-2$, $f(2)=8+4-5=7$.
+
+\textbf{b.} $f'(x) = 3x^2+2 > 0$ pour tout $x$ : $f$ strictement croissante.
+
+\textbf{c.} $f$ continue et strictement croissante sur $[1,2]$, $0$ compris entre $f(1)=-2$ et $f(2)=7$ : par le TVI (cas monotone), unique solution dans $[1,2]$.
+\end{corrige}

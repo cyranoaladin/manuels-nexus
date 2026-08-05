@@ -1,0 +1,65 @@
+% META: {"id": "TSPE-CONTIN-CR-011", "chapitre": "TSPE-CONTINUITE", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Suites définies par récurrence et continuité}
+
+% ============================================================
+% STRATE 1 — Theoreme du point fixe
+% ============================================================
+
+\theoreme{
+Soit $f$ une fonction continue sur un intervalle $I$, telle que $f(I) \subset I$ (c'est-a-dire $f(x) \in I$ pour tout $x \in I$). Soit $(u_n)$ la suite definie par $u_0 \in I$ et $u_{n+1} = f(u_n)$.
+
+Si $(u_n)$ converge vers un reel $\ell \in I$, alors $\ell$ verifie $f(\ell) = \ell$ : $\ell$ est un \textbf{point fixe} de $f$.
+}
+
+\demonstration{
+Supposons $u_n \to \ell$. Comme $f$ est continue en $\ell$, on a $f(u_n) \to f(\ell)$.
+
+Or $f(u_n) = u_{n+1}$ pour tout $n$, et $u_{n+1} \to \ell$ (meme limite que $(u_n)$, decalee d'un rang).
+
+Par unicite de la limite, $f(\ell) = \ell$.
+}
+
+\margeAppui{
+Ce theoreme ne dit pas que $(u_n)$ converge : il dit seulement que \emph{si} elle converge, sa limite est necessairement un point fixe de $f$. Il faut etablir la convergence par un autre moyen (monotonie et bornitude, par exemple).
+}
+
+\exemple{
+Soit $f(x) = \sqrt{2x + 3}$ sur $I = [0, 5]$ et $(u_n)$ definie par $u_0 = 0$, $u_{n+1} = f(u_n)$.
+
+On admet (etude possible par recurrence, cf. chapitre Suites) que $(u_n)$ est croissante et majoree par $3$, donc convergente vers un reel $\ell \in [0, 3]$.
+
+Comme $f$ est continue, $\ell$ verifie $f(\ell) = \ell$, soit $\sqrt{2\ell+3} = \ell$. En elevant au carre (les deux membres sont positifs) : $2\ell + 3 = \ell^2$, soit $\ell^2 - 2\ell - 3 = 0$, c'est-a-dire $(\ell-3)(\ell+1) = 0$. Comme $\ell \geq 0$, on obtient $\ell = 3$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, solve, Rational
+% x = symbols('x')
+% sols = solve(sqrt(2*x+3) - x, x)
+% assert sols == [3]
+% # verification directe de l'equation du second degre
+% l = symbols('l')
+% assert solve(l**2 - 2*l - 3, l) == [-1, 3]
+% END-VERIFY
+}
+
+\subsection{Méthode générale}
+
+Pour etudier une suite $(u_n)$ definie par $u_{n+1} = f(u_n)$ avec $f$ continue :
+\begin{enumerate}
+  \item Montrer que l'intervalle $I$ est stable par $f$ (i.e. $f(I) \subset I$), en general par recurrence.
+  \item Etudier la monotonie de $(u_n)$ (souvent par etude du signe de $f(x)-x$, ou par recurrence en comparant $u_{n+1}$ et $u_n$).
+  \item Si $(u_n)$ est monotone et bornee, conclure a la convergence par le theoreme de la limite monotone.
+  \item Determiner la limite $\ell$ comme solution de $f(\ell) = \ell$ dans $I$ (continuite de $f$).
+\end{enumerate}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Chercher le point fixe avant d'avoir prouve la convergence.} L'equation $f(\ell)=\ell$ peut avoir plusieurs solutions dans $I$ ; sans preuve prealable de la convergence de $(u_n)$, on ne peut pas savoir laquelle est la bonne limite (ni meme si la suite converge).
+}
+
+\erreurFrequente{
+\textbf{Oublier la continuite de $f$.} Le passage a la limite dans $u_{n+1}=f(u_n)$ pour obtenir $\ell=f(\ell)$ n'est valable que si $f$ est continue au point $\ell$. Cette hypothese doit toujours etre verifiee et citee.
+}
