@@ -14,6 +14,8 @@ de l'Education nationale. Le SHA-256 permet de verifier l'integrite du fichier.
 | `BO2019_TSPE_specialite.pdf` | MENE1921262A | BO special n 8 du 25-07-2019 | Rentree 2020 | `eb8369e7c1611e90f51491fecc5a7c2081a9c57f9c7fbb08d0414677b56ce16f` |
 | `BO2026_TSPE_specialite_r2027.pdf` | MENE2602919A | BO n 14 du 02-04-2026 | Rentree 2027 | `9c99a32bb3e5f14d8906783f86a9a0fd86a99543b032a20fe388841d024ed4a5` |
 | `BO2026_n14_complet.pdf` | — | BO n 14 du 02-04-2026 (complet) | — | `34875c42a0cf9f8cb1417e6cfd387aa59fa575df6e733d046f4533ae2f37c836` |
+| `BO2019_TCOMPL_optionnel.pdf` | MENE1921265A | BO special n 8 du 25-07-2019 | Rentree 2020 | `f9ea141d0d5dd692a1d870f5d7370734803625f1eef9ffb8b22e2179d859437b` |
+| `BO2019_TEXPERTES_optionnel.pdf` | MENE1921264A | BO special n 8 du 25-07-2019 | Rentree 2020 | `a65d1108c0222f410fe4e29e0fac6c88c8c521ab9deeec12df4a306af6dcd7fa` |
 
 ## Extraits texte
 
@@ -23,3 +25,8 @@ Le PDF reste la reference officielle.
 ## Date de depot dans le depot
 
 18 juillet 2026 (fichiers deposes par l'utilisateur).
+5 aout 2026 : ajout `BO2019_TCOMPL_optionnel` (programme mathematiques complementaires
+terminale) et `BO2019_TEXPERTES_optionnel` (programme mathematiques expertes terminale),
+recuperes depuis education.gouv.fr / eduscol.education.gouv.fr (PDF officiels) pour cadrer
+le perimetre des manuels Terminale. PDF sources non committes (gitignore `*.pdf`), extraits
+texte `pdftotext -layout` deposes dans `sources/txt/`.
