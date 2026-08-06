@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-ATT-EX-001", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C1", "TCOMPL-ATT-C2"], "capacites_codes": ["C1", "C2"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-001.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(3, 10)
+% PX4 = (1-p)**3 * p
+% assert PX4 == Rational(1029, 10000)
+% E = 1/p
+% assert E == Rational(10, 3)
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-001}{1}{10}
+On sait que $30\%$ des visiteurs d'un site web s'inscrivent à la newsletter. On observe les visiteurs un par un jusqu'au premier qui s'inscrit ; $X$ est le rang de ce premier visiteur inscrit.
+\begin{enumerate}
+  \item Justifier que $X$ suit une loi géométrique, et préciser son paramètre.
+  \item Calculer $P(X=4)$.
+  \item Calculer $E(X)$ et interpréter le résultat.
+\end{enumerate}
+\end{exercice}

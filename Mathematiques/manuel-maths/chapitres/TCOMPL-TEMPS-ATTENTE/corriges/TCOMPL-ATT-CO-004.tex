@@ -1,0 +1,13 @@
+% META: {"id": "TCOMPL-ATT-CO-004", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-004", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, oo, Rational
+% x = symbols('x', positive=True)
+% lam = Rational(1, 20)
+% E = integrate(x * lam * exp(-lam*x), (x, 0, oo))
+% assert E == 20
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EX-004}
+\textbf{1.} $E(X) = \displaystyle\int_0^{+\infty} x\times0{,}05\,\mathrm{e}^{-0{,}05x}\,\mathrm{d}x$.
+
+\textbf{2.} $E(X) = \dfrac{1}{0{,}05} = 20$ ans : la durée de vie moyenne du composant est de $20$ ans.
+\end{corrige}

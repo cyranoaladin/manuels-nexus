@@ -1,0 +1,15 @@
+% META: {"id": "TCOMPL-ATT-EX-004", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C6"], "capacites_codes": ["C6"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-004.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, oo, simplify, Rational
+% x = symbols('x', positive=True)
+% lam = Rational(1, 20)
+% E = integrate(x * lam * exp(-lam*x), (x, 0, oo))
+% assert E == 20
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-004}{2}{15}
+La durée de vie $X$ (en années) d'un composant suit la loi exponentielle de paramètre $\lambda=0{,}05$.
+\begin{enumerate}
+  \item Écrire l'intégrale donnant $E(X)$.
+  \item Calculer $E(X)$ (on admet que $\displaystyle\int_0^{+\infty} x\,\lambda\mathrm{e}^{-\lambda x}\,\mathrm{d}x = \dfrac{1}{\lambda}$) et interpréter.
+\end{enumerate}
+\end{exercice}

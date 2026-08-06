@@ -1,0 +1,26 @@
+chapitre: TCOMPL-TEMPS-ATTENTE
+niveau: TCOMPL
+theme: TEMPS-ATTENTE
+titre: "Temps d'attente"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TCOMPL-ATT-C1, libelle_eleve: "Je sais définir la loi géométrique, son espérance, et sa propriété d'absence de mémoire." }
+  - { code: C2, ref_capacite: TCOMPL-ATT-C2, libelle_eleve: "Je sais calculer explicitement des probabilités pour une variable aléatoire suivant une loi géométrique." }
+  - { code: C3, ref_capacite: TCOMPL-ATT-C3, libelle_eleve: "Je sais utiliser la caractérisation d'une loi géométrique par l'absence de mémoire dans un problème concret." }
+  - { code: C4, ref_capacite: TCOMPL-ATT-C4, libelle_eleve: "Je sais définir la loi exponentielle (densité, fonction de répartition, espérance) et sa propriété d'absence de mémoire." }
+  - { code: C5, ref_capacite: TCOMPL-ATT-C5, libelle_eleve: "Je sais vérifier qu'une fonction est une densité de probabilité et calculer des probabilités associées." }
+  - { code: C6, ref_capacite: TCOMPL-ATT-C6, libelle_eleve: "Je sais calculer l'espérance d'une variable aléatoire suivant une loi exponentielle, sous forme d'intégrale." }
+
+prerequis:
+  - { code: R1, libelle: "Calcul intégral, primitives", chapitre_origine: "TCOMPL-CALCULS-AIRES" }
+  - { code: R2, libelle: "Probabilités, variables aléatoires discrètes", chapitre_origine: "1SPE-VARIABLES-ALEATOIRES" }
+
+situation_accroche: >
+  Combien de temps faut-il attendre le prochain bus, ou avant qu'un atome radioactif ne
+  se désintègre ? Ces phénomènes partagent une propriété étonnante : l'\og absence de
+  mémoire \fg{}, le temps déjà écoulé n'influence pas le temps d'attente restant. Ce
+  chapitre étudie les deux lois qui modélisent ce type de temps d'attente : la loi
+  géométrique (temps discret) et la loi exponentielle (temps continu).
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

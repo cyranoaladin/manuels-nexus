@@ -1,0 +1,19 @@
+% META: {"id": "TCOMPL-ATT-EX-002", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "exercice", "capacites": ["TCOMPL-ATT-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/exercices/TCOMPL-ATT-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-TEMPS-ATTENTE/corriges/TCOMPL-ATT-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(1, 4)
+% def PX_sup(n, p):
+%     return (1-p)**n
+% n, k = 4, 6
+% cond = PX_sup(n+k, p) / PX_sup(n, p)
+% sans_memoire = PX_sup(k, p)
+% assert cond == sans_memoire
+% assert sans_memoire == (Rational(3,4))**6
+% END-VERIFY
+\begin{exercice}{TCOMPL-ATT-EX-002}{2}{15}
+Un standard téléphonique répond au premier appel avec une probabilité de $25\%$ à chaque tentative. On sait que les $4$ premières tentatives ont échoué.
+\begin{enumerate}
+  \item En utilisant l'absence de mémoire, exprimer la probabilité d'attendre encore $6$ tentatives supplémentaires avant le succès, sans refaire de calcul complexe.
+  \item Calculer cette probabilité.
+\end{enumerate}
+\end{exercice}

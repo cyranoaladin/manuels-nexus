@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-ATT-CO-002", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ATT-EX-002", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% p = Rational(1, 4)
+% def PX_sup(n, p):
+%     return (1-p)**n
+% n, k = 4, 6
+% cond = PX_sup(n+k, p) / PX_sup(n, p)
+% sans_memoire = PX_sup(k, p)
+% assert cond == sans_memoire
+% assert abs(N(sans_memoire) - 0.178) < 0.001
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EX-002}
+\textbf{1.} Par l'absence de mémoire, sachant $4$ échecs déjà observés, la probabilité d'attendre encore $6$ tentatives est \textbf{la même} que la probabilité initiale d'attendre $6$ tentatives dès le départ : $P_{X>4}(X>4+6) = P(X>6)$.
+
+\textbf{2.} $P(X>6) = (1-0{,}25)^6 = 0{,}75^6 \approx 0{,}178$.
+\end{corrige}

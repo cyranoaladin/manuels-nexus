@@ -1,0 +1,68 @@
+% META: {"id": "TCOMPL-ATT-CR-010", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "cours", "capacites_codes": ["C1", "C2", "C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{La loi géométrique}
+
+% ============================================================
+% STRATE 1 — Definition, calcul explicite
+% ============================================================
+
+\definition[1]{
+On répète, de façon indépendante, une épreuve de Bernoulli de paramètre $p$ jusqu'à obtenir le \textbf{premier succès}. La variable aléatoire $X$ égale au rang du premier succès suit la \textbf{loi géométrique} de paramètre $p$, notée $\mathcal{G}(p)$. Pour tout entier $k\geq1$ :
+\[
+  P(X=k) = (1-p)^{k-1} p.
+\]
+}
+
+\propriete[Espérance]{
+Si $X\sim\mathcal{G}(p)$, alors $E(X) = \dfrac{1}{p}$ (résultat admis).
+}
+
+\exemple{
+On lance un dé équilibré jusqu'à obtenir un $6$. Le rang $X$ du premier $6$ suit $\mathcal{G}\!\left(\frac{1}{6}\right)$. On calcule $P(X=3)$, la probabilité d'obtenir le premier $6$ exactement au troisième lancer :
+\[
+  P(X=3) = \left(\frac{5}{6}\right)^2 \times \frac{1}{6} = \frac{25}{216} \approx 0{,}1157.
+\]
+On a aussi $E(X) = \dfrac{1}{1/6} = 6$ : il faut en moyenne $6$ lancers pour obtenir un $6$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% p = Rational(1, 6)
+% PX3 = (1-p)**2 * p
+% assert PX3 == Rational(25, 216)
+% E = 1/p
+% assert E == 6
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Absence de memoire
+% ============================================================
+
+\propriete[Absence de mémoire]{
+Si $X\sim\mathcal{G}(p)$, alors pour tous entiers $n,k\geq0$ :
+\[
+  P_{X>n}(X>n+k) = P(X>k),
+\]
+c'est-à-dire que, sachant que le premier succès n'est pas encore arrivé au rang $n$, la probabilité d'attendre encore $k$ répétitions supplémentaires est la même qu'au tout début : le \textbf{passé n'influence pas l'avenir}.
+}
+
+\exemple{
+On tire à pile ou face jusqu'à obtenir pile. Sachant qu'on a déjà eu $5$ échecs consécutifs (face), la probabilité d'attendre encore exactement $3$ lancers de plus pour le premier pile est \textbf{la même} que la probabilité, dès le premier lancer, d'attendre $3$ lancers : la pièce \og n'a pas de mémoire \fg{} des échecs précédents.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(1, 2)
+% def PX_sup(n, p):
+%     # P(X > n) = (1-p)^n
+%     return (1-p)**n
+% n, k = 5, 3
+% # P_{X>n}(X>n+k) = P(X>n+k)/P(X>n)
+% cond = PX_sup(n+k, p) / PX_sup(n, p)
+% sans_memoire = PX_sup(k, p)
+% assert cond == sans_memoire
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire qu'un long échec récent rend un succès \og imminent \fg{}.} L'absence de mémoire de la loi géométrique contredit directement l'intuition du \og joueur malchanceux \fg{} (croire qu'après plusieurs échecs, le succès devient plus probable) : la probabilité conditionnelle d'attendre encore $k$ étapes reste exactement la même, quel que soit le nombre d'échecs déjà observés.
+}
