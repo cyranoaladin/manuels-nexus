@@ -1,5 +1,11 @@
 # Perimetre Terminale — enseignement optionnel Mathematiques expertes
 
+**Statut manuel : COMPLET (5/5 chapitres)**, acheve le 2026-08-06 dans le
+cadre de la mission "aller jusqu'au bout" (branche `terminale/collection-v1`).
+Chapitres : TEXP-COMPLEXES-ALGEBRE-GEOMETRIE, TEXP-COMPLEXES-TRIGO-POLYNOMES,
+TEXP-ARITHMETIQUE, TEXP-GRAPHES, TEXP-MATRICES-MARKOV. Perimetre reduit
+assume (cf. LOT-0 de chaque chapitre) : validation humaine finale en attente.
+
 ## Source reglementaire
 
 Arrete MENE1921264A, BO special n 8 du 25 juillet 2019, application rentree 2020.
