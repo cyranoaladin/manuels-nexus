@@ -1,0 +1,30 @@
+% META: {"id": "TSPE-GEOESPACE-EV-A-corrige", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-GEOESPACE-EV-A", "version": "A", "capacites_codes": ["C7", "C13", "C8"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt
+% A=(1,2,0);B=(3,1,2);C=(0,4,1)
+% AB=tuple(B[i]-A[i] for i in range(3))
+% AC=tuple(C[i]-A[i] for i in range(3))
+% dot=sum(a*b for a,b in zip(AB,AC))
+% assert dot == -2
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EV-A-EX1}
+\textbf{Q1.} $\vec{AB}\begin{pmatrix}2\\-1\\2\end{pmatrix}$, $\vec{AC}\begin{pmatrix}-1\\2\\1\end{pmatrix}$.
+\[
+  \vec{AB}\cdot\vec{AC} = 2\times(-1)+(-1)\times2+2\times1 = -2-2+2 = -2.
+\]
+
+\textbf{Q2.} Comme $\vec{AB}\cdot\vec{AC} = -2 \neq 0$, les vecteurs $\vec{AB}$ et $\vec{AC}$ ne sont pas orthogonaux : le triangle $ABC$ n'est pas rectangle en $A$.
+\end{corrige}
+
+\begin{corrige}{TSPE-GEOESPACE-EV-A-EX2}
+Pour $M(x,y,z) \in \mathcal{P}$, $\vec{n}\cdot\vec{AM}=0$ :
+\[
+  1(x-2)+2(y-0)-2(z-1)=0 \iff x-2+2y-2z+2=0 \iff x+2y-2z=0.
+\]
+\end{corrige}
+
+\begin{corrige}{TSPE-GEOESPACE-EV-A-EX3}
+\[
+  d(O,\mathcal{P}) = \frac{|1\times0+2\times0-2\times0-6|}{\sqrt{1^2+2^2+(-2)^2}} = \frac{|-6|}{\sqrt{9}} = \frac{6}{3} = \boxed{2}.
+\]
+\end{corrige}

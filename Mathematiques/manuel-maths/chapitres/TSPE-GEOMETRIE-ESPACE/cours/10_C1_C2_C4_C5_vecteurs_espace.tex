@@ -1,0 +1,40 @@
+% META: {"id": "TSPE-GEOESPACE-CR-010", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C1", "C2", "C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Vecteurs de l'espace, bases}
+
+% ============================================================
+% STRATE 1 — Combinaisons lineaires, bases
+% ============================================================
+
+\propriete[Combinaison linéaire]{
+Etant donnes des vecteurs $\vec{u}, \vec{v}, \vec{w}$ de l'espace et des reels $a,b,c$, le vecteur $a\vec{u}+b\vec{v}+c\vec{w}$ est appele \textbf{combinaison lineaire} de $\vec{u},\vec{v},\vec{w}$. Les regles de calcul (addition de Chasles, multiplication par un reel) sont les memes que dans le plan.
+}
+
+\exemple{
+Dans un cube $ABCDEFGH$, exprimer $\vec{AG}$ comme combinaison lineaire de $\vec{AB}$, $\vec{AD}$, $\vec{AE}$.
+
+Par la relation de Chasles : $\vec{AG} = \vec{AB}+\vec{BC}+\vec{CG} = \vec{AB}+\vec{AD}+\vec{AE}$ (car $\vec{BC}=\vec{AD}$ et $\vec{CG}=\vec{AE}$ dans un cube).
+}
+
+\definition[1]{
+Trois vecteurs $\vec{u},\vec{v},\vec{w}$ \textbf{non coplanaires} (c'est-a-dire tels qu'aucun n'est combinaison lineaire des deux autres) forment une \textbf{base} de l'espace. Tout vecteur $\vec{t}$ de l'espace se decompose alors de maniere \textbf{unique} :
+\[
+  \vec{t} = x\vec{u}+y\vec{v}+z\vec{w}, \qquad (x,y,z) \text{ appeles coordonnees de } \vec{t} \text{ dans la base } (\vec{u},\vec{v},\vec{w}).
+\]
+}
+
+\margeAppui{
+Sur une figure (par exemple un cube ou un parallelepipede), trois vecteurs non coplanaires forment une base si et seulement si ils ne sont pas tous les trois dans un meme plan.
+}
+
+\exemple{
+Dans le cube $ABCDEFGH$, $(\vec{AB},\vec{AD},\vec{AE})$ est une base de l'espace (trois aretes issues du meme sommet, non coplanaires). Les coordonnees de $\vec{AG}$ dans cette base sont $(1,1,1)$ (d'apres l'exemple precedent).
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre coplanaire et colineaire.} Deux vecteurs sont toujours coplanaires (ils definissent, avec un point, un plan) ; la notion de coplanarite non-triviale concerne \emph{trois} vecteurs : ils sont coplanaires si l'un est combinaison lineaire des deux autres.
+}
