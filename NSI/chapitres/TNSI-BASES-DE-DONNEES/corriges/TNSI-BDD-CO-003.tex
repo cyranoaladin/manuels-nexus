@@ -1,0 +1,25 @@
+% META: {"id": "TNSI-BDD-CO-003", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "corrige", "exercice_ref": "TNSI-BDD-EX-003", "capacites_codes": ["C03D", "C03E"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Eleve(id INTEGER PRIMARY KEY, nom TEXT)")
+% conn.execute("CREATE TABLE Note(id INTEGER PRIMARY KEY, id_eleve INTEGER, matiere TEXT, valeur REAL)")
+% conn.executemany("INSERT INTO Eleve VALUES (?,?)", [(1, "Nabil"), (2, "Salma")])
+% conn.executemany("INSERT INTO Note VALUES (?,?,?,?)", [
+%     (1, 1, "NSI", 15.0), (2, 2, "NSI", 18.0), (3, 1, "Maths", 12.0),
+% ])
+% conn.commit()
+% cur = conn.execute("""SELECT Eleve.nom, Note.matiere, Note.valeur
+%     FROM Note JOIN Eleve ON Note.id_eleve = Eleve.id
+%     ORDER BY Note.valeur DESC""")
+% assert cur.fetchall() == [("Salma", "NSI", 18.0), ("Nabil", "NSI", 15.0), ("Nabil", "Maths", 12.0)]
+% END-VERIFY
+\begin{corrige}{TNSI-BDD-EX-003}
+\begin{sql}
+SELECT Eleve.nom, Note.matiere, Note.valeur
+FROM Note
+JOIN Eleve ON Note.id_eleve = Eleve.id
+ORDER BY Note.valeur DESC;
+\end{sql}
+Le \texttt{JOIN} associe chaque note à l'élève correspondant via la clé étrangère \texttt{id\_eleve}, puis \texttt{ORDER BY ... DESC} trie le résultat de la note la plus haute à la plus basse.
+\end{corrige}

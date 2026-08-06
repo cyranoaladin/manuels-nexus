@@ -1,0 +1,49 @@
+% META: {"id": "TNSI-BDD-EVAL-A", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "evaluation", "capacites": ["T-BDD-01A", "T-BDD-03B", "T-BDD-03C", "T-BDD-03F"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation A --- Bases de données}
+\textit{Durée : 45 minutes. Ordinateur avec un SGBD (SQLite ou équivalent) autorisé.}
+
+\baremeIndicatif{Ex. 1 : 8 pts (modèle relationnel) ; Ex. 2 : 12 pts (SELECT, WHERE, INSERT)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Modélisation} \hfill (8 points)
+
+\begin{enumerate}
+  \item (4 pts) Définir, en une phrase chacun, les termes \textit{relation}, \textit{attribut} et \textit{clé primaire}.
+  \item (4 pts) Donner un exemple de clé étrangère dans le schéma \texttt{Commande(id, id\_client, date)} / \texttt{Client(id, nom)}, et expliquer à quoi elle sert.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{SELECT, WHERE, INSERT} \hfill (12 points)
+
+On donne la table :
+\begin{sql}
+CREATE TABLE Produit(id INTEGER PRIMARY KEY, nom TEXT, prix REAL, categorie TEXT);
+INSERT INTO Produit VALUES
+  (1, 'Cahier', 1.50, 'Papeterie'),
+  (2, 'Stylo', 0.80, 'Papeterie'),
+  (3, 'Casque audio', 25.00, 'Electronique');
+\end{sql}
+\begin{enumerate}
+  \item (4 pts) Écrire la requête affichant le nom des produits de catégorie \texttt{'Papeterie'}.
+  \item (4 pts) Écrire la requête affichant le nom des produits dont le prix est strictement inférieur à $2.00$.
+  \item (4 pts) Écrire la requête ajoutant un produit \texttt{'Gomme'}, catégorie \texttt{'Papeterie'}, prix $0.60$.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Produit(id INTEGER PRIMARY KEY, nom TEXT, prix REAL, categorie TEXT)")
+% conn.executemany("INSERT INTO Produit VALUES (?,?,?,?)", [
+%     (1, "Cahier", 1.50, "Papeterie"), (2, "Stylo", 0.80, "Papeterie"), (3, "Casque audio", 25.00, "Electronique"),
+% ])
+% conn.commit()
+% cur = conn.execute("SELECT nom FROM Produit WHERE categorie = 'Papeterie'")
+% assert set(r[0] for r in cur.fetchall()) == {"Cahier", "Stylo"}
+% cur = conn.execute("SELECT nom FROM Produit WHERE prix < 2.00")
+% assert set(r[0] for r in cur.fetchall()) == {"Cahier", "Stylo"}
+% conn.execute("INSERT INTO Produit(nom, categorie, prix) VALUES ('Gomme', 'Papeterie', 0.60)")
+% conn.commit()
+% assert conn.execute("SELECT COUNT(*) FROM Produit").fetchone()[0] == 4
+% END-VERIFY

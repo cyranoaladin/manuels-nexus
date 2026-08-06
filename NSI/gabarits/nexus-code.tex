@@ -13,6 +13,27 @@
     {à}{{\`{a}}}1 {ù}{{\`{u}}}1 {ç}{{\c{c}}}1,
 }}{}
 
+% Requetes SQL : meme gabarit visuel que python, langage SQL.
+\lstdefinestyle{nxsql}{
+  language=SQL,
+  basicstyle=\ttfamily\fontsize{8.5}{11}\selectfont,
+  keywordstyle=\color{chapcolor}\bfseries,
+  commentstyle=\color{encre!55}\itshape,
+  stringstyle=\color{coulHistoire},
+  frame=l,
+  framerule=1pt,
+  rulecolor=\color{coulCode!30},
+  backgroundcolor=\color{grisdoux},
+  numbers=left,
+  numberstyle=\ttfamily\fontsize{6}{8}\selectfont\color{encre!45},
+  numbersep=8pt,
+  xleftmargin=18pt,
+  aboveskip=9pt,
+  belowskip=9pt,
+  showstringspaces=false,
+}
+\lstnewenvironment{sql}{\lstset{style=nxsql}}{}
+
 % Code de reference : boite a barre de titre bleue pleine
 \newtcolorbox{crbox}[1]{enhanced, breakable,
   colback=nxBleu!3, colframe=nxBleu,

@@ -1,0 +1,79 @@
+% META: {"id": "TNSI-BASES-DE-DONNEES-QCM", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "qcm", "capacites_codes": ["C01A","C01C","C02","C03B","C03C","C03D"], "status": "generated"}
+
+\section*{QCM d'auto-évaluation --- Bases de données}
+
+\begin{center}
+\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\end{center}
+
+\bigskip
+
+\subsection*{C01A/C01C --- Modèle relationnel}
+
+\begin{enumerate}
+
+\item \textbf{[Q1]} Dans une relation, un attribut est défini sur :
+  \begin{enumerate}[label=\Alph*.]
+    \item un tuple.
+    \item un domaine (ensemble des valeurs possibles).
+    \item une clé étrangère uniquement.
+    \item une autre relation.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q2]} Stocker le titre et l'auteur d'un livre à chaque ligne d'une table d'emprunts (au lieu d'une table \texttt{Livre} séparée) provoque :
+  \begin{enumerate}[label=\Alph*.]
+    \item un gain de temps de calcul systématique.
+    \item une duplication de données et un risque d'incohérence lors des mises à jour.
+    \item une amélioration de la sécurité.
+    \item aucun problème particulier.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C02 --- Services d'un SGBD}
+
+\item \textbf{[Q3]} Le service de \textbf{persistance} d'un SGBD garantit que :
+  \begin{enumerate}[label=\Alph*.]
+    \item les données restent stockées durablement, même après la fin du programme.
+    \item les requêtes s'exécutent instantanément.
+    \item deux utilisateurs ne peuvent jamais accéder à la base en même temps.
+    \item les mots de passe sont chiffrés.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C03B/C03C --- SELECT, WHERE}
+
+\item \textbf{[Q4]} La requête \texttt{SELECT nom FROM Client WHERE ville = 'Lyon';} affiche :
+  \begin{enumerate}[label=\Alph*.]
+    \item toutes les colonnes des clients de Lyon.
+    \item uniquement le nom des clients habitant à Lyon.
+    \item le nombre de clients de Lyon.
+    \item toutes les villes des clients.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q5]} Écrire \texttt{WHERE ville = Lyon} (sans apostrophes) au lieu de \texttt{WHERE ville = 'Lyon'} :
+  \begin{enumerate}[label=\Alph*.]
+    \item ne change rien au résultat.
+    \item est une erreur : \texttt{Lyon} est interprété comme un nom de colonne.
+    \item rend la requête plus rapide.
+    \item est obligatoire pour les textes courts.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C03D --- JOIN}
+
+\item \textbf{[Q6]} La clause \texttt{JOIN ... ON A.x = B.y} permet de :
+  \begin{enumerate}[label=\Alph*.]
+    \item trier les résultats de la table \texttt{A}.
+    \item combiner les tuples de \texttt{A} et \texttt{B} dont les valeurs de \texttt{x} et \texttt{y} coïncident.
+    \item supprimer les doublons de \texttt{A}.
+    \item renommer la colonne \texttt{x} en \texttt{y}.
+  \end{enumerate}
+
+\end{enumerate}
