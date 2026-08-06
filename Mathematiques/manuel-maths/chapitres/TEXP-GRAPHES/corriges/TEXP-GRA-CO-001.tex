@@ -1,0 +1,17 @@
+% META: {"id": "TEXP-GRA-CO-001", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% edges = [('S1','S2'),('S1','S3'),('S2','S3'),('S3','S4'),('S4','S5')]
+% sommets = ['S1','S2','S3','S4','S5']
+% deg = {s: sum(1 for a,b in edges if s in (a,b)) for s in sommets}
+% assert deg == {'S1':2,'S2':2,'S3':3,'S4':2,'S5':1}
+% assert sum(deg.values()) == 10 == 2*5
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-001}
+\textbf{1.} Le graphe possède $5$ sommets : il est d'\textbf{ordre 5}.
+
+\textbf{2.} $\deg(S_1)=2$, $\deg(S_2)=2$, $\deg(S_3)=3$, $\deg(S_4)=2$, $\deg(S_5)=1$.
+
+\textbf{3.} Somme des degrés : $2+2+3+2+1=10$. Le graphe a $5$ arêtes, donc $2\times5=10$ : l'égalité est vérifiée (chaque arête est comptée deux fois, une fois pour chacune de ses extrémités).
+
+\textbf{4.} Un graphe complet à $5$ sommets possède $\dfrac{5\times4}{2}=10$ arêtes. Or $G$ n'a que $5$ arêtes : $G$ n'est \textbf{pas complet}.
+\end{corrige}

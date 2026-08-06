@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-GRA-EX-001", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C1"], "capacites_codes": ["C1"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-001.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% edges = [('S1','S2'),('S1','S3'),('S2','S3'),('S3','S4'),('S4','S5')]
+% sommets = ['S1','S2','S3','S4','S5']
+% deg = {s: sum(1 for a,b in edges if s in (a,b)) for s in sommets}
+% assert deg == {'S1':2,'S2':2,'S3':3,'S4':2,'S5':1}
+% assert sum(deg.values()) == 2*len(edges)
+% n = 5
+% max_aretes = n*(n-1)//2
+% assert max_aretes == 10
+% assert len(edges) != max_aretes
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-001}{1}{12}
+On considère le graphe $G$ à $5$ sommets $S_1,S_2,S_3,S_4,S_5$ et aux arêtes $\{S_1,S_2\}$, $\{S_1,S_3\}$, $\{S_2,S_3\}$, $\{S_3,S_4\}$, $\{S_4,S_5\}$.
+\begin{enumerate}
+  \item Donner l'ordre de $G$.
+  \item Déterminer le degré de chaque sommet.
+  \item Vérifier que la somme des degrés est égale au double du nombre d'arêtes.
+  \item Le graphe $G$ est-il complet ? Justifier en donnant le nombre d'arêtes d'un graphe complet à $5$ sommets.
+\end{enumerate}
+\end{exercice}

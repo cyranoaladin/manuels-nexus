@@ -1,0 +1,61 @@
+% META: {"id": "TEXP-GRA-CR-010", "chapitre": "TEXP-GRAPHES", "type_objet": "cours", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Vocabulaire des graphes}
+
+% ============================================================
+% STRATE 1 — Vocabulaire de base
+% ============================================================
+
+\definition[1]{
+Un \textbf{graphe} $G$ est constitué d'un ensemble de \textbf{sommets} et d'un ensemble d'\textbf{arêtes} reliant certains sommets deux à deux. Le nombre de sommets est l'\textbf{ordre} du graphe. Deux sommets reliés par une arête sont dits \textbf{adjacents}.
+}
+
+\definition[2]{
+Le \textbf{degré} d'un sommet est le nombre d'arêtes qui lui sont incidentes (qui le touchent). Une \textbf{chaîne} est une suite de sommets consécutivement adjacents ; sa \textbf{longueur} est son nombre d'arêtes. Un graphe est \textbf{connexe} si, pour toute paire de sommets, il existe une chaîne les reliant.
+}
+
+\exemple{
+Considérons un graphe à $4$ sommets $A,B,C,D$ avec les arêtes $\{A,B\}$, $\{B,C\}$, $\{C,D\}$, $\{A,D\}$. Cet graphe est d'ordre $4$ ; chaque sommet a pour degré $2$ ; $A,B,C,D,A$ est une chaîne fermée de longueur $4$ ; le graphe est connexe.
+}
+
+% BEGIN-VERIFY
+% aretes = {frozenset({'A','B'}), frozenset({'B','C'}), frozenset({'C','D'}), frozenset({'A','D'})}
+% sommets = {'A','B','C','D'}
+% degre = {s: sum(1 for a in aretes if s in a) for s in sommets}
+% assert degre == {'A': 2, 'B': 2, 'C': 2, 'D': 2}
+% assert len(sommets) == 4
+% END-VERIFY
+
+\definition[3]{
+Un \textbf{graphe complet} d'ordre $n$ est un graphe où chaque paire de sommets distincts est reliée par une arête. Il possède $\dfrac{n(n-1)}{2}$ arêtes.
+}
+
+% BEGIN-VERIFY
+% n = 5
+% nb_aretes_complet = n * (n - 1) // 2
+% assert nb_aretes_complet == 10
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Modeliser une situation par un graphe
+% ============================================================
+
+\propriete[Modéliser par un graphe]{
+Pour modéliser une situation par un graphe, on identifie les \textbf{objets} (sommets) et les \textbf{relations} entre eux (arêtes) : réseau social (personnes/amitiés), réseau routier (villes/routes), plan de câblage (appareils/connexions).
+}
+
+\exemple{
+Un réseau social relie $5$ personnes : Alice-Bob, Bob-Claire, Claire-David, David-Alice, Alice-Élise. On modélise chaque personne par un sommet, chaque relation d'amitié par une arête. Le degré d'Alice est $3$ (amie avec Bob, David, Élise) : c'est la personne la mieux connectée du réseau.
+}
+
+% BEGIN-VERIFY
+% amities = {frozenset({'Alice','Bob'}), frozenset({'Bob','Claire'}),
+%            frozenset({'Claire','David'}), frozenset({'David','Alice'}),
+%            frozenset({'Alice','Elise'})}
+% degre_alice = sum(1 for a in amities if 'Alice' in a)
+% assert degre_alice == 3
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre ordre du graphe et nombre d'arêtes.} L'\textbf{ordre} est le nombre de sommets ; le nombre d'arêtes est une donnée indépendante, qui peut varier de $0$ (aucune arête) jusqu'à $\dfrac{n(n-1)}{2}$ (graphe complet) pour un graphe d'ordre $n$.
+}

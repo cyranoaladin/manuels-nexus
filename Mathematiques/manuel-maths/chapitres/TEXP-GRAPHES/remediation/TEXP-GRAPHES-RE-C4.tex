@@ -1,0 +1,36 @@
+% META: {"id": "TEXP-GRAPHES-RE-C4", "chapitre": "TEXP-GRAPHES", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : puissances de matrice, pas carre coefficient par coefficient
+%---------------------------------------------------------------
+
+\begin{exercice}{TEXP-GRA-RE-C4-EX1}{1}{10}
+Un élève affirme que, pour calculer $M^2$, il suffit d'élever chaque coefficient de $M$ au carré, c'est-à-dire que $(M^2)_{ij}=(m_{ij})^2$.
+
+On prend le graphe à $4$ sommets $A,B,C,D$ (arêtes $\{A,B\}$, $\{B,C\}$, $\{C,D\}$, $\{A,D\}$) de matrice d'adjacence
+$$M=\begin{pmatrix}0&1&0&1\\1&0&1&0\\0&1&0&1\\1&0&1&0\end{pmatrix}$$
+\begin{enumerate}
+  \item Calculer la matrice obtenue en élevant chaque coefficient de $M$ au carré. Que remarque-t-on ?
+  \item Calculer le véritable produit matriciel $M^2=M\times M$.
+  \item Les deux résultats sont-ils identiques ? Que peut-on en conclure sur l'affirmation de l'élève ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]])
+% elementwise = Matrix(4, 4, lambda i, j: M[i,j]**2)
+% assert elementwise == M
+% M2 = M**2
+% assert M2 == Matrix([[2,0,2,0],[0,2,0,2],[2,0,2,0],[0,2,0,2]])
+% assert elementwise != M2
+% END-VERIFY
+
+\begin{corrige}{TEXP-GRA-RE-C4-EX1}
+\textbf{1.} Comme tous les coefficients de $M$ valent $0$ ou $1$, élever chaque coefficient au carré ne change rien ($0^2=0$, $1^2=1$) : on retrouve exactement $M$.
+
+\textbf{2.} Le véritable produit matriciel donne
+$$M^2=\begin{pmatrix}2&0&2&0\\0&2&0&2\\2&0&2&0\\0&2&0&2\end{pmatrix}$$
+
+\textbf{3.} Les deux résultats sont totalement différents : élever chaque coefficient au carré redonne $M$ elle-même, alors que le vrai $M^2$ (produit matriciel) fait apparaître des $2$. \textbf{L'affirmation de l'élève est fausse.} $M^2$ doit toujours se calculer par un \textbf{produit matriciel} $M\times M$ (somme de produits de coefficients, ligne par colonne), jamais coefficient par coefficient : c'est cette opération, et elle seule, qui donne le nombre de chaînes de longueur $2$.
+\end{corrige}

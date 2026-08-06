@@ -1,0 +1,53 @@
+% META: {"id": "TEXP-GRA-EV-B", "chapitre": "TEXP-GRAPHES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C3", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% MB = Matrix([
+%     [0,1,1,1],
+%     [1,0,1,0],
+%     [1,1,0,0],
+%     [1,0,0,0],
+% ])
+% deg = [sum(MB.row(i)) for i in range(4)]
+% assert deg == [3,2,2,1]
+% MB2 = MB**2
+% MB3 = MB**3
+% assert MB2[0,3] == 0
+% assert MB3[0,3] == 3
+% assert MB2[0,0] * MB[0,3] == MB3[0,3]
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-GRA-EV-B}{55}
+
+\begin{exercice}{TEXP-GRA-EV-B-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacités C1, C3}
+
+\medskip
+
+On considère le graphe $G$ à $4$ sommets $W,X,Y,Z$, d'arêtes $\{W,X\}$, $\{W,Y\}$, $\{W,Z\}$, $\{X,Y\}$.
+
+\begin{enumerate}
+  \item (2 pts) Donner l'ordre de $G$.
+  \item (3 pts) Déterminer le degré de chaque sommet.
+  \item (3 pts) Construire la matrice d'adjacence $M$ de $G$, en numérotant les sommets dans l'ordre $W,X,Y,Z$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-GRA-EV-B-EX2}{2}{40}
+\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5}
+
+\medskip
+
+On reprend le graphe $G$ et sa matrice $M$ de l'exercice 1.
+
+\begin{enumerate}
+  \item (4 pts) Calculer $M^2$. Que vaut $(M^2)_{W,Z}$ ? Justifier ce résultat en observant les voisins de $Z$.
+  \item (4 pts) Rappeler la relation de récurrence liant $(M^{n+1})_{ij}$ à $(M^n)_{ik}$ et $m_{kj}$, et justifier brièvement (en une phrase) pourquoi elle est vraie.
+  \item (4 pts) Le sommet $Z$ n'a qu'un seul voisin. En utilisant cette information, la relation de récurrence et $(M^2)_{W,W}$, déterminer $(M^3)_{W,Z}$ \textbf{sans calculer entièrement} le produit $M^2\times M$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

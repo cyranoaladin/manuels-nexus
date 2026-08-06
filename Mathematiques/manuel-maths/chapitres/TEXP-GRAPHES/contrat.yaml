@@ -1,0 +1,25 @@
+chapitre: TEXP-GRAPHES
+niveau: TEXPERTES
+theme: GRAPHES
+titre: "Graphes"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TEXP-GRA-C1, libelle_eleve: "Je sais utiliser le vocabulaire des graphes : sommets, arêtes, adjacence, degré, ordre, chaîne, connexité, graphe complet." }
+  - { code: C2, ref_capacite: TEXP-GRA-C2, libelle_eleve: "Je sais modéliser une situation concrète par un graphe." }
+  - { code: C3, ref_capacite: TEXP-GRA-C3, libelle_eleve: "Je sais construire la matrice d'adjacence d'un graphe." }
+  - { code: C4, ref_capacite: TEXP-GRA-C4, libelle_eleve: "Je sais calculer le nombre de chemins de longueur donnée entre deux sommets d'un graphe à l'aide des puissances de la matrice d'adjacence." }
+  - { code: C5, ref_capacite: TEXP-GRA-C5, libelle_eleve: "Je sais démontrer que le coefficient (i,j) de la puissance n-ième de la matrice d'adjacence donne le nombre de chemins de longueur n entre les sommets i et j." }
+
+prerequis:
+  - { code: R1, libelle: "Structures de données de base", chapitre_origine: "1SPE" }
+
+situation_accroche: >
+  En 1736, Euler résout le célèbre problème des sept ponts de Königsberg (existe-t-il
+  une promenade empruntant chaque pont une seule fois ?) en inventant une nouvelle
+  branche des mathématiques : la théorie des graphes. Aujourd'hui, les graphes modélisent
+  les réseaux sociaux, les routes, Internet, et bien d'autres systèmes de relations entre
+  objets. Ce chapitre introduit le vocabulaire fondamental des graphes et leur lien avec
+  le calcul matriciel.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

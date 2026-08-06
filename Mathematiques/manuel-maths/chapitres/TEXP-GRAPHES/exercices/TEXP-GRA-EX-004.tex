@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-GRA-EX-004", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C4"], "capacites_codes": ["C4"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-004.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([
+%     [0,1,1,0],
+%     [1,0,1,0],
+%     [1,1,0,1],
+%     [0,0,1,0],
+% ])
+% M2 = M**2
+% M3 = M**3
+% assert M2 == Matrix([[2,1,1,1],[1,2,1,1],[1,1,3,0],[1,1,0,1]])
+% assert M3 == Matrix([[2,3,4,1],[3,2,4,1],[4,4,2,3],[1,1,3,0]])
+% assert M2[0,3] == 1
+% assert M3[0,3] == 1
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-004}{2}{15}
+On considère le graphe $H$ à $4$ sommets $A,B,C,D$ (numérotés dans cet ordre), constitué d'un triangle $A,B,C$ (arêtes $\{A,B\}$, $\{A,C\}$, $\{B,C\}$) auquel on ajoute un sommet $D$ relié uniquement à $C$ (arête $\{C,D\}$).
+\begin{enumerate}
+  \item Construire la matrice d'adjacence $M$ de $H$.
+  \item Calculer $M^2$. En déduire le nombre de chaînes de longueur $2$ entre $A$ et $D$, et écrire explicitement cette (ces) chaîne(s).
+  \item Calculer $M^3$. En déduire le nombre de chaînes de longueur $3$ entre $A$ et $D$, et écrire explicitement cette (ces) chaîne(s).
+\end{enumerate}
+\end{exercice}
