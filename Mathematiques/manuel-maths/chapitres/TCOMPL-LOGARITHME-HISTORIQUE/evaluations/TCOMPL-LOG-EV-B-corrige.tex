@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-LOG-EV-B-corrige", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-LOG-EV-B", "capacites_codes": ["C1", "C3", "C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% n_reel = math.log(100/8000) / math.log(0.85)
+% assert 26 < n_reel < 27
+% assert 8000 * 0.85**26 > 100
+% assert 8000 * 0.85**27 < 100
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EV-B-EX1}
+\textbf{1.} Pour $x>0$, $\ln x$ est l'unique réel $y$ tel que $\mathrm{e}^y=x$. On a $\ln 1 = 0$ et $\ln \mathrm{e} = 1$.
+
+\textbf{2.} Avec $b=\dfrac{1}{a}$ : $\ln\!\left(a\times\dfrac{1}{a}\right) = \ln(a) + \ln\!\left(\dfrac{1}{a}\right)$. Or $a\times\dfrac{1}{a}=1$ et $\ln(1)=0$, donc $0 = \ln(a)+\ln\!\left(\dfrac{1}{a}\right)$, soit $\ln\!\left(\dfrac{1}{a}\right) = -\ln(a)$.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-LOG-EV-B-EX2}
+\textbf{1.} On cherche $n$ tel que $8000\times0{,}85^n < 100$, soit $0{,}85^n < 0{,}0125$.
+
+\textbf{2.} En passant au logarithme : $n\ln(0{,}85) < \ln(0{,}0125)$. Comme $0{,}85<1$, $\ln(0{,}85)<0$ : diviser par $\ln(0{,}85)$ \textbf{inverse} le sens de l'inégalité :
+\[
+  n > \frac{\ln(0{,}0125)}{\ln(0{,}85)} \approx 26{,}96.
+\]
+
+\textbf{3.} Comme $n$ est un entier, la valeur passe sous $100$ € à partir de $n=27$ ans (on vérifie $u_{26}\approx116{,}9 > 100$ et $u_{27}\approx99{,}4<100$).
+\end{corrige}

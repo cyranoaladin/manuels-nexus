@@ -1,0 +1,16 @@
+% META: {"id": "TCOMPL-LOG-CO-002", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, solve, Eq
+% x = symbols('x')
+% sols = solve(Eq(ln(2*x+1), ln(x) + ln(3)), x)
+% assert sols == [1]
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-002}
+\textbf{Domaine.} Il faut $2x+1>0$ (soit $x>-\frac{1}{2}$) et $x>0$ : le domaine est $]0,+\infty[$.
+
+\textbf{Résolution.} Sur ce domaine, $\ln(x)+\ln(3) = \ln(3x)$ (équation fonctionnelle). L'équation devient :
+\[
+  \ln(2x+1) = \ln(3x) \iff 2x+1 = 3x \iff x = 1,
+\]
+car $\ln$ est strictement croissante donc injective. On vérifie que $x=1>0$ : $\boxed{S=\{1\}}$.
+\end{corrige}

@@ -1,0 +1,54 @@
+% META: {"id": "TCOMPL-LOG-CR-010", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Le logarithme, de Neper à la fonction réciproque}
+
+% ============================================================
+% STRATE 1 — Approche historique et definition
+% ============================================================
+
+Au début du dix-septième siècle, l'astronome et mathématicien écossais John Napier (Neper) remarque un lien entre \textbf{suites arithmétiques} et \textbf{suites géométriques} : si l'on associe à chaque terme d'une suite géométrique $(q^n)$ le rang $n$ correspondant (une suite arithmétique), \textbf{multiplier} deux termes géométriques revient à \textbf{additionner} leurs rangs. Neper construit ainsi une table permettant de remplacer des multiplications coûteuses par de simples additions.
+
+\margeAppui{
+$q^a \times q^b = q^{a+b}$ : sur les \textbf{exposants}, la multiplication devient une addition. C'est exactement le principe qu'exploite le logarithme.
+}
+
+\definition[1]{
+Pour tout réel $x > 0$, il existe un unique réel $y$ tel que $\mathrm{e}^y = x$. Ce réel $y$ est appelé \textbf{logarithme népérien} de $x$, noté $\ln x$. La fonction $\ln$ est ainsi la fonction \textbf{réciproque} de la fonction exponentielle.
+}
+
+\propriete[Propriétés immédiates]{
+Pour tout $x > 0$ : $\mathrm{e}^{\ln x} = x$. Pour tout $y \in \mathbb{R}$ : $\ln(\mathrm{e}^y) = y$. En particulier, $\ln 1 = 0$ et $\ln \mathrm{e} = 1$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, ln, simplify
+% x = symbols('x', positive=True)
+% assert simplify(exp(ln(x)) - x) == 0
+% assert ln(1) == 0
+% assert ln(exp(1)) == 1
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Limites, representation graphique
+% ============================================================
+
+\propriete[Limites et représentation graphique]{
+La fonction $\ln$ est définie, continue et strictement croissante sur $]0,+\infty[$. On a :
+\[
+  \lim_{x \to 0^+} \ln x = -\infty
+  \qquad \text{et} \qquad
+  \lim_{x \to +\infty} \ln x = +\infty.
+\]
+Sa courbe représentative est symétrique de celle de l'exponentielle par rapport à la droite $y=x$ (propriété générale des fonctions réciproques).
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, limit, oo
+% x = symbols('x', positive=True)
+% assert limit(ln(x), x, 0, '+') == -oo
+% assert limit(ln(x), x, oo) == oo
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire que $\ln x$ est défini pour tout réel $x$.} Le logarithme népérien n'est défini que pour $x > 0$ : $\ln 0$ et $\ln(x)$ pour $x<0$ n'existent pas. Toujours vérifier le domaine de définition avant de manipuler une expression contenant $\ln$.
+}

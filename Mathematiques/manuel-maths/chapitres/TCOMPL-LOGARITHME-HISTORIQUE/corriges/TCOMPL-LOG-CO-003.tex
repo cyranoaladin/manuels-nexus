@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-LOG-CO-003", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% n_reel = math.log(50/500) / math.log(0.9)
+% assert 21 < n_reel < 22
+% assert 500 * 0.9**21 > 50
+% assert 500 * 0.9**22 < 50
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-003}
+\textbf{1.} On cherche $n$ tel que $500 \times 0{,}9^n < 50$, soit $0{,}9^n < 0{,}1$. En passant au logarithme (fonction strictement croissante, l'inégalité est conservée par $\ln$) :
+\[
+  n \ln(0{,}9) < \ln(0{,}1).
+\]
+Comme $0{,}9<1$, on a $\ln(0{,}9)<0$ : diviser par $\ln(0{,}9)$ \textbf{inverse} le sens de l'inégalité :
+\[
+  n > \frac{\ln(0{,}1)}{\ln(0{,}9)}.
+\]
+
+\textbf{2.} Numériquement, $\dfrac{\ln(0{,}1)}{\ln(0{,}9)} \approx 21{,}85$. Comme $n$ est un entier, la quantité restante devient inférieure à $50$ mg à partir de $n=22$ heures (on vérifie que $u_{21}\approx54{,}7 > 50$ et $u_{22}\approx49{,}2<50$).
+\end{corrige}
