@@ -1,0 +1,96 @@
+% META: {"id": "TCOMPL-MF-CR-010", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "cours", "capacites_codes": ["C1", "C2", "C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Étudier une fonction pour modéliser un problème}
+
+% ============================================================
+% STRATE 1 — Derivee, tableau de variation
+% ============================================================
+
+Une entreprise fabrique $x$ objets. Le coût moyen de production par objet (en euros) est modélisé, pour $x>0$, par :
+\[
+  f(x) = x + \frac{9}{x}.
+\]
+
+\propriete[Dérivée et sens de variation]{
+La fonction $f$ est dérivable sur $]0,+\infty[$ et pour tout $x>0$ :
+\[
+  f'(x) = 1 - \frac{9}{x^2}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Eq
+% x = symbols('x', positive=True)
+% f = x + 9/x
+% fp = diff(f, x)
+% assert fp == 1 - 9/x**2
+% assert solve(Eq(fp, 0), x) == [3]
+% END-VERIFY
+
+\exemple{
+On résout $f'(x)=0$, soit $1 - \dfrac{9}{x^2}=0 \iff x^2=9 \iff x=3$ (car $x>0$). Pour $0<x<3$, $f'(x)<0$ ($f$ décroît) ; pour $x>3$, $f'(x)>0$ ($f$ croît). Le tableau de variation fait apparaître un minimum en $x=3$, avec $f(3) = 3+3=6$ euros.
+}
+
+\margeAppui{
+Ce type de fonction (somme d'un terme proportionnel et d'un terme inversement proportionnel) modélise de nombreux coûts moyens : minimiser $f$ revient à trouver le meilleur compromis entre les deux effets.
+}
+
+% ============================================================
+% STRATE 2 — Exploiter le tableau de variation, valeurs approchees
+% ============================================================
+
+\propriete[Nombre de solutions de $f(x)=k$]{
+Une fonction strictement monotone sur un intervalle prend chaque valeur \textbf{au plus une fois}. Un tableau de variation avec plusieurs monotonies successives permet de dénombrer, sur chaque intervalle de monotonie, le nombre de solutions de $f(x)=k$ (une solution si $k$ est atteint sur cet intervalle, zéro sinon).
+}
+
+\exemple{
+Pour $f(x)=x+\dfrac{9}{x}$ sur $]0,+\infty[$ : $f$ est strictement décroissante sur $]0,3]$ de $+\infty$ à $6$, puis strictement croissante sur $[3,+\infty[$ de $6$ à $+\infty$. Pour $k=10>6$, l'équation $f(x)=10$ admet donc \textbf{exactement deux} solutions (une sur chaque intervalle de monotonie) ; pour $k=6$, une seule solution ($x=3$) ; pour $k<6$, aucune solution.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq, Rational
+% x = symbols('x', positive=True)
+% f = x + 9/x
+% sols = solve(Eq(f, 10), x)
+% assert len(sols) == 2
+% assert solve(Eq(f, 6), x) == [3]
+% assert solve(Eq(f, 5), x) == []
+% END-VERIFY
+
+\propriete[Valeurs approchées par balayage ou dichotomie]{
+Lorsqu'une équation $f(x)=k$ n'admet pas de solution exacte simple, on cherche une \textbf{valeur approchée} : le \textbf{balayage} teste des valeurs régulièrement espacées jusqu'à encadrer un changement de signe de $f(x)-k$ ; la \textbf{dichotomie} affine cet encadrement en le divisant par deux à chaque étape.
+}
+
+\begin{python}
+def dichotomie(f, a, b, precision):
+    # f continue, f(a) et f(b) de signes opposes
+    while b - a > precision:
+        m = (a + b) / 2
+        if f(a) * f(m) <= 0:
+            b = m
+        else:
+            a = m
+    return (a + b) / 2
+\end{python}
+
+% BEGIN-VERIFY
+% def dichotomie(f, a, b, precision):
+%     while b - a > precision:
+%         m = (a + b) / 2
+%         if f(a) * f(m) <= 0:
+%             b = m
+%         else:
+%             a = m
+%     return (a + b) / 2
+%
+% f = lambda x: x + 9/x - 10
+% approx = dichotomie(f, 3, 9, 1e-6)
+% # solution exacte sur [3,9[ : x + 9/x = 10 -> x^2-10x+9=0 -> x=1 ou x=9 ; sur ]3,9[ pas de racine stricte
+% # on encadre plutot la racine sur [0.5, 3] : x=1
+% approx2 = dichotomie(f, 0.5, 3, 1e-6)
+% assert abs(approx2 - 1) < 1e-4
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Appliquer la dichotomie sans vérifier le changement de signe.} La méthode suppose que $f(a)$ et $f(b)$ sont de signes opposés (théorème des valeurs intermédiaires) : sans cette hypothèse initiale vérifiée, l'algorithme peut converger vers une valeur qui n'est pas une solution de $f(x)=k$.
+}

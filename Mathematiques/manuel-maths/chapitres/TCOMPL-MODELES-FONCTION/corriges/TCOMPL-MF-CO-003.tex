@@ -1,0 +1,16 @@
+% META: {"id": "TCOMPL-MF-CO-003", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-003", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Eq, simplify
+% x = symbols('x')
+% h = x**3 - 6*x**2 + 9*x
+% hpp = diff(h, x, 2)
+% assert simplify(hpp - (6*x - 12)) == 0
+% assert solve(Eq(hpp, 0), x) == [2]
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-003}
+\textbf{1.} $h'(x) = 3x^2 - 12x + 9$, donc $h''(x) = 6x - 12$.
+
+\textbf{2.} $h''(x) = 6x-12 = 6(x-2)$. Pour $x<2$, $h''(x)<0$ : $h$ est \textbf{concave} sur $]-\infty,2]$. Pour $x>2$, $h''(x)>0$ : $h$ est \textbf{convexe} sur $[2,+\infty[$.
+
+\textbf{3.} $h''$ s'annule en $x=2$ en changeant de signe (négatif avant, positif après) : $h$ admet un \textbf{point d'inflexion} d'abscisse $x=2$.
+\end{corrige}

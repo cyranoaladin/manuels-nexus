@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-MF-CO-001", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Eq
+% x = symbols('x', positive=True)
+% f = x + 16/x
+% fp = diff(f, x)
+% assert fp == 1 - 16/x**2
+% assert solve(Eq(fp, 0), x) == [4]
+% assert f.subs(x, 4) == 8
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-001}
+\textbf{1.} Pour $x>0$ :
+\[
+  f'(x) = 1 - \frac{16}{x^2}.
+\]
+
+\textbf{2.} $f'(x) = 0 \iff x^2 = 16 \iff x = 4$ (car $x>0$). Pour $0<x<4$, $f'(x)<0$ ; pour $x>4$, $f'(x)>0$ : $f$ décroît sur $]0,4]$ puis croît sur $[4,+\infty[$.
+
+\textbf{3.} Le minimum est atteint en $x=4$, avec $f(4) = 4 + \dfrac{16}{4} = 4+4=8$. Le coût moyen minimal est de $8$ euros par objet, pour une production de $4$ objets.
+\end{corrige}

@@ -1,0 +1,42 @@
+% META: {"id": "TCOMPL-MF-EV-A-corrige", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-MF-EV-A", "capacites_codes": ["C1", "C2", "C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Eq
+% x = symbols('x', positive=True)
+% f = x + 4/x
+% fp = diff(f, x)
+% assert fp == 1 - 4/x**2
+% assert solve(Eq(fp, 0), x) == [2]
+% assert f.subs(x, 2) == 4
+%
+% g = lambda t: t**3 - 4*t - 1
+% assert g(2) < 0
+% assert g(2.5) > 0
+% assert g(2.25) > 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EV-A-EX1}
+\textbf{1.} $f'(x) = 1 - \dfrac{4}{x^2}$.
+
+\textbf{2.} $f'(x)=0 \iff x^2=4 \iff x=2$ (car $x>0$). $f'(x)<0$ sur $]0,2[$, $f'(x)>0$ sur $]2,+\infty[$ : $f$ décroît sur $]0,2]$ puis croît sur $[2,+\infty[$.
+
+\textbf{3.} Minimum en $x=2$ : $f(2)=2+2=4$. Coût moyen minimal de $4$ centaines d'euros pour une production de $200$ pièces.
+
+\textbf{4.} $5>4$ (le minimum) : la valeur $5$ est atteinte une fois sur chacun des deux intervalles de monotonie, soit \textbf{deux solutions}.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-MF-EV-A-EX2}
+\textbf{1.}
+\begin{python}
+def dichotomie(f, a, b, precision):
+    while b - a > precision:
+        m = (a + b) / 2
+        if f(a) * f(m) <= 0:
+            b = m
+        else:
+            a = m
+    return (a + b) / 2
+\end{python}
+
+\textbf{2.} Étape 1 : $m = \dfrac{2+3}{2} = 2{,}5$. On calcule $2{,}5^3 - 4\times2{,}5 - 1 = 4{,}625 > 0$. Comme $f(2)<0$ et $f(2{,}5)>0$, la racine est dans $[2\,;\ 2{,}5]$.
+
+Étape 2 : $m = \dfrac{2+2{,}5}{2} = 2{,}25$. On calcule $2{,}25^3 - 4\times2{,}25 - 1 = 1{,}390625 > 0$. Comme $f(2)<0$ et $f(2{,}25)>0$, la racine est dans $[2\,;\ 2{,}25]$.
+\end{corrige}
