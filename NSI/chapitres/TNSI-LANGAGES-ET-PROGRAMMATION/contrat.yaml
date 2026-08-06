@@ -1,0 +1,32 @@
+chapitre: TNSI-LANGAGES-ET-PROGRAMMATION
+niveau: TNSI
+theme: LANGAGES-ET-PROGRAMMATION
+titre: "Langages, récursivité et paradigmes de programmation"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C01A, ref_capacite: T-LANG-01A, libelle_eleve: "Je comprends que tout programme est aussi une donnée." }
+  - { code: C01B, ref_capacite: T-LANG-01B, libelle_eleve: "Je comprends que la calculabilité ne dépend pas du langage utilisé." }
+  - { code: C01C, ref_capacite: T-LANG-01C, libelle_eleve: "Je sais expliquer, sans formalisme théorique, pourquoi le problème de l'arrêt est indécidable." }
+  - { code: C02A, ref_capacite: T-LANG-02A, libelle_eleve: "Je sais écrire un programme récursif." }
+  - { code: C02B, ref_capacite: T-LANG-02B, libelle_eleve: "Je sais analyser le fonctionnement d'un programme récursif." }
+  - { code: C03A, ref_capacite: T-LANG-03A, libelle_eleve: "Je sais utiliser des API ou bibliothèques." }
+  - { code: C03B, ref_capacite: T-LANG-03B, libelle_eleve: "Je sais exploiter la documentation d'une API ou bibliothèque." }
+  - { code: C03C, ref_capacite: T-LANG-03C, libelle_eleve: "Je sais créer des modules simples et les documenter." }
+  - { code: C04A, ref_capacite: T-LANG-04A, libelle_eleve: "Je sais distinguer, sur des exemples, les paradigmes impératif, fonctionnel et objet." }
+  - { code: C04B, ref_capacite: T-LANG-04B, libelle_eleve: "Je sais choisir un paradigme adapté au champ d'application." }
+  - { code: C05,  ref_capacite: T-LANG-05,  libelle_eleve: "Je sais identifier les causes typiques de bugs dans un programme." }
+
+prerequis:
+  - { code: R1, libelle: "Fonctions, récursivité de base", chapitre_origine: "1NSI-LANGAGE" }
+  - { code: R2, libelle: "Classes Python", chapitre_origine: "TNSI-STRUCTURES-DONNEES" }
+
+situation_accroche: >
+  Un meme algorithme de tri peut s'ecrire en Python, en C ou en OCaml : le langage change,
+  mais ce qui est calculable ne change pas. Certains programmes, en revanche, ne peuvent
+  jamais etre garantis de s'arreter par un simple test automatique -- c'est le celebre
+  probleme de l'arret. Ce chapitre explore ces questions fondamentales, ainsi que les
+  outils concrets du quotidien d'un programmeur ou d'une programmeuse : la recursivite,
+  les bibliotheques et modules, les paradigmes de programmation, et la traque des bugs.
+
+temps_estime_h: { parcours1: 16, parcours2: 13, parcours3: 10 }
