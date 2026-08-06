@@ -1,0 +1,26 @@
+chapitre: TCOMPL-ECHANTILLONNAGE
+niveau: TCOMPL
+theme: ECHANTILLONNAGE
+titre: "Répétition d'expériences indépendantes, échantillonnage"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TCOMPL-ECH-C1, libelle_eleve: "Je sais identifier une situation où une variable aléatoire suit une loi de Bernoulli ou une loi binomiale." }
+  - { code: C2, ref_capacite: TCOMPL-ECH-C2, libelle_eleve: "Je sais déterminer des coefficients binomiaux à l'aide du triangle de Pascal." }
+  - { code: C3, ref_capacite: TCOMPL-ECH-C3, libelle_eleve: "Je sais calculer, à la calculatrice ou en Python, des probabilités P(X=k) ou P(X≤k) pour X suivant une loi binomiale." }
+  - { code: C4, ref_capacite: TCOMPL-ECH-C4, libelle_eleve: "Je sais déterminer un intervalle de fluctuation I tel que P(X∈I) ≥ 1-α pour X suivant une loi binomiale." }
+  - { code: C5, ref_capacite: TCOMPL-ECH-C5, libelle_eleve: "Je sais simuler en Python un échantillon de taille n d'une variable aléatoire, et calculer la série des moyennes de N échantillons." }
+  - { code: C6, ref_capacite: TCOMPL-ECH-C6, libelle_eleve: "Je sais démontrer l'espérance d'une variable aléatoire suivant une loi binomiale, pour n ≤ 3." }
+
+prerequis:
+  - { code: R1, libelle: "Probabilités, variables aléatoires, espérance", chapitre_origine: "1SPE-VARIABLES-ALEATOIRES" }
+  - { code: R2, libelle: "Probabilités conditionnelles", chapitre_origine: "1SPE-PROBA-COND" }
+
+situation_accroche: >
+  Un sondage interroge 1000 personnes pour estimer l'opinion d'une population entière ;
+  un laboratoire teste un lot de pièces pour détecter une proportion de défauts. Dans les
+  deux cas, on répète une même expérience aléatoire un grand nombre de fois de manière
+  indépendante. Ce chapitre étudie la loi binomiale, outil central pour modéliser ces
+  répétitions et quantifier l'incertitude d'un échantillonnage.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

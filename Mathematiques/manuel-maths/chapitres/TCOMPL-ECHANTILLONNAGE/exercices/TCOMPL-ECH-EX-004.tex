@@ -1,0 +1,14 @@
+% META: {"id": "TCOMPL-ECH-EX-004", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C6"], "capacites_codes": ["C6"], "methodes": [], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-004.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% p = symbols('p')
+% E = 0*(1-p)**2 + 1*2*p*(1-p) + 2*p**2
+% assert simplify(expand(E) - 2*p) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-004}{2}{15}
+Soit $X \sim \mathcal{B}(2,p)$.
+\begin{enumerate}
+  \item Écrire $P(X=0)$, $P(X=1)$, $P(X=2)$ en fonction de $p$.
+  \item En utilisant la définition $E(X) = \displaystyle\sum_{k=0}^{2} k\,P(X=k)$, démontrer que $E(X)=2p$.
+\end{enumerate}
+\end{exercice}

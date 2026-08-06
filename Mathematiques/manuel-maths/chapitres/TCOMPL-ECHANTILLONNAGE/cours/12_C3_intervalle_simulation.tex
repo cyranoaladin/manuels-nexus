@@ -1,0 +1,90 @@
+% META: {"id": "TCOMPL-ECH-CR-012", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "cours", "capacites_codes": ["C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Intervalle de fluctuation et simulation}
+
+% ============================================================
+% STRATE 1 — Intervalle de fluctuation
+% ============================================================
+
+\definition[1]{
+Pour $X \sim \mathcal{B}(n,p)$ et un seuil $\alpha \in\, ]0,1[$ (souvent $\alpha=0{,}05$), un \textbf{intervalle de fluctuation} au seuil $1-\alpha$ est un intervalle $I=[a,b]$ tel que $P(X\in I) \geq 1-\alpha$.
+}
+
+\propriete[Construction pratique]{
+On construit $I=[a,b]$ en cherchant le plus petit $a$ tel que $P(X<a) \leq \dfrac{\alpha}{2}$, et le plus petit $b$ tel que $P(X\leq b) \geq 1-\dfrac{\alpha}{2}$ : cela centre approximativement l'intervalle autour de l'espérance $np$.
+}
+
+\exemple{
+Pour $X \sim \mathcal{B}(50, 0{,}4)$ et $\alpha=0{,}05$, on cherche $I=[a,b]$ tel que $P(X\in I)\geq0{,}95$. En balayant les valeurs cumulées, on trouve $I=[13,27]$ (à vérifier à la calculatrice ou en Python).
+}
+
+% BEGIN-VERIFY
+% from math import comb
+% def P_egal(n, p, k):
+%     return comb(n, k) * p**k * (1 - p)**(n - k)
+% n, p = 50, 0.4
+% a = 0
+% cumul = 0
+% while cumul < 0.025:
+%     cumul += P_egal(n, p, a)
+%     a += 1
+% a -= 1
+% b = 0
+% cumul2 = 0
+% while cumul2 < 0.975:
+%     cumul2 += P_egal(n, p, b)
+%     b += 1
+% b -= 1
+% assert a == 13
+% assert b == 27
+% proba_intervalle = sum(P_egal(n, p, k) for k in range(a, b + 1))
+% assert proba_intervalle >= 0.95
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Simulation Python
+% ============================================================
+
+\propriete[Simuler un échantillon]{
+Pour simuler un échantillon de taille $n$ d'une variable de Bernoulli de paramètre $p$, on utilise une fonction aléatoire uniforme sur $[0,1]$ : un tirage est un \og succès \fg{} si la valeur tirée est inférieure à $p$.
+}
+
+\begin{python}
+import random
+
+def simuler_bernoulli(p):
+    return 1 if random.random() < p else 0
+
+def simuler_echantillon(n, p):
+    return [simuler_bernoulli(p) for _ in range(n)]
+
+def moyenne_echantillon(n, p):
+    echantillon = simuler_echantillon(n, p)
+    return sum(echantillon) / n
+\end{python}
+
+% BEGIN-VERIFY
+% import random
+% random.seed(42)
+% def simuler_bernoulli(p):
+%     return 1 if random.random() < p else 0
+% def simuler_echantillon(n, p):
+%     return [simuler_bernoulli(p) for _ in range(n)]
+% def moyenne_echantillon(n, p):
+%     echantillon = simuler_echantillon(n, p)
+%     return sum(echantillon) / n
+% echantillon = simuler_echantillon(1000, 0.3)
+% assert all(v in (0, 1) for v in echantillon)
+% assert len(echantillon) == 1000
+% moyennes = [moyenne_echantillon(100, 0.3) for _ in range(200)]
+% moyenne_des_moyennes = sum(moyennes) / len(moyennes)
+% assert abs(moyenne_des_moyennes - 0.3) < 0.05
+% END-VERIFY
+
+\margeAppui{
+Répéter cette simulation $N$ fois (pour obtenir $N$ échantillons de taille $n$) et calculer la moyenne de chaque échantillon permet d'observer empiriquement que ces moyennes se regroupent autour de $p$, avec une dispersion qui diminue quand $n$ augmente : c'est une illustration expérimentale de la loi des grands nombres.
+}
+
+\erreurFrequente{
+\textbf{Confondre la taille de l'échantillon $n$ et le nombre d'échantillons $N$.} Simuler \og $N$ échantillons de taille $n$ \fg{} signifie répéter $N$ fois l'expérience \og tirer $n$ valeurs et faire leur moyenne \fg{}, produisant $N$ moyennes différentes, pas un unique échantillon de taille $N \times n$.
+}

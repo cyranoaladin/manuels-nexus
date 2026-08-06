@@ -1,0 +1,14 @@
+% META: {"id": "TCOMPL-ECH-EX-001", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C1", "TCOMPL-ECH-C3"], "capacites_codes": ["C1", "C3"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-001.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from math import comb
+% n, p, k = 8, 0.4, 3
+% PXk = comb(n, k) * p**k * (1-p)**(n-k)
+% assert abs(PXk - 0.2787) < 0.0001
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-001}{1}{15}
+On interroge $8$ personnes au hasard dans une population où $40\%$ sont favorables à un projet. Soit $X$ le nombre de personnes favorables parmi les $8$ interrogées.
+\begin{enumerate}
+  \item Justifier que $X$ suit une loi binomiale, et préciser ses paramètres.
+  \item Calculer $P(X=3)$, à $10^{-4}$ près.
+\end{enumerate}
+\end{exercice}

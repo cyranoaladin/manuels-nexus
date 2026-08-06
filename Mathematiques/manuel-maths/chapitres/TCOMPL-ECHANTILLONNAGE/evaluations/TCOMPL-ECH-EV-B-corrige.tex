@@ -1,0 +1,50 @@
+% META: {"id": "TCOMPL-ECH-EV-B-corrige", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ECH-EV-B", "capacites_codes": ["C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from math import comb
+% def P_egal(n, p, k):
+%     return comb(n, k) * p**k * (1 - p)**(n - k)
+% n, p = 200, 0.2
+% a, cumul = 0, 0
+% while cumul < 0.025:
+%     cumul += P_egal(n, p, a)
+%     a += 1
+% a -= 1
+% b, cumul2 = 0, 0
+% while cumul2 < 0.975:
+%     cumul2 += P_egal(n, p, b)
+%     b += 1
+% b -= 1
+% assert a == 29
+% assert b == 51
+% assert not (29 <= 58 <= 51)
+%
+% import random
+% def simuler_moyennes(N, n, p):
+%     moyennes = []
+%     for _ in range(N):
+%         echantillon = [1 if random.random() < p else 0 for _ in range(n)]
+%         moyennes.append(sum(echantillon) / n)
+%     return moyennes
+% random.seed(1)
+% resultat = simuler_moyennes(10, 50, 0.3)
+% assert len(resultat) == 10
+% assert all(0 <= m <= 1 for m in resultat)
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EV-B-EX1}
+\textbf{1.} On trouve $I=[29,51]$ : $P(X\in[29,51]) \geq 0{,}95$.
+
+\textbf{2.} La valeur observée $58$ n'appartient \textbf{pas} à l'intervalle $[29,51]$ : ce résultat est peu probable si le taux réel de défauts était bien $20\%$. On peut donc \textbf{douter} de l'affirmation du fabricant, au risque de $5\%$ de se tromper (le taux réel de défauts semble supérieur à $20\%$).
+\end{corrige}
+
+\begin{corrige}{TCOMPL-ECH-EV-B-EX2}
+\begin{python}
+import random
+
+def simuler_moyennes(N, n, p):
+    moyennes = []
+    for _ in range(N):
+        echantillon = [1 if random.random() < p else 0 for _ in range(n)]
+        moyennes.append(sum(echantillon) / n)
+    return moyennes
+\end{python}
+\end{corrige}
