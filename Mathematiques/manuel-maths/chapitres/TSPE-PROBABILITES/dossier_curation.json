@@ -1,0 +1,19 @@
+{
+  "chapitre": "TSPE-PROBABILITES",
+  "referentiel": "capacites_TSPE_PROBABILITES.json + capacites_TSPE_CONCENTRATION_LGN.json",
+  "bo": "BO special n 8 du 25 juillet 2019",
+  "mode_creation": "ex_nihilo",
+  "note": "Fusion de TSPE-CONCENTRATION-LGN (1 capacite) dans ce chapitre comme sous-partie finale, conformement a la structure du BO (sous-section de Probabilites) et a l'option laissee ouverte dans docs/10_perimetre_terminale.md.",
+  "capacites_cartographie": {
+    "C1": { "theme": "Succession d'epreuves, arbres, probas totales", "niveau": "fondamental" },
+    "C2": { "theme": "Schema de Bernoulli, loi binomiale (definition)", "niveau": "fondamental" },
+    "C3": { "theme": "Seuils, comparaison, optimisation avec binomiale", "niveau": "application" },
+    "C4": { "theme": "Calcul numerique de probabilites binomiales", "niveau": "application" },
+    "C5": { "theme": "P(X=k) = C(n,k)p^k(1-p)^(n-k)", "niveau": "demonstration", "exigible": true },
+    "C6": { "theme": "Decomposition en somme de variables", "niveau": "fondamental" },
+    "C7": { "theme": "Linearite de l'esperance", "niveau": "fondamental" },
+    "C8": { "theme": "Additivite de la variance (independance)", "niveau": "fondamental" },
+    "C9": { "theme": "E(X)=np, V(X)=np(1-p) pour la binomiale", "niveau": "demonstration", "exigible": true },
+    "C10": { "theme": "Inegalite de Bienayme-Tchebychev, taille d'echantillon", "niveau": "application" }
+  }
+}

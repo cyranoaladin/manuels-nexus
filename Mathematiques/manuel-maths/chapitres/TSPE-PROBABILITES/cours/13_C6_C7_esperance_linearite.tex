@@ -1,0 +1,47 @@
+% META: {"id": "TSPE-PROBA-CR-013", "chapitre": "TSPE-PROBABILITES", "type_objet": "cours", "capacites_codes": ["C6", "C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Somme de variables aléatoires, linéarité de l'espérance}
+
+% ============================================================
+% STRATE 1 — Decomposition et linearite
+% ============================================================
+
+\propriete[Décomposition]{
+Une variable aleatoire complexe peut souvent s'ecrire comme somme de variables aleatoires plus simples. Par exemple, une variable $X$ suivant $\mathcal{B}(n,p)$ peut s'ecrire $X = X_1+X_2+\cdots+X_n$, ou chaque $X_i$ vaut $1$ si la $i$-eme epreuve est un succes, $0$ sinon (variable de Bernoulli).
+}
+
+\propriete[Linéarité de l'espérance, admise]{
+Pour toutes variables aleatoires $X,Y$ (finies) et tous reels $a,b$ :
+\[
+  E(aX+bY) = a\,E(X) + b\,E(Y).
+\]
+En particulier, $E(X_1+\cdots+X_n) = E(X_1)+\cdots+E(X_n)$, \textbf{meme si les $X_i$ ne sont pas independantes}.
+}
+
+\margeAppui{
+Contrairement a la variance (voir plus loin), la linearite de l'esperance ne necessite \emph{aucune} hypothese d'independance.
+}
+
+\exemple{
+On lance $3$ des equilibres. $X$ = somme des points obtenus. Calculer $E(X)$.
+
+$X=X_1+X_2+X_3$ ou $X_i$ est le resultat du $i$-eme de. $E(X_i) = \dfrac{1+2+3+4+5+6}{6} = \dfrac{7}{2}$ pour chaque $i$.
+
+Par linearite : $E(X) = E(X_1)+E(X_2)+E(X_3) = 3\times\dfrac{7}{2} = \dfrac{21}{2} = 10{,}5$.
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% Ei = Rational(1+2+3+4+5+6, 6)
+% assert Ei == Rational(7,2)
+% E = 3*Ei
+% assert E == Rational(21,2)
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Croire que la linearite de l'esperance necessite l'independance.} C'est faux : $E(X+Y)=E(X)+E(Y)$ est toujours vraie, meme si $X$ et $Y$ sont dependantes. Cette hypothese sera necessaire pour la \emph{variance} uniquement.
+}

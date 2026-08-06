@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-PROBA-EV-A-corrige", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-PROBA-EV-A", "version": "A", "capacites_codes": ["C1", "C5", "C9"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p1 = Rational(5,8)*Rational(3,7) + Rational(3,8)*Rational(5,7)
+% assert p1 == Rational(15, 28)
+% p2 = binomial(4,1)*Rational(1,4)**1*Rational(3,4)**3
+% assert p2 == Rational(27, 64)
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EV-A-EX1}
+\textbf{Q1.} Premier tirage : $P(R)=\dfrac{5}{8}$, $P(B)=\dfrac{3}{8}$. Deuxieme tirage (sans remise) : si $R$ au premier tirage, $P_R(B)=\dfrac{3}{7}$ ; si $B$, $P_B(R)=\dfrac{5}{7}$.
+
+\textbf{Q2.} $P(\text{couleurs differentes}) = P(R_1)\times P_{R_1}(B_2) + P(B_1)\times P_{B_1}(R_2) = \dfrac{5}{8}\times\dfrac{3}{7}+\dfrac{3}{8}\times\dfrac{5}{7} = \dfrac{15}{56}+\dfrac{15}{56} = \boxed{\dfrac{15}{28}}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-PROBA-EV-A-EX2}
+Les chemins avec exactement $1$ succes parmi $4$ epreuves sont au nombre de $\dbinom{4}{1}=4$ (SEEE, ESEE, EESE, EEES), chacun de probabilite $p^1(1-p)^3 = 0{,}25\times(0{,}75)^3$.
+
+\[
+  P(X=1) = \binom{4}{1}(0{,}25)^1(0{,}75)^3 = 4\times0{,}25\times0{,}421875 = \boxed{\dfrac{27}{64}} \approx 0{,}4219.
+\]
+\end{corrige}
+
+\begin{corrige}{TSPE-PROBA-EV-A-EX3}
+$E(X) = np = 25\times0{,}6 = \boxed{15}$. $V(X) = np(1-p) = 25\times0{,}6\times0{,}4 = \boxed{6}$.
+\end{corrige}

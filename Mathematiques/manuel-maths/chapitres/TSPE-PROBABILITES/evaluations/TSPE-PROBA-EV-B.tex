@@ -1,0 +1,54 @@
+% META: {"id": "TSPE-PROBA-EV-B", "chapitre": "TSPE-PROBABILITES", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C3", "C8", "C10"], "competences": ["calculer", "raisonner", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(1,10)
+% P0 = (1-p)**15
+% assert round(float(P0), 4) == 0.2059
+% E = 4*Rational(3,10)
+% V = 4*Rational(3,10)*Rational(7,10)
+% assert E == Rational(6,5)
+% assert V == Rational(21,25)
+% n_min = 1 / (4 * Rational(1,10)**2 * Rational(5,100))
+% assert n_min == 500
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-PROBA-EV-B}{55}
+
+\begin{exercice}{TSPE-PROBA-EV-B-EX1}{2}{15}
+\textbf{Exercice 1} (6 points) — \textit{Capacite C3}
+
+\medskip
+
+Une chaine de production a un taux de defaut de $10\%$. On preleve $15$ pieces (schema de Bernoulli). $X$ = nombre de pieces defectueuses.
+\begin{enumerate}
+  \item (2 pts) Preciser la loi de $X$.
+  \item (4 pts) Calculer $P(X=0)$ (arrondir a $10^{-4}$), et en deduire $P(X\geq 1)$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-PROBA-EV-B-EX2}{2}{20}
+\textbf{Exercice 2} (7 points) — \textit{Capacite C8}
+
+\medskip
+
+$4$ machines independantes ont chacune une probabilite $0{,}3$ de tomber en panne dans le mois. Soit $Y_1,\ldots,Y_4$ les variables de Bernoulli associees.
+\begin{enumerate}
+  \item (2 pts) Calculer $E(Y_1)$ et $V(Y_1)$.
+  \item (2 pts) Calculer $E(Y_1+\cdots+Y_4)$ (justifier la propriete utilisee).
+  \item (3 pts) Calculer $V(Y_1+\cdots+Y_4)$ (justifier la propriete utilisee, en particulier l'hypothese necessaire).
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-PROBA-EV-B-EX3}{2}{15}
+\textbf{Exercice 3} (7 points) — \textit{Capacite C10}
+
+\medskip
+
+On veut estimer une proportion $p$ inconnue avec une precision $\delta=0{,}1$ et un risque $\alpha=0{,}05$. Determiner une taille d'echantillon $n$ suffisante, en utilisant l'inegalite de Bienayme-Tchebychev et la majoration $p(1-p)\leq 1/4$.
+\end{exercice}
+
+\end{evaluation}

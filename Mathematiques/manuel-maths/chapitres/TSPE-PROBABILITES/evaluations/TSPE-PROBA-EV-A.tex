@@ -1,0 +1,47 @@
+% META: {"id": "TSPE-PROBA-EV-A", "chapitre": "TSPE-PROBABILITES", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C5", "C9"], "competences": ["calculer", "raisonner", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, binomial
+% p1 = Rational(5,8)*Rational(3,7) + Rational(3,8)*Rational(5,7)
+% assert p1 == Rational(15, 28)
+% p2 = binomial(4,1)*Rational(1,4)**1*Rational(3,4)**3
+% assert p2 == Rational(27, 64)
+% n, p = 25, Rational(6,10)
+% assert n*p == 15
+% assert n*p*(1-p) == 6
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-PROBA-EV-A}{55}
+
+\begin{exercice}{TSPE-PROBA-EV-A-EX1}{2}{15}
+\textbf{Exercice 1} (6 points) — \textit{Capacite C1}
+
+\medskip
+
+Une urne contient $5$ boules rouges et $3$ boules bleues. On tire successivement, sans remise, $2$ boules.
+\begin{enumerate}
+  \item (3 pts) Representer la situation par un arbre pondere.
+  \item (3 pts) Calculer la probabilite d'obtenir deux boules de couleurs differentes.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-PROBA-EV-A-EX2}{2}{20}
+\textbf{Exercice 2} (7 points) — \textit{Capacite C5}
+
+\medskip
+
+Soit $X \sim \mathcal{B}(4,\,0{,}25)$. En redigeant la demonstration du cours (denombrement des chemins a $1$ succes et calcul de la probabilite d'un chemin), etablir puis calculer $P(X=1)$.
+\end{exercice}
+
+\begin{exercice}{TSPE-PROBA-EV-A-EX3}{2}{15}
+\textbf{Exercice 3} (7 points) — \textit{Capacite C9}
+
+\medskip
+
+Soit $X \sim \mathcal{B}(25,\,0{,}6)$. En utilisant les formules du cours (sans redemontrer), calculer $E(X)$ et $V(X)$.
+\end{exercice}
+
+\end{evaluation}
