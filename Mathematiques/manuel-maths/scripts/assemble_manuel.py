@@ -26,7 +26,16 @@ import yaml
 from common import ROOT
 from pdf_integrity import verify_pdf
 
-CHAPITRES_1SPE = [
+# L'analyseur statique (scripts/inventory_assembly.py) ne reconnait un
+# "assembleur de manuel" que pour un fichier nomme exactement
+# .../scripts/assemble_manuel.py et ne lit CHAPITRES qu'avec ast.literal_eval,
+# qui exige un litteral pur (pas une expression referencant d'autres noms,
+# meme une simple concatenation). CHAPITRES doit donc rester le seul et
+# unique litteral source de verite, union de tous les manuels geres ici ; il
+# est ensuite regroupe par manuel via le prefixe de chaque chapitre. Un seul
+# tel fichier peut exister par repertoire scripts/, d'ou l'union ici plutot
+# qu'un fichier separe par manuel.
+CHAPITRES = [
     "1SPE-SUITES",
     "1SPE-SECOND-DEGRE",
     "1SPE-DERIVATION-LOCAL",
@@ -37,25 +46,16 @@ CHAPITRES_1SPE = [
     "1SPE-GEOMETRIE-REPEREE",
     "1SPE-PROBA-COND",
     "1SPE-VARIABLES-ALEATOIRES",
-]
-
-# Chapitres TSPE deja produits ; la cible finale (12 ou 13 chapitres) reste a
-# figer en Phase 1 (MISSION_PRIORITAIRE §10). Cette liste ne prejuge pas de
-# cette decision : elle raccorde seulement ce qui existe deja au modele
-# d'inventaire, sans en produire de nouveau contenu.
-CHAPITRES_TSPE = [
+    # Chapitres TSPE deja produits ; la cible finale (12 ou 13 chapitres)
+    # reste a figer en Phase 1 (MISSION_PRIORITAIRE §10). Cette liste ne
+    # prejuge pas de cette decision : elle raccorde seulement ce qui existe
+    # deja au modele d'inventaire, sans produire de nouveau contenu.
     "TSPE-SUITES-LIMITES",
     "TSPE-LIMITES-FONCTIONS",
     "TSPE-DERIVATION-CONVEXITE",
 ]
-
-# L'analyseur statique (scripts/inventory_assembly.py) ne reconnait un
-# "assembleur de manuel" que pour un fichier nomme exactement
-# .../scripts/assemble_manuel.py et ne lit qu'une seule constante CHAPITRES,
-# qu'il regroupe ensuite par manuel via le prefixe de chaque chapitre. Un
-# seul tel fichier peut donc exister par repertoire scripts/ : CHAPITRES doit
-# rester l'union de tous les manuels geres ici.
-CHAPITRES = CHAPITRES_1SPE + CHAPITRES_TSPE
+CHAPITRES_1SPE = [chap for chap in CHAPITRES if chap.startswith("1SPE-")]
+CHAPITRES_TSPE = [chap for chap in CHAPITRES if chap.startswith("TSPE-")]
 
 MANUAL_TEX_NAMES = {
     "1SPE": "MANUEL_1SPE",
