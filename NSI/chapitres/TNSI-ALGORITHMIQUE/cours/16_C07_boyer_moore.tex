@@ -1,0 +1,112 @@
+% META: {"id": "TNSI-ALGO-CR-016", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "cours", "capacites_codes": ["C05"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Recherche d'un motif : l'algorithme de Boyer-Moore}
+
+% ============================================================
+% STRATE 1 — Recherche naive et son cout
+% ============================================================
+
+\definition[1]{
+Rechercher un \textbf{motif} (chaîne courte) dans un \textbf{texte} (chaîne longue) consiste à trouver la ou les positions où le motif apparaît dans le texte. La méthode \textbf{naïve} teste, pour chaque position du texte, si le motif y correspond caractère par caractère.
+}
+
+\begin{python}
+def recherche_naive(texte, motif):
+    positions = []
+    for i in range(len(texte) - len(motif) + 1):
+        if texte[i:i + len(motif)] == motif:
+            positions.append(i)
+    return positions
+\end{python}
+
+% BEGIN-VERIFY
+% def recherche_naive(texte, motif):
+%     positions = []
+%     for i in range(len(texte) - len(motif) + 1):
+%         if texte[i:i + len(motif)] == motif:
+%             positions.append(i)
+%     return positions
+%
+% assert recherche_naive("abracadabra", "abra") == [0, 7]
+% END-VERIFY
+
+\margeAppui{
+Dans le pire cas, la recherche naïve compare le motif à chaque position du texte, caractère par caractère : son coût est proportionnel au produit de la longueur du texte par celle du motif. L'algorithme de \textbf{Boyer-Moore} (1977) accélère cette recherche en exploitant l'information des comparaisons déjà effectuées.
+}
+
+% ============================================================
+% STRATE 2 — Principe de Boyer-Moore
+% ============================================================
+
+\propriete[Principe de Boyer-Moore]{
+L'algorithme de Boyer-Moore compare le motif au texte de \textbf{droite à gauche}, et se déplace en s'appuyant sur un \textbf{prétraitement} du motif : lorsqu'un caractère du texte ne correspond pas, on utilise la position de ce caractère dans le motif (règle du \og mauvais caractère \fg{}) pour décaler le motif directement à la position suivante où une correspondance est encore possible, au lieu d'avancer d'une seule case comme la méthode naïve.
+}
+
+\textbf{Exemple.} Règle simplifiée du mauvais caractère (décalage fondé sur la dernière occurrence de chaque caractère dans le motif) :
+\begin{python}
+def table_decalage(motif):
+    table = {}
+    for i, c in enumerate(motif):
+        table[c] = i
+    return table
+
+def boyer_moore_simplifie(texte, motif):
+    table = table_decalage(motif)
+    n, m = len(texte), len(motif)
+    positions = []
+    i = 0
+    while i <= n - m:
+        j = m - 1
+        while j >= 0 and texte[i + j] == motif[j]:
+            j -= 1
+        if j < 0:
+            positions.append(i)
+            i += 1
+        else:
+            decalage_c = j - table.get(texte[i + j], -1)
+            i += max(1, decalage_c)
+    return positions
+\end{python}
+
+% BEGIN-VERIFY
+% def table_decalage(motif):
+%     table = {}
+%     for i, c in enumerate(motif):
+%         table[c] = i
+%     return table
+%
+% def boyer_moore_simplifie(texte, motif):
+%     table = table_decalage(motif)
+%     n, m = len(texte), len(motif)
+%     positions = []
+%     i = 0
+%     while i <= n - m:
+%         j = m - 1
+%         while j >= 0 and texte[i + j] == motif[j]:
+%             j -= 1
+%         if j < 0:
+%             positions.append(i)
+%             i += 1
+%         else:
+%             decalage_c = j - table.get(texte[i + j], -1)
+%             i += max(1, decalage_c)
+%     return positions
+%
+% def recherche_naive(texte, motif):
+%     positions = []
+%     for i in range(len(texte) - len(motif) + 1):
+%         if texte[i:i + len(motif)] == motif:
+%             positions.append(i)
+%     return positions
+%
+% assert boyer_moore_simplifie("abracadabra", "abra") == recherche_naive("abracadabra", "abra")
+% assert boyer_moore_simplifie("ceci est un texte de test", "texte") == recherche_naive("ceci est un texte de test", "texte")
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire que Boyer-Moore compare toujours de gauche à droite comme la méthode naïve.} C'est précisément l'inverse : c'est en comparant le motif au texte \textbf{de droite à gauche}, tout en avançant le motif de gauche à droite le long du texte, que l'algorithme peut exploiter un désaccord précoce (sur le dernier caractère comparé) pour décaler le motif de plusieurs positions d'un coup.
+}
+
+\approfondissement{
+Le programme ne demande pas l'étude formelle du coût de Boyer-Moore, qui est délicate (le meilleur cas est sous-linéaire, mais certaines variantes du pire cas restent quadratiques sans une règle de décalage supplémentaire, dite du \og bon suffixe \fg{}, non traitée ici).
+}

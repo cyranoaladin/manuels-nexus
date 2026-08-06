@@ -1,0 +1,24 @@
+% META: {"id": "TNSI-ALGO-CO-004", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige", "exercice_ref": "TNSI-ALGO-EX-004", "capacites_codes": ["C04"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def fib_memo(n, memo=None):
+%     if memo is None:
+%         memo = {0: 0, 1: 1}
+%     if n in memo:
+%         return memo[n]
+%     memo[n] = fib_memo(n - 1, memo) + fib_memo(n - 2, memo)
+%     return memo[n]
+% assert [fib_memo(n) for n in range(10)] == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+% assert fib_memo(30) == 832040
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EX-004}
+\begin{python}
+def fib_memo(n, memo=None):
+    if memo is None:
+        memo = {0: 0, 1: 1}
+    if n in memo:
+        return memo[n]
+    memo[n] = fib_memo(n - 1, memo) + fib_memo(n - 2, memo)
+    return memo[n]
+\end{python}
+Comme \lstinline{rendu_memo}, les cas de base ($n=0$ et $n=1$) sont préchargés dans \lstinline{memo}. Sans mémoïsation, le nombre d'appels récursifs pour calculer $F_{30}$ dépasse le million ; avec mémoïsation, chaque valeur $F_0, \dots, F_{30}$ n'est calculée qu'une seule fois.
+\end{corrige}

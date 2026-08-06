@@ -1,0 +1,69 @@
+% META: {"id": "TNSI-ALGO-EVAL-B", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "evaluation", "capacites": ["T-ALGO-02A", "T-ALGO-02C", "T-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation B --- Graphes et diviser pour régner}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (parcours et cycle) ; Ex. 2 : 10 pts (diviser pour régner)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Parcours et cycle} \hfill (10 points)
+
+On donne le graphe non orienté :
+\begin{python}
+graphe = {
+    "P": ["Q", "R"],
+    "Q": ["P", "S"],
+    "R": ["P", "S"],
+    "S": ["Q", "R"],
+}
+\end{python}
+\begin{enumerate}
+  \item (5 pts) Donner l'ordre de visite des sommets par un parcours en largeur (BFS) depuis \texttt{"P"}, en supposant que les voisins sont explorés dans l'ordre où ils apparaissent dans la liste.
+  \item (5 pts) Ce graphe contient-il un cycle ? Justifier en citant un cycle si oui.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def bfs(graphe, depart):
+%     visites = [depart]
+%     file = [depart]
+%     while file:
+%         sommet = file.pop(0)
+%         for voisin in graphe[sommet]:
+%             if voisin not in visites:
+%                 visites.append(voisin)
+%                 file.append(voisin)
+%     return visites
+% graphe = {
+%     "P": ["Q", "R"], "Q": ["P", "S"], "R": ["P", "S"], "S": ["Q", "R"],
+% }
+% assert bfs(graphe, "P") == ["P", "Q", "R", "S"]
+% def a_un_cycle(graphe, sommet, visites, parent):
+%     visites.append(sommet)
+%     for voisin in graphe[sommet]:
+%         if voisin not in visites:
+%             if a_un_cycle(graphe, voisin, visites, sommet):
+%                 return True
+%         elif voisin != parent:
+%             return True
+%     return False
+% assert a_un_cycle(graphe, "P", [], None) is True
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Diviser pour régner} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Rappeler les trois étapes de la méthode diviser pour régner.
+  \item (6 pts) Écrire une fonction récursive \lstinline{somme_dpr(liste)} qui calcule la somme des éléments d'une liste non vide par diviser pour régner (diviser en deux moitiés, additionner récursivement, puis combiner par addition).
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def somme_dpr(liste):
+%     if len(liste) == 1:
+%         return liste[0]
+%     milieu = len(liste) // 2
+%     return somme_dpr(liste[:milieu]) + somme_dpr(liste[milieu:])
+% assert somme_dpr([1, 2, 3, 4, 5]) == 15
+% assert somme_dpr([7]) == 7
+% END-VERIFY
