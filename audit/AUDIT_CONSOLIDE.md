@@ -53,10 +53,7 @@
 ### broken_meta_references (0)
 - Aucune.
 
-### chapters_not_in_manual (4)
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml, cible=TSPE-DERIVATION-CONVEXITE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/contrat.yaml, cible=TSPE-LIMITES-FONCTIONS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/contrat.yaml, cible=TSPE-SUITES-LIMITES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+### chapters_not_in_manual (1)
 - source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml, cible=1NSI-TYPES-CONSTRUITS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 
 ### context_mismatches (0)
@@ -97,8 +94,7 @@
 ### metadata_missing (0)
 - Aucune.
 
-### missing_assemblers (3)
-- source=Mathematiques/manuel-maths/scripts/assemble_manuel.py, cible=TSPE_2026_2027, champ=manuel, raison=aucun assembleur de manuel suivi
+### missing_assemblers (2)
 - source=NSI/scripts/assemble_manuel.py, cible=1NSI, champ=manuel, raison=aucun assembleur de manuel suivi
 - source=NSI/scripts/assemble_manuel.py, cible=TNSI, champ=manuel, raison=aucun assembleur de manuel suivi
 
@@ -108,38 +104,38 @@
 ### orphan_files (0)
 - Aucune.
 
-### unassembled_objects (207)
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-006.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-006.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-007.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-007.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-008.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-008.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-009.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-009.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-010.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-010.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-011.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-011.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-012.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-012.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-013.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-013.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-014.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-014.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-015.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-015.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-016.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-016.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-017.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-017.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-018.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-018.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-019.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-019.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-020.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-020.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-021.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-021.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-022.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-022.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-023.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-023.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-024.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-024.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-025.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-025.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-026.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-026.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-027.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-027.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-028.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-028.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-029.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-029.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-030.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-030.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- … 177 autres.
+### unassembled_objects (55)
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-002.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-003.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-004.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-005.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-006.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-006.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-007.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-007.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-008.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-008.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-009.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-009.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-010.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-010.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-011.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-011.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-012.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-012.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-013.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-013.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-014.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-014.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-015.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-015.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-016.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-016.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-017.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-017.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-018.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-018.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-019.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-019.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-020.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-020.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-021.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-021.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-022.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-022.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-023.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-023.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-024.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-024.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-025.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-025.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-026.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-026.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-027.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-027.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-028.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-028.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-029.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-029.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-030.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-030.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- … 25 autres.
 
 ### unattributed_pdfs (1)
 - source=Mathematiques/manuel-maths/build/specimen.pdf, cible=Mathematiques/manuel-maths/build/specimen.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
@@ -201,5 +197,5 @@
 - banque_evaluations : absent (artifacts=0)
 - livret_methodes : partial (artifacts=0)
 - livret_remediation : partial (artifacts=0)
-- manuel_eleve : absent (artifacts=0)
-- manuel_professeur : absent (artifacts=0)
+- manuel_eleve : compiled (artifacts=1)
+- manuel_professeur : compiled (artifacts=1)

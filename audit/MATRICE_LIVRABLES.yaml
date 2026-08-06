@@ -316,12 +316,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '432'
       source: anomalies.blocking_statuses
-    - code: anomalie:chapters_not_in_manual
-      detail: '3'
-      source: anomalies.chapters_not_in_manual
-    - code: anomalie:unassembled_objects
-      detail: '152'
-      source: anomalies.unassembled_objects
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations
@@ -331,12 +325,6 @@ manuals:
     - code: livrable_non_compile
       detail: partial
       source: deliverable_matrix.TSPE_2026_2027.variants.livret_remediation
-    - code: livrable_non_compile
-      detail: absent
-      source: deliverable_matrix.TSPE_2026_2027.variants.manuel_eleve
-    - code: livrable_non_compile
-      detail: absent
-      source: deliverable_matrix.TSPE_2026_2027.variants.manuel_professeur
     - code: objectif_chapitres_non_fige
       detail: cible a figer en Phase 1
       source: MISSION_PRIORITAIRE §10
@@ -344,7 +332,9 @@ manuals:
       detail: objets=429; contrats=3
       source: manuals.TSPE_2026_2027.statuses
     current:
-      artifacts: []
+      artifacts:
+      - Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf
+      - Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.pdf
       chapter_count: 3
       chapters:
       - TSPE-DERIVATION-CONVEXITE
@@ -380,8 +370,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:chapters_not_in_manual
-    - anomalie:unassembled_objects
     - objectif_chapitres_non_fige
     - statuts_non_approuves
     structural_compile_ready: false
@@ -404,21 +392,25 @@ manuals:
         declared_manual_variants: []
         state: partial
       manuel_eleve:
-        artifacts: []
+        artifacts:
+        - Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
+        declared_manual_variants:
+        - eleve
+        state: compiled
       manuel_professeur:
-        artifacts: []
+        artifacts:
+        - Mathematiques/manuel-maths/build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.pdf
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
-model_digest: sha256:dd07f4f7bff23770f7f4e20437037164b5bacd1e994768a5a32e9484bc45ff97
+        declared_manual_variants:
+        - professeur
+        state: compiled
+model_digest: sha256:7ba6cde72561ee41059272acf121402798bbba53cd1c25d71d9f0869be264d12
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-06T03:24:46Z'
+  generated_at_utc: '2026-08-06T04:45:57Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
     scripts/build_manifest.py: sha256:afb34e4a11f6e1d3315183a85163989ffc5e458993f1a0d0543899ada54f0d0e
@@ -430,7 +422,7 @@ provenance:
   generator_sha256: sha256:d58a1e818e49be506c3ed606c33a0b097d46638bb1ab73c73124e6414a10707f
   generator_version: 1
   git_available: true
-  head_sha: 38b9c1e046750f05573658f507f8b42f3466cdd7
+  head_sha: 8784725186865505e25afb9f3cdf6d23b52a1482
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -441,4 +433,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:e3509ce4acc859c69efe559c9dc75a86d5e0432ecedbce3380d310cf3358582a
+source_digest: sha256:6fcd151b300aa76c99fc9c24cb776f56f9a15ae4be7497cb3067fc1f0dbfe179

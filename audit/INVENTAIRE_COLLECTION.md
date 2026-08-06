@@ -9,19 +9,19 @@
 | 1NSI | NSI Première | NSI | Premiere | courante | 1 | 5 | 55 | 153 | 153 | — |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 464 | 1334 | 1334 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 0 | 0 | 0 | 0 | 0 | — |
-| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 3 | 16 | 152 | 429 | 429 | — |
+| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 3 | 16 | 152 | 429 | 429 | manual |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
 | blocking_statuses | 1930 |
-| unassembled_objects | 207 |
+| unassembled_objects | 55 |
 | unavailable_inspiration_sources | 15 |
-| chapters_not_in_manual | 4 |
 | duplicate_assembly_objects | 3 |
-| missing_assemblers | 3 |
+| missing_assemblers | 2 |
 | broken_latex_references | 1 |
+| chapters_not_in_manual | 1 |
 | unattributed_pdfs | 1 |
 
 ### Échantillon déterministe
@@ -31,21 +31,17 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
 - broken_latex_references: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
-- chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml, cible=TSPE-DERIVATION-CONVEXITE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/contrat.yaml, cible=TSPE-LIMITES-FONCTIONS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/contrat.yaml, cible=TSPE-SUITES-LIMITES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - chapters_not_in_manual: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml, cible=1NSI-TYPES-CONSTRUITS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
-- missing_assemblers: source=Mathematiques/manuel-maths/scripts/assemble_manuel.py, cible=TSPE_2026_2027, champ=manuel, raison=aucun assembleur de manuel suivi
 - missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=1NSI, champ=manuel, raison=aucun assembleur de manuel suivi
 - missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=TNSI, champ=manuel, raison=aucun assembleur de manuel suivi
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/corriges/TSPE-DERCONV-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-002.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-003.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-004.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-005.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unattributed_pdfs: source=Mathematiques/manuel-maths/build/specimen.pdf, cible=Mathematiques/manuel-maths/build/specimen.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td1_station_meteo.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_td_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
