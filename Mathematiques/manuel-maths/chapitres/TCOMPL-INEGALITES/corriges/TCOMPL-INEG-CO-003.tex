@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-INEG-CO-003", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-003", "capacites_codes": ["C1", "C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% xs = [0, 0.2, 0.4, 0.6, 0.8, 1]
+% ys = [0, 0.05, 0.15, 0.30, 0.55, 1]
+% aire = 0
+% for i in range(5):
+%     largeur = xs[i+1] - xs[i]
+%     hauteur_moyenne = (ys[i] + ys[i+1]) / 2
+%     aire += largeur * hauteur_moyenne
+% assert abs(aire - 0.31) < 1e-9
+% G = 1 - 2*aire
+% assert abs(G - 0.38) < 1e-9
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-003}
+Chaque trapèze a pour largeur $0{,}2$ et pour hauteur moyenne la moyenne des deux ordonnées :
+\[
+\begin{aligned}
+\text{Aire} &= 0{,}2\times\frac{0+0{,}05}{2} + 0{,}2\times\frac{0{,}05+0{,}15}{2} + 0{,}2\times\frac{0{,}15+0{,}30}{2} \\
+            &\quad + 0{,}2\times\frac{0{,}30+0{,}55}{2} + 0{,}2\times\frac{0{,}55+1}{2} \\
+            &= 0{,}005+0{,}02+0{,}045+0{,}085+0{,}155 = 0{,}31.
+\end{aligned}
+\]
+D'où $G = 1-2\times0{,}31 = 0{,}38$.
+\end{corrige}

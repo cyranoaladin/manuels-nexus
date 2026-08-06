@@ -1,0 +1,37 @@
+% META: {"id": "TCOMPL-INEG-EV-B", "chapitre": "TCOMPL-INEGALITES", "type_objet": "evaluation", "version": "B", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C1", "C3", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, integrate, Rational
+% x = symbols('x')
+% L1 = (x**2 + 3*x) / 4
+% assert L1.subs(x, 0) == 0 and L1.subs(x, 1) == 1
+% I1 = integrate(L1, (x, 0, 1))
+% G1 = 1 - 2*I1
+% assert G1 == Rational(1, 12)
+% L2 = x**2
+% I2 = integrate(L2, (x, 0, 1))
+% G2 = 1 - 2*I2
+% assert G2 == Rational(1, 3)
+% assert G2 > G1
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-INEG-EV-B}{45}
+
+\begin{exercice}{TCOMPL-INEG-EV-B-EX1}{2}{40}
+\textbf{Exercice unique} (20 points) --- \textit{Capacités C1, C3, C5}
+
+\medskip
+
+Deux pays A et B sont modélisés par les courbes de Lorenz $L_A(x) = \dfrac{x^2+3x}{4}$ et $L_B(x) = x^2$ sur $[0,1]$.
+\begin{enumerate}
+  \item (4 pts) Vérifier que $L_A(0)=0$ et $L_A(1)=1$.
+  \item (6 pts) Calculer l'indice de Gini $G_A$ associé au pays A.
+  \item (6 pts) Calculer l'indice de Gini $G_B$ associé au pays B (on rappelle $\displaystyle\int_0^1 x^2\,\mathrm{d}x=\dfrac{1}{3}$).
+  \item (4 pts) Comparer $G_A$ et $G_B$ : quel pays a la répartition la plus inégalitaire ?
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-INEG-EX-003", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C1", "TCOMPL-INEG-C3"], "capacites_codes": ["C1", "C3"], "methodes": [], "parcours": 2, "competences": ["calculer", "modeliser"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-003.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% xs = [0, 0.2, 0.4, 0.6, 0.8, 1]
+% ys = [0, 0.05, 0.15, 0.30, 0.55, 1]
+% aire = 0
+% for i in range(5):
+%     largeur = xs[i+1] - xs[i]
+%     hauteur_moyenne = (ys[i] + ys[i+1]) / 2
+%     aire += largeur * hauteur_moyenne
+% assert abs(aire - 0.31) < 1e-9
+% G = 1 - 2*aire
+% assert abs(G - 0.38) < 1e-9
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-003}{2}{20}
+On reprend les données par quintiles du cours (page précédente) :
+\[
+\begin{array}{c|cccccc}
+  x & 0 & 0{,}2 & 0{,}4 & 0{,}6 & 0{,}8 & 1 \\
+  \hline
+  y & 0 & 0{,}05 & 0{,}15 & 0{,}30 & 0{,}55 & 1
+\end{array}
+\]
+En approximant l'aire sous la ligne polygonale par la méthode des trapèzes (sur chacun des $5$ intervalles), estimer l'indice de Gini de cette répartition.
+\end{exercice}

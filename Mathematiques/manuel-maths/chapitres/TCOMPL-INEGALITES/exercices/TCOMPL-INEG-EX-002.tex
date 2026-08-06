@@ -1,0 +1,13 @@
+% META: {"id": "TCOMPL-INEG-EX-002", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C3", "TCOMPL-INEG-C5"], "capacites_codes": ["C3", "C5"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% L = (2*x**2 + x) / 3
+% I = integrate(L, (x, 0, 1))
+% assert I == Rational(7, 18)
+% G = 1 - 2*I
+% assert G == Rational(2, 9)
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-002}{2}{15}
+On reprend le modèle $L(x) = \dfrac{2x^2+x}{3}$ de l'exercice précédent. Calculer l'indice de Gini associé à ce modèle.
+\end{exercice}

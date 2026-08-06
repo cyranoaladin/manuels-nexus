@@ -1,0 +1,70 @@
+% META: {"id": "TCOMPL-INEG-CR-010", "chapitre": "TCOMPL-INEGALITES", "type_objet": "cours", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Construire une courbe de Lorenz}
+
+% ============================================================
+% STRATE 1 — Construction a partir de quantiles
+% ============================================================
+
+\definition[1]{
+La \textbf{courbe de Lorenz} d'une répartition (des revenus, des richesses...) représente, pour chaque proportion cumulée $x$ de la population (classée de la plus pauvre à la plus riche), la proportion cumulée $y$ de la richesse totale que cette population détient.
+}
+
+\exemple{
+Dans un pays, la population est répartie en $5$ quintiles (groupes de $20\%$), classés du plus pauvre au plus riche. La richesse cumulée détenue par chaque quintile est donnée dans le tableau :
+\[
+\begin{array}{c|cccccc}
+  \text{Proportion cumulée de population } x & 0 & 0{,}2 & 0{,}4 & 0{,}6 & 0{,}8 & 1 \\
+  \hline
+  \text{Proportion cumulée de richesse } y & 0 & 0{,}05 & 0{,}15 & 0{,}30 & 0{,}55 & 1
+\end{array}
+\]
+La ligne polygonale reliant ces points est une approximation de la courbe de Lorenz.
+}
+
+\margeAppui{
+Les points $(0,0)$ et $(1,1)$ figurent toujours sur une courbe de Lorenz : $0\%$ de la population ne détient rien, et $100\%$ de la population détient $100\%$ de la richesse.
+}
+
+% BEGIN-VERIFY
+% xs = [0, 0.2, 0.4, 0.6, 0.8, 1]
+% ys = [0, 0.05, 0.15, 0.30, 0.55, 1]
+% assert xs[0] == 0 and ys[0] == 0
+% assert xs[-1] == 1 and ys[-1] == 1
+% # verifie que les 20% les plus pauvres detiennent moins de richesse cumulee que leur part de population
+% for x, y in zip(xs, ys):
+%     assert y <= x
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Modelisation par une fonction convexe
+% ============================================================
+
+\propriete[Modélisation continue]{
+On modélise une courbe de Lorenz par une fonction $L$ continue, croissante et \textbf{convexe} sur $[0,1]$, vérifiant $L(0)=0$ et $L(1)=1$. La courbe de $L$ se situe toujours \textbf{en dessous} de la première bissectrice $y=x$ (sauf aux extrémités), car les $x\%$ les plus pauvres détiennent toujours une part de richesse inférieure ou égale à $x\%$.
+}
+
+\exemple{
+Le modèle $L(x) = x^2$ vérifie $L(0)=0$, $L(1)=1$, et $L'(x)=2x \geq 0$ (croissante), $L''(x)=2>0$ (convexe) : c'est un modèle de courbe de Lorenz valide. Plus l'exposant est grand (par exemple $L(x)=x^3$), plus la courbe s'éloigne de la bissectrice, traduisant des inégalités plus fortes.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational
+% x = symbols('x')
+% L = x**2
+% assert L.subs(x, 0) == 0
+% assert L.subs(x, 1) == 1
+% Lpp = diff(L, x, 2)
+% assert Lpp == 2
+% L3 = x**3
+% # comparer L(0.5) : plus petit pour un exposant plus grand -> plus d'inegalite
+% assert L3.subs(x, Rational(1,2)) < L.subs(x, Rational(1,2))
+% END-VERIFY
+
+\propriete[Cas d'égalité parfaite]{
+La fonction $L(x)=x$ (la première bissectrice elle-même) correspond à une situation d'\textbf{égalité parfaite} : chaque tranche de $x\%$ de la population détient exactement $x\%$ de la richesse. Plus une courbe de Lorenz s'éloigne (en dessous) de cette droite, plus la répartition est inégalitaire.
+}
+
+\erreurFrequente{
+\textbf{Croire qu'une courbe de Lorenz peut passer au-dessus de la bissectrice.} Puisque la population est classée de la plus pauvre à la plus riche, les $x\%$ les plus pauvres ne peuvent jamais détenir \textbf{plus} de $x\%$ de la richesse totale : $L(x) \leq x$ pour tout $x \in [0,1]$.
+}
