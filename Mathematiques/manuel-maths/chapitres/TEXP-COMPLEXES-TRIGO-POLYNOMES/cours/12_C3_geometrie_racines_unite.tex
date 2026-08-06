@@ -1,0 +1,69 @@
+% META: {"id": "TEXP-CTP-CR-012", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "cours", "capacites_codes": ["C6", "C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Nombres complexes en géométrie, racines de l'unité}
+
+% ============================================================
+% STRATE 1 — Complexes et configurations du plan
+% ============================================================
+
+\propriete[Interprétation géométrique]{
+Pour $A(a)$, $B(b)$, $C(c)$ trois points d'affixes distinctes, $\dfrac{c-a}{b-a}$ a pour module $\dfrac{AC}{AB}$ et pour argument une mesure de l'angle $(\overrightarrow{AB},\overrightarrow{AC})$. En particulier :
+\begin{itemize}
+  \item $A,B,C$ sont \textbf{alignés} si et seulement si $\dfrac{c-a}{b-a}\in\mathbb{R}$ ;
+  \item $(AB)\perp(AC)$ si et seulement si $\dfrac{c-a}{b-a}$ est un \textbf{imaginaire pur}.
+\end{itemize}
+}
+
+\exemple{
+Soient $A(1)$, $B(4)$, $C(1+3i)$. Calculons $\dfrac{c-a}{b-a} = \dfrac{3i}{3} = i$, un imaginaire pur : les droites $(AB)$ et $(AC)$ sont donc \textbf{perpendiculaires}.
+}
+
+% BEGIN-VERIFY
+% from sympy import I, re
+% a, b, c = 1, 4, 1+3*I
+% rapport = (c-a)/(b-a)
+% assert rapport == I
+% assert re(rapport) == 0
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Racines n-iemes de l'unite
+% ============================================================
+
+\definition[1]{
+Les \textbf{racines $n$-ièmes de l'unité} sont les solutions complexes de $z^n=1$. Leur ensemble est noté $\mathbb{U}_n$.
+}
+
+\theoreme[Description de $\mathbb{U}_n$]{
+$\mathbb{U}_n = \left\{\mathrm{e}^{2ik\pi/n},\ k=0,1,\dots,n-1\right\}$ : ce sont $n$ nombres complexes distincts de module $1$, régulièrement répartis sur le cercle trigonométrique (sommets d'un polygone régulier à $n$ côtés).
+}
+
+\demonstration{
+Cherchons $z=r\mathrm{e}^{i\theta}$ tel que $z^n=1$. Alors $z^n = r^n\mathrm{e}^{in\theta}$, qui doit être égal à $1=1\times\mathrm{e}^{i0}$. Par unicité du module et de l'argument (modulo $2\pi$) : $r^n=1$ donne $r=1$ (car $r\geq0$), et $n\theta \equiv 0\ [2\pi]$ donne $\theta = \dfrac{2k\pi}{n}$ pour $k\in\mathbb{Z}$. En ne gardant que les valeurs distinctes modulo $2\pi$, on obtient exactement $n$ solutions, pour $k=0,1,\dots,n-1$.
+}
+
+% BEGIN-VERIFY
+% from sympy import exp, I, pi, simplify, nsimplify
+% n = 6
+% racines = [simplify(exp(2*I*k*pi/n)) for k in range(n)]
+% for r in racines:
+%     assert simplify(r**n - 1) == 0
+% # les n racines sont distinctes
+% assert len(set(racines)) == n
+% END-VERIFY
+
+\exemple{
+Pour $n=3$, les racines cubiques de l'unité sont $1$, $j=\mathrm{e}^{2i\pi/3}=-\dfrac{1}{2}+i\dfrac{\sqrt3}{2}$, et $j^2=\mathrm{e}^{4i\pi/3}=-\dfrac{1}{2}-i\dfrac{\sqrt3}{2}$ : elles forment un triangle équilatéral inscrit dans le cercle unité.
+}
+
+% BEGIN-VERIFY
+% from sympy import exp, I, pi, simplify, sqrt, Rational, N
+% j = exp(2*I*pi/3)
+% cible = Rational(-1,2) + I*sqrt(3)/2
+% assert abs(complex(N(j - cible))) < 1e-9
+% assert simplify(j**3 - 1) == 0
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier que $\mathbb{U}_n$ contient exactement $n$ éléments, pas plus.} Certaines valeurs de $k$ (par exemple $k=n$) redonnent le même argument modulo $2\pi$ qu'une valeur déjà obtenue : il ne faut retenir que $k=0,1,\dots,n-1$ pour ne pas compter deux fois la même racine.
+}

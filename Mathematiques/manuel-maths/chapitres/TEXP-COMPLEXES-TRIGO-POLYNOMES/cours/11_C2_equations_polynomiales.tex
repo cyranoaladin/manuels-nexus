@@ -1,0 +1,82 @@
+% META: {"id": "TEXP-CTP-CR-011", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "cours", "capacites_codes": ["C3", "C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Formule d'addition et équations polynomiales}
+
+% ============================================================
+% STRATE 1 — Formule d'addition (demonstration)
+% ============================================================
+
+\theoreme[Formule d'addition]{
+Pour tous réels $a,b$ : $\cos(a-b) = \cos a\cos b + \sin a\sin b$.
+}
+
+\demonstration{
+Considérons les vecteurs unitaires $\vec u(\cos a,\sin a)$ et $\vec v(\cos b,\sin b)$. Leur produit scalaire, calculé par les coordonnées, vaut $\vec u\cdot\vec v = \cos a\cos b+\sin a\sin b$. Calculé par la formule géométrique, il vaut $\vec u\cdot\vec v = \|\vec u\|\|\vec v\|\cos(\widehat{\vec u,\vec v}) = 1\times1\times\cos(a-b)$ (angle entre les deux vecteurs). En égalant les deux expressions : $\cos(a-b)=\cos a\cos b+\sin a\sin b$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, simplify
+% a, b = symbols('a b', real=True)
+% gauche = cos(a-b)
+% droite = cos(a)*cos(b) + sin(a)*sin(b)
+% assert simplify(gauche - droite) == 0
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Equations polynomiales
+% ============================================================
+
+\propriete[Équation du second degré]{
+Pour $az^2+bz+c=0$ ($a\neq0$, coefficients réels), on calcule $\Delta=b^2-4ac$. Si $\Delta<0$, l'équation admet deux solutions complexes conjuguées $z=\dfrac{-b\pm i\sqrt{-\Delta}}{2a}$.
+}
+
+\exemple{
+Résoudre $z^2-2z+5=0$ : $\Delta=4-20=-16<0$. Les solutions sont $z=\dfrac{2\pm i\sqrt{16}}{2}=1\pm2i$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, Eq, solve, I
+% z = symbols('z')
+% sols = solve(Eq(z**2-2*z+5, 0), z)
+% assert set(sols) == {1+2*I, 1-2*I}
+% END-VERIFY
+
+\theoreme[Factorisation]{
+Pour $a\in\mathbb{C}$ et $n\in\mathbb{N}^*$ : $z^n-a^n = (z-a)(z^{n-1}+z^{n-2}a+\dots+za^{n-2}+a^{n-1})$. Plus généralement, si $P$ est un polynôme et $P(a)=0$, alors $P(z)$ se factorise par $(z-a)$.
+}
+
+\demonstration{
+En développant $(z-a)(z^{n-1}+z^{n-2}a+\dots+a^{n-1})$, chaque terme $z^ka^{n-1-k}$ apparaît deux fois avec des signes opposés (télescopage), sauf $z^n$ (dans le premier facteur du produit) et $-a^n$ (dans le dernier) : le développement se réduit à $z^n-a^n$.
+
+Pour un polynôme $P$ quelconque avec $P(a)=0$ : la division euclidienne de $P(z)$ par $(z-a)$ donne $P(z)=(z-a)Q(z)+R$, où $R$ est une constante (degré $<1$). En évaluant en $z=a$ : $P(a)=0\times Q(a)+R$, donc $R=P(a)=0$. Ainsi $P(z)=(z-a)Q(z)$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% z, a = symbols('z a')
+% n = 4
+% droite = expand((z-a) * sum(z**k * a**(n-1-k) for k in range(n)))
+% assert simplify(droite - (z**n - a**n)) == 0
+% END-VERIFY
+
+\propriete[Nombre de racines]{
+Un polynôme de degré $n$ (non nul) admet \textbf{au plus} $n$ racines.
+}
+
+\exemple{
+On sait que $2$ est racine de $P(z)=z^3-2z^2-z+2$. On factorise : $P(z)=(z-2)(z^2-1) = (z-2)(z-1)(z+1)$, ce qui donne les $3$ racines $2,1,-1$ — exactement le degré du polynôme, le maximum possible.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, expand, factor, solve
+% z = symbols('z')
+% P = z**3 - 2*z**2 - z + 2
+% assert P.subs(z, 2) == 0
+% racines = solve(P, z)
+% assert set(racines) == {2, 1, -1}
+% assert expand((z-2)*(z-1)*(z+1)) == P
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire qu'un polynôme de degré $n$ admet toujours exactement $n$ racines réelles.} Le théorème garantit \textbf{au plus} $n$ racines (dans $\mathbb{C}$, en comptant les multiplicités, on en a exactement $n$, mais ce résultat plus fort n'est pas au programme) : certaines racines peuvent être complexes non réelles, ou confondues (racines multiples).
+}

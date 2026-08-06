@@ -1,0 +1,14 @@
+% META: {"id": "TEXP-CTP-CO-004", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-004", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, simplify, im
+% a, b, c = 1+I, 3+3*I, 5+5*I
+% rapport = simplify((c-a)/(b-a))
+% assert im(rapport) == 0
+% assert rapport == 2
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-004}
+\[
+  \frac{c-a}{b-a} = \frac{(5+5i)-(1+i)}{(3+3i)-(1+i)} = \frac{4+4i}{2+2i} = \frac{4(1+i)}{2(1+i)} = 2.
+\]
+Ce rapport est un \textbf{réel} (égal à $2$) : $A$, $B$, $C$ sont donc \textbf{alignés}.
+\end{corrige}

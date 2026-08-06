@@ -1,0 +1,41 @@
+% META: {"id": "TEXP-CTP-EV-A", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C2", "C4"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, simplify, Rational, solve, factor, I
+% theta = symbols('theta', real=True)
+% cible = Rational(1,4)*cos(3*theta) + Rational(3,4)*cos(theta)
+% assert simplify(cos(theta)**3 - cible) == 0
+% z = symbols('z')
+% P = z**3 - 3*z**2 + 4*z - 2
+% assert P.subs(z, 1) == 0
+% assert factor(P) == (z-1)*(z**2-2*z+2)
+% assert set(solve(P, z)) == {1, 1-I, 1+I}
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-CTP-EV-A}{50}
+
+\begin{exercice}{TEXP-CTP-EV-A-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C2}
+
+\medskip
+
+En utilisant la formule d'Euler pour $\cos\theta$, linéariser $\cos^3\theta$ (l'écrire comme combinaison linéaire de $\cos(k\theta)$).
+\end{exercice}
+
+\begin{exercice}{TEXP-CTP-EV-A-EX2}{2}{30}
+\textbf{Exercice 2} (12 points) --- \textit{Capacité C4}
+
+\medskip
+
+Soit $P(z)=z^3-3z^2+4z-2$.
+\begin{enumerate}
+  \item (2 pts) Vérifier que $1$ est racine de $P$.
+  \item (4 pts) Déterminer $Q(z)$ tel que $P(z)=(z-1)Q(z)$.
+  \item (6 pts) Résoudre $P(z)=0$ dans $\mathbb{C}$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

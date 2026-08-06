@@ -1,0 +1,74 @@
+% META: {"id": "TEXP-CTP-CR-010", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "cours", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Forme exponentielle, formules d'Euler et de Moivre}
+
+% ============================================================
+% STRATE 1 — Forme trigonometrique et exponentielle
+% ============================================================
+
+\definition[1]{
+Pour $z\neq0$ de module $r=|z|$ et d'argument $\theta$, la \textbf{forme trigonométrique} de $z$ est $z=r(\cos\theta+i\sin\theta)$. On note $\mathrm{e}^{i\theta}=\cos\theta+i\sin\theta$ (\textbf{exponentielle imaginaire}) : la \textbf{forme exponentielle} de $z$ est $z=r\,\mathrm{e}^{i\theta}$.
+}
+
+\propriete[Relation fonctionnelle]{
+Pour tous réels $\theta,\varphi$ : $\mathrm{e}^{i\theta}\times\mathrm{e}^{i\varphi} = \mathrm{e}^{i(\theta+\varphi)}$.
+}
+
+\exemple{
+Passons $z=1-i$ de la forme algébrique à la forme exponentielle : $|z|=\sqrt{1+1}=\sqrt2$, $\cos\theta=\dfrac{1}{\sqrt2}$, $\sin\theta=-\dfrac{1}{\sqrt2}$, donc $\theta=-\dfrac{\pi}{4}$. Ainsi $z=\sqrt2\,\mathrm{e}^{-i\pi/4}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import sqrt, I, exp, pi, N, Abs, arg
+% z = 1 - I
+% forme_exp = sqrt(2) * exp(-I*pi/4)
+% assert abs(complex(N(z - forme_exp))) < 1e-9
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Formules d'Euler et de Moivre
+% ============================================================
+
+\theoreme[Formules d'Euler]{
+Pour tout réel $\theta$ :
+\[
+  \cos\theta = \frac{\mathrm{e}^{i\theta}+\mathrm{e}^{-i\theta}}{2}, \qquad \sin\theta = \frac{\mathrm{e}^{i\theta}-\mathrm{e}^{-i\theta}}{2i}.
+\]
+}
+
+\margeAppui{
+Ces formules s'obtiennent directement en additionnant (ou soustrayant) $\mathrm{e}^{i\theta}=\cos\theta+i\sin\theta$ et $\mathrm{e}^{-i\theta}=\cos\theta-i\sin\theta$.
+}
+
+\theoreme[Formule de Moivre]{
+Pour tout réel $\theta$ et tout $n\in\mathbb{N}$ : $\cos(n\theta)+i\sin(n\theta) = (\cos\theta+i\sin\theta)^n$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, I, expand, simplify, exp
+% theta = symbols('theta', real=True)
+% n = 4
+% gauche = cos(n*theta) + I*sin(n*theta)
+% droite = expand((cos(theta)+I*sin(theta))**n, complex=True)
+% # comparaison via forme exponentielle (plus robuste que expand trigonometrique direct)
+% assert simplify(exp(I*n*theta) - (exp(I*theta))**n) == 0
+% END-VERIFY
+
+\exemple{
+Utilisons Euler pour linéariser $\cos^2\theta$ :
+\[
+  \cos^2\theta = \left(\frac{\mathrm{e}^{i\theta}+\mathrm{e}^{-i\theta}}{2}\right)^2 = \frac{\mathrm{e}^{2i\theta}+2+\mathrm{e}^{-2i\theta}}{4} = \frac{1}{2} + \frac{\mathrm{e}^{2i\theta}+\mathrm{e}^{-2i\theta}}{4} = \frac{1}{2}+\frac{\cos(2\theta)}{2}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, cos, simplify, Rational
+% theta = symbols('theta', real=True)
+% gauche = cos(theta)**2
+% droite = Rational(1,2) + cos(2*theta)/2
+% assert simplify(gauche - droite) == 0
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre la formule de Moivre et les formules d'Euler.} La formule de \textbf{Moivre} relie une puissance de $(\cos\theta+i\sin\theta)$ à $\cos(n\theta)+i\sin(n\theta)$ (utile pour calculer une puissance) ; les formules d'\textbf{Euler} expriment $\cos\theta$ et $\sin\theta$ à partir de $\mathrm{e}^{i\theta}$ (utiles pour linéariser une expression trigonométrique).
+}

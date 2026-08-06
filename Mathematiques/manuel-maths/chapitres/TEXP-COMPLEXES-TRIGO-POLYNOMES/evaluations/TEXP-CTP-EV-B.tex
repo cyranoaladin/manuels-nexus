@@ -1,0 +1,43 @@
+% META: {"id": "TEXP-CTP-EV-B", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "evaluation", "version": "B", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C6", "C7"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, simplify, re, exp, pi
+% a, b, c = 0, 3, 3*I
+% rapport = simplify((c-a)/(b-a))
+% assert rapport == I
+% assert re(rapport) == 0
+% n = 5
+% racines = set(simplify(exp(2*I*k*pi/n)) for k in range(n))
+% assert len(racines) == 5
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-CTP-EV-B}{50}
+
+\begin{exercice}{TEXP-CTP-EV-B-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C6}
+
+\medskip
+
+Soient $A(0)$, $B(3)$, $C(3i)$.
+\begin{enumerate}
+  \item (4 pts) Calculer $\dfrac{c-a}{b-a}$.
+  \item (4 pts) En déduire si $(AB)$ et $(AC)$ sont perpendiculaires. Justifier.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-CTP-EV-B-EX2}{2}{30}
+\textbf{Exercice 2} (12 points) --- \textit{Capacité C7}
+
+\medskip
+
+\begin{enumerate}
+  \item (4 pts) Définir l'ensemble $\mathbb{U}_5$ des racines cinquièmes de l'unité, et donner l'expression générale de ses éléments.
+  \item (4 pts) Démontrer que $\mathbb{U}_5$ contient exactement $5$ éléments distincts.
+  \item (4 pts) Ces $5$ éléments, placés dans le plan complexe, forment quelle figure géométrique ? Justifier en une phrase.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

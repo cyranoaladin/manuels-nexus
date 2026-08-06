@@ -1,0 +1,16 @@
+% META: {"id": "TEXP-CTP-CO-003", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-003", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, factor, I
+% z = symbols('z')
+% P = z**3 - z**2 + z - 1
+% assert P.subs(z, 1) == 0
+% assert factor(P) == (z-1)*(z**2+1)
+% assert set(solve(P, z)) == {1, I, -I}
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-003}
+\textbf{1.} $P(1) = 1-1+1-1=0$ : $1$ est bien racine de $P$.
+
+\textbf{2.} Par identification (ou division euclidienne) : $Q(z)=z^2+1$, et on vérifie $(z-1)(z^2+1) = z^3+z-z^2-1 = z^3-z^2+z-1 = P(z)$.
+
+\textbf{3.} $P(z)=0 \iff z=1$ ou $Q(z)=0$. L'équation $z^2+1=0$ donne $z^2=-1$, soit $z=i$ ou $z=-i$. L'ensemble des solutions est $\{1,i,-i\}$.
+\end{corrige}
