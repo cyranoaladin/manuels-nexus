@@ -1,0 +1,81 @@
+% META: {"id": "TEXP-MATRICES-MARKOV-QCM", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5","C6","C7"], "status": "generated"}
+
+\section*{QCM d'auto-évaluation --- Matrices et chaînes de Markov}
+
+\begin{center}
+\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\end{center}
+
+\bigskip
+
+\subsection*{C1 --- Opérations sur les matrices}
+
+\begin{enumerate}
+
+\item \textbf{[Q1]} Une matrice carrée $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ est inversible si et seulement si :
+  \begin{enumerate}[label=\Alph*.]
+    \item $a=d$ et $b=c$.
+    \item $ad-bc\neq0$.
+    \item $a+b+c+d\neq0$.
+    \item elle est toujours inversible.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C2/C3 --- Modélisation et suites de matrices}
+
+\item \textbf{[Q2]} Pour une suite $(U_n)$ vérifiant $U_{n+1}=AU_n+C$ avec $I-A$ inversible, le point fixe $X$ vérifie :
+  \begin{enumerate}[label=\Alph*.]
+    \item $X=A+C$.
+    \item $X=AX+C$.
+    \item $X=A^{-1}C$.
+    \item $X=0$.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q3]} Dans la formule $U_n=A^n(U_0-X)+X$, la matrice $X$ représente :
+  \begin{enumerate}[label=\Alph*.]
+    \item la valeur de $U_n$ quand $n=0$.
+    \item le point fixe de la relation de récurrence.
+    \item l'inverse de $A$.
+    \item une matrice toujours nulle.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C4 --- Chaînes de Markov}
+
+\item \textbf{[Q4]} Dans la matrice de transition $P$ d'une chaîne de Markov, chaque \textbf{ligne} :
+  \begin{enumerate}[label=\Alph*.]
+    \item somme à $0$.
+    \item somme à $1$.
+    \item contient uniquement des $1$.
+    \item est symétrique.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C5 --- Distribution après $n$ transitions}
+
+\item \textbf{[Q5]} La distribution après $n$ transitions $\pi_n$ se calcule par :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\pi_n=P^n\pi_0$.
+    \item $\pi_n=\pi_0P^n$.
+    \item $\pi_n=P^n+\pi_0$.
+    \item $\pi_n=\pi_0+n P$.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C6/C7 --- Démonstration et distribution invariante}
+
+\item \textbf{[Q6]} Une distribution $\pi$ est dite \textbf{invariante} pour une chaîne de Markov de matrice $P$ si :
+  \begin{enumerate}[label=\Alph*.]
+    \item $\pi P=\pi$.
+    \item $\pi+P=0$.
+    \item $P$ est inversible.
+    \item $\pi$ contient uniquement des zéros.
+  \end{enumerate}
+
+\end{enumerate}

@@ -1,0 +1,70 @@
+% META: {"id": "TEXP-MAT-CR-012", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "cours", "capacites_codes": ["C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Chaînes de Markov}
+
+% ============================================================
+% STRATE 1 — Graphe pondere, distribution initiale, matrice de transition
+% ============================================================
+
+\definition[3]{
+Une \textbf{chaîne de Markov} à $k$ états ($k=2$ ou $3$ au programme) décrit l'évolution aléatoire d'un système parmi $k$ états possibles, où la probabilité de passer d'un état à un autre lors de l'étape suivante ne dépend que de l'état présent (et non des étapes antérieures). On la représente par un \textbf{graphe orienté pondéré} : les sommets sont les états, et une arête orientée de l'état $i$ vers l'état $j$, pondérée par $p_{ij}$, indique la probabilité de passer de $i$ à $j$ en une étape.
+}
+
+\definition[4]{
+La \textbf{matrice de transition} $P$ d'une chaîne de Markov à $k$ états est la matrice carrée $k\times k$ dont le coefficient $p_{ij}$ (ligne $i$, colonne $j$) est la probabilité de passer de l'état $i$ à l'état $j$ en une étape. Chaque ligne de $P$ est une distribution de probabilité : ses coefficients sont positifs et leur somme vaut $1$. La \textbf{distribution initiale} $\pi_0$ est la matrice ligne donnant la probabilité de chaque état à l'instant $0$.
+}
+
+\exemple{
+On étudie la météo d'une ville : chaque jour est soit \og Ensoleillé \fg{} (E), soit \og Pluvieux \fg{} (P). Si un jour est ensoleillé, le lendemain l'est encore avec une probabilité de $0{,}8$ (et pluvieux avec probabilité $0{,}2$) ; si un jour est pluvieux, le lendemain est ensoleillé avec une probabilité de $0{,}4$ (et pluvieux avec probabilité $0{,}6$).
+
+\begin{center}
+\begin{tikzpicture}[node distance=3.2cm, >=Latex, thick]
+  \node[circle, draw, minimum size=1.4cm] (E) {E};
+  \node[circle, draw, minimum size=1.4cm, right of=E] (P) {P};
+  \draw[->] (E) to[loop above] node{$0{,}8$} (E);
+  \draw[->] (P) to[loop above] node{$0{,}6$} (P);
+  \draw[->] (E) to[bend left=15] node[above]{$0{,}2$} (P);
+  \draw[->] (P) to[bend left=15] node[below]{$0{,}4$} (E);
+\end{tikzpicture}
+\end{center}
+
+En numérotant les états $1=$E, $2=$P, la matrice de transition est $P=\begin{pmatrix}0{,}8&0{,}2\\0{,}4&0{,}6\end{pmatrix}$ (chaque ligne somme à $1$). Si le jour $0$ est ensoleillé, la distribution initiale est $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% P = Matrix([[Rational(8,10), Rational(2,10)], [Rational(4,10), Rational(6,10)]])
+% assert sum(P.row(0)) == 1
+% assert sum(P.row(1)) == 1
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Distribution apres n transitions
+% ============================================================
+
+\propriete[Distribution après $n$ transitions]{
+Soit $P$ la matrice de transition d'une chaîne de Markov et $\pi_0$ sa distribution initiale. La \textbf{distribution après $n$ transitions} est la matrice ligne $\pi_n=\pi_0P^n$. Le coefficient $(P^n)_{ij}$ s'interprète comme la \textbf{probabilité de se trouver dans l'état $j$ après $n$ transitions, sachant que l'on est parti de l'état $i$}.
+}
+
+\exemple{
+Avec $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$ (jour $0$ ensoleillé) et $P=\begin{pmatrix}0{,}8&0{,}2\\0{,}4&0{,}6\end{pmatrix}$ :
+$$\pi_1=\pi_0P=\begin{pmatrix}0{,}8&0{,}2\end{pmatrix}\qquad\pi_2=\pi_0P^2=\begin{pmatrix}0{,}72&0{,}28\end{pmatrix}\qquad\pi_3=\pi_0P^3=\begin{pmatrix}0{,}688&0{,}312\end{pmatrix}$$
+Ainsi, la probabilité qu'il pleuve $3$ jours après un jour ensoleillé est $0{,}312$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, N
+% P = Matrix([[Rational(8,10), Rational(2,10)], [Rational(4,10), Rational(6,10)]])
+% pi0 = Matrix([[1,0]])
+% pi1 = pi0*P
+% pi2 = pi0*P**2
+% pi3 = pi0*P**3
+% assert pi1 == Matrix([[Rational(4,5), Rational(1,5)]])
+% assert pi2 == Matrix([[Rational(18,25), Rational(7,25)]])
+% assert pi3 == Matrix([[Rational(86,125), Rational(39,125)]])
+% assert abs(N(pi3[0,1]) - 0.312) < 1e-9
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre $\pi_0P^n$ (distribution ligne fois matrice) avec $P^n\pi_0$.} La distribution initiale $\pi_0$ est une matrice \textbf{ligne}, et se multiplie \textbf{à gauche} de $P^n$ : $\pi_n=\pi_0P^n$. Le produit $P^n\pi_0$ n'est en général même pas défini (tailles incompatibles) si $\pi_0$ est bien une matrice ligne $1\times k$.
+}

@@ -1,0 +1,27 @@
+% META: {"id": "TEXP-MAT-EX-003", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-003.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye
+% A = Matrix([[Rational(1,2), 0], [Rational(1,4), Rational(3,4)]])
+% C = Matrix([[3],[2]])
+% I = eye(2)
+% X = (I - A).solve(C)
+% assert X == Matrix([[6],[14]])
+% U0 = Matrix([[0],[0]])
+% U1 = A*U0 + C
+% U2 = A*U1 + C
+% assert U1 == Matrix([[3],[2]])
+% assert U2 == Matrix([[Rational(9,2)],[Rational(17,4)]])
+% for n in range(1, 4):
+%     Un = U0
+%     for _ in range(n):
+%         Un = A*Un + C
+%     assert (A**n)*(U0 - X) + X == Un
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-003}{2}{15}
+On considère la suite de matrices colonnes $(U_n)$ définie par $U_0=\begin{pmatrix}0\\0\end{pmatrix}$ et $U_{n+1}=AU_n+C$, avec $A=\begin{pmatrix}\tfrac{1}{2}&0\\\tfrac{1}{4}&\tfrac{3}{4}\end{pmatrix}$ et $C=\begin{pmatrix}3\\2\end{pmatrix}$.
+\begin{enumerate}
+  \item Calculer $U_1$ puis $U_2$ directement à partir de la relation de récurrence.
+  \item Vérifier que $I-A$ est inversible, et déterminer le point fixe $X$ vérifiant $X=AX+C$.
+  \item En déduire l'expression de $U_n$ en fonction de $n$, sous la forme $U_n=A^n(U_0-X)+X$.
+\end{enumerate}
+\end{exercice}

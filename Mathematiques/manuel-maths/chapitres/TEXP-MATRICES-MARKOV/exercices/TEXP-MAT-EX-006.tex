@@ -1,0 +1,25 @@
+% META: {"id": "TEXP-MAT-EX-006", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C6", "TEXP-MAT-C7"], "capacites_codes": ["C6", "C7"], "methodes": [], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-006.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, symbols, solve, N
+% P = Matrix([[Rational(9,10), Rational(1,10)], [Rational(3,10), Rational(7,10)]])
+% a, b = symbols('a b', positive=True)
+% pi = Matrix([[a, b]])
+% eq = pi*P - pi
+% sol = solve([eq[0], eq[1], a + b - 1], [a, b])
+% assert sol[a] == Rational(3,4)
+% assert sol[b] == Rational(1,4)
+% pi_inv = Matrix([[Rational(3,4), Rational(1,4)]])
+% assert pi_inv * P == pi_inv
+% pi0 = Matrix([[1,0]])
+% pi_grand_n = pi0 * P**40
+% for i in range(2):
+%     assert abs(N(pi_grand_n[0,i]) - N(pi_inv[0,i])) < 1e-6
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-006}{3}{18}
+On reprend la chaîne de Markov du service de streaming, de matrice de transition $P=\begin{pmatrix}0{,}9&0{,}1\\0{,}3&0{,}7\end{pmatrix}$.
+\begin{enumerate}
+  \item Rappeler pourquoi $\pi_n=\pi_0P^n$ pour tout $n$ (on pourra citer le principe de la démonstration du cours, sans la refaire entièrement).
+  \item Déterminer la distribution invariante $\pi=\begin{pmatrix}a&b\end{pmatrix}$ de cette chaîne (on résoudra $\pi P=\pi$ avec $a+b=1$).
+  \item Interpréter concrètement, en une phrase, ce que signifie cette distribution invariante pour l'évolution à long terme de la proportion d'abonnés.
+\end{enumerate}
+\end{exercice}

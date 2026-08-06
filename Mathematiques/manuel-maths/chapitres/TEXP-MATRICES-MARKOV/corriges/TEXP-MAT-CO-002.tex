@@ -1,0 +1,13 @@
+% META: {"id": "TEXP-MAT-CO-002", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% qte = Matrix([[10,5,20]])
+% prix = Matrix([[12],[15],[8]])
+% total = qte*prix
+% assert total == Matrix([[355]])
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-002}
+\textbf{1.} $Q=\begin{pmatrix}10&5&20\end{pmatrix}$ (quantités de romans, BD, mangas) et $T=\begin{pmatrix}12\\15\\8\end{pmatrix}$ (prix unitaires correspondants).
+
+\textbf{2.} $Q\times T=10\times12+5\times15+20\times8=120+75+160=355$. Ce nombre représente la \textbf{recette totale} (en euros) de la journée.
+\end{corrige}
