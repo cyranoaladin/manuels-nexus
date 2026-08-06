@@ -1,0 +1,87 @@
+% META: {"id": "TCOMPL-CORR-CR-010", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "cours", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Ajustement affine et coefficient de corrélation}
+
+% ============================================================
+% STRATE 1 — Nuage, point moyen, moindres carres
+% ============================================================
+
+\definition[1]{
+Pour une série statistique de $n$ couples $(x_i,y_i)$, le \textbf{nuage de points} est l'ensemble des points $M_i(x_i,y_i)$. Le \textbf{point moyen} $G(\bar{x},\bar{y})$ a pour coordonnées les moyennes des $x_i$ et des $y_i$.
+}
+
+\theoreme[Droite des moindres carrés]{
+La droite $y=ax+b$ qui minimise la somme des carrés des écarts verticaux $\displaystyle\sum_{i=1}^n \big(y_i-(ax_i+b)\big)^2$ a pour coefficients :
+\[
+  a = \frac{\sum_{i=1}^n (x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^n (x_i-\bar{x})^2}, \qquad b = \bar{y}-a\bar{x}.
+\]
+Cette droite passe toujours par le point moyen $G$.
+}
+
+\demonstration{
+On note $S(a,b) = \displaystyle\sum_{i=1}^n (y_i-ax_i-b)^2$. Les coefficients optimaux annulent les dérivées partielles de $S$ :
+\[
+  \frac{\partial S}{\partial b} = -2\sum_i (y_i-ax_i-b) = 0 \iff \sum_i y_i - a\sum_i x_i - nb = 0 \iff b = \bar{y}-a\bar{x}.
+\]
+En substituant dans $\dfrac{\partial S}{\partial a} = -2\displaystyle\sum_i x_i(y_i-ax_i-b) = 0$ et en simplifiant à l'aide de $b=\bar y - a\bar x$, on obtient, après réduction :
+\[
+  a\sum_i (x_i-\bar{x})^2 = \sum_i (x_i-\bar{x})(y_i-\bar{y}),
+\]
+d'où la formule de $a$. Enfin, $y=a\bar{x}+b = a\bar x + \bar y - a\bar x = \bar y$ : la droite passe bien par $G(\bar x,\bar y)$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% xs = [1, 2, 3, 4, 5]
+% ys = [3, 5, 6, 8, 11]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% a, b = symbols('a b')
+% S = sum((y - (a*x + b))**2 for x, y in zip(xs, ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% a_val, b_val = sols[a], sols[b]
+% # formule directe
+% Sxy = sum((x-xbar)*(y-ybar) for x, y in zip(xs, ys))
+% Sxx = sum((x-xbar)**2 for x in xs)
+% a_formule = Sxy / Sxx
+% b_formule = ybar - a_formule*xbar
+% assert a_val == a_formule
+% assert b_val == b_formule
+% # passe par le point moyen
+% assert a_val*xbar + b_val == ybar
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Coefficient de correlation
+% ============================================================
+
+\definition[2]{
+Le \textbf{coefficient de corrélation linéaire} mesure la qualité de l'ajustement affine :
+\[
+  r = \frac{\sum_i (x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_i (x_i-\bar{x})^2}\ \sqrt{\sum_i (y_i-\bar{y})^2}}.
+\]
+$r$ est compris entre $-1$ et $1$. Plus $|r|$ est proche de $1$, plus le nuage est proche d'être aligné (corrélation linéaire forte).
+}
+
+\exemple{
+Pour la série $(1,3),(2,5),(3,6),(4,8),(5,11)$, on calcule $r \approx 0{,}985$ : les points sont presque parfaitement alignés.
+}
+
+% BEGIN-VERIFY
+% from sympy import sqrt, N, Rational
+% xs = [1, 2, 3, 4, 5]
+% ys = [3, 5, 6, 8, 11]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% Sxy = sum((x-xbar)*(y-ybar) for x, y in zip(xs, ys))
+% Sxx = sum((x-xbar)**2 for x in xs)
+% Syy = sum((y-ybar)**2 for y in ys)
+% r = Sxy / sqrt(Sxx*Syy)
+% assert abs(N(r) - 0.9851) < 0.0001
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire qu'un coefficient de corrélation proche de $1$ implique une relation affine parfaite.} $r$ mesure la qualité de l'\textbf{ajustement linéaire}, pas l'existence d'une relation exacte : un nuage peut suivre parfaitement une courbe non affine (par exemple une parabole) tout en ayant un coefficient $r$ élevé mais différent de $1$, ou même faible si la courbure est marquée.
+}

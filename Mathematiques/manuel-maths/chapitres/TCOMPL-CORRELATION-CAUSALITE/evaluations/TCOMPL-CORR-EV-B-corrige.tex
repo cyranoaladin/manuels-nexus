@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-CORR-EV-B-corrige", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-CORR-EV-B", "capacites_codes": ["C3", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import log, N, exp
+% ys = [5, 10, 20, 40]
+% Ys = [N(log(y), 4) for y in ys]
+% assert abs(float(Ys[0]) - 1.609) < 0.001
+% assert abs(float(Ys[1]) - 2.303) < 0.001
+% assert abs(float(Ys[2]) - 2.996) < 0.001
+% assert abs(float(Ys[3]) - 3.689) < 0.001
+% diffs = [Ys[i+1]-Ys[i] for i in range(3)]
+% for d in diffs:
+%     assert abs(float(d) - float(N(log(2),4))) < 0.001
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EV-B-EX1}
+\textbf{1.} On pose $Y=\ln(y)$ : $Y = \ln(A) + bt$, une relation affine en $t$.
+
+\textbf{2.} $Y_0=\ln5\approx1{,}609$, $Y_1=\ln10\approx2{,}303$, $Y_2=\ln20\approx2{,}996$, $Y_3=\ln40\approx3{,}689$.
+
+\textbf{3.} Les écarts successifs entre les $Y_i$ valent tous $\approx0{,}693=\ln2$ : le nuage est parfaitement aligné, de pente $b=\ln2\approx0{,}693$ et d'ordonnée à l'origine $\ln(A)=\ln5$, donc $A=5$. On retrouve $y=5\,\mathrm{e}^{t\ln2}=5\times2^t$.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-CORR-EV-B-EX2}
+\textbf{1.} Non : il n'y a aucune raison qu'une librairie \og fasse apparaître \fg{} des pharmacies.
+
+\textbf{2.} La variable cachée est la \textbf{densité de population} (ou l'activité commerciale) du quartier : un quartier plus peuplé ou plus commerçant compte naturellement davantage de commerces de tous types, librairies et pharmacies comprises, sans lien de causalité direct entre les deux.
+\end{corrige}

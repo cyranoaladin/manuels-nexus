@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-CORR-CO-001", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-001", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% xs = [0, 1, 2, 3]
+% ys = [5, 8, 10, 15]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% assert xbar == Rational(3, 2)
+% assert ybar == Rational(19, 2)
+% a, b = symbols('a b')
+% S = sum((y - (a*x + b))**2 for x, y in zip(xs, ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% assert sols[a] == Rational(16, 5)
+% assert sols[b] == Rational(47, 10)
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-001}
+\textbf{1.} $\bar{x} = \dfrac{0+1+2+3}{4} = 1{,}5$ ; $\bar{y} = \dfrac{5+8+10+15}{4} = 9{,}5$. Le point moyen est $G(1{,}5\,;\ 9{,}5)$.
+
+\textbf{2.} À la calculatrice, on obtient $a=3{,}2$ et $b=4{,}7$, soit $y=3{,}2x+4{,}7$.
+\end{corrige}

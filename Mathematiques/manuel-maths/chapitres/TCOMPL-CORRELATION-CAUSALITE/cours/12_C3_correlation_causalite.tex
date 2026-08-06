@@ -1,0 +1,41 @@
+% META: {"id": "TCOMPL-CORR-CR-012", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Corrélation n'est pas causalité}
+
+% ============================================================
+% STRATE 1 — Le piege de la causalite
+% ============================================================
+
+\definition[1]{
+Deux variables sont \textbf{corrélées} lorsqu'un coefficient de corrélation élevé (proche de $1$ ou $-1$) traduit une tendance commune (quand l'une augmente, l'autre a tendance à augmenter, ou à diminuer). Une relation de \textbf{causalité} signifie qu'une variable \textbf{provoque} directement les variations de l'autre. \textbf{Une forte corrélation n'implique pas une causalité.}
+}
+
+\exemple{
+Sur des données estivales, les ventes de glaces et le nombre de noyades sont fortement corrélées (les deux augmentent en été). Manger une glace ne \textbf{cause} évidemment pas de noyade : les deux phénomènes ont une \textbf{cause commune}, la chaleur estivale, qui pousse à la fois à consommer des glaces et à se baigner (activité qui comporte un risque de noyade).
+}
+
+\propriete[Explications possibles d'une corrélation]{
+Face à une corrélation observée entre deux variables $X$ et $Y$, plusieurs explications sont possibles :
+\begin{itemize}
+  \item $X$ cause $Y$ (relation causale directe) ;
+  \item $Y$ cause $X$ (causalité inverse) ;
+  \item une \textbf{variable cachée} $Z$ cause à la fois $X$ et $Y$ (cause commune) ;
+  \item la corrélation est due au \textbf{hasard} (surtout sur de petits échantillons, ou en testant de très nombreuses paires de variables).
+\end{itemize}
+}
+
+% ============================================================
+% STRATE 2 — Exemples supplementaires
+% ============================================================
+
+\exemple{
+La loi de Moore prédit un doublement du nombre de transistors par puce environ tous les deux ans. Sur les données historiques, cette croissance est fortement corrélée au temps écoulé. Mais ce n'est pas le \og temps \fg{} en lui-même qui cause cette évolution : ce sont les progrès technologiques (miniaturisation, recherche, investissements), qui se produisent au fil du temps.
+}
+
+\margeAppui{
+Pour établir une causalité de façon rigoureuse, les scientifiques utilisent des méthodes spécifiques (expériences contrôlées avec groupe témoin, essais randomisés) qui vont au-delà de la simple observation d'une corrélation statistique.
+}
+
+\erreurFrequente{
+\textbf{Affirmer une causalité uniquement à partir d'un coefficient de corrélation élevé.} Le calcul de $r$ ne renseigne que sur la force d'une association \textbf{statistique} entre deux séries de données ; il ne dit rien sur le \textbf{mécanisme} qui relie ces deux variables. Toute affirmation de causalité doit s'appuyer sur un raisonnement (ou une expérimentation) allant au-delà du simple calcul du coefficient de corrélation.
+}

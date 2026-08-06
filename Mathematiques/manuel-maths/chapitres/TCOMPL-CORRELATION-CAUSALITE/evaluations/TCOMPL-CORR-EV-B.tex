@@ -1,0 +1,45 @@
+% META: {"id": "TCOMPL-CORR-EV-B", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "evaluation", "version": "B", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C3", "C5"], "competences": ["modeliser", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import log, symbols, diff, solve, N, exp
+% xs = [0, 1, 2, 3]
+% ys = [5, 10, 20, 40]
+% Ys = [log(y) for y in ys]
+% a, b = symbols('a b')
+% S = sum((Y - (a*x + b))**2 for x, Y in zip(xs, Ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% assert abs(N(sols[a]) - log(2)) < 1e-9
+% assert abs(N(exp(sols[b])) - 5) < 1e-9
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-CORR-EV-B}{45}
+
+\begin{exercice}{TCOMPL-CORR-EV-B-EX1}{2}{30}
+\textbf{Exercice 1} (12 points) --- \textit{Capacité C3}
+
+\medskip
+
+On soupçonne qu'une population de bactéries $(t_i,y_i)$ suit une relation $y=A\,\mathrm{e}^{bt}$, avec $(0,5),(1,10),(2,20),(3,40)$ ($t$ en heures, $y$ en milliers d'individus).
+\begin{enumerate}
+  \item (4 pts) Quel changement de variable $Y$ permet de linéariser cette relation exponentielle ?
+  \item (4 pts) Calculer les valeurs de $Y_i=\ln(y_i)$ correspondantes.
+  \item (4 pts) En observant que le nuage $(t_i,Y_i)$ est parfaitement aligné, déterminer $A$ et $b$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-CORR-EV-B-EX2}{2}{20}
+\textbf{Exercice 2} (8 points) --- \textit{Capacité C5}
+
+\medskip
+
+Dans une ville, le nombre de librairies et le nombre de pharmacies par quartier sont fortement corrélés.
+\begin{enumerate}
+  \item (4 pts) Peut-on en conclure qu'ouvrir une librairie fait apparaître des pharmacies ? Justifier.
+  \item (4 pts) Proposer une variable cachée plausible expliquant cette corrélation.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

@@ -1,0 +1,16 @@
+% META: {"id": "TCOMPL-CORR-EX-002", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C4"], "capacites_codes": ["C4"], "methodes": [], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% a, b = 3.2, 4.7
+% assert abs((a*1.5 + b) - 9.5) < 1e-9
+% valeur_interp = a*2.5 + b
+% assert abs(valeur_interp - 12.7) < 1e-9
+% valeur_extrap = a*50 + b
+% assert abs(valeur_extrap - 164.7) < 1e-9
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-002}{2}{15}
+On reprend l'ajustement $y=3{,}2x+4{,}7$ de l'exercice précédent, valable pour un budget publicitaire $x\in[0,3]$ (en milliers d'euros).
+\begin{enumerate}
+  \item Estimer le nombre de nouveaux clients pour un budget de $2{,}5$ milliers d'euros. S'agit-il d'une interpolation ou d'une extrapolation ?
+  \item Estimer le nombre de nouveaux clients pour un budget de $50$ milliers d'euros. S'agit-il d'une interpolation ou d'une extrapolation ? Cette estimation est-elle fiable ? Justifier.
+\end{enumerate}
+\end{exercice}

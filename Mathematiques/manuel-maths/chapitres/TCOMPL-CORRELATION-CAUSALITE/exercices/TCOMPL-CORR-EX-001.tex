@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-CORR-EX-001", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "exercice", "capacites": ["TCOMPL-CORR-C1", "TCOMPL-CORR-C2"], "capacites_codes": ["C1", "C2"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-001.tex", "corrige_tex": "chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational
+% xs = [0, 1, 2, 3]
+% ys = [5, 8, 10, 15]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% assert xbar == Rational(3, 2)
+% assert ybar == Rational(19, 2)
+% a, b = symbols('a b')
+% S = sum((y - (a*x + b))**2 for x, y in zip(xs, ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% assert sols[a] == Rational(16, 5)
+% assert sols[b] == Rational(47, 10)
+% END-VERIFY
+\begin{exercice}{TCOMPL-CORR-EX-001}{1}{15}
+On mesure, pour $4$ semaines, le budget publicitaire $x_i$ (en milliers d'euros) et le nombre $y_i$ de nouveaux clients :
+\[
+  (0,5),\ (1,8),\ (2,10),\ (3,15).
+\]
+\begin{enumerate}
+  \item Calculer les coordonnées du point moyen $G$.
+  \item À l'aide d'un logiciel ou d'une calculatrice, déterminer l'équation de la droite des moindres carrés $y=ax+b$.
+\end{enumerate}
+\end{exercice}

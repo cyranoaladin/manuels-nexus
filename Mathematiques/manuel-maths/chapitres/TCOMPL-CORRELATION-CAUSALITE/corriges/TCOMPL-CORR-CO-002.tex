@@ -1,0 +1,13 @@
+% META: {"id": "TCOMPL-CORR-CO-002", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-002", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% a, b = 3.2, 4.7
+% valeur_interp = a*2.5 + b
+% assert abs(valeur_interp - 12.7) < 1e-9
+% valeur_extrap = a*50 + b
+% assert abs(valeur_extrap - 164.7) < 1e-9
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-002}
+\textbf{1.} $y = 3{,}2\times2{,}5+4{,}7 = 12{,}7$ nouveaux clients environ. Comme $2{,}5\in[0,3]$, c'est une \textbf{interpolation}, raisonnablement fiable.
+
+\textbf{2.} $y = 3{,}2\times50+4{,}7 = 164{,}7$ nouveaux clients. Comme $50 \notin [0,3]$ (très en dehors), c'est une \textbf{extrapolation}. Cette estimation n'est \textbf{pas fiable} : rien ne garantit que la relation affine observée sur un petit budget ($0$ à $3$ milliers d'euros) reste valable pour un budget $15$ fois plus grand (effets de saturation du marché probables).
+\end{corrige}

@@ -1,0 +1,25 @@
+chapitre: TCOMPL-CORRELATION-CAUSALITE
+niveau: TCOMPL
+theme: CORRELATION-CAUSALITE
+titre: "Corrélation et causalité"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TCOMPL-CORR-C1, libelle_eleve: "Je sais représenter un nuage de points et calculer les coordonnées de son point moyen." }
+  - { code: C2, ref_capacite: TCOMPL-CORR-C2, libelle_eleve: "Je sais déterminer la droite des moindres carrés d'un ajustement affine et calculer un coefficient de corrélation." }
+  - { code: C3, ref_capacite: TCOMPL-CORR-C3, libelle_eleve: "Je sais me ramener à un ajustement affine par changement de variable." }
+  - { code: C4, ref_capacite: TCOMPL-CORR-C4, libelle_eleve: "Je sais utiliser un ajustement affine pour interpoler ou extrapoler une valeur, avec un regard critique sur la validité de l'extrapolation." }
+  - { code: C5, ref_capacite: TCOMPL-CORR-C5, libelle_eleve: "Je sais expliquer pourquoi une forte corrélation entre deux variables ne prouve pas une relation de cause à effet." }
+
+prerequis:
+  - { code: R1, libelle: "Statistique descriptive à une variable", chapitre_origine: "2NDE" }
+  - { code: R2, libelle: "Fonction logarithme", chapitre_origine: "TCOMPL-LOGARITHME-HISTORIQUE" }
+
+situation_accroche: >
+  Les ventes de glaces et les noyades augmentent toutes deux en été : faut-il en conclure
+  que manger une glace cause la noyade ? Cet exemple absurde illustre un piège
+  statistique fréquent : confondre corrélation et causalité. Ce chapitre approfondit
+  l'étude des séries statistiques à deux variables et développe un regard critique sur
+  l'interprétation d'une corrélation observée.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 6 }
