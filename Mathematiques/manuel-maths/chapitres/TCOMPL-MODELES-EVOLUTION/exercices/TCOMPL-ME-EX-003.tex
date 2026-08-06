@@ -1,0 +1,18 @@
+% META: {"id": "TCOMPL-ME-EX-003", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "exercice", "capacites": ["TCOMPL-ME-C5"], "capacites_codes": ["C5"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/exercices/TCOMPL-ME-EX-003.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Rational
+% t = symbols('t')
+% C = -60
+% y = C*exp(-Rational(1,4)*t) + 240
+% yp = diff(y, t)
+% assert (yp - (-Rational(1,4)*y + 60)).simplify() == 0
+% assert y.subs(t, 0) == 180
+% END-VERIFY
+\begin{exercice}{TCOMPL-ME-EX-003}{2}{15}
+La température $y(t)$ (en degrés) d'un objet placé dans un four vérifie $y'(t) = -0{,}25\,y(t) + 60$, avec $y(0)=180$.
+\begin{enumerate}
+  \item Déterminer la solution particulière constante $y_p$.
+  \item Donner la solution générale de l'équation, puis déterminer la constante $C$ à l'aide de la condition initiale.
+  \item Quelle est la température de l'objet lorsque $t \to +\infty$ ?
+\end{enumerate}
+\end{exercice}

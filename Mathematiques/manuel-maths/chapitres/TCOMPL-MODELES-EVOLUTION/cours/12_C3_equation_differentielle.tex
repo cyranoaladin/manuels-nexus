@@ -1,0 +1,62 @@
+% META: {"id": "TCOMPL-ME-CR-012", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Équations différentielles $y'=ay$ et $y'=ay+b$}
+
+% ============================================================
+% STRATE 1 — Resolution de y'=ay
+% ============================================================
+
+\definition[1]{
+Une \textbf{équation différentielle} est une équation dont l'inconnue est une \textbf{fonction} $y$, reliant $y$ à sa dérivée $y'$. Résoudre $y'=ay$ (avec $a$ réel) consiste à trouver toutes les fonctions dérivables sur $\mathbb{R}$ vérifiant cette relation.
+}
+
+\theoreme[Solutions de $y'=ay$]{
+Les solutions de l'équation différentielle $y' = ay$ sont exactement les fonctions $y(x) = C\,\mathrm{e}^{ax}$, où $C$ est une constante réelle.
+}
+
+\demonstration{
+On vérifie d'abord que $y(x)=C\mathrm{e}^{ax}$ est bien solution : $y'(x) = Ca\,\mathrm{e}^{ax} = a\, y(x)$.
+
+Réciproquement, soit $y$ une solution quelconque de $y'=ay$. On pose $z(x) = y(x)\,\mathrm{e}^{-ax}$. Alors :
+\[
+  z'(x) = y'(x)\,\mathrm{e}^{-ax} - a\,y(x)\,\mathrm{e}^{-ax} = \big(y'(x) - a\,y(x)\big)\,\mathrm{e}^{-ax} = 0,
+\]
+car $y'(x)=ay(x)$. Donc $z$ est constante, $z(x)=C$, soit $y(x) = C\,\mathrm{e}^{ax}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Function, symbols, dsolve, Eq, exp, diff
+% x = symbols('x')
+% y = Function('y')
+% a = symbols('a')
+% sol = dsolve(Eq(y(x).diff(x), a*y(x)), y(x))
+% # verifie que exp(a*x) est bien solution
+% test = exp(a*x)
+% assert (diff(test, x) - a*test).simplify() == 0
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Equation avec second membre y'=ay+b
+% ============================================================
+
+\propriete[Solutions de $y'=ay+b$]{
+Pour $a \neq 0$, les solutions de $y'=ay+b$ sont les fonctions $y(x) = C\,\mathrm{e}^{ax} - \dfrac{b}{a}$, où $C$ est une constante réelle. La fonction constante $y_p = -\dfrac{b}{a}$ est une \textbf{solution particulière} (solution constante) ; on lui ajoute toute solution de l'équation \og sans second membre \fg{} $y'=ay$.
+}
+
+\exemple{
+La charge d'un condensateur vérifie $q'(t) = -0{,}5\,q(t) + 10$, avec $q(0)=0$. La solution particulière constante vérifie $-0{,}5\,y_p+10=0$, soit $y_p=20$. La solution générale est $q(t) = C\,\mathrm{e}^{-0{,}5t}+20$. La condition $q(0)=0$ donne $C+20=0$, soit $C=-20$ : $q(t) = 20 - 20\,\mathrm{e}^{-0{,}5t}$, qui tend vers $20$ quand $t\to+\infty$ (charge maximale).
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, limit, oo, Rational
+% t = symbols('t')
+% q = 20 - 20*exp(-Rational(1,2)*t)
+% qp = diff(q, t)
+% assert (qp - (-Rational(1,2)*q + 10)).simplify() == 0
+% assert q.subs(t, 0) == 0
+% assert limit(q, t, oo) == 20
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier la solution particulière constante.} Écrire directement $y(x)=C\mathrm{e}^{ax}$ comme solution de $y'=ay+b$ (en ignorant $b$) est une erreur fréquente : il faut d'abord chercher la solution constante $y_p=-b/a$, puis ajouter la solution générale de l'équation sans second membre $y'=ay$.
+}

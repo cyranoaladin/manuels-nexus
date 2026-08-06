@@ -1,0 +1,66 @@
+% META: {"id": "TCOMPL-ME-CR-011", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "cours", "capacites_codes": ["C3", "C4"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Suites récurrentes : représentation graphique et cas arithmético-géométrique}
+
+% ============================================================
+% STRATE 1 — Representation graphique
+% ============================================================
+
+\definition[1]{
+Pour une suite définie par $u_{n+1} = f(u_n)$ avec $f$ continue, on représente graphiquement ses premiers termes en traçant la courbe de $f$ et la droite d'équation $y=x$ : on place $u_0$ sur l'axe des abscisses, on rejoint la courbe (ordonnée $u_1=f(u_0)$), puis la droite $y=x$ (report en abscisse), et on répète le procédé.
+}
+
+\margeAppui{
+Cette construction (en \og escalier \fg{} ou en \og spirale \fg{} selon les cas) permet de \textbf{conjecturer} si la suite converge, et vers quelle valeur : si la suite semble se rapprocher d'un point d'intersection entre la courbe de $f$ et la droite $y=x$, ce point est un candidat naturel pour la limite.
+}
+
+\exemple{
+Soit $u_{n+1} = \sqrt{2 u_n + 3}$ avec $u_0 = 0$. La droite $y=x$ coupe la courbe de $f(x)=\sqrt{2x+3}$ au point où $x = \sqrt{2x+3}$, soit $x^2 = 2x+3$ (pour $x\geq0$), soit $x^2-2x-3=0$, dont l'unique racine positive est $x=3$. La construction graphique laisse conjecturer que $(u_n)$ converge vers $3$.
+}
+
+% BEGIN-VERIFY
+% import math
+% u = 0.0
+% for _ in range(30):
+%     u = math.sqrt(2*u + 3)
+% assert abs(u - 3) < 1e-6
+% from sympy import symbols, solve, Eq
+% x = symbols('x', positive=True)
+% assert solve(Eq(x**2 - 2*x - 3, 0), x) == [3]
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Suite arithmetico-geometrique
+% ============================================================
+
+\definition[2]{
+Une suite $(u_n)$ est \textbf{arithmético-géométrique} si elle vérifie une relation $u_{n+1} = a u_n + b$ avec $a \neq 1$. Contrairement à une suite géométrique ($b=0$) ou arithmétique ($a=1$), elle combine les deux effets.
+}
+
+\propriete[Méthode de résolution]{
+On cherche la suite \textbf{constante} $c$ solution de la relation, c'est-à-dire $c = ac+b$, soit $c = \dfrac{b}{1-a}$. On pose alors $v_n = u_n - c$ : la suite $(v_n)$ est \textbf{géométrique} de raison $a$, ce qui permet de retrouver $u_n = c + (u_0-c)a^n$ pour tout $n$.
+}
+
+\demonstration{
+On a $v_{n+1} = u_{n+1} - c = (au_n+b) - c$. Or $c=ac+b$, donc $b = c-ac$, d'où $v_{n+1} = au_n + c - ac - c = a(u_n-c) = a v_n$. La suite $(v_n)$ est bien géométrique de raison $a$ et de premier terme $v_0=u_0-c$, donc $v_n = (u_0-c)a^n$, soit $u_n = c+(u_0-c)a^n$.
+}
+
+\exemple{
+Soit $u_{n+1} = 0{,}5 u_n + 3$ avec $u_0 = 0$. La solution constante vérifie $c = 0{,}5c+3$, soit $c=6$. On pose $v_n = u_n-6$, géométrique de raison $0{,}5$ et de premier terme $v_0=-6$, d'où $u_n = 6 - 6\times0{,}5^n$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% a, b, u0 = Rational(1,2), 3, 0
+% c = b / (1 - a)
+% assert c == 6
+% u = u0
+% for _ in range(5):
+%     u = a * u + b
+% formule = c + (u0 - c) * a**5
+% assert u == formule
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier de vérifier $a \neq 1$ avant d'appliquer la méthode.} Si $a=1$, la relation $u_{n+1}=u_n+b$ définit une suite \textbf{arithmétique}, pour laquelle il n'existe pas de solution constante (sauf si $b=0$) : la méthode de la suite constante ne s'applique pas, il faut utiliser directement $u_n = u_0 + nb$.
+}

@@ -1,0 +1,43 @@
+% META: {"id": "TCOMPL-ME-EV-A", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C4"], "competences": ["calculer", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% u0, q = 500, Rational(3, 10)
+% limite = u0 / (1 - q)
+% assert limite == Rational(5000, 7)
+% a, b, w0 = Rational(2, 5), 12, 0
+% c = b / (1 - a)
+% assert c == 20
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-ME-EV-A}{50}
+
+\begin{exercice}{TCOMPL-ME-EV-A-EX1}{1}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacités C1, C2}
+
+\medskip
+
+Un système d'arrosage délivre $500$ mL d'eau chaque jour à une plante en pot ; $70\%$ de l'eau présente dans le pot s'évapore ou est absorbée chaque jour (donc $30\%$ subsiste).
+\begin{enumerate}
+  \item (3 pts) Identifier la raison $q$ de la suite géométrique associée.
+  \item (5 pts) Déterminer la quantité limite d'eau accumulée dans le pot au bout d'un grand nombre de jours.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-ME-EV-A-EX2}{2}{30}
+\textbf{Exercice 2} (12 points) --- \textit{Capacité C4}
+
+\medskip
+
+Une suite $(w_n)$ vérifie $w_{n+1} = 0{,}4\,w_n + 12$, avec $w_0=0$.
+\begin{enumerate}
+  \item (3 pts) Déterminer la suite constante $c$ solution de la relation.
+  \item (4 pts) Justifier que $(w_n - c)$ est géométrique, en préciser la raison.
+  \item (5 pts) En déduire l'expression explicite de $w_n$ en fonction de $n$, et calculer $w_3$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-ME-EX-004", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "exercice", "capacites": ["TCOMPL-ME-C1", "TCOMPL-ME-C3"], "capacites_codes": ["C1", "C3"], "methodes": [], "parcours": 1, "competences": ["modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/exercices/TCOMPL-ME-EX-004.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% u = 10.0
+% for _ in range(50):
+%     u = 0.5 * (u + 6 / u)
+% assert abs(u - 2.449489742783178) < 1e-9
+% import math
+% assert abs(u - math.sqrt(6)) < 1e-9
+% END-VERIFY
+\begin{exercice}{TCOMPL-ME-EX-004}{1}{15}
+On définit la suite $(u_n)$ par $u_0 = 10$ et $u_{n+1} = \dfrac{1}{2}\left(u_n + \dfrac{6}{u_n}\right)$ (méthode de Héron pour approcher $\sqrt{6}$).
+\begin{enumerate}
+  \item Identifier la fonction $f$ telle que $u_{n+1}=f(u_n)$.
+  \item Chercher un point fixe de $f$ (solution de $f(x)=x$ pour $x>0$) : quelle valeur remarquable obtient-on ?
+  \item Calculer $u_1$, $u_2$ à la calculatrice ou à la main, et constater la rapidité de la convergence.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,24 @@
+chapitre: TCOMPL-MODELES-EVOLUTION
+niveau: TCOMPL
+theme: MODELES-EVOLUTION
+titre: "Modèles d'évolution"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TCOMPL-ME-C1, libelle_eleve: "Je sais modéliser un problème d'évolution par une suite définie explicitement ou par récurrence." }
+  - { code: C2, ref_capacite: TCOMPL-ME-C2, libelle_eleve: "Je sais calculer la limite d'une suite géométrique et la limite de la somme de ses termes lorsque la raison est dans ]0;1[." }
+  - { code: C3, ref_capacite: TCOMPL-ME-C3, libelle_eleve: "Je sais représenter graphiquement une suite récurrente $u_{n+1}=f(u_n)$ et conjecturer son comportement." }
+  - { code: C4, ref_capacite: TCOMPL-ME-C4, libelle_eleve: "Je sais résoudre une suite arithmético-géométrique en cherchant sa solution constante puis en m'y ramenant." }
+  - { code: C5, ref_capacite: TCOMPL-ME-C5, libelle_eleve: "Je sais résoudre une équation différentielle y'=ay, et y'=ay+b en cherchant une solution particulière constante." }
+
+prerequis:
+  - { code: R1, libelle: "Suites : sens de variation, limites, suites géométriques", chapitre_origine: "1SPE-SUITES" }
+  - { code: R2, libelle: "Fonction exponentielle", chapitre_origine: "1SPE-EXPONENTIELLE" }
+
+situation_accroche: >
+  Un capital placé à intérêt composé, la décroissance radioactive d'un échantillon, la
+  charge d'un condensateur : ces phénomènes évoluent dans le temps selon des lois
+  discrètes (suites) ou continues (fonctions solutions d'équations différentielles). Ce
+  chapitre étudie ces deux familles de modèles et leurs points communs.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

@@ -1,0 +1,21 @@
+% META: {"id": "TCOMPL-ME-CO-003", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-003", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Rational, limit, oo
+% t = symbols('t')
+% C = -60
+% y = C*exp(-Rational(1,4)*t) + 240
+% yp = diff(y, t)
+% assert (yp - (-Rational(1,4)*y + 60)).simplify() == 0
+% assert y.subs(t, 0) == 180
+% assert limit(y, t, oo) == 240
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-003}
+\textbf{1.} $y_p$ vérifie $-0{,}25\,y_p+60=0$, soit $y_p = \dfrac{60}{0{,}25} = 240$.
+
+\textbf{2.} La solution générale est $y(t) = C\,\mathrm{e}^{-0{,}25t} + 240$. La condition $y(0)=180$ donne $C+240=180$, soit $C=-60$ :
+\[
+  y(t) = -60\,\mathrm{e}^{-0{,}25t} + 240.
+\]
+
+\textbf{3.} Quand $t\to+\infty$, $\mathrm{e}^{-0{,}25t}\to0$, donc $y(t) \to 240$ : la température de l'objet se stabilise à $240$ degrés (température du four).
+\end{corrige}

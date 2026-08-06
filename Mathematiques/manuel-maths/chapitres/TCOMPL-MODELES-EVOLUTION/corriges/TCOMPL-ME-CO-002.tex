@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-ME-CO-002", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-002", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% a, b, u0 = Rational(3, 4), 5, 2
+% c = b / (1 - a)
+% assert c == 20
+% u = u0
+% for _ in range(4):
+%     u = a * u + b
+% formule = c + (u0 - c) * a**4
+% assert u == formule
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-002}
+\textbf{1.} $c = 0{,}75c+5 \iff 0{,}25c=5 \iff c=20$.
+
+\textbf{2.} $v_{n+1} = u_{n+1}-20 = (0{,}75u_n+5)-20 = 0{,}75u_n - 15 = 0{,}75(u_n-20) = 0{,}75\,v_n$. La suite $(v_n)$ est géométrique de raison $0{,}75$.
+
+\textbf{3.} $v_0 = u_0-20 = 2-20=-18$, donc $v_n = -18 \times 0{,}75^n$, soit :
+\[
+  u_n = 20 - 18 \times 0{,}75^n.
+\]
+\end{corrige}
