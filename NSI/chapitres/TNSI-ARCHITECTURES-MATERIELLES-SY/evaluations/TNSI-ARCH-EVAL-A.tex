@@ -1,0 +1,60 @@
+% META: {"id": "TNSI-ARCH-EVAL-A", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "evaluation", "capacites": ["T-ARCH-01", "T-ARCH-02A", "T-ARCH-02B", "T-ARCH-02C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation A --- Système sur puce et processus}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 8 pts (SoC, création de processus) ; Ex. 2 : 12 pts (ordonnancement, interblocage)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Système sur puce et processus} \hfill (8 points)
+
+\begin{enumerate}
+  \item (4 pts) Citer trois avantages de l'intégration de plusieurs composants sur un système sur puce, et son principal inconvénient.
+  \item (4 pts) Décrire, en une phrase, ce que fait le système d'exploitation lors de la création d'un processus.
+\end{enumerate}
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Ordonnancement et interblocage} \hfill (12 points)
+
+\begin{enumerate}
+  \item (6 pts) En utilisant \lstinline{tourniquet} du cours, déterminer l'ordre d'exécution pour trois processus \texttt{P1}, \texttt{P2}, \texttt{P3} de durées respectives $2$, $4$, $3$, avec une tranche de temps de $2$.
+  \item (6 pts) Trois processus \texttt{P1}, \texttt{P2}, \texttt{P3} retiennent chacun une ressource \texttt{R1}, \texttt{R2}, \texttt{R3}, et \texttt{P1} attend \texttt{R2}, \texttt{P2} attend \texttt{R1} (pas de troisième attente). Y a-t-il un interblocage ? Justifier avec \lstinline{a_un_interblocage} du cours.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def tourniquet(processus, tranche, duree_totale):
+%     ordre_execution = []
+%     file = list(processus)
+%     temps_restant = dict(duree_totale)
+%     while file:
+%         p = file.pop(0)
+%         execute = min(tranche, temps_restant[p])
+%         ordre_execution.append((p, execute))
+%         temps_restant[p] -= execute
+%         if temps_restant[p] > 0:
+%             file.append(p)
+%     return ordre_execution
+% resultat = tourniquet(["P1", "P2", "P3"], 2, {"P1": 2, "P2": 4, "P3": 3})
+% assert resultat == [("P1", 2), ("P2", 2), ("P3", 2), ("P2", 2), ("P3", 1)]
+%
+% def a_un_interblocage(attente, retenue_par):
+%     for depart in attente:
+%         visites = [depart]
+%         courant = depart
+%         while True:
+%             ressource_attendue = attente.get(courant)
+%             if ressource_attendue is None:
+%                 break
+%             detenteur = retenue_par.get(ressource_attendue)
+%             if detenteur is None:
+%                 break
+%             if detenteur in visites:
+%                 return True
+%             visites.append(detenteur)
+%             courant = detenteur
+%     return False
+% attente = {"P1": "R2", "P2": "R1"}
+% retenue_par = {"R1": "P1", "R2": "P2", "R3": "P3"}
+% assert a_un_interblocage(attente, retenue_par) is True
+% END-VERIFY
