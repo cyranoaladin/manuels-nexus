@@ -1,0 +1,86 @@
+% META: {"id": "TNSI-STRUCT-CR-014", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "cours", "capacites_codes": ["C05A", "C05B", "C05C", "C05D"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Graphes : modélisation et représentations}
+
+% ============================================================
+% STRATE 1 — Modelisation et deux representations
+% ============================================================
+
+\definition[1]{
+Un \textbf{graphe} est constitue de \textbf{sommets} (ou noeuds) relies par des \textbf{aretes}. Un graphe est \textbf{oriente} si ses aretes ont un sens (representees par des fleches), \textbf{non oriente} sinon.
+}
+
+\margeAppui{
+On modelise par un graphe toute situation faite d'elements en relation : reseau routier (sommets = villes, aretes = routes), reseau social (sommets = personnes, aretes = relations), pages web (sommets = pages, aretes orientees = liens hypertexte).
+}
+
+\propriete[Représentation par matrice d'adjacence]{
+Pour un graphe a $n$ sommets numerotes de $0$ a $n-1$, la \textbf{matrice d'adjacence} est un tableau $n \times n$ ou la case $(i,j)$ vaut $1$ (ou \lstinline{True}) s'il existe une arete de $i$ vers $j$, $0$ sinon.
+}
+
+\textbf{Exemple.} Graphe oriente a $3$ sommets : $0\to1$, $0\to2$, $1\to2$.
+
+\begin{python}
+matrice = [
+    [0, 1, 1],
+    [0, 0, 1],
+    [0, 0, 0],
+]
+\end{python}
+
+% BEGIN-VERIFY
+% matrice = [
+%     [0, 1, 1],
+%     [0, 0, 1],
+%     [0, 0, 0],
+% ]
+% # arete de i vers j <=> matrice[i][j] == 1
+% assert matrice[0][1] == 1  # 0 -> 1
+% assert matrice[0][2] == 1  # 0 -> 2
+% assert matrice[1][2] == 1  # 1 -> 2
+% assert matrice[1][0] == 0  # pas d'arete 1 -> 0
+% END-VERIFY
+
+\propriete[Représentation par listes de successeurs]{
+Pour chaque sommet, on stocke la \textbf{liste des sommets accessibles directement} (ses successeurs), par exemple sous forme de dictionnaire.
+}
+
+\textbf{Exemple.} Le meme graphe ($0\to1$, $0\to2$, $1\to2$) represente par listes de successeurs :
+\begin{python}
+successeurs = {
+    0: [1, 2],
+    1: [2],
+    2: [],
+}
+\end{python}
+
+% BEGIN-VERIFY
+% successeurs = {0: [1, 2], 1: [2], 2: []}
+% assert successeurs[0] == [1, 2]
+% assert successeurs[1] == [2]
+% assert successeurs[2] == []
+%
+% # conversion matrice -> listes de successeurs
+% matrice = [[0,1,1],[0,0,1],[0,0,0]]
+% conv = {i: [j for j in range(len(matrice)) if matrice[i][j] == 1] for i in range(len(matrice))}
+% assert conv == successeurs
+% END-VERIFY
+
+\textbf{Conversion.} Pour passer de la matrice aux listes de successeurs, on parcourt chaque ligne $i$ et on retient les indices $j$ ou \lstinline{matrice[i][j] == 1} :
+\begin{python}
+def matrice_vers_listes(matrice):
+    n = len(matrice)
+    return {i: [j for j in range(n) if matrice[i][j] == 1] for i in range(n)}
+\end{python}
+
+\propriete[Comparaison]{
+La \textbf{matrice d'adjacence} permet de tester en temps constant l'existence d'une arete $(i,j)$, mais occupe une memoire en $n^2$ meme si le graphe est peu dense (\textbf{creux}). Les \textbf{listes de successeurs} occupent une memoire proportionnelle au nombre d'aretes reellement presentes, plus adaptees aux graphes creux, mais tester l'existence d'une arete precise peut necessiter de parcourir une liste.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier qu'un sommet sans successeur doit quand meme apparaitre.} Dans la representation par listes de successeurs, un sommet isole ou puits (sans arete sortante) doit etre present dans le dictionnaire avec une liste \textbf{vide}, pas absent du dictionnaire : sinon, un parcours du graphe risque d'ignorer ce sommet.
+}
