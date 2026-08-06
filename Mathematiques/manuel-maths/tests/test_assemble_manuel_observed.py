@@ -322,7 +322,7 @@ def _commit_fixture(repository: Path, *paths: Path) -> None:
 def _professor_paths() -> list[str]:
     return [
         path.relative_to(GIT_ROOT).as_posix()
-        for chapter in assemble_manuel.CHAPITRES
+        for chapter in assemble_manuel.CHAPITRES_1SPE
         for path in assemble_manuel.collect_chapter(
             MANUAL_ROOT / "chapitres" / chapter,
             "professeur",
@@ -333,7 +333,7 @@ def _professor_paths() -> list[str]:
 def _student_paths() -> list[str]:
     return [
         path.relative_to(GIT_ROOT).as_posix()
-        for chapter in assemble_manuel.CHAPITRES
+        for chapter in assemble_manuel.CHAPITRES_1SPE
         for path in assemble_manuel.collect_chapter(
             MANUAL_ROOT / "chapitres" / chapter,
             "eleve",

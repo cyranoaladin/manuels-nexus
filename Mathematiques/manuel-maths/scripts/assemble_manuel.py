@@ -26,7 +26,7 @@ import yaml
 from common import ROOT
 from pdf_integrity import verify_pdf
 
-CHAPITRES = [
+CHAPITRES_1SPE = [
     "1SPE-SUITES",
     "1SPE-SECOND-DEGRE",
     "1SPE-DERIVATION-LOCAL",
@@ -38,6 +38,37 @@ CHAPITRES = [
     "1SPE-PROBA-COND",
     "1SPE-VARIABLES-ALEATOIRES",
 ]
+
+# Chapitres TSPE deja produits ; la cible finale (12 ou 13 chapitres) reste a
+# figer en Phase 1 (MISSION_PRIORITAIRE §10). Cette liste ne prejuge pas de
+# cette decision : elle raccorde seulement ce qui existe deja au modele
+# d'inventaire, sans en produire de nouveau contenu.
+CHAPITRES_TSPE = [
+    "TSPE-SUITES-LIMITES",
+    "TSPE-LIMITES-FONCTIONS",
+    "TSPE-DERIVATION-CONVEXITE",
+]
+
+# L'analyseur statique (scripts/inventory_assembly.py) ne reconnait un
+# "assembleur de manuel" que pour un fichier nomme exactement
+# .../scripts/assemble_manuel.py et ne lit qu'une seule constante CHAPITRES,
+# qu'il regroupe ensuite par manuel via le prefixe de chaque chapitre. Un
+# seul tel fichier peut donc exister par repertoire scripts/ : CHAPITRES doit
+# rester l'union de tous les manuels geres ici.
+CHAPITRES = CHAPITRES_1SPE + CHAPITRES_TSPE
+
+MANUAL_TEX_NAMES = {
+    "1SPE": "MANUEL_1SPE",
+    "TSPE_2026_2027": "MANUEL_TSPE_2026-2027",
+}
+MANUAL_CHAPTERS = {
+    "1SPE": CHAPITRES_1SPE,
+    "TSPE_2026_2027": CHAPITRES_TSPE,
+}
+MANUAL_TITLES = {
+    "1SPE": "Manuel de mathématiques — Première spécialité",
+    "TSPE_2026_2027": "Manuel de mathématiques — Terminale spécialité",
+}
 
 ORDER = [
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
@@ -327,7 +358,9 @@ def _git_relative_path(path: Path, git_root: Path, *, exists: bool) -> str:
     return relative.as_posix()
 
 
-def _secure_build_directory(manual_root: Path) -> Path:
+def _secure_build_directory(
+    manual_root: Path, subdirectory: str = "MANUEL_1SPE"
+) -> Path:
     try:
         root_metadata = manual_root.lstat()
     except OSError as error:
@@ -338,7 +371,7 @@ def _secure_build_directory(manual_root: Path) -> Path:
         raise AssemblyError("racine du manuel non sûre")
 
     current = manual_root
-    for component in ("build", "MANUEL_1SPE"):
+    for component in ("build", subdirectory):
         candidate = current / component
         try:
             candidate.mkdir(mode=0o755)
@@ -357,8 +390,10 @@ def _secure_build_directory(manual_root: Path) -> Path:
 
 
 @contextmanager
-def _exclusive_build_lock(build: Path, variant: str) -> Any:
-    lock_path = build / f".MANUEL_1SPE_{variant}.lock"
+def _exclusive_build_lock(
+    build: Path, variant: str, tex_name_prefix: str = "MANUEL_1SPE"
+) -> Any:
+    lock_path = build / f".{tex_name_prefix}_{variant}.lock"
     flags = (
         os.O_RDWR
         | os.O_CREAT
@@ -755,11 +790,14 @@ def render_master(
     variant: str,
     run_id: str,
     *,
+    manual: str = "1SPE",
     git_root: Path | None = None,
     tracked_paths: frozenset[str] | None = None,
 ) -> str:
     if variant not in {"eleve", "professeur"}:
         raise ValueError("variante inconnue")
+    if manual not in MANUAL_CHAPTERS:
+        raise ValueError("manuel inconnu")
     if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
         raise ValueError("identifiant de build invalide")
     if git_root is None:
@@ -768,20 +806,28 @@ def render_master(
         tracked_paths = load_tracked_paths(git_root)
     parts = []
 
-    # Transversal front matter
-    parts.append("\\input{transversal/page_de_garde}")
-    parts.append("\\newpage")
-    parts.append("\\input{transversal/avant_propos}")
-    parts.append("\\newpage")
-    parts.append("\\input{transversal/mode_emploi}")
-    parts.append("\\newpage")
-    parts.append("\\tableofcontents")
-    parts.append("\\newpage")
-    parts.append("\\input{transversal/index_capacites}")
-    parts.append("\\newpage")
+    # Transversal front matter. Le texte 1SPE (avant-propos, mode d'emploi,
+    # formulaire, memo Python) est ecrit pour la Premiere specialite et n'est
+    # pas reutilisable tel quel pour un autre manuel : les manuels autres que
+    # 1SPE recoivent une page de titre minimale a la place, sans prejuger de
+    # leur futur contenu transversal propre.
+    if manual == "1SPE":
+        parts.append("\\input{transversal/page_de_garde}")
+        parts.append("\\newpage")
+        parts.append("\\input{transversal/avant_propos}")
+        parts.append("\\newpage")
+        parts.append("\\input{transversal/mode_emploi}")
+        parts.append("\\newpage")
+        parts.append("\\tableofcontents")
+        parts.append("\\newpage")
+        parts.append("\\input{transversal/index_capacites}")
+        parts.append("\\newpage")
+    else:
+        parts.append("\\tableofcontents")
+        parts.append("\\newpage")
 
     # Chapters
-    for chap in CHAPITRES:
+    for chap in MANUAL_CHAPTERS[manual]:
         chap_dir = ROOT / "chapitres" / chap
         if not chap_dir.exists():
             print(f"SKIP {chap} (directory not found)")
@@ -804,12 +850,13 @@ def render_master(
         parts.append(opening)
         parts.append(inputs)
 
-    # Back matter
-    parts.append("\\appendix")
-    parts.append("\\clearpage")
-    parts.append("\\input{transversal/formulaire}")
-    parts.append("\\clearpage")
-    parts.append("\\input{transversal/memo_python}")
+    # Back matter (1SPE uniquement : formulaire et memo Python specifiques)
+    if manual == "1SPE":
+        parts.append("\\appendix")
+        parts.append("\\clearpage")
+        parts.append("\\input{transversal/formulaire}")
+        parts.append("\\clearpage")
+        parts.append("\\input{transversal/memo_python}")
 
     content = "\n".join(parts)
 
@@ -825,12 +872,17 @@ def render_master(
             )
         )
     )
-    master = f"""% Manuel 1SPE — variante {titre_var}
+    matiere_niveau = (
+        "\\matiere{Mathématiques}\\niveau{Première spécialité}"
+        if manual == "1SPE"
+        else "\\matiere{Mathématiques}\\niveau{Terminale spécialité}"
+    )
+    master = f"""% {MANUAL_TITLES[manual]} — variante {titre_var}
 % Assemble par scripts/assemble_manuel.py
 \\documentclass{{gabarits/nexus-manuel}}
 {variant_configuration}
-\\matiere{{Mathématiques}}\\niveau{{Première spécialité}}
-\\title{{Manuel de mathématiques — Première spécialité — Édition {titre_var}}}
+{matiere_niveau}
+\\title{{{MANUAL_TITLES[manual]} — Édition {titre_var}}}
 \\begin{{document}}
 \\typeout{{NEXUS_BUILD_RUN:{run_id}}}
 {content}
@@ -960,6 +1012,7 @@ def _collect_tool_versions(
 def _publish_observed_evidence(
     *,
     variant: str,
+    manual: str,
     run_id: str,
     git_root: Path,
     tex_path: Path,
@@ -1021,7 +1074,7 @@ def _publish_observed_evidence(
         "gates": gates,
         "generated_dependencies": [],
         "log_path": canonical["log"],
-        "manual": "1SPE",
+        "manual": manual,
         "pdf_path": canonical["pdf"],
         "preflight_report": canonical["preflight"],
         "preflight_succeeded": True,
@@ -1039,10 +1092,11 @@ def _main_locked(
     variant: str,
     record_observed: bool = False,
     *,
+    manual: str = "1SPE",
     active_runner: Callable[..., Any],
     build: Path,
 ) -> int:
-    tex_name = f"MANUEL_1SPE_{variant}"
+    tex_name = f"{MANUAL_TEX_NAMES[manual]}_{variant}"
     tex_path = build / f"{tex_name}.tex"
     pdf_path = build / f"{tex_name}.pdf"
     log_path = build / f"{tex_name}.log"
@@ -1066,6 +1120,7 @@ def _main_locked(
         master = render_master(
             variant,
             run_id,
+            manual=manual,
             git_root=git_root,
             tracked_paths=tracked_paths,
         )
@@ -1168,6 +1223,7 @@ def _main_locked(
     try:
         _publish_observed_evidence(
             variant=variant,
+            manual=manual,
             run_id=run_id,
             git_root=git_root,
             tex_path=tex_path,
@@ -1226,15 +1282,20 @@ def main(
     variant: str,
     record_observed: bool = False,
     *,
+    manual: str = "1SPE",
     runner: Callable[..., Any] | None = None,
 ) -> int:
+    if manual not in MANUAL_TEX_NAMES:
+        print("Build refusé : manuel inconnu")
+        return 1
     active_runner = _active_runner(runner)
     try:
-        build = _secure_build_directory(ROOT)
-        with _exclusive_build_lock(build, variant):
+        build = _secure_build_directory(ROOT, MANUAL_TEX_NAMES[manual])
+        with _exclusive_build_lock(build, variant, MANUAL_TEX_NAMES[manual]):
             return _main_locked(
                 variant,
                 record_observed,
+                manual=manual,
                 active_runner=active_runner,
                 build=build,
             )
@@ -1250,10 +1311,21 @@ def build_argument_parser() -> argparse.ArgumentParser:
         default="professeur",
         choices=["professeur", "eleve"],
     )
+    ap.add_argument(
+        "--manual",
+        default="1SPE",
+        choices=sorted(MANUAL_TEX_NAMES),
+    )
     ap.add_argument("--record-observed", action="store_true")
     return ap
 
 
 if __name__ == "__main__":
     args = build_argument_parser().parse_args()
-    sys.exit(main(args.variant, record_observed=args.record_observed))
+    sys.exit(
+        main(
+            args.variant,
+            record_observed=args.record_observed,
+            manual=args.manual,
+        )
+    )
