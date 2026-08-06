@@ -24,10 +24,10 @@
 % assert est_equilibre('((') == False
 % END-VERIFY
 \begin{exercice}{TNSI-STRUCT-EX-001}{2}{20}
-On veut verifier si une expression comportant des parentheses \lstinline{()}, crochets \lstinline{[]} et accolades \lstinline{{}} est \textbf{bien parenthesee} (chaque symbole ouvrant a un symbole fermant correspondant, dans le bon ordre).
+On veut verifier si une expression comportant des parentheses \lstinline{()}, crochets \lstinline{[]} et accolades \lstinline|{}| est \textbf{bien parenthesee} (chaque symbole ouvrant a un symbole fermant correspondant, dans le bon ordre).
 \begin{enumerate}
   \item Expliquer pourquoi une \textbf{pile} est une structure adaptee a ce probleme (justifier par les operations dominantes).
   \item Ecrire une fonction \lstinline{est_equilibre(expr)} qui utilise une pile (interface \lstinline{empiler}, \lstinline{depiler}, \lstinline{est_vide}) pour resoudre ce probleme.
-  \item Tester votre fonction sur \lstinline{"([{}])"} (bien parenthesee) et \lstinline{"([)]"} (mal parenthesee).
+  \item Tester votre fonction sur \lstinline|"([{}])"| (bien parenthesee) et \lstinline{"([)]"} (mal parenthesee).
 \end{enumerate}
 \end{exercice}
