@@ -17,7 +17,6 @@
 |---|---|
 | blocking_statuses | 1930 |
 | unassembled_objects | 207 |
-| broken_meta_references | 24 |
 | unavailable_inspiration_sources | 15 |
 | chapters_not_in_manual | 4 |
 | duplicate_assembly_objects | 3 |
@@ -32,11 +31,6 @@
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-003.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-003, scope=object
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-004.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-004, scope=object
 - broken_latex_references: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-035.tex, cible=1SPE-SECDEG-C1, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-035.tex, cible=1SPE-SECDEG-C2, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-035.tex, cible=1SPE-SECDEG-C3, champ=capacites[2], raison=capacite META absente du contrat du chapitre
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-036.tex, cible=1SPE-SECDEG-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- broken_meta_references: source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-036.tex, cible=1SPE-SECDEG-C4, champ=capacites[1], raison=capacite META absente du contrat du chapitre
 - chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml, cible=TSPE-DERIVATION-CONVEXITE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-LIMITES-FONCTIONS/contrat.yaml, cible=TSPE-LIMITES-FONCTIONS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-SUITES-LIMITES/contrat.yaml, cible=TSPE-SUITES-LIMITES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel

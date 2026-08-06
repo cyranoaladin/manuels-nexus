@@ -50,31 +50,8 @@
 ### broken_latex_references (1)
 - source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
 
-### broken_meta_references (24)
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-035.tex, cible=1SPE-SECDEG-C1, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-035.tex, cible=1SPE-SECDEG-C2, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-035.tex, cible=1SPE-SECDEG-C3, champ=capacites[2], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-036.tex, cible=1SPE-SECDEG-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-036.tex, cible=1SPE-SECDEG-C4, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-036.tex, cible=1SPE-SECDEG-C5, champ=capacites[2], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-037.tex, cible=1SPE-SECDEG-C2, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-037.tex, cible=1SPE-SECDEG-C5, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-037.tex, cible=1SPE-SECDEG-C6, champ=capacites[2], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-038.tex, cible=1SPE-SECDEG-C1, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-038.tex, cible=1SPE-SECDEG-C3, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-038.tex, cible=1SPE-SECDEG-C4, champ=capacites[2], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex, cible=1SPE-SECDEG-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex, cible=1SPE-SECDEG-C5, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-039.tex, cible=1SPE-SECDEG-C6, champ=capacites[2], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex, cible=1SPE-SECDEG-C1, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex, cible=1SPE-SECDEG-C2, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-040.tex, cible=1SPE-SECDEG-C6, champ=capacites[2], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-041.tex, cible=1SPE-SECDEG-C3, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-041.tex, cible=1SPE-SECDEG-C4, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-041.tex, cible=1SPE-SECDEG-C5, champ=capacites[2], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-042.tex, cible=1SPE-SECDEG-C2, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-042.tex, cible=1SPE-SECDEG-C3, champ=capacites[1], raison=capacite META absente du contrat du chapitre
-- source=Mathematiques/manuel-maths/chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-042.tex, cible=1SPE-SECDEG-C6, champ=capacites[2], raison=capacite META absente du contrat du chapitre
+### broken_meta_references (0)
+- Aucune.
 
 ### chapters_not_in_manual (4)
 - source=Mathematiques/manuel-maths/chapitres/TSPE-DERIVATION-CONVEXITE/contrat.yaml, cible=TSPE-DERIVATION-CONVEXITE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
@@ -203,9 +180,9 @@
 
 ### Mathématiques Première
 - Éligible publication: False
-- banque_evaluations : absent (artifacts=0)
-- livret_methodes : partial (artifacts=0)
-- livret_remediation : partial (artifacts=0)
+- banque_evaluations : compiled (artifacts=1)
+- livret_methodes : compiled (artifacts=1)
+- livret_remediation : compiled (artifacts=1)
 - manuel_eleve : compiled (artifacts=1)
 - manuel_professeur : compiled (artifacts=1)
 
