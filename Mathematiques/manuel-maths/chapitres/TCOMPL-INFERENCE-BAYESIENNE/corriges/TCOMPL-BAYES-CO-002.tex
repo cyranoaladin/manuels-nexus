@@ -1,0 +1,12 @@
+% META: {"id": "TCOMPL-BAYES-CO-002", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-002", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_pluie_nuages = Rational(9, 10)
+% P_nuages_pluie = Rational(3, 10)
+% assert P_pluie_nuages != P_nuages_pluie
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-002}
+\textbf{1.} $P_P(N)$ et $P_N(P)$ conditionnent sur des événements différents ($P$ dans un cas, $N$ dans l'autre) : il n'y a aucune raison qu'ils soient égaux. Les nuages sont beaucoup plus fréquents que la pluie (on peut avoir des nuages sans pluie, mais rarement de la pluie sans nuages), ce qui explique que $P_P(N)$ soit élevé alors que $P_N(P)$ est plus faible.
+
+\textbf{2.} La probabilité a posteriori de pluie sachant qu'on observe des nuages est $P_N(P) = 0{,}3$ : c'est la probabilité de l'événement d'intérêt ($P$) \textbf{sachant l'observation} ($N$).
+\end{corrige}

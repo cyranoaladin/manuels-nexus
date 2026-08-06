@@ -1,0 +1,67 @@
+% META: {"id": "TCOMPL-BAYES-CR-011", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "cours", "capacites_codes": ["C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Tests de dépistage : sensibilité, spécificité, valeurs prédictives}
+
+% ============================================================
+% STRATE 1 — Vocabulaire des tests binaires
+% ============================================================
+
+\definition[1]{
+Pour un test de dépistage d'une maladie, on note $M$ l'événement \og être malade \fg{} et $T$ l'événement \og test positif \fg{}. On définit :
+\begin{itemize}
+  \item la \textbf{sensibilité} $Se = P_M(T)$ : probabilité que le test soit positif sachant que le patient est malade ;
+  \item la \textbf{spécificité} $Sp = P_{\bar M}(\bar T)$ : probabilité que le test soit négatif sachant que le patient est sain ;
+  \item la \textbf{valeur prédictive positive} $VPP = P_T(M)$ : probabilité d'être malade sachant le test positif ;
+  \item la \textbf{valeur prédictive négative} $VPN = P_{\bar T}(\bar M)$ : probabilité d'être sain sachant le test négatif.
+\end{itemize}
+}
+
+\margeAppui{
+Sensibilité et spécificité sont des propriétés \textbf{intrinsèques} du test (mesurées lors de sa conception, indépendantes de la population testée). Les valeurs prédictives, elles, dépendent aussi de la \textbf{prévalence} de la maladie dans la population testée.
+}
+
+\exemple{
+Un test de sensibilité $Se=0{,}95$ et de spécificité $Sp=0{,}90$ est appliqué à une population où la prévalence (proportion de malades) est $p=P(M)=0{,}01$. Par la formule de Bayes :
+\[
+  VPP = P_T(M) = \frac{Se \times p}{Se\times p + (1-Sp)\times(1-p)} = \frac{0{,}95\times0{,}01}{0{,}95\times0{,}01+0{,}10\times0{,}99} \approx 0{,}088.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% Se, Sp, p = Rational(95,100), Rational(90,100), Rational(1,100)
+% VPP = Se*p / (Se*p + (1-Sp)*(1-p))
+% assert abs(N(VPP) - 0.088) < 0.001
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — VPP en fonction de la prevalence
+% ============================================================
+
+\propriete[La VPP dépend fortement de la prévalence]{
+Pour un test de sensibilité et spécificité \textbf{fixées}, la valeur prédictive positive $VPP(p) = \dfrac{Se\times p}{Se\times p+(1-Sp)(1-p)}$ est une fonction \textbf{croissante} de la prévalence $p$ : plus la maladie est répandue dans la population testée, plus un test positif est fiable.
+}
+
+\exemple{
+Avec le même test ($Se=0{,}95$, $Sp=0{,}90$), comparons deux populations : l'une de prévalence $p=0{,}01$ (VPP $\approx0{,}088$, calculé ci-dessus), l'autre de prévalence $p=0{,}30$ (population à risque, dépistage ciblé) :
+\[
+  VPP(0{,}30) = \frac{0{,}95\times0{,}30}{0{,}95\times0{,}30+0{,}10\times0{,}70} \approx 0{,}803.
+\]
+La fiabilité d'un même test positif passe ainsi de $8{,}8\%$ à $80{,}3\%$ selon la population testée.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% Se, Sp = Rational(95,100), Rational(90,100)
+% def VPP(p):
+%     return Se*p / (Se*p + (1-Sp)*(1-p))
+% assert abs(N(VPP(Rational(30,100))) - 0.803) < 0.001
+% # verifie la croissance de VPP en fonction de p sur plusieurs points
+% valeurs_p = [Rational(1,100), Rational(5,100), Rational(10,100), Rational(30,100), Rational(50,100)]
+% valeurs_vpp = [N(VPP(pp)) for pp in valeurs_p]
+% assert valeurs_vpp == sorted(valeurs_vpp)
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire qu'un test très sensible et spécifique est toujours fiable, quelle que soit la population.} Un même test peut avoir une VPP très différente selon qu'il est appliqué à un dépistage \textbf{de masse} (prévalence faible, VPP faible, beaucoup de faux positifs) ou à un dépistage \textbf{ciblé} sur une population à risque (prévalence plus élevée, VPP plus élevée) : la qualité intrinsèque du test (Se, Sp) ne suffit pas à juger de sa fiabilité pratique.
+}

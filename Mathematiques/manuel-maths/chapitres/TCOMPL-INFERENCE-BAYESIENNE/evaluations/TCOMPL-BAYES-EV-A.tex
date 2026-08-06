@@ -1,0 +1,34 @@
+% META: {"id": "TCOMPL-BAYES-EV-A", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "evaluation", "version": "A", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% PA = Rational(3, 100)
+% PA_B = Rational(85, 100)
+% PnotA_B = Rational(4, 100)
+% PB = PA*PA_B + (1-PA)*PnotA_B
+% assert PB == Rational(643, 10000)
+% PB_A = PA_B*PA/PB
+% assert PB_A == Rational(255, 643)
+% assert abs(float(PB_A) - 0.3966) < 0.001
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-BAYES-EV-A}{45}
+
+\begin{exercice}{TCOMPL-BAYES-EV-A-EX1}{2}{40}
+\textbf{Exercice unique} (20 points) --- \textit{Capacités C1, C2, C3}
+
+\medskip
+
+Dans un pays, $3\%$ de la population est porteuse d'un anticorps particulier ($P(A)=0{,}03$). Un test le détecte avec une probabilité de $85\%$ quand il est présent, et donne un résultat positif à tort avec une probabilité de $4\%$ chez les personnes non porteuses.
+\begin{enumerate}
+  \item (4 pts) Rappeler la formule de Bayes reliant $P_B(A)$, $P_A(B)$, $P(A)$ et $P(B)$.
+  \item (6 pts) Calculer $P(B)$, la probabilité qu'un individu pris au hasard ait un test positif.
+  \item (6 pts) En déduire $P_B(A)$.
+  \item (4 pts) Expliquer pourquoi $P_B(A)$ et $P_A(B)=0{,}85$ sont si différents, en une phrase.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-BAYES-EV-A-corrige", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-BAYES-EV-A", "capacites_codes": ["C1", "C2", "C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% PA = Rational(3, 100)
+% PA_B = Rational(85, 100)
+% PnotA_B = Rational(4, 100)
+% PB = PA*PA_B + (1-PA)*PnotA_B
+% assert PB == Rational(643, 10000)
+% PB_A = PA_B*PA/PB
+% assert PB_A == Rational(255, 643)
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EV-A-EX1}
+\textbf{1.} $P_B(A) = \dfrac{P_A(B)\times P(A)}{P(B)}$.
+
+\textbf{2.} $P(B) = P(A)\times P_A(B) + P(\bar A)\times P_{\bar A}(B) = 0{,}03\times0{,}85+0{,}97\times0{,}04 = 0{,}0255+0{,}0388 = 0{,}0643$.
+
+\textbf{3.} $P_B(A) = \dfrac{0{,}85\times0{,}03}{0{,}0643} = \dfrac{0{,}0255}{0{,}0643} \approx 0{,}397$.
+
+\textbf{4.} $P_A(B)=0{,}85$ mesure la fiabilité du test chez les personnes \textbf{déjà connues} porteuses ; $P_B(A)\approx0{,}397$ mesure la probabilité d'être réellement porteur \textbf{après} un résultat positif, dans toute la population -- cette dernière est plombée par le nombre de faux positifs, très important car peu de gens sont réellement porteurs ($3\%$ seulement).
+\end{corrige}

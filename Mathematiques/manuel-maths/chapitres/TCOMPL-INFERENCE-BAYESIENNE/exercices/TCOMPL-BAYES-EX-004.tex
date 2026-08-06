@@ -1,0 +1,18 @@
+% META: {"id": "TCOMPL-BAYES-EX-004", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C5"], "capacites_codes": ["C5"], "methodes": [], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-004.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% Se, Sp = Rational(90, 100), Rational(95, 100)
+% def VPP(p):
+%     return Se*p / (Se*p + (1-Sp)*(1-p))
+% assert abs(N(VPP(Rational(1,100))) - 0.1538) < 0.001
+% assert abs(N(VPP(Rational(20,100))) - 0.8182) < 0.001
+% assert VPP(Rational(20,100)) > VPP(Rational(1,100))
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-004}{2}{15}
+Un test a une sensibilité $Se=0{,}90$ et une spécificité $Sp=0{,}95$.
+\begin{enumerate}
+  \item Calculer la $VPP$ de ce test appliqué à une population générale de prévalence $p=0{,}01$.
+  \item Calculer la $VPP$ de ce même test appliqué à une population à risque, de prévalence $p=0{,}20$.
+  \item Comparer les deux résultats et expliquer, en une phrase, pourquoi ce même test est utilisé différemment selon la population ciblée.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,18 @@
+% META: {"id": "TCOMPL-BAYES-EX-001", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C2"], "capacites_codes": ["C2"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-001.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% PA = Rational(1, 20)
+% PA_B = Rational(4, 5)
+% PnotA_B = Rational(1, 10)
+% PB = PA*PA_B + (1-PA)*PnotA_B
+% assert PB == Rational(27, 200)
+% PB_A = PA_B * PA / PB
+% assert PB_A == Rational(8, 27)
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-001}{1}{15}
+Dans une population, $5\%$ des individus possèdent un certain gène ($P(A)=0{,}05$). Un test génétique le détecte avec une probabilité de $80\%$ quand le gène est présent, et donne un résultat positif à tort avec une probabilité de $10\%$ chez les personnes sans le gène.
+\begin{enumerate}
+  \item Calculer $P(B)$, la probabilité qu'un individu pris au hasard ait un test positif.
+  \item En déduire $P_B(A)$, la probabilité qu'un individu testé positif possède réellement le gène.
+\end{enumerate}
+\end{exercice}

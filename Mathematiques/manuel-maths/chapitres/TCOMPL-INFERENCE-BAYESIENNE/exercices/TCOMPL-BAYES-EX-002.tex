@@ -1,0 +1,14 @@
+% META: {"id": "TCOMPL-BAYES-EX-002", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "exercice", "capacites": ["TCOMPL-BAYES-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 1, "competences": ["raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/exercices/TCOMPL-BAYES-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-INFERENCE-BAYESIENNE/corriges/TCOMPL-BAYES-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% P_pluie_nuages = Rational(9, 10)
+% P_nuages_pluie = Rational(3, 10)
+% assert P_pluie_nuages != P_nuages_pluie
+% END-VERIFY
+\begin{exercice}{TCOMPL-BAYES-EX-002}{1}{10}
+On considère les événements $N$ = \og il y a des nuages \fg{} et $P$ = \og il pleut \fg{}. On sait que $P_P(N) = 0{,}9$ (s'il pleut, il y a presque toujours des nuages) et $P_N(P) = 0{,}3$ (s'il y a des nuages, il ne pleut que $30\%$ du temps).
+\begin{enumerate}
+  \item Expliquer, sans calcul, pourquoi il n'est pas surprenant que $P_P(N) \neq P_N(P)$.
+  \item Lequel de ces deux nombres correspond à la probabilité \og a posteriori \fg{} de pluie, sachant qu'on observe des nuages ?
+\end{enumerate}
+\end{exercice}
