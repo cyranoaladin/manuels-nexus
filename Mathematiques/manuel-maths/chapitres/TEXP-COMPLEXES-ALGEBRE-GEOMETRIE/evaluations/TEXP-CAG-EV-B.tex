@@ -1,0 +1,34 @@
+% META: {"id": "TEXP-CAG-EV-B", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "evaluation", "version": "B", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, I, Abs, arg, pi, simplify
+% z = 3 - I*3*sqrt(3)
+% assert simplify(Abs(z) - 6) == 0
+% assert simplify(arg(z) - (-pi/3)) == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-CAG-EV-B}{50}
+
+\begin{exercice}{TEXP-CAG-EV-B-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C4}
+
+\medskip
+
+Déterminer le module et un argument de $z=3-3i\sqrt{3}$.
+\end{exercice}
+
+\begin{exercice}{TEXP-CAG-EV-B-EX2}{2}{30}
+\textbf{Exercice 2} (12 points) --- \textit{Capacité C5}
+
+\medskip
+
+\begin{enumerate}
+  \item (5 pts) Démontrer que pour tout $z\in\mathbb{C}$, $|z|^2=z\bar z$.
+  \item (7 pts) En déduire une démonstration de $|zw|=|z||w|$ pour tous $z,w\in\mathbb{C}$ (on utilisera que $\overline{zw}=\bar z\bar w$, résultat admis pour cette question).
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

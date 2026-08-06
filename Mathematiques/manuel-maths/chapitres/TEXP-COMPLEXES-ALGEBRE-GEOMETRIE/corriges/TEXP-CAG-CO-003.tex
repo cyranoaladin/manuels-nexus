@@ -1,0 +1,12 @@
+% META: {"id": "TEXP-CAG-CO-003", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-003", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, I, Abs, arg, pi, simplify
+% z = -sqrt(2) + I*sqrt(2)
+% assert simplify(Abs(z) - 2) == 0
+% assert simplify(arg(z) - 3*pi/4) == 0
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EX-003}
+$|z| = \sqrt{(-\sqrt2)^2+(\sqrt2)^2} = \sqrt{2+2} = 2$.
+
+$\cos\theta = \dfrac{-\sqrt2}{2} = -\dfrac{\sqrt2}{2}$ et $\sin\theta = \dfrac{\sqrt2}{2}$ : ces valeurs correspondent à $\theta = \dfrac{3\pi}{4}$.
+\end{corrige}

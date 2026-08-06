@@ -1,0 +1,25 @@
+% META: {"id": "TEXP-CAG-EV-B-corrige", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-CAG-EV-B", "capacites_codes": ["C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, I, Abs, arg, pi, simplify, symbols, conjugate, expand
+% z = 3 - I*3*sqrt(3)
+% assert simplify(Abs(z) - 6) == 0
+% assert simplify(arg(z) - (-pi/3)) == 0
+% a, b = symbols('a b', real=True)
+% zz = a + I*b
+% assert simplify(expand(zz*conjugate(zz)) - (a**2+b**2)) == 0
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EV-B-EX1}
+$|z| = \sqrt{3^2+(3\sqrt3)^2} = \sqrt{9+27} = \sqrt{36} = 6$.
+
+$\cos\theta = \dfrac{3}{6}=\dfrac{1}{2}$ et $\sin\theta = \dfrac{-3\sqrt3}{6}=-\dfrac{\sqrt3}{2}$ : ces valeurs correspondent à $\theta=-\dfrac{\pi}{3}$.
+\end{corrige}
+
+\begin{corrige}{TEXP-CAG-EV-B-EX2}
+\textbf{1.} Écrivons $z=a+ib$. Alors $z\bar z = (a+ib)(a-ib) = a^2-i^2b^2 = a^2+b^2$ (car $i^2=-1$). Or $|z|^2=a^2+b^2$ par définition, donc $|z|^2=z\bar z$.
+
+\textbf{2.} En utilisant le résultat précédent et $\overline{zw}=\bar z\bar w$ :
+\[
+  |zw|^2 = (zw)\overline{(zw)} = zw\bar z\bar w = (z\bar z)(w\bar w) = |z|^2|w|^2.
+\]
+$|zw|$ et $|z||w|$ sont deux réels positifs de carrés égaux, donc égaux : $|zw|=|z||w|$.
+\end{corrige}

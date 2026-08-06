@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-RE-C1", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : oubli de i^2=-1
+%---------------------------------------------------------------
+
+\begin{exercice}{TEXP-CAG-RE-C1-EX1}{1}{10}
+Un élève développe $(2+3i)^2$ et obtient $4+9i^2=4-9=-5$ en oubliant le terme du double produit. Recalculer correctement $(2+3i)^2$ et identifier l'erreur.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import I, expand
+% resultat_correct = expand((2+3*I)**2)
+% assert resultat_correct == -5 + 12*I
+% resultat_faux = 4 + 9*(-1)
+% assert resultat_faux != resultat_correct
+% END-VERIFY
+
+\begin{corrige}{TEXP-CAG-RE-C1-EX1}
+Le développement complet de $(2+3i)^2 = 2^2 + 2\times2\times3i + (3i)^2 = 4+12i+9i^2 = 4+12i-9 = -5+12i$. L'élève a oublié le terme du \textbf{double produit} $2\times2\times3i=12i$ dans l'identité remarquable $(a+b)^2=a^2+2ab+b^2$ : cette identité reste valable dans $\mathbb{C}$, il ne faut surtout pas l'oublier.
+\end{corrige}

@@ -1,0 +1,12 @@
+% META: {"id": "TEXP-CAG-EX-002", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C2"], "capacites_codes": ["C2"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-002.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, I, Eq, solve, conjugate
+% a, b = symbols('a b', real=True)
+% z = a + I*b
+% eq = Eq(2*z - conjugate(z), 6 + 9*I)
+% sol = solve(eq, [a, b])
+% assert sol == {a: 6, b: 3}
+% END-VERIFY
+\begin{exercice}{TEXP-CAG-EX-002}{2}{15}
+Déterminer le nombre complexe $z=a+ib$ (avec $a,b\in\mathbb{R}$) vérifiant $2z-\bar z = 6+9i$.
+\end{exercice}

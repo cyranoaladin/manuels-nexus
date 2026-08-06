@@ -1,0 +1,36 @@
+% META: {"id": "TEXP-CAG-EV-A", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, Eq, solve, expand
+% z = symbols('z')
+% sol = solve(Eq((3-2*I)*z, 7+4*I), z)
+% assert sol == [1 + 2*I]
+% assert expand((1-I)**3) == -2 - 2*I
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-CAG-EV-A}{50}
+
+\begin{exercice}{TEXP-CAG-EV-A-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C2}
+
+\medskip
+
+Résoudre l'équation $(3-2i)z = 7+4i$, sous forme algébrique.
+\end{exercice}
+
+\begin{exercice}{TEXP-CAG-EV-A-EX2}{2}{30}
+\textbf{Exercice 2} (12 points) --- \textit{Capacités C1, C3}
+
+\medskip
+
+\begin{enumerate}
+  \item (4 pts) Développer $(1-i)^3$ à l'aide de la formule du binôme.
+  \item (4 pts) Démontrer que pour tous $z,w\in\mathbb{C}$, $\overline{zw}=\bar z\bar w$.
+  \item (4 pts) En déduire $\overline{(1-i)^3}$ sans nouveau développement complet, puis vérifier par le calcul direct.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

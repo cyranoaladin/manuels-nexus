@@ -1,0 +1,15 @@
+% META: {"id": "TEXP-CAG-CO-004", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-004", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, expand
+% assert expand((1+I)**4) == -4
+% assert expand((1+I)**2) == 2*I
+% assert expand((2*I)**2) == -4
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EX-004}
+Par la formule du binôme :
+\[
+  (1+i)^4 = \sum_{k=0}^4 \binom{4}{k}1^k i^{4-k} = i^4+4i^3+6i^2+4i+1 = 1-4i-6+4i+1 = -4.
+\]
+
+Vérification : $(1+i)^2 = 1+2i+i^2 = 1+2i-1 = 2i$, donc $(1+i)^4 = (2i)^2 = 4i^2 = -4$. Les deux méthodes donnent bien le même résultat.
+\end{corrige}
