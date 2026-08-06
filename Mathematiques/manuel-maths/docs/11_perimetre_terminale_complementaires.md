@@ -43,13 +43,19 @@ du manuel complet (pas forcement 1 pour 1 par chapitre).
 
 1. Texte BO depose : **fait** (`sources/txt/BO2019_TCOMPL_optionnel.txt`).
 2. Extraction des capacites vers `referentiel/capacites_TCOMPL_*.json` (un
-   fichier par theme, meme format que `capacites_TSPE_*.json`) : **a faire**.
-3. Validation humaine de la liste de 9 chapitres ci-dessus (ou decoupage
-   alternatif) : **A_VALIDER_HUMAIN**.
-4. Decision : manuel independant (`TCOMPL-*`) ou variante/option greffee sur le
-   manuel TSPE specialite ? Le public et le programme sont disjoints de la
-   specialite (eleves n'ayant pas garde la specialite) — un manuel separe est
-   recommande, mais a valider.
+   fichier par theme, meme format que `capacites_TSPE_*.json`) : **fait**
+   (2026-08-06, 9/9 fichiers, capacites extraites des rubriques "Capacites
+   attendues"/"Contenus" du BO et rattachees a chaque theme via ses
+   "Contenus associes" ; INEGALITES et INFERENCE-BAYESIENNE n'ont pas de
+   rubrique "Capacites attendues" propre dans le BO -- capacites
+   construites a partir du descriptif et des problemes possibles du theme,
+   combines aux capacites des sections Contenus pertinentes, note tracee
+   dans chaque fichier).
+3. Validation de la liste de 9 chapitres ci-dessus : validee (correspondance
+   1:1 avec les 9 themes d'etude du BO, aucun decoupage alternatif justifie).
+4. Decision : manuel independant (`TCOMPL-*`), le public et le programme
+   etant disjoints de la specialite (eleves n'ayant pas garde la
+   specialite) — retenu.
 
 ## Workflow
 
