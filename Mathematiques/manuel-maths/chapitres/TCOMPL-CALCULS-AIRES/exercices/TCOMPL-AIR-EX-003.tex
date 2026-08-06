@@ -1,0 +1,19 @@
+% META: {"id": "TCOMPL-AIR-EX-003", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-003.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq, integrate, Rational
+% x = symbols('x')
+% f = -x**2 + 4
+% g = x**2 - 2*x
+% inter = solve(Eq(f, g), x)
+% assert inter == [-1, 2]
+% aire = integrate(f - g, (x, -1, 2))
+% assert aire == Rational(9, 1)
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-003}{2}{20}
+Soit $f(x) = -x^2+4$ et $g(x) = x^2-2x$.
+\begin{enumerate}
+  \item Déterminer les abscisses des points d'intersection des courbes de $f$ et $g$.
+  \item Justifier que $f \geq g$ entre ces deux abscisses.
+  \item Calculer l'aire comprise entre les deux courbes.
+\end{enumerate}
+\end{exercice}

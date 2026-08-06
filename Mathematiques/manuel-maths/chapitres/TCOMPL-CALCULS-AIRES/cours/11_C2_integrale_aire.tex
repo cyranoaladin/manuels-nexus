@@ -1,0 +1,66 @@
+% META: {"id": "TCOMPL-AIR-CR-011", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "cours", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{L'intégrale comme aire}
+
+% ============================================================
+% STRATE 1 — Definition et relation de Chasles
+% ============================================================
+
+\definition[1]{
+Soit $f$ une fonction continue et \textbf{positive} sur $[a,b]$. L'\textbf{intégrale} de $f$ entre $a$ et $b$, notée $\displaystyle\int_a^b f(x)\,\mathrm{d}x$, est l'\textbf{aire}, exprimée en unités d'aire, de la partie du plan délimitée par la courbe de $f$, l'axe des abscisses, et les droites d'équation $x=a$ et $x=b$.
+}
+
+\propriete[Relation de Chasles]{
+Pour $f$ continue positive sur $[a,c]$ et $a \leq b \leq c$ :
+\[
+  \int_a^c f(x)\,\mathrm{d}x = \int_a^b f(x)\,\mathrm{d}x + \int_b^c f(x)\,\mathrm{d}x.
+\]
+}
+
+\margeAppui{
+Cette relation traduit simplement que l'aire totale sous la courbe entre $a$ et $c$ est la somme de l'aire entre $a$ et $b$ et de l'aire entre $b$ et $c$ : c'est la propriété d'additivité des aires.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate
+% x = symbols('x')
+% f = x**2 + 1
+% total = integrate(f, (x, 0, 5))
+% partiel = integrate(f, (x, 0, 2)) + integrate(f, (x, 2, 5))
+% assert total == partiel
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Estimer et encadrer par la methode des rectangles
+% ============================================================
+
+\propriete[Encadrement par la méthode des rectangles]{
+Pour $f$ continue, positive et \textbf{croissante} sur $[a,b]$, on subdivise $[a,b]$ en $n$ intervalles de même largeur $h=\dfrac{b-a}{n}$. La somme des aires des rectangles de hauteur \textbf{minimale} (à gauche) sous-estime l'intégrale, celle des rectangles de hauteur \textbf{maximale} (à droite) la surestime :
+\[
+  h\sum_{k=0}^{n-1} f(a+kh) \ \leq\ \int_a^b f(x)\,\mathrm{d}x \ \leq\ h\sum_{k=1}^{n} f(a+kh).
+\]
+}
+
+\exemple{
+Encadrons $\displaystyle\int_0^1 x^2\,\mathrm{d}x$ avec $n=4$ rectangles ($f(x)=x^2$, croissante sur $[0,1]$, $h=0{,}25$) :
+\[
+  0{,}25\times(0^2+0{,}25^2+0{,}5^2+0{,}75^2) \ \leq\ \int_0^1 x^2\,\mathrm{d}x \ \leq\ 0{,}25\times(0{,}25^2+0{,}5^2+0{,}75^2+1^2).
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational, integrate, symbols
+% x = symbols('x')
+% h = Rational(1, 4)
+% minorant = h * sum((k*h)**2 for k in range(0, 4))
+% majorant = h * sum((k*h)**2 for k in range(1, 5))
+% exact = integrate(x**2, (x, 0, 1))
+% assert minorant <= exact <= majorant
+% assert exact == Rational(1, 3)
+% assert minorant == Rational(7, 32)
+% assert majorant == Rational(15, 32)
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Inverser minorant et majorant.} Pour une fonction \textbf{croissante}, les rectangles \og à gauche \fg{} (hauteur $f$ au début de chaque sous-intervalle) donnent la somme la plus \textbf{petite} (minorant), et les rectangles \og à droite \fg{} donnent la somme la plus \textbf{grande} (majorant). Pour une fonction \textbf{décroissante}, c'est l'inverse.
+}

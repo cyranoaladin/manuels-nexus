@@ -1,0 +1,11 @@
+% META: {"id": "TCOMPL-AIR-EX-001", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C4"], "capacites_codes": ["C4"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-001.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, simplify, ln
+% x = symbols('x')
+% f = x / (x**2 + 1)
+% F = ln(x**2 + 1) / 2
+% assert simplify(diff(F, x) - f) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-001}{1}{10}
+Déterminer une primitive de $f(x) = \dfrac{x}{x^2+1}$ sur $\mathbb{R}$ (on reconnaîtra une forme $\dfrac{u'}{u}$).
+\end{exercice}

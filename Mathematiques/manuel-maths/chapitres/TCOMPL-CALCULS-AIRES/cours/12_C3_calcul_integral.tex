@@ -1,0 +1,90 @@
+% META: {"id": "TCOMPL-AIR-CR-012", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "cours", "capacites_codes": ["C3", "C6"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Calculer une intégrale à l'aide des primitives}
+
+% ============================================================
+% STRATE 1 — Calcul par primitives, valeur moyenne, aire entre courbes
+% ============================================================
+
+\theoreme[Calcul d'une intégrale par primitive]{
+Si $F$ est une primitive de $f$, continue sur $[a,b]$, alors :
+\[
+  \int_a^b f(x)\,\mathrm{d}x = F(b) - F(a).
+\]
+}
+
+\exemple{
+$\displaystyle\int_1^3 x^2\,\mathrm{d}x = \left[\frac{x^3}{3}\right]_1^3 = \frac{27}{3}-\frac{1}{3} = \frac{26}{3}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% assert integrate(x**2, (x, 1, 3)) == Rational(26, 3)
+% END-VERIFY
+
+\definition[1]{
+La \textbf{valeur moyenne} de $f$ continue sur $[a,b]$ (avec $a<b$) est :
+\[
+  m = \frac{1}{b-a}\int_a^b f(x)\,\mathrm{d}x.
+\]
+}
+
+\propriete[Aire entre deux courbes]{
+Si $f \geq g$ sur $[a,b]$, l'aire comprise entre les courbes de $f$ et $g$ sur $[a,b]$ vaut $\displaystyle\int_a^b \big(f(x)-g(x)\big)\,\mathrm{d}x$.
+}
+
+\exemple{
+Aire entre $f(x)=x+2$ et $g(x)=x^2$ sur $[-1,2]$ (on vérifie $f\geq g$ sur cet intervalle) :
+\[
+  \int_{-1}^{2} \big((x+2)-x^2\big)\,\mathrm{d}x = \left[\frac{x^2}{2}+2x-\frac{x^3}{3}\right]_{-1}^{2} = \frac{9}{2}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational, solve, Eq
+% x = symbols('x')
+% f = x + 2
+% g = x**2
+% # verifier f >= g sur [-1,2] (intersection en x=-1 et x=2)
+% assert solve(Eq(f, g), x) == [-1, 2]
+% aire = integrate(f - g, (x, -1, 2))
+% assert aire == Rational(9, 2)
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Theoreme fondamental : F(x)=integrale de f a pour derivee f
+% ============================================================
+
+\theoreme[Fonction intégrale]{
+Soit $f$ une fonction continue, positive et \textbf{croissante} sur $[a,b]$. La fonction $F$ définie sur $[a,b]$ par $F(x) = \displaystyle\int_a^x f(t)\,\mathrm{d}t$ est dérivable sur $[a,b]$, et $F' = f$.
+}
+
+\demonstration{
+Soit $x_0 \in [a,b[$ et $h>0$ petit. Par la relation de Chasles :
+\[
+  F(x_0+h) - F(x_0) = \int_{x_0}^{x_0+h} f(t)\,\mathrm{d}t.
+\]
+Comme $f$ est croissante sur $[x_0,x_0+h]$, on a $f(x_0) \leq f(t) \leq f(x_0+h)$ pour $t\in[x_0,x_0+h]$, donc en encadrant l'aire par des rectangles :
+\[
+  h\,f(x_0) \ \leq\ F(x_0+h)-F(x_0) \ \leq\ h\,f(x_0+h).
+\]
+En divisant par $h>0$ :
+\[
+  f(x_0) \ \leq\ \frac{F(x_0+h)-F(x_0)}{h} \ \leq\ f(x_0+h).
+\]
+Quand $h\to0^+$, $f(x_0+h)\to f(x_0)$ par continuité de $f$ : par encadrement, $\dfrac{F(x_0+h)-F(x_0)}{h} \to f(x_0)$. Donc $F'(x_0)=f(x_0)$ (un raisonnement analogue s'applique pour $h<0$).
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, diff, simplify
+% x, t = symbols('x t')
+% f = t**2 + 1
+% F = integrate(f, (t, 0, x))
+% Fp = diff(F, x)
+% assert simplify(Fp - (x**2 + 1)) == 0
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre la variable d'intégration et la borne.} Dans $F(x) = \displaystyle\int_a^x f(t)\,\mathrm{d}t$, la lettre $t$ (variable d'intégration, \og muette \fg{}) est différente de $x$ (borne supérieure, variable dont dépend $F$) : on ne peut pas écrire $F(x)=\int_a^x f(x)\,\mathrm{d}x$ sans confusion.
+}

@@ -1,0 +1,25 @@
+chapitre: TCOMPL-CALCULS-AIRES
+niveau: TCOMPL
+theme: CALCULS-AIRES
+titre: "Calculs d'aires"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TCOMPL-AIR-C1, libelle_eleve: "Je sais définir l'intégrale d'une fonction continue positive comme aire sous la courbe, et utiliser la relation de Chasles." }
+  - { code: C2, ref_capacite: TCOMPL-AIR-C2, libelle_eleve: "Je sais estimer graphiquement ou encadrer une intégrale ou une valeur moyenne." }
+  - { code: C3, ref_capacite: TCOMPL-AIR-C3, libelle_eleve: "Je sais calculer une intégrale, une valeur moyenne, une aire sous une courbe ou entre deux courbes." }
+  - { code: C4, ref_capacite: TCOMPL-AIR-C4, libelle_eleve: "Je sais déterminer les primitives d'une fonction en reconnaissant une forme usuelle." }
+  - { code: C5, ref_capacite: TCOMPL-AIR-C5, libelle_eleve: "Je sais démontrer que deux primitives d'une même fonction continue sur un intervalle diffèrent d'une constante." }
+  - { code: C6, ref_capacite: TCOMPL-AIR-C6, libelle_eleve: "Je sais démontrer que la fonction intégrale $F(x)=\\int_a^x f(t)\\,dt$ a pour dérivée $f$, lorsque $f$ est continue, positive et croissante." }
+
+prerequis:
+  - { code: R1, libelle: "Dérivation, primitives usuelles", chapitre_origine: "1SPE-DERIVATION-GLOBAL" }
+  - { code: R2, libelle: "Continuité", chapitre_origine: "TCOMPL-MODELES-FONCTION" }
+
+situation_accroche: >
+  Archimède calculait déjà l'aire sous une parabole par une méthode d'exhaustion,
+  bien avant l'invention du calcul intégral moderne. Ce chapitre explore différentes
+  méthodes pour calculer une aire sous une courbe, de l'approximation par des
+  rectangles jusqu'au calcul exact par les primitives.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

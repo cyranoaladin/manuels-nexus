@@ -1,0 +1,66 @@
+% META: {"id": "TCOMPL-AIR-CR-010", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "cours", "capacites_codes": ["C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Primitives d'une fonction}
+
+% ============================================================
+% STRATE 1 — Notion de primitive, formes usuelles
+% ============================================================
+
+\definition[1]{
+Soit $f$ une fonction continue sur un intervalle $I$. Une \textbf{primitive} de $f$ sur $I$ est une fonction $F$ dérivable sur $I$ telle que $F'=f$.
+}
+
+\propriete[Primitives de formes usuelles]{
+Si $u$ est une fonction dérivable sur $I$ :
+\begin{itemize}
+  \item une primitive de $2uu'$ est $u^2$ ;
+  \item une primitive de $u'\mathrm{e}^u$ est $\mathrm{e}^u$ ;
+  \item une primitive de $\dfrac{u'}{u}$ (avec $u>0$) est $\ln u$.
+\end{itemize}
+}
+
+\exemple{
+Une primitive de $f(x) = 2x\,\mathrm{e}^{x^2}$ sur $\mathbb{R}$ : on reconnaît la forme $u'\mathrm{e}^u$ avec $u(x)=x^2$, $u'(x)=2x$. Une primitive est donc $F(x) = \mathrm{e}^{x^2}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x = symbols('x')
+% f = 2*x*exp(x**2)
+% F = exp(x**2)
+% assert simplify(diff(F, x) - f) == 0
+% END-VERIFY
+
+\margeAppui{
+Reconnaître ces formes demande de repérer, dans l'expression à intégrer, une fonction $u$ et sa dérivée $u'$ qui apparaissent \textbf{ensemble} : c'est l'exercice principal du calcul de primitives au programme.
+}
+
+% ============================================================
+% STRATE 2 — Deux primitives diferent d'une constante
+% ============================================================
+
+\theoreme[Primitives d'une même fonction]{
+Si $F$ et $G$ sont deux primitives d'une même fonction $f$ continue sur un intervalle $I$, alors $F-G$ est \textbf{constante} sur $I$.
+}
+
+\demonstration{
+Posons $H = F-G$. Alors $H' = F'-G' = f-f = 0$ sur $I$. Une fonction dont la dérivée est nulle sur un intervalle est constante sur cet intervalle (propriété admise, vue en première). Donc $H$ est constante, c'est-à-dire $F-G$ est constante sur $I$.
+}
+
+\exemple{
+$F(x) = \dfrac{x^3}{3}$ et $G(x) = \dfrac{x^3}{3}+5$ sont deux primitives de $f(x)=x^2$ sur $\mathbb{R}$ : $F(x)-G(x) = -5$, bien constante.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x')
+% F = x**3/3
+% G = x**3/3 + 5
+% assert diff(F, x) == x**2
+% assert diff(G, x) == x**2
+% assert (F - G) == -5
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier la constante $+C$ dans une primitive générale.} Une fonction $f$ admet une \textbf{infinité} de primitives sur un intervalle, toutes de la forme $F+C$ où $F$ est une primitive particulière et $C$ une constante réelle quelconque : sans précision supplémentaire (par exemple une condition initiale), on ne peut pas déterminer \textbf{une seule} primitive.
+}

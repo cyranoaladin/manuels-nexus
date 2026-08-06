@@ -1,0 +1,43 @@
+% META: {"id": "TCOMPL-AIR-EV-A", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C3", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, diff, simplify, exp
+% x = symbols('x')
+% f = 4*x**3 - 6*x + 2
+% I = integrate(f, (x, 0, 1))
+% assert I == 0
+% g = 2*x*exp(x**2 - 1)
+% G = exp(x**2 - 1)
+% assert simplify(diff(G, x) - g) == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-AIR-EV-A}{50}
+
+\begin{exercice}{TCOMPL-AIR-EV-A-EX1}{1}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C3}
+
+\medskip
+
+Soit $f(x) = 4x^3-6x+2$.
+\begin{enumerate}
+  \item (4 pts) Déterminer une primitive de $f$.
+  \item (4 pts) Calculer $\displaystyle\int_0^1 f(x)\,\mathrm{d}x$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-AIR-EV-A-EX2}{2}{30}
+\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5}
+
+\medskip
+
+\begin{enumerate}
+  \item (4 pts) Déterminer une primitive de $g(x) = 2x\,\mathrm{e}^{x^2-1}$ sur $\mathbb{R}$.
+  \item (4 pts) Démontrer que si $F$ et $G$ sont deux primitives d'une même fonction continue $f$ sur un intervalle $I$, alors $F-G$ est constante sur $I$.
+  \item (4 pts) En déduire, sachant que $H$ est une primitive de $g$ vérifiant $H(1)=5$, l'expression de $H$ en fonction de la primitive trouvée à la question 1.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

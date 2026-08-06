@@ -1,0 +1,30 @@
+% META: {"id": "TCOMPL-AIR-EV-B-corrige", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-AIR-EV-B", "capacites_codes": ["C2", "C3", "C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq, integrate, Rational
+% x = symbols('x')
+% f = -x**2 + 6*x
+% g = 2*x
+% inter = solve(Eq(f, g), x)
+% assert inter == [0, 4]
+% aire = integrate(f - g, (x, 0, 4))
+% assert aire == Rational(32, 3)
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EV-B-EX1}
+\textbf{1.} $f(x)=g(x) \iff -x^2+6x=2x \iff -x^2+4x=0 \iff x(4-x)=0 \iff x=0$ ou $x=4$.
+
+\textbf{2.} $f(x)-g(x) = -x^2+4x = -x(x-4)$, polynôme du second degré de coefficient dominant négatif, positif \textbf{entre} ses racines $0$ et $4$ : $f\geq g$ sur $[0,4]$.
+
+\textbf{3.} L'aire vaut :
+\[
+  \int_0^4 \big(f(x)-g(x)\big)\,\mathrm{d}x = \int_0^4 \big(-x^2+4x\big)\,\mathrm{d}x = \left[-\frac{x^3}{3}+2x^2\right]_0^4 = -\frac{64}{3}+32 = \frac{32}{3} \text{ unités d'aire.}
+\]
+\end{corrige}
+
+\begin{corrige}{TCOMPL-AIR-EV-B-EX2}
+\textbf{1.} Pour $f$ continue, positive et croissante sur $[a,b]$, la fonction $F(x)=\displaystyle\int_a^x f(t)\,\mathrm{d}t$ est dérivable sur $[a,b]$ et $F'=f$.
+
+\textbf{2.} Avec $h=\dfrac{4-0}{4}=1$ :
+\[
+  1\times\big(\sqrt{0}+\sqrt{1}+\sqrt{2}+\sqrt{3}\big) \ \leq\ \int_0^4 \sqrt{x}\,\mathrm{d}x \ \leq\ 1\times\big(\sqrt{1}+\sqrt{2}+\sqrt{3}+\sqrt{4}\big).
+\]
+\end{corrige}
