@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-INTEG-EV-A-corrige", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-INTEG-EV-A", "version": "A", "capacites_codes": ["C1", "C4", "C8"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, exp, simplify, sqrt, Rational
+% x = symbols('x')
+% I2 = integrate(x*exp(-x), (x, 0, 2))
+% assert simplify(I2 - (1 - 3*exp(-2))) == 0
+% A3 = integrate((3-x**2)-(x**2-1), (x, -sqrt(2), sqrt(2)))
+% assert simplify(A3 - Rational(16,3)*sqrt(2)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EV-A-EX1}
+$f$ est decroissante sur $[1,2]$ (fonction inverse). Minimum : $f(2)=\dfrac{1}{2}$. Maximum : $f(1)=1$.
+
+Encadrement : $\dfrac{1}{2}\times(2-1) \leq \displaystyle\int_1^2 f(x)\,\mathrm{d}x \leq 1\times(2-1)$, soit $\dfrac{1}{2} \leq \displaystyle\int_1^2 \dfrac{1}{x}\,\mathrm{d}x \leq 1$.
+\end{corrige}
+
+\begin{corrige}{TSPE-INTEG-EV-A-EX2}
+$u(x)=x$, $u'(x)=1$ ; $v'(x)=\mathrm{e}^{-x}$, $v(x)=-\mathrm{e}^{-x}$.
+\[
+  \int_0^2 x\,\mathrm{e}^{-x}\,\mathrm{d}x = \big[-x\,\mathrm{e}^{-x}\big]_0^2 - \int_0^2 (-\mathrm{e}^{-x})\,\mathrm{d}x = -2\mathrm{e}^{-2} + \big[-\mathrm{e}^{-x}\big]_0^2 = -2\mathrm{e}^{-2} + (-\mathrm{e}^{-2}+1) = 1-3\mathrm{e}^{-2}.
+\]
+\end{corrige}
+
+\begin{corrige}{TSPE-INTEG-EV-A-EX3}
+\textbf{Q1.} $f(x)=g(x) \iff 3-x^2=x^2-1 \iff 2x^2=4 \iff x=\pm\sqrt{2}$.
+
+\textbf{Q2.} $f(x)-g(x) = 4-2x^2$. En $x=0$ : $4>0$, et $4-2x^2 \geq 0 \iff x^2 \leq 2$, donc $f \geq g$ sur $[-\sqrt{2},\sqrt{2}]$.
+
+\textbf{Q3.} $\mathcal{A} = \displaystyle\int_{-\sqrt{2}}^{\sqrt{2}} (4-2x^2)\,\mathrm{d}x = \left[4x-\dfrac{2x^3}{3}\right]_{-\sqrt{2}}^{\sqrt{2}} = \dfrac{20\sqrt{2}}{3}$ unites d'aire.
+\end{corrige}

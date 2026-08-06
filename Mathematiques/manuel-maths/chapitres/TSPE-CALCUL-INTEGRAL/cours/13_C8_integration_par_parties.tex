@@ -1,0 +1,60 @@
+% META: {"id": "TSPE-INTEG-CR-013", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "cours", "capacites_codes": ["C8", "C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Intégration par parties}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible
+% ============================================================
+
+\theoreme[Formule d'intégration par parties]{
+Soient $u,v$ deux fonctions derivables, de derivees $u',v'$ continues sur $[a,b]$. Alors :
+\[
+  \int_a^b u(x)v'(x)\,\mathrm{d}x = \big[u(x)v(x)\big]_a^b - \int_a^b u'(x)v(x)\,\mathrm{d}x.
+\]
+}
+
+\demonstration{
+La fonction $uv$ est derivable sur $[a,b]$ (produit de fonctions derivables), et par la formule de derivation d'un produit :
+\[
+  (uv)' = u'v + uv'.
+\]
+
+En integrant les deux membres de cette egalite entre $a$ et $b$ (les fonctions en jeu sont continues) :
+\[
+  \int_a^b (uv)'(x)\,\mathrm{d}x = \int_a^b u'(x)v(x)\,\mathrm{d}x + \int_a^b u(x)v'(x)\,\mathrm{d}x.
+\]
+
+Or $uv$ est une primitive de $(uv)'$, donc $\displaystyle\int_a^b (uv)'(x)\,\mathrm{d}x = \big[u(x)v(x)\big]_a^b$.
+
+En reorganisant :
+\[
+  \int_a^b u(x)v'(x)\,\mathrm{d}x = \big[u(x)v(x)\big]_a^b - \int_a^b u'(x)v(x)\,\mathrm{d}x.
+\]
+}
+
+\margeAppui{
+On utilise l'integration par parties lorsque l'integrale de $u'v$ est plus simple a calculer que celle de $uv'$ : typiquement pour un produit polynome $\times$ exponentielle, ou polynome $\times$ logarithme.
+}
+
+\exemple{
+Calculer $\displaystyle\int_0^1 x\,\mathrm{e}^x\,\mathrm{d}x$.
+
+On pose $u(x)=x$ (donc $u'(x)=1$) et $v'(x)=\mathrm{e}^x$ (donc $v(x)=\mathrm{e}^x$).
+\[
+  \int_0^1 x\,\mathrm{e}^x\,\mathrm{d}x = \big[x\,\mathrm{e}^x\big]_0^1 - \int_0^1 1 \times \mathrm{e}^x\,\mathrm{d}x = (1\times\mathrm{e}^1 - 0) - \big[\mathrm{e}^x\big]_0^1 = \mathrm{e} - (\mathrm{e}-1) = 1.
+\]
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate
+% x = symbols('x')
+% assert integrate(x*exp(x), (x, 0, 1)) == 1
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Choisir $u$ et $v'$ dans le mauvais sens.} Pour $\int x\,\mathrm{e}^x\,\mathrm{d}x$, poser $u=\mathrm{e}^x$ et $v'=x$ complique le calcul (on introduit un $x^2$). Il faut choisir $u$ de sorte que $u'$ soit plus simple que $u$ (ici $u=x$, polynome, se simplifie en derivant).
+}

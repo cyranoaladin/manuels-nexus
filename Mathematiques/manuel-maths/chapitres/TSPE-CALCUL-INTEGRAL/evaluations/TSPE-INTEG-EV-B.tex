@@ -1,0 +1,47 @@
+% META: {"id": "TSPE-INTEG-EV-B", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C2", "C5", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, cos, ln, exp, simplify, pi, log
+% x = symbols('x')
+% assert integrate(cos(x), (x, 0, pi/2)) == 1
+% I2 = integrate(ln(x), (x, 1, 2))
+% assert simplify(I2 - (2*log(2) - 1)) == 0
+% K0 = integrate(exp(x), (x, 0, 1))
+% assert simplify(K0 - (exp(1) - 1)) == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-INTEG-EV-B}{55}
+
+\begin{exercice}{TSPE-INTEG-EV-B-EX1}{2}{15}
+\textbf{Exercice 1} (5 points) — \textit{Capacite C2}
+
+\medskip
+
+Calculer $\displaystyle\int_0^{\pi/2} \cos(x)\,\mathrm{d}x$.
+\end{exercice}
+
+\begin{exercice}{TSPE-INTEG-EV-B-EX2}{2}{20}
+\textbf{Exercice 2} (8 points) — \textit{Capacite C8}
+
+\medskip
+
+Calculer $\displaystyle\int_1^2 \ln(x)\,\mathrm{d}x$ par integration par parties (poser $u(x)=\ln(x)$, $v'(x)=1$).
+\end{exercice}
+
+\begin{exercice}{TSPE-INTEG-EV-B-EX3}{2}{20}
+\textbf{Exercice 3} (7 points) — \textit{Capacite C5}
+
+\medskip
+
+Pour $n \in \mathbb{N}$, on pose $K_n = \displaystyle\int_0^1 x^n \mathrm{e}^x\,\mathrm{d}x$.
+\begin{enumerate}
+  \item (2 pts) Calculer $K_0$.
+  \item (2 pts) Justifier que $K_n \geq 0$ pour tout $n$.
+  \item (3 pts) A l'aide d'une integration par parties (avec $u(x)=x^n$, $v'(x)=\mathrm{e}^x$), etablir une relation entre $K_n$ et $K_{n-1}$ pour $n\geq 1$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}
