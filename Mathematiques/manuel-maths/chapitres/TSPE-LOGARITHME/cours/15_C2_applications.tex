@@ -1,0 +1,55 @@
+% META: {"id": "TSPE-LOG-CR-015", "chapitre": "TSPE-LOGARITHME", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Résolution de problèmes avec exponentielle et logarithme}
+
+% ============================================================
+% STRATE 1 — Exemple complet de resolution de probleme
+% ============================================================
+
+\exemple{
+\textbf{Datation par decroissance radioactive.} Un echantillon radioactif a une masse $m(t) = m_0 \,\mathrm{e}^{-\lambda t}$ (en grammes), ou $t$ est le temps en annees et $\lambda > 0$ une constante caracteristique de l'element.
+
+On donne $m_0 = 100$ g et $\lambda = 0{,}03$.
+
+\textbf{1. Au bout de combien d'annees la masse est-elle divisee par $2$ (demi-vie) ?}
+
+On cherche $t$ tel que $m(t) = \dfrac{m_0}{2}$, soit $100\,\mathrm{e}^{-0{,}03 t} = 50$, c'est-a-dire $\mathrm{e}^{-0{,}03t} = \dfrac{1}{2}$.
+
+En appliquant $\ln$ aux deux membres (tous deux strictement positifs) :
+\[
+  -0{,}03t = \ln\!\left(\frac{1}{2}\right) = -\ln 2, \qquad \text{donc} \qquad t = \frac{\ln 2}{0{,}03} \approx 23{,}1 \text{ ans}.
+\]
+
+\textbf{2. Au bout de combien d'annees reste-t-il moins de $10\%$ de la masse initiale ?}
+
+On cherche $t$ tel que $m(t) < 0{,}1\, m_0$, soit $\mathrm{e}^{-0{,}03t} < 0{,}1$.
+
+En appliquant $\ln$ (croissant, l'inegalite est conservee) :
+\[
+  -0{,}03t < \ln(0{,}1), \qquad \text{donc} \qquad t > \frac{\ln(0{,}1)}{-0{,}03} = \frac{-\ln(0{,}1)}{0{,}03} \approx 76{,}8 \text{ ans}.
+\]
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, ln, solve, Eq, Rational, nsolve
+% t = symbols('t', positive=True)
+% lam = Rational(3, 100)
+% sol = solve(Eq(exp(-lam*t), Rational(1,2)), t)
+% import math
+% assert abs(float(sol[0]) - math.log(2)/0.03) < 1e-9
+% assert round(float(sol[0]), 1) == 23.1
+% t2 = -math.log(0.1)/0.03
+% assert round(t2, 1) == 76.8
+% END-VERIFY
+}
+
+\margeAppui{
+Methode generale : isoler le terme exponentiel, puis appliquer $\ln$ aux deux membres (l'inegalite se conserve car $\ln$ est croissante). Pour une equation/inequation avec $\ln$, on peut appliquer $\exp$ aux deux membres de la meme facon.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Appliquer $\ln$ a une expression qui peut etre negative ou nulle.} $\ln$ n'est defini que sur $]0,+\infty[$. Avant d'appliquer $\ln$ aux deux membres d'une (in)egalite, il faut s'assurer qu'ils sont tous deux strictement positifs.
+}

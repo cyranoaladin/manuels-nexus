@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-LOG-EX-007", "chapitre": "TSPE-LOGARITHME", "type_objet": "exercice", "capacites": ["TSPE-LOG-C4"], "capacites_codes": ["C4"], "methodes": ["M2"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-LOGARITHME/exercices/TSPE-LOG-EX-007.tex", "corrige_tex": "chapitres/TSPE-LOGARITHME/corriges/TSPE-LOG-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, limit
+% x = symbols('x', positive=True)
+% assert limit(3*x*ln(x), x, 0, '+') == 0
+% assert limit(x*ln(x) + 2*x, x, 0, '+') == 0
+% END-VERIFY
+\begin{exercice}{TSPE-LOG-EX-007}{2}{12}
+Calculer les limites suivantes, en justifiant a partir du resultat $\displaystyle\lim_{x \to 0^+} x\ln x = 0$.
+\begin{enumerate}
+  \item $\displaystyle\lim_{x \to 0^+} 3x\ln x$.
+  \item $\displaystyle\lim_{x \to 0^+} \left(x\ln x + 2x\right)$.
+\end{enumerate}
+\end{exercice}

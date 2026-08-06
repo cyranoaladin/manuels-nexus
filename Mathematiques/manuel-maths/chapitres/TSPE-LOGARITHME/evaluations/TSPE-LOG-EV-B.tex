@@ -1,0 +1,48 @@
+% META: {"id": "TSPE-LOG-EV-B", "chapitre": "TSPE-LOGARITHME", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4"], "competences": ["raisonner", "calculer", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, exp, diff, solve, Eq, simplify, limit
+% x = symbols('x', positive=True)
+% sol = solve(Eq(exp(2*x+1), 10), x)
+% assert simplify(sol[0] - (ln(10)-1)/2) == 0
+% f = x**2*ln(x)
+% fp = diff(f, x)
+% assert simplify(fp - x*(2*ln(x)+1)) == 0
+% assert limit(f, x, 0, '+') == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-LOG-EV-B}{55}
+
+\begin{exercice}{TSPE-LOG-EV-B-EX1}{2}{15}
+\textbf{Exercice 1} (6 points) — \textit{Capacite C1}
+
+\medskip
+
+Resoudre l'equation $\mathrm{e}^{2x+1} = 10$ (donner la valeur exacte, puis une valeur approchee a $10^{-2}$ pres).
+\end{exercice}
+
+\begin{exercice}{TSPE-LOG-EV-B-EX2}{2}{25}
+\textbf{Exercice 2} (8 points) — \textit{Capacite C3, C4}
+
+\medskip
+
+Soit $f(x) = x^2 \ln x$ sur $]0, +\infty[$, prolongee par $f(0)=0$.
+\begin{enumerate}
+  \item (2 pts) Justifier que $\displaystyle\lim_{x\to0^+} f(x) = 0$ (on pourra ecrire $f(x) = x \times (x\ln x)$).
+  \item (3 pts) Calculer $f'(x)$ pour $x>0$, et verifier que $f'(x) = x(2\ln x + 1)$.
+  \item (3 pts) Resoudre $f'(x)=0$ sur $]0,+\infty[$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-LOG-EV-B-EX3}{3}{15}
+\textbf{Exercice 3} (6 points) — \textit{Capacite C2}
+
+\medskip
+
+Une substance chimique se decompose selon $C(t) = C_0\,\mathrm{e}^{-0{,}08t}$, ou $t$ est le temps en minutes. On donne $C_0 = 80$ mg. Au bout de combien de minutes reste-t-il $20$ mg de substance (valeur exacte, puis approchee a $0{,}1$ min pres) ?
+\end{exercice}
+
+\end{evaluation}

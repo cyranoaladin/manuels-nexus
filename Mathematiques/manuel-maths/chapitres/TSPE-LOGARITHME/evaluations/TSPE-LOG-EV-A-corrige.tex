@@ -1,0 +1,33 @@
+% META: {"id": "TSPE-LOG-EV-A-corrige", "chapitre": "TSPE-LOGARITHME", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-LOG-EV-A", "version": "A", "capacites_codes": ["C1", "C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff, solve, Eq, limit
+% x = symbols('x', positive=True)
+% assert solve(Eq(ln(x) + ln(x+1), ln(6)), x) == [2]
+% f = ln(x) - x + 1
+% assert diff(f, x) == -1 + 1/x
+% assert f.subs(x, 1) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-LOG-EV-A-EX1}
+Domaine : $x>0$ et $x+1>0$, soit $x>0$.
+
+$\ln(x+1)+\ln(x) = \ln(x(x+1))$. L'equation devient $x(x+1)=6$, soit $x^2+x-6=0$, de racines $x=2$ et $x=-3$.
+
+Seul $x=2$ verifie $x>0$ : $S=\{2\}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-LOG-EV-A-EX2}
+\textbf{Q1.} $f'(x) = \dfrac{1}{x} - 1$.
+
+\textbf{Q2.} $f'(x)=0 \iff \dfrac{1}{x}=1 \iff x=1$. Pour $0<x<1$, $\dfrac{1}{x}>1$ donc $f'(x)>0$ ; pour $x>1$, $f'(x)<0$.
+
+\textbf{Q3.} $f$ est croissante sur $]0,1]$ et decroissante sur $[1,+\infty[$ : maximum en $x=1$, $f(1) = \ln(1)-1+1 = 0$.
+\end{corrige}
+
+\begin{corrige}{TSPE-LOG-EV-A-EX3}
+D'apres le theoreme du cours (demonstration par changement de variable $X=-\ln x$, se ramenant a la croissance comparee de l'exponentielle), $x\ln x \to 0$ quand $x \to 0^+$.
+
+Donc $5x\ln x \to 5 \times 0 = 0$ (produit par une constante), et $3x \to 0$ (limite usuelle). Par difference des limites :
+\[
+  5x\ln x - 3x \to 0 - 0 = 0.
+\]
+\end{corrige}

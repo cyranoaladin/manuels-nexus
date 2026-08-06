@@ -1,0 +1,78 @@
+% META: {"id": "TSPE-LOG-CR-010", "chapitre": "TSPE-LOGARITHME", "type_objet": "cours", "capacites_codes": [], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Définition et équation fonctionnelle du logarithme népérien}
+
+% ============================================================
+% STRATE 1 — Definition et propriete fondamentale
+% ============================================================
+
+\definition[1]{
+Pour tout reel $x > 0$, il existe un unique reel $y$ tel que $\mathrm{e}^y = x$. Ce reel $y$ est appele \textbf{logarithme neperien} de $x$, note $\ln x$.
+
+Autrement dit, la fonction $\ln$ est la fonction reciproque de la fonction exponentielle : pour $x>0$ et $y \in \mathbb{R}$,
+\[
+  y = \ln x \iff x = \mathrm{e}^y.
+\]
+}
+
+\propriete{
+Pour tout $x > 0$ : $\mathrm{e}^{\ln x} = x$. Pour tout $y \in \mathbb{R}$ : $\ln(\mathrm{e}^y) = y$.
+
+En particulier $\ln 1 = 0$ et $\ln \mathrm{e} = 1$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, ln, simplify
+% x = symbols('x', positive=True)
+% assert simplify(exp(ln(x)) - x) == 0
+% assert ln(1) == 0
+% assert ln(exp(1)) == 1
+% END-VERIFY
+
+\theoreme[Équation fonctionnelle]{
+Pour tous reels $a > 0$ et $b > 0$ :
+\[
+  \ln(ab) = \ln a + \ln b.
+\]
+}
+
+\demonstration{
+Posons $A = \ln a$ et $B = \ln b$, de sorte que $a = \mathrm{e}^A$ et $b = \mathrm{e}^B$. Alors $ab = \mathrm{e}^A \times \mathrm{e}^B = \mathrm{e}^{A+B}$ (regle sur l'exponentielle d'une somme).
+
+Par definition du logarithme, $\ln(ab) = A + B = \ln a + \ln b$.
+}
+
+\propriete[Conséquences]{
+Pour $a, b > 0$ et $n \in \mathbb{Z}$ :
+\begin{itemize}
+  \item $\ln\!\left(\dfrac{1}{a}\right) = -\ln a$
+  \item $\ln\!\left(\dfrac{a}{b}\right) = \ln a - \ln b$
+  \item $\ln(a^n) = n \ln a$
+  \item $\ln(\sqrt{a}) = \dfrac{1}{2}\ln a$
+\end{itemize}
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, sqrt, simplify, Rational
+% a, b = symbols('a b', positive=True)
+% assert simplify(ln(1/a) - (-ln(a))) == 0
+% assert simplify(ln(a/b) - (ln(a) - ln(b))) == 0
+% assert simplify(ln(a**3) - 3*ln(a)) == 0
+% assert simplify(ln(sqrt(a)) - Rational(1,2)*ln(a)) == 0
+% END-VERIFY
+
+\margeAppui{
+Cette equation fonctionnelle transforme un produit en somme : c'est l'interet historique et pratique du logarithme (calculs, echelles logarithmiques en sciences).
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Ecrire $\ln(a+b) = \ln a + \ln b$.} C'est faux : l'equation fonctionnelle porte sur le \emph{produit}, pas sur la somme. En general $\ln(a+b) \neq \ln a + \ln b$.
+}
+
+\erreurFrequente{
+\textbf{Oublier le domaine de definition.} $\ln x$ n'est defini que pour $x > 0$. Avant d'ecrire $\ln(f(x))$, il faut toujours verifier que $f(x) > 0$.
+}

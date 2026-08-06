@@ -1,0 +1,60 @@
+% META: {"id": "TSPE-LOG-CR-011", "chapitre": "TSPE-LOGARITHME", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Dérivée de la fonction logarithme népérien}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible
+% ============================================================
+
+\theoreme{
+La fonction $\ln$ est derivable sur $]0, +\infty[$ (derivabilite admise), et pour tout $x > 0$ :
+\[
+  \ln'(x) = \frac{1}{x}.
+\]
+}
+
+\demonstration{
+On admet que $\ln$ est derivable sur $]0,+\infty[$. Pour tout $x > 0$, on a par definition $\mathrm{e}^{\ln x} = x$.
+
+Derivons les deux membres de cette egalite (le membre de gauche est une fonction composee $\mathrm{e}^{u(x)}$ avec $u(x) = \ln x$, de derivee $u'(x)\,\mathrm{e}^{u(x)}$) :
+\[
+  \ln'(x) \times \mathrm{e}^{\ln x} = 1.
+\]
+
+Or $\mathrm{e}^{\ln x} = x$, donc :
+\[
+  \ln'(x) \times x = 1.
+\]
+
+Comme $x \neq 0$, on en deduit $\ln'(x) = \dfrac{1}{x}$.
+}
+
+\margeAppui{
+Ce raisonnement (deriver les deux membres d'une egalite $f(g(x))=x$) est une technique classique pour retrouver la derivee d'une fonction reciproque.
+}
+
+\exemple{
+Soit $f(x) = \ln(2x+3)$ sur son ensemble de definition. Comme $f = \ln \circ u$ avec $u(x)=2x+3$, on a $f'(x) = u'(x) \times \dfrac{1}{u(x)} = \dfrac{2}{2x+3}$, defini pour $2x+3>0$, soit $x > -\dfrac{3}{2}$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff
+% x = symbols('x')
+% f = ln(2*x+3)
+% assert diff(f, x) == 2/(2*x+3)
+% END-VERIFY
+}
+
+\propriete[Dérivée de $\ln(u)$]{
+Si $u$ est une fonction derivable et strictement positive sur un intervalle $I$, alors $\ln(u)$ est derivable sur $I$ et :
+\[
+  (\ln u)'(x) = \frac{u'(x)}{u(x)}.
+\]
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier la derivee de $u$ dans $(\ln u)'=u'/u$.} Pour $f(x)=\ln(3x^2+1)$, la derivee est $\dfrac{6x}{3x^2+1}$ (avec $u'(x)=6x$ au numerateur), pas $\dfrac{1}{3x^2+1}$.
+}
