@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-TRIGO-EX-002", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["TSPE-TRIGO-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-TRIGONOMETRIE/exercices/TSPE-TRIGO-EX-002.tex", "corrige_tex": "chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import cos, pi, Rational, simplify
+% assert simplify(cos(2*pi/3) - Rational(-1, 2)) == 0
+% import numpy as np
+% a = 2*np.pi/3
+% for xv in [np.pi, a, a+0.01]:
+%     assert np.cos(xv) <= -0.5 + 1e-9
+% for xv in [0, a - 0.1]:
+%     assert np.cos(xv) > -0.5
+% END-VERIFY
+\begin{exercice}{TSPE-TRIGO-EX-002}{1}{10}
+Resoudre dans $[-\pi, \pi]$ l'inequation $\cos x \leq -\dfrac{1}{2}$.
+\end{exercice}

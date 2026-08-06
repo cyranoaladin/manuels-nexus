@@ -1,0 +1,43 @@
+% META: {"id": "TSPE-TRIGO-EV-A", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "evaluation", "version": "A", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C1", "C2"], "competences": ["raisonner", "calculer", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, sqrt, diff, pi, simplify, solve, Eq
+% x = symbols('x')
+% assert simplify(cos(3*pi/4) + sqrt(2)/2) == 0
+% f = sin(x) + cos(x)
+% fp = diff(f, x)
+% assert fp == cos(x) - sin(x)
+% assert solve(Eq(fp, 0), x) == [pi/4]
+% assert f.subs(x, pi/4) == sqrt(2)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-TRIGO-EV-A}{45}
+
+\begin{exercice}{TSPE-TRIGO-EV-A-EX1}{2}{20}
+\textbf{Exercice 1} (10 points) — \textit{Capacite C1}
+
+\medskip
+
+\begin{enumerate}
+  \item (4 pts) Resoudre dans $[-\pi,\pi]$ l'equation $\cos x = -\dfrac{\sqrt{2}}{2}$.
+  \item (6 pts) Resoudre dans $[-\pi,\pi]$ l'inequation $\cos x \geq -\dfrac{\sqrt{2}}{2}$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-TRIGO-EV-A-EX2}{2}{25}
+\textbf{Exercice 2} (10 points) — \textit{Capacite C2}
+
+\medskip
+
+Soit $f(x) = \sin x + \cos x$ sur $\left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]$.
+\begin{enumerate}
+  \item (3 pts) Calculer $f'(x)$.
+  \item (4 pts) Resoudre $f'(x)=0$ sur $\left[-\dfrac{\pi}{2},\dfrac{\pi}{2}\right]$, et etudier le signe de $f'$.
+  \item (3 pts) En deduire le maximum de $f$ sur $\left[-\dfrac{\pi}{2},\dfrac{\pi}{2}\right]$ et la valeur de $x$ ou il est atteint.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

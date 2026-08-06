@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-TRIGO-EV-B-corrige", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-TRIGO-EV-B", "version": "B", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, sqrt, pi, simplify
+% x = symbols('x')
+% assert simplify(cos(5*pi/6) + sqrt(3)/2) == 0
+% f = sin(2*x)
+% assert f.subs(x, pi/4) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-TRIGO-EV-B-EX1}
+\textbf{Q1.} $\cos\!\left(\dfrac{5\pi}{6}\right) = -\dfrac{\sqrt{3}}{2}$, donc les solutions sur $[-\pi,\pi]$ sont $x=\dfrac{5\pi}{6}$ et $x=-\dfrac{5\pi}{6}$.
+
+\textbf{Q2.} La courbe de $\cos$ est en dessous de $-\dfrac{\sqrt{3}}{2}$ aux extremites de l'intervalle : $S = \left[-\pi, -\dfrac{5\pi}{6}\right] \cup \left[\dfrac{5\pi}{6}, \pi\right]$.
+\end{corrige}
+
+\begin{corrige}{TSPE-TRIGO-EV-B-EX2}
+\textbf{Q1.} $f'(x) = 2\cos(2x)$ (derivee de $\sin(2x)$, composee affine, facteur $2$).
+
+\textbf{Q2.} $f'(x) = 0 \iff \cos(2x) = 0$. Sur $\left[0,\dfrac{\pi}{2}\right]$, $2x \in [0,\pi]$, donc $2x=\dfrac{\pi}{2}$, soit $x=\dfrac{\pi}{4}$. On a $f'(0)=2\cos(0)=2>0$ et $f'\!\left(\dfrac{\pi}{2}\right)=2\cos(\pi)=-2<0$ : $f'$ est positive avant $\dfrac{\pi}{4}$, negative apres.
+
+\textbf{Q3.} $f$ est croissante sur $\left[0,\dfrac{\pi}{4}\right]$ et decroissante sur $\left[\dfrac{\pi}{4},\dfrac{\pi}{2}\right]$ : le maximum de $f$ vaut $f\!\left(\dfrac{\pi}{4}\right) = \sin\!\left(\dfrac{\pi}{2}\right) = 1$, atteint en $x=\dfrac{\pi}{4}$.
+\end{corrige}

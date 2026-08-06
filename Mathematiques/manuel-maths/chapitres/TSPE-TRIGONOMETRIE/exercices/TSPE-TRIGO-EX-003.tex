@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-TRIGO-EX-003", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["TSPE-TRIGO-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "modeliser"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-TRIGONOMETRIE/exercices/TSPE-TRIGO-EX-003.tex", "corrige_tex": "chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import cos, pi, sqrt, Rational, simplify
+% assert simplify(cos(pi/6) - sqrt(3)/2) == 0
+% import numpy as np
+% a = np.pi/6
+% assert np.cos(0) > np.sqrt(3)/2
+% assert abs(np.cos(a) - np.sqrt(3)/2) < 1e-9
+% END-VERIFY
+\begin{exercice}{TSPE-TRIGO-EX-003}{2}{12}
+La hauteur d'un wagon de grande roue au-dessus du sol est modelisee par $h(t) = 10 + 10\cos(t)$ (en metres), ou $t \in [-\pi, \pi]$ est le temps (en unites adaptees) depuis le passage au point le plus haut.
+\begin{enumerate}
+  \item Calculer $h(0)$. Interpreter.
+  \item Determiner les instants $t \in [-\pi,\pi]$ pour lesquels le wagon est a une hauteur de $10 + 5\sqrt{3}$ metres.
+  \item Determiner l'ensemble des instants pour lesquels le wagon est a une hauteur superieure ou egale a $10 + 5\sqrt{3}$ metres.
+\end{enumerate}
+\end{exercice}

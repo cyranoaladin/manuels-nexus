@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-TRIGO-CO-004", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "TSPE-TRIGO-EX-004", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, sin, cos, diff, pi, solve, Eq, trigsimp
+% x = symbols('x')
+% aire = 8*sin(x)*cos(x)
+% assert trigsimp(aire) == 4*sin(2*x)
+% ap = trigsimp(diff(aire, x))
+% assert ap == 8*cos(2*x)
+% assert ap.subs(x, pi/6) > 0
+% assert ap.subs(x, pi/3) < 0
+% END-VERIFY
+\begin{corrige}{TSPE-TRIGO-EX-004}
+
+\textbf{Q1.} $M$ est sur le cercle de rayon $R=2$, a l'angle $x$ : ses coordonnees sont $(R\cos x, R\sin x)$. Par symetrie du rectangle par rapport a l'axe vertical, la largeur totale est $2 \times R\cos x = 2R\cos x$, et la hauteur (ordonnee de $M$) est $R\sin x$.
+
+\textbf{Q2.} $\mathcal{A}(x) = 2R\cos x \times R \sin x = 2R^2 \sin x \cos x$. Avec $R=2$, $\mathcal{A}(x) = 8\sin x \cos x$. En utilisant $2\sin x\cos x = \sin(2x)$ : $\mathcal{A}(x) = 4 \times 2 \sin x \cos x = 4\sin(2x)$.
+
+\textbf{Q3.} $\mathcal{A}'(x) = 4 \times 2\cos(2x) = 8\cos(2x)$. Sur $\left]0,\dfrac{\pi}{2}\right[$, $2x \in ]0,\pi[$, et $\cos(2x)=0$ pour $2x=\dfrac{\pi}{2}$, soit $x=\dfrac{\pi}{4}$. On a $\cos(2x)>0$ pour $x<\dfrac{\pi}{4}$ et $\cos(2x)<0$ pour $x>\dfrac{\pi}{4}$.
+
+$\mathcal{A}$ est donc croissante sur $\left]0,\dfrac{\pi}{4}\right]$ puis decroissante sur $\left[\dfrac{\pi}{4}, \dfrac{\pi}{2}\right[$ : l'aire est maximale en $x=\dfrac{\pi}{4}$, et vaut $\mathcal{A}\!\left(\dfrac{\pi}{4}\right) = 4\sin\!\left(\dfrac{\pi}{2}\right) = 4$.
+
+\end{corrige}

@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-TRIGONOMETRIE-RE-C2", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : etude de fonction trigonometrique
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-TRIGO-RE-C2-EX1}{1}{10}
+Soit $f(x) = 2\cos x + 1$ sur $[0, \pi]$.
+\begin{enumerate}
+  \item Calculer $f'(x)$.
+  \item Etudier le signe de $f'$ sur $[0,\pi]$ et en deduire le sens de variation de $f$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, cos, sin, diff
+% x = symbols('x')
+% f = 2*cos(x) + 1
+% assert diff(f, x) == -2*sin(x)
+% END-VERIFY
+
+\begin{corrige}{TSPE-TRIGO-RE-C2-EX1}
+\textbf{a.} $f'(x) = -2\sin x$.
+
+\textbf{b.} Sur $[0,\pi]$, $\sin x \geq 0$, donc $f'(x) = -2\sin x \leq 0$ : $f$ est decroissante sur $[0,\pi]$.
+\end{corrige}

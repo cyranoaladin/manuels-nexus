@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-TRIGONOMETRIE-RE-C1", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "remediation", "capacites_codes": ["C1"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : equations/inequations cos(x)=a
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-TRIGO-RE-C1-EX1}{1}{10}
+Resoudre dans $[-\pi,\pi]$ :
+\begin{enumerate}
+  \item $\cos x = \dfrac{\sqrt{3}}{2}$.
+  \item $\cos x \geq 0$.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import cos, pi, sqrt, simplify
+% assert simplify(cos(pi/6) - sqrt(3)/2) == 0
+% assert cos(pi/2) == 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-TRIGO-RE-C1-EX1}
+\textbf{a.} $\cos\!\left(\dfrac{\pi}{6}\right) = \dfrac{\sqrt{3}}{2}$, donc $S = \left\{-\dfrac{\pi}{6}\,;\,\dfrac{\pi}{6}\right\}$.
+
+\textbf{b.} $\cos x = 0$ pour $x = \pm\dfrac{\pi}{2}$. La courbe de $\cos$ est positive entre ces deux valeurs : $S = \left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]$.
+\end{corrige}

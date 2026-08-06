@@ -1,0 +1,51 @@
+% META: {"id": "TSPE-TRIGO-CR-012", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "cours", "capacites_codes": ["C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Étudier une fonction trigonométrique pour un problème d'optimisation}
+
+% ============================================================
+% STRATE 1 — Methode et exemple complet
+% ============================================================
+
+Pour etudier les variations d'une fonction construite a partir de $\sin$ et $\cos$ (somme, produit par une constante, composee avec une fonction affine), on utilise les regles de derivation usuelles avec $\sin'=\cos$ et $\cos'=-\sin$, puis on etudie le signe de la derivee.
+
+\exemple{
+\textbf{Triangle isocele inscrit dans un cercle.} On considere un triangle isocele $OAB$ dont le sommet $O$ est le centre d'un cercle de rayon $1$, avec $OA = OB = 1$ et un angle au sommet $\widehat{AOB} = 2x$, ou $x \in \left]0, \dfrac{\pi}{2}\right[$.
+
+L'aire du triangle est $\mathcal{A}(x) = \dfrac{1}{2} \times OA \times OB \times \sin(\widehat{AOB}) = \dfrac{1}{2}\sin(2x)$.
+
+\textbf{Determiner la valeur de $x$ qui maximise l'aire.}
+
+$\mathcal{A}'(x) = \dfrac{1}{2} \times 2\cos(2x) = \cos(2x)$ (derivee de $x \mapsto \sin(2x)$, composee affine).
+
+Sur $\left]0, \dfrac{\pi}{2}\right[$, $2x \in ]0, \pi[$. On a $\cos(2x) = 0$ pour $2x = \dfrac{\pi}{2}$, soit $x = \dfrac{\pi}{4}$. De plus $\cos(2x) > 0$ pour $2x < \dfrac{\pi}{2}$ (soit $x < \dfrac{\pi}{4}$) et $\cos(2x) < 0$ pour $x > \dfrac{\pi}{4}$.
+
+Donc $\mathcal{A}$ est croissante sur $\left]0, \dfrac{\pi}{4}\right]$ et decroissante sur $\left[\dfrac{\pi}{4}, \dfrac{\pi}{2}\right[$ : l'aire est maximale en $x = \dfrac{\pi}{4}$, et vaut $\mathcal{A}\!\left(\dfrac{\pi}{4}\right) = \dfrac{1}{2}\sin\!\left(\dfrac{\pi}{2}\right) = \dfrac{1}{2}$.
+
+Le triangle d'aire maximale est donc celui pour lequel $\widehat{AOB} = \dfrac{\pi}{2}$ (angle droit).
+
+% BEGIN-VERIFY
+% from sympy import symbols, sin, cos, diff, pi, Rational, solve
+% x = symbols('x')
+% A = Rational(1,2)*sin(2*x)
+% Ap = diff(A, x)
+% assert Ap == cos(2*x)
+% crit = solve(Ap, x)
+% assert pi/4 in crit
+% assert A.subs(x, pi/4) == Rational(1, 2)
+% # signe : positif avant pi/4, negatif apres, sur ]0, pi/2[
+% assert Ap.subs(x, pi/6) > 0
+% assert Ap.subs(x, pi/3) < 0
+% END-VERIFY
+}
+
+\margeAppui{
+Methode generale d'optimisation : deriver, etudier le signe de la derivee, en deduire le tableau de variations, puis lire le maximum (ou minimum) et la valeur en laquelle il est atteint.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier la derivee d'une fonction composee.} Pour deriver $x \mapsto \sin(2x)$, il faut appliquer $(v \circ u)' = u' \times (v' \circ u)$ avec $u(x)=2x$ : $\left(\sin(2x)\right)' = 2\cos(2x)$, et non $\cos(2x)$ seul (oubli du facteur $u'=2$).
+}
