@@ -1,0 +1,66 @@
+% META: {"id": "TEXP-ARI-CR-010", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "cours", "capacites_codes": ["C1", "C9"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Divisibilité et PGCD}
+
+% ============================================================
+% STRATE 1 — Divisibilite, diviseurs
+% ============================================================
+
+\definition[1]{
+Un entier $a\in\mathbb{Z}$ est \textbf{divisible} par $b\in\mathbb{Z}^*$ (ou $b$ \textbf{divise} $a$, noté $b\mid a$) s'il existe $k\in\mathbb{Z}$ tel que $a=bk$.
+}
+
+\exemple{
+Les diviseurs positifs de $36$ sont $1,2,3,4,6,9,12,18,36$.
+}
+
+% BEGIN-VERIFY
+% diviseurs_36 = [d for d in range(1, 37) if 36 % d == 0]
+% assert diviseurs_36 == [1, 2, 3, 4, 6, 9, 12, 18, 36]
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — PGCD et algorithme d'Euclide
+% ============================================================
+
+\definition[2]{
+Le \textbf{PGCD} (plus grand commun diviseur) de deux entiers non tous deux nuls $a,b$ est le plus grand entier qui divise à la fois $a$ et $b$.
+}
+
+\theoreme[Algorithme d'Euclide]{
+Pour $a,b$ entiers avec $b\neq0$, en notant $r$ le reste de la division euclidienne de $a$ par $b$ : $\mathrm{PGCD}(a,b) = \mathrm{PGCD}(b,r)$. En répétant ce procédé jusqu'à un reste nul, le dernier reste non nul est le PGCD.
+}
+
+\exemple{
+Calculons $\mathrm{PGCD}(252,105)$ :
+\[
+  252 = 2\times105+42,\quad 105=2\times42+21,\quad 42=2\times21+0.
+\]
+Le dernier reste non nul est $21$ : $\mathrm{PGCD}(252,105)=21$.
+}
+
+\begin{python}
+def pgcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+\end{python}
+
+% BEGIN-VERIFY
+% def pgcd(a, b):
+%     while b != 0:
+%         a, b = b, a % b
+%     return a
+% assert pgcd(252, 105) == 21
+% import math
+% assert pgcd(252, 105) == math.gcd(252, 105)
+% assert pgcd(17, 5) == 1
+% END-VERIFY
+
+\propriete[Couples d'entiers premiers entre eux]{
+Deux entiers $a,b$ sont \textbf{premiers entre eux} si $\mathrm{PGCD}(a,b)=1$ (leur seul diviseur commun positif est $1$).
+}
+
+\erreurFrequente{
+\textbf{Confondre \og premiers entre eux \fg{} et \og nombres premiers \fg{}.} Deux nombres peuvent être premiers entre eux sans être eux-mêmes des nombres premiers : par exemple, $8$ et $15$ sont premiers entre eux ($\mathrm{PGCD}(8,15)=1$), bien que ni $8$ ni $15$ ne soient des nombres premiers.
+}

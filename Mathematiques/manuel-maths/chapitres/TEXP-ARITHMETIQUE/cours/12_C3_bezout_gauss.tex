@@ -1,0 +1,71 @@
+% META: {"id": "TEXP-ARI-CR-012", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "cours", "capacites_codes": ["C4", "C5", "C6"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Théorèmes de Bézout et de Gauss}
+
+% ============================================================
+% STRATE 1 — Theoreme de Bezout
+% ============================================================
+
+\theoreme[Théorème de Bézout]{
+Pour tous entiers $a,b$ non tous deux nuls, il existe des entiers $x,y\in\mathbb{Z}$ tels que $\mathrm{PGCD}(a,b) = ax+by$.
+}
+
+\demonstration{
+Considérons l'ensemble $E=\{au+bv\ :\ u,v\in\mathbb{Z},\ au+bv>0\}$. Cet ensemble est non vide (par exemple $a^2+b^2>0$ appartient à $E$ pour $u=a,v=b$), donc il possède un plus petit élément $d=ax_0+by_0>0$.
+
+Montrons que $d$ divise $a$ : la division euclidienne de $a$ par $d$ donne $a=qd+r$ avec $0\leq r<d$. Alors $r=a-qd = a-q(ax_0+by_0) = a(1-qx_0)+b(-qy_0)$, une combinaison de la forme $au+bv$. Si $r>0$, alors $r\in E$ et $r<d$, ce qui contredit la minimalité de $d$. Donc $r=0$, c'est-à-dire $d$ divise $a$. Par un raisonnement identique, $d$ divise $b$.
+
+$d$ est donc un diviseur commun de $a$ et $b$. Réciproquement, tout diviseur commun $\delta$ de $a$ et $b$ divise $ax_0+by_0=d$. Donc $d$ est le \textbf{plus grand} diviseur commun : $d=\mathrm{PGCD}(a,b)$, et $d=ax_0+by_0$.
+}
+
+\exemple{
+Pour $a=252$, $b=105$ (PGCD $=21$, vu précédemment), on remonte l'algorithme d'Euclide : $21 = 105-2\times42$ et $42=252-2\times105$, donc $21 = 105-2\times(252-2\times105) = 5\times105-2\times252$. On a bien $21 = 252\times(-2)+105\times5$.
+}
+
+% BEGIN-VERIFY
+% assert 252*(-2) + 105*5 == 21
+% import math
+% assert math.gcd(252, 105) == 21
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Theoreme de Gauss, equations diophantiennes
+% ============================================================
+
+\theoreme[Théorème de Gauss]{
+Si $a$ divise $bc$ et si $a$ est premier avec $b$, alors $a$ divise $c$.
+}
+
+\demonstration{
+Comme $a$ et $b$ sont premiers entre eux, le théorème de Bézout donne $u,v\in\mathbb{Z}$ tels que $au+bv=1$. En multipliant par $c$ : $acu+bcv=c$. Or $a$ divise $acu$ (évident) et $a$ divise $bcv$ (car $a$ divise $bc$ par hypothèse). Donc $a$ divise la somme $acu+bcv=c$.
+}
+
+% BEGIN-VERIFY
+% import math
+% a, b, c = 5, 3, 20
+% assert (b*c) % a == 0
+% assert math.gcd(a, b) == 1
+% assert c % a == 0
+% END-VERIFY
+
+\propriete[Équations diophantiennes]{
+L'équation $ax+by=c$ (avec $a,b,c\in\mathbb{Z}$) admet des solutions entières $(x,y)$ si et seulement si $\mathrm{PGCD}(a,b)$ divise $c$. On en trouve une solution particulière via l'algorithme d'Euclide étendu (Bézout), puis on décrit toutes les solutions.
+}
+
+\exemple{
+Résoudre $252x+105y=63$ dans $\mathbb{Z}^2$. Comme $\mathrm{PGCD}(252,105)=21$ divise $63$ ($63=3\times21$), l'équation a des solutions. En multipliant la relation de Bézout $252\times(-2)+105\times5=21$ par $3$ : $252\times(-6)+105\times15=63$. Une solution particulière est $(x_0,y_0)=(-6,15)$.
+}
+
+% BEGIN-VERIFY
+% assert 252*(-6) + 105*15 == 63
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Croire qu'une équation diophantienne $ax+by=c$ a toujours des solutions entières.} Ce n'est le cas que si $\mathrm{PGCD}(a,b)$ divise $c$ : par exemple, $6x+9y=4$ n'a \textbf{aucune} solution entière, car $\mathrm{PGCD}(6,9)=3$ ne divise pas $4$.
+}
+
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(6, 9) == 3
+% assert 4 % 3 != 0
+% END-VERIFY

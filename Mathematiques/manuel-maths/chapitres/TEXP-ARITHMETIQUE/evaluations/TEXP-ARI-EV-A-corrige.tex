@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-ARI-EV-A-corrige", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-ARI-EV-A", "capacites_codes": ["C1", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(198, 72) == 18
+% assert 198 == 2*72 + 54
+% assert 72 == 1*54 + 18
+% assert 54 == 3*18 + 0
+% assert 198*(-1) + 72*3 == 18
+% assert 198*(-3) + 72*9 == 54
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EV-A-EX1}
+\[
+  198 = 2\times72+54, \qquad 72=1\times54+18, \qquad 54=3\times18+0.
+\]
+Le dernier reste non nul est $18$ : $\mathrm{PGCD}(198,72)=18$.
+\end{corrige}
+
+\begin{corrige}{TEXP-ARI-EV-A-EX2}
+\textbf{1.} Voir la démonstration du cours : $E=\{au+bv>0\}$ est non vide, possède un plus petit élément $d$, et on montre par division euclidienne que $d$ divise $a$ et $b$ ; tout diviseur commun de $a,b$ divise $d$, donc $d=\mathrm{PGCD}(a,b)$.
+
+\textbf{2.} On remonte : $18 = 72-1\times54 = 72-1\times(198-2\times72) = 3\times72-198$, soit $198\times(-1)+72\times3=18$.
+
+\textbf{3.} $\mathrm{PGCD}(198,72)=18$ divise $54$ ($54=3\times18$) : l'équation a des solutions. En multipliant la relation précédente par $3$ : $198\times(-3)+72\times9=54$. Une solution est $(x_0,y_0)=(-3,9)$.
+\end{corrige}

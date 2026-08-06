@@ -1,0 +1,21 @@
+% META: {"id": "TEXP-ARI-CO-003", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-003", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(17, 5) == 1
+% assert 17 == 3*5 + 2
+% assert 5 == 2*2 + 1
+% assert 2 == 2*1 + 0
+% assert 17*(-2) + 5*7 == 1
+% assert 17*(-6) + 5*21 == 3
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-003}
+\textbf{1.} $\mathrm{PGCD}(17,5)=1$, qui divise $3$ : l'équation admet des solutions entières.
+
+\textbf{2.} Algorithme d'Euclide : $17=3\times5+2$, $5=2\times2+1$, $2=2\times1+0$. On remonte :
+\[
+  1 = 5-2\times2 = 5-2\times(17-3\times5) = 7\times5-2\times17.
+\]
+Donc $17\times(-2)+5\times7=1$.
+
+\textbf{3.} En multipliant par $3$ : $17\times(-6)+5\times21=3$. Une solution particulière est $(x_0,y_0)=(-6,21)$.
+\end{corrige}
