@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-COMBI-EV-B-corrige", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-COMBI-EV-B", "version": "B", "capacites_codes": ["C2", "C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert binomial(12, 4) == 495
+% assert sum(binomial(6,k) for k in range(7)) == 64
+% END-VERIFY
+\begin{corrige}{TSPE-COMBI-EV-B-EX1}
+\textbf{Q1.} Non : c'est un groupe (ensemble), l'ordre de selection des $4$ eleves n'a pas d'importance.
+
+\textbf{Q2.} $\dbinom{12}{4} = \dfrac{12!}{4!\,8!} = \dfrac{12\times11\times10\times9}{4\times3\times2\times1} = \boxed{495}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-COMBI-EV-B-EX2}
+\[
+  \binom{6}{0}+\binom{6}{1}+\binom{6}{2}+\binom{6}{3}+\binom{6}{4}+\binom{6}{5}+\binom{6}{6} = 1+6+15+20+15+6+1 = 64 = 2^6.
+\]
+
+Principe general : on denombre l'ensemble des parties d'un ensemble a $n$ elements de deux facons (par le principe multiplicatif : $2^n$ ; en classant par taille : $\sum_k \dbinom{n}{k}$), ce qui donne l'egalite.
+\end{corrige}
+
+\begin{corrige}{TSPE-COMBI-EV-B-EX3}
+Soit $E$ un ensemble a $n$ elements, $a \in E$ fixe. On classe les parties a $k$ elements de $E$ selon qu'elles contiennent $a$ ou non :
+\begin{itemize}
+  \item parties contenant $a$ : choisir les $k-1$ autres elements parmi les $n-1$ restants, soit $\dbinom{n-1}{k-1}$ ;
+  \item parties ne contenant pas $a$ : choisir les $k$ elements parmi les $n-1$ restants, soit $\dbinom{n-1}{k}$.
+\end{itemize}
+Ces deux categories sont disjointes et couvrent toutes les parties a $k$ elements : par le principe additif, $\dbinom{n}{k} = \dbinom{n-1}{k-1}+\dbinom{n-1}{k}$.
+\end{corrige}

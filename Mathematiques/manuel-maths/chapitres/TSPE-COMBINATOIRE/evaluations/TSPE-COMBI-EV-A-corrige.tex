@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-COMBI-EV-A-corrige", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-COMBI-EV-A", "version": "A", "capacites_codes": ["C2", "C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert 5*4*3 == 60
+% assert binomial(8,3) + binomial(8,4) == 126
+% END-VERIFY
+\begin{corrige}{TSPE-COMBI-EV-A-EX1}
+\textbf{Q1.} Oui : "ABC" et "BAC" sont deux codes differents.
+
+\textbf{Q2.} Choix ordonne de $3$ lettres distinctes parmi $5$ : $5 \times 4 \times 3 = \boxed{60}$ codes.
+\end{corrige}
+
+\begin{corrige}{TSPE-COMBI-EV-A-EX2}
+Soit $E$ un ensemble a $n$ elements. On denombre les parties de $E$ de deux facons.
+
+\textbf{Methode 1.} Pour chaque element, $2$ choix (dans la partie ou non) : par le principe multiplicatif, $2^n$ parties.
+
+\textbf{Methode 2.} En classant par taille $k$ (de $0$ a $n$), il y a $\dbinom{n}{k}$ parties de taille $k$ ; par le principe additif, $\displaystyle\sum_{k=0}^n \dbinom{n}{k}$ parties au total.
+
+Les deux methodes denombrent le meme ensemble : $\displaystyle\sum_{k=0}^{n}\dbinom{n}{k} = 2^n$.
+\end{corrige}
+
+\begin{corrige}{TSPE-COMBI-EV-A-EX3}
+D'apres la relation de Pascal, $\dbinom{9}{4} = \dbinom{8}{3}+\dbinom{8}{4}$.
+\[
+  \binom{9}{4} = 56+70 = \boxed{126}.
+\]
+\end{corrige}

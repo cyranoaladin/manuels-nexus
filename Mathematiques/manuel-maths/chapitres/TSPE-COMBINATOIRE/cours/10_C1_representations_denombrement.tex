@@ -1,0 +1,42 @@
+% META: {"id": "TSPE-COMBI-CR-010", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Représentations pour dénombrer}
+
+% ============================================================
+% STRATE 1 — Outils de representation
+% ============================================================
+
+\definition[1]{
+\textbf{Dénombrer} un ensemble fini, c'est determiner son nombre d'elements (son \textbf{cardinal}), note $\mathrm{Card}(E)$ ou $|E|$.
+}
+
+\propriete[Outils de représentation]{
+\begin{itemize}
+  \item \textbf{Arbre} : represente des choix successifs (chaque branche = une possibilite a une etape).
+  \item \textbf{Tableau} (double entree) : adapte pour deux choix independants.
+  \item \textbf{Diagramme (patates, Venn)} : adapte pour representer des unions, intersections, complementaires d'ensembles.
+  \item \textbf{Liste ou ensemble} : enumeration directe, adaptee aux petits cas.
+\end{itemize}
+}
+
+\exemple{
+Un menu propose $3$ entrees et $2$ desserts. Combien de menus (entree, dessert) different differents peut-on composer ?
+
+Un arbre a $3$ branches au premier niveau (entrees), chacune se subdivisant en $2$ branches (desserts) : on obtient $3 \times 2 = 6$ chemins, donc $6$ menus possibles.
+
+% BEGIN-VERIFY
+% assert 3 * 2 == 6
+% END-VERIFY
+}
+
+\margeAppui{
+Le choix de la representation depend de la structure du probleme : arbre pour des etapes successives, tableau pour deux criteres croises, diagramme pour des categories qui se recoupent.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de verifier si l'ordre compte et si les repetitions sont autorisees.} Avant tout denombrement, il faut se demander : "Choisit-on avec ou sans ordre ?" et "Peut-on choisir plusieurs fois le meme element ?" — ces deux questions determinent la formule a utiliser (chapitre suivant).
+}

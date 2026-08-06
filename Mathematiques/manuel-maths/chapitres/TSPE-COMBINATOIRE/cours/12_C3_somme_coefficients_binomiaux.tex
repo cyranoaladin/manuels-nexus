@@ -1,0 +1,52 @@
+% META: {"id": "TSPE-COMBI-CR-012", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "cours", "capacites_codes": ["C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Somme des coefficients binomiaux}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible
+% ============================================================
+
+\theoreme{
+Pour tout entier naturel $n$ :
+\[
+  \sum_{k=0}^{n} \binom{n}{k} = 2^n.
+\]
+}
+
+\demonstration{
+Soit $E$ un ensemble a $n$ elements. On denombre le nombre de \textbf{parties} (sous-ensembles) de $E$ de deux facons differentes.
+
+\textbf{Premiere methode : par le principe multiplicatif.} Pour construire une partie de $E$, on decide, pour chacun des $n$ elements, s'il appartient ou non a la partie : $2$ choix independants (« oui » ou « non ») pour chacun des $n$ elements. Par le principe multiplicatif, le nombre total de parties de $E$ est :
+\[
+  \underbrace{2 \times 2 \times \cdots \times 2}_{n \text{ facteurs}} = 2^n.
+\]
+
+\textbf{Deuxieme methode : en classant les parties par taille.} Toute partie de $E$ a un cardinal $k$ compris entre $0$ et $n$. Le nombre de parties de cardinal $k$ est, par definition, $\dbinom{n}{k}$. En sommant sur toutes les tailles possibles (les parties de tailles differentes sont deux a deux disjointes au sens des ensembles qu'elles forment, donc le principe additif s'applique) :
+\[
+  \text{Nombre total de parties de } E = \sum_{k=0}^{n} \binom{n}{k}.
+\]
+
+Les deux methodes denombrent le meme ensemble (l'ensemble des parties de $E$) : elles donnent donc le meme resultat, d'ou $\displaystyle\sum_{k=0}^{n} \binom{n}{k} = 2^n$.
+}
+
+\margeAppui{
+Cette technique — denombrer un meme ensemble de deux facons differentes pour en deduire une egalite — s'appelle une \textbf{preuve combinatoire} (ou preuve par double denombrement).
+}
+
+\exemple{
+Verifier la formule pour $n=4$ : $\dbinom{4}{0}+\dbinom{4}{1}+\dbinom{4}{2}+\dbinom{4}{3}+\dbinom{4}{4} = 1+4+6+4+1 = 16 = 2^4$.
+
+% BEGIN-VERIFY
+% from sympy import binomial
+% total = sum(binomial(4, k) for k in range(5))
+% assert total == 16 == 2**4
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Croire que la preuve necessite de calculer chaque $\dbinom{n}{k}$.} La preuve combinatoire ne calcule aucun coefficient binomial individuellement : elle compare deux facons de compter le \emph{meme} ensemble (les parties de $E$). C'est la l'interet de cette methode, plus elegante qu'un calcul algebrique direct.
+}

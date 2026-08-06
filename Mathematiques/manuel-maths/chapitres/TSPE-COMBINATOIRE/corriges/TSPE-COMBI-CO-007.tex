@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-COMBI-CO-007", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "corrige", "exercice_ref": "TSPE-COMBI-EX-007", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert binomial(7, 2) == 21
+% assert binomial(7, 3) == 35
+% assert 21 + 35 == binomial(8, 3) == 56
+% END-VERIFY
+\begin{corrige}{TSPE-COMBI-EX-007}
+
+\textbf{Q1.} Un comite de $3$ personnes contenant Alice est determine par le choix des $2$ autres membres parmi les $7$ personnes restantes de $G$ : il y en a $\dbinom{7}{2} = 21$.
+
+\textbf{Q2.} Un comite de $3$ personnes ne contenant pas Alice est un choix de $3$ personnes parmi les $7$ restantes : il y en a $\dbinom{7}{3} = 35$.
+
+\textbf{Q3.} Tout comite de $3$ personnes contient Alice ou ne la contient pas (ces deux cas sont disjoints et couvrent tous les cas) : par le principe additif, le nombre total de comites est $21+35 = 56$.
+
+\textbf{Q4.} Directement, le nombre de comites de $3$ personnes parmi $8$ est $\dbinom{8}{3} = 56$, ce qui coincide avec la Q3. On retrouve exactement la relation de Pascal : $\dbinom{8}{3} = \dbinom{7}{2}+\dbinom{7}{3}$ (avec $n=8$, $k=3$) — c'est precisement le raisonnement de la demonstration combinatoire du cours, applique ici a Alice comme element fixe.
+
+\end{corrige}
