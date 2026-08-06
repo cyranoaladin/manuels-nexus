@@ -1,0 +1,52 @@
+% META: {"id": "TSPE-PRIMEQ-EV-B", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3"], "competences": ["calculer", "raisonner", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, ln, exp, simplify, Rational
+% x = symbols('x')
+% F = Rational(1,2)*ln(2*x+3)
+% assert simplify(diff(F, x) - 1/(2*x+3)) == 0
+% y = exp(-3*x) + 3
+% assert diff(y, x) == -3*y + 9
+% assert y.subs(x, 0) == 4
+% yp = -x - 1
+% assert diff(yp, x) == 2*yp + 2*x + 1
+% y3 = 3*exp(2*x) + yp
+% assert diff(y3, x) == 2*y3 + 2*x + 1
+% assert y3.subs(x, 0) == 2
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-PRIMEQ-EV-B}{55}
+
+\begin{exercice}{TSPE-PRIMEQ-EV-B-EX1}{2}{15}
+\textbf{Exercice 1} (6 points) — \textit{Capacite C1}
+
+\medskip
+
+Determiner une primitive sur $\left]-\dfrac{3}{2},+\infty\right[$ de $f(x) = \dfrac{1}{2x+3}$.
+\end{exercice}
+
+\begin{exercice}{TSPE-PRIMEQ-EV-B-EX2}{2}{20}
+\textbf{Exercice 2} (8 points) — \textit{Capacite C2}
+
+\medskip
+
+Resoudre $y' = -3y + 9$, puis determiner la solution telle que $y(0) = 4$.
+\end{exercice}
+
+\begin{exercice}{TSPE-PRIMEQ-EV-B-EX3}{2}{20}
+\textbf{Exercice 3} (6 points) — \textit{Capacite C3}
+
+\medskip
+
+On donne que $y_p(x) = -x-1$ est une solution particuliere de $y' = 2y+2x+1$.
+\begin{enumerate}
+  \item (2 pts) Verifier que $y_p$ est solution de l'equation.
+  \item (2 pts) Donner la forme generale des solutions.
+  \item (2 pts) Determiner la solution telle que $y(0) = 2$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

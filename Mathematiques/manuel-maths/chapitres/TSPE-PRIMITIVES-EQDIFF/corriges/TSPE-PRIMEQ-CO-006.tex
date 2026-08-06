@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-PRIMEQ-CO-006", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "corrige", "exercice_ref": "TSPE-PRIMEQ-EX-006", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp
+% x = symbols('x')
+% assert diff(exp(2*x), x) == diff(exp(2*x) - 7, x)
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EX-006}
+
+\textbf{Q1.} $F'(x) = 2\mathrm{e}^{2x}$ et $G'(x) = 2\mathrm{e}^{2x}$ : $F$ et $G$ sont bien deux primitives de $f(x) = 2\mathrm{e}^{2x}$ sur $\mathbb{R}$.
+
+\textbf{Q2.} D'apres le theoreme du cours, deux primitives d'une meme fonction continue sur un intervalle different d'une constante. Ici, $G(x)-F(x) = -7$ pour tout $x$ (calcul direct), donc $k=-7$ : $G = F - 7$.
+
+\end{corrige}

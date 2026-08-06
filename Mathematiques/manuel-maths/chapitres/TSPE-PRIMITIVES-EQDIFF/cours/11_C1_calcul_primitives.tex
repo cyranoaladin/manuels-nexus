@@ -1,0 +1,79 @@
+% META: {"id": "TSPE-PRIMEQ-CR-011", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Calcul de primitives}
+
+% ============================================================
+% STRATE 1 — Primitives de reference et forme (v'ou)u'
+% ============================================================
+
+\propriete[Primitives de référence]{
+\begin{itemize}
+  \item $f(x) = x^n$ ($n \in \mathbb{N}$) a pour primitive $F(x) = \dfrac{x^{n+1}}{n+1}$ sur $\mathbb{R}$.
+  \item $f(x) = \dfrac{1}{x^2}$ a pour primitive $F(x) = -\dfrac{1}{x}$ sur $]0,+\infty[$ ou sur $]-\infty,0[$.
+  \item $f(x) = \dfrac{1}{\sqrt{x}}$ a pour primitive $F(x) = 2\sqrt{x}$ sur $]0,+\infty[$.
+  \item $f(x) = \dfrac{1}{x}$ a pour primitive $F(x) = \ln x$ sur $]0,+\infty[$.
+  \item $f(x) = \mathrm{e}^x$ a pour primitive $F(x) = \mathrm{e}^x$ sur $\mathbb{R}$.
+  \item $f(x) = \cos x$ a pour primitive $F(x) = \sin x$ ; $f(x) = \sin x$ a pour primitive $F(x) = -\cos x$, sur $\mathbb{R}$.
+\end{itemize}
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, ln, exp, sin, cos, sqrt, Rational
+% x = symbols('x')
+% assert diff(x**4/4, x) == x**3
+% assert diff(-1/x, x) == 1/x**2
+% assert diff(2*sqrt(x), x) == 1/sqrt(x)
+% assert diff(ln(x), x) == 1/x
+% assert diff(exp(x), x) == exp(x)
+% assert diff(sin(x), x) == cos(x)
+% assert diff(-cos(x), x) == sin(x)
+% END-VERIFY
+
+\theoreme[Forme $(v' \circ u) \times u'$]{
+Si $u$ est derivable sur $I$ et $v$ admet une primitive $V$, alors $x \mapsto V(u(x))$ est une primitive de $x \mapsto u'(x) \times v(u(x))$ sur $I$.
+
+En particulier :
+\begin{itemize}
+  \item $u' \mathrm{e}^u$ a pour primitive $\mathrm{e}^u$.
+  \item $\dfrac{u'}{u}$ a pour primitive $\ln|u|$ (si $u$ ne s'annule pas).
+  \item $u'u^n$ ($n \in \mathbb{N}$) a pour primitive $\dfrac{u^{n+1}}{n+1}$.
+\end{itemize}
+}
+
+\exemple{
+Trouver une primitive de $f(x) = \dfrac{2x}{x^2+1}$ sur $\mathbb{R}$.
+
+On reconnait la forme $\dfrac{u'}{u}$ avec $u(x)=x^2+1$ (toujours $>0$) et $u'(x)=2x$. Une primitive est donc $F(x) = \ln(x^2+1)$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, ln
+% x = symbols('x')
+% F = ln(x**2+1)
+% assert diff(F, x) == 2*x/(x**2+1)
+% END-VERIFY
+}
+
+\exemple{
+Trouver une primitive de $f(x) = 6x(x^2+1)^2$ sur $\mathbb{R}$.
+
+On reconnait la forme $u' u^n$ avec $u(x)=x^2+1$, $u'(x)=2x$, $n=2$ : $f(x) = 3 \times u'(x) \times u(x)^2$. Une primitive est donc $F(x) = 3 \times \dfrac{u(x)^3}{3} = (x^2+1)^3$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand
+% x = symbols('x')
+% F = (x**2+1)**3
+% assert expand(diff(F, x) - 6*x*(x**2+1)**2) == 0
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre derivee et primitive.} Deriver $F$ donne $f$ ; trouver une primitive de $f$ revient a "remonter" a une fonction $F$ dont $f$ est la derivee. Toujours verifier une primitive en la derivant.
+}
+
+\erreurFrequente{
+\textbf{Oublier le facteur $u'$ dans les formes composees.} $2x \, \mathrm{e}^{x^2}$ a pour primitive $\mathrm{e}^{x^2}$ (car $u=x^2$, $u'=2x$ est deja present) ; mais $\mathrm{e}^{x^2}$ seul (sans le facteur $2x$) n'a pas de primitive elementaire simple.
+}

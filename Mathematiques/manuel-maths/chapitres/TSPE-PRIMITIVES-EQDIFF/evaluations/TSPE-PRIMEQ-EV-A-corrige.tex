@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-PRIMEQ-EV-A-corrige", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-PRIMEQ-EV-A", "version": "A", "capacites_codes": ["C1", "C4", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, expand, ln, Rational
+% x = symbols('x')
+% F = (x**3+2)**5/15
+% assert expand(diff(F, x) - x**2*(x**3+2)**4) == 0
+% assert diff(ln(x**2+1), x) == diff(ln(x**2+1) + Rational(1, 2), x)
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EV-A-EX1}
+Forme $u'u^n$ avec $u(x)=x^3+2$, $u'(x)=3x^2$, $n=4$ : $f(x) = \dfrac{1}{3} \times 3x^2 \times (x^3+2)^4 = \dfrac{1}{3}u'u^4$.
+
+Une primitive de $u'u^4$ est $\dfrac{u^5}{5}$, donc :
+\[
+  \boxed{F(x) = \frac{1}{3} \times \frac{(x^3+2)^5}{5} = \frac{(x^3+2)^5}{15}}.
+\]
+\end{corrige}
+
+\begin{corrige}{TSPE-PRIMEQ-EV-A-EX2}
+\textbf{Q1.} $F'(x) = \dfrac{2x}{x^2+1}$ et $G'(x) = \dfrac{2x}{x^2+1}$ (la constante $1/2$ disparait a la derivation). $F$ et $G$ sont donc deux primitives de $f(x) = \dfrac{2x}{x^2+1}$ sur $\mathbb{R}$.
+
+\textbf{Q2.} D'apres le theoreme du cours, deux primitives d'une meme fonction continue sur un intervalle different d'une constante. Ici, $G(x)-F(x) = \dfrac{1}{2}$ pour tout $x$ (lecture directe des expressions) : la constante vaut $\dfrac{1}{2}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-PRIMEQ-EV-A-EX3}
+Les solutions de $y'=2y$ sont $y(x) = C\mathrm{e}^{2x}$. La condition $y(1)=3\mathrm{e}^2$ donne $C\mathrm{e}^2 = 3\mathrm{e}^2$, donc $C=3$.
+
+La solution cherchee est $y(x) = 3\mathrm{e}^{2x}$.
+\end{corrige}

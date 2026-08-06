@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-PRIMEQ-EX-006", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "exercice", "capacites": ["TSPE-PRIMEQ-C4"], "capacites_codes": ["C4"], "methodes": ["M1"], "parcours": 1, "competences": ["raisonner", "calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-006.tex", "corrige_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/corriges/TSPE-PRIMEQ-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, exp
+% x = symbols('x')
+% F = exp(2*x)
+% G = exp(2*x) - 7
+% assert diff(F, x) == diff(G, x)
+% assert F - G == 7
+% END-VERIFY
+\begin{exercice}{TSPE-PRIMEQ-EX-006}{1}{10}
+On donne $F(x) = \mathrm{e}^{2x}$ et $G(x) = \mathrm{e}^{2x} - 7$.
+\begin{enumerate}
+  \item Verifier que $F$ et $G$ sont deux primitives d'une meme fonction $f$ que l'on determinera.
+  \item Sans calcul supplementaire, donner (en justifiant par le cours) la valeur de la constante $k$ telle que $G = F + k$.
+\end{enumerate}
+\end{exercice}

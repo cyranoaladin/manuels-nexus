@@ -1,0 +1,60 @@
+% META: {"id": "TSPE-PRIMEQ-CR-010", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Primitives d'une fonction}
+
+% ============================================================
+% STRATE 1 — Definition et demonstration exigible
+% ============================================================
+
+\definition[1]{
+Soit $f$ une fonction definie sur un intervalle $I$. Une \textbf{primitive} de $f$ sur $I$ est une fonction $F$ derivable sur $I$ telle que $F' = f$ sur $I$.
+}
+
+\propriete[Admise]{
+Une fonction constante sur un intervalle a pour derivee la fonction nulle. Reciproquement, si une fonction $g$ est derivable sur un intervalle $I$ et $g'=0$ sur $I$, alors $g$ est constante sur $I$.
+}
+
+\theoreme{
+Soit $f$ une fonction continue sur un intervalle $I$, et $F$ une primitive de $f$ sur $I$. Alors les primitives de $f$ sur $I$ sont exactement les fonctions $x \mapsto F(x) + k$, ou $k \in \mathbb{R}$ est une constante.
+
+Autrement dit, deux primitives de $f$ sur $I$ different d'une constante.
+}
+
+\demonstration{
+Soit $G$ une autre primitive de $f$ sur $I$, c'est-a-dire $G' = f$ sur $I$.
+
+Posons $g = G - F$. Alors $g$ est derivable sur $I$ (difference de fonctions derivables), et :
+\[
+  g' = G' - F' = f - f = 0 \quad \text{sur } I.
+\]
+
+D'apres la propriete admise, $g$ est donc constante sur $I$ : il existe $k \in \mathbb{R}$ tel que $g(x) = k$ pour tout $x \in I$, c'est-a-dire $G(x) - F(x) = k$, soit $G(x) = F(x) + k$.
+
+Reciproquement, pour tout $k \in \mathbb{R}$, la fonction $x \mapsto F(x)+k$ est bien une primitive de $f$ (sa derivee est $F'=f$).
+}
+
+\margeAppui{
+Une fonction $f$ continue sur un intervalle admet donc une infinite de primitives sur cet intervalle, toutes obtenues a partir de l'une d'entre elles en ajoutant une constante.
+}
+
+\exemple{
+$F(x) = x^2$ et $G(x) = x^2 + 5$ sont deux primitives de $f(x)=2x$ sur $\mathbb{R}$ : $G(x) - F(x) = 5$, constante.
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x')
+% F = x**2
+% G = x**2 + 5
+% assert diff(F, x) == 2*x
+% assert diff(G, x) == 2*x
+% assert G - F == 5
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier que ce resultat suppose $I$ un intervalle.} Sur une reunion de deux intervalles disjoints, deux fonctions de meme derivee peuvent differer par des constantes \emph{differentes} sur chaque intervalle (ce n'est plus une seule constante globale).
+}

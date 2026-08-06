@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-PRIMEQ-CO-003", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "corrige", "exercice_ref": "TSPE-PRIMEQ-EX-003", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff
+% x = symbols('x')
+% y = -3*exp(-2*x) + 4
+% assert diff(y, x) == -2*y + 8
+% assert y.subs(x, 0) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EX-003}
+
+\textbf{Q1.} $y_0 = -\dfrac{b}{a} = -\dfrac{8}{-2} = 4$.
+
+\textbf{Q2.} Solutions generales : $y(x) = C\mathrm{e}^{-2x} + 4$, $C \in \mathbb{R}$.
+
+\textbf{Q3.} $y(0) = C + 4 = 1$, donc $C=-3$. La solution cherchee est $y(x) = -3\mathrm{e}^{-2x}+4$.
+
+\end{corrige}

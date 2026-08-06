@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-PRIMEQ-ME-002", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "methode", "capacites_codes": ["C2", "C3"], "methodes": ["M2"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M2}{Résoudre une équation différentielle $y'=ay+b$ ou $y'=ay+f$}
+
+\quandUtiliser{%
+  Utiliser cette methode pour resoudre une equation differentielle lineaire du premier ordre, puis determiner la solution verifiant une condition initiale.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier} $a$ (coefficient de $y$) et le second membre ($b$ constant, ou $f$ fonction).
+    \item \textbf{Trouver ou verifier une solution particuliere} $y_p$ : constante si second membre constant ($y_p=-b/a$), ou verifier la solution donnee dans l'enonce si second membre est une fonction.
+    \item \textbf{Ecrire la solution generale} $y(x) = C\mathrm{e}^{ax} + y_p(x)$.
+    \item \textbf{Utiliser la condition initiale} (par exemple $y(x_0)=y_0$) pour determiner $C$.
+  \end{enumerate}
+}
+
+\end{fichemethode}
