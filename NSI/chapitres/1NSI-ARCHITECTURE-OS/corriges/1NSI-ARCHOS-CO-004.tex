@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-ARCHOS-CO-004", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige", "exercice_ref": "1NSI-ARCHOS-EX-004", "capacites": ["P-ARCH-03B"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import subprocess, tempfile
+% with tempfile.TemporaryDirectory() as tmp:
+%     subprocess.run(["mkdir", "projet"], cwd=tmp, check=True)
+%     subprocess.run(["touch", "projet/main.py"], cwd=tmp, check=True)
+%     subprocess.run(["touch", "projet/readme.md"], cwd=tmp, check=True)
+%     resultat = subprocess.run(["ls", "projet"], cwd=tmp, capture_output=True, text=True, check=True)
+%     assert sorted(resultat.stdout.split()) == ["main.py", "readme.md"]
+%     subprocess.run(["rm", "projet/readme.md"], cwd=tmp, check=True)
+%     resultat2 = subprocess.run(["ls", "projet"], cwd=tmp, capture_output=True, text=True, check=True)
+%     assert resultat2.stdout.split() == ["main.py"]
+% END-VERIFY
+\begin{corrige}{1NSI-ARCHOS-EX-004}
+\begin{python}
+import subprocess
+
+subprocess.run(["mkdir", "projet"])
+subprocess.run(["touch", "projet/main.py"])
+subprocess.run(["touch", "projet/readme.md"])
+
+resultat = subprocess.run(["ls", "projet"], capture_output=True, text=True)
+print(resultat.stdout)  # main.py \n readme.md
+
+subprocess.run(["rm", "projet/readme.md"])
+resultat2 = subprocess.run(["ls", "projet"], capture_output=True, text=True)
+print(resultat2.stdout)  # main.py
+\end{python}
+Après suppression, seul \lstinline{main.py} reste dans le dossier \lstinline{projet}.
+\end{corrige}

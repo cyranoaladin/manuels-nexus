@@ -1,0 +1,24 @@
+chapitre: 1NSI-ARCHITECTURE-OS
+niveau: 1NSI
+theme: ARCHITECTURES-MATERIELLES-ET
+titre: "Architecture de von Neumann et systèmes d'exploitation"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-ARCH-01A, libelle_eleve: "Je sais distinguer les rôles et les caractéristiques des constituants d'une machine (architecture de von Neumann)." }
+  - { code: C2, ref_capacite: P-ARCH-01B, libelle_eleve: "Je sais dérouler l'exécution d'une séquence d'instructions simples de type langage machine." }
+  - { code: C3, ref_capacite: P-ARCH-03A, libelle_eleve: "Je sais identifier les fonctions d'un système d'exploitation." }
+  - { code: C4, ref_capacite: P-ARCH-03B, libelle_eleve: "Je sais utiliser les commandes de base en ligne de commande." }
+  - { code: C5, ref_capacite: P-ARCH-03C, libelle_eleve: "Je sais gérer les droits et permissions d'accès aux fichiers." }
+
+prerequis:
+  - { code: R1, libelle: "Représentation binaire des entiers", chapitre_origine: "1NSI-TYPES-BASE" }
+
+situation_accroche: >
+  Quand un ordinateur exécute un programme, où sont stockées les instructions ? Où sont
+  stockées les données sur lesquelles elles travaillent ? Comment le système d'exploitation
+  gère-t-il qui a le droit de lire ou modifier tel fichier ? Ce chapitre explore
+  l'architecture matérielle qui rend l'exécution des programmes possible, et le rôle du
+  système d'exploitation qui l'organise.
+
+temps_estime_h: { parcours1: 9, parcours2: 7, parcours3: 6 }

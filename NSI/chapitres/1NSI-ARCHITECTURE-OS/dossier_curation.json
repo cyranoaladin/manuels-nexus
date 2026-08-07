@@ -1,0 +1,14 @@
+{
+  "chapitre": "1NSI-ARCHITECTURE-OS",
+  "referentiel": "capacites_1NSI_ARCHITECTURES-MATERIELLES-ET.json",
+  "bo": "Arrete MENE1901633A, BO special n1 du 22 janvier 2019 -- NSI premiere, rubrique 'Architectures materielles et systemes d'exploitation' (sous-ensemble)",
+  "mode_creation": "ex_nihilo",
+  "note": "Sixieme chapitre du manuel Premiere NSI (mapping docs/09 : 1NSI-ARCHITECTURE-OS <- P09, capacites P-ARCH-01/03). Ce theme fait partie du bloc unique BO 'Architectures materielles et systemes d'exploitation', scinde en 2 chapitres (1NSI-ARCHITECTURE-OS et 1NSI-RESEAUX, capacites P-ARCH-02/04) pour rester a une granularite geree, a l'image du decoupage documente dans docs/09. Referentiel source verifie conforme au texte officiel du B.O. corpus_nsi indisponible : mode ex nihilo. Contenu partiellement conceptuel (architecture materielle, fonctions de l'OS) : verifie par execution python reelle la ou c'est calculable (deroule d'instructions, simulation de droits de fichiers, commandes shell reelles).",
+  "capacites_cartographie": {
+    "C1": { "theme": "Constituants d'une machine (von Neumann)", "niveau": "fondamental" },
+    "C2": { "theme": "Deroule d'une sequence d'instructions machine", "niveau": "application" },
+    "C3": { "theme": "Fonctions d'un systeme d'exploitation", "niveau": "fondamental" },
+    "C4": { "theme": "Commandes de base en ligne de commande", "niveau": "application" },
+    "C5": { "theme": "Droits et permissions d'acces aux fichiers", "niveau": "application" }
+  }
+}

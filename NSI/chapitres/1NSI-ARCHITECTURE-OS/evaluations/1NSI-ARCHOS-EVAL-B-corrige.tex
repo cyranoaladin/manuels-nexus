@@ -1,0 +1,81 @@
+% META: {"id": "1NSI-ARCHOS-EVAL-B-corrige", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ARCHOS-EVAL-B", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres = {}
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "SUB":
+%             _, reg_dest, reg_src = instruction
+%             registres[reg_dest] = registres[reg_dest] - registres[reg_src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%     return memoire, registres
+% memoire = [20, 8, 0]
+% programme = [
+%     ("LOAD", "R0", 0),
+%     ("LOAD", "R1", 1),
+%     ("SUB", "R0", "R1"),
+%     ("STORE", "R0", 2),
+%     ("HALT",),
+% ]
+% memoire_finale, registres = executer(programme, memoire)
+% assert memoire_finale == [20, 8, 12]
+% def droit_accorde(permissions, categorie, action):
+%     index = {"proprietaire": 0, "groupe": 3, "autres": 6}
+%     decalage = {"lecture": 0, "ecriture": 1, "execution": 2}
+%     position = index[categorie] + decalage[action]
+%     return permissions[position] != "-"
+% def permissions_vers_octal(permissions):
+%     groupes = [permissions[0:3], permissions[3:6], permissions[6:9]]
+%     valeurs = []
+%     for g in groupes:
+%         v = (4 if g[0] == "r" else 0) + (2 if g[1] == "w" else 0) + (1 if g[2] == "x" else 0)
+%         valeurs.append(v)
+%     return "".join(str(v) for v in valeurs)
+% assert permissions_vers_octal("rw-rw-r--") == "664"
+% END-VERIFY
+\begin{corrige}{1NSI-ARCHOS-EVAL-B-EX1}
+\textbf{1.} Processeur, mémoire, entrées, sorties. Le \textbf{processeur} exécute les
+instructions.
+
+\textbf{2.}
+\begin{python}
+def executer(programme, memoire):
+    registres = {}
+    for instruction in programme:
+        op = instruction[0]
+        if op == "LOAD":
+            _, reg, adresse = instruction
+            registres[reg] = memoire[adresse]
+        elif op == "SUB":
+            _, reg_dest, reg_src = instruction
+            registres[reg_dest] = registres[reg_dest] - registres[reg_src]
+        elif op == "STORE":
+            _, reg, adresse = instruction
+            memoire[adresse] = registres[reg]
+        elif op == "HALT":
+            break
+    return memoire, registres
+\end{python}
+
+\textbf{3.} Après \lstinline{LOAD R0,0} : \lstinline{R0=20}. Après \lstinline{LOAD R1,1} :
+\lstinline{R1=8}. Après \lstinline{SUB R0,R1} : \lstinline{R0=12}. Après
+\lstinline{STORE R0,2} : \lstinline{memoire=[20, 8, 12]}.
+\end{corrige}
+
+\begin{corrige}{1NSI-ARCHOS-EVAL-B-EX2}
+\textbf{1.} Par exemple : gestion de la mémoire (allouer de l'espace à chaque programme)
+et gestion des fichiers (organiser le stockage sur disque).
+
+\textbf{2.} Le propriétaire \textbf{peut} écrire (\lstinline{rw-}). Le groupe \textbf{peut}
+écrire (\lstinline{rw-}). Les autres \textbf{ne peuvent pas} écrire (\lstinline{r--}).
+
+\textbf{3.} \lstinline{rw-}=$6$, \lstinline{rw-}=$6$, \lstinline{r--}=$4$ : notation
+octale \lstinline{664}.
+\end{corrige}
