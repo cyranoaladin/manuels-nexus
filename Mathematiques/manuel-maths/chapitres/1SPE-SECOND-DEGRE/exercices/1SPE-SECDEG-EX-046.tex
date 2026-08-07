@@ -1,0 +1,27 @@
+% META: {"id": "1SPE-SECDEG-EX-046", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C3"], "capacites_codes": ["C3"], "methodes": ["M3"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-046.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-046.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, sqrt, Rational
+% x = symbols('x')
+% C = x**2 - 40*x + 500
+% eq = C - 300
+% assert eq == x**2 - 40*x + 200
+% Delta = (-40)**2 - 4*1*200
+% assert Delta == 800
+% sols = solve(eq, x)
+% assert sols == [20 - 10*sqrt(2), 10*sqrt(2) + 20]
+% assert abs(float(sols[0]) - 5.86) < 0.01
+% assert abs(float(sols[1]) - 34.14) < 0.01
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-046}{2}{15}
+Une entreprise fabrique des bracelets artisanaux. Le coût de production (en euros) de $x$ bracelets est modélisé par :
+\[
+C(x) = x^2 - 40x + 500, \qquad x \in [0\,;\,60].
+\]
+On souhaite déterminer combien de bracelets produire pour un coût total de $300$~€.
+
+\begin{enumerate}
+  \item Poser l'équation traduisant cette situation.
+  \item Calculer le discriminant de cette équation.
+  \item Résoudre l'équation (on donnera les solutions sous forme exacte, puis arrondies à l'unité) et conclure dans le contexte.
+\end{enumerate}
+\end{exercice}

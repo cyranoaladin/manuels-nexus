@@ -1,0 +1,35 @@
+% META: {"id": "1SPE-SECDEG-CO-050", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-050", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solveset, S, EmptySet
+% x = symbols('x')
+% f = x**2 + 4
+% Delta = 0**2 - 4*1*4
+% assert Delta == -16
+% assert solveset(f, x, domain=S.Reals) == EmptySet
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-050}
+
+\textbf{1. Discriminant.}
+
+\commentaireMarge{$a = 1$, $b = 0$, $c = 4$.}
+
+Pour l'équation $x^2 + 4 = 0$, on a $a = 1$, $b = 0$, $c = 4$, donc :
+\[
+\Delta = b^2 - 4ac = 0^2 - 4 \times 1 \times 4 = -16.
+\]
+
+\medskip
+\textbf{2. Interprétation.}
+
+\commentaireMarge{$\Delta < 0 \Rightarrow$ aucune racine réelle.}
+
+$\Delta = -16 < 0$. Or, un trinôme du second degré à coefficients réels n'admet des racines réelles que si $\Delta \geqslant 0$. Donc l'équation $x^2 + 4 = 0$ n'admet \textbf{aucune solution réelle}.
+
+\medskip
+\textbf{3. Qui a raison ?}
+
+Le \textbf{premier élève a raison}. Son raisonnement est correct : pour tout réel $x$, $x^2 \geqslant 0$, donc $x^2 + 4 \geqslant 4 > 0$. L'expression $x^2+4$ ne peut donc jamais être strictement négative, et l'inéquation $x^2 + 4 < 0$ n'a effectivement aucune solution.
+
+Le second élève commet une erreur classique : l'affirmation « une équation du second degré a toujours deux racines » n'est vraie que dans l'ensemble des nombres \textbf{complexes} (hors programme de première), et non dans l'ensemble des réels $\mathbb{R}$. Dans $\mathbb{R}$, le nombre de racines d'un trinôme dépend du signe du discriminant : deux racines si $\Delta > 0$, une racine double si $\Delta = 0$, \textbf{aucune racine réelle si $\Delta < 0$} — ce qui est précisément le cas ici.
+
+\end{corrige}

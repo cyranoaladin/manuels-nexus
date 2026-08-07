@@ -1,0 +1,20 @@
+% META: {"id": "1SPE-SECDEG-EX-049", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-049.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-049.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% x = symbols('x')
+% f = -3*x**2 + 6*x - 3
+% assert simplify(f - (-3*(x - 1)**2)) == 0
+% assert f.subs(x, 1) == 0
+% assert f.subs(x, 0) < 0
+% assert f.subs(x, 2) < 0
+% assert f.subs(x, 5) < 0
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-049}{3}{15}
+On considère la fonction $f(x) = -3x^2 + 6x - 3$.
+
+\begin{enumerate}
+  \item Sans résoudre l'équation $f(x) = 0$, écrire $f(x)$ sous forme canonique.
+  \item En déduire, sans étude de signe classique, que $f(x) \leqslant 0$ pour tout réel $x$.
+  \item Préciser en quel(s) point(s) l'égalité $f(x) = 0$ est atteinte, et justifier qu'il n'y en a qu'un seul.
+\end{enumerate}
+\end{exercice}

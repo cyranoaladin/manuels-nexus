@@ -1,0 +1,40 @@
+% META: {"id": "1SPE-SECDEG-CO-049", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-049", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, simplify
+% x = symbols('x')
+% f = -3*x**2 + 6*x - 3
+% assert simplify(f - (-3*(x - 1)**2)) == 0
+% assert f.subs(x, 1) == 0
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-049}
+
+\textbf{1. Forme canonique.}
+
+\commentaireMarge{On factorise $-3$ puis on reconnaît une identité remarquable.}
+
+On factorise par $-3$ :
+\[
+f(x) = -3x^2 + 6x - 3 = -3(x^2 - 2x + 1).
+\]
+On reconnaît l'identité remarquable $x^2 - 2x + 1 = (x-1)^2$, donc :
+\[
+f(x) = -3(x - 1)^2.
+\]
+
+\medskip
+\textbf{2. Signe de $f(x)$.}
+
+\commentaireMarge{Un carré est toujours positif ou nul.}
+
+Pour tout réel $x$, $(x-1)^2 \geqslant 0$. En multipliant par $-3 < 0$ (ce qui inverse le sens de l'inégalité) :
+\[
+-3(x-1)^2 \leqslant 0, \quad \text{soit} \quad f(x) \leqslant 0 \text{ pour tout } x \in \mathbb{R}.
+\]
+Il n'est pas nécessaire de calculer les racines ni le discriminant pour obtenir ce résultat : la forme canonique suffit.
+
+\medskip
+\textbf{3. Cas d'égalité.}
+
+L'égalité $f(x) = 0$ équivaut à $-3(x-1)^2 = 0$, soit $(x-1)^2 = 0$, soit $x = 1$. Un carré ne s'annule qu'en un seul point (sa racine), donc l'égalité $f(x) = 0$ n'est atteinte qu'au point unique $x = 1$.
+
+\end{corrige}

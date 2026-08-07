@@ -1,0 +1,35 @@
+% META: {"id": "1SPE-SUITES-EX-050", "chapitre": "1SPE-SUITES", "type_objet": "exercice", "capacites": ["1SPE-SUITES-C7"], "capacites_codes": ["C7"], "methodes": ["M7"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SUITES/exercices/1SPE-SUITES-EX-050.tex", "corrige_tex": "chapitres/1SPE-SUITES/corriges/1SPE-SUITES-CO-050.tex", "status": "generated"}
+% BEGIN-VERIFY
+% v = 500
+% n = 0
+% while v <= 2000:
+%     n = n + 1
+%     v = 1.08 * v
+% assert n == 19
+% assert abs(v - 2157.85) < 0.01
+% assert abs(500 * 1.08**17 - 1850.01) < 0.01
+% assert abs(500 * 1.08**18 - 1998.01) < 0.01
+% assert abs(500 * 1.08**19 - 2157.85) < 0.01
+% assert 500 * 1.08**18 <= 2000
+% assert 500 * 1.08**19 > 2000
+% END-VERIFY
+\begin{exercice}{1SPE-SUITES-EX-050}{2}{15}
+Une entreprise place $500$~€ sur un compte dont la valeur augmente de $8\,\%$ chaque année. On note $v_n$ la valeur du placement (en euros) après $n$ années.
+
+\begin{enumerate}
+  \item Exprimer $v_n$ en fonction de $n$.
+  \item Compléter et expliquer le programme Python ci-dessous, qui détermine le premier rang $n$ tel que $v_n > 2\,000$ :
+
+  \begin{center}
+  \texttt{v = 500}\\
+  \texttt{n = 0}\\
+  \texttt{while v <= 2000:}\\
+  \texttt{\quad\quad n = n + 1}\\
+  \texttt{\quad\quad v = 1.08 * v}\\
+  \texttt{print(n)}
+  \end{center}
+
+  \item Calculer à la main $v_{17}$, $v_{18}$ et $v_{19}$ (arrondir au centime), et vérifier la valeur affichée par le programme.
+  \item Interpréter le résultat dans le contexte.
+\end{enumerate}
+\end{exercice}

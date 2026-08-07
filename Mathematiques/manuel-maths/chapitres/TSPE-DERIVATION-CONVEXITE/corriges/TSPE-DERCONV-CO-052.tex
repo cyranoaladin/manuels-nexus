@@ -14,7 +14,7 @@
 % lhs = f.subs(x, Rational(5,3))
 % rhs = (f.subs(x, 1) + 2*f.subs(x, 2))/3
 % assert lhs == Rational(625, 81)
-% assert rhs == (1 + 2*16)/3
+% assert rhs == Rational(1 + 2*16, 3)
 % assert rhs == Rational(33, 3)
 % assert rhs == 11
 % assert lhs < rhs  # 625/81 ~ 7.7 < 11

@@ -12,16 +12,19 @@
 % B = lambda k: 1000 * (1.004 ** k)
 % assert abs(B(0) - 1000) < 1e-9
 % assert abs(B(1) - 1004) < 1e-9
-% # Recherche du seuil B_n > A_n
-% k = 0
+% # B demarre en tete (capital initial 1000 euros) puis A reprend l'avantage des le rang 6
+% assert B(5) > A(5)
+% assert B(6) <= A(6)
+% # Recherche du seuil de depassement DEFINITIF de B sur A (rang >= 10 pour ignorer le sursaut initial)
+% k = 10
 % while B(k) <= A(k):
 %     k += 1
-% assert k == 167
-% assert B(167) > A(167)
-% assert B(166) <= A(166)
+% assert k == 1415
+% assert B(1415) > A(1415)
+% assert B(1414) <= A(1414)
 % # Verification valeurs approximatives
-% assert abs(B(167) - 1000 * 1.004**167) < 1e-6
-% assert A(167) == 33400
+% assert abs(B(1415) - 1000 * 1.004**1415) < 1e-6
+% assert A(1415) == 283000
 % END-VERIFY
 
 \section*{Temps 7 — TD fil rouge : Deux offres d'épargne}
@@ -140,10 +143,10 @@ Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des
 \textbf{Partie C — À partir de quel mois $B_n > A_n$ ?}
 
 \begin{enumerate}
-  \item Vérifier que $B_{100} < A_{100}$ et que $B_{200} > A_{200}$. Que peut-on en conclure ?
-  \item Compléter et expliquer le programme Python ci-dessous, qui détermine le premier rang $n$ tel que $B_n > A_n$.
+  \item Vérifier que $B_5 > A_5$ et que $B_6 \leqslant A_6$. Que peut-on en conclure sur les tout premiers mois ?
+  \item Compléter et expliquer le programme Python ci-dessous, qui détermine le premier rang $n$ (à partir du rang $10$) tel que $B_n$ dépasse \emph{définitivement} $A_n$.
   \item Exécuter mentalement les deux premiers tours de boucle (vérifier les valeurs de \texttt{A}, \texttt{B} et \texttt{n}).
-  \item Donner le rang $n$ de dépassement et interpréter le résultat dans le contexte.
+  \item Donner le rang $n$ de dépassement définitif et interpréter le résultat dans le contexte.
 \end{enumerate}
 
 \end{exercice}
@@ -151,20 +154,21 @@ Sur 5 ans, l'offre B ne fait croître le capital que de $270$~€, bien loin des
 \noindent\textbf{Programme à compléter :}
 
 \begin{python}
-# Recherche du premier mois n tel que B_n > A_n
+# Recherche du premier mois n (a partir du rang 10) tel que B_n
+# depasse DEFINITIVEMENT A_n
 # A_n = 200*n  (offre A : suite arithmetique)
 # B_n = 1000 * 1.004**n  (offre B : suite geometrique)
 
-A = 0          # valeur initiale de A_0
-B = 1000       # valeur initiale de B_0
-n = 0
+n = 10
+A = 200 * n
+B = 1000 * 1.004**n
 
 while B <= A:
     n = n + 1
     A = 200 * n        # mise a jour de A_n
     B = 1000 * 1.004**n  # mise a jour de B_n
 
-print("Premier mois de depassement : n =", n)
+print("Premier mois de depassement definitif : n =", n)
 print("A_n =", A, "euros")
 print("B_n =", round(B, 2), "euros")
 \end{python}
@@ -173,54 +177,40 @@ print("B_n =", round(B, 2), "euros")
 
 \textbf{Question 1.}
 \[
-  A_{100} = 200 \times 100 = 20\,000 \text{ €}, \quad B_{100} = 1\,000 \times 1{,}004^{100} \approx 1\,000 \times 1{,}4918 \approx 1\,492 \text{ €.}
+  A_5 = 200 \times 5 = 1\,000 \text{ €}, \quad B_5 = 1\,000 \times 1{,}004^5 \approx 1\,020{,}16 \text{ €.}
 \]
-Donc $B_{100} < A_{100}$.
+Donc $B_5 > A_5$ : grâce à son capital de départ, l'offre B est encore en tête au $5^{\text{e}}$ mois.
 \[
-  A_{200} = 200 \times 200 = 40\,000 \text{ €}, \quad B_{200} = 1\,000 \times 1{,}004^{200} \approx 1\,000 \times 2{,}2253 \approx 2\,225 \text{ €.}
+  A_6 = 200 \times 6 = 1\,200 \text{ €}, \quad B_6 = 1\,000 \times 1{,}004^6 \approx 1\,024{,}24 \text{ €.}
 \]
+Donc $B_6 \leqslant A_6$ : dès le $6^{\text{e}}$ mois, les versements réguliers de l'offre A comblent l'avance initiale de l'offre B.
 
-\commentaireMarge{$1{,}004^{100} \approx 1{,}49$ et $1{,}004^{200} \approx 2{,}23$ : la croissance géométrique est encore trop lente sur cet horizon.}
+\commentaireMarge{L'avance de B au départ disparaît vite.}
 
-Donc $B_{200} < A_{200}$ également. La suite géométrique ne rattrape pas encore la suite arithmétique à ces rangs.
+On en conclut que l'avantage de l'offre B au démarrage est très éphémère : dès le sixième mois, l'offre A reprend la tête, et il faudra étudier ce qui se passe beaucoup plus loin pour savoir si $(B_n)$ finit par revenir devant $(A_n)$.
 
-\textbf{Question 2.} La boucle \texttt{while B <= A} tourne tant que l'offre B n'a pas dépassé l'offre A. À chaque itération, on incrémente $n$ puis on recalcule les deux capitaux avec les formules explicites. La boucle s'arrête dès que $B_n > A_n$.
+\textbf{Question 2.} On sait par la question 1 que l'offre A est en tête à partir du rang $6$ ; on initialise donc directement au rang $10$ (largement après ce sursaut initial) pour ne pas re-détecter ce premier croisement sans intérêt. La boucle \texttt{while B <= A} tourne ensuite tant que l'offre B n'a pas repris l'avantage. À chaque itération, on incrémente $n$ puis on recalcule les deux capitaux avec les formules explicites. La boucle s'arrête dès que $B_n > A_n$, ce qui donne le rang du dépassement \emph{définitif}.
 
-\textbf{Question 3.} Exécution des deux premiers tours :
+\textbf{Question 3.} Exécution des deux premiers tours (après l'initialisation au rang $10$) :
 
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
 \texttt{n} & \texttt{A} & \texttt{B} & Condition \texttt{B <= A} \\
 \hline
-$0$ (init.) & $0$ & $1\,000$ & Faux (on ne rentre pas) \\
+$10$ (init.) & $2\,000$ & $1\,040{,}73$ & Vrai (on entre dans la boucle) \\
+\hline
+$11$ & $2\,200$ & $1\,044{,}89$ & Vrai \\
+\hline
+$12$ & $2\,400$ & $1\,049{,}07$ & Vrai \\
 \hline
 \end{tabular}
 \end{center}
 
-\commentaireMarge{Attention : au rang $0$, $B_0 = 1\,000 > A_0 = 0$, donc la boucle ne s'exécute pas du tout ! On doit initialiser en forçant la condition à être vraie au départ.}
-
-En fait, $B_0 = 1\,000 > A_0 = 0$ : la condition \texttt{B <= A} est fausse dès le départ. Le programme est à corriger en démarrant à $n = 1$ :
-
-\begin{python}
-n = 1
-A = 200
-B = 1000 * 1.004
-
-while B <= A:
-    n = n + 1
-    A = 200 * n
-    B = 1000 * 1.004**n
-
-print("Premier mois de depassement : n =", n)
-print("A_n =", A, "euros")
-print("B_n =", round(B, 2), "euros")
-\end{python}
-
-\textbf{Question 4.} Le programme affiche \texttt{n = 167}. Donc le premier mois pour lequel $B_{167} > A_{167}$ est $n = 167$, soit environ $13$ ans et $11$ mois.
+\textbf{Question 4.} Le programme affiche \texttt{n = 1415}. Donc le premier mois pour lequel $B_n$ dépasse définitivement $A_n$ est $n = 1\,415$, soit environ $118$ ans — un horizon qui dépasse très largement une vie humaine.
 
 \[
-  A_{167} = 200 \times 167 = 33\,400 \text{ €}, \quad B_{167} = 1\,000 \times 1{,}004^{167} \approx 33\,402 \text{ €.}
+  A_{1415} = 200 \times 1\,415 = 283\,000 \text{ €}, \quad B_{1415} = 1\,000 \times 1{,}004^{1415} \approx 283\,925 \text{ €.}
 \]
 
 \end{corrige}
@@ -237,7 +227,7 @@ print("B_n =", round(B, 2), "euros")
 
 \begin{enumerate}
   \item Quelle offre est plus avantageuse sur un horizon de $5$ ans ? De $10$ ans ? Justifier avec les calculs des parties précédentes.
-  \item À partir du rang $n = 167$, que se passe-t-il pour les valeurs de $B_n$ par rapport à $A_n$ ? Justifier qualitativement sans calcul.
+  \item À partir du rang $n = 1\,415$, que se passe-t-il pour les valeurs de $B_n$ par rapport à $A_n$ ? Justifier qualitativement sans calcul.
   \item \pictoOral{} \textit{Question orale.} « Expliquer en quelques phrases pourquoi une suite géométrique de raison proche de $1$ est d'abord dominée par une suite arithmétique à forte raison, puis finit par la dépasser. Quel rôle jouent le capital initial et la raison dans la dynamique à long terme ? »
 \end{enumerate}
 
@@ -251,11 +241,11 @@ Sur $5$ ans ($n = 60$) : $A_{60} = 12\,000$~€ contre $B_{60} \approx 1\,270$~�
 
 Sur $10$ ans ($n = 120$) : $A_{120} = 24\,000$~€ contre $B_{120} = 1\,000 \times 1{,}004^{120} \approx 1\,615$~€. L'offre A reste nettement meilleure.
 
-\commentaireMarge{Pour un épargnant dont l'horizon est inférieur à 14 ans, l'offre A (versements réguliers) est bien plus efficace.}
+\commentaireMarge{Sur tout horizon d'épargne raisonnable (quelques dizaines d'années), l'offre A (versements réguliers) reste bien plus efficace.}
 
-\textbf{Conclusion :} Pour tout horizon inférieur à $167$ mois, l'offre A est plus avantageuse.
+\textbf{Conclusion :} Pour tout horizon inférieur à $1\,415$ mois (environ $118$ ans), l'offre A est plus avantageuse — c'est-à-dire pour toute durée d'épargne réaliste.
 
-\textbf{Question 2.} À partir du rang $167$, la suite géométrique $(B_n)$ dépasse définitivement $(A_n)$. En effet, $(B_n)$ croît de manière exponentielle (multiplication par $1{,}004$ à chaque étape) tandis que $(A_n)$ croît de manière linéaire (addition de $200$ à chaque étape). Sur le long terme, toute croissance exponentielle, même de raison très proche de $1$, l'emporte sur une croissance linéaire.
+\textbf{Question 2.} À partir du rang $1\,415$, la suite géométrique $(B_n)$ dépasse définitivement $(A_n)$. En effet, $(B_n)$ croît de manière exponentielle (multiplication par $1{,}004$ à chaque étape) tandis que $(A_n)$ croît de manière linéaire (addition de $200$ à chaque étape). Sur le long terme, toute croissance exponentielle, même de raison très proche de $1$, l'emporte sur une croissance linéaire — mais ce terme peut être extrêmement lointain, comme ici où il dépasse une vie humaine.
 
 \textbf{Question 3 — Éléments de réponse orale.}
 

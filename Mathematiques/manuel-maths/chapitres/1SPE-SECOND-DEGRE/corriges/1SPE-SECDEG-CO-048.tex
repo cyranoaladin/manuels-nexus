@@ -1,0 +1,45 @@
+% META: {"id": "1SPE-SECDEG-CO-048", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "corrige", "exercice_ref": "1SPE-SECDEG-EX-048", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, expand
+% x = symbols('x')
+% A = x*(20 - x)
+% assert expand(A) == -x**2 + 20*x
+% xs = Rational(-20, 2*(-1))
+% assert xs == 10
+% assert A.subs(x, xs) == 100
+% END-VERIFY
+\begin{corrige}{1SPE-SECDEG-EX-048}
+
+\textbf{1. Expression de l'aire.}
+
+\commentaireMarge{Le périmètre du rectangle vaut $2x + 2\ell = 40$.}
+
+Si $x$ est la largeur, le périmètre s'écrit $2x + 2\ell = 40$, d'où $\ell = 20 - x$ (la longueur).
+
+L'aire de l'enclos est donc :
+\[
+A(x) = x \times \ell = x(20 - x).
+\]
+
+\medskip
+\textbf{2. Forme développée et sommet.}
+
+En développant :
+\[
+A(x) = x(20 - x) = -x^2 + 20x.
+\]
+C'est bien un polynôme du second degré avec $a = -1$, $b = 20$, $c = 0$.
+
+\commentaireMarge{$\alpha = -\dfrac{b}{2a}$.}
+
+\[
+\alpha = -\frac{b}{2a} = -\frac{20}{2 \times (-1)} = 10, \qquad \beta = A(10) = 10 \times (20 - 10) = 100.
+\]
+Le sommet est $S(10\,;\,100)$.
+
+\medskip
+\textbf{3. Dimensions optimales.}
+
+Comme $a = -1 < 0$, le sommet correspond à un maximum. L'aire est donc maximale pour $x = 10$~m (largeur), soit une longueur $\ell = 20 - 10 = 10$~m : l'enclos optimal est un \textbf{carré} de côté $10$~m, d'aire maximale $100$~m$^2$.
+
+\end{corrige}

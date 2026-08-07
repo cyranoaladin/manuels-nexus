@@ -82,7 +82,7 @@ Resoudre les inequations suivantes.
 \coupDePouce{1}{Pour (1), les racines de $-x^2 + 3x - 2 = 0$ sont $x = 1$ et $x = 2$. Comme $a = -1 < 0$, le trinome est positif \textit{entre} les racines.}
 
 % BEGIN-VERIFY
-% from sympy import symbols, solve
+% from sympy import symbols, solve, expand
 % x = symbols('x')
 % # (1) -x^2 + 3x - 2 >= 0 => solution [1;2]
 % f1 = -x**2 + 3*x - 2
@@ -93,7 +93,7 @@ Resoudre les inequations suivantes.
 % # (2) x^2 + 4x + 4 = (x+2)^2 > 0 => x != -2
 % f2 = x**2 + 4*x + 4
 % from sympy import Rational
-% assert f2 == (x+2)**2
+% assert f2 == expand((x+2)**2)
 % assert f2.subs(x, -2) == 0  # egalite en x = -2
 % assert f2.subs(x, 0) > 0
 % # (3) x^2 + 1 <= 0 => pas de solution (toujours > 0)

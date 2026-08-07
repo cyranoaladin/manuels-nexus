@@ -1,0 +1,24 @@
+% META: {"id": "1SPE-SECDEG-EX-047", "chapitre": "1SPE-SECOND-DEGRE", "type_objet": "exercice", "capacites": ["1SPE-SECOND-DEGRE-C5"], "capacites_codes": ["C5"], "methodes": ["M5"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "parametres_sympy": {}, "fichier_tex": "chapitres/1SPE-SECOND-DEGRE/exercices/1SPE-SECDEG-EX-047.tex", "corrige_tex": "chapitres/1SPE-SECOND-DEGRE/corriges/1SPE-SECDEG-CO-047.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, S, solveset, Interval
+% x = symbols('x')
+% B = -2*x**2 + 80*x - 600
+% assert sorted(solve(B, x)) == [10, 30]
+% sol = solveset(B >= 0, x, domain=S.Reals)
+% assert sol == Interval(10, 30)
+% assert B.subs(x, 20) > 0
+% assert B.subs(x, 0) < 0
+% assert B.subs(x, 40) < 0
+% END-VERIFY
+\begin{exercice}{1SPE-SECDEG-EX-047}{2}{15}
+Une association organise un événement. Le bénéfice réalisé (en euros) pour $x$ billets vendus est modélisé par :
+\[
+B(x) = -2x^2 + 80x - 600, \qquad x \in [0\,;\,40].
+\]
+
+\begin{enumerate}
+  \item Résoudre l'équation $B(x) = 0$.
+  \item En déduire le signe de $B(x)$ sur $[0\,;\,40]$.
+  \item Résoudre l'inéquation $B(x) \geqslant 0$ et interpréter le résultat : pour quelles valeurs de $x$ l'événement est-il bénéficiaire (strictement) ?
+\end{enumerate}
+\end{exercice}
