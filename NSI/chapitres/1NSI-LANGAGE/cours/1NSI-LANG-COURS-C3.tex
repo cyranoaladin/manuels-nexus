@@ -1,0 +1,73 @@
+% META: {"id": "1NSI-LANG-COURS-C3", "chapitre": "1NSI-LANGAGE", "type_objet": "cours", "capacites": ["P-LANG-03A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Spécifier une fonction}
+
+\definition[D3]{
+  \textbf{Spécifier} une fonction, c'est décrire précisément ce qu'elle fait \textbf{avant}
+  de l'écrire : son \textbf{prototype} (nom, paramètres, valeur renvoyée), ses
+  \textbf{préconditions} (ce que les arguments doivent vérifier pour que la fonction ait un
+  sens) et ses \textbf{postconditions} (ce que le résultat doit vérifier).
+}
+
+\propriete[Rôle des pré/postconditions]{
+  Une \textbf{précondition} est une hypothèse sur les \textbf{arguments}, que l'appelant
+  doit garantir. Une \textbf{postcondition} est une garantie sur le \textbf{résultat}, que
+  la fonction doit assurer si les préconditions sont respectées. En Python, on peut vérifier
+  ces conditions avec l'instruction \lstinline{assert}.
+}
+
+\begin{codereference}{Spécification d'une fonction avec préconditions et postconditions}
+\begin{python}
+def aire_triangle(base, hauteur):
+    """Calcule l'aire d'un triangle a partir de sa base et sa hauteur.
+
+    Preconditions : base > 0 et hauteur > 0.
+    Postcondition : le resultat renvoye est strictement positif.
+    """
+    assert base > 0, "la base doit etre strictement positive"
+    assert hauteur > 0, "la hauteur doit etre strictement positive"
+    aire = base * hauteur / 2
+    assert aire > 0
+    return aire
+
+print(aire_triangle(6, 4))  # 12.0
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def aire_triangle(base, hauteur):
+%     assert base > 0
+%     assert hauteur > 0
+%     aire = base * hauteur / 2
+%     assert aire > 0
+%     return aire
+% assert aire_triangle(6, 4) == 12.0
+% erreur_levee = False
+% try:
+%     aire_triangle(-2, 4)
+% except AssertionError:
+%     erreur_levee = True
+% assert erreur_levee is True
+% END-VERIFY
+
+\exemple{Appeler \lstinline{aire_triangle(-2, 4)} viole la précondition
+\lstinline{base > 0} : l'instruction \lstinline{assert} interrompt le programme avec une
+\lstinline{AssertionError} et le message associé, plutôt que de renvoyer un résultat
+absurde (une aire négative).}
+
+\propriete[Le prototype]{
+  Le \textbf{prototype} d'une fonction résume sa signature : son nom, le nom et le rôle de
+  chaque paramètre, et le type de la valeur renvoyée. En Python, on l'exprime généralement
+  dans la première ligne de la \textbf{docstring} (chaîne de documentation entre triple
+  guillemets), juste après la définition de la fonction.
+}
+
+\erreurFrequente{Écrire le code d'une fonction \textbf{avant} d'avoir réfléchi à ses
+préconditions. Sans préconditions explicites, une fonction peut recevoir des arguments
+absurdes (une base négative, une liste vide) et produire un résultat incorrect \textbf{sans
+qu'aucune erreur ne soit signalée} — le bug se manifeste alors bien plus tard, loin de sa
+cause réelle.}
+
+\alamachine{Écris une fonction \lstinline{moyenne(notes)} qui calcule la moyenne d'une
+liste de notes. Réfléchis à sa précondition (la liste peut-elle être vide ?) et à sa
+postcondition (dans quel intervalle doit se situer le résultat, si les notes sont entre
+$0$ et $20$ ?). Ajoute les \lstinline{assert} correspondants.}

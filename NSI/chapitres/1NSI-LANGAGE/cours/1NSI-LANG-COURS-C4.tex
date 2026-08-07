@@ -1,0 +1,109 @@
+% META: {"id": "1NSI-LANG-COURS-C4", "chapitre": "1NSI-LANGAGE", "type_objet": "cours", "capacites": ["P-LANG-04"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Mise au point de programmes}
+
+\definition[D4]{
+  Un \textbf{jeu de tests} est un ensemble d'appels de fonction, chacun accompagné du
+  résultat attendu, utilisé pour vérifier qu'un programme se comporte correctement. Mettre
+  au point un programme, c'est faire évoluer son code jusqu'à ce qu'il réussisse tous les
+  tests du jeu.
+}
+
+\exemple{Un élève écrit une fonction censée renvoyer le maximum d'une liste de nombres :}
+
+\begin{python}
+def maximum_bugue(liste):
+    maxi = 0
+    for x in liste:
+        if x > maxi:
+            maxi = x
+    return maxi
+
+print(maximum_bugue([3, 7, 2]))    # 7 -- semble correct
+\end{python}
+
+% BEGIN-VERIFY
+% def maximum_bugue(liste):
+%     maxi = 0
+%     for x in liste:
+%         if x > maxi:
+%             maxi = x
+%     return maxi
+% assert maximum_bugue([3, 7, 2]) == 7
+% END-VERIFY
+
+\propriete[Un jeu de tests réussi ne prouve pas la correction]{
+  Le succès d'un jeu de tests montre seulement que le programme fonctionne \textbf{sur les
+  cas testés}. Il ne garantit \textbf{pas} que le programme est correct pour tous les cas
+  possibles : un jeu de tests incomplet peut laisser passer un bug.
+}
+
+\contreexemple{Le test précédent (liste de nombres positifs) réussit, mais
+\lstinline{maximum_bugue} échoue sur une liste ne contenant que des nombres
+\textbf{négatifs} :}
+
+\begin{console}
+>>> maximum_bugue([-5, -1, -8])
+0
+\end{console}
+
+% BEGIN-VERIFY
+% def maximum_bugue(liste):
+%     maxi = 0
+%     for x in liste:
+%         if x > maxi:
+%             maxi = x
+%     return maxi
+% assert maximum_bugue([-5, -1, -8]) == 0  # bug : devrait etre -1
+% END-VERIFY
+
+\erreurFrequente{Initialiser un accumulateur de maximum à $0$ (EF). C'est correct \textbf{si
+et seulement si} la liste contient au moins une valeur positive : sinon, $0$ « gagne »
+à tort contre toutes les valeurs négatives. Il faut initialiser l'accumulateur avec le
+\textbf{premier élément} de la liste, pas avec une constante arbitraire.}
+
+\begin{codereference}{Version corrigée, avec jeu de tests plus complet}
+\begin{python}
+def maximum(liste):
+    """Renvoie le plus grand element de `liste`.
+
+    Precondition : `liste` est non vide.
+    """
+    assert len(liste) > 0
+    maxi = liste[0]
+    for x in liste[1:]:
+        if x > maxi:
+            maxi = x
+    return maxi
+
+# Jeu de tests couvrant plusieurs cas
+assert maximum([3, 7, 2]) == 7          # cas "normal", positifs
+assert maximum([-5, -1, -8]) == -1      # cas limite : tous negatifs
+assert maximum([42]) == 42              # cas limite : un seul element
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def maximum(liste):
+%     assert len(liste) > 0
+%     maxi = liste[0]
+%     for x in liste[1:]:
+%         if x > maxi:
+%             maxi = x
+%     return maxi
+% assert maximum([3, 7, 2]) == 7
+% assert maximum([-5, -1, -8]) == -1
+% assert maximum([42]) == 42
+% END-VERIFY
+
+\propriete[Concevoir un bon jeu de tests]{
+  Un jeu de tests efficace couvre : un cas « normal », un ou plusieurs \textbf{cas
+  limites} (liste d'un seul élément, valeurs négatives, valeur nulle, chaîne vide...), et si
+  pertinent un cas où une précondition est violée (pour vérifier qu'une erreur est bien
+  signalée).
+}
+
+\alamachine{Écris une fonction \lstinline{est_palindrome(mot)} qui teste si un mot se lit
+de la même façon à l'endroit et à l'envers. Écris un jeu de tests d'au moins $4$ cas
+(un mot palindrome, un mot non palindrome, un mot d'une seule lettre, la chaîne vide) avant
+même d'écrire le code de la fonction, puis implémente-la jusqu'à ce que tous les tests
+passent.}

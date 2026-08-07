@@ -1,0 +1,56 @@
+% META: {"id": "1NSI-LANG-EVAL-A-corrige", "chapitre": "1NSI-LANGAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-LANG-EVAL-A", "capacites": ["P-LANG-01", "P-LANG-03A", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def moyenne_ponderee(valeurs, poids):
+%     assert len(valeurs) == len(poids)
+%     assert sum(poids) > 0
+%     total = 0
+%     for i in range(len(valeurs)):
+%         total = total + valeurs[i] * poids[i]
+%     return total / sum(poids)
+% assert moyenne_ponderee([12, 15, 8], [1, 2, 1]) == 12.5
+% def somme_positifs_bugue(liste):
+%     total = 0
+%     for i in range(len(liste) - 1):
+%         if liste[i] > 0:
+%             total += liste[i]
+%     return total
+% assert somme_positifs_bugue([3, -2, 5]) == 3
+% import math
+% assert math.gcd(84, 30) == 6
+% END-VERIFY
+\begin{corrige}{1NSI-LANG-EVAL-A-EX1}
+\textbf{1.} Précondition : \lstinline{valeurs} et \lstinline{poids} ont la même longueur,
+et la somme des poids est strictement positive (pour ne pas diviser par zéro).
+
+\textbf{2.}
+\begin{python}
+def moyenne_ponderee(valeurs, poids):
+    assert len(valeurs) == len(poids)
+    assert sum(poids) > 0
+    total = 0
+    for i in range(len(valeurs)):
+        total = total + valeurs[i] * poids[i]
+    return total / sum(poids)
+\end{python}
+
+\textbf{3.} $\dfrac{12\times1+15\times2+8\times1}{1+2+1}=\dfrac{12+30+8}{4}=\dfrac{50}{4}=12{,}5$.
+\end{corrige}
+
+\begin{corrige}{1NSI-LANG-EVAL-A-EX2}
+\textbf{1.} \lstinline{somme_positifs_bugue([3, -2, 5])} renvoie $3$. Le résultat attendu
+est $8$ ($3+5$, les deux éléments strictement positifs).
+
+\textbf{2.} L'erreur est dans \lstinline{range(len(liste) - 1)} : cette boucle parcourt les
+indices de $0$ à \lstinline{len(liste) - 2}, donc \textbf{exclut le dernier élément} de la
+liste (indice \lstinline{len(liste) - 1}). Version corrigée :
+\begin{python}
+def somme_positifs(liste):
+    total = 0
+    for i in range(len(liste)):
+        if liste[i] > 0:
+            total += liste[i]
+    return total
+\end{python}
+
+\textbf{3.} \lstinline{import math} puis \lstinline{math.gcd(84, 30)}, qui renvoie $6$.
+\end{corrige}
