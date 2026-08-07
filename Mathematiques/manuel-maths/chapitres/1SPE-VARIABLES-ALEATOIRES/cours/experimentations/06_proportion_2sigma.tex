@@ -1,0 +1,58 @@
+% META: {"id": "1SPE-VARALEA-EXP-004", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "experimentation", "capacites_codes": ["C4"], "programme_refs": ["VA-EXP-PROPORTION-2SIGMA"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+
+\subsection{Simuler $N$ échantillons et tester la borne à $2\sigma$}
+
+On simule $N$ échantillons, chacun de taille $n$. Pour chaque échantillon,
+on note $m$ sa moyenne et on teste
+\[
+  \lvert m-\mu\rvert\leq\frac{2\sigma}{\sqrt{n}}.
+\]
+Dans notre exemple, $\mu=1{,}3$ et $\sigma=2{,}1$. Les quatre paramètres
+$\mu$, $\sigma$, $n$ et $N$ jouent des rôles différents : les deux premiers
+décrivent la loi, $n$ est la taille d'un échantillon et $N$ est le nombre
+d'échantillons simulés.
+
+\begin{python}
+from math import sqrt
+from random import Random
+
+VALEURS = (-2, 1, 4)
+PROBABILITES = (0.2, 0.5, 0.3)
+MU = 1.3
+SIGMA = 2.1
+
+def tirage_variable(generateur):
+    u = generateur.random()
+    cumul = 0
+    for valeur, probabilite in zip(VALEURS, PROBABILITES):
+        cumul = cumul + probabilite
+        if u < cumul:
+            return valeur
+    return VALEURS[-1]
+
+def proportion_dans_borne(n, N, graine):
+    """Proportion des N moyennes a distance au plus 2*sigma/sqrt(n) de mu."""
+    if n <= 0 or N <= 0:
+        raise ValueError("n et N doivent etre strictement positifs")
+    generateur = Random(graine)
+    borne = 2 * SIGMA / sqrt(n)
+    favorables = 0
+    for _ in range(N):
+        moyenne = sum(tirage_variable(generateur) for _ in range(n)) / n
+        if abs(moyenne - MU) <= borne:
+            favorables = favorables + 1
+    return favorables / N
+\end{python}
+
+\exemple{
+Pour $n=50$, $N=400$ et la graine $1729$, la proportion obtenue est
+$0{,}94$. Avec la graine $314159$, elle vaut $0{,}935$ : la proportion
+elle-même varie d'une simulation à l'autre.
+}
+
+\erreurFrequente{
+Cette proportion est un constat empirique et ne constitue pas une preuve
+d'une valeur universelle. Il faut conserver $n$, $N$, $\mu$, $\sigma$ et la
+graine avec le résultat afin que l'expérience soit interprétable et
+reproductible.
+}

@@ -1,0 +1,39 @@
+% META: {"id": "1SPE-VARALEA-EXP-002", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "experimentation", "capacites_codes": ["C3"], "programme_refs": ["VA-EXP-FONCTION-MOYENNE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+
+\subsection{Écrire une fonction renvoyant la moyenne d'un échantillon}
+
+La taille $n$ d'un échantillon est le nombre de valeurs simulées. Si
+$x_1,\ldots,x_n$ sont ces valeurs, leur moyenne est
+\[
+  m=\frac{x_1+\cdots+x_n}{n}.
+\]
+
+\begin{python}
+from random import Random
+
+VALEURS = (-2, 1, 4)
+PROBABILITES = (0.2, 0.5, 0.3)
+
+def tirage_variable(generateur):
+    u = generateur.random()
+    cumul = 0
+    for valeur, probabilite in zip(VALEURS, PROBABILITES):
+        cumul = cumul + probabilite
+        if u < cumul:
+            return valeur
+    return VALEURS[-1]
+
+def moyenne_echantillon(n, graine):
+    """Renvoie la moyenne d'un echantillon simule de taille n."""
+    if n <= 0:
+        raise ValueError("n doit etre strictement positif")
+    generateur = Random(graine)
+    somme = sum(tirage_variable(generateur) for _ in range(n))
+    return somme / n
+\end{python}
+
+\exemple{
+Avec $n=40$ et la graine $1729$, la fonction renvoie $m=1{,}9$.
+Cette valeur dépend de l'échantillon; elle n'est pas une nouvelle valeur
+théorique de $E(X)$.
+}

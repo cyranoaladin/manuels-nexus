@@ -1,0 +1,42 @@
+% META: {"id": "1SPE-VARALEA-EXP-001", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "experimentation", "capacites_codes": ["C3"], "programme_refs": ["VA-EXP-SIMULER"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+
+\subsection{Simuler une variable aléatoire finie}
+
+On utilise la loi
+\[
+\begin{array}{c|ccc}
+  x_i & -2 & 1 & 4\\ \hline
+  P(X=x_i) & 0{,}2 & 0{,}5 & 0{,}3
+\end{array}
+\]
+La fonction \code{tirage\_variable} partage l'intervalle $[0\,;1[$ en
+trois intervalles de longueurs $0{,}2$, $0{,}5$ et $0{,}3$.
+
+\begin{python}
+from random import Random
+
+VALEURS = (-2, 1, 4)
+PROBABILITES = (0.2, 0.5, 0.3)
+
+def tirage_variable(generateur):
+    u = generateur.random()
+    cumul = 0
+    for valeur, probabilite in zip(VALEURS, PROBABILITES):
+        cumul = cumul + probabilite
+        if u < cumul:
+            return valeur
+    return VALEURS[-1]
+
+def simuler_variable(n, graine):
+    """Simule un echantillon de taille n de la variable X."""
+    if n <= 0:
+        raise ValueError("n doit etre strictement positif")
+    generateur = Random(graine)
+    return [tirage_variable(generateur) for _ in range(n)]
+\end{python}
+
+\erreurFrequente{
+La graine sert à retrouver exactement le même échantillon lors d'une
+vérification. La liste obtenue est une réalisation possible de la variable,
+pas la loi elle-même.
+}

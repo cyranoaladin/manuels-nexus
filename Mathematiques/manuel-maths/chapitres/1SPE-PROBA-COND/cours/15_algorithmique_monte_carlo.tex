@@ -1,0 +1,67 @@
+% META: {"id": "1SPE-PROBCOND-ALG-001", "chapitre": "1SPE-PROBA-COND", "type_objet": "algorithme", "capacites_codes": ["C5"], "programme_refs": ["PROB-COND-ALG-001"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+
+\section{Algorithmique : une méthode de Monte-Carlo}
+
+\propriete[Méthode de Monte-Carlo]{
+On peut estimer une probabilité, et donc une aire, en répétant un grand
+nombre de fois une expérience aléatoire simulée. La fréquence de
+l'événement observé fournit alors une \textbf{estimation empirique} de sa
+probabilité.
+}
+
+\exemple{
+On choisit au hasard un point $M(x\,;y)$ dans le carré $[0\,;1]^2$.
+L'événement
+\[
+  D=\left\{x^2+y^2\leq 1\right\}
+\]
+signifie que $M$ appartient au quart de disque de rayon $1$. Le rapport des
+aires vaut
+\[
+  P(D)=\frac{\pi/4}{1}=\frac{\pi}{4}.
+\]
+Si $f$ est la fréquence des points situés dans le quart de disque, alors
+$4f$ fournit une estimation de $\pi$.
+}
+
+\begin{python}
+from random import Random
+
+def estimer_pi(n, graine):
+    """Estime pi avec n points pseudo-aleatoires dans le carre unite."""
+    if n <= 0:
+        raise ValueError("n doit etre strictement positif")
+    generateur = Random(graine)
+    dedans = 0
+    for _ in range(n):
+        x = generateur.random()
+        y = generateur.random()
+        if x * x + y * y <= 1:
+            dedans = dedans + 1
+    return 4 * dedans / n
+\end{python}
+
+\propriete[Démarche expérimentale]{%
+\begin{enumerate}
+  \item Choisir une taille $n$ et une graine, par exemple
+        \code{estimer\_pi(10000, 1729)}.
+  \item Compter les points qui réalisent l'événement $D$.
+  \item Calculer la fréquence \code{dedans / n}, puis la multiplier par $4$.
+  \item Recommencer avec d'autres graines et avec une valeur de $n$ plus
+        grande pour observer la variabilité de l'estimation.
+\end{enumerate}
+}
+
+\erreurFrequente{
+Le nombre renvoyé est une \textbf{estimation empirique}. Une exécution, même
+avec beaucoup de points, ne constitue pas une preuve de la valeur de $\pi$.
+La graine rend l'expérience reproductible; elle ne rend pas le résultat
+exact. Deux graines peuvent produire deux estimations différentes.
+}
+
+\exemple{
+Pour $n=10\,000$ et la graine $1729$, le programme renvoie $3{,}13$.
+L'écart à $\pi$ est ici d'environ $0{,}012$. Ce constat décrit cette
+simulation précise et ne garantit pas l'écart obtenu lors d'une autre
+simulation.
+}

@@ -79,9 +79,11 @@ ORDER = [
 
 ELEVE_EXCLUDES = {"corriges"}
 ELEVE_ALLOWED_TYPES = {
+    "algorithme",
     "cours",
     "coup_de_pouce",
     "evaluation",
+    "experimentation",
     "exercice",
     "methode",
     "qcm",

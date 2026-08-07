@@ -1,0 +1,34 @@
+% META: {"id": "1SPE-VARALEA-ALG-002", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "algorithme", "capacites_codes": ["C3"], "programme_refs": ["PROB-VA-ALG-002"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+
+\subsection{Comparer les fréquences des lettres de deux textes}
+
+Une lettre choisie au hasard dans un texte définit une variable aléatoire
+finie. Sa loi est le tableau des fréquences des lettres. Pour rendre une
+comparaison français--anglais pertinente, la fonction ci-dessous ignore la
+casse, les espaces et la ponctuation; elle ramène aussi une lettre accentuée
+à la lettre latine correspondante.
+
+\begin{python}
+from collections import Counter
+from unicodedata import normalize
+
+def frequences_lettres(texte):
+    """Renvoie les frequences des lettres a...z presentes dans texte."""
+    decompose = normalize("NFD", texte.lower())
+    lettres = [caractere for caractere in decompose if "a" <= caractere <= "z"]
+    if not lettres:
+        return {}
+    effectifs = Counter(lettres)
+    total = len(lettres)
+    return {
+        lettre: effectifs[lettre] / total
+        for lettre in sorted(effectifs)
+    }
+\end{python}
+
+\propriete[Démarche de comparaison]{%
+Appliquer la fonction à deux textes de longueurs comparables, puis comparer
+les lettres les plus fréquentes. Les fréquences calculées décrivent les
+textes choisis : un extrait différent, même dans la même langue, peut donner
+un classement différent.
+}

@@ -1,0 +1,45 @@
+% META: {"id": "1SPE-VARALEA-ALG-001", "chapitre": "1SPE-VARIABLES-ALEATOIRES", "type_objet": "algorithme", "capacites_codes": ["C2"], "programme_refs": ["PROB-VA-ALG-001"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "verified"}
+
+\section{Algorithmique et expérimentations sur une variable aléatoire}
+
+\subsection{Calculer l'espérance, la variance et l'écart type}
+
+Une variable aléatoire finie prend ici les valeurs $-2$, $1$ et $4$ avec
+les probabilités respectives $0{,}2$, $0{,}5$ et $0{,}3$. Le programme
+suivant reçoit les valeurs et leurs probabilités; il ne dépend donc pas de
+la situation choisie.
+
+\begin{python}
+from math import sqrt
+
+def caracteristiques(valeurs, probabilites):
+    """Renvoie (esperance, variance, ecart_type) d'une loi finie."""
+    if len(valeurs) == 0 or len(valeurs) != len(probabilites):
+        raise ValueError("la loi doit contenir autant de valeurs que de probabilites")
+    if any(p < 0 for p in probabilites):
+        raise ValueError("les probabilites doivent etre positives")
+    if abs(sum(probabilites) - 1) > 1e-12:
+        raise ValueError("la somme des probabilites doit valoir 1")
+    esperance = sum(x * p for x, p in zip(valeurs, probabilites))
+    variance = sum(
+        (x - esperance) ** 2 * p
+        for x, p in zip(valeurs, probabilites)
+    )
+    return esperance, variance, sqrt(variance)
+\end{python}
+
+\exemple{
+Avec \code{valeurs = (-2, 1, 4)} et
+\code{probabilites = (0.2, 0.5, 0.3)}, la fonction renvoie
+\[
+  E(X)=1{,}3,\qquad V(X)=4{,}41,\qquad \sigma(X)=2{,}1.
+\]
+Ces résultats sont des calculs exacts à l'arrondi d'affichage près : ils
+proviennent de la loi donnée, sans simulation.
+}
+
+\input{chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex}
+\input{chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex}
+\input{chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex}
+\input{chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex}
+\input{chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex}
