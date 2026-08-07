@@ -1,71 +1,48 @@
 {
   "niveau": "1NSI",
-  "theme": "REPRESENTATION-DES-DONNEES-T",
-  "bo_reference": "Programme NSI, BO special n1 du 22 janvier 2019 -- a re-verifier contre le B.O. en vigueur (R7)",
+  "theme": "REPRESENTATION-DONNEES-TYPES-VALEURS-BASE",
+  "bo_reference": "Programme NSI de premiere, BO special n1 du 22 janvier 2019 (arrete MENE1901633A), rubrique \"Representation des donnees : types et valeurs de base\". Verifie le 2026-08-07 contre le texte officiel (education.gouv.fr/bo/19/Special1/MENE1901633A.htm, PDF annexe spe633_annexe_1063268.pdf) : programme inchange depuis 2019 pour cette rubrique.",
   "source_yaml": "/home/alaeddine/Documents/NSI-recovery-t10-p08-t17/00_programmes_officiels/programme_nsi_2019.yaml",
+  "correction_R7": "Ce fichier contenait par erreur (avant le 2026-08-07) une copie des capacites de 'types construits' (P-DATA-CONSTR-*) au lieu du contenu reel de la rubrique 'types et valeurs de base'. Corrige par confrontation directe au texte du B.O. (page 4 de l'annexe officielle) : entiers/binaire, flottants, booleens, texte/encodage.",
   "capacites": [
     {
-      "id": "P-DATA-CONSTR-01",
-      "contenu_bo": "p-uplets et p-uplets nommés",
-      "libelle_bo": "Ecrire une fonction renvoyant un p-uplet de valeurs.",
+      "id": "P-BASE-01",
+      "contenu_bo": "Ecriture d'un entier positif dans une base b >= 2",
+      "libelle_bo": "Passer de la representation d'une base dans une autre.",
       "libelle_eleve": "",
-      "commentaire_officiel": "Les appellations Python peuvent différer de celles d'autres langages.",
+      "commentaire_officiel": "Les bases 2, 10 et 16 sont privilegiees.",
       "demonstration_exigible": false
     },
     {
-      "id": "P-DATA-CONSTR-02A",
-      "contenu_bo": "Tableaux indexés",
-      "libelle_bo": "Lire et modifier les éléments d'un tableau grâce à leurs index.",
+      "id": "P-BASE-02",
+      "contenu_bo": "Representation binaire d'un entier relatif",
+      "libelle_bo": "Evaluer le nombre de bits necessaires a l'ecriture en base 2 d'un entier, de la somme ou du produit de deux nombres entiers. Utiliser le complement a 2.",
       "libelle_eleve": "",
-      "commentaire_officiel": "Python identifie listes et tableaux ; pas d'exigence sur slices ni NumPy.",
+      "commentaire_officiel": "Il s'agit de decrire les tailles courantes des entiers (8, 16, 32 ou 64 bits). Il est possible d'evoquer la representation des entiers de taille arbitraire de Python.",
       "demonstration_exigible": false
     },
     {
-      "id": "P-DATA-CONSTR-02B",
-      "contenu_bo": "Tableaux donnés en compréhension",
-      "libelle_bo": "Construire un tableau par compréhension.",
+      "id": "P-BASE-03",
+      "contenu_bo": "Representation approximative des nombres reels : notion de nombre flottant",
+      "libelle_bo": "Calculer sur quelques exemples la representation de nombres reels : 0.1, 0.25 ou 1/3.",
       "libelle_eleve": "",
-      "commentaire_officiel": "Compréhensions limitées à des expressions lisibles.",
+      "commentaire_officiel": "0.2 + 0.1 n'est pas egal a 0.3. Il faut eviter de tester l'egalite de deux flottants. Aucune connaissance precise de la norme IEEE-754 n'est exigible.",
       "demonstration_exigible": false
     },
     {
-      "id": "P-DATA-CONSTR-02C",
-      "contenu_bo": "Tableaux de tableaux",
-      "libelle_bo": "Utiliser des tableaux de tableaux pour représenter des matrices.",
+      "id": "P-BASE-04",
+      "contenu_bo": "Valeurs booleennes : 0, 1. Operateurs booleens : and, or, not. Expressions booleennes",
+      "libelle_bo": "Dresser la table d'une expression booleenne.",
       "libelle_eleve": "",
-      "commentaire_officiel": "Représentation matricielle sans NumPy.",
+      "commentaire_officiel": "Le ou exclusif (xor) est evoque. Quelques applications directes comme l'addition binaire sont presentees. L'attention des eleves est attiree sur le caractere sequentiel de certains operateurs booleens.",
       "demonstration_exigible": false
     },
     {
-      "id": "P-DATA-CONSTR-02D",
-      "contenu_bo": "Itération sur tableau",
-      "libelle_bo": "Itérer sur les éléments d'un tableau.",
+      "id": "P-BASE-05",
+      "contenu_bo": "Representation d'un texte en machine. Exemples des encodages ASCII, ISO-8859-1, Unicode",
+      "libelle_bo": "Identifier l'interet des differents systemes d'encodage. Convertir un fichier texte dans differents formats d'encodage.",
       "libelle_eleve": "",
-      "commentaire_officiel": "Distinguer itération sur valeurs et itération sur indices.",
-      "demonstration_exigible": false
-    },
-    {
-      "id": "P-DATA-CONSTR-03A",
-      "contenu_bo": "Dictionnaires par clés et valeurs",
-      "libelle_bo": "Construire une entrée de dictionnaire.",
-      "libelle_eleve": "",
-      "commentaire_officiel": "Possibilité d'utiliser des données EXIF fictives comme exemple d'enregistrement.",
-      "demonstration_exigible": false
-    },
-    {
-      "id": "P-DATA-CONSTR-03B",
-      "contenu_bo": "Itération sur dictionnaire",
-      "libelle_bo": "Itérer sur les éléments d'un dictionnaire.",
-      "libelle_eleve": "",
-      "commentaire_officiel": "Distinguer clés, valeurs et couples clé-valeur.",
-      "demonstration_exigible": false
-    },
-    {
-      "id": "P-DATA-CONSTR-03C",
-      "contenu_bo": "Méthodes de dictionnaire",
-      "libelle_bo": "Utiliser les méthodes keys, values et items.",
-      "libelle_eleve": "",
-      "commentaire_officiel": "Insister sur le type des vues et sur les usages courants.",
+      "commentaire_officiel": "Aucune connaissance precise des normes d'encodage n'est exigible.",
       "demonstration_exigible": false
     }
   ]

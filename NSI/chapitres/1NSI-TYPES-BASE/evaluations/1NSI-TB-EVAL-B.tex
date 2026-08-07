@@ -1,0 +1,50 @@
+% META: {"id": "1NSI-TB-EVAL-B", "chapitre": "1NSI-TYPES-BASE", "type_objet": "evaluation", "capacites": ["P-BASE-01", "P-BASE-02", "P-BASE-03", "P-BASE-04", "P-BASE-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation B --- Types et valeurs de base}
+\textit{Durée : 45 minutes. Calculatrice et brouillon autorisés, pas d'ordinateur.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (bases, complément à 2) ; Ex. 2 : 10 pts (flottants, booléens, encodage)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Bases et complément à 2} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Convertir $150$ (écriture décimale) en base $2$ puis en base $16$, en détaillant les calculs.
+  \item (3 pts) Combien de bits sont nécessaires pour écrire $150$ en binaire ?
+  \item (3 pts) Écrire $-20$ en complément à 2 sur $8$ bits, en détaillant la méthode.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% assert bin(150) == '0b10010110'
+% assert hex(150) == '0x96'
+% assert (150).bit_length() == 8
+% def complement_a_2(x, n):
+%     if x < 0:
+%         x = (1 << n) + x
+%     return format(x, f'0{n}b')
+% assert complement_a_2(-20, 8) == '11101100'
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Flottants, booléens, encodage} \hfill (10 points)
+
+\begin{enumerate}
+  \item (3 pts) Que renvoie le test \lstinline{0.2 + 0.2 + 0.2 == 0.6} en Python ? Expliquer pourquoi, et proposer une réécriture correcte de ce test.
+  \item (4 pts) Dresser la table de vérité de l'expression $(a\ \text{or}\ b)\ \text{and}\ c$. Pour combien de combinaisons de $(a,b,c)$ cette expression est-elle vraie ?
+  \item (3 pts) Le mot \lstinline{"vélo"} occupe-t-il le même nombre d'octets une fois encodé en ISO-8859-1 et en UTF-8 ? Justifier précisément la valeur trouvée pour chaque encodage.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% assert (0.2 + 0.2 + 0.2 == 0.6) is False
+% def presque_egaux(a, b, tolerance=1e-9):
+%     return abs(a - b) < tolerance
+% assert presque_egaux(0.2 + 0.2 + 0.2, 0.6) is True
+% def expr(a, b, c):
+%     return (a or b) and c
+% resultats = {(a, b, c): expr(a, b, c)
+%              for a in (True, False) for b in (True, False) for c in (True, False)}
+% assert sum(1 for v in resultats.values() if v) == 3
+% assert len('vélo'.encode('utf-8')) == 5
+% assert len('vélo'.encode('iso-8859-1')) == 4
+% END-VERIFY

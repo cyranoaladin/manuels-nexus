@@ -1,0 +1,100 @@
+% META: {"id": "1NSI-TB-COURS-C5", "chapitre": "1NSI-TYPES-BASE", "type_objet": "cours", "capacites": ["P-BASE-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Représentation d'un texte en machine}
+
+\definition[D7]{
+  Un \textbf{encodage de caractères} est une correspondance entre des caractères (lettres,
+  chiffres, symboles) et des suites de bits. Coder un texte, c'est appliquer cette
+  correspondance à chacun de ses caractères.
+}
+
+\propriete[Trois encodages historiques]{
+  \begin{itemize}
+    \item \textbf{ASCII} (1963) : code chaque caractère sur $7$ bits (128 caractères) :
+    lettres non accentuées, chiffres, ponctuation de base. Ne code pas les caractères
+    accentués (é, à, ç...).
+    \item \textbf{ISO-8859-1} (« Latin-1 ») : étend ASCII à $8$ bits (256 caractères), en
+    ajoutant les caractères accentués usuels des langues d'Europe de l'Ouest.
+    \item \textbf{Unicode} (via l'encodage \textbf{UTF-8}) : vise à coder \textbf{tous} les
+    caractères de toutes les langues (et les emojis). Chaque caractère occupe de $1$ à $4$
+    octets selon sa position dans la table Unicode.
+  \end{itemize}
+}
+
+\exemple{Le caractère \lstinline{'A'} a pour code $65$ dans ASCII, ISO-8859-1 \textbf{et}
+UTF-8 (les 128 premiers caractères Unicode coïncident avec ASCII). Le caractère
+\lstinline{'é'} n'existe pas en ASCII, vaut $233$ en ISO-8859-1 (un seul octet), et occupe
+\textbf{deux} octets en UTF-8.}
+
+% BEGIN-VERIFY
+% assert ord('A') == 65
+% assert 'A'.encode('ascii') == b'A'
+% assert 'é'.encode('iso-8859-1') == bytes([233])
+% assert len('é'.encode('utf-8')) == 2
+% assert 'é'.encode('utf-8') == b'\xc3\xa9'
+% END-VERIFY
+
+\contreexemple{Tenter d'encoder un caractère accentué en ASCII provoque une erreur, car ce
+caractère n'existe pas dans cet encodage :}
+
+\begin{console}
+>>> 'café'.encode('ascii')
+UnicodeEncodeError: 'ascii' codec can't encode character '\xe9' in position 3:
+ordinal not in range(128)
+\end{console}
+
+% BEGIN-VERIFY
+% erreur_levee = False
+% try:
+%     'café'.encode('ascii')
+% except UnicodeEncodeError:
+%     erreur_levee = True
+% assert erreur_levee is True
+% END-VERIFY
+
+\begin{codereference}{Convertir un texte d'un encodage à un autre}
+\begin{python}
+def reencoder(texte, encodage_source, encodage_cible):
+    """Reencode un texte : decode avec la source puis encode avec la cible.
+
+    Preconditions : `texte` est deja une chaine Python (str), pas des octets.
+    """
+    octets = texte.encode(encodage_source)
+    return octets.decode(encodage_source).encode(encodage_cible)
+
+octets_latin1 = reencoder('café', 'utf-8', 'iso-8859-1')
+print(octets_latin1)          # b'caf\xe9'
+print(len(octets_latin1))     # 4 octets (contre 5 en UTF-8)
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def reencoder(texte, encodage_source, encodage_cible):
+%     octets = texte.encode(encodage_source)
+%     return octets.decode(encodage_source).encode(encodage_cible)
+% resultat = reencoder('café', 'utf-8', 'iso-8859-1')
+% assert resultat == b'caf\xe9'
+% assert len(resultat) == 4
+% assert len('café'.encode('utf-8')) == 5
+% END-VERIFY
+
+\propriete[Intérêt d'un encodage universel]{
+  Unicode/UTF-8 s'est imposé car il permet d'échanger des textes entre systèmes utilisant
+  des langues différentes (et donc des jeux de caractères différents) sans ambiguïté ni
+  perte d'information, contrairement à ASCII (trop limité) ou aux nombreux encodages
+  régionaux incompatibles entre eux (ISO-8859-1 pour l'Europe de l'Ouest, d'autres pour le
+  cyrillique, l'arabe, etc.).
+}
+
+\erreurFrequente{Confondre le \textbf{nombre de caractères} d'une chaîne et son
+\textbf{nombre d'octets} une fois encodée. \lstinline{len('café')} vaut $4$ (quatre
+caractères), mais \lstinline{len('café'.encode('utf-8'))} vaut $5$ (le « é » occupe deux
+octets en UTF-8).}
+
+% BEGIN-VERIFY
+% assert len('café') == 4
+% assert len('café'.encode('utf-8')) == 5
+% END-VERIFY
+
+\alamachine{Dans un éditeur Python, encode la chaîne \lstinline{"NSI 2026 - à bientôt !"} en
+UTF-8 puis en ISO-8859-1, et compare le nombre d'octets obtenus avec \lstinline{len()}.
+Essaie ensuite de l'encoder en ASCII : observe et explique l'erreur.}

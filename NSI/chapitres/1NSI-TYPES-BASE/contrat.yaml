@@ -1,0 +1,23 @@
+chapitre: 1NSI-TYPES-BASE
+niveau: 1NSI
+theme: REPRESENTATION-DONNEES-TYPES-VALEURS-BASE
+titre: "Représentation des données : types et valeurs de base"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-BASE-01, libelle_eleve: "Je sais passer de la représentation d'un entier positif dans une base à une autre (bases 2, 10, 16)." }
+  - { code: C2, ref_capacite: P-BASE-02, libelle_eleve: "Je sais évaluer le nombre de bits nécessaires à l'écriture d'un entier en base 2, et utiliser le complément à 2 pour représenter un entier relatif." }
+  - { code: C3, ref_capacite: P-BASE-03, libelle_eleve: "Je sais expliquer pourquoi la représentation des nombres flottants est approximative et pourquoi il ne faut pas tester leur égalité directement." }
+  - { code: C4, ref_capacite: P-BASE-04, libelle_eleve: "Je sais dresser la table de vérité d'une expression booléenne construite avec and, or, not." }
+  - { code: C5, ref_capacite: P-BASE-05, libelle_eleve: "Je sais identifier l'intérêt de différents systèmes d'encodage de texte (ASCII, ISO-8859-1, Unicode) et convertir un texte d'un encodage à un autre." }
+
+prerequis:
+  - { code: R1, libelle: "Notion de bit, écriture décimale des entiers", chapitre_origine: "SNT" }
+
+situation_accroche: >
+  Une photo prise avec un smartphone pèse quelques mégaoctets, un texte quelques kilooctets :
+  pourquoi une telle différence ? Comment un ordinateur, qui ne manipule que des 0 et des 1,
+  représente-t-il un nombre négatif, un nombre à virgule, ou la lettre « é » ? Ce chapitre
+  explore le codage des données de base qui sert de fondation à toute l'informatique.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 7 }
