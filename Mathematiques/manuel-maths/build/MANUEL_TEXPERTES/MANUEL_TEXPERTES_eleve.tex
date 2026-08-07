@@ -1,0 +1,248 @@
+% Manuel de mathématiques — Terminale, mathématiques expertes — variante eleve
+% Assemble par scripts/assemble_manuel.py
+\documentclass{gabarits/nexus-manuel}
+\nxVersionProfesseurfalse
+\RenewDocumentEnvironment{corrige}{m +b}{}{}
+\renewcommand{\baremeIndicatif}[1]{}
+\matiere{Mathématiques}\niveau{Terminale — maths expertes}
+\title{Manuel de mathématiques — Terminale, mathématiques expertes — Édition eleve}
+\begin{document}
+\typeout{NEXUS_BUILD_RUN:35da2a722a97ef1d0e742451f86f8f53}
+\tableofcontents
+\newpage
+% ===== TEXP-COMPLEXES-ALGEBRE-GEOMETRIE =====
+\ouverturechapitre{Nombres complexes : points de vue algébrique et géométrique}{\begin{itemize}
+\item \textbf{C1} --- Je sais effectuer des calculs algébriques avec des nombres complexes (somme, produit, conjugué, inverse).
+\item \textbf{C2} --- Je sais résoudre une équation linéaire az=b ou une équation simple faisant intervenir z et son conjugué.
+\item \textbf{C3} --- Je sais démontrer les propriétés du conjugué d'un produit, d'un inverse, d'une puissance, et la formule du binôme dans $\mathbb{C}$.
+\item \textbf{C4} --- Je sais déterminer le module et un argument d'un nombre complexe, et représenter/déterminer une affixe.
+\item \textbf{C5} --- Je sais démontrer la formule $|z|^2=z\bar z$ et les propriétés du module d'un produit et d'une puissance.
+\end{itemize}}{Comment résoudre une équation qui n'a pas de solution réelle, comme x²+1=0 ? Les mathématiciens italiens du XVIe siècle ont eu l'audace d'inventer un nombre i tel que i²=-1. Ce chapitre reprend et approfondit l'étude algébrique des nombres complexes vue en première, puis explore leur interprétation géométrique comme points du plan.
+}{\parcoursUn~12 h \quad \parcoursDeux~10 h \quad \parcoursTrois~8 h}
+\clearpage
+\typeout{NEXUS_OBJECT_BEGIN:1d4d046511e70cdab1eed55a898c9013f65c90b3}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/10_C1_algebre.tex}
+\typeout{NEXUS_OBJECT_END:1d4d046511e70cdab1eed55a898c9013f65c90b3}
+\typeout{NEXUS_OBJECT_BEGIN:6507e1511c73742ac5be4cdd4060eeed5a67b409}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/cours/11_C2_geometrie.tex}
+\typeout{NEXUS_OBJECT_END:6507e1511c73742ac5be4cdd4060eeed5a67b409}
+\typeout{NEXUS_OBJECT_BEGIN:297c01277e75e467c3c4d9d3dd566a21107f68b2}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-001.tex}
+\typeout{NEXUS_OBJECT_END:297c01277e75e467c3c4d9d3dd566a21107f68b2}
+\typeout{NEXUS_OBJECT_BEGIN:00f3d9e4575b379448636cfd81b9be58cd7b8370}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-002.tex}
+\typeout{NEXUS_OBJECT_END:00f3d9e4575b379448636cfd81b9be58cd7b8370}
+\typeout{NEXUS_OBJECT_BEGIN:7419ab0251f35c5463335cb70ae19ba351a6a2d6}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-003.tex}
+\typeout{NEXUS_OBJECT_END:7419ab0251f35c5463335cb70ae19ba351a6a2d6}
+\typeout{NEXUS_OBJECT_BEGIN:93b92346b77e2ada491ac2d77b765d2f4a9acfa5}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-004.tex}
+\typeout{NEXUS_OBJECT_END:93b92346b77e2ada491ac2d77b765d2f4a9acfa5}
+\typeout{NEXUS_OBJECT_BEGIN:34b520fa1d6bfc69d334859c5c390fcea4f98620}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/qcm/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-QCM.tex}
+\typeout{NEXUS_OBJECT_END:34b520fa1d6bfc69d334859c5c390fcea4f98620}
+\typeout{NEXUS_OBJECT_BEGIN:5d791204c8e10d4d5588e7d966938b312e44c5dc}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/evaluations/TEXP-CAG-EV-A.tex}
+\typeout{NEXUS_OBJECT_END:5d791204c8e10d4d5588e7d966938b312e44c5dc}
+\typeout{NEXUS_OBJECT_BEGIN:04608cfe52f898abb56ab9723584ff00748d015c}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/evaluations/TEXP-CAG-EV-B.tex}
+\typeout{NEXUS_OBJECT_END:04608cfe52f898abb56ab9723584ff00748d015c}
+\typeout{NEXUS_OBJECT_BEGIN:62e3be0e09c5969b3708f90205828b2e88d6f075}
+\input{chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/remediation/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE-RE-C1.tex}
+\typeout{NEXUS_OBJECT_END:62e3be0e09c5969b3708f90205828b2e88d6f075}
+% ===== TEXP-COMPLEXES-TRIGO-POLYNOMES =====
+\ouverturechapitre{Nombres complexes : trigonométrie et équations polynomiales}{\begin{itemize}
+\item \textbf{C1} --- Je sais passer de la forme algébrique d'un nombre complexe à sa forme trigonométrique ou exponentielle, et inversement.
+\item \textbf{C2} --- Je sais utiliser les formules d'Euler et de Moivre pour transformer des expressions trigonométriques et calculer des puissances de nombres complexes.
+\item \textbf{C3} --- Je sais démontrer une formule d'addition trigonométrique à partir du produit scalaire.
+\item \textbf{C4} --- Je sais résoudre une équation polynomiale de degré 2, ou de degré 3 quand une racine est connue, et factoriser un polynôme dont une racine est connue.
+\item \textbf{C5} --- Je sais démontrer la factorisation de $z^n-a^n$ par $z-a$, celle de $P(z)$ par $z-a$ si $P(a)=0$, et que le nombre de racines d'un polynôme est majoré par son degré.
+\item \textbf{C6} --- Je sais utiliser les nombres complexes pour étudier des configurations du plan (alignement, orthogonalité, longueurs, angles, ensembles de points).
+\item \textbf{C7} --- Je sais déterminer l'ensemble des racines n-ièmes de l'unité et les utiliser pour étudier des polygones réguliers.
+\end{itemize}}{L'exponentielle imaginaire $\mathrm{e}^{i\theta}$, découverte par Euler, relie de façon spectaculaire l'analyse et la trigonométrie : $\mathrm{e}^{i\pi}+1=0$, une des formules les plus célèbres des mathématiques, unit cinq constantes fondamentales. Ce chapitre explore cette forme exponentielle des nombres complexes, ses applications en trigonométrie, et l'étude des équations polynomiales dans $\mathbb{C}$.
+}{\parcoursUn~14 h \quad \parcoursDeux~11 h \quad \parcoursTrois~9 h}
+\clearpage
+\typeout{NEXUS_OBJECT_BEGIN:0beaed71625665b2feb3348e4cc74512885afa21}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/cours/10_C1_forme_exponentielle.tex}
+\typeout{NEXUS_OBJECT_END:0beaed71625665b2feb3348e4cc74512885afa21}
+\typeout{NEXUS_OBJECT_BEGIN:ff894ee4a3435f2cf9742f5fce816be65fe89cc8}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/cours/11_C2_equations_polynomiales.tex}
+\typeout{NEXUS_OBJECT_END:ff894ee4a3435f2cf9742f5fce816be65fe89cc8}
+\typeout{NEXUS_OBJECT_BEGIN:1fd24af0bd330387f254d76c6470d16dccedc3cc}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/cours/12_C3_geometrie_racines_unite.tex}
+\typeout{NEXUS_OBJECT_END:1fd24af0bd330387f254d76c6470d16dccedc3cc}
+\typeout{NEXUS_OBJECT_BEGIN:b35113bc9c6e729545dfc551f2a267a6a9d07966}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-001.tex}
+\typeout{NEXUS_OBJECT_END:b35113bc9c6e729545dfc551f2a267a6a9d07966}
+\typeout{NEXUS_OBJECT_BEGIN:339f7163a6af7afd0a6c21a7f3fb4bf1a6be2717}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-002.tex}
+\typeout{NEXUS_OBJECT_END:339f7163a6af7afd0a6c21a7f3fb4bf1a6be2717}
+\typeout{NEXUS_OBJECT_BEGIN:43d552d105a895f51d1bac2f62ea70a39982f914}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-003.tex}
+\typeout{NEXUS_OBJECT_END:43d552d105a895f51d1bac2f62ea70a39982f914}
+\typeout{NEXUS_OBJECT_BEGIN:6088619ffee9f3e3605677b270793cc4cb9d618d}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-004.tex}
+\typeout{NEXUS_OBJECT_END:6088619ffee9f3e3605677b270793cc4cb9d618d}
+\typeout{NEXUS_OBJECT_BEGIN:29226fd1fb8203986e2190cef345cc22d62e9ccf}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/qcm/TEXP-COMPLEXES-TRIGO-POLYNOMES-QCM.tex}
+\typeout{NEXUS_OBJECT_END:29226fd1fb8203986e2190cef345cc22d62e9ccf}
+\typeout{NEXUS_OBJECT_BEGIN:1415c7909539bc93b7fb2505b7cdb62d2316eeeb}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/evaluations/TEXP-CTP-EV-A.tex}
+\typeout{NEXUS_OBJECT_END:1415c7909539bc93b7fb2505b7cdb62d2316eeeb}
+\typeout{NEXUS_OBJECT_BEGIN:6828bf2d4f175cf66ac259db621f7a1c831cef8a}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/evaluations/TEXP-CTP-EV-B.tex}
+\typeout{NEXUS_OBJECT_END:6828bf2d4f175cf66ac259db621f7a1c831cef8a}
+\typeout{NEXUS_OBJECT_BEGIN:0b7a9acc862088d06f4a9b183b62f0d9080f2d5b}
+\input{chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/remediation/TEXP-COMPLEXES-TRIGO-POLYNOMES-RE-C7.tex}
+\typeout{NEXUS_OBJECT_END:0b7a9acc862088d06f4a9b183b62f0d9080f2d5b}
+% ===== TEXP-ARITHMETIQUE =====
+\ouverturechapitre{Arithmétique}{\begin{itemize}
+\item \textbf{C1} --- Je sais déterminer les diviseurs d'un entier et le PGCD de deux entiers (algorithme d'Euclide).
+\item \textbf{C2} --- Je sais résoudre une congruence ax≡b [n] et déterminer un inverse de a modulo n quand a et n sont premiers entre eux.
+\item \textbf{C3} --- Je sais établir et utiliser des tests de divisibilité, étudier la primalité d'un nombre, et étudier des problèmes de chiffrement simples.
+\item \textbf{C4} --- Je sais résoudre une équation diophantienne simple ax+by=c à l'aide du théorème de Bézout.
+\item \textbf{C5} --- Je sais démontrer le théorème de Bézout : le PGCD de a et b s'écrit ax+by pour des entiers x,y.
+\item \textbf{C6} --- Je sais démontrer le théorème de Gauss (si a divise bc et a est premier avec b, alors a divise c).
+\item \textbf{C7} --- Je sais démontrer que l'ensemble des nombres premiers est infini, et utiliser la décomposition en facteurs premiers.
+\item \textbf{C8} --- Je sais énoncer et utiliser le petit théorème de Fermat.
+\item \textbf{C9} --- Je sais programmer l'algorithme d'Euclide (PGCD et couple de Bézout), le crible d'Ératosthène, et la décomposition en facteurs premiers.
+\end{itemize}}{Comment un site web peut-il vérifier votre mot de passe sans jamais le stocker en clair ? Comment deux ordinateurs peuvent-ils échanger un message secret sur un réseau public, sans qu'un espion puisse le déchiffrer ? Les réponses reposent sur l'arithmétique des nombres entiers : congruences, nombres premiers, théorème de Bézout. Ce chapitre explore ces fondements, redécouverts depuis l'Antiquité grecque et devenus aujourd'hui les piliers de la cryptographie moderne.
+}{\parcoursUn~18 h \quad \parcoursDeux~14 h \quad \parcoursTrois~11 h}
+\clearpage
+\typeout{NEXUS_OBJECT_BEGIN:f3a3b4560b6f105f584df48b8cbf6d582ed48c0c}
+\input{chapitres/TEXP-ARITHMETIQUE/cours/10_C1_divisibilite_pgcd.tex}
+\typeout{NEXUS_OBJECT_END:f3a3b4560b6f105f584df48b8cbf6d582ed48c0c}
+\typeout{NEXUS_OBJECT_BEGIN:074814c81f3e718bbc57696437608f5e768d23bf}
+\input{chapitres/TEXP-ARITHMETIQUE/cours/11_C2_congruences.tex}
+\typeout{NEXUS_OBJECT_END:074814c81f3e718bbc57696437608f5e768d23bf}
+\typeout{NEXUS_OBJECT_BEGIN:88259761d32ee98fc3e090e7eb3e7a2834b68220}
+\input{chapitres/TEXP-ARITHMETIQUE/cours/12_C3_bezout_gauss.tex}
+\typeout{NEXUS_OBJECT_END:88259761d32ee98fc3e090e7eb3e7a2834b68220}
+\typeout{NEXUS_OBJECT_BEGIN:951fda0096fba74ea9c83630f6d4316347129376}
+\input{chapitres/TEXP-ARITHMETIQUE/cours/13_C4_nombres_premiers.tex}
+\typeout{NEXUS_OBJECT_END:951fda0096fba74ea9c83630f6d4316347129376}
+\typeout{NEXUS_OBJECT_BEGIN:5ab3d149357c98d4d817078db4dfcea219d0ff25}
+\input{chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-001.tex}
+\typeout{NEXUS_OBJECT_END:5ab3d149357c98d4d817078db4dfcea219d0ff25}
+\typeout{NEXUS_OBJECT_BEGIN:99b8d41a05297417f7e6498e5bf876294728ca88}
+\input{chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-002.tex}
+\typeout{NEXUS_OBJECT_END:99b8d41a05297417f7e6498e5bf876294728ca88}
+\typeout{NEXUS_OBJECT_BEGIN:f10cbcd379eaae610bd9787a496c636d5f72f77f}
+\input{chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-003.tex}
+\typeout{NEXUS_OBJECT_END:f10cbcd379eaae610bd9787a496c636d5f72f77f}
+\typeout{NEXUS_OBJECT_BEGIN:64bb5024c3e3c2bcc6698de4ec82327b307b77c1}
+\input{chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-004.tex}
+\typeout{NEXUS_OBJECT_END:64bb5024c3e3c2bcc6698de4ec82327b307b77c1}
+\typeout{NEXUS_OBJECT_BEGIN:128bc2906ca3f586c96c3736767237441bb15887}
+\input{chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-005.tex}
+\typeout{NEXUS_OBJECT_END:128bc2906ca3f586c96c3736767237441bb15887}
+\typeout{NEXUS_OBJECT_BEGIN:864072632c3f54042f03d2bbbcc4e0f6a8782d0d}
+\input{chapitres/TEXP-ARITHMETIQUE/qcm/TEXP-ARITHMETIQUE-QCM.tex}
+\typeout{NEXUS_OBJECT_END:864072632c3f54042f03d2bbbcc4e0f6a8782d0d}
+\typeout{NEXUS_OBJECT_BEGIN:4a919cf4a981266b91dcf47f0523a14871d3b41c}
+\input{chapitres/TEXP-ARITHMETIQUE/evaluations/TEXP-ARI-EV-A.tex}
+\typeout{NEXUS_OBJECT_END:4a919cf4a981266b91dcf47f0523a14871d3b41c}
+\typeout{NEXUS_OBJECT_BEGIN:a3c68ed4d4bb72106571a7a1843cd100feae5aa7}
+\input{chapitres/TEXP-ARITHMETIQUE/evaluations/TEXP-ARI-EV-B.tex}
+\typeout{NEXUS_OBJECT_END:a3c68ed4d4bb72106571a7a1843cd100feae5aa7}
+\typeout{NEXUS_OBJECT_BEGIN:05846e80245c9ad998397c7c31a2a5b8e24b6510}
+\input{chapitres/TEXP-ARITHMETIQUE/remediation/TEXP-ARITHMETIQUE-RE-C4.tex}
+\typeout{NEXUS_OBJECT_END:05846e80245c9ad998397c7c31a2a5b8e24b6510}
+% ===== TEXP-GRAPHES =====
+\ouverturechapitre{Graphes}{\begin{itemize}
+\item \textbf{C1} --- Je sais utiliser le vocabulaire des graphes : sommets, arêtes, adjacence, degré, ordre, chaîne, connexité, graphe complet.
+\item \textbf{C2} --- Je sais modéliser une situation concrète par un graphe.
+\item \textbf{C3} --- Je sais construire la matrice d'adjacence d'un graphe.
+\item \textbf{C4} --- Je sais calculer le nombre de chemins de longueur donnée entre deux sommets d'un graphe à l'aide des puissances de la matrice d'adjacence.
+\item \textbf{C5} --- Je sais démontrer que le coefficient (i,j) de la puissance n-ième de la matrice d'adjacence donne le nombre de chemins de longueur n entre les sommets i et j.
+\end{itemize}}{En 1736, Euler résout le célèbre problème des sept ponts de Königsberg (existe-t-il une promenade empruntant chaque pont une seule fois ?) en inventant une nouvelle branche des mathématiques : la théorie des graphes. Aujourd'hui, les graphes modélisent les réseaux sociaux, les routes, Internet, et bien d'autres systèmes de relations entre objets. Ce chapitre introduit le vocabulaire fondamental des graphes et leur lien avec le calcul matriciel.
+}{\parcoursUn~12 h \quad \parcoursDeux~10 h \quad \parcoursTrois~8 h}
+\clearpage
+\typeout{NEXUS_OBJECT_BEGIN:7bf8a43593e3f06c8afdd1089e44880b4edc03ce}
+\input{chapitres/TEXP-GRAPHES/cours/10_C1_vocabulaire_graphes.tex}
+\typeout{NEXUS_OBJECT_END:7bf8a43593e3f06c8afdd1089e44880b4edc03ce}
+\typeout{NEXUS_OBJECT_BEGIN:8b304762fbb79549f0db9a3e5c0de8710d113f4b}
+\input{chapitres/TEXP-GRAPHES/cours/11_C2_matrice_adjacence.tex}
+\typeout{NEXUS_OBJECT_END:8b304762fbb79549f0db9a3e5c0de8710d113f4b}
+\typeout{NEXUS_OBJECT_BEGIN:fdaa159a2c470b6263cdcf97cf076df4b779cf21}
+\input{chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-001.tex}
+\typeout{NEXUS_OBJECT_END:fdaa159a2c470b6263cdcf97cf076df4b779cf21}
+\typeout{NEXUS_OBJECT_BEGIN:0113b053b6e6cbbb317acd6d3ad54f683fe9c7c1}
+\input{chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-002.tex}
+\typeout{NEXUS_OBJECT_END:0113b053b6e6cbbb317acd6d3ad54f683fe9c7c1}
+\typeout{NEXUS_OBJECT_BEGIN:2cc39696da9a3df7e20e9ad5e94a05c73cb77f84}
+\input{chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-003.tex}
+\typeout{NEXUS_OBJECT_END:2cc39696da9a3df7e20e9ad5e94a05c73cb77f84}
+\typeout{NEXUS_OBJECT_BEGIN:8785e3e29c3038519f4a61cc9bab60d0191ca1d7}
+\input{chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-004.tex}
+\typeout{NEXUS_OBJECT_END:8785e3e29c3038519f4a61cc9bab60d0191ca1d7}
+\typeout{NEXUS_OBJECT_BEGIN:43d15a347e48c4cd9033b716642340cb6b72ab0d}
+\input{chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-005.tex}
+\typeout{NEXUS_OBJECT_END:43d15a347e48c4cd9033b716642340cb6b72ab0d}
+\typeout{NEXUS_OBJECT_BEGIN:8ffbe21c70032e51c6ab1e799ea30f4509059679}
+\input{chapitres/TEXP-GRAPHES/qcm/TEXP-GRAPHES-QCM.tex}
+\typeout{NEXUS_OBJECT_END:8ffbe21c70032e51c6ab1e799ea30f4509059679}
+\typeout{NEXUS_OBJECT_BEGIN:a23c3642342c6dfeee5ab8fb47d53c75df597b4d}
+\input{chapitres/TEXP-GRAPHES/evaluations/TEXP-GRA-EV-A.tex}
+\typeout{NEXUS_OBJECT_END:a23c3642342c6dfeee5ab8fb47d53c75df597b4d}
+\typeout{NEXUS_OBJECT_BEGIN:6ebfa1ed457896495872065adb0c62db83789f22}
+\input{chapitres/TEXP-GRAPHES/evaluations/TEXP-GRA-EV-B.tex}
+\typeout{NEXUS_OBJECT_END:6ebfa1ed457896495872065adb0c62db83789f22}
+\typeout{NEXUS_OBJECT_BEGIN:a32083e639e2a047a7d9d7302da1ca10a4e19c68}
+\input{chapitres/TEXP-GRAPHES/remediation/TEXP-GRAPHES-RE-C4.tex}
+\typeout{NEXUS_OBJECT_END:a32083e639e2a047a7d9d7302da1ca10a4e19c68}
+% ===== TEXP-MATRICES-MARKOV =====
+\ouverturechapitre{Matrices et chaînes de Markov}{\begin{itemize}
+\item \textbf{C1} --- Je sais effectuer les opérations sur les matrices (somme, produit, inverse, puissance).
+\item \textbf{C2} --- Je sais modéliser une situation par une matrice.
+\item \textbf{C3} --- Je sais étudier une suite de matrices colonnes vérifiant $U_{n+1}=AU_n+C$, en résolvant un système linéaire ou une suite récurrente.
+\item \textbf{C4} --- Je sais associer un graphe orienté pondéré à une chaîne de Markov à deux ou trois états, et représenter distribution initiale et matrice de transition.
+\item \textbf{C5} --- Je sais calculer, pour une chaîne de Markov, la distribution après n transitions et interpréter le coefficient (i,j) de la puissance n-ième de la matrice de transition.
+\item \textbf{C6} --- Je sais démontrer l'expression de la distribution après n transitions pour une chaîne de Markov.
+\item \textbf{C7} --- Je sais déterminer une distribution invariante d'une chaîne de Markov à deux ou trois états.
+\end{itemize}}{Une chaîne de radio étudie la fidélité de ses auditeurs : d'un jour sur l'autre, un auditeur qui écoute la radio a une certaine probabilité de continuer à l'écouter le lendemain, et un non-auditeur a une certaine probabilité de commencer à l'écouter. Comment prévoir, sur le long terme, la proportion d'auditeurs ? Ce type de situation, où l'état futur ne dépend que de l'état présent, se modélise par une chaîne de Markov : ce chapitre en développe les outils matriciels.
+}{\parcoursUn~14 h \quad \parcoursDeux~12 h \quad \parcoursTrois~10 h}
+\clearpage
+\typeout{NEXUS_OBJECT_BEGIN:65ed55e446e5dc5aeffcef47eb3ebdcda312676e}
+\input{chapitres/TEXP-MATRICES-MARKOV/cours/10_C1_operations_matrices.tex}
+\typeout{NEXUS_OBJECT_END:65ed55e446e5dc5aeffcef47eb3ebdcda312676e}
+\typeout{NEXUS_OBJECT_BEGIN:6dacc5fe75ace4cdcb7bf30a89c459ce56a5c615}
+\input{chapitres/TEXP-MATRICES-MARKOV/cours/11_C2C3_suites_matricielles.tex}
+\typeout{NEXUS_OBJECT_END:6dacc5fe75ace4cdcb7bf30a89c459ce56a5c615}
+\typeout{NEXUS_OBJECT_BEGIN:1b0caac4fd9dde7da02cc8798c33bb90e42877fd}
+\input{chapitres/TEXP-MATRICES-MARKOV/cours/12_C4C5_chaines_markov.tex}
+\typeout{NEXUS_OBJECT_END:1b0caac4fd9dde7da02cc8798c33bb90e42877fd}
+\typeout{NEXUS_OBJECT_BEGIN:0fbf183bc40d5d4b6c6562579ab29fe0ac5d3f1e}
+\input{chapitres/TEXP-MATRICES-MARKOV/cours/13_C6C7_demonstration_distribution_invariante.tex}
+\typeout{NEXUS_OBJECT_END:0fbf183bc40d5d4b6c6562579ab29fe0ac5d3f1e}
+\typeout{NEXUS_OBJECT_BEGIN:417857e2136300ab820c62ce4ccf08c010ed09a2}
+\input{chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-001.tex}
+\typeout{NEXUS_OBJECT_END:417857e2136300ab820c62ce4ccf08c010ed09a2}
+\typeout{NEXUS_OBJECT_BEGIN:d20128e9d0e8752dad21f3e1a33f00d67f2e71ed}
+\input{chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-002.tex}
+\typeout{NEXUS_OBJECT_END:d20128e9d0e8752dad21f3e1a33f00d67f2e71ed}
+\typeout{NEXUS_OBJECT_BEGIN:301f799c7ae63d041a5ff4459c8a4bc02cba5ed6}
+\input{chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-003.tex}
+\typeout{NEXUS_OBJECT_END:301f799c7ae63d041a5ff4459c8a4bc02cba5ed6}
+\typeout{NEXUS_OBJECT_BEGIN:48f6dc4900b504bf17595f226b5cb544f1a7deff}
+\input{chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-004.tex}
+\typeout{NEXUS_OBJECT_END:48f6dc4900b504bf17595f226b5cb544f1a7deff}
+\typeout{NEXUS_OBJECT_BEGIN:5d173a71eff715abea58fa3e493260a0f4ffa049}
+\input{chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-005.tex}
+\typeout{NEXUS_OBJECT_END:5d173a71eff715abea58fa3e493260a0f4ffa049}
+\typeout{NEXUS_OBJECT_BEGIN:4d27d676eedc3ee4cb8dbcb30ef2e65e1c176ae1}
+\input{chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-006.tex}
+\typeout{NEXUS_OBJECT_END:4d27d676eedc3ee4cb8dbcb30ef2e65e1c176ae1}
+\typeout{NEXUS_OBJECT_BEGIN:ed9d33e4526f59b42e792aab5c38b71914a0845f}
+\input{chapitres/TEXP-MATRICES-MARKOV/qcm/TEXP-MATRICES-MARKOV-QCM.tex}
+\typeout{NEXUS_OBJECT_END:ed9d33e4526f59b42e792aab5c38b71914a0845f}
+\typeout{NEXUS_OBJECT_BEGIN:32fd8c250eb93a26d283b0894d23cabfff88285a}
+\input{chapitres/TEXP-MATRICES-MARKOV/evaluations/TEXP-MAT-EV-A.tex}
+\typeout{NEXUS_OBJECT_END:32fd8c250eb93a26d283b0894d23cabfff88285a}
+\typeout{NEXUS_OBJECT_BEGIN:2a2e29c39e96b396523ba5f597ad6669157d048c}
+\input{chapitres/TEXP-MATRICES-MARKOV/evaluations/TEXP-MAT-EV-B.tex}
+\typeout{NEXUS_OBJECT_END:2a2e29c39e96b396523ba5f597ad6669157d048c}
+\typeout{NEXUS_OBJECT_BEGIN:aca870b0429d5d30a5fa321f578c0b832211b5aa}
+\input{chapitres/TEXP-MATRICES-MARKOV/remediation/TEXP-MATRICES-MARKOV-RE-C5.tex}
+\typeout{NEXUS_OBJECT_END:aca870b0429d5d30a5fa321f578c0b832211b5aa}
+\end{document}

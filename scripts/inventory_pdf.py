@@ -70,6 +70,8 @@ def attribute_pdf(path: str, inventory: Mapping[str, Any]) -> dict[str, Any]:
         ("MANUEL_TSPE_2026-2027", "TSPE_2026_2027"),
         ("MANUEL_TSPE_2026_2027", "TSPE_2026_2027"),
         ("MANUEL_1SPE", "1SPE"),
+        ("MANUEL_TCOMPL", "TCOMPL"),
+        ("MANUEL_TEXPERTES", "TEXPERTES"),
         ("MANUEL_1NSI", "1NSI"),
         ("MANUEL_TNSI", "TNSI"),
     )

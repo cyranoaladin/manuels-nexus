@@ -364,6 +364,8 @@ COMPILED_PDF_BUILD_ROOTS: Mapping[str, str] = MappingProxyType(
     {
         "1NSI": "NSI/build",
         "1SPE": "Mathematiques/manuel-maths/build",
+        "TCOMPL": "Mathematiques/manuel-maths/build",
+        "TEXPERTES": "Mathematiques/manuel-maths/build",
         "TNSI": "NSI/build",
         "TSPE_2026_2027": "Mathematiques/manuel-maths/build",
     }
@@ -3293,11 +3295,23 @@ MANUALS: dict[str, dict[str, str]] = {
         "level": "Terminale specialite",
         "edition": "2026-2027",
     },
+    "TCOMPL": {
+        "subject": "Mathematiques",
+        "level": "Terminale mathematiques complementaires",
+        "edition": "courante",
+    },
+    "TEXPERTES": {
+        "subject": "Mathematiques",
+        "level": "Terminale mathematiques expertes",
+        "edition": "courante",
+    },
 }
 
 MANUAL_EXPECTED_LEVELS: dict[str, str] = {
     "1NSI": "1NSI",
     "1SPE": "1SPE",
+    "TCOMPL": "TCOMPL",
+    "TEXPERTES": "TEXPERTES",
     "TNSI": "TNSI",
     "TSPE_2026_2027": "TSPE",
 }
@@ -3430,6 +3444,22 @@ DELIVERABLE_SPECS: dict[str, dict[str, Any]] = {
             "banque_evaluations": ("evaluations",),
             "livret_methodes": ("methodes",),
             "livret_remediation": ("remediation", "remediations"),
+            "manuel_eleve": ("eleve",),
+            "manuel_professeur": ("professeur",),
+        },
+    },
+    "TCOMPL": {
+        "directive": "docs/11_perimetre_terminale_complementaires.md",
+        "target_chapters": 9,
+        "variants": {
+            "manuel_eleve": ("eleve",),
+            "manuel_professeur": ("professeur",),
+        },
+    },
+    "TEXPERTES": {
+        "directive": "docs/12_perimetre_terminale_expertes.md",
+        "target_chapters": 5,
+        "variants": {
             "manuel_eleve": ("eleve",),
             "manuel_professeur": ("professeur",),
         },
@@ -4936,7 +4966,7 @@ def _project_for_manual(manual: str) -> str:
 
 def _supported_manuals_for_assembler(path: str) -> tuple[str, ...]:
     if path.startswith("Mathematiques/manuel-maths/"):
-        return ("1SPE", "TSPE_2026_2027")
+        return ("1SPE", "TSPE_2026_2027", "TCOMPL", "TEXPERTES")
     return ("1NSI", "TNSI")
 
 
@@ -5325,6 +5355,10 @@ def _manual_for_chapter(chapter_id: str) -> str | None:
         return "1SPE"
     if chapter_id.startswith("TSPE-"):
         return "TSPE_2026_2027"
+    if chapter_id.startswith("TCOMPL-"):
+        return "TCOMPL"
+    if chapter_id.startswith("TEXP-"):
+        return "TEXPERTES"
     if chapter_id.startswith("1NSI-"):
         return "1NSI"
     if chapter_id.startswith("TNSI-"):
@@ -7576,6 +7610,8 @@ def _manual_name(manual_id: str) -> str:
         "TSPE_2026_2027": "Mathématiques Terminale",
         "1NSI": "NSI Première",
         "TNSI": "NSI Terminale",
+        "TCOMPL": "Mathématiques Terminale complémentaires",
+        "TEXPERTES": "Mathématiques Terminale expertes",
     }.get(manual_id, manual_id)
 
 

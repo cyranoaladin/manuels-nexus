@@ -62,21 +62,51 @@ CHAPITRES = [
     "TSPE-COMBINATOIRE",
     "TSPE-PROBABILITES",
     "TSPE-GEOMETRIE-ESPACE",
+    # Mathematiques complementaires, ordre de docs/11_perimetre_terminale_complementaires.md
+    "TCOMPL-MODELES-FONCTION",
+    "TCOMPL-MODELES-EVOLUTION",
+    "TCOMPL-LOGARITHME-HISTORIQUE",
+    "TCOMPL-CALCULS-AIRES",
+    "TCOMPL-INEGALITES",
+    "TCOMPL-INFERENCE-BAYESIENNE",
+    "TCOMPL-ECHANTILLONNAGE",
+    "TCOMPL-TEMPS-ATTENTE",
+    "TCOMPL-CORRELATION-CAUSALITE",
+    # Mathematiques expertes, ordre de docs/12_perimetre_terminale_expertes.md
+    "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE",
+    "TEXP-COMPLEXES-TRIGO-POLYNOMES",
+    "TEXP-ARITHMETIQUE",
+    "TEXP-GRAPHES",
+    "TEXP-MATRICES-MARKOV",
 ]
 CHAPITRES_1SPE = [chap for chap in CHAPITRES if chap.startswith("1SPE-")]
 CHAPITRES_TSPE = [chap for chap in CHAPITRES if chap.startswith("TSPE-")]
+CHAPITRES_TCOMPL = [chap for chap in CHAPITRES if chap.startswith("TCOMPL-")]
+CHAPITRES_TEXP = [chap for chap in CHAPITRES if chap.startswith("TEXP-")]
 
 MANUAL_TEX_NAMES = {
     "1SPE": "MANUEL_1SPE",
     "TSPE_2026_2027": "MANUEL_TSPE_2026-2027",
+    "TCOMPL": "MANUEL_TCOMPL",
+    "TEXPERTES": "MANUEL_TEXPERTES",
 }
 MANUAL_CHAPTERS = {
     "1SPE": CHAPITRES_1SPE,
     "TSPE_2026_2027": CHAPITRES_TSPE,
+    "TCOMPL": CHAPITRES_TCOMPL,
+    "TEXPERTES": CHAPITRES_TEXP,
 }
 MANUAL_TITLES = {
     "1SPE": "Manuel de mathématiques — Première spécialité",
     "TSPE_2026_2027": "Manuel de mathématiques — Terminale spécialité",
+    "TCOMPL": "Manuel de mathématiques — Terminale, mathématiques complémentaires",
+    "TEXPERTES": "Manuel de mathématiques — Terminale, mathématiques expertes",
+}
+MANUAL_LEVEL_LABELS = {
+    "1SPE": "Première spécialité",
+    "TSPE_2026_2027": "Terminale spécialité",
+    "TCOMPL": "Terminale — maths complémentaires",
+    "TEXPERTES": "Terminale — maths expertes",
 }
 
 ORDER = [
@@ -884,9 +914,8 @@ def render_master(
         )
     )
     matiere_niveau = (
-        "\\matiere{Mathématiques}\\niveau{Première spécialité}"
-        if manual == "1SPE"
-        else "\\matiere{Mathématiques}\\niveau{Terminale spécialité}"
+        "\\matiere{Mathématiques}"
+        f"\\niveau{{{MANUAL_LEVEL_LABELS[manual]}}}"
     )
     master = f"""% {MANUAL_TITLES[manual]} — variante {titre_var}
 % Assemble par scripts/assemble_manuel.py
