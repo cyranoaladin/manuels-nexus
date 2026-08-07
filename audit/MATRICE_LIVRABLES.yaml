@@ -124,10 +124,16 @@ manuals:
   1SPE:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '1344'
+      detail: '1411'
       source: anomalies.blocking_statuses
+    - code: anomalie:unassembled_objects
+      detail: '5'
+      source: anomalies.unassembled_objects
+    - code: anomalie:unclassified_types
+      detail: '7'
+      source: anomalies.unclassified_types
     - code: statuts_non_approuves
-      detail: objets=1334; contrats=10
+      detail: objets=1401; contrats=10
       source: manuals.1SPE.statuses
     current:
       artifacts:
@@ -149,14 +155,15 @@ manuals:
       - 1SPE-TRIGONOMETRIE
       - 1SPE-VARIABLES-ALEATOIRES
       statuses:
-        generated: 1334
+        generated: 1393
+        verified: 8
       totals:
         capacites: 50
-        corriges: 482
-        coups_de_pouce: 134
+        corriges: 491
+        coups_de_pouce: 176
         diagnostics: 5
         evaluations: 18
-        exercices_principaux: 464
+        exercices_principaux: 473
         methodes: 50
         projets: 0
         qcm: 10
@@ -178,6 +185,7 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
+    - anomalie:unassembled_objects
     - statuts_non_approuves
     structural_compile_ready: true
     variants:
@@ -211,6 +219,142 @@ manuals:
       manuel_professeur:
         artifacts:
         - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf
+        declared_chapter_variants: []
+        declared_manual_variants:
+        - professeur
+        state: compiled
+  TCOMPL:
+    blockers:
+    - code: anomalie:blocking_statuses
+      detail: '159'
+      source: anomalies.blocking_statuses
+    - code: statuts_non_approuves
+      detail: objets=150; contrats=9
+      source: manuals.TCOMPL.statuses
+    current:
+      artifacts:
+      - Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf
+      - Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf
+      chapter_count: 9
+      chapters:
+      - TCOMPL-CALCULS-AIRES
+      - TCOMPL-CORRELATION-CAUSALITE
+      - TCOMPL-ECHANTILLONNAGE
+      - TCOMPL-INEGALITES
+      - TCOMPL-INFERENCE-BAYESIENNE
+      - TCOMPL-LOGARITHME-HISTORIQUE
+      - TCOMPL-MODELES-EVOLUTION
+      - TCOMPL-MODELES-FONCTION
+      - TCOMPL-TEMPS-ATTENTE
+      statuses:
+        generated: 150
+      totals:
+        capacites: 50
+        corriges: 54
+        coups_de_pouce: 0
+        diagnostics: 0
+        evaluations: 18
+        exercices_principaux: 36
+        methodes: 0
+        projets: 0
+        qcm: 9
+        remediations: 9
+        sections_cours: 24
+        td: 0
+    objective:
+      directive: docs/11_perimetre_terminale_complementaires.md
+      target_chapters: 9
+    phase0_structural_eligible: false
+    publication_eligible: false
+    publication_gate_coverage:
+      execution: false
+      mathematical: false
+      pedagogical: false
+      print: false
+      regulatory: false
+      structural: true
+      visual: false
+    structural_blockers:
+    - anomalie:blocking_statuses
+    - statuts_non_approuves
+    structural_compile_ready: true
+    variants:
+      manuel_eleve:
+        artifacts:
+        - Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf
+        declared_chapter_variants: []
+        declared_manual_variants:
+        - eleve
+        state: compiled
+      manuel_professeur:
+        artifacts:
+        - Mathematiques/manuel-maths/build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf
+        declared_chapter_variants: []
+        declared_manual_variants:
+        - professeur
+        state: compiled
+  TEXPERTES:
+    blockers:
+    - code: anomalie:blocking_statuses
+      detail: '98'
+      source: anomalies.blocking_statuses
+    - code: statuts_non_approuves
+      detail: objets=93; contrats=5
+      source: manuals.TEXPERTES.statuses
+    current:
+      artifacts:
+      - Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf
+      - Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf
+      chapter_count: 5
+      chapters:
+      - TEXP-ARITHMETIQUE
+      - TEXP-COMPLEXES-ALGEBRE-GEOMETRIE
+      - TEXP-COMPLEXES-TRIGO-POLYNOMES
+      - TEXP-GRAPHES
+      - TEXP-MATRICES-MARKOV
+      statuses:
+        generated: 93
+      totals:
+        capacites: 33
+        corriges: 34
+        coups_de_pouce: 0
+        diagnostics: 0
+        evaluations: 10
+        exercices_principaux: 24
+        methodes: 0
+        projets: 0
+        qcm: 5
+        remediations: 5
+        sections_cours: 15
+        td: 0
+    objective:
+      directive: docs/12_perimetre_terminale_expertes.md
+      target_chapters: 5
+    phase0_structural_eligible: false
+    publication_eligible: false
+    publication_gate_coverage:
+      execution: false
+      mathematical: false
+      pedagogical: false
+      print: false
+      regulatory: false
+      structural: true
+      visual: false
+    structural_blockers:
+    - anomalie:blocking_statuses
+    - statuts_non_approuves
+    structural_compile_ready: true
+    variants:
+      manuel_eleve:
+        artifacts:
+        - Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf
+        declared_chapter_variants: []
+        declared_manual_variants:
+        - eleve
+        state: compiled
+      manuel_professeur:
+        artifacts:
+        - Mathematiques/manuel-maths/build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf
         declared_chapter_variants: []
         declared_manual_variants:
         - professeur
@@ -345,12 +489,6 @@ manuals:
     - code: anomalie:broken_meta_references
       detail: '2'
       source: anomalies.broken_meta_references
-    - code: anomalie:chapters_not_in_manual
-      detail: '8'
-      source: anomalies.chapters_not_in_manual
-    - code: anomalie:unassembled_objects
-      detail: '61'
-      source: anomalies.unassembled_objects
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.TSPE_2026_2027.variants.banque_evaluations
@@ -414,8 +552,6 @@ manuals:
     structural_blockers:
     - anomalie:blocking_statuses
     - anomalie:broken_meta_references
-    - anomalie:chapters_not_in_manual
-    - anomalie:unassembled_objects
     - objectif_chapitres_non_fige
     - statuts_non_approuves
     structural_compile_ready: false
@@ -451,24 +587,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:9bb515b34dd7f62dc6d5b59f9d52bd186a9d444d6cca76cb81533760142c3c3d
+model_digest: sha256:8c28f11f0f196afcd884b89ed1b359462dce95e8be062032f2db5e6b3b4d20d5
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-07T13:43:02Z'
+  generated_at_utc: '2026-08-07T20:40:03Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
     scripts/build_manifest.py: sha256:afb34e4a11f6e1d3315183a85163989ffc5e458993f1a0d0543899ada54f0d0e
     scripts/inventory_assembly.py: sha256:4df9591ae0576826887e9f42d2e82d7541b7169f6c27cb40987ecba3962f60ef
-    scripts/inventory_collection.py: sha256:3b82802cf39dac48b15fd00ed73b630df980fa7b2c583ca6b5c0a3cc879258dc
+    scripts/inventory_collection.py: sha256:dab883a12b936ea2af1b39a839990fbb47a98ffd959659de42ed5ba5dba0e545
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
-    scripts/inventory_pdf.py: sha256:d35af02bcf165276be9a76adea722813cd7376f4166b9ab1ab9bc91e226ebce9
+    scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:d58a1e818e49be506c3ed606c33a0b097d46638bb1ab73c73124e6414a10707f
+  generator_sha256: sha256:14e8f18beb99dc6d84b36e2c195f28b3a4d6f6a0dea3da07c57e75e7243a850d
   generator_version: 1
   git_available: true
-  head_sha: 02ea4f2c3ab1f160ed3f3371bc66104622e79260
+  head_sha: d03c1d885ff18b91a12af62cbc1419f0579be365
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -479,4 +615,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:0a0df3864bdd1c953e4b0f612d99f36c73c383ec37808695184c6a2e766c8693
+source_digest: sha256:a377216ae776b3f914411cadc2f1f638527622d56b6a926fe3e6748c5ef0d4a8

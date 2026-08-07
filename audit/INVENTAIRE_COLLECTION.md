@@ -7,7 +7,9 @@
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1NSI | NSI Première | NSI | Premiere | courante | 1 | 5 | 55 | 153 | 153 | — |
-| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 464 | 1334 | 1334 | manual |
+| 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 473 | 1401 | 1401 | manual |
+| TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 36 | 150 | 150 | manual |
+| TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 24 | 93 | 93 | manual |
 | TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 23 | 109 | 109 | — |
 | TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 213 | 659 | 659 | manual |
 
@@ -15,12 +17,11 @@
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2283 |
-| unknown_chapter_prefixes | 257 |
-| orphan_files | 243 |
-| unassembled_objects | 139 |
-| chapters_not_in_manual | 15 |
+| blocking_statuses | 2607 |
+| unassembled_objects | 83 |
 | unavailable_inspiration_sources | 15 |
+| chapters_not_in_manual | 7 |
+| unclassified_types | 7 |
 | duplicate_assembly_objects | 3 |
 | broken_meta_references | 2 |
 | missing_assemblers | 2 |
@@ -36,43 +37,38 @@
 - broken_latex_references: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex, cible=CONCLGN-C1, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-009.tex, cible=TSPE-PROBA-C10, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/contrat.yaml, cible=TSPE-CALCUL-INTEGRAL, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/contrat.yaml, cible=TSPE-COMBINATOIRE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/contrat.yaml, cible=TSPE-CONTINUITE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/contrat.yaml, cible=TSPE-GEOMETRIE-ESPACE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/contrat.yaml, cible=TSPE-LOGARITHME, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml, cible=1NSI-TYPES-CONSTRUITS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/TNSI-ALGORITHMIQUE/contrat.yaml, cible=TNSI-ALGORITHMIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/contrat.yaml, cible=TNSI-ARCHITECTURES-MATERIELLES-SY, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/TNSI-BASES-DE-DONNEES/contrat.yaml, cible=TNSI-BASES-DE-DONNEES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/contrat.yaml, cible=TNSI-HISTOIRE-INFORMATIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=1NSI, champ=manuel, raison=aucun assembleur de manuel suivi
 - missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=TNSI, champ=manuel, raison=aucun assembleur de manuel suivi
-- orphan_files: source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-001.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-003.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- orphan_files: source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unattributed_pdfs: source=Mathematiques/manuel-maths/build/specimen.pdf, cible=Mathematiques/manuel-maths/build/specimen.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td1_station_meteo.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_td_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C1.tex, cible=NSI/corpus_nsi/03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_tuples.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C1.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits.md, champ=sources_inspiration[1], raison=source d'inspiration absente des sources suivies
 - unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C2.tex, cible=NSI/corpus_nsi/03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_listes.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- unknown_chapter_prefixes: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/contrat.yaml, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- unknown_chapter_prefixes: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-001.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- unknown_chapter_prefixes: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- unknown_chapter_prefixes: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-003.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- unknown_chapter_prefixes: path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
+- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, id=1SPE-PROBCOND-ALG-001, source_type=algorithme
+- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex, id=1SPE-VARALEA-ALG-001, source_type=algorithme
+- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, id=1SPE-VARALEA-ALG-002, source_type=algorithme
+- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, id=1SPE-VARALEA-EXP-001, source_type=experimentation
+- unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, id=1SPE-VARALEA-EXP-002, source_type=experimentation
 
 ## Réconciliation des rapports
 
-- Assertions lues: 108
-- Ouvertes: 46
-- Contradictoires: 18
+- Assertions lues: 119
+- Ouvertes: 53
+- Contradictoires: 25
 
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 16 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 36 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | exercices_principaux | 30 | None | ouvert
@@ -85,11 +81,17 @@
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 53 | manual:TSPE_2026_2027 | chapitres | 13 | 11 | contredit
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 73 | directive:collection | seuil_exercices_declares | 2 | None | ouvert
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 73 | directive:collection | seuil_exercices_declares | 50 | None | ouvert
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 18 | chapter:1SPE-SUITES | exercices_principaux | 1 | 49 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 19 | chapter:1SPE-SECOND-DEGRE | exercices_principaux | 8 | 42 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 44 | manual:1SPE | chapitres | 4 | 10 | contredit
-- Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | corriges | 49 | 51 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 36 | manual:1SPE | chapitres | 13 | 10 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 73 | unresolved:portee_chapitres_ambigue | chapitres | 3 | None | ouvert
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | coups_de_pouce | 21 | 47 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 213 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | coups_de_pouce | 20 | 47 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 213 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 106 | manual:TSPE_2026_2027 | chapitres | 4 | 11 | contredit
+- Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | corriges | 49 | 52 | contredit
+- Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | exercices_principaux | 49 | 50 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 10 | chapter:1SPE-SUITES | pages_compilees | 82 | None | ouvert
+- Mathematiques/manuel-maths/MISSION_LOG.md | 11 | chapter:1SPE-SECOND-DEGRE | exercices_principaux | 42 | 50 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 17 | chapter:1SPE-SUITES | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/MISSION_LOG.md | 20 | manual:1SPE | tests_passes | 214 | None | ouvert
 - Mathematiques/manuel-maths/MISSION_LOG.md | 23 | chapter:1SPE-DERIVATION-LOCAL | exercices_principaux | 30 | 50 | contredit
@@ -98,9 +100,3 @@
 - Mathematiques/manuel-maths/MISSION_LOG.md | 28 | chapter:1SPE-DERIVATION-GLOBAL | remediations_items_declares | 10 | None | ouvert
 - Mathematiques/manuel-maths/MISSION_LOG.md | 32 | chapter:TSPE-SUITES-LIMITES | remediations_items_declares | 10 | None | ouvert
 - Mathematiques/manuel-maths/MISSION_LOG.md | 33 | chapter:TSPE-LIMITES-FONCTIONS | remediations_items_declares | 10 | None | ouvert
-- Mathematiques/manuel-maths/MISSION_LOG.md | 36 | chapter:TSPE-DERIVATION-CONVEXITE | coups_de_pouce | 16 | 15 | contredit
-- Mathematiques/manuel-maths/MISSION_LOG.md | 36 | chapter:TSPE-DERIVATION-CONVEXITE | exercices_principaux | 2 | 52 | contredit
-- Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 13 | chapter:1SPE-SUITES | pages_compilees | 82 | None | ouvert
-- Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 13 | chapter:1SPE-SUITES | verify_assertions | 140 | None | ouvert
-- Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 14 | chapter:1SPE-SECOND-DEGRE | pages_compilees | 65 | None | ouvert
-- Mathematiques/manuel-maths/RAPPORT_FINAL_1SPE.md | 14 | chapter:1SPE-SECOND-DEGRE | verify_assertions | 140 | None | ouvert

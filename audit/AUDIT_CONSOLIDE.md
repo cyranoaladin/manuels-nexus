@@ -11,7 +11,7 @@
 ### assembler_invalid (0)
 - Aucune.
 
-### blocking_statuses (2283)
+### blocking_statuses (2607)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
@@ -42,7 +42,7 @@
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-027, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-028.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-028, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-029, scope=object
-- … 2253 autres.
+- … 2577 autres.
 
 ### broken_assembly_references (0)
 - Aucune.
@@ -54,15 +54,7 @@
 - source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex, cible=CONCLGN-C1, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-009.tex, cible=TSPE-PROBA-C10, champ=capacites[0], raison=capacite META absente du contrat du chapitre
 
-### chapters_not_in_manual (15)
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/contrat.yaml, cible=TSPE-CALCUL-INTEGRAL, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/contrat.yaml, cible=TSPE-COMBINATOIRE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/contrat.yaml, cible=TSPE-CONTINUITE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/contrat.yaml, cible=TSPE-GEOMETRIE-ESPACE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-LOGARITHME/contrat.yaml, cible=TSPE-LOGARITHME, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-PRIMITIVES-EQDIFF/contrat.yaml, cible=TSPE-PRIMITIVES-EQDIFF, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/contrat.yaml, cible=TSPE-PROBABILITES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=Mathematiques/manuel-maths/chapitres/TSPE-TRIGONOMETRIE/contrat.yaml, cible=TSPE-TRIGONOMETRIE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+### chapters_not_in_manual (7)
 - source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml, cible=1NSI-TYPES-CONSTRUITS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - source=NSI/chapitres/TNSI-ALGORITHMIQUE/contrat.yaml, cible=TNSI-ALGORITHMIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/contrat.yaml, cible=TNSI-ARCHITECTURES-MATERIELLES-SY, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
@@ -116,71 +108,41 @@
 ### missing_corrections (0)
 - Aucune.
 
-### orphan_files (243)
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-001.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-003.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-A-corrige.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-A-corrige.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-A.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-A.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-B-corrige.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-B-corrige.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-B.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-B.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-001.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-001.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-002.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-002.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-003.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-003.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-004.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-004.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/remediation/TCOMPL-CALCULS-AIRES-RE-C4.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/remediation/TCOMPL-CALCULS-AIRES-RE-C4.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-002.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-003.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-004.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/12_C3_correlation_causalite.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/12_C3_correlation_causalite.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-A-corrige.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-A-corrige.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-A.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-A.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-B-corrige.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-B-corrige.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-B.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-B.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-001.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-001.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- source=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-002.tex, cible=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/exercices/TCOMPL-CORR-EX-002.tex, champ=reachability, raison=fichier LaTeX suivi sans META, non reference et hors assemblage, role=latex_source
-- … 213 autres.
+### orphan_files (0)
+- Aucune.
 
-### unassembled_objects (139)
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-006.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-006.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-007.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-007.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-008.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-008.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-006.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-006.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-007.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-COMBINATOIRE/corriges/TSPE-COMBI-CO-007.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-006.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-006.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-007.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-007.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-008.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-008.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-001.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-002.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-003.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-004.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-005.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-006.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-006.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-007.tex, cible=Mathematiques/manuel-maths/chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-007.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- … 109 autres.
+### unassembled_objects (83)
+- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-002.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-003.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-004.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-005.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-006.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-006.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-007.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-007.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-008.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-008.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-009.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-009.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-010.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-010.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-011.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-011.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-012.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-012.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-013.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-013.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-014.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-014.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-015.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-015.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-016.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-016.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-017.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-017.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-018.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-018.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-019.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-019.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-020.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-020.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-021.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-021.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-022.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-022.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-023.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-023.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-024.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-024.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-025.tex, cible=NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-025.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- … 53 autres.
 
 ### unattributed_pdfs (1)
 - source=Mathematiques/manuel-maths/build/specimen.pdf, cible=Mathematiques/manuel-maths/build/specimen.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
@@ -202,41 +164,17 @@
 - source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/projet/1NSI-TC-PROJET.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_tp_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
 - source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/remediation/1NSI-TC-REM.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_remediation_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
 
-### unclassified_types (0)
-- Aucune.
+### unclassified_types (7)
+- path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, id=1SPE-PROBCOND-ALG-001, source_type=algorithme
+- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex, id=1SPE-VARALEA-ALG-001, source_type=algorithme
+- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, id=1SPE-VARALEA-ALG-002, source_type=algorithme
+- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, id=1SPE-VARALEA-EXP-001, source_type=experimentation
+- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, id=1SPE-VARALEA-EXP-002, source_type=experimentation
+- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, id=1SPE-VARALEA-EXP-003, source_type=experimentation
+- path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, id=1SPE-VARALEA-EXP-004, source_type=experimentation
 
-### unknown_chapter_prefixes (257)
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/contrat.yaml, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-001.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-003.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-004.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/10_C1_primitives.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/11_C2_integrale_aire.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/cours/12_C3_calcul_integral.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-A-corrige.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-A.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-B-corrige.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/evaluations/TCOMPL-AIR-EV-B.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-001.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-002.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-003.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-004.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/qcm/TCOMPL-CALCULS-AIRES-QCM.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CALCULS-AIRES/remediation/TCOMPL-CALCULS-AIRES-RE-C4.tex, chapter=TCOMPL-CALCULS-AIRES, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/contrat.yaml, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-001.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-002.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-003.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/corriges/TCOMPL-CORR-CO-004.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/10_C1_ajustement_affine.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/11_C2_changement_variable.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/cours/12_C3_correlation_causalite.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-A-corrige.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-A.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-B-corrige.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- path=Mathematiques/manuel-maths/chapitres/TCOMPL-CORRELATION-CAUSALITE/evaluations/TCOMPL-CORR-EV-B.tex, chapter=TCOMPL-CORRELATION-CAUSALITE, reason=prefixe de chapitre sans manuel canonique
-- … 227 autres.
+### unknown_chapter_prefixes (0)
+- Aucune.
 
 ## Livrables
 ### NSI Première
@@ -254,6 +192,16 @@
 - banque_evaluations : compiled (artifacts=1)
 - livret_methodes : compiled (artifacts=1)
 - livret_remediation : compiled (artifacts=1)
+- manuel_eleve : compiled (artifacts=1)
+- manuel_professeur : compiled (artifacts=1)
+
+### Mathématiques Terminale complémentaires
+- Éligible publication: False
+- manuel_eleve : compiled (artifacts=1)
+- manuel_professeur : compiled (artifacts=1)
+
+### Mathématiques Terminale expertes
+- Éligible publication: False
 - manuel_eleve : compiled (artifacts=1)
 - manuel_professeur : compiled (artifacts=1)
 
