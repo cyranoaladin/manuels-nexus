@@ -1,0 +1,78 @@
+% META: {"id": "TCOMPL-ME-CR-010", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "cours", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Modéliser par une suite, suites géométriques}
+
+% ============================================================
+% STRATE 1 — Modeliser par une suite
+% ============================================================
+
+\definition[1]{
+Modéliser un phénomène évoluant par étapes discrètes (années, mois, générations...) consiste à définir une \textbf{suite} $(u_n)$, soit par une \textbf{formule explicite} $u_n = f(n)$, soit par une \textbf{relation de récurrence} $u_{n+1} = f(u_n)$ à partir d'un terme initial $u_0$.
+}
+
+\exemple{
+Un capital de $1000$ € est placé à un taux annuel de $3\%$. Le capital après $n$ années, $u_n$, vérifie la relation de récurrence $u_{n+1} = 1{,}03\, u_n$, avec $u_0 = 1000$. On reconnaît une suite \textbf{géométrique} de raison $q=1{,}03$, de formule explicite $u_n = 1000 \times 1{,}03^n$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% u = 1000
+% for _ in range(3):
+%     u = u * Rational(103, 100)
+% explicite = 1000 * Rational(103, 100)**3
+% assert u == explicite
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Limite de suite geometrique et de sa somme
+% ============================================================
+
+\propriete[Limite d'une suite géométrique]{
+Soit $(u_n)$ une suite géométrique de raison $q>0$ et de premier terme $u_0 \neq 0$.
+\begin{itemize}
+  \item si $0 < q < 1$, alors $\lim_{n\to+\infty} u_n = 0$ ;
+  \item si $q = 1$, la suite est constante ;
+  \item si $q > 1$, alors $\lim_{n\to+\infty} u_n = +\infty$ (si $u_0>0$).
+\end{itemize}
+}
+
+\theoreme[Somme des termes d'une suite géométrique]{
+Pour une suite géométrique de premier terme $u_0$ et de raison $q$ avec $0 < q < 1$, la somme $S_n = u_0 + u_0 q + \dots + u_0 q^n$ tend, lorsque $n \to +\infty$, vers :
+\[
+  \lim_{n\to+\infty} S_n = \frac{u_0}{1-q}.
+\]
+}
+
+\demonstration{
+On rappelle que $S_n = u_0 \dfrac{1-q^{n+1}}{1-q}$ pour $q \neq 1$. Comme $0<q<1$, on a $\lim_{n\to+\infty} q^{n+1} = 0$, donc par opérations sur les limites :
+\[
+  \lim_{n\to+\infty} S_n = u_0 \times \frac{1-0}{1-q} = \frac{u_0}{1-q}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, limit, oo, Rational, summation
+% n, q, u0 = symbols('n q u0', positive=True)
+% Sn = u0 * (1 - q**(n+1)) / (1 - q)
+% # verification numerique avec q=0.5, u0=1000
+% Sn_num = Sn.subs({q: Rational(1,2), u0: 1000})
+% assert limit(Sn_num, n, oo) == 2000
+% assert 1000/(1-Rational(1,2)) == 2000
+% END-VERIFY
+
+\exemple{
+Un patient prend un médicament dont $80\%$ est éliminé chaque jour ($q=0{,}2$) ; la dose administrée chaque jour est de $50$ mg. La quantité \textbf{cumulée} maximale dans l'organisme, au bout d'un grand nombre de jours, tend vers $\dfrac{50}{1-0{,}2} = 62{,}5$ mg.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% u0 = 50
+% q = Rational(1, 5)
+% limite = u0 / (1 - q)
+% assert limite == Rational(125, 2)
+% assert float(limite) == 62.5
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Utiliser la formule de la somme sans vérifier $0<q<1$.} Pour $q \geq 1$, la somme $S_n$ ne converge pas (elle tend vers $+\infty$) : la formule $\dfrac{u_0}{1-q}$ n'a de sens comme \textbf{limite} que dans le cas $0<q<1$.
+}

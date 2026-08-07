@@ -1,0 +1,14 @@
+% META: {"id": "TCOMPL-LOG-CO-004", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige", "exercice_ref": "TCOMPL-LOG-EX-004", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff, simplify
+% x = symbols('x', positive=True)
+% f = ln(3*x + 5)
+% fp = diff(f, x)
+% assert simplify(fp - 3/(3*x+5)) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EX-004}
+On pose $u(x)=3x+5$ (strictement positif sur son domaine $x>-\frac{5}{3}$), $u'(x)=3$. Avec $(\ln u)' = \dfrac{u'}{u}$ :
+\[
+  f'(x) = \frac{3}{3x+5}.
+\]
+\end{corrige}

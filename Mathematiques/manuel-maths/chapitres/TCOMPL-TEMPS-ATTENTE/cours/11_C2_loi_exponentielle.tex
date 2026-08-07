@@ -1,0 +1,81 @@
+% META: {"id": "TCOMPL-ATT-CR-011", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "cours", "capacites_codes": ["C4", "C5", "C6"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{La loi exponentielle}
+
+% ============================================================
+% STRATE 1 — Densite, verification, fonction de repartition
+% ============================================================
+
+\definition[1]{
+Une variable aléatoire $X$ à valeurs dans $[0,+\infty[$ suit la \textbf{loi exponentielle} de paramètre $\lambda>0$, notée $\mathcal{E}(\lambda)$, si sa densité de probabilité est $f(x) = \lambda\,\mathrm{e}^{-\lambda x}$ pour $x\geq0$ (et $f(x)=0$ pour $x<0$).
+}
+
+\propriete[Vérifier qu'une fonction est une densité]{
+Une fonction $f$ est une densité de probabilité sur $[0,+\infty[$ si $f$ est positive sur $[0,+\infty[$ et $\displaystyle\int_0^{+\infty} f(x)\,\mathrm{d}x = 1$.
+}
+
+\exemple{
+Vérifions que $f(x)=\lambda\mathrm{e}^{-\lambda x}$ est bien une densité : $f(x)\geq0$ pour tout $x\geq0$ (car $\lambda>0$), et :
+\[
+  \int_0^{+\infty} \lambda\,\mathrm{e}^{-\lambda x}\,\mathrm{d}x = \Big[-\mathrm{e}^{-\lambda x}\Big]_0^{+\infty} = 0-(-1) = 1.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, oo, simplify
+% x, lam = symbols('x lambda', positive=True)
+% f = lam * exp(-lam*x)
+% I = integrate(f, (x, 0, oo))
+% assert simplify(I - 1) == 0
+% END-VERIFY
+
+\propriete[Fonction de répartition et calcul de probabilités]{
+Pour $X\sim\mathcal{E}(\lambda)$, la fonction de répartition est $P(X\leq t) = \displaystyle\int_0^t \lambda\mathrm{e}^{-\lambda x}\,\mathrm{d}x = 1-\mathrm{e}^{-\lambda t}$ pour $t\geq0$, et $P(X>t) = \mathrm{e}^{-\lambda t}$.
+}
+
+\exemple{
+La durée de vie $X$ (en années) d'un composant électronique suit $\mathcal{E}(0{,}1)$. La probabilité qu'il fonctionne encore après $5$ ans est :
+\[
+  P(X>5) = \mathrm{e}^{-0{,}1\times5} = \mathrm{e}^{-0{,}5} \approx 0{,}6065.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import exp, N, Rational
+% lam = Rational(1, 10)
+% P_sup5 = exp(-lam*5)
+% assert abs(N(P_sup5) - 0.6065) < 0.0001
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Esperance et absence de memoire
+% ============================================================
+
+\propriete[Espérance]{
+Si $X\sim\mathcal{E}(\lambda)$, alors $E(X) = \displaystyle\int_0^{+\infty} x\,\lambda\mathrm{e}^{-\lambda x}\,\mathrm{d}x = \dfrac{1}{\lambda}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, oo, simplify
+% x, lam = symbols('x lambda', positive=True)
+% E = integrate(x * lam * exp(-lam*x), (x, 0, oo))
+% assert simplify(E - 1/lam) == 0
+% END-VERIFY
+
+\propriete[Absence de mémoire]{
+Comme la loi géométrique, la loi exponentielle vérifie $P_{X>s}(X>s+t) = P(X>t)$ pour tous $s,t\geq0$ : le temps déjà écoulé sans événement ne modifie pas la loi du temps d'attente restant. C'est la seule loi à densité sur $[0,+\infty[$ possédant cette propriété.
+}
+
+% BEGIN-VERIFY
+% from sympy import exp, Rational
+% lam = Rational(1, 5)
+% s, t = 3, 2
+% # P(X > s+t) / P(X > s) = exp(-lam*(s+t)) / exp(-lam*s) = exp(-lam*t)
+% gauche = exp(-lam*(s+t)) / exp(-lam*s)
+% droite = exp(-lam*t)
+% assert (gauche - droite).simplify() == 0
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre densité $f(x)$ et probabilité $P(X=x)$.} Pour une loi à densité, $P(X=x)=0$ pour toute valeur précise $x$ : la densité $f(x)$ n'est pas une probabilité, c'est une fonction dont l'\textbf{aire sous la courbe} sur un intervalle donne la probabilité que $X$ appartienne à cet intervalle.
+}

@@ -1,0 +1,41 @@
+% META: {"id": "TNSI-ALGO-EVAL-B-corrige", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-ALGO-EVAL-B", "capacites": ["T-ALGO-02A", "T-ALGO-02C", "T-ALGO-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def bfs(graphe, depart):
+%     visites = [depart]
+%     file = [depart]
+%     while file:
+%         sommet = file.pop(0)
+%         for voisin in graphe[sommet]:
+%             if voisin not in visites:
+%                 visites.append(voisin)
+%                 file.append(voisin)
+%     return visites
+% graphe = {
+%     "P": ["Q", "R"], "Q": ["P", "S"], "R": ["P", "S"], "S": ["Q", "R"],
+% }
+% assert bfs(graphe, "P") == ["P", "Q", "R", "S"]
+% def somme_dpr(liste):
+%     if len(liste) == 1:
+%         return liste[0]
+%     milieu = len(liste) // 2
+%     return somme_dpr(liste[:milieu]) + somme_dpr(liste[milieu:])
+% assert somme_dpr([1, 2, 3, 4, 5]) == 15
+% END-VERIFY
+\begin{corrige}{TNSI-ALGO-EVAL-B-EX1}
+\textbf{Q1.} Depuis \texttt{"P"} : on enfile \texttt{"P"}, on le défile et on enfile ses voisins \texttt{"Q"} puis \texttt{"R"} ; on défile \texttt{"Q"}, son voisin \texttt{"S"} n'est pas encore visité, on l'enfile ; on défile \texttt{"R"}, son voisin \texttt{"S"} est déjà visité. Ordre de visite : \texttt{P, Q, R, S}.
+
+\textbf{Q2.} Oui : \texttt{P} $\to$ \texttt{Q} $\to$ \texttt{S} $\to$ \texttt{R} $\to$ \texttt{P} est un cycle (chaque arête utilisée existe bien dans le graphe, et on revient au sommet de départ sans repasser par une même arête).
+\end{corrige}
+
+\begin{corrige}{TNSI-ALGO-EVAL-B-EX2}
+\textbf{Q1.} Diviser (découper le problème en sous-instances plus petites de même nature), régner (résoudre récursivement chaque sous-instance), combiner (assembler les solutions partielles en la solution globale).
+
+\textbf{Q2.}
+\begin{python}
+def somme_dpr(liste):
+    if len(liste) == 1:
+        return liste[0]
+    milieu = len(liste) // 2
+    return somme_dpr(liste[:milieu]) + somme_dpr(liste[milieu:])
+\end{python}
+\end{corrige}

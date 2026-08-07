@@ -1,0 +1,24 @@
+% META: {"id": "TEXP-GRA-CO-005", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-005", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([
+%     [0,1,1,0],
+%     [1,0,1,0],
+%     [1,1,0,1],
+%     [0,0,1,0],
+% ])
+% M2 = M**2
+% M3 = M**3
+% assert M2[0,2] == 1
+% assert M3[0,3] == 1
+% assert M2[0,2] * M[2,3] == M3[0,3]
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-005}
+\textbf{1.} Le sommet $D$ n'est relié qu'au sommet $C$ : $C$ est son unique voisin.
+
+\textbf{2.} D'après la relation de récurrence, $(M^3)_{A,D}=\displaystyle\sum_{k}(M^2)_{A,k}\times m_{k,D}$, où seuls les sommets $k$ adjacents à $D$ contribuent (les autres termes $m_{k,D}$ sont nuls). Comme $C$ est le seul voisin de $D$, cette somme se réduit à un seul terme : $(M^3)_{A,D}=(M^2)_{A,C}\times m_{C,D}=(M^2)_{A,C}\times1=(M^2)_{A,C}$.
+
+\textbf{3.} $(M^2)_{A,C}=1$, donc $(M^3)_{A,D}=1$, ce qui correspond bien à la valeur trouvée à l'exercice précédent.
+
+\textbf{4.} Toute chaîne de longueur $3$ de $A$ à $D$ se termine forcément par l'arête $\{C,D\}$ (puisque $C$ est le seul voisin de $D$) : elle se décompose donc en une chaîne de longueur $2$ de $A$ à $C$, suivie de cette arête. Le nombre de telles chaînes est donc exactement le nombre de chaînes de longueur $2$ de $A$ à $C$, c'est-à-dire $(M^2)_{A,C}$.
+\end{corrige}

@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-CORR-EV-A-corrige", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-CORR-EV-A", "capacites_codes": ["C1", "C2", "C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, sqrt, N
+% xs = [2, 4, 6, 8, 10]
+% ys = [15, 22, 28, 35, 40]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% assert xbar == 6 and ybar == 28
+% a, b = symbols('a b')
+% S = sum((y - (a*x + b))**2 for x, y in zip(xs, ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% assert sols[a] == Rational(63, 20)
+% assert sols[b] == Rational(91, 10)
+% valeur_7 = float(sols[a])*7 + float(sols[b])
+% assert abs(valeur_7 - 31.15) < 0.01
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EV-A-EX1}
+\textbf{1.} $\bar{x} = \dfrac{2+4+6+8+10}{5} = 6$ ; $\bar{y} = \dfrac{15+22+28+35+40}{5} = 28$. $G(6,28)$.
+
+\textbf{2.} À la calculatrice : $a=3{,}15$, $b=9{,}1$, soit $y=3{,}15x+9{,}1$.
+
+\textbf{3.} $r \approx 0{,}999$ : l'ajustement affine est de très bonne qualité, le nuage est presque parfaitement aligné.
+
+\textbf{4.} $y = 3{,}15\times7+9{,}1 = 31{,}15$. Comme $7\in[2,10]$ (plage des concentrations observées), c'est une \textbf{interpolation}, raisonnablement fiable.
+\end{corrige}

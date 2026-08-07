@@ -1,0 +1,43 @@
+% META: {"id": "TCOMPL-ECH-EV-A", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "evaluation", "version": "A", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C6"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from math import comb
+% def P_egal(n, p, k):
+%     return comb(n, k) * p**k * (1 - p)**(n - k)
+% assert comb(6, 2) == 15
+% assert abs(P_egal(6, 0.25, 2) - 0.2966) < 0.0001
+% assert abs(sum(P_egal(6, 0.25, i) for i in range(3)) - 0.8306) < 0.0001
+% from sympy import symbols, expand, simplify
+% p = symbols('p')
+% E = 0*(1-p)**2 + 1*2*p*(1-p) + 2*p**2
+% assert simplify(expand(E) - 2*p) == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-ECH-EV-A}{45}
+
+\begin{exercice}{TCOMPL-ECH-EV-A-EX1}{2}{30}
+\textbf{Exercice 1} (12 points) --- \textit{Capacités C1, C2, C3}
+
+\medskip
+
+On répète $6$ fois, de façon indépendante, un tirage dans une urne contenant $25\%$ de boules rouges. Soit $X$ le nombre de boules rouges obtenues.
+\begin{enumerate}
+  \item (3 pts) Justifier que $X$ suit une loi binomiale, et préciser ses paramètres.
+  \item (3 pts) Calculer $\binom{6}{2}$ à l'aide du triangle de Pascal.
+  \item (3 pts) Calculer $P(X=2)$, à $10^{-4}$ près.
+  \item (3 pts) Calculer $P(X\leq2)$, à $10^{-4}$ près.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-ECH-EV-A-EX2}{2}{20}
+\textbf{Exercice 2} (8 points) --- \textit{Capacité C6}
+
+\medskip
+
+Soit $Y \sim \mathcal{B}(2,p)$. En utilisant $P(Y=0)=(1-p)^2$, $P(Y=1)=2p(1-p)$, $P(Y=2)=p^2$, démontrer que $E(Y)=2p$.
+\end{exercice}
+
+\end{evaluation}

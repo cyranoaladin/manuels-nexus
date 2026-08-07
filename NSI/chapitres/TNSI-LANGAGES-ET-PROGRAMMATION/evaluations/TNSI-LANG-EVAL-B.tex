@@ -1,0 +1,82 @@
+% META: {"id": "TNSI-LANG-EVAL-B", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "evaluation", "capacites": ["T-LANG-03C", "T-LANG-04A", "T-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation B --- Modules, paradigmes et débogage}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 8 pts (module documenté) ; Ex. 2 : 12 pts (paradigmes, débogage)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Créer un module documenté} \hfill (8 points)
+
+\begin{enumerate}
+  \item (5 pts) Écrire une fonction \lstinline{est_premier(n)}, destinée à un module \lstinline{arithmetique.py}, qui renvoie \lstinline{True} si l'entier \lstinline{n} (supérieur à $1$) est premier, \lstinline{False} sinon. Ajouter une docstring décrivant son rôle, son paramètre et sa valeur de retour.
+  \item (3 pts) Tester la fonction sur $n=7$ (premier) et $n=8$ (non premier).
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def est_premier(n):
+%     """Indique si l'entier n (n > 1) est premier."""
+%     for d in range(2, n):
+%         if n % d == 0:
+%             return False
+%     return True
+% assert est_premier(7) is True
+% assert est_premier(8) is False
+% assert est_premier(2) is True
+% assert est_premier.__doc__ is not None
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Paradigmes et débogage} \hfill (12 points)
+
+\begin{enumerate}
+  \item (4 pts) Réécrire en style fonctionnel (une liste en compréhension) la fonction impérative suivante :
+\begin{python}
+def carres_positifs_imperatif(valeurs):
+    resultat = []
+    for v in valeurs:
+        if v > 0:
+            resultat.append(v ** 2)
+    return resultat
+\end{python}
+  \item (4 pts) Le code suivant contient un bug de nommage :
+\begin{python}
+def calculer_moyenne(notes):
+    sum = 0
+    for n in notes:
+        sum += n
+    return sum / len(notes)
+\end{python}
+    Quelle fonction native est masquée ? Ce code fonctionne-t-il malgré tout pour calculer une moyenne simple ? Justifier.
+  \item (4 pts) Le code suivant compare deux résultats de calculs flottants avec \lstinline{==}. Que renvoie-t-il, pourquoi est-ce risqué de comparer ainsi, et comment corriger ?
+\begin{python}
+resultat = 0.3 - 0.2
+print(resultat == 0.1)
+\end{python}
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def carres_positifs_fonctionnel(valeurs):
+%     return [v ** 2 for v in valeurs if v > 0]
+% def carres_positifs_imperatif(valeurs):
+%     resultat = []
+%     for v in valeurs:
+%         if v > 0:
+%             resultat.append(v ** 2)
+%     return resultat
+% donnees = [-2, 3, -1, 4]
+% assert carres_positifs_fonctionnel(donnees) == carres_positifs_imperatif(donnees)
+% assert carres_positifs_fonctionnel(donnees) == [9, 16]
+%
+% def calculer_moyenne(notes):
+%     sum = 0
+%     for n in notes:
+%         sum += n
+%     return sum / len(notes)
+% assert calculer_moyenne([10, 20, 30]) == 20.0
+%
+% resultat = 0.3 - 0.2
+% assert resultat != 0.1
+% assert abs(resultat - 0.1) < 1e-9
+% END-VERIFY

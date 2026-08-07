@@ -1,0 +1,51 @@
+{
+  "niveau": "TEXPERTES",
+  "theme": "MATRICES-MARKOV",
+  "bo_reference": "Programme d'enseignement optionnel de mathematiques expertes de terminale generale, arrete MENE1921264A, BO special n 8 du 25 juillet 2019 -- section « Graphes et matrices » (bloc unique du BO, deliberement entrelace avec les graphes).",
+  "note": "Repartition assumee du bloc unique BO « Graphes et matrices » en deux chapitres (cf. capacites_TEXPERTES_GRAPHES.json pour la justification). Ce fichier reprend les capacites du bloc directement liees au calcul matriciel et aux chaines de Markov. Formulations extraites de sources/txt/BO2019_TEXPERTES_optionnel.txt, lignes 627-668. R7 verifie le 2026-08-06.",
+  "capacites": [
+    {
+      "id": "TEXP-MAT-C1",
+      "libelle_bo": "Notion de matrice (tableau de nombres réels). Matrice carrée, matrice colonne, matrice ligne. Opérations. Inverse, puissances d'une matrice carrée.",
+      "libelle_eleve": "Je sais effectuer les opérations sur les matrices (somme, produit, inverse, puissance).",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-MAT-C2",
+      "libelle_bo": "Modéliser une situation par une matrice.",
+      "libelle_eleve": "Je sais modéliser une situation par une matrice.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-MAT-C3",
+      "libelle_bo": "Suite de matrices colonnes (Uₙ) vérifiant une relation de récurrence du type Uₙ₊₁ = AUₙ + C.",
+      "libelle_eleve": "Je sais étudier une suite de matrices colonnes vérifiant Uₙ₊₁=AUₙ+C, en résolvant un système linéaire ou une suite récurrente.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-MAT-C4",
+      "libelle_bo": "Graphe orienté pondéré associé à une chaîne de Markov à deux ou trois états. Chaîne de Markov à deux ou trois états. Distribution initiale, représentée par une matrice ligne π₀. Matrice de transition, graphe pondéré associé.",
+      "libelle_eleve": "Je sais associer un graphe orienté pondéré à une chaîne de Markov à deux ou trois états, et représenter distribution initiale et matrice de transition.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-MAT-C5",
+      "libelle_bo": "Pour une chaîne de Markov à deux ou trois états de matrice P, interprétation du coefficient (i,j) de Pⁿ. Distribution après n transitions, représentée comme la matrice ligne π₀Pⁿ.",
+      "libelle_eleve": "Je sais calculer, pour une chaîne de Markov, la distribution après n transitions π₀Pⁿ et interpréter le coefficient (i,j) de Pⁿ.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-MAT-C6",
+      "libelle_bo": "Pour une chaîne de Markov, expression de la probabilité de passer de l'état i à l'état j en n transitions, de la matrice ligne représentant la distribution après n transitions.",
+      "libelle_eleve": "Je sais démontrer l'expression de la distribution après n transitions π₀Pⁿ pour une chaîne de Markov.",
+      "demonstration_exigible": true,
+      "demonstration": "Expression de la distribution après n transitions comme π₀Pⁿ."
+    },
+    {
+      "id": "TEXP-MAT-C7",
+      "libelle_bo": "Distributions invariantes d'une chaîne de Markov à deux ou trois états.",
+      "libelle_eleve": "Je sais déterminer une distribution invariante d'une chaîne de Markov à deux ou trois états.",
+      "demonstration_exigible": false
+    }
+  ]
+}

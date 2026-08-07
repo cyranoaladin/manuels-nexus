@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-CONTIN-EX-007", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["raisonner", "calculer", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-007.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve, Eq
+% x = symbols('x')
+% f = Rational(1,3)*x + 2
+% assert f.subs(x, 0) == 2
+% assert f.subs(x, 3) == 3
+% sols = solve(Eq(x, f), x)
+% assert sols == [3]
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-007}{2}{15}
+Soit $(u_n)$ definie par $u_0 = 0$ et $u_{n+1} = \dfrac{1}{3}u_n + 2$. On pose $f(x) = \dfrac{1}{3}x + 2$.
+\begin{enumerate}
+  \item Montrer par recurrence que $0 \leq u_n \leq 3$ pour tout $n$.
+  \item Montrer que $(u_n)$ est croissante (on pourra etudier le signe de $u_{n+1}-u_n$ par recurrence, en commencant par verifier $u_1 \geq u_0$).
+  \item Justifier que $(u_n)$ converge vers un reel $\ell$, et calculer $\ell$ en utilisant la continuite de $f$.
+  \item Retrouver ce resultat en montrant que la suite $(v_n)$ definie par $v_n = u_n - 3$ est geometrique.
+\end{enumerate}
+\end{exercice}

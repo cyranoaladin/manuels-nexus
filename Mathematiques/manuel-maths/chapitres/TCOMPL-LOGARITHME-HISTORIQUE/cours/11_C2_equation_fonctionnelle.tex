@@ -1,0 +1,78 @@
+% META: {"id": "TCOMPL-LOG-CR-011", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "cours", "capacites_codes": ["C2", "C3", "C4"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{L'équation fonctionnelle : de la multiplication à l'addition}
+
+% ============================================================
+% STRATE 1 — Equation fonctionnelle et demonstration
+% ============================================================
+
+\theoreme[Équation fonctionnelle]{
+Pour tous réels $a > 0$ et $b > 0$ :
+\[
+  \ln(ab) = \ln a + \ln b.
+\]
+}
+
+\demonstration{
+Posons $A = \ln a$ et $B = \ln b$, de sorte que $a = \mathrm{e}^A$ et $b = \mathrm{e}^B$. Alors $ab = \mathrm{e}^A \times \mathrm{e}^B = \mathrm{e}^{A+B}$ (règle sur l'exponentielle d'une somme). Par définition du logarithme, $\ln(ab) = A+B = \ln a + \ln b$.
+}
+
+\propriete[Conséquences]{
+Pour $a, b > 0$ et $n \in \mathbb{Z}$ :
+\begin{itemize}
+  \item $\ln\!\left(\dfrac{1}{a}\right) = -\ln a$ ;
+  \item $\ln\!\left(\dfrac{a}{b}\right) = \ln a - \ln b$ ;
+  \item $\ln(a^n) = n \ln a$ ;
+  \item $\ln(\sqrt{a}) = \dfrac{1}{2}\ln a$.
+\end{itemize}
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, sqrt, simplify
+% a, b = symbols('a b', positive=True)
+% n = symbols('n', integer=True)
+% assert simplify(ln(1/a) - (-ln(a))) == 0
+% assert simplify(ln(a/b) - (ln(a) - ln(b))) == 0
+% assert simplify(ln(a**n) - n*ln(a)) == 0
+% assert simplify(ln(sqrt(a)) - ln(a)/2) == 0
+% END-VERIFY
+
+\margeAppui{
+Cette équation fonctionnelle réalise exactement le rêve de Neper : $\ln(ab) = \ln a + \ln b$ transforme une \textbf{multiplication} en une \textbf{addition}. C'est le principe à la base des tables de logarithmes et, plus tard, de la règle à calcul.
+}
+
+% ============================================================
+% STRATE 2 — Resoudre des equations, determiner un seuil
+% ============================================================
+
+\exemple{
+Résoudre $\ln(x) + \ln(x-2) = \ln(3)$ sur son domaine de définition. On a besoin de $x>0$ et $x-2>0$, soit $x>2$. Sur ce domaine, l'équation fonctionnelle donne $\ln(x(x-2)) = \ln 3 \iff x(x-2)=3 \iff x^2-2x-3=0$, dont les racines sont $x=3$ et $x=-1$. Seule $x=3$ vérifie $x>2$ : $S=\{3\}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, solve, Eq
+% x = symbols('x')
+% sols = solve(Eq(ln(x) + ln(x-2), ln(3)), x)
+% assert sols == [3]
+% END-VERIFY
+
+\propriete[Déterminer un seuil]{
+Pour une suite géométrique $u_n = u_0 \times q^n$ avec $q>1$, chercher le plus petit rang $n$ tel que $u_n \geq S$ (un seuil) revient, en passant au logarithme, à résoudre $n \ln q \geq \ln\!\left(\dfrac{S}{u_0}\right)$, soit $n \geq \dfrac{\ln(S/u_0)}{\ln q}$ (l'inégalité se conserve car $\ln q > 0$ quand $q>1$).
+}
+
+\exemple{
+Un capital de $1000$ € croît de $5\%$ par an : $u_n = 1000 \times 1{,}05^n$. À partir de quel rang $u_n$ dépasse-t-il $2000$ € ? On résout $1{,}05^n \geq 2$, soit $n\ln(1{,}05) \geq \ln 2$, soit $n \geq \dfrac{\ln 2}{\ln 1{,}05} \approx 14{,}2$ : dès $n=15$.
+}
+
+% BEGIN-VERIFY
+% from sympy import log, N, floor
+% seuil = log(2) / log(1.05)
+% assert N(seuil) > 14 and N(seuil) < 15
+% n = 15
+% assert 1000 * 1.05**n >= 2000
+% assert 1000 * 1.05**14 < 2000
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Diviser par $\ln q$ sans vérifier son signe.} Pour $0<q<1$, on a $\ln q < 0$ : diviser une inégalité par $\ln q$ \textbf{inverse le sens} de l'inégalité. La méthode du seuil ci-dessus suppose implicitement $q>1$ (donc $\ln q>0$) ; pour $q<1$, il faut inverser le sens de l'inégalité obtenue.
+}

@@ -1,0 +1,13 @@
+% META: {"id": "TEXP-ARI-CO-001", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert 180 == 2*84 + 12
+% assert 84 == 7*12 + 0
+% import math
+% assert math.gcd(180, 84) == 12
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-001}
+\[
+  180 = 2\times84+12, \qquad 84=7\times12+0.
+\]
+Le dernier reste non nul est $12$ : $\mathrm{PGCD}(180,84)=12$.
+\end{corrige}

@@ -1,0 +1,26 @@
+chapitre: TCOMPL-INEGALITES
+niveau: TCOMPL
+theme: INEGALITES
+titre: "Répartition des richesses, inégalités"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TCOMPL-INEG-C1, libelle_eleve: "Je sais construire et interpréter une courbe de Lorenz à partir de données réelles (quantiles d'une répartition)." }
+  - { code: C2, ref_capacite: TCOMPL-INEG-C2, libelle_eleve: "Je sais modéliser une courbe de Lorenz par une fonction convexe de [0,1] dans [0,1] et interpréter sa position par rapport à la première bissectrice." }
+  - { code: C3, ref_capacite: TCOMPL-INEG-C3, libelle_eleve: "Je sais calculer un indice de Gini et l'interpréter comme mesure du degré d'inégalité d'une répartition." }
+  - { code: C4, ref_capacite: TCOMPL-INEG-C4, libelle_eleve: "Je sais étudier la convexité d'une fonction modélisant une courbe de Lorenz à l'aide de sa dérivée seconde." }
+  - { code: C5, ref_capacite: TCOMPL-INEG-C5, libelle_eleve: "Je sais calculer, par une intégrale, l'aire entre une courbe de Lorenz et la première bissectrice pour en déduire l'indice de Gini." }
+
+prerequis:
+  - { code: R1, libelle: "Convexité (signe de la dérivée seconde)", chapitre_origine: "TCOMPL-MODELES-FONCTION" }
+  - { code: R2, libelle: "Calcul intégral, aire entre deux courbes", chapitre_origine: "TCOMPL-CALCULS-AIRES" }
+  - { code: R3, libelle: "Statistique descriptive : quantiles, médiane", chapitre_origine: "2NDE" }
+
+situation_accroche: >
+  Comment mesurer objectivement les inégalités de revenus dans un pays, et comparer
+  deux pays entre eux ? L'économiste américain Max Lorenz proposa en 1905 une
+  représentation graphique simple : la courbe de Lorenz. Ce chapitre montre comment
+  les mathématiques (convexité, calcul intégral) permettent de construire cette
+  courbe et d'en tirer un indicateur chiffré, l'indice de Gini.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 6 }

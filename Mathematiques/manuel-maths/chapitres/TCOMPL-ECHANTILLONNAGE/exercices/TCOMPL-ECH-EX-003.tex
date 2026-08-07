@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-ECH-EX-003", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "exercice", "capacites": ["TCOMPL-ECH-C4"], "capacites_codes": ["C4"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/exercices/TCOMPL-ECH-EX-003.tex", "corrige_tex": "chapitres/TCOMPL-ECHANTILLONNAGE/corriges/TCOMPL-ECH-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from math import comb
+% def P_egal(n, p, k):
+%     return comb(n, k) * p**k * (1 - p)**(n - k)
+% n, p = 100, 0.5
+% a, cumul = 0, 0
+% while cumul < 0.025:
+%     cumul += P_egal(n, p, a)
+%     a += 1
+% a -= 1
+% b, cumul2 = 0, 0
+% while cumul2 < 0.975:
+%     cumul2 += P_egal(n, p, b)
+%     b += 1
+% b -= 1
+% assert a == 40
+% assert b == 60
+% proba = sum(P_egal(n, p, k) for k in range(a, b + 1))
+% assert proba >= 0.95
+% END-VERIFY
+\begin{exercice}{TCOMPL-ECH-EX-003}{2}{15}
+On teste une pièce de monnaie en la lançant $n=100$ fois. Sous l'hypothèse que la pièce est équilibrée ($p=0{,}5$), $X$ (nombre de \og pile \fg{}) suit $\mathcal{B}(100\,;\ 0{,}5)$.
+\begin{enumerate}
+  \item À la calculatrice ou en Python, déterminer un intervalle de fluctuation $I=[a,b]$ au seuil $95\%$ (donc $P(X\in I)\geq0{,}95$).
+  \item Si l'on observe $65$ \og pile \fg{} sur les $100$ lancers, que peut-on en conclure sur l'équilibre de la pièce ?
+\end{enumerate}
+\end{exercice}

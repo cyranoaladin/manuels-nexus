@@ -1,0 +1,16 @@
+% META: {"id": "TNSI-ALGO-EX-005", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "exercice", "capacites": ["T-ALGO-03"], "capacites_codes": ["C03"], "methodes": [], "parcours": 2, "competences": ["programmer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ALGORITHMIQUE/exercices/TNSI-ALGO-EX-005.tex", "corrige_tex": "chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def maximum_dpr(liste):
+%     if len(liste) == 1:
+%         return liste[0]
+%     milieu = len(liste) // 2
+%     max_gauche = maximum_dpr(liste[:milieu])
+%     max_droite = maximum_dpr(liste[milieu:])
+%     return max(max_gauche, max_droite)
+% assert maximum_dpr([3, 7, 1, 9, 4, 2]) == 9
+% assert maximum_dpr([5]) == 5
+% assert maximum_dpr([-1, -5, -2]) == -1
+% END-VERIFY
+\begin{exercice}{TNSI-ALGO-EX-005}{2}{15}
+Écrire, selon le principe \textbf{diviser pour régner} (comme le tri fusion du cours), une fonction récursive \lstinline{maximum_dpr(liste)} qui renvoie le plus grand élément d'une liste non vide : diviser la liste en deux moitiés, trouver récursivement le maximum de chaque moitié, puis combiner en renvoyant le plus grand des deux. Quel est le cas de base ?
+\end{exercice}

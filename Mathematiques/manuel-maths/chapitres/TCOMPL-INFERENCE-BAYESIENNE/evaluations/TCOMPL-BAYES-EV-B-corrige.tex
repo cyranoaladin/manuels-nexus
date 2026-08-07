@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-BAYES-EV-B-corrige", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-BAYES-EV-B", "capacites_codes": ["C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% Se, Sp = Rational(88, 100), Rational(97, 100)
+% def VPP(p):
+%     return Se*p / (Se*p + (1-Sp)*(1-p))
+% assert VPP(Rational(5, 1000)) == Rational(88, 685)
+% assert VPP(Rational(15, 100)) == Rational(88, 105)
+% assert abs(N(VPP(Rational(5,1000))) - 0.1285) < 0.001
+% assert abs(N(VPP(Rational(15,100))) - 0.8381) < 0.001
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EV-B-EX1}
+\textbf{1.} Sensibilité $Se=P_M(T)$ : probabilité que le test soit positif sachant que le patient est malade. Spécificité $Sp=P_{\bar M}(\bar T)$ : probabilité que le test soit négatif sachant que le patient est sain.
+
+\textbf{2.} $VPP = P_T(M)$ : probabilité d'être malade sachant que le test est positif.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-BAYES-EV-B-EX2}
+\textbf{1.} $VPP(0{,}005) = \dfrac{0{,}88\times0{,}005}{0{,}88\times0{,}005+0{,}03\times0{,}995} = \dfrac{0{,}0044}{0{,}0341} \approx 0{,}129$.
+
+\textbf{2.} $VPP(0{,}15) = \dfrac{0{,}88\times0{,}15}{0{,}88\times0{,}15+0{,}03\times0{,}85} = \dfrac{0{,}132}{0{,}1575} \approx 0{,}838$.
+
+\textbf{3.} La fiabilité passe de $12{,}9\%$ à $83{,}8\%$ : ce test n'est pas adapté à un dépistage systématique en population générale (trop de faux positifs), mais devient très fiable lorsqu'il est réservé à une population déjà présélectionnée comme à risque.
+\end{corrige}

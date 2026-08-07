@@ -1,0 +1,19 @@
+% META: {"id": "TEXP-ARI-EX-005", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 2, "competences": ["modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-005.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def chiffrer(m, a=3, b=5):
+%     return (a*m + b) % 26
+% m = ord('B') - ord('A')
+% c = chiffrer(m)
+% assert c == 8
+% assert chr(c + ord('A')) == 'I'
+% import math
+% assert math.gcd(3, 26) == 1
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-005}{2}{15}
+On chiffre une lettre en associant à sa position $m$ dans l'alphabet ($A=0,B=1,\dots,Z=25$) la position $c=(3m+5)\bmod26$.
+\begin{enumerate}
+  \item Justifier que ce chiffrement est bien défini (pourquoi $c$ est-il toujours entre $0$ et $25$ ?).
+  \item Chiffrer la lettre \og B \fg{} ($m=1$).
+  \item Pourquoi le choix $a=3$ (au lieu, par exemple, de $a=2$) est-il important pour que ce chiffrement soit \textbf{déchiffrable} (chaque lettre chiffrée provient d'une unique lettre claire) ?
+\end{enumerate}
+\end{exercice}

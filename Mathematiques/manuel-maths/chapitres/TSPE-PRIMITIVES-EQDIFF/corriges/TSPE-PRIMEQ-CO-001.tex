@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-PRIMEQ-CO-001", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "corrige", "exercice_ref": "TSPE-PRIMEQ-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x')
+% F = x**3 - 2*x**2 + x
+% assert diff(F, x) == 3*x**2 - 4*x + 1
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EX-001}
+On primitive terme a terme : une primitive de $3x^2$ est $x^3$, une primitive de $-4x$ est $-2x^2$, une primitive de $1$ est $x$.
+\[
+  \boxed{F(x) = x^3 - 2x^2 + x}.
+\]
+Verification : $F'(x) = 3x^2 - 4x + 1 = f(x)$. \checkmark
+\end{corrige}

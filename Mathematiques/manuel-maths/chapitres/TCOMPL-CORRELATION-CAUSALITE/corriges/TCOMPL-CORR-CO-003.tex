@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-CORR-CO-003", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "corrige", "exercice_ref": "TCOMPL-CORR-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import log, symbols, diff, solve, N, exp
+% xs = [1, 2, 3, 4]
+% ys = [3, 12, 27, 48]
+% Ys = [log(y) for y in ys]
+% a, b = symbols('a b')
+% S = sum((Y - (a*log(x) + b))**2 for x, Y in zip(xs, Ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% assert abs(N(sols[a]) - 2) < 1e-9
+% assert abs(N(exp(sols[b])) - 3) < 1e-9
+% END-VERIFY
+\begin{corrige}{TCOMPL-CORR-EX-003}
+\textbf{1.} Si $y=Ax^b$, alors $\ln(y) = \ln(A) + b\ln(x)$ (équation fonctionnelle du logarithme). En posant $X=\ln(x)$ et $Y=\ln(y)$, on obtient $Y = bX + \ln(A)$ : une relation \textbf{affine} entre $X$ et $Y$.
+
+\textbf{2.} Les points $(X_i,Y_i) = (\ln x_i, \ln y_i)$ sont exactement alignés, de pente $b=2$ et d'ordonnée à l'origine $\ln(A)=\ln(3)$. On en déduit $A=3$ et $b=2$, soit $y=3x^2$ (on vérifie : $3\times1^2=3$, $3\times2^2=12$, $3\times3^2=27$, $3\times4^2=48$, conforme aux données).
+\end{corrige}

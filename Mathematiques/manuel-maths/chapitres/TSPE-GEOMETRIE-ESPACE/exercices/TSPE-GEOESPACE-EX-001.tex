@@ -1,0 +1,16 @@
+% META: {"id": "TSPE-GEOESPACE-EX-001", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "exercice", "capacites": ["TSPE-GEOESPACE-C7"], "capacites_codes": ["C7"], "methodes": ["M1"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/exercices/TSPE-GEOESPACE-EX-001.tex", "corrige_tex": "chapitres/TSPE-GEOMETRIE-ESPACE/corriges/TSPE-GEOESPACE-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% A=(0,0,0); B=(1,2,2); C=(2,-2,1)
+% AB=tuple(B[i]-A[i] for i in range(3))
+% AC=tuple(C[i]-A[i] for i in range(3))
+% dot = sum(a*b for a,b in zip(AB,AC))
+% assert dot == 0
+% END-VERIFY
+\begin{exercice}{TSPE-GEOESPACE-EX-001}{1}{10}
+Dans un repere orthonorme de l'espace, on donne $A(0,0,0)$, $B(1,2,2)$, $C(2,-2,1)$.
+\begin{enumerate}
+  \item Calculer les coordonnees des vecteurs $\vec{AB}$ et $\vec{AC}$.
+  \item Calculer $\vec{AB}\cdot\vec{AC}$.
+  \item En deduire la nature du triangle $ABC$.
+\end{enumerate}
+\end{exercice}

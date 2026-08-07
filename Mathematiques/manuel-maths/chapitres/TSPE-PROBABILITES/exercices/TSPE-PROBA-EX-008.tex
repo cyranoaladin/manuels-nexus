@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-PROBA-EX-008", "chapitre": "TSPE-PROBABILITES", "type_objet": "exercice", "capacites": ["TSPE-PROBA-C9"], "capacites_codes": ["C9"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "communiquer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-008.tex", "corrige_tex": "chapitres/TSPE-PROBABILITES/corriges/TSPE-PROBA-CO-008.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% n, p = 40, Rational(1,4)
+% assert n*p == 10
+% assert n*p*(1-p) == Rational(15,2)
+% END-VERIFY
+\begin{exercice}{TSPE-PROBA-EX-008}{3}{18}
+$X \sim \mathcal{B}(40,\,0{,}25)$.
+\begin{enumerate}
+  \item En redigeant la demonstration du cours (decomposition en variables de Bernoulli, linearite de l'esperance), etablir la valeur de $E(X)$.
+  \item De meme, en utilisant l'additivite de la variance (justifier l'independance), etablir la valeur de $V(X)$.
+  \item Application numerique : calculer $E(X)$ et $V(X)$.
+\end{enumerate}
+\end{exercice}

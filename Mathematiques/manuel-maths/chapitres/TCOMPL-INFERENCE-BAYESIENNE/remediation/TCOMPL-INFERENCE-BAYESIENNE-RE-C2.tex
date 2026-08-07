@@ -1,0 +1,31 @@
+% META: {"id": "TCOMPL-INFERENCE-BAYESIENNE-RE-C2", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "remediation", "capacites_codes": ["C2"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C2 : confondre P(B) avec Se
+%---------------------------------------------------------------
+
+\begin{exercice}{TCOMPL-BAYES-RE-C2-EX1}{1}{10}
+Un élève calcule la VPP d'un test ($Se=0{,}90$, $Sp=0{,}95$, prévalence $p=0{,}05$) en écrivant directement $VPP = \dfrac{Se\times p}{Se} = p = 0{,}05$, en simplifiant à tort $Se$ au numérateur et au dénominateur. Recalculer correctement $P(T)$ (et non $Se$ seul) puis la VPP, et expliquer l'erreur.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% Se, Sp, p = Rational(90,100), Rational(95,100), Rational(5,100)
+% PT = Se*p + (1-Sp)*(1-p)
+% assert PT != Se
+% VPP = Se*p / PT
+% assert VPP != p
+% assert abs(float(VPP) - 0.486) < 0.001
+% END-VERIFY
+
+\begin{corrige}{TCOMPL-BAYES-RE-C2-EX1}
+L'erreur consiste à confondre $P(T)$ (probabilité totale qu'un test soit positif, incluant les vrais \textbf{et} les faux positifs) avec $Se$ seul (probabilité que le test soit positif \textbf{sachant} la maladie). Le bon calcul est :
+\[
+  P(T) = Se\times p + (1-Sp)\times(1-p) = 0{,}90\times0{,}05+0{,}05\times0{,}95 = 0{,}045+0{,}0475 = 0{,}0925,
+\]
+puis :
+\[
+  VPP = \frac{Se\times p}{P(T)} = \frac{0{,}045}{0{,}0925} \approx 0{,}486.
+\]
+On ne peut jamais simplifier $Se$ entre numérateur et dénominateur : le dénominateur $P(T)$ contient un second terme (les faux positifs) qui n'a rien à voir avec $Se$.
+\end{corrige}

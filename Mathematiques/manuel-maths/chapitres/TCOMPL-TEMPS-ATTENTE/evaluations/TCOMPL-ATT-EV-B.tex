@@ -1,0 +1,35 @@
+% META: {"id": "TCOMPL-ATT-EV-B", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "evaluation", "version": "B", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C4", "C5", "C6"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, oo, Rational, N, simplify
+% x = symbols('x', positive=True)
+% lam = Rational(1, 15)
+% f = lam * exp(-lam*x)
+% I = integrate(f, (x, 0, oo))
+% assert simplify(I - 1) == 0
+% E = integrate(x * f, (x, 0, oo))
+% assert E == 15
+% P = 1 - exp(-lam*10)
+% assert abs(N(P) - 0.4866) < 0.0001
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-ATT-EV-B}{45}
+
+\begin{exercice}{TCOMPL-ATT-EV-B-EX1}{2}{40}
+\textbf{Exercice unique} (20 points) --- \textit{Capacités C4, C5, C6}
+
+\medskip
+
+Le temps d'attente $X$ (en minutes) entre deux clients dans une boutique suit la loi exponentielle de paramètre $\lambda=\dfrac{1}{15}$, de densité $f(x)=\dfrac{1}{15}\,\mathrm{e}^{-x/15}$ pour $x\geq0$.
+\begin{enumerate}
+  \item (4 pts) Vérifier que $f$ est bien une densité de probabilité.
+  \item (4 pts) Calculer $P(X\leq10)$, la probabilité qu'un client arrive avant $10$ minutes.
+  \item (6 pts) Écrire l'intégrale donnant $E(X)$, puis donner sa valeur (on admettra que $\displaystyle\int_0^{+\infty}x\lambda\mathrm{e}^{-\lambda x}\,\mathrm{d}x=\dfrac{1}{\lambda}$).
+  \item (6 pts) Énoncer la propriété d'absence de mémoire de la loi exponentielle, et expliquer en une phrase pourquoi elle est réaliste pour ce contexte (arrivées de clients \og au hasard \fg{}).
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

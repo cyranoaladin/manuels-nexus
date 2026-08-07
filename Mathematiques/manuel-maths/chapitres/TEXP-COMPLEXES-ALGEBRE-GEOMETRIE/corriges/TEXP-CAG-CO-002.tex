@@ -1,0 +1,16 @@
+% META: {"id": "TEXP-CAG-CO-002", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige", "exercice_ref": "TEXP-CAG-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, I, Eq, solve, conjugate
+% a, b = symbols('a b', real=True)
+% z = a + I*b
+% eq = Eq(2*z - conjugate(z), 6 + 9*I)
+% sol = solve(eq, [a, b])
+% assert sol == {a: 6, b: 3}
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EX-002}
+Posons $z=a+ib$, donc $\bar z=a-ib$. Alors :
+\[
+  2z-\bar z = 2(a+ib)-(a-ib) = (2a-a)+i(2b+b) = a+3ib.
+\]
+L'équation $a+3ib=6+9i$ donne, par identification des parties réelle et imaginaire : $a=6$ et $3b=9$, soit $b=3$. Donc $z=6+3i$.
+\end{corrige}

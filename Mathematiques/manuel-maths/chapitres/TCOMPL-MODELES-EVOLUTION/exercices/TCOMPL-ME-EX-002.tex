@@ -1,0 +1,20 @@
+% META: {"id": "TCOMPL-ME-EX-002", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "exercice", "capacites": ["TCOMPL-ME-C4"], "capacites_codes": ["C4"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/exercices/TCOMPL-ME-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-EVOLUTION/corriges/TCOMPL-ME-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% a, b, u0 = Rational(3, 4), 5, 2
+% c = b / (1 - a)
+% assert c == 20
+% u = u0
+% for _ in range(4):
+%     u = a * u + b
+% formule = c + (u0 - c) * a**4
+% assert u == formule
+% END-VERIFY
+\begin{exercice}{TCOMPL-ME-EX-002}{2}{15}
+Une population de bactéries évolue selon $u_{n+1} = 0{,}75\, u_n + 5$ (en milliers d'individus), avec $u_0=2$.
+\begin{enumerate}
+  \item Déterminer la suite constante $c$ solution de la relation.
+  \item Poser $v_n = u_n - c$, justifier que $(v_n)$ est géométrique, et donner sa raison.
+  \item En déduire l'expression explicite de $u_n$ en fonction de $n$.
+\end{enumerate}
+\end{exercice}

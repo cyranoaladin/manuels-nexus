@@ -1,0 +1,27 @@
+% META: {"id": "TCOMPL-CALCULS-AIRES-RE-C4", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : oubli du coefficient devant la primitive
+%---------------------------------------------------------------
+
+\begin{exercice}{TCOMPL-AIR-RE-C4-EX1}{1}{10}
+Un élève cherche une primitive de $f(x) = x\,\mathrm{e}^{x^2}$ et propose $F(x) = \mathrm{e}^{x^2}$. Vérifier, en calculant $F'(x)$, si cette proposition est correcte. Si ce n'est pas le cas, corriger.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, simplify
+% x = symbols('x')
+% f = x * exp(x**2)
+% F_eleve = exp(x**2)
+% Fp_eleve = diff(F_eleve, x)
+% assert simplify(Fp_eleve - f) != 0
+% F_correct = exp(x**2) / 2
+% assert simplify(diff(F_correct, x) - f) == 0
+% END-VERIFY
+
+\begin{corrige}{TCOMPL-AIR-RE-C4-EX1}
+On calcule $F'(x)$ pour la proposition de l'élève : avec $u(x)=x^2$, $u'(x)=2x$, on a $F'(x) = u'(x)\mathrm{e}^{u(x)} = 2x\,\mathrm{e}^{x^2}$, qui vaut \textbf{le double} de $f(x)=x\,\mathrm{e}^{x^2}$ : la proposition est \textbf{incorrecte}. L'oubli vient du facteur $2$ apporté par $u'$. La primitive correcte compense ce facteur :
+\[
+  F(x) = \frac{1}{2}\,\mathrm{e}^{x^2}.
+\]
+\end{corrige}

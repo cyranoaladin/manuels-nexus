@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-GRA-CO-003", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-003", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([
+%     [0,1,1,0,0],
+%     [1,0,1,0,0],
+%     [1,1,0,1,0],
+%     [0,0,1,0,1],
+%     [0,0,0,1,0],
+% ])
+% assert M == M.T
+% nb_uns = sum(1 for i in range(5) for j in range(5) if M[i,j] == 1)
+% assert nb_uns == 10
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-003}
+\textbf{1.} En numérotant $S_1,S_2,S_3,S_4,S_5$ dans cet ordre :
+$$M=\begin{pmatrix}0&1&1&0&0\\1&0&1&0&0\\1&1&0&1&0\\0&0&1&0&1\\0&0&0&1&0\end{pmatrix}$$
+
+\textbf{2.} $M$ est symétrique : $M=M^{\top}$. C'est attendu car le graphe est \textbf{non orienté} : une arête $\{S_i,S_j\}$ relie $S_i$ à $S_j$ tout autant que $S_j$ à $S_i$, donc $m_{ij}=m_{ji}$ pour tous $i,j$.
+
+\textbf{3.} $M$ compte $10$ coefficients égaux à $1$. Le graphe a $5$ arêtes, et chaque arête $\{S_i,S_j\}$ contribue deux fois à ces coefficients ($m_{ij}=1$ et $m_{ji}=1$) : $10=2\times5$.
+\end{corrige}

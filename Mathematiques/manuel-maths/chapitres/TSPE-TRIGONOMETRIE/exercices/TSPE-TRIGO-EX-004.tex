@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-TRIGO-EX-004", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "exercice", "capacites": ["TSPE-TRIGO-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-TRIGONOMETRIE/exercices/TSPE-TRIGO-EX-004.tex", "corrige_tex": "chapitres/TSPE-TRIGONOMETRIE/corriges/TSPE-TRIGO-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, sin, cos, diff, pi, solve, Eq, trigsimp
+% x = symbols('x')
+% R = 2
+% aire = 2*R*cos(x) * R*sin(x)
+% aire_s = trigsimp(aire)
+% assert aire_s == 4*sin(2*x)
+% ap = trigsimp(diff(aire, x))
+% assert ap == 8*cos(2*x)
+% crit = solve(Eq(ap, 0), x)
+% assert pi/4 in crit
+% assert aire.subs(x, pi/4) == 4
+% END-VERIFY
+\begin{exercice}{TSPE-TRIGO-EX-004}{2}{18}
+On inscrit un rectangle $MNPQ$ dans un demi-cercle de rayon $R=2$ (diametre sur l'axe des abscisses, centre $O$), symetrique par rapport a l'axe vertical. On note $x \in \left]0, \dfrac{\pi}{2}\right[$ l'angle entre $[OM]$ et l'axe des abscisses, ou $M$ est le sommet du rectangle sur le demi-cercle du cote positif.
+\begin{enumerate}
+  \item Justifier que la largeur du rectangle est $2R\cos x$ et sa hauteur $R \sin x$.
+  \item Exprimer l'aire $\mathcal{A}(x)$ du rectangle en fonction de $x$, et montrer que $\mathcal{A}(x) = 4\sin(2x)$.
+  \item Etudier les variations de $\mathcal{A}$ sur $\left]0, \dfrac{\pi}{2}\right[$ et determiner l'angle $x$ qui maximise l'aire, ainsi que cette aire maximale.
+\end{enumerate}
+\end{exercice}

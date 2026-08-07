@@ -1,0 +1,22 @@
+% META: {"id": "TEXP-COMPLEXES-TRIGO-POLYNOMES-RE-C7", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "remediation", "capacites_codes": ["C7"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C7 : compter les racines n-iemes distinctes
+%---------------------------------------------------------------
+
+\begin{exercice}{TEXP-CTP-RE-C7-EX1}{1}{10}
+Un élève affirme que $\mathbb{U}_4$ contient les $5$ éléments correspondant à $k=0,1,2,3,4$ dans $\mathrm{e}^{2ik\pi/4}$. Vérifier si $k=0$ et $k=4$ donnent le même nombre complexe, et corriger le nombre d'éléments de $\mathbb{U}_4$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import exp, I, pi, simplify
+% k0 = simplify(exp(2*I*0*pi/4))
+% k4 = simplify(exp(2*I*4*pi/4))
+% assert k0 == k4
+% racines = set(simplify(exp(2*I*k*pi/4)) for k in range(4))
+% assert len(racines) == 4
+% END-VERIFY
+
+\begin{corrige}{TEXP-CTP-RE-C7-EX1}
+Pour $k=0$ : $\mathrm{e}^{0}=1$. Pour $k=4$ : $\mathrm{e}^{2i\times4\pi/4}=\mathrm{e}^{2i\pi}=1$ également : $k=0$ et $k=4$ donnent \textbf{le même} nombre complexe (l'argument $2\pi$ correspond au même angle que $0$). L'élève a compté une racine en double. $\mathbb{U}_4$ contient bien $4$ éléments distincts, correspondant à $k=0,1,2,3$ uniquement.
+\end{corrige}

@@ -1,0 +1,11 @@
+% META: {"id": "TCOMPL-LOG-EX-004", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "exercice", "capacites": ["TCOMPL-LOG-C5"], "capacites_codes": ["C5"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/exercices/TCOMPL-LOG-EX-004.tex", "corrige_tex": "chapitres/TCOMPL-LOGARITHME-HISTORIQUE/corriges/TCOMPL-LOG-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff, simplify
+% x = symbols('x', positive=True)
+% f = ln(3*x + 5)
+% fp = diff(f, x)
+% assert simplify(fp - 3/(3*x+5)) == 0
+% END-VERIFY
+\begin{exercice}{TCOMPL-LOG-EX-004}{1}{10}
+Calculer la dérivée de $f(x) = \ln(3x+5)$ sur son domaine de définition.
+\end{exercice}

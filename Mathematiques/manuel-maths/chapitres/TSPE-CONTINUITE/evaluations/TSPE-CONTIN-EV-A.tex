@@ -1,0 +1,60 @@
+% META: {"id": "TSPE-CONTIN-EV-A", "chapitre": "TSPE-CONTINUITE", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C1", "C2"], "competences": ["raisonner", "calculer", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, solve, Eq
+% x = symbols('x')
+% # Exercice 1 (10 pts) : TVI
+% f = x**3 - 4*x + 2
+% assert f.subs(x, 1) == -1
+% assert f.subs(x, 2) == 2
+% # Exercice 2 (10 pts) : suite recurrente
+% g = Rational(2, 5)*x + Rational(3, 5)
+% assert g.subs(x, 1) == 1
+% assert g.subs(x, 5) == Rational(13, 5)
+% sols = solve(Eq(x, g), x)
+% assert sols == [1]
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+% Toute reponse doit etre justifiee ; les resultats seuls ne sont pas acceptes.
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-CONTIN-EV-A}{50}
+
+%===============================================================
+% EXERCICE 1 — TVI (10 points) — Capacite C1
+%===============================================================
+
+\begin{exercice}{TSPE-CONTIN-EV-A-EX1}{2}{25}
+
+\textbf{Exercice 1} (10 points) — \textit{Capacite C1}
+
+\medskip
+
+Soit $f(x) = x^3 - 4x + 2$ sur $[1, 2]$.
+\begin{enumerate}
+  \item (2 pts) Justifier que $f$ est continue sur $[1,2]$.
+  \item (2 pts) Calculer $f(1)$ et $f(2)$.
+  \item (6 pts) Justifier que l'equation $f(x) = 0$ admet au moins une solution dans $[1,2]$.
+\end{enumerate}
+\end{exercice}
+
+%===============================================================
+% EXERCICE 2 — Suite recurrente (10 points) — Capacite C2
+%===============================================================
+
+\begin{exercice}{TSPE-CONTIN-EV-A-EX2}{2}{25}
+
+\textbf{Exercice 2} (10 points) — \textit{Capacite C2}
+
+\medskip
+
+Soit $(u_n)$ definie par $u_0 = 5$ et $u_{n+1} = \dfrac{2u_n + 3}{5}$. On pose $f(x) = \dfrac{2x+3}{5}$.
+\begin{enumerate}
+  \item (3 pts) Montrer par recurrence que $1 \leq u_n \leq 5$ pour tout $n$.
+  \item (3 pts) Montrer que $(u_n)$ est decroissante.
+  \item (4 pts) Justifier que $(u_n)$ converge vers un reel $\ell$, et calculer $\ell$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

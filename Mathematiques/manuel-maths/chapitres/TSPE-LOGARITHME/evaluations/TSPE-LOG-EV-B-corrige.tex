@@ -1,0 +1,38 @@
+% META: {"id": "TSPE-LOG-EV-B-corrige", "chapitre": "TSPE-LOGARITHME", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-LOG-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3", "C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, exp, simplify, Rational
+% x = symbols('x')
+% sol1 = (ln(10)-1)/2
+% assert simplify(exp(2*sol1+1) - 10) == 0
+% t = symbols('t')
+% sol3 = ln(4)/Rational(8,100)
+% assert round(float(sol3), 1) == 17.3
+% END-VERIFY
+\begin{corrige}{TSPE-LOG-EV-B-EX1}
+$\mathrm{e}^{2x+1}=10$ et $10>0$ : on applique $\ln$ aux deux membres.
+\[
+  2x+1 = \ln(10), \qquad \text{donc} \qquad x = \frac{\ln(10)-1}{2}.
+\]
+Numeriquement, $x \approx 0{,}65$.
+\end{corrige}
+
+\begin{corrige}{TSPE-LOG-EV-B-EX2}
+\textbf{Q1.} $f(x) = x^2\ln x = x \times (x\ln x)$. Comme $x \to 0$ et $x\ln x \to 0$ (resultat du cours), par produit des limites, $f(x) \to 0$.
+
+\textbf{Q2.} $f$ est un produit de $x^2$ (derivee $2x$) et $\ln x$ (derivee $1/x$) :
+\[
+  f'(x) = 2x \times \ln x + x^2 \times \frac{1}{x} = 2x\ln x + x = x(2\ln x + 1).
+\]
+
+\textbf{Q3.} $f'(x)=0 \iff x=0$ (exclu, $x>0$) ou $2\ln x + 1 = 0 \iff \ln x = -\dfrac{1}{2} \iff x = \mathrm{e}^{-1/2}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-LOG-EV-B-EX3}
+On resout $80\,\mathrm{e}^{-0{,}08t} = 20$, soit $\mathrm{e}^{-0{,}08t} = 0{,}25$.
+
+En appliquant $\ln$ :
+\[
+  -0{,}08t = \ln(0{,}25) = -\ln(4), \qquad \text{donc} \qquad t = \frac{\ln 4}{0{,}08}.
+\]
+Numeriquement, $t \approx 17{,}3$ minutes.
+\end{corrige}

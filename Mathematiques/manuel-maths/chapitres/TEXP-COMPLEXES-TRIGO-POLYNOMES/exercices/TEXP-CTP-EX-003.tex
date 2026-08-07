@@ -1,0 +1,17 @@
+% META: {"id": "TEXP-CTP-EX-003", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C4"], "capacites_codes": ["C4"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-003.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, factor, I
+% z = symbols('z')
+% P = z**3 - z**2 + z - 1
+% assert P.subs(z, 1) == 0
+% assert factor(P) == (z-1)*(z**2+1)
+% assert set(solve(P, z)) == {1, I, -I}
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-003}{2}{20}
+Soit $P(z)=z^3-z^2+z-1$.
+\begin{enumerate}
+  \item Vérifier que $1$ est racine de $P$.
+  \item Déterminer $Q(z)$ tel que $P(z)=(z-1)Q(z)$.
+  \item Résoudre $P(z)=0$ dans $\mathbb{C}$ (on résoudra $Q(z)=0$).
+\end{enumerate}
+\end{exercice}

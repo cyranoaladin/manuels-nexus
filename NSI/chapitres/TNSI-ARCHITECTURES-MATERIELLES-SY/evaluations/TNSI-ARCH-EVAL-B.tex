@@ -1,0 +1,69 @@
+% META: {"id": "TNSI-ARCH-EVAL-B", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "evaluation", "capacites": ["T-ARCH-03", "T-ARCH-04A", "T-ARCH-04B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation B --- Routage et cryptographie}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (routage) ; Ex. 2 : 10 pts (chiffrement, HTTPS)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Routage} \hfill (10 points)
+
+\begin{python}
+reseau = {
+    "A": {"B": 1, "D": 8},
+    "B": {"A": 1, "C": 1},
+    "C": {"B": 1, "D": 1},
+    "D": {"A": 8, "C": 1},
+}
+\end{python}
+\begin{enumerate}
+  \item (5 pts) En utilisant \lstinline{bfs_sauts} du cours, quelle route RIP choisirait-il de \texttt{A} vers \texttt{D}, et en combien de sauts ?
+  \item (5 pts) En utilisant \lstinline{plus_court_cout} du cours, quel est le coût de la route la moins coûteuse de \texttt{A} vers \texttt{D} ? Coïncide-t-elle avec la route RIP ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def bfs_sauts(graphe_couts, depart, arrivee):
+%     visites = {depart: 0}
+%     file = [depart]
+%     while file:
+%         courant = file.pop(0)
+%         if courant == arrivee:
+%             return visites[courant]
+%         for voisin in graphe_couts[courant]:
+%             if voisin not in visites:
+%                 visites[voisin] = visites[courant] + 1
+%                 file.append(voisin)
+%     return None
+% def plus_court_cout(graphe_couts, depart, arrivee):
+%     couts = {depart: 0}
+%     a_traiter = [depart]
+%     while a_traiter:
+%         courant = min(a_traiter, key=lambda s: couts[s])
+%         a_traiter.remove(courant)
+%         if courant == arrivee:
+%             break
+%         for voisin, poids in graphe_couts[courant].items():
+%             nouveau_cout = couts[courant] + poids
+%             if voisin not in couts or nouveau_cout < couts[voisin]:
+%                 couts[voisin] = nouveau_cout
+%                 if voisin not in a_traiter:
+%                     a_traiter.append(voisin)
+%     return couts[arrivee]
+% reseau = {
+%     "A": {"B": 1, "D": 8},
+%     "B": {"A": 1, "C": 1},
+%     "C": {"B": 1, "D": 1},
+%     "D": {"A": 8, "C": 1},
+% }
+% assert bfs_sauts(reseau, "A", "D") == 1
+% assert plus_court_cout(reseau, "A", "D") == 3
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Chiffrement et HTTPS} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Quelle est la différence essentielle entre chiffrement symétrique et asymétrique ?
+  \item (6 pts) Expliquer pourquoi une connexion HTTPS combine les deux, plutôt que d'utiliser uniquement le chiffrement asymétrique pour tout l'échange.
+\end{enumerate}

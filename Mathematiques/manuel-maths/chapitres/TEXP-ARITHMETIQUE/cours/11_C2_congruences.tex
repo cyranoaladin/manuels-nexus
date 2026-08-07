@@ -1,0 +1,55 @@
+% META: {"id": "TEXP-ARI-CR-011", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "cours", "capacites_codes": ["C2", "C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Congruences}
+
+% ============================================================
+% STRATE 1 — Definition, compatibilite avec les operations
+% ============================================================
+
+\definition[1]{
+Pour $n\in\mathbb{N}^*$, deux entiers $a,b$ sont \textbf{congrus modulo $n$} (noté $a\equiv b\ [n]$) si $n$ divise $a-b$, c'est-à-dire si $a$ et $b$ ont le même reste dans la division euclidienne par $n$.
+}
+
+\propriete[Compatibilité avec les opérations]{
+Si $a\equiv b\ [n]$ et $c\equiv d\ [n]$, alors $a+c\equiv b+d\ [n]$ et $ac\equiv bd\ [n]$. En particulier, $a^k\equiv b^k\ [n]$ pour tout $k\in\mathbb{N}$.
+}
+
+\exemple{
+Comme $10\equiv1\ [9]$, on a $10^k\equiv1\ [9]$ pour tout $k$ : \textbf{un entier est congru, modulo $9$, à la somme de ses chiffres} (test de divisibilité par $9$). Par exemple, $2\,754$ : $2+7+5+4=18\equiv0\ [9]$, donc $2\,754$ est divisible par $9$.
+}
+
+% BEGIN-VERIFY
+% assert 2754 % 9 == 0
+% assert (2+7+5+4) % 9 == 0
+% assert 10 % 9 == 1
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Resoudre ax=b [n], inverse modulaire
+% ============================================================
+
+\propriete[Inverse modulaire]{
+Si $a$ et $n$ sont premiers entre eux, il existe un unique entier $u$ modulo $n$ (appelé \textbf{inverse de $a$ modulo $n$}) tel que $au\equiv1\ [n]$. On l'obtient via le théorème de Bézout (voir plus loin). La congruence $ax\equiv b\ [n]$ se résout alors en multipliant les deux membres par $u$ : $x\equiv ub\ [n]$.
+}
+
+\exemple{
+Résoudre $3x\equiv5\ [7]$. Comme $\mathrm{PGCD}(3,7)=1$, $3$ admet un inverse modulo $7$ : on cherche $u$ tel que $3u\equiv1\ [7]$ ; $u=5$ convient ($3\times5=15\equiv1\ [7]$). Donc $x\equiv5\times5=25\equiv4\ [7]$.
+}
+
+% BEGIN-VERIFY
+% assert (3*5) % 7 == 1
+% x = 4
+% assert (3*x) % 7 == 5 % 7
+% # verification que x=4 est bien LA solution modulo 7 (unique dans {0,...,6})
+% solutions = [x for x in range(7) if (3*x) % 7 == 5 % 7]
+% assert solutions == [4]
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Diviser une congruence sans vérifier que le nombre est inversible modulo $n$.} On ne peut \og diviser \fg{} une congruence $ax\equiv b\ [n]$ que si $a$ est premier avec $n$ (donc inversible) : sinon, la division peut faire perdre des solutions ou en introduire d'invalides. Par exemple, $6x\equiv6\ [8]$ n'équivaut \textbf{pas} à $x\equiv1\ [8]$ (qui ne donnerait qu'une solution), car $\mathrm{PGCD}(6,8)=2\neq1$ : les solutions modulo $8$ sont en réalité $x\equiv1\ [8]$ \textbf{et} $x\equiv5\ [8]$.
+}
+
+% BEGIN-VERIFY
+% solutions_6x = [x for x in range(8) if (6*x) % 8 == 6 % 8]
+% assert solutions_6x == [1, 5]
+% END-VERIFY

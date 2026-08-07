@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-MF-EX-002", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "exercice", "capacites": ["TCOMPL-MF-C2"], "capacites_codes": ["C2"], "methodes": [], "parcours": 2, "competences": ["raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-MODELES-FONCTION/exercices/TCOMPL-MF-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-MODELES-FONCTION/corriges/TCOMPL-MF-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq
+% x = symbols('x', positive=True)
+% f = x + 16/x
+% assert len(solve(Eq(f, 10), x)) == 2
+% assert solve(Eq(f, 8), x) == [4]
+% assert solve(Eq(f, 7), x) == []
+% END-VERIFY
+\begin{exercice}{TCOMPL-MF-EX-002}{2}{15}
+On reprend $f(x) = x + \dfrac{16}{x}$ (décroissante sur $]0,4]$ de $+\infty$ à $8$, puis croissante sur $[4,+\infty[$ de $8$ à $+\infty$). Sans chercher à résoudre explicitement les équations, déterminer, en justifiant à l'aide du tableau de variation, le nombre de solutions de :
+\begin{enumerate}
+  \item $f(x) = 10$ ;
+  \item $f(x) = 8$ ;
+  \item $f(x) = 7$.
+\end{enumerate}
+\end{exercice}

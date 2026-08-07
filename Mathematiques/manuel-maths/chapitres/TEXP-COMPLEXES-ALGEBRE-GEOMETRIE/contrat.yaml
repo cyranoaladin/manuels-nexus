@@ -1,0 +1,24 @@
+chapitre: TEXP-COMPLEXES-ALGEBRE-GEOMETRIE
+niveau: TEXPERTES
+theme: COMPLEXES-ALGEBRE-GEOMETRIE
+titre: "Nombres complexes : points de vue algébrique et géométrique"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TEXP-CAG-C1, libelle_eleve: "Je sais effectuer des calculs algébriques avec des nombres complexes (somme, produit, conjugué, inverse)." }
+  - { code: C2, ref_capacite: TEXP-CAG-C2, libelle_eleve: "Je sais résoudre une équation linéaire az=b ou une équation simple faisant intervenir z et son conjugué." }
+  - { code: C3, ref_capacite: TEXP-CAG-C3, libelle_eleve: "Je sais démontrer les propriétés du conjugué d'un produit, d'un inverse, d'une puissance, et la formule du binôme dans $\\mathbb{C}$." }
+  - { code: C4, ref_capacite: TEXP-CAG-C4, libelle_eleve: "Je sais déterminer le module et un argument d'un nombre complexe, et représenter/déterminer une affixe." }
+  - { code: C5, ref_capacite: TEXP-CAG-C5, libelle_eleve: "Je sais démontrer la formule $|z|^2=z\\bar z$ et les propriétés du module d'un produit et d'une puissance." }
+
+prerequis:
+  - { code: R1, libelle: "Nombres complexes : forme algébrique, opérations de base", chapitre_origine: "1SPE" }
+  - { code: R2, libelle: "Vecteurs, repère orthonormé", chapitre_origine: "1SPE-GEOMETRIE-REPEREE" }
+
+situation_accroche: >
+  Comment résoudre une équation qui n'a pas de solution réelle, comme x²+1=0 ? Les
+  mathématiciens italiens du XVIe siècle ont eu l'audace d'inventer un nombre i tel que
+  i²=-1. Ce chapitre reprend et approfondit l'étude algébrique des nombres complexes
+  vue en première, puis explore leur interprétation géométrique comme points du plan.
+
+temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }

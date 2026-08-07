@@ -1,0 +1,22 @@
+% META: {"id": "TCOMPL-ATT-EV-B-corrige", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ATT-EV-B", "capacites_codes": ["C4", "C5", "C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, oo, Rational, N, simplify
+% x = symbols('x', positive=True)
+% lam = Rational(1, 15)
+% f = lam * exp(-lam*x)
+% I = integrate(f, (x, 0, oo))
+% assert simplify(I - 1) == 0
+% E = integrate(x * f, (x, 0, oo))
+% assert E == 15
+% P = 1 - exp(-lam*10)
+% assert abs(N(P) - 0.4866) < 0.0001
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EV-B-EX1}
+\textbf{1.} $f(x)=\frac{1}{15}\mathrm{e}^{-x/15}\geq0$ pour tout $x\geq0$, et $\displaystyle\int_0^{+\infty}\frac{1}{15}\mathrm{e}^{-x/15}\,\mathrm{d}x = \Big[-\mathrm{e}^{-x/15}\Big]_0^{+\infty} = 0-(-1)=1$. $f$ est bien une densité.
+
+\textbf{2.} $P(X\leq10) = 1-\mathrm{e}^{-10/15} = 1-\mathrm{e}^{-2/3} \approx 0{,}4866$.
+
+\textbf{3.} $E(X) = \displaystyle\int_0^{+\infty} x\times\frac{1}{15}\mathrm{e}^{-x/15}\,\mathrm{d}x = \dfrac{1}{1/15} = 15$ minutes.
+
+\textbf{4.} $P_{X>s}(X>s+t) = P(X>t)$ pour tous $s,t\geq0$ : le temps déjà écoulé sans nouveau client ne change rien à la loi du temps d'attente restant. C'est réaliste ici car les arrivées de clients sont indépendantes les unes des autres, sans effet de \og fatigue \fg{} ou d'\og imminence \fg{} après une longue attente.
+\end{corrige}

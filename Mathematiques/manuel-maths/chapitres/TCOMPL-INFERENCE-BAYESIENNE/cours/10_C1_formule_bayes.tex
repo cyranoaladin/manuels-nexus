@@ -1,0 +1,58 @@
+% META: {"id": "TCOMPL-BAYES-CR-010", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "cours", "capacites_codes": ["C1", "C2", "C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{La formule de Bayes}
+
+% ============================================================
+% STRATE 1 — Rappel proba conditionnelle, formule de Bayes
+% ============================================================
+
+\definition[1]{
+Pour deux événements $A$ et $B$ avec $P(A)>0$, la \textbf{probabilité conditionnelle} de $B$ sachant $A$ est $P_A(B) = \dfrac{P(A\cap B)}{P(A)}$.
+}
+
+\margeAppui{
+On appelle $P(A)$ la \textbf{probabilité a priori} de $A$ (avant toute observation), et $P_B(A)$ la \textbf{probabilité a posteriori} de $A$ (après avoir observé $B$).
+}
+
+\theoreme[Formule de Bayes]{
+Pour $A$ et $B$ deux événements de probabilité non nulle :
+\[
+  P_B(A) = \frac{P_A(B) \times P(A)}{P(B)}.
+\]
+}
+
+\demonstration{
+Par définition de la probabilité conditionnelle, $P(A\cap B) = P_A(B)\times P(A)$ et aussi $P(A\cap B) = P_B(A)\times P(B)$ (les deux expressions désignent la même probabilité $P(A\cap B)$, calculée dans les deux sens). En égalant : $P_B(A)\times P(B) = P_A(B)\times P(A)$, d'où le résultat en divisant par $P(B)$ (non nul).
+}
+
+% ============================================================
+% STRATE 2 — Distinction PB(A) vs PA(B)
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre $P_B(A)$ et $P_A(B)$.} Ces deux quantités sont en général \textbf{très différentes} : $P_A(B)$ est la probabilité de $B$ sachant $A$ (par exemple, la probabilité qu'un test soit positif sachant que le patient est malade), alors que $P_B(A)$ est la probabilité de $A$ sachant $B$ (la probabilité que le patient soit malade sachant que le test est positif). C'est précisément la formule de Bayes qui permet de passer de l'une à l'autre.
+}
+
+\exemple{
+Dans une population, $1\%$ des personnes sont porteuses d'une maladie ($P(A)=0{,}01$). Un test détecte la maladie avec une probabilité de $99\%$ quand elle est présente ($P_A(B)=0{,}99$), et donne un résultat positif à tort dans $2\%$ des cas chez les personnes saines. On calcule $P(B) = P(A)P_A(B) + P(\bar{A})P_{\bar{A}}(B) = 0{,}01\times0{,}99 + 0{,}99\times0{,}02 = 0{,}0297$.
+
+La probabilité qu'une personne testée positive soit réellement malade est :
+\[
+  P_B(A) = \frac{P_A(B)\times P(A)}{P(B)} = \frac{0{,}99\times0{,}01}{0{,}0297} \approx 0{,}333.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% PA = Rational(1, 100)
+% PA_B = Rational(99, 100)
+% PnotA_B = Rational(2, 100)
+% PB = PA*PA_B + (1-PA)*PnotA_B
+% assert PB == Rational(297, 10000)
+% PB_A = PA_B * PA / PB
+% assert abs(float(PB_A) - 0.333) < 0.001
+% END-VERIFY
+
+\propriete[Le paradoxe du test fiable]{
+Même avec un test fiable à $99\%$, la probabilité $P_B(A)$ d'être réellement malade sachant le test positif ne vaut que $33\%$ environ dans l'exemple ci-dessus : cela s'explique par la \textbf{rareté} de la maladie ($1\%$ de la population), qui fait que le nombre de \textbf{faux positifs} (personnes saines testées à tort positives) devient important en valeur absolue, même avec un faible taux d'erreur individuel.
+}

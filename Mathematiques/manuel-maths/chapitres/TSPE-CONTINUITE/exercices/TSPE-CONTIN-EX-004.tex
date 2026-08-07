@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-004", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 2, "competences": ["raisonner", "modeliser"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-004.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff
+% x = symbols('x')
+% f = ln(x) + x - 3
+% fp = diff(f, x)
+% assert fp == 1 + 1/x
+% assert f.subs(x, 1) == -2
+% assert float(f.subs(x, 4)) > 2
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-004}{2}{12}
+Une entreprise modelise son benefice (en milliers d'euros) par $f(x) = \ln(x) + x - 3$, ou $x \in [1, 4]$ represente le prix de vente unitaire.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et justifier que $f$ est strictement croissante sur $[1, 4]$.
+  \item Calculer $f(1)$. Que vaut $f(4)$ (arrondir a $10^{-2}$) ?
+  \item Justifier qu'il existe un unique prix $x_0 \in [1, 4]$ pour lequel le benefice est nul.
+\end{enumerate}
+\end{exercice}

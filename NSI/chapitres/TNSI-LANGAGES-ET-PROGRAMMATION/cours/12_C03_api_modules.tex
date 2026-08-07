@@ -1,0 +1,84 @@
+% META: {"id": "TNSI-LANG-CR-012", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "cours", "capacites_codes": ["C03A", "C03B", "C03C"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{API, bibliothèques et modules}
+
+% ============================================================
+% STRATE 1 — Utiliser une API et sa documentation
+% ============================================================
+
+\definition[1]{
+Une \textbf{bibliothèque} (ou \textit{librairie}) est un ensemble de fonctions déjà écrites et testées, réutilisables dans d'autres programmes. Son \textbf{API} (\textit{Application Programming Interface}) est l'ensemble des fonctions, classes et paramètres qu'elle expose à l'utilisateur, \textbf{sans qu'il ait besoin de connaître leur implémentation interne}.
+}
+
+\textbf{Exemple.} La bibliothèque standard \lstinline{statistics} fournit des fonctions déjà écrites et testées :
+\begin{python}
+import statistics
+
+notes = [12, 15, 8, 17, 14]
+moyenne = statistics.mean(notes)
+mediane = statistics.median(notes)
+ecart_type = statistics.stdev(notes)
+\end{python}
+
+% BEGIN-VERIFY
+% import statistics
+% notes = [12, 15, 8, 17, 14]
+% moyenne = statistics.mean(notes)
+% mediane = statistics.median(notes)
+% assert moyenne == 13.2
+% assert mediane == 14
+% END-VERIFY
+
+\propriete[Exploiter la documentation]{
+Avant d'utiliser une fonction d'une bibliothèque, on consulte sa \textbf{documentation} : le nom et l'ordre des paramètres, leur type attendu, la valeur renvoyée, et des exemples d'utilisation. En Python, \lstinline{help(fonction)} affiche la \textbf{docstring} (chaîne de documentation) associée à une fonction.
+}
+
+\margeAppui{
+Se tromper sur l'\textbf{ordre des paramètres} d'une fonction d'API est une source d'erreur fréquente : toujours vérifier la signature exacte dans la documentation avant l'appel, plutôt que de deviner par analogie avec une autre bibliothèque.
+}
+
+% ============================================================
+% STRATE 2 — Creer et documenter un module
+% ============================================================
+
+\definition[2]{
+Un \textbf{module} est un fichier Python (\lstinline{.py}) regroupant des fonctions liées par un thème commun, réutilisable dans d'autres programmes via \lstinline{import}. Chaque fonction d'un module bien conçu est \textbf{documentée} par une docstring décrivant son rôle, ses paramètres et sa valeur de retour.
+}
+
+\textbf{Exemple.} Un module \lstinline{geometrie.py} regroupant des fonctions sur les figures planes, chacune documentée :
+\begin{python}
+def aire_rectangle(largeur, hauteur):
+    """Renvoie l'aire d'un rectangle.
+
+    Parametres : largeur, hauteur (nombres positifs).
+    Renvoie : l'aire (largeur * hauteur).
+    """
+    return largeur * hauteur
+
+def perimetre_rectangle(largeur, hauteur):
+    """Renvoie le perimetre d'un rectangle."""
+    return 2 * (largeur + hauteur)
+\end{python}
+
+% BEGIN-VERIFY
+% def aire_rectangle(largeur, hauteur):
+%     """Renvoie l'aire d'un rectangle.
+%
+%     Parametres : largeur, hauteur (nombres positifs).
+%     Renvoie : l'aire (largeur * hauteur).
+%     """
+%     return largeur * hauteur
+%
+% def perimetre_rectangle(largeur, hauteur):
+%     """Renvoie le perimetre d'un rectangle."""
+%     return 2 * (largeur + hauteur)
+%
+% assert aire_rectangle(4, 3) == 12
+% assert perimetre_rectangle(4, 3) == 14
+% assert aire_rectangle.__doc__ is not None
+% assert "aire" in aire_rectangle.__doc__.lower()
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Documenter le \og comment \fg{} au lieu du \og quoi \fg{}.} Une bonne docstring décrit \textbf{ce que fait} la fonction, ses paramètres attendus et sa valeur de retour -- pas le détail de son implémentation interne (qui peut changer sans que la documentation ait besoin d'être mise à jour, tant que le comportement observable reste le même).
+}

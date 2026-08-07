@@ -1,0 +1,81 @@
+% META: {"id": "TEXP-GRAPHES-QCM", "chapitre": "TEXP-GRAPHES", "type_objet": "qcm", "capacites_codes": ["C1","C2","C3","C4","C5"], "status": "generated"}
+
+\section*{QCM d'auto-évaluation --- Graphes}
+
+\begin{center}
+\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\end{center}
+
+\bigskip
+
+\subsection*{C1 --- Vocabulaire des graphes}
+
+\begin{enumerate}
+
+\item \textbf{[Q1]} Le degré d'un sommet est :
+  \begin{enumerate}[label=\Alph*.]
+    \item le nombre de sommets du graphe.
+    \item le nombre d'arêtes incidentes à ce sommet.
+    \item la distance à un autre sommet.
+    \item toujours égal à l'ordre du graphe.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q2]} Un graphe complet d'ordre $n$ possède :
+  \begin{enumerate}[label=\Alph*.]
+    \item $n$ arêtes.
+    \item $n-1$ arêtes.
+    \item $\dfrac{n(n-1)}{2}$ arêtes.
+    \item $n^2$ arêtes.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C2 --- Modélisation}
+
+\item \textbf{[Q3]} Pour modéliser un réseau de villes reliées par des routes, on choisit naturellement :
+  \begin{enumerate}[label=\Alph*.]
+    \item les villes comme arêtes et les routes comme sommets.
+    \item les villes comme sommets et les routes comme arêtes.
+    \item uniquement des sommets, sans arêtes.
+    \item une matrice sans lien avec un graphe.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C3 --- Matrice d'adjacence}
+
+\item \textbf{[Q4]} La matrice d'adjacence d'un graphe non orienté est toujours :
+  \begin{enumerate}[label=\Alph*.]
+    \item diagonale.
+    \item symétrique.
+    \item inversible.
+    \item composée uniquement de $1$.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C4 --- Puissances de la matrice d'adjacence}
+
+\item \textbf{[Q5]} Si $M$ est la matrice d'adjacence d'un graphe $G$, le coefficient $(M^3)_{ij}$ donne :
+  \begin{enumerate}[label=\Alph*.]
+    \item le nombre de sommets adjacents à $i$.
+    \item le nombre de chaînes de longueur $3$ entre $i$ et $j$.
+    \item la distance la plus courte entre $i$ et $j$.
+    \item toujours $0$ si $i\neq j$.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C5 --- Démonstration}
+
+\item \textbf{[Q6]} Dans la démonstration par récurrence de la propriété sur $(M^n)_{ij}$, l'étape d'hérédité repose sur :
+  \begin{enumerate}[label=\Alph*.]
+    \item le calcul direct de $M^n$ pour un très grand $n$.
+    \item la décomposition d'une chaîne de longueur $n+1$ en une chaîne de longueur $n$ suivie d'une arête.
+    \item le fait que $M$ soit toujours inversible.
+    \item une vérification numérique sur quelques exemples.
+  \end{enumerate}
+
+\end{enumerate}

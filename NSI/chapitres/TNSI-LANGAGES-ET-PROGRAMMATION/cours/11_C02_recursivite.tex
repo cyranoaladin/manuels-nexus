@@ -1,0 +1,91 @@
+% META: {"id": "TNSI-LANG-CR-011", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "cours", "capacites_codes": ["C02A", "C02B"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Écrire et analyser un programme récursif}
+
+% ============================================================
+% STRATE 1 — Ecrire un programme recursif
+% ============================================================
+
+\definition[1]{
+Un programme \textbf{récursif} est une fonction qui s'appelle elle-même, directement ou indirectement. Il comporte toujours au moins un \textbf{cas de base} (qui s'arrête sans appel récursif) et un \textbf{cas général} (qui se ramène à une instance plus simple du même problème).
+}
+
+\textbf{Exemple.} La factorielle, un exemple classique dans un domaine mathématique :
+\begin{python}
+def factorielle(n):
+    if n == 0:
+        return 1
+    return n * factorielle(n - 1)
+\end{python}
+
+\textbf{Exemple.} Compter les occurrences d'un caractère dans une chaîne, dans un domaine différent (traitement de texte) :
+\begin{python}
+def compter(chaine, caractere):
+    if chaine == "":
+        return 0
+    premier = 1 if chaine[0] == caractere else 0
+    return premier + compter(chaine[1:], caractere)
+\end{python}
+
+% BEGIN-VERIFY
+% def factorielle(n):
+%     if n == 0:
+%         return 1
+%     return n * factorielle(n - 1)
+% assert factorielle(5) == 120
+% assert factorielle(0) == 1
+%
+% def compter(chaine, caractere):
+%     if chaine == "":
+%         return 0
+%     premier = 1 if chaine[0] == caractere else 0
+%     return premier + compter(chaine[1:], caractere)
+% assert compter("banane", "a") == 2
+% assert compter("", "x") == 0
+% END-VERIFY
+
+\margeAppui{
+Sans cas de base correctement écrit, la récursion ne s'arrête jamais : Python lève alors une erreur \lstinline{RecursionError} (profondeur maximale de récursion atteinte) après quelques milliers d'appels imbriqués.
+}
+
+% ============================================================
+% STRATE 2 — Analyser un programme recursif : arbre d'appels
+% ============================================================
+
+\definition[2]{
+\textbf{Analyser} un programme récursif consiste à comprendre son \textbf{arbre d'appels} (quels appels déclenchent quels autres appels), à vérifier sa \textbf{terminaison} (le cas de base est-il toujours atteint ?), et à évaluer le nombre d'appels effectués.
+}
+
+\textbf{Exemple.} La version naïve du calcul de Fibonacci effectue un très grand nombre d'appels redondants : on peut le mesurer en instrumentant le code avec un compteur.
+\begin{python}
+compteur_appels = 0
+
+def fib_naif(n):
+    global compteur_appels
+    compteur_appels += 1
+    if n <= 1:
+        return n
+    return fib_naif(n - 1) + fib_naif(n - 2)
+\end{python}
+
+% BEGIN-VERIFY
+% compteur_appels = 0
+% def fib_naif(n):
+%     global compteur_appels
+%     compteur_appels += 1
+%     if n <= 1:
+%         return n
+%     return fib_naif(n - 1) + fib_naif(n - 2)
+%
+% resultat = fib_naif(10)
+% assert resultat == 55
+% assert compteur_appels == 177
+% END-VERIFY
+
+\propriete[Lecture de l'arbre d'appels]{
+L'appel \lstinline{fib_naif(4)} déclenche \lstinline{fib_naif(3)} et \lstinline{fib_naif(2)} ; \lstinline{fib_naif(3)} déclenche à son tour \lstinline{fib_naif(2)} et \lstinline{fib_naif(1)}. On observe que \lstinline{fib_naif(2)} est appelé \textbf{deux fois indépendamment}, avec le même résultat recalculé à chaque fois : c'est cette redondance, visible sur l'arbre d'appels, qui explique la croissance très rapide du nombre d'appels (voir le chapitre \textit{Algorithmique} pour la solution par mémoïsation).
+}
+
+\erreurFrequente{
+\textbf{Confondre \og la fonction s'exécute plusieurs fois \fg{} et \og la fonction boucle indéfiniment \fg{}.} Un grand nombre d'appels récursifs (comme pour \lstinline{fib_naif}) n'est pas un signe de non-terminaison : chaque branche de l'arbre d'appels atteint bien le cas de base ($n \leq 1$), la fonction termine toujours, mais avec un coût qui peut devenir très élevé.
+}

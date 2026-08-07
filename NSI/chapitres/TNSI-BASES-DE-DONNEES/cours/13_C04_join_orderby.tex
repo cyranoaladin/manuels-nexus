@@ -1,0 +1,77 @@
+% META: {"id": "TNSI-BDD-CR-023", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "cours", "capacites_codes": ["C03D", "C03E"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Croiser les données : JOIN et ORDER BY}
+
+% ============================================================
+% STRATE 1 — JOIN
+% ============================================================
+
+\definition[1]{
+La clause \textbf{JOIN} combine des tuples de deux relations dont les valeurs coïncident sur une colonne commune, en général une clé étrangère et la clé primaire qu'elle référence. La syntaxe \texttt{JOIN ... ON ...} précise la condition de rapprochement.
+}
+
+\textbf{Exemple.} Reprenons \texttt{Livre} et une table \texttt{Emprunt} qui référence \texttt{Livre.id} :
+\begin{sql}
+CREATE TABLE Emprunt(id INTEGER PRIMARY KEY, id_livre INTEGER, date_emprunt TEXT);
+INSERT INTO Emprunt VALUES (1, 2, '2026-02-01'), (2, 3, '2026-02-03');
+
+SELECT Emprunt.date_emprunt, Livre.titre
+FROM Emprunt
+JOIN Livre ON Emprunt.id_livre = Livre.id;
+\end{sql}
+Chaque ligne du résultat associe une date d'emprunt au \textbf{titre} du livre correspondant, sans jamais avoir stocké ce titre dans la table \texttt{Emprunt}.
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER)")
+% conn.executemany("INSERT INTO Livre VALUES (?,?,?,?)", [
+%     (1, "Le Petit Prince", "Saint-Exupery", 1943),
+%     (2, "1984", "Orwell", 1949),
+%     (3, "La Peste", "Camus", 1947),
+% ])
+% conn.execute("CREATE TABLE Emprunt(id INTEGER PRIMARY KEY, id_livre INTEGER, date_emprunt TEXT)")
+% conn.executemany("INSERT INTO Emprunt VALUES (?,?,?)", [
+%     (1, 2, "2026-02-01"),
+%     (2, 3, "2026-02-03"),
+% ])
+% conn.commit()
+% cur = conn.execute("""SELECT Emprunt.date_emprunt, Livre.titre
+%     FROM Emprunt JOIN Livre ON Emprunt.id_livre = Livre.id""")
+% assert cur.fetchall() == [("2026-02-01", "1984"), ("2026-02-03", "La Peste")]
+% END-VERIFY
+
+\margeAppui{
+Sans \texttt{JOIN}, il faudrait effectuer deux requêtes séparées puis recouper les résultats \og à la main \fg{} dans le programme appelant : \texttt{JOIN} délègue ce travail au SGBD, de façon plus fiable et plus efficace.
+}
+
+% ============================================================
+% STRATE 2 — ORDER BY
+% ============================================================
+
+\propriete[Trier avec ORDER BY]{
+La clause \texttt{ORDER BY} trie les tuples du résultat selon un ou plusieurs attributs, par ordre croissant (\texttt{ASC}, par défaut) ou décroissant (\texttt{DESC}).
+}
+
+\textbf{Exemple.} Livres triés du plus récent au plus ancien :
+\begin{sql}
+SELECT titre, annee FROM Livre ORDER BY annee DESC;
+\end{sql}
+
+% BEGIN-VERIFY
+% import sqlite3
+% conn = sqlite3.connect(":memory:")
+% conn.execute("CREATE TABLE Livre(id INTEGER PRIMARY KEY, titre TEXT, auteur TEXT, annee INTEGER)")
+% conn.executemany("INSERT INTO Livre VALUES (?,?,?,?)", [
+%     (1, "Le Petit Prince", "Saint-Exupery", 1943),
+%     (2, "1984", "Orwell", 1949),
+%     (3, "La Peste", "Camus", 1947),
+% ])
+% conn.commit()
+% cur = conn.execute("SELECT titre, annee FROM Livre ORDER BY annee DESC")
+% assert [r[0] for r in cur.fetchall()] == ["1984", "La Peste", "Le Petit Prince"]
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier que \texttt{ORDER BY} se place après \texttt{WHERE}.} L'ordre des clauses est fixe : \texttt{SELECT ... FROM ... WHERE ... ORDER BY ...}. Écrire \texttt{ORDER BY} avant \texttt{WHERE} est une erreur de syntaxe.
+}

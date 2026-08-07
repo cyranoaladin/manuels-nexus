@@ -1,0 +1,43 @@
+% META: {"id": "TCOMPL-ME-EV-B", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "evaluation", "version": "B", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C3", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Rational, limit, oo
+% t = symbols('t')
+% y = -80*exp(-Rational(1,3)*t) + 100
+% yp = diff(y, t)
+% assert (yp - (-Rational(1,3)*y + Rational(100,3))).simplify() == 0
+% assert y.subs(t, 0) == 20
+% assert limit(y, t, oo) == 100
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-ME-EV-B}{50}
+
+\begin{exercice}{TCOMPL-ME-EV-B-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C3}
+
+\medskip
+
+On définit $u_0=1$ et $u_{n+1} = \dfrac{1}{3}u_n + 4$.
+\begin{enumerate}
+  \item (3 pts) Un point fixe de $f(x)=\dfrac{1}{3}x+4$ correspond à l'intersection entre la courbe de $f$ et la droite $y=x$. Le déterminer par le calcul.
+  \item (5 pts) Calculer $u_1$ et $u_2$, et comparer leur proximité avec le point fixe trouvé à la question précédente.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-ME-EV-B-EX2}{2}{30}
+\textbf{Exercice 2} (12 points) --- \textit{Capacité C5}
+
+\medskip
+
+La quantité $y(t)$ d'un médicament dans le sang (en mg) vérifie $y'(t) = -\dfrac{1}{3}y(t) + \dfrac{100}{3}$, avec $y(0)=20$.
+\begin{enumerate}
+  \item (3 pts) Déterminer la solution particulière constante $y_p$.
+  \item (5 pts) Donner la solution générale, puis déterminer $y(t)$ à l'aide de la condition initiale.
+  \item (4 pts) Quelle est la quantité limite de médicament dans le sang lorsque $t\to+\infty$ ?
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

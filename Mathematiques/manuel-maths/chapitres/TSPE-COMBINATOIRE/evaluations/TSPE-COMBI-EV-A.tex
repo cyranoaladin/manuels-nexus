@@ -1,0 +1,43 @@
+% META: {"id": "TSPE-COMBI-EV-A", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "evaluation", "version": "A", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C2", "C3", "C4"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert 5*4*3 == 60
+% assert sum(binomial(5,k) for k in range(6)) == 32
+% assert binomial(8,3) + binomial(8,4) == binomial(9,4) == 126
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-COMBI-EV-A}{45}
+
+\begin{exercice}{TSPE-COMBI-EV-A-EX1}{2}{15}
+\textbf{Exercice 1} (6 points) — \textit{Capacite C2}
+
+\medskip
+
+On forme un code de $3$ lettres distinctes (sans repetition) a partir de $5$ lettres disponibles $\{A,B,C,D,E\}$, l'ordre des lettres important.
+\begin{enumerate}
+  \item (2 pts) L'ordre compte-t-il ? Justifier.
+  \item (4 pts) Calculer le nombre de codes possibles.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-COMBI-EV-A-EX2}{2}{20}
+\textbf{Exercice 2} (7 points) — \textit{Capacite C3}
+
+\medskip
+
+Demontrer que $\displaystyle\sum_{k=0}^{n}\dbinom{n}{k} = 2^n$ pour tout entier naturel $n$, en redigeant la preuve combinatoire du cours (double denombrement des parties d'un ensemble a $n$ elements).
+\end{exercice}
+
+\begin{exercice}{TSPE-COMBI-EV-A-EX3}{2}{15}
+\textbf{Exercice 3} (7 points) — \textit{Capacite C4}
+
+\medskip
+
+Sachant que $\dbinom{8}{3}=56$ et $\dbinom{8}{4}=70$, calculer $\dbinom{9}{4}$ a l'aide de la relation de Pascal, en citant precisement la relation utilisee.
+\end{exercice}
+
+\end{evaluation}

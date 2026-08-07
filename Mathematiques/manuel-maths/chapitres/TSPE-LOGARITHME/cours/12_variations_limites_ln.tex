@@ -1,0 +1,49 @@
+% META: {"id": "TSPE-LOG-CR-012", "chapitre": "TSPE-LOGARITHME", "type_objet": "cours", "capacites_codes": [], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Variations et limites de la fonction logarithme népérien}
+
+% ============================================================
+% STRATE 1 — Variations et limites
+% ============================================================
+
+\propriete{
+Pour tout $x>0$, $\ln'(x) = \dfrac{1}{x} > 0$ : la fonction $\ln$ est strictement croissante sur $]0,+\infty[$.
+}
+
+\theoreme[Limites aux bornes]{
+\[
+  \lim_{x \to +\infty} \ln x = +\infty \qquad \text{et} \qquad \lim_{x \to 0^+} \ln x = -\infty.
+\]
+}
+
+\demonstration{
+\textbf{Limite en $+\infty$.} $\ln$ est strictement croissante. Pour tout $A > 0$, en posant $x_0 = \mathrm{e}^A$, on a $\ln(x_0) = A$. Par croissance de $\ln$, pour tout $x \geq x_0$, $\ln x \geq \ln x_0 = A$. Donc $\ln x \to +\infty$ quand $x \to +\infty$.
+
+\textbf{Limite en $0^+$.} En posant $X = \dfrac{1}{x}$, quand $x \to 0^+$, $X \to +\infty$. Or $\ln x = \ln\!\left(\dfrac{1}{X}\right) = -\ln X$ (propriete algebrique). Comme $\ln X \to +\infty$, on a $-\ln X \to -\infty$, donc $\ln x \to -\infty$.
+}
+
+\theoreme[Croissances comparées, admis à partir du résultat sur l'exponentielle]{
+\[
+  \lim_{x \to +\infty} \frac{\ln x}{x} = 0.
+\]
+}
+
+\demonstration{
+Posons $X = \ln x$, de sorte que $x = \mathrm{e}^X$. Quand $x \to +\infty$, $X \to +\infty$.
+\[
+  \frac{\ln x}{x} = \frac{X}{\mathrm{e}^X}.
+\]
+Or, d'apres la croissance comparee de $x \mapsto \mathrm{e}^x$ et des puissances de $x$ (etablie au chapitre sur les limites de fonctions), $\dfrac{\mathrm{e}^X}{X} \to +\infty$ quand $X \to +\infty$, donc $\dfrac{X}{\mathrm{e}^X} \to 0$. Ainsi $\dfrac{\ln x}{x} \to 0$.
+}
+
+\margeAppui{
+Ce resultat signifie que $\ln x$ « l'emporte » face a $x$, mais beaucoup moins vite que l'exponentielle ne l'emporte face aux puissances de $x$ : le logarithme croit tres lentement.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Croire que $\ln x \to -\infty$ quand $x \to +\infty$.} $\ln$ est croissante sur $]0,+\infty[$ : sa limite en $+\infty$ est $+\infty$, pas $-\infty$. C'est en $0^+$ (et non en $+\infty$) que la limite vaut $-\infty$.
+}

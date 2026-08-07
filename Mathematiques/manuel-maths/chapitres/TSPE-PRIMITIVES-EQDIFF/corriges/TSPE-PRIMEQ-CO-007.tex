@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-PRIMEQ-CO-007", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "corrige", "exercice_ref": "TSPE-PRIMEQ-EX-007", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Rational
+% x = symbols('x')
+% y = 2*exp(-Rational(1, 2)*x)
+% assert diff(y, x) == -Rational(1, 2)*y
+% assert y.subs(x, 0) == 2
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EX-007}
+Ici $a = -\dfrac{1}{2}$. Les solutions de $y'=ay$ sont $y(x) = C\mathrm{e}^{ax}$, soit $y(x) = C\mathrm{e}^{-x/2}$, $C \in \mathbb{R}$.
+
+$y(0) = C = 2$. La solution cherchee est $\boxed{y(x) = 2\mathrm{e}^{-x/2}}$.
+\end{corrige}

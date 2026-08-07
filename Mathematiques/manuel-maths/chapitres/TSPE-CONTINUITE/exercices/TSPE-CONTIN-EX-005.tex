@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-CONTIN-EX-005", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 3, "competences": ["raisonner", "chercher"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-005.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, nsolve
+% x = symbols('x')
+% f = x**5 + x - 1
+% fp = diff(f, x)
+% assert fp == 5*x**4 + 1
+% assert f.subs(x, 0) == -1
+% assert f.subs(x, 1) == 1
+% c = nsolve(f, x, 0.7)
+% assert 0.75 < float(c) < 0.76
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-005}{3}{15}
+On considere la fonction $f(x) = x^5 + x - 1$ sur $\mathbb{R}$.
+\begin{enumerate}
+  \item Etudier le sens de variation de $f$ sur $\mathbb{R}$ (on justifiera que $f'(x) > 0$ pour tout $x$).
+  \item Montrer que l'equation $f(x) = 0$ admet une unique solution reelle $\alpha$.
+  \item Justifier que $\alpha \in [0, 1]$.
+  \item Ecrire (sans l'executer) un algorithme Python de dichotomie qui renvoie un encadrement de $\alpha$ a $10^{-3}$ pres.
+\end{enumerate}
+\end{exercice}

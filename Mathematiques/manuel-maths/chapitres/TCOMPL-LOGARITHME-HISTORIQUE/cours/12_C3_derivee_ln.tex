@@ -1,0 +1,64 @@
+% META: {"id": "TCOMPL-LOG-CR-012", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "cours", "capacites_codes": ["C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Dérivée du logarithme népérien}
+
+% ============================================================
+% STRATE 1 — Demonstration de la derivee
+% ============================================================
+
+On admet que la fonction $\ln$, réciproque de la fonction exponentielle, est dérivable sur $]0,+\infty[$.
+
+\theoreme[Dérivée de $\ln$]{
+Pour tout $x > 0$ :
+\[
+  \ln'(x) = \frac{1}{x}.
+\]
+}
+
+\demonstration{
+Pour tout $x>0$, on a $\mathrm{e}^{\ln x} = x$. En dérivant les deux membres de cette égalité (le membre de gauche par la formule de dérivation d'une composée, en admettant la dérivabilité de $\ln$) :
+\[
+  \ln'(x) \times \mathrm{e}^{\ln x} = 1,
+\]
+soit $\ln'(x) \times x = 1$ (car $\mathrm{e}^{\ln x}=x$), d'où $\ln'(x) = \dfrac{1}{x}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff
+% x = symbols('x', positive=True)
+% assert diff(ln(x), x) == 1/x
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Derivee de fonctions composees avec ln
+% ============================================================
+
+\propriete[Dérivée de $\ln u$]{
+Si $u$ est une fonction dérivable et strictement positive sur un intervalle $I$, alors $\ln u$ est dérivable sur $I$ et :
+\[
+  (\ln u)'(x) = \frac{u'(x)}{u(x)}.
+\]
+}
+
+\exemple{
+Pour $f(x) = \ln(x^2+1)$, on a $u(x)=x^2+1$ (toujours strictement positive), $u'(x)=2x$, donc :
+\[
+  f'(x) = \frac{2x}{x^2+1}.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, diff, simplify
+% x = symbols('x')
+% f = ln(x**2 + 1)
+% fp = diff(f, x)
+% assert simplify(fp - 2*x/(x**2+1)) == 0
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre $(\ln u)'$ et $\ln(u')$.} La dérivée de $\ln u$ est $\dfrac{u'}{u}$ (un quotient), pas le logarithme de la dérivée de $u$. Cette dernière expression n'a d'ailleurs de sens que si $u'$ est elle-même strictement positive, ce qui n'est pas garanti.
+}
+
+\approfondissement{
+Historiquement, la relation $\ln'(x) = \dfrac{1}{x}$ correspond au problème de la \textbf{quadrature de l'hyperbole} : l'aire sous la courbe de $y=\dfrac{1}{x}$ entre $1$ et $x$ définit une fonction dont la dérivée vaut $\dfrac{1}{x}$ — c'est ainsi que certains mathématiciens (Grégoire de Saint-Vincent, au dix-septième siècle) ont approché la notion de logarithme par le calcul intégral, avant même que le lien avec l'exponentielle ne soit pleinement formalisé.
+}

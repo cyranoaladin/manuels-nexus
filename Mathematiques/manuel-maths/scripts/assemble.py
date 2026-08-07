@@ -62,6 +62,20 @@ def ouverture_depuis_contrat(chap_dir: Path) -> str:
     )
 
 
+NIVEAU_LABELS = {
+    "1SPE": "Première spécialité",
+    "TSPE": "Terminale spécialité",
+    "TCOMPL": "Terminale — Mathématiques complémentaires",
+    "TEXPERTES": "Terminale — Mathématiques expertes",
+}
+
+
+def niveau_depuis_contrat(chap_dir: Path) -> str:
+    contrat = yaml.safe_load((chap_dir / "contrat.yaml").read_text(encoding="utf-8"))
+    code = contrat.get("niveau", "")
+    return NIVEAU_LABELS.get(code, code or "Première spécialité")
+
+
 def main(chap: str, variant: str) -> int:
     chap_dir = ROOT / "chapitres" / chap
     build = ROOT / "build" / chap
@@ -72,9 +86,11 @@ def main(chap: str, variant: str) -> int:
         return 1
     inputs = "\n".join(f"\\input{{{f.relative_to(ROOT)}}}" for f in files)
     ouverture = ouverture_depuis_contrat(chap_dir) if variant == "complet" else ""
+    niveau = niveau_depuis_contrat(chap_dir)
     master = (ROOT / "gabarits" / "chapitre_master.tex").read_text(encoding="utf-8")
     master = (master.replace("%%CONTENT%%", inputs)
                     .replace("%%OPENING%%", ouverture)
+                    .replace("%%NIVEAU%%", niveau)
                     .replace("%%CHAP%%", chap))
     tex_path = build / f"{chap}_{variant}.tex"
     tex_path.write_text(master, encoding="utf-8")

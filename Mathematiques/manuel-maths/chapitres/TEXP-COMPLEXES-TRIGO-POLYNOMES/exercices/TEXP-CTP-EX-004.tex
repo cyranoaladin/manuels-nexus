@@ -1,0 +1,11 @@
+% META: {"id": "TEXP-CTP-EX-004", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C6"], "capacites_codes": ["C6"], "methodes": [], "parcours": 1, "competences": ["raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-004.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, simplify, im
+% a, b, c = 1+I, 3+3*I, 5+5*I
+% rapport = simplify((c-a)/(b-a))
+% assert im(rapport) == 0
+% assert rapport == 2
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-004}{1}{10}
+Soient $A(1+i)$, $B(3+3i)$, $C(5+5i)$. Calculer $\dfrac{c-a}{b-a}$ et en déduire si $A$, $B$, $C$ sont alignés.
+\end{exercice}

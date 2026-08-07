@@ -1,0 +1,11 @@
+% META: {"id": "TEXP-ARI-CO-002", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert (4*3) % 11 == 1
+% solutions = [x for x in range(11) if (4*x) % 11 == 7 % 11]
+% assert solutions == [10]
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-002}
+\textbf{1.} $4\times3=12\equiv1\ [11]$ : $3$ est bien l'inverse de $4$ modulo $11$.
+
+\textbf{2.} En multipliant les deux membres de $4x\equiv7\ [11]$ par $3$ : $12x\equiv21\ [11]$, soit $x\equiv21\ [11]$ (car $12\equiv1\ [11]$), c'est-à-dire $x\equiv10\ [11]$.
+\end{corrige}

@@ -1,0 +1,34 @@
+chapitre: TNSI-STRUCTURES-DONNEES
+niveau: TNSI
+theme: STRUCTURES-DE-DONNEES
+titre: "Structures de données"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C01A, ref_capacite: T-STRUCT-01A, libelle_eleve: "Je sais spécifier une structure de données par son interface." }
+  - { code: C01B, ref_capacite: T-STRUCT-01B, libelle_eleve: "Je sais distinguer interface et implémentation." }
+  - { code: C01C, ref_capacite: T-STRUCT-01C, libelle_eleve: "Je sais écrire plusieurs implémentations d'une même structure de données." }
+  - { code: C02A, ref_capacite: T-STRUCT-02A, libelle_eleve: "Je sais écrire la définition d'une classe." }
+  - { code: C02B, ref_capacite: T-STRUCT-02B, libelle_eleve: "Je sais accéder aux attributs et méthodes d'une classe." }
+  - { code: C03A, ref_capacite: T-STRUCT-03A, libelle_eleve: "Je sais distinguer des structures par le jeu des méthodes qui les caractérisent (FIFO et LIFO)." }
+  - { code: C03B, ref_capacite: T-STRUCT-03B, libelle_eleve: "Je sais choisir une structure de données adaptée à la situation à modéliser." }
+  - { code: C03C, ref_capacite: T-STRUCT-03C, libelle_eleve: "Je sais distinguer la recherche d'une valeur dans une liste et dans un dictionnaire." }
+  - { code: C04A, ref_capacite: T-STRUCT-04A, libelle_eleve: "Je sais identifier des situations nécessitant une structure de données arborescente." }
+  - { code: C04B, ref_capacite: T-STRUCT-04B, libelle_eleve: "Je sais évaluer quelques mesures des arbres binaires (taille, hauteur, feuilles)." }
+  - { code: C05A, ref_capacite: T-STRUCT-05A, libelle_eleve: "Je sais modéliser des situations sous forme de graphes." }
+  - { code: C05B, ref_capacite: T-STRUCT-05B, libelle_eleve: "Je sais écrire l'implémentation d'un graphe par matrice d'adjacence." }
+  - { code: C05C, ref_capacite: T-STRUCT-05C, libelle_eleve: "Je sais écrire l'implémentation d'un graphe par listes de successeurs." }
+  - { code: C05D, ref_capacite: T-STRUCT-05D, libelle_eleve: "Je sais passer d'une représentation de graphe à une autre." }
+
+prerequis:
+  - { code: R1, libelle: "Types construits : p-uplets, tableaux, dictionnaires", chapitre_origine: "1NSI-TYPES-CONSTRUITS" }
+  - { code: R2, libelle: "Fonctions récursives", chapitre_origine: "1NSI-LANGAGE" }
+
+situation_accroche: >
+  Un GPS doit calculer un itineraire, un correcteur doit annuler la derniere action, un
+  reseau social doit suggerer des amis d'amis : chacune de ces situations repose sur une
+  structure de donnees adaptee (graphe, pile, arbre). Ce chapitre introduit les
+  structures de donnees fondamentales de l'informatique et le concept de classe pour
+  les implementer.
+
+temps_estime_h: { parcours1: 20, parcours2: 17, parcours3: 14 }

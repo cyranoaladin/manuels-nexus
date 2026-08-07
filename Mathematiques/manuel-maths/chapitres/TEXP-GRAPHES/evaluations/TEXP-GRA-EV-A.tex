@@ -1,0 +1,53 @@
+% META: {"id": "TEXP-GRA-EV-A", "chapitre": "TEXP-GRAPHES", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C3", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% MA = Matrix([
+%     [0,1,1,0],
+%     [1,0,1,1],
+%     [1,1,0,0],
+%     [0,1,0,0],
+% ])
+% deg = [sum(MA.row(i)) for i in range(4)]
+% assert deg == [2,3,2,1]
+% MA2 = MA**2
+% MA3 = MA**3
+% assert MA2[0,3] == 1
+% assert MA3[0,3] == 1
+% assert MA2[0,1] * MA[1,3] == MA3[0,3]
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-GRA-EV-A}{55}
+
+\begin{exercice}{TEXP-GRA-EV-A-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacités C1, C3}
+
+\medskip
+
+On considère le graphe $G$ à $4$ sommets $P,Q,R,S$, d'arêtes $\{P,Q\}$, $\{P,R\}$, $\{Q,R\}$, $\{Q,S\}$.
+
+\begin{enumerate}
+  \item (2 pts) Donner l'ordre de $G$.
+  \item (3 pts) Déterminer le degré de chaque sommet.
+  \item (3 pts) Construire la matrice d'adjacence $M$ de $G$, en numérotant les sommets dans l'ordre $P,Q,R,S$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-GRA-EV-A-EX2}{2}{40}
+\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5}
+
+\medskip
+
+On reprend le graphe $G$ et sa matrice $M$ de l'exercice 1.
+
+\begin{enumerate}
+  \item (4 pts) Calculer $M^2$. En déduire le nombre de chaînes de longueur $2$ entre $P$ et $S$, et écrire cette (ces) chaîne(s) explicitement.
+  \item (4 pts) Rappeler la relation de récurrence liant $(M^{n+1})_{ij}$ à $(M^n)_{ik}$ et $m_{kj}$, et justifier brièvement (en une phrase) pourquoi elle est vraie.
+  \item (4 pts) Le sommet $S$ n'a qu'un seul voisin. En utilisant cette information et la relation de récurrence, déterminer $(M^3)_{P,S}$ \textbf{sans calculer entièrement} le produit $M^2\times M$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-CTP-EV-B-corrige", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-CTP-EV-B", "capacites_codes": ["C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, simplify, re, exp, pi
+% a, b, c = 0, 3, 3*I
+% rapport = simplify((c-a)/(b-a))
+% assert rapport == I
+% n = 5
+% racines = set(simplify(exp(2*I*k*pi/n)) for k in range(n))
+% assert len(racines) == 5
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EV-B-EX1}
+\textbf{1.} $\dfrac{c-a}{b-a} = \dfrac{3i-0}{3-0} = \dfrac{3i}{3} = i$.
+
+\textbf{2.} Ce rapport, $i$, est un \textbf{imaginaire pur} (partie réelle nulle) : les droites $(AB)$ et $(AC)$ sont donc \textbf{perpendiculaires}.
+\end{corrige}
+
+\begin{corrige}{TEXP-CTP-EV-B-EX2}
+\textbf{1.} $\mathbb{U}_5 = \{z\in\mathbb{C}\ :\ z^5=1\}$. Ses éléments sont $\mathrm{e}^{2ik\pi/5}$ pour $k=0,1,2,3,4$.
+
+\textbf{2.} Pour $k$ et $k'$ dans $\{0,\dots,4\}$ distincts, les arguments $\dfrac{2k\pi}{5}$ et $\dfrac{2k'\pi}{5}$ diffèrent d'un multiple non nul de $\dfrac{2\pi}{5}$, strictement inférieur à $2\pi$ en valeur absolue : ils ne peuvent donc pas être égaux modulo $2\pi$, ce qui garantit $5$ nombres complexes deux à deux distincts.
+
+\textbf{3.} Ces $5$ points, tous de module $1$ et régulièrement espacés d'un angle de $\dfrac{2\pi}{5}$, forment les sommets d'un \textbf{pentagone régulier} inscrit dans le cercle trigonométrique.
+\end{corrige}

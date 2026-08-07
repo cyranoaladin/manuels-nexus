@@ -1,0 +1,29 @@
+% META: {"id": "TCOMPL-ME-EV-A-corrige", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ME-EV-A", "capacites_codes": ["C1", "C2", "C4"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% u0, q = 500, Rational(3, 10)
+% limite = u0 / (1 - q)
+% assert limite == Rational(5000, 7)
+% a, b, w0 = Rational(2, 5), 12, 0
+% c = b / (1 - a)
+% assert c == 20
+% w = w0
+% for _ in range(3):
+%     w = a*w + b
+% assert w == Rational(468, 25)
+% formule = c + (w0 - c)*a**3
+% assert w == formule
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EV-A-EX1}
+\textbf{1.} Chaque jour, $30\%$ de l'eau subsiste : $q=0{,}3$.
+
+\textbf{2.} La quantité limite tend vers $\dfrac{500}{1-0{,}3} = \dfrac{500}{0{,}7} = \dfrac{5000}{7} \approx 714{,}3$ mL.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-ME-EV-A-EX2}
+\textbf{1.} $c = 0{,}4c+12 \iff 0{,}6c=12 \iff c=20$.
+
+\textbf{2.} $w_{n+1}-c = (0{,}4w_n+12)-20 = 0{,}4w_n-8 = 0{,}4(w_n-20) = 0{,}4(w_n-c)$ : la suite $(w_n-c)$ est géométrique de raison $0{,}4$.
+
+\textbf{3.} $w_0-c=0-20=-20$, donc $w_n-20=-20\times0{,}4^n$, soit $w_n = 20-20\times0{,}4^n$. Pour $n=3$ : $w_3 = 20-20\times0{,}064=20-1{,}28=18{,}72$.
+\end{corrige}

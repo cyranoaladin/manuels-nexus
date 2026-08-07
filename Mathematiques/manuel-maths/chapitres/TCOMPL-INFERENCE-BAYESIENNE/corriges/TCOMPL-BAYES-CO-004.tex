@@ -1,0 +1,16 @@
+% META: {"id": "TCOMPL-BAYES-CO-004", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-004", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% Se, Sp = Rational(90, 100), Rational(95, 100)
+% def VPP(p):
+%     return Se*p / (Se*p + (1-Sp)*(1-p))
+% assert abs(N(VPP(Rational(1,100))) - 0.1538) < 0.001
+% assert abs(N(VPP(Rational(20,100))) - 0.8182) < 0.001
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-004}
+\textbf{1.} $VPP(0{,}01) = \dfrac{0{,}90\times0{,}01}{0{,}90\times0{,}01+0{,}05\times0{,}99} = \dfrac{0{,}009}{0{,}0585} \approx 0{,}154$.
+
+\textbf{2.} $VPP(0{,}20) = \dfrac{0{,}90\times0{,}20}{0{,}90\times0{,}20+0{,}05\times0{,}80} = \dfrac{0{,}18}{0{,}22} \approx 0{,}818$.
+
+\textbf{3.} La fiabilité d'un test positif passe de $15{,}4\%$ à $81{,}8\%$ selon la population : c'est pourquoi ce test est peu utile en dépistage systématique de masse (population générale, prévalence faible), mais devient très informatif lorsqu'il est réservé à une population déjà ciblée comme à risque (prévalence plus élevée).
+\end{corrige}

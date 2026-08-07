@@ -1,0 +1,48 @@
+% META: {"id": "TEXP-ARI-EV-B", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C6", "C7", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert pow(7, 12, 13) == 1
+% premiers = [2, 3, 5]
+% N = 1
+% for p in premiers:
+%     N *= p
+% N += 1
+% assert N == 31
+% for p in premiers:
+%     assert N % p != 0
+% import math
+% a, b, c = 7, 4, 28
+% assert (b*c) % a == 0
+% assert math.gcd(a, b) == 1
+% assert c % a == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-ARI-EV-B}{55}
+
+\begin{exercice}{TEXP-ARI-EV-B-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C6}
+
+\medskip
+
+\begin{enumerate}
+  \item (4 pts) Démontrer le théorème de Gauss : si $a$ divise $bc$ et $a$ est premier avec $b$, alors $a$ divise $c$.
+  \item (4 pts) Appliquer ce théorème pour justifier que, sachant $7$ divise $4\times28$ et $\mathrm{PGCD}(7,4)=1$, $7$ divise $28$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-ARI-EV-B-EX2}{2}{40}
+\textbf{Exercice 2} (12 points) --- \textit{Capacités C7, C8}
+
+\medskip
+
+\begin{enumerate}
+  \item (5 pts) Démontrer que l'ensemble des nombres premiers est infini (raisonnement par l'absurde en considérant $N=p_1\times\dots\times p_n+1$).
+  \item (3 pts) Vérifier, en appliquant ce raisonnement à $\{2,3,5\}$, que $N=2\times3\times5+1=31$ n'est divisible par aucun de $2,3,5$.
+  \item (4 pts) Énoncer le petit théorème de Fermat, et calculer directement le reste de $7^{12}$ dans la division par $13$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

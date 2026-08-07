@@ -1,0 +1,18 @@
+% META: {"id": "TCOMPL-INEG-CO-002", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-002", "capacites_codes": ["C3", "C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% L = (2*x**2 + x) / 3
+% I = integrate(L, (x, 0, 1))
+% assert I == Rational(7, 18)
+% G = 1 - 2*I
+% assert G == Rational(2, 9)
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-002}
+On calcule d'abord $\displaystyle\int_0^1 L(x)\,\mathrm{d}x = \int_0^1 \frac{2x^2+x}{3}\,\mathrm{d}x = \frac{1}{3}\left[\frac{2x^3}{3}+\frac{x^2}{2}\right]_0^1 = \frac{1}{3}\left(\frac{2}{3}+\frac{1}{2}\right) = \frac{1}{3}\times\frac{7}{6} = \frac{7}{18}$.
+
+D'où :
+\[
+  G = 1 - 2\times\frac{7}{18} = 1 - \frac{7}{9} = \frac{2}{9} \approx 0{,}22.
+\]
+\end{corrige}

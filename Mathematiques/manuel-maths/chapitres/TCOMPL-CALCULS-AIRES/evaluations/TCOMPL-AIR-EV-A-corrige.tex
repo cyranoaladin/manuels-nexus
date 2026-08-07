@@ -1,0 +1,30 @@
+% META: {"id": "TCOMPL-AIR-EV-A-corrige", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-AIR-EV-A", "capacites_codes": ["C3", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, diff, simplify, exp
+% x = symbols('x')
+% f = 4*x**3 - 6*x + 2
+% F = x**4 - 3*x**2 + 2*x
+% assert simplify(diff(F, x) - f) == 0
+% I = integrate(f, (x, 0, 1))
+% assert I == 0
+% G = exp(x**2 - 1)
+% assert G.subs(x, 1) == 1
+% H = G + 4
+% assert H.subs(x, 1) == 5
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EV-A-EX1}
+\textbf{1.} Une primitive de $f(x)=4x^3-6x+2$ est $F(x) = x^4-3x^2+2x$.
+
+\textbf{2.} $\displaystyle\int_0^1 f(x)\,\mathrm{d}x = F(1)-F(0) = (1-3+2)-0 = 0$.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-AIR-EV-A-EX2}
+\textbf{1.} On pose $u(x)=x^2-1$, $u'(x)=2x$ : $g(x)=u'(x)\mathrm{e}^{u(x)}$, dont une primitive est $G(x) = \mathrm{e}^{x^2-1}$.
+
+\textbf{2.} Posons $D=F-G$. Alors $D'=F'-G'=f-f=0$ sur $I$. Une fonction de dérivée nulle sur un intervalle est constante sur cet intervalle : $D$ est donc constante, c'est-à-dire $F-G$ est constante sur $I$.
+
+\textbf{3.} Toute primitive de $g$ s'écrit $G+C$ pour une constante $C$. On a $H(x)=G(x)+C=\mathrm{e}^{x^2-1}+C$. La condition $H(1)=5$ donne $\mathrm{e}^{1-1}+C=5$, soit $1+C=5$, donc $C=4$ :
+\[
+  H(x) = \mathrm{e}^{x^2-1} + 4.
+\]
+\end{corrige}

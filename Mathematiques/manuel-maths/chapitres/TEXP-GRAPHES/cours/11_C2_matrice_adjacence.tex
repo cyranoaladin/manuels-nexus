@@ -1,0 +1,123 @@
+% META: {"id": "TEXP-GRA-CR-011", "chapitre": "TEXP-GRAPHES", "type_objet": "cours", "capacites_codes": ["C3", "C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Matrice d'adjacence et dénombrement de chemins}
+
+% ============================================================
+% STRATE 1 — Matrice d'adjacence
+% ============================================================
+
+\definition[4]{
+Soit $G$ un graphe d'ordre $n$ dont les sommets sont numérotés $1,2,\dots,n$. La \textbf{matrice d'adjacence} de $G$ est la matrice carrée $M=(m_{ij})$ de taille $n\times n$ telle que
+$$m_{ij}=\begin{cases}1 & \text{si les sommets } i \text{ et } j \text{ sont adjacents}\\0 & \text{sinon}\end{cases}$$
+}
+
+\exemple{
+Considérons le graphe à $4$ sommets $A,B,C,D$ (numérotés $1,2,3,4$) avec les arêtes $\{A,B\}$, $\{B,C\}$, $\{C,D\}$, $\{A,D\}$ (déjà rencontré en \S1). Sa matrice d'adjacence est
+$$M=\begin{pmatrix}0&1&0&1\\1&0&1&0\\0&1&0&1\\1&0&1&0\end{pmatrix}$$
+On lit par exemple $m_{12}=1$ ($A$ et $B$ adjacents) et $m_{13}=0$ ($A$ et $C$ non adjacents).
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]])
+% assert M[0,1] == 1
+% assert M[0,2] == 0
+% assert M == M.T  # graphe non oriente : matrice symetrique
+% END-VERIFY
+
+\propriete{
+La matrice d'adjacence d'un graphe non orienté est \textbf{symétrique} ($m_{ij}=m_{ji}$), car une arête $\{i,j\}$ relie $i$ à $j$ tout autant que $j$ à $i$.
+}
+
+% ============================================================
+% STRATE 2 — Denombrement de chemins par puissances de M
+% ============================================================
+
+\propriete[Dénombrement de chemins]{
+Soit $M$ la matrice d'adjacence d'un graphe $G$ d'ordre $n$. Pour tout entier $k\geqslant1$, le coefficient $(M^k)_{ij}$ est égal au \textbf{nombre de chaînes de longueur $k$} reliant le sommet $i$ au sommet $j$ (en comptant les passages répétés par un même sommet ou une même arête).
+}
+
+\exemple{
+Avec la matrice $M$ précédente, calculons $M^2$ :
+$$M^2=\begin{pmatrix}2&0&2&0\\0&2&0&2\\2&0&2&0\\0&2&0&2\end{pmatrix}$$
+Le coefficient $(M^2)_{11}=2$ signifie qu'il existe $2$ chaînes de longueur $2$ de $A$ à $A$ : $A\text{-}B\text{-}A$ et $A\text{-}D\text{-}A$. Le coefficient $(M^2)_{13}=2$ signifie qu'il existe $2$ chaînes de longueur $2$ de $A$ à $C$ : $A\text{-}B\text{-}C$ et $A\text{-}D\text{-}C$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]])
+% M2 = M**2
+% assert M2 == Matrix([[2,0,2,0],[0,2,0,2],[2,0,2,0],[0,2,0,2]])
+% # verification exhaustive par enumeration directe des chaines de longueur 2
+% aretes = {(0,1),(1,0),(1,2),(2,1),(2,3),(3,2),(3,0),(0,3)}
+% def voisins(s):
+%     return [b for (a,b) in aretes if a == s]
+% nb_chaines_A_C = sum(1 for k in voisins(0) if 2 in voisins(k))
+% assert nb_chaines_A_C == M2[0,2]
+% END-VERIFY
+
+\exemple{
+Calculons également $M^3$ pour dénombrer les chaînes de longueur $3$ :
+$$M^3=\begin{pmatrix}0&4&0&4\\4&0&4&0\\0&4&0&4\\4&0&4&0\end{pmatrix}$$
+Il existe $4$ chaînes de longueur $3$ entre $A$ et $B$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]])
+% M3 = M**3
+% assert M3 == Matrix([[0,4,0,4],[4,0,4,0],[0,4,0,4],[4,0,4,0]])
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre chaîne et chemin simple.} $(M^k)_{ij}$ compte \textbf{toutes} les chaînes de longueur $k$, y compris celles qui repassent par un sommet ou une arête déjà utilisés. Ce n'est donc pas, en général, le nombre de chemins \textit{simples} (sans répétition) de longueur $k$.
+}
+
+% ============================================================
+% STRATE 3 — Demonstration exigible (C5)
+% ============================================================
+
+\demonstration{
+\textbf{Propriété à démontrer.} Soit $M$ la matrice d'adjacence d'un graphe $G$ d'ordre $p$ à sommets numérotés $1,\dots,p$. Pour tout entier $n\geqslant1$ et tous sommets $i,j$, le coefficient $(M^n)_{ij}$ est égal au nombre de chaînes de longueur $n$ reliant $i$ à $j$.
+
+\textbf{Démonstration par récurrence sur $n$.}
+
+\textit{Initialisation ($n=1$).} $(M^1)_{ij}=m_{ij}$ vaut $1$ si $i$ et $j$ sont adjacents (il existe alors exactement une chaîne de longueur $1$, l'arête $\{i,j\}$) et $0$ sinon (aucune chaîne de longueur $1$). La propriété est vraie au rang $1$.
+
+\textit{Hérédité.} Supposons la propriété vraie au rang $n$ : pour tous sommets $a,b$, $(M^n)_{ab}$ est le nombre de chaînes de longueur $n$ de $a$ à $b$. Montrons qu'elle est vraie au rang $n+1$.
+
+Par définition du produit matriciel, $M^{n+1}=M^n\times M$, donc pour tous sommets $i,j$ :
+$$(M^{n+1})_{ij}=\sum_{k=1}^{p}(M^n)_{ik}\times m_{kj}$$
+Dans cette somme, le terme $m_{kj}$ vaut $1$ si $k$ et $j$ sont adjacents (et $0$ sinon) : seuls les sommets $k$ adjacents à $j$ contribuent, chacun avec le terme $(M^n)_{ik}$.
+
+Or toute chaîne de longueur $n+1$ de $i$ à $j$ se décompose de façon unique en une chaîne de longueur $n$ de $i$ à un sommet $k$ adjacent à $j$, suivie de l'arête $\{k,j\}$. Par hypothèse de récurrence, il existe exactement $(M^n)_{ik}$ chaînes de longueur $n$ de $i$ à $k$. En sommant sur tous les sommets $k$ adjacents à $j$ (c'est-à-dire tels que $m_{kj}=1$), on obtient le nombre total de chaînes de longueur $n+1$ de $i$ à $j$, qui vaut donc
+$$\sum_{k=1}^{p}(M^n)_{ik}\times m_{kj}=(M^{n+1})_{ij}$$
+La propriété est donc vraie au rang $n+1$.
+
+\textbf{Conclusion.} Par le principe de récurrence, pour tout entier $n\geqslant1$ et tous sommets $i,j$, $(M^n)_{ij}$ est le nombre de chaînes de longueur $n$ reliant $i$ à $j$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([[0,1,0,1],[1,0,1,0],[0,1,0,1],[1,0,1,0]])
+% # verification de la relation de recurrence M^(n+1) = M^n * M sur plusieurs rangs
+% for n in range(1, 5):
+%     Mn = M**n
+%     Mn1 = M**(n+1)
+%     assert Mn1 == Mn * M
+% # verification independante par enumeration de chemins (parcours de graphe) pour n=4
+% aretes = {(0,1),(1,0),(1,2),(2,1),(2,3),(3,2),(3,0),(0,3)}
+% def voisins(s):
+%     return [b for (a,b) in aretes if a == s]
+% def nb_chaines(i, j, longueur):
+%     if longueur == 0:
+%         return 1 if i == j else 0
+%     total = 0
+%     for k in voisins(i):
+%         total += nb_chaines(k, j, longueur - 1)
+%     return total
+% M4 = M**4
+% for i in range(4):
+%     for j in range(4):
+%         assert nb_chaines(i, j, 4) == M4[i, j]
+% END-VERIFY

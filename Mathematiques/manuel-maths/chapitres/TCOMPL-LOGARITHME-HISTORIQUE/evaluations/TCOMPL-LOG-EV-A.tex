@@ -1,0 +1,41 @@
+% META: {"id": "TCOMPL-LOG-EV-A", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C2", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, solve, Eq, diff, simplify
+% x = symbols('x', positive=True)
+% assert solve(Eq(ln(x) + ln(x+3), ln(4)), x) == [1]
+% f = ln(5*x+2)
+% fp = diff(f, x)
+% assert simplify(fp - 5/(5*x+2)) == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-LOG-EV-A}{50}
+
+\begin{exercice}{TCOMPL-LOG-EV-A-EX1}{2}{25}
+\textbf{Exercice 1} (10 points) --- \textit{Capacités C2, C4}
+
+\medskip
+
+\begin{enumerate}
+  \item (3 pts) Démontrer que pour $a,b>0$, $\ln(ab) = \ln(a)+\ln(b)$ (on admettra $\mathrm{e}^{\ln x}=x$).
+  \item (7 pts) Résoudre l'équation $\ln(x) + \ln(x+3) = \ln(4)$ (préciser le domaine).
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-LOG-EV-A-EX2}{2}{25}
+\textbf{Exercice 2} (10 points) --- \textit{Capacité C5}
+
+\medskip
+
+Soit $f(x) = \ln(5x+2)$.
+\begin{enumerate}
+  \item (2 pts) Donner le domaine de définition de $f$.
+  \item (5 pts) Calculer $f'(x)$.
+  \item (3 pts) Étudier le signe de $f'(x)$ et en déduire le sens de variation de $f$.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

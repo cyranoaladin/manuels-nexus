@@ -1,0 +1,61 @@
+% META: {"id": "TEXP-MAT-EV-A", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C4", "C5", "C6", "C7"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye, symbols, solve
+% A = Matrix([[3,1],[2,1]])
+% B = Matrix([[1,2],[0,1]])
+% assert A+B == Matrix([[4,3],[2,2]])
+% assert A*B == Matrix([[3,7],[2,5]])
+% assert A.det() == 1
+% assert A.inv() == Matrix([[1,-1],[-2,3]])
+% assert A**2 == Matrix([[11,4],[8,3]])
+% PA = Matrix([[Rational(9,10), Rational(1,10)], [Rational(4,10), Rational(6,10)]])
+% assert sum(PA.row(0)) == 1
+% assert sum(PA.row(1)) == 1
+% pi0 = Matrix([[1,0]])
+% pi2 = pi0*PA**2
+% assert pi2 == Matrix([[Rational(17,20), Rational(3,20)]])
+% a, b = symbols('a b', positive=True)
+% pi = Matrix([[a, b]])
+% eq = pi*PA - pi
+% sol = solve([eq[0], eq[1], a + b - 1], [a, b])
+% assert sol[a] == Rational(4,5)
+% assert sol[b] == Rational(1,5)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-MAT-EV-A}{55}
+
+\begin{exercice}{TEXP-MAT-EV-A-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C1}
+
+\medskip
+
+On donne $A=\begin{pmatrix}3&1\\2&1\end{pmatrix}$ et $B=\begin{pmatrix}1&2\\0&1\end{pmatrix}$.
+
+\begin{enumerate}
+  \item (2 pts) Calculer $A+B$ et $AB$.
+  \item (2 pts) Calculer $\det(A)$ et en déduire que $A$ est inversible.
+  \item (2 pts) Déterminer $A^{-1}$.
+  \item (2 pts) Calculer $A^2$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-MAT-EV-A-EX2}{2}{40}
+\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5, C6, C7}
+
+\medskip
+
+Une machine est chaque jour soit en fonctionnement (F), soit en panne (P). Si elle fonctionne, elle fonctionne encore le lendemain avec probabilité $0{,}9$ (et tombe en panne avec probabilité $0{,}1$). Si elle est en panne, elle est réparée et fonctionne le lendemain avec probabilité $0{,}4$ (et reste en panne avec probabilité $0{,}6$). Au jour $0$, la machine fonctionne.
+
+\begin{enumerate}
+  \item (2 pts) Donner la matrice de transition $P$ (en numérotant $1=$F, $2=$P) et la distribution initiale $\pi_0$.
+  \item (3 pts) Calculer $\pi_2=\pi_0P^2$, et donner la probabilité que la machine fonctionne au jour $2$.
+  \item (3 pts) Justifier, en citant le principe de la démonstration du cours, que $\pi_n=\pi_0P^n$ pour tout $n$.
+  \item (4 pts) Déterminer la distribution invariante de cette chaîne, et interpréter le résultat.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

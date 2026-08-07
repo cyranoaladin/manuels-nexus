@@ -1,0 +1,61 @@
+% META: {"id": "TSPE-TRIGO-CR-010", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "cours", "capacites_codes": [], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Dérivées et variations des fonctions sinus et cosinus}
+
+% ============================================================
+% STRATE 1 — Derivees (admises) et variations
+% ============================================================
+
+\propriete[Dérivées, admises]{
+Les fonctions $\sin$ et $\cos$ sont dérivables sur $\mathbb{R}$, et pour tout reel $x$ :
+\[
+  \sin'(x) = \cos x \qquad \text{et} \qquad \cos'(x) = -\sin x.
+\]
+}
+
+\margeAppui{
+Ces deux formules se retiennent ensemble : deriver $\sin$ donne $\cos$ ; deriver $\cos$ donne $-\sin$ (avec le signe moins).
+}
+
+\exemple{
+Soit $f(x) = \cos x + 2\sin x$. Alors $f'(x) = -\sin x + 2\cos x$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, sin, cos, diff
+% x = symbols('x')
+% f = cos(x) + 2*sin(x)
+% assert diff(f, x) == -sin(x) + 2*cos(x)
+% END-VERIFY
+}
+
+\subsection{Tableaux de variations sur $[-\pi, \pi]$}
+
+Sur $[-\pi, \pi]$ :
+\begin{itemize}
+  \item $\cos$ est decroissante sur $[0, \pi]$ (car $\cos'(x) = -\sin x \leq 0$ sur $[0,\pi]$) et croissante sur $[-\pi, 0]$ (car $-\sin x \geq 0$ sur $[-\pi,0]$).
+  \item $\sin$ est croissante sur $\left[-\dfrac{\pi}{2}, \dfrac{\pi}{2}\right]$ (car $\sin'(x) = \cos x \geq 0$ sur cet intervalle) et decroissante sur $\left[\dfrac{\pi}{2}, \pi\right]$ et sur $\left[-\pi, -\dfrac{\pi}{2}\right]$.
+\end{itemize}
+
+% BEGIN-VERIFY
+% from sympy import symbols, sin, cos, diff, pi
+% x = symbols('x')
+% dcos = diff(cos(x), x)
+% assert dcos == -sin(x)
+% # sur [0, pi], sin >= 0 donc -sin <= 0 : cos decroissante
+% assert dcos.subs(x, pi/2) <= 0
+% dsin = diff(sin(x), x)
+% assert dsin == cos(x)
+% assert dsin.subs(x, 0) > 0
+% END-VERIFY
+
+\margeAppui{
+Les courbes de $\cos$ et $\sin$ sont des sinusoides, periodiques de periode $2\pi$. La courbe de $\sin$ est l'image de celle de $\cos$ par la translation de vecteur $\dfrac{\pi}{2}\vec{\imath}$ : $\sin x = \cos\!\left(x - \dfrac{\pi}{2}\right)$.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre les signes des deux dérivées.} $\cos'=-\sin$ (avec un signe moins), mais $\sin'=\cos$ (sans signe moins). Une erreur frequente consiste a ecrire $\cos' = \sin$ ou $\sin' = -\cos$.
+}

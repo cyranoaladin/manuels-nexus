@@ -1,0 +1,28 @@
+% META: {"id": "TEXP-GRA-EX-003", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 2, "competences": ["calculer", "representer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-003.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([
+%     [0,1,1,0,0],
+%     [1,0,1,0,0],
+%     [1,1,0,1,0],
+%     [0,0,1,0,1],
+%     [0,0,0,1,0],
+% ])
+% assert M == M.T
+% edges = [('S1','S2'),('S1','S3'),('S2','S3'),('S3','S4'),('S4','S5')]
+% sommets = ['S1','S2','S3','S4','S5']
+% idx = {s: i for i, s in enumerate(sommets)}
+% for a, b in edges:
+%     assert M[idx[a], idx[b]] == 1
+%     assert M[idx[b], idx[a]] == 1
+% nb_uns = sum(1 for i in range(5) for j in range(5) if M[i,j] == 1)
+% assert nb_uns == 2 * len(edges)
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-003}{2}{12}
+On reprend le graphe $G$ de l'exercice précédent : sommets $S_1,S_2,S_3,S_4,S_5$, arêtes $\{S_1,S_2\}$, $\{S_1,S_3\}$, $\{S_2,S_3\}$, $\{S_3,S_4\}$, $\{S_4,S_5\}$.
+\begin{enumerate}
+  \item Construire la matrice d'adjacence $M$ de $G$, en numérotant les sommets dans l'ordre $S_1,S_2,S_3,S_4,S_5$.
+  \item Vérifier que $M$ est symétrique. Pourquoi cela est-il attendu pour ce graphe ?
+  \item Combien la matrice $M$ compte-t-elle de coefficients égaux à $1$ ? Relier ce nombre au nombre d'arêtes de $G$.
+\end{enumerate}
+\end{exercice}

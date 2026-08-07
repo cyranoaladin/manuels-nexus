@@ -1,0 +1,47 @@
+% META: {"id": "TCOMPL-ECH-EV-B", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "evaluation", "version": "B", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from math import comb
+% def P_egal(n, p, k):
+%     return comb(n, k) * p**k * (1 - p)**(n - k)
+% n, p = 200, 0.2
+% a, cumul = 0, 0
+% while cumul < 0.025:
+%     cumul += P_egal(n, p, a)
+%     a += 1
+% a -= 1
+% b, cumul2 = 0, 0
+% while cumul2 < 0.975:
+%     cumul2 += P_egal(n, p, b)
+%     b += 1
+% b -= 1
+% assert a == 29
+% assert b == 51
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-ECH-EV-B}{45}
+
+\begin{exercice}{TCOMPL-ECH-EV-B-EX1}{2}{30}
+\textbf{Exercice 1} (12 points) --- \textit{Capacité C4}
+
+\medskip
+
+Un fabricant affirme que $20\%$ de ses produits sont défectueux. On prélève un échantillon de $200$ produits, et $X$ (nombre de défectueux) est supposé suivre $\mathcal{B}(200\,;\ 0{,}2)$.
+\begin{enumerate}
+  \item (6 pts) À la calculatrice ou en Python, déterminer un intervalle de fluctuation $I=[a,b]$ au seuil $95\%$.
+  \item (6 pts) Si l'échantillon prélevé contient $58$ produits défectueux, que peut-on en conclure sur l'affirmation du fabricant ?
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-ECH-EV-B-EX2}{2}{20}
+\textbf{Exercice 2} (8 points) --- \textit{Capacité C5}
+
+\medskip
+
+Écrire, en Python, une fonction \texttt{simuler\_moyennes(N, n, p)} qui simule $N$ échantillons de taille $n$ d'une variable de Bernoulli de paramètre $p$, et renvoie la liste des $N$ moyennes obtenues.
+\end{exercice}
+
+\end{evaluation}

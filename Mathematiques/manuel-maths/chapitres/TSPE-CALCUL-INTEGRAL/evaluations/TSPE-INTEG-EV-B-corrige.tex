@@ -1,0 +1,34 @@
+% META: {"id": "TSPE-INTEG-EV-B-corrige", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-INTEG-EV-B", "version": "B", "capacites_codes": ["C2", "C5", "C8"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, cos, ln, exp, simplify, pi, log
+% x = symbols('x')
+% assert integrate(cos(x), (x, 0, pi/2)) == 1
+% I2 = integrate(ln(x), (x, 1, 2))
+% assert simplify(I2 - (2*log(2) - 1)) == 0
+% K0 = integrate(exp(x), (x, 0, 1))
+% assert simplify(K0 - (exp(1) - 1)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EV-B-EX1}
+Une primitive de $\cos$ est $\sin$.
+\[
+  \int_0^{\pi/2} \cos(x)\,\mathrm{d}x = \big[\sin x\big]_0^{\pi/2} = \sin\!\left(\frac{\pi}{2}\right) - \sin(0) = 1-0 = \boxed{1}.
+\]
+\end{corrige}
+
+\begin{corrige}{TSPE-INTEG-EV-B-EX2}
+$u(x)=\ln x$, $u'(x)=\dfrac{1}{x}$ ; $v'(x)=1$, $v(x)=x$.
+\[
+  \int_1^2 \ln(x)\,\mathrm{d}x = \big[x\ln x\big]_1^2 - \int_1^2 \frac{x}{x}\,\mathrm{d}x = (2\ln 2 - 0) - \int_1^2 1\,\mathrm{d}x = 2\ln 2 - 1.
+\]
+\end{corrige}
+
+\begin{corrige}{TSPE-INTEG-EV-B-EX3}
+\textbf{Q1.} $K_0 = \displaystyle\int_0^1 \mathrm{e}^x\,\mathrm{d}x = \big[\mathrm{e}^x\big]_0^1 = \mathrm{e}-1$.
+
+\textbf{Q2.} $x^n\mathrm{e}^x \geq 0$ sur $[0,1]$ (produit de deux termes positifs), donc $K_n$ est l'integrale d'une fonction positive : $K_n \geq 0$.
+
+\textbf{Q3.} Avec $u(x)=x^n$ ($u'(x)=nx^{n-1}$) et $v'(x)=\mathrm{e}^x$ ($v(x)=\mathrm{e}^x$) :
+\[
+  K_n = \big[x^n\mathrm{e}^x\big]_0^1 - \int_0^1 nx^{n-1}\mathrm{e}^x\,\mathrm{d}x = \mathrm{e} - n\,K_{n-1}.
+\]
+\end{corrige}

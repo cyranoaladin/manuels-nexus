@@ -1,0 +1,52 @@
+% META: {"id": "TCOMPL-CORR-CR-011", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "cours", "capacites_codes": ["C3", "C4"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Changement de variable, interpolation et extrapolation}
+
+% ============================================================
+% STRATE 1 — Changement de variable pour ajustement exponentiel
+% ============================================================
+
+\propriete[Linéariser une relation exponentielle]{
+Si un nuage de points $(x_i,y_i)$ (avec $y_i>0$) suit une évolution de type $y=A\,\mathrm{e}^{bx}$, on pose $Y=\ln(y)$. Alors $Y = \ln(A) + bx$ : le nuage $(x_i, Y_i)$ suit un ajustement \textbf{affine}, dont la pente donne $b$ et l'ordonnée à l'origine donne $\ln(A)$.
+}
+
+\exemple{
+Une population de bactéries suit $y = 2^x$, avec les données $(0,1),(1,2),(2,4),(3,8),(4,16)$. En posant $Y=\ln(y)$, on obtient $(0,0),(1,\ln2),(2,2\ln2),(3,3\ln2),(4,4\ln2)$ : un nuage parfaitement aligné de pente $b=\ln2$ et d'ordonnée à l'origine $\ln(A)=0$, donc $A=1$. On retrouve bien $y=1\times\mathrm{e}^{x\ln2} = 2^x$.
+}
+
+% BEGIN-VERIFY
+% from sympy import log, symbols, diff, solve, nsimplify, Rational, exp, simplify
+% xs = [0, 1, 2, 3, 4]
+% ys = [1, 2, 4, 8, 16]
+% Ys = [log(y) for y in ys]
+% n = len(xs)
+% a, b = symbols('a b')
+% S = sum((Y - (a*x + b))**2 for x, Y in zip(xs, Ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% a_val = simplify(sols[a])
+% b_val = simplify(sols[b])
+% assert simplify(a_val - log(2)) == 0
+% assert simplify(b_val) == 0
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Interpolation et extrapolation
+% ============================================================
+
+\definition[1]{
+\textbf{Interpoler} consiste à estimer une valeur \textbf{à l'intérieur} de la plage des données observées ; \textbf{extrapoler} consiste à estimer une valeur \textbf{en dehors} de cette plage.
+}
+
+\exemple{
+Reprenons l'ajustement $y=2^x$ ci-dessus, valable pour $x\in[0,4]$. Estimer $y$ pour $x=2{,}5$ (\textbf{interpolation}, à l'intérieur de $[0,4]$) donne $y=2^{2{,}5}\approx5{,}66$ : cette estimation reste raisonnable. Estimer $y$ pour $x=20$ (\textbf{extrapolation}, très en dehors de $[0,4]$) donnerait $y=2^{20}\approx10^6$ : rien ne garantit que le modèle exponentiel reste valable aussi loin (une population de bactéries finit par saturer par manque de ressources).
+}
+
+% BEGIN-VERIFY
+% from sympy import N, Rational
+% assert abs(N(2**Rational(5,2)) - 5.657) < 0.001
+% assert 2**20 == 1048576
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Extrapoler sans esprit critique.} Un ajustement, aussi bon soit-il sur la plage observée, ne garantit \textbf{rien} en dehors de cette plage : de nombreux phénomènes (croissance de population, propagation d'une épidémie...) suivent un modèle exponentiel sur une période limitée, avant de ralentir (saturation, ressources limitées) ou de changer de comportement.
+}

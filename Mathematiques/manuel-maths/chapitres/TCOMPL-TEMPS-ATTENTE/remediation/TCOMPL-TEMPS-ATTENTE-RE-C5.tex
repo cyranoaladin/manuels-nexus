@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-TEMPS-ATTENTE-RE-C5", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : P(X=x) n'est pas f(x)
+%---------------------------------------------------------------
+
+\begin{exercice}{TCOMPL-ATT-RE-C5-EX1}{1}{10}
+Pour $X$ suivant une loi exponentielle de paramètre $\lambda=0{,}5$, un élève calcule $f(2) = 0{,}5\,\mathrm{e}^{-1} \approx 0{,}184$ et en conclut que $P(X=2) \approx 0{,}184$. Cette conclusion est-elle correcte ? Que vaut réellement $P(X=2)$ ?
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Rational, exp, N
+% lam = Rational(1, 2)
+% f2 = lam * exp(-lam*2)
+% assert abs(N(f2) - 0.184) < 0.001
+% PX2 = 0
+% assert PX2 == 0
+% assert f2 != PX2
+% END-VERIFY
+
+\begin{corrige}{TCOMPL-ATT-RE-C5-EX1}
+La conclusion est \textbf{incorrecte}. La valeur $f(2)\approx0{,}184$ est la valeur de la \textbf{densité} en $x=2$, pas une probabilité. Pour une variable aléatoire à densité, la probabilité qu'elle prenne \textbf{exactement} une valeur donnée est toujours nulle : $P(X=2)=0$. Seule l'aire sous la courbe de $f$ sur un \textbf{intervalle} (par exemple $P(1{,}9\leq X\leq2{,}1)$) donne une probabilité non nulle.
+\end{corrige}

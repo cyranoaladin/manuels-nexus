@@ -1,0 +1,10 @@
+% META: {"id": "TEXP-CTP-CO-001", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "corrige", "exercice_ref": "TEXP-CTP-EX-001", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import sqrt, I, exp, pi, N
+% z = -1 - I
+% forme_exp = sqrt(2) * exp(-I*3*pi/4)
+% assert abs(complex(N(z - forme_exp))) < 1e-9
+% END-VERIFY
+\begin{corrige}{TEXP-CTP-EX-001}
+$|z| = \sqrt{(-1)^2+(-1)^2} = \sqrt2$. $\cos\theta=\dfrac{-1}{\sqrt2}$, $\sin\theta=\dfrac{-1}{\sqrt2}$ : ces valeurs correspondent à $\theta=-\dfrac{3\pi}{4}$. Donc $z=\sqrt2\,\mathrm{e}^{-3i\pi/4}$.
+\end{corrige}

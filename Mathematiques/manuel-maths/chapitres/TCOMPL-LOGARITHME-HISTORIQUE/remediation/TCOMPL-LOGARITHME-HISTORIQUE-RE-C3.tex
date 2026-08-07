@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-LOGARITHME-HISTORIQUE-RE-C3", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : sens de l'inegalite en divisant par ln(q)<0
+%---------------------------------------------------------------
+
+\begin{exercice}{TCOMPL-LOG-RE-C3-EX1}{1}{10}
+Un élève résout $0{,}5^n < 0{,}01$ ainsi : \og $n\ln(0{,}5) < \ln(0{,}01)$, donc $n < \dfrac{\ln(0{,}01)}{\ln(0{,}5)}$ \fg{}. Vérifier numériquement si cette conclusion est cohérente en testant $n=10$ et $n=1$. Identifier l'erreur et corriger.
+\end{exercice}
+
+% BEGIN-VERIFY
+% assert 0.5**10 < 0.01
+% assert not (0.5**1 < 0.01)
+% import math
+% borne = math.log(0.01) / math.log(0.5)
+% assert borne > 6 and borne < 7
+% # la solution correcte est n > borne (pas n < borne)
+% assert 10 > borne
+% assert not (1 > borne)
+% END-VERIFY
+
+\begin{corrige}{TCOMPL-LOG-RE-C3-EX1}
+Pour $n=10$ : $0{,}5^{10} \approx 0{,}00098 < 0{,}01$, l'inégalité de départ est vraie. Pour $n=1$ : $0{,}5^1=0{,}5$, qui n'est \textbf{pas} inférieur à $0{,}01$. Or $\dfrac{\ln(0{,}01)}{\ln(0{,}5)} \approx 6{,}64$ : $n=1 < 6{,}64$ vérifierait la conclusion de l'élève (\og $n < 6{,}64$ \fg{}), mais ne vérifie \textbf{pas} l'inégalité de départ ! L'élève a oublié d'inverser le sens de l'inégalité : comme $\ln(0{,}5)<0$, diviser par $\ln(0{,}5)$ inverse le sens. La bonne conclusion est $n > \dfrac{\ln(0{,}01)}{\ln(0{,}5)} \approx 6{,}64$, soit $n\geq7$.
+\end{corrige}

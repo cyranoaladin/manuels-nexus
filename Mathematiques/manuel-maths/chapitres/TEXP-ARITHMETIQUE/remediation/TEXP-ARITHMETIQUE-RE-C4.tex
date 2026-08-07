@@ -1,0 +1,19 @@
+% META: {"id": "TEXP-ARITHMETIQUE-RE-C4", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "remediation", "capacites_codes": ["C4"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C4 : existence de solutions entieres
+%---------------------------------------------------------------
+
+\begin{exercice}{TEXP-ARI-RE-C4-EX1}{1}{10}
+Un élève cherche à résoudre $12x+18y=15$ dans $\mathbb{Z}^2$. Calculer $\mathrm{PGCD}(12,18)$ et déterminer si cette équation admet des solutions entières.
+\end{exercice}
+
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(12, 18) == 6
+% assert 15 % 6 != 0
+% END-VERIFY
+
+\begin{corrige}{TEXP-ARI-RE-C4-EX1}
+$\mathrm{PGCD}(12,18)=6$. Pour que $12x+18y=15$ admette des solutions entières, il faudrait que $6$ divise $15$ : or $15=2\times6+3$, $6$ ne divise pas $15$. L'équation \textbf{n'a aucune solution entière} : $12x+18y$ est toujours un multiple de $6$ (car $12$ et $18$ le sont), et $15$ n'en est pas un.
+\end{corrige}

@@ -1,0 +1,71 @@
+% META: {"id": "TEXP-MAT-CR-010", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Opérations sur les matrices}
+
+% ============================================================
+% STRATE 1 — Definitions et operations de base
+% ============================================================
+
+\definition[1]{
+Une \textbf{matrice} de taille $p\times q$ est un tableau de nombres réels comportant $p$ lignes et $q$ colonnes. Une matrice \textbf{carrée} a autant de lignes que de colonnes ($p=q$) ; une matrice \textbf{colonne} a une seule colonne ($q=1$) ; une matrice \textbf{ligne} a une seule ligne ($p=1$).
+}
+
+\propriete[Somme et produit]{
+Deux matrices de même taille $p\times q$ s'\textbf{additionnent} coefficient par coefficient. Le \textbf{produit} $AB$ de deux matrices n'est défini que si le nombre de colonnes de $A$ égale le nombre de lignes de $B$ ; le coefficient en ligne $i$, colonne $j$ de $AB$ est la somme des produits des coefficients de la ligne $i$ de $A$ par ceux de la colonne $j$ de $B$.
+}
+
+\exemple{
+Avec $A=\begin{pmatrix}2&1\\1&1\end{pmatrix}$ et $B=\begin{pmatrix}1&0\\3&2\end{pmatrix}$ :
+$$A+B=\begin{pmatrix}3&1\\4&3\end{pmatrix}\qquad AB=\begin{pmatrix}5&2\\4&2\end{pmatrix}$$
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% A = Matrix([[2,1],[1,1]])
+% B = Matrix([[1,0],[3,2]])
+% assert A + B == Matrix([[3,1],[4,3]])
+% assert A * B == Matrix([[5,2],[4,2]])
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Le produit matriciel n'est pas commutatif.} En général, $AB\neq BA$ (et l'un des deux produits peut même ne pas être défini si les tailles ne correspondent pas). Ne jamais échanger l'ordre des facteurs sans justification.
+}
+
+% ============================================================
+% STRATE 2 — Inverse et puissances
+% ============================================================
+
+\definition[2]{
+Une matrice carrée $A$ est \textbf{inversible} s'il existe une matrice $A^{-1}$, appelée \textbf{inverse} de $A$, telle que $AA^{-1}=A^{-1}A=I$ (matrice identité). Pour une matrice $2\times2$, $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ est inversible si et seulement si son \textbf{déterminant} $\det(A)=ad-bc$ est non nul, et alors
+$$A^{-1}=\dfrac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$$
+}
+
+\exemple{
+Pour $A=\begin{pmatrix}2&1\\1&1\end{pmatrix}$, $\det(A)=2\times1-1\times1=1\neq0$ : $A$ est inversible, et
+$$A^{-1}=\dfrac{1}{1}\begin{pmatrix}1&-1\\-1&2\end{pmatrix}=\begin{pmatrix}1&-1\\-1&2\end{pmatrix}$$
+On vérifie que $AA^{-1}=I$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, eye
+% A = Matrix([[2,1],[1,1]])
+% assert A.det() == 1
+% Ainv = A.inv()
+% assert Ainv == Matrix([[1,-1],[-1,2]])
+% assert A * Ainv == eye(2)
+% END-VERIFY
+
+\propriete[Puissances d'une matrice carrée]{
+Pour une matrice carrée $A$ et un entier $n\geqslant1$, $A^n$ désigne le produit de $A$ par elle-même $n$ fois ($A^0=I$ par convention). Le calcul de $A^n$ se fait par produits matriciels successifs, ou (pour des valeurs de $n$ élevées) à l'aide d'un outil de calcul.
+}
+
+\exemple{
+Pour $A=\begin{pmatrix}2&1\\1&1\end{pmatrix}$ : $A^2=\begin{pmatrix}5&3\\3&2\end{pmatrix}$ et $A^3=\begin{pmatrix}13&8\\8&5\end{pmatrix}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix
+% A = Matrix([[2,1],[1,1]])
+% assert A**2 == Matrix([[5,3],[3,2]])
+% assert A**3 == Matrix([[13,8],[8,5]])
+% END-VERIFY

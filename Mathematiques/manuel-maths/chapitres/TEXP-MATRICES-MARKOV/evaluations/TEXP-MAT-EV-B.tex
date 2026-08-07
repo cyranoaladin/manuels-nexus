@@ -1,0 +1,61 @@
+% META: {"id": "TEXP-MAT-EV-B", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "evaluation", "version": "B", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C4", "C5", "C6", "C7"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye, symbols, solve
+% A = Matrix([[2,1],[3,2]])
+% B = Matrix([[1,0],[1,2]])
+% assert A+B == Matrix([[3,1],[4,4]])
+% assert A*B == Matrix([[3,2],[5,4]])
+% assert A.det() == 1
+% assert A.inv() == Matrix([[2,-1],[-3,2]])
+% assert A**2 == Matrix([[7,4],[12,7]])
+% PB = Matrix([[Rational(8,10), Rational(2,10)], [Rational(5,10), Rational(5,10)]])
+% assert sum(PB.row(0)) == 1
+% assert sum(PB.row(1)) == 1
+% pi0 = Matrix([[1,0]])
+% pi2 = pi0*PB**2
+% assert pi2 == Matrix([[Rational(37,50), Rational(13,50)]])
+% a, b = symbols('a b', positive=True)
+% pi = Matrix([[a, b]])
+% eq = pi*PB - pi
+% sol = solve([eq[0], eq[1], a + b - 1], [a, b])
+% assert sol[a] == Rational(5,7)
+% assert sol[b] == Rational(2,7)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-MAT-EV-B}{55}
+
+\begin{exercice}{TEXP-MAT-EV-B-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C1}
+
+\medskip
+
+On donne $A=\begin{pmatrix}2&1\\3&2\end{pmatrix}$ et $B=\begin{pmatrix}1&0\\1&2\end{pmatrix}$.
+
+\begin{enumerate}
+  \item (2 pts) Calculer $A+B$ et $AB$.
+  \item (2 pts) Calculer $\det(A)$ et en déduire que $A$ est inversible.
+  \item (2 pts) Déterminer $A^{-1}$.
+  \item (2 pts) Calculer $A^2$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TEXP-MAT-EV-B-EX2}{2}{40}
+\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5, C6, C7}
+
+\medskip
+
+Un joueur en ligne est chaque jour soit connecté (C), soit déconnecté (D). S'il est connecté un jour, il l'est encore le lendemain avec probabilité $0{,}8$ (et se déconnecte avec probabilité $0{,}2$). S'il est déconnecté, il se reconnecte le lendemain avec probabilité $0{,}5$ (et reste déconnecté avec probabilité $0{,}5$). Au jour $0$, le joueur est connecté.
+
+\begin{enumerate}
+  \item (2 pts) Donner la matrice de transition $P$ (en numérotant $1=$C, $2=$D) et la distribution initiale $\pi_0$.
+  \item (3 pts) Calculer $\pi_2=\pi_0P^2$, et donner la probabilité que le joueur soit connecté au jour $2$.
+  \item (3 pts) Justifier, en citant le principe de la démonstration du cours, que $\pi_n=\pi_0P^n$ pour tout $n$.
+  \item (4 pts) Déterminer la distribution invariante de cette chaîne, et interpréter le résultat.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

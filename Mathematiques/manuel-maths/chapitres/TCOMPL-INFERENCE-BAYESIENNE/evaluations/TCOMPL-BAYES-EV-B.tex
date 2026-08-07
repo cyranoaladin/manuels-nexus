@@ -1,0 +1,42 @@
+% META: {"id": "TCOMPL-BAYES-EV-B", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "evaluation", "version": "B", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% Se, Sp = Rational(88, 100), Rational(97, 100)
+% def VPP(p):
+%     return Se*p / (Se*p + (1-Sp)*(1-p))
+% assert VPP(Rational(5, 1000)) == Rational(88, 685)
+% assert VPP(Rational(15, 100)) == Rational(88, 105)
+% assert VPP(Rational(15,100)) > VPP(Rational(5,1000))
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-BAYES-EV-B}{45}
+
+\begin{exercice}{TCOMPL-BAYES-EV-B-EX1}{1}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C4}
+
+\medskip
+
+\begin{enumerate}
+  \item (4 pts) Définir sensibilité et spécificité d'un test de dépistage, en utilisant les notations $P_M(T)$ et $P_{\bar M}(\bar T)$.
+  \item (4 pts) Définir la valeur prédictive positive $VPP$ à l'aide d'une notation en probabilité conditionnelle.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-BAYES-EV-B-EX2}{2}{40}
+\textbf{Exercice 2} (12 points) --- \textit{Capacité C5}
+
+\medskip
+
+Un test a une sensibilité $Se=0{,}88$ et une spécificité $Sp=0{,}97$.
+\begin{enumerate}
+  \item (4 pts) Calculer la $VPP$ pour une population générale de prévalence $p=0{,}005$.
+  \item (4 pts) Calculer la $VPP$ pour une population à risque de prévalence $p=0{,}15$.
+  \item (4 pts) Comparer et conclure sur l'usage de ce test selon la population.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

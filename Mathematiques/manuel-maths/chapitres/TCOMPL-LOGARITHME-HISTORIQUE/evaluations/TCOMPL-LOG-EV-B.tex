@@ -1,0 +1,40 @@
+% META: {"id": "TCOMPL-LOG-EV-B", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "evaluation", "version": "B", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C1", "C3", "C4"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% n_reel = math.log(100/8000) / math.log(0.85)
+% assert 26 < n_reel < 27
+% assert 8000 * 0.85**26 > 100
+% assert 8000 * 0.85**27 < 100
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-LOG-EV-B}{50}
+
+\begin{exercice}{TCOMPL-LOG-EV-B-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacités C1, C4}
+
+\medskip
+
+\begin{enumerate}
+  \item (3 pts) Rappeler la définition de $\ln x$ pour $x>0$, et donner $\ln 1$ et $\ln \mathrm{e}$.
+  \item (5 pts) En utilisant $\ln(ab)=\ln a+\ln b$ avec $b=\dfrac{1}{a}$, démontrer que $\ln\!\left(\dfrac{1}{a}\right) = -\ln(a)$ pour $a>0$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-LOG-EV-B-EX2}{3}{30}
+\textbf{Exercice 2} (12 points) --- \textit{Capacité C3}
+
+\medskip
+
+La valeur d'une machine industrielle diminue de $15\%$ chaque année : sa valeur après $n$ années est $u_n = 8000 \times 0{,}85^n$ (en euros), pour une valeur initiale de $8000$ €.
+\begin{enumerate}
+  \item (3 pts) Poser l'inéquation permettant de déterminer à partir de quel rang $n$ la valeur devient inférieure à $100$ €.
+  \item (5 pts) Résoudre cette inéquation à l'aide du logarithme, en justifiant le sens de l'inégalité obtenue.
+  \item (4 pts) Conclure : à partir de quelle année entière la valeur passe-t-elle sous $100$ € ?
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

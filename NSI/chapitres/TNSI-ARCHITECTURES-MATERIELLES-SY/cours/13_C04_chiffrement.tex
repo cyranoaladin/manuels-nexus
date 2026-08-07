@@ -1,0 +1,60 @@
+% META: {"id": "TNSI-ARCH-CR-013", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "cours", "capacites_codes": ["C04A", "C04B"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Chiffrement symétrique et asymétrique}
+
+% ============================================================
+% STRATE 1 — Chiffrement symetrique
+% ============================================================
+
+\definition[1]{
+Le \textbf{chiffrement symétrique} utilise une \textbf{unique clé secrète}, partagée à l'avance entre l'émetteur et le destinataire, pour chiffrer \textbf{et} déchiffrer un message. Il est rapide, mais suppose que les deux parties aient pu échanger la clé de façon sûre au préalable.
+}
+
+\textbf{Exemple.} Un chiffrement symétrique très simplifié par \textbf{XOR} avec une clé répétée (principe illustratif, non utilisé tel quel en pratique) :
+\begin{python}
+def chiffrer_xor(message, cle):
+    return bytes(o ^ cle[i % len(cle)] for i, o in enumerate(message))
+
+def dechiffrer_xor(chiffre, cle):
+    return chiffrer_xor(chiffre, cle)  # XOR est sa propre inverse
+\end{python}
+
+% BEGIN-VERIFY
+% def chiffrer_xor(message, cle):
+%     return bytes(o ^ cle[i % len(cle)] for i, o in enumerate(message))
+% def dechiffrer_xor(chiffre, cle):
+%     return chiffrer_xor(chiffre, cle)
+% message = b"NEXUS"
+% cle = b"K7"
+% chiffre = chiffrer_xor(message, cle)
+% assert chiffre != message
+% assert dechiffrer_xor(chiffre, cle) == message
+% END-VERIFY
+
+\margeAppui{
+La propriété remarquable du XOR ($a \oplus b \oplus b = a$) explique pourquoi la même fonction sert à chiffrer et à déchiffrer : appliquer deux fois le même XOR avec la même clé restitue le message d'origine.
+}
+
+% ============================================================
+% STRATE 2 — Chiffrement asymetrique et HTTPS
+% ============================================================
+
+\definition[2]{
+Le \textbf{chiffrement asymétrique} utilise une \textbf{paire de clés} liées mathématiquement : une \textbf{clé publique}, diffusée librement, et une \textbf{clé privée}, gardée secrète. Ce qui est chiffré avec la clé publique ne peut être déchiffré qu'avec la clé privée correspondante. Il est plus lent que le chiffrement symétrique, mais ne nécessite \textbf{aucun} échange préalable de secret.
+}
+
+\propriete[Sécuriser HTTPS : le meilleur des deux mondes]{
+Une connexion \textbf{HTTPS} combine les deux : au début de la connexion, le client et le serveur utilisent un protocole \textbf{asymétrique} pour échanger, en toute sécurité sur un réseau public, une \textbf{clé symétrique} temporaire (dite \textit{clé de session}). Toute la suite de l'échange (les pages web, les données du formulaire...) est ensuite chiffrée avec cette clé symétrique, beaucoup plus rapide à utiliser pour de gros volumes de données.
+}
+
+\margeAppui{
+Le programme de terminale n'exige \textbf{pas} le détail de la négociation SSL/TLS ; il s'agit seulement de comprendre \textbf{pourquoi} on combine les deux familles de chiffrement plutôt que d'utiliser l'une ou l'autre seule.
+}
+
+\erreurFrequente{
+\textbf{Croire que HTTPS chiffre tout avec le protocole asymétrique de bout en bout.} Ce serait beaucoup trop lent pour des échanges volumineux : le chiffrement asymétrique sert uniquement à échanger la clé symétrique de session au tout début de la connexion, puis c'est le chiffrement symétrique, bien plus rapide, qui protège le reste des données échangées.
+}
+
+\approfondissement{
+Le chiffrement asymétrique repose sur des problèmes mathématiques réputés difficiles à inverser sans la clé privée (par exemple, la factorisation de grands nombres entiers pour l'algorithme RSA). Ce fondement mathématique est étudié plus en détail dans le programme de mathématiques expertes (arithmétique).
+}

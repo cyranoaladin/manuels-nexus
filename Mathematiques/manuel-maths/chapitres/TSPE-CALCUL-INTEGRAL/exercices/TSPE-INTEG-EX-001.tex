@@ -1,0 +1,14 @@
+% META: {"id": "TSPE-INTEG-EX-001", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "exercice", "capacites": ["TSPE-INTEG-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CALCUL-INTEGRAL/exercices/TSPE-INTEG-EX-001.tex", "corrige_tex": "chapitres/TSPE-CALCUL-INTEGRAL/corriges/TSPE-INTEG-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate
+% x = symbols('x')
+% I = integrate(x**2+1, (x, 0, 2))
+% assert 2*1 <= I <= 2*5
+% END-VERIFY
+\begin{exercice}{TSPE-INTEG-EX-001}{1}{8}
+Soit $f(x) = x^2+1$ sur $[0,2]$.
+\begin{enumerate}
+  \item Determiner le minimum et le maximum de $f$ sur $[0,2]$.
+  \item En deduire un encadrement de $\displaystyle\int_0^2 f(x)\,\mathrm{d}x$.
+\end{enumerate}
+\end{exercice}

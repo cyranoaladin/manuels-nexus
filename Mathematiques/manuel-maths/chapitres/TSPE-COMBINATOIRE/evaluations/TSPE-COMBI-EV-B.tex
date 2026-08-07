@@ -1,0 +1,43 @@
+% META: {"id": "TSPE-COMBI-EV-B", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "evaluation", "version": "B", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C2", "C3", "C4"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert binomial(12, 4) == 495
+% assert sum(binomial(6,k) for k in range(7)) == 64 == 2**6
+% assert binomial(7,2) + binomial(7,3) == binomial(8,3) == 56
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-COMBI-EV-B}{45}
+
+\begin{exercice}{TSPE-COMBI-EV-B-EX1}{2}{15}
+\textbf{Exercice 1} (6 points) — \textit{Capacite C2}
+
+\medskip
+
+On choisit $4$ eleves parmi $12$ pour former un groupe de travail (sans role distinct).
+\begin{enumerate}
+  \item (2 pts) L'ordre compte-t-il ? Justifier.
+  \item (4 pts) Calculer le nombre de groupes possibles.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-COMBI-EV-B-EX2}{2}{20}
+\textbf{Exercice 2} (7 points) — \textit{Capacite C3}
+
+\medskip
+
+Verifier la formule $\displaystyle\sum_{k=0}^{n}\dbinom{n}{k}=2^n$ pour $n=6$ (calcul direct de chaque terme), puis rappeler en une phrase le principe de la preuve combinatoire generale (sans la rediger integralement).
+\end{exercice}
+
+\begin{exercice}{TSPE-COMBI-EV-B-EX3}{2}{15}
+\textbf{Exercice 3} (7 points) — \textit{Capacite C4}
+
+\medskip
+
+Demontrer, par une methode combinatoire (sans calcul factoriel), la relation de Pascal $\dbinom{n}{k} = \dbinom{n-1}{k-1}+\dbinom{n-1}{k}$.
+\end{exercice}
+
+\end{evaluation}

@@ -1,0 +1,15 @@
+% META: {"id": "TCOMPL-ME-CO-004", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-ME-EX-004", "capacites_codes": ["C1", "C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% f = lambda x: 0.5*(x + 6/x)
+% u1 = f(10.0)
+% u2 = f(u1)
+% assert abs(u1 - 5.3) < 1e-9
+% assert abs(u2 - 3.2160377358490564) < 1e-9
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EX-004}
+\textbf{1.} $f(x) = \dfrac{1}{2}\left(x+\dfrac{6}{x}\right)$ pour $x>0$.
+
+\textbf{2.} $f(x)=x \iff \dfrac{1}{2}\left(x+\dfrac{6}{x}\right)=x \iff x+\dfrac{6}{x}=2x \iff \dfrac{6}{x}=x \iff x^2=6 \iff x=\sqrt{6}$ (car $x>0$). Le point fixe est $\sqrt{6}$.
+
+\textbf{3.} $u_1 = \dfrac{1}{2}\left(10+\dfrac{6}{10}\right) = \dfrac{1}{2}\times10{,}6 = 5{,}3$. $u_2 = \dfrac{1}{2}\left(5{,}3+\dfrac{6}{5{,}3}\right) \approx 3{,}216$. On observe une convergence très rapide vers $\sqrt{6}\approx2{,}449$ : c'est la célèbre méthode de Héron (ou de Newton).
+\end{corrige}

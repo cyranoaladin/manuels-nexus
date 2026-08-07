@@ -1,0 +1,122 @@
+% META: {"id": "TEXP-ARI-CR-013", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "cours", "capacites_codes": ["C7", "C8", "C9"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Nombres premiers}
+
+% ============================================================
+% STRATE 1 — Infinite des nombres premiers, decomposition
+% ============================================================
+
+\definition[1]{
+Un entier $p\geq2$ est \textbf{premier} s'il n'admet que deux diviseurs positifs : $1$ et lui-même.
+}
+
+\theoreme[Infinité des nombres premiers]{
+L'ensemble des nombres premiers est infini.
+}
+
+\demonstration{
+Par l'absurde, supposons qu'il n'existe qu'un nombre fini de nombres premiers $p_1,p_2,\dots,p_n$. Posons $N=p_1\times p_2\times\dots\times p_n+1$. Cet entier $N$ admet un diviseur premier $p$ (tout entier $\geq2$ admet un diviseur premier). Ce $p$ est nécessairement l'un des $p_i$ (par hypothèse, ce sont les seuls nombres premiers). Mais alors $p_i$ divise à la fois $N$ et $p_1\times\dots\times p_n$, donc $p_i$ divise leur différence $N-p_1\times\dots\times p_n=1$ : c'est impossible, car aucun nombre premier ne divise $1$. Contradiction : l'ensemble des nombres premiers est donc infini.
+}
+
+% BEGIN-VERIFY
+% premiers = [2, 3, 5, 7]
+% N = 1
+% for p in premiers:
+%     N *= p
+% N += 1
+% assert N == 211
+% # verifie qu'aucun des premiers de la liste ne divise N (illustration de la contradiction)
+% for p in premiers:
+%     assert N % p != 0
+% END-VERIFY
+
+\propriete[Décomposition en facteurs premiers]{
+Tout entier $n\geq2$ se décompose de façon \textbf{unique} (à l'ordre près) en produit de nombres premiers.
+}
+
+\begin{python}
+def facteurs_premiers(n):
+    facteurs = []
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            facteurs.append(d)
+            n //= d
+        d += 1
+    if n > 1:
+        facteurs.append(n)
+    return facteurs
+\end{python}
+
+% BEGIN-VERIFY
+% def facteurs_premiers(n):
+%     facteurs = []
+%     d = 2
+%     while d * d <= n:
+%         while n % d == 0:
+%             facteurs.append(d)
+%             n //= d
+%         d += 1
+%     if n > 1:
+%         facteurs.append(n)
+%     return facteurs
+% assert facteurs_premiers(360) == [2, 2, 2, 3, 3, 5]
+% produit = 1
+% for f in facteurs_premiers(360):
+%     produit *= f
+% assert produit == 360
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Petit theoreme de Fermat, crible d'Eratosthene
+% ============================================================
+
+\theoreme[Petit théorème de Fermat]{
+Si $p$ est premier et $a$ un entier non divisible par $p$, alors $a^{p-1}\equiv1\ [p]$.
+}
+
+\exemple{
+Pour $p=7$ et $a=3$ : $3^6=729$. On vérifie $729 = 104\times7+1$, donc $3^6\equiv1\ [7]$.
+}
+
+% BEGIN-VERIFY
+% assert 3**6 == 729
+% assert 729 % 7 == 1
+% assert pow(3, 6, 7) == 1
+% END-VERIFY
+
+\propriete[Crible d'Ératosthène]{
+Pour trouver tous les nombres premiers jusqu'à $N$, on part de la liste $2,3,\dots,N$, et on élimine successivement tous les multiples de chaque nombre non encore éliminé, en partant de $2$.
+}
+
+\begin{python}
+def crible(N):
+    est_premier = [True] * (N + 1)
+    est_premier[0] = est_premier[1] = False
+    for d in range(2, int(N**0.5) + 1):
+        if est_premier[d]:
+            for multiple in range(d*d, N + 1, d):
+                est_premier[multiple] = False
+    return [n for n in range(N + 1) if est_premier[n]]
+\end{python}
+
+% BEGIN-VERIFY
+% def crible(N):
+%     est_premier = [True] * (N + 1)
+%     est_premier[0] = est_premier[1] = False
+%     for d in range(2, int(N**0.5) + 1):
+%         if est_premier[d]:
+%             for multiple in range(d*d, N + 1, d):
+%                 est_premier[multiple] = False
+%     return [n for n in range(N + 1) if est_premier[n]]
+% assert crible(30) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Appliquer le petit théorème de Fermat sans vérifier que $p$ est premier.} Le résultat est \textbf{faux} en général si $p$ n'est pas premier : par exemple, pour $p=8$ (non premier) et $a=3$, $3^7=2187=273\times8+3$, donc $3^7\equiv3\ [8]$ et non $1$.
+}
+
+% BEGIN-VERIFY
+% assert 3**7 == 2187
+% assert 2187 % 8 == 3
+% END-VERIFY

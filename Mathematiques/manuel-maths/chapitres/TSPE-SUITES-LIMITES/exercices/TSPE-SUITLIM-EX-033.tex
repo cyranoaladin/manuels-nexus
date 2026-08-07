@@ -10,7 +10,10 @@
 Soit $(u_n)$ la suite definie par $u_n = n \times 0{,}9^n$.
 \begin{enumerate}
   \item Calculer $u_1$, $u_5$ et $u_{10}$ (arrondir a $10^{-2}$).
-  \item On pose $q = 0{,}9$ et on ecrit $\dfrac{1}{q} = \dfrac{10}{9} = 1 + \dfrac{1}{9}$. En utilisant l'inegalite de Bernoulli, montrer que $\left(\dfrac{1}{q}\right)^n \geq 1 + \dfrac{n}{9}$.
-  \item En deduire que $0 \leq u_n \leq \dfrac{9n}{9 + n}$ et conclure sur $\lim u_n$.
+  \item On pose $q = 0{,}9$ et $a = \dfrac{1}{9}$, de sorte que $\dfrac{1}{q} = 1 + a$. En developpant $(1+a)^n$ par la formule du binome et en ne conservant que le terme d'indice $2$ (tous les termes sont positifs), montrer que pour tout $n \geq 2$ :
+  \[
+    \left(\frac{1}{q}\right)^n \geq \frac{n(n-1)}{2}\,a^2.
+  \]
+  \item En deduire que pour tout $n \geq 2$, $0 \leq u_n \leq \dfrac{162}{n-1}$, puis conclure sur $\lim u_n$.
 \end{enumerate}
 \end{exercice}

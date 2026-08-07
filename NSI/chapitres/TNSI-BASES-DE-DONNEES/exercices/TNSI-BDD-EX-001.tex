@@ -1,0 +1,11 @@
+% META: {"id": "TNSI-BDD-EX-001", "chapitre": "TNSI-BASES-DE-DONNEES", "type_objet": "exercice", "capacites": ["T-BDD-01A", "T-BDD-01C"], "capacites_codes": ["C01A", "C01C"], "methodes": [], "parcours": 1, "competences": ["analyser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-BASES-DE-DONNEES/exercices/TNSI-BDD-EX-001.tex", "corrige_tex": "chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-001.tex", "status": "generated"}
+\begin{exercice}{TNSI-BDD-EX-001}{1}{15}
+Un club de sport stocke tous ses adhérents dans une unique table :
+\begin{sql}
+Inscription(id, nom_adherent, prenom_adherent, nom_sport, jour_seance, nom_coach)
+\end{sql}
+\begin{enumerate}
+  \item Un adhérent pratiquant deux sports différents apparaît-il une ou deux fois dans cette table ? Quel problème cela pose-t-il si l'on corrige une faute de frappe dans son nom ?
+  \item Proposer un découpage de cette table en plusieurs relations (avec leurs attributs) qui élimine ce problème. Préciser au moins une clé étrangère.
+\end{enumerate}
+\end{exercice}

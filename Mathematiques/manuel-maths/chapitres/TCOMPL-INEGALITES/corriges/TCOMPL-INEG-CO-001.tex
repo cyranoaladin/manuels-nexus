@@ -1,0 +1,15 @@
+% META: {"id": "TCOMPL-INEG-CO-001", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige", "exercice_ref": "TCOMPL-INEG-EX-001", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational
+% x = symbols('x')
+% L = (2*x**2 + x) / 3
+% assert L.subs(x, 0) == 0
+% assert L.subs(x, 1) == 1
+% Lpp = diff(L, x, 2)
+% assert Lpp == Rational(4, 3)
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EX-001}
+\textbf{1.} $L(0) = \dfrac{0+0}{3} = 0$. $L(1) = \dfrac{2+1}{3} = \dfrac{3}{3} = 1$.
+
+\textbf{2.} $L'(x) = \dfrac{4x+1}{3}$, donc $L''(x) = \dfrac{4}{3}$, qui est \textbf{constante et positive} : $L$ est convexe sur $[0,1]$ (et même sur $\mathbb{R}$).
+\end{corrige}

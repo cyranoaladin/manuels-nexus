@@ -1,0 +1,30 @@
+chapitre: TEXP-ARITHMETIQUE
+niveau: TEXPERTES
+theme: ARITHMETIQUE
+titre: "Arithmétique"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TEXP-ARI-C1, libelle_eleve: "Je sais déterminer les diviseurs d'un entier et le PGCD de deux entiers (algorithme d'Euclide)." }
+  - { code: C2, ref_capacite: TEXP-ARI-C2, libelle_eleve: "Je sais résoudre une congruence ax≡b [n] et déterminer un inverse de a modulo n quand a et n sont premiers entre eux." }
+  - { code: C3, ref_capacite: TEXP-ARI-C3, libelle_eleve: "Je sais établir et utiliser des tests de divisibilité, étudier la primalité d'un nombre, et étudier des problèmes de chiffrement simples." }
+  - { code: C4, ref_capacite: TEXP-ARI-C4, libelle_eleve: "Je sais résoudre une équation diophantienne simple ax+by=c à l'aide du théorème de Bézout." }
+  - { code: C5, ref_capacite: TEXP-ARI-C5, libelle_eleve: "Je sais démontrer le théorème de Bézout : le PGCD de a et b s'écrit ax+by pour des entiers x,y." }
+  - { code: C6, ref_capacite: TEXP-ARI-C6, libelle_eleve: "Je sais démontrer le théorème de Gauss (si a divise bc et a est premier avec b, alors a divise c)." }
+  - { code: C7, ref_capacite: TEXP-ARI-C7, libelle_eleve: "Je sais démontrer que l'ensemble des nombres premiers est infini, et utiliser la décomposition en facteurs premiers." }
+  - { code: C8, ref_capacite: TEXP-ARI-C8, libelle_eleve: "Je sais énoncer et utiliser le petit théorème de Fermat." }
+  - { code: C9, ref_capacite: TEXP-ARI-C9, libelle_eleve: "Je sais programmer l'algorithme d'Euclide (PGCD et couple de Bézout), le crible d'Ératosthène, et la décomposition en facteurs premiers." }
+
+prerequis:
+  - { code: R1, libelle: "Nombres entiers, divisibilité de base", chapitre_origine: "2NDE" }
+  - { code: R2, libelle: "Récursivité, algorithmique", chapitre_origine: "1SPE" }
+
+situation_accroche: >
+  Comment un site web peut-il vérifier votre mot de passe sans jamais le stocker en
+  clair ? Comment deux ordinateurs peuvent-ils échanger un message secret sur un réseau
+  public, sans qu'un espion puisse le déchiffrer ? Les réponses reposent sur
+  l'arithmétique des nombres entiers : congruences, nombres premiers, théorème de
+  Bézout. Ce chapitre explore ces fondements, redécouverts depuis l'Antiquité grecque
+  et devenus aujourd'hui les piliers de la cryptographie moderne.
+
+temps_estime_h: { parcours1: 18, parcours2: 14, parcours3: 11 }

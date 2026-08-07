@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-GEOESPACE-EV-B-corrige", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-GEOESPACE-EV-B", "version": "B", "capacites_codes": ["C12", "C15", "C11"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% A1=(1,1,1); u1=(2,-1,1)
+% t=2
+% pt = tuple(A1[i]+t*u1[i] for i in range(3))
+% assert pt == (5,-1,3)
+% END-VERIFY
+\begin{corrige}{TSPE-GEOESPACE-EV-B-EX1}
+\textbf{Q1.} $\begin{cases}x=1+2t\\y=1-t\\z=1+t\end{cases}\quad(t\in\mathbb{R})$.
+
+\textbf{Q2.} $1+2t=5 \Rightarrow t=2$. Verification : $1-2=-1$ \checkmark, $1+2=3$ \checkmark. Meme valeur $t=2$ pour les trois coordonnees : $B \in \mathcal{D}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-GEOESPACE-EV-B-EX2}
+Representation parametrique de $\mathcal{D}'$ : $\begin{cases}x=1+t\\y=t\\z=t\end{cases}$.
+
+Substitution dans $\mathcal{P}$ : $(1+t)+t-t-2=0 \iff t-1=0 \iff t=1$.
+
+Point d'intersection : $(1+1,\,1,\,1) = (2,1,1)$.
+
+Verification : $2+1-1-2=0$ \checkmark.
+\end{corrige}
+
+\begin{corrige}{TSPE-GEOESPACE-EV-B-EX3}
+$H,N \in \mathcal{P}$ donc $\vec{HN}$ est un vecteur de $\mathcal{P}$. Comme $(MH) \perp \mathcal{P}$, $\vec{MH}$ est orthogonal a tout vecteur de $\mathcal{P}$, donc $\vec{MH}\cdot\vec{HN}=0$ : le triangle $MHN$ est rectangle en $H$.
+
+Par Pythagore : $MN^2 = MH^2+HN^2$. Comme $N\neq H$, $HN^2>0$, donc $MN^2>MH^2$, soit $MN>MH$ (grandeurs positives).
+\end{corrige}

@@ -1,0 +1,68 @@
+% META: {"id": "TSPE-LOG-CR-014", "chapitre": "TSPE-LOGARITHME", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Résoudre des équations et inéquations avec $\ln$ et $\mathrm{e}$}
+
+% ============================================================
+% STRATE 1 — Outils et exemples
+% ============================================================
+
+\propriete[Outils de résolution]{
+Pour $a, b > 0$ :
+\begin{itemize}
+  \item $\ln a = \ln b \iff a = b$ (car $\ln$ est strictement croissante, donc injective).
+  \item $\ln a \leq \ln b \iff a \leq b$.
+  \item Pour tous reels $A, B$ : $\mathrm{e}^A = \mathrm{e}^B \iff A = B$, et $\mathrm{e}^A \leq \mathrm{e}^B \iff A \leq B$.
+\end{itemize}
+}
+
+\exemple{
+Resoudre $\ln(2x-1) = \ln(x+3)$.
+
+\textbf{Domaine.} Il faut $2x-1>0$ et $x+3>0$, soit $x > \dfrac{1}{2}$.
+
+\textbf{Resolution.} Sur ce domaine, $\ln(2x-1)=\ln(x+3) \iff 2x-1=x+3 \iff x=4$.
+
+Comme $4 > \dfrac{1}{2}$, $S = \{4\}$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, ln, solve, Eq
+% x = symbols('x')
+% sols = solve(Eq(ln(2*x-1), ln(x+3)), x)
+% assert sols == [4]
+% assert 2*4 - 1 > 0 and 4 + 3 > 0
+% END-VERIFY
+}
+
+\exemple{
+Resoudre $\mathrm{e}^{2x-1} = 5$.
+
+$\mathrm{e}^{2x-1} = 5 \iff \ln\!\left(\mathrm{e}^{2x-1}\right) = \ln 5 \iff 2x-1 = \ln 5 \iff x = \dfrac{1+\ln 5}{2}$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, ln, solve, Eq, Rational, simplify
+% x = symbols('x')
+% sols = solve(Eq(exp(2*x-1), 5), x)
+% assert simplify(sols[0] - (1+ln(5))/2) == 0
+% END-VERIFY
+}
+
+\exemple{
+Resoudre $\ln(x) \geq 3$ sur $]0,+\infty[$.
+
+$\ln x \geq 3 \iff \ln x \geq \ln(\mathrm{e}^3) \iff x \geq \mathrm{e}^3$ (croissance de $\ln$).
+
+$S = [\mathrm{e}^3, +\infty[$.
+
+% BEGIN-VERIFY
+% from sympy import ln, exp, simplify
+% assert simplify(ln(exp(3)) - 3) == 0
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de verifier le domaine de definition avant de conclure.} Une equation avec $\ln$ peut donner une solution algebrique qui ne verifie pas les conditions de positivite des arguments : il faut toujours verifier a posteriori (ou determiner le domaine avant de resoudre).
+}

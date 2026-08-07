@@ -1,0 +1,59 @@
+% META: {"id": "TCOMPL-MF-CR-011", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "cours", "capacites_codes": ["C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Convexité d'une fonction}
+
+% ============================================================
+% STRATE 1 — Reconnaitre la convexite graphiquement
+% ============================================================
+
+\definition[1]{
+Une fonction $f$ dérivable sur un intervalle $I$ est \textbf{convexe} sur $I$ si sa courbe représentative est toujours située \textbf{au-dessus} de chacune de ses tangentes. Elle est \textbf{concave} si sa courbe est toujours \textbf{en dessous} de chacune de ses tangentes. Un \textbf{point d'inflexion} est un point où la courbe traverse sa tangente, c'est-à-dire où la convexité change.
+}
+
+\margeAppui{
+Graphiquement : une courbe convexe \og se creuse vers le haut \fg{} (comme un bol), une courbe concave \og se creuse vers le bas \fg{} (comme un dôme).
+}
+
+% ============================================================
+% STRATE 2 — Caracterisation par la derivee seconde
+% ============================================================
+
+\propriete[Caractérisation par la dérivée seconde]{
+Soit $f$ deux fois dérivable sur un intervalle $I$. Alors :
+\begin{itemize}
+  \item $f$ est convexe sur $I$ si et seulement si $f''(x) \geq 0$ pour tout $x \in I$ ;
+  \item $f$ est concave sur $I$ si et seulement si $f''(x) \leq 0$ pour tout $x \in I$ ;
+  \item un point d'inflexion correspond à un point où $f''$ s'annule en \textbf{changeant de signe}.
+\end{itemize}
+}
+
+\exemple{
+Reprenons $f(x) = x + \dfrac{9}{x}$ sur $]0,+\infty[$. On calcule $f''(x) = \dfrac{18}{x^3}$. Pour tout $x>0$, $f''(x)>0$ : $f$ est \textbf{convexe} sur $]0,+\infty[$, sans point d'inflexion.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x', positive=True)
+% f = x + 9/x
+% fpp = diff(f, x, 2)
+% assert fpp == 18/x**3
+% END-VERIFY
+
+\exemple{
+Soit $g(x) = x^3 - 3x$ sur $\mathbb{R}$. On calcule $g''(x) = 6x$, qui s'annule en $x=0$ en changeant de signe (négatif pour $x<0$, positif pour $x>0$) : $g$ admet un \textbf{point d'inflexion} en $x=0$, elle est concave sur $]-\infty,0]$ et convexe sur $[0,+\infty[$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Eq
+% x = symbols('x')
+% g = x**3 - 3*x
+% gpp = diff(g, x, 2)
+% assert gpp == 6*x
+% assert solve(Eq(gpp, 0), x) == [0]
+% assert gpp.subs(x, -1) < 0
+% assert gpp.subs(x, 1) > 0
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre $f'' \geq 0$ et $f' \geq 0$.} Le signe de $f'$ donne le sens de \textbf{variation} de $f$ (croissante/décroissante) ; le signe de $f''$ donne la \textbf{convexité} de $f$ (courbe au-dessus/en dessous des tangentes). Une fonction peut être croissante et concave, croissante et convexe, décroissante et concave, ou décroissante et convexe : les deux notions sont indépendantes.
+}

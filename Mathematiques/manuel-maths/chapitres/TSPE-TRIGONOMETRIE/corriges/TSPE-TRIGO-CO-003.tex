@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-TRIGO-CO-003", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "TSPE-TRIGO-EX-003", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import cos, pi, sqrt, simplify
+% h = lambda t: 10 + 10*cos(t)
+% assert h(0) == 20
+% assert simplify(h(pi/6) - (10 + 5*sqrt(3))) == 0
+% assert simplify(h(-pi/6) - (10 + 5*sqrt(3))) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-TRIGO-EX-003}
+
+\textbf{Q1.} $h(0) = 10 + 10\cos(0) = 10+10 = 20$. A $t=0$, le wagon est au point le plus haut, a $20$ metres du sol.
+
+\textbf{Q2.} $h(t) = 10+5\sqrt{3} \iff 10\cos t = 5\sqrt{3} \iff \cos t = \dfrac{\sqrt{3}}{2}$.
+
+On reconnait $\cos\!\left(\dfrac{\pi}{6}\right) = \dfrac{\sqrt{3}}{2}$ : les solutions sur $[-\pi,\pi]$ sont $t = \dfrac{\pi}{6}$ et $t = -\dfrac{\pi}{6}$.
+
+\textbf{Q3.} $h(t) \geq 10+5\sqrt{3} \iff \cos t \geq \dfrac{\sqrt{3}}{2}$. La courbe de $\cos$ est au-dessus de $\dfrac{\sqrt{3}}{2}$ entre les deux solutions de l'equation (la « bosse centrale ») : l'ensemble cherche est $\boxed{\left[-\dfrac{\pi}{6}, \dfrac{\pi}{6}\right]}$.
+
+\end{corrige}

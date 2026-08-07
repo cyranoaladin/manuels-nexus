@@ -1,0 +1,51 @@
+% META: {"id": "TSPE-INTEG-EV-A", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C4", "C8"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, exp, simplify, Rational, sqrt, Eq, solve
+% x = symbols('x')
+% I1 = integrate(1/x, (x, 1, 2))
+% assert Rational(1,2) <= I1 <= 1
+% I2 = integrate(x*exp(-x), (x, 0, 2))
+% assert simplify(I2 - (1 - 3*exp(-2))) == 0
+% f = 3 - x**2
+% g = x**2 - 1
+% assert solve(Eq(f, g), x) == [-sqrt(2), sqrt(2)]
+% A3 = integrate(f - g, (x, -sqrt(2), sqrt(2)))
+% assert simplify(A3 - Rational(16,3)*sqrt(2)) == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-INTEG-EV-A}{55}
+
+\begin{exercice}{TSPE-INTEG-EV-A-EX1}{2}{15}
+\textbf{Exercice 1} (5 points) — \textit{Capacite C1}
+
+\medskip
+
+Soit $f(x)=\dfrac{1}{x}$ sur $[1,2]$. Determiner le minimum et le maximum de $f$ sur $[1,2]$, puis encadrer $\displaystyle\int_1^2 f(x)\,\mathrm{d}x$.
+\end{exercice}
+
+\begin{exercice}{TSPE-INTEG-EV-A-EX2}{2}{20}
+\textbf{Exercice 2} (8 points) — \textit{Capacite C8}
+
+\medskip
+
+Calculer $\displaystyle\int_0^2 x\,\mathrm{e}^{-x}\,\mathrm{d}x$ par integration par parties (poser $u(x)=x$, $v'(x)=\mathrm{e}^{-x}$).
+\end{exercice}
+
+\begin{exercice}{TSPE-INTEG-EV-A-EX3}{2}{20}
+\textbf{Exercice 3} (7 points) — \textit{Capacite C4}
+
+\medskip
+
+On considere $f(x)=3-x^2$ et $g(x)=x^2-1$.
+\begin{enumerate}
+  \item (2 pts) Determiner les points d'intersection des deux courbes.
+  \item (2 pts) Justifier que $f \geq g$ entre ces deux points.
+  \item (3 pts) Calculer l'aire entre les deux courbes sur cet intervalle.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

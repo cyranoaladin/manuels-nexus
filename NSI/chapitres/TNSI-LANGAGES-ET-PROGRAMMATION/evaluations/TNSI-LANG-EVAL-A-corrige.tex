@@ -1,0 +1,25 @@
+% META: {"id": "TNSI-LANG-EVAL-A-corrige", "chapitre": "TNSI-LANGAGES-ET-PROGRAMMATION", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-LANG-EVAL-A", "capacites": ["T-LANG-01A", "T-LANG-01C", "T-LANG-02A", "T-LANG-02B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def puissance(base, exposant):
+%     if exposant == 0:
+%         return 1
+%     return base * puissance(base, exposant - 1)
+% assert puissance(2, 4) == 16
+% END-VERIFY
+\begin{corrige}{TNSI-LANG-EVAL-A-EX1}
+\textbf{Q1.} Le code source d'un programme est une suite de caractères, stockable et manipulable comme n'importe quelle donnée : par exemple, un interpréteur lit le code d'un autre programme comme une donnée en entrée, pour l'exécuter instruction par instruction.
+
+\textbf{Q2.} Si un programme \lstinline{s_arrete(P, e)} pouvait toujours décider correctement si \lstinline{P} s'arrête sur \lstinline{e}, on pourrait construire un programme \lstinline{paradoxe} qui fait exactement le contraire de ce que \lstinline{s_arrete(paradoxe, paradoxe)} prédit pour lui-même : \lstinline{s_arrete} se tromperait alors nécessairement sur ce cas précis, ce qui contredit l'hypothèse qu'il décide correctement dans tous les cas. Un tel programme ne peut donc pas exister.
+\end{corrige}
+
+\begin{corrige}{TNSI-LANG-EVAL-A-EX2}
+\textbf{Q1.}
+\begin{python}
+def puissance(base, exposant):
+    if exposant == 0:
+        return 1
+    return base * puissance(base, exposant - 1)
+\end{python}
+
+\textbf{Q2.} \lstinline{puissance(2, 4)} appelle \lstinline{puissance(2, 3)}, qui appelle \lstinline{puissance(2, 2)}, qui appelle \lstinline{puissance(2, 1)}, qui appelle \lstinline{puissance(2, 0)} : ce dernier atteint le cas de base (\lstinline{exposant == 0}) et renvoie $1$ directement. Les résultats remontent ensuite en cascade : $1 \to 2 \to 4 \to 8 \to 16$.
+\end{corrige}

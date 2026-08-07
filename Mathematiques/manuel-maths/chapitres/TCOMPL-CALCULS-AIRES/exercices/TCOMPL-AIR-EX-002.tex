@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-AIR-EX-002", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "exercice", "capacites": ["TCOMPL-AIR-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-CALCULS-AIRES/exercices/TCOMPL-AIR-EX-002.tex", "corrige_tex": "chapitres/TCOMPL-CALCULS-AIRES/corriges/TCOMPL-AIR-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% f = 3*x**2 - 2*x + 1
+% I = integrate(f, (x, 0, 2))
+% assert I == 6
+% moyenne = I / (2 - 0)
+% assert moyenne == 3
+% END-VERIFY
+\begin{exercice}{TCOMPL-AIR-EX-002}{1}{15}
+Soit $f(x) = 3x^2-2x+1$.
+\begin{enumerate}
+  \item Calculer $\displaystyle\int_0^2 f(x)\,\mathrm{d}x$.
+  \item En déduire la valeur moyenne de $f$ sur $[0,2]$.
+\end{enumerate}
+\end{exercice}

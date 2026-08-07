@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-BAYES-CO-001", "chapitre": "TCOMPL-INFERENCE-BAYESIENNE", "type_objet": "corrige", "exercice_ref": "TCOMPL-BAYES-EX-001", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% PA = Rational(1, 20)
+% PA_B = Rational(4, 5)
+% PnotA_B = Rational(1, 10)
+% PB = PA*PA_B + (1-PA)*PnotA_B
+% assert PB == Rational(27, 200)
+% PB_A = PA_B * PA / PB
+% assert PB_A == Rational(8, 27)
+% END-VERIFY
+\begin{corrige}{TCOMPL-BAYES-EX-001}
+\textbf{1.} Par la formule des probabilités totales (système complet $A$, $\bar A$) :
+\[
+  P(B) = P(A)\times P_A(B) + P(\bar A)\times P_{\bar A}(B) = 0{,}05\times0{,}8 + 0{,}95\times0{,}1 = 0{,}04+0{,}095 = 0{,}135 = \frac{27}{200}.
+\]
+
+\textbf{2.} Par la formule de Bayes :
+\[
+  P_B(A) = \frac{P_A(B)\times P(A)}{P(B)} = \frac{0{,}8\times0{,}05}{0{,}135} = \frac{0{,}04}{0{,}135} = \frac{8}{27} \approx 0{,}296.
+\]
+Un individu testé positif a donc environ $29{,}6\%$ de chances de porter réellement le gène.
+\end{corrige}

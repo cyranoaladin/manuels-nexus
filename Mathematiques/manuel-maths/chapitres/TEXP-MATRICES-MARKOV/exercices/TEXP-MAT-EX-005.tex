@@ -1,0 +1,20 @@
+% META: {"id": "TEXP-MAT-EX-005", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "exercice", "capacites": ["TEXP-MAT-C5"], "capacites_codes": ["C5"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-MATRICES-MARKOV/exercices/TEXP-MAT-EX-005.tex", "corrige_tex": "chapitres/TEXP-MATRICES-MARKOV/corriges/TEXP-MAT-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% P = Matrix([[Rational(9,10), Rational(1,10)], [Rational(3,10), Rational(7,10)]])
+% pi0 = Matrix([[1,0]])
+% pi1 = pi0*P
+% pi2 = pi0*P**2
+% assert pi1 == Matrix([[Rational(9,10), Rational(1,10)]])
+% assert pi2 == Matrix([[Rational(21,25), Rational(4,25)]])
+% P2 = P**2
+% assert P2 == Matrix([[Rational(21,25), Rational(4,25)], [Rational(12,25), Rational(13,25)]])
+% END-VERIFY
+\begin{exercice}{TEXP-MAT-EX-005}{2}{15}
+On reprend la chaîne de Markov du service de streaming (exercice précédent), de matrice de transition $P=\begin{pmatrix}0{,}9&0{,}1\\0{,}3&0{,}7\end{pmatrix}$ et de distribution initiale $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$.
+\begin{enumerate}
+  \item Calculer $\pi_1=\pi_0P$. Interpréter le résultat.
+  \item Calculer $P^2$, puis $\pi_2=\pi_0P^2$.
+  \item Quelle est la probabilité que ce client soit encore abonné dans deux mois ? Quel coefficient de $P^2$ donne directement cette information ?
+\end{enumerate}
+\end{exercice}

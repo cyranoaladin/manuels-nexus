@@ -1,0 +1,31 @@
+% META: {"id": "TSPE-PRIMEQ-EV-B-corrige", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-PRIMEQ-EV-B", "version": "B", "capacites_codes": ["C1", "C2", "C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, ln, exp, simplify, Rational
+% x = symbols('x')
+% F = Rational(1,2)*ln(2*x+3)
+% assert simplify(diff(F, x) - 1/(2*x+3)) == 0
+% y = exp(-3*x) + 3
+% assert y.subs(x, 0) == 4
+% yp = -x - 1
+% y3 = 3*exp(2*x) + yp
+% assert y3.subs(x, 0) == 2
+% END-VERIFY
+\begin{corrige}{TSPE-PRIMEQ-EV-B-EX1}
+Forme $\dfrac{u'}{u}$ avec $u(x)=2x+3$ (strictement positif sur l'intervalle donne), $u'(x)=2$ : $f(x) = \dfrac{1}{2} \times \dfrac{2}{2x+3}$.
+
+Une primitive est $\boxed{F(x) = \dfrac{1}{2}\ln(2x+3)}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-PRIMEQ-EV-B-EX2}
+Solution particuliere : $y_0 = -\dfrac{9}{-3} = 3$. Solutions generales : $y(x) = C\mathrm{e}^{-3x}+3$.
+
+$y(0) = C+3=4$, donc $C=1$. La solution cherchee est $y(x) = \mathrm{e}^{-3x}+3$.
+\end{corrige}
+
+\begin{corrige}{TSPE-PRIMEQ-EV-B-EX3}
+\textbf{Q1.} $y_p'(x) = -1$. Et $2y_p(x)+2x+1 = 2(-x-1)+2x+1 = -2x-2+2x+1=-1$. On a bien $y_p'=2y_p+2x+1$. \checkmark
+
+\textbf{Q2.} Solutions generales : $y(x) = C\mathrm{e}^{2x} + (-x-1) = C\mathrm{e}^{2x}-x-1$.
+
+\textbf{Q3.} $y(0) = C-1=2$, donc $C=3$. La solution cherchee est $y(x) = 3\mathrm{e}^{2x}-x-1$.
+\end{corrige}

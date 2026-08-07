@@ -1,0 +1,13 @@
+% META: {"id": "TSPE-TRIGO-CO-002", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "corrige", "exercice_ref": "TSPE-TRIGO-EX-002", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import cos, pi, Rational, simplify
+% assert simplify(cos(2*pi/3) - Rational(-1, 2)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-TRIGO-EX-002}
+On resout d'abord $\cos x = -\dfrac{1}{2}$ : on reconnait $\cos\!\left(\dfrac{2\pi}{3}\right) = -\dfrac{1}{2}$, donc les solutions de l'equation sont $x = \dfrac{2\pi}{3}$ et $x = -\dfrac{2\pi}{3}$.
+
+La courbe de $\cos$ est en dessous de la droite $y=-\dfrac{1}{2}$ « aux extremites » de l'intervalle, entre ces deux valeurs et les bords $\pm\pi$. L'ensemble des solutions de l'inequation est donc :
+\[
+  \boxed{S = \left[-\pi, -\dfrac{2\pi}{3}\right] \cup \left[\dfrac{2\pi}{3}, \pi\right]}.
+\]
+\end{corrige}

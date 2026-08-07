@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-PRIMEQ-EX-004", "chapitre": "TSPE-PRIMITIVES-EQDIFF", "type_objet": "exercice", "capacites": ["TSPE-PRIMEQ-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 2, "competences": ["modeliser", "calculer"], "duree_min": 16, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/exercices/TSPE-PRIMEQ-EX-004.tex", "corrige_tex": "chapitres/TSPE-PRIMITIVES-EQDIFF/corriges/TSPE-PRIMEQ-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Rational
+% t = symbols('t')
+% T = 20 + 70*exp(-t/10)
+% assert diff(T, t) == -Rational(1,10)*(T - 20)
+% assert T.subs(t, 0) == 90
+% assert round(float(T.subs(t, 10)), 2) == 45.75
+% END-VERIFY
+\begin{exercice}{TSPE-PRIMEQ-EX-004}{2}{16}
+Un objet a une temperature $T(t)$ (en \degres C, $t$ en minutes) qui verifie la loi de refroidissement de Newton : $T'(t) = -0{,}1\,(T(t) - 20)$, ou $20\degres$C est la temperature ambiante. A l'instant $t=0$, l'objet est a $90\degres$C.
+\begin{enumerate}
+  \item Mettre l'equation sous la forme $T' = aT + b$ en precisant $a$ et $b$.
+  \item Determiner la solution particuliere constante, puis la forme generale des solutions.
+  \item Determiner $T(t)$ en utilisant la condition initiale $T(0)=90$.
+  \item Calculer $T(10)$ (arrondir a $0{,}01$ pres).
+\end{enumerate}
+\end{exercice}

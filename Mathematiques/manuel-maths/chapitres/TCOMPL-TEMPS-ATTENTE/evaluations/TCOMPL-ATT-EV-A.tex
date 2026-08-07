@@ -1,0 +1,48 @@
+% META: {"id": "TCOMPL-ATT-EV-A", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "evaluation", "version": "A", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% p = Rational(1, 8)
+% PX5 = (1-p)**4 * p
+% assert PX5 == Rational(2401, 32768)
+% E = 1/p
+% assert E == 8
+% def PX_sup(n, p):
+%     return (1-p)**n
+% n, k = 3, 5
+% cond = PX_sup(n+k, p) / PX_sup(n, p)
+% assert cond == PX_sup(k, p)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-ATT-EV-A}{45}
+
+\begin{exercice}{TCOMPL-ATT-EV-A-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacités C1, C2}
+
+\medskip
+
+Un jeu vidéo attribue un objet rare à chaque partie avec une probabilité de $12{,}5\%$ ($p=\frac{1}{8}$). Soit $X$ le rang de la première partie où l'objet est obtenu.
+\begin{enumerate}
+  \item (2 pts) Justifier que $X\sim\mathcal{G}\!\left(\frac{1}{8}\right)$.
+  \item (3 pts) Calculer $P(X=5)$.
+  \item (3 pts) Calculer $E(X)$ et interpréter.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-ATT-EV-A-EX2}{2}{20}
+\textbf{Exercice 2} (12 points) --- \textit{Capacité C3}
+
+\medskip
+
+On reprend le jeu précédent. Un joueur a déjà joué $3$ parties sans obtenir l'objet.
+\begin{enumerate}
+  \item (4 pts) Énoncer la propriété d'absence de mémoire de la loi géométrique.
+  \item (4 pts) En déduire, sans nouveau calcul complexe, la probabilité que le joueur attende encore exactement $5$ parties de plus.
+  \item (4 pts) Calculer cette probabilité.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

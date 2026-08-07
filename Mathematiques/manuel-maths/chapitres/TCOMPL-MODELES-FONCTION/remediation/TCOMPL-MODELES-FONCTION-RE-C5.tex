@@ -1,0 +1,23 @@
+% META: {"id": "TCOMPL-MODELES-FONCTION-RE-C5", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : signe de f'' vs signe de f'
+%---------------------------------------------------------------
+
+\begin{exercice}{TCOMPL-MF-RE-C5-EX1}{1}{10}
+Soit $f(x) = x^2 - 4x + 1$ sur $\mathbb{R}$. Calculer $f'(x)$ et $f''(x)$. La fonction $f$ est-elle convexe, concave, ou ni l'un ni l'autre sur $\mathbb{R}$ ? Justifier sans confondre le signe de $f'$ et celui de $f''$.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff
+% x = symbols('x')
+% f = x**2 - 4*x + 1
+% fp = diff(f, x)
+% fpp = diff(f, x, 2)
+% assert fp == 2*x - 4
+% assert fpp == 2
+% END-VERIFY
+
+\begin{corrige}{TCOMPL-MF-RE-C5-EX1}
+$f'(x) = 2x-4$ (change de signe : négatif avant $x=2$, positif après) et $f''(x) = 2$ (constante, toujours positive). La fonction $f$ est \textbf{convexe sur $\mathbb{R}$ tout entier} (car $f''(x)=2 \geq 0$ pour tout $x$), bien que son sens de variation change en $x=2$ (décroissante puis croissante) : la convexité (signe de $f''$) et le sens de variation (signe de $f'$) sont deux informations indépendantes.
+\end{corrige}

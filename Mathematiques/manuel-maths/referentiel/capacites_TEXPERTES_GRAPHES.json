@@ -1,0 +1,39 @@
+{
+  "niveau": "TEXPERTES",
+  "theme": "GRAPHES",
+  "bo_reference": "Programme d'enseignement optionnel de mathematiques expertes de terminale generale, arrete MENE1921264A, BO special n 8 du 25 juillet 2019 -- section « Graphes et matrices » (bloc unique du BO, deliberement entrelace avec les matrices).",
+  "note": "Le BO traite « Graphes et matrices » comme un bloc unique sans sous-parties Contenus/Capacites separees. Repartition assumee en deux chapitres (Graphes ; Matrices et chaines de Markov) pour rester a une granularite comparable aux autres chapitres du manuel -- decision tracee dans docs/12_perimetre_terminale_expertes.md. Ce fichier reprend les capacites du bloc directement liees au vocabulaire des graphes et au denombrement de chemins. Formulations extraites de sources/txt/BO2019_TEXPERTES_optionnel.txt, lignes 627-668. R7 verifie le 2026-08-06.",
+  "capacites": [
+    {
+      "id": "TEXP-GRA-C1",
+      "libelle_bo": "Graphe, sommets, arêtes. Exemple du graphe complet. Sommets adjacents, degré, ordre d'un graphe, chaîne, longueur d'une chaîne, graphe connexe.",
+      "libelle_eleve": "Je sais utiliser le vocabulaire des graphes : sommets, arêtes, adjacence, degré, ordre, chaîne, connexité, graphe complet.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-GRA-C2",
+      "libelle_bo": "Modéliser une situation par un graphe.",
+      "libelle_eleve": "Je sais modéliser une situation concrète par un graphe.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-GRA-C3",
+      "libelle_bo": "Exemples de représentations matricielles : matrice d'adjacence d'un graphe.",
+      "libelle_eleve": "Je sais construire la matrice d'adjacence d'un graphe.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-GRA-C4",
+      "libelle_bo": "Dans le cadre de la résolution de problèmes, utiliser le calcul matriciel, notamment les puissances d'une matrice carrée, pour calculer le nombre de chemins de longueur donnée entre deux sommets d'un graphe.",
+      "libelle_eleve": "Je sais calculer le nombre de chemins de longueur donnée entre deux sommets d'un graphe à l'aide des puissances de la matrice d'adjacence.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-GRA-C5",
+      "libelle_bo": "Expression du nombre de chemins de longueur n reliant deux sommets d'un graphe à l'aide de la puissance n-ième de la matrice d'adjacence.",
+      "libelle_eleve": "Je sais démontrer que le coefficient (i,j) de la puissance n-ième de la matrice d'adjacence donne le nombre de chemins de longueur n entre les sommets i et j.",
+      "demonstration_exigible": true,
+      "demonstration": "Expression du nombre de chemins de longueur n reliant deux sommets d'un graphe à l'aide de la puissance n-ième de la matrice d'adjacence."
+    }
+  ]
+}

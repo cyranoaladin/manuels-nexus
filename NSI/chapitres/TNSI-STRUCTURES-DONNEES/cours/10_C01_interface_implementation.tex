@@ -1,0 +1,112 @@
+% META: {"id": "TNSI-STRUCT-CR-010", "chapitre": "TNSI-STRUCTURES-DONNEES", "type_objet": "cours", "capacites_codes": ["C01A", "C01B", "C01C"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Interface et implémentation d'une structure de données}
+
+% ============================================================
+% STRATE 1 — Definitions et exemple contraste
+% ============================================================
+
+\definition[1]{
+L'\textbf{interface} d'une structure de donnees est l'ensemble des \textbf{operations} qu'elle propose (ce que l'on peut faire), \textbf{sans preciser comment} elles sont realisees. Une \textbf{implementation} est une facon concrete de coder ces operations (avec quelles donnees internes, quel algorithme).
+}
+
+\margeAppui{
+Une meme interface peut avoir \textbf{plusieurs implementations} differentes : l'utilisateur de la structure n'a pas besoin de connaitre l'implementation pour utiliser l'interface.
+}
+
+\exemple{
+\textbf{Interface d'une pile (Stack)} : \lstinline{empiler(valeur)}, \lstinline{depiler()}, \lstinline{est_vide()}.
+}
+
+\textbf{Implementation 1 — avec une liste Python (fin de liste = sommet) :}
+\begin{python}
+class PileListe:
+    def __init__(self):
+        self._donnees = []
+
+    def empiler(self, valeur):
+        self._donnees.append(valeur)
+
+    def depiler(self):
+        return self._donnees.pop()
+
+    def est_vide(self):
+        return len(self._donnees) == 0
+\end{python}
+
+\textbf{Implementation 2 — avec une liste chainee (debut = sommet) :}
+\begin{python}
+class Maillon:
+    def __init__(self, valeur, suivant=None):
+        self.valeur = valeur
+        self.suivant = suivant
+
+class PileChainee:
+    def __init__(self):
+        self._sommet = None
+
+    def empiler(self, valeur):
+        self._sommet = Maillon(valeur, self._sommet)
+
+    def depiler(self):
+        v = self._sommet.valeur
+        self._sommet = self._sommet.suivant
+        return v
+
+    def est_vide(self):
+        return self._sommet is None
+\end{python}
+
+% BEGIN-VERIFY
+% class PileListe:
+%     def __init__(self):
+%         self._donnees = []
+%     def empiler(self, valeur):
+%         self._donnees.append(valeur)
+%     def depiler(self):
+%         return self._donnees.pop()
+%     def est_vide(self):
+%         return len(self._donnees) == 0
+%
+% class Maillon:
+%     def __init__(self, valeur, suivant=None):
+%         self.valeur = valeur
+%         self.suivant = suivant
+%
+% class PileChainee:
+%     def __init__(self):
+%         self._sommet = None
+%     def empiler(self, valeur):
+%         self._sommet = Maillon(valeur, self._sommet)
+%     def depiler(self):
+%         v = self._sommet.valeur
+%         self._sommet = self._sommet.suivant
+%         return v
+%     def est_vide(self):
+%         return self._sommet is None
+%
+% # meme interface, deux implementations : meme comportement observable
+% for Pile in (PileListe, PileChainee):
+%     p = Pile()
+%     assert p.est_vide()
+%     p.empiler(1)
+%     p.empiler(2)
+%     p.empiler(3)
+%     assert not p.est_vide()
+%     assert p.depiler() == 3
+%     assert p.depiler() == 2
+%     assert p.depiler() == 1
+%     assert p.est_vide()
+% END-VERIFY
+
+\exemple{
+Ces deux implementations offrent \textbf{exactement la meme interface} (memes trois methodes, meme comportement observable), mais des structures de donnees internes totalement differentes (tableau dynamique contre liste chainee).
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre interface et implementation lors d'un test.} Un test doit porter sur le comportement observable via l'interface (par exemple : apres avoir empile 1, 2, 3, depiler doit renvoyer 3), pas sur les details internes (comme la structure exacte de \lstinline{_donnees}). Cela permet au meme jeu de tests de valider plusieurs implementations.
+}

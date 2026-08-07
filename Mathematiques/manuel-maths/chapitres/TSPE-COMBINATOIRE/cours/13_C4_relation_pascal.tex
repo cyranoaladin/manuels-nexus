@@ -1,0 +1,59 @@
+% META: {"id": "TSPE-COMBI-CR-013", "chapitre": "TSPE-COMBINATOIRE", "type_objet": "cours", "capacites_codes": ["C4"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Relation de Pascal}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible (deux methodes)
+% ============================================================
+
+\theoreme[Relation de Pascal]{
+Pour tous entiers $n \geq 1$ et $1 \leq k \leq n-1$ :
+\[
+  \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}.
+\]
+}
+
+\demonstration{
+\textbf{Methode 1 : par le calcul.}
+\[
+  \binom{n-1}{k-1} + \binom{n-1}{k} = \frac{(n-1)!}{(k-1)!\,(n-k)!} + \frac{(n-1)!}{k!\,(n-1-k)!}.
+\]
+
+On reduit au meme denominateur $k!\,(n-k)!$ (on multiplie le premier terme par $\dfrac{k}{k}$ et le second par $\dfrac{n-k}{n-k}$) :
+\[
+  = \frac{k\,(n-1)!}{k!\,(n-k)!} + \frac{(n-k)\,(n-1)!}{k!\,(n-k)!} = \frac{(n-1)!\,\big(k+(n-k)\big)}{k!\,(n-k)!} = \frac{n\,(n-1)!}{k!\,(n-k)!} = \frac{n!}{k!\,(n-k)!} = \binom{n}{k}.
+\]
+
+\textbf{Methode 2 : méthode combinatoire.} Soit $E$ un ensemble a $n$ elements, et $a \in E$ un element fixe. On denombre les parties de $E$ a $k$ elements en les separant en deux categories :
+
+\begin{itemize}
+  \item les parties \textbf{contenant} $a$ : choisir une telle partie revient a choisir les $k-1$ autres elements parmi les $n-1$ elements restants de $E \setminus \{a\}$, soit $\dbinom{n-1}{k-1}$ possibilites ;
+  \item les parties \textbf{ne contenant pas} $a$ : choisir une telle partie revient a choisir les $k$ elements parmi les $n-1$ elements de $E \setminus \{a\}$, soit $\dbinom{n-1}{k}$ possibilites.
+\end{itemize}
+
+Ces deux categories sont disjointes et recouvrent toutes les parties a $k$ elements de $E$. Par le principe additif :
+\[
+  \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}.
+\]
+}
+
+\margeAppui{
+Cette relation permet de construire le \textbf{triangle de Pascal} : chaque coefficient est la somme des deux coefficients au-dessus de lui dans la ligne precedente.
+}
+
+\exemple{
+Verifier la relation pour $n=6$, $k=2$ : $\dbinom{5}{1}+\dbinom{5}{2} = 5+10=15$, et $\dbinom{6}{2}=15$.
+
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert binomial(5,1) + binomial(5,2) == binomial(6,2) == 15
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre les deux methodes de preuve.} La preuve « par le calcul » manipule des expressions factorielles ; la preuve « combinatoire » ne calcule rien, elle denombre le meme ensemble de deux facons (partition selon l'appartenance de $a$). Les deux sont valables mais de nature differente : un enonce peut demander specifiquement l'une ou l'autre.
+}

@@ -1,0 +1,49 @@
+% META: {"id": "TSPE-LOG-EV-A", "chapitre": "TSPE-LOGARITHME", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3", "C4"], "competences": ["raisonner", "calculer", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, exp, diff, solve, Eq, limit
+% x = symbols('x', positive=True)
+% assert solve(Eq(ln(x) + ln(x+1), ln(6)), x) == [2]
+% f = ln(x) - x + 1
+% fp = diff(f, x)
+% assert fp == -1 + 1/x
+% assert solve(Eq(fp, 0), x) == [1]
+% assert f.subs(x, 1) == 0
+% assert limit(x*ln(x), x, 0, '+') == 0
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TSPE-LOG-EV-A}{55}
+
+\begin{exercice}{TSPE-LOG-EV-A-EX1}{2}{15}
+\textbf{Exercice 1} (6 points) — \textit{Capacite C1}
+
+\medskip
+
+Resoudre l'equation $\ln(x+1) + \ln(x) = \ln(6)$.
+\end{exercice}
+
+\begin{exercice}{TSPE-LOG-EV-A-EX2}{2}{25}
+\textbf{Exercice 2} (8 points) — \textit{Capacite C3}
+
+\medskip
+
+Soit $f(x) = \ln(x) - x + 1$ sur $]0, +\infty[$.
+\begin{enumerate}
+  \item (2 pts) Calculer $f'(x)$.
+  \item (3 pts) Resoudre $f'(x)=0$ et etudier le signe de $f'(x)$.
+  \item (3 pts) En deduire le tableau de variations de $f$ et son maximum sur $]0,+\infty[$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TSPE-LOG-EV-A-EX3}{3}{15}
+\textbf{Exercice 3} (6 points) — \textit{Capacite C4}
+
+\medskip
+
+En utilisant le resultat $\displaystyle\lim_{x\to0^+} x\ln x = 0$ (demonstration exigible, a rappeler brievement), calculer $\displaystyle\lim_{x \to 0^+} \left(5x\ln x - 3x\right)$.
+\end{exercice}
+
+\end{evaluation}

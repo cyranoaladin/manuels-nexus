@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-CONTIN-EV-A-corrige", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-CONTIN-EV-A", "version": "A", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, solve, Eq
+% x = symbols('x')
+% f = x**3 - 4*x + 2
+% assert f.subs(x, 1) == -1
+% assert f.subs(x, 2) == 2
+% g = Rational(2, 5)*x + Rational(3, 5)
+% assert solve(Eq(x, g), x) == [1]
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EV-A-EX1}
+\textbf{Q1.} $f$ est un polynome, donc continue sur $\mathbb{R}$, en particulier sur $[1,2]$.
+
+\textbf{Q2.} $f(1) = 1 - 4 + 2 = -1$. $f(2) = 8 - 8 + 2 = 2$.
+
+\textbf{Q3.} $f$ est continue sur $[1,2]$ et $0$ est compris entre $f(1)=-1$ et $f(2)=2$. Par le TVI, l'equation $f(x)=0$ admet au moins une solution dans $[1,2]$.
+\end{corrige}
+
+\begin{corrige}{TSPE-CONTIN-EV-A-EX2}
+\textbf{Q1.} Initialisation : $u_0=5 \in [1,5]$.
+
+Heredite : si $1 \leq u_n \leq 5$, comme $f$ est croissante (coefficient $2/5>0$), $f(1) \leq f(u_n) \leq f(5)$, soit $1 \leq u_{n+1} \leq \dfrac{13}{5} \leq 5$. Donc $1 \leq u_{n+1} \leq 5$.
+
+\textbf{Q2.} $u_1 = f(5) = \dfrac{13}{5} = 2{,}6 \leq u_0 = 5$. Si $u_{n+1} \leq u_n$, comme $f$ est croissante, $f(u_{n+1}) \leq f(u_n)$, soit $u_{n+2}\leq u_{n+1}$. Par recurrence, $(u_n)$ est decroissante.
+
+\textbf{Q3.} $(u_n)$ decroissante et minoree par $1$ : elle converge vers un reel $\ell \in [1,5]$. Par continuite de $f$, $\ell = f(\ell) = \dfrac{2\ell+3}{5}$, soit $5\ell = 2\ell+3$, $3\ell=3$, donc $\ell=1$.
+\end{corrige}

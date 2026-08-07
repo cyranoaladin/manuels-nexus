@@ -1,0 +1,15 @@
+% META: {"id": "TSPE-PROBA-EX-007", "chapitre": "TSPE-PROBABILITES", "type_objet": "exercice", "capacites": ["TSPE-PROBA-C8"], "capacites_codes": ["C8"], "methodes": ["M1"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-007.tex", "corrige_tex": "chapitres/TSPE-PROBABILITES/corriges/TSPE-PROBA-CO-007.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% V = Rational(2,10)*Rational(8,10)
+% assert V == Rational(4, 25)
+% assert 3*V == Rational(12, 25)
+% END-VERIFY
+\begin{exercice}{TSPE-PROBA-EX-007}{2}{10}
+Trois composants electroniques, independants les uns des autres, ont chacun une probabilite $0{,}2$ de tomber en panne. Soit $X_1,X_2,X_3$ les variables de Bernoulli associees (1 si panne, 0 sinon).
+\begin{enumerate}
+  \item Calculer $V(X_1)$.
+  \item Justifier que l'on peut appliquer l'additivite de la variance a $X_1+X_2+X_3$.
+  \item Calculer $V(X_1+X_2+X_3)$.
+\end{enumerate}
+\end{exercice}

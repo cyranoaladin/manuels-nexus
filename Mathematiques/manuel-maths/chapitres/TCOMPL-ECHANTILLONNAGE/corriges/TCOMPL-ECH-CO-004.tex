@@ -1,0 +1,16 @@
+% META: {"id": "TCOMPL-ECH-CO-004", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige", "exercice_ref": "TCOMPL-ECH-EX-004", "capacites_codes": ["C6"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, expand, simplify
+% p = symbols('p')
+% E = 0*(1-p)**2 + 1*2*p*(1-p) + 2*p**2
+% assert simplify(expand(E) - 2*p) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EX-004}
+\textbf{1.} $P(X=0)=(1-p)^2$, $P(X=1)=\dbinom{2}{1}p(1-p)=2p(1-p)$, $P(X=2)=p^2$.
+
+\textbf{2.}
+\[
+  E(X) = 0\times(1-p)^2 + 1\times2p(1-p) + 2\times p^2 = 2p(1-p)+2p^2 = 2p-2p^2+2p^2 = 2p.
+\]
+On retrouve bien $E(X)=np$ avec $n=2$.
+\end{corrige}

@@ -1,0 +1,24 @@
+% META: {"id": "TCOMPL-ECH-EV-A-corrige", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ECH-EV-A", "capacites_codes": ["C1", "C2", "C3", "C6"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from math import comb
+% def P_egal(n, p, k):
+%     return comb(n, k) * p**k * (1 - p)**(n - k)
+% assert comb(6, 2) == 15
+% assert abs(P_egal(6, 0.25, 2) - 0.2966) < 0.0001
+% assert abs(sum(P_egal(6, 0.25, i) for i in range(3)) - 0.8306) < 0.0001
+% END-VERIFY
+\begin{corrige}{TCOMPL-ECH-EV-A-EX1}
+\textbf{1.} Les $6$ tirages sont indépendants, chacun avec la même probabilité $p=0{,}25$ de tirer une boule rouge : $X\sim\mathcal{B}(6\,;\ 0{,}25)$.
+
+\textbf{2.} En complétant le triangle de Pascal jusqu'à $n=6$ (ou par la formule) : $\binom{6}{2}=15$.
+
+\textbf{3.} $P(X=2) = \binom{6}{2}\times0{,}25^2\times0{,}75^4 \approx 0{,}2966$.
+
+\textbf{4.} $P(X\leq2) = P(X=0)+P(X=1)+P(X=2) \approx 0{,}8306$.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-ECH-EV-A-EX2}
+\[
+  E(Y) = 0\times(1-p)^2 + 1\times2p(1-p) + 2\times p^2 = 2p(1-p)+2p^2 = 2p-2p^2+2p^2 = 2p.
+\]
+\end{corrige}

@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-PROBA-EV-B-corrige", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige_evaluation", "evaluation_ref": "TSPE-PROBA-EV-B", "version": "B", "capacites_codes": ["C3", "C8", "C10"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% p = Rational(1,10)
+% P0 = (1-p)**15
+% assert round(float(P0), 4) == 0.2059
+% n_min = 1 / (4 * Rational(1,10)**2 * Rational(5,100))
+% assert n_min == 500
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EV-B-EX1}
+\textbf{Q1.} $X \sim \mathcal{B}(15,\,0{,}1)$.
+
+\textbf{Q2.} $P(X=0) = (0{,}9)^{15} \approx 0{,}2059$. $P(X\geq1) = 1-P(X=0) \approx \boxed{0{,}7941}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-PROBA-EV-B-EX2}
+\textbf{Q1.} $E(Y_1)=p=0{,}3$. $V(Y_1)=p(1-p)=0{,}3\times0{,}7=0{,}21$.
+
+\textbf{Q2.} Par linearite de l'esperance (valable sans hypothese d'independance) : $E(Y_1+\cdots+Y_4) = 4\times0{,}3 = \boxed{1{,}2}$.
+
+\textbf{Q3.} Les $4$ machines sont independantes (donne dans l'enonce), donc l'additivite de la variance s'applique : $V(Y_1+\cdots+Y_4) = 4\times0{,}21 = \boxed{0{,}84}$.
+\end{corrige}
+
+\begin{corrige}{TSPE-PROBA-EV-B-EX3}
+On veut $\dfrac{1}{4n\delta^2} \leq \alpha$, soit $n \geq \dfrac{1}{4\delta^2\alpha} = \dfrac{1}{4\times(0{,}1)^2\times0{,}05} = \dfrac{1}{0{,}002} = 500$.
+
+Un echantillon de taille $\boxed{n=500}$ suffit.
+\end{corrige}

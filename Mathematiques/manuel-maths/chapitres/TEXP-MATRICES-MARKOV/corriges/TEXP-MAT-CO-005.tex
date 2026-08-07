@@ -1,0 +1,20 @@
+% META: {"id": "TEXP-MAT-CO-005", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-005", "capacites_codes": ["C5"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% P = Matrix([[Rational(9,10), Rational(1,10)], [Rational(3,10), Rational(7,10)]])
+% pi0 = Matrix([[1,0]])
+% pi1 = pi0*P
+% pi2 = pi0*P**2
+% assert pi1 == Matrix([[Rational(9,10), Rational(1,10)]])
+% assert pi2 == Matrix([[Rational(21,25), Rational(4,25)]])
+% P2 = P**2
+% assert P2 == Matrix([[Rational(21,25), Rational(4,25)], [Rational(12,25), Rational(13,25)]])
+% assert P2[0,0] == pi2[0,0]
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-005}
+\textbf{1.} $\pi_1=\pi_0P=\begin{pmatrix}1&0\end{pmatrix}\begin{pmatrix}0{,}9&0{,}1\\0{,}3&0{,}7\end{pmatrix}=\begin{pmatrix}0{,}9&0{,}1\end{pmatrix}$. Après un mois, ce client a une probabilité de $0{,}9$ d'être encore abonné, et $0{,}1$ de s'être désabonné.
+
+\textbf{2.} $P^2=\begin{pmatrix}0{,}84&0{,}16\\0{,}48&0{,}52\end{pmatrix}$, soit sous forme fractionnaire $P^2=\begin{pmatrix}\tfrac{21}{25}&\tfrac{4}{25}\\\tfrac{12}{25}&\tfrac{13}{25}\end{pmatrix}$. Donc $\pi_2=\pi_0P^2=\begin{pmatrix}\tfrac{21}{25}&\tfrac{4}{25}\end{pmatrix}=\begin{pmatrix}0{,}84&0{,}16\end{pmatrix}$.
+
+\textbf{3.} La probabilité que ce client soit encore abonné dans deux mois est $0{,}84$ (première coordonnée de $\pi_2$). C'est directement le coefficient $(P^2)_{1,1}$ (ligne A, colonne A) de $P^2$, qui donne la probabilité de passer de l'état A à l'état A en $2$ transitions.
+\end{corrige}

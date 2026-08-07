@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-006", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M2"], "parcours": 1, "competences": ["raisonner", "calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-006.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-006.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, sqrt, solve, Eq
+% x = symbols('x')
+% f = sqrt(x + 2)
+% assert f.subs(x, 0) == sqrt(2)
+% assert f.subs(x, 2) == 2
+% sols = solve(Eq(x, f), x)
+% assert sols == [2]
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-006}{1}{12}
+Soit $(u_n)$ la suite definie par $u_0 = 0$ et $u_{n+1} = \sqrt{u_n + 2}$.
+\begin{enumerate}
+  \item Justifier que la fonction $f(x) = \sqrt{x+2}$ est continue sur $[0, 2]$ et que $f([0,2]) \subset [0,2]$.
+  \item On admet que $(u_n)$ est croissante et majoree par $2$. Justifier qu'elle converge vers un reel $\ell \in [0, 2]$.
+  \item Montrer que $\ell$ verifie $\ell^2 - \ell - 2 = 0$, puis determiner $\ell$.
+\end{enumerate}
+\end{exercice}

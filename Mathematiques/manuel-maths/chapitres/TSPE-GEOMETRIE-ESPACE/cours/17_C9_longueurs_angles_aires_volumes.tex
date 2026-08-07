@@ -1,0 +1,43 @@
+% META: {"id": "TSPE-GEOESPACE-CR-017", "chapitre": "TSPE-GEOMETRIE-ESPACE", "type_objet": "cours", "capacites_codes": ["C9"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Problèmes de longueurs, angles, aires et volumes}
+
+% ============================================================
+% STRATE 1 — Formules et exemple
+% ============================================================
+
+\propriete[Angle entre deux vecteurs]{
+Pour $\vec{u},\vec{v}$ non nuls : $\cos(\widehat{\vec{u},\vec{v}}) = \dfrac{\vec{u}\cdot\vec{v}}{\|\vec{u}\|\times\|\vec{v}\|}$.
+}
+
+\propriete[Aire d'un triangle]{
+L'aire du triangle $ABC$ peut se calculer via $\mathcal{A} = \dfrac{1}{2}AB \times h$, ou $h$ est la hauteur issue de $C$ (obtenue par exemple via une distance point-droite), ou encore a l'aide de la formule faisant intervenir le sinus de l'angle en $A$ : $\mathcal{A} = \dfrac{1}{2}AB\times AC\times\sin(\widehat{BAC})$.
+}
+
+\exemple{
+Soit $A(0,0,0)$, $B(4,0,0)$, $C(0,3,0)$. Calculer l'aire du triangle $ABC$ et l'angle $\widehat{BAC}$.
+
+$\vec{AB}\begin{pmatrix}4\\0\\0\end{pmatrix}$, $\vec{AC}\begin{pmatrix}0\\3\\0\end{pmatrix}$. $\vec{AB}\cdot\vec{AC}=0$ : le triangle est rectangle en $A$, donc $\widehat{BAC}=\dfrac{\pi}{2}$.
+
+$\mathcal{A} = \dfrac{1}{2}\times AB\times AC = \dfrac{1}{2}\times4\times3=6$ unites d'aire.
+
+% BEGIN-VERIFY
+% AB = (4,0,0); AC = (0,3,0)
+% dot = sum(a*b for a,b in zip(AB,AC))
+% assert dot == 0
+% aire = 0.5*4*3
+% assert aire == 6
+% END-VERIFY
+}
+
+\propriete[Volume d'un tétraèdre]{
+Le volume d'un tetraedre $ABCD$ est $V = \dfrac{1}{3}\times\mathcal{A}_{\text{base}}\times h$, ou $\mathcal{A}_{\text{base}}$ est l'aire d'une face choisie comme base et $h$ la hauteur (distance du sommet oppose au plan de cette face).
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier le facteur $1/3$ dans le volume d'un tetraedre (ou d'une pyramide).} Contrairement au volume d'un prisme ($\mathcal{A}_{\text{base}}\times h$), celui d'une pyramide ou d'un tetraedre comporte un facteur $1/3$.
+}

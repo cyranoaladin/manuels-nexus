@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-LOG-EV-A-corrige", "chapitre": "TCOMPL-LOGARITHME-HISTORIQUE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-LOG-EV-A", "capacites_codes": ["C2", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, ln, solve, Eq, diff, simplify
+% x = symbols('x', positive=True)
+% assert solve(Eq(ln(x) + ln(x+3), ln(4)), x) == [1]
+% f = ln(5*x+2)
+% fp = diff(f, x)
+% assert simplify(fp - 5/(5*x+2)) == 0
+% END-VERIFY
+\begin{corrige}{TCOMPL-LOG-EV-A-EX1}
+\textbf{1.} Posons $A=\ln a$, $B=\ln b$, donc $a=\mathrm{e}^A$, $b=\mathrm{e}^B$. Alors $ab=\mathrm{e}^A\mathrm{e}^B=\mathrm{e}^{A+B}$, donc $\ln(ab)=A+B=\ln a+\ln b$.
+
+\textbf{2.} \textbf{Domaine.} Il faut $x>0$ et $x+3>0$, soit $x>0$. Sur ce domaine :
+\[
+  \ln(x)+\ln(x+3) = \ln(x(x+3)) = \ln(4) \iff x(x+3)=4 \iff x^2+3x-4=0.
+\]
+Discriminant $\Delta=9+16=25$, racines $x=\dfrac{-3\pm5}{2}$, soit $x=1$ ou $x=-4$. Seul $x=1$ vérifie $x>0$ : $S=\{1\}$.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-LOG-EV-A-EX2}
+\textbf{1.} Il faut $5x+2>0$, soit $x>-\dfrac{2}{5}$ : domaine $\left]-\dfrac{2}{5},+\infty\right[$.
+
+\textbf{2.} Avec $u(x)=5x+2$, $u'(x)=5$ : $f'(x) = \dfrac{5}{5x+2}$.
+
+\textbf{3.} Sur le domaine, $5x+2>0$, donc $f'(x)>0$ : $f$ est \textbf{strictement croissante} sur $\left]-\dfrac{2}{5},+\infty\right[$.
+\end{corrige}

@@ -1,0 +1,64 @@
+% META: {"id": "TCOMPL-ECH-CR-010", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "cours", "capacites_codes": ["C1", "C2"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Schéma de Bernoulli et loi binomiale}
+
+% ============================================================
+% STRATE 1 — Identifier Bernoulli et binomiale
+% ============================================================
+
+\definition[1]{
+Une \textbf{épreuve de Bernoulli} est une expérience aléatoire à deux issues (\og succès \fg{} de probabilité $p$, \og échec \fg{} de probabilité $1-p$). Un \textbf{schéma de Bernoulli} de paramètres $n$ et $p$ répète $n$ fois, de façon \textbf{indépendante}, la même épreuve de Bernoulli de paramètre $p$.
+}
+
+\propriete[Loi binomiale]{
+Si $X$ compte le nombre de succès dans un schéma de Bernoulli de paramètres $n$ et $p$, alors $X$ suit la \textbf{loi binomiale} $\mathcal{B}(n,p)$, et pour tout $k \in \{0,1,\dots,n\}$ :
+\[
+  P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}.
+\]
+}
+
+\margeAppui{
+Pour reconnaître une loi binomiale, il faut vérifier trois conditions : un \textbf{nombre fixé} $n$ de répétitions, des répétitions \textbf{indépendantes}, et une probabilité de succès $p$ \textbf{identique} à chaque répétition.
+}
+
+\exemple{
+On lance $5$ fois un dé équilibré et on compte le nombre de \og $6$ \fg{} obtenus. Chaque lancer est une épreuve de Bernoulli de succès \og obtenir un 6 \fg{}, de probabilité $p=\frac{1}{6}$, répétée $5$ fois de façon indépendante : le nombre de succès $X$ suit $\mathcal{B}\!\left(5,\frac{1}{6}\right)$.
+}
+
+% ============================================================
+% STRATE 2 — Coefficients binomiaux, triangle de Pascal
+% ============================================================
+
+\definition[2]{
+Le \textbf{coefficient binomial} $\binom{n}{k}$ compte le nombre de façons d'obtenir $k$ succès parmi $n$ répétitions (c'est-à-dire le nombre de positions possibles des $k$ succès parmi les $n$ épreuves). Il se lit dans le \textbf{triangle de Pascal}, où chaque coefficient est la somme des deux coefficients situés juste au-dessus :
+\[
+  \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}.
+\]
+}
+
+\exemple{
+Les premières lignes du triangle de Pascal :
+\[
+\begin{array}{ccccccccc}
+ n=0: & & & & 1 & & & & \\
+ n=1: & & & 1 & & 1 & & & \\
+ n=2: & & 1 & & 2 & & 1 & & \\
+ n=3: & 1 & & 3 & & 3 & & 1 & \\
+\end{array}
+\]
+Par exemple, $\binom{3}{1}=3$ : il y a $3$ façons d'obtenir exactement $1$ succès parmi $3$ répétitions.
+}
+
+% BEGIN-VERIFY
+% from sympy import binomial
+% assert binomial(0, 0) == 1
+% assert binomial(1, 0) == 1 and binomial(1, 1) == 1
+% assert binomial(2, 0) == 1 and binomial(2, 1) == 2 and binomial(2, 2) == 1
+% assert binomial(3, 0) == 1 and binomial(3, 1) == 3 and binomial(3, 2) == 3 and binomial(3, 3) == 1
+% # relation de Pascal
+% assert binomial(3, 1) == binomial(2, 0) + binomial(2, 1)
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Confondre $\binom{n}{k}$ avec $n^k$ ou $k!$.} Le coefficient binomial compte un nombre de \textbf{combinaisons} (positions possibles), pas une puissance ni une factorielle seule : $\binom{n}{k} = \dfrac{n!}{k!(n-k)!}$, une formule à retenir mais que le triangle de Pascal permet de retrouver sans calcul pour de petites valeurs de $n$.
+}

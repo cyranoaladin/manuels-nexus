@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-CALCUL-INTEGRAL-RE-C8", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "remediation", "capacites_codes": ["C8"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C8 : integration par parties
+%---------------------------------------------------------------
+
+\begin{exercice}{TSPE-INTEG-RE-C8-EX1}{1}{10}
+Calculer $\displaystyle\int_0^1 x\,\mathrm{e}^{2x}\,\mathrm{d}x$ par integration par parties (poser $u(x)=x$, $v'(x)=\mathrm{e}^{2x}$).
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate, simplify, Rational
+% x = symbols('x')
+% I = integrate(x*exp(2*x), (x, 0, 1))
+% assert simplify(I - (Rational(1,4)*exp(2) + Rational(1,4))) == 0
+% END-VERIFY
+
+\begin{corrige}{TSPE-INTEG-RE-C8-EX1}
+$u(x)=x$, $u'(x)=1$ ; $v'(x)=\mathrm{e}^{2x}$, $v(x)=\dfrac{1}{2}\mathrm{e}^{2x}$.
+\[
+  \int_0^1 x\,\mathrm{e}^{2x}\,\mathrm{d}x = \left[\frac{x}{2}\mathrm{e}^{2x}\right]_0^1 - \int_0^1 \frac{1}{2}\mathrm{e}^{2x}\,\mathrm{d}x = \frac{\mathrm{e}^2}{2} - \left[\frac{1}{4}\mathrm{e}^{2x}\right]_0^1 = \frac{\mathrm{e}^2}{2} - \frac{\mathrm{e}^2}{4} + \frac{1}{4} = \frac{\mathrm{e}^2}{4}+\frac{1}{4}.
+\]
+\end{corrige}

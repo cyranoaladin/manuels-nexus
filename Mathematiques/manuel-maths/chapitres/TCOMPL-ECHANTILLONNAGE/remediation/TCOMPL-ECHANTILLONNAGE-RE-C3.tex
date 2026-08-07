@@ -1,0 +1,29 @@
+% META: {"id": "TCOMPL-ECHANTILLONNAGE-RE-C3", "chapitre": "TCOMPL-ECHANTILLONNAGE", "type_objet": "remediation", "capacites_codes": ["C3"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : P(X<=k) n'est pas P(X=k)
+%---------------------------------------------------------------
+
+\begin{exercice}{TCOMPL-ECH-RE-C3-EX1}{1}{10}
+Pour $X\sim\mathcal{B}(5\,;\ 0{,}5)$, un élève affirme que $P(X\leq2)$ et $P(X=2)$ sont la même chose. Calculer les deux valeurs et montrer qu'elles sont différentes.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from math import comb
+% def P_egal(n, p, k):
+%     return comb(n, k) * p**k * (1-p)**(n-k)
+% n, p = 5, 0.5
+% PX2 = P_egal(n, p, 2)
+% PXle2 = sum(P_egal(n, p, k) for k in range(3))
+% assert PX2 != PXle2
+% assert abs(PX2 - 0.3125) < 1e-9
+% assert abs(PXle2 - 0.5) < 1e-9
+% END-VERIFY
+
+\begin{corrige}{TCOMPL-ECH-RE-C3-EX1}
+$P(X=2) = \dbinom{5}{2}\times0{,}5^2\times0{,}5^3 = 10\times0{,}03125 = 0{,}3125$.
+
+$P(X\leq2) = P(X=0)+P(X=1)+P(X=2) = 0{,}03125+0{,}15625+0{,}3125 = 0{,}5$.
+
+Les deux valeurs sont bien différentes : $P(X=2)$ ne concerne que la valeur exacte $2$, tandis que $P(X\leq2)$ \textbf{cumule} les probabilités de $0$, $1$ et $2$. Confondre les deux conduit à sous-estimer largement la probabilité cumulée.
+\end{corrige}

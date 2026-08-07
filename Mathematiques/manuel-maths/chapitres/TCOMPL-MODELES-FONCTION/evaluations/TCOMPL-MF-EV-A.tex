@@ -1,0 +1,45 @@
+% META: {"id": "TCOMPL-MF-EV-A", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "evaluation", "version": "A", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C3"], "competences": ["calculer", "raisonner", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Eq
+% x = symbols('x', positive=True)
+% f = x + 4/x
+% fp = diff(f, x)
+% assert fp == 1 - 4/x**2
+% assert solve(Eq(fp, 0), x) == [2]
+% assert f.subs(x, 2) == 4
+% assert len(solve(Eq(f, 5), x)) == 2
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-MF-EV-A}{50}
+
+\begin{exercice}{TCOMPL-MF-EV-A-EX1}{2}{30}
+\textbf{Exercice 1} (12 points) --- \textit{Capacités C1, C2}
+
+\medskip
+
+Un artisan modélise son coût moyen de fabrication par $f(x) = x + \dfrac{4}{x}$ pour $x>0$ (en centaines d'euros, pour $x$ centaines de pièces produites).
+\begin{enumerate}
+  \item (3 pts) Calculer $f'(x)$.
+  \item (4 pts) Résoudre $f'(x)=0$ et dresser le tableau de variation de $f$ sur $]0,+\infty[$.
+  \item (2 pts) En déduire le coût moyen minimal et la production correspondante.
+  \item (3 pts) Sans résoudre explicitement, déterminer le nombre de solutions de $f(x)=5$, en justifiant à l'aide du tableau de variation.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-MF-EV-A-EX2}{3}{20}
+\textbf{Exercice 2} (8 points) --- \textit{Capacité C3}
+
+\medskip
+
+On admet que l'équation $x^3 - 4x - 1 = 0$ possède une unique solution $\alpha$ sur $[2,3]$.
+\begin{enumerate}
+  \item (3 pts) Écrire, en langage naturel ou en Python, un algorithme de dichotomie permettant d'obtenir un encadrement de $\alpha$ à $10^{-2}$ près.
+  \item (5 pts) Effectuer à la main les deux premières étapes de la dichotomie sur $[2,3]$ (on donne $2^3-4\times2-1=-1<0$ et $3^3-4\times3-1=14>0$).
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

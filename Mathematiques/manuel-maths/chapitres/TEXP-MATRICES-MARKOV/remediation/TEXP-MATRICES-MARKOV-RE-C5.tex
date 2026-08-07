@@ -1,0 +1,36 @@
+% META: {"id": "TEXP-MATRICES-MARKOV-RE-C5", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : pi_0 P^n (ligne x matrice), pas P^n pi_0
+%---------------------------------------------------------------
+
+\begin{exercice}{TEXP-MAT-RE-C5-EX1}{1}{10}
+Un élève calcule la distribution après $2$ transitions en écrivant $\pi_0$ comme une matrice \textbf{colonne} et en calculant $P^2\pi_0$ (au lieu de $\pi_0P^2$ avec $\pi_0$ en matrice ligne).
+
+On reprend la chaîne de Markov du streaming : $P=\begin{pmatrix}0{,}9&0{,}1\\0{,}3&0{,}7\end{pmatrix}$, $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$.
+\begin{enumerate}
+  \item Calculer la distribution correcte $\pi_2=\pi_0P^2$ (avec $\pi_0$ en matrice ligne, multipliée \textbf{à gauche} de $P^2$).
+  \item Calculer $P^2\begin{pmatrix}1\\0\end{pmatrix}$ (en transformant, comme l'élève, $\pi_0$ en matrice colonne multipliée \textbf{à droite}).
+  \item Comparer les deux résultats. Que peut-on en conclure sur la méthode de l'élève ?
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% P = Matrix([[Rational(9,10), Rational(1,10)], [Rational(3,10), Rational(7,10)]])
+% pi0_row = Matrix([[1,0]])
+% pi0_col = Matrix([[1],[0]])
+% correct = pi0_row * P**2
+% wrong = P**2 * pi0_col
+% assert correct == Matrix([[Rational(21,25), Rational(4,25)]])
+% assert wrong == Matrix([[Rational(21,25)],[Rational(12,25)]])
+% assert correct[0,1] != wrong[1,0]
+% END-VERIFY
+
+\begin{corrige}{TEXP-MAT-RE-C5-EX1}
+\textbf{1.} $\pi_2=\pi_0P^2=\begin{pmatrix}1&0\end{pmatrix}\begin{pmatrix}0{,}84&0{,}16\\0{,}48&0{,}52\end{pmatrix}=\begin{pmatrix}0{,}84&0{,}16\end{pmatrix}$ : la probabilité correcte d'être non-abonné après $2$ mois est $0{,}16$.
+
+\textbf{2.} $P^2\begin{pmatrix}1\\0\end{pmatrix}=\begin{pmatrix}0{,}84\\0{,}48\end{pmatrix}$ : la seconde coordonnée obtenue par ce calcul est $0{,}48$.
+
+\textbf{3.} Les deux résultats diffèrent ($0{,}16$ contre $0{,}48$) : la méthode de l'élève est \textbf{fausse}. En transformant $\pi_0$ en matrice colonne multipliée à droite de $P^2$, on calcule en réalité la \textbf{première colonne} de $P^2$, qui n'a pas le même sens probabiliste que $\pi_0P^2$. La distribution $\pi_0$ doit toujours rester une matrice \textbf{ligne}, multipliée \textbf{à gauche} de $P^n$.
+\end{corrige}

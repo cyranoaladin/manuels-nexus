@@ -1,0 +1,65 @@
+{
+  "niveau": "TEXPERTES",
+  "theme": "ARITHMETIQUE",
+  "bo_reference": "Programme d'enseignement optionnel de mathematiques expertes de terminale generale, arrete MENE1921264A, BO special n 8 du 25 juillet 2019 -- section « Arithmetique » (bloc unique du BO).",
+  "note": "Formulations libelle_bo extraites de sources/txt/BO2019_TEXPERTES_optionnel.txt, lignes 493-581. Chapitre correspondant a 1 bloc unique du BO (non subdivise en sous-parties par le texte officiel), regroupant divisibilite/congruences/PGCD/Bezout/Gauss/nombres premiers/Fermat -- decision de calibrage (1 chapitre pour ce bloc entier plutot que de le scinder artificiellement) tracee dans docs/12_perimetre_terminale_expertes.md. R7 verifie le 2026-08-06.",
+  "capacites": [
+    {
+      "id": "TEXP-ARI-C1",
+      "libelle_bo": "Déterminer les diviseurs d'un entier, le PGCD de deux entiers.",
+      "libelle_eleve": "Je sais déterminer les diviseurs d'un entier et le PGCD de deux entiers (algorithme d'Euclide).",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-ARI-C2",
+      "libelle_bo": "Résoudre une congruence ax ≡ b [n]. Déterminer un inverse de a modulo n lorsque a et n sont premiers entre eux.",
+      "libelle_eleve": "Je sais résoudre une congruence ax≡b [n] et déterminer un inverse de a modulo n quand a et n sont premiers entre eux.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-ARI-C3",
+      "libelle_bo": "Établir et utiliser des tests de divisibilité, étudier la primalité de certains nombres, étudier des problèmes de chiffrement.",
+      "libelle_eleve": "Je sais établir et utiliser des tests de divisibilité, étudier la primalité d'un nombre, et étudier des problèmes de chiffrement simples.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-ARI-C4",
+      "libelle_bo": "Résoudre des équations diophantiennes simples.",
+      "libelle_eleve": "Je sais résoudre une équation diophantienne simple ax+by=c à l'aide du théorème de Bézout.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-ARI-C5",
+      "libelle_bo": "Écriture du PGCD de a et b sous la forme ax + by, (x,y) ∈ ℤ² (théorème de Bézout).",
+      "libelle_eleve": "Je sais démontrer le théorème de Bézout : le PGCD de a et b s'écrit ax+by pour des entiers x,y.",
+      "demonstration_exigible": true,
+      "demonstration": "Écriture du PGCD de a et b sous la forme ax + by, (x,y) ∈ ℤ²."
+    },
+    {
+      "id": "TEXP-ARI-C6",
+      "libelle_bo": "Théorème de Gauss.",
+      "libelle_eleve": "Je sais démontrer le théorème de Gauss (si a divise bc et a est premier avec b, alors a divise c).",
+      "demonstration_exigible": true,
+      "demonstration": "Théorème de Gauss."
+    },
+    {
+      "id": "TEXP-ARI-C7",
+      "libelle_bo": "Nombres premiers. Leur ensemble est infini. Existence et unicité de la décomposition d'un entier en produit de facteurs premiers.",
+      "libelle_eleve": "Je sais démontrer que l'ensemble des nombres premiers est infini, et utiliser la décomposition en facteurs premiers.",
+      "demonstration_exigible": true,
+      "demonstration": "L'ensemble des nombres premiers est infini."
+    },
+    {
+      "id": "TEXP-ARI-C8",
+      "libelle_bo": "Petit théorème de Fermat.",
+      "libelle_eleve": "Je sais énoncer et utiliser le petit théorème de Fermat.",
+      "demonstration_exigible": false
+    },
+    {
+      "id": "TEXP-ARI-C9",
+      "libelle_bo": "Algorithme d'Euclide de calcul du PGCD de deux nombres et calcul d'un couple de Bézout. Crible d'Ératosthène. Décomposition en facteurs premiers.",
+      "libelle_eleve": "Je sais programmer l'algorithme d'Euclide (PGCD et couple de Bézout), le crible d'Ératosthène, et la décomposition en facteurs premiers.",
+      "demonstration_exigible": false
+    }
+  ]
+}

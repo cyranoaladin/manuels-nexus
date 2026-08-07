@@ -1,0 +1,33 @@
+% META: {"id": "TNSI-ARCH-EVAL-A-corrige", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "corrige_evaluation", "evaluation_ref": "TNSI-ARCH-EVAL-A", "capacites": ["T-ARCH-01", "T-ARCH-02A", "T-ARCH-02B", "T-ARCH-02C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def tourniquet(processus, tranche, duree_totale):
+%     ordre_execution = []
+%     file = list(processus)
+%     temps_restant = dict(duree_totale)
+%     while file:
+%         p = file.pop(0)
+%         execute = min(tranche, temps_restant[p])
+%         ordre_execution.append((p, execute))
+%         temps_restant[p] -= execute
+%         if temps_restant[p] > 0:
+%             file.append(p)
+%     return ordre_execution
+% resultat = tourniquet(["P1", "P2", "P3"], 2, {"P1": 2, "P2": 4, "P3": 3})
+% assert resultat == [("P1", 2), ("P2", 2), ("P3", 2), ("P2", 2), ("P3", 1)]
+% END-VERIFY
+\begin{corrige}{TNSI-ARCH-EVAL-A-EX1}
+\textbf{Q1.} Avantages : compacité, consommation énergétique réduite, coût de fabrication réduit en grande série. Inconvénient : perte de modularité (un composant défaillant oblige à remplacer toute la puce).
+
+\textbf{Q2.} Le système d'exploitation alloue de la mémoire au nouveau processus, y charge le code du programme, et l'inscrit dans la liste des processus à exécuter.
+\end{corrige}
+
+\begin{corrige}{TNSI-ARCH-EVAL-A-EX2}
+\textbf{Q1.}
+\begin{python}
+resultat = tourniquet(["P1", "P2", "P3"], 2, {"P1": 2, "P2": 4, "P3": 3})
+print(resultat)  # [('P1', 2), ('P2', 2), ('P3', 2), ('P2', 2), ('P3', 1)]
+\end{python}
+\texttt{P1} termine en une seule tranche (durée $2$), \texttt{P2} et \texttt{P3} nécessitent chacun deux passages.
+
+\textbf{Q2.} Non, il n'y a \textbf{pas} d'interblocage : \texttt{P3} retient \texttt{R3} sans rien attendre, donc la chaîne d'attente \texttt{P1} $\to$ \texttt{P2} (via \texttt{R2} puis \texttt{R1}) ne boucle pas -- \texttt{P2} finira par obtenir \texttt{R1} dès que \texttt{P1} le libère, sans dépendre de personne d'autre.
+\end{corrige}

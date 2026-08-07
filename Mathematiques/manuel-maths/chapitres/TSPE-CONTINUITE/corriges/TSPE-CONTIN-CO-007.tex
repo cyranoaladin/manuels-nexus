@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-CONTIN-CO-007", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-007", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, simplify
+% n = symbols('n', integer=True, nonnegative=True)
+% # v_n = u_n - 3 verifie v_{n+1} = (1/3) v_n
+% x = symbols('x')
+% f = Rational(1,3)*x + 2
+% assert simplify((f - 3) - Rational(1,3)*(x - 3)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-007}
+
+\textbf{Q1.} Initialisation : $u_0 = 0 \in [0,3]$.
+
+Heredite : supposons $0 \leq u_n \leq 3$. Comme $f$ est croissante (coefficient $1/3>0$), $f(0) \leq f(u_n) \leq f(3)$, soit $2 \leq u_{n+1} \leq 3$. En particulier $0 \leq u_{n+1} \leq 3$.
+
+Par recurrence, $0 \leq u_n \leq 3$ pour tout $n$.
+
+\textbf{Q2.} $u_1 = \dfrac{1}{3}\times 0 + 2 = 2 \geq u_0 = 0$.
+
+Supposons $u_{n+1} \geq u_n$. Comme $f$ est croissante, $f(u_{n+1}) \geq f(u_n)$, soit $u_{n+2} \geq u_{n+1}$. Par recurrence, $(u_n)$ est croissante.
+
+\textbf{Q3.} $(u_n)$ est croissante et majoree par $3$ (Q1) : elle converge vers un reel $\ell \in [0,3]$. Par continuite de $f$, $\ell = f(\ell) = \dfrac{1}{3}\ell + 2$, soit $\dfrac{2}{3}\ell = 2$, donc $\boxed{\ell = 3}$.
+
+\textbf{Q4.} $v_{n+1} = u_{n+1} - 3 = \dfrac{1}{3}u_n + 2 - 3 = \dfrac{1}{3}u_n - 1 = \dfrac{1}{3}(u_n - 3) = \dfrac{1}{3}v_n$.
+
+$(v_n)$ est donc geometrique de raison $\dfrac{1}{3}$ et de premier terme $v_0 = u_0 - 3 = -3$, d'ou $v_n = -3 \times \left(\dfrac{1}{3}\right)^n \to 0$, donc $u_n = v_n + 3 \to 3$. On retrouve $\ell = 3$.
+
+\end{corrige}

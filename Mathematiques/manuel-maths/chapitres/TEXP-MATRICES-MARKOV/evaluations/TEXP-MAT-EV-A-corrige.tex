@@ -1,0 +1,40 @@
+% META: {"id": "TEXP-MAT-EV-A-corrige", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-MAT-EV-A", "capacites_codes": ["C1", "C4", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye, symbols, solve
+% A = Matrix([[3,1],[2,1]])
+% B = Matrix([[1,2],[0,1]])
+% assert A+B == Matrix([[4,3],[2,2]])
+% assert A*B == Matrix([[3,7],[2,5]])
+% assert A.det() == 1
+% assert A.inv() == Matrix([[1,-1],[-2,3]])
+% assert A**2 == Matrix([[11,4],[8,3]])
+% PA = Matrix([[Rational(9,10), Rational(1,10)], [Rational(4,10), Rational(6,10)]])
+% pi0 = Matrix([[1,0]])
+% pi2 = pi0*PA**2
+% assert pi2 == Matrix([[Rational(17,20), Rational(3,20)]])
+% a, b = symbols('a b', positive=True)
+% pi = Matrix([[a, b]])
+% eq = pi*PA - pi
+% sol = solve([eq[0], eq[1], a + b - 1], [a, b])
+% assert sol[a] == Rational(4,5)
+% assert sol[b] == Rational(1,5)
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EV-A-EX1}
+\textbf{1.} $A+B=\begin{pmatrix}4&3\\2&2\end{pmatrix}$ et $AB=\begin{pmatrix}3&7\\2&5\end{pmatrix}$.
+
+\textbf{2.} $\det(A)=3\times1-1\times2=1\neq0$ : $A$ est inversible.
+
+\textbf{3.} $A^{-1}=\dfrac{1}{1}\begin{pmatrix}1&-1\\-2&3\end{pmatrix}=\begin{pmatrix}1&-1\\-2&3\end{pmatrix}$.
+
+\textbf{4.} $A^2=\begin{pmatrix}11&4\\8&3\end{pmatrix}$.
+\end{corrige}
+
+\begin{corrige}{TEXP-MAT-EV-A-EX2}
+\textbf{1.} $P=\begin{pmatrix}0{,}9&0{,}1\\0{,}4&0{,}6\end{pmatrix}$ et $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$ (la machine fonctionne au jour $0$).
+
+\textbf{2.} $\pi_2=\pi_0P^2=\begin{pmatrix}\tfrac{17}{20}&\tfrac{3}{20}\end{pmatrix}=\begin{pmatrix}0{,}85&0{,}15\end{pmatrix}$. La probabilité que la machine fonctionne au jour $2$ est $0{,}85$.
+
+\textbf{3.} Par définition de la chaîne, $\pi_{k+1}=\pi_kP$ pour tout $k$. Une récurrence immédiate donne alors $\pi_n=\pi_0P^n$ : vrai au rang $0$ ($\pi_0P^0=\pi_0$), et si vrai au rang $n$, $\pi_{n+1}=\pi_nP=(\pi_0P^n)P=\pi_0P^{n+1}$, donc vrai au rang $n+1$.
+
+\textbf{4.} On résout $\pi P=\pi$ avec $\pi=\begin{pmatrix}a&b\end{pmatrix}$, $a+b=1$ : $0{,}9a+0{,}4b=a\iff0{,}1a=0{,}4b\iff a=4b$ ; avec $a+b=1$ : $5b=1$, donc $b=\dfrac{1}{5}$, $a=\dfrac{4}{5}$. La distribution invariante est $\begin{pmatrix}\tfrac{4}{5}&\tfrac{1}{5}\end{pmatrix}$ : sur le long terme, la machine fonctionne environ $80\,\%$ du temps.
+\end{corrige}

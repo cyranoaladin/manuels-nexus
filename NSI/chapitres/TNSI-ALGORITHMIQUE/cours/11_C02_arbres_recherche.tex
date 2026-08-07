@@ -1,0 +1,113 @@
+% META: {"id": "TNSI-ALGO-CR-011", "chapitre": "TNSI-ALGORITHMIQUE", "type_objet": "cours", "capacites_codes": ["C01E", "C01F"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Arbre binaire de recherche}
+
+% ============================================================
+% STRATE 1 — Definition et recherche
+% ============================================================
+
+\definition[1]{
+Un \textbf{arbre binaire de recherche} (ABR) est un arbre binaire dans lequel, pour chaque nœud, toutes les valeurs du sous-arbre gauche sont \textbf{inférieures} à la valeur du nœud, et toutes celles du sous-arbre droit lui sont \textbf{supérieures}.
+}
+
+\margeAppui{
+Cette propriété se vérifie \textbf{récursivement} à chaque nœud, pas seulement entre parent et enfants directs : \textbf{tout} nœud du sous-arbre gauche, même profondément imbriqué, doit être inférieur à la racine.
+}
+
+\textbf{Exemple.} Rechercher une clé dans un ABR : on compare la clé cherchée à la racine, et on descend à gauche ou à droite selon le résultat.
+\begin{python}
+class Noeud:
+    def __init__(self, valeur, gauche=None, droite=None):
+        self.valeur = valeur
+        self.gauche = gauche
+        self.droite = droite
+
+def rechercher(arbre, cle):
+    if arbre is None:
+        return False
+    if cle == arbre.valeur:
+        return True
+    if cle < arbre.valeur:
+        return rechercher(arbre.gauche, cle)
+    return rechercher(arbre.droite, cle)
+\end{python}
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+%
+% def rechercher(arbre, cle):
+%     if arbre is None:
+%         return False
+%     if cle == arbre.valeur:
+%         return True
+%     if cle < arbre.valeur:
+%         return rechercher(arbre.gauche, cle)
+%     return rechercher(arbre.droite, cle)
+%
+% abr = Noeud(5, Noeud(2, Noeud(1), Noeud(3)), Noeud(8))
+% assert rechercher(abr, 3) is True
+% assert rechercher(abr, 8) is True
+% assert rechercher(abr, 6) is False
+% END-VERIFY
+
+\propriete[Coût de la recherche]{
+À chaque comparaison, la recherche élimine tout un sous-arbre : le coût de la recherche est proportionnel à la \textbf{hauteur} de l'arbre. Pour un arbre équilibré à $n$ nœuds, cette hauteur est de l'ordre de $\log_2 n$ : la recherche est très rapide. Pour un arbre dégénéré (ressemblant à une liste chaînée), elle peut coûter jusqu'à $n$ comparaisons.
+}
+
+% ============================================================
+% STRATE 2 — Insertion
+% ============================================================
+
+\definition[2]{
+\textbf{Insérer} une clé dans un ABR consiste à descendre dans l'arbre comme pour une recherche, jusqu'à atteindre un sous-arbre vide, et à y placer la nouvelle clé sous forme de feuille : cela préserve la propriété d'ABR.
+}
+
+\begin{python}
+def inserer(arbre, cle):
+    if arbre is None:
+        return Noeud(cle)
+    if cle < arbre.valeur:
+        arbre.gauche = inserer(arbre.gauche, cle)
+    elif cle > arbre.valeur:
+        arbre.droite = inserer(arbre.droite, cle)
+    return arbre
+\end{python}
+
+% BEGIN-VERIFY
+% class Noeud:
+%     def __init__(self, valeur, gauche=None, droite=None):
+%         self.valeur = valeur
+%         self.gauche = gauche
+%         self.droite = droite
+%
+% def inserer(arbre, cle):
+%     if arbre is None:
+%         return Noeud(cle)
+%     if cle < arbre.valeur:
+%         arbre.gauche = inserer(arbre.gauche, cle)
+%     elif cle > arbre.valeur:
+%         arbre.droite = inserer(arbre.droite, cle)
+%     return arbre
+%
+% def infixe(arbre):
+%     if arbre is None:
+%         return []
+%     return infixe(arbre.gauche) + [arbre.valeur] + infixe(arbre.droite)
+%
+% abr = None
+% for v in (5, 2, 8, 1, 3):
+%     abr = inserer(abr, v)
+% assert infixe(abr) == [1, 2, 3, 5, 8]
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier de réaffecter le résultat de \lstinline{inserer}.} Écrire simplement \lstinline{inserer(arbre.gauche, cle)} sans faire \lstinline{arbre.gauche = inserer(arbre.gauche, cle)} ne modifie rien lorsque \lstinline{arbre.gauche} vaut \lstinline{None} : un nouveau nœud est bien créé et renvoyé par la fonction, mais il n'est jamais rattaché à l'arbre existant.
+}
+
+\margeAppui{
+Un ABR construit par insertions successives dans un ordre \textbf{déjà trié} dégénère en une liste chaînée (chaque nœud n'a qu'un seul enfant) : la hauteur vaut alors $n-1$ au lieu de $\log_2 n$, et la recherche perd tout son avantage.
+}

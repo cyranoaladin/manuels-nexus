@@ -1,0 +1,58 @@
+% META: {"id": "TEXP-MAT-CR-011", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "cours", "capacites_codes": ["C2", "C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Modélisation par une matrice et suites de matrices colonnes}
+
+% ============================================================
+% STRATE 1 — Modeliser par une matrice
+% ============================================================
+
+\propriete[Modéliser par une matrice]{
+Une matrice permet de représenter de façon compacte plusieurs quantités liées entre elles par des relations linéaires : une \textbf{matrice colonne} $U_n=\begin{pmatrix}a_n\\b_n\end{pmatrix}$ regroupe par exemple deux grandeurs $a_n,b_n$ évoluant simultanément d'une étape $n$ à l'étape $n+1$.
+}
+
+\exemple{
+Deux ateliers $A$ et $B$ produisent chaque mois des pièces. On note $a_n$ et $b_n$ leurs productions (en centaines de pièces) au mois $n$. L'évolution est régie par
+$$a_{n+1}=\tfrac{1}{4}a_n+\tfrac{1}{4}b_n+1\qquad b_{n+1}=\tfrac{1}{4}a_n+\tfrac{1}{2}b_n+3$$
+En posant $U_n=\begin{pmatrix}a_n\\b_n\end{pmatrix}$, $A=\begin{pmatrix}\tfrac{1}{4}&\tfrac{1}{4}\\\tfrac{1}{4}&\tfrac{1}{2}\end{pmatrix}$ et $C=\begin{pmatrix}1\\3\end{pmatrix}$, cette évolution s'écrit sous forme matricielle $U_{n+1}=AU_n+C$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% A = Matrix([[Rational(1,4), Rational(1,4)], [Rational(1,4), Rational(1,2)]])
+% C = Matrix([[1],[3]])
+% U0 = Matrix([[0],[0]])
+% U1 = A*U0 + C
+% assert U1 == Matrix([[1],[3]])
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Suite Un+1 = A Un + C
+% ============================================================
+
+\propriete[Résolution d'une suite $U_{n+1}=AU_n+C$]{
+Soit $(U_n)$ une suite de matrices colonnes vérifiant $U_{n+1}=AU_n+C$, où $A$ est une matrice carrée telle que $I-A$ est inversible. Il existe une unique matrice colonne $X$, appelée \textbf{point fixe}, vérifiant $X=AX+C$, donnée par $X=(I-A)^{-1}C$. La suite $(V_n)$ définie par $V_n=U_n-X$ vérifie alors $V_{n+1}=AV_n$, donc $V_n=A^nV_0$, d'où
+$$U_n=A^n(U_0-X)+X$$
+}
+
+\exemple{
+Avec $A=\begin{pmatrix}\tfrac{1}{4}&\tfrac{1}{4}\\\tfrac{1}{4}&\tfrac{1}{2}\end{pmatrix}$ et $C=\begin{pmatrix}1\\3\end{pmatrix}$ de l'exemple précédent, le point fixe $X$ vérifie $(I-A)X=C$ ; on trouve $X=\begin{pmatrix}4\\8\end{pmatrix}$. Ainsi, en partant de $U_0=\begin{pmatrix}0\\0\end{pmatrix}$, on a pour tout $n$ : $U_n=A^n\begin{pmatrix}-4\\-8\end{pmatrix}+\begin{pmatrix}4\\8\end{pmatrix}$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye
+% A = Matrix([[Rational(1,4), Rational(1,4)], [Rational(1,4), Rational(1,2)]])
+% C = Matrix([[1],[3]])
+% I = eye(2)
+% X = (I - A).solve(C)
+% assert X == Matrix([[4],[8]])
+% U0 = Matrix([[0],[0]])
+% Un = U0
+% for n in range(1, 5):
+%     Un = A*Un + C
+%     Un_formule = (A**n)*(U0 - X) + X
+%     assert Un_formule == Un
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier le second membre $C$ dans le raisonnement par point fixe.} La méthode $U_n=A^n(U_0-X)+X$ ne fonctionne \textbf{que} pour une relation $U_{n+1}=AU_n+C$ avec $C$ \textbf{constant} (indépendant de $n$). Si le second membre dépend de $n$, cette méthode ne s'applique pas directement.
+}

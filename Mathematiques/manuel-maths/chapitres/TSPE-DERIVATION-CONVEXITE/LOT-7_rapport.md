@@ -106,3 +106,6 @@ Couverture : 100 % des capacités sur tous les parcours et supports.
 ### Coût API estimé : ~0 $
 
 ## Tag : `chap/TSPE-DERIVATION-CONVEXITE-v1`
+
+## Audit 2026-08-05 (branche terminale/collection-v1) — LOT 7
+make chapter : succes, 27 pages, PDF valide. Chapitre TSPE-DERIVATION-CONVEXITE : COMPLET.

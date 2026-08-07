@@ -57,3 +57,7 @@ Toutes les corrections sont des recalculs de la valeur vraie (règle VERIFY), ja
 - `simplify(a) == b` remplacé par `simplify(a - b) == 0` (EX-016, EX-024, EX-025, EX-026)
 
 ## Coût API estimé : ~0 $
+
+## Audit 2026-08-05 (branche terminale/collection-v1) — LOT 4
+52 exercices + corriges + coups de pouce. SymPy 0 FAIL. R3 non automatisable
+(pas de DB), mode ex-nihilo deja accepte.

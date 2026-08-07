@@ -1,0 +1,69 @@
+% META: {"id": "TCOMPL-INEG-CR-011", "chapitre": "TCOMPL-INEGALITES", "type_objet": "cours", "capacites_codes": ["C3", "C4", "C5"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{L'indice de Gini}
+
+% ============================================================
+% STRATE 1 — Definition et calcul par integrale
+% ============================================================
+
+\definition[1]{
+L'\textbf{indice de Gini} $G$ mesure le degré d'inégalité d'une répartition modélisée par une courbe de Lorenz $L$. Il est défini comme le double de l'aire comprise entre la première bissectrice $y=x$ et la courbe de $L$ sur $[0,1]$ :
+\[
+  G = 2\int_0^1 \big(x - L(x)\big)\,\mathrm{d}x.
+\]
+}
+
+\propriete[Formule équivalente]{
+Comme l'aire sous la bissectrice sur $[0,1]$ vaut $\dfrac{1}{2}$ (aire d'un triangle) :
+\[
+  G = 1 - 2\int_0^1 L(x)\,\mathrm{d}x.
+\]
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% L = x**2
+% G_definition = 2 * integrate(x - L, (x, 0, 1))
+% G_formule = 1 - 2 * integrate(L, (x, 0, 1))
+% assert G_definition == G_formule
+% assert G_definition == Rational(1, 3)
+% END-VERIFY
+
+\exemple{
+Pour le modèle $L(x)=x^2$ vu précédemment : $\displaystyle\int_0^1 x^2\,\mathrm{d}x = \dfrac{1}{3}$, donc $G = 1-2\times\dfrac{1}{3} = \dfrac{1}{3} \approx 0{,}33$.
+}
+
+\propriete[Interprétation]{
+$G$ est compris entre $0$ et $1$ :
+\begin{itemize}
+  \item $G=0$ correspond à l'\textbf{égalité parfaite} ($L(x)=x$, aucune aire entre les deux courbes) ;
+  \item plus $G$ est proche de $1$, plus la répartition est \textbf{inégalitaire} (courbe de Lorenz très éloignée de la bissectrice).
+\end{itemize}
+}
+
+% ============================================================
+% STRATE 2 — Convexite et comparaison de deux repartitions
+% ============================================================
+
+\exemple{
+Comparons deux modèles : $L_1(x)=x^2$ et $L_2(x)=x^3$, tous deux convexes ($L_1''(x)=2>0$, $L_2''(x)=6x\geq0$ sur $[0,1]$). On calcule $G_1=\dfrac{1}{3}$ (vu ci-dessus) et $G_2 = 1-2\displaystyle\int_0^1 x^3\,\mathrm{d}x = 1-2\times\dfrac{1}{4}=\dfrac{1}{2}$. Comme $G_2 > G_1$, la répartition modélisée par $L_2$ est \textbf{plus inégalitaire} que celle modélisée par $L_1$.
+}
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, diff, Rational
+% x = symbols('x')
+% L1 = x**2
+% L2 = x**3
+% assert diff(L1, x, 2) == 2
+% assert diff(L2, x, 2) == 6*x
+% G1 = 1 - 2*integrate(L1, (x, 0, 1))
+% G2 = 1 - 2*integrate(L2, (x, 0, 1))
+% assert G1 == Rational(1, 3)
+% assert G2 == Rational(1, 2)
+% assert G2 > G1
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier le facteur $2$ dans la définition de $G$.} L'aire entre la bissectrice et la courbe de Lorenz seule (sans le facteur $2$) est comprise entre $0$ et $\dfrac{1}{2}$ (l'aire maximale possible sous le triangle) : le facteur $2$ normalise l'indice pour qu'il soit compris entre $0$ et $1$, ce qui facilite son interprétation et sa comparaison entre pays.
+}

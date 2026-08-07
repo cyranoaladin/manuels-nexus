@@ -1,0 +1,15 @@
+% META: {"id": "TEXP-GRA-CO-002", "chapitre": "TEXP-GRAPHES", "type_objet": "corrige", "exercice_ref": "TEXP-GRA-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% n = 6
+% nb_matchs = n * (n - 1) // 2
+% assert nb_matchs == 15
+% END-VERIFY
+\begin{corrige}{TEXP-GRA-EX-002}
+\textbf{1.} On modélise chaque \textbf{équipe} par un sommet, et chaque \textbf{match} par une arête reliant les deux équipes qui s'affrontent.
+
+\textbf{2.} Il y a $6$ équipes, donc le graphe est d'\textbf{ordre 6}.
+
+\textbf{3.} Comme chaque équipe affronte toutes les autres exactement une fois, tous les sommets sont reliés deux à deux : c'est un \textbf{graphe complet}.
+
+\textbf{4.} Le nombre d'arêtes d'un graphe complet d'ordre $6$ est $\dfrac{6\times5}{2}=15$. Il y a donc \textbf{15 matchs} au total.
+\end{corrige}

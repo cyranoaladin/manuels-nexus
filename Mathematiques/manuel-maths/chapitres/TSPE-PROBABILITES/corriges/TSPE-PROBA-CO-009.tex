@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-PROBA-CO-009", "chapitre": "TSPE-PROBABILITES", "type_objet": "corrige", "exercice_ref": "TSPE-PROBA-EX-009", "capacites_codes": ["C10"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational
+% n_min = 1 / (4 * Rational(5,100)**2 * Rational(1,10))
+% assert n_min == 1000
+% END-VERIFY
+\begin{corrige}{TSPE-PROBA-EX-009}
+
+\textbf{Q1.} $V(M_n) = \dfrac{p(1-p)}{n} \leq \dfrac{1}{4n}$ pour tout $p \in [0,1]$ (car $p(1-p)\leq 1/4$).
+
+\textbf{Q2.} Par l'inegalite de Bienayme-Tchebychev : $P(|M_n-p|\geq\delta) \leq \dfrac{V(M_n)}{\delta^2} \leq \dfrac{1}{4n\delta^2}$. Il suffit donc que $\dfrac{1}{4n\delta^2} \leq \alpha$, soit $n \geq \dfrac{1}{4\delta^2\alpha}$.
+
+\textbf{Q3.} $n \geq \dfrac{1}{4\times(0{,}05)^2\times0{,}1} = \dfrac{1}{0{,}001} = 1000$.
+
+Un echantillon de taille $\boxed{n=1000}$ suffit.
+
+\end{corrige}

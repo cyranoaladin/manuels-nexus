@@ -1,0 +1,41 @@
+% META: {"id": "TSPE-INTEG-CR-016", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "cours", "capacites_codes": ["C6"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Interprétation de l'intégrale dans un contexte concret}
+
+% ============================================================
+% STRATE 1 — Exemple d'interpretation physique
+% ============================================================
+
+\exemple{
+La vitesse d'un mobile (en m/s) est donnee par $v(t) = 3t^2+2t$ pour $t \in [0,4]$ (temps en secondes).
+
+\textbf{1. Interpretation de l'integrale.} La distance parcourue entre les instants $t=1$ et $t=3$ est $\displaystyle\int_1^3 v(t)\,\mathrm{d}t$ (l'integrale de la vitesse donne la distance, primitive de la vitesse = position).
+
+\[
+  \int_1^3 (3t^2+2t)\,\mathrm{d}t = \big[t^3+t^2\big]_1^3 = (27+9)-(1+1) = 34 \text{ metres}.
+\]
+
+\textbf{2. Vitesse moyenne.} La vitesse moyenne sur $[1,3]$ est $\mu = \dfrac{1}{3-1}\displaystyle\int_1^3 v(t)\,\mathrm{d}t = \dfrac{34}{2} = 17$ m/s.
+
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% t = symbols('t')
+% v = 3*t**2 + 2*t
+% D = integrate(v, (t, 1, 3))
+% assert D == 34
+% mu = D / 2
+% assert mu == 17
+% END-VERIFY
+}
+
+\margeAppui{
+Selon le contexte, l'integrale d'une grandeur "par unite de temps (ou d'espace)" donne la grandeur cumulee : integrale d'un debit = volume ; integrale d'une puissance = energie ; integrale d'une densite = masse, etc.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Confondre valeur moyenne et integrale.} La valeur moyenne est l'integrale \emph{divisee par la longueur de l'intervalle} $(b-a)$. Oublier cette division est une erreur frequente.
+}

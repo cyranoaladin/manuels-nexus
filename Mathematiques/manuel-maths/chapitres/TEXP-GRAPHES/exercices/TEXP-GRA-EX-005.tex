@@ -1,0 +1,32 @@
+% META: {"id": "TEXP-GRA-EX-005", "chapitre": "TEXP-GRAPHES", "type_objet": "exercice", "capacites": ["TEXP-GRA-C5"], "capacites_codes": ["C5"], "methodes": [], "parcours": 3, "competences": ["raisonner", "calculer"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-GRAPHES/exercices/TEXP-GRA-EX-005.tex", "corrige_tex": "chapitres/TEXP-GRAPHES/corriges/TEXP-GRA-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix
+% M = Matrix([
+%     [0,1,1,0],
+%     [1,0,1,0],
+%     [1,1,0,1],
+%     [0,0,1,0],
+% ])
+% M2 = M**2
+% M3 = M**3
+% # D (indice 3) n'a qu'un seul voisin : C (indice 2)
+% voisins_D = [k for k in range(4) if M[k,3] == 1]
+% assert voisins_D == [2]
+% somme_recurrence = sum(M2[0, k] * M[k, 3] for k in range(4))
+% assert somme_recurrence == M3[0, 3]
+% assert somme_recurrence == M2[0, 2] * M[2, 3]
+% assert M2[0,2] == 1
+% END-VERIFY
+\begin{exercice}{TEXP-GRA-EX-005}{3}{18}
+On reprend le graphe $H$ (sommets $A,B,C,D$) et ses matrices $M$, $M^2$, $M^3$ de l'exercice précédent.
+
+On rappelle la relation de récurrence démontrée en cours : pour tous sommets $i,j$,
+$$(M^{n+1})_{ij}=\sum_{k}(M^n)_{ik}\times m_{kj}$$
+où la somme porte en réalité uniquement sur les sommets $k$ adjacents à $j$.
+\begin{enumerate}
+  \item Quel est l'unique voisin du sommet $D$ dans $H$ ?
+  \item En déduire que $(M^3)_{A,D}=(M^2)_{A,C}$, sans recalculer entièrement le produit $M^2\times M$.
+  \item Sachant que $(M^2)_{A,C}=1$, retrouver la valeur de $(M^3)_{A,D}$ trouvée à l'exercice précédent.
+  \item Expliquer, avec les mots du cours (décomposition d'une chaîne), pourquoi ce raisonnement est valable.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,40 @@
+% META: {"id": "TEXP-MAT-EV-B-corrige", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-MAT-EV-B", "capacites_codes": ["C1", "C4", "C5", "C6", "C7"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye, symbols, solve
+% A = Matrix([[2,1],[3,2]])
+% B = Matrix([[1,0],[1,2]])
+% assert A+B == Matrix([[3,1],[4,4]])
+% assert A*B == Matrix([[3,2],[5,4]])
+% assert A.det() == 1
+% assert A.inv() == Matrix([[2,-1],[-3,2]])
+% assert A**2 == Matrix([[7,4],[12,7]])
+% PB = Matrix([[Rational(8,10), Rational(2,10)], [Rational(5,10), Rational(5,10)]])
+% pi0 = Matrix([[1,0]])
+% pi2 = pi0*PB**2
+% assert pi2 == Matrix([[Rational(37,50), Rational(13,50)]])
+% a, b = symbols('a b', positive=True)
+% pi = Matrix([[a, b]])
+% eq = pi*PB - pi
+% sol = solve([eq[0], eq[1], a + b - 1], [a, b])
+% assert sol[a] == Rational(5,7)
+% assert sol[b] == Rational(2,7)
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EV-B-EX1}
+\textbf{1.} $A+B=\begin{pmatrix}3&1\\4&4\end{pmatrix}$ et $AB=\begin{pmatrix}3&2\\5&4\end{pmatrix}$.
+
+\textbf{2.} $\det(A)=2\times2-1\times3=1\neq0$ : $A$ est inversible.
+
+\textbf{3.} $A^{-1}=\dfrac{1}{1}\begin{pmatrix}2&-1\\-3&2\end{pmatrix}=\begin{pmatrix}2&-1\\-3&2\end{pmatrix}$.
+
+\textbf{4.} $A^2=\begin{pmatrix}7&4\\12&7\end{pmatrix}$.
+\end{corrige}
+
+\begin{corrige}{TEXP-MAT-EV-B-EX2}
+\textbf{1.} $P=\begin{pmatrix}0{,}8&0{,}2\\0{,}5&0{,}5\end{pmatrix}$ et $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$ (le joueur est connecté au jour $0$).
+
+\textbf{2.} $\pi_2=\pi_0P^2=\begin{pmatrix}\tfrac{37}{50}&\tfrac{13}{50}\end{pmatrix}=\begin{pmatrix}0{,}74&0{,}26\end{pmatrix}$. La probabilité que le joueur soit connecté au jour $2$ est $0{,}74$.
+
+\textbf{3.} Par définition de la chaîne, $\pi_{k+1}=\pi_kP$ pour tout $k$. Une récurrence immédiate donne alors $\pi_n=\pi_0P^n$ : vrai au rang $0$ ($\pi_0P^0=\pi_0$), et si vrai au rang $n$, $\pi_{n+1}=\pi_nP=(\pi_0P^n)P=\pi_0P^{n+1}$, donc vrai au rang $n+1$.
+
+\textbf{4.} On résout $\pi P=\pi$ avec $\pi=\begin{pmatrix}a&b\end{pmatrix}$, $a+b=1$ : $0{,}8a+0{,}5b=a\iff0{,}2a=0{,}5b\iff a=\tfrac{5}{2}b$ ; avec $a+b=1$ : $\tfrac{7}{2}b=1$, donc $b=\dfrac{2}{7}$, $a=\dfrac{5}{7}$. La distribution invariante est $\begin{pmatrix}\tfrac{5}{7}&\tfrac{2}{7}\end{pmatrix}$ : sur le long terme, le joueur est connecté environ $\tfrac{5}{7}\approx71\,\%$ du temps.
+\end{corrige}

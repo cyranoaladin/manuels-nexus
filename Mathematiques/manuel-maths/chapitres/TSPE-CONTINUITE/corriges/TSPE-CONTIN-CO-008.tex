@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-CONTIN-CO-008", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-008", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, sqrt, Rational
+% x = symbols('x')
+% sols = solve(x**2 + x - 1, x)
+% golden = (-1 + sqrt(5))/2
+% assert golden in sols
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-008}
+
+\textbf{Q1.} Initialisation : $u_0 = 1 \in [0,1]$.
+
+Heredite : supposons $u_n \in [0,1]$. Alors $1 + u_n \in [1,2]$, donc $u_{n+1} = \dfrac{1}{1+u_n} \in \left[\dfrac{1}{2}, 1\right] \subset [0,1]$.
+
+Par recurrence, $u_n \in [0,1]$ pour tout $n$.
+
+\textbf{Q2.} La fonction $f(x) = \dfrac{1}{1+x}$ est continue sur $[0,1]$ (quotient de fonctions continues dont le denominateur ne s'annule pas). Les deux suites extraites convergent vers $\ell$, et $u_{n+1} = f(u_n)$ pour tout $n$ ; par continuite de $f$ en $\ell$, en passant a la limite dans cette relation on obtient $\ell = f(\ell) = \dfrac{1}{1+\ell}$.
+
+\textbf{Q3.} Comme $\ell \in [0,1]$, on a $1+\ell \neq 0$ et on peut multiplier : $\ell(1+\ell) = 1$, soit $\ell^2 + \ell - 1 = 0$.
+
+Discriminant : $\Delta = 1 + 4 = 5$. Les racines sont $\dfrac{-1-\sqrt{5}}{2}$ et $\dfrac{-1+\sqrt{5}}{2}$. Comme $\ell \in [0,1]$ (donc $\ell \geq 0$), seule la seconde convient :
+\[
+\boxed{\ell = \frac{-1+\sqrt{5}}{2}} \approx 0{,}618.
+\]
+
+\textbf{Q4.} $(u_{2n})$ et $(u_{2n+1})$ convergent vers la meme limite $\ell$ : tout entier $n$ est soit pair, soit impair, donc pour tout $\varepsilon > 0$, a partir d'un certain rang (le plus grand des deux rangs associes aux deux suites extraites), $|u_n - \ell| \leq \varepsilon$. Ainsi $(u_n)$ converge vers $\ell$.
+
+\end{corrige}

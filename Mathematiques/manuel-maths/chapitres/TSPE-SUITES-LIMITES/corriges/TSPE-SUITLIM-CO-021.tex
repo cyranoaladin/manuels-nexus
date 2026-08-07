@@ -3,9 +3,22 @@
 % from sympy import *
 % n = symbols('n', integer=True, nonnegative=True)
 % a = Rational(102, 100)
-% u_expr = -600000 + 800000*a**n
+% u_expr = 600000 - 400000*a**n
 % assert u_expr.subs(n, 0) == 200000
-% assert limit(u_expr, n, oo) == oo
+% assert u_expr.subs(n, 1) == 192000  # u_1 = 1.02*u_0 - 12000
+% assert limit(u_expr, n, oo) == -oo
+% assert u_expr.subs(n, 20) > 0
+% assert u_expr.subs(n, 21) < 0
+% # Question 5 : R quelconque, ell = R/0.02, u_n = ell + (u0-ell)*a^n
+% R, ell = symbols('R ell', positive=True)
+% u0 = 200000
+% ell_expr = R / Rational(2, 100)
+% # R = 4000 : ell = u0, suite constante
+% assert ell_expr.subs(R, 4000) == u0
+% # R < 4000 : ell < u0 => u0 - ell > 0 => u_n -> +oo
+% assert ell_expr.subs(R, 3000) < u0
+% # R > 4000 : ell > u0 => u0 - ell < 0 => u_n -> -oo
+% assert ell_expr.subs(R, 5000) > u0
 % END-VERIFY
 \begin{corrige}{TSPE-SUITLIM-EX-021}
 
@@ -15,14 +28,26 @@
 
 $v_n = u_n - 600\,000$ geometrique de raison $1{,}02$, $v_0 = -400\,000$.
 
-\textbf{Question 3.} $u_n = 600\,000 - 400\,000 \times 1{,}02^n$.
-
-Attendons : $v_n = -400\,000 \times 1{,}02^n$, donc $u_n = 600\,000 - 400\,000 \times 1{,}02^n$.
-
+\textbf{Question 3.} $(v_n)$ est geometrique de raison $1{,}02$ et de premier terme $v_0 = -400\,000$, donc $v_n = -400\,000 \times 1{,}02^n$. Comme $u_n = v_n + 600\,000$ :
+\[
+u_n = 600\,000 - 400\,000 \times 1{,}02^n.
+\]
 Verification : $u_0 = 600\,000 - 400\,000 = 200\,000$. Correct.
 
-\textbf{Question 4.} $u_{n+1} - u_n = 0{,}02\,u_n - 12\,000 < 0$ tant que $u_n < 600\,000$. Or $u_n = 600\,000 - 400\,000 \times 1{,}02^n$; $u_n < 600\,000$ toujours (car $400\,000 \times 1{,}02^n > 0$). Donc $(u_n)$ decroissante. Mais $1{,}02^n \to +\infty$, donc $u_n \to -\infty$ : l'emprunt n'est jamais rembourse (la dette croitra a terme).
+\textbf{Question 4.} $u_{n+1} - u_n = 0{,}02\,u_n - 12\,000$. Or $u_n < 600\,000$ pour tout $n$ (car $400\,000 \times 1{,}02^n > 0$), donc $0{,}02\,u_n < 12\,000$, soit $u_{n+1} - u_n < 0$ : la suite $(u_n)$ est decroissante.
 
-\textbf{Question 5.} Pour remboursement : $\ell \leq 0$, soit $b/(1-a) \leq 0$, $\dfrac{-R}{-0{,}02} \leq 0$, $R \geq 0$. Il faut $u_n \to -\infty$, i.e., la suite atteint $0$. Remboursement minimal : $R > 0{,}02 \times 200\,000 = 4\,000$ (les interets de la premiere annee). Plus precisement, $R > 0{,}02\ell = 0{,}02 \times R/0{,}02 = R$, ce qui est circulaire. Condition : $R > 0{,}02 \times u_0 = 4\,000$ au minimum, mais pour rembourser il faut $R > \ell \times 0{,}02$... En fait il suffit que $a = 1{,}02$ et $\ell = R/0{,}02$. Pour que $u_n$ decroisse vers $-\infty$ (dette payee), il faut $\ell > u_0$, soit $R/0{,}02 > 200\,000$, $R > 4\,000$. Or ici $R = 12\,000 > 4\,000$ mais $\ell = 600\,000 > u_0$ donc la suite decroit... Contradiction avec le resultat precedent. Revoyons : $u_n = 600\,000 - 400\,000 \times 1{,}02^n \to -\infty$ car $1{,}02^n \to +\infty$. Donc $u_n$ finit par devenir negatif : l'emprunt est rembourse. Le rang $n_0$ ou $u_{n_0} \leq 0$ est solution de $1{,}02^n \geq 3/2$, soit $n \geq \ln(1{,}5)/\ln(1{,}02) \approx 20{,}5$, donc $\boxed{n_0 = 21}$.
+Comme $1{,}02 > 1$, $1{,}02^n \to +\infty$, donc $u_n = 600\,000 - 400\,000 \times 1{,}02^n \to -\infty$. La suite decroissante et non minoree finit donc par devenir negative ou nulle : l'emprunt \textbf{est rembourse} (le capital restant du atteint $0$ en temps fini).
+
+Rang de remboursement : $u_n \leq 0 \iff 400\,000 \times 1{,}02^n \geq 600\,000 \iff 1{,}02^n \geq 1{,}5 \iff n \geq \dfrac{\ln(1{,}5)}{\ln(1{,}02)} \approx 20{,}5$. Le capital restant du s'annule donc au rang $\boxed{n_0 = 21}$.
+
+\textbf{Question 5.} Pour un remboursement annuel $R$ quelconque, le point fixe devient $\ell = \dfrac{R}{0{,}02}$ et $u_n = \ell + (200\,000 - \ell) \times 1{,}02^n$.
+
+\begin{itemize}
+  \item Si $R < 4\,000$ (le montant des interets de la premiere annee) : $\ell < 200\,000 = u_0$, donc $u_0 - \ell > 0$ et $u_n \to +\infty$ : la dette croit indefiniment, l'emprunt n'est jamais rembourse.
+  \item Si $R = 4\,000$ : $\ell = u_0$, donc $u_n = u_0 = 200\,000$ pour tout $n$ : le capital restant du est constant, l'emprunt n'est jamais rembourse.
+  \item Si $R > 4\,000$ : $\ell > u_0$, donc $u_0 - \ell < 0$ et $u_n \to -\infty$ (comme en question 4) : l'emprunt est rembourse en temps fini.
+\end{itemize}
+
+Il faut donc $R > 4\,000$ euros. (Il n'y a pas de minimum atteint : pour $R$ arbitrairement proche de $4\,000$ euros par valeurs superieures, l'emprunt finit toujours par etre rembourse, mais en un temps qui tend vers $+\infty$.)
 
 \end{corrige}

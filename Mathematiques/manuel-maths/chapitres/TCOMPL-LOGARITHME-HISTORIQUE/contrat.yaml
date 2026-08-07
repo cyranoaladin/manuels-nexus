@@ -1,0 +1,25 @@
+chapitre: TCOMPL-LOGARITHME-HISTORIQUE
+niveau: TCOMPL
+theme: LOGARITHME-HISTORIQUE
+titre: "Approche historique de la fonction logarithme"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TCOMPL-LOG-C1, libelle_eleve: "Je sais présenter la fonction logarithme népérien comme réciproque de l'exponentielle : limites, représentation graphique, équation fonctionnelle, dérivée." }
+  - { code: C2, ref_capacite: TCOMPL-LOG-C2, libelle_eleve: "Je sais utiliser l'équation fonctionnelle du logarithme pour transformer une écriture ou résoudre une équation/inéquation." }
+  - { code: C3, ref_capacite: TCOMPL-LOG-C3, libelle_eleve: "Je sais utiliser $\\ln(q^n) = n \\ln(q)$ pour déterminer un seuil (par exemple dans une suite géométrique)." }
+  - { code: C4, ref_capacite: TCOMPL-LOG-C4, libelle_eleve: "Je sais démontrer les relations ln(ab) = ln(a) + ln(b) et ln(1/a) = -ln(a) à partir de l'équation fonctionnelle." }
+  - { code: C5, ref_capacite: TCOMPL-LOG-C5, libelle_eleve: "Je sais démontrer que la dérivée de ln est x ↦ 1/x, en admettant la dérivabilité." }
+
+prerequis:
+  - { code: R1, libelle: "Fonction exponentielle : définition, propriétés, dérivée", chapitre_origine: "1SPE-EXPONENTIELLE" }
+  - { code: R2, libelle: "Suites arithmétiques et géométriques", chapitre_origine: "1SPE-SUITES" }
+
+situation_accroche: >
+  Au début du XVIIe siècle, les astronomes devaient multiplier entre eux des nombres à de
+  nombreux chiffres, un calcul long et source d'erreurs. John Napier (Neper) eut l'idée de
+  construire une table permettant de remplacer une multiplication par une addition. Ce
+  chapitre retrace cette idée fondatrice et introduit la fonction logarithme népérien qui en
+  est l'aboutissement moderne.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 6 }

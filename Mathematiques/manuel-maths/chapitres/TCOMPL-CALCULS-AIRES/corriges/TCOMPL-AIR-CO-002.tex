@@ -1,0 +1,18 @@
+% META: {"id": "TCOMPL-AIR-CO-002", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "corrige", "exercice_ref": "TCOMPL-AIR-EX-002", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, Rational
+% x = symbols('x')
+% f = 3*x**2 - 2*x + 1
+% I = integrate(f, (x, 0, 2))
+% assert I == 6
+% moyenne = I / (2 - 0)
+% assert moyenne == 3
+% END-VERIFY
+\begin{corrige}{TCOMPL-AIR-EX-002}
+\textbf{1.} Une primitive de $f$ est $F(x) = x^3-x^2+x$. Donc :
+\[
+  \int_0^2 f(x)\,\mathrm{d}x = F(2)-F(0) = (8-4+2) - 0 = 6.
+\]
+
+\textbf{2.} La valeur moyenne est $m = \dfrac{1}{2-0}\times6 = 3$.
+\end{corrige}

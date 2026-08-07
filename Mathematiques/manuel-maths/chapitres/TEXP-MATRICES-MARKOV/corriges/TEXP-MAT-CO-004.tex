@@ -1,0 +1,14 @@
+% META: {"id": "TEXP-MAT-CO-004", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "corrige", "exercice_ref": "TEXP-MAT-EX-004", "capacites_codes": ["C4"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational
+% P = Matrix([[Rational(9,10), Rational(1,10)], [Rational(3,10), Rational(7,10)]])
+% assert sum(P.row(0)) == 1
+% assert sum(P.row(1)) == 1
+% END-VERIFY
+\begin{corrige}{TEXP-MAT-EX-004}
+\textbf{1.} Le graphe comporte deux sommets A et N, avec une boucle sur A pondérée $0{,}9$, une boucle sur N pondérée $0{,}7$, une arête de A vers N pondérée $0{,}1$, et une arête de N vers A pondérée $0{,}3$.
+
+\textbf{2.} $P=\begin{pmatrix}0{,}9&0{,}1\\0{,}3&0{,}7\end{pmatrix}$. Ligne 1 : $0{,}9+0{,}1=1$. Ligne 2 : $0{,}3+0{,}7=1$. Les deux lignes somment bien à $1$.
+
+\textbf{3.} Le client vient de s'abonner : il est dans l'état A au mois $0$. La distribution initiale est $\pi_0=\begin{pmatrix}1&0\end{pmatrix}$.
+\end{corrige}

@@ -1,0 +1,14 @@
+% META: {"id": "TNSI-ARCH-EX-004", "chapitre": "TNSI-ARCHITECTURES-MATERIELLES-SY", "type_objet": "exercice", "capacites": ["T-ARCH-04A"], "capacites_codes": ["C04A"], "methodes": [], "parcours": 1, "competences": ["programmer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/exercices/TNSI-ARCH-EX-004.tex", "corrige_tex": "chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def chiffrer_xor(message, cle):
+%     return bytes(o ^ cle[i % len(cle)] for i, o in enumerate(message))
+% message = b"BAC2027"
+% cle = b"NSI"
+% chiffre = chiffrer_xor(message, cle)
+% dechiffre = chiffrer_xor(chiffre, cle)
+% assert dechiffre == message
+% assert chiffre != message
+% END-VERIFY
+\begin{exercice}{TNSI-ARCH-EX-004}{1}{15}
+En utilisant \lstinline{chiffrer_xor} du cours, chiffrer le message \texttt{b"BAC2027"} avec la clé \texttt{b"NSI"}, puis vérifier qu'appliquer la même fonction une seconde fois sur le résultat, avec la même clé, redonne le message d'origine. Pourquoi ce chiffrement est-il qualifié de \textbf{symétrique} ?
+\end{exercice}

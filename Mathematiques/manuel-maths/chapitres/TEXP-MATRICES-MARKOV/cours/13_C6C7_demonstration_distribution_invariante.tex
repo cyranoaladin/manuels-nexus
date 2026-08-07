@@ -1,0 +1,75 @@
+% META: {"id": "TEXP-MAT-CR-013", "chapitre": "TEXP-MATRICES-MARKOV", "type_objet": "cours", "capacites_codes": ["C6", "C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Démonstration et distributions invariantes}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible (C6)
+% ============================================================
+
+\demonstration{
+\textbf{Propriété à démontrer.} Soit $P$ la matrice de transition d'une chaîne de Markov, $\pi_0$ sa distribution initiale, et $(\pi_n)$ la suite des distributions successives, définie par la relation $\pi_{n+1}=\pi_nP$ (la probabilité de chaque état à l'étape $n+1$ s'obtient, par la formule des probabilités totales appliquée à la propriété de Markov, en combinant la distribution à l'étape $n$ et les probabilités de transition). Alors, pour tout entier $n\geqslant0$ :
+$$\pi_n=\pi_0P^n$$
+
+\textbf{Démonstration par récurrence sur $n$.}
+
+\textit{Initialisation ($n=0$).} $\pi_0P^0=\pi_0I=\pi_0$ (où $I$ est la matrice identité, et $P^0=I$ par convention). La propriété est donc vraie au rang $0$.
+
+\textit{Hérédité.} Supposons la propriété vraie au rang $n$, c'est-à-dire $\pi_n=\pi_0P^n$. Montrons qu'elle est vraie au rang $n+1$.
+
+Par définition de la suite $(\pi_n)$, $\pi_{n+1}=\pi_nP$. En remplaçant $\pi_n$ par $\pi_0P^n$ (hypothèse de récurrence) :
+$$\pi_{n+1}=\pi_nP=(\pi_0P^n)P=\pi_0(P^nP)=\pi_0P^{n+1}$$
+(la dernière égalité utilise l'associativité du produit matriciel et $P^nP=P^{n+1}$). La propriété est donc vraie au rang $n+1$.
+
+\textbf{Conclusion.} Par le principe de récurrence, pour tout entier $n\geqslant0$, $\pi_n=\pi_0P^n$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, eye
+% P = Matrix([[Rational(8,10), Rational(2,10)], [Rational(4,10), Rational(6,10)]])
+% pi0 = Matrix([[1,0]])
+% pi = pi0
+% for n in range(0, 5):
+%     assert pi == pi0 * P**n
+%     pi = pi * P
+% assert P**0 == eye(2)
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Distributions invariantes (C7)
+% ============================================================
+
+\definition[5]{
+Une distribution $\pi$ (matrice ligne à coefficients positifs de somme $1$) est \textbf{invariante} pour une chaîne de Markov de matrice de transition $P$ si $\pi P=\pi$ : si la distribution à une étape est $\pi$, elle reste $\pi$ à l'étape suivante (et donc à toutes les étapes suivantes).
+}
+
+\propriete[Recherche d'une distribution invariante]{
+Pour un système à $2$ états, une distribution invariante $\pi=\begin{pmatrix}a&b\end{pmatrix}$ (avec $a,b\geqslant0$) est solution du système obtenu en écrivant $\pi P=\pi$ coefficient par coefficient, complété par la condition $a+b=1$.
+}
+
+\exemple{
+Pour la chaîne météo précédente, $P=\begin{pmatrix}0{,}8&0{,}2\\0{,}4&0{,}6\end{pmatrix}$. On cherche $\pi=\begin{pmatrix}a&b\end{pmatrix}$ tel que $\pi P=\pi$, soit
+$$\begin{cases}0{,}8a+0{,}4b=a\\0{,}2a+0{,}6b=b\end{cases}\iff 0{,}2a=0{,}4b\iff a=2b$$
+Avec la condition $a+b=1$ : $2b+b=1$, donc $b=\dfrac{1}{3}$ et $a=\dfrac{2}{3}$. La distribution invariante est $\pi=\begin{pmatrix}\tfrac{2}{3}&\tfrac{1}{3}\end{pmatrix}$ : sur le long terme, il fait beau environ deux jours sur trois.
+}
+
+% BEGIN-VERIFY
+% from sympy import Matrix, Rational, symbols, solve, N
+% P = Matrix([[Rational(8,10), Rational(2,10)], [Rational(4,10), Rational(6,10)]])
+% a, b = symbols('a b', positive=True)
+% pi = Matrix([[a, b]])
+% eq = pi*P - pi
+% sol = solve([eq[0], eq[1], a + b - 1], [a, b])
+% assert sol[a] == Rational(2,3)
+% assert sol[b] == Rational(1,3)
+% pi_inv = Matrix([[Rational(2,3), Rational(1,3)]])
+% assert pi_inv * P == pi_inv
+% # verification numerique : pi0 P^n tend vers pi_inv quand n devient grand
+% pi0 = Matrix([[1,0]])
+% pi_grand_n = pi0 * P**30
+% for i in range(2):
+%     assert abs(N(pi_grand_n[0,i]) - N(pi_inv[0,i])) < 1e-6
+% END-VERIFY
+
+\erreurFrequente{
+\textbf{Oublier la condition $a+b=1$.} L'équation $\pi P=\pi$ seule admet une infinité de solutions (proportionnelles entre elles) : c'est la condition supplémentaire \og la somme des coefficients vaut $1$ \fg{} (car $\pi$ est une distribution de probabilité) qui fixe une unique solution.
+}

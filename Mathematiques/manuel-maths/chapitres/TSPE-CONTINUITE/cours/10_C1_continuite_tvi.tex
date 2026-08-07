@@ -1,0 +1,93 @@
+% META: {"id": "TSPE-CONTIN-CR-010", "chapitre": "TSPE-CONTINUITE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Continuité et théorème des valeurs intermédiaires}
+
+% ============================================================
+% STRATE 1 — Definitions et theoreme (admis)
+% ============================================================
+
+\definition[1]{
+Soit $f$ une fonction definie sur un intervalle $I$ et $a \in I$. On dit que $f$ est \textbf{continue en $a$} si $\displaystyle\lim_{x \to a} f(x) = f(a)$.
+
+$f$ est \textbf{continue sur $I$} si elle est continue en tout point de $I$.
+}
+
+\margeAppui{
+Intuitivement : la courbe de $f$ se trace sans lever le crayon sur $I$. Toute fonction derivable sur $I$ est continue sur $I$.
+}
+
+\propriete{
+Les fonctions polynomes, la fonction exponentielle, la fonction logarithme neperien, la fonction racine carree, ainsi que les sommes, produits, quotients (la ou le denominateur ne s'annule pas) et composees de fonctions continues sont continues sur leur ensemble de definition.
+}
+
+\theoreme[Valeurs intermédiaires (TVI), admis]{
+Soit $f$ une fonction continue sur un intervalle $[a, b]$. Pour tout reel $k$ compris entre $f(a)$ et $f(b)$, il existe (au moins) un reel $c \in [a, b]$ tel que $f(c) = k$.
+}
+
+\margeAppui{
+Ce theoreme est admis : sa demonstration rigoureuse repose sur la construction des nombres reels (propriete de la borne superieure), hors programme de terminale.
+}
+
+\propriete[Cas strictement monotone (corollaire du TVI)]{
+Si de plus $f$ est \textbf{strictement monotone} sur $[a, b]$, alors pour tout $k$ compris entre $f(a)$ et $f(b)$, le reel $c$ tel que $f(c) = k$ est \textbf{unique}.
+}
+
+\exemple{
+Soit $f(x) = x^3 + x - 1$ sur $[0, 1]$. $f$ est continue et strictement croissante sur $[0,1]$ (somme de fonctions strictement croissantes), $f(0) = -1 < 0$ et $f(1) = 1 > 0$. Comme $0$ est compris entre $f(0)$ et $f(1)$, le TVI (cas monotone) donne l'existence et l'unicite d'un reel $c \in [0, 1]$ tel que $f(c) = 0$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, diff, solve, nsolve
+% x = symbols('x')
+% f = x**3 + x - 1
+% assert f.subs(x, 0) == -1
+% assert f.subs(x, 1) == 1
+% fp = diff(f, x)
+% assert fp == 3*x**2 + 1
+% # f' > 0 toujours (somme de termes positifs) donc strictement croissante
+% c = nsolve(f, x, 0.7)
+% assert 0 < float(c) < 1
+% END-VERIFY
+}
+
+\subsection{Balayage par dichotomie}
+
+Pour encadrer la solution $c$ de $f(x) = k$ donnee par le TVI, on peut utiliser un \textbf{algorithme de dichotomie} : on partage successivement en deux l'intervalle contenant $c$, en gardant a chaque etape le sous-intervalle sur lequel $f$ change de signe (ou passe par $k$).
+
+\begin{python}
+def dichotomie(f, a, b, precision):
+    # f continue, f(a) et f(b) de signes opposes
+    while b - a > precision:
+        m = (a + b) / 2
+        if f(a) * f(m) <= 0:
+            b = m
+        else:
+            a = m
+    return (a + b) / 2
+\end{python}
+
+% BEGIN-VERIFY
+% def dichotomie(f, a, b, precision):
+%     while b - a > precision:
+%         m = (a + b) / 2
+%         if f(a) * f(m) <= 0:
+%             b = m
+%         else:
+%             a = m
+%     return (a + b) / 2
+% f = lambda x: x**3 + x - 1
+% c = dichotomie(f, 0, 1, 1e-6)
+% assert abs(f(c)) < 1e-3
+% assert 0.68 < c < 0.69
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Marge d'appui et erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de justifier la continuite avant d'appliquer le TVI.} Le TVI ne s'applique qu'aux fonctions continues sur l'intervalle considere : la continuite doit toujours etre justifiee (somme/produit/composee de fonctions continues usuelles), jamais admise sans argument.
+}
+
+\erreurFrequente{
+\textbf{Oublier la stricte monotonie pour conclure a l'unicite.} Le TVI seul donne l'existence d'une solution, pas son unicite. Il faut ajouter la stricte monotonie de $f$ sur l'intervalle pour obtenir l'unicite.
+}

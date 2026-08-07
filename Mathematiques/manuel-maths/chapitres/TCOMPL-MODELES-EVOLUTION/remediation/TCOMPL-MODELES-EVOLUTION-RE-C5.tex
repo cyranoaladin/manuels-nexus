@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-MODELES-EVOLUTION-RE-C5", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "remediation", "capacites_codes": ["C5"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C5 : ne pas oublier la solution particuliere
+%---------------------------------------------------------------
+
+\begin{exercice}{TCOMPL-ME-RE-C5-EX1}{1}{10}
+Un élève résout $y'=2y+6$ et écrit directement $y(x)=C\,\mathrm{e}^{2x}$ comme solution générale, en oubliant le second membre. Vérifier, en calculant $y'(x)$ pour cette proposition, que ce n'est \textbf{pas} une solution de $y'=2y+6$. Proposer la solution correcte.
+\end{exercice}
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff
+% x = symbols('x')
+% C = symbols('C')
+% y_faux = C*exp(2*x)
+% yp_faux = diff(y_faux, x)
+% # y_faux' = 2*C*exp(2x) = 2*y_faux, mais on veut 2*y_faux+6 : jamais egal sauf C tel que 6=0, absurde
+% assert (yp_faux - (2*y_faux + 6)).simplify() != 0
+% y_correct = C*exp(2*x) - 3
+% yp_correct = diff(y_correct, x)
+% assert (yp_correct - (2*y_correct + 6)).simplify() == 0
+% END-VERIFY
+
+\begin{corrige}{TCOMPL-ME-RE-C5-EX1}
+Pour $y(x)=C\mathrm{e}^{2x}$, on calcule $y'(x) = 2C\mathrm{e}^{2x} = 2y(x)$, donc $y'(x) - 2y(x) = 0 \neq 6$ : cette fonction vérifie $y'=2y$ (sans second membre), pas $y'=2y+6$. Elle n'est \textbf{pas} solution de l'équation demandée.
+
+La solution particulière constante vérifie $0=2y_p+6$, soit $y_p=-3$. La solution générale correcte est $y(x) = C\mathrm{e}^{2x} - 3$.
+\end{corrige}

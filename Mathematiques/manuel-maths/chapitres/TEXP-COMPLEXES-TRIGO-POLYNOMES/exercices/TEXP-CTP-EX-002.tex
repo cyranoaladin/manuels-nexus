@@ -1,0 +1,10 @@
+% META: {"id": "TEXP-CTP-EX-002", "chapitre": "TEXP-COMPLEXES-TRIGO-POLYNOMES", "type_objet": "exercice", "capacites": ["TEXP-CTP-C2"], "capacites_codes": ["C2"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/exercices/TEXP-CTP-EX-002.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-TRIGO-POLYNOMES/corriges/TEXP-CTP-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, sin, simplify, Rational
+% theta = symbols('theta', real=True)
+% cible = Rational(3,4)*sin(theta) - Rational(1,4)*sin(3*theta)
+% assert simplify(sin(theta)**3 - cible) == 0
+% END-VERIFY
+\begin{exercice}{TEXP-CTP-EX-002}{2}{20}
+En utilisant la formule d'Euler pour $\sin\theta$, linéariser $\sin^3\theta$ (l'écrire comme combinaison linéaire de $\sin(k\theta)$).
+\end{exercice}

@@ -1,0 +1,55 @@
+% META: {"id": "TSPE-PROBA-CR-015", "chapitre": "TSPE-PROBABILITES", "type_objet": "cours", "capacites_codes": ["C9"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Espérance et variance de la loi binomiale}
+
+% ============================================================
+% STRATE 1 — Demonstration exigible
+% ============================================================
+
+\theoreme{
+Si $X \sim \mathcal{B}(n,p)$, alors :
+\[
+  E(X) = np \qquad \text{et} \qquad V(X) = np(1-p).
+\]
+}
+
+\demonstration{
+On decompose $X = X_1+X_2+\cdots+X_n$, ou $X_i$ vaut $1$ si la $i$-eme epreuve est un succes, $0$ sinon. Chaque $X_i$ suit une loi de Bernoulli de parametre $p$, et les $X_i$ sont independantes (epreuves independantes du schema de Bernoulli).
+
+\textbf{Espérance.} Pour chaque $i$, $E(X_i) = 0\times(1-p) + 1\times p = p$.
+
+Par linearite de l'esperance (chapitre precedent, valable sans hypothese d'independance) :
+\[
+  E(X) = E(X_1)+E(X_2)+\cdots+E(X_n) = \underbrace{p+p+\cdots+p}_{n \text{ termes}} = np.
+\]
+
+\textbf{Variance.} Pour chaque $i$, $V(X_i) = p(1-p)$ (propriete etablie au chapitre precedent pour une loi de Bernoulli).
+
+Comme les $X_i$ sont \textbf{independantes}, on peut appliquer l'additivite de la variance :
+\[
+  V(X) = V(X_1)+V(X_2)+\cdots+V(X_n) = \underbrace{p(1-p)+\cdots+p(1-p)}_{n \text{ termes}} = np(1-p).
+\]
+}
+
+\margeAppui{
+Cette demonstration illustre l'interet de decomposer une variable complexe ($X$) en somme de variables simples ($X_i$, Bernoulli) : les proprietes de linearite et d'additivite se combinent alors pour obtenir directement le resultat.
+}
+
+\exemple{
+$X \sim \mathcal{B}(50,\,0{,}2)$. $E(X) = 50\times0{,}2 = 10$. $V(X) = 50\times0{,}2\times0{,}8 = 8$.
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% n, p = 50, Rational(2,10)
+% assert n*p == 10
+% assert n*p*(1-p) == 8
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier de justifier l'independance des $X_i$ pour la variance.} La formule $E(X)=np$ est toujours valable (linearite, sans condition), mais $V(X)=np(1-p)$ necessite explicitement l'independance des epreuves du schema de Bernoulli — a mentionner dans une redaction rigoureuse.
+}

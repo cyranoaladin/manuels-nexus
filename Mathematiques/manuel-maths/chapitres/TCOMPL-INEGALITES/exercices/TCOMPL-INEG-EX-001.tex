@@ -1,0 +1,17 @@
+% META: {"id": "TCOMPL-INEG-EX-001", "chapitre": "TCOMPL-INEGALITES", "type_objet": "exercice", "capacites": ["TCOMPL-INEG-C4"], "capacites_codes": ["C4"], "methodes": [], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TCOMPL-INEGALITES/exercices/TCOMPL-INEG-EX-001.tex", "corrige_tex": "chapitres/TCOMPL-INEGALITES/corriges/TCOMPL-INEG-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational
+% x = symbols('x')
+% L = (2*x**2 + x) / 3
+% assert L.subs(x, 0) == 0
+% assert L.subs(x, 1) == 1
+% Lpp = diff(L, x, 2)
+% assert Lpp == Rational(4, 3)
+% END-VERIFY
+\begin{exercice}{TCOMPL-INEG-EX-001}{1}{10}
+On modélise une courbe de Lorenz par $L(x) = \dfrac{2x^2+x}{3}$ sur $[0,1]$.
+\begin{enumerate}
+  \item Vérifier que $L(0)=0$ et $L(1)=1$.
+  \item Calculer $L''(x)$ et en déduire que $L$ est bien convexe sur $[0,1]$.
+\end{enumerate}
+\end{exercice}

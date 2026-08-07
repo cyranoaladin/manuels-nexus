@@ -1,0 +1,43 @@
+% META: {"id": "TCOMPL-AIR-EV-B", "chapitre": "TCOMPL-CALCULS-AIRES", "type_objet": "evaluation", "version": "B", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C2", "C3", "C6"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq, integrate, Rational
+% x = symbols('x')
+% f = -x**2 + 6*x
+% g = 2*x
+% inter = solve(Eq(f, g), x)
+% assert inter == [0, 4]
+% aire = integrate(f - g, (x, 0, 4))
+% assert aire == Rational(32, 3)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-AIR-EV-B}{50}
+
+\begin{exercice}{TCOMPL-AIR-EV-B-EX1}{2}{30}
+\textbf{Exercice 1} (12 points) --- \textit{Capacité C3}
+
+\medskip
+
+Soit $f(x) = -x^2+6x$ et $g(x)=2x$.
+\begin{enumerate}
+  \item (4 pts) Déterminer les abscisses des points d'intersection des courbes de $f$ et $g$.
+  \item (3 pts) Justifier que $f\geq g$ entre ces deux abscisses.
+  \item (5 pts) Calculer l'aire comprise entre les deux courbes.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-AIR-EV-B-EX2}{2}{20}
+\textbf{Exercice 2} (8 points) --- \textit{Capacités C2, C6}
+
+\medskip
+
+\begin{enumerate}
+  \item (4 pts) Énoncer le théorème donnant la dérivée de la fonction $F(x)=\displaystyle\int_a^x f(t)\,\mathrm{d}t$ pour $f$ continue, positive et croissante.
+  \item (4 pts) Pour $f(x)=\sqrt{x}$ sur $[0,4]$ et $n=4$ rectangles, écrire (sans calculer) l'encadrement de $\displaystyle\int_0^4 \sqrt{x}\,\mathrm{d}x$ par la méthode des rectangles.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

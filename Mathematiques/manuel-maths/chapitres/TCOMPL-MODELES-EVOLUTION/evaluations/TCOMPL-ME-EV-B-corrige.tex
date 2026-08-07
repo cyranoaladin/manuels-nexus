@@ -1,0 +1,34 @@
+% META: {"id": "TCOMPL-ME-EV-B-corrige", "chapitre": "TCOMPL-MODELES-EVOLUTION", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ME-EV-B", "capacites_codes": ["C3", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, exp, diff, Rational, limit, oo, solve, Eq
+% x = symbols('x')
+% assert solve(Eq(Rational(1,3)*x + 4, x), x) == [6]
+% u0 = 1
+% u1 = Rational(1,3)*u0 + 4
+% u2 = Rational(1,3)*u1 + 4
+% assert u1 == Rational(13, 3)
+% assert u2 == Rational(49, 9)
+%
+% t = symbols('t')
+% y = -80*exp(-Rational(1,3)*t) + 100
+% yp = diff(y, t)
+% assert (yp - (-Rational(1,3)*y + Rational(100,3))).simplify() == 0
+% assert y.subs(t, 0) == 20
+% assert limit(y, t, oo) == 100
+% END-VERIFY
+\begin{corrige}{TCOMPL-ME-EV-B-EX1}
+\textbf{1.} $\dfrac{1}{3}x+4 = x \iff 4 = x - \dfrac{1}{3}x = \dfrac{2}{3}x \iff x=6$. Le point fixe est $x=6$.
+
+\textbf{2.} $u_1 = \dfrac{1}{3}\times1+4 = \dfrac{13}{3} \approx 4{,}33$. $u_2 = \dfrac{1}{3}\times\dfrac{13}{3}+4 = \dfrac{49}{9} \approx 5{,}44$. Les termes se rapprochent progressivement de $6$, confirmant la conjecture graphique.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-ME-EV-B-EX2}
+\textbf{1.} $y_p$ vérifie $-\dfrac{1}{3}y_p + \dfrac{100}{3} = 0$, soit $y_p = 100$.
+
+\textbf{2.} Solution générale : $y(t) = C\,\mathrm{e}^{-t/3} + 100$. Avec $y(0)=20$ : $C+100=20$, soit $C=-80$ :
+\[
+  y(t) = -80\,\mathrm{e}^{-t/3} + 100.
+\]
+
+\textbf{3.} Quand $t\to+\infty$, $\mathrm{e}^{-t/3}\to0$, donc $y(t)\to100$ : la quantité limite de médicament dans le sang est de $100$ mg.
+\end{corrige}

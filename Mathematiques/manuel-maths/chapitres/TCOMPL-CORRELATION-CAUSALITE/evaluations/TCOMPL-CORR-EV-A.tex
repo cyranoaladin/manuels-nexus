@@ -1,0 +1,45 @@
+% META: {"id": "TCOMPL-CORR-EV-A", "chapitre": "TCOMPL-CORRELATION-CAUSALITE", "type_objet": "evaluation", "version": "A", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C1", "C2", "C4"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Rational, sqrt, N
+% xs = [2, 4, 6, 8, 10]
+% ys = [15, 22, 28, 35, 40]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% assert xbar == 6 and ybar == 28
+% a, b = symbols('a b')
+% S = sum((y - (a*x + b))**2 for x, y in zip(xs, ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% assert sols[a] == Rational(63, 20)
+% assert sols[b] == Rational(91, 10)
+% Sxy = sum((x-xbar)*(y-ybar) for x, y in zip(xs, ys))
+% Sxx = sum((x-xbar)**2 for x in xs)
+% Syy = sum((y-ybar)**2 for y in ys)
+% r = Sxy / sqrt(Sxx*Syy)
+% assert abs(N(r) - 0.9986) < 0.0001
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-CORR-EV-A}{45}
+
+\begin{exercice}{TCOMPL-CORR-EV-A-EX1}{2}{40}
+\textbf{Exercice unique} (20 points) --- \textit{Capacités C1, C2, C4}
+
+\medskip
+
+Un laboratoire mesure, pour $5$ concentrations $x_i$ (en mg/L) d'un réactif, l'absorbance $y_i$ mesurée par un spectrophotomètre :
+\[
+  (2,15),\ (4,22),\ (6,28),\ (8,35),\ (10,40).
+\]
+\begin{enumerate}
+  \item (4 pts) Calculer les coordonnées du point moyen $G$.
+  \item (6 pts) À la calculatrice, déterminer l'équation de la droite des moindres carrés $y=ax+b$.
+  \item (4 pts) Calculer le coefficient de corrélation $r$, et commenter la qualité de l'ajustement.
+  \item (6 pts) Estimer l'absorbance pour une concentration de $7$ mg/L. Cette estimation est-elle une interpolation ou une extrapolation ? Justifier.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

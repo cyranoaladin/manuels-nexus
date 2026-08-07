@@ -1,0 +1,26 @@
+% META: {"id": "TCOMPL-INEG-EV-A-corrige", "chapitre": "TCOMPL-INEGALITES", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-INEG-EV-A", "capacites_codes": ["C2", "C4", "C5"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, integrate, Rational
+% x = symbols('x')
+% L = (3*x**2 + x) / 4
+% assert L.subs(x, 0) == 0
+% assert L.subs(x, 1) == 1
+% Lp = diff(L, x)
+% assert Lp.subs(x, 0) > 0
+% Lpp = diff(L, x, 2)
+% assert Lpp == Rational(3, 2)
+% I = integrate(L, (x, 0, 1))
+% G = 1 - 2*I
+% assert G == Rational(1, 4)
+% END-VERIFY
+\begin{corrige}{TCOMPL-INEG-EV-A-EX1}
+\textbf{1.} $L(0) = \dfrac{0+0}{4} = 0$. $L(1) = \dfrac{3+1}{4} = 1$.
+
+\textbf{2.} $L'(x) = \dfrac{6x+1}{4}$. Sur $[0,1]$, $6x+1 \geq 1 > 0$, donc $L'(x)>0$ : $L$ est strictement croissante sur $[0,1]$.
+
+\textbf{3.} $L''(x) = \dfrac{6}{4} = \dfrac{3}{2}$, constante et positive : $L$ est convexe sur $[0,1]$.
+
+\textbf{4.} $\displaystyle\int_0^1 L(x)\,\mathrm{d}x = \dfrac{1}{4}\left[x^3+\dfrac{x^2}{2}\right]_0^1 = \dfrac{1}{4}\left(1+\dfrac{1}{2}\right) = \dfrac{1}{4}\times\dfrac{3}{2} = \dfrac{3}{8}$.
+
+D'où $G = 1-2\times\dfrac{3}{8} = 1-\dfrac{3}{4} = \dfrac{1}{4} = 0{,}25$.
+\end{corrige}

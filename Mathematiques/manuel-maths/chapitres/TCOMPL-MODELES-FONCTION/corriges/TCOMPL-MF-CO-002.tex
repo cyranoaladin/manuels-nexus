@@ -1,0 +1,16 @@
+% META: {"id": "TCOMPL-MF-CO-002", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "corrige", "exercice_ref": "TCOMPL-MF-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, solve, Eq
+% x = symbols('x', positive=True)
+% f = x + 16/x
+% assert len(solve(Eq(f, 10), x)) == 2
+% assert solve(Eq(f, 8), x) == [4]
+% assert solve(Eq(f, 7), x) == []
+% END-VERIFY
+\begin{corrige}{TCOMPL-MF-EX-002}
+\textbf{1.} $10 > 8$ (le minimum) : la valeur $10$ est atteinte une fois sur chaque intervalle de monotonie ($]0,4]$ et $[4,+\infty[$), soit \textbf{deux solutions}.
+
+\textbf{2.} $8$ est exactement le minimum de $f$, atteint en un seul point ($x=4$), à la jonction des deux intervalles de monotonie : \textbf{une seule solution}.
+
+\textbf{3.} $7 < 8$ (le minimum) : $f$ ne prend jamais la valeur $7$, qui est strictement inférieure à son minimum : \textbf{aucune solution}.
+\end{corrige}

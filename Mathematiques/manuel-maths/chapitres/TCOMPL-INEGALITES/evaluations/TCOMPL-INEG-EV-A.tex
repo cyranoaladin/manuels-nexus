@@ -1,0 +1,38 @@
+% META: {"id": "TCOMPL-INEG-EV-A", "chapitre": "TCOMPL-INEGALITES", "type_objet": "evaluation", "version": "A", "duree_min": 45, "bareme_total": 20, "capacites_codes": ["C2", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, integrate, Rational
+% x = symbols('x')
+% L = (3*x**2 + x) / 4
+% assert L.subs(x, 0) == 0
+% assert L.subs(x, 1) == 1
+% Lp = diff(L, x)
+% assert Lp.subs(x, 0) > 0
+% assert Lp.subs(x, 1) > 0
+% Lpp = diff(L, x, 2)
+% assert Lpp == Rational(3, 2)
+% I = integrate(L, (x, 0, 1))
+% G = 1 - 2*I
+% assert G == Rational(1, 4)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 45 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-INEG-EV-A}{45}
+
+\begin{exercice}{TCOMPL-INEG-EV-A-EX1}{2}{40}
+\textbf{Exercice unique} (20 points) --- \textit{Capacités C2, C4, C5}
+
+\medskip
+
+On modélise une courbe de Lorenz par $L(x) = \dfrac{3x^2+x}{4}$ sur $[0,1]$.
+\begin{enumerate}
+  \item (4 pts) Vérifier que $L(0)=0$ et $L(1)=1$.
+  \item (4 pts) Calculer $L'(x)$ et vérifier que $L$ est croissante sur $[0,1]$ (indication : étudier le signe de $L'$).
+  \item (4 pts) Calculer $L''(x)$ et en déduire que $L$ est convexe.
+  \item (8 pts) Calculer l'indice de Gini associé à ce modèle.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

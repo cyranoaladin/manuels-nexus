@@ -1,0 +1,39 @@
+% META: {"id": "TEXP-ARI-EV-A", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "evaluation", "version": "A", "duree_min": 55, "bareme_total": 20, "capacites_codes": ["C1", "C4", "C5"], "competences": ["calculer", "raisonner"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(198, 72) == 18
+% assert 198 == 2*72 + 54
+% assert 72 == 1*54 + 18
+% assert 54 == 3*18 + 0
+% assert 198*(-1) + 72*3 == 18
+% assert 54 % 18 == 0
+% assert 198*(-3) + 72*9 == 54
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 55 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TEXP-ARI-EV-A}{55}
+
+\begin{exercice}{TEXP-ARI-EV-A-EX1}{2}{20}
+\textbf{Exercice 1} (8 points) --- \textit{Capacité C1}
+
+\medskip
+
+Calculer $\mathrm{PGCD}(198,72)$ à l'aide de l'algorithme d'Euclide, en détaillant chaque étape.
+\end{exercice}
+
+\begin{exercice}{TEXP-ARI-EV-A-EX2}{2}{40}
+\textbf{Exercice 2} (12 points) --- \textit{Capacités C4, C5}
+
+\medskip
+
+\begin{enumerate}
+  \item (4 pts) Démontrer le théorème de Bézout (on pourra s'appuyer sur l'ensemble $E=\{au+bv>0,\ u,v\in\mathbb{Z}\}$).
+  \item (4 pts) En remontant l'algorithme d'Euclide de l'exercice 1, exprimer $18$ sous la forme $198x+72y$.
+  \item (4 pts) L'équation $198x+72y=54$ admet-elle des solutions entières ? Si oui, en donner une.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

@@ -1,0 +1,23 @@
+% META: {"id": "TEXP-CAG-EV-A-corrige", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "corrige_evaluation", "evaluation_ref": "TEXP-CAG-EV-A", "capacites_codes": ["C1", "C2", "C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, symbols, Eq, solve, expand, conjugate
+% z = symbols('z')
+% sol = solve(Eq((3-2*I)*z, 7+4*I), z)
+% assert sol == [1 + 2*I]
+% assert expand((1-I)**3) == -2 - 2*I
+% assert expand((1+I)**3) == -2 + 2*I
+% assert conjugate(-2-2*I) == -2+2*I
+% END-VERIFY
+\begin{corrige}{TEXP-CAG-EV-A-EX1}
+\[
+  z = \frac{7+4i}{3-2i} = \frac{(7+4i)(3+2i)}{(3-2i)(3+2i)} = \frac{21+14i+12i+8i^2}{9+4} = \frac{21+26i-8}{13} = \frac{13+26i}{13} = 1+2i.
+\]
+\end{corrige}
+
+\begin{corrige}{TEXP-CAG-EV-A-EX2}
+\textbf{1.} $(1-i)^3 = 1-3i+3i^2-i^3 = 1-3i-3+i = -2-2i$.
+
+\textbf{2.} Posons $z=a+ib$, $w=c+id$. $zw=(ac-bd)+i(ad+bc)$, donc $\overline{zw}=(ac-bd)-i(ad+bc)$. Par ailleurs $\bar z\bar w=(a-ib)(c-id)=(ac-bd)-i(ad+bc)$ : on retrouve bien $\overline{zw}=\bar z\bar w$.
+
+\textbf{3.} $\overline{(1-i)^3} = (\overline{1-i})^3 = (1+i)^3$ (en appliquant la propriété du conjugué à une puissance). Or $(1+i)^3 = -2+2i$. Vérification par le calcul direct de $\overline{-2-2i}=-2+2i$ : les deux méthodes coïncident.
+\end{corrige}

@@ -1,0 +1,28 @@
+% META: {"id": "TCOMPL-ATT-EV-A-corrige", "chapitre": "TCOMPL-TEMPS-ATTENTE", "type_objet": "corrige_evaluation", "evaluation_ref": "TCOMPL-ATT-EV-A", "capacites_codes": ["C1", "C2", "C3"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import Rational, N
+% p = Rational(1, 8)
+% PX5 = (1-p)**4 * p
+% assert PX5 == Rational(2401, 32768)
+% assert abs(N(PX5) - 0.0733) < 0.0001
+% E = 1/p
+% assert E == 8
+% def PX_sup(n, p):
+%     return (1-p)**n
+% assert PX_sup(3+5, p) / PX_sup(3, p) == PX_sup(5, p)
+% END-VERIFY
+\begin{corrige}{TCOMPL-ATT-EV-A-EX1}
+\textbf{1.} Chaque partie est une épreuve de Bernoulli indépendante de succès $p=\frac{1}{8}$ : $X$, rang de la première réussite, suit $\mathcal{G}\!\left(\frac{1}{8}\right)$.
+
+\textbf{2.} $P(X=5) = \left(\frac{7}{8}\right)^4\times\frac{1}{8} = \frac{2401}{32768} \approx 0{,}0733$.
+
+\textbf{3.} $E(X) = 8$ : il faut en moyenne $8$ parties pour obtenir l'objet rare.
+\end{corrige}
+
+\begin{corrige}{TCOMPL-ATT-EV-A-EX2}
+\textbf{1.} Pour $X\sim\mathcal{G}(p)$, $P_{X>n}(X>n+k)=P(X>k)$ pour tous $n,k\geq0$ : le passé n'influence pas l'avenir.
+
+\textbf{2.} Par l'absence de mémoire, la probabilité d'attendre encore $5$ parties sachant $3$ échecs déjà observés est \textbf{la même} que la probabilité initiale d'attendre $5$ parties : $P_{X>3}(X>8) = P(X>5)$.
+
+\textbf{3.} $P(X>5) = \left(\frac{7}{8}\right)^5 \approx 0{,}513$.
+\end{corrige}

@@ -1,0 +1,13 @@
+% META: {"id": "TEXP-ARI-EX-002", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "exercice", "capacites": ["TEXP-ARI-C2"], "capacites_codes": ["C2"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-ARITHMETIQUE/exercices/TEXP-ARI-EX-002.tex", "corrige_tex": "chapitres/TEXP-ARITHMETIQUE/corriges/TEXP-ARI-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% assert (4*3) % 11 == 1
+% solutions = [x for x in range(11) if (4*x) % 11 == 7 % 11]
+% assert solutions == [10]
+% END-VERIFY
+\begin{exercice}{TEXP-ARI-EX-002}{2}{15}
+Résoudre la congruence $4x\equiv7\ [11]$.
+\begin{enumerate}
+  \item Vérifier que $3$ est l'inverse de $4$ modulo $11$.
+  \item En déduire les solutions.
+\end{enumerate}
+\end{exercice}

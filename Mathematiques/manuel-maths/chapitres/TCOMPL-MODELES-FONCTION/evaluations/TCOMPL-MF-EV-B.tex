@@ -1,0 +1,51 @@
+% META: {"id": "TCOMPL-MF-EV-B", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "evaluation", "version": "B", "duree_min": 50, "bareme_total": 20, "capacites_codes": ["C4", "C5", "C6", "C7"], "competences": ["calculer", "modeliser"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, solve, Eq, Rational, simplify
+% x = symbols('x')
+% k = x**3 - 3*x**2
+% kpp = diff(k, x, 2)
+% assert simplify(kpp - (6*x - 6)) == 0
+% assert solve(Eq(kpp, 0), x) == [1]
+% xs = [0, 2, 3, 5, 8]
+% ys = [20, 16, 14, 9, 3]
+% xbar = Rational(sum(xs), len(xs))
+% ybar = Rational(sum(ys), len(ys))
+% assert xbar == Rational(18, 5)
+% assert ybar == Rational(62, 5)
+% END-VERIFY
+
+%---------------------------------------------------------------
+% Duree : 50 minutes — Bareme : 20 points
+%---------------------------------------------------------------
+
+\begin{evaluation}{TCOMPL-MF-EV-B}{50}
+
+\begin{exercice}{TCOMPL-MF-EV-B-EX1}{2}{25}
+\textbf{Exercice 1} (10 points) --- \textit{Capacités C4, C5}
+
+\medskip
+
+Soit $k(x) = x^3 - 3x^2$ sur $\mathbb{R}$.
+\begin{enumerate}
+  \item (2 pts) Calculer $k''(x)$.
+  \item (4 pts) Étudier le signe de $k''(x)$ et en déduire les intervalles de convexité et de concavité de $k$.
+  \item (4 pts) $k$ admet-elle un point d'inflexion ? Si oui, donner ses coordonnées.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{TCOMPL-MF-EV-B-EX2}{2}{25}
+\textbf{Exercice 2} (10 points) --- \textit{Capacités C6, C7}
+
+\medskip
+
+Une association mesure, pour $5$ campagnes de sensibilisation, le budget $x_i$ investi (en milliers d'euros) et le nombre $y_i$ de nouveaux adhérents perdus par mois d'inactivité (donnée fictive décroissante) :
+\[
+  (0,20),\ (2,16),\ (3,14),\ (5,9),\ (8,3).
+\]
+\begin{enumerate}
+  \item (5 pts) Calculer les coordonnées du point moyen $G(\bar{x}, \bar{y})$.
+  \item (5 pts) La droite de régression obtenue par la méthode des moindres carrés est $y \approx -2{,}16x + 20{,}2$. Vérifier qu'elle passe, à l'arrondi près, par le point moyen $G$ calculé à la question précédente.
+\end{enumerate}
+\end{exercice}
+
+\end{evaluation}

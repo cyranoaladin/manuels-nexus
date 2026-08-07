@@ -1,0 +1,28 @@
+chapitre: TEXP-MATRICES-MARKOV
+niveau: TEXPERTES
+theme: MATRICES-MARKOV
+titre: "Matrices et chaînes de Markov"
+statut: valide   # valide humainement le 2026-08-06 (branche terminale/collection-v1, creation ex nihilo)
+
+capacites:
+  - { code: C1, ref_capacite: TEXP-MAT-C1, libelle_eleve: "Je sais effectuer les opérations sur les matrices (somme, produit, inverse, puissance)." }
+  - { code: C2, ref_capacite: TEXP-MAT-C2, libelle_eleve: "Je sais modéliser une situation par une matrice." }
+  - { code: C3, ref_capacite: TEXP-MAT-C3, libelle_eleve: "Je sais étudier une suite de matrices colonnes vérifiant $U_{n+1}=AU_n+C$, en résolvant un système linéaire ou une suite récurrente." }
+  - { code: C4, ref_capacite: TEXP-MAT-C4, libelle_eleve: "Je sais associer un graphe orienté pondéré à une chaîne de Markov à deux ou trois états, et représenter distribution initiale et matrice de transition." }
+  - { code: C5, ref_capacite: TEXP-MAT-C5, libelle_eleve: "Je sais calculer, pour une chaîne de Markov, la distribution après n transitions et interpréter le coefficient (i,j) de la puissance n-ième de la matrice de transition." }
+  - { code: C6, ref_capacite: TEXP-MAT-C6, libelle_eleve: "Je sais démontrer l'expression de la distribution après n transitions pour une chaîne de Markov." }
+  - { code: C7, ref_capacite: TEXP-MAT-C7, libelle_eleve: "Je sais déterminer une distribution invariante d'une chaîne de Markov à deux ou trois états." }
+
+prerequis:
+  - { code: R1, libelle: "Matrice d'adjacence et puissances de matrice", chapitre_origine: "TEXP-GRAPHES" }
+  - { code: R2, libelle: "Probabilités conditionnelles", chapitre_origine: "1SPE" }
+
+situation_accroche: >
+  Une chaîne de radio étudie la fidélité de ses auditeurs : d'un jour sur l'autre, un auditeur
+  qui écoute la radio a une certaine probabilité de continuer à l'écouter le lendemain, et un
+  non-auditeur a une certaine probabilité de commencer à l'écouter. Comment prévoir, sur le long
+  terme, la proportion d'auditeurs ? Ce type de situation, où l'état futur ne dépend que de
+  l'état présent, se modélise par une chaîne de Markov : ce chapitre en développe les outils
+  matriciels.
+
+temps_estime_h: { parcours1: 14, parcours2: 12, parcours3: 10 }

@@ -1,0 +1,66 @@
+% META: {"id": "TCOMPL-MF-CR-012", "chapitre": "TCOMPL-MODELES-FONCTION", "type_objet": "cours", "capacites_codes": ["C6", "C7"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Statistique à deux variables et ajustement}
+
+% ============================================================
+% STRATE 1 — Nuage de points, point moyen
+% ============================================================
+
+\definition[1]{
+Une série statistique à deux variables associe, à $n$ individus, un couple de valeurs $(x_i, y_i)$. Le \textbf{nuage de points} est l'ensemble des points $M_i(x_i, y_i)$ dans un repère. Le \textbf{point moyen} $G(\bar{x}, \bar{y})$ a pour coordonnées les moyennes respectives des $x_i$ et des $y_i$.
+}
+
+\exemple{
+On mesure, pour $5$ semaines, le nombre d'heures de révision $x_i$ et la note obtenue $y_i$ :
+\[
+  (2,8),\ (4,11),\ (5,13),\ (7,16),\ (8,17).
+\]
+La moyenne des $x_i$ est $\bar{x} = \dfrac{2+4+5+7+8}{5} = 5{,}2$, et la moyenne des $y_i$ est $\bar{y} = \dfrac{8+11+13+16+17}{5} = 13$. Le point moyen est $G(5{,}2\,;\ 13)$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational
+% xs = [2, 4, 5, 7, 8]
+% ys = [8, 11, 13, 16, 17]
+% xbar = Rational(sum(xs), len(xs))
+% ybar = Rational(sum(ys), len(ys))
+% assert xbar == Rational(26, 5)
+% assert ybar == 13
+% END-VERIFY
+
+% ============================================================
+% STRATE 2 — Droite de regression (moindres carres)
+% ============================================================
+
+\propriete[Droite de régression]{
+Lorsque le nuage de points suggère une tendance affine, on ajuste une \textbf{droite de régression} $y = ax+b$, qui minimise la somme des carrés des écarts verticaux entre les points et la droite (\textbf{méthode des moindres carrés}). Cette droite passe toujours par le point moyen $G$.
+}
+
+\exemple{
+Pour la série précédente, la droite de régression (calculée par la méthode des moindres carrés, à la calculatrice ou par calcul) est approximativement $y \approx 1{,}5x + 5{,}2$. On vérifie qu'elle passe bien, à l'arrondi près, par le point moyen $G(5{,}2\,;\ 13)$.
+}
+
+% BEGIN-VERIFY
+% from sympy import Rational, symbols, diff, solve, simplify
+% xs = [2, 4, 5, 7, 8]
+% ys = [8, 11, 13, 16, 17]
+% n = len(xs)
+% xbar = Rational(sum(xs), n)
+% ybar = Rational(sum(ys), n)
+% a, b = symbols('a b')
+% # somme des carres des ecarts (moindres carres)
+% S = sum((y - (a*x + b))**2 for x, y in zip(xs, ys))
+% sols = solve([diff(S, a), diff(S, b)], [a, b])
+% a_val, b_val = sols[a], sols[b]
+% # la droite passe par le point moyen
+% assert simplify(a_val*xbar + b_val - ybar) == 0
+% assert abs(float(a_val) - 1.5) < 0.05
+% END-VERIFY
+
+\margeAppui{
+Le fait que la droite des moindres carrés passe toujours exactement par le point moyen $G$ est une propriété générale (démonstration exigible) : elle permet de vérifier rapidement la cohérence d'un calcul d'ajustement.
+}
+
+\erreurFrequente{
+\textbf{Extrapoler sans esprit critique.} Une droite de régression est fiable pour \textbf{interpoler} (estimer une valeur entre deux valeurs observées), mais devient risquée pour \textbf{extrapoler} loin en dehors de la plage des données observées : rien ne garantit que la tendance affine se poursuive.
+}

@@ -1,0 +1,12 @@
+% META: {"id": "TSPE-INTEG-CO-002", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "corrige", "exercice_ref": "TSPE-INTEG-EX-002", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, integrate, E
+% x = symbols('x')
+% assert integrate(1/x, (x, 1, E)) == 1
+% END-VERIFY
+\begin{corrige}{TSPE-INTEG-EX-002}
+Une primitive de $\dfrac{1}{x}$ sur $]0,+\infty[$ est $\ln x$.
+\[
+  \int_1^{\mathrm{e}} \frac{1}{x}\,\mathrm{d}x = \ln(\mathrm{e}) - \ln(1) = 1 - 0 = \boxed{1}.
+\]
+\end{corrige}

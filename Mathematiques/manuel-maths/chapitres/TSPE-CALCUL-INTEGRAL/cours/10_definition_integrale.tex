@@ -1,0 +1,58 @@
+% META: {"id": "TSPE-INTEG-CR-010", "chapitre": "TSPE-CALCUL-INTEGRAL", "type_objet": "cours", "capacites_codes": ["C1", "C3"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Intégrale d'une fonction continue et positive}
+
+% ============================================================
+% STRATE 1 — Definition, encadrement, valeur moyenne
+% ============================================================
+
+\definition[1]{
+Soit $f$ une fonction continue et positive sur $[a,b]$ ($a<b$), et $\mathcal{C}_f$ sa courbe representative dans un repere orthogonal. L'\textbf{integrale de $f$ entre $a$ et $b$}, notee $\displaystyle\int_a^b f(x)\,\mathrm{d}x$, est l'aire (en unites d'aire) du domaine delimite par $\mathcal{C}_f$, l'axe des abscisses, et les droites d'equation $x=a$ et $x=b$.
+}
+
+\margeAppui{
+Pour $f$ non necessairement positive, on definit l'integrale a partir des primitives (voir plus loin) ; l'interpretation en aire algebrique tient compte du signe (aires sous l'axe comptees negativement).
+}
+
+\propriete[Encadrement]{
+Si $f$ est continue sur $[a,b]$ et $m \leq f(x) \leq M$ pour tout $x \in [a,b]$, alors :
+\[
+  m(b-a) \leq \int_a^b f(x)\,\mathrm{d}x \leq M(b-a).
+\]
+}
+
+\exemple{
+Estimer $\displaystyle\int_1^3 \mathrm{e}^x\,\mathrm{d}x$ sachant que $\mathrm{e} \leq \mathrm{e}^x \leq \mathrm{e}^3$ sur $[1,3]$.
+
+$2\mathrm{e} \leq \displaystyle\int_1^3 \mathrm{e}^x\,\mathrm{d}x \leq 2\mathrm{e}^3$.
+
+% BEGIN-VERIFY
+% from sympy import symbols, exp, integrate
+% x = symbols('x')
+% I = integrate(exp(x), (x, 1, 3))
+% assert 2*exp(1) <= I <= 2*exp(3)
+% END-VERIFY
+}
+
+\propriete[Comparaison]{
+Si $f \leq g$ sur $[a,b]$ (avec $f,g$ continues), alors $\displaystyle\int_a^b f(x)\,\mathrm{d}x \leq \int_a^b g(x)\,\mathrm{d}x$.
+}
+
+\definition[2]{
+La \textbf{valeur moyenne} de $f$ continue sur $[a,b]$ est :
+\[
+  \mu = \frac{1}{b-a}\int_a^b f(x)\,\mathrm{d}x.
+\]
+}
+
+\margeAppui{
+Interpretation graphique : $\mu$ est la hauteur du rectangle de base $[a,b]$ ayant la meme aire que le domaine sous la courbe de $f$.
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Utiliser un encadrement grossier de $f$ au lieu du minimum/maximum reel.} Pour un encadrement fin de l'integrale, il faut le minimum et le maximum \emph{exacts} de $f$ sur $[a,b]$ (etudier les variations si necessaire), pas une estimation approximative.
+}

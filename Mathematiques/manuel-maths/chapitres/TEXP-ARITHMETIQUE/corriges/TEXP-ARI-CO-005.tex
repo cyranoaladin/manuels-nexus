@@ -1,0 +1,19 @@
+% META: {"id": "TEXP-ARI-CO-005", "chapitre": "TEXP-ARITHMETIQUE", "type_objet": "corrige", "exercice_ref": "TEXP-ARI-EX-005", "capacites_codes": ["C3"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def chiffrer(m, a=3, b=5):
+%     return (a*m + b) % 26
+% m = ord('B') - ord('A')
+% c = chiffrer(m)
+% assert c == 8
+% assert chr(c + ord('A')) == 'I'
+% import math
+% assert math.gcd(3, 26) == 1
+% assert math.gcd(2, 26) == 2
+% END-VERIFY
+\begin{corrige}{TEXP-ARI-EX-005}
+\textbf{1.} L'opérateur \og modulo $26$ \fg{} renvoie toujours un reste compris entre $0$ et $25$ : $c$ désigne donc toujours une lettre valide de l'alphabet.
+
+\textbf{2.} Pour $m=1$ : $c=(3\times1+5)\bmod26 = 8\bmod26 = 8$, soit la lettre \og I \fg{}.
+
+\textbf{3.} Le déchiffrement nécessite d'inverser $m\mapsto3m+5\ [26]$, c'est-à-dire de calculer un \textbf{inverse de $3$ modulo $26$}. Cet inverse n'existe que si $\mathrm{PGCD}(3,26)=1$, ce qui est le cas ici. Avec $a=2$ en revanche, $\mathrm{PGCD}(2,26)=2\neq1$ : $2$ n'aurait \textbf{pas} d'inverse modulo $26$, et plusieurs lettres claires différentes se chiffreraient en la même lettre, rendant le déchiffrement impossible.
+\end{corrige}

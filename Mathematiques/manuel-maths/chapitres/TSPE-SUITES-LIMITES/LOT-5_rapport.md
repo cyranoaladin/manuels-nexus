@@ -32,3 +32,11 @@
 | C7 | Q14, Q15 |
 
 Chaque distracteur est lie a une erreur documentee avec renvoi methode.
+# LOT-5 — QCM diagnostic, auto-evaluation, remediation (audit 2026-08-05)
+
+QCM 7 sections (C1-C7), 1-2 questions/capacite, 4 distracteurs par question.
+5 fiches remediation (RE-C1..RE-C5, sur C1-C5 uniquement — C6/C7 n'ont pas de
+fiche dediee, couvertes par RE-C4/C5 existantes vu la proximite methode).
+5 fiches "FR" (erreurs frequentes ciblees R1-R5). SymPy sur les blocs
+calculables : 0 FAIL. QCM Q4 (C2) : formulation de l'option A un peu proche
+de la conclusion recherchee (ambiguite mineure, non bloquante). Statut : valide.

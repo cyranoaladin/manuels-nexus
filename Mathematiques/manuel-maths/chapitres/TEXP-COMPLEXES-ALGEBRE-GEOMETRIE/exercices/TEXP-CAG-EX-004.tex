@@ -1,0 +1,11 @@
+% META: {"id": "TEXP-CAG-EX-004", "chapitre": "TEXP-COMPLEXES-ALGEBRE-GEOMETRIE", "type_objet": "exercice", "capacites": ["TEXP-CAG-C3"], "capacites_codes": ["C3"], "methodes": [], "parcours": 2, "competences": ["calculer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/exercices/TEXP-CAG-EX-004.tex", "corrige_tex": "chapitres/TEXP-COMPLEXES-ALGEBRE-GEOMETRIE/corriges/TEXP-CAG-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import I, expand, binomial
+% direct = expand((1+I)**4)
+% via_binome = expand(sum(binomial(4,k)*1**k*I**(4-k) for k in range(5)))
+% assert direct == via_binome
+% assert direct == -4
+% END-VERIFY
+\begin{exercice}{TEXP-CAG-EX-004}{2}{15}
+En utilisant la formule du binôme, développer $(1+i)^4$. Vérifier le résultat en calculant $(1+i)^2$ puis en élevant au carré.
+\end{exercice}

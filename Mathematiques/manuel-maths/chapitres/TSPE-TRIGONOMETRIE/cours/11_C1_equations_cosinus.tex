@@ -1,0 +1,75 @@
+% META: {"id": "TSPE-TRIGO-CR-011", "chapitre": "TSPE-TRIGONOMETRIE", "type_objet": "cours", "capacites_codes": ["C1"], "sources_inspiration": [], "mode_creation": "ex_nihilo", "status": "generated"}
+
+\section{Équations et inéquations $\cos x = a$}
+
+% ============================================================
+% STRATE 1 — Resolution de cos(x) = a sur [-pi, pi]
+% ============================================================
+
+\propriete{
+Soit $a \in [-1, 1]$. Sur $[-\pi, \pi]$, l'equation $\cos x = a$ admet :
+\begin{itemize}
+  \item exactement une solution si $a = 1$ (a savoir $x=0$) ou si $a=-1$ (a savoir $x=\pi$, sachant que $-\pi$ et $\pi$ representent le meme point sur $[-\pi,\pi]$ selon la convention retenue) ;
+  \item exactement deux solutions opposees $x = \pm \arccos(a)$ si $-1 < a < 1$.
+\end{itemize}
+}
+
+\margeAppui{
+$\arccos(a)$ designe l'unique reel de $[0, \pi]$ dont le cosinus vaut $a$. Par exemple $\arccos(0) = \dfrac{\pi}{2}$, $\arccos\!\left(\dfrac{1}{2}\right) = \dfrac{\pi}{3}$.
+}
+
+\exemple{
+Resoudre $\cos x = \dfrac{1}{2}$ sur $[-\pi, \pi]$.
+
+On sait que $\cos\!\left(\dfrac{\pi}{3}\right) = \dfrac{1}{2}$. Les solutions sont donc $x = \dfrac{\pi}{3}$ et $x = -\dfrac{\pi}{3}$.
+
+% BEGIN-VERIFY
+% from sympy import cos, pi, Rational, simplify
+% assert simplify(cos(pi/3) - Rational(1,2)) == 0
+% assert simplify(cos(-pi/3) - Rational(1,2)) == 0
+% END-VERIFY
+}
+
+\subsection{Inéquation $\cos x \leq a$}
+
+\propriete{
+Soit $a \in ]-1, 1[$. Sur $[-\pi, \pi]$, l'ensemble des solutions de $\cos x \leq a$ est :
+\[
+  [-\pi, -\arccos(a)] \cup [\arccos(a), \pi].
+\]
+}
+
+\margeAppui{
+La courbe de $\cos$ est au-dessus de la droite $y=a$ entre $-\arccos(a)$ et $\arccos(a)$ (« la bosse centrale »), et en dessous partout ailleurs sur $[-\pi,\pi]$.
+}
+
+\exemple{
+Resoudre $\cos x \leq \dfrac{1}{2}$ sur $[-\pi, \pi]$.
+
+Avec $\arccos\!\left(\dfrac{1}{2}\right) = \dfrac{\pi}{3}$, l'ensemble des solutions est $\left[-\pi, -\dfrac{\pi}{3}\right] \cup \left[\dfrac{\pi}{3}, \pi\right]$.
+
+% BEGIN-VERIFY
+% import numpy as np
+% a = np.pi / 3
+% # points dans la solution annoncee : cos(x) <= 1/2
+% for xv in [-np.pi, -a, -a - 0.01, np.pi, a, a + 0.01]:
+%     if xv <= -a + 1e-9 or xv >= a - 1e-9:
+%         assert np.cos(xv) <= 0.5 + 1e-9
+% # points hors de la solution annoncee (dans ]-a, a[) : cos(x) > 1/2
+% for xv in [0, a - 0.1, -(a - 0.1)]:
+%     assert -a < xv < a
+%     assert np.cos(xv) > 0.5
+% END-VERIFY
+}
+
+% ============================================================
+% STRATE 2 — Erreurs frequentes
+% ============================================================
+
+\erreurFrequente{
+\textbf{Oublier la deuxieme solution (opposee).} L'equation $\cos x = a$ (avec $-1<a<1$) a toujours deux solutions opposees sur $[-\pi,\pi]$, pas une seule. Ne pas oublier $-\arccos(a)$ en plus de $\arccos(a)$.
+}
+
+\erreurFrequente{
+\textbf{Inverser le sens de l'inegalite dans la solution.} Comme $\cos$ n'est pas monotone sur $[-\pi,\pi]$ (elle decroit puis... en realite ici elle croit sur $[-\pi,0]$ puis decroit sur $[0,\pi]$), on ne peut pas resoudre $\cos x \leq a$ comme une inegalite usuelle : il faut raisonner graphiquement ou a l'aide du cercle trigonometrique.
+}
