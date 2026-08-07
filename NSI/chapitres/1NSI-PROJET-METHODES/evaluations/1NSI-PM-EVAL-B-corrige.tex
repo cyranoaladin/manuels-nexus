@@ -1,0 +1,46 @@
+% META: {"id": "1NSI-PM-EVAL-B-corrige", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-PM-EVAL-B", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% evenements = [
+%     (1936, "Concept de machine universelle", "Alan Turing"),
+%     (1969, "Debuts du reseau Internet", "DARPA"),
+%     (1991, "Premiere version publique de Python", "Guido van Rossum"),
+% ]
+% def evenements_entre(evenements, debut, fin):
+%     return [e for e in evenements if debut <= e[0] <= fin]
+% resultat = evenements_entre(evenements, 1960, 1991)
+% assert [e[0] for e in resultat] == [1969, 1991]
+% def acceder_element(liste, indice):
+%     assert 0 <= indice < len(liste), "indice hors des bornes de la liste"
+%     return liste[indice]
+% assert acceder_element([1, 2, 3], 1) == 2
+% END-VERIFY
+\begin{corrige}{1NSI-PM-EVAL-B-EX1}
+\textbf{1.} Entre 1960 et 1991 : les débuts du réseau Internet (1969) et la première
+version publique de Python (1991).
+
+\textbf{2.} $\dfrac{3}{5}\times100=60{,}0\,\%$.
+
+\textbf{3.} Avec seulement $2$ à $4$ élèves et un temps limité, un projet trop ambitieux
+risque de ne \textbf{jamais aboutir} : l'équipe s'épuise sur des fonctionnalités
+secondaires sans jamais disposer d'une version complète et testée. Un projet modeste mais
+terminé et fonctionnel est pédagogiquement plus utile (et plus valorisant) qu'un projet
+ambitieux resté à l'état d'ébauche.
+\end{corrige}
+
+\begin{corrige}{1NSI-PM-EVAL-B-EX2}
+\textbf{1.} Le programme lève une \lstinline{IndexError}, avec le message
+\lstinline{list index out of range}.
+
+\textbf{2.}
+\begin{python}
+def acceder_element(liste, indice):
+    assert 0 <= indice < len(liste), "indice hors des bornes de la liste"
+    return liste[indice]
+\end{python}
+
+\textbf{3.} Une précondition explicite documente, directement dans le code, l'hypothèse
+nécessaire (un indice valide) avec un message personnalisé et compréhensible. L'erreur
+native \lstinline{IndexError} arrête aussi le programme, mais sans expliquer la
+\textbf{cause métier} du problème (ici, un indice incohérent avec la taille de la liste)
+aussi clairement qu'un message d'assertion rédigé pour ce cas précis.
+\end{corrige}

@@ -1,0 +1,86 @@
+% META: {"id": "1NSI-PM-COURS-C2", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "cours", "capacites": ["BO-PREAMBULE-DEMARCHE-DE-PROJET"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{La démarche de projet}
+
+\margeAppui{Le programme officiel réserve au moins un \textbf{quart} de l'horaire annuel de
+Première à la conception et à l'élaboration de projets, menés par groupes de $2$ à $4$
+élèves.}
+
+\definition[D2]{
+  Un \textbf{cahier des charges} décrit, avant de commencer à programmer, ce que le projet
+  doit accomplir : les fonctionnalités attendues, les contraintes, et les critères qui
+  permettront de dire si le projet est réussi.
+}
+
+\propriete[Découper un projet en jalons]{
+  Un \textbf{jalon} (ou \emph{point d'étape}) est une étape intermédiaire d'un projet, avec
+  un objectif précis et vérifiable. Découper un projet en jalons permet de suivre sa
+  progression, d'ajuster ses objectifs si nécessaire, et d'éviter de se retrouver bloqué en
+  fin de projet.
+}
+
+\begin{codereference}{Suivre l'avancement d'un projet par ses jalons}
+\begin{python}
+jalons = [
+    {"nom": "Cahier des charges", "termine": True},
+    {"nom": "Prototype minimal", "termine": True},
+    {"nom": "Fonctionnalites completes", "termine": False},
+    {"nom": "Tests et correction de bugs", "termine": False},
+    {"nom": "Presentation finale", "termine": False},
+]
+
+def avancement(jalons):
+    """Renvoie le pourcentage de jalons termines."""
+    nb_termines = sum(1 for j in jalons if j["termine"])
+    return nb_termines / len(jalons) * 100
+
+def prochain_jalon(jalons):
+    """Renvoie le nom du premier jalon non termine, ou None si tout est fini."""
+    for j in jalons:
+        if not j["termine"]:
+            return j["nom"]
+    return None
+
+print(avancement(jalons))       # 40.0
+print(prochain_jalon(jalons))   # Fonctionnalites completes
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% jalons = [
+%     {"nom": "Cahier des charges", "termine": True},
+%     {"nom": "Prototype minimal", "termine": True},
+%     {"nom": "Fonctionnalites completes", "termine": False},
+%     {"nom": "Tests et correction de bugs", "termine": False},
+%     {"nom": "Presentation finale", "termine": False},
+% ]
+% def avancement(jalons):
+%     nb_termines = sum(1 for j in jalons if j["termine"])
+%     return nb_termines / len(jalons) * 100
+% def prochain_jalon(jalons):
+%     for j in jalons:
+%         if not j["termine"]:
+%             return j["nom"]
+%     return None
+% assert avancement(jalons) == 40.0
+% assert prochain_jalon(jalons) == "Fonctionnalites completes"
+% jalons_termines = [{"nom": "Seul jalon", "termine": True}]
+% assert prochain_jalon(jalons_termines) is None
+% END-VERIFY
+
+\propriete[Travailler en équipe]{
+  Le programme officiel préconise des groupes de $2$ à $4$ élèves. Un projet en équipe
+  suppose de \textbf{répartir les tâches} (par exemple par fonctionnalité, ou par couche :
+  données, algorithmes, interface), de \textbf{coordonner le travail} (éviter que deux
+  personnes modifient la même partie en même temps), et de tenir des \textbf{points d'étape}
+  réguliers avec le professeur.
+}
+
+\erreurFrequente{Vouloir réaliser un projet trop ambitieux, sans jalons intermédiaires. Le
+programme officiel insiste explicitement sur le fait que les projets doivent rester
+\og d'une ambition raisonnable \fg{} pour permettre à l'équipe de les mener à terme : mieux
+vaut un projet modeste \textbf{complet} et testé, qu'un projet ambitieux inachevé.}
+
+\alamachine{Choisis un projet informatique simple de ton choix (par exemple un petit jeu,
+un gestionnaire de liste de tâches). Découpe-le en $4$ jalons avec la structure
+\lstinline{jalons} du cours, et calcule ton avancement au fur et à mesure que tu réalises
+chaque étape.}

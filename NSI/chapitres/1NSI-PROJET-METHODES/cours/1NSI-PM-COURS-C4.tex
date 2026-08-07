@@ -1,0 +1,65 @@
+% META: {"id": "1NSI-PM-COURS-C4", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "cours", "capacites": ["BO-PREAMBULE-COMPETENCES-ORALES"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Documenter son code et préparer une présentation orale}
+
+\definition[D4]{
+  \textbf{Documenter} un programme, c'est expliquer, en langage naturel, ce qu'il fait :
+  le rôle de chaque fonction (via une \textbf{docstring}), les choix de conception
+  importants, et la manière de l'utiliser.
+}
+
+\begin{codereference}{Une fonction bien documentée}
+\begin{python}
+def calcul_moyenne(valeurs):
+    """Calcule la moyenne arithmetique d'une liste de valeurs numeriques.
+
+    Precondition : valeurs est une liste non vide.
+    Postcondition : le resultat est compris entre min(valeurs) et max(valeurs).
+    """
+    return sum(valeurs) / len(valeurs)
+
+def a_une_docstring(fonction):
+    """Teste si `fonction` possede une docstring non vide."""
+    return fonction.__doc__ is not None and len(fonction.__doc__.strip()) > 0
+
+print(a_une_docstring(calcul_moyenne))  # True
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def calcul_moyenne(valeurs):
+%     """Calcule la moyenne arithmetique d'une liste de valeurs numeriques."""
+%     return sum(valeurs) / len(valeurs)
+% def a_une_docstring(fonction):
+%     return fonction.__doc__ is not None and len(fonction.__doc__.strip()) > 0
+% assert a_une_docstring(calcul_moyenne) is True
+% def sans_doc(x):
+%     return x
+% assert a_une_docstring(sans_doc) is False
+% END-VERIFY
+
+\propriete[Ce qu'une bonne documentation contient]{
+  Une docstring de fonction utile précise, dans l'ordre : \textbf{ce que fait} la fonction
+  (une phrase claire), ses \textbf{préconditions} (ce que les arguments doivent vérifier),
+  et éventuellement ses \textbf{postconditions} (ce que garantit le résultat) — exactement
+  la spécification vue au chapitre sur les langages et la programmation.
+}
+
+\propriete[Préparer une présentation orale de projet]{
+  Le programme officiel souligne que cette spécialité contribue au développement des
+  \textbf{compétences orales}, en particulier pour préparer l'épreuve orale de terminale
+  (Grand Oral) — un travail qui commence dès la Première. Une présentation de projet
+  efficace explique : le \textbf{problème} traité, les \textbf{choix} effectués (et
+  pourquoi), les \textbf{difficultés} rencontrées et comment elles ont été surmontées, et
+  une \textbf{démonstration} concrète du résultat.
+}
+
+\erreurFrequente{Préparer une présentation orale qui ne fait que \textbf{décrire le code
+ligne par ligne}. Un jury (ou un public) s'intéresse davantage au \textbf{raisonnement} :
+pourquoi ce problème est intéressant, pourquoi telle approche a été choisie plutôt qu'une
+autre, ce qui a été appris en le résolvant — pas à une lecture littérale du code source.}
+
+\alamachine{Choisis une fonction que tu as écrite dans un chapitre précédent de ce manuel
+(par exemple le tri par insertion ou la recherche dichotomique). Écris-lui une docstring
+complète (rôle, précondition, postcondition), puis vérifie avec \lstinline{a_une_docstring}
+qu'elle est bien documentée. Prépare ensuite, à l'oral, une explication de $2$ minutes de
+cette fonction pour un camarade qui ne l'a jamais vue.}

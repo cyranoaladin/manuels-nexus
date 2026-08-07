@@ -1,0 +1,46 @@
+% META: {"id": "1NSI-PM-EVAL-A-corrige", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-PM-EVAL-A", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% evenements = [
+%     (1948, "Premier ordinateur a programme enregistre", "Equipe de Manchester"),
+%     (1971, "Premier microprocesseur commercial", "Intel"),
+%     (1989, "Invention du World Wide Web", "Tim Berners-Lee"),
+% ]
+% def evenements_entre(evenements, debut, fin):
+%     return [e for e in evenements if debut <= e[0] <= fin]
+% resultat = evenements_entre(evenements, 1950, 1990)
+% assert [e[0] for e in resultat] == [1971, 1989]
+% def diviser(a, b):
+%     assert b != 0, "le diviseur ne doit pas etre nul"
+%     return a / b
+% assert diviser(10, 2) == 5.0
+% END-VERIFY
+\begin{corrige}{1NSI-PM-EVAL-A-EX1}
+\textbf{1.} Entre 1950 et 1990 : le premier microprocesseur commercial (1971) et
+l'invention du World Wide Web (1989).
+
+\textbf{2.} $\dfrac{2}{4}\times100=50{,}0\,\%$.
+
+\textbf{3.} La démarche de projet est une compétence essentielle du programme (analyser un
+besoin, concevoir une solution, travailler en équipe, gérer le temps) qui ne peut
+s'acquérir qu'en la \textbf{pratiquant} réellement, pas seulement en l'étudiant en théorie :
+imposer un volume horaire minimal garantit que tous les élèves, quel que soit
+l'établissement, bénéficient effectivement de cette pratique.
+\end{corrige}
+
+\begin{corrige}{1NSI-PM-EVAL-A-EX2}
+\textbf{1.} Le programme lève une \lstinline{ZeroDivisionError}, avec le message
+\lstinline{division by zero}.
+
+\textbf{2.}
+\begin{python}
+def diviser(a, b):
+    assert b != 0, "le diviseur ne doit pas etre nul"
+    return a / b
+\end{python}
+
+\textbf{3.} Une précondition explicite documente clairement, dans le code lui-même,
+l'hypothèse nécessaire au bon fonctionnement de la fonction, avec un \textbf{message
+personnalisé} compréhensible. Laisser l'erreur native se produire fonctionne aussi (le
+programme s'arrête bien), mais sans cette documentation, un autre développeur (ou soi-même
+plus tard) doit deviner pourquoi la division a été appelée avec un diviseur nul.
+\end{corrige}
