@@ -1,0 +1,109 @@
+% META: {"id": "1NSI-RES-COURS-C1", "chapitre": "1NSI-RESEAUX", "type_objet": "cours", "capacites": ["P-ARCH-02A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Découpage en paquets et encapsulation}
+
+\margeAppui{Un fichier volumineux n'est jamais envoyé « d'un bloc » sur Internet : il est
+découpé en petits morceaux, appelés \emph{paquets}.}
+
+\definition[D1]{
+  Un \textbf{paquet} est un petit bloc de données, accompagné d'un \textbf{en-tête}
+  contenant des informations nécessaires à son acheminement et à sa remise en ordre : numéro
+  du paquet, nombre total de paquets, adresse d'origine, adresse de destination...
+}
+
+\propriete[Intérêt du découpage en paquets]{
+  Découper un message en paquets permet : de faire circuler plusieurs communications
+  \textbf{simultanément} sur le même réseau (partage de la bande passante) ; de faire
+  emprunter à des paquets d'un même message des \textbf{chemins différents} si nécessaire ;
+  de ne \textbf{retransmettre que les paquets perdus} en cas de problème, plutôt que le
+  message entier.
+}
+
+\begin{codereference}{Découper et réassembler un message en paquets}
+\begin{python}
+def decouper_en_paquets(message, taille_max):
+    """Decoupe `message` en paquets de taille au plus `taille_max`."""
+    nb_paquets = (len(message) + taille_max - 1) // taille_max
+    paquets = []
+    for i in range(nb_paquets):
+        donnees = message[i * taille_max:(i + 1) * taille_max]
+        paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+    return paquets
+
+def reassembler(paquets):
+    """Reassemble un message a partir de ses paquets, quel que soit leur ordre d'arrivee."""
+    paquets_tries = sorted(paquets, key=lambda p: p["numero"])
+    return "".join(p["donnees"] for p in paquets_tries)
+
+message = "BONJOURNSI"
+paquets = decouper_en_paquets(message, 4)
+print(paquets)
+print(reassembler(paquets))  # BONJOURNSI
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def decouper_en_paquets(message, taille_max):
+%     nb_paquets = (len(message) + taille_max - 1) // taille_max
+%     paquets = []
+%     for i in range(nb_paquets):
+%         donnees = message[i * taille_max:(i + 1) * taille_max]
+%         paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+%     return paquets
+% def reassembler(paquets):
+%     paquets_tries = sorted(paquets, key=lambda p: p["numero"])
+%     return "".join(p["donnees"] for p in paquets_tries)
+% message = "BONJOURNSI"
+% paquets = decouper_en_paquets(message, 4)
+% assert paquets == [
+%     {"numero": 0, "total": 3, "donnees": "BONJ"},
+%     {"numero": 1, "total": 3, "donnees": "OURN"},
+%     {"numero": 2, "total": 3, "donnees": "SI"},
+% ]
+% assert reassembler(paquets) == message
+% END-VERIFY
+
+\propriete[Encapsulation]{
+  L'\textbf{encapsulation} consiste à ajouter successivement des en-têtes autour des
+  données à mesure qu'elles descendent dans les couches réseau (données applicatives $\to$
+  en-tête de transport $\to$ en-tête réseau $\to$ en-tête de liaison), chaque couche
+  n'interprétant que \textbf{son propre} en-tête, sans avoir besoin de connaître le contenu
+  des couches supérieures.
+}
+
+\exemple{Peu importe le contenu du message (texte, image, vidéo), l'en-tête réseau qui
+indique l'adresse IP de destination a toujours le même format : c'est ce qui permet à un
+routeur d'acheminer n'importe quel type de données sans avoir à en comprendre le contenu.}
+
+\begin{codereference}{Modéliser l'encapsulation par imbrication de dictionnaires}
+\begin{python}
+def encapsuler(donnees, en_tete_transport, en_tete_reseau):
+    """Encapsule des donnees dans deux en-tetes successifs (transport puis reseau)."""
+    paquet_transport = {"en_tete": en_tete_transport, "donnees": donnees}
+    paquet_reseau = {"en_tete": en_tete_reseau, "donnees": paquet_transport}
+    return paquet_reseau
+
+paquet = encapsuler("Bonjour", {"port": 443}, {"ip_dest": "192.168.1.10"})
+print(paquet)
+# le routeur ne lit que paquet["en_tete"] (ip_dest), sans decoder paquet["donnees"]
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def encapsuler(donnees, en_tete_transport, en_tete_reseau):
+%     paquet_transport = {"en_tete": en_tete_transport, "donnees": donnees}
+%     paquet_reseau = {"en_tete": en_tete_reseau, "donnees": paquet_transport}
+%     return paquet_reseau
+% paquet = encapsuler("Bonjour", {"port": 443}, {"ip_dest": "192.168.1.10"})
+% assert paquet["en_tete"] == {"ip_dest": "192.168.1.10"}
+% assert paquet["donnees"]["en_tete"] == {"port": 443}
+% assert paquet["donnees"]["donnees"] == "Bonjour"
+% END-VERIFY
+
+\erreurFrequente{Croire que les paquets d'un même message arrivent toujours \textbf{dans
+l'ordre} d'envoi. Le numéro de paquet dans l'en-tête sert précisément à les
+\textbf{réordonner} à l'arrivée : sans lui, un réassemblage naïf (dans l'ordre de réception)
+produirait un message incorrect si des paquets arrivent dans le désordre.}
+
+\alamachine{Modifie \lstinline{reassembler} pour qu'elle lève une erreur explicite
+(\lstinline{assert}) si le nombre de paquets reçus ne correspond pas au \lstinline{total}
+indiqué dans leurs en-têtes (paquet manquant).}

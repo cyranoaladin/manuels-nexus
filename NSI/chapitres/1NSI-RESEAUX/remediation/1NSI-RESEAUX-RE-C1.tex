@@ -1,0 +1,57 @@
+% META: {"id": "1NSI-RESEAUX-RE-C1", "chapitre": "1NSI-RESEAUX", "type_objet": "remediation", "capacites": ["P-ARCH-02A"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : reassembler dans l'ordre d'arrivee au lieu du numero
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-RES-RE-C1-EX1}{1}{10}
+Le message \lstinline{"RESEAUXNSI"} est découpé en $4$ paquets de taille maximale $3$ avec
+\lstinline{decouper_en_paquets} du cours. Ils arrivent au destinataire dans l'ordre :
+paquet $3$, puis $1$, puis $0$, puis $2$. Un élève réassemble le message en concaténant
+simplement les paquets \textbf{dans leur ordre d'arrivée}, sans les trier :
+\begin{python}
+ordre_arrivee = [paquets[3], paquets[1], paquets[0], paquets[2]]
+message_reconstitue = "".join(p["donnees"] for p in ordre_arrivee)
+\end{python}
+\begin{enumerate}
+  \item Que contient \lstinline{message_reconstitue} avec cette méthode ? Est-ce le message d'origine ?
+  \item Pourquoi cette méthode échoue-t-elle ici, alors qu'elle fonctionnerait si les paquets arrivaient dans l'ordre $0,1,2,3$ ?
+  \item Corriger le réassemblage pour qu'il fonctionne quel que soit l'ordre d'arrivée.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def decouper_en_paquets(message, taille_max):
+%     nb_paquets = (len(message) + taille_max - 1) // taille_max
+%     paquets = []
+%     for i in range(nb_paquets):
+%         donnees = message[i * taille_max:(i + 1) * taille_max]
+%         paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+%     return paquets
+% message = "RESEAUXNSI"
+% paquets = decouper_en_paquets(message, 3)
+% ordre_arrivee = [paquets[3], paquets[1], paquets[0], paquets[2]]
+% message_reconstitue = "".join(p["donnees"] for p in ordre_arrivee)
+% assert message_reconstitue == "IEAURESXNS"
+% assert message_reconstitue != message
+% correct = "".join(p["donnees"] for p in sorted(ordre_arrivee, key=lambda p: p["numero"]))
+% assert correct == message
+% END-VERIFY
+
+\begin{corrige}{1NSI-RES-RE-C1-EX1}
+\textbf{1.} \lstinline{message_reconstitue} vaut \lstinline{"IEAURESXNS"} : ce n'est
+\textbf{pas} le message d'origine (\lstinline{"RESEAUXNSI"}).
+
+\textbf{2.} Concaténer dans l'ordre d'arrivée ne fonctionne que si les paquets arrivent
+\textbf{déjà dans l'ordre d'envoi} ($0,1,2,3$). Sur un vrai réseau, rien ne garantit cet
+ordre (les paquets peuvent emprunter des chemins différents, avec des délais différents) :
+il faut donc systématiquement se fier au \textbf{numéro} inscrit dans l'en-tête, jamais à
+l'ordre d'arrivée.
+
+\textbf{3.} Il faut trier les paquets par leur champ \lstinline{numero} avant de les
+concaténer :
+\begin{python}
+paquets_tries = sorted(ordre_arrivee, key=lambda p: p["numero"])
+message_correct = "".join(p["donnees"] for p in paquets_tries)
+\end{python}
+\end{corrige}

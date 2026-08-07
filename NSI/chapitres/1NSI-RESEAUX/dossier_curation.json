@@ -1,0 +1,14 @@
+{
+  "chapitre": "1NSI-RESEAUX",
+  "referentiel": "capacites_1NSI_ARCHITECTURES-MATERIELLES-ET.json",
+  "bo": "Arrete MENE1901633A, BO special n1 du 22 janvier 2019 -- NSI premiere, rubrique 'Architectures materielles et systemes d'exploitation' (sous-ensemble reseau/IHM materielle)",
+  "mode_creation": "ex_nihilo",
+  "note": "Septieme chapitre du manuel Premiere NSI (mapping docs/09 : 1NSI-RESEAUX <- P10, capacites P-ARCH-02/04). Deuxieme moitie du bloc unique BO 'Architectures materielles et systemes d'exploitation', scinde avec 1NSI-ARCHITECTURE-OS (capacites P-ARCH-01/03). Referentiel source verifie conforme au texte officiel du B.O. corpus_nsi indisponible : mode ex nihilo. Decoupage en paquets, protocole bit alterne et simulation de reseau modelises et verifies par execution python reelle ; capteurs/actionneurs/IHM modelises par une simulation de thermostat verifiee par execution.",
+  "capacites_cartographie": {
+    "C1": { "theme": "Decoupage en paquets et encapsulation", "niveau": "fondamental" },
+    "C2": { "theme": "Protocole du bit alterne (recuperation de perte)", "niveau": "fondamental" },
+    "C3": { "theme": "Simulation d'un reseau", "niveau": "application" },
+    "C4": { "theme": "Capteurs et actionneurs", "niveau": "fondamental" },
+    "C5": { "theme": "IHM programmee repondant a un cahier des charges", "niveau": "application" }
+  }
+}

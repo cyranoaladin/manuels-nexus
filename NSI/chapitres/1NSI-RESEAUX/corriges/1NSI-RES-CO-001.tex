@@ -1,0 +1,40 @@
+% META: {"id": "1NSI-RES-CO-001", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige", "exercice_ref": "1NSI-RES-EX-001", "capacites": ["P-ARCH-02A"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def decouper_en_paquets(message, taille_max):
+%     nb_paquets = (len(message) + taille_max - 1) // taille_max
+%     paquets = []
+%     for i in range(nb_paquets):
+%         donnees = message[i * taille_max:(i + 1) * taille_max]
+%         paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+%     return paquets
+% def reassembler(paquets):
+%     paquets_tries = sorted(paquets, key=lambda p: p["numero"])
+%     return "".join(p["donnees"] for p in paquets_tries)
+% message = "PROTOCOLERESEAU"
+% paquets = decouper_en_paquets(message, 5)
+% assert paquets == [
+%     {"numero": 0, "total": 3, "donnees": "PROTO"},
+%     {"numero": 1, "total": 3, "donnees": "COLER"},
+%     {"numero": 2, "total": 3, "donnees": "ESEAU"},
+% ]
+% ordre_arrivee = [paquets[2], paquets[0], paquets[1]]
+% assert reassembler(ordre_arrivee) == message
+% naif = "".join(p["donnees"] for p in ordre_arrivee)
+% assert naif == "ESEAUPROTOCOLER"
+% assert naif != message
+% END-VERIFY
+\begin{corrige}{1NSI-RES-EX-001}
+\textbf{1.} $3$ paquets sont créés : \lstinline{{"numero": 0, "donnees": "PROTO"}},
+\lstinline{{"numero": 1, "donnees": "COLER"}}, \lstinline{{"numero": 2, "donnees":
+"ESEAU"}}.
+
+\textbf{2.} Oui, le message est correctement reconstitué :
+\lstinline{"PROTOCOLERESEAU"}. \lstinline{reassembler} \textbf{trie} les paquets selon leur
+champ \lstinline{numero} avant de les concaténer, donc l'ordre d'arrivée n'a aucune
+importance.
+
+\textbf{3.} En concaténant simplement dans l'ordre d'arrivée (paquet 2, puis 0, puis 1),
+on obtiendrait \lstinline{"ESEAUPROTOCOLER"} : un message \textbf{incorrect} et
+incompréhensible. C'est exactement pour éviter ce problème que chaque paquet porte un
+numéro dans son en-tête.
+\end{corrige}
