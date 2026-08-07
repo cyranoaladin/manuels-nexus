@@ -1,0 +1,18 @@
+{
+  "chapitre": "1NSI-WEB-IHM",
+  "referentiel": "capacites_1NSI_INTERACTIONS-ENTRE-L-HOMME-E.json",
+  "bo": "Arrete MENE1901633A, BO special n1 du 22 janvier 2019 -- NSI premiere, rubrique 'Interactions entre l'homme et la machine sur le Web'",
+  "mode_creation": "ex_nihilo",
+  "note": "Cinquieme chapitre du manuel Premiere NSI (mapping docs/09 : 1NSI-WEB-IHM <- P08). Referentiel source verifie conforme au texte officiel du B.O. Chapitre au contenu majoritairement conceptuel (HTML/JS/HTTP) : le code HTML/JS est presente a titre illustratif (non execute, hors perimetre Python) ; les parties calculables (construction de requetes GET/POST, ordre client-serveur) sont verifiees par execution Python reelle via le module urllib.parse de la bibliotheque standard. corpus_nsi indisponible : mode ex nihilo.",
+  "capacites_cartographie": {
+    "C1": { "theme": "Composants graphiques Web", "niveau": "fondamental" },
+    "C2": { "theme": "Evenements associes aux composants", "niveau": "fondamental" },
+    "C3": { "theme": "Methodes executees lors d'un clic", "niveau": "application" },
+    "C4": { "theme": "Execution client/serveur, ordre des echanges", "niveau": "fondamental" },
+    "C5": { "theme": "Donnees memorisees cote client (cookies)", "niveau": "application" },
+    "C6": { "theme": "Transmission chiffree (HTTPS, approche fonctionnelle)", "niveau": "fondamental" },
+    "C7": { "theme": "Fonctionnement d'un formulaire Web", "niveau": "application" },
+    "C8": { "theme": "Requetes GET et POST", "niveau": "fondamental" },
+    "C9": { "theme": "Choix du type de requete selon confidentialite", "niveau": "application" }
+  }
+}

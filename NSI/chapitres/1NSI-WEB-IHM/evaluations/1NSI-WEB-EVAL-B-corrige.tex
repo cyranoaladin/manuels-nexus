@@ -1,0 +1,56 @@
+% META: {"id": "1NSI-WEB-EVAL-B-corrige", "chapitre": "1NSI-WEB-IHM", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-WEB-EVAL-B", "capacites": ["P-IHM-01A", "P-IHM-02", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+%     return None
+% favoris = {"articles": 3}
+% def retirer_favori():
+%     favoris["articles"] -= 1
+%     return favoris["articles"]
+% ajouter_gestionnaire("bouton_retirer", retirer_favori)
+% resultats = [declencher_clic("bouton_retirer") for _ in range(2)]
+% assert resultats == [2, 1]
+% from urllib.parse import urlencode
+% params = {"ville": "Sousse", "type": "appartement"}
+% url = "https://immo.fr/recherche?" + urlencode(params)
+% assert url == "https://immo.fr/recherche?ville=Sousse&type=appartement"
+% END-VERIFY
+\begin{corrige}{1NSI-WEB-EVAL-B-EX1}
+\textbf{1.} Non. Le HTML décrit uniquement l'apparence des composants ; sans code
+JavaScript associant une fonction à l'événement clic, rien ne se produit automatiquement.
+
+\textbf{2.}
+\begin{python}
+favoris = {"articles": 3}
+
+def retirer_favori():
+    favoris["articles"] -= 1
+    return favoris["articles"]
+
+ajouter_gestionnaire("bouton_retirer", retirer_favori)
+\end{python}
+
+\textbf{3.} La séquence est \lstinline{[2, 1]}.
+\end{corrige}
+
+\begin{corrige}{1NSI-WEB-EVAL-B-EX2}
+\textbf{1.}
+\begin{python}
+from urllib.parse import urlencode
+
+params = {"ville": "Sousse", "type": "appartement"}
+url = "https://immo.fr/recherche?" + urlencode(params)
+print(url)
+# https://immo.fr/recherche?ville=Sousse&type=appartement
+\end{python}
+
+\textbf{2.} Oui, GET est adapté : les critères de recherche (ville, type de bien) ne sont
+pas confidentiels, et l'URL résultante peut être partagée ou mise en favori.
+
+\textbf{3.} Il faut privilégier \textbf{POST} : le nom, l'email et le message d'un
+visiteur sont des données à caractère personnel qui ne doivent pas apparaître dans l'URL.
+\end{corrige}
