@@ -1,0 +1,29 @@
+% META: {"id": "1NSI-ARCHOS-EX-005", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "exercice", "capacites": ["P-ARCH-03C"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-005.tex", "corrige_tex": "chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def droit_accorde(permissions, categorie, action):
+%     index = {"proprietaire": 0, "groupe": 3, "autres": 6}
+%     decalage = {"lecture": 0, "ecriture": 1, "execution": 2}
+%     position = index[categorie] + decalage[action]
+%     return permissions[position] != "-"
+% def permissions_vers_octal(permissions):
+%     groupes = [permissions[0:3], permissions[3:6], permissions[6:9]]
+%     valeurs = []
+%     for g in groupes:
+%         v = (4 if g[0] == "r" else 0) + (2 if g[1] == "w" else 0) + (1 if g[2] == "x" else 0)
+%         valeurs.append(v)
+%     return "".join(str(v) for v in valeurs)
+% perm = "rw-r-----"
+% assert droit_accorde(perm, "proprietaire", "lecture") is True
+% assert droit_accorde(perm, "proprietaire", "execution") is False
+% assert droit_accorde(perm, "groupe", "lecture") is True
+% assert droit_accorde(perm, "autres", "lecture") is False
+% assert permissions_vers_octal(perm) == "640"
+% END-VERIFY
+\begin{exercice}{1NSI-ARCHOS-EX-005}{3}{12}
+Un fichier confidentiel a les permissions \lstinline{"rw-r-----"}.
+\begin{enumerate}
+  \item En utilisant \lstinline{droit_accorde} du cours, déterminer si le propriétaire peut exécuter ce fichier, si le groupe peut le lire, et si les autres utilisateurs peuvent le lire.
+  \item Convertir ces permissions en notation octale avec \lstinline{permissions_vers_octal}.
+  \item Ce fichier est-il accessible en lecture par n'importe quel utilisateur du système ? Justifier, et proposer un scénario où de telles permissions seraient appropriées.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,55 @@
+% META: {"id": "1NSI-WEB-EVAL-B", "chapitre": "1NSI-WEB-IHM", "type_objet": "evaluation", "capacites": ["P-IHM-01A", "P-IHM-02", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation B --- Interactions homme-machine sur le Web}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (composants, gestionnaire d'événement) ; Ex. 2 : 10 pts (GET/POST)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Bouton « retirer des favoris »} \hfill (10 points)
+
+On donne le code HTML suivant, sur une page listant $3$ favoris :
+\begin{console}
+<button id="bouton_retirer">Retirer des favoris</button>
+<span id="compteur">3</span> favori(s)
+\end{console}
+
+\begin{enumerate}
+  \item (2 pts) Ce code HTML seul suffit-il à décrémenter le compteur lors d'un clic ? Justifier.
+  \item (5 pts) En reprenant le modèle du cours, écrire une fonction \lstinline{retirer_favori()} qui décrémente \lstinline{favoris["articles"]} (initialisé à $3$) et renvoie la nouvelle valeur, puis l'associer à \lstinline{"bouton_retirer"}.
+  \item (3 pts) Simuler $2$ clics successifs. Quelle est la séquence de valeurs renvoyées ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+%     return None
+% favoris = {"articles": 3}
+% def retirer_favori():
+%     favoris["articles"] -= 1
+%     return favoris["articles"]
+% ajouter_gestionnaire("bouton_retirer", retirer_favori)
+% resultats = [declencher_clic("bouton_retirer") for _ in range(2)]
+% assert resultats == [2, 1]
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Choisir GET ou POST} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Un formulaire de recherche immobilière transmet les paramètres \lstinline{{"ville": "Sousse", "type": "appartement"}}. Construire, avec \lstinline{urlencode}, l'URL de la requête GET correspondante (base : \lstinline{"https://immo.fr/recherche"}).
+  \item (3 pts) Cette recherche peut-elle raisonnablement utiliser GET ? Justifier en citant la nature des données.
+  \item (3 pts) Un autre formulaire du même site transmet le nom, l'email et le message d'un visiteur souhaitant être recontacté. Quelle méthode privilégier, et pourquoi ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% params = {"ville": "Sousse", "type": "appartement"}
+% url = "https://immo.fr/recherche?" + urlencode(params)
+% assert url == "https://immo.fr/recherche?ville=Sousse&type=appartement"
+% END-VERIFY

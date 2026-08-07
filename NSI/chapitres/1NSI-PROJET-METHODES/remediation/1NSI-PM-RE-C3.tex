@@ -1,0 +1,60 @@
+% META: {"id": "1NSI-PM-RE-C3", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "remediation", "capacites": ["BO-PREAMBULE-COMPETENCES-METHODE"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C3 : TypeError par melange str/int
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-PM-RE-C3-EX1}{1}{10}
+Le programme suivant plante à l'exécution :
+\begin{python}
+def message_bienvenue_bugue(nom, age):
+    return "Bonjour " + nom + ", tu as " + age + " ans."
+
+message_bienvenue_bugue("Lina", 16)
+\end{python}
+\begin{enumerate}
+  \item Quel type d'erreur ce programme provoque-t-il ? Quel est le message exact ?
+  \item En appliquant la démarche méthodique du cours, identifier précisément quelle sous-expression du \lstinline{return} pose problème, et pourquoi.
+  \item Corriger la fonction (au moins deux méthodes sont possibles : conversion explicite, ou f-string).
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def message_bienvenue_bugue(nom, age):
+%     return "Bonjour " + nom + ", tu as " + age + " ans."
+% erreur_levee = False
+% try:
+%     message_bienvenue_bugue("Lina", 16)
+% except TypeError as e:
+%     erreur_levee = True
+%     message = str(e)
+% assert erreur_levee is True
+% assert message == 'can only concatenate str (not "int") to str'
+% def message_bienvenue(nom, age):
+%     return "Bonjour " + nom + ", tu as " + str(age) + " ans."
+% assert message_bienvenue("Lina", 16) == "Bonjour Lina, tu as 16 ans."
+% def message_bienvenue_fstring(nom, age):
+%     return f"Bonjour {nom}, tu as {age} ans."
+% assert message_bienvenue_fstring("Lina", 16) == "Bonjour Lina, tu as 16 ans."
+% END-VERIFY
+
+\begin{corrige}{1NSI-PM-RE-C3-EX1}
+\textbf{1.} Le programme lève une \lstinline{TypeError}, avec le message
+\lstinline{can only concatenate str (not "int") to str}.
+
+\textbf{2.} L'expression fautive est \lstinline{"... tu as " + age + " ans."} :
+l'opérateur \lstinline{+} entre chaînes de caractères \textbf{concatène} du texte, mais
+\lstinline{age} est un entier (\lstinline{int}), pas une chaîne. Python refuse de mélanger
+directement un \lstinline{int} et un \lstinline{str} avec \lstinline{+}.
+
+\textbf{3.} Deux corrections possibles :
+\begin{python}
+def message_bienvenue(nom, age):
+    return "Bonjour " + nom + ", tu as " + str(age) + " ans."
+
+def message_bienvenue_fstring(nom, age):
+    return f"Bonjour {nom}, tu as {age} ans."
+\end{python}
+La première convertit explicitement \lstinline{age} en chaîne avec \lstinline{str(...)} ;
+la seconde utilise une \emph{f-string}, qui effectue cette conversion automatiquement.
+\end{corrige}

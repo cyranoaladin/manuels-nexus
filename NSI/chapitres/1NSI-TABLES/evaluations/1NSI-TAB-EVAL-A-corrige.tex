@@ -1,0 +1,42 @@
+% META: {"id": "1NSI-TAB-EVAL-A-corrige", "chapitre": "1NSI-TABLES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-TAB-EVAL-A", "capacites": ["P-TABLE-01", "P-TABLE-02", "P-TABLE-03", "P-TABLE-04"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% films = [
+%     {"titre": "Interstellar", "annee": 2014, "genre": "SF", "note": 8.6},
+%     {"titre": "Inception", "annee": 2010, "genre": "SF", "note": 8.8},
+%     {"titre": "Amelie", "annee": 2001, "genre": "Comedie", "note": 8.3},
+%     {"titre": "Dune", "annee": 2021, "genre": "SF", "note": 8.0},
+% ]
+% resultat = [f for f in films if f["genre"] == "SF" and f["note"] >= 8.5]
+% assert [f["titre"] for f in resultat] == ["Interstellar", "Inception"]
+% tri = sorted(films, key=lambda ligne: ligne["annee"])
+% assert tri[0]["titre"] == "Amelie"
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EVAL-A-EX1}
+\textbf{1.} Avant conversion, \lstinline{films[0]["annee"]} serait une chaîne de
+caractères (\lstinline{str}), par exemple \lstinline{"2014"}.
+\begin{python}
+for ligne in films:
+    ligne["annee"] = int(ligne["annee"])
+    ligne["note"] = float(ligne["note"])
+\end{python}
+
+\textbf{2.}
+\begin{python}
+resultat = [f for f in films if f["genre"] == "SF" and f["note"] >= 8.5]
+\end{python}
+
+\textbf{3.} $2$ films remplissent ce critère : \textbf{Interstellar} (note $8{,}6$) et
+\textbf{Inception} (note $8{,}8$).
+\end{corrige}
+
+\begin{corrige}{1NSI-TAB-EVAL-A-EX2}
+\textbf{1.} \lstinline{sorted(films, key=lambda ligne: ligne["annee"])}. Le premier film
+après tri est \textbf{Amelie} (2001, la plus ancienne année).
+
+\textbf{2.} En fusionnant \lstinline{films} et \lstinline{realisateurs} sur
+\lstinline{titre}, on obtient $3$ lignes (Interstellar, Inception, Amelie).
+
+\textbf{3.} \textbf{Dune} n'apparaît pas dans le résultat : son titre n'est pas présent
+dans la table \lstinline{realisateurs}, il est donc hors du domaine de valeurs commun aux
+deux tables sur la colonne \lstinline{titre}.
+\end{corrige}

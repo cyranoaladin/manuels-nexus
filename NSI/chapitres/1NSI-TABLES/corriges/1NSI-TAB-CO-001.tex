@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-TAB-CO-001", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TAB-EX-001", "capacites": ["P-TABLE-01"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% import csv, io
+% texte = "titre,auteur,prix,stock\nLe Petit Prince,Saint-Exupery,7.5,12\n1984,Orwell,9.9,5\nLe Comte de Monte-Cristo,Dumas,12.0,3"
+% livres = list(csv.DictReader(io.StringIO(texte)))
+% for ligne in livres:
+%     ligne["prix"] = float(ligne["prix"])
+%     ligne["stock"] = int(ligne["stock"])
+% valeur_stock = sum(ligne["prix"] * ligne["stock"] for ligne in livres)
+% assert abs(valeur_stock - 175.5) < 1e-9
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-001}
+\textbf{1.}
+\begin{python}
+import csv
+
+with open("livres.csv", encoding="utf-8") as f:
+    livres = list(csv.DictReader(f))
+\end{python}
+
+\textbf{2.} \lstinline{livres[0]["prix"]} est une chaîne de caractères
+(\lstinline{str}), pas un flottant : \lstinline{"7.5"}, pas \lstinline{7.5}.
+\begin{python}
+for ligne in livres:
+    ligne["prix"] = float(ligne["prix"])
+    ligne["stock"] = int(ligne["stock"])
+\end{python}
+
+\textbf{3.} $7{,}5\times12+9{,}9\times5+12{,}0\times3=90+49{,}5+36=175{,}5$ euros.
+\end{corrige}

@@ -1,0 +1,115 @@
+% META: {"id": "1NSI-WEB-COURS-C2", "chapitre": "1NSI-WEB-IHM", "type_objet": "cours", "capacites": ["P-IHM-03A", "P-IHM-03B", "P-IHM-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Interaction client-serveur}
+
+\definition[D3]{
+  Le \textbf{client} désigne le navigateur de l'utilisateur ; le \textbf{serveur} désigne la
+  machine distante qui héberge le site Web. Une interaction Web typique suit un ordre
+  précis : le client envoie une \textbf{requête}, le serveur la traite et renvoie une
+  \textbf{réponse}, que le client affiche.
+}
+
+\propriete[Ce qui s'exécute où]{
+  Le code exécuté sur le \textbf{serveur} (souvent en Python, PHP, etc.) génère la page à
+  partir de données (base de données, calculs) : l'utilisateur ne voit jamais ce code. Le
+  code exécuté sur le \textbf{client} (en JavaScript, dans le navigateur) réagit aux
+  interactions de l'utilisateur \textbf{sans nouvel échange avec le serveur} (par exemple,
+  afficher un message d'alerte), sauf s'il déclenche explicitement une nouvelle requête.
+}
+
+\begin{codereference}{Modélisation de l'ordre client-serveur}
+\begin{python}
+etapes = []
+
+def navigateur_envoie_requete(url):
+    etapes.append(("client", "envoie requete vers " + url))
+
+def serveur_recoit_et_traite(url):
+    etapes.append(("serveur", "traite la requete " + url))
+    return "page HTML generee"
+
+def serveur_renvoie_reponse(contenu):
+    etapes.append(("serveur", "renvoie la reponse"))
+
+def navigateur_affiche(contenu):
+    etapes.append(("client", "affiche : " + contenu))
+
+navigateur_envoie_requete("/accueil")
+contenu = serveur_recoit_et_traite("/accueil")
+serveur_renvoie_reponse(contenu)
+navigateur_affiche(contenu)
+
+print([acteur for acteur, action in etapes])
+# ['client', 'serveur', 'serveur', 'client']
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% etapes = []
+% def navigateur_envoie_requete(url):
+%     etapes.append(("client", "envoie requete vers " + url))
+% def serveur_recoit_et_traite(url):
+%     etapes.append(("serveur", "traite la requete " + url))
+%     return "page HTML generee"
+% def serveur_renvoie_reponse(contenu):
+%     etapes.append(("serveur", "renvoie la reponse"))
+% def navigateur_affiche(contenu):
+%     etapes.append(("client", "affiche : " + contenu))
+% navigateur_envoie_requete("/accueil")
+% contenu = serveur_recoit_et_traite("/accueil")
+% serveur_renvoie_reponse(contenu)
+% navigateur_affiche(contenu)
+% assert [acteur for acteur, action in etapes] == ["client", "serveur", "serveur", "client"]
+% END-VERIFY
+
+\definition[D4]{
+  Un \textbf{cookie} est une petite donnée que le serveur demande au navigateur de
+  \textbf{mémoriser} côté client. À chaque requête ultérieure vers le même site, le
+  navigateur \textbf{retransmet} automatiquement ce cookie au serveur (par exemple, pour
+  reconnaître un utilisateur déjà connecté).
+}
+
+\begin{codereference}{Modélisation d'un cookie mémorisé côté client}
+\begin{python}
+cookies_client = {}
+
+def serveur_definit_cookie(nom, valeur):
+    cookies_client[nom] = valeur
+
+def client_envoie_requete_avec_cookies(url):
+    """Le client retransmet automatiquement les cookies memorises."""
+    return {"url": url, "cookies": dict(cookies_client)}
+
+serveur_definit_cookie("id_session", "abc123")
+requete = client_envoie_requete_avec_cookies("/panier")
+print(requete)  # {'url': '/panier', 'cookies': {'id_session': 'abc123'}}
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% cookies_client = {}
+% def serveur_definit_cookie(nom, valeur):
+%     cookies_client[nom] = valeur
+% def client_envoie_requete_avec_cookies(url):
+%     return {"url": url, "cookies": dict(cookies_client)}
+% serveur_definit_cookie("id_session", "abc123")
+% requete = client_envoie_requete_avec_cookies("/panier")
+% assert requete == {"url": "/panier", "cookies": {"id_session": "abc123"}}
+% END-VERIFY
+
+\propriete[Transmission chiffrée (HTTPS)]{
+  Sans chiffrement (protocole \textbf{HTTP}), les données échangées entre client et serveur
+  circulent \textbf{en clair} : n'importe quel intermédiaire sur le réseau peut les lire. Le
+  protocole \textbf{HTTPS} chiffre ces échanges, rendant leur contenu illisible pour un
+  intermédiaire. On utilise HTTPS dès que des informations sensibles (mot de passe, numéro
+  de carte bancaire) sont transmises.
+}
+
+\erreurFrequente{Croire qu'un site en HTTPS est à l'abri de \textbf{tout} risque. HTTPS
+protège la \textbf{transmission} des données (personne ne peut les lire en chemin), mais ne
+garantit rien sur ce que le serveur \textbf{fait} des données une fois reçues (stockage
+sécurisé ou non, revente à des tiers, etc.).}
+
+\alamachine{Reprends le code du gestionnaire de cookies. Ajoute une fonction
+\lstinline{supprimer_cookie(nom)} qui retire un cookie de \lstinline{cookies_client} (par
+exemple lors d'une déconnexion). Vérifie qu'après suppression, une nouvelle requête ne
+contient plus ce cookie.}

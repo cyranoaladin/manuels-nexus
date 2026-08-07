@@ -1,0 +1,76 @@
+% META: {"id": "1NSI-TAB-COURS-C3", "chapitre": "1NSI-TABLES", "type_objet": "cours", "capacites": ["P-TABLE-03"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Trier une table}
+
+\propriete[Tri suivant une colonne]{
+  Trier une table suivant une colonne consiste à réordonner ses lignes selon les valeurs de
+  cette colonne (ordre croissant ou décroissant). En Python, la fonction \lstinline{sorted}
+  accepte un paramètre \lstinline{key} : une fonction qui, pour chaque ligne, renvoie la
+  valeur à utiliser pour le tri.
+}
+
+\begin{codereference}{Trier une table avec \lstinline{sorted}}
+\begin{python}
+adherents = [
+    {"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80},
+    {"nom": "Sami", "age": 15, "categorie": "junior", "cotisation": 80},
+    {"nom": "Nour", "age": 17, "categorie": "junior", "cotisation": 80},
+    {"nom": "Yasmine", "age": 22, "categorie": "senior", "cotisation": 120},
+    {"nom": "Karim", "age": 19, "categorie": "senior", "cotisation": 120},
+]
+
+tries_par_age = sorted(adherents, key=lambda ligne: ligne["age"])
+print([ligne["nom"] for ligne in tries_par_age])
+# ['Sami', 'Ali', 'Nour', 'Karim', 'Yasmine']
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% adherents = [
+%     {"nom": "Ali", "age": 16}, {"nom": "Sami", "age": 15},
+%     {"nom": "Nour", "age": 17}, {"nom": "Yasmine", "age": 22}, {"nom": "Karim", "age": 19},
+% ]
+% tries_par_age = sorted(adherents, key=lambda ligne: ligne["age"])
+% assert [ligne["nom"] for ligne in tries_par_age] == ["Sami", "Ali", "Nour", "Karim", "Yasmine"]
+% END-VERIFY
+
+\propriete[Ordre décroissant]{
+  Pour trier en ordre \textbf{décroissant}, on ajoute le paramètre
+  \lstinline{reverse=True} à \lstinline{sorted}.
+}
+
+\exemple{Trier les adhérents par cotisation décroissante :}
+
+% BEGIN-VERIFY
+% adherents = [
+%     {"nom": "Ali", "cotisation": 80}, {"nom": "Sami", "cotisation": 80},
+%     {"nom": "Nour", "cotisation": 80}, {"nom": "Yasmine", "cotisation": 120}, {"nom": "Karim", "cotisation": 120},
+% ]
+% tries_desc = sorted(adherents, key=lambda ligne: ligne["cotisation"], reverse=True)
+% assert [ligne["nom"] for ligne in tries_desc][:2] == ["Yasmine", "Karim"]
+% END-VERIFY
+
+\erreurFrequente{Écrire une fonction de tri « à la main » (par insertion ou sélection,
+vues au chapitre d'algorithmique) alors qu'une fonction intégrée existe et suffit
+largement. Le programme officiel autorise explicitement l'usage de \lstinline{sorted} pour
+trier une table : implémenter son propre tri n'apporte rien ici et augmente le risque
+d'erreur.}
+
+\definition[D3]{
+  \lstinline{sorted(table, key=...)} renvoie une \textbf{nouvelle} liste triée, sans
+  modifier \lstinline{table}. La méthode \lstinline{table.sort(key=...)}, elle, trie la
+  liste \textbf{sur place} (elle modifie \lstinline{table} et ne renvoie rien).
+}
+
+% BEGIN-VERIFY
+% table = [{"v": 3}, {"v": 1}, {"v": 2}]
+% resultat = sorted(table, key=lambda ligne: ligne["v"])
+% assert table == [{"v": 3}, {"v": 1}, {"v": 2}]  # table originale inchangee
+% assert [ligne["v"] for ligne in resultat] == [1, 2, 3]
+% table.sort(key=lambda ligne: ligne["v"])
+% assert [ligne["v"] for ligne in table] == [1, 2, 3]  # table modifiee sur place
+% END-VERIFY
+
+\alamachine{Trie la table \lstinline{adherents} par ordre alphabétique du \lstinline{nom},
+puis par \lstinline{age} décroissant. Vérifie, en affichant \lstinline{adherents} avant et
+après un appel à \lstinline{sorted} (pas \lstinline{.sort()}), que la table d'origine n'est
+pas modifiée.}

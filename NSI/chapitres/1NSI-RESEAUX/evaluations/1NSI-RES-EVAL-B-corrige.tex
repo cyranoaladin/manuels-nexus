@@ -1,0 +1,54 @@
+% META: {"id": "1NSI-RES-EVAL-B-corrige", "chapitre": "1NSI-RESEAUX", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-RES-EVAL-B", "capacites": ["P-ARCH-02A", "P-ARCH-02B", "P-ARCH-02C", "P-ARCH-04A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def decouper_en_paquets(message, taille_max):
+%     nb_paquets = (len(message) + taille_max - 1) // taille_max
+%     paquets = []
+%     for i in range(nb_paquets):
+%         donnees = message[i * taille_max:(i + 1) * taille_max]
+%         paquets.append({"numero": i, "total": nb_paquets, "donnees": donnees})
+%     return paquets
+% paquets = decouper_en_paquets("PAQUETSRESEAU", 5)
+% assert len(paquets) == 3
+% reseau = {"X": ["Y"], "Y": ["X", "Z"], "Z": ["Y"]}
+% def peuvent_communiquer(reseau, depart, arrivee, visites=None):
+%     if visites is None:
+%         visites = set()
+%     if depart == arrivee:
+%         return True
+%     visites.add(depart)
+%     for v in reseau.get(depart, []):
+%         if v not in visites and peuvent_communiquer(reseau, v, arrivee, visites):
+%             return True
+%     return False
+% assert peuvent_communiquer(reseau, "X", "Z") is True
+% END-VERIFY
+\begin{corrige}{1NSI-RES-EVAL-B-EX1}
+\textbf{1.} $3$ paquets sont créés : \lstinline{"PAQUE"} (numéro 0), \lstinline{"TSRES"}
+(numéro 1), \lstinline{"EAU"} (numéro 2).
+
+\textbf{2.} Tentative $1$ : envoi de \lstinline{"M"} avec bit $0$ — réussit. Tentative
+$2$ : envoi de \lstinline{"N"} avec bit $1$ — échoue. Tentative $3$ : retransmission de
+\lstinline{"N"} avec bit $1$ — réussit. Tentative $4$ : envoi de \lstinline{"O"} avec bit
+$0$ — réussit. Messages reçus : \lstinline{[(0, "M"), (1, "N"), (0, "O")]}.
+
+\textbf{3.} Les paquets sont envoyés \textbf{un par un} : l'émetteur attend toujours l'ACK
+avant d'envoyer le suivant. Un seul bit suffit donc à distinguer \og un nouveau paquet \fg{}
+(bit différent du précédent) d'\og une retransmission \fg{} (même bit que le paquet
+précédent, non encore confirmé).
+\end{corrige}
+
+\begin{corrige}{1NSI-RES-EVAL-B-EX2}
+\textbf{1.} \lstinline{peuvent_communiquer(reseau, "X", "Z")} renvoie \lstinline{True} :
+il existe un chemin \lstinline{X -> Y -> Z}.
+
+\textbf{2.}
+\begin{python}
+def decider_ventilation(co2, seuil=800):
+    return co2 > seuil
+\end{python}
+
+\textbf{3.} \lstinline{decider_ventilation(1000)} vaut \lstinline{True} (air vicié, il
+faut ventiler) ; \lstinline{decider_ventilation(500)} vaut \lstinline{False} (air
+correct). Le \textbf{capteur} est le capteur de CO2 ; l'\textbf{actionneur} est le système
+de ventilation.
+\end{corrige}

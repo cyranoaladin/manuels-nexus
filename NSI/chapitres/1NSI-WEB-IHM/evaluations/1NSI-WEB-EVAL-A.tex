@@ -1,0 +1,55 @@
+% META: {"id": "1NSI-WEB-EVAL-A", "chapitre": "1NSI-WEB-IHM", "type_objet": "evaluation", "capacites": ["P-IHM-01A", "P-IHM-02", "P-IHM-04B", "P-IHM-04C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation A --- Interactions homme-machine sur le Web}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (composants, gestionnaire d'événement) ; Ex. 2 : 10 pts (GET/POST)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Bouton « ajouter au panier »} \hfill (10 points)
+
+On donne le code HTML suivant :
+\begin{console}
+<button id="bouton_ajouter">Ajouter au panier</button>
+<span id="compteur">0</span> article(s)
+\end{console}
+
+\begin{enumerate}
+  \item (2 pts) Ce code HTML seul suffit-il à incrémenter le compteur lors d'un clic ? Justifier.
+  \item (5 pts) En reprenant le modèle du cours (\lstinline{ajouter_gestionnaire}, \lstinline{declencher_clic}), écrire une fonction \lstinline{ajouter_article()} qui incrémente \lstinline{panier["articles"]} (initialement $0$) et renvoie la nouvelle valeur, puis l'associer à \lstinline{"bouton_ajouter"}.
+  \item (3 pts) Simuler $3$ clics successifs. Quelle est la séquence de valeurs renvoyées ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+%     return None
+% panier = {"articles": 0}
+% def ajouter_article():
+%     panier["articles"] += 1
+%     return panier["articles"]
+% ajouter_gestionnaire("bouton_ajouter", ajouter_article)
+% resultats = [declencher_clic("bouton_ajouter") for _ in range(3)]
+% assert resultats == [1, 2, 3]
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Choisir GET ou POST} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Un formulaire de recherche de produits transmet les paramètres \lstinline{{"q": "ordinateur", "trie": "popularite"}}. Construire, avec \lstinline{urlencode}, l'URL de la requête GET correspondante (base : \lstinline{"https://boutique.fr/recherche"}).
+  \item (3 pts) Cette recherche peut-elle raisonnablement utiliser GET ? Justifier en citant la nature des données.
+  \item (3 pts) Un autre formulaire du même site transmet un numéro de téléphone et une adresse postale pour une livraison. Quelle méthode privilégier, et pourquoi ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% from urllib.parse import urlencode
+% params = {"q": "ordinateur", "trie": "popularite"}
+% url = "https://boutique.fr/recherche?" + urlencode(params)
+% assert url == "https://boutique.fr/recherche?q=ordinateur&trie=popularite"
+% END-VERIFY

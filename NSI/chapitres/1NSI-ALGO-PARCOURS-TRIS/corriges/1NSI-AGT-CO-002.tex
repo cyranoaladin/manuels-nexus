@@ -1,0 +1,33 @@
+% META: {"id": "1NSI-AGT-CO-002", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-AGT-EX-002", "capacites": ["P-ALGO-01A"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def recherche_toutes_occurrences(tableau, valeur):
+%     indices = []
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             indices.append(i)
+%     return indices
+% assert recherche_toutes_occurrences([3, 7, 3, 3, 9], 3) == [0, 2, 3]
+% assert recherche_toutes_occurrences([3, 7, 3, 3, 9], 5) == []
+% END-VERIFY
+\begin{corrige}{1NSI-AGT-EX-002}
+\textbf{1.}
+\begin{python}
+def recherche_toutes_occurrences(tableau, valeur):
+    indices = []
+    for i in range(len(tableau)):
+        if tableau[i] == valeur:
+            indices.append(i)
+    return indices
+\end{python}
+
+\textbf{2.} \lstinline{recherche_toutes_occurrences([3, 7, 3, 3, 9], 3)} vaut
+\lstinline{[0, 2, 3]}. Avec \lstinline{valeur=5} : \lstinline{[]} (aucune occurrence).
+
+\textbf{3.} Le coût dans le pire cas est aussi \textbf{linéaire}, $O(n)$ : contrairement à
+\lstinline{recherche_occurrence} qui peut s'arrêter dès la première occurrence trouvée,
+\lstinline{recherche_toutes_occurrences} doit \textbf{toujours} parcourir l'intégralité du
+tableau (elle ne peut pas s'arrêter en cours de route, car une occurrence ultérieure
+pourrait exister). Les deux fonctions ont le même ordre de grandeur ($O(n)$), mais
+\lstinline{recherche_occurrence} peut être plus rapide \textbf{en pratique} si la valeur
+recherchée apparaît tôt dans le tableau.
+\end{corrige}

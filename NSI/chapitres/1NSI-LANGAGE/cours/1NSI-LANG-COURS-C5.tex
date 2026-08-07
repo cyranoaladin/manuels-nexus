@@ -1,0 +1,69 @@
+% META: {"id": "1NSI-LANG-COURS-C5", "chapitre": "1NSI-LANGAGE", "type_objet": "cours", "capacites": ["P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Utiliser une bibliothèque}
+
+\definition[D5]{
+  Une \textbf{bibliothèque} (ou \emph{module}) est un ensemble de fonctions déjà écrites et
+  testées, que l'on peut réutiliser avec l'instruction \lstinline{import}. Utiliser une
+  bibliothèque évite de « réinventer la roue » : c'est l'intérêt de la
+  \textbf{modularisation}.
+}
+
+\propriete[Lire la documentation]{
+  Avant d'utiliser une fonction d'une bibliothèque, on consulte sa \textbf{documentation} :
+  son prototype (paramètres, valeur renvoyée), une description de son comportement, parfois
+  des exemples. En Python, la fonction \lstinline{help(...)} affiche la docstring d'une
+  fonction, directement dans l'interpréteur.
+}
+
+\exemple{Le module \lstinline{math} fournit des fonctions mathématiques prêtes à l'emploi :}
+
+\begin{python}
+import math
+
+print(math.gcd(48, 18))    # 6 : plus grand commun diviseur
+print(math.isqrt(50))      # 7 : partie entiere de la racine carree
+print(math.ceil(4.2))      # 5 : arrondi a l'entier superieur
+print(math.floor(4.8))     # 4 : arrondi a l'entier inferieur
+\end{python}
+
+% BEGIN-VERIFY
+% import math
+% assert math.gcd(48, 18) == 6
+% assert math.isqrt(50) == 7
+% assert math.ceil(4.2) == 5
+% assert math.floor(4.8) == 4
+% END-VERIFY
+
+\begin{console}
+>>> help(math.isqrt)
+Help on built-in function isqrt in module math:
+
+isqrt(n, /)
+    Return the integer part of the square root of the input.
+\end{console}
+
+\erreurFrequente{Utiliser une fonction d'une bibliothèque \textbf{sans en lire la
+documentation}, en devinant son comportement. Par exemple, \lstinline{math.isqrt(48)}
+renvoie la partie \textbf{entière tronquée} de la racine carrée ($6$, car
+$6^2=36\leqslant48<49=7^2$), ce qui n'est \textbf{pas} toujours la même chose qu'un
+\textbf{arrondi} : \lstinline{round(math.sqrt(48))} vaut $7$ (la racine exacte
+$\approx6{,}93$ s'arrondit à $7$), une valeur différente. Deux fonctions qui se ressemblent
+peuvent avoir des comportements différents : il faut vérifier dans la documentation.}
+
+% BEGIN-VERIFY
+% import math
+% assert math.isqrt(48) == 6
+% assert round(math.sqrt(48)) == 7
+% assert math.isqrt(48) != round(math.sqrt(48))
+% END-VERIFY
+
+\propriete[Aucune connaissance exhaustive exigée]{
+  Le programme n'exige \textbf{aucune connaissance exhaustive} d'une bibliothèque
+  particulière : savoir \textbf{chercher} et \textbf{lire} une documentation pour trouver la
+  bonne fonction est plus important que de mémoriser toutes les fonctions disponibles.
+}
+
+\alamachine{Utilise \lstinline{help(str.split)} (ou consulte une documentation en ligne)
+pour comprendre ce que fait la méthode \lstinline{split} des chaînes de caractères.
+Utilise-la pour découper la chaîne \lstinline{"pomme,poire,banane"} en une liste de trois
+mots, à partir de la virgule comme séparateur.}

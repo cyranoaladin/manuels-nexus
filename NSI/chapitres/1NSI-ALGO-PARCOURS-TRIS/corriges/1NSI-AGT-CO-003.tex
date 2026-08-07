@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-AGT-CO-003", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-AGT-EX-003", "capacites": ["P-ALGO-02A", "P-ALGO-02C"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def tri_insertion(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% depart = [4, 2, 7, 1]
+% assert tri_insertion(depart) == [1, 2, 4, 7]
+% END-VERIFY
+\begin{corrige}{1NSI-AGT-EX-003}
+\textbf{1.} Tableau initial : \lstinline{[4, 2, 7, 1]}.
+\begin{itemize}
+  \item Après $i=1$ (insertion de $2$) : \lstinline{[2, 4, 7, 1]}
+  \item Après $i=2$ (insertion de $7$, déjà à sa place) : \lstinline{[2, 4, 7, 1]}
+  \item Après $i=3$ (insertion de $1$) : \lstinline{[1, 2, 4, 7]}
+\end{itemize}
+
+\textbf{2.} Après $i=1$ : \lstinline{[2, 4]} est trié. Après $i=2$ : \lstinline{[2, 4, 7]}
+est trié. Après $i=3$ : \lstinline{[1, 2, 4, 7]} est trié. L'invariant est vérifié à
+chaque étape.
+
+\textbf{3.} Oui, le tableau final \lstinline{[1, 2, 4, 7]} est correctement trié, ce que
+confirme l'exécution du code.
+\end{corrige}

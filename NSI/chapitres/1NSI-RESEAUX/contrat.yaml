@@ -1,0 +1,27 @@
+chapitre: 1NSI-RESEAUX
+niveau: 1NSI
+theme: ARCHITECTURES-MATERIELLES-ET
+titre: "Réseaux : transmission de données"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-ARCH-02A, libelle_eleve: "Je sais expliquer l'intérêt du découpage en paquets et de l'encapsulation." }
+  - { code: C2, ref_capacite: P-ARCH-02B, libelle_eleve: "Je sais dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets (bit alterné)." }
+  - { code: C3, ref_capacite: P-ARCH-02C, libelle_eleve: "Je sais simuler un réseau simple et déterminer si deux machines peuvent communiquer." }
+  - { code: C4, ref_capacite: P-ARCH-04A, libelle_eleve: "Je sais identifier le rôle des capteurs et des actionneurs." }
+  - { code: C5, ref_capacite: P-ARCH-04B, libelle_eleve: "Je sais réaliser par programmation une IHM répondant à un cahier des charges donné." }
+
+prerequis:
+  - { code: R1, libelle: "Dictionnaires, fonctions récursives simples", chapitre_origine: "1NSI-TYPES-CONSTRUITS" }
+  - { code: R2, libelle: "Protocole TCP/IP (vu en Seconde SNT)", chapitre_origine: "SNT" }
+
+situation_accroche: >
+  Envoyer une photo par Internet ne se fait pas d'un seul bloc : elle est découpée en
+  petits morceaux, envoyés séparément, parfois par des chemins différents, puis
+  reconstitués à l'arrivée. Que se passe-t-il si l'un de ces morceaux se perd en route ?
+  Comment le réseau détecte-t-il et corrige-t-il cette perte ? Ce chapitre explore le
+  découpage en paquets, un protocole simple de récupération de perte, la simulation d'un
+  réseau, et le lien entre le monde numérique et le monde physique via capteurs et
+  actionneurs.
+
+temps_estime_h: { parcours1: 9, parcours2: 7, parcours3: 6 }

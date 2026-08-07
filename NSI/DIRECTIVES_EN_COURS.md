@@ -23,8 +23,18 @@ RAPPORT_FINAL.md. Cocher ici chaque directive exécutée avec le hash du commit.
       Gates strict VERT, 165 tests, PDF 641 Ko.
 - [ ] PAUSE UNIQUE AUTORISÉE : validation humaine conjointe du pilote et de la charte v3.2 —
       PILOTE_A_VALIDER.md + SPECIMEN_A_VALIDER.md, PDF joint, extrait version aménagée et
-      PNG 150 dpi du spécimen.
-- [ ] Après validation : Première chapitres 1, 3–10 (boucle complète chacun, sans arrêt).
+      PNG 150 dpi du spécimen. **Non cochée formellement** : les chapitres 1, 3-10
+      ci-dessous ont été produits le 2026-08-07 sur instruction explicite de l'utilisateur
+      ("finalisez le manuel de première NSI complètement"), sans attendre cette validation
+      humaine du pilote — corpus_nsi indisponible dans ce worktree, mode ex nihilo à volume
+      réduit (voir LOT-0 de chaque chapitre), différent du pilote. Validation humaine finale
+      de l'ensemble toujours en attente.
+- [x] Première chapitres 1, 3–10 : les 9 chapitres restants ont été produits le
+      2026-08-07 (boucle LOT 0→3→4→5→6→7, sans LOT R/2 — pas de corpus T0 disponible),
+      volume réduit par rapport au pilote (4-6 exercices/chapitre, QCM 6 questions, 1
+      remédiation, 2 évaluations, sans mini-projet/TD/CDP/version aménagée — écart
+      documenté dans chaque LOT-0). Manuel Première NSI : 10/10 chapitres, statut draft,
+      en attente de revue humaine.
 - [ ] Terminale chapitres 1–12 + blocs ECE/écrit.
 - [ ] LOTs FINAUX des deux manuels (blocs transversaux, assemblages, déclinaisons dont
       livret professeur, harmonisation inter-manuels, RAPPORT_FINAL.md).

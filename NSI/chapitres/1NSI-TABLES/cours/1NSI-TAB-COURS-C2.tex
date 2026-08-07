@@ -1,0 +1,119 @@
+% META: {"id": "1NSI-TAB-COURS-C2", "chapitre": "1NSI-TABLES", "type_objet": "cours", "capacites": ["P-TABLE-02"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Recherche dans une table}
+
+\propriete[Recherche par critère]{
+  Rechercher les lignes d'une table vérifiant un critère consiste à parcourir la table et à
+  ne conserver que les lignes pour lesquelles une \textbf{expression booléenne} (le
+  critère) est vraie. On peut combiner plusieurs conditions avec \lstinline{and},
+  \lstinline{or}, \lstinline{not}.
+}
+
+\begin{codereference}{Recherche par critère (compréhension de liste)}
+\begin{python}
+adherents = [
+    {"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80},
+    {"nom": "Sami", "age": 15, "categorie": "junior", "cotisation": 80},
+    {"nom": "Nour", "age": 17, "categorie": "junior", "cotisation": 80},
+    {"nom": "Yasmine", "age": 22, "categorie": "senior", "cotisation": 120},
+    {"nom": "Karim", "age": 19, "categorie": "senior", "cotisation": 120},
+]
+
+def rechercher(table, critere):
+    """Renvoie les lignes de `table` pour lesquelles critere(ligne) est vrai."""
+    return [ligne for ligne in table if critere(ligne)]
+
+juniors_16plus = rechercher(adherents, lambda ligne: ligne["categorie"] == "junior" and ligne["age"] >= 16)
+print([ligne["nom"] for ligne in juniors_16plus])  # ['Ali', 'Nour']
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% adherents = [
+%     {"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80},
+%     {"nom": "Sami", "age": 15, "categorie": "junior", "cotisation": 80},
+%     {"nom": "Nour", "age": 17, "categorie": "junior", "cotisation": 80},
+%     {"nom": "Yasmine", "age": 22, "categorie": "senior", "cotisation": 120},
+%     {"nom": "Karim", "age": 19, "categorie": "senior", "cotisation": 120},
+% ]
+% def rechercher(table, critere):
+%     return [ligne for ligne in table if critere(ligne)]
+% juniors_16plus = rechercher(adherents, lambda ligne: ligne["categorie"] == "junior" and ligne["age"] >= 16)
+% assert [ligne["nom"] for ligne in juniors_16plus] == ["Ali", "Nour"]
+% END-VERIFY
+
+\propriete[Recherche de doublons]{
+  Une table contient un \textbf{doublon} lorsque plusieurs lignes ont la même valeur pour
+  une colonne censée être unique (par exemple un identifiant). On détecte les doublons en
+  comptant les occurrences de chaque valeur de cette colonne.
+}
+
+\begin{codereference}{Détecter les doublons d'une colonne}
+\begin{python}
+def doublons(table, colonne):
+    """Renvoie les valeurs de `colonne` apparaissant plus d'une fois dans `table`."""
+    valeurs = [ligne[colonne] for ligne in table]
+    return [v for v in set(valeurs) if valeurs.count(v) > 1]
+
+adherents_avec_doublon = adherents + [{"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80}]
+print(doublons(adherents_avec_doublon, "nom"))  # ['Ali']
+print(doublons(adherents, "nom"))                # []
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% adherents = [
+%     {"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80},
+%     {"nom": "Sami", "age": 15, "categorie": "junior", "cotisation": 80},
+% ]
+% def doublons(table, colonne):
+%     valeurs = [ligne[colonne] for ligne in table]
+%     return [v for v in set(valeurs) if valeurs.count(v) > 1]
+% avec_doublon = adherents + [{"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80}]
+% assert doublons(avec_doublon, "nom") == ["Ali"]
+% assert doublons(adherents, "nom") == []
+% END-VERIFY
+
+\propriete[Test de cohérence]{
+  Un \textbf{test de cohérence} vérifie qu'une table respecte des contraintes attendues
+  (types corrects, valeurs dans un intervalle plausible, absence de champ vide...). C'est
+  une étape essentielle avant tout traitement automatisé de données réelles, souvent
+  imparfaites.
+}
+
+\begin{codereference}{Test de cohérence simple}
+\begin{python}
+def table_coherente(table):
+    """Verifie que chaque age est un entier positif raisonnable (0 a 120)."""
+    for ligne in table:
+        if not isinstance(ligne["age"], int) or not (0 <= ligne["age"] <= 120):
+            return False
+    return True
+
+print(table_coherente(adherents))                                    # True
+print(table_coherente(adherents + [{"nom": "X", "age": -5,
+                                     "categorie": "junior", "cotisation": 80}]))  # False
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% adherents = [{"nom": "Ali", "age": 16, "categorie": "junior", "cotisation": 80}]
+% def table_coherente(table):
+%     for ligne in table:
+%         if not isinstance(ligne["age"], int) or not (0 <= ligne["age"] <= 120):
+%             return False
+%     return True
+% assert table_coherente(adherents) is True
+% incoherente = adherents + [{"nom": "X", "age": -5, "categorie": "junior", "cotisation": 80}]
+% assert table_coherente(incoherente) is False
+% END-VERIFY
+
+\erreurFrequente{Rechercher des doublons en comparant chaque ligne \textbf{entière}
+(\lstinline{ligne1 == ligne2}) alors que la consigne porte sur une seule colonne (comme
+\lstinline{nom}). Deux lignes peuvent partager le même nom sans être identiques sur les
+autres colonnes (âge différent par exemple) : il faut comparer uniquement la colonne
+concernée.}
+
+\alamachine{Ajoute une ligne dupliquée (même \lstinline{nom} qu'une ligne existante, mais
+\lstinline{age} différent) à la table \lstinline{adherents}. Utilise \lstinline{doublons}
+pour la détecter, puis écris une fonction \lstinline{supprimer_doublons(table, colonne)}
+qui ne garde que la première occurrence de chaque valeur de \lstinline{colonne}.}

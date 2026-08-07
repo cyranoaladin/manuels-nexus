@@ -1,0 +1,29 @@
+chapitre: 1NSI-WEB-IHM
+niveau: 1NSI
+theme: INTERACTIONS-ENTRE-L-HOMME-E
+titre: "Interactions entre l'homme et la machine sur le Web"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-IHM-01A, libelle_eleve: "Je sais identifier les composants graphiques permettant d'interagir avec une application Web." }
+  - { code: C2, ref_capacite: P-IHM-01B, libelle_eleve: "Je sais identifier les événements que les fonctions associées aux composants graphiques peuvent traiter." }
+  - { code: C3, ref_capacite: P-IHM-02, libelle_eleve: "Je sais analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web." }
+  - { code: C4, ref_capacite: P-IHM-03A, libelle_eleve: "Je sais distinguer ce qui est exécuté sur le client ou sur le serveur, et dans quel ordre." }
+  - { code: C5, ref_capacite: P-IHM-03B, libelle_eleve: "Je sais distinguer ce qui est mémorisé dans le client et retransmis au serveur." }
+  - { code: C6, ref_capacite: P-IHM-03C, libelle_eleve: "Je sais reconnaître quand et pourquoi une transmission est chiffrée." }
+  - { code: C7, ref_capacite: P-IHM-04A, libelle_eleve: "Je sais analyser le fonctionnement d'un formulaire Web simple." }
+  - { code: C8, ref_capacite: P-IHM-04B, libelle_eleve: "Je sais distinguer les transmissions de paramètres par requêtes POST ou GET." }
+  - { code: C9, ref_capacite: P-IHM-04C, libelle_eleve: "Je sais discuter du choix du type de requête selon les valeurs à transmettre et leur confidentialité." }
+
+prerequis:
+  - { code: R1, libelle: "Dictionnaires, chaînes de caractères", chapitre_origine: "1NSI-TYPES-CONSTRUITS" }
+  - { code: R2, libelle: "Notion de client/serveur (vue en Seconde SNT)", chapitre_origine: "SNT" }
+
+situation_accroche: >
+  Quand on remplit un formulaire de recherche sur un site Web et qu'on clique sur
+  « Rechercher », que se passe-t-il exactement, et où ? Quel code s'exécute dans le
+  navigateur, quel code s'exécute sur le serveur distant, et comment les données transitent-
+  elles entre les deux ? Ce chapitre explore les mécanismes d'interaction entre l'utilisateur
+  et une application Web, du clic de souris jusqu'à la réponse du serveur.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 7 }

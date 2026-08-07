@@ -1,0 +1,19 @@
+% META: {"id": "1NSI-TB-CO-002", "chapitre": "1NSI-TYPES-BASE", "type_objet": "corrige", "exercice_ref": "1NSI-TB-EX-002", "capacites": ["P-BASE-02"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% assert (300).bit_length() == 9
+% def complement_a_2(x, n):
+%     if x < 0:
+%         x = (1 << n) + x
+%     return format(x, f'0{n}b')
+% assert complement_a_2(-12, 8) == '11110100'
+% assert complement_a_2(20, 8) == '00010100'
+% END-VERIFY
+\begin{corrige}{1NSI-TB-EX-002}
+\textbf{1.} $2^8=256\leqslant300<512=2^9$, donc $300$ nécessite $9$ bits.
+
+\textbf{2.} $20=16+4=10100_2$, soit sur 8 bits : $00010100$.
+
+\textbf{3.} $12=1100_2$, soit sur 8 bits : $00001100$. En inversant chaque bit :
+$11110011$. En ajoutant $1$ : $11110100$. Donc $-12$ s'écrit $11110100$ en complément à 2
+sur 8 bits.
+\end{corrige}

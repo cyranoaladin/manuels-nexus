@@ -1,0 +1,25 @@
+chapitre: 1NSI-PROJET-METHODES
+niveau: 1NSI
+theme: HISTOIRE-DE-L-INFORMATIQUE-ET-METHODES
+titre: "Projet et méthodes"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-HIST-01, libelle_eleve: "Je sais situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes." }
+  - { code: C2, ref_capacite: BO-PREAMBULE-DEMARCHE-DE-PROJET, libelle_eleve: "Je sais structurer un projet informatique en jalons, avec un cahier des charges et un travail en équipe." }
+  - { code: C3, ref_capacite: BO-PREAMBULE-COMPETENCES-METHODE, libelle_eleve: "Je sais déboguer méthodiquement un programme, en lisant un message d'erreur et en localisant la cause du bug." }
+  - { code: C4, ref_capacite: BO-PREAMBULE-COMPETENCES-ORALES, libelle_eleve: "Je sais documenter mon code et préparer une présentation orale argumentée d'un projet informatique." }
+
+prerequis:
+  - { code: R1, libelle: "Spécification, jeux de tests", chapitre_origine: "1NSI-LANGAGE" }
+
+situation_accroche: >
+  Ce chapitre transversal clôt le manuel de Première. Il ne porte pas sur une nouvelle
+  notion technique, mais sur trois compétences qui traversent toute l'année : se repérer
+  dans l'histoire de l'informatique (une rubrique du programme construite progressivement,
+  chapitre après chapitre), savoir organiser un projet informatique en équipe (le programme
+  officiel réserve au moins un quart de l'horaire annuel à la conception de projets), et
+  savoir déboguer méthodiquement un programme — une compétence indispensable dès que les
+  programmes se complexifient.
+
+temps_estime_h: { parcours1: 8, parcours2: 6, parcours3: 5 }

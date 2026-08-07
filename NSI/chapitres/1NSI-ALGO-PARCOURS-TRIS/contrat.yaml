@@ -1,0 +1,25 @@
+chapitre: 1NSI-ALGO-PARCOURS-TRIS
+niveau: 1NSI
+theme: ALGORITHMIQUE
+titre: "Algorithmique 1 : parcours et tris"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-ALGO-01A, libelle_eleve: "Je sais écrire un algorithme de recherche d'une occurrence dans un tableau." }
+  - { code: C2, ref_capacite: P-ALGO-01B, libelle_eleve: "Je sais écrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne." }
+  - { code: C3, ref_capacite: P-ALGO-02A, libelle_eleve: "Je sais écrire l'algorithme du tri par insertion." }
+  - { code: C4, ref_capacite: P-ALGO-02C, libelle_eleve: "Je sais décrire un invariant de boucle qui prouve la correction du tri par insertion." }
+  - { code: C5, ref_capacite: P-ALGO-02B, libelle_eleve: "Je sais écrire l'algorithme du tri par sélection." }
+  - { code: C6, ref_capacite: P-ALGO-02D, libelle_eleve: "Je sais décrire un invariant de boucle qui prouve la correction du tri par sélection." }
+
+prerequis:
+  - { code: R1, libelle: "Tableaux indexés, boucles for/while", chapitre_origine: "1NSI-TYPES-CONSTRUITS" }
+
+situation_accroche: >
+  Trouver le plus rapide d'une liste de coureurs, calculer une moyenne de classe, ou trier
+  un classement par score : ce sont des besoins très courants, qui reposent tous sur un
+  parcours séquentiel d'un tableau. Ce chapitre présente les algorithmes de base sur
+  les tableaux (recherche, extremum, moyenne) et deux algorithmes de tri classiques
+  (insertion, sélection), avec la preuve rigoureuse de leur correction.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 7 }

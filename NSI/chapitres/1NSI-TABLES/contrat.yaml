@@ -1,0 +1,24 @@
+chapitre: 1NSI-TABLES
+niveau: 1NSI
+theme: TRAITEMENT-DE-DONNEES-EN-TAB
+titre: "Traitement de données en tables"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-TABLE-01, libelle_eleve: "Je sais importer une table depuis un fichier texte tabulé ou un fichier CSV." }
+  - { code: C2, ref_capacite: P-TABLE-02, libelle_eleve: "Je sais rechercher les lignes d'une table vérifiant des critères exprimés en logique propositionnelle, et détecter des doublons." }
+  - { code: C3, ref_capacite: P-TABLE-03, libelle_eleve: "Je sais trier une table suivant une colonne." }
+  - { code: C4, ref_capacite: P-TABLE-04, libelle_eleve: "Je sais construire une nouvelle table en combinant les données de deux tables." }
+
+prerequis:
+  - { code: R1, libelle: "P-uplets, tableaux, dictionnaires", chapitre_origine: "1NSI-TYPES-CONSTRUITS" }
+  - { code: R2, libelle: "Boucles for, fonctions, opérateurs booléens", chapitre_origine: "1NSI-TYPES-BASE" }
+
+situation_accroche: >
+  Un club sportif tient à jour un fichier CSV listant ses adhérents (nom, âge, catégorie,
+  cotisation) : comment retrouver rapidement tous les adhérents d'une catégorie, classer
+  la liste par âge, ou la fusionner avec le fichier des présences à l'entraînement ? Ce
+  chapitre présente les techniques de base pour manipuler des données organisées en
+  tables, sans base de données.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 7 }

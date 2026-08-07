@@ -1,0 +1,25 @@
+chapitre: 1NSI-LANGAGE
+niveau: 1NSI
+theme: LANGAGES-ET-PROGRAMMATION
+titre: "Langages et programmation"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-LANG-01, libelle_eleve: "Je sais identifier les constructions élémentaires communes aux langages de programmation (séquences, affectation, conditionnelles, boucles, appels de fonction)." }
+  - { code: C2, ref_capacite: P-LANG-02, libelle_eleve: "Je sais repérer, dans un nouveau langage, les traits communs et les traits particuliers par rapport à ce que je connais déjà." }
+  - { code: C3, ref_capacite: P-LANG-03A, libelle_eleve: "Je sais prototyper une fonction et décrire ses préconditions et postconditions." }
+  - { code: C4, ref_capacite: P-LANG-04, libelle_eleve: "Je sais mettre au point un programme à l'aide de jeux de tests." }
+  - { code: C5, ref_capacite: P-LANG-05, libelle_eleve: "Je sais utiliser la documentation d'une bibliothèque pour trouver et employer une fonction." }
+
+prerequis:
+  - { code: R1, libelle: "Types de base, opérateurs booléens", chapitre_origine: "1NSI-TYPES-BASE" }
+  - { code: R2, libelle: "Boucles for/while, structures conditionnelles", chapitre_origine: "SNT" }
+
+situation_accroche: >
+  Un programme qui « marche » sur un exemple n'est pas forcément correct. Comment être sûr
+  qu'une fonction fait ce qu'elle doit faire, dans tous les cas ? Ce chapitre présente les
+  constructions de base communes à tous les langages, la démarche de spécification
+  (préconditions/postconditions) et la mise au point par jeux de tests — des outils
+  indispensables dès que les programmes se complexifient.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 7 }

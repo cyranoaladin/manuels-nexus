@@ -1,0 +1,42 @@
+% META: {"id": "1NSI-TAB-EVAL-B-corrige", "chapitre": "1NSI-TABLES", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-TAB-EVAL-B", "capacites": ["P-TABLE-01", "P-TABLE-02", "P-TABLE-03", "P-TABLE-04"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% jeux = [
+%     {"titre": "Zelda", "annee": 2017, "genre": "Aventure", "note": 9.7},
+%     {"titre": "Portal 2", "annee": 2011, "genre": "Puzzle", "note": 9.5},
+%     {"titre": "Celeste", "annee": 2018, "genre": "Plateforme", "note": 9.2},
+%     {"titre": "Tetris", "annee": 1984, "genre": "Puzzle", "note": 9.0},
+% ]
+% resultat = [j for j in jeux if j["genre"] == "Puzzle" and j["note"] >= 9.3]
+% assert [j["titre"] for j in resultat] == ["Portal 2"]
+% tri = sorted(jeux, key=lambda ligne: ligne["annee"])
+% assert tri[0]["titre"] == "Tetris"
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EVAL-B-EX1}
+\textbf{1.} Avant conversion, \lstinline{jeux[0]["note"]} serait une chaîne de caractères
+(\lstinline{str}), par exemple \lstinline{"9.7"}.
+\begin{python}
+for ligne in jeux:
+    ligne["annee"] = int(ligne["annee"])
+    ligne["note"] = float(ligne["note"])
+\end{python}
+
+\textbf{2.}
+\begin{python}
+resultat = [j for j in jeux if j["genre"] == "Puzzle" and j["note"] >= 9.3]
+\end{python}
+
+\textbf{3.} $1$ seul jeu remplit ce critère : \textbf{Portal 2} (note $9{,}5$). Tetris, bien
+que du genre Puzzle, a une note de $9{,}0$, inférieure au seuil de $9{,}3$.
+\end{corrige}
+
+\begin{corrige}{1NSI-TAB-EVAL-B-EX2}
+\textbf{1.} \lstinline{sorted(jeux, key=lambda ligne: ligne["annee"])}. Le premier jeu
+après tri est \textbf{Tetris} (1984, la plus ancienne année).
+
+\textbf{2.} En fusionnant \lstinline{jeux} et \lstinline{studios} sur \lstinline{titre}, on
+obtient $3$ lignes (Zelda, Portal 2, Celeste).
+
+\textbf{3.} \textbf{Tetris} n'apparaît pas dans le résultat : son titre n'est pas présent
+dans la table \lstinline{studios}, il est donc hors du domaine de valeurs commun aux deux
+tables sur la colonne \lstinline{titre}.
+\end{corrige}

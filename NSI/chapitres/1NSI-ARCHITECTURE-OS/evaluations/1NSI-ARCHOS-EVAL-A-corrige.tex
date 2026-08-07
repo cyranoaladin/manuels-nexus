@@ -1,0 +1,83 @@
+% META: {"id": "1NSI-ARCHOS-EVAL-A-corrige", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "corrige_evaluation", "evaluation_ref": "1NSI-ARCHOS-EVAL-A", "capacites": ["P-ARCH-01A", "P-ARCH-01B", "P-ARCH-03A", "P-ARCH-03C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres = {}
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "MUL":
+%             _, reg_dest, reg_src = instruction
+%             registres[reg_dest] = registres[reg_dest] * registres[reg_src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%     return memoire, registres
+% memoire = [6, 7, 0]
+% programme = [
+%     ("LOAD", "R0", 0),
+%     ("LOAD", "R1", 1),
+%     ("MUL", "R0", "R1"),
+%     ("STORE", "R0", 2),
+%     ("HALT",),
+% ]
+% memoire_finale, registres = executer(programme, memoire)
+% assert memoire_finale == [6, 7, 42]
+% def droit_accorde(permissions, categorie, action):
+%     index = {"proprietaire": 0, "groupe": 3, "autres": 6}
+%     decalage = {"lecture": 0, "ecriture": 1, "execution": 2}
+%     position = index[categorie] + decalage[action]
+%     return permissions[position] != "-"
+% def permissions_vers_octal(permissions):
+%     groupes = [permissions[0:3], permissions[3:6], permissions[6:9]]
+%     valeurs = []
+%     for g in groupes:
+%         v = (4 if g[0] == "r" else 0) + (2 if g[1] == "w" else 0) + (1 if g[2] == "x" else 0)
+%         valeurs.append(v)
+%     return "".join(str(v) for v in valeurs)
+% assert permissions_vers_octal("rwxr-x---") == "750"
+% END-VERIFY
+\begin{corrige}{1NSI-ARCHOS-EVAL-A-EX1}
+\textbf{1.} Processeur, mémoire, entrées, sorties. La \textbf{mémoire} stocke à la fois
+les instructions et les données.
+
+\textbf{2.}
+\begin{python}
+def executer(programme, memoire):
+    registres = {}
+    for instruction in programme:
+        op = instruction[0]
+        if op == "LOAD":
+            _, reg, adresse = instruction
+            registres[reg] = memoire[adresse]
+        elif op == "MUL":
+            _, reg_dest, reg_src = instruction
+            registres[reg_dest] = registres[reg_dest] * registres[reg_src]
+        elif op == "STORE":
+            _, reg, adresse = instruction
+            memoire[adresse] = registres[reg]
+        elif op == "HALT":
+            break
+    return memoire, registres
+\end{python}
+
+\textbf{3.} Après \lstinline{LOAD R0,0} : \lstinline{R0=6}. Après \lstinline{LOAD R1,1} :
+\lstinline{R1=7}. Après \lstinline{MUL R0,R1} : \lstinline{R0=42}. Après
+\lstinline{STORE R0,2} : \lstinline{memoire=[6, 7, 42]}.
+\end{corrige}
+
+\begin{corrige}{1NSI-ARCHOS-EVAL-A-EX2}
+\textbf{1.} Par exemple : gestion des processus (partage du temps processeur) et gestion
+des droits d'accès aux fichiers (autres réponses possibles : gestion de la mémoire,
+gestion des fichiers).
+
+\textbf{2.} Le propriétaire \textbf{peut} exécuter (\lstinline{rwx}). Le groupe
+\textbf{peut} exécuter (\lstinline{r-x}). Les autres \textbf{ne peuvent pas} lire
+(\lstinline{---}).
+
+\textbf{3.} \lstinline{rwx}=$7$, \lstinline{r-x}=$5$, \lstinline{---}=$0$ : notation
+octale \lstinline{750}.
+\end{corrige}

@@ -1,0 +1,51 @@
+% META: {"id": "1NSI-ARCHOS-EX-002", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "exercice", "capacites": ["P-ARCH-01B"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-002.tex", "corrige_tex": "chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def executer(programme, memoire):
+%     registres = {}
+%     for instruction in programme:
+%         op = instruction[0]
+%         if op == "LOAD":
+%             _, reg, adresse = instruction
+%             registres[reg] = memoire[adresse]
+%         elif op == "ADD":
+%             _, reg_dest, reg_src = instruction
+%             registres[reg_dest] = registres[reg_dest] + registres[reg_src]
+%         elif op == "SUB":
+%             _, reg_dest, reg_src = instruction
+%             registres[reg_dest] = registres[reg_dest] - registres[reg_src]
+%         elif op == "STORE":
+%             _, reg, adresse = instruction
+%             memoire[adresse] = registres[reg]
+%         elif op == "HALT":
+%             break
+%     return memoire, registres
+% memoire = [10, 4, 0]
+% programme = [
+%     ("LOAD", "R0", 0),
+%     ("LOAD", "R1", 1),
+%     ("SUB", "R0", "R1"),
+%     ("STORE", "R0", 2),
+%     ("HALT",),
+% ]
+% memoire_finale, registres = executer(programme, memoire)
+% assert memoire_finale == [10, 4, 6]
+% assert registres == {"R0": 6, "R1": 4}
+% END-VERIFY
+\begin{exercice}{1NSI-ARCHOS-EX-002}{1}{12}
+On reprend le simulateur \lstinline{executer} du cours.
+\begin{enumerate}
+  \item Ajouter à \lstinline{executer} le traitement de l'instruction \lstinline{("SUB", reg_dest, reg_src)}, qui effectue \lstinline{reg_dest <- reg_dest - reg_src}.
+  \item Dérouler \og à la main \fg{} (sur papier) l'exécution du programme suivant, en indiquant l'état de \lstinline{registres} après chaque instruction :
+\begin{python}
+memoire = [10, 4, 0]
+programme = [
+    ("LOAD", "R0", 0),
+    ("LOAD", "R1", 1),
+    ("SUB", "R0", "R1"),
+    ("STORE", "R0", 2),
+    ("HALT",),
+]
+\end{python}
+  \item Vérifier ta réponse en exécutant le programme avec ta fonction modifiée.
+\end{enumerate}
+\end{exercice}

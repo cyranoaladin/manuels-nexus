@@ -1,0 +1,35 @@
+% META: {"id": "1NSI-AGT-CO-001", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-AGT-EX-001", "capacites": ["P-ALGO-01B"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def minimum(tableau):
+%     mini = tableau[0]
+%     for x in tableau[1:]:
+%         if x < mini:
+%             mini = x
+%     return mini
+% def moyenne(tableau):
+%     return sum(tableau) / len(tableau)
+% notes = [12, 4, 9, 1, 7]
+% assert minimum(notes) == 1
+% assert moyenne(notes) == 6.6
+% END-VERIFY
+\begin{corrige}{1NSI-AGT-EX-001}
+\textbf{1.}
+\begin{python}
+def minimum(tableau):
+    mini = tableau[0]
+    for x in tableau[1:]:
+        if x < mini:
+            mini = x
+    return mini
+\end{python}
+
+\textbf{2.} Le minimum est $1$. La moyenne est
+$\dfrac{12+4+9+1+7}{5}=\dfrac{33}{5}=6{,}6$.
+
+\textbf{3.} Ce choix fonctionne seulement parce que l'élève connaît une \textbf{borne
+maximale a priori} (ici, $20$, la note maximale). Cette astuce n'est pas généralisable :
+pour un tableau de données quelconques (températures, scores non bornés...), il n'existe
+pas toujours de constante connue à l'avance garantie supérieure à tous les éléments.
+Initialiser avec le \textbf{premier élément} du tableau fonctionne, elle, dans
+\textbf{tous} les cas, sans connaissance préalable des données.
+\end{corrige}

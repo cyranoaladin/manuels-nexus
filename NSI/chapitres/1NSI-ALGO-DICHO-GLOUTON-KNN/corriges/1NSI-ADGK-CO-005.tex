@@ -1,0 +1,34 @@
+% META: {"id": "1NSI-ADGK-CO-005", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-EX-005", "capacites": ["P-ALGO-05"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def sac_a_dos_glouton(objets, capacite):
+%     objets_tries = sorted(objets, key=lambda o: o[2] / o[1], reverse=True)
+%     charge = 0
+%     valeur_totale = 0
+%     choisis = []
+%     for nom, poids, valeur in objets_tries:
+%         if charge + poids <= capacite:
+%             choisis.append(nom)
+%             charge += poids
+%             valeur_totale += valeur
+%     return choisis, valeur_totale
+% objets = [("X", 6, 30), ("Y", 5, 20), ("Z", 5, 20)]
+% choisis, valeur = sac_a_dos_glouton(objets, 10)
+% assert choisis == ["X"]
+% assert valeur == 30
+% assert 20 + 20 > valeur
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-005}
+\textbf{1.} Rapports valeur/poids : \lstinline{X} : $30/6=5$ ; \lstinline{Y} : $20/5=4$ ;
+\lstinline{Z} : $20/5=4$. L'algorithme examine donc \lstinline{X} en premier (rapport le
+plus élevé), puis \lstinline{Y} et \lstinline{Z}.
+
+\textbf{2.} L'algorithme choisit d'abord \lstinline{X} (poids $6\leqslant10$, charge $=6$).
+Il ne peut ensuite prendre ni \lstinline{Y} ni \lstinline{Z} (poids $5$ chacun, charge
+$6+5=11>10$). Résultat : \lstinline{["X"]}, valeur totale $30$.
+
+\textbf{3.} En prenant \lstinline{Y} et \lstinline{Z} ensemble (poids $5+5=10\leqslant10$),
+on obtient une valeur de $20+20=40>30$. L'algorithme glouton n'est donc \textbf{pas
+optimal} dans ce cas : privilégier le meilleur rapport valeur/poids objet par objet ne
+garantit pas la meilleure combinaison globale, exactement comme pour le rendu de monnaie
+avec un système de pièces non standard.
+\end{corrige}

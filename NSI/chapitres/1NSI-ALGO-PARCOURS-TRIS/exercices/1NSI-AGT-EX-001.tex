@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-AGT-EX-001", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-01B"], "parcours": 1, "competences": ["calculer"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-001.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def minimum(tableau):
+%     mini = tableau[0]
+%     for x in tableau[1:]:
+%         if x < mini:
+%             mini = x
+%     return mini
+% def moyenne(tableau):
+%     return sum(tableau) / len(tableau)
+% notes = [12, 4, 9, 1, 7]
+% assert minimum(notes) == 1
+% assert moyenne(notes) == 6.6
+% END-VERIFY
+\begin{exercice}{1NSI-AGT-EX-001}{1}{10}
+On donne le tableau de notes \lstinline{[12, 4, 9, 1, 7]}.
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{minimum(tableau)} qui renvoie le plus petit élément d'un tableau non vide (sur le modèle de \lstinline{maximum} du cours).
+  \item Calculer la note minimale et la moyenne de ce tableau.
+  \item Un élève initialise \lstinline{mini = 20} avant sa boucle, en argumentant que $20$ est la note maximale possible. Pourquoi ce choix, bien que semblant raisonnable ici, est-il une mauvaise pratique en général ?
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,62 @@
+% META: {"id": "1NSI-ARCHOS-COURS-C1", "chapitre": "1NSI-ARCHITECTURE-OS", "type_objet": "cours", "capacites": ["P-ARCH-01A"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{L'architecture de von Neumann}
+
+\margeAppui{Depuis 1945, la quasi-totalité des ordinateurs suivent le même schéma
+d'organisation : l'architecture de von Neumann.}
+
+\definition[D1]{
+  L'\textbf{architecture de von Neumann} décrit une machine composée de quatre constituants
+  principaux, reliés par un \textbf{bus} : le \textbf{processeur} (ou UC, unité centrale),
+  la \textbf{mémoire}, et les périphériques d'\textbf{entrée-sortie}.
+}
+
+\begin{center}
+\begin{tikzpicture}[
+  boite/.style={draw=nxBleu, line width=0.8pt, minimum width=3.4cm, minimum height=1.1cm, font=\sffamily\small, align=center, fill=nxBleu!5},
+  fleche/.style={draw=nxBleu, line width=0.8pt, -{Stealth[length=6pt]}}
+]
+  \node[boite] (uc) at (0,2) {Processeur (UC)\\[2pt]\footnotesize registres, UAL, séquenceur};
+  \node[boite] (mem) at (0,0) {Mémoire\\[2pt]\footnotesize instructions et données};
+  \node[boite, minimum width=1.5cm] (entree) at (-2.6,-2) {Entrées};
+  \node[boite, minimum width=1.5cm] (sortie) at (2.6,-2) {Sorties};
+
+  \draw[fleche] (mem.north) -- (uc.south) node[midway, right, font=\tiny\sffamily] {bus};
+  \draw[fleche] (uc.south) ++(-0.6,0) |- (entree.north);
+  \draw[fleche] (mem.south) ++(0.6,0) |- (sortie.north);
+\end{tikzpicture}
+\end{center}
+
+\propriete[Rôle de chaque constituant]{
+  Le \textbf{processeur} exécute les instructions, une par une : il lit une instruction en
+  mémoire, la décode, l'exécute, puis passe à la suivante. La \textbf{mémoire} stocke à la
+  fois les \textbf{instructions} du programme et les \textbf{données} qu'il manipule (c'est
+  le principe clé de von Neumann : un même espace mémoire pour le code et les données). Les
+  \textbf{entrées-sorties} permettent à la machine de communiquer avec l'extérieur (clavier,
+  écran, disque, réseau).
+}
+
+\definition[D2]{
+  À l'intérieur du processeur, les \textbf{registres} sont de petites mémoires très rapides
+  qui stockent temporairement les valeurs en cours de traitement. L'\textbf{UAL} (unité
+  arithmétique et logique) effectue les calculs (addition, comparaison...). Le
+  \textbf{séquenceur} pilote l'enchaînement des étapes d'exécution.
+}
+
+\propriete[Monoprocesseur et multiprocesseur]{
+  Une architecture \textbf{monoprocesseur} ne dispose que d'un seul processeur : les
+  instructions s'exécutent \textbf{une à la fois}, séquentiellement. Une architecture
+  \textbf{multiprocesseur} dispose de plusieurs processeurs (ou plusieurs \emph{cœurs}), qui
+  peuvent exécuter des instructions \textbf{en parallèle}.
+}
+
+\erreurFrequente{Croire que le processeur \og sait \fg{} distinguer une instruction d'une
+donnée en mémoire. Dans l'architecture de von Neumann, instructions et données sont stockées
+dans le \textbf{même espace mémoire}, sous forme de suites de bits identiques dans leur
+nature : c'est uniquement le \textbf{contexte de lecture} (est-ce le séquenceur qui lit à
+cette adresse pour exécuter, ou l'UAL qui lit une donnée pour calculer ?) qui détermine
+comment ces bits sont interprétés.
+}
+
+\alamachine{Recherche le nombre de cœurs du processeur de l'ordinateur que tu utilises
+(par exemple avec la commande \lstinline{nproc} sous Linux, ou dans les informations
+système). Ce processeur est-il monoprocesseur ou multiprocesseur au sens du cours ?}

@@ -1,0 +1,80 @@
+% META: {"id": "1NSI-ADGK-RE-C1", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "remediation", "capacites": ["P-ALGO-04"], "status": "generated"}
+
+%---------------------------------------------------------------
+% FICHE DE REMEDIATION — C1 : oubli du +1 dans la mise a jour de borne_inf
+%---------------------------------------------------------------
+
+\begin{exercice}{1NSI-ADGK-RE-C1-EX1}{1}{10}
+Un élève écrit la recherche dichotomique suivante, avec une erreur dans la mise à jour de
+\lstinline{borne_inf} :
+\begin{python}
+def recherche_dichotomique_bugue(tableau_trie, valeur):
+    borne_inf, borne_sup = 0, len(tableau_trie) - 1
+    while borne_inf <= borne_sup:
+        milieu = (borne_inf + borne_sup) // 2
+        if tableau_trie[milieu] == valeur:
+            return milieu
+        elif tableau_trie[milieu] < valeur:
+            borne_inf = milieu  # au lieu de milieu + 1
+        else:
+            borne_sup = milieu - 1
+    return -1
+\end{python}
+\begin{enumerate}
+  \item Sur le tableau \lstinline{[1, 3, 5, 7, 9, 11, 13]}, que se passe-t-il si on cherche la valeur $4$ (absente) avec cette fonction bugée ? (on pourra limiter le nombre d'itérations testées à $20$ pour éviter une exécution trop longue)
+  \item Calculer le variant $V=\text{borne\_sup}-\text{borne\_inf}$ à chaque itération. Décroît-il toujours strictement avec cette version bugée ?
+  \item Corriger le code pour que la terminaison soit à nouveau garantie.
+\end{enumerate}
+\end{exercice}
+
+% BEGIN-VERIFY
+% def recherche_dichotomique_bugue_limitee(tableau_trie, valeur, max_iter=20):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     variants = []
+%     compteur = 0
+%     while borne_inf <= borne_sup:
+%         compteur += 1
+%         if compteur > max_iter:
+%             return "boucle_infinie", variants
+%         variants.append(borne_sup - borne_inf)
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu, variants
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu
+%         else:
+%             borne_sup = milieu - 1
+%     return -1, variants
+% t = [1, 3, 5, 7, 9, 11, 13]
+% resultat, variants = recherche_dichotomique_bugue_limitee(t, 4)
+% assert resultat == "boucle_infinie"
+% assert variants[-1] == variants[-2] == variants[-3]  # le variant ne decroit plus (stagne)
+% def recherche_dichotomique(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1
+% assert recherche_dichotomique(t, 4) == -1
+% END-VERIFY
+
+\begin{corrige}{1NSI-ADGK-RE-C1-EX1}
+\textbf{1.} La fonction ne termine \textbf{jamais} : elle entre dans une boucle infinie
+(après $20$ itérations, aucune réponse n'est obtenue).
+
+\textbf{2.} Dès que \lstinline{tableau_trie[milieu] < valeur} et que la zone de recherche
+se réduit à deux éléments consécutifs (\lstinline{borne_sup = borne_inf + 1}), on a
+\lstinline{milieu = borne_inf} : l'instruction \lstinline{borne_inf = milieu} laisse alors
+\lstinline{borne_inf} \textbf{inchangé}. Le variant $V=\text{borne\_sup}-\text{borne\_inf}$
+cesse de décroître (il stagne à la même valeur indéfiniment) : la preuve de terminaison du
+cours ne s'applique plus, et effectivement, l'algorithme ne termine pas.
+
+\textbf{3.} Il faut remettre \lstinline{borne_inf = milieu + 1} (comme dans le cours), pour
+garantir que \lstinline{borne_inf} augmente strictement à chaque fois que cette branche est
+empruntée, ce qui restaure la décroissance stricte du variant $V$.
+\end{corrige}

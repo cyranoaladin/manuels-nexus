@@ -1,0 +1,28 @@
+% META: {"id": "1NSI-WEB-EX-002", "chapitre": "1NSI-WEB-IHM", "type_objet": "exercice", "capacites": ["P-IHM-02"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex", "corrige_tex": "chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% gestionnaires = {}
+% def ajouter_gestionnaire(id_composant, fonction):
+%     gestionnaires[id_composant] = fonction
+% def declencher_clic(id_composant):
+%     if id_composant in gestionnaires:
+%         return gestionnaires[id_composant]()
+%     return None
+% etat = {"visible": False}
+% def basculer_affichage():
+%     etat["visible"] = not etat["visible"]
+%     return etat["visible"]
+% ajouter_gestionnaire("bouton_menu", basculer_affichage)
+% resultats = [declencher_clic("bouton_menu") for _ in range(3)]
+% assert resultats == [True, False, True]
+% END-VERIFY
+\begin{exercice}{1NSI-WEB-EX-002}{1}{12}
+On reprend le modèle de gestionnaire d'événements du cours (\lstinline{ajouter_gestionnaire},
+\lstinline{declencher_clic}). Un menu de navigation doit s'afficher ou se masquer à chaque
+clic sur un bouton \lstinline{"bouton_menu"} (un menu \og bascule \fg{}, comme sur un site
+mobile).
+\begin{enumerate}
+  \item Écrire une fonction \lstinline{basculer_affichage()} qui inverse la valeur de \lstinline{etat["visible"]} (initialement \lstinline{False}) et renvoie la nouvelle valeur.
+  \item Associer cette fonction à \lstinline{"bouton_menu"} avec \lstinline{ajouter_gestionnaire}.
+  \item Simuler $3$ clics successifs sur \lstinline{"bouton_menu"}. Quelle est la séquence de valeurs renvoyées ?
+\end{enumerate}
+\end{exercice}

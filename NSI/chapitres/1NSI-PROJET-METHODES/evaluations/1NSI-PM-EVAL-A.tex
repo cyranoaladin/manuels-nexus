@@ -1,0 +1,76 @@
+% META: {"id": "1NSI-PM-EVAL-A", "chapitre": "1NSI-PROJET-METHODES", "type_objet": "evaluation", "capacites": ["P-HIST-01", "BO-PREAMBULE-DEMARCHE-DE-PROJET", "BO-PREAMBULE-COMPETENCES-METHODE"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation A --- Projet et méthodes}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (histoire, démarche de projet) ; Ex. 2 : 10 pts (débogage)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Histoire et gestion de projet} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) En utilisant \lstinline{evenements_entre} du cours sur la chronologie \lstinline{[(1948, ...), (1971, ...), (1989, ...)]}, lister les événements situés entre 1950 et 1990.
+  \item (3 pts) Un projet est découpé en $4$ jalons, dont $2$ sont terminés. Calculer son avancement avec \lstinline{avancement} du cours.
+  \item (3 pts) Pourquoi le programme officiel impose-t-il de réserver au moins un quart de l'horaire annuel à la démarche de projet, plutôt que de laisser cette part au libre choix du professeur ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% evenements = [
+%     (1948, "Premier ordinateur a programme enregistre", "Equipe de Manchester"),
+%     (1971, "Premier microprocesseur commercial", "Intel"),
+%     (1989, "Invention du World Wide Web", "Tim Berners-Lee"),
+% ]
+% def evenements_entre(evenements, debut, fin):
+%     return [e for e in evenements if debut <= e[0] <= fin]
+% resultat = evenements_entre(evenements, 1950, 1990)
+% assert [e[0] for e in resultat] == [1971, 1989]
+% jalons = [
+%     {"nom": "Cahier des charges", "termine": True},
+%     {"nom": "Base de donnees", "termine": True},
+%     {"nom": "Interface utilisateur", "termine": False},
+%     {"nom": "Tests", "termine": False},
+% ]
+% def avancement(jalons):
+%     return sum(1 for j in jalons if j["termine"]) / len(jalons) * 100
+% assert avancement(jalons) == 50.0
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Débogage} \hfill (10 points)
+
+\begin{python}
+def diviser_bugue(a, b):
+    return a / b
+
+diviser_bugue(10, 0)
+\end{python}
+
+\begin{enumerate}
+  \item (3 pts) Quel type d'erreur ce programme provoque-t-il ? Quel est le message exact ?
+  \item (4 pts) Écrire une version corrigée \lstinline{diviser(a, b)} qui utilise une précondition (\lstinline{assert}) pour interdire explicitement une division par zéro, avec un message clair.
+  \item (3 pts) Pourquoi une précondition explicite est-elle préférable à laisser l'erreur native (\lstinline{ZeroDivisionError}) se produire sans explication ?
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def diviser_bugue(a, b):
+%     return a / b
+% erreur_native = False
+% try:
+%     diviser_bugue(10, 0)
+% except ZeroDivisionError as e:
+%     erreur_native = True
+%     message = str(e)
+% assert erreur_native is True
+% assert message == "division by zero"
+% def diviser(a, b):
+%     assert b != 0, "le diviseur ne doit pas etre nul"
+%     return a / b
+% assert diviser(10, 2) == 5.0
+% erreur_precondition = False
+% try:
+%     diviser(10, 0)
+% except AssertionError:
+%     erreur_precondition = True
+% assert erreur_precondition is True
+% END-VERIFY

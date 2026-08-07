@@ -1,0 +1,24 @@
+chapitre: 1NSI-ALGO-DICHO-GLOUTON-KNN
+niveau: 1NSI
+theme: ALGORITHMIQUE
+titre: "Algorithmique 2 : dichotomie, algorithmes gloutons, k plus proches voisins"
+statut: draft   # ex nihilo, autoverifie par execution reelle (python -I), branche terminale/collection-v1, 2026-08-07
+
+capacites:
+  - { code: C1, ref_capacite: P-ALGO-04, libelle_eleve: "Je sais écrire une recherche dichotomique dans un tableau trié et prouver sa terminaison à l'aide d'un variant de boucle." }
+  - { code: C2, ref_capacite: P-ALGO-05, libelle_eleve: "Je sais résoudre un problème grâce à un algorithme glouton." }
+  - { code: C3, ref_capacite: P-ALGO-03, libelle_eleve: "Je sais écrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins." }
+
+prerequis:
+  - { code: R1, libelle: "Parcours séquentiel, tableaux triés", chapitre_origine: "1NSI-ALGO-PARCOURS-TRIS" }
+
+situation_accroche: >
+  Chercher un mot dans un dictionnaire papier ne se fait pas en tournant les pages une par
+  une depuis le début : on ouvre à peu près au milieu, on compare, et on recommence dans la
+  bonne moitié. Ce principe, la dichotomie, est bien plus rapide qu'un parcours séquentiel.
+  Ce chapitre présente la recherche dichotomique et sa preuve de terminaison, les
+  algorithmes gloutons (qui font toujours le choix qui semble le meilleur sur le moment,
+  sans garantie de résultat optimal), et l'algorithme des k plus proches voisins, un
+  premier exemple d'algorithme d'apprentissage automatique.
+
+temps_estime_h: { parcours1: 10, parcours2: 8, parcours3: 7 }

@@ -1,0 +1,50 @@
+% META: {"id": "1NSI-AGT-EX-005", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-02A", "P-ALGO-02B"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-005.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def tri_insertion_compte(tableau):
+%     tableau = tableau[:]
+%     compte = 0
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             compte += 1
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         if j >= 0:
+%             compte += 1
+%         tableau[j + 1] = valeur
+%     return tableau, compte
+% def tri_selection_compte(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     compte = 0
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             compte += 1
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau, compte
+% deja_trie = list(range(1, 21))
+% _, c1 = tri_insertion_compte(deja_trie)
+% _, c2 = tri_selection_compte(deja_trie)
+% assert c1 == 19
+% assert c2 == 190
+% assert c1 < c2
+% decroissant = list(range(20, 0, -1))
+% _, c3 = tri_insertion_compte(decroissant)
+% _, c4 = tri_selection_compte(decroissant)
+% assert c3 == 190
+% assert c4 == 190
+% assert c3 == c4
+% END-VERIFY
+\begin{exercice}{1NSI-AGT-EX-005}{3}{15}
+On ajoute un compteur de comparaisons aux deux fonctions de tri du cours (une variable
+incrémentée à chaque comparaison entre deux éléments du tableau).
+\begin{enumerate}
+  \item Sur un tableau \textbf{déjà trié} de $20$ éléments (\lstinline{list(range(1, 21))}), combien de comparaisons effectue le tri par insertion ? Le tri par sélection ?
+  \item Ce résultat confirme-t-il la propriété du cours (« insertion contre sélection ») ? Expliquer pourquoi le tri par insertion effectue si peu de comparaisons dans ce cas précis.
+  \item Sur un tableau trié en ordre \textbf{strictement décroissant} de $20$ éléments, on obtient $190$ comparaisons pour le tri par insertion \textbf{et} $190$ pour le tri par sélection. Ce résultat te surprend-il ? Explique, en raisonnant sur le déroulement de la boucle \lstinline{while} du tri par insertion dans ce cas précis, pourquoi son avantage habituel disparaît ici.
+\end{enumerate}
+\end{exercice}

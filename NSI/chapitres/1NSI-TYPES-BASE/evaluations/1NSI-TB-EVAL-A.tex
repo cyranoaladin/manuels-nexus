@@ -1,0 +1,45 @@
+% META: {"id": "1NSI-TB-EVAL-A", "chapitre": "1NSI-TYPES-BASE", "type_objet": "evaluation", "capacites": ["P-BASE-01", "P-BASE-02", "P-BASE-03", "P-BASE-04", "P-BASE-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation A --- Types et valeurs de base}
+\textit{Durée : 45 minutes. Calculatrice et brouillon autorisés, pas d'ordinateur.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (bases, complément à 2) ; Ex. 2 : 10 pts (flottants, booléens, encodage)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Bases et complément à 2} \hfill (10 points)
+
+\begin{enumerate}
+  \item (4 pts) Convertir $90$ (écriture décimale) en base $2$ puis en base $16$, en détaillant les calculs.
+  \item (3 pts) Combien de bits sont nécessaires pour écrire $90$ en binaire ?
+  \item (3 pts) Écrire $-7$ en complément à 2 sur $8$ bits, en détaillant la méthode (écriture de $7$, inversion des bits, ajout de $1$).
+\end{enumerate}
+
+% BEGIN-VERIFY
+% assert bin(90) == '0b1011010'
+% assert hex(90) == '0x5a'
+% assert (90).bit_length() == 7
+% def complement_a_2(x, n):
+%     if x < 0:
+%         x = (1 << n) + x
+%     return format(x, f'0{n}b')
+% assert complement_a_2(-7, 8) == '11111001'
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Flottants, booléens, encodage} \hfill (10 points)
+
+\begin{enumerate}
+  \item (3 pts) Que renvoie le test \lstinline{0.1 + 0.1 + 0.1 == 0.3} en Python ? Expliquer pourquoi.
+  \item (4 pts) Dresser la table de vérité de l'expression $(a\ \text{and}\ \text{not}\ b)\ \text{or}\ (\text{not}\ a\ \text{and}\ b)$. Quel opérateur booléen usuel cette expression reproduit-elle ?
+  \item (3 pts) Le mot \lstinline{"info"} (lettres non accentuées) occupe-t-il le même nombre d'octets une fois encodé en ASCII, en ISO-8859-1 et en UTF-8 ? Justifier.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% assert (0.1 + 0.1 + 0.1 == 0.3) is False
+% def expr(a, b):
+%     return (a and not b) or (not a and b)
+% resultats = {(a, b): expr(a, b) for a in (True, False) for b in (True, False)}
+% assert resultats == {(True, True): False, (True, False): True, (False, True): True, (False, False): False}
+% assert len('info'.encode('ascii')) == len('info'.encode('iso-8859-1')) == len('info'.encode('utf-8')) == 4
+% END-VERIFY

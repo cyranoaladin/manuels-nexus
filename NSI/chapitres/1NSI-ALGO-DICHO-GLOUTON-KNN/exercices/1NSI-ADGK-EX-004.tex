@@ -1,0 +1,32 @@
+% META: {"id": "1NSI-ADGK-EX-004", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "exercice", "capacites": ["P-ALGO-03"], "parcours": 2, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex", "corrige_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def distance(p1, p2):
+%     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
+% def k_plus_proches_voisins(points_classes, nouveau_point, k):
+%     distances = [(distance((x, y), nouveau_point), classe)
+%                  for (x, y, classe) in points_classes]
+%     distances.sort(key=lambda d: d[0])
+%     k_plus_proches = distances[:k]
+%     classes = [c for (_, c) in k_plus_proches]
+%     return max(set(classes), key=classes.count)
+% fruits = [
+%     (150, 7, "Pomme"), (170, 7.5, "Pomme"), (140, 6.5, "Pomme"),
+%     (120, 20, "Banane"), (130, 22, "Banane"), (110, 18, "Banane"),
+% ]
+% assert k_plus_proches_voisins(fruits, (145, 8), 3) == "Pomme"
+% END-VERIFY
+\begin{exercice}{1NSI-ADGK-EX-004}{2}{12}
+On dispose d'une base de fruits déjà classés, chacun décrit par sa masse (en g) et sa
+longueur (en cm) :
+\begin{python}
+fruits = [
+    (150, 7, "Pomme"), (170, 7.5, "Pomme"), (140, 6.5, "Pomme"),
+    (120, 20, "Banane"), (130, 22, "Banane"), (110, 18, "Banane"),
+]
+\end{python}
+\begin{enumerate}
+  \item En utilisant \lstinline{k_plus_proches_voisins} du cours, prédire la classe d'un nouveau fruit de masse $145$\,g et de longueur $8$\,cm, avec $k=3$.
+  \item Cette prédiction te semble-t-elle raisonnable au vu des données (comparer masse et longueur du nouveau fruit à celles des deux groupes) ?
+  \item Que se passerait-il, à ton avis, si on utilisait $k=6$ (tous les fruits de la base) au lieu de $k=3$ ? La classe obtenue serait-elle nécessairement pertinente ?
+\end{enumerate}
+\end{exercice}

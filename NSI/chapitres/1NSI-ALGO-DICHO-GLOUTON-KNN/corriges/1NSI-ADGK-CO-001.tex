@@ -1,0 +1,40 @@
+% META: {"id": "1NSI-ADGK-CO-001", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-EX-001", "capacites": ["P-ALGO-04"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def recherche_dichotomique_trace(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     etapes = []
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         etapes.append((borne_inf, borne_sup, milieu, tableau_trie[milieu]))
+%         if tableau_trie[milieu] == valeur:
+%             return milieu, etapes
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1, etapes
+% t = [2, 5, 8, 12, 16, 23, 38, 45, 56, 72]
+% idx, etapes = recherche_dichotomique_trace(t, 23)
+% assert idx == 5
+% assert etapes == [(0, 9, 4, 16), (5, 9, 7, 45), (5, 6, 5, 23)]
+% variants = [sup - inf for (inf, sup, _, _) in etapes]
+% assert variants == [9, 4, 1]
+% for k in range(1, len(variants)):
+%     assert variants[k] < variants[k - 1]
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-001}
+\textbf{1.}
+\begin{center}
+\begin{tabular}{cccc}
+  \lstinline{borne_inf} & \lstinline{borne_sup} & \lstinline{milieu} & \lstinline{tableau_trie[milieu]} \\\hline
+  0 & 9 & 4 & 16 \\
+  5 & 9 & 7 & 45 \\
+  5 & 6 & 5 & 23 \\
+\end{tabular}
+\end{center}
+
+\textbf{2.} $3$ itérations sont nécessaires. L'indice renvoyé est $5$.
+
+\textbf{3.} $V$ vaut successivement $9-0=9$, $9-5=4$, $6-5=1$ : la suite $9,4,1$ est bien
+strictement décroissante.
+\end{corrige}

@@ -1,0 +1,27 @@
+% META: {"id": "1NSI-ADGK-EX-002", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "exercice", "capacites": ["P-ALGO-04"], "parcours": 2, "competences": ["debugger", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex", "corrige_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def recherche_dichotomique(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1
+% non_trie = [23, 5, 42, 8, 16, 3, 99]
+% assert 23 in non_trie
+% assert recherche_dichotomique(non_trie, 23) == -1
+% END-VERIFY
+\begin{exercice}{1NSI-ADGK-EX-002}{2}{12}
+Un élève applique \lstinline{recherche_dichotomique} du cours au tableau
+\lstinline{[23, 5, 42, 8, 16, 3, 99]}, qui n'est \textbf{pas trié}, pour chercher la valeur
+$23$.
+\begin{enumerate}
+  \item Que renvoie \lstinline{recherche_dichotomique([23, 5, 42, 8, 16, 3, 99], 23)} ? La valeur $23$ est-elle pourtant présente dans le tableau ?
+  \item Dérouler les deux premières itérations pour expliquer précisément pourquoi l'algorithme élimine à tort la portion du tableau contenant la valeur $23$.
+  \item Quelle condition, énoncée dans le cours, ce tableau ne respecte-t-il pas ?
+\end{enumerate}
+\end{exercice}

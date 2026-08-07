@@ -1,0 +1,93 @@
+% META: {"id": "1NSI-RES-COURS-C3", "chapitre": "1NSI-RESEAUX", "type_objet": "cours", "capacites": ["P-ARCH-04A", "P-ARCH-04B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Capteurs, actionneurs et IHM programmée}
+
+\definition[D4]{
+  Un \textbf{capteur} mesure une grandeur physique (température, luminosité, présence...)
+  et la convertit en une donnée numérique exploitable par un programme. Un
+  \textbf{actionneur} reçoit une commande d'un programme et agit sur le monde physique
+  (allumer une lampe, ouvrir un volet, déclencher un moteur...).
+}
+
+\exemple{Un thermostat connecté : le \textbf{capteur} de température mesure la
+température ambiante ; le programme décide, selon cette mesure, d'activer ou non le
+chauffage ; l'\textbf{actionneur} (relais électrique) coupe ou active effectivement le
+chauffage.}
+
+\propriete[Cahier des charges d'une IHM]{
+  Réaliser une IHM (interface homme-machine) répondant à un \textbf{cahier des charges}
+  consiste à traduire des règles énoncées en langage courant (« si la température descend
+  sous $18\,^\circ\text{C}$, le chauffage s'active ») en un programme précis, testé sur des
+  cas concrets.
+}
+
+\begin{codereference}{Thermostat programmé : capteur, décision, actionneur}
+\begin{python}
+etat = {"chauffage": False, "override_manuel": None}
+
+def decider_chauffage(temperature, seuil=18):
+    """Cahier des charges : le chauffage s'active si temperature < seuil,
+    sauf si un override manuel est actif (bouton de la telecommande)."""
+    if etat["override_manuel"] is not None:
+        return etat["override_manuel"]
+    return temperature < seuil
+
+def actionner_chauffage(temperature, seuil=18):
+    """Lit le capteur (simule par le parametre temperature), decide,
+    et pilote l'actionneur (simule par etat["chauffage"])."""
+    etat["chauffage"] = decider_chauffage(temperature, seuil)
+    return etat["chauffage"]
+
+def bouton_override(valeur):
+    """Gestionnaire d'evenement du bouton manuel de la telecommande."""
+    etat["override_manuel"] = valeur
+
+print(actionner_chauffage(15))  # True : il fait froid, chauffage active
+print(actionner_chauffage(22))  # False : il fait assez chaud
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% etat = {"chauffage": False, "override_manuel": None}
+% def decider_chauffage(temperature, seuil=18):
+%     if etat["override_manuel"] is not None:
+%         return etat["override_manuel"]
+%     return temperature < seuil
+% def actionner_chauffage(temperature, seuil=18):
+%     etat["chauffage"] = decider_chauffage(temperature, seuil)
+%     return etat["chauffage"]
+% def bouton_override(valeur):
+%     etat["override_manuel"] = valeur
+% assert actionner_chauffage(15) is True
+% assert actionner_chauffage(22) is False
+% END-VERIFY
+
+\exemple{Le cahier des charges précise aussi qu'un utilisateur peut forcer manuellement le
+chauffage (bouton \og override \fg{}), quelle que soit la température :}
+
+% BEGIN-VERIFY
+% etat = {"chauffage": False, "override_manuel": None}
+% def decider_chauffage(temperature, seuil=18):
+%     if etat["override_manuel"] is not None:
+%         return etat["override_manuel"]
+%     return temperature < seuil
+% def actionner_chauffage(temperature, seuil=18):
+%     etat["chauffage"] = decider_chauffage(temperature, seuil)
+%     return etat["chauffage"]
+% def bouton_override(valeur):
+%     etat["override_manuel"] = valeur
+% bouton_override(True)
+% assert actionner_chauffage(25) is True  # force malgre une temperature elevee
+% bouton_override(None)
+% assert actionner_chauffage(25) is False  # retour au comportement automatique
+% END-VERIFY
+
+\erreurFrequente{Programmer une IHM en oubliant de tester les \textbf{cas limites} du
+cahier des charges (température exactement égale au seuil, override activé puis désactivé).
+Un cahier des charges mal testé peut sembler fonctionner sur l'exemple de démonstration tout
+en étant incorrect dans des situations réelles fréquentes.}
+
+\alamachine{Modifie le thermostat pour ajouter une \textbf{hystérésis} : le chauffage
+s'active si la température descend sous $18\,^\circ\text{C}$, mais ne se désactive que
+lorsqu'elle dépasse $20\,^\circ\text{C}$ (pour éviter des allumages/extinctions trop
+fréquents). Teste ta fonction sur une séquence de températures
+\lstinline{[15, 17, 19, 21, 19]}.}

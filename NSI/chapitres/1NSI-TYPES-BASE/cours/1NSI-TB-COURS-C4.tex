@@ -1,0 +1,103 @@
+% META: {"id": "1NSI-TB-COURS-C4", "chapitre": "1NSI-TYPES-BASE", "type_objet": "cours", "capacites": ["P-BASE-04"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Valeurs et opérateurs booléens}
+
+\definition[D5]{
+  Une \textbf{valeur booléenne} ne prend que deux valeurs : \lstinline{True} (vrai, souvent
+  codé 1) ou \lstinline{False} (faux, souvent codé 0). Les trois opérateurs booléens de base
+  sont \lstinline{and} (et), \lstinline{or} (ou) et \lstinline{not} (non).
+}
+
+\propriete[Table de vérité de \lstinline{and} et \lstinline{or}]{
+  \begin{center}
+  \begin{tabular}{cc|cc}
+    $a$ & $b$ & $a\ \text{and}\ b$ & $a\ \text{or}\ b$ \\\hline
+    Vrai & Vrai & Vrai & Vrai \\
+    Vrai & Faux & Faux & Vrai \\
+    Faux & Vrai & Faux & Vrai \\
+    Faux & Faux & Faux & Faux \\
+  \end{tabular}
+  \end{center}
+  \lstinline{and} est vrai seulement si \textbf{les deux} opérandes sont vrais ;
+  \lstinline{or} est vrai dès qu'\textbf{au moins un} des deux opérandes est vrai.
+}
+
+% BEGIN-VERIFY
+% table_and = {(a, b): a and b for a in (True, False) for b in (True, False)}
+% assert table_and == {(True, True): True, (True, False): False, (False, True): False, (False, False): False}
+% table_or = {(a, b): a or b for a in (True, False) for b in (True, False)}
+% assert table_or == {(True, True): True, (True, False): True, (False, True): True, (False, False): False}
+% END-VERIFY
+
+\definition[D6]{
+  Le \textbf{ou exclusif} (\lstinline{xor}, noté $\oplus$) est vrai lorsque \textbf{exactement
+  un} des deux opérandes est vrai (mais pas les deux). En Python, on l'obtient avec
+  \lstinline{a != b} pour des booléens, ou l'opérateur \lstinline{^} bit à bit sur des entiers.
+}
+
+\exemple{Le xor sert par exemple à additionner deux bits sans retenue : $0\oplus0=0$,
+$0\oplus1=1$, $1\oplus0=1$, $1\oplus1=0$ (la retenue, elle, correspond à \lstinline{a and b}).}
+
+\begin{codereference}{Addition d'un bit (demi-additionneur)}
+\begin{python}
+def demi_additionneur(a, b):
+    """Additionne deux bits (0 ou 1) : renvoie (somme, retenue)."""
+    somme = a ^ b
+    retenue = a & b
+    return somme, retenue
+
+print(demi_additionneur(1, 1))  # (0, 1) : 1+1 = 10 en binaire
+print(demi_additionneur(1, 0))  # (1, 0)
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def demi_additionneur(a, b):
+%     somme = a ^ b
+%     retenue = a & b
+%     return somme, retenue
+% assert demi_additionneur(0, 0) == (0, 0)
+% assert demi_additionneur(0, 1) == (1, 0)
+% assert demi_additionneur(1, 0) == (1, 0)
+% assert demi_additionneur(1, 1) == (0, 1)
+% END-VERIFY
+
+\propriete[Table de vérité d'une expression composée]{
+  Pour dresser la table de vérité d'une expression booléenne à $n$ variables, on énumère les
+  $2^n$ combinaisons possibles de valeurs des variables, et on calcule la valeur de
+  l'expression pour chacune.
+}
+
+\exemple{Table de vérité de $(a\ \text{and}\ b)\ \text{or}\ (\text{not}\ a\ \text{and}\ c)$ :}
+
+% BEGIN-VERIFY
+% def expr(a, b, c):
+%     return (a and b) or ((not a) and c)
+% resultats = {(a, b, c): expr(a, b, c)
+%              for a in (True, False) for b in (True, False) for c in (True, False)}
+% assert resultats[(True, True, False)] is True
+% assert resultats[(True, False, False)] is False
+% assert resultats[(False, False, True)] is True
+% assert resultats[(False, False, False)] is False
+% assert len(resultats) == 8
+% END-VERIFY
+
+\erreurFrequente{Croire que \lstinline{and} et \lstinline{or} évaluent toujours leurs deux
+opérandes. En Python, l'évaluation est \textbf{séquentielle} et \textbf{court-circuitée} :
+dans \lstinline{a and b}, si \lstinline{a} vaut \lstinline{False}, \lstinline{b} n'est même
+pas évalué (le résultat est déjà déterminé). Cela peut avoir des effets de bord si
+\lstinline{b} contient un appel de fonction.}
+
+% BEGIN-VERIFY
+% compteur = {'appels': 0}
+% def effet_de_bord():
+%     compteur['appels'] += 1
+%     return True
+% resultat = False and effet_de_bord()
+% assert resultat is False
+% assert compteur['appels'] == 0  # effet_de_bord() n'a jamais ete appelee : court-circuit
+% END-VERIFY
+
+\alamachine{Écris une fonction \lstinline{table_verite(expr, n)} qui... en fait, dresse
+« à la main » (avec des boucles \lstinline{for}) la table de vérité de l'expression
+\lstinline{(a or b) and (not c)} pour les 8 combinaisons de \lstinline{a}, \lstinline{b},
+\lstinline{c}. Vérifie ton résultat avec Python.}

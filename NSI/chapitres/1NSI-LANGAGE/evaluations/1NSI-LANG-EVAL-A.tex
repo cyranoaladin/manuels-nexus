@@ -1,0 +1,66 @@
+% META: {"id": "1NSI-LANG-EVAL-A", "chapitre": "1NSI-LANGAGE", "type_objet": "evaluation", "capacites": ["P-LANG-01", "P-LANG-03A", "P-LANG-04", "P-LANG-05"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "duree_min": 45, "status": "generated"}
+\section*{Évaluation A --- Langages et programmation}
+\textit{Durée : 45 minutes. Ordinateur avec interpréteur Python autorisé.}
+
+\baremeIndicatif{Ex. 1 : 10 pts (constructions, spécification) ; Ex. 2 : 10 pts (mise au point, bibliothèque)}
+
+\bigskip
+
+\textbf{Exercice 1} --- \textit{Moyenne pondérée} \hfill (10 points)
+
+\begin{enumerate}
+  \item (2 pts) Proposer une précondition pour une fonction \lstinline{moyenne_ponderee(valeurs, poids)} calculant une moyenne pondérée (on pourra penser à la longueur des deux listes, et à la somme des poids).
+  \item (5 pts) Écrire cette fonction, avec les \lstinline{assert} correspondants, en utilisant une boucle \lstinline{for} bornée.
+  \item (3 pts) Calculer \lstinline{moyenne_ponderee([12, 15, 8], [1, 2, 1])} à la main, puis vérifier avec le code.
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def moyenne_ponderee(valeurs, poids):
+%     assert len(valeurs) == len(poids)
+%     assert sum(poids) > 0
+%     total = 0
+%     for i in range(len(valeurs)):
+%         total = total + valeurs[i] * poids[i]
+%     return total / sum(poids)
+% assert moyenne_ponderee([12, 15, 8], [1, 2, 1]) == 12.5
+% END-VERIFY
+
+\bigskip
+
+\textbf{Exercice 2} --- \textit{Mise au point et bibliothèque} \hfill (10 points)
+
+Un élève écrit la fonction suivante, censée renvoyer la somme des éléments strictement
+positifs d'une liste :
+\begin{python}
+def somme_positifs_bugue(liste):
+    total = 0
+    for i in range(len(liste) - 1):
+        if liste[i] > 0:
+            total += liste[i]
+    return total
+\end{python}
+
+\begin{enumerate}
+  \item (3 pts) Que renvoie \lstinline{somme_positifs_bugue([3, -2, 5])} ? Quel est le résultat attendu ?
+  \item (4 pts) Identifier précisément l'erreur dans le code, et proposer une version corrigée.
+  \item (3 pts) En utilisant le module \lstinline{math}, calculer le PGCD de $84$ et $30$ (indiquer le nom de la fonction utilisée).
+\end{enumerate}
+
+% BEGIN-VERIFY
+% def somme_positifs_bugue(liste):
+%     total = 0
+%     for i in range(len(liste) - 1):
+%         if liste[i] > 0:
+%             total += liste[i]
+%     return total
+% assert somme_positifs_bugue([3, -2, 5]) == 3
+% def somme_positifs(liste):
+%     total = 0
+%     for i in range(len(liste)):
+%         if liste[i] > 0:
+%             total += liste[i]
+%     return total
+% assert somme_positifs([3, -2, 5]) == 8
+% import math
+% assert math.gcd(84, 30) == 6
+% END-VERIFY
