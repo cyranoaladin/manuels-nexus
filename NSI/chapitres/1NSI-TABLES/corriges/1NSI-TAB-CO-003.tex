@@ -1,0 +1,38 @@
+% META: {"id": "1NSI-TAB-CO-003", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TAB-EX-003", "capacites": ["P-TABLE-02"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% commandes = [
+%     {"id": "C001", "client": "Ali", "quantite": 3},
+%     {"id": "C002", "client": "Sara", "quantite": 1},
+%     {"id": "C001", "client": "Ali", "quantite": 3},
+%     {"id": "C003", "client": "Nadia", "quantite": -2},
+% ]
+% def doublons(table, colonne):
+%     valeurs = [ligne[colonne] for ligne in table]
+%     return [v for v in set(valeurs) if valeurs.count(v) > 1]
+% assert doublons(commandes, "id") == ["C001"]
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-003}
+\textbf{1.}
+\begin{python}
+def doublons(table, colonne):
+    valeurs = [ligne[colonne] for ligne in table]
+    return [v for v in set(valeurs) if valeurs.count(v) > 1]
+\end{python}
+\lstinline{doublons(commandes, "id")} renvoie \lstinline{["C001"]} : l'identifiant
+\lstinline{"C001"} apparaît deux fois. C'est anormal car un identifiant de commande est
+censé être \textbf{unique} : cela peut signaler une commande enregistrée deux fois par
+erreur.
+
+\textbf{2.}
+\begin{python}
+def coherente(table):
+    for ligne in table:
+        if not isinstance(ligne["quantite"], int) or ligne["quantite"] <= 0:
+            return False
+    return True
+\end{python}
+\lstinline{coherente(commandes)} renvoie \lstinline{False}.
+
+\textbf{3.} La ligne responsable est \lstinline{{"id": "C003", "client": "Nadia",
+"quantite": -2}} : sa quantité est négative, ce qui n'a pas de sens pour une commande.
+\end{corrige}

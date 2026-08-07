@@ -1,0 +1,83 @@
+% META: {"id": "1NSI-TABLES-QCM", "chapitre": "1NSI-TABLES", "type_objet": "qcm", "capacites": ["P-TABLE-01","P-TABLE-02","P-TABLE-03","P-TABLE-04"], "status": "generated"}
+
+\section*{QCM d'auto-évaluation --- Traitement de données en tables}
+
+\begin{center}
+\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\end{center}
+
+\bigskip
+
+\subsection*{C1 --- Import de table}
+
+\begin{enumerate}
+
+\item \textbf{[Q1]} Après import d'un fichier CSV avec \lstinline{csv.DictReader}, une
+valeur numérique comme \lstinline{"16"} est de type :
+  \begin{enumerate}[label=\Alph*.]
+    \item \lstinline{int}
+    \item \lstinline{float}
+    \item \lstinline{str}
+    \item \lstinline{bool}
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C2 --- Recherche, doublons, cohérence}
+
+\item \textbf{[Q2]} Pour rechercher les lignes d'une table vérifiant un critère, l'outil le
+plus adapté en Python est :
+  \begin{enumerate}[label=\Alph*.]
+    \item une compréhension de liste avec condition.
+    \item une modification directe du fichier CSV.
+    \item la fonction \lstinline{sorted}.
+    \item l'opérateur \lstinline{+}.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q3]} Pour détecter un doublon sur la colonne \lstinline{id} d'une table, il
+faut :
+  \begin{enumerate}[label=\Alph*.]
+    \item comparer chaque ligne entière avec toutes les autres.
+    \item compter les occurrences de chaque valeur de la colonne \lstinline{id} uniquement.
+    \item trier la table par ordre alphabétique.
+    \item supprimer toutes les lignes identiques.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C3 --- Tri}
+
+\item \textbf{[Q4]} \lstinline{sorted(table, key=lambda ligne: ligne["age"])} :
+  \begin{enumerate}[label=\Alph*.]
+    \item modifie \lstinline{table} sur place et ne renvoie rien.
+    \item renvoie une nouvelle liste triée, sans modifier \lstinline{table}.
+    \item provoque une erreur si \lstinline{table} contient des dictionnaires.
+    \item trie uniquement les nombres, jamais les chaînes.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C4 --- Fusion de tables}
+
+\item \textbf{[Q5]} Lors de la fusion de deux tables sur une colonne commune, une ligne de
+\lstinline{table1} dont la clé n'existe pas dans \lstinline{table2} :
+  \begin{enumerate}[label=\Alph*.]
+    \item provoque une erreur du programme.
+    \item apparaît dans le résultat avec des valeurs vides pour les colonnes de \lstinline{table2}.
+    \item n'apparaît pas dans le résultat, par défaut.
+    \item est dupliquée dans le résultat.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q6]} Le « domaine de valeurs » d'une colonne désigne :
+  \begin{enumerate}[label=\Alph*.]
+    \item le nombre de lignes de la table.
+    \item l'ensemble des valeurs que peut prendre cette colonne.
+    \item le type Python de la colonne uniquement.
+    \item le nom de la colonne dans le fichier CSV.
+  \end{enumerate}
+
+\end{enumerate}

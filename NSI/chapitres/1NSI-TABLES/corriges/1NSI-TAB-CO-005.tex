@@ -1,0 +1,49 @@
+% META: {"id": "1NSI-TAB-CO-005", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TAB-EX-005", "capacites": ["P-TABLE-04"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% eleves = [
+%     {"nom": "Amine", "classe": "1A"}, {"nom": "Lina", "classe": "1B"},
+%     {"nom": "Omar", "classe": "1A"}, {"nom": "Sara", "classe": "1B"},
+% ]
+% absences = [
+%     {"nom": "Amine", "nb_absences": 2}, {"nom": "Omar", "nb_absences": 0}, {"nom": "Sara", "nb_absences": 5},
+% ]
+% def fusionner_tout(table1, table2, cle, defauts):
+%     index2 = {ligne[cle]: ligne for ligne in table2}
+%     fusion = []
+%     for ligne1 in table1:
+%         if ligne1[cle] in index2:
+%             complement = {k: v for k, v in index2[ligne1[cle]].items() if k != cle}
+%         else:
+%             complement = defauts
+%         fusion.append({**ligne1, **complement})
+%     return fusion
+% resultat = fusionner_tout(eleves, absences, "nom", {"nb_absences": 0})
+% assert len(resultat) == 4
+% lina = [ligne for ligne in resultat if ligne["nom"] == "Lina"][0]
+% assert lina["nb_absences"] == 0
+% END-VERIFY
+\begin{corrige}{1NSI-TAB-EX-005}
+\textbf{1.} La table fusionnée contient $3$ lignes (Amine, Omar, Sara).
+
+\textbf{2.} \textbf{Lina} n'apparaît pas dans le résultat : son nom n'est pas présent dans
+la table \lstinline{absences}, donc il est hors du domaine de valeurs \textbf{commun} aux
+deux tables sur la colonne \lstinline{nom}.
+
+\textbf{3.} Il faut modifier la fonction pour que, lorsque le nom d'un élève de
+\lstinline{eleves} n'est pas trouvé dans \lstinline{absences}, on lui attribue des valeurs
+par défaut (\lstinline{nb_absences: 0}) au lieu de l'exclure du résultat :
+\begin{python}
+def fusionner_tout(table1, table2, cle, defauts):
+    index2 = {ligne[cle]: ligne for ligne in table2}
+    fusion = []
+    for ligne1 in table1:
+        if ligne1[cle] in index2:
+            complement = {k: v for k, v in index2[ligne1[cle]].items() if k != cle}
+        else:
+            complement = defauts
+        fusion.append({**ligne1, **complement})
+    return fusion
+\end{python}
+Avec \lstinline{fusionner_tout(eleves, absences, "nom", {"nb_absences": 0})}, on obtient
+bien les $4$ élèves, Lina ayant \lstinline{nb_absences} égal à $0$.
+\end{corrige}

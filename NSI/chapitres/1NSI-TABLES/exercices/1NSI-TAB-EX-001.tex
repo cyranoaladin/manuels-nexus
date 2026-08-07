@@ -1,0 +1,28 @@
+% META: {"id": "1NSI-TAB-EX-001", "chapitre": "1NSI-TABLES", "type_objet": "exercice", "capacites": ["P-TABLE-01"], "parcours": 1, "competences": ["calculer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-001.tex", "corrige_tex": "chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-001.tex", "status": "generated"}
+% BEGIN-VERIFY
+% import csv, io
+% texte = "titre,auteur,prix,stock\nLe Petit Prince,Saint-Exupery,7.5,12\n1984,Orwell,9.9,5\nLe Comte de Monte-Cristo,Dumas,12.0,3"
+% livres = list(csv.DictReader(io.StringIO(texte)))
+% assert livres[0]["prix"] == "7.5"
+% for ligne in livres:
+%     ligne["prix"] = float(ligne["prix"])
+%     ligne["stock"] = int(ligne["stock"])
+% assert livres[0]["prix"] == 7.5
+% assert isinstance(livres[0]["stock"], int)
+% valeur_stock = sum(ligne["prix"] * ligne["stock"] for ligne in livres)
+% assert abs(valeur_stock - 175.5) < 1e-9
+% END-VERIFY
+\begin{exercice}{1NSI-TAB-EX-001}{1}{12}
+Une librairie stocke son inventaire dans le fichier \lstinline{livres.csv} :
+\begin{console}
+titre,auteur,prix,stock
+Le Petit Prince,Saint-Exupery,7.5,12
+1984,Orwell,9.9,5
+Le Comte de Monte-Cristo,Dumas,12.0,3
+\end{console}
+\begin{enumerate}
+  \item Écrire le code Python (avec le module \lstinline{csv}) qui importe ce fichier dans une table \lstinline{livres}.
+  \item Après import, quel est le type Python de \lstinline{livres[0]["prix"]} ? Écrire le code qui convertit les colonnes \lstinline{prix} (en \lstinline{float}) et \lstinline{stock} (en \lstinline{int}) pour toutes les lignes.
+  \item En déduire la valeur totale du stock (somme de \lstinline{prix * stock} pour chaque livre).
+\end{enumerate}
+\end{exercice}
