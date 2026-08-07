@@ -46,13 +46,22 @@ CHAPITRES = [
     "1SPE-GEOMETRIE-REPEREE",
     "1SPE-PROBA-COND",
     "1SPE-VARIABLES-ALEATOIRES",
-    # Chapitres TSPE deja produits ; la cible finale (12 ou 13 chapitres)
-    # reste a figer en Phase 1 (MISSION_PRIORITAIRE §10). Cette liste ne
-    # prejuge pas de cette decision : elle raccorde seulement ce qui existe
-    # deja au modele d'inventaire, sans produire de nouveau contenu.
+    # Ordre officiel du perimetre TSPE corrige le 2026-08-05
+    # (docs/10_perimetre_terminale.md, programme 2019 MENE1921247A).
+    # Le chapitre 10bis TSPE-CONCENTRATION-LGN reste un point ouvert
+    # A_VALIDER_HUMAIN (fusion dans TSPE-PROBABILITES ou chapitre distinct)
+    # et n'est pas produit : il n'apparait donc pas ici.
     "TSPE-SUITES-LIMITES",
     "TSPE-LIMITES-FONCTIONS",
+    "TSPE-CONTINUITE",
     "TSPE-DERIVATION-CONVEXITE",
+    "TSPE-TRIGONOMETRIE",
+    "TSPE-LOGARITHME",
+    "TSPE-PRIMITIVES-EQDIFF",
+    "TSPE-CALCUL-INTEGRAL",
+    "TSPE-COMBINATOIRE",
+    "TSPE-PROBABILITES",
+    "TSPE-GEOMETRIE-ESPACE",
 ]
 CHAPITRES_1SPE = [chap for chap in CHAPITRES if chap.startswith("1SPE-")]
 CHAPITRES_TSPE = [chap for chap in CHAPITRES if chap.startswith("TSPE-")]
