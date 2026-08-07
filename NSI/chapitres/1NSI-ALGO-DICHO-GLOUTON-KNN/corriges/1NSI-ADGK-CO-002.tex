@@ -1,0 +1,32 @@
+% META: {"id": "1NSI-ADGK-CO-002", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-EX-002", "capacites": ["P-ALGO-04"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def recherche_dichotomique(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1
+% non_trie = [23, 5, 42, 8, 16, 3, 99]
+% assert recherche_dichotomique(non_trie, 23) == -1
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-002}
+\textbf{1.} La fonction renvoie $-1$ (« non trouvée »). Pourtant, $23$ est bien présent,
+à l'indice $0$ du tableau.
+
+\textbf{2.} Itération 1 : \lstinline{borne_inf=0}, \lstinline{borne_sup=6},
+\lstinline{milieu=3}, \lstinline{tableau_trie[3]=8}. Comme $8<23$, l'algorithme suppose
+(à tort, car le tableau n'est pas trié) que $23$ ne peut se trouver que dans la moitié
+\textbf{droite} : il fixe \lstinline{borne_inf=4}, éliminant définitivement les indices
+$0$ à $3$ — alors que l'indice $0$ contient justement la valeur cherchée ! Itération 2 :
+\lstinline{borne_inf=4}, \lstinline{borne_sup=6}, \lstinline{milieu=5},
+\lstinline{tableau_trie[5]=3}. Comme $3<23$, on élimine encore, \lstinline{borne_inf=6}.
+La suite ne peut plus trouver $23$, qui a déjà été éliminé à tort.
+
+\textbf{3.} Ce tableau ne respecte pas la condition d'être \textbf{trié}, condition
+indispensable pour que l'élimination d'une moitié de la zone de recherche soit valide.
+\end{corrige}

@@ -1,0 +1,110 @@
+% META: {"id": "1NSI-ADGK-COURS-C1", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "cours", "capacites": ["P-ALGO-04"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Recherche dichotomique}
+
+\margeAppui{Chercher un mot dans un dictionnaire papier trié : on ouvre au milieu, on
+compare, et on ne garde que la moitié pertinente. C'est le principe de la
+\textbf{dichotomie}.}
+
+\definition[D1]{
+  La \textbf{recherche dichotomique} recherche une valeur dans un tableau \textbf{trié}
+  en comparant systématiquement la valeur cherchée à l'élément \textbf{du milieu} de la
+  zone de recherche restante, et en ne conservant que la moitié où la valeur peut encore se
+  trouver.
+}
+
+\begin{codereference}{Recherche dichotomique}
+\begin{python}
+def recherche_dichotomique(tableau_trie, valeur):
+    """Renvoie l'indice de `valeur` dans `tableau_trie` (trie), ou -1 si absente."""
+    borne_inf, borne_sup = 0, len(tableau_trie) - 1
+    while borne_inf <= borne_sup:
+        milieu = (borne_inf + borne_sup) // 2
+        if tableau_trie[milieu] == valeur:
+            return milieu
+        elif tableau_trie[milieu] < valeur:
+            borne_inf = milieu + 1
+        else:
+            borne_sup = milieu - 1
+    return -1
+
+t = [1, 3, 5, 7, 9, 11, 13, 15]
+print(recherche_dichotomique(t, 11))  # 5
+print(recherche_dichotomique(t, 4))   # -1
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def recherche_dichotomique(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     while borne_inf <= borne_sup:
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1
+% t = [1, 3, 5, 7, 9, 11, 13, 15]
+% assert recherche_dichotomique(t, 11) == 5
+% assert recherche_dichotomique(t, 4) == -1
+% assert recherche_dichotomique(t, 1) == 0
+% assert recherche_dichotomique(t, 15) == 7
+% END-VERIFY
+
+\propriete[Coût de la dichotomie]{
+  À chaque itération, la zone de recherche est \textbf{divisée par deux}. Le coût de la
+  recherche dichotomique est donc \textbf{logarithmique} ($O(\log_2 n)$), bien plus rapide
+  que le coût linéaire de la recherche séquentielle pour un grand tableau.
+}
+
+\demonstration{
+\textbf{Terminaison de la recherche dichotomique.}
+
+On considère le \textbf{variant de boucle} $V=\text{borne\_sup}-\text{borne\_inf}$.
+
+\textbf{$V$ est bien défini et positif ou nul} tant que la boucle continue, puisque la
+condition de la boucle \lstinline{while} est précisément \lstinline{borne_inf <= borne_sup}.
+
+\textbf{$V$ décroît strictement} à chaque itération : si \lstinline{tableau_trie[milieu] <
+valeur}, alors \lstinline{borne_inf} devient \lstinline{milieu + 1}, strictement supérieur à
+son ancienne valeur (puisque $\text{milieu}\geqslant\text{borne\_inf}$), donc $V$ diminue.
+Si \lstinline{tableau_trie[milieu] > valeur}, alors \lstinline{borne_sup} devient
+\lstinline{milieu - 1}, strictement inférieur à son ancienne valeur (puisque
+$\text{milieu}\leqslant\text{borne\_sup}$), donc $V$ diminue également.
+
+\textbf{Conclusion.} $V$ est un entier positif ou nul qui décroît strictement à chaque
+tour de boucle : une suite d'entiers positifs strictement décroissante est nécessairement
+\textbf{finie}. La boucle \lstinline{while} termine donc en un nombre fini d'itérations.
+}
+
+% BEGIN-VERIFY
+% def recherche_dichotomique_avec_variant(tableau_trie, valeur):
+%     borne_inf, borne_sup = 0, len(tableau_trie) - 1
+%     variants = []
+%     while borne_inf <= borne_sup:
+%         variants.append(borne_sup - borne_inf)
+%         milieu = (borne_inf + borne_sup) // 2
+%         if tableau_trie[milieu] == valeur:
+%             return milieu, variants
+%         elif tableau_trie[milieu] < valeur:
+%             borne_inf = milieu + 1
+%         else:
+%             borne_sup = milieu - 1
+%     return -1, variants
+% t = [1, 3, 5, 7, 9, 11, 13, 15]
+% _, variants = recherche_dichotomique_avec_variant(t, 4)
+% for k in range(1, len(variants)):
+%     assert variants[k] < variants[k - 1]
+% assert all(v >= 0 for v in variants)
+% END-VERIFY
+
+\erreurFrequente{Appliquer la dichotomie sur un tableau \textbf{non trié}. La dichotomie
+repose entièrement sur le tri : comparer à l'élément du milieu ne permet d'éliminer une
+moitié \textbf{que si} on est certain que tous les éléments de cette moitié sont, eux
+aussi, inférieurs (ou supérieurs) à la valeur cherchée — ce qui n'est garanti que si le
+tableau est trié.}
+
+\alamachine{Modifie \lstinline{recherche_dichotomique} pour qu'elle compte le nombre
+d'itérations effectuées, et compare ce nombre à $\log_2(n)$ pour un tableau trié de $1000$
+éléments (utilise \lstinline{math.log2}).}

@@ -1,0 +1,45 @@
+% META: {"id": "1NSI-ADGK-EX-005", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "exercice", "capacites": ["P-ALGO-05"], "parcours": 3, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex", "corrige_tex": "chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def sac_a_dos_glouton(objets, capacite):
+%     objets_tries = sorted(objets, key=lambda o: o[2] / o[1], reverse=True)
+%     charge = 0
+%     valeur_totale = 0
+%     choisis = []
+%     for nom, poids, valeur in objets_tries:
+%         if charge + poids <= capacite:
+%             choisis.append(nom)
+%             charge += poids
+%             valeur_totale += valeur
+%     return choisis, valeur_totale
+% objets = [("X", 6, 30), ("Y", 5, 20), ("Z", 5, 20)]
+% choisis, valeur = sac_a_dos_glouton(objets, 10)
+% assert choisis == ["X"]
+% assert valeur == 30
+% END-VERIFY
+\begin{exercice}{1NSI-ADGK-EX-005}{3}{15}
+Le problème du \textbf{sac à dos} : on dispose d'objets, chacun avec un poids et une
+valeur, et d'un sac de capacité limitée. On veut maximiser la valeur totale des objets
+emportés sans dépasser la capacité. Une approche gloutonne classique choisit les objets par
+\textbf{rapport valeur/poids décroissant}.
+\begin{python}
+def sac_a_dos_glouton(objets, capacite):
+    """objets : liste de (nom, poids, valeur)."""
+    objets_tries = sorted(objets, key=lambda o: o[2] / o[1], reverse=True)
+    charge = 0
+    valeur_totale = 0
+    choisis = []
+    for nom, poids, valeur in objets_tries:
+        if charge + poids <= capacite:
+            choisis.append(nom)
+            charge += poids
+            valeur_totale += valeur
+    return choisis, valeur_totale
+\end{python}
+On dispose des objets \lstinline{X} (poids $6$, valeur $30$), \lstinline{Y} (poids $5$,
+valeur $20$) et \lstinline{Z} (poids $5$, valeur $20$), pour un sac de capacité $10$.
+\begin{enumerate}
+  \item Calculer le rapport valeur/poids de chaque objet, et en déduire l'ordre dans lequel l'algorithme les examine.
+  \item Exécuter \lstinline{sac_a_dos_glouton} sur ces données. Quels objets sont choisis, et quelle est la valeur totale obtenue ?
+  \item Trouver, en cherchant à la main, une combinaison d'objets de poids total $\leqslant10$ offrant une valeur \textbf{strictement supérieure}. L'algorithme glouton est-il optimal dans ce cas ?
+\end{enumerate}
+\end{exercice}

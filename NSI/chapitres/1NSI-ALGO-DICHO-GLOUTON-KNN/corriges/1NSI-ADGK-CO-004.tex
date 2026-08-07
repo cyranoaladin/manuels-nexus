@@ -1,0 +1,34 @@
+% META: {"id": "1NSI-ADGK-CO-004", "chapitre": "1NSI-ALGO-DICHO-GLOUTON-KNN", "type_objet": "corrige", "exercice_ref": "1NSI-ADGK-EX-004", "capacites": ["P-ALGO-03"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def distance(p1, p2):
+%     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
+% def k_plus_proches_voisins(points_classes, nouveau_point, k):
+%     distances = [(distance((x, y), nouveau_point), classe)
+%                  for (x, y, classe) in points_classes]
+%     distances.sort(key=lambda d: d[0])
+%     k_plus_proches = distances[:k]
+%     classes = [c for (_, c) in k_plus_proches]
+%     return max(set(classes), key=classes.count)
+% fruits = [
+%     (150, 7, "Pomme"), (170, 7.5, "Pomme"), (140, 6.5, "Pomme"),
+%     (120, 20, "Banane"), (130, 22, "Banane"), (110, 18, "Banane"),
+% ]
+% assert k_plus_proches_voisins(fruits, (145, 8), 3) == "Pomme"
+% END-VERIFY
+\begin{corrige}{1NSI-ADGK-EX-004}
+\textbf{1.} \lstinline{k_plus_proches_voisins(fruits, (145, 8), 3)} renvoie
+\lstinline{"Pomme"}.
+
+\textbf{2.} Oui, cette prédiction est raisonnable : le nouveau fruit ($145$\,g,
+$8$\,cm) est proche en masse et en longueur du groupe des pommes ($140$ à $170$\,g,
+$6{,}5$ à $7{,}5$\,cm), et très différent du groupe des bananes (masses proches mais
+longueurs bien supérieures, $18$ à $22$\,cm).
+
+\textbf{3.} Avec $k=6$, on utiliserait \textbf{tous} les fruits de la base, dont exactement
+$3$ pommes et $3$ bananes : c'est une situation d'\textbf{égalité} entre les deux classes,
+qui ne reflète plus la proximité réelle du nouveau point (les bananes, pourtant très
+éloignées, compteraient autant que les pommes, très proches). Le résultat d'une égalité
+dépend alors de détails d'implémentation non garantis, ce qui n'est pas satisfaisant : un
+$k$ trop grand (ici, égal à la taille totale de la base) fait perdre tout le sens de la
+méthode, qui repose justement sur la proximité \textbf{locale}.
+\end{corrige}
