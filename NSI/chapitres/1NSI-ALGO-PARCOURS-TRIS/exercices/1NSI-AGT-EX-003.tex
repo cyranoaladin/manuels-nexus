@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-AGT-EX-003", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-02A", "P-ALGO-02C"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-003.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-003.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def tri_insertion(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% depart = [4, 2, 7, 1]
+% assert tri_insertion(depart) == [1, 2, 4, 7]
+% END-VERIFY
+\begin{exercice}{1NSI-AGT-EX-003}{2}{15}
+On applique le tri par insertion au tableau \lstinline{[4, 2, 7, 1]}.
+\begin{enumerate}
+  \item Dérouler l'algorithme : donner le contenu du tableau après chaque itération de la boucle \lstinline{for} externe ($i=1$, $i=2$, $i=3$).
+  \item Pour chaque étape, vérifier que le sous-tableau \lstinline{tableau[0:i+1]} est bien trié (c'est l'invariant de boucle du cours).
+  \item Le tableau final est-il correctement trié ? Vérifier avec le code.
+\end{enumerate}
+\end{exercice}

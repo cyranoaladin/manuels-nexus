@@ -1,0 +1,30 @@
+% META: {"id": "1NSI-AGT-CO-004", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "corrige", "exercice_ref": "1NSI-AGT-EX-004", "capacites": ["P-ALGO-02B", "P-ALGO-02D"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def tri_selection(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% depart = [6, 3, 8, 2]
+% assert tri_selection(depart) == [2, 3, 6, 8]
+% END-VERIFY
+\begin{corrige}{1NSI-AGT-EX-004}
+\textbf{1.} Tableau initial : \lstinline{[6, 3, 8, 2]}.
+\begin{itemize}
+  \item $i=0$ : minimum de \lstinline{[6, 3, 8, 2]} à l'indice $3$ (valeur $2$). Après échange : \lstinline{[2, 3, 8, 6]}.
+  \item $i=1$ : minimum de \lstinline{[3, 8, 6]} à l'indice $1$ (valeur $3$, déjà en place). Après échange (avec elle-même) : \lstinline{[2, 3, 8, 6]}.
+  \item $i=2$ : minimum de \lstinline{[8, 6]} à l'indice $3$ (valeur $6$). Après échange : \lstinline{[2, 3, 6, 8]}.
+\end{itemize}
+
+\textbf{2.} Après $i=0$ : \lstinline{[2]} trié, maximum $2\leqslant3$ (minimum du reste
+\lstinline{[3,8,6]}). Après $i=1$ : \lstinline{[2,3]} trié, maximum $3\leqslant6$ (minimum
+de \lstinline{[8,6]}). Après $i=2$ : \lstinline{[2,3,6]} trié, maximum $6\leqslant8$.
+L'invariant est vérifié à chaque étape.
+
+\textbf{3.} Oui, le tableau final \lstinline{[2, 3, 6, 8]} est correctement trié.
+\end{corrige}

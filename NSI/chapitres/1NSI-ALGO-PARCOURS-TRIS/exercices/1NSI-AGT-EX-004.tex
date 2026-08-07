@@ -1,0 +1,23 @@
+% META: {"id": "1NSI-AGT-EX-004", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "exercice", "capacites": ["P-ALGO-02B", "P-ALGO-02D"], "parcours": 2, "competences": ["calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-004.tex", "corrige_tex": "chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-004.tex", "status": "generated"}
+% BEGIN-VERIFY
+% def tri_selection(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% depart = [6, 3, 8, 2]
+% assert tri_selection(depart) == [2, 3, 6, 8]
+% END-VERIFY
+\begin{exercice}{1NSI-AGT-EX-004}{2}{15}
+On applique le tri par sélection au tableau \lstinline{[6, 3, 8, 2]}.
+\begin{enumerate}
+  \item Dérouler l'algorithme : pour chaque itération de la boucle \lstinline{for} externe ($i=0$, $i=1$, $i=2$), donner l'indice du minimum trouvé dans la partie restante, et le contenu du tableau après l'échange.
+  \item Pour chaque étape, vérifier que \lstinline{tableau[0:i+1]} est trié \textbf{et} que son maximum est inférieur ou égal au minimum de \lstinline{tableau[i+1:]} (c'est l'invariant de boucle du cours).
+  \item Le tableau final est-il correctement trié ?
+\end{enumerate}
+\end{exercice}

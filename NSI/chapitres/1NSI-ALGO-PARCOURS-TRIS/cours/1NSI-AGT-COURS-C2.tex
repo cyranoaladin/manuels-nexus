@@ -1,0 +1,102 @@
+% META: {"id": "1NSI-AGT-COURS-C2", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "cours", "capacites": ["P-ALGO-02A", "P-ALGO-02C"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Le tri par insertion}
+
+\definition[D2]{
+  Le \textbf{tri par insertion} construit progressivement une partie triée du tableau, en
+  \textbf{insérant}, un par un, chaque élément restant à sa bonne place dans la partie déjà
+  triée (comme on trie des cartes à jouer en main, une par une).
+}
+
+\begin{codereference}{Tri par insertion}
+\begin{python}
+def tri_insertion(tableau):
+    """Trie `tableau` par ordre croissant, par insertion (renvoie une copie triee)."""
+    tableau = tableau[:]
+    for i in range(1, len(tableau)):
+        valeur = tableau[i]
+        j = i - 1
+        while j >= 0 and tableau[j] > valeur:
+            tableau[j + 1] = tableau[j]
+            j -= 1
+        tableau[j + 1] = valeur
+    return tableau
+
+print(tri_insertion([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def tri_insertion(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         tableau[j + 1] = valeur
+%     return tableau
+% assert tri_insertion([5, 3, 8, 1, 9, 2]) == [1, 2, 3, 5, 8, 9]
+% assert tri_insertion([]) == []
+% assert tri_insertion([1]) == [1]
+% assert tri_insertion([2, 1]) == [1, 2]
+% END-VERIFY
+
+\propriete[Terminaison et coût]{
+  La boucle \lstinline{for} externe s'exécute un nombre \textbf{fixe} de fois
+  ($n-1$ itérations pour un tableau de taille $n$) : elle termine nécessairement. La boucle
+  \lstinline{while} interne termine car $j$ \textbf{décroît strictement} à chaque tour et
+  est bornée par $0$. Dans le \textbf{pire cas} (tableau trié en ordre décroissant), le
+  coût est \textbf{quadratique} ($O(n^2)$) : chaque insertion peut nécessiter de décaler
+  tous les éléments déjà triés.
+}
+
+\demonstration{
+\textbf{Invariant de boucle} : au début de chaque itération $i$ de la boucle \lstinline{for}
+(avant l'insertion de \lstinline{tableau[i]}), le sous-tableau \lstinline{tableau[0:i]} est
+\textbf{trié} (et contient les mêmes éléments que le sous-tableau original
+\lstinline{tableau[0:i]} avant tout tri).
+
+\textbf{Initialisation.} Avant la première itération ($i=1$), \lstinline{tableau[0:1]} est
+un tableau à un seul élément : il est trivialement trié.
+
+\textbf{Conservation.} Supposons \lstinline{tableau[0:i]} trié au début de l'itération $i$.
+La boucle \lstinline{while} interne décale vers la droite tous les éléments de
+\lstinline{tableau[0:i]} strictement supérieurs à \lstinline{valeur = tableau[i]}, puis
+place \lstinline{valeur} à la position ainsi libérée. Le sous-tableau
+\lstinline{tableau[0:i+1]} obtenu est donc trié : l'invariant est conservé pour
+l'itération suivante.
+
+\textbf{Terminaison.} Après la dernière itération ($i=n-1$), l'invariant donne :
+\lstinline{tableau[0:n]} (le tableau entier) est trié. L'algorithme est donc
+\textbf{correct}.
+}
+
+% BEGIN-VERIFY
+% def tri_insertion_avec_invariant(tableau):
+%     tableau = tableau[:]
+%     for i in range(1, len(tableau)):
+%         # invariant avant insertion : tableau[0:i] est trie
+%         assert tableau[0:i] == sorted(tableau[0:i])
+%         valeur = tableau[i]
+%         j = i - 1
+%         while j >= 0 and tableau[j] > valeur:
+%             tableau[j + 1] = tableau[j]
+%             j -= 1
+%         tableau[j + 1] = valeur
+%         # invariant conserve apres insertion : tableau[0:i+1] est trie
+%         assert tableau[0:i + 1] == sorted(tableau[0:i + 1])
+%     return tableau
+% resultat = tri_insertion_avec_invariant([5, 3, 8, 1, 9, 2])
+% assert resultat == [1, 2, 3, 5, 8, 9]
+% END-VERIFY
+
+\erreurFrequente{Croire qu'un invariant de boucle doit être vérifié \textbf{une seule fois}
+(par exemple seulement à la fin). Un invariant doit être vrai \textbf{à chaque} itération :
+c'est cette répétition, de l'initialisation jusqu'à la terminaison, qui constitue la preuve
+par récurrence de la correction de l'algorithme.}
+
+\alamachine{Ajoute des instructions \lstinline{assert tableau[0:i] == sorted(tableau[0:i])}
+dans ta propre implémentation du tri par insertion, juste avant l'insertion de chaque
+nouvel élément, pour vérifier expérimentalement l'invariant sur plusieurs tableaux de ton
+choix.}

@@ -1,0 +1,114 @@
+% META: {"id": "1NSI-AGT-COURS-C3", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "cours", "capacites": ["P-ALGO-02B", "P-ALGO-02D"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Le tri par sélection}
+
+\definition[D3]{
+  Le \textbf{tri par sélection} construit progressivement une partie triée en
+  \textbf{choisissant}, à chaque étape, le plus petit élément \textbf{restant} et en le
+  plaçant à la bonne position (au lieu d'insérer un élément dans la partie triée, comme
+  pour le tri par insertion).
+}
+
+\begin{codereference}{Tri par sélection}
+\begin{python}
+def tri_selection(tableau):
+    """Trie `tableau` par ordre croissant, par selection (renvoie une copie triee)."""
+    tableau = tableau[:]
+    n = len(tableau)
+    for i in range(n - 1):
+        indice_min = i
+        for j in range(i + 1, n):
+            if tableau[j] < tableau[indice_min]:
+                indice_min = j
+        tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+    return tableau
+
+print(tri_selection([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def tri_selection(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     return tableau
+% assert tri_selection([5, 3, 8, 1, 9, 2]) == [1, 2, 3, 5, 8, 9]
+% assert tri_selection([]) == []
+% assert tri_selection([1]) == [1]
+% assert tri_selection([2, 1]) == [1, 2]
+% END-VERIFY
+
+\propriete[Terminaison et coût]{
+  Les deux boucles \lstinline{for} (externe et interne) s'exécutent un nombre
+  \textbf{fixe} de fois, déterminé à l'avance : l'algorithme termine nécessairement. Dans
+  \textbf{tous} les cas (pas seulement le pire), le coût est \textbf{quadratique}
+  ($O(n^2)$) : contrairement au tri par insertion, la recherche du minimum restant
+  parcourt toujours l'intégralité de la partie non triée, même si le tableau est déjà
+  trié.
+}
+
+\demonstration{
+\textbf{Invariant de boucle} : au début de chaque itération $i$ de la boucle \lstinline{for}
+externe, le sous-tableau \lstinline{tableau[0:i]} est \textbf{trié}, et chacun de ses
+éléments est \textbf{inférieur ou égal} à tous les éléments de \lstinline{tableau[i:n]}.
+
+\textbf{Initialisation.} Avant la première itération ($i=0$), \lstinline{tableau[0:0]} est
+le tableau vide : l'invariant est trivialement vrai.
+
+\textbf{Conservation.} Supposons l'invariant vrai au début de l'itération $i$. La boucle
+\lstinline{for} interne détermine \lstinline{indice_min}, l'indice du plus petit élément de
+\lstinline{tableau[i:n]}. L'échange place cet élément minimal en position $i$. Comme
+\lstinline{tableau[0:i]} était déjà trié et que ses éléments étaient tous inférieurs ou
+égaux à \lstinline{tableau[i:n]} (donc au minimum choisi), \lstinline{tableau[0:i+1]} est
+trié ; et ce minimum étant le plus petit du reste, tous les éléments de
+\lstinline{tableau[0:i+1]} restent inférieurs ou égaux à \lstinline{tableau[i+1:n]}.
+L'invariant est conservé.
+
+\textbf{Terminaison.} Après la dernière itération ($i=n-2$), l'invariant donne :
+\lstinline{tableau[0:n-1]} est trié, avec son dernier élément inférieur ou égal à
+\lstinline{tableau[n-1:n]} : le tableau entier \lstinline{tableau[0:n]} est donc trié.
+}
+
+% BEGIN-VERIFY
+% def tri_selection_avec_invariant(tableau):
+%     tableau = tableau[:]
+%     n = len(tableau)
+%     for i in range(n - 1):
+%         # invariant avant l'etape i : tableau[0:i] trie et <= au reste
+%         assert tableau[0:i] == sorted(tableau[0:i])
+%         if i > 0 and i < n:
+%             assert max(tableau[0:i], default=float("-inf")) <= min(tableau[i:n], default=float("inf"))
+%         indice_min = i
+%         for j in range(i + 1, n):
+%             if tableau[j] < tableau[indice_min]:
+%                 indice_min = j
+%         tableau[i], tableau[indice_min] = tableau[indice_min], tableau[i]
+%     assert tableau == sorted(tableau)
+%     return tableau
+% resultat = tri_selection_avec_invariant([5, 3, 8, 1, 9, 2])
+% assert resultat == [1, 2, 3, 5, 8, 9]
+% END-VERIFY
+
+\propriete[Insertion contre sélection]{
+  Les deux tris ont le même coût dans le pire cas ($O(n^2)$), mais le tri par
+  \textbf{insertion} est plus rapide en pratique sur un tableau \textbf{presque trié}
+  (la boucle \lstinline{while} interne s'arrête vite), alors que le tri par
+  \textbf{sélection} effectue toujours le même nombre de comparaisons, quel que soit
+  l'état initial du tableau.
+}
+
+\erreurFrequente{Confondre les deux tris : dans le tri par sélection, on
+\textbf{recherche le minimum} de toute la partie restante avant de l'échanger ; dans le
+tri par insertion, on \textbf{insère} l'élément courant à sa place en décalant les
+éléments plus grands. Ce ne sont pas les mêmes opérations, même si le résultat final est
+identique.}
+
+\alamachine{Compare expérimentalement le nombre de comparaisons effectuées par
+\lstinline{tri_insertion} et \lstinline{tri_selection} sur un tableau \textbf{déjà trié}
+de $20$ éléments (ajoute un compteur global incrémenté à chaque comparaison dans les deux
+fonctions). Le résultat confirme-t-il la propriété du cours ?}

@@ -1,0 +1,96 @@
+% META: {"id": "1NSI-AGT-COURS-C1", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "cours", "capacites": ["P-ALGO-01A", "P-ALGO-01B"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+\section{Parcours séquentiel d'un tableau}
+
+\definition[D1]{
+  Un \textbf{parcours séquentiel} examine les éléments d'un tableau \textbf{un par un}, dans
+  l'ordre, généralement à l'aide d'une boucle \lstinline{for}. De nombreux algorithmes de
+  base (recherche, extremum, moyenne) reposent sur ce principe.
+}
+
+\propriete[Recherche d'une occurrence]{
+  Rechercher une occurrence d'une valeur dans un tableau consiste à parcourir le tableau et
+  à s'arrêter (en renvoyant l'indice trouvé) dès que la valeur est rencontrée. Si elle
+  n'apparaît nulle part, on renvoie une valeur conventionnelle (par exemple $-1$).
+}
+
+\begin{codereference}{Recherche d'une occurrence (coût linéaire)}
+\begin{python}
+def recherche_occurrence(tableau, valeur):
+    """Renvoie l'indice de la premiere occurrence de `valeur`, ou -1 si absente."""
+    for i in range(len(tableau)):
+        if tableau[i] == valeur:
+            return i
+    return -1
+
+print(recherche_occurrence([5, 3, 8, 1], 8))   # 2
+print(recherche_occurrence([5, 3, 8, 1], 99))  # -1
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def recherche_occurrence(tableau, valeur):
+%     for i in range(len(tableau)):
+%         if tableau[i] == valeur:
+%             return i
+%     return -1
+% assert recherche_occurrence([5, 3, 8, 1], 8) == 2
+% assert recherche_occurrence([5, 3, 8, 1], 99) == -1
+% assert recherche_occurrence([], 1) == -1
+% END-VERIFY
+
+\propriete[Coût de la recherche]{
+  Dans le \textbf{pire cas} (valeur absente, ou en dernière position), la recherche
+  d'occurrence examine \textbf{tous} les éléments du tableau : son coût est
+  \textbf{linéaire} (proportionnel à la taille $n$ du tableau, noté $O(n)$).
+}
+
+\propriete[Recherche d'un extremum]{
+  Rechercher le maximum (ou le minimum) d'un tableau non vide consiste à parcourir ses
+  éléments en conservant, dans un accumulateur, la plus grande (ou plus petite) valeur
+  rencontrée jusque-là. L'accumulateur doit être initialisé avec le \textbf{premier élément}
+  du tableau, jamais avec une constante arbitraire.
+}
+
+\begin{codereference}{Recherche du maximum et calcul d'une moyenne}
+\begin{python}
+def maximum(tableau):
+    """Renvoie le plus grand element de `tableau` (non vide)."""
+    maxi = tableau[0]
+    for x in tableau[1:]:
+        if x > maxi:
+            maxi = x
+    return maxi
+
+def moyenne(tableau):
+    """Renvoie la moyenne des elements de `tableau` (non vide)."""
+    return sum(tableau) / len(tableau)
+
+print(maximum([5, 3, 8, 1]))   # 8
+print(moyenne([5, 3, 8, 1]))   # 4.25
+\end{python}
+\end{codereference}
+
+% BEGIN-VERIFY
+% def maximum(tableau):
+%     maxi = tableau[0]
+%     for x in tableau[1:]:
+%         if x > maxi:
+%             maxi = x
+%     return maxi
+% def moyenne(tableau):
+%     return sum(tableau) / len(tableau)
+% assert maximum([5, 3, 8, 1]) == 8
+% assert maximum([-5, -3, -8, -1]) == -1  # cas limite : tous negatifs
+% assert moyenne([5, 3, 8, 1]) == 4.25
+% END-VERIFY
+
+\erreurFrequente{Initialiser l'accumulateur du maximum à $0$ (EF). Cette erreur produit un
+résultat incorrect dès que \textbf{tous} les éléments du tableau sont négatifs : le
+maximum trouvé serait alors $0$, une valeur absente du tableau. Il faut toujours
+initialiser l'accumulateur avec le \textbf{premier élément} du tableau.}
+
+\alamachine{Écris une fonction \lstinline{recherche_toutes_occurrences(tableau, valeur)}
+qui renvoie la liste de \textbf{tous} les indices où \lstinline{valeur} apparaît dans
+\lstinline{tableau} (et non seulement le premier). Teste-la sur
+\lstinline{[3, 7, 3, 3, 9]} avec \lstinline{valeur=3} : le résultat attendu est
+\lstinline{[0, 2, 3]}.}

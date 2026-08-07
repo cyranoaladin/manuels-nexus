@@ -1,0 +1,79 @@
+% META: {"id": "1NSI-ALGO-PARCOURS-TRIS-QCM", "chapitre": "1NSI-ALGO-PARCOURS-TRIS", "type_objet": "qcm", "capacites": ["P-ALGO-01A","P-ALGO-01B","P-ALGO-02A","P-ALGO-02B","P-ALGO-02C","P-ALGO-02D"], "status": "generated"}
+
+\section*{QCM d'auto-évaluation --- Algorithmique 1 : parcours et tris}
+
+\begin{center}
+\textit{Pour chaque question, une seule réponse est exacte. Entourez la lettre correspondante.}
+\end{center}
+
+\bigskip
+
+\subsection*{C1 --- Recherche d'occurrence}
+
+\begin{enumerate}
+
+\item \textbf{[Q1]} Le coût, dans le pire cas, d'une recherche séquentielle d'une valeur dans un tableau de taille $n$ est :
+  \begin{enumerate}[label=\Alph*.]
+    \item constant.
+    \item logarithmique.
+    \item linéaire, $O(n)$.
+    \item quadratique, $O(n^2)$.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C2 --- Extremum}
+
+\item \textbf{[Q2]} Pour rechercher le maximum d'un tableau non vide, il faut initialiser l'accumulateur avec :
+  \begin{enumerate}[label=\Alph*.]
+    \item la valeur $0$.
+    \item le premier élément du tableau.
+    \item la plus grande valeur possible.
+    \item la dernière valeur du tableau.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C3/C4 --- Tri par insertion}
+
+\item \textbf{[Q3]} Le tri par insertion construit la partie triée du tableau en :
+  \begin{enumerate}[label=\Alph*.]
+    \item recherchant le minimum de la partie restante à chaque étape.
+    \item insérant chaque nouvel élément à sa bonne place dans la partie déjà triée.
+    \item triant d'abord la seconde moitié du tableau.
+    \item échangeant des éléments au hasard.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q4]} L'invariant de boucle du tri par insertion affirme qu'au début de l'itération $i$ :
+  \begin{enumerate}[label=\Alph*.]
+    \item le tableau entier est déjà trié.
+    \item le sous-tableau \lstinline{tableau[0:i]} est trié.
+    \item le sous-tableau \lstinline{tableau[i:n]} est trié.
+    \item aucune partie du tableau n'est triée.
+  \end{enumerate}
+
+\bigskip
+
+\subsection*{C5/C6 --- Tri par sélection}
+
+\item \textbf{[Q5]} Le tri par sélection construit la partie triée du tableau en :
+  \begin{enumerate}[label=\Alph*.]
+    \item insérant chaque élément à sa bonne place.
+    \item recherchant le minimum de la partie restante et l'échangeant à sa place.
+    \item divisant le tableau en deux moitiés récursivement.
+    \item ne comparant jamais deux éléments.
+  \end{enumerate}
+
+\bigskip
+
+\item \textbf{[Q6]} Contrairement au tri par insertion, le tri par sélection effectue, dans TOUS les cas (tableau déjà trié ou non) :
+  \begin{enumerate}[label=\Alph*.]
+    \item un nombre de comparaisons variable selon l'ordre initial.
+    \item toujours le même nombre de comparaisons, quel que soit l'ordre initial.
+    \item zéro comparaison.
+    \item un nombre de comparaisons linéaire, $O(n)$.
+  \end{enumerate}
+
+\end{enumerate}
