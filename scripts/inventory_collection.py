@@ -2304,7 +2304,24 @@ def _approved_baseline_extension_diagnosis(
 
     current = _coalesce_active_debt(current_active)
     previous = _coalesce_active_debt(baseline_active)
+    recomputed_comparison = _compare_anomaly_debt(
+        current_active,
+        baseline_active,
+        baseline_resolved,
+    )
+    if _canonicalize(comparison) != _canonicalize(recomputed_comparison):
+        offending.append("comparaison de baseline fournie incohérente")
+    comparison = recomputed_comparison
     new_fingerprints = sorted(set(current) - set(previous))
+    retained_fingerprints = sorted(set(current) & set(previous))
+    for fingerprint in retained_fingerprints:
+        if _canonicalize(current[fingerprint]) != _canonicalize(
+            previous[fingerprint]
+        ):
+            offending.append(
+                "fingerprint conservé modifié intégralement:"
+                f"{fingerprint}"
+            )
     transition = policy.get("approved_transition")
 
     if transition is None:
@@ -2339,16 +2356,6 @@ def _approved_baseline_extension_diagnosis(
     elif not isinstance(transition, Mapping):
         offending.append("contrat approved_transition invalide")
     else:
-        recomputed_comparison = _compare_anomaly_debt(
-            current_active,
-            baseline_active,
-            baseline_resolved,
-        )
-        if _canonicalize(comparison) != _canonicalize(recomputed_comparison):
-            offending.append("comparaison de baseline fournie incohérente")
-        comparison = recomputed_comparison
-
-        retained_fingerprints = sorted(set(current) & set(previous))
         resolved_fingerprints = sorted(set(previous) - set(current))
         modified_pairs = [
             {
@@ -2449,15 +2456,6 @@ def _approved_baseline_extension_diagnosis(
             sorted(transition.get("resolved_category_counts", {}).items())
         ):
             offending.append("catégories des fingerprints résolus différentes")
-
-        for fingerprint in retained_fingerprints:
-            if _canonicalize(current[fingerprint]) != _canonicalize(
-                previous[fingerprint]
-            ):
-                offending.append(
-                    "fingerprint conservé modifié intégralement:"
-                    f"{fingerprint}"
-                )
 
     if len(new_fingerprints) != approved_set.get("fingerprint_count"):
         offending.append("nombre de fingerprints différent du jeu approuvé")

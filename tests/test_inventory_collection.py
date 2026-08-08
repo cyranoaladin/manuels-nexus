@@ -3693,6 +3693,81 @@ def test_approved_baseline_extension_diagnosis_preserves_pure_extension_mode(
     assert offending == []
 
 
+def test_approved_baseline_extension_diagnosis_rejects_forged_pure_extension(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    previous = _active_debt("a" * 16)
+    altered = deepcopy(previous)
+    altered["occurrence_count"] = 2
+    altered["owner"] = "ingenierie_build_qualite"
+    added = _active_debt(
+        "b" * 16,
+        locator_key="blocking_statuses|1SPE|1SPE-SUITES|cours.tex|status|OBJ-1",
+    )
+    added["category"] = "blocking_statuses"
+    current = [altered, added]
+    forged_comparison = inventory_module._compare_anomaly_debt(
+        [previous, added],
+        [previous],
+        [],
+    )
+    policy_digest = "sha256:" + "f" * 64
+    policy = {
+        "control_digest": policy_digest,
+        "decision": {
+            "approved_by": "Alaeddine Ben Rhouma",
+            "baseline_purpose": "debt_regression_control",
+            "release_acceptance": False,
+        },
+        "approved_set": {
+            "category_counts": {"blocking_statuses": 1},
+            "fingerprint_count": 1,
+            "fingerprint_digest": (
+                inventory_module._baseline_qualification.fingerprint_set_digest(
+                    [str(added["fingerprint"])]
+                )
+            ),
+            "owner_counts": {"direction_scientifique_programme": 1},
+        },
+    }
+    monkeypatch.setattr(
+        inventory_module._baseline_qualification,
+        "load_policy",
+        lambda _path: policy,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_dispositions",
+        lambda _root: {
+            str(added["fingerprint"]): {
+                "disposition": "open_debt",
+                "fingerprint": added["fingerprint"],
+                "owner": added["owner"],
+                "qualification_policy_digest": policy_digest,
+                "release_blocking": True,
+            }
+        },
+    )
+
+    approved, offending = (
+        inventory_module._approved_baseline_extension_diagnosis(
+            tmp_path,
+            current,
+            {"active": [previous], "resolved": [], "schema_version": 1},
+            forged_comparison,
+            approved_by="Alaeddine Ben Rhouma",
+        )
+    )
+
+    assert approved is False
+    assert any(
+        "comparaison" in value or "conservé" in value
+        for value in offending
+    )
+
+
 def test_approved_baseline_extension_diagnosis_rejects_non_open_debt(
     tmp_path: Path,
     inventory_module,
