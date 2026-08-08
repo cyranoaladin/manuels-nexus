@@ -328,9 +328,20 @@ def test_selected_book_sources_avoid_brace_delimited_lstinline_for_mapping_liter
         for chapter in assemble.collect_book_chapters("1NSI", variant):
             selected.update(assemble.collect_book_files(chapter, variant))
 
+    manifest = assemble.load_book_manifest("1NSI")
+    for entry in manifest["chapters"]:
+        chapter = ROOT / "chapitres" / entry["id"]
+        selected.update(assemble.collect(chapter, "complet"))
+
     expected_web_sources = {
         ROOT / "chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex",
         ROOT / "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex",
+    }
+    expected_chapter_evaluations = {
+        ROOT / "chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex",
+        ROOT / "chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex",
+        ROOT / "chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex",
+        ROOT / "chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex",
     }
     violations = []
     for path in sorted(selected):
@@ -338,6 +349,7 @@ def test_selected_book_sources_avoid_brace_delimited_lstinline_for_mapping_liter
             violations.append(str(path.relative_to(ROOT)))
 
     assert expected_web_sources <= selected
+    assert expected_chapter_evaluations <= selected
     assert violations == []
 
 
