@@ -284,26 +284,65 @@ Run:
 cd NSI
 python3 scripts/assemble.py --book 1NSI --variant complet
 python3 scripts/assemble.py --book 1NSI --variant remediation
+
+test "$(pdfinfo build/books/MANUEL_1NSI_v1.pdf | awk '/^Pages:/{print $2}')" = "101"
+test "$(sha256sum build/books/MANUEL_1NSI_v1.pdf | cut -d' ' -f1)" = \
+  "b8eb0626907c705d91bd0b7a0e747b4fa8f1aca98a920f1a10f37558ce21c604"
+test "$(pdftotext -layout build/books/MANUEL_1NSI_v1.pdf - | sha256sum | cut -d' ' -f1)" = \
+  "b30c62100f72138e47fdf7a5e23572069100cf701fbeacf293e8a11383c3314f"
+
+test "$(pdfinfo build/books/MANUEL_1NSI_v1_remediation.pdf | awk '/^Pages:/{print $2}')" = "13"
+test "$(sha256sum build/books/MANUEL_1NSI_v1_remediation.pdf | cut -d' ' -f1)" = \
+  "6817b3d67e350f9bf7c8945d9f0d8e74c15b6208a382a735ba7ba5a2aaeaadf6"
+test "$(pdftotext -layout build/books/MANUEL_1NSI_v1_remediation.pdf - | sha256sum | cut -d' ' -f1)" = \
+  "9e309917a376b4456ed101d0fa50e26f2e130d8261a9d344f684ceab1036d0b2"
 ```
 
 Exiger les mêmes nombres de pages et SHA-256 de texte `pdftotext -layout`.
 Comparer également les SHA-256 PDF ; toute différence doit être expliquée avant
 de continuer. Les preflights automatiques doivent retourner `0`.
 
-- [ ] **Step 4: Vérifier l'inventaire et le gel TNSI**
+- [ ] **Step 4: Régénérer et committer les six artefacts d'inventaire**
 
 ```bash
-cd ..
+cd /home/alaeddine/Documents/Manuels_Nexus/.worktrees/finalisation-collection-v1
+python3 scripts/inventory_collection.py --validate-model --fail-on-new
+git status --short
+```
+
+Expected: seuls les six artefacts gérés changent :
+
+```text
+ETAT_COLLECTION.md
+audit/AUDIT_CONSOLIDE.md
+audit/ECARTS_ET_CONTRADICTIONS.yaml
+audit/INVENTAIRE_COLLECTION.json
+audit/INVENTAIRE_COLLECTION.md
+audit/MATRICE_LIVRABLES.yaml
+```
+
+```bash
+git add ETAT_COLLECTION.md audit/AUDIT_CONSOLIDE.md \
+  audit/ECARTS_ET_CONTRADICTIONS.yaml audit/INVENTAIRE_COLLECTION.json \
+  audit/INVENTAIRE_COLLECTION.md audit/MATRICE_LIVRABLES.yaml
+git commit -m "[AUDIT] regenere l inventaire apres separation 1NSI"
+```
+
+- [ ] **Step 5: Vérifier l'inventaire et le gel TNSI**
+
+```bash
+cd /home/alaeddine/Documents/Manuels_Nexus/.worktrees/finalisation-collection-v1
 python3 scripts/inventory_collection.py --check --validate-model --fail-on-new
 git diff --name-only a21b5d7..HEAD | rg '^NSI/chapitres/TNSI-' && exit 1 || true
 git diff --check
 git status --short --branch
 ```
 
-Expected: aucun nouveau `broken_reference`, aucun chemin TNSI et worktree suivi
-propre. `--release-strict` n'est pas exécuté et aucune publication n'est déclarée.
+Expected: les six rendus sont à jour, aucun nouveau `broken_reference`, aucun
+chemin TNSI et worktree suivi propre. `--release-strict` n'est pas exécuté et
+aucune publication n'est déclarée.
 
-- [ ] **Step 5: Revue finale**
+- [ ] **Step 6: Revue finale**
 
 Faire relire le range `a21b5d7..HEAD` en priorité sur : fuite élève, références
 META, conservation SHA-256, gate non affaibli, absence de changement TNSI et
