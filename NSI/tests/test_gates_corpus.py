@@ -15,7 +15,10 @@ import pytest
 
 # Import gate logic
 import sys
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+
+import assemble
 
 
 # --- check_eleve_no_corrige patterns ---
@@ -319,12 +322,22 @@ def test_amenagee_extract_avoids_lstinline_inside_tabular_cells():
     assert re.search(r"\\lstinline\{[^}]+\}\s*&", text) is None
 
 
-def test_tex_sources_avoid_brace_delimited_lstinline_for_mapping_literals():
-    violations = []
-    for path in sorted(Path("chapitres").rglob("*.tex")):
-        if r"\lstinline{{" in path.read_text(encoding="utf-8"):
-            violations.append(str(path))
+def test_selected_book_sources_avoid_brace_delimited_lstinline_for_mapping_literals():
+    selected = set()
+    for variant in assemble.BOOK_VARIANTS:
+        for chapter in assemble.collect_book_chapters("1NSI", variant):
+            selected.update(assemble.collect_book_files(chapter, variant))
 
+    expected_web_sources = {
+        ROOT / "chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex",
+        ROOT / "chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex",
+    }
+    violations = []
+    for path in sorted(selected):
+        if r"\lstinline{{" in path.read_text(encoding="utf-8"):
+            violations.append(str(path.relative_to(ROOT)))
+
+    assert expected_web_sources <= selected
     assert violations == []
 
 

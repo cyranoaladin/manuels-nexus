@@ -16,6 +16,9 @@ def test_load_book_manifest_1nsi():
     assert manifest["output_name"] == "MANUEL_1NSI_v1"
     assert manifest["matiere"] == "NSI"
     assert manifest["niveau"] == "Première"
+    assert manifest["author"]
+    assert manifest["subject"]
+    assert manifest["keywords"]
     assert len(manifest["chapters"]) == 10
 
 
@@ -55,6 +58,17 @@ def test_collect_complete_book_files_are_student_safe():
     assert len(chapters) == 10
     assert selected
     assert violations == []
+
+
+def test_collect_book_files_ignores_markers_in_repository_parent(monkeypatch, tmp_path):
+    root = tmp_path / "professeur-archive" / "NSI"
+    chapter = root / "chapitres" / "1NSI-FIXTURE"
+    course = chapter / "cours" / "1-cours.tex"
+    course.parent.mkdir(parents=True)
+    course.write_text("Contenu élève.", encoding="utf-8")
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    assert assemble.collect_book_files(chapter, "complet") == [course]
 
 
 def test_collect_book_chapters_methodes_1nsi():
@@ -103,6 +117,22 @@ def test_render_book_master_uses_public_metadata_on_title_page():
     assert "NSI --- Première" in tex
     assert "@matiere" not in tex
     assert "@niveau" not in tex
+
+
+@pytest.mark.parametrize("variant", sorted(assemble.BOOK_VARIANTS))
+def test_render_book_master_configures_pdf_metadata_and_navigation(variant):
+    manifest = assemble.load_book_manifest("1NSI")
+    tex = assemble.render_book_master("1NSI", variant)
+
+    assert "{hyperref}" in tex
+    assert r"\hypersetup{" in tex
+    assert f"pdftitle={{{assemble._book_title(manifest, variant)}}}" in tex
+    assert f"pdfauthor={{{manifest['author']}}}" in tex
+    assert f"pdfsubject={{{manifest['subject']}}}" in tex
+    assert f"pdfkeywords={{{manifest['keywords']}}}" in tex
+    assert "bookmarks=true" in tex
+    assert "bookmarksopen=true" in tex
+    assert "%%PDF_" not in tex
 
 
 def test_render_complete_book_master_is_explicitly_student_safe():

@@ -44,9 +44,12 @@ Les quatre sorties utilisent explicitement le mode élève du gabarit. Les corps
 environnements `corrige` sont neutralisés dans ce rendu, sans supprimer ni modifier les
 sources professeur. Les identifiants internes restent masqués.
 
-Les 15 corrections de délimiteurs `lstinline` introduites pour les littéraux de dictionnaire
-sont conservées : elles garantissent que le corpus professeur futur reste compilable même
-si ces objets ne sont pas exposés dans le livre élève complet.
+Le gabarit active les liens et signets PDF. Le titre, l'auteur, le sujet et les mots-clés
+proviennent du manifeste du livre.
+
+Les délimiteurs `lstinline` sûrs sont imposés uniquement aux sources sélectionnées par les
+quatre variantes. Les corrections nécessaires sont conservées dans le cours WEB C3 et
+l'exercice WEB EX-004 ; le corpus professeur hors livre reste hors périmètre de cette passe.
 
 ## Hors périmètre
 

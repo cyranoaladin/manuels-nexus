@@ -5,6 +5,16 @@
 \renewcommand*{\raggedleftmarginnote}{\raggedleft}
 \matiere{%%MATIERE%%}\niveau{%%NIVEAU%%}
 \title{%%TITLE%%}
+\usepackage[unicode,hidelinks]{hyperref}
+\hypersetup{
+  pdftitle={%%TITLE%%},
+  pdfauthor={%%PDF_AUTHOR%%},
+  pdfsubject={%%PDF_SUBJECT%%},
+  pdfkeywords={%%PDF_KEYWORDS%%},
+  bookmarks=true,
+  bookmarksopen=true,
+  bookmarksnumbered=true
+}
 \begin{document}
 \frontmatter
 \begin{titlepage}

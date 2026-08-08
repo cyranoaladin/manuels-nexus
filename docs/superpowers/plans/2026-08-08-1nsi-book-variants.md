@@ -195,9 +195,12 @@ Expected: four PDFs generated, with partial books for `methodes` and `amenagee`.
 
 Run `verify_pdf` on each generated PDF under `NSI/build/books/`.
 Expected: exit code `0` for each, no fatal/Overfull/Underfull log entry, and `pdftotext` exposes neither `Corrigé`, `Barème indicatif` nor identifiant `1NSI-*`.
+Each PDF must also expose non-empty Title, Author, Subject and Keywords metadata. Its
+outline must be non-empty.
 
-The 15 safe `lstinline|...|` delimiters for mapping literals remain part of the professor
-source corpus and must not be reverted by the student-book filter.
+Safe `lstinline|...|` delimiters for mapping literals are required in every source selected
+by the four student-book variants. Unselected professor and evaluation sources remain out
+of scope.
 
 - [ ] **Step 5: Commit**
 

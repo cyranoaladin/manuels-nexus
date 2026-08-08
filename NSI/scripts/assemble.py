@@ -84,7 +84,7 @@ def collect_book_files(chap_dir: Path, variant: str) -> list[Path]:
         for path in files
         if not any(
             marker in part.lower()
-            for part in path.parts
+            for part in path.relative_to(ROOT).parts
             for marker in ("corrige", "professeur")
         )
     ]
@@ -200,6 +200,9 @@ def render_book_master(book_id: str, variant: str = "complet") -> str:
         .replace("%%NIVEAU%%", manifest["niveau"])
         .replace("%%TITLE%%", _book_title(manifest, variant))
         .replace("%%SUBTITLE%%", manifest.get("subtitle", ""))
+        .replace("%%PDF_AUTHOR%%", manifest["author"])
+        .replace("%%PDF_SUBJECT%%", manifest["subject"])
+        .replace("%%PDF_KEYWORDS%%", manifest["keywords"])
         .replace("%%CONTENT%%", "\n\n".join(parts))
     )
 

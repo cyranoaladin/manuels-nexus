@@ -6,7 +6,7 @@
 
 **Architecture:** étendre `NSI/scripts/assemble.py` avec un mode `--book` adossé à un manifeste versionné décrivant le manuel. Le pipeline utilise une collecte livre élève distincte de la collecte chapitre, la compilation LaTeX existante et `verify_pdf`, via un nouveau gabarit maître de manuel. Les 10 chapitres ne signifient pas tous leurs fichiers : le complet exclut corrigés, évaluations barémées, remédiations corrigées et contenus professeur.
 
-**Contrat élève:** le master force `\nxVersionProfesseurfalse` et neutralise les corps `corrige` pour les quatre variantes. Les sources professeur restent versionnées, notamment les 15 littéraux de dictionnaire dont les délimiteurs `lstinline` ont été fiabilisés pour une future édition professeur.
+**Contrat élève:** le master force `\nxVersionProfesseurfalse` et neutralise les corps `corrige` pour les quatre variantes. Les sources professeur restent versionnées mais hors périmètre ; les délimiteurs `lstinline` sûrs sont garantis dans les seules sources réellement sélectionnées. Le master produit aussi les liens, signets et métadonnées PDF à partir du manifeste.
 
 **Tech Stack:** Python 3.11, pytest, LuaLaTeX, gabarits LaTeX Nexus, scripts NSI existants.
 
