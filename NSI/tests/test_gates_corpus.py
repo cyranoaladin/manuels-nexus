@@ -108,6 +108,19 @@ class TestEleveNoCorrige:
         assert len(violations) == 1
         assert str(leaked.relative_to(tmp_path)) in violations[0]
 
+    def test_filtered_scan_excludes_unrelated_build_file(self, tmp_path):
+        _write_tex(tmp_path, "chapitres/1NSI-TEST/cours/clean.tex")
+        _write_tex(
+            tmp_path,
+            "build/TNSI-manuel.tex",
+            r"\begin{corrige}Reponse\end{corrige}",
+        )
+
+        checked, violations = _scan_gate(tmp_path, "1NSI-")
+
+        assert checked == 1
+        assert violations == []
+
     @pytest.mark.parametrize("prefix", ["", "   "])
     def test_filtered_scan_rejects_empty_prefix(self, tmp_path, prefix):
         with pytest.raises(ValueError, match="prefix"):
@@ -180,6 +193,46 @@ La réponse est 42.
   \item \lstinline{<class 'tuple'>}
   \item \lstinline{<class 'int'>}"""
         assert QCM_DIAG_RE.search(text) is None
+
+
+class TestEleveNoCorrigeCli:
+    def test_clean_filtered_scan_returns_zero(self, tmp_path, monkeypatch, capsys):
+        _write_tex(tmp_path, "chapitres/1NSI-TEST/cours/clean.tex")
+        monkeypatch.setattr(eleve_no_corrige, "ROOT", tmp_path)
+
+        return_code = eleve_no_corrige.main(["--prefix", "1NSI-"])
+
+        captured = capsys.readouterr()
+        assert return_code == 0
+        assert "VERT -- 1 fichiers verifies" in captured.out
+        assert captured.err == ""
+
+    def test_violation_returns_one(self, tmp_path, monkeypatch, capsys):
+        leaked = _write_tex(
+            tmp_path,
+            "chapitres/1NSI-TEST/remediation/leak.tex",
+            r"\begin{corrige}Reponse\end{corrige}",
+        )
+        monkeypatch.setattr(eleve_no_corrige, "ROOT", tmp_path)
+
+        return_code = eleve_no_corrige.main(["--prefix", "1NSI-"])
+
+        captured = capsys.readouterr()
+        assert return_code == 1
+        assert "ROUGE -- contenu corrige detecte" in captured.out
+        assert str(leaked.relative_to(tmp_path)) in captured.out
+        assert captured.err == ""
+
+    def test_invalid_prefix_returns_two(self, tmp_path, monkeypatch, capsys):
+        monkeypatch.setattr(eleve_no_corrige, "ROOT", tmp_path)
+
+        return_code = eleve_no_corrige.main(["--prefix", "   "])
+
+        captured = capsys.readouterr()
+        assert return_code == 2
+        assert captured.out == ""
+        assert "ROUGE -- filtre invalide" in captured.err
+        assert "prefix vide" in captured.err
 
 
 # --- check_no_placeholders patterns ---
