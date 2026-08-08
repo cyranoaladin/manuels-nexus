@@ -10,6 +10,10 @@
 
 **Tech Stack:** Python 3.11, pytest, LuaLaTeX, gabarits LaTeX Nexus, scripts NSI existants.
 
+**Statut au 2026-08-08 :** plan 1NSI exécuté et validé. Le preflight, le staging et la
+reproductibilité concernent uniquement ce manuel ; TNSI et la release globale restent hors
+périmètre.
+
 ---
 
 ## Chunk 1: Tests rouges pour le mode manuel
@@ -20,7 +24,7 @@
 - Create: `NSI/tests/test_assemble_book.py`
 - Modify: `NSI/scripts/assemble.py`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 def test_load_book_manifest_1nsi():
@@ -29,24 +33,24 @@ def test_load_book_manifest_1nsi():
     assert len(manifest["chapters"]) == 10
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: FAIL with missing `load_book_manifest` or missing manifest file.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 def load_book_manifest(book_id: str) -> dict:
     ...
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: PASS for manifest loading assertions.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/tests/test_assemble_book.py NSI/scripts/assemble.py
@@ -59,7 +63,7 @@ git commit -m "[1NSI][ASSEMBLAGE] ajoute les tests du mode manuel"
 - Create: `NSI/tests/test_assemble_book.py`
 - Modify: `NSI/scripts/assemble.py`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 def test_collect_book_chapters_1nsi():
@@ -68,24 +72,24 @@ def test_collect_book_chapters_1nsi():
     assert chapters[-1].name == "1NSI-PROJET-METHODES"
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: FAIL with missing `collect_book_chapters`.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 def collect_book_chapters(book_id: str) -> list[Path]:
     ...
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: PASS for ordered chapter resolution.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/tests/test_assemble_book.py NSI/scripts/assemble.py
@@ -100,19 +104,19 @@ git commit -m "[1NSI][ASSEMBLAGE] fige l'ordre du manuel Premiere"
 - Create: `NSI/manifests/books/1NSI.json`
 - Create: `NSI/gabarits/book_master.tex`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 def test_book_master_template_exists():
     assert (ROOT / "gabarits" / "book_master.tex").exists()
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: FAIL because template does not exist.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```json
 {
@@ -125,12 +129,12 @@ Expected: FAIL because template does not exist.
 }
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: PASS for manifest and template existence.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/manifests/books/1NSI.json NSI/gabarits/book_master.tex NSI/tests/test_assemble_book.py
@@ -143,7 +147,7 @@ git commit -m "[1NSI][ASSEMBLAGE] ajoute le manifeste et le gabarit du manuel"
 - Modify: `NSI/scripts/assemble.py`
 - Modify: `NSI/Makefile`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 def test_build_book_master_contains_all_chapters():
@@ -153,24 +157,24 @@ def test_build_book_master_contains_all_chapters():
     assert "1NSI-PROJET-METHODES" in tex
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: FAIL with missing `render_book_master`.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 def render_book_master(book_id: str) -> str:
     ...
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: PASS with generated master text including all 10 chapters.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/scripts/assemble.py NSI/Makefile NSI/tests/test_assemble_book.py
@@ -185,27 +189,27 @@ git commit -m "[1NSI][ASSEMBLAGE] ajoute le mode --book"
 - Read/verify: `NSI/build/books/MANUEL_1NSI_v1.pdf`
 - Read/verify: `NSI/build/books/MANUEL_1NSI_v1.log`
 
-- [ ] **Step 1: Run focused tests**
+- [x] **Step 1: Run focused tests**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_assemble_book.py -q`
 Expected: PASS
 
-- [ ] **Step 2: Run regression-adjacent tests**
+- [x] **Step 2: Run regression-adjacent tests**
 
 Run: `cd NSI && .venv/bin/python -m pytest tests/test_verify_python.py tests/test_gates_corpus.py -q`
 Expected: PASS
 
-- [ ] **Step 3: Build the manual**
+- [x] **Step 3: Build the manual**
 
 Run: `cd NSI && .venv/bin/python scripts/assemble.py --book 1NSI`
 Expected: PDF created at `build/books/MANUEL_1NSI_v1.pdf`
 
-- [ ] **Step 4: Validate the artifact**
+- [x] **Step 4: Validate the artifact**
 
 Run: `cd NSI && .venv/bin/python -c "from pathlib import Path; from pdf_integrity import verify_pdf; raise SystemExit(verify_pdf(Path('build/books/MANUEL_1NSI_v1.pdf'), Path('build/books/MANUEL_1NSI_v1.log')))"` with `PYTHONPATH=scripts`
 Expected: exit code `0`
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/scripts/assemble.py NSI/Makefile NSI/gabarits/book_master.tex NSI/manifests/books/1NSI.json NSI/tests/test_assemble_book.py

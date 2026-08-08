@@ -1,5 +1,6 @@
 """Tests rouges/verts du mode assembleur manuel NSI."""
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -33,6 +34,20 @@ def _write_manifest(root: Path, manifest: dict, filename: str = "1NSI.json") -> 
     path = root / "manifests" / "books" / filename
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(manifest), encoding="utf-8")
+
+
+def _prepare_book_root(root: Path) -> None:
+    _write_manifest(root, _valid_manifest())
+    course = root / "chapitres" / "1NSI-FIXTURE" / "cours" / "1-cours.tex"
+    course.parent.mkdir(parents=True)
+    course.write_text("Contenu élève.", encoding="utf-8")
+    master = root / "gabarits" / "book_master.tex"
+    master.parent.mkdir(parents=True)
+    master.write_text(
+        "%%MATIERE%% %%NIVEAU%% %%TITLE%% %%SUBTITLE%% "
+        "%%PDF_AUTHOR%% %%PDF_SUBJECT%% %%PDF_KEYWORDS%%\n%%CONTENT%%\n",
+        encoding="utf-8",
+    )
 
 
 def test_load_book_manifest_1nsi():
@@ -151,6 +166,33 @@ def test_latex_escape_covers_manifest_special_characters():
     assert assemble.latex_escape(value) == (
         r"\#\_\%\&\$\{\}\textbackslash{}\textasciicircum{}\textasciitilde{}"
     )
+
+
+def test_render_book_master_escapes_all_manifest_text(monkeypatch, tmp_path):
+    root = tmp_path / "NSI"
+    _prepare_book_root(root)
+    special = "# _ % & $ { } \\input{injected} ^ ~"
+    manifest = _valid_manifest(
+        title=f"Titre {special}",
+        subtitle=f"Sous-titre {special}",
+        matiere=f"Matière {special}",
+        niveau=f"Niveau {special}",
+        author=f"Auteur {special}",
+        subject=f"Sujet {special}",
+        keywords=f"Mots {special}",
+        chapters=[{"id": "1NSI-FIXTURE", "title": f"Chapitre {special}"}],
+    )
+    _write_manifest(root, manifest)
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    tex = assemble.render_book_master("1NSI")
+
+    for field in (
+        "title", "subtitle", "matiere", "niveau", "author", "subject", "keywords"
+    ):
+        assert assemble.latex_escape(manifest[field]) in tex
+    assert assemble.latex_escape(manifest["chapters"][0]["title"]) in tex
+    assert r"\input{injected}" not in tex
 
 
 def test_collect_book_chapters_1nsi():
@@ -317,10 +359,122 @@ def test_compile_tex_rejects_lualatex_failure_even_with_stale_pdf(
         lambda *_args, **_kwargs: verified.append(True) or 0,
     )
 
-    assert assemble.compile_tex(tex_path, tmp_path) == 1
+    assert assemble.compile_tex(
+        tex_path, tmp_path, source_date_epoch=1786147200
+    ) == 1
     assert len(calls) == 1
     assert verified == []
     assert "latex failure" in capsys.readouterr().out
+    assert not (tmp_path / "manuel.pdf").exists()
+    environment = calls[0][1]["env"]
+    assert environment["SOURCE_DATE_EPOCH"] == "1786147200"
+    assert environment["FORCE_SOURCE_DATE"] == "1"
+    assert environment["TZ"] == "UTC"
+
+
+def test_build_book_stages_preflights_and_promotes_with_one_manifest_read(
+    monkeypatch, tmp_path
+):
+    root = tmp_path / "NSI"
+    _prepare_book_root(root)
+    build_dir = root / "build" / "books"
+    build_dir.mkdir(parents=True)
+    canonical_pdf = build_dir / "MANUEL_1NSI_v1.pdf"
+    canonical_pdf.write_bytes(b"stale")
+    manifest_reads = []
+    preflight_calls = []
+    original_load = assemble.load_book_manifest
+
+    def counting_load(book_id):
+        manifest_reads.append(book_id)
+        return original_load(book_id)
+
+    def fake_compile(tex_path, staging_dir, *, source_date_epoch):
+        assert staging_dir.parent == build_dir
+        assert staging_dir.name.startswith(".MANUEL_1NSI_v1-")
+        assert source_date_epoch == 1786147200
+        assert not canonical_pdf.exists()
+        (staging_dir / f"{tex_path.stem}.pdf").write_bytes(b"fresh")
+        (staging_dir / f"{tex_path.stem}.log").write_text("clean", encoding="utf-8")
+        (staging_dir / f"{tex_path.stem}.aux").write_text("aux", encoding="utf-8")
+        return 0
+
+    def fake_preflight(pdf, log):
+        preflight_calls.append((pdf, log))
+        assert pdf.parent != build_dir
+        assert not canonical_pdf.exists()
+        return 0
+
+    monkeypatch.setattr(assemble, "ROOT", root)
+    monkeypatch.setattr(assemble, "load_book_manifest", counting_load)
+    monkeypatch.setattr(assemble, "compile_tex", fake_compile)
+    monkeypatch.setattr(assemble, "preflight_book_pdf", fake_preflight)
+
+    assert assemble.build_book("1NSI", "complet") == 0
+    assert manifest_reads == ["1NSI"]
+    assert len(preflight_calls) == 1
+    assert canonical_pdf.read_bytes() == b"fresh"
+    assert (build_dir / "MANUEL_1NSI_v1.log").read_text(encoding="utf-8") == "clean"
+    assert not list(build_dir.glob(".MANUEL_1NSI_v1-*"))
+
+
+def test_build_book_preflight_failure_removes_canonical_pdf(monkeypatch, tmp_path):
+    root = tmp_path / "NSI"
+    _prepare_book_root(root)
+    build_dir = root / "build" / "books"
+    build_dir.mkdir(parents=True)
+    canonical_pdf = build_dir / "MANUEL_1NSI_v1.pdf"
+    canonical_pdf.write_bytes(b"stale")
+
+    def fake_compile(tex_path, staging_dir, *, source_date_epoch):
+        (staging_dir / f"{tex_path.stem}.pdf").write_bytes(b"invalid")
+        (staging_dir / f"{tex_path.stem}.log").write_text("clean", encoding="utf-8")
+        return 0
+
+    monkeypatch.setattr(assemble, "ROOT", root)
+    monkeypatch.setattr(assemble, "compile_tex", fake_compile)
+    monkeypatch.setattr(assemble, "preflight_book_pdf", lambda *_args: 1)
+
+    assert assemble.build_book("1NSI", "complet") == 1
+    assert not canonical_pdf.exists()
+    assert not list(build_dir.glob(".MANUEL_1NSI_v1-*"))
+
+
+def test_promote_book_artifacts_promotes_pdf_last(monkeypatch, tmp_path):
+    staging = tmp_path / "staging"
+    destination = tmp_path / "books"
+    staging.mkdir()
+    destination.mkdir()
+    for suffix in (".pdf", ".log", ".tex", ".aux"):
+        (staging / f"MANUEL{suffix}").write_text(suffix, encoding="utf-8")
+    destinations = []
+    real_replace = os.replace
+
+    def record_replace(source, target):
+        destinations.append(Path(target))
+        real_replace(source, target)
+
+    monkeypatch.setattr(assemble.os, "replace", record_replace)
+
+    assemble._promote_book_artifacts(staging, destination, "MANUEL")
+
+    assert destinations[-1].suffix == ".pdf"
+
+
+def test_build_book_rejects_output_symlink_escape(monkeypatch, tmp_path):
+    root = tmp_path / "NSI"
+    _prepare_book_root(root)
+    build_dir = root / "build" / "books"
+    build_dir.mkdir(parents=True)
+    outside = tmp_path / "outside.pdf"
+    outside.write_bytes(b"outside")
+    (build_dir / "MANUEL_1NSI_v1.pdf").symlink_to(outside)
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    with pytest.raises(ValueError, match="hors du dépôt"):
+        assemble.build_book("1NSI", "complet")
+
+    assert outside.read_bytes() == b"outside"
 
 
 @pytest.mark.parametrize("variant", ["professeur", "parcours1"])

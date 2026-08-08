@@ -5,14 +5,17 @@ Déclinaisons chapitre : complet|methodes|parcours1|remediation|professeur|amena
 Déclinaisons livre : complet|methodes|remediation|amenagee.
 """
 import argparse
+from dataclasses import dataclass
 import json
+import os
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 from common import ROOT
-from pdf_integrity import verify_pdf
+from pdf_integrity import preflight_book_pdf, verify_pdf
 
 BOOK_VARIANT_SUFFIX = {
     "complet": "",
@@ -27,6 +30,7 @@ BOOK_VARIANT_LABEL = {
     "amenagee": "version aménagée",
 }
 BOOK_VARIANTS = frozenset(BOOK_VARIANT_SUFFIX)
+DEFAULT_SOURCE_DATE_EPOCH = 1786147200
 BOOK_MANIFEST_KEYS = frozenset({
     "book_id", "title", "subtitle", "matiere", "niveau", "author",
     "subject", "keywords", "source_date_epoch", "output_name", "chapters",
@@ -49,6 +53,17 @@ LATEX_ESCAPES = {
     "^": r"\textasciicircum{}",
     "~": r"\textasciitilde{}",
 }
+
+
+@dataclass(frozen=True)
+class BookContext:
+    book_id: str
+    variant: str
+    manifest: dict
+    chapters: tuple[Path, ...]
+    output_stem: str
+
+
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
@@ -164,25 +179,34 @@ def collect_book_files(chap_dir: Path, variant: str) -> list[Path]:
     ]
 
 
-def compile_tex(tex_path: Path, build_dir: Path) -> int:
-    import os
-
+def compile_tex(
+    tex_path: Path,
+    build_dir: Path,
+    *,
+    source_date_epoch: int = DEFAULT_SOURCE_DATE_EPOCH,
+) -> int:
     env = os.environ.copy()
     env["TEXINPUTS"] = f"./gabarits/:{env.get('TEXINPUTS', '')}"
+    env["SOURCE_DATE_EPOCH"] = str(source_date_epoch)
+    env["FORCE_SOURCE_DATE"] = "1"
+    env["TZ"] = "UTC"
+    pdf_path = build_dir / (tex_path.stem + ".pdf")
+    pdf_path.unlink(missing_ok=True)
     for _ in range(2):
         proc = subprocess.run(
             ["lualatex", "-interaction=nonstopmode", "-halt-on-error",
              f"-output-directory={build_dir}", str(tex_path)],
             capture_output=True, cwd=ROOT, env=env)
         if proc.returncode != 0:
+            pdf_path.unlink(missing_ok=True)
             print(proc.stdout.decode("utf-8", errors="replace")[-3000:])
             return 1
-    pdf_path = build_dir / (tex_path.stem + ".pdf")
     if not pdf_path.exists():
         print(proc.stdout.decode("utf-8", errors="replace")[-3000:])
         return 1
     log_path = build_dir / (tex_path.stem + ".log")
     if verify_pdf(pdf_path, log_path):
+        pdf_path.unlink(missing_ok=True)
         return 1
     print(f"PDF : {pdf_path} ({pdf_path.stat().st_size // 1024} Ko)")
     return 0
@@ -211,9 +235,7 @@ def _chapter_entry_title(entry: str | dict) -> str:
     return _chapter_entry_id(entry)
 
 
-def collect_book_chapters(book_id: str, variant: str = "complet") -> list[Path]:
-    _validate_book_variant(variant)
-    manifest = load_book_manifest(book_id)
+def _collect_book_chapters(manifest: dict, book_id: str, variant: str) -> list[Path]:
     chapter_dirs = []
     for entry in manifest["chapters"]:
         chapter_id = _chapter_entry_id(entry)
@@ -227,6 +249,23 @@ def collect_book_chapters(book_id: str, variant: str = "complet") -> list[Path]:
             f"Aucun chapitre éligible pour le livre {book_id} en variante {variant}."
         )
     return chapter_dirs
+
+
+def _book_context(book_id: str, variant: str) -> BookContext:
+    _validate_book_variant(variant)
+    manifest = load_book_manifest(book_id)
+    chapters = tuple(_collect_book_chapters(manifest, book_id, variant))
+    return BookContext(
+        book_id=book_id,
+        variant=variant,
+        manifest=manifest,
+        chapters=chapters,
+        output_stem=_book_output_name(manifest, variant),
+    )
+
+
+def collect_book_chapters(book_id: str, variant: str = "complet") -> list[Path]:
+    return list(_book_context(book_id, variant).chapters)
 
 
 def _book_title(manifest: dict, variant: str) -> str:
@@ -248,9 +287,10 @@ def _validate_book_variant(variant: str) -> None:
         )
 
 
-def render_book_master(book_id: str, variant: str = "complet") -> str:
-    manifest = load_book_manifest(book_id)
-    included_dirs = collect_book_chapters(book_id, variant)
+def _render_book_master(context: BookContext) -> str:
+    manifest = context.manifest
+    variant = context.variant
+    included_dirs = context.chapters
     included_ids = {chap_dir.name for chap_dir in included_dirs}
     parts = []
     for entry in manifest["chapters"]:
@@ -285,6 +325,10 @@ def render_book_master(book_id: str, variant: str = "complet") -> str:
     )
 
 
+def render_book_master(book_id: str, variant: str = "complet") -> str:
+    return _render_book_master(_book_context(book_id, variant))
+
+
 def build_chapter(chap: str, variant: str) -> int:
     chap_dir = ROOT / "chapitres" / chap
     build = ROOT / "build" / chap
@@ -298,13 +342,40 @@ def build_chapter(chap: str, variant: str) -> int:
     master = master.replace("%%CONTENT%%", inputs).replace("%%CHAP%%", chap)
     tex_path = build / f"{chap}_{variant}.tex"
     tex_path.write_text(master, encoding="utf-8")
-    return compile_tex(tex_path, build)
+    return compile_tex(
+        tex_path, build, source_date_epoch=DEFAULT_SOURCE_DATE_EPOCH
+    )
+
+
+def _book_build_dir() -> Path:
+    build_dir = _resolve_under(ROOT, "build/books", "Le répertoire de sortie")
+    build_dir.mkdir(parents=True, exist_ok=True)
+    return build_dir
+
+
+def _book_output_path(build_dir: Path, filename: str) -> Path:
+    return _resolve_under(build_dir, filename, "La sortie du livre")
+
+
+def _promote_book_artifacts(staging: Path, build_dir: Path, stem: str) -> None:
+    artifacts = sorted(
+        path for path in staging.glob(f"{stem}.*") if path.is_file()
+    )
+    pdf = staging / f"{stem}.pdf"
+    if pdf not in artifacts:
+        raise FileNotFoundError(f"PDF de staging introuvable : {pdf}")
+    for source in artifacts:
+        if source == pdf:
+            continue
+        destination = _book_output_path(build_dir, source.name)
+        os.replace(source, destination)
+    os.replace(pdf, _book_output_path(build_dir, pdf.name))
 
 
 def build_book(book_id: str, variant: str) -> int:
-    _validate_book_variant(variant)
-    manifest = load_book_manifest(book_id)
-    included = collect_book_chapters(book_id, variant)
+    context = _book_context(book_id, variant)
+    manifest = context.manifest
+    included = context.chapters
     included_ids = [chap.name for chap in included]
     skipped = [
         _chapter_entry_id(entry)
@@ -314,11 +385,36 @@ def build_book(book_id: str, variant: str) -> int:
     print(f"Variant {variant} — chapitres inclus : {', '.join(included_ids)}")
     if skipped:
         print(f"Variant {variant} — chapitres ignorés : {', '.join(skipped)}")
-    build_dir = ROOT / "build" / "books"
-    build_dir.mkdir(parents=True, exist_ok=True)
-    tex_path = build_dir / f"{_book_output_name(manifest, variant)}.tex"
-    tex_path.write_text(render_book_master(book_id, variant), encoding="utf-8")
-    return compile_tex(tex_path, build_dir)
+    build_dir = _book_build_dir()
+    canonical_pdf = _book_output_path(build_dir, f"{context.output_stem}.pdf")
+    canonical_pdf.unlink(missing_ok=True)
+    promoted = False
+    try:
+        with tempfile.TemporaryDirectory(
+            prefix=f".{context.output_stem}-", dir=build_dir
+        ) as staging_name:
+            staging = Path(staging_name).resolve()
+            if not staging.is_relative_to(build_dir):
+                raise ValueError("Le staging résout hors du répertoire de sortie.")
+            tex_path = staging / f"{context.output_stem}.tex"
+            tex_path.write_text(_render_book_master(context), encoding="utf-8")
+            result = compile_tex(
+                tex_path,
+                staging,
+                source_date_epoch=manifest["source_date_epoch"],
+            )
+            if result:
+                return result
+            staged_pdf = staging / f"{context.output_stem}.pdf"
+            staged_log = staging / f"{context.output_stem}.log"
+            if preflight_book_pdf(staged_pdf, staged_log):
+                return 1
+            _promote_book_artifacts(staging, build_dir, context.output_stem)
+            promoted = True
+            return 0
+    finally:
+        if not promoted:
+            canonical_pdf.unlink(missing_ok=True)
 
 
 def main(*, chap: str | None = None, variant: str = "complet", book: str | None = None) -> int:

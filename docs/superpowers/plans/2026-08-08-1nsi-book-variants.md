@@ -8,6 +8,9 @@
 
 **Tech Stack:** Python 3.11, pytest, LuaLaTeX, gabarits Nexus, `verify_pdf`.
 
+**Statut au 2026-08-08 :** les quatre variantes 1NSI sont implémentées et validées. Ce
+statut ne couvre ni TNSI ni une release globale de la collection.
+
 ---
 
 ## Chunk 1: Tests rouges de sélection variant-aware
@@ -18,7 +21,7 @@
 - Modify: `NSI/tests/test_assemble_book.py`
 - Modify: `NSI/scripts/assemble.py`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 def test_collect_book_chapters_methodes_1nsi():
@@ -26,24 +29,24 @@ def test_collect_book_chapters_methodes_1nsi():
     assert [path.name for path in chapters] == ["1NSI-TYPES-CONSTRUITS"]
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
 Expected: FAIL because `collect_book_chapters` does not accept the variant logic yet.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 def collect_book_chapters(book_id: str, variant: str = "complet") -> list[Path]:
     ...
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
 Expected: PASS for variant-aware chapter selection.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/tests/test_assemble_book.py NSI/scripts/assemble.py
@@ -56,7 +59,7 @@ git commit -m "[1NSI][ASSEMBLAGE] fige la selection des chapitres par variante"
 - Modify: `NSI/tests/test_assemble_book.py`
 - Modify: `NSI/scripts/assemble.py`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 def test_build_book_rejects_chapter_only_variants():
@@ -64,24 +67,24 @@ def test_build_book_rejects_chapter_only_variants():
         assemble.build_book("1NSI", "professeur")
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
 Expected: FAIL because the mode livre does not yet reject chapter-only variants before loading the manifest.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 if variant not in BOOK_VARIANTS:
     raise ValueError(...)
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
 Expected: PASS with explicit rejection of `professeur` and `parcours1` in book mode; chapter mode remains unchanged.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/tests/test_assemble_book.py NSI/scripts/assemble.py
@@ -96,7 +99,7 @@ git commit -m "[1NSI][ASSEMBLAGE] refuse les variantes de livre vides"
 - Modify: `NSI/scripts/assemble.py`
 - Modify: `NSI/tests/test_assemble_book.py`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```python
 def test_render_book_master_methodes_contains_one_chapter():
@@ -105,24 +108,24 @@ def test_render_book_master_methodes_contains_one_chapter():
     assert "1NSI-TYPES-CONSTRUITS" in tex
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
 Expected: FAIL because `render_book_master` still assumes `complet`.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```python
 def render_book_master(book_id: str, variant: str = "complet") -> str:
     ...
 ```
 
-- [ ] **Step 4: Run test to verify it passes**
+- [x] **Step 4: Run test to verify it passes**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/scripts/assemble.py NSI/tests/test_assemble_book.py
@@ -134,16 +137,16 @@ git commit -m "[1NSI][ASSEMBLAGE] rend le master livre sensible aux variantes"
 **Files:**
 - Modify: `NSI/Makefile`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 No code test; verify via command behavior.
 
-- [ ] **Step 2: Run command to verify current limitation**
+- [x] **Step 2: Run command to verify current limitation**
 
 Run: `cd NSI && make book VARIANT=methodes`
 Expected: build still uses the default book behavior or ignores `VARIANT`.
 
-- [ ] **Step 3: Write minimal implementation**
+- [x] **Step 3: Write minimal implementation**
 
 ```make
 VARIANT ?= complet
@@ -151,12 +154,12 @@ book:
 	$(PY) scripts/assemble.py --book 1NSI --variant $(VARIANT)
 ```
 
-- [ ] **Step 4: Run command to verify it passes**
+- [x] **Step 4: Run command to verify it passes**
 
 Run: `cd NSI && make book VARIANT=methodes`
 Expected: methodes book is built.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/Makefile
@@ -171,17 +174,17 @@ git commit -m "[1NSI][ASSEMBLAGE] expose la variante du mode livre"
 - Read/verify: `NSI/build/books/*.pdf`
 - Read/verify: `NSI/build/books/*.log`
 
-- [ ] **Step 1: Run focused tests**
+- [x] **Step 1: Run focused tests**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
 Expected: PASS
 
-- [ ] **Step 2: Run regression-adjacent tests**
+- [x] **Step 2: Run regression-adjacent tests**
 
 Run: `cd NSI && python3 -m pytest tests/test_verify_python.py tests/test_gates_corpus.py -q`
 Expected: PASS
 
-- [ ] **Step 3: Build the four 1NSI variants**
+- [x] **Step 3: Build the four 1NSI variants**
 
 Run:
 - `cd NSI && python3 scripts/assemble.py --book 1NSI --variant complet`
@@ -191,7 +194,7 @@ Run:
 
 Expected: four PDFs generated, with partial books for `methodes` and `amenagee`.
 
-- [ ] **Step 4: Validate the artifacts**
+- [x] **Step 4: Validate the artifacts**
 
 Run `verify_pdf` on each generated PDF under `NSI/build/books/`.
 Expected: exit code `0` for each, no fatal/Overfull/Underfull log entry, and `pdftotext` exposes neither `Corrigé`, `Barème indicatif` nor identifiant `1NSI-*`.
@@ -202,7 +205,7 @@ Safe `lstinline|...|` delimiters for mapping literals are required in every sour
 by the four student-book variants. Unselected professor and evaluation sources remain out
 of scope.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add NSI/scripts/assemble.py NSI/Makefile NSI/tests/test_assemble_book.py docs/superpowers/specs/2026-08-08-1nsi-book-variants-design.md docs/superpowers/plans/2026-08-08-1nsi-book-variants.md

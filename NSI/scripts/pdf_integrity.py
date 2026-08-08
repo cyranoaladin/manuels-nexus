@@ -2,14 +2,34 @@
 
 from __future__ import annotations
 
+import re
 import subprocess
 from collections.abc import Callable, Mapping
 from pathlib import Path
 from typing import Any
 
+import fitz
+
 
 MISSING_ASSET = "Nexus asset missing:"
 MISSING_CHARACTER = "Missing character:"
+BOOK_LOG_DIAGNOSTICS = (
+    "! LaTeX Error",
+    "Fatal error",
+    "Emergency stop",
+    "Overfull \\hbox",
+    "Overfull \\vbox",
+    "Underfull \\hbox",
+    "Underfull \\vbox",
+    "Undefined control sequence",
+    MISSING_ASSET,
+    MISSING_CHARACTER,
+)
+BOOK_METADATA_FIELDS = ("title", "author", "subject", "keywords")
+BOOK_STUDENT_LEAK = re.compile(
+    r"\bcorrigé\b|barème indicatif|réponse attendue|1NSI-",
+    re.IGNORECASE,
+)
 
 
 def log_has_missing_asset_warning(log: str) -> bool:
@@ -28,6 +48,43 @@ def fonts_are_embedded(output: str) -> bool:
         if fields[-4] != "yes":
             print(f"Avertissement : police non sous-ensemblée ({' '.join(fields[:-5])}).")
     return bool(lines)
+
+
+def book_preflight_issues(pdf: Path, log: Path) -> list[str]:
+    issues = []
+    try:
+        log_text = log.read_text(encoding="utf-8", errors="replace")
+    except FileNotFoundError:
+        issues.append(f"Journal LaTeX introuvable : {log}")
+        log_text = ""
+    for diagnostic in BOOK_LOG_DIAGNOSTICS:
+        if diagnostic.lower() in log_text.lower():
+            issues.append(f"Diagnostic LaTeX interdit : {diagnostic}")
+
+    try:
+        with fitz.open(pdf) as document:
+            metadata = document.metadata or {}
+            for field in BOOK_METADATA_FIELDS:
+                if not str(metadata.get(field, "")).strip():
+                    issues.append(f"Métadonnée PDF vide : {field}")
+            if not document.get_toc(simple=True):
+                issues.append("Outline PDF vide.")
+            if not any(page.get_links() for page in document):
+                issues.append("Aucun lien PDF.")
+            text = "\n".join(page.get_text() for page in document)
+            leak = BOOK_STUDENT_LEAK.search(text)
+            if leak:
+                issues.append(f"Fuite version élève : {leak.group(0)}")
+    except (FileNotFoundError, fitz.FileDataError) as error:
+        issues.append(f"PDF illisible : {error}")
+    return issues
+
+
+def preflight_book_pdf(pdf: Path, log: Path) -> int:
+    issues = book_preflight_issues(pdf, log)
+    for issue in issues:
+        print(issue)
+    return int(bool(issues))
 
 
 def verify_pdf(
