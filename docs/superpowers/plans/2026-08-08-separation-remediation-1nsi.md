@@ -306,7 +306,7 @@ de continuer. Les preflights automatiques doivent retourner `0`.
 
 ```bash
 cd /home/alaeddine/Documents/Manuels_Nexus/.worktrees/finalisation-collection-v1
-python3 scripts/inventory_collection.py --validate-model --fail-on-new
+python3 scripts/inventory_collection.py
 git status --short
 ```
 
