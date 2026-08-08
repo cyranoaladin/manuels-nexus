@@ -23,7 +23,8 @@ import assemble  # noqa: E402
 
 # --- check_eleve_no_corrige patterns ---
 
-from gates_corpus.check_eleve_no_corrige import FORBIDDEN, is_allowed
+from gates_corpus import check_eleve_no_corrige as eleve_no_corrige  # noqa: E402
+from gates_corpus.check_eleve_no_corrige import FORBIDDEN, is_allowed  # noqa: E402
 
 
 def _scan_content(text: str) -> list[str]:
@@ -36,7 +37,98 @@ def _scan_content(text: str) -> list[str]:
     return hits
 
 
+def _scan_gate(root: Path, prefix: str | None):
+    assert hasattr(eleve_no_corrige, "scan"), "scan(root, prefix) API is missing"
+    return eleve_no_corrige.scan(root, prefix)
+
+
+def _write_tex(root: Path, relative_path: str, content: str = "Contenu eleve.") -> Path:
+    path = root / relative_path
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
 class TestEleveNoCorrige:
+    def test_filtered_scan_detects_leak_in_matching_chapter(self, tmp_path):
+        leaked = _write_tex(
+            tmp_path,
+            "chapitres/1NSI-TEST/remediation/leak.tex",
+            r"\begin{corrige}Reponse\end{corrige}",
+        )
+
+        checked, violations = _scan_gate(tmp_path, "1NSI-")
+
+        assert checked == 1
+        assert len(violations) == 1
+        assert str(leaked.relative_to(tmp_path)) in violations[0]
+
+    def test_filtered_scan_ignores_tnsi_but_global_scan_detects_it(self, tmp_path):
+        _write_tex(tmp_path, "chapitres/1NSI-TEST/cours/clean.tex")
+        leaked = _write_tex(
+            tmp_path,
+            "chapitres/TNSI-TEST/remediation/leak.tex",
+            r"\begin{corrige}Reponse\end{corrige}",
+        )
+
+        filtered_checked, filtered_violations = _scan_gate(tmp_path, "1NSI-")
+        global_checked, global_violations = _scan_gate(tmp_path, None)
+
+        assert filtered_checked == 1
+        assert filtered_violations == []
+        assert global_checked == 2
+        assert len(global_violations) == 1
+        assert str(leaked.relative_to(tmp_path)) in global_violations[0]
+
+    def test_filtered_scan_includes_build_file_referencing_prefix_in_path(self, tmp_path):
+        _write_tex(tmp_path, "chapitres/1NSI-TEST/cours/clean.tex")
+        leaked = _write_tex(
+            tmp_path,
+            "build/1NSI-manuel.tex",
+            r"\begin{corrige}Reponse\end{corrige}",
+        )
+
+        checked, violations = _scan_gate(tmp_path, "1NSI-")
+
+        assert checked == 2
+        assert len(violations) == 1
+        assert str(leaked.relative_to(tmp_path)) in violations[0]
+
+    def test_filtered_scan_includes_build_file_referencing_prefix_in_content(self, tmp_path):
+        _write_tex(tmp_path, "chapitres/1NSI-TEST/cours/clean.tex")
+        leaked = _write_tex(
+            tmp_path,
+            "build/manuel.tex",
+            "% livre 1NSI-\n" + r"\begin{corrige}Reponse\end{corrige}",
+        )
+
+        checked, violations = _scan_gate(tmp_path, "1NSI-")
+
+        assert checked == 2
+        assert len(violations) == 1
+        assert str(leaked.relative_to(tmp_path)) in violations[0]
+
+    @pytest.mark.parametrize("prefix", ["", "   "])
+    def test_filtered_scan_rejects_empty_prefix(self, tmp_path, prefix):
+        with pytest.raises(ValueError, match="prefix"):
+            _scan_gate(tmp_path, prefix)
+
+    def test_filtered_scan_rejects_prefix_without_matching_chapter(self, tmp_path):
+        _write_tex(tmp_path, "chapitres/TNSI-TEST/cours/clean.tex")
+
+        with pytest.raises(ValueError, match="chapitre"):
+            _scan_gate(tmp_path, "1NSI-")
+
+    def test_filtered_scan_rejects_matching_chapter_without_checked_file(self, tmp_path):
+        _write_tex(
+            tmp_path,
+            "chapitres/1NSI-TEST/corriges/answer.tex",
+            r"\begin{corrige}Reponse\end{corrige}",
+        )
+
+        with pytest.raises(ValueError, match="fichier"):
+            _scan_gate(tmp_path, "1NSI-")
+
     def test_corrigee_adjectival_passes(self):
         """'corrigee' adjectival dans un enonce doit passer VERT."""
         text = r"""
