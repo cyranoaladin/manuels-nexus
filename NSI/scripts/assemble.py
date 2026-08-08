@@ -6,6 +6,7 @@ Déclinaisons livre : complet|methodes|remediation|amenagee.
 """
 import argparse
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -26,6 +27,28 @@ BOOK_VARIANT_LABEL = {
     "amenagee": "version aménagée",
 }
 BOOK_VARIANTS = frozenset(BOOK_VARIANT_SUFFIX)
+BOOK_MANIFEST_KEYS = frozenset({
+    "book_id", "title", "subtitle", "matiere", "niveau", "author",
+    "subject", "keywords", "source_date_epoch", "output_name", "chapters",
+})
+BOOK_STRING_FIELDS = frozenset(
+    {"book_id", "title", "subtitle", "matiere", "niveau", "author",
+     "subject", "keywords", "output_name"}
+)
+CHAPTER_ENTRY_KEYS = frozenset({"id", "title"})
+SAFE_COMPONENT = re.compile(r"[A-Za-z0-9][A-Za-z0-9_-]*\Z")
+LATEX_ESCAPES = {
+    "#": r"\#",
+    "_": r"\_",
+    "%": r"\%",
+    "&": r"\&",
+    "$": r"\$",
+    "{": r"\{",
+    "}": r"\}",
+    "\\": r"\textbackslash{}",
+    "^": r"\textasciicircum{}",
+    "~": r"\textasciitilde{}",
+}
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
@@ -36,6 +59,57 @@ BOOK_STUDENT_ORDER = [
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
     ("cours", "07_td*"), ("projet", "*"), ("qcm", "*"), ("ece", "*"),
 ]
+
+
+def latex_escape(value: str) -> str:
+    return "".join(LATEX_ESCAPES.get(character, character) for character in value)
+
+
+def _validate_component(value: object, field: str) -> str:
+    if not isinstance(value, str) or not SAFE_COMPONENT.fullmatch(value):
+        raise ValueError(f"{field} doit être un composant de chemin sûr.")
+    return value
+
+
+def _resolve_under(base: Path, relative: str, field: str) -> Path:
+    resolved_base = base.resolve()
+    resolved = (resolved_base / relative).resolve()
+    if not resolved.is_relative_to(resolved_base):
+        raise ValueError(f"{field} résout hors du dépôt.")
+    return resolved
+
+
+def _validate_book_manifest(manifest: object, requested_book_id: str) -> dict:
+    if not isinstance(manifest, dict):
+        raise ValueError("Le manifeste doit être un objet JSON.")
+    if set(manifest) != BOOK_MANIFEST_KEYS:
+        raise ValueError("Les clés du manifeste ne correspondent pas au schéma fermé.")
+    for field in BOOK_STRING_FIELDS:
+        value = manifest[field]
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"{field} doit être une chaîne non vide.")
+    if manifest["book_id"] != requested_book_id:
+        raise ValueError("Le book_id du manifeste ne correspond pas au fichier demandé.")
+    _validate_component(manifest["book_id"], "book_id")
+    _validate_component(manifest["output_name"], "output_name")
+    epoch = manifest["source_date_epoch"]
+    if isinstance(epoch, bool) or not isinstance(epoch, int) or epoch < 0:
+        raise ValueError("source_date_epoch doit être un entier positif ou nul.")
+    chapters = manifest["chapters"]
+    if not isinstance(chapters, list) or not chapters:
+        raise ValueError("chapters doit être une liste non vide.")
+    seen = set()
+    for index, entry in enumerate(chapters):
+        if not isinstance(entry, dict) or set(entry) != CHAPTER_ENTRY_KEYS:
+            raise ValueError(f"L'entrée chapitre {index} ne respecte pas le schéma fermé.")
+        chapter_id = _validate_component(entry.get("id"), f"chapitre {index} id")
+        title = entry.get("title")
+        if not isinstance(title, str) or not title.strip():
+            raise ValueError(f"Le titre du chapitre {index} doit être une chaîne non vide.")
+        if chapter_id in seen:
+            raise ValueError(f"Identifiant de chapitre dupliqué : {chapter_id}")
+        seen.add(chapter_id)
+    return manifest
 
 
 def _collect_in_order(chap_dir: Path, order: list[tuple[str, str]]) -> list[Path]:
@@ -115,10 +189,14 @@ def compile_tex(tex_path: Path, build_dir: Path) -> int:
 
 
 def load_book_manifest(book_id: str) -> dict:
-    manifest_path = ROOT / "manifests" / "books" / f"{book_id}.json"
+    _validate_component(book_id, "book_id")
+    manifest_path = _resolve_under(
+        ROOT / "manifests" / "books", f"{book_id}.json", "Le manifeste"
+    )
     if not manifest_path.exists():
         raise FileNotFoundError(f"Manifeste introuvable : {manifest_path}")
-    return json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    return _validate_book_manifest(manifest, book_id)
 
 
 def _chapter_entry_id(entry: str | dict) -> str:
@@ -139,8 +217,8 @@ def collect_book_chapters(book_id: str, variant: str = "complet") -> list[Path]:
     chapter_dirs = []
     for entry in manifest["chapters"]:
         chapter_id = _chapter_entry_id(entry)
-        chap_dir = ROOT / "chapitres" / chapter_id
-        if not chap_dir.exists():
+        chap_dir = _resolve_under(ROOT / "chapitres", chapter_id, "Le chapitre")
+        if not chap_dir.is_dir():
             raise FileNotFoundError(f"Chapitre introuvable : {chapter_id}")
         if collect_book_files(chap_dir, variant):
             chapter_dirs.append(chap_dir)
@@ -180,7 +258,7 @@ def render_book_master(book_id: str, variant: str = "complet") -> str:
         if chapter_id not in included_ids:
             continue
         chapter_title = _chapter_entry_title(entry)
-        chap_dir = ROOT / "chapitres" / chapter_id
+        chap_dir = _resolve_under(ROOT / "chapitres", chapter_id, "Le chapitre")
         inputs = "\n".join(
             f"\\input{{{path.relative_to(ROOT)}}}"
             for path in collect_book_files(chap_dir, variant)
@@ -188,7 +266,7 @@ def render_book_master(book_id: str, variant: str = "complet") -> str:
         parts.append(
             "\n".join(
                 [
-                    f"\\chapter{{{chapter_title}}}",
+                    f"\\chapter{{{latex_escape(chapter_title)}}}",
                     f"\\label{{chap:{chapter_id.lower()}}}",
                     inputs,
                 ]
@@ -196,13 +274,13 @@ def render_book_master(book_id: str, variant: str = "complet") -> str:
         )
     master = (ROOT / "gabarits" / "book_master.tex").read_text(encoding="utf-8")
     return (
-        master.replace("%%MATIERE%%", manifest["matiere"])
-        .replace("%%NIVEAU%%", manifest["niveau"])
-        .replace("%%TITLE%%", _book_title(manifest, variant))
-        .replace("%%SUBTITLE%%", manifest.get("subtitle", ""))
-        .replace("%%PDF_AUTHOR%%", manifest["author"])
-        .replace("%%PDF_SUBJECT%%", manifest["subject"])
-        .replace("%%PDF_KEYWORDS%%", manifest["keywords"])
+        master.replace("%%MATIERE%%", latex_escape(manifest["matiere"]))
+        .replace("%%NIVEAU%%", latex_escape(manifest["niveau"]))
+        .replace("%%TITLE%%", latex_escape(_book_title(manifest, variant)))
+        .replace("%%SUBTITLE%%", latex_escape(manifest["subtitle"]))
+        .replace("%%PDF_AUTHOR%%", latex_escape(manifest["author"]))
+        .replace("%%PDF_SUBJECT%%", latex_escape(manifest["subject"]))
+        .replace("%%PDF_KEYWORDS%%", latex_escape(manifest["keywords"]))
         .replace("%%CONTENT%%", "\n\n".join(parts))
     )
 

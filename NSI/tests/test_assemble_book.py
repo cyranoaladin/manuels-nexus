@@ -1,4 +1,5 @@
 """Tests rouges/verts du mode assembleur manuel NSI."""
+import json
 from pathlib import Path
 import subprocess
 import sys
@@ -10,6 +11,30 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import assemble  # noqa: E402
 
 
+def _valid_manifest(**overrides):
+    manifest = {
+        "book_id": "1NSI",
+        "title": "Manuel NSI Première",
+        "subtitle": "Édition de travail 2026-2027",
+        "matiere": "NSI",
+        "niveau": "Première",
+        "author": "Nexus Réussite",
+        "subject": "Manuel scolaire NSI",
+        "keywords": "NSI, Première",
+        "source_date_epoch": 1786147200,
+        "output_name": "MANUEL_1NSI_v1",
+        "chapters": [{"id": "1NSI-FIXTURE", "title": "Chapitre test"}],
+    }
+    manifest.update(overrides)
+    return manifest
+
+
+def _write_manifest(root: Path, manifest: dict, filename: str = "1NSI.json") -> None:
+    path = root / "manifests" / "books" / filename
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(manifest), encoding="utf-8")
+
+
 def test_load_book_manifest_1nsi():
     manifest = assemble.load_book_manifest("1NSI")
 
@@ -19,7 +44,113 @@ def test_load_book_manifest_1nsi():
     assert manifest["author"]
     assert manifest["subject"]
     assert manifest["keywords"]
+    assert manifest["source_date_epoch"] == 1786147200
     assert len(manifest["chapters"]) == 10
+
+
+@pytest.mark.parametrize("book_id", ["../escape", "folder/book", r"folder\book", ".."])
+def test_load_book_manifest_rejects_unsafe_book_id(monkeypatch, tmp_path, book_id):
+    root = tmp_path / "NSI"
+    escaped_path = root / "manifests" / "escape.json"
+    escaped_path.parent.mkdir(parents=True)
+    escaped_path.write_text(json.dumps(_valid_manifest(book_id=book_id)), encoding="utf-8")
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    with pytest.raises(ValueError, match="book_id"):
+        assemble.load_book_manifest(book_id)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("title", ""),
+        ("author", 42),
+        ("chapters", []),
+        ("source_date_epoch", "1786147200"),
+        ("source_date_epoch", True),
+        ("output_name", "../MANUEL"),
+    ],
+)
+def test_load_book_manifest_rejects_invalid_top_level_values(
+    monkeypatch, tmp_path, field, value
+):
+    root = tmp_path / "NSI"
+    _write_manifest(root, _valid_manifest(**{field: value}))
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    with pytest.raises(ValueError, match=field):
+        assemble.load_book_manifest("1NSI")
+
+
+def test_load_book_manifest_rejects_missing_and_extra_keys(monkeypatch, tmp_path):
+    root = tmp_path / "NSI"
+    missing = _valid_manifest()
+    missing.pop("subject")
+    _write_manifest(root, missing)
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    with pytest.raises(ValueError, match="clés"):
+        assemble.load_book_manifest("1NSI")
+
+    _write_manifest(root, _valid_manifest(unexpected="value"))
+    with pytest.raises(ValueError, match="clés"):
+        assemble.load_book_manifest("1NSI")
+
+
+@pytest.mark.parametrize(
+    "chapters",
+    [
+        [{"id": "1NSI-FIXTURE", "title": "Chapitre", "extra": "interdit"}],
+        [{"id": "../SORTIE", "title": "Chapitre"}],
+        [{"id": "1NSI-FIXTURE", "title": ""}],
+        [
+            {"id": "1NSI-FIXTURE", "title": "Chapitre A"},
+            {"id": "1NSI-FIXTURE", "title": "Chapitre B"},
+        ],
+    ],
+)
+def test_load_book_manifest_rejects_invalid_chapter_entries(
+    monkeypatch, tmp_path, chapters
+):
+    root = tmp_path / "NSI"
+    _write_manifest(root, _valid_manifest(chapters=chapters))
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    with pytest.raises(ValueError, match="chapitre|dupliqué"):
+        assemble.load_book_manifest("1NSI")
+
+
+def test_load_book_manifest_rejects_incoherent_book_id(monkeypatch, tmp_path):
+    root = tmp_path / "NSI"
+    _write_manifest(root, _valid_manifest(book_id="TNSI"))
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    with pytest.raises(ValueError, match="book_id"):
+        assemble.load_book_manifest("1NSI")
+
+
+def test_collect_book_chapters_rejects_symlink_escape(monkeypatch, tmp_path):
+    root = tmp_path / "NSI"
+    outside = tmp_path / "outside" / "1NSI-FIXTURE"
+    course = outside / "cours" / "1-cours.tex"
+    course.parent.mkdir(parents=True)
+    course.write_text("Contenu externe.", encoding="utf-8")
+    chapters_root = root / "chapitres"
+    chapters_root.mkdir(parents=True)
+    (chapters_root / "1NSI-FIXTURE").symlink_to(outside, target_is_directory=True)
+    _write_manifest(root, _valid_manifest())
+    monkeypatch.setattr(assemble, "ROOT", root)
+
+    with pytest.raises(ValueError, match="hors du dépôt"):
+        assemble.collect_book_chapters("1NSI")
+
+
+def test_latex_escape_covers_manifest_special_characters():
+    value = "#_%&${}\\^~"
+
+    assert assemble.latex_escape(value) == (
+        r"\#\_\%\&\$\{\}\textbackslash{}\textasciicircum{}\textasciitilde{}"
+    )
 
 
 def test_collect_book_chapters_1nsi():
