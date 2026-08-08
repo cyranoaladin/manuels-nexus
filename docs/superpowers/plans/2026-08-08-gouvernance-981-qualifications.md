@@ -53,7 +53,16 @@ contrat de 186 par :
 - digests source et modèle observés dans la conception ;
 - objet `approved_transition` avec 2 647 actifs avant, 2 005 conservés, 642
   résolus, 2 986 actifs après, digest des 642, catégories des 642, trois paires
-  et digest des paires.
+  et digest des paires ;
+- digest initial de baseline
+  `sha256:714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff`
+  et historique `resolved` initial égal à zéro.
+
+Migrer toutes les assertions repository-level encore figées :
+
+- `approved_fingerprint_count` : 186 vers 981 ;
+- taille du registre matérialisé : 2 647 vers 3 628 ;
+- test CLI read-only : lot approuvé de 981.
 
 Ajouter les cas du classifieur :
 
@@ -84,6 +93,11 @@ approuvé, un jeu résolu approuvé et une paire modifiée approuvée. Tester qu
 - refuse une paire différente ;
 - refuse une réapparition depuis `resolved` ;
 - refuse une altération d'un fingerprint conservé ;
+- refuse aussi les changements que le comparateur classe comme améliorations :
+  diminution d'occurrences, baisse de sévérité et passage bloquant vers non
+  bloquant ;
+- refuse une baseline initiale de digest différent ou avec un historique
+  `resolved` non vide ;
 - refuse un ajout non `open_debt` ou non bloquant ;
 - conserve son comportement historique d'extension pure lorsque le contrat de
   transition est absent ou vide dans les fixtures existantes.
@@ -102,14 +116,15 @@ actuellement toute résolution et toute paire modifiée.
 
 Dans `_approved_baseline_extension_diagnosis` :
 
-1. Charger et valider `approved_transition`.
+1. Charger et valider `approved_transition`, puis lier la garde au payload de
+   baseline initial en vérifiant son digest canonique et son compte `resolved`.
 2. Recalculer indépendamment les ensembles courant, précédent, ajouté, résolu
    et conservé.
 3. Comparer les comptes, digests et catégories au contrat.
 4. Comparer exactement les paires `modified`, dans leur ordre canonique, et
    leur digest.
-5. Refuser toute régression, aggravation, croissance, changement de
-   disposition ou de qualification sur une empreinte conservée.
+5. Exiger l'égalité canonique complète de chaque enregistrement conservé entre
+   la baseline et l'inventaire courant, sans exemption pour une amélioration.
 6. Autoriser comme seuls échecs de comparaison les 978 anomalies nouvelles et
    les trois remplacements contractuels.
 7. Continuer de vérifier chaque ajout contre la disposition matérialisée :
@@ -124,6 +139,8 @@ lorsqu'un `approved_transition` est présent.
 Ajouter au registre la décision humaine approuvée, sans déclaration de
 publication. Étendre le schéma avec un `$defs/approved_transition` fermé
 (`additionalProperties: false`) et des constantes exactes pour cette décision.
+Le contrat inclut obligatoirement le digest de baseline initial et le compte
+initial de l'historique résolu.
 
 Dans la politique :
 
@@ -221,8 +238,10 @@ git diff --check
 git status --short
 ```
 
-Attendu : zéro non qualifiée, matérialisation idempotente et modèle vert. Le
-gate `--fail-on-new` reste rouge jusqu'à la tâche 3, sans affaiblissement.
+Attendu : zéro non qualifiée, 3 628 dispositions et matérialisation idempotente.
+`--validate-model` reste temporairement rouge uniquement parce que les six
+rapports canoniques portent encore les anciens digests. `--fail-on-new` reste
+rouge jusqu'à la tâche 4. Ne masquer aucun de ces états.
 
 ### Étape 4 - Commit atomique
 
@@ -235,7 +254,60 @@ git commit -m "[AUDIT] materialise les 981 qualifications ouvertes"
 
 ---
 
-## Tâche 3 - Étendre et réconcilier la baseline
+## Tâche 3 - Régénérer l'inventaire canonique
+
+**Fichiers :**
+
+- `ETAT_COLLECTION.md`
+- `audit/AUDIT_CONSOLIDE.md`
+- `audit/ECARTS_ET_CONTRADICTIONS.yaml`
+- `audit/INVENTAIRE_COLLECTION.json`
+- `audit/INVENTAIRE_COLLECTION.md`
+- `audit/MATRICE_LIVRABLES.yaml`
+
+### Étape 1 - Observer le diff attendu
+
+```bash
+python3 scripts/inventory_collection.py --check
+```
+
+Attendu : code `3`, diff limité aux six rapports canoniques et dérive expliquée
+par les nouveaux digests des dispositions et du modèle.
+
+### Étape 2 - Régénérer et contrôler l'idempotence
+
+```bash
+python3 scripts/inventory_collection.py
+python3 scripts/inventory_collection.py --check
+python3 scripts/inventory_collection.py --validate-model
+```
+
+Attendu : second appel `0` et modèle vert avant tout essai de mise à jour de
+baseline.
+
+### Étape 3 - Commit atomique
+
+```bash
+git add ETAT_COLLECTION.md \
+  audit/AUDIT_CONSOLIDE.md \
+  audit/ECARTS_ET_CONTRADICTIONS.yaml \
+  audit/INVENTAIRE_COLLECTION.json \
+  audit/INVENTAIRE_COLLECTION.md \
+  audit/MATRICE_LIVRABLES.yaml
+git commit -m "[AUDIT] regenere l inventaire apres qualification"
+```
+
+Après commit, confirmer depuis l'arbre propre :
+
+```bash
+python3 scripts/inventory_collection.py --check
+python3 scripts/inventory_collection.py --validate-model
+git status --short
+```
+
+---
+
+## Tâche 4 - Étendre et réconcilier la baseline
 
 **Fichiers générés :**
 
@@ -243,15 +315,16 @@ git commit -m "[AUDIT] materialise les 981 qualifications ouvertes"
 - Modifier : `audit/BASELINE_UPDATE_REPORT.md`
 - Modifier : `audit/BASELINE_FREEZE_REPORT.md`
 
-### Étape 1 - Exiger un arbre propre
+### Étape 1 - Exiger un arbre propre et la baseline initiale approuvée
 
 ```bash
 git status --short
 python3 scripts/inventory_collection.py --validate-model
 ```
 
-Attendu : aucun fichier modifié et modèle vert. Ne pas lancer l'écriture de
-baseline si cette précondition n'est pas satisfaite.
+Attendu : aucun fichier modifié, modèle vert, baseline initiale de digest
+`sha256:714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff`
+et historique résolu vide. Ne pas lancer l'écriture autrement.
 
 ### Étape 2 - Exécuter la transition approuvée
 
@@ -294,51 +367,6 @@ git add audit/ANOMALIES_BASELINE.json \
   audit/BASELINE_FREEZE_REPORT.md
 git commit -m "[AUDIT] reconcilie la baseline des qualifications"
 ```
-
----
-
-## Tâche 4 - Régénérer l'inventaire canonique si nécessaire
-
-**Fichiers potentiels :**
-
-- `ETAT_COLLECTION.md`
-- `audit/AUDIT_CONSOLIDE.md`
-- `audit/ECARTS_ET_CONTRADICTIONS.yaml`
-- `audit/INVENTAIRE_COLLECTION.json`
-- `audit/INVENTAIRE_COLLECTION.md`
-- `audit/MATRICE_LIVRABLES.yaml`
-
-### Étape 1 - Vérifier avant écriture
-
-```bash
-python3 scripts/inventory_collection.py --check
-```
-
-Si le résultat est `0`, ne créer aucun commit vide. S'il est `3`, vérifier que
-les diffs annoncés sont limités aux six rapports canoniques.
-
-### Étape 2 - Régénérer et contrôler l'idempotence
-
-```bash
-python3 scripts/inventory_collection.py
-python3 scripts/inventory_collection.py --check
-```
-
-Attendu : second appel `0`.
-
-### Étape 3 - Commit conditionnel
-
-```bash
-git add ETAT_COLLECTION.md \
-  audit/AUDIT_CONSOLIDE.md \
-  audit/ECARTS_ET_CONTRADICTIONS.yaml \
-  audit/INVENTAIRE_COLLECTION.json \
-  audit/INVENTAIRE_COLLECTION.md \
-  audit/MATRICE_LIVRABLES.yaml
-git commit -m "[AUDIT] regenere l inventaire apres qualification"
-```
-
-Ne committer que les fichiers effectivement modifiés.
 
 ---
 

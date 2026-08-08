@@ -139,6 +139,10 @@ ce lot. `release_acceptance` reste faux.
 La baseline contient 2 647 empreintes actives alors que l'inventaire courant en
 contient 2 986. La transition exacte est :
 
+- empreinte canonique de la baseline initiale :
+  `sha256:714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff` ;
+- historique `resolved` initial : `0`.
+
 | Transition | Nombre |
 |---|---:|
 | Empreintes actives conservées | 2 005 |
@@ -182,8 +186,9 @@ d'extension approuvée doit refuser :
 - un ajout qui ne serait pas `open_debt` et bloquant.
 
 Le contrat machine est stocké dans un objet `approved_transition` de la
-politique avec les comptes avant/après, le compte et l'empreinte du jeu résolu,
-sa ventilation par catégorie, les trois paires ordonnées et leur empreinte. Le
+politique avec l'empreinte de baseline initiale, le compte initial de
+`resolved`, les comptes avant/après, le compte et l'empreinte du jeu résolu, sa
+ventilation par catégorie, les trois paires ordonnées et leur empreinte. Le
 schéma `baseline-qualification-policy.schema.json` rend tous ces champs
 obligatoires pour cette décision et en verrouille les valeurs approuvées.
 
@@ -195,12 +200,14 @@ La migration suit quatre états séparés et auditables :
    politique et les tests figent le lot et la réconciliation de baseline. Les
    anciennes dispositions restent intactes.
 2. **Matérialisation** : le générateur ajoute les 981 dispositions `open_debt`
-   et produit un rapport d'anomalies non qualifiées vide.
-3. **Extension et réconciliation de baseline** : depuis un arbre propre, la
-   commande approuvée ajoute exactement les 981 empreintes, archive exactement
-   les 642 empreintes antérieures et régénère les rapports de décision.
-4. **Inventaire canonique** : les six rapports canoniques sont régénérés si leur
-   contenu dérive après la qualification.
+   aux 2 647 preuves historiques conservées et produit un rapport d'anomalies
+   non qualifiées vide. Le registre contient alors 3 628 dispositions.
+3. **Inventaire canonique** : les six rapports canoniques sont régénérés pour
+   attester le nouveau digest des dispositions avant le gate de modèle.
+4. **Extension et réconciliation de baseline** : depuis un arbre propre et un
+   modèle valide, la commande approuvée ajoute exactement les 981 empreintes,
+   archive exactement les 642 empreintes antérieures et régénère les rapports
+   de décision.
 
 Le changement d'empreinte de contrôle de la politique ne doit pas réécrire les
 entrées antérieures : elles sont conservées comme preuves historiques
@@ -213,8 +220,8 @@ Les changements seront séparés ainsi :
 
 1. décision, schéma, politique, garde de réconciliation et tests du contrat ;
 2. dispositions et rapports de matérialisation ;
-3. baseline et rapports d'extension/réconciliation approuvée ;
-4. rapports canoniques régénérés, seulement s'ils changent.
+3. rapports canoniques régénérés ;
+4. baseline et rapports d'extension/réconciliation approuvée.
 
 Une étape ne peut commencer que lorsque la précédente est vérifiée et commise.
 La commande d'extension de baseline exige notamment un arbre Git propre.
