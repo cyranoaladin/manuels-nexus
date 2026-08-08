@@ -49,7 +49,8 @@ sélectionner.
 ne rend aucun motif admissible : il réduit seulement l'ensemble des chapitres
 inspectés pour fournir une preuve indépendante que la dette 1NSI est résolue.
 Il échoue si aucun chapitre ne correspond ou si aucun fichier n'est effectivement
-inspecté.
+inspecté. Une valeur de préfixe vide ou composée uniquement d'espaces est rejetée
+avant tout scan.
 
 Avec `--prefix`, les sources sous `chapitres/` sont limitées aux répertoires dont
 le nom commence par le préfixe. Sous `build/`, seuls les fichiers dont le chemin
@@ -64,6 +65,7 @@ Les tests doivent démontrer que :
   environnement `corrige` reprend l'ID de l'environnement `exercice` ;
 - le gate filtré 1NSI est vert ;
 - un préfixe sans chapitre échoue au lieu de produire un faux vert ;
+- un préfixe vide ou blanc est refusé ;
 - une fuite injectée sous un chapitre `1NSI-*` reste détectée ;
 - le gate global reste rouge uniquement à cause des cinq fichiers TNSI ;
 - aucun fichier TNSI n'est modifié.
