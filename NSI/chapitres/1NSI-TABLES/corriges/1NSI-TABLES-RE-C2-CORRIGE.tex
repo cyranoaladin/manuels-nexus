@@ -1,0 +1,22 @@
+% META: {"id": "1NSI-TABLES-RE-C2-CORRIGE", "chapitre": "1NSI-TABLES", "type_objet": "corrige", "exercice_ref": "1NSI-TABLES-RE-C2", "capacites": ["P-TABLE-02"], "status": "generated"}
+
+\begin{corrige}{1NSI-TAB-RE-C2-EX1}
+\textbf{1.} \lstinline{doublons_naifs} vaut \lstinline{[]} (liste vide) : aucun doublon
+n'est détecté. Pourtant, \lstinline{"Ali"} apparaît bien deux fois dans la colonne
+\lstinline{nom}.
+
+\textbf{2.} Les deux lignes ont le même \lstinline{nom} mais des valeurs
+\textbf{différentes} pour \lstinline{age} et \lstinline{classe} : converties en chaînes
+avec \lstinline{str(...)}, ce sont donc deux chaînes \textbf{différentes}, qui n'apparaissent
+chacune qu'une seule fois. La comparaison ligne entière ne peut détecter que des lignes
+strictement identiques sur \textbf{toutes} les colonnes, pas un doublon sur une seule
+colonne.
+
+\textbf{3.}
+\begin{python}
+noms = [ligne["nom"] for ligne in eleves]
+doublons_colonne = [n for n in set(noms) if noms.count(n) > 1]
+\end{python}
+\lstinline{doublons_colonne} vaut \lstinline{["Ali"]} : cette fois, le doublon est bien
+détecté, car on compare uniquement la colonne concernée.
+\end{corrige}

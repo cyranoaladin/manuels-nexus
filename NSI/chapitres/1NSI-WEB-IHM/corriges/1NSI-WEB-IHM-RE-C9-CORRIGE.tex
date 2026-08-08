@@ -1,0 +1,29 @@
+% META: {"id": "1NSI-WEB-IHM-RE-C9-CORRIGE", "chapitre": "1NSI-WEB-IHM", "type_objet": "corrige", "exercice_ref": "1NSI-WEB-IHM-RE-C9", "capacites": ["P-IHM-04C"], "status": "generated"}
+
+\begin{corrige}{1NSI-WEB-RE-C9-EX1}
+\textbf{1.}
+\begin{python}
+from urllib.parse import urlencode
+
+donnees = {"nouveau_mdp": "MonSecret2026"}
+url = "https://site.fr/nouveau_mdp?" + urlencode(donnees)
+print(url)
+# https://site.fr/nouveau_mdp?nouveau_mdp=MonSecret2026
+\end{python}
+
+\textbf{2.} Oui, le mot de passe apparaît \textbf{en clair} dans l'URL. Cette URL risque
+d'être enregistrée dans l'\textbf{historique du navigateur} et dans les
+\textbf{journaux (logs) du serveur}, deux endroits où un mot de passe ne devrait jamais
+apparaître, même sur une connexion HTTPS (qui protège seulement la transmission, pas ces
+enregistrements).
+
+\textbf{3.}
+\begin{console}
+<form action="/nouveau_mdp" method="POST">
+    <input type="password" name="nouveau_mdp">
+    <button type="submit">Valider</button>
+</form>
+\end{console}
+Avec \lstinline{method="POST"}, le mot de passe est placé dans le corps de la requête, pas
+dans l'URL.
+\end{corrige}

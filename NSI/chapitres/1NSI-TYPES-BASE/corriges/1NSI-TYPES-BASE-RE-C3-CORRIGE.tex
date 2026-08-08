@@ -1,0 +1,19 @@
+% META: {"id": "1NSI-TYPES-BASE-RE-C3-CORRIGE", "chapitre": "1NSI-TYPES-BASE", "type_objet": "corrige", "exercice_ref": "1NSI-TYPES-BASE-RE-C3", "capacites": ["P-BASE-03"], "status": "generated"}
+
+\begin{corrige}{1NSI-TB-RE-C3-EX1}
+\textbf{1.} \lstinline{print(x)} affiche \lstinline{0.30000000000000004}.
+
+\textbf{2.} Chaque addition de $0{,}1$ (lui-même stocké de façon approchée) introduit une
+petite erreur d'arrondi. Après trois additions, la valeur accumulée n'est plus exactement
+égale à la représentation flottante de $0{,}3$ : le test \lstinline{==} compare des
+\textbf{bits}, pas des valeurs mathématiques.
+
+\textbf{3.} Il faut remplacer le test par une comparaison à tolérance près :
+\begin{python}
+def presque_egaux(a, b, tolerance=1e-9):
+    return abs(a - b) < tolerance
+
+if presque_egaux(x, 0.3):
+    ...
+\end{python}
+\end{corrige}

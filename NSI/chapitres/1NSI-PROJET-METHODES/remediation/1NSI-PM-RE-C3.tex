@@ -37,24 +37,3 @@ message_bienvenue_bugue("Lina", 16)
 %     return f"Bonjour {nom}, tu as {age} ans."
 % assert message_bienvenue_fstring("Lina", 16) == "Bonjour Lina, tu as 16 ans."
 % END-VERIFY
-
-\begin{corrige}{1NSI-PM-RE-C3-EX1}
-\textbf{1.} Le programme lève une \lstinline{TypeError}, avec le message
-\lstinline{can only concatenate str (not "int") to str}.
-
-\textbf{2.} L'expression fautive est \lstinline{"... tu as " + age + " ans."} :
-l'opérateur \lstinline{+} entre chaînes de caractères \textbf{concatène} du texte, mais
-\lstinline{age} est un entier (\lstinline{int}), pas une chaîne. Python refuse de mélanger
-directement un \lstinline{int} et un \lstinline{str} avec \lstinline{+}.
-
-\textbf{3.} Deux corrections possibles :
-\begin{python}
-def message_bienvenue(nom, age):
-    return "Bonjour " + nom + ", tu as " + str(age) + " ans."
-
-def message_bienvenue_fstring(nom, age):
-    return f"Bonjour {nom}, tu as {age} ans."
-\end{python}
-La première convertit explicitement \lstinline{age} en chaîne avec \lstinline{str(...)} ;
-la seconde utilise une \emph{f-string}, qui effectue cette conversion automatiquement.
-\end{corrige}

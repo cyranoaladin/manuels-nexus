@@ -37,25 +37,3 @@ def minimum_bugue(liste):
 %     return mini
 % assert minimum([5, 3, 8]) == 3
 % END-VERIFY
-
-\begin{corrige}{1NSI-LANG-RE-C4-EX1}
-\textbf{1.} \lstinline{minimum_bugue([5, 3, 8])} renvoie \lstinline{0}, alors que le
-minimum réel de la liste est $3$.
-
-\textbf{2.} L'accumulateur \lstinline{mini} est initialisé à $0$, qui est \textbf{inférieur
-à tous les éléments} de la liste \lstinline{[5, 3, 8]} (tous positifs et $\geqslant3$).
-Aucun élément ne vérifie donc \lstinline{x < mini}, et \lstinline{mini} reste égal à $0$
-jusqu'à la fin : ce $0$, qui n'appartient même pas à la liste, est renvoyé à tort.
-
-\textbf{3.}
-\begin{python}
-def minimum(liste):
-    mini = liste[0]
-    for x in liste[1:]:
-        if x < mini:
-            mini = x
-    return mini
-\end{python}
-En initialisant \lstinline{mini} avec le \textbf{premier élément} de la liste (et non une
-constante arbitraire), la fonction renvoie bien $3$ pour \lstinline{[5, 3, 8]}.
-\end{corrige}

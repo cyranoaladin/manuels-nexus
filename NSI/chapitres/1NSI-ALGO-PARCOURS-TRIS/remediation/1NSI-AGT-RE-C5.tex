@@ -51,22 +51,3 @@ def tri_selection_bugue(tableau):
 %     return tableau
 % assert tri_selection([9, 1, 5, 3, 7]) == [1, 3, 5, 7, 9]
 % END-VERIFY
-
-\begin{corrige}{1NSI-AGT-RE-C5-EX1}
-\textbf{1.} \lstinline{tri_selection_bugue([9, 1, 5, 3, 7])} renvoie
-\lstinline{[7, 1, 5, 3, 9]} : le tableau n'est \textbf{pas} correctement trié (la version
-correcte donnerait \lstinline{[1, 3, 5, 7, 9]}).
-
-\textbf{2.} En réinitialisant \lstinline{indice_min = i} à \textbf{chaque} tour de la
-boucle interne, la comparaison \lstinline{tableau[j] < tableau[indice_min]} ne compare
-jamais \lstinline{tableau[j]} qu'à \lstinline{tableau[i]} (la valeur d'origine), jamais au
-minimum \textbf{déjà trouvé} lors des tours précédents de la boucle interne. Seule la toute
-\textbf{dernière} comparaison effectuée (avec \lstinline{j = n-1}) détermine la valeur
-finale de \lstinline{indice_min} utilisée pour l'échange : le minimum global de la partie
-restante n'est donc, en général, pas retrouvé.
-
-\textbf{3.} Il faut initialiser \lstinline{indice_min = i} \textbf{avant} la boucle
-\lstinline{for j} (donc à l'intérieur de la boucle \lstinline{for i}, mais avant la boucle
-interne), pour que la comparaison se fasse contre le \textbf{meilleur candidat trouvé
-jusque-là}, et non contre \lstinline{tableau[i]} à chaque tour.
-\end{corrige}

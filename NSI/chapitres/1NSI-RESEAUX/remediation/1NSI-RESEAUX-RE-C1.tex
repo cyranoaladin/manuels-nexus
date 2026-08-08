@@ -37,21 +37,3 @@ message_reconstitue = "".join(p["donnees"] for p in ordre_arrivee)
 % correct = "".join(p["donnees"] for p in sorted(ordre_arrivee, key=lambda p: p["numero"]))
 % assert correct == message
 % END-VERIFY
-
-\begin{corrige}{1NSI-RES-RE-C1-EX1}
-\textbf{1.} \lstinline{message_reconstitue} vaut \lstinline{"IEAURESXNS"} : ce n'est
-\textbf{pas} le message d'origine (\lstinline{"RESEAUXNSI"}).
-
-\textbf{2.} Concaténer dans l'ordre d'arrivée ne fonctionne que si les paquets arrivent
-\textbf{déjà dans l'ordre d'envoi} ($0,1,2,3$). Sur un vrai réseau, rien ne garantit cet
-ordre (les paquets peuvent emprunter des chemins différents, avec des délais différents) :
-il faut donc systématiquement se fier au \textbf{numéro} inscrit dans l'en-tête, jamais à
-l'ordre d'arrivée.
-
-\textbf{3.} Il faut trier les paquets par leur champ \lstinline{numero} avant de les
-concaténer :
-\begin{python}
-paquets_tries = sorted(ordre_arrivee, key=lambda p: p["numero"])
-message_correct = "".join(p["donnees"] for p in paquets_tries)
-\end{python}
-\end{corrige}
