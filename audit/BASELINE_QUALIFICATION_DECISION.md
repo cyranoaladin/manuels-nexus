@@ -229,3 +229,60 @@ Digests observés avant matérialisation :
 
 - source : `sha256:f2b46f25776ce98e2a52a422581532911045d861613ab652625a08b838d07545` ;
 - modèle : `sha256:606142c55324affad412521536f294a913c4ba45d0d0e10e7fb785238cba58aa`.
+
+---
+
+<a id="decision-baseline-debt-extension-collection-2026-08-08"></a>
+
+## Extension et réconciliation approuvées pour la collection
+
+| Champ | Valeur |
+|---|---|
+| Identifiant | `baseline-debt-extension-collection-2026-08-08` |
+| Date | 8 août 2026 |
+| Branche | `finalisation/collection-v1` |
+| HEAD observé | `a48e8e41fc3f6ef9274e564722d5155c8df401b7` |
+| `baseline_purpose` | `debt_regression_control` |
+| `release_acceptance` | `false` |
+| Approbateur | Alaeddine Ben Rhouma |
+| Rôle | Direction scientifique et éditoriale Nexus Réussite |
+
+L’approbateur autorise exclusivement l’enregistrement des 981 fingerprints du
+lot observé comme `open_debt`, tous bloquants pour la release. Le lot est
+verrouillé par l’empreinte
+`sha256:e2ec8130f85f690eda663ac556b61e63ffd7d98e422c71f0245b10112161887f`
+et par les ventilations suivantes :
+
+- `blocking_statuses` : 875 ;
+- `unassembled_objects` : 82 ;
+- `chapters_not_in_manual` : 15 ;
+- `broken_meta_references` : 2 ;
+- `unclassified_types` : 7 ;
+- `direction_scientifique_programme` : 752 ;
+- `direction_editoriale_pedagogique` : 98 ;
+- `ingenierie_build_qualite` : 131.
+
+L’approbateur autorise également la réconciliation exacte de la baseline
+initiale d’empreinte
+`sha256:714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff` :
+2 005 fingerprints actifs sont conservés sans modification et 642 anciens
+fingerprints sont archivés dans `resolved`, pour un état final de 2 986 actifs.
+Le jeu résolu est verrouillé par l’empreinte
+`sha256:44397de4c98d70ce3575c04ea37322a403a29a3468bd29a23bffc938ed4908fc`.
+Il inclut uniquement les trois remplacements appariés suivants :
+
+- `9873ab6a1e11c673` vers `3276d95a8a9b8142` ;
+- `63548ddb4dd6b1dd` vers `d51832bdeebf5d4a` ;
+- `8fdec12020b7159b` vers `a96d99c614321acc`.
+
+Cette autorisation sert uniquement au contrôle de non-régression de la dette.
+Elle n’approuve aucun contenu scientifique, réglementaire, pédagogique,
+éditorial ou visuel, ne lève aucun P0 et n’autorise aucune publication. Les 981
+anomalies restent comptées par `--release-strict`, `release_acceptance` reste
+`false` et le manuel de Mathématiques Première spécialité demeure **NO-GO
+publication**.
+
+Digests observés avant matérialisation :
+
+- source : `sha256:590c51801b32a6661878de7956d1752b9f027bf2cd65ba2605e8120b682d91d3` ;
+- modèle : `sha256:8db8abe9a2882c827f4aee55f7584f082f1ea7f31647783e7f52697443055d22`.

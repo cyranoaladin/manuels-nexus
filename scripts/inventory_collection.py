@@ -2261,12 +2261,12 @@ def _qualification_digest_bootstrap_diagnosis(
 def _approved_baseline_extension_diagnosis(
     root: Path,
     current_active: Sequence[Mapping[str, Any]],
-    baseline_active: Sequence[Mapping[str, Any]],
+    baseline_payload: Mapping[str, Any],
     comparison: Mapping[str, Any],
     *,
     approved_by: str,
 ) -> tuple[bool, list[str]]:
-    """Verify that baseline drift is exactly the human-approved policy lot."""
+    """Verify that baseline drift is exactly the human-approved transition."""
 
     offending: list[str] = []
     try:
@@ -2295,29 +2295,169 @@ def _approved_baseline_extension_diagnosis(
     if decision.get("release_acceptance") is not False:
         offending.append("release_acceptance doit rester false")
 
+    baseline_active = baseline_payload.get("active")
+    baseline_resolved = baseline_payload.get("resolved")
+    if not isinstance(baseline_active, list) or not isinstance(
+        baseline_resolved, list
+    ):
+        return False, ["payload de baseline initiale invalide"]
+
     current = _coalesce_active_debt(current_active)
     previous = _coalesce_active_debt(baseline_active)
     new_fingerprints = sorted(set(current) - set(previous))
-    if set(previous) - set(current):
-        offending.append("fingerprint historique supprimé pendant l'extension")
-    if comparison.get("modified"):
-        offending.append("anomalie historique modifiée pendant l'extension")
-    if comparison.get("resolved"):
-        offending.append("anomalie résolue pendant l'extension")
-    if comparison.get("regressions"):
-        offending.append("anomalie résolue réapparue pendant l'extension")
-    if sorted(str(value) for value in comparison.get("new", [])) != (
-        new_fingerprints
-    ):
-        offending.append("jeu new incohérent avec les fingerprints ajoutés")
-    expected_failures = {
-        f"anomalie nouvelle fp={fingerprint}"
-        for fingerprint in new_fingerprints
-    }
-    if {
-        str(value) for value in comparison.get("failures", [])
-    } != expected_failures:
-        offending.append("dérive non exclusivement constituée d'ajouts")
+    transition = policy.get("approved_transition")
+
+    if transition is None:
+        if set(previous) - set(current):
+            offending.append(
+                "fingerprint historique supprimé pendant l'extension"
+            )
+        if comparison.get("modified"):
+            offending.append(
+                "anomalie historique modifiée pendant l'extension"
+            )
+        if comparison.get("resolved"):
+            offending.append("anomalie résolue pendant l'extension")
+        if comparison.get("regressions"):
+            offending.append(
+                "anomalie résolue réapparue pendant l'extension"
+            )
+        if sorted(str(value) for value in comparison.get("new", [])) != (
+            new_fingerprints
+        ):
+            offending.append(
+                "jeu new incohérent avec les fingerprints ajoutés"
+            )
+        expected_failures = {
+            f"anomalie nouvelle fp={fingerprint}"
+            for fingerprint in new_fingerprints
+        }
+        if {
+            str(value) for value in comparison.get("failures", [])
+        } != expected_failures:
+            offending.append("dérive non exclusivement constituée d'ajouts")
+    elif not isinstance(transition, Mapping):
+        offending.append("contrat approved_transition invalide")
+    else:
+        recomputed_comparison = _compare_anomaly_debt(
+            current_active,
+            baseline_active,
+            baseline_resolved,
+        )
+        if _canonicalize(comparison) != _canonicalize(recomputed_comparison):
+            offending.append("comparaison de baseline fournie incohérente")
+        comparison = recomputed_comparison
+
+        retained_fingerprints = sorted(set(current) & set(previous))
+        resolved_fingerprints = sorted(set(previous) - set(current))
+        modified_pairs = [
+            {
+                "current": str(value.get("current", "")),
+                "previous": str(value.get("previous", "")),
+            }
+            for value in comparison.get("modified", [])
+            if isinstance(value, Mapping)
+        ]
+        expected_modified_pairs = transition.get("modified_pairs")
+        if modified_pairs != expected_modified_pairs:
+            offending.append("paires de remplacement différentes du contrat")
+        serialized_pairs = json.dumps(
+            _canonicalize(modified_pairs),
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        modified_pairs_digest = (
+            "sha256:"
+            + hashlib.sha256(_utf8_bytes(serialized_pairs)).hexdigest()
+        )
+        if modified_pairs_digest != transition.get("modified_pairs_digest"):
+            offending.append("digest des paires de remplacement différent")
+
+        modified_current = {
+            pair["current"] for pair in modified_pairs if pair["current"]
+        }
+        modified_previous = {
+            pair["previous"] for pair in modified_pairs if pair["previous"]
+        }
+        expected_new = sorted(set(new_fingerprints) - modified_current)
+        expected_resolved = sorted(
+            set(resolved_fingerprints) - modified_previous
+        )
+        if sorted(str(value) for value in comparison.get("new", [])) != (
+            expected_new
+        ):
+            offending.append("jeu new différent de la transition approuvée")
+        if sorted(str(value) for value in comparison.get("resolved", [])) != (
+            expected_resolved
+        ):
+            offending.append(
+                "jeu resolved différent de la transition approuvée"
+            )
+        if comparison.get("regressions"):
+            offending.append("anomalie resolved réapparue pendant l'extension")
+
+        expected_failures = {
+            f"anomalie nouvelle fp={fingerprint}"
+            for fingerprint in expected_new
+        }
+        for pair in modified_pairs:
+            previous_record = previous.get(pair["previous"], {})
+            locator = str(previous_record.get("locator_key", ""))
+            expected_failures.add(
+                "anomalie modifiée "
+                f"locator={locator}: {pair['previous']}→{pair['current']}"
+            )
+        if {
+            str(value) for value in comparison.get("failures", [])
+        } != expected_failures:
+            offending.append(
+                "échecs de comparaison hors transition approuvée"
+            )
+
+        if _baseline_payload_digest(baseline_payload) != transition.get(
+            "initial_baseline_digest"
+        ):
+            offending.append("digest de baseline initiale différent")
+        if len(previous) != transition.get(
+            "initial_active_fingerprint_count"
+        ):
+            offending.append("nombre actif initial différent")
+        if len(baseline_resolved) != transition.get(
+            "initial_resolved_fingerprint_count"
+        ):
+            offending.append("historique resolved initial différent")
+        if len(retained_fingerprints) != transition.get(
+            "retained_fingerprint_count"
+        ):
+            offending.append("nombre de fingerprints conservés différent")
+        if len(resolved_fingerprints) != transition.get(
+            "resolved_fingerprint_count"
+        ):
+            offending.append("nombre de fingerprints résolus différent")
+        if len(current) != transition.get("final_active_fingerprint_count"):
+            offending.append("nombre actif final différent")
+        if _baseline_qualification.fingerprint_set_digest(
+            resolved_fingerprints
+        ) != transition.get("resolved_fingerprint_digest"):
+            offending.append("digest des fingerprints résolus différent")
+        resolved_category_counts = Counter(
+            str(previous[fingerprint].get("category", ""))
+            for fingerprint in resolved_fingerprints
+        )
+        if dict(sorted(resolved_category_counts.items())) != dict(
+            sorted(transition.get("resolved_category_counts", {}).items())
+        ):
+            offending.append("catégories des fingerprints résolus différentes")
+
+        for fingerprint in retained_fingerprints:
+            if _canonicalize(current[fingerprint]) != _canonicalize(
+                previous[fingerprint]
+            ):
+                offending.append(
+                    "fingerprint conservé modifié intégralement:"
+                    f"{fingerprint}"
+                )
 
     if len(new_fingerprints) != approved_set.get("fingerprint_count"):
         offending.append("nombre de fingerprints différent du jeu approuvé")
@@ -9073,7 +9213,7 @@ def _update_baseline_gate(
             approved, offending = _approved_baseline_extension_diagnosis(
                 root,
                 probe_current_active,
-                probe_old_active,
+                validated_baseline,
                 probe_comparison,
                 approved_by=approved_by,
             )
@@ -9194,7 +9334,7 @@ def _update_baseline_gate(
             approved, offending = _approved_baseline_extension_diagnosis(
                 root,
                 current_active,
-                old_active,
+                old_payload,
                 comparison,
                 approved_by=approved_by,
             )
@@ -9776,10 +9916,10 @@ def _run() -> int:
         action="store_true",
         help=(
             "Avec --update-baseline uniquement : autorise l'ajout exact du "
-            "jeu de fingerprints défini par la politique approuvée, après "
-            "preuve qu'aucune dette historique n'est supprimée ou modifiée "
-            "et que chaque ajout reste open_debt avec "
-            "release_acceptance=false."
+            "jeu de fingerprints défini par la politique approuvée et, si "
+            "approved_transition est présent, la réconciliation exacte des "
+            "résolutions et remplacements contractuels. Chaque ajout reste "
+            "open_debt et release_acceptance=false."
         ),
     )
     parser.add_argument(

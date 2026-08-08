@@ -7,27 +7,52 @@ allowed_dispositions:
   - accepted_exception
   - fixed
 approved_set:
-  baseline_sha: fb90e5c7cabb16c29c61bf4bdc1d5abae3f0121a
+  baseline_sha: a48e8e41fc3f6ef9274e564722d5155c8df401b7
   category_counts:
-    blocking_statuses: 134
-    unassembled_objects: 52
-  fingerprint_count: 186
-  fingerprint_digest: sha256:ac046f9784e3a492dbcb83dca74292ff0b503a19b52d09ebef51e5e94a299fe8
-  observed_model_digest_before_materialization: sha256:606142c55324affad412521536f294a913c4ba45d0d0e10e7fb785238cba58aa
-  observed_source_digest_before_materialization: sha256:f2b46f25776ce98e2a52a422581532911045d861613ab652625a08b838d07545
+    blocking_statuses: 875
+    broken_meta_references: 2
+    chapters_not_in_manual: 15
+    unassembled_objects: 82
+    unclassified_types: 7
+  fingerprint_count: 981
+  fingerprint_digest: sha256:e2ec8130f85f690eda663ac556b61e63ffd7d98e422c71f0245b10112161887f
+  observed_model_digest_before_materialization: sha256:8db8abe9a2882c827f4aee55f7584f082f1ea7f31647783e7f52697443055d22
+  observed_source_digest_before_materialization: sha256:590c51801b32a6661878de7956d1752b9f027bf2cd65ba2605e8120b682d91d3
   owner_counts:
-    direction_editoriale_pedagogique: 25
-    direction_scientifique_programme: 109
-    ingenierie_build_qualite: 52
+    direction_editoriale_pedagogique: 98
+    direction_scientifique_programme: 752
+    ingenierie_build_qualite: 131
+approved_transition:
+  final_active_fingerprint_count: 2986
+  initial_active_fingerprint_count: 2647
+  initial_baseline_digest: sha256:714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff
+  initial_resolved_fingerprint_count: 0
+  modified_pairs:
+    - current: 3276d95a8a9b8142
+      previous: 9873ab6a1e11c673
+    - current: d51832bdeebf5d4a
+      previous: 63548ddb4dd6b1dd
+    - current: a96d99c614321acc
+      previous: 8fdec12020b7159b
+  modified_pairs_digest: sha256:eaa22aa607e9a9616f251cee24e8b639e9c958c639aac353b13fd01e18836dd1
+  resolved_category_counts:
+    blocking_statuses: 3
+    broken_meta_references: 24
+    chapters_not_in_manual: 3
+    missing_assemblers: 1
+    unassembled_objects: 611
+  resolved_fingerprint_count: 642
+  resolved_fingerprint_digest: sha256:44397de4c98d70ce3575c04ea37322a403a29a3468bd29a23bffc938ed4908fc
+  retained_fingerprint_count: 2005
 artifact_type: baseline_qualification_policy
-control_digest: sha256:f6d141beaa54c22d263f585a450bcccab4c48b12f3abda87588632f5ac45f967
+control_digest: sha256:e3cceb1c434a6f35e9a71f2115836bdf6fdb6ff243c5330b007c0a93da6e1c22
 decision:
   approved_by: Alaeddine Ben Rhouma
   approver_role: Direction scientifique et éditoriale Nexus Réussite
   baseline_purpose: debt_regression_control
-  id: baseline-debt-extension-origin-main-2026-08-02
+  id: baseline-debt-extension-collection-2026-08-08
   provisional_after_freeze: false
-  ref: audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-debt-extension-origin-main-2026-08-02
+  ref: audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-debt-extension-collection-2026-08-08
   release_acceptance: false
 initial_policy:
   prohibited_outputs:
@@ -244,6 +269,30 @@ rules:
       disposition: open_debt
       owner: direction_editoriale_pedagogique
       reason: Réutilisation sans preuve éditoriale complète.
+      release_blocking: true
+  - order: 17
+    id: blocking-scientific-algorithm-experiment
+    match:
+      categories: [blocking_statuses]
+      field_equals:
+        scope: object
+      field_in:
+        object_type:
+          - algorithme
+          - experimentation
+    decision:
+      disposition: open_debt
+      owner: direction_scientifique_programme
+      reason: Algorithme ou expérimentation scientifique sans statut de publication approuvé.
+      release_blocking: true
+  - order: 18
+    id: unclassified-source-type
+    match:
+      categories: [unclassified_types]
+    decision:
+      disposition: open_debt
+      owner: ingenierie_build_qualite
+      reason: Type d'objet non classé dans la taxonomie canonique.
       release_blocking: true
 schema_ref: audit/schemas/v1/baseline-qualification-policy.schema.json
 schema_version: 1

@@ -1472,7 +1472,7 @@ def test_materialize_baseline_qualifications_check_is_read_only(
 
     payload = json.loads(result.stdout)
     assert payload["gate"] == "materialize-baseline-qualifications"
-    assert payload["approved_fingerprint_count"] == 186
+    assert payload["approved_fingerprint_count"] == 981
     assert payload["unqualified"] == 0
     assert result.returncode in {0, 3}
     assert (result.returncode == 0) is (payload["diffs"] == [])
@@ -3481,7 +3481,150 @@ def test_qualification_digest_bootstrap_diagnosis_rejects_owner_change(
     assert any("owner" in value for value in offending)
 
 
-def test_approved_baseline_extension_diagnosis_accepts_only_policy_set(
+def _canonical_test_digest(value: object) -> str:
+    serialized = json.dumps(
+        value,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return f"sha256:{hashlib.sha256(serialized.encode('utf-8')).hexdigest()}"
+
+
+def _approved_transition_case(inventory_module) -> dict[str, object]:
+    retained = _active_debt(
+        "a" * 16,
+        locator_key="missing_corrections|1SPE|C1|retained.tex|corrige_tex|RET-1",
+    )
+    resolved = _active_debt(
+        "b" * 16,
+        locator_key="missing_corrections|1SPE|C1|resolved.tex|corrige_tex|RES-1",
+    )
+    previous_modified = _active_debt(
+        "c" * 16,
+        locator_key="missing_corrections|1SPE|C1|modified.tex|corrige_tex|MOD-1",
+    )
+    added = _active_debt(
+        "d" * 16,
+        locator_key="missing_corrections|1SPE|C1|added.tex|corrige_tex|ADD-1",
+    )
+    current_modified = _active_debt(
+        "e" * 16,
+        locator_key=str(previous_modified["locator_key"]),
+    )
+    baseline_payload = {
+        "active": [retained, resolved, previous_modified],
+        "resolved": [],
+        "schema_version": 1,
+    }
+    current_active = [deepcopy(retained), added, current_modified]
+    comparison = inventory_module._compare_anomaly_debt(
+        current_active,
+        baseline_payload["active"],
+        baseline_payload["resolved"],
+    )
+    modified_pairs = [
+        {"current": "e" * 16, "previous": "c" * 16},
+    ]
+    policy_digest = "sha256:" + "f" * 64
+    policy = {
+        "control_digest": policy_digest,
+        "decision": {
+            "approved_by": "Alaeddine Ben Rhouma",
+            "baseline_purpose": "debt_regression_control",
+            "release_acceptance": False,
+        },
+        "approved_set": {
+            "category_counts": {"missing_corrections": 2},
+            "fingerprint_count": 2,
+            "fingerprint_digest": (
+                inventory_module._baseline_qualification.fingerprint_set_digest(
+                    ["d" * 16, "e" * 16]
+                )
+            ),
+            "owner_counts": {"direction_scientifique_programme": 2},
+        },
+        "approved_transition": {
+            "final_active_fingerprint_count": 3,
+            "initial_active_fingerprint_count": 3,
+            "initial_baseline_digest": inventory_module._baseline_payload_digest(
+                baseline_payload
+            ),
+            "initial_resolved_fingerprint_count": 0,
+            "modified_pairs": modified_pairs,
+            "modified_pairs_digest": _canonical_test_digest(modified_pairs),
+            "resolved_category_counts": {"missing_corrections": 2},
+            "resolved_fingerprint_count": 2,
+            "resolved_fingerprint_digest": (
+                inventory_module._baseline_qualification.fingerprint_set_digest(
+                    ["b" * 16, "c" * 16]
+                )
+            ),
+            "retained_fingerprint_count": 1,
+        },
+    }
+    dispositions = {
+        fingerprint: {
+            "disposition": "open_debt",
+            "fingerprint": fingerprint,
+            "owner": "direction_scientifique_programme",
+            "qualification_policy_digest": policy_digest,
+            "release_blocking": True,
+        }
+        for fingerprint in ("d" * 16, "e" * 16)
+    }
+    return {
+        "baseline_payload": baseline_payload,
+        "comparison": comparison,
+        "current_active": current_active,
+        "dispositions": dispositions,
+        "policy": policy,
+    }
+
+
+def _diagnose_approved_transition(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    case: dict[str, object],
+) -> tuple[bool, list[str]]:
+    monkeypatch.setattr(
+        inventory_module._baseline_qualification,
+        "load_policy",
+        lambda _path: case["policy"],
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_dispositions",
+        lambda _root: case["dispositions"],
+    )
+    return inventory_module._approved_baseline_extension_diagnosis(
+        tmp_path,
+        case["current_active"],
+        case["baseline_payload"],
+        case["comparison"],
+        approved_by="Alaeddine Ben Rhouma",
+    )
+
+
+def _refresh_transition_comparison(case: dict[str, object], inventory_module) -> None:
+    baseline_payload = case["baseline_payload"]
+    case["comparison"] = inventory_module._compare_anomaly_debt(
+        case["current_active"],
+        baseline_payload["active"],
+        baseline_payload["resolved"],
+    )
+
+
+def _refresh_transition_baseline_digest(
+    case: dict[str, object], inventory_module
+) -> None:
+    case["policy"]["approved_transition"]["initial_baseline_digest"] = (
+        inventory_module._baseline_payload_digest(case["baseline_payload"])
+    )
+
+
+def test_approved_baseline_extension_diagnosis_preserves_pure_extension_mode(
     tmp_path: Path,
     inventory_module,
     monkeypatch: pytest.MonkeyPatch,
@@ -3540,7 +3683,7 @@ def test_approved_baseline_extension_diagnosis_accepts_only_policy_set(
         inventory_module._approved_baseline_extension_diagnosis(
             tmp_path,
             current,
-            [previous],
+            {"active": [previous], "resolved": [], "schema_version": 1},
             comparison,
             approved_by="Alaeddine Ben Rhouma",
         )
@@ -3610,7 +3753,7 @@ def test_approved_baseline_extension_diagnosis_rejects_non_open_debt(
         inventory_module._approved_baseline_extension_diagnosis(
             tmp_path,
             current,
-            [previous],
+            {"active": [previous], "resolved": [], "schema_version": 1},
             comparison,
             approved_by="Alaeddine Ben Rhouma",
         )
@@ -3618,6 +3761,285 @@ def test_approved_baseline_extension_diagnosis_rejects_non_open_debt(
 
     assert approved is False
     assert any("open_debt" in value for value in offending)
+
+
+def test_approved_baseline_extension_diagnosis_accepts_exact_reconciliation(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is True
+    assert offending == []
+
+
+def test_approved_baseline_extension_diagnosis_rejects_addition_outside_lot(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    case["current_active"].append(
+        _active_debt(
+            "f" * 16,
+            locator_key="missing_corrections|1SPE|C1|extra.tex|corrige_tex|EXTRA-1",
+        )
+    )
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert offending
+
+
+def test_approved_baseline_extension_diagnosis_rejects_resolution_outside_lot(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    case["current_active"] = [
+        entry
+        for entry in case["current_active"]
+        if entry["fingerprint"] != "a" * 16
+    ]
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert offending
+
+
+def test_approved_baseline_extension_diagnosis_rejects_different_pair(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    replacement = next(
+        entry
+        for entry in case["current_active"]
+        if entry["fingerprint"] == "e" * 16
+    )
+    replacement["locator_key"] = (
+        "missing_corrections|1SPE|C1|other.tex|corrige_tex|OTHER-1"
+    )
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("paire" in value for value in offending)
+
+
+def test_approved_baseline_extension_diagnosis_rejects_resolved_reappearance(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    reappeared = _active_debt(
+        "9" * 16,
+        locator_key="missing_corrections|1SPE|C1|history.tex|corrige_tex|HIST-1",
+    )
+    case["baseline_payload"]["resolved"] = [
+        {"fingerprint": "9" * 16, "resolved_at": "2026-08-01T00:00:00Z"}
+    ]
+    case["current_active"].append(reappeared)
+    _refresh_transition_baseline_digest(case, inventory_module)
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("réappar" in value for value in offending)
+
+
+def test_approved_baseline_extension_diagnosis_rejects_retained_record_change(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    retained = next(
+        entry
+        for entry in case["current_active"]
+        if entry["fingerprint"] == "a" * 16
+    )
+    retained["justification"] = "Justification altérée."
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("conserv" in value for value in offending)
+
+
+def test_approved_baseline_extension_diagnosis_rejects_occurrence_decrease(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    case["baseline_payload"]["active"][0]["occurrence_count"] = 2
+    _refresh_transition_baseline_digest(case, inventory_module)
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("conserv" in value for value in offending)
+
+
+def test_approved_baseline_extension_diagnosis_rejects_severity_decrease(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    retained = next(
+        entry
+        for entry in case["current_active"]
+        if entry["fingerprint"] == "a" * 16
+    )
+    retained["severity"] = "warning"
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("conserv" in value for value in offending)
+
+
+def test_approved_baseline_extension_diagnosis_rejects_blocking_decrease(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    retained = next(
+        entry
+        for entry in case["current_active"]
+        if entry["fingerprint"] == "a" * 16
+    )
+    retained["blocking"] = False
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("conserv" in value for value in offending)
+
+
+def test_approved_baseline_extension_diagnosis_rejects_initial_digest_drift(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    case["policy"]["approved_transition"]["initial_baseline_digest"] = (
+        "sha256:" + "0" * 64
+    )
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("baseline initiale" in value for value in offending)
+
+
+def test_approved_baseline_extension_diagnosis_rejects_nonempty_initial_resolved(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    case["baseline_payload"]["resolved"] = [
+        {"fingerprint": "9" * 16, "resolved_at": "2026-08-01T00:00:00Z"}
+    ]
+    _refresh_transition_baseline_digest(case, inventory_module)
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("resolved initial" in value for value in offending)
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("disposition", "intentional_reuse"),
+        ("blocking", False),
+        ("owner", "ingenierie_build_qualite"),
+    ],
+)
+def test_approved_baseline_extension_diagnosis_rejects_invalid_added_record(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    field: str,
+    value: object,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    added = next(
+        entry
+        for entry in case["current_active"]
+        if entry["fingerprint"] == "d" * 16
+    )
+    added[field] = value
+    _refresh_transition_comparison(case, inventory_module)
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert offending
+
+
+def test_approved_baseline_extension_diagnosis_rejects_policy_digest_mismatch(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    case = _approved_transition_case(inventory_module)
+    case["dispositions"]["d" * 16]["qualification_policy_digest"] = (
+        "sha256:" + "0" * 64
+    )
+
+    approved, offending = _diagnose_approved_transition(
+        tmp_path, inventory_module, monkeypatch, case
+    )
+
+    assert approved is False
+    assert any("disposition ajoutée" in value for value in offending)
 
 
 def test_qualification_digest_bootstrap_diagnosis_rejects_severity_change(

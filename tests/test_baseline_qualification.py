@@ -72,38 +72,81 @@ def test_qualification_policy_schema_and_approved_contract(
         "approved_by": "Alaeddine Ben Rhouma",
         "approver_role": "Direction scientifique et éditoriale Nexus Réussite",
         "baseline_purpose": "debt_regression_control",
-        "id": "baseline-debt-extension-origin-main-2026-08-02",
+        "id": "baseline-debt-extension-collection-2026-08-08",
         "provisional_after_freeze": False,
         "ref": (
             "audit/BASELINE_QUALIFICATION_DECISION.md"
-            "#decision-baseline-debt-extension-origin-main-2026-08-02"
+            "#decision-baseline-debt-extension-collection-2026-08-08"
         ),
         "release_acceptance": False,
     }
     assert payload["approved_set"] == {
-        "baseline_sha": "fb90e5c7cabb16c29c61bf4bdc1d5abae3f0121a",
+        "baseline_sha": "a48e8e41fc3f6ef9274e564722d5155c8df401b7",
         "category_counts": {
-            "blocking_statuses": 134,
-            "unassembled_objects": 52,
+            "blocking_statuses": 875,
+            "broken_meta_references": 2,
+            "chapters_not_in_manual": 15,
+            "unassembled_objects": 82,
+            "unclassified_types": 7,
         },
-        "fingerprint_count": 186,
+        "fingerprint_count": 981,
         "fingerprint_digest": (
             "sha256:"
-            "ac046f9784e3a492dbcb83dca74292ff0b503a19b52d09ebef51e5e94a299fe8"
+            "e2ec8130f85f690eda663ac556b61e63ffd7d98e422c71f0245b10112161887f"
         ),
         "observed_model_digest_before_materialization": (
             "sha256:"
-            "606142c55324affad412521536f294a913c4ba45d0d0e10e7fb785238cba58aa"
+            "8db8abe9a2882c827f4aee55f7584f082f1ea7f31647783e7f52697443055d22"
         ),
         "observed_source_digest_before_materialization": (
             "sha256:"
-            "f2b46f25776ce98e2a52a422581532911045d861613ab652625a08b838d07545"
+            "590c51801b32a6661878de7956d1752b9f027bf2cd65ba2605e8120b682d91d3"
         ),
         "owner_counts": {
-            "direction_editoriale_pedagogique": 25,
-            "direction_scientifique_programme": 109,
-            "ingenierie_build_qualite": 52,
+            "direction_editoriale_pedagogique": 98,
+            "direction_scientifique_programme": 752,
+            "ingenierie_build_qualite": 131,
         },
+    }
+    assert payload["approved_transition"] == {
+        "final_active_fingerprint_count": 2986,
+        "initial_active_fingerprint_count": 2647,
+        "initial_baseline_digest": (
+            "sha256:"
+            "714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff"
+        ),
+        "initial_resolved_fingerprint_count": 0,
+        "modified_pairs": [
+            {
+                "current": "3276d95a8a9b8142",
+                "previous": "9873ab6a1e11c673",
+            },
+            {
+                "current": "d51832bdeebf5d4a",
+                "previous": "63548ddb4dd6b1dd",
+            },
+            {
+                "current": "a96d99c614321acc",
+                "previous": "8fdec12020b7159b",
+            },
+        ],
+        "modified_pairs_digest": (
+            "sha256:"
+            "eaa22aa607e9a9616f251cee24e8b639e9c958c639aac353b13fd01e18836dd1"
+        ),
+        "resolved_category_counts": {
+            "blocking_statuses": 3,
+            "broken_meta_references": 24,
+            "chapters_not_in_manual": 3,
+            "missing_assemblers": 1,
+            "unassembled_objects": 611,
+        },
+        "resolved_fingerprint_count": 642,
+        "resolved_fingerprint_digest": (
+            "sha256:"
+            "44397de4c98d70ce3575c04ea37322a403a29a3468bd29a23bffc938ed4908fc"
+        ),
+        "retained_fingerprint_count": 2005,
     }
     assert set(payload["owners"]) == {
         "direction_scientifique_programme",
@@ -164,6 +207,30 @@ def test_qualification_policy_schema_and_approved_contract(
         ),
         (
             "blocking_statuses",
+            {"scope": "object", "object_type": "algorithme", "status": "draft"},
+            (
+                "blocking-scientific-algorithm-experiment",
+                "open_debt",
+                "direction_scientifique_programme",
+                True,
+            ),
+        ),
+        (
+            "blocking_statuses",
+            {
+                "scope": "object",
+                "object_type": "experimentation",
+                "status": "generated",
+            },
+            (
+                "blocking-scientific-algorithm-experiment",
+                "open_debt",
+                "direction_scientifique_programme",
+                True,
+            ),
+        ),
+        (
+            "blocking_statuses",
             {"scope": "object", "object_type": "remediation", "status": "draft"},
             (
                 "blocking-pedagogical-object",
@@ -181,6 +248,16 @@ def test_qualification_policy_schema_and_approved_contract(
             "broken_meta_references",
             {"source": "a.tex"},
             ("broken-meta-reference", "open_debt", "ingenierie_build_qualite", True),
+        ),
+        (
+            "unclassified_types",
+            {"source": "a.tex", "object_type": "type_inconnu"},
+            (
+                "unclassified-source-type",
+                "open_debt",
+                "ingenierie_build_qualite",
+                True,
+            ),
         ),
         (
             "chapters_not_in_manual",
@@ -374,24 +451,9 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
     inventory = inventory_module.build_inventory(ROOT)
     records = inventory_module._baseline_qualification_records(inventory)
     dispositions = inventory_module._load_dispositions(ROOT)
-    managed = {
-        fingerprint
-        for fingerprint, disposition in dispositions.items()
-        if (
-            disposition.get("qualification_policy_digest")
-            == policy["control_digest"]
-            and disposition.get("policy_rule") != "historical-evidence"
-        )
-    }
-    resolved_fingerprint = min(managed)
-    records_after_resolution = [
-        record
-        for record in records
-        if str(record["fingerprint"]) not in managed
-    ]
     plan = qualification_module.plan_materialization(
         policy,
-        records_after_resolution,
+        records,
         dispositions,
         observed_source_digest=inventory["source_digest"],
         observed_model_digest=inventory_module._model_digest(inventory),
@@ -408,12 +470,8 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
         )
     }
 
-    assert managed.isdisjoint(
-        str(record["fingerprint"]) for record in records_after_resolution
-    )
-    assert resolved_fingerprint in current_entries
-    assert set(current_entries) == managed
-    assert plan["approved_fingerprint_count"] == 186
+    assert len(current_entries) == 981
+    assert plan["approved_fingerprint_count"] == 981
     assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
     ]
@@ -445,13 +503,13 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
         observed_model_digest=inventory_module._model_digest(inventory),
     )
 
-    assert plan["approved_fingerprint_count"] == 186
+    assert plan["approved_fingerprint_count"] == 981
     assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
     ]
     assert plan["unqualified"] == []
     payload = plan["dispositions_payload"]
-    assert len(payload["dispositions"]) == 2647
+    assert len(payload["dispositions"]) == 3628
     required = {
         "approved_by",
         "baseline_sha",
@@ -550,6 +608,14 @@ def test_repository_registry_excludes_prior_policy_from_current_policy(
     inventory = inventory_module.build_inventory(ROOT)
     records = inventory_module._baseline_qualification_records(inventory)
     dispositions = inventory_module._load_dispositions(ROOT)
+    plan = qualification_module.plan_materialization(
+        policy,
+        records,
+        dispositions,
+        observed_source_digest=inventory["source_digest"],
+        observed_model_digest=inventory_module._model_digest(inventory),
+    )
+    planned_dispositions = plan["dispositions_payload"]["dispositions"]
 
     assert any(
         record.get("qualification_policy_digest")
@@ -559,7 +625,7 @@ def test_repository_registry_excludes_prior_policy_from_current_policy(
     )
     assert qualification_module.validate_materialized_registry(
         policy,
-        dispositions,
+        planned_dispositions,
         active_records=records,
     ) == []
 
@@ -1359,7 +1425,15 @@ def test_materialization_refuses_approved_set_drift_without_partial_payload(
 ) -> None:
     inventory = inventory_module.build_inventory(ROOT)
     records = inventory_module._baseline_qualification_records(inventory)
-    historical = inventory_module._load_dispositions(ROOT)
+    historical_before_materialization = inventory_module._load_dispositions(ROOT)
+    initial_plan = qualification_module.plan_materialization(
+        policy,
+        records,
+        historical_before_materialization,
+        observed_source_digest=inventory["source_digest"],
+        observed_model_digest=inventory_module._model_digest(inventory),
+    )
+    historical = initial_plan["dispositions_payload"]["dispositions"]
     managed = {
         fingerprint
         for fingerprint, disposition in historical.items()
@@ -1371,7 +1445,7 @@ def test_materialization_refuses_approved_set_drift_without_partial_payload(
         next(
             index
             for index, record in enumerate(changed)
-            if not record["qualified"] or record["fingerprint"] in managed
+            if record["fingerprint"] in managed
         )
     )
     changed_historical = deepcopy(historical)
