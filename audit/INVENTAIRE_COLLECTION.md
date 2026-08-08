@@ -6,7 +6,7 @@
 
 | ID | Manuel | Matière | Niveau | Édition | Chapitres | Capacités | Exercices | Fichiers contenu | Objets | Variantes compilées |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1NSI | NSI Première | NSI | Premiere | courante | 1 | 5 | 55 | 153 | 153 | — |
+| 1NSI | NSI Première | NSI | Premiere | courante | 10 | 51 | 100 | 339 | 339 | — |
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 473 | 1401 | 1401 | manual |
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 36 | 150 | 150 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 24 | 93 | 93 | manual |
@@ -17,10 +17,10 @@
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2607 |
-| unassembled_objects | 83 |
+| blocking_statuses | 2802 |
+| unassembled_objects | 137 |
+| chapters_not_in_manual | 16 |
 | unavailable_inspiration_sources | 15 |
-| chapters_not_in_manual | 7 |
 | unclassified_types | 7 |
 | duplicate_assembly_objects | 3 |
 | broken_meta_references | 2 |
@@ -37,11 +37,11 @@
 - broken_latex_references: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex, cible=CONCLGN-C1, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-009.tex, cible=TSPE-PROBA-C10, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- chapters_not_in_manual: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml, cible=1NSI-TYPES-CONSTRUITS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-ALGORITHMIQUE/contrat.yaml, cible=TNSI-ALGORITHMIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/contrat.yaml, cible=TNSI-ARCHITECTURES-MATERIELLES-SY, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-BASES-DE-DONNEES/contrat.yaml, cible=TNSI-BASES-DE-DONNEES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/contrat.yaml, cible=TNSI-HISTOIRE-INFORMATIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml, cible=1NSI-ALGO-DICHO-GLOUTON-KNN, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml, cible=1NSI-ALGO-PARCOURS-TRIS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml, cible=1NSI-ARCHITECTURE-OS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/1NSI-LANGAGE/contrat.yaml, cible=1NSI-LANGAGE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+- chapters_not_in_manual: source=NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml, cible=1NSI-PROJET-METHODES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
@@ -66,9 +66,9 @@
 
 ## Réconciliation des rapports
 
-- Assertions lues: 119
+- Assertions lues: 122
 - Ouvertes: 53
-- Contradictoires: 25
+- Contradictoires: 28
 
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 16 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | chapitres | 3 | None | ouvert
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 36 | report:Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | exercices_principaux | 30 | None | ouvert

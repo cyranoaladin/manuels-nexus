@@ -5,17 +5,14 @@ manuals:
   1NSI:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '154'
+      detail: '349'
       source: anomalies.blocking_statuses
     - code: anomalie:chapters_not_in_manual
-      detail: '1'
+      detail: '10'
       source: anomalies.chapters_not_in_manual
     - code: anomalie:unassembled_objects
-      detail: '55'
+      detail: '109'
       source: anomalies.unassembled_objects
-    - code: chapitres_manquants
-      detail: 1/10
-      source: manuals.1NSI.chapters
     - code: livrable_non_compile
       detail: absent
       source: deliverable_matrix.1NSI.variants.evaluations
@@ -38,28 +35,37 @@ manuals:
       detail: partial
       source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
-      detail: objets=153; contrats=1
+      detail: objets=339; contrats=10
       source: manuals.1NSI.statuses
     current:
       artifacts: []
-      chapter_count: 1
+      chapter_count: 10
       chapters:
+      - 1NSI-ALGO-DICHO-GLOUTON-KNN
+      - 1NSI-ALGO-PARCOURS-TRIS
+      - 1NSI-ARCHITECTURE-OS
+      - 1NSI-LANGAGE
+      - 1NSI-PROJET-METHODES
+      - 1NSI-RESEAUX
+      - 1NSI-TABLES
+      - 1NSI-TYPES-BASE
       - 1NSI-TYPES-CONSTRUITS
+      - 1NSI-WEB-IHM
       statuses:
-        generated: 3
+        generated: 189
         needs_review: 150
       totals:
-        capacites: 5
-        corriges: 55
+        capacites: 51
+        corriges: 127
         coups_de_pouce: 24
         diagnostics: 1
-        evaluations: 2
-        exercices_principaux: 55
+        evaluations: 20
+        exercices_principaux: 100
         methodes: 5
         projets: 1
-        qcm: 1
-        remediations: 1
-        sections_cours: 5
+        qcm: 10
+        remediations: 10
+        sections_cours: 38
         td: 2
     objective:
       directive: MISSION_PRIORITAIRE §9
@@ -78,7 +84,6 @@ manuals:
     - anomalie:blocking_statuses
     - anomalie:chapters_not_in_manual
     - anomalie:unassembled_objects
-    - chapitres_manquants
     - statuts_non_approuves
     structural_compile_ready: false
     variants:
@@ -587,12 +592,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:8c28f11f0f196afcd884b89ed1b359462dce95e8be062032f2db5e6b3b4d20d5
+model_digest: sha256:8db8abe9a2882c827f4aee55f7584f082f1ea7f31647783e7f52697443055d22
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-07T20:40:03Z'
+  generated_at_utc: '2026-08-08T21:38:04Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
     scripts/build_manifest.py: sha256:afb34e4a11f6e1d3315183a85163989ffc5e458993f1a0d0543899ada54f0d0e
@@ -604,7 +609,7 @@ provenance:
   generator_sha256: sha256:14e8f18beb99dc6d84b36e2c195f28b3a4d6f6a0dea3da07c57e75e7243a850d
   generator_version: 1
   git_available: true
-  head_sha: d03c1d885ff18b91a12af62cbc1419f0579be365
+  head_sha: 5730b1a9d0cafd04d42fd67ea455d18e96ab10a1
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -615,4 +620,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:a377216ae776b3f914411cadc2f1f638527622d56b6a926fe3e6748c5ef0d4a8
+source_digest: sha256:590c51801b32a6661878de7956d1752b9f027bf2cd65ba2605e8120b682d91d3
