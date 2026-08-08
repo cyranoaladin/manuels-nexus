@@ -1,0 +1,19 @@
+% Gabarit maître de manuel — assemblé par scripts/assemble.py --book
+\documentclass{gabarits/nexus-manuel}
+\matiere{%%MATIERE%%}\niveau{%%NIVEAU%%}
+\title{%%TITLE%%}
+\begin{document}
+\frontmatter
+\begin{titlepage}
+  \centering
+  \vspace*{0.18\textheight}
+  {\titrefont\fontsize{26}{32}\selectfont %%TITLE%%\par}
+  \vspace{1.2cm}
+  {\Large %%SUBTITLE%%\par}
+  \vfill
+  {\large \nexus@matiere{} --- \nexus@niveau\par}
+\end{titlepage}
+\tableofcontents
+\mainmatter
+%%CONTENT%%
+\end{document}

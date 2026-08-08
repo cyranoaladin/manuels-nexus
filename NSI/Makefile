@@ -1,7 +1,8 @@
-.PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter specimen test gates-corpus gates-corpus-strict lot-gates
+.PHONY: setup referentiel harvest verify ruff similarity coverage accents chapter book specimen test gates-corpus gates-corpus-strict lot-gates
 
 PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 CHAP ?= 1NSI-TYPES-CONSTRUITS
+VARIANT ?= complet
 
 setup:
 	python3 -m venv .venv
@@ -37,6 +38,9 @@ accents:
 
 chapter:
 	$(PY) scripts/assemble.py --chap $(CHAP) --variant complet
+
+book:
+	$(PY) scripts/assemble.py --book 1NSI --variant $(VARIANT)
 
 specimen:
 	mkdir -p build/specimen
