@@ -310,5 +310,14 @@ valeur = "ASCII"
     assert find_ascii_violations(text) == []
 
 
+def test_amenagee_extract_avoids_lstinline_inside_tabular_cells():
+    """Regression build amenagee : \\lstinline est fragile dans un tabular."""
+    text = Path(
+        "chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex"
+    ).read_text(encoding="utf-8")
+
+    assert re.search(r"\\lstinline\{[^}]+\}\s*&", text) is None
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])
