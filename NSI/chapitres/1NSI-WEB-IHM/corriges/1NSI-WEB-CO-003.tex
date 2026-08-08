@@ -13,10 +13,10 @@
 % END-VERIFY
 \begin{corrige}{1NSI-WEB-EX-003}
 \textbf{1.} La requête pour \lstinline{/accueil} ne contient \textbf{aucun} cookie :
-\lstinline{{"url": "/accueil", "cookies": {}}}.
+\lstinline|{"url": "/accueil", "cookies": {}}|.
 
 \textbf{2.} La requête pour \lstinline{/paiement} contient le cookie \lstinline{panier} :
-\lstinline{{"url": "/paiement", "cookies": {"panier": "2 articles"}}}.
+\lstinline|{"url": "/paiement", "cookies": {"panier": "2 articles"}}|.
 
 \textbf{3.} Non : le serveur n'a pas besoin de conserver lui-même l'état du panier de
 chaque visiteur. C'est le \textbf{navigateur} qui mémorise le cookie et le

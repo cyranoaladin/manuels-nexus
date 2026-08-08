@@ -10,7 +10,7 @@ Un site de paiement en ligne doit transmettre un numéro de carte bancaire et un
 sécurité au serveur.
 \begin{enumerate}
   \item Le site utilise HTTPS. Cela suffit-il à garantir que le numéro de carte ne sera visible par personne d'autre que le serveur destinataire ? Justifier en une phrase (on distinguera la protection pendant la \textbf{transmission} de ce qui se passe \textbf{avant} ou \textbf{après}).
-  \item Écrire le code qui construit l'URL qu'obtiendrait un attaquant regardant l'historique du navigateur, \textbf{si} (par erreur de conception) ce formulaire utilisait la méthode GET avec les paramètres \lstinline{{"carte": "1234567812345678", "code": "123"}}. Le numéro de carte apparaît-il dans cette URL ?
+  \item Écrire le code qui construit l'URL qu'obtiendrait un attaquant regardant l'historique du navigateur, \textbf{si} (par erreur de conception) ce formulaire utilisait la méthode GET avec les paramètres \lstinline|{"carte": "1234567812345678", "code": "123"}|. Le numéro de carte apparaît-il dans cette URL ?
   \item Quelle méthode (GET ou POST) faut-il utiliser pour ce formulaire ? Justifier.
 \end{enumerate}
 \end{exercice}

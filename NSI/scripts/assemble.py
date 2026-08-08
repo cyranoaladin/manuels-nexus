@@ -71,9 +71,12 @@ def compile_tex(tex_path: Path, build_dir: Path) -> int:
     env["TEXINPUTS"] = f"./gabarits/:{env.get('TEXINPUTS', '')}"
     for _ in range(2):
         proc = subprocess.run(
-            ["lualatex", "-interaction=nonstopmode",
+            ["lualatex", "-interaction=nonstopmode", "-halt-on-error",
              f"-output-directory={build_dir}", str(tex_path)],
             capture_output=True, cwd=ROOT, env=env)
+        if proc.returncode != 0:
+            print(proc.stdout.decode("utf-8", errors="replace")[-3000:])
+            return 1
     pdf_path = build_dir / (tex_path.stem + ".pdf")
     if not pdf_path.exists():
         print(proc.stdout.decode("utf-8", errors="replace")[-3000:])

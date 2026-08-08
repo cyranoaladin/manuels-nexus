@@ -319,5 +319,14 @@ def test_amenagee_extract_avoids_lstinline_inside_tabular_cells():
     assert re.search(r"\\lstinline\{[^}]+\}\s*&", text) is None
 
 
+def test_tex_sources_avoid_brace_delimited_lstinline_for_mapping_literals():
+    violations = []
+    for path in sorted(Path("chapitres").rglob("*.tex")):
+        if r"\lstinline{{" in path.read_text(encoding="utf-8"):
+            violations.append(str(path))
+
+    assert violations == []
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

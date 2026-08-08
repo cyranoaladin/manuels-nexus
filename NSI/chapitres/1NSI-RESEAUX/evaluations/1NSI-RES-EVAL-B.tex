@@ -50,7 +50,7 @@
 \textbf{Exercice 2} --- \textit{Réseau et capteurs} \hfill (10 points)
 
 \begin{enumerate}
-  \item (4 pts) On donne le réseau \lstinline{{"X": ["Y"], "Y": ["X", "Z"], "Z": ["Y"]}}. En utilisant \lstinline{peuvent_communiquer} du cours, vérifier que \lstinline{"X"} et \lstinline{"Z"} peuvent communiquer.
+  \item (4 pts) On donne le réseau \lstinline|{"X": ["Y"], "Y": ["X", "Z"], "Z": ["Y"]}|. En utilisant \lstinline{peuvent_communiquer} du cours, vérifier que \lstinline{"X"} et \lstinline{"Z"} peuvent communiquer.
   \item (3 pts) Écrire une fonction \lstinline{decider_ventilation(co2, seuil=800)} qui renvoie \lstinline{True} si le taux de CO2 (en ppm) dépasse le seuil (la ventilation doit s'activer).
   \item (3 pts) Tester cette fonction pour un taux de $1000$ ppm et de $500$ ppm. Identifier, dans ce système, le capteur et l'actionneur.
 \end{enumerate}
