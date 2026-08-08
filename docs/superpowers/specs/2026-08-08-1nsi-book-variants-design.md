@@ -15,8 +15,8 @@ partiel tant que les 12 chapitres attendus ne sont pas présents.
 - Les déclinaisons `methodes` et `amenagee` n'existent actuellement que dans
   `1NSI-TYPES-CONSTRUITS`.
 - Le mode livre actuel assemble uniquement `complet`.
-- Le choix CLI expose déjà `professeur` et `parcours1`, mais la logique actuelle de
-  collecte ne les traite pas explicitement.
+- Le choix CLI chapitre expose `professeur` et `parcours1`; ces variantes restent
+  réservées au mode chapitre et sont refusées par le mode livre.
 - `TNSI` ne compte que 6 chapitres à la date du 8 août 2026 ; il reste hors périmètre
   de cette passe.
 
@@ -24,17 +24,29 @@ partiel tant que les 12 chapitres attendus ne sont pas présents.
 
 Le mode livre devient sensible au `--variant` :
 
-- `complet` : assemble tous les chapitres du manifeste ayant du contenu complet.
+- `complet` : assemble les 10 chapitres du manifeste avec leur contenu élève
+  (`cours`, `methodes`, `exercices`, `coups_de_pouce`, TD, `projet`, `qcm`, `ece`).
+  Il exclut les évaluations barémées, les packs de remédiation corrigés, les corrigés
+  et tout chemin professeur.
 - `remediation` : assemble tous les chapitres ayant un dossier `remediation/` non vide.
 - `methodes` : assemble uniquement les chapitres ayant un dossier `methodes/` non vide.
 - `amenagee` : assemble uniquement les chapitres ayant un dossier `amenagee/` non vide.
 
 Le comportement est volontairement tolérant par chapitre, mais strict au niveau du livre :
 
+- seules les variantes `complet`, `remediation`, `methodes` et `amenagee` sont admises ;
 - un chapitre sans contenu pour la variante demandée est ignoré ;
 - un résumé des chapitres inclus/exclus est affiché ;
 - si aucun chapitre n'est éligible, l'assemblage échoue ;
 - aucun manifeste `TNSI` n'est ajouté dans cette passe.
+
+Les quatre sorties utilisent explicitement le mode élève du gabarit. Les corps des
+environnements `corrige` sont neutralisés dans ce rendu, sans supprimer ni modifier les
+sources professeur. Les identifiants internes restent masqués.
+
+Les 15 corrections de délimiteurs `lstinline` introduites pour les littéraux de dictionnaire
+sont conservées : elles garantissent que le corpus professeur futur reste compilable même
+si ces objets ne sont pas exposés dans le livre élève complet.
 
 ## Hors périmètre
 
@@ -45,8 +57,8 @@ Le comportement est volontairement tolérant par chapitre, mais strict au niveau
 
 ## Impact code
 
-- centraliser la résolution des fichiers d'un chapitre par variante ;
-- réutiliser cette résolution aussi bien pour `--chap` que pour `--book` ;
+- conserver la résolution historique du mode chapitre ;
+- définir une résolution livre élève distincte et un filtre défensif des chemins professeur ;
 - rendre explicite le comportement des variantes non encore supportées ;
 - ajouter des tests unitaires ciblant l'inclusion/exclusion de chapitres par variante.
 
@@ -55,4 +67,6 @@ Le comportement est volontairement tolérant par chapitre, mais strict au niveau
 - tests unitaires assembleur sur la sélection des chapitres ;
 - build réel `1NSI` en `complet`, `remediation`, `methodes`, `amenagee` ;
 - `verify_pdf` sur chaque PDF généré ;
+- scan `pdftotext` sans `Corrigé`, `Barème indicatif` ni identifiant `1NSI-*` ;
+- logs sans `Overfull`, `Underfull` ni erreur LaTeX fatale ;
 - `git diff --check`.

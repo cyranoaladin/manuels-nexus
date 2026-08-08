@@ -4,7 +4,7 @@
 
 **Goal:** permettre à `NSI/scripts/assemble.py --book 1NSI --variant ...` d'assembler les variantes `complet`, `remediation`, `methodes` et `amenagee` en incluant seulement les chapitres réellement alimentés.
 
-**Architecture:** factoriser la collecte variant-aware au niveau chapitre, puis la réutiliser pour la construction du livre. Le manifeste `1NSI` reste unique ; la variante pilote seulement la sélection des objets et des chapitres.
+**Architecture:** conserver la collecte variant-aware du mode chapitre et ajouter une collecte livre élève dédiée. Le manifeste `1NSI` reste unique ; `complet` prend les objets élève des 10 chapitres mais exclut corrigés, évaluations barémées, remédiations corrigées et chemins professeur. Le master force le mode élève et neutralise les corps `corrige` sans supprimer leurs sources.
 
 **Tech Stack:** Python 3.11, pytest, LuaLaTeX, gabarits Nexus, `verify_pdf`.
 
@@ -59,27 +59,27 @@ git commit -m "[1NSI][ASSEMBLAGE] fige la selection des chapitres par variante"
 - [ ] **Step 1: Write the failing test**
 
 ```python
-def test_collect_book_chapters_professeur_1nsi_fails():
-    with pytest.raises(ValueError):
-        assemble.collect_book_chapters("1NSI", "professeur")
+def test_build_book_rejects_chapter_only_variants():
+    with pytest.raises(ValueError, match="Variante de livre non prise en charge"):
+        assemble.build_book("1NSI", "professeur")
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
-Expected: FAIL because the function does not reject empty book variants correctly.
+Expected: FAIL because the mode livre does not yet reject chapter-only variants before loading the manifest.
 
 - [ ] **Step 3: Write minimal implementation**
 
 ```python
-if not chapter_dirs:
+if variant not in BOOK_VARIANTS:
     raise ValueError(...)
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
 
 Run: `cd NSI && python3 -m pytest tests/test_assemble_book.py -q`
-Expected: PASS with explicit failure on empty variant.
+Expected: PASS with explicit rejection of `professeur` and `parcours1` in book mode; chapter mode remains unchanged.
 
 - [ ] **Step 5: Commit**
 
@@ -194,7 +194,10 @@ Expected: four PDFs generated, with partial books for `methodes` and `amenagee`.
 - [ ] **Step 4: Validate the artifacts**
 
 Run `verify_pdf` on each generated PDF under `NSI/build/books/`.
-Expected: exit code `0` for each.
+Expected: exit code `0` for each, no fatal/Overfull/Underfull log entry, and `pdftotext` exposes neither `Corrigé`, `Barème indicatif` nor identifiant `1NSI-*`.
+
+The 15 safe `lstinline|...|` delimiters for mapping literals remain part of the professor
+source corpus and must not be reverted by the student-book filter.
 
 - [ ] **Step 5: Commit**
 

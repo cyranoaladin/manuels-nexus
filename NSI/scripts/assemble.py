@@ -1,7 +1,8 @@
 """Assemblage (R5/F06) : génère le .tex maître d'un chapitre ou d'un manuel
 depuis les objets, puis compile (LuaLaTeX ×2).
 
-Déclinaisons : --variant complet|methodes|parcours1|remediation|amenagee
+Déclinaisons chapitre : complet|methodes|parcours1|remediation|professeur|amenagee.
+Déclinaisons livre : complet|methodes|remediation|amenagee.
 """
 import argparse
 import json
@@ -17,22 +18,38 @@ BOOK_VARIANT_SUFFIX = {
     "methodes": "_methodes",
     "remediation": "_remediation",
     "amenagee": "_amenagee",
-    "professeur": "_professeur",
-    "parcours1": "_parcours1",
 }
 BOOK_VARIANT_LABEL = {
     "complet": "manuel complet",
     "methodes": "livret méthodes",
     "remediation": "livret remédiation",
     "amenagee": "version aménagée",
-    "professeur": "livret professeur",
-    "parcours1": "parcours 1",
 }
+BOOK_VARIANTS = frozenset(BOOK_VARIANT_SUFFIX)
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
     ("cours", "07_td*"), ("projet", "*"), ("qcm", "*"), ("evaluations", "*"), ("ece", "*"), ("remediation", "*"),
 ]
+BOOK_STUDENT_ORDER = [
+    ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
+    ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
+    ("cours", "07_td*"), ("projet", "*"), ("qcm", "*"), ("ece", "*"),
+]
+
+
+def _collect_in_order(chap_dir: Path, order: list[tuple[str, str]]) -> list[Path]:
+    files = []
+    for sub, pat in order:
+        files += sorted(
+            (chap_dir / sub).glob(f"{pat}.tex" if not pat.endswith("*") else pat + ".tex")
+        )
+    seen, out = set(), []
+    for path in files:
+        if path not in seen:
+            seen.add(path)
+            out.append(path)
+    return out
 
 
 def collect(chap_dir: Path, variant: str) -> list[Path]:
@@ -52,16 +69,25 @@ def collect(chap_dir: Path, variant: str) -> list[Path]:
         return []
     if variant == "parcours1":
         return sorted((chap_dir / "exercices").glob("*.tex"))
-    files = []
-    for sub, pat in ORDER:
-        files += sorted((chap_dir / sub).glob(f"{pat}.tex" if not pat.endswith("*") else pat + ".tex"))
-    # dédoublonner en conservant l'ordre
-    seen, out = set(), []
-    for f in files:
-        if f not in seen:
-            seen.add(f)
-            out.append(f)
-    return out
+    return _collect_in_order(chap_dir, ORDER)
+
+
+def collect_book_files(chap_dir: Path, variant: str) -> list[Path]:
+    _validate_book_variant(variant)
+    files = (
+        _collect_in_order(chap_dir, BOOK_STUDENT_ORDER)
+        if variant == "complet"
+        else collect(chap_dir, variant)
+    )
+    return [
+        path
+        for path in files
+        if not any(
+            marker in part.lower()
+            for part in path.parts
+            for marker in ("corrige", "professeur")
+        )
+    ]
 
 
 def compile_tex(tex_path: Path, build_dir: Path) -> int:
@@ -108,6 +134,7 @@ def _chapter_entry_title(entry: str | dict) -> str:
 
 
 def collect_book_chapters(book_id: str, variant: str = "complet") -> list[Path]:
+    _validate_book_variant(variant)
     manifest = load_book_manifest(book_id)
     chapter_dirs = []
     for entry in manifest["chapters"]:
@@ -115,7 +142,7 @@ def collect_book_chapters(book_id: str, variant: str = "complet") -> list[Path]:
         chap_dir = ROOT / "chapitres" / chapter_id
         if not chap_dir.exists():
             raise FileNotFoundError(f"Chapitre introuvable : {chapter_id}")
-        if collect(chap_dir, variant):
+        if collect_book_files(chap_dir, variant):
             chapter_dirs.append(chap_dir)
     if not chapter_dirs:
         raise ValueError(
@@ -134,6 +161,15 @@ def _book_output_name(manifest: dict, variant: str) -> str:
     return f"{manifest['output_name']}{BOOK_VARIANT_SUFFIX[variant]}"
 
 
+def _validate_book_variant(variant: str) -> None:
+    if variant not in BOOK_VARIANTS:
+        supported = ", ".join(sorted(BOOK_VARIANTS))
+        raise ValueError(
+            f"Variante de livre non prise en charge : {variant}. "
+            f"Variantes autorisées : {supported}."
+        )
+
+
 def render_book_master(book_id: str, variant: str = "complet") -> str:
     manifest = load_book_manifest(book_id)
     included_dirs = collect_book_chapters(book_id, variant)
@@ -146,7 +182,8 @@ def render_book_master(book_id: str, variant: str = "complet") -> str:
         chapter_title = _chapter_entry_title(entry)
         chap_dir = ROOT / "chapitres" / chapter_id
         inputs = "\n".join(
-            f"\\input{{{path.relative_to(ROOT)}}}" for path in collect(chap_dir, variant)
+            f"\\input{{{path.relative_to(ROOT)}}}"
+            for path in collect_book_files(chap_dir, variant)
         )
         parts.append(
             "\n".join(
@@ -184,6 +221,7 @@ def build_chapter(chap: str, variant: str) -> int:
 
 
 def build_book(book_id: str, variant: str) -> int:
+    _validate_book_variant(variant)
     manifest = load_book_manifest(book_id)
     included = collect_book_chapters(book_id, variant)
     included_ids = [chap.name for chap in included]
@@ -204,6 +242,7 @@ def build_book(book_id: str, variant: str) -> int:
 
 def main(*, chap: str | None = None, variant: str = "complet", book: str | None = None) -> int:
     if book:
+        _validate_book_variant(variant)
         return build_book(book, variant)
     if chap is None:
         raise ValueError("Un chapitre ou un livre doit être fourni.")

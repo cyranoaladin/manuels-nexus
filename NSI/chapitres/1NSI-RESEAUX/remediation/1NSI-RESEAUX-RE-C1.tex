@@ -5,10 +5,10 @@
 %---------------------------------------------------------------
 
 \begin{exercice}{1NSI-RES-RE-C1-EX1}{1}{10}
-Le message \lstinline{"RESEAUXNSI"} est découpé en $4$ paquets de taille maximale $3$ avec
-\lstinline{decouper_en_paquets} du cours. Ils arrivent au destinataire dans l'ordre :
-paquet $3$, puis $1$, puis $0$, puis $2$. Un élève réassemble le message en concaténant
-simplement les paquets \textbf{dans leur ordre d'arrivée}, sans les trier :
+Le message \lstinline{"RESEAUXNSI"} est découpé en $4$ paquets de taille maximale $3$.
+Ils arrivent au destinataire dans l'ordre : paquet $3$, puis $1$, puis $0$, puis $2$.
+Un élève réassemble le message en concaténant simplement les paquets
+\textbf{dans leur ordre d'arrivée}, sans les trier :
 \begin{python}
 ordre_arrivee = [paquets[3], paquets[1], paquets[0], paquets[2]]
 message_reconstitue = "".join(p["donnees"] for p in ordre_arrivee)

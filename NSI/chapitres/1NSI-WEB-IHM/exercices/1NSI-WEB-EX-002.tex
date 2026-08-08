@@ -16,10 +16,9 @@
 % assert resultats == [True, False, True]
 % END-VERIFY
 \begin{exercice}{1NSI-WEB-EX-002}{1}{12}
-On reprend le modèle de gestionnaire d'événements du cours (\lstinline{ajouter_gestionnaire},
-\lstinline{declencher_clic}). Un menu de navigation doit s'afficher ou se masquer à chaque
-clic sur un bouton \lstinline{"bouton_menu"} (un menu \og bascule \fg{}, comme sur un site
-mobile).
+On reprend le modèle du cours qui enregistre un gestionnaire puis déclenche un clic.
+Un menu de navigation doit s'afficher ou se masquer à chaque clic sur le bouton
+\lstinline{"bouton_menu"} (un menu \og bascule \fg{}, comme sur un site mobile).
 \begin{enumerate}
   \item Écrire une fonction \lstinline{basculer_affichage()} qui inverse la valeur de \lstinline{etat["visible"]} (initialement \lstinline{False}) et renvoie la nouvelle valeur.
   \item Associer cette fonction à \lstinline{"bouton_menu"} avec \lstinline{ajouter_gestionnaire}.

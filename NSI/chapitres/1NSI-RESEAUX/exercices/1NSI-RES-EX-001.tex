@@ -18,8 +18,8 @@
 % assert reassembler(ordre_arrivee) == message
 % END-VERIFY
 \begin{exercice}{1NSI-RES-EX-001}{1}{12}
-On découpe le message \lstinline{"PROTOCOLERESEAU"} en paquets de taille maximale $5$ avec
-\lstinline{decouper_en_paquets} du cours.
+On utilise la fonction de découpage du cours. Le message \lstinline{"PROTOCOLERESEAU"} est
+découpé en paquets de taille maximale $5$.
 \begin{enumerate}
   \item Combien de paquets sont créés ? Donner le contenu (\lstinline{donnees}) de chacun.
   \item On suppose que les paquets arrivent au destinataire dans l'ordre suivant : paquet $2$, puis paquet $0$, puis paquet $1$. Le message est-il correctement reconstitué par \lstinline{reassembler} malgré cet ordre d'arrivée ? Pourquoi ?

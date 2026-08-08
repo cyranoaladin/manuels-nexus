@@ -12,11 +12,10 @@
 % assert r2 == {"url": "/paiement", "cookies": {"panier": "2 articles"}}
 % END-VERIFY
 \begin{exercice}{1NSI-WEB-EX-003}{2}{12}
-On reprend le modèle de cookies du cours (\lstinline{serveur_definit_cookie},
-\lstinline{client_envoie_requete_avec_cookies}). Un site de e-commerce fonctionne ainsi :
-un visiteur charge la page \lstinline{/accueil} (aucun cookie n'existe encore), puis ajoute
-un article à son panier (le serveur définit alors un cookie \lstinline{"panier"} avec la
-valeur \lstinline{"2 articles"}), puis charge la page \lstinline{/paiement}.
+On reprend le modèle de cookies du cours. Un site de e-commerce fonctionne ainsi : un
+visiteur charge la page \lstinline{/accueil} (aucun cookie n'existe encore), puis ajoute un
+article à son panier. Le serveur définit alors un cookie \lstinline{"panier"} avec la valeur
+\lstinline{"2 articles"}, puis le visiteur charge la page \lstinline{/paiement}.
 \begin{enumerate}
   \item Que contient la requête envoyée pour \lstinline{/accueil}, avant tout ajout au panier ?
   \item Après l'ajout au panier, que contient la requête envoyée pour \lstinline{/paiement} ?
