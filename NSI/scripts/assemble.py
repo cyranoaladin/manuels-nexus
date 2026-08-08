@@ -354,6 +354,11 @@ def _book_build_dir() -> Path:
 
 
 def _book_output_path(build_dir: Path, filename: str) -> Path:
+    candidate = build_dir / filename
+    if candidate.is_symlink():
+        raise ValueError(
+            "La sortie du livre symbolique est interdite, même sans sortie hors du dépôt."
+        )
     return _resolve_under(build_dir, filename, "La sortie du livre")
 
 

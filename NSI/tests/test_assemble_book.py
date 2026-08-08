@@ -477,6 +477,29 @@ def test_build_book_rejects_output_symlink_escape(monkeypatch, tmp_path):
     assert outside.read_bytes() == b"outside"
 
 
+def test_build_book_rejects_internal_output_symlink_before_unlink(
+    monkeypatch, tmp_path
+):
+    root = tmp_path / "NSI"
+    _prepare_book_root(root)
+    build_dir = root / "build" / "books"
+    build_dir.mkdir(parents=True)
+    target = build_dir / "archive.pdf"
+    target.write_bytes(b"archive")
+    (build_dir / "MANUEL_1NSI_v1.pdf").symlink_to(target.name)
+    monkeypatch.setattr(assemble, "ROOT", root)
+    monkeypatch.setattr(
+        assemble,
+        "compile_tex",
+        lambda *_args, **_kwargs: pytest.fail("Le build ne doit pas démarrer."),
+    )
+
+    with pytest.raises(ValueError, match="symbolique"):
+        assemble.build_book("1NSI", "complet")
+
+    assert target.read_bytes() == b"archive"
+
+
 @pytest.mark.parametrize("variant", ["professeur", "parcours1"])
 def test_build_book_rejects_chapter_only_variants_before_loading_manifest(
     monkeypatch, variant

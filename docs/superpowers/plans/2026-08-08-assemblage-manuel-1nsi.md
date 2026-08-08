@@ -216,4 +216,4 @@ git add NSI/scripts/assemble.py NSI/Makefile NSI/gabarits/book_master.tex NSI/ma
 git commit -m "[1NSI][ASSEMBLAGE] produit le manuel Premiere NSI"
 ```
 
-Plan complete and saved to `docs/superpowers/plans/2026-08-08-assemblage-manuel-1nsi.md`. Ready to execute.
+Plan exécuté et validé pour le manuel 1NSI ; TNSI et la release globale restent hors périmètre.

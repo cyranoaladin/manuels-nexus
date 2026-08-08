@@ -18,7 +18,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-import assemble
+import assemble  # noqa: E402
 
 
 # --- check_eleve_no_corrige patterns ---
