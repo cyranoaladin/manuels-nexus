@@ -9578,9 +9578,10 @@ def _update_baseline_gate(
             mode="head",
             allowed_generation_paths=lock_identity,
         )
-        inventory = build_inventory(
+        inventory = _build_inventory(
             root,
             require_git_provenance=True,
+            owned_generation_lock=lock_identity,
         )
         provenance = inventory.get("provenance")
         if not isinstance(provenance, Mapping):

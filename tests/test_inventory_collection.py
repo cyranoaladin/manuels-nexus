@@ -4824,10 +4824,23 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
             ],
         },
     )
+    received_lock_identities: list[dict[str, tuple[int, int]]] = []
+
+    def build_inventory_under_owned_lock(
+        _root: Path,
+        *,
+        require_git_provenance: bool = False,
+        owned_generation_lock: dict[str, tuple[int, int]] | None = None,
+    ) -> dict[str, object]:
+        assert require_git_provenance is True
+        assert owned_generation_lock is not None
+        received_lock_identities.append(dict(owned_generation_lock))
+        return inventory
+
     monkeypatch.setattr(
         inventory_module,
-        "build_inventory",
-        lambda _root, **_kwargs: inventory,
+        "_build_inventory",
+        build_inventory_under_owned_lock,
     )
     monkeypatch.setattr(
         inventory_module,
@@ -4860,6 +4873,8 @@ def test_update_baseline_writes_audited_transition_and_preserves_resolved_histor
         tmp_path / "audit/BASELINE_FREEZE_REPORT.md"
     ).read_text(encoding="utf-8")
     assert result["success"] is True
+    assert len(received_lock_identities) == 1
+    assert inventory_module.GENERIC_LOCK_FILE in received_lock_identities[0]
     assert payload["provisional"] is False
     assert payload["baseline_purpose"] == "debt_regression_control"
     assert payload["release_acceptance"] is False
