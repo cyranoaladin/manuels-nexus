@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import importlib
 import argparse
+import ctypes
 import json
 import hashlib
 import posixpath
@@ -6676,18 +6677,6 @@ def _write_transaction_entry(
         _write_all(fd, payload)
         os.fsync(fd)
         return identity
-    except Exception:
-        try:
-            current = os.stat(
-                name,
-                dir_fd=directory_fd,
-                follow_symlinks=False,
-            )
-            if _stat_identity(current) == _stat_identity(identity):
-                os.unlink(name, dir_fd=directory_fd)
-        except OSError:
-            pass
-        raise
     finally:
         os.close(fd)
 
@@ -6738,68 +6727,62 @@ def _transaction_entry_is_regular(directory_fd: int, name: str) -> bool:
     return stat.S_ISREG(value.st_mode)
 
 
-def _copy_recovery_backup(
+def _copy_recovery_payload(
     root: Path,
     *,
     root_fd: int,
-    transaction_fd: int,
-    backup_name: str,
+    payload: bytes,
 ) -> Path:
-    source_flags = (
-        os.O_RDONLY
-        | getattr(os, "O_CLOEXEC", 0)
-        | getattr(os, "O_NOFOLLOW", 0)
-    )
-    source_fd = os.open(backup_name, source_flags, dir_fd=transaction_fd)
-    try:
-        source_stat = os.fstat(source_fd)
-        if not stat.S_ISREG(source_stat.st_mode):
-            raise InventoryError("rollback backup is not a regular file")
-        destination_fd: int | None = None
-        recovery_name = ""
-        for _ in range(128):
-            recovery_name = (
-                f".inventory-collection-recovery-{secrets.token_hex(16)}.bak"
-            )
-            try:
-                destination_fd = os.open(
-                    recovery_name,
-                    os.O_CREAT
-                    | os.O_EXCL
-                    | os.O_WRONLY
-                    | getattr(os, "O_CLOEXEC", 0)
-                    | getattr(os, "O_NOFOLLOW", 0),
-                    0o600,
-                    dir_fd=root_fd,
-                )
-                break
-            except FileExistsError:
-                continue
-        if destination_fd is None:
-            raise InventoryError("cannot allocate recovery backup")
-        destination_stat = os.fstat(destination_fd)
+    destination_fd: int | None = None
+    recovery_name = ""
+    for _ in range(128):
+        recovery_name = (
+            f".inventory-collection-recovery-{secrets.token_hex(16)}.bak"
+        )
         try:
-            os.lseek(source_fd, 0, os.SEEK_SET)
-            while True:
-                chunk = os.read(source_fd, 1024 * 1024)
-                if not chunk:
-                    break
-                _write_all(destination_fd, chunk)
-            os.fsync(destination_fd)
-        except Exception:
-            try:
-                current = os.stat(
-                    recovery_name,
-                    dir_fd=root_fd,
-                    follow_symlinks=False,
-                )
-                if _stat_identity(current) == _stat_identity(destination_stat):
-                    os.unlink(recovery_name, dir_fd=root_fd)
-            except OSError:
-                pass
-            raise
-        finally:
-            os.close(destination_fd)
+            destination_fd = os.open(
+                recovery_name,
+                os.O_CREAT
+                | os.O_EXCL
+                | os.O_RDWR
+                | getattr(os, "O_CLOEXEC", 0)
+                | getattr(os, "O_NOFOLLOW", 0),
+                0o600,
+                dir_fd=root_fd,
+            )
+            break
+        except FileExistsError:
+            continue
+    if destination_fd is None:
+        raise InventoryError("cannot allocate recovery backup")
+    destination_stat = os.fstat(destination_fd)
+    try:
+        if (
+            not stat.S_ISREG(destination_stat.st_mode)
+            or destination_stat.st_nlink != 1
+        ):
+            raise InventoryError(
+                "recovery backup creation is not exclusive"
+            )
+        _write_all(destination_fd, payload)
+        os.fsync(destination_fd)
+        os.lseek(destination_fd, 0, os.SEEK_SET)
+        chunks: list[bytes] = []
+        while True:
+            chunk = os.read(destination_fd, 1024 * 1024)
+            if not chunk:
+                break
+            chunks.append(chunk)
+        verified_stat = os.fstat(destination_fd)
+        if (
+            b"".join(chunks) != payload
+            or _stat_identity(verified_stat)
+            != _stat_identity(destination_stat)
+            or verified_stat.st_nlink != 1
+        ):
+            raise InventoryError(
+                f"recovery backup content changed: {root / recovery_name}"
+            )
         current = os.stat(
             recovery_name,
             dir_fd=root_fd,
@@ -6808,12 +6791,194 @@ def _copy_recovery_backup(
         if (
             not stat.S_ISREG(current.st_mode)
             or _stat_identity(current) != _stat_identity(destination_stat)
+            or current.st_nlink != 1
         ):
             raise InventoryError("recovery backup identity changed")
+        os.lseek(destination_fd, 0, os.SEEK_SET)
+        final_chunks: list[bytes] = []
+        while True:
+            chunk = os.read(destination_fd, 1024 * 1024)
+            if not chunk:
+                break
+            final_chunks.append(chunk)
+        if b"".join(final_chunks) != payload:
+            raise InventoryError(
+                f"recovery backup content changed: {root / recovery_name}"
+            )
         os.fsync(root_fd)
+        os.lseek(destination_fd, 0, os.SEEK_SET)
+        durable_chunks: list[bytes] = []
+        while True:
+            chunk = os.read(destination_fd, 1024 * 1024)
+            if not chunk:
+                break
+            durable_chunks.append(chunk)
+        durable_fd_stat = os.fstat(destination_fd)
+        durable_name_stat = os.stat(
+            recovery_name,
+            dir_fd=root_fd,
+            follow_symlinks=False,
+        )
+        if (
+            b"".join(durable_chunks) != payload
+            or _stat_identity(durable_fd_stat)
+            != _stat_identity(destination_stat)
+            or durable_fd_stat.st_nlink != 1
+            or not stat.S_ISREG(durable_name_stat.st_mode)
+            or _stat_identity(durable_name_stat)
+            != _stat_identity(destination_stat)
+            or durable_name_stat.st_nlink != 1
+        ):
+            raise InventoryError("recovery backup identity changed")
         return root / recovery_name
     finally:
-        os.close(source_fd)
+        os.close(destination_fd)
+
+
+def _exchange_directory_entries(
+    source_fd: int,
+    source_name: str,
+    destination_fd: int,
+    destination_name: str,
+) -> None:
+    renameat2 = getattr(ctypes.CDLL(None, use_errno=True), "renameat2", None)
+    if renameat2 is None:
+        raise InventoryError("atomic entry exchange is unavailable")
+    renameat2.argtypes = (
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    )
+    renameat2.restype = ctypes.c_int
+    result = renameat2(
+        source_fd,
+        os.fsencode(source_name),
+        destination_fd,
+        os.fsencode(destination_name),
+        2,  # RENAME_EXCHANGE
+    )
+    if result != 0:
+        error_number = ctypes.get_errno()
+        raise OSError(
+            error_number,
+            os.strerror(error_number),
+            source_name,
+            destination_name,
+        )
+
+
+def _restore_authenticated_payload(
+    parent_fd: int,
+    basename: str,
+    payload: bytes,
+    *,
+    preserved_entries: list[str],
+) -> os.stat_result:
+    for _attempt in range(3):
+        rollback_name = ""
+        rollback_snapshot: os.stat_result | None = None
+        for _ in range(128):
+            rollback_name = (
+                f".inventory-collection-rollback-{secrets.token_hex(16)}.tmp"
+            )
+            try:
+                rollback_snapshot = _write_transaction_entry(
+                    parent_fd,
+                    rollback_name,
+                    payload,
+                )
+                break
+            except FileExistsError:
+                continue
+        if rollback_snapshot is None:
+            raise InventoryError("cannot allocate rollback entry")
+        _revalidate_transaction_entry_snapshot(
+            parent_fd,
+            rollback_name,
+            rollback_snapshot,
+        )
+        _exchange_directory_entries(
+            parent_fd,
+            rollback_name,
+            parent_fd,
+            basename,
+        )
+        preserved_entries.append(rollback_name)
+        os.fsync(parent_fd)
+        restored = _read_destination_backup(parent_fd, basename)
+        if restored is None:
+            continue
+        restored_payload, restored_snapshot = restored
+        if (
+            _stat_identity(restored_snapshot)
+            == _stat_identity(rollback_snapshot)
+            and restored_payload == payload
+        ):
+            _revalidate_destination_entry(
+                parent_fd,
+                basename,
+                restored_snapshot,
+            )
+            return restored_snapshot
+        _revalidate_destination_entry(
+            parent_fd,
+            basename,
+            restored_snapshot,
+        )
+        quarantine_name = ""
+        quarantine_snapshot: os.stat_result | None = None
+        for _ in range(128):
+            quarantine_name = (
+                ".inventory-collection-preserved-rollback-"
+                f"{secrets.token_hex(16)}.wip"
+            )
+            try:
+                quarantine_snapshot = _write_transaction_entry(
+                    parent_fd,
+                    quarantine_name,
+                    b"",
+                )
+                break
+            except FileExistsError:
+                continue
+        if quarantine_snapshot is None:
+            raise InventoryError("cannot allocate rollback quarantine")
+        _revalidate_transaction_entry_snapshot(
+            parent_fd,
+            quarantine_name,
+            quarantine_snapshot,
+        )
+        _exchange_directory_entries(
+            parent_fd,
+            basename,
+            parent_fd,
+            quarantine_name,
+        )
+        preserved_entries.append(quarantine_name)
+        os.fsync(parent_fd)
+        _revalidate_destination_entry(
+            parent_fd,
+            basename,
+            quarantine_snapshot,
+        )
+        quarantined = _read_destination_backup(
+            parent_fd,
+            quarantine_name,
+        )
+        if quarantined is None:
+            raise InventoryError(
+                "preserved rollback entry disappeared: "
+                f"{quarantine_name}"
+            )
+        _quarantined_payload, quarantined_snapshot = quarantined
+        _revalidate_destination_entry(
+            parent_fd,
+            quarantine_name,
+            quarantined_snapshot,
+        )
+    raise InventoryError("rollback entry changed repeatedly")
 
 
 _TRANSACTION_DIRECTORY_RE = re.compile(
@@ -7327,10 +7492,12 @@ def _apply_atomic_payloads(
     staged: dict[PurePosixPath, str] = {}
     stage_digests: dict[PurePosixPath, str] = {}
     backups: dict[PurePosixPath, str] = {}
+    backup_payloads: dict[PurePosixPath, bytes] = {}
     backup_digests: dict[PurePosixPath, str] = {}
     transaction_entries: set[str] = set()
     transaction_entry_snapshots: dict[str, os.stat_result] = {}
     preserved_transaction_entries: set[str] = set()
+    preserved_rollback_entries: list[Path] = []
     replaced: list[PurePosixPath] = []
     legacy_temp_root = root / ".inventory-collection-apply"
     if (
@@ -7431,6 +7598,7 @@ def _apply_atomic_payloads(
                     backup_name,
                     backup_payload,
                 )
+                backup_payloads[relative] = backup_payload
                 transaction_entry_snapshots[backup_name] = backup_snapshot
                 backups[relative] = backup_name
                 backup_digests[relative] = _transaction_payload_digest(
@@ -7574,76 +7742,36 @@ def _apply_atomic_payloads(
                     relative.name,
                     applied_stat,
                 )
-                backup_name = backups.get(relative)
-                if backup_name:
-                    backup_snapshot = transaction_entry_snapshots.get(
-                        backup_name
-                    )
-                    if backup_snapshot is None:
-                        raise InventoryError(
-                            "transaction validation entry identity "
-                            f"unavailable: {backup_name}"
-                        )
+                backup_payload = backup_payloads.get(relative)
+                if backup_payload is not None:
+                    quarantined_names: list[str] = []
                     try:
-                        _revalidate_transaction_entry_snapshot(
-                            temp_fd,
-                            backup_name,
-                            backup_snapshot,
+                        _restore_authenticated_payload(
+                            parent_fd,
+                            relative.name,
+                            backup_payload,
+                            preserved_entries=quarantined_names,
                         )
-                    except InventoryError:
-                        preserved_transaction_entries.add(backup_name)
-                        raise
-                    os.replace(
-                        backup_name,
-                        relative.name,
-                        src_dir_fd=temp_fd,
-                        dst_dir_fd=parent_fd,
-                    )
+                    finally:
+                        preserved_rollback_entries.extend(
+                            Path(relative.parent.as_posix()) / name
+                            for name in quarantined_names
+                        )
                 else:
                     os.unlink(relative.name, dir_fd=parent_fd)
                 os.fsync(parent_fd)
             except Exception as rollback_exc:
-                backup_name = backups.get(relative)
-                backup_is_owned = False
-                if backup_name:
-                    backup_snapshot = transaction_entry_snapshots.get(
-                        backup_name
-                    )
-                    if backup_snapshot is None:
-                        backup_validation_error = InventoryError(
-                            "transaction validation entry identity "
-                            f"unavailable: {backup_name}"
-                        )
-                    else:
-                        try:
-                            _revalidate_transaction_entry_snapshot(
-                                temp_fd,
-                                backup_name,
-                                backup_snapshot,
-                            )
-                        except InventoryError as validation_exc:
-                            backup_validation_error = validation_exc
-                        else:
-                            backup_validation_error = None
-                            backup_is_owned = True
-                    if backup_validation_error is not None:
-                        preserved_transaction_entries.add(backup_name)
-                        if str(backup_validation_error) != str(rollback_exc):
-                            rollback_errors.append(
-                                str(backup_validation_error)
-                            )
-                if backup_name and backup_is_owned:
+                backup_payload = backup_payloads.get(relative)
+                if backup_payload is not None:
                     try:
                         recoverable_backups.append(
-                            _copy_recovery_backup(
+                            _copy_recovery_payload(
                                 root,
                                 root_fd=root_fd,
-                                transaction_fd=temp_fd,
-                                backup_name=backup_name,
+                                payload=backup_payload,
                             )
                         )
                     except Exception as recovery_exc:
-                        preserved_transaction_entries.add(backup_name)
                         rollback_errors.append(
                             f"recovery backup failed: {recovery_exc}"
                         )
@@ -7657,6 +7785,11 @@ def _apply_atomic_payloads(
             message += "; " + "; ".join(
                 f"recoverable backup: {path}"
                 for path in recoverable_backups
+            )
+        if preserved_rollback_entries:
+            message += "; " + "; ".join(
+                f"preserved rollback entry: {path}"
+                for path in preserved_rollback_entries
             )
         raise InventoryError(f"{message}; cause: {exc}") from exc
     finally:

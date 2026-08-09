@@ -1864,9 +1864,15 @@ def test_materialization_cli_rolls_back_all_outputs_on_apply_failure(
     )
 
     assert result["success"] is False
-    assert {
-        path: path.read_bytes() for path in sorted((tmp_path / "audit").iterdir())
-    } == before
+    assert {path: path.read_bytes() for path in before} == before
+    preserved = list(
+        (tmp_path / "audit").glob(
+            ".inventory-collection-rollback-*.tmp"
+        )
+    )
+    assert len(preserved) == 1
+    assert b"nouveau" in preserved[0].read_bytes()
+    assert "preserved rollback entry" in " ".join(result["reasons"])
     assert list(tmp_path.glob(".inventory-collection-apply-*")) == []
 
 
@@ -10151,6 +10157,10 @@ def test_rollback_never_uses_substituted_backup(
     _write(first, "premier historique\n")
     _write(second, "second historique\n")
     _write(wip, "WIP étranger au rollback\n")
+    before = {
+        first: first.read_bytes(),
+        second: second.read_bytes(),
+    }
     wip_before = wip.read_bytes()
     original_write_entry = inventory_module._write_transaction_entry
     original_replace = inventory_module.os.replace
@@ -10206,13 +10216,7 @@ def test_rollback_never_uses_substituted_backup(
         )
 
     assert substituted is True
-    assert (
-        "transaction validation entry identity changed: backup-00000000"
-        in str(captured.value)
-    )
-    assert first.read_text(encoding="utf-8") == "premier nouveau\n"
-    assert second.read_text(encoding="utf-8") == "second historique\n"
-    assert first.read_bytes() != wip_before
+    assert {path: path.read_bytes() for path in before} == before
     assert not wip.exists()
     transaction_directories = list(
         repository.glob(".inventory-collection-apply-*")
@@ -10220,7 +10224,840 @@ def test_rollback_never_uses_substituted_backup(
     assert len(transaction_directories) == 1
     retained_wip = transaction_directories[0] / "backup-00000000"
     assert retained_wip.read_bytes() == wip_before
+    assert any(
+        "preserved foreign transaction entry backup-00000000" in note
+        for note in getattr(captured.value, "__notes__", ())
+    )
     assert list(repository.glob(".inventory-collection-recovery-*")) == []
+
+
+def test_rollback_uses_authenticated_payload_after_backup_toctou_substitution(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    wip = outside / "foreign-backup.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(wip, "WIP étranger au rollback\n")
+    before = {
+        first: first.read_bytes(),
+        second: second.read_bytes(),
+    }
+    wip_before = wip.read_bytes()
+    original_write_entry = inventory_module._write_transaction_entry
+    original_replace = inventory_module.os.replace
+    original_exchange = inventory_module._exchange_directory_entries
+    transaction_fd: int | None = None
+    substituted = False
+
+    def capture_transaction_fd(
+        directory_fd: int,
+        name: str,
+        payload: bytes,
+    ) -> os.stat_result:
+        nonlocal transaction_fd
+        identity = original_write_entry(directory_fd, name, payload)
+        if name == "journal-ready":
+            transaction_fd = directory_fd
+        return identity
+
+    def substitute_backup_during_restore(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        nonlocal substituted
+        if str(source) == "stage-00000001":
+            raise OSError("injection second forward replace")
+        original_replace(source, target, **kwargs)
+
+    def substitute_backup_during_exchange(
+        source_fd: int,
+        source_name: str,
+        destination_fd: int,
+        destination_name: str,
+    ) -> None:
+        nonlocal substituted
+        if (
+            source_name.startswith(".inventory-collection-rollback-")
+            and not substituted
+        ):
+            assert transaction_fd is not None
+            os.unlink("backup-00000000", dir_fd=transaction_fd)
+            os.rename(
+                wip,
+                "backup-00000000",
+                dst_dir_fd=transaction_fd,
+            )
+            substituted = True
+        original_exchange(
+            source_fd,
+            source_name,
+            destination_fd,
+            destination_name,
+        )
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_write_transaction_entry",
+        capture_transaction_fd,
+    )
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        substitute_backup_during_restore,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        substitute_backup_during_exchange,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back.*injection second forward replace",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+        )
+
+    assert substituted is True
+    assert {path: path.read_bytes() for path in before} == before
+    assert not wip.exists()
+    transaction_directories = list(
+        repository.glob(".inventory-collection-apply-*")
+    )
+    assert len(transaction_directories) == 1
+    retained_wip = transaction_directories[0] / "backup-00000000"
+    assert retained_wip.read_bytes() == wip_before
+    assert any(
+        "preserved foreign transaction entry backup-00000000" in note
+        for note in getattr(captured.value, "__notes__", ())
+    )
+    assert list(repository.glob(".inventory-collection-recovery-*")) == []
+
+
+def test_rollback_quarantines_substituted_restore_entry_and_retries(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    wip = outside / "foreign-rollback.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(wip, "WIP substitué au rollback\n")
+    before = {
+        first: first.read_bytes(),
+        second: second.read_bytes(),
+    }
+    wip_before = wip.read_bytes()
+    original_replace = inventory_module.os.replace
+    original_exchange = inventory_module._exchange_directory_entries
+    substituted = False
+
+    def substitute_restore_entry(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        nonlocal substituted
+        if str(source) == "stage-00000001":
+            raise OSError("injection second forward replace")
+        original_replace(source, target, **kwargs)
+
+    def substitute_restore_exchange(
+        source_fd: int,
+        source_name: str,
+        destination_fd: int,
+        destination_name: str,
+    ) -> None:
+        nonlocal substituted
+        if source_name.startswith(".inventory-collection-rollback-") and not substituted:
+            os.unlink(source_name, dir_fd=source_fd)
+            os.rename(wip, source_name, dst_dir_fd=source_fd)
+            substituted = True
+        original_exchange(
+            source_fd,
+            source_name,
+            destination_fd,
+            destination_name,
+        )
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        substitute_restore_entry,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        substitute_restore_exchange,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back.*injection second forward replace",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+        )
+
+    assert substituted is True
+    assert {path: path.read_bytes() for path in before} == before
+    assert not wip.exists()
+    quarantined = list(
+        (repository / "audit").glob(
+            ".inventory-collection-preserved-rollback-*.wip"
+        )
+    )
+    assert len(quarantined) == 1
+    assert quarantined[0].read_bytes() == wip_before
+    assert "preserved rollback entry" in str(captured.value)
+    assert list(repository.glob(".inventory-collection-recovery-*")) == []
+
+
+def test_persistent_restore_substitution_fails_safe_with_recovery_payload(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    historical = first.read_bytes()
+    foreign_payloads = [
+        f"WIP persistant {index}\n".encode()
+        for index in range(3)
+    ]
+    foreign_paths = [
+        outside / f"foreign-rollback-{index}.txt"
+        for index in range(3)
+    ]
+    for path, payload in zip(foreign_paths, foreign_payloads, strict=True):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+    original_replace = inventory_module.os.replace
+    original_exchange = inventory_module._exchange_directory_entries
+    substitutions = 0
+
+    def substitute_every_restore_entry(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        nonlocal substitutions
+        if str(source) == "stage-00000001":
+            raise OSError("injection second forward replace")
+        original_replace(source, target, **kwargs)
+
+    def substitute_every_restore_exchange(
+        source_fd: int,
+        source_name: str,
+        destination_fd: int,
+        destination_name: str,
+    ) -> None:
+        nonlocal substitutions
+        if source_name.startswith(".inventory-collection-rollback-"):
+            os.unlink(source_name, dir_fd=source_fd)
+            os.rename(
+                foreign_paths[substitutions],
+                source_name,
+                dst_dir_fd=source_fd,
+            )
+            substitutions += 1
+        original_exchange(
+            source_fd,
+            source_name,
+            destination_fd,
+            destination_name,
+        )
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        substitute_every_restore_entry,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        substitute_every_restore_exchange,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back incompletely",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+    )
+
+    assert substitutions == 3
+    assert first.read_bytes() == b""
+    assert first.is_file()
+    assert second.read_text(encoding="utf-8") == "second historique\n"
+    quarantined = list(
+        (repository / "audit").glob(
+            ".inventory-collection-preserved-rollback-*.wip"
+        )
+    )
+    assert sorted(path.read_bytes() for path in quarantined) == sorted(
+        foreign_payloads
+    )
+    recovery = list(
+        repository.glob(".inventory-collection-recovery-*.bak")
+    )
+    assert len(recovery) == 1
+    assert recovery[0].read_bytes() == historical
+    assert (
+        str(captured.value).count(
+            ".inventory-collection-preserved-rollback-"
+        )
+        == 3
+    )
+
+
+def test_rollback_cleanup_never_unlinks_a_substituted_wip(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    wip = outside / "cleanup-wip.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(wip, "WIP substitué pendant cleanup\n")
+    wip_before = wip.read_bytes()
+    original_replace = inventory_module.os.replace
+    original_stat = inventory_module.os.stat
+    rollback_stats = 0
+    substituted = False
+
+    def fail_restore_replace(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        if str(source) == "stage-00000001":
+            raise OSError("injection second forward replace")
+        original_replace(source, target, **kwargs)
+
+    def fail_restore_exchange(
+        _source_fd: int,
+        source_name: str,
+        _destination_fd: int,
+        _destination_name: str,
+    ) -> None:
+        if source_name.startswith(".inventory-collection-rollback-"):
+            raise OSError("injection rollback exchange")
+        raise AssertionError("unexpected non-rollback exchange")
+
+    def substitute_after_cleanup_stat(
+        path: Path | str,
+        *args: object,
+        **kwargs: object,
+    ) -> os.stat_result:
+        nonlocal rollback_stats, substituted
+        result = original_stat(path, *args, **kwargs)
+        if str(path).startswith(".inventory-collection-rollback-"):
+            rollback_stats += 1
+            if rollback_stats == 2:
+                directory_fd = kwargs["dir_fd"]
+                assert isinstance(directory_fd, int)
+                os.unlink(path, dir_fd=directory_fd)
+                os.rename(wip, path, dst_dir_fd=directory_fd)
+                substituted = True
+        return result
+
+    monkeypatch.setattr(inventory_module.os, "replace", fail_restore_replace)
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        fail_restore_exchange,
+    )
+    monkeypatch.setattr(
+        inventory_module.os,
+        "stat",
+        substitute_after_cleanup_stat,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back incompletely",
+    ):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+        )
+
+    assert substituted is False
+    assert wip.read_bytes() == wip_before
+
+
+def test_recovery_payload_rejects_same_inode_content_corruption(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root_fd = os.open(tmp_path, os.O_RDONLY | os.O_DIRECTORY)
+    payload = b"historical authenticated bytes\n"
+    original_write_all = inventory_module._write_all
+
+    def corrupt_after_write(fd: int, written_payload: bytes) -> None:
+        original_write_all(fd, written_payload)
+        os.lseek(fd, 0, os.SEEK_SET)
+        os.write(fd, b"CORRUPTED")
+        os.ftruncate(fd, len(b"CORRUPTED"))
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_write_all",
+        corrupt_after_write,
+    )
+    try:
+        with pytest.raises(
+            inventory_module.InventoryError,
+            match="recovery backup content changed",
+        ):
+            inventory_module._copy_recovery_payload(
+                tmp_path,
+                root_fd=root_fd,
+                payload=payload,
+            )
+    finally:
+        os.close(root_fd)
+
+
+def test_recovery_payload_revalidates_name_after_directory_fsync(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root_fd = os.open(tmp_path, os.O_RDONLY | os.O_DIRECTORY)
+    wip = tmp_path.parent / f"{tmp_path.name}-recovery-wip.txt"
+    _write(wip, "WIP substitué après fsync répertoire\n")
+    wip_before = wip.read_bytes()
+    original_fsync = inventory_module.os.fsync
+    substituted = False
+
+    def substitute_after_directory_fsync(fd: int) -> None:
+        nonlocal substituted
+        original_fsync(fd)
+        if fd == root_fd and not substituted:
+            recovery = next(
+                tmp_path.glob(".inventory-collection-recovery-*.bak")
+            )
+            recovery.unlink()
+            wip.rename(recovery)
+            substituted = True
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "fsync",
+        substitute_after_directory_fsync,
+    )
+    try:
+        with pytest.raises(
+            inventory_module.InventoryError,
+            match="recovery backup identity changed",
+        ):
+            inventory_module._copy_recovery_payload(
+                tmp_path,
+                root_fd=root_fd,
+                payload=b"historical authenticated bytes\n",
+            )
+    finally:
+        os.close(root_fd)
+
+    assert substituted is True
+    recovery = list(tmp_path.glob(".inventory-collection-recovery-*.bak"))
+    assert len(recovery) == 1
+    assert recovery[0].read_bytes() == wip_before
+
+
+def test_quarantine_never_overwrites_an_existing_entry(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    source_wip = outside / "source-wip.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(source_wip, "WIP source substitué\n")
+    collision_token = "2" * 32
+    collision = (
+        repository
+        / "audit"
+        / f".inventory-collection-preserved-rollback-{collision_token}.wip"
+    )
+    _write(collision, "WIP de quarantaine préexistant\n")
+    collision_before = collision.read_bytes()
+    original_replace = inventory_module.os.replace
+    original_exchange = inventory_module._exchange_directory_entries
+    tokens = iter(
+        ["1" * 32, collision_token, "3" * 32, "4" * 32]
+    )
+    substituted = False
+
+    def substitute_restore_entry(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        nonlocal substituted
+        if str(source) == "stage-00000001":
+            raise OSError("injection second forward replace")
+        original_replace(source, target, **kwargs)
+
+    def substitute_restore_exchange(
+        source_fd: int,
+        source_name: str,
+        destination_fd: int,
+        destination_name: str,
+    ) -> None:
+        nonlocal substituted
+        if source_name.startswith(".inventory-collection-rollback-") and not substituted:
+            os.unlink(source_name, dir_fd=source_fd)
+            os.rename(source_wip, source_name, dst_dir_fd=source_fd)
+            substituted = True
+        original_exchange(
+            source_fd,
+            source_name,
+            destination_fd,
+            destination_name,
+        )
+
+    def deterministic_token_hex(nbytes: int) -> str:
+        if nbytes == 12:
+            return "a" * 24
+        return next(tokens)
+
+    monkeypatch.setattr(
+        inventory_module.secrets,
+        "token_hex",
+        deterministic_token_hex,
+    )
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        substitute_restore_entry,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        substitute_restore_exchange,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back.*injection second forward replace",
+    ):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+        )
+
+    assert substituted is True
+    assert first.read_text(encoding="utf-8") == "premier historique\n"
+    assert collision.read_bytes() == collision_before
+    quarantined = list(
+        (repository / "audit").glob(
+            ".inventory-collection-preserved-rollback-*.wip"
+        )
+    )
+    assert len(quarantined) == 2
+
+
+def test_transaction_entry_write_failure_never_unlinks_substituted_wip(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    directory = tmp_path / "transaction"
+    directory.mkdir()
+    directory_fd = os.open(directory, os.O_RDONLY | os.O_DIRECTORY)
+    wip = tmp_path / "write-failure-wip.txt"
+    _write(wip, "WIP substitué après échec écriture\n")
+    wip_before = wip.read_bytes()
+    original_stat = inventory_module.os.stat
+    substituted = False
+
+    def fail_fsync(_fd: int) -> None:
+        raise OSError("injection fsync transaction entry")
+
+    def substitute_after_validation(
+        path: Path | str,
+        *args: object,
+        **kwargs: object,
+    ) -> os.stat_result:
+        nonlocal substituted
+        result = original_stat(path, *args, **kwargs)
+        if str(path) == "stage-00000000" and not substituted:
+            os.unlink(path, dir_fd=directory_fd)
+            os.rename(wip, path, dst_dir_fd=directory_fd)
+            substituted = True
+        return result
+
+    monkeypatch.setattr(inventory_module.os, "fsync", fail_fsync)
+    monkeypatch.setattr(
+        inventory_module.os,
+        "stat",
+        substitute_after_validation,
+    )
+    try:
+        with pytest.raises(OSError, match="injection fsync transaction entry"):
+            inventory_module._write_transaction_entry(
+                directory_fd,
+                "stage-00000000",
+                b"owned payload\n",
+            )
+    finally:
+        os.close(directory_fd)
+
+    assert substituted is False
+    assert wip.read_bytes() == wip_before
+
+
+def test_rollback_exchange_preserves_destination_substituted_before_install(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    wip = outside / "destination-wip.txt"
+    displaced = outside / "displaced-applied.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(wip, "WIP substitué en destination\n")
+    wip_before = wip.read_bytes()
+    original_replace = inventory_module.os.replace
+    original_exchange = inventory_module._exchange_directory_entries
+    substituted = False
+
+    def inject_destination(source_fd: int) -> None:
+        nonlocal substituted
+        if substituted:
+            return
+        os.rename(
+            "a-first.txt",
+            displaced,
+            src_dir_fd=source_fd,
+        )
+        os.rename(wip, "a-first.txt", dst_dir_fd=source_fd)
+        substituted = True
+
+    def replace_with_destination_substitution(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        if str(source) == "stage-00000001":
+            raise OSError("injection second forward replace")
+        if str(source).startswith(".inventory-collection-rollback-"):
+            source_fd = kwargs["src_dir_fd"]
+            assert isinstance(source_fd, int)
+            inject_destination(source_fd)
+        original_replace(source, target, **kwargs)
+
+    def exchange_with_destination_substitution(
+        source_fd: int,
+        source_name: str,
+        destination_fd: int,
+        destination_name: str,
+    ) -> None:
+        if source_name.startswith(".inventory-collection-rollback-"):
+            inject_destination(destination_fd)
+        original_exchange(
+            source_fd,
+            source_name,
+            destination_fd,
+            destination_name,
+        )
+
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        replace_with_destination_substitution,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        exchange_with_destination_substitution,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back.*injection second forward replace",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+        )
+
+    assert substituted is True
+    assert first.read_text(encoding="utf-8") == "premier historique\n"
+    assert displaced.read_text(encoding="utf-8") == "premier nouveau\n"
+    assert not wip.exists()
+    preserved = list(
+        (repository / "audit").glob(
+            ".inventory-collection-rollback-*.tmp"
+        )
+    )
+    assert any(path.read_bytes() == wip_before for path in preserved)
+    assert "preserved rollback entry" in str(captured.value)
+
+
+def test_rollback_fsyncs_parent_immediately_after_each_exchange(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    wip = tmp_path / "exchange-sync-wip.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(wip, "WIP pour échange durable\n")
+    original_exchange = inventory_module._exchange_directory_entries
+    original_fsync = inventory_module.os.fsync
+    original_read_backup = inventory_module._read_destination_backup
+    pending_sync_fd: int | None = None
+    read_before_sync = False
+    substituted = False
+
+    def observe_exchange(
+        source_fd: int,
+        source_name: str,
+        destination_fd: int,
+        destination_name: str,
+    ) -> None:
+        nonlocal pending_sync_fd, substituted
+        if (
+            source_name.startswith(".inventory-collection-rollback-")
+            and not substituted
+        ):
+            os.unlink(source_name, dir_fd=source_fd)
+            os.rename(wip, source_name, dst_dir_fd=source_fd)
+            substituted = True
+        original_exchange(
+            source_fd,
+            source_name,
+            destination_fd,
+            destination_name,
+        )
+        pending_sync_fd = destination_fd
+
+    def observe_fsync(fd: int) -> None:
+        nonlocal pending_sync_fd
+        original_fsync(fd)
+        if fd == pending_sync_fd:
+            pending_sync_fd = None
+
+    def require_exchange_sync(
+        parent_fd: int,
+        basename: str,
+    ) -> tuple[bytes, os.stat_result] | None:
+        nonlocal read_before_sync
+        if pending_sync_fd is not None:
+            read_before_sync = True
+        return original_read_backup(parent_fd, basename)
+
+    original_replace = inventory_module.os.replace
+
+    def fail_second_forward_replace(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        nonlocal substituted
+        if str(source) == "stage-00000001":
+            raise OSError("injection second forward replace")
+        if (
+            str(source).startswith(".inventory-collection-rollback-")
+            and not substituted
+        ):
+            source_fd = kwargs["src_dir_fd"]
+            assert isinstance(source_fd, int)
+            os.unlink(source, dir_fd=source_fd)
+            os.rename(wip, source, dst_dir_fd=source_fd)
+            substituted = True
+        original_replace(source, target, **kwargs)
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        observe_exchange,
+    )
+    monkeypatch.setattr(inventory_module.os, "fsync", observe_fsync)
+    monkeypatch.setattr(
+        inventory_module,
+        "_read_destination_backup",
+        require_exchange_sync,
+    )
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        fail_second_forward_replace,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back.*injection second forward replace",
+    ):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+        )
+
+    assert substituted is True
+    assert pending_sync_fd is None
+    assert read_before_sync is False
 
 
 def test_next_transaction_recovers_batch_after_process_crash(
@@ -10625,14 +11462,29 @@ def test_failed_rollback_preserves_and_reports_recoverable_backup(
     ) -> None:
         nonlocal replacements
         replacements += 1
-        if replacements in {2, 3}:
+        if replacements == 2:
             raise OSError(f"injection replace {replacements}")
         original_replace(source, target, **kwargs)
+
+    def fail_rollback_exchange(
+        _source_fd: int,
+        source_name: str,
+        _destination_fd: int,
+        _destination_name: str,
+    ) -> None:
+        if source_name.startswith(".inventory-collection-rollback-"):
+            raise OSError("injection rollback exchange")
+        raise AssertionError("unexpected non-rollback exchange")
 
     monkeypatch.setattr(
         inventory_module.os,
         "replace",
         fail_apply_then_rollback,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        fail_rollback_exchange,
     )
 
     with pytest.raises(
@@ -11235,9 +12087,19 @@ def test_failed_rollback_copies_backup_out_of_a_substituted_temp_root(
     ) -> None:
         nonlocal replacements
         replacements += 1
-        if replacements in {2, 3}:
+        if replacements == 2:
             raise OSError(f"injection replace {replacements}")
         original_replace(source, target, **kwargs)
+
+    def fail_rollback_exchange(
+        _source_fd: int,
+        source_name: str,
+        _destination_fd: int,
+        _destination_name: str,
+    ) -> None:
+        if source_name.startswith(".inventory-collection-rollback-"):
+            raise OSError("injection rollback exchange")
+        raise AssertionError("unexpected non-rollback exchange")
 
     monkeypatch.setattr(
         inventory_module.os,
@@ -11248,6 +12110,11 @@ def test_failed_rollback_copies_backup_out_of_a_substituted_temp_root(
         inventory_module.os,
         "replace",
         fail_apply_then_rollback,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_exchange_directory_entries",
+        fail_rollback_exchange,
     )
 
     with pytest.raises(
