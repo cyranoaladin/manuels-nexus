@@ -18,6 +18,40 @@ class AssemblyAnalysisError(RuntimeError):
     """Raised when an assembler cannot be inspected safely."""
 
 
+_AUDITED_SELECTION_CONSTANTS = frozenset(
+    {
+        "CHAPITRES",
+        "ELEVE_ALLOWED_TYPES",
+        "ELEVE_EXCLUDES",
+        "ELEVE_VARIANTS",
+        "ORDER",
+        "VARIANT_ORDERS",
+        "VARIANTS",
+        "VARIANTES",
+    }
+)
+_MUTATING_METHODS = frozenset(
+    {
+        "add",
+        "append",
+        "clear",
+        "difference_update",
+        "discard",
+        "extend",
+        "insert",
+        "intersection_update",
+        "pop",
+        "popitem",
+        "remove",
+        "reverse",
+        "setdefault",
+        "sort",
+        "symmetric_difference_update",
+        "update",
+    }
+)
+
+
 def _canonicalize_literal(value: Any) -> Any:
     if isinstance(value, Mapping):
         return {
@@ -31,14 +65,7 @@ def _canonicalize_literal(value: Any) -> Any:
     return value
 
 
-def _assignment_target_names(node: ast.AST) -> set[str]:
-    if isinstance(node, ast.Assign):
-        targets = node.targets
-    elif isinstance(node, (ast.AnnAssign, ast.AugAssign, ast.NamedExpr)):
-        targets = [node.target]
-    else:
-        return set()
-
+def _target_root_names(*targets: ast.AST) -> set[str]:
     names: set[str] = set()
     pending = list(targets)
     while pending:
@@ -47,9 +74,143 @@ def _assignment_target_names(node: ast.AST) -> set[str]:
             names.add(target.id)
         elif isinstance(target, (ast.List, ast.Tuple)):
             pending.extend(target.elts)
-        elif isinstance(target, ast.Starred):
+        elif isinstance(target, (ast.Attribute, ast.Starred, ast.Subscript)):
             pending.append(target.value)
     return names
+
+
+class _ScopeGlobalCollector(ast.NodeVisitor):
+    def __init__(self) -> None:
+        self.names: set[str] = set()
+
+    def visit_Global(self, node: ast.Global) -> None:
+        self.names.update(node.names)
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        return None
+
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+        return None
+
+    def visit_Lambda(self, node: ast.Lambda) -> None:
+        return None
+
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
+        return None
+
+
+def _scope_global_names(body: list[ast.stmt]) -> frozenset[str]:
+    collector = _ScopeGlobalCollector()
+    for statement in body:
+        collector.visit(statement)
+    return frozenset(collector.names)
+
+
+class _AuditedMutationVisitor(ast.NodeVisitor):
+    def __init__(self, supported_top_level_node_ids: set[int]) -> None:
+        self.ambiguous: set[str] = set()
+        self.declared: set[str] = set()
+        self._scope_globals: list[frozenset[str] | None] = [None]
+        self._supported_top_level_node_ids = supported_top_level_node_ids
+
+    def _module_names(self, names: set[str]) -> set[str]:
+        audited = names & _AUDITED_SELECTION_CONSTANTS
+        scope_globals = self._scope_globals[-1]
+        return audited if scope_globals is None else audited & scope_globals
+
+    def _record(self, names: set[str], *, supported: bool = False) -> None:
+        module_names = self._module_names(names)
+        self.declared.update(module_names)
+        if not supported:
+            self.ambiguous.update(module_names)
+
+    def visit_Assign(self, node: ast.Assign) -> None:
+        self._record(
+            _target_root_names(*node.targets),
+            supported=id(node) in self._supported_top_level_node_ids,
+        )
+        self.generic_visit(node)
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+        self._record(
+            _target_root_names(node.target),
+            supported=id(node) in self._supported_top_level_node_ids,
+        )
+        self.generic_visit(node)
+
+    def visit_AugAssign(self, node: ast.AugAssign) -> None:
+        self._record(_target_root_names(node.target))
+        self.generic_visit(node)
+
+    def visit_NamedExpr(self, node: ast.NamedExpr) -> None:
+        self._record(_target_root_names(node.target))
+        self.generic_visit(node)
+
+    def visit_Delete(self, node: ast.Delete) -> None:
+        self._record(_target_root_names(*node.targets))
+        self.generic_visit(node)
+
+    def visit_Call(self, node: ast.Call) -> None:
+        if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
+            self._record(_target_root_names(node.func.value))
+        self.generic_visit(node)
+
+    def visit_For(self, node: ast.For) -> None:
+        self._record(_target_root_names(node.target))
+        self.generic_visit(node)
+
+    def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
+        self._record(_target_root_names(node.target))
+        self.generic_visit(node)
+
+    def visit_With(self, node: ast.With) -> None:
+        self._record(
+            _target_root_names(
+                *(
+                    item.optional_vars
+                    for item in node.items
+                    if item.optional_vars is not None
+                )
+            )
+        )
+        self.generic_visit(node)
+
+    def visit_AsyncWith(self, node: ast.AsyncWith) -> None:
+        self.visit_With(node)
+
+    def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:
+        if node.name is not None:
+            self._record({node.name})
+        self.generic_visit(node)
+
+    def _visit_function(
+        self,
+        node: ast.FunctionDef | ast.AsyncFunctionDef,
+    ) -> None:
+        self._record({node.name})
+        for decorator in node.decorator_list:
+            self.visit(decorator)
+        for default in (*node.args.defaults, *node.args.kw_defaults):
+            if default is not None:
+                self.visit(default)
+        self._scope_globals.append(_scope_global_names(node.body))
+        for statement in node.body:
+            self.visit(statement)
+        self._scope_globals.pop()
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        self._visit_function(node)
+
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+        self._visit_function(node)
+
+    def visit_Lambda(self, node: ast.Lambda) -> None:
+        for default in (*node.args.defaults, *node.args.kw_defaults):
+            if default is not None:
+                self.visit(default)
+        self._scope_globals.append(frozenset())
+        self.visit(node.body)
+        self._scope_globals.pop()
 
 
 def _ast_latex_inputs(tree: ast.AST) -> list[tuple[str, str]]:
@@ -84,40 +245,27 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
         ) from exc
 
     constants: dict[str, Any] = {}
-    accepted_names = {
-        "CHAPITRES",
-        "ELEVE_ALLOWED_TYPES",
-        "ELEVE_EXCLUDES",
-        "ELEVE_VARIANTS",
-        "ORDER",
-        "VARIANT_ORDERS",
-        "VARIANTS",
-        "VARIANTES",
-    }
-    closed_contract_names = {"ELEVE_VARIANTS", "VARIANT_ORDERS"}
-    top_level_node_ids = {id(node) for node in tree.body}
-    declared_constants: set[str] = set()
-    ambiguous_constants: set[str] = set()
-    for node in ast.walk(tree):
-        contract_names = _assignment_target_names(node) & closed_contract_names
-        if not contract_names:
-            continue
-        declared_constants.update(contract_names)
-        supported_top_level = id(node) in top_level_node_ids and (
-            (
-                isinstance(node, ast.Assign)
-                and len(node.targets) == 1
-                and isinstance(node.targets[0], ast.Name)
-            )
-            or (
-                isinstance(node, ast.AnnAssign)
-                and isinstance(node.target, ast.Name)
-                and node.value is not None
-            )
+    accepted_names = _AUDITED_SELECTION_CONSTANTS
+    supported_top_level_node_ids = {
+        id(node)
+        for node in tree.body
+        if (
+            isinstance(node, ast.Assign)
+            and len(node.targets) == 1
+            and isinstance(node.targets[0], ast.Name)
         )
-        if not supported_top_level:
-            ambiguous_constants.update(contract_names)
+        or (
+            isinstance(node, ast.AnnAssign)
+            and isinstance(node.target, ast.Name)
+            and node.value is not None
+        )
+    }
+    mutation_visitor = _AuditedMutationVisitor(supported_top_level_node_ids)
+    mutation_visitor.visit(tree)
 
+    declared_constants = set(mutation_visitor.declared)
+    ambiguous_constants = set(mutation_visitor.ambiguous)
+    unresolved_constants: set[str] = set()
     for node in tree.body:
         name: str | None = None
         value_node: ast.AST | None = None
@@ -136,7 +284,9 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
             constants[name] = _canonicalize_literal(ast.literal_eval(value_node))
         except (ValueError, TypeError):
             constants.pop(name, None)
+            unresolved_constants.add(name)
             continue
+        unresolved_constants.discard(name)
 
     variants: set[str] = set()
     for name in ("VARIANTS", "VARIANTES"):
@@ -179,6 +329,7 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
         "constants": dict(sorted(constants.items())),
         "declared_constants": sorted(declared_constants),
         "latex_inputs": _ast_latex_inputs(tree),
+        "unresolved_constants": sorted(unresolved_constants),
         "variants": sorted(variants),
     }
 
@@ -247,6 +398,8 @@ def validate_analysis(
         )
         if closed_contract:
             ambiguous_constants = set(analysis.get("ambiguous_constants", []))
+            unresolved_constants = set(analysis.get("unresolved_constants", []))
+            unsafe_constants = ambiguous_constants | unresolved_constants
             declared_variants = constants.get("VARIANTS")
             variant_orders = constants.get("VARIANT_ORDERS")
             valid_declared_variants = (
@@ -269,12 +422,12 @@ def validate_analysis(
                     for rules in variant_orders.values()
                 )
             )
-            if "VARIANT_ORDERS" in ambiguous_constants:
+            if "VARIANT_ORDERS" in unsafe_constants:
                 errors.append(
                     (
                         "VARIANT_ORDERS",
-                        "declaration VARIANT_ORDERS conditionnelle, imbriquee ou "
-                        "chainee interdite",
+                        "declaration ou mutation VARIANT_ORDERS hors affectation "
+                        "litterale top-level interdite",
                     )
                 )
             elif not valid_variant_orders:
@@ -298,12 +451,12 @@ def validate_analysis(
                 and valid_declared_variants
                 and set(student_variants) <= set(declared_variants)
             )
-            if "ELEVE_VARIANTS" in ambiguous_constants:
+            if "ELEVE_VARIANTS" in unsafe_constants:
                 errors.append(
                     (
                         "ELEVE_VARIANTS",
-                        "declaration ELEVE_VARIANTS conditionnelle, imbriquee ou "
-                        "chainee interdite",
+                        "declaration ou mutation ELEVE_VARIANTS hors affectation "
+                        "litterale top-level interdite",
                     )
                 )
             elif not valid_student_variants:
@@ -312,6 +465,19 @@ def validate_analysis(
                         "ELEVE_VARIANTS",
                         "ELEVE_VARIANTS doit etre un sous-ensemble non vide de "
                         "VARIANTS contenant eleve",
+                    )
+                )
+            existing_error_fields = {field for field, _reason in errors}
+            for name in sorted(
+                unsafe_constants - {"ELEVE_VARIANTS", "VARIANT_ORDERS"}
+            ):
+                if name in existing_error_fields:
+                    continue
+                errors.append(
+                    (
+                        name,
+                        f"declaration ou mutation {name} hors affectation "
+                        "litterale top-level interdite",
                     )
                 )
     return errors
@@ -663,6 +829,7 @@ def add_declared_assemblies(
             if not isinstance(chapters, list):
                 continue
             chapters = [item for item in chapters if isinstance(item, str)]
+            supported = set(supported_manuals(path))
             grouped: dict[str, list[str]] = defaultdict(list)
             declared_manuals: set[str] = set()
             for index, chapter in enumerate(chapters):
@@ -674,6 +841,17 @@ def add_declared_assemblies(
                             chapter,
                             f"CHAPITRES[{index}]",
                             "prefixe de chapitre inconnu dans CHAPITRES",
+                        )
+                    )
+                    continue
+                if manual not in supported:
+                    anomalies["broken_assembly_references"].append(
+                        _anomaly(
+                            path,
+                            chapter,
+                            f"CHAPITRES[{index}]",
+                            "chapitre hors du perimetre des manuels pris en "
+                            "charge par cet assembleur",
                         )
                     )
                     continue

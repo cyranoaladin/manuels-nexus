@@ -6759,24 +6759,8 @@ ELEVE_VARIANTS = student_variants = build_student_variants()
     }
 
 
-@pytest.mark.parametrize(
-    "ambiguous_declarations",
-    [
-        '''if contract_enabled:
-    VARIANT_ORDERS = build_orders()
-    ELEVE_VARIANTS = build_student_variants()
-''',
-        '''def configure_contract():
-    VARIANT_ORDERS = build_orders()
-    ELEVE_VARIANTS = build_student_variants()
-''',
-    ],
-    ids=("conditional", "nested"),
-)
-def test_closed_contract_rejects_conditional_or_nested_reassignments(
-    tmp_path: Path,
-    inventory_module,
-    ambiguous_declarations: str,
+def test_closed_contract_rejects_conditional_reassignments(
+    tmp_path: Path, inventory_module
 ) -> None:
     assembler = tmp_path / "assemble_manuel.py"
     _write(
@@ -6787,8 +6771,10 @@ VARIANTS = ["eleve"]
 VARIANT_ORDERS = {"eleve": [("cours", "*")]}
 ELEVE_VARIANTS = ["eleve"]
 ELEVE_ALLOWED_TYPES = ["cours"]
-'''
-        + ambiguous_declarations,
+if contract_enabled:
+    VARIANT_ORDERS = build_orders()
+    ELEVE_VARIANTS = build_student_variants()
+''',
     )
 
     analysis = inventory_module.analyze_assembler(assembler)
@@ -6850,6 +6836,136 @@ ELEVE_ALLOWED_TYPES = ["cours"]
         "NSI/scripts/assemble_manuel.py",
         analysis,
     ) == []
+
+
+def _closed_contract_source(extra: str = "") -> str:
+    return (
+        '''CHAPITRES = ["1NSI-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve", "professeur"]
+VARIANT_ORDERS = {
+    "eleve": [("cours", "*")],
+    "professeur": [("cours", "*"), ("corriges", "*")],
+}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+ELEVE_EXCLUDES = []
+'''
+        + extra
+    )
+
+
+@pytest.mark.parametrize(
+    ("mutation", "expected_field"),
+    [
+        (
+            'VARIANT_ORDERS["eleve"] = [("corriges", "*")]\n',
+            "VARIANT_ORDERS",
+        ),
+        ('ELEVE_VARIANTS.append("professeur")\n', "ELEVE_VARIANTS"),
+        ('ELEVE_ALLOWED_TYPES.append("corrige")\n', "ELEVE_ALLOWED_TYPES"),
+        ('ELEVE_EXCLUDES += ["corriges"]\n', "ELEVE_EXCLUDES"),
+        (
+            'VARIANT_ORDERS.update({"eleve": [("corriges", "*")]})\n',
+            "VARIANT_ORDERS",
+        ),
+    ],
+    ids=(
+        "subscript-assignment",
+        "student-variant-append",
+        "student-type-append",
+        "excludes-iadd",
+        "variant-order-update",
+    ),
+)
+def test_closed_contract_rejects_module_scope_runtime_mutations(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+    expected_field: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(assembler, _closed_contract_source(mutation))
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert expected_field in {field for field, _reason in errors}
+
+
+def test_closed_contract_ignores_function_local_names_and_mutations(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def configure_local_contract():
+    VARIANT_ORDERS = build_orders()
+    ELEVE_VARIANTS = build_student_variants()
+    ELEVE_ALLOWED_TYPES.append("corrige")
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
+def test_closed_contract_rejects_function_global_mutations(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def mutate_global_contract():
+    global VARIANT_ORDERS, ELEVE_ALLOWED_TYPES
+    VARIANT_ORDERS = build_orders()
+    ELEVE_ALLOWED_TYPES.append("corrige")
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert {field for field, _reason in errors} >= {
+        "ELEVE_ALLOWED_TYPES",
+        "VARIANT_ORDERS",
+    }
+
+
+def test_closed_contract_rejects_module_conditional_mutation(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''if contract_enabled:
+    ELEVE_ALLOWED_TYPES.append("corrige")
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "ELEVE_ALLOWED_TYPES" in {field for field, _reason in errors}
 
 
 def test_legacy_manual_assembler_remains_valid_without_closed_variant_contract(
@@ -7201,6 +7317,77 @@ def test_manual_assembler_gaps_and_chapters_outside_manual_are_explicit(
     assert {
         item["cible"] for item in inventory["anomalies"]["chapters_not_in_manual"]
     } == {"1NSI-TEST", "TNSI-TEST", "TSPE-TEST"}
+
+
+def test_nsi_manual_assembler_cannot_cover_tnsi_chapters(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    assembler = "NSI/scripts/assemble_manuel.py"
+    sources = {
+        "NSI/chapitres/1NSI-TEST/contrat.yaml": _contract(
+            "1NSI-TEST", "1NSI", capacities=1
+        ),
+        "NSI/chapitres/1NSI-TEST/cours/10_cours.tex": _meta(
+            id="1NSI-TEST-COURS-C1",
+            chapitre="1NSI-TEST",
+            status="approved",
+        ),
+        "NSI/chapitres/TNSI-TEST/contrat.yaml": _contract(
+            "TNSI-TEST", "TNSI", capacities=1
+        ),
+        "NSI/chapitres/TNSI-TEST/cours/10_cours.tex": _meta(
+            id="TNSI-TEST-COURS-C1",
+            chapitre="TNSI-TEST",
+            status="approved",
+        ),
+        assembler: '''CHAPITRES = ["1NSI-TEST", "TNSI-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+''',
+    }
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    manual_assemblies = {
+        assembly["assembly_id"]: assembly
+        for assembly in inventory["assemblies"]
+        if assembly["scope"] == "manual"
+    }
+
+    assert "nsi:manual:1NSI:eleve" in manual_assemblies
+    assert "nsi:manual:TNSI:eleve" not in manual_assemblies
+    assert any(
+        anomaly["source"] == assembler
+        and anomaly["cible"] == "TNSI-TEST"
+        and anomaly["champ"] == "CHAPITRES[1]"
+        and "perimetre" in anomaly["raison"]
+        for anomaly in inventory["anomalies"]["broken_assembly_references"]
+    )
+    assert any(
+        anomaly["cible"] == "TNSI-TEST"
+        for anomaly in inventory["anomalies"]["chapters_not_in_manual"]
+    )
+
+
+def test_supported_manuals_distinguish_nsi_chapter_and_manual_assemblers(
+    inventory_module,
+) -> None:
+    supported = inventory_module._supported_manuals_for_assembler
+
+    assert supported("NSI/scripts/assemble_manuel.py") == ("1NSI",)
+    assert supported("NSI/scripts/assemble.py") == ("1NSI", "TNSI")
+    assert supported("Mathematiques/manuel-maths/scripts/assemble_manuel.py") == (
+        "1SPE",
+        "TSPE_2026_2027",
+        "TCOMPL",
+        "TEXPERTES",
+    )
 
 
 def test_pdf_inventory_uses_only_tracked_files_and_reports_unavailable_page_count(
