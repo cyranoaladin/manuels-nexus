@@ -5,6 +5,7 @@ from __future__ import annotations
 import ast
 import fnmatch
 from collections import Counter, defaultdict
+from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Mapping
 
@@ -79,93 +80,85 @@ def _target_root_names(*targets: ast.AST) -> set[str]:
     return names
 
 
-class _ScopeGlobalCollector(ast.NodeVisitor):
+def _binding_target_names(*targets: ast.AST) -> set[str]:
+    names: set[str] = set()
+    pending = list(targets)
+    while pending:
+        target = pending.pop()
+        if isinstance(target, ast.Name):
+            names.add(target.id)
+        elif isinstance(target, (ast.List, ast.Tuple)):
+            pending.extend(target.elts)
+        elif isinstance(target, ast.Starred):
+            pending.append(target.value)
+    return names
+
+
+def _mutation_target_names(*targets: ast.AST) -> set[str]:
+    names: set[str] = set()
+    pending = list(targets)
+    while pending:
+        target = pending.pop()
+        if isinstance(target, (ast.Attribute, ast.Subscript)):
+            names.update(_target_root_names(target.value))
+        elif isinstance(target, (ast.List, ast.Tuple)):
+            pending.extend(target.elts)
+        elif isinstance(target, ast.Starred):
+            pending.append(target.value)
+    return names
+
+
+def _import_bound_names(node: ast.Import | ast.ImportFrom) -> set[str]:
+    names: set[str] = set()
+    for alias in node.names:
+        if alias.name == "*":
+            continue
+        names.add(alias.asname or alias.name.split(".", maxsplit=1)[0])
+    return names
+
+
+class _ScopeBindingCollector(ast.NodeVisitor):
     def __init__(self) -> None:
-        self.names: set[str] = set()
+        self.globals: set[str] = set()
+        self.locals: set[str] = set()
+        self.nonlocals: set[str] = set()
 
     def visit_Global(self, node: ast.Global) -> None:
-        self.names.update(node.names)
+        self.globals.update(node.names)
 
-    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
-        return None
-
-    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
-        return None
-
-    def visit_Lambda(self, node: ast.Lambda) -> None:
-        return None
-
-    def visit_ClassDef(self, node: ast.ClassDef) -> None:
-        return None
-
-
-def _scope_global_names(body: list[ast.stmt]) -> frozenset[str]:
-    collector = _ScopeGlobalCollector()
-    for statement in body:
-        collector.visit(statement)
-    return frozenset(collector.names)
-
-
-class _AuditedMutationVisitor(ast.NodeVisitor):
-    def __init__(self, supported_top_level_node_ids: set[int]) -> None:
-        self.ambiguous: set[str] = set()
-        self.declared: set[str] = set()
-        self._scope_globals: list[frozenset[str] | None] = [None]
-        self._supported_top_level_node_ids = supported_top_level_node_ids
-
-    def _module_names(self, names: set[str]) -> set[str]:
-        audited = names & _AUDITED_SELECTION_CONSTANTS
-        scope_globals = self._scope_globals[-1]
-        return audited if scope_globals is None else audited & scope_globals
-
-    def _record(self, names: set[str], *, supported: bool = False) -> None:
-        module_names = self._module_names(names)
-        self.declared.update(module_names)
-        if not supported:
-            self.ambiguous.update(module_names)
+    def visit_Nonlocal(self, node: ast.Nonlocal) -> None:
+        self.nonlocals.update(node.names)
 
     def visit_Assign(self, node: ast.Assign) -> None:
-        self._record(
-            _target_root_names(*node.targets),
-            supported=id(node) in self._supported_top_level_node_ids,
-        )
+        self.locals.update(_binding_target_names(*node.targets))
         self.generic_visit(node)
 
     def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
-        self._record(
-            _target_root_names(node.target),
-            supported=id(node) in self._supported_top_level_node_ids,
-        )
+        self.locals.update(_binding_target_names(node.target))
         self.generic_visit(node)
 
     def visit_AugAssign(self, node: ast.AugAssign) -> None:
-        self._record(_target_root_names(node.target))
+        self.locals.update(_binding_target_names(node.target))
         self.generic_visit(node)
 
     def visit_NamedExpr(self, node: ast.NamedExpr) -> None:
-        self._record(_target_root_names(node.target))
+        self.locals.update(_binding_target_names(node.target))
         self.generic_visit(node)
 
     def visit_Delete(self, node: ast.Delete) -> None:
-        self._record(_target_root_names(*node.targets))
-        self.generic_visit(node)
-
-    def visit_Call(self, node: ast.Call) -> None:
-        if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
-            self._record(_target_root_names(node.func.value))
+        self.locals.update(_binding_target_names(*node.targets))
         self.generic_visit(node)
 
     def visit_For(self, node: ast.For) -> None:
-        self._record(_target_root_names(node.target))
+        self.locals.update(_binding_target_names(node.target))
         self.generic_visit(node)
 
     def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
-        self._record(_target_root_names(node.target))
-        self.generic_visit(node)
+        self.visit_For(node)
 
     def visit_With(self, node: ast.With) -> None:
-        self._record(
-            _target_root_names(
+        self.locals.update(
+            _binding_target_names(
                 *(
                     item.optional_vars
                     for item in node.items
@@ -180,23 +173,268 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
 
     def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:
         if node.name is not None:
-            self._record({node.name})
+            self.locals.add(node.name)
+        self.generic_visit(node)
+
+    def visit_Import(self, node: ast.Import) -> None:
+        self.locals.update(_import_bound_names(node))
+
+    def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+        self.locals.update(_import_bound_names(node))
+
+    def visit_MatchAs(self, node: ast.MatchAs) -> None:
+        if node.name is not None:
+            self.locals.add(node.name)
+        self.generic_visit(node)
+
+    def visit_MatchStar(self, node: ast.MatchStar) -> None:
+        if node.name is not None:
+            self.locals.add(node.name)
+
+    def visit_MatchMapping(self, node: ast.MatchMapping) -> None:
+        if node.rest is not None:
+            self.locals.add(node.rest)
+        self.generic_visit(node)
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        self.locals.add(node.name)
+        for decorator in node.decorator_list:
+            self.visit(decorator)
+        for default in (*node.args.defaults, *node.args.kw_defaults):
+            if default is not None:
+                self.visit(default)
+
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+        self.visit_FunctionDef(node)
+
+    def visit_Lambda(self, node: ast.Lambda) -> None:
+        for default in (*node.args.defaults, *node.args.kw_defaults):
+            if default is not None:
+                self.visit(default)
+
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
+        self.locals.add(node.name)
+        for decorator in node.decorator_list:
+            self.visit(decorator)
+        for base in node.bases:
+            self.visit(base)
+        for keyword in node.keywords:
+            self.visit(keyword.value)
+
+
+def _argument_names(arguments: ast.arguments) -> set[str]:
+    names = {
+        argument.arg
+        for argument in (
+            *arguments.posonlyargs,
+            *arguments.args,
+            *arguments.kwonlyargs,
+        )
+    }
+    if arguments.vararg is not None:
+        names.add(arguments.vararg.arg)
+    if arguments.kwarg is not None:
+        names.add(arguments.kwarg.arg)
+    return names
+
+
+@dataclass(frozen=True)
+class _LexicalScope:
+    kind: str
+    locals: frozenset[str]
+    globals: frozenset[str]
+    nonlocals: frozenset[str]
+
+
+def _lexical_scope(
+    kind: str,
+    body: list[ast.stmt],
+    *,
+    arguments: ast.arguments | None = None,
+) -> _LexicalScope:
+    collector = _ScopeBindingCollector()
+    for statement in body:
+        collector.visit(statement)
+    local_names = set(collector.locals)
+    if arguments is not None:
+        local_names.update(_argument_names(arguments))
+    local_names.difference_update(collector.globals | collector.nonlocals)
+    return _LexicalScope(
+        kind=kind,
+        locals=frozenset(local_names),
+        globals=frozenset(collector.globals),
+        nonlocals=frozenset(collector.nonlocals),
+    )
+
+
+_MODULE_SCOPE = _LexicalScope(
+    kind="module",
+    locals=frozenset(),
+    globals=frozenset(),
+    nonlocals=frozenset(),
+)
+
+
+class _AuditedMutationVisitor(ast.NodeVisitor):
+    def __init__(self, supported_top_level_node_ids: set[int]) -> None:
+        self.ambiguous: set[str] = set()
+        self.declared: set[str] = set()
+        self._scopes: list[_LexicalScope] = [_MODULE_SCOPE]
+        self._supported_top_level_node_ids = supported_top_level_node_ids
+
+    def _binding_module_names(self, names: set[str]) -> set[str]:
+        audited = names & _AUDITED_SELECTION_CONSTANTS
+        scope = self._scopes[-1]
+        if scope.kind == "module":
+            return audited
+        return audited & scope.globals
+
+    def _name_resolves_to_module(self, name: str) -> bool:
+        scope = self._scopes[-1]
+        if scope.kind == "module":
+            return True
+        if scope.kind == "class":
+            return True
+        if name in scope.globals:
+            return True
+        if name in scope.locals or name in scope.nonlocals:
+            return False
+        for enclosing in reversed(self._scopes[:-1]):
+            if enclosing.kind != "function":
+                continue
+            if name in enclosing.locals or name in enclosing.nonlocals:
+                return False
+        return True
+
+    def _mutation_module_names(self, names: set[str]) -> set[str]:
+        return {
+            name
+            for name in names & _AUDITED_SELECTION_CONSTANTS
+            if self._name_resolves_to_module(name)
+        }
+
+    def _record_module_names(self, module_names: set[str]) -> None:
+        self.declared.update(module_names)
+        self.ambiguous.update(module_names)
+
+    def _record_binding(self, names: set[str], *, supported: bool = False) -> None:
+        module_names = self._binding_module_names(names)
+        self.declared.update(module_names)
+        if not supported:
+            self.ambiguous.update(module_names)
+
+    def _record_mutation(self, names: set[str]) -> None:
+        self._record_module_names(self._mutation_module_names(names))
+
+    def _record_alias(self, value: ast.AST | None) -> None:
+        if (
+            isinstance(value, ast.Name)
+            and value.id in _AUDITED_SELECTION_CONSTANTS
+            and self._name_resolves_to_module(value.id)
+        ):
+            self._record_module_names({value.id})
+
+    def visit_Assign(self, node: ast.Assign) -> None:
+        self._record_binding(
+            _binding_target_names(*node.targets),
+            supported=id(node) in self._supported_top_level_node_ids,
+        )
+        self._record_mutation(_mutation_target_names(*node.targets))
+        self._record_alias(node.value)
+        self.generic_visit(node)
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+        self._record_binding(
+            _binding_target_names(node.target),
+            supported=id(node) in self._supported_top_level_node_ids,
+        )
+        self._record_mutation(_mutation_target_names(node.target))
+        self._record_alias(node.value)
+        self.generic_visit(node)
+
+    def visit_AugAssign(self, node: ast.AugAssign) -> None:
+        self._record_binding(_binding_target_names(node.target))
+        self._record_mutation(_mutation_target_names(node.target))
+        self.generic_visit(node)
+
+    def visit_NamedExpr(self, node: ast.NamedExpr) -> None:
+        self._record_binding(_binding_target_names(node.target))
+        self._record_alias(node.value)
+        self.generic_visit(node)
+
+    def visit_Delete(self, node: ast.Delete) -> None:
+        self._record_binding(_binding_target_names(*node.targets))
+        self._record_mutation(_mutation_target_names(*node.targets))
+        self.generic_visit(node)
+
+    def visit_Call(self, node: ast.Call) -> None:
+        if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
+            self._record_mutation(_target_root_names(node.func.value))
+        self.generic_visit(node)
+
+    def visit_For(self, node: ast.For) -> None:
+        self._record_binding(_binding_target_names(node.target))
+        self.generic_visit(node)
+
+    def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
+        self.visit_For(node)
+
+    def visit_With(self, node: ast.With) -> None:
+        self._record_binding(
+            _binding_target_names(
+                *(
+                    item.optional_vars
+                    for item in node.items
+                    if item.optional_vars is not None
+                )
+            )
+        )
+        self.generic_visit(node)
+
+    def visit_AsyncWith(self, node: ast.AsyncWith) -> None:
+        self.visit_With(node)
+
+    def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:
+        if node.name is not None:
+            self._record_binding({node.name})
+        self.generic_visit(node)
+
+    def visit_Import(self, node: ast.Import) -> None:
+        self._record_binding(_import_bound_names(node))
+
+    def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+        self._record_binding(_import_bound_names(node))
+
+    def visit_MatchAs(self, node: ast.MatchAs) -> None:
+        if node.name is not None:
+            self._record_binding({node.name})
+        self.generic_visit(node)
+
+    def visit_MatchStar(self, node: ast.MatchStar) -> None:
+        if node.name is not None:
+            self._record_binding({node.name})
+
+    def visit_MatchMapping(self, node: ast.MatchMapping) -> None:
+        if node.rest is not None:
+            self._record_binding({node.rest})
         self.generic_visit(node)
 
     def _visit_function(
         self,
         node: ast.FunctionDef | ast.AsyncFunctionDef,
     ) -> None:
-        self._record({node.name})
+        self._record_binding({node.name})
         for decorator in node.decorator_list:
             self.visit(decorator)
         for default in (*node.args.defaults, *node.args.kw_defaults):
             if default is not None:
                 self.visit(default)
-        self._scope_globals.append(_scope_global_names(node.body))
+        self._scopes.append(
+            _lexical_scope("function", node.body, arguments=node.args)
+        )
         for statement in node.body:
             self.visit(statement)
-        self._scope_globals.pop()
+        self._scopes.pop()
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         self._visit_function(node)
@@ -208,9 +446,32 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         for default in (*node.args.defaults, *node.args.kw_defaults):
             if default is not None:
                 self.visit(default)
-        self._scope_globals.append(frozenset())
+        lambda_collector = _ScopeBindingCollector()
+        lambda_collector.visit(node.body)
+        lambda_locals = _argument_names(node.args) | lambda_collector.locals
+        self._scopes.append(
+            _LexicalScope(
+                kind="function",
+                locals=frozenset(lambda_locals),
+                globals=frozenset(),
+                nonlocals=frozenset(),
+            )
+        )
         self.visit(node.body)
-        self._scope_globals.pop()
+        self._scopes.pop()
+
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
+        self._record_binding({node.name})
+        for decorator in node.decorator_list:
+            self.visit(decorator)
+        for base in node.bases:
+            self.visit(base)
+        for keyword in node.keywords:
+            self.visit(keyword.value)
+        self._scopes.append(_lexical_scope("class", node.body))
+        for statement in node.body:
+            self.visit(statement)
+        self._scopes.pop()
 
 
 def _ast_latex_inputs(tree: ast.AST) -> list[tuple[str, str]]:
