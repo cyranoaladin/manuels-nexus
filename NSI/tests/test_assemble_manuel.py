@@ -120,6 +120,8 @@ def _prepare_root(root: Path) -> None:
 def _patch_root(monkeypatch, assembler, root: Path) -> None:
     monkeypatch.setattr(assembler, "ROOT", root)
     monkeypatch.setattr(assembler.legacy, "ROOT", root)
+    tracked = frozenset(root.rglob("*.tex"))
+    monkeypatch.setattr(assembler, "_tracked_object_paths", lambda: tracked)
 
 
 def test_canonical_literals_are_exact_and_runtime_closed(assembler):
@@ -163,6 +165,74 @@ def test_student_selection_includes_contractual_ece_object(
 
     assert "ece" in assembler.ELEVE_ALLOWED_TYPES
     assert ece in selected
+
+
+def test_runtime_selection_ignores_untracked_tex(monkeypatch, tmp_path, assembler):
+    root = tmp_path / "NSI"
+    _prepare_root(root)
+    _patch_root(monkeypatch, assembler, root)
+    untracked = root / "chapitres" / CHAPTERS[0] / "cours" / "10_local.tex"
+    _write_meta(untracked, CHAPTERS[0], "cours", "LOCAL")
+
+    selected = assembler.collect_variant_objects("eleve")
+
+    assert untracked not in selected
+
+
+def test_tracked_source_discovery_fails_closed_on_git_error(
+    monkeypatch, assembler
+):
+    def fail_git(*_args, **_kwargs):
+        raise subprocess.CalledProcessError(128, ["git", "ls-files"])
+
+    monkeypatch.setattr(assembler.subprocess, "run", fail_git)
+
+    with pytest.raises(RuntimeError, match="fichiers suivis Git"):
+        assembler._tracked_object_paths()
+
+
+@pytest.mark.parametrize(
+    "metadata",
+    [
+        {"chapitre": CHAPTERS[0], "type_objet": "cours", "status": "approved"},
+        {"id": "FIXTURE", "chapitre": CHAPTERS[0], "type_objet": "cours"},
+        {
+            "id": "FIXTURE",
+            "chapitre": CHAPTERS[0],
+            "type_objet": "cours",
+            "status": " ",
+        },
+        {
+            "id": "FIXTURE",
+            "chapitre": CHAPTERS[0],
+            "type_objet": "cours",
+            "status": "approved",
+            "sous_type": 42,
+        },
+        {
+            "id": "FIXTURE",
+            "chapitre": CHAPTERS[0],
+            "type_objet": "cours",
+            "status": "approved",
+            "sous_type": "",
+        },
+    ],
+    ids=("missing-id", "missing-status", "blank-status", "subtype-type", "subtype-blank"),
+)
+def test_runtime_selection_rejects_inventory_invalid_meta(
+    monkeypatch, tmp_path, assembler, metadata
+):
+    root = tmp_path / "NSI"
+    _prepare_root(root)
+    invalid = root / "chapitres" / CHAPTERS[0] / "cours" / "10_invalid.tex"
+    invalid.write_text(
+        "% META: " + json.dumps(metadata) + "\nContenu.\n",
+        encoding="utf-8",
+    )
+    _patch_root(monkeypatch, assembler, root)
+
+    with pytest.raises(ValueError, match="META"):
+        assembler.collect_variant_objects("eleve")
 
 
 def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(assembler):
@@ -268,7 +338,7 @@ def test_selection_rejects_object_symlink_escape(monkeypatch, tmp_path, assemble
         assembler.collect_variant_objects("methodes")
 
 
-def test_selection_rejects_business_directory_symlink_escape(
+def test_selection_ignores_untracked_business_directory_symlink_escape(
     monkeypatch, tmp_path, assembler
 ):
     root = tmp_path / "NSI"
@@ -284,8 +354,7 @@ def test_selection_rejects_business_directory_symlink_escape(
     linked.symlink_to(outside, target_is_directory=True)
     _patch_root(monkeypatch, assembler, root)
 
-    with pytest.raises(ValueError, match="Objet META hors du chapitre"):
-        assembler.collect_variant_objects("methodes")
+    assert assembler.collect_variant_objects("methodes") == []
 
 
 @pytest.mark.parametrize(

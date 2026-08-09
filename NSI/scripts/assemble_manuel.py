@@ -5,7 +5,9 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 import json
+import os
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 
@@ -109,6 +111,7 @@ ELEVE_ALLOWED_TYPES = [
 ELEVE_EXCLUDES = ["corriges", "evaluations", "professeur"]
 
 META_PREFIX = "% META:"
+REQUIRED_META_FIELDS = ("id", "chapitre", "type_objet", "status")
 TEACHER_VARIANT_SETUP = r"\nxVersionProfesseurtrue"
 VARIANT_LABELS = {
     "eleve": "manuel élève",
@@ -154,12 +157,40 @@ def _metadata(path: Path, chapter: str) -> dict[str, object]:
         raise ValueError(f"En-tete META invalide : {path}") from error
     if not isinstance(metadata, dict):
         raise ValueError(f"En-tete META non objet : {path}")
+    invalid_fields = [
+        field
+        for field in REQUIRED_META_FIELDS
+        if not isinstance(metadata.get(field), str) or not metadata[field].strip()
+    ]
+    if invalid_fields:
+        raise ValueError(
+            f"Champs META absents ou invalides ({', '.join(invalid_fields)}) : {path}"
+        )
+    source_subtype = metadata.get("sous_type")
+    if "sous_type" in metadata and (
+        not isinstance(source_subtype, str) or not source_subtype.strip()
+    ):
+        raise ValueError(f"Champ META sous_type invalide : {path}")
     if metadata.get("chapitre") != chapter:
         raise ValueError(f"Chapitre META incoherent : {path}")
-    source_type = metadata.get("type_objet")
-    if not isinstance(source_type, str) or not source_type:
-        raise ValueError(f"type_objet META absent : {path}")
     return metadata
+
+
+def _tracked_object_paths() -> frozenset[Path]:
+    try:
+        result = subprocess.run(
+            ["git", "ls-files", "-z", "--", "chapitres"],
+            cwd=ROOT,
+            capture_output=True,
+            check=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise RuntimeError("Impossible de lire les fichiers suivis Git 1NSI.") from error
+    return frozenset(
+        ROOT / os.fsdecode(relative)
+        for relative in result.stdout.split(b"\0")
+        if relative and relative.endswith(b".tex")
+    )
 
 
 def _confined_object(chapter_dir: Path, path: Path) -> Path:
@@ -183,6 +214,7 @@ def collect_variant_objects(variant: str) -> list[Path]:
         raise RuntimeError("ORDER et la variante professeur divergent.")
     # The AST gate requires audited mutable literals to remain indexed in place.
     student_variant = variant in ELEVE_VARIANTS
+    tracked_objects = _tracked_object_paths()
     selected: list[Path] = []
     seen: set[Path] = set()
     for chapter in CHAPITRES:
@@ -205,6 +237,8 @@ def collect_variant_objects(variant: str) -> list[Path]:
             if student_variant and directory in ELEVE_EXCLUDES:
                 continue
             for path in sorted((chapter_dir / directory).glob(f"{pattern}.tex")):
+                if path not in tracked_objects:
+                    continue
                 path = _confined_object(chapter_dir, path)
                 metadata = _metadata(path, chapter)
                 if (
