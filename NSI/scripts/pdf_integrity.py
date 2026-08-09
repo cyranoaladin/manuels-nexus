@@ -50,7 +50,12 @@ def fonts_are_embedded(output: str) -> bool:
     return bool(lines)
 
 
-def book_preflight_issues(pdf: Path, log: Path) -> list[str]:
+def book_preflight_issues(
+    pdf: Path,
+    log: Path,
+    *,
+    check_student_leaks: bool = True,
+) -> list[str]:
     issues = []
     try:
         log_text = log.read_text(encoding="utf-8", errors="replace")
@@ -71,17 +76,27 @@ def book_preflight_issues(pdf: Path, log: Path) -> list[str]:
                 issues.append("Outline PDF vide.")
             if not any(page.get_links() for page in document):
                 issues.append("Aucun lien PDF.")
-            text = "\n".join(page.get_text() for page in document)
-            leak = BOOK_STUDENT_LEAK.search(text)
-            if leak:
-                issues.append(f"Fuite version élève : {leak.group(0)}")
+            if check_student_leaks:
+                text = "\n".join(page.get_text() for page in document)
+                leak = BOOK_STUDENT_LEAK.search(text)
+                if leak:
+                    issues.append(f"Fuite version élève : {leak.group(0)}")
     except (FileNotFoundError, fitz.FileDataError) as error:
         issues.append(f"PDF illisible : {error}")
     return issues
 
 
-def preflight_book_pdf(pdf: Path, log: Path) -> int:
-    issues = book_preflight_issues(pdf, log)
+def preflight_book_pdf(
+    pdf: Path,
+    log: Path,
+    *,
+    check_student_leaks: bool = True,
+) -> int:
+    issues = book_preflight_issues(
+        pdf,
+        log,
+        check_student_leaks=check_student_leaks,
+    )
     for issue in issues:
         print(issue)
     return int(bool(issues))

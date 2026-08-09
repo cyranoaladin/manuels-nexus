@@ -8421,6 +8421,110 @@ def test_supported_manuals_distinguish_nsi_chapter_and_manual_assemblers(
     )
 
 
+def test_live_1nsi_runtime_selection_matches_declared_manual_assemblies(
+    inventory_module, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assembler_path = ROOT / "NSI/scripts/assemble_manuel.py"
+    assert assembler_path.is_file(), "assemble_manuel.py doit etre cree"
+    spec = importlib.util.spec_from_file_location("assemble_manuel_live", assembler_path)
+    assert spec is not None and spec.loader is not None
+    scripts_path = str(ROOT / "NSI/scripts")
+    monkeypatch.syspath_prepend(scripts_path)
+    runtime = importlib.util.module_from_spec(spec)
+    monkeypatch.setitem(sys.modules, spec.name, runtime)
+    spec.loader.exec_module(runtime)
+
+    tracked = set(inventory_module.git_tracked_files(ROOT))
+    tracked.add("NSI/scripts/assemble_manuel.py")
+    monkeypatch.setattr(
+        inventory_module,
+        "git_tracked_files",
+        lambda _repository: tuple(sorted(tracked)),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_observed_build_manifest",
+        lambda *_args, **_kwargs: [],
+    )
+    inventory = inventory_module.build_inventory(ROOT)
+    assemblies = {
+        assembly["variant"]: assembly
+        for assembly in inventory["assemblies"]
+        if assembly["manual"] == "1NSI" and assembly["scope"] == "manual"
+    }
+
+    assert set(assemblies) == set(runtime.VARIANTS)
+    for variant in runtime.VARIANTS:
+        runtime_paths = [
+            path.relative_to(ROOT).as_posix()
+            for path in runtime.collect_variant_objects(variant)
+        ]
+        assert assemblies[variant]["included_objects"] == runtime_paths
+
+
+def test_live_1nsi_manual_declaration_closes_assembly_debt_without_tnsi(
+    inventory_module, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    assembler = "NSI/scripts/assemble_manuel.py"
+    assert (ROOT / assembler).is_file(), "assemble_manuel.py doit etre cree"
+    tracked = set(inventory_module.git_tracked_files(ROOT))
+    tracked.add(assembler)
+    monkeypatch.setattr(
+        inventory_module,
+        "git_tracked_files",
+        lambda _repository: tuple(sorted(tracked)),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_observed_build_manifest",
+        lambda *_args, **_kwargs: [],
+    )
+
+    inventory = inventory_module.build_inventory(ROOT)
+    nsi_manual_assemblies = [
+        assembly
+        for assembly in inventory["assemblies"]
+        if assembly["scope"] == "manual" and assembly["manual"] == "1NSI"
+    ]
+    tnsi_manual_assemblies = [
+        assembly
+        for assembly in inventory["assemblies"]
+        if assembly["scope"] == "manual" and assembly["manual"] == "TNSI"
+    ]
+    tnsi_chapter_variants = {
+        assembly["variant"]
+        for assembly in inventory["assemblies"]
+        if assembly["scope"] == "chapter" and assembly["manual"] == "TNSI"
+    }
+
+    assert len(nsi_manual_assemblies) == 7
+    assert {
+        chapter
+        for assembly in nsi_manual_assemblies
+        for chapter in assembly["chapters"]
+    } == set(inventory["manuals"]["1NSI"]["chapters"])
+    assert not [
+        anomaly
+        for anomaly in inventory["anomalies"]["chapters_not_in_manual"]
+        if anomaly["cible"].startswith("1NSI-")
+    ]
+    assert not [
+        anomaly
+        for anomaly in inventory["anomalies"]["unassembled_objects"]
+        if anomaly["cible"].startswith("NSI/chapitres/1NSI-")
+    ]
+    assert tnsi_manual_assemblies == []
+    assert tnsi_chapter_variants == {
+        "amenagee",
+        "complet",
+        "methodes",
+        "parcours1",
+        "professeur",
+        "remediation",
+    }
+    assert not (ROOT / "NSI/manifests/books/TNSI.json").exists()
+
+
 def test_pdf_inventory_uses_only_tracked_files_and_reports_unavailable_page_count(
     tmp_path: Path, inventory_module, monkeypatch: pytest.MonkeyPatch
 ) -> None:

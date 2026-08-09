@@ -2,7 +2,7 @@
 
 PY := $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 CHAP ?= 1NSI-TYPES-CONSTRUITS
-VARIANT ?= complet
+VARIANT ?= eleve
 
 setup:
 	python3 -m venv .venv
@@ -40,7 +40,7 @@ chapter:
 	$(PY) scripts/assemble.py --chap $(CHAP) --variant complet
 
 book:
-	$(PY) scripts/assemble.py --book 1NSI --variant $(VARIANT)
+	$(PY) scripts/assemble_manuel.py --variant $(VARIANT)
 
 specimen:
 	mkdir -p build/specimen

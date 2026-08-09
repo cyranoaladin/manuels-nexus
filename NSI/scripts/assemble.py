@@ -5,6 +5,7 @@ Déclinaisons chapitre : complet|methodes|parcours1|remediation|professeur|amena
 Déclinaisons livre : complet|methodes|remediation|amenagee.
 """
 import argparse
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 import json
 import os
@@ -30,6 +31,12 @@ BOOK_VARIANT_LABEL = {
     "amenagee": "version aménagée",
 }
 BOOK_VARIANTS = frozenset(BOOK_VARIANT_SUFFIX)
+STUDENT_VARIANT_SETUP = "\n".join(
+    (
+        r"\nxVersionProfesseurfalse",
+        r"\RenewDocumentEnvironment{corrige}{m +b}{}{}",
+    )
+)
 DEFAULT_SOURCE_DATE_EPOCH = 1786147200
 BOOK_MANIFEST_KEYS = frozenset({
     "book_id", "title", "subtitle", "matiere", "niveau", "author",
@@ -287,21 +294,25 @@ def _validate_book_variant(variant: str) -> None:
         )
 
 
-def _render_book_master(context: BookContext) -> str:
-    manifest = context.manifest
-    variant = context.variant
-    included_dirs = context.chapters
-    included_ids = {chap_dir.name for chap_dir in included_dirs}
+def render_book_master_from_files(
+    manifest: Mapping[str, object],
+    files_by_chapter: Mapping[str, Sequence[Path]],
+    *,
+    title: str,
+    variant_setup: str,
+) -> str:
+    """Render the shared book template from an already validated selection."""
+
     parts = []
     for entry in manifest["chapters"]:
         chapter_id = _chapter_entry_id(entry)
-        if chapter_id not in included_ids:
+        selected_files = files_by_chapter.get(chapter_id, ())
+        if not selected_files:
             continue
         chapter_title = _chapter_entry_title(entry)
-        chap_dir = _resolve_under(ROOT / "chapitres", chapter_id, "Le chapitre")
         inputs = "\n".join(
             f"\\input{{{path.relative_to(ROOT)}}}"
-            for path in collect_book_files(chap_dir, variant)
+            for path in selected_files
         )
         parts.append(
             "\n".join(
@@ -314,14 +325,30 @@ def _render_book_master(context: BookContext) -> str:
         )
     master = (ROOT / "gabarits" / "book_master.tex").read_text(encoding="utf-8")
     return (
-        master.replace("%%MATIERE%%", latex_escape(manifest["matiere"]))
+        master.replace("%%VARIANT_SETUP%%", variant_setup)
+        .replace("%%MATIERE%%", latex_escape(manifest["matiere"]))
         .replace("%%NIVEAU%%", latex_escape(manifest["niveau"]))
-        .replace("%%TITLE%%", latex_escape(_book_title(manifest, variant)))
+        .replace("%%TITLE%%", latex_escape(title))
         .replace("%%SUBTITLE%%", latex_escape(manifest["subtitle"]))
         .replace("%%PDF_AUTHOR%%", latex_escape(manifest["author"]))
         .replace("%%PDF_SUBJECT%%", latex_escape(manifest["subject"]))
         .replace("%%PDF_KEYWORDS%%", latex_escape(manifest["keywords"]))
         .replace("%%CONTENT%%", "\n\n".join(parts))
+    )
+
+
+def _render_book_master(context: BookContext) -> str:
+    manifest = context.manifest
+    variant = context.variant
+    files_by_chapter = {
+        chapter.name: collect_book_files(chapter, variant)
+        for chapter in context.chapters
+    }
+    return render_book_master_from_files(
+        manifest,
+        files_by_chapter,
+        title=_book_title(manifest, variant),
+        variant_setup=STUDENT_VARIANT_SETUP,
     )
 
 
