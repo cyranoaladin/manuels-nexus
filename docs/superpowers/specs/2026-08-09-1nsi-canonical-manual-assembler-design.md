@@ -40,7 +40,7 @@ manifeste JSON NSI.
 - `eleve` : cours, méthodes, exercices, coups de pouce, TD, projets, QCM et ECE,
   sans évaluations barémées, remédiations corrigées, corrigés ni contenu
   professeur.
-- `professeur` : les dix chapitres et tous leurs objets publiables, notamment
+- `professeur` : les dix chapitres et tous leurs objets assemblables, notamment
   les 109 objets sous `corriges/` actuellement hors assemblage.
 - `methodes` : uniquement les objets du répertoire `methodes/`.
 - `remediation` : uniquement les objets élèves du répertoire `remediation/` ;
@@ -58,7 +58,9 @@ repose sur une recherche textuelle dans le nom de sortie.
 
 L'alias historique `complet` reste accepté par `assemble.py` pour ne pas casser
 les usages existants, mais n'est pas une variante déclarée par l'assembleur
-canonique.
+canonique. `assemble.py` remplace lui aussi le nouvel emplacement
+`%%VARIANT_SETUP%%` par le setup élève historique, afin que cette compatibilité
+ne laisse jamais un placeholder dans le TeX produit.
 
 ## Inventaire et traçabilité
 
@@ -93,9 +95,12 @@ l'assembleur peut émettre un receipt fermé puis appeler
 `scripts/build_manifest.py --receipt`, selon le même contrat de défiance que
 l'assembleur mathématique.
 
-Le receipt contient la variante canonique, l'assembly ID, les objets inclus et
-exclus, la trace ordonnée, les dépendances générées, les preuves de compilation,
-préflight, séparation élève lorsque applicable et reproductibilité. Une
+Le receipt fermé conserve les chemins des preuves, les dépendances générées, les
+résultats de compilation, préflight, séparation élève lorsque applicable et
+reproductibilité. Le recorder ne fait confiance à aucune liste d'objets fournie
+par l'assembleur : il dérive lui-même les objets inclus, exclus et leur trace
+ordonnée depuis le FLS et les marqueurs du journal. Il applique la séparation
+élève aux cinq variantes déclarées élèves, pas seulement au nom `eleve`. Une
 compilation locale sans `--record-observed` reste possible ; elle ne rend pas le
 livrable visible dans la matrice.
 
@@ -105,6 +110,11 @@ contractuelles. Le chemin et le champ `variant` du receipt portent donc la même
 identité interprétable par l'inventaire. Les anciennes sorties
 `NSI/build/books/MANUEL_1NSI_v1*.pdf`, ignorées par Git, restent des sorties de
 compatibilité non observées et ne sont jamais utilisées comme preuve canonique.
+Les sept PDF canoniques sont explicitement réinclus par `NSI/.gitignore` et
+suivis dans Git avant l'attestation. Le manifeste observé ne référence donc
+jamais un PDF absent après clone. Les journaux, FLS, masters temporaires et
+rapports de préflight restent des preuves locales ignorées ; seuls leurs digests
+validés alimentent l'enregistrement.
 
 ## Sécurité et erreurs
 
@@ -133,7 +143,8 @@ compatibilité non observées et ne sont jamais utilisées comme preuve canoniqu
   sont pas approuvés ;
 - diff TNSI vide sur `NSI/chapitres/TNSI-*`, absence de manifeste TNSI et test
   statique garantissant que TNSI conserve ses seules variantes de chapitre,
-  sans assemblage manuel déclaré.
+  sans assemblage manuel déclaré ;
+- absence de tout PDF ou receipt TNSI sous `NSI/build/`.
 
 La baseline de dette n'est pas réécrite dans cette passe : les anomalies
 résolues sont constatées par comparaison avec la baseline approuvée existante.
