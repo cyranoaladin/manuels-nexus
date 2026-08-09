@@ -95,10 +95,21 @@ _RECEIPT_FIELDS = {
     "tool_versions",
     "variant",
 }
+_1NSI_STUDENT_VARIANTS = frozenset(
+    {"eleve", "methodes", "remediation", "amenagee", "projets"}
+)
 
 
 class BuildManifestError(RuntimeError):
     """Refusal to record unproved or inconsistent build evidence."""
+
+
+def _requires_student_separation(manual: object, variant: object) -> bool:
+    """Return whether this observed manual variant must pass student gates."""
+
+    return variant == "eleve" or (
+        manual == "1NSI" and variant in _1NSI_STUDENT_VARIANTS
+    )
 
 
 def build_state_digest(builds: list[Mapping[str, Any]]) -> str:
@@ -450,7 +461,10 @@ def _validate_build_shape(build: Mapping[str, Any]) -> None:
         value = gates.get(gate)
         if not isinstance(value, Mapping) or value.get("passed") is not True:
             raise BuildManifestError(f"preuve {gate} absente ou rouge")
-    if build.get("variant") == "eleve":
+    if _requires_student_separation(
+        build.get("manual"),
+        build.get("variant"),
+    ):
         student_gate = gates.get("student_separation")
         if (
             not isinstance(student_gate, Mapping)
@@ -1500,7 +1514,10 @@ def _run_local_pdf_preflight(
 
 def _student_text_violations(text: str) -> list[str]:
     checks = (
-        ("identifiant interne", r"\b1SPE-[A-Z0-9]+(?:-[A-Z0-9]+)*"),
+        (
+            "identifiant interne",
+            r"\b(?:1SPE|1NSI)-[A-Z0-9]+(?:-[A-Z0-9]+)*",
+        ),
         ("corrigé", r"(?i:\bcorrig[ée]s?\b)"),
         ("barème enseignant", r"(?i:\bbar[èe]me indicatif\b)"),
         (
@@ -1758,7 +1775,7 @@ def _derive_receipt_evidence(
         expected_pages=pages,
         reproducibility=reproducibility,
     )
-    if variant == "eleve":
+    if _requires_student_separation(manual, variant):
         _run_local_student_separation(
             root / pdf_path,
             reproducibility=reproducibility,
@@ -1792,7 +1809,7 @@ def _derive_receipt_evidence(
         "passed": True,
         "checks": local_preflight,
     }
-    if variant == "eleve":
+    if _requires_student_separation(manual, variant):
         receipt_student_gate = gates.get("student_separation")
         if (
             not isinstance(receipt_student_gate, Mapping)
@@ -1911,7 +1928,7 @@ def _derive_receipt_evidence(
             expected_pages=pages,
             reproducibility=reproducibility,
         )
-        if variant == "eleve":
+        if _requires_student_separation(manual, variant):
             _run_local_student_separation(
                 root / pdf_path,
                 reproducibility=reproducibility,

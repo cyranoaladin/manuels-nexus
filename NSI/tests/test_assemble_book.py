@@ -370,6 +370,37 @@ def test_compile_tex_rejects_lualatex_failure_even_with_stale_pdf(
     assert environment["SOURCE_DATE_EPOCH"] == "1786147200"
     assert environment["FORCE_SOURCE_DATE"] == "1"
     assert environment["TZ"] == "UTC"
+    assert "-recorder" not in calls[0][0]
+
+
+def test_compile_tex_adds_recorder_to_every_lualatex_pass_when_requested(
+    monkeypatch, tmp_path
+):
+    tex_path = tmp_path / "manuel.tex"
+    tex_path.write_text("fixture", encoding="utf-8")
+    calls = []
+
+    def successful_run(command, **kwargs):
+        calls.append((command, kwargs))
+        (tmp_path / "manuel.pdf").write_bytes(b"%PDF")
+        (tmp_path / "manuel.log").write_text("clean", encoding="utf-8")
+        (tmp_path / "manuel.fls").write_text(
+            f"INPUT {tex_path}\n",
+            encoding="utf-8",
+        )
+        return subprocess.CompletedProcess(command, 0, stdout=b"")
+
+    monkeypatch.setattr(assemble.subprocess, "run", successful_run)
+    monkeypatch.setattr(assemble, "verify_pdf", lambda *_args, **_kwargs: 0)
+
+    assert assemble.compile_tex(
+        tex_path,
+        tmp_path,
+        source_date_epoch=1786147200,
+        recorder=True,
+    ) == 0
+    assert len(calls) == 2
+    assert all("-recorder" in command for command, _kwargs in calls)
 
 
 def test_build_book_stages_preflights_and_promotes_with_one_manifest_read(

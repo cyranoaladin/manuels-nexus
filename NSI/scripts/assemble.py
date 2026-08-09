@@ -5,7 +5,7 @@ Déclinaisons chapitre : complet|methodes|parcours1|remediation|professeur|amena
 Déclinaisons livre : complet|methodes|remediation|amenagee.
 """
 import argparse
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 import json
 import os
@@ -191,19 +191,28 @@ def compile_tex(
     build_dir: Path,
     *,
     source_date_epoch: int = DEFAULT_SOURCE_DATE_EPOCH,
+    recorder: bool = False,
+    environment: Mapping[str, str] | None = None,
+    runner: Callable[..., object] | None = None,
 ) -> int:
-    env = os.environ.copy()
+    env = os.environ.copy() if environment is None else dict(environment)
     env["TEXINPUTS"] = f"./gabarits/:{env.get('TEXINPUTS', '')}"
     env["SOURCE_DATE_EPOCH"] = str(source_date_epoch)
     env["FORCE_SOURCE_DATE"] = "1"
     env["TZ"] = "UTC"
+    active_runner = subprocess.run if runner is None else runner
     pdf_path = build_dir / (tex_path.stem + ".pdf")
     pdf_path.unlink(missing_ok=True)
+    command = [
+        "lualatex",
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+    ]
+    if recorder:
+        command.append("-recorder")
+    command.extend((f"-output-directory={build_dir}", str(tex_path)))
     for _ in range(2):
-        proc = subprocess.run(
-            ["lualatex", "-interaction=nonstopmode", "-halt-on-error",
-             f"-output-directory={build_dir}", str(tex_path)],
-            capture_output=True, cwd=ROOT, env=env)
+        proc = active_runner(command, capture_output=True, cwd=ROOT, env=env)
         if proc.returncode != 0:
             pdf_path.unlink(missing_ok=True)
             print(proc.stdout.decode("utf-8", errors="replace")[-3000:])
@@ -212,7 +221,12 @@ def compile_tex(
         print(proc.stdout.decode("utf-8", errors="replace")[-3000:])
         return 1
     log_path = build_dir / (tex_path.stem + ".log")
-    if verify_pdf(pdf_path, log_path):
+    if verify_pdf(
+        pdf_path,
+        log_path,
+        runner=active_runner,
+        environment=env,
+    ):
         pdf_path.unlink(missing_ok=True)
         return 1
     print(f"PDF : {pdf_path} ({pdf_path.stat().st_size // 1024} Ko)")

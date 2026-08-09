@@ -3,19 +3,25 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+import hashlib
 import json
 import os
 from pathlib import Path
+import re
+import secrets
 import subprocess
 import sys
 import tempfile
+from typing import Any
 
 import assemble as legacy
 from common import ROOT as PROJECT_ROOT
 
 
 ROOT = PROJECT_ROOT
+REPOSITORY_ROOT = ROOT.parent
 BOOK_ID = "1NSI"
 CHAPITRES = [
     "1NSI-TYPES-BASE",
@@ -122,6 +128,57 @@ VARIANT_LABELS = {
     "evaluations": "banque d'évaluations",
     "projets": "livret projets",
 }
+REPRODUCIBILITY_CONFIG = (
+    "Mathematiques/manuel-maths/config/reproducible-build.json"
+)
+REPRODUCIBILITY_CONFIG_FIELDS = {
+    "schema_version",
+    "source_commit",
+    "source_date_epoch",
+}
+REPRODUCIBILITY_CONSTANTS = {
+    "force_source_date": "1",
+    "timezone": "UTC",
+    "locale": "C.UTF-8",
+    "pythonhashseed": "0",
+}
+TOOL_VERSION_COMMANDS = {
+    "lualatex": ["lualatex", "--version"],
+    "pdfinfo": ["pdfinfo", "-v"],
+    "pdffonts": ["pdffonts", "-v"],
+    "python": [sys.executable, "--version"],
+}
+RECEIPT_FIELDS = frozenset(
+    {
+        "compile_succeeded",
+        "evidence_sha256",
+        "fls_path",
+        "gates",
+        "generated_dependencies",
+        "log_path",
+        "manual",
+        "master_path",
+        "pdf_path",
+        "preflight_report",
+        "preflight_succeeded",
+        "reproducibility",
+        "run_id",
+        "tool_versions",
+        "variant",
+    }
+)
+PREFLIGHT_FIELDS = frozenset(
+    {
+        "run_id",
+        "pdf_path",
+        "pdf_sha256",
+        "page_count",
+        "passed",
+        "checks",
+        "tool_versions",
+        "reproducibility",
+    }
+)
 
 
 @dataclass(frozen=True)
@@ -296,12 +353,91 @@ def _variant_setup(variant: str) -> str:
     )
 
 
-def _render_context(context: ManualContext) -> str:
-    return legacy.render_book_master_from_files(
+def _repository_relative(path: Path, *, exists: bool = True) -> str:
+    repository = REPOSITORY_ROOT.resolve(strict=True)
+    if exists:
+        if path.is_symlink() or not path.is_file():
+            raise ValueError(f"Preuve non reguliere ou absente : {path}")
+        candidate = path.resolve(strict=True)
+    else:
+        parent = path.parent.resolve(strict=True)
+        candidate = parent / path.name
+    try:
+        relative = candidate.relative_to(repository)
+    except ValueError as error:
+        raise ValueError(f"Preuve hors du depot : {path}") from error
+    canonical = relative.as_posix()
+    if any(part in {"", ".", ".."} for part in canonical.split("/")):
+        raise ValueError(f"Chemin de preuve non canonique : {path}")
+    return canonical
+
+
+def _trace_token(canonical_path: str) -> str:
+    return hashlib.sha256(canonical_path.encode("utf-8")).hexdigest()[:40]
+
+
+def _trace_master(
+    master: str,
+    context: ManualContext,
+    *,
+    run_id: str,
+    repository_root: Path,
+) -> str:
+    if re.fullmatch(r"[0-9a-f]{32}", run_id) is None:
+        raise ValueError("run_id invalide")
+    marker = f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}"
+    if "\\begin{document}" in master:
+        if master.count("\\begin{document}") != 1:
+            raise ValueError("Debut de document LaTeX ambigu.")
+        master = master.replace(
+            "\\begin{document}",
+            f"\\begin{{document}}\n{marker}",
+            1,
+        )
+    else:
+        master = f"{marker}\n{master}"
+
+    repository = repository_root.resolve(strict=True)
+    for chapter in CHAPITRES:
+        for path in context.files_by_chapter[chapter]:
+            input_path = path.relative_to(ROOT).as_posix()
+            input_line = f"\\input{{{input_path}}}"
+            if master.count(input_line) != 1:
+                raise ValueError(f"Entree LaTeX absente ou ambigue : {input_path}")
+            canonical_path = path.resolve(strict=True).relative_to(repository).as_posix()
+            token = _trace_token(canonical_path)
+            wrapped = "\n".join(
+                (
+                    f"\\typeout{{NEXUS_OBJECT_BEGIN:{token}}}",
+                    input_line,
+                    f"\\typeout{{NEXUS_OBJECT_END:{token}}}",
+                )
+            )
+            master = master.replace(input_line, wrapped, 1)
+    return master
+
+
+def _render_context(
+    context: ManualContext,
+    *,
+    run_id: str | None = None,
+    repository_root: Path | None = None,
+) -> str:
+    master = legacy.render_book_master_from_files(
         context.manifest,
         context.files_by_chapter,
         title=_title(context.manifest, context.variant),
         variant_setup=_variant_setup(context.variant),
+    )
+    if run_id is None:
+        return master
+    return _trace_master(
+        master,
+        context,
+        run_id=run_id,
+        repository_root=(
+            REPOSITORY_ROOT if repository_root is None else repository_root
+        ),
     )
 
 
@@ -317,19 +453,377 @@ def canonical_output_path(variant: str) -> Path:
     return legacy._book_output_path(build_dir, f"MANUEL_1NSI_{variant}.pdf")
 
 
-def build_manual(variant: str) -> int:
-    _validate_variant(variant)
-    context = _manual_context(variant)
-    build_dir = legacy._resolve_under(
-        ROOT, "build/MANUEL_1NSI", "Le repertoire de sortie"
+def _fsync_directory(directory: Path) -> None:
+    if os.name != "posix":
+        return
+    descriptor = os.open(
+        directory,
+        os.O_RDONLY
+        | getattr(os, "O_DIRECTORY", 0)
+        | getattr(os, "O_CLOEXEC", 0),
     )
-    build_dir.mkdir(parents=True, exist_ok=True)
-    canonical_pdf = legacy._book_output_path(
-        build_dir, f"{context.output_stem}.pdf"
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _atomic_write_json(path: Path, payload: Mapping[str, object]) -> None:
+    descriptor = -1
+    temporary: Path | None = None
+    try:
+        descriptor, raw_temporary = tempfile.mkstemp(
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+        )
+        temporary = Path(raw_temporary)
+        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+            descriptor = -1
+            json.dump(
+                payload,
+                stream,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            )
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+        _fsync_directory(path.parent)
+        temporary = None
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
+def _atomic_write_text(path: Path, content: str) -> None:
+    descriptor = -1
+    temporary: Path | None = None
+    try:
+        descriptor, raw_temporary = tempfile.mkstemp(
+            dir=path.parent,
+            prefix=f".{path.name}.",
+            suffix=".tmp",
+        )
+        temporary = Path(raw_temporary)
+        with os.fdopen(
+            descriptor,
+            "w",
+            encoding="utf-8",
+            newline="\n",
+        ) as stream:
+            descriptor = -1
+            stream.write(content)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+        _fsync_directory(path.parent)
+        temporary = None
+    finally:
+        if descriptor >= 0:
+            os.close(descriptor)
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
+def _sha256_path(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return f"sha256:{digest.hexdigest()}"
+
+
+def _load_reproducibility_control() -> dict[str, object]:
+    path = REPOSITORY_ROOT / REPRODUCIBILITY_CONFIG
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise ValueError("Config de reproductibilite illisible.") from error
+    if not isinstance(payload, dict) or set(payload) != REPRODUCIBILITY_CONFIG_FIELDS:
+        raise ValueError("Config de reproductibilite non fermee.")
+    source_commit = payload.get("source_commit")
+    source_date_epoch = payload.get("source_date_epoch")
+    if payload.get("schema_version") != 1:
+        raise ValueError("Version de config de reproductibilite invalide.")
+    if not isinstance(source_commit, str) or re.fullmatch(
+        r"[0-9a-f]{40}", source_commit
+    ) is None:
+        raise ValueError("source_commit de reproductibilite invalide.")
+    if type(source_date_epoch) is not int or source_date_epoch <= 0:
+        raise ValueError("source_date_epoch de reproductibilite invalide.")
+    return {
+        "config_path": REPRODUCIBILITY_CONFIG,
+        "source_commit": source_commit,
+        "source_date_epoch": source_date_epoch,
+        **REPRODUCIBILITY_CONSTANTS,
+    }
+
+
+def _observed_environment(
+    reproducibility: Mapping[str, object],
+) -> dict[str, str]:
+    environment = {
+        name: os.environ[name]
+        for name in ("PATH", "HOME")
+        if name in os.environ
+    }
+    environment.update(
+        {
+            "FORCE_SOURCE_DATE": str(reproducibility["force_source_date"]),
+            "TZ": str(reproducibility["timezone"]),
+            "LC_ALL": str(reproducibility["locale"]),
+            "PYTHONHASHSEED": str(reproducibility["pythonhashseed"]),
+            "SOURCE_DATE_EPOCH": str(reproducibility["source_date_epoch"]),
+        }
     )
-    canonical_pdf.unlink(missing_ok=True)
+    return environment
+
+
+def _compile_observed(
+    tex_path: Path,
+    staging: Path,
+    *,
+    environment: Mapping[str, str],
+    runner: Callable[..., Any] | None = None,
+) -> int:
+    result = legacy.compile_tex(
+        tex_path,
+        staging,
+        source_date_epoch=int(environment["SOURCE_DATE_EPOCH"]),
+        recorder=True,
+        environment=environment,
+        runner=runner,
+    )
+    if result:
+        return result
+    required = tuple(
+        staging / f"{tex_path.stem}.{suffix}"
+        for suffix in ("pdf", "log", "fls")
+    )
+    if any(not path.is_file() or path.is_symlink() for path in required):
+        print("Preuves LuaLaTeX ou trace FLS absentes.")
+        return 1
+    return 0
+
+
+def _pdf_page_count(
+    pdf_path: Path,
+    *,
+    environment: Mapping[str, str],
+    runner: Callable[..., Any] = subprocess.run,
+) -> int:
+    try:
+        completed = runner(
+            ["pdfinfo", str(pdf_path)],
+            env=dict(environment),
+            capture_output=True,
+            text=True,
+            errors="replace",
+            check=False,
+            timeout=20,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise ValueError("pdfinfo indisponible.") from error
+    if completed.returncode != 0:
+        raise ValueError("pdfinfo en echec.")
+    match = re.search(r"^Pages:\s*([0-9]+)\s*$", completed.stdout, re.MULTILINE)
+    if match is None or int(match.group(1)) <= 0:
+        raise ValueError("Pagination PDF invalide.")
+    return int(match.group(1))
+
+
+def _first_version_line(completed: Any, tool: str) -> str:
+    if completed.returncode != 0:
+        raise ValueError(f"Collecte de version {tool} en echec.")
+    output = "\n".join(
+        value
+        for value in (
+            getattr(completed, "stdout", ""),
+            getattr(completed, "stderr", ""),
+        )
+        if isinstance(value, str) and value
+    )
+    for line in output.splitlines():
+        normalized = " ".join(line.split())
+        if normalized:
+            return normalized
+    raise ValueError(f"Version {tool} absente.")
+
+
+def _collect_tool_versions(
+    *,
+    environment: Mapping[str, str],
+    runner: Callable[..., Any] = subprocess.run,
+) -> dict[str, str]:
+    versions: dict[str, str] = {}
+    for tool, command in TOOL_VERSION_COMMANDS.items():
+        try:
+            completed = runner(
+                command,
+                env=dict(environment),
+                capture_output=True,
+                text=True,
+                errors="replace",
+                check=False,
+                timeout=20,
+            )
+        except (OSError, subprocess.TimeoutExpired) as error:
+            raise ValueError(f"Collecte de version {tool} indisponible.") from error
+        versions[tool] = _first_version_line(completed, tool)
+    return versions
+
+
+def _validate_run_evidence(master_path: Path, log_path: Path, run_id: str) -> None:
+    master_lines = [
+        line
+        for line in master_path.read_text(encoding="utf-8").splitlines()
+        if "NEXUS_BUILD_RUN:" in line
+    ]
+    log_lines = [
+        line.strip()
+        for line in log_path.read_text(
+            encoding="utf-8", errors="replace"
+        ).splitlines()
+        if "NEXUS_BUILD_RUN:" in line
+    ]
+    if master_lines != [f"\\typeout{{NEXUS_BUILD_RUN:{run_id}}}"]:
+        raise ValueError("Marqueur run_id du master invalide.")
+    if log_lines != [f"NEXUS_BUILD_RUN:{run_id}"]:
+        raise ValueError("Marqueur run_id du journal invalide.")
+
+
+def _publish_observed_evidence(
+    *,
+    context: ManualContext,
+    build_dir: Path,
+    run_id: str,
+    page_count: int,
+    tool_versions: Mapping[str, str],
+    reproducibility: Mapping[str, object],
+) -> Path:
+    stem = context.output_stem
+    master_path = build_dir / f"{stem}.tex"
+    log_path = build_dir / f"{stem}.log"
+    fls_path = build_dir / f"{stem}.fls"
+    pdf_path = build_dir / f"{stem}.pdf"
+    report_path = build_dir / f"{stem}.preflight.json"
+    receipt_path = build_dir / f"{stem}.receipt.json"
+    _validate_run_evidence(master_path, log_path, run_id)
+    canonical = {
+        "master": _repository_relative(master_path),
+        "log": _repository_relative(log_path),
+        "fls": _repository_relative(fls_path),
+        "pdf": _repository_relative(pdf_path),
+        "preflight": _repository_relative(report_path, exists=False),
+    }
+    pdf_digest = _sha256_path(pdf_path)
+    report: dict[str, object] = {
+        "run_id": run_id,
+        "pdf_path": canonical["pdf"],
+        "pdf_sha256": pdf_digest,
+        "page_count": page_count,
+        "passed": True,
+        "checks": {
+            "verify_pdf": {"passed": True},
+            "pdfinfo": {"passed": True},
+            "pdffonts": {"passed": True},
+        },
+        "tool_versions": dict(tool_versions),
+        "reproducibility": dict(reproducibility),
+    }
+    if set(report) != PREFLIGHT_FIELDS:
+        raise ValueError("Rapport de preflight non ferme.")
+    _atomic_write_json(report_path, report)
+    canonical["preflight"] = _repository_relative(report_path)
+    evidence_sha256 = {
+        "master": _sha256_path(master_path),
+        "log": _sha256_path(log_path),
+        "fls": _sha256_path(fls_path),
+        "pdf": _sha256_path(pdf_path),
+        "preflight": _sha256_path(report_path),
+    }
+    if evidence_sha256["pdf"] != pdf_digest:
+        raise ValueError("PDF modifie apres le preflight.")
+    gates: dict[str, object] = {
+        "compile": {"passed": True},
+        "preflight": {"passed": True},
+    }
+    if context.variant in ELEVE_VARIANTS:
+        gates["student_separation"] = {"passed": True}
+    receipt: dict[str, object] = {
+        "compile_succeeded": True,
+        "evidence_sha256": evidence_sha256,
+        "fls_path": canonical["fls"],
+        "gates": gates,
+        "generated_dependencies": [],
+        "log_path": canonical["log"],
+        "manual": BOOK_ID,
+        "master_path": canonical["master"],
+        "pdf_path": canonical["pdf"],
+        "preflight_report": canonical["preflight"],
+        "preflight_succeeded": True,
+        "reproducibility": dict(reproducibility),
+        "run_id": run_id,
+        "tool_versions": dict(tool_versions),
+        "variant": context.variant,
+    }
+    if set(receipt) != RECEIPT_FIELDS:
+        raise ValueError("Receipt de build non ferme.")
+    _atomic_write_json(receipt_path, receipt)
+    return receipt_path
+
+
+def _invoke_recorder(
+    receipt_path: Path,
+    *,
+    environment: Mapping[str, str],
+) -> int:
+    try:
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(REPOSITORY_ROOT / "scripts/build_manifest.py"),
+                "--receipt",
+                str(receipt_path),
+            ],
+            cwd=REPOSITORY_ROOT,
+            env=dict(environment),
+            capture_output=True,
+            text=True,
+            errors="replace",
+            check=False,
+        )
+    except OSError as error:
+        print(f"Enregistrement observe indisponible : {error}")
+        return 1
+    if completed.returncode != 0:
+        output = completed.stderr or completed.stdout
+        if output:
+            print(output[-3000:])
+    return int(completed.returncode)
+
+
+def _remove_stale_evidence(paths: tuple[Path, ...]) -> None:
+    for path in paths:
+        if not path.exists() and not path.is_symlink():
+            continue
+        if path.is_dir() and not path.is_symlink():
+            raise ValueError(f"Preuve perimee non fichier : {path}")
+        path.unlink()
+
+
+def _build_local(
+    context: ManualContext,
+    build_dir: Path,
+    canonical_pdf: Path,
+) -> int:
     promoted = False
-    student_variant = variant in ELEVE_VARIANTS
+    student_variant = context.variant in ELEVE_VARIANTS
     try:
         with tempfile.TemporaryDirectory(
             prefix=f".{context.output_stem}-", dir=build_dir
@@ -363,11 +857,111 @@ def build_manual(variant: str) -> int:
             canonical_pdf.unlink(missing_ok=True)
 
 
+def _build_observed(
+    context: ManualContext,
+    build_dir: Path,
+    canonical_pdf: Path,
+) -> int:
+    report_path = build_dir / f"{context.output_stem}.preflight.json"
+    receipt_path = build_dir / f"{context.output_stem}.receipt.json"
+    _remove_stale_evidence((report_path, receipt_path))
+    canonical_pdf.unlink(missing_ok=True)
+    promoted = False
+    recorded = False
+    try:
+        reproducibility = _load_reproducibility_control()
+        environment = _observed_environment(reproducibility)
+        run_id = secrets.token_hex(16)
+        master_path = legacy._book_output_path(
+            build_dir,
+            f"{context.output_stem}.tex",
+        )
+        with tempfile.TemporaryDirectory(
+            prefix=f".{context.output_stem}-", dir=build_dir
+        ) as staging_name:
+            staging = Path(staging_name).resolve()
+            if not staging.is_relative_to(build_dir):
+                raise ValueError("Le staging resout hors du repertoire de sortie.")
+            _atomic_write_text(
+                master_path,
+                _render_context(
+                    context,
+                    run_id=run_id,
+                    repository_root=REPOSITORY_ROOT,
+                ),
+            )
+            if _compile_observed(master_path, staging, environment=environment):
+                return 1
+            staged_pdf = staging / f"{context.output_stem}.pdf"
+            staged_log = staging / f"{context.output_stem}.log"
+            if legacy.preflight_book_pdf(
+                staged_pdf,
+                staged_log,
+                check_student_leaks=context.variant in ELEVE_VARIANTS,
+            ):
+                return 1
+            if legacy.verify_pdf(
+                staged_pdf,
+                staged_log,
+                environment=environment,
+            ):
+                return 1
+            page_count = _pdf_page_count(staged_pdf, environment=environment)
+            tool_versions = _collect_tool_versions(environment=environment)
+            legacy._promote_book_artifacts(
+                staging,
+                build_dir,
+                context.output_stem,
+            )
+            promoted = True
+        receipt_path = _publish_observed_evidence(
+            context=context,
+            build_dir=build_dir,
+            run_id=run_id,
+            page_count=page_count,
+            tool_versions=tool_versions,
+            reproducibility=reproducibility,
+        )
+        if _invoke_recorder(receipt_path, environment=environment):
+            return 1
+        recorded = True
+        print(f"PDF canonique observe : {canonical_pdf}")
+        return 0
+    except (OSError, subprocess.SubprocessError, ValueError) as error:
+        print(f"Build observe refuse : {error}")
+        return 1
+    finally:
+        if not recorded:
+            report_path.unlink(missing_ok=True)
+            receipt_path.unlink(missing_ok=True)
+        if not promoted:
+            canonical_pdf.unlink(missing_ok=True)
+
+
+def build_manual(variant: str, record_observed: bool = False) -> int:
+    _validate_variant(variant)
+    context = _manual_context(variant)
+    build_dir = legacy._resolve_under(
+        ROOT, "build/MANUEL_1NSI", "Le repertoire de sortie"
+    )
+    build_dir.mkdir(parents=True, exist_ok=True)
+    canonical_pdf = legacy._book_output_path(
+        build_dir, f"{context.output_stem}.pdf"
+    )
+    if record_observed:
+        return _build_observed(context, build_dir, canonical_pdf)
+    return _build_local(context, build_dir, canonical_pdf)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--variant", default="eleve")
+    parser.add_argument("--record-observed", action="store_true")
     arguments = parser.parse_args(argv)
-    return build_manual(arguments.variant)
+    return build_manual(
+        arguments.variant,
+        record_observed=arguments.record_observed,
+    )
 
 
 if __name__ == "__main__":

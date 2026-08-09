@@ -243,6 +243,7 @@ def _receipt(
     ("text", "expected"),
     [
         ("1SPE-SUITES-EX-001", "identifiant interne"),
+        ("1NSI-TYPES-BASE-EX-001", "identifiant interne"),
         ("Corrigé", "corrigé"),
         ("corriges", "corrigé"),
         ("Barème indicatif", "barème enseignant"),
@@ -266,6 +267,43 @@ def test_student_build_shape_requires_locally_recomputed_separation_gate(
 
     build["gates"]["student_separation"] = {"passed": True}
     manifest_module._validate_build_shape(build)
+
+
+@pytest.mark.parametrize(
+    "variant",
+    ["eleve", "methodes", "remediation", "amenagee", "projets"],
+)
+def test_all_1nsi_student_build_shapes_require_separation_gate(
+    manifest_module, variant: str
+) -> None:
+    build = _build("a" * 40, f"build/MANUEL_1NSI_{variant}.pdf", b"%PDF")
+    build["manual"] = "1NSI"
+    build["variant"] = variant
+
+    with pytest.raises(manifest_module.BuildManifestError, match="séparation"):
+        manifest_module._validate_build_shape(build)
+
+    build["gates"]["student_separation"] = {"passed": True}
+    manifest_module._validate_build_shape(build)
+
+
+@pytest.mark.parametrize("variant", ["professeur", "evaluations"])
+def test_1nsi_teacher_build_shapes_do_not_require_student_gate(
+    manifest_module, variant: str
+) -> None:
+    build = _build("a" * 40, f"build/MANUEL_1NSI_{variant}.pdf", b"%PDF")
+    build["manual"] = "1NSI"
+    build["variant"] = variant
+
+    manifest_module._validate_build_shape(build)
+
+
+def test_1spe_student_role_remains_backward_compatible(manifest_module) -> None:
+    assert manifest_module._requires_student_separation("1SPE", "eleve") is True
+    assert (
+        manifest_module._requires_student_separation("1SPE", "professeur")
+        is False
+    )
 
 
 def _trace_token(path: str) -> str:
@@ -498,6 +536,22 @@ def _install_receipt_evidence(
         raising=False,
     )
     return receipt, paths, source_commit, source_date_epoch
+
+
+def _retarget_receipt_to_1nsi(
+    repository: Path,
+    manifest_module,
+    receipt: dict[str, object],
+    variant: str,
+) -> None:
+    receipt["manual"] = "1NSI"
+    receipt["variant"] = variant
+    inventory_module = manifest_module._load_inventory_module()
+    inventory = inventory_module.build_inventory(repository)
+    declared = inventory["declared_assemblies"][0]
+    declared["manual"] = "1NSI"
+    declared["variant"] = variant
+    inventory_module.build_inventory = lambda _root: inventory
 
 
 def _install_schema(repository: Path) -> None:
@@ -831,6 +885,30 @@ def _registered_1spe_build_producer() -> list[dict[str, object]]:
             "producer_id": "math-1spe-manual",
             "recorder": "scripts/build_manifest.py",
         }
+    ]
+
+
+def test_versioned_build_producers_register_exact_1nsi_manual_surface(
+    inventory_module,
+) -> None:
+    producers = inventory_module._load_build_producers(ROOT)
+
+    assert producers == [
+        *_registered_1spe_build_producer(),
+        {
+            "assembler": "NSI/scripts/assemble_manuel.py",
+            "assembly_ids": [
+                "nsi:manual:1NSI:amenagee",
+                "nsi:manual:1NSI:eleve",
+                "nsi:manual:1NSI:evaluations",
+                "nsi:manual:1NSI:methodes",
+                "nsi:manual:1NSI:professeur",
+                "nsi:manual:1NSI:projets",
+                "nsi:manual:1NSI:remediation",
+            ],
+            "producer_id": "nsi-1nsi-manual",
+            "recorder": "scripts/build_manifest.py",
+        },
     ]
 
 
@@ -3128,6 +3206,71 @@ def test_receipt_derivation_recomputes_all_derived_evidence(
     proposed["builds"] = [build]
     proposed["build_state_digest"] = _state_digest([build])
     validator(proposed)
+
+
+@pytest.mark.parametrize(
+    "variant",
+    ["eleve", "methodes", "remediation", "amenagee", "projets"],
+)
+def test_1nsi_student_receipts_rerun_local_separation_and_require_gate(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    variant: str,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    _retarget_receipt_to_1nsi(tmp_path, manifest_module, receipt, variant)
+    calls: list[Path] = []
+    monkeypatch.setattr(
+        manifest_module,
+        "_run_local_student_separation",
+        lambda pdf, *, reproducibility: calls.append(pdf),
+    )
+
+    with pytest.raises(manifest_module.BuildManifestError, match="séparation"):
+        manifest_module._derive_receipt_evidence(tmp_path, receipt)
+
+    receipt["gates"]["student_separation"] = {"passed": True}  # type: ignore[index]
+    _envelope, build, _validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+
+    assert len(calls) == 2
+    assert build["gates"]["student_separation"] == {"passed": True}
+
+
+@pytest.mark.parametrize("variant", ["professeur", "evaluations"])
+def test_1nsi_teacher_receipts_do_not_run_or_require_student_separation(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    variant: str,
+) -> None:
+    receipt, _paths, _source_commit, _epoch = _install_receipt_evidence(
+        tmp_path,
+        manifest_module,
+        monkeypatch,
+    )
+    _retarget_receipt_to_1nsi(tmp_path, manifest_module, receipt, variant)
+    monkeypatch.setattr(
+        manifest_module,
+        "_run_local_student_separation",
+        lambda *_args, **_kwargs: pytest.fail(
+            "une variante enseignante ne doit pas subir le gate élève"
+        ),
+    )
+
+    _envelope, build, _validator = manifest_module._derive_receipt_evidence(
+        tmp_path,
+        receipt,
+    )
+
+    assert "student_separation" not in build["gates"]
 
 
 def _commit_tracked_source(repository: Path) -> Path:

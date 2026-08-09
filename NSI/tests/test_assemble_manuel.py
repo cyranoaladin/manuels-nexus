@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -42,6 +43,13 @@ STUDENT_VARIANTS = (
     "amenagee",
     "projets",
 )
+RUN_ID = "0123456789abcdef0123456789abcdef"
+TOOL_VERSIONS = {
+    "lualatex": "LuaHBTeX, Version 1.17.0",
+    "pdfinfo": "pdfinfo version 24.02.0",
+    "pdffonts": "pdffonts version 24.02.0",
+    "python": f"Python {sys.version.split()[0]}",
+}
 
 
 def _load_assembler():
@@ -119,6 +127,7 @@ def _prepare_root(root: Path) -> None:
 
 def _patch_root(monkeypatch, assembler, root: Path) -> None:
     monkeypatch.setattr(assembler, "ROOT", root)
+    monkeypatch.setattr(assembler, "REPOSITORY_ROOT", root.parent, raising=False)
     monkeypatch.setattr(assembler.legacy, "ROOT", root)
     tracked = frozenset(root.rglob("*.tex"))
     monkeypatch.setattr(assembler, "_tracked_object_paths", lambda: tracked)
@@ -483,3 +492,311 @@ def test_make_book_dispatches_to_canonical_assembler():
 
     assert "scripts/assemble_manuel.py --variant eleve" in default_result.stdout
     assert "scripts/assemble_manuel.py --variant projets" in projects_result.stdout
+
+
+def _write_reproducibility_control(repository: Path) -> int:
+    epoch = 1770000000
+    path = (
+        repository
+        / "Mathematiques"
+        / "manuel-maths"
+        / "config"
+        / "reproducible-build.json"
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "source_commit": "a" * 40,
+                "source_date_epoch": epoch,
+            }
+        ),
+        encoding="utf-8",
+    )
+    return epoch
+
+
+def _observed_build_fakes(monkeypatch, assembler, root: Path):
+    observed: dict[str, object] = {"recorder_calls": []}
+
+    def fake_compile(tex_path, staging, *, environment):
+        observed["source_date_epoch"] = environment["SOURCE_DATE_EPOCH"]
+        master = tex_path.read_text(encoding="utf-8")
+        run_marker = next(
+            line for line in master.splitlines() if "NEXUS_BUILD_RUN:" in line
+        )
+        run_id = run_marker.partition("NEXUS_BUILD_RUN:")[2].partition("}")[0]
+        (staging / f"{tex_path.stem}.pdf").write_bytes(b"%PDF observed")
+        (staging / f"{tex_path.stem}.log").write_text(
+            f"NEXUS_BUILD_RUN:{run_id}\nOutput written on observed.pdf (3 pages).\n",
+            encoding="utf-8",
+        )
+        (staging / f"{tex_path.stem}.fls").write_text(
+            f"INPUT {tex_path}\n",
+            encoding="utf-8",
+        )
+        return 0
+
+    def fake_recorder(receipt_path, *, environment):
+        build_dir = root / "build" / "MANUEL_1NSI"
+        variant = receipt_path.name.removeprefix("MANUEL_1NSI_").removesuffix(
+            ".receipt.json"
+        )
+        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+        master_path = root.parent / receipt["master_path"]
+        fls_path = root.parent / receipt["fls_path"]
+        assert (build_dir / f"MANUEL_1NSI_{variant}.pdf").is_file()
+        assert receipt_path.is_file()
+        assert (build_dir / f"MANUEL_1NSI_{variant}.preflight.json").is_file()
+        assert f"INPUT {master_path}\n" in fls_path.read_text(encoding="utf-8")
+        observed["recorder_calls"].append(receipt_path)
+        observed["recorder_environment"] = dict(environment)
+        return 0
+
+    monkeypatch.setattr(assembler, "_compile_observed", fake_compile)
+    monkeypatch.setattr(
+        assembler.legacy,
+        "preflight_book_pdf",
+        lambda *_args, **_kwargs: 0,
+    )
+    monkeypatch.setattr(
+        assembler.legacy,
+        "verify_pdf",
+        lambda *_args, **_kwargs: 0,
+    )
+    monkeypatch.setattr(assembler, "_pdf_page_count", lambda *_args, **_kwargs: 3)
+    monkeypatch.setattr(
+        assembler,
+        "_collect_tool_versions",
+        lambda *_args, **_kwargs: dict(TOOL_VERSIONS),
+    )
+    monkeypatch.setattr(assembler, "_invoke_recorder", fake_recorder)
+    monkeypatch.setattr(assembler.secrets, "token_hex", lambda _size: RUN_ID)
+    return observed
+
+
+def test_observed_master_wraps_every_object_with_canonical_trace_markers(
+    monkeypatch, tmp_path, assembler
+):
+    root = tmp_path / "repository" / "NSI"
+    _prepare_root(root)
+    _patch_root(monkeypatch, assembler, root)
+    context = assembler._manual_context("eleve")
+
+    master = assembler._render_context(
+        context,
+        run_id=RUN_ID,
+        repository_root=root.parent,
+    )
+
+    assert master.count(f"NEXUS_BUILD_RUN:{RUN_ID}") == 1
+    for path in assembler.collect_variant_objects("eleve"):
+        canonical = path.relative_to(root.parent).as_posix()
+        token = hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:40]
+        assert master.count(f"NEXUS_OBJECT_BEGIN:{token}") == 1
+        assert master.count(f"NEXUS_OBJECT_END:{token}") == 1
+
+
+def test_observed_compiler_uses_shared_lualatex_recorder_primitive(
+    monkeypatch, tmp_path, assembler
+):
+    staging = tmp_path / "staging"
+    staging.mkdir()
+    tex_path = staging / "MANUEL_1NSI_eleve.tex"
+    tex_path.write_text("master", encoding="utf-8")
+    calls = []
+
+    def compile_tex(path, build_dir, **kwargs):
+        calls.append((path, build_dir, kwargs))
+        (staging / "MANUEL_1NSI_eleve.pdf").write_bytes(b"%PDF")
+        (staging / "MANUEL_1NSI_eleve.log").write_text("log", encoding="utf-8")
+        (staging / "MANUEL_1NSI_eleve.fls").write_text("fls", encoding="utf-8")
+        return 0
+
+    monkeypatch.setattr(assembler.legacy, "compile_tex", compile_tex)
+    runner = object()
+    environment = {"SOURCE_DATE_EPOCH": "1770000000"}
+
+    assert (
+        assembler._compile_observed(
+            tex_path,
+            staging,
+            environment=environment,
+            runner=runner,
+        )
+        == 0
+    )
+    assert calls == [
+        (
+            tex_path,
+            staging,
+            {
+                "environment": environment,
+                "recorder": True,
+                "runner": runner,
+                "source_date_epoch": 1770000000,
+            },
+        )
+    ]
+
+
+@pytest.mark.parametrize("variant", VARIANTS)
+def test_observed_build_emits_closed_receipt_after_promotion(
+    monkeypatch, tmp_path, assembler, variant
+):
+    root = tmp_path / "repository" / "NSI"
+    _prepare_root(root)
+    if variant != "eleve":
+        directory, source_type = {
+            "professeur": ("corriges", "corrige"),
+            "methodes": ("methodes", "methode"),
+            "remediation": ("remediation", "remediation"),
+            "amenagee": ("amenagee", "amenagee"),
+            "evaluations": ("evaluations", "evaluation"),
+            "projets": ("projet", "projet"),
+        }[variant]
+        _write_meta(
+            root / "chapitres" / CHAPTERS[0] / directory / "01_variant.tex",
+            CHAPTERS[0],
+            source_type,
+            variant.upper(),
+        )
+    _patch_root(monkeypatch, assembler, root)
+    epoch = _write_reproducibility_control(root.parent)
+    observed = _observed_build_fakes(monkeypatch, assembler, root)
+
+    assert assembler.build_manual(variant, record_observed=True) == 0
+
+    build_dir = root / "build" / "MANUEL_1NSI"
+    receipt_path = build_dir / f"MANUEL_1NSI_{variant}.receipt.json"
+    report_path = build_dir / f"MANUEL_1NSI_{variant}.preflight.json"
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    assert set(receipt) == assembler.RECEIPT_FIELDS
+    assert not {"included_objects", "excluded_objects", "ordered_trace"} & set(
+        receipt
+    )
+    assert receipt["manual"] == "1NSI"
+    assert receipt["variant"] == variant
+    assert receipt["run_id"] == RUN_ID
+    assert receipt["pdf_path"] == (
+        f"NSI/build/MANUEL_1NSI/MANUEL_1NSI_{variant}.pdf"
+    )
+    assert receipt["master_path"].startswith("NSI/build/MANUEL_1NSI/")
+    assert receipt["log_path"].startswith("NSI/build/MANUEL_1NSI/")
+    assert receipt["fls_path"].startswith("NSI/build/MANUEL_1NSI/")
+    assert receipt["preflight_report"].startswith("NSI/build/MANUEL_1NSI/")
+    assert receipt["generated_dependencies"] == []
+    assert receipt["tool_versions"] == TOOL_VERSIONS
+    assert receipt["reproducibility"]["source_date_epoch"] == epoch
+    assert observed["source_date_epoch"] == str(epoch)
+    assert len(observed["recorder_calls"]) == 1
+    assert set(report) == assembler.PREFLIGHT_FIELDS
+    assert report["pdf_sha256"] == receipt["evidence_sha256"]["pdf"]
+    if variant in STUDENT_VARIANTS:
+        assert receipt["gates"]["student_separation"] == {"passed": True}
+    else:
+        assert "student_separation" not in receipt["gates"]
+
+
+@pytest.mark.parametrize(
+    "failure",
+    ["compile", "preflight", "verify", "promotion", "receipt"],
+)
+def test_observed_failure_before_recording_removes_receipt_and_report(
+    monkeypatch, tmp_path, assembler, failure
+):
+    root = tmp_path / "repository" / "NSI"
+    _prepare_root(root)
+    _patch_root(monkeypatch, assembler, root)
+    _write_reproducibility_control(root.parent)
+    observed = _observed_build_fakes(monkeypatch, assembler, root)
+    build_dir = root / "build" / "MANUEL_1NSI"
+    build_dir.mkdir(parents=True)
+    receipt = build_dir / "MANUEL_1NSI_eleve.receipt.json"
+    report = build_dir / "MANUEL_1NSI_eleve.preflight.json"
+    receipt.write_text("stale", encoding="utf-8")
+    report.write_text("stale", encoding="utf-8")
+    if failure == "compile":
+        monkeypatch.setattr(
+            assembler,
+            "_compile_observed",
+            lambda *_args, **_kwargs: 1,
+        )
+    elif failure == "preflight":
+        monkeypatch.setattr(
+            assembler.legacy,
+            "preflight_book_pdf",
+            lambda *_args, **_kwargs: 1,
+        )
+    elif failure == "verify":
+        monkeypatch.setattr(
+            assembler.legacy,
+            "verify_pdf",
+            lambda *_args, **_kwargs: 1,
+        )
+    elif failure == "promotion":
+        monkeypatch.setattr(
+            assembler.legacy,
+            "_promote_book_artifacts",
+            lambda *_args, **_kwargs: (_ for _ in ()).throw(
+                OSError("promotion refusee")
+            ),
+        )
+    else:
+        real_atomic_write = assembler._atomic_write_json
+
+        def fail_receipt_write(path, payload):
+            real_atomic_write(path, payload)
+            if path == receipt:
+                raise OSError("receipt refuse")
+
+        monkeypatch.setattr(assembler, "_atomic_write_json", fail_receipt_write)
+
+    assert assembler.build_manual("eleve", record_observed=True) == 1
+
+    assert not receipt.exists()
+    assert not report.exists()
+    assert observed["recorder_calls"] == []
+    if failure in {"compile", "preflight", "verify", "promotion"}:
+        assert not (build_dir / "MANUEL_1NSI_eleve.pdf").exists()
+
+
+def test_observed_recorder_failure_rolls_back_receipt_and_report(
+    monkeypatch, tmp_path, assembler
+):
+    root = tmp_path / "repository" / "NSI"
+    _prepare_root(root)
+    _patch_root(monkeypatch, assembler, root)
+    _write_reproducibility_control(root.parent)
+    _observed_build_fakes(monkeypatch, assembler, root)
+    calls = []
+    monkeypatch.setattr(
+        assembler,
+        "_invoke_recorder",
+        lambda receipt_path, *, environment: calls.append(receipt_path) or 1,
+    )
+
+    assert assembler.build_manual("eleve", record_observed=True) == 1
+
+    build_dir = root / "build" / "MANUEL_1NSI"
+    assert calls == [build_dir / "MANUEL_1NSI_eleve.receipt.json"]
+    assert not (build_dir / "MANUEL_1NSI_eleve.receipt.json").exists()
+    assert not (build_dir / "MANUEL_1NSI_eleve.preflight.json").exists()
+    assert (build_dir / "MANUEL_1NSI_eleve.pdf").is_file()
+
+
+def test_cli_forwards_record_observed(monkeypatch, assembler):
+    calls = []
+    monkeypatch.setattr(
+        assembler,
+        "build_manual",
+        lambda variant, record_observed=False: calls.append(
+            (variant, record_observed)
+        )
+        or 0,
+    )
+
+    assert assembler.main(["--variant", "projets", "--record-observed"]) == 0
+    assert calls == [("projets", True)]
