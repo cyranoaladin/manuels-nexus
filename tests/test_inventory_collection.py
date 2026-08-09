@@ -7614,6 +7614,83 @@ def test_closed_contract_nonlocal_conditional_rebinding_keeps_owner_alias(
     assert "VARIANT_ORDERS" in {field for field, _reason in errors}
 
 
+def test_closed_contract_nested_nonlocal_reset_does_not_clear_uncalled_owner_alias(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def outer():
+    rules = VARIANT_ORDERS["eleve"]
+
+    def reset_rules():
+        nonlocal rules
+        rules = []
+
+    rules.append(("corriges", "*"))
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "VARIANT_ORDERS" in {field for field, _reason in errors}
+
+
+def test_closed_contract_exception_handler_sees_alias_from_try_prefix(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def mutate_rules():
+    rules = []
+    try:
+        rules = VARIANT_ORDERS["eleve"]
+        raise RuntimeError
+    except RuntimeError:
+        rules.append(("corriges", "*"))
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "VARIANT_ORDERS" in {field for field, _reason in errors}
+
+
+def test_closed_contract_allows_read_only_variant_order_accessor(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def select_rules(variant):
+    rules = VARIANT_ORDERS.get(variant, ())
+    return [(directory, pattern) for directory, pattern in rules]
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
 @pytest.mark.parametrize(
     "escape",
     [

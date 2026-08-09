@@ -412,6 +412,18 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             self.visit(statement)
         return self._alias_state()
 
+    def _visit_statement_prefix_alias_states(
+        self,
+        statements: list[ast.stmt],
+        state: list[dict[str, set[str]]],
+    ) -> list[list[dict[str, set[str]]]]:
+        self._mutable_aliases = self._copy_alias_state(state)
+        states = [self._alias_state()]
+        for statement in statements:
+            self.visit(statement)
+            states.append(self._alias_state())
+        return states
+
     def _value_module_names(self, value: ast.AST | None) -> set[str]:
         if not isinstance(value, ast.Name) or not isinstance(value.ctx, ast.Load):
             return set()
@@ -627,7 +639,6 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def visit_Call(self, node: ast.Call) -> None:
         if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
             self._record_mutation(_target_root_names(node.func.value))
-        self._record_module_names(self._accessor_module_names(node))
         for argument in node.args:
             self._record_escape(argument)
         for keyword in node.keywords:
@@ -692,11 +703,13 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
 
     def visit_Try(self, node: ast.Try) -> None:
         entry_state = self._alias_state()
-        body_state = self._visit_statements_from_alias_state(node.body, entry_state)
+        body_states = self._visit_statement_prefix_alias_states(node.body, entry_state)
+        body_state = body_states[-1]
         normal_state = self._visit_statements_from_alias_state(node.orelse, body_state)
         exit_states = [normal_state]
+        handler_entry_state = self._merge_alias_states(*body_states)
         for handler in node.handlers:
-            self._mutable_aliases = self._copy_alias_state(entry_state)
+            self._mutable_aliases = self._copy_alias_state(handler_entry_state)
             self.visit(handler)
             exit_states.append(self._alias_state())
         merged_state = self._merge_alias_states(*exit_states)
@@ -771,6 +784,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self,
         node: ast.FunctionDef | ast.AsyncFunctionDef,
     ) -> None:
+        enclosing_alias_state = self._alias_state()
         self._record_binding({node.name})
         for decorator in node.decorator_list:
             self.visit(decorator)
@@ -807,6 +821,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self._mutable_aliases.pop()
         self._class_runtime_bindings.pop()
         self._scopes.pop()
+        self._mutable_aliases = enclosing_alias_state
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         self._visit_function(node)
@@ -815,6 +830,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self._visit_function(node)
 
     def visit_Lambda(self, node: ast.Lambda) -> None:
+        enclosing_alias_state = self._alias_state()
         for default in (*node.args.defaults, *node.args.kw_defaults):
             if default is not None:
                 self._record_escape(default)
@@ -837,6 +853,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self._mutable_aliases.pop()
         self._class_runtime_bindings.pop()
         self._scopes.pop()
+        self._mutable_aliases = enclosing_alias_state
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
         self._record_binding({node.name})
