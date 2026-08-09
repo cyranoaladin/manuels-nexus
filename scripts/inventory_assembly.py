@@ -275,11 +275,24 @@ _MODULE_SCOPE = _LexicalScope(
 )
 
 
+def _guaranteed_class_statement_bindings(statement: ast.stmt) -> set[str]:
+    if isinstance(statement, ast.Assign):
+        return _binding_target_names(*statement.targets)
+    if isinstance(statement, ast.AnnAssign) and statement.value is not None:
+        return _binding_target_names(statement.target)
+    if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+        return {statement.name}
+    if isinstance(statement, (ast.Import, ast.ImportFrom)):
+        return _import_bound_names(statement)
+    return set()
+
+
 class _AuditedMutationVisitor(ast.NodeVisitor):
     def __init__(self, supported_top_level_node_ids: set[int]) -> None:
         self.ambiguous: set[str] = set()
         self.declared: set[str] = set()
         self._scopes: list[_LexicalScope] = [_MODULE_SCOPE]
+        self._class_runtime_bindings: list[set[str] | None] = [None]
         self._supported_top_level_node_ids = supported_top_level_node_ids
 
     def _binding_module_names(self, names: set[str]) -> set[str]:
@@ -294,13 +307,18 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         if scope.kind == "module":
             return True
         if scope.kind == "class":
-            return True
-        if name in scope.globals:
-            return True
-        if name in scope.locals or name in scope.nonlocals:
-            return False
+            if name in scope.globals:
+                return True
+            class_bindings = self._class_runtime_bindings[-1]
+            if class_bindings is not None and name in class_bindings:
+                return False
+        else:
+            if name in scope.globals:
+                return True
+            if name in scope.locals or name in scope.nonlocals:
+                return False
         for enclosing in reversed(self._scopes[:-1]):
-            if enclosing.kind != "function":
+            if enclosing.kind not in {"comprehension", "function"}:
                 continue
             if name in enclosing.locals or name in enclosing.nonlocals:
                 return False
@@ -326,13 +344,49 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def _record_mutation(self, names: set[str]) -> None:
         self._record_module_names(self._mutation_module_names(names))
 
-    def _record_alias(self, value: ast.AST | None) -> None:
-        if (
-            isinstance(value, ast.Name)
-            and value.id in _AUDITED_SELECTION_CONSTANTS
-            and self._name_resolves_to_module(value.id)
-        ):
-            self._record_module_names({value.id})
+    def _escaping_module_names(self, value: ast.AST | None) -> set[str]:
+        if value is None:
+            return set()
+        if isinstance(value, ast.Name):
+            if (
+                isinstance(value.ctx, ast.Load)
+                and value.id in _AUDITED_SELECTION_CONSTANTS
+                and self._name_resolves_to_module(value.id)
+            ):
+                return {value.id}
+            return set()
+        if isinstance(value, ast.Starred):
+            return self._escaping_module_names(value.value)
+        if isinstance(value, (ast.List, ast.Set, ast.Tuple)):
+            return set().union(
+                *(self._escaping_module_names(item) for item in value.elts)
+            )
+        if isinstance(value, ast.Dict):
+            return set().union(
+                *(
+                    self._escaping_module_names(item)
+                    for item in (*value.keys, *value.values)
+                )
+            )
+        if isinstance(value, ast.IfExp):
+            return self._escaping_module_names(
+                value.body
+            ) | self._escaping_module_names(value.orelse)
+        if isinstance(value, ast.BoolOp):
+            return set().union(
+                *(self._escaping_module_names(item) for item in value.values)
+            )
+        if isinstance(value, ast.NamedExpr):
+            return self._escaping_module_names(value.value)
+        if isinstance(value, ast.Await):
+            return self._escaping_module_names(value.value)
+        # Indexed reads select a value without exposing the audited container itself.
+        if isinstance(value, ast.Subscript):
+            return set()
+        return set()
+
+    def _record_escape(self, value: ast.AST | None) -> None:
+        self.ambiguous.update(self._escaping_module_names(value))
 
     def visit_Assign(self, node: ast.Assign) -> None:
         self._record_binding(
@@ -340,7 +394,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             supported=id(node) in self._supported_top_level_node_ids,
         )
         self._record_mutation(_mutation_target_names(*node.targets))
-        self._record_alias(node.value)
+        self._record_escape(node.value)
         self.generic_visit(node)
 
     def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
@@ -349,7 +403,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             supported=id(node) in self._supported_top_level_node_ids,
         )
         self._record_mutation(_mutation_target_names(node.target))
-        self._record_alias(node.value)
+        self._record_escape(node.value)
         self.generic_visit(node)
 
     def visit_AugAssign(self, node: ast.AugAssign) -> None:
@@ -359,7 +413,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
 
     def visit_NamedExpr(self, node: ast.NamedExpr) -> None:
         self._record_binding(_binding_target_names(node.target))
-        self._record_alias(node.value)
+        self._record_escape(node.value)
         self.generic_visit(node)
 
     def visit_Delete(self, node: ast.Delete) -> None:
@@ -370,6 +424,22 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def visit_Call(self, node: ast.Call) -> None:
         if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
             self._record_mutation(_target_root_names(node.func.value))
+        for argument in node.args:
+            self._record_escape(argument)
+        for keyword in node.keywords:
+            self._record_escape(keyword.value)
+        self.generic_visit(node)
+
+    def visit_Return(self, node: ast.Return) -> None:
+        self._record_escape(node.value)
+        self.generic_visit(node)
+
+    def visit_Yield(self, node: ast.Yield) -> None:
+        self._record_escape(node.value)
+        self.generic_visit(node)
+
+    def visit_YieldFrom(self, node: ast.YieldFrom) -> None:
+        self._record_escape(node.value)
         self.generic_visit(node)
 
     def visit_For(self, node: ast.For) -> None:
@@ -403,6 +473,10 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self._record_binding(_import_bound_names(node))
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+        if any(alias.name == "*" for alias in node.names):
+            # A star import may overwrite any audited global. It only invalidates
+            # assemblers that independently opt into the closed contract.
+            self.ambiguous.update(_AUDITED_SELECTION_CONSTANTS)
         self._record_binding(_import_bound_names(node))
 
     def visit_MatchAs(self, node: ast.MatchAs) -> None:
@@ -428,12 +502,15 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             self.visit(decorator)
         for default in (*node.args.defaults, *node.args.kw_defaults):
             if default is not None:
+                self._record_escape(default)
                 self.visit(default)
         self._scopes.append(
             _lexical_scope("function", node.body, arguments=node.args)
         )
+        self._class_runtime_bindings.append(None)
         for statement in node.body:
             self.visit(statement)
+        self._class_runtime_bindings.pop()
         self._scopes.pop()
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
@@ -445,6 +522,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def visit_Lambda(self, node: ast.Lambda) -> None:
         for default in (*node.args.defaults, *node.args.kw_defaults):
             if default is not None:
+                self._record_escape(default)
                 self.visit(default)
         lambda_collector = _ScopeBindingCollector()
         lambda_collector.visit(node.body)
@@ -457,7 +535,10 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
                 nonlocals=frozenset(),
             )
         )
+        self._class_runtime_bindings.append(None)
+        self._record_escape(node.body)
         self.visit(node.body)
+        self._class_runtime_bindings.pop()
         self._scopes.pop()
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
@@ -469,9 +550,60 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         for keyword in node.keywords:
             self.visit(keyword.value)
         self._scopes.append(_lexical_scope("class", node.body))
+        self._class_runtime_bindings.append(set())
         for statement in node.body:
             self.visit(statement)
+            class_bindings = self._class_runtime_bindings[-1]
+            if class_bindings is not None:
+                class_bindings.update(
+                    _guaranteed_class_statement_bindings(statement)
+                    - set(self._scopes[-1].globals)
+                )
+        self._class_runtime_bindings.pop()
         self._scopes.pop()
+
+    def _visit_comprehension(
+        self,
+        generators: list[ast.comprehension],
+        outputs: tuple[ast.expr, ...],
+    ) -> None:
+        if not generators:
+            return
+        self.visit(generators[0].iter)
+        local_names = set().union(
+            *(_binding_target_names(generator.target) for generator in generators)
+        )
+        self._scopes.append(
+            _LexicalScope(
+                kind="comprehension",
+                locals=frozenset(local_names),
+                globals=frozenset(),
+                nonlocals=frozenset(),
+            )
+        )
+        self._class_runtime_bindings.append(None)
+        for index, generator in enumerate(generators):
+            if index:
+                self.visit(generator.iter)
+            for condition in generator.ifs:
+                self.visit(condition)
+        for output in outputs:
+            self._record_escape(output)
+            self.visit(output)
+        self._class_runtime_bindings.pop()
+        self._scopes.pop()
+
+    def visit_ListComp(self, node: ast.ListComp) -> None:
+        self._visit_comprehension(node.generators, (node.elt,))
+
+    def visit_SetComp(self, node: ast.SetComp) -> None:
+        self._visit_comprehension(node.generators, (node.elt,))
+
+    def visit_DictComp(self, node: ast.DictComp) -> None:
+        self._visit_comprehension(node.generators, (node.key, node.value))
+
+    def visit_GeneratorExp(self, node: ast.GeneratorExp) -> None:
+        self._visit_comprehension(node.generators, (node.elt,))
 
 
 def _ast_latex_inputs(tree: ast.AST) -> list[tuple[str, str]]:

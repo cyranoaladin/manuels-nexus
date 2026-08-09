@@ -7052,6 +7052,55 @@ def test_closed_contract_rejects_function_global_import_binding(
     assert "ORDER" in {field for field, _reason in errors}
 
 
+def test_closed_contract_rejects_module_star_import_used_by_function(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''from runtime_contract import *
+
+def select_rules(variant):
+    return VARIANT_ORDERS[variant]
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert {field for field, _reason in errors} >= {
+        "ELEVE_ALLOWED_TYPES",
+        "VARIANT_ORDERS",
+    }
+
+
+def test_module_star_import_does_not_opt_legacy_assembler_into_closed_contract(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''CHAPITRES = ["1NSI-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+from runtime_contract import *
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
 def test_closed_contract_allows_class_attributes_with_audited_names(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -7072,6 +7121,83 @@ def test_closed_contract_allows_class_attributes_with_audited_names(
         "NSI/scripts/assemble_manuel.py",
         analysis,
     ) == []
+
+
+def test_closed_contract_allows_class_local_binding_before_mutation(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''class LocalContract:
+    ELEVE_ALLOWED_TYPES = []
+    ELEVE_ALLOWED_TYPES.append("corrige")
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
+def test_closed_contract_rejects_unshadowed_class_body_mutation(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''class ContractMutator:
+    ELEVE_ALLOWED_TYPES.append("corrige")
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "ELEVE_ALLOWED_TYPES" in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
+    "class_body",
+    [
+        '''    ELEVE_ALLOWED_TYPES.append("corrige")
+    ELEVE_ALLOWED_TYPES = []
+''',
+        '''    if enabled:
+        ELEVE_ALLOWED_TYPES = []
+    ELEVE_ALLOWED_TYPES.append("corrige")
+''',
+    ],
+    ids=("later-binding", "conditional-binding"),
+)
+def test_closed_contract_class_bindings_do_not_mask_global_retroactively(
+    tmp_path: Path,
+    inventory_module,
+    class_body: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source("class ContractMutator:\n" + class_body),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "ELEVE_ALLOWED_TYPES" in {field for field, _reason in errors}
 
 
 def test_closed_contract_rejects_method_mutating_unshadowed_global(
@@ -7127,6 +7253,112 @@ def test_closed_contract_rejects_aliases_of_global_mutable_constants(
 ) -> None:
     assembler = tmp_path / "assemble_manuel.py"
     _write(assembler, _closed_contract_source(alias_binding))
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert expected_field in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
+    ("escape", "expected_field"),
+    [
+        ("mutate(VARIANT_ORDERS)\n", "VARIANT_ORDERS"),
+        ("helper(values=ELEVE_ALLOWED_TYPES)\n", "ELEVE_ALLOWED_TYPES"),
+        ("def helper(orders=VARIANT_ORDERS):\n    pass\n", "VARIANT_ORDERS"),
+        ('box = {"orders": VARIANT_ORDERS}\n', "VARIANT_ORDERS"),
+        ("box = [ELEVE_ALLOWED_TYPES]\n", "ELEVE_ALLOWED_TYPES"),
+    ],
+    ids=("call", "keyword", "default", "dict", "list"),
+)
+def test_closed_contract_rejects_mutable_constant_escapes(
+    tmp_path: Path,
+    inventory_module,
+    escape: str,
+    expected_field: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(assembler, _closed_contract_source(escape))
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert expected_field in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
+    "comprehension",
+    [
+        "[VARIANT_ORDERS for VARIANT_ORDERS in values]",
+        "{ELEVE_ALLOWED_TYPES for ELEVE_ALLOWED_TYPES in values}",
+        "{VARIANT_ORDERS: item for VARIANT_ORDERS, item in values}",
+        "(ELEVE_ALLOWED_TYPES for ELEVE_ALLOWED_TYPES in values)",
+    ],
+    ids=("list", "set", "dict", "generator"),
+)
+def test_closed_contract_allows_local_comprehension_targets(
+    tmp_path: Path,
+    inventory_module,
+    comprehension: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            "def collect(values):\n"
+            f"    result = {comprehension}\n"
+            "    return result\n"
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
+@pytest.mark.parametrize(
+    ("comprehension", "expected_field"),
+    [
+        ("[VARIANT_ORDERS for item in values]", "VARIANT_ORDERS"),
+        (
+            "{helper(values=ELEVE_ALLOWED_TYPES) for item in values}",
+            "ELEVE_ALLOWED_TYPES",
+        ),
+        (
+            "{item: VARIANT_ORDERS for item in values}",
+            "VARIANT_ORDERS",
+        ),
+        (
+            "(mutate(ELEVE_ALLOWED_TYPES) for item in values)",
+            "ELEVE_ALLOWED_TYPES",
+        ),
+    ],
+    ids=("list", "set", "dict", "generator"),
+)
+def test_closed_contract_rejects_global_escapes_in_comprehensions(
+    tmp_path: Path,
+    inventory_module,
+    comprehension: str,
+    expected_field: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            "def collect(values):\n"
+            f"    result = {comprehension}\n"
+            "    return result\n"
+        ),
+    )
 
     analysis = inventory_module.analyze_assembler(assembler)
     errors = inventory_module._assembly_core.validate_analysis(
