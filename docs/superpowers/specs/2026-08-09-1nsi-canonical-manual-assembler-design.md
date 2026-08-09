@@ -25,9 +25,11 @@ livrables, sans créer ni modifier un assemblage TNSI.
 
 Créer `NSI/scripts/assemble_manuel.py` comme adaptateur canonique dédié. Ce
 module porte les déclarations littérales consommées par l'analyse statique et
-les utilise aussi à l'exécution. Il réemploie les primitives sûres de
-chargement, rendu, compilation, préflight et promotion déjà éprouvées dans
-`NSI/scripts/assemble.py`.
+les utilise aussi à l'exécution. En particulier, un littéral fermé
+`VARIANT_ORDERS` associe chaque variante à ses règles de sélection ; l'inventaire
+lit ce même littéral par AST au lieu de maintenir une seconde table implicite.
+Il réemploie les primitives sûres de chargement, rendu, compilation, préflight
+et promotion déjà éprouvées dans `NSI/scripts/assemble.py`.
 
 Cette approche évite de renommer l'assembleur historique de chapitre et évite
 d'introduire dans l'inventaire une exception qui interpréterait directement le
@@ -48,6 +50,12 @@ manifeste JSON NSI.
   banque est rendue en mode professeur.
 - `projets` : uniquement les objets du répertoire `projet/`, en mode élève.
 
+Le gabarit de livre reçoit un emplacement fermé de configuration de variante.
+Les cinq variantes élèves y injectent `\nxVersionProfesseurfalse` et la
+neutralisation du corps de `corrige`. `professeur` et `evaluations` injectent
+`\nxVersionProfesseurtrue` sans neutraliser `corrige`. Aucun choix de rôle ne
+repose sur une recherche textuelle dans le nom de sortie.
+
 L'alias historique `complet` reste accepté par `assemble.py` pour ne pas casser
 les usages existants, mais n'est pas une variante déclarée par l'assembleur
 canonique.
@@ -60,11 +68,43 @@ l'allowlist des assembleurs suivis. Son analyse statique doit lire :
 - un littéral `CHAPITRES` contenant exactement les dix chapitres du manifeste ;
 - un littéral `ORDER` couvrant tous les répertoires métier ;
 - un littéral `VARIANTS` contenant exactement les sept variantes canoniques ;
+- un littéral `VARIANT_ORDERS` donnant les règles effectives des sept variantes ;
 - les filtres élève fail-closed exigés par le modèle.
 
-Les sélections spécialisées `evaluations` et `projets` sont reconnues à la fois
-par l'assembleur réel et par `inventory_assembly.select_items`, afin que la
-déclaration auditée corresponde à la construction exécutée.
+`inventory_assembly.select_items` consomme `VARIANT_ORDERS`, comme l'assembleur
+réel. Un test d'intégration compare, variante par variante, la liste ordonnée des
+objets META sélectionnés au runtime avec `included_objects` calculé par
+l'inventaire. Toute divergence de chemins est bloquante.
+
+## Preflight sensible au rôle
+
+Le préflight commun continue de contrôler journaux LaTeX, métadonnées, outline,
+liens et lisibilité pour les sept variantes. Le détecteur de fuite élève est
+activé uniquement pour `eleve`, `methodes`, `remediation`, `amenagee` et
+`projets`. Il est désactivé explicitement pour `professeur` et `evaluations`, où
+les corrigés et barèmes sont contractuels. Cette décision est portée par une
+valeur de rôle fermée, jamais déduite du nom du fichier de sortie.
+
+## Builds observés
+
+`audit/BUILD_PRODUCERS.yaml` déclare un producteur 1NSI couvrant exactement les
+sept identifiants `nsi:manual:1NSI:<variant>`. Après compilation et préflight,
+l'assembleur peut émettre un receipt fermé puis appeler
+`scripts/build_manifest.py --receipt`, selon le même contrat de défiance que
+l'assembleur mathématique.
+
+Le receipt contient la variante canonique, l'assembly ID, les objets inclus et
+exclus, la trace ordonnée, les dépendances générées, les preuves de compilation,
+préflight, séparation élève lorsque applicable et reproductibilité. Une
+compilation locale sans `--record-observed` reste possible ; elle ne rend pas le
+livrable visible dans la matrice.
+
+Les sorties canoniques vivent sous `NSI/build/MANUEL_1NSI/` et sont nommées
+`MANUEL_1NSI_<variante>.pdf`, avec une variante parmi les sept valeurs
+contractuelles. Le chemin et le champ `variant` du receipt portent donc la même
+identité interprétable par l'inventaire. Les anciennes sorties
+`NSI/build/books/MANUEL_1NSI_v1*.pdf`, ignorées par Git, restent des sorties de
+compatibilité non observées et ne sont jamais utilisées comme preuve canonique.
 
 ## Sécurité et erreurs
 
@@ -74,6 +114,8 @@ déclaration auditée corresponde à la construction exécutée.
 - Les sorties sont construites en staging, préflightées puis promues ; un échec
   ne laisse pas de PDF canonique périmé.
 - Les variantes élèves filtrent les chemins et types professeur avant rendu.
+- Un build professeur ou évaluations ne peut pas contourner les contrôles PDF
+  communs ; seule la recherche de fuite élève est inapplicable à ces rôles.
 - Aucun manifeste, chapitre, source ou sortie TNSI n'est créé ou modifié.
 
 ## Vérification
@@ -82,10 +124,19 @@ déclaration auditée corresponde à la construction exécutée.
 - test d'inventaire prouvant sept variantes manuelles, dix chapitres couverts,
   zéro chapitre 1NSI hors manuel et zéro objet 1NSI non assemblé ;
 - tests d'étanchéité élève et de couverture des 109 corrigés professeur ;
-- compilation réelle des sept variantes 1NSI et préflight PDF ;
+- test de parité exacte entre sélections runtime et inventaire ;
+- compilation réelle des sept variantes 1NSI, préflight PDF puis enregistrement
+  des sept reçus observés sur un arbre propre ;
 - régénération contrôlée de l'inventaire et comparaison de baseline ;
-- `--validate-model`, `--fail-on-new` et `--release-strict` ;
-- diff TNSI vide sur `NSI/chapitres/TNSI-*` et absence de manifeste TNSI.
+- `--validate-model` et `--fail-on-new` verts ; `--release-strict` reste rouge
+  attendu tant que les statuts 1NSI et les autres dimensions de publication ne
+  sont pas approuvés ;
+- diff TNSI vide sur `NSI/chapitres/TNSI-*`, absence de manifeste TNSI et test
+  statique garantissant que TNSI conserve ses seules variantes de chapitre,
+  sans assemblage manuel déclaré.
+
+La baseline de dette n'est pas réécrite dans cette passe : les anomalies
+résolues sont constatées par comparaison avec la baseline approuvée existante.
 
 ## Hors périmètre
 
