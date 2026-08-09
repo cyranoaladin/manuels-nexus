@@ -484,6 +484,14 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def _assignment_alias_names(self, value: ast.AST | None) -> set[str]:
         return self._derived_alias_names(value)
 
+    def _mutation_expression_module_names(self, value: ast.AST | None) -> set[str]:
+        module_names = self._derived_alias_names(value)
+        if module_names:
+            return module_names
+        if isinstance(value, (ast.Attribute, ast.Subscript)):
+            return self._mutation_expression_module_names(value.value)
+        return set()
+
     def _clear_aliases(self, names: set[str]) -> None:
         for name in names:
             self._mutable_aliases[self._alias_binding_index(name)].pop(name, None)
@@ -501,6 +509,10 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
                 aliases[name] = set(module_names)
             return
         if names and names <= set(scope.nonlocals):
+            # Calls are not executed by the static analyzer. Introducing an
+            # audited alias through nonlocal is therefore unsafe regardless of
+            # whether a later call can be proven.
+            self._record_module_names(module_names)
             for name in names:
                 self._mutable_aliases[self._alias_binding_index(name)][name] = set(
                     module_names
@@ -604,6 +616,11 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             supported=id(node) in self._supported_top_level_node_ids,
         )
         self._record_mutation(_mutation_target_names(*node.targets))
+        self._record_module_names(
+            set().union(
+                *(self._mutation_expression_module_names(target) for target in node.targets)
+            )
+        )
         self._record_assignment_value(tuple(node.targets), node.value)
         self.generic_visit(node)
 
@@ -613,11 +630,17 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             supported=id(node) in self._supported_top_level_node_ids,
         )
         self._record_mutation(_mutation_target_names(node.target))
+        self._record_module_names(
+            self._mutation_expression_module_names(node.target)
+        )
         self._record_assignment_value((node.target,), node.value)
         self.generic_visit(node)
 
     def visit_AugAssign(self, node: ast.AugAssign) -> None:
         self._record_mutation(_target_root_names(node.target))
+        self._record_module_names(
+            self._mutation_expression_module_names(node.target)
+        )
         self._record_binding(_binding_target_names(node.target))
         self.generic_visit(node)
 
@@ -629,6 +652,11 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def visit_Delete(self, node: ast.Delete) -> None:
         self._record_binding(_binding_target_names(*node.targets))
         self._record_mutation(_mutation_target_names(*node.targets))
+        self._record_module_names(
+            set().union(
+                *(self._mutation_expression_module_names(target) for target in node.targets)
+            )
+        )
         deleted_names = _binding_target_names(*node.targets)
         self._clear_aliases(deleted_names)
         class_bindings = self._class_runtime_bindings[-1]
@@ -639,6 +667,9 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def visit_Call(self, node: ast.Call) -> None:
         if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
             self._record_mutation(_target_root_names(node.func.value))
+            self._record_module_names(
+                self._mutation_expression_module_names(node.func.value)
+            )
         for argument in node.args:
             self._record_escape(argument)
         for keyword in node.keywords:

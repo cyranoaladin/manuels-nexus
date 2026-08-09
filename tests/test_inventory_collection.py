@@ -7692,6 +7692,64 @@ def test_closed_contract_allows_read_only_variant_order_accessor(
 
 
 @pytest.mark.parametrize(
+    "mutation",
+    [
+        '''def mutate_rules():
+    VARIANT_ORDERS.get("eleve", []).append(("corriges", "*"))
+''',
+        '''def mutate_rules():
+    VARIANT_ORDERS.get("eleve", [])[0] = ("corriges", "*")
+''',
+    ],
+    ids=("method", "subscript"),
+)
+def test_closed_contract_rejects_direct_accessor_result_mutation(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(assembler, _closed_contract_source(mutation))
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "VARIANT_ORDERS" in {field for field, _reason in errors}
+
+
+def test_closed_contract_rejects_nonlocal_alias_introduction(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def outer():
+    rules = []
+
+    def select_rules():
+        nonlocal rules
+        rules = VARIANT_ORDERS["eleve"]
+
+    select_rules()
+    rules.append(("corriges", "*"))
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "VARIANT_ORDERS" in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
     "escape",
     [
         "def expose(variant):\n    return VARIANT_ORDERS[variant]\n",
