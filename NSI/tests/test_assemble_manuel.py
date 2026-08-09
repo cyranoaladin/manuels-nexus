@@ -162,6 +162,20 @@ def test_canonical_literals_are_exact_and_runtime_closed(assembler):
     )
 
 
+def test_local_and_observed_manuals_share_source_date_epoch():
+    manifest = json.loads(
+        (ROOT / "manifests/books/1NSI.json").read_text(encoding="utf-8")
+    )
+    reproducibility = json.loads(
+        (
+            ROOT.parent
+            / "Mathematiques/manuel-maths/config/reproducible-build.json"
+        ).read_text(encoding="utf-8")
+    )
+
+    assert manifest["source_date_epoch"] == reproducibility["source_date_epoch"]
+
+
 def test_student_selection_includes_contractual_ece_object(
     monkeypatch, tmp_path, assembler
 ):

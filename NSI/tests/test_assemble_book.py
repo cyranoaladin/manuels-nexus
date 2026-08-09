@@ -59,7 +59,7 @@ def test_load_book_manifest_1nsi():
     assert manifest["author"]
     assert manifest["subject"]
     assert manifest["keywords"]
-    assert manifest["source_date_epoch"] == 1786147200
+    assert manifest["source_date_epoch"] == 1785962466
     assert len(manifest["chapters"]) == 10
 
 
