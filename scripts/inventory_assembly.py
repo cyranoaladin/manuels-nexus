@@ -51,6 +51,7 @@ _MUTATING_METHODS = frozenset(
         "update",
     }
 )
+_NESTED_MUTABLE_ACCESSORS = frozenset({"get", "items", "values"})
 
 
 def _canonicalize_literal(value: Any) -> Any:
@@ -364,30 +365,116 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
                 return set()
         return set()
 
+    def _alias_binding_index(self, name: str) -> int:
+        current_index = len(self._scopes) - 1
+        current_scope = self._scopes[current_index]
+        if current_scope.kind == "module":
+            return 0
+        if name in current_scope.globals:
+            return 0
+        if name in current_scope.nonlocals:
+            for index in range(current_index - 1, 0, -1):
+                scope = self._scopes[index]
+                if scope.kind == "function" and name in scope.locals:
+                    return index
+        return current_index
+
+    @staticmethod
+    def _copy_alias_state(
+        state: list[dict[str, set[str]]],
+    ) -> list[dict[str, set[str]]]:
+        return [
+            {name: set(module_names) for name, module_names in aliases.items()}
+            for aliases in state
+        ]
+
+    def _alias_state(self) -> list[dict[str, set[str]]]:
+        return self._copy_alias_state(self._mutable_aliases)
+
+    def _merge_alias_states(
+        self,
+        *states: list[dict[str, set[str]]],
+    ) -> list[dict[str, set[str]]]:
+        merged = [{} for _scope in self._scopes]
+        for state in states:
+            for index, aliases in enumerate(state):
+                for name, module_names in aliases.items():
+                    merged[index].setdefault(name, set()).update(module_names)
+        return merged
+
+    def _visit_statements_from_alias_state(
+        self,
+        statements: list[ast.stmt],
+        state: list[dict[str, set[str]]],
+    ) -> list[dict[str, set[str]]]:
+        self._mutable_aliases = self._copy_alias_state(state)
+        for statement in statements:
+            self.visit(statement)
+        return self._alias_state()
+
+    def _value_module_names(self, value: ast.AST | None) -> set[str]:
+        if not isinstance(value, ast.Name) or not isinstance(value.ctx, ast.Load):
+            return set()
+        alias_names = self._alias_module_names(value.id)
+        if alias_names:
+            return alias_names
+        if value.id in _AUDITED_SELECTION_CONSTANTS and self._name_resolves_to_module(
+            value.id
+        ):
+            return {value.id}
+        return set()
+
     def _indexed_module_names(self, value: ast.AST | None) -> set[str]:
         if not isinstance(value, ast.Subscript):
             return set()
         container = value.value
         if (
             isinstance(container, ast.Name)
-            and container.id == "VARIANT_ORDERS"
+            and container.id in _AUDITED_SELECTION_CONSTANTS
             and self._name_resolves_to_module(container.id)
         ):
             return {container.id}
         return set()
 
-    def _assignment_alias_names(self, value: ast.AST | None) -> set[str]:
+    def _accessor_module_names(self, value: ast.AST | None) -> set[str]:
+        if not isinstance(value, ast.Call) or not isinstance(value.func, ast.Attribute):
+            return set()
+        if value.func.attr not in _NESTED_MUTABLE_ACCESSORS:
+            return set()
+        return self._value_module_names(value.func.value)
+
+    def _derived_alias_names(self, value: ast.AST | None) -> set[str]:
         indexed_names = self._indexed_module_names(value)
         if indexed_names:
             return indexed_names
+        accessor_names = self._accessor_module_names(value)
+        if accessor_names:
+            return accessor_names
         if isinstance(value, ast.Name) and isinstance(value.ctx, ast.Load):
             return self._alias_module_names(value.id)
         return set()
 
+    def _iterated_alias_names(self, value: ast.AST | None) -> set[str]:
+        derived_names = self._indexed_module_names(value) | self._accessor_module_names(
+            value
+        )
+        if derived_names:
+            return derived_names
+        if isinstance(value, (ast.List, ast.Set, ast.Tuple)):
+            return set().union(
+                *(
+                    self._derived_alias_names(item) | self._iterated_alias_names(item)
+                    for item in value.elts
+                )
+            )
+        return set()
+
+    def _assignment_alias_names(self, value: ast.AST | None) -> set[str]:
+        return self._derived_alias_names(value)
+
     def _clear_aliases(self, names: set[str]) -> None:
-        aliases = self._mutable_aliases[-1]
         for name in names:
-            aliases.pop(name, None)
+            self._mutable_aliases[self._alias_binding_index(name)].pop(name, None)
 
     def _bind_aliases(self, names: set[str], module_names: set[str]) -> None:
         scope = self._scopes[-1]
@@ -401,7 +488,26 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             for name in names:
                 aliases[name] = set(module_names)
             return
+        if names and names <= set(scope.nonlocals):
+            for name in names:
+                self._mutable_aliases[self._alias_binding_index(name)][name] = set(
+                    module_names
+                )
+            return
         self._record_module_names(module_names)
+
+    def _record_iteration_aliases(
+        self,
+        target: ast.AST,
+        iterable: ast.AST,
+    ) -> set[str]:
+        bound_names = _binding_target_names(target)
+        self._record_binding(bound_names)
+        self._clear_aliases(bound_names)
+        alias_names = self._iterated_alias_names(iterable)
+        if alias_names:
+            self._bind_aliases(bound_names, alias_names)
+        return bound_names
 
     def _record_assignment_value(
         self,
@@ -473,6 +579,8 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             return self._escaping_module_names(value.value)
         if isinstance(value, ast.Subscript):
             return self._indexed_module_names(value)
+        if isinstance(value, ast.Call):
+            return self._accessor_module_names(value)
         return set()
 
     def _record_escape(self, value: ast.AST | None) -> None:
@@ -519,6 +627,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def visit_Call(self, node: ast.Call) -> None:
         if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
             self._record_mutation(_target_root_names(node.func.value))
+        self._record_module_names(self._accessor_module_names(node))
         for argument in node.args:
             self._record_escape(argument)
         for keyword in node.keywords:
@@ -539,22 +648,65 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
 
     def visit_For(self, node: ast.For) -> None:
         self.visit(node.iter)
-        bound_names = _binding_target_names(node.target)
-        self._record_binding(bound_names)
+        entry_state = self._alias_state()
+        bound_names = self._record_iteration_aliases(node.target, node.iter)
         class_bindings = self._class_runtime_bindings[-1]
         previous_bindings = set(class_bindings) if class_bindings is not None else None
         if class_bindings is not None:
             class_bindings.update(bound_names - set(self._scopes[-1].globals))
         for statement in node.body:
             self.visit(statement)
+        body_state = self._alias_state()
         if class_bindings is not None and previous_bindings is not None:
             class_bindings.clear()
             class_bindings.update(previous_bindings)
-        for statement in node.orelse:
-            self.visit(statement)
+        loop_state = self._merge_alias_states(entry_state, body_state)
+        else_state = self._visit_statements_from_alias_state(node.orelse, loop_state)
+        self._mutable_aliases = self._merge_alias_states(
+            entry_state,
+            body_state,
+            else_state,
+        )
 
     def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
         self.visit_For(node)
+
+    def visit_While(self, node: ast.While) -> None:
+        self.visit(node.test)
+        entry_state = self._alias_state()
+        body_state = self._visit_statements_from_alias_state(node.body, entry_state)
+        loop_state = self._merge_alias_states(entry_state, body_state)
+        else_state = self._visit_statements_from_alias_state(node.orelse, loop_state)
+        self._mutable_aliases = self._merge_alias_states(
+            entry_state,
+            body_state,
+            else_state,
+        )
+
+    def visit_If(self, node: ast.If) -> None:
+        self.visit(node.test)
+        entry_state = self._alias_state()
+        body_state = self._visit_statements_from_alias_state(node.body, entry_state)
+        else_state = self._visit_statements_from_alias_state(node.orelse, entry_state)
+        self._mutable_aliases = self._merge_alias_states(body_state, else_state)
+
+    def visit_Try(self, node: ast.Try) -> None:
+        entry_state = self._alias_state()
+        body_state = self._visit_statements_from_alias_state(node.body, entry_state)
+        normal_state = self._visit_statements_from_alias_state(node.orelse, body_state)
+        exit_states = [normal_state]
+        for handler in node.handlers:
+            self._mutable_aliases = self._copy_alias_state(entry_state)
+            self.visit(handler)
+            exit_states.append(self._alias_state())
+        merged_state = self._merge_alias_states(*exit_states)
+        self._mutable_aliases = self._visit_statements_from_alias_state(
+            node.finalbody,
+            merged_state,
+        )
+
+    def visit_TryStar(self, node: ast.TryStar) -> None:
+        self.visit_Try(node)
 
     def visit_With(self, node: ast.With) -> None:
         class_bindings = self._class_runtime_bindings[-1]
@@ -733,6 +885,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         for index, generator in enumerate(generators):
             if index:
                 self.visit(generator.iter)
+            self._record_iteration_aliases(generator.target, generator.iter)
             for condition in generator.ifs:
                 self.visit(condition)
         for output in outputs:

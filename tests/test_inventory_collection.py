@@ -7385,6 +7385,236 @@ def test_closed_contract_rejects_global_alias_of_indexed_rules(
 
 
 @pytest.mark.parametrize(
+    ("mutation", "expected_field"),
+    [
+        (
+            '''def mutate_rules():
+    for rules in VARIANT_ORDERS.values():
+        rules.append(("corriges", "*"))
+''',
+            "VARIANT_ORDERS",
+        ),
+        (
+            '''def mutate_rules():
+    for _variant, rules in VARIANT_ORDERS.items():
+        rules.append(("corriges", "*"))
+''',
+            "VARIANT_ORDERS",
+        ),
+        (
+            '''def mutate_rules():
+    rules = VARIANT_ORDERS.get("eleve")
+    rules.append(("corriges", "*"))
+''',
+            "VARIANT_ORDERS",
+        ),
+        (
+            '''def mutate_rule():
+    rule = ORDER[0]
+    rule[0] = "corriges"
+''',
+            "ORDER",
+        ),
+        (
+            '''def mutate_rules():
+    for rules in [VARIANT_ORDERS["eleve"]]:
+        rules.append(("corriges", "*"))
+''',
+            "VARIANT_ORDERS",
+        ),
+        (
+            '''def mutate_rules():
+    [
+        rules.append(("corriges", "*"))
+        for rules in [VARIANT_ORDERS["eleve"]]
+    ]
+''',
+            "VARIANT_ORDERS",
+        ),
+    ],
+    ids=("values", "items", "get", "order-subscript", "for-target", "comp-target"),
+)
+def test_closed_contract_rejects_nested_mutable_aliases(
+    tmp_path: Path,
+    inventory_module,
+    mutation: str,
+    expected_field: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(assembler, _closed_contract_source(mutation))
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert expected_field in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
+    "conditional_mutation",
+    [
+        '''def mutate_rules(enabled):
+    rules = VARIANT_ORDERS["eleve"]
+    if enabled:
+        rules = []
+    rules.append(("corriges", "*"))
+''',
+        '''def mutate_rules(enabled):
+    rules = VARIANT_ORDERS["eleve"]
+    if enabled:
+        rules = []
+    else:
+        pass
+    rules.append(("corriges", "*"))
+''',
+        '''def mutate_rules(enabled, finalize):
+    rules = VARIANT_ORDERS["eleve"]
+    try:
+        if enabled:
+            rules = []
+    except RuntimeError:
+        rules = []
+    finally:
+        if finalize:
+            rules = []
+    rules.append(("corriges", "*"))
+''',
+        '''def mutate_rules(values):
+    rules = VARIANT_ORDERS["eleve"]
+    for _value in values:
+        rules = []
+    rules.append(("corriges", "*"))
+''',
+        '''def mutate_rules(enabled):
+    rules = VARIANT_ORDERS["eleve"]
+    while enabled:
+        rules = []
+        enabled = False
+    rules.append(("corriges", "*"))
+''',
+    ],
+    ids=("if", "if-else", "try-except-finally", "for", "while"),
+)
+def test_closed_contract_keeps_aliases_possible_on_control_flow_paths(
+    tmp_path: Path,
+    inventory_module,
+    conditional_mutation: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(assembler, _closed_contract_source(conditional_mutation))
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "VARIANT_ORDERS" in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
+    "safe_rebinding",
+    [
+        '''def rebind_rules(enabled):
+    rules = VARIANT_ORDERS["eleve"]
+    if enabled:
+        rules = []
+    else:
+        rules = []
+    rules.append(("local", "*"))
+''',
+        '''def rebind_rules():
+    rules = VARIANT_ORDERS["eleve"]
+    try:
+        rules = []
+    except RuntimeError:
+        rules = []
+    rules.append(("local", "*"))
+''',
+        '''def rebind_rules():
+    rules = VARIANT_ORDERS["eleve"]
+    try:
+        action()
+    finally:
+        rules = []
+    rules.append(("local", "*"))
+''',
+    ],
+    ids=("if-else", "try-except", "finally"),
+)
+def test_closed_contract_allows_aliases_cleared_on_all_paths(
+    tmp_path: Path,
+    inventory_module,
+    safe_rebinding: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(assembler, _closed_contract_source(safe_rebinding))
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
+def test_closed_contract_nonlocal_rebinding_clears_owner_alias(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def outer():
+    rules = VARIANT_ORDERS["eleve"]
+
+    def rebind_rules():
+        nonlocal rules
+        rules = []
+        rules.append(("local", "*"))
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
+def test_closed_contract_nonlocal_conditional_rebinding_keeps_owner_alias(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def outer():
+    rules = VARIANT_ORDERS["eleve"]
+
+    def mutate_rules(enabled):
+        nonlocal rules
+        if enabled:
+            rules = []
+        rules.append(("corriges", "*"))
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "VARIANT_ORDERS" in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
     "escape",
     [
         "def expose(variant):\n    return VARIANT_ORDERS[variant]\n",
@@ -7596,6 +7826,32 @@ def test_closed_contract_allows_indexed_variant_order_reads(
     first_directory = rules[0][0]
     has_rules = rules != []
     return selected, first_directory, has_rules
+'''
+        ),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
+def test_closed_contract_allows_indexed_order_reads(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source(
+            '''def select_rule():
+    rule = ORDER[0]
+    selected = []
+    for part in rule:
+        selected.append(part)
+    directory = rule[0]
+    return selected, directory
 '''
         ),
     )
