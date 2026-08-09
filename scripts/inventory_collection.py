@@ -2855,13 +2855,31 @@ def _exclude_owned_generation_paths(
         for path, identity in allowed_generation_paths.items()
     }
 
-    def is_owned_generation_lock(path: str) -> bool:
+    def is_owned_generation_path(path: str) -> bool:
         normalized = _normalize_path_for_match(path)
         expected = allowed.get(normalized)
-        return (
-            normalized == GENERIC_LOCK_FILE
-            and expected is not None
-            and _path_matches_identity(repository, normalized, expected)
+        if expected is None or not _path_matches_identity(
+            repository,
+            normalized,
+            expected,
+        ):
+            return False
+        if normalized == GENERIC_LOCK_FILE:
+            return True
+        parts = PurePosixPath(normalized).parts
+        return bool(
+            len(parts) == 2
+            and _TRANSACTION_DIRECTORY_RE.fullmatch(parts[0])
+            and (
+                parts[1]
+                in {
+                    "journal-ready",
+                    "journal.json",
+                    "preparing.json",
+                    "transaction-owner",
+                }
+                or _TRANSACTION_ENTRY_RE.fullmatch(parts[1])
+            )
         )
 
     return [
@@ -2869,7 +2887,7 @@ def _exclude_owned_generation_paths(
         for entry in entries
         if not _status_paths(entry)
         or not all(
-            is_owned_generation_lock(path)
+            is_owned_generation_path(path)
             for path in _status_paths(entry)
         )
     ]
@@ -6798,6 +6816,31 @@ def _transaction_payload_digest(payload: bytes) -> str:
     return f"sha256:{hashlib.sha256(payload).hexdigest()}"
 
 
+def _owned_transaction_entry_identities(
+    transaction_name: str,
+    transaction_fd: int,
+    expected_entries: set[str],
+) -> dict[str, tuple[int, int]]:
+    actual_entries = set(os.listdir(transaction_fd))
+    if actual_entries != expected_entries:
+        raise InventoryError("transaction entries changed before validation")
+    identities: dict[str, tuple[int, int]] = {}
+    for entry in sorted(actual_entries):
+        metadata = os.stat(
+            entry,
+            dir_fd=transaction_fd,
+            follow_symlinks=False,
+        )
+        if not stat.S_ISREG(metadata.st_mode):
+            raise InventoryError(
+                f"transaction validation entry is not regular: {entry}"
+            )
+        identities[f"{transaction_name}/{entry}"] = _stat_identity(
+            metadata
+        )
+    return identities
+
+
 def _recover_interrupted_transactions(
     root: Path,
     *,
@@ -7213,7 +7256,9 @@ def _apply_atomic_payloads(
     root: Path,
     rendered_artifacts: dict[Path, str],
     *,
-    validate_before_apply: Callable[[], None] | None = None,
+    validate_before_apply: (
+        Callable[[Mapping[str, tuple[int, int]]], None] | None
+    ) = None,
     validate_state: Callable[[], None] | None = None,
 ) -> None:
     root = root.resolve()
@@ -7386,7 +7431,13 @@ def _apply_atomic_payloads(
         os.fsync(temp_fd)
         _require_repository_root_identity(root, root_stat)
         if validate_before_apply is not None:
-            validate_before_apply()
+            validate_before_apply(
+                _owned_transaction_entry_identities(
+                    temp_name,
+                    temp_fd,
+                    transaction_entries,
+                )
+            )
         for relative, stage_name in sorted(
             staged.items(),
             key=lambda item: str(item[0]),
@@ -9526,7 +9577,11 @@ def _safe_update_baseline_gate(
         )
 
 
-def _baseline_materialization_plan(root: Path) -> dict[str, Any]:
+def _baseline_materialization_plan(
+    root: Path,
+    *,
+    owned_generation_lock: Mapping[str, tuple[int, int]] | None = None,
+) -> dict[str, Any]:
     policy = _baseline_qualification.load_policy(
         root / BASELINE_QUALIFICATION_POLICY_FILE
     )
@@ -9535,7 +9590,10 @@ def _baseline_materialization_plan(root: Path) -> dict[str, Any]:
         root=root,
         path=Path(BASELINE_QUALIFICATION_POLICY_FILE),
     )
-    inventory = build_inventory(root)
+    inventory = _build_inventory(
+        root,
+        owned_generation_lock=owned_generation_lock,
+    )
     plan = _baseline_qualification.plan_materialization(
         policy,
         _baseline_qualification_records(inventory),
@@ -9637,12 +9695,18 @@ def _materialize_baseline_qualifications(
     _validate_materialization_destinations(root, rendered)
     diffs = _compare_rendered_artifacts(root, rendered)
 
-    def revalidate_plan() -> None:
+    def revalidate_plan(
+        *,
+        owned_generation_lock: Mapping[str, tuple[int, int]] | None = None,
+    ) -> None:
         if _repo_head_sha(root, required=True) != initial_head:
             raise InventoryError(
                 "HEAD modifié pendant la validation de matérialisation"
             )
-        revalidated = _baseline_materialization_plan(root)
+        revalidated = _baseline_materialization_plan(
+            root,
+            owned_generation_lock=owned_generation_lock,
+        )
         if _materialization_plan_identity(
             revalidated
         ) != _materialization_plan_identity(plan):
@@ -9672,9 +9736,9 @@ def _materialize_baseline_qualifications(
             reasons=reasons,
         )
     else:
-        with _lock_generation(root):
+        with _lock_generation(root) as lock_identity:
             _recover_repository_transactions(root)
-            revalidate_plan()
+            revalidate_plan(owned_generation_lock=lock_identity)
 
             def require_unchanged_head() -> None:
                 if _repo_head_sha(root, required=True) != initial_head:
@@ -9685,7 +9749,12 @@ def _materialize_baseline_qualifications(
             _apply_atomic_payloads(
                 root,
                 rendered,
-                validate_before_apply=revalidate_plan,
+                validate_before_apply=lambda transaction_identity: revalidate_plan(
+                    owned_generation_lock={
+                        **lock_identity,
+                        **transaction_identity,
+                    }
+                ),
                 validate_state=require_unchanged_head,
             )
         success = not plan["unqualified"]

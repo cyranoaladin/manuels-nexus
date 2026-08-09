@@ -1488,6 +1488,138 @@ def test_materialize_baseline_qualifications_check_is_read_only(
     assert _git_status_bytes(repository) == before
 
 
+def test_materialization_revalidations_use_only_the_owned_lock_identity(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    subprocess.run(
+        [
+            "git",
+            "clone",
+            "-q",
+            "--no-hardlinks",
+            str(ROOT),
+            str(repository),
+        ],
+        check=True,
+    )
+    original_lock = inventory_module._lock_generation
+    original_plan = inventory_module._baseline_materialization_plan
+    original_manifest_loader = inventory_module._load_observed_build_manifest
+    lock_identities: list[dict[str, tuple[int, int]]] = []
+    plan_lock_arguments: list[dict[str, tuple[int, int]] | None] = []
+    manifest_lock_arguments: list[dict[str, tuple[int, int]] | None] = []
+
+    @contextmanager
+    def observed_lock(root: Path):
+        with original_lock(root) as lock_identity:
+            lock_identities.append(lock_identity)
+            arbitrary = root / "notes-utilisateur.txt"
+            _write(arbitrary, "WIP utilisateur\n")
+            assert inventory_module._observed_git_state(
+                root,
+                allowed_generation_paths=lock_identity,
+            )[2] is True
+            arbitrary.unlink()
+            yield lock_identity
+
+    def observed_plan(
+        root: Path,
+        *,
+        owned_generation_lock: dict[str, tuple[int, int]] | None = None,
+    ) -> dict[str, object]:
+        plan_lock_arguments.append(
+            dict(owned_generation_lock)
+            if owned_generation_lock is not None
+            else None
+        )
+        if owned_generation_lock is None:
+            return original_plan(root)
+        arbitrary = root / "notes-utilisateur.txt"
+        _write(arbitrary, "WIP utilisateur\n")
+        assert inventory_module._observed_git_state(
+            root,
+            allowed_generation_paths=owned_generation_lock,
+        )[2] is True
+        arbitrary.unlink()
+        return original_plan(
+            root,
+            owned_generation_lock=owned_generation_lock,
+        )
+
+    def observed_manifest_loader(
+        root: Path,
+        *,
+        owned_generation_lock: dict[str, tuple[int, int]] | None = None,
+        **kwargs: object,
+    ) -> list[dict[str, object]]:
+        manifest_lock_arguments.append(
+            dict(owned_generation_lock)
+            if owned_generation_lock is not None
+            else None
+        )
+        return original_manifest_loader(
+            root,
+            owned_generation_lock=owned_generation_lock,
+            **kwargs,
+        )
+
+    monkeypatch.setattr(inventory_module, "_lock_generation", observed_lock)
+    monkeypatch.setattr(
+        inventory_module,
+        "_baseline_materialization_plan",
+        observed_plan,
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_load_observed_build_manifest",
+        observed_manifest_loader,
+    )
+    result = inventory_module._safe_materialize_baseline_qualifications(
+        repository,
+        check_only=False,
+    )
+
+    assert result["reasons"] == []
+    assert result["success"] is True
+    assert len(lock_identities) == 1
+    owned_identity = lock_identities[0]
+    assert set(owned_identity) == {inventory_module.GENERIC_LOCK_FILE}
+    assert plan_lock_arguments[:2] == [None, owned_identity]
+    assert len(plan_lock_arguments) == 3
+    staged_identity = plan_lock_arguments[2]
+    assert staged_identity is not None
+    assert staged_identity[inventory_module.GENERIC_LOCK_FILE] == (
+        owned_identity[inventory_module.GENERIC_LOCK_FILE]
+    )
+    transaction_paths = set(staged_identity) - {
+        inventory_module.GENERIC_LOCK_FILE
+    }
+    assert transaction_paths
+    assert all(
+        re.fullmatch(
+            r"\.inventory-collection-apply-[0-9a-f]{24}/"
+            r"(?:transaction-owner|preparing\.json|journal\.json|"
+            r"journal-ready|(?:stage|backup)-[0-9]{8})",
+            path,
+        )
+        for path in transaction_paths
+    )
+    assert manifest_lock_arguments == plan_lock_arguments
+    assert "owned_generation_lock" not in inspect.signature(
+        inventory_module.build_inventory
+    ).parameters
+    assert set(_git_status_bytes(repository).rstrip(b"\0").split(b"\0")) == {
+        b" M audit/ANOMALY_DISPOSITIONS.yaml",
+        b" M audit/UNQUALIFIED_ANOMALIES.json",
+        b" M audit/UNQUALIFIED_ANOMALIES.md",
+    }
+    assert not list(repository.glob(".inventory-collection-apply-*"))
+    assert not (repository / inventory_module.GENERIC_LOCK_FILE).exists()
+
+
 def _synthetic_materialization_plan(
     *,
     marker: str = "stable",
@@ -1545,7 +1677,7 @@ def test_materialization_writes_only_unqualified_reports_when_policy_cannot_deci
     monkeypatch.setattr(
         inventory_module,
         "_baseline_materialization_plan",
-        lambda _root: deepcopy(plan),
+        lambda _root, **_kwargs: deepcopy(plan),
     )
     monkeypatch.setattr(
         inventory_module,
@@ -1582,7 +1714,7 @@ def test_materialization_check_revalidates_changed_head(
     monkeypatch.setattr(
         inventory_module,
         "_baseline_materialization_plan",
-        lambda _root: deepcopy(plan),
+        lambda _root, **_kwargs: deepcopy(plan),
     )
 
     result = inventory_module._safe_materialize_baseline_qualifications(
@@ -1623,7 +1755,7 @@ def test_materialization_check_revalidates_all_approved_digests(
     monkeypatch.setattr(
         inventory_module,
         "_baseline_materialization_plan",
-        lambda _root: deepcopy(next(plans)),
+        lambda _root, **_kwargs: deepcopy(next(plans)),
     )
 
     result = inventory_module._safe_materialize_baseline_qualifications(
@@ -1666,7 +1798,7 @@ def test_materialization_cli_transaction_rejects_path_substitution(
     monkeypatch.setattr(
         inventory_module,
         "_baseline_materialization_plan",
-        lambda _root: deepcopy(plan),
+        lambda _root, **_kwargs: deepcopy(plan),
     )
 
     result = inventory_module._safe_materialize_baseline_qualifications(
@@ -1703,7 +1835,7 @@ def test_materialization_cli_rolls_back_all_outputs_on_apply_failure(
     monkeypatch.setattr(
         inventory_module,
         "_baseline_materialization_plan",
-        lambda _root: deepcopy(plan),
+        lambda _root, **_kwargs: deepcopy(plan),
     )
     original_replace = inventory_module.os.replace
     forward_replacements = 0
@@ -1766,7 +1898,7 @@ def test_materialization_transaction_revalidates_digests_after_staging(
     monkeypatch.setattr(
         inventory_module,
         "_baseline_materialization_plan",
-        lambda _root: deepcopy(changed if drifted else stable),
+        lambda _root, **_kwargs: deepcopy(changed if drifted else stable),
     )
     real_write_entry = inventory_module._write_transaction_entry
 
@@ -1851,7 +1983,7 @@ module._apply_atomic_payloads(
     monkeypatch.setattr(
         inventory_module,
         "_baseline_materialization_plan",
-        lambda _root: deepcopy(plan),
+        lambda _root, **_kwargs: deepcopy(plan),
     )
 
     def stop_before_new_write(*_args: object, **_kwargs: object) -> None:
