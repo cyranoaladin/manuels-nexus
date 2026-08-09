@@ -7548,12 +7548,13 @@ def _apply_atomic_payloads(
             )
         if validate_state is not None:
             validate_state()
-        _write_transaction_entry(
+        committed_snapshot = _write_transaction_entry(
             temp_fd,
             "committed",
             b"",
         )
         transaction_entries.add("committed")
+        transaction_entry_snapshots["committed"] = committed_snapshot
         os.fsync(temp_fd)
         if validate_state is not None:
             validate_state()
@@ -7574,10 +7575,24 @@ def _apply_atomic_payloads(
                     applied_stat,
                 )
                 backup_name = backups.get(relative)
-                if backup_name and _transaction_entry_is_regular(
-                    temp_fd,
-                    backup_name,
-                ):
+                if backup_name:
+                    backup_snapshot = transaction_entry_snapshots.get(
+                        backup_name
+                    )
+                    if backup_snapshot is None:
+                        raise InventoryError(
+                            "transaction validation entry identity "
+                            f"unavailable: {backup_name}"
+                        )
+                    try:
+                        _revalidate_transaction_entry_snapshot(
+                            temp_fd,
+                            backup_name,
+                            backup_snapshot,
+                        )
+                    except InventoryError:
+                        preserved_transaction_entries.add(backup_name)
+                        raise
                     os.replace(
                         backup_name,
                         relative.name,
@@ -7589,10 +7604,35 @@ def _apply_atomic_payloads(
                 os.fsync(parent_fd)
             except Exception as rollback_exc:
                 backup_name = backups.get(relative)
-                if backup_name and _transaction_entry_is_regular(
-                    temp_fd,
-                    backup_name,
-                ):
+                backup_is_owned = False
+                if backup_name:
+                    backup_snapshot = transaction_entry_snapshots.get(
+                        backup_name
+                    )
+                    if backup_snapshot is None:
+                        backup_validation_error = InventoryError(
+                            "transaction validation entry identity "
+                            f"unavailable: {backup_name}"
+                        )
+                    else:
+                        try:
+                            _revalidate_transaction_entry_snapshot(
+                                temp_fd,
+                                backup_name,
+                                backup_snapshot,
+                            )
+                        except InventoryError as validation_exc:
+                            backup_validation_error = validation_exc
+                        else:
+                            backup_validation_error = None
+                            backup_is_owned = True
+                    if backup_validation_error is not None:
+                        preserved_transaction_entries.add(backup_name)
+                        if str(backup_validation_error) != str(rollback_exc):
+                            rollback_errors.append(
+                                str(backup_validation_error)
+                            )
+                if backup_name and backup_is_owned:
                     try:
                         recoverable_backups.append(
                             _copy_recovery_backup(
@@ -7624,13 +7664,50 @@ def _apply_atomic_payloads(
         cleanup_errors: list[str] = []
         try:
             for name in sorted(
-                transaction_entries - preserved_transaction_entries,
+                transaction_entries,
                 key=lambda value: (
                     value == "committed",
                     value == "journal.json",
                     value,
                 ),
             ):
+                if name in preserved_transaction_entries:
+                    continue
+                try:
+                    os.stat(
+                        name,
+                        dir_fd=temp_fd,
+                        follow_symlinks=False,
+                    )
+                except FileNotFoundError:
+                    continue
+                except OSError as cleanup_exc:
+                    preserved_transaction_entries.add(name)
+                    preserved_transaction_entries.add("journal.json")
+                    cleanup_errors.append(
+                        f"preserved transaction entry {name}: {cleanup_exc}"
+                    )
+                    continue
+                expected_snapshot = transaction_entry_snapshots.get(name)
+                try:
+                    if expected_snapshot is None:
+                        raise InventoryError(
+                            "transaction validation entry identity "
+                            f"unavailable: {name}"
+                        )
+                    _revalidate_transaction_entry_snapshot(
+                        temp_fd,
+                        name,
+                        expected_snapshot,
+                    )
+                except InventoryError as cleanup_exc:
+                    preserved_transaction_entries.add(name)
+                    preserved_transaction_entries.add("journal.json")
+                    cleanup_errors.append(
+                        "preserved foreign transaction entry "
+                        f"{name}: {cleanup_exc}"
+                    )
+                    continue
                 try:
                     os.unlink(name, dir_fd=temp_fd)
                 except FileNotFoundError:

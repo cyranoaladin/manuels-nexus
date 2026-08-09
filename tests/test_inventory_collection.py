@@ -10027,7 +10027,7 @@ def test_transaction_rejects_stage_substituted_before_identity_validation(
             "transaction rolled back.*transaction validation entry identity "
             "changed: stage-00000000"
         ),
-    ):
+    ) as captured:
         inventory_module._apply_atomic_payloads(
             repository,
             {
@@ -10041,8 +10041,186 @@ def test_transaction_rejects_stage_substituted_before_identity_validation(
     assert callback_called is False
     assert {path: path.read_bytes() for path in before} == before
     assert sentinel.read_bytes() == sentinel_before
-    assert sentinel.stat().st_nlink == 1
-    assert list(repository.glob(".inventory-collection-apply-*")) == []
+    assert sentinel.stat().st_nlink == 2
+    transaction_directories = list(
+        repository.glob(".inventory-collection-apply-*")
+    )
+    assert len(transaction_directories) == 1
+    retained_stage = transaction_directories[0] / "stage-00000000"
+    assert retained_stage.read_bytes() == sentinel_before
+    assert retained_stage.stat().st_ino == sentinel.stat().st_ino
+    assert any(
+        "preserved foreign transaction entry stage-00000000" in note
+        for note in getattr(captured.value, "__notes__", ())
+    )
+
+
+def test_cleanup_preserves_unique_wip_substituted_for_stage(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    wip = outside / "unique-wip.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(wip, "WIP unique à récupérer\n")
+    before = {
+        first: first.read_bytes(),
+        second: second.read_bytes(),
+    }
+    wip_before = wip.read_bytes()
+    original_write_entry = inventory_module._write_transaction_entry
+    substituted = False
+    callback_called = False
+
+    def move_wip_over_stage(
+        directory_fd: int,
+        name: str,
+        payload: bytes,
+    ) -> os.stat_result:
+        nonlocal substituted
+        identity = original_write_entry(directory_fd, name, payload)
+        if name == "journal-ready" and not substituted:
+            os.unlink("stage-00000000", dir_fd=directory_fd)
+            os.rename(
+                wip,
+                "stage-00000000",
+                dst_dir_fd=directory_fd,
+            )
+            substituted = True
+        return identity
+
+    def observe_validation(
+        _owned_entries: dict[str, tuple[int, int]],
+    ) -> None:
+        nonlocal callback_called
+        callback_called = True
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_write_transaction_entry",
+        move_wip_over_stage,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match=(
+            "transaction rolled back.*transaction validation entry identity "
+            "changed: stage-00000000"
+        ),
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+            validate_before_apply=observe_validation,
+        )
+
+    assert substituted is True
+    assert callback_called is False
+    assert {path: path.read_bytes() for path in before} == before
+    assert not wip.exists()
+    transaction_directories = list(
+        repository.glob(".inventory-collection-apply-*")
+    )
+    assert len(transaction_directories) == 1
+    retained_wip = transaction_directories[0] / "stage-00000000"
+    assert retained_wip.read_bytes() == wip_before
+    assert any(
+        "preserved foreign transaction entry stage-00000000" in note
+        for note in getattr(captured.value, "__notes__", ())
+    )
+
+
+def test_rollback_never_uses_substituted_backup(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    wip = outside / "foreign-backup.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(wip, "WIP étranger au rollback\n")
+    wip_before = wip.read_bytes()
+    original_write_entry = inventory_module._write_transaction_entry
+    original_replace = inventory_module.os.replace
+    substituted = False
+
+    def move_wip_over_backup(
+        directory_fd: int,
+        name: str,
+        payload: bytes,
+    ) -> os.stat_result:
+        nonlocal substituted
+        identity = original_write_entry(directory_fd, name, payload)
+        if name == "journal-ready" and not substituted:
+            os.unlink("backup-00000000", dir_fd=directory_fd)
+            os.rename(
+                wip,
+                "backup-00000000",
+                dst_dir_fd=directory_fd,
+            )
+            substituted = True
+        return identity
+
+    def fail_second_forward_replace(
+        source: Path | str,
+        target: Path | str,
+        **kwargs: object,
+    ) -> None:
+        if str(source) == "stage-00000001":
+            raise OSError("injection second forward replace")
+        original_replace(source, target, **kwargs)
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_write_transaction_entry",
+        move_wip_over_backup,
+    )
+    monkeypatch.setattr(
+        inventory_module.os,
+        "replace",
+        fail_second_forward_replace,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match="transaction rolled back.*injection second forward replace",
+    ) as captured:
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+        )
+
+    assert substituted is True
+    assert (
+        "transaction validation entry identity changed: backup-00000000"
+        in str(captured.value)
+    )
+    assert first.read_text(encoding="utf-8") == "premier nouveau\n"
+    assert second.read_text(encoding="utf-8") == "second historique\n"
+    assert first.read_bytes() != wip_before
+    assert not wip.exists()
+    transaction_directories = list(
+        repository.glob(".inventory-collection-apply-*")
+    )
+    assert len(transaction_directories) == 1
+    retained_wip = transaction_directories[0] / "backup-00000000"
+    assert retained_wip.read_bytes() == wip_before
+    assert list(repository.glob(".inventory-collection-recovery-*")) == []
 
 
 def test_next_transaction_recovers_batch_after_process_crash(
