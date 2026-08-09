@@ -771,6 +771,10 @@ def test_observed_recorder_failure_rolls_back_receipt_and_report(
     _patch_root(monkeypatch, assembler, root)
     _write_reproducibility_control(root.parent)
     _observed_build_fakes(monkeypatch, assembler, root)
+    build_dir = root / "build" / "MANUEL_1NSI"
+    build_dir.mkdir(parents=True)
+    canonical_pdf = build_dir / "MANUEL_1NSI_eleve.pdf"
+    canonical_pdf.write_bytes(b"%PDF-previous-canonical")
     calls = []
     monkeypatch.setattr(
         assembler,
@@ -780,11 +784,11 @@ def test_observed_recorder_failure_rolls_back_receipt_and_report(
 
     assert assembler.build_manual("eleve", record_observed=True) == 1
 
-    build_dir = root / "build" / "MANUEL_1NSI"
     assert calls == [build_dir / "MANUEL_1NSI_eleve.receipt.json"]
     assert not (build_dir / "MANUEL_1NSI_eleve.receipt.json").exists()
     assert not (build_dir / "MANUEL_1NSI_eleve.preflight.json").exists()
-    assert (build_dir / "MANUEL_1NSI_eleve.pdf").is_file()
+    assert canonical_pdf.read_bytes() == b"%PDF-previous-canonical"
+    assert not list(build_dir.glob("*.pdf.backup"))
 
 
 def test_cli_forwards_record_observed(monkeypatch, assembler):

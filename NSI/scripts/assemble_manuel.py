@@ -817,6 +817,44 @@ def _remove_stale_evidence(paths: tuple[Path, ...]) -> None:
         path.unlink()
 
 
+def _backup_canonical_pdf(canonical_pdf: Path) -> Path | None:
+    if not canonical_pdf.exists() and not canonical_pdf.is_symlink():
+        return None
+    if canonical_pdf.is_symlink() or not canonical_pdf.is_file():
+        raise ValueError(f"PDF canonique non regulier : {canonical_pdf}")
+    descriptor, backup_name = tempfile.mkstemp(
+        dir=canonical_pdf.parent,
+        prefix=f".{canonical_pdf.stem}-",
+        suffix=".pdf.backup",
+    )
+    os.close(descriptor)
+    backup_path = Path(backup_name)
+    try:
+        os.replace(canonical_pdf, backup_path)
+        _fsync_directory(canonical_pdf.parent)
+    except OSError:
+        backup_path.unlink(missing_ok=True)
+        raise
+    return backup_path
+
+
+def _finish_canonical_pdf_transaction(
+    canonical_pdf: Path,
+    backup_path: Path | None,
+    *,
+    recorded: bool,
+) -> None:
+    if recorded:
+        if backup_path is not None:
+            backup_path.unlink()
+            _fsync_directory(canonical_pdf.parent)
+        return
+    canonical_pdf.unlink(missing_ok=True)
+    if backup_path is not None:
+        os.replace(backup_path, canonical_pdf)
+    _fsync_directory(canonical_pdf.parent)
+
+
 def _build_local(
     context: ManualContext,
     build_dir: Path,
@@ -865,10 +903,10 @@ def _build_observed(
     report_path = build_dir / f"{context.output_stem}.preflight.json"
     receipt_path = build_dir / f"{context.output_stem}.receipt.json"
     _remove_stale_evidence((report_path, receipt_path))
-    canonical_pdf.unlink(missing_ok=True)
-    promoted = False
+    backup_path: Path | None = None
     recorded = False
     try:
+        backup_path = _backup_canonical_pdf(canonical_pdf)
         reproducibility = _load_reproducibility_control()
         environment = _observed_environment(reproducibility)
         run_id = secrets.token_hex(16)
@@ -913,7 +951,6 @@ def _build_observed(
                 build_dir,
                 context.output_stem,
             )
-            promoted = True
         receipt_path = _publish_observed_evidence(
             context=context,
             build_dir=build_dir,
@@ -934,8 +971,11 @@ def _build_observed(
         if not recorded:
             report_path.unlink(missing_ok=True)
             receipt_path.unlink(missing_ok=True)
-        if not promoted:
-            canonical_pdf.unlink(missing_ok=True)
+        _finish_canonical_pdf_transaction(
+            canonical_pdf,
+            backup_path,
+            recorded=recorded,
+        )
 
 
 def build_manual(variant: str, record_observed: bool = False) -> int:
