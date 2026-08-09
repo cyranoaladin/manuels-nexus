@@ -146,7 +146,7 @@ def _validate_variant(variant: str) -> None:
 def _metadata(path: Path, chapter: str) -> dict[str, object]:
     try:
         with path.open(encoding="utf-8") as stream:
-            first_line = stream.readline().strip()
+            first_line = stream.readline().lstrip("\ufeff").rstrip("\r\n")
     except (OSError, UnicodeError) as error:
         raise ValueError(f"Objet META illisible : {path}") from error
     if not first_line.startswith(META_PREFIX):

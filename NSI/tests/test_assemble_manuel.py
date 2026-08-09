@@ -235,6 +235,23 @@ def test_runtime_selection_rejects_inventory_invalid_meta(
         assembler.collect_variant_objects("eleve")
 
 
+def test_runtime_meta_header_matches_inventory_line_normalization(
+    monkeypatch, tmp_path, assembler
+):
+    root = tmp_path / "NSI"
+    _prepare_root(root)
+    invalid = root / "chapitres" / CHAPTERS[0] / "cours" / "10_indented.tex"
+    invalid.write_text(
+        '  % META: {"id":"X","chapitre":"1NSI-TYPES-BASE",'
+        '"type_objet":"cours","status":"approved"}\nContenu.\n',
+        encoding="utf-8",
+    )
+    _patch_root(monkeypatch, assembler, root)
+
+    with pytest.raises(ValueError, match="En-tete META absent"):
+        assembler.collect_variant_objects("eleve")
+
+
 def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(assembler):
     selected = {
         variant: assembler.collect_variant_objects(variant) for variant in VARIANTS
