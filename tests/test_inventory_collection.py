@@ -16,7 +16,7 @@ import time
 import warnings
 from contextlib import contextmanager
 from copy import deepcopy
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import jsonschema
 import pytest
@@ -6574,6 +6574,179 @@ parser.add_argument("--variant", choices=["eleve", "professeur"])
     ]
 
 
+def test_manual_variant_orders_are_literal_closed_and_validated(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''CHAPITRES = ["1NSI-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve", "professeur", "evaluations", "projets"]
+VARIANT_ORDERS = {
+    "eleve": [("cours", "*")],
+    "professeur": [("cours", "*"), ("corriges", "*")],
+    "evaluations": [("evaluations", "*")],
+    "projets": [("projet", "*")],
+}
+ELEVE_VARIANTS = {"eleve", "projets"}
+ELEVE_ALLOWED_TYPES = {"cours", "projet"}
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert analysis["constants"]["VARIANT_ORDERS"] == {
+        "eleve": [["cours", "*"]],
+        "evaluations": [["evaluations", "*"]],
+        "professeur": [["cours", "*"], ["corriges", "*"]],
+        "projets": [["projet", "*"]],
+    }
+    assert analysis["constants"]["ELEVE_VARIANTS"] == ["eleve", "projets"]
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
+@pytest.mark.parametrize(
+    ("variant_orders", "student_variants", "expected_field"),
+    [
+        (
+            '{"eleve": [("cours", "*")]}',
+            '["eleve"]',
+            "VARIANT_ORDERS",
+        ),
+        (
+            '{"eleve": [], "professeur": [("cours", "*")]}',
+            '["eleve"]',
+            "VARIANT_ORDERS",
+        ),
+        (
+            '{"eleve": [("", "*")], "professeur": [("cours", "*")]}',
+            '["eleve"]',
+            "VARIANT_ORDERS",
+        ),
+        (
+            '{"eleve": [("cours", "*")], "professeur": [("cours", "*")]}',
+            "[]",
+            "ELEVE_VARIANTS",
+        ),
+        (
+            '{"eleve": [("cours", "*")], "professeur": [("cours", "*")]}',
+            '["professeur"]',
+            "ELEVE_VARIANTS",
+        ),
+        (
+            '{"eleve": [("cours", "*")], "professeur": [("cours", "*")]}',
+            '["eleve", "inconnue"]',
+            "ELEVE_VARIANTS",
+        ),
+    ],
+    ids=(
+        "partial-orders",
+        "empty-rules",
+        "empty-directory",
+        "empty-student-variants",
+        "missing-eleve",
+        "foreign-student-variant",
+    ),
+)
+def test_closed_manual_variant_contract_rejects_invalid_literals(
+    tmp_path: Path,
+    inventory_module,
+    variant_orders: str,
+    student_variants: str,
+    expected_field: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        'CHAPITRES = ["1NSI-TEST"]\n'
+        'ORDER = [("cours", "*")]\n'
+        'VARIANTS = ["eleve", "professeur"]\n'
+        f"VARIANT_ORDERS = {variant_orders}\n"
+        f"ELEVE_VARIANTS = {student_variants}\n"
+        'ELEVE_ALLOWED_TYPES = ["cours"]\n',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert expected_field in {field for field, _reason in errors}
+
+
+@pytest.mark.parametrize(
+    ("contract_declaration", "missing_field"),
+    [
+        (
+            'VARIANT_ORDERS = {"eleve": [("cours", "*")]}\n',
+            "ELEVE_VARIANTS",
+        ),
+        ('ELEVE_VARIANTS = ["eleve"]\n', "VARIANT_ORDERS"),
+        ('VARIANT_ORDERS = build_orders()\n', "VARIANT_ORDERS"),
+        (
+            'VARIANT_ORDERS = {"eleve": [("cours", "*")]}\n'
+            "VARIANT_ORDERS = build_orders()\n",
+            "VARIANT_ORDERS",
+        ),
+        (
+            'ELEVE_VARIANTS = ["eleve"]\n'
+            "ELEVE_VARIANTS = build_student_variants()\n",
+            "ELEVE_VARIANTS",
+        ),
+    ],
+    ids=(
+        "orders-only",
+        "student-variants-only",
+        "dynamic-orders",
+        "reassigned-dynamic-orders",
+        "reassigned-dynamic-student-variants",
+    ),
+)
+def test_closed_manual_variant_contract_cannot_be_declared_partially(
+    tmp_path: Path,
+    inventory_module,
+    contract_declaration: str,
+    missing_field: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        'CHAPITRES = ["1NSI-TEST"]\n'
+        'ORDER = [("cours", "*")]\n'
+        'VARIANTS = ["eleve"]\n'
+        'ELEVE_ALLOWED_TYPES = ["cours"]\n'
+        + contract_declaration,
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert missing_field in {field for field, _reason in errors}
+
+
+def test_legacy_manual_assembler_remains_valid_without_closed_variant_contract(
+    inventory_module,
+) -> None:
+    path = ROOT / "Mathematiques/manuel-maths/scripts/assemble_manuel.py"
+
+    analysis = inventory_module.analyze_assembler(path)
+
+    assert "VARIANT_ORDERS" not in analysis["constants"]
+    assert "ELEVE_VARIANTS" not in analysis["constants"]
+    assert inventory_module._assembly_core.validate_analysis(
+        "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
 def test_professor_only_manual_assembler_does_not_require_student_filter(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -6697,6 +6870,99 @@ ELEVE_ALLOWED_TYPES = {"cours", "evaluation", "exercice"}
         f"{base}/exercices/1SPE-TEST-EX-001.tex",
         f"{base}/evaluations/1SPE-TEST-EV-A.tex",
     ]
+
+
+def test_declared_variant_orders_drive_specialized_manual_selection(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    base = _chapter_path("1SPE", "1SPE-TEST")
+    assembler = "Mathematiques/manuel-maths/scripts/assemble_manuel.py"
+    student_objects = {
+        "eleve": f"{base}/cours/10_cours.tex",
+        "methodes": f"{base}/methodes/10_methode.tex",
+        "remediation": f"{base}/remediation/10_remediation.tex",
+        "amenagee": f"{base}/amenagee/10_amenagee.tex",
+        "projets": f"{base}/projet/10_projet.tex",
+    }
+    teacher_objects = {
+        variant: str(PurePosixPath(path).with_name(f"99_{variant}_prof.tex"))
+        for variant, path in student_objects.items()
+    }
+    evaluation = f"{base}/evaluations/10_evaluation.tex"
+    evaluation_correction = f"{base}/evaluations/20_corrige.tex"
+    sources = {
+        f"{base}/contrat.yaml": _contract("1SPE-TEST", "1SPE", capacities=1),
+        student_objects["eleve"]: _meta(
+            id="1SPE-TEST-COURS-C1", type_objet="cours", status="approved"
+        ),
+        student_objects["methodes"]: _meta(
+            id="1SPE-TEST-METHODE-C1", type_objet="methode", status="approved"
+        ),
+        student_objects["remediation"]: _meta(
+            id="1SPE-TEST-REMEDIATION-C1",
+            type_objet="remediation",
+            status="approved",
+        ),
+        student_objects["amenagee"]: _meta(
+            id="1SPE-TEST-AMENAGEE-C1", type_objet="exercice", status="approved"
+        ),
+        student_objects["projets"]: _meta(
+            id="1SPE-TEST-PROJET-C1", type_objet="projet", status="approved"
+        ),
+        evaluation: _meta(
+            id="1SPE-TEST-EVALUATION-C1",
+            type_objet="evaluation",
+            status="approved",
+        ),
+        evaluation_correction: _meta(
+            id="1SPE-TEST-EVALUATION-CORRIGE-C1",
+            type_objet="corrige_evaluation",
+            status="approved",
+        ),
+        assembler: '''CHAPITRES = ["1SPE-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve", "professeur", "methodes", "remediation", "amenagee", "evaluations", "projets"]
+VARIANT_ORDERS = {
+    "eleve": [("cours", "*")],
+    "professeur": [("cours", "*"), ("methodes", "*"), ("remediation", "*"), ("amenagee", "*"), ("evaluations", "*"), ("projet", "*")],
+    "methodes": [("methodes", "*")],
+    "remediation": [("remediation", "*")],
+    "amenagee": [("amenagee", "*")],
+    "evaluations": [("evaluations", "*")],
+    "projets": [("projet", "*")],
+}
+ELEVE_VARIANTS = ["eleve", "methodes", "remediation", "amenagee", "projets"]
+ELEVE_ALLOWED_TYPES = ["cours", "methode", "remediation", "exercice", "projet"]
+''',
+    }
+    for index, (variant, path) in enumerate(teacher_objects.items(), start=1):
+        sources[path] = _meta(
+            id=f"1SPE-TEST-{variant.upper()}-PROF-{index}",
+            type_objet="corrige_evaluation",
+            status="approved",
+        )
+    for path, content in sources.items():
+        _write(tmp_path / path, content)
+    _track(tmp_path, *sources)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+    assemblies = {item["assembly_id"]: item for item in inventory["assemblies"]}
+
+    for variant, expected_path in student_objects.items():
+        assembly = assemblies[f"math:manual:1SPE:{variant}"]
+        assert assembly["included_objects"] == [expected_path]
+        assert teacher_objects[variant] not in assembly["included_objects"]
+    assert assemblies["math:manual:1SPE:evaluations"]["included_objects"] == [
+        evaluation,
+        evaluation_correction,
+    ]
+    assert set(assemblies["math:manual:1SPE:professeur"]["included_objects"]) == {
+        *student_objects.values(),
+        *teacher_objects.values(),
+        evaluation,
+        evaluation_correction,
+    }
 
 
 def test_assemblies_follow_ast_globs_and_expose_duplicates_exclusions_and_orphans(
@@ -7565,6 +7831,7 @@ def test_graph_source_role_policies_are_explicit(
             "Mathematiques/manuel-maths/scripts/assemble.py",
             "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
             "NSI/scripts/assemble.py",
+            "NSI/scripts/assemble_manuel.py",
         }
     )
     assert inventory_module.COMPILED_PDF_SOURCE_ROLES == frozenset(
@@ -7946,18 +8213,32 @@ def test_noncanonical_assembler_cannot_prove_declared_assembly(
     } >= {"1NSI", "TNSI"}
 
 
-def test_declared_assembler_allowlist_preserves_three_real_engines(
-    inventory_module,
+def test_declared_assembler_allowlist_preserves_real_and_planned_engines(
+    inventory_module, monkeypatch
 ) -> None:
     tracked = inventory_module.git_tracked_files(ROOT)
     source_roles = inventory_module._load_source_roles(ROOT, tracked)
     expected = inventory_module.DECLARED_ASSEMBLER_PATH_ALLOWLIST
+    planned = "NSI/scripts/assemble_manuel.py"
+    existing = expected & set(tracked)
 
-    assert expected <= set(tracked)
+    assert planned in expected
+    assert expected <= set(tracked) | {planned}
     assert {
-        source_roles[path] for path in expected
+        source_roles[path] for path in existing
     } <= inventory_module.DECLARED_ASSEMBLER_SOURCE_ROLES
+    for path in existing:
+        analysis = inventory_module.analyze_assembler(ROOT / path)
+        assert inventory_module._assembly_core.validate_analysis(
+            path,
+            analysis,
+        ) == []
 
+    monkeypatch.setattr(
+        inventory_module,
+        "BUILD_MANIFEST_FILE",
+        "audit/TEST_ABSENT_BUILD_MANIFEST.json",
+    )
     inventory = inventory_module.build_inventory(ROOT)
     assert inventory["declared_assemblies"] == inventory["assemblies"]
     observed = {
@@ -7966,7 +8247,7 @@ def test_declared_assembler_allowlist_preserves_three_real_engines(
         if assembly["scope"] in {"chapter", "manual"}
     }
 
-    assert observed == expected
+    assert observed == existing
 
 
 @pytest.mark.parametrize(

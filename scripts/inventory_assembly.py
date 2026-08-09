@@ -67,10 +67,13 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
         "CHAPITRES",
         "ELEVE_ALLOWED_TYPES",
         "ELEVE_EXCLUDES",
+        "ELEVE_VARIANTS",
         "ORDER",
+        "VARIANT_ORDERS",
         "VARIANTS",
         "VARIANTES",
     }
+    declared_constants: set[str] = set()
     for node in tree.body:
         name: str | None = None
         value_node: ast.AST | None = None
@@ -84,9 +87,11 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
             value_node = node.value
         if name not in accepted_names or value_node is None:
             continue
+        declared_constants.add(name)
         try:
             constants[name] = _canonicalize_literal(ast.literal_eval(value_node))
         except (ValueError, TypeError):
+            constants.pop(name, None)
             continue
 
     variants: set[str] = set()
@@ -127,6 +132,7 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
 
     return {
         "constants": dict(sorted(constants.items())),
+        "declared_constants": sorted(declared_constants),
         "latex_inputs": _ast_latex_inputs(tree),
         "variants": sorted(variants),
     }
@@ -142,6 +148,15 @@ def valid_order(value: Any) -> list[list[str]]:
         and len(item) == 2
         and all(isinstance(part, str) for part in item)
     ]
+
+
+def _is_valid_variant_order(value: Any) -> bool:
+    return (
+        isinstance(value, list)
+        and bool(value)
+        and len(valid_order(value)) == len(value)
+        and all(part.strip() for rule in value for part in rule)
+    )
 
 
 def validate_analysis(
@@ -160,6 +175,7 @@ def validate_analysis(
     if not isinstance(variants, list) or not variants:
         errors.append(("variants", "aucune variante litterale resolue"))
     if path.endswith("/scripts/assemble_manuel.py"):
+        constants = analysis["constants"]
         chapters = analysis["constants"].get("CHAPITRES")
         if (
             not isinstance(chapters, list)
@@ -180,6 +196,61 @@ def validate_analysis(
                         "filtre metadata eleve absent ou invalide",
                     )
                 )
+        declared_constants = set(analysis.get("declared_constants", constants))
+        closed_contract = bool(
+            declared_constants & {"ELEVE_VARIANTS", "VARIANT_ORDERS"}
+        )
+        if closed_contract:
+            declared_variants = constants.get("VARIANTS")
+            variant_orders = constants.get("VARIANT_ORDERS")
+            valid_declared_variants = (
+                isinstance(declared_variants, list)
+                and bool(declared_variants)
+                and all(
+                    isinstance(value, str) and bool(value.strip())
+                    for value in declared_variants
+                )
+                and len(set(declared_variants)) == len(declared_variants)
+                and sorted(declared_variants) == variants
+            )
+            valid_variant_orders = (
+                valid_declared_variants
+                and isinstance(variant_orders, Mapping)
+                and set(variant_orders) == set(declared_variants)
+                and all(
+                    _is_valid_variant_order(rules)
+                    for rules in variant_orders.values()
+                )
+            )
+            if not valid_variant_orders:
+                errors.append(
+                    (
+                        "VARIANT_ORDERS",
+                        "VARIANT_ORDERS doit couvrir exactement VARIANTS avec "
+                        "des regles [repertoire, glob] non vides",
+                    )
+                )
+            student_variants = constants.get("ELEVE_VARIANTS")
+            valid_student_variants = (
+                isinstance(student_variants, list)
+                and bool(student_variants)
+                and all(
+                    isinstance(value, str) and bool(value.strip())
+                    for value in student_variants
+                )
+                and len(set(student_variants)) == len(student_variants)
+                and "eleve" in student_variants
+                and valid_declared_variants
+                and set(student_variants) <= set(declared_variants)
+            )
+            if not valid_student_variants:
+                errors.append(
+                    (
+                        "ELEVE_VARIANTS",
+                        "ELEVE_VARIANTS doit etre un sous-ensemble non vide de "
+                        "VARIANTS contenant eleve",
+                    )
+                )
     return errors
 
 
@@ -190,8 +261,15 @@ def select_items(
     *,
     exclusions: Any,
     allowed_source_types: Any = None,
+    variant_orders: Any = None,
 ) -> tuple[list[dict[str, Any]], Counter[str]]:
-    if variant == "methodes":
+    if variant_orders is not None:
+        rules = (
+            valid_order(variant_orders.get(variant, []))
+            if isinstance(variant_orders, Mapping)
+            else []
+        )
+    elif variant == "methodes":
         rules: list[list[str]] = [["methodes", "*"]]
     elif variant == "remediation":
         rules = [["remediation", "*"]]
@@ -360,12 +438,24 @@ def _build_manual_assemblies(
     constants = analysis["constants"]
     student_excludes = constants.get("ELEVE_EXCLUDES", [])
     student_allowed_types = constants.get("ELEVE_ALLOWED_TYPES")
+    variant_orders = constants.get("VARIANT_ORDERS")
+    declared_student_variants = constants.get("ELEVE_VARIANTS")
+    student_variants = (
+        {
+            value
+            for value in declared_student_variants
+            if isinstance(value, str)
+        }
+        if isinstance(declared_student_variants, list)
+        else {"eleve"}
+    )
     for variant in analysis["variants"]:
         selected: list[dict[str, Any]] = []
         duplicate_counts: Counter[str] = Counter()
         inclusion_counts: Counter[str] = Counter()
         eligible: list[dict[str, Any]] = []
-        exclusions = student_excludes if variant == "eleve" else []
+        is_student_variant = variant in student_variants
+        exclusions = student_excludes if is_student_variant else []
         for chapter in chapters:
             chapter_objects = objects_by_chapter.get(chapter, [])
             eligible.extend(chapter_objects)
@@ -375,8 +465,9 @@ def _build_manual_assemblies(
                 variant,
                 exclusions=exclusions,
                 allowed_source_types=(
-                    student_allowed_types if variant == "eleve" else None
+                    student_allowed_types if is_student_variant else None
                 ),
+                variant_orders=variant_orders,
             )
             selected.extend(chapter_selected)
             inclusion_counts.update(item["path"] for item in chapter_selected)

@@ -358,6 +358,7 @@ DECLARED_ASSEMBLER_PATH_ALLOWLIST = frozenset(
         "Mathematiques/manuel-maths/scripts/assemble.py",
         "Mathematiques/manuel-maths/scripts/assemble_manuel.py",
         "NSI/scripts/assemble.py",
+        "NSI/scripts/assemble_manuel.py",
     }
 )
 COMPILED_PDF_SOURCE_ROLES = frozenset({"generated_dependency"})
