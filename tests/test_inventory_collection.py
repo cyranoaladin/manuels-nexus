@@ -954,7 +954,7 @@ def test_subtype_priority_changes_counts_but_preserves_source_taxonomy(
     }
 
 
-def test_build_inventory_aggregates_objects_and_keeps_four_manuals(
+def test_build_inventory_aggregates_objects_and_keeps_six_manuals(
     tmp_path: Path, inventory_module
 ) -> None:
     _init_repository(tmp_path)
@@ -1004,7 +1004,14 @@ def test_build_inventory_aggregates_objects_and_keeps_four_manuals(
 
     inventory = inventory_module.build_inventory(tmp_path)
 
-    assert list(inventory["manuals"]) == ["1NSI", "1SPE", "TNSI", "TSPE_2026_2027"]
+    assert list(inventory["manuals"]) == [
+        "1NSI",
+        "1SPE",
+        "TCOMPL",
+        "TEXPERTES",
+        "TNSI",
+        "TSPE_2026_2027",
+    ]
     chapter = inventory["manuals"]["1SPE"]["chapters"]["1SPE-TEST"]
     assert chapter["counts"] == {
         "capacites": 2,
@@ -1611,11 +1618,7 @@ def test_materialization_revalidations_use_only_the_owned_lock_identity(
     assert "owned_generation_lock" not in inspect.signature(
         inventory_module.build_inventory
     ).parameters
-    assert set(_git_status_bytes(repository).rstrip(b"\0").split(b"\0")) == {
-        b" M audit/ANOMALY_DISPOSITIONS.yaml",
-        b" M audit/UNQUALIFIED_ANOMALIES.json",
-        b" M audit/UNQUALIFIED_ANOMALIES.md",
-    }
+    assert _git_status_bytes(repository) == b""
     assert not list(repository.glob(".inventory-collection-apply-*"))
     assert not (repository / inventory_module.GENERIC_LOCK_FILE).exists()
 
@@ -6804,6 +6807,8 @@ def test_manual_assembler_gaps_and_chapters_outside_manual_are_explicit(
     } == {
         ("1NSI", "manuel", "aucun assembleur de manuel suivi"),
         ("1SPE", "manuel", "aucun assembleur de manuel suivi"),
+        ("TCOMPL", "manuel", "aucun assembleur de manuel suivi"),
+        ("TEXPERTES", "manuel", "aucun assembleur de manuel suivi"),
         ("TNSI", "manuel", "aucun assembleur de manuel suivi"),
         ("TSPE_2026_2027", "manuel", "aucun assembleur de manuel suivi"),
     }
@@ -7568,6 +7573,8 @@ def test_graph_source_role_policies_are_explicit(
     assert dict(inventory_module.COMPILED_PDF_BUILD_ROOTS) == {
         "1NSI": "NSI/build",
         "1SPE": "Mathematiques/manuel-maths/build",
+        "TCOMPL": "Mathematiques/manuel-maths/build",
+        "TEXPERTES": "Mathematiques/manuel-maths/build",
         "TNSI": "NSI/build",
         "TSPE_2026_2027": "Mathematiques/manuel-maths/build",
     }
@@ -8863,7 +8870,14 @@ def test_deliverable_matrix_covers_all_mission_variants_and_blocks_publication(
     inventory = inventory_module.build_inventory(tmp_path)
     matrix = inventory["deliverable_matrix"]
 
-    assert list(matrix["manuals"]) == ["1NSI", "1SPE", "TNSI", "TSPE_2026_2027"]
+    assert list(matrix["manuals"]) == [
+        "1NSI",
+        "1SPE",
+        "TCOMPL",
+        "TEXPERTES",
+        "TNSI",
+        "TSPE_2026_2027",
+    ]
     assert set(matrix["manuals"]["1SPE"]["variants"]) == {
         "banque_evaluations",
         "livret_methodes",
@@ -12965,7 +12979,7 @@ def test_real_reports_expose_known_exercise_contradictions(inventory_module) -> 
         and claim["metric"] == "exercices_principaux"
         and claim["declared"] == 471
     )
-    assert total["calculated"] == 464
+    assert total["calculated"] == 473
     assert total["etat"] == "contredit"
     trigonometrie = next(
         claim
