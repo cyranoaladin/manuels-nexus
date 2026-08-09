@@ -275,6 +275,14 @@ def test_book_master_template_exists():
     assert (ROOT / "gabarits" / "book_master.tex").exists()
 
 
+def test_book_master_reserves_room_for_three_digit_toc_page_numbers():
+    template = (ROOT / "gabarits" / "book_master.tex").read_text(
+        encoding="utf-8"
+    )
+
+    assert r"\renewcommand*{\@pnumwidth}{2em}" in template
+
+
 def test_render_book_master_contains_all_chapters():
     tex = assemble.render_book_master("1NSI")
 

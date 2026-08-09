@@ -22,6 +22,6 @@
 
   \item Lorsqu'une clé est présente dans les deux dictionnaires (ici \lstinline{"y"}), la valeur du second dictionnaire \lstinline{d2} écrase celle du premier. En effet, la seconde boucle exécute \lstinline{resultat["y"] = d2["y"]}, soit \lstinline{resultat["y"] = 10}, qui remplace la valeur 2 précédemment copiée depuis \lstinline{d1}.
 
-  \item Non, les dictionnaires \lstinline{a} et \lstinline{b} ne sont pas modifiés. La fonction crée un nouveau dictionnaire \lstinline{resultat} et n'écrit jamais dans \lstinline{d1} ni \lstinline{d2}. Après l'appel, \lstinline{a == \{"x": 1, "y": 2\}} et \lstinline{b == \{"y": 10, "z": 3\}}.
+  \item Non, les dictionnaires \lstinline{a} et \lstinline{b} ne sont pas modifiés. La fonction crée un nouveau dictionnaire \lstinline{resultat} et n'écrit jamais dans \lstinline{d1} ni \lstinline{d2}. Après l'appel, \lstinline|a == {"x": 1, "y": 2}| et \lstinline|b == {"y": 10, "z": 3}|.
 \end{enumerate}
 \end{corrige}

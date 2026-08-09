@@ -50,9 +50,9 @@ def executer(programme, memoire):
 
 \textbf{2.} Déroulé :
 \begin{itemize}
-  \item Après \lstinline{("LOAD", "R0", 0)} : \lstinline{registres = {"R0": 10}}
-  \item Après \lstinline{("LOAD", "R1", 1)} : \lstinline{registres = {"R0": 10, "R1": 4}}
-  \item Après \lstinline{("SUB", "R0", "R1")} : \lstinline{registres = {"R0": 6, "R1": 4}}
+  \item Après \lstinline{("LOAD", "R0", 0)} : \lstinline|registres = {"R0": 10}|
+  \item Après \lstinline{("LOAD", "R1", 1)} : \lstinline|registres = {"R0": 10, "R1": 4}|
+  \item Après \lstinline{("SUB", "R0", "R1")} : \lstinline|registres = {"R0": 6, "R1": 4}|
   \item Après \lstinline{("STORE", "R0", 2)} : \lstinline{memoire = [10, 4, 6]}
 \end{itemize}
 

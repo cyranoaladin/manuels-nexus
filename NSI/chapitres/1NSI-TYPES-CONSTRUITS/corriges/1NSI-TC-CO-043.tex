@@ -20,14 +20,14 @@ def inverser_dico(d):
     return resultat
 \end{python}
 
-\textbf{Déroulement sur l'exemple} \lstinline{{"a": 1, "b": 2, "c": 3}} :
+\textbf{Déroulement sur l'exemple} \lstinline|{"a": 1, "b": 2, "c": 3}| :
 \begin{itemize}
   \item \lstinline{cle = "a"}, \lstinline{valeur = 1} $\to$ \lstinline{resultat[1] = "a"}
   \item \lstinline{cle = "b"}, \lstinline{valeur = 2} $\to$ \lstinline{resultat[2] = "b"}
   \item \lstinline{cle = "c"}, \lstinline{valeur = 3} $\to$ \lstinline{resultat[3] = "c"}
 \end{itemize}
 
-Résultat : \lstinline{{1: "a", 2: "b", 3: "c"}}.
+Résultat : \lstinline|{1: "a", 2: "b", 3: "c"}|.
 
 \textbf{Remarque :} cette méthode suppose que les valeurs sont toutes distinctes. Si deux clés avaient la même valeur, seule la dernière serait conservée dans le dictionnaire inversé.
 \end{corrige}

@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 
@@ -294,6 +295,53 @@ def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(asse
         "corriges",
         "professeur",
     } & {path.parent.name for path in selected["eleve"]}
+
+
+def test_professor_sources_do_not_nest_braces_in_brace_delimited_lstinline(
+    assembler,
+):
+    offenders = []
+    for path in assembler.collect_variant_objects("professeur"):
+        for line_number, line in enumerate(
+            path.read_text(encoding="utf-8").splitlines(),
+            start=1,
+        ):
+            if re.search(r"\\lstinline\{[^}\n]*\{", line):
+                offenders.append(f"{path.relative_to(ROOT)}:{line_number}")
+
+    assert offenders == []
+
+
+def test_professor_sources_do_not_use_lstinline_in_tabular_cells(assembler):
+    offenders = []
+    for path in assembler.collect_variant_objects("professeur"):
+        if path.parent.name != "corriges":
+            continue
+        text = path.read_text(encoding="utf-8")
+        if re.search(r"\\lstinline(?:\{[^}]*\}|(.).*?\1)\s*&", text):
+            offenders.append(str(path.relative_to(ROOT)))
+
+    assert offenders == []
+
+
+def test_known_long_inline_paragraphs_have_local_ragged_fallback():
+    expected = {
+        ROOT
+        / "chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-024.tex": (
+            "Vérification :",
+        ),
+        ROOT
+        / "chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A.tex": (
+            "Pourquoi une précondition explicite",
+        ),
+    }
+    for path, markers in expected.items():
+        text = path.read_text(encoding="utf-8")
+        for marker in markers:
+            start = text.index(marker)
+            paragraph = text[max(0, start - 40) : start + 400]
+            assert r"{\raggedright" in paragraph
+            assert r"\par}" in paragraph
 
 
 @pytest.mark.parametrize("variant", STUDENT_VARIANTS)
