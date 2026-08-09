@@ -21,7 +21,7 @@ class AssemblyAnalysisError(RuntimeError):
 def _canonicalize_literal(value: Any) -> Any:
     if isinstance(value, Mapping):
         return {
-            str(key): _canonicalize_literal(item)
+            key: _canonicalize_literal(item)
             for key, item in sorted(value.items(), key=lambda pair: str(pair[0]))
         }
     if isinstance(value, (set, frozenset)):
@@ -29,6 +29,27 @@ def _canonicalize_literal(value: Any) -> Any:
     if isinstance(value, (list, tuple)):
         return [_canonicalize_literal(item) for item in value]
     return value
+
+
+def _assignment_target_names(node: ast.AST) -> set[str]:
+    if isinstance(node, ast.Assign):
+        targets = node.targets
+    elif isinstance(node, (ast.AnnAssign, ast.AugAssign, ast.NamedExpr)):
+        targets = [node.target]
+    else:
+        return set()
+
+    names: set[str] = set()
+    pending = list(targets)
+    while pending:
+        target = pending.pop()
+        if isinstance(target, ast.Name):
+            names.add(target.id)
+        elif isinstance(target, (ast.List, ast.Tuple)):
+            pending.extend(target.elts)
+        elif isinstance(target, ast.Starred):
+            pending.append(target.value)
+    return names
 
 
 def _ast_latex_inputs(tree: ast.AST) -> list[tuple[str, str]]:
@@ -73,7 +94,30 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
         "VARIANTS",
         "VARIANTES",
     }
+    closed_contract_names = {"ELEVE_VARIANTS", "VARIANT_ORDERS"}
+    top_level_node_ids = {id(node) for node in tree.body}
     declared_constants: set[str] = set()
+    ambiguous_constants: set[str] = set()
+    for node in ast.walk(tree):
+        contract_names = _assignment_target_names(node) & closed_contract_names
+        if not contract_names:
+            continue
+        declared_constants.update(contract_names)
+        supported_top_level = id(node) in top_level_node_ids and (
+            (
+                isinstance(node, ast.Assign)
+                and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)
+            )
+            or (
+                isinstance(node, ast.AnnAssign)
+                and isinstance(node.target, ast.Name)
+                and node.value is not None
+            )
+        )
+        if not supported_top_level:
+            ambiguous_constants.update(contract_names)
+
     for node in tree.body:
         name: str | None = None
         value_node: ast.AST | None = None
@@ -131,6 +175,7 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
             variants.update(item for item in literal_choices if isinstance(item, str))
 
     return {
+        "ambiguous_constants": sorted(ambiguous_constants),
         "constants": dict(sorted(constants.items())),
         "declared_constants": sorted(declared_constants),
         "latex_inputs": _ast_latex_inputs(tree),
@@ -201,6 +246,7 @@ def validate_analysis(
             declared_constants & {"ELEVE_VARIANTS", "VARIANT_ORDERS"}
         )
         if closed_contract:
+            ambiguous_constants = set(analysis.get("ambiguous_constants", []))
             declared_variants = constants.get("VARIANTS")
             variant_orders = constants.get("VARIANT_ORDERS")
             valid_declared_variants = (
@@ -216,13 +262,22 @@ def validate_analysis(
             valid_variant_orders = (
                 valid_declared_variants
                 and isinstance(variant_orders, Mapping)
+                and all(isinstance(key, str) for key in variant_orders)
                 and set(variant_orders) == set(declared_variants)
                 and all(
                     _is_valid_variant_order(rules)
                     for rules in variant_orders.values()
                 )
             )
-            if not valid_variant_orders:
+            if "VARIANT_ORDERS" in ambiguous_constants:
+                errors.append(
+                    (
+                        "VARIANT_ORDERS",
+                        "declaration VARIANT_ORDERS conditionnelle, imbriquee ou "
+                        "chainee interdite",
+                    )
+                )
+            elif not valid_variant_orders:
                 errors.append(
                     (
                         "VARIANT_ORDERS",
@@ -243,7 +298,15 @@ def validate_analysis(
                 and valid_declared_variants
                 and set(student_variants) <= set(declared_variants)
             )
-            if not valid_student_variants:
+            if "ELEVE_VARIANTS" in ambiguous_constants:
+                errors.append(
+                    (
+                        "ELEVE_VARIANTS",
+                        "declaration ELEVE_VARIANTS conditionnelle, imbriquee ou "
+                        "chainee interdite",
+                    )
+                )
+            elif not valid_student_variants:
                 errors.append(
                     (
                         "ELEVE_VARIANTS",

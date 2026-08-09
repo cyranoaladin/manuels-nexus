@@ -6732,6 +6732,126 @@ def test_closed_manual_variant_contract_cannot_be_declared_partially(
     assert missing_field in {field for field, _reason in errors}
 
 
+def test_closed_contract_rejects_chained_dynamic_declarations(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''CHAPITRES = ["1NSI-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+VARIANT_ORDERS = orders = build_orders()
+ELEVE_VARIANTS = student_variants = build_student_variants()
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert {field for field, _reason in errors} >= {
+        "ELEVE_VARIANTS",
+        "VARIANT_ORDERS",
+    }
+
+
+@pytest.mark.parametrize(
+    "ambiguous_declarations",
+    [
+        '''if contract_enabled:
+    VARIANT_ORDERS = build_orders()
+    ELEVE_VARIANTS = build_student_variants()
+''',
+        '''def configure_contract():
+    VARIANT_ORDERS = build_orders()
+    ELEVE_VARIANTS = build_student_variants()
+''',
+    ],
+    ids=("conditional", "nested"),
+)
+def test_closed_contract_rejects_conditional_or_nested_reassignments(
+    tmp_path: Path,
+    inventory_module,
+    ambiguous_declarations: str,
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''CHAPITRES = ["1NSI-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+'''
+        + ambiguous_declarations,
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert {field for field, _reason in errors} >= {
+        "ELEVE_VARIANTS",
+        "VARIANT_ORDERS",
+    }
+
+
+def test_closed_contract_rejects_non_string_variant_order_keys(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''CHAPITRES = ["1NSI-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["1", "eleve"]
+VARIANT_ORDERS = {1: [("cours", "*")], "eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "VARIANT_ORDERS" in {field for field, _reason in errors}
+
+
+def test_closed_contract_uses_last_supported_top_level_assignment(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''CHAPITRES = ["1NSI-TEST"]
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = build_orders()
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = build_student_variants()
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+
+    assert inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    ) == []
+
+
 def test_legacy_manual_assembler_remains_valid_without_closed_variant_contract(
     inventory_module,
 ) -> None:
