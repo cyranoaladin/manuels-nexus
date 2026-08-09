@@ -6372,7 +6372,7 @@ def _open_pinned_directory(
 
 def _create_transaction_directory(
     root_fd: int,
-) -> tuple[str, int, os.stat_result]:
+) -> tuple[str, int, os.stat_result, os.stat_result]:
     name = ""
     for _ in range(128):
         name = f".inventory-collection-apply-{secrets.token_hex(12)}"
@@ -6423,14 +6423,14 @@ def _create_transaction_directory(
             raise InventoryError("transaction directory identity changed")
         if not _directory_entry_matches_identity(root_fd, name, pinned):
             raise InventoryError("transaction directory identity changed")
-        _write_transaction_entry(
+        owner_snapshot = _write_transaction_entry(
             fd,
             "transaction-owner",
             b"",
         )
         os.fsync(fd)
         os.fsync(root_fd)
-        return name, fd, pinned
+        return name, fd, pinned, owner_snapshot
     except Exception:
         try:
             os.unlink("transaction-owner", dir_fd=fd)
@@ -6669,6 +6669,10 @@ def _write_transaction_entry(
     fd = os.open(name, flags, 0o600, dir_fd=directory_fd)
     identity = os.fstat(fd)
     try:
+        if not stat.S_ISREG(identity.st_mode) or identity.st_nlink != 1:
+            raise InventoryError(
+                f"transaction entry creation is not exclusive: {name}"
+            )
         _write_all(fd, payload)
         os.fsync(fd)
         return identity
@@ -6694,8 +6698,8 @@ def _publish_transaction_entry(
     temporary_name: str,
     final_name: str,
     payload: bytes,
-) -> None:
-    _write_transaction_entry(
+) -> os.stat_result:
+    identity = _write_transaction_entry(
         directory_fd,
         temporary_name,
         payload,
@@ -6707,7 +6711,13 @@ def _publish_transaction_entry(
             src_dir_fd=directory_fd,
             dst_dir_fd=directory_fd,
         )
+        _revalidate_transaction_entry_snapshot(
+            directory_fd,
+            final_name,
+            identity,
+        )
         os.fsync(directory_fd)
+        return identity
     except Exception:
         try:
             os.unlink(temporary_name, dir_fd=directory_fd)
@@ -6816,28 +6826,51 @@ def _transaction_payload_digest(payload: bytes) -> str:
     return f"sha256:{hashlib.sha256(payload).hexdigest()}"
 
 
-def _owned_transaction_entry_identities(
-    transaction_name: str,
+def _revalidate_transaction_entry_snapshot(
     transaction_fd: int,
-    expected_entries: set[str],
-) -> dict[str, tuple[int, int]]:
-    actual_entries = set(os.listdir(transaction_fd))
-    if actual_entries != expected_entries:
-        raise InventoryError("transaction entries changed before validation")
-    identities: dict[str, tuple[int, int]] = {}
-    for entry in sorted(actual_entries):
-        metadata = os.stat(
+    entry: str,
+    expected: os.stat_result,
+) -> None:
+    try:
+        current = os.stat(
             entry,
             dir_fd=transaction_fd,
             follow_symlinks=False,
         )
-        if not stat.S_ISREG(metadata.st_mode):
-            raise InventoryError(
-                f"transaction validation entry is not regular: {entry}"
-            )
-        identities[f"{transaction_name}/{entry}"] = _stat_identity(
-            metadata
+    except OSError as exc:
+        raise InventoryError(
+            f"transaction validation entry unavailable: {entry}"
+        ) from exc
+    if not stat.S_ISREG(current.st_mode):
+        raise InventoryError(
+            f"transaction validation entry is not regular: {entry}"
         )
+    if _stat_identity(current) != _stat_identity(expected):
+        raise InventoryError(
+            f"transaction validation entry identity changed: {entry}"
+        )
+    if expected.st_nlink != 1 or current.st_nlink != 1:
+        raise InventoryError(
+            f"transaction validation entry link count changed: {entry}"
+        )
+
+
+def _owned_transaction_entry_identities(
+    transaction_name: str,
+    transaction_fd: int,
+    expected_entries: Mapping[str, os.stat_result],
+) -> dict[str, tuple[int, int]]:
+    actual_entries = set(os.listdir(transaction_fd))
+    if actual_entries != set(expected_entries):
+        raise InventoryError("transaction entries changed before validation")
+    identities: dict[str, tuple[int, int]] = {}
+    for entry, expected in sorted(expected_entries.items()):
+        _revalidate_transaction_entry_snapshot(
+            transaction_fd,
+            entry,
+            expected,
+        )
+        identities[f"{transaction_name}/{entry}"] = _stat_identity(expected)
     return identities
 
 
@@ -7296,6 +7329,7 @@ def _apply_atomic_payloads(
     backups: dict[PurePosixPath, str] = {}
     backup_digests: dict[PurePosixPath, str] = {}
     transaction_entries: set[str] = set()
+    transaction_entry_snapshots: dict[str, os.stat_result] = {}
     preserved_transaction_entries: set[str] = set()
     replaced: list[PurePosixPath] = []
     legacy_temp_root = root / ".inventory-collection-apply"
@@ -7316,10 +7350,14 @@ def _apply_atomic_payloads(
             root_fd=root_fd,
             root_stat=root_stat,
         )
-        temp_name, temp_fd, temp_stat = _create_transaction_directory(
-            root_fd
-        )
+        (
+            temp_name,
+            temp_fd,
+            temp_stat,
+            owner_snapshot,
+        ) = _create_transaction_directory(root_fd)
         transaction_entries.add("transaction-owner")
+        transaction_entry_snapshots["transaction-owner"] = owner_snapshot
     except Exception:
         os.close(root_fd)
         raise
@@ -7340,7 +7378,7 @@ def _apply_atomic_payloads(
             "process_start_token": process_start_token,
             "schema_version": 1,
         }
-        _publish_transaction_entry(
+        preparing_snapshot = _publish_transaction_entry(
             temp_fd,
             temporary_name="preparing.tmp",
             final_name="preparing.json",
@@ -7354,6 +7392,7 @@ def _apply_atomic_payloads(
             ),
         )
         transaction_entries.add("preparing.json")
+        transaction_entry_snapshots["preparing.json"] = preparing_snapshot
         for relative in targets:
             destination_parents[relative] = _open_destination_parent(
                 root_fd,
@@ -7369,6 +7408,9 @@ def _apply_atomic_payloads(
                 stage_name,
                 stage_payload,
             )
+            transaction_entry_snapshots[stage_name] = stage_snapshots[
+                relative
+            ]
             staged[relative] = stage_name
             stage_digests[relative] = _transaction_payload_digest(
                 stage_payload
@@ -7384,11 +7426,12 @@ def _apply_atomic_payloads(
                 backup_payload, target_stat = backup
                 destination_snapshots[relative] = target_stat
                 backup_name = f"backup-{index:08d}"
-                _write_transaction_entry(
+                backup_snapshot = _write_transaction_entry(
                     temp_fd,
                     backup_name,
                     backup_payload,
                 )
+                transaction_entry_snapshots[backup_name] = backup_snapshot
                 backups[relative] = backup_name
                 backup_digests[relative] = _transaction_payload_digest(
                     backup_payload
@@ -7408,7 +7451,7 @@ def _apply_atomic_payloads(
                 for relative in sorted(targets, key=str)
             ],
         }
-        _publish_transaction_entry(
+        journal_snapshot = _publish_transaction_entry(
             temp_fd,
             temporary_name="journal.tmp",
             final_name="journal.json",
@@ -7422,12 +7465,16 @@ def _apply_atomic_payloads(
             ),
         )
         transaction_entries.add("journal.json")
-        _write_transaction_entry(
+        transaction_entry_snapshots["journal.json"] = journal_snapshot
+        journal_ready_snapshot = _write_transaction_entry(
             temp_fd,
             "journal-ready",
             b"",
         )
         transaction_entries.add("journal-ready")
+        transaction_entry_snapshots[
+            "journal-ready"
+        ] = journal_ready_snapshot
         os.fsync(temp_fd)
         _require_repository_root_identity(root, root_stat)
         if validate_before_apply is not None:
@@ -7435,7 +7482,7 @@ def _apply_atomic_payloads(
                 _owned_transaction_entry_identities(
                     temp_name,
                     temp_fd,
-                    transaction_entries,
+                    transaction_entry_snapshots,
                 )
             )
         for relative, stage_name in sorted(
@@ -7446,6 +7493,11 @@ def _apply_atomic_payloads(
             if validate_state is not None:
                 validate_state()
             parent_fd, parent_stat = destination_parents[relative]
+            _revalidate_transaction_entry_snapshot(
+                temp_fd,
+                stage_name,
+                stage_snapshots[relative],
+            )
             _revalidate_destination_parent(
                 root_fd,
                 relative,

@@ -9969,6 +9969,82 @@ def test_atomic_batch_failure_restores_every_target_byte_for_byte(
     assert not new_target.exists()
 
 
+def test_transaction_rejects_stage_substituted_before_identity_validation(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "repository"
+    outside = tmp_path / "outside"
+    first = repository / "audit/a-first.txt"
+    second = repository / "audit/z-second.txt"
+    sentinel = outside / "sentinel-wip.txt"
+    _write(first, "premier historique\n")
+    _write(second, "second historique\n")
+    _write(sentinel, "WIP concurrent à préserver\n")
+    before = {
+        first: first.read_bytes(),
+        second: second.read_bytes(),
+    }
+    sentinel_before = sentinel.read_bytes()
+    original_write_entry = inventory_module._write_transaction_entry
+    substituted = False
+    callback_called = False
+
+    def substitute_stage_after_staging(
+        directory_fd: int,
+        name: str,
+        payload: bytes,
+    ) -> os.stat_result:
+        nonlocal substituted
+        identity = original_write_entry(directory_fd, name, payload)
+        if name == "journal-ready" and not substituted:
+            os.unlink("stage-00000000", dir_fd=directory_fd)
+            os.link(
+                sentinel,
+                "stage-00000000",
+                dst_dir_fd=directory_fd,
+                follow_symlinks=False,
+            )
+            substituted = True
+        return identity
+
+    def observe_validation(
+        _owned_entries: dict[str, tuple[int, int]],
+    ) -> None:
+        nonlocal callback_called
+        callback_called = True
+
+    monkeypatch.setattr(
+        inventory_module,
+        "_write_transaction_entry",
+        substitute_stage_after_staging,
+    )
+
+    with pytest.raises(
+        inventory_module.InventoryError,
+        match=(
+            "transaction rolled back.*transaction validation entry identity "
+            "changed: stage-00000000"
+        ),
+    ):
+        inventory_module._apply_atomic_payloads(
+            repository,
+            {
+                Path("audit/a-first.txt"): "premier nouveau\n",
+                Path("audit/z-second.txt"): "second nouveau\n",
+            },
+            validate_before_apply=observe_validation,
+        )
+
+    assert substituted is True
+    assert callback_called is False
+    assert {path: path.read_bytes() for path in before} == before
+    assert sentinel.read_bytes() == sentinel_before
+    assert sentinel.stat().st_nlink == 1
+    assert list(repository.glob(".inventory-collection-apply-*")) == []
+
+
 def test_next_transaction_recovers_batch_after_process_crash(
     tmp_path: Path,
     inventory_module,
