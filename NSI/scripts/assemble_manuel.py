@@ -102,6 +102,7 @@ ELEVE_ALLOWED_TYPES = [
     "projet",
     "qcm",
     "qcm_diagnostics",
+    "ece",
     "remediation",
     "amenagee",
 ]

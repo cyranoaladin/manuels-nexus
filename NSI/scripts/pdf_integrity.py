@@ -76,11 +76,15 @@ def book_preflight_issues(
                 issues.append("Outline PDF vide.")
             if not any(page.get_links() for page in document):
                 issues.append("Aucun lien PDF.")
-            if check_student_leaks:
+            try:
                 text = "\n".join(page.get_text() for page in document)
-                leak = BOOK_STUDENT_LEAK.search(text)
-                if leak:
-                    issues.append(f"Fuite version élève : {leak.group(0)}")
+            except (RuntimeError, ValueError) as error:
+                issues.append(f"Extraction texte PDF impossible : {error}")
+            else:
+                if check_student_leaks:
+                    leak = BOOK_STUDENT_LEAK.search(text)
+                    if leak:
+                        issues.append(f"Fuite version élève : {leak.group(0)}")
     except (FileNotFoundError, fitz.FileDataError) as error:
         issues.append(f"PDF illisible : {error}")
     return issues

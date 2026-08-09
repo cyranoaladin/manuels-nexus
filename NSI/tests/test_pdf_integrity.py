@@ -58,6 +58,38 @@ def _paths(tmp_path: Path, **pdf_options) -> tuple[Path, Path]:
     return pdf, log
 
 
+def _fake_document(monkeypatch, get_text):
+    class FakePage:
+        def get_links(self):
+            return [{"kind": fitz.LINK_GOTO}]
+
+        def get_text(self):
+            return get_text()
+
+    class FakeDocument:
+        metadata = {
+            "title": "Test manual",
+            "author": "Nexus Reussite",
+            "subject": "NSI",
+            "keywords": "NSI, test",
+        }
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return False
+
+        def __iter__(self):
+            return iter((FakePage(),))
+
+        def get_toc(self, *, simple):
+            assert simple is True
+            return [[1, "Test chapter", 1]]
+
+    monkeypatch.setattr(pdf_integrity.fitz, "open", lambda _pdf: FakeDocument())
+
+
 def test_student_leak_check_defaults_to_enabled(tmp_path):
     pdf, log = _paths(tmp_path, text="Corrigé complet.")
 
@@ -66,6 +98,47 @@ def test_student_leak_check_defaults_to_enabled(tmp_path):
         for issue in pdf_integrity.book_preflight_issues(pdf, log)
     )
     assert pdf_integrity.preflight_book_pdf(pdf, log) == 1
+
+
+def test_teacher_preflight_always_extracts_page_text(monkeypatch, tmp_path):
+    calls = []
+    _fake_document(monkeypatch, lambda: calls.append("get_text") or "Corrigé complet.")
+    log = tmp_path / "manual.log"
+    log.write_text("Clean compilation.\n", encoding="utf-8")
+
+    issues = pdf_integrity.book_preflight_issues(
+        tmp_path / "manual.pdf",
+        log,
+        check_student_leaks=False,
+    )
+
+    assert calls == ["get_text"]
+    assert issues == []
+
+
+def test_text_extraction_failure_is_a_clean_blocking_diagnostic(
+    monkeypatch, tmp_path, capsys
+):
+    def fail_extraction():
+        raise RuntimeError("fixture extraction failure")
+
+    _fake_document(monkeypatch, fail_extraction)
+    log = tmp_path / "manual.log"
+    log.write_text("Clean compilation.\n", encoding="utf-8")
+
+    try:
+        result = pdf_integrity.preflight_book_pdf(
+            tmp_path / "manual.pdf",
+            log,
+            check_student_leaks=False,
+        )
+    except RuntimeError as error:
+        pytest.fail(f"L'erreur d'extraction ne doit pas s'echapper : {error}")
+
+    captured = capsys.readouterr()
+    assert result == 1
+    assert "Extraction texte PDF impossible : fixture extraction failure" in captured.out
+    assert "Traceback" not in captured.out + captured.err
 
 
 def test_teacher_role_disables_only_student_leak_check(tmp_path):

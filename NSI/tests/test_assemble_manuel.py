@@ -150,6 +150,21 @@ def test_canonical_literals_are_exact_and_runtime_closed(assembler):
     )
 
 
+def test_student_selection_includes_contractual_ece_object(
+    monkeypatch, tmp_path, assembler
+):
+    root = tmp_path / "NSI"
+    _prepare_root(root)
+    ece = root / "chapitres" / CHAPTERS[0] / "ece" / "01_ece.tex"
+    _write_meta(ece, CHAPTERS[0], "ece", "ECE-1")
+    _patch_root(monkeypatch, assembler, root)
+
+    selected = assembler.collect_variant_objects("eleve")
+
+    assert "ece" in assembler.ELEVE_ALLOWED_TYPES
+    assert ece in selected
+
+
 def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(assembler):
     selected = {
         variant: assembler.collect_variant_objects(variant) for variant in VARIANTS
