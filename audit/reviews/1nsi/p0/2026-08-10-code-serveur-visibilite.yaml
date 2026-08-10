@@ -1,0 +1,37 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-WEB-SERVER-VISIBILITY-COURSE
+source_commit_sha: 13023dec636d3c6a46f8b93d13a038d471db4e60
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:48d0495257fe6c081ae0705dcb0672d1c58485b92893d895b893b41159154957
+  - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
+    sha256: sha256:37fbaf3e3f88ac24d6aa1a60728df013f20d0909b54ec3b112860f2f8acc5778
+reviewer_id: 019fed6e-cf35-7ce2-b2dd-171bb78a328a
+reviewer_model: GPT-5 (Codex)
+review_run_id: 1nsi-p0-code-serveur-visibilite-2026-08-10-socrates-v1
+session_id: 019fed6e-cf35-7ce2-b2dd-171bb78a328a
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      ........                                                                 [100%]
+      8 passed in 1.00s
+    stderr: ""
+    stdout_sha256: sha256:1e65d8e936d68ff8bdeae141306b63e87af7b1cf83fcd4bc83ab7a7bd1d8b79f
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Le test distingue la reponse HTTP generee d'une publication separee des sources.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T21:54:26+01:00"
