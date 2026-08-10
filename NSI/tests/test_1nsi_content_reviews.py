@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import sys
 import time
+import uuid
 from collections import Counter
 from pathlib import Path
 
@@ -230,6 +231,7 @@ def _review_run_receipt(
     source_manifest = {
         "review_tool_sha256": _sha(root / "scripts/review_1nsi_content.py"),
         "execution_checker_sha256": _sha(root / "NSI/scripts/verify_python.py"),
+        "execution_common_sha256": _sha(root / "NSI/scripts/common.py"),
         "entries": [
             {
                 "id": source["id"],
@@ -802,6 +804,7 @@ def test_review_run_receipt_schema_is_closed_and_validates_yaml(sealed_review) -
     assert set(manifest_schema["required"]) == {
         "review_tool_sha256",
         "execution_checker_sha256",
+        "execution_common_sha256",
         "entries",
     }
     wrapper = {
@@ -821,6 +824,7 @@ def test_review_run_receipt_schema_is_closed_and_validates_yaml(sealed_review) -
         ("dependency", "dependance scellee"),
         ("review_tool", "outil de revue"),
         ("execution_checker", "verificateur d'execution"),
+        ("execution_common", "support d'execution"),
     ],
 )
 def test_rejects_post_sealing_source_manifest_mutation(
@@ -843,8 +847,13 @@ def test_rejects_post_sealing_source_manifest_mutation(
         path.write_text(
             path.read_text(encoding="utf-8") + "# mutation\n", encoding="utf-8"
         )
-    else:
+    elif mutation == "execution_checker":
         path = root / "NSI/scripts/verify_python.py"
+        path.write_text(
+            path.read_text(encoding="utf-8") + "# mutation\n", encoding="utf-8"
+        )
+    else:
+        path = root / "NSI/scripts/common.py"
         path.write_text(
             path.read_text(encoding="utf-8") + "# mutation\n", encoding="utf-8"
         )
@@ -952,6 +961,29 @@ def test_verifier_and_receipt_schema_are_loaded_only_from_requested_root(
         review_module.ReviewValidationError, match="schema.*introuvable"
     ):
         review_module._receipt_schema(first)
+
+
+def test_verifier_cache_is_invalidated_by_checker_or_common_digest(
+    tmp_path, review_module
+) -> None:
+    _install_review_support(tmp_path)
+    first = review_module._verify_module(tmp_path)
+
+    verifier_path = tmp_path / "NSI/scripts/verify_python.py"
+    verifier_path.write_text(
+        verifier_path.read_text(encoding="utf-8") + "# checker mutation\n",
+        encoding="utf-8",
+    )
+    after_checker = review_module._verify_module(tmp_path)
+    assert after_checker is not first
+
+    common_path = tmp_path / "NSI/scripts/common.py"
+    common_path.write_text(
+        common_path.read_text(encoding="utf-8") + "# common mutation\n",
+        encoding="utf-8",
+    )
+    after_common = review_module._verify_module(tmp_path)
+    assert after_common is not after_checker
 
 
 def test_accepts_finding_with_git_sealed_review_receipt(
@@ -1141,6 +1173,43 @@ def test_malformed_finding_types_raise_normalized_validation_error(
             sealed_review["policy"],
             require_complete=True,
         )
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("path", None),
+        ("path", []),
+        ("line_start", None),
+        ("line_start", "1"),
+        ("line_start", []),
+        ("line_start", True),
+        ("line_start", 0),
+        ("line_end", "1"),
+        ("line_end", False),
+        ("line_end", 0),
+        ("excerpt_sha256", None),
+        ("excerpt_sha256", []),
+        ("excerpt_sha256", "not-a-digest"),
+        ("fact_type", None),
+        ("fact_type", []),
+        ("fact_type", True),
+        ("fact_type", "unknown_type"),
+        ("observation", None),
+        ("observation", []),
+        ("observation", True),
+        ("observation", ""),
+    ],
+)
+def test_validate_fact_normalizes_malformed_field_boundaries(
+    sealed_review, review_module, field, value
+) -> None:
+    source = sealed_review["sources"][0]
+    fact = _fact(source, "Observation valide.", root=sealed_review["root"])
+    fact[field] = value
+
+    with pytest.raises(review_module.ReviewValidationError):
+        review_module._validate_fact(fact, {source["path"]}, sealed_review["root"])
 
 
 @pytest.mark.parametrize(
@@ -1789,7 +1858,62 @@ def test_confined_python_has_no_network(review_module) -> None:
     assert out.strip() == "network-blocked"
 
 
-def test_confined_python_timeout_kills_child_process_group(review_module) -> None:
+def test_cgroup_tasksmax_bounds_fork_bomb(review_module) -> None:
+    rc, out, err = review_module._confined_python(
+        "import os, signal, time\n"
+        "children = []\n"
+        "for _ in range(64):\n"
+        "    try:\n"
+        "        child = os.fork()\n"
+        "    except OSError:\n"
+        "        print(f'tasks-bounded:{len(children)}', flush=True)\n"
+        "        break\n"
+        "    if child == 0:\n"
+        "        time.sleep(30)\n"
+        "        os._exit(0)\n"
+        "    children.append(child)\n"
+        "else:\n"
+        "    print('tasks-unbounded', flush=True)\n"
+        "for child in children:\n"
+        "    os.kill(child, signal.SIGKILL)\n"
+        "for child in children:\n"
+        "    os.waitpid(child, 0)\n",
+        timeout=5,
+    )
+
+    assert rc == 0, err
+    assert "tasks-unbounded" not in out
+    count = int(out.strip().removeprefix("tasks-bounded:"))
+    assert 1 <= count < 16
+
+
+def test_cgroup_memorymax_bounds_aggregate_children(review_module) -> None:
+    started = time.monotonic()
+    rc, out, err = review_module._confined_python(
+        "import os, time\n"
+        "children = []\n"
+        "for _ in range(4):\n"
+        "    child = os.fork()\n"
+        "    if child == 0:\n"
+        "        block = bytearray(70 * 1024 * 1024)\n"
+        "        for index in range(0, len(block), 4096):\n"
+        "            block[index] = 1\n"
+        "        print('allocated', flush=True)\n"
+        "        time.sleep(30)\n"
+        "        os._exit(0)\n"
+        "    children.append(child)\n"
+        "for child in children:\n"
+        "    os.waitpid(child, 0)\n",
+        timeout=8,
+    )
+
+    assert rc != 0
+    assert err != "timeout", f"la limite memoire agregee n'a pas arrete l'unite: {out}"
+    assert time.monotonic() - started < 8
+
+
+def test_confined_python_timeout_collects_unit_and_children(review_module) -> None:
+    unit_name = f"nexus-review-test-{uuid.uuid4().hex}"
     started = time.monotonic()
     rc, out, err = review_module._confined_python(
         "import os, time\n"
@@ -1800,12 +1924,26 @@ def test_confined_python_timeout_kills_child_process_group(review_module) -> Non
         "    print(child, flush=True)\n"
         "    time.sleep(60)\n",
         timeout=0.3,
+        unit_name=unit_name,
     )
 
     assert rc != 0
     assert err == "timeout"
     assert time.monotonic() - started < 5
     assert out.strip().isdigit(), "le processus enfant a bien demarre avant le timeout"
+    observed = subprocess.run(
+        [
+            str(review_module.SYSTEMCTL_PATH),
+            "--user",
+            "show",
+            "--property=LoadState",
+            "--value",
+            unit_name,
+        ],
+        capture_output=True,
+        text=True,
+    )
+    assert observed.stdout.strip() in {"", "not-found"}
 
 
 def test_missing_bwrap_is_a_hard_validation_error(
@@ -1814,6 +1952,19 @@ def test_missing_bwrap_is_a_hard_validation_error(
     monkeypatch.setattr(review_module, "BWRAP_PATH", tmp_path / "missing-bwrap")
     with pytest.raises(
         review_module.ReviewValidationError, match="bwrap.*indisponible"
+    ):
+        review_module._confined_python("print(1)\n")
+
+
+def test_missing_systemd_user_cgroup_is_a_hard_validation_error(
+    review_module, monkeypatch, tmp_path
+) -> None:
+    review_module._SYSTEMD_PREFLIGHT_CACHE.clear()
+    monkeypatch.setattr(
+        review_module, "SYSTEMD_RUN_PATH", tmp_path / "missing-systemd-run"
+    )
+    with pytest.raises(
+        review_module.ReviewValidationError, match="systemd.*cgroup.*indisponible"
     ):
         review_module._confined_python("print(1)\n")
 

@@ -15,6 +15,8 @@ import shutil
 import signal
 import subprocess
 import sys
+import time
+import uuid
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -26,11 +28,25 @@ from jsonschema import Draft202012Validator, FormatChecker
 ROOT = Path(__file__).resolve().parents[1]
 BWRAP_PATH = Path("/usr/bin/bwrap")
 RUFF_PATH = Path(shutil.which("ruff") or "/nonexistent/ruff")
+SYSTEMD_RUN_PATH = Path("/usr/bin/systemd-run")
+SYSTEMCTL_PATH = Path("/usr/bin/systemctl")
+CGROUP_CONTROLLERS_PATH = Path("/sys/fs/cgroup/cgroup.controllers")
 POLICY_PATH = Path("audit/1NSI_CONTENT_REVIEW_POLICY.yaml")
 SCHEMA_PATH = Path("audit/schemas/v1/1nsi-content-review.schema.json")
 META = re.compile(r"^% META:\s*(\{.*\})\s*$", re.MULTILINE)
 PYTHON_REFERENCE = re.compile(r"[A-Za-z0-9_./\\-]+\.py")
 LINK_KEYS = {"exercice_ref", "exercice_id", "evaluation_ref"}
+FACT_TYPES = {
+    "source_statement",
+    "programme_alignment",
+    "computed_result",
+    "execution_receipt",
+    "exercise_link",
+    "correction_link",
+    "pedagogical_structure",
+    "student_teacher_separation",
+    "reviewer_observation",
+}
 DEPENDENCY_CLASSES = (
     "protocol",
     "source",
@@ -534,17 +550,32 @@ def _validate_fact(fact: dict[str, Any], allowed_paths: set[str], root: Path) ->
     if not isinstance(fact, dict) or set(fact) != required:
         raise ReviewValidationError("preuve incomplete ou champ inconnu")
     path = fact["path"]
+    line_start = fact["line_start"]
+    line_end = fact["line_end"]
+    excerpt_sha256 = fact["excerpt_sha256"]
+    fact_type = fact["fact_type"]
+    observation = fact["observation"]
+    if not isinstance(path, str) or not path:
+        raise ReviewValidationError("chemin de preuve invalide")
+    if type(line_start) is not int or type(line_end) is not int:
+        raise ReviewValidationError("bornes de preuve invalides")
+    if line_start < 1 or line_end < line_start:
+        raise ReviewValidationError("plage de lignes invalide")
+    if not isinstance(excerpt_sha256, str) or not re.fullmatch(
+        r"sha256:[0-9a-f]{64}", excerpt_sha256
+    ):
+        raise ReviewValidationError("digest d'extrait invalide")
+    if not isinstance(fact_type, str) or fact_type not in FACT_TYPES:
+        raise ReviewValidationError("type de preuve invalide")
+    if not isinstance(observation, str) or not observation.strip():
+        raise ReviewValidationError("observation de preuve vide")
     if "TNSI" in path:
         raise ReviewValidationError("preuve TNSI interdite")
     if path not in allowed_paths:
         raise ReviewValidationError(f"preuve hors dependances: {path}")
-    observed = sha256_bytes(
-        _excerpt_bytes(root / path, fact["line_start"], fact["line_end"])
-    )
-    if observed != fact["excerpt_sha256"]:
+    observed = sha256_bytes(_excerpt_bytes(root / path, line_start, line_end))
+    if observed != excerpt_sha256:
         raise ReviewValidationError(f"digest d'extrait invalide: {path}")
-    if not isinstance(fact["observation"], str) or not fact["observation"].strip():
-        raise ReviewValidationError("observation de preuve vide")
 
 
 _REVIEW_RECEIPT_CACHE: dict[
@@ -680,6 +711,10 @@ def _validate_review_receipt(
         raise ReviewValidationError(
             "verificateur d'execution different du manifeste scelle"
         )
+    if source_manifest["execution_common_sha256"] != sha256_file(
+        root / "NSI/scripts/common.py"
+    ):
+        raise ReviewValidationError("support d'execution different du manifeste scelle")
     manifest_entries = source_manifest["entries"]
     manifest_ids = [entry["id"] for entry in manifest_entries]
     if len(manifest_ids) != len(set(manifest_ids)) or set(manifest_ids) != set(
@@ -913,15 +948,124 @@ def validate_findings(
     )
 
 
-_VERIFY_MODULES: dict[Path, Any] = {}
+_VERIFY_MODULES: dict[tuple[Path, str, str], Any] = {}
+_SYSTEMD_PREFLIGHT_CACHE: set[tuple[Path, Path, Path]] = set()
+SYSTEMD_CGROUP_PROPERTIES = (
+    "TasksMax=16",
+    "MemoryMax=268435456",
+    "MemorySwapMax=0",
+    "CPUQuota=100%",
+    "OOMPolicy=kill",
+    "LimitCPU=5",
+    "LimitAS=201326592",
+    "LimitNOFILE=64",
+    "LimitFSIZE=2097152",
+)
 
 
 def _sandbox_resource_limits() -> None:
     resource.setrlimit(resource.RLIMIT_CPU, (5, 5))
-    resource.setrlimit(resource.RLIMIT_AS, (512 * 1024 * 1024, 512 * 1024 * 1024))
+    resource.setrlimit(resource.RLIMIT_AS, (192 * 1024 * 1024, 192 * 1024 * 1024))
     resource.setrlimit(resource.RLIMIT_NOFILE, (64, 64))
-    resource.setrlimit(resource.RLIMIT_NPROC, (4096, 4096))
     resource.setrlimit(resource.RLIMIT_FSIZE, (2 * 1024 * 1024, 2 * 1024 * 1024))
+
+
+def _systemd_unit_name() -> str:
+    return f"nexus-review-{os.getpid()}-{uuid.uuid4().hex}"
+
+
+def _systemd_run_command(unit_name: str, command: list[str]) -> list[str]:
+    arguments = [
+        str(SYSTEMD_RUN_PATH),
+        "--user",
+        "--pipe",
+        "--wait",
+        "--collect",
+        "--quiet",
+        f"--unit={unit_name}",
+    ]
+    arguments.extend(
+        argument
+        for setting in SYSTEMD_CGROUP_PROPERTIES
+        for argument in ("--property", setting)
+    )
+    return [*arguments, "--", *command]
+
+
+def _systemctl(*arguments: str) -> subprocess.CompletedProcess[str]:
+    try:
+        return subprocess.run(
+            [str(SYSTEMCTL_PATH), "--user", *arguments],
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        raise ReviewValidationError("controle de l'unite systemd impossible") from error
+
+
+def _terminate_systemd_unit(unit_name: str) -> None:
+    for arguments in (
+        ("kill", "--kill-whom=all", unit_name),
+        ("stop", unit_name),
+        ("reset-failed", unit_name),
+    ):
+        try:
+            _systemctl(*arguments)
+        except ReviewValidationError:
+            continue
+    for _ in range(40):
+        try:
+            state = _systemctl(
+                "show", "--property=LoadState", "--value", unit_name
+            ).stdout.strip()
+        except ReviewValidationError:
+            return
+        if state in {"", "not-found"}:
+            return
+        time.sleep(0.025)
+    raise ReviewValidationError(f"unite systemd non collectee: {unit_name}")
+
+
+def _ensure_systemd_user_cgroup() -> None:
+    cache_key = (
+        SYSTEMD_RUN_PATH.resolve(),
+        SYSTEMCTL_PATH.resolve(),
+        CGROUP_CONTROLLERS_PATH.resolve(),
+    )
+    if cache_key in _SYSTEMD_PREFLIGHT_CACHE:
+        return
+    if (
+        not SYSTEMD_RUN_PATH.is_file()
+        or not SYSTEMCTL_PATH.is_file()
+        or not CGROUP_CONTROLLERS_PATH.is_file()
+    ):
+        raise ReviewValidationError("systemd user cgroup v2 indisponible")
+    try:
+        controllers = set(CGROUP_CONTROLLERS_PATH.read_text(encoding="utf-8").split())
+    except OSError as error:
+        raise ReviewValidationError("systemd user cgroup v2 indisponible") from error
+    if not {"cpu", "memory", "pids"} <= controllers:
+        raise ReviewValidationError("systemd user cgroup v2 indisponible")
+    manager = _systemctl("is-system-running")
+    if manager.returncode != 0 or manager.stdout.strip() != "running":
+        raise ReviewValidationError("systemd user cgroup v2 indisponible")
+
+    unit_name = _systemd_unit_name() + "-probe"
+    try:
+        probe = subprocess.run(
+            _systemd_run_command(unit_name, ["/usr/bin/true"]),
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+    except (OSError, subprocess.TimeoutExpired) as error:
+        _terminate_systemd_unit(unit_name)
+        raise ReviewValidationError("systemd user cgroup v2 indisponible") from error
+    if probe.returncode != 0:
+        _terminate_systemd_unit(unit_name)
+        raise ReviewValidationError("systemd user cgroup v2 indisponible")
+    _SYSTEMD_PREFLIGHT_CACHE.add(cache_key)
 
 
 def _bwrap_command(command: list[str], *, with_ruff: bool = False) -> list[str]:
@@ -969,27 +1113,62 @@ def _bwrap_command(command: list[str], *, with_ruff: bool = False) -> list[str]:
 
 
 def _run_confined(
-    command: list[str], payload: str, *, timeout: float, with_ruff: bool = False
+    command: list[str],
+    payload: str,
+    *,
+    timeout: float,
+    with_ruff: bool = False,
+    unit_name: str | None = None,
 ) -> tuple[int, str, str]:
-    process = subprocess.Popen(
-        _bwrap_command(command, with_ruff=with_ruff),
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-        start_new_session=True,
-        preexec_fn=_sandbox_resource_limits,
+    _ensure_systemd_user_cgroup()
+    observed_unit = unit_name or _systemd_unit_name()
+    if not re.fullmatch(r"nexus-review-[a-zA-Z0-9-]+", observed_unit):
+        raise ReviewValidationError("nom d'unite sandbox invalide")
+    wrapped_command = _systemd_run_command(
+        observed_unit, _bwrap_command(command, with_ruff=with_ruff)
     )
+    process_environment = {
+        "HOME": "/tmp",
+        "PATH": "/usr/bin",
+        "LANG": "C.UTF-8",
+    }
+    for name in ("XDG_RUNTIME_DIR", "DBUS_SESSION_BUS_ADDRESS"):
+        if name in os.environ:
+            process_environment[name] = os.environ[name]
+    try:
+        process = subprocess.Popen(
+            wrapped_command,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            start_new_session=True,
+            preexec_fn=_sandbox_resource_limits,
+            env=process_environment,
+        )
+    except OSError as error:
+        _terminate_systemd_unit(observed_unit)
+        raise ReviewValidationError(
+            "demarrage du sandbox systemd impossible"
+        ) from error
     try:
         stdout, stderr = process.communicate(payload, timeout=timeout)
     except subprocess.TimeoutExpired:
-        os.killpg(process.pid, signal.SIGKILL)
+        _terminate_systemd_unit(observed_unit)
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
         stdout, _stderr = process.communicate()
         return 1, stdout, "timeout"
+    if process.returncode != 0:
+        _terminate_systemd_unit(observed_unit)
     return process.returncode, stdout, stderr
 
 
-def _confined_python(script: str, timeout: float = 30) -> tuple[int, str, str]:
+def _confined_python(
+    script: str, timeout: float = 30, *, unit_name: str | None = None
+) -> tuple[int, str, str]:
     return _run_confined(
         [
             "/usr/bin/python3",
@@ -999,6 +1178,7 @@ def _confined_python(script: str, timeout: float = 30) -> tuple[int, str, str]:
         ],
         script,
         timeout=timeout,
+        unit_name=unit_name,
     )
 
 
@@ -1032,16 +1212,22 @@ def _load_module(path: Path, name: str) -> Any:
 
 def _verify_module(root: Path = ROOT) -> Any:
     resolved_root = root.resolve()
-    cached = _VERIFY_MODULES.get(resolved_root)
-    if cached is not None:
-        return cached
     scripts_dir = resolved_root / "NSI" / "scripts"
     verifier_path = scripts_dir / "verify_python.py"
     common_path = scripts_dir / "common.py"
     if not verifier_path.is_file() or not common_path.is_file():
         raise ReviewValidationError("verify_python.py ou common.py introuvable")
+    cache_key = (
+        resolved_root,
+        sha256_file(verifier_path),
+        sha256_file(common_path),
+    )
+    cached = _VERIFY_MODULES.get(cache_key)
+    if cached is not None:
+        return cached
 
-    suffix = hashlib.sha256(str(resolved_root).encode("utf-8")).hexdigest()[:12]
+    suffix_payload = "|".join((str(resolved_root), cache_key[1], cache_key[2]))
+    suffix = hashlib.sha256(suffix_payload.encode("utf-8")).hexdigest()[:12]
     previous_common = sys.modules.get("common")
     try:
         common = _load_module(common_path, f"nsi_review_common_{suffix}")
@@ -1056,7 +1242,7 @@ def _verify_module(root: Path = ROOT) -> Any:
         script, timeout=timeout
     )
     module.ruff_check = _confined_ruff
-    _VERIFY_MODULES[resolved_root] = module
+    _VERIFY_MODULES[cache_key] = module
     return module
 
 
@@ -1301,6 +1487,10 @@ def release_gate_allows(
     document: dict[str, Any], policy: dict[str, Any], root: Path = ROOT
 ) -> bool:
     if not isinstance(document, dict) or not isinstance(policy, dict):
+        return False
+    try:
+        _ensure_systemd_user_cgroup()
+    except ReviewValidationError:
         return False
     if not BWRAP_PATH.is_file():
         return False
