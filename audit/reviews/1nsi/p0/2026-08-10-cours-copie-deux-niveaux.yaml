@@ -1,0 +1,47 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-TC-COURS-C5-COPIE-PROFONDE-INCOMPLETE
+source_commit_sha: 8ec7de50df630d4e9ee2372d69f3efe3e76725ff
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:a7fcc4c90d351a74705d124f82332d87ea9fbefa98665ec49a8bef5f61448229
+  - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/code/copier_grille_deux_niveaux.py
+    sha256: sha256:72077ef969c52ef5331b2a843334e17892d5d8d7e8c1c9631b5f93f106694d9b
+  - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex
+    sha256: sha256:e3ff936b91d894d18f7e30bd8aedbbe3cf1726a03047f6270560917585b908ae
+reviewer_id: 019fed80-e9bd-7ef3-bfd6-a4352f2df7ef
+reviewer_model: GPT-5 (Codex)
+review_run_id: 1nsi-p0-cours-copie-deux-niveaux-2026-08-10-hypatia-v1
+session_id: 019fed80-e9bd-7ef3-bfd6-a4352f2df7ef
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      .........                                                                [100%]
+      9 passed in 0.98s
+    stderr: ""
+    stdout_sha256: sha256:8f32d67a8f7a3a16dc817c2fe6968947418ac3b82ac6eac71b474dd994701c59
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La copie des deux premiers niveaux et sa limite sur une cellule mutable sont verifiees.
+  - command: python -m py_compile chapitres/1NSI-TYPES-CONSTRUITS/code/copier_grille_deux_niveaux.py
+    cwd: NSI
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique de copie a deux niveaux est syntaxiquement valide.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T22:11:51+01:00"
