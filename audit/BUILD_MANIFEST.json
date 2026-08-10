@@ -1,6 +1,6 @@
 {
   "artifact_type": "build_manifest",
-  "build_state_digest": "sha256:47d756d2789cb259f447ed1b1c7907b169f298bad518eb0c522a685dc71233b6",
+  "build_state_digest": "sha256:cd3d8dc1925bdd1d37b33ce3b8c24d14b757d12a10f03cd9db3bc592f2af8213",
   "builds": [
     {
       "excluded_objects": [],
@@ -1358,6 +1358,55 @@
         "python": "Python 3.12.3"
       },
       "variant": "professeur"
+    },
+    {
+      "excluded_objects": [],
+      "gates": {
+        "compile": {
+          "passed": true
+        },
+        "preflight": {
+          "checks": {
+            "pdffonts": "passed",
+            "pdfinfo": "passed"
+          },
+          "passed": true
+        },
+        "student_separation": {
+          "passed": true
+        }
+      },
+      "generated_dependencies": [],
+      "generated_dependency_digests": {},
+      "git_sha": "546b6c87697bc2eb4617968a1b0fb743e263b620",
+      "included_objects": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/projet/1NSI-TC-PROJET.tex"
+      ],
+      "manual": "1NSI",
+      "model_digest": "sha256:8e76c512d45243967181dc99c14d30cf4700b8743868da438cf5bb5a5e8a0d63",
+      "ordered_trace": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/projet/1NSI-TC-PROJET.tex"
+      ],
+      "page_count": 3,
+      "pdf_path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_projets.pdf",
+      "pdf_sha256": "sha256:23ea667ae2688ecbc71e18d87df1b531d31cb1f36a7859498e27f4f8f8347d65",
+      "reproducibility": {
+        "config_path": "Mathematiques/manuel-maths/config/reproducible-build.json",
+        "force_source_date": "1",
+        "locale": "C.UTF-8",
+        "pythonhashseed": "0",
+        "source_commit": "f9ad08b1f91395f7631400475f90f1119269c630",
+        "source_date_epoch": 1785962466,
+        "timezone": "UTC"
+      },
+      "source_digest": "sha256:6d2f38239917c4096e77adc2ba0a9d574c43dd96f938f6ec8d4e532f9909b044",
+      "tool_versions": {
+        "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
+        "pdffonts": "pdffonts version 24.02.0",
+        "pdfinfo": "pdfinfo version 24.02.0",
+        "python": "Python 3.12.3"
+      },
+      "variant": "projets"
     }
   ],
   "generated_by": "build_manifest.py",
@@ -1365,7 +1414,7 @@
   "provenance": {
     "branch": "finalisation/collection-v1",
     "dirty": false,
-    "head_sha": "53e92e851bda55f25fd2a3ecd28212023d498dff"
+    "head_sha": "546b6c87697bc2eb4617968a1b0fb743e263b620"
   },
   "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
   "schema_version": 1,
