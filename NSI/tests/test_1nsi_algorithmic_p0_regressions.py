@@ -16,6 +16,12 @@ INSERTION_COURSE = (
     / "cours"
     / "1NSI-AGT-COURS-C2.tex"
 )
+SELECTION_COURSE = (
+    CHAPTERS
+    / "1NSI-ALGO-PARCOURS-TRIS"
+    / "cours"
+    / "1NSI-AGT-COURS-C3.tex"
+)
 ALGORITHMS_QCM = (
     CHAPTERS
     / "1NSI-ALGO-PARCOURS-TRIS"
@@ -62,6 +68,36 @@ def test_insertion_sort_termination_covers_all_array_sizes() -> None:
     assert "la condition de la boucle devient fausse" in normalized
     assert "Si $n\\leqslant1$, la boucle ne s'exécute pas" in normalized
     assert "Si $n\\geqslant2$, la dernière itération a $i=n-1$" in normalized
+
+
+def test_selection_sort_termination_covers_empty_and_singleton_arrays() -> None:
+    source = SELECTION_COURSE.read_text(encoding="utf-8")
+    property_block = source.split(
+        r"\propriete[Terminaison et coût]{", maxsplit=1
+    )[1].split(r"\demonstration{", maxsplit=1)[0]
+    demonstration_block = source.split(r"\demonstration{", maxsplit=1)[1].split(
+        "% BEGIN-VERIFY", maxsplit=1
+    )[0]
+    normalized_property = _normalized(property_block)
+    normalized_demonstration = _normalized(demonstration_block)
+
+    assert "$\\max(n-1,0)$ itérations" in normalized_property
+    assert (
+        "Si $n\\leqslant1$, la boucle externe ne s'exécute pas"
+        in normalized_property
+    )
+    assert "le tableau est déjà trié" in normalized_property
+    assert (
+        "Si $n\\leqslant1$, la boucle externe ne s'exécute pas"
+        in normalized_demonstration
+    )
+    assert "le tableau est déjà trié" in normalized_demonstration
+    assert (
+        "Si $n\\geqslant2$, la dernière itération a $i=n-2$"
+        in normalized_demonstration
+    )
+    assert "le tableau entier est donc trié" in normalized_demonstration
+    assert "Après la dernière itération ($i=n-2$)" not in normalized_demonstration
 
 
 def test_maximum_qcm_uses_four_unambiguous_options_in_order() -> None:

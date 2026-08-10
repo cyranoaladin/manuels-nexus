@@ -44,12 +44,14 @@ print(tri_selection([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]
 % END-VERIFY
 
 \propriete[Terminaison et coût]{
-  Les deux boucles \lstinline{for} (externe et interne) s'exécutent un nombre
-  \textbf{fixe} de fois, déterminé à l'avance : l'algorithme termine nécessairement. Dans
-  \textbf{tous} les cas (pas seulement le pire), le coût est \textbf{quadratique}
-  ($O(n^2)$) : contrairement au tri par insertion, la recherche du minimum restant
-  parcourt toujours l'intégralité de la partie non triée, même si le tableau est déjà
-  trié.
+  Pour un tableau de taille $n$, la boucle externe s'exécute
+  $\max(n-1,0)$ itérations. Si $n\leqslant1$, la boucle externe ne s'exécute pas
+  et le tableau est déjà trié. Sinon, les deux boucles \lstinline{for} parcourent
+  des intervalles finis, déterminés à l'avance : l'algorithme termine
+  nécessairement. Pour $n$ variable, le coût est \textbf{quadratique}
+  ($O(n^2)$) : contrairement au tri par insertion, la recherche du minimum
+  restant parcourt toujours l'intégralité de la partie non triée, même si le
+  tableau est déjà trié.
 }
 
 \demonstration{
@@ -69,9 +71,11 @@ trié ; et ce minimum étant le plus petit du reste, tous les éléments de
 \lstinline{tableau[0:i+1]} restent inférieurs ou égaux à \lstinline{tableau[i+1:n]}.
 L'invariant est conservé.
 
-\textbf{Terminaison.} Après la dernière itération ($i=n-2$), l'invariant donne :
-\lstinline{tableau[0:n-1]} est trié, avec son dernier élément inférieur ou égal à
-\lstinline{tableau[n-1:n]} : le tableau entier \lstinline{tableau[0:n]} est donc trié.
+\textbf{Terminaison.} Si $n\leqslant1$, la boucle externe ne s'exécute pas et le
+tableau est déjà trié. Si $n\geqslant2$, la dernière itération a $i=n-2$. Après
+sa conservation, l'invariant donne que \lstinline{tableau[0:n-1]} est trié et que
+son dernier élément est inférieur ou égal à l'unique élément de
+\lstinline{tableau[n-1:n]} : le tableau entier est donc trié.
 }
 
 % BEGIN-VERIFY
