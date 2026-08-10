@@ -36,7 +36,7 @@ EXPECTED = {
     "1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex": (
         "1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex",
         "1NSI-LANG-RE-C4-EX1",
-        "46a23a39e01974d66875ea58f167ed1b91e9ad5300ed3c1a0d7dafc97dfb275e",
+        "f7a439a0ceb0eda17b0cbb2395b254b822e0cabeca37776bbd8ff87fca173d2f",
     ),
     "1NSI-PROJET-METHODES/remediation/1NSI-PM-RE-C3.tex": (
         "1NSI-PROJET-METHODES/corriges/1NSI-PM-RE-C3-CORRIGE.tex",
