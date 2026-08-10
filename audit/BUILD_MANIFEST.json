@@ -1,6 +1,6 @@
 {
   "artifact_type": "build_manifest",
-  "build_state_digest": "sha256:77a697bff2e3c9bd964fd4ee333a6e6cb92154b6a6e10cf15aa0527e3c1630b2",
+  "build_state_digest": "sha256:f558841c166cc4d6afaf7381ed559842c8503c3384b81696312013546ae4d7c2",
   "builds": [
     {
       "excluded_objects": [],
@@ -459,6 +459,126 @@
         "python": "Python 3.12.3"
       },
       "variant": "eleve"
+    },
+    {
+      "excluded_objects": [],
+      "gates": {
+        "compile": {
+          "passed": true
+        },
+        "preflight": {
+          "checks": {
+            "pdffonts": "passed",
+            "pdfinfo": "passed"
+          },
+          "passed": true
+        }
+      },
+      "generated_dependencies": [],
+      "generated_dependency_digests": {},
+      "git_sha": "479c206ff9e22cbe68336c11a95a7534a53bdb1b",
+      "included_objects": [
+        "NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex",
+        "NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-A.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-B.tex",
+        "NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex",
+        "NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex",
+        "NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-A.tex",
+        "NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-B.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex",
+        "NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex",
+        "NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-B.tex"
+      ],
+      "manual": "1NSI",
+      "model_digest": "sha256:8e76c512d45243967181dc99c14d30cf4700b8743868da438cf5bb5a5e8a0d63",
+      "ordered_trace": [
+        "NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex",
+        "NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-A.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-B.tex",
+        "NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex",
+        "NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex",
+        "NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-A.tex",
+        "NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-B.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex",
+        "NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex",
+        "NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A-corrige.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-B-corrige.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-B.tex"
+      ],
+      "page_count": 29,
+      "pdf_path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_evaluations.pdf",
+      "pdf_sha256": "sha256:742fc6abfbaaf5a32a4fc3d9c6fc6c81f05b9934e305a9558d557967c2579bc4",
+      "reproducibility": {
+        "config_path": "Mathematiques/manuel-maths/config/reproducible-build.json",
+        "force_source_date": "1",
+        "locale": "C.UTF-8",
+        "pythonhashseed": "0",
+        "source_commit": "f9ad08b1f91395f7631400475f90f1119269c630",
+        "source_date_epoch": 1785962466,
+        "timezone": "UTC"
+      },
+      "source_digest": "sha256:6d2f38239917c4096e77adc2ba0a9d574c43dd96f938f6ec8d4e532f9909b044",
+      "tool_versions": {
+        "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
+        "pdffonts": "pdffonts version 24.02.0",
+        "pdfinfo": "pdfinfo version 24.02.0",
+        "python": "Python 3.12.3"
+      },
+      "variant": "evaluations"
     }
   ],
   "generated_by": "build_manifest.py",
@@ -466,7 +586,7 @@
   "provenance": {
     "branch": "finalisation/collection-v1",
     "dirty": false,
-    "head_sha": "281da255c574bd2461f960b41f6e87c50d6320bc"
+    "head_sha": "479c206ff9e22cbe68336c11a95a7534a53bdb1b"
   },
   "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
   "schema_version": 1,
