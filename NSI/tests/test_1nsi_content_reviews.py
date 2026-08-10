@@ -252,6 +252,40 @@ def _reseal_review_receipt(sealed_review: dict, receipt: dict) -> None:
     sealed_review["provenance"]["sealing_commit_sha"] = _git(root, "rev-parse", "HEAD")
 
 
+def _seal_finding_payload_with_anomalies(sealed_review: dict) -> dict:
+    source = sealed_review["sources"][0]
+    finding = _finding(
+        source,
+        provenance=sealed_review["provenance"],
+        root=sealed_review["root"],
+    )
+    anomaly_ids = ["1NSI-REV-SEALED-A", "1NSI-REV-SEALED-B"]
+    finding["dimensions"]["scientific"]["verdict"] = "issue"
+    finding["dimensions"]["scientific"]["anomaly_ids"] = anomaly_ids.copy()
+    finding["anomalies"] = []
+    for index, anomaly_id in enumerate(anomaly_ids, start=1):
+        fact = copy.deepcopy(finding["dimensions"]["scientific"]["facts"][0])
+        fact["observation"] = f"Anomalie scellee distincte {index}."
+        finding["anomalies"].append({
+            "id": anomaly_id,
+            "severity": "P1",
+            "dimension": "scientific",
+            "fact": fact,
+            "consequence": f"Consequence scellee {index}.",
+            "expected_action": f"Action scellee {index}.",
+        })
+
+    receipt = copy.deepcopy(sealed_review["receipt"])
+    review = next(item for item in receipt["reviews"] if item["id"] == source["id"])
+    review["payload"] = {
+        "dimensions": copy.deepcopy(finding["dimensions"]),
+        "anomalies": copy.deepcopy(finding["anomalies"]),
+    }
+    _reseal_review_receipt(sealed_review, receipt)
+    finding["provenance"] = copy.deepcopy(sealed_review["provenance"])
+    return finding
+
+
 @pytest.fixture
 def sealed_review(tmp_path, policy):
     chapter = tmp_path / "NSI" / "chapitres" / "1NSI-UNIT"
@@ -669,6 +703,56 @@ def test_accepts_finding_with_git_sealed_review_receipt(sealed_review, review_mo
     assert validated[0]["provenance"] == sealed_review["provenance"]
 
 
+def test_accepts_finding_exactly_equal_to_sealed_review_payload(
+    sealed_review, review_module
+) -> None:
+    finding = _seal_finding_payload_with_anomalies(sealed_review)
+    source = sealed_review["sources"][0]
+
+    validated = review_module.validate_findings(
+        [finding],
+        [source],
+        sealed_review["root"],
+        sealed_review["policy"],
+        require_complete=True,
+    )
+
+    assert validated[0]["dimensions"] == finding["dimensions"]
+    assert validated[0]["anomalies"] == finding["anomalies"]
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    ["verdict", "justification", "facts", "anomaly_ids", "anomalies"],
+)
+def test_rejects_finding_payload_different_from_sealed_review(
+    sealed_review, review_module, mutation
+) -> None:
+    finding = _seal_finding_payload_with_anomalies(sealed_review)
+    source = sealed_review["sources"][0]
+    if mutation == "verdict":
+        finding["dimensions"]["pedagogical"]["verdict"] = "not_applicable"
+    elif mutation == "justification":
+        finding["dimensions"]["scientific"]["justification"] += " Mutation."
+    elif mutation == "facts":
+        fact = copy.deepcopy(finding["dimensions"]["scientific"]["facts"][0])
+        fact["observation"] = "Fait ajoute uniquement au finding."
+        finding["dimensions"]["scientific"]["facts"].append(fact)
+    elif mutation == "anomaly_ids":
+        finding["dimensions"]["scientific"]["anomaly_ids"].reverse()
+    else:
+        finding["anomalies"][0]["consequence"] += " Mutation."
+
+    with pytest.raises(review_module.ReviewValidationError, match="payload scelle"):
+        review_module.validate_findings(
+            [finding],
+            [source],
+            sealed_review["root"],
+            sealed_review["policy"],
+            require_complete=True,
+        )
+
+
 @pytest.mark.parametrize(
     ("mutation", "message"),
     [
@@ -986,6 +1070,17 @@ def test_rejects_normalized_duplicate_observations(sealed_review, review_module)
     ]
     findings[0]["dimensions"]["scientific"]["facts"][0]["observation"] = "Meme fait ancre."
     findings[1]["dimensions"]["scientific"]["facts"][0]["observation"] = "  meme   FAIT ancre "
+    receipt = copy.deepcopy(sealed_review["receipt"])
+    findings_by_id = {finding["id"]: finding for finding in findings}
+    for review in receipt["reviews"]:
+        finding = findings_by_id[review["id"]]
+        review["payload"] = {
+            "dimensions": copy.deepcopy(finding["dimensions"]),
+            "anomalies": copy.deepcopy(finding["anomalies"]),
+        }
+    _reseal_review_receipt(sealed_review, receipt)
+    for finding in findings:
+        finding["provenance"] = copy.deepcopy(sealed_review["provenance"])
     with pytest.raises(review_module.ReviewValidationError, match="observation"):
         review_module.validate_findings(
             findings,
@@ -1432,6 +1527,18 @@ def test_generate_register_marks_receipt_divergence_as_p1_traceability(
         },
         "anomalies": [],
     }
+    sealed_run = yaml.safe_load(review_receipt.read_text(encoding="utf-8"))
+    sealed_run["reviews"][0]["payload"] = {
+        "dimensions": copy.deepcopy(finding["dimensions"]),
+        "anomalies": copy.deepcopy(finding["anomalies"]),
+    }
+    review_receipt.write_text(
+        yaml.safe_dump(sealed_run, sort_keys=False, allow_unicode=True), encoding="utf-8"
+    )
+    _git(tmp_path, "add", review_receipt.relative_to(tmp_path).as_posix())
+    _git(tmp_path, "commit", "-q", "-m", "reseal execution review payload")
+    finding["provenance"]["review_receipt_sha256"] = _sha(review_receipt)
+    finding["provenance"]["sealing_commit_sha"] = _git(tmp_path, "rev-parse", "HEAD")
 
     document = review_module.generate_register(
         [finding], tmp_path, policy, sources=[source], require_complete=True

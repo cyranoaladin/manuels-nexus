@@ -178,9 +178,12 @@ def load_policy(root: Path = ROOT) -> dict[str, Any]:
     return policy
 
 
+def _canonical_json(value: Any) -> str:
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+
+
 def _canonical_digest(value: Any) -> str:
-    payload = json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
-    return sha256_bytes(payload.encode("ascii"))
+    return sha256_bytes(_canonical_json(value).encode("ascii"))
 
 
 def _file_record(path: Path, root: Path) -> dict[str, str]:
@@ -470,7 +473,7 @@ def _validate_review_receipt(
     source: dict[str, Any],
     root: Path,
     policy: dict[str, Any],
-) -> None:
+) -> dict[str, Any]:
     receipt_path = provenance["review_receipt_path"]
     if (
         receipt_path not in REVIEW_RECEIPT_PATHS
@@ -563,6 +566,7 @@ def _validate_review_receipt(
         raise ReviewValidationError("chapitre de review incoherent")
     if review["scope"] != source["scope"]:
         raise ReviewValidationError("scope de review incoherent")
+    return review["payload"]
 
 
 def validate_findings(
@@ -649,7 +653,6 @@ def validate_findings(
             raise ReviewValidationError("integrateur incoherent")
         if provenance["reviewer_id"] == provenance["integrator_id"]:
             raise ReviewValidationError("relecteur identique a l'integrateur")
-        _validate_review_receipt(provenance, source, root, policy)
 
         anomalies = finding.get("anomalies")
         if not isinstance(anomalies, list):
@@ -704,6 +707,15 @@ def validate_findings(
             if anomaly["dimension"] not in {"scientific", "pedagogical"}:
                 raise ReviewValidationError("dimension d'anomalie invalide")
             _validate_fact(anomaly["fact"], allowed_paths, root)
+        sealed_payload = _validate_review_receipt(provenance, source, root, policy)
+        finding_payload = {
+            "dimensions": finding["dimensions"],
+            "anomalies": finding["anomalies"],
+        }
+        if _canonical_json(sealed_payload) != _canonical_json(finding_payload):
+            raise ReviewValidationError(
+                f"payload scelle different du finding pour {source['id']}"
+            )
         validated.append(copy.deepcopy(finding))
     return sorted(validated, key=lambda item: (item["chapter"], item["scope"], item["id"]))
 
