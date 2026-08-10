@@ -38,13 +38,24 @@ SECRET_PATTERNS = (
     re.compile(r"\bsk-[A-Za-z0-9_-]{20,}\b"),
     re.compile(r"OPENROUTER_API_KEY\s*[:=]\s*[^\s#]+", re.IGNORECASE),
     re.compile(r"Authorization\s*:\s*Bearer\s+\S+", re.IGNORECASE),
+    re.compile(r"\bghp_"),
+    re.compile(r"\bgithub_pat_"),
+)
+CREDENTIAL_ASSIGNMENT = re.compile(
+    r"^\s*(?:export\s+)?(?P<name>x-api-key|(?:[A-Z][A-Z0-9_]*_)?(?:API_KEY|TOKEN|SECRET|PASSWORD))"
+    r"\s*(?:=|:)\s*(?P<value>[^\s#]+)\s*$",
+    re.IGNORECASE | re.MULTILINE,
+)
+SAFE_CREDENTIAL_SENTINELS = {"not_applicable", "redacted", "none", "null"}
+RFC3339_DATETIME = re.compile(
+    r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$"
 )
 FORMAT_CHECKER = FormatChecker()
 
 
 @FORMAT_CHECKER.checks("date-time")
 def _is_rfc3339_datetime(value: object) -> bool:
-    if not isinstance(value, str) or "T" not in value:
+    if not isinstance(value, str) or not RFC3339_DATETIME.fullmatch(value):
         return False
     try:
         return datetime.fromisoformat(value.replace("Z", "+00:00")).tzinfo is not None
@@ -86,6 +97,8 @@ def _receipt_paths(root: Path) -> list[Path]:
 
 def _valid_receipt(source_path: str = "source.txt", source: bytes = b"source\n") -> dict:
     digest = _sha256(source)
+    stdout = "sortie de test\n"
+    stderr = "erreur de test\n"
     return {
         "artifact_type": "1nsi_p0_correction_attestation",
         "schema_version": 1,
@@ -104,8 +117,10 @@ def _valid_receipt(source_path: str = "source.txt", source: bytes = b"source\n")
                 "command": "pytest -q tests/test_unit.py",
                 "cwd": "NSI",
                 "exit_code": 0,
-                "stdout_sha256": digest,
-                "stderr_sha256": digest,
+                "stdout": stdout,
+                "stderr": stderr,
+                "stdout_sha256": _sha256(stdout.encode("utf-8")),
+                "stderr_sha256": _sha256(stderr.encode("utf-8")),
                 "result_summary": "Le test cible est vert.",
             }
         ],
@@ -120,8 +135,26 @@ def _load_schema() -> dict:
 
 
 def _assert_no_secret(raw: str, path: Path) -> None:
+    def replace_sentinel(match: re.Match[str]) -> str:
+        value = match["value"].strip("\"'").lower()
+        assert value in SAFE_CREDENTIAL_SENTINELS, (
+            f"secret ou credential interdit dans {path}"
+        )
+        return match["name"]
+
+    redacted = CREDENTIAL_ASSIGNMENT.sub(replace_sentinel, raw)
     for pattern in SECRET_PATTERNS:
-        assert not pattern.search(raw), f"secret ou credential interdit dans {path}"
+        assert not pattern.search(redacted), f"secret ou credential interdit dans {path}"
+
+
+def _assert_command_output_hashes(commands: list[dict]) -> None:
+    for command in commands:
+        assert _sha256(command["stdout"].encode("utf-8")) == command["stdout_sha256"], (
+            "le digest stdout doit correspondre aux octets UTF-8 exacts"
+        )
+        assert _sha256(command["stderr"].encode("utf-8")) == command["stderr_sha256"], (
+            "le digest stderr doit correspondre aux octets UTF-8 exacts"
+        )
 
 
 def _assert_source_hashes(root: Path, receipt: dict) -> None:
@@ -162,6 +195,7 @@ def _validate_receipts(root: Path = ROOT) -> list[dict]:
         _assert_no_secret(raw, path)
         receipt = yaml.safe_load(raw)
         validator.validate(receipt)
+        _assert_command_output_hashes(receipt["commands"])
         _assert_source_hashes(root, receipt)
         _assert_post_commit_parent(root, path, receipt)
         receipts.append(receipt)
@@ -216,11 +250,55 @@ def test_schema_enforces_formats_and_enumerations() -> None:
     assert len(errors) >= 3
 
 
+def test_date_time_requires_an_rfc3339_minute_precision_offset() -> None:
+    assert _is_rfc3339_datetime("2026-08-10T12:00:00+00:00")
+    assert not _is_rfc3339_datetime("2026-08-10T12:00:00+00:00:01")
+
+
+def test_command_output_digest_rejects_altered_stdout() -> None:
+    command = _valid_receipt()["commands"][0]
+    command["stdout"] = "sortie falsifiee"
+    with pytest.raises(AssertionError, match="stdout"):
+        _assert_command_output_hashes([command])
+
+
 def test_receipt_secret_detector_rejects_fake_credential_only() -> None:
     path = Path("fixture.yaml")
     _assert_no_secret("reviewer_id: unit-reviewer", path)
     with pytest.raises(AssertionError, match="secret ou credential"):
         _assert_no_secret("Authorization: Bearer sk-" + "x" * 24, path)
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        "GITHUB_TOKEN=fake-token",
+        "ghp_" + "x" * 36,
+        "github_pat_" + "x" * 24,
+        "x-api-key: fake-key",
+        "API_KEY=fake-key",
+        "TOKEN: fake-token",
+        "SECRET=fake-secret",
+        "PASSWORD: fake-password",
+    ],
+)
+def test_receipt_secret_detector_rejects_additional_fake_credentials(raw: str) -> None:
+    with pytest.raises(AssertionError, match="secret ou credential"):
+        _assert_no_secret(raw, Path("fixture.yaml"))
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        "GITHUB_TOKEN",
+        "API_KEY=not_applicable",
+        "TOKEN: redacted",
+        "SECRET=none",
+        "PASSWORD: null",
+    ],
+)
+def test_receipt_secret_detector_allows_names_and_sentinels(raw: str) -> None:
+    _assert_no_secret(raw, Path("fixture.yaml"))
 
 
 def test_existing_receipts_validate_when_present() -> None:

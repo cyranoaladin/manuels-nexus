@@ -76,6 +76,8 @@
         "command",
         "cwd",
         "exit_code",
+        "stdout",
+        "stderr",
         "stdout_sha256",
         "stderr_sha256",
         "result_summary"
@@ -84,6 +86,8 @@
         "command": { "type": "string", "minLength": 1 },
         "cwd": { "type": "string", "minLength": 1 },
         "exit_code": { "type": "integer" },
+        "stdout": { "type": "string" },
+        "stderr": { "type": "string" },
         "stdout_sha256": { "$ref": "#/$defs/sha256" },
         "stderr_sha256": { "$ref": "#/$defs/sha256" },
         "result_summary": { "type": "string", "minLength": 1 }
