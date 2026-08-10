@@ -1,13 +1,63 @@
 {
   "artifact_type": "build_manifest",
-  "build_state_digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-  "builds": [],
+  "build_state_digest": "sha256:d21f0126437377ec575fb922f8d1a3ba77d0102d29b6e6fac82c30586df5bcbc",
+  "builds": [
+    {
+      "excluded_objects": [],
+      "gates": {
+        "compile": {
+          "passed": true
+        },
+        "preflight": {
+          "checks": {
+            "pdffonts": "passed",
+            "pdfinfo": "passed"
+          },
+          "passed": true
+        },
+        "student_separation": {
+          "passed": true
+        }
+      },
+      "generated_dependencies": [],
+      "generated_dependency_digests": {},
+      "git_sha": "93a6cf84c21255f0f43cd713ebb3706cc12fab0b",
+      "included_objects": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex"
+      ],
+      "manual": "1NSI",
+      "model_digest": "sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548",
+      "ordered_trace": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex"
+      ],
+      "page_count": 4,
+      "pdf_path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf",
+      "pdf_sha256": "sha256:764db14d0a06dd9b720fc1028e7c702929e891345cfef8adf132736fc9fe5d19",
+      "reproducibility": {
+        "config_path": "Mathematiques/manuel-maths/config/reproducible-build.json",
+        "force_source_date": "1",
+        "locale": "C.UTF-8",
+        "pythonhashseed": "0",
+        "source_commit": "f9ad08b1f91395f7631400475f90f1119269c630",
+        "source_date_epoch": 1785962466,
+        "timezone": "UTC"
+      },
+      "source_digest": "sha256:8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81",
+      "tool_versions": {
+        "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
+        "pdffonts": "pdffonts version 24.02.0",
+        "pdfinfo": "pdfinfo version 24.02.0",
+        "python": "Python 3.12.3"
+      },
+      "variant": "amenagee"
+    }
+  ],
   "generated_by": "build_manifest.py",
   "model_digest": "sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548",
   "provenance": {
     "branch": "finalisation/collection-v1",
     "dirty": false,
-    "head_sha": "181f426fbb09fc55575ac0486ea108e5b7ad84a5"
+    "head_sha": "93a6cf84c21255f0f43cd713ebb3706cc12fab0b"
   },
   "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
   "schema_version": 1,
