@@ -1,0 +1,48 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-LANG-COURS-C4-MAXIMUM-ZERO
+source_commit_sha: 2d0bd28b502aeefabff9c733eea6fec308a0b116
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:efee5b1e7a30309996a995e898a8493011f7c5a8ce2acb68f5f85d7f55d4dc21
+  - path: NSI/chapitres/1NSI-LANGAGE/code/maximum_bugue.py
+    sha256: sha256:610d04975de3e5d01cd6766707c01d8af08b26d157a872786d190613206c5d65
+  - path: NSI/chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C4.tex
+    sha256: sha256:5bf6371dcf077b1403eafa636cf8804a5959e8a3e80a0973d2daba5053d6167f
+reviewer_id: 019fed12-0461-7e60-8a96-beee9cf917b8
+reviewer_model: gpt-5.6-terra
+review_run_id: 1nsi-p0-maximum-zero-2026-08-10-turing-v1
+session_id: 019fed12-0461-7e60-8a96-beee9cf917b8
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      ..                                                                       [100%]
+      2 passed in 0.14s
+    stderr: ""
+    stdout_sha256: sha256:0a97b591ab7ce9644866a9aea8e19c37ff6647585418c546d0481e0cb92bfbc7
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Les deux regressions passent, dont le leurre de provenance et le critere mathematique.
+  - command: python chapitres/1NSI-LANGAGE/code/maximum_bugue.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      7
+    stderr: ""
+    stdout_sha256: sha256:10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique publie 7; la revue prouve que la fonction renvoie max(0, max(liste)) pour une liste non vide.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T20:22:19+01:00"
