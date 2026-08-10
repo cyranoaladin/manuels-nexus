@@ -1,6 +1,6 @@
 {
   "artifact_type": "build_manifest",
-  "build_state_digest": "sha256:8c80319c9597434ad4055bdd1c2fe37bf76bfd63720614842847ec4a0191566b",
+  "build_state_digest": "sha256:164e829970653a7c72020ffd65e11691a67199cf94dcc5ff35c0f52f2c06642b",
   "builds": [
     {
       "excluded_objects": [],
@@ -579,6 +579,63 @@
         "python": "Python 3.12.3"
       },
       "variant": "evaluations"
+    },
+    {
+      "excluded_objects": [],
+      "gates": {
+        "compile": {
+          "passed": true
+        },
+        "preflight": {
+          "checks": {
+            "pdffonts": "passed",
+            "pdfinfo": "passed"
+          },
+          "passed": true
+        },
+        "student_separation": {
+          "passed": true
+        }
+      },
+      "generated_dependencies": [],
+      "generated_dependency_digests": {},
+      "git_sha": "a2f3ce1eabc96e69e2f2ef6aa9a342eca56c8527",
+      "included_objects": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M1.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M2.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M3.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M4.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M5.tex"
+      ],
+      "manual": "1NSI",
+      "model_digest": "sha256:b63f4266ea648863f26a5b0cf6d0de5e1d567d643b332bbbb871af4ae5c78cba",
+      "ordered_trace": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M1.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M2.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M3.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M4.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M5.tex"
+      ],
+      "page_count": 6,
+      "pdf_path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf",
+      "pdf_sha256": "sha256:8648ae545890fc64fe8eeee0bb590788e048a18a3d9d43aaafe307e00956e3bc",
+      "reproducibility": {
+        "config_path": "Mathematiques/manuel-maths/config/reproducible-build.json",
+        "force_source_date": "1",
+        "locale": "C.UTF-8",
+        "pythonhashseed": "0",
+        "source_commit": "f9ad08b1f91395f7631400475f90f1119269c630",
+        "source_date_epoch": 1785962466,
+        "timezone": "UTC"
+      },
+      "source_digest": "sha256:ad16664a264ad02890e5775bae4de053b32f33f917dfc33497aa00c7ead18f19",
+      "tool_versions": {
+        "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
+        "pdffonts": "pdffonts version 24.02.0",
+        "pdfinfo": "pdfinfo version 24.02.0",
+        "python": "Python 3.12.3"
+      },
+      "variant": "methodes"
     }
   ],
   "generated_by": "build_manifest.py",
@@ -586,7 +643,7 @@
   "provenance": {
     "branch": "finalisation/collection-v1",
     "dirty": false,
-    "head_sha": "2fbfff513159d302946155ba6b1b2ba2afaa8772"
+    "head_sha": "a2f3ce1eabc96e69e2f2ef6aa9a342eca56c8527"
   },
   "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
   "schema_version": 1,
