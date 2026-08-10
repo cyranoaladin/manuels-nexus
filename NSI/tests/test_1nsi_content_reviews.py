@@ -68,6 +68,9 @@ REVIEW_RUNS = {
         "types-construits",
     )
 }
+OBJECT_REVIEW_RUNS = REVIEW_RUNS - {
+    "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml"
+}
 ALLOWED_FILES = (
     CURRENT_ALLOWED_FILES | INVENTORY_INTEGRATION_FILES | REVIEW_OUTPUTS | REVIEW_RUNS
 )
@@ -2574,7 +2577,11 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
         "sealing_commit_sha": CONTRACT_RECEIPT_COMMIT,
     }
 
-    findings = review_module.load_findings(FINDINGS_PATH)
+    findings = [
+        finding
+        for finding in review_module.load_findings(FINDINGS_PATH)
+        if finding["scope"] == "contract"
+    ]
     contracts = [source for source in sources if source["scope"] == "contract"]
     assert len(findings) == len(contracts) == 10
     assert {finding["id"] for finding in findings} == {
@@ -2680,3 +2687,48 @@ def test_contract_findings_receipt_is_git_sealed_and_matches_current_dependencie
                 source, sources, ROOT, policy
             ),
         }
+
+
+def test_object_findings_exhaustively_cover_all_339_sources(
+    policy, sources, review_module
+) -> None:
+    findings = review_module.load_findings(FINDINGS_PATH)
+    object_sources = [source for source in sources if source["scope"] == "object"]
+    object_findings = [finding for finding in findings if finding["scope"] == "object"]
+
+    assert len(object_sources) == 339
+    assert len(object_findings) == 339
+    assert {finding["id"] for finding in object_findings} == {
+        source["id"] for source in object_sources
+    }
+    assert Counter(finding["chapter"] for finding in object_findings) == Counter(
+        source["chapter"] for source in object_sources
+    )
+    assert {
+        finding["provenance"]["review_receipt_path"] for finding in object_findings
+    } == OBJECT_REVIEW_RUNS
+    assert (
+        len({finding["provenance"]["review_run_id"] for finding in object_findings})
+        == len(OBJECT_REVIEW_RUNS)
+        == 5
+    )
+    assert len(
+        {finding["provenance"]["reviewer_id"] for finding in object_findings}
+    ) == len(OBJECT_REVIEW_RUNS)
+    assert all(
+        finding["provenance"]["reviewer_id"] != policy["integrator_id"]
+        for finding in object_findings
+    )
+    assert "TNSI" not in json.dumps(object_findings, ensure_ascii=False)
+
+    sources_by_id = {source["id"]: source for source in object_sources}
+    for finding in object_findings:
+        source = sources_by_id[finding["id"]]
+        assert finding["source_path"] == source["path"]
+        assert finding["source_status"] == source["status"]
+        assert set(finding["dimensions"]) == {"scientific", "pedagogical"}
+
+    validated = review_module.validate_findings(
+        findings, sources, ROOT, policy, require_complete=True
+    )
+    assert len(validated) == 349
