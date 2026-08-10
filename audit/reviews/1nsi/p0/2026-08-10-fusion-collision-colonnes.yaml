@@ -1,0 +1,47 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-TAB-COURS-C4-COLLISION-COLONNES
+source_commit_sha: 04571b9b848427f7d15163472654f5d8612c6b61
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:12633984ce991c00e02201feaa7b14e058424d927d7e89684e0d0b8940a884e9
+  - path: NSI/chapitres/1NSI-TABLES/code/fusionner.py
+    sha256: sha256:61137c01689ffc723b541d9622e459bd4da5545d52b485ad3fe5a7b2c32977bb
+  - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex
+    sha256: sha256:b44d5bdf94925d2a02cdb48c49cbb32c0b66a63e3498cf31dd36552548fceff9
+reviewer_id: 019fed63-47c4-73d1-ad09-d5cea07ec23e
+reviewer_model: GPT-5 (Codex)
+review_run_id: 1nsi-p0-fusion-collision-colonnes-2026-08-10-rawls-v1
+session_id: 019fed63-47c4-73d1-ad09-d5cea07ec23e
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      .......                                                                  [100%]
+      7 passed in 1.01s
+    stderr: ""
+    stdout_sha256: sha256:340395270fb417a47ab873172450df0cf4b411bc867aa069cf153e3d9697d7ae
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La collision hors cle est refusee; la dette distincte FUSION-DOUBLONS reste ouverte.
+  - command: python -m py_compile chapitres/1NSI-TABLES/code/fusionner.py
+    cwd: NSI
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique de la fusion est syntaxiquement valide.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T21:37:07+01:00"
