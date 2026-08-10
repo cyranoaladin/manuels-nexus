@@ -157,6 +157,7 @@
         "protocol_digest",
         "reviewed_at",
         "assignment",
+        "source_manifest",
         "reviews"
       ],
       "properties": {
@@ -185,6 +186,39 @@
               "minItems": 1,
               "uniqueItems": true,
               "items": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "source_manifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "review_tool_sha256",
+            "execution_checker_sha256",
+            "entries"
+          ],
+          "properties": {
+            "review_tool_sha256": { "$ref": "#/$defs/sha256" },
+            "execution_checker_sha256": { "$ref": "#/$defs/sha256" },
+            "entries": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "path",
+                  "source_sha256",
+                  "dependency_digest"
+                ],
+                "properties": {
+                  "id": { "type": "string", "minLength": 1 },
+                  "path": { "type": "string", "minLength": 1 },
+                  "source_sha256": { "$ref": "#/$defs/sha256" },
+                  "dependency_digest": { "$ref": "#/$defs/sha256" }
+                }
+              }
             }
           }
         },
