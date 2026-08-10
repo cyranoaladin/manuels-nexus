@@ -151,8 +151,9 @@ def test_minimum_canonical_source_rejects_empty_list_and_matches_correction() ->
     assert minimum([5, 3, 8]) == 3
     assert minimum([42]) == 42
     assert minimum([-5, -1, -8]) == -8
-    with pytest.raises(AssertionError):
+    with pytest.raises(AssertionError) as error:
         minimum([])
+    assert str(error.value) == "liste doit etre non vide"
 
     source_code = MINIMUM_SOURCE.read_text(encoding="utf-8")
     tex = MINIMUM_CORRECTION.read_text(encoding="utf-8")
@@ -184,7 +185,8 @@ def test_minimum_canonical_source_rejects_empty_list_and_matches_correction() ->
     ]
 
     assert '"type_objet": "corrige"' in tex.splitlines()[0]
-    assert "Precondition : liste est non vide" in tex
+    assert r"\textbf{Précondition : la liste est non vide.}" in tex
+    assert "déclenchant" in tex
     assert "AssertionError" in tex
     assert re.search(
         r"% BEGIN-VERIFY\n"
@@ -192,8 +194,8 @@ def test_minimum_canonical_source_rejects_empty_list_and_matches_correction() ->
         r"% assert minimum\(\[5, 3, 8\]\) == 3.*?"
         r"% try:.*?"
         r"%     minimum\(\[\]\).*?"
-        r"% except AssertionError:.*?"
-        r"%     pass.*?"
+        r"% except AssertionError as erreur:.*?"
+        r'%     assert str\(erreur\) == "liste doit etre non vide".*?'
         r"% else:.*?"
         r"%     raise AssertionError.*?"
         r"% END-VERIFY",

@@ -10,8 +10,8 @@ Aucun élément ne vérifie donc \lstinline{x < mini}, et \lstinline{mini} reste
 jusqu'à la fin : ce $0$, qui n'appartient même pas à la liste, est renvoyé à tort.
 
 \textbf{3.}
-La \textbf{Precondition : liste est non vide.} L'instruction \lstinline{assert}
-refuse donc \lstinline{[]} en declenchant une \lstinline{AssertionError}.
+\textbf{Précondition : la liste est non vide.} L'instruction \lstinline{assert}
+refuse donc \lstinline{[]} en déclenchant une \lstinline{AssertionError}.
 
 % PYTHON-SOURCE: code/minimum.py
 \begin{python}
@@ -20,7 +20,7 @@ def minimum(liste):
 
     Precondition : liste est non vide.
     """
-    assert len(liste) > 0
+    assert len(liste) > 0, "liste doit etre non vide"
     mini = liste[0]
     for x in liste[1:]:
         if x < mini:
@@ -37,7 +37,7 @@ constante arbitraire), la fonction renvoie bien $3$ pour \lstinline{[5, 3, 8]}.
 %
 %     Precondition : liste est non vide.
 %     """
-%     assert len(liste) > 0
+%     assert len(liste) > 0, "liste doit etre non vide"
 %     mini = liste[0]
 %     for x in liste[1:]:
 %         if x < mini:
@@ -46,8 +46,8 @@ constante arbitraire), la fonction renvoie bien $3$ pour \lstinline{[5, 3, 8]}.
 % assert minimum([5, 3, 8]) == 3
 % try:
 %     minimum([])
-% except AssertionError:
-%     pass
+% except AssertionError as erreur:
+%     assert str(erreur) == "liste doit etre non vide"
 % else:
 %     raise AssertionError("minimum doit refuser une liste vide")
 % END-VERIFY
