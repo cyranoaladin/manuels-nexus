@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import subprocess
 from collections import Counter
 from copy import deepcopy
 from pathlib import Path
@@ -153,16 +154,39 @@ def test_qualification_policy_schema_and_approved_contract(
         "modified_pairs_digest"
     ]
 
-    inventory = inventory_module.build_inventory(ROOT)
-    baseline = json.loads(
-        (ROOT / "audit" / "ANOMALIES_BASELINE.json").read_text(
-            encoding="utf-8"
-        )
+    baseline_sha = payload["approved_set"]["baseline_sha"]
+    observed_inventory = json.loads(
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(ROOT),
+                "show",
+                f"{baseline_sha}:audit/INVENTAIRE_COLLECTION.json",
+            ],
+            check=True,
+            stdout=subprocess.PIPE,
+            text=True,
+        ).stdout
+    )
+    initial_baseline = json.loads(
+        subprocess.run(
+            [
+                "git",
+                "-C",
+                str(ROOT),
+                "show",
+                f"{baseline_sha}:audit/ANOMALIES_BASELINE.json",
+            ],
+            check=True,
+            stdout=subprocess.PIPE,
+            text=True,
+        ).stdout
     )
     comparison = inventory_module._compare_anomaly_debt(
-        inventory_module._current_active_debt(inventory),
-        baseline["active"],
-        baseline["resolved"],
+        inventory_module._current_active_debt(observed_inventory),
+        initial_baseline["active"],
+        initial_baseline["resolved"],
     )
     assert modified_pairs == comparison["modified"]
     assert set(payload["owners"]) == {
