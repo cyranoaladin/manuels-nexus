@@ -1518,7 +1518,10 @@ def _student_text_violations(text: str) -> list[str]:
             "identifiant interne",
             r"\b(?:1SPE|1NSI)-[A-Z0-9]+(?:-[A-Z0-9]+)*",
         ),
-        ("corrigé", r"(?i:\bcorrigé\b)"),
+        (
+            "corrigé",
+            r"(?im:\bcorrigés?\b|\bcorriges\b(?=[ \t]*(?:[.:;!?-][ \t]*)?$))",
+        ),
         ("barème enseignant", r"(?i:\bbar[èe]me indicatif\b)"),
         (
             "note enseignant",

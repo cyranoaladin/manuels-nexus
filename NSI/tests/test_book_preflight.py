@@ -103,7 +103,14 @@ def test_preflight_book_pdf_rejects_pdf_without_links(tmp_path):
 
 @pytest.mark.parametrize(
     "leak",
-    ["Corrigé", "Barème indicatif", "Réponse attendue", "1NSI-INTERNE"],
+    [
+        "Corrigé",
+        "Corrigés",
+        "corriges",
+        "Barème indicatif",
+        "Réponse attendue",
+        "1NSI-INTERNE",
+    ],
 )
 def test_preflight_book_pdf_rejects_student_leaks(tmp_path, leak):
     assert _preflight(tmp_path, text=f"Contenu public. {leak}") == 1
@@ -113,7 +120,10 @@ def test_preflight_book_pdf_allows_instruction_to_correct(tmp_path):
     assert (
         _preflight(
             tmp_path,
-            text="Corrige puis corriger le programme et étudier la version corrigée.",
+            text=(
+                "Corrige puis corriger le programme. Tu corriges aussi un autre "
+                "programme et étudies la version corrigée."
+            ),
         )
         == 0
     )

@@ -245,6 +245,8 @@ def _receipt(
         ("1SPE-SUITES-EX-001", "identifiant interne"),
         ("1NSI-TYPES-BASE-EX-001", "identifiant interne"),
         ("Corrigé", "corrigé"),
+        ("Corrigés", "corrigé"),
+        ("corriges", "corrigé"),
         ("Barème indicatif", "barème enseignant"),
         ("Réponse professeur", "note enseignant"),
     ],
@@ -260,6 +262,7 @@ def test_recorder_student_text_gate_rejects_teacher_leaks(
     [
         "Corrige le programme.",
         "Corriger le programme.",
+        "Tu corriges le programme.",
         "Étudier la version corrigée.",
     ],
 )
