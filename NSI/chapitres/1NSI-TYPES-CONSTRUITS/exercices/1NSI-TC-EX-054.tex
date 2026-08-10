@@ -1,32 +1,75 @@
 % META: {"id": "1NSI-TC-EX-054", "chapitre": "1NSI-TYPES-CONSTRUITS", "type_objet": "exercice", "capacites": ["1NSI-TYPES-CONSTRUITS-C5"], "parcours": 3, "competences": ["programmer", "modeliser"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "needs_review"}
 % BEGIN-VERIFY
-% def copie_profonde_grille(grille):
-%     resultat = []
-%     for ligne in grille:
-%         resultat.append(list(ligne))
-%     return resultat
+% def copier_grille_deux_niveaux(grille):
+%     """Copie la liste externe et chaque ligne.
+%
+%     Precondition : les cellules sont des valeurs scalaires atomiques non mutables,
+%     sans conteneur imbrique.
+%     """
+%     return [list(ligne) for ligne in grille]
 % g = [[1, 2], [3, 4]]
-% c = copie_profonde_grille(g)
+% c = copier_grille_deux_niveaux(g)
 % c[0][0] = 99
-% assert g[0][0] == 1
-% assert c[0][0] == 99
-% c[1] = [10, 20]
-% assert g[1] == [3, 4]
+% print(g[0][0])
+% grille = [[1, 2], [3, 4]]
+% copie = copier_grille_deux_niveaux(grille)
+% assert copie is not grille
+% assert all(
+%     ligne_copie is not ligne
+%     for ligne_copie, ligne in zip(copie, grille)
+% )
+% copie.append([5, 6])
+% copie[1] = [10, 20]
+% copie[0][0] = 99
+% assert grille == [[1, 2], [3, 4]]
+% hors_contrat = [[[1]]]
+% copie_hors_contrat = copier_grille_deux_niveaux(hors_contrat)
+% assert copie_hors_contrat[0][0] is hors_contrat[0][0]
+% copie_hors_contrat[0][0].append(2)
+% assert hors_contrat == [[[1, 2]]]
 % END-VERIFY
+% BEGIN-TRACE
+% def copier_grille_deux_niveaux(grille):
+%     """Copie la liste externe et chaque ligne.
+%
+%     Precondition : les cellules sont des valeurs scalaires atomiques non mutables,
+%     sans conteneur imbrique.
+%     """
+%     return [list(ligne) for ligne in grille]
+% g = [[1, 2], [3, 4]]
+% c = copier_grille_deux_niveaux(g)
+% c[0][0] = 99
+% print(g[0][0])
+% EXPECTED
+% 1
+% END-TRACE
 \begin{exercice}{1NSI-TC-EX-054}{3}{15}
-On veut créer une fonction qui copie entièrement une grille (liste de listes)
-sans qu'aucune modification de la copie n'affecte l'original.
+On suppose que les cellules sont des valeurs scalaires atomiques non mutables,
+sans conteneur imbriqué. On veut réaliser une \textbf{copie des deux premiers
+niveaux} d'une grille.
 
 \begin{enumerate}
-  \item Écrire une fonction \lstinline{copie_profonde_grille(grille)} qui renvoie
-        une copie profonde de la grille.
-  \item Vérifier que la modification de la copie ne modifie pas l'original :
+  \item Écrire une fonction \lstinline{copier_grille_deux_niveaux(grille)} qui
+        crée une nouvelle liste externe et une nouvelle liste pour chaque ligne.
+        Sa garantie est limitée aux modifications de la structure externe, aux
+        remplacements de lignes et aux réaffectations de cellules dans la copie :
+        elles ne doivent pas modifier la grille d'origine.
+  \item Étudier le scénario numérique suivant :
 \begin{python}
 g = [[1, 2], [3, 4]]
-c = copie_profonde_grille(g)
+c = copier_grille_deux_niveaux(g)
 c[0][0] = 99
-print(g[0][0])  # doit afficher 1
+print(g[0][0])
 \end{python}
-  \item Expliquer pourquoi \lstinline{list(grille)} ne suffit pas.
+\begin{console}
+1
+\end{console}
+        Justifier l'affichage en comparant l'identité de la liste externe et de
+        chacune des lignes.
+  \item Le cas \lstinline{[[[1]]]} est hors contrat : la cellule-liste reste partagée.
+        Expliquer pourquoi une mutation de cette liste interne par la copie affecte
+        aussi l'original, et pourquoi la fonction ne garantit rien au-delà des deux
+        premiers niveaux.
 \end{enumerate}
+% PYTHON-SOURCE: code/copier_grille_deux_niveaux.py
 \end{exercice}

@@ -60,6 +60,14 @@ GRID_COPY_ANSWER_053 = (
     NSI_ROOT
     / "chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-053.tex"
 )
+GRID_COPY_EXERCISE_054 = (
+    NSI_ROOT
+    / "chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-054.tex"
+)
+GRID_COPY_ANSWER_054 = (
+    NSI_ROOT
+    / "chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-054.tex"
+)
 REVIEW_SCRIPT = REPO_ROOT / "scripts/review_1nsi_content.py"
 
 _REVIEW_SPEC = importlib.util.spec_from_file_location(
@@ -820,3 +828,136 @@ print(grille[0])"""
     assert "hors_contrat = [[[1]]]" in verify_code
     assert "is hors_contrat[0][0]" in verify_code
     assert "assert hors_contrat == [[[1, 2]]]" in verify_code
+
+
+def test_grid_exercise_054_uses_two_level_function_name_and_contract() -> None:
+    assert GRID_COPY_EXERCISE_054.is_file()
+    assert GRID_COPY_ANSWER_054.is_file()
+    assert GRID_COPY_SOURCE.is_file()
+
+    exercise = GRID_COPY_EXERCISE_054.read_text(encoding="utf-8")
+    answer = GRID_COPY_ANSWER_054.read_text(encoding="utf-8")
+    source_code = GRID_COPY_SOURCE.read_text(encoding="utf-8")
+    scenario = """g = [[1, 2], [3, 4]]
+c = copier_grille_deux_niveaux(g)
+c[0][0] = 99
+print(g[0][0])"""
+
+    required_contract = (
+        "copier_grille_deux_niveaux",
+        "copie des deux premiers niveaux",
+        "cellules sont des valeurs scalaires atomiques non mutables",
+        "sans conteneur imbriqué",
+        "modifications de la structure externe",
+        "remplacements de lignes",
+        "réaffectations de cellules",
+        r"\lstinline{[[[1]]]}",
+        "cellule-liste reste partagée",
+        "hors contrat",
+    )
+    forbidden_claims = (
+        "copie_profonde_grille",
+        "copie entièrement",
+        "copie profonde de la grille",
+        "la copie est bien profonde",
+        "Pour que la copie soit profonde",
+        "aucune modification de la copie",
+        "# doit afficher 1",
+        "# affiche 1",
+    )
+    for tex in (exercise, answer):
+        normalized = " ".join(tex.split())
+        for phrase in required_contract:
+            assert phrase in normalized
+        for phrase in forbidden_claims:
+            assert phrase not in normalized
+        assert "% PYTHON-SOURCE: code/copier_grille_deux_niveaux.py" in tex
+        assert "\\begin{console}\n1\n\\end{console}" in tex
+
+    visible_exercise_programs = re.findall(
+        r"\\begin\{python\}\n(?P<python>.*?)\\end\{python\}",
+        exercise,
+        re.DOTALL,
+    )
+    assert visible_exercise_programs == [scenario + "\n"]
+    assert "def copier_grille_deux_niveaux" not in visible_exercise_programs[0]
+
+    visible_answer_programs = re.findall(
+        r"\\begin\{python\}\n(?P<python>.*?)\\end\{python\}",
+        answer,
+        re.DOTALL,
+    )
+    assert visible_answer_programs == [source_code, scenario + "\n"]
+
+    python_dependency = {
+        "path": (
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/code/"
+            "copier_grille_deux_niveaux.py"
+        ),
+        "sha256": "sha256:"
+        + hashlib.sha256(source_code.encode("utf-8")).hexdigest(),
+    }
+    records = (
+        {
+            "id": "1NSI-TC-EX-054",
+            "path": (
+                "NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/"
+                "1NSI-TC-EX-054.tex"
+            ),
+            "metadata": {},
+            "scope": "object",
+            "chapter": "1NSI-TYPES-CONSTRUITS",
+        },
+        {
+            "id": "1NSI-TC-CO-054",
+            "path": (
+                "NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/"
+                "1NSI-TC-CO-054.tex"
+            ),
+            "metadata": {},
+            "scope": "object",
+            "chapter": "1NSI-TYPES-CONSTRUITS",
+        },
+    )
+    for record in records:
+        manifest = review_module.dependency_manifest(record, [record], REPO_ROOT)
+        assert manifest["python"] == [python_dependency]
+
+    for tex in (exercise, answer):
+        trace_matches = list(
+            re.finditer(
+                r"% BEGIN-TRACE\n(?P<trace>.*?)% EXPECTED\n"
+                r"(?P<expected>.*?)% END-TRACE",
+                tex,
+                re.DOTALL,
+            )
+        )
+        assert len(trace_matches) == 1
+        trace_code = _uncomment(trace_matches[0].group("trace"))
+        expected = _uncomment(trace_matches[0].group("expected")) + "\n"
+        assert trace_code == source_code.rstrip("\n") + "\n" + scenario
+        stdout = subprocess.run(
+            ["python", "-c", trace_code],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        assert stdout == expected == "1\n"
+
+        verify_matches = list(
+            re.finditer(
+                r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY",
+                tex,
+                re.DOTALL,
+            )
+        )
+        assert len(verify_matches) == 1
+        verify_code = _uncomment(verify_matches[0].group("verify"))
+        assert verify_code.count(source_code.rstrip("\n")) == 1
+        assert scenario in verify_code
+        assert "assert copie is not grille" in verify_code
+        assert "assert all(" in verify_code
+        assert "hors_contrat = [[[1]]]" in verify_code
+        assert "is hors_contrat[0][0]" in verify_code
+        assert "assert hors_contrat == [[[1, 2]]]" in verify_code
+        subprocess.run(["python", "-c", verify_code], check=True)
