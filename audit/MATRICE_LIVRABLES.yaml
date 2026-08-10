@@ -7,38 +7,18 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '349'
       source: anomalies.blocking_statuses
-    - code: anomalie:chapters_not_in_manual
-      detail: '10'
-      source: anomalies.chapters_not_in_manual
-    - code: anomalie:unassembled_objects
-      detail: '109'
-      source: anomalies.unassembled_objects
-    - code: livrable_non_compile
-      detail: absent
-      source: deliverable_matrix.1NSI.variants.evaluations
-    - code: livrable_non_compile
-      detail: partial
-      source: deliverable_matrix.1NSI.variants.livret_methodes
-    - code: livrable_non_compile
-      detail: absent
-      source: deliverable_matrix.1NSI.variants.manuel_eleve
-    - code: livrable_non_compile
-      detail: partial
-      source: deliverable_matrix.1NSI.variants.manuel_professeur
-    - code: livrable_non_compile
-      detail: absent
-      source: deliverable_matrix.1NSI.variants.projets
-    - code: livrable_non_compile
-      detail: partial
-      source: deliverable_matrix.1NSI.variants.remediations
-    - code: livrable_non_compile
-      detail: partial
-      source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
       detail: objets=339; contrats=10
       source: manuals.1NSI.statuses
     current:
-      artifacts: []
+      artifacts:
+      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf
+      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf
+      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_evaluations.pdf
+      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf
+      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf
+      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_projets.pdf
+      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf
       chapter_count: 10
       chapters:
       - 1NSI-ALGO-DICHO-GLOUTON-KNN
@@ -82,50 +62,62 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:chapters_not_in_manual
-    - anomalie:unassembled_objects
     - statuts_non_approuves
-    structural_compile_ready: false
+    structural_compile_ready: true
     variants:
       evaluations:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_evaluations.pdf
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
+        declared_manual_variants:
+        - evaluations
+        state: compiled
       livret_methodes:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf
         declared_chapter_variants:
         - methodes
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - methodes
+        state: compiled
       manuel_eleve:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
+        declared_manual_variants:
+        - eleve
+        state: compiled
       manuel_professeur:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf
         declared_chapter_variants:
         - professeur
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - professeur
+        state: compiled
       projets:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_projets.pdf
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
+        declared_manual_variants:
+        - projets
+        state: compiled
       remediations:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf
         declared_chapter_variants:
         - remediation
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - remediation
+        state: compiled
       version_amenagee:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf
         declared_chapter_variants:
         - amenagee
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - amenagee
+        state: compiled
   1SPE:
     blockers:
     - code: anomalie:blocking_statuses
@@ -592,24 +584,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:2eb1e45d3b1455242b0229bf27c8c58da97215287bdf3c04bc98d4160cdad503
+model_digest: sha256:31c7a433bbad440e55f059e836c947575786adc3e55a40aeb17c7faa63a48820
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-09T06:28:21Z'
+  generated_at_utc: '2026-08-10T03:14:49Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
-    scripts/build_manifest.py: sha256:afb34e4a11f6e1d3315183a85163989ffc5e458993f1a0d0543899ada54f0d0e
-    scripts/inventory_assembly.py: sha256:4df9591ae0576826887e9f42d2e82d7541b7169f6c27cb40987ecba3962f60ef
-    scripts/inventory_collection.py: sha256:00606dcca626e7419e1c256302b3bc82d52a9ec81b347d28253ae01d189fe139
+    scripts/build_manifest.py: sha256:78366be0329d346105f1533070dd53c8c3724c67b6b5fc9b43bd9b1169df4ef2
+    scripts/inventory_assembly.py: sha256:85b002d11298e2fdeca5a7bc8a32436838769a02585ab4a8c690b7b5aea49704
+    scripts/inventory_collection.py: sha256:65d5b905b495555e89175331cacda1c7af6f49d19d2ae8e7b1707312d517d4ec
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:b169b9c38d9085fe6aa727626355ffcc7643f0f2b9f8d6e261a49e467cfab401
+  generator_sha256: sha256:a5f0b6741cf3c67a8b3ae13ee2e8a7f4b3dedb05fe25817c88d74f8a50a0ae61
   generator_version: 1
   git_available: true
-  head_sha: 32dd6fd237fe37ab012127fb40ea5f17efd904ba
+  head_sha: e33b9c600eab13ff53cd5f11e53ae01716d5cbd3
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -620,4 +612,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:064ae412437e040895a1343591766827545f9ebe82ec18cee037ffa37c36aa54
+source_digest: sha256:a5ae7c5972b5be8242839098358ad824001d8b0a529dae03a49f9e10ea42847e

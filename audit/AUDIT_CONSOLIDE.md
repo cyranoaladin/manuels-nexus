@@ -54,17 +54,7 @@
 - source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex, cible=CONCLGN-C1, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-009.tex, cible=TSPE-PROBA-C10, champ=capacites[0], raison=capacite META absente du contrat du chapitre
 
-### chapters_not_in_manual (16)
-- source=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml, cible=1NSI-ALGO-DICHO-GLOUTON-KNN, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml, cible=1NSI-ALGO-PARCOURS-TRIS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml, cible=1NSI-ARCHITECTURE-OS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-LANGAGE/contrat.yaml, cible=1NSI-LANGAGE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml, cible=1NSI-PROJET-METHODES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-RESEAUX/contrat.yaml, cible=1NSI-RESEAUX, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-TABLES/contrat.yaml, cible=1NSI-TABLES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml, cible=1NSI-TYPES-BASE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml, cible=1NSI-TYPES-CONSTRUITS, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/1NSI-WEB-IHM/contrat.yaml, cible=1NSI-WEB-IHM, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+### chapters_not_in_manual (6)
 - source=NSI/chapitres/TNSI-ALGORITHMIQUE/contrat.yaml, cible=TNSI-ALGORITHMIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/contrat.yaml, cible=TNSI-ARCHITECTURES-MATERIELLES-SY, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - source=NSI/chapitres/TNSI-BASES-DE-DONNEES/contrat.yaml, cible=TNSI-BASES-DE-DONNEES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
@@ -110,8 +100,7 @@
 ### metadata_missing (0)
 - Aucune.
 
-### missing_assemblers (2)
-- source=NSI/scripts/assemble_manuel.py, cible=1NSI, champ=manuel, raison=aucun assembleur de manuel suivi
+### missing_assemblers (1)
 - source=NSI/scripts/assemble_manuel.py, cible=TNSI, champ=manuel, raison=aucun assembleur de manuel suivi
 
 ### missing_corrections (0)
@@ -120,38 +109,35 @@
 ### orphan_files (0)
 - Aucune.
 
-### unassembled_objects (137)
+### unassembled_objects (28)
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex, cible=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex, cible=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex, cible=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex, cible=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex, cible=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C1-CORRIGE.tex, cible=NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C1-CORRIGE.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex, cible=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-002.tex, cible=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-003.tex, cible=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-004.tex, cible=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex, cible=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-RE-C5-CORRIGE.tex, cible=NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-RE-C5-CORRIGE.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex, cible=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex, cible=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex, cible=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex, cible=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex, cible=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex, cible=NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-001.tex, cible=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-002.tex, cible=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-003.tex, cible=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-004.tex, cible=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-005.tex, cible=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex, cible=NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-001.tex, cible=NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- … 107 autres.
+- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-001.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-002.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-003.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-004.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-005.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-001.tex, cible=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-002.tex, cible=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-003.tex, cible=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-004.tex, cible=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-001.tex, cible=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-002.tex, cible=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-003.tex, cible=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-004.tex, cible=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-001.tex, cible=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-002.tex, cible=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-001.tex, cible=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-002.tex, cible=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-003.tex, cible=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-004.tex, cible=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-001.tex, cible=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-002.tex, cible=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-003.tex, cible=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
+- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-004.tex, cible=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 
 ### unattributed_pdfs (1)
 - source=Mathematiques/manuel-maths/build/specimen.pdf, cible=Mathematiques/manuel-maths/build/specimen.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
@@ -188,13 +174,13 @@
 ## Livrables
 ### NSI Première
 - Éligible publication: False
-- evaluations : absent (artifacts=0)
-- livret_methodes : partial (artifacts=0)
-- manuel_eleve : absent (artifacts=0)
-- manuel_professeur : partial (artifacts=0)
-- projets : absent (artifacts=0)
-- remediations : partial (artifacts=0)
-- version_amenagee : partial (artifacts=0)
+- evaluations : compiled (artifacts=1)
+- livret_methodes : compiled (artifacts=1)
+- manuel_eleve : compiled (artifacts=1)
+- manuel_professeur : compiled (artifacts=1)
+- projets : compiled (artifacts=1)
+- remediations : compiled (artifacts=1)
+- version_amenagee : compiled (artifacts=1)
 
 ### Mathématiques Première
 - Éligible publication: False
