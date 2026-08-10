@@ -24,6 +24,14 @@ ROOT = Path(__file__).resolve().parents[2]
 MODULE_PATH = ROOT / "scripts" / "review_1nsi_content.py"
 POLICY_PATH = ROOT / "audit" / "1NSI_CONTENT_REVIEW_POLICY.yaml"
 SCHEMA_PATH = ROOT / "audit" / "schemas" / "v1" / "1nsi-content-review.schema.json"
+FINDINGS_PATH = ROOT / "audit" / "1NSI_CONTENT_REVIEW_FINDINGS.yaml"
+CONTRACT_RECEIPT_PATH = (
+    ROOT / "audit" / "reviews" / "1nsi" / "runs" / "2026-08-10-contracts.yaml"
+)
+CONTRACT_RECEIPT_COMMIT = "c92b94e9ecee48a10617ef5d92f069adb4ce7a1f"
+CONTRACT_RECEIPT_SHA256 = (
+    "sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb"
+)
 BASE_SHA = "867e10503044688a0b8cee3847647562dce6db45"
 PDF_SHA256 = "7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0"
 SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
@@ -200,6 +208,15 @@ def _git(root: Path, *args: str, input_text: str | None = None) -> str:
         text=True,
         input=input_text,
     ).stdout.strip()
+
+
+def _git_bytes(root: Path, *args: str) -> bytes:
+    return subprocess.run(
+        ["git", *args],
+        cwd=root,
+        check=True,
+        capture_output=True,
+    ).stdout
 
 
 def _review_run_receipt(
@@ -2519,3 +2536,133 @@ def test_cli_exposes_required_modes(policy, review_module, monkeypatch) -> None:
     )
     assert review_module.main(["--release-gate"]) != 0
     assert calls == [ROOT]
+
+
+def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
+    policy, sources, review_module
+) -> None:
+    assert FINDINGS_PATH.is_file(), "les findings des contrats doivent etre crees"
+    document = yaml.safe_load(FINDINGS_PATH.read_text(encoding="utf-8"))
+    assert {
+        key: document[key]
+        for key in (
+            "artifact_type",
+            "schema_version",
+            "manual",
+            "review_run_id",
+            "review_receipt_path",
+            "review_receipt_sha256",
+            "sealing_commit_sha",
+        )
+    } == {
+        "artifact_type": "1nsi_content_review_findings",
+        "schema_version": 1,
+        "manual": "1NSI",
+        "review_run_id": "1nsi-contracts-2026-08-10-kierkegaard",
+        "review_receipt_path": CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix(),
+        "review_receipt_sha256": CONTRACT_RECEIPT_SHA256,
+        "sealing_commit_sha": CONTRACT_RECEIPT_COMMIT,
+    }
+
+    findings = review_module.load_findings(FINDINGS_PATH)
+    contracts = [source for source in sources if source["scope"] == "contract"]
+    assert len(findings) == len(contracts) == 10
+    assert {finding["id"] for finding in findings} == {
+        source["id"] for source in contracts
+    }
+    assert all(finding["scope"] == "contract" for finding in findings)
+    assert "TNSI" not in json.dumps(findings, ensure_ascii=False)
+
+    validated = review_module.validate_findings(
+        findings, sources, ROOT, policy, require_complete=False
+    )
+    receipt = yaml.safe_load(CONTRACT_RECEIPT_PATH.read_text(encoding="utf-8"))
+    reviews_by_id = {review["id"]: review for review in receipt["reviews"]}
+    sources_by_id = {source["id"]: source for source in contracts}
+    expected_provenance = {
+        "reviewer_id": "019feb19-4b6d-7173-82b8-6448ff665706",
+        "review_run_id": "1nsi-contracts-2026-08-10-kierkegaard",
+        "reviewer_model": "codex-inherited-gpt5",
+        "integrator_id": policy["integrator_id"],
+        "review_receipt_path": CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix(),
+        "review_receipt_sha256": CONTRACT_RECEIPT_SHA256,
+        "sealing_commit_sha": CONTRACT_RECEIPT_COMMIT,
+    }
+    for finding in validated:
+        source = sources_by_id[finding["id"]]
+        assert finding["chapter"] == source["chapter"]
+        assert finding["source_path"] == source["path"]
+        assert finding["source_status"] == source["status"] == "draft"
+        assert finding["capacity_refs"] == source["capacity_refs"]
+        assert finding["provenance"] == expected_provenance
+        assert {
+            "dimensions": finding["dimensions"],
+            "anomalies": finding["anomalies"],
+        } == reviews_by_id[finding["id"]]["payload"]
+
+    scientific = Counter(
+        finding["dimensions"]["scientific"]["verdict"] for finding in validated
+    )
+    pedagogical = Counter(
+        finding["dimensions"]["pedagogical"]["verdict"] for finding in validated
+    )
+    anomalies = [
+        anomaly for finding in validated for anomaly in finding["anomalies"]
+    ]
+    assert scientific == Counter({"issue": 6, "pass": 4})
+    assert pedagogical == Counter({"pass": 7, "issue": 3})
+    assert len(anomalies) == len({anomaly["id"] for anomaly in anomalies}) == 12
+    assert Counter(anomaly["severity"] for anomaly in anomalies) == Counter(
+        {"P0": 3, "P1": 8, "P2": 1}
+    )
+
+
+def test_contract_findings_receipt_is_git_sealed_and_matches_current_dependencies(
+    policy, sources, review_module
+) -> None:
+    assert FINDINGS_PATH.is_file(), "le receipt doit etre consomme par des findings"
+    receipt_relative = CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix()
+    sealed_bytes = _git_bytes(
+        ROOT, "show", f"{CONTRACT_RECEIPT_COMMIT}:{receipt_relative}"
+    )
+    assert review_module.sha256_bytes(sealed_bytes) == CONTRACT_RECEIPT_SHA256
+    assert CONTRACT_RECEIPT_PATH.read_bytes() == sealed_bytes
+
+    receipt = yaml.safe_load(sealed_bytes.decode("utf-8"))
+    errors = list(
+        Draft202012Validator(
+            review_module._receipt_schema(ROOT),
+            format_checker=review_module.FORMAT_CHECKER,
+        ).iter_errors(receipt)
+    )
+    assert not errors
+    contracts = [source for source in sources if source["scope"] == "contract"]
+    assert receipt["protocol_digest"] == policy["protocol_digest"]
+    assert receipt["assignment"] == {
+        "scope": "contract",
+        "chapters": [source["chapter"] for source in contracts],
+        "source_ids": [source["id"] for source in contracts],
+    }
+    assert [review["id"] for review in receipt["reviews"]] == [
+        source["id"] for source in contracts
+    ]
+
+    manifest = receipt["source_manifest"]
+    assert manifest["review_tool_sha256"] == _sha(MODULE_PATH)
+    assert manifest["execution_checker_sha256"] == _sha(
+        ROOT / "NSI" / "scripts" / "verify_python.py"
+    )
+    assert manifest["execution_common_sha256"] == _sha(
+        ROOT / "NSI" / "scripts" / "common.py"
+    )
+    entries_by_id = {entry["id"]: entry for entry in manifest["entries"]}
+    assert set(entries_by_id) == {source["id"] for source in contracts}
+    for source in contracts:
+        assert entries_by_id[source["id"]] == {
+            "id": source["id"],
+            "path": source["path"],
+            "source_sha256": _sha(ROOT / source["path"]),
+            "dependency_digest": review_module.compute_dependency_digest(
+                source, sources, ROOT, policy
+            ),
+        }
