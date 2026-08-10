@@ -1,0 +1,51 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-LANGAGE-RE-C4-LISTE-VIDE
+source_commit_sha: b30ed9dcb2fe0521694f2cf583dd8825f6ea9c16
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:dbe6a50cd835a061fc542151daa54c92cfdd1f80b6c597bfa5b8a2cf0a2f676b
+  - path: NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex
+    sha256: sha256:a444833724c78c437213fdc13e8c7d5686540a081cc732d06117d26220698412
+  - path: NSI/chapitres/1NSI-LANGAGE/code/minimum.py
+    sha256: sha256:62a55918d0194bc4b319c87f5ad38b55d00592566763e625d219bbbc4b4efae0
+  - path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex
+    sha256: sha256:be036c83ff7a8e251b24357baa9afce82bfeed344440ce85e402f95ab6e8d2a6
+reviewer_id: 019fed3d-6312-7430-99e8-2100b205f381
+reviewer_model: gpt-5
+review_run_id: 1nsi-p0-minimum-remediation-liste-vide-2026-08-10-cicero-v1
+session_id: 019fed3d-6312-7430-99e8-2100b205f381
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      ....                                                                     [100%]
+      4 passed in 1.01s
+    stderr: ""
+    stdout_sha256: sha256:00313f812180a456ffe7937fb2b03b4b821aaf1ef4e4604dbf9ca8f66d21b731
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Les regressions du minimum et de sa remediation passent sur le SHA revu.
+  - command: pytest -q tests/test_remediation_separation.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      ...........................                                              [100%]
+      27 passed in 0.13s
+    stderr: ""
+    stdout_sha256: sha256:c7210c7ed0b6fdf81e44092be6deb9e5adc55af0b4aa0667441c9e648619854b
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La remediation reste separee de son corrige professeur.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T20:56:30+01:00"
