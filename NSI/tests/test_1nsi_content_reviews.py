@@ -1912,6 +1912,176 @@ def test_cgroup_memorymax_bounds_aggregate_children(review_module) -> None:
     assert time.monotonic() - started < 8
 
 
+@pytest.mark.parametrize(
+    ("timeout", "runtime_property"),
+    [(0.2, "RuntimeMaxSec=1s"), (2.2, "RuntimeMaxSec=3s"), (30, "RuntimeMaxSec=31s")],
+)
+def test_systemd_run_bounds_runtime_and_stop_policy(
+    review_module, timeout, runtime_property
+) -> None:
+    command = review_module._systemd_run_command(
+        "nexus-review-test-properties", ["/usr/bin/true"], timeout=timeout
+    )
+    properties = {
+        command[index + 1]
+        for index, argument in enumerate(command[:-1])
+        if argument == "--property"
+    }
+
+    assert runtime_property in properties
+    assert "KillMode=control-group" in properties
+    assert "SendSIGKILL=yes" in properties
+    assert "TimeoutStopSec=1s" in properties
+
+
+@pytest.mark.parametrize("failure_mode", ["returncode", "exception", "empty_show"])
+def test_terminate_systemd_unit_reports_control_failures(
+    review_module, monkeypatch, failure_mode
+) -> None:
+    calls = []
+
+    def failing_systemctl(*arguments):
+        calls.append(arguments)
+        if failure_mode == "exception":
+            raise review_module.ReviewValidationError("bus indisponible")
+        if failure_mode == "returncode":
+            return subprocess.CompletedProcess(arguments, 1, "", "failure")
+        if arguments[0] == "show":
+            return subprocess.CompletedProcess(arguments, 0, "", "")
+        return subprocess.CompletedProcess(arguments, 0, "", "")
+
+    monkeypatch.setattr(review_module, "_systemctl", failing_systemctl)
+    monkeypatch.setattr(review_module.time, "sleep", lambda _duration: None)
+
+    with pytest.raises(review_module.ReviewValidationError, match="arret.*systemd"):
+        review_module._terminate_systemd_unit("nexus-review-test-failure")
+
+    assert calls[0] == (
+        "kill",
+        "--kill-whom=all",
+        "nexus-review-test-failure",
+    )
+    assert ("reset-failed", "nexus-review-test-failure") in calls
+
+
+class _TimeoutThenReapProcess:
+    pid = 424242
+    returncode = None
+
+    def __init__(self, *, persistent: bool) -> None:
+        self.persistent = persistent
+        self.communicate_calls = 0
+
+    def communicate(self, _payload=None, *, timeout=None):
+        self.communicate_calls += 1
+        if self.communicate_calls == 1 or (
+            self.persistent and self.communicate_calls == 2
+        ):
+            raise subprocess.TimeoutExpired("sandbox", timeout, output="partial")
+        self.returncode = -9
+        return "reaped", ""
+
+
+@pytest.mark.parametrize("persistent", [False, True])
+def test_run_confined_reaps_local_process_before_cleanup_error(
+    review_module, monkeypatch, persistent
+) -> None:
+    process = _TimeoutThenReapProcess(persistent=persistent)
+    signals = []
+    monkeypatch.setattr(review_module, "_ensure_systemd_user_cgroup", lambda: None)
+    monkeypatch.setattr(
+        review_module, "_bwrap_command", lambda command, with_ruff=False: command
+    )
+    monkeypatch.setattr(
+        review_module,
+        "_systemd_run_command",
+        lambda unit, command, timeout=None: command,
+    )
+    monkeypatch.setattr(
+        review_module.subprocess, "Popen", lambda *args, **kwargs: process
+    )
+    monkeypatch.setattr(
+        review_module,
+        "_terminate_systemd_unit",
+        lambda _unit: (_ for _ in ()).throw(
+            review_module.ReviewValidationError("cleanup indisponible")
+        ),
+    )
+    monkeypatch.setattr(
+        review_module.os,
+        "killpg",
+        lambda pid, sent_signal: signals.append((pid, sent_signal)),
+    )
+
+    started = time.monotonic()
+    with pytest.raises(
+        review_module.ReviewValidationError, match="cleanup indisponible"
+    ):
+        review_module._run_confined(
+            ["/usr/bin/true"], "", timeout=0.01, unit_name="nexus-review-test-reap"
+        )
+
+    assert time.monotonic() - started < 1
+    assert signals[0] == (process.pid, review_module.signal.SIGTERM)
+    if persistent:
+        assert signals[-1] == (process.pid, review_module.signal.SIGKILL)
+        assert process.communicate_calls == 3
+    else:
+        assert process.communicate_calls == 2
+
+
+def test_run_confined_reaps_nonzero_process_before_cleanup_error(
+    review_module, monkeypatch
+) -> None:
+    process = _TimeoutThenReapProcess(persistent=False)
+    process.communicate = lambda _payload=None, timeout=None: ("", "failed")
+    process.returncode = 1
+    signals = []
+    reaps = []
+    monkeypatch.setattr(review_module, "_ensure_systemd_user_cgroup", lambda: None)
+    monkeypatch.setattr(
+        review_module, "_bwrap_command", lambda command, with_ruff=False: command
+    )
+    monkeypatch.setattr(
+        review_module,
+        "_systemd_run_command",
+        lambda unit, command, timeout=None: command,
+    )
+    monkeypatch.setattr(
+        review_module.subprocess, "Popen", lambda *args, **kwargs: process
+    )
+    monkeypatch.setattr(
+        review_module,
+        "_terminate_systemd_unit",
+        lambda _unit: (_ for _ in ()).throw(
+            review_module.ReviewValidationError("cleanup indisponible")
+        ),
+    )
+    monkeypatch.setattr(
+        review_module.os,
+        "killpg",
+        lambda pid, sent_signal: signals.append((pid, sent_signal)),
+    )
+
+    original_communicate = process.communicate
+
+    def recording_communicate(_payload=None, timeout=None):
+        reaps.append(timeout)
+        return original_communicate(_payload, timeout=timeout)
+
+    process.communicate = recording_communicate
+    with pytest.raises(
+        review_module.ReviewValidationError, match="cleanup indisponible"
+    ):
+        review_module._run_confined(
+            ["/usr/bin/false"], "", timeout=0.1, unit_name="nexus-review-test-error"
+        )
+
+    assert signals == [(process.pid, review_module.signal.SIGTERM)]
+    assert len(reaps) >= 2
+    assert all(timeout is not None for timeout in reaps[1:])
+
+
 def test_confined_python_timeout_collects_unit_and_children(review_module) -> None:
     unit_name = f"nexus-review-test-{uuid.uuid4().hex}"
     started = time.monotonic()
@@ -1943,7 +2113,57 @@ def test_confined_python_timeout_collects_unit_and_children(review_module) -> No
         capture_output=True,
         text=True,
     )
-    assert observed.stdout.strip() in {"", "not-found"}
+    assert observed.returncode == 0
+    assert observed.stdout.strip() == "not-found"
+
+
+def test_runtime_max_collects_unit_when_cleanup_channel_is_unavailable(
+    review_module, monkeypatch
+) -> None:
+    review_module._ensure_systemd_user_cgroup()
+    unit_name = f"nexus-review-test-{uuid.uuid4().hex}"
+    original_cleanup = review_module._terminate_systemd_unit
+    try:
+        monkeypatch.setattr(
+            review_module,
+            "_terminate_systemd_unit",
+            lambda _unit: (_ for _ in ()).throw(
+                review_module.ReviewValidationError("cleanup simule indisponible")
+            ),
+        )
+        started = time.monotonic()
+        with pytest.raises(
+            review_module.ReviewValidationError, match="cleanup simule indisponible"
+        ):
+            review_module._confined_python(
+                "import time\ntime.sleep(60)\n",
+                timeout=0.2,
+                unit_name=unit_name,
+            )
+        assert time.monotonic() - started < 2
+
+        deadline = time.monotonic() + 3
+        while time.monotonic() < deadline:
+            observed = subprocess.run(
+                [
+                    str(review_module.SYSTEMCTL_PATH),
+                    "--user",
+                    "show",
+                    "--property=LoadState",
+                    "--value",
+                    unit_name,
+                ],
+                capture_output=True,
+                text=True,
+            )
+            if observed.returncode == 0 and observed.stdout.strip() == "not-found":
+                break
+            time.sleep(0.05)
+        else:
+            pytest.fail(f"RuntimeMaxSec n'a pas collecte {unit_name}")
+    finally:
+        monkeypatch.setattr(review_module, "_terminate_systemd_unit", original_cleanup)
+        original_cleanup(unit_name)
 
 
 def test_missing_bwrap_is_a_hard_validation_error(

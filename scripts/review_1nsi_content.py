@@ -8,6 +8,7 @@ import copy
 import hashlib
 import importlib.util
 import json
+import math
 import os
 import re
 import resource
@@ -31,6 +32,8 @@ RUFF_PATH = Path(shutil.which("ruff") or "/nonexistent/ruff")
 SYSTEMD_RUN_PATH = Path("/usr/bin/systemd-run")
 SYSTEMCTL_PATH = Path("/usr/bin/systemctl")
 CGROUP_CONTROLLERS_PATH = Path("/sys/fs/cgroup/cgroup.controllers")
+SYSTEMCTL_CALL_TIMEOUT = 0.5
+SYSTEMD_CLEANUP_TIMEOUT = 2.0
 POLICY_PATH = Path("audit/1NSI_CONTENT_REVIEW_POLICY.yaml")
 SCHEMA_PATH = Path("audit/schemas/v1/1nsi-content-review.schema.json")
 META = re.compile(r"^% META:\s*(\{.*\})\s*$", re.MULTILINE)
@@ -956,6 +959,9 @@ SYSTEMD_CGROUP_PROPERTIES = (
     "MemorySwapMax=0",
     "CPUQuota=100%",
     "OOMPolicy=kill",
+    "KillMode=control-group",
+    "SendSIGKILL=yes",
+    "TimeoutStopSec=1s",
     "LimitCPU=5",
     "LimitAS=201326592",
     "LimitNOFILE=64",
@@ -974,7 +980,17 @@ def _systemd_unit_name() -> str:
     return f"nexus-review-{os.getpid()}-{uuid.uuid4().hex}"
 
 
-def _systemd_run_command(unit_name: str, command: list[str]) -> list[str]:
+def _runtime_max_seconds(timeout: float) -> int:
+    if isinstance(timeout, bool) or not isinstance(timeout, (int, float)):
+        raise ReviewValidationError("timeout du sandbox invalide")
+    if not math.isfinite(timeout) or timeout <= 0:
+        raise ReviewValidationError("timeout du sandbox invalide")
+    return max(1, math.ceil(timeout + 0.5))
+
+
+def _systemd_run_command(
+    unit_name: str, command: list[str], *, timeout: float
+) -> list[str]:
     arguments = [
         str(SYSTEMD_RUN_PATH),
         "--user",
@@ -984,10 +1000,12 @@ def _systemd_run_command(unit_name: str, command: list[str]) -> list[str]:
         "--quiet",
         f"--unit={unit_name}",
     ]
+    properties = (
+        *SYSTEMD_CGROUP_PROPERTIES,
+        f"RuntimeMaxSec={_runtime_max_seconds(timeout)}s",
+    )
     arguments.extend(
-        argument
-        for setting in SYSTEMD_CGROUP_PROPERTIES
-        for argument in ("--property", setting)
+        argument for setting in properties for argument in ("--property", setting)
     )
     return [*arguments, "--", *command]
 
@@ -998,33 +1016,53 @@ def _systemctl(*arguments: str) -> subprocess.CompletedProcess[str]:
             [str(SYSTEMCTL_PATH), "--user", *arguments],
             capture_output=True,
             text=True,
-            timeout=5,
+            timeout=SYSTEMCTL_CALL_TIMEOUT,
         )
     except (OSError, subprocess.TimeoutExpired) as error:
         raise ReviewValidationError("controle de l'unite systemd impossible") from error
 
 
 def _terminate_systemd_unit(unit_name: str) -> None:
+    failures: list[str] = []
+    deadline = time.monotonic() + SYSTEMD_CLEANUP_TIMEOUT
     for arguments in (
         ("kill", "--kill-whom=all", unit_name),
         ("stop", unit_name),
         ("reset-failed", unit_name),
     ):
         try:
-            _systemctl(*arguments)
-        except ReviewValidationError:
-            continue
-    for _ in range(40):
+            result = _systemctl(*arguments)
+        except ReviewValidationError as error:
+            failures.append(str(error))
+        else:
+            if result.returncode != 0:
+                failures.append(
+                    f"systemctl {arguments[0]} rc={result.returncode}: "
+                    f"{result.stderr.strip()}"
+                )
+    for _ in range(80):
+        if time.monotonic() >= deadline:
+            break
         try:
-            state = _systemctl(
-                "show", "--property=LoadState", "--value", unit_name
-            ).stdout.strip()
-        except ReviewValidationError:
-            return
-        if state in {"", "not-found"}:
-            return
-        time.sleep(0.025)
-    raise ReviewValidationError(f"unite systemd non collectee: {unit_name}")
+            observed = _systemctl("show", "--property=LoadState", "--value", unit_name)
+        except ReviewValidationError as error:
+            failures.append(str(error))
+        else:
+            state = observed.stdout.strip()
+            if observed.returncode != 0:
+                failures.append(
+                    f"systemctl show rc={observed.returncode}: "
+                    f"{observed.stderr.strip()}"
+                )
+            elif state == "not-found":
+                return
+            elif not state:
+                failures.append("systemctl show sans LoadState")
+        time.sleep(min(0.025, max(0, deadline - time.monotonic())))
+    detail = failures[-1] if failures else "LoadState reste charge"
+    raise ReviewValidationError(
+        f"arret du sandbox systemd non confirme pour {unit_name}: {detail}"
+    )
 
 
 def _ensure_systemd_user_cgroup() -> None:
@@ -1054,7 +1092,7 @@ def _ensure_systemd_user_cgroup() -> None:
     unit_name = _systemd_unit_name() + "-probe"
     try:
         probe = subprocess.run(
-            _systemd_run_command(unit_name, ["/usr/bin/true"]),
+            _systemd_run_command(unit_name, ["/usr/bin/true"], timeout=1),
             capture_output=True,
             text=True,
             timeout=5,
@@ -1112,6 +1150,54 @@ def _bwrap_command(command: list[str], *, with_ruff: bool = False) -> list[str]:
     return [*arguments, "--", *command]
 
 
+def _merge_process_output(current: str, observed: str | None) -> str:
+    return observed if observed else current
+
+
+def _kill_and_reap_local_process(
+    process: subprocess.Popen[str], stdout: str, stderr: str
+) -> tuple[str, str, ReviewValidationError | None]:
+    cleanup_error: ReviewValidationError | None = None
+    try:
+        os.killpg(process.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        pass
+    except OSError as error:
+        cleanup_error = ReviewValidationError(
+            f"SIGTERM local impossible pour le sandbox: {error}"
+        )
+    try:
+        observed_stdout, observed_stderr = process.communicate(timeout=1)
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        except OSError as error:
+            cleanup_error = ReviewValidationError(
+                f"SIGKILL local impossible pour le sandbox: {error}"
+            )
+        try:
+            observed_stdout, observed_stderr = process.communicate(timeout=1)
+        except subprocess.TimeoutExpired:
+            try:
+                process.kill()
+            except OSError as error:
+                cleanup_error = ReviewValidationError(
+                    f"kill local impossible pour le sandbox: {error}"
+                )
+            try:
+                observed_stdout, observed_stderr = process.communicate(timeout=1)
+            except subprocess.TimeoutExpired:
+                observed_stdout, observed_stderr = None, None
+                cleanup_error = ReviewValidationError(
+                    "processus local du sandbox non reape apres SIGKILL"
+                )
+    stdout = _merge_process_output(stdout, observed_stdout)
+    stderr = _merge_process_output(stderr, observed_stderr)
+    return stdout, stderr, cleanup_error
+
+
 def _run_confined(
     command: list[str],
     payload: str,
@@ -1125,7 +1211,9 @@ def _run_confined(
     if not re.fullmatch(r"nexus-review-[a-zA-Z0-9-]+", observed_unit):
         raise ReviewValidationError("nom d'unite sandbox invalide")
     wrapped_command = _systemd_run_command(
-        observed_unit, _bwrap_command(command, with_ruff=with_ruff)
+        observed_unit,
+        _bwrap_command(command, with_ruff=with_ruff),
+        timeout=timeout,
     )
     process_environment = {
         "HOME": "/tmp",
@@ -1151,18 +1239,45 @@ def _run_confined(
         raise ReviewValidationError(
             "demarrage du sandbox systemd impossible"
         ) from error
+    stdout = ""
+    stderr = ""
+    timed_out = False
+    primary_error: ReviewValidationError | None = None
+    cleanup_errors: list[ReviewValidationError] = []
+    cleanup_required = False
     try:
         stdout, stderr = process.communicate(payload, timeout=timeout)
+        cleanup_required = process.returncode != 0
     except subprocess.TimeoutExpired:
-        _terminate_systemd_unit(observed_unit)
-        try:
-            os.killpg(process.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            pass
-        stdout, _stderr = process.communicate()
+        timed_out = True
+        cleanup_required = True
+    except (OSError, ValueError) as error:
+        primary_error = ReviewValidationError(
+            f"communication avec le sandbox impossible: {error}"
+        )
+        cleanup_required = True
+    finally:
+        if cleanup_required:
+            try:
+                _terminate_systemd_unit(observed_unit)
+            except ReviewValidationError as error:
+                cleanup_errors.append(error)
+            stdout, stderr, local_error = _kill_and_reap_local_process(
+                process, stdout, stderr
+            )
+            if local_error is not None:
+                cleanup_errors.append(local_error)
+    if cleanup_errors:
+        if len(cleanup_errors) == 1:
+            raise cleanup_errors[0]
+        raise ReviewValidationError(
+            "erreurs d'arret du sandbox: "
+            + " | ".join(str(error) for error in cleanup_errors)
+        )
+    if primary_error is not None:
+        raise primary_error
+    if timed_out:
         return 1, stdout, "timeout"
-    if process.returncode != 0:
-        _terminate_systemd_unit(observed_unit)
     return process.returncode, stdout, stderr
 
 
