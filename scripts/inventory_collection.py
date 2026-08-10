@@ -4355,11 +4355,7 @@ def _build_inventory(
     )
     inventory["pdfs"] = _inventory_pdfs(
         root,
-        tuple(
-            path
-            for path in tracked
-            if source_roles[path] != "validation_reference"
-        ),
+        tuple(path for path in tracked if source_roles[path] != "validation_reference"),
         inventory,
         source_roles=source_roles,
     )

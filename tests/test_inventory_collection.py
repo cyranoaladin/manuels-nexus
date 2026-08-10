@@ -6376,9 +6376,10 @@ def test_source_digest_excludes_tracked_validation_reference_pdf(
         for item in first["anomalies"]["unattributed_pdfs"]
     )
     _write(tmp_path / official_pdf, "reference officielle version 2\n")
-    assert inventory_module.build_inventory(tmp_path)["source_digest"] == first[
-        "source_digest"
-    ]
+    assert (
+        inventory_module.build_inventory(tmp_path)["source_digest"]
+        == first["source_digest"]
+    )
 
 
 def test_reference_graph_reports_missing_correction_and_broken_meta_and_latex_targets(
