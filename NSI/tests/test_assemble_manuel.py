@@ -311,6 +311,38 @@ def test_runtime_selection_covers_all_professor_objects_and_is_student_safe(asse
     } & {path.parent.name for path in selected["eleve"]}
 
 
+def test_ten_p0_sources_follow_canonical_variant_membership(assembler):
+    selected = {
+        variant: set(assembler.collect_variant_objects(variant))
+        for variant in VARIANTS
+    }
+    affected_courses = {
+        ROOT / "chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C4.tex",
+        ROOT / "chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C2.tex",
+        ROOT / "chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex",
+        ROOT / "chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex",
+        ROOT / "chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex",
+        ROOT / "chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex",
+    }
+    remediation = (
+        ROOT / "chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex"
+    )
+    exercises = {
+        ROOT / "chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-053.tex",
+        ROOT / "chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-054.tex",
+    }
+    corrections = set(ROOT.glob("chapitres/1NSI-*/corriges/*.tex"))
+
+    for variant in ("eleve", "professeur"):
+        assert affected_courses <= selected[variant]
+        assert exercises <= selected[variant]
+    for variant in ("remediation", "professeur"):
+        assert remediation in selected[variant]
+    assert corrections <= selected["professeur"]
+    for variant in set(VARIANTS) - {"professeur"}:
+        assert corrections.isdisjoint(selected[variant])
+
+
 def test_professor_sources_do_not_nest_braces_in_brace_delimited_lstinline(
     assembler,
 ):
