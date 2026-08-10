@@ -13,6 +13,9 @@ verdicts:
 - issue
 - not_applicable
 - human_confirmation_required
+review_dimensions:
+- scientific
+- pedagogical
 prohibited_transitions:
 - approved
 - ready
@@ -51,7 +54,7 @@ contractual_documents:
   sha256: sha256:f235a4dfc797b006b84abe17c9c57a11eab40412d0e6a49648297b26dfc45c91
 - path: docs/codex/ISSUE_REGISTER_TEMPLATE.md
   sha256: sha256:3768d699ef4158bc0f8212c7b5fc797ad3412ce9f55f3935644e48e882cdda93
-protocol_digest: sha256:3b79ab9ee7bd8c0050f17c1b0cb74989202a84b9eff5c31580398b4f2409c9c0
+protocol_digest: sha256:2eed100be6bac38635673e13359af5f65cdba7440ddc5d8fb2a1c5d83e40bb83
 capacity_matrix:
 - chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
   contract_code: C1
@@ -1505,3 +1508,12 @@ allowlist:
 - audit/sources/1nsi/programme-premiere-nsi.pdf
 - audit/sources/1nsi/legifrance-arrete-17-janvier-2019.html
 - audit/sources/1nsi/eduscol-programmes-nsi.html
+- audit/1NSI_CONTENT_REVIEW_FINDINGS.yaml
+- audit/1NSI_CONTENT_REVIEWS.json
+- audit/1NSI_CONTENT_REVIEW_SUMMARY.md
+- audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
+- audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
+- audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml
+- audit/reviews/1nsi/runs/2026-08-10-language-project.yaml
+- audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml
+- audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml

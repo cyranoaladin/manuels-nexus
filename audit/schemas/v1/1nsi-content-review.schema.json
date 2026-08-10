@@ -71,13 +71,31 @@
         "reviewer_id",
         "review_run_id",
         "reviewer_model",
-        "integrator_id"
+        "integrator_id",
+        "review_receipt_path",
+        "review_receipt_sha256",
+        "sealing_commit_sha"
       ],
       "properties": {
         "reviewer_id": { "type": "string", "minLength": 1 },
         "review_run_id": { "type": "string", "minLength": 1 },
         "reviewer_model": { "type": "string", "minLength": 1 },
-        "integrator_id": { "type": "string", "minLength": 1 }
+        "integrator_id": { "type": "string", "minLength": 1 },
+        "review_receipt_path": {
+          "enum": [
+            "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml",
+            "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml",
+            "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml",
+            "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml",
+            "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml",
+            "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml"
+          ]
+        },
+        "review_receipt_sha256": { "$ref": "#/$defs/sha256" },
+        "sealing_commit_sha": {
+          "type": "string",
+          "pattern": "^(?:[0-9a-f]{40}|[0-9a-f]{64})$"
+        }
       }
     },
     "dimension": {
@@ -120,7 +138,7 @@
       "properties": {
         "id": { "type": "string", "pattern": "^1NSI-REV-[A-Z0-9-]+$" },
         "severity": { "enum": ["P0", "P1", "P2", "P3"] },
-        "dimension": { "enum": ["scientific", "pedagogical"] },
+        "dimension": { "enum": ["scientific", "pedagogical", "traceability"] },
         "fact": { "$ref": "#/$defs/fact" },
         "consequence": { "type": "string", "minLength": 1 },
         "expected_action": { "type": "string", "minLength": 1 }
@@ -192,7 +210,15 @@
         },
         "anomalies": {
           "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+          "items": {
+            "enum": [
+              "fresh_execution_failed",
+              "missing_receipt",
+              "execution_receipt_diverged"
+            ]
+          },
+          "maxItems": 1,
+          "uniqueItems": true
         }
       }
     },

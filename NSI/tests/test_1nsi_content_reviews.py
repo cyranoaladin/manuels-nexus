@@ -24,7 +24,7 @@ SCHEMA_PATH = ROOT / "audit" / "schemas" / "v1" / "1nsi-content-review.schema.js
 BASE_SHA = "867e10503044688a0b8cee3847647562dce6db45"
 PDF_SHA256 = "7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0"
 SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
-ALLOWED_FILES = {
+CURRENT_ALLOWED_FILES = {
     "NSI/tests/test_1nsi_content_reviews.py",
     "scripts/review_1nsi_content.py",
     "audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
@@ -33,6 +33,23 @@ ALLOWED_FILES = {
     "audit/sources/1nsi/legifrance-arrete-17-janvier-2019.html",
     "audit/sources/1nsi/eduscol-programmes-nsi.html",
 }
+REVIEW_OUTPUTS = {
+    "audit/1NSI_CONTENT_REVIEW_FINDINGS.yaml",
+    "audit/1NSI_CONTENT_REVIEWS.json",
+    "audit/1NSI_CONTENT_REVIEW_SUMMARY.md",
+}
+REVIEW_RUNS = {
+    f"audit/reviews/1nsi/runs/2026-08-10-{name}.yaml"
+    for name in (
+        "contracts",
+        "algorithms",
+        "systems-web",
+        "language-project",
+        "data-basics-tables",
+        "types-construits",
+    )
+}
+ALLOWED_FILES = CURRENT_ALLOWED_FILES | REVIEW_OUTPUTS | REVIEW_RUNS
 CONTRACTUAL_DOCUMENTS = {
     "NSI/docs/01_conception_manuel.md",
     "NSI/docs/02_workflow_production.md",
@@ -100,8 +117,14 @@ def _excerpt_digest(path: Path, start: int = 1, end: int = 1) -> str:
     return "sha256:" + hashlib.sha256(b"".join(lines[start - 1 : end])).hexdigest()
 
 
-def _fact(source: dict, observation: str, *, fact_type: str = "source_statement") -> dict:
-    path = ROOT / source["path"]
+def _fact(
+    source: dict,
+    observation: str,
+    *,
+    fact_type: str = "source_statement",
+    root: Path = ROOT,
+) -> dict:
+    path = root / source["path"]
     return {
         "path": source["path"],
         "line_start": 1,
@@ -112,8 +135,21 @@ def _fact(source: dict, observation: str, *, fact_type: str = "source_statement"
     }
 
 
-def _finding(source: dict, *, reviewer_id: str = "independent-reviewer") -> dict:
+def _finding(
+    source: dict,
+    *,
+    reviewer_id: str = "independent-reviewer",
+    provenance: dict | None = None,
+    root: Path = ROOT,
+) -> dict:
     refs = source.get("capacity_refs", [])
+    if provenance is None:
+        provenance = {
+            "reviewer_id": reviewer_id,
+            "review_run_id": "unit-review-run",
+            "reviewer_model": "unit-reviewer-model",
+            "integrator_id": "integrator",
+        }
     return {
         "id": source["id"],
         "scope": source["scope"],
@@ -121,27 +157,111 @@ def _finding(source: dict, *, reviewer_id: str = "independent-reviewer") -> dict
         "source_path": source["path"],
         "source_status": source["status"],
         "capacity_refs": refs,
-        "provenance": {
-            "reviewer_id": reviewer_id,
-            "review_run_id": "unit-review-run",
-            "reviewer_model": "unit-reviewer-model",
-            "integrator_id": "integrator",
-        },
+        "provenance": copy.deepcopy(provenance),
         "dimensions": {
             "scientific": {
                 "verdict": "pass",
                 "justification": "Le fait scientifique ancre a ete examine dans cette fixture.",
-                "facts": [_fact(source, f"Constat scientifique propre a {source['id']}.")],
+                "facts": [
+                    _fact(
+                        source,
+                        f"Constat scientifique propre a {source['id']}.",
+                        root=root,
+                    )
+                ],
                 "anomaly_ids": [],
             },
             "pedagogical": {
                 "verdict": "pass",
                 "justification": "Le fait pedagogique ancre a ete examine dans cette fixture.",
-                "facts": [_fact(source, f"Constat pedagogique propre a {source['id']}.")],
+                "facts": [
+                    _fact(
+                        source,
+                        f"Constat pedagogique propre a {source['id']}.",
+                        root=root,
+                    )
+                ],
                 "anomaly_ids": [],
             },
         },
         "anomalies": [],
+    }
+
+
+def _git(root: Path, *args: str, input_text: str | None = None) -> str:
+    return subprocess.run(
+        ["git", *args],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+        input=input_text,
+    ).stdout.strip()
+
+
+@pytest.fixture
+def sealed_review(tmp_path, policy):
+    chapter = tmp_path / "NSI" / "chapitres" / "1NSI-UNIT"
+    contract_path = chapter / "contrat.yaml"
+    receipt_path = tmp_path / "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml"
+    object_paths = [
+        chapter / "exercices" / "1NSI-UNIT-EX-001.tex",
+        chapter / "exercices" / "1NSI-UNIT-EX-002.tex",
+    ]
+    contract_path.parent.mkdir(parents=True)
+    receipt_path.parent.mkdir(parents=True)
+    object_paths[0].parent.mkdir(parents=True)
+    contract_path.write_text(
+        "chapitre: 1NSI-UNIT\nstatut: draft\ncapacites: []\n", encoding="utf-8"
+    )
+    receipt_path.write_text(
+        "artifact_type: 1nsi_content_review_run\nrun_id: unit-review-run\n",
+        encoding="utf-8",
+    )
+    sources = []
+    for index, path in enumerate(object_paths, start=1):
+        object_id = f"1NSI-UNIT-EX-{index:03d}"
+        path.write_text(
+            f'% META: {{"id":"{object_id}","chapitre":"1NSI-UNIT",'
+            '"type_objet":"exercice","status":"verified"}}\n'
+            f"Contenu unitaire {index}.\n",
+            encoding="utf-8",
+        )
+        sources.append(
+            {
+                "id": object_id,
+                "scope": "object",
+                "chapter": "1NSI-UNIT",
+                "path": path.relative_to(tmp_path).as_posix(),
+                "status": "verified",
+                "type": "exercice",
+                "capacity_refs": [],
+                "metadata": {},
+                "source_sha256": _sha(path),
+            }
+        )
+
+    _git(tmp_path, "init", "-q")
+    _git(tmp_path, "config", "user.name", "Nexus Tests")
+    _git(tmp_path, "config", "user.email", "nexus-tests@example.invalid")
+    _git(tmp_path, "add", ".")
+    _git(tmp_path, "commit", "-q", "-m", "seal review receipt")
+    sealing_commit = _git(tmp_path, "rev-parse", "HEAD")
+    provenance = {
+        "reviewer_id": "independent-reviewer",
+        "review_run_id": "unit-review-run",
+        "reviewer_model": "unit-reviewer-model",
+        "integrator_id": "integrator",
+        "review_receipt_path": receipt_path.relative_to(tmp_path).as_posix(),
+        "review_receipt_sha256": _sha(receipt_path),
+        "sealing_commit_sha": sealing_commit,
+    }
+    return {
+        "root": tmp_path,
+        "policy": copy.deepcopy(policy),
+        "sources": sources,
+        "provenance": provenance,
+        "receipt_path": receipt_path,
     }
 
 
@@ -159,6 +279,7 @@ def test_policy_closes_manual_decision_and_verdicts(policy) -> None:
         "not_applicable",
         "human_confirmation_required",
     ]
+    assert policy["review_dimensions"] == ["scientific", "pedagogical"]
     assert set(policy["prohibited_transitions"]) == {"approved", "ready", "rejected"}
     assert set(policy["allowlist"]) == ALLOWED_FILES
 
@@ -244,6 +365,37 @@ def test_protocol_mutation_invalidates_all_dependency_digests(policy, sources, r
     assert all(before != after for before, after in zip(original, changed, strict=True))
 
 
+@pytest.mark.parametrize(
+    "mutation",
+    ["decision", "verdicts", "prohibited_transitions", "review_dimensions", "capacity_matrix"],
+)
+def test_protocol_digest_seals_every_governance_rule(
+    policy, review_module, mutation
+) -> None:
+    mutated = copy.deepcopy(policy)
+    if mutation == "decision":
+        mutated["decision"]["release_acceptance"] = True
+    elif mutation == "verdicts":
+        mutated["verdicts"].reverse()
+    elif mutation == "prohibited_transitions":
+        mutated["prohibited_transitions"].append("silently_approved")
+    elif mutation == "review_dimensions":
+        mutated["review_dimensions"].reverse()
+    else:
+        mutated["capacity_matrix"][0]["programme_anchor"] += " Mutation de test."
+
+    assert review_module.compute_protocol_digest(ROOT, mutated) != policy["protocol_digest"]
+
+
+def test_protocol_payload_contains_exactly_eight_source_records(policy, review_module) -> None:
+    records = review_module._protocol_records(policy)
+    assert len(records) == 8
+    assert {record["path"] for record in records} == {
+        *(item["snapshot_path"] for item in policy["official_sources"]),
+        *(item["path"] for item in policy["contractual_documents"]),
+    }
+
+
 def test_discover_sources_is_exact_and_1nsi_only(sources) -> None:
     assert sources is not None, "le generateur de revue doit etre cree"
     assert len(sources) == 349
@@ -300,6 +452,7 @@ def test_verify_scope_rejects_every_guard_drift(policy, review_module, surface) 
 
 
 def test_verify_scope_rejects_changed_path_outside_allowlist(policy, review_module) -> None:
+    review_module.verify_scope(ROOT, policy, changed_paths=sorted(REVIEW_OUTPUTS | REVIEW_RUNS))
     review_module.verify_scope(ROOT, policy, changed_paths=sorted(ALLOWED_FILES))
     with pytest.raises(review_module.ReviewValidationError, match="allowlist"):
         review_module.verify_scope(
@@ -354,6 +507,9 @@ def _schema_entry(index: int) -> dict:
             "review_run_id": "unit-run",
             "reviewer_model": "unit-model",
             "integrator_id": "integrator",
+            "review_receipt_path": "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml",
+            "review_receipt_sha256": digest,
+            "sealing_commit_sha": "1" * 40,
         },
         "dimensions": {
             "scientific": copy.deepcopy(dimension),
@@ -376,6 +532,15 @@ def test_schema_is_closed_and_requires_exactly_349_entries() -> None:
     assert schema["$defs"]["entry"]["additionalProperties"] is False
     assert schema["$defs"]["fact"]["additionalProperties"] is False
     assert schema["$defs"]["provenance"]["additionalProperties"] is False
+    assert set(schema["$defs"]["provenance"]["required"]) == {
+        "reviewer_id",
+        "review_run_id",
+        "reviewer_model",
+        "integrator_id",
+        "review_receipt_path",
+        "review_receipt_sha256",
+        "sealing_commit_sha",
+    }
 
     document = {
         "artifact_type": "1nsi_content_reviews",
@@ -405,12 +570,186 @@ def test_schema_rejects_approval_and_unknown_properties() -> None:
     assert len(errors) >= 2
 
 
+def test_accepts_finding_with_git_sealed_review_receipt(sealed_review, review_module) -> None:
+    source = sealed_review["sources"][0]
+    finding = _finding(
+        source,
+        provenance=sealed_review["provenance"],
+        root=sealed_review["root"],
+    )
+
+    validated = review_module.validate_findings(
+        [finding],
+        [source],
+        sealed_review["root"],
+        sealed_review["policy"],
+        require_complete=True,
+    )
+
+    assert validated[0]["provenance"] == sealed_review["provenance"]
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("path", "recu de revue"),
+        ("extra_run_path", "recu de revue"),
+        ("digest", "digest du recu"),
+        ("commit", "commit de scellement"),
+        ("not_in_commit", "absent du commit"),
+        ("not_ancestor", "ancetre"),
+        ("worktree_drift", "octets du recu"),
+    ],
+)
+def test_rejects_unsealed_review_receipt(
+    sealed_review, review_module, mutation, message
+) -> None:
+    root = sealed_review["root"]
+    provenance = copy.deepcopy(sealed_review["provenance"])
+    if mutation == "path":
+        provenance["review_receipt_path"] = "audit/1NSI_CONTENT_REVIEWS.json"
+    elif mutation == "extra_run_path":
+        path = root / "audit/reviews/1nsi/runs/2026-08-10-unplanned.yaml"
+        path.write_text("run_id: unplanned\n", encoding="utf-8")
+        _git(root, "add", path.relative_to(root).as_posix())
+        _git(root, "commit", "-q", "-m", "seal unplanned receipt")
+        provenance["review_receipt_path"] = path.relative_to(root).as_posix()
+        provenance["review_receipt_sha256"] = _sha(path)
+        provenance["sealing_commit_sha"] = _git(root, "rev-parse", "HEAD")
+        sealed_review["policy"]["allowlist"].append(provenance["review_receipt_path"])
+    elif mutation == "digest":
+        provenance["review_receipt_sha256"] = "sha256:" + "0" * 64
+    elif mutation == "commit":
+        provenance["sealing_commit_sha"] = "0" * 40
+    elif mutation == "not_in_commit":
+        path = root / "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml"
+        path.write_text("run_id: not-committed\n", encoding="utf-8")
+        provenance["review_receipt_path"] = path.relative_to(root).as_posix()
+        provenance["review_receipt_sha256"] = _sha(path)
+    elif mutation == "not_ancestor":
+        tree = _git(root, "rev-parse", "HEAD^{tree}")
+        provenance["sealing_commit_sha"] = _git(
+            root, "commit-tree", tree, input_text="unrelated seal\n"
+        )
+    else:
+        sealed_review["receipt_path"].write_text("run_id: modified\n", encoding="utf-8")
+
+    source = sealed_review["sources"][0]
+    finding = _finding(source, provenance=provenance, root=root)
+    with pytest.raises(review_module.ReviewValidationError, match=message):
+        review_module.validate_findings(
+            [finding], [source], root, sealed_review["policy"], require_complete=True
+        )
+
+
+@pytest.mark.parametrize(
+    ("dimension_name", "verdict"),
+    [
+        ("scientific", "human_confirmation_required"),
+        ("pedagogical", "not_applicable"),
+    ],
+)
+def test_dimension_with_anomaly_requires_issue_verdict(
+    sealed_review, review_module, dimension_name, verdict
+) -> None:
+    source = sealed_review["sources"][0]
+    finding = _finding(
+        source,
+        provenance=sealed_review["provenance"],
+        root=sealed_review["root"],
+    )
+    anomaly_id = "1NSI-REV-UNIT-DIMENSION"
+    finding["dimensions"][dimension_name]["verdict"] = verdict
+    finding["dimensions"][dimension_name]["anomaly_ids"] = [anomaly_id]
+    finding["anomalies"] = [{
+        "id": anomaly_id,
+        "severity": "P1",
+        "dimension": dimension_name,
+        "fact": copy.deepcopy(finding["dimensions"][dimension_name]["facts"][0]),
+        "consequence": "Consequence dimensionnelle de test.",
+        "expected_action": "Action dimensionnelle de test.",
+    }]
+
+    with pytest.raises(review_module.ReviewValidationError, match="verdict issue"):
+        review_module.validate_findings(
+            [finding],
+            [source],
+            sealed_review["root"],
+            sealed_review["policy"],
+            require_complete=True,
+        )
+
+
+def _approved_release_fixture(policy) -> tuple[dict, dict]:
+    approved_policy = copy.deepcopy(policy)
+    approved_policy["decision"].update({
+        "publication_approval": True,
+        "human_confirmation_required": False,
+        "release_acceptance": True,
+    })
+    entry = _schema_entry(0)
+    entry["publication_approval"] = True
+    entry["human_confirmation_required"] = False
+    document = {
+        "publication_approval": True,
+        "human_confirmation_required": False,
+        "entries": [entry],
+    }
+    return approved_policy, document
+
+
+def test_release_gate_can_pass_only_fully_approved_clean_document(policy, review_module) -> None:
+    approved_policy, document = _approved_release_fixture(policy)
+    assert review_module.release_gate_allows(document, approved_policy) is True
+
+
+@pytest.mark.parametrize(
+    "blocker",
+    [
+        "policy_publication_false",
+        "policy_human_confirmation",
+        "document_publication_false",
+        "document_human_confirmation",
+        "entry_publication_false",
+        "entry_human_confirmation",
+        "entry_anomaly",
+        "entry_issue",
+        "entry_human_verdict",
+    ],
+)
+def test_release_gate_rejects_every_document_or_entry_blocker(
+    policy, review_module, blocker
+) -> None:
+    approved_policy, document = _approved_release_fixture(policy)
+    entry = document["entries"][0]
+    if blocker == "policy_publication_false":
+        approved_policy["decision"]["publication_approval"] = False
+    elif blocker == "policy_human_confirmation":
+        approved_policy["decision"]["human_confirmation_required"] = True
+    elif blocker == "document_publication_false":
+        document["publication_approval"] = False
+    elif blocker == "document_human_confirmation":
+        document["human_confirmation_required"] = True
+    elif blocker == "entry_publication_false":
+        entry["publication_approval"] = False
+    elif blocker == "entry_human_confirmation":
+        entry["human_confirmation_required"] = True
+    elif blocker == "entry_anomaly":
+        entry["anomalies"] = [{"id": "1NSI-REV-RELEASE"}]
+    elif blocker == "entry_issue":
+        entry["dimensions"]["scientific"]["verdict"] = "issue"
+    else:
+        entry["dimensions"]["pedagogical"]["verdict"] = "human_confirmation_required"
+
+    assert review_module.release_gate_allows(document, approved_policy) is False
+
+
 @pytest.mark.parametrize(
     ("mutation", "message"),
     [
         ("digest_supplied", "digest"),
         ("verdict_without_evidence", "preuve"),
-        ("pass_with_issue", "pass"),
+        ("pass_with_issue", "verdict issue"),
         ("tnsi_path", "TNSI"),
         ("approval", "approval"),
         ("unknown_ref", "reference"),
@@ -421,9 +760,13 @@ def test_schema_rejects_approval_and_unknown_properties() -> None:
         ("unknown_field", "champ inconnu"),
     ],
 )
-def test_reject_invalid_finding(policy, sources, review_module, mutation, message) -> None:
-    source = next(item for item in sources if item["scope"] == "object")
-    finding = _finding(source)
+def test_reject_invalid_finding(
+    sealed_review, review_module, mutation, message
+) -> None:
+    root = sealed_review["root"]
+    policy = sealed_review["policy"]
+    source = sealed_review["sources"][0]
+    finding = _finding(source, provenance=sealed_review["provenance"], root=root)
     if mutation == "digest_supplied":
         finding["source_sha256"] = source["source_sha256"]
     elif mutation == "verdict_without_evidence":
@@ -449,9 +792,11 @@ def test_reject_invalid_finding(policy, sources, review_module, mutation, messag
     elif mutation == "incomplete_provenance":
         finding["provenance"].pop("reviewer_model")
     elif mutation == "evidence_outside_graph":
+        outside = root / "outside.txt"
+        outside.write_text("preuve hors graphe\n", encoding="utf-8")
         fact = finding["dimensions"]["scientific"]["facts"][0]
-        fact["path"] = "AGENTS.md"
-        fact["excerpt_sha256"] = _excerpt_digest(ROOT / "AGENTS.md")
+        fact["path"] = "outside.txt"
+        fact["excerpt_sha256"] = _excerpt_digest(outside)
     elif mutation == "unknown_field":
         finding["approved"] = True
     else:
@@ -462,7 +807,7 @@ def test_reject_invalid_finding(policy, sources, review_module, mutation, messag
         review_module.validate_findings(
             [finding],
             [source],
-            ROOT,
+            root,
             policy,
             require_complete=True,
         )
@@ -484,29 +829,51 @@ def test_rejects_missing_and_duplicate_findings(policy, sources, review_module) 
         )
 
 
-def test_rejects_normalized_duplicate_observations(policy, sources, review_module) -> None:
-    selected = [
-        item
-        for item in sources
-        if item["scope"] == "object" and item["chapter"] == sources[0]["chapter"]
-    ][:2]
-    findings = [_finding(item) for item in selected]
+def test_rejects_normalized_duplicate_observations(sealed_review, review_module) -> None:
+    selected = sealed_review["sources"]
+    findings = [
+        _finding(
+            item,
+            provenance=sealed_review["provenance"],
+            root=sealed_review["root"],
+        )
+        for item in selected
+    ]
     findings[0]["dimensions"]["scientific"]["facts"][0]["observation"] = "Meme fait ancre."
     findings[1]["dimensions"]["scientific"]["facts"][0]["observation"] = "  meme   FAIT ancre "
     with pytest.raises(review_module.ReviewValidationError, match="observation"):
         review_module.validate_findings(
-            findings, selected, ROOT, policy, require_complete=True
+            findings,
+            selected,
+            sealed_review["root"],
+            sealed_review["policy"],
+            require_complete=True,
         )
 
 
-def test_generate_register_is_deterministic_with_fixture(policy, sources, review_module) -> None:
-    selected = [item for item in sources if item["scope"] == "object"][:2]
-    findings = [_finding(item) for item in selected]
+def test_generate_register_is_deterministic_with_fixture(sealed_review, review_module) -> None:
+    selected = sealed_review["sources"]
+    findings = [
+        _finding(
+            item,
+            provenance=sealed_review["provenance"],
+            root=sealed_review["root"],
+        )
+        for item in selected
+    ]
     first = review_module.generate_register(
-        findings, ROOT, policy, sources=selected, require_complete=True
+        findings,
+        sealed_review["root"],
+        sealed_review["policy"],
+        sources=selected,
+        require_complete=True,
     )
     second = review_module.generate_register(
-        copy.deepcopy(findings), ROOT, policy, sources=selected, require_complete=True
+        copy.deepcopy(findings),
+        sealed_review["root"],
+        sealed_review["policy"],
+        sources=selected,
+        require_complete=True,
     )
     assert first == second
     assert first["publication_approval"] is False
@@ -515,28 +882,111 @@ def test_generate_register_is_deterministic_with_fixture(policy, sources, review
     assert all(SHA256.fullmatch(entry["dependency_digest"]) for entry in first["entries"])
 
 
-def test_dependency_digest_changes_for_every_required_class(review_module) -> None:
-    class_digests = {
-        key: "sha256:" + f"{index:064x}"[-64:]
-        for index, key in enumerate(
-            (
-                "protocol",
-                "source",
-                "contract",
-                "linked_objects",
-                "help",
-                "correction",
-                "receipt",
-                "python",
-            ),
-            start=1,
-        )
+@pytest.mark.parametrize(
+    "dependency_class",
+    [
+        "protocol",
+        "source",
+        "contract",
+        "linked_objects",
+        "help",
+        "correction",
+        "receipt",
+        "python",
+    ],
+)
+def test_real_dependency_mutation_changes_required_class_digest(
+    tmp_path, policy, review_module, dependency_class
+) -> None:
+    chapter = tmp_path / "NSI/chapitres/1NSI-UNIT"
+    paths = {
+        "source": chapter / "exercices/1NSI-UNIT-EX-001.tex",
+        "contract": chapter / "contrat.yaml",
+        "linked_objects": chapter / "exercices/1NSI-UNIT-LINKED.tex",
+        "help": chapter / "methodes/1NSI-UNIT-HELP.tex",
+        "correction": chapter / "corriges/1NSI-UNIT-CORR.tex",
+        "receipt": chapter / "validations/1NSI-UNIT-EX-001.execution.json",
+        "python": chapter / "code/example.py",
     }
-    baseline = review_module.aggregate_dependency_digest(class_digests)
-    for key in class_digests:
-        mutated = dict(class_digests)
-        mutated[key] = "sha256:" + "f" * 64
-        assert review_module.aggregate_dependency_digest(mutated) != baseline, key
+    for path in paths.values():
+        path.parent.mkdir(parents=True, exist_ok=True)
+    paths["contract"].write_text(
+        "chapitre: 1NSI-UNIT\nstatut: draft\ncapacites: []\n", encoding="utf-8"
+    )
+    paths["source"].write_text(
+        '% META: {"id":"1NSI-UNIT-EX-001","chapitre":"1NSI-UNIT",'
+        '"type_objet":"exercice","status":"verified"}\n'
+        "Code publie : \\texttt{code/example.py}.\n",
+        encoding="utf-8",
+    )
+    paths["linked_objects"].write_text("Objet lie.\n", encoding="utf-8")
+    paths["help"].write_text("Aide liee.\n", encoding="utf-8")
+    paths["correction"].write_text("Corrige lie.\n", encoding="utf-8")
+    paths["receipt"].write_text(
+        json.dumps({"verdict": "pass", "details": {"checks": []}}), encoding="utf-8"
+    )
+    paths["python"].write_text("print(42)\n", encoding="utf-8")
+
+    def source_record(object_id: str, key: str, object_type: str, metadata: dict) -> dict:
+        path = paths[key]
+        return {
+            "id": object_id,
+            "scope": "object",
+            "chapter": "1NSI-UNIT",
+            "path": path.relative_to(tmp_path).as_posix(),
+            "status": "verified",
+            "type": object_type,
+            "capacity_refs": [],
+            "metadata": metadata,
+            "source_sha256": _sha(path),
+        }
+
+    source = source_record(
+        "1NSI-UNIT-EX-001",
+        "source",
+        "exercice",
+        {"corrige_tex": paths["correction"].relative_to(tmp_path / "NSI").as_posix()},
+    )
+    sources = [
+        source,
+        source_record(
+            "1NSI-UNIT-LINKED",
+            "linked_objects",
+            "exercice",
+            {"exercice_ref": source["id"]},
+        ),
+        source_record(
+            "1NSI-UNIT-HELP",
+            "help",
+            "coup_de_pouce",
+            {"exercice_ref": source["id"]},
+        ),
+        source_record(
+            "1NSI-UNIT-CORR",
+            "correction",
+            "corrige",
+            {"exercice_ref": source["id"]},
+        ),
+    ]
+    mutable_policy = copy.deepcopy(policy)
+    before = review_module.dependency_class_digests(
+        source, sources, tmp_path, mutable_policy
+    )
+    before_aggregate = review_module.aggregate_dependency_digest(before)
+
+    if dependency_class == "protocol":
+        mutable_policy["protocol_digest"] = "sha256:" + "f" * 64
+    else:
+        paths[dependency_class].write_text(
+            paths[dependency_class].read_text(encoding="utf-8") + "mutation\n",
+            encoding="utf-8",
+        )
+
+    after = review_module.dependency_class_digests(
+        source, sources, tmp_path, mutable_policy
+    )
+    assert after[dependency_class] != before[dependency_class]
+    assert review_module.aggregate_dependency_digest(after) != before_aggregate
 
 
 def test_dependency_graph_contains_bidirectional_help_correction_and_receipt(sources, review_module) -> None:
@@ -590,6 +1040,72 @@ def test_dependency_graph_detects_declared_python_file(tmp_path, review_module) 
     }]
 
 
+@pytest.mark.parametrize(
+    ("object_id", "receipt_stem"),
+    [
+        ("1NSI-TC-TD1", "07_td1_station_meteo"),
+        ("1NSI-TC-TD2", "07_td2_classement_esport"),
+    ],
+)
+def test_receipt_resolution_uses_real_source_stem_for_td(
+    sources, review_module, object_id, receipt_stem
+) -> None:
+    source = next(item for item in sources if item["id"] == object_id)
+    manifest = review_module.dependency_manifest(source, sources, ROOT)
+
+    assert manifest["receipt"] == [{
+        "path": (
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/validations/"
+            f"{receipt_stem}.execution.json"
+        ),
+        "sha256": _sha(
+            ROOT
+            / "NSI/chapitres/1NSI-TYPES-CONSTRUITS/validations"
+            / f"{receipt_stem}.execution.json"
+        ),
+    }]
+    observation = review_module.execution_observation(source, ROOT)
+    assert observation["receipt_sha256"] == manifest["receipt"][0]["sha256"]
+    assert "missing_receipt" not in observation["anomalies"]
+
+
+def test_receipt_resolution_rejects_distinct_id_and_stem_candidates(
+    tmp_path, review_module
+) -> None:
+    chapter = tmp_path / "NSI/chapitres/1NSI-UNIT"
+    source_path = chapter / "cours/source-stem.tex"
+    validations = chapter / "validations"
+    source_path.parent.mkdir(parents=True)
+    validations.mkdir(parents=True)
+    (chapter / "contrat.yaml").write_text(
+        "chapitre: 1NSI-UNIT\nstatut: draft\ncapacites: []\n", encoding="utf-8"
+    )
+    source_path.write_text(
+        '% META: {"id":"META-ID","chapitre":"1NSI-UNIT",'
+        '"type_objet":"cours","status":"verified"}\n'
+        "% BEGIN-TRACE\n% print(2)\n% EXPECTED\n% 2\n% END-TRACE\n",
+        encoding="utf-8",
+    )
+    for name in ("META-ID", "source-stem"):
+        (validations / f"{name}.execution.json").write_text(
+            json.dumps({"verdict": "pass", "details": {"checks": []}}),
+            encoding="utf-8",
+        )
+    source = {
+        "id": "META-ID",
+        "scope": "object",
+        "chapter": "1NSI-UNIT",
+        "path": source_path.relative_to(tmp_path).as_posix(),
+        "status": "verified",
+        "type": "cours",
+        "capacity_refs": [],
+        "metadata": {},
+    }
+
+    with pytest.raises(review_module.ReviewValidationError, match="candidats de recu"):
+        review_module.dependency_manifest(source, [source], tmp_path)
+
+
 def test_execution_observation_reruns_without_writing_receipt(tmp_path, review_module) -> None:
     chapter = tmp_path / "NSI" / "chapitres" / "1NSI-UNIT"
     source_path = chapter / "exercices" / "1NSI-UNIT-EX-001.tex"
@@ -635,10 +1151,43 @@ def test_execution_observation_reruns_without_writing_receipt(tmp_path, review_m
     receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
     divergent = review_module.execution_observation(source, tmp_path)
     assert divergent["matches_receipt"] is False
-    assert divergent["anomalies"]
+    assert divergent["anomalies"] == ["execution_receipt_diverged"]
+
+    receipt_path.unlink()
+    missing = review_module.execution_observation(source, tmp_path)
+    assert missing["matches_receipt"] is False
+    assert missing["anomalies"] == ["missing_receipt"]
+
+    source_path.write_text(
+        source_path.read_text(encoding="utf-8").replace("% 2\n% END-TRACE", "% 3\n% END-TRACE"),
+        encoding="utf-8",
+    )
+    failed = review_module.execution_observation(source, tmp_path)
+    assert failed["fresh_verdict"] == "fail"
+    assert failed["anomalies"] == ["fresh_execution_failed"]
 
 
-def test_generate_register_promotes_receipt_divergence_to_scientific_issue(
+@pytest.mark.parametrize(
+    ("anomaly_code", "severity", "dimension"),
+    [
+        ("fresh_execution_failed", "P0", "scientific"),
+        ("missing_receipt", "P1", "traceability"),
+        ("execution_receipt_diverged", "P1", "traceability"),
+    ],
+)
+def test_execution_anomaly_severity_matches_failure_class(
+    sealed_review, review_module, anomaly_code, severity, dimension
+) -> None:
+    anomaly = review_module._execution_anomaly(
+        sealed_review["sources"][0],
+        {"anomalies": [anomaly_code]},
+        sealed_review["root"],
+    )
+    assert anomaly["severity"] == severity
+    assert anomaly["dimension"] == dimension
+
+
+def test_generate_register_marks_receipt_divergence_as_p1_traceability(
     tmp_path, policy, review_module
 ) -> None:
     chapter = tmp_path / "NSI" / "chapitres" / "1NSI-UNIT"
@@ -664,6 +1213,14 @@ def test_generate_register_promotes_receipt_divergence_to_scientific_issue(
         }),
         encoding="utf-8",
     )
+    review_receipt = tmp_path / "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml"
+    review_receipt.parent.mkdir(parents=True)
+    review_receipt.write_text("run_id: unit-run\n", encoding="utf-8")
+    _git(tmp_path, "init", "-q")
+    _git(tmp_path, "config", "user.name", "Nexus Tests")
+    _git(tmp_path, "config", "user.email", "nexus-tests@example.invalid")
+    _git(tmp_path, "add", ".")
+    _git(tmp_path, "commit", "-q", "-m", "seal execution review")
     before = receipt_path.read_bytes()
     source = {
         "id": "1NSI-UNIT-EX-001",
@@ -696,6 +1253,9 @@ def test_generate_register_promotes_receipt_divergence_to_scientific_issue(
             "review_run_id": "unit-run",
             "reviewer_model": "unit-model",
             "integrator_id": "integrator",
+            "review_receipt_path": review_receipt.relative_to(tmp_path).as_posix(),
+            "review_receipt_sha256": _sha(review_receipt),
+            "sealing_commit_sha": _git(tmp_path, "rev-parse", "HEAD"),
         },
         "dimensions": {
             "scientific": {
@@ -719,9 +1279,10 @@ def test_generate_register_promotes_receipt_divergence_to_scientific_issue(
     )
 
     entry = document["entries"][0]
-    assert entry["dimensions"]["scientific"]["verdict"] == "issue"
-    assert entry["dimensions"]["scientific"]["anomaly_ids"]
-    assert entry["anomalies"][0]["severity"] == "P0"
+    assert entry["dimensions"]["scientific"]["verdict"] == "pass"
+    assert entry["dimensions"]["scientific"]["anomaly_ids"] == []
+    assert entry["anomalies"][0]["severity"] == "P1"
+    assert entry["anomalies"][0]["dimension"] == "traceability"
     assert entry["execution_observation"]["matches_receipt"] is False
     assert receipt_path.read_bytes() == before
 

@@ -34,6 +34,17 @@ DEPENDENCY_CLASSES = (
     "receipt",
     "python",
 )
+REVIEW_RECEIPT_PATHS = frozenset(
+    f"audit/reviews/1nsi/runs/2026-08-10-{name}.yaml"
+    for name in (
+        "contracts",
+        "algorithms",
+        "systems-web",
+        "language-project",
+        "data-basics-tables",
+        "types-construits",
+    )
+)
 
 
 class ReviewValidationError(ValueError):
@@ -131,8 +142,22 @@ def _protocol_records(policy: dict[str, Any]) -> list[dict[str, str]]:
     return sorted(records, key=lambda item: item["path"])
 
 
-def protocol_digest_from_records(records: list[dict[str, str]]) -> str:
-    payload = json.dumps(records, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
+def protocol_digest_from_records(
+    records: list[dict[str, str]], policy: dict[str, Any]
+) -> str:
+    payload = json.dumps(
+        {
+            "decision": policy["decision"],
+            "verdicts": policy["verdicts"],
+            "prohibited_transitions": policy["prohibited_transitions"],
+            "review_dimensions": policy["review_dimensions"],
+            "capacity_matrix": policy["capacity_matrix"],
+            "source_records": records,
+        },
+        ensure_ascii=True,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
     return sha256_bytes(payload.encode("ascii"))
 
 
@@ -142,7 +167,7 @@ def compute_protocol_digest(root: Path, policy: dict[str, Any]) -> str:
         observed = sha256_file(root / record["path"])
         if observed != record["sha256"]:
             raise ReviewValidationError(f"digest de protocole obsolete: {record['path']}")
-    return protocol_digest_from_records(records)
+    return protocol_digest_from_records(records, policy)
 
 
 def load_policy(root: Path = ROOT) -> dict[str, Any]:
@@ -189,6 +214,23 @@ def _resolve_declared_path(raw: str, source: dict[str, Any], root: Path) -> Path
         if resolved.is_file():
             return resolved
     return None
+
+
+def _resolve_execution_receipt(source: dict[str, Any], root: Path) -> Path | None:
+    validations = root / "NSI" / "chapitres" / source["chapter"] / "validations"
+    source_stem = Path(source["path"]).stem
+    names = {source["id"], source_stem}
+    candidates = sorted(
+        (validations / f"{name}.execution.json" for name in names),
+        key=lambda path: path.name,
+    )
+    existing = [path for path in candidates if path.is_file()]
+    if len(existing) > 1:
+        relative = ", ".join(_relative(path, root) for path in existing)
+        raise ReviewValidationError(
+            f"candidats de recu d'execution ambigus pour {source['id']}: {relative}"
+        )
+    return existing[0] if existing else None
 
 
 def dependency_manifest(
@@ -249,15 +291,8 @@ def dependency_manifest(
         if object_type in {"corrige", "corrige_evaluation"}:
             manifest["correction"].append(record)
 
-    receipt = (
-        root
-        / "NSI"
-        / "chapitres"
-        / source["chapter"]
-        / "validations"
-        / f"{source['id']}.execution.json"
-    )
-    if receipt.is_file():
+    receipt = _resolve_execution_receipt(source, root)
+    if receipt is not None:
         manifest["receipt"] = [_file_record(receipt, root)]
 
     python_paths: set[Path] = set()
@@ -430,6 +465,54 @@ def _validate_fact(fact: dict[str, Any], allowed_paths: set[str], root: Path) ->
         raise ReviewValidationError("observation de preuve vide")
 
 
+def _validate_review_receipt(
+    provenance: dict[str, Any], root: Path, policy: dict[str, Any]
+) -> None:
+    receipt_path = provenance["review_receipt_path"]
+    if (
+        receipt_path not in REVIEW_RECEIPT_PATHS
+        or receipt_path not in policy["allowlist"]
+    ):
+        raise ReviewValidationError("chemin du recu de revue interdit")
+
+    expected_digest = provenance["review_receipt_sha256"]
+    if not re.fullmatch(r"sha256:[0-9a-f]{64}", expected_digest):
+        raise ReviewValidationError("digest du recu de revue invalide")
+    commit_sha = provenance["sealing_commit_sha"]
+    if not re.fullmatch(r"(?:[0-9a-f]{40}|[0-9a-f]{64})", commit_sha):
+        raise ReviewValidationError("commit de scellement invalide")
+
+    commit = subprocess.run(
+        ["git", "rev-parse", "--verify", f"{commit_sha}^{{commit}}"],
+        cwd=root,
+        capture_output=True,
+        text=True,
+    )
+    if commit.returncode != 0:
+        raise ReviewValidationError("commit de scellement introuvable")
+    ancestor = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", commit_sha, "HEAD"],
+        cwd=root,
+        capture_output=True,
+    )
+    if ancestor.returncode != 0:
+        raise ReviewValidationError("commit de scellement non ancetre de HEAD")
+
+    blob = subprocess.run(
+        ["git", "show", f"{commit_sha}:{receipt_path}"],
+        cwd=root,
+        capture_output=True,
+    )
+    if blob.returncode != 0:
+        raise ReviewValidationError("recu de revue absent du commit de scellement")
+    if sha256_bytes(blob.stdout) != expected_digest:
+        raise ReviewValidationError("digest du recu de revue incoherent avec le blob scelle")
+
+    worktree_path = root / receipt_path
+    if not worktree_path.is_file() or worktree_path.read_bytes() != blob.stdout:
+        raise ReviewValidationError("octets du recu de revue differents du blob scelle")
+
+
 def validate_findings(
     findings: list[dict[str, Any]],
     sources: list[dict[str, Any]],
@@ -497,7 +580,15 @@ def validate_findings(
             raise ReviewValidationError("references du finding incompletes")
 
         provenance = finding.get("provenance")
-        provenance_fields = {"reviewer_id", "review_run_id", "reviewer_model", "integrator_id"}
+        provenance_fields = {
+            "reviewer_id",
+            "review_run_id",
+            "reviewer_model",
+            "integrator_id",
+            "review_receipt_path",
+            "review_receipt_sha256",
+            "sealing_commit_sha",
+        }
         if not isinstance(provenance, dict) or set(provenance) != provenance_fields:
             raise ReviewValidationError("provenance incomplete")
         if any(not isinstance(provenance[key], str) or not provenance[key].strip() for key in provenance):
@@ -506,6 +597,7 @@ def validate_findings(
             raise ReviewValidationError("integrateur incoherent")
         if provenance["reviewer_id"] == provenance["integrator_id"]:
             raise ReviewValidationError("relecteur identique a l'integrateur")
+        _validate_review_receipt(provenance, root, policy)
 
         anomalies = finding.get("anomalies")
         if not isinstance(anomalies, list):
@@ -537,8 +629,8 @@ def validate_findings(
                 anomaly.get("id") for anomaly in dimension_anomalies
             }:
                 raise ReviewValidationError("liens d'anomalies incoherents")
-            if dimension["verdict"] == "pass" and dimension_anomalies:
-                raise ReviewValidationError("verdict pass avec issue")
+            if dimension_anomalies and dimension["verdict"] != "issue":
+                raise ReviewValidationError("anomalie dimensionnelle exige un verdict issue")
             if dimension["verdict"] == "issue" and not dimension_anomalies:
                 raise ReviewValidationError("verdict issue sans anomalie")
             for fact in facts:
@@ -596,17 +688,10 @@ def execution_observation(source: dict[str, Any], root: Path = ROOT) -> dict[str
     result = verifier.check_object(path, no_ruff=False)
     fresh_verdict = "pass" if result["verdict"] == "verified" else result["verdict"]
     stable_result = {"verdict": fresh_verdict, "checks": result["checks"]}
-    receipt_path = (
-        root
-        / "NSI"
-        / "chapitres"
-        / source["chapter"]
-        / "validations"
-        / f"{source['id']}.execution.json"
-    )
+    receipt_path = _resolve_execution_receipt(source, root)
     receipt: dict[str, Any] | None = None
     receipt_sha: str | None = None
-    if receipt_path.is_file():
+    if receipt_path is not None:
         receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
         receipt_sha = sha256_file(receipt_path)
     receipt_verdict = receipt.get("verdict") if receipt else None
@@ -615,7 +700,9 @@ def execution_observation(source: dict[str, Any], root: Path = ROOT) -> dict[str
     anomalies = []
     if fresh_verdict == "fail":
         anomalies.append("fresh_execution_failed")
-    if not matches:
+    elif receipt is None:
+        anomalies.append("missing_receipt")
+    elif not matches:
         anomalies.append("execution_receipt_diverged")
     return {
         "checker": "NSI/scripts/verify_python.py::check_object",
@@ -632,6 +719,8 @@ def execution_observation(source: dict[str, Any], root: Path = ROOT) -> dict[str
 def _execution_anomaly(
     source: dict[str, Any], observation: dict[str, Any], root: Path
 ) -> dict[str, Any]:
+    failure_class = observation["anomalies"][0]
+    fresh_failure = failure_class == "fresh_execution_failed"
     anomaly_id = "1NSI-REV-EXEC-" + hashlib.sha256(source["id"].encode("utf-8")).hexdigest()[:12].upper()
     source_path = root / source["path"]
     fact = {
@@ -640,14 +729,22 @@ def _execution_anomaly(
         "line_end": 1,
         "excerpt_sha256": sha256_bytes(_excerpt_bytes(source_path, 1, 1)),
         "fact_type": "computed_result",
-        "observation": f"Le controle executable frais diverge pour {source['id']}.",
+        "observation": (
+            f"Le controle executable frais echoue pour {source['id']}."
+            if fresh_failure
+            else f"La tracabilite du recu d'execution est incomplete pour {source['id']}."
+        ),
     }
     return {
         "id": anomaly_id,
-        "severity": "P0",
-        "dimension": "scientific",
+        "severity": "P0" if fresh_failure else "P1",
+        "dimension": "scientific" if fresh_failure else "traceability",
         "fact": fact,
-        "consequence": "La coherence du code publie et de son recu n'est pas etablie.",
+        "consequence": (
+            "Le code publie ne satisfait pas le controle executable frais."
+            if fresh_failure
+            else "Le controle frais passe, mais sa tracabilite par un recu concordant n'est pas etablie."
+        ),
         "expected_action": "Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.",
     }
 
@@ -676,10 +773,11 @@ def generate_register(
         if observation and observation["anomalies"]:
             anomaly = _execution_anomaly(source, observation, root)
             anomalies.append(anomaly)
-            scientific = dimensions["scientific"]
-            scientific["verdict"] = "issue"
-            scientific["facts"].append(copy.deepcopy(anomaly["fact"]))
-            scientific["anomaly_ids"].append(anomaly["id"])
+            if anomaly["dimension"] in dimensions:
+                dimension = dimensions[anomaly["dimension"]]
+                dimension["verdict"] = "issue"
+                dimension["facts"].append(copy.deepcopy(anomaly["fact"]))
+                dimension["anomaly_ids"].append(anomaly["id"])
         class_digests = dependency_class_digests(source, observed_sources, root, policy)
         entries.append(
             {
@@ -750,6 +848,35 @@ def render_summary(document: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def release_gate_allows(document: dict[str, Any], policy: dict[str, Any]) -> bool:
+    decision = policy.get("decision", {})
+    if (
+        decision.get("publication_approval") is not True
+        or decision.get("human_confirmation_required") is not False
+        or decision.get("release_acceptance") is not True
+    ):
+        return False
+    if (
+        document.get("publication_approval") is not True
+        or document.get("human_confirmation_required") is not False
+    ):
+        return False
+    for entry in document.get("entries", []):
+        if (
+            entry.get("publication_approval") is not True
+            or entry.get("human_confirmation_required") is not False
+            or bool(entry.get("anomalies"))
+        ):
+            return False
+        dimensions = entry.get("dimensions", {})
+        if any(
+            dimension.get("verdict") in {"issue", "human_confirmation_required"}
+            for dimension in dimensions.values()
+        ):
+            return False
+    return True
+
+
 def load_findings(path: Path) -> list[dict[str, Any]]:
     data = yaml.safe_load(path.read_text(encoding="utf-8"))
     if isinstance(data, dict):
@@ -802,10 +929,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.output_summary or args.check:
             _write_or_check(args.output_summary, render_summary(document), args.check)
         if args.release_gate:
-            return 7 if (
-                not policy["decision"]["publication_approval"]
-                or policy["decision"]["human_confirmation_required"]
-            ) else 0
+            return 0 if release_gate_allows(document, policy) else 7
         return 0
     except (OSError, ReviewValidationError, yaml.YAMLError, json.JSONDecodeError) as error:
         print(f"review_1nsi_content: {error}", file=sys.stderr)
