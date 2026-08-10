@@ -72,6 +72,27 @@ PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
 POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
+RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
+CURRENT_RECEIPT_SEALS = {
+    "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": (
+        "sha256:bed9bc079bc621ec3ab67da234d274f540963090a294efa1290782d326bba872"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": (
+        "sha256:9946804b5f5a7af0b5f1d4f0b53e1a871cb65c760b3150b22d24286ac19b5797"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": (
+        "sha256:1248d76e4926f2688a64497e2c0b2177f461f168d8c2b6bc3b0f76b7359e0f1a"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": (
+        "sha256:0263aa85f9f7d18b6262819fb7ba113c3c804d38e0f5939c7f5c3d05a844fb26"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": (
+        "sha256:5c13f4527855d90c84490392263b3b58d0f9f4e7330ab9e6b2ec6ea99a415373"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": (
+        "sha256:7de97aac1c10c6bcd17bd5b1117148abddad957c9155e6ab5e23fbd6a97f91e4"
+    ),
+}
 GOVERNANCE_REVIEW_CONFIG = {
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": {
         "reviewer_id": "019fec51-6552-7ac2-8a57-962a9f664475",
@@ -921,6 +942,110 @@ def test_all_review_receipts_match_current_governance_before_sealing(
     assert len(covered_ids) == len(set(covered_ids)) == 349
     assert set(covered_ids) == set(sources_by_id)
     assert execution_debt == EXPECTED_EXECUTION_DEBT
+
+
+def test_sealed_current_governance_receipts_cover_all_349_reviews(
+    review_module,
+) -> None:
+    assert set(CURRENT_RECEIPT_SEALS) == REVIEW_RUNS
+    assert _git(
+        ROOT, "rev-list", "--parents", "-n", "1", RECEIPTS_COMMIT
+    ).split() == [RECEIPTS_COMMIT, POLICY_COMMIT]
+
+    covered_ids = []
+    for relative_path, expected_digest in sorted(CURRENT_RECEIPT_SEALS.items()):
+        sealed_bytes = _git_bytes(ROOT, "show", f"{RECEIPTS_COMMIT}:{relative_path}")
+        assert review_module.sha256_bytes(sealed_bytes) == expected_digest
+        assert (ROOT / relative_path).read_bytes() == sealed_bytes
+        receipt = yaml.safe_load(sealed_bytes.decode("utf-8"))
+        config = GOVERNANCE_REVIEW_CONFIG[relative_path]
+        assert {
+            "reviewer_id": receipt["reviewer_id"],
+            "review_run_id": receipt["review_run_id"],
+            "reviewer_model": receipt["reviewer_model"],
+        } == {
+            "reviewer_id": config["reviewer_id"],
+            "review_run_id": config["review_run_id"],
+            "reviewer_model": "codex-gpt5",
+        }
+        assert [review["id"] for review in receipt["reviews"]] == receipt[
+            "assignment"
+        ]["source_ids"]
+        covered_ids.extend(receipt["assignment"]["source_ids"])
+
+    assert len(covered_ids) == len(set(covered_ids)) == 349
+
+
+def test_findings_only_differ_on_reattested_payload_or_provenance(
+    policy, sources, review_module
+) -> None:
+    document = yaml.safe_load(FINDINGS_PATH.read_text(encoding="utf-8"))
+    contract_relative = CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix()
+    contract_config = GOVERNANCE_REVIEW_CONFIG[contract_relative]
+    stale_header = {
+        key: document[key]
+        for key in (
+            "review_run_id",
+            "review_receipt_path",
+            "review_receipt_sha256",
+            "sealing_commit_sha",
+        )
+    } != {
+        "review_run_id": contract_config["review_run_id"],
+        "review_receipt_path": contract_relative,
+        "review_receipt_sha256": CURRENT_RECEIPT_SEALS[contract_relative],
+        "sealing_commit_sha": RECEIPTS_COMMIT,
+    }
+
+    findings = review_module.load_findings(FINDINGS_PATH)
+    findings_by_id = {finding["id"]: finding for finding in findings}
+    sources_by_id = {source["id"]: source for source in sources}
+    assert len(findings_by_id) == len(findings) == 349
+    assert set(findings_by_id) == set(sources_by_id)
+
+    stale_reviews = []
+    for relative_path, expected_digest in sorted(CURRENT_RECEIPT_SEALS.items()):
+        receipt = yaml.safe_load(
+            _git_bytes(ROOT, "show", f"{RECEIPTS_COMMIT}:{relative_path}").decode(
+                "utf-8"
+            )
+        )
+        expected_provenance = {
+            "reviewer_id": receipt["reviewer_id"],
+            "review_run_id": receipt["review_run_id"],
+            "reviewer_model": receipt["reviewer_model"],
+            "integrator_id": policy["integrator_id"],
+            "review_receipt_path": relative_path,
+            "review_receipt_sha256": expected_digest,
+            "sealing_commit_sha": RECEIPTS_COMMIT,
+        }
+        for review in receipt["reviews"]:
+            source = sources_by_id[review["id"]]
+            finding = findings_by_id[review["id"]]
+            assert {
+                "id": finding["id"],
+                "scope": finding["scope"],
+                "chapter": finding["chapter"],
+                "source_path": finding["source_path"],
+                "source_status": finding["source_status"],
+                "capacity_refs": finding["capacity_refs"],
+            } == {
+                "id": source["id"],
+                "scope": source["scope"],
+                "chapter": source["chapter"],
+                "source_path": source["path"],
+                "source_status": source["status"],
+                "capacity_refs": source.get("capacity_refs", []),
+            }
+            if finding["provenance"] != expected_provenance or {
+                "dimensions": finding["dimensions"],
+                "anomalies": finding["anomalies"],
+            } != review["payload"]:
+                stale_reviews.append(review["id"])
+
+    assert not stale_header and not stale_reviews, (
+        f"findings obsoletes: header={stale_header}, entries={stale_reviews}"
+    )
 
 
 def test_scope_guard_base_is_strict_full_commit(policy, review_module) -> None:
@@ -2847,6 +2972,9 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
     policy, sources, review_module
 ) -> None:
     assert FINDINGS_PATH.is_file(), "les findings des contrats doivent etre crees"
+    receipt_relative = CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix()
+    receipt_digest = CURRENT_RECEIPT_SEALS[receipt_relative]
+    config = GOVERNANCE_REVIEW_CONFIG[receipt_relative]
     document = yaml.safe_load(FINDINGS_PATH.read_text(encoding="utf-8"))
     assert {
         key: document[key]
@@ -2863,10 +2991,10 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
         "artifact_type": "1nsi_content_review_findings",
         "schema_version": 1,
         "manual": "1NSI",
-        "review_run_id": "1nsi-contracts-2026-08-10-plato-reattestation-v2",
-        "review_receipt_path": CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix(),
-        "review_receipt_sha256": CONTRACT_RECEIPT_SHA256,
-        "sealing_commit_sha": CONTRACT_RECEIPT_COMMIT,
+        "review_run_id": config["review_run_id"],
+        "review_receipt_path": receipt_relative,
+        "review_receipt_sha256": receipt_digest,
+        "sealing_commit_sha": RECEIPTS_COMMIT,
     }
 
     findings = [
@@ -2889,13 +3017,13 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
     reviews_by_id = {review["id"]: review for review in receipt["reviews"]}
     sources_by_id = {source["id"]: source for source in contracts}
     expected_provenance = {
-        "reviewer_id": "019feb3f-cd89-7242-9a84-6fafbc77e0d8",
-        "review_run_id": "1nsi-contracts-2026-08-10-plato-reattestation-v2",
-        "reviewer_model": "codex-inherited-gpt5",
+        "reviewer_id": config["reviewer_id"],
+        "review_run_id": config["review_run_id"],
+        "reviewer_model": "codex-gpt5",
         "integrator_id": policy["integrator_id"],
-        "review_receipt_path": CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix(),
-        "review_receipt_sha256": CONTRACT_RECEIPT_SHA256,
-        "sealing_commit_sha": CONTRACT_RECEIPT_COMMIT,
+        "review_receipt_path": receipt_relative,
+        "review_receipt_sha256": receipt_digest,
+        "sealing_commit_sha": RECEIPTS_COMMIT,
     }
     for finding in validated:
         source = sources_by_id[finding["id"]]
@@ -2930,16 +3058,14 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
     )
 
 
-def test_contract_findings_receipt_is_git_sealed_and_matches_current_dependencies(
-    policy, sources, review_module
+def test_historical_contract_receipt_remains_git_sealed(
+    sources, review_module
 ) -> None:
-    assert FINDINGS_PATH.is_file(), "le receipt doit etre consomme par des findings"
     receipt_relative = CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix()
     sealed_bytes = _git_bytes(
         ROOT, "show", f"{CONTRACT_RECEIPT_COMMIT}:{receipt_relative}"
     )
     assert review_module.sha256_bytes(sealed_bytes) == CONTRACT_RECEIPT_SHA256
-    assert CONTRACT_RECEIPT_PATH.read_bytes() == sealed_bytes
 
     receipt = yaml.safe_load(sealed_bytes.decode("utf-8"))
     errors = list(
@@ -2950,7 +3076,16 @@ def test_contract_findings_receipt_is_git_sealed_and_matches_current_dependencie
     )
     assert not errors
     contracts = [source for source in sources if source["scope"] == "contract"]
-    assert receipt["protocol_digest"] == policy["protocol_digest"]
+    assert receipt["protocol_digest"] == PRE_BUILD_MANIFEST_PROTOCOL_DIGEST
+    assert {
+        "reviewer_id": receipt["reviewer_id"],
+        "review_run_id": receipt["review_run_id"],
+        "reviewer_model": receipt["reviewer_model"],
+    } == {
+        "reviewer_id": "019feb3f-cd89-7242-9a84-6fafbc77e0d8",
+        "review_run_id": "1nsi-contracts-2026-08-10-plato-reattestation-v2",
+        "reviewer_model": "codex-inherited-gpt5",
+    }
     assert receipt["assignment"] == {
         "scope": "contract",
         "chapters": [source["chapter"] for source in contracts],
@@ -2959,26 +3094,6 @@ def test_contract_findings_receipt_is_git_sealed_and_matches_current_dependencie
     assert [review["id"] for review in receipt["reviews"]] == [
         source["id"] for source in contracts
     ]
-
-    manifest = receipt["source_manifest"]
-    assert manifest["review_tool_sha256"] == _sha(MODULE_PATH)
-    assert manifest["execution_checker_sha256"] == _sha(
-        ROOT / "NSI" / "scripts" / "verify_python.py"
-    )
-    assert manifest["execution_common_sha256"] == _sha(
-        ROOT / "NSI" / "scripts" / "common.py"
-    )
-    entries_by_id = {entry["id"]: entry for entry in manifest["entries"]}
-    assert set(entries_by_id) == {source["id"] for source in contracts}
-    for source in contracts:
-        assert entries_by_id[source["id"]] == {
-            "id": source["id"],
-            "path": source["path"],
-            "source_sha256": _sha(ROOT / source["path"]),
-            "dependency_digest": review_module.compute_dependency_digest(
-                source, sources, ROOT, policy
-            ),
-        }
 
 
 def test_algorithm_review_receipt_matches_current_sources_before_sealing(
@@ -3040,33 +3155,37 @@ def test_algorithm_review_receipt_matches_current_sources_before_sealing(
         if not condition:
             mismatches.append(message)
 
+    config = GOVERNANCE_REVIEW_CONFIG[
+        ALGORITHM_RECEIPT_PATH.relative_to(ROOT).as_posix()
+    ]
+
     require(
         receipt["protocol_digest"] == policy["protocol_digest"],
         "protocol_digest different de la policy courante",
     )
     require(
-        receipt["reviewer_id"] == C3_REVIEWER_ID,
-        f"reviewer_id attendu: {C3_REVIEWER_ID}",
+        receipt["reviewer_id"] == config["reviewer_id"],
+        f"reviewer_id attendu: {config['reviewer_id']}",
     )
     require(
-        receipt["reviewer_id"] not in PRE_C3_REVIEWER_IDS,
-        "le reviewer C3 doit etre nouveau parmi toutes les revues precedentes",
+        receipt["reviewer_id"] not in PRE_GOVERNANCE_REVIEWER_IDS,
+        "le reviewer doit etre nouveau parmi les revues de gouvernance precedentes",
     )
     require(
         receipt["reviewer_id"] != policy["integrator_id"],
         "le reviewer doit etre distinct de l'integrateur",
     )
     require(
-        receipt["review_run_id"] == C3_REVIEW_RUN_ID,
-        f"review_run_id attendu: {C3_REVIEW_RUN_ID}",
+        receipt["review_run_id"] == config["review_run_id"],
+        f"review_run_id attendu: {config['review_run_id']}",
     )
     require(
-        receipt["review_run_id"] not in PRE_C3_REVIEW_RUN_IDS,
-        "le review_run_id C3 doit etre nouveau",
+        receipt["review_run_id"] not in PRE_GOVERNANCE_REVIEW_RUN_IDS,
+        "le review_run_id de gouvernance doit etre nouveau",
     )
     require(
-        receipt["reviewer_model"] == C3_REVIEWER_MODEL,
-        f"reviewer_model attendu: {C3_REVIEWER_MODEL}",
+        receipt["reviewer_model"] == "codex-gpt5",
+        "reviewer_model attendu: codex-gpt5",
     )
     require(
         receipt["assignment"] == expected_assignment,
@@ -3224,29 +3343,26 @@ def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
     register_anomalies = [
         anomaly for entry in document["entries"] for anomaly in entry["anomalies"]
     ]
-    assert len(register_anomalies) == 260
+    assert len(register_anomalies) == 270
     assert Counter(anomaly["severity"] for anomaly in register_anomalies) == Counter(
-        {"P0": 141, "P1": 116, "P2": 3}
+        {"P0": 151, "P1": 116, "P2": 3}
     )
 
     assert len(findings) == len(document["entries"]) == 349
     assert "Entries: 349" in summary_text
-    assert "- Total: 260" in summary_text
-    assert "- P0: 141" in summary_text
+    assert "- Total: 270" in summary_text
+    assert "- P0: 151" in summary_text
     assert "- P1: 116" in summary_text
     assert "- P2: 3" in summary_text
     assert review_module.release_gate_allows(document, policy) is False
 
 
-def test_algorithm_findings_are_sealed_to_the_c3_review_receipt(
-    policy, sources, review_module
-) -> None:
+def test_historical_algorithm_c3_receipt_remains_git_sealed(review_module) -> None:
     receipt_relative = ALGORITHM_RECEIPT_PATH.relative_to(ROOT).as_posix()
     sealed_bytes = _git_bytes(
         ROOT, "show", f"{ALGORITHM_RECEIPT_COMMIT}:{receipt_relative}"
     )
     assert review_module.sha256_bytes(sealed_bytes) == ALGORITHM_RECEIPT_SHA256
-    assert ALGORITHM_RECEIPT_PATH.read_bytes() == sealed_bytes
     receipt_parents = _git(
         ROOT, "rev-list", "--parents", "-n", "1", ALGORITHM_RECEIPT_COMMIT
     ).split()
@@ -3267,48 +3383,6 @@ def test_algorithm_findings_are_sealed_to_the_c3_review_receipt(
     }
     reviews_by_id = {review["id"]: review for review in receipt["reviews"]}
     assert len(reviews_by_id) == 40
-    expected_provenance = {
-        "reviewer_id": C3_REVIEWER_ID,
-        "review_run_id": ALGORITHM_REVIEW_RUN_ID,
-        "reviewer_model": ALGORITHM_REVIEWER_MODEL,
-        "integrator_id": policy["integrator_id"],
-        "review_receipt_path": receipt_relative,
-        "review_receipt_sha256": ALGORITHM_RECEIPT_SHA256,
-        "sealing_commit_sha": ALGORITHM_RECEIPT_COMMIT,
-    }
-
-    algorithm_findings = [
-        finding
-        for finding in review_module.load_findings(FINDINGS_PATH)
-        if finding["id"] in reviews_by_id
-    ]
-    assert len(algorithm_findings) == 40
-    findings_by_id = {finding["id"]: finding for finding in algorithm_findings}
-    assert set(findings_by_id) == set(reviews_by_id)
-    sources_by_id = {source["id"]: source for source in sources}
-    for object_id, review in reviews_by_id.items():
-        finding = findings_by_id[object_id]
-        source = sources_by_id[object_id]
-        assert {
-            "id": finding["id"],
-            "scope": finding["scope"],
-            "chapter": finding["chapter"],
-            "source_path": finding["source_path"],
-            "source_status": finding["source_status"],
-            "capacity_refs": finding["capacity_refs"],
-        } == {
-            "id": source["id"],
-            "scope": source["scope"],
-            "chapter": source["chapter"],
-            "source_path": source["path"],
-            "source_status": source["status"],
-            "capacity_refs": source.get("capacity_refs", []),
-        }
-        assert finding["provenance"] == expected_provenance
-        assert {
-            "dimensions": finding["dimensions"],
-            "anomalies": finding["anomalies"],
-        } == review["payload"]
 
 
 def test_object_findings_exhaustively_cover_all_339_sources(
