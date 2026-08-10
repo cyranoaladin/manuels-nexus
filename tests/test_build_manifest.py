@@ -245,7 +245,6 @@ def _receipt(
         ("1SPE-SUITES-EX-001", "identifiant interne"),
         ("1NSI-TYPES-BASE-EX-001", "identifiant interne"),
         ("Corrigé", "corrigé"),
-        ("corriges", "corrigé"),
         ("Barème indicatif", "barème enseignant"),
         ("Réponse professeur", "note enseignant"),
     ],
@@ -254,6 +253,20 @@ def test_recorder_student_text_gate_rejects_teacher_leaks(
     manifest_module, text: str, expected: str
 ) -> None:
     assert expected in manifest_module._student_text_violations(text)
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Corrige le programme.",
+        "Corriger le programme.",
+        "Étudier la version corrigée.",
+    ],
+)
+def test_recorder_student_text_gate_allows_correction_instructions(
+    manifest_module, text: str
+) -> None:
+    assert "corrigé" not in manifest_module._student_text_violations(text)
 
 
 def test_student_build_shape_requires_locally_recomputed_separation_gate(

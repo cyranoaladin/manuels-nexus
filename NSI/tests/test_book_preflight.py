@@ -110,4 +110,10 @@ def test_preflight_book_pdf_rejects_student_leaks(tmp_path, leak):
 
 
 def test_preflight_book_pdf_allows_instruction_to_correct(tmp_path):
-    assert _preflight(tmp_path, text="Corriger le programme et étudier la version corrigée.") == 0
+    assert (
+        _preflight(
+            tmp_path,
+            text="Corrige puis corriger le programme et étudier la version corrigée.",
+        )
+        == 0
+    )
