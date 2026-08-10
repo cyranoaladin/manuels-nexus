@@ -130,6 +130,9 @@ SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
         "build_producers": MappingProxyType(
             {1: "audit/schemas/v1/build-producers.schema.json"}
         ),
+        "1nsi_content_reviews": MappingProxyType(
+            {1: "audit/schemas/v1/1nsi-content-review.schema.json"}
+        ),
     }
 )
 
@@ -4006,7 +4009,9 @@ def _build_inventory(
         if _is_relevant_source(path) and _is_production(path)
     )
     model_sources = tuple(
-        path for path in tracked if _is_model_source(path) or _is_production(path)
+        path
+        for path in tracked
+        if _is_digest_model_source(path, source_roles[path]) or _is_production(path)
     )
     metadata_error_paths: set[str] = set()
 
@@ -4350,7 +4355,11 @@ def _build_inventory(
     )
     inventory["pdfs"] = _inventory_pdfs(
         root,
-        tracked,
+        tuple(
+            path
+            for path in tracked
+            if source_roles[path] != "validation_reference"
+        ),
         inventory,
         source_roles=source_roles,
     )
@@ -5447,6 +5456,12 @@ def _is_model_source(path: str) -> bool:
         or path.endswith("/scripts/assemble_manuel.py")
         or path.lower().endswith(".pdf")
     )
+
+
+def _is_digest_model_source(path: str, source_role: str) -> bool:
+    if path.lower().endswith(".pdf"):
+        return source_role != "validation_reference"
+    return _is_model_source(path)
 
 
 def _is_relevant_tex(path: str) -> bool:

@@ -6339,6 +6339,48 @@ def test_source_digest_uses_only_tracked_relevant_sources(
     assert inventory_module.build_inventory(tmp_path)["source_digest"] != first
 
 
+def test_source_digest_excludes_tracked_validation_reference_pdf(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_pdfinfo",
+        lambda _path: (None, "reference hors build"),
+    )
+    monkeypatch.setattr(
+        inventory_module,
+        "_page_count_with_python",
+        lambda _path: (None, "reference hors build"),
+    )
+    _init_repository(tmp_path)
+    base = _chapter_path("1NSI", "1NSI-TEST")
+    contract = f"{base}/contrat.yaml"
+    course = f"{base}/cours/c1.tex"
+    official_pdf = "audit/sources/1nsi/programme-premiere-nsi.pdf"
+    _write(tmp_path / contract, _contract("1NSI-TEST", "1NSI", capacities=1))
+    _write(
+        tmp_path / course,
+        _meta(id="1NSI-TEST-COURS-C1", chapitre="1NSI-TEST"),
+    )
+    _write(tmp_path / official_pdf, "reference officielle version 1\n")
+    _track(tmp_path, contract, course, official_pdf)
+
+    first = inventory_module.build_inventory(tmp_path)
+
+    assert official_pdf not in first["source_files"]
+    assert all(item["path"] != official_pdf for item in first["pdfs"])
+    assert all(
+        item["cible"] != official_pdf
+        for item in first["anomalies"]["unattributed_pdfs"]
+    )
+    _write(tmp_path / official_pdf, "reference officielle version 2\n")
+    assert inventory_module.build_inventory(tmp_path)["source_digest"] == first[
+        "source_digest"
+    ]
+
+
 def test_reference_graph_reports_missing_correction_and_broken_meta_and_latex_targets(
     tmp_path: Path, inventory_module
 ) -> None:
