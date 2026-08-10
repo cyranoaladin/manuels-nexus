@@ -67,9 +67,16 @@ CONTRACT_RECEIPT_COMMIT = "c5ab5d4607eb38b41e5824561aad1c7a8abcb275"
 CONTRACT_RECEIPT_SHA256 = (
     "sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162"
 )
-BASE_SHA = "7afc4b4e9dffa6fe9c2a5c46833e490df0026a6d"
+PRE_TEN_P0_BASE_SHA = "7afc4b4e9dffa6fe9c2a5c46833e490df0026a6d"
+BASE_SHA = "086c5b2086335d6f6e3b3f059f938a6cf41a088f"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
+)
+PRE_TEN_P0_PROTOCOL_DIGEST = (
+    "sha256:ccf155dc42c557a0b2b684267adee402d5886c944cac07baff4295f38c751e51"
+)
+TEN_P0_PROTOCOL_DIGEST = (
+    "sha256:1467725d0bf734b28becae772d3c966f00c3a1dd984e2aec1c164b25d36911e3"
 )
 POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
@@ -93,6 +100,8 @@ CURRENT_RECEIPT_SEALS = {
         "sha256:7de97aac1c10c6bcd17bd5b1117148abddad957c9155e6ab5e23fbd6a97f91e4"
     ),
 }
+PRE_TEN_P0_RECEIPTS_COMMIT = RECEIPTS_COMMIT
+PRE_TEN_P0_RECEIPT_SEALS = dict(CURRENT_RECEIPT_SEALS)
 GOVERNANCE_REVIEW_CONFIG = {
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": {
         "reviewer_id": "019fec51-6552-7ac2-8a57-962a9f664475",
@@ -257,6 +266,22 @@ def sources(review_module):
 
 def _sha(path: Path) -> str:
     return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _assert_historical_fact(
+    fact: dict,
+    allowed_paths: set[str],
+    commit: str,
+) -> None:
+    assert fact["path"] in allowed_paths
+    assert "TNSI" not in fact["path"]
+    source = _git_bytes(ROOT, "show", f"{commit}:{fact['path']}")
+    lines = source.splitlines(keepends=True)
+    assert 1 <= fact["line_start"] <= fact["line_end"] <= len(lines)
+    excerpt = b"".join(lines[fact["line_start"] - 1 : fact["line_end"]])
+    assert fact["excerpt_sha256"] == (
+        "sha256:" + hashlib.sha256(excerpt).hexdigest()
+    )
 
 
 def _contract_refs() -> set[tuple[str, str]]:
@@ -780,6 +805,148 @@ def test_build_manifest_governance_uses_current_clean_base(
     review_module.verify_scope(ROOT, policy)
 
 
+def test_pre_ten_p0_receipts_remain_historically_sealed(review_module) -> None:
+    historical_policy = yaml.safe_load(
+        _git_bytes(ROOT, "show", f"{POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml").decode(
+            "utf-8"
+        )
+    )
+    assert historical_policy["scope_guard"]["implementation_base_sha"] == (
+        PRE_TEN_P0_BASE_SHA
+    )
+    assert historical_policy["protocol_digest"] == PRE_TEN_P0_PROTOCOL_DIGEST
+    assert _git(ROOT, "rev-list", "--parents", "-n", "1", PRE_TEN_P0_RECEIPTS_COMMIT).split() == [
+        PRE_TEN_P0_RECEIPTS_COMMIT,
+        POLICY_COMMIT,
+    ]
+    receipt_schema = review_module._receipt_schema(ROOT)
+
+    for relative_path, expected_digest in sorted(
+        PRE_TEN_P0_RECEIPT_SEALS.items()
+    ):
+        receipt_bytes = _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_TEN_P0_RECEIPTS_COMMIT}:{relative_path}",
+        )
+        assert "sha256:" + hashlib.sha256(receipt_bytes).hexdigest() == (
+            expected_digest
+        )
+        receipt = yaml.safe_load(receipt_bytes.decode("utf-8"))
+        Draft202012Validator(
+            receipt_schema,
+            format_checker=review_module.FORMAT_CHECKER,
+        ).validate(receipt)
+        assert receipt["protocol_digest"] == PRE_TEN_P0_PROTOCOL_DIGEST
+        assert "TNSI" not in json.dumps(receipt, ensure_ascii=False)
+
+        manifest = receipt["source_manifest"]
+        historical_tools = {
+            "review_tool_sha256": "scripts/review_1nsi_content.py",
+            "execution_checker_sha256": "NSI/scripts/verify_python.py",
+            "execution_common_sha256": "NSI/scripts/common.py",
+        }
+        for field, source_path in historical_tools.items():
+            payload = _git_bytes(
+                ROOT,
+                "show",
+                f"{PRE_TEN_P0_RECEIPTS_COMMIT}:{source_path}",
+            )
+            assert manifest[field] == (
+                "sha256:" + hashlib.sha256(payload).hexdigest()
+            )
+        for entry in manifest["entries"]:
+            payload = _git_bytes(
+                ROOT,
+                "show",
+                f"{PRE_TEN_P0_RECEIPTS_COMMIT}:{entry['path']}",
+            )
+            assert entry["source_sha256"] == (
+                "sha256:" + hashlib.sha256(payload).hexdigest()
+            )
+
+
+def test_ten_p0_policy_migration_invalidates_exactly_six_receipts(
+    policy, sources, review_module
+) -> None:
+    assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
+    assert policy["protocol_digest"] == TEN_P0_PROTOCOL_DIGEST
+    assert review_module.compute_protocol_digest(ROOT, policy) == (
+        TEN_P0_PROTOCOL_DIGEST
+    )
+
+    sources_by_id = {source["id"]: source for source in sources}
+    source_changed_receipts = set()
+    stale_receipts = set()
+    current_tool_hashes = {
+        "review_tool_sha256": _sha(MODULE_PATH),
+        "execution_checker_sha256": _sha(ROOT / "NSI/scripts/verify_python.py"),
+        "execution_common_sha256": _sha(ROOT / "NSI/scripts/common.py"),
+    }
+
+    for relative_path in sorted(REVIEW_RUNS):
+        receipt = yaml.safe_load(
+            _git_bytes(
+                ROOT,
+                "show",
+                f"{PRE_TEN_P0_RECEIPTS_COMMIT}:{relative_path}",
+            ).decode("utf-8")
+        )
+        manifest = receipt["source_manifest"]
+        stale_fields = set()
+        if receipt["protocol_digest"] != policy["protocol_digest"]:
+            stale_fields.add("protocol_digest")
+        if (
+            manifest["execution_checker_sha256"]
+            != current_tool_hashes["execution_checker_sha256"]
+        ):
+            stale_fields.add("execution_checker_sha256")
+        assert manifest["review_tool_sha256"] == current_tool_hashes[
+            "review_tool_sha256"
+        ]
+        assert manifest["execution_common_sha256"] == current_tool_hashes[
+            "execution_common_sha256"
+        ]
+
+        source_mismatches = set()
+        dependency_mismatches = set()
+        for entry in manifest["entries"]:
+            source = sources_by_id[entry["id"]]
+            assert entry["path"] == source["path"]
+            if entry["source_sha256"] != _sha(ROOT / source["path"]):
+                source_mismatches.add(entry["id"])
+            if entry["dependency_digest"] != (
+                review_module.compute_dependency_digest(
+                    source,
+                    sources,
+                    ROOT,
+                    policy,
+                )
+            ):
+                dependency_mismatches.add(entry["id"])
+
+        assert dependency_mismatches == set(receipt["assignment"]["source_ids"])
+        stale_fields.add("dependency_digest")
+        if source_mismatches:
+            stale_fields.add("source_sha256")
+            source_changed_receipts.add(relative_path)
+        assert stale_fields == {
+            "protocol_digest",
+            "execution_checker_sha256",
+            "dependency_digest",
+            *({"source_sha256"} if source_mismatches else set()),
+        }
+        stale_receipts.add(relative_path)
+
+    assert stale_receipts == REVIEW_RUNS
+    assert source_changed_receipts == {
+        "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml",
+        "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml",
+        "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml",
+        "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml",
+    }
+
+
 def test_policy_migration_invalidates_only_review_envelopes(
     policy, sources, review_module
 ) -> None:
@@ -813,7 +980,14 @@ def test_policy_migration_invalidates_only_review_envelopes(
         for entry in receipt["source_manifest"]["entries"]:
             source = sources_by_id[entry["id"]]
             assert entry["path"] == source["path"]
-            assert entry["source_sha256"] == _sha(ROOT / source["path"])
+            historical_source = _git_bytes(
+                ROOT,
+                "show",
+                f"{POLICY_COMMIT}^:{source['path']}",
+            )
+            assert entry["source_sha256"] == (
+                "sha256:" + hashlib.sha256(historical_source).hexdigest()
+            )
             assert entry["dependency_digest"] != review_module.compute_dependency_digest(
                 source, sources, ROOT, policy
             )
@@ -834,9 +1008,13 @@ def test_policy_migration_invalidates_only_review_envelopes(
                 assert dimension["anomaly_ids"] == expected_ids
                 assert (dimension["verdict"] == "issue") == bool(expected_ids)
                 for fact in dimension["facts"]:
-                    review_module._validate_fact(fact, allowed_paths, ROOT)
+                    _assert_historical_fact(fact, allowed_paths, f"{POLICY_COMMIT}^")
             for anomaly in anomalies:
-                review_module._validate_fact(anomaly["fact"], allowed_paths, ROOT)
+                _assert_historical_fact(
+                    anomaly["fact"],
+                    allowed_paths,
+                    f"{POLICY_COMMIT}^",
+                )
 
 
 def test_all_review_receipts_match_current_governance_before_sealing(
