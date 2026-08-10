@@ -859,6 +859,8 @@ def _build_local(
     context: ManualContext,
     build_dir: Path,
     canonical_pdf: Path,
+    *,
+    staging_only: bool = False,
 ) -> int:
     student_variant = context.variant in ELEVE_VARIANTS
     with tempfile.TemporaryDirectory(
@@ -884,6 +886,9 @@ def _build_local(
             check_student_leaks=student_variant,
         ):
             return 1
+        if staging_only:
+            print(f"Validation staging reussie : {context.output_stem}")
+            return 0
         legacy._promote_book_artifacts(staging, build_dir, context.output_stem)
         print(f"PDF canonique : {canonical_pdf}")
         return 0
@@ -972,7 +977,15 @@ def _build_observed(
         )
 
 
-def build_manual(variant: str, record_observed: bool = False) -> int:
+def build_manual(
+    variant: str,
+    record_observed: bool = False,
+    staging_only: bool = False,
+) -> int:
+    if record_observed and staging_only:
+        raise ValueError(
+            "staging_only et record_observed sont mutuellement exclusifs."
+        )
     _validate_variant(variant)
     context = _manual_context(variant)
     build_dir = legacy._resolve_under(
@@ -984,14 +997,28 @@ def build_manual(variant: str, record_observed: bool = False) -> int:
     )
     if record_observed:
         return _build_observed(context, build_dir, canonical_pdf)
-    return _build_local(context, build_dir, canonical_pdf)
+    return _build_local(
+        context,
+        build_dir,
+        canonical_pdf,
+        staging_only=staging_only,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--variant", default="eleve")
     parser.add_argument("--record-observed", action="store_true")
+    parser.add_argument("--staging-only", action="store_true")
     arguments = parser.parse_args(argv)
+    if arguments.record_observed and arguments.staging_only:
+        parser.error("--staging-only et --record-observed sont incompatibles")
+    if arguments.staging_only:
+        return build_manual(
+            arguments.variant,
+            record_observed=arguments.record_observed,
+            staging_only=True,
+        )
     return build_manual(
         arguments.variant,
         record_observed=arguments.record_observed,

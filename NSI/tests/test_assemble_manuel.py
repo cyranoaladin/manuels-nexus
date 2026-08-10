@@ -536,6 +536,128 @@ def test_failed_local_build_preserves_the_previous_canonical_pdf(
     assert not list(build_dir.glob(".MANUEL_1NSI_eleve-*"))
 
 
+def test_staging_only_build_preflights_without_promoting_any_artifact(
+    monkeypatch, tmp_path, assembler
+):
+    root = tmp_path / "NSI"
+    _prepare_root(root)
+    _patch_root(monkeypatch, assembler, root)
+    build_dir = root / "build" / "MANUEL_1NSI"
+    build_dir.mkdir(parents=True)
+    canonical = build_dir / "MANUEL_1NSI_eleve.pdf"
+    canonical.write_bytes(b"previous-canonical")
+    before_digest = hashlib.sha256(canonical.read_bytes()).hexdigest()
+    calls = []
+
+    def fake_compile(tex_path, staging, *, source_date_epoch):
+        calls.append("compile")
+        (staging / f"{tex_path.stem}.pdf").write_bytes(b"staged-pdf")
+        (staging / f"{tex_path.stem}.log").write_text("staged-log", encoding="utf-8")
+        (staging / f"{tex_path.stem}.aux").write_text("staged-aux", encoding="utf-8")
+        return 0
+
+    def fake_preflight(pdf, log, *, check_student_leaks):
+        calls.append(("preflight", pdf, log, check_student_leaks))
+        assert pdf.name == canonical.name
+        assert log.name == f"{canonical.stem}.log"
+        assert check_student_leaks is True
+        return 0
+
+    monkeypatch.setattr(assembler.legacy, "compile_tex", fake_compile)
+    monkeypatch.setattr(assembler.legacy, "preflight_book_pdf", fake_preflight)
+    monkeypatch.setattr(
+        assembler.legacy,
+        "_promote_book_artifacts",
+        lambda *_args: pytest.fail("staging_only ne doit jamais promouvoir"),
+    )
+
+    assert assembler.build_manual("eleve", staging_only=True) == 0
+
+    assert calls[0] == "compile"
+    assert calls[1][0] == "preflight"
+    assert canonical.read_bytes() == b"previous-canonical"
+    assert hashlib.sha256(canonical.read_bytes()).hexdigest() == before_digest
+    assert sorted(path.name for path in build_dir.iterdir()) == [canonical.name]
+
+
+@pytest.mark.parametrize("failure", ["compile", "preflight"])
+def test_staging_only_failure_preserves_canonical_and_promotes_nothing(
+    monkeypatch, tmp_path, assembler, failure
+):
+    root = tmp_path / "NSI"
+    _prepare_root(root)
+    _patch_root(monkeypatch, assembler, root)
+    build_dir = root / "build" / "MANUEL_1NSI"
+    build_dir.mkdir(parents=True)
+    canonical = build_dir / "MANUEL_1NSI_eleve.pdf"
+    canonical.write_bytes(b"previous-canonical")
+    before_digest = hashlib.sha256(canonical.read_bytes()).hexdigest()
+
+    def fake_compile(tex_path, staging, *, source_date_epoch):
+        if failure == "compile":
+            return 1
+        (staging / f"{tex_path.stem}.pdf").write_bytes(b"invalid-staged-pdf")
+        (staging / f"{tex_path.stem}.log").write_text("staged-log", encoding="utf-8")
+        (staging / f"{tex_path.stem}.aux").write_text("staged-aux", encoding="utf-8")
+        return 0
+
+    def fake_preflight(_pdf, _log, *, check_student_leaks):
+        assert failure == "preflight"
+        assert check_student_leaks is True
+        return 1
+
+    monkeypatch.setattr(assembler.legacy, "compile_tex", fake_compile)
+    monkeypatch.setattr(assembler.legacy, "preflight_book_pdf", fake_preflight)
+    monkeypatch.setattr(
+        assembler.legacy,
+        "_promote_book_artifacts",
+        lambda *_args: pytest.fail("un echec staging_only ne doit pas promouvoir"),
+    )
+
+    assert assembler.build_manual("eleve", staging_only=True) == 1
+
+    assert canonical.read_bytes() == b"previous-canonical"
+    assert hashlib.sha256(canonical.read_bytes()).hexdigest() == before_digest
+    assert sorted(path.name for path in build_dir.iterdir()) == [canonical.name]
+
+
+def test_build_manual_rejects_staging_only_record_observed_combination(
+    assembler,
+):
+    with pytest.raises(ValueError, match="staging_only.*record_observed"):
+        assembler.build_manual("eleve", record_observed=True, staging_only=True)
+
+
+def test_cli_forwards_staging_only(monkeypatch, assembler):
+    calls = []
+    monkeypatch.setattr(
+        assembler,
+        "build_manual",
+        lambda variant, record_observed=False, staging_only=False: calls.append(
+            (variant, record_observed, staging_only)
+        )
+        or 0,
+    )
+
+    assert assembler.main(["--variant", "projets", "--staging-only"]) == 0
+    assert calls == [("projets", False, True)]
+
+
+def test_cli_rejects_staging_only_record_observed_combination(
+    monkeypatch, assembler
+):
+    monkeypatch.setattr(
+        assembler,
+        "build_manual",
+        lambda *_args, **_kwargs: pytest.fail("la CLI doit refuser la combinaison"),
+    )
+
+    with pytest.raises(SystemExit) as error:
+        assembler.main(["--record-observed", "--staging-only"])
+
+    assert error.value.code == 2
+
+
 def test_make_book_dispatches_to_canonical_assembler():
     default_result = subprocess.run(
         ["make", "-n", "book"],
