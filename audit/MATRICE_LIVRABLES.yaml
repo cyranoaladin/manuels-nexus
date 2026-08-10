@@ -32,8 +32,9 @@ manuals:
       - 1NSI-TYPES-CONSTRUITS
       - 1NSI-WEB-IHM
       statuses:
-        generated: 189
-        needs_review: 150
+        manual_review: 7
+        needs_review: 169
+        verified: 163
       totals:
         capacites: 51
         corriges: 127
@@ -584,12 +585,12 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:b63f4266ea648863f26a5b0cf6d0de5e1d567d643b332bbbb871af4ae5c78cba
+model_digest: sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548
 provenance:
   branch: finalisation/collection-v1
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-10T04:16:40Z'
+  generated_at_utc: '2026-08-10T04:42:32Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
     scripts/build_manifest.py: sha256:86910a57486681520e421458d058b498455a4156ad0ef4e4357c54a94ab6c57e
@@ -601,7 +602,7 @@ provenance:
   generator_sha256: sha256:b5f09fa6fe8f62ed9168e03ea69380ce751ea5ccb370c3c5ab9081f0727021b1
   generator_version: 1
   git_available: true
-  head_sha: 3e86d4673b0b6bdd2286b7fa3c0ed146cc35b88f
+  head_sha: 7688739d71386d93e8b32c4b9dbc8caf1e07ce64
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -612,4 +613,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:ad16664a264ad02890e5775bae4de053b32f33f917dfc33497aa00c7ead18f19
+source_digest: sha256:8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81
