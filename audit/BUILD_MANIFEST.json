@@ -1,6 +1,6 @@
 {
   "artifact_type": "build_manifest",
-  "build_state_digest": "sha256:2045f88890dd8e5c711ba7fc050d4dc49faa651d3a850cef50673439f2ae443a",
+  "build_state_digest": "sha256:26dd2735bbd6032624d573751a647d1b37f91a81feefbfe8b05b3f832e163033",
   "builds": [
     {
       "excluded_objects": [],
@@ -1407,6 +1407,73 @@
         "python": "Python 3.12.3"
       },
       "variant": "projets"
+    },
+    {
+      "excluded_objects": [],
+      "gates": {
+        "compile": {
+          "passed": true
+        },
+        "preflight": {
+          "checks": {
+            "pdffonts": "passed",
+            "pdfinfo": "passed"
+          },
+          "passed": true
+        },
+        "student_separation": {
+          "passed": true
+        }
+      },
+      "generated_dependencies": [],
+      "generated_dependency_digests": {},
+      "git_sha": "21c2387cb4478a009b92eb5ed07223ff3b730482",
+      "included_objects": [
+        "NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/remediation/1NSI-TC-REM.tex",
+        "NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex",
+        "NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C1.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex",
+        "NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-RE-C3.tex"
+      ],
+      "manual": "1NSI",
+      "model_digest": "sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548",
+      "ordered_trace": [
+        "NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex",
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/remediation/1NSI-TC-REM.tex",
+        "NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex",
+        "NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex",
+        "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex",
+        "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C1.tex",
+        "NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex",
+        "NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex",
+        "NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex",
+        "NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-RE-C3.tex"
+      ],
+      "page_count": 13,
+      "pdf_path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf",
+      "pdf_sha256": "sha256:7a60e75a1ad078bb9b0caf688b846a9ec3617a0cc6b5281bf8edfdaab76d4226",
+      "reproducibility": {
+        "config_path": "Mathematiques/manuel-maths/config/reproducible-build.json",
+        "force_source_date": "1",
+        "locale": "C.UTF-8",
+        "pythonhashseed": "0",
+        "source_commit": "f9ad08b1f91395f7631400475f90f1119269c630",
+        "source_date_epoch": 1785962466,
+        "timezone": "UTC"
+      },
+      "source_digest": "sha256:8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81",
+      "tool_versions": {
+        "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
+        "pdffonts": "pdffonts version 24.02.0",
+        "pdfinfo": "pdfinfo version 24.02.0",
+        "python": "Python 3.12.3"
+      },
+      "variant": "remediation"
     }
   ],
   "generated_by": "build_manifest.py",
@@ -1414,7 +1481,7 @@
   "provenance": {
     "branch": "finalisation/collection-v1",
     "dirty": false,
-    "head_sha": "cee87128d1d0c7305ce160743517e4b5967dcfc4"
+    "head_sha": "21c2387cb4478a009b92eb5ed07223ff3b730482"
   },
   "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
   "schema_version": 1,
