@@ -1,0 +1,59 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-LANGAGE-RE-C4-CORRIGE-LISTE-VIDE
+source_commit_sha: ab6a104bd89c2fd8360f31be66647a9ed987fe5a
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:273d30ba8f7bae612e2cdb679733e7c495d612f63be3f66561014776a019f875
+  - path: NSI/tests/test_remediation_separation.py
+    sha256: sha256:dc38f3bceb46d782fc8810e7ec7bc47be32e9d69f0745815a822d5e53f8c814a
+  - path: NSI/chapitres/1NSI-LANGAGE/code/minimum.py
+    sha256: sha256:62a55918d0194bc4b319c87f5ad38b55d00592566763e625d219bbbc4b4efae0
+  - path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex
+    sha256: sha256:be036c83ff7a8e251b24357baa9afce82bfeed344440ce85e402f95ab6e8d2a6
+reviewer_id: 019fed26-ba51-77c0-8bfa-9bb3d16621e3
+reviewer_model: gpt-5.6-terra
+review_run_id: 1nsi-p0-minimum-corrige-liste-vide-2026-08-10-hooke-v1
+session_id: 019fed26-ba51-77c0-8bfa-9bb3d16621e3
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      ...                                                                      [100%]
+      3 passed in 0.96s
+    stderr: ""
+    stdout_sha256: sha256:bc3b389f2906ebf6404c7e3aa5a879a34e5e077d7f997e49110c9cde53d70864
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Les regressions scientifiques du minimum passent sur le SHA revu.
+  - command: pytest -q tests/test_remediation_separation.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      ...........................                                              [100%]
+      27 passed in 0.11s
+    stderr: ""
+    stdout_sha256: sha256:6b07b5e878b6a15e9b8af1aaf75d4afa7c28a8c12dbb1f5282b285be5f8cdd59
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Le verrou du bloc de correction correspond au contenu corrige.
+  - command: python -m py_compile chapitres/1NSI-LANGAGE/code/minimum.py
+    cwd: NSI
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique du minimum est syntaxiquement valide.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T20:45:26+01:00"
