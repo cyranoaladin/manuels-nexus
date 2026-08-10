@@ -94,7 +94,7 @@ def check_object(tex: Path, no_ruff: bool = False) -> dict:
     return {"verdict": verdict, "checks": checks}
 
 
-def main(chap: str, no_ruff: bool) -> int:
+def main(chap: str, no_ruff: bool, check: bool = False) -> int:
     chap_dir = ROOT / "chapitres" / chap
     failures = 0
     for sub in SUBDIRS:
@@ -108,7 +108,8 @@ def main(chap: str, no_ruff: bool) -> int:
                 "created_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             }
             record["gate"] = "sympy"  # compat schéma ; sémantique : gate d'exécution
-            write_json(chap_dir / "validations" / f"{tex.stem}.execution.json", record)
+            if not check:
+                write_json(chap_dir / "validations" / f"{tex.stem}.execution.json", record)
             tag = {"pass": "OK    ", "fail": "FAIL  ", "manual_review": "REVIEW"}[record["verdict"]]
             first_fail = next((c["detail"] for c in result["checks"] if not c.get("pass", True)), "")
             print(f"[{tag}] {tex.stem} {first_fail[:90]}")
@@ -121,5 +122,6 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--chap", required=True)
     ap.add_argument("--no-ruff", action="store_true")
+    ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
-    sys.exit(1 if main(args.chap, args.no_ruff) else 0)
+    sys.exit(1 if main(args.chap, args.no_ruff, args.check) else 0)
