@@ -43,7 +43,8 @@ SECRET_PATTERNS = (
 )
 CREDENTIAL_ASSIGNMENT = re.compile(
     r"^\s*(?:export\s+)?(?P<name>x-api-key|(?:[A-Z][A-Z0-9_]*_)?(?:API_KEY|TOKEN|SECRET|PASSWORD))"
-    r"\s*(?:=|:)\s*(?P<value>[^\s#]+)\s*$",
+    r"\s*(?:=|:)\s*(?P<value>\"(?:[^\"\\]|\\.)*\"|'(?:[^'\\]|\\.)*'|[^#\n]+?)"
+    r"\s*(?:#.*)?$",
     re.IGNORECASE | re.MULTILINE,
 )
 SAFE_CREDENTIAL_SENTINELS = {"not_applicable", "redacted", "none", "null"}
@@ -136,7 +137,10 @@ def _load_schema() -> dict:
 
 def _assert_no_secret(raw: str, path: Path) -> None:
     def replace_sentinel(match: re.Match[str]) -> str:
-        value = match["value"].strip("\"'").lower()
+        value = match["value"].strip()
+        if value[:1] == value[-1:] and value[:1] in {"\"", "'"}:
+            value = value[1:-1]
+        value = value.strip().lower()
         assert value in SAFE_CREDENTIAL_SENTINELS, (
             f"secret ou credential interdit dans {path}"
         )
@@ -298,6 +302,29 @@ def test_receipt_secret_detector_rejects_additional_fake_credentials(raw: str) -
     ],
 )
 def test_receipt_secret_detector_allows_names_and_sentinels(raw: str) -> None:
+    _assert_no_secret(raw, Path("fixture.yaml"))
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        'API_KEY: "secret-value" # documented',
+        "x-api-key: secret value # documented",
+    ],
+)
+def test_receipt_secret_detector_rejects_yaml_values_with_comments(raw: str) -> None:
+    with pytest.raises(AssertionError, match="secret ou credential"):
+        _assert_no_secret(raw, Path("fixture.yaml"))
+
+
+@pytest.mark.parametrize(
+    "raw",
+    [
+        "TOKEN: redacted # commentaire",
+        'API_KEY: "not_applicable" # commentaire',
+    ],
+)
+def test_receipt_secret_detector_allows_yaml_sentinels_with_comments(raw: str) -> None:
     _assert_no_secret(raw, Path("fixture.yaml"))
 
 
