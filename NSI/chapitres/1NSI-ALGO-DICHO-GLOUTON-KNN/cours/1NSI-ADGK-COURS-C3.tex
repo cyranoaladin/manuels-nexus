@@ -9,7 +9,8 @@ nouveaux éléments à partir d'exemples déjà classés.}
   L'algorithme des \textbf{k plus proches voisins} prédit la classe d'un nouvel élément en
   examinant les $k$ éléments \textbf{déjà classés} les plus proches de lui (au sens d'une
   distance, par exemple la distance euclidienne), et en lui attribuant la classe
-  \textbf{majoritaire} parmi ces $k$ voisins.
+  \textbf{majoritaire} parmi ces $k$ voisins. Le paramètre $k$ doit être entier et vérifier
+  $1\leqslant k\leqslant n$, où $n$ est le nombre d'éléments déjà classés.
 }
 
 \propriete[Distance euclidienne entre deux points]{
@@ -18,29 +19,39 @@ nouveaux éléments à partir d'exemples déjà classés.}
 }
 
 \begin{codereference}{Algorithme des k plus proches voisins}
+% PYTHON-SOURCE: code/k_plus_proches_voisins.py
 \begin{python}
 def distance(p1, p2):
     """Distance euclidienne entre deux points (x, y)."""
     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
 
+
 def k_plus_proches_voisins(points_classes, nouveau_point, k):
     """Predit la classe de `nouveau_point` a partir de ses k plus proches voisins.
 
     `points_classes` : liste de triplets (x, y, classe) deja etiquetes.
+    Precondition : k est un entier et 1 <= k <= len(points_classes).
     """
-    distances = [(distance((x, y), nouveau_point), classe)
-                 for (x, y, classe) in points_classes]
+    if type(k) is not int or not 1 <= k <= len(points_classes):
+        raise ValueError(
+            "k doit etre un entier compris entre 1 et le nombre de points"
+        )
+    distances = [
+        (distance((x, y), nouveau_point), classe)
+        for (x, y, classe) in points_classes
+    ]
     distances.sort(key=lambda d: d[0])
     k_plus_proches = distances[:k]
     classes = [c for (_, c) in k_plus_proches]
     return max(set(classes), key=classes.count)
 
+
 points = [
     (1, 1, "A"), (2, 1, "A"), (1, 2, "A"),
     (8, 8, "B"), (9, 8, "B"), (8, 9, "B"),
 ]
-print(k_plus_proches_voisins(points, (1.5, 1.5), 3))  # A
-print(k_plus_proches_voisins(points, (8.5, 8.5), 3))  # B
+print(k_plus_proches_voisins(points, (1.5, 1.5), 3))
+print(k_plus_proches_voisins(points, (8.5, 8.5), 3))
 \end{python}
 \end{codereference}
 
@@ -48,6 +59,10 @@ print(k_plus_proches_voisins(points, (8.5, 8.5), 3))  # B
 % def distance(p1, p2):
 %     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
 % def k_plus_proches_voisins(points_classes, nouveau_point, k):
+%     if type(k) is not int or not 1 <= k <= len(points_classes):
+%         raise ValueError(
+%             "k doit etre un entier compris entre 1 et le nombre de points"
+%         )
 %     distances = [(distance((x, y), nouveau_point), classe)
 %                  for (x, y, classe) in points_classes]
 %     distances.sort(key=lambda d: d[0])
@@ -61,6 +76,13 @@ print(k_plus_proches_voisins(points, (8.5, 8.5), 3))  # B
 % assert k_plus_proches_voisins(points, (1.5, 1.5), 3) == "A"
 % assert k_plus_proches_voisins(points, (8.5, 8.5), 3) == "B"
 % assert abs(distance((1,1),(4,5)) - 5.0) < 1e-9
+% for k_invalide in (0, -1, len(points) + 1, 1.0, True):
+%     try:
+%         k_plus_proches_voisins(points, (1.5, 1.5), k_invalide)
+%     except ValueError as erreur:
+%         assert str(erreur) == "k doit etre un entier compris entre 1 et le nombre de points"
+%     else:
+%         raise AssertionError("k hors domaine doit etre refuse")
 % END-VERIFY
 
 \propriete[Choix de $k$]{

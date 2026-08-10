@@ -1,3 +1,4 @@
+import ast
 import re
 from pathlib import Path
 
@@ -44,9 +45,24 @@ def test_greedy_change_does_not_promise_an_optimal_solution() -> None:
         in normalized
     )
     assert (
-        '"""Construit un rendu en choisissant d\'abord les plus grandes pieces '
-        'disponibles."""'
-        in source
+        "Construit un rendu en choisissant d'abord les plus grandes pieces disponibles."
+        in normalized
+    )
+    listing = re.search(
+        r"% PYTHON-SOURCE: code/rendu_glouton\.py\n"
+        r"\\begin\{python\}(?P<python>.*?)\\end\{python\}",
+        source,
+        re.DOTALL,
+    )
+    assert listing is not None
+    module = ast.parse(listing.group("python"))
+    function = next(
+        node
+        for node in module.body
+        if isinstance(node, ast.FunctionDef) and node.name == "rendu_glouton"
+    )
+    assert ast.get_docstring(function).splitlines()[0] == (
+        "Construit un rendu en choisissant d'abord les plus grandes pieces disponibles."
     )
     assert "moins de pièces possible" not in source
     assert "moins de pieces possible" not in source

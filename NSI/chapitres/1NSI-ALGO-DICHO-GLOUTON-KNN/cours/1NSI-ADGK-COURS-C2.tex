@@ -9,36 +9,63 @@
 
 \exemple{Le \textbf{rendu de monnaie} : pour tenter d'obtenir un rendu avec peu de
 pièces, on choisit à chaque étape la plus grande pièce (ou billet) ne dépassant
-pas le montant restant.}
+pas le montant restant. Les valeurs des pièces doivent être strictement positives. Si la
+stratégie gloutonne ne trouve pas de rendu exact, la fonction le signale au lieu de
+renvoyer un rendu partiel ; cela ne prouve pas qu'aucun autre rendu exact n'existe.}
 
 \begin{codereference}{Rendu de monnaie glouton}
+% PYTHON-SOURCE: code/rendu_glouton.py
 \begin{python}
 def rendu_glouton(montant, pieces):
-    """Construit un rendu en choisissant d'abord les plus grandes pieces disponibles."""
+    """Construit un rendu en choisissant d'abord les plus grandes pieces disponibles.
+
+    Precondition : les valeurs des pieces sont strictement positives.
+    """
+    if not all(p > 0 for p in pieces):
+        raise ValueError("les pieces doivent etre strictement positives")
     pieces_triees = sorted(pieces, reverse=True)
     rendu = []
     for p in pieces_triees:
         while montant >= p:
             rendu.append(p)
             montant -= p
+    if montant != 0:
+        raise ValueError("l'algorithme glouton n'a pas trouve de rendu exact")
     return rendu
 
-print(rendu_glouton(78, [50, 20, 10, 5, 2, 1]))  # [50, 20, 5, 2, 1]
+
+print(rendu_glouton(78, [50, 20, 10, 5, 2, 1]))
 \end{python}
 \end{codereference}
 
 % BEGIN-VERIFY
 % def rendu_glouton(montant, pieces):
+%     if not all(p > 0 for p in pieces):
+%         raise ValueError("les pieces doivent etre strictement positives")
 %     pieces_triees = sorted(pieces, reverse=True)
 %     rendu = []
 %     for p in pieces_triees:
 %         while montant >= p:
 %             rendu.append(p)
 %             montant -= p
+%     if montant != 0:
+%         raise ValueError("l'algorithme glouton n'a pas trouve de rendu exact")
 %     return rendu
 % resultat = rendu_glouton(78, [50, 20, 10, 5, 2, 1])
 % assert resultat == [50, 20, 5, 2, 1]
 % assert sum(resultat) == 78
+% try:
+%     rendu_glouton(3, [2, 0, 1])
+% except ValueError as erreur:
+%     assert str(erreur) == "les pieces doivent etre strictement positives"
+% else:
+%     raise AssertionError("une piece nulle doit etre refusee")
+% try:
+%     rendu_glouton(3, [2])
+% except ValueError as erreur:
+%     assert str(erreur) == "l'algorithme glouton n'a pas trouve de rendu exact"
+% else:
+%     raise AssertionError("un rendu partiel doit etre refuse")
 % END-VERIFY
 
 \propriete[Un algorithme glouton n'est pas toujours optimal]{
@@ -55,12 +82,16 @@ cas, \textbf{pas optimal}.}
 
 % BEGIN-VERIFY
 % def rendu_glouton(montant, pieces):
+%     if not all(p > 0 for p in pieces):
+%         raise ValueError("les pieces doivent etre strictement positives")
 %     pieces_triees = sorted(pieces, reverse=True)
 %     rendu = []
 %     for p in pieces_triees:
 %         while montant >= p:
 %             rendu.append(p)
 %             montant -= p
+%     if montant != 0:
+%         raise ValueError("l'algorithme glouton n'a pas trouve de rendu exact")
 %     return rendu
 % rendu = rendu_glouton(6, [4, 3, 1])
 % assert rendu == [4, 1, 1]
