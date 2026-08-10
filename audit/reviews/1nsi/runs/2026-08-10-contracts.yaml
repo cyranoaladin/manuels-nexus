@@ -1,0 +1,623 @@
+artifact_type: 1nsi_review_run
+schema_version: 1
+manual: 1NSI
+review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
+reviewer_model: codex-inherited-gpt5
+protocol_digest: sha256:7f084bfd08b62de04c6370471ab62d6decbec5dc0598ee6f23b939676001cf96
+reviewed_at: '2026-08-10T11:09:12+01:00'
+assignment:
+  scope: contract
+  chapters:
+  - 1NSI-ALGO-DICHO-GLOUTON-KNN
+  - 1NSI-ALGO-PARCOURS-TRIS
+  - 1NSI-ARCHITECTURE-OS
+  - 1NSI-LANGAGE
+  - 1NSI-PROJET-METHODES
+  - 1NSI-RESEAUX
+  - 1NSI-TABLES
+  - 1NSI-TYPES-BASE
+  - 1NSI-TYPES-CONSTRUITS
+  - 1NSI-WEB-IHM
+  source_ids:
+  - contract:1NSI-ALGO-DICHO-GLOUTON-KNN
+  - contract:1NSI-ALGO-PARCOURS-TRIS
+  - contract:1NSI-ARCHITECTURE-OS
+  - contract:1NSI-LANGAGE
+  - contract:1NSI-PROJET-METHODES
+  - contract:1NSI-RESEAUX
+  - contract:1NSI-TABLES
+  - contract:1NSI-TYPES-BASE
+  - contract:1NSI-TYPES-CONSTRUITS
+  - contract:1NSI-WEB-IHM
+source_manifest:
+  review_tool_sha256: sha256:a453068adf03803ac3e9f2e8e2cebca25e4113a64a0339bd19d8cf77ff1eb5fa
+  execution_checker_sha256: sha256:ad7dc41c88787d524bb0ba20c02b04ea9d8b5ac1646ad02c906b1af72d4ca0ba
+  execution_common_sha256: sha256:37822308dace9072c0bedccc3d73c4646dc9010aa859a64591a1fa7ad7338e53
+  entries:
+  - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
+    source_sha256: sha256:b66809a4f8fd0dc319bfc991c37e607a2578c643fbf8702f3520ca87ea1ac5ec
+    dependency_digest: sha256:76ff097f73f5df0199ea4530be8d394c467f3d144d83a538fc87c3e9c770b3a7
+  - id: contract:1NSI-ALGO-PARCOURS-TRIS
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
+    source_sha256: sha256:78ecdb66f7f1b93ef821c2b0b61c657834dfbaefa73676d781b6fa7ada0374e6
+    dependency_digest: sha256:43ceaa4d396914d631bd8d3093415f785b49610427f843959ca83f46427a4eee
+  - id: contract:1NSI-ARCHITECTURE-OS
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml
+    source_sha256: sha256:33dd60431b4afa16bb8710bed83c211a9ec5aa17135f5c164906acd62ec02f3e
+    dependency_digest: sha256:a7228a4f5b03de37807987cc5ff66b8f0cb657144e9a9dadf8495fed993cc4c1
+  - id: contract:1NSI-LANGAGE
+    path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
+    source_sha256: sha256:653076c07aceee86b75cde923135b53976b1054d98033042cbde7a78c064fd86
+    dependency_digest: sha256:5cca178ce12567f7b215c1c15a2dd47a916b03ef50f7c19539b31b006192b3c9
+  - id: contract:1NSI-PROJET-METHODES
+    path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+    source_sha256: sha256:373e5c1d32f079974d5d67109dab802a942fcd76f05f55a43fe2ce108143fe47
+    dependency_digest: sha256:6a9ab140f4b8b53dacd0d2866b96d255b0d351a6d5cc1a8b395cbf012bf49af6
+  - id: contract:1NSI-RESEAUX
+    path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
+    source_sha256: sha256:1e92f3599fe8ca3a2bb0830338b3e0499323b7e0b71fe7ef6955cdeb0111bea2
+    dependency_digest: sha256:84f3fb8a47bba4cde343e22f20a465565c519f4bcc2937295e4ceaa688f7e0b8
+  - id: contract:1NSI-TABLES
+    path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+    source_sha256: sha256:31969806064fdc4e682600af4608108df20a6fb5b2c938386867afe1432cd0f7
+    dependency_digest: sha256:22a576b6d76f53267337235941b7d5aafd640ed39435175e53090d4d2ede95f1
+  - id: contract:1NSI-TYPES-BASE
+    path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
+    source_sha256: sha256:6d757b21ba4ceab3ed8628940866cee252a486c1174b06a61852cc377c364663
+    dependency_digest: sha256:2bad0070a5cbf542433a505a3ff3f9e434097357b8cb015121eff0b7efc571ca
+  - id: contract:1NSI-TYPES-CONSTRUITS
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+    source_sha256: sha256:efff9b440e22ec4199e158b4a02cd3a6ad1d46e755a81eb4b3a4cf2b64c2aa46
+    dependency_digest: sha256:49b0dcf1e4ae38558f8a97ac54225857812f73154d120e59b9be33c1b8f74cb1
+  - id: contract:1NSI-WEB-IHM
+    path: NSI/chapitres/1NSI-WEB-IHM/contrat.yaml
+    source_sha256: sha256:b4f455779b23b426b7fd438bee8efd185a3989b69012f489d34c4bd91ab0c56d
+    dependency_digest: sha256:254e9aae2435285fd2f5a94ff62096220f32779b7ae14a7111864910dbed9cf5
+reviews:
+- id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
+  chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: C1 à C3 couvrent la dichotomie avec variant, l'approche gloutonne et k-NN conformément
+          aux capacités officielles.
+        facts:
+        - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
+          line_start: 8
+          line_end: 10
+          excerpt_sha256: sha256:ba7a40a36af17eb17d0181b86cbad11c0b25dd1749358337cc081349b1788be9
+          fact_type: programme_alignment
+          observation: Les trois capacités correspondent aux trois attendus officiels de cette partie
+            de l'algorithmique.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le prérequis, l'accroche comparative et les durées différenciées forment une progression
+          cohérente.
+        facts:
+        - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
+          line_start: 12
+          line_end: 24
+          excerpt_sha256: sha256:4339a6887b6e95ee7f2f74bd4fd65af877d8011028b665960fe4cbaac1b6d069
+          fact_type: pedagogical_structure
+          observation: Le parcours séquentiel précède logiquement la dichotomie et l'accroche articule
+            explicitement les trois méthodes algorithmiques.
+        anomaly_ids: []
+    anomalies: []
+- id: contract:1NSI-ALGO-PARCOURS-TRIS
+  chapter: 1NSI-ALGO-PARCOURS-TRIS
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: Les capacités attendues sont représentées, mais deux prescriptions officielles
+          importantes, terminaison des tris et coûts linéaire/quadratique, ne sont pas rendues observables
+          dans le contrat.
+        facts:
+        - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
+          line_start: 8
+          line_end: 13
+          excerpt_sha256: sha256:87bcda7a0b275e3d4cd71e23ab2df2defbf4ffbf2345f5cc011a9b5661d6ff21
+          fact_type: programme_alignment
+          observation: Les recherches, les deux tris et leurs invariants sont couverts, sans capacité
+            relative à la terminaison ni aux coûts.
+        - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
+          line_start: 18
+          line_end: 23
+          excerpt_sha256: sha256:42e1f3d576279ed1d912134833c64b84600483f20f7f005f90103922a94cf54a
+          fact_type: source_statement
+          observation: L'objectif d'ouverture annonce la correction des tris mais pas leur terminaison
+            ni les coûts linéaire et quadratique prescrits par les commentaires officiels.
+        anomaly_ids:
+        - 1NSI-REV-APT-COUTS-TERMINAISON
+      pedagogical:
+        verdict: pass
+        justification: Le chapitre part des tableaux, progresse des parcours vers les tris et réserve
+          davantage de temps au parcours le plus accompagné.
+        facts:
+        - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
+          line_start: 15
+          line_end: 25
+          excerpt_sha256: sha256:345039088db9c8445fba05ec8df8b8df9c82d73ec2d2724ac1ef12fa63a3c9cc
+          fact_type: pedagogical_structure
+          observation: Le prérequis sur les tableaux et l'accroche recherche-moyenne-tri organisent une
+            progression intelligible.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-APT-COUTS-TERMINAISON
+      severity: P1
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
+        line_start: 18
+        line_end: 23
+        excerpt_sha256: sha256:42e1f3d576279ed1d912134833c64b84600483f20f7f005f90103922a94cf54a
+        fact_type: programme_alignment
+        observation: La situation annonce la correction mais ne contractualise ni la justification de
+          terminaison ni l'étude des coûts exigées par le programme.
+      consequence: La couverture contractuelle ne permet pas de prouver que les coûts linéaire et quadratique
+        et la terminaison seront enseignés et évalués.
+      expected_action: Ajouter des attendus observables sur la terminaison des tris, le coût linéaire
+        des parcours et le coût quadratique au pire des deux tris.
+- id: contract:1NSI-ARCHITECTURE-OS
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les constituants de von Neumann, l'exécution machine et les trois capacités relatives
+          au système d'exploitation correspondent au programme.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml
+          line_start: 8
+          line_end: 12
+          excerpt_sha256: sha256:717253bdebae4981c6078c80f2f5876cd2bfd98b74b6c530578972bafbcfa61d
+          fact_type: programme_alignment
+          observation: C1 à C5 reprennent les cinq capacités officielles consacrées à l'architecture séquentielle
+            et aux systèmes d'exploitation.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le prérequis binaire et l'accroche instructions-données-droits assurent une entrée
+          cohérente dans les deux parties du chapitre.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml
+          line_start: 14
+          line_end: 24
+          excerpt_sha256: sha256:89f32b3416008fc0a679fad5cf650c24acc8cf6773cdd2cc3f3544a7d4b4f537
+          fact_type: pedagogical_structure
+          observation: La situation relie l'exécution matérielle au contrôle des fichiers par le système
+            d'exploitation, avec des temps proportionnés.
+        anomaly_ids: []
+    anomalies: []
+- id: contract:1NSI-LANGAGE
+  chapter: 1NSI-LANGAGE
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les constructions élémentaires, la diversité des langages, la spécification, les
+          tests et les bibliothèques sont tous couverts.
+        facts:
+        - path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
+          line_start: 8
+          line_end: 12
+          excerpt_sha256: sha256:2ee8811a209712ccb20e289b01abad7a0526961a5f197a30cbf8113645d45402
+          fact_type: programme_alignment
+          observation: Les cinq capacités agrègent sans perte les sept formulations attendues du tableau
+            officiel Langages et programmation.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les prérequis et l'accroche conduisent de l'exécution élémentaire vers la spécification
+          et la validation.
+        facts:
+        - path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
+          line_start: 14
+          line_end: 25
+          excerpt_sha256: sha256:3e613402cc2cccbdc017c4fbeb3aea10848be091b5f62c5ae214a7d060d9a9c6
+          fact_type: pedagogical_structure
+          observation: Le problème initial du programme correct sur un seul exemple motive directement
+            préconditions, postconditions et jeux de tests.
+        anomaly_ids: []
+    anomalies: []
+- id: contract:1NSI-PROJET-METHODES
+  chapter: 1NSI-PROJET-METHODES
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: C1 est une capacité officielle et C2-C3 sont soutenues par le préambule, mais C4
+          cite uniquement l'oral alors qu'elle ajoute la documentation du code.
+        facts:
+        - path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+          line_start: 8
+          line_end: 11
+          excerpt_sha256: sha256:eea2e006a5630540d532053bbe3113f9b67f2cfcc762f4aa3c35ee37dfc898dc
+          fact_type: programme_alignment
+          observation: C4 réunit documentation du code et présentation orale sous la seule référence BO-PREAMBULE-COMPETENCES-ORALES.
+        anomaly_ids:
+        - 1NSI-REV-PM-C4-SOURCES
+      pedagogical:
+        verdict: issue
+        justification: C4 n'est pas atomique et les temps du chapitre ne matérialisent pas l'allocation
+          annuelle minimale réservée aux projets.
+        facts:
+        - path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+          line_start: 11
+          line_end: 11
+          excerpt_sha256: sha256:a17b6e7e9eb0324427510725368c793b6bee81abec25d3657aaa3deec7c44a67
+          fact_type: pedagogical_structure
+          observation: Une seule capacité demande simultanément de documenter un code et de préparer une
+            présentation orale argumentée.
+        - path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+          line_start: 16
+          line_end: 25
+          excerpt_sha256: sha256:b03a378a191a73a25dc6cc56d8bc1887a3fc11a28eb9450573d0c6bf5e2c3baa
+          fact_type: reviewer_observation
+          observation: Le contrat rappelle le quart de l'horaire annuel, mais annonce un chapitre final
+            estimé à seulement 8, 6 ou 5 heures sans calendrier de projets distribués.
+        anomaly_ids:
+        - 1NSI-REV-PM-C4-ATOMICITE
+        - 1NSI-REV-PM-TEMPS-PROJET
+    anomalies:
+    - id: 1NSI-REV-PM-C4-SOURCES
+      severity: P1
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+        line_start: 11
+        line_end: 11
+        excerpt_sha256: sha256:a17b6e7e9eb0324427510725368c793b6bee81abec25d3657aaa3deec7c44a67
+        fact_type: programme_alignment
+        observation: La référence orale ne source pas à elle seule l'exigence distincte de documentation
+          du code.
+      consequence: La matrice attribue à une seule source officielle une formulation composite qu'elle
+        ne porte pas intégralement.
+      expected_action: Associer la documentation à la section officielle Langages et programmation et
+        l'oral au préambule, ou séparer les deux capacités.
+    - id: 1NSI-REV-PM-C4-ATOMICITE
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+        line_start: 11
+        line_end: 11
+        excerpt_sha256: sha256:a17b6e7e9eb0324427510725368c793b6bee81abec25d3657aaa3deec7c44a67
+        fact_type: pedagogical_structure
+        observation: C4 combine deux performances indépendantes qui nécessitent des méthodes, critères
+          et preuves de maîtrise différents.
+      consequence: Une validation unique ne permet pas de diagnostiquer séparément la qualité de la documentation
+        et celle de l'argumentation orale.
+      expected_action: Scinder C4 en deux capacités ou définir explicitement deux sous-critères évalués
+        et remédiés séparément.
+    - id: 1NSI-REV-PM-TEMPS-PROJET
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+        line_start: 16
+        line_end: 25
+        excerpt_sha256: sha256:b03a378a191a73a25dc6cc56d8bc1887a3fc11a28eb9450573d0c6bf5e2c3baa
+        fact_type: pedagogical_structure
+        observation: L'exigence d'au moins un quart de l'horaire annuel est citée, mais aucun découpage
+          annuel ne relie cette exigence aux estimations 8/6/5 heures.
+      consequence: Le contrat ne suffit pas à démontrer le respect du volume officiel consacré aux projets.
+      expected_action: Distinguer le temps du module méthodologique du volume annuel des projets et fournir
+        une allocation explicite atteignant au moins un quart de l'horaire.
+- id: contract:1NSI-RESEAUX
+  chapter: 1NSI-RESEAUX
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: Les cinq capacités sont officielles, mais la récursivité est déclarée comme prérequis
+          alors qu'elle relève du programme de Terminale et n'est pas couverte par TYPES-CONSTRUITS.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
+          line_start: 8
+          line_end: 12
+          excerpt_sha256: sha256:a80cc7fb3cad34634cc3ba4cf6193cc4d1b0ba849ba4d23a2d8d8dcb5fd54dfb
+          fact_type: programme_alignment
+          observation: C1-C3 couvrent les réseaux et C4-C5 reprennent les capacités officielles sur capteurs,
+            actionneurs et IHM embarquée.
+        - path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
+          line_start: 14
+          line_end: 16
+          excerpt_sha256: sha256:b43803aade357dcf135963fd7a7fb7cdcf82a6056c135de0647d6672c0bb297b
+          fact_type: source_statement
+          observation: R1 exige des fonctions récursives simples et les attribue au chapitre TYPES-CONSTRUITS.
+        anomaly_ids:
+        - 1NSI-REV-RESEAUX-RECURSION
+      pedagogical:
+        verdict: issue
+        justification: Le regroupement est autorisé par le programme, mais le titre et l'accroche ne construisent
+          pas suffisamment la transition vers la programmation d'une IHM.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
+          line_start: 11
+          line_end: 25
+          excerpt_sha256: sha256:cecb7cded2781a82fe204255568265c450c864fd23891fdf2420f235a31e2af8
+          fact_type: pedagogical_structure
+          observation: C4-C5 occupent deux capacités sur cinq, tandis que l'accroche n'explicite que le
+            lien physique par capteurs et actionneurs, sans situation de programmation d'IHM.
+        anomaly_ids:
+        - 1NSI-REV-RESEAUX-IHM-STRUCTURE
+    anomalies:
+    - id: 1NSI-REV-RESEAUX-RECURSION
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
+        line_start: 15
+        line_end: 15
+        excerpt_sha256: sha256:26f71017d02b60f65c22c8382767e0c8d042b80ea0bf3d36c39d559e514efca6
+        fact_type: programme_alignment
+        observation: Le contrat rend la récursivité exigible en Première et l'attribue à un chapitre qui
+          ne la contractualise pas.
+      consequence: Un contenu de Terminale devient un prérequis obligatoire sans source officielle de
+        Première ni chaîne d'apprentissage.
+      expected_action: Retirer la récursivité du prérequis Réseaux ou la remplacer par les structures
+        effectivement nécessaires et couvertes en Première.
+    - id: 1NSI-REV-RESEAUX-IHM-STRUCTURE
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
+        line_start: 11
+        line_end: 25
+        excerpt_sha256: sha256:cecb7cded2781a82fe204255568265c450c864fd23891fdf2420f235a31e2af8
+        fact_type: pedagogical_structure
+        observation: La capacité de réalisation d'une IHM n'est pas annoncée par le titre et ne reçoit
+          pas de problème d'accroche correspondant.
+      consequence: La progression risque de juxtaposer réseaux et systèmes embarqués sans objectif intégrateur
+        explicite.
+      expected_action: Élargir le titre et la situation à un objet connecté avec IHM, ou déplacer C4-C5
+        vers un chapitre explicitement consacré aux périphériques et systèmes embarqués.
+- id: contract:1NSI-TABLES
+  chapter: 1NSI-TABLES
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: Les quatre capacités principales sont couvertes, mais C2 ne reprend que les doublons
+          et omet les tests de cohérence demandés par le commentaire officiel.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+          line_start: 8
+          line_end: 11
+          excerpt_sha256: sha256:f1b69d462a289697300e04fe10f9bf84c950c6bcafcc7531ffc2181981e1abf8
+          fact_type: programme_alignment
+          observation: Importation, recherche logique, tri et fusion sont présents; C2 ajoute les doublons
+            mais pas les tests de cohérence d'une table.
+        anomaly_ids:
+        - 1NSI-REV-TABLES-COHERENCE
+      pedagogical:
+        verdict: pass
+        justification: Les prérequis sur les structures et la logique, puis le fil rouge CSV, ordonnent
+          correctement les quatre traitements.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+          line_start: 13
+          line_end: 24
+          excerpt_sha256: sha256:9d9b503532267c034b90db1c2aa683405b0657c6c4b5259d1eb37fb874573678
+          fact_type: pedagogical_structure
+          observation: Le fichier d'adhérents permet successivement recherche, tri et combinaison sans
+            introduire prématurément un système de gestion de base de données.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-TABLES-COHERENCE
+      severity: P2
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+        line_start: 9
+        line_end: 9
+        excerpt_sha256: sha256:988c32f759d79b3d2d8c56c56003bef32ca46c74d2f8ccf531ada20ee8b44879
+        fact_type: programme_alignment
+        observation: C2 contractualise la détection des doublons mais pas les tests de cohérence également
+          prescrits dans le programme.
+      consequence: La couverture du commentaire officiel reste partielle et les contrôles de domaine ou
+        de structure peuvent être absents.
+      expected_action: Ajouter explicitement les tests de cohérence d'une table à C2 ou à une capacité
+        distincte.
+- id: contract:1NSI-TYPES-BASE
+  chapter: 1NSI-TYPES-BASE
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: C1, C4 et C5 sont conformes; C2 est partielle et C3 remplace la capacité officielle
+          de calcul de représentations par une explication générale.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
+          line_start: 8
+          line_end: 12
+          excerpt_sha256: sha256:ea88bed0ee89d4ad34917d70578748e16587d38669a5009388e673568ffcdc03
+          fact_type: programme_alignment
+          observation: C2 omet les sommes et produits d'entiers; C3 omet les calculs sur 0,1, 0,25 ou
+            1/3 demandés officiellement.
+        anomaly_ids:
+        - 1NSI-REV-TB-C2-COUVERTURE
+        - 1NSI-REV-TB-C3-CAPACITE
+      pedagogical:
+        verdict: pass
+        justification: Le prérequis sur le bit et l'accroche commune aux nombres, flottants et textes
+          donnent une progression cohérente.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
+          line_start: 14
+          line_end: 23
+          excerpt_sha256: sha256:a28f7d1bbcdf2bb9a9931f6fd708fd2dc8fdb2212eac1b3a3944a2244d5ffbeb
+          fact_type: pedagogical_structure
+          observation: La situation relie tailles de fichiers et codage binaire avant d'aborder négatifs,
+            flottants et caractères.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-TB-C2-COUVERTURE
+      severity: P1
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
+        line_start: 9
+        line_end: 9
+        excerpt_sha256: sha256:68d43a9de30ec634a2602a295291f27dcbbc52951e25887cc8e4b8055fafd915
+        fact_type: programme_alignment
+        observation: C2 limite l'évaluation du nombre de bits à un entier et ne mentionne pas la somme
+          ou le produit de deux entiers.
+      consequence: Une partie explicite de la capacité officielle n'est ni contractualisée ni nécessairement
+        évaluée.
+      expected_action: Étendre C2 à l'évaluation du nombre de bits d'un entier, de la somme et du produit
+        de deux entiers.
+    - id: 1NSI-REV-TB-C3-CAPACITE
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
+        line_start: 10
+        line_end: 10
+        excerpt_sha256: sha256:f7ee11f91c8698befcbfa1ab442a01dfab6b5c706f2a87433376d38424f75d60
+        fact_type: programme_alignment
+        observation: C3 demande d'expliquer l'approximation et d'éviter l'égalité, mais pas de calculer
+          des représentations sur les exemples officiels.
+      consequence: La capacité attendue officiellement n'est pas couverte; des commentaires du programme
+        lui sont substitués.
+      expected_action: Reformuler C3 pour inclure le calcul sur quelques représentations de réels, puis
+        conserver l'approximation et l'égalité comme critères d'interprétation.
+- id: contract:1NSI-TYPES-CONSTRUITS
+  chapter: 1NSI-TYPES-CONSTRUITS
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: C1-C4 sont rapprochables du programme mais utilisent uniquement des références
+          locales; C5 sur les objets mutables n'a pas de capacité officielle correspondante.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+          line_start: 8
+          line_end: 12
+          excerpt_sha256: sha256:926b1a63613de8416471f6392167a48cb9c887f7fdec7fb640387dcc854d1da2
+          fact_type: programme_alignment
+          observation: Les cinq ref_capacite sont des identifiants locaux 1NSI-TYPES-CONSTRUITS-C1 à C5
+            et non des références officielles résolues.
+        - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+          line_start: 12
+          line_end: 12
+          excerpt_sha256: sha256:b6a590cf18e2d04dffadb47624d742727de5fd290ab306cd4561c8eb4767c277
+          fact_type: source_statement
+          observation: C5 érige la sémantique d'affectation des objets mutables en capacité sans la qualifier
+            comme enrichissement.
+        anomaly_ids:
+        - 1NSI-REV-TC-REFS-LOCALES
+        - 1NSI-REV-TC-C5-MUTABILITE
+      pedagogical:
+        verdict: issue
+        justification: La situation et les durées sont cohérentes, mais deux prérequis renvoient à LANGAGE
+          alors que TYPES-CONSTRUITS le précède dans l'assemblage canonique.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+          line_start: 14
+          line_end: 18
+          excerpt_sha256: sha256:30faa80f4993921cd951bd100a1899ece7d0a5614e63603e36f64145dfc17231
+          fact_type: pedagogical_structure
+          observation: R2 et R3 attribuent boucles, fonctions, paramètres et return à 1NSI-LANGAGE, créant
+            une dépendance arrière dans l'ordre courant.
+        - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+          line_start: 20
+          line_end: 26
+          excerpt_sha256: sha256:f16084a1b34e5a8124ded5ea5c2f74b3e2fe1e513203dda68a20e494e386d1b3
+          fact_type: reviewer_observation
+          observation: Le classement e-sport intègre p-uplets, tableaux et dictionnaires et justifie une
+            durée supérieure aux autres chapitres.
+        anomaly_ids:
+        - 1NSI-REV-TC-PREREQUIS-ORDRE
+    anomalies:
+    - id: 1NSI-REV-TC-REFS-LOCALES
+      severity: P1
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+        line_start: 8
+        line_end: 12
+        excerpt_sha256: sha256:926b1a63613de8416471f6392167a48cb9c887f7fdec7fb640387dcc854d1da2
+        fact_type: programme_alignment
+        observation: Aucune des cinq capacités ne porte une référence officielle ou un ancrage permettant
+          une résolution indépendante.
+      consequence: La couverture du programme ne peut pas être auditée depuis le contrat et une capacité
+        locale peut être confondue avec un attendu officiel.
+      expected_action: Remplacer C1-C4 par des références canoniques reliées aux formulations officielles
+        et classifier explicitement toute capacité supplémentaire.
+    - id: 1NSI-REV-TC-C5-MUTABILITE
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+        line_start: 12
+        line_end: 12
+        excerpt_sha256: sha256:b6a590cf18e2d04dffadb47624d742727de5fd290ab306cd4561c8eb4767c277
+        fact_type: programme_alignment
+        observation: La capacité C5 sur l'affectation d'un objet mutable n'apparaît pas dans les capacités
+          attendues du programme officiel de Première.
+      consequence: Un enrichissement non sourcé est présenté comme exigible au même niveau que les capacités
+        officielles.
+      expected_action: Retirer C5 du contrat officiel ou la conserver sous une classification explicite
+        d'enrichissement non exigible avec source et balisage.
+    - id: 1NSI-REV-TC-PREREQUIS-ORDRE
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+        line_start: 16
+        line_end: 17
+        excerpt_sha256: sha256:7b2236efbb9e17df6206c0c8c277a002c7bab0fd963263f4d22eea0370eab244
+        fact_type: pedagogical_structure
+        observation: Le contrat exige des apprentissages rattachés à LANGAGE avant que ce chapitre ne
+          soit rencontré dans l'ordre canonique.
+      consequence: Les élèves peuvent commencer TYPES-CONSTRUITS sans les fonctions et structures de contrôle
+        déclarées nécessaires.
+      expected_action: Placer LANGAGE avant TYPES-CONSTRUITS ou reformuler R2-R3 comme acquis SNT explicitement
+        diagnostiqués et remédiés.
+- id: contract:1NSI-WEB-IHM
+  chapter: 1NSI-WEB-IHM
+  scope: contract
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les huit capacités attendues et le choix GET/POST issu du commentaire officiel
+          sont tous représentés sans extension disciplinaire future.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/contrat.yaml
+          line_start: 8
+          line_end: 16
+          excerpt_sha256: sha256:052b4f4bd48f70cee8bd96f23af562a95ba49bb9e760e42ab67783e309227e20
+          fact_type: programme_alignment
+          observation: C1 à C8 reproduisent les capacités attendues; C9 rend observable la discussion
+            officielle sur valeurs transmises et confidentialité.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les prérequis SNT et dictionnaires précèdent un fil conducteur complet du formulaire
+          au traitement serveur.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/contrat.yaml
+          line_start: 18
+          line_end: 29
+          excerpt_sha256: sha256:632b8b7903ffc664a30b5efe160bdf50ef83486ff2137aba238babd732283c22
+          fact_type: pedagogical_structure
+          observation: L'accroche suit l'action de l'utilisateur, l'exécution client, la transmission
+            et la réponse serveur dans un ordre exploitable pédagogiquement.
+        anomaly_ids: []
+    anomalies: []
