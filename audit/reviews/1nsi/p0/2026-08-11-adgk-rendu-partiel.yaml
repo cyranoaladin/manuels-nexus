@@ -1,0 +1,50 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-ADGK-C2-RENDU-PARTIEL
+source_commit_sha: 67d1ab9588c0a17cb7694f95f567a0c13be55643
+source_files:
+  - path: NSI/tests/test_1nsi_adgk_scientific_p0_regressions.py
+    sha256: sha256:fa438c29d0f7a4dafad2ab8780df8cb19e9a9da26ad8d0b12e6e46965ca8756d
+  - path: NSI/tests/test_1nsi_algorithmic_p0_regressions.py
+    sha256: sha256:349ee4832b86137a2e8d4b5fa0730e4e91480fc3d4bbf4e976a3d6214294b238
+  - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/code/rendu_glouton.py
+    sha256: sha256:16974e98d816cc51ef332b2c0f8c0feb23d47a49b083cd0a580c88ffc0695bf8
+  - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex
+    sha256: sha256:18c87734b9b335b85f79ee61104f7ee07f573bd0cc15126f409df76c8e44d0c5
+reviewer_id: 019fee04-439a-7cc1-a35f-d8b94b3d5550
+reviewer_model: GPT-5 Codex
+review_run_id: 1nsi-p0-adgk-rendu-partiel-2026-08-11-8bcd7795-v1
+session_id: 019fee04-439a-7cc1-a35f-d8b94b3d5550
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q NSI/tests/test_1nsi_adgk_scientific_p0_regressions.py::test_greedy_change_rejects_a_partial_result NSI/tests/test_1nsi_adgk_scientific_p0_regressions.py::test_greedy_failure_does_not_claim_mathematical_impossibility
+    cwd: .
+    exit_code: 0
+    stdout: |
+      ..                                                                       [100%]
+      2 passed in 0.10s
+    stderr: ""
+    stdout_sha256: sha256:471c77f65875e4c272e08d0f1104f654c2ee63bed8cefdd055594fbb60385d29
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Les regressions refusent le rendu partiel sans conclure a une impossibilite.
+  - command: python NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/code/rendu_glouton.py
+    cwd: .
+    exit_code: 0
+    stdout: |
+      [50, 20, 5, 2, 1]
+    stderr: ""
+    stdout_sha256: sha256:393ad56aa752ebd012389902a86c90930dc8b55e360aa98ef41f6bdeabe909ba
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique conserve la sortie valide du cours.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte.
+verdict: approved
+reviewed_at: "2026-08-11T00:50:29+01:00"

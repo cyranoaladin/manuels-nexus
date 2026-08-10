@@ -1,0 +1,49 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-ADGK-C3-DOMAINE-K
+source_commit_sha: 67d1ab9588c0a17cb7694f95f567a0c13be55643
+source_files:
+  - path: NSI/tests/test_1nsi_adgk_scientific_p0_regressions.py
+    sha256: sha256:fa438c29d0f7a4dafad2ab8780df8cb19e9a9da26ad8d0b12e6e46965ca8756d
+  - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/code/k_plus_proches_voisins.py
+    sha256: sha256:cabbc276541c3e98db45b173ea40d4e6d1bea30a2b1c07ba2a02f20d4d82577b
+  - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex
+    sha256: sha256:fec44ebe4c917d780f4170b091bbb1fbd3726374f6c07bdaa9086d2766a7dfd0
+reviewer_id: 019fee14-0c33-79c3-9c68-c24b5717641d
+reviewer_model: GPT-5 Codex
+review_run_id: 1nsi-p0-adgk-domaine-k-2026-08-11-92132260-v1
+session_id: 019fee14-0c33-79c3-9c68-c24b5717641d
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q NSI/tests/test_1nsi_adgk_scientific_p0_regressions.py -k knn
+    cwd: .
+    exit_code: 0
+    stdout: |
+      ......                                                                   [100%]
+      6 passed, 6 deselected in 0.61s
+    stderr: ""
+    stdout_sha256: sha256:f0f3c936a64b5e42ea51567577b57b44408200bf299368b6f62b49e4b8f3844d
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Les regressions valident le domaine entier de k sous Python normal et optimise.
+  - command: python NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/code/k_plus_proches_voisins.py
+    cwd: .
+    exit_code: 0
+    stdout: |
+      A
+      B
+    stderr: ""
+    stdout_sha256: sha256:daee1cd25194ae952d046ad9b9c81d3c07dc5332440b58d6d7461b248be56712
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique conserve les deux classifications attendues.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte.
+verdict: approved
+reviewed_at: "2026-08-11T00:51:45+01:00"

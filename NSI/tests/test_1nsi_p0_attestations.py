@@ -32,6 +32,9 @@ EXPECTED_P0_IDS = {
     "1NSI-REV-TC-COURS-C5-COPIE-PROFONDE-INCOMPLETE",
     "1NSI-REV-TC-CO-053-COPIE-PROFONDE-INCOMPLETE",
     "1NSI-REV-TC-CO-054-COPIE-PROFONDE-INCOMPLETE",
+    "1NSI-REV-ADGK-C2-TERMINAISON-PIECE-NULLE",
+    "1NSI-REV-ADGK-C2-RENDU-PARTIEL",
+    "1NSI-REV-ADGK-C3-DOMAINE-K",
 }
 SECRET_PATTERNS = (
     re.compile(r"sk-or-v1-", re.IGNORECASE),
@@ -93,7 +96,7 @@ def _is_tracked(root: Path, path: Path) -> bool:
 
 
 def _receipt_paths(root: Path) -> list[Path]:
-    return sorted((root / "audit" / "reviews" / "1nsi" / "p0").glob("2026-08-10-*.yaml"))
+    return sorted((root / "audit" / "reviews" / "1nsi" / "p0").glob("*.yaml"))
 
 
 def _valid_receipt(source_path: str = "source.txt", source: bytes = b"source\n") -> dict:
@@ -210,7 +213,7 @@ def _validate_receipts(root: Path = ROOT) -> list[dict]:
         assert not duplicates, f"{key} doit etre unique: {duplicates}"
 
     if (root / "audit" / "reviews" / "1nsi" / "p0" / SUMMARY_FILENAME).is_file():
-        assert len(receipts) == 10
+        assert len(receipts) == 13
         assert {receipt["p0_id"] for receipt in receipts} == EXPECTED_P0_IDS
     return receipts
 
