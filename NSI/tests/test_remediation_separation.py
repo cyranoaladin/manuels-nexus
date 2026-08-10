@@ -99,7 +99,7 @@ def test_companion_metadata_and_environment_match_source(source_relative):
     assert companion_meta["type_objet"] == "corrige"
     assert companion_meta["exercice_ref"] == source_meta["id"]
     assert companion_meta["capacites"] == source_meta["capacites"]
-    assert companion_meta["status"] == "generated"
+    assert companion_meta["status"] == "needs_review"
     assert EXERCISE_RE.findall(source_text) == [expected_environment_id]
     assert CORRECTION_RE.findall(companion_text) == [expected_environment_id]
 
