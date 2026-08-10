@@ -32,6 +32,27 @@ ALGORITHM_RECEIPT_PATH = (
     ROOT / "audit" / "reviews" / "1nsi" / "runs" / "2026-08-10-algorithms.yaml"
 )
 SECOND_REVIEWER_ID = "019febc0-6f71-7a92-a196-d579889d7e6e"
+C3_REVIEWER_ID = "019fec35-2ae8-7051-be21-6b3754d1f688"
+C3_REVIEW_RUN_ID = "1nsi-objects-algorithms-2026-08-10-c3-review-019fec35-v1"
+C3_REVIEWER_MODEL = "codex-gpt5"
+PRE_C3_REVIEWER_IDS = {
+    "019feb3f-cd89-7242-9a84-6fafbc77e0d8",
+    "019feb71-27c9-7530-ab01-ce74cea1b4a2",
+    "019feb71-89a9-77b3-9103-ad05eacf18ca",
+    "019feb72-1592-7900-b0b1-02fae59a6a39",
+    "019feb72-7252-77a1-b864-775b021ed954",
+    "019feb72-ceeb-7d72-9abd-de60ca43316e",
+    SECOND_REVIEWER_ID,
+}
+PRE_C3_REVIEW_RUN_IDS = {
+    "1nsi-contracts-2026-08-10-plato-reattestation-v2",
+    "1nsi-objects-algorithms-2026-08-10-bernoulli-v1",
+    "1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1",
+    "1nsi-objects-data-basics-tables-2026-08-10-chandrasekhar-v1",
+    "1nsi-objects-language-project-2026-08-10-lorentz-v1",
+    "1nsi-objects-systems-web-2026-08-10-boyle-v1",
+    "1nsi-objects-types-construits-2026-08-10-epicurus-v1",
+}
 ALGORITHM_SOURCE_COMMIT = "1b577c8becb0d21ef3485a5e6cdec236f1e006b7"
 ALGORITHM_RECEIPT_COMMIT = "c315a7117dbd3b3e54c4894110d12b1862b4083e"
 ALGORITHM_RECEIPT_SHA256 = (
@@ -2768,20 +2789,28 @@ def test_algorithm_review_receipt_matches_current_sources_before_sealing(
         "protocol_digest different de la policy courante",
     )
     require(
-        receipt["reviewer_id"] == SECOND_REVIEWER_ID,
-        f"reviewer_id attendu: {SECOND_REVIEWER_ID}",
+        receipt["reviewer_id"] == C3_REVIEWER_ID,
+        f"reviewer_id attendu: {C3_REVIEWER_ID}",
     )
     require(
-        receipt["reviewer_id"] != OLD_ALGORITHM_REVIEWER_ID,
-        "le reviewer algorithmique historique ne constitue pas une seconde revue",
+        receipt["reviewer_id"] not in PRE_C3_REVIEWER_IDS,
+        "le reviewer C3 doit etre nouveau parmi toutes les revues precedentes",
     )
     require(
         receipt["reviewer_id"] != policy["integrator_id"],
         "le reviewer doit etre distinct de l'integrateur",
     )
     require(
-        receipt["review_run_id"] != OLD_ALGORITHM_REVIEW_RUN_ID,
-        "le review_run_id historique doit etre remplace",
+        receipt["review_run_id"] == C3_REVIEW_RUN_ID,
+        f"review_run_id attendu: {C3_REVIEW_RUN_ID}",
+    )
+    require(
+        receipt["review_run_id"] not in PRE_C3_REVIEW_RUN_IDS,
+        "le review_run_id C3 doit etre nouveau",
+    )
+    require(
+        receipt["reviewer_model"] == C3_REVIEWER_MODEL,
+        f"reviewer_model attendu: {C3_REVIEWER_MODEL}",
     )
     require(
         receipt["assignment"] == expected_assignment,

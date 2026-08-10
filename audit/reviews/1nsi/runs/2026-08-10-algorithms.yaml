@@ -2,11 +2,11 @@
   "artifact_type": "1nsi_review_run",
   "schema_version": 1,
   "manual": "1NSI",
-  "review_run_id": "1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1",
-  "reviewer_id": "019febc0-6f71-7a92-a196-d579889d7e6e",
+  "review_run_id": "1nsi-objects-algorithms-2026-08-10-c3-review-019fec35-v1",
+  "reviewer_id": "019fec35-2ae8-7051-be21-6b3754d1f688",
   "reviewer_model": "codex-gpt5",
   "protocol_digest": "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9",
-  "reviewed_at": "2026-08-10T14:07:03+01:00",
+  "reviewed_at": "2026-08-10T16:13:20+01:00",
   "assignment": {
     "scope": "object",
     "chapters": [
@@ -220,8 +220,8 @@
       {
         "id": "1NSI-AGT-COURS-C3",
         "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
-        "source_sha256": "sha256:1c5f4cbe9bf8d5fbb80893d1a8b8d85f2bf4d867824d9beed0d843805cbc85ab",
-        "dependency_digest": "sha256:2af780f1616d8b86548d6d50d736b95c0dcc6fb916a201269f18484413bb730d"
+        "source_sha256": "sha256:c9c390760e1ab5fbdf83b3957a2ba8a620ed878a6543944c3d090f55562eb257",
+        "dependency_digest": "sha256:0e65e9cd47d85ae196cdc0ff3337af40e95a784aa4aff7cb5fab076743c79a8e"
       },
       {
         "id": "1NSI-AGT-EVAL-A",
@@ -1605,16 +1605,16 @@
       "payload": {
         "dimensions": {
           "scientific": {
-            "verdict": "issue",
-            "justification": "Le code et l'invariant sont corrects, mais la conclusion publiée de la preuve n'est pas définie pour les tableaux de taille 0 ou 1.",
+            "verdict": "pass",
+            "justification": "Le code, la terminaison des boucles et l'invariant sont corrects ; la conclusion distingue explicitement les cas n inférieur ou égal à 1 et n supérieur ou égal à 2.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
                 "line_start": 46,
-                "line_end": 75,
-                "excerpt_sha256": "sha256:7ee04ae209bcb740158945dea1924677ee2740e7932e0ef24d21637fe145e574",
+                "line_end": 78,
+                "excerpt_sha256": "sha256:83eed7959a609fb710d6f90b5132d8f3d100c374064b5ba9faba72c7eec8f38c",
                 "fact_type": "source_statement",
-                "observation": "Dans 1NSI-AGT-COURS-C3, les boucles bornées terminent mais la preuve finale omet les deux tailles sans itération externe."
+                "observation": "Dans 1NSI-AGT-COURS-C3, la boucle externe comporte max(n-1,0) itérations ; la preuve traite sans itération n inférieur ou égal à 1 et réserve i=n-2 à n supérieur ou égal à 2."
               },
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
@@ -1625,18 +1625,24 @@
                 "observation": "L'exécution fraîche de 1NSI-AGT-COURS-C3 passe avec le check_digest exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd."
               }
             ],
-            "anomaly_ids": [
-              "1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON"
-            ]
+            "anomaly_ids": []
           },
           "pedagogical": {
             "verdict": "pass",
-            "justification": "La comparaison insertion-sélection prépare une activité de mesure sur tableau déjà trié.",
+            "justification": "La preuve sépare les cas limites avant la dernière itération et la comparaison insertion-sélection prépare une activité de mesure sur tableau déjà trié.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
-                "line_start": 97,
-                "line_end": 114,
+                "line_start": 74,
+                "line_end": 78,
+                "excerpt_sha256": "sha256:cd3fb5a9ba471b2ea46f10bea2812391e07e0bc5c28d44c3ca9793ba0b4d5cc2",
+                "fact_type": "pedagogical_structure",
+                "observation": "La conclusion de 1NSI-AGT-COURS-C3 traite d'abord les tableaux de taille au plus un, puis justifie le tableau entier pour n au moins égal à deux."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
+                "line_start": 101,
+                "line_end": 118,
                 "excerpt_sha256": "sha256:58aff815802a83808e24b50eaf9b507e049b0fb2861e5f0da93bb0bb1027d7dd",
                 "fact_type": "pedagogical_structure",
                 "observation": "La clôture de 1NSI-AGT-COURS-C3 relie le nombre fixe de comparaisons de sélection à un comptage expérimental sur vingt éléments."
@@ -1645,23 +1651,7 @@
             "anomaly_ids": []
           }
         },
-        "anomalies": [
-          {
-            "id": "1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON",
-            "severity": "P0",
-            "dimension": "scientific",
-            "fact": {
-              "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
-              "line_start": 72,
-              "line_end": 75,
-              "excerpt_sha256": "sha256:5cec7f94aaddc4f14d237d8709f2fce77154f85f2d2b2e831a3da4475ec61df1",
-              "fact_type": "source_statement",
-              "observation": "La conclusion de 1NSI-AGT-COURS-C3 invoque une dernière itération i=n-2 sans distinguer les cas n=0 et n=1 où cette itération n'existe pas."
-            },
-            "consequence": "La preuve générale attribue une dernière itération inexistante aux tableaux vides ou réduits à un élément.",
-            "expected_action": "Traiter séparément n inférieur ou égal à 1, puis réserver la dernière itération i=n-2 au cas n supérieur ou égal à 2 et ajouter un test de régression."
-          }
-        ]
+        "anomalies": []
       }
     },
     {
@@ -2286,7 +2276,7 @@
         "dimensions": {
           "scientific": {
             "verdict": "pass",
-            "justification": "Q2 possède désormais une seule réponse défendable : le premier élément, les trois autres propositions étant invalides en général.",
+            "justification": "Les six questions ont une réponse disciplinaire unique ; pour Q2, seul le premier élément constitue une initialisation générale valide du maximum d'un tableau non vide.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex",
@@ -2294,14 +2284,14 @@
                 "line_end": 33,
                 "excerpt_sha256": "sha256:bd1b538f2caa0fee7e640b41340fdd2fc92d921a3874acf29fa38083a219c2ad",
                 "fact_type": "source_statement",
-                "observation": "Les quatre options actuelles de Q2 dans 1NSI-ALGO-PARCOURS-TRIS-QCM éliminent l'ancienne initialisation valide par le dernier élément."
+                "observation": "Dans Q2 de 1NSI-ALGO-PARCOURS-TRIS-QCM, les options sont zéro, premier élément, plus grande valeur possible et taille du tableau ; seul le premier élément est valide en général."
               }
             ],
             "anomaly_ids": []
           },
           "pedagogical": {
             "verdict": "issue",
-            "justification": "L'objet d'auto-évaluation ne contient aucune clé, et l'ambiguïté de Q2 empêche en plus une rétroaction fiable.",
+            "justification": "L'objet se présente comme auto-évaluation mais ne fournit ni clé, ni score interprétable, ni orientation de remédiation.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex",
