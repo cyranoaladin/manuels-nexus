@@ -1,0 +1,1507 @@
+artifact_type: 1nsi_content_review_policy
+schema_version: 1
+manual: 1NSI
+decision:
+  id: 1nsi-scientific-pedagogical-review-2026-08-10
+  date: '2026-08-10'
+  human_instruction: traiter separement la revue scientifique et pedagogique des 349 statuts 1NSI, sans toucher a TNSI
+  publication_approval: false
+  human_confirmation_required: true
+  release_acceptance: false
+verdicts:
+- pass
+- issue
+- not_applicable
+- human_confirmation_required
+prohibited_transitions:
+- approved
+- ready
+- rejected
+integrator_id: integrator
+official_sources:
+- id: programme-premiere-nsi-2019
+  kind: official_programme_pdf
+  url: https://www.education.gouv.fr/sites/default/files/document/Programme%20de%20num%C3%A9rique%20et%20sciences%20informatiques%20de%20premi%C3%A8re%20g%C3%A9n%C3%A9rale-248139.pdf
+  consulted_on: '2026-08-10'
+  snapshot_path: audit/sources/1nsi/programme-premiere-nsi.pdf
+  sha256: sha256:7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0
+  capture_status: content
+- id: legifrance-arrete-17-janvier-2019
+  kind: legifrance_consolidated_text
+  url: https://www.legifrance.gouv.fr/loda/id/LEGITEXT000038046340
+  consulted_on: '2026-08-10'
+  snapshot_path: audit/sources/1nsi/legifrance-arrete-17-janvier-2019.html
+  sha256: sha256:6af0b9dea65d0fcfbc5de970cba25c9683db9ea1f3196bd725003bd7cc24e3fe
+  capture_status: content
+- id: eduscol-programmes-nsi
+  kind: eduscol_programme_page
+  url: https://eduscol.education.gouv.fr/5823/programmes-et-ressources-en-numerique-et-sciences-informatiques-voie-g?menu_id=2536
+  consulted_on: '2026-08-10'
+  snapshot_path: audit/sources/1nsi/eduscol-programmes-nsi.html
+  sha256: sha256:34cbffd399f0b65528caec82669ae13b74b1391d5666bfc5a038bc0227a66d13
+  capture_status: content
+contractual_documents:
+- path: NSI/docs/01_conception_manuel.md
+  sha256: sha256:b1f1be14272e1bffafca1626a74a389bcb64a03deb99547e1f5060c40a433616
+- path: NSI/docs/02_workflow_production.md
+  sha256: sha256:1d36a9a506a17361bfa69280df2766bc9f620b61289caec299a5d3b3666d02cc
+- path: NSI/docs/05_conventions_latex.md
+  sha256: sha256:f3bfc2520ebbe1ce9835ea956e07aeaca6d51fb3f9c197a73186ce06678bda02
+- path: docs/codex/QUALITY_GATES.md
+  sha256: sha256:f235a4dfc797b006b84abe17c9c57a11eab40412d0e6a49648297b26dfc45c91
+- path: docs/codex/ISSUE_REGISTER_TEMPLATE.md
+  sha256: sha256:3768d699ef4158bc0f8212c7b5fc797ad3412ce9f55f3935644e48e882cdda93
+protocol_digest: sha256:3b79ab9ee7bd8c0050f17c1b0cb74989202a84b9eff5c31580398b4f2409c9c0
+capacity_matrix:
+- chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
+  contract_code: C1
+  ref: P-ALGO-04
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais \xE9crire une recherche dichotomique dans un tableau tri\xE9 et prouver sa terminaison \xE0 l'aide\
+    \ d'un variant de boucle."
+  human_confirmation_required: false
+- chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
+  contract_code: C2
+  ref: P-ALGO-05
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais r\xE9soudre un probl\xE8me gr\xE2ce \xE0 un algorithme glouton."
+  human_confirmation_required: false
+- chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
+  contract_code: C3
+  ref: P-ALGO-03
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais \xE9crire un algorithme qui pr\xE9dit la classe d'un \xE9l\xE9ment \xE0 partir de la classe majoritaire\
+    \ de ses k plus proches voisins."
+  human_confirmation_required: false
+- chapter: 1NSI-ALGO-PARCOURS-TRIS
+  contract_code: C1
+  ref: P-ALGO-01A
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais \xE9crire un algorithme de recherche d'une occurrence dans un tableau."
+  human_confirmation_required: false
+- chapter: 1NSI-ALGO-PARCOURS-TRIS
+  contract_code: C2
+  ref: P-ALGO-01B
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais \xE9crire un algorithme de recherche d'un extremum ou de calcul d'une moyenne."
+  human_confirmation_required: false
+- chapter: 1NSI-ALGO-PARCOURS-TRIS
+  contract_code: C3
+  ref: P-ALGO-02A
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais \xE9crire l'algorithme du tri par insertion."
+  human_confirmation_required: false
+- chapter: 1NSI-ALGO-PARCOURS-TRIS
+  contract_code: C4
+  ref: P-ALGO-02C
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais d\xE9crire un invariant de boucle qui prouve la correction du tri par insertion."
+  human_confirmation_required: false
+- chapter: 1NSI-ALGO-PARCOURS-TRIS
+  contract_code: C5
+  ref: P-ALGO-02B
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais \xE9crire l'algorithme du tri par s\xE9lection."
+  human_confirmation_required: false
+- chapter: 1NSI-ALGO-PARCOURS-TRIS
+  contract_code: C6
+  ref: P-ALGO-02D
+  classification: official_capacity
+  programme_section: Algorithmique
+  programme_anchor: "Je sais d\xE9crire un invariant de boucle qui prouve la correction du tri par s\xE9lection."
+  human_confirmation_required: false
+- chapter: 1NSI-ARCHITECTURE-OS
+  contract_code: C1
+  ref: P-ARCH-01A
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais distinguer les r\xF4les et les caract\xE9ristiques des constituants d'une machine (architecture\
+    \ de von Neumann)."
+  human_confirmation_required: false
+- chapter: 1NSI-ARCHITECTURE-OS
+  contract_code: C2
+  ref: P-ARCH-01B
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais d\xE9rouler l'ex\xE9cution d'une s\xE9quence d'instructions simples de type langage machine."
+  human_confirmation_required: false
+- chapter: 1NSI-ARCHITECTURE-OS
+  contract_code: C3
+  ref: P-ARCH-03A
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais identifier les fonctions d'un syst\xE8me d'exploitation."
+  human_confirmation_required: false
+- chapter: 1NSI-ARCHITECTURE-OS
+  contract_code: C4
+  ref: P-ARCH-03B
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: Je sais utiliser les commandes de base en ligne de commande.
+  human_confirmation_required: false
+- chapter: 1NSI-ARCHITECTURE-OS
+  contract_code: C5
+  ref: P-ARCH-03C
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais g\xE9rer les droits et permissions d'acc\xE8s aux fichiers."
+  human_confirmation_required: false
+- chapter: 1NSI-LANGAGE
+  contract_code: C1
+  ref: P-LANG-01
+  classification: official_capacity
+  programme_section: Langages et programmation
+  programme_anchor: "Je sais identifier les constructions \xE9l\xE9mentaires communes aux langages de programmation (s\xE9\
+    quences, affectation, conditionnelles, boucles, appels de fonction)."
+  human_confirmation_required: false
+- chapter: 1NSI-LANGAGE
+  contract_code: C2
+  ref: P-LANG-02
+  classification: official_capacity
+  programme_section: Langages et programmation
+  programme_anchor: "Je sais rep\xE9rer, dans un nouveau langage, les traits communs et les traits particuliers par rapport\
+    \ \xE0 ce que je connais d\xE9j\xE0."
+  human_confirmation_required: false
+- chapter: 1NSI-LANGAGE
+  contract_code: C3
+  ref: P-LANG-03A
+  classification: official_capacity
+  programme_section: Langages et programmation
+  programme_anchor: "Je sais prototyper une fonction et d\xE9crire ses pr\xE9conditions et postconditions."
+  human_confirmation_required: false
+- chapter: 1NSI-LANGAGE
+  contract_code: C4
+  ref: P-LANG-04
+  classification: official_capacity
+  programme_section: Langages et programmation
+  programme_anchor: "Je sais mettre au point un programme \xE0 l'aide de jeux de tests."
+  human_confirmation_required: false
+- chapter: 1NSI-LANGAGE
+  contract_code: C5
+  ref: P-LANG-05
+  classification: official_capacity
+  programme_section: Langages et programmation
+  programme_anchor: "Je sais utiliser la documentation d'une biblioth\xE8que pour trouver et employer une fonction."
+  human_confirmation_required: false
+- chapter: 1NSI-PROJET-METHODES
+  contract_code: C1
+  ref: P-HIST-01
+  classification: official_capacity
+  programme_section: Histoire de l informatique
+  programme_anchor: "Je sais situer dans le temps les principaux \xE9v\xE9nements de l'histoire de l'informatique et leurs\
+    \ protagonistes."
+  human_confirmation_required: false
+- chapter: 1NSI-PROJET-METHODES
+  contract_code: C2
+  ref: BO-PREAMBULE-DEMARCHE-DE-PROJET
+  classification: transversal_enrichment
+  programme_section: 'Preambule : demarche de projet et competences transversales'
+  programme_anchor: "Je sais structurer un projet informatique en jalons, avec un cahier des charges et un travail en \xE9\
+    quipe."
+  human_confirmation_required: true
+- chapter: 1NSI-PROJET-METHODES
+  contract_code: C3
+  ref: BO-PREAMBULE-COMPETENCES-METHODE
+  classification: transversal_enrichment
+  programme_section: 'Preambule : demarche de projet et competences transversales'
+  programme_anchor: "Je sais d\xE9boguer m\xE9thodiquement un programme, en lisant un message d'erreur et en localisant la\
+    \ cause du bug."
+  human_confirmation_required: true
+- chapter: 1NSI-PROJET-METHODES
+  contract_code: C4
+  ref: BO-PREAMBULE-COMPETENCES-ORALES
+  classification: transversal_enrichment
+  programme_section: 'Preambule : demarche de projet et competences transversales'
+  programme_anchor: "Je sais documenter mon code et pr\xE9parer une pr\xE9sentation orale argument\xE9e d'un projet informatique."
+  human_confirmation_required: true
+- chapter: 1NSI-RESEAUX
+  contract_code: C1
+  ref: P-ARCH-02A
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais expliquer l'int\xE9r\xEAt du d\xE9coupage en paquets et de l'encapsulation."
+  human_confirmation_required: false
+- chapter: 1NSI-RESEAUX
+  contract_code: C2
+  ref: P-ARCH-02B
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais d\xE9rouler le fonctionnement d'un protocole simple de r\xE9cup\xE9ration de perte de paquets\
+    \ (bit altern\xE9)."
+  human_confirmation_required: false
+- chapter: 1NSI-RESEAUX
+  contract_code: C3
+  ref: P-ARCH-02C
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais simuler un r\xE9seau simple et d\xE9terminer si deux machines peuvent communiquer."
+  human_confirmation_required: false
+- chapter: 1NSI-RESEAUX
+  contract_code: C4
+  ref: P-ARCH-04A
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais identifier le r\xF4le des capteurs et des actionneurs."
+  human_confirmation_required: false
+- chapter: 1NSI-RESEAUX
+  contract_code: C5
+  ref: P-ARCH-04B
+  classification: official_capacity
+  programme_section: Architectures materielles et systemes d exploitation
+  programme_anchor: "Je sais r\xE9aliser par programmation une IHM r\xE9pondant \xE0 un cahier des charges donn\xE9."
+  human_confirmation_required: false
+- chapter: 1NSI-TABLES
+  contract_code: C1
+  ref: P-TABLE-01
+  classification: official_capacity
+  programme_section: Traitement de donnees en tables
+  programme_anchor: "Je sais importer une table depuis un fichier texte tabul\xE9 ou un fichier CSV."
+  human_confirmation_required: false
+- chapter: 1NSI-TABLES
+  contract_code: C2
+  ref: P-TABLE-02
+  classification: official_capacity
+  programme_section: Traitement de donnees en tables
+  programme_anchor: "Je sais rechercher les lignes d'une table v\xE9rifiant des crit\xE8res exprim\xE9s en logique propositionnelle,\
+    \ et d\xE9tecter des doublons."
+  human_confirmation_required: false
+- chapter: 1NSI-TABLES
+  contract_code: C3
+  ref: P-TABLE-03
+  classification: official_capacity
+  programme_section: Traitement de donnees en tables
+  programme_anchor: Je sais trier une table suivant une colonne.
+  human_confirmation_required: false
+- chapter: 1NSI-TABLES
+  contract_code: C4
+  ref: P-TABLE-04
+  classification: official_capacity
+  programme_section: Traitement de donnees en tables
+  programme_anchor: "Je sais construire une nouvelle table en combinant les donn\xE9es de deux tables."
+  human_confirmation_required: false
+- chapter: 1NSI-TYPES-BASE
+  contract_code: C1
+  ref: P-BASE-01
+  classification: official_capacity
+  programme_section: 'Representation des donnees : types et valeurs de base'
+  programme_anchor: "Je sais passer de la repr\xE9sentation d'un entier positif dans une base \xE0 une autre (bases 2, 10,\
+    \ 16)."
+  human_confirmation_required: false
+- chapter: 1NSI-TYPES-BASE
+  contract_code: C2
+  ref: P-BASE-02
+  classification: official_capacity
+  programme_section: 'Representation des donnees : types et valeurs de base'
+  programme_anchor: "Je sais \xE9valuer le nombre de bits n\xE9cessaires \xE0 l'\xE9criture d'un entier en base 2, et utiliser\
+    \ le compl\xE9ment \xE0 2 pour repr\xE9senter un entier relatif."
+  human_confirmation_required: false
+- chapter: 1NSI-TYPES-BASE
+  contract_code: C3
+  ref: P-BASE-03
+  classification: official_capacity
+  programme_section: 'Representation des donnees : types et valeurs de base'
+  programme_anchor: "Je sais expliquer pourquoi la repr\xE9sentation des nombres flottants est approximative et pourquoi il\
+    \ ne faut pas tester leur \xE9galit\xE9 directement."
+  human_confirmation_required: false
+- chapter: 1NSI-TYPES-BASE
+  contract_code: C4
+  ref: P-BASE-04
+  classification: official_capacity
+  programme_section: 'Representation des donnees : types et valeurs de base'
+  programme_anchor: "Je sais dresser la table de v\xE9rit\xE9 d'une expression bool\xE9enne construite avec and, or, not."
+  human_confirmation_required: false
+- chapter: 1NSI-TYPES-BASE
+  contract_code: C5
+  ref: P-BASE-05
+  classification: official_capacity
+  programme_section: 'Representation des donnees : types et valeurs de base'
+  programme_anchor: "Je sais identifier l'int\xE9r\xEAt de diff\xE9rents syst\xE8mes d'encodage de texte (ASCII, ISO-8859-1,\
+    \ Unicode) et convertir un texte d'un encodage \xE0 un autre."
+  human_confirmation_required: false
+- chapter: 1NSI-TYPES-CONSTRUITS
+  contract_code: C1
+  ref: 1NSI-TYPES-CONSTRUITS-C1
+  classification: local_reference
+  programme_section: 'Representation des donnees : types construits'
+  programme_anchor: "Je sais utiliser des p-uplets et \xE9crire une fonction qui renvoie plusieurs valeurs."
+  human_confirmation_required: true
+- chapter: 1NSI-TYPES-CONSTRUITS
+  contract_code: C2
+  ref: 1NSI-TYPES-CONSTRUITS-C2
+  classification: local_reference
+  programme_section: 'Representation des donnees : types construits'
+  programme_anchor: "Je sais lire, modifier et construire des tableaux, y compris en compr\xE9hension."
+  human_confirmation_required: true
+- chapter: 1NSI-TYPES-CONSTRUITS
+  contract_code: C3
+  ref: 1NSI-TYPES-CONSTRUITS-C3
+  classification: local_reference
+  programme_section: 'Representation des donnees : types construits'
+  programme_anchor: "Je sais repr\xE9senter et parcourir une grille avec un tableau de tableaux."
+  human_confirmation_required: true
+- chapter: 1NSI-TYPES-CONSTRUITS
+  contract_code: C4
+  ref: 1NSI-TYPES-CONSTRUITS-C4
+  classification: local_reference
+  programme_section: 'Representation des donnees : types construits'
+  programme_anchor: "Je sais cr\xE9er, modifier et parcourir un dictionnaire."
+  human_confirmation_required: true
+- chapter: 1NSI-TYPES-CONSTRUITS
+  contract_code: C5
+  ref: 1NSI-TYPES-CONSTRUITS-C5
+  classification: local_reference
+  programme_section: 'Representation des donnees : types construits'
+  programme_anchor: "Je sais pr\xE9voir l'effet d'une affectation sur un objet mutable."
+  human_confirmation_required: true
+- chapter: 1NSI-WEB-IHM
+  contract_code: C1
+  ref: P-IHM-01A
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: Je sais identifier les composants graphiques permettant d'interagir avec une application Web.
+  human_confirmation_required: false
+- chapter: 1NSI-WEB-IHM
+  contract_code: C2
+  ref: P-IHM-01B
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: "Je sais identifier les \xE9v\xE9nements que les fonctions associ\xE9es aux composants graphiques peuvent\
+    \ traiter."
+  human_confirmation_required: false
+- chapter: 1NSI-WEB-IHM
+  contract_code: C3
+  ref: P-IHM-02
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: "Je sais analyser et modifier les m\xE9thodes ex\xE9cut\xE9es lors d'un clic sur un bouton d'une page\
+    \ Web."
+  human_confirmation_required: false
+- chapter: 1NSI-WEB-IHM
+  contract_code: C4
+  ref: P-IHM-03A
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: "Je sais distinguer ce qui est ex\xE9cut\xE9 sur le client ou sur le serveur, et dans quel ordre."
+  human_confirmation_required: false
+- chapter: 1NSI-WEB-IHM
+  contract_code: C5
+  ref: P-IHM-03B
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: "Je sais distinguer ce qui est m\xE9moris\xE9 dans le client et retransmis au serveur."
+  human_confirmation_required: false
+- chapter: 1NSI-WEB-IHM
+  contract_code: C6
+  ref: P-IHM-03C
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: "Je sais reconna\xEEtre quand et pourquoi une transmission est chiffr\xE9e."
+  human_confirmation_required: false
+- chapter: 1NSI-WEB-IHM
+  contract_code: C7
+  ref: P-IHM-04A
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: Je sais analyser le fonctionnement d'un formulaire Web simple.
+  human_confirmation_required: false
+- chapter: 1NSI-WEB-IHM
+  contract_code: C8
+  ref: P-IHM-04B
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: "Je sais distinguer les transmissions de param\xE8tres par requ\xEAtes POST ou GET."
+  human_confirmation_required: false
+- chapter: 1NSI-WEB-IHM
+  contract_code: C9
+  ref: P-IHM-04C
+  classification: official_capacity
+  programme_section: Interactions entre l'homme et la machine sur le Web
+  programme_anchor: "Je sais discuter du choix du type de requ\xEAte selon les valeurs \xE0 transmettre et leur confidentialit\xE9\
+    ."
+  human_confirmation_required: false
+scope_guard:
+  implementation_base_sha: 867e10503044688a0b8cee3847647562dce6db45
+  sources:
+  - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
+    status: draft
+  - id: 1NSI-ADGK-CO-001
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex
+    status: verified
+  - id: 1NSI-ADGK-CO-002
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex
+    status: verified
+  - id: 1NSI-ADGK-CO-003
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex
+    status: verified
+  - id: 1NSI-ADGK-CO-004
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex
+    status: verified
+  - id: 1NSI-ADGK-CO-005
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex
+    status: verified
+  - id: 1NSI-ADGK-COURS-C1
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C1.tex
+    status: verified
+  - id: 1NSI-ADGK-COURS-C2
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex
+    status: verified
+  - id: 1NSI-ADGK-COURS-C3
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex
+    status: verified
+  - id: 1NSI-ADGK-EVAL-A
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex
+    status: verified
+  - id: 1NSI-ADGK-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-ADGK-EVAL-B
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex
+    status: verified
+  - id: 1NSI-ADGK-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-ADGK-EX-001
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-001.tex
+    status: verified
+  - id: 1NSI-ADGK-EX-002
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex
+    status: verified
+  - id: 1NSI-ADGK-EX-003
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-003.tex
+    status: verified
+  - id: 1NSI-ADGK-EX-004
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex
+    status: verified
+  - id: 1NSI-ADGK-EX-005
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex
+    status: verified
+  - id: 1NSI-ADGK-RE-C1
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C1.tex
+    status: verified
+  - id: 1NSI-ADGK-RE-C1-CORRIGE
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C1-CORRIGE.tex
+    status: needs_review
+  - id: 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM
+    path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex
+    status: needs_review
+  - id: contract:1NSI-ALGO-PARCOURS-TRIS
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
+    status: draft
+  - id: 1NSI-AGT-CO-001
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex
+    status: verified
+  - id: 1NSI-AGT-CO-002
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-002.tex
+    status: verified
+  - id: 1NSI-AGT-CO-003
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-003.tex
+    status: verified
+  - id: 1NSI-AGT-CO-004
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-004.tex
+    status: verified
+  - id: 1NSI-AGT-CO-005
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex
+    status: verified
+  - id: 1NSI-AGT-COURS-C1
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C1.tex
+    status: verified
+  - id: 1NSI-AGT-COURS-C2
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex
+    status: verified
+  - id: 1NSI-AGT-COURS-C3
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex
+    status: verified
+  - id: 1NSI-AGT-EVAL-A
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A.tex
+    status: verified
+  - id: 1NSI-AGT-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-AGT-EVAL-B
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B.tex
+    status: verified
+  - id: 1NSI-AGT-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-AGT-EX-001
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-001.tex
+    status: verified
+  - id: 1NSI-AGT-EX-002
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-002.tex
+    status: verified
+  - id: 1NSI-AGT-EX-003
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-003.tex
+    status: verified
+  - id: 1NSI-AGT-EX-004
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-004.tex
+    status: verified
+  - id: 1NSI-AGT-EX-005
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-005.tex
+    status: verified
+  - id: 1NSI-AGT-RE-C5
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex
+    status: verified
+  - id: 1NSI-AGT-RE-C5-CORRIGE
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-RE-C5-CORRIGE.tex
+    status: needs_review
+  - id: 1NSI-ALGO-PARCOURS-TRIS-QCM
+    path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex
+    status: needs_review
+  - id: contract:1NSI-ARCHITECTURE-OS
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml
+    status: draft
+  - id: 1NSI-ARCHITECTURE-OS-QCM
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.tex
+    status: needs_review
+  - id: 1NSI-ARCHITECTURE-OS-RE-C5
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex
+    status: verified
+  - id: 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex
+    status: needs_review
+  - id: 1NSI-ARCHOS-CO-001
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex
+    status: manual_review
+  - id: 1NSI-ARCHOS-CO-002
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex
+    status: verified
+  - id: 1NSI-ARCHOS-CO-003
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex
+    status: manual_review
+  - id: 1NSI-ARCHOS-CO-004
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex
+    status: verified
+  - id: 1NSI-ARCHOS-CO-005
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex
+    status: verified
+  - id: 1NSI-ARCHOS-COURS-C1
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
+    status: manual_review
+  - id: 1NSI-ARCHOS-COURS-C2
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C2.tex
+    status: verified
+  - id: 1NSI-ARCHOS-COURS-C3
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C3.tex
+    status: verified
+  - id: 1NSI-ARCHOS-EVAL-A
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex
+    status: verified
+  - id: 1NSI-ARCHOS-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-ARCHOS-EVAL-B
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex
+    status: verified
+  - id: 1NSI-ARCHOS-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-ARCHOS-EX-001
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-001.tex
+    status: manual_review
+  - id: 1NSI-ARCHOS-EX-002
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-002.tex
+    status: verified
+  - id: 1NSI-ARCHOS-EX-003
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-003.tex
+    status: manual_review
+  - id: 1NSI-ARCHOS-EX-004
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex
+    status: verified
+  - id: 1NSI-ARCHOS-EX-005
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-005.tex
+    status: verified
+  - id: contract:1NSI-LANGAGE
+    path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
+    status: draft
+  - id: 1NSI-LANG-CO-001
+    path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-001.tex
+    status: verified
+  - id: 1NSI-LANG-CO-002
+    path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-002.tex
+    status: verified
+  - id: 1NSI-LANG-CO-003
+    path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-003.tex
+    status: verified
+  - id: 1NSI-LANG-CO-004
+    path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-004.tex
+    status: verified
+  - id: 1NSI-LANG-CO-005
+    path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANG-CO-005.tex
+    status: verified
+  - id: 1NSI-LANG-COURS-C1
+    path: NSI/chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C1.tex
+    status: verified
+  - id: 1NSI-LANG-COURS-C2
+    path: NSI/chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C2.tex
+    status: verified
+  - id: 1NSI-LANG-COURS-C3
+    path: NSI/chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C3.tex
+    status: verified
+  - id: 1NSI-LANG-COURS-C4
+    path: NSI/chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C4.tex
+    status: verified
+  - id: 1NSI-LANG-COURS-C5
+    path: NSI/chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C5.tex
+    status: verified
+  - id: 1NSI-LANG-EVAL-A
+    path: NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-A.tex
+    status: verified
+  - id: 1NSI-LANG-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-LANG-EVAL-B
+    path: NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-B.tex
+    status: verified
+  - id: 1NSI-LANG-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-LANGAGE/evaluations/1NSI-LANG-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-LANG-EX-001
+    path: NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-001.tex
+    status: verified
+  - id: 1NSI-LANG-EX-002
+    path: NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-002.tex
+    status: verified
+  - id: 1NSI-LANG-EX-003
+    path: NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-003.tex
+    status: verified
+  - id: 1NSI-LANG-EX-004
+    path: NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-004.tex
+    status: verified
+  - id: 1NSI-LANG-EX-005
+    path: NSI/chapitres/1NSI-LANGAGE/exercices/1NSI-LANG-EX-005.tex
+    status: verified
+  - id: 1NSI-LANGAGE-QCM
+    path: NSI/chapitres/1NSI-LANGAGE/qcm/1NSI-LANGAGE-QCM.tex
+    status: needs_review
+  - id: 1NSI-LANGAGE-RE-C4
+    path: NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex
+    status: verified
+  - id: 1NSI-LANGAGE-RE-C4-CORRIGE
+    path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex
+    status: needs_review
+  - id: contract:1NSI-PROJET-METHODES
+    path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+    status: draft
+  - id: 1NSI-PM-CO-001
+    path: NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-001.tex
+    status: verified
+  - id: 1NSI-PM-CO-002
+    path: NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-002.tex
+    status: verified
+  - id: 1NSI-PM-CO-003
+    path: NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-003.tex
+    status: verified
+  - id: 1NSI-PM-CO-004
+    path: NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-004.tex
+    status: verified
+  - id: 1NSI-PM-CO-005
+    path: NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-CO-005.tex
+    status: verified
+  - id: 1NSI-PM-COURS-C1
+    path: NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C1.tex
+    status: verified
+  - id: 1NSI-PM-COURS-C2
+    path: NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C2.tex
+    status: verified
+  - id: 1NSI-PM-COURS-C3
+    path: NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex
+    status: verified
+  - id: 1NSI-PM-COURS-C4
+    path: NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C4.tex
+    status: verified
+  - id: 1NSI-PM-EVAL-A
+    path: NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A.tex
+    status: verified
+  - id: 1NSI-PM-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-PM-EVAL-B
+    path: NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-B.tex
+    status: verified
+  - id: 1NSI-PM-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-PROJET-METHODES/evaluations/1NSI-PM-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-PM-EX-001
+    path: NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-001.tex
+    status: verified
+  - id: 1NSI-PM-EX-002
+    path: NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-002.tex
+    status: verified
+  - id: 1NSI-PM-EX-003
+    path: NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-003.tex
+    status: verified
+  - id: 1NSI-PM-EX-004
+    path: NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-004.tex
+    status: verified
+  - id: 1NSI-PM-EX-005
+    path: NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-005.tex
+    status: verified
+  - id: 1NSI-PM-RE-C3
+    path: NSI/chapitres/1NSI-PROJET-METHODES/remediation/1NSI-PM-RE-C3.tex
+    status: verified
+  - id: 1NSI-PM-RE-C3-CORRIGE
+    path: NSI/chapitres/1NSI-PROJET-METHODES/corriges/1NSI-PM-RE-C3-CORRIGE.tex
+    status: needs_review
+  - id: 1NSI-PROJET-METHODES-QCM
+    path: NSI/chapitres/1NSI-PROJET-METHODES/qcm/1NSI-PROJET-METHODES-QCM.tex
+    status: needs_review
+  - id: contract:1NSI-RESEAUX
+    path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
+    status: draft
+  - id: 1NSI-RES-CO-001
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-001.tex
+    status: verified
+  - id: 1NSI-RES-CO-002
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-002.tex
+    status: verified
+  - id: 1NSI-RES-CO-003
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-003.tex
+    status: verified
+  - id: 1NSI-RES-CO-004
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-004.tex
+    status: verified
+  - id: 1NSI-RES-CO-005
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-005.tex
+    status: verified
+  - id: 1NSI-RES-COURS-C1
+    path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C1.tex
+    status: verified
+  - id: 1NSI-RES-COURS-C2
+    path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
+    status: verified
+  - id: 1NSI-RES-COURS-C3
+    path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+    status: verified
+  - id: 1NSI-RES-EVAL-A
+    path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
+    status: verified
+  - id: 1NSI-RES-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-RES-EVAL-B
+    path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
+    status: verified
+  - id: 1NSI-RES-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-RES-EX-001
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-001.tex
+    status: verified
+  - id: 1NSI-RES-EX-002
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
+    status: verified
+  - id: 1NSI-RES-EX-003
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
+    status: verified
+  - id: 1NSI-RES-EX-004
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-004.tex
+    status: verified
+  - id: 1NSI-RES-EX-005
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
+    status: verified
+  - id: 1NSI-RESEAUX-QCM
+    path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
+    status: needs_review
+  - id: 1NSI-RESEAUX-RE-C1
+    path: NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex
+    status: verified
+  - id: 1NSI-RESEAUX-RE-C1-CORRIGE
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
+    status: needs_review
+  - id: contract:1NSI-TABLES
+    path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+    status: draft
+  - id: 1NSI-TAB-CO-001
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-001.tex
+    status: verified
+  - id: 1NSI-TAB-CO-002
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-002.tex
+    status: verified
+  - id: 1NSI-TAB-CO-003
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-003.tex
+    status: verified
+  - id: 1NSI-TAB-CO-004
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-004.tex
+    status: verified
+  - id: 1NSI-TAB-CO-005
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-005.tex
+    status: verified
+  - id: 1NSI-TAB-COURS-C1
+    path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C1.tex
+    status: verified
+  - id: 1NSI-TAB-COURS-C2
+    path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C2.tex
+    status: verified
+  - id: 1NSI-TAB-COURS-C3
+    path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C3.tex
+    status: verified
+  - id: 1NSI-TAB-COURS-C4
+    path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex
+    status: verified
+  - id: 1NSI-TAB-EVAL-A
+    path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex
+    status: verified
+  - id: 1NSI-TAB-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-TAB-EVAL-B
+    path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex
+    status: verified
+  - id: 1NSI-TAB-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-TAB-EX-001
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-001.tex
+    status: verified
+  - id: 1NSI-TAB-EX-002
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-002.tex
+    status: verified
+  - id: 1NSI-TAB-EX-003
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-003.tex
+    status: verified
+  - id: 1NSI-TAB-EX-004
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-004.tex
+    status: verified
+  - id: 1NSI-TAB-EX-005
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-005.tex
+    status: verified
+  - id: 1NSI-TABLES-QCM
+    path: NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.tex
+    status: needs_review
+  - id: 1NSI-TABLES-RE-C2
+    path: NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex
+    status: verified
+  - id: 1NSI-TABLES-RE-C2-CORRIGE
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TABLES-RE-C2-CORRIGE.tex
+    status: needs_review
+  - id: contract:1NSI-TYPES-BASE
+    path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
+    status: draft
+  - id: 1NSI-TB-CO-001
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-001.tex
+    status: verified
+  - id: 1NSI-TB-CO-002
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-002.tex
+    status: verified
+  - id: 1NSI-TB-CO-003
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-003.tex
+    status: verified
+  - id: 1NSI-TB-CO-004
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-004.tex
+    status: verified
+  - id: 1NSI-TB-CO-005
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-005.tex
+    status: verified
+  - id: 1NSI-TB-COURS-C1
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C1.tex
+    status: verified
+  - id: 1NSI-TB-COURS-C2
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex
+    status: verified
+  - id: 1NSI-TB-COURS-C3
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C3.tex
+    status: verified
+  - id: 1NSI-TB-COURS-C4
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C4.tex
+    status: verified
+  - id: 1NSI-TB-COURS-C5
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C5.tex
+    status: verified
+  - id: 1NSI-TB-EVAL-A
+    path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex
+    status: verified
+  - id: 1NSI-TB-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-TB-EVAL-B
+    path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex
+    status: verified
+  - id: 1NSI-TB-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-TB-EX-001
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-001.tex
+    status: verified
+  - id: 1NSI-TB-EX-002
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-002.tex
+    status: verified
+  - id: 1NSI-TB-EX-003
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-003.tex
+    status: verified
+  - id: 1NSI-TB-EX-004
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-004.tex
+    status: verified
+  - id: 1NSI-TB-EX-005
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-005.tex
+    status: verified
+  - id: 1NSI-TYPES-BASE-QCM
+    path: NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.tex
+    status: needs_review
+  - id: 1NSI-TYPES-BASE-RE-C3
+    path: NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex
+    status: verified
+  - id: 1NSI-TYPES-BASE-RE-C3-CORRIGE
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C3-CORRIGE.tex
+    status: needs_review
+  - id: contract:1NSI-TYPES-CONSTRUITS
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+    status: draft
+  - id: 1NSI-TC-AM-EXTRAIT
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-001
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-001.tex
+    status: verified
+  - id: 1NSI-TC-CO-002
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-002.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-003
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-003.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-004
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-004.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-005
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-005.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-006
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-006.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-007
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-007.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-008
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-008.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-009
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-009.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-010
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-010.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-011
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-011.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-012
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-012.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-013
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-013.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-014
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-014.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-015
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-015.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-016
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-016.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-017
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-017.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-018
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-018.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-019
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-019.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-020
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-020.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-021
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-021.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-022
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-022.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-023
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-023.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-024
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-024.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-025
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-025.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-026
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-026.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-027
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-027.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-028
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-028.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-029
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-029.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-030
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-030.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-031
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-031.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-032
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-032.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-033
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-033.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-034
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-034.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-035
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-035.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-036
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-036.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-037
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-037.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-038
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-038.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-039
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-039.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-040
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-040.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-041
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-041.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-042
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-042.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-043
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-043.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-044
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-044.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-045
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-045.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-046
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-046.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-047
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-047.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-048
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-048.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-049
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-049.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-050
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-050.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-051
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-051.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-052
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-052.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-053
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-053.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-054
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-054.tex
+    status: needs_review
+  - id: 1NSI-TC-CO-055
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-055.tex
+    status: needs_review
+  - id: 1NSI-TC-COURS-C1
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C1.tex
+    status: needs_review
+  - id: 1NSI-TC-COURS-C2
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C2.tex
+    status: needs_review
+  - id: 1NSI-TC-COURS-C3
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C3.tex
+    status: needs_review
+  - id: 1NSI-TC-COURS-C4
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C4.tex
+    status: needs_review
+  - id: 1NSI-TC-COURS-C5
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex
+    status: needs_review
+  - id: 1NSI-TC-EVAL-A
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-A.tex
+    status: needs_review
+  - id: 1NSI-TC-EVAL-B
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-B.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-001
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-001.tex
+    status: verified
+  - id: 1NSI-TC-EX-001-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-001-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-002
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-002.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-002-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-002-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-003
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-003.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-003-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-003-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-004
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-004.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-004-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-004-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-005
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-005.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-005-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-005-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-006
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-006.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-006-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-006-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-007
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-007.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-007-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-007-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-008
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-008.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-009
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-009.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-010
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-010.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-011
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-011.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-012
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-012.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-013
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-013.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-014
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-014.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-014-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-014-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-015
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-015.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-015-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-015-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-016
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-016.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-016-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-016-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-017
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-017.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-017-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-017-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-018
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-018.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-019
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-019.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-020
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-020.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-021
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-021.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-022
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-022.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-022-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-022-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-023
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-023.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-024
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-024.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-025
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-025.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-025-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-025-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-026
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-026.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-026-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-026-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-027
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-027.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-027-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-027-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-028
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-028.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-028-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-028-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-029
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-029.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-030
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-030.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-031
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-031.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-032
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-032.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-033
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-033.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-034
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-034.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-035
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-035.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-035-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-035-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-036
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-036.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-036-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-036-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-037
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-037.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-037-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-037-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-038
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-038.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-038-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-038-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-039
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-039.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-040
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-040.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-041
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-041.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-042
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-042.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-043
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-043.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-044
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-044.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-045
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-045.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-046
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-046.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-046-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-046-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-047
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-047.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-047-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-047-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-048
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-048.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-048-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-048-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-049
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-049.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-049-CDP
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/coups_de_pouce/1NSI-TC-EX-049-CDP.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-050
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-050.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-051
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-051.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-052
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-052.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-053
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-053.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-054
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-054.tex
+    status: needs_review
+  - id: 1NSI-TC-EX-055
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-055.tex
+    status: needs_review
+  - id: 1NSI-TC-M1
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M1.tex
+    status: needs_review
+  - id: 1NSI-TC-M2
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M2.tex
+    status: needs_review
+  - id: 1NSI-TC-M3
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M3.tex
+    status: needs_review
+  - id: 1NSI-TC-M4
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M4.tex
+    status: needs_review
+  - id: 1NSI-TC-M5
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/methodes/1NSI-TC-M5.tex
+    status: needs_review
+  - id: 1NSI-TC-PROJET
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/projet/1NSI-TC-PROJET.tex
+    status: needs_review
+  - id: 1NSI-TC-QCM
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM.tex
+    status: needs_review
+  - id: 1NSI-TC-QCM-DIAG
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/qcm/1NSI-TC-QCM-DIAG.tex
+    status: needs_review
+  - id: 1NSI-TC-REM
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/remediation/1NSI-TC-REM.tex
+    status: needs_review
+  - id: 1NSI-TC-TD1
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td1_station_meteo.tex
+    status: needs_review
+  - id: 1NSI-TC-TD2
+    path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td2_classement_esport.tex
+    status: needs_review
+  - id: contract:1NSI-WEB-IHM
+    path: NSI/chapitres/1NSI-WEB-IHM/contrat.yaml
+    status: draft
+  - id: 1NSI-WEB-CO-001
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
+    status: manual_review
+  - id: 1NSI-WEB-CO-002
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
+    status: verified
+  - id: 1NSI-WEB-CO-003
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
+    status: verified
+  - id: 1NSI-WEB-CO-004
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
+    status: verified
+  - id: 1NSI-WEB-CO-005
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-005.tex
+    status: verified
+  - id: 1NSI-WEB-COURS-C1
+    path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
+    status: verified
+  - id: 1NSI-WEB-COURS-C2
+    path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
+    status: verified
+  - id: 1NSI-WEB-COURS-C3
+    path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
+    status: verified
+  - id: 1NSI-WEB-EVAL-A
+    path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
+    status: verified
+  - id: 1NSI-WEB-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+    status: verified
+  - id: 1NSI-WEB-EVAL-B
+    path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
+    status: verified
+  - id: 1NSI-WEB-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+    status: verified
+  - id: 1NSI-WEB-EX-001
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-001.tex
+    status: manual_review
+  - id: 1NSI-WEB-EX-002
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
+    status: verified
+  - id: 1NSI-WEB-EX-003
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
+    status: verified
+  - id: 1NSI-WEB-EX-004
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex
+    status: verified
+  - id: 1NSI-WEB-EX-005
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-005.tex
+    status: verified
+  - id: 1NSI-WEB-IHM-QCM
+    path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
+    status: needs_review
+  - id: 1NSI-WEB-IHM-RE-C9
+    path: NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex
+    status: verified
+  - id: 1NSI-WEB-IHM-RE-C9-CORRIGE
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C9-CORRIGE.tex
+    status: needs_review
+  build_manifest:
+    path: audit/BUILD_MANIFEST.json
+    sha256: sha256:89526661a52c012f01fba41d38a9780d6b791ad3892faf93589488e95607ea94
+  canonical_pdfs:
+  - path: NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf
+    sha256: sha256:764db14d0a06dd9b720fc1028e7c702929e891345cfef8adf132736fc9fe5d19
+  - path: NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf
+    sha256: sha256:cca2f2d8917244e4af36a00660c581c669289a2941e19a65aadb4e9dd516a1e1
+  - path: NSI/build/MANUEL_1NSI/MANUEL_1NSI_evaluations.pdf
+    sha256: sha256:742fc6abfbaaf5a32a4fc3d9c6fc6c81f05b9934e305a9558d557967c2579bc4
+  - path: NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf
+    sha256: sha256:8648ae545890fc64fe8eeee0bb590788e048a18a3d9d43aaafe307e00956e3bc
+  - path: NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf
+    sha256: sha256:887851d6500277970527f9cbe89d256663cd9503abf6dd2f30a28866715b4b0e
+  - path: NSI/build/MANUEL_1NSI/MANUEL_1NSI_projets.pdf
+    sha256: sha256:23ea667ae2688ecbc71e18d87df1b531d31cb1f36a7859498e27f4f8f8347d65
+  - path: NSI/build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf
+    sha256: sha256:7a60e75a1ad078bb9b0caf688b846a9ec3617a0cc6b5281bf8edfdaab76d4226
+  tnsi_tracked_files_count: 261
+  tnsi_tracked_files_digest: sha256:4f0f12e0bd3f55dba0c01bdf0ee379b5838d3485306ee75fd8eaa1abf2d12392
+allowlist:
+- NSI/tests/test_1nsi_content_reviews.py
+- scripts/review_1nsi_content.py
+- audit/1NSI_CONTENT_REVIEW_POLICY.yaml
+- audit/schemas/v1/1nsi-content-review.schema.json
+- audit/sources/1nsi/programme-premiere-nsi.pdf
+- audit/sources/1nsi/legifrance-arrete-17-janvier-2019.html
+- audit/sources/1nsi/eduscol-programmes-nsi.html

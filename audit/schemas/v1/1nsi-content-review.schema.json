@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:nexus:audit:schema:v1:1nsi-content-review",
+  "title": "Nexus 1NSI scientific and pedagogical content reviews v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "manual",
+    "protocol_digest",
+    "publication_approval",
+    "human_confirmation_required",
+    "entries"
+  ],
+  "properties": {
+    "artifact_type": { "const": "1nsi_content_reviews" },
+    "schema_version": { "const": 1 },
+    "manual": { "const": "1NSI" },
+    "protocol_digest": { "$ref": "#/$defs/sha256" },
+    "publication_approval": { "const": false },
+    "human_confirmation_required": { "const": true },
+    "entries": {
+      "type": "array",
+      "minItems": 349,
+      "maxItems": 349,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "line_start",
+        "line_end",
+        "excerpt_sha256",
+        "fact_type",
+        "observation"
+      ],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "line_start": { "type": "integer", "minimum": 1 },
+        "line_end": { "type": "integer", "minimum": 1 },
+        "excerpt_sha256": { "$ref": "#/$defs/sha256" },
+        "fact_type": {
+          "enum": [
+            "source_statement",
+            "programme_alignment",
+            "computed_result",
+            "execution_receipt",
+            "exercise_link",
+            "correction_link",
+            "pedagogical_structure",
+            "student_teacher_separation",
+            "reviewer_observation"
+          ]
+        },
+        "observation": { "type": "string", "minLength": 1 }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewer_id",
+        "review_run_id",
+        "reviewer_model",
+        "integrator_id"
+      ],
+      "properties": {
+        "reviewer_id": { "type": "string", "minLength": 1 },
+        "review_run_id": { "type": "string", "minLength": 1 },
+        "reviewer_model": { "type": "string", "minLength": 1 },
+        "integrator_id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "justification", "facts", "anomaly_ids"],
+      "properties": {
+        "verdict": {
+          "enum": [
+            "pass",
+            "issue",
+            "not_applicable",
+            "human_confirmation_required"
+          ]
+        },
+        "justification": { "type": "string", "minLength": 1 },
+        "facts": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/fact" }
+        },
+        "anomaly_ids": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^1NSI-REV-[A-Z0-9-]+$" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "anomaly": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "severity",
+        "dimension",
+        "fact",
+        "consequence",
+        "expected_action"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^1NSI-REV-[A-Z0-9-]+$" },
+        "severity": { "enum": ["P0", "P1", "P2", "P3"] },
+        "dimension": { "enum": ["scientific", "pedagogical"] },
+        "fact": { "$ref": "#/$defs/fact" },
+        "consequence": { "type": "string", "minLength": 1 },
+        "expected_action": { "type": "string", "minLength": 1 }
+      }
+    },
+    "dependency_digests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "protocol",
+        "source",
+        "contract",
+        "linked_objects",
+        "help",
+        "correction",
+        "receipt",
+        "python"
+      ],
+      "properties": {
+        "protocol": { "$ref": "#/$defs/sha256" },
+        "source": { "$ref": "#/$defs/sha256" },
+        "contract": { "$ref": "#/$defs/sha256" },
+        "linked_objects": { "$ref": "#/$defs/sha256" },
+        "help": { "$ref": "#/$defs/sha256" },
+        "correction": { "$ref": "#/$defs/sha256" },
+        "receipt": { "$ref": "#/$defs/sha256" },
+        "python": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "execution_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "index", "pass", "detail"],
+      "properties": {
+        "type": { "enum": ["verify", "trace", "ruff"] },
+        "index": { "type": "integer", "minimum": 0 },
+        "pass": { "type": "boolean" },
+        "detail": { "type": "string" }
+      }
+    },
+    "execution_observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checker",
+        "fresh_verdict",
+        "receipt_verdict",
+        "matches_receipt",
+        "checks",
+        "check_digest",
+        "receipt_sha256",
+        "anomalies"
+      ],
+      "properties": {
+        "checker": { "const": "NSI/scripts/verify_python.py::check_object" },
+        "fresh_verdict": { "enum": ["pass", "fail", "manual_review"] },
+        "receipt_verdict": { "type": ["string", "null"] },
+        "matches_receipt": { "type": "boolean" },
+        "checks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/execution_check" }
+        },
+        "check_digest": { "$ref": "#/$defs/sha256" },
+        "receipt_sha256": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        },
+        "anomalies": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "scope",
+        "chapter",
+        "source_path",
+        "source_status",
+        "source_sha256",
+        "contract_path",
+        "capacity_refs",
+        "protocol_digest",
+        "dependency_digest",
+        "dependency_digests",
+        "provenance",
+        "dimensions",
+        "anomalies",
+        "execution_observation",
+        "publication_approval",
+        "human_confirmation_required"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "scope": { "enum": ["object", "contract"] },
+        "chapter": { "type": "string", "pattern": "^1NSI-" },
+        "source_path": { "type": "string", "pattern": "^NSI/chapitres/1NSI-" },
+        "source_status": {
+          "enum": ["draft", "verified", "needs_review", "manual_review"]
+        },
+        "source_sha256": { "$ref": "#/$defs/sha256" },
+        "contract_path": {
+          "type": "string",
+          "pattern": "^NSI/chapitres/1NSI-[^/]+/contrat\\.yaml$"
+        },
+        "capacity_refs": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "protocol_digest": { "$ref": "#/$defs/sha256" },
+        "dependency_digest": { "$ref": "#/$defs/sha256" },
+        "dependency_digests": { "$ref": "#/$defs/dependency_digests" },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["scientific", "pedagogical"],
+          "properties": {
+            "scientific": { "$ref": "#/$defs/dimension" },
+            "pedagogical": { "$ref": "#/$defs/dimension" }
+          }
+        },
+        "anomalies": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/anomaly" }
+        },
+        "execution_observation": {
+          "oneOf": [
+            { "$ref": "#/$defs/execution_observation" },
+            { "type": "null" }
+          ]
+        },
+        "publication_approval": { "const": false },
+        "human_confirmation_required": { "const": true }
+      }
+    }
+  }
+}
