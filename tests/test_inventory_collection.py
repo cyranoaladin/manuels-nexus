@@ -1479,7 +1479,7 @@ def test_materialize_baseline_qualifications_check_is_read_only(
 
     payload = json.loads(result.stdout)
     assert payload["gate"] == "materialize-baseline-qualifications"
-    assert payload["approved_fingerprint_count"] == 981
+    assert payload["approved_fingerprint_count"] == 189
     assert payload["unqualified"] == 0
     assert result.returncode in {0, 3}
     assert (result.returncode == 0) is (payload["diffs"] == [])

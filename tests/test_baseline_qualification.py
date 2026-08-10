@@ -51,8 +51,19 @@ def _digest_fingerprints(fingerprints: list[str]) -> str:
     return f"sha256:{hashlib.sha256(payload).hexdigest()}"
 
 
+def _digest_payload(payload: object) -> str:
+    serialized = json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
+    return f"sha256:{hashlib.sha256(serialized).hexdigest()}"
+
+
 def test_qualification_policy_schema_and_approved_contract(
     qualification_module,
+    inventory_module,
     policy,
 ) -> None:
     schema_path = (
@@ -72,82 +83,88 @@ def test_qualification_policy_schema_and_approved_contract(
         "approved_by": "Alaeddine Ben Rhouma",
         "approver_role": "Direction scientifique et éditoriale Nexus Réussite",
         "baseline_purpose": "debt_regression_control",
-        "id": "baseline-debt-extension-collection-2026-08-08",
+        "id": "baseline-status-governance-1nsi-2026-08-10",
         "provisional_after_freeze": False,
         "ref": (
             "audit/BASELINE_QUALIFICATION_DECISION.md"
-            "#decision-baseline-debt-extension-collection-2026-08-08"
+            "#decision-baseline-status-governance-1nsi-2026-08-10"
         ),
         "release_acceptance": False,
     }
     assert payload["approved_set"] == {
-        "baseline_sha": "a48e8e41fc3f6ef9274e564722d5155c8df401b7",
+        "baseline_sha": "afae475ee06e8510804c0065ccfd35dfa0199875",
         "category_counts": {
-            "blocking_statuses": 875,
-            "broken_meta_references": 2,
-            "chapters_not_in_manual": 15,
-            "unassembled_objects": 82,
-            "unclassified_types": 7,
+            "blocking_statuses": 189,
         },
-        "fingerprint_count": 981,
+        "fingerprint_count": 189,
         "fingerprint_digest": (
             "sha256:"
-            "e2ec8130f85f690eda663ac556b61e63ffd7d98e422c71f0245b10112161887f"
+            "6a994806a4a3b8c710fb0eb2e089e90e8666543b3380e4ccf0cf5268500f86ca"
         ),
         "observed_model_digest_before_materialization": (
             "sha256:"
-            "8db8abe9a2882c827f4aee55f7584f082f1ea7f31647783e7f52697443055d22"
+            "f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548"
         ),
         "observed_source_digest_before_materialization": (
             "sha256:"
-            "590c51801b32a6661878de7956d1752b9f027bf2cd65ba2605e8120b682d91d3"
+            "8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81"
         ),
         "owner_counts": {
-            "direction_editoriale_pedagogique": 98,
-            "direction_scientifique_programme": 752,
-            "ingenierie_build_qualite": 131,
+            "direction_editoriale_pedagogique": 10,
+            "direction_scientifique_programme": 179,
         },
     }
-    assert payload["approved_transition"] == {
-        "final_active_fingerprint_count": 2986,
-        "initial_active_fingerprint_count": 2647,
+    transition = payload["approved_transition"]
+    modified_pairs = transition["modified_pairs"]
+    assert {
+        key: value
+        for key, value in transition.items()
+        if key != "modified_pairs"
+    } == {
+        "final_active_fingerprint_count": 2866,
+        "initial_active_fingerprint_count": 2986,
         "initial_baseline_digest": (
             "sha256:"
-            "714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff"
+            "ebe9580cae8f994a19bb82960762a845c19e2c9a6e006aae244dcebc26ca3bbb"
         ),
-        "initial_resolved_fingerprint_count": 0,
-        "modified_pairs": [
-            {
-                "current": "3276d95a8a9b8142",
-                "previous": "9873ab6a1e11c673",
-            },
-            {
-                "current": "d51832bdeebf5d4a",
-                "previous": "63548ddb4dd6b1dd",
-            },
-            {
-                "current": "a96d99c614321acc",
-                "previous": "8fdec12020b7159b",
-            },
-        ],
+        "initial_resolved_fingerprint_count": 642,
         "modified_pairs_digest": (
             "sha256:"
-            "eaa22aa607e9a9616f251cee24e8b639e9c958c639aac353b13fd01e18836dd1"
+            "b744f797cb072e7c1200b5e8c87a2ef7b16076578e53e1e70e15b764988ea3e0"
         ),
         "resolved_category_counts": {
-            "blocking_statuses": 3,
-            "broken_meta_references": 24,
-            "chapters_not_in_manual": 3,
+            "blocking_statuses": 189,
+            "chapters_not_in_manual": 10,
             "missing_assemblers": 1,
-            "unassembled_objects": 611,
+            "unassembled_objects": 109,
         },
-        "resolved_fingerprint_count": 642,
+        "resolved_fingerprint_count": 309,
         "resolved_fingerprint_digest": (
             "sha256:"
-            "44397de4c98d70ce3575c04ea37322a403a29a3468bd29a23bffc938ed4908fc"
+            "b652287acfa1d91c62446b1dc3f251b46980ca6363968a14733b3e2e91bf3631"
         ),
-        "retained_fingerprint_count": 2005,
+        "retained_fingerprint_count": 2677,
     }
+    assert len(modified_pairs) == 189
+    assert len(
+        {(pair["previous"], pair["current"]) for pair in modified_pairs}
+    ) == 189
+    assert _digest_payload(modified_pairs) == transition[
+        "modified_pairs_digest"
+    ]
+
+    inventory = inventory_module.build_inventory(ROOT)
+    baseline = json.loads(
+        (ROOT / "audit" / "ANOMALIES_BASELINE.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    comparison = inventory_module._compare_anomaly_debt(
+        inventory_module._current_active_debt(inventory),
+        baseline["active"],
+        baseline["resolved"],
+    )
+    assert modified_pairs == comparison["modified"]
     assert set(payload["owners"]) == {
         "direction_scientifique_programme",
         "direction_editoriale_pedagogique",
@@ -470,8 +487,8 @@ def test_repository_approved_set_has_exact_category_and_owner_counts(
         )
     }
 
-    assert len(current_entries) == 981
-    assert plan["approved_fingerprint_count"] == 981
+    assert len(current_entries) == 189
+    assert plan["approved_fingerprint_count"] == 189
     assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
     ]
@@ -503,13 +520,13 @@ def test_materialization_plan_preserves_history_and_emits_all_required_fields(
         observed_model_digest=inventory_module._model_digest(inventory),
     )
 
-    assert plan["approved_fingerprint_count"] == 981
+    assert plan["approved_fingerprint_count"] == 189
     assert plan["approved_fingerprint_digest"] == policy["approved_set"][
         "fingerprint_digest"
     ]
     assert plan["unqualified"] == []
     payload = plan["dispositions_payload"]
-    assert len(payload["dispositions"]) == 3628
+    assert len(payload["dispositions"]) == 3817
     required = {
         "approved_by",
         "baseline_sha",

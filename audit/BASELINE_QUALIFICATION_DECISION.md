@@ -286,3 +286,56 @@ Digests observés avant matérialisation :
 
 - source : `sha256:590c51801b32a6661878de7956d1752b9f027bf2cd65ba2605e8120b682d91d3` ;
 - modèle : `sha256:8db8abe9a2882c827f4aee55f7584f082f1ea7f31647783e7f52697443055d22`.
+
+---
+
+<a id="decision-baseline-status-governance-1nsi-2026-08-10"></a>
+
+## Réconciliation approuvée après gouvernance des statuts 1NSI
+
+| Champ | Valeur |
+|---|---|
+| Identifiant | `baseline-status-governance-1nsi-2026-08-10` |
+| Date | 10 août 2026 |
+| Branche | `finalisation/collection-v1` |
+| HEAD observé | `afae475ee06e8510804c0065ccfd35dfa0199875` |
+| `baseline_purpose` | `debt_regression_control` |
+| `release_acceptance` | `false` |
+| Approbateur | Alaeddine Ben Rhouma |
+| Rôle | Direction scientifique et éditoriale Nexus Réussite |
+
+L’instruction humaine « traiter séparément la gouvernance des 349 statuts »
+autorise exclusivement la réconciliation mécanique des empreintes modifiées par
+les 189 transitions de statut 1NSI déjà auditées. Les 189 nouvelles empreintes
+restent `open_debt`, bloquantes pour la release, et sont verrouillées par
+`sha256:6a994806a4a3b8c710fb0eb2e089e90e8666543b3380e4ccf0cf5268500f86ca` :
+
+- `blocking_statuses` : 189 ;
+- `direction_scientifique_programme` : 179 ;
+- `direction_editoriale_pedagogique` : 10.
+
+La transition exacte part d’une baseline de 2 986 empreintes actives et 642
+empreintes résolues, d’empreinte
+`sha256:ebe9580cae8f994a19bb82960762a845c19e2c9a6e006aae244dcebc26ca3bbb`.
+Elle conserve 2 677 empreintes inchangées, remplace 189 empreintes de statut et
+archive 309 anciennes empreintes dans `resolved`, pour un état final de 2 866
+empreintes actives et 951 résolues. Le jeu résolu est verrouillé par
+`sha256:b652287acfa1d91c62446b1dc3f251b46980ca6363968a14733b3e2e91bf3631` :
+
+- 189 anciennes empreintes `blocking_statuses`, appariées aux 189 nouvelles ;
+- 109 `unassembled_objects`, désormais intégrés aux variantes canoniques 1NSI ;
+- 10 `chapters_not_in_manual`, désormais intégrés au manuel 1NSI ;
+- 1 `missing_assemblers`, l’assembleur 1NSI étant désormais présent.
+
+Les 189 paires sont listées intégralement dans la politique et verrouillées par
+`sha256:b744f797cb072e7c1200b5e8c87a2ef7b16076578e53e1e70e15b764988ea3e0`.
+Cette décision ne modifie aucune source TNSI, n’approuve aucun contenu
+scientifique, réglementaire, pédagogique, éditorial ou visuel, ne lève aucun P0
+et n’autorise aucune publication. Les 349 statuts 1NSI restent bloquants,
+`release_acceptance` reste `false` et la collection demeure **NO-GO
+publication**.
+
+Digests observés avant matérialisation :
+
+- source : `sha256:8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81` ;
+- modèle : `sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548`.

@@ -135,48 +135,36 @@
       ],
       "properties": {
         "baseline_sha": {
-          "const": "a48e8e41fc3f6ef9274e564722d5155c8df401b7"
+          "const": "afae475ee06e8510804c0065ccfd35dfa0199875"
         },
         "category_counts": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "blocking_statuses",
-            "broken_meta_references",
-            "chapters_not_in_manual",
-            "unassembled_objects",
-            "unclassified_types"
-          ],
+          "required": ["blocking_statuses"],
           "properties": {
-            "blocking_statuses": { "const": 875 },
-            "broken_meta_references": { "const": 2 },
-            "chapters_not_in_manual": { "const": 15 },
-            "unassembled_objects": { "const": 82 },
-            "unclassified_types": { "const": 7 }
+            "blocking_statuses": { "const": 189 }
           }
         },
-        "fingerprint_count": { "const": 981 },
+        "fingerprint_count": { "const": 189 },
         "fingerprint_digest": {
-          "const": "sha256:e2ec8130f85f690eda663ac556b61e63ffd7d98e422c71f0245b10112161887f"
+          "const": "sha256:6a994806a4a3b8c710fb0eb2e089e90e8666543b3380e4ccf0cf5268500f86ca"
         },
         "observed_model_digest_before_materialization": {
-          "const": "sha256:8db8abe9a2882c827f4aee55f7584f082f1ea7f31647783e7f52697443055d22"
+          "const": "sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548"
         },
         "observed_source_digest_before_materialization": {
-          "const": "sha256:590c51801b32a6661878de7956d1752b9f027bf2cd65ba2605e8120b682d91d3"
+          "const": "sha256:8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81"
         },
         "owner_counts": {
           "type": "object",
           "additionalProperties": false,
           "required": [
             "direction_editoriale_pedagogique",
-            "direction_scientifique_programme",
-            "ingenierie_build_qualite"
+            "direction_scientifique_programme"
           ],
           "properties": {
-            "direction_editoriale_pedagogique": { "const": 98 },
-            "direction_scientifique_programme": { "const": 752 },
-            "ingenierie_build_qualite": { "const": 131 }
+            "direction_editoriale_pedagogique": { "const": 10 },
+            "direction_scientifique_programme": { "const": 179 }
           }
         }
       }
@@ -197,54 +185,43 @@
         "retained_fingerprint_count"
       ],
       "properties": {
-        "final_active_fingerprint_count": { "const": 2986 },
-        "initial_active_fingerprint_count": { "const": 2647 },
+        "final_active_fingerprint_count": { "const": 2866 },
+        "initial_active_fingerprint_count": { "const": 2986 },
         "initial_baseline_digest": {
-          "const": "sha256:714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff"
+          "const": "sha256:ebe9580cae8f994a19bb82960762a845c19e2c9a6e006aae244dcebc26ca3bbb"
         },
-        "initial_resolved_fingerprint_count": { "const": 0 },
+        "initial_resolved_fingerprint_count": { "const": 642 },
         "modified_pairs": {
-          "const": [
-            {
-              "current": "3276d95a8a9b8142",
-              "previous": "9873ab6a1e11c673"
-            },
-            {
-              "current": "d51832bdeebf5d4a",
-              "previous": "63548ddb4dd6b1dd"
-            },
-            {
-              "current": "a96d99c614321acc",
-              "previous": "8fdec12020b7159b"
-            }
-          ]
+          "type": "array",
+          "minItems": 189,
+          "maxItems": 189,
+          "items": { "$ref": "#/$defs/modified_pair" },
+          "uniqueItems": true
         },
         "modified_pairs_digest": {
-          "const": "sha256:eaa22aa607e9a9616f251cee24e8b639e9c958c639aac353b13fd01e18836dd1"
+          "const": "sha256:b744f797cb072e7c1200b5e8c87a2ef7b16076578e53e1e70e15b764988ea3e0"
         },
         "resolved_category_counts": {
           "type": "object",
           "additionalProperties": false,
           "required": [
             "blocking_statuses",
-            "broken_meta_references",
             "chapters_not_in_manual",
             "missing_assemblers",
             "unassembled_objects"
           ],
           "properties": {
-            "blocking_statuses": { "const": 3 },
-            "broken_meta_references": { "const": 24 },
-            "chapters_not_in_manual": { "const": 3 },
+            "blocking_statuses": { "const": 189 },
+            "chapters_not_in_manual": { "const": 10 },
             "missing_assemblers": { "const": 1 },
-            "unassembled_objects": { "const": 611 }
+            "unassembled_objects": { "const": 109 }
           }
         },
-        "resolved_fingerprint_count": { "const": 642 },
+        "resolved_fingerprint_count": { "const": 309 },
         "resolved_fingerprint_digest": {
-          "const": "sha256:44397de4c98d70ce3575c04ea37322a403a29a3468bd29a23bffc938ed4908fc"
+          "const": "sha256:b652287acfa1d91c62446b1dc3f251b46980ca6363968a14733b3e2e91bf3631"
         },
-        "retained_fingerprint_count": { "const": 2005 }
+        "retained_fingerprint_count": { "const": 2677 }
       }
     },
     "decision": {
@@ -265,10 +242,10 @@
           "const": "Direction scientifique et éditoriale Nexus Réussite"
         },
         "baseline_purpose": { "const": "debt_regression_control" },
-        "id": { "const": "baseline-debt-extension-collection-2026-08-08" },
+        "id": { "const": "baseline-status-governance-1nsi-2026-08-10" },
         "provisional_after_freeze": { "const": false },
         "ref": {
-          "const": "audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-debt-extension-collection-2026-08-08"
+          "const": "audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-status-governance-1nsi-2026-08-10"
         },
         "release_acceptance": { "const": false }
       }
@@ -350,6 +327,15 @@
           }
         }
       ]
+    },
+    "modified_pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current", "previous"],
+      "properties": {
+        "current": { "type": "string", "pattern": "^[0-9a-f]{16}$" },
+        "previous": { "type": "string", "pattern": "^[0-9a-f]{16}$" }
+      }
     },
     "non_empty_string": { "type": "string", "minLength": 1 },
     "owner": {

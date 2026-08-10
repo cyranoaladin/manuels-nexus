@@ -7,52 +7,418 @@ allowed_dispositions:
   - accepted_exception
   - fixed
 approved_set:
-  baseline_sha: a48e8e41fc3f6ef9274e564722d5155c8df401b7
+  baseline_sha: afae475ee06e8510804c0065ccfd35dfa0199875
   category_counts:
-    blocking_statuses: 875
-    broken_meta_references: 2
-    chapters_not_in_manual: 15
-    unassembled_objects: 82
-    unclassified_types: 7
-  fingerprint_count: 981
-  fingerprint_digest: sha256:e2ec8130f85f690eda663ac556b61e63ffd7d98e422c71f0245b10112161887f
-  observed_model_digest_before_materialization: sha256:8db8abe9a2882c827f4aee55f7584f082f1ea7f31647783e7f52697443055d22
-  observed_source_digest_before_materialization: sha256:590c51801b32a6661878de7956d1752b9f027bf2cd65ba2605e8120b682d91d3
+    blocking_statuses: 189
+  fingerprint_count: 189
+  fingerprint_digest: sha256:6a994806a4a3b8c710fb0eb2e089e90e8666543b3380e4ccf0cf5268500f86ca
+  observed_model_digest_before_materialization: sha256:f273dd51de99b09c8ef3846c2974556ed9ce11a8cc5e8cc8cfb0820d42e51548
+  observed_source_digest_before_materialization: sha256:8fda81f750904276cff25878f84fb196ac3f1b26c30c62ec054f2f09ab691b81
   owner_counts:
-    direction_editoriale_pedagogique: 98
-    direction_scientifique_programme: 752
-    ingenierie_build_qualite: 131
+    direction_editoriale_pedagogique: 10
+    direction_scientifique_programme: 179
 approved_transition:
-  final_active_fingerprint_count: 2986
-  initial_active_fingerprint_count: 2647
-  initial_baseline_digest: sha256:714c859e7a56e8034e16b3d5c6beeee350848594351076ac256764c180e2e9ff
-  initial_resolved_fingerprint_count: 0
+  final_active_fingerprint_count: 2866
+  initial_active_fingerprint_count: 2986
+  initial_baseline_digest: sha256:ebe9580cae8f994a19bb82960762a845c19e2c9a6e006aae244dcebc26ca3bbb
+  initial_resolved_fingerprint_count: 642
   modified_pairs:
-    - current: 3276d95a8a9b8142
-      previous: 9873ab6a1e11c673
-    - current: d51832bdeebf5d4a
-      previous: 63548ddb4dd6b1dd
-    - current: a96d99c614321acc
-      previous: 8fdec12020b7159b
-  modified_pairs_digest: sha256:eaa22aa607e9a9616f251cee24e8b639e9c958c639aac353b13fd01e18836dd1
+    - current: eb78f3b442b4bd4a
+      previous: 5c47f5c8d7fced25
+    - current: 2e8a939e5d97ef97
+      previous: 52f2a223b6752322
+    - current: 39c8c115731b4ea6
+      previous: f2191299cc732569
+    - current: 0ee757161c71ce58
+      previous: 4a8ef72fe24e6020
+    - current: 3a4144869aa335c4
+      previous: 858a4f856cf133ea
+    - current: bfcd7e83e4eaf799
+      previous: b4436b18bb119e26
+    - current: fc05af58b9ac2eb0
+      previous: bf064c83f3ecc034
+    - current: 5f038baa434acbf3
+      previous: 1a8f05002cf28f99
+    - current: 014d2ff9b1a09587
+      previous: eaf6cf597437766f
+    - current: 07ebb851118cee15
+      previous: 128c0274d146eba2
+    - current: 7fd36f948da1bf67
+      previous: eaf3e5a7bde8b2d5
+    - current: 7eaf948ed2bd548a
+      previous: 617c736e65499e03
+    - current: 32ec417b3d62bd60
+      previous: dc3c6c92b491baae
+    - current: 11ae381f7b000064
+      previous: 08127113deb1e809
+    - current: fe9e625871f51790
+      previous: 7a5299db215b3686
+    - current: f6443ecadae2fb5a
+      previous: da5258f08e1e9f43
+    - current: 0f6d9b397d5b7903
+      previous: edd5dbfd6572fd37
+    - current: d2fe7538e2b83f20
+      previous: 17f4178f3a1bec5e
+    - current: ad544a6079ef7773
+      previous: 03cd17377db9ba61
+    - current: 08032f055ed86946
+      previous: 0775aea704dcaf2b
+    - current: 5e59d1fcf5b054aa
+      previous: e7d97357dbc7c8f2
+    - current: 6fc5e1aea0982c84
+      previous: db2afb52872c3a33
+    - current: 628a0ae76300fb6f
+      previous: 18fc71323f51959c
+    - current: 9e1f5e94c31fdea5
+      previous: d4053db0a64065d3
+    - current: 9f8b03c8cf207694
+      previous: 691fcd0338aa9410
+    - current: 2e10a1fa5e61ca58
+      previous: 7e378283bf5bd10b
+    - current: b1b11f28b3c73674
+      previous: 0978c2bfe769f6a0
+    - current: a4d85ea8ddf56111
+      previous: fb57773ab178474b
+    - current: e3f94eee205675b2
+      previous: f0ef585771c7da47
+    - current: 760dd470d22f772c
+      previous: 262f6fa301b6f656
+    - current: 0af04017fed4737f
+      previous: 56f247cb663f781c
+    - current: e0ba62172b638934
+      previous: 133aac175df1940f
+    - current: 4686bd1f406b8183
+      previous: 402dab9d28b1a86a
+    - current: af246e507894e771
+      previous: 063ef819bc740810
+    - current: dcc356fd36c1f24a
+      previous: 85fd5d2bc33f2dee
+    - current: 328000ecdd540a1a
+      previous: 049eb6eaadb2ea68
+    - current: 3590d1dbf73db60c
+      previous: 009adfcd492292db
+    - current: 3fcbbb555620d4c5
+      previous: 941461d27ec7ae64
+    - current: 63c728f63b2c0015
+      previous: f23e7fb0dc13ef1e
+    - current: ac9ea077ad841eeb
+      previous: 9be6e482f97ac60c
+    - current: 62bb8d254350f0bf
+      previous: bd5a3a428317ea6d
+    - current: 11cb430618acdf4f
+      previous: 832e4b39191427f1
+    - current: 8e0b9993c2b44ec2
+      previous: 79218b6e9838a1da
+    - current: 5bbdeab0c734f0a9
+      previous: 68a01f48f0cde4a0
+    - current: 63c352c027ade6c7
+      previous: 9b80c030488736de
+    - current: 99491b4155c02893
+      previous: f158bb361ad86f19
+    - current: d73a694bd1419c38
+      previous: 458d607b2f0a2d55
+    - current: 69a74a151acee939
+      previous: 3849124d502ada53
+    - current: 8646bd4142bdecf7
+      previous: 6cc2c82edf7a835b
+    - current: 9bff5ced77d45bea
+      previous: 763e91bfeecc81c1
+    - current: 5209046b49392348
+      previous: 1d9c9684ab3ef8df
+    - current: e69de15261f6b4c9
+      previous: 8faed3e7062e4e41
+    - current: 69f3a3356d04d605
+      previous: bda49984f79e2d10
+    - current: 0ee9b54a1255d2ed
+      previous: aa28841f50427fc4
+    - current: d267c32e0e57df47
+      previous: dc318c082f75ea62
+    - current: 52aa18b48ff8d956
+      previous: 1b7ad6f000dc6796
+    - current: 38122d989752b49f
+      previous: 04edbb6c9ac01f06
+    - current: dccfc957133798d9
+      previous: 7d74105d1e60f851
+    - current: b0ad9e2f93010963
+      previous: 96f0a7f9d713a835
+    - current: b2ac11e5b79becc9
+      previous: 7de10d2bde6517e8
+    - current: a3dbab00c2d1c7b7
+      previous: 66c197c8ab75de62
+    - current: 51da03b12b8aba41
+      previous: 05c475a831b85b9a
+    - current: ef7dc834494e2f98
+      previous: fbba2cbf074c41b6
+    - current: f581aa6c13c690bc
+      previous: 082aed2203996b37
+    - current: bdc5c92e369dff21
+      previous: 8bb3d37662d88f07
+    - current: da4d4554a771466d
+      previous: a2010567e9f546b2
+    - current: 85b72429726df55b
+      previous: 0f969d78f9cd7e25
+    - current: 261ddee53bbc84e7
+      previous: 4eeb1b11edefb012
+    - current: 4e23ad2512e8af7b
+      previous: e7134d7f24fd6553
+    - current: d6f5d12f61f1dcd8
+      previous: c885732f1f6e82cd
+    - current: 7073dabc885e3443
+      previous: ea1a3c1a5ed798df
+    - current: 81d3b82785828723
+      previous: 1b1f6cb1331e215e
+    - current: cd3535157cd19bff
+      previous: 5a660e28cce3e48a
+    - current: d80e3ed3271e5888
+      previous: 2502551aedb97e8c
+    - current: 8b5e5ae0fc95fa18
+      previous: 941378a22e50f380
+    - current: 4b88e346f28d3e35
+      previous: 0f0cd7781ac166cb
+    - current: 12d9ec751510ae57
+      previous: b2935c72a5feb75e
+    - current: 87b5968915a5b34a
+      previous: f381f1555fa366bf
+    - current: 6ea8c44eac8eca8a
+      previous: 2938b3b10793d4d5
+    - current: fb13e63d28ecc255
+      previous: 4d7aed2639f11689
+    - current: 1b15fd5dd34ce94f
+      previous: feed10d05e3d569c
+    - current: 0a50e40cea63c7ec
+      previous: d6836ce0fbaec26a
+    - current: 27aacd3da26af224
+      previous: 9846727700a863e6
+    - current: c1412a811ad29bcf
+      previous: cb29b84870933ed8
+    - current: 63017d35d61986d3
+      previous: b6828b145db111fa
+    - current: 697123c2a315a095
+      previous: d50eccd8486922e0
+    - current: bceeb8ff9e256f2f
+      previous: d0641411ee0ead72
+    - current: b175828ac2c8acfa
+      previous: bb2cd52a2ae9a10e
+    - current: 99570ce5befd6f4c
+      previous: 20c8f5945296b7c6
+    - current: fe6d06271905897d
+      previous: f3cb5ab9a6f79f19
+    - current: 08ccabe5e9222561
+      previous: d0f945696036bd54
+    - current: 6605c9babfa1e2df
+      previous: a7d767be5a37e966
+    - current: 1171b31e6f3298fd
+      previous: 8fc1962338d3fc9c
+    - current: 05c8c175399c41b1
+      previous: edd801ef6b576cbc
+    - current: eeb693ccc6012ac1
+      previous: 97e6bd8594b5711a
+    - current: 5365da217f5c5530
+      previous: 2eaaf91c1f68e042
+    - current: c0c9046ff5a55ad4
+      previous: b36193c87feea403
+    - current: 621efa467d2adeda
+      previous: ce1b1c532c93ef31
+    - current: ca45b54ae1920a8c
+      previous: 0e20dd5e582232e4
+    - current: 9645ea62a6fc85d6
+      previous: 2828f04a10bf1f52
+    - current: f8eb410367e02ad0
+      previous: 27bc5e678ec8b05e
+    - current: 1a2c1217071af8cd
+      previous: f5564fee066bcf82
+    - current: fb60859cdbf60726
+      previous: 8d66dc40f5adcb01
+    - current: 6f8b4c817b585180
+      previous: 83ee33949f5290a8
+    - current: 0331d80210909b32
+      previous: 81bda57d29101a8a
+    - current: 5395f4f77b08042c
+      previous: 97a3849ab42a2f53
+    - current: 75e3e2a99d1f09cb
+      previous: b37ad3a0365c88ad
+    - current: b3a25b1dd06157d6
+      previous: 22e3d72417068fed
+    - current: 6c8730e5f49c0baa
+      previous: 2d7e3c97e8cf5662
+    - current: fb131d2b3eee6e70
+      previous: d8958feadeee39a1
+    - current: e367c1090c45bc35
+      previous: d8beede50322577e
+    - current: 050f16e344c936ac
+      previous: 510b340d6bb0dd69
+    - current: aff1ecf43ef4d685
+      previous: b9ece3a808b51a97
+    - current: 4b46694d86b621dc
+      previous: 1c14e2225bff8f3f
+    - current: 23db62f7e331e106
+      previous: 39452d62d490dcb6
+    - current: 808d488ba4be867d
+      previous: 02cbb402c6988344
+    - current: 9c739a842ae8564a
+      previous: e4bff9ee319bdd08
+    - current: b6321ec1d6f562cd
+      previous: 53aa755c6f749f79
+    - current: 762051a8ca3440e1
+      previous: b60ab35b7ef2b3ad
+    - current: f2671393d0fe5014
+      previous: 48e84a7333b5703b
+    - current: 99555e730738e173
+      previous: cd64af47d51b2f2c
+    - current: a9d56cfbf1f22224
+      previous: 036f84410cce112a
+    - current: 7440135a1476ff96
+      previous: 3abe1c5d8065fa42
+    - current: e15748db24bcdcf5
+      previous: db9c6f512f069f00
+    - current: bd9a2fa1278d324a
+      previous: 7148ad46ca3cdddc
+    - current: 068beb7c3d817bc4
+      previous: 1ce6c295a28602a5
+    - current: 3ca9968df0262175
+      previous: 82b90baf4a959103
+    - current: 35edfb0d03bc0ebc
+      previous: 64a8202574b1c1b8
+    - current: 6dc75770a3c6c265
+      previous: 3f6a153b7c87db43
+    - current: 7b1ede47c0a420c9
+      previous: 928cac04bdeb9878
+    - current: 81c8316b2330e48e
+      previous: 079e4f0b35e7546f
+    - current: d9b8aea842a64dcb
+      previous: 05eee1a55839720b
+    - current: 443f7941ed8144e7
+      previous: 7172d6624b892ce0
+    - current: d98a677a5c49c0e1
+      previous: 3ae4326ee4e73644
+    - current: 4aa59422a94c46ac
+      previous: 278713b85a7bafb6
+    - current: 300195544a51fa1d
+      previous: 17ebb4868467d079
+    - current: ec984e221e4f145c
+      previous: 223b87daa0d85328
+    - current: 8480e5392e34403a
+      previous: d2fbc3a0913a2727
+    - current: 543a2322dbc09a19
+      previous: 8215258789fd5a5f
+    - current: 419ca6022b2173ef
+      previous: 66e68b20298acb48
+    - current: a7c673e08264fa1a
+      previous: c568570d51f719bd
+    - current: d3148742fc1af66a
+      previous: 40d1f0e3c77380be
+    - current: 23e39d943106a25a
+      previous: 7524d8b89c9395e7
+    - current: 25a4b9f6f1de35ef
+      previous: 8e878fa67d2463a5
+    - current: 1e3b22a9039bca38
+      previous: 1e58fa37cff21e07
+    - current: 2d2f0b6e7b77a90f
+      previous: 7382f1ed0704d10a
+    - current: ba9281532580ceb9
+      previous: e782ae471a5132be
+    - current: 84bd64f1bffc20a3
+      previous: a8fad2b85af815be
+    - current: 8f597012d592c587
+      previous: dd0f05624ed3dd6e
+    - current: 9f9b7c00e942c0b7
+      previous: 1f35f52ff1bb6de6
+    - current: e7d38fcaa268d83d
+      previous: a21444ba970b5e4a
+    - current: 3935124872489a17
+      previous: 376a8d97ad074049
+    - current: e2fdc00ca0a96d3e
+      previous: ff28595d4aa9b19f
+    - current: 4100a0082227bba6
+      previous: 3e9cf6cf763cb0ed
+    - current: 5ebc8ac8bd6da3c1
+      previous: 76f4ed94ad677e82
+    - current: dff0c817cc6bd9e6
+      previous: 5e8b794eb2e77934
+    - current: 49549dd17050cbd4
+      previous: e5a397386adad4fc
+    - current: 85aa39ad8a1e091d
+      previous: 240b40cbf94ac157
+    - current: cad4f06e4c54dd44
+      previous: 9be057457bcfd573
+    - current: d0bf0618d5dffc26
+      previous: 89391b93edeee86f
+    - current: 0b495bb15ba9e83e
+      previous: a0d843aa3c38c91e
+    - current: f8713da24f6d64fd
+      previous: cfce845226443d37
+    - current: ec1ba0f6bd9017bd
+      previous: aeda5f51477e0805
+    - current: ddfc07f98c97b51d
+      previous: 8340cd07cf506986
+    - current: 765afcbcd9ee03cc
+      previous: bff76d1c0b789637
+    - current: 86ba84f83d9372c1
+      previous: 658920242707d12b
+    - current: c882ee2ec8bb339b
+      previous: b81784601456bd77
+    - current: 4b1c9fbea14b76d7
+      previous: 2f2740c0face3b5c
+    - current: 07c46dcba0778f44
+      previous: 9c27dee0483bf65b
+    - current: 0a39abb9f6cfee7c
+      previous: 5304dd658544e8ff
+    - current: 909ad1b88979fff5
+      previous: 06f3ef3125048d09
+    - current: 4cc3cfb43e53c1f8
+      previous: 40688e9312f46f74
+    - current: 956cb4997eb9797a
+      previous: 4dcae2dd175dff90
+    - current: 359674c7019149bd
+      previous: ada15afc4aa655d3
+    - current: 744698bd77d354bc
+      previous: 74bf57bc1ae81703
+    - current: 1db985a12ada3bfb
+      previous: d388784e4220a27f
+    - current: 84ee6c2985a179c4
+      previous: c973cee42710aa96
+    - current: 1d97b02b58fc6909
+      previous: 1526c6b29d6a459a
+    - current: 9c07d129fd566c22
+      previous: c8b501467835bcfb
+    - current: 201af78b693deed0
+      previous: 478b4e11a7bc35ec
+    - current: e409738036f8c59f
+      previous: a6117f9a11cba91e
+    - current: 9feffc6fdea55977
+      previous: 1486d9fbe6e717ee
+    - current: 1505cb47646cd947
+      previous: 78e0684b30a5cceb
+    - current: 1063d7b37c352c72
+      previous: db6a283782f123e8
+    - current: 36ffbf0ea6a7bc15
+      previous: 4e5522b9c540c64c
+    - current: 360906d89a1c2548
+      previous: b8e9b34cf9b31f8f
+    - current: b0ff408c6853137b
+      previous: f070261b56b709d0
+    - current: b40cc33fbf681b46
+      previous: 227ec2d7672ef1fe
+    - current: 5900a200f473a901
+      previous: 8be469c025ed23eb
+  modified_pairs_digest: sha256:b744f797cb072e7c1200b5e8c87a2ef7b16076578e53e1e70e15b764988ea3e0
   resolved_category_counts:
-    blocking_statuses: 3
-    broken_meta_references: 24
-    chapters_not_in_manual: 3
+    blocking_statuses: 189
+    chapters_not_in_manual: 10
     missing_assemblers: 1
-    unassembled_objects: 611
-  resolved_fingerprint_count: 642
-  resolved_fingerprint_digest: sha256:44397de4c98d70ce3575c04ea37322a403a29a3468bd29a23bffc938ed4908fc
-  retained_fingerprint_count: 2005
+    unassembled_objects: 109
+  resolved_fingerprint_count: 309
+  resolved_fingerprint_digest: sha256:b652287acfa1d91c62446b1dc3f251b46980ca6363968a14733b3e2e91bf3631
+  retained_fingerprint_count: 2677
 artifact_type: baseline_qualification_policy
-control_digest: sha256:e3cceb1c434a6f35e9a71f2115836bdf6fdb6ff243c5330b007c0a93da6e1c22
+control_digest: sha256:34341425e865bb72129064438631fe3ae9af3a78dd0b647b5b7276bdabee77a9
 decision:
   approved_by: Alaeddine Ben Rhouma
   approver_role: Direction scientifique et éditoriale Nexus Réussite
   baseline_purpose: debt_regression_control
-  id: baseline-debt-extension-collection-2026-08-08
+  id: baseline-status-governance-1nsi-2026-08-10
   provisional_after_freeze: false
-  ref: audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-debt-extension-collection-2026-08-08
+  ref: audit/BASELINE_QUALIFICATION_DECISION.md#decision-baseline-status-governance-1nsi-2026-08-10
   release_acceptance: false
 initial_policy:
   prohibited_outputs:
