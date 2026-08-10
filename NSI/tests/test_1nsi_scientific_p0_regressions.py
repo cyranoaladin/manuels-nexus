@@ -5,13 +5,20 @@ import importlib.util
 import io
 import re
 import runpy
+import subprocess
 from pathlib import Path
+
+import pytest
 
 
 NSI_ROOT = Path(__file__).resolve().parents[1]
 REPO_ROOT = NSI_ROOT.parent
 COURSE = NSI_ROOT / "chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C4.tex"
 PYTHON_SOURCE = NSI_ROOT / "chapitres/1NSI-LANGAGE/code/maximum_bugue.py"
+MINIMUM_CORRECTION = (
+    NSI_ROOT / "chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex"
+)
+MINIMUM_SOURCE = NSI_ROOT / "chapitres/1NSI-LANGAGE/code/minimum.py"
 REVIEW_SCRIPT = REPO_ROOT / "scripts/review_1nsi_content.py"
 
 _REVIEW_SPEC = importlib.util.spec_from_file_location(
@@ -129,3 +136,76 @@ def test_maximum_zero_condition_includes_zero_for_nonempty_lists() -> None:
     assert "[-5, 0, -8]" in error_text
     assert "[-5, -1, -8]" in error_text
     assert "contient au moins une valeur positive" not in error_text
+
+
+def test_minimum_canonical_source_rejects_empty_list_and_matches_correction() -> None:
+    assert MINIMUM_CORRECTION.is_file()
+    assert MINIMUM_SOURCE.is_file()
+
+    stdout = io.StringIO()
+    with contextlib.redirect_stdout(stdout):
+        namespace = runpy.run_path(str(MINIMUM_SOURCE))
+    assert stdout.getvalue() == ""
+
+    minimum = namespace["minimum"]
+    assert minimum([5, 3, 8]) == 3
+    assert minimum([42]) == 42
+    assert minimum([-5, -1, -8]) == -8
+    with pytest.raises(AssertionError):
+        minimum([])
+
+    source_code = MINIMUM_SOURCE.read_text(encoding="utf-8")
+    tex = MINIMUM_CORRECTION.read_text(encoding="utf-8")
+    sequence = re.compile(
+        r"(?m)^% PYTHON-SOURCE: code/minimum\.py\n"
+        r"\\begin\{python\}(?P<python>.*?)\\end\{python\}",
+        re.DOTALL,
+    )
+    matches = list(sequence.finditer(tex))
+    assert len(matches) == 1, "la sequence Python marquee doit etre unique"
+    assert matches[0].group("python") == f"\n{source_code}"
+
+    correction_record = {
+        "id": "1NSI-LANGAGE-RE-C4-CORRIGE",
+        "path": "NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex",
+        "metadata": {},
+        "scope": "object",
+        "chapter": "1NSI-LANGAGE",
+    }
+    manifest = review_module.dependency_manifest(
+        correction_record, [correction_record], REPO_ROOT
+    )
+    assert manifest["python"] == [
+        {
+            "path": "NSI/chapitres/1NSI-LANGAGE/code/minimum.py",
+            "sha256": "sha256:"
+            + hashlib.sha256(source_code.encode("utf-8")).hexdigest(),
+        }
+    ]
+
+    assert '"type_objet": "corrige"' in tex.splitlines()[0]
+    assert "Precondition : liste est non vide" in tex
+    assert "AssertionError" in tex
+    assert re.search(
+        r"% BEGIN-VERIFY\n"
+        r"% def minimum\(liste\):.*?"
+        r"% assert minimum\(\[5, 3, 8\]\) == 3.*?"
+        r"% try:.*?"
+        r"%     minimum\(\[\]\).*?"
+        r"% except AssertionError:.*?"
+        r"%     pass.*?"
+        r"% else:.*?"
+        r"%     raise AssertionError.*?"
+        r"% END-VERIFY",
+        tex,
+        re.DOTALL,
+    )
+
+    verification = subprocess.run(
+        ["python", "scripts/verify_python.py", "--chap", "1NSI-LANGAGE", "--check"],
+        cwd=NSI_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert verification.returncode == 0, verification.stdout + verification.stderr
