@@ -115,10 +115,60 @@ print(grille)              # [[99, 2], [3, 4]]; modifié !
 % [[99, 2], [3, 4]]
 % END-TRACE
 
-\erreurFrequente{Copier une liste imbriquée seulement au premier niveau (EF4).
-Avec \lstinline{list(grille)}, les sous-listes restent partagées.
-Pour une copie profonde, copier chaque sous-liste :
-\lstinline{[list(ligne) for ligne in grille]}.}
+\erreurFrequente{Présenter \lstinline{[list(ligne) for ligne in grille]} comme une
+copie profonde générale. Cette compréhension réalise seulement une
+\textbf{copie des deux premiers niveaux} : la liste externe et chaque ligne.
+Son contrat est le suivant : les \textbf{cellules sont des valeurs scalaires atomiques
+non mutables}, par exemple de type \lstinline{int}, \lstinline{float},
+\lstinline{bool} ou \lstinline{str} ; les conteneurs imbriqués sont exclus.
+Elle ne constitue pas une copie profonde générale.}
+
+% PYTHON-SOURCE: code/copier_grille_deux_niveaux.py
+\begin{codereference}{Copier une grille sous un contrat à deux niveaux}
+\begin{python}
+def copier_grille_deux_niveaux(grille):
+    """Copie la liste externe et chaque ligne.
+
+    Precondition : les cellules sont des valeurs scalaires atomiques non mutables,
+    sans conteneur imbrique.
+    """
+    return [list(ligne) for ligne in grille]
+\end{python}
+\end{codereference}
+
+\propriete[Deux niveaux distincts]{Pour la grille numérique
+\lstinline{grille = [[1, 2], [3, 4]]}, la fonction crée une nouvelle liste externe
+et une nouvelle liste pour chaque ligne. La copie a les mêmes valeurs, mais ses
+lignes sont des objets distincts : réaffecter \lstinline{copie[0][0] = 99} ne
+modifie pas \lstinline{grille}, qui reste égale à \lstinline{[[1, 2], [3, 4]]}.
+}
+
+\contreexemple{Hors contrat, avec \lstinline{[[[1]]]}, la cellule est elle-même
+une liste mutable. La fonction copie la liste externe et sa ligne, mais cette
+cellule-liste reste partagée : lui ajouter \lstinline{2} par la copie modifie aussi
+la grille d'origine, qui devient \lstinline{[[[1, 2]]]}.}
+
+% BEGIN-VERIFY
+% def copier_grille_deux_niveaux(grille):
+%     """Copie la liste externe et chaque ligne.
+%
+%     Precondition : les cellules sont des valeurs scalaires atomiques non mutables,
+%     sans conteneur imbrique.
+%     """
+%     return [list(ligne) for ligne in grille]
+% grille = [[1, 2], [3, 4]]
+% copie = copier_grille_deux_niveaux(grille)
+% assert copie == grille
+% assert copie is not grille
+% assert all(ligne_copie is not ligne for ligne_copie, ligne in zip(copie, grille))
+% copie[0][0] = 99
+% assert grille == [[1, 2], [3, 4]]
+% hors_contrat = [[[1]]]
+% copie_hors_contrat = copier_grille_deux_niveaux(hors_contrat)
+% assert copie_hors_contrat[0][0] is hors_contrat[0][0]
+% copie_hors_contrat[0][0].append(2)
+% assert hors_contrat == [[[1, 2]]]
+% END-VERIFY
 
 \begin{codereference}{Effet de bord dans une fonction}
 \begin{python}

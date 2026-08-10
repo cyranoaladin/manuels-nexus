@@ -44,6 +44,14 @@ TABLE_JOIN_SOURCE = NSI_ROOT / "chapitres/1NSI-TABLES/code/fusionner.py"
 WEB_SERVER_COURSE = (
     NSI_ROOT / "chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex"
 )
+GRID_COPY_COURSE = (
+    NSI_ROOT
+    / "chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex"
+)
+GRID_COPY_SOURCE = (
+    NSI_ROOT
+    / "chapitres/1NSI-TYPES-CONSTRUITS/code/copier_grille_deux_niveaux.py"
+)
 REVIEW_SCRIPT = REPO_ROOT / "scripts/review_1nsi_content.py"
 
 _REVIEW_SPEC = importlib.util.spec_from_file_location(
@@ -600,3 +608,103 @@ def test_server_code_is_normally_not_sent_in_http_response() -> None:
         "générée par leur exécution"
         in property_text
     )
+
+
+def test_grid_course_names_two_level_copy_and_states_atomic_cell_contract() -> None:
+    assert GRID_COPY_COURSE.is_file()
+
+    tex = GRID_COPY_COURSE.read_text(encoding="utf-8")
+    assert "Pour une copie profonde" not in tex
+    assert "copie des deux premiers niveaux" in tex
+    assert "cellules sont des valeurs scalaires atomiques non mutables" in tex
+    assert "les conteneurs imbriqués sont exclus" in tex
+    assert r"\lstinline{[[[1]]]}" in tex
+    assert "ne constitue pas une copie profonde générale" in tex
+
+    assert GRID_COPY_SOURCE.is_file()
+    stdout = io.StringIO()
+    with contextlib.redirect_stdout(stdout):
+        namespace = runpy.run_path(str(GRID_COPY_SOURCE))
+    assert stdout.getvalue() == ""
+
+    copier_grille_deux_niveaux = namespace["copier_grille_deux_niveaux"]
+    grille = [[1, 2], [3, 4]]
+    copie = copier_grille_deux_niveaux(grille)
+    assert copie == grille
+    assert copie is not grille
+    assert all(ligne_copie is not ligne for ligne_copie, ligne in zip(copie, grille))
+    copie[0][0] = 99
+    assert grille == [[1, 2], [3, 4]]
+
+    hors_contrat = [[[1]]]
+    copie_hors_contrat = copier_grille_deux_niveaux(hors_contrat)
+    assert copie_hors_contrat[0][0] is hors_contrat[0][0]
+    copie_hors_contrat[0][0].append(2)
+    assert hors_contrat == [[[1, 2]]]
+
+    source_code = GRID_COPY_SOURCE.read_text(encoding="utf-8")
+    expected_source = '''def copier_grille_deux_niveaux(grille):
+    """Copie la liste externe et chaque ligne.
+
+    Precondition : les cellules sont des valeurs scalaires atomiques non mutables,
+    sans conteneur imbrique.
+    """
+    return [list(ligne) for ligne in grille]
+'''
+    assert source_code == expected_source
+    assert source_code.isascii()
+
+    sequence = re.compile(
+        r"(?m)^% PYTHON-SOURCE: code/copier_grille_deux_niveaux\.py\n"
+        r"\\begin\{codereference\}\{.*?\}\n"
+        r"\\begin\{python\}(?P<python>.*?)\\end\{python\}",
+        re.DOTALL,
+    )
+    matches = list(sequence.finditer(tex))
+    assert len(matches) == 1, "la sequence Python marquee doit etre unique"
+    assert matches[0].group("python") == f"\n{source_code}"
+
+    course_record = {
+        "id": "1NSI-TC-COURS-C5",
+        "path": (
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/"
+            "1NSI-TC-COURS-C5.tex"
+        ),
+        "metadata": {},
+        "scope": "object",
+        "chapter": "1NSI-TYPES-CONSTRUITS",
+    }
+    manifest = review_module.dependency_manifest(
+        course_record, [course_record], REPO_ROOT
+    )
+    assert manifest["python"] == [
+        {
+            "path": (
+                "NSI/chapitres/1NSI-TYPES-CONSTRUITS/code/"
+                "copier_grille_deux_niveaux.py"
+            ),
+            "sha256": "sha256:"
+            + hashlib.sha256(source_code.encode("utf-8")).hexdigest(),
+        }
+    ]
+
+    verify_matches = list(
+        re.finditer(
+            r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY", tex, re.DOTALL
+        )
+    )
+    verify_blocks = [_uncomment(match.group("verify")) for match in verify_matches]
+    matching_blocks = [
+        block
+        for block in verify_blocks
+        if "def copier_grille_deux_niveaux" in block
+    ]
+    assert len(matching_blocks) == 1
+    verify_code = matching_blocks[0]
+    assert verify_code.count(source_code.rstrip("\n")) == 1
+    assert "assert copie is not grille" in verify_code
+    assert "assert all(" in verify_code
+    assert "copie[0][0] = 99" in verify_code
+    assert "assert grille == [[1, 2], [3, 4]]" in verify_code
+    assert "hors_contrat = [[[1]]]" in verify_code
+    assert "is hors_contrat[0][0]" in verify_code
