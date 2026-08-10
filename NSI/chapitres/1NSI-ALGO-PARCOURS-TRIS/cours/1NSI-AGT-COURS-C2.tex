@@ -44,11 +44,13 @@ print(tri_insertion([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]
 
 \propriete[Terminaison et coût]{
   La boucle \lstinline{for} externe s'exécute un nombre \textbf{fixe} de fois
-  ($n-1$ itérations pour un tableau de taille $n$) : elle termine nécessairement. La boucle
-  \lstinline{while} interne termine car $j$ \textbf{décroît strictement} à chaque tour et
-  est bornée par $0$. Dans le \textbf{pire cas} (tableau trié en ordre décroissant), le
-  coût est \textbf{quadratique} ($O(n^2)$) : chaque insertion peut nécessiter de décaler
-  tous les éléments déjà triés.
+  ($\max(n-1,0)$ fois pour un tableau de taille $n$) : elle termine nécessairement. Pour
+  $n\leqslant1$, aucune itération n'est nécessaire : ces tableaux sont déjà triés. Dans la
+  boucle \lstinline{while} interne, avant chaque tour exécuté, $j\geqslant0$ ; le variant
+  entier $j+1$ est donc \textbf{strictement positif} et décroît de $1$. Lorsque $j=-1$,
+  la condition de la boucle devient fausse. Dans le \textbf{pire cas} (tableau trié en
+  ordre décroissant), le coût est \textbf{quadratique} ($O(n^2)$) : chaque insertion peut
+  nécessiter de décaler tous les éléments déjà triés.
 }
 
 \demonstration{
@@ -57,8 +59,8 @@ print(tri_insertion([5, 3, 8, 1, 9, 2]))  # [1, 2, 3, 5, 8, 9]
 \textbf{trié} (et contient les mêmes éléments que le sous-tableau original
 \lstinline{tableau[0:i]} avant tout tri).
 
-\textbf{Initialisation.} Avant la première itération ($i=1$), \lstinline{tableau[0:1]} est
-un tableau à un seul élément : il est trivialement trié.
+\textbf{Initialisation.} Lorsque $n\geqslant2$, avant la première itération ($i=1$),
+\lstinline{tableau[0:1]} est un tableau à un seul élément : il est trivialement trié.
 
 \textbf{Conservation.} Supposons \lstinline{tableau[0:i]} trié au début de l'itération $i$.
 La boucle \lstinline{while} interne décale vers la droite tous les éléments de
@@ -67,9 +69,9 @@ place \lstinline{valeur} à la position ainsi libérée. Le sous-tableau
 \lstinline{tableau[0:i+1]} obtenu est donc trié : l'invariant est conservé pour
 l'itération suivante.
 
-\textbf{Terminaison.} Après la dernière itération ($i=n-1$), l'invariant donne :
-\lstinline{tableau[0:n]} (le tableau entier) est trié. L'algorithme est donc
-\textbf{correct}.
+\textbf{Terminaison.} Si $n\leqslant1$, la boucle ne s'exécute pas et le tableau entier
+est déjà trié. Si $n\geqslant2$, la dernière itération a $i=n-1$ et l'invariant donne :
+\lstinline{tableau[0:n]} (le tableau entier) est trié. L'algorithme est donc \textbf{correct}.
 }
 
 % BEGIN-VERIFY

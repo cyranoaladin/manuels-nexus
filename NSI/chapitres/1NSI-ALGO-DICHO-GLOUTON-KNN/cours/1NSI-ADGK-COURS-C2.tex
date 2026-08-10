@@ -7,14 +7,14 @@
   \og localement optimal \fg{}), sans jamais revenir en arrière.
 }
 
-\exemple{Le \textbf{rendu de monnaie} : pour rendre un montant donné avec le moins de
-pièces possible, on choisit à chaque étape la plus grande pièce (ou billet) ne dépassant
+\exemple{Le \textbf{rendu de monnaie} : pour tenter d'obtenir un rendu avec peu de
+pièces, on choisit à chaque étape la plus grande pièce (ou billet) ne dépassant
 pas le montant restant.}
 
 \begin{codereference}{Rendu de monnaie glouton}
 \begin{python}
 def rendu_glouton(montant, pieces):
-    """Rend `montant` en utilisant le moins de pieces possible (methode gloutonne)."""
+    """Construit un rendu en choisissant d'abord les plus grandes pieces disponibles."""
     pieces_triees = sorted(pieces, reverse=True)
     rendu = []
     for p in pieces_triees:
