@@ -32,6 +32,15 @@ ALGORITHM_RECEIPT_PATH = (
     ROOT / "audit" / "reviews" / "1nsi" / "runs" / "2026-08-10-algorithms.yaml"
 )
 SECOND_REVIEWER_ID = "019febc0-6f71-7a92-a196-d579889d7e6e"
+ALGORITHM_SOURCE_COMMIT = "1b577c8becb0d21ef3485a5e6cdec236f1e006b7"
+ALGORITHM_RECEIPT_COMMIT = "c315a7117dbd3b3e54c4894110d12b1862b4083e"
+ALGORITHM_RECEIPT_SHA256 = (
+    "sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227"
+)
+ALGORITHM_REVIEW_RUN_ID = (
+    "1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1"
+)
+ALGORITHM_REVIEWER_MODEL = "codex-gpt5"
 OLD_ALGORITHM_REVIEWER_ID = "019feb71-27c9-7530-ab01-ce74cea1b4a2"
 OLD_ALGORITHM_REVIEW_RUN_ID = "1nsi-objects-algorithms-2026-08-10-bernoulli-v1"
 CONTRACT_RECEIPT_COMMIT = "c5ab5d4607eb38b41e5824561aad1c7a8abcb275"
@@ -2902,6 +2911,127 @@ def test_algorithm_review_receipt_matches_current_sources_before_sealing(
         )
 
     assert not mismatches, "\n" + "\n".join(mismatches)
+
+
+def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
+    policy, review_module
+) -> None:
+    resolved_ids = {
+        "1NSI-REV-ADGK-C2-DOCSTRING-OPTIMALITE",
+        "1NSI-REV-AGT-C2-BORNE-TERMINAISON",
+        "1NSI-REV-AGT-QCM-Q2-AMBIGU",
+        "1NSI-REV-ADGK-C2-CONTRADICTION",
+    }
+    new_p0_id = "1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON"
+    json_path = ROOT / "audit" / "1NSI_CONTENT_REVIEWS.json"
+    summary_path = ROOT / "audit" / "1NSI_CONTENT_REVIEW_SUMMARY.md"
+
+    findings_text = FINDINGS_PATH.read_text(encoding="utf-8")
+    json_text = json_path.read_text(encoding="utf-8")
+    summary_text = summary_path.read_text(encoding="utf-8")
+    for anomaly_id in resolved_ids:
+        assert anomaly_id not in findings_text
+        assert anomaly_id not in json_text
+        assert anomaly_id not in summary_text
+
+    findings = review_module.load_findings(FINDINGS_PATH)
+    document = json.loads(json_text)
+    findings_anomalies = [
+        anomaly for finding in findings for anomaly in finding["anomalies"]
+    ]
+    register_anomalies = [
+        anomaly for entry in document["entries"] for anomaly in entry["anomalies"]
+    ]
+    for anomalies in (findings_anomalies, register_anomalies):
+        by_id = {anomaly["id"]: anomaly for anomaly in anomalies}
+        assert by_id[new_p0_id]["severity"] == "P0"
+
+    assert len(register_anomalies) == 261
+    assert Counter(anomaly["severity"] for anomaly in register_anomalies) == Counter(
+        {"P0": 142, "P1": 116, "P2": 3}
+    )
+
+    assert len(findings) == len(document["entries"]) == 349
+    assert new_p0_id in summary_text
+    assert "Entries: 349" in summary_text
+    assert "- Total: 261" in summary_text
+    assert "- P0: 142" in summary_text
+    assert "- P1: 116" in summary_text
+    assert "- P2: 3" in summary_text
+    assert review_module.release_gate_allows(document, policy) is False
+
+
+def test_algorithm_findings_are_sealed_to_the_second_review_receipt(
+    policy, sources, review_module
+) -> None:
+    receipt_relative = ALGORITHM_RECEIPT_PATH.relative_to(ROOT).as_posix()
+    sealed_bytes = _git_bytes(
+        ROOT, "show", f"{ALGORITHM_RECEIPT_COMMIT}:{receipt_relative}"
+    )
+    assert review_module.sha256_bytes(sealed_bytes) == ALGORITHM_RECEIPT_SHA256
+    assert ALGORITHM_RECEIPT_PATH.read_bytes() == sealed_bytes
+    receipt_parents = _git(
+        ROOT, "rev-list", "--parents", "-n", "1", ALGORITHM_RECEIPT_COMMIT
+    ).split()
+    assert receipt_parents == [
+        ALGORITHM_RECEIPT_COMMIT,
+        ALGORITHM_SOURCE_COMMIT,
+    ]
+
+    receipt = yaml.safe_load(sealed_bytes.decode("utf-8"))
+    assert {
+        "reviewer_id": receipt["reviewer_id"],
+        "review_run_id": receipt["review_run_id"],
+        "reviewer_model": receipt["reviewer_model"],
+    } == {
+        "reviewer_id": SECOND_REVIEWER_ID,
+        "review_run_id": ALGORITHM_REVIEW_RUN_ID,
+        "reviewer_model": ALGORITHM_REVIEWER_MODEL,
+    }
+    reviews_by_id = {review["id"]: review for review in receipt["reviews"]}
+    assert len(reviews_by_id) == 40
+    expected_provenance = {
+        "reviewer_id": SECOND_REVIEWER_ID,
+        "review_run_id": ALGORITHM_REVIEW_RUN_ID,
+        "reviewer_model": ALGORITHM_REVIEWER_MODEL,
+        "integrator_id": policy["integrator_id"],
+        "review_receipt_path": receipt_relative,
+        "review_receipt_sha256": ALGORITHM_RECEIPT_SHA256,
+        "sealing_commit_sha": ALGORITHM_RECEIPT_COMMIT,
+    }
+
+    algorithm_findings = [
+        finding
+        for finding in review_module.load_findings(FINDINGS_PATH)
+        if finding["id"] in reviews_by_id
+    ]
+    assert len(algorithm_findings) == 40
+    findings_by_id = {finding["id"]: finding for finding in algorithm_findings}
+    assert set(findings_by_id) == set(reviews_by_id)
+    sources_by_id = {source["id"]: source for source in sources}
+    for object_id, review in reviews_by_id.items():
+        finding = findings_by_id[object_id]
+        source = sources_by_id[object_id]
+        assert {
+            "id": finding["id"],
+            "scope": finding["scope"],
+            "chapter": finding["chapter"],
+            "source_path": finding["source_path"],
+            "source_status": finding["source_status"],
+            "capacity_refs": finding["capacity_refs"],
+        } == {
+            "id": source["id"],
+            "scope": source["scope"],
+            "chapter": source["chapter"],
+            "source_path": source["path"],
+            "source_status": source["status"],
+            "capacity_refs": source.get("capacity_refs", []),
+        }
+        assert finding["provenance"] == expected_provenance
+        assert {
+            "dimensions": finding["dimensions"],
+            "anomalies": finding["anomalies"],
+        } == review["payload"]
 
 
 def test_object_findings_exhaustively_cover_all_339_sources(

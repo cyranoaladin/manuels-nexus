@@ -804,39 +804,46 @@ findings:
   capacity_refs:
   - P-ALGO-04
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le corrigé retrouve l'indice 5 et la suite de variants 9, 4, 1, tous vérifiés par
-        le bloc exécutable.
+      justification: Le corrigé retrouve l'indice 5 et la suite de variants 9, 4,
+        1, tous vérifiés par le bloc exécutable.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex
         line_start: 16
         line_end: 23
         excerpt_sha256: sha256:f1a524d7eedde6a0918af8361d193df535b56b0d78efa5efdb4fb09d86fd782d
         fact_type: source_statement
-        observation: Le contrôle de 1NSI-ADGK-CO-001 établit l'indice 5 et la décroissance stricte des
-          trois valeurs du variant.
+        observation: Le contrôle de 1NSI-ADGK-CO-001 établit l'indice 5 et la décroissance
+          stricte des trois valeurs du variant.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:5298fbc827fba18d3fc38bfa6780d72cf643f38ec0e3131d53cc6d057a648755
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-CO-001 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le tableau de trace répond séparément aux trois demandes de l'exercice et explicite
-        le rôle du variant.
+      justification: Le tableau de trace répond séparément aux trois demandes de l'exercice
+        et explicite le rôle du variant.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex
         line_start: 25
         line_end: 39
         excerpt_sha256: sha256:e0faaf40dc60b473008b1baf857d694a65701a9a0de8716eb2f992772ff0f7ee
         fact_type: pedagogical_structure
-        observation: Le corrigé 1NSI-ADGK-CO-001 organise la trace, le nombre d'itérations puis la preuve
-          de décroissance dans l'ordre des questions.
+        observation: Le corrigé 1NSI-ADGK-CO-001 organise la trace, le nombre d'itérations
+          puis la preuve de décroissance dans l'ordre des questions.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-CO-002
@@ -847,39 +854,46 @@ findings:
   capacity_refs:
   - P-ALGO-04
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le faux négatif sur le tableau non trié est reproduit et l'explication respecte la
-        précondition de dichotomie.
+      justification: Le faux négatif sur le tableau non trié est reproduit et l'explication
+        respecte la précondition de dichotomie.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex
         line_start: 14
         line_end: 16
         excerpt_sha256: sha256:45003979185a77e96d8641a0171e8080c5826b06a17b1fab4d397cf77c23fee0
         fact_type: source_statement
-        observation: Le test de 1NSI-ADGK-CO-002 confirme que 23 est présent mais que la dichotomie renvoie
-          -1 sur cette entrée non triée.
+        observation: Le test de 1NSI-ADGK-CO-002 confirme que 23 est présent mais
+          que la dichotomie renvoie -1 sur cette entrée non triée.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:5e3c46952793688b3b846a2852bba4882b53e9d132ff5fad73d95c79fedb8334
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-CO-002 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: L'élimination fautive des indices 0 à 3 est explicitée avant le rappel de la condition
-        de tri.
+      justification: L'élimination fautive des indices 0 à 3 est explicitée avant
+        le rappel de la condition de tri.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex
         line_start: 17
         line_end: 31
         excerpt_sha256: sha256:baf5e8d33bd01d6f4ee6308b204da26c3eb17ad94ce17d439a14aa70275da79a
         fact_type: pedagogical_structure
-        observation: L'explication de 1NSI-ADGK-CO-002 localise précisément la première moitié éliminée
-          à tort et rattache l'échec à la précondition violée.
+        observation: L'explication de 1NSI-ADGK-CO-002 localise précisément la première
+          moitié éliminée à tort et rattache l'échec à la précondition violée.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-CO-003
@@ -890,38 +904,46 @@ findings:
   capacity_refs:
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le rendu glouton de 63 euros produit bien 50, 10, 2, 1 et sa somme est correcte.
+      justification: Le rendu glouton de 63 euros produit bien 50, 10, 2, 1 et sa
+        somme est correcte.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex
         line_start: 11
         line_end: 12
         excerpt_sha256: sha256:dc2bf824477b90bc1ab8b646b765795aab53ed1afaef2d2119774c871053ad8f
         fact_type: source_statement
-        observation: L'assertion de 1NSI-ADGK-CO-003 vérifie exactement les quatre pièces obtenues pour
-          le montant 63.
+        observation: L'assertion de 1NSI-ADGK-CO-003 vérifie exactement les quatre
+          pièces obtenues pour le montant 63.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:1dfe7219923bb5947ec9c18c176d7259b1710f5db6427bd54d570d9f1410305c
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-CO-003 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La solution déroule les choix puis distingue le système euro du contre-exemple non
-        canonique 4, 3, 1.
+      justification: La solution déroule les choix puis distingue le système euro
+        du contre-exemple non canonique 4, 3, 1.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex
         line_start: 13
         line_end: 22
         excerpt_sha256: sha256:b54a2528048cb616c94cb5f803da3cc99dd43650ae1a3cf99bc8573a88bb962a
         fact_type: pedagogical_structure
-        observation: Le corrigé 1NSI-ADGK-CO-003 relie le calcul demandé au contre-exemple 4+1+1 contre
-          3+3 afin de limiter la généralisation gloutonne.
+        observation: Le corrigé 1NSI-ADGK-CO-003 relie le calcul demandé au contre-exemple
+          4+1+1 contre 3+3 afin de limiter la généralisation gloutonne.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-CO-004
@@ -932,39 +954,47 @@ findings:
   capacity_refs:
   - P-ALGO-03
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le résultat Pomme pour k=3 est exécuté sur les six données de fruits sans divergence
-        du reçu.
+      justification: Le résultat Pomme pour k=3 est exécuté sur les six données de
+        fruits sans divergence du reçu.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex
         line_start: 12
         line_end: 16
         excerpt_sha256: sha256:f8fa27b50e0853c7c1d7da39a6016ce97335bf97d0e59711ebe82ce9a9de49d8
         fact_type: source_statement
-        observation: Le jeu de données de 1NSI-ADGK-CO-004 conduit fraîchement à la classe Pomme pour
-          le point de coordonnées 145 et 8.
+        observation: Le jeu de données de 1NSI-ADGK-CO-004 conduit fraîchement à la
+          classe Pomme pour le point de coordonnées 145 et 8.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:2abe769c707903de301a0d30720267a89987fd11e5aef224435d6edd35266c32
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-CO-004 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La justification compare les deux caractéristiques et traite explicitement l'égalité
-        obtenue avec k=6.
+      justification: La justification compare les deux caractéristiques et traite
+        explicitement l'égalité obtenue avec k=6.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex
         line_start: 18
         line_end: 33
         excerpt_sha256: sha256:18aab944ccfe3bb808897fae06c819e94aa6df514f8caa4b6703d6c849b0b52d
         fact_type: pedagogical_structure
-        observation: Le corrigé 1NSI-ADGK-CO-004 explique la proximité du nouveau fruit puis avertit que
-          le vote trois contre trois ne détermine pas une classe satisfaisante.
+        observation: Le corrigé 1NSI-ADGK-CO-004 explique la proximité du nouveau
+          fruit puis avertit que le vote trois contre trois ne détermine pas une classe
+          satisfaisante.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-CO-005
@@ -975,39 +1005,46 @@ findings:
   capacity_refs:
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: 'Le contre-exemple du sac à dos est calculé correctement : le glouton vaut 30 alors
-        que Y et Z valent 40.'
+      justification: 'Le contre-exemple du sac à dos est calculé correctement : le
+        glouton vaut 30 alors que Y et Z valent 40.'
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex
         line_start: 14
         line_end: 18
         excerpt_sha256: sha256:9ef8b4173b03349a66324d767989d7d57cb05d6166d6918562cef30dafdf56fa
         fact_type: source_statement
-        observation: Les contrôles de 1NSI-ADGK-CO-005 démontrent que le choix X de valeur 30 est dominé
-          par la combinaison de valeur 40.
+        observation: Les contrôles de 1NSI-ADGK-CO-005 démontrent que le choix X de
+          valeur 30 est dominé par la combinaison de valeur 40.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:5332a6c340323f83f469ca8ca433244603c68954ecc39f3de064a2bb3636e46d
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-CO-005 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le corrigé détaille rapports, charge résiduelle et comparaison globale, ce qui répond
-        aux trois étapes.
+      justification: Le corrigé détaille rapports, charge résiduelle et comparaison
+        globale, ce qui répond aux trois étapes.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex
         line_start: 20
         line_end: 33
         excerpt_sha256: sha256:8d93b63cadb655382bd8b144c95dc44ebb6e81799795d9fa90dea2f876f71063
         fact_type: pedagogical_structure
-        observation: La solution 1NSI-ADGK-CO-005 fait apparaître pourquoi le meilleur rapport local bloque
-          ensuite les deux objets de poids 5.
+        observation: La solution 1NSI-ADGK-CO-005 fait apparaître pourquoi le meilleur
+          rapport local bloque ensuite les deux objets de poids 5.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-COURS-C1
@@ -1018,39 +1055,46 @@ findings:
   capacity_refs:
   - P-ALGO-04
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: L'algorithme, son coût logarithmique et la terminaison par variant entier décroissant
-        sont cohérents.
+      justification: L'algorithme, son coût logarithmique et la terminaison par variant
+        entier décroissant sont cohérents.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C1.tex
         line_start: 15
         line_end: 100
         excerpt_sha256: sha256:b1e7f8563108d568b018047ac6e3fefe1b261ad18674c54ee2c544b761edad04
         fact_type: source_statement
-        observation: Le cours 1NSI-ADGK-COURS-C1 met à jour les bornes avec plus ou moins un et contrôle
-          sur plusieurs cas la décroissance du variant.
+        observation: Le cours 1NSI-ADGK-COURS-C1 met à jour les bornes avec plus ou
+          moins un et contrôle sur plusieurs cas la décroissance du variant.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C1.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:d3783523db8dfebeb09842a2629f2f6d824153e3a54a6f47539b3fd86abc37e1
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-COURS-C1 passe avec le check_digest
+          exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La précondition de tri, l'erreur fréquente et l'activité de comptage forment une
-        progression de compréhension vers l'analyse.
+      justification: La précondition de tri, l'erreur fréquente et l'activité de comptage
+        forment une progression de compréhension vers l'analyse.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C1.tex
         line_start: 102
         line_end: 110
         excerpt_sha256: sha256:0c2254aba2463e457da79d3310a767d6cb167b82b40c7cba2079e8d377828d69
         fact_type: pedagogical_structure
-        observation: La clôture de 1NSI-ADGK-COURS-C1 transforme l'oubli du tri en diagnostic puis propose
-          de mesurer les itérations sur mille éléments.
+        observation: La clôture de 1NSI-ADGK-COURS-C1 transforme l'oubli du tri en
+          diagnostic puis propose de mesurer les itérations sur mille éléments.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-COURS-C2
@@ -1061,73 +1105,48 @@ findings:
   capacity_refs:
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
-      verdict: issue
-      justification: Le corps du cours expose correctement les limites du glouton, mais la docstring promet
-        à tort un nombre minimal pour toute liste de pièces.
+      verdict: pass
+      justification: La fonction décrit désormais le choix glouton sans promettre
+        un optimum général, puis le cours fournit un contre-exemple correct.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex
-        line_start: 14
-        line_end: 47
-        excerpt_sha256: sha256:22cb1c2af7907a63fcf04be70af0ac0d2c45b0cde56211bebdaa68aa7f4731d5
+        line_start: 10
+        line_end: 17
+        excerpt_sha256: sha256:dc90f3675c9814a74f9deab9cc8ef862bdae94b040c7c3e2f1788e9ff3c578e7
         fact_type: source_statement
-        observation: Dans 1NSI-ADGK-COURS-C2, la fonction est documentée comme minimale alors que la propriété
-          suivante précise que l'optimalité n'est pas garantie.
-      anomaly_ids:
-      - 1NSI-REV-ADGK-C2-DOCSTRING-OPTIMALITE
+        observation: Dans 1NSI-ADGK-COURS-C2, l'exemple vise explicitement peu de
+          pièces et la docstring décrit seulement l'ordre des choix.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:e67f8b80405ba979dcb78d68d7e22bbb8c9452a96d77216abc4c47ebe5a6b31d
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-COURS-C2 passe avec le check_digest
+          exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd.
+      anomaly_ids: []
     pedagogical:
-      verdict: issue
-      justification: L'exemple et le contre-exemple sont utiles, mais la contradiction immédiate entre
-        la documentation du code et le texte fragilise le modèle conceptuel.
+      verdict: pass
+      justification: La progression distingue sans contradiction choix local, absence
+        de garantie générale et cas particulier du système en euros.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex
-        line_start: 14
+        line_start: 44
         line_end: 54
-        excerpt_sha256: sha256:8d8df36aa77eb706667e3d8ff22be444a31599dbfb2c9d65177b36704233c384
+        excerpt_sha256: sha256:3fb2829811bbd792badca939332118d0f4133d802f7bfe3e20751bb327c4d46a
         fact_type: pedagogical_structure
-        observation: Le lecteur de 1NSI-ADGK-COURS-C2 reçoit d'abord une garantie absolue dans le code
-          puis un contre-exemple explicite quelques lignes plus loin.
-      anomaly_ids:
-      - 1NSI-REV-ADGK-C2-CONTRADICTION
-  anomalies:
-  - id: 1NSI-REV-ADGK-C2-DOCSTRING-OPTIMALITE
-    severity: P0
-    dimension: scientific
-    fact:
-      path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex
-      line_start: 16
-      line_end: 17
-      excerpt_sha256: sha256:03379b9362c4faf54f80ca6c04963f4e2fdca5c866b3de58746fd6097bbd6cef
-      fact_type: source_statement
-      observation: La docstring affirme que rendu_glouton utilise le moins de pièces possible sans restreindre
-        le système de pièces.
-    consequence: Une propriété fausse est attachée au code de référence et peut être retenue comme spécification
-      générale.
-    expected_action: Remplacer la promesse par une description du choix glouton et réserver l'optimalité
-      aux systèmes pour lesquels elle est démontrée.
-  - id: 1NSI-REV-ADGK-C2-CONTRADICTION
-    severity: P1
-    dimension: pedagogical
-    fact:
-      path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex
-      line_start: 14
-      line_end: 47
-      excerpt_sha256: sha256:22cb1c2af7907a63fcf04be70af0ac0d2c45b0cde56211bebdaa68aa7f4731d5
-      fact_type: pedagogical_structure
-      observation: Le même objet garantit d'abord le minimum dans la documentation puis nie toute garantie
-        générale dans la propriété suivante.
-    consequence: Deux messages incompatibles empêchent l'élève de savoir quelle propriété associer à la
-      fonction publiée.
-    expected_action: Aligner docstring, exemple et propriété autour d'une formulation unique distinguant
-      résultat glouton et optimum.
+        observation: La propriété et le contre-exemple de 1NSI-ADGK-COURS-C2 opposent
+          clairement solution gloutonne et solution optimale.
+      anomaly_ids: []
+  anomalies: []
 - id: 1NSI-ADGK-COURS-C3
   scope: object
   chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
@@ -1136,40 +1155,48 @@ findings:
   capacity_refs:
   - P-ALGO-03
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: issue
-      justification: Les calculs de distance et les exemples passent, mais l'algorithme ne définit aucune
-        règle en cas d'égalité de votes.
+      justification: Les calculs de distance et les exemples passent, mais l'algorithme
+        ne définit aucune règle en cas d'égalité de votes.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex
         line_start: 20
         line_end: 71
         excerpt_sha256: sha256:aa6a844ac48cae2e49bc8d09ae7c2a7b93a4656df31dacd9e5d443aa1f9ecd01
         fact_type: source_statement
-        observation: La fonction 1NSI-ADGK-COURS-C3 applique max à un ensemble de classes sans stratégie
-          de départage, malgré la discussion ultérieure sur le choix de k.
+        observation: La fonction 1NSI-ADGK-COURS-C3 applique max à un ensemble de
+          classes sans stratégie de départage, malgré la discussion ultérieure sur
+          le choix de k.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:0f393a860a4575060a4804551d29489ec00465872b9e3ede9a72e048e85368c2
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-COURS-C3 passe avec le check_digest
+          exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077.
       anomaly_ids:
       - 1NSI-REV-ADGK-C3-EGALITE-KNN
     pedagogical:
       verdict: pass
-      justification: La progression relie distance, vote majoritaire, sensibilité au bruit et influence
-        de k avec une activité de perturbation.
+      justification: La progression relie distance, vote majoritaire, sensibilité
+        au bruit et influence de k avec une activité de perturbation.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex
         line_start: 66
         line_end: 82
         excerpt_sha256: sha256:5fd14508c0549bf128b3b54c7814121543cd5df5c92d5a49ae9d5782408bf142
         fact_type: pedagogical_structure
-        observation: La fin de 1NSI-ADGK-COURS-C3 demande de comparer k égal à 3 puis 5 après ajout d'un
-          point bruité, ce qui rend l'effet du voisinage observable.
+        observation: La fin de 1NSI-ADGK-COURS-C3 demande de comparer k égal à 3 puis
+          5 après ajout d'un point bruité, ce qui rend l'effet du voisinage observable.
       anomaly_ids: []
   anomalies:
   - id: 1NSI-REV-ADGK-C3-EGALITE-KNN
@@ -1181,12 +1208,12 @@ findings:
       line_end: 36
       excerpt_sha256: sha256:6c109719d3738e63cd44cfbfc5a5b045a4b308552c8b96ca70f73e511ccb750c
       fact_type: source_statement
-      observation: Le vote max(set(classes), key=classes.count) ne spécifie aucun départage lorsque plusieurs
-        classes ont la même fréquence.
-    consequence: La fonction annoncée comme prédictive peut renvoyer une classe dépendant de détails d'implémentation
-      pour des entrées admises.
-    expected_action: Définir et tester une précondition ou une stratégie déterministe d'égalité, notamment
-      pour plusieurs classes.
+      observation: Le vote max(set(classes), key=classes.count) ne spécifie aucun
+        départage lorsque plusieurs classes ont la même fréquence.
+    consequence: La fonction annoncée comme prédictive peut renvoyer une classe dépendant
+      de détails d'implémentation pour des entrées admises.
+    expected_action: Définir et tester une précondition ou une stratégie déterministe
+      d'égalité, notamment pour plusieurs classes.
 - id: 1NSI-ADGK-EVAL-A
   scope: object
   chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
@@ -1197,39 +1224,46 @@ findings:
   - P-ALGO-04
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les blocs exécutables couvrent la recherche, le variant, le rendu glouton et la classification
-        Chat attendue.
+      justification: Les blocs exécutables couvrent la recherche, le variant, le rendu
+        glouton et la classification Chat attendue.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex
         line_start: 19
         line_end: 75
         excerpt_sha256: sha256:3e94af214536910074849a0fbd74fde09750ca21f1b6ae064bf88c4e3173d9bf
         fact_type: source_statement
-        observation: Les vérifications de 1NSI-ADGK-EVAL-A confirment l'indice 4, le rendu 20+20+5+2 et
-          le vote Chat pour k égal à 3.
+        observation: Les vérifications de 1NSI-ADGK-EVAL-A confirment l'indice 4,
+          le rendu 20+20+5+2 et le vote Chat pour k égal à 3.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:52c49650d683b2fc799c540193083456be50d15aeb04972bd0c54a4295c9ceee
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EVAL-A passe avec le check_digest
+          exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Deux exercices équilibrent preuve de terminaison, exécution gloutonne et interprétation
-        k-NN sur 45 minutes.
+      justification: Deux exercices équilibrent preuve de terminaison, exécution gloutonne
+        et interprétation k-NN sur 45 minutes.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex
         line_start: 8
         line_end: 50
         excerpt_sha256: sha256:2ef6b947ddf542a72bd49150e638b8523c7a44970aa10d0d203e09534e21a3a6
         fact_type: pedagogical_structure
-        observation: L'évaluation 1NSI-ADGK-EVAL-A répartit explicitement dix points sur la dichotomie
-          et dix sur glouton plus k-NN.
+        observation: L'évaluation 1NSI-ADGK-EVAL-A répartit explicitement dix points
+          sur la dichotomie et dix sur glouton plus k-NN.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-EVAL-A-corrige
@@ -1242,39 +1276,47 @@ findings:
   - P-ALGO-04
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: La réponse k-NN Chat concorde avec le bloc exécutable de l'évaluation liée, et les
-        autres calculs sont vérifiés localement.
+      justification: La réponse k-NN Chat concorde avec le bloc exécutable de l'évaluation
+        liée, et les autres calculs sont vérifiés localement.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex
         line_start: 62
         line_end: 74
         excerpt_sha256: sha256:cedcdd00c8bdc758205ea2b14cdaa267a452e40cd5e21bfa6bb70ce7ff708b3a
         fact_type: source_statement
-        observation: Le calcul lié à 1NSI-ADGK-EVAL-A-corrige exécute les distances de l'évaluation et
-          confirme la classe Chat annoncée.
+        observation: Le calcul lié à 1NSI-ADGK-EVAL-A-corrige exécute les distances
+          de l'évaluation et confirme la classe Chat annoncée.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A-corrige.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:57567308ab139cd090b5e939772c91ecbc76a0e8640a5d1d15a0d4e6fc0a03fa
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EVAL-A-corrige passe avec le
+          check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le corrigé répond point par point et distingue preuve du variant, classification
-        et limite de l'heuristique gloutonne.
+      justification: Le corrigé répond point par point et distingue preuve du variant,
+        classification et limite de l'heuristique gloutonne.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A-corrige.tex
         line_start: 30
         line_end: 54
         excerpt_sha256: sha256:03d4b629b4d77310de5155f25b57f15194fe5fffdc1e719f127f9954e2017a0a
         fact_type: pedagogical_structure
-        observation: La correction 1NSI-ADGK-EVAL-A-corrige restitue les trois états de dichotomie puis
-          justifie séparément le vote k-NN et le contre-exemple monétaire.
+        observation: La correction 1NSI-ADGK-EVAL-A-corrige restitue les trois états
+          de dichotomie puis justifie séparément le vote k-NN et le contre-exemple
+          monétaire.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-EVAL-B
@@ -1287,39 +1329,46 @@ findings:
   - P-ALGO-04
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les résultats de dichotomie, rendu de 38 et classification Iris sont tous couverts
-        par des assertions fraîches.
+      justification: Les résultats de dichotomie, rendu de 38 et classification Iris
+        sont tous couverts par des assertions fraîches.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex
         line_start: 20
         line_end: 75
         excerpt_sha256: sha256:688f6239346a656c7fe79f23f0760010687496db3b8dc6d1bd25ca6a7f9c5e0c
         fact_type: source_statement
-        observation: Les contrôles de 1NSI-ADGK-EVAL-B valident l'indice 4, cinq pièces totalisant 38
-          et la classe Iris des trois voisins.
+        observation: Les contrôles de 1NSI-ADGK-EVAL-B valident l'indice 4, cinq pièces
+          totalisant 38 et la classe Iris des trois voisins.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:acb2fa429672b3a6f4a123954e4ab0fa0f5fcbb59b7c0531356a59b9559346da
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EVAL-B passe avec le check_digest
+          exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La variante B conserve le même niveau d'exigence tout en changeant données et question
-        finale sur le bruit.
+      justification: La variante B conserve le même niveau d'exigence tout en changeant
+        données et question finale sur le bruit.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex
         line_start: 9
         line_end: 50
         excerpt_sha256: sha256:15febd9d0098f20afd56b8276aef7f2ce635bcbc7244623b32ab06f136c0c072
         fact_type: pedagogical_structure
-        observation: L'évaluation 1NSI-ADGK-EVAL-B associe le variant à une analyse de k égal à 1, distincte
-          de la question d'optimalité de la variante A.
+        observation: L'évaluation 1NSI-ADGK-EVAL-B associe le variant à une analyse
+          de k égal à 1, distincte de la question d'optimalité de la variante A.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-EVAL-B-corrige
@@ -1332,39 +1381,46 @@ findings:
   - P-ALGO-04
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: La prédiction Iris est confirmée par l'exécution de l'évaluation liée et les calculs
-        de dichotomie et monnaie passent localement.
+      justification: La prédiction Iris est confirmée par l'exécution de l'évaluation
+        liée et les calculs de dichotomie et monnaie passent localement.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex
         line_start: 63
         line_end: 75
         excerpt_sha256: sha256:a81232e7ff9112903be0a59ff682245d5be6e6314557c57c1527ad0285f5649f
         fact_type: source_statement
-        observation: Le bloc associé à 1NSI-ADGK-EVAL-B-corrige classe effectivement le point 5,1 et 1,5
-          parmi les Iris.
+        observation: Le bloc associé à 1NSI-ADGK-EVAL-B-corrige classe effectivement
+          le point 5,1 et 1,5 parmi les Iris.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B-corrige.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:6add9c08ff4ae096f37a7d26580c575f0d4c22539168e8e86548188c3e1a7cf0
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EVAL-B-corrige passe avec le
+          check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La correction explicite les trois itérations, chaque pièce choisie et le risque d'un
-        voisin unique mal étiqueté.
+      justification: La correction explicite les trois itérations, chaque pièce choisie
+        et le risque d'un voisin unique mal étiqueté.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B-corrige.tex
         line_start: 30
         line_end: 54
         excerpt_sha256: sha256:47bdbf270b1f11090afc1330767db2b7344abfa70454cb7eecbc8e55c859899f
         fact_type: pedagogical_structure
-        observation: Le corrigé 1NSI-ADGK-EVAL-B-corrige relie précisément k égal à 1 à l'absence de vote
-          majoritaire compensant une donnée bruitée.
+        observation: Le corrigé 1NSI-ADGK-EVAL-B-corrige relie précisément k égal
+          à 1 à l'absence de vote majoritaire compensant une donnée bruitée.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-EX-001
@@ -1375,37 +1431,46 @@ findings:
   capacity_refs:
   - P-ALGO-04
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: L'exemple de dichotomie est exécutable et l'indice 5 attendu est exact.
+      justification: L'exemple de dichotomie est exécutable et l'indice 5 attendu
+        est exact.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-001.tex
         line_start: 2
         line_end: 16
         excerpt_sha256: sha256:e5f8bb81afe737914cd8cec23c65d0fb384702564d8ba764131eb53449394254
         fact_type: source_statement
-        observation: Le test intégré à 1NSI-ADGK-EX-001 retrouve 23 à l'indice 5 dans le tableau trié
-          de dix éléments.
+        observation: Le test intégré à 1NSI-ADGK-EX-001 retrouve 23 à l'indice 5 dans
+          le tableau trié de dix éléments.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-001.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:672dcf6bdfc030fd490d2ee1cdf780e638a9d28f1343b04f2512d6e57c56486b
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EX-001 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: L'exercice guide de la trace des bornes au calcul du variant sans donner les réponses.
+      justification: L'exercice guide de la trace des bornes au calcul du variant
+        sans donner les réponses.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-001.tex
         line_start: 17
         line_end: 25
         excerpt_sha256: sha256:75a96667aa587ab2ca22f02670068aa151a51513352d55c7dad83e808b33d5ed
         fact_type: pedagogical_structure
-        observation: Les trois consignes de 1NSI-ADGK-EX-001 font produire successivement la trace, le
-          nombre d'itérations et la preuve de décroissance.
+        observation: Les trois consignes de 1NSI-ADGK-EX-001 font produire successivement
+          la trace, le nombre d'itérations et la preuve de décroissance.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-EX-002
@@ -1416,39 +1481,46 @@ findings:
   capacity_refs:
   - P-ALGO-04
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le comportement erroné sur tableau non trié est reproduit sans présenter la dichotomie
-        comme valide dans ce cas.
+      justification: Le comportement erroné sur tableau non trié est reproduit sans
+        présenter la dichotomie comme valide dans ce cas.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex
         line_start: 2
         line_end: 17
         excerpt_sha256: sha256:458c8ed37623d9a0278ab455005700eee79c6e151b4931461d5505eb0640159f
         fact_type: source_statement
-        observation: Les assertions de 1NSI-ADGK-EX-002 établissent simultanément la présence de 23 et
-          le retour -1 de l'algorithme mal appliqué.
+        observation: Les assertions de 1NSI-ADGK-EX-002 établissent simultanément
+          la présence de 23 et le retour -1 de l'algorithme mal appliqué.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:ec6da471af9fcb49269dc518a973a6d267b62c6431290fed5529a2103574b3c1
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EX-002 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La tâche cible une précondition essentielle par analyse causale plutôt que par simple
-        rappel déclaratif.
+      justification: La tâche cible une précondition essentielle par analyse causale
+        plutôt que par simple rappel déclaratif.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex
         line_start: 18
         line_end: 26
         excerpt_sha256: sha256:949cf150c7006818973dd4be03f116f099b1127687ce3632763a0cbdd3debe4d
         fact_type: pedagogical_structure
-        observation: L'élève doit, dans 1NSI-ADGK-EX-002, dérouler deux tours et identifier la portion
-          contenant 23 que l'algorithme élimine à tort.
+        observation: L'élève doit, dans 1NSI-ADGK-EX-002, dérouler deux tours et identifier
+          la portion contenant 23 que l'algorithme élimine à tort.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-EX-003
@@ -1459,13 +1531,13 @@ findings:
   capacity_refs:
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
@@ -1476,21 +1548,28 @@ findings:
         line_end: 13
         excerpt_sha256: sha256:daa4baf078b0bf56e67d63ba88ee1bc3bf5fe61c71e774d52f23bf93b7f041f5
         fact_type: source_statement
-        observation: Le bloc de 1NSI-ADGK-EX-003 vérifie la liste 50, 10, 2, 1 ainsi que son total égal
-          à 63.
+        observation: Le bloc de 1NSI-ADGK-EX-003 vérifie la liste 50, 10, 2, 1 ainsi
+          que son total égal à 63.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-003.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:adb83cd104fc8281232368b056e3ddae31135b002e518f202856eb626acba9e0
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EX-003 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: L'exercice articule exécution, validation de somme et discussion de l'optimalité
-        à partir du contre-exemple du cours.
+      justification: L'exercice articule exécution, validation de somme et discussion
+        de l'optimalité à partir du contre-exemple du cours.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-003.tex
         line_start: 14
         line_end: 19
         excerpt_sha256: sha256:13f5edf502c7378e09f159c200c78524095efc2972a188c8c1cb0034b923b4e0
         fact_type: pedagogical_structure
-        observation: La dernière question de 1NSI-ADGK-EX-003 oblige à distinguer le système euro d'un
-          système de pièces quelconque.
+        observation: La dernière question de 1NSI-ADGK-EX-003 oblige à distinguer
+          le système euro d'un système de pièces quelconque.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-EX-004
@@ -1501,38 +1580,46 @@ findings:
   capacity_refs:
   - P-ALGO-03
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: La classification Pomme pour k=3 est vérifiée sur les données publiées.
+      justification: La classification Pomme pour k=3 est vérifiée sur les données
+        publiées.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex
         line_start: 2
         line_end: 17
         excerpt_sha256: sha256:6ab65509deef22bb849200468cdfc8db91f9070b62175368c3f3f7803b35eebb
         fact_type: source_statement
-        observation: L'exécution de 1NSI-ADGK-EX-004 confirme la majorité Pomme parmi les trois plus proches
-          voisins du fruit 145 et 8.
+        observation: L'exécution de 1NSI-ADGK-EX-004 confirme la majorité Pomme parmi
+          les trois plus proches voisins du fruit 145 et 8.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:fd1881f33f1a3e91e2e85bb415390cd4b9999a3539da283965b04271ecaece68
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EX-004 passe avec le check_digest
+          exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Les questions demandent calcul, appréciation des échelles puis analyse d'un vote
-        à égalité pour k=6.
+      justification: Les questions demandent calcul, appréciation des échelles puis
+        analyse d'un vote à égalité pour k=6.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex
         line_start: 18
         line_end: 31
         excerpt_sha256: sha256:beac24d1df631e4d3bff0e7fa59b149033e6f51e6d444b90645e22d4d75bd0de
         fact_type: pedagogical_structure
-        observation: Le parcours 1NSI-ADGK-EX-004 fait passer d'une prédiction effective à une critique
-          de la pertinence lorsque tous les fruits deviennent voisins.
+        observation: Le parcours 1NSI-ADGK-EX-004 fait passer d'une prédiction effective
+          à une critique de la pertinence lorsque tous les fruits deviennent voisins.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-EX-005
@@ -1543,38 +1630,46 @@ findings:
   capacity_refs:
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le code du sac à dos et la valeur gloutonne 30 sont exécutés sur les données de l'énoncé.
+      justification: Le code du sac à dos et la valeur gloutonne 30 sont exécutés
+        sur les données de l'énoncé.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex
         line_start: 2
         line_end: 18
         excerpt_sha256: sha256:73314d69d111b0023114e54327c3a25f1e4630ef25dc9ff9e4234ae3b2e369c0
         fact_type: source_statement
-        observation: Le contrôle de 1NSI-ADGK-EX-005 établit que l'algorithme retient seulement X avec
-          une valeur totale de 30.
+        observation: Le contrôle de 1NSI-ADGK-EX-005 établit que l'algorithme retient
+          seulement X avec une valeur totale de 30.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:f83fbd7e7abf3b25322e97bb044859ddcdcbcb38f756097d93dc59cdfcae1c33
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-EX-005 passe avec le check_digest
+          exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le niveau 3 demande de construire soi-même une meilleure combinaison, ce qui met
-        à l'épreuve la limite de l'heuristique.
+      justification: Le niveau 3 demande de construire soi-même une meilleure combinaison,
+        ce qui met à l'épreuve la limite de l'heuristique.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex
         line_start: 19
         line_end: 44
         excerpt_sha256: sha256:20db244b72a0582da325a564570e4abd63703194c11bfd51edab39d27dfdd324
         fact_type: pedagogical_structure
-        observation: Dans 1NSI-ADGK-EX-005, l'élève calcule les rapports, simule la charge puis doit exhiber
-          une solution strictement meilleure.
+        observation: Dans 1NSI-ADGK-EX-005, l'élève calcule les rapports, simule la
+          charge puis doit exhiber une solution strictement meilleure.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ADGK-RE-C1
@@ -1585,39 +1680,46 @@ findings:
   capacity_refs:
   - P-ALGO-04
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le bloc borné reproduit la stagnation du variant puis vérifie la correction milieu
-        plus un.
+      justification: Le bloc borné reproduit la stagnation du variant puis vérifie
+        la correction milieu plus un.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C1.tex
         line_start: 30
         line_end: 64
         excerpt_sha256: sha256:e1cdebbe0e7ecd472f41bc38ae6595a86cc5e957351654e7aad5b8ac9d866efb
         fact_type: source_statement
-        observation: La vérification de 1NSI-ADGK-RE-C1 détecte trois variants finaux égaux avant de confirmer
-          le retour -1 de la version corrigée.
+        observation: La vérification de 1NSI-ADGK-RE-C1 détecte trois variants finaux
+          égaux avant de confirmer le retour -1 de la version corrigée.
+      - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C1.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:cddc4ec6286042d11547e859bb774e35a13b185bc228fc013483587fb4dd037f
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-ADGK-RE-C1 passe avec le check_digest
+          exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077.
       anomaly_ids: []
     pedagogical:
       verdict: issue
-      justification: Le diagnostic cible une erreur pertinente, mais l'énoncé expose une fonction infinie
-        sans fournir le garde-fou d'exécution évoqué.
+      justification: Le diagnostic cible une erreur pertinente, mais l'énoncé expose
+        une fonction infinie sans fournir le garde-fou d'exécution évoqué.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C1.tex
         line_start: 7
         line_end: 27
         excerpt_sha256: sha256:86fbf4e0f5729b915ef786c5d1d726b79cdd18da48d17c595aa2623a2fa7a8ec
         fact_type: pedagogical_structure
-        observation: L'activité 1NSI-ADGK-RE-C1 suggère de limiter à vingt itérations sans montrer comment
-          borner l'appel de la fonction bugée donnée à l'élève.
+        observation: L'activité 1NSI-ADGK-RE-C1 suggère de limiter à vingt itérations
+          sans montrer comment borner l'appel de la fonction bugée donnée à l'élève.
       anomaly_ids:
       - 1NSI-REV-ADGK-RE-C1-EXECUTION-INFINIE
   anomalies:
@@ -1630,12 +1732,12 @@ findings:
       line_end: 26
       excerpt_sha256: sha256:a0798aeccd2590781c5962a0763f2df974c84ad42acf78bdaa8257f512a38482
       fact_type: pedagogical_structure
-      observation: Le code fourni boucle indéfiniment sur le cas ciblé, tandis que la consigne évoque
-        vingt itérations sans instrumenter cette limite.
-    consequence: Un élève peut bloquer son interpréteur sans disposer du garde-fou nécessaire au diagnostic
-      demandé.
-    expected_action: Fournir une version instrumentée avec compteur ou imposer un environnement avec timeout
-      avant toute exécution.
+      observation: Le code fourni boucle indéfiniment sur le cas ciblé, tandis que
+        la consigne évoque vingt itérations sans instrumenter cette limite.
+    consequence: Un élève peut bloquer son interpréteur sans disposer du garde-fou
+      nécessaire au diagnostic demandé.
+    expected_action: Fournir une version instrumentée avec compteur ou imposer un
+      environnement avec timeout avant toute exécution.
 - id: 1NSI-ADGK-RE-C1-CORRIGE
   scope: object
   chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
@@ -1644,38 +1746,39 @@ findings:
   capacity_refs:
   - P-ALGO-04
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: La stagnation lorsque milieu égale borne_inf et la correction milieu plus un sont
-        exactes.
+      justification: La stagnation lorsque milieu égale borne_inf et la correction
+        milieu plus un sont exactes.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C1-CORRIGE.tex
         line_start: 3
         line_end: 16
         excerpt_sha256: sha256:d357236d0388610d367fc41c016976f4fb38a535a4ae7011b38be7b40fb3712c
         fact_type: source_statement
-        observation: Le corrigé 1NSI-ADGK-RE-C1-CORRIGE identifie le cas de deux indices consécutifs où
-          borne_inf reste inchangée.
+        observation: Le corrigé 1NSI-ADGK-RE-C1-CORRIGE identifie le cas de deux indices
+          consécutifs où borne_inf reste inchangée.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La réponse relie symptôme, variant et réparation dans un ordre diagnostique exploitable.
+      justification: La réponse relie symptôme, variant et réparation dans un ordre
+        diagnostique exploitable.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-RE-C1-CORRIGE.tex
         line_start: 3
         line_end: 16
         excerpt_sha256: sha256:d357236d0388610d367fc41c016976f4fb38a535a4ae7011b38be7b40fb3712c
         fact_type: pedagogical_structure
-        observation: La remédiation corrigée 1NSI-ADGK-RE-C1-CORRIGE explique d'abord la boucle infinie,
-          puis sa cause et enfin la modification minimale.
+        observation: La remédiation corrigée 1NSI-ADGK-RE-C1-CORRIGE explique d'abord
+          la boucle infinie, puis sa cause et enfin la modification minimale.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM
@@ -1688,39 +1791,39 @@ findings:
   - P-ALGO-04
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les six questions ont une réponse disciplinaire identifiable sur tri, variant, glouton
-        et k-NN.
+      justification: Les six questions ont une réponse disciplinaire identifiable
+        sur tri, variant, glouton et k-NN.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex
         line_start: 11
         line_end: 75
         excerpt_sha256: sha256:0382e1ab8bbc568b58ab228ca125d0095b00bb0a865cde411e1ef15fbb578d24
         fact_type: source_statement
-        observation: Le QCM 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM distingue correctement terminaison et correction,
-          puis choix local et majorité des voisins.
+        observation: Le QCM 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM distingue correctement
+          terminaison et correction, puis choix local et majorité des voisins.
       anomaly_ids: []
     pedagogical:
       verdict: issue
-      justification: L'objet se présente comme auto-évaluation mais ne fournit ni clé ni rétroaction permettant
-        à l'élève de se situer.
+      justification: L'objet se présente comme auto-évaluation mais ne fournit ni
+        clé ni rétroaction permettant à l'élève de se situer.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex
         line_start: 3
         line_end: 77
         excerpt_sha256: sha256:9f584ccfbf4ee384844966cd767f104775d5ef48f3c21fa3862be811f68f9f05
         fact_type: pedagogical_structure
-        observation: Après les six items du QCM 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM, le fichier se termine
-          sans réponses ni renvoi vers un corrigé.
+        observation: Après les six items du QCM 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM, le
+          fichier se termine sans réponses ni renvoi vers un corrigé.
       anomaly_ids:
       - 1NSI-REV-ADGK-QCM-SANS-CLE
   anomalies:
@@ -1733,11 +1836,12 @@ findings:
       line_end: 77
       excerpt_sha256: sha256:9f584ccfbf4ee384844966cd767f104775d5ef48f3c21fa3862be811f68f9f05
       fact_type: pedagogical_structure
-      observation: Le QCM est intitulé auto-évaluation mais aucune réponse ni rétroaction ne suit les
-        six items.
-    consequence: L'élève ne peut ni calculer sa maîtrise ni être orienté vers une remédiation.
-    expected_action: Ajouter une clé séparée de la version élève immédiate, un mécanisme de correction
-      et des renvois de remédiation.
+      observation: Le QCM est intitulé auto-évaluation mais aucune réponse ni rétroaction
+        ne suit les six items.
+    consequence: L'élève ne peut ni calculer sa maîtrise ni être orienté vers une
+      remédiation.
+    expected_action: Ajouter une clé séparée de la version élève immédiate, un mécanisme
+      de correction et des renvois de remédiation.
 - id: 1NSI-AGT-CO-001
   scope: object
   chapter: 1NSI-ALGO-PARCOURS-TRIS
@@ -1746,37 +1850,46 @@ findings:
   capacity_refs:
   - P-ALGO-01B
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le minimum 1 et la moyenne 6,6 sont calculés et vérifiés sur le tableau de notes.
+      justification: Le minimum 1 et la moyenne 6,6 sont calculés et vérifiés sur
+        le tableau de notes.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex
         line_start: 2
         line_end: 14
         excerpt_sha256: sha256:2aae1b7b6a242265846b1ff7ae0547f3ad05d213301b773b5e6ca551f46ffc5d
         fact_type: source_statement
-        observation: Les assertions de 1NSI-AGT-CO-001 confirment le minimum 1 et le quotient 33 sur 5.
+        observation: Les assertions de 1NSI-AGT-CO-001 confirment le minimum 1 et
+          le quotient 33 sur 5.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:775b958611763403482738a8c577c186a6ce00822194b56573f229b02d31b57b
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-CO-001 passe avec le check_digest
+          exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le corrigé fournit le code attendu puis explique pourquoi une borne arbitraire n'est
-        pas généralisable.
+      justification: Le corrigé fournit le code attendu puis explique pourquoi une
+        borne arbitraire n'est pas généralisable.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex
         line_start: 15
         line_end: 34
         excerpt_sha256: sha256:f8c82b3b2f18d96b5d1a7a7c1c632d4ca6ed615792189eb21ac9bb5678b7e16f
         fact_type: pedagogical_structure
-        observation: La solution 1NSI-AGT-CO-001 oppose l'initialisation à 20 à celle par le premier élément
-          en variant les domaines de données.
+        observation: La solution 1NSI-AGT-CO-001 oppose l'initialisation à 20 à celle
+          par le premier élément en variant les domaines de données.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-CO-002
@@ -1787,38 +1900,46 @@ findings:
   capacity_refs:
   - P-ALGO-01A
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: La fonction renvoie tous les indices et le cas absent sous forme de liste vide.
+      justification: La fonction renvoie tous les indices et le cas absent sous forme
+        de liste vide.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-002.tex
         line_start: 2
         line_end: 11
         excerpt_sha256: sha256:aa50acfcaf5a9bcf06f5d39e3b4269881145f69d9d71afd65a948192456909cb
         fact_type: source_statement
-        observation: Le contrôle de 1NSI-AGT-CO-002 obtient 0, 2, 3 pour la valeur 3 et aucune position
-          pour la valeur 5.
+        observation: Le contrôle de 1NSI-AGT-CO-002 obtient 0, 2, 3 pour la valeur
+          3 et aucune position pour la valeur 5.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-002.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:e82592650d976537d5a11633b6c4a6658b8d214d50f04df7862d1b17abdd7e05
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-CO-002 passe avec le check_digest
+          exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La correction compare le parcours intégral au possible arrêt anticipé de la recherche
-        d'une seule occurrence.
+      justification: La correction compare le parcours intégral au possible arrêt
+        anticipé de la recherche d'une seule occurrence.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-002.tex
         line_start: 12
         line_end: 32
         excerpt_sha256: sha256:aebc543acb3f47d22b1bc303ff2bbdc33faf4f5b4b766ba0112c42146588493b
         fact_type: pedagogical_structure
-        observation: L'explication 1NSI-AGT-CO-002 distingue même ordre linéaire et différence pratique
-          lorsque la première occurrence arrive tôt.
+        observation: L'explication 1NSI-AGT-CO-002 distingue même ordre linéaire et
+          différence pratique lorsque la première occurrence arrive tôt.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-CO-003
@@ -1830,13 +1951,13 @@ findings:
   - P-ALGO-02A
   - P-ALGO-02C
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
@@ -1847,21 +1968,28 @@ findings:
         line_end: 15
         excerpt_sha256: sha256:bcce0783488fdfb2669e3e2b8b96e709351d7940ee4a315c62d92131a0ccf25c
         fact_type: source_statement
-        observation: L'assertion de 1NSI-AGT-CO-003 confirme le résultat croissant à partir de 4, 2, 7,
-          1.
+        observation: L'assertion de 1NSI-AGT-CO-003 confirme le résultat croissant
+          à partir de 4, 2, 7, 1.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-003.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:48e273a48b001796af928a7d5954d3056e03c3bcfe293c06e0f3379ae0ce7ce9
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-CO-003 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Chaque état intermédiaire est donné et le préfixe trié est vérifié après les trois
-        insertions.
+      justification: Chaque état intermédiaire est donné et le préfixe trié est vérifié
+        après les trois insertions.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-003.tex
         line_start: 16
         line_end: 29
         excerpt_sha256: sha256:e45679c5f3d13d9cb7753f56041b7e4c1725a05bf12111ec2e919c74cf361a21
         fact_type: pedagogical_structure
-        observation: Le corrigé 1NSI-AGT-CO-003 rend visibles les préfixes de tailles deux, trois puis
-          quatre avant la validation finale.
+        observation: Le corrigé 1NSI-AGT-CO-003 rend visibles les préfixes de tailles
+          deux, trois puis quatre avant la validation finale.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-CO-004
@@ -1873,13 +2001,13 @@ findings:
   - P-ALGO-02B
   - P-ALGO-02D
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
@@ -1890,21 +2018,28 @@ findings:
         line_end: 15
         excerpt_sha256: sha256:1f44577325ef839171a50002722b0cbd5356f451af340fa4b23560329868d5ed
         fact_type: source_statement
-        observation: Le bloc de 1NSI-AGT-CO-004 valide l'échange du minimum jusqu'au tableau croissant
-          final.
+        observation: Le bloc de 1NSI-AGT-CO-004 valide l'échange du minimum jusqu'au
+          tableau croissant final.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-004.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:9a987e3b31d6f9b1a74289f35e7d46ec8cd4fc35c8f38910ec9bf2d58d4e55e6
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-CO-004 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Les indices minimaux et les deux composantes de l'invariant sont contrôlés à chaque
-        étape.
+      justification: Les indices minimaux et les deux composantes de l'invariant sont
+        contrôlés à chaque étape.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-004.tex
         line_start: 16
         line_end: 29
         excerpt_sha256: sha256:3b426570a6a641c51cab67558d5ec7ae03e08b3e9561575a543a2253f20936ed
         fact_type: pedagogical_structure
-        observation: La correction 1NSI-AGT-CO-004 compare après chaque échange le maximum du préfixe
-          au minimum du suffixe restant.
+        observation: La correction 1NSI-AGT-CO-004 compare après chaque échange le
+          maximum du préfixe au minimum du suffixe restant.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-CO-005
@@ -1916,39 +2051,46 @@ findings:
   - P-ALGO-02A
   - P-ALGO-02B
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les compteurs obtiennent 19 contre 190 sur tableau trié et 190 contre 190 sur tableau
-        décroissant.
+      justification: Les compteurs obtiennent 19 contre 190 sur tableau trié et 190
+        contre 190 sur tableau décroissant.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex
         line_start: 2
         line_end: 34
         excerpt_sha256: sha256:f712906f099c53eb7f22df489ce8dd3ecbb74a0112a046845a8a905c830ff1d7
         fact_type: source_statement
-        observation: Les assertions de 1NSI-AGT-CO-005 fixent les nombres de comparaisons des deux tris
-          pour vingt éléments déjà ordonnés.
+        observation: Les assertions de 1NSI-AGT-CO-005 fixent les nombres de comparaisons
+          des deux tris pour vingt éléments déjà ordonnés.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:b5a776bc7fac21d15fc515e920218c3d7a1de9cba10d4ddf8c4aed3021180ff9
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-CO-005 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le corrigé interprète les comptes à partir de l'arrêt immédiat ou des décalages maximaux
-        de la boucle interne.
+      justification: Le corrigé interprète les comptes à partir de l'arrêt immédiat
+        ou des décalages maximaux de la boucle interne.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex
         line_start: 35
         line_end: 51
         excerpt_sha256: sha256:bf0515160b8ea6d0ed35df4714f9666fc390c48e5c8a0aff12fcd1b17114fe14
         fact_type: pedagogical_structure
-        observation: L'analyse 1NSI-AGT-CO-005 relie le meilleur cas d'insertion à une comparaison par
-          élément puis son pire cas aux 190 décalages.
+        observation: L'analyse 1NSI-AGT-CO-005 relie le meilleur cas d'insertion à
+          une comparaison par élément puis son pire cas aux 190 décalages.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-COURS-C1
@@ -1960,40 +2102,47 @@ findings:
   - P-ALGO-01A
   - P-ALGO-01B
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: issue
-      justification: Recherche et extremum sont explicitement parcourus, mais la moyenne délègue le calcul
-        à sum au lieu d'écrire l'algorithme de parcours attendu.
+      justification: Recherche et extremum sont explicitement parcourus, mais la moyenne
+        délègue le calcul à sum au lieu d'écrire l'algorithme de parcours attendu.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C1.tex
         line_start: 54
         line_end: 85
         excerpt_sha256: sha256:fde957bc2d961511e8694cd231d628d16c9e8124a4bcb2b4b5753bb7b1c321ae
         fact_type: source_statement
-        observation: Dans 1NSI-AGT-COURS-C1, moyenne se réduit à sum(tableau) divisé par len(tableau),
-          sans accumulateur enseigné ou testé.
+        observation: Dans 1NSI-AGT-COURS-C1, moyenne se réduit à sum(tableau) divisé
+          par len(tableau), sans accumulateur enseigné ou testé.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C1.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:2d173b96539ec6eac11a0de38aab2afd36bc1067be9f6ca1be53f3e4adba09c9
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-COURS-C1 passe avec le check_digest
+          exact sha256:bc2ad11b86734b3fe5af9ebc8d460d56fffc2cde8d492aeeeb28c51b4a953520.
       anomaly_ids:
       - 1NSI-REV-AGT-C1-MOYENNE-PARCOURS
     pedagogical:
       verdict: pass
-      justification: Le cours introduit recherche, coût, extremum et cas négatif avant une activité de
-        transfert vers toutes les occurrences.
+      justification: Le cours introduit recherche, coût, extremum et cas négatif avant
+        une activité de transfert vers toutes les occurrences.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C1.tex
         line_start: 87
         line_end: 96
         excerpt_sha256: sha256:ee67a7032909d854f23fef6c5ab6d9a122f55f67c037004354034002e9ddacdb
         fact_type: pedagogical_structure
-        observation: La fin de 1NSI-AGT-COURS-C1 part de l'erreur maxi égal à zéro et demande ensuite
-          de construire la liste de tous les indices.
+        observation: La fin de 1NSI-AGT-COURS-C1 part de l'erreur maxi égal à zéro
+          et demande ensuite de construire la liste de tous les indices.
       anomaly_ids: []
   anomalies:
   - id: 1NSI-REV-AGT-C1-MOYENNE-PARCOURS
@@ -2005,12 +2154,12 @@ findings:
       line_end: 66
       excerpt_sha256: sha256:cd3377e1344f5a46a9305535c3e64de8a1f5aa6fd67cbc6ab58125f69245eab9
       fact_type: source_statement
-      observation: La fonction moyenne appelle directement sum et ne matérialise pas le parcours avec
-        accumulateur attendu dans ce chapitre.
-    consequence: Le contenu ne prouve pas l'apprentissage de l'algorithme de calcul d'une moyenne demandé
-      par le programme.
-    expected_action: Écrire et tester une version par parcours explicite avant de présenter éventuellement
-      sum comme raccourci de bibliothèque.
+      observation: La fonction moyenne appelle directement sum et ne matérialise pas
+        le parcours avec accumulateur attendu dans ce chapitre.
+    consequence: Le contenu ne prouve pas l'apprentissage de l'algorithme de calcul
+      d'une moyenne demandé par le programme.
+    expected_action: Écrire et tester une version par parcours explicite avant de
+      présenter éventuellement sum comme raccourci de bibliothèque.
 - id: 1NSI-AGT-COURS-C2
   scope: object
   chapter: 1NSI-ALGO-PARCOURS-TRIS
@@ -2020,57 +2169,48 @@ findings:
   - P-ALGO-02A
   - P-ALGO-02C
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
-      verdict: issue
-      justification: L'algorithme, le coût et l'invariant sont corrects, mais la justification de terminaison
-        affirme faussement que j est borné par 0.
+      verdict: pass
+      justification: La terminaison traite les tailles 0 et 1 et utilise le variant
+        positif j+1 jusqu'à la valeur terminale j=-1.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex
         line_start: 45
-        line_end: 72
-        excerpt_sha256: sha256:0fc1ede95f9a91db6743b34a79ff340883f7796de6cbe1aa67115f9f1ec77048
+        line_end: 54
+        excerpt_sha256: sha256:b9e79e9d037c5c6b180bbde747c378874370a171a4f4bf78d47c0962defcc473
         fact_type: source_statement
-        observation: La preuve de 1NSI-AGT-COURS-C2 dit que j décroît en restant borné par 0 alors que
-          l'exécution valide atteint j égal à -1.
-      anomaly_ids:
-      - 1NSI-REV-AGT-C2-BORNE-TERMINAISON
+        observation: La preuve locale de 1NSI-AGT-COURS-C2 borne la boucle externe
+          par max(n-1,0) et la boucle interne par le variant j+1.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:2b79de52d2ba11b2c3858fd8cc5cfbef9dcc9580ab7334c3e452f9e49d702ae8
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-COURS-C2 passe avec le check_digest
+          exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd.
+      anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La démonstration suit initialisation, conservation et conclusion, puis fait expérimenter
-        l'invariant avec des assertions.
+      justification: Invariant, initialisation, conservation et terminaison sont séparés,
+        avec une conclusion conditionnée correctement par la taille.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex
-        line_start: 54
-        line_end: 102
-        excerpt_sha256: sha256:e9d41518ceba43b15c9acec67bc1d7b0eb516c92d1faabec61f11cc21aac7f8b
+        line_start: 56
+        line_end: 75
+        excerpt_sha256: sha256:a35a0de8829630940452076081c016308ceb4a224e11ad9149a48b0e8f829c43
         fact_type: pedagogical_structure
-        observation: Le parcours 1NSI-AGT-COURS-C2 articule le préfixe trié à chaque insertion et demande
-          de réinjecter cette propriété dans une implémentation personnelle.
+        observation: La démonstration de 1NSI-AGT-COURS-C2 isole n inférieur ou égal
+          à 1 avant d'utiliser la dernière itération i=n-1.
       anomaly_ids: []
-  anomalies:
-  - id: 1NSI-REV-AGT-C2-BORNE-TERMINAISON
-    severity: P0
-    dimension: scientific
-    fact:
-      path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex
-      line_start: 45
-      line_end: 51
-      excerpt_sha256: sha256:88264814b291984ff0cab7eb1615ad624b5be78d07338c7f4b7bdc1e55067965
-      fact_type: source_statement
-      observation: Le texte affirme que j décroît strictement et est borné par 0, alors que le code peut
-        décrémenter j jusqu'à -1.
-    consequence: La preuve publiée contient une assertion fausse sur la borne du variant de la boucle
-      interne.
-    expected_action: Corriger la borne inférieure en -1 ou choisir le variant j+1, puis ajouter un test
-      de régression de la preuve sur insertion en tête.
+  anomalies: []
 - id: 1NSI-AGT-COURS-C3
   scope: object
   chapter: 1NSI-ALGO-PARCOURS-TRIS
@@ -2080,41 +2220,65 @@ findings:
   - P-ALGO-02B
   - P-ALGO-02D
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
-      verdict: pass
-      justification: Le tri par sélection, sa terminaison, son coût quadratique et son invariant sont
-        cohérents et exécutés.
+      verdict: issue
+      justification: Le code et l'invariant sont corrects, mais la conclusion publiée
+        de la preuve n'est pas définie pour les tableaux de taille 0 ou 1.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex
-        line_start: 29
-        line_end: 95
-        excerpt_sha256: sha256:5b17e70ee8bb69dad13344940b0c527d32defb834e9e892df09986efcbde70da
+        line_start: 46
+        line_end: 75
+        excerpt_sha256: sha256:7ee04ae209bcb740158945dea1924677ee2740e7932e0ef24d21637fe145e574
         fact_type: source_statement
-        observation: Les vérifications de 1NSI-AGT-COURS-C3 trient quatre cas limites et contrôlent le
-          préfixe inférieur ou égal au suffixe.
-      anomaly_ids: []
+        observation: Dans 1NSI-AGT-COURS-C3, les boucles bornées terminent mais la
+          preuve finale omet les deux tailles sans itération externe.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:0778d479abb48c334e9f1e4949733ef708b03fbac19d99209dfe9bc93ed762f3
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-COURS-C3 passe avec le check_digest
+          exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd.
+      anomaly_ids:
+      - 1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON
     pedagogical:
       verdict: pass
-      justification: La comparaison insertion-sélection prépare une activité de mesure sur tableau déjà
-        trié.
+      justification: La comparaison insertion-sélection prépare une activité de mesure
+        sur tableau déjà trié.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex
         line_start: 97
         line_end: 114
         excerpt_sha256: sha256:58aff815802a83808e24b50eaf9b507e049b0fb2861e5f0da93bb0bb1027d7dd
         fact_type: pedagogical_structure
-        observation: La clôture de 1NSI-AGT-COURS-C3 relie le nombre fixe de comparaisons de sélection
-          à un comptage expérimental sur vingt éléments.
+        observation: La clôture de 1NSI-AGT-COURS-C3 relie le nombre fixe de comparaisons
+          de sélection à un comptage expérimental sur vingt éléments.
       anomaly_ids: []
-  anomalies: []
+  anomalies:
+  - id: 1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON
+    severity: P0
+    dimension: scientific
+    fact:
+      path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex
+      line_start: 72
+      line_end: 75
+      excerpt_sha256: sha256:5cec7f94aaddc4f14d237d8709f2fce77154f85f2d2b2e831a3da4475ec61df1
+      fact_type: source_statement
+      observation: La conclusion de 1NSI-AGT-COURS-C3 invoque une dernière itération
+        i=n-2 sans distinguer les cas n=0 et n=1 où cette itération n'existe pas.
+    consequence: La preuve générale attribue une dernière itération inexistante aux
+      tableaux vides ou réduits à un élément.
+    expected_action: Traiter séparément n inférieur ou égal à 1, puis réserver la
+      dernière itération i=n-2 au cas n supérieur ou égal à 2 et ajouter un test de
+      régression.
 - id: 1NSI-AGT-EVAL-A
   scope: object
   chapter: 1NSI-ALGO-PARCOURS-TRIS
@@ -2126,38 +2290,47 @@ findings:
   - P-ALGO-02A
   - P-ALGO-02C
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les valeurs de parcours et le résultat du tri par insertion sont exacts et exécutés.
+      justification: Les valeurs de parcours et le résultat du tri par insertion sont
+        exacts et exécutés.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A.tex
         line_start: 19
         line_end: 62
         excerpt_sha256: sha256:1e1c6afd9b698fafc76e92b4ddec56d8f1bc02d8b8119d22313b94d7fcce460a
         fact_type: source_statement
-        observation: Les contrôles de 1NSI-AGT-EVAL-A valident l'indice 3, le maximum 30, la moyenne 17,2
-          et le tri 2, 4, 6, 9.
+        observation: Les contrôles de 1NSI-AGT-EVAL-A valident l'indice 3, le maximum
+          30, la moyenne 17,2 et le tri 2, 4, 6, 9.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:1599ced4e46863c8dfa1079b3041e66aa8d6dbabb8c2f435231c3906556d8b6a
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EVAL-A passe avec le check_digest
+          exact sha256:9ec255e4e449dc8dd87edeb70b318a234f4725456b6bf25ae5b508fac274e164.
       anomaly_ids: []
     pedagogical:
       verdict: issue
-      justification: L'évaluation demande de dérouler un tri déjà fourni et son invariant, mais n'évalue
-        ni son écriture ni sa terminaison.
+      justification: L'évaluation demande de dérouler un tri déjà fourni et son invariant,
+        mais n'évalue ni son écriture ni sa terminaison.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A.tex
         line_start: 41
         line_end: 49
         excerpt_sha256: sha256:42193761569f9abcf04e4be1e307ddafd0290910e23e76a227bc8665127b4cbe
         fact_type: pedagogical_structure
-        observation: L'exercice 2 de 1NSI-AGT-EVAL-A réserve les dix points à la trace, au préfixe trié
-          et au coût, sans production d'algorithme ni argument de terminaison.
+        observation: L'exercice 2 de 1NSI-AGT-EVAL-A réserve les dix points à la trace,
+          au préfixe trié et au coût, sans production d'algorithme ni argument de
+          terminaison.
       anomaly_ids:
       - 1NSI-REV-AGT-EVAL-A-ECRITURE-TERMINAISON
   anomalies:
@@ -2170,12 +2343,12 @@ findings:
       line_end: 49
       excerpt_sha256: sha256:42193761569f9abcf04e4be1e307ddafd0290910e23e76a227bc8665127b4cbe
       fact_type: pedagogical_structure
-      observation: L'exercice de tri par insertion évalue trace, invariant et coût mais ni écriture de
-        l'algorithme ni terminaison.
-    consequence: Une réussite à cette évaluation ne démontre pas deux attendus officiels essentiels du
-      tri étudié.
-    expected_action: Ajouter une production ou complétion de code et une justification explicite de terminaison
-      avec critère observable.
+      observation: L'exercice de tri par insertion évalue trace, invariant et coût
+        mais ni écriture de l'algorithme ni terminaison.
+    consequence: Une réussite à cette évaluation ne démontre pas deux attendus officiels
+      essentiels du tri étudié.
+    expected_action: Ajouter une production ou complétion de code et une justification
+      explicite de terminaison avec critère observable.
 - id: 1NSI-AGT-EVAL-A-corrige
   scope: object
   chapter: 1NSI-ALGO-PARCOURS-TRIS
@@ -2187,38 +2360,46 @@ findings:
   - P-ALGO-02A
   - P-ALGO-02C
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les calculs 86 sur 5 et le tri intermédiaire sont concordants avec les assertions.
+      justification: Les calculs 86 sur 5 et le tri intermédiaire sont concordants
+        avec les assertions.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A-corrige.tex
         line_start: 2
         line_end: 31
         excerpt_sha256: sha256:1b65cb87e9ad5af24c3f7e31d055edb6e315060e69da818f86bb6de67664ad58
         fact_type: source_statement
-        observation: Le bloc de 1NSI-AGT-EVAL-A-corrige confirme les trois résultats de parcours et le
-          tableau final de l'insertion.
+        observation: Le bloc de 1NSI-AGT-EVAL-A-corrige confirme les trois résultats
+          de parcours et le tableau final de l'insertion.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A-corrige.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:948a0c6f995c5707800936826af951aca379f99261612ba936cf08e3aa19846a
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EVAL-A-corrige passe avec le
+          check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La correction restitue chaque insertion et vérifie le préfixe croissant avant de
-        donner le coût.
+      justification: La correction restitue chaque insertion et vérifie le préfixe
+        croissant avant de donner le coût.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A-corrige.tex
         line_start: 32
         line_end: 52
         excerpt_sha256: sha256:eb139a7a86298a20ac022ddd4f1480a06343e736c733fc4e6f6a223c3718ced4
         fact_type: pedagogical_structure
-        observation: Le corrigé 1NSI-AGT-EVAL-A-corrige sépare calculs de parcours et trois états successifs
-          du tri par insertion.
+        observation: Le corrigé 1NSI-AGT-EVAL-A-corrige sépare calculs de parcours
+          et trois états successifs du tri par insertion.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-EVAL-B
@@ -2232,38 +2413,46 @@ findings:
   - P-ALGO-02B
   - P-ALGO-02D
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les résultats de parcours et du tri par sélection sont exacts et fraîchement exécutés.
+      justification: Les résultats de parcours et du tri par sélection sont exacts
+        et fraîchement exécutés.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B.tex
         line_start: 19
         line_end: 62
         excerpt_sha256: sha256:3c5f4787946a81d2657ca66c04e7d6d3c3107c5a65f1158f30b4dc13d94b8c33
         fact_type: source_statement
-        observation: Les contrôles de 1NSI-AGT-EVAL-B retrouvent l'indice 2, le maximum 40, la moyenne
-          20 et le tri 1, 4, 7, 9.
+        observation: Les contrôles de 1NSI-AGT-EVAL-B retrouvent l'indice 2, le maximum
+          40, la moyenne 20 et le tri 1, 4, 7, 9.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:633ebeb3a95d495f61600102ffd97fd40df8515ad8ca372c8aabff63fcbbf34b
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EVAL-B passe avec le check_digest
+          exact sha256:9ec255e4e449dc8dd87edeb70b318a234f4725456b6bf25ae5b508fac274e164.
       anomaly_ids: []
     pedagogical:
       verdict: issue
-      justification: La variante sélection contrôle trace, invariant et coût, mais pas l'écriture de l'algorithme
-        ni la justification de sa terminaison.
+      justification: La variante sélection contrôle trace, invariant et coût, mais
+        pas l'écriture de l'algorithme ni la justification de sa terminaison.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B.tex
         line_start: 41
         line_end: 49
         excerpt_sha256: sha256:aae90df1b39a8f1d269e303159a8f7fea2f74581b736a1d21797fc0d97156405
         fact_type: pedagogical_structure
-        observation: L'exercice 2 de 1NSI-AGT-EVAL-B n'exige aucune fonction de tri écrite par l'élève
-          et aucune preuve que les deux boucles finissent.
+        observation: L'exercice 2 de 1NSI-AGT-EVAL-B n'exige aucune fonction de tri
+          écrite par l'élève et aucune preuve que les deux boucles finissent.
       anomaly_ids:
       - 1NSI-REV-AGT-EVAL-B-ECRITURE-TERMINAISON
   anomalies:
@@ -2276,11 +2465,12 @@ findings:
       line_end: 49
       excerpt_sha256: sha256:aae90df1b39a8f1d269e303159a8f7fea2f74581b736a1d21797fc0d97156405
       fact_type: pedagogical_structure
-      observation: L'exercice de tri par sélection fournit le cadre de l'algorithme et ne demande aucune
-        preuve de fin des deux boucles.
-    consequence: La variante B ne mesure pas la capacité à écrire le tri ni à justifier sa terminaison.
-    expected_action: Introduire une tâche d'écriture ou correction du code et un item distinct sur la
-      terminaison des boucles bornées.
+      observation: L'exercice de tri par sélection fournit le cadre de l'algorithme
+        et ne demande aucune preuve de fin des deux boucles.
+    consequence: La variante B ne mesure pas la capacité à écrire le tri ni à justifier
+      sa terminaison.
+    expected_action: Introduire une tâche d'écriture ou correction du code et un item
+      distinct sur la terminaison des boucles bornées.
 - id: 1NSI-AGT-EVAL-B-corrige
   scope: object
   chapter: 1NSI-ALGO-PARCOURS-TRIS
@@ -2292,38 +2482,46 @@ findings:
   - P-ALGO-02B
   - P-ALGO-02D
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les valeurs 100 sur 5 et le tri par sélection concordent avec les contrôles.
+      justification: Les valeurs 100 sur 5 et le tri par sélection concordent avec
+        les contrôles.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B-corrige.tex
         line_start: 2
         line_end: 31
         excerpt_sha256: sha256:eba9b009507d4b57bdca22ee5a7605bbd8828d62cb9c28f93ab42ca8f3d288fb
         fact_type: source_statement
-        observation: Le bloc de 1NSI-AGT-EVAL-B-corrige valide les trois agrégats puis le tableau croissant
-          1, 4, 7, 9.
+        observation: Le bloc de 1NSI-AGT-EVAL-B-corrige valide les trois agrégats
+          puis le tableau croissant 1, 4, 7, 9.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B-corrige.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:40d8d0ee9005a8a9a632ee62a6954dbec0eaf25f754c04493bb91e2802d3aa3b
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EVAL-B-corrige passe avec le
+          check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le corrigé expose chaque minimum, chaque échange et l'invariant complet avant de
-        comparer les coûts.
+      justification: Le corrigé expose chaque minimum, chaque échange et l'invariant
+        complet avant de comparer les coûts.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B-corrige.tex
         line_start: 32
         line_end: 54
         excerpt_sha256: sha256:f3a75598d3ea8a5367e102f430453118af1b1afb8cd03c584cdaab1deba39095
         fact_type: pedagogical_structure
-        observation: La solution 1NSI-AGT-EVAL-B-corrige suit les indices 1, 2 puis 2 et vérifie à chaque
-          tour la frontière préfixe-suffixe.
+        observation: La solution 1NSI-AGT-EVAL-B-corrige suit les indices 1, 2 puis
+          2 et vérifie à chaque tour la frontière préfixe-suffixe.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-EX-001
@@ -2334,37 +2532,46 @@ findings:
   capacity_refs:
   - P-ALGO-01B
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Le minimum et la moyenne demandés sont vérifiés sur les données exactes de l'énoncé.
+      justification: Le minimum et la moyenne demandés sont vérifiés sur les données
+        exactes de l'énoncé.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-001.tex
         line_start: 2
         line_end: 14
         excerpt_sha256: sha256:2aae1b7b6a242265846b1ff7ae0547f3ad05d213301b773b5e6ca551f46ffc5d
         fact_type: source_statement
-        observation: Le bloc de 1NSI-AGT-EX-001 obtient 1 et 6,6 à partir des cinq notes publiées.
+        observation: Le bloc de 1NSI-AGT-EX-001 obtient 1 et 6,6 à partir des cinq
+          notes publiées.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-001.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:be0fb7403d36133d5b752afa3f6bfbe0de87f47bdb0cbc30188b8137f9d8b3f2
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EX-001 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La tâche combine programmation, calcul et critique d'une initialisation dépendante
-        du contexte scolaire.
+      justification: La tâche combine programmation, calcul et critique d'une initialisation
+        dépendante du contexte scolaire.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-001.tex
         line_start: 15
         line_end: 21
         excerpt_sha256: sha256:0a2fc3a4a572c53447d049a02917559f77d4d8171d454e0323bcfbd4bc908dc4
         fact_type: pedagogical_structure
-        observation: L'exercice 1NSI-AGT-EX-001 demande de généraliser maximum en minimum puis de discuter
-          explicitement la constante 20.
+        observation: L'exercice 1NSI-AGT-EX-001 demande de généraliser maximum en
+          minimum puis de discuter explicitement la constante 20.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-EX-002
@@ -2375,36 +2582,46 @@ findings:
   capacity_refs:
   - P-ALGO-01A
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: La recherche de toutes les occurrences est correcte pour présence multiple et absence.
+      justification: La recherche de toutes les occurrences est correcte pour présence
+        multiple et absence.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-002.tex
         line_start: 2
         line_end: 11
         excerpt_sha256: sha256:aa50acfcaf5a9bcf06f5d39e3b4269881145f69d9d71afd65a948192456909cb
         fact_type: source_statement
-        observation: Les tests de 1NSI-AGT-EX-002 produisent trois indices ordonnés puis la liste vide.
+        observation: Les tests de 1NSI-AGT-EX-002 produisent trois indices ordonnés
+          puis la liste vide.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-002.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:b0532532cfa58c7cc5363a83c68774aa73c2e930a4a1b1ab7c5fbd0dc4cd97b5
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EX-002 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: L'exercice fait écrire, tester et analyser le coût d'une variante du cours.
+      justification: L'exercice fait écrire, tester et analyser le coût d'une variante
+        du cours.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-002.tex
         line_start: 12
         line_end: 19
         excerpt_sha256: sha256:47de24334d4634d52cdedf62caded3780910b731c356ffb38a4b668d02b866f2
         fact_type: pedagogical_structure
-        observation: Le parcours 1NSI-AGT-EX-002 mène d'une fonction à résultat unique vers une collection
-          complète d'indices et sa complexité.
+        observation: Le parcours 1NSI-AGT-EX-002 mène d'une fonction à résultat unique
+          vers une collection complète d'indices et sa complexité.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-EX-003
@@ -2416,13 +2633,13 @@ findings:
   - P-ALGO-02A
   - P-ALGO-02C
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
@@ -2433,20 +2650,28 @@ findings:
         line_end: 15
         excerpt_sha256: sha256:bcce0783488fdfb2669e3e2b8b96e709351d7940ee4a315c62d92131a0ccf25c
         fact_type: source_statement
-        observation: L'assertion de 1NSI-AGT-EX-003 confirme le résultat 1, 2, 4, 7.
+        observation: L'assertion de 1NSI-AGT-EX-003 confirme le résultat 1, 2, 4,
+          7.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-003.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:c1a23287b2c1f62c374087c910b4969dfea3403ef2735600607658dfc4e450ae
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EX-003 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Les consignes rendent observable l'invariant après chaque insertion puis demandent
-        une vérification machine finale.
+      justification: Les consignes rendent observable l'invariant après chaque insertion
+        puis demandent une vérification machine finale.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-003.tex
         line_start: 16
         line_end: 22
         excerpt_sha256: sha256:2ddf5ce73e270ac26f39c14005d0b9c7ec79fb3a7715cbb6b7d60399ca801e50
         fact_type: pedagogical_structure
-        observation: Dans 1NSI-AGT-EX-003, l'élève produit trois tableaux intermédiaires avant de confronter
-          le dernier au code.
+        observation: Dans 1NSI-AGT-EX-003, l'élève produit trois tableaux intermédiaires
+          avant de confronter le dernier au code.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-EX-004
@@ -2458,13 +2683,13 @@ findings:
   - P-ALGO-02B
   - P-ALGO-02D
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
@@ -2475,19 +2700,28 @@ findings:
         line_end: 15
         excerpt_sha256: sha256:1f44577325ef839171a50002722b0cbd5356f451af340fa4b23560329868d5ed
         fact_type: source_statement
-        observation: Le contrôle de 1NSI-AGT-EX-004 valide le tableau final 2, 3, 6, 8.
+        observation: Le contrôle de 1NSI-AGT-EX-004 valide le tableau final 2, 3,
+          6, 8.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-004.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:035e14fe60c440f32aa21b080844bb4788dfd9f80302acad22318a3f876baf6d
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EX-004 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: L'exercice exige indices minimaux, échanges et les deux clauses de l'invariant.
+      justification: L'exercice exige indices minimaux, échanges et les deux clauses
+        de l'invariant.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-004.tex
         line_start: 16
         line_end: 22
         excerpt_sha256: sha256:3e1045613a4e5a4147ec006f02b0a25279f603d9339a3346e526de052b4f14eb
         fact_type: pedagogical_structure
-        observation: La tâche 1NSI-AGT-EX-004 ne se limite pas au préfixe trié et fait aussi comparer
-          son maximum au minimum restant.
+        observation: La tâche 1NSI-AGT-EX-004 ne se limite pas au préfixe trié et
+          fait aussi comparer son maximum au minimum restant.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-EX-005
@@ -2499,39 +2733,46 @@ findings:
   - P-ALGO-02A
   - P-ALGO-02B
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: Les deux instruments de comptage donnent les valeurs annoncées pour les ordres croissant
-        et décroissant.
+      justification: Les deux instruments de comptage donnent les valeurs annoncées
+        pour les ordres croissant et décroissant.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-005.tex
         line_start: 2
         line_end: 41
         excerpt_sha256: sha256:6ec905a94576782c6f37c5af8070793f9b8be899886e89c6d48472a9c31940cb
         fact_type: source_statement
-        observation: Les assertions de 1NSI-AGT-EX-005 comparent 19 à 190 sur l'entrée triée puis établissent
-          l'égalité 190 sur l'entrée inverse.
+        observation: Les assertions de 1NSI-AGT-EX-005 comparent 19 à 190 sur l'entrée
+          triée puis établissent l'égalité 190 sur l'entrée inverse.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-005.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:16fac9dedf5acdde0673b71e2ec6d6c71f7558eec9707a4af4309fb09f992935
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-EX-005 passe avec le check_digest
+          exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le niveau 3 demande d'interpréter les mesures à partir de la boucle while plutôt
-        que de réciter les ordres de grandeur.
+      justification: Le niveau 3 demande d'interpréter les mesures à partir de la
+        boucle while plutôt que de réciter les ordres de grandeur.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-005.tex
         line_start: 42
         line_end: 49
         excerpt_sha256: sha256:9019725199fb0d02724fd5665f29bbab3aab034f7ccf16869d815216bb240723
         fact_type: pedagogical_structure
-        observation: L'exercice 1NSI-AGT-EX-005 fait expliquer pourquoi l'insertion perd son avantage
-          lorsque chaque nouvel élément traverse tout le préfixe.
+        observation: L'exercice 1NSI-AGT-EX-005 fait expliquer pourquoi l'insertion
+          perd son avantage lorsque chaque nouvel élément traverse tout le préfixe.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-RE-C5
@@ -2542,38 +2783,46 @@ findings:
   capacity_refs:
   - P-ALGO-02B
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: La version fautive produit le tableau annoncé et la version réparée trie correctement.
+      justification: La version fautive produit le tableau annoncé et la version réparée
+        trie correctement.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex
         line_start: 30
         line_end: 53
         excerpt_sha256: sha256:6f17b45d9dbbdd415b0f4cde0b3b915a5aa5f090bceb0f5df1759a4bea2badc9
         fact_type: source_statement
-        observation: La vérification de 1NSI-AGT-RE-C5 reproduit 7, 1, 5, 3, 9 avant d'obtenir 1, 3, 5,
-          7, 9 après déplacement de l'initialisation.
+        observation: La vérification de 1NSI-AGT-RE-C5 reproduit 7, 1, 5, 3, 9 avant
+          d'obtenir 1, 3, 5, 7, 9 après déplacement de l'initialisation.
+      - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex
+        line_start: 1
+        line_end: 1
+        excerpt_sha256: sha256:67ce61743ba05e2010ce08eb1fadf4abae35cb6f0fe61967ee4c910eaebef7a8
+        fact_type: computed_result
+        observation: L'exécution fraîche de 1NSI-AGT-RE-C5 passe avec le check_digest
+          exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: La remédiation isole une erreur de portée de variable et demande observation, explication
-        puis correction.
+      justification: La remédiation isole une erreur de portée de variable et demande
+        observation, explication puis correction.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex
         line_start: 7
         line_end: 27
         excerpt_sha256: sha256:91d59992161483573cb328bd67e0daa69a9517d6e89fe8ec764d4d2f645d4917
         fact_type: pedagogical_structure
-        observation: Le scénario 1NSI-AGT-RE-C5 centre les trois questions sur la conservation du meilleur
-          indice pendant la boucle interne.
+        observation: Le scénario 1NSI-AGT-RE-C5 centre les trois questions sur la
+          conservation du meilleur indice pendant la boucle interne.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-AGT-RE-C5-CORRIGE
@@ -2584,38 +2833,39 @@ findings:
   capacity_refs:
   - P-ALGO-02B
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
       verdict: pass
-      justification: La cause de la perte du minimum global et l'emplacement correct de l'initialisation
-        sont décrits exactement.
+      justification: La cause de la perte du minimum global et l'emplacement correct
+        de l'initialisation sont décrits exactement.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-RE-C5-CORRIGE.tex
         line_start: 3
         line_end: 19
         excerpt_sha256: sha256:dd12bb83898079b70b65baca24556d1218d3fb5840473c203991fc04831cff2b
         fact_type: source_statement
-        observation: Le corrigé 1NSI-AGT-RE-C5-CORRIGE explique que la dernière comparaison écrase le
-          candidat accumulé lorsque indice_min est recréé à chaque tour.
+        observation: Le corrigé 1NSI-AGT-RE-C5-CORRIGE explique que la dernière comparaison
+          écrase le candidat accumulé lorsque indice_min est recréé à chaque tour.
       anomaly_ids: []
     pedagogical:
       verdict: pass
-      justification: Le corrigé suit résultat observé, mécanisme fautif et réparation minimale.
+      justification: Le corrigé suit résultat observé, mécanisme fautif et réparation
+        minimale.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-RE-C5-CORRIGE.tex
         line_start: 3
         line_end: 19
         excerpt_sha256: sha256:dd12bb83898079b70b65baca24556d1218d3fb5840473c203991fc04831cff2b
         fact_type: pedagogical_structure
-        observation: La solution de remédiation 1NSI-AGT-RE-C5-CORRIGE distingue clairement la boucle
-          externe de la boucle interne pour replacer l'affectation.
+        observation: La solution de remédiation 1NSI-AGT-RE-C5-CORRIGE distingue clairement
+          la boucle externe de la boucle interne pour replacer l'affectation.
       anomaly_ids: []
   anomalies: []
 - id: 1NSI-ALGO-PARCOURS-TRIS-QCM
@@ -2631,58 +2881,42 @@ findings:
   - P-ALGO-02C
   - P-ALGO-02D
   provenance:
-    reviewer_id: 019feb71-27c9-7530-ab01-ce74cea1b4a2
-    review_run_id: 1nsi-objects-algorithms-2026-08-10-bernoulli-v1
-    reviewer_model: codex-inherited-gpt5
+    reviewer_id: 019febc0-6f71-7a92-a196-d579889d7e6e
+    review_run_id: 1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1
+    reviewer_model: codex-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:5abce77a76e6a652bfc165a49e42e748d6d181c01fbe5f5c786f5d355a65abc0
-    sealing_commit_sha: 150cb25badd570a60070435808b896390541dcb0
+    review_receipt_sha256: sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227
+    sealing_commit_sha: c315a7117dbd3b3e54c4894110d12b1862b4083e
   dimensions:
     scientific:
-      verdict: issue
-      justification: Cinq items sont univoques, mais la question sur l'initialisation du maximum admet
-        aussi le dernier élément selon le parcours choisi.
+      verdict: pass
+      justification: 'Q2 possède désormais une seule réponse défendable : le premier
+        élément, les trois autres propositions étant invalides en général.'
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex
         line_start: 25
         line_end: 33
-        excerpt_sha256: sha256:6808986392aff18ddc07a8e683e1129ce124a9cf884320215034350d098fb083
+        excerpt_sha256: sha256:bd1b538f2caa0fee7e640b41340fdd2fc92d921a3874acf29fa38083a219c2ad
         fact_type: source_statement
-        observation: Le QCM 1NSI-ALGO-PARCOURS-TRIS-QCM annonce une seule réponse alors que premier et
-          dernier éléments peuvent tous deux initialiser un maximum correct.
-      anomaly_ids:
-      - 1NSI-REV-AGT-QCM-Q2-AMBIGU
+        observation: Les quatre options actuelles de Q2 dans 1NSI-ALGO-PARCOURS-TRIS-QCM
+          éliminent l'ancienne initialisation valide par le dernier élément.
+      anomaly_ids: []
     pedagogical:
       verdict: issue
-      justification: L'objet d'auto-évaluation ne contient aucune clé, et l'ambiguïté de Q2 empêche en
-        plus une rétroaction fiable.
+      justification: L'objet d'auto-évaluation ne contient aucune clé, et l'ambiguïté
+        de Q2 empêche en plus une rétroaction fiable.
       facts:
       - path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex
         line_start: 3
         line_end: 79
-        excerpt_sha256: sha256:c5988aea66511a743dd983f648893845d7c8fecb1685941bc823e0ac41939409
+        excerpt_sha256: sha256:a25edc607255d24078f9d188aa03535ebd53b5f4deb114ee4bc49aa2e395f359
         fact_type: pedagogical_structure
-        observation: Le fichier 1NSI-ALGO-PARCOURS-TRIS-QCM se termine après six questions sans corrigé,
-          score ou orientation de remédiation.
+        observation: Le fichier 1NSI-ALGO-PARCOURS-TRIS-QCM se termine après six questions
+          sans corrigé, score ou orientation de remédiation.
       anomaly_ids:
       - 1NSI-REV-AGT-QCM-SANS-CLE
   anomalies:
-  - id: 1NSI-REV-AGT-QCM-Q2-AMBIGU
-    severity: P0
-    dimension: scientific
-    fact:
-      path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex
-      line_start: 25
-      line_end: 33
-      excerpt_sha256: sha256:6808986392aff18ddc07a8e683e1129ce124a9cf884320215034350d098fb083
-      fact_type: source_statement
-      observation: Pour un tableau non vide, le dernier élément est aussi une initialisation valide du
-        maximum si les autres éléments sont parcourus.
-    consequence: Deux distracteurs peuvent être défendus alors que l'instruction garantit une seule réponse
-      exacte.
-    expected_action: Préciser que la boucle parcourt tableau[1:] ou remplacer le distracteur dernier élément
-      par une valeur réellement invalide.
   - id: 1NSI-REV-AGT-QCM-SANS-CLE
     severity: P1
     dimension: pedagogical
@@ -2690,14 +2924,14 @@ findings:
       path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex
       line_start: 3
       line_end: 79
-      excerpt_sha256: sha256:c5988aea66511a743dd983f648893845d7c8fecb1685941bc823e0ac41939409
+      excerpt_sha256: sha256:a25edc607255d24078f9d188aa03535ebd53b5f4deb114ee4bc49aa2e395f359
       fact_type: pedagogical_structure
-      observation: Le QCM se présente comme auto-évaluation sans fournir réponses, score interprétable
-        ou feedback.
-    consequence: L'activité ne peut pas produire de preuve de maîtrise ni déclencher la remédiation annoncée
-      par la boucle Nexus.
-    expected_action: Ajouter une correction séparée et des orientations par capacité sans exposer les
-      réponses avant la passation.
+      observation: Le QCM se présente comme auto-évaluation sans fournir réponses,
+        score interprétable ou feedback.
+    consequence: L'activité ne peut pas produire de preuve de maîtrise ni déclencher
+      la remédiation annoncée par la boucle Nexus.
+    expected_action: Ajouter une correction séparée et des orientations par capacité
+      sans exposer les réponses avant la passation.
 - id: 1NSI-ARCHITECTURE-OS-QCM
   scope: object
   chapter: 1NSI-ARCHITECTURE-OS

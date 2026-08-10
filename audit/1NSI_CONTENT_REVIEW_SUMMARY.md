@@ -6,43 +6,40 @@ Publication approval: false
 Human confirmation required: true
 
 ## Scientific
-- pass: 119
-- issue: 125
+- pass: 121
+- issue: 123
 - not_applicable: 0
 - human_confirmation_required: 105
 
 ## Pedagogical
-- pass: 220
-- issue: 78
+- pass: 221
+- issue: 77
 - not_applicable: 0
 - human_confirmation_required: 51
 
 ## Anomalies
-- Total: 264
+- Total: 261
 
 ### By severity
-- P0: 144
-- P1: 117
+- P0: 142
+- P1: 116
 - P2: 3
 - P3: 0
 
 ### By dimension
-- scientific: 153
-- pedagogical: 97
+- scientific: 151
+- pedagogical: 96
 - traceability: 14
 
 ### Actions
-- `1NSI-REV-ADGK-C2-DOCSTRING-OPTIMALITE` [P0/scientific]: Remplacer la promesse par une description du choix glouton et réserver l'optimalité aux systèmes pour lesquels elle est démontrée.
-- `1NSI-REV-ADGK-C2-CONTRADICTION` [P1/pedagogical]: Aligner docstring, exemple et propriété autour d'une formulation unique distinguant résultat glouton et optimum.
 - `1NSI-REV-ADGK-C3-EGALITE-KNN` [P1/scientific]: Définir et tester une précondition ou une stratégie déterministe d'égalité, notamment pour plusieurs classes.
 - `1NSI-REV-ADGK-RE-C1-EXECUTION-INFINIE` [P1/pedagogical]: Fournir une version instrumentée avec compteur ou imposer un environnement avec timeout avant toute exécution.
 - `1NSI-REV-ADGK-QCM-SANS-CLE` [P1/pedagogical]: Ajouter une clé séparée de la version élève immédiate, un mécanisme de correction et des renvois de remédiation.
 - `1NSI-REV-APT-COUTS-TERMINAISON` [P1/scientific]: Ajouter des attendus observables sur la terminaison des tris, le coût linéaire des parcours et le coût quadratique au pire des deux tris.
 - `1NSI-REV-AGT-C1-MOYENNE-PARCOURS` [P1/scientific]: Écrire et tester une version par parcours explicite avant de présenter éventuellement sum comme raccourci de bibliothèque.
-- `1NSI-REV-AGT-C2-BORNE-TERMINAISON` [P0/scientific]: Corriger la borne inférieure en -1 ou choisir le variant j+1, puis ajouter un test de régression de la preuve sur insertion en tête.
+- `1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON` [P0/scientific]: Traiter séparément n inférieur ou égal à 1, puis réserver la dernière itération i=n-2 au cas n supérieur ou égal à 2 et ajouter un test de régression.
 - `1NSI-REV-AGT-EVAL-A-ECRITURE-TERMINAISON` [P1/pedagogical]: Ajouter une production ou complétion de code et une justification explicite de terminaison avec critère observable.
 - `1NSI-REV-AGT-EVAL-B-ECRITURE-TERMINAISON` [P1/pedagogical]: Introduire une tâche d'écriture ou correction du code et un item distinct sur la terminaison des boucles bornées.
-- `1NSI-REV-AGT-QCM-Q2-AMBIGU` [P0/scientific]: Préciser que la boucle parcourt tableau[1:] ou remplacer le distracteur dernier élément par une valeur réellement invalide.
 - `1NSI-REV-AGT-QCM-SANS-CLE` [P1/pedagogical]: Ajouter une correction séparée et des orientations par capacité sans exposer les réponses avant la passation.
 - `1NSI-REV-ARCH-QCM-AUTOCORRECTION` [P1/pedagogical]: Relier une clé professeur et fournir un retour élève sans exposer les réponses dans le manuel élève.
 - `1NSI-REV-ARCH-CO004-TERMINAL` [P1/pedagogical]: Ajouter les commandes shell attendues et leurs effets avant la variante automatisée en Python.
