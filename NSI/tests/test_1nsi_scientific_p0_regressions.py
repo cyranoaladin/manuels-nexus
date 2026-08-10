@@ -18,6 +18,9 @@ PYTHON_SOURCE = NSI_ROOT / "chapitres/1NSI-LANGAGE/code/maximum_bugue.py"
 MINIMUM_CORRECTION = (
     NSI_ROOT / "chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex"
 )
+MINIMUM_REMEDIATION = (
+    NSI_ROOT / "chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex"
+)
 MINIMUM_SOURCE = NSI_ROOT / "chapitres/1NSI-LANGAGE/code/minimum.py"
 REVIEW_SCRIPT = REPO_ROOT / "scripts/review_1nsi_content.py"
 
@@ -211,3 +214,66 @@ def test_minimum_canonical_source_rejects_empty_list_and_matches_correction() ->
         text=True,
     )
     assert verification.returncode == 0, verification.stdout + verification.stderr
+
+
+def test_minimum_remediation_states_nonempty_precondition_and_matches_answer() -> None:
+    assert MINIMUM_REMEDIATION.is_file()
+    assert MINIMUM_SOURCE.is_file()
+
+    source_code = MINIMUM_SOURCE.read_text(encoding="utf-8")
+    tex = MINIMUM_REMEDIATION.read_text(encoding="utf-8")
+    exercise = re.search(
+        r"\\begin\{exercice\}.*?\\end\{exercice\}", tex, re.DOTALL
+    )
+    assert exercise is not None
+    visible_text = exercise.group(0)
+    normalized_visible = " ".join(visible_text.split())
+    assert "liste non vide" in normalized_visible
+    assert visible_text.index("liste non vide") < visible_text.index(r"\begin{python}")
+    assert r"Le cas \lstinline{[]} est hors précondition." in visible_text
+    assert "justifier" in visible_text.lower()
+    assert "def minimum(liste):" not in visible_text
+    assert 'assert len(liste) > 0, "liste doit etre non vide"' not in visible_text
+    assert "AssertionError" not in visible_text
+
+    marker = "% PYTHON-SOURCE: code/minimum.py"
+    assert tex.count(marker) == 1
+    verify_matches = list(
+        re.finditer(
+            r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY", tex, re.DOTALL
+        )
+    )
+    assert len(verify_matches) == 1
+    verify_match = verify_matches[0]
+    verify_code = _uncomment(verify_match.group("verify"))
+    canonical_code = source_code.rstrip("\n")
+    assert verify_code.count(canonical_code) == 1
+    outside_verify = tex[: verify_match.start()] + tex[verify_match.end() :]
+    assert canonical_code not in outside_verify
+    assert re.search(
+        r"try:\n"
+        r"    minimum\(\[\]\)\n"
+        r"except AssertionError as erreur:\n"
+        r'    assert str\(erreur\) == "liste doit etre non vide"\n'
+        r"else:\n"
+        r"    raise AssertionError",
+        verify_code,
+    )
+
+    remediation_record = {
+        "id": "1NSI-LANGAGE-RE-C4",
+        "path": "NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex",
+        "metadata": {},
+        "scope": "object",
+        "chapter": "1NSI-LANGAGE",
+    }
+    manifest = review_module.dependency_manifest(
+        remediation_record, [remediation_record], REPO_ROOT
+    )
+    assert manifest["python"] == [
+        {
+            "path": "NSI/chapitres/1NSI-LANGAGE/code/minimum.py",
+            "sha256": "sha256:"
+            + hashlib.sha256(source_code.encode("utf-8")).hexdigest(),
+        }
+    ]
