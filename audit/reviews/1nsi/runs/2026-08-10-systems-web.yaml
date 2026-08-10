@@ -1,0 +1,3308 @@
+artifact_type: 1nsi_review_run
+schema_version: 1
+manual: 1NSI
+review_run_id: 1nsi-objects-systems-web-2026-08-10-boyle-v1
+reviewer_id: 019feb71-89a9-77b3-9103-ad05eacf18ca
+reviewer_model: codex-inherited-gpt5
+protocol_digest: sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9
+reviewed_at: '2026-08-10T11:43:03.124509+00:00'
+assignment:
+  scope: object
+  chapters:
+  - 1NSI-ARCHITECTURE-OS
+  - 1NSI-RESEAUX
+  - 1NSI-WEB-IHM
+  source_ids:
+  - 1NSI-ARCHITECTURE-OS-QCM
+  - 1NSI-ARCHITECTURE-OS-RE-C5
+  - 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE
+  - 1NSI-ARCHOS-CO-001
+  - 1NSI-ARCHOS-CO-002
+  - 1NSI-ARCHOS-CO-003
+  - 1NSI-ARCHOS-CO-004
+  - 1NSI-ARCHOS-CO-005
+  - 1NSI-ARCHOS-COURS-C1
+  - 1NSI-ARCHOS-COURS-C2
+  - 1NSI-ARCHOS-COURS-C3
+  - 1NSI-ARCHOS-EVAL-A
+  - 1NSI-ARCHOS-EVAL-A-corrige
+  - 1NSI-ARCHOS-EVAL-B
+  - 1NSI-ARCHOS-EVAL-B-corrige
+  - 1NSI-ARCHOS-EX-001
+  - 1NSI-ARCHOS-EX-002
+  - 1NSI-ARCHOS-EX-003
+  - 1NSI-ARCHOS-EX-004
+  - 1NSI-ARCHOS-EX-005
+  - 1NSI-RES-CO-001
+  - 1NSI-RES-CO-002
+  - 1NSI-RES-CO-003
+  - 1NSI-RES-CO-004
+  - 1NSI-RES-CO-005
+  - 1NSI-RES-COURS-C1
+  - 1NSI-RES-COURS-C2
+  - 1NSI-RES-COURS-C3
+  - 1NSI-RES-EVAL-A
+  - 1NSI-RES-EVAL-A-corrige
+  - 1NSI-RES-EVAL-B
+  - 1NSI-RES-EVAL-B-corrige
+  - 1NSI-RES-EX-001
+  - 1NSI-RES-EX-002
+  - 1NSI-RES-EX-003
+  - 1NSI-RES-EX-004
+  - 1NSI-RES-EX-005
+  - 1NSI-RESEAUX-QCM
+  - 1NSI-RESEAUX-RE-C1
+  - 1NSI-RESEAUX-RE-C1-CORRIGE
+  - 1NSI-WEB-CO-001
+  - 1NSI-WEB-CO-002
+  - 1NSI-WEB-CO-003
+  - 1NSI-WEB-CO-004
+  - 1NSI-WEB-CO-005
+  - 1NSI-WEB-COURS-C1
+  - 1NSI-WEB-COURS-C2
+  - 1NSI-WEB-COURS-C3
+  - 1NSI-WEB-EVAL-A
+  - 1NSI-WEB-EVAL-A-corrige
+  - 1NSI-WEB-EVAL-B
+  - 1NSI-WEB-EVAL-B-corrige
+  - 1NSI-WEB-EX-001
+  - 1NSI-WEB-EX-002
+  - 1NSI-WEB-EX-003
+  - 1NSI-WEB-EX-004
+  - 1NSI-WEB-EX-005
+  - 1NSI-WEB-IHM-QCM
+  - 1NSI-WEB-IHM-RE-C9
+  - 1NSI-WEB-IHM-RE-C9-CORRIGE
+source_manifest:
+  review_tool_sha256: sha256:a453068adf03803ac3e9f2e8e2cebca25e4113a64a0339bd19d8cf77ff1eb5fa
+  execution_checker_sha256: sha256:ad7dc41c88787d524bb0ba20c02b04ea9d8b5ac1646ad02c906b1af72d4ca0ba
+  execution_common_sha256: sha256:37822308dace9072c0bedccc3d73c4646dc9010aa859a64591a1fa7ad7338e53
+  entries:
+  - id: 1NSI-ARCHITECTURE-OS-QCM
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.tex
+    source_sha256: sha256:cf900c928e67cd67b499a98a0512b3818224bbad7b303bc6e6eab64faba67f1e
+    dependency_digest: sha256:330c16d921a8c2bc0d6504d977b2031b9ff6afa6f2709fd85a102e5a5746bec9
+  - id: 1NSI-ARCHITECTURE-OS-RE-C5
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex
+    source_sha256: sha256:3da27d42ed1e4c13910f2aefee607cac572e8f7dec185584d4ca315f1e861482
+    dependency_digest: sha256:0466f7bde9d4f4124972fa1459b24ed172db99e71330d81766f39431148ba440
+  - id: 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex
+    source_sha256: sha256:525f695c63069f0ffc7814c13d7c9d510a1e6c2279e14b847e4492e0008a532e
+    dependency_digest: sha256:5e052563c83ef547eda9912fffaad146e8467fa9dc224b29c5b6849b559b1d5a
+  - id: 1NSI-ARCHOS-CO-001
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex
+    source_sha256: sha256:b46fe5e5d77e6fa7ae6be35507d3e220eaa5f17a954938f129f53365e2e0fd39
+    dependency_digest: sha256:5322466d031128e4ce61b0937fbae59f7665093de55f2ab9789a6be82fde108a
+  - id: 1NSI-ARCHOS-CO-002
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex
+    source_sha256: sha256:149a5e9f44ecf2148c7dea53bd0168461d13a3d7dd16790569c8c69086373bf8
+    dependency_digest: sha256:35154c12e92d3285eb65e8bff55c8a8b0b3d28fb5ad1ceb8ca6141f9cc6127ca
+  - id: 1NSI-ARCHOS-CO-003
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex
+    source_sha256: sha256:5d73eca68da810d9a4a39d4cbd572e0aaaf76c6abeaf62f13fbb255a1ad43db7
+    dependency_digest: sha256:35974f5d847c110022f6c8a6bf2eda41d2267e4ae8f29c051b73e1b04efe406a
+  - id: 1NSI-ARCHOS-CO-004
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex
+    source_sha256: sha256:8cfb585f83bc6f58463ce9ba125eab8ae20de5ab0c14abc4218ec4ce719843e2
+    dependency_digest: sha256:e3c9a85b4f1d4bedb957205f65c4cfb82bdb20dd194bcdb3395e911bf85a984f
+  - id: 1NSI-ARCHOS-CO-005
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex
+    source_sha256: sha256:12fdf3da6cb39a2ee41e4a29c41c6a0b9dfc154d6f4291669b2a23455137d3b5
+    dependency_digest: sha256:29e9d18b2efbe877e3f96eb26ff4c13cc53fb0fd65e16475a442bee1129b602d
+  - id: 1NSI-ARCHOS-COURS-C1
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
+    source_sha256: sha256:c53437be351663fbf55e5db4573b5ae3b918f3ac82d3fee805004a5ecb612040
+    dependency_digest: sha256:ba043e04e7ba79cca07da2ec39b70d21fe15054fdc25c16c156157afaad0e192
+  - id: 1NSI-ARCHOS-COURS-C2
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C2.tex
+    source_sha256: sha256:706e19b60d79fea3b924c5309fe8c04458a7c888f306adeaf7e0e355f6960694
+    dependency_digest: sha256:342f272ed83f29299bd8e75766c218a8c336b2d96f99656e587a2b6f49db7d18
+  - id: 1NSI-ARCHOS-COURS-C3
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C3.tex
+    source_sha256: sha256:36e70dd8406447d4bae2fe13fbcaeb8065614aceb762774a5283dbcdc9bb5f63
+    dependency_digest: sha256:317f1cea20828318b9162115a310b55aa9692d1d5bbbf7e76342fb3d01e7c8be
+  - id: 1NSI-ARCHOS-EVAL-A
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex
+    source_sha256: sha256:bd32e360ccb8ac7fa5fd0a60bdb214e0c86c5090f0c1c64116cc987905d6c80a
+    dependency_digest: sha256:2f835ca0e91f1c26c30143bff4e87ee41abb192c2b6b8f3a905e60bd709952a6
+  - id: 1NSI-ARCHOS-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex
+    source_sha256: sha256:39fa2b034089fcad75d48a1f3add07c3064fe3ac9f05347c1361816bc634a600
+    dependency_digest: sha256:0cca0b6ed5bf48860245dbcba5bb09110aef4f8a2ab6ada7d4332e95c4324b82
+  - id: 1NSI-ARCHOS-EVAL-B
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex
+    source_sha256: sha256:880e27501c16adf8b17230e03793d3242610e72cfd972c7c03277e14d78c98d8
+    dependency_digest: sha256:56324ac7401dc9ffe336c7122b667b4f33468b767d291a953afef730b464d58a
+  - id: 1NSI-ARCHOS-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex
+    source_sha256: sha256:87977126fad9be17e03eb56bd3e94f1d6437b3e041b5ee6cd8b24adec7018cb8
+    dependency_digest: sha256:3e5cfa2db570c9ef8a51e6933362e328bfdf5e8648238bc49e758e74664d8486
+  - id: 1NSI-ARCHOS-EX-001
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-001.tex
+    source_sha256: sha256:f53529398e8cf69a40b9509f39f326ecc056bd4ddc9e8d2d71586529d46c0f33
+    dependency_digest: sha256:f6071f3a0ee4c5db37f1e98c54b54b5ff326d1cb2930c35fe3651c68d68aa7f9
+  - id: 1NSI-ARCHOS-EX-002
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-002.tex
+    source_sha256: sha256:d7ea2abcde1b50a87c5a291206fa8fc354dde722c27667d7b42ea2a4c4ded96f
+    dependency_digest: sha256:be48918ef6bba98bb638708d06fd5bd0e4bf1f7bb0d6cf0bc02c10aba00bfc09
+  - id: 1NSI-ARCHOS-EX-003
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-003.tex
+    source_sha256: sha256:0238343cf1ccc09e257c6ae91dcae56e796617057e551593be3dbb49648b200f
+    dependency_digest: sha256:04a4b50da779a09411a07ffacdf83d6e67cf21db34e31defcd3a2315b191f515
+  - id: 1NSI-ARCHOS-EX-004
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex
+    source_sha256: sha256:9e788090d226b687c5ee4d9bab7675ef22456aa72f7a92c8174c0970ef5ab2a2
+    dependency_digest: sha256:e494fe9b499ece5512b0ea0124cbbd3a9a804dd829ce17ba2bfc9f71895ddc34
+  - id: 1NSI-ARCHOS-EX-005
+    path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-005.tex
+    source_sha256: sha256:28d6018c7f5f3f4a6c1e5f7a5908c967e6843449761d51d1c8c4f0e52a655bc0
+    dependency_digest: sha256:7d33b085f68df827be77c45f7afdcf7b2245dab731d2d3369b78537eed7d8193
+  - id: 1NSI-RES-CO-001
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-001.tex
+    source_sha256: sha256:5ef2330225ea0d6eb719f73db2c7572634f31c87fdf2262dd549f1d5a31cddfa
+    dependency_digest: sha256:b32fb7e2f75b4ae346301bab5e6e274d2777a45c7c5bed91978be3125e0d838d
+  - id: 1NSI-RES-CO-002
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-002.tex
+    source_sha256: sha256:5bad788f49a25a178e4b3431fe2a876a227b2bf79afc5b207d35b741e258a84c
+    dependency_digest: sha256:64c9989bfb816565b0035b8b8de36c548fea920c3a12815f0b4a93445a179238
+  - id: 1NSI-RES-CO-003
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-003.tex
+    source_sha256: sha256:eb4af0f544c5af83cc76fa1699fdae0c330823ed06d97d02ebe52738cd3c358a
+    dependency_digest: sha256:bfd6f28919b336c549661fb2786eb77c10b1dd31ee496735b5eb019a0cfb2582
+  - id: 1NSI-RES-CO-004
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-004.tex
+    source_sha256: sha256:b13a6927186701d7ac068eca0f0e3950f88415b01bc02a0f84d414058bcb9383
+    dependency_digest: sha256:6b816b364f9cb7a508cfe71df61002f897bd2a5ed375bec304c0a9eff73cb327
+  - id: 1NSI-RES-CO-005
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-005.tex
+    source_sha256: sha256:55d341d6ff49882609b176b0182497dc44ad224600bbc90301da4fedb9f2c2d6
+    dependency_digest: sha256:0036a70ca7e278b4bb9e8361dd3c07fdddd26b9c1e627ef77ac98248eb1d3cf9
+  - id: 1NSI-RES-COURS-C1
+    path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C1.tex
+    source_sha256: sha256:92b61efa42774aee595aa9ea505fe2856e64e8443af9b87d1628c0bf4a38030a
+    dependency_digest: sha256:6d9b32880e3fa3b416a8947108e297eb8adc36360bd869fe48bc6bdf6af16b12
+  - id: 1NSI-RES-COURS-C2
+    path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
+    source_sha256: sha256:fe025eb8761525c7a11928a2798443d9e438fe1f97fcc4a9a32a595e17c3e532
+    dependency_digest: sha256:e278e04d79ea4a5fbb7dc3d2522c14f36b9c0c56bfffffeb6b64587a58473109
+  - id: 1NSI-RES-COURS-C3
+    path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+    source_sha256: sha256:25e1992ddf7ac22057d5fff0b45ef3849c25941c4f579dd217d6388d45c34f92
+    dependency_digest: sha256:ee00a1e67f25e4f0c8d9add571e18896918bb7ed4d2dffaa60f848348dd375fd
+  - id: 1NSI-RES-EVAL-A
+    path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
+    source_sha256: sha256:051d0635615ad8f75a088cfb8010e59ecb151e55db25e86c435930bc5d693afc
+    dependency_digest: sha256:0e1379351b461f0625f6c81ae377febe7417e9833d157083f1ce3989d4423d7b
+  - id: 1NSI-RES-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
+    source_sha256: sha256:cdafb2ed9a76f3c9dd208279420a338f501a45db90b06e212bec7fc3f575f58e
+    dependency_digest: sha256:ea70f97b9cc4b3329a0dab98cee629e74053cec6efc1dfe26fac71d52e4e27aa
+  - id: 1NSI-RES-EVAL-B
+    path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
+    source_sha256: sha256:a75a7f39a01142c81d7198777ad4e2828fe3df77ae320c8c832d5d86081c8326
+    dependency_digest: sha256:19428714249d61d3f0153f7f65805cfbe55557db1dabf99bee3d53ce3cb43918
+  - id: 1NSI-RES-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
+    source_sha256: sha256:1a7fe0d4291a96f79a71626a91955fd24d59f78ac2a437a52681e086139e5091
+    dependency_digest: sha256:1e6b254fdabeab67116a77f6472124e61591e05802a7b08cc210d61e3cc8017c
+  - id: 1NSI-RES-EX-001
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-001.tex
+    source_sha256: sha256:de3291bd93485f61939e248f63c4fb913ccae804f5d1adcccac16e1991f4017a
+    dependency_digest: sha256:97badbf20be1fd6162da1b808ec729daaa776bb0f2cf3915c71182f01b431547
+  - id: 1NSI-RES-EX-002
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
+    source_sha256: sha256:d389124686288c26f9d29a69ef1d872ff0212f54780657d868d69afb3d252513
+    dependency_digest: sha256:a4a29576fcda217629b43b56b6ac9dfaa954b28cb575557c1459e51a2525f669
+  - id: 1NSI-RES-EX-003
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
+    source_sha256: sha256:65a4a9983294ad544b3d8777ea1ecf75e361cdd103de3fa4e1def607e174c9b9
+    dependency_digest: sha256:56dcd3e390cdc4453f39dcb69440a97a836bfed4e4422186bf7a7272986d9797
+  - id: 1NSI-RES-EX-004
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-004.tex
+    source_sha256: sha256:0ac56c820f31fa687137f236ff455b45b829522f652f6a21f66dff85c8144f5c
+    dependency_digest: sha256:622ff9263e79beeb33b29f6680807de0489875b6a191620058cc13061b0f44cd
+  - id: 1NSI-RES-EX-005
+    path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
+    source_sha256: sha256:36d52fb96cef3bf4c4301df2bce619298fdf1a8bd64141b91abd64c8d75dcb85
+    dependency_digest: sha256:f072820e23a70f2008b0f680142634e4b6e44421bee667e904a61c0711ebeff0
+  - id: 1NSI-RESEAUX-QCM
+    path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
+    source_sha256: sha256:e15510b9b2c769b0d4b0be35be71e9314ab9b718fc77ca2b3830f0bfb565e65d
+    dependency_digest: sha256:539d87cfadcf9d5363534b3687cc5efc8ab1552291759315ac2114191e3b1c63
+  - id: 1NSI-RESEAUX-RE-C1
+    path: NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex
+    source_sha256: sha256:25fa0892a01eb6a86a310cb4eca28e36ce5de63acfc36b0aa48b643f8148babf
+    dependency_digest: sha256:33b6d2beaa5b54bb691eb638262675948b74f571fb2ff5f6579b7ea6d4a5bbf2
+  - id: 1NSI-RESEAUX-RE-C1-CORRIGE
+    path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
+    source_sha256: sha256:17cb364e2e25d432d3d8a724057a02e47d50e6bd9c579c727df16b35c70dbf9d
+    dependency_digest: sha256:1b8fe61d6daa5b6820169573b23ac665545f38b36db0bb4b5296957ddc4dd918
+  - id: 1NSI-WEB-CO-001
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
+    source_sha256: sha256:a1d0a4739760d5a13347c09ad79dac4e586f7c95e5fd5215e80974e373116e88
+    dependency_digest: sha256:be3a4b209eafe96f768d0d932462dacc368927735f2785b7ed2b704c86934340
+  - id: 1NSI-WEB-CO-002
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
+    source_sha256: sha256:29aaae9de2440becd751960145c55eda8fd4123742d0a1ada5b46a9fef469463
+    dependency_digest: sha256:1cc6e226bf8fe8c82583937a4933383f20a2002c812c33b7ecf9b08411acc1e0
+  - id: 1NSI-WEB-CO-003
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
+    source_sha256: sha256:c97a149c75db68d3b0566c7cf2f772cd2af00c28be69fdeabdebadce2073cd7a
+    dependency_digest: sha256:0ea5f85cf20835a05417c123ee7bc0ffdf958352d100f0731fa852b3d491df55
+  - id: 1NSI-WEB-CO-004
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
+    source_sha256: sha256:885dcdad606da7adea734301ec1c3eb0371f75cb14ddd862734aa1e0c1a5cf7d
+    dependency_digest: sha256:499a1c5cee8181b6b0834f68541e15dea66b9818b29136079fe50adb0329af20
+  - id: 1NSI-WEB-CO-005
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-005.tex
+    source_sha256: sha256:e7dc188159026c8e946397f8899618662a6c03a885dbb9c6f8f2ec6d50dac425
+    dependency_digest: sha256:19e040a71121c8bff4194b2fdb6836192a07199df0b80798fe38b47da04f5f72
+  - id: 1NSI-WEB-COURS-C1
+    path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
+    source_sha256: sha256:8326a78ed11d2e3eb4798e20c06298c1a43508f4261ee0e9c75fb2623987d2af
+    dependency_digest: sha256:0f7ea4accd251181d2e32e270c35ec4493f69fce356d5cee3795b0053e16a2b6
+  - id: 1NSI-WEB-COURS-C2
+    path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
+    source_sha256: sha256:aae660dfb939fa817684bbcb1e1587462db1c40264d5fda2b77d391631fe28dc
+    dependency_digest: sha256:a2494b392c499dda1e30653fbb301c17c357593fbbb36961c219bab0f0d4a7c3
+  - id: 1NSI-WEB-COURS-C3
+    path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
+    source_sha256: sha256:39d05a637a133eafcda90f6c9fb93c7a1896bbd744e0c6be0d44504575e1f044
+    dependency_digest: sha256:7fef6a41e4576dec4323a7767ad648d225f5f450b0cba61a1b52a08e190eb55d
+  - id: 1NSI-WEB-EVAL-A
+    path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
+    source_sha256: sha256:b32909f32fccbfc776514ab86408ceeb79bc0fc392ee246f2efddd42de606a24
+    dependency_digest: sha256:38441bc0b757a54e3db8689dfca3375b52f5d9eaace207b2f1c45d79dcddd961
+  - id: 1NSI-WEB-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+    source_sha256: sha256:0c5ff606a888b76ee1e151f22d81e96ab4d05c89a8209240ea75358f3c7f8a84
+    dependency_digest: sha256:82661b1a6045835a80e840a3f8d90c6f078bf1afeb3def253d5da4bf2b8f8eb0
+  - id: 1NSI-WEB-EVAL-B
+    path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
+    source_sha256: sha256:edbcfddc575ac899f4778a6adc27070d0b8e936e2e81ff120c30ff095f3f8946
+    dependency_digest: sha256:466b7b6b541dff4472af195e59d4e4fb9ef4bd1c8c298fa6292e9da7e3f07de8
+  - id: 1NSI-WEB-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+    source_sha256: sha256:c4dfce83e52e44ecf3c1fb889b13e187933cf480b0c3629cd26618c056b20007
+    dependency_digest: sha256:ebfe68f8a97a952e009393bac063c8ae9e19d45920e7a891d5ed4d5ea585eff3
+  - id: 1NSI-WEB-EX-001
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-001.tex
+    source_sha256: sha256:fa05bca79e568a724d96245e4082e9ed1097937b1843e115b0eb34c3bbb2f351
+    dependency_digest: sha256:2abdc3247aaf4050bc4647bacc5607a44a101e15870ab6b846c14274e610419e
+  - id: 1NSI-WEB-EX-002
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
+    source_sha256: sha256:ab7767f0db92d5a1c5db55b3a0b66874468801bbc6acb90e00ac8998471e97d8
+    dependency_digest: sha256:628d896be2414ceeba9da5085e80a343b03bf2a4c9c6e5659efa89e780fd2b74
+  - id: 1NSI-WEB-EX-003
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
+    source_sha256: sha256:071fbd7114ad7547ce0cdae48a58c703f5d41f1494507fee2504143c8718635c
+    dependency_digest: sha256:e57340da5aab910db8184c31522ccd5dc3ab2524976c1bfc4ea65fa1d2661bf8
+  - id: 1NSI-WEB-EX-004
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex
+    source_sha256: sha256:3c0aeeb0f43d5e110e2e8a8b9eef6f499cb29795c5217503add026dd39b6e7f0
+    dependency_digest: sha256:c3f6de116665909f7ff4d23d580cc437a4594628e75c3dcd6e4bd7ffcf08d72d
+  - id: 1NSI-WEB-EX-005
+    path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-005.tex
+    source_sha256: sha256:7255684c24c3db38b19035d65f0ab8bb005ba4f48fffac9b67c6eaa0ac306b53
+    dependency_digest: sha256:edec4b9710ac3e84c0aaee2343d214317b840eaadd0e12a2f4f051000ea6b0ff
+  - id: 1NSI-WEB-IHM-QCM
+    path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
+    source_sha256: sha256:51dc410026fd52366582b4ab62158c7ba3177cab1c76817fac1647bfd51ced91
+    dependency_digest: sha256:e78647ad5207cc920c46835b85c669da2b55aa2a07faa044e0b241f419f53987
+  - id: 1NSI-WEB-IHM-RE-C9
+    path: NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex
+    source_sha256: sha256:a380c4b236e05520186518017d262730740b17a02371c7e6be68d38cdb80858e
+    dependency_digest: sha256:9fe3467c0eb316def3c3169aab23cdcaf69c392e67b457fa32a581802bce1b37
+  - id: 1NSI-WEB-IHM-RE-C9-CORRIGE
+    path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C9-CORRIGE.tex
+    source_sha256: sha256:d3d9bef251a4cb21280299979dea4687a52ebd48467a60c2fee5aaa27a276574
+    dependency_digest: sha256:bdf4f5bf605077f7e2cbc6ca809f155717bf91ca31153d66256fffc5fab3ef3b
+reviews:
+- id: 1NSI-ARCHITECTURE-OS-QCM
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHITECTURE-OS-QCM est scientifiquement cohérent sur six questions sur la mémoire de von Neumann,
+          le séquencement, les processus, les commandes et les permissions dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:6062f99f86c9b6c5e4b585a8a1b716383aeafd89a11de66f4d06156e33f63817
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHITECTURE-OS-QCM couvre six questions sur la mémoire de von Neumann,
+            le séquencement, les processus, les commandes et les permissions et a été confrontée au contrat, au programme
+            et aux objets liés.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-ARCHITECTURE-OS-QCM présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir
+          l’objet sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:6062f99f86c9b6c5e4b585a8a1b716383aeafd89a11de66f4d06156e33f63817
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHITECTURE-OS-QCM, le format qcm propose un diagnostic à choix unique autour de six questions
+            sur la mémoire de von Neumann, le séquencement, les processus, les commandes et les permissions.
+        - &id001
+          path: NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.tex
+          line_start: 3
+          line_end: 81
+          excerpt_sha256: sha256:216e7dc8ac8aa136196391c8d173e726c694c1978b40690dbb65389ab1471222
+          fact_type: reviewer_observation
+          observation: Le document se présente comme un QCM d’auto-évaluation mais ne contient ni clé ni lien vers un corrigé.
+        anomaly_ids:
+        - 1NSI-REV-ARCH-QCM-AUTOCORRECTION
+    anomalies:
+    - id: 1NSI-REV-ARCH-QCM-AUTOCORRECTION
+      severity: P1
+      dimension: pedagogical
+      fact: *id001
+      consequence: L’élève ne peut pas vérifier ses six réponses ni orienter une remédiation.
+      expected_action: Relier une clé professeur et fournir un retour élève sans exposer les réponses dans le manuel élève.
+- id: 1NSI-ARCHITECTURE-OS-RE-C5
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHITECTURE-OS-RE-C5 est scientifiquement cohérent sur la distinction propriétaire, groupe et
+          autres dans une chaîne de permissions dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:3a0061b9553c0496d1e6f8ea86979a5cfc33253150040989502074d16044f951
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHITECTURE-OS-RE-C5 couvre la distinction propriétaire, groupe et autres
+            dans une chaîne de permissions et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:cab98303ab42b523e04d9d8c32122c713d4e747924d60b03e3a2fae8793df9d8
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHITECTURE-OS-RE-C5 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHITECTURE-OS-RE-C5 fournit une activité exploitable et cohérente avec son rôle de remediation
+          sur la distinction propriétaire, groupe et autres dans une chaîne de permissions.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:3a0061b9553c0496d1e6f8ea86979a5cfc33253150040989502074d16044f951
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHITECTURE-OS-RE-C5, le format remediation cible une erreur identifiée avant un nouveau
+            test autour de la distinction propriétaire, groupe et autres dans une chaîne de permissions.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE est scientifiquement cohérent sur la correction du diagnostic portant
+          sur les trois blocs de permissions dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex
+          line_start: 2
+          line_end: 18
+          excerpt_sha256: sha256:c6595d771ce1c4721d2d45e6d7697e70c538af8804c6e7892b8ed2c8a6aab76b
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE couvre la correction du diagnostic portant
+            sur les trois blocs de permissions et a été confrontée au contrat, au programme et aux objets liés.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE fournit une activité exploitable et cohérente avec son rôle de corrige
+          sur la correction du diagnostic portant sur les trois blocs de permissions.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex
+          line_start: 2
+          line_end: 18
+          excerpt_sha256: sha256:c6595d771ce1c4721d2d45e6d7697e70c538af8804c6e7892b8ed2c8a6aab76b
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE, le format corrige explicite la résolution de l’objet lié autour
+            de la correction du diagnostic portant sur les trois blocs de permissions.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-CO-001
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-001 est scientifiquement cohérent sur les rôles du processeur et de la mémoire ainsi
+          que l’exécution multicœur dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex
+          line_start: 2
+          line_end: 15
+          excerpt_sha256: sha256:3cc8576cfc589c207aa8aff54abc1b24ace4a3d865aa3c6aa12b34db08f0f005
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-CO-001 couvre les rôles du processeur et de la mémoire ainsi que
+            l’exécution multicœur et a été confrontée au contrat, au programme et aux objets liés.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-001 fournit une activité exploitable et cohérente avec son rôle de corrige sur les rôles
+          du processeur et de la mémoire ainsi que l’exécution multicœur.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex
+          line_start: 2
+          line_end: 15
+          excerpt_sha256: sha256:3cc8576cfc589c207aa8aff54abc1b24ace4a3d865aa3c6aa12b34db08f0f005
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-CO-001, le format corrige explicite la résolution de l’objet lié autour de les rôles
+            du processeur et de la mémoire ainsi que l’exécution multicœur.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-CO-002
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-002 est scientifiquement cohérent sur le déroulé LOAD, SUB, STORE d’une machine simplifiée
+          dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex
+          line_start: 2
+          line_end: 60
+          excerpt_sha256: sha256:09e505cd3c487be9773fa2acf74bfd1a316ae79ce28cebbf3008093e4f54e8dd
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-CO-002 couvre le déroulé LOAD, SUB, STORE d’une machine simplifiée
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:f9f86fb33344940daf1af97d1a259e34b4d3e104b64e97ab289ae888e529a48f
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-CO-002 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-002 fournit une activité exploitable et cohérente avec son rôle de corrige sur le déroulé
+          LOAD, SUB, STORE d’une machine simplifiée.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex
+          line_start: 2
+          line_end: 60
+          excerpt_sha256: sha256:09e505cd3c487be9773fa2acf74bfd1a316ae79ce28cebbf3008093e4f54e8dd
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-CO-002, le format corrige explicite la résolution de l’objet lié autour de le déroulé
+            LOAD, SUB, STORE d’une machine simplifiée.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-CO-003
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-003 est scientifiquement cohérent sur l’ordonnancement, les droits et la distinction
+          libre/propriétaire dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex
+          line_start: 2
+          line_end: 16
+          excerpt_sha256: sha256:49c2e08ab0e9d52a001b88530da2f8797d416615857a2a88817a032d4a345973
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-CO-003 couvre l’ordonnancement, les droits et la distinction libre/propriétaire
+            et a été confrontée au contrat, au programme et aux objets liés.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-003 fournit une activité exploitable et cohérente avec son rôle de corrige sur l’ordonnancement,
+          les droits et la distinction libre/propriétaire.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex
+          line_start: 2
+          line_end: 16
+          excerpt_sha256: sha256:49c2e08ab0e9d52a001b88530da2f8797d416615857a2a88817a032d4a345973
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-CO-003, le format corrige explicite la résolution de l’objet lié autour de l’ordonnancement,
+            les droits et la distinction libre/propriétaire.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-CO-004
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-004 est scientifiquement cohérent sur la création, le listage et la suppression de fichiers
+          par commandes Unix dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex
+          line_start: 2
+          line_end: 30
+          excerpt_sha256: sha256:87db07df574f0bf93b5cbf158833cd5ae65bb4f082ab7ad7504b126c69b73389
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-CO-004 couvre la création, le listage et la suppression de fichiers
+            par commandes Unix et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:1949780a6dc9c162bf2f63f100a6671936317352e4a6cdbd9b755b0c249cfc9a
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-CO-004 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-ARCHOS-CO-004 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex
+          line_start: 2
+          line_end: 30
+          excerpt_sha256: sha256:87db07df574f0bf93b5cbf158833cd5ae65bb4f082ab7ad7504b126c69b73389
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-CO-004, le format corrige explicite la résolution de l’objet lié autour de la création,
+            le listage et la suppression de fichiers par commandes Unix.
+        - &id002
+          path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex
+          line_start: 14
+          line_end: 29
+          excerpt_sha256: sha256:69eac9d6976a0a82d4240641fc2fed0f25c6df11938fdc463e0d402528cc8ec2
+          fact_type: reviewer_observation
+          observation: Le corrigé fournit un script subprocess sans montrer la séquence équivalente saisie dans un shell.
+        anomaly_ids:
+        - 1NSI-REV-ARCH-CO004-TERMINAL
+    anomalies:
+    - id: 1NSI-REV-ARCH-CO004-TERMINAL
+      severity: P1
+      dimension: pedagogical
+      fact: *id002
+      consequence: La correction valide du Python mais ne donne pas de preuve d’acquisition de la ligne de commande.
+      expected_action: Ajouter les commandes shell attendues et leurs effets avant la variante automatisée en Python.
+- id: 1NSI-ARCHOS-CO-005
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-005 est scientifiquement cohérent sur la lecture et la conversion octale des permissions
+          Unix dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex
+          line_start: 2
+          line_end: 34
+          excerpt_sha256: sha256:cda23d5c7178fcc4a44df6086f079b502d945122203f6bfe724872d943f4217f
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-CO-005 couvre la lecture et la conversion octale des permissions
+            Unix et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:4c32fb8a8a3092e7ba075df147e56c42810a660a6667a271884aa311e72d19f9
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-CO-005 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-CO-005 fournit une activité exploitable et cohérente avec son rôle de corrige sur la lecture
+          et la conversion octale des permissions Unix.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex
+          line_start: 2
+          line_end: 34
+          excerpt_sha256: sha256:cda23d5c7178fcc4a44df6086f079b502d945122203f6bfe724872d943f4217f
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-CO-005, le format corrige explicite la résolution de l’objet lié autour de la lecture
+            et la conversion octale des permissions Unix.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-COURS-C1
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-COURS-C1 est scientifiquement cohérent sur les constituants de von Neumann et la distinction
+          mono/multiprocesseur dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
+          line_start: 2
+          line_end: 62
+          excerpt_sha256: sha256:9a449b9881f7c81ac3368857746df649317c051ad8071a8966f7cbf312254853
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-COURS-C1 couvre les constituants de von Neumann et la distinction
+            mono/multiprocesseur et a été confrontée au contrat, au programme et aux objets liés.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-ARCHOS-COURS-C1 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
+          line_start: 2
+          line_end: 62
+          excerpt_sha256: sha256:9a449b9881f7c81ac3368857746df649317c051ad8071a8966f7cbf312254853
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-COURS-C1, le format cours organise définitions, exemples et mise en activité autour
+            de les constituants de von Neumann et la distinction mono/multiprocesseur.
+        - &id003
+          path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
+          line_start: 7
+          line_end: 11
+          excerpt_sha256: sha256:e1949d46815a73afbab9d355ae9ba51f8718d17b1b6648328d1b69c61deddb62
+          fact_type: reviewer_observation
+          observation: La définition annonce quatre constituants mais sa phrase regroupe processeur, mémoire et périphériques
+            d’entrée-sortie sans expliciter le décompte ni le statut du bus.
+        anomaly_ids:
+        - 1NSI-REV-ARCH-C1-CONSTITUANTS
+    anomalies:
+    - id: 1NSI-REV-ARCH-C1-CONSTITUANTS
+      severity: P1
+      dimension: pedagogical
+      fact: *id003
+      consequence: Les évaluations demandent ensuite quatre constituants sans que l’élève dispose d’une nomenclature non ambiguë.
+      expected_action: Énumérer explicitement les constituants retenus et distinguer le bus de liaison de cette liste.
+- id: 1NSI-ARCHOS-COURS-C2
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-COURS-C2 est scientifiquement cohérent sur la simulation et le déroulé d’instructions machine
+          simples dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C2.tex
+          line_start: 2
+          line_end: 97
+          excerpt_sha256: sha256:5af9033150ca2bfc770428d74301a01187abf6267a07bd276aa4633934c78a82
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-COURS-C2 couvre la simulation et le déroulé d’instructions machine
+            simples et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C2.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:b231956f47e4007b7e7d08184d7e638ec5346a4a4fc3926e646a85e27952465e
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-COURS-C2 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-COURS-C2 fournit une activité exploitable et cohérente avec son rôle de cours sur la simulation
+          et le déroulé d’instructions machine simples.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C2.tex
+          line_start: 2
+          line_end: 97
+          excerpt_sha256: sha256:5af9033150ca2bfc770428d74301a01187abf6267a07bd276aa4633934c78a82
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-COURS-C2, le format cours organise définitions, exemples et mise en activité autour
+            de la simulation et le déroulé d’instructions machine simples.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-COURS-C3
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-COURS-C3 est scientifiquement cohérent sur les fonctions d’un système, le terminal et les
+          permissions de fichiers dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C3.tex
+          line_start: 2
+          line_end: 139
+          excerpt_sha256: sha256:3d25fe496bfcc4d2abe55eb988ddee55caf23bda4950ff88c056df21afc66385
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-COURS-C3 couvre les fonctions d’un système, le terminal et les permissions
+            de fichiers et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C3.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:fe67f8b6304bf8aa79a67796705341060e0d84473b2b0fb4542d4abaafaab444
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-COURS-C3 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-COURS-C3 fournit une activité exploitable et cohérente avec son rôle de cours sur les fonctions
+          d’un système, le terminal et les permissions de fichiers.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C3.tex
+          line_start: 2
+          line_end: 139
+          excerpt_sha256: sha256:3d25fe496bfcc4d2abe55eb988ddee55caf23bda4950ff88c056df21afc66385
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-COURS-C3, le format cours organise définitions, exemples et mise en activité autour
+            de les fonctions d’un système, le terminal et les permissions de fichiers.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-EVAL-A
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EVAL-A est scientifiquement cohérent sur von Neumann, multiplication machine, fonctions
+          du système et permissions 750 dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex
+          line_start: 2
+          line_end: 84
+          excerpt_sha256: sha256:6e78405188e8d4d2963eb71ace82372c3ac2840eaa3bcbb1299196576d58352e
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EVAL-A couvre von Neumann, multiplication machine, fonctions du
+            système et permissions 750 et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:dfe0dade46d2a077f50094e13c5e0d1a878f61af1cb8d2ea4fa35334ea5a96fa
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-EVAL-A passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EVAL-A fournit une activité exploitable et cohérente avec son rôle de evaluation sur von
+          Neumann, multiplication machine, fonctions du système et permissions 750.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex
+          line_start: 2
+          line_end: 84
+          excerpt_sha256: sha256:6e78405188e8d4d2963eb71ace82372c3ac2840eaa3bcbb1299196576d58352e
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EVAL-A, le format evaluation recueille une preuve de maîtrise sur un temps annoncé
+            autour de von Neumann, multiplication machine, fonctions du système et permissions 750.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-EVAL-A-corrige
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EVAL-A-corrige est scientifiquement cohérent sur la résolution de l’évaluation A sur architecture
+          et permissions dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex
+          line_start: 2
+          line_end: 83
+          excerpt_sha256: sha256:ae2bff609c93dcb01a14f9abcd27e7b9138a11c75254b4c8f412a98b2e47979a
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EVAL-A-corrige couvre la résolution de l’évaluation A sur architecture
+            et permissions et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:5cd53e576e49a09e53cc13a6356e50f63f4cfc15387963f7dad0d3c30e9da132
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-EVAL-A-corrige passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EVAL-A-corrige fournit une activité exploitable et cohérente avec son rôle de corrige_evaluation
+          sur la résolution de l’évaluation A sur architecture et permissions.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex
+          line_start: 2
+          line_end: 83
+          excerpt_sha256: sha256:ae2bff609c93dcb01a14f9abcd27e7b9138a11c75254b4c8f412a98b2e47979a
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EVAL-A-corrige, le format corrige_evaluation fournit les réponses et justifications
+            du sujet lié autour de la résolution de l’évaluation A sur architecture et permissions.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-EVAL-B
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EVAL-B est scientifiquement cohérent sur von Neumann, soustraction machine, fonctions du
+          système et permissions 664 dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex
+          line_start: 2
+          line_end: 84
+          excerpt_sha256: sha256:71cfeec24c898af2402caf56834d8dbab2f35f1a22537bf43e977b23eb21f7f2
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EVAL-B couvre von Neumann, soustraction machine, fonctions du système
+            et permissions 664 et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:03857b678e928e10897a2364c3197c109f1f6741a314d4784ab22a0dcb69f4da
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-EVAL-B passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EVAL-B fournit une activité exploitable et cohérente avec son rôle de evaluation sur von
+          Neumann, soustraction machine, fonctions du système et permissions 664.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex
+          line_start: 2
+          line_end: 84
+          excerpt_sha256: sha256:71cfeec24c898af2402caf56834d8dbab2f35f1a22537bf43e977b23eb21f7f2
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EVAL-B, le format evaluation recueille une preuve de maîtrise sur un temps annoncé
+            autour de von Neumann, soustraction machine, fonctions du système et permissions 664.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-EVAL-B-corrige
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EVAL-B-corrige est scientifiquement cohérent sur la résolution de l’évaluation B sur architecture
+          et permissions dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:d0b0038abfe2b3cc394ba280eb7d23d06e8177452b963237712730c7bd1ba27c
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EVAL-B-corrige couvre la résolution de l’évaluation B sur architecture
+            et permissions et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:643f7b0bbec5f7993c32b18ff03f44cbbb97e7d18920e12ba2bc0fc1ca19f9a4
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-EVAL-B-corrige passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EVAL-B-corrige fournit une activité exploitable et cohérente avec son rôle de corrige_evaluation
+          sur la résolution de l’évaluation B sur architecture et permissions.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:d0b0038abfe2b3cc394ba280eb7d23d06e8177452b963237712730c7bd1ba27c
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EVAL-B-corrige, le format corrige_evaluation fournit les réponses et justifications
+            du sujet lié autour de la résolution de l’évaluation B sur architecture et permissions.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-EX-001
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-001 est scientifiquement cohérent sur les constituants de von Neumann, le multicœur
+          et l’interprétation des bits dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-001.tex
+          line_start: 2
+          line_end: 8
+          excerpt_sha256: sha256:43b8dfb2b349cee8ba30c8299b66ff0aae31f3e2e7ff4f24667c74fd03490ec0
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EX-001 couvre les constituants de von Neumann, le multicœur et l’interprétation
+            des bits et a été confrontée au contrat, au programme et aux objets liés.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-001 fournit une activité exploitable et cohérente avec son rôle de exercice sur les
+          constituants de von Neumann, le multicœur et l’interprétation des bits.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-001.tex
+          line_start: 2
+          line_end: 8
+          excerpt_sha256: sha256:43b8dfb2b349cee8ba30c8299b66ff0aae31f3e2e7ff4f24667c74fd03490ec0
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EX-001, le format exercice met l’élève en activité avec une consigne graduée autour
+            de les constituants de von Neumann, le multicœur et l’interprétation des bits.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-EX-002
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-002 est scientifiquement cohérent sur l’ajout de SUB et le suivi des registres et de
+          la mémoire dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-002.tex
+          line_start: 2
+          line_end: 51
+          excerpt_sha256: sha256:0a8f0cf6525c1ce914eef6ebc68f069ea7f182fb6e31c1d5cd204cd33498e065
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EX-002 couvre l’ajout de SUB et le suivi des registres et de la
+            mémoire et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-002.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:59450660f0846ef7dbc9d9cd6b8b445ea527b616c629da976971335d336b7c63
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-EX-002 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-002 fournit une activité exploitable et cohérente avec son rôle de exercice sur l’ajout
+          de SUB et le suivi des registres et de la mémoire.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-002.tex
+          line_start: 2
+          line_end: 51
+          excerpt_sha256: sha256:0a8f0cf6525c1ce914eef6ebc68f069ea7f182fb6e31c1d5cd204cd33498e065
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EX-002, le format exercice met l’élève en activité avec une consigne graduée autour
+            de l’ajout de SUB et le suivi des registres et de la mémoire.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-EX-003
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-003 est scientifiquement cohérent sur l’ordonnancement sur un cœur, l’isolation et les
+          systèmes libres dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-003.tex
+          line_start: 2
+          line_end: 10
+          excerpt_sha256: sha256:31a7496178a125fd4e2a77c7e2c7224f73531250c4627fc3cf3655f69e504d25
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EX-003 couvre l’ordonnancement sur un cœur, l’isolation et les systèmes
+            libres et a été confrontée au contrat, au programme et aux objets liés.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-003 fournit une activité exploitable et cohérente avec son rôle de exercice sur l’ordonnancement
+          sur un cœur, l’isolation et les systèmes libres.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-003.tex
+          line_start: 2
+          line_end: 10
+          excerpt_sha256: sha256:31a7496178a125fd4e2a77c7e2c7224f73531250c4627fc3cf3655f69e504d25
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EX-003, le format exercice met l’élève en activité avec une consigne graduée autour
+            de l’ordonnancement sur un cœur, l’isolation et les systèmes libres.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-ARCHOS-EX-004
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-004 est scientifiquement cohérent sur l’usage de mkdir, touch, ls et rm depuis Python
+          dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex
+          line_start: 2
+          line_end: 24
+          excerpt_sha256: sha256:c08504f1f08cc2504281c2225d53ff6a2cc304a8a89e63667f9880910028dbbb
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EX-004 couvre l’usage de mkdir, touch, ls et rm depuis Python et
+            a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:58b420ade2e8263bd20f0e55000a78891f79bc9cd47a30729bdcd187c0f7754b
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-EX-004 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-ARCHOS-EX-004 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex
+          line_start: 2
+          line_end: 24
+          excerpt_sha256: sha256:c08504f1f08cc2504281c2225d53ff6a2cc304a8a89e63667f9880910028dbbb
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EX-004, le format exercice met l’élève en activité avec une consigne graduée autour
+            de l’usage de mkdir, touch, ls et rm depuis Python.
+        - &id004
+          path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex
+          line_start: 14
+          line_end: 23
+          excerpt_sha256: sha256:6d22405e50db93fbb45ebd5437ecf1e5a9b63cb7d7b5fc4e0196121da4ecc540
+          fact_type: reviewer_observation
+          observation: L’exercice demande d’utiliser les commandes de base uniquement au travers de subprocess.run et non
+            dans une véritable ligne de commande.
+        anomaly_ids:
+        - 1NSI-REV-ARCH-EX004-TERMINAL
+    anomalies:
+    - id: 1NSI-REV-ARCH-EX004-TERMINAL
+      severity: P1
+      dimension: pedagogical
+      fact: *id004
+      consequence: La capacité officielle d’usage du terminal n’est pas directement observée chez l’élève.
+      expected_action: Faire exécuter et expliquer la séquence dans un terminal libre, puis réserver Python à une comparaison
+        éventuelle.
+- id: 1NSI-ARCHOS-EX-005
+  chapter: 1NSI-ARCHITECTURE-OS
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-005 est scientifiquement cohérent sur les droits rw-r----- et leur notation 640 dans
+          le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-005.tex
+          line_start: 2
+          line_end: 29
+          excerpt_sha256: sha256:6fd976357cd6e5c059218ab0548a614bbd21531c327884d16c4a7c7eb0178103
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-ARCHOS-EX-005 couvre les droits rw-r----- et leur notation 640 et a été
+            confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-005.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:3ae117a73c3f5d4eb7608e43b539b1ddd24e2f397dd100f68f7e8e9a3a52f9e4
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-ARCHOS-EX-005 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-ARCHOS-EX-005 fournit une activité exploitable et cohérente avec son rôle de exercice sur les
+          droits rw-r----- et leur notation 640.
+        facts:
+        - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-005.tex
+          line_start: 2
+          line_end: 29
+          excerpt_sha256: sha256:6fd976357cd6e5c059218ab0548a614bbd21531c327884d16c4a7c7eb0178103
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-ARCHOS-EX-005, le format exercice met l’élève en activité avec une consigne graduée autour
+            de les droits rw-r----- et leur notation 640.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-RES-CO-001
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RES-CO-001 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-001.tex
+          line_start: 2
+          line_end: 39
+          excerpt_sha256: sha256:0ab3d4ff3f5008dea00443aaffb58f71a58dad736e6dcddaf40121fb411e52ea
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-CO-001 couvre le réassemblage ordonné du message PROTOCOLERESEAU et
+            a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-001.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:c80261215569971ba4d8c65dd0acf0c59bc41116a25e380accdacd9017417b8e
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-CO-001 passe ; sa trace concorde avec son reçu.
+        - &id005
+          path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-001.tex
+          line_start: 30
+          line_end: 38
+          excerpt_sha256: sha256:a44074714230767b9333a7ed96f755e3d308b70df6d09bbf2f242c270332d760
+          fact_type: reviewer_observation
+          observation: Le corrigé affirme que chaque paquet porte nécessairement un numéro dans son en-tête afin d’être remis
+            en ordre.
+        anomaly_ids:
+        - 1NSI-REV-RES-C1-HEADER-CO001
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-CO-001 fournit une activité exploitable et cohérente avec son rôle de corrige sur le réassemblage
+          ordonné du message PROTOCOLERESEAU.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-001.tex
+          line_start: 2
+          line_end: 39
+          excerpt_sha256: sha256:0ab3d4ff3f5008dea00443aaffb58f71a58dad736e6dcddaf40121fb411e52ea
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-CO-001, le format corrige explicite la résolution de l’objet lié autour de le réassemblage
+            ordonné du message PROTOCOLERESEAU.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-RES-C1-HEADER-CO001
+      severity: P0
+      dimension: scientific
+      fact: *id005
+      consequence: Une règle propre au modèle local est enseignée comme propriété universelle des paquets réseau.
+      expected_action: Restreindre l’affirmation au protocole simulé et distinguer en-têtes IP, transport et données applicatives.
+- id: 1NSI-RES-CO-002
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RES-CO-002 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-002.tex
+          line_start: 2
+          line_end: 32
+          excerpt_sha256: sha256:6ec5a6758da7cdfc15751a966d4086b9d447bca9cb7eaaab3c1d4c6d1b7baa83
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-CO-002 couvre le déroulé de cinq tentatives avec bits alternés et a
+            été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-002.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:82a553a2445ee385fb6a702e1ed328a9eb3218bce1afadc338ae1e2ebf03b8dc
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-CO-002 passe ; sa trace concorde avec son reçu.
+        - &id006
+          path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-002.tex
+          line_start: 20
+          line_end: 31
+          excerpt_sha256: sha256:0493ed510398891c5fd5f2d38303fcc5b9c7668091d848898c561ea06a6e04f3
+          fact_type: reviewer_observation
+          observation: Le corrigé qualifie chaque tentative de perdue sans indiquer si le récepteur a reçu le paquet avant
+            la perte de l’ACK.
+        anomaly_ids:
+        - 1NSI-REV-RES-BITALT-CO002
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-CO-002 fournit une activité exploitable et cohérente avec son rôle de corrige sur le déroulé
+          de cinq tentatives avec bits alternés.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-002.tex
+          line_start: 2
+          line_end: 32
+          excerpt_sha256: sha256:6ec5a6758da7cdfc15751a966d4086b9d447bca9cb7eaaab3c1d4c6d1b7baa83
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-CO-002, le format corrige explicite la résolution de l’objet lié autour de le déroulé
+            de cinq tentatives avec bits alternés.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-RES-BITALT-CO002
+      severity: P0
+      dimension: scientific
+      fact: *id006
+      consequence: Le déroulé validé ne démontre pas le mécanisme scientifique du protocole du bit alterné.
+      expected_action: Fournir deux traces distinctes, dont une perte d’ACK avec doublon reçu puis ignoré.
+- id: 1NSI-RES-CO-003
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RES-CO-003 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-003.tex
+          line_start: 2
+          line_end: 38
+          excerpt_sha256: sha256:3039d66c0e7d657f0227c1363fe3e4a4e073bf8b8ac57cce148c7ab77d03ef44
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-CO-003 couvre la recherche récursive d’un chemin entre salles et commutateurs
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-003.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:861faea0e7329f477c01534c63a8fb808d8a3f9098f95cd5e8d6917f070663bc
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-CO-003 passe ; sa trace concorde avec son reçu.
+        - &id007
+          path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-003.tex
+          line_start: 26
+          line_end: 37
+          excerpt_sha256: sha256:8d640ae9ed9d0ada5e4fde2ba058d2d40c72b00885fe9962b4b44314266f8f4a
+          fact_type: reviewer_observation
+          observation: Le corrigé exige l’explication d’appels récursifs sans fin et du marquage des sommets.
+        anomaly_ids:
+        - 1NSI-REV-RES-RECURSION-CO003
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-CO-003 fournit une activité exploitable et cohérente avec son rôle de corrige sur la recherche
+          récursive d’un chemin entre salles et commutateurs.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-003.tex
+          line_start: 2
+          line_end: 38
+          excerpt_sha256: sha256:3039d66c0e7d657f0227c1363fe3e4a4e073bf8b8ac57cce148c7ab77d03ef44
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-CO-003, le format corrige explicite la résolution de l’objet lié autour de la recherche
+            récursive d’un chemin entre salles et commutateurs.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-RES-RECURSION-CO003
+      severity: P0
+      dimension: scientific
+      fact: *id007
+      consequence: Le corrigé institutionnalise la récursion et les parcours de graphe comme savoirs de Première.
+      expected_action: Fournir une correction centrée sur la topologie et réserver l’algorithme récursif à un approfondissement
+        non exigible.
+- id: 1NSI-RES-CO-004
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-CO-004 est scientifiquement cohérent sur la décision d’éclairage autour du seuil de 300 lux
+          dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-004.tex
+          line_start: 2
+          line_end: 23
+          excerpt_sha256: sha256:58dd6cabe161973720ff12a1ed561bd743117c8b0a8e8d60c10383c75e8bbcee
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-CO-004 couvre la décision d’éclairage autour du seuil de 300 lux et
+            a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-004.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:5843efd92f68ad21a1e92b405ae684c33ae5958a9667d3d359d7b39b840d8563
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-CO-004 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-CO-004 fournit une activité exploitable et cohérente avec son rôle de corrige sur la décision
+          d’éclairage autour du seuil de 300 lux.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-004.tex
+          line_start: 2
+          line_end: 23
+          excerpt_sha256: sha256:58dd6cabe161973720ff12a1ed561bd743117c8b0a8e8d60c10383c75e8bbcee
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-CO-004, le format corrige explicite la résolution de l’objet lié autour de la décision
+            d’éclairage autour du seuil de 300 lux.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-RES-CO-005
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-CO-005 est scientifiquement cohérent sur la commande d’une pompe avec hystérésis dans le périmètre
+          observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-005.tex
+          line_start: 2
+          line_end: 38
+          excerpt_sha256: sha256:1a2f4f2a9c7a28dc25a65ceb8aba3e4f215d06f73c38ef329e052cea8365a46b
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-CO-005 couvre la commande d’une pompe avec hystérésis et a été confrontée
+            au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-005.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:285ad98bfdee562aba277d477ca4215ce9ce7079978220e554ad1dcefa4055a3
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-CO-005 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RES-CO-005 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-005.tex
+          line_start: 2
+          line_end: 38
+          excerpt_sha256: sha256:1a2f4f2a9c7a28dc25a65ceb8aba3e4f215d06f73c38ef329e052cea8365a46b
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-CO-005, le format corrige explicite la résolution de l’objet lié autour de la commande
+            d’une pompe avec hystérésis.
+        - &id008
+          path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-005.tex
+          line_start: 16
+          line_end: 38
+          excerpt_sha256: sha256:4190f3764571b3b4d2bf112448e6fa50f315cf4d114d03c1cc7c7f12b41c7768
+          fact_type: reviewer_observation
+          observation: Le corrigé valide une hystérésis de pompe sans traiter d’interface homme-machine.
+        anomaly_ids:
+        - 1NSI-REV-RES-IHM-CO005
+    anomalies:
+    - id: 1NSI-REV-RES-IHM-CO005
+      severity: P1
+      dimension: pedagogical
+      fact: *id008
+      consequence: La correction ne rétablit pas l’alignement avec la capacité IHM portée par l’objet.
+      expected_action: Compléter par la gestion d’un événement utilisateur et la présentation de l’état de la pompe.
+- id: 1NSI-RES-COURS-C1
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RES-COURS-C1 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C1.tex
+          line_start: 2
+          line_end: 109
+          excerpt_sha256: sha256:1905b62ab84b96182f7d791423d76ad8aeefeda34d3b538afaf0d830254c0cf3
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-COURS-C1 couvre le découpage, le réassemblage et l’encapsulation de
+            données et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C1.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:e9798c256e29172587f1887b02b5cf285f5a4eca4a66d3d408c430ec43aa077e
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-COURS-C1 passe ; sa trace concorde avec son reçu.
+        - &id009
+          path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C1.tex
+          line_start: 7
+          line_end: 18
+          excerpt_sha256: sha256:0a5dd188b0ae8d5a8f1dcd7cffe9c32f3196d223e353a55d1a3e33f0285c4648
+          fact_type: reviewer_observation
+          observation: Le cours présente le numéro et le nombre total comme des champs génériques de l’en-tête d’un paquet
+            et en déduit le réordonnancement de tout message.
+        anomaly_ids:
+        - 1NSI-REV-RES-C1-HEADER-COURSE
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-COURS-C1 fournit une activité exploitable et cohérente avec son rôle de cours sur le découpage,
+          le réassemblage et l’encapsulation de données.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C1.tex
+          line_start: 2
+          line_end: 109
+          excerpt_sha256: sha256:1905b62ab84b96182f7d791423d76ad8aeefeda34d3b538afaf0d830254c0cf3
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-COURS-C1, le format cours organise définitions, exemples et mise en activité autour de
+            le découpage, le réassemblage et l’encapsulation de données.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-RES-C1-HEADER-COURSE
+      severity: P0
+      dimension: scientific
+      fact: *id009
+      consequence: Cette généralisation confond le modèle pédagogique avec les mécanismes réels des couches IP et transport.
+      expected_action: Nommer explicitement le protocole et la couche qui portent séquencement ou fragmentation, puis étiqueter
+        le dictionnaire comme modèle simplifié.
+- id: 1NSI-RES-COURS-C2
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RES-COURS-C2 présente 2 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
+          line_start: 2
+          line_end: 146
+          excerpt_sha256: sha256:8a47ddffdeff0fa6f833029d18af9e04e71085d8fcd8c6c6685894469c2d1f34
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-COURS-C2 couvre le bit alterné et une simulation de réseau par graphe
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:d263db3de2bb65d47fa968339d202879e43c625778de7ad0c949f85e68b7c073
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-COURS-C2 passe ; sa trace concorde avec son reçu.
+        - &id010
+          path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
+          line_start: 19
+          line_end: 40
+          excerpt_sha256: sha256:d4f2500398e0f5b627bd59e3ab5ce07ebd5135c401ce7e8bfac7ba3e71dbcbab
+          fact_type: reviewer_observation
+          observation: La simulation traite de la même façon une perte du paquet et une perte de l’ACK en n’ajoutant rien
+            au récepteur lors de la tentative perdue.
+        - &id011
+          path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
+          line_start: 77
+          line_end: 107
+          excerpt_sha256: sha256:eab6cf96ec2dbf027000d138b1be0dfcb3424f41da1affdb0700db73fbd39b99
+          fact_type: reviewer_observation
+          observation: Le cours impose une recherche de chemin récursive avec ensemble de sommets visités sans étiqueter cet
+            algorithme comme approfondissement de Terminale.
+        anomaly_ids:
+        - 1NSI-REV-RES-BITALT-COURSE
+        - 1NSI-REV-RES-RECURSION-COURSE
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RES-COURS-C2 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
+          line_start: 2
+          line_end: 146
+          excerpt_sha256: sha256:8a47ddffdeff0fa6f833029d18af9e04e71085d8fcd8c6c6685894469c2d1f34
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-COURS-C2, le format cours organise définitions, exemples et mise en activité autour de
+            le bit alterné et une simulation de réseau par graphe.
+        - &id012
+          path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
+          line_start: 139
+          line_end: 146
+          excerpt_sha256: sha256:d1105a27043b880e5dcca107d92ef9d504c565d98e29561654139869a445a1c0
+          fact_type: reviewer_observation
+          observation: L’activité demande de vérifier que PC3 n’accède pas directement à Internet alors que la fonction fournie
+            ne distingue que l’existence d’un chemin, lequel existe via PC1 et le commutateur.
+        anomaly_ids:
+        - 1NSI-REV-RES-C2-DIRECT
+    anomalies:
+    - id: 1NSI-REV-RES-BITALT-COURSE
+      severity: P0
+      dimension: scientific
+      fact: *id010
+      consequence: 'Elle ne simule jamais le cas définissant l’utilité du bit alterné : paquet reçu, ACK perdu, retransmission
+        puis rejet du doublon.'
+      expected_action: Modéliser séparément livraison du paquet et livraison de l’ACK, conserver le bit attendu du récepteur
+        et tester le rejet d’un doublon.
+    - id: 1NSI-REV-RES-RECURSION-COURSE
+      severity: P0
+      dimension: scientific
+      fact: *id011
+      consequence: La récursion et le parcours de graphe deviennent des prérequis exigibles pour une capacité de Première.
+      expected_action: Remplacer l’exigence par une simulation réseau de Première ou fournir un outil opaque, et étiqueter
+        clairement tout parcours récursif hors programme.
+    - id: 1NSI-REV-RES-C2-DIRECT
+      severity: P1
+      dimension: pedagogical
+      fact: *id012
+      consequence: La consigne n’est pas vérifiable avec l’outil proposé et peut faire confondre liaison directe et communication.
+      expected_action: Demander séparément l’adjacence et la connectivité, avec les résultats attendus pour chacune.
+- id: 1NSI-RES-COURS-C3
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-COURS-C3 est scientifiquement cohérent sur les capteurs, actionneurs et la commande programmée
+          d’un thermostat dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+          line_start: 2
+          line_end: 93
+          excerpt_sha256: sha256:eae87a96a86195e26693b8b6ffadfcbf1c09e67e1228afc16df450080be6c194
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-COURS-C3 couvre les capteurs, actionneurs et la commande programmée
+            d’un thermostat et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:e3e0b4003746beb4b633826abe6512a5a107afbb93edf3aa52df5a4a2bd0892b
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-COURS-C3 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RES-COURS-C3 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+          line_start: 2
+          line_end: 93
+          excerpt_sha256: sha256:eae87a96a86195e26693b8b6ffadfcbf1c09e67e1228afc16df450080be6c194
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-COURS-C3, le format cours organise définitions, exemples et mise en activité autour de
+            les capteurs, actionneurs et la commande programmée d’un thermostat.
+        - &id013
+          path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+          line_start: 16
+          line_end: 46
+          excerpt_sha256: sha256:b216756db334e9ed689080f790d388cf8090af557cb13d7308bf291d2879f92d
+          fact_type: reviewer_observation
+          observation: Le cours appelle IHM une logique de thermostat pilotée par fonctions Python sans composant d’interaction
+            observable.
+        anomaly_ids:
+        - 1NSI-REV-RES-IHM-COURSE
+    anomalies:
+    - id: 1NSI-REV-RES-IHM-COURSE
+      severity: P1
+      dimension: pedagogical
+      fact: *id013
+      consequence: La capacité de réaliser une interface répondant à un cahier des charges n’est pas effectivement travaillée.
+      expected_action: Ajouter une interface matérielle ou graphique minimale avec événement utilisateur, affichage d’état
+        et tests du cahier des charges.
+- id: 1NSI-RES-EVAL-A
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-EVAL-A est scientifiquement cohérent sur les paquets, le bit alterné, la connectivité et un
+          arrosage automatique dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:c34251a3bc299a5bae274b7628ca46e05f7afa581bf7cbd5cdf772bf7c2ee3e8
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EVAL-A couvre les paquets, le bit alterné, la connectivité et un arrosage
+            automatique et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:adc2813e299fa39b0ca50567bb3158777f8ffcc2e64b34ebd8c667865e38e202
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EVAL-A passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RES-EVAL-A présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:c34251a3bc299a5bae274b7628ca46e05f7afa581bf7cbd5cdf772bf7c2ee3e8
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EVAL-A, le format evaluation recueille une preuve de maîtrise sur un temps annoncé autour
+            de les paquets, le bit alterné, la connectivité et un arrosage automatique.
+        - &id014
+          path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
+          line_start: 9
+          line_end: 18
+          excerpt_sha256: sha256:154de5a6f3dbaccb8aefeb38e50c7d4782f1a245376bebe4e8af651176f54e04
+          fact_type: reviewer_observation
+          observation: L’évaluation A ne teste qu’une tentative globalement échouée et jamais la perte d’un ACK après réception
+            du paquet.
+        anomaly_ids:
+        - 1NSI-REV-RES-BITALT-EVALA
+    anomalies:
+    - id: 1NSI-REV-RES-BITALT-EVALA
+      severity: P1
+      dimension: pedagogical
+      fact: *id014
+      consequence: La preuve de maîtrise peut être obtenue sans comprendre pourquoi le bit permet d’identifier un doublon.
+      expected_action: Ajouter une trace avec paquet reçu, ACK perdu et retransmission du même bit.
+- id: 1NSI-RES-EVAL-A-corrige
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-EVAL-A-corrige est scientifiquement cohérent sur la résolution de l’évaluation réseaux A dans
+          le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
+          line_start: 2
+          line_end: 53
+          excerpt_sha256: sha256:1c5ca165dbce06c2ea5f40a773bc6dbc3919c7dfec3053706b19840a9f0c4e56
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EVAL-A-corrige couvre la résolution de l’évaluation réseaux A et a
+            été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:1afee394a48e1b86251e12c28ce6c77d97a85a35a81205899f2228d2c06a9477
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EVAL-A-corrige passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RES-EVAL-A-corrige présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir
+          l’objet sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
+          line_start: 2
+          line_end: 53
+          excerpt_sha256: sha256:1c5ca165dbce06c2ea5f40a773bc6dbc3919c7dfec3053706b19840a9f0c4e56
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EVAL-A-corrige, le format corrige_evaluation fournit les réponses et justifications du
+            sujet lié autour de la résolution de l’évaluation réseaux A.
+        - &id015
+          path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
+          line_start: 25
+          line_end: 36
+          excerpt_sha256: sha256:0714b83029ab03d541acd81a218fa05413ef39f3e378812f2d1fde5b1bb31aff
+          fact_type: reviewer_observation
+          observation: Le corrigé A conclut à la livraison par répétition mais ne montre aucun état du récepteur lors d’une
+            perte d’ACK.
+        anomaly_ids:
+        - 1NSI-REV-RES-BITALT-EVALA-CO
+    anomalies:
+    - id: 1NSI-REV-RES-BITALT-EVALA-CO
+      severity: P1
+      dimension: pedagogical
+      fact: *id015
+      consequence: La correction n’explicite pas la compétence centrale de détection des retransmissions.
+      expected_action: Compléter la trace par le bit attendu, le doublon ignoré et l’ACK renvoyé.
+- id: 1NSI-RES-EVAL-B
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-EVAL-B est scientifiquement cohérent sur les paquets, le bit alterné, la connectivité et une
+          ventilation automatique dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:8587c9782796b6a6a3693c9c900988415b5468393c4cb855e01229ef7f467adb
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EVAL-B couvre les paquets, le bit alterné, la connectivité et une ventilation
+            automatique et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:32f2857c1647e7f643437d1ea085530f3800e5d1a90697d96b58d8eb8fad00f6
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EVAL-B passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RES-EVAL-B présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:8587c9782796b6a6a3693c9c900988415b5468393c4cb855e01229ef7f467adb
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EVAL-B, le format evaluation recueille une preuve de maîtrise sur un temps annoncé autour
+            de les paquets, le bit alterné, la connectivité et une ventilation automatique.
+        - &id016
+          path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
+          line_start: 9
+          line_end: 18
+          excerpt_sha256: sha256:f5a0c4ddc6368fd9969156497a396b4fef71e6c8ce0ff64c87f07bfa59150e81
+          fact_type: reviewer_observation
+          observation: L’évaluation B reprend une perte indifférenciée et n’observe pas le traitement d’un doublon consécutif
+            à un ACK perdu.
+        anomaly_ids:
+        - 1NSI-REV-RES-BITALT-EVALB
+    anomalies:
+    - id: 1NSI-REV-RES-BITALT-EVALB
+      severity: P1
+      dimension: pedagogical
+      fact: *id016
+      consequence: L’alternance peut être récitée sans que la sûreté du protocole soit comprise.
+      expected_action: Introduire une perte d’ACK et demander si le récepteur livre ou ignore la retransmission.
+- id: 1NSI-RES-EVAL-B-corrige
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-EVAL-B-corrige est scientifiquement cohérent sur la résolution de l’évaluation réseaux B dans
+          le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
+          line_start: 2
+          line_end: 54
+          excerpt_sha256: sha256:f8f094e5365da187bc688b820334876b7a25e10e708c4281756060d88a058437
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EVAL-B-corrige couvre la résolution de l’évaluation réseaux B et a
+            été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:a9e297b216521765b566bb538165a992fe81c2ff74e954796a59443d1e6d14e1
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EVAL-B-corrige passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RES-EVAL-B-corrige présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir
+          l’objet sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
+          line_start: 2
+          line_end: 54
+          excerpt_sha256: sha256:f8f094e5365da187bc688b820334876b7a25e10e708c4281756060d88a058437
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EVAL-B-corrige, le format corrige_evaluation fournit les réponses et justifications du
+            sujet lié autour de la résolution de l’évaluation réseaux B.
+        - &id017
+          path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
+          line_start: 25
+          line_end: 38
+          excerpt_sha256: sha256:7fb2ea3b7e18fa67db18856e0093efb8d86be4c2430852d02769bf0d065ba400
+          fact_type: reviewer_observation
+          observation: Le corrigé B associe même bit et paquet non confirmé uniquement du point de vue de l’émetteur.
+        anomaly_ids:
+        - 1NSI-REV-RES-BITALT-EVALB-CO
+    anomalies:
+    - id: 1NSI-REV-RES-BITALT-EVALB-CO
+      severity: P1
+      dimension: pedagogical
+      fact: *id017
+      consequence: Le rôle du bit attendu par le récepteur et l’élimination des doublons restent absents.
+      expected_action: Ajouter le point de vue du récepteur et la trace d’un ACK perdu.
+- id: 1NSI-RES-EX-001
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-EX-001 est scientifiquement cohérent sur le découpage et le réassemblage de PROTOCOLERESEAU
+          dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-001.tex
+          line_start: 2
+          line_end: 28
+          excerpt_sha256: sha256:bd3325f4bd40575ae56cca75766526ab3385ed95769269f658255ef5709003ba
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EX-001 couvre le découpage et le réassemblage de PROTOCOLERESEAU et
+            a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-001.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:5874241e807fc1923623d56128e68abd26eb01aa6be7252d28fd4f062460198e
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EX-001 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-EX-001 fournit une activité exploitable et cohérente avec son rôle de exercice sur le découpage
+          et le réassemblage de PROTOCOLERESEAU.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-001.tex
+          line_start: 2
+          line_end: 28
+          excerpt_sha256: sha256:bd3325f4bd40575ae56cca75766526ab3385ed95769269f658255ef5709003ba
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EX-001, le format exercice met l’élève en activité avec une consigne graduée autour de
+            le découpage et le réassemblage de PROTOCOLERESEAU.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-RES-EX-002
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RES-EX-002 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
+          line_start: 2
+          line_end: 30
+          excerpt_sha256: sha256:d7598fe59e0b631aca8806c8409e6c5f3e24355b835aaa750b46bac7d8a55520
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EX-002 couvre les retransmissions de X, Y et Z avec un bit alterné
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:9269b5811c8430fe6755e54d9f9133199e68a6181b5a19e547e8af9a1372f0be
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EX-002 passe ; sa trace concorde avec son reçu.
+        - &id018
+          path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
+          line_start: 21
+          line_end: 29
+          excerpt_sha256: sha256:120a640b9b64a0c391a661cbb3862178c0cda4a535c4cedbfdabd55aa09f2d41
+          fact_type: reviewer_observation
+          observation: L’énoncé assimile une tentative où le paquet est perdu à une tentative où seul l’ACK est perdu, tout
+            en demandant la même liste finale.
+        anomaly_ids:
+        - 1NSI-REV-RES-BITALT-EX002
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-EX-002 fournit une activité exploitable et cohérente avec son rôle de exercice sur les retransmissions
+          de X, Y et Z avec un bit alterné.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
+          line_start: 2
+          line_end: 30
+          excerpt_sha256: sha256:d7598fe59e0b631aca8806c8409e6c5f3e24355b835aaa750b46bac7d8a55520
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EX-002, le format exercice met l’élève en activité avec une consigne graduée autour de
+            les retransmissions de X, Y et Z avec un bit alterné.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-RES-BITALT-EX002
+      severity: P0
+      dimension: scientific
+      fact: *id018
+      consequence: L’élève ne peut pas dérouler le comportement du récepteur ni justifier le rejet des doublons.
+      expected_action: Distinguer les deux types de pertes et demander l’état de l’émetteur et du récepteur à chaque tentative.
+- id: 1NSI-RES-EX-003
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RES-EX-003 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
+          line_start: 2
+          line_end: 42
+          excerpt_sha256: sha256:478cddc55b196dab180936f591b5f913b1cae25828e64d75969de282953da667
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EX-003 couvre la connectivité d’un réseau scolaire représenté par un
+            graphe et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:66a6d8a4306eb8ec2df65caca9f872ffe195691f6a110ccd7ec2728322563b51
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EX-003 passe ; sa trace concorde avec son reçu.
+        - &id019
+          path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
+          line_start: 26
+          line_end: 40
+          excerpt_sha256: sha256:5ab4dea048bf2f3057e390521d41403a17547fc3d56e8c5fdc0e4b7e2a170082
+          fact_type: reviewer_observation
+          observation: L’exercice demande de raisonner sur l’arrêt d’une fonction récursive de parcours et sur les cycles
+            d’un graphe.
+        anomaly_ids:
+        - 1NSI-REV-RES-RECURSION-EX003
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-EX-003 fournit une activité exploitable et cohérente avec son rôle de exercice sur la connectivité
+          d’un réseau scolaire représenté par un graphe.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
+          line_start: 2
+          line_end: 42
+          excerpt_sha256: sha256:478cddc55b196dab180936f591b5f913b1cae25828e64d75969de282953da667
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EX-003, le format exercice met l’élève en activité avec une consigne graduée autour de
+            la connectivité d’un réseau scolaire représenté par un graphe.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-RES-RECURSION-EX003
+      severity: P0
+      dimension: scientific
+      fact: *id019
+      consequence: Une notion de Terminale est évaluée comme outil normal du chapitre de Première.
+      expected_action: Évaluer la connectivité dans un simulateur adapté sans demander l’analyse d’un parcours récursif.
+- id: 1NSI-RES-EX-004
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-EX-004 est scientifiquement cohérent sur l’identification capteur/actionneur et le seuil d’un
+          lampadaire dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-004.tex
+          line_start: 2
+          line_end: 17
+          excerpt_sha256: sha256:dbc9b3b3a47aca6162a587cbccb183beab5de3d90920d7b755bc6e3d841ab146
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EX-004 couvre l’identification capteur/actionneur et le seuil d’un
+            lampadaire et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-004.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:293944ec4a4fd7cbc0ea4e458d3ac1ed0ac2870208cfa570048e734af817c3e6
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EX-004 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RES-EX-004 fournit une activité exploitable et cohérente avec son rôle de exercice sur l’identification
+          capteur/actionneur et le seuil d’un lampadaire.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-004.tex
+          line_start: 2
+          line_end: 17
+          excerpt_sha256: sha256:dbc9b3b3a47aca6162a587cbccb183beab5de3d90920d7b755bc6e3d841ab146
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EX-004, le format exercice met l’élève en activité avec une consigne graduée autour de
+            l’identification capteur/actionneur et le seuil d’un lampadaire.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-RES-EX-005
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-RES-EX-005 est scientifiquement cohérent sur la programmation d’un arrosage à deux seuils dans
+          le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:6a1ad623b67de3b275b91d7ab78fc993e0e1b3c066d5b62507d12ab55c33d4aa
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RES-EX-005 couvre la programmation d’un arrosage à deux seuils et a été
+            confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:bfa80506f93a52a85305e86631a5b9e1f58cd33023796287013c0d32a3532514
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RES-EX-005 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RES-EX-005 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:6a1ad623b67de3b275b91d7ab78fc993e0e1b3c066d5b62507d12ab55c33d4aa
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RES-EX-005, le format exercice met l’élève en activité avec une consigne graduée autour de
+            la programmation d’un arrosage à deux seuils.
+        - &id020
+          path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
+          line_start: 16
+          line_end: 27
+          excerpt_sha256: sha256:be760d337ed2f513dbf0539717b6c4d5328a1fe83e4449975936fa1e4fd4b649
+          fact_type: reviewer_observation
+          observation: L’exercice programme uniquement une commande automatique de pompe sans interaction humaine.
+        anomaly_ids:
+        - 1NSI-REV-RES-IHM-EX005
+    anomalies:
+    - id: 1NSI-REV-RES-IHM-EX005
+      severity: P1
+      dimension: pedagogical
+      fact: *id020
+      consequence: L’objet revendique la capacité IHM mais n’en fournit aucune preuve observable.
+      expected_action: Faire concevoir au moins une commande utilisateur et un retour d’état reliés au cahier des charges.
+- id: 1NSI-RESEAUX-QCM
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RESEAUX-QCM présente 2 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:e0f55d9d1958f3327f8fa606777203e9f8d8123fd03cd8804e43fcf7dd7c744f
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RESEAUX-QCM couvre les paquets, le bit alterné, les parcours de réseau,
+            les capteurs et l’hystérésis et a été confrontée au contrat, au programme et aux objets liés.
+        - &id021
+          path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
+          line_start: 11
+          line_end: 21
+          excerpt_sha256: sha256:ae33a2e6eeba43be0cde6a31dcb462fc62b57c29c68fd701c0e1c8b33f3a9854
+          fact_type: reviewer_observation
+          observation: La première question suppose qu’un numéro de paquet sert généralement à réordonner toute transmission.
+        - &id022
+          path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
+          line_start: 37
+          line_end: 45
+          excerpt_sha256: sha256:793b3c6e014f440a620a1719e3fb6ad38d65079f1a30b8b79bb6b24bd9a0d1d0
+          fact_type: reviewer_observation
+          observation: Le QCM évalue le marquage des sommets dans une recherche de chemin cyclique.
+        anomaly_ids:
+        - 1NSI-REV-RES-C1-HEADER-QCM
+        - 1NSI-REV-RES-RECURSION-QCM
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-RESEAUX-QCM présente 2 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:e0f55d9d1958f3327f8fa606777203e9f8d8123fd03cd8804e43fcf7dd7c744f
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RESEAUX-QCM, le format qcm propose un diagnostic à choix unique autour de les paquets, le
+            bit alterné, les parcours de réseau, les capteurs et l’hystérésis.
+        - &id023
+          path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
+          line_start: 61
+          line_end: 79
+          excerpt_sha256: sha256:6485e633e1c66fe1eec116e98d2b51bb93af080a1c60fa862b155c0eeb62367e
+          fact_type: reviewer_observation
+          observation: Les questions annoncées comme IHM portent sur les tests de seuil et l’hystérésis, sans composant ni
+            interaction humaine.
+        - &id024
+          path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
+          line_start: 3
+          line_end: 81
+          excerpt_sha256: sha256:2740d998217c438798439f8445d8fe6266ef67e07e1a3143ffcf4f310e735c65
+          fact_type: reviewer_observation
+          observation: Le QCM se déclare auto-évaluation mais ne fournit aucune clé ni orientation selon les erreurs.
+        anomaly_ids:
+        - 1NSI-REV-RES-IHM-QCM
+        - 1NSI-REV-RES-QCM-AUTOCORRECTION
+    anomalies:
+    - id: 1NSI-REV-RES-C1-HEADER-QCM
+      severity: P0
+      dimension: scientific
+      fact: *id021
+      consequence: Le QCM évalue comme exacte une généralisation qui dépend du protocole et de la couche observés.
+      expected_action: Reformuler la question dans le cadre du protocole simplifié du chapitre ou utiliser un en-tête explicitement
+        séquencé.
+    - id: 1NSI-REV-RES-RECURSION-QCM
+      severity: P0
+      dimension: scientific
+      fact: *id022
+      consequence: L’auto-évaluation rend exigible un contenu de parcours de graphe qui n’appartient pas au programme de Première.
+      expected_action: Remplacer la question par l’usage ou l’interprétation d’une simulation réseau conforme au niveau.
+    - id: 1NSI-REV-RES-IHM-QCM
+      severity: P1
+      dimension: pedagogical
+      fact: *id023
+      consequence: Le QCM peut valider C5 sans évaluer la réalisation d’une interface.
+      expected_action: Introduire un scénario d’événement, de commande utilisateur et de retour visuel ou matériel.
+    - id: 1NSI-REV-RES-QCM-AUTOCORRECTION
+      severity: P1
+      dimension: pedagogical
+      fact: *id024
+      consequence: Les réponses ne peuvent pas déclencher la remédiation annoncée par le dispositif Nexus.
+      expected_action: Relier une clé contrôlée et une orientation de remédiation sans fuite dans la variante élève.
+- id: 1NSI-RESEAUX-RE-C1
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RESEAUX-RE-C1 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex
+          line_start: 2
+          line_end: 39
+          excerpt_sha256: sha256:182883b72375b36b19ebb93eea3a9e83b1fb0d9143c7f1b83a78554b81d8f58a
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RESEAUX-RE-C1 couvre le réassemblage d’un message reçu dans le désordre
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:251095e69c121eae94f99dd818c1a5e72be55be67f2f702d9b01c7068f846578
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RESEAUX-RE-C1 passe ; sa trace diverge du reçu existant.
+        - &id025
+          path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
+          line_start: 7
+          line_end: 18
+          excerpt_sha256: sha256:bfd04af8a1de6ab309f64c46bc30f57994ec422c998247cb896fe27c9f1fd3a1
+          fact_type: reviewer_observation
+          observation: Le corrigé lié à la remédiation impose sur un vrai réseau de se fier systématiquement à un numéro de
+            paquet générique.
+        anomaly_ids:
+        - 1NSI-REV-RES-C1-HEADER-RE
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RESEAUX-RE-C1 fournit une activité exploitable et cohérente avec son rôle de remediation sur le
+          réassemblage d’un message reçu dans le désordre.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex
+          line_start: 2
+          line_end: 39
+          excerpt_sha256: sha256:182883b72375b36b19ebb93eea3a9e83b1fb0d9143c7f1b83a78554b81d8f58a
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RESEAUX-RE-C1, le format remediation cible une erreur identifiée avant un nouveau test autour
+            de le réassemblage d’un message reçu dans le désordre.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-RES-C1-HEADER-RE
+      severity: P0
+      dimension: scientific
+      fact: *id025
+      consequence: La remédiation stabilise une représentation techniquement fausse au lieu de corriger le modèle.
+      expected_action: Présenter la numérotation comme un champ du protocole simplifié choisi et non comme un invariant de
+        tout paquet.
+- id: 1NSI-RESEAUX-RE-C1-CORRIGE
+  chapter: 1NSI-RESEAUX
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-RESEAUX-RE-C1-CORRIGE présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré
+          la cohérence des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
+          line_start: 2
+          line_end: 19
+          excerpt_sha256: sha256:962fb751a75074cb2f18003f4804590bb6b96bd28d41e1988600f1cf61ba3a62
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-RESEAUX-RE-C1-CORRIGE couvre la correction du réassemblage de RESEAUXNSI
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:2a24819e3a840ba3ecb063ebe14b807340eaa067ce6c8eb172e09607a7c9da20
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-RESEAUX-RE-C1-CORRIGE passe ; sa trace ne dispose pas de reçu.
+        - &id026
+          path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
+          line_start: 7
+          line_end: 18
+          excerpt_sha256: sha256:bfd04af8a1de6ab309f64c46bc30f57994ec422c998247cb896fe27c9f1fd3a1
+          fact_type: reviewer_observation
+          observation: La correction généralise à tout réseau réel la présence d’un numéro permettant de trier les paquets.
+        anomaly_ids:
+        - 1NSI-REV-RES-C1-HEADER-RECO
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-RESEAUX-RE-C1-CORRIGE fournit une activité exploitable et cohérente avec son rôle de corrige sur
+          la correction du réassemblage de RESEAUXNSI.
+        facts:
+        - path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
+          line_start: 2
+          line_end: 19
+          excerpt_sha256: sha256:962fb751a75074cb2f18003f4804590bb6b96bd28d41e1988600f1cf61ba3a62
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-RESEAUX-RE-C1-CORRIGE, le format corrige explicite la résolution de l’objet lié autour de
+            la correction du réassemblage de RESEAUXNSI.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-RES-C1-HEADER-RECO
+      severity: P0
+      dimension: scientific
+      fact: *id026
+      consequence: Le corrigé professeur transmet une propriété de protocole non universelle comme une vérité réseau.
+      expected_action: Préciser le niveau protocolaire du séquencement et conserver le tri uniquement dans le modèle déclaré.
+- id: 1NSI-WEB-CO-001
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-CO-001 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
+          line_start: 2
+          line_end: 14
+          excerpt_sha256: sha256:2d8d6bd336d3d55de2c99390c57b39e8c0c2a4ed4d7fc8c6ccaf46d915eabf33
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-CO-001 couvre les composants HTML, leurs événements et la soumission
+            par défaut et a été confrontée au contrat, au programme et aux objets liés.
+        - &id027
+          path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
+          line_start: 10
+          line_end: 13
+          excerpt_sha256: sha256:35a6c240736f41c7d7d409448a6f8c4cbe25bfb392a71083e27c7e2db9e6f435
+          fact_type: reviewer_observation
+          observation: Le corrigé affirme que HTML décrit à lui seul structure et apparence du formulaire.
+        anomaly_ids:
+        - 1NSI-REV-WEB-HTML-CSS-CO001
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-CO-001 fournit une activité exploitable et cohérente avec son rôle de corrige sur les composants
+          HTML, leurs événements et la soumission par défaut.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
+          line_start: 2
+          line_end: 14
+          excerpt_sha256: sha256:2d8d6bd336d3d55de2c99390c57b39e8c0c2a4ed4d7fc8c6ccaf46d915eabf33
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-CO-001, le format corrige explicite la résolution de l’objet lié autour de les composants
+            HTML, leurs événements et la soumission par défaut.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-WEB-HTML-CSS-CO001
+      severity: P0
+      dimension: scientific
+      fact: *id027
+      consequence: Une réponse scientifiquement inexacte est donnée comme attendu professeur.
+      expected_action: Corriger la réponse en distinguant HTML, CSS et JavaScript tout en conservant la soumission native
+        du formulaire.
+- id: 1NSI-WEB-CO-002
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-CO-002 est scientifiquement cohérent sur la bascule d’un menu après trois clics simulés dans
+          le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
+          line_start: 2
+          line_end: 36
+          excerpt_sha256: sha256:651a92be7f46c56309b66e86d90f514016fb666e940d1ebbf094847f39de6091
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-CO-002 couvre la bascule d’un menu après trois clics simulés et a été
+            confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:cead9e58afcd2265476bf4c1d21a4a27efc6bdee7d5e3ba983212f70cc979f1e
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-CO-002 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-CO-002 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
+          line_start: 2
+          line_end: 36
+          excerpt_sha256: sha256:651a92be7f46c56309b66e86d90f514016fb666e940d1ebbf094847f39de6091
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-CO-002, le format corrige explicite la résolution de l’objet lié autour de la bascule
+            d’un menu après trois clics simulés.
+        - &id028
+          path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
+          line_start: 18
+          line_end: 35
+          excerpt_sha256: sha256:05d7732e1a09a9f25823f7b5ee8c343e1049e3a33d3d7fcf7e41513a724d5759
+          fact_type: reviewer_observation
+          observation: Le corrigé résout le menu exclusivement dans le modèle Python.
+        anomaly_ids:
+        - 1NSI-REV-WEB-JS-CO002
+    anomalies:
+    - id: 1NSI-REV-WEB-JS-CO002
+      severity: P1
+      dimension: pedagogical
+      fact: *id028
+      consequence: La correction ne montre ni DOM, ni événement navigateur, ni modification de style ou d’attribut.
+      expected_action: Donner aussi la version JavaScript exécutée dans la page et relier chaque étape au modèle.
+- id: 1NSI-WEB-CO-003
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-CO-003 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
+          line_start: 2
+          line_end: 25
+          excerpt_sha256: sha256:c289124cdc6e3b535e5de1f2d57b80d94820a5e4e20bb6341076e184a5a5053d
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-CO-003 couvre la mémorisation d’un panier dans un cookie côté client
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:453c585dc361b345c5aac1be96d7d0ab98450634d241a43be3d7c3866b46aa59
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-CO-003 passe ; sa trace concorde avec son reçu.
+        - &id029
+          path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
+          line_start: 14
+          line_end: 24
+          excerpt_sha256: sha256:08d038a9d44aed1ab4573869cdfca486bf68ca89e1bbcd0eb7603a22b19c9c7c
+          fact_type: reviewer_observation
+          observation: Le corrigé affirme que le serveur peut retrouver le panier sans stockage côté serveur en faisant confiance
+            au cookie panier.
+        anomaly_ids:
+        - 1NSI-REV-WEB-COOKIE-CART-CO003
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-CO-003 fournit une activité exploitable et cohérente avec son rôle de corrige sur la mémorisation
+          d’un panier dans un cookie côté client.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
+          line_start: 2
+          line_end: 25
+          excerpt_sha256: sha256:c289124cdc6e3b535e5de1f2d57b80d94820a5e4e20bb6341076e184a5a5053d
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-CO-003, le format corrige explicite la résolution de l’objet lié autour de la mémorisation
+            d’un panier dans un cookie côté client.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-WEB-COOKIE-CART-CO003
+      severity: P0
+      dimension: scientific
+      fact: *id029
+      consequence: Cette réponse omet l’intégrité de l’état client et enseigne un schéma vulnérable à la falsification.
+      expected_action: Corriger avec un cookie de session opaque ou un état signé dont l’intégrité est vérifiée côté serveur.
+- id: 1NSI-WEB-CO-004
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-CO-004 est scientifiquement cohérent sur HTTPS, l’exposition des paramètres GET et le choix
+          de POST dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
+          line_start: 2
+          line_end: 29
+          excerpt_sha256: sha256:57e99525abaeb20b9dd120613507d0adc07c3620dd6127dae90a9073247f447a
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-CO-004 couvre HTTPS, l’exposition des paramètres GET et le choix de
+            POST et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:bd84083b93e67a10834b4e2405438073649903a4f5e083333def255ec8093be2
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-CO-004 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-CO-004 fournit une activité exploitable et cohérente avec son rôle de corrige sur HTTPS, l’exposition
+          des paramètres GET et le choix de POST.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
+          line_start: 2
+          line_end: 29
+          excerpt_sha256: sha256:57e99525abaeb20b9dd120613507d0adc07c3620dd6127dae90a9073247f447a
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-CO-004, le format corrige explicite la résolution de l’objet lié autour de HTTPS, l’exposition
+            des paramètres GET et le choix de POST.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-WEB-CO-005
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-CO-005 est scientifiquement cohérent sur la construction et la partageabilité d’une URL de
+          recherche dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-005.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:92d15f065acbfe31c0f28b58271dcc682d61c355d9fe33c9b4d44e7704c1a390
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-CO-005 couvre la construction et la partageabilité d’une URL de recherche
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-005.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:87972b794fbe416f0260cada72585fdb5acba1e4817819a69ed106b6cef266b5
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-CO-005 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-CO-005 fournit une activité exploitable et cohérente avec son rôle de corrige sur la construction
+          et la partageabilité d’une URL de recherche.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-005.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:92d15f065acbfe31c0f28b58271dcc682d61c355d9fe33c9b4d44e7704c1a390
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-CO-005, le format corrige explicite la résolution de l’objet lié autour de la construction
+            et la partageabilité d’une URL de recherche.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-WEB-COURS-C1
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-COURS-C1 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
+          line_start: 2
+          line_end: 101
+          excerpt_sha256: sha256:95cdbe2c416da05d1ae3d6d16402eed98f0b23e306bd56e2d30e47ba37024d9f
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-COURS-C1 couvre les composants HTML, les événements JavaScript et leur
+            modélisation Python et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:299cca10909b0530126910fe00e9779351ab4bf12d8397a37418d720cd5668d6
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-COURS-C1 passe ; sa trace concorde avec son reçu.
+        - &id030
+          path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
+          line_start: 21
+          line_end: 25
+          excerpt_sha256: sha256:f7011eb86fc04c641adb5c2a48e8dabcd8a1f21786b373cc0581d2388e98cadc
+          fact_type: reviewer_observation
+          observation: Le cours attribue au HTML l’apparence du composant au lieu de distinguer structure et sémantique HTML,
+            présentation CSS et comportement JavaScript.
+        anomaly_ids:
+        - 1NSI-REV-WEB-HTML-CSS-COURSE
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-COURS-C1 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
+          line_start: 2
+          line_end: 101
+          excerpt_sha256: sha256:95cdbe2c416da05d1ae3d6d16402eed98f0b23e306bd56e2d30e47ba37024d9f
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-COURS-C1, le format cours organise définitions, exemples et mise en activité autour de
+            les composants HTML, les événements JavaScript et leur modélisation Python.
+        - &id031
+          path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
+          line_start: 35
+          line_end: 72
+          excerpt_sha256: sha256:1fdf68843f826e66d4bffe998fcde017f4da6d8d4b12ad4476cdf70b5f838163
+          fact_type: reviewer_observation
+          observation: Après un exemple JavaScript non manipulé, l’apprentissage bascule vers un dictionnaire Python simulant
+            les clics.
+        anomaly_ids:
+        - 1NSI-REV-WEB-JS-COURSE
+    anomalies:
+    - id: 1NSI-REV-WEB-HTML-CSS-COURSE
+      severity: P0
+      dimension: scientific
+      fact: *id030
+      consequence: La séparation des responsabilités du Web est scientifiquement brouillée dès la propriété centrale.
+      expected_action: Réserver structure et sémantique à HTML, présentation à CSS et réactions aux événements à JavaScript.
+    - id: 1NSI-REV-WEB-JS-COURSE
+      severity: P1
+      dimension: pedagogical
+      fact: *id031
+      consequence: La capacité officielle d’analyser et modifier la méthode exécutée lors d’un clic n’est pas directement
+        exercée sur une page Web.
+      expected_action: Faire modifier un gestionnaire JavaScript minimal dans un document HTML exécutable.
+- id: 1NSI-WEB-COURS-C2
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-COURS-C2 est scientifiquement cohérent sur l’ordre client-serveur, les cookies et le chiffrement
+          HTTPS dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
+          line_start: 2
+          line_end: 115
+          excerpt_sha256: sha256:4168d2fe4c3179be28dac5dec5f80a24e60fd141b623c2dd685715b5a357264f
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-COURS-C2 couvre l’ordre client-serveur, les cookies et le chiffrement
+            HTTPS et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:c760e4e7e41cc6d6a41f3ce8966ec8bf9f334524f164d5e5e9fc0fff5b9a79be
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-COURS-C2 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-COURS-C2 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
+          line_start: 2
+          line_end: 115
+          excerpt_sha256: sha256:4168d2fe4c3179be28dac5dec5f80a24e60fd141b623c2dd685715b5a357264f
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-COURS-C2, le format cours organise définitions, exemples et mise en activité autour de
+            l’ordre client-serveur, les cookies et le chiffrement HTTPS.
+        - &id032
+          path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
+          line_start: 64
+          line_end: 68
+          excerpt_sha256: sha256:082b8086fb836085f4351f883d6b3e892915dbe830d64a8addb9a6626ce1ff69
+          fact_type: reviewer_observation
+          observation: Le cours affirme qu’un cookie est retransmis à chaque requête ultérieure vers le même site sans mentionner
+            domaine, chemin, Secure, SameSite ni expiration.
+        anomaly_ids:
+        - 1NSI-REV-WEB-COOKIE-SCOPE
+    anomalies:
+    - id: 1NSI-REV-WEB-COOKIE-SCOPE
+      severity: P1
+      dimension: pedagogical
+      fact: *id032
+      consequence: L’élève reçoit une règle trop absolue pour raisonner correctement sur portée et confidentialité.
+      expected_action: Qualifier la règle comme simplification et introduire au minimum domaine, chemin et attribut Secure.
+- id: 1NSI-WEB-COURS-C3
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-COURS-C3 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
+          line_start: 2
+          line_end: 88
+          excerpt_sha256: sha256:fc1cf23c3e75974f1e8bb2e62169714d437a350b2c07a086a50acd0db947ecfd
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-COURS-C3 couvre les formulaires et la transmission de paramètres par
+            GET ou POST et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:33b6a002d17f44cd466ad2cba4e9c8be1653bdc2c5fe4891ef162823c439a26a
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-COURS-C3 passe ; sa trace concorde avec son reçu.
+        - &id033
+          path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
+          line_start: 72
+          line_end: 84
+          excerpt_sha256: sha256:1d2d276d48e96f0057de3986f30c72187a33d931b3f194e21f085944355a0d3e
+          fact_type: reviewer_observation
+          observation: Le cours associe POST aux données confidentielles sans exiger explicitement HTTPS dans la règle de
+            choix.
+        anomaly_ids:
+        - 1NSI-REV-WEB-POST-TLS-COURSE
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-COURS-C3 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
+          line_start: 2
+          line_end: 88
+          excerpt_sha256: sha256:fc1cf23c3e75974f1e8bb2e62169714d437a350b2c07a086a50acd0db947ecfd
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-COURS-C3, le format cours organise définitions, exemples et mise en activité autour de
+            les formulaires et la transmission de paramètres par GET ou POST.
+        - &id034
+          path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
+          line_start: 45
+          line_end: 77
+          excerpt_sha256: sha256:d15b5b2a9755e0e0c970646f945d06c6145d4c25dc5df8c42237ddc2b03a07e2
+          fact_type: reviewer_observation
+          observation: Le choix GET/POST est réduit à visibilité, taille et confidentialité sans évoquer lecture sans effet
+            de bord contre modification d’état.
+        anomaly_ids:
+        - 1NSI-REV-WEB-METHOD-SEMANTICS
+    anomalies:
+    - id: 1NSI-REV-WEB-POST-TLS-COURSE
+      severity: P0
+      dimension: scientific
+      fact: *id033
+      consequence: Un élève peut conclure que placer le secret dans le corps suffit à le protéger pendant le transport.
+      expected_action: Formuler la règle comme POST sur HTTPS pour les secrets et rappeler que POST ne chiffre rien.
+    - id: 1NSI-REV-WEB-METHOD-SEMANTICS
+      severity: P1
+      dimension: pedagogical
+      fact: *id034
+      consequence: Les élèves ne disposent pas du critère sémantique nécessaire pour concevoir un formulaire correct.
+      expected_action: Introduire GET pour une opération sûre de consultation et POST pour une action modifiant l’état, en
+        plus des critères de confidentialité.
+- id: 1NSI-WEB-EVAL-A
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-EVAL-A présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
+          line_start: 2
+          line_end: 55
+          excerpt_sha256: sha256:2a3be67e16ed4198f6f6f93f7241f5de24a32e8e42703d4c15803d84dbbe4328
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EVAL-A couvre un bouton de panier et le choix GET/POST pour une boutique
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:70459a1e097f3461b628acd45f41ca39e157030992ea8c90e6280a140cffea10
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-EVAL-A passe ; sa trace concorde avec son reçu.
+        - &id035
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+          line_start: 22
+          line_end: 25
+          excerpt_sha256: sha256:57841d4cbf64d4278562e0d5bddf5749b05adb5c94dbbd3cce421533c79697c9
+          fact_type: reviewer_observation
+          observation: La réponse scellée de l’évaluation A réduit HTML à l’apparence et conditionne toute réaction à JavaScript.
+        anomaly_ids:
+        - 1NSI-REV-WEB-HTML-CSS-EVALA
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-EVAL-A présente 2 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
+          line_start: 2
+          line_end: 55
+          excerpt_sha256: sha256:2a3be67e16ed4198f6f6f93f7241f5de24a32e8e42703d4c15803d84dbbe4328
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EVAL-A, le format evaluation recueille une preuve de maîtrise sur un temps annoncé autour
+            de un bouton de panier et le choix GET/POST pour une boutique.
+        - &id036
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
+          line_start: 9
+          line_end: 37
+          excerpt_sha256: sha256:bc591abc31b4e3bb5cb042b2910bd1f0b22269ff75f05f806183d2d1278c190c
+          fact_type: reviewer_observation
+          observation: L’évaluation A remplace l’analyse d’un clic Web par l’appel de fonctions Python simulées.
+        - &id037
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
+          line_start: 42
+          line_end: 48
+          excerpt_sha256: sha256:cf01e390d1c872ffca37c421b28a7c027d585c94674a57408a389c936f35825c
+          fact_type: reviewer_observation
+          observation: L’évaluation A demande la méthode pour des coordonnées personnelles sans exiger de mentionner HTTPS.
+        anomaly_ids:
+        - 1NSI-REV-WEB-JS-EVALA
+        - 1NSI-REV-WEB-TLS-EVALA
+    anomalies:
+    - id: 1NSI-REV-WEB-HTML-CSS-EVALA
+      severity: P0
+      dimension: scientific
+      fact: *id035
+      consequence: Le barème peut créditer une conception erronée des responsabilités HTML, CSS et des comportements natifs.
+      expected_action: Réécrire l’attendu avec structure HTML, style CSS, événement JavaScript et éventuelle action native.
+    - id: 1NSI-REV-WEB-JS-EVALA
+      severity: P1
+      dimension: pedagogical
+      fact: *id036
+      consequence: La capacité P-IHM-02 peut être validée sans aucune lecture ou modification de JavaScript.
+      expected_action: Évaluer une modification courte d’un gestionnaire addEventListener dans la page fournie.
+    - id: 1NSI-REV-WEB-TLS-EVALA
+      severity: P1
+      dimension: pedagogical
+      fact: *id037
+      consequence: Une réponse POST seule peut obtenir les points tout en laissant la transmission non chiffrée.
+      expected_action: Exiger POST sur HTTPS et faire justifier séparément URL et transport.
+- id: 1NSI-WEB-EVAL-A-corrige
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-EVAL-A-corrige présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la
+          cohérence des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+          line_start: 2
+          line_end: 58
+          excerpt_sha256: sha256:768648b13bf8049bbb03919be29d65d3746fb387f7faae89647158df8074a07f
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EVAL-A-corrige couvre la résolution de l’évaluation Web A et a été
+            confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:4d13e7536fbd06e684cd16f56d7e76bf1a01cde6f5d72f1c14cb98d1dd1273bf
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-EVAL-A-corrige passe ; sa trace concorde avec son reçu.
+        - &id038
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+          line_start: 22
+          line_end: 25
+          excerpt_sha256: sha256:57841d4cbf64d4278562e0d5bddf5749b05adb5c94dbbd3cce421533c79697c9
+          fact_type: reviewer_observation
+          observation: Le corrigé A présente l’apparence comme fonction du HTML et nie toute action automatique sans JavaScript.
+        anomaly_ids:
+        - 1NSI-REV-WEB-HTML-CSS-EVALA-CO
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-EVAL-A-corrige présente 2 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir
+          l’objet sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+          line_start: 2
+          line_end: 58
+          excerpt_sha256: sha256:768648b13bf8049bbb03919be29d65d3746fb387f7faae89647158df8074a07f
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EVAL-A-corrige, le format corrige_evaluation fournit les réponses et justifications du
+            sujet lié autour de la résolution de l’évaluation Web A.
+        - &id039
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+          line_start: 27
+          line_end: 38
+          excerpt_sha256: sha256:f92d70d97f5a45a831d8cd6e79cad8f0f5d67cea96b7baab71bf65f770e67aa6
+          fact_type: reviewer_observation
+          observation: Le corrigé A ne fournit qu’une fonction Python et son enregistrement dans le simulateur.
+        - &id040
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
+          line_start: 52
+          line_end: 57
+          excerpt_sha256: sha256:31dae1dcb94f4215636e0afa5b4b49ba2cea1871d0d52fbbf81161e73a0fddfd
+          fact_type: reviewer_observation
+          observation: Le corrigé A recommande POST pour les données personnelles mais ne complète pas par HTTPS.
+        anomaly_ids:
+        - 1NSI-REV-WEB-JS-EVALA-CO
+        - 1NSI-REV-WEB-TLS-EVALA-CO
+    anomalies:
+    - id: 1NSI-REV-WEB-HTML-CSS-EVALA-CO
+      severity: P0
+      dimension: scientific
+      fact: *id038
+      consequence: Le corrigé professeur contient une généralisation fausse, notamment pour les contrôles et formulaires natifs.
+      expected_action: Distinguer style CSS et comportement natif avant d’expliquer le gestionnaire JavaScript ajouté.
+    - id: 1NSI-REV-WEB-JS-EVALA-CO
+      severity: P1
+      dimension: pedagogical
+      fact: *id039
+      consequence: Aucune correction de la méthode réellement exécutée par le navigateur n’est disponible.
+      expected_action: Ajouter le corrigé JavaScript et expliquer l’accès au composant et la mise à jour du DOM.
+    - id: 1NSI-REV-WEB-TLS-EVALA-CO
+      severity: P1
+      dimension: pedagogical
+      fact: *id040
+      consequence: Le retour professeur ne prévient pas l’assimilation de POST à un chiffrement.
+      expected_action: Ajouter explicitement l’exigence HTTPS et ses limites.
+- id: 1NSI-WEB-EVAL-B
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-EVAL-B présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
+          line_start: 2
+          line_end: 55
+          excerpt_sha256: sha256:8628ebd9c95c05c36a3dfebee506ee52cf0e1fe247de8e3208500f253dc6d607
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EVAL-B couvre un bouton de favoris et le choix GET/POST pour un site
+            immobilier et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:8aad99d4f35fd27681d6e608eb84a221459451059d62161d944e4fe086b3422f
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-EVAL-B passe ; sa trace concorde avec son reçu.
+        - &id041
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+          line_start: 22
+          line_end: 25
+          excerpt_sha256: sha256:4b48fbb7a8047d462ef29b142a0c5ef678f226a728bd6917558b356f13bbb0b6
+          fact_type: reviewer_observation
+          observation: La réponse liée à l’évaluation B attribue l’apparence au HTML et affirme qu’aucune action n’est automatique
+            sans JavaScript.
+        anomaly_ids:
+        - 1NSI-REV-WEB-HTML-CSS-EVALB
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-EVAL-B présente 2 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
+          line_start: 2
+          line_end: 55
+          excerpt_sha256: sha256:8628ebd9c95c05c36a3dfebee506ee52cf0e1fe247de8e3208500f253dc6d607
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EVAL-B, le format evaluation recueille une preuve de maîtrise sur un temps annoncé autour
+            de un bouton de favoris et le choix GET/POST pour un site immobilier.
+        - &id042
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
+          line_start: 9
+          line_end: 37
+          excerpt_sha256: sha256:36bc3566c6bc39f7ecc1503a919bfd6c84243835efea60fe2a8834f22643619e
+          fact_type: reviewer_observation
+          observation: L’évaluation B mesure à nouveau un gestionnaire Python abstrait plutôt qu’un clic dans une page.
+        - &id043
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
+          line_start: 42
+          line_end: 48
+          excerpt_sha256: sha256:92ee47da4e5c3558ffefd34a4915763ab43fef2fa3f3b883628ff03acbd11d96
+          fact_type: reviewer_observation
+          observation: L’évaluation B accepte le choix d’une méthode pour nom, email et message sans critère de chiffrement
+            du transport.
+        anomaly_ids:
+        - 1NSI-REV-WEB-JS-EVALB
+        - 1NSI-REV-WEB-TLS-EVALB
+    anomalies:
+    - id: 1NSI-REV-WEB-HTML-CSS-EVALB
+      severity: P0
+      dimension: scientific
+      fact: *id041
+      consequence: L’évaluation valide une séparation des technologies Web incorrecte.
+      expected_action: Corriger l’attendu en séparant HTML, CSS, JavaScript et comportement intrinsèque des éléments.
+    - id: 1NSI-REV-WEB-JS-EVALB
+      severity: P1
+      dimension: pedagogical
+      fact: *id042
+      consequence: Le second sujet ne fournit pas davantage de preuve sur la compétence Web attendue.
+      expected_action: Remplacer la simulation par une modification JavaScript bornée et observable.
+    - id: 1NSI-REV-WEB-TLS-EVALB
+      severity: P1
+      dimension: pedagogical
+      fact: *id043
+      consequence: La confidentialité peut être considérée acquise par la seule absence des paramètres dans l’URL.
+      expected_action: Demander POST sur HTTPS et distinguer exposition URL, journaux et transport.
+- id: 1NSI-WEB-EVAL-B-corrige
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-EVAL-B-corrige présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la
+          cohérence des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+          line_start: 2
+          line_end: 56
+          excerpt_sha256: sha256:255e28857a23d699d56d6a51e498ce86491c6e8d5c0a30bcbc2c9681921710fc
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EVAL-B-corrige couvre la résolution de l’évaluation Web B et a été
+            confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:a2d7c3279823e770da328ac035901f2842fb0b4b2383e153623da9d952887877
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-EVAL-B-corrige passe ; sa trace concorde avec son reçu.
+        - &id044
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+          line_start: 22
+          line_end: 25
+          excerpt_sha256: sha256:4b48fbb7a8047d462ef29b142a0c5ef678f226a728bd6917558b356f13bbb0b6
+          fact_type: reviewer_observation
+          observation: Le corrigé B reprend la même confusion entre apparence HTML et comportement JavaScript.
+        anomaly_ids:
+        - 1NSI-REV-WEB-HTML-CSS-EVALB-CO
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-EVAL-B-corrige présente 2 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir
+          l’objet sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+          line_start: 2
+          line_end: 56
+          excerpt_sha256: sha256:255e28857a23d699d56d6a51e498ce86491c6e8d5c0a30bcbc2c9681921710fc
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EVAL-B-corrige, le format corrige_evaluation fournit les réponses et justifications du
+            sujet lié autour de la résolution de l’évaluation Web B.
+        - &id045
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+          line_start: 26
+          line_end: 37
+          excerpt_sha256: sha256:86b3932b215a65a2b9f9c84728e613541fa77118ef6d86adf0aa1bd082ce1a05
+          fact_type: reviewer_observation
+          observation: Le corrigé B reste limité au dictionnaire de gestionnaires Python.
+        - &id046
+          path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
+          line_start: 50
+          line_end: 55
+          excerpt_sha256: sha256:6fd55656f35261c8f6bb5abaef6ca12c69c9e00549c8050d13b86fdaba0f3802
+          fact_type: reviewer_observation
+          observation: Le corrigé B privilégie POST pour les données personnelles sans rappeler le chiffrement HTTPS.
+        anomaly_ids:
+        - 1NSI-REV-WEB-JS-EVALB-CO
+        - 1NSI-REV-WEB-TLS-EVALB-CO
+    anomalies:
+    - id: 1NSI-REV-WEB-HTML-CSS-EVALB-CO
+      severity: P0
+      dimension: scientific
+      fact: *id044
+      consequence: La variante professeur diffuse une distinction techniquement inexacte.
+      expected_action: Réviser la réponse et introduire explicitement la couche CSS.
+    - id: 1NSI-REV-WEB-JS-EVALB-CO
+      severity: P1
+      dimension: pedagogical
+      fact: *id045
+      consequence: Le retour professeur ne relie pas le modèle à l’exécution côté client.
+      expected_action: Présenter la correction équivalente avec événement JavaScript et modification du document.
+    - id: 1NSI-REV-WEB-TLS-EVALB-CO
+      severity: P1
+      dimension: pedagogical
+      fact: *id046
+      consequence: La correction laisse une recommandation de sécurité incomplète.
+      expected_action: Compléter par HTTPS et préciser que le corps POST reste visible aux extrémités.
+- id: 1NSI-WEB-EX-001
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-EX-001 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-001.tex
+          line_start: 2
+          line_end: 19
+          excerpt_sha256: sha256:b7957bf4b5cd9d74e4457e060cbd1bc8dfe93f5850479fe208a717b9c56213fd
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EX-001 couvre l’identification des composants et événements d’un formulaire
+            d’avis et a été confrontée au contrat, au programme et aux objets liés.
+        - &id047
+          path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
+          line_start: 10
+          line_end: 13
+          excerpt_sha256: sha256:35a6c240736f41c7d7d409448a6f8c4cbe25bfb392a71083e27c7e2db9e6f435
+          fact_type: reviewer_observation
+          observation: Le corrigé lié à l’exercice attribue l’apparence au HTML et ne nomme pas le rôle de CSS.
+        anomaly_ids:
+        - 1NSI-REV-WEB-HTML-CSS-EX001
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-EX-001 fournit une activité exploitable et cohérente avec son rôle de exercice sur l’identification
+          des composants et événements d’un formulaire d’avis.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-001.tex
+          line_start: 2
+          line_end: 19
+          excerpt_sha256: sha256:b7957bf4b5cd9d74e4457e060cbd1bc8dfe93f5850479fe208a717b9c56213fd
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EX-001, le format exercice met l’élève en activité avec une consigne graduée autour de
+            l’identification des composants et événements d’un formulaire d’avis.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-WEB-HTML-CSS-EX001
+      severity: P0
+      dimension: scientific
+      fact: *id047
+      consequence: L’exercice conduit à mémoriser une séparation HTML/JavaScript incomplète et techniquement fausse.
+      expected_action: Faire distinguer explicitement structure HTML, style CSS, comportement JavaScript et comportement natif
+        du formulaire.
+- id: 1NSI-WEB-EX-002
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-EX-002 est scientifiquement cohérent sur la modification d’un état de menu par gestionnaire
+          de clic dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:ea6832f7b2d6ab96b1a5e94a0774fd671cfac3b362f4e781b648e5e4772a3cf9
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EX-002 couvre la modification d’un état de menu par gestionnaire de
+            clic et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:4c7b7a29fe29153b482c677ad884577ff5a49ae83af2b6ee8ccbee88f26774d8
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-EX-002 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-EX-002 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:ea6832f7b2d6ab96b1a5e94a0774fd671cfac3b362f4e781b648e5e4772a3cf9
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EX-002, le format exercice met l’élève en activité avec une consigne graduée autour de
+            la modification d’un état de menu par gestionnaire de clic.
+        - &id048
+          path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
+          line_start: 18
+          line_end: 27
+          excerpt_sha256: sha256:2453409e70516bbd83cfd87c13a930054bc40f3cc506ce19fb745fc72d4abf56
+          fact_type: reviewer_observation
+          observation: L’exercice de menu mobile modifie un état Python sans modifier le gestionnaire d’un bouton dans une
+            page Web.
+        anomaly_ids:
+        - 1NSI-REV-WEB-JS-EX002
+    anomalies:
+    - id: 1NSI-REV-WEB-JS-EX002
+      severity: P1
+      dimension: pedagogical
+      fact: *id048
+      consequence: L’élève peut réussir sans analyser ni changer une méthode JavaScript exécutée au clic.
+      expected_action: Proposer le HTML et le JavaScript minimaux puis demander la modification du gestionnaire réel.
+- id: 1NSI-WEB-EX-003
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-EX-003 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
+          line_start: 2
+          line_end: 24
+          excerpt_sha256: sha256:4ccd7dca0385beb568d640e8e5fd6e779a33ad122516db2472a20c7c88ce391d
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EX-003 couvre le transfert d’un panier au moyen d’un cookie et a été
+            confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:88976e70d1b92b9d5f153e605df2bfc734d550c83c4daaa55a43dba75402ff25
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-EX-003 passe ; sa trace concorde avec son reçu.
+        - &id049
+          path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
+          line_start: 14
+          line_end: 23
+          excerpt_sha256: sha256:96cbb745cc47afbc03c2df3ab470916325c7e7c3173c488fac1adcd32cb572be
+          fact_type: reviewer_observation
+          observation: L’exercice place directement le contenu du panier dans un cookie client et demande de conclure que
+            le serveur n’a pas à mémoriser cet état.
+        anomaly_ids:
+        - 1NSI-REV-WEB-COOKIE-CART-EX003
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-EX-003 fournit une activité exploitable et cohérente avec son rôle de exercice sur le transfert
+          d’un panier au moyen d’un cookie.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
+          line_start: 2
+          line_end: 24
+          excerpt_sha256: sha256:4ccd7dca0385beb568d640e8e5fd6e779a33ad122516db2472a20c7c88ce391d
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EX-003, le format exercice met l’élève en activité avec une consigne graduée autour de
+            le transfert d’un panier au moyen d’un cookie.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-WEB-COOKIE-CART-EX003
+      severity: P0
+      dimension: scientific
+      fact: *id049
+      consequence: Sans mécanisme d’intégrité annoncé, l’utilisateur peut modifier la valeur transmise et falsifier l’état
+        applicatif.
+      expected_action: Utiliser un identifiant de session opaque avec état serveur, ou expliciter et vérifier une protection
+        cryptographique du cookie.
+- id: 1NSI-WEB-EX-004
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-EX-004 est scientifiquement cohérent sur le paiement sous HTTPS et les risques d’un numéro
+          de carte dans une URL dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex
+          line_start: 2
+          line_end: 16
+          excerpt_sha256: sha256:b28aa6a5b05c94303b7ad09361324ce188476d3ad4a80d4fd1cf4c66f0869653
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EX-004 couvre le paiement sous HTTPS et les risques d’un numéro de
+            carte dans une URL et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:fc7c92d235d775d092cde2e592fcf2cfa2660b3a486d24c6d6ef2afac4266a2a
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-EX-004 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-EX-004 fournit une activité exploitable et cohérente avec son rôle de exercice sur le paiement
+          sous HTTPS et les risques d’un numéro de carte dans une URL.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex
+          line_start: 2
+          line_end: 16
+          excerpt_sha256: sha256:b28aa6a5b05c94303b7ad09361324ce188476d3ad4a80d4fd1cf4c66f0869653
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EX-004, le format exercice met l’élève en activité avec une consigne graduée autour de
+            le paiement sous HTTPS et les risques d’un numéro de carte dans une URL.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-WEB-EX-005
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-EX-005 est scientifiquement cohérent sur le formulaire GET d’une recherche de voyage dans
+          le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-005.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:915e3d1542da37fd174dd5fcf57313b152465acf5c582c3628056feb07bf38e9
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-EX-005 couvre le formulaire GET d’une recherche de voyage et a été
+            confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-005.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:2663e320ea8f874b09c601b60c10bc5de328fe67f8e6c01053c27d7d743988bf
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-EX-005 passe ; sa trace concorde avec son reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-EX-005 fournit une activité exploitable et cohérente avec son rôle de exercice sur le formulaire
+          GET d’une recherche de voyage.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-005.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:915e3d1542da37fd174dd5fcf57313b152465acf5c582c3628056feb07bf38e9
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-EX-005, le format exercice met l’élève en activité avec une consigne graduée autour de
+            le formulaire GET d’une recherche de voyage.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-WEB-IHM-QCM
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: 1NSI-WEB-IHM-QCM présente 2 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
+          des autres éléments relus.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:4991c8b2ea840f5ac095912ab5e03a0f00e60746a8e13ddee481fbbedf26ed16
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-IHM-QCM couvre les événements, le code serveur, HTTPS et les méthodes
+            GET/POST et a été confrontée au contrat, au programme et aux objets liés.
+        - &id050
+          path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
+          line_start: 25
+          line_end: 33
+          excerpt_sha256: sha256:ad82a189d07739824ff8b02d6bb08bb52e500e8a462671868f97838deceb7cd2
+          fact_type: reviewer_observation
+          observation: La seule réponse attendue affirme que le code serveur n’est jamais visible par l’utilisateur, formulation
+            absolue différente du fait qu’il n’est pas envoyé pour exécution au navigateur.
+        - &id051
+          path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
+          line_start: 61
+          line_end: 69
+          excerpt_sha256: sha256:9d7318776266631a4dc4ebc3f5b18e326d282f7f857261db8a3654c24446c532
+          fact_type: reviewer_observation
+          observation: Le QCM recommande POST seul pour transmettre un mot de passe et ne propose pas POST sur HTTPS.
+        anomaly_ids:
+        - 1NSI-REV-WEB-QCM-SERVER-VISIBILITY
+        - 1NSI-REV-WEB-QCM-PASSWORD-TLS
+      pedagogical:
+        verdict: issue
+        justification: 1NSI-WEB-IHM-QCM présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
+          sans correction.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
+          line_start: 2
+          line_end: 81
+          excerpt_sha256: sha256:4991c8b2ea840f5ac095912ab5e03a0f00e60746a8e13ddee481fbbedf26ed16
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-IHM-QCM, le format qcm propose un diagnostic à choix unique autour de les événements,
+            le code serveur, HTTPS et les méthodes GET/POST.
+        - &id052
+          path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
+          line_start: 3
+          line_end: 81
+          excerpt_sha256: sha256:275c3ab7133dac4804f00d9cc9ed3cc420c2bcabc568644b96c72e153a8d8d54
+          fact_type: reviewer_observation
+          observation: Le QCM d’auto-évaluation ne fournit ni clé liée ni rétroaction pour les six questions.
+        anomaly_ids:
+        - 1NSI-REV-WEB-QCM-AUTOCORRECTION
+    anomalies:
+    - id: 1NSI-REV-WEB-QCM-SERVER-VISIBILITY
+      severity: P0
+      dimension: scientific
+      fact: *id050
+      consequence: La question ne possède pas de réponse exacte sans hypothèse supplémentaire.
+      expected_action: Demander quel code est exécuté côté serveur et préciser qu’il n’est normalement pas transmis dans la
+        réponse HTTP.
+    - id: 1NSI-REV-WEB-QCM-PASSWORD-TLS
+      severity: P0
+      dimension: scientific
+      fact: *id051
+      consequence: La méthode HTTP est confondue avec la confidentialité du transport ; un mot de passe POST sur HTTP reste
+        lisible sur le réseau.
+      expected_action: Faire de POST sur HTTPS la réponse exacte et distinguer corps de requête et chiffrement TLS.
+    - id: 1NSI-REV-WEB-QCM-AUTOCORRECTION
+      severity: P1
+      dimension: pedagogical
+      fact: *id052
+      consequence: L’élève ne peut pas transformer son diagnostic en orientation ou remédiation.
+      expected_action: Ajouter une clé contrôlée et des renvois de remédiation sans exposer les réponses dans la version élève.
+- id: 1NSI-WEB-IHM-RE-C9
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-IHM-RE-C9 est scientifiquement cohérent sur la sortie d’un mot de passe de l’URL d’un formulaire
+          dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:32f7284c844cd85479f33a6bddcd4cdc01e11be396afb14562dac456d27575ae
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-IHM-RE-C9 couvre la sortie d’un mot de passe de l’URL d’un formulaire
+            et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:972e0cf8c53d1674294ec47ba9b61ed85c2c173212c8c6721973e8744117691a
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-IHM-RE-C9 passe ; sa trace diverge du reçu existant.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-IHM-RE-C9 fournit une activité exploitable et cohérente avec son rôle de remediation sur la
+          sortie d’un mot de passe de l’URL d’un formulaire.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex
+          line_start: 2
+          line_end: 27
+          excerpt_sha256: sha256:32f7284c844cd85479f33a6bddcd4cdc01e11be396afb14562dac456d27575ae
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-IHM-RE-C9, le format remediation cible une erreur identifiée avant un nouveau test autour
+            de la sortie d’un mot de passe de l’URL d’un formulaire.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-WEB-IHM-RE-C9-CORRIGE
+  chapter: 1NSI-WEB-IHM
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: 1NSI-WEB-IHM-RE-C9-CORRIGE est scientifiquement cohérent sur la correction du formulaire de réinitialisation
+          par POST dans le périmètre observé.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C9-CORRIGE.tex
+          line_start: 2
+          line_end: 29
+          excerpt_sha256: sha256:36309bc4a1fa7e60cbeff1520d17d10f426ecf5ae102c19c62a2355b18b044bb
+          fact_type: source_statement
+          observation: La lecture complète de 1NSI-WEB-IHM-RE-C9-CORRIGE couvre la correction du formulaire de réinitialisation
+            par POST et a été confrontée au contrat, au programme et aux objets liés.
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C9-CORRIGE.tex
+          line_start: 1
+          line_end: 1
+          excerpt_sha256: sha256:f41f41f074ad7b72b701d57904060a492cc621e8a52d330c05cc4501c1b22b84
+          fact_type: computed_result
+          observation: Le contrôle exécutable frais de 1NSI-WEB-IHM-RE-C9-CORRIGE passe ; sa trace ne dispose pas de reçu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: 1NSI-WEB-IHM-RE-C9-CORRIGE fournit une activité exploitable et cohérente avec son rôle de corrige sur
+          la correction du formulaire de réinitialisation par POST.
+        facts:
+        - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C9-CORRIGE.tex
+          line_start: 2
+          line_end: 29
+          excerpt_sha256: sha256:36309bc4a1fa7e60cbeff1520d17d10f426ecf5ae102c19c62a2355b18b044bb
+          fact_type: pedagogical_structure
+          observation: Dans 1NSI-WEB-IHM-RE-C9-CORRIGE, le format corrige explicite la résolution de l’objet lié autour de
+            la correction du formulaire de réinitialisation par POST.
+        anomaly_ids: []
+    anomalies: []

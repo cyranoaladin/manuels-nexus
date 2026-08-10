@@ -1,0 +1,1832 @@
+artifact_type: 1nsi_review_run
+schema_version: 1
+manual: 1NSI
+review_run_id: 1nsi-objects-data-basics-tables-2026-08-10-chandrasekhar-v1
+reviewer_id: 019feb72-7252-77a1-b864-775b021ed954
+reviewer_model: codex-inherited-gpt5
+protocol_digest: sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9
+reviewed_at: '2026-08-10T12:42:55+01:00'
+assignment:
+  scope: object
+  chapters:
+  - 1NSI-TABLES
+  - 1NSI-TYPES-BASE
+  source_ids:
+  - 1NSI-TAB-CO-001
+  - 1NSI-TAB-CO-002
+  - 1NSI-TAB-CO-003
+  - 1NSI-TAB-CO-004
+  - 1NSI-TAB-CO-005
+  - 1NSI-TAB-COURS-C1
+  - 1NSI-TAB-COURS-C2
+  - 1NSI-TAB-COURS-C3
+  - 1NSI-TAB-COURS-C4
+  - 1NSI-TAB-EVAL-A
+  - 1NSI-TAB-EVAL-A-corrige
+  - 1NSI-TAB-EVAL-B
+  - 1NSI-TAB-EVAL-B-corrige
+  - 1NSI-TAB-EX-001
+  - 1NSI-TAB-EX-002
+  - 1NSI-TAB-EX-003
+  - 1NSI-TAB-EX-004
+  - 1NSI-TAB-EX-005
+  - 1NSI-TABLES-QCM
+  - 1NSI-TABLES-RE-C2
+  - 1NSI-TABLES-RE-C2-CORRIGE
+  - 1NSI-TB-CO-001
+  - 1NSI-TB-CO-002
+  - 1NSI-TB-CO-003
+  - 1NSI-TB-CO-004
+  - 1NSI-TB-CO-005
+  - 1NSI-TB-COURS-C1
+  - 1NSI-TB-COURS-C2
+  - 1NSI-TB-COURS-C3
+  - 1NSI-TB-COURS-C4
+  - 1NSI-TB-COURS-C5
+  - 1NSI-TB-EVAL-A
+  - 1NSI-TB-EVAL-A-corrige
+  - 1NSI-TB-EVAL-B
+  - 1NSI-TB-EVAL-B-corrige
+  - 1NSI-TB-EX-001
+  - 1NSI-TB-EX-002
+  - 1NSI-TB-EX-003
+  - 1NSI-TB-EX-004
+  - 1NSI-TB-EX-005
+  - 1NSI-TYPES-BASE-QCM
+  - 1NSI-TYPES-BASE-RE-C3
+  - 1NSI-TYPES-BASE-RE-C3-CORRIGE
+source_manifest:
+  review_tool_sha256: sha256:a453068adf03803ac3e9f2e8e2cebca25e4113a64a0339bd19d8cf77ff1eb5fa
+  execution_checker_sha256: sha256:ad7dc41c88787d524bb0ba20c02b04ea9d8b5ac1646ad02c906b1af72d4ca0ba
+  execution_common_sha256: sha256:37822308dace9072c0bedccc3d73c4646dc9010aa859a64591a1fa7ad7338e53
+  entries:
+  - id: 1NSI-TAB-CO-001
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-001.tex
+    source_sha256: sha256:c6ac4f64c2e530f6e9ecc5efc736481be65a6b955cd1f7653b825092eadc2d1b
+    dependency_digest: sha256:2b0ef2f9393409766e848939ce53c37b1ac8b8ead9f99825f640f367c884b7fe
+  - id: 1NSI-TAB-CO-002
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-002.tex
+    source_sha256: sha256:be40773be52a0eaa088c8689f39a571c7fc0d2ef930c62dd58ece00f1d96699d
+    dependency_digest: sha256:b1a8f07d35272670d3759e7cd07c192c35b1b2bbe26c8e0b72ec9ab4f2649664
+  - id: 1NSI-TAB-CO-003
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-003.tex
+    source_sha256: sha256:d64318721b31604b2c8784c74f09316936b300ea3801e66f5e4085510f6be82b
+    dependency_digest: sha256:b0cd65ae4e5889129a5b3e1d30078f67035996945a162a604407fea33b0d2b98
+  - id: 1NSI-TAB-CO-004
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-004.tex
+    source_sha256: sha256:20f50210be251d18ecaa492fb0f95ebacb9f7faaf298843fc9e4cfacb9a3c4a3
+    dependency_digest: sha256:a8b56ca3e7ac5bd4606953540c5898759e63eed48c1be63ec9c23b6059fcbb24
+  - id: 1NSI-TAB-CO-005
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-005.tex
+    source_sha256: sha256:9c69973262672af9cf791b8c34240c86a67a50ac80c4cf036a9292c9cd892c01
+    dependency_digest: sha256:0438daac0422591f62d76f17b69c9185e2b6811979500ba2a279148572adacc0
+  - id: 1NSI-TAB-COURS-C1
+    path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C1.tex
+    source_sha256: sha256:7b09c89cad617ccf9b83e2e2b464bdaa47488c87307ce361cbbaa1244a590785
+    dependency_digest: sha256:25907b1071606101ad07018137ecd11df367f4f141e70482523db0a678b5a9f3
+  - id: 1NSI-TAB-COURS-C2
+    path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C2.tex
+    source_sha256: sha256:17669ae9d162cdf77a35d809993fea46d9ebc9d07711dabcdf5968e1d7480d77
+    dependency_digest: sha256:9597ad2d51d29b20b9899e831686264afd95df4a114eedec60754c71af5725a6
+  - id: 1NSI-TAB-COURS-C3
+    path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C3.tex
+    source_sha256: sha256:d708599bcabcf344c8612fb8f9a5587a3afe5a290f47bb96d4fe3cc8f51e303f
+    dependency_digest: sha256:348ed1a05813681da2fb66abd278282562486fc47f3af8f2792712a4a5abdc02
+  - id: 1NSI-TAB-COURS-C4
+    path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex
+    source_sha256: sha256:db00190eb41b1c519574afc2f3d0bec2164eb362828dc631036105c40528d1a4
+    dependency_digest: sha256:912b539da31dee0849a9f8a69529c0e01a87c20bb01dd9baeae2e6c2c3305484
+  - id: 1NSI-TAB-EVAL-A
+    path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex
+    source_sha256: sha256:b262da83a287f0cd572d1499c301fddbbd896cacf9da6f6e2a7297b81a419b7c
+    dependency_digest: sha256:d72570f7be15593235529331a2f1eb493db8affddb6edf92d82e5def44bb5a5e
+  - id: 1NSI-TAB-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex
+    source_sha256: sha256:30682354bb6b71bab0b425bbdf2c49efc0218f84e5e6646a0795f563ea346769
+    dependency_digest: sha256:9fa7c1946f5485d37fea69150112736b9c330de2b51c19efb0427be4208f9351
+  - id: 1NSI-TAB-EVAL-B
+    path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex
+    source_sha256: sha256:f86b7b0256629a764e18222559b9c92f4e4d4c9b507dc7b1bb74370c84ffa0b2
+    dependency_digest: sha256:668b6c9becf7a0f1694db2b81c3d4bf7b127906a8c2eabfdec02c4ab3f34b9a1
+  - id: 1NSI-TAB-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex
+    source_sha256: sha256:1d6fa1c778505302671d3b9e5d4de84d8f0f022678521a3b63ade853b22e45a1
+    dependency_digest: sha256:64225c37af04f35aa0971ef5849f5d38bb20831e534a5d1b359e74fc82427288
+  - id: 1NSI-TAB-EX-001
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-001.tex
+    source_sha256: sha256:77477a98ce3c23873d6135695ca9f3a1dc3832fc9d21d37828fb939297f186b5
+    dependency_digest: sha256:659bcbfcac9720594dcd587ee48e8f78c9d83e37f60308ae89b13a604dbfee9b
+  - id: 1NSI-TAB-EX-002
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-002.tex
+    source_sha256: sha256:6647253d84a452dbfdd62275042132246d5dbf66b9c8b4cc97249ebed59ce5e2
+    dependency_digest: sha256:d68e1c982de35e451de07646be94808dc79ab27b0050a31c0f0e44aace690fd7
+  - id: 1NSI-TAB-EX-003
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-003.tex
+    source_sha256: sha256:9c945f01a8a4fba5d980d0b8f98fb0581ca3c3da1a5d6c6c1b30e278fc09fef3
+    dependency_digest: sha256:d407dff3293353e2bd944760afa8dd86c311f47f196e447888872fd5f4047b67
+  - id: 1NSI-TAB-EX-004
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-004.tex
+    source_sha256: sha256:df9f7c2876207fe075f2e723cf07720d9d1302a05d9a6bc03f14b1e1fcdd3564
+    dependency_digest: sha256:24c3af42c1bd29e1ce43aa88b001fbda40afcea869e59903033d179526dd9715
+  - id: 1NSI-TAB-EX-005
+    path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-005.tex
+    source_sha256: sha256:1d72d924e2bd796bd7813bc5d4d2ea896d2aeeee82a4485de01c56760d072e0b
+    dependency_digest: sha256:67bbd3c1b7c83dfb6da17a029ff66364eca812cf18d81ddb1cd61d732729c1d8
+  - id: 1NSI-TABLES-QCM
+    path: NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.tex
+    source_sha256: sha256:def0eb7d1c158364450be1419a6e5ac38f2edc8e87a285ecac2b06c25333018b
+    dependency_digest: sha256:2b33c48118ef33539a5016db370375bd06e3adbff4e8b7094f15a77349821ba0
+  - id: 1NSI-TABLES-RE-C2
+    path: NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex
+    source_sha256: sha256:e0803efe50a8348801ecbc9d2dd92adb101f16d693727d21a4b5279969dad890
+    dependency_digest: sha256:6465228b5b54bfc791f910acb6a6506e945b24271b53d2c6b3849c06f14f83a0
+  - id: 1NSI-TABLES-RE-C2-CORRIGE
+    path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TABLES-RE-C2-CORRIGE.tex
+    source_sha256: sha256:c0f7c3fd15c76eed335d0fe29cc5e919175cab31839ba7838e526c85110e0679
+    dependency_digest: sha256:b342e397c05824f20a2b9a3fead4adb953cdb510de8dafa8a804c4edad0a9e5a
+  - id: 1NSI-TB-CO-001
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-001.tex
+    source_sha256: sha256:b03af1db5314a59e53f34ffcc3ed852c1f1f245e7fa159a73c707ddcfe29b41d
+    dependency_digest: sha256:0c3ec49b7990a939d38d43220107a56ecf9433269a515a76810b303c84c92efc
+  - id: 1NSI-TB-CO-002
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-002.tex
+    source_sha256: sha256:ebd95edf0e939c2200d340a13d02c26905d71e8c6e4701d92dcd84e2bf0961fa
+    dependency_digest: sha256:19ce25a7e138d96f6aae69301492cfee8eceabd2dc4c69a5408ff23c019e77aa
+  - id: 1NSI-TB-CO-003
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-003.tex
+    source_sha256: sha256:4bccd311113e8ddbde951fa13e425314c03f5c78eaf323843c09724b1af3259a
+    dependency_digest: sha256:41d951df5aa005e9b85b654a06e4de2534e3147aeccd1436fe36b06e115d4a4d
+  - id: 1NSI-TB-CO-004
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-004.tex
+    source_sha256: sha256:60f3c49c8dc671a8c2c92c3e9af5da6198e23297a0bde76d1f4510e63fef3662
+    dependency_digest: sha256:c61172daca2a327bd178ed47a5494e26597a802f88a54f6013e3a7cc7f65e7e2
+  - id: 1NSI-TB-CO-005
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-005.tex
+    source_sha256: sha256:a09a480c40cb8774463a225b4af13aff4605613b6ab7d8d0ea71d94689703266
+    dependency_digest: sha256:4a9cc12c377856e4866a8e8775c9c4c223d2ef9a3d0863ea87954f59f8d1f98b
+  - id: 1NSI-TB-COURS-C1
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C1.tex
+    source_sha256: sha256:0c47842ef18ffaf8841c2572750ffd58cd5697ea3866ae0e475145454bad8570
+    dependency_digest: sha256:35797b374fd1dab262f11b3adf56a624b11a4f3a54455648c5bf563f7cc3665d
+  - id: 1NSI-TB-COURS-C2
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex
+    source_sha256: sha256:c184adbf8d644ad8d7ab21c52125f3cdb1b1b39928c2834f4b921e99c7c37107
+    dependency_digest: sha256:35f40e1e08ee351c139b4c72daf6624c4a2efc02c1a76e856baa0881b143d7e0
+  - id: 1NSI-TB-COURS-C3
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C3.tex
+    source_sha256: sha256:72690ceac5458967440e0a275d4918da9e1a496dcd15f519e594ecddf90e6c36
+    dependency_digest: sha256:a17a1fd0818b6ebadbaafd497c9c8ae1394b0e4c12d96d247e15ced48ca13bbf
+  - id: 1NSI-TB-COURS-C4
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C4.tex
+    source_sha256: sha256:a109d73100e6f4f782d489ee9996aace35ecaedb5c99bd050b47f34aeef3f16f
+    dependency_digest: sha256:6584fe39c5b5778ac02d795f2977d42373871d5e046b9bcdf4e170e383d35090
+  - id: 1NSI-TB-COURS-C5
+    path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C5.tex
+    source_sha256: sha256:6dd01309d1acfb4e5cfd9c4974fe6710ac28ec35bd5d0e330766d8ed742a51e6
+    dependency_digest: sha256:f2ed5bf9c24a0018b215f315f79e995146f05f7f228aa9cecbd64f8820f118fa
+  - id: 1NSI-TB-EVAL-A
+    path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex
+    source_sha256: sha256:747e0a54e40af4e94321e6d4be59bfcdfef3354cec7c79ba1ff6c07f09d734a9
+    dependency_digest: sha256:cc43ec0396ab021b0d71b0b5a402c3b29a400f7650e22c5ea99c4aad0dab7aa7
+  - id: 1NSI-TB-EVAL-A-corrige
+    path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex
+    source_sha256: sha256:e0af37dc2debb0cc451e6d8b49a830868d1545968b38724147cdab360fb8d4da
+    dependency_digest: sha256:763c0208adc1e824307ba0ca936a81c9e810a7738e68273b9510c890a13c3b1f
+  - id: 1NSI-TB-EVAL-B
+    path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex
+    source_sha256: sha256:2e0c0a651cbf5d2641e53dab7f33988b160dea2ac28ce587b9048ef28881b999
+    dependency_digest: sha256:c410dfffbd12e367cdb68488b105102e05d5790d624587171971f8b301624df6
+  - id: 1NSI-TB-EVAL-B-corrige
+    path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex
+    source_sha256: sha256:340b1c0f7c6109f9fcb81409906102f71d4745e31b4be63ebbfe748c3ff75405
+    dependency_digest: sha256:f0b855266961c680459c673cd6d1a8f05755db06c9c1edcb25953a5c685b1120
+  - id: 1NSI-TB-EX-001
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-001.tex
+    source_sha256: sha256:1ba1a0195f6cdef898fa83ccab29f5c66b2e8ef610b743debe80688fb7e30082
+    dependency_digest: sha256:1670ded881bafb2c5a719c8c692ebd5d6564d318efbb6ca444dfa2f0a7e5637f
+  - id: 1NSI-TB-EX-002
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-002.tex
+    source_sha256: sha256:ef669586b4958748bb09c2ee8c68b08685d5cb3f1389f8cea23fc99289e83ab4
+    dependency_digest: sha256:d5bb2d7bb0b2046fe31a839db3d0ccf542db395e2ea4bc7fde951ca0e6a07d16
+  - id: 1NSI-TB-EX-003
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-003.tex
+    source_sha256: sha256:37dbdaa68f093bbf4845cc765f6aebb590ac4c619176cc7175731c922e7d77f8
+    dependency_digest: sha256:1669e980fa51dbf02b708d83e3e8f063efb826018869ccefc737b3f9a6f771c9
+  - id: 1NSI-TB-EX-004
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-004.tex
+    source_sha256: sha256:d9242694b393afbe5d6f3948aeb7413d19e8d793dd07eeeafc51a5e0a372611a
+    dependency_digest: sha256:bada739e902b01abe902c532d8eeb8b5410d7d76cf3a16272a1df7bfa6e012e1
+  - id: 1NSI-TB-EX-005
+    path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-005.tex
+    source_sha256: sha256:96e3bc6eba36bca45ef3bdc4153f91bb93172cc82847665d02adf67d2bfa2ae4
+    dependency_digest: sha256:8788eafc0e7bb6fdcf15458be20e1b3a51aa9187e2bb3a40face0545cab7023b
+  - id: 1NSI-TYPES-BASE-QCM
+    path: NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.tex
+    source_sha256: sha256:265391ffbde5096fd68a3f5e900b32f23fa85fe2d374e8196a901e65bed74704
+    dependency_digest: sha256:81a75a9d4a882d21d09748d963463bf3f5fa3d948ce64548bbd59cbc2d32c509
+  - id: 1NSI-TYPES-BASE-RE-C3
+    path: NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex
+    source_sha256: sha256:9136ae7aa9fcaf0208146f2d18f756d9e4bce05e1f613b7286e4acf7456cc63c
+    dependency_digest: sha256:1284c062b008c9d7744667fc7638a9eb23198e7c26038ce51979eab74c20146a
+  - id: 1NSI-TYPES-BASE-RE-C3-CORRIGE
+    path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C3-CORRIGE.tex
+    source_sha256: sha256:98fdd5c6964b85a010ed221b8ca1bac52c5e84aa25b19d433092e1a31e43462f
+    dependency_digest: sha256:fa3bf2f31c4079e72080c57f7f45abcb1b49b39cd5f0032df8419d3f15854040
+reviews:
+- id: 1NSI-TAB-CO-001
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le corrigé importe le CSV, convertit les deux colonnes et calcule exactement la
+          valeur totale de 175,5 euros.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-001.tex
+          line_start: 12
+          line_end: 30
+          excerpt_sha256: sha256:06e5fa3444f1568ffe2f7a937e6f57884b93525f1c56981067ce103686492b6b
+          fact_type: computed_result
+          observation: Le corrigé de la librairie enchaîne import, conversions str vers float et int,
+            puis la somme 175,5 sans incohérence numérique.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les trois réponses suivent l'ordre des questions et rendent visibles le type importé,
+          le code de conversion et le calcul final.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-001.tex
+          line_start: 12
+          line_end: 30
+          excerpt_sha256: sha256:06e5fa3444f1568ffe2f7a937e6f57884b93525f1c56981067ce103686492b6b
+          fact_type: correction_link
+          observation: La correction de 1NSI-TAB-EX-001 fournit successivement le code d'import, la conversion
+            typée et le calcul détaillé du stock.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-CO-002
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le filtrage combine correctement genre et seuil, puis identifie exactement Amine
+          et Lina.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-002.tex
+          line_start: 16
+          line_end: 30
+          excerpt_sha256: sha256:14a3c5626a19e2073ecfd1f3fb7bbff910e0b7e7c1f80572b7461da7f581707f
+          fact_type: computed_result
+          observation: La compréhension corrigée sélectionne les deux seules lignes NSI de note au moins
+            15 et isole Omar sous 10.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Chaque sous-question reçoit une réponse directement exploitable pour comparer la
+          production de l'élève.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-002.tex
+          line_start: 16
+          line_end: 30
+          excerpt_sha256: sha256:14a3c5626a19e2073ecfd1f3fb7bbff910e0b7e7c1f80572b7461da7f581707f
+          fact_type: correction_link
+          observation: Le corrigé du filtrage distingue le code attendu, le cardinal obtenu et la projection
+            finale sur les noms.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-CO-003
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: La détection de C001 et le contrôle de la quantité négative concordent avec le
+          jeu de données.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-003.tex
+          line_start: 14
+          line_end: 37
+          excerpt_sha256: sha256:d82f6e6bb8a5075fd6ac9072e6ec8cc2632a6fb322b1cc406f6ea9768916a480
+          fact_type: computed_result
+          observation: Le corrigé retrouve C001 en doublon et attribue l'incohérence à la commande C003
+            de quantité -2.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La correction explicite séparément unicité de l'identifiant, cohérence de type
+          et localisation de la ligne fautive.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-003.tex
+          line_start: 14
+          line_end: 37
+          excerpt_sha256: sha256:d82f6e6bb8a5075fd6ac9072e6ec8cc2632a6fb322b1cc406f6ea9768916a480
+          fact_type: correction_link
+          observation: La correction du contrôle de commandes relie chaque fonction à l'anomalie de données
+            qu'elle doit diagnostiquer.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-CO-004
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: L'appel à sorted, les lignes extrêmes et l'absence de mutation de notes sont exacts.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-004.tex
+          line_start: 15
+          line_end: 27
+          excerpt_sha256: sha256:69216da875b85840bd2212a5b4807777a6eb74308e513cf615d7d6c6daab5d89
+          fact_type: computed_result
+          observation: Le corrigé du tri décroissant place Lina à 18 en tête, Omar à 9 en fin et distingue
+            sorted de list.sort.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les réponses couvrent instruction, lecture du résultat et effet de bord attendu.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-004.tex
+          line_start: 15
+          line_end: 27
+          excerpt_sha256: sha256:69216da875b85840bd2212a5b4807777a6eb74308e513cf615d7d6c6daab5d89
+          fact_type: correction_link
+          observation: La correction de 1NSI-TAB-EX-004 traite les trois demandes sur le tri dans l'ordre
+            annoncé.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-CO-005
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: La fusion interne produit trois lignes et l'extension proposée conserve Lina avec
+          zéro absence.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-005.tex
+          line_start: 25
+          line_end: 49
+          excerpt_sha256: sha256:e7315a32123de47220e2ee165fce8a55d54c11df0abb6d172705449260234356
+          fact_type: computed_result
+          observation: Le corrigé de fusion obtient Amine, Omar et Sara, puis construit une variante à
+            quatre lignes avec une valeur par défaut pour Lina.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le passage de la fusion commune à la conservation de tous les élèves constitue
+          un guidage explicite.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-005.tex
+          line_start: 25
+          line_end: 49
+          excerpt_sha256: sha256:e7315a32123de47220e2ee165fce8a55d54c11df0abb6d172705449260234356
+          fact_type: correction_link
+          observation: La correction de l'exercice de fusion explique d'abord l'exclusion de Lina avant
+            de fournir le pseudo-outer-join demandé.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-COURS-C1
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: La définition de table, l'import DictReader et la conversion des colonnes numériques
+          sont exacts pour le jeu proposé.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C1.tex
+          line_start: 35
+          line_end: 108
+          excerpt_sha256: sha256:e3841a18e4beef35c13e159985c0a848192725f60b35b2a9359294d51ef5dbc7
+          fact_type: source_statement
+          observation: Le cours d'import précise que DictReader produit des chaînes et montre la conversion
+            contrôlée de age et cotisation.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: L'objet exige définition de fonction et boucle for alors que R2 attribue ces acquis
+          à TYPES-BASE, qui ne les contractualise pas, et LANGAGE vient après TABLES.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C1.tex
+          line_start: 13
+          line_end: 15
+          excerpt_sha256: sha256:912768f2c492cbdbcded464cf010e15e7c6a2356e429bdcdc75aba9a4c2b6c72
+          fact_type: pedagogical_structure
+          observation: Pour le cours d'import, le contrat suppose à tort boucles et fonctions acquises
+            dans TYPES-BASE avant leur chapitre LANGAGE.
+        anomaly_ids:
+        - 1NSI-REV-TAB-COURS-C1-PREREQUIS
+    anomalies:
+    - id: 1NSI-REV-TAB-COURS-C1-PREREQUIS
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+        line_start: 13
+        line_end: 15
+        excerpt_sha256: sha256:a761976d104ea15fc6d731380a493a96a698430f74f7b53830b21d800adc74fa
+        fact_type: pedagogical_structure
+        observation: R2 ne fournit pas de prérequis réel pour la fonction importer_csv et la boucle de
+          conversion.
+      consequence: L'élève peut rencontrer des constructions Python non enseignées au moment où il doit
+        se concentrer sur l'import CSV.
+      expected_action: Rattacher boucles et fonctions à LANGAGE ou déplacer/étayer explicitement ces constructions
+        avant le cours TABLES.
+- id: 1NSI-TAB-COURS-C2
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: La recherche logique, la détection de doublons et un test de cohérence sont tous
+          présentés avec des sorties justes.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C2.tex
+          line_start: 4
+          line_end: 108
+          excerpt_sha256: sha256:668e7f0bec59b3d9ebb06715f0ab45ac92a6f13eea975a0b590d9347244e0527
+          fact_type: programme_alignment
+          observation: Le cours de recherche couvre critère propositionnel, doublon de colonne et validation
+            d'un âge entier compris entre 0 et 120.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: Les lambdas, compréhensions et fonctions de parcours ne sont pas soutenues par
+          le prérequis R2 déclaré avant LANGAGE.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C2.tex
+          line_start: 13
+          line_end: 15
+          excerpt_sha256: sha256:fb1983c5f383aef08725fe13467d5154cd738882f2c266147f3e96d52f723cd3
+          fact_type: pedagogical_structure
+          observation: Pour le cours de recherche, R2 attribue à TYPES-BASE des fonctions et boucles nécessaires
+            aux trois algorithmes présentés.
+        anomaly_ids:
+        - 1NSI-REV-TAB-COURS-C2-PREREQUIS
+    anomalies:
+    - id: 1NSI-REV-TAB-COURS-C2-PREREQUIS
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+        line_start: 13
+        line_end: 15
+        excerpt_sha256: sha256:a761976d104ea15fc6d731380a493a96a698430f74f7b53830b21d800adc74fa
+        fact_type: pedagogical_structure
+        observation: Le prérequis déclaré ne prépare ni critere(ligne), ni lambda, ni les compréhensions
+          utilisées dans cet objet.
+      consequence: La charge syntaxique peut masquer les objectifs de logique, doublons et cohérence.
+      expected_action: Introduire ces constructions dans LANGAGE auparavant ou ajouter un étayage local
+        explicite et testé.
+- id: 1NSI-TAB-COURS-C3
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le tri par clé, l'ordre décroissant et la différence entre sorted et sort sont
+          décrits correctement.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C3.tex
+          line_start: 4
+          line_end: 70
+          excerpt_sha256: sha256:10c2966fafb1ee1f5414b11a0d588227b4ba600f1404dec788d6ca445ad12e19
+          fact_type: source_statement
+          observation: Le cours de tri distingue une nouvelle liste produite par sorted de la mutation
+            sur place réalisée par sort.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: L'usage de lambda comme clé de tri dépend d'un langage fonctionnel non établi par
+          R2 ni encore traité dans LANGAGE.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C3.tex
+          line_start: 13
+          line_end: 15
+          excerpt_sha256: sha256:fb1983c5f383aef08725fe13467d5154cd738882f2c266147f3e96d52f723cd3
+          fact_type: pedagogical_structure
+          observation: Pour le cours de tri, le prérequis R2 ne justifie pas la lambda exigée avant le
+            chapitre LANGAGE.
+        anomaly_ids:
+        - 1NSI-REV-TAB-COURS-C3-PREREQUIS
+    anomalies:
+    - id: 1NSI-REV-TAB-COURS-C3-PREREQUIS
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+        line_start: 13
+        line_end: 15
+        excerpt_sha256: sha256:a761976d104ea15fc6d731380a493a96a698430f74f7b53830b21d800adc74fa
+        fact_type: pedagogical_structure
+        observation: R2 annonce boucles et fonctions dans TYPES-BASE sans couvrir la lambda passée à sorted.
+      consequence: L'élève peut appliquer mécaniquement une syntaxe non comprise au lieu de raisonner
+        sur la colonne de tri.
+      expected_action: Déplacer LANGAGE avant TABLES ou enseigner explicitement la fonction-clé avant
+        son évaluation.
+- id: 1NSI-TAB-COURS-C4
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: La fusion fonctionne sur les exemples à clés uniques, mais l'index dictionnaire
+          écrase silencieusement toute clé dupliquée de table2 sans précondition d'unicité.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex
+          line_start: 30
+          line_end: 43
+          excerpt_sha256: sha256:4461580538adc871ff2dd1425906a51c770485cfcbdbb2db79627695a3c45abc
+          fact_type: source_statement
+          observation: La compréhension index2 conserve une seule ligne par clé et perd donc des correspondances
+            lorsque table2 contient des doublons.
+        anomaly_ids:
+        - 1NSI-REV-TAB-COURS-C4-FUSION-DOUBLONS
+      pedagogical:
+        verdict: issue
+        justification: La fonction combine boucles, compréhensions et dépaquetage de dictionnaires malgré
+          un R2 erroné et un chapitre LANGAGE postérieur.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex
+          line_start: 13
+          line_end: 15
+          excerpt_sha256: sha256:0ca51180fc0be9625982a79822380e12a9d0bdbfe47a90a2ee306435e7a9b4ff
+          fact_type: pedagogical_structure
+          observation: Pour le cours de fusion, R2 ne prépare pas la fonction, la boucle, la compréhension
+            de dictionnaire ni le dépaquetage utilisés.
+        anomaly_ids:
+        - 1NSI-REV-TAB-COURS-C4-PREREQUIS
+    anomalies:
+    - id: 1NSI-REV-TAB-COURS-C4-FUSION-DOUBLONS
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex
+        line_start: 30
+        line_end: 43
+        excerpt_sha256: sha256:4461580538adc871ff2dd1425906a51c770485cfcbdbb2db79627695a3c45abc
+        fact_type: source_statement
+        observation: La création de index2 par dictionnaire remplace les lignes antérieures partageant
+          la même clé.
+      consequence: Une table contenant deux lignes de même clé produit une fusion scientifiquement incomplète
+        sans alerte.
+      expected_action: Exiger l'unicité des clés avec contrôle testé ou implémenter une fusion qui conserve
+        toutes les correspondances.
+    - id: 1NSI-REV-TAB-COURS-C4-PREREQUIS
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+        line_start: 13
+        line_end: 15
+        excerpt_sha256: sha256:a761976d104ea15fc6d731380a493a96a698430f74f7b53830b21d800adc74fa
+        fact_type: pedagogical_structure
+        observation: Le prérequis R2 ne couvre aucune des constructions avancées concentrées dans fusionner.
+      consequence: La difficulté de langage s'ajoute à la notion nouvelle de domaine commun et de combinaison
+        de tables.
+      expected_action: Réordonner la progression ou décomposer la fonction avec un guidage syntaxique
+        explicite.
+- id: 1NSI-TAB-EVAL-A
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les jeux de données, seuils, ordre chronologique et cardinal de fusion sont cohérents
+          avec les sorties exécutées.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex
+          line_start: 11
+          line_end: 79
+          excerpt_sha256: sha256:c82fc81d130f5eb8ef2454465bfadce83f2ef3d46f3b22902752c1cf88d9eedc
+          fact_type: computed_result
+          observation: L'évaluation Films conduit à Interstellar et Inception, à Amelie en premier après
+            tri et à trois lignes après fusion.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: L'évaluation revendique P-TABLE-02 mais n'évalue que la recherche par critère,
+          sans doublons ni test de cohérence.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex
+          line_start: 20
+          line_end: 53
+          excerpt_sha256: sha256:ec7631ab760960941164520f0f084e1f8893748861baeded028fd34faddd49f8
+          fact_type: pedagogical_structure
+          observation: Dans l'évaluation A TABLES, aucune question ne demande de détecter un doublon ou
+            de valider la cohérence des données.
+        anomaly_ids:
+        - 1NSI-REV-TAB-EVAL-A-COHERENCE
+    anomalies:
+    - id: 1NSI-REV-TAB-EVAL-A-COHERENCE
+      severity: P2
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex
+        line_start: 20
+        line_end: 53
+        excerpt_sha256: sha256:ec7631ab760960941164520f0f084e1f8893748861baeded028fd34faddd49f8
+        fact_type: pedagogical_structure
+        observation: Le volet P-TABLE-02 de l'évaluation A se limite au filtre SF et omet doublons et
+          cohérence.
+      consequence: Le résultat ne peut pas attester toute la capacité déclarée dans les métadonnées.
+      expected_action: Ajouter une question courte et discriminante sur un doublon ou une contrainte de
+        cohérence.
+- id: 1NSI-TAB-EVAL-A-corrige
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les conversions, le filtre, le tri et la fusion donnent les résultats exacts du
+          sujet Films.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex
+          line_start: 14
+          line_end: 42
+          excerpt_sha256: sha256:fa7149c4ff182713500e6d41ebc12daf5e27f3752c80aa249caa2f690c8dfcc5
+          fact_type: computed_result
+          observation: Le corrigé Films confirme deux résultats filtrés, Amelie au tri et Dune hors de
+            la fusion.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les réponses sont séparées selon les deux exercices et n'apparaissent que dans
+          l'objet corrigé dédié.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex
+          line_start: 14
+          line_end: 42
+          excerpt_sha256: sha256:fa7149c4ff182713500e6d41ebc12daf5e27f3752c80aa249caa2f690c8dfcc5
+          fact_type: student_teacher_separation
+          observation: Le corrigé A TABLES réserve les solutions de code et résultats au type corrige_evaluation
+            lié au sujet.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-EVAL-B
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le filtre Puzzle, le tri chronologique et la fusion des studios produisent les
+          résultats annoncés.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex
+          line_start: 11
+          line_end: 79
+          excerpt_sha256: sha256:2bf31deecaf88b54cfa80b119b5365dfd9f5b4a670337305fdcf34ea6af67bbb
+          fact_type: computed_result
+          observation: L'évaluation Jeux vidéo isole Portal 2, place Tetris en premier et exclut Tetris
+            de la fusion à trois lignes.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: Comme la variante A, elle déclare P-TABLE-02 sans aucune tâche sur doublons ou
+          cohérence.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex
+          line_start: 20
+          line_end: 53
+          excerpt_sha256: sha256:91698b306450ff4202500dae47a24d29d96a8fdbe1ecb3274cf69ab22150056f
+          fact_type: pedagogical_structure
+          observation: Dans l'évaluation B TABLES, le critère Puzzle ne vérifie ni détection de doublon
+            ni contrôle de cohérence.
+        anomaly_ids:
+        - 1NSI-REV-TAB-EVAL-B-COHERENCE
+    anomalies:
+    - id: 1NSI-REV-TAB-EVAL-B-COHERENCE
+      severity: P2
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex
+        line_start: 20
+        line_end: 53
+        excerpt_sha256: sha256:91698b306450ff4202500dae47a24d29d96a8fdbe1ecb3274cf69ab22150056f
+        fact_type: pedagogical_structure
+        observation: Le volet recherche de l'évaluation B n'échantillonne pas les deux commentaires officiels
+          sur doublons et cohérence.
+      consequence: La seconde variante ne complète pas la couverture absente de la première.
+      expected_action: Introduire dans cette variante un jeu de données incohérent ou une clé répétée
+        à diagnostiquer.
+- id: 1NSI-TAB-EVAL-B-corrige
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les réponses Portal 2, Tetris et fusion à trois lignes concordent avec les données
+          du sujet.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex
+          line_start: 14
+          line_end: 42
+          excerpt_sha256: sha256:da426afe6fc05f53964ad6c8edd51edcf1f883320dcf35de8a8baf3cb79a34d7
+          fact_type: computed_result
+          observation: Le corrigé Jeux vidéo applique correctement le seuil 9,3, le tri par année et le
+            domaine commun des titres.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La correction fournit des résultats concis et reste isolée dans le fichier corrige_evaluation.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex
+          line_start: 14
+          line_end: 42
+          excerpt_sha256: sha256:da426afe6fc05f53964ad6c8edd51edcf1f883320dcf35de8a8baf3cb79a34d7
+          fact_type: student_teacher_separation
+          observation: Le corrigé B TABLES conserve les solutions de filtrage et de fusion hors du sujet
+            d'évaluation.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-EX-001
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: L'import, les conversions et la valeur totale de 175,5 sont déterminés par des
+          données complètes et exécutées.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-001.tex
+          line_start: 15
+          line_end: 27
+          excerpt_sha256: sha256:8e2fd949bdfad79d686c1afe9f90bbb0ad6e8c3764949128dc9496e5b3b2a503
+          fact_type: computed_result
+          observation: L'exercice Librairie fournit trois lignes CSV suffisantes pour calculer sans ambiguïté
+            une valeur de stock de 175,5.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La tâche progresse de l'import brut aux types puis à un calcul agrégé contextualisé.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-001.tex
+          line_start: 23
+          line_end: 27
+          excerpt_sha256: sha256:833b70bc91d1fc566b481159d4d159cc1e7cc4b593a0abd16222dc7ad9b854ae
+          fact_type: pedagogical_structure
+          observation: L'exercice d'import fait constater le type str avant d'exiger les conversions nécessaires
+            au calcul du stock.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-EX-002
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les critères logiques sélectionnent Amine et Lina, puis la projection sous 10 isole
+          Omar.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-002.tex
+          line_start: 14
+          line_end: 30
+          excerpt_sha256: sha256:8cbc65c440c74926a5ff1d56759d285d85fc1a76fd44af8a4ceb7ed10927da09
+          fact_type: computed_result
+          observation: Le jeu Notes permet de vérifier séparément conjonction de critères et recherche
+            d'une valeur strictement sous 10.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les trois questions vont du filtre de lignes à l'interprétation puis à la projection
+          des noms.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-002.tex
+          line_start: 26
+          line_end: 30
+          excerpt_sha256: sha256:1f7fd8c70c39bf14ac119055b85d10b96eab8e28ef19b5fed822f9a2889b8bd6
+          fact_type: pedagogical_structure
+          observation: L'exercice de recherche réduit progressivement la table en conservant d'abord des
+            lignes puis seulement des noms.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-EX-003
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: C001 est bien dupliqué et la quantité -2 rend la table incohérente selon la contrainte
+          annoncée.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-003.tex
+          line_start: 21
+          line_end: 35
+          excerpt_sha256: sha256:566453fd9a9cac49674c35dcd5776753de79ab1430ddfe0bf64177bbdd1795d2
+          fact_type: computed_result
+          observation: L'exercice Commandes juxtapose volontairement une clé répétée et une quantité négative,
+            chacune avec un diagnostic distinct.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La tâche articule détection, justification métier et localisation de l'enregistrement
+          fautif.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-003.tex
+          line_start: 31
+          line_end: 35
+          excerpt_sha256: sha256:47345d04f1e8e931bafb902b84fea6fdf170a51b1aa986ac4d730bc72fba5281
+          fact_type: pedagogical_structure
+          observation: L'exercice sur les commandes fait passer du code de contrôle à l'interprétation
+            d'une violation d'unicité et de domaine.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TAB-EX-004
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le tri décroissant et les questions sur les extrêmes et la non-mutation sont scientifiquement
+          pertinents.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-004.tex
+          line_start: 20
+          line_end: 24
+          excerpt_sha256: sha256:82aa0c8bcc8d40350f36119e3f5e086f7ee5a647986966cd70e987b32a9b6812
+          fact_type: source_statement
+          observation: L'exercice de tri demande correctement une clé note, un ordre décroissant et l'effet
+            de sorted sur la table source.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: La consigne dit reprendre la table de l'exercice précédent, mais l'objet précédent
+          porte sur commandes, pas sur notes, et aucune table notes n'est fournie ici.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-004.tex
+          line_start: 18
+          line_end: 24
+          excerpt_sha256: sha256:e98e7339c03ce1b9451777b35a2081c50df4427415b720c708c2d75d7f23629c
+          fact_type: exercise_link
+          observation: 1NSI-TAB-EX-004 renvoie à tort à l'exercice précédent pour une table notes absente
+            de son propre graphe de dépendances.
+        anomaly_ids:
+        - 1NSI-REV-TAB-EX-004-DONNEES
+    anomalies:
+    - id: 1NSI-REV-TAB-EX-004-DONNEES
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-004.tex
+        line_start: 18
+        line_end: 24
+        excerpt_sha256: sha256:e98e7339c03ce1b9451777b35a2081c50df4427415b720c708c2d75d7f23629c
+        fact_type: exercise_link
+        observation: Le renvoi « exercice précédent » ne permet pas de retrouver les données notes nécessaires.
+      consequence: L'exercice n'est pas résoluble de façon autonome dans l'ordre canonique des objets.
+      expected_action: Référencer explicitement 1NSI-TAB-EX-002 et le lier, ou recopier la table notes
+        dans l'énoncé.
+- id: 1NSI-TAB-EX-005
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les deux tables donnent trois correspondances et une seule absence de correspondance,
+          Lina.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-005.tex
+          line_start: 22
+          line_end: 41
+          excerpt_sha256: sha256:9125768ea1395dff8efa36de7ffebe11a2168d407fb11c308aace1a3a837012c
+          fact_type: computed_result
+          observation: L'exercice de fusion fournit des clés uniques et conduit sans ambiguïté à trois
+            lignes communes puis à une extension conservant quatre élèves.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le troisième item organise un transfert de la fusion interne vers une conservation
+          avec valeur par défaut.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/exercices/1NSI-TAB-EX-005.tex
+          line_start: 37
+          line_end: 41
+          excerpt_sha256: sha256:f55769cd6fcdc03e1065c005faccf9e96bd68df7af354113c840de4d4ab7ff9b
+          fact_type: pedagogical_structure
+          observation: L'exercice Absences ajoute une exigence métier nouvelle après l'application directe
+            de fusionner.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TABLES-QCM
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les six questions ont chacune une réponse exacte conforme aux notions d'import,
+          recherche, tri et fusion enseignées.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.tex
+          line_start: 15
+          line_end: 80
+          excerpt_sha256: sha256:558f258eb6dc5fcc8d35ba5daac1b17dffff81df248bbc2460030c47592ca97b
+          fact_type: source_statement
+          observation: Le QCM TABLES propose des distracteurs distincts autour de str, compréhension,
+            doublon, sorted, fusion interne et domaine.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: L'auto-évaluation ne fournit ni réponses, ni orientation, et n'interroge aucun
+          test de cohérence malgré P-TABLE-02.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.tex
+          line_start: 3
+          line_end: 83
+          excerpt_sha256: sha256:6a2cc4e151e6c4cdee88c6b0b1886981a86c64dc29524821cf3164a2df07e5f6
+          fact_type: pedagogical_structure
+          observation: Le QCM TABLES se présente comme auto-évaluation sans clé de correction ni item
+            de cohérence des données.
+        anomaly_ids:
+        - 1NSI-REV-TAB-QCM-AUTOCORRECTION
+    anomalies:
+    - id: 1NSI-REV-TAB-QCM-AUTOCORRECTION
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.tex
+        line_start: 3
+        line_end: 83
+        excerpt_sha256: sha256:6a2cc4e151e6c4cdee88c6b0b1886981a86c64dc29524821cf3164a2df07e5f6
+        fact_type: pedagogical_structure
+        observation: Aucun retour ne permet à l'élève de valider ses six choix ou d'être orienté vers
+          une remédiation.
+      consequence: La preuve de maîtrise et la boucle de remédiation sont inopérantes pour cet objet.
+      expected_action: Ajouter une correction séparée avec diagnostic par distracteur et une question
+        sur la cohérence d'une table.
+- id: 1NSI-TABLES-RE-C2
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le cas Ali montre exactement pourquoi deux lignes différentes peuvent constituer
+          un doublon sur une colonne.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex
+          line_start: 7
+          line_end: 35
+          excerpt_sha256: sha256:980c6bcb089b2bece23f87ac59bfa73b37598281d10b94dc42431859febfc632
+          fact_type: computed_result
+          observation: La remédiation TABLES produit une liste naïve vide puis détecte Ali en projetant
+            uniquement la colonne nom.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le contre-exemple cible une erreur précise et demande explication puis réécriture
+          contrôlée.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex
+          line_start: 7
+          line_end: 23
+          excerpt_sha256: sha256:09d18dc59dd06a8b61c75593f0d153177587b23d1848c32fe02ba04e446d29bb
+          fact_type: pedagogical_structure
+          observation: La fiche de remédiation sur les doublons conduit de l'échec observé à un critère
+            corrigé sur la seule colonne nom.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TABLES-RE-C2-CORRIGE
+  chapter: 1NSI-TABLES
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: L'explication des chaînes différentes et la détection de Ali sur la colonne nom
+          sont exactes.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TABLES-RE-C2-CORRIGE.tex
+          line_start: 3
+          line_end: 22
+          excerpt_sha256: sha256:ebe85c9d7351da16735d9f1bd0025ec85e851e5e30fd69e1979a3f9cbeb18a4e
+          fact_type: computed_result
+          observation: Le corrigé de remédiation distingue égalité des lignes et répétition de la valeur
+            Ali dans un descripteur.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les trois réponses reprennent le diagnostic, sa cause et le code réparé dans le
+          même ordre.
+        facts:
+        - path: NSI/chapitres/1NSI-TABLES/corriges/1NSI-TABLES-RE-C2-CORRIGE.tex
+          line_start: 3
+          line_end: 22
+          excerpt_sha256: sha256:ebe85c9d7351da16735d9f1bd0025ec85e851e5e30fd69e1979a3f9cbeb18a4e
+          fact_type: correction_link
+          observation: Le corrigé TABLES-RE-C2 ferme la remédiation par une projection explicite des noms
+            et un résultat attendu.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-CO-001
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les conversions de 156, 11001₂ et 3F₁₆ sont détaillées et exactes.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-001.tex
+          line_start: 8
+          line_end: 19
+          excerpt_sha256: sha256:4863320ee169e8d305eac81eef96dbc5a4911f00f8476bfd2e98ee85c90588e6
+          fact_type: computed_result
+          observation: Le corrigé des bases obtient 10011100₂, 9C₁₆, 25 et 63 par calculs explicités.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les divisions successives rendent la méthode contrôlable, puis les conversions
+          inverses sont décomposées.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-001.tex
+          line_start: 8
+          line_end: 19
+          excerpt_sha256: sha256:4863320ee169e8d305eac81eef96dbc5a4911f00f8476bfd2e98ee85c90588e6
+          fact_type: correction_link
+          observation: La correction de 1NSI-TB-EX-001 montre les restes en bases 2 et 16 avant les sommes
+            pondérées.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-CO-002
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le besoin de 9 bits, l'écriture de 20 et le complément à 2 de -12 sont exacts.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-002.tex
+          line_start: 11
+          line_end: 19
+          excerpt_sha256: sha256:0dda77aae16d8e9d349f4a2d16d678e51540f7ebe2ad3169230c0196f80bf752
+          fact_type: computed_result
+          observation: Le corrigé des entiers relatifs établit 2^8 <= 300 < 2^9 et construit 11110100
+            pour -12.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La correction explicite chacune des trois étapes demandées pour le complément à
+          2.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-002.tex
+          line_start: 11
+          line_end: 19
+          excerpt_sha256: sha256:0dda77aae16d8e9d349f4a2d16d678e51540f7ebe2ad3169230c0196f80bf752
+          fact_type: correction_link
+          observation: La réponse à 1NSI-TB-EX-002 sépare dimensionnement, écriture positive et inversion-plus-un.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-CO-003
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: La sortie 0.30000000000000004 et la comparaison à tolérance correspondent à l'exécution
+          Python.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-003.tex
+          line_start: 8
+          line_end: 30
+          excerpt_sha256: sha256:a1d596c47b172761a9e257e1f6ddf03065dc79545d0ef7a7182187f537d28951
+          fact_type: computed_result
+          observation: Le corrigé Monnaie explique la différence flottante puis remplace == par presque_egaux
+            pour obtenir le message attendu.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le diagnostic précède l'outil correctif et sa réinsertion dans le programme complet.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-003.tex
+          line_start: 8
+          line_end: 30
+          excerpt_sha256: sha256:a1d596c47b172761a9e257e1f6ddf03065dc79545d0ef7a7182187f537d28951
+          fact_type: correction_link
+          observation: La correction de 1NSI-TB-EX-003 relie l'observation de sortie à une fonction tolérante
+            puis au test final.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-CO-004
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: La table à huit lignes, le compte de trois cas vrais et la conclusion maintenance
+          sont exacts.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-004.tex
+          line_start: 9
+          line_end: 31
+          excerpt_sha256: sha256:01f2ca3df1100d6bcebd7ae70e5826ef90a7865c153869ca745150e31dd409fa
+          fact_type: computed_result
+          observation: Le corrigé Alarme énumère les huit triplets et montre que not c interdit tout déclenchement
+            lorsque c est vrai.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La correction combine représentation tabulaire, comptage et interprétation du contexte.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-004.tex
+          line_start: 9
+          line_end: 31
+          excerpt_sha256: sha256:01f2ca3df1100d6bcebd7ae70e5826ef90a7865c153869ca745150e31dd409fa
+          fact_type: correction_link
+          observation: La réponse à l'exercice booléen passe de la table complète à une propriété de sûreté
+            du mode maintenance.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-CO-005
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les nombres de caractères et d'octets ainsi que l'échec ASCII sont exacts pour
+          « Bonjour à tous ! ».
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-005.tex
+          line_start: 8
+          line_end: 28
+          excerpt_sha256: sha256:41d714cfc87ba8a68f5db4a601227ef4bcc8b9c32e711e55e28df32fa1aac4fb
+          fact_type: computed_result
+          observation: Le corrigé Encodage distingue 16 caractères, 17 octets UTF-8, 16 octets Latin-1
+            et l'absence de à en ASCII.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La correction relie le comptage local au choix d'un encodage international.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TB-CO-005.tex
+          line_start: 8
+          line_end: 28
+          excerpt_sha256: sha256:41d714cfc87ba8a68f5db4a601227ef4bcc8b9c32e711e55e28df32fa1aac4fb
+          fact_type: correction_link
+          observation: La réponse à 1NSI-TB-EX-005 explique d'abord le caractère à puis généralise aux
+            écritures arabe, chinoise et cyrillique.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-COURS-C1
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les définitions, conversions de 45 et algorithmes de Horner et divisions successives
+          sont exacts.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C1.tex
+          line_start: 8
+          line_end: 79
+          excerpt_sha256: sha256:c4102c5ade89ba81cbe00f6ac221b692fe0936497c7894cfa39b97ff0eebf95a
+          fact_type: programme_alignment
+          observation: Le cours Bases vérifie 101101₂ = 2D₁₆ = 45 et traite les deux sens de conversion,
+            y compris zéro.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Définition, exemples, deux méthodes, erreur fréquente et activité machine construisent
+          une progression complète.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C1.tex
+          line_start: 24
+          line_end: 88
+          excerpt_sha256: sha256:026506089c2b5c0117b1bd011421329894e4a6534d91702888a4c10928833631
+          fact_type: pedagogical_structure
+          observation: Le parcours Bases alterne propriété, code vérifié et activité finale sur 255 en
+            hexadécimal.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-COURS-C2
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: Le cours dimensionne un entier et une somme, mais ne traite jamais le nombre de
+          bits du produit de deux entiers prévu officiellement.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex
+          line_start: 9
+          line_end: 25
+          excerpt_sha256: sha256:ae54de5cd5d37e97667d82cd850d0f5bde44cd31a7f3bf1f339db2c22961e0b4
+          fact_type: programme_alignment
+          observation: Le seul exemple de dimensionnement compare 200 et 200+150 ; aucun produit n'est
+            calculé ni borné.
+        anomaly_ids:
+        - 1NSI-REV-TB-COURS-C2-COUVERTURE-BITS
+      pedagogical:
+        verdict: pass
+        justification: La représentation positive précède le complément à 2, son intérêt et les bornes
+          sur 8 bits.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex
+          line_start: 27
+          line_end: 97
+          excerpt_sha256: sha256:6b9ca289b06e7e16c3881f1ccd56999c83a74de14386eafa1041b500ecd64b91
+          fact_type: pedagogical_structure
+          observation: Le cours Entiers relatifs va de la construction de -5 à l'addition modulo 2^8 puis
+            aux valeurs limites -128 et 127.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-TB-COURS-C2-COUVERTURE-BITS
+      severity: P1
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C2.tex
+        line_start: 9
+        line_end: 25
+        excerpt_sha256: sha256:ae54de5cd5d37e97667d82cd850d0f5bde44cd31a7f3bf1f339db2c22961e0b4
+        fact_type: programme_alignment
+        observation: La capacité officielle somme ou produit n'est illustrée que par la somme 200+150.
+      consequence: La maîtrise du dimensionnement d'un produit n'est pas observable dans le cours central
+        C2.
+      expected_action: Ajouter un exemple calculé et testé de nombre de bits nécessaire au produit de
+        deux entiers.
+- id: 1NSI-TB-COURS-C3
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: Le cours illustre les effets d'arrondi, mais ne calcule pas la représentation de
+          0,1, 0,25 ou 1/3 comme l'exige la capacité officielle.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C3.tex
+          line_start: 8
+          line_end: 78
+          excerpt_sha256: sha256:2c4744999182f5657ed414e85cd01efd309ee9dbb60949f05ac99dd6af3d0e46
+          fact_type: programme_alignment
+          observation: Les sorties Python et float.hex restent des constats ; aucune représentation binaire
+            de 0,1, 0,25 ou 1/3 n'est calculée dans le contenu élève.
+        anomaly_ids:
+        - 1NSI-REV-TB-COURS-C3-REPRESENTATIONS
+      pedagogical:
+        verdict: pass
+        justification: L'erreur d'égalité mène à une comparaison tolérante, puis l'IEEE-754 est clairement
+          étiqueté approfondissement.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C3.tex
+          line_start: 31
+          line_end: 83
+          excerpt_sha256: sha256:d9015be060079daaedb5696340daae526cab2a9483375af62df13bd42d6e1d38
+          fact_type: pedagogical_structure
+          observation: Le cours Flottants distingue exigible et approfondissement avant une activité de
+            comparaison de trois dixièmes.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-TB-COURS-C3-REPRESENTATIONS
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C3.tex
+        line_start: 8
+        line_end: 78
+        excerpt_sha256: sha256:2c4744999182f5657ed414e85cd01efd309ee9dbb60949f05ac99dd6af3d0e46
+        fact_type: programme_alignment
+        observation: La capacité calculer sur quelques exemples la représentation de 0,1, 0,25 ou 1/3
+          n'est pas enseignée.
+      consequence: Le cours central ne permet pas d'acquérir une capacité officielle pourtant revendiquée
+        par P-BASE-03.
+      expected_action: Ajouter des calculs binaires explicites et vérifiés pour plusieurs exemples officiels,
+        puis les évaluer.
+- id: 1NSI-TB-COURS-C4
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les tables de and/or, le xor, le demi-additionneur et le court-circuit sont exacts
+          et conformes aux commentaires officiels.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C4.tex
+          line_start: 4
+          line_end: 98
+          excerpt_sha256: sha256:926ee6b2d6d6d65f67ff102eadb6901b9eb839b836ccb7e5badf8bdc526d1e48
+          fact_type: programme_alignment
+          observation: Le cours Booléens relie tables de vérité, xor, addition binaire et évaluation séquentielle
+            avec des vérifications exécutées.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: La consigne finale contient « qui... en fait », formulation inachevée visible avant
+          la tâche réelle.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C4.tex
+          line_start: 100
+          line_end: 103
+          excerpt_sha256: sha256:cdca5dc993170a2be8aa6919d1782b51d4e5d87b29d36417c87f344c48ea41d8
+          fact_type: pedagogical_structure
+          observation: L'activité finale du cours Booléens conserve une hésitation éditoriale « qui...
+            en fait » dans la consigne élève.
+        anomaly_ids:
+        - 1NSI-REV-TB-COURS-C4-CONSIGNE
+    anomalies:
+    - id: 1NSI-REV-TB-COURS-C4-CONSIGNE
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C4.tex
+        line_start: 100
+        line_end: 103
+        excerpt_sha256: sha256:cdca5dc993170a2be8aa6919d1782b51d4e5d87b29d36417c87f344c48ea41d8
+        fact_type: pedagogical_structure
+        observation: La phrase d'ouverture de l'activité est manifestement inachevée avant de reformuler
+          la tâche.
+      consequence: La consigne nuit à la compréhension et constitue un résidu éditorial visible dans la
+        variante élève.
+      expected_action: Réécrire l'activité en une consigne directe, complète et testable, sans fragment
+        provisoire.
+- id: 1NSI-TB-COURS-C5
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: La fonction reencoder reçoit déjà une str, réencode puis redécode dans le même
+          format ; l'encodage source est redondant et aucun fichier source n'est converti.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C5.tex
+          line_start: 54
+          line_end: 77
+          excerpt_sha256: sha256:18a61d53fe51d4c5ada3a1bebb94a375cd6683fe720866d28e5e8df11628c24a
+          fact_type: source_statement
+          observation: Le code annoncé comme conversion decode une chaîne déjà décodée après l'avoir artificiellement
+            encodée avec encodage_source.
+        anomaly_ids:
+        - 1NSI-REV-TB-COURS-C5-REENCODAGE
+      pedagogical:
+        verdict: pass
+        justification: Les exemples ASCII, Latin-1 et UTF-8 distinguent correctement caractères, octets
+          et erreur d'encodage.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C5.tex
+          line_start: 10
+          line_end: 52
+          excerpt_sha256: sha256:9f837f60e653abbe0ad8d60db6e108a873adeb283ce3e05f16247c22b9e1245e
+          fact_type: pedagogical_structure
+          observation: Le cours Texte compare A, é et café dans trois encodages avant de faire observer
+            UnicodeEncodeError.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-TB-COURS-C5-REENCODAGE
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/cours/1NSI-TB-COURS-C5.tex
+        line_start: 54
+        line_end: 77
+        excerpt_sha256: sha256:18a61d53fe51d4c5ada3a1bebb94a375cd6683fe720866d28e5e8df11628c24a
+        fact_type: source_statement
+        observation: reencoder ne convertit pas des octets ou un fichier depuis un encodage source ; son
+          aller-retour encode/decode est conceptuellement faux.
+      consequence: Le code peut faire croire qu'une str Python conserve un encodage source et valide à
+        tort la capacité de conversion de fichier.
+      expected_action: Prendre des octets en entrée, les décoder avec la source puis les encoder vers
+        la cible, avec fichiers et tests dédiés.
+- id: 1NSI-TB-EVAL-A
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: L'évaluation revendique les cinq capacités mais n'évalue ni produit binaire, ni
+          calcul d'une représentation flottante, ni conversion d'un fichier texte.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex
+          line_start: 9
+          line_end: 35
+          excerpt_sha256: sha256:456086c4f1f9187f80f0c20ffc463987cca3773d647eb145997ea8f32a8f20a6
+          fact_type: programme_alignment
+          observation: Les tâches A couvrent conversions de base, complément à 2, piège d'égalité, xor
+            et tailles d'ASCII, sans les trois opérations officielles manquantes.
+        anomaly_ids:
+        - 1NSI-REV-TB-EVAL-A-COUVERTURE
+      pedagogical:
+        verdict: pass
+        justification: Deux exercices équilibrés couvrent les cinq thèmes contractuels avec durée, ressources
+          et points explicites.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex
+          line_start: 2
+          line_end: 35
+          excerpt_sha256: sha256:b00ee4049ff0aeff0bbea416a23dc4a5430526a6a6fc380db24a435733077698
+          fact_type: pedagogical_structure
+          observation: L'évaluation A organise 45 minutes en un bloc entier relatif puis un bloc flottants-booléens-encodage.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-TB-EVAL-A-COUVERTURE
+      severity: P1
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex
+        line_start: 9
+        line_end: 35
+        excerpt_sha256: sha256:456086c4f1f9187f80f0c20ffc463987cca3773d647eb145997ea8f32a8f20a6
+        fact_type: programme_alignment
+        observation: Les métadonnées déclarent P-BASE-01 à P-BASE-05 mais plusieurs attendus officiels
+          ne sont pas observables dans le sujet A.
+      consequence: Un résultat satisfaisant à cette évaluation ne prouve pas la couverture scientifique
+        complète annoncée.
+      expected_action: Ajouter des items sur produit, représentation calculée d'un flottant et conversion
+        effective de fichier.
+- id: 1NSI-TB-EVAL-A-corrige
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les conversions, le complément à 2, le xor et les quatre octets sont tous exacts.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex
+          line_start: 13
+          line_end: 47
+          excerpt_sha256: sha256:202689fea2dc5129ac1a3c52c0666a365b6c399bc2385ffdcc5185538fdfd80b
+          fact_type: computed_result
+          observation: Le corrigé A obtient 1011010₂, 5A₁₆, 11111001, la table xor et quatre octets pour
+            info.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les solutions restent dans l'objet corrigé et suivent les deux exercices sans exposer
+          de note interne.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex
+          line_start: 13
+          line_end: 47
+          excerpt_sha256: sha256:202689fea2dc5129ac1a3c52c0666a365b6c399bc2385ffdcc5185538fdfd80b
+          fact_type: student_teacher_separation
+          observation: Le corrigé A TYPES-BASE réserve les raisonnements détaillés aux environnements
+            corrige liés au sujet.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-EVAL-B
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: issue
+        justification: La variante B répète la couverture contractuelle sans mesurer le produit, le calcul
+          de représentation flottante ni une conversion de fichier.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex
+          line_start: 9
+          line_end: 35
+          excerpt_sha256: sha256:326e139b815ab7ae3d096b2fa605ca0efc3360d1cf15610a678e56f6cf585735
+          fact_type: programme_alignment
+          observation: Les tâches B évaluent 150, -20, une égalité flottante, une table booléenne et des
+            tailles d'encodage, mais pas les attendus officiels omis.
+        anomaly_ids:
+        - 1NSI-REV-TB-EVAL-B-COUVERTURE
+      pedagogical:
+        verdict: pass
+        justification: Les données diffèrent de la variante A tout en conservant une charge et une structure
+          comparables.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex
+          line_start: 2
+          line_end: 35
+          excerpt_sha256: sha256:5c034d1af13ce184e73b66f7630cc1e006ba2f71dc260ac422303394624f1422
+          fact_type: pedagogical_structure
+          observation: L'évaluation B remplace chaque valeur et expression de A sans changer l'équilibre
+            dix points plus dix points.
+        anomaly_ids: []
+    anomalies:
+    - id: 1NSI-REV-TB-EVAL-B-COUVERTURE
+      severity: P1
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex
+        line_start: 9
+        line_end: 35
+        excerpt_sha256: sha256:326e139b815ab7ae3d096b2fa605ca0efc3360d1cf15610a678e56f6cf585735
+        fact_type: programme_alignment
+        observation: La seconde variante ne compense aucune des trois lacunes de couverture de la première.
+      consequence: Les deux sujets parallèles laissent les mêmes attendus officiels sans preuve d'évaluation.
+      expected_action: Réserver dans B des items complémentaires sur produit, représentation binaire d'un
+        réel et transcodage de fichier.
+- id: 1NSI-TB-EVAL-B-corrige
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les résultats 10010110₂, 96₁₆, 11101100, trois cas vrais et cinq/quatre octets
+          sont exacts.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex
+          line_start: 13
+          line_end: 50
+          excerpt_sha256: sha256:04b36e92467528cfeea20f558c017e349c13f950bd55d27b71e5bd464ce66a90
+          fact_type: computed_result
+          observation: Le corrigé B vérifie 150, -20, 0.6000000000000001, la table booléenne et les tailles
+            de vélo.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La correction répond point par point et demeure séparée du sujet d'évaluation.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex
+          line_start: 13
+          line_end: 50
+          excerpt_sha256: sha256:04b36e92467528cfeea20f558c017e349c13f950bd55d27b71e5bd464ce66a90
+          fact_type: student_teacher_separation
+          observation: Le corrigé B TYPES-BASE isole code, tables et résultats dans le fichier corrige_evaluation
+            dédié.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-EX-001
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les quatre conversions demandées ont des résultats uniques et vérifiés.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-001.tex
+          line_start: 8
+          line_end: 14
+          excerpt_sha256: sha256:7aa4ca4d4c9732d77e44968c7c517123fd2014fcbf4469b98fc2e3b8b62d1560
+          fact_type: computed_result
+          observation: L'exercice Bases fixe 156, 11001₂ et 3F₁₆, permettant de contrôler 10011100₂, 9C₁₆,
+            25 et 63.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le niveau 1 demande les calculs détaillés dans les deux sens sans dépendance cachée.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-001.tex
+          line_start: 8
+          line_end: 14
+          excerpt_sha256: sha256:7aa4ca4d4c9732d77e44968c7c517123fd2014fcbf4469b98fc2e3b8b62d1560
+          fact_type: pedagogical_structure
+          observation: L'exercice 1NSI-TB-EX-001 commence par divisions successives puis revient aux sommes
+            de puissances.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-EX-002
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le nombre de bits et les deux écritures sur 8 bits sont correctement déterminés.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-002.tex
+          line_start: 11
+          line_end: 17
+          excerpt_sha256: sha256:46c0c16203d6afbc1bb77e42c3359e077bb2d2d038ef8cdeda171a3b0171d828
+          fact_type: computed_result
+          observation: L'exercice Entiers relatifs mène à 9 bits pour 300, 00010100 pour 20 et 11110100
+            pour -12.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La tâche accompagne explicitement l'inversion et l'ajout de un pour le nombre négatif.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-002.tex
+          line_start: 11
+          line_end: 17
+          excerpt_sha256: sha256:46c0c16203d6afbc1bb77e42c3359e077bb2d2d038ef8cdeda171a3b0171d828
+          fact_type: pedagogical_structure
+          observation: L'exercice 1NSI-TB-EX-002 distingue une écriture positive simple de la construction
+            guidée du complément à 2.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-EX-003
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Le programme affiche Erreur de calcul et la tolérance demandée corrige le test
+          pour ce cas.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-003.tex
+          line_start: 8
+          line_end: 25
+          excerpt_sha256: sha256:a6b599ca05d25bc314f1464d35f2349891b42e09961e82c4112f2228e49a74a8
+          fact_type: computed_result
+          observation: L'exercice Monnaie s'appuie sur sum([0.10] * 3) différent de 0.30 et demande une
+            comparaison absolue à 1e-9.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le scénario transforme un résultat contre-intuitif en diagnostic, fonction puis
+          réemploi.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-003.tex
+          line_start: 18
+          line_end: 25
+          excerpt_sha256: sha256:9174c084a6bb4513526ec1c2ef764b2dc8aae4f7bec224ec1864249bec8ba770
+          fact_type: pedagogical_structure
+          observation: L'exercice Flottants suit une progression observer-expliquer-programmer-réparer
+            sur un prix concret.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-EX-004
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: L'expression d'alarme possède exactement trois valuations vraies et aucune lorsque
+          maintenance est active.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-004.tex
+          line_start: 12
+          line_end: 21
+          excerpt_sha256: sha256:2c18f470a2ea1bcb61a44e919720188c4eed5f0530478e5974612542ad923e47
+          fact_type: computed_result
+          observation: L'exercice Booléens fournit le sens de a, b et c avant de demander les huit lignes
+            et le compte de trois déclenchements.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Le contexte donne une interprétation directe à chaque variable et à la conclusion
+          finale.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-004.tex
+          line_start: 12
+          line_end: 21
+          excerpt_sha256: sha256:2c18f470a2ea1bcb61a44e919720188c4eed5f0530478e5974612542ad923e47
+          fact_type: pedagogical_structure
+          observation: L'exercice Alarme relie la table de vérité à une question de fonctionnement en
+            mode maintenance.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TB-EX-005
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les comptages UTF-8 et Latin-1 et l'échec ASCII sont déterminés sans ambiguïté.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-005.tex
+          line_start: 14
+          line_end: 22
+          excerpt_sha256: sha256:68993e4ae4b8e00a9ba4cc49a42e9124dc138a9eadeb1dc718de4abca87e164c
+          fact_type: computed_result
+          observation: L'exercice Texte utilise une unique lettre à pour distinguer 16 caractères, 17
+            octets UTF-8 et 16 octets Latin-1.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La dernière question transfère le cas local vers le choix d'encodage d'un service
+          international.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/exercices/1NSI-TB-EX-005.tex
+          line_start: 14
+          line_end: 22
+          excerpt_sha256: sha256:68993e4ae4b8e00a9ba4cc49a42e9124dc138a9eadeb1dc718de4abca87e164c
+          fact_type: pedagogical_structure
+          observation: L'exercice Encodage passe du comptage de Bonjour à tous à la prise en charge de
+            plusieurs systèmes d'écriture.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TYPES-BASE-QCM
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: Les six items possèdent une réponse exacte sur bases, complément à 2, flottants,
+          booléens et encodage.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.tex
+          line_start: 15
+          line_end: 80
+          excerpt_sha256: sha256:028553f7f83bf0099ac22ee6b9d8433f1e999471c4f93a8ff26921128f6d3953
+          fact_type: source_statement
+          observation: Le QCM TYPES-BASE teste 1010₂, 256 valeurs, bit de signe, égalité 0.1+0.2, and
+            et compatibilité ASCII.
+        anomaly_ids: []
+      pedagogical:
+        verdict: issue
+        justification: Le document se présente comme auto-évaluation mais ne fournit aucune clé, explication
+          ou orientation de remédiation.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.tex
+          line_start: 3
+          line_end: 83
+          excerpt_sha256: sha256:bca2a1686a7ca2bd9bd39f434feda01b7fc46c2e1e62e7cdb22e06c1cc0efcff
+          fact_type: pedagogical_structure
+          observation: Le QCM TYPES-BASE laisse six choix sans correction associée ni diagnostic de distracteur.
+        anomaly_ids:
+        - 1NSI-REV-TB-QCM-AUTOCORRECTION
+    anomalies:
+    - id: 1NSI-REV-TB-QCM-AUTOCORRECTION
+      severity: P1
+      dimension: pedagogical
+      fact:
+        path: NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.tex
+        line_start: 3
+        line_end: 83
+        excerpt_sha256: sha256:bca2a1686a7ca2bd9bd39f434feda01b7fc46c2e1e62e7cdb22e06c1cc0efcff
+        fact_type: pedagogical_structure
+        observation: Aucun objet lié ne permet à l'élève de savoir quelles réponses sont exactes.
+      consequence: L'auto-évaluation ne produit ni preuve de maîtrise ni orientation vers la remédiation
+        C3.
+      expected_action: Créer un corrigé professeur séparé et un retour élève minimal orientant chaque
+        erreur vers le cours pertinent.
+- id: 1NSI-TYPES-BASE-RE-C3
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: La boucle produit 0.30000000000000004 et la comparaison tolérante réussit.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex
+          line_start: 7
+          line_end: 27
+          excerpt_sha256: sha256:01c11efaf986391feef5a7fdec0e802922207ddc7821f3b7376286a3c8acdbc2
+          fact_type: computed_result
+          observation: La remédiation Flottants vérifie l'accumulation de trois dixièmes et presque_egaux
+            à 1e-9.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: La fiche cible une erreur unique, demande son explication et un test réparé.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex
+          line_start: 7
+          line_end: 16
+          excerpt_sha256: sha256:671511b0477d48dc44b747a4a93d3de9b960800cf389976cc35c34a6a2c3300a
+          fact_type: pedagogical_structure
+          observation: La remédiation C3 conduit l'élève du résultat inattendu de la boucle à une stratégie
+            de comparaison correcte.
+        anomaly_ids: []
+    anomalies: []
+- id: 1NSI-TYPES-BASE-RE-C3-CORRIGE
+  chapter: 1NSI-TYPES-BASE
+  scope: object
+  payload:
+    dimensions:
+      scientific:
+        verdict: pass
+        justification: La sortie, l'explication d'arrondi et le code presque_egaux sont cohérents avec
+          l'exercice.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C3-CORRIGE.tex
+          line_start: 3
+          line_end: 19
+          excerpt_sha256: sha256:23795a17ddad2f2ab5d1801aab189ff94831394d9c861e5ac17e68330fddd784
+          fact_type: computed_result
+          observation: Le corrigé de remédiation explique 0.30000000000000004 puis propose abs(a-b) <
+            tolerance.
+        anomaly_ids: []
+      pedagogical:
+        verdict: pass
+        justification: Les trois réponses ferment précisément les trois questions de la fiche de remédiation.
+        facts:
+        - path: NSI/chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C3-CORRIGE.tex
+          line_start: 3
+          line_end: 19
+          excerpt_sha256: sha256:23795a17ddad2f2ab5d1801aab189ff94831394d9c861e5ac17e68330fddd784
+          fact_type: correction_link
+          observation: Le corrigé TYPES-BASE-RE-C3 relie observation, cause et remplacement du test ==
+            dans cet ordre.
+        anomaly_ids: []
+    anomalies: []
