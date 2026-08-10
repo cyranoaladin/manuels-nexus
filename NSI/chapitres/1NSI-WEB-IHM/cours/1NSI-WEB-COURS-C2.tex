@@ -9,11 +9,14 @@
 }
 
 \propriete[Ce qui s'exécute où]{
-  Le code exécuté sur le \textbf{serveur} (souvent en Python, PHP, etc.) génère la page à
-  partir de données (base de données, calculs) : l'utilisateur ne voit jamais ce code. Le
-  code exécuté sur le \textbf{client} (en JavaScript, dans le navigateur) réagit aux
-  interactions de l'utilisateur \textbf{sans nouvel échange avec le serveur} (par exemple,
-  afficher un message d'alerte), sauf s'il déclenche explicitement une nouvelle requête.
+  Le code qui s'exécute côté serveur (souvent en Python, PHP, etc.) génère la page à partir
+  de données (base de données, calculs). Ce code n'est normalement pas transmis dans la
+  réponse HTTP destinée au navigateur. Ses sources peuvent toutefois être publiées ou
+  divulguées par une autre voie ; cet accès éventuel est distinct de leur transmission par
+  le protocole HTTP. Le code exécuté sur le \textbf{client} (en JavaScript, dans le
+  navigateur) réagit aux interactions de l'utilisateur \textbf{sans nouvel échange avec le
+  serveur} (par exemple, afficher un message d'alerte), sauf s'il déclenche explicitement
+  une nouvelle requête.
 }
 
 \begin{codereference}{Modélisation de l'ordre client-serveur}

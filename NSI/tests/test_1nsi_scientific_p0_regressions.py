@@ -41,6 +41,9 @@ TABLE_JOIN_COURSE = (
     NSI_ROOT / "chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex"
 )
 TABLE_JOIN_SOURCE = NSI_ROOT / "chapitres/1NSI-TABLES/code/fusionner.py"
+WEB_SERVER_COURSE = (
+    NSI_ROOT / "chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex"
+)
 REVIEW_SCRIPT = REPO_ROOT / "scripts/review_1nsi_content.py"
 
 _REVIEW_SPEC = importlib.util.spec_from_file_location(
@@ -571,4 +574,27 @@ def test_table_join_rejects_overlapping_nonkey_columns() -> None:
         r"else:\n"
         r"    raise AssertionError",
         verify_blocks[0],
+    )
+
+
+def test_server_code_is_normally_not_sent_in_http_response() -> None:
+    assert WEB_SERVER_COURSE.is_file()
+
+    tex = WEB_SERVER_COURSE.read_text(encoding="utf-8")
+    property_match = re.search(
+        r"\\propriete\[Ce qui s'exécute où\]\{(?P<body>.*?)\n\}",
+        tex,
+        re.DOTALL,
+    )
+    assert property_match is not None
+    property_text = " ".join(property_match.group("body").split())
+
+    assert "s'exécute côté serveur" in property_text
+    assert "n'est normalement pas transmis" in property_text
+    assert "réponse HTTP destinée au navigateur" in property_text
+    assert "l'utilisateur ne voit jamais ce code" not in property_text
+    assert "publiées ou divulguées par une autre voie" in property_text
+    assert (
+        "cet accès éventuel est distinct de leur transmission par le protocole HTTP"
+        in property_text
     )
