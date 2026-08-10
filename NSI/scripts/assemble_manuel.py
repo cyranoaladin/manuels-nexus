@@ -860,39 +860,33 @@ def _build_local(
     build_dir: Path,
     canonical_pdf: Path,
 ) -> int:
-    promoted = False
     student_variant = context.variant in ELEVE_VARIANTS
-    try:
-        with tempfile.TemporaryDirectory(
-            prefix=f".{context.output_stem}-", dir=build_dir
-        ) as staging_name:
-            staging = Path(staging_name).resolve()
-            if not staging.is_relative_to(build_dir):
-                raise ValueError("Le staging resout hors du repertoire de sortie.")
-            tex_path = staging / f"{context.output_stem}.tex"
-            tex_path.write_text(_render_context(context), encoding="utf-8")
-            result = legacy.compile_tex(
-                tex_path,
-                staging,
-                source_date_epoch=int(context.manifest["source_date_epoch"]),
-            )
-            if result:
-                return result
-            staged_pdf = staging / f"{context.output_stem}.pdf"
-            staged_log = staging / f"{context.output_stem}.log"
-            if legacy.preflight_book_pdf(
-                staged_pdf,
-                staged_log,
-                check_student_leaks=student_variant,
-            ):
-                return 1
-            legacy._promote_book_artifacts(staging, build_dir, context.output_stem)
-            promoted = True
-            print(f"PDF canonique : {canonical_pdf}")
-            return 0
-    finally:
-        if not promoted:
-            canonical_pdf.unlink(missing_ok=True)
+    with tempfile.TemporaryDirectory(
+        prefix=f".{context.output_stem}-", dir=build_dir
+    ) as staging_name:
+        staging = Path(staging_name).resolve()
+        if not staging.is_relative_to(build_dir):
+            raise ValueError("Le staging resout hors du repertoire de sortie.")
+        tex_path = staging / f"{context.output_stem}.tex"
+        tex_path.write_text(_render_context(context), encoding="utf-8")
+        result = legacy.compile_tex(
+            tex_path,
+            staging,
+            source_date_epoch=int(context.manifest["source_date_epoch"]),
+        )
+        if result:
+            return result
+        staged_pdf = staging / f"{context.output_stem}.pdf"
+        staged_log = staging / f"{context.output_stem}.log"
+        if legacy.preflight_book_pdf(
+            staged_pdf,
+            staged_log,
+            check_student_leaks=student_variant,
+        ):
+            return 1
+        legacy._promote_book_artifacts(staging, build_dir, context.output_stem)
+        print(f"PDF canonique : {canonical_pdf}")
+        return 0
 
 
 def _build_observed(

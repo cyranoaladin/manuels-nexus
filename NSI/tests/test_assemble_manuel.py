@@ -500,7 +500,7 @@ def test_build_stages_preflights_with_explicit_role_and_promotes_pdf_last(
 
 
 @pytest.mark.parametrize("failure", ["compile", "preflight"])
-def test_failed_build_never_promotes_a_canonical_pdf(
+def test_failed_local_build_preserves_the_previous_canonical_pdf(
     monkeypatch, tmp_path, assembler, failure
 ):
     root = tmp_path / "NSI"
@@ -532,7 +532,7 @@ def test_failed_build_never_promotes_a_canonical_pdf(
     )
 
     assert assembler.build_manual("eleve") == 1
-    assert not canonical.exists()
+    assert canonical.read_bytes() == b"stale"
     assert not list(build_dir.glob(".MANUEL_1NSI_eleve-*"))
 
 
