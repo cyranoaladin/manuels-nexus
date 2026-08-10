@@ -1,7 +1,56 @@
 {
   "artifact_type": "build_manifest",
-  "build_state_digest": "sha256:2f9a8b4b5c7d936d7d5b91347883b8c611688cb7e2bbaf148c6e635194140d44",
+  "build_state_digest": "sha256:2771121671d886120f19f394aa32e092087a0b9f64c5a708197929c9eee62fa3",
   "builds": [
+    {
+      "excluded_objects": [],
+      "gates": {
+        "compile": {
+          "passed": true
+        },
+        "preflight": {
+          "checks": {
+            "pdffonts": "passed",
+            "pdfinfo": "passed"
+          },
+          "passed": true
+        },
+        "student_separation": {
+          "passed": true
+        }
+      },
+      "generated_dependencies": [],
+      "generated_dependency_digests": {},
+      "git_sha": "aa3bcfbc88914755005c5ad2fc9d3e70bdccb6f9",
+      "included_objects": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex"
+      ],
+      "manual": "1NSI",
+      "model_digest": "sha256:31c7a433bbad440e55f059e836c947575786adc3e55a40aeb17c7faa63a48820",
+      "ordered_trace": [
+        "NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex"
+      ],
+      "page_count": 4,
+      "pdf_path": "NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf",
+      "pdf_sha256": "sha256:764db14d0a06dd9b720fc1028e7c702929e891345cfef8adf132736fc9fe5d19",
+      "reproducibility": {
+        "config_path": "Mathematiques/manuel-maths/config/reproducible-build.json",
+        "force_source_date": "1",
+        "locale": "C.UTF-8",
+        "pythonhashseed": "0",
+        "source_commit": "f9ad08b1f91395f7631400475f90f1119269c630",
+        "source_date_epoch": 1785962466,
+        "timezone": "UTC"
+      },
+      "source_digest": "sha256:a5ae7c5972b5be8242839098358ad824001d8b0a529dae03a49f9e10ea42847e",
+      "tool_versions": {
+        "lualatex": "This is LuaHBTeX, Version 1.17.0 (TeX Live 2023/Debian)",
+        "pdffonts": "pdffonts version 24.02.0",
+        "pdfinfo": "pdfinfo version 24.02.0",
+        "python": "Python 3.12.3"
+      },
+      "variant": "amenagee"
+    },
     {
       "excluded_objects": [],
       "gates": {
@@ -1263,7 +1312,7 @@
   "provenance": {
     "branch": "finalisation/collection-v1",
     "dirty": false,
-    "head_sha": "cefa1c3695e25f7b304a0f09d2e54e0edee43020"
+    "head_sha": "aa3bcfbc88914755005c5ad2fc9d3e70bdccb6f9"
   },
   "schema_ref": "audit/schemas/v1/build-manifest.schema.json",
   "schema_version": 1,
