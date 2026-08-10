@@ -37,6 +37,10 @@ WEIGHTED_MEAN_SOURCE = (
     NSI_ROOT
     / "chapitres/1NSI-PROJET-METHODES/code/moyenne_ponderee.py"
 )
+TABLE_JOIN_COURSE = (
+    NSI_ROOT / "chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex"
+)
+TABLE_JOIN_SOURCE = NSI_ROOT / "chapitres/1NSI-TABLES/code/fusionner.py"
 REVIEW_SCRIPT = REPO_ROOT / "scripts/review_1nsi_content.py"
 
 _REVIEW_SPEC = importlib.util.spec_from_file_location(
@@ -478,3 +482,93 @@ def test_weighted_mean_rejects_negative_and_zero_sum_weights() -> None:
         call = f"moyenne_ponderee({valeurs!r}, {poids!r})"
         assert call in verify_code
         assert f'assert str(erreur) == "{message}"' in verify_code
+
+
+def test_table_join_rejects_overlapping_nonkey_columns() -> None:
+    assert TABLE_JOIN_COURSE.is_file()
+    assert TABLE_JOIN_SOURCE.is_file()
+
+    stdout = io.StringIO()
+    with contextlib.redirect_stdout(stdout):
+        namespace = runpy.run_path(str(TABLE_JOIN_SOURCE))
+    expected = [
+        {"nom": "Ali", "age": 16, "seances": 12},
+        {"nom": "Sami", "age": 15, "seances": 9},
+        {"nom": "Yasmine", "age": 22, "seances": 15},
+    ]
+    assert namespace["resultat"] == expected
+    assert stdout.getvalue() == f"{expected!r}\n"
+
+    fusionner = namespace["fusionner"]
+    table1 = [{"nom": "Ali"}, {"nom": "Sami", "age": 15}]
+    table2 = [
+        {"nom": "Ali", "seances": 12},
+        {"nom": "Sami", "age": 16},
+    ]
+    with pytest.raises(AssertionError) as error:
+        fusionner(table1, table2, "nom")
+    message = "les colonnes hors cle doivent etre disjointes"
+    assert str(error.value) == message
+
+    source_code = TABLE_JOIN_SOURCE.read_text(encoding="utf-8")
+    assert source_code.isascii()
+    assert source_code.index("colonnes1 =") < source_code.index("index2 =")
+    assert source_code.index("colonnes2 =") < source_code.index("index2 =")
+    assert source_code.index("assert colonnes1.isdisjoint(colonnes2)") < source_code.index(
+        "index2 ="
+    )
+    assert "index2 = {ligne[cle]: ligne for ligne in table2}" in source_code
+
+    tex = TABLE_JOIN_COURSE.read_text(encoding="utf-8")
+    sequence = re.compile(
+        r"(?m)^% PYTHON-SOURCE: code/fusionner\.py\n"
+        r"\\begin\{python\}(?P<python>.*?)\\end\{python\}\n\n"
+        r"\\begin\{console\}(?P<console>.*?)\\end\{console\}",
+        re.DOTALL,
+    )
+    matches = list(sequence.finditer(tex))
+    assert len(matches) == 1, "la sequence Python marquee doit etre unique"
+    assert matches[0].group("python") == f"\n{source_code}"
+    assert matches[0].group("console") == f"\n{stdout.getvalue()}"
+
+    course_record = {
+        "id": "1NSI-TAB-COURS-C4",
+        "path": "NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex",
+        "metadata": {},
+        "scope": "object",
+        "chapter": "1NSI-TABLES",
+    }
+    manifest = review_module.dependency_manifest(
+        course_record, [course_record], REPO_ROOT
+    )
+    assert manifest["python"] == [
+        {
+            "path": "NSI/chapitres/1NSI-TABLES/code/fusionner.py",
+            "sha256": "sha256:"
+            + hashlib.sha256(source_code.encode("utf-8")).hexdigest(),
+        }
+    ]
+
+    assert "colonnes hors clé des deux tables doivent être disjointes" in tex
+    assert "# [{'nom':" not in tex
+    verify_matches = list(
+        re.finditer(
+            r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY", tex, re.DOTALL
+        )
+    )
+    assert len(verify_matches) == 2
+    verify_blocks = [_uncomment(match.group("verify")) for match in verify_matches]
+    assert verify_blocks[0].count(source_code.rstrip("\n")) == 1
+    for verify_code in verify_blocks:
+        assert "assert colonnes1.isdisjoint(colonnes2)" in verify_code
+        assert message in verify_code
+    assert "assert resultat ==" in verify_blocks[0]
+    assert re.search(
+        r"try:\n"
+        r"    fusionner\(table_collision1, table_collision2, \"nom\"\)\n"
+        r"except AssertionError as erreur:\n"
+        rf'    assert str\(erreur\) == "{message}"\n'
+        r"else:\n"
+        r"    raise AssertionError",
+        verify_blocks[0],
+    )
