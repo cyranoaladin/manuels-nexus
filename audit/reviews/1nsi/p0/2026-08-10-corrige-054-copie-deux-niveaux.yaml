@@ -1,0 +1,49 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-TC-CO-054-COPIE-PROFONDE-INCOMPLETE
+source_commit_sha: 398f7d48fc1b519f280fbfe2ccac51731260b2d4
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:32149871a08c515613377ed045be69b81af6e148a29d55464fb8a39978a45b8e
+  - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-054.tex
+    sha256: sha256:6cf6c581c85361e68996d3d8fe03b2b1184a0d475f03c9c6617242829fae2c5a
+  - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-054.tex
+    sha256: sha256:8ae302a975cdca9598b986001e97f7cf29d735f850ac0df04c755a5c2ad2f0a6
+  - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/code/copier_grille_deux_niveaux.py
+    sha256: sha256:72077ef969c52ef5331b2a843334e17892d5d8d7e8c1c9631b5f93f106694d9b
+reviewer_id: e4261a54-86f8-5a6e-9f7a-f283bedf97ca
+reviewer_model: GPT-5 (Codex)
+review_run_id: 1nsi-p0-corrige-054-copie-deux-niveaux-2026-08-10-codex-main-v1
+session_id: 019feda9-4d3d-7993-906b-842a89839aee
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      ...........                                                              [100%]
+      11 passed in 1.09s
+    stderr: ""
+    stdout_sha256: sha256:1d926ad2a53d742011999958b77ef042f93e226ce569d80fc2ecb134f90f9b54
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: L'exercice et le corrige 054 partagent le contrat a deux niveaux et sa limite mutable.
+  - command: python -m py_compile chapitres/1NSI-TYPES-CONSTRUITS/code/copier_grille_deux_niveaux.py
+    cwd: NSI
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique partagee avec les objets 054 est syntaxiquement valide.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T22:55:47+01:00"
