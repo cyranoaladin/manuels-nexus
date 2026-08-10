@@ -1,10 +1,10 @@
 artifact_type: 1nsi_content_review_findings
 schema_version: 1
 manual: 1NSI
-review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
 review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
 findings:
 - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
   scope: contract
@@ -16,13 +16,13 @@ findings:
   - P-ALGO-04
   - P-ALGO-05
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: pass
@@ -64,13 +64,13 @@ findings:
   - P-ALGO-02C
   - P-ALGO-02D
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: issue
@@ -134,13 +134,13 @@ findings:
   - P-ARCH-03B
   - P-ARCH-03C
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: pass
@@ -181,13 +181,13 @@ findings:
   - P-LANG-04
   - P-LANG-05
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: pass
@@ -227,18 +227,20 @@ findings:
   - BO-PREAMBULE-DEMARCHE-DE-PROJET
   - P-HIST-01
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: issue
-      justification: C1 est une capacité officielle et C2-C3 sont soutenues par le préambule, mais C4
-        cite uniquement l'oral alors qu'elle ajoute la documentation du code.
+      justification: C1 est une capacité officielle et C2 est soutenue par le préambule. C3 relève
+        du processus général de mise au point, mais sa formulation précise n'est pas une capacité
+        officielle et reste un enrichissement à confirmer; C4 cite uniquement l'oral alors qu'elle
+        ajoute la documentation du code.
       facts:
       - path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
         line_start: 8
@@ -246,7 +248,15 @@ findings:
         excerpt_sha256: sha256:eea2e006a5630540d532053bbe3113f9b67f2cfcc762f4aa3c35ee37dfc898dc
         fact_type: programme_alignment
         observation: C4 réunit documentation du code et présentation orale sous la seule référence BO-PREAMBULE-COMPETENCES-ORALES.
+      - path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+        line_start: 10
+        line_end: 10
+        excerpt_sha256: sha256:dfa7899058727e0b215143527292d3432cedc8644d73caa1ade5cdfdee76c0c5
+        fact_type: programme_alignment
+        observation: C3 transforme une pratique de débogage par lecture des messages d'erreur en capacité,
+          alors que le programme ne la formule pas comme telle.
       anomaly_ids:
+      - 1NSI-REV-PM-C3-SOURCE
       - 1NSI-REV-PM-C4-SOURCES
     pedagogical:
       verdict: issue
@@ -271,6 +281,21 @@ findings:
       - 1NSI-REV-PM-C4-ATOMICITE
       - 1NSI-REV-PM-TEMPS-PROJET
   anomalies:
+  - id: 1NSI-REV-PM-C3-SOURCE
+    severity: P1
+    dimension: scientific
+    fact:
+      path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
+      line_start: 10
+      line_end: 10
+      excerpt_sha256: sha256:dfa7899058727e0b215143527292d3432cedc8644d73caa1ade5cdfdee76c0c5
+      fact_type: programme_alignment
+      observation: Le processus officiel de mise au point soutient l'apprentissage du débogage, mais
+        pas cette formulation comme capacité attendue autonome.
+    consequence: Une pratique pédagogique pertinente peut être confondue avec une capacité officielle
+      directement exigible.
+    expected_action: Conserver C3 comme transversal_enrichment avec human_confirmation_required, sans
+      la présenter comme une capacité officielle autonome.
   - id: 1NSI-REV-PM-C4-SOURCES
     severity: P1
     dimension: scientific
@@ -282,10 +307,10 @@ findings:
       fact_type: programme_alignment
       observation: La référence orale ne source pas à elle seule l'exigence distincte de documentation
         du code.
-    consequence: La matrice attribue à une seule source officielle une formulation composite qu'elle ne
-      porte pas intégralement.
-    expected_action: Associer la documentation à la section officielle Langages et programmation et l'oral
-      au préambule, ou séparer les deux capacités.
+    consequence: La matrice attribue à une seule source officielle une formulation composite qu'elle
+      ne porte pas intégralement.
+    expected_action: Associer la documentation à la section officielle Langages et programmation et
+      l'oral au préambule, ou séparer les deux capacités.
   - id: 1NSI-REV-PM-C4-ATOMICITE
     severity: P1
     dimension: pedagogical
@@ -295,8 +320,8 @@ findings:
       line_end: 11
       excerpt_sha256: sha256:a17b6e7e9eb0324427510725368c793b6bee81abec25d3657aaa3deec7c44a67
       fact_type: pedagogical_structure
-      observation: C4 combine deux performances indépendantes qui nécessitent des méthodes, critères et
-        preuves de maîtrise différents.
+      observation: C4 combine deux performances indépendantes qui nécessitent des méthodes, critères
+        et preuves de maîtrise différents.
     consequence: Une validation unique ne permet pas de diagnostiquer séparément la qualité de la documentation
       et celle de l'argumentation orale.
     expected_action: Scinder C4 en deux capacités ou définir explicitement deux sous-critères évalués
@@ -327,13 +352,13 @@ findings:
   - P-ARCH-04A
   - P-ARCH-04B
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: issue
@@ -411,13 +436,13 @@ findings:
   - P-TABLE-03
   - P-TABLE-04
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: issue
@@ -434,18 +459,27 @@ findings:
       anomaly_ids:
       - 1NSI-REV-TABLES-COHERENCE
     pedagogical:
-      verdict: pass
-      justification: Les prérequis sur les structures et la logique, puis le fil rouge CSV, ordonnent
-        correctement les quatre traitements.
+      verdict: issue
+      justification: Le fil rouge CSV ordonne correctement les quatre traitements, mais R2 attribue
+        les boucles et fonctions à TYPES-BASE, qui ne les contractualise pas, tandis que LANGAGE vient
+        après TABLES dans l'ordre canonique.
       facts:
       - path: NSI/chapitres/1NSI-TABLES/contrat.yaml
         line_start: 13
         line_end: 24
         excerpt_sha256: sha256:9d9b503532267c034b90db1c2aa683405b0657c6c4b5259d1eb37fb874573678
         fact_type: pedagogical_structure
-        observation: Le fichier d'adhérents permet successivement recherche, tri et combinaison sans introduire
-          prématurément un système de gestion de base de données.
-      anomaly_ids: []
+        observation: Le fichier d'adhérents permet successivement recherche, tri et combinaison sans
+          introduire prématurément un système de gestion de base de données.
+      - path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+        line_start: 13
+        line_end: 15
+        excerpt_sha256: sha256:a761976d104ea15fc6d731380a493a96a698430f74f7b53830b21d800adc74fa
+        fact_type: pedagogical_structure
+        observation: R2 rattache les boucles et fonctions à TYPES-BASE, sans chaîne d'apprentissage
+          antérieure cohérente dans l'assemblage canonique.
+      anomaly_ids:
+      - 1NSI-REV-TABLES-R2-ORIGINE
   anomalies:
   - id: 1NSI-REV-TABLES-COHERENCE
     severity: P2
@@ -460,7 +494,23 @@ findings:
         prescrits dans le programme.
     consequence: La couverture du commentaire officiel reste partielle et les contrôles de domaine ou
       de structure peuvent être absents.
-    expected_action: Ajouter explicitement les tests de cohérence d'une table à C2 ou à une capacité distincte.
+    expected_action: Ajouter explicitement les tests de cohérence d'une table à C2 ou à une capacité
+      distincte.
+  - id: 1NSI-REV-TABLES-R2-ORIGINE
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TABLES/contrat.yaml
+      line_start: 15
+      line_end: 15
+      excerpt_sha256: sha256:da283de7a925bead739a111a67e0c283f343237ebca553202f801fbf42ea3fc0
+      fact_type: pedagogical_structure
+      observation: TYPES-BASE ne contractualise ni les boucles ni les fonctions mentionnées dans R2,
+        et LANGAGE est assemblé après TABLES.
+    consequence: Les élèves peuvent aborder TABLES sans deux outils déclarés prérequis et sans origine
+      de remédiation correcte.
+    expected_action: Rattacher boucles et fonctions à des acquis SNT explicitement diagnostiqués, ou
+      placer LANGAGE avant TABLES et corriger l'origine de R2.
 - id: contract:1NSI-TYPES-BASE
   scope: contract
   chapter: 1NSI-TYPES-BASE
@@ -473,13 +523,13 @@ findings:
   - P-BASE-04
   - P-BASE-05
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: issue
@@ -552,18 +602,19 @@ findings:
   - 1NSI-TYPES-CONSTRUITS-C4
   - 1NSI-TYPES-CONSTRUITS-C5
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: issue
-      justification: C1-C4 sont rapprochables du programme mais utilisent uniquement des références locales;
-        C5 sur les objets mutables n'a pas de capacité officielle correspondante.
+      justification: C1-C4 sont rapprochables du programme mais utilisent uniquement des références
+        locales; les p-uplets nommés et l'itération générique d'un tableau ne sont pas contractualisés
+        explicitement; C5 sur les objets mutables n'a pas de capacité officielle correspondante.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
         line_start: 8
@@ -579,8 +630,24 @@ findings:
         fact_type: source_statement
         observation: C5 érige la sémantique d'affectation des objets mutables en capacité sans la qualifier
           comme enrichissement.
+      - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+        line_start: 8
+        line_end: 8
+        excerpt_sha256: sha256:65742ab464ff5456050a52bdb82e47dee392087d54e144c8a07365b9f199396b
+        fact_type: programme_alignment
+        observation: C1 vise les p-uplets ordinaires et le retour de plusieurs valeurs sans mentionner
+          les p-uplets nommés du contenu officiel.
+      - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+        line_start: 9
+        line_end: 9
+        excerpt_sha256: sha256:218a9898fde95521930a9c7b9b4db94e9b6494ce92fcb1d8b12339371c2c2191
+        fact_type: programme_alignment
+        observation: C2 couvre lecture, modification et construction, mais ne rend pas observable l'itération
+          générique sur les éléments d'un tableau.
       anomaly_ids:
       - 1NSI-REV-TC-REFS-LOCALES
+      - 1NSI-REV-TC-PUPLETS-NOMMES
+      - 1NSI-REV-TC-ITERATION-TABLEAU
       - 1NSI-REV-TC-C5-MUTABILITE
     pedagogical:
       verdict: issue
@@ -619,6 +686,35 @@ findings:
       locale peut être confondue avec un attendu officiel.
     expected_action: Remplacer C1-C4 par des références canoniques reliées aux formulations officielles
       et classifier explicitement toute capacité supplémentaire.
+  - id: 1NSI-REV-TC-PUPLETS-NOMMES
+    severity: P1
+    dimension: scientific
+    fact:
+      path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+      line_start: 8
+      line_end: 8
+      excerpt_sha256: sha256:65742ab464ff5456050a52bdb82e47dee392087d54e144c8a07365b9f199396b
+      fact_type: programme_alignment
+      observation: La capacité C1 ne contractualise pas explicitement les p-uplets nommés présents dans
+        les contenus officiels de Première.
+    consequence: La couverture du chapitre peut omettre les enregistrements collectant des valeurs dans
+      des champs nommés.
+    expected_action: Ajouter un attendu observable sur les p-uplets nommés, relié à la formulation officielle
+      et à une preuve de maîtrise.
+  - id: 1NSI-REV-TC-ITERATION-TABLEAU
+    severity: P1
+    dimension: scientific
+    fact:
+      path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
+      line_start: 9
+      line_end: 9
+      excerpt_sha256: sha256:218a9898fde95521930a9c7b9b4db94e9b6494ce92fcb1d8b12339371c2c2191
+      fact_type: programme_alignment
+      observation: La capacité C2 ne mentionne pas l'itération générique sur les éléments d'un tableau,
+        attendue explicitement par le programme.
+    consequence: Lire ou construire un tableau ne prouve pas que son parcours élément par élément sera
+      enseigné et évalué.
+    expected_action: Étendre C2 ou ajouter une capacité distincte rendant l'itération sur un tableau observable.
   - id: 1NSI-REV-TC-C5-MUTABILITE
     severity: P0
     dimension: scientific
@@ -643,8 +739,8 @@ findings:
       line_end: 17
       excerpt_sha256: sha256:7b2236efbb9e17df6206c0c8c277a002c7bab0fd963263f4d22eea0370eab244
       fact_type: pedagogical_structure
-      observation: Le contrat exige des apprentissages rattachés à LANGAGE avant que ce chapitre ne soit
-        rencontré dans l'ordre canonique.
+      observation: Le contrat exige des apprentissages rattachés à LANGAGE avant que ce chapitre ne
+        soit rencontré dans l'ordre canonique.
     consequence: Les élèves peuvent commencer TYPES-CONSTRUITS sans les fonctions et structures de contrôle
       déclarées nécessaires.
     expected_action: Placer LANGAGE avant TYPES-CONSTRUITS ou reformuler R2-R3 comme acquis SNT explicitement
@@ -665,13 +761,13 @@ findings:
   - P-IHM-04B
   - P-IHM-04C
   provenance:
-    reviewer_id: 019feb19-4b6d-7173-82b8-6448ff665706
-    review_run_id: 1nsi-contracts-2026-08-10-kierkegaard
+    reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
+    review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
     reviewer_model: codex-inherited-gpt5
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb
-    sealing_commit_sha: c92b94e9ecee48a10617ef5d92f069adb4ce7a1f
+    review_receipt_sha256: sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162
+    sealing_commit_sha: c5ab5d4607eb38b41e5824561aad1c7a8abcb275
   dimensions:
     scientific:
       verdict: pass

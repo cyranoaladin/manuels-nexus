@@ -28,9 +28,9 @@ FINDINGS_PATH = ROOT / "audit" / "1NSI_CONTENT_REVIEW_FINDINGS.yaml"
 CONTRACT_RECEIPT_PATH = (
     ROOT / "audit" / "reviews" / "1nsi" / "runs" / "2026-08-10-contracts.yaml"
 )
-CONTRACT_RECEIPT_COMMIT = "c92b94e9ecee48a10617ef5d92f069adb4ce7a1f"
+CONTRACT_RECEIPT_COMMIT = "c5ab5d4607eb38b41e5824561aad1c7a8abcb275"
 CONTRACT_RECEIPT_SHA256 = (
-    "sha256:91d96b0ce9ec5868aaa153b37fcdee76cee5dfb033e44be62f4d0fc5b1908bcb"
+    "sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162"
 )
 BASE_SHA = "867e10503044688a0b8cee3847647562dce6db45"
 PDF_SHA256 = "7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0"
@@ -2568,7 +2568,7 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
         "artifact_type": "1nsi_content_review_findings",
         "schema_version": 1,
         "manual": "1NSI",
-        "review_run_id": "1nsi-contracts-2026-08-10-kierkegaard",
+        "review_run_id": "1nsi-contracts-2026-08-10-plato-reattestation-v2",
         "review_receipt_path": CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix(),
         "review_receipt_sha256": CONTRACT_RECEIPT_SHA256,
         "sealing_commit_sha": CONTRACT_RECEIPT_COMMIT,
@@ -2590,8 +2590,8 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
     reviews_by_id = {review["id"]: review for review in receipt["reviews"]}
     sources_by_id = {source["id"]: source for source in contracts}
     expected_provenance = {
-        "reviewer_id": "019feb19-4b6d-7173-82b8-6448ff665706",
-        "review_run_id": "1nsi-contracts-2026-08-10-kierkegaard",
+        "reviewer_id": "019feb3f-cd89-7242-9a84-6fafbc77e0d8",
+        "review_run_id": "1nsi-contracts-2026-08-10-plato-reattestation-v2",
         "reviewer_model": "codex-inherited-gpt5",
         "integrator_id": policy["integrator_id"],
         "review_receipt_path": CONTRACT_RECEIPT_PATH.relative_to(ROOT).as_posix(),
@@ -2618,10 +2618,16 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
     )
     anomalies = [anomaly for finding in validated for anomaly in finding["anomalies"]]
     assert scientific == Counter({"issue": 6, "pass": 4})
-    assert pedagogical == Counter({"pass": 7, "issue": 3})
-    assert len(anomalies) == len({anomaly["id"] for anomaly in anomalies}) == 12
+    assert pedagogical == Counter({"pass": 6, "issue": 4})
+    assert len(anomalies) == len({anomaly["id"] for anomaly in anomalies}) == 16
+    assert {
+        "1NSI-REV-PM-C3-SOURCE",
+        "1NSI-REV-TABLES-R2-ORIGINE",
+        "1NSI-REV-TC-PUPLETS-NOMMES",
+        "1NSI-REV-TC-ITERATION-TABLEAU",
+    } <= {anomaly["id"] for anomaly in anomalies}
     assert Counter(anomaly["severity"] for anomaly in anomalies) == Counter(
-        {"P0": 3, "P1": 8, "P2": 1}
+        {"P0": 3, "P1": 12, "P2": 1}
     )
 
 
