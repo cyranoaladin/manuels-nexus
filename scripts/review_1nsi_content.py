@@ -466,7 +466,10 @@ def _validate_fact(fact: dict[str, Any], allowed_paths: set[str], root: Path) ->
 
 
 def _validate_review_receipt(
-    provenance: dict[str, Any], root: Path, policy: dict[str, Any]
+    provenance: dict[str, Any],
+    source: dict[str, Any],
+    root: Path,
+    policy: dict[str, Any],
 ) -> None:
     receipt_path = provenance["review_receipt_path"]
     if (
@@ -511,6 +514,55 @@ def _validate_review_receipt(
     worktree_path = root / receipt_path
     if not worktree_path.is_file() or worktree_path.read_bytes() != blob.stdout:
         raise ReviewValidationError("octets du recu de revue differents du blob scelle")
+
+    try:
+        receipt = yaml.safe_load(blob.stdout.decode("utf-8"))
+    except (UnicodeDecodeError, yaml.YAMLError) as error:
+        raise ReviewValidationError("YAML du recu de revue invalide") from error
+    schema_path = root / SCHEMA_PATH
+    if not schema_path.is_file():
+        schema_path = ROOT / SCHEMA_PATH
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    receipt_schema = {
+        "$schema": schema["$schema"],
+        "$ref": "#/$defs/review_run_receipt",
+        "$defs": schema["$defs"],
+    }
+    errors = sorted(
+        Draft202012Validator(receipt_schema).iter_errors(receipt),
+        key=lambda error: tuple(str(part) for part in error.path),
+    )
+    if errors:
+        raise ReviewValidationError(f"schema du recu de revue invalide: {errors[0].message}")
+
+    expected_fields = {
+        "review_run_id": provenance["review_run_id"],
+        "reviewer_id": provenance["reviewer_id"],
+        "reviewer_model": provenance["reviewer_model"],
+        "protocol_digest": policy["protocol_digest"],
+    }
+    for field, expected in expected_fields.items():
+        if receipt[field] != expected:
+            raise ReviewValidationError(f"{field} du recu de revue incoherent")
+
+    assignment = receipt["assignment"]
+    if source["id"] not in assignment["source_ids"]:
+        raise ReviewValidationError(f"source non assignee dans le recu: {source['id']}")
+    if source["chapter"] not in assignment["chapters"]:
+        raise ReviewValidationError("chapitre d'affectation incoherent")
+    if source["scope"] != assignment["scope"]:
+        raise ReviewValidationError("scope d'affectation incoherent")
+
+    matching_reviews = [review for review in receipt["reviews"] if review["id"] == source["id"]]
+    if not matching_reviews:
+        raise ReviewValidationError(f"review absente pour {source['id']}")
+    if len(matching_reviews) > 1:
+        raise ReviewValidationError(f"review dupliquee pour {source['id']}")
+    review = matching_reviews[0]
+    if review["chapter"] != source["chapter"]:
+        raise ReviewValidationError("chapitre de review incoherent")
+    if review["scope"] != source["scope"]:
+        raise ReviewValidationError("scope de review incoherent")
 
 
 def validate_findings(
@@ -597,7 +649,7 @@ def validate_findings(
             raise ReviewValidationError("integrateur incoherent")
         if provenance["reviewer_id"] == provenance["integrator_id"]:
             raise ReviewValidationError("relecteur identique a l'integrateur")
-        _validate_review_receipt(provenance, root, policy)
+        _validate_review_receipt(provenance, source, root, policy)
 
         anomalies = finding.get("anomalies")
         if not isinstance(anomalies, list):

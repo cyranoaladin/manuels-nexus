@@ -199,6 +199,59 @@ def _git(root: Path, *args: str, input_text: str | None = None) -> str:
     ).stdout.strip()
 
 
+def _review_run_receipt(
+    policy: dict,
+    sources: list[dict],
+    root: Path,
+    *,
+    review_run_id: str,
+    reviewer_id: str,
+    reviewer_model: str,
+) -> dict:
+    scopes = {source["scope"] for source in sources}
+    assert len(scopes) == 1
+    reviews = []
+    for source in sources:
+        finding = _finding(source, root=root)
+        reviews.append({
+            "id": source["id"],
+            "chapter": source["chapter"],
+            "scope": source["scope"],
+            "payload": {
+                "dimensions": finding["dimensions"],
+                "anomalies": finding["anomalies"],
+            },
+        })
+    return {
+        "artifact_type": "1nsi_review_run",
+        "schema_version": 1,
+        "manual": "1NSI",
+        "review_run_id": review_run_id,
+        "reviewer_id": reviewer_id,
+        "reviewer_model": reviewer_model,
+        "protocol_digest": policy["protocol_digest"],
+        "reviewed_at": "2026-08-10T12:00:00+00:00",
+        "assignment": {
+            "scope": scopes.pop(),
+            "chapters": sorted({source["chapter"] for source in sources}),
+            "source_ids": sorted(source["id"] for source in sources),
+        },
+        "reviews": reviews,
+    }
+
+
+def _reseal_review_receipt(sealed_review: dict, receipt: dict) -> None:
+    path = sealed_review["receipt_path"]
+    path.write_text(
+        yaml.safe_dump(receipt, sort_keys=False, allow_unicode=True), encoding="utf-8"
+    )
+    root = sealed_review["root"]
+    _git(root, "add", path.relative_to(root).as_posix())
+    _git(root, "commit", "-q", "-m", "reseal review receipt")
+    sealed_review["provenance"]["review_receipt_sha256"] = _sha(path)
+    sealed_review["provenance"]["sealing_commit_sha"] = _git(root, "rev-parse", "HEAD")
+
+
 @pytest.fixture
 def sealed_review(tmp_path, policy):
     chapter = tmp_path / "NSI" / "chapitres" / "1NSI-UNIT"
@@ -213,10 +266,6 @@ def sealed_review(tmp_path, policy):
     object_paths[0].parent.mkdir(parents=True)
     contract_path.write_text(
         "chapitre: 1NSI-UNIT\nstatut: draft\ncapacites: []\n", encoding="utf-8"
-    )
-    receipt_path.write_text(
-        "artifact_type: 1nsi_content_review_run\nrun_id: unit-review-run\n",
-        encoding="utf-8",
     )
     sources = []
     for index, path in enumerate(object_paths, start=1):
@@ -240,6 +289,17 @@ def sealed_review(tmp_path, policy):
                 "source_sha256": _sha(path),
             }
         )
+    receipt = _review_run_receipt(
+        policy,
+        sources,
+        tmp_path,
+        review_run_id="unit-review-run",
+        reviewer_id="independent-reviewer",
+        reviewer_model="unit-reviewer-model",
+    )
+    receipt_path.write_text(
+        yaml.safe_dump(receipt, sort_keys=False, allow_unicode=True), encoding="utf-8"
+    )
 
     _git(tmp_path, "init", "-q")
     _git(tmp_path, "config", "user.name", "Nexus Tests")
@@ -262,6 +322,7 @@ def sealed_review(tmp_path, policy):
         "sources": sources,
         "provenance": provenance,
         "receipt_path": receipt_path,
+        "receipt": receipt,
     }
 
 
@@ -570,6 +631,25 @@ def test_schema_rejects_approval_and_unknown_properties() -> None:
     assert len(errors) >= 2
 
 
+def test_review_run_receipt_schema_is_closed_and_validates_yaml(sealed_review) -> None:
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    receipt_schema = schema["$defs"]["review_run_receipt"]
+    assert receipt_schema["additionalProperties"] is False
+    assert receipt_schema["properties"]["assignment"]["additionalProperties"] is False
+    review_schema = receipt_schema["properties"]["reviews"]["items"]
+    assert review_schema["additionalProperties"] is False
+    assert set(review_schema["required"]) == {"id", "chapter", "scope", "payload"}
+    assert review_schema["properties"]["payload"]["additionalProperties"] is False
+    wrapper = {
+        "$schema": schema["$schema"],
+        "$ref": "#/$defs/review_run_receipt",
+        "$defs": schema["$defs"],
+    }
+    Draft202012Validator.check_schema(wrapper)
+    parsed = yaml.safe_load(sealed_review["receipt_path"].read_text(encoding="utf-8"))
+    Draft202012Validator(wrapper).validate(parsed)
+
+
 def test_accepts_finding_with_git_sealed_review_receipt(sealed_review, review_module) -> None:
     source = sealed_review["sources"][0]
     finding = _finding(
@@ -587,6 +667,71 @@ def test_accepts_finding_with_git_sealed_review_receipt(sealed_review, review_mo
     )
 
     assert validated[0]["provenance"] == sealed_review["provenance"]
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("run", "review_run_id"),
+        ("reviewer", "reviewer_id"),
+        ("model", "reviewer_model"),
+        ("protocol", "protocol_digest"),
+        ("source_not_assigned", "source non assignee"),
+        ("review_absent", "review absente"),
+        ("review_duplicated", "review dupliquee"),
+        ("assignment_chapter", "chapitre d'affectation"),
+        ("assignment_scope", "scope d'affectation"),
+        ("review_chapter", "chapitre de review"),
+        ("review_scope", "scope de review"),
+        ("schema_extra", "schema du recu"),
+    ],
+)
+def test_rejects_review_receipt_not_bound_to_current_finding(
+    sealed_review, review_module, mutation, message
+) -> None:
+    receipt = copy.deepcopy(sealed_review["receipt"])
+    source = sealed_review["sources"][0]
+    if mutation == "run":
+        receipt["review_run_id"] = "another-run"
+    elif mutation == "reviewer":
+        receipt["reviewer_id"] = "another-reviewer"
+    elif mutation == "model":
+        receipt["reviewer_model"] = "another-model"
+    elif mutation == "protocol":
+        receipt["protocol_digest"] = "sha256:" + "0" * 64
+    elif mutation == "source_not_assigned":
+        receipt["assignment"]["source_ids"].remove(source["id"])
+    elif mutation == "review_absent":
+        receipt["reviews"] = [
+            review for review in receipt["reviews"] if review["id"] != source["id"]
+        ]
+    elif mutation == "review_duplicated":
+        receipt["reviews"].append(copy.deepcopy(receipt["reviews"][0]))
+    elif mutation == "assignment_chapter":
+        receipt["assignment"]["chapters"] = ["1NSI-OTHER"]
+    elif mutation == "assignment_scope":
+        receipt["assignment"]["scope"] = "contract"
+    elif mutation == "review_chapter":
+        receipt["reviews"][0]["chapter"] = "1NSI-OTHER"
+    elif mutation == "review_scope":
+        receipt["reviews"][0]["scope"] = "contract"
+    else:
+        receipt["unexpected"] = "forbidden"
+    _reseal_review_receipt(sealed_review, receipt)
+    finding = _finding(
+        source,
+        provenance=sealed_review["provenance"],
+        root=sealed_review["root"],
+    )
+
+    with pytest.raises(review_module.ReviewValidationError, match=message):
+        review_module.validate_findings(
+            [finding],
+            [source],
+            sealed_review["root"],
+            sealed_review["policy"],
+            require_complete=True,
+        )
 
 
 @pytest.mark.parametrize(
@@ -1213,15 +1358,6 @@ def test_generate_register_marks_receipt_divergence_as_p1_traceability(
         }),
         encoding="utf-8",
     )
-    review_receipt = tmp_path / "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml"
-    review_receipt.parent.mkdir(parents=True)
-    review_receipt.write_text("run_id: unit-run\n", encoding="utf-8")
-    _git(tmp_path, "init", "-q")
-    _git(tmp_path, "config", "user.name", "Nexus Tests")
-    _git(tmp_path, "config", "user.email", "nexus-tests@example.invalid")
-    _git(tmp_path, "add", ".")
-    _git(tmp_path, "commit", "-q", "-m", "seal execution review")
-    before = receipt_path.read_bytes()
     source = {
         "id": "1NSI-UNIT-EX-001",
         "scope": "object",
@@ -1233,6 +1369,29 @@ def test_generate_register_marks_receipt_divergence_as_p1_traceability(
         "metadata": {},
         "source_sha256": _sha(source_path),
     }
+    review_receipt = tmp_path / "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml"
+    review_receipt.parent.mkdir(parents=True)
+    review_receipt.write_text(
+        yaml.safe_dump(
+            _review_run_receipt(
+                policy,
+                [source],
+                tmp_path,
+                review_run_id="unit-run",
+                reviewer_id="independent-reviewer",
+                reviewer_model="unit-model",
+            ),
+            sort_keys=False,
+            allow_unicode=True,
+        ),
+        encoding="utf-8",
+    )
+    _git(tmp_path, "init", "-q")
+    _git(tmp_path, "config", "user.name", "Nexus Tests")
+    _git(tmp_path, "config", "user.email", "nexus-tests@example.invalid")
+    _git(tmp_path, "add", ".")
+    _git(tmp_path, "commit", "-q", "-m", "seal execution review")
+    before = receipt_path.read_bytes()
     fact = {
         "path": source["path"],
         "line_start": 1,
