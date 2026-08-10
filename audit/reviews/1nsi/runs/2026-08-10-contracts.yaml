@@ -1,11 +1,11 @@
 artifact_type: 1nsi_review_run
 schema_version: 1
 manual: 1NSI
-review_run_id: 1nsi-contracts-2026-08-10-plato-reattestation-v2
-reviewer_id: 019feb3f-cd89-7242-9a84-6fafbc77e0d8
-reviewer_model: codex-inherited-gpt5
-protocol_digest: sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9
-reviewed_at: '2026-08-10T12:02:01+01:00'
+review_run_id: 1nsi-contracts-2026-08-10-build-manifest-019fec51-v1
+reviewer_id: 019fec51-6552-7ac2-8a57-962a9f664475
+reviewer_model: codex-gpt5
+protocol_digest: sha256:ccf155dc42c557a0b2b684267adee402d5886c944cac07baff4295f38c751e51
+reviewed_at: '2026-08-10T16:40:45+01:00'
 assignment:
   scope: contract
   chapters:
@@ -38,43 +38,43 @@ source_manifest:
   - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
     path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
     source_sha256: sha256:b66809a4f8fd0dc319bfc991c37e607a2578c643fbf8702f3520ca87ea1ac5ec
-    dependency_digest: sha256:aa56c4ec98971aff4ec3c9d8b8cb7e22b79575ee65331d665ca471cf166af17a
+    dependency_digest: sha256:225c70318637812c0ca03719038a93961c85e971e67149ef4663daaf332dc77a
   - id: contract:1NSI-ALGO-PARCOURS-TRIS
     path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
     source_sha256: sha256:78ecdb66f7f1b93ef821c2b0b61c657834dfbaefa73676d781b6fa7ada0374e6
-    dependency_digest: sha256:3a2f6e6186f4a9bbcd5bb08e7fb4c3a55e6e223e5e5e71a0c87c20d41621d046
+    dependency_digest: sha256:4f0b8a4296248eaea6ac3fb01569735c9ee1ec009a47a7a97fe4cd3fc3539014
   - id: contract:1NSI-ARCHITECTURE-OS
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml
     source_sha256: sha256:33dd60431b4afa16bb8710bed83c211a9ec5aa17135f5c164906acd62ec02f3e
-    dependency_digest: sha256:336df33163f013b3763abe47e550f09edc603d3e07760d4692cdd68f9c4dbe8a
+    dependency_digest: sha256:025e6e01e8d161084fb6247e6bcbca63c9ca9c25445647891e31c93d6e9c826f
   - id: contract:1NSI-LANGAGE
     path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
     source_sha256: sha256:653076c07aceee86b75cde923135b53976b1054d98033042cbde7a78c064fd86
-    dependency_digest: sha256:e608a0dfa094104c5c3e89c400ddeb5ad4cdb39aa7a078680faa93e8c1fc1ff1
+    dependency_digest: sha256:4b6abad0c75bba42707a06305a9f32437fd25ef02ab6f199728b4e5720226791
   - id: contract:1NSI-PROJET-METHODES
     path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
     source_sha256: sha256:373e5c1d32f079974d5d67109dab802a942fcd76f05f55a43fe2ce108143fe47
-    dependency_digest: sha256:2ee2f2f8e1a40e8b376d3d3dcf07e6ef10b4adda7afa561a8670d23ead75394d
+    dependency_digest: sha256:27e7bfce037f54d868cd18d6608032cce0ba53cd17275a2ee035b3eabf727ea4
   - id: contract:1NSI-RESEAUX
     path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
     source_sha256: sha256:1e92f3599fe8ca3a2bb0830338b3e0499323b7e0b71fe7ef6955cdeb0111bea2
-    dependency_digest: sha256:fd07d31afaccc8d30c6d67612516432bc47329dc210edbeed23b256439b25db3
+    dependency_digest: sha256:beee1e4392f927e8b80b96566a7546e0a18d7cc2769e64ffce670ea9e584ca3e
   - id: contract:1NSI-TABLES
     path: NSI/chapitres/1NSI-TABLES/contrat.yaml
     source_sha256: sha256:31969806064fdc4e682600af4608108df20a6fb5b2c938386867afe1432cd0f7
-    dependency_digest: sha256:c7cafc9718499ce840ffffdc0da60c2faa3fb3c15c146167321f4f31527b2fd4
+    dependency_digest: sha256:16482851908e1da90c42bb0ec7249a107b7dae0b8e9ddfab73e4824d1e7341f8
   - id: contract:1NSI-TYPES-BASE
     path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
     source_sha256: sha256:6d757b21ba4ceab3ed8628940866cee252a486c1174b06a61852cc377c364663
-    dependency_digest: sha256:8e95f07306920128c7cf6035ff4f63e958b721d12325ba9a3c497c2eba6c4e27
+    dependency_digest: sha256:93ec09a19274af9ee6817f07eb0ab8a3e7d1976f7d5a049e8d6f4ea83285a69a
   - id: contract:1NSI-TYPES-CONSTRUITS
     path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
     source_sha256: sha256:efff9b440e22ec4199e158b4a02cd3a6ad1d46e755a81eb4b3a4cf2b64c2aa46
-    dependency_digest: sha256:bb3ed8d9b2050a5318e7ec01a9736b6b75c7b723532db804f671a0607f2dba53
+    dependency_digest: sha256:8f27a1fac0c22b07a361b99fd8c9cd60cb2a2f3f06ce6efc68f765734b0a03a7
   - id: contract:1NSI-WEB-IHM
     path: NSI/chapitres/1NSI-WEB-IHM/contrat.yaml
     source_sha256: sha256:b4f455779b23b426b7fd438bee8efd185a3989b69012f489d34c4bd91ab0c56d
-    dependency_digest: sha256:a7a8586526a13d52a68791925101bfa410d2f7f00450fef18963d362b4e14d9f
+    dependency_digest: sha256:24b17d2fb1785d54fa49cf9c2e1d8a84f58c38f3796cfbd50f4da452c1e2c73f
 reviews:
 - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
   chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
@@ -235,10 +235,10 @@ reviews:
     dimensions:
       scientific:
         verdict: issue
-        justification: C1 est une capacité officielle et C2 est soutenue par le préambule. C3 relève
-          du processus général de mise au point, mais sa formulation précise n'est pas une capacité
-          officielle et reste un enrichissement à confirmer; C4 cite uniquement l'oral alors qu'elle
-          ajoute la documentation du code.
+        justification: C1 est une capacité officielle et C2 est soutenue par le préambule. C3 relève du
+          processus général de mise au point, mais sa formulation précise n'est pas une capacité officielle
+          et reste un enrichissement à confirmer; C4 cite uniquement l'oral alors qu'elle ajoute la documentation
+          du code.
         facts:
         - path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
           line_start: 8
@@ -653,7 +653,8 @@ reviews:
           attendue explicitement par le programme.
       consequence: Lire ou construire un tableau ne prouve pas que son parcours élément par élément sera
         enseigné et évalué.
-      expected_action: Étendre C2 ou ajouter une capacité distincte rendant l'itération sur un tableau observable.
+      expected_action: Étendre C2 ou ajouter une capacité distincte rendant l'itération sur un tableau
+        observable.
     - id: 1NSI-REV-TC-C5-MUTABILITE
       severity: P0
       dimension: scientific

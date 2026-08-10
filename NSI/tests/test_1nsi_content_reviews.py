@@ -13,6 +13,7 @@ import sys
 import time
 import uuid
 from collections import Counter
+from datetime import datetime
 from pathlib import Path
 
 import pytest
@@ -70,6 +71,81 @@ BASE_SHA = "7afc4b4e9dffa6fe9c2a5c46833e490df0026a6d"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
+POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
+GOVERNANCE_REVIEW_CONFIG = {
+    "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": {
+        "reviewer_id": "019fec51-6552-7ac2-8a57-962a9f664475",
+        "review_run_id": "1nsi-contracts-2026-08-10-build-manifest-019fec51-v1",
+        "previous_reviewed_at": "2026-08-10T12:02:01+01:00",
+    },
+    "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": {
+        "reviewer_id": "019fec51-8875-7243-98ab-d44ab2f963eb",
+        "review_run_id": (
+            "1nsi-objects-algorithms-2026-08-10-build-manifest-019fec51-v1"
+        ),
+        "previous_reviewed_at": "2026-08-10T16:13:20+01:00",
+    },
+    "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": {
+        "reviewer_id": "019fec51-a5a3-79b1-b9c9-27987dec5f98",
+        "review_run_id": (
+            "1nsi-objects-systems-web-2026-08-10-build-manifest-019fec51-v1"
+        ),
+        "previous_reviewed_at": "2026-08-10T11:43:03.124509+00:00",
+    },
+    "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": {
+        "reviewer_id": "019fec51-c41b-75a0-8d7f-bd4d10d9d44d",
+        "review_run_id": (
+            "1nsi-objects-language-project-2026-08-10-build-manifest-019fec51-v1"
+        ),
+        "previous_reviewed_at": "2026-08-10T12:45:26+01:00",
+    },
+    "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": {
+        "reviewer_id": "019fec51-e0b5-7531-99ff-997bd9f1247d",
+        "review_run_id": (
+            "1nsi-objects-data-basics-tables-2026-08-10-build-manifest-019fec51-v1"
+        ),
+        "previous_reviewed_at": "2026-08-10T12:42:55+01:00",
+    },
+    "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": {
+        "reviewer_id": "019fec52-0bf5-73f3-b8d9-1004f8e54c87",
+        "review_run_id": (
+            "1nsi-objects-types-construits-2026-08-10-build-manifest-019fec52-v1"
+        ),
+        "previous_reviewed_at": "2026-08-10T12:53:30+01:00",
+    },
+}
+PRE_GOVERNANCE_REVIEWER_IDS = {
+    "019feb3f-cd89-7242-9a84-6fafbc77e0d8",
+    "019feb71-89a9-77b3-9103-ad05eacf18ca",
+    "019feb72-1592-7900-b0b1-02fae59a6a39",
+    "019feb72-7252-77a1-b864-775b021ed954",
+    "019feb72-ceeb-7d72-9abd-de60ca43316e",
+    C3_REVIEWER_ID,
+}
+PRE_GOVERNANCE_REVIEW_RUN_IDS = {
+    "1nsi-contracts-2026-08-10-plato-reattestation-v2",
+    C3_REVIEW_RUN_ID,
+    "1nsi-objects-data-basics-tables-2026-08-10-chandrasekhar-v1",
+    "1nsi-objects-language-project-2026-08-10-lorentz-v1",
+    "1nsi-objects-systems-web-2026-08-10-boyle-v1",
+    "1nsi-objects-types-construits-2026-08-10-epicurus-v1",
+}
+EXPECTED_EXECUTION_DEBT = {
+    "1NSI-LANGAGE-RE-C4": ["execution_receipt_diverged"],
+    "1NSI-LANGAGE-RE-C4-CORRIGE": ["missing_receipt"],
+    "1NSI-PM-RE-C3": ["execution_receipt_diverged"],
+    "1NSI-PM-RE-C3-CORRIGE": ["missing_receipt"],
+    "1NSI-RESEAUX-RE-C1": ["execution_receipt_diverged"],
+    "1NSI-RESEAUX-RE-C1-CORRIGE": ["missing_receipt"],
+    "1NSI-TABLES-RE-C2": ["execution_receipt_diverged"],
+    "1NSI-TABLES-RE-C2-CORRIGE": ["missing_receipt"],
+    "1NSI-TYPES-BASE-RE-C3": ["execution_receipt_diverged"],
+    "1NSI-TYPES-BASE-RE-C3-CORRIGE": ["missing_receipt"],
+    "1NSI-TC-AM-EXTRAIT": ["missing_receipt"],
+    "1NSI-TC-QCM": ["missing_receipt"],
+    "1NSI-WEB-IHM-RE-C9": ["execution_receipt_diverged"],
+    "1NSI-WEB-IHM-RE-C9-CORRIGE": ["missing_receipt"],
+}
 PDF_SHA256 = "7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0"
 SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
 CURRENT_ALLOWED_FILES = {
@@ -691,7 +767,11 @@ def test_policy_migration_invalidates_only_review_envelopes(
     receipt_schema = review_module._receipt_schema(ROOT)
 
     for relative_path in sorted(REVIEW_RUNS):
-        receipt = yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))
+        receipt = yaml.safe_load(
+            _git_bytes(ROOT, "show", f"{POLICY_COMMIT}^:{relative_path}").decode(
+                "utf-8"
+            )
+        )
         schema_errors = sorted(
             Draft202012Validator(
                 receipt_schema,
@@ -736,6 +816,111 @@ def test_policy_migration_invalidates_only_review_envelopes(
                     review_module._validate_fact(fact, allowed_paths, ROOT)
             for anomaly in anomalies:
                 review_module._validate_fact(anomaly["fact"], allowed_paths, ROOT)
+
+
+def test_all_review_receipts_match_current_governance_before_sealing(
+    policy, sources, review_module
+) -> None:
+    configs = list(GOVERNANCE_REVIEW_CONFIG.values())
+    reviewer_ids = [config["reviewer_id"] for config in configs]
+    review_run_ids = [config["review_run_id"] for config in configs]
+    assert len(reviewer_ids) == len(set(reviewer_ids)) == 6
+    assert len(review_run_ids) == len(set(review_run_ids)) == 6
+    assert not (set(reviewer_ids) & PRE_GOVERNANCE_REVIEWER_IDS)
+    assert not (set(review_run_ids) & PRE_GOVERNANCE_REVIEW_RUN_IDS)
+    assert policy["integrator_id"] not in reviewer_ids
+
+    sources_by_id = {source["id"]: source for source in sources}
+    receipt_schema = review_module._receipt_schema(ROOT)
+    covered_ids = []
+    execution_debt = {}
+    for relative_path, config in GOVERNANCE_REVIEW_CONFIG.items():
+        receipt = yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))
+        schema_errors = sorted(
+            Draft202012Validator(
+                receipt_schema,
+                format_checker=review_module.FORMAT_CHECKER,
+            ).iter_errors(receipt),
+            key=lambda error: tuple(str(part) for part in error.path),
+        )
+        assert not schema_errors, (relative_path, schema_errors)
+        assert receipt["reviewer_id"] == config["reviewer_id"]
+        assert receipt["review_run_id"] == config["review_run_id"]
+        assert receipt["reviewer_model"] == "codex-gpt5"
+        assert receipt["protocol_digest"] == policy["protocol_digest"]
+        assert datetime.fromisoformat(receipt["reviewed_at"]) > datetime.fromisoformat(
+            config["previous_reviewed_at"]
+        )
+        assert "TNSI" not in json.dumps(receipt, ensure_ascii=False)
+
+        expected_sources = sorted(
+            (sources_by_id[source_id] for source_id in receipt["assignment"]["source_ids"]),
+            key=lambda source: source["id"],
+        )
+        expected_ids = [source["id"] for source in expected_sources]
+        assert receipt["assignment"] == {
+            "scope": expected_sources[0]["scope"],
+            "chapters": sorted({source["chapter"] for source in expected_sources}),
+            "source_ids": expected_ids,
+        }
+        covered_ids.extend(expected_ids)
+        manifest = receipt["source_manifest"]
+        assert manifest["review_tool_sha256"] == _sha(MODULE_PATH)
+        assert manifest["execution_checker_sha256"] == _sha(
+            ROOT / "NSI/scripts/verify_python.py"
+        )
+        assert manifest["execution_common_sha256"] == _sha(
+            ROOT / "NSI/scripts/common.py"
+        )
+        assert manifest["entries"] == [
+            {
+                "id": source["id"],
+                "path": source["path"],
+                "source_sha256": _sha(ROOT / source["path"]),
+                "dependency_digest": review_module.compute_dependency_digest(
+                    source, sources, ROOT, policy
+                ),
+            }
+            for source in expected_sources
+        ]
+        assert [review["id"] for review in receipt["reviews"]] == expected_ids
+
+        for review in receipt["reviews"]:
+            source = sources_by_id[review["id"]]
+            assert review["chapter"] == source["chapter"]
+            assert review["scope"] == source["scope"]
+            payload = review["payload"]
+            anomalies = payload["anomalies"]
+            allowed_paths = review_module._allowed_fact_paths(
+                source, sources, ROOT, policy
+            )
+            for dimension_name, dimension in payload["dimensions"].items():
+                expected_anomaly_ids = [
+                    anomaly["id"]
+                    for anomaly in anomalies
+                    if anomaly["dimension"] == dimension_name
+                ]
+                assert dimension["anomaly_ids"] == expected_anomaly_ids
+                assert (dimension["verdict"] == "issue") == bool(
+                    expected_anomaly_ids
+                )
+                for fact in dimension["facts"]:
+                    review_module._validate_fact(fact, allowed_paths, ROOT)
+            for anomaly in anomalies:
+                review_module._validate_fact(anomaly["fact"], allowed_paths, ROOT)
+
+            observation = review_module.execution_observation(source, ROOT)
+            if observation is None:
+                continue
+            assert observation["fresh_verdict"] == "pass", source["id"]
+            if observation["anomalies"]:
+                execution_debt[source["id"]] = observation["anomalies"]
+            else:
+                assert observation["matches_receipt"] is True, source["id"]
+
+    assert len(covered_ids) == len(set(covered_ids)) == 349
+    assert set(covered_ids) == set(sources_by_id)
+    assert execution_debt == EXPECTED_EXECUTION_DEBT
 
 
 def test_scope_guard_base_is_strict_full_commit(policy, review_module) -> None:
