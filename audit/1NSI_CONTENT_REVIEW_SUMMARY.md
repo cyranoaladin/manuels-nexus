@@ -6,8 +6,8 @@ Publication approval: false
 Human confirmation required: true
 
 ## Scientific
-- pass: 121
-- issue: 123
+- pass: 122
+- issue: 122
 - not_applicable: 0
 - human_confirmation_required: 105
 
@@ -18,16 +18,16 @@ Human confirmation required: true
 - human_confirmation_required: 51
 
 ## Anomalies
-- Total: 261
+- Total: 260
 
 ### By severity
-- P0: 142
+- P0: 141
 - P1: 116
 - P2: 3
 - P3: 0
 
 ### By dimension
-- scientific: 151
+- scientific: 150
 - pedagogical: 96
 - traceability: 14
 
@@ -37,7 +37,6 @@ Human confirmation required: true
 - `1NSI-REV-ADGK-QCM-SANS-CLE` [P1/pedagogical]: Ajouter une clé séparée de la version élève immédiate, un mécanisme de correction et des renvois de remédiation.
 - `1NSI-REV-APT-COUTS-TERMINAISON` [P1/scientific]: Ajouter des attendus observables sur la terminaison des tris, le coût linéaire des parcours et le coût quadratique au pire des deux tris.
 - `1NSI-REV-AGT-C1-MOYENNE-PARCOURS` [P1/scientific]: Écrire et tester une version par parcours explicite avant de présenter éventuellement sum comme raccourci de bibliothèque.
-- `1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON` [P0/scientific]: Traiter séparément n inférieur ou égal à 1, puis réserver la dernière itération i=n-2 au cas n supérieur ou égal à 2 et ajouter un test de régression.
 - `1NSI-REV-AGT-EVAL-A-ECRITURE-TERMINAISON` [P1/pedagogical]: Ajouter une production ou complétion de code et une justification explicite de terminaison avec critère observable.
 - `1NSI-REV-AGT-EVAL-B-ECRITURE-TERMINAISON` [P1/pedagogical]: Introduire une tâche d'écriture ou correction du code et un item distinct sur la terminaison des boucles bornées.
 - `1NSI-REV-AGT-QCM-SANS-CLE` [P1/pedagogical]: Ajouter une correction séparée et des orientations par capacité sans exposer les réponses avant la passation.

@@ -53,14 +53,12 @@ PRE_C3_REVIEW_RUN_IDS = {
     "1nsi-objects-systems-web-2026-08-10-boyle-v1",
     "1nsi-objects-types-construits-2026-08-10-epicurus-v1",
 }
-ALGORITHM_SOURCE_COMMIT = "1b577c8becb0d21ef3485a5e6cdec236f1e006b7"
-ALGORITHM_RECEIPT_COMMIT = "c315a7117dbd3b3e54c4894110d12b1862b4083e"
+ALGORITHM_SOURCE_COMMIT = "30f4e1b429ad7006ac34d0ac720e5bc0db608f71"
+ALGORITHM_RECEIPT_COMMIT = "bdd80c4f52e122b2c1954ea3771d151829df6630"
 ALGORITHM_RECEIPT_SHA256 = (
-    "sha256:da71fba62813bb890f64ad90ff96ddbd9e0126017d81bcf9374ca1198590c227"
+    "sha256:25dc602d9dd6251e49cfee8c3eae7fd65dee8af7d329a6b09e57a770ac8c3190"
 )
-ALGORITHM_REVIEW_RUN_ID = (
-    "1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1"
-)
+ALGORITHM_REVIEW_RUN_ID = C3_REVIEW_RUN_ID
 ALGORITHM_REVIEWER_MODEL = "codex-gpt5"
 OLD_ALGORITHM_REVIEWER_ID = "019feb71-27c9-7530-ab01-ce74cea1b4a2"
 OLD_ALGORITHM_REVIEW_RUN_ID = "1nsi-objects-algorithms-2026-08-10-bernoulli-v1"
@@ -2950,8 +2948,8 @@ def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
         "1NSI-REV-AGT-C2-BORNE-TERMINAISON",
         "1NSI-REV-AGT-QCM-Q2-AMBIGU",
         "1NSI-REV-ADGK-C2-CONTRADICTION",
+        "1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON",
     }
-    new_p0_id = "1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON"
     json_path = ROOT / "audit" / "1NSI_CONTENT_REVIEWS.json"
     summary_path = ROOT / "audit" / "1NSI_CONTENT_REVIEW_SUMMARY.md"
 
@@ -2965,32 +2963,24 @@ def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
 
     findings = review_module.load_findings(FINDINGS_PATH)
     document = json.loads(json_text)
-    findings_anomalies = [
-        anomaly for finding in findings for anomaly in finding["anomalies"]
-    ]
     register_anomalies = [
         anomaly for entry in document["entries"] for anomaly in entry["anomalies"]
     ]
-    for anomalies in (findings_anomalies, register_anomalies):
-        by_id = {anomaly["id"]: anomaly for anomaly in anomalies}
-        assert by_id[new_p0_id]["severity"] == "P0"
-
-    assert len(register_anomalies) == 261
+    assert len(register_anomalies) == 260
     assert Counter(anomaly["severity"] for anomaly in register_anomalies) == Counter(
-        {"P0": 142, "P1": 116, "P2": 3}
+        {"P0": 141, "P1": 116, "P2": 3}
     )
 
     assert len(findings) == len(document["entries"]) == 349
-    assert new_p0_id in summary_text
     assert "Entries: 349" in summary_text
-    assert "- Total: 261" in summary_text
-    assert "- P0: 142" in summary_text
+    assert "- Total: 260" in summary_text
+    assert "- P0: 141" in summary_text
     assert "- P1: 116" in summary_text
     assert "- P2: 3" in summary_text
     assert review_module.release_gate_allows(document, policy) is False
 
 
-def test_algorithm_findings_are_sealed_to_the_second_review_receipt(
+def test_algorithm_findings_are_sealed_to_the_c3_review_receipt(
     policy, sources, review_module
 ) -> None:
     receipt_relative = ALGORITHM_RECEIPT_PATH.relative_to(ROOT).as_posix()
@@ -3013,14 +3003,14 @@ def test_algorithm_findings_are_sealed_to_the_second_review_receipt(
         "review_run_id": receipt["review_run_id"],
         "reviewer_model": receipt["reviewer_model"],
     } == {
-        "reviewer_id": SECOND_REVIEWER_ID,
+        "reviewer_id": C3_REVIEWER_ID,
         "review_run_id": ALGORITHM_REVIEW_RUN_ID,
         "reviewer_model": ALGORITHM_REVIEWER_MODEL,
     }
     reviews_by_id = {review["id"]: review for review in receipt["reviews"]}
     assert len(reviews_by_id) == 40
     expected_provenance = {
-        "reviewer_id": SECOND_REVIEWER_ID,
+        "reviewer_id": C3_REVIEWER_ID,
         "review_run_id": ALGORITHM_REVIEW_RUN_ID,
         "reviewer_model": ALGORITHM_REVIEWER_MODEL,
         "integrator_id": policy["integrator_id"],
