@@ -1,0 +1,47 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-PM-COURS-C2-JALONS-VIDES
+source_commit_sha: 2eb90874903578a0f3faa4145fc3999c19c577d4
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:b7b4c50e14d14ede3b0f154b1b6a8ca9bf0e234ea428904761b49bac2c651398
+  - path: NSI/chapitres/1NSI-PROJET-METHODES/code/avancement.py
+    sha256: sha256:de9d47da3c168c5d8af6146cdb1da19905955dbe4fd122253fb2439a3d81e8a0
+  - path: NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C2.tex
+    sha256: sha256:cedefb3fc4c464c69dc7bbc4988469dd19e9a59f803fc48d83908c13c723bf14
+reviewer_id: 019fed4c-57ff-73c3-ab97-f4d502910316
+reviewer_model: gpt-5
+review_run_id: 1nsi-p0-avancement-jalons-vides-2026-08-10-laplace-v1
+session_id: 019fed4c-57ff-73c3-ab97-f4d502910316
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      .....                                                                    [100%]
+      5 passed in 0.96s
+    stderr: ""
+    stdout_sha256: sha256:2928adf7f4acff2ac90882c821e00c5a088e75affe01c61a15ba0e83aa36f7d8
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Les regressions scientifiques de l'avancement passent sur le SHA revu.
+  - command: python -m py_compile chapitres/1NSI-PROJET-METHODES/code/avancement.py
+    cwd: NSI
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique de l'avancement est syntaxiquement valide.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T21:12:58+01:00"
