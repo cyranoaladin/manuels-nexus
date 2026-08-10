@@ -66,7 +66,10 @@ CONTRACT_RECEIPT_COMMIT = "c5ab5d4607eb38b41e5824561aad1c7a8abcb275"
 CONTRACT_RECEIPT_SHA256 = (
     "sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162"
 )
-BASE_SHA = "867e10503044688a0b8cee3847647562dce6db45"
+BASE_SHA = "7afc4b4e9dffa6fe9c2a5c46833e490df0026a6d"
+PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
+    "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
+)
 PDF_SHA256 = "7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0"
 SHA256 = re.compile(r"^sha256:[0-9a-f]{64}$")
 CURRENT_ALLOWED_FILES = {
@@ -663,6 +666,76 @@ def test_scope_guard_pins_exact_sources_and_immutable_surfaces(
     assert guard["tnsi_tracked_files_count"] == 261
     assert SHA256.fullmatch(guard["tnsi_tracked_files_digest"])
     review_module.verify_scope(ROOT, policy)
+
+
+def test_build_manifest_governance_uses_current_clean_base(
+    policy, review_module
+) -> None:
+    guard = policy["scope_guard"]
+    assert guard["implementation_base_sha"] == BASE_SHA
+    assert guard["build_manifest"] == {
+        "path": "audit/BUILD_MANIFEST.json",
+        "sha256": _sha(ROOT / "audit/BUILD_MANIFEST.json"),
+    }
+    assert review_module.compute_protocol_digest(ROOT, policy) == policy[
+        "protocol_digest"
+    ]
+    review_module.verify_scope(ROOT, policy)
+
+
+def test_policy_migration_invalidates_only_review_envelopes(
+    policy, sources, review_module
+) -> None:
+    assert policy["protocol_digest"] != PRE_BUILD_MANIFEST_PROTOCOL_DIGEST
+    sources_by_id = {source["id"]: source for source in sources}
+    receipt_schema = review_module._receipt_schema(ROOT)
+
+    for relative_path in sorted(REVIEW_RUNS):
+        receipt = yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))
+        schema_errors = sorted(
+            Draft202012Validator(
+                receipt_schema,
+                format_checker=review_module.FORMAT_CHECKER,
+            ).iter_errors(receipt),
+            key=lambda error: tuple(str(part) for part in error.path),
+        )
+        assert not schema_errors, (relative_path, schema_errors)
+        assert receipt["protocol_digest"] == PRE_BUILD_MANIFEST_PROTOCOL_DIGEST
+        assert receipt["protocol_digest"] != policy["protocol_digest"]
+        assert "TNSI" not in json.dumps(receipt, ensure_ascii=False)
+
+        source_ids = receipt["assignment"]["source_ids"]
+        assert [entry["id"] for entry in receipt["source_manifest"]["entries"]] == (
+            source_ids
+        )
+        assert [review["id"] for review in receipt["reviews"]] == source_ids
+        for entry in receipt["source_manifest"]["entries"]:
+            source = sources_by_id[entry["id"]]
+            assert entry["path"] == source["path"]
+            assert entry["source_sha256"] == _sha(ROOT / source["path"])
+            assert entry["dependency_digest"] != review_module.compute_dependency_digest(
+                source, sources, ROOT, policy
+            )
+
+        for review in receipt["reviews"]:
+            source = sources_by_id[review["id"]]
+            payload = review["payload"]
+            anomalies = payload["anomalies"]
+            allowed_paths = review_module._allowed_fact_paths(
+                source, sources, ROOT, policy
+            )
+            for dimension_name, dimension in payload["dimensions"].items():
+                expected_ids = [
+                    anomaly["id"]
+                    for anomaly in anomalies
+                    if anomaly["dimension"] == dimension_name
+                ]
+                assert dimension["anomaly_ids"] == expected_ids
+                assert (dimension["verdict"] == "issue") == bool(expected_ids)
+                for fact in dimension["facts"]:
+                    review_module._validate_fact(fact, allowed_paths, ROOT)
+            for anomaly in anomalies:
+                review_module._validate_fact(anomaly["fact"], allowed_paths, ROOT)
 
 
 def test_scope_guard_base_is_strict_full_commit(policy, review_module) -> None:
