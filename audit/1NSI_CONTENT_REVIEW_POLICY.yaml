@@ -54,7 +54,7 @@ contractual_documents:
   sha256: sha256:f235a4dfc797b006b84abe17c9c57a11eab40412d0e6a49648297b26dfc45c91
 - path: docs/codex/ISSUE_REGISTER_TEMPLATE.md
   sha256: sha256:3768d699ef4158bc0f8212c7b5fc797ad3412ce9f55f3935644e48e882cdda93
-protocol_digest: sha256:7f084bfd08b62de04c6370471ab62d6decbec5dc0598ee6f23b939676001cf96
+protocol_digest: sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9
 capacity_matrix:
 - chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
   contract_code: C1
@@ -1503,6 +1503,12 @@ scope_guard:
 allowlist:
 - NSI/tests/test_1nsi_content_reviews.py
 - scripts/review_1nsi_content.py
+- scripts/inventory_collection.py
+- tests/test_inventory_collection.py
+- ETAT_COLLECTION.md
+- audit/ECARTS_ET_CONTRADICTIONS.yaml
+- audit/INVENTAIRE_COLLECTION.json
+- audit/MATRICE_LIVRABLES.yaml
 - audit/1NSI_CONTENT_REVIEW_POLICY.yaml
 - audit/schemas/v1/1nsi-content-review.schema.json
 - audit/sources/1nsi/programme-premiere-nsi.pdf

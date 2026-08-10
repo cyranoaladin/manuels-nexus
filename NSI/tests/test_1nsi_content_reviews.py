@@ -44,6 +44,14 @@ CURRENT_ALLOWED_FILES = {
     "audit/sources/1nsi/legifrance-arrete-17-janvier-2019.html",
     "audit/sources/1nsi/eduscol-programmes-nsi.html",
 }
+INVENTORY_INTEGRATION_FILES = {
+    "scripts/inventory_collection.py",
+    "tests/test_inventory_collection.py",
+    "ETAT_COLLECTION.md",
+    "audit/ECARTS_ET_CONTRADICTIONS.yaml",
+    "audit/INVENTAIRE_COLLECTION.json",
+    "audit/MATRICE_LIVRABLES.yaml",
+}
 REVIEW_OUTPUTS = {
     "audit/1NSI_CONTENT_REVIEW_FINDINGS.yaml",
     "audit/1NSI_CONTENT_REVIEWS.json",
@@ -60,7 +68,9 @@ REVIEW_RUNS = {
         "types-construits",
     )
 }
-ALLOWED_FILES = CURRENT_ALLOWED_FILES | REVIEW_OUTPUTS | REVIEW_RUNS
+ALLOWED_FILES = (
+    CURRENT_ALLOWED_FILES | INVENTORY_INTEGRATION_FILES | REVIEW_OUTPUTS | REVIEW_RUNS
+)
 CONTRACTUAL_DOCUMENTS = {
     "NSI/docs/01_conception_manuel.md",
     "NSI/docs/02_workflow_production.md",
@@ -2606,9 +2616,7 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
     pedagogical = Counter(
         finding["dimensions"]["pedagogical"]["verdict"] for finding in validated
     )
-    anomalies = [
-        anomaly for finding in validated for anomaly in finding["anomalies"]
-    ]
+    anomalies = [anomaly for finding in validated for anomaly in finding["anomalies"]]
     assert scientific == Counter({"issue": 6, "pass": 4})
     assert pedagogical == Counter({"pass": 7, "issue": 3})
     assert len(anomalies) == len({anomaly["id"] for anomaly in anomalies}) == 12
