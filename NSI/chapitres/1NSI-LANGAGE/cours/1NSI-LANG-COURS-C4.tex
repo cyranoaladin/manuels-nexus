@@ -10,6 +10,7 @@
 
 \exemple{Un élève écrit une fonction censée renvoyer le maximum d'une liste de nombres :}
 
+% PYTHON-SOURCE: code/maximum_bugue.py
 \begin{python}
 def maximum_bugue(liste):
     maxi = 0
@@ -18,18 +19,25 @@ def maximum_bugue(liste):
             maxi = x
     return maxi
 
-print(maximum_bugue([3, 7, 2]))    # 7 -- semble correct
+print(maximum_bugue([3, 7, 2]))
 \end{python}
 
-% BEGIN-VERIFY
+\begin{console}
+7
+\end{console}
+
+% BEGIN-TRACE
 % def maximum_bugue(liste):
 %     maxi = 0
 %     for x in liste:
 %         if x > maxi:
 %             maxi = x
 %     return maxi
-% assert maximum_bugue([3, 7, 2]) == 7
-% END-VERIFY
+%
+% print(maximum_bugue([3, 7, 2]))
+% EXPECTED
+% 7
+% END-TRACE
 
 \propriete[Un jeu de tests réussi ne prouve pas la correction]{
   Le succès d'un jeu de tests montre seulement que le programme fonctionne \textbf{sur les
@@ -56,9 +64,12 @@ print(maximum_bugue([3, 7, 2]))    # 7 -- semble correct
 % assert maximum_bugue([-5, -1, -8]) == 0  # bug : devrait etre -1
 % END-VERIFY
 
-\erreurFrequente{Initialiser un accumulateur de maximum à $0$ (EF). C'est correct \textbf{si
-et seulement si} la liste contient au moins une valeur positive : sinon, $0$ « gagne »
-à tort contre toutes les valeurs négatives. Il faut initialiser l'accumulateur avec le
+\erreurFrequente{Initialiser un accumulateur de maximum à $0$ (EF). Pour une liste
+\textbf{non vide} (précondition : la liste est non vide), c'est correct \textbf{si et
+seulement si} elle contient une valeur
+positive ou nulle, c'est-à-dire si $\max(\texttt{liste}) \geq 0$. Ainsi,
+\lstinline{[-5, 0, -8]} donne correctement $0$, tandis que \lstinline{[-5, -1, -8]}
+donne à tort $0$ au lieu de $-1$. Il faut initialiser l'accumulateur avec le
 \textbf{premier élément} de la liste, pas avec une constante arbitraire.}
 
 \begin{codereference}{Version corrigée, avec jeu de tests plus complet}
