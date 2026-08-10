@@ -1,0 +1,49 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-TC-CO-053-COPIE-PROFONDE-INCOMPLETE
+source_commit_sha: 16eac039532770345a70fc770097f52c6c463a12
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:8db03bb642f51ac0277b838289ec603b28a7c6b2be5e302209c22b4d57d80b05
+  - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-053.tex
+    sha256: sha256:c72def1d4f059325d26e42399fc31658957b503ee7d0ad6baa8b6db230816a21
+  - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-053.tex
+    sha256: sha256:7b1cc0db6d4b942b4b65eadc1c939aa09525c77b2d01614e486e229b0f158404
+  - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/code/copier_grille_deux_niveaux.py
+    sha256: sha256:72077ef969c52ef5331b2a843334e17892d5d8d7e8c1c9631b5f93f106694d9b
+reviewer_id: 019fed94-8b9b-74c1-b664-3cc3b56aac23
+reviewer_model: GPT-5 (Codex)
+review_run_id: 1nsi-p0-corrige-053-copie-deux-niveaux-2026-08-10-franklin-v1
+session_id: 019fed94-8b9b-74c1-b664-3cc3b56aac23
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      ..........                                                               [100%]
+      10 passed in 1.02s
+    stderr: ""
+    stdout_sha256: sha256:98b021bcc31052f0e7ea77aea21982e87a1093fcb3cee15a563738e5f9dbc130
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: L'enonce et le corrige 053 partagent le contrat a deux niveaux et sa limite mutable.
+  - command: python -m py_compile chapitres/1NSI-TYPES-CONSTRUITS/code/copier_grille_deux_niveaux.py
+    cwd: NSI
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique partagee avec le corrige 053 est syntaxiquement valide.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte dans le worktree relu.
+verdict: approved
+reviewed_at: "2026-08-10T22:32:21+01:00"
