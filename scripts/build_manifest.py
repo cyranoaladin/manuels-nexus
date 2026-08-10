@@ -1520,7 +1520,7 @@ def _student_text_violations(text: str) -> list[str]:
         ),
         (
             "corrigé",
-            r"(?im:\bcorrigés?\b|\bcorriges\b(?=[ \t]*(?:[.:;!?-][ \t]*)?$))",
+            r"(?im:\bcorrigés?\b|^[ \t]*corriges\b)",
         ),
         ("barème enseignant", r"(?i:\bbar[èe]me indicatif\b)"),
         (

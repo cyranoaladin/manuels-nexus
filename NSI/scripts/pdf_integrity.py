@@ -27,8 +27,7 @@ BOOK_LOG_DIAGNOSTICS = (
 )
 BOOK_METADATA_FIELDS = ("title", "author", "subject", "keywords")
 BOOK_STUDENT_LEAK = re.compile(
-    r"\bcorrigés?\b|\bcorriges\b(?=[ \t]*(?:[.:;!?-][ \t]*)?$)"
-    r"|barème indicatif|réponse attendue|1NSI-",
+    r"\bcorrigés?\b|^[ \t]*corriges\b|barème indicatif|réponse attendue|1NSI-",
     re.IGNORECASE | re.MULTILINE,
 )
 

@@ -106,7 +106,6 @@ def test_preflight_book_pdf_rejects_pdf_without_links(tmp_path):
     [
         "Corrigé",
         "Corrigés",
-        "corriges",
         "Barème indicatif",
         "Réponse attendue",
         "1NSI-INTERNE",
@@ -114,6 +113,10 @@ def test_preflight_book_pdf_rejects_pdf_without_links(tmp_path):
 )
 def test_preflight_book_pdf_rejects_student_leaks(tmp_path, leak):
     assert _preflight(tmp_path, text=f"Contenu public. {leak}") == 1
+
+
+def test_preflight_book_pdf_rejects_unaccented_corriges_heading(tmp_path):
+    assert _preflight(tmp_path, text="corriges") == 1
 
 
 def test_preflight_book_pdf_allows_instruction_to_correct(tmp_path):
@@ -127,3 +130,8 @@ def test_preflight_book_pdf_allows_instruction_to_correct(tmp_path):
         )
         == 0
     )
+
+
+@pytest.mark.parametrize("text", ["Tu corriges", "Tu corriges."])
+def test_preflight_book_pdf_allows_corriges_as_a_verb(tmp_path, text):
+    assert _preflight(tmp_path, text=text) == 0

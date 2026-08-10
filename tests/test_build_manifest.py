@@ -263,6 +263,8 @@ def test_recorder_student_text_gate_rejects_teacher_leaks(
         "Corrige le programme.",
         "Corriger le programme.",
         "Tu corriges le programme.",
+        "Tu corriges",
+        "Tu corriges.",
         "Étudier la version corrigée.",
     ],
 )
