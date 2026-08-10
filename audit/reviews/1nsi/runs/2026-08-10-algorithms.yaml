@@ -2,11 +2,11 @@
   "artifact_type": "1nsi_review_run",
   "schema_version": 1,
   "manual": "1NSI",
-  "review_run_id": "1nsi-objects-algorithms-2026-08-10-bernoulli-v1",
-  "reviewer_id": "019feb71-27c9-7530-ab01-ce74cea1b4a2",
-  "reviewer_model": "codex-inherited-gpt5",
+  "review_run_id": "1nsi-objects-algorithms-2026-08-10-second-review-019febc0-v1",
+  "reviewer_id": "019febc0-6f71-7a92-a196-d579889d7e6e",
+  "reviewer_model": "codex-gpt5",
   "protocol_digest": "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9",
-  "reviewed_at": "2026-08-10T12:39:56+01:00",
+  "reviewed_at": "2026-08-10T14:07:03+01:00",
   "assignment": {
     "scope": "object",
     "chapters": [
@@ -33,7 +33,6 @@
       "1NSI-ADGK-EX-005",
       "1NSI-ADGK-RE-C1",
       "1NSI-ADGK-RE-C1-CORRIGE",
-      "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM",
       "1NSI-AGT-CO-001",
       "1NSI-AGT-CO-002",
       "1NSI-AGT-CO-003",
@@ -53,6 +52,7 @@
       "1NSI-AGT-EX-005",
       "1NSI-AGT-RE-C5",
       "1NSI-AGT-RE-C5-CORRIGE",
+      "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM",
       "1NSI-ALGO-PARCOURS-TRIS-QCM"
     ]
   },
@@ -100,8 +100,8 @@
       {
         "id": "1NSI-ADGK-COURS-C2",
         "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex",
-        "source_sha256": "sha256:dccbcaa2791365d8587a5e5c57d807009db1712eff5cefd3ed370ee0bf689863",
-        "dependency_digest": "sha256:21be74279c77b8e202f0eb892e868337d1b1d3d0fe14d3af1aa480fb661725ba"
+        "source_sha256": "sha256:ad85942efe3516a9284bf14764016d0f4eddbe7137f4fbebba36bcc9b6c25aee",
+        "dependency_digest": "sha256:fd4665a8e15d6c596af0d9050232b8ddfca774b34a72c6d1202f322abd7563b7"
       },
       {
         "id": "1NSI-ADGK-COURS-C3",
@@ -176,12 +176,6 @@
         "dependency_digest": "sha256:83eee6504b14836399254f01c21c0b2c317ec645ee2b4b8be9dd7fcc495fe2b7"
       },
       {
-        "id": "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM",
-        "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
-        "source_sha256": "sha256:ea739a2504a9ced473ef002e323b05e57fab569b77085d1349e045f1a2c5b437",
-        "dependency_digest": "sha256:ed25bd5954a887868aa8c265c361bb37cde2afdb53b49339123499055e3c0a43"
-      },
-      {
         "id": "1NSI-AGT-CO-001",
         "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex",
         "source_sha256": "sha256:5ae45217dc4c960cc819ae1a6f21a56dfefb35222e3a218be4320fea52055365",
@@ -220,8 +214,8 @@
       {
         "id": "1NSI-AGT-COURS-C2",
         "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex",
-        "source_sha256": "sha256:ddf0b7616ff0aba3337cb11b5473bfe9d5c9c5ba20f9ce835bb31a7ae15f2c3c",
-        "dependency_digest": "sha256:83bb74bd055da6b57f9ac492c098de5bf22fa7acb74d5b9243765a8a744277c8"
+        "source_sha256": "sha256:0d16b34f49524a4a111da74764033e471f7ecbbdec86ed5d9026c710468f4d7d",
+        "dependency_digest": "sha256:b8689827a85e47c29959b842a2207193bdbb6887b8c0616d49a14a6904fd8b1b"
       },
       {
         "id": "1NSI-AGT-COURS-C3",
@@ -296,10 +290,16 @@
         "dependency_digest": "sha256:6ba1e1ca78a59a7a17e4fd38290800cb55dd34ae0dccaeb2561a120976ab1ecb"
       },
       {
+        "id": "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM",
+        "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
+        "source_sha256": "sha256:ea739a2504a9ced473ef002e323b05e57fab569b77085d1349e045f1a2c5b437",
+        "dependency_digest": "sha256:ed25bd5954a887868aa8c265c361bb37cde2afdb53b49339123499055e3c0a43"
+      },
+      {
         "id": "1NSI-ALGO-PARCOURS-TRIS-QCM",
         "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex",
-        "source_sha256": "sha256:40d29bc3de2454a363212fcc5f6562e480319c79e85f34766b254c140a83a098",
-        "dependency_digest": "sha256:46cd261caab4e33773f46277a919e6d9421c3cbe48144a59495c9e1caeca53b3"
+        "source_sha256": "sha256:974a709227bd3bcef04f9545860a322b44fbd77db66cb53b5945092c79b9dc71",
+        "dependency_digest": "sha256:8b630e88705aaf451c9e2c072e1eacaba71906ca1706dd7afb01531deae71a55"
       }
     ]
   },
@@ -321,6 +321,14 @@
                 "excerpt_sha256": "sha256:f1a524d7eedde6a0918af8361d193df535b56b0d78efa5efdb4fb09d86fd782d",
                 "fact_type": "source_statement",
                 "observation": "Le contrôle de 1NSI-ADGK-CO-001 établit l'indice 5 et la décroissance stricte des trois valeurs du variant."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-001.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:5298fbc827fba18d3fc38bfa6780d72cf643f38ec0e3131d53cc6d057a648755",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-CO-001 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -361,6 +369,14 @@
                 "excerpt_sha256": "sha256:45003979185a77e96d8641a0171e8080c5826b06a17b1fab4d397cf77c23fee0",
                 "fact_type": "source_statement",
                 "observation": "Le test de 1NSI-ADGK-CO-002 confirme que 23 est présent mais que la dichotomie renvoie -1 sur cette entrée non triée."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-002.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:5e3c46952793688b3b846a2852bba4882b53e9d132ff5fad73d95c79fedb8334",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-CO-002 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -401,6 +417,14 @@
                 "excerpt_sha256": "sha256:dc2bf824477b90bc1ab8b646b765795aab53ed1afaef2d2119774c871053ad8f",
                 "fact_type": "source_statement",
                 "observation": "L'assertion de 1NSI-ADGK-CO-003 vérifie exactement les quatre pièces obtenues pour le montant 63."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-003.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:1dfe7219923bb5947ec9c18c176d7259b1710f5db6427bd54d570d9f1410305c",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-CO-003 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -441,6 +465,14 @@
                 "excerpt_sha256": "sha256:f8fa27b50e0853c7c1d7da39a6016ce97335bf97d0e59711ebe82ce9a9de49d8",
                 "fact_type": "source_statement",
                 "observation": "Le jeu de données de 1NSI-ADGK-CO-004 conduit fraîchement à la classe Pomme pour le point de coordonnées 145 et 8."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-004.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:2abe769c707903de301a0d30720267a89987fd11e5aef224435d6edd35266c32",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-CO-004 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -481,6 +513,14 @@
                 "excerpt_sha256": "sha256:9ef8b4173b03349a66324d767989d7d57cb05d6166d6918562cef30dafdf56fa",
                 "fact_type": "source_statement",
                 "observation": "Les contrôles de 1NSI-ADGK-CO-005 démontrent que le choix X de valeur 30 est dominé par la combinaison de valeur 40."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/corriges/1NSI-ADGK-CO-005.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:5332a6c340323f83f469ca8ca433244603c68954ecc39f3de064a2bb3636e46d",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-CO-005 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -521,6 +561,14 @@
                 "excerpt_sha256": "sha256:b1e7f8563108d568b018047ac6e3fefe1b261ad18674c54ee2c544b761edad04",
                 "fact_type": "source_statement",
                 "observation": "Le cours 1NSI-ADGK-COURS-C1 met à jour les bornes avec plus ou moins un et contrôle sur plusieurs cas la décroissance du variant."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C1.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:d3783523db8dfebeb09842a2629f2f6d824153e3a54a6f47539b3fd86abc37e1",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-COURS-C1 passe avec le check_digest exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd."
               }
             ],
             "anomaly_ids": []
@@ -551,72 +599,45 @@
       "payload": {
         "dimensions": {
           "scientific": {
-            "verdict": "issue",
-            "justification": "Le corps du cours expose correctement les limites du glouton, mais la docstring promet à tort un nombre minimal pour toute liste de pièces.",
+            "verdict": "pass",
+            "justification": "La fonction décrit désormais le choix glouton sans promettre un optimum général, puis le cours fournit un contre-exemple correct.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex",
-                "line_start": 14,
-                "line_end": 47,
-                "excerpt_sha256": "sha256:22cb1c2af7907a63fcf04be70af0ac0d2c45b0cde56211bebdaa68aa7f4731d5",
+                "line_start": 10,
+                "line_end": 17,
+                "excerpt_sha256": "sha256:dc90f3675c9814a74f9deab9cc8ef862bdae94b040c7c3e2f1788e9ff3c578e7",
                 "fact_type": "source_statement",
-                "observation": "Dans 1NSI-ADGK-COURS-C2, la fonction est documentée comme minimale alors que la propriété suivante précise que l'optimalité n'est pas garantie."
+                "observation": "Dans 1NSI-ADGK-COURS-C2, l'exemple vise explicitement peu de pièces et la docstring décrit seulement l'ordre des choix."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:e67f8b80405ba979dcb78d68d7e22bbb8c9452a96d77216abc4c47ebe5a6b31d",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-COURS-C2 passe avec le check_digest exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd."
               }
             ],
-            "anomaly_ids": [
-              "1NSI-REV-ADGK-C2-DOCSTRING-OPTIMALITE"
-            ]
+            "anomaly_ids": []
           },
           "pedagogical": {
-            "verdict": "issue",
-            "justification": "L'exemple et le contre-exemple sont utiles, mais la contradiction immédiate entre la documentation du code et le texte fragilise le modèle conceptuel.",
+            "verdict": "pass",
+            "justification": "La progression distingue sans contradiction choix local, absence de garantie générale et cas particulier du système en euros.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex",
-                "line_start": 14,
+                "line_start": 44,
                 "line_end": 54,
-                "excerpt_sha256": "sha256:8d8df36aa77eb706667e3d8ff22be444a31599dbfb2c9d65177b36704233c384",
+                "excerpt_sha256": "sha256:3fb2829811bbd792badca939332118d0f4133d802f7bfe3e20751bb327c4d46a",
                 "fact_type": "pedagogical_structure",
-                "observation": "Le lecteur de 1NSI-ADGK-COURS-C2 reçoit d'abord une garantie absolue dans le code puis un contre-exemple explicite quelques lignes plus loin."
+                "observation": "La propriété et le contre-exemple de 1NSI-ADGK-COURS-C2 opposent clairement solution gloutonne et solution optimale."
               }
             ],
-            "anomaly_ids": [
-              "1NSI-REV-ADGK-C2-CONTRADICTION"
-            ]
+            "anomaly_ids": []
           }
         },
-        "anomalies": [
-          {
-            "id": "1NSI-REV-ADGK-C2-DOCSTRING-OPTIMALITE",
-            "severity": "P0",
-            "dimension": "scientific",
-            "fact": {
-              "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex",
-              "line_start": 16,
-              "line_end": 17,
-              "excerpt_sha256": "sha256:03379b9362c4faf54f80ca6c04963f4e2fdca5c866b3de58746fd6097bbd6cef",
-              "fact_type": "source_statement",
-              "observation": "La docstring affirme que rendu_glouton utilise le moins de pièces possible sans restreindre le système de pièces."
-            },
-            "consequence": "Une propriété fausse est attachée au code de référence et peut être retenue comme spécification générale.",
-            "expected_action": "Remplacer la promesse par une description du choix glouton et réserver l'optimalité aux systèmes pour lesquels elle est démontrée."
-          },
-          {
-            "id": "1NSI-REV-ADGK-C2-CONTRADICTION",
-            "severity": "P1",
-            "dimension": "pedagogical",
-            "fact": {
-              "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C2.tex",
-              "line_start": 14,
-              "line_end": 47,
-              "excerpt_sha256": "sha256:22cb1c2af7907a63fcf04be70af0ac0d2c45b0cde56211bebdaa68aa7f4731d5",
-              "fact_type": "pedagogical_structure",
-              "observation": "Le même objet garantit d'abord le minimum dans la documentation puis nie toute garantie générale dans la propriété suivante."
-            },
-            "consequence": "Deux messages incompatibles empêchent l'élève de savoir quelle propriété associer à la fonction publiée.",
-            "expected_action": "Aligner docstring, exemple et propriété autour d'une formulation unique distinguant résultat glouton et optimum."
-          }
-        ]
+        "anomalies": []
       }
     },
     {
@@ -636,6 +657,14 @@
                 "excerpt_sha256": "sha256:aa6a844ac48cae2e49bc8d09ae7c2a7b93a4656df31dacd9e5d443aa1f9ecd01",
                 "fact_type": "source_statement",
                 "observation": "La fonction 1NSI-ADGK-COURS-C3 applique max à un ensemble de classes sans stratégie de départage, malgré la discussion ultérieure sur le choix de k."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/cours/1NSI-ADGK-COURS-C3.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:0f393a860a4575060a4804551d29489ec00465872b9e3ede9a72e048e85368c2",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-COURS-C3 passe avec le check_digest exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077."
               }
             ],
             "anomaly_ids": [
@@ -694,6 +723,14 @@
                 "excerpt_sha256": "sha256:3e94af214536910074849a0fbd74fde09750ca21f1b6ae064bf88c4e3173d9bf",
                 "fact_type": "source_statement",
                 "observation": "Les vérifications de 1NSI-ADGK-EVAL-A confirment l'indice 4, le rendu 20+20+5+2 et le vote Chat pour k égal à 3."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:52c49650d683b2fc799c540193083456be50d15aeb04972bd0c54a4295c9ceee",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EVAL-A passe avec le check_digest exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd."
               }
             ],
             "anomaly_ids": []
@@ -734,6 +771,14 @@
                 "excerpt_sha256": "sha256:cedcdd00c8bdc758205ea2b14cdaa267a452e40cd5e21bfa6bb70ce7ff708b3a",
                 "fact_type": "source_statement",
                 "observation": "Le calcul lié à 1NSI-ADGK-EVAL-A-corrige exécute les distances de l'évaluation et confirme la classe Chat annoncée."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-A-corrige.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:57567308ab139cd090b5e939772c91ecbc76a0e8640a5d1d15a0d4e6fc0a03fa",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EVAL-A-corrige passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -774,6 +819,14 @@
                 "excerpt_sha256": "sha256:688f6239346a656c7fe79f23f0760010687496db3b8dc6d1bd25ca6a7f9c5e0c",
                 "fact_type": "source_statement",
                 "observation": "Les contrôles de 1NSI-ADGK-EVAL-B valident l'indice 4, cinq pièces totalisant 38 et la classe Iris des trois voisins."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:acb2fa429672b3a6f4a123954e4ab0fa0f5fcbb59b7c0531356a59b9559346da",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EVAL-B passe avec le check_digest exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd."
               }
             ],
             "anomaly_ids": []
@@ -814,6 +867,14 @@
                 "excerpt_sha256": "sha256:a81232e7ff9112903be0a59ff682245d5be6e6314557c57c1527ad0285f5649f",
                 "fact_type": "source_statement",
                 "observation": "Le bloc associé à 1NSI-ADGK-EVAL-B-corrige classe effectivement le point 5,1 et 1,5 parmi les Iris."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/evaluations/1NSI-ADGK-EVAL-B-corrige.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:6add9c08ff4ae096f37a7d26580c575f0d4c22539168e8e86548188c3e1a7cf0",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EVAL-B-corrige passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -854,6 +915,14 @@
                 "excerpt_sha256": "sha256:e5f8bb81afe737914cd8cec23c65d0fb384702564d8ba764131eb53449394254",
                 "fact_type": "source_statement",
                 "observation": "Le test intégré à 1NSI-ADGK-EX-001 retrouve 23 à l'indice 5 dans le tableau trié de dix éléments."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-001.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:672dcf6bdfc030fd490d2ee1cdf780e638a9d28f1343b04f2512d6e57c56486b",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EX-001 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -894,6 +963,14 @@
                 "excerpt_sha256": "sha256:458c8ed37623d9a0278ab455005700eee79c6e151b4931461d5505eb0640159f",
                 "fact_type": "source_statement",
                 "observation": "Les assertions de 1NSI-ADGK-EX-002 établissent simultanément la présence de 23 et le retour -1 de l'algorithme mal appliqué."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-002.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:ec6da471af9fcb49269dc518a973a6d267b62c6431290fed5529a2103574b3c1",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EX-002 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -934,6 +1011,14 @@
                 "excerpt_sha256": "sha256:daa4baf078b0bf56e67d63ba88ee1bc3bf5fe61c71e774d52f23bf93b7f041f5",
                 "fact_type": "source_statement",
                 "observation": "Le bloc de 1NSI-ADGK-EX-003 vérifie la liste 50, 10, 2, 1 ainsi que son total égal à 63."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-003.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:adb83cd104fc8281232368b056e3ddae31135b002e518f202856eb626acba9e0",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EX-003 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -974,6 +1059,14 @@
                 "excerpt_sha256": "sha256:6ab65509deef22bb849200468cdfc8db91f9070b62175368c3f3f7803b35eebb",
                 "fact_type": "source_statement",
                 "observation": "L'exécution de 1NSI-ADGK-EX-004 confirme la majorité Pomme parmi les trois plus proches voisins du fruit 145 et 8."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-004.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:fd1881f33f1a3e91e2e85bb415390cd4b9999a3539da283965b04271ecaece68",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EX-004 passe avec le check_digest exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077."
               }
             ],
             "anomaly_ids": []
@@ -1014,6 +1107,14 @@
                 "excerpt_sha256": "sha256:73314d69d111b0023114e54327c3a25f1e4630ef25dc9ff9e4234ae3b2e369c0",
                 "fact_type": "source_statement",
                 "observation": "Le contrôle de 1NSI-ADGK-EX-005 établit que l'algorithme retient seulement X avec une valeur totale de 30."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/exercices/1NSI-ADGK-EX-005.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:f83fbd7e7abf3b25322e97bb044859ddcdcbcb38f756097d93dc59cdfcae1c33",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-EX-005 passe avec le check_digest exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077."
               }
             ],
             "anomaly_ids": []
@@ -1054,6 +1155,14 @@
                 "excerpt_sha256": "sha256:e1cdebbe0e7ecd472f41bc38ae6595a86cc5e957351654e7aad5b8ac9d866efb",
                 "fact_type": "source_statement",
                 "observation": "La vérification de 1NSI-ADGK-RE-C1 détecte trois variants finaux égaux avant de confirmer le retour -1 de la version corrigée."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/remediation/1NSI-ADGK-RE-C1.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:cddc4ec6286042d11547e859bb774e35a13b185bc228fc013483587fb4dd037f",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-ADGK-RE-C1 passe avec le check_digest exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077."
               }
             ],
             "anomaly_ids": []
@@ -1136,64 +1245,6 @@
       }
     },
     {
-      "id": "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM",
-      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
-      "scope": "object",
-      "payload": {
-        "dimensions": {
-          "scientific": {
-            "verdict": "pass",
-            "justification": "Les six questions ont une réponse disciplinaire identifiable sur tri, variant, glouton et k-NN.",
-            "facts": [
-              {
-                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
-                "line_start": 11,
-                "line_end": 75,
-                "excerpt_sha256": "sha256:0382e1ab8bbc568b58ab228ca125d0095b00bb0a865cde411e1ef15fbb578d24",
-                "fact_type": "source_statement",
-                "observation": "Le QCM 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM distingue correctement terminaison et correction, puis choix local et majorité des voisins."
-              }
-            ],
-            "anomaly_ids": []
-          },
-          "pedagogical": {
-            "verdict": "issue",
-            "justification": "L'objet se présente comme auto-évaluation mais ne fournit ni clé ni rétroaction permettant à l'élève de se situer.",
-            "facts": [
-              {
-                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
-                "line_start": 3,
-                "line_end": 77,
-                "excerpt_sha256": "sha256:9f584ccfbf4ee384844966cd767f104775d5ef48f3c21fa3862be811f68f9f05",
-                "fact_type": "pedagogical_structure",
-                "observation": "Après les six items du QCM 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM, le fichier se termine sans réponses ni renvoi vers un corrigé."
-              }
-            ],
-            "anomaly_ids": [
-              "1NSI-REV-ADGK-QCM-SANS-CLE"
-            ]
-          }
-        },
-        "anomalies": [
-          {
-            "id": "1NSI-REV-ADGK-QCM-SANS-CLE",
-            "severity": "P1",
-            "dimension": "pedagogical",
-            "fact": {
-              "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
-              "line_start": 3,
-              "line_end": 77,
-              "excerpt_sha256": "sha256:9f584ccfbf4ee384844966cd767f104775d5ef48f3c21fa3862be811f68f9f05",
-              "fact_type": "pedagogical_structure",
-              "observation": "Le QCM est intitulé auto-évaluation mais aucune réponse ni rétroaction ne suit les six items."
-            },
-            "consequence": "L'élève ne peut ni calculer sa maîtrise ni être orienté vers une remédiation.",
-            "expected_action": "Ajouter une clé séparée de la version élève immédiate, un mécanisme de correction et des renvois de remédiation."
-          }
-        ]
-      }
-    },
-    {
       "id": "1NSI-AGT-CO-001",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "scope": "object",
@@ -1210,6 +1261,14 @@
                 "excerpt_sha256": "sha256:2aae1b7b6a242265846b1ff7ae0547f3ad05d213301b773b5e6ca551f46ffc5d",
                 "fact_type": "source_statement",
                 "observation": "Les assertions de 1NSI-AGT-CO-001 confirment le minimum 1 et le quotient 33 sur 5."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-001.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:775b958611763403482738a8c577c186a6ce00822194b56573f229b02d31b57b",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-CO-001 passe avec le check_digest exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077."
               }
             ],
             "anomaly_ids": []
@@ -1250,6 +1309,14 @@
                 "excerpt_sha256": "sha256:aa50acfcaf5a9bcf06f5d39e3b4269881145f69d9d71afd65a948192456909cb",
                 "fact_type": "source_statement",
                 "observation": "Le contrôle de 1NSI-AGT-CO-002 obtient 0, 2, 3 pour la valeur 3 et aucune position pour la valeur 5."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-002.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:e82592650d976537d5a11633b6c4a6658b8d214d50f04df7862d1b17abdd7e05",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-CO-002 passe avec le check_digest exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077."
               }
             ],
             "anomaly_ids": []
@@ -1290,6 +1357,14 @@
                 "excerpt_sha256": "sha256:bcce0783488fdfb2669e3e2b8b96e709351d7940ee4a315c62d92131a0ccf25c",
                 "fact_type": "source_statement",
                 "observation": "L'assertion de 1NSI-AGT-CO-003 confirme le résultat croissant à partir de 4, 2, 7, 1."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-003.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:48e273a48b001796af928a7d5954d3056e03c3bcfe293c06e0f3379ae0ce7ce9",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-CO-003 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1330,6 +1405,14 @@
                 "excerpt_sha256": "sha256:1f44577325ef839171a50002722b0cbd5356f451af340fa4b23560329868d5ed",
                 "fact_type": "source_statement",
                 "observation": "Le bloc de 1NSI-AGT-CO-004 valide l'échange du minimum jusqu'au tableau croissant final."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-004.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:9a987e3b31d6f9b1a74289f35e7d46ec8cd4fc35c8f38910ec9bf2d58d4e55e6",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-CO-004 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1370,6 +1453,14 @@
                 "excerpt_sha256": "sha256:f712906f099c53eb7f22df489ce8dd3ecbb74a0112a046845a8a905c830ff1d7",
                 "fact_type": "source_statement",
                 "observation": "Les assertions de 1NSI-AGT-CO-005 fixent les nombres de comparaisons des deux tris pour vingt éléments déjà ordonnés."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/corriges/1NSI-AGT-CO-005.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:b5a776bc7fac21d15fc515e920218c3d7a1de9cba10d4ddf8c4aed3021180ff9",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-CO-005 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1410,6 +1501,14 @@
                 "excerpt_sha256": "sha256:fde957bc2d961511e8694cd231d628d16c9e8124a4bcb2b4b5753bb7b1c321ae",
                 "fact_type": "source_statement",
                 "observation": "Dans 1NSI-AGT-COURS-C1, moyenne se réduit à sum(tableau) divisé par len(tableau), sans accumulateur enseigné ou testé."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C1.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:2d173b96539ec6eac11a0de38aab2afd36bc1067be9f6ca1be53f3e4adba09c9",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-COURS-C1 passe avec le check_digest exact sha256:bc2ad11b86734b3fe5af9ebc8d460d56fffc2cde8d492aeeeb28c51b4a953520."
               }
             ],
             "anomaly_ids": [
@@ -1458,55 +1557,45 @@
       "payload": {
         "dimensions": {
           "scientific": {
-            "verdict": "issue",
-            "justification": "L'algorithme, le coût et l'invariant sont corrects, mais la justification de terminaison affirme faussement que j est borné par 0.",
+            "verdict": "pass",
+            "justification": "La terminaison traite les tailles 0 et 1 et utilise le variant positif j+1 jusqu'à la valeur terminale j=-1.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex",
                 "line_start": 45,
-                "line_end": 72,
-                "excerpt_sha256": "sha256:0fc1ede95f9a91db6743b34a79ff340883f7796de6cbe1aa67115f9f1ec77048",
+                "line_end": 54,
+                "excerpt_sha256": "sha256:b9e79e9d037c5c6b180bbde747c378874370a171a4f4bf78d47c0962defcc473",
                 "fact_type": "source_statement",
-                "observation": "La preuve de 1NSI-AGT-COURS-C2 dit que j décroît en restant borné par 0 alors que l'exécution valide atteint j égal à -1."
+                "observation": "La preuve locale de 1NSI-AGT-COURS-C2 borne la boucle externe par max(n-1,0) et la boucle interne par le variant j+1."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:2b79de52d2ba11b2c3858fd8cc5cfbef9dcc9580ab7334c3e452f9e49d702ae8",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-COURS-C2 passe avec le check_digest exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd."
               }
             ],
-            "anomaly_ids": [
-              "1NSI-REV-AGT-C2-BORNE-TERMINAISON"
-            ]
+            "anomaly_ids": []
           },
           "pedagogical": {
             "verdict": "pass",
-            "justification": "La démonstration suit initialisation, conservation et conclusion, puis fait expérimenter l'invariant avec des assertions.",
+            "justification": "Invariant, initialisation, conservation et terminaison sont séparés, avec une conclusion conditionnée correctement par la taille.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex",
-                "line_start": 54,
-                "line_end": 102,
-                "excerpt_sha256": "sha256:e9d41518ceba43b15c9acec67bc1d7b0eb516c92d1faabec61f11cc21aac7f8b",
+                "line_start": 56,
+                "line_end": 75,
+                "excerpt_sha256": "sha256:a35a0de8829630940452076081c016308ceb4a224e11ad9149a48b0e8f829c43",
                 "fact_type": "pedagogical_structure",
-                "observation": "Le parcours 1NSI-AGT-COURS-C2 articule le préfixe trié à chaque insertion et demande de réinjecter cette propriété dans une implémentation personnelle."
+                "observation": "La démonstration de 1NSI-AGT-COURS-C2 isole n inférieur ou égal à 1 avant d'utiliser la dernière itération i=n-1."
               }
             ],
             "anomaly_ids": []
           }
         },
-        "anomalies": [
-          {
-            "id": "1NSI-REV-AGT-C2-BORNE-TERMINAISON",
-            "severity": "P0",
-            "dimension": "scientific",
-            "fact": {
-              "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C2.tex",
-              "line_start": 45,
-              "line_end": 51,
-              "excerpt_sha256": "sha256:88264814b291984ff0cab7eb1615ad624b5be78d07338c7f4b7bdc1e55067965",
-              "fact_type": "source_statement",
-              "observation": "Le texte affirme que j décroît strictement et est borné par 0, alors que le code peut décrémenter j jusqu'à -1."
-            },
-            "consequence": "La preuve publiée contient une assertion fausse sur la borne du variant de la boucle interne.",
-            "expected_action": "Corriger la borne inférieure en -1 ou choisir le variant j+1, puis ajouter un test de régression de la preuve sur insertion en tête."
-          }
-        ]
+        "anomalies": []
       }
     },
     {
@@ -1516,19 +1605,29 @@
       "payload": {
         "dimensions": {
           "scientific": {
-            "verdict": "pass",
-            "justification": "Le tri par sélection, sa terminaison, son coût quadratique et son invariant sont cohérents et exécutés.",
+            "verdict": "issue",
+            "justification": "Le code et l'invariant sont corrects, mais la conclusion publiée de la preuve n'est pas définie pour les tableaux de taille 0 ou 1.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
-                "line_start": 29,
-                "line_end": 95,
-                "excerpt_sha256": "sha256:5b17e70ee8bb69dad13344940b0c527d32defb834e9e892df09986efcbde70da",
+                "line_start": 46,
+                "line_end": 75,
+                "excerpt_sha256": "sha256:7ee04ae209bcb740158945dea1924677ee2740e7932e0ef24d21637fe145e574",
                 "fact_type": "source_statement",
-                "observation": "Les vérifications de 1NSI-AGT-COURS-C3 trient quatre cas limites et contrôlent le préfixe inférieur ou égal au suffixe."
+                "observation": "Dans 1NSI-AGT-COURS-C3, les boucles bornées terminent mais la preuve finale omet les deux tailles sans itération externe."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:0778d479abb48c334e9f1e4949733ef708b03fbac19d99209dfe9bc93ed762f3",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-COURS-C3 passe avec le check_digest exact sha256:2ca288011126e74863b256cb182b1353517ae5fdea04d0baa8c8dd4425442cdd."
               }
             ],
-            "anomaly_ids": []
+            "anomaly_ids": [
+              "1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON"
+            ]
           },
           "pedagogical": {
             "verdict": "pass",
@@ -1546,7 +1645,23 @@
             "anomaly_ids": []
           }
         },
-        "anomalies": []
+        "anomalies": [
+          {
+            "id": "1NSI-REV-AGT-C3-CAS-LIMITE-TERMINAISON",
+            "severity": "P0",
+            "dimension": "scientific",
+            "fact": {
+              "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/cours/1NSI-AGT-COURS-C3.tex",
+              "line_start": 72,
+              "line_end": 75,
+              "excerpt_sha256": "sha256:5cec7f94aaddc4f14d237d8709f2fce77154f85f2d2b2e831a3da4475ec61df1",
+              "fact_type": "source_statement",
+              "observation": "La conclusion de 1NSI-AGT-COURS-C3 invoque une dernière itération i=n-2 sans distinguer les cas n=0 et n=1 où cette itération n'existe pas."
+            },
+            "consequence": "La preuve générale attribue une dernière itération inexistante aux tableaux vides ou réduits à un élément.",
+            "expected_action": "Traiter séparément n inférieur ou égal à 1, puis réserver la dernière itération i=n-2 au cas n supérieur ou égal à 2 et ajouter un test de régression."
+          }
+        ]
       }
     },
     {
@@ -1566,6 +1681,14 @@
                 "excerpt_sha256": "sha256:1e1c6afd9b698fafc76e92b4ddec56d8f1bc02d8b8119d22313b94d7fcce460a",
                 "fact_type": "source_statement",
                 "observation": "Les contrôles de 1NSI-AGT-EVAL-A valident l'indice 3, le maximum 30, la moyenne 17,2 et le tri 2, 4, 6, 9."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:1599ced4e46863c8dfa1079b3041e66aa8d6dbabb8c2f435231c3906556d8b6a",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EVAL-A passe avec le check_digest exact sha256:9ec255e4e449dc8dd87edeb70b318a234f4725456b6bf25ae5b508fac274e164."
               }
             ],
             "anomaly_ids": []
@@ -1624,6 +1747,14 @@
                 "excerpt_sha256": "sha256:1b65cb87e9ad5af24c3f7e31d055edb6e315060e69da818f86bb6de67664ad58",
                 "fact_type": "source_statement",
                 "observation": "Le bloc de 1NSI-AGT-EVAL-A-corrige confirme les trois résultats de parcours et le tableau final de l'insertion."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-A-corrige.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:948a0c6f995c5707800936826af951aca379f99261612ba936cf08e3aa19846a",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EVAL-A-corrige passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1664,6 +1795,14 @@
                 "excerpt_sha256": "sha256:3c5f4787946a81d2657ca66c04e7d6d3c3107c5a65f1158f30b4dc13d94b8c33",
                 "fact_type": "source_statement",
                 "observation": "Les contrôles de 1NSI-AGT-EVAL-B retrouvent l'indice 2, le maximum 40, la moyenne 20 et le tri 1, 4, 7, 9."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:633ebeb3a95d495f61600102ffd97fd40df8515ad8ca372c8aabff63fcbbf34b",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EVAL-B passe avec le check_digest exact sha256:9ec255e4e449dc8dd87edeb70b318a234f4725456b6bf25ae5b508fac274e164."
               }
             ],
             "anomaly_ids": []
@@ -1722,6 +1861,14 @@
                 "excerpt_sha256": "sha256:eba9b009507d4b57bdca22ee5a7605bbd8828d62cb9c28f93ab42ca8f3d288fb",
                 "fact_type": "source_statement",
                 "observation": "Le bloc de 1NSI-AGT-EVAL-B-corrige valide les trois agrégats puis le tableau croissant 1, 4, 7, 9."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/evaluations/1NSI-AGT-EVAL-B-corrige.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:40d8d0ee9005a8a9a632ee62a6954dbec0eaf25f754c04493bb91e2802d3aa3b",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EVAL-B-corrige passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1762,6 +1909,14 @@
                 "excerpt_sha256": "sha256:2aae1b7b6a242265846b1ff7ae0547f3ad05d213301b773b5e6ca551f46ffc5d",
                 "fact_type": "source_statement",
                 "observation": "Le bloc de 1NSI-AGT-EX-001 obtient 1 et 6,6 à partir des cinq notes publiées."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-001.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:be0fb7403d36133d5b752afa3f6bfbe0de87f47bdb0cbc30188b8137f9d8b3f2",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EX-001 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1802,6 +1957,14 @@
                 "excerpt_sha256": "sha256:aa50acfcaf5a9bcf06f5d39e3b4269881145f69d9d71afd65a948192456909cb",
                 "fact_type": "source_statement",
                 "observation": "Les tests de 1NSI-AGT-EX-002 produisent trois indices ordonnés puis la liste vide."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-002.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:b0532532cfa58c7cc5363a83c68774aa73c2e930a4a1b1ab7c5fbd0dc4cd97b5",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EX-002 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1842,6 +2005,14 @@
                 "excerpt_sha256": "sha256:bcce0783488fdfb2669e3e2b8b96e709351d7940ee4a315c62d92131a0ccf25c",
                 "fact_type": "source_statement",
                 "observation": "L'assertion de 1NSI-AGT-EX-003 confirme le résultat 1, 2, 4, 7."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-003.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:c1a23287b2c1f62c374087c910b4969dfea3403ef2735600607658dfc4e450ae",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EX-003 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1882,6 +2053,14 @@
                 "excerpt_sha256": "sha256:1f44577325ef839171a50002722b0cbd5356f451af340fa4b23560329868d5ed",
                 "fact_type": "source_statement",
                 "observation": "Le contrôle de 1NSI-AGT-EX-004 valide le tableau final 2, 3, 6, 8."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-004.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:035e14fe60c440f32aa21b080844bb4788dfd9f80302acad22318a3f876baf6d",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EX-004 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1922,6 +2101,14 @@
                 "excerpt_sha256": "sha256:6ec905a94576782c6f37c5af8070793f9b8be899886e89c6d48472a9c31940cb",
                 "fact_type": "source_statement",
                 "observation": "Les assertions de 1NSI-AGT-EX-005 comparent 19 à 190 sur l'entrée triée puis établissent l'égalité 190 sur l'entrée inverse."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/exercices/1NSI-AGT-EX-005.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:16fac9dedf5acdde0673b71e2ec6d6c71f7558eec9707a4af4309fb09f992935",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-EX-005 passe avec le check_digest exact sha256:49a40db9cccb3ff0a4ce24d58dc5973a5fe9704407aa8d70204ded23a776229f."
               }
             ],
             "anomaly_ids": []
@@ -1962,6 +2149,14 @@
                 "excerpt_sha256": "sha256:6f17b45d9dbbdd415b0f4cde0b3b915a5aa5f090bceb0f5df1759a4bea2badc9",
                 "fact_type": "source_statement",
                 "observation": "La vérification de 1NSI-AGT-RE-C5 reproduit 7, 1, 5, 3, 9 avant d'obtenir 1, 3, 5, 7, 9 après déplacement de l'initialisation."
+              },
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/remediation/1NSI-AGT-RE-C5.tex",
+                "line_start": 1,
+                "line_end": 1,
+                "excerpt_sha256": "sha256:67ce61743ba05e2010ce08eb1fadf4abae35cb6f0fe61967ee4c910eaebef7a8",
+                "fact_type": "computed_result",
+                "observation": "L'exécution fraîche de 1NSI-AGT-RE-C5 passe avec le check_digest exact sha256:09d32e43fcea807550ee3dcb565dec08752780173b6f2a1f8386d45dd69f7077."
               }
             ],
             "anomaly_ids": []
@@ -2026,27 +2221,83 @@
       }
     },
     {
+      "id": "1NSI-ALGO-DICHO-GLOUTON-KNN-QCM",
+      "chapter": "1NSI-ALGO-DICHO-GLOUTON-KNN",
+      "scope": "object",
+      "payload": {
+        "dimensions": {
+          "scientific": {
+            "verdict": "pass",
+            "justification": "Les six questions ont une réponse disciplinaire identifiable sur tri, variant, glouton et k-NN.",
+            "facts": [
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
+                "line_start": 11,
+                "line_end": 75,
+                "excerpt_sha256": "sha256:0382e1ab8bbc568b58ab228ca125d0095b00bb0a865cde411e1ef15fbb578d24",
+                "fact_type": "source_statement",
+                "observation": "Le QCM 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM distingue correctement terminaison et correction, puis choix local et majorité des voisins."
+              }
+            ],
+            "anomaly_ids": []
+          },
+          "pedagogical": {
+            "verdict": "issue",
+            "justification": "L'objet se présente comme auto-évaluation mais ne fournit ni clé ni rétroaction permettant à l'élève de se situer.",
+            "facts": [
+              {
+                "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
+                "line_start": 3,
+                "line_end": 77,
+                "excerpt_sha256": "sha256:9f584ccfbf4ee384844966cd767f104775d5ef48f3c21fa3862be811f68f9f05",
+                "fact_type": "pedagogical_structure",
+                "observation": "Après les six items du QCM 1NSI-ALGO-DICHO-GLOUTON-KNN-QCM, le fichier se termine sans réponses ni renvoi vers un corrigé."
+              }
+            ],
+            "anomaly_ids": [
+              "1NSI-REV-ADGK-QCM-SANS-CLE"
+            ]
+          }
+        },
+        "anomalies": [
+          {
+            "id": "1NSI-REV-ADGK-QCM-SANS-CLE",
+            "severity": "P1",
+            "dimension": "pedagogical",
+            "fact": {
+              "path": "NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/qcm/1NSI-ALGO-DICHO-GLOUTON-KNN-QCM.tex",
+              "line_start": 3,
+              "line_end": 77,
+              "excerpt_sha256": "sha256:9f584ccfbf4ee384844966cd767f104775d5ef48f3c21fa3862be811f68f9f05",
+              "fact_type": "pedagogical_structure",
+              "observation": "Le QCM est intitulé auto-évaluation mais aucune réponse ni rétroaction ne suit les six items."
+            },
+            "consequence": "L'élève ne peut ni calculer sa maîtrise ni être orienté vers une remédiation.",
+            "expected_action": "Ajouter une clé séparée de la version élève immédiate, un mécanisme de correction et des renvois de remédiation."
+          }
+        ]
+      }
+    },
+    {
       "id": "1NSI-ALGO-PARCOURS-TRIS-QCM",
       "chapter": "1NSI-ALGO-PARCOURS-TRIS",
       "scope": "object",
       "payload": {
         "dimensions": {
           "scientific": {
-            "verdict": "issue",
-            "justification": "Cinq items sont univoques, mais la question sur l'initialisation du maximum admet aussi le dernier élément selon le parcours choisi.",
+            "verdict": "pass",
+            "justification": "Q2 possède désormais une seule réponse défendable : le premier élément, les trois autres propositions étant invalides en général.",
             "facts": [
               {
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex",
                 "line_start": 25,
                 "line_end": 33,
-                "excerpt_sha256": "sha256:6808986392aff18ddc07a8e683e1129ce124a9cf884320215034350d098fb083",
+                "excerpt_sha256": "sha256:bd1b538f2caa0fee7e640b41340fdd2fc92d921a3874acf29fa38083a219c2ad",
                 "fact_type": "source_statement",
-                "observation": "Le QCM 1NSI-ALGO-PARCOURS-TRIS-QCM annonce une seule réponse alors que premier et dernier éléments peuvent tous deux initialiser un maximum correct."
+                "observation": "Les quatre options actuelles de Q2 dans 1NSI-ALGO-PARCOURS-TRIS-QCM éliminent l'ancienne initialisation valide par le dernier élément."
               }
             ],
-            "anomaly_ids": [
-              "1NSI-REV-AGT-QCM-Q2-AMBIGU"
-            ]
+            "anomaly_ids": []
           },
           "pedagogical": {
             "verdict": "issue",
@@ -2056,7 +2307,7 @@
                 "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex",
                 "line_start": 3,
                 "line_end": 79,
-                "excerpt_sha256": "sha256:c5988aea66511a743dd983f648893845d7c8fecb1685941bc823e0ac41939409",
+                "excerpt_sha256": "sha256:a25edc607255d24078f9d188aa03535ebd53b5f4deb114ee4bc49aa2e395f359",
                 "fact_type": "pedagogical_structure",
                 "observation": "Le fichier 1NSI-ALGO-PARCOURS-TRIS-QCM se termine après six questions sans corrigé, score ou orientation de remédiation."
               }
@@ -2068,21 +2319,6 @@
         },
         "anomalies": [
           {
-            "id": "1NSI-REV-AGT-QCM-Q2-AMBIGU",
-            "severity": "P0",
-            "dimension": "scientific",
-            "fact": {
-              "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex",
-              "line_start": 25,
-              "line_end": 33,
-              "excerpt_sha256": "sha256:6808986392aff18ddc07a8e683e1129ce124a9cf884320215034350d098fb083",
-              "fact_type": "source_statement",
-              "observation": "Pour un tableau non vide, le dernier élément est aussi une initialisation valide du maximum si les autres éléments sont parcourus."
-            },
-            "consequence": "Deux distracteurs peuvent être défendus alors que l'instruction garantit une seule réponse exacte.",
-            "expected_action": "Préciser que la boucle parcourt tableau[1:] ou remplacer le distracteur dernier élément par une valeur réellement invalide."
-          },
-          {
             "id": "1NSI-REV-AGT-QCM-SANS-CLE",
             "severity": "P1",
             "dimension": "pedagogical",
@@ -2090,7 +2326,7 @@
               "path": "NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/qcm/1NSI-ALGO-PARCOURS-TRIS-QCM.tex",
               "line_start": 3,
               "line_end": 79,
-              "excerpt_sha256": "sha256:c5988aea66511a743dd983f648893845d7c8fecb1685941bc823e0ac41939409",
+              "excerpt_sha256": "sha256:a25edc607255d24078f9d188aa03535ebd53b5f4deb114ee4bc49aa2e395f359",
               "fact_type": "pedagogical_structure",
               "observation": "Le QCM se présente comme auto-évaluation sans fournir réponses, score interprétable ou feedback."
             },

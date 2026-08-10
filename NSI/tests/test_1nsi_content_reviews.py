@@ -28,6 +28,12 @@ FINDINGS_PATH = ROOT / "audit" / "1NSI_CONTENT_REVIEW_FINDINGS.yaml"
 CONTRACT_RECEIPT_PATH = (
     ROOT / "audit" / "reviews" / "1nsi" / "runs" / "2026-08-10-contracts.yaml"
 )
+ALGORITHM_RECEIPT_PATH = (
+    ROOT / "audit" / "reviews" / "1nsi" / "runs" / "2026-08-10-algorithms.yaml"
+)
+SECOND_REVIEWER_ID = "019febc0-6f71-7a92-a196-d579889d7e6e"
+OLD_ALGORITHM_REVIEWER_ID = "019feb71-27c9-7530-ab01-ce74cea1b4a2"
+OLD_ALGORITHM_REVIEW_RUN_ID = "1nsi-objects-algorithms-2026-08-10-bernoulli-v1"
 CONTRACT_RECEIPT_COMMIT = "c5ab5d4607eb38b41e5824561aad1c7a8abcb275"
 CONTRACT_RECEIPT_SHA256 = (
     "sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162"
@@ -2687,6 +2693,215 @@ def test_contract_findings_receipt_is_git_sealed_and_matches_current_dependencie
                 source, sources, ROOT, policy
             ),
         }
+
+
+def test_algorithm_review_receipt_matches_current_sources_before_sealing(
+    policy, sources, review_module
+) -> None:
+    receipt = yaml.safe_load(ALGORITHM_RECEIPT_PATH.read_text(encoding="utf-8"))
+    schema_errors = sorted(
+        Draft202012Validator(
+            review_module._receipt_schema(ROOT),
+            format_checker=review_module.FORMAT_CHECKER,
+        ).iter_errors(receipt),
+        key=lambda error: tuple(str(part) for part in error.path),
+    )
+    assert not schema_errors, schema_errors
+
+    algorithm_chapters = {
+        "1NSI-ALGO-DICHO-GLOUTON-KNN",
+        "1NSI-ALGO-PARCOURS-TRIS",
+    }
+    algorithm_sources = sorted(
+        (
+            source
+            for source in sources
+            if source["scope"] == "object"
+            and source["chapter"] in algorithm_chapters
+        ),
+        key=lambda source: source["id"],
+    )
+    assert len(algorithm_sources) == 40
+    expected_ids = [source["id"] for source in algorithm_sources]
+    expected_assignment = {
+        "scope": "object",
+        "chapters": sorted(algorithm_chapters),
+        "source_ids": expected_ids,
+    }
+    expected_manifest = [
+        {
+            "id": source["id"],
+            "path": source["path"],
+            "source_sha256": _sha(ROOT / source["path"]),
+            "dependency_digest": review_module.compute_dependency_digest(
+                source, sources, ROOT, policy
+            ),
+        }
+        for source in algorithm_sources
+    ]
+    expected_reviews = [
+        {
+            "id": source["id"],
+            "chapter": source["chapter"],
+            "scope": source["scope"],
+        }
+        for source in algorithm_sources
+    ]
+
+    mismatches = []
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+            mismatches.append(message)
+
+    require(
+        receipt["protocol_digest"] == policy["protocol_digest"],
+        "protocol_digest different de la policy courante",
+    )
+    require(
+        receipt["reviewer_id"] == SECOND_REVIEWER_ID,
+        f"reviewer_id attendu: {SECOND_REVIEWER_ID}",
+    )
+    require(
+        receipt["reviewer_id"] != OLD_ALGORITHM_REVIEWER_ID,
+        "le reviewer algorithmique historique ne constitue pas une seconde revue",
+    )
+    require(
+        receipt["reviewer_id"] != policy["integrator_id"],
+        "le reviewer doit etre distinct de l'integrateur",
+    )
+    require(
+        receipt["review_run_id"] != OLD_ALGORITHM_REVIEW_RUN_ID,
+        "le review_run_id historique doit etre remplace",
+    )
+    require(
+        receipt["assignment"] == expected_assignment,
+        "affectation algorithmique incomplete ou non ordonnee",
+    )
+
+    manifest = receipt["source_manifest"]
+    require(
+        manifest["review_tool_sha256"] == _sha(MODULE_PATH),
+        "hash de l'outil de revue obsolete",
+    )
+    require(
+        manifest["execution_checker_sha256"]
+        == _sha(ROOT / "NSI" / "scripts" / "verify_python.py"),
+        "hash du verificateur d'execution obsolete",
+    )
+    require(
+        manifest["execution_common_sha256"]
+        == _sha(ROOT / "NSI" / "scripts" / "common.py"),
+        "hash du support d'execution obsolete",
+    )
+    require(
+        manifest["entries"] == expected_manifest,
+        "manifeste des sources ou dependances algorithmiques obsolete",
+    )
+
+    observed_reviews = [
+        {
+            "id": review["id"],
+            "chapter": review["chapter"],
+            "scope": review["scope"],
+        }
+        for review in receipt["reviews"]
+    ]
+    require(
+        observed_reviews == expected_reviews,
+        "reviews algorithmiques incompletes ou non ordonnees",
+    )
+    require(
+        "TNSI" not in json.dumps(receipt, ensure_ascii=False),
+        "le recu algorithmique contient une reference TNSI",
+    )
+
+    sources_by_id = {source["id"]: source for source in algorithm_sources}
+    seen_observations: dict[tuple[str, str], str] = {}
+    for review in receipt["reviews"]:
+        source = sources_by_id.get(review["id"])
+        if source is None:
+            continue
+        payload = review["payload"]
+        anomalies = payload["anomalies"]
+        anomaly_ids = [anomaly["id"] for anomaly in anomalies]
+        require(
+            len(anomaly_ids) == len(set(anomaly_ids)),
+            f"anomalies dupliquees pour {source['id']}",
+        )
+        allowed_paths = review_module._allowed_fact_paths(
+            source, sources, ROOT, policy
+        )
+        payload_facts = []
+        for dimension_name, dimension in payload["dimensions"].items():
+            expected_anomaly_ids = [
+                anomaly["id"]
+                for anomaly in anomalies
+                if anomaly["dimension"] == dimension_name
+            ]
+            require(
+                dimension["anomaly_ids"] == expected_anomaly_ids,
+                f"liens d'anomalies incoherents pour {source['id']}:{dimension_name}",
+            )
+            require(
+                (dimension["verdict"] == "issue") == bool(expected_anomaly_ids),
+                f"verdict incoherent pour {source['id']}:{dimension_name}",
+            )
+            for fact in dimension["facts"]:
+                payload_facts.append(fact)
+                try:
+                    review_module._validate_fact(fact, allowed_paths, ROOT)
+                except review_module.ReviewValidationError as error:
+                    mismatches.append(f"preuve invalide pour {source['id']}: {error}")
+                normalised = review_module._normalise_observation(
+                    fact["observation"]
+                )
+                key = (source["chapter"], normalised)
+                if normalised and key in seen_observations:
+                    mismatches.append(
+                        "observation normalisee dupliquee: "
+                        f"{seen_observations[key]} / {source['id']}"
+                    )
+                seen_observations[key] = source["id"]
+        for anomaly in anomalies:
+            require(
+                anomaly["dimension"] in payload["dimensions"],
+                f"dimension d'anomalie sans verdict pour {source['id']}",
+            )
+            payload_facts.append(anomaly["fact"])
+            try:
+                review_module._validate_fact(anomaly["fact"], allowed_paths, ROOT)
+            except review_module.ReviewValidationError as error:
+                mismatches.append(
+                    f"preuve d'anomalie invalide pour {source['id']}: {error}"
+                )
+
+        observation = review_module.execution_observation(source, ROOT)
+        if observation is None:
+            continue
+        require(
+            observation["fresh_verdict"] == "pass",
+            f"execution fraiche en echec pour {source['id']}",
+        )
+        require(
+            observation["matches_receipt"] is True,
+            f"recu d'execution divergent pour {source['id']}",
+        )
+        require(
+            observation["anomalies"] == [],
+            f"anomalie d'execution pour {source['id']}: "
+            f"{observation['anomalies']}",
+        )
+        require(
+            any(
+                fact["fact_type"] == "computed_result"
+                and observation["check_digest"] in fact["observation"]
+                for fact in payload_facts
+            ),
+            f"preuve computed_result fraiche absente pour {source['id']}",
+        )
+
+    assert not mismatches, "\n" + "\n".join(mismatches)
 
 
 def test_object_findings_exhaustively_cover_all_339_sources(
