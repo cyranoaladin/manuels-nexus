@@ -1,0 +1,48 @@
+artifact_type: nsi_status_governance
+manual: 1NSI
+decision:
+  id: 1nsi-status-evidence-alignment-2026-08-10
+  date: 2026-08-10
+  human_instruction: traiter separement la gouvernance des 349 statuts
+  publication_approval: false
+  release_acceptance: false
+rules:
+  - source_status: generated
+    evidence: execution_pass
+    target_status: verified
+    count: 163
+  - source_status: generated
+    evidence: execution_manual_review
+    target_status: manual_review
+    count: 7
+  - source_status: generated
+    evidence: execution_receipt_missing
+    target_status: needs_review
+    count: 19
+  - source_status: needs_review
+    evidence: human_review_still_required
+    target_status: needs_review
+    count: 150
+  - source_status: draft
+    scope: contract
+    evidence: human_review_still_required
+    target_status: draft
+    count: 10
+expected_final:
+  objects:
+    manual_review: 7
+    needs_review: 169
+    verified: 163
+  contracts:
+    draft: 10
+  blocking_statuses: 349
+prohibited_transitions:
+  - approved
+  - ready
+  - rejected
+rationale: >-
+  Un recu verify_python.py prouve uniquement l'execution du code publie. Il ne
+  constitue ni une revue scientifique complete, ni une revue pedagogique, ni
+  une approbation de publication. Les objets sans preuve d'execution et les
+  objets deja soumis a revue humaine restent needs_review; les contrats restent
+  draft.
