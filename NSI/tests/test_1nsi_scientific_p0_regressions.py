@@ -22,6 +22,13 @@ MINIMUM_REMEDIATION = (
     NSI_ROOT / "chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex"
 )
 MINIMUM_SOURCE = NSI_ROOT / "chapitres/1NSI-LANGAGE/code/minimum.py"
+AVANCEMENT_COURSE = (
+    NSI_ROOT
+    / "chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C2.tex"
+)
+AVANCEMENT_SOURCE = (
+    NSI_ROOT / "chapitres/1NSI-PROJET-METHODES/code/avancement.py"
+)
 REVIEW_SCRIPT = REPO_ROOT / "scripts/review_1nsi_content.py"
 
 _REVIEW_SPEC = importlib.util.spec_from_file_location(
@@ -277,3 +284,93 @@ def test_minimum_remediation_states_nonempty_precondition_and_matches_answer() -
             + hashlib.sha256(source_code.encode("utf-8")).hexdigest(),
         }
     ]
+
+
+def test_avancement_canonical_source_rejects_empty_milestones() -> None:
+    assert AVANCEMENT_COURSE.is_file()
+    assert AVANCEMENT_SOURCE.is_file()
+
+    stdout = io.StringIO()
+    with contextlib.redirect_stdout(stdout):
+        namespace = runpy.run_path(str(AVANCEMENT_SOURCE))
+    assert stdout.getvalue() == "40.0\nFonctionnalites completes\n"
+
+    avancement = namespace["avancement"]
+    prochain_jalon = namespace["prochain_jalon"]
+    assert avancement.__doc__ is not None
+    assert "Precondition : la liste contient au moins un jalon." in avancement.__doc__
+    assert avancement(namespace["jalons"]) == 40.0
+    assert avancement([{"nom": "Debut", "termine": False}]) == 0.0
+    assert avancement([{"nom": "Fin", "termine": True}]) == 100.0
+    with pytest.raises(AssertionError) as error:
+        avancement([])
+    assert str(error.value) == "au moins un jalon est requis"
+    assert prochain_jalon(namespace["jalons"]) == "Fonctionnalites completes"
+    assert [jalon["nom"] for jalon in namespace["jalons"]] == [
+        "Cahier des charges",
+        "Prototype minimal",
+        "Fonctionnalites completes",
+        "Tests et correction de bugs",
+        "Presentation finale",
+    ]
+
+    source_code = AVANCEMENT_SOURCE.read_text(encoding="utf-8")
+    assert source_code.isascii()
+    tex = AVANCEMENT_COURSE.read_text(encoding="utf-8")
+    sequence = re.compile(
+        r"(?m)^% PYTHON-SOURCE: code/avancement\.py\n"
+        r"\\begin\{python\}(?P<python>.*?)\\end\{python\}\n\n"
+        r"\\begin\{console\}(?P<console>.*?)\\end\{console\}",
+        re.DOTALL,
+    )
+    matches = list(sequence.finditer(tex))
+    assert len(matches) == 1, "la sequence Python marquee doit etre unique"
+    assert matches[0].group("python") == f"\n{source_code}"
+    assert matches[0].group("console") == f"\n{stdout.getvalue()}"
+
+    course_record = {
+        "id": "1NSI-PM-COURS-C2",
+        "path": (
+            "NSI/chapitres/1NSI-PROJET-METHODES/cours/"
+            "1NSI-PM-COURS-C2.tex"
+        ),
+        "metadata": {},
+        "scope": "object",
+        "chapter": "1NSI-PROJET-METHODES",
+    }
+    manifest = review_module.dependency_manifest(
+        course_record, [course_record], REPO_ROOT
+    )
+    assert manifest["python"] == [
+        {
+            "path": (
+                "NSI/chapitres/1NSI-PROJET-METHODES/code/avancement.py"
+            ),
+            "sha256": "sha256:"
+            + hashlib.sha256(source_code.encode("utf-8")).hexdigest(),
+        }
+    ]
+
+    assert r"\textbf{Précondition : la liste des jalons est non vide.}" in tex
+    assert "# 40.0" not in tex
+    assert "# Fonctionnalites completes" not in tex
+    verify_matches = list(
+        re.finditer(
+            r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY", tex, re.DOTALL
+        )
+    )
+    assert len(verify_matches) == 1
+    verify_code = _uncomment(verify_matches[0].group("verify"))
+    assert verify_code.count(source_code.rstrip("\n")) == 1
+    assert "assert avancement(jalons) == 40.0" in verify_code
+    assert "assert avancement(jalons_non_commences) == 0.0" in verify_code
+    assert "assert avancement(jalons_termines) == 100.0" in verify_code
+    assert re.search(
+        r"try:\n"
+        r"    avancement\(\[\]\)\n"
+        r"except AssertionError as erreur:\n"
+        r'    assert str\(erreur\) == "au moins un jalon est requis"\n'
+        r"else:\n"
+        r"    raise AssertionError",
+        verify_code,
+    )
