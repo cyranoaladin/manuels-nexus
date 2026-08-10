@@ -25,7 +25,16 @@ print(grille[0])
   \item Expliquer pourquoi \lstinline{grille[0][0]} vaut \lstinline{99} alors qu'on
         a modifié \lstinline{copie}.
   \item On parle de \textbf{copie superficielle}. Qu'est-ce que cela signifie ?
-  \item Proposer une façon de créer une copie profonde de la grille (sans utiliser
-        le module \lstinline{copy}).
+  \item On suppose désormais que les cellules sont des valeurs scalaires atomiques
+        non mutables, sans conteneur imbriqué. Écrire une fonction
+        \lstinline{copier_grille_deux_niveaux(grille)} qui réalise une
+        \textbf{copie des deux premiers niveaux}. Sa garantie est limitée aux
+        modifications de la structure externe, aux remplacements de lignes et aux
+        réaffectations de cellules dans la copie, qui ne doivent pas modifier la
+        grille d'origine.
+  \item Hors de cette précondition, analyser le contre-exemple
+        \lstinline{[[[1]]]}. Expliquer pourquoi la cellule-liste reste partagée
+        entre l'original et la copie.
 \end{enumerate}
+% PYTHON-SOURCE: code/copier_grille_deux_niveaux.py
 \end{exercice}

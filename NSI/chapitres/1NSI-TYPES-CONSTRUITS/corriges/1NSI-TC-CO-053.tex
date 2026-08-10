@@ -6,11 +6,31 @@
 % assert grille[0][0] == 99
 % copie[0] = [10, 20]
 % assert grille[0] == [99, 2]
-% # Copie profonde sans module copy
+% def copier_grille_deux_niveaux(grille):
+%     """Copie la liste externe et chaque ligne.
+%
+%     Precondition : les cellules sont des valeurs scalaires atomiques non mutables,
+%     sans conteneur imbrique.
+%     """
+%     return [list(ligne) for ligne in grille]
 % grille2 = [[1, 2], [3, 4]]
-% copie_profonde = [list(ligne) for ligne in grille2]
-% copie_profonde[0][0] = 99
-% assert grille2[0][0] == 1
+% copie_deux_niveaux = copier_grille_deux_niveaux(grille2)
+% assert copie_deux_niveaux is not grille2
+% assert all(
+%     ligne_copie is not ligne
+%     for ligne_copie, ligne in zip(copie_deux_niveaux, grille2)
+% )
+% copie_deux_niveaux.append([5, 6])
+% assert grille2 == [[1, 2], [3, 4]]
+% copie_deux_niveaux[1] = [10, 20]
+% assert grille2 == [[1, 2], [3, 4]]
+% copie_deux_niveaux[0][0] = 99
+% assert grille2 == [[1, 2], [3, 4]]
+% hors_contrat = [[[1]]]
+% copie_hors_contrat = copier_grille_deux_niveaux(hors_contrat)
+% assert copie_hors_contrat[0][0] is hors_contrat[0][0]
+% copie_hors_contrat[0][0].append(2)
+% assert hors_contrat == [[[1, 2]]]
 % END-VERIFY
 \begin{corrige}{1NSI-TC-EX-053}
 \begin{enumerate}
@@ -24,10 +44,27 @@
 
   \item Une \textbf{copie superficielle} duplique la structure de premier niveau (la liste externe) mais pas les objets contenus. Les sous-listes ne sont pas copiées : elles restent partagées entre l'original et la copie. La ligne \lstinline{copie[0] = [10, 20]} remplace la référence dans \lstinline{copie} sans toucher \lstinline{grille}, mais une modification \emph{à l'intérieur} d'une sous-liste partagée affecte les deux.
 
-  \item On peut créer une copie profonde avec une liste en compréhension :
+  \item Sous la précondition que les cellules sont des valeurs scalaires atomiques
+        non mutables, sans conteneur imbriqué, la fonction suivante réalise une
+        \textbf{copie des deux premiers niveaux} :
+% PYTHON-SOURCE: code/copier_grille_deux_niveaux.py
 \begin{python}
-copie_profonde = [list(ligne) for ligne in grille]
+def copier_grille_deux_niveaux(grille):
+    """Copie la liste externe et chaque ligne.
+
+    Precondition : les cellules sont des valeurs scalaires atomiques non mutables,
+    sans conteneur imbrique.
+    """
+    return [list(ligne) for ligne in grille]
 \end{python}
-Chaque sous-liste est copiée individuellement, donc aucune modification de \lstinline{copie_profonde} n'affecte \lstinline{grille}.
+La garantie est limitée aux modifications de la structure externe, aux
+remplacements de lignes et aux réaffectations de cellules dans la copie : la
+liste externe et chaque ligne sont distinctes de celles de la grille d'origine.
+
+  \item Hors contrat, pour \lstinline{[[[1]]]}, la cellule est elle-même une liste
+        mutable. La liste externe et la ligne sont copiées, mais la cellule-liste
+        reste partagée. Ajouter une valeur dans cette cellule par la copie modifie
+        donc aussi la grille d'origine. La fonction ne fournit pas de garantie
+        générale sur des niveaux plus profonds.
 \end{enumerate}
 \end{corrige}
