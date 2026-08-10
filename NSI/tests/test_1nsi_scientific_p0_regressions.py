@@ -594,7 +594,9 @@ def test_server_code_is_normally_not_sent_in_http_response() -> None:
     assert "réponse HTTP destinée au navigateur" in property_text
     assert "l'utilisateur ne voit jamais ce code" not in property_text
     assert "publiées ou divulguées par une autre voie" in property_text
+    assert "distinct de leur transmission par le protocole HTTP" not in property_text
     assert (
-        "cet accès éventuel est distinct de leur transmission par le protocole HTTP"
+        "cet accès éventuel ne signifie pas qu'elles figurent dans la réponse HTTP "
+        "générée par leur exécution"
         in property_text
     )
