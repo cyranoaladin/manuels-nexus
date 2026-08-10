@@ -29,6 +29,14 @@ AVANCEMENT_COURSE = (
 AVANCEMENT_SOURCE = (
     NSI_ROOT / "chapitres/1NSI-PROJET-METHODES/code/avancement.py"
 )
+WEIGHTED_MEAN_COURSE = (
+    NSI_ROOT
+    / "chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex"
+)
+WEIGHTED_MEAN_SOURCE = (
+    NSI_ROOT
+    / "chapitres/1NSI-PROJET-METHODES/code/moyenne_ponderee.py"
+)
 REVIEW_SCRIPT = REPO_ROOT / "scripts/review_1nsi_content.py"
 
 _REVIEW_SPEC = importlib.util.spec_from_file_location(
@@ -374,3 +382,99 @@ def test_avancement_canonical_source_rejects_empty_milestones() -> None:
         r"    raise AssertionError",
         verify_code,
     )
+
+
+def test_weighted_mean_rejects_negative_and_zero_sum_weights() -> None:
+    assert WEIGHTED_MEAN_COURSE.is_file()
+    assert WEIGHTED_MEAN_SOURCE.is_file()
+
+    stdout = io.StringIO()
+    with contextlib.redirect_stdout(stdout):
+        namespace = runpy.run_path(str(WEIGHTED_MEAN_SOURCE))
+    assert stdout.getvalue() == ""
+
+    moyenne_ponderee = namespace["moyenne_ponderee"]
+    assert moyenne_ponderee([12, 15], [1, 3]) == 14.25
+
+    invalid_cases = [
+        (
+            [12, 15, 18],
+            [1, 2],
+            "valeurs et poids doivent avoir la meme longueur",
+        ),
+        ([12, 15], [1, -0.5], "les poids doivent etre non negatifs"),
+        ([12, 15], [0, 0], "la somme des poids doit etre strictement positive"),
+        ([], [], "la somme des poids doit etre strictement positive"),
+    ]
+    for valeurs, poids, message in invalid_cases:
+        with pytest.raises(AssertionError) as error:
+            moyenne_ponderee(valeurs, poids)
+        assert str(error.value) == message
+
+    source_code = WEIGHTED_MEAN_SOURCE.read_text(encoding="utf-8")
+    assert source_code.isascii()
+    assertions = [
+        line.strip()
+        for line in source_code.splitlines()
+        if line.strip().startswith("assert ")
+    ]
+    assert assertions == [
+        'assert len(valeurs) == len(poids), "valeurs et poids doivent avoir la meme longueur"',
+        'assert all(poids_i >= 0 for poids_i in poids), "les poids doivent etre non negatifs"',
+        'assert sum(poids) > 0, "la somme des poids doit etre strictement positive"',
+    ]
+
+    tex = WEIGHTED_MEAN_COURSE.read_text(encoding="utf-8")
+    sequence = re.compile(
+        r"(?m)^% PYTHON-SOURCE: code/moyenne_ponderee\.py\n"
+        r"\\begin\{python\}(?P<python>.*?)\\end\{python\}",
+        re.DOTALL,
+    )
+    matches = list(sequence.finditer(tex))
+    assert len(matches) == 1, "la sequence Python marquee doit etre unique"
+    assert matches[0].group("python") == f"\n{source_code}"
+
+    course_record = {
+        "id": "1NSI-PM-COURS-C3",
+        "path": (
+            "NSI/chapitres/1NSI-PROJET-METHODES/cours/"
+            "1NSI-PM-COURS-C3.tex"
+        ),
+        "metadata": {},
+        "scope": "object",
+        "chapter": "1NSI-PROJET-METHODES",
+    }
+    manifest = review_module.dependency_manifest(
+        course_record, [course_record], REPO_ROOT
+    )
+    assert manifest["python"] == [
+        {
+            "path": (
+                "NSI/chapitres/1NSI-PROJET-METHODES/code/"
+                "moyenne_ponderee.py"
+            ),
+            "sha256": "sha256:"
+            + hashlib.sha256(source_code.encode("utf-8")).hexdigest(),
+        }
+    ]
+
+    assert "combinaison convexe" in tex
+    assert r"\min(\texttt{valeurs})" in tex
+    assert r"\max(\texttt{valeurs})" in tex
+    assert "nécessairement non vide" in tex
+    assert "moyenne_ponderee_bugue([12, 15, 18], [1, 2])" in tex
+    assert "IndexError: list index out of range" in tex
+
+    verify_matches = list(
+        re.finditer(
+            r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY", tex, re.DOTALL
+        )
+    )
+    assert len(verify_matches) == 2
+    verify_code = _uncomment(verify_matches[1].group("verify"))
+    assert verify_code.count(source_code.rstrip("\n")) == 1
+    assert "assert moyenne_ponderee([12, 15], [1, 3]) == 14.25" in verify_code
+    for valeurs, poids, message in invalid_cases:
+        call = f"moyenne_ponderee({valeurs!r}, {poids!r})"
+        assert call in verify_code
+        assert f'assert str(erreur) == "{message}"' in verify_code
