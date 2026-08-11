@@ -1,0 +1,30 @@
+% META: {"id": "TSPE-CONTIN-CO-026", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-026", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% th = 20 + 60*exp(-t/10)
+% assert simplify(diff(th, t) + 6*exp(-t/10)) == 0
+% assert th.subs(t, 0) == 80
+% assert all(float(diff(th, t).subs(t, v)) < 0 for v in (0, 10, 30))
+% assert abs(float(th.subs(t, 30)) - 22.9872) < 1e-4
+% assert abs(float(th.subs(t, Rational(109,10))) - 40.1729902) < 1e-6
+% assert abs(float(th.subs(t, 11)) - 39.9722654) < 1e-6
+% assert float(th.subs(t, 11)) < 40 < float(th.subs(t, Rational(109,10)))
+% assert abs(float(nsolve(th - 40, t, 11)) - 10.9861229) < 1e-6
+% # La temperature reste strictement au-dessus de l'ambiante : enonce prouve
+% # symboliquement et non en flottants (60*exp(-100) passe sous la resolution
+% # du double, ce qui rendait le test faussement negatif en t = 1000).
+% u = symbols('u', positive=True)
+% assert (th.subs(t, u) - 20).is_positive is True
+% assert (th.subs(t, u) - 20).equals(60*exp(-u/10))
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-026}
+
+\textbf{Q1.} $\theta(0) = 20 + 60\,\mathrm{e}^{0} = 20 + 60 = 80$. La temperature initiale est bien celle de la sortie du four.
+
+\textbf{Q2.} $\theta'(t) = 60 \times \left(-\dfrac{1}{10}\right)\mathrm{e}^{-t/10} = -6\,\mathrm{e}^{-t/10}$. L'exponentielle etant strictement positive, $\theta'(t) < 0$ : la temperature est strictement decroissante, ce qui est conforme a un refroidissement.
+
+\textbf{Q3.} $\theta(30) = 20 + 60\mathrm{e}^{-3} \approx 22{,}99$ \textdegree C. Quand $t$ devient grand, $\mathrm{e}^{-t/10}$ tend vers $0$, donc $\theta(t)$ tend vers $20$. Le liquide se rapproche de la temperature de la piece sans jamais descendre en dessous : c'est exactement ce que decrit le refroidissement vers la temperature ambiante.
+
+\textbf{Q4.} $\theta$ est continue et strictement decroissante sur $[0\,;30]$, et $40$ est compris entre $\theta(30) \approx 22{,}99$ et $\theta(0) = 80$ : il existe un unique $\tau \in [0\,;30]$ tel que $\theta(\tau) = 40$. Comme $\theta(10{,}9) \approx 40{,}17 > 40$ et $\theta(11) \approx 39{,}97 < 40$, on a $10{,}9 < \tau < 11$ : le liquide devient consommable au bout d'environ $11$ minutes.
+\end{corrige}

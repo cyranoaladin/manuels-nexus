@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-CONTIN-CO-019", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-019", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% B = -x**3 + 12*x**2 - 21*x - 10
+% assert (diff(B, x) + 3*(x-1)*(x-7)).expand() == 0
+% assert B.subs(x, 1) == -20 and B.subs(x, 7) == 88 and B.subs(x, 10) == -20
+% assert B.subs(x, Rational(26,10)) == Rational(-132,125)
+% assert B.subs(x, Rational(27,10)) == Rational(1097,1000)
+% assert B.subs(x, Rational(97,10)) == Rational(2707,1000)
+% assert B.subs(x, Rational(98,10)) == Rational(-564,125)
+% assert abs(float(nsolve(B, x, 2.65)) - 2.6495181) < 1e-6
+% assert abs(float(nsolve(B, x, 9.75)) - 9.7380612) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-019}
+
+\textbf{Q1.} $B'(x) = -3x^2 + 24x - 21$. Or $-3(x-1)(x-7) = -3(x^2 - 8x + 7) = -3x^2 + 24x - 21$ : les deux expressions coincident.
+
+Sur $[1\,;7]$ : $x-1 \geq 0$ et $x-7 \leq 0$, donc $(x-1)(x-7) \leq 0$ et $B'(x) \geq 0$. Sur $[7\,;10]$ : les deux facteurs sont positifs, donc $B'(x) \leq 0$. Ainsi $B$ est strictement croissante sur $[1\,;7]$ puis strictement decroissante sur $[7\,;10]$, avec un maximum en $x = 7$.
+
+\textbf{Q2.} $B(1) = -1 + 12 - 21 - 10 = -20$ ; $B(7) = -343 + 588 - 147 - 10 = 88$ ; $B(10) = -1000 + 1200 - 210 - 10 = -20$.
+
+\textbf{Q3.} Sur $[1\,;7]$, $B$ est continue et strictement croissante, et $0$ est compris entre $B(1) = -20$ et $B(7) = 88$ : il existe une unique solution $\alpha$. Sur $[7\,;10]$, $B$ est continue et strictement decroissante, et $0$ est compris entre $B(10) = -20$ et $B(7) = 88$ : il existe une unique solution $\beta$. Ces deux intervalles recouvrant $[1\,;10]$, l'equation $B(x) = 0$ admet exactement deux solutions.
+
+\textbf{Q4.} $B(2{,}6) = -1{,}056 < 0$ et $B(2{,}7) = 1{,}097 > 0$, donc $2{,}6 < \alpha < 2{,}7$. $B(9{,}7) = 2{,}707 > 0$ et $B(9{,}8) = -4{,}512 < 0$, donc $9{,}7 < \beta < 9{,}8$.
+
+\textbf{Q5.} $B$ est positive exactement entre $\alpha$ et $\beta$. L'entreprise est donc beneficiaire lorsqu'elle produit entre environ $2{,}7$ et $9{,}7$ centaines d'articles, soit approximativement de $270$ a $970$ articles. En dessous, les couts fixes ne sont pas couverts ; au-dessus, le modele traduit une saturation qui fait replonger le benefice.
+\end{corrige}

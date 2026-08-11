@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-CONTIN-EX-019", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-019.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-019.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% B = -x**3 + 12*x**2 - 21*x - 10
+% assert (diff(B, x) + 3*(x-1)*(x-7)).expand() == 0
+% assert B.subs(x, 1) == -20 and B.subs(x, 7) == 88 and B.subs(x, 10) == -20
+% assert B.subs(x, Rational(26,10)) < 0 < B.subs(x, Rational(27,10))
+% assert B.subs(x, Rational(97,10)) > 0 > B.subs(x, Rational(98,10))
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-019}{2}{15}
+Une entreprise produit et vend $x$ centaines d'articles, avec $1 \leq x \leq 10$. Son benefice, en milliers d'euros, est modelise par
+\[ B(x) = -x^3 + 12x^2 - 21x - 10. \]
+\begin{enumerate}
+  \item Montrer que $B'(x) = -3(x-1)(x-7)$, puis dresser le tableau de variations de $B$ sur $[1\,;10]$.
+  \item Calculer $B(1)$, $B(7)$ et $B(10)$.
+  \item Montrer que l'equation $B(x) = 0$ admet exactement deux solutions sur $[1\,;10]$, notees $\alpha$ puis $\beta$ avec $\alpha < \beta$.
+  \item Encadrer $\alpha$ et $\beta$ a $0{,}1$ pres.
+  \item Interpreter : pour quelles quantites produites l'entreprise est-elle beneficiaire ?
+\end{enumerate}
+\end{exercice}

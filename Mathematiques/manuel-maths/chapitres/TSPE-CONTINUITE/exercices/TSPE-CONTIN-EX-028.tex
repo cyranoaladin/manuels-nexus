@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-028", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-028.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-028.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% g = x**3 - 6*x**2 + 9*x
+% assert (diff(g, x) - 3*(x-1)*(x-3)).expand() == 0
+% assert g.subs(x, 0) == 0 and g.subs(x, 1) == 4 and g.subs(x, 3) == 0 and g.subs(x, 4) == 4
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-028}{2}{15}
+Soit $g$ la fonction definie sur $[0\,;4]$ par $g(x) = x^3 - 6x^2 + 9x$.
+\begin{enumerate}
+  \item Montrer que $g'(x) = 3(x-1)(x-3)$ et dresser le tableau de variations de $g$ sur $[0\,;4]$.
+  \item Calculer $g(0)$, $g(1)$, $g(3)$ et $g(4)$.
+  \item Expliquer pourquoi le theoreme des valeurs intermediaires ne peut pas s'appliquer directement a $g$ sur $[0\,;4]$ pour conclure a l'unicite d'une solution.
+  \item Determiner le nombre de solutions de l'equation $g(x) = 2$ sur $[0\,;4]$, en traitant chaque intervalle de monotonie.
+  \item Verifier en remarquant que $2$ est solution evidente de $g(x) = 2$, puis en factorisant $g(x) - 2$.
+\end{enumerate}
+\end{exercice}

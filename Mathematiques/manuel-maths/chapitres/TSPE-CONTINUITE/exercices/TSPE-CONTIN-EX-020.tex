@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-020", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-020.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-020.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% V = x*(20 - 2*x)*(12 - 2*x)
+% assert V.expand() == 4*x**3 - 64*x**2 + 240*x
+% assert V.subs(x, 0) == 0 and V.subs(x, 6) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-020}{2}{15}
+Dans une plaque rectangulaire de $20$ cm sur $12$ cm, on decoupe un carre de cote $x$ a chaque coin, puis on releve les bords pour former une boite sans couvercle.
+\begin{enumerate}
+  \item Justifier que $x$ appartient a $[0\,;6]$ et que le volume de la boite, en cm$^3$, vaut $V(x) = x(20-2x)(12-2x)$.
+  \item Developper $V(x)$ et calculer $V'(x)$.
+  \item On admet que $V$ est strictement croissante sur $[0\,;2{,}42]$ et strictement decroissante sur $[2{,}42\,;6]$, et que le volume maximal vaut environ $262{,}7$ cm$^3$. Montrer que l'equation $V(x) = 200$ admet exactement deux solutions sur $[0\,;6]$.
+  \item Encadrer chacune a $0{,}1$ pres.
+  \item Un fabricant veut un volume d'au moins $200$ cm$^3$ en decoupant le moins de matiere possible. Quelle valeur de $x$ doit-il retenir ?
+\end{enumerate}
+\end{exercice}

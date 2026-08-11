@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-CONTIN-EX-021", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-021.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-021.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% c = t*exp(-t/2)
+% assert simplify(diff(c, t) - (2 - t)*exp(-t/2)/2) == 0
+% assert abs(float(c.subs(t, 2)) - 0.7357589) < 1e-6
+% assert abs(float(c.subs(t, 8)) - 0.1465251) < 1e-6
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-021}{2}{12}
+La concentration d'un medicament dans le sang, en mg$\cdot$L$^{-1}$, $t$ heures apres la prise, est modelisee sur $[2\,;8]$ par
+\[ c(t) = t\,\mathrm{e}^{-t/2}. \]
+\begin{enumerate}
+  \item Montrer que $c'(t) = \dfrac{(2-t)\,\mathrm{e}^{-t/2}}{2}$ et en deduire le sens de variation de $c$ sur $[2\,;8]$.
+  \item Calculer $c(2)$ et $c(8)$ a $10^{-3}$ pres.
+  \item Le medicament cesse d'agir lorsque la concentration passe sous $0{,}4$ mg$\cdot$L$^{-1}$. Montrer qu'il existe un unique instant $\tau$ de $[2\,;8]$ ou la concentration vaut exactement $0{,}4$.
+  \item Encadrer $\tau$ a $0{,}1$ heure pres et conclure sur la duree d'action du medicament.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-CONTIN-EX-027", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-027.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-027.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% Cm = (x**2 + 4*x + 9)/x
+% assert simplify(Cm - (x + 4 + 9/x)) == 0
+% assert simplify(diff(Cm, x) - (1 - 9/x**2)) == 0
+% assert Cm.subs(x, 3) == 10
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-027}{2}{15}
+Le cout moyen de production, en euros par objet, pour $x$ centaines d'objets fabriques ($1 \leq x \leq 8$), est
+\[ C_m(x) = \frac{x^2 + 4x + 9}{x}. \]
+\begin{enumerate}
+  \item Montrer que $C_m(x) = x + 4 + \dfrac{9}{x}$, puis que $C_m'(x) = 1 - \dfrac{9}{x^2}$.
+  \item Etudier le signe de $C_m'(x)$ sur $[1\,;8]$ et dresser le tableau de variations. Quel est le cout moyen minimal, et pour quelle production ?
+  \item Montrer que l'equation $C_m(x) = 11$ admet exactement deux solutions sur $[1\,;8]$, puis les encadrer a $0{,}1$ pres.
+  \item Resoudre exactement $C_m(x) = 11$ et comparer aux encadrements obtenus.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-CONTIN-EX-024", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M3"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-024.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-024.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% f = x**3 - 2*x - 5
+% assert f.subs(x, 2) == -1 and f.subs(x, 3) == 16
+% assert diff(f, x) == 3*x**2 - 2
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-024}{2}{12}
+Soit $f$ la fonction definie sur $[2\,;3]$ par $f(x) = x^3 - 2x - 5$.
+\begin{enumerate}
+  \item Montrer que $f$ est strictement croissante sur $[2\,;3]$, puis que l'equation $f(x) = 0$ y admet une unique solution $\alpha$.
+  \item On balaie l'intervalle avec un pas de $0{,}1$. Calculer $f(2{,}0)$ et $f(2{,}1)$ et en deduire un encadrement de $\alpha$ d'amplitude $0{,}1$.
+  \item On affine avec un pas de $0{,}01$. Calculer $f(2{,}09)$ et en deduire un encadrement d'amplitude $0{,}01$.
+  \item Comparer les methodes de balayage et de dichotomie : laquelle atteint une precision de $10^{-3}$ avec le moins de calculs de $f$ ? Justifier.
+\end{enumerate}
+\end{exercice}

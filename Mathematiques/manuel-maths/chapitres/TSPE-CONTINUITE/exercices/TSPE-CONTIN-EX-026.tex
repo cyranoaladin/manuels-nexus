@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-026", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-026.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-026.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% th = 20 + 60*exp(-t/10)
+% assert simplify(diff(th, t) + 6*exp(-t/10)) == 0
+% assert th.subs(t, 0) == 80
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-026}{2}{12}
+Un liquide sorti du four a $80$ \textdegree C refroidit dans une piece a $20$ \textdegree C. Sa temperature, en degres Celsius, apres $t$ minutes, est modelisee sur $[0\,;30]$ par
+\[ \theta(t) = 20 + 60\,\mathrm{e}^{-t/10}. \]
+\begin{enumerate}
+  \item Verifier que $\theta(0) = 80$ et interpreter.
+  \item Calculer $\theta'(t)$ et en deduire le sens de variation de $\theta$.
+  \item Calculer $\theta(30)$ a $10^{-2}$ pres. Vers quelle valeur la temperature tend-elle lorsque $t$ devient grand ? Interpreter physiquement.
+  \item Le liquide est consommable des que sa temperature descend a $40$ \textdegree C. Montrer qu'il existe un unique instant $\tau$ ou $\theta(\tau) = 40$, puis l'encadrer a $0{,}1$ minute pres.
+\end{enumerate}
+\end{exercice}

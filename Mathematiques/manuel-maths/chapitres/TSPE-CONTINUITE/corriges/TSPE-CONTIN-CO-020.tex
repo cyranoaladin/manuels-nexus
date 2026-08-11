@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-CONTIN-CO-020", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-020", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% V = x*(20 - 2*x)*(12 - 2*x)
+% assert V.expand() == 4*x**3 - 64*x**2 + 240*x
+% assert diff(V.expand(), x) == 12*x**2 - 128*x + 240
+% assert V.subs(x, 0) == 0 and V.subs(x, 6) == 0
+% assert V.subs(x, Rational(11,10)) == Rational(47971,250)
+% assert V.subs(x, Rational(12,10)) == Rational(25344,125)
+% assert V.subs(x, Rational(11,10)) < 200 < V.subs(x, Rational(12,10))
+% assert V.subs(x, Rational(38,10)) == Rational(25916,125)
+% assert V.subs(x, Rational(39,10)) == Rational(49959,250)
+% assert V.subs(x, Rational(39,10)) < 200 < V.subs(x, Rational(38,10))
+% assert abs(float(nsolve(V - 200, x, 1.15)) - 1.1737862) < 1e-6
+% assert abs(float(nsolve(V - 200, x, 3.9)) - 3.8978602) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-020}
+
+\textbf{Q1.} Le cote decoupe doit etre positif, et il faut pouvoir retirer $2x$ sur la plus petite dimension : $12 - 2x \geq 0$, soit $x \leq 6$. Donc $x \in [0\,;6]$. La base de la boite mesure $(20-2x)$ sur $(12-2x)$ et sa hauteur vaut $x$, d'ou $V(x) = x(20-2x)(12-2x)$.
+
+\textbf{Q2.} $(20-2x)(12-2x) = 240 - 40x - 24x + 4x^2 = 4x^2 - 64x + 240$, donc $V(x) = 4x^3 - 64x^2 + 240x$ et $V'(x) = 12x^2 - 128x + 240$.
+
+\textbf{Q3.} $V$ est un polynome, donc continue sur $[0\,;6]$. Sur $[0\,;2{,}42]$ elle est strictement croissante de $V(0) = 0$ a environ $262{,}7$ : comme $200$ est compris entre ces deux valeurs, il existe une unique solution. Sur $[2{,}42\,;6]$ elle est strictement decroissante d'environ $262{,}7$ a $V(6) = 0$ : meme argument, une unique solution. L'equation admet donc exactement deux solutions.
+
+\textbf{Q4.} $V(1{,}1) = 191{,}884 < 200$ et $V(1{,}2) = 202{,}752 > 200$ : la premiere solution est dans $\left]1{,}1\,;1{,}2\right[$. $V(3{,}8) = 207{,}328 > 200$ et $V(3{,}9) = 199{,}836 < 200$ : la seconde est dans $\left]3{,}8\,;3{,}9\right[$.
+
+\textbf{Q5.} Decouper le moins de matiere revient a prendre le plus petit $x$ tel que $V(x) \geq 200$, c'est-a-dire la premiere solution. Le fabricant retiendra $x \approx 1{,}2$ cm, valeur pour laquelle le volume depasse effectivement $200$ cm$^3$.
+\end{corrige}

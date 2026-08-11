@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-CONTIN-CO-021", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-021", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% c = t*exp(-t/2)
+% assert simplify(diff(c, t) - (2 - t)*exp(-t/2)/2) == 0
+% assert diff(c, t).subs(t, 2) == 0
+% assert all(float(diff(c, t).subs(t, v)) < 0 for v in (3, 5, 8))
+% assert abs(float(c.subs(t, 2)) - 0.7357589) < 1e-6
+% assert abs(float(c.subs(t, 8)) - 0.1465251) < 1e-6
+% assert abs(float(c.subs(t, 5)) - 0.4104250) < 1e-6
+% assert abs(float(c.subs(t, Rational(51,10))) - 0.3982163) < 1e-6
+% assert float(c.subs(t, Rational(51,10))) < 0.4 < float(c.subs(t, 5))
+% assert abs(float(nsolve(c - Rational(4,10), t, 5.1)) - 5.0852827) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-021}
+
+\textbf{Q1.} $c$ est un produit : avec $u = t$ et $v = \mathrm{e}^{-t/2}$, on a $u' = 1$ et $v' = -\tfrac{1}{2}\mathrm{e}^{-t/2}$. Donc
+\[ c'(t) = \mathrm{e}^{-t/2} - \frac{t}{2}\mathrm{e}^{-t/2} = \left(1 - \frac{t}{2}\right)\mathrm{e}^{-t/2} = \frac{(2-t)\,\mathrm{e}^{-t/2}}{2}. \]
+L'exponentielle etant strictement positive, $c'(t)$ a le signe de $2-t$. Sur $\left]2\,;8\right]$, $2-t < 0$ donc $c'(t) < 0$ : $c$ est strictement decroissante sur $[2\,;8]$ (la derivee ne s'annulant qu'en la borne $t=2$).
+
+\textbf{Q2.} $c(2) = 2\mathrm{e}^{-1} \approx 0{,}736$ et $c(8) = 8\mathrm{e}^{-4} \approx 0{,}147$.
+
+\textbf{Q3.} $c$ est continue sur $[2\,;8]$ (produit de fonctions continues) et strictement decroissante. Comme $0{,}4$ est compris entre $c(8) \approx 0{,}147$ et $c(2) \approx 0{,}736$, le theoreme des valeurs intermediaires applique a une fonction strictement monotone donne l'existence et l'unicite de $\tau \in [2\,;8]$ tel que $c(\tau) = 0{,}4$.
+
+\textbf{Q4.} $c(5) \approx 0{,}4104 > 0{,}4$ et $c(5{,}1) \approx 0{,}3982 < 0{,}4$, donc $5 < \tau < 5{,}1$. La concentration reste donc superieure au seuil pendant un peu plus de $5$ heures apres la prise : le medicament cesse d'agir vers la cinquieme heure, ce qui justifie une nouvelle prise a ce moment-la.
+\end{corrige}

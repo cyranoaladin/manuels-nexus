@@ -1,0 +1,46 @@
+% META: {"id": "TSPE-CONTIN-CO-023", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-023", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% f = lambda z: z**3 + z - 1
+% # trace des trois premieres etapes
+% assert f(0) == -1 and f(1) == 1
+% assert f(0.5) == -0.375
+% assert abs(f(0.75) - 0.171875) < 1e-12
+% assert abs(f(0.625) - (-0.130859375)) < 1e-12
+% etapes = []
+% a, b = 0.0, 1.0
+% for _ in range(3):
+%     m = (a + b)/2
+%     if f(a)*f(m) <= 0:
+%         b = m
+%     else:
+%         a = m
+%     etapes.append((a, b))
+% assert etapes == [(0.5, 1.0), (0.5, 0.75), (0.625, 0.75)]
+% a, b, n = 0.0, 1.0, 0
+% while b - a > 0.01:
+%     m = (a + b)/2
+%     if f(a)*f(m) <= 0:
+%         b = m
+%     else:
+%         a = m
+%     n += 1
+% assert n == 7 and abs(b - a - 2**-7) < 1e-15
+% assert abs(a - 0.6796875) < 1e-12 and abs(b - 0.6875) < 1e-12
+% assert abs(0.68 - 0.6823278) < 0.005
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-023}
+
+\textbf{Q1.} $f$ est continue et ne s'annule qu'en $\alpha$. Si $f(a)$ et $f(m)$ sont de signes contraires (produit strictement negatif), alors $\alpha$ est compris entre $a$ et $m$ : la solution est dans la moitie gauche, et on remplace $b$ par $m$. Si le produit est nul, c'est que $m$ est exactement la solution. Sinon, $f(a)$ et $f(m)$ ont le meme signe, $\alpha$ est dans la moitie droite, et on remplace $a$ par $m$.
+
+\textbf{Q2.} Depart : $[0\,;1]$ avec $f(0) = -1$ et $f(1) = 1$.
+
+\emph{Etape 1.} $m = 0{,}5$, $f(0{,}5) = 0{,}125 + 0{,}5 - 1 = -0{,}375$. Le produit $f(0)f(0{,}5) = (-1)\times(-0{,}375) > 0$ : on pose $a = 0{,}5$. Intervalle $[0{,}5\,;1]$.
+
+\emph{Etape 2.} $m = 0{,}75$, $f(0{,}75) = 0{,}421875 + 0{,}75 - 1 = 0{,}171875$. Le produit $f(0{,}5)f(0{,}75) < 0$ : on pose $b = 0{,}75$. Intervalle $[0{,}5\,;0{,}75]$.
+
+\emph{Etape 3.} $m = 0{,}625$, $f(0{,}625) = 0{,}244140625 + 0{,}625 - 1 = -0{,}130859375$. Le produit $f(0{,}5)f(0{,}625) > 0$ : on pose $a = 0{,}625$. Intervalle $[0{,}625\,;0{,}75]$.
+
+\textbf{Q3.} A chaque etape la longueur de l'intervalle est divisee par $2$ : apres $n$ etapes elle vaut $\dfrac{1}{2^n}$. La boucle s'arrete des que $\dfrac{1}{2^n} \leq 0{,}01$. Or $\dfrac{1}{2^6} = 0{,}015625 > 0{,}01$ et $\dfrac{1}{2^7} = 0{,}0078125 \leq 0{,}01$ : l'algorithme effectue \textbf{7} etapes.
+
+\textbf{Q4.} L'encadrement final est $0{,}6796875 < \alpha < 0{,}6875$, d'amplitude $0{,}0078125 < 10^{-2}$. On en deduit $\alpha \approx 0{,}68$ a $10^{-2}$ pres.
+\end{corrige}

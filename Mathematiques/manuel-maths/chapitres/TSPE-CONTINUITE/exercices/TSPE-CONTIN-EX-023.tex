@@ -1,0 +1,40 @@
+% META: {"id": "TSPE-CONTIN-EX-023", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M3"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-023.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-023.tex", "status": "generated"}
+% BEGIN-VERIFY
+% f = lambda z: z**3 + z - 1
+% a, b, n = 0.0, 1.0, 0
+% while b - a > 0.01:
+%     m = (a + b)/2
+%     if f(a)*f(m) <= 0:
+%         b = m
+%     else:
+%         a = m
+%     n += 1
+% assert n == 7
+% assert abs(a - 0.6796875) < 1e-12 and abs(b - 0.6875) < 1e-12
+% assert f(a) < 0 < f(b)
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-023}{2}{15}
+On reprend la fonction $f$ definie sur $[0\,;1]$ par $f(x) = x^3 + x - 1$, dont on a montre qu'elle s'annule en un unique reel $\alpha$ de $[0\,;1]$ (exercice \textsc{ex-009}). On veut encadrer $\alpha$ a $10^{-2}$ pres par dichotomie.
+
+\begin{center}
+\begin{minipage}{0.8\linewidth}
+\begin{verbatim}
+def dichotomie(a, b, precision):
+    while b - a > precision:
+        m = (a + b)/2
+        if f(a)*f(m) <= 0:
+            b = m
+        else:
+            a = m
+    return a, b
+\end{verbatim}
+\end{minipage}
+\end{center}
+
+\begin{enumerate}
+  \item Expliquer le role du test \verb|f(a)*f(m) <= 0| : que signifie ce produit lorsqu'il est negatif ou nul ?
+  \item Appliquer l'algorithme a la main pour les trois premieres etapes, en indiquant a chaque fois l'intervalle obtenu.
+  \item Combien d'etapes l'algorithme effectue-t-il avec \verb|precision = 0.01| ? Justifier en raisonnant sur la longueur de l'intervalle.
+  \item Donner l'encadrement final et en deduire une valeur approchee de $\alpha$ a $10^{-2}$ pres.
+\end{enumerate}
+\end{exercice}

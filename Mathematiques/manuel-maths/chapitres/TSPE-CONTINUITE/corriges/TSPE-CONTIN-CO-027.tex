@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-CONTIN-CO-027", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-027", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% Cm = (x**2 + 4*x + 9)/x
+% assert simplify(Cm - (x + 4 + 9/x)) == 0
+% assert simplify(diff(Cm, x) - (1 - 9/x**2)) == 0
+% assert Cm.subs(x, 1) == 14 and Cm.subs(x, 3) == 10 and Cm.subs(x, 8) == Rational(105,8)
+% assert diff(Cm, x).subs(x, 3) == 0
+% assert diff(Cm, x).subs(x, 2) < 0 and diff(Cm, x).subs(x, 4) > 0
+% assert Cm.subs(x, Rational(16,10)) == Rational(449,40)
+% assert Cm.subs(x, Rational(17,10)) == Rational(1869,170)
+% assert float(Cm.subs(x, Rational(17,10))) < 11 < float(Cm.subs(x, Rational(16,10)))
+% assert float(Cm.subs(x, Rational(53,10))) < 11 < float(Cm.subs(x, Rational(54,10)))
+% racines = solveset(Eq(Cm, 11), x, SS.Reals)
+% assert racines == {(7 - sqrt(13))/2, (7 + sqrt(13))/2}
+% assert abs(float((7 - sqrt(13))/2) - 1.6972244) < 1e-6
+% assert abs(float((7 + sqrt(13))/2) - 5.3027756) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-027}
+
+\textbf{Q1.} $\dfrac{x^2+4x+9}{x} = \dfrac{x^2}{x} + \dfrac{4x}{x} + \dfrac{9}{x} = x + 4 + \dfrac{9}{x}$. En derivant terme a terme, $C_m'(x) = 1 + 0 - \dfrac{9}{x^2} = 1 - \dfrac{9}{x^2}$.
+
+\textbf{Q2.} $C_m'(x) = \dfrac{x^2 - 9}{x^2} = \dfrac{(x-3)(x+3)}{x^2}$. Sur $[1\,;8]$, $x^2 > 0$ et $x + 3 > 0$, donc $C_m'(x)$ a le signe de $x - 3$ : negatif sur $[1\,;3[$, nul en $3$, positif sur $]3\,;8]$. La fonction decroit puis croit, avec un minimum en $x = 3$ valant $C_m(3) = 3 + 4 + 3 = 10$. Le cout moyen minimal est de $10$ euros par objet, pour $300$ objets produits.
+
+\textbf{Q3.} Sur $[1\,;3]$, $C_m$ est continue et strictement decroissante de $C_m(1) = 14$ a $10$, et $11$ est compris entre ces valeurs : une unique solution $\alpha$. Sur $[3\,;8]$, $C_m$ est continue et strictement croissante de $10$ a $C_m(8) = 13{,}125$, et $11$ est compris entre ces valeurs : une unique solution $\beta$. Il y a donc exactement deux solutions. Comme $C_m(1{,}6) = 11{,}225 > 11$ et $C_m(1{,}7) \approx 10{,}994 < 11$, on a $1{,}6 < \alpha < 1{,}7$ ; comme $C_m(5{,}3) \approx 10{,}998 < 11$ et $C_m(5{,}4) \approx 11{,}067 > 11$, on a $5{,}3 < \beta < 5{,}4$.
+
+\textbf{Q4.} $x + 4 + \dfrac{9}{x} = 11$ equivaut, en multipliant par $x > 0$, a $x^2 + 4x + 9 = 11x$, soit $x^2 - 7x + 9 = 0$. Le discriminant vaut $49 - 36 = 13 > 0$, d'ou les deux racines $\dfrac{7 - \sqrt{13}}{2} \approx 1{,}697$ et $\dfrac{7 + \sqrt{13}}{2} \approx 5{,}303$. Elles appartiennent bien aux encadrements trouves en Q3.
+\end{corrige}

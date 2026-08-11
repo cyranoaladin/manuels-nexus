@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-025", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-025.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-025.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% f = x**3 - 3*x
+% assert (diff(f, x) - 3*(x-1)*(x+1)).expand() == 0
+% assert f.subs(x, -2) == -2 and f.subs(x, -1) == 2
+% assert f.subs(x, 1) == -2 and f.subs(x, 2) == 2
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-025}{2}{15}
+Soit $f$ la fonction definie sur $[-2\,;2]$ par $f(x) = x^3 - 3x$, et soit $m$ un reel.
+\begin{enumerate}
+  \item Montrer que $f'(x) = 3(x-1)(x+1)$ et dresser le tableau de variations de $f$ sur $[-2\,;2]$.
+  \item Calculer $f(-2)$, $f(-1)$, $f(1)$ et $f(2)$.
+  \item Discuter, selon la valeur de $m$, le nombre de solutions de l'equation $f(x) = m$ sur $[-2\,;2]$.
+  \item Verifier la reponse pour $m = 0$ en resolvant l'equation exactement.
+\end{enumerate}
+\end{exercice}

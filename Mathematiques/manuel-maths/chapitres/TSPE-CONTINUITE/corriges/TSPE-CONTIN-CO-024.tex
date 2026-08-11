@@ -1,0 +1,30 @@
+% META: {"id": "TSPE-CONTIN-CO-024", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-024", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq
+% x, t = symbols('x t')
+% f = x**3 - 2*x - 5
+% assert diff(f, x) == 3*x**2 - 2
+% assert all(diff(f, x).subs(x, v) > 0 for v in (2, Rational(5,2), 3))
+% assert f.subs(x, 2) == -1 and f.subs(x, 3) == 16
+% assert f.subs(x, Rational(21,10)) == Rational(61,1000)
+% assert f.subs(x, Rational(209,100)) == Rational(-50671,1000000)
+% assert f.subs(x, Rational(209,100)) < 0 < f.subs(x, Rational(21,10))
+% assert abs(float(nsolve(f, x, 2.1)) - 2.0945515) < 1e-6
+% # dichotomie : n etapes pour une precision de 1e-3 sur un intervalle de longueur 1
+% n = 0
+% longueur = 1.0
+% while longueur > 1e-3:
+%     longueur /= 2
+%     n += 1
+% assert n == 10
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-024}
+
+\textbf{Q1.} $f'(x) = 3x^2 - 2$. Sur $[2\,;3]$, $x^2 \geq 4$ donc $3x^2 \geq 12$ et $f'(x) \geq 10 > 0$ : $f$ est strictement croissante. Elle est continue (polynome), $f(2) = 8 - 4 - 5 = -1$ et $f(3) = 27 - 6 - 5 = 16$, et $0$ est compris entre ces deux valeurs : il existe un unique $\alpha \in [2\,;3]$ tel que $f(\alpha) = 0$.
+
+\textbf{Q2.} $f(2{,}0) = -1 < 0$ et $f(2{,}1) = 9{,}261 - 4{,}2 - 5 = 0{,}061 > 0$. Par stricte croissance, $2 < \alpha < 2{,}1$.
+
+\textbf{Q3.} $f(2{,}09) = 9{,}129329 - 4{,}18 - 5 = -0{,}050671 < 0$, et $f(2{,}10) = 0{,}061 > 0$. Donc $2{,}09 < \alpha < 2{,}10$.
+
+\textbf{Q4.} Le balayage divise l'incertitude par $10$ a chaque changement de pas, mais au prix de $10$ evaluations de $f$ par decimale gagnee : passer de $10^{-1}$ a $10^{-3}$ demande de l'ordre de $20$ evaluations supplementaires. La dichotomie divise l'incertitude par $2$ a chaque etape, avec une seule evaluation de $f$ par etape : partant d'un intervalle de longueur $1$, il faut $n$ etapes telles que $2^{-n} \leq 10^{-3}$, soit $n = 10$ puisque $2^{-9} \approx 0{,}00195 > 10^{-3}$ et $2^{-10} \approx 0{,}00098 \leq 10^{-3}$. La dichotomie est donc nettement plus economique. Le balayage garde en revanche un avantage pedagogique : il produit un tableau de valeurs lisible et permet de reperer plusieurs solutions.
+\end{corrige}
