@@ -416,7 +416,7 @@ def test_avancement_canonical_source_rejects_empty_milestones() -> None:
     )
 
 
-def test_weighted_mean_rejects_negative_and_zero_sum_weights() -> None:
+def test_weighted_mean_rejects_invalid_weights_under_optimization() -> None:
     assert WEIGHTED_MEAN_COURSE.is_file()
     assert WEIGHTED_MEAN_SOURCE.is_file()
 
@@ -435,26 +435,53 @@ def test_weighted_mean_rejects_negative_and_zero_sum_weights() -> None:
             "valeurs et poids doivent avoir la meme longueur",
         ),
         ([12, 15], [1, -0.5], "les poids doivent etre non negatifs"),
+        ([12, 15], [1, float("nan")], "les poids doivent etre non negatifs"),
         ([12, 15], [0, 0], "la somme des poids doit etre strictement positive"),
         ([], [], "la somme des poids doit etre strictement positive"),
     ]
     for valeurs, poids, message in invalid_cases:
-        with pytest.raises(AssertionError) as error:
+        with pytest.raises(ValueError) as error:
             moyenne_ponderee(valeurs, poids)
         assert str(error.value) == message
 
+    optimized_script = f"""
+import runpy
+
+moyenne_ponderee = runpy.run_path({str(WEIGHTED_MEAN_SOURCE)!r})[
+    "moyenne_ponderee"
+]
+cases = [
+    ([12, 15, 18], [1, 2], "valeurs et poids doivent avoir la meme longueur"),
+    ([12, 15], [1, -0.5], "les poids doivent etre non negatifs"),
+    ([12, 15], [1, float("nan")], "les poids doivent etre non negatifs"),
+    ([12, 15], [0, 0], "la somme des poids doit etre strictement positive"),
+    ([], [], "la somme des poids doit etre strictement positive"),
+]
+for valeurs, poids, message in cases:
+    try:
+        moyenne_ponderee(valeurs, poids)
+    except ValueError as error:
+        if str(error) != message:
+            raise RuntimeError(f"message inattendu: {{error}}")
+    else:
+        raise RuntimeError(f"entree invalide acceptee: {{valeurs}}, {{poids}}")
+print("5 entrees invalides refusees")
+"""
+    optimized = subprocess.run(
+        [sys.executable, "-O", "-c", optimized_script],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert optimized.returncode == 0, optimized.stdout + optimized.stderr
+    assert optimized.stdout == "5 entrees invalides refusees\n"
+    assert optimized.stderr == ""
+
     source_code = WEIGHTED_MEAN_SOURCE.read_text(encoding="utf-8")
     assert source_code.isascii()
-    assertions = [
-        line.strip()
-        for line in source_code.splitlines()
-        if line.strip().startswith("assert ")
-    ]
-    assert assertions == [
-        'assert len(valeurs) == len(poids), "valeurs et poids doivent avoir la meme longueur"',
-        'assert all(poids_i >= 0 for poids_i in poids), "les poids doivent etre non negatifs"',
-        'assert sum(poids) > 0, "la somme des poids doit etre strictement positive"',
-    ]
+    assert "assert " not in source_code
+    assert source_code.count("raise ValueError(") == 3
 
     tex = WEIGHTED_MEAN_COURSE.read_text(encoding="utf-8")
     sequence = re.compile(
@@ -507,9 +534,13 @@ def test_weighted_mean_rejects_negative_and_zero_sum_weights() -> None:
     assert verify_code.count(source_code.rstrip("\n")) == 1
     assert "assert moyenne_ponderee([12, 15], [1, 3]) == 14.25" in verify_code
     for valeurs, poids, message in invalid_cases:
-        call = f"moyenne_ponderee({valeurs!r}, {poids!r})"
+        if any(isinstance(poids_i, float) and poids_i != poids_i for poids_i in poids):
+            call = 'moyenne_ponderee([12, 15], [1, float("nan")])'
+        else:
+            call = f"moyenne_ponderee({valeurs!r}, {poids!r})"
         assert call in verify_code
         assert f'assert str(erreur) == "{message}"' in verify_code
+        assert "except ValueError as erreur:" in verify_code
 
 
 def test_table_join_rejects_overlapping_nonkey_columns() -> None:

@@ -58,7 +58,7 @@ IndexError: list index out of range
     \item Lire \textbf{entièrement} le message d'erreur : type d'erreur, ligne concernée.
     \item Identifier la \textbf{cause} : ici, \lstinline{poids} a seulement $2$ éléments, mais la boucle tente d'accéder à \lstinline{poids[2]} (car \lstinline{valeurs} en a $3$).
     \item Formuler une \textbf{hypothèse} : les deux listes doivent avoir la même longueur.
-    \item \textbf{Vérifier} l'hypothèse, par exemple avec un \lstinline{print(len(valeurs), len(poids))} ou une précondition \lstinline{assert}.
+    \item \textbf{Vérifier} l'hypothèse, par exemple avec un \lstinline{print(len(valeurs), len(poids))} ou un contrôle explicite de la précondition.
     \item \textbf{Corriger} : ajouter une précondition, ou corriger l'appel fautif.
   \end{enumerate}
 }
@@ -68,48 +68,62 @@ IndexError: list index out of range
 \begin{python}
 def moyenne_ponderee(valeurs, poids):
     """Renvoie la moyenne ponderee pour des poids valides."""
-    assert len(valeurs) == len(poids), "valeurs et poids doivent avoir la meme longueur"
-    assert all(poids_i >= 0 for poids_i in poids), "les poids doivent etre non negatifs"
-    assert sum(poids) > 0, "la somme des poids doit etre strictement positive"
+    if len(valeurs) != len(poids):
+        raise ValueError("valeurs et poids doivent avoir la meme longueur")
+    if not all(poids_i >= 0 for poids_i in poids):
+        raise ValueError("les poids doivent etre non negatifs")
+    somme_poids = sum(poids)
+    if somme_poids <= 0:
+        raise ValueError("la somme des poids doit etre strictement positive")
     total = 0
     for i in range(len(valeurs)):
         total += valeurs[i] * poids[i]
-    return total / sum(poids)
+    return total / somme_poids
 \end{python}
 \end{codereference}
 
 % BEGIN-VERIFY
 % def moyenne_ponderee(valeurs, poids):
 %     """Renvoie la moyenne ponderee pour des poids valides."""
-%     assert len(valeurs) == len(poids), "valeurs et poids doivent avoir la meme longueur"
-%     assert all(poids_i >= 0 for poids_i in poids), "les poids doivent etre non negatifs"
-%     assert sum(poids) > 0, "la somme des poids doit etre strictement positive"
+%     if len(valeurs) != len(poids):
+%         raise ValueError("valeurs et poids doivent avoir la meme longueur")
+%     if not all(poids_i >= 0 for poids_i in poids):
+%         raise ValueError("les poids doivent etre non negatifs")
+%     somme_poids = sum(poids)
+%     if somme_poids <= 0:
+%         raise ValueError("la somme des poids doit etre strictement positive")
 %     total = 0
 %     for i in range(len(valeurs)):
 %         total += valeurs[i] * poids[i]
-%     return total / sum(poids)
+%     return total / somme_poids
 % assert moyenne_ponderee([12, 15], [1, 3]) == 14.25
 % try:
 %     moyenne_ponderee([12, 15, 18], [1, 2])
-% except AssertionError as erreur:
+% except ValueError as erreur:
 %     assert str(erreur) == "valeurs et poids doivent avoir la meme longueur"
 % else:
 %     raise AssertionError
 % try:
 %     moyenne_ponderee([12, 15], [1, -0.5])
-% except AssertionError as erreur:
+% except ValueError as erreur:
+%     assert str(erreur) == "les poids doivent etre non negatifs"
+% else:
+%     raise AssertionError
+% try:
+%     moyenne_ponderee([12, 15], [1, float("nan")])
+% except ValueError as erreur:
 %     assert str(erreur) == "les poids doivent etre non negatifs"
 % else:
 %     raise AssertionError
 % try:
 %     moyenne_ponderee([12, 15], [0, 0])
-% except AssertionError as erreur:
+% except ValueError as erreur:
 %     assert str(erreur) == "la somme des poids doit etre strictement positive"
 % else:
 %     raise AssertionError
 % try:
 %     moyenne_ponderee([], [])
-% except AssertionError as erreur:
+% except ValueError as erreur:
 %     assert str(erreur) == "la somme des poids doit etre strictement positive"
 % else:
 %     raise AssertionError
@@ -123,11 +137,12 @@ def moyenne_ponderee(valeurs, poids):
   $[\min(\texttt{valeurs})\,;\,\max(\texttt{valeurs})]$.
 }
 
-\propriete[Rôle du \lstinline{print} et de \lstinline{assert} en débogage]{
+\propriete[Rôle du \lstinline{print}, de \lstinline{assert} et des exceptions en débogage]{
   Insérer temporairement des \lstinline{print(...)} pour afficher l'état de variables clés
   à des points précis du programme est une technique simple et efficace pour localiser un
-  bug. Les \lstinline{assert} permettent, eux, de \textbf{documenter} et
-  \textbf{vérifier automatiquement} des hypothèses sur le programme, à chaque exécution.
+  bug. Les \lstinline{assert} documentent des hypothèses de développement, mais Python peut
+  les supprimer en mode optimisé. Une précondition qui doit rester vérifiée à chaque
+  exécution utilise donc un test explicite et lève ici une \lstinline{ValueError}.
 }
 
 \erreurFrequente{Corriger un bug en modifiant du code \textbf{au hasard}, sans avoir
