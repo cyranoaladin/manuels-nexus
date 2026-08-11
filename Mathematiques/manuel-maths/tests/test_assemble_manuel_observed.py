@@ -564,7 +564,14 @@ def test_real_professor_order_matches_declared_inventory() -> None:
     )
     professor_paths = _professor_paths()
 
-    assert len(professor_paths) == 1334
+    # Effectif atteste le 2026-08-11 : l'arbre vivant et
+    # audit/INVENTAIRE_COLLECTION.json donnent tous deux 1396 objets, dans le
+    # meme ordre. La constante valait encore 1334, effectif anterieur a la
+    # derniere regeneration de l'inventaire : elle avait decroche des deux
+    # sources qu'elle est censee garder solidaires. Ce garde-fou reste en dur
+    # pour detecter une derive simultanee du vivant et du declare, cas que
+    # l'egalite ligne suivante ne verrait pas.
+    assert len(professor_paths) == 1396
     assert all(
         path.startswith("Mathematiques/manuel-maths/") for path in professor_paths
     )
@@ -582,7 +589,9 @@ def test_real_student_order_keeps_evaluations_and_excludes_teacher_objects() -> 
     )
     student_paths = _student_paths()
 
-    assert len(student_paths) == 852
+    # Meme constat que pour la variante professeur : effectif atteste a 905,
+    # identique dans l'arbre vivant et dans l'inventaire (2026-08-11).
+    assert len(student_paths) == 905
     assert student_paths == assembly["included_objects"]
     assert sum("/evaluations/" in path for path in student_paths) == 18
     assert all("/corriges/" not in path for path in student_paths)
