@@ -72,7 +72,8 @@ PRE_ADGK_BASE_SHA = "086c5b2086335d6f6e3b3f059f938a6cf41a088f"
 PRE_OPTIMIZATION_BASE_SHA = "ef28edb826a3389150a8d88bd6eb017ddc83251a"
 PRE_PRECONDITION_BASE_SHA = "ef8d1db888807370f46693547139df9e7512c811"
 PRE_EXECUTION_RECEIPT_BASE_SHA = "d1defc745c605fe80d8b4cdbb3eaceaed1d2fae0"
-BASE_SHA = "98bcf780e0a788603ffed0a4ad3c123de1858f77"
+PRE_LANGUAGE_RECEIPT_BASE_SHA = "98bcf780e0a788603ffed0a4ad3c123de1858f77"
+BASE_SHA = "4239262b3f436cc76f4cd9936eedcbf389c31425"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
@@ -98,6 +99,10 @@ EXECUTION_RECEIPT_PROTOCOL_DIGEST = (
     "sha256:8bd253c35a3fcc2f28a3adfccb8398e8d6cfe302c90ca91db2be81f8fa3cfccc"
 )
 PRE_EXECUTION_RECEIPT_POLICY_COMMIT = "482670a4ea94a24b4cfeadc33857d0ad4e5577b6"
+LANGUAGE_RECEIPT_PROTOCOL_DIGEST = (
+    "sha256:e707d598cfeca9cb5a054d5d9617233c30d8a89c3a0ab912191cbb18715e036d"
+)
+PRE_LANGUAGE_RECEIPT_POLICY_COMMIT = "08244ef71a0a947e634e4eeb2320f9d2792c68f0"
 POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
 CURRENT_RECEIPT_SEALS = {
@@ -954,13 +959,30 @@ def test_precondition_optimization_policy_remains_historically_sealed() -> None:
     )
 
 
-def test_execution_receipt_policy_migration_invalidates_exactly_six_receipts(
+def test_table_execution_receipt_policy_remains_historically_sealed() -> None:
+    historical_policy = yaml.safe_load(
+        _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_LANGUAGE_RECEIPT_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+        ).decode("utf-8")
+    )
+    assert historical_policy["scope_guard"]["implementation_base_sha"] == (
+        PRE_LANGUAGE_RECEIPT_BASE_SHA
+    )
+    assert historical_policy["protocol_digest"] == EXECUTION_RECEIPT_PROTOCOL_DIGEST
+    assert _git(ROOT, "rev-parse", f"{PRE_LANGUAGE_RECEIPT_POLICY_COMMIT}^") == (
+        PRE_LANGUAGE_RECEIPT_BASE_SHA
+    )
+
+
+def test_language_receipt_policy_migration_invalidates_exactly_six_receipts(
     policy, sources, review_module
 ) -> None:
     assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
-    assert policy["protocol_digest"] == EXECUTION_RECEIPT_PROTOCOL_DIGEST
+    assert policy["protocol_digest"] == LANGUAGE_RECEIPT_PROTOCOL_DIGEST
     assert review_module.compute_protocol_digest(ROOT, policy) == (
-        EXECUTION_RECEIPT_PROTOCOL_DIGEST
+        LANGUAGE_RECEIPT_PROTOCOL_DIGEST
     )
 
     sources_by_id = {source["id"]: source for source in sources}
