@@ -264,11 +264,20 @@ def analyser(dossier: Path, versions: dict, pdfs: set[str]) -> Chapitre:
         ch.programme_review = "rattachement_incomplet"
 
     # --- builds ---------------------------------------------------------------
-    manuel = ch.manual_id or ""
-    ch.student_build = f"manuel_{manuel.lower()}_eleve.pdf" in pdfs or any(
-        manuel.lower() in nom and "eleve" in nom for nom in pdfs
+    # Les noms de PDF ne reprennent pas toujours l'identifiant du manuel tel
+    # quel : TSPE_2026_2027 se materialise en MANUEL_TSPE_2026-2027_*.pdf. On
+    # compare donc sur une forme normalisee, sans separateurs.
+    def _normaliser(valeur: str) -> str:
+        return re.sub(r"[^a-z0-9]", "", valeur.lower())
+
+    manuel = _normaliser(ch.manual_id or "")
+    normalises = {_normaliser(nom): nom for nom in pdfs}
+    ch.student_build = any(
+        manuel and manuel in cle and "eleve" in cle for cle in normalises
     )
-    ch.teacher_build = any(manuel.lower() in nom and "professeur" in nom for nom in pdfs)
+    ch.teacher_build = any(
+        manuel and manuel in cle and "professeur" in cle for cle in normalises
+    )
 
     # --- constats bloquants ---------------------------------------------------
     b = ch.blocking_findings

@@ -17,8 +17,8 @@ depuis l'arbre par `scripts/chapter_readiness.py`.
 |---|---|---:|---:|---:|---:|---:|---|---:|---:|---:|
 | Mathématiques Première spécialité | 2026 | 10 | 0 | 10 | 0 | 0 | 50/50 | 473/312 | 1383/1391 | 92.0% |
 | NSI Première spécialité | 2019 | 10 | 0 | 1 | 9 | 0 | 53/53 | 100/320 | 0/302 | 51.3% |
-| Mathématiques Terminale spécialité | 2019 | 11 | 0 | 4 | 7 | 0 | 67/67 | 255/376 | 757/757 | 58.8% |
-| NSI Terminale spécialité | 2019 | 6 | 0 | 0 | 6 | 0 | 59/59 | 23/266 | 103/103 | 27.8% |
+| Mathématiques Terminale spécialité | 2019 | 11 | 0 | 4 | 7 | 0 | 67/67 | 255/376 | 757/757 | 72.1% |
+| NSI Terminale spécialité | 2019 | 6 | 0 | 0 | 6 | 0 | 59/59 | 23/266 | 103/103 | 41.1% |
 | Mathématiques complémentaires Terminale | 2019 | 9 | 0 | 0 | 9 | 0 | 50/50 | 36/300 | 141/141 | 46.7% |
 | Mathématiques expertes Terminale | 2019 | 5 | 0 | 0 | 5 | 0 | 33/33 | 24/194 | 88/88 | 46.7% |
 
