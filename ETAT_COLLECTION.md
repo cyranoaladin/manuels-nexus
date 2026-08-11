@@ -9,7 +9,7 @@
 - Gate `release-strict`: ROUGE (63 bloqueurs)
 
 ## Provenance synthétique
-- SHA Git: `755069636f34b53862b7eaa5311316c2123536a6`
+- SHA Git: `d884af242efe5a1e24c71cf49c83d575db3204ba`
 - Branche: `finalisation/collection-v1`
 - Dépôt sale: non
 
