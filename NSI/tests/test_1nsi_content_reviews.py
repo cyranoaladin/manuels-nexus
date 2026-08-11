@@ -81,7 +81,8 @@ PRE_SEPARATION_LOCK_BASE_SHA = "775bfc90cbd26a4aac8494bfbf3757703442ab45"
 PRE_LANGUAGE_TRACE_BASE_SHA = "0085e91405c96ece34a1f5e40b6d8af8347dbc49"
 PRE_SIX_P0_BASE_SHA = "7cb8ad6ba526a7d53ad3dd9a804dcea581e32812"
 PRE_ACTOR_PROVENANCE_BASE_SHA = "1fc0bf5d74fa11db657c5d53fdb7e3983368bde9"
-BASE_SHA = "ba9d2196fbbaaf6f8dd36311187a8c8261dd278d"
+PRE_COUNTER_REVIEW_BASE_SHA = "ba9d2196fbbaaf6f8dd36311187a8c8261dd278d"
+BASE_SHA = "f0c1a095288e000fa014653afc7f60f5c2b0b273"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
@@ -129,6 +130,9 @@ SIX_P0_PROTOCOL_DIGEST = (
 ACTOR_PROVENANCE_PROTOCOL_DIGEST = (
     "sha256:40cb76f9b329a7f38b5e3d6580146c0578439f4a004a2c2c1c6e66f9f076b064"
 )
+COUNTER_REVIEW_PROTOCOL_DIGEST = (
+    "sha256:35179b985a29b1e0f80a73be597c00e2a53fa1d42b5a51a8b88ca60d2f2e5fa7"
+)
 GOVERNANCE_REVIEWER_MODEL = "gpt-5.6-sol"
 SIX_RESOLVED_P0_IDS = {
     "1NSI-REV-ARCH-C1-DIAGRAM-FLOWS",
@@ -150,6 +154,7 @@ PRE_SIX_P0_POLICY_COMMIT = "563680078cb336766c2f892a8fc72539eea90fbe"
 PRE_SIX_P0_RECEIPTS_COMMIT = "e32d4cf6de9bac9b722eb1b4f6ec94968c1d2e8d"
 PRE_ACTOR_PROVENANCE_POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
 PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
+PRE_COUNTER_REVIEW_POLICY_COMMIT = "f0c1a095288e000fa014653afc7f60f5c2b0b273"
 PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
 RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
@@ -1258,29 +1263,29 @@ def test_language_trace_policy_remains_historically_sealed() -> None:
     )
 
 
-def test_actor_provenance_policy_migration_invalidates_exactly_six_receipts(
+def test_counter_review_policy_migration_invalidates_exactly_six_receipts(
     policy, sources, review_module
 ) -> None:
     assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
-    assert policy["protocol_digest"] == ACTOR_PROVENANCE_PROTOCOL_DIGEST
+    assert policy["protocol_digest"] == COUNTER_REVIEW_PROTOCOL_DIGEST
     assert review_module.compute_protocol_digest(ROOT, policy) == (
-        ACTOR_PROVENANCE_PROTOCOL_DIGEST
+        COUNTER_REVIEW_PROTOCOL_DIGEST
     )
 
     historical_policy = yaml.safe_load(
         _git_bytes(
             ROOT,
             "show",
-            f"{PRE_ACTOR_PROVENANCE_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+            f"{PRE_COUNTER_REVIEW_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
         ).decode("utf-8")
     )
     assert historical_policy["scope_guard"]["implementation_base_sha"] == (
-        PRE_ACTOR_PROVENANCE_BASE_SHA
+        PRE_COUNTER_REVIEW_BASE_SHA
     )
-    assert historical_policy["protocol_digest"] == SIX_P0_PROTOCOL_DIGEST
+    assert historical_policy["protocol_digest"] == ACTOR_PROVENANCE_PROTOCOL_DIGEST
     assert _git(
-        ROOT, "rev-parse", f"{PRE_ACTOR_PROVENANCE_POLICY_COMMIT}^"
-    ) == PRE_ACTOR_PROVENANCE_BASE_SHA
+        ROOT, "rev-parse", f"{PRE_COUNTER_REVIEW_POLICY_COMMIT}^"
+    ) == PRE_COUNTER_REVIEW_BASE_SHA
 
     sources_by_id = {source["id"]: source for source in sources}
     stale_receipts = set()
