@@ -136,6 +136,35 @@ pour parent direct `P0_ATTESTATION_BASE_SHA`.
 
 Commit: `[AUDIT] atteste les six corrections P0 1NSI`.
 
+Verifier immediatement le commit cree :
+
+```bash
+test "$(git rev-parse HEAD^)" = "$P0_ATTESTATION_BASE_SHA"
+pytest -q NSI/tests/test_1nsi_p0_attestations.py
+git show --format= --name-only HEAD >/tmp/1nsi-six-p0-receipt-paths.txt
+python - <<'PY'
+from pathlib import Path
+
+expected = {
+    "audit/reviews/1nsi/p0/2026-08-11-architecture-flux-von-neumann.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-reseaux-ihm-thermostat.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-web-post-portee.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-tables-fusion-doublons.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-tables-fusion-collisions.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-types-base-egalite-flottants.yaml",
+}
+observed = {
+    line
+    for line in Path("/tmp/1nsi-six-p0-receipt-paths.txt").read_text().splitlines()
+    if line
+}
+assert observed == expected
+PY
+```
+
+Arreter immediatement si la parente, le test suivi ou l'ensemble exact des six
+chemins ne concorde pas.
+
 ### Task 3: Rafraichir le manifeste vide et l'inventaire
 
 **Files:**
