@@ -201,11 +201,38 @@ def test_minimum_canonical_source_rejects_empty_list_and_matches_correction() ->
     assert minimum([5, 3, 8]) == 3
     assert minimum([42]) == 42
     assert minimum([-5, -1, -8]) == -8
-    with pytest.raises(AssertionError) as error:
+    with pytest.raises(ValueError) as error:
         minimum([])
     assert str(error.value) == "liste doit etre non vide"
 
     source_code = MINIMUM_SOURCE.read_text(encoding="utf-8")
+    assert 'raise ValueError("liste doit etre non vide")' in source_code
+    assert "assert " not in source_code
+
+    optimized_script = f"""
+import runpy
+
+minimum = runpy.run_path({str(MINIMUM_SOURCE)!r})["minimum"]
+try:
+    minimum([])
+except ValueError as error:
+    if str(error) != "liste doit etre non vide":
+        raise RuntimeError(f"message inattendu: {{error}}")
+else:
+    raise RuntimeError("liste vide acceptee")
+print("liste vide refusee")
+"""
+    optimized = subprocess.run(
+        [sys.executable, "-O", "-c", optimized_script],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert optimized.returncode == 0, optimized.stdout + optimized.stderr
+    assert optimized.stdout == "liste vide refusee\n"
+    assert optimized.stderr == ""
+
     tex = MINIMUM_CORRECTION.read_text(encoding="utf-8")
     sequence = re.compile(
         r"(?m)^% PYTHON-SOURCE: code/minimum\.py\n"
@@ -237,14 +264,14 @@ def test_minimum_canonical_source_rejects_empty_list_and_matches_correction() ->
     assert '"type_objet": "corrige"' in tex.splitlines()[0]
     assert r"\textbf{Précondition : la liste est non vide.}" in tex
     assert "déclenchant" in tex
-    assert "AssertionError" in tex
+    assert "ValueError" in tex
     assert re.search(
         r"% BEGIN-VERIFY\n"
         r"% def minimum\(liste\):.*?"
         r"% assert minimum\(\[5, 3, 8\]\) == 3.*?"
         r"% try:.*?"
         r"%     minimum\(\[\]\).*?"
-        r"% except AssertionError as erreur:.*?"
+        r"% except ValueError as erreur:.*?"
         r'%     assert str\(erreur\) == "liste doit etre non vide".*?'
         r"% else:.*?"
         r"%     raise AssertionError.*?"
@@ -300,7 +327,7 @@ def test_minimum_remediation_states_nonempty_precondition_and_matches_answer() -
     assert re.search(
         r"try:\n"
         r"    minimum\(\[\]\)\n"
-        r"except AssertionError as erreur:\n"
+        r"except ValueError as erreur:\n"
         r'    assert str\(erreur\) == "liste doit etre non vide"\n'
         r"else:\n"
         r"    raise AssertionError",

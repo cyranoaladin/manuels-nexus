@@ -39,7 +39,8 @@ def minimum_bugue(liste):
 %
 %     Precondition : liste est non vide.
 %     """
-%     assert len(liste) > 0, "liste doit etre non vide"
+%     if len(liste) == 0:
+%         raise ValueError("liste doit etre non vide")
 %     mini = liste[0]
 %     for x in liste[1:]:
 %         if x < mini:
@@ -48,7 +49,7 @@ def minimum_bugue(liste):
 % assert minimum([5, 3, 8]) == 3
 % try:
 %     minimum([])
-% except AssertionError as erreur:
+% except ValueError as erreur:
 %     assert str(erreur) == "liste doit etre non vide"
 % else:
 %     raise AssertionError("minimum([]) doit echouer")
