@@ -1,0 +1,30 @@
+% META: {"id": "TSPE-CONTIN-ME-005", "chapitre": "TSPE-CONTINUITE", "type_objet": "methode", "capacites_codes": ["C2"], "methodes": ["M5"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M5}{Majorer l'ecart a la limite par une contraction}
+
+\quandUtiliser{%
+  Lorsqu'une suite $u_{n+1} = f(u_n)$ n'est \emph{pas monotone} — donc quand le theoreme de la limite monotone est inutilisable — ou lorsque l'enonce demande une majoration de l'erreur, un nombre d'iterations garanti, ou une vitesse de convergence.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Identifier le point fixe} $\ell$ en resolvant $f(x) = x$ sur l'intervalle de travail.
+    \item \textbf{Majorer $\left|f'\right|$} sur cet intervalle par une constante $k$, et verifier que $k < 1$. Alternativement, calculer directement $f(x) - \ell$ et le factoriser par $(x - \ell)$.
+    \item \textbf{Appliquer l'inegalite des accroissements finis} entre $u_n$ et $\ell$, en utilisant $f(\ell) = \ell$ :
+    \[ \left|u_{n+1} - \ell\right| = \left|f(u_n) - f(\ell)\right| \leq k\left|u_n - \ell\right|. \]
+    \item \textbf{Iterer} pour obtenir $\left|u_n - \ell\right| \leq k^{\,n}\left|u_0 - \ell\right|$.
+    \item \textbf{Conclure} : comme $0 \leq k < 1$, le majorant tend vers $0$, donc $u_n \to \ell$. Pour un nombre d'iterations garanti, resoudre $k^{\,n}\left|u_0 - \ell\right| < \varepsilon$.
+  \end{enumerate}
+}
+
+\pieges{%
+  \begin{itemize}
+    \item Oublier de verifier que l'intervalle est \emph{stable} par $f$ : sans cela, les termes peuvent sortir de la zone ou la majoration de $f'$ est valable.
+    \item Utiliser une majoration $k \geq 1$ : l'inegalite reste vraie mais ne prouve plus rien, puisque $k^n$ ne tend pas vers $0$.
+    \item Confondre condition suffisante et necessaire : une suite peut converger sans etre contractante, comme au voisinage d'un point fixe double ou $f'(\ell) = 1$.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler la majoration sur les premiers termes calcules : l'ecart doit effectivement etre divise par au moins $\dfrac{1}{k}$ a chaque etape. Si ce n'est pas le cas, la constante $k$ est mal estimee ou l'intervalle n'est pas stable.
+}
+\end{fichemethode}

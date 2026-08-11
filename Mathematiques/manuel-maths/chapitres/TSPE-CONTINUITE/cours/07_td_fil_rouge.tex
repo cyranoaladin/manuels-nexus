@@ -1,0 +1,111 @@
+% META: {"id": "TSPE-CONTIN-COURS-07-FR", "chapitre": "TSPE-CONTINUITE", "type_objet": "cours", "sous_type": "td_fil_rouge", "titre": "TD fil rouge — Trois facons d'approcher la meme solution", "temps_gabarit": 50, "capacites": ["C1", "C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, simplify, solveset, S, Eq
+% x = symbols('x')
+% g = x**3 + x - 3
+% assert diff(g, x) == 3*x**2 + 1
+% assert g.subs(x, 1) == -1 and g.subs(x, 2) == 7
+% alpha = float(nsolve(g, x, 1.2))
+% assert abs(alpha - 1.2134116) < 1e-6
+% assert g.subs(x, Rational(12,10)) < 0 < g.subs(x, Rational(13,10))
+% # 1) dichotomie sur [1,2] jusqu'a 1e-3
+% a, b, n = 1.0, 2.0, 0
+% h = lambda z: z**3 + z - 3
+% while b - a > 1e-3:
+%     m = (a + b)/2
+%     if h(a)*h(m) <= 0:
+%         b = m
+%     else:
+%         a = m
+%     n += 1
+% assert n == 10
+% assert a < alpha < b
+% # 2) suite recurrente contractante : u = (3 - u^3 + 3u)/4  <=>  point fixe alpha
+% f = (3 - x**3 + 3*x)/4
+% assert simplify(solveset(Eq(f, x), x, S.Reals).args[0] - 0) is not None
+% assert abs(float(f.subs(x, alpha)) - alpha) < 1e-9
+% dfp = diff(f, x)
+% assert simplify(dfp - (3 - 3*x**2)/4) == 0
+% k = max(abs(float(dfp.subs(x, v))) for v in (1.1, 1.2, 1.3))
+% assert k < 1
+% u, iters = 1.2, 0
+% while abs(u - alpha) > 1e-6:
+%     u = (3 - u**3 + 3*u)/4
+%     iters += 1
+% assert iters <= 12
+% # 3) methode de Newton (approfondissement)
+% v, it2 = 1.2, 0
+% while abs(v - alpha) > 1e-12:
+%     v = v - (v**3 + v - 3)/(3*v**2 + 1)
+%     it2 += 1
+% assert it2 <= 4
+% END-VERIFY
+
+\section*{TD fil rouge — Trois facons d'approcher la meme solution}
+
+\emph{Duree indicative : 50 min. Une seule equation, trois methodes : ce TD
+compare ce que chacune prouve et ce qu'elle coute.}
+
+On etudie l'equation
+\[ x^3 + x = 3. \]
+
+\subsection*{Etape 1 — Ce que la continuite garantit}
+
+On pose $g(x) = x^3 + x - 3$ sur $[1\,;2]$.
+
+\begin{enumerate}
+  \item Calculer $g'(x)$ et en deduire le sens de variation de $g$ sur $[1\,;2]$.
+  \item Calculer $g(1)$ et $g(2)$.
+  \item Demontrer que l'equation admet une unique solution $\alpha$ dans $[1\,;2]$.
+  \item Montrer que $1{,}2 < \alpha < 1{,}3$.
+\end{enumerate}
+
+\subsection*{Etape 2 — La dichotomie}
+
+\begin{enumerate}
+  \item Appliquer trois etapes de dichotomie a partir de $[1\,;2]$, en detaillant
+  les signes utilises.
+  \item Combien d'etapes faut-il pour obtenir un encadrement d'amplitude
+  inferieure a $10^{-3}$ ? Justifier par un calcul sur $2^{-n}$.
+  \item Ecrire en Python une fonction qui renvoie cet encadrement.
+\end{enumerate}
+
+\subsection*{Etape 3 — Une suite recurrente}
+
+On considere la suite definie par $u_0 = 1{,}2$ et
+\[ u_{n+1} = \frac{3 - u_n^{\,3} + 3u_n}{4}. \]
+
+\begin{enumerate}
+  \item Verifier que $\alpha$ est un point fixe de $f : x \mapsto \dfrac{3 - x^3 + 3x}{4}$.
+  \emph{Indication : partir de $\alpha^3 + \alpha = 3$.}
+  \item Calculer $f'(x)$, puis majorer $\left|f'(x)\right|$ sur $[1{,}1\,;1{,}3]$.
+  Cette majoration permet-elle d'appliquer la methode de contraction ?
+  \item En deduire une majoration de $\left|u_n - \alpha\right|$, puis un nombre
+  d'iterations suffisant pour atteindre une precision de $10^{-6}$.
+  \item Comparer au nombre d'etapes de dichotomie necessaire pour la meme precision.
+\end{enumerate}
+
+\subsection*{Etape 4 — Synthese}
+
+\begin{enumerate}
+  \item Parmi les trois etapes precedentes, laquelle \emph{demontre} l'existence
+  de $\alpha$ ? Les deux autres pourraient-elles s'en passer ?
+  \item Un camarade affirme : « la dichotomie prouve que la solution existe,
+  puisqu'elle la trouve ». Que repondre ?
+\end{enumerate}
+
+\approfondissement{%
+  \textbf{La methode de Newton.} Au lieu de couper l'intervalle en deux, on
+  remplace la courbe par sa tangente au point courant et on prend l'abscisse ou
+  cette tangente coupe l'axe. On obtient la relation
+  \[ v_{n+1} = v_n - \frac{g(v_n)}{g'(v_n)} = v_n - \frac{v_n^{\,3} + v_n - 3}{3v_n^{\,2} + 1}. \]
+  En partant de $v_0 = 1{,}2$, quatre iterations suffisent pour depasser douze
+  decimales exactes, la ou la dichotomie en demanderait une quarantaine. Comme
+  pour l'algorithme de Heron, le nombre de decimales exactes double a chaque
+  etape.
+
+  Cette methode n'est pas exigible au programme de terminale. Elle en montre
+  neanmoins la logique : la continuite garantit l'existence de la solution, la
+  derivation fournit un moyen efficace de l'approcher.
+}

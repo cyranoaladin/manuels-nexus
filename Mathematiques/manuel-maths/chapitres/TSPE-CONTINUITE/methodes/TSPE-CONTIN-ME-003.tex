@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-CONTIN-ME-003", "chapitre": "TSPE-CONTINUITE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M3"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M3}{Encadrer une solution par balayage ou par dichotomie}
+
+\quandUtiliser{%
+  Une fois l'existence et l'unicite d'une solution $\alpha$ etablies par le theoreme des valeurs intermediaires, lorsque l'enonce demande une valeur approchee ou un encadrement d'amplitude donnee. Ces deux methodes ne prouvent rien : elles \emph{localisent} une solution dont l'existence est deja acquise.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Verifier le prealable} : la solution doit etre unique sur l'intervalle de travail, sinon l'encadrement obtenu ne designe aucune solution en particulier.
+    \item \textbf{Balayage} : parcourir l'intervalle par pas reguliers et reperer le changement de signe de $f(x) - k$. Pour gagner une decimale, on divise le pas par $10$, ce qui coute une dizaine d'evaluations de $f$.
+    \item \textbf{Dichotomie} : partir de $[a\,;b]$, calculer le milieu $m$, puis remplacer $a$ ou $b$ par $m$ selon le signe du produit $f(a) \times f(m)$. La longueur de l'intervalle est divisee par $2$ a chaque etape, pour une seule evaluation de $f$.
+    \item \textbf{Conclure} en donnant l'encadrement obtenu, puis la valeur approchee a la precision demandee.
+  \end{enumerate}
+}
+
+\pieges{%
+  \begin{itemize}
+    \item Confondre le sens de l'encadrement quand la fonction est \emph{decroissante} : c'est alors $f(\text{borne gauche}) > k > f(\text{borne droite})$.
+    \item Ecrire une boucle \verb|while| dont la condition d'arret suppose une convergence non demontree : la boucle peut ne jamais s'arreter.
+    \item Croire que le balayage est plus rapide : apres $n$ etapes, la dichotomie donne une amplitude $\dfrac{b-a}{2^{n}}$. Pour passer de $10^{-1}$ a $10^{-3}$, elle demande environ $7$ evaluations la ou le balayage en demande une vingtaine.
+  \end{itemize}
+}
+
+\verifier{%
+  Controler que les deux bornes de l'encadrement final donnent bien des images \emph{de part et d'autre} de la valeur cible, et que l'amplitude annoncee est effectivement atteinte.
+}
+\end{fichemethode}

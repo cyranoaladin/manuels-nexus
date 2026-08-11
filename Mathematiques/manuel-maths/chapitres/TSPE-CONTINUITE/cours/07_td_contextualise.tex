@@ -1,0 +1,106 @@
+% META: {"id": "TSPE-CONTIN-COURS-07-TC", "chapitre": "TSPE-CONTINUITE", "type_objet": "cours", "sous_type": "td_contextualise", "titre": "TD contextualise — Le seuil de basculement d'une population", "temps_gabarit": 45, "capacites": ["C1", "C2"], "mode_creation": "ex_nihilo", "sources_inspiration": [], "status": "generated"}
+
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, simplify, solveset, S, Eq
+% x = symbols('x')
+% # Partie A : cout total C(x) = x^3 - 9x^2 + 30x + 20, recette R(x) = 26x
+% C = x**3 - 9*x**2 + 30*x + 20
+% R = 26*x
+% B = simplify(R - C)
+% assert B == -x**3 + 9*x**2 - 4*x - 20
+% assert diff(B, x) == -3*x**2 + 18*x - 4
+% assert B.subs(x, 0) == -20 and B.subs(x, 8) == 12 and B.subs(x, 9) == -56
+% # B' s'annule en 3 -/+ sqrt(69)/3 : trois branches monotones sur [0,8]
+% from sympy import sqrt, Poly, factor
+% crit = sorted(float(v) for v in solveset(Eq(diff(B, x), 0), x, S.Reals))
+% assert abs(crit[0] - 0.2311254) < 1e-6 and abs(crit[1] - 5.7688746) < 1e-6
+% assert abs(float(B.subs(x, crit[0])) - (-20.4561)) < 1e-3
+% assert abs(float(B.subs(x, crit[1])) - 64.4561) < 1e-3
+% # une seule racine sur [0,8], et elle est exacte
+% assert B.subs(x, 2) == 0
+% # egalite algebrique, et non egalite de representation : factor() renvoie la
+% # bonne forme mais SymPy ne compare pas structurellement deux Mul equivalents.
+% assert simplify(B + (x - 2)*(x**2 - 7*x - 10)) == 0
+% reelles = sorted(float(r) for r in Poly(B, x).real_roots())
+% assert len([r for r in reelles if 0 <= r <= 8]) == 1
+% assert abs(reelles[0] - (-1.2169906)) < 1e-6
+% assert abs(reelles[2] - 8.2169906) < 1e-6
+% # Partie B : p_{n+1} = f(p_n), f(x) = 0.6x + 0.28
+% f = Rational(3,5)*x + Rational(28,100)
+% assert solveset(Eq(f, x), x, S.Reals) == {Rational(7,10)}
+% p = Rational(1,5)
+% termes = [p]
+% for _ in range(4):
+%     p = simplify(f.subs(x, p)); termes.append(p)
+% assert [float(v) for v in termes] == [0.2, 0.4, 0.52, 0.592, 0.6352]
+% assert all(0 <= float(v) <= 1 for v in termes)
+% # d_n = 0.7 - p_n est geometrique de raison 0.6
+% for k, v in enumerate(termes):
+%     assert abs(float(v) - (0.7 - 0.5*0.6**k)) < 1e-12
+% n = 0
+% while 0.7 - 0.5*0.6**n < 0.65:
+%     n += 1
+% assert n == 5
+% assert 0.7 - 0.5*0.6**4 < 0.65 <= 0.7 - 0.5*0.6**5
+% END-VERIFY
+
+\section*{TD contextualise — Le seuil de basculement d'une population}
+
+\emph{Duree indicative : 45 min. Ce TD mobilise les deux capacites du chapitre :
+le theoreme des valeurs intermediaires en partie A, les suites recurrentes en
+partie B.}
+
+Une cooperative agricole produit $x$ tonnes d'un produit bio, avec $0 \leq x \leq 8$.
+Son cout total de production, en milliers d'euros, est modelise par
+\[ C(x) = x^3 - 9x^2 + 30x + 20, \]
+et elle vend chaque tonne $26$ milliers d'euros.
+
+\subsection*{Partie A — Le seuil de rentabilite}
+
+\begin{enumerate}
+  \item Exprimer la recette $R(x)$, puis montrer que le benefice vaut
+  $B(x) = -x^3 + 9x^2 - 4x - 20$.
+  \item Calculer $B(0)$ et $B(8)$. Que peut-on en deduire immediatement ?
+  \item Calculer $B'(x)$. Montrer que $B'$ s'annule en $3 - \dfrac{\sqrt{69}}{3}$ et
+  $3 + \dfrac{\sqrt{69}}{3}$, dont on donnera des valeurs approchees, puis dresser
+  le tableau de variations de $B$ sur $[0\,;8]$.
+  \item Le tableau fait apparaitre trois branches monotones. Determiner, branche
+  par branche, le nombre de solutions de l'equation $B(x) = 0$ sur $[0\,;8]$.
+  \item Verifier que $2$ est solution evidente, puis factoriser $B(x)$ sous la
+  forme $-(x-2)\left(x^2 - 7x - 10\right)$. En deduire toutes les racines reelles
+  de $B$ et confirmer le decompte de la question precedente.
+  \item Interpreter : a partir de quelle production la cooperative devient-elle
+  beneficiaire, et jusqu'a quelle production le reste-t-elle ?
+  \item \emph{Question ouverte.} Que vaut $B(9)$ ? Le modele reste-t-il pertinent
+  au-dela de $8$ tonnes ? Justifier en etudiant la limite de $B$ en $+\infty$.
+\end{enumerate}
+
+\subsection*{Partie B — La conversion des parcelles}
+
+Chaque annee, la cooperative convertit en bio $40\,\%$ des parcelles encore
+conventionnelles, mais $28\,\%$ de la surface totale est reprise par de
+nouveaux adherents deja convertis. On note $p_n$ la proportion de surface bio
+l'annee $n$, avec $p_0 = 0{,}2$, et on admet que
+\[ p_{n+1} = 0{,}6\,p_n + 0{,}28. \]
+
+\begin{enumerate}
+  \item Calculer $p_1$, $p_2$, $p_3$ et $p_4$.
+  \item Montrer que l'intervalle $[0\,;1]$ est stable par $f : x \mapsto 0{,}6x + 0{,}28$,
+  puis que $0 \leq p_n \leq 1$ pour tout $n$.
+  \item Montrer que $(p_n)$ est croissante.
+  \item En deduire qu'elle converge, puis determiner sa limite. Interpreter :
+  la cooperative atteindra-t-elle un jour $100\,\%$ de surface bio ?
+  \item On pose $d_n = 0{,}7 - p_n$. Montrer que $(d_n)$ est geometrique, en
+  deduire l'expression de $p_n$, puis determiner la premiere annee ou la
+  proportion depasse $65\,\%$.
+\end{enumerate}
+
+\subsection*{Partie C — Synthese}
+
+\begin{enumerate}
+  \item Les deux parties utilisent la continuite, mais pas au meme endroit du
+  raisonnement. Preciser lequel dans chaque cas.
+  \item Dans la partie A, la solution $s$ existe sans qu'on sache la calculer ;
+  dans la partie B, la limite se calcule exactement. Expliquer ce qui, dans les
+  deux situations, rend l'une inaccessible et l'autre accessible.
+\end{enumerate}

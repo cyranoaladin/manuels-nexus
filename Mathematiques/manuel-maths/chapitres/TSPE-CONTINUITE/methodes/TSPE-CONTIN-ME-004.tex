@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-CONTIN-ME-004", "chapitre": "TSPE-CONTINUITE", "type_objet": "methode", "capacites_codes": ["C1"], "methodes": ["M4"], "sources_inspiration": [], "status": "generated"}
+\begin{fichemethode}{M4}{Discuter le nombre de solutions de $f(x) = k$ a l'aide du tableau de variations}
+
+\quandUtiliser{%
+  Lorsque la fonction n'est pas monotone sur l'intervalle etudie, ou lorsque l'enonce demande de discuter le nombre de solutions selon un parametre. C'est la situation ou le theoreme des valeurs intermediaires ne peut pas s'appliquer directement.
+}
+
+\pasApas{%
+  \begin{enumerate}
+    \item \textbf{Decouper} l'intervalle d'etude en intervalles sur lesquels $f$ est strictement monotone, en s'appuyant sur le signe de $f'$.
+    \item \textbf{Relever}, pour chaque morceau, les valeurs de $f$ aux bornes (ou les limites si une borne est infinie).
+    \item \textbf{Compter} : sur un morceau ou $f$ est continue et strictement monotone, l'equation $f(x) = k$ admet une solution si et seulement si $k$ est strictement compris entre les deux valeurs aux bornes, et alors elle est unique.
+    \item \textbf{Traiter a part les valeurs extremes} : si $k$ egale un extremum local, deux morceaux voisins fournissent la meme solution, qui ne doit etre comptee qu'une fois.
+    \item \textbf{Additionner} les solutions morceau par morceau, puis conclure selon les valeurs de $k$.
+  \end{enumerate}
+}
+
+\pieges{%
+  \begin{itemize}
+    \item Appliquer le TVI a l'intervalle entier sans verifier la monotonie : on conclut alors a une solution unique alors qu'il peut y en avoir plusieurs.
+    \item Compter deux fois une solution situee a la jonction de deux morceaux.
+    \item Oublier les cas $k$ egal a un extremum, ou $k$ hors de l'image de $f$ : ce sont precisement les cas ou le nombre de solutions change.
+  \end{itemize}
+}
+
+\verifier{%
+  Le nombre de solutions ne peut pas depasser le nombre de morceaux monotones. Verifier aussi la coherence aux valeurs charnieres : le decompte doit varier d'une unite quand $k$ franchit un extremum.
+}
+\end{fichemethode}
