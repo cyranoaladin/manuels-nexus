@@ -243,6 +243,19 @@ def test_thermostat_exposes_tested_user_controls_and_state() -> None:
     assert 'assert interface_thermostat("AUTO", 25)' in verify_code
     assert "except ValueError as erreur:" in verify_code
 
+    course_record = {
+        "id": "1NSI-RES-COURS-C3",
+        "path": "NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex",
+        "metadata": {},
+        "scope": "object",
+        "chapter": "1NSI-RESEAUX",
+    }
+    execution = review_module.execution_observation(course_record, REPO_ROOT)
+    assert execution is not None
+    assert execution["fresh_verdict"] == "pass"
+    assert execution["matches_receipt"] is True
+    assert execution["anomalies"] == []
+
 
 def test_post_does_not_claim_to_prevent_server_side_logging() -> None:
     assert WEB_POST_CORRECTION.is_file()
