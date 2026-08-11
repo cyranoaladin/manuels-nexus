@@ -1,6 +1,6 @@
 # Synthese de revue 1NSI
 
-Protocol digest: `sha256:f1dacc0230ee6b2fe898c6f7b728af7ad72b3f44b00f653cacadb05245080b57`
+Protocol digest: `sha256:8127337d665962e008eb129348ddb29f59df1e666503d73929bdb644ddf30f28`
 Entries: 349
 Publication approval: false
 Human confirmation required: true
@@ -12,28 +12,28 @@ Human confirmation required: true
 - human_confirmation_required: 105
 
 ## Pedagogical
-- pass: 220
-- issue: 81
+- pass: 211
+- issue: 89
 - not_applicable: 0
-- human_confirmation_required: 48
+- human_confirmation_required: 49
 
 ## Anomalies
-- Total: 279
+- Total: 292
 
 ### By severity
-- P0: 140
-- P1: 132
-- P2: 7
+- P0: 143
+- P1: 140
+- P2: 9
 - P3: 0
 
 ### By dimension
-- scientific: 156
-- pedagogical: 108
-- traceability: 15
+- scientific: 158
+- pedagogical: 120
+- traceability: 14
 
 ### Actions
 - `1NSI-REV-ADGK-C2-FLOTTANTS-RENDU` [P0/scientific]: Borner et contrôler montant et pieces à des entiers en unités minimales, ou employer une arithmétique décimale exacte, puis ajouter un test de régression couvrant 0.3 avec [0.2, 0.1].
-- `1NSI-REV-ADGK-C3-EGALITE-KNN` [P1/scientific]: Définir puis tester des règles déterministes pour les égalités de distance et de vote.
+- `1NSI-REV-ADGK-C3-EGALITE-KNN` [P0/scientific]: Définir puis tester des règles déterministes pour les égalités de distance et de vote.
 - `1NSI-REV-ADGK-EVAL-A-ECRITURE-KNN` [P1/pedagogical]: Ajouter une tâche observable d’écriture ou de complétion de l’algorithme k-NN.
 - `1NSI-REV-ADGK-EVAL-A-UNITES-KNN` [P2/scientific]: Normaliser les deux variables ou faire discuter explicitement l’effet des unités.
 - `1NSI-REV-ADGK-EVAL-B-ECRITURE-KNN` [P1/pedagogical]: Ajouter une tâche observable d’écriture ou de complétion de l’algorithme k-NN.
@@ -60,6 +60,7 @@ Human confirmation required: true
 - `1NSI-REV-1NSI-LANG-CO-005-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-LANG-COURS-C1-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-LANG-COURS-C1-DOMAINE-SOMME-CHIFFRES` [P1/scientific]: Déclarer n entier naturel, ou refuser explicitement zéro et adapter les tests.
+- `1NSI-REV-LANG-COURS-C1-EXEMPLE-SANS-CONDITIONNELLE` [P0/scientific]: Ajouter une conditionnelle pertinente au bloc ou limiter explicitement l'annonce aux constructions effectivement présentes.
 - `1NSI-REV-1NSI-LANG-COURS-C2-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-LANG-COURS-C2-TYPAGE` [P0/scientific]: Distinguer typage statique/dynamique de typage explicite/inféré et fournir des exemples corrects.
 - `1NSI-REV-1NSI-LANG-COURS-C3-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
@@ -108,6 +109,7 @@ Human confirmation required: true
 - `1NSI-REV-1NSI-PM-COURS-C1-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-PM-COURS-C2-QUART-HORAIRE-NON-MATERIALISE` [P1/pedagogical]: Relier le cours à un calendrier de projets réels et à des preuves de suivi annuel.
 - `1NSI-REV-1NSI-PM-COURS-C3-PY-SOURCE` [P0/scientific]: Extraire également le bloc bogué dans un fichier .py canonique et vérifier les deux versions depuis leurs sources.
+- `1NSI-REV-PM-COURS-C3-POIDS-NON-FINIS` [P0/scientific]: Exiger des valeurs et des poids réels finis avec math.isfinite, prévenir ou détecter les débordements des calculs et du résultat, puis ajouter des tests de régression pour NaN, +inf, -inf et [1e308, 1e308].
 - `1NSI-REV-1NSI-PM-COURS-C4-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-PM-COURS-C4-CONTROLE-DOCSTRING-INSUFFISANT` [P1/pedagogical]: Distinguer présence et qualité, puis fournir une grille humaine pour rôle, préconditions et postconditions.
 - `1NSI-REV-1NSI-PM-EVAL-A-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
@@ -124,16 +126,16 @@ Human confirmation required: true
 - `1NSI-REV-1NSI-PM-EX-001-PARCOURS-UNIQUE` [P1/pedagogical]: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
 - `1NSI-REV-1NSI-PM-EX-001-AIDES-ABSENTES` [P1/pedagogical]: Ajouter trois niveaux de coup de pouce reliés à cet exercice et vérifier leur exclusion des corrigés élève.
 - `1NSI-REV-1NSI-PM-EX-002-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
-- `1NSI-REV-1NSI-PM-EX-002-PARCOURS-UNIQUE` [P1/pedagogical]: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
+- `1NSI-REV-1NSI-PM-EX-002-PARCOURS-UNIQUE` [P1/pedagogical]: Ajouter un entraînement C2 de parcours 2 avec des critères de réussite observables.
 - `1NSI-REV-1NSI-PM-EX-002-AIDES-ABSENTES` [P1/pedagogical]: Ajouter trois niveaux de coup de pouce reliés à cet exercice et vérifier leur exclusion des corrigés élève.
 - `1NSI-REV-1NSI-PM-EX-003-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-PM-EX003-AFFICHAGE-RETOUR` [P0/scientific]: Spécifier et tester une interface unique dans l'énoncé et le corrigé.
 - `1NSI-REV-1NSI-PM-EX-003-COHERENCE-CORRIGE` [P1/pedagogical]: Harmoniser print ou return et tester le même contrat des deux côtés.
-- `1NSI-REV-1NSI-PM-EX-003-PARCOURS-UNIQUE` [P1/pedagogical]: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
+- `1NSI-REV-1NSI-PM-EX-003-PARCOURS-UNIQUE` [P1/pedagogical]: Ajouter un entraînement C3 de parcours 1 avec des critères de réussite observables.
 - `1NSI-REV-1NSI-PM-EX-004-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-PM-EX-004-PARCOURS-UNIQUE` [P1/pedagogical]: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
 - `1NSI-REV-1NSI-PM-EX-005-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
-- `1NSI-REV-1NSI-PM-EX-005-PARCOURS-UNIQUE` [P1/pedagogical]: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
+- `1NSI-REV-1NSI-PM-EX-005-PARCOURS-UNIQUE` [P1/pedagogical]: Ajouter un entraînement C2 de parcours 2 et un entraînement C3 de parcours 1, avec des critères de réussite observables.
 - `1NSI-REV-1NSI-PM-RE-C3-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-EXEC-B787AE31D1E7` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-1NSI-PM-RE-C3-CORRIGE-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
@@ -151,7 +153,6 @@ Human confirmation required: true
 - `1NSI-REV-RES-BITALT-COURSE` [P0/scientific]: Modéliser séparément livraison du paquet et livraison de l’ACK, conserver le bit attendu du récepteur et tester le rejet d’un doublon.
 - `1NSI-REV-RES-RECURSION-COURSE` [P0/scientific]: Remplacer l’exigence par une simulation réseau de Première ou fournir un outil opaque, et étiqueter clairement tout parcours récursif hors programme.
 - `1NSI-REV-RES-C2-DIRECT` [P1/pedagogical]: Demander séparément l’adjacence et la connectivité, avec les résultats attendus pour chacune.
-- `1NSI-REV-EXEC-08174A5BF3B9` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-RES-BITALT-EVALA` [P1/pedagogical]: Ajouter une trace avec paquet reçu, ACK perdu et retransmission du même bit.
 - `1NSI-REV-RES-BITALT-EVALA-CO` [P1/pedagogical]: Compléter la trace par le bit attendu, le doublon ignoré et l’ACK renvoyé.
 - `1NSI-REV-RES-BITALT-EVALB` [P1/pedagogical]: Introduire une perte d’ACK et demander si le récepteur livre ou ignore la retransmission.
@@ -176,9 +177,15 @@ Human confirmation required: true
 - `1NSI-REV-TAB-COURS-C4-FUSION-DOUBLONS` [P0/scientific]: Exiger l'unicité des clés avec contrôle testé ou implémenter une fusion qui conserve toutes les correspondances.
 - `1NSI-REV-TAB-COURS-C4-PREREQUIS` [P1/pedagogical]: Réordonner la progression ou décomposer la fonction avec un guidage syntaxique explicite.
 - `1NSI-REV-TAB-EVAL-A-COHERENCE` [P2/pedagogical]: Ajouter une question courte et discriminante sur un doublon ou une contrainte de cohérence.
+- `1NSI-REV-TAB-EVAL-A-BAREME-COMPETENCES` [P1/pedagogical]: Ajouter à chaque question un barème détaillé par compétence, cohérent avec le total de points.
+- `1NSI-REV-TAB-EVAL-A-CORRIGE-BAREME-DETAILLE-ABSENT` [P1/pedagogical]: Ajouter un corrigé-barème commenté question par question, relié au sujet et à ses compétences.
 - `1NSI-REV-TAB-EVAL-B-COHERENCE` [P2/pedagogical]: Introduire dans cette variante un jeu de données incohérent ou une clé répétée à diagnostiquer.
+- `1NSI-REV-TAB-EVAL-B-BAREME-COMPETENCES` [P1/pedagogical]: Ajouter à chaque question un barème détaillé par compétence, cohérent avec le total de points.
+- `1NSI-REV-TAB-EVAL-B-CORRIGE-BAREME-DETAILLE-ABSENT` [P1/pedagogical]: Ajouter un corrigé-barème commenté question par question, relié au sujet et à ses compétences.
 - `1NSI-REV-TAB-EX-004-DONNEES` [P1/pedagogical]: Référencer explicitement 1NSI-TAB-EX-002 et le lier, ou recopier la table notes dans l'énoncé.
 - `1NSI-REV-TAB-QCM-AUTOCORRECTION` [P1/pedagogical]: Ajouter une correction séparée avec diagnostic par distracteur et une question sur la cohérence d'une table.
+- `1NSI-REV-TAB-QCM-VOLUME` [P2/pedagogical]: Porter le QCM à quinze questions, au moins une par capacité, en conservant le diagnostic par distracteur exigé par l'anomalie d'autocorrection.
+- `1NSI-REV-TAB-REM-CIRCUIT-INCOMPLET` [P1/pedagogical]: Fournir les trois exercices contractuels (corrigé, avec aide, autonome) puis une revalidation explicite.
 - `1NSI-REV-EXEC-599338E52EBC` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-EXEC-73CC49232A82` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-TB-C2-COUVERTURE` [P1/scientific]: Étendre C2 à l'évaluation du nombre de bits d'un entier, de la somme et du produit de deux entiers.
@@ -188,8 +195,14 @@ Human confirmation required: true
 - `1NSI-REV-TB-COURS-C4-CONSIGNE` [P1/pedagogical]: Réécrire l'activité en une consigne directe, complète et testable, sans fragment provisoire.
 - `1NSI-REV-TB-COURS-C5-REENCODAGE` [P0/scientific]: Prendre des octets en entrée, les décoder avec la source puis les encoder vers la cible, avec fichiers et tests dédiés.
 - `1NSI-REV-TB-EVAL-A-COUVERTURE` [P1/scientific]: Ajouter des items sur produit, représentation calculée d'un flottant et conversion effective de fichier.
+- `1NSI-REV-TB-EVAL-A-BAREME-COMPETENCES` [P1/pedagogical]: Ajouter à chaque question un barème détaillé par compétence, cohérent avec le total de points.
+- `1NSI-REV-TB-EVAL-A-CORRIGE-BAREME-DETAILLE-ABSENT` [P1/pedagogical]: Ajouter un corrigé-barème commenté question par question, relié au sujet et à ses compétences.
 - `1NSI-REV-TB-EVAL-B-COUVERTURE` [P1/scientific]: Réserver dans B des items complémentaires sur produit, représentation binaire d'un réel et transcodage de fichier.
+- `1NSI-REV-TB-EVAL-B-BAREME-COMPETENCES` [P1/pedagogical]: Ajouter à chaque question un barème détaillé par compétence, cohérent avec le total de points.
+- `1NSI-REV-TB-EVAL-B-CORRIGE-BAREME-DETAILLE-ABSENT` [P1/pedagogical]: Ajouter un corrigé-barème commenté question par question, relié au sujet et à ses compétences.
 - `1NSI-REV-TB-QCM-AUTOCORRECTION` [P1/pedagogical]: Créer un corrigé professeur séparé et un retour élève minimal orientant chaque erreur vers le cours pertinent.
+- `1NSI-REV-TB-QCM-VOLUME` [P2/pedagogical]: Porter le QCM à quinze questions, au moins une par capacité, en conservant le diagnostic par distracteur exigé par l'anomalie d'autocorrection.
+- `1NSI-REV-TB-REM-CIRCUIT-INCOMPLET` [P1/pedagogical]: Fournir les trois exercices contractuels (corrigé, avec aide, autonome) puis une revalidation explicite.
 - `1NSI-REV-EXEC-EECBC2B9CE8D` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-EXEC-58C01FCF940B` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-TC-REFS-LOCALES` [P1/scientific]: Remplacer C1-C4 par des références canoniques reliées aux formulations officielles et classifier explicitement toute capacité supplémentaire.

@@ -156,26 +156,26 @@ PRE_ACTOR_PROVENANCE_POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
 PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
 PRE_COUNTER_REVIEW_POLICY_COMMIT = "f0c1a095288e000fa014653afc7f60f5c2b0b273"
 PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
-POLICY_COMMIT = "6fdd04b2e8e68a77fd27cdd630284a14a029ee14"
-RECEIPTS_COMMIT = "60847229983f6712d1ed7f36791a0037ca5b5282"
+POLICY_COMMIT = "4b4e7e403d87b3a3968870652187d12885880cd4"
+RECEIPTS_COMMIT = "5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99"
 CURRENT_RECEIPT_SEALS = {
     "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": (
-        "sha256:1a02fa37a9c45b1cbef5c30ff8e95893e1faaca672c5b473ef511b788a0b4066"
+        "sha256:15bac7200bbefd1e43fa3e4523eca3f88c626a9e582673c37af7656636480d72"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": (
-        "sha256:5dd69794cad89b5f89a5a0a2148c6d7da1cde56926232d96078bdb4dd539f23b"
+        "sha256:2295f0553659160f809bb8f8dd94d7247fee9fabcd3b4c0b44ff547a2c2d3f31"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": (
-        "sha256:3afebc4c6263ad9e5b454f17615136addd5584c5c669fee715793ca1c3ad46c6"
+        "sha256:956ba28bfe50cab1317f1a563694c3002762b76d8a4ca517bdf33c613cfe98df"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": (
-        "sha256:71c853c987a94bebc15fe9a5061a9b08406f8b43255f4926e1efe678e80a8fa7"
+        "sha256:c413ac699a39372b45f49c07c5ee0ddf1812fc607f5115666a053dea8d067aae"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": (
-        "sha256:232ccb9335a13d5593df033a8a5938137a7144cb19062a210ba73460d462474c"
+        "sha256:73654ddf5a0d214b00d8761db47ce3543b896710c899ff974adcf3cb91d4efc0"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": (
-        "sha256:057995e913387674e6f9a52b8cc501355d4a0c4e90b373880ba3b080265867dc"
+        "sha256:9191629712c468932e48fc3f3b92fc24864c2d39d30530a4b960c2debb737074"
     ),
 }
 PRE_TEN_P0_RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
@@ -4006,17 +4006,25 @@ def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
     register_anomalies = [
         anomaly for entry in document["entries"] for anomaly in entry["anomalies"]
     ]
-    assert len(register_anomalies) == 279
-    assert Counter(anomaly["severity"] for anomaly in register_anomalies) == Counter(
-        {"P0": 140, "P1": 132, "P2": 7}
+    sealed_anomalies = [
+        anomaly for finding in findings for anomaly in finding["anomalies"]
+    ]
+    expected_severities = Counter(
+        anomaly["severity"] for anomaly in sealed_anomalies
     )
+    expected_severities["P1"] += len(EXPECTED_EXECUTION_DEBT)
+    assert len(register_anomalies) == len(sealed_anomalies) + len(
+        EXPECTED_EXECUTION_DEBT
+    )
+    assert Counter(
+        anomaly["severity"] for anomaly in register_anomalies
+    ) == expected_severities
 
     assert len(findings) == len(document["entries"]) == 349
     assert "Entries: 349" in summary_text
-    assert "- Total: 279" in summary_text
-    assert "- P0: 140" in summary_text
-    assert "- P1: 132" in summary_text
-    assert "- P2: 7" in summary_text
+    assert f"- Total: {len(register_anomalies)}" in summary_text
+    for severity in ("P0", "P1", "P2"):
+        assert f"- {severity}: {expected_severities[severity]}" in summary_text
     assert review_module.release_gate_allows(document, policy) is False
 
 

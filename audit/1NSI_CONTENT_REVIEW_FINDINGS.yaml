@@ -1,10 +1,10 @@
 artifact_type: 1nsi_content_review_findings
 schema_version: 1
 manual: 1NSI
-review_run_id: 1nsi-contracts-2026-08-11-six-p0-019ff021-v1
+review_run_id: 1nsi-contracts-2026-08-11-actor-provenance-019ff06c-v3
 review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-review_receipt_sha256: sha256:27918b6e7df21c6c49b23bd1b53425971b385f00d796e739bc0d4fce5c497474
-sealing_commit_sha: bbea8bd7d13c67dd7618c2bde8cd4a8929307555
+review_receipt_sha256: sha256:2295f0553659160f809bb8f8dd94d7247fee9fabcd3b4c0b44ff547a2c2d3f31
+sealing_commit_sha: 5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99
 findings:
 - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
   scope: contract
@@ -16,13 +16,13 @@ findings:
   - P-ALGO-04
   - P-ALGO-05
   provenance: &id002
-    reviewer_id: 019ff021-bfee-7950-b26d-34689f197ee3
-    review_run_id: 1nsi-contracts-2026-08-11-six-p0-019ff021-v1
+    reviewer_id: 019ff06c-1355-7cb3-84fd-fa8b6398357a
+    review_run_id: 1nsi-contracts-2026-08-11-actor-provenance-019ff06c-v3
     reviewer_model: gpt-5.6-sol
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-contracts.yaml
-    review_receipt_sha256: sha256:27918b6e7df21c6c49b23bd1b53425971b385f00d796e739bc0d4fce5c497474
-    sealing_commit_sha: bbea8bd7d13c67dd7618c2bde8cd4a8929307555
+    review_receipt_sha256: sha256:2295f0553659160f809bb8f8dd94d7247fee9fabcd3b4c0b44ff547a2c2d3f31
+    sealing_commit_sha: 5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99
   dimensions:
     scientific:
       verdict: pass
@@ -57,13 +57,13 @@ findings:
   capacity_refs:
   - P-ALGO-04
   provenance: &id001
-    reviewer_id: 019ff021-c059-7fe2-a84d-ddc9fdb3e495
-    review_run_id: 1nsi-objects-algorithms-2026-08-11-six-p0.9f59a4c7-455a-49b8-a1f7-a6bb5af90347
+    reviewer_id: 019ff06c-13e1-79b3-837c-fa66c123609f
+    review_run_id: 1nsi-objects-algorithms-2026-08-11-counter-review.62d88c4a-8e3b-4f2c-9c45-e58336c1396b-v3
     reviewer_model: gpt-5.6-sol
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml
-    review_receipt_sha256: sha256:e924d464142fbe1b3f7e05454a9a05978cfea7af022802a32913e0b6a27d8bea
-    sealing_commit_sha: bbea8bd7d13c67dd7618c2bde8cd4a8929307555
+    review_receipt_sha256: sha256:15bac7200bbefd1e43fa3e4523eca3f88c626a9e582673c37af7656636480d72
+    sealing_commit_sha: 5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99
   dimensions:
     scientific:
       verdict: pass
@@ -401,7 +401,7 @@ findings:
       anomaly_ids: []
   anomalies:
   - id: 1NSI-REV-ADGK-C3-EGALITE-KNN
-    severity: P1
+    severity: P0
     dimension: scientific
     fact:
       path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/code/k_plus_proches_voisins.py
@@ -2003,13 +2003,13 @@ findings:
   - P-ARCH-03B
   - P-ARCH-03C
   provenance: &id004
-    reviewer_id: 019ff021-c0a3-71c2-a2b3-b5cfacd770cc
-    review_run_id: 1nsi-objects-systems-web-2026-08-11-six-p0-c64cae93-bc64-4484-9031-4e4981a891cc-v1
+    reviewer_id: 019ff06c-14b7-70c0-8106-cb6a133181d0
+    review_run_id: 1nsi-objects-systems-web-2026-08-11-clean-observations-816f2911-a26c-4faf-9adc-37194116286e-v3
     reviewer_model: gpt-5.6-sol
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml
-    review_receipt_sha256: sha256:8b80cadddfe3e9488302d302b693ae1d2f4c17ab7e986538966890e60d43210d
-    sealing_commit_sha: bbea8bd7d13c67dd7618c2bde8cd4a8929307555
+    review_receipt_sha256: sha256:73654ddf5a0d214b00d8761db47ce3543b896710c899ff974adcf3cb91d4efc0
+    sealing_commit_sha: 5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99
   dimensions:
     scientific:
       verdict: pass
@@ -2359,8 +2359,8 @@ findings:
       facts:
       - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
         line_start: 2
-        line_end: 62
-        excerpt_sha256: sha256:dc6359eb0dd14b400a190464de754a7ab89515a009d2c140afee1bbd2bd66c8d
+        line_end: 65
+        excerpt_sha256: sha256:eba015d4c1acf0dfa31342a3ea02e702d323bb706e864d80e678c628f22546a1
         fact_type: source_statement
         observation: La lecture complète de 1NSI-ARCHOS-COURS-C1 couvre les constituants de von Neumann et la distinction
           mono/multiprocesseur et a été confrontée au contrat, au programme et aux objets liés.
@@ -2372,8 +2372,8 @@ findings:
       facts:
       - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
         line_start: 2
-        line_end: 62
-        excerpt_sha256: sha256:dc6359eb0dd14b400a190464de754a7ab89515a009d2c140afee1bbd2bd66c8d
+        line_end: 65
+        excerpt_sha256: sha256:eba015d4c1acf0dfa31342a3ea02e702d323bb706e864d80e678c628f22546a1
         fact_type: pedagogical_structure
         observation: Dans 1NSI-ARCHOS-COURS-C1, le format cours organise définitions, exemples et mise en activité autour
           de les constituants de von Neumann et la distinction mono/multiprocesseur.
@@ -2924,13 +2924,13 @@ findings:
   capacity_refs:
   - P-LANG-01
   provenance: &id008
-    reviewer_id: 019ff022-24e3-71d3-a75b-c73958d31b31
-    review_run_id: 1nsi-objects-language-project-2026-08-11-six-p0-bd346cbf-v1
+    reviewer_id: 019ff06c-1446-7f42-8d98-326189198929
+    review_run_id: 1nsi-objects-language-project-2026-08-11-actor-provenance-019ff06c-1446-7f42-8d98-326189198929-v3
     reviewer_model: gpt-5.6-sol
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-language-project.yaml
-    review_receipt_sha256: sha256:7e48bb58ed2328f19a62e3cabac6d6e774783743b3f50af9437be7ab8c2ed404
-    sealing_commit_sha: bbea8bd7d13c67dd7618c2bde8cd4a8929307555
+    review_receipt_sha256: sha256:c413ac699a39372b45f49c07c5ee0ddf1812fc607f5115666a053dea8d067aae
+    sealing_commit_sha: 5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99
   dimensions:
     scientific:
       verdict: issue
@@ -3219,7 +3219,8 @@ findings:
   dimensions:
     scientific:
       verdict: issue
-      justification: La réattestation indépendante relève 2 réserve(s) scientific, dont 1 nouvelle(s) contre-vérifiée(s).
+      justification: Les cinq constructions sont correctement définies, mais l'exemple somme_chiffres n'illustre pas la conditionnelle
+        qu'il annonce, son domaine exclut implicitement les entiers négatifs et le bloc publié n'a pas de source .py.
       facts:
       - path: NSI/chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C1.tex
         line_start: 7
@@ -3231,6 +3232,7 @@ findings:
       anomaly_ids:
       - 1NSI-REV-1NSI-LANG-COURS-C1-PY-SOURCE
       - 1NSI-REV-LANG-COURS-C1-DOMAINE-SOMME-CHIFFRES
+      - 1NSI-REV-LANG-COURS-C1-EXEMPLE-SANS-CONDITIONNELLE
     pedagogical:
       verdict: pass
       justification: Le cours passe d'une définition à deux exemples, une erreur fréquente puis une comparaison à produire.
@@ -3271,6 +3273,20 @@ findings:
       observation: La docstring limite n aux entiers positifs, alors que le code et son appel traitent aussi n = 0.
     consequence: Le contrat d'utilisation est incohérent sur le cas zéro.
     expected_action: Déclarer n entier naturel, ou refuser explicitement zéro et adapter les tests.
+  - id: 1NSI-REV-LANG-COURS-C1-EXEMPLE-SANS-CONDITIONNELLE
+    severity: P0
+    dimension: scientific
+    fact:
+      path: NSI/chapitres/1NSI-LANGAGE/cours/1NSI-LANG-COURS-C1.tex
+      line_start: 16
+      line_end: 31
+      excerpt_sha256: sha256:e5efbb3a137ed4892731431cd1e3456b8735becfdf9ff5a546559909aa74ed1c
+      fact_type: reviewer_observation
+      observation: Le texte annonce que somme_chiffres illustre les cinq constructions élémentaires et « toutes les constructions
+        de base », mais le bloc ne contient ni if, elif ni else.
+    consequence: L'exemple de référence ne permet pas d'identifier la conditionnelle qu'il prétend illustrer.
+    expected_action: Ajouter une conditionnelle pertinente au bloc ou limiter explicitement l'annonce aux constructions effectivement
+      présentes.
 - id: 1NSI-LANG-COURS-C2
   scope: object
   chapter: 1NSI-LANGAGE
@@ -4225,9 +4241,8 @@ findings:
   dimensions:
     scientific:
       verdict: issue
-      justification: Le minimum bogué puis corrigé passe l'exécution fraîche sur une liste non vide, mais l'énoncé omet la
-        précondition de non-vacuité requise par l'initialisation au premier élément et le code publié n'a pas de source .py
-        canonique.
+      justification: Le minimum bogué puis corrigé passe l'exécution fraîche; l'énoncé explicite la précondition de non-vacuité
+        et la version corrigée est reliée à code/minimum.py, mais le bloc bogué reste en ligne sans source .py dédiée.
       facts:
       - path: NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex
         line_start: 9
@@ -4236,6 +4251,12 @@ findings:
         fact_type: computed_result
         observation: '1NSI-LANGAGE-RE-C4 : zéro est renvoyé à tort pour 5, 3, 8 et l''initialisation au premier élément rétablit
           le minimum 3.'
+      - path: NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex
+        line_start: 28
+        line_end: 28
+        excerpt_sha256: sha256:3ba6082eae9da1c97bca7f67bec408346bf11dda1c89df41e0f3f09177d09fb8
+        fact_type: source_statement
+        observation: Le marqueur PYTHON-SOURCE relie explicitement la version corrigée à code/minimum.py.
       anomaly_ids:
       - 1NSI-REV-1NSI-LANGAGE-RE-C4-PY-SOURCE
     pedagogical:
@@ -4812,18 +4833,20 @@ findings:
   dimensions:
     scientific:
       verdict: issue
-      justification: Le traceback et sa lecture sont corrects, mais la version dite corrigée ne protège ni une somme de poids
-        nulle ni des poids négatifs, et son code publié n'est pas issu d'un .py ; cette capacité reste un enrichissement.
+      justification: Le traceback et sa lecture sont corrects. La version corrigée reliée à code/moyenne_ponderee.py rejette
+        longueurs incompatibles, poids négatifs ou NaN, somme non positive et listes vides; le bloc bogué reste sans source
+        .py et les données infinies restent acceptées, avec résultat non fini. La capacité demeure un enrichissement à confirmer.
       facts:
       - path: NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex
         line_start: 66
-        line_end: 90
-        excerpt_sha256: sha256:67586e273ddfaff3ee5c07c721021f70cd9274d6152d113b9a5d26e835625885
-        fact_type: computed_result
-        observation: '1NSI-PM-COURS-C3 : seule l''égalité des longueurs est assertée avant une division par sum des poids
-          potentiellement nulle.'
+        line_end: 83
+        excerpt_sha256: sha256:3ee52833caedbcf4f888219fa1d58f3e670cab00bd0428131a02a6ae7cd199e7
+        fact_type: source_statement
+        observation: '1NSI-PM-COURS-C3 : la version corrigée, reliée à code/moyenne_ponderee.py, contrôle l''égalité des longueurs,
+          la non-négativité des poids et une somme strictement positive avant le calcul.'
       anomaly_ids:
       - 1NSI-REV-1NSI-PM-COURS-C3-PY-SOURCE
+      - 1NSI-REV-PM-COURS-C3-POIDS-NON-FINIS
     pedagogical:
       verdict: pass
       justification: La démarche en cinq étapes relie message, cause, hypothèse, vérification et correction.
@@ -4851,6 +4874,22 @@ findings:
       de fichiers exécutés.
     expected_action: Extraire également le bloc bogué dans un fichier .py canonique et vérifier les deux versions depuis leurs
       sources.
+  - id: 1NSI-REV-PM-COURS-C3-POIDS-NON-FINIS
+    severity: P0
+    dimension: scientific
+    fact:
+      path: NSI/chapitres/1NSI-PROJET-METHODES/code/moyenne_ponderee.py
+      line_start: 1
+      line_end: 13
+      excerpt_sha256: sha256:58d41512370e1beaf789e5df9b02e73ba34f32407ad0a2dd0b6a309867455470
+      fact_type: computed_result
+      observation: moyenne_ponderee([12, 15], [1, float("inf")]) franchit les gardes et renvoie nan; des valeurs nan ou inf
+        produisent aussi un résultat non fini, et [1e308, 1e308] avec des poids [1.0, 1.0] renvoie inf malgré des entrées
+        finies.
+    consequence: La fonction accepte des données non finies et peut déborder avec des données finies, ce qui contredit la
+      propriété annoncée de combinaison convexe et de résultat dans [min(valeurs); max(valeurs)].
+    expected_action: Exiger des valeurs et des poids réels finis avec math.isfinite, prévenir ou détecter les débordements
+      des calculs et du résultat, puis ajouter des tests de régression pour NaN, +inf, -inf et [1e308, 1e308].
 - id: 1NSI-PM-COURS-C4
   scope: object
   chapter: 1NSI-PROJET-METHODES
@@ -5314,15 +5353,16 @@ findings:
       - 1NSI-REV-1NSI-PM-EX-002-PY-SOURCE
     pedagogical:
       verdict: issue
-      justification: La démarche de projet n'a ici qu'un exercice de parcours 1, sans les coups de pouce requis pour ce niveau.
+      justification: C2 est couverte par cet exercice de parcours 1 et par 1NSI-PM-EX-005 au parcours 3; le parcours 2 manque
+        et cet exercice fondamental n'a aucun coup de pouce lié.
       facts:
       - path: NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-002.tex
         line_start: 33
         line_end: 37
         excerpt_sha256: sha256:91961a5eab5e424cf81675c01c284e3b41e9f3945424e0b0460db32506cd09c3
-        fact_type: pedagogical_structure
-        observation: '1NSI-PM-EX-002 : les questions passent du calcul à une critique de charge mais sans aide graduée ou
-          autre parcours.'
+        fact_type: reviewer_observation
+        observation: '1NSI-PM-EX-002 : le lot couvre C2 aux parcours 1 ici et 3 dans 1NSI-PM-EX-005, sans parcours 2; cet
+          objet ne possède aucune aide liée.'
       anomaly_ids:
       - 1NSI-REV-1NSI-PM-EX-002-PARCOURS-UNIQUE
       - 1NSI-REV-1NSI-PM-EX-002-AIDES-ABSENTES
@@ -5350,11 +5390,11 @@ findings:
       line_start: 1
       line_end: 1
       excerpt_sha256: sha256:889cb5b00ae7cae2d2f5741a747e6fffef2666c8d71783ea307d86689b475d48
-      fact_type: pedagogical_structure
-      observation: 1NSI-PM-EX-002 est le seul exercice découvert pour BO-PREAMBULE-DEMARCHE-DE-PROJET et ne porte qu'un numéro
-        de parcours.
-    consequence: La capacité ne bénéficie pas d'exercices gradués dans les trois parcours exigés par la conception Nexus.
-    expected_action: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
+      fact_type: reviewer_observation
+      observation: L'inventaire du lot couvre C2 avec 1NSI-PM-EX-002 au parcours 1 et 1NSI-PM-EX-005 au parcours 3, sans exercice
+        de parcours 2.
+    consequence: La progression graduée de C2 est incomplète puisque le parcours intermédiaire manque.
+    expected_action: Ajouter un entraînement C2 de parcours 2 avec des critères de réussite observables.
   - id: 1NSI-REV-1NSI-PM-EX-002-AIDES-ABSENTES
     severity: P1
     dimension: pedagogical
@@ -5394,7 +5434,8 @@ findings:
       - 1NSI-REV-PM-EX003-AFFICHAGE-RETOUR
     pedagogical:
       verdict: issue
-      justification: L'objet est l'unique entraînement C3 de parcours 2 et son attendu comportemental diverge du corrigé.
+      justification: L'objet est l'unique entraînement C3 de parcours 2; 1NSI-PM-EX-005 fournit le parcours 3, le parcours
+        1 manque, et l'attendu comportemental diverge du corrigé.
       facts:
       - path: NSI/chapitres/1NSI-PROJET-METHODES/exercices/1NSI-PM-EX-003.tex
         line_start: 25
@@ -5454,11 +5495,11 @@ findings:
       line_start: 1
       line_end: 1
       excerpt_sha256: sha256:6ed0dfd30abe8eeb0f1cc8e1a42000986140c7938d5b6f466e580019571c7a7c
-      fact_type: pedagogical_structure
-      observation: 1NSI-PM-EX-003 est le seul exercice découvert pour BO-PREAMBULE-COMPETENCES-METHODE et ne porte qu'un numéro
-        de parcours.
-    consequence: La capacité ne bénéficie pas d'exercices gradués dans les trois parcours exigés par la conception Nexus.
-    expected_action: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
+      fact_type: reviewer_observation
+      observation: L'inventaire du lot couvre C3 avec 1NSI-PM-EX-003 au parcours 2 et 1NSI-PM-EX-005 au parcours 3, sans exercice
+        de parcours 1.
+    consequence: La progression graduée de C3 est incomplète puisque le parcours fondamental manque.
+    expected_action: Ajouter un entraînement C3 de parcours 1 avec des critères de réussite observables.
 - id: 1NSI-PM-EX-004
   scope: object
   chapter: 1NSI-PROJET-METHODES
@@ -5585,11 +5626,13 @@ findings:
       line_start: 1
       line_end: 1
       excerpt_sha256: sha256:e97716825127c0fc1cf593dd225b90b424e0bf97ecd22d00595b34b58ea8215f
-      fact_type: pedagogical_structure
-      observation: 1NSI-PM-EX-005 est le seul exercice découvert pour BO-PREAMBULE-COMPETENCES-METHODE, BO-PREAMBULE-DEMARCHE-DE-PROJET
-        et ne porte qu'un numéro de parcours.
-    consequence: La capacité ne bénéficie pas d'exercices gradués dans les trois parcours exigés par la conception Nexus.
-    expected_action: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
+      fact_type: reviewer_observation
+      observation: 1NSI-PM-EX-005 est l'unique exercice de parcours 3 pour C2 et C3; C2 est aussi couverte au parcours 1 par
+        1NSI-PM-EX-002, C3 au parcours 2 par 1NSI-PM-EX-003, mais C2 n'a pas de parcours 2 et C3 pas de parcours 1.
+    consequence: 'La progression graduée reste incomplète pour les deux capacités: parcours 2 absent pour C2 et parcours 1
+      absent pour C3.'
+    expected_action: Ajouter un entraînement C2 de parcours 2 et un entraînement C3 de parcours 1, avec des critères de réussite
+      observables.
 - id: 1NSI-PM-RE-C3
   scope: object
   chapter: 1NSI-PROJET-METHODES
@@ -6284,8 +6327,8 @@ findings:
       facts:
       - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
         line_start: 2
-        line_end: 93
-        excerpt_sha256: sha256:7e84c26b6d64517f08be2792d4893e6ac2f565e4ca4ec1ea395c9b525632919f
+        line_end: 146
+        excerpt_sha256: sha256:c9fe0637795a6bac6fe2b7a59ec0d828b525ebfa40c11c0cacc19b17f8eb0bfa
         fact_type: source_statement
         observation: La lecture complète de 1NSI-RES-COURS-C3 couvre les capteurs, actionneurs et la commande programmée d’un
           thermostat et a été confrontée au contrat, au programme et aux objets liés.
@@ -6303,8 +6346,8 @@ findings:
       facts:
       - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
         line_start: 2
-        line_end: 93
-        excerpt_sha256: sha256:7e84c26b6d64517f08be2792d4893e6ac2f565e4ca4ec1ea395c9b525632919f
+        line_end: 146
+        excerpt_sha256: sha256:c9fe0637795a6bac6fe2b7a59ec0d828b525ebfa40c11c0cacc19b17f8eb0bfa
         fact_type: pedagogical_structure
         observation: Dans 1NSI-RES-COURS-C3, le format cours organise définitions, exemples et mise en activité autour de
           les capteurs, actionneurs et la commande programmée d’un thermostat.
@@ -7121,13 +7164,13 @@ findings:
   capacity_refs:
   - P-TABLE-01
   provenance: &id030
-    reviewer_id: 019ff022-2527-7970-8dae-59748b06ba3a
-    review_run_id: 1nsi-objects-data-basics-tables-2026-08-11-six-p0-35a10009-3947-43f6-af4c-95c0b9339d34
+    reviewer_id: 019ff06c-1816-7bc2-8903-91b3e638556e
+    review_run_id: 1nsi-data-basics-tables-20260811T113500Z-b042c202-4b19-4035-a84b-2ad86d837113-v3
     reviewer_model: gpt-5.6-sol
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml
-    review_receipt_sha256: sha256:aaade78faf9a89b9a39cc84a525bdd99525c9be3ded01663d4175427865e0d27
-    sealing_commit_sha: bbea8bd7d13c67dd7618c2bde8cd4a8929307555
+    review_receipt_sha256: sha256:956ba28bfe50cab1317f1a563694c3002762b76d8a4ca517bdf33c613cfe98df
+    sealing_commit_sha: 5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99
   dimensions:
     scientific:
       verdict: pass
@@ -7535,7 +7578,7 @@ findings:
     pedagogical:
       verdict: issue
       justification: L'évaluation revendique P-TABLE-02 mais n'évalue que la recherche par critère, sans doublons ni test
-        de cohérence.
+        de cohérence. Toutefois, le barème ne ventile aucune question par compétence contractuelle.
       facts:
       - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex
         line_start: 20
@@ -7544,8 +7587,23 @@ findings:
         fact_type: pedagogical_structure
         observation: Dans l'évaluation A TABLES, aucune question ne demande de détecter un doublon ou de valider la cohérence
           des données.
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 119
+        line_end: 122
+        excerpt_sha256: sha256:52296613d78eb4ca151aa4e18eda6ef1f1c81e79579ca5b8841ae138fa14aa46
+        fact_type: pedagogical_structure
+        observation: Pour le sujet A TABLES, le contrat impose un barème détaillé par compétence et un corrigé-barème commenté
+          pour chaque question.
+      - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex
+        line_start: 2
+        line_end: 80
+        excerpt_sha256: sha256:4ad7ca1e8e829ffffecd2b0f76bbd7434398d3829954bac4a4e1955f702920fa
+        fact_type: pedagogical_structure
+        observation: Le sujet A TABLES attribue des points par question sans rattacher les items aux compétences chercher,
+          modéliser, représenter, calculer, raisonner ou communiquer.
       anomaly_ids:
       - 1NSI-REV-TAB-EVAL-A-COHERENCE
+      - 1NSI-REV-TAB-EVAL-A-BAREME-COMPETENCES
   anomalies:
   - id: 1NSI-REV-TAB-EVAL-A-COHERENCE
     severity: P2
@@ -7559,6 +7617,19 @@ findings:
       observation: Le volet P-TABLE-02 de l'évaluation A se limite au filtre SF et omet doublons et cohérence.
     consequence: Le résultat ne peut pas attester toute la capacité déclarée dans les métadonnées.
     expected_action: Ajouter une question courte et discriminante sur un doublon ou une contrainte de cohérence.
+  - id: 1NSI-REV-TAB-EVAL-A-BAREME-COMPETENCES
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A.tex
+      line_start: 2
+      line_end: 80
+      excerpt_sha256: sha256:4ad7ca1e8e829ffffecd2b0f76bbd7434398d3829954bac4a4e1955f702920fa
+      fact_type: pedagogical_structure
+      observation: Le sujet attribue des points par question, mais ne rattache aucun item aux compétences chercher, modéliser,
+        représenter, calculer, raisonner ou communiquer.
+    consequence: La note ne permet pas d'attester quelles compétences sont maîtrisées ni d'orienter précisément la remédiation.
+    expected_action: Ajouter à chaque question un barème détaillé par compétence, cohérent avec le total de points.
 - id: 1NSI-TAB-EVAL-A-corrige
   scope: object
   chapter: 1NSI-TABLES
@@ -7583,8 +7654,9 @@ findings:
         observation: Le corrigé Films confirme deux résultats filtrés, Amelie au tri et Dune hors de la fusion.
       anomaly_ids: []
     pedagogical:
-      verdict: pass
+      verdict: issue
       justification: Les réponses sont séparées selon les deux exercices et n'apparaissent que dans l'objet corrigé dédié.
+        Toutefois, le corrigé ne fournit pas le corrigé-barème commenté contractuel.
       facts:
       - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex
         line_start: 14
@@ -7592,8 +7664,36 @@ findings:
         excerpt_sha256: sha256:fa7149c4ff182713500e6d41ebc12daf5e27f3752c80aa249caa2f690c8dfcc5
         fact_type: student_teacher_separation
         observation: Le corrigé A TABLES réserve les solutions de code et résultats au type corrige_evaluation lié au sujet.
-      anomaly_ids: []
-  anomalies: []
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 119
+        line_end: 122
+        excerpt_sha256: sha256:52296613d78eb4ca151aa4e18eda6ef1f1c81e79579ca5b8841ae138fa14aa46
+        fact_type: pedagogical_structure
+        observation: Pour le corrigé A TABLES, le contrat impose un corrigé-barème détaillant, pour chaque question, les points,
+          erreurs pénalisées et attentes de rédaction.
+      - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex
+        line_start: 14
+        line_end: 42
+        excerpt_sha256: sha256:fa7149c4ff182713500e6d41ebc12daf5e27f3752c80aa249caa2f690c8dfcc5
+        fact_type: pedagogical_structure
+        observation: Le corrigé A TABLES fournit les réponses sans indiquer, question par question, les points accordés, erreurs
+          pénalisées ni attentes de rédaction.
+      anomaly_ids:
+      - 1NSI-REV-TAB-EVAL-A-CORRIGE-BAREME-DETAILLE-ABSENT
+  anomalies:
+  - id: 1NSI-REV-TAB-EVAL-A-CORRIGE-BAREME-DETAILLE-ABSENT
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-A-corrige.tex
+      line_start: 14
+      line_end: 42
+      excerpt_sha256: sha256:fa7149c4ff182713500e6d41ebc12daf5e27f3752c80aa249caa2f690c8dfcc5
+      fact_type: pedagogical_structure
+      observation: Le corrigé fournit les réponses, sans indiquer par question les points accordés, erreurs pénalisées ni
+        attentes de rédaction.
+    consequence: La correction ne permet pas une notation reproductible ni un retour pédagogique conforme au contrat.
+    expected_action: Ajouter un corrigé-barème commenté question par question, relié au sujet et à ses compétences.
 - id: 1NSI-TAB-EVAL-B
   scope: object
   chapter: 1NSI-TABLES
@@ -7620,7 +7720,8 @@ findings:
       anomaly_ids: []
     pedagogical:
       verdict: issue
-      justification: Comme la variante A, elle déclare P-TABLE-02 sans aucune tâche sur doublons ou cohérence.
+      justification: Comme la variante A, elle déclare P-TABLE-02 sans aucune tâche sur doublons ou cohérence. Toutefois,
+        le barème ne ventile aucune question par compétence contractuelle.
       facts:
       - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex
         line_start: 20
@@ -7628,8 +7729,23 @@ findings:
         excerpt_sha256: sha256:91698b306450ff4202500dae47a24d29d96a8fdbe1ecb3274cf69ab22150056f
         fact_type: pedagogical_structure
         observation: Dans l'évaluation B TABLES, le critère Puzzle ne vérifie ni détection de doublon ni contrôle de cohérence.
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 119
+        line_end: 122
+        excerpt_sha256: sha256:52296613d78eb4ca151aa4e18eda6ef1f1c81e79579ca5b8841ae138fa14aa46
+        fact_type: pedagogical_structure
+        observation: Pour le sujet B TABLES, le contrat impose un barème détaillé par compétence et un corrigé-barème commenté
+          pour chaque question.
+      - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex
+        line_start: 2
+        line_end: 80
+        excerpt_sha256: sha256:1b8d3b9932efad6cf4571681da4516b0446d8b1182e409f5d78c51b31a8c3e34
+        fact_type: pedagogical_structure
+        observation: Le sujet B TABLES attribue des points par question sans rattacher les items aux compétences chercher,
+          modéliser, représenter, calculer, raisonner ou communiquer.
       anomaly_ids:
       - 1NSI-REV-TAB-EVAL-B-COHERENCE
+      - 1NSI-REV-TAB-EVAL-B-BAREME-COMPETENCES
   anomalies:
   - id: 1NSI-REV-TAB-EVAL-B-COHERENCE
     severity: P2
@@ -7644,6 +7760,19 @@ findings:
         cohérence.
     consequence: La seconde variante ne complète pas la couverture absente de la première.
     expected_action: Introduire dans cette variante un jeu de données incohérent ou une clé répétée à diagnostiquer.
+  - id: 1NSI-REV-TAB-EVAL-B-BAREME-COMPETENCES
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B.tex
+      line_start: 2
+      line_end: 80
+      excerpt_sha256: sha256:1b8d3b9932efad6cf4571681da4516b0446d8b1182e409f5d78c51b31a8c3e34
+      fact_type: pedagogical_structure
+      observation: Le sujet attribue des points par question, mais ne rattache aucun item aux compétences chercher, modéliser,
+        représenter, calculer, raisonner ou communiquer.
+    consequence: La note ne permet pas d'attester quelles compétences sont maîtrisées ni d'orienter précisément la remédiation.
+    expected_action: Ajouter à chaque question un barème détaillé par compétence, cohérent avec le total de points.
 - id: 1NSI-TAB-EVAL-B-corrige
   scope: object
   chapter: 1NSI-TABLES
@@ -7668,8 +7797,9 @@ findings:
         observation: Le corrigé Jeux vidéo applique correctement le seuil 9,3, le tri par année et le domaine commun des titres.
       anomaly_ids: []
     pedagogical:
-      verdict: pass
-      justification: La correction fournit des résultats concis et reste isolée dans le fichier corrige_evaluation.
+      verdict: issue
+      justification: La correction fournit des résultats concis et reste isolée dans le fichier corrige_evaluation. Toutefois,
+        le corrigé ne fournit pas le corrigé-barème commenté contractuel.
       facts:
       - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex
         line_start: 14
@@ -7677,8 +7807,36 @@ findings:
         excerpt_sha256: sha256:da426afe6fc05f53964ad6c8edd51edcf1f883320dcf35de8a8baf3cb79a34d7
         fact_type: student_teacher_separation
         observation: Le corrigé B TABLES conserve les solutions de filtrage et de fusion hors du sujet d'évaluation.
-      anomaly_ids: []
-  anomalies: []
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 119
+        line_end: 122
+        excerpt_sha256: sha256:52296613d78eb4ca151aa4e18eda6ef1f1c81e79579ca5b8841ae138fa14aa46
+        fact_type: pedagogical_structure
+        observation: Pour le corrigé B TABLES, le contrat impose un corrigé-barème détaillant, pour chaque question, les points,
+          erreurs pénalisées et attentes de rédaction.
+      - path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex
+        line_start: 14
+        line_end: 42
+        excerpt_sha256: sha256:da426afe6fc05f53964ad6c8edd51edcf1f883320dcf35de8a8baf3cb79a34d7
+        fact_type: pedagogical_structure
+        observation: Le corrigé B TABLES fournit les réponses sans indiquer, question par question, les points accordés, erreurs
+          pénalisées ni attentes de rédaction.
+      anomaly_ids:
+      - 1NSI-REV-TAB-EVAL-B-CORRIGE-BAREME-DETAILLE-ABSENT
+  anomalies:
+  - id: 1NSI-REV-TAB-EVAL-B-CORRIGE-BAREME-DETAILLE-ABSENT
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TABLES/evaluations/1NSI-TAB-EVAL-B-corrige.tex
+      line_start: 14
+      line_end: 42
+      excerpt_sha256: sha256:da426afe6fc05f53964ad6c8edd51edcf1f883320dcf35de8a8baf3cb79a34d7
+      fact_type: pedagogical_structure
+      observation: Le corrigé fournit les réponses, sans indiquer par question les points accordés, erreurs pénalisées ni
+        attentes de rédaction.
+    consequence: La correction ne permet pas une notation reproductible ni un retour pédagogique conforme au contrat.
+    expected_action: Ajouter un corrigé-barème commenté question par question, relié au sujet et à ses compétences.
 - id: 1NSI-TAB-EX-001
   scope: object
   chapter: 1NSI-TABLES
@@ -7890,7 +8048,7 @@ findings:
     pedagogical:
       verdict: issue
       justification: L'auto-évaluation ne fournit ni réponses, ni orientation, et n'interroge aucun test de cohérence malgré
-        P-TABLE-02.
+        P-TABLE-02. Toutefois, le QCM ne comporte que six des quinze questions contractuelles.
       facts:
       - path: NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.tex
         line_start: 3
@@ -7898,8 +8056,22 @@ findings:
         excerpt_sha256: sha256:6a2cc4e151e6c4cdee88c6b0b1886981a86c64dc29524821cf3164a2df07e5f6
         fact_type: pedagogical_structure
         observation: Le QCM TABLES se présente comme auto-évaluation sans clé de correction ni item de cohérence des données.
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 111
+        line_end: 116
+        excerpt_sha256: sha256:b8b3aef485864eeb8a2f0ce8bf38d238eeab5c59b6b37272833d250b1473493d
+        fact_type: pedagogical_structure
+        observation: Pour le QCM TABLES, le contrat impose quinze questions d'auto-positionnement, avec au moins une question
+          par capacité.
+      - path: NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.tex
+        line_start: 3
+        line_end: 83
+        excerpt_sha256: sha256:6a2cc4e151e6c4cdee88c6b0b1886981a86c64dc29524821cf3164a2df07e5f6
+        fact_type: pedagogical_structure
+        observation: Le QCM TABLES contient six questions, soit neuf de moins que les quinze exigées pour l'auto-positionnement.
       anomaly_ids:
       - 1NSI-REV-TAB-QCM-AUTOCORRECTION
+      - 1NSI-REV-TAB-QCM-VOLUME
   anomalies:
   - id: 1NSI-REV-TAB-QCM-AUTOCORRECTION
     severity: P1
@@ -7914,6 +8086,19 @@ findings:
     consequence: La preuve de maîtrise et la boucle de remédiation sont inopérantes pour cet objet.
     expected_action: Ajouter une correction séparée avec diagnostic par distracteur et une question sur la cohérence d'une
       table.
+  - id: 1NSI-REV-TAB-QCM-VOLUME
+    severity: P2
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TABLES/qcm/1NSI-TABLES-QCM.tex
+      line_start: 3
+      line_end: 83
+      excerpt_sha256: sha256:6a2cc4e151e6c4cdee88c6b0b1886981a86c64dc29524821cf3164a2df07e5f6
+      fact_type: pedagogical_structure
+      observation: Le QCM ne contient que six questions alors que le contrat en exige quinze pour l'auto-positionnement.
+    consequence: L'échantillonnage est insuffisant pour un auto-positionnement contractuel et une revalidation fiable.
+    expected_action: Porter le QCM à quinze questions, au moins une par capacité, en conservant le diagnostic par distracteur
+      exigé par l'anomalie d'autocorrection.
 - id: 1NSI-TABLES-RE-C2
   scope: object
   chapter: 1NSI-TABLES
@@ -7936,8 +8121,9 @@ findings:
           nom.
       anomaly_ids: []
     pedagogical:
-      verdict: pass
-      justification: Le contre-exemple cible une erreur précise et demande explication puis réécriture contrôlée.
+      verdict: issue
+      justification: Le contre-exemple cible une erreur précise et demande explication puis réécriture contrôlée. Toutefois,
+        l'objet ne fournit ni les trois exercices gradués ni la revalidation contractuels.
       facts:
       - path: NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex
         line_start: 7
@@ -7946,8 +8132,36 @@ findings:
         fact_type: pedagogical_structure
         observation: La fiche de remédiation sur les doublons conduit de l'échec observé à un critère corrigé sur la seule
           colonne nom.
-      anomaly_ids: []
-  anomalies: []
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 111
+        line_end: 116
+        excerpt_sha256: sha256:b8b3aef485864eeb8a2f0ce8bf38d238eeab5c59b6b37272833d250b1473493d
+        fact_type: pedagogical_structure
+        observation: Pour la remédiation C2 TABLES, le contrat impose trois exercices gradués et une revalidation de la capacité
+          travaillée.
+      - path: NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex
+        line_start: 7
+        line_end: 23
+        excerpt_sha256: sha256:09d18dc59dd06a8b61c75593f0d153177587b23d1848c32fe02ba04e446d29bb
+        fact_type: pedagogical_structure
+        observation: La remédiation C2 TABLES contient un seul exercice corrigé, sans exercice avec aide, exercice autonome
+          ni revalidation distincte.
+      anomaly_ids:
+      - 1NSI-REV-TAB-REM-CIRCUIT-INCOMPLET
+  anomalies:
+  - id: 1NSI-REV-TAB-REM-CIRCUIT-INCOMPLET
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TABLES/remediation/1NSI-TABLES-RE-C2.tex
+      line_start: 7
+      line_end: 23
+      excerpt_sha256: sha256:09d18dc59dd06a8b61c75593f0d153177587b23d1848c32fe02ba04e446d29bb
+      fact_type: pedagogical_structure
+      observation: La fiche contient un seul exercice corrigé et aucun exercice avec aide, exercice autonome ou revalidation
+        distincte.
+    consequence: La difficulté diagnostiquée ne débouche pas sur une séquence graduée permettant d'attester une nouvelle maîtrise.
+    expected_action: Fournir les trois exercices contractuels (corrigé, avec aide, autonome) puis une revalidation explicite.
 - id: 1NSI-TABLES-RE-C2-CORRIGE
   scope: object
   chapter: 1NSI-TABLES
@@ -8465,8 +8679,9 @@ findings:
       anomaly_ids:
       - 1NSI-REV-TB-EVAL-A-COUVERTURE
     pedagogical:
-      verdict: pass
+      verdict: issue
       justification: Deux exercices équilibrés couvrent les cinq thèmes contractuels avec durée, ressources et points explicites.
+        Toutefois, le barème ne ventile aucune question par compétence contractuelle.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex
         line_start: 2
@@ -8474,7 +8689,22 @@ findings:
         excerpt_sha256: sha256:b00ee4049ff0aeff0bbea416a23dc4a5430526a6a6fc380db24a435733077698
         fact_type: pedagogical_structure
         observation: L'évaluation A organise 45 minutes en un bloc entier relatif puis un bloc flottants-booléens-encodage.
-      anomaly_ids: []
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 119
+        line_end: 122
+        excerpt_sha256: sha256:52296613d78eb4ca151aa4e18eda6ef1f1c81e79579ca5b8841ae138fa14aa46
+        fact_type: pedagogical_structure
+        observation: Pour le sujet A TYPES-BASE, le contrat impose un barème détaillé par compétence et un corrigé-barème
+          commenté pour chaque question.
+      - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex
+        line_start: 2
+        line_end: 45
+        excerpt_sha256: sha256:b7fb48142cdac71216a39c06d22795d351e1f74a5e63aa597fc94dd6ced2ccac
+        fact_type: pedagogical_structure
+        observation: Le sujet A TYPES-BASE attribue des points par question sans rattacher les items aux compétences chercher,
+          modéliser, représenter, calculer, raisonner ou communiquer.
+      anomaly_ids:
+      - 1NSI-REV-TB-EVAL-A-BAREME-COMPETENCES
   anomalies:
   - id: 1NSI-REV-TB-EVAL-A-COUVERTURE
     severity: P1
@@ -8489,6 +8719,19 @@ findings:
         dans le sujet A.
     consequence: Un résultat satisfaisant à cette évaluation ne prouve pas la couverture scientifique complète annoncée.
     expected_action: Ajouter des items sur produit, représentation calculée d'un flottant et conversion effective de fichier.
+  - id: 1NSI-REV-TB-EVAL-A-BAREME-COMPETENCES
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A.tex
+      line_start: 2
+      line_end: 45
+      excerpt_sha256: sha256:b7fb48142cdac71216a39c06d22795d351e1f74a5e63aa597fc94dd6ced2ccac
+      fact_type: pedagogical_structure
+      observation: Le sujet attribue des points par question, mais ne rattache aucun item aux compétences chercher, modéliser,
+        représenter, calculer, raisonner ou communiquer.
+    consequence: La note ne permet pas d'attester quelles compétences sont maîtrisées ni d'orienter précisément la remédiation.
+    expected_action: Ajouter à chaque question un barème détaillé par compétence, cohérent avec le total de points.
 - id: 1NSI-TB-EVAL-A-corrige
   scope: object
   chapter: 1NSI-TYPES-BASE
@@ -8514,8 +8757,9 @@ findings:
         observation: Le corrigé A obtient 1011010₂, 5A₁₆, 11111001, la table xor et quatre octets pour info.
       anomaly_ids: []
     pedagogical:
-      verdict: pass
+      verdict: issue
       justification: Les solutions restent dans l'objet corrigé et suivent les deux exercices sans exposer de note interne.
+        Toutefois, le corrigé ne fournit pas le corrigé-barème commenté contractuel.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex
         line_start: 13
@@ -8523,8 +8767,36 @@ findings:
         excerpt_sha256: sha256:202689fea2dc5129ac1a3c52c0666a365b6c399bc2385ffdcc5185538fdfd80b
         fact_type: student_teacher_separation
         observation: Le corrigé A TYPES-BASE réserve les raisonnements détaillés aux environnements corrige liés au sujet.
-      anomaly_ids: []
-  anomalies: []
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 119
+        line_end: 122
+        excerpt_sha256: sha256:52296613d78eb4ca151aa4e18eda6ef1f1c81e79579ca5b8841ae138fa14aa46
+        fact_type: pedagogical_structure
+        observation: Pour le corrigé A TYPES-BASE, le contrat impose un corrigé-barème détaillant, pour chaque question, les
+          points, erreurs pénalisées et attentes de rédaction.
+      - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex
+        line_start: 13
+        line_end: 47
+        excerpt_sha256: sha256:202689fea2dc5129ac1a3c52c0666a365b6c399bc2385ffdcc5185538fdfd80b
+        fact_type: pedagogical_structure
+        observation: Le corrigé A TYPES-BASE fournit les réponses sans indiquer, question par question, les points accordés,
+          erreurs pénalisées ni attentes de rédaction.
+      anomaly_ids:
+      - 1NSI-REV-TB-EVAL-A-CORRIGE-BAREME-DETAILLE-ABSENT
+  anomalies:
+  - id: 1NSI-REV-TB-EVAL-A-CORRIGE-BAREME-DETAILLE-ABSENT
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-A-corrige.tex
+      line_start: 13
+      line_end: 47
+      excerpt_sha256: sha256:202689fea2dc5129ac1a3c52c0666a365b6c399bc2385ffdcc5185538fdfd80b
+      fact_type: pedagogical_structure
+      observation: Le corrigé fournit les réponses, sans indiquer par question les points accordés, erreurs pénalisées ni
+        attentes de rédaction.
+    consequence: La correction ne permet pas une notation reproductible ni un retour pédagogique conforme au contrat.
+    expected_action: Ajouter un corrigé-barème commenté question par question, relié au sujet et à ses compétences.
 - id: 1NSI-TB-EVAL-B
   scope: object
   chapter: 1NSI-TYPES-BASE
@@ -8553,8 +8825,9 @@ findings:
       anomaly_ids:
       - 1NSI-REV-TB-EVAL-B-COUVERTURE
     pedagogical:
-      verdict: pass
-      justification: Les données diffèrent de la variante A tout en conservant une charge et une structure comparables.
+      verdict: issue
+      justification: Les données diffèrent de la variante A tout en conservant une charge et une structure comparables. Toutefois,
+        le barème ne ventile aucune question par compétence contractuelle.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex
         line_start: 2
@@ -8563,7 +8836,22 @@ findings:
         fact_type: pedagogical_structure
         observation: L'évaluation B remplace chaque valeur et expression de A sans changer l'équilibre dix points plus dix
           points.
-      anomaly_ids: []
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 119
+        line_end: 122
+        excerpt_sha256: sha256:52296613d78eb4ca151aa4e18eda6ef1f1c81e79579ca5b8841ae138fa14aa46
+        fact_type: pedagogical_structure
+        observation: Pour le sujet B TYPES-BASE, le contrat impose un barème détaillé par compétence et un corrigé-barème
+          commenté pour chaque question.
+      - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex
+        line_start: 2
+        line_end: 50
+        excerpt_sha256: sha256:366914ba16d6c2419115da235ff48a88d1c57363e24e218f5092deb95d3e34af
+        fact_type: pedagogical_structure
+        observation: Le sujet B TYPES-BASE attribue des points par question sans rattacher les items aux compétences chercher,
+          modéliser, représenter, calculer, raisonner ou communiquer.
+      anomaly_ids:
+      - 1NSI-REV-TB-EVAL-B-BAREME-COMPETENCES
   anomalies:
   - id: 1NSI-REV-TB-EVAL-B-COUVERTURE
     severity: P1
@@ -8578,6 +8866,19 @@ findings:
     consequence: Les deux sujets parallèles laissent les mêmes attendus officiels sans preuve d'évaluation.
     expected_action: Réserver dans B des items complémentaires sur produit, représentation binaire d'un réel et transcodage
       de fichier.
+  - id: 1NSI-REV-TB-EVAL-B-BAREME-COMPETENCES
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B.tex
+      line_start: 2
+      line_end: 50
+      excerpt_sha256: sha256:366914ba16d6c2419115da235ff48a88d1c57363e24e218f5092deb95d3e34af
+      fact_type: pedagogical_structure
+      observation: Le sujet attribue des points par question, mais ne rattache aucun item aux compétences chercher, modéliser,
+        représenter, calculer, raisonner ou communiquer.
+    consequence: La note ne permet pas d'attester quelles compétences sont maîtrisées ni d'orienter précisément la remédiation.
+    expected_action: Ajouter à chaque question un barème détaillé par compétence, cohérent avec le total de points.
 - id: 1NSI-TB-EVAL-B-corrige
   scope: object
   chapter: 1NSI-TYPES-BASE
@@ -8603,8 +8904,9 @@ findings:
         observation: Le corrigé B vérifie 150, -20, 0.6000000000000001, la table booléenne et les tailles de vélo.
       anomaly_ids: []
     pedagogical:
-      verdict: pass
-      justification: La correction répond point par point et demeure séparée du sujet d'évaluation.
+      verdict: issue
+      justification: La correction répond point par point et demeure séparée du sujet d'évaluation. Toutefois, le corrigé
+        ne fournit pas le corrigé-barème commenté contractuel.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex
         line_start: 13
@@ -8612,8 +8914,36 @@ findings:
         excerpt_sha256: sha256:04b36e92467528cfeea20f558c017e349c13f950bd55d27b71e5bd464ce66a90
         fact_type: student_teacher_separation
         observation: Le corrigé B TYPES-BASE isole code, tables et résultats dans le fichier corrige_evaluation dédié.
-      anomaly_ids: []
-  anomalies: []
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 119
+        line_end: 122
+        excerpt_sha256: sha256:52296613d78eb4ca151aa4e18eda6ef1f1c81e79579ca5b8841ae138fa14aa46
+        fact_type: pedagogical_structure
+        observation: Pour le corrigé B TYPES-BASE, le contrat impose un corrigé-barème détaillant, pour chaque question, les
+          points, erreurs pénalisées et attentes de rédaction.
+      - path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex
+        line_start: 13
+        line_end: 50
+        excerpt_sha256: sha256:04b36e92467528cfeea20f558c017e349c13f950bd55d27b71e5bd464ce66a90
+        fact_type: pedagogical_structure
+        observation: Le corrigé B TYPES-BASE fournit les réponses sans indiquer, question par question, les points accordés,
+          erreurs pénalisées ni attentes de rédaction.
+      anomaly_ids:
+      - 1NSI-REV-TB-EVAL-B-CORRIGE-BAREME-DETAILLE-ABSENT
+  anomalies:
+  - id: 1NSI-REV-TB-EVAL-B-CORRIGE-BAREME-DETAILLE-ABSENT
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TYPES-BASE/evaluations/1NSI-TB-EVAL-B-corrige.tex
+      line_start: 13
+      line_end: 50
+      excerpt_sha256: sha256:04b36e92467528cfeea20f558c017e349c13f950bd55d27b71e5bd464ce66a90
+      fact_type: pedagogical_structure
+      observation: Le corrigé fournit les réponses, sans indiquer par question les points accordés, erreurs pénalisées ni
+        attentes de rédaction.
+    consequence: La correction ne permet pas une notation reproductible ni un retour pédagogique conforme au contrat.
+    expected_action: Ajouter un corrigé-barème commenté question par question, relié au sujet et à ses compétences.
 - id: 1NSI-TB-EX-001
   scope: object
   chapter: 1NSI-TYPES-BASE
@@ -8805,7 +9135,7 @@ findings:
     pedagogical:
       verdict: issue
       justification: Le document se présente comme auto-évaluation mais ne fournit aucune clé, explication ou orientation
-        de remédiation.
+        de remédiation. Toutefois, le QCM ne comporte que six des quinze questions contractuelles.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.tex
         line_start: 3
@@ -8813,8 +9143,22 @@ findings:
         excerpt_sha256: sha256:bca2a1686a7ca2bd9bd39f434feda01b7fc46c2e1e62e7cdb22e06c1cc0efcff
         fact_type: pedagogical_structure
         observation: Le QCM TYPES-BASE laisse six choix sans correction associée ni diagnostic de distracteur.
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 111
+        line_end: 116
+        excerpt_sha256: sha256:b8b3aef485864eeb8a2f0ce8bf38d238eeab5c59b6b37272833d250b1473493d
+        fact_type: pedagogical_structure
+        observation: Pour le QCM TYPES-BASE, le contrat impose quinze questions d'auto-positionnement, avec au moins une question
+          par capacité.
+      - path: NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.tex
+        line_start: 3
+        line_end: 83
+        excerpt_sha256: sha256:bca2a1686a7ca2bd9bd39f434feda01b7fc46c2e1e62e7cdb22e06c1cc0efcff
+        fact_type: pedagogical_structure
+        observation: Le QCM TYPES-BASE contient six questions, soit neuf de moins que les quinze exigées pour l'auto-positionnement.
       anomaly_ids:
       - 1NSI-REV-TB-QCM-AUTOCORRECTION
+      - 1NSI-REV-TB-QCM-VOLUME
   anomalies:
   - id: 1NSI-REV-TB-QCM-AUTOCORRECTION
     severity: P1
@@ -8828,6 +9172,19 @@ findings:
       observation: Aucun objet lié ne permet à l'élève de savoir quelles réponses sont exactes.
     consequence: L'auto-évaluation ne produit ni preuve de maîtrise ni orientation vers la remédiation C3.
     expected_action: Créer un corrigé professeur séparé et un retour élève minimal orientant chaque erreur vers le cours pertinent.
+  - id: 1NSI-REV-TB-QCM-VOLUME
+    severity: P2
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TYPES-BASE/qcm/1NSI-TYPES-BASE-QCM.tex
+      line_start: 3
+      line_end: 83
+      excerpt_sha256: sha256:bca2a1686a7ca2bd9bd39f434feda01b7fc46c2e1e62e7cdb22e06c1cc0efcff
+      fact_type: pedagogical_structure
+      observation: Le QCM ne contient que six questions alors que le contrat en exige quinze pour l'auto-positionnement.
+    consequence: L'échantillonnage est insuffisant pour un auto-positionnement contractuel et une revalidation fiable.
+    expected_action: Porter le QCM à quinze questions, au moins une par capacité, en conservant le diagnostic par distracteur
+      exigé par l'anomalie d'autocorrection.
 - id: 1NSI-TYPES-BASE-RE-C3
   scope: object
   chapter: 1NSI-TYPES-BASE
@@ -8849,8 +9206,9 @@ findings:
         observation: La remédiation Flottants vérifie l'accumulation de trois dixièmes et presque_egaux à 1e-9.
       anomaly_ids: []
     pedagogical:
-      verdict: pass
-      justification: La fiche cible une erreur unique, demande son explication et un test réparé.
+      verdict: issue
+      justification: La fiche cible une erreur unique, demande son explication et un test réparé. Toutefois, l'objet ne fournit
+        ni les trois exercices gradués ni la revalidation contractuels.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex
         line_start: 7
@@ -8858,8 +9216,36 @@ findings:
         excerpt_sha256: sha256:671511b0477d48dc44b747a4a93d3de9b960800cf389976cc35c34a6a2c3300a
         fact_type: pedagogical_structure
         observation: La remédiation C3 conduit l'élève du résultat inattendu de la boucle à une stratégie de comparaison correcte.
-      anomaly_ids: []
-  anomalies: []
+      - path: NSI/docs/01_conception_manuel.md
+        line_start: 111
+        line_end: 116
+        excerpt_sha256: sha256:b8b3aef485864eeb8a2f0ce8bf38d238eeab5c59b6b37272833d250b1473493d
+        fact_type: pedagogical_structure
+        observation: Pour la remédiation C3 TYPES-BASE, le contrat impose trois exercices gradués et une revalidation de la
+          capacité travaillée.
+      - path: NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex
+        line_start: 7
+        line_end: 16
+        excerpt_sha256: sha256:671511b0477d48dc44b747a4a93d3de9b960800cf389976cc35c34a6a2c3300a
+        fact_type: pedagogical_structure
+        observation: La remédiation C3 TYPES-BASE contient un seul exercice corrigé, sans exercice avec aide, exercice autonome
+          ni revalidation distincte.
+      anomaly_ids:
+      - 1NSI-REV-TB-REM-CIRCUIT-INCOMPLET
+  anomalies:
+  - id: 1NSI-REV-TB-REM-CIRCUIT-INCOMPLET
+    severity: P1
+    dimension: pedagogical
+    fact:
+      path: NSI/chapitres/1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex
+      line_start: 7
+      line_end: 16
+      excerpt_sha256: sha256:671511b0477d48dc44b747a4a93d3de9b960800cf389976cc35c34a6a2c3300a
+      fact_type: pedagogical_structure
+      observation: La fiche contient un seul exercice corrigé et aucun exercice avec aide, exercice autonome ou revalidation
+        distincte.
+    consequence: La difficulté diagnostiquée ne débouche pas sur une séquence graduée permettant d'attester une nouvelle maîtrise.
+    expected_action: Fournir les trois exercices contractuels (corrigé, avec aide, autonome) puis une revalidation explicite.
 - id: 1NSI-TYPES-BASE-RE-C3-CORRIGE
   scope: object
   chapter: 1NSI-TYPES-BASE
@@ -9044,13 +9430,13 @@ findings:
   - 1NSI-TYPES-CONSTRUITS-C2
   - 1NSI-TYPES-CONSTRUITS-C5
   provenance: &id031
-    reviewer_id: 019ff022-2583-71e3-ad83-0199360bb747
-    review_run_id: 1nsi-objects-types-construits-2026-08-11-six-p0.81a8936e-0386-4cad-bd5b-ce77b2f2ae41
+    reviewer_id: 019ff06c-17cb-7270-8842-5d873cb89437
+    review_run_id: 1nsi-objects-types-construits-2026-08-11-final-019ff06c-v3
     reviewer_model: gpt-5.6-sol
     integrator_id: integrator
     review_receipt_path: audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml
-    review_receipt_sha256: sha256:c3f74a2c9420dc335806f086033ecd58f54f53dc46963a3586ee689eb5affc69
-    sealing_commit_sha: bbea8bd7d13c67dd7618c2bde8cd4a8929307555
+    review_receipt_sha256: sha256:9191629712c468932e48fc3f3b92fc24864c2d39d30530a4b960c2debb737074
+    sealing_commit_sha: 5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99
   dimensions:
     scientific:
       verdict: issue
@@ -10201,7 +10587,7 @@ findings:
       - 1NSI-REV-TC-CO-027-C5-NON-EXIGIBLE
       - 1NSI-REV-TC-CO-027-VALEUR-MUTABLE-PARTAGEE
     pedagogical:
-      verdict: pass
+      verdict: human_confirmation_required
       justification: 'Le guidage de 1NSI-TC-CO-027 s''appuie sur « grille = [] for i in range(n): ligne = [] », mais il mobilise
         fonctions ou boucles. Sa position avant LANGAGE exige une confirmation humaine des prérequis réellement acquis.'
       facts:
@@ -11378,12 +11764,12 @@ findings:
         ordinaire sans marqueur d’enrichissement non exigible.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-053.tex
-        line_start: 27
-        line_end: 29
-        excerpt_sha256: sha256:1ae452dfa051c0785e1d975c8a76a1ff37cfa80372877175b5636dc3a6434039
+        line_start: 47
+        line_end: 49
+        excerpt_sha256: sha256:0b521df34fcbf44409e2a58011ba96debf184115d0ce454967bee2d03704bbe9
         fact_type: source_statement
-        observation: 'Pour 1NSI-TC-CO-053, l''extrait relu établit spécifiquement : \item On peut créer une copie profonde
-          avec une liste en compréhension : \begin python copie_profonde = [list(ligne) for ligne in grille]'
+        observation: Après avoir expliqué le partage des sous-listes d'une copie superficielle, 1NSI-TC-CO-053 borne sa fonction
+          corrective à deux niveaux et aux cellules scalaires atomiques non mutables sans conteneur imbriqué.
       anomaly_ids:
       - 1NSI-REV-TC-CO-053-C5-NON-EXIGIBLE
     pedagogical:
@@ -11392,11 +11778,11 @@ findings:
         de son exercice lié.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-053.tex
-        line_start: 19
-        line_end: 21
-        excerpt_sha256: sha256:193893020dea80b6f7acb0528ff7f48e56fcdb1f424b0c2858262d3fec053232
+        line_start: 37
+        line_end: 41
+        excerpt_sha256: sha256:ff6018fc5c5e93a24f9744d425b51d3182dd96ac07666edadba3871c15f7b81f
         fact_type: pedagogical_structure
-        observation: 'Dans la progression propre à 1NSI-TC-CO-053, l''étape ancrée est : 99 [99, 2] \end console'
+        observation: 'Le corrigé commence par restituer les deux sorties observées : 99 puis [99, 2].'
       anomaly_ids: []
   anomalies:
   - id: 1NSI-REV-TC-CO-053-C5-NON-EXIGIBLE
@@ -11429,27 +11815,26 @@ findings:
         ordinaire sans marqueur d’enrichissement non exigible.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-054.tex
-        line_start: 41
-        line_end: 43
-        excerpt_sha256: sha256:091a2677b4a5fd3ac9a15f81a56ab49e8825d8239f54da835659c4d30b1f39a7
+        line_start: 48
+        line_end: 50
+        excerpt_sha256: sha256:9477b8447e3bfc6b3af765cb7a21b33368d58691ead482b6197f7a2e31b23a40
         fact_type: source_statement
-        observation: 'Pour 1NSI-TC-CO-054, l''extrait relu établit spécifiquement : On parcourt chaque ligne de la grille
-          et on en crée une copie avec \lstinline list(ligne) avant de l''ajouter au résultat. \item Vérification'
+        observation: Pour construire la copie de grille demandée dans 1NSI-TC-CO-054, le corrigé borne la fonction à deux
+          niveaux et aux cellules scalaires atomiques non mutables sans conteneur imbriqué.
       anomaly_ids:
       - 1NSI-REV-TC-CO-054-C5-NON-EXIGIBLE
     pedagogical:
       verdict: human_confirmation_required
-      justification: 'Le guidage de 1NSI-TC-CO-054 s''appuie sur « \item Vérification : \begin python g = [[1, 2], [3, 4]]
-        », mais il mobilise fonctions ou boucles. Sa position avant LANGAGE exige une confirmation humaine des prérequis réellement
-        acquis.'
+      justification: Le corrigé 1NSI-TC-CO-054 explicite la copie des deux premiers niveaux, puis vérifie sur le scénario
+        g/c que la réaffectation c[0][0] = 99 laisse g[0][0] égal à 1. Sa position avant LANGAGE exige une confirmation humaine
+        des prérequis réellement acquis.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-054.tex
-        line_start: 43
-        line_end: 45
-        excerpt_sha256: sha256:e04caae29183464efcb6d4ec50f49fa8359f4280e7b41c1ba0f02266a857d217
+        line_start: 66
+        line_end: 75
+        excerpt_sha256: sha256:80d77757cbf55c50f8dba7958a2cb4cc1e67de735b5575ac9a07dfd7a53414b9
         fact_type: pedagogical_structure
-        observation: 'Dans la progression propre à 1NSI-TC-CO-054, l''étape ancrée est : \item Vérification : \begin python
-          g = [[1, 2], [3, 4]]'
+        observation: Le scénario numérique réaffecte c[0][0] à 99 puis constate que g[0][0] reste égal à 1.
       anomaly_ids: []
   anomalies:
   - id: 1NSI-REV-TC-CO-054-C5-NON-EXIGIBLE
@@ -11873,9 +12258,9 @@ findings:
     dimension: pedagogical
     fact:
       path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex
-      line_start: 123
-      line_end: 136
-      excerpt_sha256: sha256:83ce43bce865d8a3ef171577b1ba95215de6f89d2ebfad4bb0dfd5b9219fcbf2
+      line_start: 173
+      line_end: 186
+      excerpt_sha256: sha256:d62e1e7691c301c5e9bc78820c5677b0fed8ec334e3f87ce2eb7a5f320741526
       fact_type: pedagogical_structure
       observation: 1NSI-TC-COURS-C5 mobilise une fonction à effet de bord alors que ces acquis sont rattachés au chapitre
         LANGAGE placé après TYPES-CONSTRUITS [preuve 1NSI-REV-TC-COURS-C5-PREREQUIS-LANGAGE]
@@ -11902,9 +12287,9 @@ findings:
     dimension: scientific
     fact:
       path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex
-      line_start: 150
-      line_end: 154
-      excerpt_sha256: sha256:1b29486ae238cedd8ee7a6b217e58abcb40e313ca9b08def5ce1046a7e0fdb9c
+      line_start: 200
+      line_end: 204
+      excerpt_sha256: sha256:9d1a05fb3092d1337a3859bd542b77104818982126b03dd9ee761dff00f29ecc
       fact_type: source_statement
       observation: 1NSI-TC-COURS-C5 assimile explicitement même objet et même adresse mémoire dans sa définition de is [preuve
         1NSI-REV-TC-COURS-C5-IDENTITE-ADRESSE]
@@ -15376,28 +15761,27 @@ findings:
         éditoriale.'
       facts:
       - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-054.tex
-        line_start: 21
-        line_end: 23
-        excerpt_sha256: sha256:17bde538265dea8885a0207b67a6b13ef40014044b67b87f1bc77dcf02c1ceb8
+        line_start: 47
+        line_end: 49
+        excerpt_sha256: sha256:a44de0387cd0bf54663d946e4cda2282270a305653fb82aaa7098614fcc7634b
         fact_type: source_statement
-        observation: 'Pour 1NSI-TC-EX-054, l''extrait relu établit spécifiquement : \item Écrire une fonction \lstinline copie_profonde_grille(grille)
-          qui renvoie une copie profonde de la grille. \item Vérifier que la modification de la copie ne modifie pas l''original'
+        observation: L'énoncé borne explicitement la tâche aux cellules scalaires atomiques non mutables, sans conteneur imbriqué,
+          et à une copie des deux premiers niveaux.
       anomaly_ids:
       - 1NSI-REV-TC-EX-054-C5-NON-EXIGIBLE
     pedagogical:
       verdict: pass
-      justification: L'énoncé 1NSI-TC-EX-054 structure la tâche autour de « \item Écrire une fonction \lstinline copie_profonde_grille(grille)
-        qui renvoie une copie profonde de la grille. \item Vérifier que la modification de la copie ne modifie pas l'orig
-        » sans corrigé ni barème visible dans sa source élève.
+      justification: L'énoncé 1NSI-TC-EX-054 explicite la précondition sur les cellules, borne la copie aux deux premiers
+        niveaux et demande de justifier l'affichage 1 par l'identité des listes ; aucun corrigé ni barème n'est visible dans
+        sa source élève.
       facts:
       - path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-054.tex
-        line_start: 21
-        line_end: 23
-        excerpt_sha256: sha256:17bde538265dea8885a0207b67a6b13ef40014044b67b87f1bc77dcf02c1ceb8
+        line_start: 51
+        line_end: 68
+        excerpt_sha256: sha256:2034c01868189b1583df402def90b888e931f82e648361b7d690361e9208e11f
         fact_type: pedagogical_structure
-        observation: 'Dans la progression propre à 1NSI-TC-EX-054, l''étape ancrée est : \item Écrire une fonction \lstinline
-          copie_profonde_grille(grille) qui renvoie une copie profonde de la grille. \item Vérifier que la modification de
-          la copie ne modifie pas l''original'
+        observation: L'exercice demande de construire une nouvelle liste externe et de nouvelles lignes, puis de justifier
+          sur un scénario que la réaffectation d'une cellule de la copie laisse l'original inchangé.
       anomaly_ids: []
   anomalies:
   - id: 1NSI-REV-TC-EX-054-C5-NON-EXIGIBLE
@@ -16539,8 +16923,8 @@ findings:
       facts:
       - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
         line_start: 2
-        line_end: 29
-        excerpt_sha256: sha256:53015e032f91f243f676f43937b6a94dffa265bc2fa2b1b9dbd59bed8e2c4556
+        line_end: 32
+        excerpt_sha256: sha256:9e4871423acab0c07f41b0e4f9b7a8739f46337828c93cdc6d8164d873b0b13b
         fact_type: source_statement
         observation: La lecture complète de 1NSI-WEB-CO-004 couvre HTTPS, l’exposition des paramètres GET et le choix de POST
           et a été confrontée au contrat, au programme et aux objets liés.
@@ -16558,8 +16942,8 @@ findings:
       facts:
       - path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
         line_start: 2
-        line_end: 29
-        excerpt_sha256: sha256:53015e032f91f243f676f43937b6a94dffa265bc2fa2b1b9dbd59bed8e2c4556
+        line_end: 32
+        excerpt_sha256: sha256:9e4871423acab0c07f41b0e4f9b7a8739f46337828c93cdc6d8164d873b0b13b
         fact_type: pedagogical_structure
         observation: Dans 1NSI-WEB-CO-004, le format corrige explicite la résolution de l’objet lié autour de HTTPS, l’exposition
           des paramètres GET et le choix de POST.
