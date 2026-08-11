@@ -187,6 +187,12 @@ def test_maximum_zero_condition_includes_zero_for_nonempty_lists() -> None:
     assert "[-5, -1, -8]" in error_text
     assert "contient au moins une valeur positive" not in error_text
 
+    execution = review_module.execution_observation(course_record, REPO_ROOT)
+    assert execution is not None
+    assert execution["fresh_verdict"] == "pass"
+    assert execution["matches_receipt"] is True
+    assert execution["anomalies"] == []
+
 
 def test_minimum_canonical_source_rejects_empty_list_and_matches_correction() -> None:
     assert MINIMUM_CORRECTION.is_file()
