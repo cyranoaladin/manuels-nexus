@@ -39,6 +39,12 @@ EXPECTED_P0_IDS = {
     "1NSI-REV-PM-COURS-C3-OPTIMISATION",
     "1NSI-REV-PM-COURS-C2-OPTIMISATION",
     "1NSI-REV-LANGAGE-RE-C4-MINIMUM-OPTIMISATION",
+    "1NSI-REV-ARCH-C1-DIAGRAM-FLOWS",
+    "1NSI-REV-RES-IHM-COURSE",
+    "1NSI-REV-WEB-POST-LOGS-CO004",
+    "1NSI-REV-TAB-CO-005-FUSION-DOUBLONS",
+    "1NSI-REV-TAB-CO-005-COLLISION-COLONNES",
+    "1NSI-REV-TB-RE-C3-CORRIGE-EGALITE-FLOTTANTS",
 }
 SECRET_PATTERNS = (
     re.compile(r"sk-or-v1-", re.IGNORECASE),
@@ -217,7 +223,7 @@ def _validate_receipts(root: Path = ROOT) -> list[dict]:
         assert not duplicates, f"{key} doit etre unique: {duplicates}"
 
     if (root / "audit" / "reviews" / "1nsi" / "p0" / SUMMARY_FILENAME).is_file():
-        assert len(receipts) == 17
+        assert len(receipts) == len(EXPECTED_P0_IDS)
         assert {receipt["p0_id"] for receipt in receipts} == EXPECTED_P0_IDS
     return receipts
 
