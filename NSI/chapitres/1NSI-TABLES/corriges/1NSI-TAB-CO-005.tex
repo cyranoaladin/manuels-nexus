@@ -17,6 +17,10 @@
 %         correspondances = index2.get(ligne1[cle], [defauts])
 %         for ligne2 in correspondances:
 %             complement = {k: v for k, v in ligne2.items() if k != cle}
+%             colonnes1 = set(ligne1) - {cle}
+%             colonnes2 = set(complement)
+%             if not colonnes1.isdisjoint(colonnes2):
+%                 raise ValueError("les colonnes hors cle doivent etre disjointes")
 %             fusion.append({**ligne1, **complement})
 %     return fusion
 % resultat = fusionner_tout(eleves, absences, "nom", {"nb_absences": 0})
@@ -36,6 +40,20 @@
 %     {"nom": "Amine", "classe": "1A", "absence": "lundi"},
 %     {"nom": "Amine", "classe": "1A", "absence": "mardi"},
 % ]
+% table_collision = [{"nom": "Amine", "classe": "1B"}]
+% try:
+%     fusionner_tout(eleves[:1], table_collision, "nom", {})
+% except ValueError as erreur:
+%     assert str(erreur) == "les colonnes hors cle doivent etre disjointes"
+% else:
+%     raise AssertionError("une collision doit etre refusee")
+% defauts_collision = {"classe": "inconnue"}
+% try:
+%     fusionner_tout([{"nom": "Lina", "classe": "1B"}], [], "nom", defauts_collision)
+% except ValueError as erreur:
+%     assert str(erreur) == "les colonnes hors cle doivent etre disjointes"
+% else:
+%     raise AssertionError("une collision avec les valeurs par defaut doit etre refusee")
 % END-VERIFY
 \begin{corrige}{1NSI-TAB-EX-005}
 \textbf{1.} La table fusionnée contient $3$ lignes (Amine, Omar, Sara).
@@ -59,11 +77,17 @@ def fusionner_tout(table1, table2, cle, defauts):
         correspondances = index2.get(ligne1[cle], [defauts])
         for ligne2 in correspondances:
             complement = {k: v for k, v in ligne2.items() if k != cle}
+            colonnes1 = set(ligne1) - {cle}
+            colonnes2 = set(complement)
+            if not colonnes1.isdisjoint(colonnes2):
+                raise ValueError("les colonnes hors cle doivent etre disjointes")
             fusion.append({**ligne1, **complement})
     return fusion
 \end{python}
 Avec \lstinline|fusionner_tout(eleves, absences, "nom", {"nb_absences": 0})|, on obtient
 bien les $4$ élèves, Lina ayant \lstinline{nb_absences} égal à $0$. Si plusieurs lignes de
 la seconde table portent la même clé, chacune produit une ligne dans le résultat : aucune
-correspondance n'est écrasée dans l'index.
+correspondance n'est écrasée dans l'index. Les colonnes hors clé doivent être disjointes :
+la fonction lève une erreur au lieu d'écraser silencieusement une valeur de la première
+table, y compris lorsqu'une valeur par défaut porte le même nom.
 \end{corrige}

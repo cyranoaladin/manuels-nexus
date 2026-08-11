@@ -273,6 +273,84 @@ def test_full_table_join_preserves_duplicate_matching_rows() -> None:
     assert '"absence": "mardi"' in verify_code
 
 
+def test_full_table_join_rejects_nonkey_column_collisions() -> None:
+    assert TABLE_JOIN_ALL_CORRECTION.is_file()
+    assert TABLE_JOIN_ALL_SOURCE.is_file()
+
+    namespace = runpy.run_path(str(TABLE_JOIN_ALL_SOURCE))
+    fusionner_tout = namespace["fusionner_tout"]
+    message = "les colonnes hors cle doivent etre disjointes"
+
+    with pytest.raises(ValueError) as matched_error:
+        fusionner_tout(
+            [{"nom": "Amine", "classe": "1A"}],
+            [{"nom": "Amine", "classe": "1B"}],
+            "nom",
+            {"absence": "aucune"},
+        )
+    assert str(matched_error.value) == message
+
+    with pytest.raises(ValueError) as default_error:
+        fusionner_tout(
+            [{"nom": "Lina", "absence": "inconnue"}],
+            [],
+            "nom",
+            {"absence": "aucune"},
+        )
+    assert str(default_error.value) == message
+
+    optimized_probe = """
+import runpy
+import sys
+
+fusionner_tout = runpy.run_path(sys.argv[1])["fusionner_tout"]
+try:
+    fusionner_tout(
+        [{"nom": "Amine", "classe": "1A"}],
+        [{"nom": "Amine", "classe": "1B"}],
+        "nom",
+        {},
+    )
+except ValueError as error:
+    if str(error) != "les colonnes hors cle doivent etre disjointes":
+        raise RuntimeError(f"message inattendu: {error}")
+else:
+    raise RuntimeError("la collision doit etre refusee")
+"""
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-I",
+            "-O",
+            "-c",
+            optimized_probe,
+            str(TABLE_JOIN_ALL_SOURCE),
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+
+    source_code = TABLE_JOIN_ALL_SOURCE.read_text(encoding="utf-8")
+    guard = "if not colonnes1.isdisjoint(colonnes2):"
+    assert guard in source_code
+    assert f'raise ValueError("{message}")' in source_code
+    assert "assert colonnes1.isdisjoint(colonnes2)" not in source_code
+
+    tex = TABLE_JOIN_ALL_CORRECTION.read_text(encoding="utf-8")
+    assert "colonnes hors clé doivent être disjointes" in tex
+    verify_match = re.search(
+        r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY", tex, re.DOTALL
+    )
+    assert verify_match is not None
+    verify_code = _uncomment(verify_match.group("verify"))
+    assert guard in verify_code
+    assert "table_collision" in verify_code
+    assert "defauts_collision" in verify_code
+    assert f'assert str(erreur) == "{message}"' in verify_code
+
+
 def _marked_maximum_sequence(tex: str) -> re.Match[str]:
     matches = list(MARKED_MAXIMUM_SEQUENCE.finditer(tex))
     assert len(matches) == 1, "la sequence Python marquee doit etre unique"
