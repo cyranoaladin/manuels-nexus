@@ -1,0 +1,396 @@
+{
+  "chapitre": "TSPE-CONTINUITE",
+  "titre": "Continuite et theoreme des valeurs intermediaires — QCM d'auto-evaluation",
+  "questions": [
+    {
+      "id": "Q1",
+      "capacite": "C1",
+      "enonce": "Soit $f$ continue sur $[0\\,;5]$ avec $f(0) = -2$ et $f(5) = 3$. Que peut-on affirmer ?",
+      "options": {
+        "A": "$f$ s'annule au moins une fois sur $[0\\,;5]$.",
+        "B": "$f$ s'annule exactement une fois sur $[0\\,;5]$.",
+        "C": "$f$ ne s'annule jamais sur $[0\\,;5]$.",
+        "D": "$f$ est strictement croissante sur $[0\\,;5]$."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "Confusion entre le TVI et son corollaire : l'unicite exige la stricte monotonie, qui n'est pas supposee ici.",
+          "renvoi": "M1, etape 4"
+        },
+        "C": {
+          "erreur": "L'eleve n'utilise pas le changement de signe entre les images des bornes.",
+          "renvoi": "M1, etape 2"
+        },
+        "D": {
+          "erreur": "L'eleve deduit la monotonie du seul fait que $f(5) > f(0)$.",
+          "renvoi": "RE-C1"
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "capacite": "C1",
+      "enonce": "Pour garantir l'\\emph{unicite} de la solution de $f(x) = k$ donnee par le TVI, il faut supposer de plus que $f$ est :",
+      "options": {
+        "A": "derivable.",
+        "B": "strictement monotone.",
+        "C": "positive.",
+        "D": "bornee."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La derivabilite sert a etablir la monotonie, mais ce n'est pas elle qui donne l'unicite.",
+          "renvoi": "M1, etape 4"
+        },
+        "C": {
+          "erreur": "Le signe de $f$ n'intervient nulle part dans l'enonce du theoreme.",
+          "renvoi": "cours C1"
+        },
+        "D": {
+          "erreur": "Une fonction continue sur un segment est automatiquement bornee : l'hypothese serait redondante.",
+          "renvoi": "cours C1"
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "capacite": "C1",
+      "enonce": "Soit $f$ continue et strictement decroissante sur $[1\\,;4]$, avec $f(1) = 7$ et $f(4) = -2$. L'equation $f(x) = 3$ :",
+      "options": {
+        "A": "n'a aucune solution.",
+        "B": "a exactement une solution.",
+        "C": "a exactement deux solutions.",
+        "D": "a une infinite de solutions."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve verifie si $3$ est compris entre les bornes dans le mauvais ordre : $-2 < 3 < 7$ convient.",
+          "renvoi": "M1, etape 2"
+        },
+        "C": {
+          "erreur": "Sur un intervalle de stricte monotonie, une valeur ne peut etre atteinte qu'une fois.",
+          "renvoi": "M4, etape 3"
+        },
+        "D": {
+          "erreur": "Confusion avec une fonction constante.",
+          "renvoi": "RE-C1"
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "capacite": "C1",
+      "enonce": "Une fonction $f$ continue sur $[0\\,;6]$ croit de $-1$ a $4$, puis decroit de $4$ a $2$. Le nombre de solutions de $f(x) = 3$ est :",
+      "options": {
+        "A": "$0$",
+        "B": "$1$",
+        "C": "$2$",
+        "D": "$3$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'eleve conclut trop vite parce que $f$ n'est pas monotone sur l'intervalle entier.",
+          "renvoi": "M4, etape 1"
+        },
+        "B": {
+          "erreur": "Une seule branche a ete examinee : il faut traiter les deux morceaux monotones.",
+          "renvoi": "M4, etape 3"
+        },
+        "D": {
+          "erreur": "Il n'y a que deux branches monotones, donc au plus deux solutions.",
+          "renvoi": "M4, verification"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "capacite": "C1",
+      "enonce": "Meme fonction qu'a la question precedente. Le nombre de solutions de $f(x) = 5$ est :",
+      "options": {
+        "A": "$0$",
+        "B": "$1$",
+        "C": "$2$",
+        "D": "impossible a determiner."
+      },
+      "correcte": "A",
+      "diagnostics": {
+        "B": {
+          "erreur": "L'eleve applique le TVI sans verifier que $5$ depasse le maximum de $f$, qui vaut $4$.",
+          "renvoi": "M4, etape 3"
+        },
+        "C": {
+          "erreur": "Meme erreur, appliquee deux fois.",
+          "renvoi": "M4, etape 3"
+        },
+        "D": {
+          "erreur": "Le tableau de variations suffit : le maximum est connu.",
+          "renvoi": "M4, verification"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "capacite": "C1",
+      "enonce": "On sait que $f$ est continue et strictement croissante sur $[2\\,;3]$, et que $f(2{,}4) < 0 < f(2{,}5)$. Alors la solution $\\alpha$ de $f(x) = 0$ verifie :",
+      "options": {
+        "A": "$\\alpha < 2{,}4$",
+        "B": "$2{,}4 < \\alpha < 2{,}5$",
+        "C": "$\\alpha > 2{,}5$",
+        "D": "$\\alpha = 2{,}45$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Sens de lecture inverse : pour une fonction croissante, $f$ est negative avant $\\alpha$.",
+          "renvoi": "M3, piege 1"
+        },
+        "C": {
+          "erreur": "Meme inversion, dans l'autre sens.",
+          "renvoi": "M3, piege 1"
+        },
+        "D": {
+          "erreur": "L'encadrement ne donne pas le milieu : la solution n'est pas necessairement au centre.",
+          "renvoi": "M3, etape 4"
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "capacite": "C1",
+      "enonce": "Une dichotomie part de l'intervalle $[0\\,;1]$. Combien d'etapes faut-il pour obtenir une amplitude strictement inferieure a $0{,}01$ ?",
+      "options": {
+        "A": "$5$",
+        "B": "$7$",
+        "C": "$10$",
+        "D": "$100$"
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "$2^{-5} = 0{,}03125$ reste superieur a $0{,}01$.",
+          "renvoi": "M3, etape 3"
+        },
+        "C": {
+          "erreur": "Confusion avec la precision $10^{-3}$, qui demande effectivement $10$ etapes.",
+          "renvoi": "M3, etape 3"
+        },
+        "D": {
+          "erreur": "L'eleve raisonne comme pour un balayage de pas $0{,}01$, non comme pour une division par deux.",
+          "renvoi": "M3, piege 3"
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "capacite": "C1",
+      "enonce": "Parmi ces affirmations sur le theoreme des valeurs intermediaires, laquelle est \\textbf{fausse} ?",
+      "options": {
+        "A": "Il prouve l'existence d'une solution.",
+        "B": "Il fournit une valeur approchee de la solution.",
+        "C": "Il necessite la continuite de la fonction.",
+        "D": "Il s'applique sur un intervalle."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "C'est precisement ce que fait le theoreme.",
+          "renvoi": "cours C1"
+        },
+        "C": {
+          "erreur": "La continuite est bien l'hypothese centrale, sans laquelle le theoreme est faux.",
+          "renvoi": "cours C1"
+        },
+        "D": {
+          "erreur": "L'enonce porte bien sur un intervalle.",
+          "renvoi": "cours C1"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "capacite": "C2",
+      "enonce": "Soit $(u_n)$ definie par $u_{n+1} = f(u_n)$ avec $f$ continue. Si $(u_n)$ converge vers $\\ell$, alors :",
+      "options": {
+        "A": "$f(\\ell) = 0$",
+        "B": "$f(\\ell) = \\ell$",
+        "C": "$\\ell = 0$",
+        "D": "$f$ est croissante."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Confusion entre point fixe et racine de la fonction.",
+          "renvoi": "M2, etape finale"
+        },
+        "C": {
+          "erreur": "Aucune raison que la limite soit nulle.",
+          "renvoi": "RE-C2"
+        },
+        "D": {
+          "erreur": "La monotonie de $f$ n'est ni supposee ni deduite.",
+          "renvoi": "cours C2"
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "capacite": "C2",
+      "enonce": "Pour montrer qu'une suite $u_{n+1} = f(u_n)$ reste dans un intervalle $I$, on demontre d'abord que :",
+      "options": {
+        "A": "$f$ est croissante sur $I$.",
+        "B": "$f(I) \\subset I$.",
+        "C": "$f$ est positive sur $I$.",
+        "D": "$u_0 = 0$."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "La croissance sert au sens de variation, pas a la stabilite de l'intervalle.",
+          "renvoi": "M2, etape 1"
+        },
+        "C": {
+          "erreur": "Le signe de $f$ n'assure pas que les termes restent dans $I$.",
+          "renvoi": "M2, etape 1"
+        },
+        "D": {
+          "erreur": "La valeur initiale doit appartenir a $I$, mais elle n'a aucune raison d'etre nulle.",
+          "renvoi": "M2, etape 1"
+        }
+      }
+    },
+    {
+      "id": "Q11",
+      "capacite": "C2",
+      "enonce": "Une suite croissante et majoree :",
+      "options": {
+        "A": "converge vers son majorant.",
+        "B": "converge, sans qu'on sache a priori vers quoi.",
+        "C": "peut diverger vers $+\\infty$.",
+        "D": "est necessairement geometrique."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Erreur classique : la limite est le plus petit majorant, pas n'importe quel majorant.",
+          "renvoi": "RE-C2"
+        },
+        "C": {
+          "erreur": "Contradictoire avec le fait d'etre majoree.",
+          "renvoi": "cours C2"
+        },
+        "D": {
+          "erreur": "Aucun lien entre monotonie bornee et nature geometrique.",
+          "renvoi": "RE-C2"
+        }
+      }
+    },
+    {
+      "id": "Q12",
+      "capacite": "C2",
+      "enonce": "La fonction $f$ admet deux points fixes, $0$ et $2$. La suite $u_{n+1} = f(u_n)$ avec $u_0 = 1$ converge. Sa limite :",
+      "options": {
+        "A": "vaut forcement $0$.",
+        "B": "vaut forcement $2$.",
+        "C": "vaut $0$ ou $2$, et il faut un argument supplementaire pour trancher.",
+        "D": "vaut $1$."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'equation $f(\\ell) = \\ell$ donne des candidats, pas la reponse.",
+          "renvoi": "M2, etape finale"
+        },
+        "B": {
+          "erreur": "Meme erreur : le choix du point fixe demande un encadrement ou une monotonie.",
+          "renvoi": "M2, etape finale"
+        },
+        "D": {
+          "erreur": "$1$ n'est pas un point fixe : la limite verifie necessairement $f(\\ell) = \\ell$.",
+          "renvoi": "cours C2"
+        }
+      }
+    },
+    {
+      "id": "Q13",
+      "capacite": "C2",
+      "enonce": "Une suite $u_{n+1} = f(u_n)$ dont les termes encadrent alternativement la limite :",
+      "options": {
+        "A": "ne peut pas converger.",
+        "B": "converge si $f$ est croissante.",
+        "C": "peut converger, ce que montre par exemple une majoration $\\left|u_{n+1} - \\ell\\right| \\leq k\\left|u_n - \\ell\\right|$ avec $k < 1$.",
+        "D": "converge par le theoreme de la limite monotone."
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "L'alternance n'empeche pas la convergence, elle empeche seulement d'invoquer la monotonie.",
+          "renvoi": "M5, quand l'utiliser"
+        },
+        "B": {
+          "erreur": "Une $f$ croissante produit au contraire une suite monotone, pas alternee.",
+          "renvoi": "cours C2"
+        },
+        "D": {
+          "erreur": "Ce theoreme exige la monotonie, precisement ce dont on ne dispose pas ici.",
+          "renvoi": "M5, quand l'utiliser"
+        }
+      }
+    },
+    {
+      "id": "Q14",
+      "capacite": "C2",
+      "enonce": "Si $\\left|u_{n+1} - \\ell\\right| \\leq \\dfrac{1}{2}\\left|u_n - \\ell\\right|$ pour tout $n$, et $\\left|u_0 - \\ell\\right| = 4$, alors $\\left|u_5 - \\ell\\right|$ est majore par :",
+      "options": {
+        "A": "$2$",
+        "B": "$0{,}5$",
+        "C": "$0{,}125$",
+        "D": "$0$"
+      },
+      "correcte": "C",
+      "diagnostics": {
+        "A": {
+          "erreur": "Une seule application de l'inegalite au lieu de cinq.",
+          "renvoi": "M5, etape 4"
+        },
+        "B": {
+          "erreur": "Trois applications au lieu de cinq.",
+          "renvoi": "M5, etape 4"
+        },
+        "D": {
+          "erreur": "La majoration tend vers zero mais ne l'atteint a aucun rang fini.",
+          "renvoi": "M5, etape 5"
+        }
+      }
+    },
+    {
+      "id": "Q15",
+      "capacite": "C2",
+      "enonce": "Un algorithme cherche le premier $n$ tel que $\\left|u_n - \\ell\\right| < 10^{-6}$ par une boucle \\verb|while|. Ce programme :",
+      "options": {
+        "A": "se termine toujours.",
+        "B": "se termine si l'on a prealablement demontre que $(u_n)$ converge vers $\\ell$.",
+        "C": "se termine si $(u_n)$ est croissante.",
+        "D": "ne se termine jamais."
+      },
+      "correcte": "B",
+      "diagnostics": {
+        "A": {
+          "erreur": "Sans convergence demontree, la condition d'arret peut n'etre jamais satisfaite.",
+          "renvoi": "M3, piege 2"
+        },
+        "C": {
+          "erreur": "Une suite croissante peut diverger vers $+\\infty$ et ne jamais approcher $\\ell$.",
+          "renvoi": "M3, piege 2"
+        },
+        "D": {
+          "erreur": "Le programme se termine bien des lors que la convergence est acquise.",
+          "renvoi": "M3, piege 2"
+        }
+      }
+    }
+  ]
+}

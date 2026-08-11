@@ -1,28 +1,25 @@
-% META: {"id": "TSPE-CONTINUITE-QCM", "chapitre": "TSPE-CONTINUITE", "type_objet": "qcm", "capacites_codes": ["C1","C2"], "status": "generated"}
+% META: {"id": "TSPE-CONTINUITE-QCM", "chapitre": "TSPE-CONTINUITE", "type_objet": "qcm", "genere_depuis": "chapitres/TSPE-CONTINUITE/qcm/TSPE-CONTINUITE-QCM.json", "status": "generated"}
+% Fichier genere par scripts/build_qcm_tex.py — ne pas editer a la main.
 
-\section*{QCM d'auto-evaluation — Continuité}
+\section*{Continuite et theoreme des valeurs intermediaires — QCM d'auto-evaluation}
 
 \begin{center}
-\textit{Pour chaque question, une seule reponse est exacte. Entourez la lettre correspondante.}
+\textit{Pour chaque question, une seule reponse est exacte.}
 \end{center}
-
-\bigskip
-
-\subsection*{C1 — Théorème des valeurs intermédiaires}
 
 \begin{enumerate}
 
-\item \textbf{[Q1]} Soit $f$ continue sur $[0,5]$ avec $f(0) = -2$ et $f(5) = 3$. Que peut-on affirmer ?
+\item[] \textbf{Capacite C1}
+
+\item \textbf{[Q1]} Soit $f$ continue sur $[0\,;5]$ avec $f(0) = -2$ et $f(5) = 3$. Que peut-on affirmer ?
   \begin{enumerate}[label=\Alph*.]
-    \item $f$ s'annule au moins une fois sur $[0,5]$.
-    \item $f$ s'annule exactement une fois sur $[0,5]$.
-    \item $f$ ne s'annule jamais sur $[0,5]$.
-    \item $f$ est strictement croissante sur $[0,5]$.
+    \item $f$ s'annule au moins une fois sur $[0\,;5]$.
+    \item $f$ s'annule exactement une fois sur $[0\,;5]$.
+    \item $f$ ne s'annule jamais sur $[0\,;5]$.
+    \item $f$ est strictement croissante sur $[0\,;5]$.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q2]} Pour garantir l'\emph{unicite} de la solution de $f(x)=k$ donnee par le TVI, il faut en plus supposer que $f$ est :
+\item \textbf{[Q2]} Pour garantir l'\emph{unicite} de la solution de $f(x) = k$ donnee par le TVI, il faut supposer de plus que $f$ est :
   \begin{enumerate}[label=\Alph*.]
     \item derivable.
     \item strictement monotone.
@@ -30,46 +27,232 @@
     \item bornee.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q3]} Le TVI s'applique a une fonction $f$ sur $[a,b]$ a condition que :
+\item \textbf{[Q3]} Soit $f$ continue et strictement decroissante sur $[1\,;4]$, avec $f(1) = 7$ et $f(4) = -2$. L'equation $f(x) = 3$ :
   \begin{enumerate}[label=\Alph*.]
-    \item $f$ soit derivable sur $[a,b]$.
-    \item $f$ soit continue sur $[a,b]$.
-    \item $f$ soit positive sur $[a,b]$.
-    \item $f(a) = f(b)$.
+    \item n'a aucune solution.
+    \item a exactement une solution.
+    \item a exactement deux solutions.
+    \item a une infinite de solutions.
   \end{enumerate}
 
-\bigskip
-
-\subsection*{C2 — Suites récurrentes et continuité}
-
-\item \textbf{[Q4]} Soit $f$ continue sur $I$, $f(I) \subset I$, et $(u_n)$ definie par $u_{n+1}=f(u_n)$ avec $u_0 \in I$. Si $(u_n)$ converge vers $\ell \in I$, alors :
+\item \textbf{[Q4]} Une fonction $f$ continue sur $[0\,;6]$ croit de $-1$ a $4$, puis decroit de $4$ a $2$. Le nombre de solutions de $f(x) = 3$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $\ell = u_0$.
-    \item $f(\ell) = \ell$.
-    \item $f'(\ell) = 0$.
-    \item $\ell$ n'est pas determine.
+    \item $0$
+    \item $1$
+    \item $2$
+    \item $3$
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q5]} Pour appliquer le resultat de la question precedente, quelle hypothese sur $f$ est indispensable ?
+\item \textbf{[Q5]} Meme fonction qu'a la question precedente. Le nombre de solutions de $f(x) = 5$ est :
   \begin{enumerate}[label=\Alph*.]
-    \item $f$ derivable en $\ell$.
-    \item $f$ continue en $\ell$.
-    \item $f$ strictement monotone.
-    \item $f$ positive.
+    \item $0$
+    \item $1$
+    \item $2$
+    \item impossible a determiner.
   \end{enumerate}
 
-\bigskip
-
-\item \textbf{[Q6]} Que peut-on dire d'une suite $(u_n)$ telle que $\ell = f(\ell)$ admet deux solutions dans $I$ ?
+\item \textbf{[Q6]} On sait que $f$ est continue et strictement croissante sur $[2\,;3]$, et que $f(2{,}4) < 0 < f(2{,}5)$. Alors la solution $\alpha$ de $f(x) = 0$ verifie :
   \begin{enumerate}[label=\Alph*.]
-    \item $(u_n)$ converge forcement vers les deux limites a la fois.
-    \item $(u_n)$ ne peut pas converger.
-    \item Si $(u_n)$ converge, sa limite est l'une des deux solutions, mais on ne sait pas laquelle sans etude complementaire.
-    \item $(u_n)$ converge forcement vers la plus grande des deux solutions.
+    \item $\alpha < 2{,}4$
+    \item $2{,}4 < \alpha < 2{,}5$
+    \item $\alpha > 2{,}5$
+    \item $\alpha = 2{,}45$
+  \end{enumerate}
+
+\item \textbf{[Q7]} Une dichotomie part de l'intervalle $[0\,;1]$. Combien d'etapes faut-il pour obtenir une amplitude strictement inferieure a $0{,}01$ ?
+  \begin{enumerate}[label=\Alph*.]
+    \item $5$
+    \item $7$
+    \item $10$
+    \item $100$
+  \end{enumerate}
+
+\item \textbf{[Q8]} Parmi ces affirmations sur le theoreme des valeurs intermediaires, laquelle est \textbf{fausse} ?
+  \begin{enumerate}[label=\Alph*.]
+    \item Il prouve l'existence d'une solution.
+    \item Il fournit une valeur approchee de la solution.
+    \item Il necessite la continuite de la fonction.
+    \item Il s'applique sur un intervalle.
+  \end{enumerate}
+
+\item[] \textbf{Capacite C2}
+
+\item \textbf{[Q9]} Soit $(u_n)$ definie par $u_{n+1} = f(u_n)$ avec $f$ continue. Si $(u_n)$ converge vers $\ell$, alors :
+  \begin{enumerate}[label=\Alph*.]
+    \item $f(\ell) = 0$
+    \item $f(\ell) = \ell$
+    \item $\ell = 0$
+    \item $f$ est croissante.
+  \end{enumerate}
+
+\item \textbf{[Q10]} Pour montrer qu'une suite $u_{n+1} = f(u_n)$ reste dans un intervalle $I$, on demontre d'abord que :
+  \begin{enumerate}[label=\Alph*.]
+    \item $f$ est croissante sur $I$.
+    \item $f(I) \subset I$.
+    \item $f$ est positive sur $I$.
+    \item $u_0 = 0$.
+  \end{enumerate}
+
+\item \textbf{[Q11]} Une suite croissante et majoree :
+  \begin{enumerate}[label=\Alph*.]
+    \item converge vers son majorant.
+    \item converge, sans qu'on sache a priori vers quoi.
+    \item peut diverger vers $+\infty$.
+    \item est necessairement geometrique.
+  \end{enumerate}
+
+\item \textbf{[Q12]} La fonction $f$ admet deux points fixes, $0$ et $2$. La suite $u_{n+1} = f(u_n)$ avec $u_0 = 1$ converge. Sa limite :
+  \begin{enumerate}[label=\Alph*.]
+    \item vaut forcement $0$.
+    \item vaut forcement $2$.
+    \item vaut $0$ ou $2$, et il faut un argument supplementaire pour trancher.
+    \item vaut $1$.
+  \end{enumerate}
+
+\item \textbf{[Q13]} Une suite $u_{n+1} = f(u_n)$ dont les termes encadrent alternativement la limite :
+  \begin{enumerate}[label=\Alph*.]
+    \item ne peut pas converger.
+    \item converge si $f$ est croissante.
+    \item peut converger, ce que montre par exemple une majoration $\left|u_{n+1} - \ell\right| \leq k\left|u_n - \ell\right|$ avec $k < 1$.
+    \item converge par le theoreme de la limite monotone.
+  \end{enumerate}
+
+\item \textbf{[Q14]} Si $\left|u_{n+1} - \ell\right| \leq \dfrac{1}{2}\left|u_n - \ell\right|$ pour tout $n$, et $\left|u_0 - \ell\right| = 4$, alors $\left|u_5 - \ell\right|$ est majore par :
+  \begin{enumerate}[label=\Alph*.]
+    \item $2$
+    \item $0{,}5$
+    \item $0{,}125$
+    \item $0$
+  \end{enumerate}
+
+\item \textbf{[Q15]} Un algorithme cherche le premier $n$ tel que $\left|u_n - \ell\right| < 10^{-6}$ par une boucle \verb|while|. Ce programme :
+  \begin{enumerate}[label=\Alph*.]
+    \item se termine toujours.
+    \item se termine si l'on a prealablement demontre que $(u_n)$ converge vers $\ell$.
+    \item se termine si $(u_n)$ est croissante.
+    \item ne se termine jamais.
   \end{enumerate}
 
 \end{enumerate}
+
+\clearpage
+\section*{Cle de correction — reservee au professeur}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Question & Capacite & Reponse exacte \\
+\hline
+Q1 & C1 & \textbf{A} \\
+Q2 & C1 & \textbf{B} \\
+Q3 & C1 & \textbf{B} \\
+Q4 & C1 & \textbf{C} \\
+Q5 & C1 & \textbf{A} \\
+Q6 & C1 & \textbf{B} \\
+Q7 & C1 & \textbf{B} \\
+Q8 & C1 & \textbf{B} \\
+Q9 & C2 & \textbf{B} \\
+Q10 & C2 & \textbf{B} \\
+Q11 & C2 & \textbf{B} \\
+Q12 & C2 & \textbf{C} \\
+Q13 & C2 & \textbf{C} \\
+Q14 & C2 & \textbf{C} \\
+Q15 & C2 & \textbf{B} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection*{Diagnostic des reponses erronees}
+
+\begin{itemize}
+  \item \textbf{Q1}
+  \begin{itemize}
+    \item \textbf{B} — Confusion entre le TVI et son corollaire : l'unicite exige la stricte monotonie, qui n'est pas supposee ici. \emph{Renvoi : M1, etape 4.}
+    \item \textbf{C} — L'eleve n'utilise pas le changement de signe entre les images des bornes. \emph{Renvoi : M1, etape 2.}
+    \item \textbf{D} — L'eleve deduit la monotonie du seul fait que $f(5) > f(0)$. \emph{Renvoi : RE-C1.}
+  \end{itemize}
+  \item \textbf{Q2}
+  \begin{itemize}
+    \item \textbf{A} — La derivabilite sert a etablir la monotonie, mais ce n'est pas elle qui donne l'unicite. \emph{Renvoi : M1, etape 4.}
+    \item \textbf{C} — Le signe de $f$ n'intervient nulle part dans l'enonce du theoreme. \emph{Renvoi : cours C1.}
+    \item \textbf{D} — Une fonction continue sur un segment est automatiquement bornee : l'hypothese serait redondante. \emph{Renvoi : cours C1.}
+  \end{itemize}
+  \item \textbf{Q3}
+  \begin{itemize}
+    \item \textbf{A} — L'eleve verifie si $3$ est compris entre les bornes dans le mauvais ordre : $-2 < 3 < 7$ convient. \emph{Renvoi : M1, etape 2.}
+    \item \textbf{C} — Sur un intervalle de stricte monotonie, une valeur ne peut etre atteinte qu'une fois. \emph{Renvoi : M4, etape 3.}
+    \item \textbf{D} — Confusion avec une fonction constante. \emph{Renvoi : RE-C1.}
+  \end{itemize}
+  \item \textbf{Q4}
+  \begin{itemize}
+    \item \textbf{A} — L'eleve conclut trop vite parce que $f$ n'est pas monotone sur l'intervalle entier. \emph{Renvoi : M4, etape 1.}
+    \item \textbf{B} — Une seule branche a ete examinee : il faut traiter les deux morceaux monotones. \emph{Renvoi : M4, etape 3.}
+    \item \textbf{D} — Il n'y a que deux branches monotones, donc au plus deux solutions. \emph{Renvoi : M4, verification.}
+  \end{itemize}
+  \item \textbf{Q5}
+  \begin{itemize}
+    \item \textbf{B} — L'eleve applique le TVI sans verifier que $5$ depasse le maximum de $f$, qui vaut $4$. \emph{Renvoi : M4, etape 3.}
+    \item \textbf{C} — Meme erreur, appliquee deux fois. \emph{Renvoi : M4, etape 3.}
+    \item \textbf{D} — Le tableau de variations suffit : le maximum est connu. \emph{Renvoi : M4, verification.}
+  \end{itemize}
+  \item \textbf{Q6}
+  \begin{itemize}
+    \item \textbf{A} — Sens de lecture inverse : pour une fonction croissante, $f$ est negative avant $\alpha$. \emph{Renvoi : M3, piege 1.}
+    \item \textbf{C} — Meme inversion, dans l'autre sens. \emph{Renvoi : M3, piege 1.}
+    \item \textbf{D} — L'encadrement ne donne pas le milieu : la solution n'est pas necessairement au centre. \emph{Renvoi : M3, etape 4.}
+  \end{itemize}
+  \item \textbf{Q7}
+  \begin{itemize}
+    \item \textbf{A} — $2^{-5} = 0{,}03125$ reste superieur a $0{,}01$. \emph{Renvoi : M3, etape 3.}
+    \item \textbf{C} — Confusion avec la precision $10^{-3}$, qui demande effectivement $10$ etapes. \emph{Renvoi : M3, etape 3.}
+    \item \textbf{D} — L'eleve raisonne comme pour un balayage de pas $0{,}01$, non comme pour une division par deux. \emph{Renvoi : M3, piege 3.}
+  \end{itemize}
+  \item \textbf{Q8}
+  \begin{itemize}
+    \item \textbf{A} — C'est precisement ce que fait le theoreme. \emph{Renvoi : cours C1.}
+    \item \textbf{C} — La continuite est bien l'hypothese centrale, sans laquelle le theoreme est faux. \emph{Renvoi : cours C1.}
+    \item \textbf{D} — L'enonce porte bien sur un intervalle. \emph{Renvoi : cours C1.}
+  \end{itemize}
+  \item \textbf{Q9}
+  \begin{itemize}
+    \item \textbf{A} — Confusion entre point fixe et racine de la fonction. \emph{Renvoi : M2, etape finale.}
+    \item \textbf{C} — Aucune raison que la limite soit nulle. \emph{Renvoi : RE-C2.}
+    \item \textbf{D} — La monotonie de $f$ n'est ni supposee ni deduite. \emph{Renvoi : cours C2.}
+  \end{itemize}
+  \item \textbf{Q10}
+  \begin{itemize}
+    \item \textbf{A} — La croissance sert au sens de variation, pas a la stabilite de l'intervalle. \emph{Renvoi : M2, etape 1.}
+    \item \textbf{C} — Le signe de $f$ n'assure pas que les termes restent dans $I$. \emph{Renvoi : M2, etape 1.}
+    \item \textbf{D} — La valeur initiale doit appartenir a $I$, mais elle n'a aucune raison d'etre nulle. \emph{Renvoi : M2, etape 1.}
+  \end{itemize}
+  \item \textbf{Q11}
+  \begin{itemize}
+    \item \textbf{A} — Erreur classique : la limite est le plus petit majorant, pas n'importe quel majorant. \emph{Renvoi : RE-C2.}
+    \item \textbf{C} — Contradictoire avec le fait d'etre majoree. \emph{Renvoi : cours C2.}
+    \item \textbf{D} — Aucun lien entre monotonie bornee et nature geometrique. \emph{Renvoi : RE-C2.}
+  \end{itemize}
+  \item \textbf{Q12}
+  \begin{itemize}
+    \item \textbf{A} — L'equation $f(\ell) = \ell$ donne des candidats, pas la reponse. \emph{Renvoi : M2, etape finale.}
+    \item \textbf{B} — Meme erreur : le choix du point fixe demande un encadrement ou une monotonie. \emph{Renvoi : M2, etape finale.}
+    \item \textbf{D} — $1$ n'est pas un point fixe : la limite verifie necessairement $f(\ell) = \ell$. \emph{Renvoi : cours C2.}
+  \end{itemize}
+  \item \textbf{Q13}
+  \begin{itemize}
+    \item \textbf{A} — L'alternance n'empeche pas la convergence, elle empeche seulement d'invoquer la monotonie. \emph{Renvoi : M5, quand l'utiliser.}
+    \item \textbf{B} — Une $f$ croissante produit au contraire une suite monotone, pas alternee. \emph{Renvoi : cours C2.}
+    \item \textbf{D} — Ce theoreme exige la monotonie, precisement ce dont on ne dispose pas ici. \emph{Renvoi : M5, quand l'utiliser.}
+  \end{itemize}
+  \item \textbf{Q14}
+  \begin{itemize}
+    \item \textbf{A} — Une seule application de l'inegalite au lieu de cinq. \emph{Renvoi : M5, etape 4.}
+    \item \textbf{B} — Trois applications au lieu de cinq. \emph{Renvoi : M5, etape 4.}
+    \item \textbf{D} — La majoration tend vers zero mais ne l'atteint a aucun rang fini. \emph{Renvoi : M5, etape 5.}
+  \end{itemize}
+  \item \textbf{Q15}
+  \begin{itemize}
+    \item \textbf{A} — Sans convergence demontree, la condition d'arret peut n'etre jamais satisfaite. \emph{Renvoi : M3, piege 2.}
+    \item \textbf{C} — Une suite croissante peut diverger vers $+\infty$ et ne jamais approcher $\ell$. \emph{Renvoi : M3, piege 2.}
+    \item \textbf{D} — Le programme se termine bien des lors que la convergence est acquise. \emph{Renvoi : M3, piege 2.}
+  \end{itemize}
+\end{itemize}
