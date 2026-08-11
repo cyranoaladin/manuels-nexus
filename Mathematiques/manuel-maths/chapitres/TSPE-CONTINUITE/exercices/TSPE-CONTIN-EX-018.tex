@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-CONTIN-EX-018", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-018.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-018.tex", "status": "generated"}
+% BEGIN-VERIFY
+% # Le tableau de variations est encode par ses branches monotones :
+% # (borne gauche, image gauche, borne droite, image droite, sens)
+% branches = [(-3, -2, -1, 5, 'croissante'), (-1, 5, 2, -4, 'decroissante'), (2, -4, 4, 1, 'croissante')]
+% def nb_solutions(k):
+%     total = 0
+%     for _, ya, _, yb, _ in branches:
+%         if min(ya, yb) < k < max(ya, yb):
+%             total += 1
+%     return total
+% assert nb_solutions(0) == 3
+% assert nb_solutions(3) == 2
+% assert nb_solutions(6) == 0
+% assert max(max(ya, yb) for _, ya, _, yb, _ in branches) == 5
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-018}{1}{10}
+Une fonction $f$ est continue sur $[-3\,;4]$. Son tableau de variations est le suivant :
+\begin{itemize}
+  \item $f$ est strictement croissante sur $[-3\,;-1]$, avec $f(-3) = -2$ et $f(-1) = 5$ ;
+  \item $f$ est strictement decroissante sur $[-1\,;2]$, avec $f(2) = -4$ ;
+  \item $f$ est strictement croissante sur $[2\,;4]$, avec $f(4) = 1$.
+\end{itemize}
+\begin{enumerate}
+  \item Determiner le nombre de solutions de l'equation $f(x) = 0$ sur $[-3\,;4]$, en justifiant sur chaque intervalle.
+  \item Meme question pour $f(x) = 3$.
+  \item Combien l'equation $f(x) = 6$ admet-elle de solutions ? Justifier sans calcul.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-CONTIN-CO-014", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-014", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, simplify
+% x = symbols('x')
+% f = sqrt(x) + x - 3
+% assert f.subs(x, 1) == -1 and f.subs(x, 4) == 3
+% assert float(f.subs(x, Rational(16,10))) < 0 < float(f.subs(x, Rational(17,10)))
+% assert abs(float(f.subs(x, Rational(16,10))) - (-0.1350890)) < 1e-6
+% assert abs(float(f.subs(x, Rational(17,10))) - 0.0038404) < 1e-6
+% assert abs(float(nsolve(f, x, 1.7)) - 1.6972244) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-014}
+
+\textbf{Q1.} Sur $[1\,;4]$, $x > 0$ donc $\sqrt{x}$ est derivable et $f'(x) = \dfrac{1}{2\sqrt{x}} + 1$. Les deux termes sont strictement positifs, donc $f'(x) > 0$.
+
+\textbf{Q2.} $f(1) = 1 + 1 - 3 = -1$ et $f(4) = 2 + 4 - 3 = 3$.
+
+\textbf{Q3.} $f$ est continue sur $[1\,;4]$ (somme de fonctions continues) et strictement croissante d'apres Q1. Comme $0$ est compris entre $f(1) = -1$ et $f(4) = 3$, l'equation $f(x) = 0$ admet une unique solution $\alpha$ dans $[1\,;4]$.
+
+\textbf{Q4.} $f(1{,}6) = \sqrt{1{,}6} + 1{,}6 - 3 \approx 1{,}2649 - 1{,}4 = -0{,}1351 < 0$ et $f(1{,}7) = \sqrt{1{,}7} + 1{,}7 - 3 \approx 1{,}3038 - 1{,}3 = 0{,}0038 > 0$. Par stricte croissance, $1{,}6 < \alpha < 1{,}7$.
+\end{corrige}

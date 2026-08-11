@@ -1,0 +1,21 @@
+% META: {"id": "TSPE-CONTIN-CO-009", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-009", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, S
+% x = symbols('x')
+% f = x**3 + x - 1
+% assert diff(f, x) == 3*x**2 + 1
+% assert f.subs(x, 0) == -1 and f.subs(x, 1) == 1
+% assert f.subs(x, Rational(6,10)) == Rational(-184,1000)
+% assert f.subs(x, Rational(7,10)) == Rational(43,1000)
+% assert abs(float(nsolve(f, x, 0.7)) - 0.6823278) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-009}
+
+\textbf{Q1.} $f'(x) = 3x^2 + 1$. Pour tout reel $x$, $3x^2 \geq 0$ donc $f'(x) \geq 1 > 0$ : la derivee est strictement positive sur $[0\,;1]$.
+
+\textbf{Q2.} $f(0) = 0 + 0 - 1 = -1$ et $f(1) = 1 + 1 - 1 = 1$.
+
+\textbf{Q3.} $f$ est une fonction polynome, donc continue sur $[0\,;1]$, et elle est strictement croissante sur cet intervalle d'apres Q1. Comme $0$ est compris entre $f(0) = -1$ et $f(1) = 1$, le theoreme des valeurs intermediaires, dans sa version pour les fonctions strictement monotones, garantit que l'equation $f(x) = 0$ admet une solution et une seule dans $[0\,;1]$. On la note $\alpha$.
+
+\textbf{Q4.} $f(0{,}6) = 0{,}216 + 0{,}6 - 1 = -0{,}184 < 0$ et $f(0{,}7) = 0{,}343 + 0{,}7 - 1 = 0{,}043 > 0$. Comme $f$ est strictement croissante et s'annule en $\alpha$, on a $f(x) < 0$ pour $x < \alpha$ et $f(x) > 0$ pour $x > \alpha$. Donc $0{,}6 < \alpha < 0{,}7$.
+\end{corrige}

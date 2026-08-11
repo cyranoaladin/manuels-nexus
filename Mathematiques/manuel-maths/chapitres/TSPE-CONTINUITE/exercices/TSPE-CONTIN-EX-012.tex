@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-CONTIN-EX-012", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-012.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-012.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, S
+% x = symbols('x')
+% f = x**5 + x - 3
+% assert diff(f, x) == 5*x**4 + 1
+% assert f.subs(x, 1) == -1 and f.subs(x, 2) == 31
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-012}{1}{8}
+Soit $f$ la fonction definie sur $[1\,;2]$ par $f(x) = x^5 + x - 3$.
+\begin{enumerate}
+  \item Montrer que $f$ est strictement croissante sur $[1\,;2]$.
+  \item Calculer $f(1)$ et $f(2)$.
+  \item En deduire que l'equation $f(x) = 0$ admet une unique solution $\alpha$ dans $[1\,;2]$.
+  \item Encadrer $\alpha$ a $0{,}1$ pres.
+\end{enumerate}
+\end{exercice}

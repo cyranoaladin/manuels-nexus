@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-CONTIN-CO-010", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-010", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, S
+% x = symbols('x')
+% f = x**3 - 3*x**2 + 1
+% assert diff(f, x) == 3*x**2 - 6*x
+% assert (diff(f, x) - 3*x*(x - 2)).expand() == 0
+% assert f.subs(x, 0) == 1 and f.subs(x, 1) == -1
+% assert f.subs(x, Rational(6,10)) == Rational(136,1000)
+% assert f.subs(x, Rational(7,10)) == Rational(-127,1000)
+% assert abs(float(nsolve(f, x, 0.65)) - 0.6527036) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-010}
+
+\textbf{Q1.} $f'(x) = 3x^2 - 6x = 3x(x-2)$.
+
+\textbf{Q2.} Pour $x \in \left]0\,;1\right[$ : $3x > 0$ et $x - 2 < 0$ (car $x < 1 < 2$), donc le produit $3x(x-2)$ est strictement negatif.
+
+\textbf{Q3.} $f$ est un polynome, donc continue sur $[0\,;1]$, et strictement decroissante sur $[0\,;1]$ d'apres Q2. On a $f(0) = 1$ et $f(1) = 1 - 3 + 1 = -1$. Comme $0$ est compris entre $-1$ et $1$, le theoreme des valeurs intermediaires applique a une fonction strictement monotone donne l'existence et l'unicite de $\alpha \in [0\,;1]$ tel que $f(\alpha) = 0$.
+
+\textbf{Q4.} $f(0{,}6) = 0{,}216 - 1{,}08 + 1 = 0{,}136 > 0$ et $f(0{,}7) = 0{,}343 - 1{,}47 + 1 = -0{,}127 < 0$. La fonction etant strictement decroissante, $0{,}6 < \alpha < 0{,}7$.
+\end{corrige}

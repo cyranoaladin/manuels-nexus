@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-CONTIN-CO-018", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-018", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% branches = [(-3, -2, -1, 5), (-1, 5, 2, -4), (2, -4, 4, 1)]
+% def nb(k): return sum(1 for _, ya, _, yb in branches if min(ya, yb) < k < max(ya, yb))
+% assert nb(0) == 3 and nb(3) == 2 and nb(6) == 0
+% assert max(max(ya, yb) for _, ya, _, yb in branches) == 5
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-018}
+
+\textbf{Q1.} On applique le theoreme des valeurs intermediaires sur chaque intervalle ou $f$ est strictement monotone.
+
+Sur $[-3\,;-1]$ : $f$ est continue, strictement croissante, et $0$ est compris entre $f(-3) = -2$ et $f(-1) = 5$. Il y a donc exactement une solution.
+
+Sur $[-1\,;2]$ : $f$ est continue, strictement decroissante, et $0$ est compris entre $f(2) = -4$ et $f(-1) = 5$. Une solution, et une seule.
+
+Sur $[2\,;4]$ : $f$ est continue, strictement croissante, et $0$ est compris entre $f(2) = -4$ et $f(4) = 1$. Une solution, et une seule.
+
+Au total, l'equation $f(x) = 0$ admet \textbf{trois} solutions sur $[-3\,;4]$.
+
+\textbf{Q2.} Sur $[-3\,;-1]$ : $3$ est compris entre $-2$ et $5$, donc une solution. Sur $[-1\,;2]$ : $3$ est compris entre $-4$ et $5$, donc une solution. Sur $[2\,;4]$ : $f$ varie de $-4$ a $1$, et $3 > 1$ : aucune solution. Au total, \textbf{deux} solutions.
+
+\textbf{Q3.} Le maximum de $f$ sur $[-3\,;4]$ est atteint en $x = -1$ et vaut $5$. Comme $6 > 5$, l'equation $f(x) = 6$ n'admet \textbf{aucune} solution : aucune valeur de $f$ n'atteint $6$.
+\end{corrige}

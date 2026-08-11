@@ -1,0 +1,24 @@
+% META: {"id": "TSPE-CONTIN-CO-016", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-016", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, simplify
+% x = symbols('x')
+% f = x*exp(-x)
+% assert simplify(diff(f, x) - (1 - x)*exp(-x)) == 0
+% assert f.subs(x, 0) == 0
+% assert abs(float(f.subs(x, 1)) - 0.3678794) < 1e-6
+% assert diff(f, x).subs(x, 1) == 0
+% assert all(float(diff(f, x).subs(x, v)) > 0 for v in (0, Rational(1,2), Rational(9,10)))
+% assert abs(float(f.subs(x, Rational(2,10))) - 0.1637462) < 1e-6
+% assert abs(float(f.subs(x, Rational(3,10))) - 0.2222455) < 1e-6
+% assert float(f.subs(x, Rational(2,10))) < 0.2 < float(f.subs(x, Rational(3,10)))
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-016}
+
+\textbf{Q1.} $f$ est un produit : avec $u = x$ et $v = \mathrm{e}^{-x}$, on a $u' = 1$ et $v' = -\mathrm{e}^{-x}$. Donc $f'(x) = 1\times\mathrm{e}^{-x} + x\times(-\mathrm{e}^{-x}) = (1-x)\,\mathrm{e}^{-x}$.
+
+\textbf{Q2.} L'exponentielle est strictement positive, donc $f'(x)$ a le signe de $1-x$. Sur $\left[0\,;1\right[$ on a $1-x > 0$ donc $f'(x) > 0$, et $f'(1) = 0$. La derivee ne s'annulant qu'a la borne $1$, $f$ est strictement croissante sur $[0\,;1]$.
+
+\textbf{Q3.} $f(0) = 0 \times 1 = 0$ et $f(1) = \mathrm{e}^{-1} \approx 0{,}368$.
+
+\textbf{Q4.} $f$ est continue et strictement croissante sur $[0\,;1]$, et $0{,}2$ est compris entre $f(0) = 0$ et $f(1) \approx 0{,}368$ : l'equation $f(x) = 0{,}2$ admet une unique solution $\alpha$ dans $[0\,;1]$. De plus $f(0{,}2) \approx 0{,}1637 < 0{,}2$ et $f(0{,}3) \approx 0{,}2222 > 0{,}2$, donc $0{,}2 < \alpha < 0{,}3$.
+\end{corrige}

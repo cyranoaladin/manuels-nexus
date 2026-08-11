@@ -1,0 +1,24 @@
+% META: {"id": "TSPE-CONTIN-CO-017", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-017", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, simplify
+% x = symbols('x')
+% f = x**2 + 1/x
+% assert simplify(diff(f, x) - (2*x - 1/x**2)) == 0
+% assert f.subs(x, 1) == 2 and f.subs(x, 2) == Rational(9,2)
+% assert all(float(diff(f, x).subs(x, v)) > 0 for v in (1, Rational(3,2), 2))
+% assert f.subs(x, Rational(15,10)) == Rational(35,12)
+% assert abs(float(f.subs(x, Rational(15,10))) - 2.9166667) < 1e-6
+% assert abs(float(f.subs(x, Rational(16,10))) - 3.185) < 1e-6
+% assert float(f.subs(x, Rational(15,10))) < 3 < float(f.subs(x, Rational(16,10)))
+% assert abs(float(nsolve(f - 3, x, 1.55)) - 1.5320889) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-017}
+
+\textbf{Q1.} $f(x) = x^2 + x^{-1}$, donc $f'(x) = 2x - \dfrac{1}{x^2}$.
+
+\textbf{Q2.} Pour $x \in [1\,;2]$ : $2x \geq 2$ et $\dfrac{1}{x^2} \leq 1$ (car $x^2 \geq 1$). Donc $f'(x) \geq 2 - 1 = 1 > 0$.
+
+\textbf{Q3.} $f(1) = 1 + 1 = 2$ et $f(2) = 4 + \dfrac{1}{2} = 4{,}5$.
+
+\textbf{Q4.} $f$ est continue et strictement croissante sur $[1\,;2]$, et $3$ est compris entre $f(1) = 2$ et $f(2) = 4{,}5$ : l'equation $f(x) = 3$ admet une unique solution $\alpha$ dans $[1\,;2]$. Comme $f(1{,}5) = 2{,}25 + \dfrac{2}{3} \approx 2{,}9167 < 3$ et $f(1{,}6) = 2{,}56 + 0{,}625 = 3{,}185 > 3$, on a $1{,}5 < \alpha < 1{,}6$.
+\end{corrige}

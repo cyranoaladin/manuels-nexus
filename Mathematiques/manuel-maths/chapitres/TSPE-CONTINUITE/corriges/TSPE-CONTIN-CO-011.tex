@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-CONTIN-CO-011", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-011", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, S
+% x = symbols('x')
+% f = exp(x) + x
+% assert diff(f, x) == exp(x) + 1
+% assert abs(float(f.subs(x, -1)) - (-0.6321205)) < 1e-6
+% assert float(f.subs(x, 0)) == 1.0
+% assert float(f.subs(x, Rational(-6,10))) < 0 < float(f.subs(x, Rational(-5,10)))
+% assert abs(float(f.subs(x, Rational(-6,10))) - (-0.0511884)) < 1e-6
+% assert abs(float(f.subs(x, Rational(-5,10))) - 0.1065307) < 1e-6
+% assert abs(float(nsolve(f, x, -0.55)) - (-0.5671433)) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-011}
+
+\textbf{Q1.} $f$ est la somme de la fonction exponentielle et d'une fonction affine, toutes deux derivables sur $\mathbb{R}$ : $f$ est derivable sur $[-1\,;0]$ et $f'(x) = \mathrm{e}^{x} + 1$.
+
+\textbf{Q2.} Pour tout reel $x$, $\mathrm{e}^{x} > 0$, donc $f'(x) > 1 > 0$ : $f$ est strictement croissante sur $[-1\,;0]$.
+
+\textbf{Q3.} $f(-1) = \mathrm{e}^{-1} - 1 \approx -0{,}632 < 0$ et $f(0) = 1 + 0 = 1 > 0$. La fonction $f$ est continue (somme de fonctions continues) et strictement croissante sur $[-1\,;0]$, et $0$ est compris entre $f(-1)$ et $f(0)$ : l'equation $f(x) = 0$ admet donc une unique solution $\alpha$ dans $[-1\,;0]$.
+
+\textbf{Q4.} $f(-0{,}6) = \mathrm{e}^{-0{,}6} - 0{,}6 \approx 0{,}5488 - 0{,}6 = -0{,}0512 < 0$ et $f(-0{,}5) = \mathrm{e}^{-0{,}5} - 0{,}5 \approx 0{,}6065 - 0{,}5 = 0{,}1065 > 0$. Par stricte croissance, $-0{,}6 < \alpha < -0{,}5$.
+\end{corrige}

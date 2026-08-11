@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-016", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-016.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-016.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, simplify
+% x = symbols('x')
+% f = x*exp(-x)
+% assert simplify(diff(f, x) - (1 - x)*exp(-x)) == 0
+% assert f.subs(x, 0) == 0
+% assert abs(float(f.subs(x, 1)) - 0.3678794) < 1e-6
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-016}{1}{10}
+Soit $f$ la fonction definie sur $[0\,;1]$ par $f(x) = x\,\mathrm{e}^{-x}$.
+\begin{enumerate}
+  \item Montrer que $f'(x) = (1-x)\,\mathrm{e}^{-x}$.
+  \item Etudier le signe de $f'(x)$ sur $[0\,;1]$ et en deduire le sens de variation de $f$.
+  \item Calculer $f(0)$ et donner une valeur approchee de $f(1)$ a $10^{-3}$ pres.
+  \item Montrer que l'equation $f(x) = 0{,}2$ admet une unique solution $\alpha$ dans $[0\,;1]$, puis encadrer $\alpha$ a $0{,}1$ pres.
+\end{enumerate}
+\end{exercice}

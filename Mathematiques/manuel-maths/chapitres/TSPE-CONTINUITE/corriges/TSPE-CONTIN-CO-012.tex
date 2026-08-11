@@ -1,0 +1,22 @@
+% META: {"id": "TSPE-CONTIN-CO-012", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-012", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, S
+% x = symbols('x')
+% f = x**5 + x - 3
+% assert diff(f, x) == 5*x**4 + 1
+% assert f.subs(x, 1) == -1 and f.subs(x, 2) == 31
+% assert f.subs(x, Rational(11,10)) == Rational(-28949,100000)
+% assert f.subs(x, Rational(12,10)) == Rational(68832,100000)
+% assert f.subs(x, Rational(11,10)) < 0 < f.subs(x, Rational(12,10))
+% assert abs(float(nsolve(f, x, 1.15)) - 1.1329976) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-012}
+
+\textbf{Q1.} $f'(x) = 5x^4 + 1$. Un reel eleve a la puissance $4$ est positif, donc $5x^4 \geq 0$ et $f'(x) \geq 1 > 0$ sur $[1\,;2]$ : $f$ y est strictement croissante.
+
+\textbf{Q2.} $f(1) = 1 + 1 - 3 = -1$ et $f(2) = 32 + 2 - 3 = 31$.
+
+\textbf{Q3.} $f$ est un polynome donc continue sur $[1\,;2]$, strictement croissante, et $0$ est compris entre $f(1) = -1$ et $f(2) = 31$. D'apres le theoreme des valeurs intermediaires pour une fonction strictement monotone, l'equation $f(x) = 0$ a une unique solution $\alpha$ dans $[1\,;2]$.
+
+\textbf{Q4.} $f(1{,}1) = 1{,}61051 + 1{,}1 - 3 = -0{,}28949 < 0$ et $f(1{,}2) = 2{,}48832 + 1{,}2 - 3 = 0{,}68832 > 0$, donc $1{,}1 < \alpha < 1{,}2$.
+\end{corrige}

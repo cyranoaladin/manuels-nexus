@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-009", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-009.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-009.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, S
+% x = symbols('x')
+% f = x**3 + x - 1
+% assert diff(f, x) == 3*x**2 + 1
+% assert f.subs(x, 0) == -1 and f.subs(x, 1) == 1
+% assert f.subs(x, Rational(6,10)) < 0 < f.subs(x, Rational(7,10))
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-009}{1}{8}
+Soit $f$ la fonction definie sur $[0\,;1]$ par $f(x) = x^3 + x - 1$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et determiner son signe sur $[0\,;1]$.
+  \item Calculer $f(0)$ et $f(1)$.
+  \item Montrer que l'equation $f(x) = 0$ admet une unique solution $\alpha$ dans $[0\,;1]$.
+  \item Justifier que $0{,}6 < \alpha < 0{,}7$.
+\end{enumerate}
+\end{exercice}

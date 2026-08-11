@@ -7,13 +7,18 @@
 % assert fp == 3*x**2 - 3
 % assert f.subs(x, -3) == -15
 % assert f.subs(x, -1) == 5
-% assert fp.subs(x, -2) > 0  # strictement positive sur [-3,-1]
+% # f' s'annule en -1 : la stricte positivite ne vaut que sur l'ouvert.
+% from sympy import Interval, solveset, S, oo
+% assert solveset(fp, x, S.Reals) == {-1, 1}
+% assert fp.subs(x, -1) == 0
+% for point in (-3, -2.5, -2, -1.5, -1.01):
+%     assert fp.subs(x, point) > 0
 % END-VERIFY
 \begin{exercice}{TSPE-CONTIN-EX-003}{2}{12}
 Soit $f(x) = x^3 - 3x + 3$ sur $[-3, -1]$.
 \begin{enumerate}
-  \item Calculer $f'(x)$ et montrer que $f'(x) > 0$ pour tout $x \in [-3, -1]$.
-  \item En deduire que $f$ est strictement croissante sur $[-3, -1]$.
+  \item Calculer $f'(x)$ et montrer que $f'(x) > 0$ pour tout $x \in \left]-3, -1\right[$. Que vaut $f'(-1)$ ?
+  \item En deduire que $f$ est strictement croissante sur $[-3, -1]$ tout entier, bornes comprises.
   \item Calculer $f(-3)$ et $f(-1)$.
   \item Montrer que l'equation $f(x) = 1$ admet une unique solution $\alpha$ dans $[-3, -1]$.
 \end{enumerate}

@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-CONTIN-EX-014", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-014.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-014.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, simplify
+% x = symbols('x')
+% f = sqrt(x) + x - 3
+% assert simplify(diff(f, x) - (1/(2*sqrt(x)) + 1)) == 0
+% assert f.subs(x, 1) == -1 and f.subs(x, 4) == 3
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-014}{1}{10}
+Soit $f$ la fonction definie sur $[1\,;4]$ par $f(x) = \sqrt{x} + x - 3$.
+\begin{enumerate}
+  \item Calculer $f'(x)$ et justifier que $f'(x) > 0$ sur $[1\,;4]$.
+  \item Calculer $f(1)$ et $f(4)$.
+  \item Montrer que l'equation $f(x) = 0$ admet une unique solution $\alpha$ dans $[1\,;4]$.
+  \item Montrer que $1{,}6 < \alpha < 1{,}7$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,17 @@
+% META: {"id": "TSPE-CONTIN-EX-011", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 8, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-011.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-011.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, S
+% x = symbols('x')
+% f = exp(x) + x
+% assert diff(f, x) == exp(x) + 1
+% assert float(f.subs(x, -1)) < 0 < float(f.subs(x, 0))
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-011}{1}{8}
+Soit $f$ la fonction definie sur $[-1\,;0]$ par $f(x) = \mathrm{e}^{x} + x$.
+\begin{enumerate}
+  \item Justifier que $f$ est derivable et calculer $f'(x)$.
+  \item Determiner le sens de variation de $f$ sur $[-1\,;0]$.
+  \item Montrer que l'equation $f(x) = 0$ admet une unique solution $\alpha$ dans $[-1\,;0]$.
+  \item Montrer que $-0{,}6 < \alpha < -0{,}5$.
+\end{enumerate}
+\end{exercice}

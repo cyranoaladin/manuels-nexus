@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-CONTIN-CO-015", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-015", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, sqrt, exp, simplify
+% x = symbols('x')
+% f = x/(x + 1)
+% assert simplify(diff(f, x) - 1/(x + 1)**2) == 0
+% assert f.subs(x, 0) == 0 and f.subs(x, 3) == Rational(3,4)
+% assert f.subs(x, Rational(3,2)) == Rational(3,5)
+% from sympy import solveset, S as SS, Eq
+% assert solveset(Eq(f, Rational(3,5)), x, SS.Reals) == {Rational(3,2)}
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-015}
+
+\textbf{Q1.} $f$ est un quotient derivable sur $[0\,;3]$ (le denominateur ne s'annule pas). Avec $u = x$ et $v = x+1$ : $f' = \dfrac{u'v - uv'}{v^2} = \dfrac{1\times(x+1) - x\times 1}{(x+1)^2} = \dfrac{1}{(x+1)^2}$. Ce quotient est strictement positif, donc $f$ est strictement croissante sur $[0\,;3]$.
+
+\textbf{Q2.} $f(0) = \dfrac{0}{1} = 0$ et $f(3) = \dfrac{3}{4} = 0{,}75$.
+
+\textbf{Q3.} $f$ est continue et strictement croissante sur $[0\,;3]$, et $0{,}6$ est compris entre $f(0) = 0$ et $f(3) = 0{,}75$. L'equation $f(x) = 0{,}6$ admet donc une unique solution $\alpha$ dans $[0\,;3]$.
+
+\textbf{Q4.} $\dfrac{x}{x+1} = \dfrac{3}{5}$ equivaut, en multipliant par $5(x+1) \neq 0$, a $5x = 3(x+1)$, soit $2x = 3$ et $x = \dfrac{3}{2}$. Donc $\alpha = 1{,}5$ exactement.
+
+\textbf{Remarque.} Le theoreme des valeurs intermediaires garantit qu'une solution existe et qu'elle est unique, mais ne la calcule pas. Ici l'equation se resout exactement ; ce n'est pas le cas general.
+\end{corrige}
