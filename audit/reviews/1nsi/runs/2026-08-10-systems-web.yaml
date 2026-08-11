@@ -1,11 +1,11 @@
 artifact_type: 1nsi_review_run
 schema_version: 1
 manual: 1NSI
-review_run_id: 1nsi-objects-systems-web-2026-08-10-build-manifest-019fec51-v1
-reviewer_id: 019fec51-a5a3-79b1-b9c9-27987dec5f98
+review_run_id: 1nsi-objects-systems-web-2026-08-11-language-trace-019feeea-v1
+reviewer_id: 019feeea-741e-7b53-9c40-bda2f515e04e
 reviewer_model: codex-gpt5
-protocol_digest: sha256:ccf155dc42c557a0b2b684267adee402d5886c944cac07baff4295f38c751e51
-reviewed_at: '2026-08-10T15:41:33+00:00'
+protocol_digest: sha256:9fb019e749096a244a0f5565ef31e01b69e4f81f38af3a4f7449abbfd3058555
+reviewed_at: '2026-08-11T05:18:00+01:00'
 assignment:
   scope: object
   chapters:
@@ -75,249 +75,249 @@ assignment:
   - 1NSI-WEB-IHM-RE-C9-CORRIGE
 source_manifest:
   review_tool_sha256: sha256:a453068adf03803ac3e9f2e8e2cebca25e4113a64a0339bd19d8cf77ff1eb5fa
-  execution_checker_sha256: sha256:ad7dc41c88787d524bb0ba20c02b04ea9d8b5ac1646ad02c906b1af72d4ca0ba
+  execution_checker_sha256: sha256:b4f7d90703a3c765c78cd5639b7726baf0f3ea66a6572d0198d47d72d95bee57
   execution_common_sha256: sha256:37822308dace9072c0bedccc3d73c4646dc9010aa859a64591a1fa7ad7338e53
   entries:
   - id: 1NSI-ARCHITECTURE-OS-QCM
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.tex
     source_sha256: sha256:cf900c928e67cd67b499a98a0512b3818224bbad7b303bc6e6eab64faba67f1e
-    dependency_digest: sha256:b6f2edc94b188f152c4de8390884bd5b7cbd3d246d8667172d9e26c6211ac8b2
+    dependency_digest: sha256:da04e0d831f722f14bb315e89dd013d7c3d2f7e2319576b535bf5b573388a21a
   - id: 1NSI-ARCHITECTURE-OS-RE-C5
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex
     source_sha256: sha256:3da27d42ed1e4c13910f2aefee607cac572e8f7dec185584d4ca315f1e861482
-    dependency_digest: sha256:8b4cc1057bdce3b8019181548e54ed374ffea8e320d40beb3426b6c9d625d6e6
+    dependency_digest: sha256:e5c0580e598f75e288897d504615a87fd15beab1d2f30ced0821d1b550a6491a
   - id: 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex
     source_sha256: sha256:525f695c63069f0ffc7814c13d7c9d510a1e6c2279e14b847e4492e0008a532e
-    dependency_digest: sha256:dce445d370cc23a06002bd657759d1deeeb429424999f6ec809c63865003cbea
+    dependency_digest: sha256:dc7189ec1ea96dbdd66092dd7ec368f98fb09f574ba0bca9cfcbace6f6a85a85
   - id: 1NSI-ARCHOS-CO-001
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex
     source_sha256: sha256:b46fe5e5d77e6fa7ae6be35507d3e220eaa5f17a954938f129f53365e2e0fd39
-    dependency_digest: sha256:a62542a7fa13750e942f3d00f4022dc68f9261c05d76c4fb676db05b21090bc1
+    dependency_digest: sha256:d9614859aae02145a8c0cbfbd6bc1bc00faf7552771912c104c058a238d4fae5
   - id: 1NSI-ARCHOS-CO-002
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex
     source_sha256: sha256:149a5e9f44ecf2148c7dea53bd0168461d13a3d7dd16790569c8c69086373bf8
-    dependency_digest: sha256:48c675bbd91226cdd6d4de76e0b95f6f730e2f7ae9bc9218db6aaf8cd276689f
+    dependency_digest: sha256:7b9107171e6a28c786a9f5959d04ecf2aabfe75f1651249e99b5c94be47732a6
   - id: 1NSI-ARCHOS-CO-003
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex
     source_sha256: sha256:5d73eca68da810d9a4a39d4cbd572e0aaaf76c6abeaf62f13fbb255a1ad43db7
-    dependency_digest: sha256:3496954ed72f0b1a3f70bf6f5a0041939838cd941ab3555e0f76b9cf3ec805b0
+    dependency_digest: sha256:2b44d684ccba3eda6b44d66b608e117464c403b4a96a61e05a4919126812c5ff
   - id: 1NSI-ARCHOS-CO-004
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex
     source_sha256: sha256:8cfb585f83bc6f58463ce9ba125eab8ae20de5ab0c14abc4218ec4ce719843e2
-    dependency_digest: sha256:a962c0d6ae936b2cbfffac64d0bb10966eba49a4f42a70b48202f5ca305d8a82
+    dependency_digest: sha256:38e8ce83a79c3b70e2d8d1e4e726081324f5544f4e45ec1a8321c22849200a32
   - id: 1NSI-ARCHOS-CO-005
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex
     source_sha256: sha256:12fdf3da6cb39a2ee41e4a29c41c6a0b9dfc154d6f4291669b2a23455137d3b5
-    dependency_digest: sha256:71670ea951e16a0921edfb270f6af7f5f0b00e782c3a16b71d870798a2de2bac
+    dependency_digest: sha256:483bb1e766f31be6fb6f8b231a7ea840f9bb8d7a39f2df15ae79e7b96c16f2a0
   - id: 1NSI-ARCHOS-COURS-C1
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
     source_sha256: sha256:c53437be351663fbf55e5db4573b5ae3b918f3ac82d3fee805004a5ecb612040
-    dependency_digest: sha256:5266977ac878a0fda7c492640d8aa7dffd5b911a56658931688455a83b4db23c
+    dependency_digest: sha256:d5efb74e2542edf21fc5adea10a31ea3f8d3b74482a02d05514934f472c931f3
   - id: 1NSI-ARCHOS-COURS-C2
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C2.tex
     source_sha256: sha256:706e19b60d79fea3b924c5309fe8c04458a7c888f306adeaf7e0e355f6960694
-    dependency_digest: sha256:c1b4e7bb2db97bede3d9d96eec29643b956e601a33203fad33318448f8c18098
+    dependency_digest: sha256:17bf2d40deeb38005410ba1cec96517adbf1768fab2e43bbe00914b33d44de97
   - id: 1NSI-ARCHOS-COURS-C3
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C3.tex
     source_sha256: sha256:36e70dd8406447d4bae2fe13fbcaeb8065614aceb762774a5283dbcdc9bb5f63
-    dependency_digest: sha256:637dee10d51ddb808a8e839d20b15c734e52c32f397cc6569bb6209f7ce46b27
+    dependency_digest: sha256:ac4bcabf82afa6029f0b36740c19620ac019bf78072194ae84075903b73e1652
   - id: 1NSI-ARCHOS-EVAL-A
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex
     source_sha256: sha256:bd32e360ccb8ac7fa5fd0a60bdb214e0c86c5090f0c1c64116cc987905d6c80a
-    dependency_digest: sha256:2b19a9104940cf6118c77979214561c381a6c277f958ee1ff62167151310075f
+    dependency_digest: sha256:c798253cdf37dc82c207fb720424ab33c32c3147a1a5373275222430ed05a58d
   - id: 1NSI-ARCHOS-EVAL-A-corrige
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex
     source_sha256: sha256:39fa2b034089fcad75d48a1f3add07c3064fe3ac9f05347c1361816bc634a600
-    dependency_digest: sha256:7fd28450e656b45d824a53d4afe463a367fa2ac3c2b428de71bb1f4056936551
+    dependency_digest: sha256:0d1628626a26ddc6faaf4ccc30edc09d803fc3787d76f84d4639ced8f5a042a6
   - id: 1NSI-ARCHOS-EVAL-B
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex
     source_sha256: sha256:880e27501c16adf8b17230e03793d3242610e72cfd972c7c03277e14d78c98d8
-    dependency_digest: sha256:8ef6b0423d74027602cf3c63fbbb21cb00891d719b21acdcee7ca9e40a1379d1
+    dependency_digest: sha256:9b157fe9bdb4eaaa43b9802558f6f719b16afe5a4c998b4c711b7a30f14b7720
   - id: 1NSI-ARCHOS-EVAL-B-corrige
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex
     source_sha256: sha256:87977126fad9be17e03eb56bd3e94f1d6437b3e041b5ee6cd8b24adec7018cb8
-    dependency_digest: sha256:d1313a1d58bcdac7aab49a22f3dc55fd4f2cf4cc7f00e53e492cc512e31d2894
+    dependency_digest: sha256:f37434ead2b42ccdfc3e6bcb8b18b4cc5a99306251c5f2be9438022224958799
   - id: 1NSI-ARCHOS-EX-001
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-001.tex
     source_sha256: sha256:f53529398e8cf69a40b9509f39f326ecc056bd4ddc9e8d2d71586529d46c0f33
-    dependency_digest: sha256:0855683642600f3e8b964a098f49604e753dcda63a4c6fd2a2c2466f33879e03
+    dependency_digest: sha256:d38ae12c1b13e9752d53f5f3b8205de6a61e1224a29c217e75148d6e838b7187
   - id: 1NSI-ARCHOS-EX-002
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-002.tex
     source_sha256: sha256:d7ea2abcde1b50a87c5a291206fa8fc354dde722c27667d7b42ea2a4c4ded96f
-    dependency_digest: sha256:314dce1a7e2d2271e3e9d2c46f4267b07c7228382c03411f18ab6b04031b7a35
+    dependency_digest: sha256:7edf5d028fe08ead6f2ffa09252d8746ba77ed2ed98334539bd83085b9039274
   - id: 1NSI-ARCHOS-EX-003
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-003.tex
     source_sha256: sha256:0238343cf1ccc09e257c6ae91dcae56e796617057e551593be3dbb49648b200f
-    dependency_digest: sha256:75d7917d8d29457aeba6242724c4b5b47c4936407c4c44656a6e1df25d5a0ae8
+    dependency_digest: sha256:5b2e6aba41e7bb184e58804097c6136431b8e8d8955aedf6e58ae0284e9739fb
   - id: 1NSI-ARCHOS-EX-004
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex
     source_sha256: sha256:9e788090d226b687c5ee4d9bab7675ef22456aa72f7a92c8174c0970ef5ab2a2
-    dependency_digest: sha256:dcd278846eac7b24850684cb3bc1b00e6cb1ab1db88f8e5da8d0dd6f386c59df
+    dependency_digest: sha256:2e023e38092fb1e0d58e090f230644e3e38edc94800842c99720dbcc8bbee406
   - id: 1NSI-ARCHOS-EX-005
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-005.tex
     source_sha256: sha256:28d6018c7f5f3f4a6c1e5f7a5908c967e6843449761d51d1c8c4f0e52a655bc0
-    dependency_digest: sha256:03c2f86f49b00c98075b69c344c10289d5d1002d3191cb2026e0204091387a61
+    dependency_digest: sha256:edf302ab73e04e1ae0d4dcd16bf6b7a5287b855af45a778444bdc17df316505a
   - id: 1NSI-RES-CO-001
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-001.tex
     source_sha256: sha256:5ef2330225ea0d6eb719f73db2c7572634f31c87fdf2262dd549f1d5a31cddfa
-    dependency_digest: sha256:eea05fb7622b0d58de31bfbdc27023829dd836d6303a7838f35187e5805b6016
+    dependency_digest: sha256:7bb8a7b6e34acebae87fda6e941596bbc6e7c459f561d67cd9f14186e383edda
   - id: 1NSI-RES-CO-002
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-002.tex
     source_sha256: sha256:5bad788f49a25a178e4b3431fe2a876a227b2bf79afc5b207d35b741e258a84c
-    dependency_digest: sha256:49d0ab837e60867cefff2a9641ecb50f541c34b43aa706d3045a3a2d8e9471c1
+    dependency_digest: sha256:59420a8d07974463074a3bb16940f333ee5decb4b81ee50ed43c5bff0cb9cadd
   - id: 1NSI-RES-CO-003
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-003.tex
     source_sha256: sha256:eb4af0f544c5af83cc76fa1699fdae0c330823ed06d97d02ebe52738cd3c358a
-    dependency_digest: sha256:4761be8d80d2ada12efdadd2f816d655ca20f34d01991d1b0ed639bbd02ffea5
+    dependency_digest: sha256:bb8d6ea6f8565e2d7824d1667492a15e164bc6166de08a2c2059679a47cc2562
   - id: 1NSI-RES-CO-004
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-004.tex
     source_sha256: sha256:b13a6927186701d7ac068eca0f0e3950f88415b01bc02a0f84d414058bcb9383
-    dependency_digest: sha256:a84e2e8651006230421e13a5c7cd5aa78731b5ea036448474bbe86cbe02b0202
+    dependency_digest: sha256:880deb47097403c2ccbbef4fa600b93f4ab5b20071e689c5b8aab80015a8b122
   - id: 1NSI-RES-CO-005
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-005.tex
     source_sha256: sha256:55d341d6ff49882609b176b0182497dc44ad224600bbc90301da4fedb9f2c2d6
-    dependency_digest: sha256:fdb7b7991f1d9a37f7bef76288dd529591c49384163b11debedfd646b6d1a538
+    dependency_digest: sha256:6389816a77ee7d57b1bf3efbc6e5f336475daf67a6bb8ed983f2f74cf134c859
   - id: 1NSI-RES-COURS-C1
     path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C1.tex
     source_sha256: sha256:92b61efa42774aee595aa9ea505fe2856e64e8443af9b87d1628c0bf4a38030a
-    dependency_digest: sha256:bc18e02c17f39dee55fcc98fac689f81bb61fb7be2473ddf06043d983317ded4
+    dependency_digest: sha256:7a61c7cbffc41bf9e21da27a7cabb37c4d816f26707c5259555d070e735161c4
   - id: 1NSI-RES-COURS-C2
     path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
     source_sha256: sha256:fe025eb8761525c7a11928a2798443d9e438fe1f97fcc4a9a32a595e17c3e532
-    dependency_digest: sha256:2a1330adefc2488e2ea9ff5e571cc5c34cf3536a1ec72a1064bf180718b39736
+    dependency_digest: sha256:b7ab0b82d2233aeb0608eefced118d0485934f31225b1e936f05d2b630e40477
   - id: 1NSI-RES-COURS-C3
     path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
     source_sha256: sha256:25e1992ddf7ac22057d5fff0b45ef3849c25941c4f579dd217d6388d45c34f92
-    dependency_digest: sha256:fb8f81bed127c3b0bb362b294a40e227c428d0cb185e0cb18c43827f3f95f1ca
+    dependency_digest: sha256:72fd90f7466ceb264b00594afd6e668e524c47e5c99a90bd043e6f36af8fe960
   - id: 1NSI-RES-EVAL-A
     path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
     source_sha256: sha256:051d0635615ad8f75a088cfb8010e59ecb151e55db25e86c435930bc5d693afc
-    dependency_digest: sha256:300b87eb03e9613e5bec4bae347d1f8be4e3343c9c0bdda9a43be25e41af24f6
+    dependency_digest: sha256:fcc57ed0c87ac490a40fdcc106566fb285c1a337242446726c875269d3225e2f
   - id: 1NSI-RES-EVAL-A-corrige
     path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
     source_sha256: sha256:cdafb2ed9a76f3c9dd208279420a338f501a45db90b06e212bec7fc3f575f58e
-    dependency_digest: sha256:d67109cc48b7d76a401806492921cf4155ddc0cccf181cb28350ffb9bf0cb20f
+    dependency_digest: sha256:426b4d2f239fe50198d8145bcdaa3ffe5088a6c7c2aaa2f1ce885e73cdb28961
   - id: 1NSI-RES-EVAL-B
     path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
     source_sha256: sha256:a75a7f39a01142c81d7198777ad4e2828fe3df77ae320c8c832d5d86081c8326
-    dependency_digest: sha256:be21ba9dc6bbd2895e1352728c6db5d4a2e0a8f2c04332acb8d500c871ffc552
+    dependency_digest: sha256:8448558851b704d633635827cf32022abea27763539f4a0f79a501af9ca4c063
   - id: 1NSI-RES-EVAL-B-corrige
     path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
     source_sha256: sha256:1a7fe0d4291a96f79a71626a91955fd24d59f78ac2a437a52681e086139e5091
-    dependency_digest: sha256:b2e465f4b60f320e246c954a58b75fe24f3f748183aaaba488cfa13ef8e7ded0
+    dependency_digest: sha256:0c6cd1781c813bcd2c4d2bf2e51b4d3453d0806e246634cc5b9629c5761a6db7
   - id: 1NSI-RES-EX-001
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-001.tex
     source_sha256: sha256:de3291bd93485f61939e248f63c4fb913ccae804f5d1adcccac16e1991f4017a
-    dependency_digest: sha256:2f1014ee8c861aee7ede4b2f03ed146ee5e8952a14523646c2d1ee63a1b243f8
+    dependency_digest: sha256:fcc815c5ac110d8f33579d6ea54d073be4be17e1638eb4b684728be293f8cbb4
   - id: 1NSI-RES-EX-002
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
     source_sha256: sha256:d389124686288c26f9d29a69ef1d872ff0212f54780657d868d69afb3d252513
-    dependency_digest: sha256:6665c19ce8de4cd5427afa23afed9a02e4f013fbd3f350654d55e90f39f1aa01
+    dependency_digest: sha256:3b6a638a9dec063a079d9da314ef226927b3619d229b4f928389c43bebba9c9e
   - id: 1NSI-RES-EX-003
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
     source_sha256: sha256:65a4a9983294ad544b3d8777ea1ecf75e361cdd103de3fa4e1def607e174c9b9
-    dependency_digest: sha256:25879b1da10456002644e2bd0421141f003cb56d88b87d08fdafe61da434d097
+    dependency_digest: sha256:1c732d922ba68560abde6b0d93f50389413510b28c6baeaf16c3ed8d364a3467
   - id: 1NSI-RES-EX-004
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-004.tex
     source_sha256: sha256:0ac56c820f31fa687137f236ff455b45b829522f652f6a21f66dff85c8144f5c
-    dependency_digest: sha256:a4d7a821aa61c72a33cb0cd0690d2c86707c6afe7407c6536aa342bfa154b493
+    dependency_digest: sha256:90822c56ba68ee607d6eb37cefd7750b472c99f02aedef0cc89753fef588b3ac
   - id: 1NSI-RES-EX-005
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
     source_sha256: sha256:36d52fb96cef3bf4c4301df2bce619298fdf1a8bd64141b91abd64c8d75dcb85
-    dependency_digest: sha256:115402b95ee2c194332d586db7ed10c7f5f8da8e43b75d43a56b47da17fbac20
+    dependency_digest: sha256:140f506cf0de4d41530cb589c8aec30f2e67edd4c88a46cc1ab59e9f2c08f3df
   - id: 1NSI-RESEAUX-QCM
     path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
     source_sha256: sha256:e15510b9b2c769b0d4b0be35be71e9314ab9b718fc77ca2b3830f0bfb565e65d
-    dependency_digest: sha256:a54d6d1a9c88959c136042f9722948e9464219a2b04b7b0f83022658d6e04da5
+    dependency_digest: sha256:38f5c5210438a57a9582869fe4fa1a75e5d1eac8d704c0639c485a9da3c225da
   - id: 1NSI-RESEAUX-RE-C1
     path: NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex
     source_sha256: sha256:25fa0892a01eb6a86a310cb4eca28e36ce5de63acfc36b0aa48b643f8148babf
-    dependency_digest: sha256:33ca8e40f17889e522b77a1851c399a47e2e44bb6d584a7e3cd75b2d972ae7dc
+    dependency_digest: sha256:babd337f8da2559ec7a88bf14ae61ea398b6459f8b4c978872543bef7bb433f9
   - id: 1NSI-RESEAUX-RE-C1-CORRIGE
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
     source_sha256: sha256:17cb364e2e25d432d3d8a724057a02e47d50e6bd9c579c727df16b35c70dbf9d
-    dependency_digest: sha256:3d9a539472a77e8b4dafab502b1829d72142d75efe728fe664cd4f06cb9727a7
+    dependency_digest: sha256:12d2e164bb100203e45b768ec241a3219ecb90ee1d80b15db8f65207c5cc184d
   - id: 1NSI-WEB-CO-001
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
     source_sha256: sha256:a1d0a4739760d5a13347c09ad79dac4e586f7c95e5fd5215e80974e373116e88
-    dependency_digest: sha256:1aa4d8fd45818a73a6e15a334df0d5091d90b0d3b93935023d819502af25aab0
+    dependency_digest: sha256:c92555d8e99c018081a0382a78187a82041dcc4c45ab5935c8239710de22d00b
   - id: 1NSI-WEB-CO-002
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
     source_sha256: sha256:29aaae9de2440becd751960145c55eda8fd4123742d0a1ada5b46a9fef469463
-    dependency_digest: sha256:81ad3642d1619afaa80a97f7dc4b072b97c82425acc51ac5a4821178e2290c6d
+    dependency_digest: sha256:6f23e3a3bb20bdc0479598e034b7bfe2ff2d193bda8d1884243be034c3cf9e5a
   - id: 1NSI-WEB-CO-003
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
     source_sha256: sha256:c97a149c75db68d3b0566c7cf2f772cd2af00c28be69fdeabdebadce2073cd7a
-    dependency_digest: sha256:5929cf44459f47d220bd6a763905c483e6313cb7a6f0bd2ce7d39eeac028e9b8
+    dependency_digest: sha256:f92bb22ba3d97d564086b315ad1d8453cdf1ebbb9f17df7a638dfe68fbd90fa0
   - id: 1NSI-WEB-CO-004
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
     source_sha256: sha256:885dcdad606da7adea734301ec1c3eb0371f75cb14ddd862734aa1e0c1a5cf7d
-    dependency_digest: sha256:ad28c9ae6e189e34cbc2f76a17725a0b55af694ce4c8f44b7f4b3bb0eb1132fc
+    dependency_digest: sha256:5e373f039370dcc903e6e7efe050d4f3e6736ace86068bf92e818d9ab2c26e88
   - id: 1NSI-WEB-CO-005
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-005.tex
     source_sha256: sha256:e7dc188159026c8e946397f8899618662a6c03a885dbb9c6f8f2ec6d50dac425
-    dependency_digest: sha256:3a1aa2ed5307358c8a14687c9ea8a8c08d41315224dbf130676f7d2e1bbc5f14
+    dependency_digest: sha256:25b7fe6dabce6462d3ff37fc6732cf71f65cf3ec3dd5b6ede9c4d96060bce2c4
   - id: 1NSI-WEB-COURS-C1
     path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
     source_sha256: sha256:8326a78ed11d2e3eb4798e20c06298c1a43508f4261ee0e9c75fb2623987d2af
-    dependency_digest: sha256:34cfcbf31a65e7271b0f9fe099baebe926d8df709a8f57fc7db7313ed06b5bc2
+    dependency_digest: sha256:8dd00975fd9077d7d0eccc1fd219538d9ae2e99221d883b59fa9f6640f5d9c12
   - id: 1NSI-WEB-COURS-C2
     path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
-    source_sha256: sha256:aae660dfb939fa817684bbcb1e1587462db1c40264d5fda2b77d391631fe28dc
-    dependency_digest: sha256:a894933b6d900b408731981245ab2ba8a6cd033ebebdd17bb97dc0603087f865
+    source_sha256: sha256:37fbaf3e3f88ac24d6aa1a60728df013f20d0909b54ec3b112860f2f8acc5778
+    dependency_digest: sha256:f4cd35f25e92f45ffa05f3165be9c6beaf57245db5eff18830e45fc4f419a3a0
   - id: 1NSI-WEB-COURS-C3
     path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
     source_sha256: sha256:39d05a637a133eafcda90f6c9fb93c7a1896bbd744e0c6be0d44504575e1f044
-    dependency_digest: sha256:7b03dac1848bf38529b47286b43e0d68713c1db44b75d21a691b516dbb798c58
+    dependency_digest: sha256:3847e94804b96c248fd6ade06074d61eed480a4e8f484175713ef36fa72dd884
   - id: 1NSI-WEB-EVAL-A
     path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
     source_sha256: sha256:b32909f32fccbfc776514ab86408ceeb79bc0fc392ee246f2efddd42de606a24
-    dependency_digest: sha256:096a5968a735bb75576729719e0b2b29bf48eb48630e1fa7e331125f89d7c3e1
+    dependency_digest: sha256:b162c136dcf5958ffcc69ccf1527564f45b489d0006dfb67b55e3b262438033b
   - id: 1NSI-WEB-EVAL-A-corrige
     path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
     source_sha256: sha256:0c5ff606a888b76ee1e151f22d81e96ab4d05c89a8209240ea75358f3c7f8a84
-    dependency_digest: sha256:7e72e0baae53e0fcc07756fa374518ee65ecfa09ef891ab98e72bcc135d0fff0
+    dependency_digest: sha256:5a218d33996dc9dc5298626c8406d04c8a3a76f2e5bed2cf223aa289d5f4bac4
   - id: 1NSI-WEB-EVAL-B
     path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
     source_sha256: sha256:edbcfddc575ac899f4778a6adc27070d0b8e936e2e81ff120c30ff095f3f8946
-    dependency_digest: sha256:e9aa9e5705047ded2a31333061ca934eb92061c843e50688014c56476cbbae0f
+    dependency_digest: sha256:038f7a78ee533bffa8e6ad5770192fefacd258043dcc4a3512aedeb445b646bb
   - id: 1NSI-WEB-EVAL-B-corrige
     path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
     source_sha256: sha256:c4dfce83e52e44ecf3c1fb889b13e187933cf480b0c3629cd26618c056b20007
-    dependency_digest: sha256:a29ab62dd170d2a8f421ac057daa8b4155e712bdeee1afa996535ccdbdf4171e
+    dependency_digest: sha256:50cc8fe72e143c95026df91b982a8696c4bc126762bb469a68f00e15b0b9152c
   - id: 1NSI-WEB-EX-001
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-001.tex
     source_sha256: sha256:fa05bca79e568a724d96245e4082e9ed1097937b1843e115b0eb34c3bbb2f351
-    dependency_digest: sha256:ac2c5dd0c1b3b093268d2a9c4de2923c45c6dbc1210aeb399a670e8024ee2bfe
+    dependency_digest: sha256:ef560daba5ae849c018a0959e8afcf9d001b7eefbe464d16fdba2cb7b626e817
   - id: 1NSI-WEB-EX-002
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
     source_sha256: sha256:ab7767f0db92d5a1c5db55b3a0b66874468801bbc6acb90e00ac8998471e97d8
-    dependency_digest: sha256:be92a3ecbb6895a7f0521222b08aad6ca1ee7d36f6106749efa81405f872899a
+    dependency_digest: sha256:e57aafb3dbf923105eb248530b86d5ffe2071c8ae8ec7c10d230e998f9410db2
   - id: 1NSI-WEB-EX-003
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
     source_sha256: sha256:071fbd7114ad7547ce0cdae48a58c703f5d41f1494507fee2504143c8718635c
-    dependency_digest: sha256:d2e76e94a4c5f5ec237eabc1cfe65fc712f7db9bfccef76b072b867265d373b2
+    dependency_digest: sha256:82f6e04a98850c27e6f8bb460243a3a71da73aeb163b2255a93c71d941f29ce7
   - id: 1NSI-WEB-EX-004
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex
     source_sha256: sha256:3c0aeeb0f43d5e110e2e8a8b9eef6f499cb29795c5217503add026dd39b6e7f0
-    dependency_digest: sha256:f35d5208b8e7e26b663f50eb552accf2833c9aae642ad7a8025d58550f07a377
+    dependency_digest: sha256:1a1f2b17ea5a8ab1afc2bb8f58e6f0cfded673de3fabdd4c7db8df980c5c1ab7
   - id: 1NSI-WEB-EX-005
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-005.tex
     source_sha256: sha256:7255684c24c3db38b19035d65f0ab8bb005ba4f48fffac9b67c6eaa0ac306b53
-    dependency_digest: sha256:0149b72f3d6618dd9ad881d009c6fc92f172d2240ce5c9b8d271e1e4593bcb4d
+    dependency_digest: sha256:686f0b7913af2276d982ae33c8c2590bf9a1fb54543502277d2768ad3740d9ef
   - id: 1NSI-WEB-IHM-QCM
     path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
     source_sha256: sha256:51dc410026fd52366582b4ab62158c7ba3177cab1c76817fac1647bfd51ced91
-    dependency_digest: sha256:856b1bdd11cec8897f22853ca0a118affe1206b8962a465493b6c440905c583b
+    dependency_digest: sha256:e8d065e117a6286b6bd29243535efad489d731aa7ccf162386d8d792cdc5f9d8
   - id: 1NSI-WEB-IHM-RE-C9
     path: NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex
     source_sha256: sha256:a380c4b236e05520186518017d262730740b17a02371c7e6be68d38cdb80858e
-    dependency_digest: sha256:dc51e4c38e2a4d8ae2e47b2c0059409a69283b0248a42db3c1645b2c8b222a44
+    dependency_digest: sha256:75e1883d4b6d2e1ac75931adb65c75e54ee46fa7b05591d6e7a0675a8977fe7d
   - id: 1NSI-WEB-IHM-RE-C9-CORRIGE
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C9-CORRIGE.tex
     source_sha256: sha256:d3d9bef251a4cb21280299979dea4687a52ebd48467a60c2fee5aaa27a276574
-    dependency_digest: sha256:dafc6a14d5ca31ae36927d7f32b61ac27e825f786cf71491c38f1c300485d2b8
+    dependency_digest: sha256:ad0f36d010648898ce0f36ad6afb6d3888ff3e5aff80437eac174b96766b8e4b
 reviews:
 - id: 1NSI-ARCHITECTURE-OS-QCM
   chapter: 1NSI-ARCHITECTURE-OS
@@ -634,7 +634,7 @@ reviews:
   payload:
     dimensions:
       scientific:
-        verdict: pass
+        verdict: issue
         justification: 1NSI-ARCHOS-COURS-C1 est scientifiquement cohérent sur les constituants de von Neumann et la distinction
           mono/multiprocesseur dans le périmètre observé.
         facts:
@@ -645,7 +645,8 @@ reviews:
           fact_type: source_statement
           observation: La lecture complète de 1NSI-ARCHOS-COURS-C1 couvre les constituants de von Neumann et la distinction
             mono/multiprocesseur et a été confrontée au contrat, au programme et aux objets liés.
-        anomaly_ids: []
+        anomaly_ids:
+        - 1NSI-REV-ARCH-C1-DIAGRAM-FLOWS
       pedagogical:
         verdict: issue
         justification: 1NSI-ARCHOS-COURS-C1 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
@@ -675,6 +676,18 @@ reviews:
       fact: *id003
       consequence: Les évaluations demandent ensuite quatre constituants sans que l’élève dispose d’une nomenclature non ambiguë.
       expected_action: Énumérer explicitement les constituants retenus et distinguer le bus de liaison de cette liste.
+    - id: 1NSI-REV-ARCH-C1-DIAGRAM-FLOWS
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
+        line_start: 18
+        line_end: 25
+        excerpt_sha256: sha256:9566550199aace4b26df5de37bfdf9a50bac7080fbe49dfcbdf5577fbbceb964
+        fact_type: source_statement
+        observation: Les flèches donnent mémoire vers UC, UC vers Entrées et mémoire vers Sorties, sans bus commun bidirectionnel.
+      consequence: Le schéma inverse le flux d’entrée et représente incorrectement les échanges de l’architecture de von Neumann.
+      expected_action: Redessiner des liaisons bidirectionnelles via un bus commun entre processeur, mémoire et entrées-sorties.
 - id: 1NSI-ARCHOS-COURS-C2
   chapter: 1NSI-ARCHITECTURE-OS
   scope: object
@@ -1492,7 +1505,7 @@ reviews:
   payload:
     dimensions:
       scientific:
-        verdict: pass
+        verdict: issue
         justification: 1NSI-RES-COURS-C3 est scientifiquement cohérent sur les capteurs, actionneurs et la commande programmée
           d’un thermostat dans le périmètre observé.
         facts:
@@ -1509,9 +1522,10 @@ reviews:
           excerpt_sha256: sha256:e3e0b4003746beb4b633826abe6512a5a107afbb93edf3aa52df5a4a2bd0892b
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-RES-COURS-C3 passe ; sa trace concorde avec son reçu.
-        anomaly_ids: []
+        anomaly_ids:
+        - 1NSI-REV-RES-IHM-COURSE
       pedagogical:
-        verdict: issue
+        verdict: pass
         justification: 1NSI-RES-COURS-C3 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
           sans correction.
         facts:
@@ -1522,24 +1536,30 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-RES-COURS-C3, le format cours organise définitions, exemples et mise en activité autour de
             les capteurs, actionneurs et la commande programmée d’un thermostat.
-        - &id013
-          path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+        - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
           line_start: 16
           line_end: 46
           excerpt_sha256: sha256:b216756db334e9ed689080f790d388cf8090af557cb13d7308bf291d2879f92d
           fact_type: reviewer_observation
           observation: Le cours appelle IHM une logique de thermostat pilotée par fonctions Python sans composant d’interaction
             observable.
-        anomaly_ids:
-        - 1NSI-REV-RES-IHM-COURSE
+        anomaly_ids: []
     anomalies:
     - id: 1NSI-REV-RES-IHM-COURSE
-      severity: P1
-      dimension: pedagogical
-      fact: *id013
-      consequence: La capacité de réaliser une interface répondant à un cahier des charges n’est pas effectivement travaillée.
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+        line_start: 16
+        line_end: 46
+        excerpt_sha256: sha256:b216756db334e9ed689080f790d388cf8090af557cb13d7308bf291d2879f92d
+        fact_type: source_statement
+        observation: Le bloc qualifié d’IHM ne contient aucun composant d’interface, saisie, affichage ou liaison d’événement
+          observable.
+      consequence: La capacité de réaliser une IHM répondant à un cahier des charges est déclarée travaillée sans interface
+        effective.
       expected_action: Ajouter une interface matérielle ou graphique minimale avec événement utilisateur, affichage d’état
-        et tests du cahier des charges.
+        et tests.
 - id: 1NSI-RES-EVAL-A
   chapter: 1NSI-RESEAUX
   scope: object
@@ -1576,7 +1596,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-RES-EVAL-A, le format evaluation recueille une preuve de maîtrise sur un temps annoncé autour
             de les paquets, le bit alterné, la connectivité et un arrosage automatique.
-        - &id014
+        - &id013
           path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
           line_start: 9
           line_end: 18
@@ -1590,7 +1610,7 @@ reviews:
     - id: 1NSI-REV-RES-BITALT-EVALA
       severity: P1
       dimension: pedagogical
-      fact: *id014
+      fact: *id013
       consequence: La preuve de maîtrise peut être obtenue sans comprendre pourquoi le bit permet d’identifier un doublon.
       expected_action: Ajouter une trace avec paquet reçu, ACK perdu et retransmission du même bit.
 - id: 1NSI-RES-EVAL-A-corrige
@@ -1629,7 +1649,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-RES-EVAL-A-corrige, le format corrige_evaluation fournit les réponses et justifications du
             sujet lié autour de la résolution de l’évaluation réseaux A.
-        - &id015
+        - &id014
           path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
           line_start: 25
           line_end: 36
@@ -1643,7 +1663,7 @@ reviews:
     - id: 1NSI-REV-RES-BITALT-EVALA-CO
       severity: P1
       dimension: pedagogical
-      fact: *id015
+      fact: *id014
       consequence: La correction n’explicite pas la compétence centrale de détection des retransmissions.
       expected_action: Compléter la trace par le bit attendu, le doublon ignoré et l’ACK renvoyé.
 - id: 1NSI-RES-EVAL-B
@@ -1682,7 +1702,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-RES-EVAL-B, le format evaluation recueille une preuve de maîtrise sur un temps annoncé autour
             de les paquets, le bit alterné, la connectivité et une ventilation automatique.
-        - &id016
+        - &id015
           path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
           line_start: 9
           line_end: 18
@@ -1696,7 +1716,7 @@ reviews:
     - id: 1NSI-REV-RES-BITALT-EVALB
       severity: P1
       dimension: pedagogical
-      fact: *id016
+      fact: *id015
       consequence: L’alternance peut être récitée sans que la sûreté du protocole soit comprise.
       expected_action: Introduire une perte d’ACK et demander si le récepteur livre ou ignore la retransmission.
 - id: 1NSI-RES-EVAL-B-corrige
@@ -1735,7 +1755,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-RES-EVAL-B-corrige, le format corrige_evaluation fournit les réponses et justifications du
             sujet lié autour de la résolution de l’évaluation réseaux B.
-        - &id017
+        - &id016
           path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
           line_start: 25
           line_end: 38
@@ -1748,7 +1768,7 @@ reviews:
     - id: 1NSI-REV-RES-BITALT-EVALB-CO
       severity: P1
       dimension: pedagogical
-      fact: *id017
+      fact: *id016
       consequence: Le rôle du bit attendu par le récepteur et l’élimination des doublons restent absents.
       expected_action: Ajouter le point de vue du récepteur et la trace d’un ACK perdu.
 - id: 1NSI-RES-EX-001
@@ -1812,7 +1832,7 @@ reviews:
           excerpt_sha256: sha256:9269b5811c8430fe6755e54d9f9133199e68a6181b5a19e547e8af9a1372f0be
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-RES-EX-002 passe ; sa trace concorde avec son reçu.
-        - &id018
+        - &id017
           path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
           line_start: 21
           line_end: 29
@@ -1839,7 +1859,7 @@ reviews:
     - id: 1NSI-REV-RES-BITALT-EX002
       severity: P0
       dimension: scientific
-      fact: *id018
+      fact: *id017
       consequence: L’élève ne peut pas dérouler le comportement du récepteur ni justifier le rejet des doublons.
       expected_action: Distinguer les deux types de pertes et demander l’état de l’émetteur et du récepteur à chaque tentative.
 - id: 1NSI-RES-EX-003
@@ -1865,7 +1885,7 @@ reviews:
           excerpt_sha256: sha256:66a6d8a4306eb8ec2df65caca9f872ffe195691f6a110ccd7ec2728322563b51
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-RES-EX-003 passe ; sa trace concorde avec son reçu.
-        - &id019
+        - &id018
           path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
           line_start: 26
           line_end: 40
@@ -1892,7 +1912,7 @@ reviews:
     - id: 1NSI-REV-RES-RECURSION-EX003
       severity: P0
       dimension: scientific
-      fact: *id019
+      fact: *id018
       consequence: Une notion de Terminale est évaluée comme outil normal du chapitre de Première.
       expected_action: Évaluer la connectivité dans un simulateur adapté sans demander l’analyse d’un parcours récursif.
 - id: 1NSI-RES-EX-004
@@ -1969,7 +1989,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-RES-EX-005, le format exercice met l’élève en activité avec une consigne graduée autour de
             la programmation d’un arrosage à deux seuils.
-        - &id020
+        - &id019
           path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
           line_start: 16
           line_end: 27
@@ -1982,7 +2002,7 @@ reviews:
     - id: 1NSI-REV-RES-IHM-EX005
       severity: P1
       dimension: pedagogical
-      fact: *id020
+      fact: *id019
       consequence: L’objet revendique la capacité IHM mais n’en fournit aucune preuve observable.
       expected_action: Faire concevoir au moins une commande utilisateur et un retour d’état reliés au cahier des charges.
 - id: 1NSI-RESEAUX-QCM
@@ -2002,14 +2022,14 @@ reviews:
           fact_type: source_statement
           observation: La lecture complète de 1NSI-RESEAUX-QCM couvre les paquets, le bit alterné, les parcours de réseau,
             les capteurs et l’hystérésis et a été confrontée au contrat, au programme et aux objets liés.
-        - &id021
+        - &id020
           path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
           line_start: 11
           line_end: 21
           excerpt_sha256: sha256:ae33a2e6eeba43be0cde6a31dcb462fc62b57c29c68fd701c0e1c8b33f3a9854
           fact_type: reviewer_observation
           observation: La première question suppose qu’un numéro de paquet sert généralement à réordonner toute transmission.
-        - &id022
+        - &id021
           path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
           line_start: 37
           line_end: 45
@@ -2031,7 +2051,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-RESEAUX-QCM, le format qcm propose un diagnostic à choix unique autour de les paquets, le
             bit alterné, les parcours de réseau, les capteurs et l’hystérésis.
-        - &id023
+        - &id022
           path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
           line_start: 61
           line_end: 79
@@ -2039,7 +2059,7 @@ reviews:
           fact_type: reviewer_observation
           observation: Les questions annoncées comme IHM portent sur les tests de seuil et l’hystérésis, sans composant ni
             interaction humaine.
-        - &id024
+        - &id023
           path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
           line_start: 3
           line_end: 81
@@ -2053,26 +2073,26 @@ reviews:
     - id: 1NSI-REV-RES-C1-HEADER-QCM
       severity: P0
       dimension: scientific
-      fact: *id021
+      fact: *id020
       consequence: Le QCM évalue comme exacte une généralisation qui dépend du protocole et de la couche observés.
       expected_action: Reformuler la question dans le cadre du protocole simplifié du chapitre ou utiliser un en-tête explicitement
         séquencé.
     - id: 1NSI-REV-RES-RECURSION-QCM
       severity: P0
       dimension: scientific
-      fact: *id022
+      fact: *id021
       consequence: L’auto-évaluation rend exigible un contenu de parcours de graphe qui n’appartient pas au programme de Première.
       expected_action: Remplacer la question par l’usage ou l’interprétation d’une simulation réseau conforme au niveau.
     - id: 1NSI-REV-RES-IHM-QCM
       severity: P1
       dimension: pedagogical
-      fact: *id023
+      fact: *id022
       consequence: Le QCM peut valider C5 sans évaluer la réalisation d’une interface.
       expected_action: Introduire un scénario d’événement, de commande utilisateur et de retour visuel ou matériel.
     - id: 1NSI-REV-RES-QCM-AUTOCORRECTION
       severity: P1
       dimension: pedagogical
-      fact: *id024
+      fact: *id023
       consequence: Les réponses ne peuvent pas déclencher la remédiation annoncée par le dispositif Nexus.
       expected_action: Relier une clé contrôlée et une orientation de remédiation sans fuite dans la variante élève.
 - id: 1NSI-RESEAUX-RE-C1
@@ -2098,7 +2118,7 @@ reviews:
           excerpt_sha256: sha256:251095e69c121eae94f99dd818c1a5e72be55be67f2f702d9b01c7068f846578
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-RESEAUX-RE-C1 passe ; sa trace diverge du reçu existant.
-        - &id025
+        - &id024
           path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
           line_start: 7
           line_end: 18
@@ -2125,7 +2145,7 @@ reviews:
     - id: 1NSI-REV-RES-C1-HEADER-RE
       severity: P0
       dimension: scientific
-      fact: *id025
+      fact: *id024
       consequence: La remédiation stabilise une représentation techniquement fausse au lieu de corriger le modèle.
       expected_action: Présenter la numérotation comme un champ du protocole simplifié choisi et non comme un invariant de
         tout paquet.
@@ -2152,7 +2172,7 @@ reviews:
           excerpt_sha256: sha256:2a24819e3a840ba3ecb063ebe14b807340eaa067ce6c8eb172e09607a7c9da20
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-RESEAUX-RE-C1-CORRIGE passe ; sa trace ne dispose pas de reçu.
-        - &id026
+        - &id025
           path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
           line_start: 7
           line_end: 18
@@ -2178,7 +2198,7 @@ reviews:
     - id: 1NSI-REV-RES-C1-HEADER-RECO
       severity: P0
       dimension: scientific
-      fact: *id026
+      fact: *id025
       consequence: Le corrigé professeur transmet une propriété de protocole non universelle comme une vérité réseau.
       expected_action: Préciser le niveau protocolaire du séquencement et conserver le tri uniquement dans le modèle déclaré.
 - id: 1NSI-WEB-CO-001
@@ -2198,7 +2218,7 @@ reviews:
           fact_type: source_statement
           observation: La lecture complète de 1NSI-WEB-CO-001 couvre les composants HTML, leurs événements et la soumission
             par défaut et a été confrontée au contrat, au programme et aux objets liés.
-        - &id027
+        - &id026
           path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
           line_start: 10
           line_end: 13
@@ -2224,7 +2244,7 @@ reviews:
     - id: 1NSI-REV-WEB-HTML-CSS-CO001
       severity: P0
       dimension: scientific
-      fact: *id027
+      fact: *id026
       consequence: Une réponse scientifiquement inexacte est donnée comme attendu professeur.
       expected_action: Corriger la réponse en distinguant HTML, CSS et JavaScript tout en conservant la soumission native
         du formulaire.
@@ -2264,7 +2284,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-CO-002, le format corrige explicite la résolution de l’objet lié autour de la bascule
             d’un menu après trois clics simulés.
-        - &id028
+        - &id027
           path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
           line_start: 18
           line_end: 35
@@ -2277,7 +2297,7 @@ reviews:
     - id: 1NSI-REV-WEB-JS-CO002
       severity: P1
       dimension: pedagogical
-      fact: *id028
+      fact: *id027
       consequence: La correction ne montre ni DOM, ni événement navigateur, ni modification de style ou d’attribut.
       expected_action: Donner aussi la version JavaScript exécutée dans la page et relier chaque étape au modèle.
 - id: 1NSI-WEB-CO-003
@@ -2303,7 +2323,7 @@ reviews:
           excerpt_sha256: sha256:453c585dc361b345c5aac1be96d7d0ab98450634d241a43be3d7c3866b46aa59
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-CO-003 passe ; sa trace concorde avec son reçu.
-        - &id029
+        - &id028
           path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
           line_start: 14
           line_end: 24
@@ -2330,7 +2350,7 @@ reviews:
     - id: 1NSI-REV-WEB-COOKIE-CART-CO003
       severity: P0
       dimension: scientific
-      fact: *id029
+      fact: *id028
       consequence: Cette réponse omet l’intégrité de l’état client et enseigne un schéma vulnérable à la falsification.
       expected_action: Corriger avec un cookie de session opaque ou un état signé dont l’intégrité est vérifiée côté serveur.
 - id: 1NSI-WEB-CO-004
@@ -2339,7 +2359,7 @@ reviews:
   payload:
     dimensions:
       scientific:
-        verdict: pass
+        verdict: issue
         justification: 1NSI-WEB-CO-004 est scientifiquement cohérent sur HTTPS, l’exposition des paramètres GET et le choix
           de POST dans le périmètre observé.
         facts:
@@ -2356,7 +2376,8 @@ reviews:
           excerpt_sha256: sha256:bd84083b93e67a10834b4e2405438073649903a4f5e083333def255ec8093be2
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-CO-004 passe ; sa trace concorde avec son reçu.
-        anomaly_ids: []
+        anomaly_ids:
+        - 1NSI-REV-WEB-POST-LOGS-CO004
       pedagogical:
         verdict: pass
         justification: 1NSI-WEB-CO-004 fournit une activité exploitable et cohérente avec son rôle de corrige sur HTTPS, l’exposition
@@ -2370,7 +2391,21 @@ reviews:
           observation: Dans 1NSI-WEB-CO-004, le format corrige explicite la résolution de l’objet lié autour de HTTPS, l’exposition
             des paramètres GET et le choix de POST.
         anomaly_ids: []
-    anomalies: []
+    anomalies:
+    - id: 1NSI-REV-WEB-POST-LOGS-CO004
+      severity: P0
+      dimension: scientific
+      fact:
+        path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
+        line_start: 26
+        line_end: 28
+        excerpt_sha256: sha256:c03715e578ec76ac3e1bb400064a10522ca4d8c87b1240844e1cdc7b3a0f1f75
+        fact_type: source_statement
+        observation: Le corrigé affirme que POST évite que les données ne se retrouvent dans les journaux.
+      consequence: POST retire les paramètres de l’URL mais n’empêche pas la journalisation du corps par le serveur, un proxy
+        ou l’application.
+      expected_action: Limiter l’affirmation à l’URL et expliquer que la confidentialité exige HTTPS, minimisation et politique
+        de journalisation.
 - id: 1NSI-WEB-CO-005
   chapter: 1NSI-WEB-IHM
   scope: object
@@ -2432,7 +2467,7 @@ reviews:
           excerpt_sha256: sha256:299cca10909b0530126910fe00e9779351ab4bf12d8397a37418d720cd5668d6
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-COURS-C1 passe ; sa trace concorde avec son reçu.
-        - &id030
+        - &id029
           path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
           line_start: 21
           line_end: 25
@@ -2454,7 +2489,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-COURS-C1, le format cours organise définitions, exemples et mise en activité autour de
             les composants HTML, les événements JavaScript et leur modélisation Python.
-        - &id031
+        - &id030
           path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
           line_start: 35
           line_end: 72
@@ -2468,13 +2503,13 @@ reviews:
     - id: 1NSI-REV-WEB-HTML-CSS-COURSE
       severity: P0
       dimension: scientific
-      fact: *id030
+      fact: *id029
       consequence: La séparation des responsabilités du Web est scientifiquement brouillée dès la propriété centrale.
       expected_action: Réserver structure et sémantique à HTML, présentation à CSS et réactions aux événements à JavaScript.
     - id: 1NSI-REV-WEB-JS-COURSE
       severity: P1
       dimension: pedagogical
-      fact: *id031
+      fact: *id030
       consequence: La capacité officielle d’analyser et modifier la méthode exécutée lors d’un clic n’est pas directement
         exercée sur une page Web.
       expected_action: Faire modifier un gestionnaire JavaScript minimal dans un document HTML exécutable.
@@ -2484,69 +2519,42 @@ reviews:
   payload:
     dimensions:
       scientific:
-        verdict: issue
-        justification: 1NSI-WEB-COURS-C2 présente 1 réserve(s) scientifique(s) bloquante(s) détaillée(s), malgré la cohérence
-          des autres éléments relus.
+        verdict: pass
+        justification: Le cours distingue désormais correctement exécution côté serveur et contenu normalement transmis dans
+          la réponse HTTP.
         facts:
         - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
           line_start: 2
-          line_end: 115
-          excerpt_sha256: sha256:4168d2fe4c3179be28dac5dec5f80a24e60fd141b623c2dd685715b5a357264f
+          line_end: 118
+          excerpt_sha256: sha256:60f5df9c13a6d7808640b07dde8bde694864bffc0fb801a4a71300568f48f08a
           fact_type: source_statement
-          observation: La lecture complète de 1NSI-WEB-COURS-C2 couvre l’ordre client-serveur, les cookies et le chiffrement
-            HTTPS et a été confrontée au contrat, au programme et aux objets liés.
-        - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
-          line_start: 1
-          line_end: 1
-          excerpt_sha256: sha256:c760e4e7e41cc6d6a41f3ce8966ec8bf9f334524f164d5e5e9fc0fff5b9a79be
-          fact_type: computed_result
-          observation: Le contrôle exécutable frais de 1NSI-WEB-COURS-C2 passe ; sa trace concorde avec son reçu.
+          observation: La séquence traite l’ordre client-serveur, les cookies et HTTPS.
         - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
           line_start: 11
-          line_end: 16
-          excerpt_sha256: sha256:cee1f7edc1ac4c59944429fa4913cb3076d970df53ac931b0e035f226568db7f
-          fact_type: reviewer_observation
-          observation: Le cours affirme que l’utilisateur ne voit jamais le code exécuté sur le serveur, formulation absolue
-            différente du fait qu’il n’est normalement pas transmis au navigateur dans la réponse HTTP.
-        anomaly_ids:
-        - 1NSI-REV-WEB-SERVER-VISIBILITY-COURSE
+          line_end: 19
+          excerpt_sha256: sha256:dfdb0596d7202b57d6fa6126339a5ecc25a3af0b5aac38211c88ccde69201798
+          fact_type: source_statement
+          observation: La formulation borne la non-transmission du code serveur au comportement normal de la réponse HTTP.
+        anomaly_ids: []
       pedagogical:
         verdict: issue
-        justification: 1NSI-WEB-COURS-C2 présente 1 réserve(s) pédagogique(s) détaillée(s) qui empêchent de retenir l’objet
-          sans correction.
+        justification: La progression est structurée, mais la règle de retransmission des cookies reste trop absolue.
         facts:
         - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
           line_start: 2
-          line_end: 115
-          excerpt_sha256: sha256:4168d2fe4c3179be28dac5dec5f80a24e60fd141b623c2dd685715b5a357264f
+          line_end: 118
+          excerpt_sha256: sha256:60f5df9c13a6d7808640b07dde8bde694864bffc0fb801a4a71300568f48f08a
           fact_type: pedagogical_structure
-          observation: Dans 1NSI-WEB-COURS-C2, le format cours organise définitions, exemples et mise en activité autour de
-            l’ordre client-serveur, les cookies et le chiffrement HTTPS.
+          observation: Le cours organise définitions, exemple exécuté et mise en activité.
         - path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
-          line_start: 64
-          line_end: 68
+          line_start: 67
+          line_end: 71
           excerpt_sha256: sha256:082b8086fb836085f4351f883d6b3e892915dbe830d64a8addb9a6626ce1ff69
           fact_type: reviewer_observation
-          observation: Le cours affirme qu’un cookie est retransmis à chaque requête ultérieure vers le même site sans mentionner
-            domaine, chemin, Secure, SameSite ni expiration.
+          observation: La définition ne précise pas la portée par domaine, chemin, Secure, SameSite ou expiration.
         anomaly_ids:
         - 1NSI-REV-WEB-COOKIE-SCOPE
     anomalies:
-    - id: 1NSI-REV-WEB-SERVER-VISIBILITY-COURSE
-      severity: P0
-      dimension: scientific
-      fact:
-        path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
-        line_start: 11
-        line_end: 16
-        excerpt_sha256: sha256:cee1f7edc1ac4c59944429fa4913cb3076d970df53ac931b0e035f226568db7f
-        fact_type: reviewer_observation
-        observation: Le cours affirme que l’utilisateur ne voit jamais le code exécuté sur le serveur, formulation absolue
-          différente du fait qu’il n’est normalement pas transmis au navigateur dans la réponse HTTP.
-      consequence: La propriété peut faire confondre absence de transmission du code serveur au client et impossibilité absolue
-        pour l’utilisateur d’y accéder par une autre voie.
-      expected_action: Préciser que le code serveur s’exécute côté serveur et n’est normalement pas envoyé dans la réponse
-        HTTP destinée au navigateur.
     - id: 1NSI-REV-WEB-COOKIE-SCOPE
       severity: P1
       dimension: pedagogical
@@ -2554,7 +2562,7 @@ reviews:
         path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
         line_start: 64
         line_end: 68
-        excerpt_sha256: sha256:082b8086fb836085f4351f883d6b3e892915dbe830d64a8addb9a6626ce1ff69
+        excerpt_sha256: sha256:c305aef353d7d86b24d4683fed489ef5b9b463975eac8e403d7c865431c37dfe
         fact_type: reviewer_observation
         observation: Le cours affirme qu’un cookie est retransmis à chaque requête ultérieure vers le même site sans mentionner
           domaine, chemin, Secure, SameSite ni expiration.
@@ -2583,7 +2591,7 @@ reviews:
           excerpt_sha256: sha256:33b6a002d17f44cd466ad2cba4e9c8be1653bdc2c5fe4891ef162823c439a26a
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-COURS-C3 passe ; sa trace concorde avec son reçu.
-        - &id032
+        - &id031
           path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
           line_start: 72
           line_end: 84
@@ -2605,7 +2613,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-COURS-C3, le format cours organise définitions, exemples et mise en activité autour de
             les formulaires et la transmission de paramètres par GET ou POST.
-        - &id033
+        - &id032
           path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
           line_start: 45
           line_end: 77
@@ -2619,13 +2627,13 @@ reviews:
     - id: 1NSI-REV-WEB-POST-TLS-COURSE
       severity: P0
       dimension: scientific
-      fact: *id032
+      fact: *id031
       consequence: Un élève peut conclure que placer le secret dans le corps suffit à le protéger pendant le transport.
       expected_action: Formuler la règle comme POST sur HTTPS pour les secrets et rappeler que POST ne chiffre rien.
     - id: 1NSI-REV-WEB-METHOD-SEMANTICS
       severity: P1
       dimension: pedagogical
-      fact: *id033
+      fact: *id032
       consequence: Les élèves ne disposent pas du critère sémantique nécessaire pour concevoir un formulaire correct.
       expected_action: Introduire GET pour une opération sûre de consultation et POST pour une action modifiant l’état, en
         plus des critères de confidentialité.
@@ -2652,7 +2660,7 @@ reviews:
           excerpt_sha256: sha256:70459a1e097f3461b628acd45f41ca39e157030992ea8c90e6280a140cffea10
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-EVAL-A passe ; sa trace concorde avec son reçu.
-        - &id034
+        - &id033
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
           line_start: 22
           line_end: 25
@@ -2673,14 +2681,14 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-EVAL-A, le format evaluation recueille une preuve de maîtrise sur un temps annoncé autour
             de un bouton de panier et le choix GET/POST pour une boutique.
-        - &id035
+        - &id034
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
           line_start: 9
           line_end: 37
           excerpt_sha256: sha256:bc591abc31b4e3bb5cb042b2910bd1f0b22269ff75f05f806183d2d1278c190c
           fact_type: reviewer_observation
           observation: L’évaluation A remplace l’analyse d’un clic Web par l’appel de fonctions Python simulées.
-        - &id036
+        - &id035
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
           line_start: 42
           line_end: 48
@@ -2694,19 +2702,19 @@ reviews:
     - id: 1NSI-REV-WEB-HTML-CSS-EVALA
       severity: P0
       dimension: scientific
-      fact: *id034
+      fact: *id033
       consequence: Le barème peut créditer une conception erronée des responsabilités HTML, CSS et des comportements natifs.
       expected_action: Réécrire l’attendu avec structure HTML, style CSS, événement JavaScript et éventuelle action native.
     - id: 1NSI-REV-WEB-JS-EVALA
       severity: P1
       dimension: pedagogical
-      fact: *id035
+      fact: *id034
       consequence: La capacité P-IHM-02 peut être validée sans aucune lecture ou modification de JavaScript.
       expected_action: Évaluer une modification courte d’un gestionnaire addEventListener dans la page fournie.
     - id: 1NSI-REV-WEB-TLS-EVALA
       severity: P1
       dimension: pedagogical
-      fact: *id036
+      fact: *id035
       consequence: Une réponse POST seule peut obtenir les points tout en laissant la transmission non chiffrée.
       expected_action: Exiger POST sur HTTPS et faire justifier séparément URL et transport.
 - id: 1NSI-WEB-EVAL-A-corrige
@@ -2732,7 +2740,7 @@ reviews:
           excerpt_sha256: sha256:4d13e7536fbd06e684cd16f56d7e76bf1a01cde6f5d72f1c14cb98d1dd1273bf
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-EVAL-A-corrige passe ; sa trace concorde avec son reçu.
-        - &id037
+        - &id036
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
           line_start: 22
           line_end: 25
@@ -2753,14 +2761,14 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-EVAL-A-corrige, le format corrige_evaluation fournit les réponses et justifications du
             sujet lié autour de la résolution de l’évaluation Web A.
-        - &id038
+        - &id037
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
           line_start: 27
           line_end: 38
           excerpt_sha256: sha256:f92d70d97f5a45a831d8cd6e79cad8f0f5d67cea96b7baab71bf65f770e67aa6
           fact_type: reviewer_observation
           observation: Le corrigé A ne fournit qu’une fonction Python et son enregistrement dans le simulateur.
-        - &id039
+        - &id038
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
           line_start: 52
           line_end: 57
@@ -2774,19 +2782,19 @@ reviews:
     - id: 1NSI-REV-WEB-HTML-CSS-EVALA-CO
       severity: P0
       dimension: scientific
-      fact: *id037
+      fact: *id036
       consequence: Le corrigé professeur contient une généralisation fausse, notamment pour les contrôles et formulaires natifs.
       expected_action: Distinguer style CSS et comportement natif avant d’expliquer le gestionnaire JavaScript ajouté.
     - id: 1NSI-REV-WEB-JS-EVALA-CO
       severity: P1
       dimension: pedagogical
-      fact: *id038
+      fact: *id037
       consequence: Aucune correction de la méthode réellement exécutée par le navigateur n’est disponible.
       expected_action: Ajouter le corrigé JavaScript et expliquer l’accès au composant et la mise à jour du DOM.
     - id: 1NSI-REV-WEB-TLS-EVALA-CO
       severity: P1
       dimension: pedagogical
-      fact: *id039
+      fact: *id038
       consequence: Le retour professeur ne prévient pas l’assimilation de POST à un chiffrement.
       expected_action: Ajouter explicitement l’exigence HTTPS et ses limites.
 - id: 1NSI-WEB-EVAL-B
@@ -2812,7 +2820,7 @@ reviews:
           excerpt_sha256: sha256:8aad99d4f35fd27681d6e608eb84a221459451059d62161d944e4fe086b3422f
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-EVAL-B passe ; sa trace concorde avec son reçu.
-        - &id040
+        - &id039
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
           line_start: 22
           line_end: 25
@@ -2834,14 +2842,14 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-EVAL-B, le format evaluation recueille une preuve de maîtrise sur un temps annoncé autour
             de un bouton de favoris et le choix GET/POST pour un site immobilier.
-        - &id041
+        - &id040
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
           line_start: 9
           line_end: 37
           excerpt_sha256: sha256:36bc3566c6bc39f7ecc1503a919bfd6c84243835efea60fe2a8834f22643619e
           fact_type: reviewer_observation
           observation: L’évaluation B mesure à nouveau un gestionnaire Python abstrait plutôt qu’un clic dans une page.
-        - &id042
+        - &id041
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
           line_start: 42
           line_end: 48
@@ -2856,19 +2864,19 @@ reviews:
     - id: 1NSI-REV-WEB-HTML-CSS-EVALB
       severity: P0
       dimension: scientific
-      fact: *id040
+      fact: *id039
       consequence: L’évaluation valide une séparation des technologies Web incorrecte.
       expected_action: Corriger l’attendu en séparant HTML, CSS, JavaScript et comportement intrinsèque des éléments.
     - id: 1NSI-REV-WEB-JS-EVALB
       severity: P1
       dimension: pedagogical
-      fact: *id041
+      fact: *id040
       consequence: Le second sujet ne fournit pas davantage de preuve sur la compétence Web attendue.
       expected_action: Remplacer la simulation par une modification JavaScript bornée et observable.
     - id: 1NSI-REV-WEB-TLS-EVALB
       severity: P1
       dimension: pedagogical
-      fact: *id042
+      fact: *id041
       consequence: La confidentialité peut être considérée acquise par la seule absence des paramètres dans l’URL.
       expected_action: Demander POST sur HTTPS et distinguer exposition URL, journaux et transport.
 - id: 1NSI-WEB-EVAL-B-corrige
@@ -2894,7 +2902,7 @@ reviews:
           excerpt_sha256: sha256:a2d7c3279823e770da328ac035901f2842fb0b4b2383e153623da9d952887877
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-EVAL-B-corrige passe ; sa trace concorde avec son reçu.
-        - &id043
+        - &id042
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
           line_start: 22
           line_end: 25
@@ -2915,14 +2923,14 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-EVAL-B-corrige, le format corrige_evaluation fournit les réponses et justifications du
             sujet lié autour de la résolution de l’évaluation Web B.
-        - &id044
+        - &id043
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
           line_start: 26
           line_end: 37
           excerpt_sha256: sha256:86b3932b215a65a2b9f9c84728e613541fa77118ef6d86adf0aa1bd082ce1a05
           fact_type: reviewer_observation
           observation: Le corrigé B reste limité au dictionnaire de gestionnaires Python.
-        - &id045
+        - &id044
           path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
           line_start: 50
           line_end: 55
@@ -2936,19 +2944,19 @@ reviews:
     - id: 1NSI-REV-WEB-HTML-CSS-EVALB-CO
       severity: P0
       dimension: scientific
-      fact: *id043
+      fact: *id042
       consequence: La variante professeur diffuse une distinction techniquement inexacte.
       expected_action: Réviser la réponse et introduire explicitement la couche CSS.
     - id: 1NSI-REV-WEB-JS-EVALB-CO
       severity: P1
       dimension: pedagogical
-      fact: *id044
+      fact: *id043
       consequence: Le retour professeur ne relie pas le modèle à l’exécution côté client.
       expected_action: Présenter la correction équivalente avec événement JavaScript et modification du document.
     - id: 1NSI-REV-WEB-TLS-EVALB-CO
       severity: P1
       dimension: pedagogical
-      fact: *id045
+      fact: *id044
       consequence: La correction laisse une recommandation de sécurité incomplète.
       expected_action: Compléter par HTTPS et préciser que le corps POST reste visible aux extrémités.
 - id: 1NSI-WEB-EX-001
@@ -2968,7 +2976,7 @@ reviews:
           fact_type: source_statement
           observation: La lecture complète de 1NSI-WEB-EX-001 couvre l’identification des composants et événements d’un formulaire
             d’avis et a été confrontée au contrat, au programme et aux objets liés.
-        - &id046
+        - &id045
           path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
           line_start: 10
           line_end: 13
@@ -2994,7 +3002,7 @@ reviews:
     - id: 1NSI-REV-WEB-HTML-CSS-EX001
       severity: P0
       dimension: scientific
-      fact: *id046
+      fact: *id045
       consequence: L’exercice conduit à mémoriser une séparation HTML/JavaScript incomplète et techniquement fausse.
       expected_action: Faire distinguer explicitement structure HTML, style CSS, comportement JavaScript et comportement natif
         du formulaire.
@@ -3034,7 +3042,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-EX-002, le format exercice met l’élève en activité avec une consigne graduée autour de
             la modification d’un état de menu par gestionnaire de clic.
-        - &id047
+        - &id046
           path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
           line_start: 18
           line_end: 27
@@ -3048,7 +3056,7 @@ reviews:
     - id: 1NSI-REV-WEB-JS-EX002
       severity: P1
       dimension: pedagogical
-      fact: *id047
+      fact: *id046
       consequence: L’élève peut réussir sans analyser ni changer une méthode JavaScript exécutée au clic.
       expected_action: Proposer le HTML et le JavaScript minimaux puis demander la modification du gestionnaire réel.
 - id: 1NSI-WEB-EX-003
@@ -3074,7 +3082,7 @@ reviews:
           excerpt_sha256: sha256:88976e70d1b92b9d5f153e605df2bfc734d550c83c4daaa55a43dba75402ff25
           fact_type: computed_result
           observation: Le contrôle exécutable frais de 1NSI-WEB-EX-003 passe ; sa trace concorde avec son reçu.
-        - &id048
+        - &id047
           path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
           line_start: 14
           line_end: 23
@@ -3101,7 +3109,7 @@ reviews:
     - id: 1NSI-REV-WEB-COOKIE-CART-EX003
       severity: P0
       dimension: scientific
-      fact: *id048
+      fact: *id047
       consequence: Sans mécanisme d’intégrité annoncé, l’utilisateur peut modifier la valeur transmise et falsifier l’état
         applicatif.
       expected_action: Utiliser un identifiant de session opaque avec état serveur, ou expliciter et vérifier une protection
@@ -3199,7 +3207,7 @@ reviews:
           fact_type: source_statement
           observation: La lecture complète de 1NSI-WEB-IHM-QCM couvre les événements, le code serveur, HTTPS et les méthodes
             GET/POST et a été confrontée au contrat, au programme et aux objets liés.
-        - &id049
+        - &id048
           path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
           line_start: 25
           line_end: 33
@@ -3207,7 +3215,7 @@ reviews:
           fact_type: reviewer_observation
           observation: La seule réponse attendue affirme que le code serveur n’est jamais visible par l’utilisateur, formulation
             absolue différente du fait qu’il n’est pas envoyé pour exécution au navigateur.
-        - &id050
+        - &id049
           path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
           line_start: 61
           line_end: 69
@@ -3229,7 +3237,7 @@ reviews:
           fact_type: pedagogical_structure
           observation: Dans 1NSI-WEB-IHM-QCM, le format qcm propose un diagnostic à choix unique autour de les événements,
             le code serveur, HTTPS et les méthodes GET/POST.
-        - &id051
+        - &id050
           path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
           line_start: 3
           line_end: 81
@@ -3242,21 +3250,21 @@ reviews:
     - id: 1NSI-REV-WEB-QCM-SERVER-VISIBILITY
       severity: P0
       dimension: scientific
-      fact: *id049
+      fact: *id048
       consequence: La question ne possède pas de réponse exacte sans hypothèse supplémentaire.
       expected_action: Demander quel code est exécuté côté serveur et préciser qu’il n’est normalement pas transmis dans la
         réponse HTTP.
     - id: 1NSI-REV-WEB-QCM-PASSWORD-TLS
       severity: P0
       dimension: scientific
-      fact: *id050
+      fact: *id049
       consequence: La méthode HTTP est confondue avec la confidentialité du transport ; un mot de passe POST sur HTTP reste
         lisible sur le réseau.
       expected_action: Faire de POST sur HTTPS la réponse exacte et distinguer corps de requête et chiffrement TLS.
     - id: 1NSI-REV-WEB-QCM-AUTOCORRECTION
       severity: P1
       dimension: pedagogical
-      fact: *id051
+      fact: *id050
       consequence: L’élève ne peut pas transformer son diagnostic en orientation ou remédiation.
       expected_action: Ajouter une clé contrôlée et des renvois de remédiation sans exposer les réponses dans la version élève.
 - id: 1NSI-WEB-IHM-RE-C9

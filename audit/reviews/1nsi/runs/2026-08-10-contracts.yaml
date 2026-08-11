@@ -1,11 +1,11 @@
 artifact_type: 1nsi_review_run
 schema_version: 1
 manual: 1NSI
-review_run_id: 1nsi-contracts-2026-08-10-build-manifest-019fec51-v1
-reviewer_id: 019fec51-6552-7ac2-8a57-962a9f664475
+review_run_id: 1nsi-contracts-2026-08-11-language-trace-019feeea-v1
+reviewer_id: 019feeea-7360-7ec1-b9d6-7a6bd1ae85e9
 reviewer_model: codex-gpt5
-protocol_digest: sha256:ccf155dc42c557a0b2b684267adee402d5886c944cac07baff4295f38c751e51
-reviewed_at: '2026-08-10T16:40:45+01:00'
+protocol_digest: sha256:9fb019e749096a244a0f5565ef31e01b69e4f81f38af3a4f7449abbfd3058555
+reviewed_at: '2026-08-11T05:16:00+01:00'
 assignment:
   scope: contract
   chapters:
@@ -32,49 +32,49 @@ assignment:
   - contract:1NSI-WEB-IHM
 source_manifest:
   review_tool_sha256: sha256:a453068adf03803ac3e9f2e8e2cebca25e4113a64a0339bd19d8cf77ff1eb5fa
-  execution_checker_sha256: sha256:ad7dc41c88787d524bb0ba20c02b04ea9d8b5ac1646ad02c906b1af72d4ca0ba
+  execution_checker_sha256: sha256:b4f7d90703a3c765c78cd5639b7726baf0f3ea66a6572d0198d47d72d95bee57
   execution_common_sha256: sha256:37822308dace9072c0bedccc3d73c4646dc9010aa859a64591a1fa7ad7338e53
   entries:
   - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
     path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
     source_sha256: sha256:b66809a4f8fd0dc319bfc991c37e607a2578c643fbf8702f3520ca87ea1ac5ec
-    dependency_digest: sha256:225c70318637812c0ca03719038a93961c85e971e67149ef4663daaf332dc77a
+    dependency_digest: sha256:d16fdcdb1a261aadc494a3841fe8ca56efda8bb93074d5acfb310574fb947ae0
   - id: contract:1NSI-ALGO-PARCOURS-TRIS
     path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
     source_sha256: sha256:78ecdb66f7f1b93ef821c2b0b61c657834dfbaefa73676d781b6fa7ada0374e6
-    dependency_digest: sha256:4f0b8a4296248eaea6ac3fb01569735c9ee1ec009a47a7a97fe4cd3fc3539014
+    dependency_digest: sha256:e22c67e5958a4e32abfe8c0146e1da8724609547d009f03fe51498befaefc6a0
   - id: contract:1NSI-ARCHITECTURE-OS
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml
     source_sha256: sha256:33dd60431b4afa16bb8710bed83c211a9ec5aa17135f5c164906acd62ec02f3e
-    dependency_digest: sha256:025e6e01e8d161084fb6247e6bcbca63c9ca9c25445647891e31c93d6e9c826f
+    dependency_digest: sha256:1fa0d6814ed543d60a65380c2deed627e21fb9b2d18456a4675a294bda83417d
   - id: contract:1NSI-LANGAGE
     path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
-    source_sha256: sha256:653076c07aceee86b75cde923135b53976b1054d98033042cbde7a78c064fd86
-    dependency_digest: sha256:4b6abad0c75bba42707a06305a9f32437fd25ef02ab6f199728b4e5720226791
+    source_sha256: sha256:3c832b5d25fa9bd5e840226a065dbe288a71a3ec730f805bb904b30ab45b386a
+    dependency_digest: sha256:4e26e462bafb89d393b6f466d6f0967c78eceae8dcf1c7026f05dda98efcdf84
   - id: contract:1NSI-PROJET-METHODES
     path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
     source_sha256: sha256:373e5c1d32f079974d5d67109dab802a942fcd76f05f55a43fe2ce108143fe47
-    dependency_digest: sha256:27e7bfce037f54d868cd18d6608032cce0ba53cd17275a2ee035b3eabf727ea4
+    dependency_digest: sha256:ec2125a5495c4fe10d97026144d5809f88b8beb2c007105045c2a67b613b6138
   - id: contract:1NSI-RESEAUX
     path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
     source_sha256: sha256:1e92f3599fe8ca3a2bb0830338b3e0499323b7e0b71fe7ef6955cdeb0111bea2
-    dependency_digest: sha256:beee1e4392f927e8b80b96566a7546e0a18d7cc2769e64ffce670ea9e584ca3e
+    dependency_digest: sha256:15560816e0caba894da94eb2125df9edced819eac38ed0a0869e4b67eb065bf7
   - id: contract:1NSI-TABLES
     path: NSI/chapitres/1NSI-TABLES/contrat.yaml
     source_sha256: sha256:31969806064fdc4e682600af4608108df20a6fb5b2c938386867afe1432cd0f7
-    dependency_digest: sha256:16482851908e1da90c42bb0ec7249a107b7dae0b8e9ddfab73e4824d1e7341f8
+    dependency_digest: sha256:ba68c01025930a26957ecf4a6e6fffa6354ad20a70eb0493088ebef934601f63
   - id: contract:1NSI-TYPES-BASE
     path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
     source_sha256: sha256:6d757b21ba4ceab3ed8628940866cee252a486c1174b06a61852cc377c364663
-    dependency_digest: sha256:93ec09a19274af9ee6817f07eb0ab8a3e7d1976f7d5a049e8d6f4ea83285a69a
+    dependency_digest: sha256:d6c16d8cb9e263bcf5388b396c61237c751621686095884cc6683d2fb44f04ee
   - id: contract:1NSI-TYPES-CONSTRUITS
     path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
     source_sha256: sha256:efff9b440e22ec4199e158b4a02cd3a6ad1d46e755a81eb4b3a4cf2b64c2aa46
-    dependency_digest: sha256:8f27a1fac0c22b07a361b99fd8c9cd60cb2a2f3f06ce6efc68f765734b0a03a7
+    dependency_digest: sha256:a23918fe846cad641e029ba02fb87beee3ab470e7872314dbeeae7198df3e29d
   - id: contract:1NSI-WEB-IHM
     path: NSI/chapitres/1NSI-WEB-IHM/contrat.yaml
     source_sha256: sha256:b4f455779b23b426b7fd438bee8efd185a3989b69012f489d34c4bd91ab0c56d
-    dependency_digest: sha256:24b17d2fb1785d54fa49cf9c2e1d8a84f58c38f3796cfbd50f4da452c1e2c73f
+    dependency_digest: sha256:7ccffdef078ccc3f90c6837faab0f0763303800a846bb6039c45348cf3bc4687
 reviews:
 - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
   chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
@@ -203,29 +203,31 @@ reviews:
     dimensions:
       scientific:
         verdict: pass
-        justification: Les constructions élémentaires, la diversité des langages, la spécification, les
-          tests et les bibliothèques sont tous couverts.
+        justification: Les sept capacités attendues de la rubrique sont contractualisées sans agrégation
+          ; C3/P-LANG-03A, C6/P-LANG-03B et C7/P-LANG-03C distinguent explicitement prototype, préconditions
+          et postconditions.
         facts:
         - path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
           line_start: 8
-          line_end: 12
-          excerpt_sha256: sha256:2ee8811a209712ccb20e289b01abad7a0526961a5f197a30cbf8113645d45402
+          line_end: 14
+          excerpt_sha256: sha256:39c86d32b6f4a918febf047da3e170a6aff4c973db53c8e8ed809873c79493e9
           fact_type: programme_alignment
-          observation: Les cinq capacités agrègent sans perte les sept formulations attendues du tableau
-            officiel Langages et programmation.
+          observation: C1 à C7 tracent séparément les sept capacités officielles ; C3 porte P-LANG-03A,
+            C6 porte P-LANG-03B et C7 porte P-LANG-03C.
         anomaly_ids: []
       pedagogical:
         verdict: pass
-        justification: Les prérequis et l'accroche conduisent de l'exécution élémentaire vers la spécification
-          et la validation.
+        justification: Les prérequis et l’accroche conduisent des constructions élémentaires vers la spécification
+          et la validation ; la séparation C3/C6/C7 rend les attendus observables séparément.
         facts:
         - path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
-          line_start: 14
-          line_end: 25
+          line_start: 16
+          line_end: 27
           excerpt_sha256: sha256:3e613402cc2cccbdc017c4fbeb3aea10848be091b5f62c5ae214a7d060d9a9c6
           fact_type: pedagogical_structure
-          observation: Le problème initial du programme correct sur un seul exemple motive directement
-            préconditions, postconditions et jeux de tests.
+          observation: Les prérequis sur les types, les booléens et les structures de contrôle, puis le
+            problème d’un programme valide sur un seul exemple, motivent la spécification et les jeux
+            de tests.
         anomaly_ids: []
     anomalies: []
 - id: contract:1NSI-PROJET-METHODES

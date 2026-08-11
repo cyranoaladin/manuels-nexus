@@ -144,42 +144,42 @@ PRE_TEN_P0_RECEIPTS_COMMIT = RECEIPTS_COMMIT
 PRE_TEN_P0_RECEIPT_SEALS = dict(CURRENT_RECEIPT_SEALS)
 GOVERNANCE_REVIEW_CONFIG = {
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": {
-        "reviewer_id": "019fec51-6552-7ac2-8a57-962a9f664475",
-        "review_run_id": "1nsi-contracts-2026-08-10-build-manifest-019fec51-v1",
+        "reviewer_id": "019feeea-7360-7ec1-b9d6-7a6bd1ae85e9",
+        "review_run_id": "1nsi-contracts-2026-08-11-language-trace-019feeea-v1",
         "previous_reviewed_at": "2026-08-10T12:02:01+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": {
-        "reviewer_id": "019fec51-8875-7243-98ab-d44ab2f963eb",
+        "reviewer_id": "019feeea-7468-73d3-bdb2-3896a3930c8b",
         "review_run_id": (
-            "1nsi-objects-algorithms-2026-08-10-build-manifest-019fec51-v1"
+            "1nsi-objects-algorithms-2026-08-11-language-trace-019feeea-v1"
         ),
         "previous_reviewed_at": "2026-08-10T16:13:20+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": {
-        "reviewer_id": "019fec51-a5a3-79b1-b9c9-27987dec5f98",
+        "reviewer_id": "019feeea-741e-7b53-9c40-bda2f515e04e",
         "review_run_id": (
-            "1nsi-objects-systems-web-2026-08-10-build-manifest-019fec51-v1"
+            "1nsi-objects-systems-web-2026-08-11-language-trace-019feeea-v1"
         ),
         "previous_reviewed_at": "2026-08-10T11:43:03.124509+00:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": {
-        "reviewer_id": "019fec51-c41b-75a0-8d7f-bd4d10d9d44d",
+        "reviewer_id": "019feeea-73d9-7c90-9a08-27018cd7c72d",
         "review_run_id": (
-            "1nsi-objects-language-project-2026-08-10-build-manifest-019fec51-v1"
+            "1nsi-objects-language-project-2026-08-11-language-trace-019feeea-v1"
         ),
         "previous_reviewed_at": "2026-08-10T12:45:26+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": {
-        "reviewer_id": "019fec51-e0b5-7531-99ff-997bd9f1247d",
+        "reviewer_id": "019feeea-74da-7211-99ae-3715f605f195",
         "review_run_id": (
-            "1nsi-objects-data-basics-tables-2026-08-10-build-manifest-019fec51-v1"
+            "1nsi-objects-data-basics-tables-2026-08-11-language-trace-019feeea-v1"
         ),
         "previous_reviewed_at": "2026-08-10T12:42:55+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": {
-        "reviewer_id": "019fec52-0bf5-73f3-b8d9-1004f8e54c87",
+        "reviewer_id": "019feef5-b487-7993-b072-b2b1e7fcc4ff",
         "review_run_id": (
-            "1nsi-objects-types-construits-2026-08-10-build-manifest-019fec52-v1"
+            "1nsi-objects-types-construits-2026-08-11-language-trace-019feef5-v1"
         ),
         "previous_reviewed_at": "2026-08-10T12:53:30+01:00",
     },
@@ -190,15 +190,27 @@ PRE_GOVERNANCE_REVIEWER_IDS = {
     "019feb72-1592-7900-b0b1-02fae59a6a39",
     "019feb72-7252-77a1-b864-775b021ed954",
     "019feb72-ceeb-7d72-9abd-de60ca43316e",
+    "019fec51-6552-7ac2-8a57-962a9f664475",
+    "019fec51-8875-7243-98ab-d44ab2f963eb",
+    "019fec51-a5a3-79b1-b9c9-27987dec5f98",
+    "019fec51-c41b-75a0-8d7f-bd4d10d9d44d",
+    "019fec51-e0b5-7531-99ff-997bd9f1247d",
+    "019fec52-0bf5-73f3-b8d9-1004f8e54c87",
     C3_REVIEWER_ID,
 }
 PRE_GOVERNANCE_REVIEW_RUN_IDS = {
     "1nsi-contracts-2026-08-10-plato-reattestation-v2",
+    "1nsi-contracts-2026-08-10-build-manifest-019fec51-v1",
     C3_REVIEW_RUN_ID,
+    "1nsi-objects-algorithms-2026-08-10-build-manifest-019fec51-v1",
     "1nsi-objects-data-basics-tables-2026-08-10-chandrasekhar-v1",
+    "1nsi-objects-data-basics-tables-2026-08-10-build-manifest-019fec51-v1",
     "1nsi-objects-language-project-2026-08-10-lorentz-v1",
+    "1nsi-objects-language-project-2026-08-10-build-manifest-019fec51-v1",
     "1nsi-objects-systems-web-2026-08-10-boyle-v1",
+    "1nsi-objects-systems-web-2026-08-10-build-manifest-019fec51-v1",
     "1nsi-objects-types-construits-2026-08-10-epicurus-v1",
+    "1nsi-objects-types-construits-2026-08-10-build-manifest-019fec52-v1",
 }
 EXPECTED_EXECUTION_DEBT = {
     "1NSI-LANGAGE-RE-C4": ["execution_receipt_diverged"],
