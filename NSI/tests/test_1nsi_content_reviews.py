@@ -156,6 +156,9 @@ PRE_ACTOR_PROVENANCE_POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
 PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
 PRE_COUNTER_REVIEW_POLICY_COMMIT = "f0c1a095288e000fa014653afc7f60f5c2b0b273"
 PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
+PRE_CLEAN_OBSERVATIONS_RECEIPTS_COMMIT = (
+    "60847229983f6712d1ed7f36791a0037ca5b5282"
+)
 POLICY_COMMIT = "4b4e7e403d87b3a3968870652187d12885880cd4"
 RECEIPTS_COMMIT = "5d8bedd9b20d042fcc25eac7d601dcc6ff44cb99"
 CURRENT_RECEIPT_SEALS = {
@@ -177,6 +180,22 @@ CURRENT_RECEIPT_SEALS = {
     "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": (
         "sha256:9191629712c468932e48fc3f3b92fc24864c2d39d30530a4b960c2debb737074"
     ),
+}
+OBSERVATION_ONLY_REATTESTED_IDS = {
+    "1NSI-TAB-EVAL-A",
+    "1NSI-TAB-EVAL-A-corrige",
+    "1NSI-TAB-EVAL-B",
+    "1NSI-TAB-EVAL-B-corrige",
+    "1NSI-TABLES-QCM",
+    "1NSI-TABLES-RE-C2",
+    "1NSI-TB-EVAL-A",
+    "1NSI-TB-EVAL-A-corrige",
+    "1NSI-TB-EVAL-B",
+    "1NSI-TB-EVAL-B-corrige",
+    "1NSI-TYPES-BASE-QCM",
+    "1NSI-TYPES-BASE-RE-C3",
+    "1NSI-TC-CO-053",
+    "1NSI-TC-CO-054",
 }
 PRE_TEN_P0_RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
 PRE_TEN_P0_RECEIPT_SEALS = {
@@ -1614,7 +1633,7 @@ def test_sealed_current_governance_receipts_cover_all_349_reviews(
     assert len(covered_ids) == len(set(covered_ids)) == 349
 
 
-def test_sealed_current_governance_observations_are_unique_per_chapter(
+def test_sealed_current_governance_observations_are_globally_unique(
     review_module,
 ) -> None:
     seen = {}
@@ -1631,12 +1650,75 @@ def test_sealed_current_governance_observations_are_unique_per_chapter(
                     normalised = review_module._normalise_observation(
                         fact["observation"]
                     )
-                    key = (review["chapter"], normalised)
-                    if normalised and key in seen:
-                        duplicates.append((seen[key], review["id"]))
-                    seen[key] = review["id"]
+                    if normalised and normalised in seen:
+                        duplicates.append((seen[normalised], review["id"]))
+                    seen[normalised] = review["id"]
 
     assert not duplicates, f"observations dupliquees: {duplicates}"
+
+
+def test_clean_observation_reattestation_preserves_every_anomaly_and_payload(
+) -> None:
+    previous_payloads = {}
+    current_payloads = {}
+    for relative_path in sorted(CURRENT_RECEIPT_SEALS):
+        previous = yaml.safe_load(
+            _git_bytes(
+                ROOT,
+                "show",
+                f"{PRE_CLEAN_OBSERVATIONS_RECEIPTS_COMMIT}:{relative_path}",
+            ).decode("utf-8")
+        )
+        current = yaml.safe_load(
+            _git_bytes(ROOT, "show", f"{RECEIPTS_COMMIT}:{relative_path}").decode(
+                "utf-8"
+            )
+        )
+        previous_payloads.update(
+            {review["id"]: review["payload"] for review in previous["reviews"]}
+        )
+        current_payloads.update(
+            {review["id"]: review["payload"] for review in current["reviews"]}
+        )
+
+    assert set(previous_payloads) == set(current_payloads)
+    changed_ids = {
+        source_id
+        for source_id in previous_payloads
+        if previous_payloads[source_id] != current_payloads[source_id]
+    }
+    assert changed_ids == OBSERVATION_ONLY_REATTESTED_IDS
+
+    for source_id in changed_ids:
+        previous = copy.deepcopy(previous_payloads[source_id])
+        current = copy.deepcopy(current_payloads[source_id])
+        previous_observations = []
+        current_observations = []
+        for payload, observations in (
+            (previous, previous_observations),
+            (current, current_observations),
+        ):
+            for dimension in payload["dimensions"].values():
+                for fact in dimension["facts"]:
+                    observations.append(fact.pop("observation"))
+        assert previous == current, source_id
+        assert previous_observations != current_observations, source_id
+
+    previous_anomalies = {
+        anomaly["id"]: anomaly
+        for payload in previous_payloads.values()
+        for anomaly in payload["anomalies"]
+    }
+    current_anomalies = {
+        anomaly["id"]: anomaly
+        for payload in current_payloads.values()
+        for anomaly in payload["anomalies"]
+    }
+    assert previous_anomalies == current_anomalies
+    assert len(current_anomalies) == 278
+    assert Counter(
+        anomaly["severity"] for anomaly in current_anomalies.values()
+    ) == Counter({"P0": 143, "P1": 126, "P2": 9})
 
 
 def test_findings_only_differ_on_reattested_payload_or_provenance(
@@ -4009,22 +4091,21 @@ def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
     sealed_anomalies = [
         anomaly for finding in findings for anomaly in finding["anomalies"]
     ]
-    expected_severities = Counter(
+    assert len(sealed_anomalies) == 278
+    assert Counter(
         anomaly["severity"] for anomaly in sealed_anomalies
-    )
-    expected_severities["P1"] += len(EXPECTED_EXECUTION_DEBT)
-    assert len(register_anomalies) == len(sealed_anomalies) + len(
-        EXPECTED_EXECUTION_DEBT
-    )
+    ) == Counter({"P0": 143, "P1": 126, "P2": 9})
+    assert len(register_anomalies) == 292
     assert Counter(
         anomaly["severity"] for anomaly in register_anomalies
-    ) == expected_severities
+    ) == Counter({"P0": 143, "P1": 140, "P2": 9})
 
     assert len(findings) == len(document["entries"]) == 349
     assert "Entries: 349" in summary_text
-    assert f"- Total: {len(register_anomalies)}" in summary_text
-    for severity in ("P0", "P1", "P2"):
-        assert f"- {severity}: {expected_severities[severity]}" in summary_text
+    assert "- Total: 292" in summary_text
+    assert "- P0: 143" in summary_text
+    assert "- P1: 140" in summary_text
+    assert "- P2: 9" in summary_text
     assert review_module.release_gate_allows(document, policy) is False
 
 
