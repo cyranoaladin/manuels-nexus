@@ -1,38 +1,42 @@
 # Synthese de revue 1NSI
 
-Protocol digest: `sha256:ccf155dc42c557a0b2b684267adee402d5886c944cac07baff4295f38c751e51`
+Protocol digest: `sha256:9fb019e749096a244a0f5565ef31e01b69e4f81f38af3a4f7449abbfd3058555`
 Entries: 349
 Publication approval: false
 Human confirmation required: true
 
 ## Scientific
-- pass: 121
-- issue: 123
+- pass: 116
+- issue: 127
 - not_applicable: 0
-- human_confirmation_required: 105
+- human_confirmation_required: 106
 
 ## Pedagogical
-- pass: 221
-- issue: 77
+- pass: 220
+- issue: 78
 - not_applicable: 0
 - human_confirmation_required: 51
 
 ## Anomalies
-- Total: 270
+- Total: 267
 
 ### By severity
-- P0: 151
-- P1: 116
-- P2: 3
+- P0: 144
+- P1: 118
+- P2: 5
 - P3: 0
 
 ### By dimension
-- scientific: 160
-- pedagogical: 96
+- scientific: 155
+- pedagogical: 98
 - traceability: 14
 
 ### Actions
-- `1NSI-REV-ADGK-C3-EGALITE-KNN` [P1/scientific]: Définir et tester une précondition ou une stratégie déterministe d'égalité, notamment pour plusieurs classes.
+- `1NSI-REV-ADGK-C3-EGALITE-KNN` [P1/scientific]: Définir puis tester des règles déterministes pour les égalités de distance et de vote.
+- `1NSI-REV-ADGK-EVAL-A-ECRITURE-KNN` [P1/pedagogical]: Ajouter une tâche observable d’écriture ou de complétion de l’algorithme k-NN.
+- `1NSI-REV-ADGK-EVAL-A-UNITES-KNN` [P2/scientific]: Normaliser les deux variables ou faire discuter explicitement l’effet des unités.
+- `1NSI-REV-ADGK-EVAL-B-ECRITURE-KNN` [P1/pedagogical]: Ajouter une tâche observable d’écriture ou de complétion de l’algorithme k-NN.
+- `1NSI-REV-ADGK-EX-004-UNITES-KNN` [P2/scientific]: Normaliser les variables ou expliciter cette limite avant d’interpréter la prédiction.
 - `1NSI-REV-ADGK-RE-C1-EXECUTION-INFINIE` [P1/pedagogical]: Fournir une version instrumentée avec compteur ou imposer un environnement avec timeout avant toute exécution.
 - `1NSI-REV-ADGK-QCM-SANS-CLE` [P1/pedagogical]: Ajouter une clé séparée de la version élève immédiate, un mécanisme de correction et des renvois de remédiation.
 - `1NSI-REV-APT-COUTS-TERMINAISON` [P1/scientific]: Ajouter des attendus observables sur la terminaison des tris, le coût linéaire des parcours et le coût quadratique au pire des deux tris.
@@ -43,6 +47,7 @@ Human confirmation required: true
 - `1NSI-REV-ARCH-QCM-AUTOCORRECTION` [P1/pedagogical]: Relier une clé professeur et fournir un retour élève sans exposer les réponses dans le manuel élève.
 - `1NSI-REV-ARCH-CO004-TERMINAL` [P1/pedagogical]: Ajouter les commandes shell attendues et leurs effets avant la variante automatisée en Python.
 - `1NSI-REV-ARCH-C1-CONSTITUANTS` [P1/pedagogical]: Énumérer explicitement les constituants retenus et distinguer le bus de liaison de cette liste.
+- `1NSI-REV-ARCH-C1-DIAGRAM-FLOWS` [P0/scientific]: Redessiner des liaisons bidirectionnelles via un bus commun entre processeur, mémoire et entrées-sorties.
 - `1NSI-REV-ARCH-EX004-TERMINAL` [P1/pedagogical]: Faire exécuter et expliquer la séquence dans un terminal libre, puis réserver Python à une comparaison éventuelle.
 - `1NSI-REV-1NSI-LANG-CO-001-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-LANG-CO-002-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
@@ -56,17 +61,16 @@ Human confirmation required: true
 - `1NSI-REV-LANG-COURS-C2-TYPAGE` [P0/scientific]: Distinguer typage statique/dynamique de typage explicite/inféré et fournir des exemples corrects.
 - `1NSI-REV-1NSI-LANG-COURS-C3-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-LANG-COURS-C3-SPECIFICATION-TROP-FAIBLE` [P1/pedagogical]: Exprimer la relation aire égale base fois hauteur sur deux, avec les hypothèses de domaine.
-- `1NSI-REV-1NSI-LANG-COURS-C4-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
-- `1NSI-REV-LANG-COURS-C4-MAXIMUM-ZERO` [P0/scientific]: Remplacer « valeur positive » par « valeur positive ou nulle », ou formuler max(liste) supérieur ou égal à zéro, puis tester [-5, 0, -8] et [-5, -1, -8].
+- `1NSI-REV-1NSI-LANG-COURS-C4-PY-SOURCE` [P0/scientific]: Extraire également le bloc bogué dans un fichier .py canonique et vérifier les deux versions depuis leurs sources.
 - `1NSI-REV-1NSI-LANG-COURS-C5-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-LANG-EVAL-A-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-LANG-EVAL-A-POIDS` [P0/scientific]: Exiger des poids non négatifs, au moins un poids strictement positif, puis tester les cas invalides.
-- `1NSI-REV-1NSI-LANG-EVAL-A-COUVERTURE-C2` [P1/pedagogical]: Ajouter un item observable de comparaison ou documenter une évaluation complémentaire.
+- `1NSI-REV-1NSI-LANG-EVAL-A-COUVERTURE-C2` [P1/pedagogical]: Ajouter des items distincts sur diversité des langages, prototype et postcondition, puis tracer leurs capacités dans la META.
 - `1NSI-REV-1NSI-LANG-EVAL-A-CORRIGE-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-LANG-EVAL-A-CORRIGE-POIDS` [P0/scientific]: Ajouter la non-négativité de chaque poids et des tests de régression dans la source Python canonique.
 - `1NSI-REV-1NSI-LANG-EVAL-B-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-LANG-EVAL-B-POIDS` [P0/scientific]: Préciser le domaine des poids et rejeter les poids négatifs par assertion testée.
-- `1NSI-REV-1NSI-LANG-EVAL-B-COUVERTURE-C2` [P1/pedagogical]: Introduire une tâche isomorphe de traduction et comparaison dans les deux variantes.
+- `1NSI-REV-1NSI-LANG-EVAL-B-COUVERTURE-C2` [P1/pedagogical]: Ajouter des items distincts sur diversité des langages, prototype et postcondition, puis tracer leurs capacités dans la META.
 - `1NSI-REV-1NSI-LANG-EVAL-B-CORRIGE-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-LANG-EVAL-B-CORRIGE-POIDS` [P0/scientific]: Mutualiser une spécification correcte des poids et ajouter des contre-tests négatifs.
 - `1NSI-REV-1NSI-LANG-EX-001-PARCOURS-UNIQUE` [P1/pedagogical]: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
@@ -80,11 +84,9 @@ Human confirmation required: true
 - `1NSI-REV-1NSI-LANG-EX-004-PARCOURS-UNIQUE` [P1/pedagogical]: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
 - `1NSI-REV-1NSI-LANG-EX-005-PARCOURS-UNIQUE` [P1/pedagogical]: Créer des entraînements distincts dans les parcours manquants avec critères de réussite observables.
 - `1NSI-REV-1NSI-LANGAGE-QCM-SANS-DIAGNOSTIC` [P1/pedagogical]: Ajouter clé, explication de chaque distracteur et renvoi par capacité.
-- `1NSI-REV-1NSI-LANGAGE-RE-C4-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
-- `1NSI-REV-LANGAGE-RE-C4-LISTE-VIDE` [P0/scientific]: Déclarer et vérifier la précondition « liste non vide », puis ajouter un test du cas vide et harmoniser le corrigé.
+- `1NSI-REV-1NSI-LANGAGE-QCM-COUVERTURE-SPECIFICATION` [P1/pedagogical]: Ajouter des questions distinctes sur le prototype et les postconditions, avec diagnostic par capacité.
+- `1NSI-REV-1NSI-LANGAGE-RE-C4-PY-SOURCE` [P0/scientific]: Extraire également le bloc bogué dans un fichier .py canonique et vérifier les deux versions depuis leurs sources.
 - `1NSI-REV-EXEC-E855428ABA9A` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
-- `1NSI-REV-1NSI-LANGAGE-RE-C4-CORRIGE-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
-- `1NSI-REV-LANGAGE-RE-C4-CORRIGE-LISTE-VIDE` [P0/scientific]: Ajouter une docstring et une assertion de non-vacuité, puis tester explicitement une liste vide dans la source Python canonique.
 - `1NSI-REV-EXEC-67B0789F1DC4` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-PM-C3-SOURCE` [P1/scientific]: Conserver C3 comme transversal_enrichment avec human_confirmation_required, sans la présenter comme une capacité officielle autonome.
 - `1NSI-REV-PM-C4-SOURCES` [P1/scientific]: Associer la documentation à la section officielle Langages et programmation et l'oral au préambule, ou séparer les deux capacités.
@@ -98,12 +100,8 @@ Human confirmation required: true
 - `1NSI-REV-PM-CO004-POSTCONDITION-TRI` [P0/scientific]: Ajouter que le résultat est une permutation du tableau initial et tester ordre, longueur et fréquences.
 - `1NSI-REV-1NSI-PM-CO-005-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-PM-COURS-C1-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
-- `1NSI-REV-1NSI-PM-COURS-C2-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-PM-COURS-C2-QUART-HORAIRE-NON-MATERIALISE` [P1/pedagogical]: Relier le cours à un calendrier de projets réels et à des preuves de suivi annuel.
-- `1NSI-REV-PM-COURS-C2-JALONS-VIDES` [P0/scientific]: Déclarer et vérifier la précondition « au moins un jalon », puis ajouter un test du cas vide dans la source Python canonique.
-- `1NSI-REV-1NSI-PM-COURS-C3-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
-- `1NSI-REV-PM-COURS-C3-DENOMINATEUR` [P0/scientific]: Compléter les préconditions sur les poids et ajouter un test qui échoue avec somme nulle.
-- `1NSI-REV-PM-COURS-C3-POIDS-NEGATIFS` [P0/scientific]: Exiger des poids non négatifs et au moins un poids strictement positif, puis tester séparément poids négatif et somme nulle.
+- `1NSI-REV-1NSI-PM-COURS-C3-PY-SOURCE` [P0/scientific]: Extraire également le bloc bogué dans un fichier .py canonique et vérifier les deux versions depuis leurs sources.
 - `1NSI-REV-1NSI-PM-COURS-C4-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
 - `1NSI-REV-1NSI-PM-COURS-C4-CONTROLE-DOCSTRING-INSUFFISANT` [P1/pedagogical]: Distinguer présence et qualité, puis fournir une grille humaine pour rôle, préconditions et postconditions.
 - `1NSI-REV-1NSI-PM-EVAL-A-PY-SOURCE` [P0/scientific]: Extraire le code canonique dans un fichier .py suivi, générer le bloc publié depuis cette source et ajouter un test de non-divergence.
@@ -143,7 +141,7 @@ Human confirmation required: true
 - `1NSI-REV-RES-BITALT-COURSE` [P0/scientific]: Modéliser séparément livraison du paquet et livraison de l’ACK, conserver le bit attendu du récepteur et tester le rejet d’un doublon.
 - `1NSI-REV-RES-RECURSION-COURSE` [P0/scientific]: Remplacer l’exigence par une simulation réseau de Première ou fournir un outil opaque, et étiqueter clairement tout parcours récursif hors programme.
 - `1NSI-REV-RES-C2-DIRECT` [P1/pedagogical]: Demander séparément l’adjacence et la connectivité, avec les résultats attendus pour chacune.
-- `1NSI-REV-RES-IHM-COURSE` [P1/pedagogical]: Ajouter une interface matérielle ou graphique minimale avec événement utilisateur, affichage d’état et tests du cahier des charges.
+- `1NSI-REV-RES-IHM-COURSE` [P0/scientific]: Ajouter une interface matérielle ou graphique minimale avec événement utilisateur, affichage d’état et tests.
 - `1NSI-REV-RES-BITALT-EVALA` [P1/pedagogical]: Ajouter une trace avec paquet reçu, ACK perdu et retransmission du même bit.
 - `1NSI-REV-RES-BITALT-EVALA-CO` [P1/pedagogical]: Compléter la trace par le bit attendu, le doublon ignoré et l’ACK renvoyé.
 - `1NSI-REV-RES-BITALT-EVALB` [P1/pedagogical]: Introduire une perte d’ACK et demander si le récepteur livre ou ignore la retransmission.
@@ -161,12 +159,13 @@ Human confirmation required: true
 - `1NSI-REV-EXEC-B1A89D6E8780` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-TABLES-COHERENCE` [P2/scientific]: Ajouter explicitement les tests de cohérence d'une table à C2 ou à une capacité distincte.
 - `1NSI-REV-TABLES-R2-ORIGINE` [P1/pedagogical]: Rattacher boucles et fonctions à des acquis SNT explicitement diagnostiqués, ou placer LANGAGE avant TABLES et corriger l'origine de R2.
+- `1NSI-REV-TAB-CO-005-FUSION-DOUBLONS` [P0/scientific]: Définir une politique de cardinalité et détecter ou conserver explicitement les clés dupliquées.
+- `1NSI-REV-TAB-CO-005-COLLISION-COLONNES` [P0/scientific]: Détecter les collisions de colonnes et imposer une politique explicite de renommage ou de rejet.
 - `1NSI-REV-TAB-COURS-C1-PREREQUIS` [P1/pedagogical]: Rattacher boucles et fonctions à LANGAGE ou déplacer/étayer explicitement ces constructions avant le cours TABLES.
 - `1NSI-REV-TAB-COURS-C2-PREREQUIS` [P1/pedagogical]: Introduire ces constructions dans LANGAGE auparavant ou ajouter un étayage local explicite et testé.
 - `1NSI-REV-TAB-COURS-C3-PREREQUIS` [P1/pedagogical]: Déplacer LANGAGE avant TABLES ou enseigner explicitement la fonction-clé avant son évaluation.
 - `1NSI-REV-TAB-COURS-C4-FUSION-DOUBLONS` [P0/scientific]: Exiger l'unicité des clés avec contrôle testé ou implémenter une fusion qui conserve toutes les correspondances.
 - `1NSI-REV-TAB-COURS-C4-PREREQUIS` [P1/pedagogical]: Réordonner la progression ou décomposer la fonction avec un guidage syntaxique explicite.
-- `1NSI-REV-TAB-COURS-C4-COLLISION-COLONNES` [P0/scientific]: Exiger et tester des colonnes non-clés disjointes, ou définir une stratégie explicite de renommage et de résolution des conflits avant la fusion.
 - `1NSI-REV-TAB-EVAL-A-COHERENCE` [P2/pedagogical]: Ajouter une question courte et discriminante sur un doublon ou une contrainte de cohérence.
 - `1NSI-REV-TAB-EVAL-B-COHERENCE` [P2/pedagogical]: Introduire dans cette variante un jeu de données incohérent ou une clé répétée à diagnostiquer.
 - `1NSI-REV-TAB-EX-004-DONNEES` [P1/pedagogical]: Référencer explicitement 1NSI-TAB-EX-002 et le lier, ou recopier la table notes dans l'énoncé.
@@ -183,6 +182,7 @@ Human confirmation required: true
 - `1NSI-REV-TB-EVAL-B-COUVERTURE` [P1/scientific]: Réserver dans B des items complémentaires sur produit, représentation binaire d'un réel et transcodage de fichier.
 - `1NSI-REV-TB-QCM-AUTOCORRECTION` [P1/pedagogical]: Créer un corrigé professeur séparé et un retour élève minimal orientant chaque erreur vers le cours pertinent.
 - `1NSI-REV-EXEC-EECBC2B9CE8D` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
+- `1NSI-REV-TB-RE-C3-CORRIGE-EGALITE-FLOTTANTS` [P0/scientific]: Expliquer que == compare les valeurs selon la sémantique IEEE 754 de Python et conserver la comparaison à tolérance pour les calculs approchés.
 - `1NSI-REV-EXEC-58C01FCF940B` [P1/traceability]: Corriger la source ou regenerer le recu dans un lot distinct, puis refaire la revue.
 - `1NSI-REV-TC-REFS-LOCALES` [P1/scientific]: Remplacer C1-C4 par des références canoniques reliées aux formulations officielles et classifier explicitement toute capacité supplémentaire.
 - `1NSI-REV-TC-PUPLETS-NOMMES` [P1/scientific]: Ajouter un attendu observable sur les p-uplets nommés, relié à la formulation officielle et à une preuve de maîtrise.
@@ -207,9 +207,7 @@ Human confirmation required: true
 - `1NSI-REV-TC-CO-051-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
 - `1NSI-REV-TC-CO-052-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
 - `1NSI-REV-TC-CO-053-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
-- `1NSI-REV-TC-CO-053-COPIE-PROFONDE-INCOMPLETE` [P0/scientific]: Qualifier cette construction de copie des deux premiers niveaux et imposer des cellules non mutables, ou fournir une copie récursive réelle avec un test de cellule mutable.
 - `1NSI-REV-TC-CO-054-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
-- `1NSI-REV-TC-CO-054-COPIE-PROFONDE-INCOMPLETE` [P0/scientific]: Restreindre explicitement la grille à des cellules non mutables et renommer la copie, ou implémenter une copie récursive réelle avec une régression sur cellule mutable.
 - `1NSI-REV-TC-CO-055-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
 - `1NSI-REV-TC-COURS-C1-PREREQUIS-LANGAGE` [P1/pedagogical]: Placer LANGAGE avant ce chapitre ou ajouter un diagnostic, un rappel et une remédiation explicites avant cette activité.
 - `1NSI-REV-TC-COURS-C1-PUPLETS-NOMMES` [P1/scientific]: Ajouter une section, un exemple exécutable et une preuve de maîtrise sur les p-uplets nommés, avec ancrage officiel.
@@ -224,7 +222,6 @@ Human confirmation required: true
 - `1NSI-REV-TC-COURS-C5-PREREQUIS-LANGAGE` [P1/pedagogical]: Placer LANGAGE avant ce chapitre ou ajouter un diagnostic, un rappel et une remédiation explicites avant cette activité.
 - `1NSI-REV-TC-COURS-C5-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
 - `1NSI-REV-TC-COURS-C5-IDENTITE-ADRESSE` [P0/scientific]: Définir is par l'identité d'objet et retirer la parenthèse sur l'adresse mémoire.
-- `1NSI-REV-TC-COURS-C5-COPIE-PROFONDE-INCOMPLETE` [P0/scientific]: Remplacer « copie profonde » par « copie des deux premiers niveaux » avec précondition de cellules non mutables, ou effectuer une copie récursive réelle et ajouter un test avec une cellule mutable.
 - `1NSI-REV-TC-EVAL-A-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
 - `1NSI-REV-TC-EVAL-B-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
 - `1NSI-REV-TC-EX-001-C5-NON-EXIGIBLE` [P0/scientific]: Étiqueter explicitement ce contenu comme enrichissement non exigible, le sortir des évaluations obligatoires et conserver une source de programme vérifiable.
@@ -276,9 +273,9 @@ Human confirmation required: true
 - `1NSI-REV-WEB-HTML-CSS-CO001` [P0/scientific]: Corriger la réponse en distinguant HTML, CSS et JavaScript tout en conservant la soumission native du formulaire.
 - `1NSI-REV-WEB-JS-CO002` [P1/pedagogical]: Donner aussi la version JavaScript exécutée dans la page et relier chaque étape au modèle.
 - `1NSI-REV-WEB-COOKIE-CART-CO003` [P0/scientific]: Corriger avec un cookie de session opaque ou un état signé dont l’intégrité est vérifiée côté serveur.
+- `1NSI-REV-WEB-POST-LOGS-CO004` [P0/scientific]: Limiter l’affirmation à l’URL et expliquer que la confidentialité exige HTTPS, minimisation et politique de journalisation.
 - `1NSI-REV-WEB-HTML-CSS-COURSE` [P0/scientific]: Réserver structure et sémantique à HTML, présentation à CSS et réactions aux événements à JavaScript.
 - `1NSI-REV-WEB-JS-COURSE` [P1/pedagogical]: Faire modifier un gestionnaire JavaScript minimal dans un document HTML exécutable.
-- `1NSI-REV-WEB-SERVER-VISIBILITY-COURSE` [P0/scientific]: Préciser que le code serveur s’exécute côté serveur et n’est normalement pas envoyé dans la réponse HTTP destinée au navigateur.
 - `1NSI-REV-WEB-COOKIE-SCOPE` [P1/pedagogical]: Qualifier la règle comme simplification et introduire au minimum domaine, chemin et attribut Secure.
 - `1NSI-REV-WEB-POST-TLS-COURSE` [P0/scientific]: Formuler la règle comme POST sur HTTPS pour les secrets et rappeler que POST ne chiffre rien.
 - `1NSI-REV-WEB-METHOD-SEMANTICS` [P1/pedagogical]: Introduire GET pour une opération sûre de consultation et POST pour une action modifiant l’état, en plus des critères de confidentialité.

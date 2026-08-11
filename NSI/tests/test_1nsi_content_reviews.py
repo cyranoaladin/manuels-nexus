@@ -118,9 +118,32 @@ LANGUAGE_TRACE_PROTOCOL_DIGEST = (
     "sha256:9fb019e749096a244a0f5565ef31e01b69e4f81f38af3a4f7449abbfd3058555"
 )
 PRE_LANGUAGE_TRACE_POLICY_COMMIT = "21f3faeadd80016476f7a65cf66620046f940890"
-POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
-RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
+PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
+POLICY_COMMIT = "563680078cb336766c2f892a8fc72539eea90fbe"
+RECEIPT_REATTESTATION_COMMIT = "f7fd13dbbecedf4711473f2e3e7026f03c4c7853"
+RECEIPTS_COMMIT = "e32d4cf6de9bac9b722eb1b4f6ec94968c1d2e8d"
 CURRENT_RECEIPT_SEALS = {
+    "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": (
+        "sha256:942e3367a893a7a2b020c08bd90d98f45c57642921fd68fb8c22fe4fedeb3cbc"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": (
+        "sha256:caac7143d36d16f65fd96f222786d6c333e0aa80a6c56c3fb6b62543758d3eb7"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": (
+        "sha256:fc87e530141d2c91b76f09820a580aa076bc7ab4843e428fc385c141124a8a69"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": (
+        "sha256:b0e00f119b531aa56b41d967396fccdb7309146f26162a04189b1f4da0e6daff"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": (
+        "sha256:8b693bf117db367bdc980c78d70cf3d6c9c725b59f592cd0216960cc27b93a4c"
+    ),
+    "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": (
+        "sha256:3e507d48a99cd95cc83145cdbb3c4d332e47fd81b245286b50d8e7e3f6d70632"
+    ),
+}
+PRE_TEN_P0_RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
+PRE_TEN_P0_RECEIPT_SEALS = {
     "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": (
         "sha256:bed9bc079bc621ec3ab67da234d274f540963090a294efa1290782d326bba872"
     ),
@@ -140,8 +163,6 @@ CURRENT_RECEIPT_SEALS = {
         "sha256:7de97aac1c10c6bcd17bd5b1117148abddad957c9155e6ab5e23fbd6a97f91e4"
     ),
 }
-PRE_TEN_P0_RECEIPTS_COMMIT = RECEIPTS_COMMIT
-PRE_TEN_P0_RECEIPT_SEALS = dict(CURRENT_RECEIPT_SEALS)
 GOVERNANCE_REVIEW_CONFIG = {
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": {
         "reviewer_id": "019feeea-7360-7ec1-b9d6-7a6bd1ae85e9",
@@ -859,9 +880,11 @@ def test_build_manifest_governance_uses_current_clean_base(
 
 def test_pre_ten_p0_receipts_remain_historically_sealed(review_module) -> None:
     historical_policy = yaml.safe_load(
-        _git_bytes(ROOT, "show", f"{POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml").decode(
-            "utf-8"
-        )
+        _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_TEN_P0_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+        ).decode("utf-8")
     )
     assert historical_policy["scope_guard"]["implementation_base_sha"] == (
         PRE_TEN_P0_BASE_SHA
@@ -869,7 +892,7 @@ def test_pre_ten_p0_receipts_remain_historically_sealed(review_module) -> None:
     assert historical_policy["protocol_digest"] == PRE_TEN_P0_PROTOCOL_DIGEST
     assert _git(ROOT, "rev-list", "--parents", "-n", "1", PRE_TEN_P0_RECEIPTS_COMMIT).split() == [
         PRE_TEN_P0_RECEIPTS_COMMIT,
-        POLICY_COMMIT,
+        PRE_TEN_P0_POLICY_COMMIT,
     ]
     receipt_schema = review_module._receipt_schema(ROOT)
 
@@ -1158,7 +1181,7 @@ def test_policy_migration_invalidates_only_review_envelopes(
             key=lambda error: tuple(str(part) for part in error.path),
         )
         assert not schema_errors, (relative_path, schema_errors)
-        assert receipt["protocol_digest"] == PRE_BUILD_MANIFEST_PROTOCOL_DIGEST
+        assert receipt["protocol_digest"] == PRE_TEN_P0_PROTOCOL_DIGEST
         assert receipt["protocol_digest"] != policy["protocol_digest"]
         assert "TNSI" not in json.dumps(receipt, ensure_ascii=False)
 
@@ -1173,7 +1196,7 @@ def test_policy_migration_invalidates_only_review_envelopes(
             historical_source = _git_bytes(
                 ROOT,
                 "show",
-                f"{POLICY_COMMIT}^:{source['path']}",
+                f"{PRE_TEN_P0_RECEIPTS_COMMIT}:{source['path']}",
             )
             assert entry["source_sha256"] == (
                 "sha256:" + hashlib.sha256(historical_source).hexdigest()
@@ -1198,12 +1221,14 @@ def test_policy_migration_invalidates_only_review_envelopes(
                 assert dimension["anomaly_ids"] == expected_ids
                 assert (dimension["verdict"] == "issue") == bool(expected_ids)
                 for fact in dimension["facts"]:
-                    _assert_historical_fact(fact, allowed_paths, f"{POLICY_COMMIT}^")
+                    _assert_historical_fact(
+                        fact, allowed_paths, PRE_TEN_P0_RECEIPTS_COMMIT
+                    )
             for anomaly in anomalies:
                 _assert_historical_fact(
                     anomaly["fact"],
                     allowed_paths,
-                    f"{POLICY_COMMIT}^",
+                    PRE_TEN_P0_RECEIPTS_COMMIT,
                 )
 
 
@@ -1318,7 +1343,10 @@ def test_sealed_current_governance_receipts_cover_all_349_reviews(
     assert set(CURRENT_RECEIPT_SEALS) == REVIEW_RUNS
     assert _git(
         ROOT, "rev-list", "--parents", "-n", "1", RECEIPTS_COMMIT
-    ).split() == [RECEIPTS_COMMIT, POLICY_COMMIT]
+    ).split() == [RECEIPTS_COMMIT, RECEIPT_REATTESTATION_COMMIT]
+    assert _git(
+        ROOT, "rev-list", "--parents", "-n", "1", RECEIPT_REATTESTATION_COMMIT
+    ).split() == [RECEIPT_REATTESTATION_COMMIT, POLICY_COMMIT]
 
     covered_ids = []
     for relative_path, expected_digest in sorted(CURRENT_RECEIPT_SEALS.items()):
@@ -3711,17 +3739,17 @@ def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
     register_anomalies = [
         anomaly for entry in document["entries"] for anomaly in entry["anomalies"]
     ]
-    assert len(register_anomalies) == 270
+    assert len(register_anomalies) == 267
     assert Counter(anomaly["severity"] for anomaly in register_anomalies) == Counter(
-        {"P0": 151, "P1": 116, "P2": 3}
+        {"P0": 144, "P1": 118, "P2": 5}
     )
 
     assert len(findings) == len(document["entries"]) == 349
     assert "Entries: 349" in summary_text
-    assert "- Total: 270" in summary_text
-    assert "- P0: 151" in summary_text
-    assert "- P1: 116" in summary_text
-    assert "- P2: 3" in summary_text
+    assert "- Total: 267" in summary_text
+    assert "- P0: 144" in summary_text
+    assert "- P1: 118" in summary_text
+    assert "- P2: 5" in summary_text
     assert review_module.release_gate_allows(document, policy) is False
 
 
