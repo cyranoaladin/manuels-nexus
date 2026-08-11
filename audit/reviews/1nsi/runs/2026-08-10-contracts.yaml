@@ -1,11 +1,11 @@
 artifact_type: 1nsi_review_run
 schema_version: 1
 manual: 1NSI
-review_run_id: 1nsi-contracts-2026-08-11-six-p0-019ff021-v1
-reviewer_id: 019ff021-bfee-7950-b26d-34689f197ee3
+review_run_id: 1nsi-contracts-2026-08-11-actor-provenance-019ff06c-v2
+reviewer_id: 019ff06c-1355-7cb3-84fd-fa8b6398357a
 reviewer_model: gpt-5.6-sol
-protocol_digest: sha256:f1dacc0230ee6b2fe898c6f7b728af7ad72b3f44b00f653cacadb05245080b57
-reviewed_at: '2026-08-11T10:30:45+01:00'
+protocol_digest: sha256:35179b985a29b1e0f80a73be597c00e2a53fa1d42b5a51a8b88ca60d2f2e5fa7
+reviewed_at: '2026-08-11T12:15:00+01:00'
 assignment:
   scope: contract
   chapters:
@@ -38,43 +38,43 @@ source_manifest:
   - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
     path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
     source_sha256: sha256:b66809a4f8fd0dc319bfc991c37e607a2578c643fbf8702f3520ca87ea1ac5ec
-    dependency_digest: sha256:9c39840d0f6719a38acaa736eacfe213c5ba4374f96f6839b5dc75e98856bfc7
+    dependency_digest: sha256:612d584c32322701ade632a68eaeb1abf414d7a13543eda614b045de3e266c57
   - id: contract:1NSI-ALGO-PARCOURS-TRIS
     path: NSI/chapitres/1NSI-ALGO-PARCOURS-TRIS/contrat.yaml
     source_sha256: sha256:78ecdb66f7f1b93ef821c2b0b61c657834dfbaefa73676d781b6fa7ada0374e6
-    dependency_digest: sha256:7df98883808e2f15c794a89505fcb7bed7d8105a9e07fbbbb4ac897106140fc1
+    dependency_digest: sha256:a2f1927d9a91aa7613f9cb72b24301513b8b54bf40e38decf3906fff4fc7f3fe
   - id: contract:1NSI-ARCHITECTURE-OS
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/contrat.yaml
     source_sha256: sha256:33dd60431b4afa16bb8710bed83c211a9ec5aa17135f5c164906acd62ec02f3e
-    dependency_digest: sha256:0e005c260c9553ce1d5196472a465b0f700c8d56b7e8573b09ed4d0ef8d19263
+    dependency_digest: sha256:df2bd46da603eed3acd812e34c4d0e6c98f79e93b36976bb56c64735bb9247d1
   - id: contract:1NSI-LANGAGE
     path: NSI/chapitres/1NSI-LANGAGE/contrat.yaml
     source_sha256: sha256:3c832b5d25fa9bd5e840226a065dbe288a71a3ec730f805bb904b30ab45b386a
-    dependency_digest: sha256:b3f4035e36355de191c45cb3518bd6d22213ad665b4995cfbb4522e31e8e5b27
+    dependency_digest: sha256:5d70a9a3d5a1a618a75478fe89b0f17134f5a252b7cda6b145c8b91c65e1751d
   - id: contract:1NSI-PROJET-METHODES
     path: NSI/chapitres/1NSI-PROJET-METHODES/contrat.yaml
     source_sha256: sha256:373e5c1d32f079974d5d67109dab802a942fcd76f05f55a43fe2ce108143fe47
-    dependency_digest: sha256:e044f6ac3393285f8c86543d3d365e52f180ea2f202c39e0d4f24f17151f53df
+    dependency_digest: sha256:3a85d659ac3d93dfa05a5130a0f6fbe668a2afdc50153932748825fbe0c6035d
   - id: contract:1NSI-RESEAUX
     path: NSI/chapitres/1NSI-RESEAUX/contrat.yaml
     source_sha256: sha256:1e92f3599fe8ca3a2bb0830338b3e0499323b7e0b71fe7ef6955cdeb0111bea2
-    dependency_digest: sha256:c91c8dc5adedd8b89c45fbc431267f3f44ae21bccd5ae0665f1f73d5f190e90e
+    dependency_digest: sha256:2d6c94269e46d2d9ae3aa94d7320d2d8906673a2f4c8fbfb8344d59a5ef3864e
   - id: contract:1NSI-TABLES
     path: NSI/chapitres/1NSI-TABLES/contrat.yaml
     source_sha256: sha256:31969806064fdc4e682600af4608108df20a6fb5b2c938386867afe1432cd0f7
-    dependency_digest: sha256:f3f4fc78b8e2ec167de7652d2e36ec834ae7b58d9c7e0fbb559823078156ea8e
+    dependency_digest: sha256:5707cc7b8d91b14a9fc82fc9106259632c28fc667cbee558fc46fbb40e4f6dbb
   - id: contract:1NSI-TYPES-BASE
     path: NSI/chapitres/1NSI-TYPES-BASE/contrat.yaml
     source_sha256: sha256:6d757b21ba4ceab3ed8628940866cee252a486c1174b06a61852cc377c364663
-    dependency_digest: sha256:41c8c257b5b81e242ff0713a80e90a2a30eb0ae203a8821a281c473e39ddecfa
+    dependency_digest: sha256:9e3104381bfac7ac0f2e10b86b1ba96f2bb49f0a7bc079bbe60af5791455377f
   - id: contract:1NSI-TYPES-CONSTRUITS
     path: NSI/chapitres/1NSI-TYPES-CONSTRUITS/contrat.yaml
     source_sha256: sha256:efff9b440e22ec4199e158b4a02cd3a6ad1d46e755a81eb4b3a4cf2b64c2aa46
-    dependency_digest: sha256:d9eef37f059690d485e5ee25beb83cabb5ce7e7993aa64747fc9c0dc9c5a0b5b
+    dependency_digest: sha256:2e027f41b812939957c8ae5559a37c306014fc864ad43b9697e71014b8845f45
   - id: contract:1NSI-WEB-IHM
     path: NSI/chapitres/1NSI-WEB-IHM/contrat.yaml
     source_sha256: sha256:b4f455779b23b426b7fd438bee8efd185a3989b69012f489d34c4bd91ab0c56d
-    dependency_digest: sha256:60d8b4739de7cb895aa2611997e4661524c2fef16f887af3f7c498a0c91bf12d
+    dependency_digest: sha256:0a1ccbdefcfea9048bdf2c9cf93b70db120af27f54830f73bae36ede06179627
 reviews:
 - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
   chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN

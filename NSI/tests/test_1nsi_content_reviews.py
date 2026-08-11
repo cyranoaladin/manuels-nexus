@@ -201,57 +201,63 @@ PRE_TEN_P0_RECEIPT_SEALS = {
 }
 GOVERNANCE_REVIEW_CONFIG = {
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": {
-        "reviewer_id": "019ff021-bfee-7950-b26d-34689f197ee3",
-        "review_run_id": "1nsi-contracts-2026-08-11-six-p0-019ff021-v1",
-        "previous_reviewed_at": "2026-08-10T12:02:01+01:00",
-        "reviewed_at": "2026-08-11T10:30:45+01:00",
+        "reviewer_id": "019ff06c-1355-7cb3-84fd-fa8b6398357a",
+        "review_run_id": "1nsi-contracts-2026-08-11-actor-provenance-019ff06c-v2",
+        "previous_reviewed_at": "2026-08-11T10:30:45+01:00",
+        "reviewed_at": "2026-08-11T12:15:00+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": {
-        "reviewer_id": "019ff021-c059-7fe2-a84d-ddc9fdb3e495",
+        "reviewer_id": "019ff06c-13e1-79b3-837c-fa66c123609f",
         "review_run_id": (
-            "1nsi-objects-algorithms-2026-08-11-six-p0."
-            "9f59a4c7-455a-49b8-a1f7-a6bb5af90347"
+            "1nsi-objects-algorithms-2026-08-11-counter-review."
+            "62d88c4a-8e3b-4f2c-9c45-e58336c1396b-v2"
         ),
-        "previous_reviewed_at": "2026-08-10T16:13:20+01:00",
-        "reviewed_at": "2026-08-11T10:31:31+01:00",
+        "previous_reviewed_at": "2026-08-11T10:31:31+01:00",
+        "reviewed_at": "2026-08-11T12:16:33+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": {
-        "reviewer_id": "019ff021-c0a3-71c2-a2b3-b5cfacd770cc",
+        "reviewer_id": "019ff06c-14b7-70c0-8106-cb6a133181d0",
         "review_run_id": (
-            "1nsi-objects-systems-web-2026-08-11-six-p0-"
-            "c64cae93-bc64-4484-9031-4e4981a891cc-v1"
+            "1nsi-objects-systems-web-2026-08-11-counter-review-"
+            "9a634c32-df8b-4f1f-857a-7a4c8a50a2c9-v2"
         ),
-        "previous_reviewed_at": "2026-08-10T11:43:03.124509+00:00",
-        "reviewed_at": "2026-08-11T10:32:28+01:00",
+        "previous_reviewed_at": "2026-08-11T10:32:28+01:00",
+        "reviewed_at": "2026-08-11T12:13:04+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": {
-        "reviewer_id": "019ff022-24e3-71d3-a75b-c73958d31b31",
+        "reviewer_id": "019ff06c-1446-7f42-8d98-326189198929",
         "review_run_id": (
-            "1nsi-objects-language-project-2026-08-11-six-p0-bd346cbf-v1"
+            "1nsi-objects-language-project-2026-08-11-actor-provenance-"
+            "019ff06c-1446-7f42-8d98-326189198929-v2"
         ),
-        "previous_reviewed_at": "2026-08-10T12:45:26+01:00",
-        "reviewed_at": "2026-08-11T10:32:42+01:00",
+        "previous_reviewed_at": "2026-08-11T10:32:42+01:00",
+        "reviewed_at": "2026-08-11T12:13:05+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": {
-        "reviewer_id": "019ff022-2527-7970-8dae-59748b06ba3a",
+        "reviewer_id": "019ff06c-1816-7bc2-8903-91b3e638556e",
         "review_run_id": (
-            "1nsi-objects-data-basics-tables-2026-08-11-six-p0-"
-            "35a10009-3947-43f6-af4c-95c0b9339d34"
+            "1nsi-data-basics-tables-20260811T111530Z-"
+            "635c7730-a034-4e57-992e-934a3a6e9dbf-v2"
         ),
-        "previous_reviewed_at": "2026-08-10T12:42:55+01:00",
-        "reviewed_at": "2026-08-11T10:30:35+01:00",
+        "previous_reviewed_at": "2026-08-11T10:30:35+01:00",
+        "reviewed_at": "2026-08-11T12:15:30+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": {
-        "reviewer_id": "019ff022-2583-71e3-ad83-0199360bb747",
+        "reviewer_id": "019ff06c-17cb-7270-8842-5d873cb89437",
         "review_run_id": (
-            "1nsi-objects-types-construits-2026-08-11-six-p0."
-            "81a8936e-0386-4cad-bd5b-ce77b2f2ae41"
+            "1nsi-objects-types-construits-2026-08-11-final-019ff06c-v2"
         ),
-        "previous_reviewed_at": "2026-08-10T12:53:30+01:00",
-        "reviewed_at": "2026-08-11T10:32:30+01:00",
+        "previous_reviewed_at": "2026-08-11T10:32:30+01:00",
+        "reviewed_at": "2026-08-11T12:12:28+01:00",
     },
 }
 PRE_GOVERNANCE_REVIEWER_IDS = {
+    "019ff021-bfee-7950-b26d-34689f197ee3",
+    "019ff021-c059-7fe2-a84d-ddc9fdb3e495",
+    "019ff021-c0a3-71c2-a2b3-b5cfacd770cc",
+    "019ff022-24e3-71d3-a75b-c73958d31b31",
+    "019ff022-2527-7970-8dae-59748b06ba3a",
+    "019ff022-2583-71e3-ad83-0199360bb747",
     "019feeea-7360-7ec1-b9d6-7a6bd1ae85e9",
     "019feeea-73d9-7c90-9a08-27018cd7c72d",
     "019feeea-741e-7b53-9c40-bda2f515e04e",
@@ -272,6 +278,12 @@ PRE_GOVERNANCE_REVIEWER_IDS = {
     C3_REVIEWER_ID,
 }
 PRE_GOVERNANCE_REVIEW_RUN_IDS = {
+    "1nsi-contracts-2026-08-11-six-p0-019ff021-v1",
+    "1nsi-objects-algorithms-2026-08-11-six-p0.9f59a4c7-455a-49b8-a1f7-a6bb5af90347",
+    "1nsi-objects-data-basics-tables-2026-08-11-six-p0-35a10009-3947-43f6-af4c-95c0b9339d34",
+    "1nsi-objects-language-project-2026-08-11-six-p0-bd346cbf-v1",
+    "1nsi-objects-systems-web-2026-08-11-six-p0-c64cae93-bc64-4484-9031-4e4981a891cc-v1",
+    "1nsi-objects-types-construits-2026-08-11-six-p0.81a8936e-0386-4cad-bd5b-ce77b2f2ae41",
     "1nsi-contracts-2026-08-11-language-trace-019feeea-v1",
     "1nsi-objects-algorithms-2026-08-11-language-trace-019feeea-v1",
     "1nsi-objects-data-basics-tables-2026-08-11-language-trace-019feeea-v1",
