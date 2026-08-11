@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-02A",
+      "official_label": "Ecrire la définition d'une classe.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T02/T02_cours_classes_objets.md",
+        "anchor": "#définitions-et-formalisation",
+        "quote": "Définition D1 : classe est utilisé dans Programmation orientée objet avec une donnée, une règle et un contrôle.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T02/T02_tp_classes_objets.md",
+        "anchor": "#consigne-technique-détaillée",
+        "quote": "Problème à programmer : Coder une classe Compte avec validations, méthodes publiques et tests de cas limites.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T02/T02_corrige_classes_objets.md",
+        "anchor": "#exercices-numérotés",
+        "quote": "Exercice 1 : résoudre constructeur avec `Compte(\"Ada\", 20)` ; attendu : propriétaire Ada, solde 20.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours définit la notion de classe avec ses attributs et méthodes, le TP fait pratiquer l'écriture d'une classe Compte complète, et le corrigé fournit les réponses attendues pour chaque exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

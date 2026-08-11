@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-05D",
+      "official_label": "Passer d'une représentation à une autre.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_cours_graphes_modelisation_listes_matrices.md",
+        "anchor": "#méthodes",
+        "quote": "choisir liste pour graphe peu dense.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_TD_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exercice-4",
+        "quote": "Consigne : choisir liste pour graphe peu dense ; traiter aussi `sommet isolé E` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_corrige_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exercice-4",
+        "quote": "Réponse attendue : sommet E isolé -> liste vide.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours présente la méthode de choix de représentation (liste vs matrice), le TD fait pratiquer le passage d'une représentation à l'autre (exercice 4 sur T-STRUCT-05D), et le corrigé fournit la réponse attendue. La capacité T-STRUCT-05D est explicitement couverte dans les trois types de preuves.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

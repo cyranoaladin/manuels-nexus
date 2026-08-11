@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-02B",
+      "official_label": "Accéder aux attributs et méthodes d'une classe.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T02/T02_cours_classes_objets.md",
+        "anchor": "#définitions-et-formalisation",
+        "quote": "Définition D3 : méthode est utilisé dans Programmation orientée objet avec une donnée, une règle et un contrôle.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T02/T02_td_classes_objets.md",
+        "anchor": "#exemple-corrigé-2---méthode-dépôt",
+        "quote": "Donnée étudiée : dépôt de 15.\n- Méthode : vérifier le montant puis modifier le solde.\n- Résultat obtenu : solde augmenté de 15.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T02/T02_corrige_classes_objets.md",
+        "anchor": "#méthode-générale-de-correction",
+        "quote": "Point 2 : pour méthode dépôt, exiger la donnée dépôt de 15, la méthode « vérifier le montant puis modifier le solde » et le contrôle « montant nul ou négatif ».",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours définit attributs et méthodes dans le contexte POO, le TD fait pratiquer l'accès aux méthodes (dépôt, retrait) et le corrigé fournit les réponses attendues. La capacité T-STRUCT-02B (accéder aux attributs et méthodes) est bien couverte par ces supports.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+sequence: P03
+theme: Données textuelles et approximation
+notions_exigibles:
+- Unicode
+- UTF-8
+- octet
+- flottant
+capacites_officielles:
+- P-DATA-BASE-05A
+exemples_obligatoires:
+- 'ASCII simple : `A` -> `41` en hexadécimal'
+- 'accent UTF-8 : `é` -> `c3 a9`'
+- 'chaîne mixte : `Aé` -> 2 caractères et 3 octets'
+- 'flottant : `0.1 + 0.2` -> valeur proche de `0.3`'
+cas_limites:
+- caractère dans l’ASCII
+- longueur en octets différente de la longueur en caractères
+- chaîne vide
+- arrondi binaire
+erreurs_frequentes:
+- EF1 - Compter les caractères au lieu des octets en UTF-8.
+- EF2 - Croire que tout caractère occupe un octet.
+- EF3 - Comparer deux flottants avec égalité stricte après calcul.
+- EF4 - Confondre point de code et représentation binaire.
+types_exercices_attendus:
+- ASCII simple avec `A`
+- accent UTF-8 à partir de `é`
+- chaîne mixte avec `Aé`
+- flottant pour `0.1 + 0.2`
+- un cas limite lié à caractère dans l’ASCII
+- deux méthodes possibles pour accent UTF-8
+- un transfert qui utilise chaîne mixte avec une donnée nouvelle
+- un énoncé volontairement erroné sur flottant
+tp_attendu: Analyser une chaîne en code points, octets UTF-8 et comparaison numérique
+  tolérante.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- Unicode
+- A
+- é
+- caractère dans l’ASCII
+- EF1
+- Analyser une chaîne en code points, octets UTF-8 et comparaison numérique tolérante.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

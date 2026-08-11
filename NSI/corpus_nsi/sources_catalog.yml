@@ -1,0 +1,105 @@
+sources:
+  - id: programme_nsi_premiere_2019
+    title: "Programme NSI première générale"
+    url: "https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm"
+    local_path: "00_programmes_officiels/programme_nsi_2019.yaml"
+    source_type: officiel
+    license: "publication institutionnelle"
+    copyright_status: "reference_citable"
+    rgpd_status: "aucune_donnee_personnelle"
+    level: premiere
+    theme: programme
+    capacity_ids: []
+    reuse_policy: "référence officielle, pas preuve de couverture interne"
+    rag_collection: nsi_official
+    decision: classer_reference
+    reviewer: "QA corpus"
+    date_review: "2026-06-29"
+    risk_level: low
+    allowed_actions:
+      - index
+      - summarize
+
+  - id: programme_nsi_terminale_2019
+    title: "Programme NSI terminale générale"
+    url: "https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm"
+    local_path: "00_programmes_officiels/programme_nsi_2019.yaml"
+    source_type: officiel
+    license: "publication institutionnelle"
+    copyright_status: "reference_citable"
+    rgpd_status: "aucune_donnee_personnelle"
+    level: terminale
+    theme: programme
+    capacity_ids: []
+    reuse_policy: "référence officielle, pas preuve de couverture interne"
+    rag_collection: nsi_official
+    decision: classer_reference
+    reviewer: "QA corpus"
+    date_review: "2026-06-29"
+    risk_level: low
+    allowed_actions:
+      - index
+      - summarize
+
+  - id: documents_drive_local_mirror
+    title: "Miroir local Documents_DRIVE"
+    url: ""
+    local_path: "../Documents_DRIVE"
+    source_type: drive_interne
+    license: "droits_a_verifier"
+    copyright_status: "a_auditer"
+    rgpd_status: "a_auditer_avant_ingestion"
+    level: mixte
+    theme: inspiration
+    capacity_ids: []
+    reuse_policy: "tri local, nettoyage RGPD et revue humaine obligatoires ; jamais preuve interne"
+    rag_collection: rag_education
+    decision: a_classifier_avant_ingestion
+    reviewer: "QA corpus"
+    date_review: "2026-06-29"
+    risk_level: high
+    allowed_actions:
+      - summarize
+      - inspire
+
+  - id: annales_publiques_nsi
+    title: "Annales publiques NSI"
+    url: "https://eduscol.education.fr/"
+    local_path: ""
+    source_type: annale_publique
+    license: "a_verifier_document_par_document"
+    copyright_status: "a_qualifier"
+    rgpd_status: "aucune_donnee_eleve_attendue"
+    level: terminale
+    theme: annales
+    capacity_ids: []
+    reuse_policy: "index externe possible, jamais preuve de couverture interne"
+    rag_collection: nsi_annales
+    decision: a_classifier_avant_ingestion
+    reviewer: "QA corpus"
+    date_review: "2026-06-29"
+    risk_level: medium
+    allowed_actions:
+      - index
+      - summarize
+      - inspire
+
+  - id: donnees_eleves_nominatives
+    title: "Données élèves et fichiers nominatifs"
+    url: ""
+    local_path: "NotesEleves.csv"
+    source_type: rejet
+    license: "interdit"
+    copyright_status: "non_ingerable"
+    rgpd_status: "donnees_personnelles"
+    level: interdit
+    theme: confidentialite
+    capacity_ids: []
+    reuse_policy: "rejet absolu"
+    rag_collection: ""
+    decision: rejet
+    reviewer: "QA corpus"
+    date_review: "2026-06-29"
+    risk_level: critical
+    allowed_actions:
+      - reject

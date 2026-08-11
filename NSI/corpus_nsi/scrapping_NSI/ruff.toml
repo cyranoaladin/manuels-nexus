@@ -1,0 +1,13 @@
+target-version = "py312"
+line-length = 100
+include = [
+    "scraper_nsi_v2.py",
+    "scraper_eduscol.py",
+    "safe_archive.py",
+    "netpolicy.py",
+    "provenance.py",
+    "test_*.py",
+]
+
+[lint.per-file-ignores]
+"scraper_eduscol.py" = ["E402"]

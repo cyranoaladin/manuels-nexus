@@ -1,0 +1,19 @@
+# Known alignment failures — capacités déclarées en frontmatter sans trace
+# exercice/évaluation mentionnant l'ID littéralement. Chaque entrée est un
+# WARNING (pas un FAIL) tant qu'elle figure ici.
+# Ce fichier DOIT redevenir vide quand toutes les entrées sont résolues.
+#
+# === POLITIQUE DU REGISTRE (réf. PR A5) ===
+# Ce fichier est un ledger de remédiation TEMPORAIRE. L'état vide est la norme.
+# Toute entrée DOIT comporter :
+#   - id : identifiant de la capacité officielle
+#   - prefix : séquence concernée
+#   - file : fichier déclarant la capacité
+#   - reason : diagnostic factuel (pourquoi le gate échoue)
+#   - resolution : référence à la PR/étape ouverte qui résoudra l'écart
+# Tout cas de capacité non-travaillée/non-évaluée HORS de ce registre = échec
+# dur (gate KO). Les tests adverses du harnais garantissent le fail-closed
+# hors-liste. La ligne PASS du gate affiche le nombre d'entrées actives
+# (via le compteur de warnings).
+
+known_failures: []

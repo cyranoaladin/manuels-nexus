@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-13T00:41:00Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-03B",
+      "official_label": "Construire des requêtes d'interrogation avec SELECT et FROM.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md",
+        "anchor": "#1-lire-une-requête--une-suite-de-clauses-ayant-chacune-un-rôle",
+        "quote": "`SELECT` indique les colonnes à afficher : c'est la **projection** ;\n- `FROM` indique la ou les tables utilisées ;",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md",
+        "anchor": "#exercice-3--écrire-une-projection-filtrée-standard-8-min",
+        "quote": "Le professeur veut les identifiants des élèves de T1, classés du plus grand au plus petit identifiant.\n\n1. Écrire la requête complète.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md",
+        "anchor": "#exercice-3--projection-filtrée",
+        "quote": "```sql\nSELECT id_eleve\nFROM Eleve\nWHERE classe = 'T1'\nORDER BY id_eleve DESC;\n```",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne le rôle de SELECT et FROM comme projection et source. Le TD fait pratiquer l'écriture d'une requête avec SELECT et FROM. Le corrigé fournit la requête complète attendue avec SELECT et FROM.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

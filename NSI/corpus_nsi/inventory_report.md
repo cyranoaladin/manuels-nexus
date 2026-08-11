@@ -1,0 +1,4724 @@
+# Inventaire ressources NSI
+
+- Total ressources : 1174
+- Ressources pédagogiques : 53
+- Ressources techniques : 1121
+- Ressources copiées dans banques : 0
+
+## Répartition par source
+- adapted_from_drive: 7
+- generated: 1166
+- import_partiel: 1
+
+## Répartition par niveau
+- interne: 605
+- premiere: 266
+- terminale: 303
+
+## Répartition par type
+- banque: 14
+- document: 744
+- python: 84
+- script: 210
+- sequence: 45
+- test: 77
+
+## Répartition par statut
+- needs_review: 1174
+
+## Répartition audience
+- corrige: 82
+- eleve: 143
+- mixte: 946
+- professeur: 3
+
+## Catégories (distinguer exigences)
+- Sources issues du Drive ou adaptées depuis Drive :
+  - 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_tuples.md
+  - 03_progressions/fiches_cours/premiere/P05/P05_fiche_cours_tables_csv_import_coherence.md
+  - 03_progressions/fiches_cours/terminale/T01/T01_fiche_cours_interface_implementation_tad.md
+  - 03_progressions/fiches_cours/terminale/T18/T18_fiche_cours_boyer_moore.md
+  - 03_progressions/supports/premiere/P05/P05_td_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_tp_tables_csv.md
+  - 03_progressions/supports/premiere/P05/data/pays_monde_extrait.csv
+  - premiere/sequences/s01_representation_donnees/cours_eleve.md
+- Sources générées :
+  - .env.rag.example
+  - .github/workflows/ci.yml
+  - .pre-commit-config.yaml
+  - 00_programmes_officiels/README.md
+  - 00_programmes_officiels/programme_nsi_2019.yaml
+  - 00_programmes_officiels/programme_nsi_premiere.txt
+  - 00_programmes_officiels/programme_nsi_terminale.txt
+  - 01_charte_graphique_et_pedagogique/charte_documentaire_sequences.md
+  - 01_charte_graphique_et_pedagogique/charte_graphique.md
+  - 01_charte_graphique_et_pedagogique/metadata_schema.md
+  - 02_modeles_documents/modele_aides.tex
+  - 02_modeles_documents/modele_corrige.tex
+  - 02_modeles_documents/modele_cours.tex
+  - 02_modeles_documents/modele_evaluation.tex
+  - 02_modeles_documents/modele_fiche_methode.tex
+  - 02_modeles_documents/modele_guide_prof.md
+  - 02_modeles_documents/modele_qcm.json
+  - 02_modeles_documents/modele_sequence.yaml
+  - 02_modeles_documents/modele_td.tex
+  - 02_modeles_documents/modele_tp.tex
+  - 02_modeles_documents/modele_trace.tex
+  - 02_modeles_documents/nsi-preamble.sty
+  - 03_progressions/fiches_cours/premiere/P00/P00_fiche_cours_methode_nsi.md
+  - 03_progressions/fiches_cours/premiere/P01/P01_fiche_cours_bits_bases_2_10_16.md
+  - 03_progressions/fiches_cours/premiere/P01/P01_fiche_cours_conversions.md
+  - 03_progressions/fiches_cours/premiere/P02/P02_fiche_cours_booleens_tables_verite.md
+  - 03_progressions/fiches_cours/premiere/P02/P02_fiche_cours_complement_a_deux.md
+  - 03_progressions/fiches_cours/premiere/P03/P03_fiche_cours_flottants_approximations.md
+  - 03_progressions/fiches_cours/premiere/P03/P03_fiche_cours_texte_unicode.md
+  - 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_dictionnaires.md
+  - 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_listes.md
+  - 03_progressions/fiches_cours/premiere/P06/P06_fiche_cours_tables_recherche_tri_fusion.md
+  - 03_progressions/fiches_cours/premiere/P07/P07_fiche_cours_fonctions_tests_specifications.md
+  - 03_progressions/fiches_cours/premiere/P08/P08_fiche_cours_html_css_dom.md
+  - 03_progressions/fiches_cours/premiere/P08/P08_fiche_cours_http_get_post_formulaires.md
+  - 03_progressions/fiches_cours/premiere/P09/P09_fiche_cours_architecture_os_droits.md
+  - 03_progressions/fiches_cours/premiere/P10/P10_fiche_cours_reseaux_protocoles_paquets.md
+  - 03_progressions/fiches_cours/premiere/P11/P11_fiche_cours_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/fiches_cours/premiere/P12/P12_fiche_cours_tris_invariants_complexite.md
+  - 03_progressions/fiches_cours/premiere/P13/P13_fiche_cours_dichotomie_glouton_knn.md
+  - 03_progressions/fiches_cours/premiere/P14/P14_fiche_cours_synthese_projet_oral.md
+  - 03_progressions/fiches_cours/terminale/T00/T00_fiche_cours_reprise_python_tests_complexite.md
+  - 03_progressions/fiches_cours/terminale/T02/T02_fiche_cours_classes_objets_attributs_methodes.md
+  - 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_dictionnaires.md
+  - 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_files.md
+  - 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_piles.md
+  - 03_progressions/fiches_cours/terminale/T04/T04_fiche_cours_recursivite_cas_base_terminaison.md
+  - 03_progressions/fiches_cours/terminale/T05/T05_fiche_cours_arbres_binaires_parcours.md
+  - 03_progressions/fiches_cours/terminale/T06/T06_fiche_cours_arbres_binaires_recherche.md
+  - 03_progressions/fiches_cours/terminale/T07/T07_fiche_cours_graphes_modelisation_listes_matrices.md
+  - 03_progressions/fiches_cours/terminale/T08/T08_fiche_cours_bfs_dfs_cycles_chemins.md
+  - 03_progressions/fiches_cours/terminale/T09/T09_fiche_cours_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/fiches_cours/terminale/T10/T10_fiche_cours_sql_insert_update_delete.md
+  - 03_progressions/fiches_cours/terminale/T10/T10_fiche_cours_sql_select_where_join.md
+  - 03_progressions/fiches_cours/terminale/T11/T11_fiche_cours_processus_ordonnancement_interblocage.md
+  - 03_progressions/fiches_cours/terminale/T12/T12_fiche_cours_routage_rip_ospf.md
+  - 03_progressions/fiches_cours/terminale/T13/T13_fiche_cours_chiffrement_https.md
+  - 03_progressions/fiches_cours/terminale/T14/T14_fiche_cours_modularite_api_paradigmes_bugs.md
+  - 03_progressions/fiches_cours/terminale/T15/T15_fiche_cours_calculabilite_arret.md
+  - 03_progressions/fiches_cours/terminale/T16/T16_fiche_cours_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/fiches_cours/terminale/T17/T17_fiche_cours_programmation_dynamique.md
+  - 03_progressions/fiches_cours/terminale/T19/T19_fiche_cours_bac_pratique_grand_oral_projet.md
+  - 03_progressions/monthly_load_premiere.md
+  - 03_progressions/monthly_load_terminale.md
+  - 03_progressions/progression_premiere.md
+  - 03_progressions/progression_terminale.md
+  - 03_progressions/seances_premiere.md
+  - 03_progressions/seances_terminale.md
+  - 03_progressions/supports/contracts/P00_contract.yml
+  - 03_progressions/supports/contracts/P01_contract.yml
+  - 03_progressions/supports/contracts/P02_contract.yml
+  - 03_progressions/supports/contracts/P03_contract.yml
+  - 03_progressions/supports/contracts/P04_contract.yml
+  - 03_progressions/supports/contracts/P05_contract.yml
+  - 03_progressions/supports/contracts/P06_contract.yml
+  - 03_progressions/supports/contracts/P07_contract.yml
+  - 03_progressions/supports/contracts/P08_contract.yml
+  - 03_progressions/supports/contracts/P09_contract.yml
+  - 03_progressions/supports/contracts/P10_contract.yml
+  - 03_progressions/supports/contracts/P11_contract.yml
+  - 03_progressions/supports/contracts/P12_contract.yml
+  - 03_progressions/supports/contracts/P13_contract.yml
+  - 03_progressions/supports/contracts/P14_contract.yml
+  - 03_progressions/supports/contracts/T00_contract.yml
+  - 03_progressions/supports/contracts/T01_contract.yml
+  - 03_progressions/supports/contracts/T02_contract.yml
+  - 03_progressions/supports/contracts/T03_contract.yml
+  - 03_progressions/supports/contracts/T04_contract.yml
+  - 03_progressions/supports/contracts/T05_contract.yml
+  - 03_progressions/supports/contracts/T06_contract.yml
+  - 03_progressions/supports/contracts/T07_contract.yml
+  - 03_progressions/supports/contracts/T08_contract.yml
+  - 03_progressions/supports/contracts/T09_contract.yml
+  - 03_progressions/supports/contracts/T10_contract.yml
+  - 03_progressions/supports/contracts/T11_contract.yml
+  - 03_progressions/supports/contracts/T12_contract.yml
+  - 03_progressions/supports/contracts/T13_contract.yml
+  - 03_progressions/supports/contracts/T14_contract.yml
+  - 03_progressions/supports/contracts/T15_contract.yml
+  - 03_progressions/supports/contracts/T16_contract.yml
+  - 03_progressions/supports/contracts/T17_contract.yml
+  - 03_progressions/supports/contracts/T18_contract.yml
+  - 03_progressions/supports/contracts/T19_contract.yml
+  - 03_progressions/supports/premiere/P00/P00_bareme_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_cours_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_evaluation_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_remediation_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_tp_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_trace_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_version_amenagee_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/code/P00_corrige_professeur_diagnostic_python.py
+  - 03_progressions/supports/premiere/P00/code/P00_starter_diagnostic_python.py
+  - 03_progressions/supports/premiere/P00/code/P00_tests_attendus_diagnostic_python.py
+  - 03_progressions/supports/premiere/P01/P01_bareme_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_corrige_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_cours_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_evaluation_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_remediation_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_td_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_tp_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_trace_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_version_amenagee_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/code/P01_corrige_professeur_conversions_bases.py
+  - 03_progressions/supports/premiere/P01/code/P01_starter_conversions_bases.py
+  - 03_progressions/supports/premiere/P01/code/P01_tests_attendus_conversions_bases.py
+  - 03_progressions/supports/premiere/P02/P02_bareme_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_bareme_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_corrige_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_corrige_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_cours_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_cours_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_evaluation_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_evaluation_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_remediation_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_td_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_td_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_tp_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_tp_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_trace_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_trace_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_version_amenagee_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/code/P02_corrige_professeur_complement_booleens.py
+  - 03_progressions/supports/premiere/P02/code/P02_starter_complement_booleens.py
+  - 03_progressions/supports/premiere/P02/code/P02_tests_attendus_complement_booleens.py
+  - 03_progressions/supports/premiere/P03/P03_bareme_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_bareme_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_corrige_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_corrige_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_cours_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_cours_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_evaluation_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_evaluation_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_remediation_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_td_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_td_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_tp_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_tp_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_trace_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_trace_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_version_amenagee_texte_reels.md
+  - 03_progressions/supports/premiere/P03/code/P03_corrige_professeur_texte_reels.py
+  - 03_progressions/supports/premiere/P03/code/P03_starter_texte_reels.py
+  - 03_progressions/supports/premiere/P03/code/P03_tests_attendus_texte_reels.py
+  - 03_progressions/supports/premiere/P04/P04_bareme_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_bareme_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_corrige_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_cours_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_evaluation_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_remediation_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_td_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_tp_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_tp_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_trace_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_trace_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md
+  - 03_progressions/supports/premiere/P04/code/P04_corrige_professeur_types_construits.py
+  - 03_progressions/supports/premiere/P04/code/P04_starter_types_construits.py
+  - 03_progressions/supports/premiere/P04/code/P04_tests_attendus_types_construits.py
+  - 03_progressions/supports/premiere/P05/P05_bareme_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_corrige_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_cours_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_evaluation_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_remediation_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_trace_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_version_amenagee_tables_csv.md
+  - 03_progressions/supports/premiere/P05/code/P05_corrige_professeur_tables_csv.py
+  - 03_progressions/supports/premiere/P05/code/P05_starter_tables_csv.py
+  - 03_progressions/supports/premiere/P05/code/P05_tests_attendus_tables_csv.py
+  - 03_progressions/supports/premiere/P06/P06_TD_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_bareme_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_corrige_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_cours_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_evaluation_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_remediation_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_tp_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_trace_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_version_amenagee_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/code/P06_corrige_professeur_tables_recherche_tri_fusion.py
+  - 03_progressions/supports/premiere/P06/code/P06_starter_tables_recherche_tri_fusion.py
+  - 03_progressions/supports/premiere/P06/code/P06_tests_attendus_tables_recherche_tri_fusion.py
+  - 03_progressions/supports/premiere/P07/P07_TD_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_TP_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_bareme_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_evaluation_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_remediation_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_tp_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_trace_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_version_amenagee_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/code/P07_corrige_professeur_fonctions_tests_specifications.py
+  - 03_progressions/supports/premiere/P07/code/P07_starter_fonctions_tests_specifications.py
+  - 03_progressions/supports/premiere/P07/code/P07_tests_attendus_fonctions_tests_specifications.py
+  - 03_progressions/supports/premiere/P08/P08_TD_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_TP_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_TP_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_bareme_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_bareme_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_bareme_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_corrige_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_corrige_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_corrige_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_evaluation_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_evaluation_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_remediation_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_trace_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_version_amenagee_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/code/P08_corrige_professeur_web_http_dom_formulaires.py
+  - 03_progressions/supports/premiere/P08/code/P08_starter_web_http_dom_formulaires.py
+  - 03_progressions/supports/premiere/P08/code/P08_tests_attendus_web_http_dom_formulaires.py
+  - 03_progressions/supports/premiere/P09/P09_TD_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_bareme_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_corrige_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_cours_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_evaluation_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_remediation_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_tp_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_trace_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_version_amenagee_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/code/P09_corrige_professeur_architecture_os_droits.py
+  - 03_progressions/supports/premiere/P09/code/P09_starter_architecture_os_droits.py
+  - 03_progressions/supports/premiere/P09/code/P09_tests_attendus_architecture_os_droits.py
+  - 03_progressions/supports/premiere/P10/P10_TD_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_bareme_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_corrige_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_cours_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_evaluation_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_remediation_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_tp_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_trace_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_version_amenagee_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/code/P10_corrige_professeur_reseaux_protocoles_paquets.py
+  - 03_progressions/supports/premiere/P10/code/P10_starter_reseaux_protocoles_paquets.py
+  - 03_progressions/supports/premiere/P10/code/P10_tests_attendus_reseaux_protocoles_paquets.py
+  - 03_progressions/supports/premiere/P11/P11_TD_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_bareme_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_corrige_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_cours_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_evaluation_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_remediation_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_tp_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_trace_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_version_amenagee_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/code/P11_corrige_professeur_parcours_recherche_extremum_moyenne.py
+  - 03_progressions/supports/premiere/P11/code/P11_starter_parcours_recherche_extremum_moyenne.py
+  - 03_progressions/supports/premiere/P11/code/P11_tests_attendus_parcours_recherche_extremum_moyenne.py
+  - 03_progressions/supports/premiere/P12/P12_TD_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_bareme_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_corrige_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_cours_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_evaluation_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_remediation_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_tp_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_trace_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_version_amenagee_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/code/P12_corrige_professeur_tris_invariants_complexite.py
+  - 03_progressions/supports/premiere/P12/code/P12_starter_tris_invariants_complexite.py
+  - 03_progressions/supports/premiere/P12/code/P12_tests_attendus_tris_invariants_complexite.py
+  - 03_progressions/supports/premiere/P13/P13_TD_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_bareme_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_corrige_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_cours_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_evaluation_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_remediation_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_tp_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_trace_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_version_amenagee_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P14/P14_TD_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_bareme_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_corrige_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_cours_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_evaluation_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_remediation_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_tp_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_trace_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_version_amenagee_synthese_projet_oral.md
+  - 03_progressions/supports/terminale/T00/T00_bareme_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_corrige_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_cours_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_evaluation_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_remediation_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_td_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_tp_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_trace_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_version_amenagee_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/code/T00_corrige_professeur_diagnostic_tests.py
+  - 03_progressions/supports/terminale/T00/code/T00_starter_diagnostic_tests.py
+  - 03_progressions/supports/terminale/T00/code/T00_tests_attendus_diagnostic_tests.py
+  - 03_progressions/supports/terminale/T01/T01_bareme_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_bareme_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_corrige_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_corrige_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_cours_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_cours_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_evaluation_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_evaluation_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_remediation_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_td_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_td_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_tp_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_tp_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_trace_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_trace_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_version_amenagee_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/code/T01_corrige_professeur_interfaces_structures.py
+  - 03_progressions/supports/terminale/T01/code/T01_starter_interfaces_structures.py
+  - 03_progressions/supports/terminale/T01/code/T01_tests_attendus_interfaces_structures.py
+  - 03_progressions/supports/terminale/T02/T02_bareme_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_corrige_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_cours_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_evaluation_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_remediation_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_td_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_tp_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_trace_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_version_amenagee_classes_objets.md
+  - 03_progressions/supports/terminale/T02/code/T02_corrige_professeur_classes_objets.py
+  - 03_progressions/supports/terminale/T02/code/T02_starter_classes_objets.py
+  - 03_progressions/supports/terminale/T02/code/T02_tests_attendus_classes_objets.py
+  - 03_progressions/supports/terminale/T03/T03_bareme_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_bareme_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_corrige_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_corrige_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_cours_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_cours_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_evaluation_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_evaluation_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_remediation_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_td_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_td_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_tp_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_tp_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_trace_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_trace_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_version_amenagee_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/code/T03_corrige_professeur_piles_files_dictionnaires.py
+  - 03_progressions/supports/terminale/T03/code/T03_starter_piles_files_dictionnaires.py
+  - 03_progressions/supports/terminale/T03/code/T03_tests_attendus_piles_files_dictionnaires.py
+  - 03_progressions/supports/terminale/T04/T04_bareme_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_corrige_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_cours_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_evaluation_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_remediation_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_td_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_tp_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_trace_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_version_amenagee_recursivite.md
+  - 03_progressions/supports/terminale/T04/code/T04_corrige_professeur_recursivite.py
+  - 03_progressions/supports/terminale/T04/code/T04_starter_recursivite.py
+  - 03_progressions/supports/terminale/T04/code/T04_tests_attendus_recursivite.py
+  - 03_progressions/supports/terminale/T05/T05_bareme_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_bareme_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_corrige_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_corrige_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_cours_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_cours_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_evaluation_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_evaluation_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_remediation_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_td_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_td_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_tp_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_tp_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_trace_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_trace_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_version_amenagee_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/code/T05_corrige_professeur_arbres_binaires.py
+  - 03_progressions/supports/terminale/T05/code/T05_starter_arbres_binaires.py
+  - 03_progressions/supports/terminale/T05/code/T05_tests_attendus_arbres_binaires.py
+  - 03_progressions/supports/terminale/T06/T06_TD_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_TP_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_bareme_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_corrige_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_cours_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_evaluation_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_remediation_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_tp_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_trace_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_version_amenagee_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/code/T06_corrige_professeur_arbres_binaires_recherche.py
+  - 03_progressions/supports/terminale/T06/code/T06_starter_arbres_binaires_recherche.py
+  - 03_progressions/supports/terminale/T06/code/T06_tests_attendus_arbres_binaires_recherche.py
+  - 03_progressions/supports/terminale/T07/T07_TD_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_TP_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_bareme_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_corrige_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_cours_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_evaluation_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_remediation_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_tp_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_trace_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_version_amenagee_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/code/T07_corrige_professeur_graphes_modelisation_listes_matrices.py
+  - 03_progressions/supports/terminale/T07/code/T07_starter_graphes_modelisation_listes_matrices.py
+  - 03_progressions/supports/terminale/T07/code/T07_tests_attendus_graphes_modelisation_listes_matrices.py
+  - 03_progressions/supports/terminale/T08/T08_TD_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_TP_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_bareme_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_corrige_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_cours_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_evaluation_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_remediation_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_tp_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_trace_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_version_amenagee_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/code/T08_corrige_professeur_bfs_dfs_cycles_chemins.py
+  - 03_progressions/supports/terminale/T08/code/T08_starter_bfs_dfs_cycles_chemins.py
+  - 03_progressions/supports/terminale/T08/code/T08_tests_attendus_bfs_dfs_cycles_chemins.py
+  - 03_progressions/supports/terminale/T09/T09_TD_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_bareme_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_corrige_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_cours_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_evaluation_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_remediation_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_tp_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_trace_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_version_amenagee_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/code/T09_corrige_professeur_bases_relationnelles_cles_contraintes.py
+  - 03_progressions/supports/terminale/T09/code/T09_starter_bases_relationnelles_cles_contraintes.py
+  - 03_progressions/supports/terminale/T09/code/T09_tests_attendus_bases_relationnelles_cles_contraintes.py
+  - 03_progressions/supports/terminale/T10/T10_TD_sql_insert_update_delete.md
+  - 03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_bareme_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_evaluation_sql_insert_update_delete.md
+  - 03_progressions/supports/terminale/T10/T10_evaluation_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_remediation_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_tp_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_trace_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_version_amenagee_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/code/T10_corrige_professeur_sql_select_where_join.py
+  - 03_progressions/supports/terminale/T10/code/T10_starter_sql_select_where_join.py
+  - 03_progressions/supports/terminale/T10/code/T10_tests_attendus_sql_select_where_join.py
+  - 03_progressions/supports/terminale/T11/T11_TD_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_bareme_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_corrige_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_cours_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_evaluation_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_remediation_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_tp_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_trace_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_version_amenagee_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T12/T12_TD_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_bareme_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_corrige_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_cours_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_evaluation_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_remediation_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_tp_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_trace_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_version_amenagee_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/code/T12_corrige_professeur_routage_rip_ospf.py
+  - 03_progressions/supports/terminale/T12/code/T12_starter_routage_rip_ospf.py
+  - 03_progressions/supports/terminale/T12/code/T12_tests_attendus_routage_rip_ospf.py
+  - 03_progressions/supports/terminale/T13/T13_TD_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_bareme_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_corrige_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_cours_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_evaluation_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_remediation_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_tp_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_trace_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_version_amenagee_chiffrement_https.md
+  - 03_progressions/supports/terminale/T14/T14_TD_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_bareme_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_corrige_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_cours_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_evaluation_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_remediation_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_tp_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_trace_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_version_amenagee_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T15/T15_TD_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_bareme_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_corrige_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_cours_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_evaluation_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_remediation_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_tp_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_trace_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_version_amenagee_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T16/T16_TD_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_bareme_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_corrige_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_cours_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_evaluation_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_remediation_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_tp_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_trace_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_version_amenagee_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/code/T16_corrige_professeur_diviser_pour_regner_tri_fusion.py
+  - 03_progressions/supports/terminale/T16/code/T16_starter_diviser_pour_regner_tri_fusion.py
+  - 03_progressions/supports/terminale/T16/code/T16_tests_attendus_diviser_pour_regner_tri_fusion.py
+  - 03_progressions/supports/terminale/T17/T17_TD_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_bareme_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_corrige_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_cours_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_evaluation_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_remediation_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_tp_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_trace_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_version_amenagee_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/code/T17_corrige_professeur_programmation_dynamique.py
+  - 03_progressions/supports/terminale/T17/code/T17_starter_programmation_dynamique.py
+  - 03_progressions/supports/terminale/T17/code/T17_tests_attendus_programmation_dynamique.py
+  - 03_progressions/supports/terminale/T18/T18_TD_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_bareme_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_corrige_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_cours_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_evaluation_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_remediation_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_tp_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_trace_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_version_amenagee_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/code/T18_corrige_professeur_boyer_moore.py
+  - 03_progressions/supports/terminale/T18/code/T18_starter_boyer_moore.py
+  - 03_progressions/supports/terminale/T18/code/T18_tests_attendus_boyer_moore.py
+  - 03_progressions/supports/terminale/T19/T19_TD_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_bareme_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_corrige_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_cours_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_evaluation_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_remediation_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_tp_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_trace_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_version_amenagee_bac_pratique_grand_oral_projet.md
+  - INDEX.md
+  - INDEX_BY_AUDIENCE.md
+  - INDEX_BY_CAPACITY.md
+  - INDEX_BY_CHAPTER.md
+  - INDEX_BY_DOCUMENT_TYPE.md
+  - INDEX_BY_DOMAIN.md
+  - INDEX_BY_LEVEL.md
+  - INDEX_BY_RAG_COLLECTION.md
+  - INDEX_BY_SEQUENCE.md
+  - INDEX_BY_SESSION.md
+  - INDEX_BY_THEME.md
+  - README.md
+  - bank_strategy.md
+  - calendar_2026_2027_tunisia.md
+  - carnet_de_bord.md
+  - content_tree_policy.md
+  - course_internal_coherence_report.md
+  - coverage_gap_action_plan.md
+  - delivery_policy.md
+  - differentiation_quality_report.md
+  - docs/GUIDE_DEPLOIEMENT.md
+  - docs/LISEZMOI.txt
+  - docs/archive_security_policy.md
+  - docs/audits/AUDIT_FRONTEND_infra_ground_truth.md
+  - docs/enrichment_roadmap.md
+  - docs/finalisation_report.md
+  - docs/judge_campaign_plan.md
+  - docs/kit_production_NSI.md
+  - docs/latex_systems_decision.md
+  - docs/local_excludes_required.md
+  - docs/promotion/dossier_revue_lead.md
+  - docs/promotion/dossier_revue_lead_v2.md
+  - docs/promotion/dossier_revue_lead_v3.md
+  - docs/promotion/dossier_revue_lead_v4.md
+  - docs/promotion/dossier_revue_lead_v5.md
+  - docs/reorg_report.md
+  - docs/repo_topology.md
+  - docs/rvw_responses.md
+  - docs/source_archive_policy.md
+  - drive_inventory.csv
+  - drive_mapping.md
+  - drive_quarantine/README.md
+  - drive_quarantine_manifest.csv
+  - drive_remaining_action_plan.md
+  - drive_sources.yml
+  - evaluation_bareme_alignment_report.md
+  - human_review_register.csv
+  - human_review_wave_1_plan.md
+  - latex/README.md
+  - latex/build.sh
+  - latex/packs/premiere/P13/P13_aides.tex
+  - latex/packs/premiere/P13/P13_corrige.tex
+  - latex/packs/premiere/P13/P13_cours.tex
+  - latex/packs/premiere/P13/P13_evaluation.tex
+  - latex/packs/premiere/P13/P13_fiche_methode.tex
+  - latex/packs/premiere/P13/P13_td.tex
+  - latex/packs/premiere/P13/P13_td_eleve.tex
+  - latex/packs/premiere/P13/P13_tp.tex
+  - latex/packs/premiere/P13/P13_tp_eleve.tex
+  - latex/packs/premiere/P13/P13_trace.tex
+  - latex/packs/premiere/P13/build.sh
+  - learning_objectives_assessed_report.md
+  - missing_capabilities.md
+  - missing_documents_register_v2.md
+  - missing_sequence_resources_register.md
+  - pilot_scope.yml
+  - premiere/banques/evaluations/index.md
+  - premiere/banques/exercices/index.md
+  - premiere/banques/index.md
+  - premiere/banques/projets/index.md
+  - premiere/banques/qcm/index.md
+  - premiere/banques/sujets_pratiques/index.md
+  - premiere/banques/tp/index.md
+  - premiere/sequences/s01_representation_donnees/aides_progressives.md
+  - premiere/sequences/s01_representation_donnees/bareme.md
+  - premiere/sequences/s01_representation_donnees/corrige.md
+  - premiere/sequences/s01_representation_donnees/corrige_professeur.md
+  - premiere/sequences/s01_representation_donnees/evaluation.md
+  - premiere/sequences/s01_representation_donnees/evaluation_corrigee.md
+  - premiere/sequences/s01_representation_donnees/fiche_methode.md
+  - premiere/sequences/s01_representation_donnees/grille_competences.md
+  - premiere/sequences/s01_representation_donnees/guide_professeur.md
+  - premiere/sequences/s01_representation_donnees/pedagogical_review.md
+  - premiere/sequences/s01_representation_donnees/projet_associe.md
+  - premiere/sequences/s01_representation_donnees/python/representation_tools.py
+  - premiere/sequences/s01_representation_donnees/qcm.json
+  - premiere/sequences/s01_representation_donnees/quality_audit_s01.md
+  - premiere/sequences/s01_representation_donnees/revue_substance.md
+  - premiere/sequences/s01_representation_donnees/sequence.yaml
+  - premiere/sequences/s01_representation_donnees/sources.md
+  - premiere/sequences/s01_representation_donnees/td.md
+  - premiere/sequences/s01_representation_donnees/tests/test_representation_tools.py
+  - premiere/sequences/s01_representation_donnees/tp.md
+  - premiere/sequences/s01_representation_donnees/trace_ecrite.md
+  - premiere/sequences/s01_representation_donnees/version_amenagee.md
+  - privacy_allowlist.yml
+  - program_capacity_evidence_depth_report.md
+  - programme_matrix_premiere.md
+  - programme_matrix_terminale.md
+  - progression_audit.md
+  - project_plan_premiere.md
+  - project_plan_terminale.md
+  - pyproject.toml
+  - qa_debt_register.md
+  - qa_gate_policy.md
+  - qa_report.md
+  - rag_coherence_report.md
+  - rag_config.example.yml
+  - rag_connection.md
+  - rag_server_fix_plan.md
+  - rag_timeout_diagnostic.md
+  - reports/METHODE_PRODUCTION_REELLE.md
+  - reports/alignment_known_failures.yml
+  - reports/audit_03_07_26.md
+  - reports/closure2/corrective2_report.md
+  - reports/closure2/corrective3_report.md
+  - reports/closure2/corrective_report.md
+  - reports/closure2/phaseA_closure_report.md
+  - reports/closure2/phaseA_final_report.md
+  - reports/closure2/rag_embedding_parity_report.md
+  - reports/closure2/rag_prod_cutover_executed_report.md
+  - reports/closure2/rag_prod_cutover_runbook.md
+  - reports/closure2/rag_state_of_truth.md
+  - reports/closure2/rag_target_architecture.md
+  - reports/closure2/rag_v2_cutover_STATE.md
+  - reports/closure2/rag_v2_cutover_report.md
+  - reports/closure2/rag_v2_rebuilt_report.md
+  - reports/closure2/rag_v2_versioned_report.md
+  - reports/drive_enrichment_report.md
+  - reports/excellence_editorial_review_nsi.md
+  - reports/excellence_remediation_progress.md
+  - reports/final_recipe_review_nsi.md
+  - reports/human_review_checklist_accessibility.md
+  - reports/human_review_checklist_pedagogy.md
+  - reports/human_review_checklist_science.md
+  - reports/human_review_protocol.md
+  - reports/lot0_ruff_autofix_review.md
+  - reports/lot1/drive_forensic.md
+  - reports/lot1/lot1_validation_log.md
+  - reports/lot1/repo_map.md
+  - reports/lot2/lot2_validation_log.md
+  - reports/lot3/archive_extraction_inventory.md
+  - reports/lot3/archive_security_inventory.md
+  - reports/lot3/lot3_hardening_validation_log.md
+  - reports/lot3/lot3_validation_log.md
+  - reports/lot3/post_merge_audit.md
+  - reports/missing_documents_register.md
+  - reports/pedagogical_blockers_report.md
+  - reports/programme_yaml_audit.md
+  - reports/reconciliation/branch_topology.md
+  - reports/reconciliation/closure_report.md
+  - reports/reconciliation/drive_integration_plan.md
+  - reports/reconciliation/mypy_debt.md
+  - reports/reconciliation/process_incidents.md
+  - reports/reconciliation/rag_pr35_status.md
+  - reports/reconciliation/rag_reindex_plan.md
+  - reports/reconciliation/reconciliation_report.md
+  - reports/reconciliation/reconciliation_verification_report.md
+  - reports/recovery_t10_p08_t17_from_blobs.md
+  - reports/td_quality_debt_register.yml
+  - reports/td_quality_debt_report.md
+  - reports_policy.md
+  - requirements.txt
+  - reviewer_confirmation.schema.json
+  - scientific_claims_review_report.md
+  - scraping_ingestion_plan.md
+  - scraping_strategy.md
+  - scripts/__init__.py
+  - scripts/_course_sheets_common.py
+  - scripts/_drive_paths.py
+  - scripts/_inventory_utils.py
+  - scripts/_operational_links.py
+  - scripts/_pedagogy_reports.py
+  - scripts/_qa_common.py
+  - scripts/_session_checks.py
+  - scripts/_supports_evidence.py
+  - scripts/archive_security.py
+  - scripts/build_all.py
+  - scripts/build_source_archive.py
+  - scripts/build_source_zip.py
+  - scripts/check_agents_governance.py
+  - scripts/check_archive_portability.py
+  - scripts/check_audit_extracted_runtime_budget.py
+  - scripts/check_audit_folder_policy.py
+  - scripts/check_bank_strategy.py
+  - scripts/check_boyer_moore_trace_consistency.py
+  - scripts/check_build_reports_freshness.py
+  - scripts/check_capacity_status_ladder.py
+  - scripts/check_closed_error_classes.py
+  - scripts/check_content_tree_policy.py
+  - scripts/check_contract_substance_quality.py
+  - scripts/check_corrected_answers_are_concrete.py
+  - scripts/check_course_explanatory_quality.py
+  - scripts/check_course_internal_coherence.py
+  - scripts/check_course_sheet_exercise_answer_count.py
+  - scripts/check_course_sheet_linked_resources_exist.py
+  - scripts/check_course_sheet_readiness.py
+  - scripts/check_course_sheet_readiness_strict.py
+  - scripts/check_course_sheets_alignment.py
+  - scripts/check_course_sheets_coverage.py
+  - scripts/check_course_sheets_no_template_abuse.py
+  - scripts/check_course_sheets_quality.py
+  - scripts/check_course_sheets_substance.py
+  - scripts/check_coverage_evidence.py
+  - scripts/check_coverage_gap_action_plan.py
+  - scripts/check_csv_numeric_fields_are_parseable.py
+  - scripts/check_delivered_archive_exactly_source_clean.py
+  - scripts/check_differentiation_distinctness.py
+  - scripts/check_differentiation_quality.py
+  - scripts/check_document_depth.py
+  - scripts/check_document_naming_conventions.py
+  - scripts/check_document_style.py
+  - scripts/check_drive_action_plan_completeness.py
+  - scripts/check_drive_enrichment_traceability.py
+  - scripts/check_drive_enrichment_traceability_portable.py
+  - scripts/check_drive_integration_plan.py
+  - scripts/check_drive_mapping.py
+  - scripts/check_drive_mapping_release.py
+  - scripts/check_drive_quarantine_privacy.py
+  - scripts/check_drive_trace_no_absolute_local_paths.py
+  - scripts/check_dynamic_programming_recurrence_consistency.py
+  - scripts/check_eleve_no_corrige.py
+  - scripts/check_eval_bareme_pairing.py
+  - scripts/check_evaluation_bareme_alignment.py
+  - scripts/check_evaluation_distribution.py
+  - scripts/check_first_batch_alignment.py
+  - scripts/check_first_batch_document_quality.py
+  - scripts/check_first_batch_tp_assets.py
+  - scripts/check_full_notional_resource_matrix.py
+  - scripts/check_full_sequence_resource_matrix.py
+  - scripts/check_gate_policy_consistency.py
+  - scripts/check_generated_template_residue.py
+  - scripts/check_git_clean.py
+  - scripts/check_graph_algorithm_trace_consistency.py
+  - scripts/check_human_review_register.py
+  - scripts/check_human_review_wave_plan.py
+  - scripts/check_learning_objectives_assessed.py
+  - scripts/check_linked_evaluation_quality.py
+  - scripts/check_linked_evaluation_substance.py
+  - scripts/check_linked_td_quality.py
+  - scripts/check_linked_td_substance.py
+  - scripts/check_links.py
+  - scripts/check_local_drive_traceability.py
+  - scripts/check_makefile_audit_policy.py
+  - scripts/check_manifest_source_integrity.py
+  - scripts/check_manifest_source_trace_consistency.py
+  - scripts/check_metadata.py
+  - scripts/check_missing_register_actionability.py
+  - scripts/check_missing_register_semantic_consistency.py
+  - scripts/check_monthly_load_balance.py
+  - scripts/check_network_packet_trace_consistency.py
+  - scripts/check_no_absent_coverage_for_release.py
+  - scripts/check_no_build_artifacts_in_index.py
+  - scripts/check_no_committed_secrets.py
+  - scripts/check_no_coverage_from_sheets_only.py
+  - scripts/check_no_duplicate_capacity_lines.py
+  - scripts/check_no_generic_scaffold_overuse.py
+  - scripts/check_no_global_archive_in_delivery_context.py
+  - scripts/check_no_line_padding.py
+  - scripts/check_no_needs_review_for_release.py
+  - scripts/check_no_operational_scope_hardcoding.py
+  - scripts/check_no_placeholders.py
+  - scripts/check_no_placeholders_code.py
+  - scripts/check_no_placeholders_docs.py
+  - scripts/check_no_private_data.py
+  - scripts/check_no_secret_file_mutation_policy.py
+  - scripts/check_no_sensitive_drive_in_source_clean.py
+  - scripts/check_no_teacher_content_in_student_export.py
+  - scripts/check_no_token_only_validation.py
+  - scripts/check_official_program_capacity_coverage_matrix.py
+  - scripts/check_operational_readiness_quality_coupling.py
+  - scripts/check_operational_supports_no_indicative_debt.py
+  - scripts/check_p04_key_consistency.py
+  - scripts/check_p05_expected_outputs_are_explicit.py
+  - scripts/check_p05_pipeline_consistency.py
+  - scripts/check_p05_semantic_consistency.py
+  - scripts/check_packaging_mode.py
+  - scripts/check_paper_tp_contract.py
+  - scripts/check_paper_tp_justification.py
+  - scripts/check_pedagogical_alignment.py
+  - scripts/check_pedagogical_indexes.py
+  - scripts/check_program_capacity_evidence_depth.py
+  - scripts/check_program_coverage.py
+  - scripts/check_program_yaml_atomicity.py
+  - scripts/check_progression_calendar_alignment.py
+  - scripts/check_progression_project_consistency.py
+  - scripts/check_project_quarter_requirement.py
+  - scripts/check_python_cache_stability.py
+  - scripts/check_python_quality.py
+  - scripts/check_qa_report_freshness.py
+  - scripts/check_qcm_contract_consistency.py
+  - scripts/check_qcm_schema.py
+  - scripts/check_quality_gates.py
+  - scripts/check_question_capacity_alignment.py
+  - scripts/check_rag_collection_policy.py
+  - scripts/check_rag_config.py
+  - scripts/check_rag_freshness.py
+  - scripts/check_rag_golden_examples_policy.py
+  - scripts/check_rag_index_metadata.py
+  - scripts/check_rag_metadata_canonical_fields.py
+  - scripts/check_ready_session_operationality.py
+  - scripts/check_ready_supports_depth.py
+  - scripts/check_ready_supports_required_sections.py
+  - scripts/check_register_no_hidden_operational_debt.py
+  - scripts/check_rendered_unit_artifacts.py
+  - scripts/check_repo_topology.py
+  - scripts/check_reports_policy.py
+  - scripts/check_required_sections.py
+  - scripts/check_scientific_claims_review.py
+  - scripts/check_sequence_capacity_alignment.py
+  - scripts/check_sequence_completeness.py
+  - scripts/check_sequence_contracts.py
+  - scripts/check_sequence_pack_consistency.py
+  - scripts/check_sequence_pedagogical_coherence.py
+  - scripts/check_session_classroom_operationality.py
+  - scripts/check_session_duration_consistency.py
+  - scripts/check_session_level_planning.py
+  - scripts/check_session_monthly_total.py
+  - scripts/check_session_operationalization_plan.py
+  - scripts/check_session_project_hours.py
+  - scripts/check_session_referenced_files_exist.py
+  - scripts/check_session_specificity.py
+  - scripts/check_session_to_resource_alignment.py
+  - scripts/check_session_week_calendar_consistency.py
+  - scripts/check_skills_governance.py
+  - scripts/check_sources_catalog.py
+  - scripts/check_sources_catalog_schema.py
+  - scripts/check_sql_query_result_consistency.py
+  - scripts/check_status_promotion_guard.py
+  - scripts/check_student_supports_no_scaffold_language.py
+  - scripts/check_substance_anchors.py
+  - scripts/check_substance_report_artifacts.py
+  - scripts/check_support_pedagogical_depth.py
+  - scripts/check_support_substance.py
+  - scripts/check_t18_trace_table_quality.py
+  - scripts/check_td_corrige_alignment.py
+  - scripts/check_teacher_corrections_alignment.py
+  - scripts/check_teacher_docs_depth.py
+  - scripts/check_tp_executable_opportunity.py
+  - scripts/check_tp_pedagogical_assets.py
+  - scripts/check_tp_pedagogical_assets_runtime.py
+  - scripts/check_tp_test_alignment.py
+  - scripts/check_tp_text_asset_alignment.py
+  - scripts/check_tree_bst_invariant_consistency.py
+  - scripts/check_uploaded_archive_policy.py
+  - scripts/check_validated_documents_quality_gates.py
+  - scripts/check_validated_statuses.py
+  - scripts/check_verdict_provenance.py
+  - scripts/classify_scraped_resource.py
+  - scripts/cleanup_python_artifacts.py
+  - scripts/drive_local_inventory.py
+  - scripts/drive_resource_triage.py
+  - scripts/generate_coverage_gap_action_plan.py
+  - scripts/generate_index.py
+  - scripts/generate_pedagogical_indexes.py
+  - scripts/generate_qa_report.py
+  - scripts/ingest_drive_export.py
+  - scripts/ingest_nsi_corpus.py
+  - scripts/judge_campaign.py
+  - scripts/prepare_scraped_docs_for_rag.py
+  - scripts/rag_coherence_report.py
+  - scripts/rag_core.py
+  - scripts/rag_diagnose_search_timeout.py
+  - scripts/rag_index_plan.py
+  - scripts/rag_ingest.py
+  - scripts/rag_ingest_server.py
+  - scripts/rag_query_example.py
+  - scripts/rag_smoke_test.py
+  - scripts/rebuild_inventory.py
+  - scripts/render_sequence.py
+  - scripts/render_substance_report.py
+  - scripts/render_unit.py
+  - scripts/run_audit_extracted_source.py
+  - scripts/run_python_tests.py
+  - scripts/run_substance_judge.py
+  - scripts/substance_judge.py
+  - scripts/substance_report_renderer.py
+  - sources_catalog.schema.json
+  - sources_catalog.yml
+  - substance_pipeline.md
+  - substance_rag_pilot_report.md
+  - substance_reviews/_adversarial/poisoned.verdict.json
+  - substance_reviews/campaign/P-ALGO-01A_substance_review.json
+  - substance_reviews/campaign/P-ALGO-01B_substance_review.json
+  - substance_reviews/campaign/P-ALGO-02A_substance_review.json
+  - substance_reviews/campaign/P-ALGO-02B_substance_review.json
+  - substance_reviews/campaign/P-ALGO-02C_substance_review.json
+  - substance_reviews/campaign/P-ALGO-02D_substance_review.json
+  - substance_reviews/campaign/P-ALGO-03_substance_review.json
+  - substance_reviews/campaign/P-ALGO-04_substance_review.json
+  - substance_reviews/campaign/P-ALGO-05_substance_review.json
+  - substance_reviews/campaign/P-ARCH-01A_substance_review.json
+  - substance_reviews/campaign/P-ARCH-01B_substance_review.json
+  - substance_reviews/campaign/P-ARCH-02A_substance_review.json
+  - substance_reviews/campaign/P-ARCH-02B_substance_review.json
+  - substance_reviews/campaign/P-ARCH-02C_substance_review.json
+  - substance_reviews/campaign/P-ARCH-03A_substance_review.json
+  - substance_reviews/campaign/P-ARCH-03B_substance_review.json
+  - substance_reviews/campaign/P-ARCH-03C_substance_review.json
+  - substance_reviews/campaign/P-ARCH-04A_substance_review.json
+  - substance_reviews/campaign/P-ARCH-04B_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-01_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-02A_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-02B_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-03_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-04_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-05A_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-05B_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-01_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-02A_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-02B_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-02C_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-02D_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-03A_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-03B_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-03C_substance_review.json
+  - substance_reviews/campaign/P-HIST-01_substance_review.json
+  - substance_reviews/campaign/P-IHM-01A_substance_review.json
+  - substance_reviews/campaign/P-IHM-01B_substance_review.json
+  - substance_reviews/campaign/P-IHM-02_substance_review.json
+  - substance_reviews/campaign/P-IHM-03A_substance_review.json
+  - substance_reviews/campaign/P-IHM-03B_substance_review.json
+  - substance_reviews/campaign/P-IHM-03C_substance_review.json
+  - substance_reviews/campaign/P-IHM-04A_substance_review.json
+  - substance_reviews/campaign/P-IHM-04B_substance_review.json
+  - substance_reviews/campaign/P-IHM-04C_substance_review.json
+  - substance_reviews/campaign/P-LANG-01_substance_review.json
+  - substance_reviews/campaign/P-LANG-02_substance_review.json
+  - substance_reviews/campaign/P-LANG-03A_substance_review.json
+  - substance_reviews/campaign/P-LANG-03B_substance_review.json
+  - substance_reviews/campaign/P-LANG-03C_substance_review.json
+  - substance_reviews/campaign/P-LANG-04_substance_review.json
+  - substance_reviews/campaign/P-LANG-05_substance_review.json
+  - substance_reviews/campaign/P-TABLE-01_substance_review.json
+  - substance_reviews/campaign/P-TABLE-02_substance_review.json
+  - substance_reviews/campaign/P-TABLE-03_substance_review.json
+  - substance_reviews/campaign/P-TABLE-04_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01A_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01B_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01C_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01D_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01E_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01F_substance_review.json
+  - substance_reviews/campaign/T-ALGO-02A_substance_review.json
+  - substance_reviews/campaign/T-ALGO-02B_substance_review.json
+  - substance_reviews/campaign/T-ALGO-02C_substance_review.json
+  - substance_reviews/campaign/T-ALGO-02D_substance_review.json
+  - substance_reviews/campaign/T-ALGO-03_substance_review.json
+  - substance_reviews/campaign/T-ALGO-04_substance_review.json
+  - substance_reviews/campaign/T-ALGO-05_substance_review.json
+  - substance_reviews/campaign/T-ARCH-01_substance_review.json
+  - substance_reviews/campaign/T-ARCH-02A_substance_review.json
+  - substance_reviews/campaign/T-ARCH-02B_substance_review.json
+  - substance_reviews/campaign/T-ARCH-02C_substance_review.json
+  - substance_reviews/campaign/T-ARCH-03_substance_review.json
+  - substance_reviews/campaign/T-ARCH-04A_substance_review.json
+  - substance_reviews/campaign/T-ARCH-04B_substance_review.json
+  - substance_reviews/campaign/T-BDD-01A_substance_review.json
+  - substance_reviews/campaign/T-BDD-01B_substance_review.json
+  - substance_reviews/campaign/T-BDD-01C_substance_review.json
+  - substance_reviews/campaign/T-BDD-02_substance_review.json
+  - substance_reviews/campaign/T-BDD-03A_substance_review.json
+  - substance_reviews/campaign/T-BDD-03B_substance_review.json
+  - substance_reviews/campaign/T-BDD-03C_substance_review.json
+  - substance_reviews/campaign/T-BDD-03D_substance_review.json
+  - substance_reviews/campaign/T-BDD-03E_substance_review.json
+  - substance_reviews/campaign/T-BDD-03F_substance_review.json
+  - substance_reviews/campaign/T-BDD-03G_substance_review.json
+  - substance_reviews/campaign/T-BDD-03H_substance_review.json
+  - substance_reviews/campaign/T-HIST-01A_substance_review.json
+  - substance_reviews/campaign/T-HIST-01B_substance_review.json
+  - substance_reviews/campaign/T-LANG-01A_substance_review.json
+  - substance_reviews/campaign/T-LANG-01B_substance_review.json
+  - substance_reviews/campaign/T-LANG-01C_substance_review.json
+  - substance_reviews/campaign/T-LANG-02A_substance_review.json
+  - substance_reviews/campaign/T-LANG-02B_substance_review.json
+  - substance_reviews/campaign/T-LANG-03A_substance_review.json
+  - substance_reviews/campaign/T-LANG-03B_substance_review.json
+  - substance_reviews/campaign/T-LANG-03C_substance_review.json
+  - substance_reviews/campaign/T-LANG-04A_substance_review.json
+  - substance_reviews/campaign/T-LANG-04B_substance_review.json
+  - substance_reviews/campaign/T-LANG-05_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-01A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-01B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-01C_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-02A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-02B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-03A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-03B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-03C_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-04A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-04B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-05A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-05B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-05C_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-05D_substance_review.json
+  - substance_reviews/campaign/_usage_log.json
+  - substance_reviews_index.md
+  - substance_verdict.schema.json
+  - support_source_trace.yml
+  - td_corrige_alignment_report.md
+  - terminale/banques/evaluations/index.md
+  - terminale/banques/exercices/index.md
+  - terminale/banques/index.md
+  - terminale/banques/projets/index.md
+  - terminale/banques/qcm/index.md
+  - terminale/banques/sujets_pratiques/index.md
+  - terminale/banques/tp/index.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/aides_progressives.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/bareme.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/corrige.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/corrige_professeur.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/cours_eleve.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/evaluation.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/evaluation_corrigee.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/fiche_methode.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/grille_competences.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/guide_professeur.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/pedagogical_review.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/projet_associe.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/python/structures_tools.py
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/qcm.json
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/quality_audit_s01.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/sequence.yaml
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/sources.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/td.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/tests/test_structures_tools.py
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/tp.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/trace_ecrite.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/version_amenagee.md
+  - tests/conftest.py
+  - tests/fixtures/substance_judge/P05.json
+  - tests/mypy_baseline.txt
+  - tests/test_archive_integration_wrappers.py
+  - tests/test_archive_portability_modes.py
+  - tests/test_archive_security_imports.py
+  - tests/test_audit_extracted_source_no_hang.py
+  - tests/test_audit_strategic_integration.py
+  - tests/test_build_artifacts.py
+  - tests/test_classify_schema.py
+  - tests/test_consolidation_strict.py
+  - tests/test_course_sheets.py
+  - tests/test_delivered_archive_exactly_source_clean.py
+  - tests/test_doc_lint.py
+  - tests/test_drive_enrichment_traceability.py
+  - tests/test_drive_local_pipeline.py
+  - tests/test_drive_mapping_release.py
+  - tests/test_drive_portable_and_manifest.py
+  - tests/test_ellipsis_scoping.py
+  - tests/test_env_file_resolution.py
+  - tests/test_excellence_remediation_regressions.py
+  - tests/test_executable_quality_controls.py
+  - tests/test_final_quality_hardening.py
+  - tests/test_first_batch_alignment.py
+  - tests/test_first_batch_document_quality.py
+  - tests/test_first_batch_tp_assets.py
+  - tests/test_full_matrix_and_runtime.py
+  - tests/test_judge_collection_barriers.py
+  - tests/test_line_padding.py
+  - tests/test_linked_support_quality.py
+  - tests/test_local_drive_traceability.py
+  - tests/test_lot1_drive_gate_boundary.py
+  - tests/test_lot2_scraper_content_dedup.py
+  - tests/test_lot3_archive_security.py
+  - tests/test_lot3_topological_isolation.py
+  - tests/test_manifest_separation.py
+  - tests/test_missing_register_actionability.py
+  - tests/test_mypy_strict_debt.py
+  - tests/test_no_coverage_from_sheets_only.py
+  - tests/test_no_global_archive_in_delivery_context.py
+  - tests/test_no_inline_env_resolution.py
+  - tests/test_no_placeholders_code.py
+  - tests/test_no_stale_archive_guard.py
+  - tests/test_notional_and_disciplinary_controls.py
+  - tests/test_operational_substance_controls.py
+  - tests/test_organizer_nsi_safety.py
+  - tests/test_p05_p04_controls.py
+  - tests/test_packaging_modes.py
+  - tests/test_policy_checker_ast.py
+  - tests/test_private_data_detection.py
+  - tests/test_rag_governance_and_indexes.py
+  - tests/test_rag_ingest.py
+  - tests/test_ready_session_operationality.py
+  - tests/test_ready_supports_gates.py
+  - tests/test_register_semantic_consistency.py
+  - tests/test_render_substance_report_cli.py
+  - tests/test_render_unit.py
+  - tests/test_repo_topology.py
+  - tests/test_run_python_tests.py
+  - tests/test_secret_guard.py
+  - tests/test_sequence_contracts.py
+  - tests/test_sequence_pack_and_scaffold_controls.py
+  - tests/test_session_referenced_files_exist.py
+  - tests/test_session_specificity.py
+  - tests/test_source_archive_policy.py
+  - tests/test_source_zip_delivery.py
+  - tests/test_source_zip_timestamps.py
+  - tests/test_status_promotion_guard.py
+  - tests/test_strict_full_bank_controls.py
+  - tests/test_substance_hardened.py
+  - tests/test_substance_judge_pipeline.py
+  - tests/test_substance_report_renderer.py
+  - tests/test_support_substance.py
+  - tests/test_tp_pedagogical_assets.py
+  - tests/test_tp_pedagogical_assets_no_hang.py
+  - tests/test_tp_pedagogical_assets_runtime.py
+  - tests/test_tp_text_asset_alignment.py
+  - tests/test_uploaded_archive_policy.py
+  - tests/test_verdict_provenance.py
+  - tp_executable_opportunity_register.md
+  - tp_test_alignment_report.md
+- Ressources pédagogiques :
+  - premiere/banques/evaluations/index.md
+  - premiere/banques/exercices/index.md
+  - premiere/banques/index.md
+  - premiere/banques/projets/index.md
+  - premiere/banques/qcm/index.md
+  - premiere/banques/sujets_pratiques/index.md
+  - premiere/banques/tp/index.md
+  - premiere/sequences/s01_representation_donnees/aides_progressives.md
+  - premiere/sequences/s01_representation_donnees/bareme.md
+  - premiere/sequences/s01_representation_donnees/corrige.md
+  - premiere/sequences/s01_representation_donnees/corrige_professeur.md
+  - premiere/sequences/s01_representation_donnees/cours_eleve.md
+  - premiere/sequences/s01_representation_donnees/evaluation.md
+  - premiere/sequences/s01_representation_donnees/evaluation_corrigee.md
+  - premiere/sequences/s01_representation_donnees/fiche_methode.md
+  - premiere/sequences/s01_representation_donnees/grille_competences.md
+  - premiere/sequences/s01_representation_donnees/guide_professeur.md
+  - premiere/sequences/s01_representation_donnees/pedagogical_review.md
+  - premiere/sequences/s01_representation_donnees/projet_associe.md
+  - premiere/sequences/s01_representation_donnees/qcm.json
+  - premiere/sequences/s01_representation_donnees/quality_audit_s01.md
+  - premiere/sequences/s01_representation_donnees/revue_substance.md
+  - premiere/sequences/s01_representation_donnees/sources.md
+  - premiere/sequences/s01_representation_donnees/td.md
+  - premiere/sequences/s01_representation_donnees/tp.md
+  - premiere/sequences/s01_representation_donnees/trace_ecrite.md
+  - premiere/sequences/s01_representation_donnees/version_amenagee.md
+  - terminale/banques/evaluations/index.md
+  - terminale/banques/exercices/index.md
+  - terminale/banques/index.md
+  - terminale/banques/projets/index.md
+  - terminale/banques/qcm/index.md
+  - terminale/banques/sujets_pratiques/index.md
+  - terminale/banques/tp/index.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/aides_progressives.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/bareme.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/corrige.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/corrige_professeur.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/cours_eleve.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/evaluation.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/evaluation_corrigee.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/fiche_methode.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/grille_competences.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/guide_professeur.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/pedagogical_review.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/projet_associe.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/qcm.json
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/quality_audit_s01.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/sources.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/td.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/tp.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/trace_ecrite.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/version_amenagee.md
+- Ressources techniques :
+  - .env.rag.example
+  - .github/workflows/ci.yml
+  - .pre-commit-config.yaml
+  - 00_programmes_officiels/README.md
+  - 00_programmes_officiels/programme_nsi_2019.yaml
+  - 00_programmes_officiels/programme_nsi_premiere.txt
+  - 00_programmes_officiels/programme_nsi_terminale.txt
+  - 01_charte_graphique_et_pedagogique/charte_documentaire_sequences.md
+  - 01_charte_graphique_et_pedagogique/charte_graphique.md
+  - 01_charte_graphique_et_pedagogique/metadata_schema.md
+  - 02_modeles_documents/modele_aides.tex
+  - 02_modeles_documents/modele_corrige.tex
+  - 02_modeles_documents/modele_cours.tex
+  - 02_modeles_documents/modele_evaluation.tex
+  - 02_modeles_documents/modele_fiche_methode.tex
+  - 02_modeles_documents/modele_guide_prof.md
+  - 02_modeles_documents/modele_qcm.json
+  - 02_modeles_documents/modele_sequence.yaml
+  - 02_modeles_documents/modele_td.tex
+  - 02_modeles_documents/modele_tp.tex
+  - 02_modeles_documents/modele_trace.tex
+  - 02_modeles_documents/nsi-preamble.sty
+  - 03_progressions/fiches_cours/premiere/P00/P00_fiche_cours_methode_nsi.md
+  - 03_progressions/fiches_cours/premiere/P01/P01_fiche_cours_bits_bases_2_10_16.md
+  - 03_progressions/fiches_cours/premiere/P01/P01_fiche_cours_conversions.md
+  - 03_progressions/fiches_cours/premiere/P02/P02_fiche_cours_booleens_tables_verite.md
+  - 03_progressions/fiches_cours/premiere/P02/P02_fiche_cours_complement_a_deux.md
+  - 03_progressions/fiches_cours/premiere/P03/P03_fiche_cours_flottants_approximations.md
+  - 03_progressions/fiches_cours/premiere/P03/P03_fiche_cours_texte_unicode.md
+  - 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_dictionnaires.md
+  - 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_listes.md
+  - 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_tuples.md
+  - 03_progressions/fiches_cours/premiere/P05/P05_fiche_cours_tables_csv_import_coherence.md
+  - 03_progressions/fiches_cours/premiere/P06/P06_fiche_cours_tables_recherche_tri_fusion.md
+  - 03_progressions/fiches_cours/premiere/P07/P07_fiche_cours_fonctions_tests_specifications.md
+  - 03_progressions/fiches_cours/premiere/P08/P08_fiche_cours_html_css_dom.md
+  - 03_progressions/fiches_cours/premiere/P08/P08_fiche_cours_http_get_post_formulaires.md
+  - 03_progressions/fiches_cours/premiere/P09/P09_fiche_cours_architecture_os_droits.md
+  - 03_progressions/fiches_cours/premiere/P10/P10_fiche_cours_reseaux_protocoles_paquets.md
+  - 03_progressions/fiches_cours/premiere/P11/P11_fiche_cours_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/fiches_cours/premiere/P12/P12_fiche_cours_tris_invariants_complexite.md
+  - 03_progressions/fiches_cours/premiere/P13/P13_fiche_cours_dichotomie_glouton_knn.md
+  - 03_progressions/fiches_cours/premiere/P14/P14_fiche_cours_synthese_projet_oral.md
+  - 03_progressions/fiches_cours/terminale/T00/T00_fiche_cours_reprise_python_tests_complexite.md
+  - 03_progressions/fiches_cours/terminale/T01/T01_fiche_cours_interface_implementation_tad.md
+  - 03_progressions/fiches_cours/terminale/T02/T02_fiche_cours_classes_objets_attributs_methodes.md
+  - 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_dictionnaires.md
+  - 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_files.md
+  - 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_piles.md
+  - 03_progressions/fiches_cours/terminale/T04/T04_fiche_cours_recursivite_cas_base_terminaison.md
+  - 03_progressions/fiches_cours/terminale/T05/T05_fiche_cours_arbres_binaires_parcours.md
+  - 03_progressions/fiches_cours/terminale/T06/T06_fiche_cours_arbres_binaires_recherche.md
+  - 03_progressions/fiches_cours/terminale/T07/T07_fiche_cours_graphes_modelisation_listes_matrices.md
+  - 03_progressions/fiches_cours/terminale/T08/T08_fiche_cours_bfs_dfs_cycles_chemins.md
+  - 03_progressions/fiches_cours/terminale/T09/T09_fiche_cours_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/fiches_cours/terminale/T10/T10_fiche_cours_sql_insert_update_delete.md
+  - 03_progressions/fiches_cours/terminale/T10/T10_fiche_cours_sql_select_where_join.md
+  - 03_progressions/fiches_cours/terminale/T11/T11_fiche_cours_processus_ordonnancement_interblocage.md
+  - 03_progressions/fiches_cours/terminale/T12/T12_fiche_cours_routage_rip_ospf.md
+  - 03_progressions/fiches_cours/terminale/T13/T13_fiche_cours_chiffrement_https.md
+  - 03_progressions/fiches_cours/terminale/T14/T14_fiche_cours_modularite_api_paradigmes_bugs.md
+  - 03_progressions/fiches_cours/terminale/T15/T15_fiche_cours_calculabilite_arret.md
+  - 03_progressions/fiches_cours/terminale/T16/T16_fiche_cours_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/fiches_cours/terminale/T17/T17_fiche_cours_programmation_dynamique.md
+  - 03_progressions/fiches_cours/terminale/T18/T18_fiche_cours_boyer_moore.md
+  - 03_progressions/fiches_cours/terminale/T19/T19_fiche_cours_bac_pratique_grand_oral_projet.md
+  - 03_progressions/monthly_load_premiere.md
+  - 03_progressions/monthly_load_terminale.md
+  - 03_progressions/progression_premiere.md
+  - 03_progressions/progression_terminale.md
+  - 03_progressions/seances_premiere.md
+  - 03_progressions/seances_terminale.md
+  - 03_progressions/supports/contracts/P00_contract.yml
+  - 03_progressions/supports/contracts/P01_contract.yml
+  - 03_progressions/supports/contracts/P02_contract.yml
+  - 03_progressions/supports/contracts/P03_contract.yml
+  - 03_progressions/supports/contracts/P04_contract.yml
+  - 03_progressions/supports/contracts/P05_contract.yml
+  - 03_progressions/supports/contracts/P06_contract.yml
+  - 03_progressions/supports/contracts/P07_contract.yml
+  - 03_progressions/supports/contracts/P08_contract.yml
+  - 03_progressions/supports/contracts/P09_contract.yml
+  - 03_progressions/supports/contracts/P10_contract.yml
+  - 03_progressions/supports/contracts/P11_contract.yml
+  - 03_progressions/supports/contracts/P12_contract.yml
+  - 03_progressions/supports/contracts/P13_contract.yml
+  - 03_progressions/supports/contracts/P14_contract.yml
+  - 03_progressions/supports/contracts/T00_contract.yml
+  - 03_progressions/supports/contracts/T01_contract.yml
+  - 03_progressions/supports/contracts/T02_contract.yml
+  - 03_progressions/supports/contracts/T03_contract.yml
+  - 03_progressions/supports/contracts/T04_contract.yml
+  - 03_progressions/supports/contracts/T05_contract.yml
+  - 03_progressions/supports/contracts/T06_contract.yml
+  - 03_progressions/supports/contracts/T07_contract.yml
+  - 03_progressions/supports/contracts/T08_contract.yml
+  - 03_progressions/supports/contracts/T09_contract.yml
+  - 03_progressions/supports/contracts/T10_contract.yml
+  - 03_progressions/supports/contracts/T11_contract.yml
+  - 03_progressions/supports/contracts/T12_contract.yml
+  - 03_progressions/supports/contracts/T13_contract.yml
+  - 03_progressions/supports/contracts/T14_contract.yml
+  - 03_progressions/supports/contracts/T15_contract.yml
+  - 03_progressions/supports/contracts/T16_contract.yml
+  - 03_progressions/supports/contracts/T17_contract.yml
+  - 03_progressions/supports/contracts/T18_contract.yml
+  - 03_progressions/supports/contracts/T19_contract.yml
+  - 03_progressions/supports/premiere/P00/P00_bareme_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_cours_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_evaluation_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_remediation_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_tp_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_trace_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/P00_version_amenagee_diagnostic_python.md
+  - 03_progressions/supports/premiere/P00/code/P00_corrige_professeur_diagnostic_python.py
+  - 03_progressions/supports/premiere/P00/code/P00_starter_diagnostic_python.py
+  - 03_progressions/supports/premiere/P00/code/P00_tests_attendus_diagnostic_python.py
+  - 03_progressions/supports/premiere/P01/P01_bareme_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_corrige_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_cours_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_evaluation_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_remediation_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_td_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_tp_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_trace_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/P01_version_amenagee_conversions_bases.md
+  - 03_progressions/supports/premiere/P01/code/P01_corrige_professeur_conversions_bases.py
+  - 03_progressions/supports/premiere/P01/code/P01_starter_conversions_bases.py
+  - 03_progressions/supports/premiere/P01/code/P01_tests_attendus_conversions_bases.py
+  - 03_progressions/supports/premiere/P02/P02_bareme_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_bareme_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_corrige_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_corrige_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_cours_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_cours_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_evaluation_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_evaluation_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_remediation_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_td_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_td_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_tp_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_tp_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_trace_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/P02_trace_tables_verite_booleennes.md
+  - 03_progressions/supports/premiere/P02/P02_version_amenagee_complement_booleens.md
+  - 03_progressions/supports/premiere/P02/code/P02_corrige_professeur_complement_booleens.py
+  - 03_progressions/supports/premiere/P02/code/P02_starter_complement_booleens.py
+  - 03_progressions/supports/premiere/P02/code/P02_tests_attendus_complement_booleens.py
+  - 03_progressions/supports/premiere/P03/P03_bareme_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_bareme_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_corrige_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_corrige_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_cours_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_cours_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_evaluation_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_evaluation_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_remediation_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_td_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_td_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_tp_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_tp_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_trace_conversion_encodages_texte.md
+  - 03_progressions/supports/premiere/P03/P03_trace_texte_reels.md
+  - 03_progressions/supports/premiere/P03/P03_version_amenagee_texte_reels.md
+  - 03_progressions/supports/premiere/P03/code/P03_corrige_professeur_texte_reels.py
+  - 03_progressions/supports/premiere/P03/code/P03_starter_texte_reels.py
+  - 03_progressions/supports/premiere/P03/code/P03_tests_attendus_texte_reels.py
+  - 03_progressions/supports/premiere/P04/P04_bareme_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_bareme_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_corrige_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_cours_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_evaluation_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_remediation_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_td_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_tp_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_tp_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_trace_types_construits.md
+  - 03_progressions/supports/premiere/P04/P04_trace_types_construits_complement.md
+  - 03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md
+  - 03_progressions/supports/premiere/P04/code/P04_corrige_professeur_types_construits.py
+  - 03_progressions/supports/premiere/P04/code/P04_starter_types_construits.py
+  - 03_progressions/supports/premiere/P04/code/P04_tests_attendus_types_construits.py
+  - 03_progressions/supports/premiere/P05/P05_bareme_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_corrige_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_cours_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_evaluation_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_remediation_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_td_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_tp_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_trace_tables_csv.md
+  - 03_progressions/supports/premiere/P05/P05_version_amenagee_tables_csv.md
+  - 03_progressions/supports/premiere/P05/code/P05_corrige_professeur_tables_csv.py
+  - 03_progressions/supports/premiere/P05/code/P05_starter_tables_csv.py
+  - 03_progressions/supports/premiere/P05/code/P05_tests_attendus_tables_csv.py
+  - 03_progressions/supports/premiere/P05/data/pays_monde_extrait.csv
+  - 03_progressions/supports/premiere/P06/P06_TD_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_bareme_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_corrige_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_cours_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_evaluation_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_remediation_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_tp_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_trace_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/P06_version_amenagee_tables_recherche_tri_fusion.md
+  - 03_progressions/supports/premiere/P06/code/P06_corrige_professeur_tables_recherche_tri_fusion.py
+  - 03_progressions/supports/premiere/P06/code/P06_starter_tables_recherche_tri_fusion.py
+  - 03_progressions/supports/premiere/P06/code/P06_tests_attendus_tables_recherche_tri_fusion.py
+  - 03_progressions/supports/premiere/P07/P07_TD_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_TP_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_bareme_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_evaluation_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_remediation_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_tp_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_trace_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/P07_version_amenagee_fonctions_tests_specifications.md
+  - 03_progressions/supports/premiere/P07/code/P07_corrige_professeur_fonctions_tests_specifications.py
+  - 03_progressions/supports/premiere/P07/code/P07_starter_fonctions_tests_specifications.py
+  - 03_progressions/supports/premiere/P07/code/P07_tests_attendus_fonctions_tests_specifications.py
+  - 03_progressions/supports/premiere/P08/P08_TD_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_TP_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_TP_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_bareme_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_bareme_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_bareme_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_corrige_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_corrige_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_corrige_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_evaluation_html_css_dom.md
+  - 03_progressions/supports/premiere/P08/P08_evaluation_http_get_post_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_remediation_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_trace_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/P08_version_amenagee_web_http_dom_formulaires.md
+  - 03_progressions/supports/premiere/P08/code/P08_corrige_professeur_web_http_dom_formulaires.py
+  - 03_progressions/supports/premiere/P08/code/P08_starter_web_http_dom_formulaires.py
+  - 03_progressions/supports/premiere/P08/code/P08_tests_attendus_web_http_dom_formulaires.py
+  - 03_progressions/supports/premiere/P09/P09_TD_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_bareme_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_corrige_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_cours_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_evaluation_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_remediation_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_tp_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_trace_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/P09_version_amenagee_architecture_os_droits.md
+  - 03_progressions/supports/premiere/P09/code/P09_corrige_professeur_architecture_os_droits.py
+  - 03_progressions/supports/premiere/P09/code/P09_starter_architecture_os_droits.py
+  - 03_progressions/supports/premiere/P09/code/P09_tests_attendus_architecture_os_droits.py
+  - 03_progressions/supports/premiere/P10/P10_TD_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_bareme_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_corrige_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_cours_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_evaluation_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_remediation_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_tp_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_trace_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/P10_version_amenagee_reseaux_protocoles_paquets.md
+  - 03_progressions/supports/premiere/P10/code/P10_corrige_professeur_reseaux_protocoles_paquets.py
+  - 03_progressions/supports/premiere/P10/code/P10_starter_reseaux_protocoles_paquets.py
+  - 03_progressions/supports/premiere/P10/code/P10_tests_attendus_reseaux_protocoles_paquets.py
+  - 03_progressions/supports/premiere/P11/P11_TD_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_bareme_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_corrige_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_cours_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_evaluation_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_remediation_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_tp_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_trace_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/P11_version_amenagee_parcours_recherche_extremum_moyenne.md
+  - 03_progressions/supports/premiere/P11/code/P11_corrige_professeur_parcours_recherche_extremum_moyenne.py
+  - 03_progressions/supports/premiere/P11/code/P11_starter_parcours_recherche_extremum_moyenne.py
+  - 03_progressions/supports/premiere/P11/code/P11_tests_attendus_parcours_recherche_extremum_moyenne.py
+  - 03_progressions/supports/premiere/P12/P12_TD_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_bareme_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_corrige_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_cours_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_evaluation_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_remediation_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_tp_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_trace_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/P12_version_amenagee_tris_invariants_complexite.md
+  - 03_progressions/supports/premiere/P12/code/P12_corrige_professeur_tris_invariants_complexite.py
+  - 03_progressions/supports/premiere/P12/code/P12_starter_tris_invariants_complexite.py
+  - 03_progressions/supports/premiere/P12/code/P12_tests_attendus_tris_invariants_complexite.py
+  - 03_progressions/supports/premiere/P13/P13_TD_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_bareme_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_corrige_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_cours_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_evaluation_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_remediation_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_tp_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_trace_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P13/P13_version_amenagee_dichotomie_glouton_knn.md
+  - 03_progressions/supports/premiere/P14/P14_TD_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_bareme_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_corrige_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_cours_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_evaluation_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_remediation_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_tp_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_trace_synthese_projet_oral.md
+  - 03_progressions/supports/premiere/P14/P14_version_amenagee_synthese_projet_oral.md
+  - 03_progressions/supports/terminale/T00/T00_bareme_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_corrige_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_cours_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_evaluation_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_remediation_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_td_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_tp_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_trace_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/T00_version_amenagee_diagnostic_tests.md
+  - 03_progressions/supports/terminale/T00/code/T00_corrige_professeur_diagnostic_tests.py
+  - 03_progressions/supports/terminale/T00/code/T00_starter_diagnostic_tests.py
+  - 03_progressions/supports/terminale/T00/code/T00_tests_attendus_diagnostic_tests.py
+  - 03_progressions/supports/terminale/T01/T01_bareme_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_bareme_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_corrige_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_corrige_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_cours_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_cours_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_evaluation_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_evaluation_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_remediation_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_td_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_td_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_tp_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_tp_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_trace_interface_implementation_complement.md
+  - 03_progressions/supports/terminale/T01/T01_trace_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/T01_version_amenagee_interfaces_structures.md
+  - 03_progressions/supports/terminale/T01/code/T01_corrige_professeur_interfaces_structures.py
+  - 03_progressions/supports/terminale/T01/code/T01_starter_interfaces_structures.py
+  - 03_progressions/supports/terminale/T01/code/T01_tests_attendus_interfaces_structures.py
+  - 03_progressions/supports/terminale/T02/T02_bareme_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_corrige_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_cours_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_evaluation_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_remediation_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_td_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_tp_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_trace_classes_objets.md
+  - 03_progressions/supports/terminale/T02/T02_version_amenagee_classes_objets.md
+  - 03_progressions/supports/terminale/T02/code/T02_corrige_professeur_classes_objets.py
+  - 03_progressions/supports/terminale/T02/code/T02_starter_classes_objets.py
+  - 03_progressions/supports/terminale/T02/code/T02_tests_attendus_classes_objets.py
+  - 03_progressions/supports/terminale/T03/T03_bareme_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_bareme_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_corrige_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_corrige_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_cours_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_cours_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_evaluation_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_evaluation_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_remediation_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_td_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_td_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_tp_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_tp_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_trace_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/T03_trace_recherche_liste_dictionnaire.md
+  - 03_progressions/supports/terminale/T03/T03_version_amenagee_piles_files_dictionnaires.md
+  - 03_progressions/supports/terminale/T03/code/T03_corrige_professeur_piles_files_dictionnaires.py
+  - 03_progressions/supports/terminale/T03/code/T03_starter_piles_files_dictionnaires.py
+  - 03_progressions/supports/terminale/T03/code/T03_tests_attendus_piles_files_dictionnaires.py
+  - 03_progressions/supports/terminale/T04/T04_bareme_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_corrige_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_cours_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_evaluation_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_remediation_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_td_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_tp_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_trace_recursivite.md
+  - 03_progressions/supports/terminale/T04/T04_version_amenagee_recursivite.md
+  - 03_progressions/supports/terminale/T04/code/T04_corrige_professeur_recursivite.py
+  - 03_progressions/supports/terminale/T04/code/T04_starter_recursivite.py
+  - 03_progressions/supports/terminale/T04/code/T04_tests_attendus_recursivite.py
+  - 03_progressions/supports/terminale/T05/T05_bareme_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_bareme_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_corrige_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_corrige_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_cours_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_cours_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_evaluation_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_evaluation_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_remediation_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_td_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_td_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_tp_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_tp_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_trace_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/T05_trace_arbres_mesures_parcours_complement.md
+  - 03_progressions/supports/terminale/T05/T05_version_amenagee_arbres_binaires.md
+  - 03_progressions/supports/terminale/T05/code/T05_corrige_professeur_arbres_binaires.py
+  - 03_progressions/supports/terminale/T05/code/T05_starter_arbres_binaires.py
+  - 03_progressions/supports/terminale/T05/code/T05_tests_attendus_arbres_binaires.py
+  - 03_progressions/supports/terminale/T06/T06_TD_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_TP_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_bareme_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_corrige_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_cours_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_evaluation_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_remediation_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_tp_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_trace_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/T06_version_amenagee_arbres_binaires_recherche.md
+  - 03_progressions/supports/terminale/T06/code/T06_corrige_professeur_arbres_binaires_recherche.py
+  - 03_progressions/supports/terminale/T06/code/T06_starter_arbres_binaires_recherche.py
+  - 03_progressions/supports/terminale/T06/code/T06_tests_attendus_arbres_binaires_recherche.py
+  - 03_progressions/supports/terminale/T07/T07_TD_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_TP_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_bareme_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_corrige_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_cours_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_evaluation_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_remediation_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_tp_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_trace_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/T07_version_amenagee_graphes_modelisation_listes_matrices.md
+  - 03_progressions/supports/terminale/T07/code/T07_corrige_professeur_graphes_modelisation_listes_matrices.py
+  - 03_progressions/supports/terminale/T07/code/T07_starter_graphes_modelisation_listes_matrices.py
+  - 03_progressions/supports/terminale/T07/code/T07_tests_attendus_graphes_modelisation_listes_matrices.py
+  - 03_progressions/supports/terminale/T08/T08_TD_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_TP_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_bareme_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_corrige_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_cours_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_evaluation_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_remediation_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_tp_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_trace_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/T08_version_amenagee_bfs_dfs_cycles_chemins.md
+  - 03_progressions/supports/terminale/T08/code/T08_corrige_professeur_bfs_dfs_cycles_chemins.py
+  - 03_progressions/supports/terminale/T08/code/T08_starter_bfs_dfs_cycles_chemins.py
+  - 03_progressions/supports/terminale/T08/code/T08_tests_attendus_bfs_dfs_cycles_chemins.py
+  - 03_progressions/supports/terminale/T09/T09_TD_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_bareme_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_corrige_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_cours_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_evaluation_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_remediation_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_tp_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_trace_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/T09_version_amenagee_bases_relationnelles_cles_contraintes.md
+  - 03_progressions/supports/terminale/T09/code/T09_corrige_professeur_bases_relationnelles_cles_contraintes.py
+  - 03_progressions/supports/terminale/T09/code/T09_starter_bases_relationnelles_cles_contraintes.py
+  - 03_progressions/supports/terminale/T09/code/T09_tests_attendus_bases_relationnelles_cles_contraintes.py
+  - 03_progressions/supports/terminale/T10/T10_TD_sql_insert_update_delete.md
+  - 03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_bareme_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_evaluation_sql_insert_update_delete.md
+  - 03_progressions/supports/terminale/T10/T10_evaluation_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_remediation_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_tp_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_trace_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/T10_version_amenagee_sql_select_where_join.md
+  - 03_progressions/supports/terminale/T10/code/T10_corrige_professeur_sql_select_where_join.py
+  - 03_progressions/supports/terminale/T10/code/T10_starter_sql_select_where_join.py
+  - 03_progressions/supports/terminale/T10/code/T10_tests_attendus_sql_select_where_join.py
+  - 03_progressions/supports/terminale/T11/T11_TD_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_bareme_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_corrige_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_cours_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_evaluation_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_remediation_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_tp_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_trace_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T11/T11_version_amenagee_processus_ordonnancement_interblocage.md
+  - 03_progressions/supports/terminale/T12/T12_TD_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_bareme_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_corrige_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_cours_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_evaluation_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_remediation_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_tp_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_trace_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/T12_version_amenagee_routage_rip_ospf.md
+  - 03_progressions/supports/terminale/T12/code/T12_corrige_professeur_routage_rip_ospf.py
+  - 03_progressions/supports/terminale/T12/code/T12_starter_routage_rip_ospf.py
+  - 03_progressions/supports/terminale/T12/code/T12_tests_attendus_routage_rip_ospf.py
+  - 03_progressions/supports/terminale/T13/T13_TD_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_bareme_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_corrige_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_cours_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_evaluation_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_remediation_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_tp_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_trace_chiffrement_https.md
+  - 03_progressions/supports/terminale/T13/T13_version_amenagee_chiffrement_https.md
+  - 03_progressions/supports/terminale/T14/T14_TD_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_bareme_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_corrige_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_cours_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_evaluation_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_remediation_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_tp_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_trace_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T14/T14_version_amenagee_modularite_api_paradigmes_bugs.md
+  - 03_progressions/supports/terminale/T15/T15_TD_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_bareme_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_corrige_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_cours_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_evaluation_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_remediation_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_tp_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_trace_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T15/T15_version_amenagee_calculabilite_arret.md
+  - 03_progressions/supports/terminale/T16/T16_TD_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_bareme_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_corrige_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_cours_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_evaluation_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_remediation_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_tp_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_trace_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/T16_version_amenagee_diviser_pour_regner_tri_fusion.md
+  - 03_progressions/supports/terminale/T16/code/T16_corrige_professeur_diviser_pour_regner_tri_fusion.py
+  - 03_progressions/supports/terminale/T16/code/T16_starter_diviser_pour_regner_tri_fusion.py
+  - 03_progressions/supports/terminale/T16/code/T16_tests_attendus_diviser_pour_regner_tri_fusion.py
+  - 03_progressions/supports/terminale/T17/T17_TD_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_bareme_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_corrige_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_cours_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_evaluation_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_remediation_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_tp_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_trace_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/T17_version_amenagee_programmation_dynamique.md
+  - 03_progressions/supports/terminale/T17/code/T17_corrige_professeur_programmation_dynamique.py
+  - 03_progressions/supports/terminale/T17/code/T17_starter_programmation_dynamique.py
+  - 03_progressions/supports/terminale/T17/code/T17_tests_attendus_programmation_dynamique.py
+  - 03_progressions/supports/terminale/T18/T18_TD_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_bareme_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_corrige_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_cours_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_evaluation_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_remediation_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_tp_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_trace_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/T18_version_amenagee_boyer_moore.md
+  - 03_progressions/supports/terminale/T18/code/T18_corrige_professeur_boyer_moore.py
+  - 03_progressions/supports/terminale/T18/code/T18_starter_boyer_moore.py
+  - 03_progressions/supports/terminale/T18/code/T18_tests_attendus_boyer_moore.py
+  - 03_progressions/supports/terminale/T19/T19_TD_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_bareme_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_corrige_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_cours_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_evaluation_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_remediation_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_tp_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_trace_bac_pratique_grand_oral_projet.md
+  - 03_progressions/supports/terminale/T19/T19_version_amenagee_bac_pratique_grand_oral_projet.md
+  - INDEX.md
+  - INDEX_BY_AUDIENCE.md
+  - INDEX_BY_CAPACITY.md
+  - INDEX_BY_CHAPTER.md
+  - INDEX_BY_DOCUMENT_TYPE.md
+  - INDEX_BY_DOMAIN.md
+  - INDEX_BY_LEVEL.md
+  - INDEX_BY_RAG_COLLECTION.md
+  - INDEX_BY_SEQUENCE.md
+  - INDEX_BY_SESSION.md
+  - INDEX_BY_THEME.md
+  - README.md
+  - bank_strategy.md
+  - calendar_2026_2027_tunisia.md
+  - carnet_de_bord.md
+  - content_tree_policy.md
+  - course_internal_coherence_report.md
+  - coverage_gap_action_plan.md
+  - delivery_policy.md
+  - differentiation_quality_report.md
+  - docs/GUIDE_DEPLOIEMENT.md
+  - docs/LISEZMOI.txt
+  - docs/archive_security_policy.md
+  - docs/audits/AUDIT_FRONTEND_infra_ground_truth.md
+  - docs/enrichment_roadmap.md
+  - docs/finalisation_report.md
+  - docs/judge_campaign_plan.md
+  - docs/kit_production_NSI.md
+  - docs/latex_systems_decision.md
+  - docs/local_excludes_required.md
+  - docs/promotion/dossier_revue_lead.md
+  - docs/promotion/dossier_revue_lead_v2.md
+  - docs/promotion/dossier_revue_lead_v3.md
+  - docs/promotion/dossier_revue_lead_v4.md
+  - docs/promotion/dossier_revue_lead_v5.md
+  - docs/reorg_report.md
+  - docs/repo_topology.md
+  - docs/rvw_responses.md
+  - docs/source_archive_policy.md
+  - drive_inventory.csv
+  - drive_mapping.md
+  - drive_quarantine/README.md
+  - drive_quarantine_manifest.csv
+  - drive_remaining_action_plan.md
+  - drive_sources.yml
+  - evaluation_bareme_alignment_report.md
+  - human_review_register.csv
+  - human_review_wave_1_plan.md
+  - latex/README.md
+  - latex/build.sh
+  - latex/packs/premiere/P13/P13_aides.tex
+  - latex/packs/premiere/P13/P13_corrige.tex
+  - latex/packs/premiere/P13/P13_cours.tex
+  - latex/packs/premiere/P13/P13_evaluation.tex
+  - latex/packs/premiere/P13/P13_fiche_methode.tex
+  - latex/packs/premiere/P13/P13_td.tex
+  - latex/packs/premiere/P13/P13_td_eleve.tex
+  - latex/packs/premiere/P13/P13_tp.tex
+  - latex/packs/premiere/P13/P13_tp_eleve.tex
+  - latex/packs/premiere/P13/P13_trace.tex
+  - latex/packs/premiere/P13/build.sh
+  - learning_objectives_assessed_report.md
+  - missing_capabilities.md
+  - missing_documents_register_v2.md
+  - missing_sequence_resources_register.md
+  - pilot_scope.yml
+  - premiere/sequences/s01_representation_donnees/python/representation_tools.py
+  - premiere/sequences/s01_representation_donnees/sequence.yaml
+  - premiere/sequences/s01_representation_donnees/tests/test_representation_tools.py
+  - privacy_allowlist.yml
+  - program_capacity_evidence_depth_report.md
+  - programme_matrix_premiere.md
+  - programme_matrix_terminale.md
+  - progression_audit.md
+  - project_plan_premiere.md
+  - project_plan_terminale.md
+  - pyproject.toml
+  - qa_debt_register.md
+  - qa_gate_policy.md
+  - qa_report.md
+  - rag_coherence_report.md
+  - rag_config.example.yml
+  - rag_connection.md
+  - rag_server_fix_plan.md
+  - rag_timeout_diagnostic.md
+  - reports/METHODE_PRODUCTION_REELLE.md
+  - reports/alignment_known_failures.yml
+  - reports/audit_03_07_26.md
+  - reports/closure2/corrective2_report.md
+  - reports/closure2/corrective3_report.md
+  - reports/closure2/corrective_report.md
+  - reports/closure2/phaseA_closure_report.md
+  - reports/closure2/phaseA_final_report.md
+  - reports/closure2/rag_embedding_parity_report.md
+  - reports/closure2/rag_prod_cutover_executed_report.md
+  - reports/closure2/rag_prod_cutover_runbook.md
+  - reports/closure2/rag_state_of_truth.md
+  - reports/closure2/rag_target_architecture.md
+  - reports/closure2/rag_v2_cutover_STATE.md
+  - reports/closure2/rag_v2_cutover_report.md
+  - reports/closure2/rag_v2_rebuilt_report.md
+  - reports/closure2/rag_v2_versioned_report.md
+  - reports/drive_enrichment_report.md
+  - reports/excellence_editorial_review_nsi.md
+  - reports/excellence_remediation_progress.md
+  - reports/final_recipe_review_nsi.md
+  - reports/human_review_checklist_accessibility.md
+  - reports/human_review_checklist_pedagogy.md
+  - reports/human_review_checklist_science.md
+  - reports/human_review_protocol.md
+  - reports/lot0_ruff_autofix_review.md
+  - reports/lot1/drive_forensic.md
+  - reports/lot1/lot1_validation_log.md
+  - reports/lot1/repo_map.md
+  - reports/lot2/lot2_validation_log.md
+  - reports/lot3/archive_extraction_inventory.md
+  - reports/lot3/archive_security_inventory.md
+  - reports/lot3/lot3_hardening_validation_log.md
+  - reports/lot3/lot3_validation_log.md
+  - reports/lot3/post_merge_audit.md
+  - reports/missing_documents_register.md
+  - reports/pedagogical_blockers_report.md
+  - reports/programme_yaml_audit.md
+  - reports/reconciliation/branch_topology.md
+  - reports/reconciliation/closure_report.md
+  - reports/reconciliation/drive_integration_plan.md
+  - reports/reconciliation/mypy_debt.md
+  - reports/reconciliation/process_incidents.md
+  - reports/reconciliation/rag_pr35_status.md
+  - reports/reconciliation/rag_reindex_plan.md
+  - reports/reconciliation/reconciliation_report.md
+  - reports/reconciliation/reconciliation_verification_report.md
+  - reports/recovery_t10_p08_t17_from_blobs.md
+  - reports/td_quality_debt_register.yml
+  - reports/td_quality_debt_report.md
+  - reports_policy.md
+  - requirements.txt
+  - reviewer_confirmation.schema.json
+  - scientific_claims_review_report.md
+  - scraping_ingestion_plan.md
+  - scraping_strategy.md
+  - scripts/__init__.py
+  - scripts/_course_sheets_common.py
+  - scripts/_drive_paths.py
+  - scripts/_inventory_utils.py
+  - scripts/_operational_links.py
+  - scripts/_pedagogy_reports.py
+  - scripts/_qa_common.py
+  - scripts/_session_checks.py
+  - scripts/_supports_evidence.py
+  - scripts/archive_security.py
+  - scripts/build_all.py
+  - scripts/build_source_archive.py
+  - scripts/build_source_zip.py
+  - scripts/check_agents_governance.py
+  - scripts/check_archive_portability.py
+  - scripts/check_audit_extracted_runtime_budget.py
+  - scripts/check_audit_folder_policy.py
+  - scripts/check_bank_strategy.py
+  - scripts/check_boyer_moore_trace_consistency.py
+  - scripts/check_build_reports_freshness.py
+  - scripts/check_capacity_status_ladder.py
+  - scripts/check_closed_error_classes.py
+  - scripts/check_content_tree_policy.py
+  - scripts/check_contract_substance_quality.py
+  - scripts/check_corrected_answers_are_concrete.py
+  - scripts/check_course_explanatory_quality.py
+  - scripts/check_course_internal_coherence.py
+  - scripts/check_course_sheet_exercise_answer_count.py
+  - scripts/check_course_sheet_linked_resources_exist.py
+  - scripts/check_course_sheet_readiness.py
+  - scripts/check_course_sheet_readiness_strict.py
+  - scripts/check_course_sheets_alignment.py
+  - scripts/check_course_sheets_coverage.py
+  - scripts/check_course_sheets_no_template_abuse.py
+  - scripts/check_course_sheets_quality.py
+  - scripts/check_course_sheets_substance.py
+  - scripts/check_coverage_evidence.py
+  - scripts/check_coverage_gap_action_plan.py
+  - scripts/check_csv_numeric_fields_are_parseable.py
+  - scripts/check_delivered_archive_exactly_source_clean.py
+  - scripts/check_differentiation_distinctness.py
+  - scripts/check_differentiation_quality.py
+  - scripts/check_document_depth.py
+  - scripts/check_document_naming_conventions.py
+  - scripts/check_document_style.py
+  - scripts/check_drive_action_plan_completeness.py
+  - scripts/check_drive_enrichment_traceability.py
+  - scripts/check_drive_enrichment_traceability_portable.py
+  - scripts/check_drive_integration_plan.py
+  - scripts/check_drive_mapping.py
+  - scripts/check_drive_mapping_release.py
+  - scripts/check_drive_quarantine_privacy.py
+  - scripts/check_drive_trace_no_absolute_local_paths.py
+  - scripts/check_dynamic_programming_recurrence_consistency.py
+  - scripts/check_eleve_no_corrige.py
+  - scripts/check_eval_bareme_pairing.py
+  - scripts/check_evaluation_bareme_alignment.py
+  - scripts/check_evaluation_distribution.py
+  - scripts/check_first_batch_alignment.py
+  - scripts/check_first_batch_document_quality.py
+  - scripts/check_first_batch_tp_assets.py
+  - scripts/check_full_notional_resource_matrix.py
+  - scripts/check_full_sequence_resource_matrix.py
+  - scripts/check_gate_policy_consistency.py
+  - scripts/check_generated_template_residue.py
+  - scripts/check_git_clean.py
+  - scripts/check_graph_algorithm_trace_consistency.py
+  - scripts/check_human_review_register.py
+  - scripts/check_human_review_wave_plan.py
+  - scripts/check_learning_objectives_assessed.py
+  - scripts/check_linked_evaluation_quality.py
+  - scripts/check_linked_evaluation_substance.py
+  - scripts/check_linked_td_quality.py
+  - scripts/check_linked_td_substance.py
+  - scripts/check_links.py
+  - scripts/check_local_drive_traceability.py
+  - scripts/check_makefile_audit_policy.py
+  - scripts/check_manifest_source_integrity.py
+  - scripts/check_manifest_source_trace_consistency.py
+  - scripts/check_metadata.py
+  - scripts/check_missing_register_actionability.py
+  - scripts/check_missing_register_semantic_consistency.py
+  - scripts/check_monthly_load_balance.py
+  - scripts/check_network_packet_trace_consistency.py
+  - scripts/check_no_absent_coverage_for_release.py
+  - scripts/check_no_build_artifacts_in_index.py
+  - scripts/check_no_committed_secrets.py
+  - scripts/check_no_coverage_from_sheets_only.py
+  - scripts/check_no_duplicate_capacity_lines.py
+  - scripts/check_no_generic_scaffold_overuse.py
+  - scripts/check_no_global_archive_in_delivery_context.py
+  - scripts/check_no_line_padding.py
+  - scripts/check_no_needs_review_for_release.py
+  - scripts/check_no_operational_scope_hardcoding.py
+  - scripts/check_no_placeholders.py
+  - scripts/check_no_placeholders_code.py
+  - scripts/check_no_placeholders_docs.py
+  - scripts/check_no_private_data.py
+  - scripts/check_no_secret_file_mutation_policy.py
+  - scripts/check_no_sensitive_drive_in_source_clean.py
+  - scripts/check_no_teacher_content_in_student_export.py
+  - scripts/check_no_token_only_validation.py
+  - scripts/check_official_program_capacity_coverage_matrix.py
+  - scripts/check_operational_readiness_quality_coupling.py
+  - scripts/check_operational_supports_no_indicative_debt.py
+  - scripts/check_p04_key_consistency.py
+  - scripts/check_p05_expected_outputs_are_explicit.py
+  - scripts/check_p05_pipeline_consistency.py
+  - scripts/check_p05_semantic_consistency.py
+  - scripts/check_packaging_mode.py
+  - scripts/check_paper_tp_contract.py
+  - scripts/check_paper_tp_justification.py
+  - scripts/check_pedagogical_alignment.py
+  - scripts/check_pedagogical_indexes.py
+  - scripts/check_program_capacity_evidence_depth.py
+  - scripts/check_program_coverage.py
+  - scripts/check_program_yaml_atomicity.py
+  - scripts/check_progression_calendar_alignment.py
+  - scripts/check_progression_project_consistency.py
+  - scripts/check_project_quarter_requirement.py
+  - scripts/check_python_cache_stability.py
+  - scripts/check_python_quality.py
+  - scripts/check_qa_report_freshness.py
+  - scripts/check_qcm_contract_consistency.py
+  - scripts/check_qcm_schema.py
+  - scripts/check_quality_gates.py
+  - scripts/check_question_capacity_alignment.py
+  - scripts/check_rag_collection_policy.py
+  - scripts/check_rag_config.py
+  - scripts/check_rag_freshness.py
+  - scripts/check_rag_golden_examples_policy.py
+  - scripts/check_rag_index_metadata.py
+  - scripts/check_rag_metadata_canonical_fields.py
+  - scripts/check_ready_session_operationality.py
+  - scripts/check_ready_supports_depth.py
+  - scripts/check_ready_supports_required_sections.py
+  - scripts/check_register_no_hidden_operational_debt.py
+  - scripts/check_rendered_unit_artifacts.py
+  - scripts/check_repo_topology.py
+  - scripts/check_reports_policy.py
+  - scripts/check_required_sections.py
+  - scripts/check_scientific_claims_review.py
+  - scripts/check_sequence_capacity_alignment.py
+  - scripts/check_sequence_completeness.py
+  - scripts/check_sequence_contracts.py
+  - scripts/check_sequence_pack_consistency.py
+  - scripts/check_sequence_pedagogical_coherence.py
+  - scripts/check_session_classroom_operationality.py
+  - scripts/check_session_duration_consistency.py
+  - scripts/check_session_level_planning.py
+  - scripts/check_session_monthly_total.py
+  - scripts/check_session_operationalization_plan.py
+  - scripts/check_session_project_hours.py
+  - scripts/check_session_referenced_files_exist.py
+  - scripts/check_session_specificity.py
+  - scripts/check_session_to_resource_alignment.py
+  - scripts/check_session_week_calendar_consistency.py
+  - scripts/check_skills_governance.py
+  - scripts/check_sources_catalog.py
+  - scripts/check_sources_catalog_schema.py
+  - scripts/check_sql_query_result_consistency.py
+  - scripts/check_status_promotion_guard.py
+  - scripts/check_student_supports_no_scaffold_language.py
+  - scripts/check_substance_anchors.py
+  - scripts/check_substance_report_artifacts.py
+  - scripts/check_support_pedagogical_depth.py
+  - scripts/check_support_substance.py
+  - scripts/check_t18_trace_table_quality.py
+  - scripts/check_td_corrige_alignment.py
+  - scripts/check_teacher_corrections_alignment.py
+  - scripts/check_teacher_docs_depth.py
+  - scripts/check_tp_executable_opportunity.py
+  - scripts/check_tp_pedagogical_assets.py
+  - scripts/check_tp_pedagogical_assets_runtime.py
+  - scripts/check_tp_test_alignment.py
+  - scripts/check_tp_text_asset_alignment.py
+  - scripts/check_tree_bst_invariant_consistency.py
+  - scripts/check_uploaded_archive_policy.py
+  - scripts/check_validated_documents_quality_gates.py
+  - scripts/check_validated_statuses.py
+  - scripts/check_verdict_provenance.py
+  - scripts/classify_scraped_resource.py
+  - scripts/cleanup_python_artifacts.py
+  - scripts/drive_local_inventory.py
+  - scripts/drive_resource_triage.py
+  - scripts/generate_coverage_gap_action_plan.py
+  - scripts/generate_index.py
+  - scripts/generate_pedagogical_indexes.py
+  - scripts/generate_qa_report.py
+  - scripts/ingest_drive_export.py
+  - scripts/ingest_nsi_corpus.py
+  - scripts/judge_campaign.py
+  - scripts/prepare_scraped_docs_for_rag.py
+  - scripts/rag_coherence_report.py
+  - scripts/rag_core.py
+  - scripts/rag_diagnose_search_timeout.py
+  - scripts/rag_index_plan.py
+  - scripts/rag_ingest.py
+  - scripts/rag_ingest_server.py
+  - scripts/rag_query_example.py
+  - scripts/rag_smoke_test.py
+  - scripts/rebuild_inventory.py
+  - scripts/render_sequence.py
+  - scripts/render_substance_report.py
+  - scripts/render_unit.py
+  - scripts/run_audit_extracted_source.py
+  - scripts/run_python_tests.py
+  - scripts/run_substance_judge.py
+  - scripts/substance_judge.py
+  - scripts/substance_report_renderer.py
+  - sources_catalog.schema.json
+  - sources_catalog.yml
+  - substance_pipeline.md
+  - substance_rag_pilot_report.md
+  - substance_reviews/_adversarial/poisoned.verdict.json
+  - substance_reviews/campaign/P-ALGO-01A_substance_review.json
+  - substance_reviews/campaign/P-ALGO-01B_substance_review.json
+  - substance_reviews/campaign/P-ALGO-02A_substance_review.json
+  - substance_reviews/campaign/P-ALGO-02B_substance_review.json
+  - substance_reviews/campaign/P-ALGO-02C_substance_review.json
+  - substance_reviews/campaign/P-ALGO-02D_substance_review.json
+  - substance_reviews/campaign/P-ALGO-03_substance_review.json
+  - substance_reviews/campaign/P-ALGO-04_substance_review.json
+  - substance_reviews/campaign/P-ALGO-05_substance_review.json
+  - substance_reviews/campaign/P-ARCH-01A_substance_review.json
+  - substance_reviews/campaign/P-ARCH-01B_substance_review.json
+  - substance_reviews/campaign/P-ARCH-02A_substance_review.json
+  - substance_reviews/campaign/P-ARCH-02B_substance_review.json
+  - substance_reviews/campaign/P-ARCH-02C_substance_review.json
+  - substance_reviews/campaign/P-ARCH-03A_substance_review.json
+  - substance_reviews/campaign/P-ARCH-03B_substance_review.json
+  - substance_reviews/campaign/P-ARCH-03C_substance_review.json
+  - substance_reviews/campaign/P-ARCH-04A_substance_review.json
+  - substance_reviews/campaign/P-ARCH-04B_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-01_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-02A_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-02B_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-03_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-04_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-05A_substance_review.json
+  - substance_reviews/campaign/P-DATA-BASE-05B_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-01_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-02A_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-02B_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-02C_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-02D_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-03A_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-03B_substance_review.json
+  - substance_reviews/campaign/P-DATA-CONSTR-03C_substance_review.json
+  - substance_reviews/campaign/P-HIST-01_substance_review.json
+  - substance_reviews/campaign/P-IHM-01A_substance_review.json
+  - substance_reviews/campaign/P-IHM-01B_substance_review.json
+  - substance_reviews/campaign/P-IHM-02_substance_review.json
+  - substance_reviews/campaign/P-IHM-03A_substance_review.json
+  - substance_reviews/campaign/P-IHM-03B_substance_review.json
+  - substance_reviews/campaign/P-IHM-03C_substance_review.json
+  - substance_reviews/campaign/P-IHM-04A_substance_review.json
+  - substance_reviews/campaign/P-IHM-04B_substance_review.json
+  - substance_reviews/campaign/P-IHM-04C_substance_review.json
+  - substance_reviews/campaign/P-LANG-01_substance_review.json
+  - substance_reviews/campaign/P-LANG-02_substance_review.json
+  - substance_reviews/campaign/P-LANG-03A_substance_review.json
+  - substance_reviews/campaign/P-LANG-03B_substance_review.json
+  - substance_reviews/campaign/P-LANG-03C_substance_review.json
+  - substance_reviews/campaign/P-LANG-04_substance_review.json
+  - substance_reviews/campaign/P-LANG-05_substance_review.json
+  - substance_reviews/campaign/P-TABLE-01_substance_review.json
+  - substance_reviews/campaign/P-TABLE-02_substance_review.json
+  - substance_reviews/campaign/P-TABLE-03_substance_review.json
+  - substance_reviews/campaign/P-TABLE-04_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01A_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01B_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01C_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01D_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01E_substance_review.json
+  - substance_reviews/campaign/T-ALGO-01F_substance_review.json
+  - substance_reviews/campaign/T-ALGO-02A_substance_review.json
+  - substance_reviews/campaign/T-ALGO-02B_substance_review.json
+  - substance_reviews/campaign/T-ALGO-02C_substance_review.json
+  - substance_reviews/campaign/T-ALGO-02D_substance_review.json
+  - substance_reviews/campaign/T-ALGO-03_substance_review.json
+  - substance_reviews/campaign/T-ALGO-04_substance_review.json
+  - substance_reviews/campaign/T-ALGO-05_substance_review.json
+  - substance_reviews/campaign/T-ARCH-01_substance_review.json
+  - substance_reviews/campaign/T-ARCH-02A_substance_review.json
+  - substance_reviews/campaign/T-ARCH-02B_substance_review.json
+  - substance_reviews/campaign/T-ARCH-02C_substance_review.json
+  - substance_reviews/campaign/T-ARCH-03_substance_review.json
+  - substance_reviews/campaign/T-ARCH-04A_substance_review.json
+  - substance_reviews/campaign/T-ARCH-04B_substance_review.json
+  - substance_reviews/campaign/T-BDD-01A_substance_review.json
+  - substance_reviews/campaign/T-BDD-01B_substance_review.json
+  - substance_reviews/campaign/T-BDD-01C_substance_review.json
+  - substance_reviews/campaign/T-BDD-02_substance_review.json
+  - substance_reviews/campaign/T-BDD-03A_substance_review.json
+  - substance_reviews/campaign/T-BDD-03B_substance_review.json
+  - substance_reviews/campaign/T-BDD-03C_substance_review.json
+  - substance_reviews/campaign/T-BDD-03D_substance_review.json
+  - substance_reviews/campaign/T-BDD-03E_substance_review.json
+  - substance_reviews/campaign/T-BDD-03F_substance_review.json
+  - substance_reviews/campaign/T-BDD-03G_substance_review.json
+  - substance_reviews/campaign/T-BDD-03H_substance_review.json
+  - substance_reviews/campaign/T-HIST-01A_substance_review.json
+  - substance_reviews/campaign/T-HIST-01B_substance_review.json
+  - substance_reviews/campaign/T-LANG-01A_substance_review.json
+  - substance_reviews/campaign/T-LANG-01B_substance_review.json
+  - substance_reviews/campaign/T-LANG-01C_substance_review.json
+  - substance_reviews/campaign/T-LANG-02A_substance_review.json
+  - substance_reviews/campaign/T-LANG-02B_substance_review.json
+  - substance_reviews/campaign/T-LANG-03A_substance_review.json
+  - substance_reviews/campaign/T-LANG-03B_substance_review.json
+  - substance_reviews/campaign/T-LANG-03C_substance_review.json
+  - substance_reviews/campaign/T-LANG-04A_substance_review.json
+  - substance_reviews/campaign/T-LANG-04B_substance_review.json
+  - substance_reviews/campaign/T-LANG-05_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-01A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-01B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-01C_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-02A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-02B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-03A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-03B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-03C_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-04A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-04B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-05A_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-05B_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-05C_substance_review.json
+  - substance_reviews/campaign/T-STRUCT-05D_substance_review.json
+  - substance_reviews/campaign/_usage_log.json
+  - substance_reviews_index.md
+  - substance_verdict.schema.json
+  - support_source_trace.yml
+  - td_corrige_alignment_report.md
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/python/structures_tools.py
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/sequence.yaml
+  - terminale/sequences/s01_structures_donnees_interfaces_implementations/tests/test_structures_tools.py
+  - tests/conftest.py
+  - tests/fixtures/substance_judge/P05.json
+  - tests/mypy_baseline.txt
+  - tests/test_archive_integration_wrappers.py
+  - tests/test_archive_portability_modes.py
+  - tests/test_archive_security_imports.py
+  - tests/test_audit_extracted_source_no_hang.py
+  - tests/test_audit_strategic_integration.py
+  - tests/test_build_artifacts.py
+  - tests/test_classify_schema.py
+  - tests/test_consolidation_strict.py
+  - tests/test_course_sheets.py
+  - tests/test_delivered_archive_exactly_source_clean.py
+  - tests/test_doc_lint.py
+  - tests/test_drive_enrichment_traceability.py
+  - tests/test_drive_local_pipeline.py
+  - tests/test_drive_mapping_release.py
+  - tests/test_drive_portable_and_manifest.py
+  - tests/test_ellipsis_scoping.py
+  - tests/test_env_file_resolution.py
+  - tests/test_excellence_remediation_regressions.py
+  - tests/test_executable_quality_controls.py
+  - tests/test_final_quality_hardening.py
+  - tests/test_first_batch_alignment.py
+  - tests/test_first_batch_document_quality.py
+  - tests/test_first_batch_tp_assets.py
+  - tests/test_full_matrix_and_runtime.py
+  - tests/test_judge_collection_barriers.py
+  - tests/test_line_padding.py
+  - tests/test_linked_support_quality.py
+  - tests/test_local_drive_traceability.py
+  - tests/test_lot1_drive_gate_boundary.py
+  - tests/test_lot2_scraper_content_dedup.py
+  - tests/test_lot3_archive_security.py
+  - tests/test_lot3_topological_isolation.py
+  - tests/test_manifest_separation.py
+  - tests/test_missing_register_actionability.py
+  - tests/test_mypy_strict_debt.py
+  - tests/test_no_coverage_from_sheets_only.py
+  - tests/test_no_global_archive_in_delivery_context.py
+  - tests/test_no_inline_env_resolution.py
+  - tests/test_no_placeholders_code.py
+  - tests/test_no_stale_archive_guard.py
+  - tests/test_notional_and_disciplinary_controls.py
+  - tests/test_operational_substance_controls.py
+  - tests/test_organizer_nsi_safety.py
+  - tests/test_p05_p04_controls.py
+  - tests/test_packaging_modes.py
+  - tests/test_policy_checker_ast.py
+  - tests/test_private_data_detection.py
+  - tests/test_rag_governance_and_indexes.py
+  - tests/test_rag_ingest.py
+  - tests/test_ready_session_operationality.py
+  - tests/test_ready_supports_gates.py
+  - tests/test_register_semantic_consistency.py
+  - tests/test_render_substance_report_cli.py
+  - tests/test_render_unit.py
+  - tests/test_repo_topology.py
+  - tests/test_run_python_tests.py
+  - tests/test_secret_guard.py
+  - tests/test_sequence_contracts.py
+  - tests/test_sequence_pack_and_scaffold_controls.py
+  - tests/test_session_referenced_files_exist.py
+  - tests/test_session_specificity.py
+  - tests/test_source_archive_policy.py
+  - tests/test_source_zip_delivery.py
+  - tests/test_source_zip_timestamps.py
+  - tests/test_status_promotion_guard.py
+  - tests/test_strict_full_bank_controls.py
+  - tests/test_substance_hardened.py
+  - tests/test_substance_judge_pipeline.py
+  - tests/test_substance_report_renderer.py
+  - tests/test_support_substance.py
+  - tests/test_tp_pedagogical_assets.py
+  - tests/test_tp_pedagogical_assets_no_hang.py
+  - tests/test_tp_pedagogical_assets_runtime.py
+  - tests/test_tp_text_asset_alignment.py
+  - tests/test_uploaded_archive_policy.py
+  - tests/test_verdict_provenance.py
+  - tp_executable_opportunity_register.md
+  - tp_test_alignment_report.md
+- Ressources copiées dans banques :
+
+## Séquences détectées
+- P00: 10
+- P01: 11
+- P02: 18
+- P03: 18
+- P04: 19
+- P05: 10
+- P06: 10
+- P07: 11
+- P08: 18
+- P09: 10
+- P10: 10
+- P11: 10
+- P12: 10
+- P13: 10
+- P14: 10
+- S01 representation des donnees: 1
+- S01 structures de donnees interfaces implementations: 1
+- T00: 10
+- T01: 17
+- T02: 10
+- T03: 19
+- T04: 10
+- T05: 17
+- T06: 11
+- T07: 11
+- T08: 11
+- T09: 10
+- T10: 13
+- T11: 10
+- T12: 10
+- T13: 10
+- T14: 10
+- T15: 10
+- T16: 10
+- T17: 10
+- T18: 10
+- T19: 10
+- bank_index: 14
+- s01_representation_donnees: 22
+- s01_structures_donnees_interfaces_implementations: 21
+
+## Ressources publiables
+
+## Ressources professeur
+- 02_modeles_documents/modele_guide_prof.md
+- premiere/sequences/s01_representation_donnees/guide_professeur.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/guide_professeur.md
+
+## Ressources élève
+- .env.rag.example
+- .github/workflows/ci.yml
+- .pre-commit-config.yaml
+- 00_programmes_officiels/README.md
+- 00_programmes_officiels/programme_nsi_2019.yaml
+- 00_programmes_officiels/programme_nsi_premiere.txt
+- 00_programmes_officiels/programme_nsi_terminale.txt
+- 01_charte_graphique_et_pedagogique/charte_documentaire_sequences.md
+- 01_charte_graphique_et_pedagogique/charte_graphique.md
+- 01_charte_graphique_et_pedagogique/metadata_schema.md
+- 02_modeles_documents/modele_aides.tex
+- 02_modeles_documents/modele_cours.tex
+- 02_modeles_documents/modele_evaluation.tex
+- 02_modeles_documents/modele_fiche_methode.tex
+- 02_modeles_documents/modele_qcm.json
+- 02_modeles_documents/modele_sequence.yaml
+- 02_modeles_documents/modele_td.tex
+- 02_modeles_documents/modele_tp.tex
+- 02_modeles_documents/modele_trace.tex
+- 02_modeles_documents/nsi-preamble.sty
+- 03_progressions/fiches_cours/premiere/P00/P00_fiche_cours_methode_nsi.md
+- 03_progressions/fiches_cours/premiere/P01/P01_fiche_cours_bits_bases_2_10_16.md
+- 03_progressions/fiches_cours/premiere/P01/P01_fiche_cours_conversions.md
+- 03_progressions/fiches_cours/premiere/P02/P02_fiche_cours_booleens_tables_verite.md
+- 03_progressions/fiches_cours/premiere/P02/P02_fiche_cours_complement_a_deux.md
+- 03_progressions/fiches_cours/premiere/P03/P03_fiche_cours_flottants_approximations.md
+- 03_progressions/fiches_cours/premiere/P03/P03_fiche_cours_texte_unicode.md
+- 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_dictionnaires.md
+- 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_listes.md
+- 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_tuples.md
+- 03_progressions/fiches_cours/premiere/P05/P05_fiche_cours_tables_csv_import_coherence.md
+- 03_progressions/fiches_cours/premiere/P06/P06_fiche_cours_tables_recherche_tri_fusion.md
+- 03_progressions/fiches_cours/premiere/P07/P07_fiche_cours_fonctions_tests_specifications.md
+- 03_progressions/fiches_cours/premiere/P08/P08_fiche_cours_html_css_dom.md
+- 03_progressions/fiches_cours/premiere/P08/P08_fiche_cours_http_get_post_formulaires.md
+- 03_progressions/fiches_cours/premiere/P09/P09_fiche_cours_architecture_os_droits.md
+- 03_progressions/fiches_cours/premiere/P10/P10_fiche_cours_reseaux_protocoles_paquets.md
+- 03_progressions/fiches_cours/premiere/P11/P11_fiche_cours_parcours_recherche_extremum_moyenne.md
+- 03_progressions/fiches_cours/premiere/P12/P12_fiche_cours_tris_invariants_complexite.md
+- 03_progressions/fiches_cours/premiere/P13/P13_fiche_cours_dichotomie_glouton_knn.md
+- 03_progressions/fiches_cours/premiere/P14/P14_fiche_cours_synthese_projet_oral.md
+- 03_progressions/fiches_cours/terminale/T00/T00_fiche_cours_reprise_python_tests_complexite.md
+- 03_progressions/fiches_cours/terminale/T01/T01_fiche_cours_interface_implementation_tad.md
+- 03_progressions/fiches_cours/terminale/T02/T02_fiche_cours_classes_objets_attributs_methodes.md
+- 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_dictionnaires.md
+- 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_files.md
+- 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_piles.md
+- 03_progressions/fiches_cours/terminale/T04/T04_fiche_cours_recursivite_cas_base_terminaison.md
+- 03_progressions/fiches_cours/terminale/T05/T05_fiche_cours_arbres_binaires_parcours.md
+- 03_progressions/fiches_cours/terminale/T06/T06_fiche_cours_arbres_binaires_recherche.md
+- 03_progressions/fiches_cours/terminale/T07/T07_fiche_cours_graphes_modelisation_listes_matrices.md
+- 03_progressions/fiches_cours/terminale/T08/T08_fiche_cours_bfs_dfs_cycles_chemins.md
+- 03_progressions/fiches_cours/terminale/T09/T09_fiche_cours_bases_relationnelles_cles_contraintes.md
+- 03_progressions/fiches_cours/terminale/T10/T10_fiche_cours_sql_insert_update_delete.md
+- 03_progressions/fiches_cours/terminale/T10/T10_fiche_cours_sql_select_where_join.md
+- 03_progressions/fiches_cours/terminale/T11/T11_fiche_cours_processus_ordonnancement_interblocage.md
+- 03_progressions/fiches_cours/terminale/T12/T12_fiche_cours_routage_rip_ospf.md
+- 03_progressions/fiches_cours/terminale/T13/T13_fiche_cours_chiffrement_https.md
+- 03_progressions/fiches_cours/terminale/T14/T14_fiche_cours_modularite_api_paradigmes_bugs.md
+- 03_progressions/fiches_cours/terminale/T15/T15_fiche_cours_calculabilite_arret.md
+- 03_progressions/fiches_cours/terminale/T16/T16_fiche_cours_diviser_pour_regner_tri_fusion.md
+- 03_progressions/fiches_cours/terminale/T17/T17_fiche_cours_programmation_dynamique.md
+- 03_progressions/fiches_cours/terminale/T18/T18_fiche_cours_boyer_moore.md
+- 03_progressions/fiches_cours/terminale/T19/T19_fiche_cours_bac_pratique_grand_oral_projet.md
+- 03_progressions/monthly_load_premiere.md
+- 03_progressions/monthly_load_terminale.md
+- 03_progressions/progression_premiere.md
+- 03_progressions/progression_terminale.md
+- 03_progressions/seances_premiere.md
+- 03_progressions/seances_terminale.md
+- 03_progressions/supports/contracts/P00_contract.yml
+- 03_progressions/supports/contracts/P01_contract.yml
+- 03_progressions/supports/contracts/P02_contract.yml
+- 03_progressions/supports/contracts/P03_contract.yml
+- 03_progressions/supports/contracts/P04_contract.yml
+- 03_progressions/supports/contracts/P05_contract.yml
+- 03_progressions/supports/contracts/P06_contract.yml
+- 03_progressions/supports/contracts/P07_contract.yml
+- 03_progressions/supports/contracts/P08_contract.yml
+- 03_progressions/supports/contracts/P09_contract.yml
+- 03_progressions/supports/contracts/P10_contract.yml
+- 03_progressions/supports/contracts/P11_contract.yml
+- 03_progressions/supports/contracts/P12_contract.yml
+- 03_progressions/supports/contracts/P13_contract.yml
+- 03_progressions/supports/contracts/P14_contract.yml
+- 03_progressions/supports/contracts/T00_contract.yml
+- 03_progressions/supports/contracts/T01_contract.yml
+- 03_progressions/supports/contracts/T02_contract.yml
+- 03_progressions/supports/contracts/T03_contract.yml
+- 03_progressions/supports/contracts/T04_contract.yml
+- 03_progressions/supports/contracts/T05_contract.yml
+- 03_progressions/supports/contracts/T06_contract.yml
+- 03_progressions/supports/contracts/T07_contract.yml
+- 03_progressions/supports/contracts/T08_contract.yml
+- 03_progressions/supports/contracts/T09_contract.yml
+- 03_progressions/supports/contracts/T10_contract.yml
+- 03_progressions/supports/contracts/T11_contract.yml
+- 03_progressions/supports/contracts/T12_contract.yml
+- 03_progressions/supports/contracts/T13_contract.yml
+- 03_progressions/supports/contracts/T14_contract.yml
+- 03_progressions/supports/contracts/T15_contract.yml
+- 03_progressions/supports/contracts/T16_contract.yml
+- 03_progressions/supports/contracts/T17_contract.yml
+- 03_progressions/supports/contracts/T18_contract.yml
+- 03_progressions/supports/contracts/T19_contract.yml
+- 03_progressions/supports/premiere/P00/P00_bareme_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_cours_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_evaluation_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_remediation_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_tp_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_trace_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_version_amenagee_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/code/P00_starter_diagnostic_python.py
+- 03_progressions/supports/premiere/P00/code/P00_tests_attendus_diagnostic_python.py
+- 03_progressions/supports/premiere/P01/P01_bareme_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_cours_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_evaluation_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_remediation_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_td_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_tp_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_trace_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_version_amenagee_conversions_bases.md
+- 03_progressions/supports/premiere/P01/code/P01_starter_conversions_bases.py
+- 03_progressions/supports/premiere/P01/code/P01_tests_attendus_conversions_bases.py
+- 03_progressions/supports/premiere/P02/P02_bareme_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_bareme_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_cours_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_cours_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_evaluation_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_evaluation_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_remediation_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_td_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_td_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_tp_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_tp_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_trace_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_trace_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_version_amenagee_complement_booleens.md
+- 03_progressions/supports/premiere/P02/code/P02_starter_complement_booleens.py
+- 03_progressions/supports/premiere/P02/code/P02_tests_attendus_complement_booleens.py
+- 03_progressions/supports/premiere/P03/P03_bareme_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_bareme_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_cours_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_cours_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_evaluation_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_evaluation_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_remediation_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_td_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_td_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_tp_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_tp_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_trace_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_trace_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_version_amenagee_texte_reels.md
+- 03_progressions/supports/premiere/P03/code/P03_starter_texte_reels.py
+- 03_progressions/supports/premiere/P03/code/P03_tests_attendus_texte_reels.py
+- 03_progressions/supports/premiere/P04/P04_bareme_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_bareme_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_cours_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_evaluation_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_remediation_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_td_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_tp_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_tp_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_trace_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_trace_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md
+- 03_progressions/supports/premiere/P04/code/P04_starter_types_construits.py
+- 03_progressions/supports/premiere/P04/code/P04_tests_attendus_types_construits.py
+- 03_progressions/supports/premiere/P05/P05_bareme_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_cours_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_evaluation_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_remediation_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_td_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_tp_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_trace_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_version_amenagee_tables_csv.md
+- 03_progressions/supports/premiere/P05/code/P05_starter_tables_csv.py
+- 03_progressions/supports/premiere/P05/code/P05_tests_attendus_tables_csv.py
+- 03_progressions/supports/premiere/P05/data/pays_monde_extrait.csv
+- 03_progressions/supports/premiere/P06/P06_TD_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_bareme_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_cours_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_evaluation_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_remediation_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_tp_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_trace_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_version_amenagee_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/code/P06_starter_tables_recherche_tri_fusion.py
+- 03_progressions/supports/premiere/P06/code/P06_tests_attendus_tables_recherche_tri_fusion.py
+- 03_progressions/supports/premiere/P07/P07_TD_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_TP_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_bareme_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_evaluation_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_remediation_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_tp_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_trace_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_version_amenagee_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/code/P07_starter_fonctions_tests_specifications.py
+- 03_progressions/supports/premiere/P07/code/P07_tests_attendus_fonctions_tests_specifications.py
+- 03_progressions/supports/premiere/P08/P08_TD_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_TP_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_TP_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_bareme_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_bareme_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_bareme_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_evaluation_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_evaluation_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_remediation_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_trace_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_version_amenagee_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/code/P08_starter_web_http_dom_formulaires.py
+- 03_progressions/supports/premiere/P08/code/P08_tests_attendus_web_http_dom_formulaires.py
+- 03_progressions/supports/premiere/P09/P09_TD_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_bareme_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_cours_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_evaluation_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_remediation_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_tp_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_trace_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_version_amenagee_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/code/P09_starter_architecture_os_droits.py
+- 03_progressions/supports/premiere/P09/code/P09_tests_attendus_architecture_os_droits.py
+- 03_progressions/supports/premiere/P10/P10_TD_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_bareme_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_cours_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_evaluation_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_remediation_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_tp_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_trace_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_version_amenagee_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/code/P10_starter_reseaux_protocoles_paquets.py
+- 03_progressions/supports/premiere/P10/code/P10_tests_attendus_reseaux_protocoles_paquets.py
+- 03_progressions/supports/premiere/P11/P11_TD_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_bareme_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_cours_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_evaluation_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_remediation_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_tp_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_trace_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_version_amenagee_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/code/P11_starter_parcours_recherche_extremum_moyenne.py
+- 03_progressions/supports/premiere/P11/code/P11_tests_attendus_parcours_recherche_extremum_moyenne.py
+- 03_progressions/supports/premiere/P12/P12_TD_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_bareme_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_cours_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_evaluation_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_remediation_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_tp_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_trace_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_version_amenagee_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/code/P12_starter_tris_invariants_complexite.py
+- 03_progressions/supports/premiere/P12/code/P12_tests_attendus_tris_invariants_complexite.py
+- 03_progressions/supports/premiere/P13/P13_TD_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_bareme_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_cours_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_evaluation_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_remediation_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_tp_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_trace_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_version_amenagee_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P14/P14_TD_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_bareme_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_cours_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_evaluation_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_remediation_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_tp_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_trace_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_version_amenagee_synthese_projet_oral.md
+- 03_progressions/supports/terminale/T00/T00_bareme_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_cours_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_evaluation_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_remediation_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_td_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_tp_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_trace_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_version_amenagee_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/code/T00_starter_diagnostic_tests.py
+- 03_progressions/supports/terminale/T00/code/T00_tests_attendus_diagnostic_tests.py
+- 03_progressions/supports/terminale/T01/T01_bareme_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_bareme_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_cours_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_cours_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_evaluation_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_evaluation_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_remediation_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_td_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_td_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_tp_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_tp_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_trace_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_trace_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_version_amenagee_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/code/T01_starter_interfaces_structures.py
+- 03_progressions/supports/terminale/T01/code/T01_tests_attendus_interfaces_structures.py
+- 03_progressions/supports/terminale/T02/T02_bareme_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_cours_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_evaluation_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_remediation_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_td_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_tp_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_trace_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_version_amenagee_classes_objets.md
+- 03_progressions/supports/terminale/T02/code/T02_starter_classes_objets.py
+- 03_progressions/supports/terminale/T02/code/T02_tests_attendus_classes_objets.py
+- 03_progressions/supports/terminale/T03/T03_bareme_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_bareme_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_cours_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_cours_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_evaluation_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_evaluation_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_remediation_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_td_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_td_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_tp_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_tp_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_trace_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_trace_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_version_amenagee_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/code/T03_starter_piles_files_dictionnaires.py
+- 03_progressions/supports/terminale/T03/code/T03_tests_attendus_piles_files_dictionnaires.py
+- 03_progressions/supports/terminale/T04/T04_bareme_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_cours_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_evaluation_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_remediation_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_td_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_tp_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_trace_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_version_amenagee_recursivite.md
+- 03_progressions/supports/terminale/T04/code/T04_starter_recursivite.py
+- 03_progressions/supports/terminale/T04/code/T04_tests_attendus_recursivite.py
+- 03_progressions/supports/terminale/T05/T05_bareme_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_bareme_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_cours_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_cours_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_evaluation_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_evaluation_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_remediation_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_td_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_td_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_tp_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_tp_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_trace_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_trace_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_version_amenagee_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/code/T05_starter_arbres_binaires.py
+- 03_progressions/supports/terminale/T05/code/T05_tests_attendus_arbres_binaires.py
+- 03_progressions/supports/terminale/T06/T06_TD_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_TP_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_bareme_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_cours_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_evaluation_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_remediation_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_tp_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_trace_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_version_amenagee_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/code/T06_starter_arbres_binaires_recherche.py
+- 03_progressions/supports/terminale/T06/code/T06_tests_attendus_arbres_binaires_recherche.py
+- 03_progressions/supports/terminale/T07/T07_TD_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_TP_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_bareme_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_cours_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_evaluation_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_remediation_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_tp_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_trace_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_version_amenagee_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/code/T07_starter_graphes_modelisation_listes_matrices.py
+- 03_progressions/supports/terminale/T07/code/T07_tests_attendus_graphes_modelisation_listes_matrices.py
+- 03_progressions/supports/terminale/T08/T08_TD_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_TP_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_bareme_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_cours_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_evaluation_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_remediation_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_tp_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_trace_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_version_amenagee_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/code/T08_starter_bfs_dfs_cycles_chemins.py
+- 03_progressions/supports/terminale/T08/code/T08_tests_attendus_bfs_dfs_cycles_chemins.py
+- 03_progressions/supports/terminale/T09/T09_TD_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_bareme_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_cours_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_evaluation_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_remediation_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_tp_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_trace_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_version_amenagee_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/code/T09_starter_bases_relationnelles_cles_contraintes.py
+- 03_progressions/supports/terminale/T09/code/T09_tests_attendus_bases_relationnelles_cles_contraintes.py
+- 03_progressions/supports/terminale/T10/T10_TD_sql_insert_update_delete.md
+- 03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_bareme_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_evaluation_sql_insert_update_delete.md
+- 03_progressions/supports/terminale/T10/T10_evaluation_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_remediation_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_tp_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_trace_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_version_amenagee_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/code/T10_starter_sql_select_where_join.py
+- 03_progressions/supports/terminale/T10/code/T10_tests_attendus_sql_select_where_join.py
+- 03_progressions/supports/terminale/T11/T11_TD_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_bareme_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_cours_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_evaluation_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_remediation_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_tp_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_trace_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_version_amenagee_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T12/T12_TD_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_bareme_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_cours_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_evaluation_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_remediation_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_tp_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_trace_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_version_amenagee_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/code/T12_starter_routage_rip_ospf.py
+- 03_progressions/supports/terminale/T12/code/T12_tests_attendus_routage_rip_ospf.py
+- 03_progressions/supports/terminale/T13/T13_TD_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_bareme_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_cours_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_evaluation_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_remediation_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_tp_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_trace_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_version_amenagee_chiffrement_https.md
+- 03_progressions/supports/terminale/T14/T14_TD_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_bareme_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_cours_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_evaluation_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_remediation_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_tp_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_trace_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_version_amenagee_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T15/T15_TD_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_bareme_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_cours_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_evaluation_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_remediation_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_tp_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_trace_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_version_amenagee_calculabilite_arret.md
+- 03_progressions/supports/terminale/T16/T16_TD_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_bareme_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_cours_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_evaluation_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_remediation_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_tp_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_trace_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_version_amenagee_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/code/T16_starter_diviser_pour_regner_tri_fusion.py
+- 03_progressions/supports/terminale/T16/code/T16_tests_attendus_diviser_pour_regner_tri_fusion.py
+- 03_progressions/supports/terminale/T17/T17_TD_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_bareme_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_cours_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_evaluation_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_remediation_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_tp_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_trace_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_version_amenagee_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/code/T17_starter_programmation_dynamique.py
+- 03_progressions/supports/terminale/T17/code/T17_tests_attendus_programmation_dynamique.py
+- 03_progressions/supports/terminale/T18/T18_TD_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_bareme_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_cours_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_evaluation_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_remediation_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_tp_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_trace_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_version_amenagee_boyer_moore.md
+- 03_progressions/supports/terminale/T18/code/T18_starter_boyer_moore.py
+- 03_progressions/supports/terminale/T18/code/T18_tests_attendus_boyer_moore.py
+- 03_progressions/supports/terminale/T19/T19_TD_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_bareme_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_cours_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_evaluation_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_remediation_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_tp_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_trace_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_version_amenagee_bac_pratique_grand_oral_projet.md
+- INDEX.md
+- INDEX_BY_AUDIENCE.md
+- INDEX_BY_CAPACITY.md
+- INDEX_BY_CHAPTER.md
+- INDEX_BY_DOCUMENT_TYPE.md
+- INDEX_BY_DOMAIN.md
+- INDEX_BY_LEVEL.md
+- INDEX_BY_RAG_COLLECTION.md
+- INDEX_BY_SEQUENCE.md
+- INDEX_BY_SESSION.md
+- INDEX_BY_THEME.md
+- README.md
+- bank_strategy.md
+- calendar_2026_2027_tunisia.md
+- carnet_de_bord.md
+- content_tree_policy.md
+- course_internal_coherence_report.md
+- coverage_gap_action_plan.md
+- delivery_policy.md
+- differentiation_quality_report.md
+- docs/GUIDE_DEPLOIEMENT.md
+- docs/LISEZMOI.txt
+- docs/archive_security_policy.md
+- docs/audits/AUDIT_FRONTEND_infra_ground_truth.md
+- docs/enrichment_roadmap.md
+- docs/finalisation_report.md
+- docs/judge_campaign_plan.md
+- docs/kit_production_NSI.md
+- docs/latex_systems_decision.md
+- docs/local_excludes_required.md
+- docs/promotion/dossier_revue_lead.md
+- docs/promotion/dossier_revue_lead_v2.md
+- docs/promotion/dossier_revue_lead_v3.md
+- docs/promotion/dossier_revue_lead_v4.md
+- docs/promotion/dossier_revue_lead_v5.md
+- docs/reorg_report.md
+- docs/repo_topology.md
+- docs/rvw_responses.md
+- docs/source_archive_policy.md
+- drive_inventory.csv
+- drive_mapping.md
+- drive_quarantine/README.md
+- drive_quarantine_manifest.csv
+- drive_remaining_action_plan.md
+- drive_sources.yml
+- evaluation_bareme_alignment_report.md
+- human_review_register.csv
+- human_review_wave_1_plan.md
+- latex/README.md
+- latex/build.sh
+- latex/packs/premiere/P13/P13_aides.tex
+- latex/packs/premiere/P13/P13_cours.tex
+- latex/packs/premiere/P13/P13_evaluation.tex
+- latex/packs/premiere/P13/P13_fiche_methode.tex
+- latex/packs/premiere/P13/P13_td.tex
+- latex/packs/premiere/P13/P13_td_eleve.tex
+- latex/packs/premiere/P13/P13_tp.tex
+- latex/packs/premiere/P13/P13_tp_eleve.tex
+- latex/packs/premiere/P13/P13_trace.tex
+- latex/packs/premiere/P13/build.sh
+- learning_objectives_assessed_report.md
+- missing_capabilities.md
+- missing_documents_register_v2.md
+- missing_sequence_resources_register.md
+- pilot_scope.yml
+- premiere/banques/evaluations/index.md
+- premiere/banques/exercices/index.md
+- premiere/banques/index.md
+- premiere/banques/projets/index.md
+- premiere/banques/qcm/index.md
+- premiere/banques/sujets_pratiques/index.md
+- premiere/banques/tp/index.md
+- premiere/sequences/s01_representation_donnees/aides_progressives.md
+- premiere/sequences/s01_representation_donnees/bareme.md
+- premiere/sequences/s01_representation_donnees/cours_eleve.md
+- premiere/sequences/s01_representation_donnees/evaluation.md
+- premiere/sequences/s01_representation_donnees/fiche_methode.md
+- premiere/sequences/s01_representation_donnees/grille_competences.md
+- premiere/sequences/s01_representation_donnees/pedagogical_review.md
+- premiere/sequences/s01_representation_donnees/projet_associe.md
+- premiere/sequences/s01_representation_donnees/python/representation_tools.py
+- premiere/sequences/s01_representation_donnees/qcm.json
+- premiere/sequences/s01_representation_donnees/quality_audit_s01.md
+- premiere/sequences/s01_representation_donnees/revue_substance.md
+- premiere/sequences/s01_representation_donnees/sequence.yaml
+- premiere/sequences/s01_representation_donnees/sources.md
+- premiere/sequences/s01_representation_donnees/td.md
+- premiere/sequences/s01_representation_donnees/tests/test_representation_tools.py
+- premiere/sequences/s01_representation_donnees/tp.md
+- premiere/sequences/s01_representation_donnees/trace_ecrite.md
+- premiere/sequences/s01_representation_donnees/version_amenagee.md
+- privacy_allowlist.yml
+- program_capacity_evidence_depth_report.md
+- programme_matrix_premiere.md
+- programme_matrix_terminale.md
+- progression_audit.md
+- project_plan_premiere.md
+- project_plan_terminale.md
+- pyproject.toml
+- qa_debt_register.md
+- qa_gate_policy.md
+- qa_report.md
+- rag_coherence_report.md
+- rag_config.example.yml
+- rag_connection.md
+- rag_server_fix_plan.md
+- rag_timeout_diagnostic.md
+- reports/METHODE_PRODUCTION_REELLE.md
+- reports/alignment_known_failures.yml
+- reports/audit_03_07_26.md
+- reports/closure2/corrective2_report.md
+- reports/closure2/corrective3_report.md
+- reports/closure2/corrective_report.md
+- reports/closure2/phaseA_closure_report.md
+- reports/closure2/phaseA_final_report.md
+- reports/closure2/rag_embedding_parity_report.md
+- reports/closure2/rag_prod_cutover_executed_report.md
+- reports/closure2/rag_prod_cutover_runbook.md
+- reports/closure2/rag_state_of_truth.md
+- reports/closure2/rag_target_architecture.md
+- reports/closure2/rag_v2_cutover_STATE.md
+- reports/closure2/rag_v2_cutover_report.md
+- reports/closure2/rag_v2_rebuilt_report.md
+- reports/closure2/rag_v2_versioned_report.md
+- reports/drive_enrichment_report.md
+- reports/excellence_editorial_review_nsi.md
+- reports/excellence_remediation_progress.md
+- reports/final_recipe_review_nsi.md
+- reports/human_review_checklist_accessibility.md
+- reports/human_review_checklist_pedagogy.md
+- reports/human_review_checklist_science.md
+- reports/human_review_protocol.md
+- reports/lot0_ruff_autofix_review.md
+- reports/lot1/drive_forensic.md
+- reports/lot1/lot1_validation_log.md
+- reports/lot1/repo_map.md
+- reports/lot2/lot2_validation_log.md
+- reports/lot3/archive_extraction_inventory.md
+- reports/lot3/archive_security_inventory.md
+- reports/lot3/lot3_hardening_validation_log.md
+- reports/lot3/lot3_validation_log.md
+- reports/lot3/post_merge_audit.md
+- reports/missing_documents_register.md
+- reports/pedagogical_blockers_report.md
+- reports/programme_yaml_audit.md
+- reports/reconciliation/branch_topology.md
+- reports/reconciliation/closure_report.md
+- reports/reconciliation/drive_integration_plan.md
+- reports/reconciliation/mypy_debt.md
+- reports/reconciliation/process_incidents.md
+- reports/reconciliation/rag_pr35_status.md
+- reports/reconciliation/rag_reindex_plan.md
+- reports/reconciliation/reconciliation_report.md
+- reports/reconciliation/reconciliation_verification_report.md
+- reports/recovery_t10_p08_t17_from_blobs.md
+- reports/td_quality_debt_register.yml
+- reports/td_quality_debt_report.md
+- reports_policy.md
+- requirements.txt
+- reviewer_confirmation.schema.json
+- scientific_claims_review_report.md
+- scraping_ingestion_plan.md
+- scraping_strategy.md
+- scripts/__init__.py
+- scripts/_course_sheets_common.py
+- scripts/_drive_paths.py
+- scripts/_inventory_utils.py
+- scripts/_operational_links.py
+- scripts/_pedagogy_reports.py
+- scripts/_qa_common.py
+- scripts/_session_checks.py
+- scripts/_supports_evidence.py
+- scripts/archive_security.py
+- scripts/build_all.py
+- scripts/build_source_archive.py
+- scripts/build_source_zip.py
+- scripts/check_agents_governance.py
+- scripts/check_archive_portability.py
+- scripts/check_audit_extracted_runtime_budget.py
+- scripts/check_audit_folder_policy.py
+- scripts/check_bank_strategy.py
+- scripts/check_boyer_moore_trace_consistency.py
+- scripts/check_build_reports_freshness.py
+- scripts/check_capacity_status_ladder.py
+- scripts/check_closed_error_classes.py
+- scripts/check_content_tree_policy.py
+- scripts/check_contract_substance_quality.py
+- scripts/check_corrected_answers_are_concrete.py
+- scripts/check_course_explanatory_quality.py
+- scripts/check_course_internal_coherence.py
+- scripts/check_course_sheet_exercise_answer_count.py
+- scripts/check_course_sheet_linked_resources_exist.py
+- scripts/check_course_sheet_readiness.py
+- scripts/check_course_sheet_readiness_strict.py
+- scripts/check_course_sheets_alignment.py
+- scripts/check_course_sheets_coverage.py
+- scripts/check_course_sheets_no_template_abuse.py
+- scripts/check_course_sheets_quality.py
+- scripts/check_course_sheets_substance.py
+- scripts/check_coverage_evidence.py
+- scripts/check_coverage_gap_action_plan.py
+- scripts/check_csv_numeric_fields_are_parseable.py
+- scripts/check_delivered_archive_exactly_source_clean.py
+- scripts/check_differentiation_distinctness.py
+- scripts/check_differentiation_quality.py
+- scripts/check_document_depth.py
+- scripts/check_document_naming_conventions.py
+- scripts/check_document_style.py
+- scripts/check_drive_action_plan_completeness.py
+- scripts/check_drive_enrichment_traceability.py
+- scripts/check_drive_enrichment_traceability_portable.py
+- scripts/check_drive_integration_plan.py
+- scripts/check_drive_mapping.py
+- scripts/check_drive_mapping_release.py
+- scripts/check_drive_quarantine_privacy.py
+- scripts/check_drive_trace_no_absolute_local_paths.py
+- scripts/check_dynamic_programming_recurrence_consistency.py
+- scripts/check_eval_bareme_pairing.py
+- scripts/check_evaluation_bareme_alignment.py
+- scripts/check_evaluation_distribution.py
+- scripts/check_first_batch_alignment.py
+- scripts/check_first_batch_document_quality.py
+- scripts/check_first_batch_tp_assets.py
+- scripts/check_full_notional_resource_matrix.py
+- scripts/check_full_sequence_resource_matrix.py
+- scripts/check_gate_policy_consistency.py
+- scripts/check_generated_template_residue.py
+- scripts/check_git_clean.py
+- scripts/check_graph_algorithm_trace_consistency.py
+- scripts/check_human_review_register.py
+- scripts/check_human_review_wave_plan.py
+- scripts/check_learning_objectives_assessed.py
+- scripts/check_linked_evaluation_quality.py
+- scripts/check_linked_evaluation_substance.py
+- scripts/check_linked_td_quality.py
+- scripts/check_linked_td_substance.py
+- scripts/check_links.py
+- scripts/check_local_drive_traceability.py
+- scripts/check_makefile_audit_policy.py
+- scripts/check_manifest_source_integrity.py
+- scripts/check_manifest_source_trace_consistency.py
+- scripts/check_metadata.py
+- scripts/check_missing_register_actionability.py
+- scripts/check_missing_register_semantic_consistency.py
+- scripts/check_monthly_load_balance.py
+- scripts/check_network_packet_trace_consistency.py
+- scripts/check_no_absent_coverage_for_release.py
+- scripts/check_no_build_artifacts_in_index.py
+- scripts/check_no_committed_secrets.py
+- scripts/check_no_coverage_from_sheets_only.py
+- scripts/check_no_duplicate_capacity_lines.py
+- scripts/check_no_generic_scaffold_overuse.py
+- scripts/check_no_global_archive_in_delivery_context.py
+- scripts/check_no_line_padding.py
+- scripts/check_no_needs_review_for_release.py
+- scripts/check_no_operational_scope_hardcoding.py
+- scripts/check_no_placeholders.py
+- scripts/check_no_placeholders_code.py
+- scripts/check_no_placeholders_docs.py
+- scripts/check_no_private_data.py
+- scripts/check_no_secret_file_mutation_policy.py
+- scripts/check_no_sensitive_drive_in_source_clean.py
+- scripts/check_no_teacher_content_in_student_export.py
+- scripts/check_no_token_only_validation.py
+- scripts/check_official_program_capacity_coverage_matrix.py
+- scripts/check_operational_readiness_quality_coupling.py
+- scripts/check_operational_supports_no_indicative_debt.py
+- scripts/check_p04_key_consistency.py
+- scripts/check_p05_expected_outputs_are_explicit.py
+- scripts/check_p05_pipeline_consistency.py
+- scripts/check_p05_semantic_consistency.py
+- scripts/check_packaging_mode.py
+- scripts/check_paper_tp_contract.py
+- scripts/check_paper_tp_justification.py
+- scripts/check_pedagogical_alignment.py
+- scripts/check_pedagogical_indexes.py
+- scripts/check_program_capacity_evidence_depth.py
+- scripts/check_program_coverage.py
+- scripts/check_program_yaml_atomicity.py
+- scripts/check_progression_calendar_alignment.py
+- scripts/check_progression_project_consistency.py
+- scripts/check_project_quarter_requirement.py
+- scripts/check_python_cache_stability.py
+- scripts/check_python_quality.py
+- scripts/check_qa_report_freshness.py
+- scripts/check_qcm_contract_consistency.py
+- scripts/check_qcm_schema.py
+- scripts/check_quality_gates.py
+- scripts/check_question_capacity_alignment.py
+- scripts/check_rag_collection_policy.py
+- scripts/check_rag_config.py
+- scripts/check_rag_freshness.py
+- scripts/check_rag_golden_examples_policy.py
+- scripts/check_rag_index_metadata.py
+- scripts/check_rag_metadata_canonical_fields.py
+- scripts/check_ready_session_operationality.py
+- scripts/check_ready_supports_depth.py
+- scripts/check_ready_supports_required_sections.py
+- scripts/check_register_no_hidden_operational_debt.py
+- scripts/check_rendered_unit_artifacts.py
+- scripts/check_repo_topology.py
+- scripts/check_reports_policy.py
+- scripts/check_required_sections.py
+- scripts/check_scientific_claims_review.py
+- scripts/check_sequence_capacity_alignment.py
+- scripts/check_sequence_completeness.py
+- scripts/check_sequence_contracts.py
+- scripts/check_sequence_pack_consistency.py
+- scripts/check_sequence_pedagogical_coherence.py
+- scripts/check_session_classroom_operationality.py
+- scripts/check_session_duration_consistency.py
+- scripts/check_session_level_planning.py
+- scripts/check_session_monthly_total.py
+- scripts/check_session_operationalization_plan.py
+- scripts/check_session_project_hours.py
+- scripts/check_session_referenced_files_exist.py
+- scripts/check_session_specificity.py
+- scripts/check_session_to_resource_alignment.py
+- scripts/check_session_week_calendar_consistency.py
+- scripts/check_skills_governance.py
+- scripts/check_sources_catalog.py
+- scripts/check_sources_catalog_schema.py
+- scripts/check_sql_query_result_consistency.py
+- scripts/check_status_promotion_guard.py
+- scripts/check_student_supports_no_scaffold_language.py
+- scripts/check_substance_anchors.py
+- scripts/check_substance_report_artifacts.py
+- scripts/check_support_pedagogical_depth.py
+- scripts/check_support_substance.py
+- scripts/check_t18_trace_table_quality.py
+- scripts/check_teacher_corrections_alignment.py
+- scripts/check_teacher_docs_depth.py
+- scripts/check_tp_executable_opportunity.py
+- scripts/check_tp_pedagogical_assets.py
+- scripts/check_tp_pedagogical_assets_runtime.py
+- scripts/check_tp_test_alignment.py
+- scripts/check_tp_text_asset_alignment.py
+- scripts/check_tree_bst_invariant_consistency.py
+- scripts/check_uploaded_archive_policy.py
+- scripts/check_validated_documents_quality_gates.py
+- scripts/check_validated_statuses.py
+- scripts/check_verdict_provenance.py
+- scripts/classify_scraped_resource.py
+- scripts/cleanup_python_artifacts.py
+- scripts/drive_local_inventory.py
+- scripts/drive_resource_triage.py
+- scripts/generate_coverage_gap_action_plan.py
+- scripts/generate_index.py
+- scripts/generate_pedagogical_indexes.py
+- scripts/generate_qa_report.py
+- scripts/ingest_drive_export.py
+- scripts/ingest_nsi_corpus.py
+- scripts/judge_campaign.py
+- scripts/prepare_scraped_docs_for_rag.py
+- scripts/rag_coherence_report.py
+- scripts/rag_core.py
+- scripts/rag_diagnose_search_timeout.py
+- scripts/rag_index_plan.py
+- scripts/rag_ingest.py
+- scripts/rag_ingest_server.py
+- scripts/rag_query_example.py
+- scripts/rag_smoke_test.py
+- scripts/rebuild_inventory.py
+- scripts/render_sequence.py
+- scripts/render_substance_report.py
+- scripts/render_unit.py
+- scripts/run_audit_extracted_source.py
+- scripts/run_python_tests.py
+- scripts/run_substance_judge.py
+- scripts/substance_judge.py
+- scripts/substance_report_renderer.py
+- sources_catalog.schema.json
+- sources_catalog.yml
+- substance_pipeline.md
+- substance_rag_pilot_report.md
+- substance_reviews/_adversarial/poisoned.verdict.json
+- substance_reviews/campaign/P-ALGO-01A_substance_review.json
+- substance_reviews/campaign/P-ALGO-01B_substance_review.json
+- substance_reviews/campaign/P-ALGO-02A_substance_review.json
+- substance_reviews/campaign/P-ALGO-02B_substance_review.json
+- substance_reviews/campaign/P-ALGO-02C_substance_review.json
+- substance_reviews/campaign/P-ALGO-02D_substance_review.json
+- substance_reviews/campaign/P-ALGO-03_substance_review.json
+- substance_reviews/campaign/P-ALGO-04_substance_review.json
+- substance_reviews/campaign/P-ALGO-05_substance_review.json
+- substance_reviews/campaign/P-ARCH-01A_substance_review.json
+- substance_reviews/campaign/P-ARCH-01B_substance_review.json
+- substance_reviews/campaign/P-ARCH-02A_substance_review.json
+- substance_reviews/campaign/P-ARCH-02B_substance_review.json
+- substance_reviews/campaign/P-ARCH-02C_substance_review.json
+- substance_reviews/campaign/P-ARCH-03A_substance_review.json
+- substance_reviews/campaign/P-ARCH-03B_substance_review.json
+- substance_reviews/campaign/P-ARCH-03C_substance_review.json
+- substance_reviews/campaign/P-ARCH-04A_substance_review.json
+- substance_reviews/campaign/P-ARCH-04B_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-01_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-02A_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-02B_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-03_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-04_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-05A_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-05B_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-01_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-02A_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-02B_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-02C_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-02D_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-03A_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-03B_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-03C_substance_review.json
+- substance_reviews/campaign/P-HIST-01_substance_review.json
+- substance_reviews/campaign/P-IHM-01A_substance_review.json
+- substance_reviews/campaign/P-IHM-01B_substance_review.json
+- substance_reviews/campaign/P-IHM-02_substance_review.json
+- substance_reviews/campaign/P-IHM-03A_substance_review.json
+- substance_reviews/campaign/P-IHM-03B_substance_review.json
+- substance_reviews/campaign/P-IHM-03C_substance_review.json
+- substance_reviews/campaign/P-IHM-04A_substance_review.json
+- substance_reviews/campaign/P-IHM-04B_substance_review.json
+- substance_reviews/campaign/P-IHM-04C_substance_review.json
+- substance_reviews/campaign/P-LANG-01_substance_review.json
+- substance_reviews/campaign/P-LANG-02_substance_review.json
+- substance_reviews/campaign/P-LANG-03A_substance_review.json
+- substance_reviews/campaign/P-LANG-03B_substance_review.json
+- substance_reviews/campaign/P-LANG-03C_substance_review.json
+- substance_reviews/campaign/P-LANG-04_substance_review.json
+- substance_reviews/campaign/P-LANG-05_substance_review.json
+- substance_reviews/campaign/P-TABLE-01_substance_review.json
+- substance_reviews/campaign/P-TABLE-02_substance_review.json
+- substance_reviews/campaign/P-TABLE-03_substance_review.json
+- substance_reviews/campaign/P-TABLE-04_substance_review.json
+- substance_reviews/campaign/T-ALGO-01A_substance_review.json
+- substance_reviews/campaign/T-ALGO-01B_substance_review.json
+- substance_reviews/campaign/T-ALGO-01C_substance_review.json
+- substance_reviews/campaign/T-ALGO-01D_substance_review.json
+- substance_reviews/campaign/T-ALGO-01E_substance_review.json
+- substance_reviews/campaign/T-ALGO-01F_substance_review.json
+- substance_reviews/campaign/T-ALGO-02A_substance_review.json
+- substance_reviews/campaign/T-ALGO-02B_substance_review.json
+- substance_reviews/campaign/T-ALGO-02C_substance_review.json
+- substance_reviews/campaign/T-ALGO-02D_substance_review.json
+- substance_reviews/campaign/T-ALGO-03_substance_review.json
+- substance_reviews/campaign/T-ALGO-04_substance_review.json
+- substance_reviews/campaign/T-ALGO-05_substance_review.json
+- substance_reviews/campaign/T-ARCH-01_substance_review.json
+- substance_reviews/campaign/T-ARCH-02A_substance_review.json
+- substance_reviews/campaign/T-ARCH-02B_substance_review.json
+- substance_reviews/campaign/T-ARCH-02C_substance_review.json
+- substance_reviews/campaign/T-ARCH-03_substance_review.json
+- substance_reviews/campaign/T-ARCH-04A_substance_review.json
+- substance_reviews/campaign/T-ARCH-04B_substance_review.json
+- substance_reviews/campaign/T-BDD-01A_substance_review.json
+- substance_reviews/campaign/T-BDD-01B_substance_review.json
+- substance_reviews/campaign/T-BDD-01C_substance_review.json
+- substance_reviews/campaign/T-BDD-02_substance_review.json
+- substance_reviews/campaign/T-BDD-03A_substance_review.json
+- substance_reviews/campaign/T-BDD-03B_substance_review.json
+- substance_reviews/campaign/T-BDD-03C_substance_review.json
+- substance_reviews/campaign/T-BDD-03D_substance_review.json
+- substance_reviews/campaign/T-BDD-03E_substance_review.json
+- substance_reviews/campaign/T-BDD-03F_substance_review.json
+- substance_reviews/campaign/T-BDD-03G_substance_review.json
+- substance_reviews/campaign/T-BDD-03H_substance_review.json
+- substance_reviews/campaign/T-HIST-01A_substance_review.json
+- substance_reviews/campaign/T-HIST-01B_substance_review.json
+- substance_reviews/campaign/T-LANG-01A_substance_review.json
+- substance_reviews/campaign/T-LANG-01B_substance_review.json
+- substance_reviews/campaign/T-LANG-01C_substance_review.json
+- substance_reviews/campaign/T-LANG-02A_substance_review.json
+- substance_reviews/campaign/T-LANG-02B_substance_review.json
+- substance_reviews/campaign/T-LANG-03A_substance_review.json
+- substance_reviews/campaign/T-LANG-03B_substance_review.json
+- substance_reviews/campaign/T-LANG-03C_substance_review.json
+- substance_reviews/campaign/T-LANG-04A_substance_review.json
+- substance_reviews/campaign/T-LANG-04B_substance_review.json
+- substance_reviews/campaign/T-LANG-05_substance_review.json
+- substance_reviews/campaign/T-STRUCT-01A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-01B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-01C_substance_review.json
+- substance_reviews/campaign/T-STRUCT-02A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-02B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-03A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-03B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-03C_substance_review.json
+- substance_reviews/campaign/T-STRUCT-04A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-04B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-05A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-05B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-05C_substance_review.json
+- substance_reviews/campaign/T-STRUCT-05D_substance_review.json
+- substance_reviews/campaign/_usage_log.json
+- substance_reviews_index.md
+- substance_verdict.schema.json
+- support_source_trace.yml
+- terminale/banques/evaluations/index.md
+- terminale/banques/exercices/index.md
+- terminale/banques/index.md
+- terminale/banques/projets/index.md
+- terminale/banques/qcm/index.md
+- terminale/banques/sujets_pratiques/index.md
+- terminale/banques/tp/index.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/aides_progressives.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/bareme.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/cours_eleve.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/evaluation.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/fiche_methode.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/grille_competences.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/pedagogical_review.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/projet_associe.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/python/structures_tools.py
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/qcm.json
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/quality_audit_s01.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/sequence.yaml
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/sources.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/td.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/tests/test_structures_tools.py
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/tp.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/trace_ecrite.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/version_amenagee.md
+- tests/conftest.py
+- tests/fixtures/substance_judge/P05.json
+- tests/mypy_baseline.txt
+- tests/test_archive_integration_wrappers.py
+- tests/test_archive_portability_modes.py
+- tests/test_archive_security_imports.py
+- tests/test_audit_extracted_source_no_hang.py
+- tests/test_audit_strategic_integration.py
+- tests/test_build_artifacts.py
+- tests/test_classify_schema.py
+- tests/test_consolidation_strict.py
+- tests/test_course_sheets.py
+- tests/test_delivered_archive_exactly_source_clean.py
+- tests/test_doc_lint.py
+- tests/test_drive_enrichment_traceability.py
+- tests/test_drive_local_pipeline.py
+- tests/test_drive_mapping_release.py
+- tests/test_drive_portable_and_manifest.py
+- tests/test_ellipsis_scoping.py
+- tests/test_env_file_resolution.py
+- tests/test_excellence_remediation_regressions.py
+- tests/test_executable_quality_controls.py
+- tests/test_final_quality_hardening.py
+- tests/test_first_batch_alignment.py
+- tests/test_first_batch_document_quality.py
+- tests/test_first_batch_tp_assets.py
+- tests/test_full_matrix_and_runtime.py
+- tests/test_judge_collection_barriers.py
+- tests/test_line_padding.py
+- tests/test_linked_support_quality.py
+- tests/test_local_drive_traceability.py
+- tests/test_lot1_drive_gate_boundary.py
+- tests/test_lot2_scraper_content_dedup.py
+- tests/test_lot3_archive_security.py
+- tests/test_lot3_topological_isolation.py
+- tests/test_manifest_separation.py
+- tests/test_missing_register_actionability.py
+- tests/test_mypy_strict_debt.py
+- tests/test_no_coverage_from_sheets_only.py
+- tests/test_no_global_archive_in_delivery_context.py
+- tests/test_no_inline_env_resolution.py
+- tests/test_no_placeholders_code.py
+- tests/test_no_stale_archive_guard.py
+- tests/test_notional_and_disciplinary_controls.py
+- tests/test_operational_substance_controls.py
+- tests/test_organizer_nsi_safety.py
+- tests/test_p05_p04_controls.py
+- tests/test_packaging_modes.py
+- tests/test_policy_checker_ast.py
+- tests/test_private_data_detection.py
+- tests/test_rag_governance_and_indexes.py
+- tests/test_rag_ingest.py
+- tests/test_ready_session_operationality.py
+- tests/test_ready_supports_gates.py
+- tests/test_register_semantic_consistency.py
+- tests/test_render_substance_report_cli.py
+- tests/test_render_unit.py
+- tests/test_repo_topology.py
+- tests/test_run_python_tests.py
+- tests/test_secret_guard.py
+- tests/test_sequence_contracts.py
+- tests/test_sequence_pack_and_scaffold_controls.py
+- tests/test_session_referenced_files_exist.py
+- tests/test_session_specificity.py
+- tests/test_source_archive_policy.py
+- tests/test_source_zip_delivery.py
+- tests/test_source_zip_timestamps.py
+- tests/test_status_promotion_guard.py
+- tests/test_strict_full_bank_controls.py
+- tests/test_substance_hardened.py
+- tests/test_substance_judge_pipeline.py
+- tests/test_substance_report_renderer.py
+- tests/test_support_substance.py
+- tests/test_tp_pedagogical_assets.py
+- tests/test_tp_pedagogical_assets_no_hang.py
+- tests/test_tp_pedagogical_assets_runtime.py
+- tests/test_tp_text_asset_alignment.py
+- tests/test_uploaded_archive_policy.py
+- tests/test_verdict_provenance.py
+- tp_executable_opportunity_register.md
+- tp_test_alignment_report.md
+
+## Ressources haute qualité
+- Aucune ressource avec statut final pour l’instant.
+
+## Ressources à corriger / compléter
+- .env.rag.example
+- .github/workflows/ci.yml
+- .pre-commit-config.yaml
+- 00_programmes_officiels/README.md
+- 00_programmes_officiels/programme_nsi_2019.yaml
+- 00_programmes_officiels/programme_nsi_premiere.txt
+- 00_programmes_officiels/programme_nsi_terminale.txt
+- 01_charte_graphique_et_pedagogique/charte_documentaire_sequences.md
+- 01_charte_graphique_et_pedagogique/charte_graphique.md
+- 01_charte_graphique_et_pedagogique/metadata_schema.md
+- 02_modeles_documents/modele_aides.tex
+- 02_modeles_documents/modele_corrige.tex
+- 02_modeles_documents/modele_cours.tex
+- 02_modeles_documents/modele_evaluation.tex
+- 02_modeles_documents/modele_fiche_methode.tex
+- 02_modeles_documents/modele_guide_prof.md
+- 02_modeles_documents/modele_qcm.json
+- 02_modeles_documents/modele_sequence.yaml
+- 02_modeles_documents/modele_td.tex
+- 02_modeles_documents/modele_tp.tex
+- 02_modeles_documents/modele_trace.tex
+- 02_modeles_documents/nsi-preamble.sty
+- 03_progressions/fiches_cours/premiere/P00/P00_fiche_cours_methode_nsi.md
+- 03_progressions/fiches_cours/premiere/P01/P01_fiche_cours_bits_bases_2_10_16.md
+- 03_progressions/fiches_cours/premiere/P01/P01_fiche_cours_conversions.md
+- 03_progressions/fiches_cours/premiere/P02/P02_fiche_cours_booleens_tables_verite.md
+- 03_progressions/fiches_cours/premiere/P02/P02_fiche_cours_complement_a_deux.md
+- 03_progressions/fiches_cours/premiere/P03/P03_fiche_cours_flottants_approximations.md
+- 03_progressions/fiches_cours/premiere/P03/P03_fiche_cours_texte_unicode.md
+- 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_dictionnaires.md
+- 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_listes.md
+- 03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_tuples.md
+- 03_progressions/fiches_cours/premiere/P05/P05_fiche_cours_tables_csv_import_coherence.md
+- 03_progressions/fiches_cours/premiere/P06/P06_fiche_cours_tables_recherche_tri_fusion.md
+- 03_progressions/fiches_cours/premiere/P07/P07_fiche_cours_fonctions_tests_specifications.md
+- 03_progressions/fiches_cours/premiere/P08/P08_fiche_cours_html_css_dom.md
+- 03_progressions/fiches_cours/premiere/P08/P08_fiche_cours_http_get_post_formulaires.md
+- 03_progressions/fiches_cours/premiere/P09/P09_fiche_cours_architecture_os_droits.md
+- 03_progressions/fiches_cours/premiere/P10/P10_fiche_cours_reseaux_protocoles_paquets.md
+- 03_progressions/fiches_cours/premiere/P11/P11_fiche_cours_parcours_recherche_extremum_moyenne.md
+- 03_progressions/fiches_cours/premiere/P12/P12_fiche_cours_tris_invariants_complexite.md
+- 03_progressions/fiches_cours/premiere/P13/P13_fiche_cours_dichotomie_glouton_knn.md
+- 03_progressions/fiches_cours/premiere/P14/P14_fiche_cours_synthese_projet_oral.md
+- 03_progressions/fiches_cours/terminale/T00/T00_fiche_cours_reprise_python_tests_complexite.md
+- 03_progressions/fiches_cours/terminale/T01/T01_fiche_cours_interface_implementation_tad.md
+- 03_progressions/fiches_cours/terminale/T02/T02_fiche_cours_classes_objets_attributs_methodes.md
+- 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_dictionnaires.md
+- 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_files.md
+- 03_progressions/fiches_cours/terminale/T03/T03_fiche_cours_piles.md
+- 03_progressions/fiches_cours/terminale/T04/T04_fiche_cours_recursivite_cas_base_terminaison.md
+- 03_progressions/fiches_cours/terminale/T05/T05_fiche_cours_arbres_binaires_parcours.md
+- 03_progressions/fiches_cours/terminale/T06/T06_fiche_cours_arbres_binaires_recherche.md
+- 03_progressions/fiches_cours/terminale/T07/T07_fiche_cours_graphes_modelisation_listes_matrices.md
+- 03_progressions/fiches_cours/terminale/T08/T08_fiche_cours_bfs_dfs_cycles_chemins.md
+- 03_progressions/fiches_cours/terminale/T09/T09_fiche_cours_bases_relationnelles_cles_contraintes.md
+- 03_progressions/fiches_cours/terminale/T10/T10_fiche_cours_sql_insert_update_delete.md
+- 03_progressions/fiches_cours/terminale/T10/T10_fiche_cours_sql_select_where_join.md
+- 03_progressions/fiches_cours/terminale/T11/T11_fiche_cours_processus_ordonnancement_interblocage.md
+- 03_progressions/fiches_cours/terminale/T12/T12_fiche_cours_routage_rip_ospf.md
+- 03_progressions/fiches_cours/terminale/T13/T13_fiche_cours_chiffrement_https.md
+- 03_progressions/fiches_cours/terminale/T14/T14_fiche_cours_modularite_api_paradigmes_bugs.md
+- 03_progressions/fiches_cours/terminale/T15/T15_fiche_cours_calculabilite_arret.md
+- 03_progressions/fiches_cours/terminale/T16/T16_fiche_cours_diviser_pour_regner_tri_fusion.md
+- 03_progressions/fiches_cours/terminale/T17/T17_fiche_cours_programmation_dynamique.md
+- 03_progressions/fiches_cours/terminale/T18/T18_fiche_cours_boyer_moore.md
+- 03_progressions/fiches_cours/terminale/T19/T19_fiche_cours_bac_pratique_grand_oral_projet.md
+- 03_progressions/monthly_load_premiere.md
+- 03_progressions/monthly_load_terminale.md
+- 03_progressions/progression_premiere.md
+- 03_progressions/progression_terminale.md
+- 03_progressions/seances_premiere.md
+- 03_progressions/seances_terminale.md
+- 03_progressions/supports/contracts/P00_contract.yml
+- 03_progressions/supports/contracts/P01_contract.yml
+- 03_progressions/supports/contracts/P02_contract.yml
+- 03_progressions/supports/contracts/P03_contract.yml
+- 03_progressions/supports/contracts/P04_contract.yml
+- 03_progressions/supports/contracts/P05_contract.yml
+- 03_progressions/supports/contracts/P06_contract.yml
+- 03_progressions/supports/contracts/P07_contract.yml
+- 03_progressions/supports/contracts/P08_contract.yml
+- 03_progressions/supports/contracts/P09_contract.yml
+- 03_progressions/supports/contracts/P10_contract.yml
+- 03_progressions/supports/contracts/P11_contract.yml
+- 03_progressions/supports/contracts/P12_contract.yml
+- 03_progressions/supports/contracts/P13_contract.yml
+- 03_progressions/supports/contracts/P14_contract.yml
+- 03_progressions/supports/contracts/T00_contract.yml
+- 03_progressions/supports/contracts/T01_contract.yml
+- 03_progressions/supports/contracts/T02_contract.yml
+- 03_progressions/supports/contracts/T03_contract.yml
+- 03_progressions/supports/contracts/T04_contract.yml
+- 03_progressions/supports/contracts/T05_contract.yml
+- 03_progressions/supports/contracts/T06_contract.yml
+- 03_progressions/supports/contracts/T07_contract.yml
+- 03_progressions/supports/contracts/T08_contract.yml
+- 03_progressions/supports/contracts/T09_contract.yml
+- 03_progressions/supports/contracts/T10_contract.yml
+- 03_progressions/supports/contracts/T11_contract.yml
+- 03_progressions/supports/contracts/T12_contract.yml
+- 03_progressions/supports/contracts/T13_contract.yml
+- 03_progressions/supports/contracts/T14_contract.yml
+- 03_progressions/supports/contracts/T15_contract.yml
+- 03_progressions/supports/contracts/T16_contract.yml
+- 03_progressions/supports/contracts/T17_contract.yml
+- 03_progressions/supports/contracts/T18_contract.yml
+- 03_progressions/supports/contracts/T19_contract.yml
+- 03_progressions/supports/premiere/P00/P00_bareme_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_cours_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_evaluation_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_remediation_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_tp_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_trace_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/P00_version_amenagee_diagnostic_python.md
+- 03_progressions/supports/premiere/P00/code/P00_corrige_professeur_diagnostic_python.py
+- 03_progressions/supports/premiere/P00/code/P00_starter_diagnostic_python.py
+- 03_progressions/supports/premiere/P00/code/P00_tests_attendus_diagnostic_python.py
+- 03_progressions/supports/premiere/P01/P01_bareme_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_corrige_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_cours_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_evaluation_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_remediation_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_td_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_tp_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_trace_conversions_bases.md
+- 03_progressions/supports/premiere/P01/P01_version_amenagee_conversions_bases.md
+- 03_progressions/supports/premiere/P01/code/P01_corrige_professeur_conversions_bases.py
+- 03_progressions/supports/premiere/P01/code/P01_starter_conversions_bases.py
+- 03_progressions/supports/premiere/P01/code/P01_tests_attendus_conversions_bases.py
+- 03_progressions/supports/premiere/P02/P02_bareme_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_bareme_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_corrige_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_corrige_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_cours_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_cours_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_evaluation_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_evaluation_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_remediation_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_td_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_td_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_tp_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_tp_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_trace_complement_booleens.md
+- 03_progressions/supports/premiere/P02/P02_trace_tables_verite_booleennes.md
+- 03_progressions/supports/premiere/P02/P02_version_amenagee_complement_booleens.md
+- 03_progressions/supports/premiere/P02/code/P02_corrige_professeur_complement_booleens.py
+- 03_progressions/supports/premiere/P02/code/P02_starter_complement_booleens.py
+- 03_progressions/supports/premiere/P02/code/P02_tests_attendus_complement_booleens.py
+- 03_progressions/supports/premiere/P03/P03_bareme_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_bareme_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_corrige_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_corrige_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_cours_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_cours_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_evaluation_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_evaluation_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_remediation_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_td_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_td_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_tp_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_tp_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_trace_conversion_encodages_texte.md
+- 03_progressions/supports/premiere/P03/P03_trace_texte_reels.md
+- 03_progressions/supports/premiere/P03/P03_version_amenagee_texte_reels.md
+- 03_progressions/supports/premiere/P03/code/P03_corrige_professeur_texte_reels.py
+- 03_progressions/supports/premiere/P03/code/P03_starter_texte_reels.py
+- 03_progressions/supports/premiere/P03/code/P03_tests_attendus_texte_reels.py
+- 03_progressions/supports/premiere/P04/P04_bareme_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_bareme_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_corrige_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_cours_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_evaluation_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_remediation_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_td_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_tp_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_tp_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_trace_types_construits.md
+- 03_progressions/supports/premiere/P04/P04_trace_types_construits_complement.md
+- 03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md
+- 03_progressions/supports/premiere/P04/code/P04_corrige_professeur_types_construits.py
+- 03_progressions/supports/premiere/P04/code/P04_starter_types_construits.py
+- 03_progressions/supports/premiere/P04/code/P04_tests_attendus_types_construits.py
+- 03_progressions/supports/premiere/P05/P05_bareme_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_corrige_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_cours_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_evaluation_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_remediation_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_td_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_tp_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_trace_tables_csv.md
+- 03_progressions/supports/premiere/P05/P05_version_amenagee_tables_csv.md
+- 03_progressions/supports/premiere/P05/code/P05_corrige_professeur_tables_csv.py
+- 03_progressions/supports/premiere/P05/code/P05_starter_tables_csv.py
+- 03_progressions/supports/premiere/P05/code/P05_tests_attendus_tables_csv.py
+- 03_progressions/supports/premiere/P05/data/pays_monde_extrait.csv
+- 03_progressions/supports/premiere/P06/P06_TD_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_bareme_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_corrige_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_cours_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_evaluation_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_remediation_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_tp_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_trace_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/P06_version_amenagee_tables_recherche_tri_fusion.md
+- 03_progressions/supports/premiere/P06/code/P06_corrige_professeur_tables_recherche_tri_fusion.py
+- 03_progressions/supports/premiere/P06/code/P06_starter_tables_recherche_tri_fusion.py
+- 03_progressions/supports/premiere/P06/code/P06_tests_attendus_tables_recherche_tri_fusion.py
+- 03_progressions/supports/premiere/P07/P07_TD_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_TP_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_bareme_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_evaluation_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_remediation_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_tp_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_trace_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/P07_version_amenagee_fonctions_tests_specifications.md
+- 03_progressions/supports/premiere/P07/code/P07_corrige_professeur_fonctions_tests_specifications.py
+- 03_progressions/supports/premiere/P07/code/P07_starter_fonctions_tests_specifications.py
+- 03_progressions/supports/premiere/P07/code/P07_tests_attendus_fonctions_tests_specifications.py
+- 03_progressions/supports/premiere/P08/P08_TD_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_TP_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_TP_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_bareme_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_bareme_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_bareme_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_corrige_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_corrige_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_corrige_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_evaluation_html_css_dom.md
+- 03_progressions/supports/premiere/P08/P08_evaluation_http_get_post_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_remediation_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_trace_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/P08_version_amenagee_web_http_dom_formulaires.md
+- 03_progressions/supports/premiere/P08/code/P08_corrige_professeur_web_http_dom_formulaires.py
+- 03_progressions/supports/premiere/P08/code/P08_starter_web_http_dom_formulaires.py
+- 03_progressions/supports/premiere/P08/code/P08_tests_attendus_web_http_dom_formulaires.py
+- 03_progressions/supports/premiere/P09/P09_TD_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_bareme_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_corrige_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_cours_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_evaluation_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_remediation_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_tp_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_trace_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/P09_version_amenagee_architecture_os_droits.md
+- 03_progressions/supports/premiere/P09/code/P09_corrige_professeur_architecture_os_droits.py
+- 03_progressions/supports/premiere/P09/code/P09_starter_architecture_os_droits.py
+- 03_progressions/supports/premiere/P09/code/P09_tests_attendus_architecture_os_droits.py
+- 03_progressions/supports/premiere/P10/P10_TD_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_bareme_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_corrige_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_cours_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_evaluation_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_remediation_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_tp_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_trace_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/P10_version_amenagee_reseaux_protocoles_paquets.md
+- 03_progressions/supports/premiere/P10/code/P10_corrige_professeur_reseaux_protocoles_paquets.py
+- 03_progressions/supports/premiere/P10/code/P10_starter_reseaux_protocoles_paquets.py
+- 03_progressions/supports/premiere/P10/code/P10_tests_attendus_reseaux_protocoles_paquets.py
+- 03_progressions/supports/premiere/P11/P11_TD_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_bareme_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_corrige_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_cours_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_evaluation_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_remediation_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_tp_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_trace_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/P11_version_amenagee_parcours_recherche_extremum_moyenne.md
+- 03_progressions/supports/premiere/P11/code/P11_corrige_professeur_parcours_recherche_extremum_moyenne.py
+- 03_progressions/supports/premiere/P11/code/P11_starter_parcours_recherche_extremum_moyenne.py
+- 03_progressions/supports/premiere/P11/code/P11_tests_attendus_parcours_recherche_extremum_moyenne.py
+- 03_progressions/supports/premiere/P12/P12_TD_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_bareme_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_corrige_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_cours_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_evaluation_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_remediation_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_tp_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_trace_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/P12_version_amenagee_tris_invariants_complexite.md
+- 03_progressions/supports/premiere/P12/code/P12_corrige_professeur_tris_invariants_complexite.py
+- 03_progressions/supports/premiere/P12/code/P12_starter_tris_invariants_complexite.py
+- 03_progressions/supports/premiere/P12/code/P12_tests_attendus_tris_invariants_complexite.py
+- 03_progressions/supports/premiere/P13/P13_TD_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_bareme_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_corrige_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_cours_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_evaluation_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_remediation_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_tp_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_trace_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P13/P13_version_amenagee_dichotomie_glouton_knn.md
+- 03_progressions/supports/premiere/P14/P14_TD_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_bareme_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_corrige_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_cours_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_evaluation_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_remediation_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_tp_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_trace_synthese_projet_oral.md
+- 03_progressions/supports/premiere/P14/P14_version_amenagee_synthese_projet_oral.md
+- 03_progressions/supports/terminale/T00/T00_bareme_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_corrige_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_cours_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_evaluation_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_remediation_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_td_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_tp_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_trace_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/T00_version_amenagee_diagnostic_tests.md
+- 03_progressions/supports/terminale/T00/code/T00_corrige_professeur_diagnostic_tests.py
+- 03_progressions/supports/terminale/T00/code/T00_starter_diagnostic_tests.py
+- 03_progressions/supports/terminale/T00/code/T00_tests_attendus_diagnostic_tests.py
+- 03_progressions/supports/terminale/T01/T01_bareme_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_bareme_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_corrige_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_corrige_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_cours_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_cours_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_evaluation_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_evaluation_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_remediation_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_td_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_td_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_tp_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_tp_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_trace_interface_implementation_complement.md
+- 03_progressions/supports/terminale/T01/T01_trace_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/T01_version_amenagee_interfaces_structures.md
+- 03_progressions/supports/terminale/T01/code/T01_corrige_professeur_interfaces_structures.py
+- 03_progressions/supports/terminale/T01/code/T01_starter_interfaces_structures.py
+- 03_progressions/supports/terminale/T01/code/T01_tests_attendus_interfaces_structures.py
+- 03_progressions/supports/terminale/T02/T02_bareme_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_corrige_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_cours_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_evaluation_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_remediation_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_td_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_tp_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_trace_classes_objets.md
+- 03_progressions/supports/terminale/T02/T02_version_amenagee_classes_objets.md
+- 03_progressions/supports/terminale/T02/code/T02_corrige_professeur_classes_objets.py
+- 03_progressions/supports/terminale/T02/code/T02_starter_classes_objets.py
+- 03_progressions/supports/terminale/T02/code/T02_tests_attendus_classes_objets.py
+- 03_progressions/supports/terminale/T03/T03_bareme_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_bareme_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_corrige_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_corrige_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_cours_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_cours_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_evaluation_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_evaluation_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_remediation_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_td_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_td_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_tp_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_tp_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_trace_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/T03_trace_recherche_liste_dictionnaire.md
+- 03_progressions/supports/terminale/T03/T03_version_amenagee_piles_files_dictionnaires.md
+- 03_progressions/supports/terminale/T03/code/T03_corrige_professeur_piles_files_dictionnaires.py
+- 03_progressions/supports/terminale/T03/code/T03_starter_piles_files_dictionnaires.py
+- 03_progressions/supports/terminale/T03/code/T03_tests_attendus_piles_files_dictionnaires.py
+- 03_progressions/supports/terminale/T04/T04_bareme_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_corrige_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_cours_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_evaluation_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_remediation_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_td_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_tp_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_trace_recursivite.md
+- 03_progressions/supports/terminale/T04/T04_version_amenagee_recursivite.md
+- 03_progressions/supports/terminale/T04/code/T04_corrige_professeur_recursivite.py
+- 03_progressions/supports/terminale/T04/code/T04_starter_recursivite.py
+- 03_progressions/supports/terminale/T04/code/T04_tests_attendus_recursivite.py
+- 03_progressions/supports/terminale/T05/T05_bareme_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_bareme_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_corrige_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_corrige_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_cours_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_cours_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_evaluation_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_evaluation_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_remediation_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_td_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_td_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_tp_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_tp_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_trace_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/T05_trace_arbres_mesures_parcours_complement.md
+- 03_progressions/supports/terminale/T05/T05_version_amenagee_arbres_binaires.md
+- 03_progressions/supports/terminale/T05/code/T05_corrige_professeur_arbres_binaires.py
+- 03_progressions/supports/terminale/T05/code/T05_starter_arbres_binaires.py
+- 03_progressions/supports/terminale/T05/code/T05_tests_attendus_arbres_binaires.py
+- 03_progressions/supports/terminale/T06/T06_TD_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_TP_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_bareme_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_corrige_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_cours_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_evaluation_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_remediation_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_tp_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_trace_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/T06_version_amenagee_arbres_binaires_recherche.md
+- 03_progressions/supports/terminale/T06/code/T06_corrige_professeur_arbres_binaires_recherche.py
+- 03_progressions/supports/terminale/T06/code/T06_starter_arbres_binaires_recherche.py
+- 03_progressions/supports/terminale/T06/code/T06_tests_attendus_arbres_binaires_recherche.py
+- 03_progressions/supports/terminale/T07/T07_TD_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_TP_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_bareme_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_corrige_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_cours_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_evaluation_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_remediation_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_tp_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_trace_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/T07_version_amenagee_graphes_modelisation_listes_matrices.md
+- 03_progressions/supports/terminale/T07/code/T07_corrige_professeur_graphes_modelisation_listes_matrices.py
+- 03_progressions/supports/terminale/T07/code/T07_starter_graphes_modelisation_listes_matrices.py
+- 03_progressions/supports/terminale/T07/code/T07_tests_attendus_graphes_modelisation_listes_matrices.py
+- 03_progressions/supports/terminale/T08/T08_TD_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_TP_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_bareme_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_corrige_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_cours_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_evaluation_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_remediation_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_tp_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_trace_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/T08_version_amenagee_bfs_dfs_cycles_chemins.md
+- 03_progressions/supports/terminale/T08/code/T08_corrige_professeur_bfs_dfs_cycles_chemins.py
+- 03_progressions/supports/terminale/T08/code/T08_starter_bfs_dfs_cycles_chemins.py
+- 03_progressions/supports/terminale/T08/code/T08_tests_attendus_bfs_dfs_cycles_chemins.py
+- 03_progressions/supports/terminale/T09/T09_TD_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_bareme_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_corrige_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_cours_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_evaluation_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_remediation_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_tp_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_trace_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/T09_version_amenagee_bases_relationnelles_cles_contraintes.md
+- 03_progressions/supports/terminale/T09/code/T09_corrige_professeur_bases_relationnelles_cles_contraintes.py
+- 03_progressions/supports/terminale/T09/code/T09_starter_bases_relationnelles_cles_contraintes.py
+- 03_progressions/supports/terminale/T09/code/T09_tests_attendus_bases_relationnelles_cles_contraintes.py
+- 03_progressions/supports/terminale/T10/T10_TD_sql_insert_update_delete.md
+- 03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_bareme_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_evaluation_sql_insert_update_delete.md
+- 03_progressions/supports/terminale/T10/T10_evaluation_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_remediation_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_tp_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_trace_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/T10_version_amenagee_sql_select_where_join.md
+- 03_progressions/supports/terminale/T10/code/T10_corrige_professeur_sql_select_where_join.py
+- 03_progressions/supports/terminale/T10/code/T10_starter_sql_select_where_join.py
+- 03_progressions/supports/terminale/T10/code/T10_tests_attendus_sql_select_where_join.py
+- 03_progressions/supports/terminale/T11/T11_TD_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_bareme_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_corrige_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_cours_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_evaluation_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_remediation_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_tp_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_trace_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T11/T11_version_amenagee_processus_ordonnancement_interblocage.md
+- 03_progressions/supports/terminale/T12/T12_TD_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_bareme_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_corrige_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_cours_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_evaluation_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_remediation_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_tp_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_trace_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/T12_version_amenagee_routage_rip_ospf.md
+- 03_progressions/supports/terminale/T12/code/T12_corrige_professeur_routage_rip_ospf.py
+- 03_progressions/supports/terminale/T12/code/T12_starter_routage_rip_ospf.py
+- 03_progressions/supports/terminale/T12/code/T12_tests_attendus_routage_rip_ospf.py
+- 03_progressions/supports/terminale/T13/T13_TD_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_bareme_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_corrige_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_cours_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_evaluation_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_remediation_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_tp_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_trace_chiffrement_https.md
+- 03_progressions/supports/terminale/T13/T13_version_amenagee_chiffrement_https.md
+- 03_progressions/supports/terminale/T14/T14_TD_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_bareme_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_corrige_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_cours_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_evaluation_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_remediation_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_tp_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_trace_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T14/T14_version_amenagee_modularite_api_paradigmes_bugs.md
+- 03_progressions/supports/terminale/T15/T15_TD_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_bareme_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_corrige_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_cours_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_evaluation_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_remediation_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_tp_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_trace_calculabilite_arret.md
+- 03_progressions/supports/terminale/T15/T15_version_amenagee_calculabilite_arret.md
+- 03_progressions/supports/terminale/T16/T16_TD_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_bareme_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_corrige_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_cours_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_evaluation_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_remediation_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_tp_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_trace_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/T16_version_amenagee_diviser_pour_regner_tri_fusion.md
+- 03_progressions/supports/terminale/T16/code/T16_corrige_professeur_diviser_pour_regner_tri_fusion.py
+- 03_progressions/supports/terminale/T16/code/T16_starter_diviser_pour_regner_tri_fusion.py
+- 03_progressions/supports/terminale/T16/code/T16_tests_attendus_diviser_pour_regner_tri_fusion.py
+- 03_progressions/supports/terminale/T17/T17_TD_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_bareme_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_corrige_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_cours_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_evaluation_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_remediation_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_tp_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_trace_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/T17_version_amenagee_programmation_dynamique.md
+- 03_progressions/supports/terminale/T17/code/T17_corrige_professeur_programmation_dynamique.py
+- 03_progressions/supports/terminale/T17/code/T17_starter_programmation_dynamique.py
+- 03_progressions/supports/terminale/T17/code/T17_tests_attendus_programmation_dynamique.py
+- 03_progressions/supports/terminale/T18/T18_TD_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_bareme_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_corrige_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_cours_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_evaluation_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_remediation_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_tp_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_trace_boyer_moore.md
+- 03_progressions/supports/terminale/T18/T18_version_amenagee_boyer_moore.md
+- 03_progressions/supports/terminale/T18/code/T18_corrige_professeur_boyer_moore.py
+- 03_progressions/supports/terminale/T18/code/T18_starter_boyer_moore.py
+- 03_progressions/supports/terminale/T18/code/T18_tests_attendus_boyer_moore.py
+- 03_progressions/supports/terminale/T19/T19_TD_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_bareme_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_corrige_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_cours_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_evaluation_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_remediation_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_tp_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_trace_bac_pratique_grand_oral_projet.md
+- 03_progressions/supports/terminale/T19/T19_version_amenagee_bac_pratique_grand_oral_projet.md
+- INDEX.md
+- INDEX_BY_AUDIENCE.md
+- INDEX_BY_CAPACITY.md
+- INDEX_BY_CHAPTER.md
+- INDEX_BY_DOCUMENT_TYPE.md
+- INDEX_BY_DOMAIN.md
+- INDEX_BY_LEVEL.md
+- INDEX_BY_RAG_COLLECTION.md
+- INDEX_BY_SEQUENCE.md
+- INDEX_BY_SESSION.md
+- INDEX_BY_THEME.md
+- README.md
+- bank_strategy.md
+- calendar_2026_2027_tunisia.md
+- carnet_de_bord.md
+- content_tree_policy.md
+- course_internal_coherence_report.md
+- coverage_gap_action_plan.md
+- delivery_policy.md
+- differentiation_quality_report.md
+- docs/GUIDE_DEPLOIEMENT.md
+- docs/LISEZMOI.txt
+- docs/archive_security_policy.md
+- docs/audits/AUDIT_FRONTEND_infra_ground_truth.md
+- docs/enrichment_roadmap.md
+- docs/finalisation_report.md
+- docs/judge_campaign_plan.md
+- docs/kit_production_NSI.md
+- docs/latex_systems_decision.md
+- docs/local_excludes_required.md
+- docs/promotion/dossier_revue_lead.md
+- docs/promotion/dossier_revue_lead_v2.md
+- docs/promotion/dossier_revue_lead_v3.md
+- docs/promotion/dossier_revue_lead_v4.md
+- docs/promotion/dossier_revue_lead_v5.md
+- docs/reorg_report.md
+- docs/repo_topology.md
+- docs/rvw_responses.md
+- docs/source_archive_policy.md
+- drive_inventory.csv
+- drive_mapping.md
+- drive_quarantine/README.md
+- drive_quarantine_manifest.csv
+- drive_remaining_action_plan.md
+- drive_sources.yml
+- evaluation_bareme_alignment_report.md
+- human_review_register.csv
+- human_review_wave_1_plan.md
+- latex/README.md
+- latex/build.sh
+- latex/packs/premiere/P13/P13_aides.tex
+- latex/packs/premiere/P13/P13_corrige.tex
+- latex/packs/premiere/P13/P13_cours.tex
+- latex/packs/premiere/P13/P13_evaluation.tex
+- latex/packs/premiere/P13/P13_fiche_methode.tex
+- latex/packs/premiere/P13/P13_td.tex
+- latex/packs/premiere/P13/P13_td_eleve.tex
+- latex/packs/premiere/P13/P13_tp.tex
+- latex/packs/premiere/P13/P13_tp_eleve.tex
+- latex/packs/premiere/P13/P13_trace.tex
+- latex/packs/premiere/P13/build.sh
+- learning_objectives_assessed_report.md
+- missing_capabilities.md
+- missing_documents_register_v2.md
+- missing_sequence_resources_register.md
+- pilot_scope.yml
+- premiere/banques/evaluations/index.md
+- premiere/banques/exercices/index.md
+- premiere/banques/index.md
+- premiere/banques/projets/index.md
+- premiere/banques/qcm/index.md
+- premiere/banques/sujets_pratiques/index.md
+- premiere/banques/tp/index.md
+- premiere/sequences/s01_representation_donnees/aides_progressives.md
+- premiere/sequences/s01_representation_donnees/bareme.md
+- premiere/sequences/s01_representation_donnees/corrige.md
+- premiere/sequences/s01_representation_donnees/corrige_professeur.md
+- premiere/sequences/s01_representation_donnees/cours_eleve.md
+- premiere/sequences/s01_representation_donnees/evaluation.md
+- premiere/sequences/s01_representation_donnees/evaluation_corrigee.md
+- premiere/sequences/s01_representation_donnees/fiche_methode.md
+- premiere/sequences/s01_representation_donnees/grille_competences.md
+- premiere/sequences/s01_representation_donnees/guide_professeur.md
+- premiere/sequences/s01_representation_donnees/pedagogical_review.md
+- premiere/sequences/s01_representation_donnees/projet_associe.md
+- premiere/sequences/s01_representation_donnees/python/representation_tools.py
+- premiere/sequences/s01_representation_donnees/qcm.json
+- premiere/sequences/s01_representation_donnees/quality_audit_s01.md
+- premiere/sequences/s01_representation_donnees/revue_substance.md
+- premiere/sequences/s01_representation_donnees/sequence.yaml
+- premiere/sequences/s01_representation_donnees/sources.md
+- premiere/sequences/s01_representation_donnees/td.md
+- premiere/sequences/s01_representation_donnees/tests/test_representation_tools.py
+- premiere/sequences/s01_representation_donnees/tp.md
+- premiere/sequences/s01_representation_donnees/trace_ecrite.md
+- premiere/sequences/s01_representation_donnees/version_amenagee.md
+- privacy_allowlist.yml
+- program_capacity_evidence_depth_report.md
+- programme_matrix_premiere.md
+- programme_matrix_terminale.md
+- progression_audit.md
+- project_plan_premiere.md
+- project_plan_terminale.md
+- pyproject.toml
+- qa_debt_register.md
+- qa_gate_policy.md
+- qa_report.md
+- rag_coherence_report.md
+- rag_config.example.yml
+- rag_connection.md
+- rag_server_fix_plan.md
+- rag_timeout_diagnostic.md
+- reports/METHODE_PRODUCTION_REELLE.md
+- reports/alignment_known_failures.yml
+- reports/audit_03_07_26.md
+- reports/closure2/corrective2_report.md
+- reports/closure2/corrective3_report.md
+- reports/closure2/corrective_report.md
+- reports/closure2/phaseA_closure_report.md
+- reports/closure2/phaseA_final_report.md
+- reports/closure2/rag_embedding_parity_report.md
+- reports/closure2/rag_prod_cutover_executed_report.md
+- reports/closure2/rag_prod_cutover_runbook.md
+- reports/closure2/rag_state_of_truth.md
+- reports/closure2/rag_target_architecture.md
+- reports/closure2/rag_v2_cutover_STATE.md
+- reports/closure2/rag_v2_cutover_report.md
+- reports/closure2/rag_v2_rebuilt_report.md
+- reports/closure2/rag_v2_versioned_report.md
+- reports/drive_enrichment_report.md
+- reports/excellence_editorial_review_nsi.md
+- reports/excellence_remediation_progress.md
+- reports/final_recipe_review_nsi.md
+- reports/human_review_checklist_accessibility.md
+- reports/human_review_checklist_pedagogy.md
+- reports/human_review_checklist_science.md
+- reports/human_review_protocol.md
+- reports/lot0_ruff_autofix_review.md
+- reports/lot1/drive_forensic.md
+- reports/lot1/lot1_validation_log.md
+- reports/lot1/repo_map.md
+- reports/lot2/lot2_validation_log.md
+- reports/lot3/archive_extraction_inventory.md
+- reports/lot3/archive_security_inventory.md
+- reports/lot3/lot3_hardening_validation_log.md
+- reports/lot3/lot3_validation_log.md
+- reports/lot3/post_merge_audit.md
+- reports/missing_documents_register.md
+- reports/pedagogical_blockers_report.md
+- reports/programme_yaml_audit.md
+- reports/reconciliation/branch_topology.md
+- reports/reconciliation/closure_report.md
+- reports/reconciliation/drive_integration_plan.md
+- reports/reconciliation/mypy_debt.md
+- reports/reconciliation/process_incidents.md
+- reports/reconciliation/rag_pr35_status.md
+- reports/reconciliation/rag_reindex_plan.md
+- reports/reconciliation/reconciliation_report.md
+- reports/reconciliation/reconciliation_verification_report.md
+- reports/recovery_t10_p08_t17_from_blobs.md
+- reports/td_quality_debt_register.yml
+- reports/td_quality_debt_report.md
+- reports_policy.md
+- requirements.txt
+- reviewer_confirmation.schema.json
+- scientific_claims_review_report.md
+- scraping_ingestion_plan.md
+- scraping_strategy.md
+- scripts/__init__.py
+- scripts/_course_sheets_common.py
+- scripts/_drive_paths.py
+- scripts/_inventory_utils.py
+- scripts/_operational_links.py
+- scripts/_pedagogy_reports.py
+- scripts/_qa_common.py
+- scripts/_session_checks.py
+- scripts/_supports_evidence.py
+- scripts/archive_security.py
+- scripts/build_all.py
+- scripts/build_source_archive.py
+- scripts/build_source_zip.py
+- scripts/check_agents_governance.py
+- scripts/check_archive_portability.py
+- scripts/check_audit_extracted_runtime_budget.py
+- scripts/check_audit_folder_policy.py
+- scripts/check_bank_strategy.py
+- scripts/check_boyer_moore_trace_consistency.py
+- scripts/check_build_reports_freshness.py
+- scripts/check_capacity_status_ladder.py
+- scripts/check_closed_error_classes.py
+- scripts/check_content_tree_policy.py
+- scripts/check_contract_substance_quality.py
+- scripts/check_corrected_answers_are_concrete.py
+- scripts/check_course_explanatory_quality.py
+- scripts/check_course_internal_coherence.py
+- scripts/check_course_sheet_exercise_answer_count.py
+- scripts/check_course_sheet_linked_resources_exist.py
+- scripts/check_course_sheet_readiness.py
+- scripts/check_course_sheet_readiness_strict.py
+- scripts/check_course_sheets_alignment.py
+- scripts/check_course_sheets_coverage.py
+- scripts/check_course_sheets_no_template_abuse.py
+- scripts/check_course_sheets_quality.py
+- scripts/check_course_sheets_substance.py
+- scripts/check_coverage_evidence.py
+- scripts/check_coverage_gap_action_plan.py
+- scripts/check_csv_numeric_fields_are_parseable.py
+- scripts/check_delivered_archive_exactly_source_clean.py
+- scripts/check_differentiation_distinctness.py
+- scripts/check_differentiation_quality.py
+- scripts/check_document_depth.py
+- scripts/check_document_naming_conventions.py
+- scripts/check_document_style.py
+- scripts/check_drive_action_plan_completeness.py
+- scripts/check_drive_enrichment_traceability.py
+- scripts/check_drive_enrichment_traceability_portable.py
+- scripts/check_drive_integration_plan.py
+- scripts/check_drive_mapping.py
+- scripts/check_drive_mapping_release.py
+- scripts/check_drive_quarantine_privacy.py
+- scripts/check_drive_trace_no_absolute_local_paths.py
+- scripts/check_dynamic_programming_recurrence_consistency.py
+- scripts/check_eleve_no_corrige.py
+- scripts/check_eval_bareme_pairing.py
+- scripts/check_evaluation_bareme_alignment.py
+- scripts/check_evaluation_distribution.py
+- scripts/check_first_batch_alignment.py
+- scripts/check_first_batch_document_quality.py
+- scripts/check_first_batch_tp_assets.py
+- scripts/check_full_notional_resource_matrix.py
+- scripts/check_full_sequence_resource_matrix.py
+- scripts/check_gate_policy_consistency.py
+- scripts/check_generated_template_residue.py
+- scripts/check_git_clean.py
+- scripts/check_graph_algorithm_trace_consistency.py
+- scripts/check_human_review_register.py
+- scripts/check_human_review_wave_plan.py
+- scripts/check_learning_objectives_assessed.py
+- scripts/check_linked_evaluation_quality.py
+- scripts/check_linked_evaluation_substance.py
+- scripts/check_linked_td_quality.py
+- scripts/check_linked_td_substance.py
+- scripts/check_links.py
+- scripts/check_local_drive_traceability.py
+- scripts/check_makefile_audit_policy.py
+- scripts/check_manifest_source_integrity.py
+- scripts/check_manifest_source_trace_consistency.py
+- scripts/check_metadata.py
+- scripts/check_missing_register_actionability.py
+- scripts/check_missing_register_semantic_consistency.py
+- scripts/check_monthly_load_balance.py
+- scripts/check_network_packet_trace_consistency.py
+- scripts/check_no_absent_coverage_for_release.py
+- scripts/check_no_build_artifacts_in_index.py
+- scripts/check_no_committed_secrets.py
+- scripts/check_no_coverage_from_sheets_only.py
+- scripts/check_no_duplicate_capacity_lines.py
+- scripts/check_no_generic_scaffold_overuse.py
+- scripts/check_no_global_archive_in_delivery_context.py
+- scripts/check_no_line_padding.py
+- scripts/check_no_needs_review_for_release.py
+- scripts/check_no_operational_scope_hardcoding.py
+- scripts/check_no_placeholders.py
+- scripts/check_no_placeholders_code.py
+- scripts/check_no_placeholders_docs.py
+- scripts/check_no_private_data.py
+- scripts/check_no_secret_file_mutation_policy.py
+- scripts/check_no_sensitive_drive_in_source_clean.py
+- scripts/check_no_teacher_content_in_student_export.py
+- scripts/check_no_token_only_validation.py
+- scripts/check_official_program_capacity_coverage_matrix.py
+- scripts/check_operational_readiness_quality_coupling.py
+- scripts/check_operational_supports_no_indicative_debt.py
+- scripts/check_p04_key_consistency.py
+- scripts/check_p05_expected_outputs_are_explicit.py
+- scripts/check_p05_pipeline_consistency.py
+- scripts/check_p05_semantic_consistency.py
+- scripts/check_packaging_mode.py
+- scripts/check_paper_tp_contract.py
+- scripts/check_paper_tp_justification.py
+- scripts/check_pedagogical_alignment.py
+- scripts/check_pedagogical_indexes.py
+- scripts/check_program_capacity_evidence_depth.py
+- scripts/check_program_coverage.py
+- scripts/check_program_yaml_atomicity.py
+- scripts/check_progression_calendar_alignment.py
+- scripts/check_progression_project_consistency.py
+- scripts/check_project_quarter_requirement.py
+- scripts/check_python_cache_stability.py
+- scripts/check_python_quality.py
+- scripts/check_qa_report_freshness.py
+- scripts/check_qcm_contract_consistency.py
+- scripts/check_qcm_schema.py
+- scripts/check_quality_gates.py
+- scripts/check_question_capacity_alignment.py
+- scripts/check_rag_collection_policy.py
+- scripts/check_rag_config.py
+- scripts/check_rag_freshness.py
+- scripts/check_rag_golden_examples_policy.py
+- scripts/check_rag_index_metadata.py
+- scripts/check_rag_metadata_canonical_fields.py
+- scripts/check_ready_session_operationality.py
+- scripts/check_ready_supports_depth.py
+- scripts/check_ready_supports_required_sections.py
+- scripts/check_register_no_hidden_operational_debt.py
+- scripts/check_rendered_unit_artifacts.py
+- scripts/check_repo_topology.py
+- scripts/check_reports_policy.py
+- scripts/check_required_sections.py
+- scripts/check_scientific_claims_review.py
+- scripts/check_sequence_capacity_alignment.py
+- scripts/check_sequence_completeness.py
+- scripts/check_sequence_contracts.py
+- scripts/check_sequence_pack_consistency.py
+- scripts/check_sequence_pedagogical_coherence.py
+- scripts/check_session_classroom_operationality.py
+- scripts/check_session_duration_consistency.py
+- scripts/check_session_level_planning.py
+- scripts/check_session_monthly_total.py
+- scripts/check_session_operationalization_plan.py
+- scripts/check_session_project_hours.py
+- scripts/check_session_referenced_files_exist.py
+- scripts/check_session_specificity.py
+- scripts/check_session_to_resource_alignment.py
+- scripts/check_session_week_calendar_consistency.py
+- scripts/check_skills_governance.py
+- scripts/check_sources_catalog.py
+- scripts/check_sources_catalog_schema.py
+- scripts/check_sql_query_result_consistency.py
+- scripts/check_status_promotion_guard.py
+- scripts/check_student_supports_no_scaffold_language.py
+- scripts/check_substance_anchors.py
+- scripts/check_substance_report_artifacts.py
+- scripts/check_support_pedagogical_depth.py
+- scripts/check_support_substance.py
+- scripts/check_t18_trace_table_quality.py
+- scripts/check_td_corrige_alignment.py
+- scripts/check_teacher_corrections_alignment.py
+- scripts/check_teacher_docs_depth.py
+- scripts/check_tp_executable_opportunity.py
+- scripts/check_tp_pedagogical_assets.py
+- scripts/check_tp_pedagogical_assets_runtime.py
+- scripts/check_tp_test_alignment.py
+- scripts/check_tp_text_asset_alignment.py
+- scripts/check_tree_bst_invariant_consistency.py
+- scripts/check_uploaded_archive_policy.py
+- scripts/check_validated_documents_quality_gates.py
+- scripts/check_validated_statuses.py
+- scripts/check_verdict_provenance.py
+- scripts/classify_scraped_resource.py
+- scripts/cleanup_python_artifacts.py
+- scripts/drive_local_inventory.py
+- scripts/drive_resource_triage.py
+- scripts/generate_coverage_gap_action_plan.py
+- scripts/generate_index.py
+- scripts/generate_pedagogical_indexes.py
+- scripts/generate_qa_report.py
+- scripts/ingest_drive_export.py
+- scripts/ingest_nsi_corpus.py
+- scripts/judge_campaign.py
+- scripts/prepare_scraped_docs_for_rag.py
+- scripts/rag_coherence_report.py
+- scripts/rag_core.py
+- scripts/rag_diagnose_search_timeout.py
+- scripts/rag_index_plan.py
+- scripts/rag_ingest.py
+- scripts/rag_ingest_server.py
+- scripts/rag_query_example.py
+- scripts/rag_smoke_test.py
+- scripts/rebuild_inventory.py
+- scripts/render_sequence.py
+- scripts/render_substance_report.py
+- scripts/render_unit.py
+- scripts/run_audit_extracted_source.py
+- scripts/run_python_tests.py
+- scripts/run_substance_judge.py
+- scripts/substance_judge.py
+- scripts/substance_report_renderer.py
+- sources_catalog.schema.json
+- sources_catalog.yml
+- substance_pipeline.md
+- substance_rag_pilot_report.md
+- substance_reviews/_adversarial/poisoned.verdict.json
+- substance_reviews/campaign/P-ALGO-01A_substance_review.json
+- substance_reviews/campaign/P-ALGO-01B_substance_review.json
+- substance_reviews/campaign/P-ALGO-02A_substance_review.json
+- substance_reviews/campaign/P-ALGO-02B_substance_review.json
+- substance_reviews/campaign/P-ALGO-02C_substance_review.json
+- substance_reviews/campaign/P-ALGO-02D_substance_review.json
+- substance_reviews/campaign/P-ALGO-03_substance_review.json
+- substance_reviews/campaign/P-ALGO-04_substance_review.json
+- substance_reviews/campaign/P-ALGO-05_substance_review.json
+- substance_reviews/campaign/P-ARCH-01A_substance_review.json
+- substance_reviews/campaign/P-ARCH-01B_substance_review.json
+- substance_reviews/campaign/P-ARCH-02A_substance_review.json
+- substance_reviews/campaign/P-ARCH-02B_substance_review.json
+- substance_reviews/campaign/P-ARCH-02C_substance_review.json
+- substance_reviews/campaign/P-ARCH-03A_substance_review.json
+- substance_reviews/campaign/P-ARCH-03B_substance_review.json
+- substance_reviews/campaign/P-ARCH-03C_substance_review.json
+- substance_reviews/campaign/P-ARCH-04A_substance_review.json
+- substance_reviews/campaign/P-ARCH-04B_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-01_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-02A_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-02B_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-03_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-04_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-05A_substance_review.json
+- substance_reviews/campaign/P-DATA-BASE-05B_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-01_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-02A_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-02B_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-02C_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-02D_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-03A_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-03B_substance_review.json
+- substance_reviews/campaign/P-DATA-CONSTR-03C_substance_review.json
+- substance_reviews/campaign/P-HIST-01_substance_review.json
+- substance_reviews/campaign/P-IHM-01A_substance_review.json
+- substance_reviews/campaign/P-IHM-01B_substance_review.json
+- substance_reviews/campaign/P-IHM-02_substance_review.json
+- substance_reviews/campaign/P-IHM-03A_substance_review.json
+- substance_reviews/campaign/P-IHM-03B_substance_review.json
+- substance_reviews/campaign/P-IHM-03C_substance_review.json
+- substance_reviews/campaign/P-IHM-04A_substance_review.json
+- substance_reviews/campaign/P-IHM-04B_substance_review.json
+- substance_reviews/campaign/P-IHM-04C_substance_review.json
+- substance_reviews/campaign/P-LANG-01_substance_review.json
+- substance_reviews/campaign/P-LANG-02_substance_review.json
+- substance_reviews/campaign/P-LANG-03A_substance_review.json
+- substance_reviews/campaign/P-LANG-03B_substance_review.json
+- substance_reviews/campaign/P-LANG-03C_substance_review.json
+- substance_reviews/campaign/P-LANG-04_substance_review.json
+- substance_reviews/campaign/P-LANG-05_substance_review.json
+- substance_reviews/campaign/P-TABLE-01_substance_review.json
+- substance_reviews/campaign/P-TABLE-02_substance_review.json
+- substance_reviews/campaign/P-TABLE-03_substance_review.json
+- substance_reviews/campaign/P-TABLE-04_substance_review.json
+- substance_reviews/campaign/T-ALGO-01A_substance_review.json
+- substance_reviews/campaign/T-ALGO-01B_substance_review.json
+- substance_reviews/campaign/T-ALGO-01C_substance_review.json
+- substance_reviews/campaign/T-ALGO-01D_substance_review.json
+- substance_reviews/campaign/T-ALGO-01E_substance_review.json
+- substance_reviews/campaign/T-ALGO-01F_substance_review.json
+- substance_reviews/campaign/T-ALGO-02A_substance_review.json
+- substance_reviews/campaign/T-ALGO-02B_substance_review.json
+- substance_reviews/campaign/T-ALGO-02C_substance_review.json
+- substance_reviews/campaign/T-ALGO-02D_substance_review.json
+- substance_reviews/campaign/T-ALGO-03_substance_review.json
+- substance_reviews/campaign/T-ALGO-04_substance_review.json
+- substance_reviews/campaign/T-ALGO-05_substance_review.json
+- substance_reviews/campaign/T-ARCH-01_substance_review.json
+- substance_reviews/campaign/T-ARCH-02A_substance_review.json
+- substance_reviews/campaign/T-ARCH-02B_substance_review.json
+- substance_reviews/campaign/T-ARCH-02C_substance_review.json
+- substance_reviews/campaign/T-ARCH-03_substance_review.json
+- substance_reviews/campaign/T-ARCH-04A_substance_review.json
+- substance_reviews/campaign/T-ARCH-04B_substance_review.json
+- substance_reviews/campaign/T-BDD-01A_substance_review.json
+- substance_reviews/campaign/T-BDD-01B_substance_review.json
+- substance_reviews/campaign/T-BDD-01C_substance_review.json
+- substance_reviews/campaign/T-BDD-02_substance_review.json
+- substance_reviews/campaign/T-BDD-03A_substance_review.json
+- substance_reviews/campaign/T-BDD-03B_substance_review.json
+- substance_reviews/campaign/T-BDD-03C_substance_review.json
+- substance_reviews/campaign/T-BDD-03D_substance_review.json
+- substance_reviews/campaign/T-BDD-03E_substance_review.json
+- substance_reviews/campaign/T-BDD-03F_substance_review.json
+- substance_reviews/campaign/T-BDD-03G_substance_review.json
+- substance_reviews/campaign/T-BDD-03H_substance_review.json
+- substance_reviews/campaign/T-HIST-01A_substance_review.json
+- substance_reviews/campaign/T-HIST-01B_substance_review.json
+- substance_reviews/campaign/T-LANG-01A_substance_review.json
+- substance_reviews/campaign/T-LANG-01B_substance_review.json
+- substance_reviews/campaign/T-LANG-01C_substance_review.json
+- substance_reviews/campaign/T-LANG-02A_substance_review.json
+- substance_reviews/campaign/T-LANG-02B_substance_review.json
+- substance_reviews/campaign/T-LANG-03A_substance_review.json
+- substance_reviews/campaign/T-LANG-03B_substance_review.json
+- substance_reviews/campaign/T-LANG-03C_substance_review.json
+- substance_reviews/campaign/T-LANG-04A_substance_review.json
+- substance_reviews/campaign/T-LANG-04B_substance_review.json
+- substance_reviews/campaign/T-LANG-05_substance_review.json
+- substance_reviews/campaign/T-STRUCT-01A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-01B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-01C_substance_review.json
+- substance_reviews/campaign/T-STRUCT-02A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-02B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-03A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-03B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-03C_substance_review.json
+- substance_reviews/campaign/T-STRUCT-04A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-04B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-05A_substance_review.json
+- substance_reviews/campaign/T-STRUCT-05B_substance_review.json
+- substance_reviews/campaign/T-STRUCT-05C_substance_review.json
+- substance_reviews/campaign/T-STRUCT-05D_substance_review.json
+- substance_reviews/campaign/_usage_log.json
+- substance_reviews_index.md
+- substance_verdict.schema.json
+- support_source_trace.yml
+- td_corrige_alignment_report.md
+- terminale/banques/evaluations/index.md
+- terminale/banques/exercices/index.md
+- terminale/banques/index.md
+- terminale/banques/projets/index.md
+- terminale/banques/qcm/index.md
+- terminale/banques/sujets_pratiques/index.md
+- terminale/banques/tp/index.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/aides_progressives.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/bareme.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/corrige.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/corrige_professeur.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/cours_eleve.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/evaluation.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/evaluation_corrigee.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/fiche_methode.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/grille_competences.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/guide_professeur.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/pedagogical_review.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/projet_associe.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/python/structures_tools.py
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/qcm.json
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/quality_audit_s01.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/sequence.yaml
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/sources.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/td.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/tests/test_structures_tools.py
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/tp.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/trace_ecrite.md
+- terminale/sequences/s01_structures_donnees_interfaces_implementations/version_amenagee.md
+- tests/conftest.py
+- tests/fixtures/substance_judge/P05.json
+- tests/mypy_baseline.txt
+- tests/test_archive_integration_wrappers.py
+- tests/test_archive_portability_modes.py
+- tests/test_archive_security_imports.py
+- tests/test_audit_extracted_source_no_hang.py
+- tests/test_audit_strategic_integration.py
+- tests/test_build_artifacts.py
+- tests/test_classify_schema.py
+- tests/test_consolidation_strict.py
+- tests/test_course_sheets.py
+- tests/test_delivered_archive_exactly_source_clean.py
+- tests/test_doc_lint.py
+- tests/test_drive_enrichment_traceability.py
+- tests/test_drive_local_pipeline.py
+- tests/test_drive_mapping_release.py
+- tests/test_drive_portable_and_manifest.py
+- tests/test_ellipsis_scoping.py
+- tests/test_env_file_resolution.py
+- tests/test_excellence_remediation_regressions.py
+- tests/test_executable_quality_controls.py
+- tests/test_final_quality_hardening.py
+- tests/test_first_batch_alignment.py
+- tests/test_first_batch_document_quality.py
+- tests/test_first_batch_tp_assets.py
+- tests/test_full_matrix_and_runtime.py
+- tests/test_judge_collection_barriers.py
+- tests/test_line_padding.py
+- tests/test_linked_support_quality.py
+- tests/test_local_drive_traceability.py
+- tests/test_lot1_drive_gate_boundary.py
+- tests/test_lot2_scraper_content_dedup.py
+- tests/test_lot3_archive_security.py
+- tests/test_lot3_topological_isolation.py
+- tests/test_manifest_separation.py
+- tests/test_missing_register_actionability.py
+- tests/test_mypy_strict_debt.py
+- tests/test_no_coverage_from_sheets_only.py
+- tests/test_no_global_archive_in_delivery_context.py
+- tests/test_no_inline_env_resolution.py
+- tests/test_no_placeholders_code.py
+- tests/test_no_stale_archive_guard.py
+- tests/test_notional_and_disciplinary_controls.py
+- tests/test_operational_substance_controls.py
+- tests/test_organizer_nsi_safety.py
+- tests/test_p05_p04_controls.py
+- tests/test_packaging_modes.py
+- tests/test_policy_checker_ast.py
+- tests/test_private_data_detection.py
+- tests/test_rag_governance_and_indexes.py
+- tests/test_rag_ingest.py
+- tests/test_ready_session_operationality.py
+- tests/test_ready_supports_gates.py
+- tests/test_register_semantic_consistency.py
+- tests/test_render_substance_report_cli.py
+- tests/test_render_unit.py
+- tests/test_repo_topology.py
+- tests/test_run_python_tests.py
+- tests/test_secret_guard.py
+- tests/test_sequence_contracts.py
+- tests/test_sequence_pack_and_scaffold_controls.py
+- tests/test_session_referenced_files_exist.py
+- tests/test_session_specificity.py
+- tests/test_source_archive_policy.py
+- tests/test_source_zip_delivery.py
+- tests/test_source_zip_timestamps.py
+- tests/test_status_promotion_guard.py
+- tests/test_strict_full_bank_controls.py
+- tests/test_substance_hardened.py
+- tests/test_substance_judge_pipeline.py
+- tests/test_substance_report_renderer.py
+- tests/test_support_substance.py
+- tests/test_tp_pedagogical_assets.py
+- tests/test_tp_pedagogical_assets_no_hang.py
+- tests/test_tp_pedagogical_assets_runtime.py
+- tests/test_tp_text_asset_alignment.py
+- tests/test_uploaded_archive_policy.py
+- tests/test_verdict_provenance.py
+- tp_executable_opportunity_register.md
+- tp_test_alignment_report.md
+
+## Métadonnées incomplètes
+- 03_progressions/supports/premiere/P05/data/pays_monde_extrait.csv (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_aides.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_corrige.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_cours.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_evaluation.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_fiche_methode.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_td.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_td_eleve.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_tp.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_tp_eleve.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/P13_trace.tex (niveau=premiere, statut=needs_review)
+- latex/packs/premiere/P13/build.sh (niveau=premiere, statut=needs_review)
+
+## Doublons (même hash SHA256)
+- Aucun doublon détecté.

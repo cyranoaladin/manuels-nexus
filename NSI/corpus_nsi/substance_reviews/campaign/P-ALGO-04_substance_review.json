@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-11T14:35:48Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-04",
+      "official_label": "Montrer la terminaison de la recherche dichotomique à l'aide d'un variant de boucle.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_cours_dichotomie_glouton_knn.md",
+        "anchor": "#exemple-corrigé-2---variant-de-dichotomie-p-algo-04",
+        "quote": "Méthode : montrer que le variant V = droite − gauche + 1 (nombre de candidats) décroît strictement à chaque étape.\n- Résultat attendu : étape 1 → g=0, d=5, V=6 ; étape 2 → g=3, d=5, V=3 → trouvé. V décroît de 6 à 3, prouvant la terminaison.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_TD_dichotomie_glouton_knn.md",
+        "anchor": "#exercice-2",
+        "quote": "Consigne : montrer que le variant V = droite − gauche + 1 décroît strictement à chaque étape ; traiter aussi `cible absente` si nécessaire.\n- Réponse attendue : V décroît de 6 à 3 → terminaison (cible trouvée à l'indice 4).",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_corrige_dichotomie_glouton_knn.md",
+        "anchor": "#exercice-2",
+        "quote": "Réponse attendue : V décroît de 6 à 3 → terminaison.\n- Méthode : variant.\n- Cas limite : cible absente → V=0.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours expose la méthode du variant V = droite − gauche + 1 avec trace détaillée. Le TD fait pratiquer la démonstration de terminaison sur un exemple concret. Le corrigé fournit la réponse attendue avec le cas limite.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ARCH-02C",
+      "official_label": "Simuler ou mettre en œuvre un réseau.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_cours_reseaux_protocoles_paquets.md",
+        "anchor": "#exemple-corrigé-3",
+        "quote": "Méthode : dérouler M0 ACK0 M1 perdu retransmission ACK1.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_tp_reseaux_protocoles_paquets.md",
+        "anchor": "#travail-demandé",
+        "quote": "Tester le cas limite `TTL=1` : après décrément, `TTL=0`, le paquet est supprimé.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_corrige_reseaux_protocoles_paquets.md",
+        "anchor": "#exercice-3",
+        "quote": "Réponse attendue : M0 -> ACK0 -> M1 perdu -> M1 retransmis -> ACK1.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La capacité P-ARCH-02C est explicitement ciblée dans le cours (exemple corrigé 3 sur le protocole à bit alterné), dans le TP (simulation réseau avec cas limite TTL et décision de routage) et dans le corrigé (exercice 3 et corrigé TP). Le contenu correspond bien à la mise en œuvre ou simulation de réseau, notamment via le protocole TCP/bit alterné et le routage par préfixe.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

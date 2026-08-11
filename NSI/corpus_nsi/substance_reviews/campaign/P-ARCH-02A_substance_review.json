@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ARCH-02A",
+      "official_label": "Mettre en évidence l'intérêt du découpage en paquets et de l'encapsulation.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_cours_reseaux_protocoles_paquets.md",
+        "anchor": "#exemple-corrigé-1",
+        "quote": "Méthode : identifier champs de bout en bout.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_TD_reseaux_protocoles_paquets.md",
+        "anchor": "#exercice-1",
+        "quote": "Consigne : identifier champs de bout en bout ; traiter aussi `TTL devient 0` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_corrige_reseaux_protocoles_paquets.md",
+        "anchor": "#exercice-1",
+        "quote": "Réponse attendue : src=192.168.1.20 dst=172.16.0.8 TCP port 443 TTL 4.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Les fichiers traitent bien P-ARCH-02A avec identification des champs d'un paquet (IP src/dst, TCP, port, TTL), ce qui correspond à la mise en évidence du découpage en paquets et de l'encapsulation. Le cours présente la méthode, le TD la fait pratiquer, et le corrigé fournit la réponse attendue. Toutefois, le contenu reste centré sur la lecture de champs plutôt que sur l'intérêt conceptuel du découpage en paquets et de l'encapsulation au sens strict du programme.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

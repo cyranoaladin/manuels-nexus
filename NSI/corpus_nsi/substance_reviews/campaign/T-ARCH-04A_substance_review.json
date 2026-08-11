@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-14T10:32:40Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ARCH-04A",
+      "official_label": "Décrire les principes du chiffrement symétrique et asymétrique.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T13/T13_cours_chiffrement_https.md",
+        "anchor": "#à-savoir",
+        "quote": "- chiffrement symétrique : une seule clé partagée, rapide, utilisé pour les données applicatives.\n- chiffrement asymétrique : paire clé publique / clé privée, plus lent, utilisé pour l'échange sécurisé de la clé de session.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T13/T13_TD_chiffrement_https.md",
+        "anchor": "#exercice-3",
+        "quote": "Consigne : expliquez pourquoi le client chiffre `Ksession` avec `Kpub_serveur` avant de l'envoyer. Ensuite, expliquez pourquoi les données applicatives (requêtes, réponses) sont chiffrées avec `Ksession` (symétrique) et non directement avec `Kpub_serveur` (asymétrique). Donnez au moins une raison liée aux performances.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T13/T13_corrige_chiffrement_https.md",
+        "anchor": "#exercice-3",
+        "quote": "- Réponse attendue : `Ksession` est chiffrée avec `Kpub_serveur` (asymétrique) pour un échange sécurisé ; les données sont ensuite chiffrées avec `Ksession` (symétrique) pour la rapidité.\n- Méthode : justifier la combinaison des deux types de chiffrement par les performances et la sécurité.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours liste les notions de chiffrement symétrique et asymétrique avec vocabulaire clé. Le TD fait pratiquer la distinction entre les deux types de chiffrement et leur combinaison dans HTTPS. Le corrigé fournit la réponse attendue avec méthode et cas limite.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

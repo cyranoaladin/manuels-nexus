@@ -1,0 +1,57 @@
+sequence: P12
+level: premiere
+theme: tris, invariants et complexité
+notion: tris, invariants et complexité
+status: needs_review
+notions_exigibles:
+- tri par insertion
+- tri par sélection
+- invariant
+- variant
+- coût quadratique
+- stabilité
+- doublon 17
+capacites_officielles:
+- P-ALGO-02A
+- P-ALGO-02B
+- P-ALGO-02C
+- P-ALGO-02D
+exemples_obligatoires:
+- insertion après i=1 -> [17,42,23,17,9]
+- sélection place 9 en tête
+- 'invariant : indices < i triés'
+- pire cas quadratique
+cas_limites:
+- liste vide
+- liste déjà triée
+- doublons 17
+erreurs_frequentes:
+- invariant confondu avec résultat
+- décalage oublié
+- coût linéaire annoncé
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- tri par insertion
+- tri par sélection
+- invariant
+- variant
+- insertion après i=1 -> [17,42,23,17,9]
+- liste vide
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

@@ -1,0 +1,67 @@
+# command: rm -rf dist && .venv/bin/pytest
+# timestamp: 2026-06-28T21:53:28+01:00
+# head: f55d5332925c7f36135288f8681a40a271e59387
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.0.2, pluggy-1.6.0
+rootdir: /home/alaeddine/Documents/NSI/nsi-enseignement
+configfile: pyproject.toml
+testpaths: tests
+collected 215 items
+
+tests/test_archive_portability_modes.py .                                [  0%]
+tests/test_audit_extracted_source_no_hang.py ..                          [  1%]
+tests/test_audit_strategic_integration.py ......                         [  4%]
+tests/test_build_artifacts.py ...                                        [  5%]
+tests/test_consolidation_strict.py .....                                 [  7%]
+tests/test_course_sheets.py ..........                                   [ 12%]
+tests/test_delivered_archive_exactly_source_clean.py ...                 [ 13%]
+tests/test_drive_enrichment_traceability.py ......                       [ 16%]
+tests/test_drive_local_pipeline.py ...                                   [ 18%]
+tests/test_drive_mapping_release.py .                                    [ 18%]
+tests/test_drive_portable_and_manifest.py .....                          [ 20%]
+tests/test_executable_quality_controls.py ...........                    [ 26%]
+tests/test_final_quality_hardening.py .............                      [ 32%]
+tests/test_first_batch_alignment.py ..                                   [ 33%]
+tests/test_first_batch_document_quality.py ...                           [ 34%]
+tests/test_first_batch_tp_assets.py ..                                   [ 35%]
+tests/test_full_matrix_and_runtime.py ...                                [ 36%]
+tests/test_line_padding.py ..                                            [ 37%]
+tests/test_linked_support_quality.py ............                        [ 43%]
+tests/test_local_drive_traceability.py ...                               [ 44%]
+tests/test_lot1_drive_gate_boundary.py ...                               [ 46%]
+tests/test_missing_register_actionability.py ..                          [ 46%]
+tests/test_no_coverage_from_sheets_only.py ...                           [ 48%]
+tests/test_no_global_archive_in_delivery_context.py ....                 [ 50%]
+tests/test_notional_and_disciplinary_controls.py ...........             [ 55%]
+tests/test_operational_substance_controls.py ....................        [ 64%]
+tests/test_p05_p04_controls.py ..........                                [ 69%]
+tests/test_packaging_modes.py .                                          [ 69%]
+tests/test_private_data_detection.py .....                               [ 72%]
+tests/test_ready_session_operationality.py .                             [ 72%]
+tests/test_ready_supports_gates.py ..                                    [ 73%]
+tests/test_register_semantic_consistency.py ..                           [ 74%]
+tests/test_run_python_tests.py ..                                        [ 75%]
+tests/test_secret_guard.py ...                                           [ 76%]
+tests/test_sequence_contracts.py .                                       [ 77%]
+tests/test_sequence_pack_and_scaffold_controls.py ..........             [ 81%]
+tests/test_session_referenced_files_exist.py ...                         [ 83%]
+tests/test_session_specificity.py ..                                     [ 84%]
+tests/test_source_zip_delivery.py .                                      [ 84%]
+tests/test_source_zip_timestamps.py .                                    [ 85%]
+tests/test_status_promotion_guard.py .....                               [ 87%]
+tests/test_strict_full_bank_controls.py ....                             [ 89%]
+tests/test_substance_judge_pipeline.py ........                          [ 93%]
+tests/test_support_substance.py ..                                       [ 93%]
+tests/test_tp_pedagogical_assets.py .                                    [ 94%]
+tests/test_tp_pedagogical_assets_no_hang.py .                            [ 94%]
+tests/test_tp_pedagogical_assets_runtime.py .                            [ 95%]
+tests/test_tp_text_asset_alignment.py ...                                [ 96%]
+tests/test_uploaded_archive_policy.py .......                            [100%]
+
+=============================== warnings summary ===============================
+tests/test_archive_portability_modes.py::ArchivePortabilityModesTest::test_source_clean_mode_does_not_require_git_bundle
+  /usr/lib/python3.12/tarfile.py:2274: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================== 215 passed, 1 warning in 62.52s (0:01:02) ===================

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-07T21:56:57Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-01A",
+      "official_label": "Spécifier une structure de données par son interface.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_cours_interfaces_structures.md",
+        "anchor": "#exemple-corrigé-1---interface-pile",
+        "quote": "Donnée étudiée : `push`, `pop`, `is_empty`.\n- Méthode : décrire contrat d'entrée et résultat de chaque opération.\n- Résultat obtenu : interface indépendante du stockage.\n- Contrôle : le cas limite « dépilement vide » est vérifié séparément.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_td_interfaces_structures.md",
+        "anchor": "#exercice-1",
+        "quote": "Énoncé disciplinaire : résoudre interface pile avec `push`, `pop`, `is_empty`.\n- Production attendue : interface indépendante du stockage.\n- Contrainte de contrôle : faire apparaître le contrôle « dépilement vide ».\n- Critère local : la réponse contient une donnée, une méthode, un résultat et une vérification.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_corrige_interfaces_structures.md",
+        "anchor": "#corrigé-exercice-1",
+        "quote": "Méthode : identifier `push`, `pop`, `is_empty`, appliquer la méthode « décrire contrat d'entrée et résultat de chaque opération », puis écrire interface indépendante du stockage.\n- Résultat : interface indépendante du stockage.\n- Contrôle : faire apparaître le contrôle « dépilement vide ».\n- Erreur traitée : EF1 - Confondre interface et implémentation.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la spécification d'une pile par son interface (contrat, opérations, cas limite). Le TD fait pratiquer avec une consigne de production attendue. Le corrigé professeur fournit la méthode complète et l'erreur traitée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

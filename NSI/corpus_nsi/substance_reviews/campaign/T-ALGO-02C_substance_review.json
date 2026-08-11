@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-06T06:13:21Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-02C",
+      "official_label": "Repérer la présence d'un cycle dans un graphe.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_cours_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exemples-corrigés",
+        "quote": "- Méthode : DFS explore un chemin avant retour.\n- Résultat attendu : F isolé -> aucun chemin.\n- Contrôle : capacité T-ALGO-02C et cas limite `cycle D-C-D`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_TD_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exercice-3",
+        "quote": "- Capacité officielle : T-ALGO-02C.\n- Données : `adj={A:[B,C], B:[D], C:[E], D:[C], E:[]}`. ; jeu_exercice=gamma\n- Consigne : DFS explore un chemin avant retour ; traiter aussi `cycle D-C-D` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_corrige_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exercice-3",
+        "quote": "- Réponse attendue : F isolé -> aucun chemin.\n- Méthode : DFS explore un chemin avant retour.\n- Cas limite : cycle D-C-D.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours présente la méthode DFS avec détection de cycle (T-ALGO-02C), le TD fait pratiquer via l'exercice 3 avec le cas limite cycle D-C-D, et le corrigé fournit la réponse attendue avec la méthode associée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

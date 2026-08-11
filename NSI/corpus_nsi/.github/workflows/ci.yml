@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Ruff
+        run: ruff check .
+
+      - name: Tests
+        run: pytest
+
+      - name: Generated-files freshness (regen + git diff)
+        run: make check-generated-freshness
+
+      - name: Full audit (cold, idempotent)
+        run: make audit-idempotence
+
+      - name: Substance gate (all verdicts)
+        run: python -m scripts.check_substance_anchors
+
+      - name: Substance adversarial guard
+        run: |
+          set +e
+          python -m scripts.check_substance_anchors substance_reviews/_adversarial/poisoned.verdict.json --repo-root . > /tmp/poisoned_guard.log 2>&1
+          status=$?
+          cat /tmp/poisoned_guard.log
+          test "$status" -eq 1
+          grep -q "DÉGRADÉ" /tmp/poisoned_guard.log
+
+      - name: Status promotion guard
+        run: python -m scripts.check_status_promotion_guard
+
+      - name: Secret guard
+        run: python -m scripts.check_no_committed_secrets
+
+      - name: Closed error classes guard
+        run: python -m scripts.check_closed_error_classes
+
+      - name: Eval-barème pairing guard
+        run: python -m scripts.check_eval_bareme_pairing
+
+      - name: Verdict provenance guard
+        run: python -m scripts.check_verdict_provenance --base ${{ github.event.pull_request.base.sha || 'HEAD~1' }}

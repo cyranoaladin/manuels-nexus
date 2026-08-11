@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T11:54:51Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-BASE-03",
+      "official_label": "Calculer sur quelques exemples la représentation de nombres réels simples.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P03/P03_cours_texte_reels.md",
+        "anchor": "#principe-de-la-virgule-flottante",
+        "quote": "Un nombre réel est stocké sous la forme `± m × 2^e`, où `m` (mantisse) est un nombre entre 1 et 2 et `e` (exposant) est un entier relatif. Comme la mantisse est stockée sur un nombre fini de bits, la représentation est **approximative** pour la plupart des nombres décimaux.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P03/P03_td_texte_reels.md",
+        "anchor": "#exercice-9",
+        "quote": "Énoncé disciplinaire : calculer la représentation en binaire de nombres réels simples par la méthode des multiplications successives. (9a) Convertir 0.75 en binaire. La représentation est-elle exacte ? (9b) Convertir 0.1 en binaire (5 premières étapes). Le développement est-il fini ?",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P03/P03_td_texte_reels.md",
+        "anchor": "#corrigé-exercice-9",
+        "quote": "Résultat : (9a) 0.75 × 2 = 1.5 → 1, reste 0.5 ; 0.5 × 2 = 1.0 → 1, reste 0. Donc 0.75₁₀ = 0.11₂. Exacte car 0.75 = 1/2 + 1/4. (9b) 0.1 × 2 = 0.2 → 0 ; 0.2 × 2 = 0.4 → 0 ; 0.4 × 2 = 0.8 → 0 ; 0.8 × 2 = 1.6 → 1, reste 0.6 ; 0.6 × 2 = 1.2 → 1, reste 0.2. Cycle infini : 0.1₁₀ = 0.00011…₂.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours expose le principe de la virgule flottante et calcule explicitement 0.75, 0.1 et 5.625 en binaire. Le TD (exercice 9) fait pratiquer ces conversions avec consigne détaillée, et le corrigé exercice 9 fournit les résultats complets avec vérification par recomposition.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

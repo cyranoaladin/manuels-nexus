@@ -1,0 +1,55 @@
+sequence: T06
+level: terminale
+theme: arbres binaires de recherche
+notion: arbres binaires de recherche
+status: needs_review
+notions_exigibles:
+- invariant ABR
+- recherche
+- insertion
+- parcours infixe
+- arbre vide
+- doublon
+- complexité hauteur
+capacites_officielles:
+- T-ALGO-01E
+- T-ALGO-01F
+exemples_obligatoires:
+- 'chercher 6 : 8 -> 3 -> 6'
+- 'insérer 7 : 8 -> 3 -> 6 -> droite'
+- infixe -> 1,3,6,8,10,14
+- arbre vide -> nouvelle racine
+cas_limites:
+- arbre vide
+- doublon 6
+- arbre dégénéré
+erreurs_frequentes:
+- gauche et droite inversées
+- logarithmique sans équilibre
+- racine vide oubliée
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- invariant ABR
+- recherche
+- insertion
+- parcours infixe
+- 'chercher 6 : 8 -> 3 -> 6'
+- arbre vide
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

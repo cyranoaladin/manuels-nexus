@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-02A",
+      "official_label": "Parcourir un graphe en largeur d'abord.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_cours_bfs_dfs_cycles_chemins.md",
+        "anchor": "#méthodes",
+        "quote": "BFS file A puis B,C puis D,E.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_TD_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exercice-1",
+        "quote": "Consigne : BFS file A puis B,C puis D,E ; traiter aussi `sommet isolé F` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_corrige_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exercice-1",
+        "quote": "Réponse attendue : BFS -> A,B,C,D,E.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne le parcours BFS avec file et fournit des exemples corrigés. Le TD fait pratiquer le parcours en largeur sur un graphe explicite. Le corrigé fournit la réponse attendue avec la méthode détaillée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-13T00:40:49Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-03A",
+      "official_label": "Identifier les composants d'une requête.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md",
+        "anchor": "#1-lire-une-requête--une-suite-de-clauses-ayant-chacune-un-rôle",
+        "quote": "Une **requête SQL** est une instruction adressée au système de gestion de base de données. Dans une requête de lecture :\n\n- `SELECT` indique les colonnes à afficher : c'est la **projection** ;\n- `FROM` indique la ou les tables utilisées ;\n- `JOIN ... ON` indique comment relier les lignes de deux tables ;\n- `WHERE` indique quelles lignes conserver : c'est la **sélection** ;\n- `ORDER BY` ordonne le résultat obtenu.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md",
+        "anchor": "#exercice-1--lire-et-annoter-une-requête-socle-6-min",
+        "quote": "Recopier la requête et annoter le rôle de chaque clause.\n2. Donner le résultat exact.\n3. Dire si la table `Eleve` a été modifiée.\n\n**Livrable.** Une requête annotée, un tableau à deux colonnes et une phrase de conclusion.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md",
+        "anchor": "#exercice-1--lire-et-annoter",
+        "quote": "- `SELECT nom, classe` choisit les deux colonnes affichées.\n- `FROM Eleve` indique la table lue.\n- `WHERE classe = 'T2'` conserve Alan et Linus.\n- `ORDER BY nom ASC` les place dans l'ordre alphabétique.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours définit explicitement le rôle de chaque clause SQL (T-BDD-03A). Le TD fait pratiquer l'annotation des clauses sur une requête concrète. Le corrigé fournit les réponses exactes pour chaque clause annotée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

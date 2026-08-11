@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-12T10:40:34Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-02",
+      "official_label": "Identifier les services rendus par un SGBD relationnel.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_cours_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#les-quatre-services-fondamentaux",
+        "quote": "| Service | Rôle | Exemple |\n|---------|------|---------|",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_TD_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#exercice-4",
+        "quote": "Consigne : repérer id_livre=9 absent ; traiter aussi `clé primaire nulle` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_corrige_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#exercice-4",
+        "quote": "Réponse attendue : suppression d un livre emprunté refusée.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours expose les quatre services d'un SGBD (persistance, concurrence, efficacité, sécurisation) avec exemples. Le TD (ex. 4 et 8) fait pratiquer T-BDD-02 sur un cas concret. Le corrigé fournit la réponse attendue pour ces exercices.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T13:22:16Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-LANG-05",
+      "official_label": "Utiliser la documentation d'une bibliothèque.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md",
+        "anchor": "#utiliser-la-documentation-dune-bibliothèque",
+        "quote": "Pour chaque fonction d'une bibliothèque, la documentation indique :\n1. **Le nom** de la fonction.\n2. **Les paramètres** (nombre, type attendu, valeurs par défaut).\n3. **La valeur de retour** (type et signification).\n4. **Des exemples d'utilisation**.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_TD_fonctions_tests_specifications.md",
+        "anchor": "#exercice-10",
+        "quote": "Consigne : (10a) écrire un programme qui utilise `math.sqrt` pour calculer la diagonale d'un carré de côté 5 (formule : côté × √2) ; (10b) utiliser `help(math.floor)` pour décrire ce que fait `math.floor` puis calculer `math.floor(3.7)` et `math.floor(-3.2)` ; (10c) expliquer la différence entre `math.floor` et `math.ceil` en utilisant la documentation.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md",
+        "anchor": "#exercice-10",
+        "quote": "Réponse attendue : (10a) `import math ; math.sqrt(2) * 5` ≈ 7.0710678118654755. (10b) `math.floor(3.7)` → 3 ; `math.floor(-3.2)` → −4 (arrondi vers −∞, pas vers 0). (10c) `math.floor` arrondit vers −∞ (plancher), `math.ceil` arrondit vers +∞ (plafond)",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne comment lire une documentation de bibliothèque avec les modules math et random. Le TD (exercice 10) fait pratiquer l'utilisation de math.sqrt, math.floor et help(). Le corrigé fournit les réponses vérifiables avec valeurs numériques exactes.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

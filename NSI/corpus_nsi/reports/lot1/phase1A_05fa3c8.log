@@ -1,0 +1,50 @@
+# phase1A 2026-06-28T20:04:52.478995+00:00
+HEAD 05fa3c8e4dae5b92ec4dc8ca106290ec26887960
+## roots
+drive: exists=True path=/home/alaeddine/Documents/NSI/Documents_DRIVE
+central: exists=True path=/home/alaeddine/Documents/NSI/scrapping_NSI/ressources_nsi_centralisees
+duplicate_drive: exists=True path=/home/alaeddine/Documents/NSI/scrapping_NSI/ressources_nsi_centralisees/_doublons_drive
+skipped_drive: exists=True path=/home/alaeddine/Documents/NSI/scrapping_NSI/ressources_nsi_centralisees/_skipped_drive
+registry: exists=True path=/home/alaeddine/Documents/NSI/scrapping_NSI/migration_registry.json
+## file_counts
+drive: files=0
+central: files=15906
+duplicate_drive: files=291
+skipped_drive: files=38
+## registry_summary
+registry_top_type=dict
+registry_top_keys=['entries', 'source_cache', 'updated_at', 'version']
+entries_type=dict entries_count=16041
+source_cache_type=dict source_cache_count=4835
+entries_dest_present=15577
+entries_dest_missing=464
+entries_source_prefixes={'ressources_nsi_centralisees': 15577, '/tmp': 463, 'Documents_DRIVE': 1}
+entries_with_Documents_DRIVE_source=1
+drive_entry_sample ('27bc5d081eefacf05dfa0936cb4991c4873a3fcc179eb185ec15099eb7c39c20', '/tmp/tmpw_mu6n0c/Documents_DRIVE/Algo_Premiere/Cours drive.pdf', '/tmp/tmpw_mu6n0c/ressources_nsi_centralisees/01_Premiere_NSI/01_Cours/Cours_drive.pdf')
+missing_dest_sample ('0039f7034cdbe377a994764d8d9289178a6e836b4d7da633f84d789e5bda61bf', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - gisele.bareux.free.fr/zip/NSI_1iere_S7_DRco.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('00b28203079f7b5196d5b4e40d6fc42b54147a9e39bed1138958f712764e643b', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - gisele.bareux.free.fr/zip/VI_Diagray2020.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('00ebbd300a87dc7468830ea4a98873967c99f709486067bdad8a00fdebfd2ae8', '/tmp/tmpw_mu6n0c/transit/ressources_nsi_extraites/Site_Source/premiere/cours_source.pdf', '/tmp/tmpw_mu6n0c/ressources_nsi_centralisees/01_Premiere_NSI/01_Cours/cours_source.pdf')
+missing_dest_sample ('013d5790b923e9d755ef21b5fdbec6ab7c3a8ca817e9c4c085d51ed2e01ee726', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - aeif.fr/zip/Sources_Amerique_Sud_novembre_2025_sujet_1.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('01792ea48c65f2b6b5b04e6df5810db605dc5b72d9039e6ea0754a99d7bfae88', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - aeif.fr/zip/cor_amerique_sud_nov_25_j2.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('01984b6c3e4e87460e0f48ed0cf9d28938ebe0a5b9a27af3d0088f012db057a4', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Dépôt Source David Latreyte/zip/favicon.ico.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('0246702b14ec0255ed4e06590e7b309a041b9ea7026adfdcf3f854e3017b9916', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - www.monlyceenumerique.fr - index_nsi.html/zip/Exercices_bdd_python_veleve.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('0420585de5fd703dd1f747082cbfad567a7223569516e0280ac5f51b991d9c94', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - squidfunk.github.io - mkdocs-material/zip/color-palette-system-preference.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('042a987a94d7e720c1bf8e3d4ed460caa9c65c63053ca9753f98999b981388d6', '/tmp/nsi_transit/_extracted_zips/tp_linux/base_tp/commandes_supplementaires.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('042cb272abb5da40e131e4aa5885fca75477738b2d2946d6ad491b24f46c1e07', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - gisele.bareux.free.fr/zip/Seance 06.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('045f35c7fbdb775b0cbd985cd5cbf66ae7f7e61fa9d20ca66a923f2309d70f90', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - www.maths-info-lycee.fr - nsi.html/zip/donnees_films.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('051d7cf34889d82d536faee897d3ad1ba2b577aab9a9cb91044ebc29c5bf9c25', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Eric Tixidor - Allophysique/zip/gimp.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('058ba13d4f2be85ba60d4297e814014a4bda1892a54ba6b1941d36976171da7b', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - icnisnlycee.free.fr/zip/pages_web_css.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('0642cb569d90e8a189a4fd51a2be1efe3c27d1b4cbe0f3ebad3df1843b71817e', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - ferney-nsi.gitlab.io - premiere/zip/osPython.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('065b56e38fb68bd84eef9cdc991b83573596b619abd57599c4e5e899f05cdaf4', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - icnisnlycee.free.fr/zip/oeuvres.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('06b87261d6b2e639d6b8867fa2c42e8c7b87e3d8ded3826f6d8346b48deabf28', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - gisele.bareux.free.fr/zip/Montre TI EZ 430.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('06f0fc8c6b4a18c49468d6861533881402f3aa76f3b69321c9841933a29239f4', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - gisele.bareux.free.fr/zip/NSI_Ter_S6co.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('07589e69bb79701ad01c89676ad81182e232b4a0e0af45c8b91e3bdfd57d8b7a', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Gilles Lassus - Tle NSI/zip/dossiers.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('0868da0affb67a096b240f584baeee5aa65e8a0ba14b4cc88f14c5751fbb8e37', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - progalgo.fr/zip/26_BCG_NSI_2.zip', '__archive_processed_in_transit__')
+missing_dest_sample ('0882912352cf72250106848127a37b67d60c711e5ec8fba710d64aeda9c9a7c1', '/tmp/nsi_transit/ressources_nsi_extraites_v2/Annuaire - gisele.bareux.free.fr/zip/ISN_TerS_9.zip', '__archive_processed_in_transit__')
+## hash_reconciliation_limited
+central_unique_hashes=15614
+## conclusion_inputs
+has_drive_root True
+drive_files 0
+has_registry True
+has_drive_source_entries unknown_if_no_registry_parse

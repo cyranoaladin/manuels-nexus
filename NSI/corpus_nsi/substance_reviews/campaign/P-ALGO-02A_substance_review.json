@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-02A",
+      "official_label": "Ecrire un algorithme de tri par insertion.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_cours_tris_invariants_complexite.md",
+        "anchor": "#méthodes",
+        "quote": "insérer la clé dans la partie gauche triée.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_TD_tris_invariants_complexite.md",
+        "anchor": "#exercice-1",
+        "quote": "Consigne : insérer la clé dans la partie gauche triée ; traiter aussi `liste vide` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_corrige_tris_invariants_complexite.md",
+        "anchor": "#exercice-1",
+        "quote": "Réponse attendue : insertion après i=1 -> [17,42,23,17,9].",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode du tri par insertion, le TD fait pratiquer l'insertion de la clé dans la partie gauche triée, et le corrigé fournit la réponse attendue avec le résultat explicite.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

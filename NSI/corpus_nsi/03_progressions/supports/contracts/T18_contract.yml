@@ -1,0 +1,55 @@
+sequence: T18
+level: terminale
+theme: Boyer-Moore
+notion: Boyer-Moore
+status: needs_review
+notions_exigibles:
+- motif
+- texte
+- table du mauvais caractère
+- comparaison droite à gauche
+- décalage
+- trace complète
+- pseudo-code
+- motif trouvé
+capacites_officielles:
+- T-ALGO-05
+exemples_obligatoires:
+- 'table : A->2, N->1'
+- 'alignement 0 : N comparé à A -> décalage 1'
+- 'alignement 1 : ANA trouvé'
+- motif XYZ absent
+cas_limites:
+- motif absent
+- motif plus long que texte
+- caractère absent du motif
+erreurs_frequentes:
+- comparaison gauche à droite
+- décalage nul
+- caractère absent oublié
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- motif
+- texte
+- table du mauvais caractère
+- comparaison droite à gauche
+- 'table : A->2, N->1'
+- motif absent
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

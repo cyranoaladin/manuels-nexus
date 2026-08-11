@@ -1,0 +1,116 @@
+---
+title: "T04 - Version amenagee - Récursivité"
+level: "terminale"
+sequence_id: "T04"
+document_type: "version_amenagee"
+status: "needs_review"
+version: "0.4.1"
+source: "BO 2019"
+source_creation: "generated_from_program"
+theme: "Langage et preuve de terminaison"
+notion: "appel récursif, cas de base, terminaison, pile d’appels"
+objectifs:
+  - "Objectif O1 - Identifier précisément la représentation ou la structure en jeu"
+  - "Objectif O2 - Appliquer une méthode disciplinaire complète"
+  - "Objectif O3 - Justifier le résultat sur un cas différent"
+  - "Objectif O4 - Contrôler un cas limite et corriger une erreur observée"
+private_data: false
+official_program:
+  capacities:
+    - "T-LANG-02A"
+    - "T-LANG-02B"
+---
+
+
+# T04 - Version aménagée - Récursivité
+
+## Objectifs spécifiques
+- Objectif O1 - Identifier précisément la représentation ou la structure en jeu.
+- Objectif O2 - Appliquer une méthode disciplinaire complète.
+- Objectif O3 - Justifier le résultat sur un cas différent.
+- Objectif O4 - Contrôler un cas limite et corriger une erreur observée.
+
+## Capacités officielles atomiques
+- T-LANG-02A
+- T-LANG-02B
+
+## Prérequis
+- Reconnaître une consigne liée à appel récursif.
+- Distinguer donnée, méthode et conclusion dans le thème Langage et preuve de terminaison.
+- Rédiger une justification courte en utilisant le vocabulaire du programme.
+- Contrôler une réponse par un cas limite ou un contre-exemple explicite.
+
+## Séance(s) correspondante(s)
+- T04-S1 à T04-S5 : support rattaché aux séances prêtes de la progression.
+
+## Situation-problème concrète
+Un algorithme de parcours doit traiter une structure définie en se ramenant à un sous-problème plus petit.
+
+## Activité d’entrée
+1. Identifier le cas de base d’une factorielle.
+2. Suivre les appels de `somme([4, 1, 3])`.
+3. Comparer récursif et itératif.
+4. Prévoir ce qui se passe sans décroissance.
+
+## Version aménagée - Énoncé élève
+### Question aménagée 1
+- Énoncé élève : traiter factorielle avec la donnée `4!`.
+- Aide intégrée : commencer par appliquer `n * fact(n-1)` jusqu’au cas `0!`.
+- Espace de réponse : méthode : ______ ; résultat : ______ ; contrôle : ______.
+- Point de vigilance : Oublier le cas de base.
+### Question aménagée 2
+- Énoncé élève : traiter somme de liste avec la donnée `[4, 1, 3]`.
+- Aide intégrée : commencer par séparer tête et reste.
+- Espace de réponse : méthode : ______ ; résultat : ______ ; contrôle : ______.
+- Point de vigilance : Faire un appel récursif qui ne rapproche pas du cas de base.
+### Question aménagée 3
+- Énoncé élève : traiter longueur avec la donnée `["a", "b"]`.
+- Aide intégrée : commencer par ajouter 1 à la longueur du reste.
+- Espace de réponse : méthode : ______ ; résultat : ______ ; contrôle : ______.
+- Point de vigilance : Confondre valeur retournée et affichage des appels.
+### Question aménagée 4
+- Énoncé élève : traiter terminaison avec la donnée `n` décroît vers 0.
+- Aide intégrée : commencer par montrer une mesure entière strictement décroissante.
+- Espace de réponse : méthode : ______ ; résultat : ______ ; contrôle : ______.
+- Point de vigilance : Ne pas traiter l’entrée vide.
+## Exercices numérotés
+- Exercice 1 : résoudre factorielle avec `4!` avec aide possible sur la méthode.
+- Exercice 2 : expliquer somme de liste à partir de `[4, 1, 3]` avec aide possible sur la méthode.
+- Exercice 3 : comparer longueur avec `["a", "b"]` avec aide possible sur la méthode.
+- Exercice 4 : corriger terminaison pour `n` décroît vers 0 avec aide possible sur la méthode.
+- Exercice 5 : tester un cas limite lié à entier négatif refusé avec aide possible sur la méthode.
+- Exercice 6 : classer deux méthodes possibles pour somme de liste avec aide possible sur la méthode.
+- Exercice 7 : justifier un transfert qui utilise longueur avec une donnée nouvelle avec aide possible sur la méthode.
+- Exercice 8 : étendre un énoncé volontairement erroné sur terminaison avec aide possible sur la méthode.
+## Corrigés complets des exercices du cours
+- Corrigé exercice 1 : méthode : identifier `4!`, appliquer la méthode « appliquer `n * fact(n-1)` jusqu’au cas `0!` », puis écrire `24` ; résultat : `24` ; contrôle : faire apparaître le contrôle « entier négatif refusé ».
+- Corrigé exercice 2 : méthode : expliciter chaque étape de séparer tête et reste avant de conclure par `8` ; résultat : `8` ; contrôle : rédiger la méthode avant le résultat.
+- Corrigé exercice 3 : méthode : comparer la donnée avec le cas limite « reste vide » et valider `2` ; résultat : `2` ; contrôle : comparer avec le cas « reste vide ».
+- Corrigé exercice 4 : méthode : isoler l’erreur fréquente « Ne pas traiter l’entrée vide. » puis reprendre la procédure correcte ; résultat : preuve de terminaison ; contrôle : corriger l’erreur « Ne pas traiter l’entrée vide. ».
+- Corrigé exercice 5 : méthode : identifier `4!`, appliquer la méthode « appliquer `n * fact(n-1)` jusqu’au cas `0!` », puis écrire `24` ; résultat : le comportement de factorielle est contrôlé ; contrôle : nommer la donnée minimale et la conclusion.
+- Corrigé exercice 6 : méthode : expliciter chaque étape de séparer tête et reste avant de conclure par `8` ; résultat : la méthode robuste est choisie et justifiée ; contrôle : identifier pourquoi « Faire un appel récursif qui ne rapproche pas du cas de base. » est une erreur.
+- Corrigé exercice 7 : méthode : comparer la donnée avec le cas limite « reste vide » et valider `2` ; résultat : la justification reste valable sur le nouveau cas ; contrôle : inclure une étape calculable par un pair.
+- Corrigé exercice 8 : méthode : isoler l’erreur fréquente « Ne pas traiter l’entrée vide. » puis reprendre la procédure correcte ; résultat : l’erreur est localisée puis réparée ; contrôle : proposer une activité corrective inspirée de « Tester d’abord la liste vide ou `n = 0`. ».
+
+## Erreurs fréquentes
+- Erreur fréquente EF1 - Oublier le cas de base.
+- Erreur fréquente EF2 - Faire un appel récursif qui ne rapproche pas du cas de base.
+- Erreur fréquente EF3 - Confondre valeur retournée et affichage des appels.
+- Erreur fréquente EF4 - Ne pas traiter l’entrée vide.
+
+## Remédiation ciblée
+- Activité corrective EF1 : Encadrer le cas de base avant d’écrire l’appel récursif.
+- Activité corrective EF2 : Tracer la valeur de l’argument à chaque appel.
+- Activité corrective EF3 : Dessiner la pile d’appels avec valeurs de retour.
+- Activité corrective EF4 : Tester d’abord la liste vide ou `n = 0`.
+
+## Différenciation
+- Socle : traiter `4!` avec une fiche méthode fournie.
+- Standard : traiter `[4, 1, 3]` en rédigeant la justification complète.
+- Expert : inventer un cas limite lié à « reste vide » et expliquer le comportement attendu.
+
+## Critères de réussite
+- La capacité officielle est citée dans la copie.
+- La méthode contient au moins une étape vérifiable par un pair.
+- Le cas limite est discuté avec une donnée concrète.
+- La correction explique quelle erreur fréquente est évitée.

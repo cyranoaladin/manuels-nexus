@@ -1,0 +1,288 @@
+{
+  "metadata": {
+    "title": "QCM - S01 Représentation des données",
+    "titre": "QCM - S01 Représentation des données",
+    "level": "premiere",
+    "niveau": "premiere",
+    "sequence_id": "s01_representation_donnees",
+    "sequence": "s01_representation_donnees",
+    "document_type": "qcm",
+    "status": "needs_review",
+    "statut": "needs_review",
+    "version": "0.3.0",
+    "source": "BO spécial n°1 du 22 janvier 2019",
+    "theme": "Représentation des données",
+    "notion": "bits, bases, complément à deux, types construits",
+    "objectifs": [
+      "Vérifier les points clés de la séquence."
+    ],
+    "official_program": {
+      "level": "premiere",
+      "rubrique": "Représentation des données",
+      "content": "QCM",
+      "capacities": [
+        {
+          "id": "P-DATA-BASE-01",
+          "label": "Changer de base.",
+          "evidence": [
+            {
+              "section": "questions",
+              "file": "premiere/sequences/s01_representation_donnees/qcm.json",
+              "anchor": "#questions",
+              "type": "qcm"
+            }
+          ]
+        },
+        {
+          "id": "P-DATA-BASE-02B",
+          "label": "Complément à deux.",
+          "evidence": [
+            {
+              "section": "questions",
+              "file": "premiere/sequences/s01_representation_donnees/qcm.json",
+              "anchor": "#questions",
+              "type": "qcm"
+            }
+          ]
+        },
+        {
+          "id": "P-DATA-BASE-04",
+          "label": "Booléens.",
+          "evidence": [
+            {
+              "section": "questions",
+              "file": "premiere/sequences/s01_representation_donnees/qcm.json",
+              "anchor": "#questions",
+              "type": "qcm"
+            }
+          ]
+        },
+        {
+          "id": "P-DATA-BASE-05A",
+          "label": "Encodage.",
+          "evidence": [
+            {
+              "section": "questions",
+              "file": "premiere/sequences/s01_representation_donnees/qcm.json",
+              "anchor": "#questions",
+              "type": "qcm"
+            }
+          ]
+        },
+        {
+          "id": "P-DATA-CONSTR-01",
+          "label": "Tuples.",
+          "evidence": [
+            {
+              "section": "questions",
+              "file": "premiere/sequences/s01_representation_donnees/qcm.json",
+              "anchor": "#questions",
+              "type": "qcm"
+            }
+          ]
+        },
+        {
+          "id": "P-DATA-CONSTR-02A",
+          "label": "Listes.",
+          "evidence": [
+            {
+              "section": "questions",
+              "file": "premiere/sequences/s01_representation_donnees/qcm.json",
+              "anchor": "#questions",
+              "type": "qcm"
+            }
+          ]
+        },
+        {
+          "id": "P-DATA-CONSTR-03A",
+          "label": "Dictionnaires.",
+          "evidence": [
+            {
+              "section": "questions",
+              "file": "premiere/sequences/s01_representation_donnees/qcm.json",
+              "anchor": "#questions",
+              "type": "qcm"
+            }
+          ]
+        },
+        {
+          "id": "P-LANG-04",
+          "label": "Tests.",
+          "evidence": [
+            {
+              "section": "questions",
+              "file": "premiere/sequences/s01_representation_donnees/qcm.json",
+              "anchor": "#questions",
+              "type": "qcm"
+            }
+          ]
+        }
+      ]
+    },
+    "private_data": false
+  },
+  "questions": [
+    {
+      "id": "P1Q1",
+      "question": "Que vaut 1010 en base 2 ?",
+      "propositions": [
+        "10",
+        "1010",
+        "8"
+      ],
+      "bonne_reponse": "10",
+      "difficulte": "socle",
+      "capacite_officielle": "P-DATA-BASE-01",
+      "erreur_ciblee": "Lire une écriture binaire comme une écriture décimale.",
+      "explications": {
+        "10": "Réponse attendue.",
+        "1010": "C'est la lecture en base 10, pas en base 2.",
+        "8": "Le bit de poids 2 est oublié."
+      }
+    },
+    {
+      "id": "P1Q2",
+      "question": "Quel est l'intervalle des entiers relatifs sur 8 bits en complément à deux ?",
+      "propositions": [
+        "-128 à 127",
+        "0 à 255",
+        "-127 à 128"
+      ],
+      "bonne_reponse": "-128 à 127",
+      "difficulte": "standard",
+      "capacite_officielle": "P-DATA-BASE-02B",
+      "erreur_ciblee": "Confondre entier signé et non signé.",
+      "explications": {
+        "-128 à 127": "Réponse attendue.",
+        "0 à 255": "C'est l'intervalle sans signe.",
+        "-127 à 128": "La borne négative est mal calculée."
+      }
+    },
+    {
+      "id": "P1Q3",
+      "question": "Que vaut 11111111 en complément à deux sur 8 bits ?",
+      "propositions": [
+        "-1",
+        "255",
+        "-128"
+      ],
+      "bonne_reponse": "-1",
+      "difficulte": "standard",
+      "capacite_officielle": "P-DATA-BASE-02B",
+      "erreur_ciblee": "Oublier la convention de signe.",
+      "explications": {
+        "-1": "Réponse attendue.",
+        "255": "C'est la lecture sans signe.",
+        "-128": "C'est 10000000 en complément à deux."
+      }
+    },
+    {
+      "id": "P1Q4",
+      "question": "Dans la table de vérité de a and not b, quel cas donne True ?",
+      "propositions": [
+        "a=True, b=False",
+        "a=True, b=True",
+        "a=False, b=False"
+      ],
+      "bonne_reponse": "a=True, b=False",
+      "difficulte": "socle",
+      "capacite_officielle": "P-DATA-BASE-04",
+      "erreur_ciblee": "Oublier l'effet de not.",
+      "explications": {
+        "a=True, b=False": "Réponse attendue.",
+        "a=True, b=True": "not b vaut False.",
+        "a=False, b=False": "a vaut False."
+      }
+    },
+    {
+      "id": "P1Q5",
+      "question": "Pourquoi Unicode est-il utile ?",
+      "propositions": [
+        "Pour représenter beaucoup plus de caractères qu'ASCII",
+        "Pour rendre tous les textes plus courts",
+        "Pour supprimer les octets"
+      ],
+      "bonne_reponse": "Pour représenter beaucoup plus de caractères qu'ASCII",
+      "difficulte": "socle",
+      "capacite_officielle": "P-DATA-BASE-05A",
+      "erreur_ciblee": "Confondre encodage et compression.",
+      "explications": {
+        "Pour représenter beaucoup plus de caractères qu'ASCII": "Réponse attendue.",
+        "Pour rendre tous les textes plus courts": "Ce n'est pas son objectif.",
+        "Pour supprimer les octets": "Un encodage utilise toujours des octets en mémoire ou fichier."
+      }
+    },
+    {
+      "id": "P1Q6",
+      "question": "Quelle structure convient pour un point (x, y) non modifié ?",
+      "propositions": [
+        "tuple",
+        "dictionnaire",
+        "chaîne"
+      ],
+      "bonne_reponse": "tuple",
+      "difficulte": "socle",
+      "capacite_officielle": "P-DATA-CONSTR-01",
+      "erreur_ciblee": "Ne pas reconnaître un p-uplet.",
+      "explications": {
+        "tuple": "Réponse attendue.",
+        "dictionnaire": "Possible avec champs nommés, mais moins direct ici.",
+        "chaîne": "Une chaîne n'est pas adaptée aux calculs numériques."
+      }
+    },
+    {
+      "id": "P1Q7",
+      "question": "Pourquoi choisir un dictionnaire pour compter des votes ?",
+      "propositions": [
+        "Parce qu'on associe chaque choix à un effectif",
+        "Parce qu'un dictionnaire garde toujours l'ordre de vote",
+        "Parce qu'il interdit les valeurs numériques"
+      ],
+      "bonne_reponse": "Parce qu'on associe chaque choix à un effectif",
+      "difficulte": "standard",
+      "capacite_officielle": "P-DATA-CONSTR-03A",
+      "erreur_ciblee": "Confondre clé et position.",
+      "explications": {
+        "Parce qu'on associe chaque choix à un effectif": "Réponse attendue.",
+        "Parce qu'un dictionnaire garde toujours l'ordre de vote": "L'ordre de vote brut n'est pas l'objectif.",
+        "Parce qu'il interdit les valeurs numériques": "Un dictionnaire peut contenir des valeurs numériques."
+      }
+    },
+    {
+      "id": "P1Q8",
+      "question": "Après notes = [12, 15, 9], puis notes[1] = 14, que produit [x * 2 for x in notes] ?",
+      "propositions": [
+        "[24, 28, 18]",
+        "[12, 14, 9]",
+        "[24, 30, 18]"
+      ],
+      "bonne_reponse": "[24, 28, 18]",
+      "difficulte": "standard",
+      "capacite_officielle": "P-DATA-CONSTR-02A",
+      "erreur_ciblee": "Oublier qu'une liste est modifiable avant la compréhension.",
+      "explications": {
+        "[24, 28, 18]": "Réponse attendue : la valeur d'indice 1 a été modifiée avant de doubler chaque élément.",
+        "[12, 14, 9]": "C'est la liste modifiée, mais la compréhension n'a pas encore été appliquée.",
+        "[24, 30, 18]": "La valeur 15 a été doublée comme si la modification notes[1] = 14 n'avait pas eu lieu."
+      }
+    },
+    {
+      "id": "P1Q9",
+      "question": "Quel test est un cas limite pertinent pour une fonction de conversion vers base 2 ?",
+      "propositions": [
+        "to_base(0, 2)",
+        "to_base(42, 2)",
+        "to_base(18, 2)"
+      ],
+      "bonne_reponse": "to_base(0, 2)",
+      "difficulte": "expert",
+      "capacite_officielle": "P-LANG-04",
+      "erreur_ciblee": "Tester seulement des cas ordinaires.",
+      "explications": {
+        "to_base(0, 2)": "Réponse attendue.",
+        "to_base(42, 2)": "Cas utile mais ordinaire.",
+        "to_base(18, 2)": "Cas utile mais ordinaire."
+      }
+    }
+  ]
+}

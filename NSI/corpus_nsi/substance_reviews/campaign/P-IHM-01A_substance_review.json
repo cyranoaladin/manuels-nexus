@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-14T23:53:15Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-IHM-01A",
+      "official_label": "Identifier les composants graphiques permettant d'interagir avec une application Web.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md",
+        "anchor": "#exemples-corrigés",
+        "quote": "Méthode : repérer header main form label input.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_html_css_dom.md",
+        "anchor": "#exercice-1--lire-une-structure-html",
+        "quote": "Consigne : recopie dans un tableau les balises, les attributs et les textes visibles.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_corrige_web_http_dom_formulaires.md",
+        "anchor": "#exercice-1",
+        "quote": "Résultat : `main`, `h1`, `p` et `button` sont des balises ; `class=\"intro\"` et `id=\"inscrire\"` sont des attributs ; les intitulés du club et du bouton sont du texte.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours nomme les composants HTML, le TD fait identifier balises et attributs sur un bouton concret, et le corrigé distingue explicitement balise, attribut, identifiant et classe. Le verdict reste needs_review dans l'attente d'une revue humaine indépendante.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

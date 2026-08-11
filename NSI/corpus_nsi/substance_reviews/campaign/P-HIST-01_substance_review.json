@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-08T10:14:39Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-HIST-01",
+      "official_label": "Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P14/P14_cours_synthese_projet_oral.md",
+        "anchor": "#principaux-événements-de-lhistoire-de-linformatique",
+        "quote": "| 1936 | Machine de Turing (modèle théorique de calcul) | Alan Turing | Fondation théorique : tout calcul est une suite d'opérations élémentaires sur une bande |",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P14/P14_TD_synthese_projet_oral.md",
+        "anchor": "#exercice-9",
+        "quote": "Consigne : (9a) ordonner les événements suivants du plus ancien au plus récent : microprocesseur Intel 4004, machine de Turing, invention du Web, ENIAC, circuit intégré. (9b) Associer chaque événement à son protagoniste principal.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P14/P14_corrige_synthese_projet_oral.md",
+        "anchor": "#exercice-9",
+        "quote": "Réponse attendue : frise ordonnée (Turing 1936, ENIAC 1946, CI 1958, i4004 1971, Web 1989), associations protagonistes, rupture von Neumann, distinction Internet/Web.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours fournit une frise chronologique structurée avec protagonistes (Turing, von Neumann, Berners-Lee…). L'exercice 9 du TD fait pratiquer l'ordonnancement et l'association événement-protagoniste. Le corrigé fournit la réponse complète avec la frise ordonnée et les distinctions clés.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

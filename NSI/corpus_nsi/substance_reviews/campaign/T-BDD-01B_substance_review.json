@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-08T21:31:22Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-01B",
+      "official_label": "Distinguer structure et contenu d'une base de données.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_cours_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#savoir-disciplinaire",
+        "quote": "Vocabulaire à maîtriser : relation, attribut, tuple, clé primaire, clé étrangère, contrainte, schéma, instance.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_TD_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#exercice-2",
+        "quote": "Consigne : vérifier unicité id_livre ; traiter aussi `doublon id_livre=1` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_corrige_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#exercice-2",
+        "quote": "Réponse attendue : Emprunt.id_livre référence Livre.id_livre.\n- Méthode : vérifier unicité id_livre.\n- Cas limite : doublon id_livre=1.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne le vocabulaire schéma/instance/attribut, le TD fait pratiquer la vérification de la structure (clé primaire, clé étrangère), et le corrigé fournit la réponse attendue pour distinguer structure et contenu.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

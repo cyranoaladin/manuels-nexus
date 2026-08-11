@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-06T06:15:19Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ARCH-03",
+      "official_label": "Identifier, selon le protocole de routage utilisé, la route empruntée par un paquet.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T12/T12_cours_routage_rip_ospf.md",
+        "anchor": "#méthodes",
+        "quote": "- compter sauts RIP.\n- additionner coûts OSPF.\n- choisir route en égalité documentée.\n- recalculer après panne.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T12/T12_TD_routage_rip_ospf.md",
+        "anchor": "#exercice-1",
+        "quote": "Consigne : compter sauts RIP ; traiter aussi `égalité exacte` si nécessaire.\n- Réponse attendue : RIP : A-B-D et A-C-D ont 2 sauts.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T12/T12_corrige_routage_rip_ospf.md",
+        "anchor": "#exercice-2",
+        "quote": "- Réponse attendue : OSPF : A-B-D coût 10, A-C-D coût 11.\n- Méthode : additionner coûts OSPF.\n- Cas limite : lien indisponible.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne les méthodes RIP/OSPF avec exemples corrigés, le TD fait pratiquer le comptage de sauts et le calcul de coûts sur des données explicites, et le corrigé fournit les réponses attendues exercice par exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

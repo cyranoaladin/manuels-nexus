@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-06T06:12:43Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-04B",
+      "official_label": "Evaluer quelques mesures des arbres binaires.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_trace_arbres_mesures_parcours_complement.md",
+        "anchor": "#1-mesures-dun-arbre-binaire-t-struct-04b",
+        "quote": "| **Taille** | Nombre total de noeuds | 0 |\n| **Hauteur** | Plus long chemin racine → feuille (en arêtes) | -1 (convention) |\n| **Feuilles** | Noeuds sans fils gauche ni fils droit | {} (ensemble vide) |",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_td_arbres_mesures_parcours_complement.md",
+        "anchor": "#exercice-1--mesures-sur-papier-t-struct-04b",
+        "quote": "**1.a)** Déterminer la taille de A1.\n\n**1.b)** Déterminer la hauteur de A1. Préciser le plus long chemin.\n\n**1.c)** Lister toutes les feuilles de A1.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_corrige_arbres_mesures_parcours_complement.md",
+        "anchor": "#question-1--mesures-sur-papier-t-struct-04b",
+        "quote": "Taille : on dénombre tous les noeuds : 50, 30, 70, 20, 40, 80, 10, 35, 45. **Taille = 9.**\n\nHauteur : le plus long chemin est 50 → 30 → 40 → 35 (ou 50 → 30 → 40 → 45), soit 3 arêtes. **Hauteur = 3.**",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Verdict campagne Sonnet 4.6.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

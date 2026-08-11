@@ -1,0 +1,28 @@
+id: "s01_representation_donnees"
+title: "Représenter des données : bits, textes et types construits"
+level: "premiere"
+status: "needs_review"
+version: "0.3.0"
+source: "BO spécial n°1 du 22 janvier 2019"
+duration: "5 séances"
+limits:
+  - "La séquence ne couvre pas le traitement de tables CSV."
+  - "Les flottants restent un angle mort à traiter dans une autre séquence."
+documents:
+  eleve:
+    - "cours_eleve.md"
+    - "trace_ecrite.md"
+    - "td.md"
+    - "tp.md"
+    - "fiche_methode.md"
+    - "aides_progressives.md"
+    - "evaluation.md"
+    - "qcm.json"
+    - "projet_associe.md"
+  professeur:
+    - "corrige.md"
+    - "guide_professeur.md"
+python:
+  - "python/representation_tools.py"
+tests:
+  - "tests/test_representation_tools.py"

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-02B",
+      "official_label": "Parcourir un graphe en profondeur d'abord.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_cours_bfs_dfs_cycles_chemins.md",
+        "anchor": "#méthodes",
+        "quote": "DFS explore un chemin avant retour.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_TD_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exercice-3",
+        "quote": "Consigne : DFS explore un chemin avant retour ; traiter aussi `cycle D-C-D` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_corrige_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exercice-3",
+        "quote": "Méthode : DFS explore un chemin avant retour.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Attention : la capacité T-ALGO-02B est officiellement étiquetée 'mémoriser prédécesseurs / reconstruire un chemin' dans les exercices, mais le libellé officiel à juger est 'Parcourir un graphe en profondeur d'abord' (DFS). Le cours enseigne le DFS avec pile, le TD exercice 3 fait pratiquer le DFS, et le corrigé fournit la méthode et le résultat attendu pour le DFS. Les trois preuves sont présentes.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

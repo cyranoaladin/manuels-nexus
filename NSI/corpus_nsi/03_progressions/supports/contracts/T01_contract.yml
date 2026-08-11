@@ -1,0 +1,55 @@
+sequence: T01
+theme: Structures de données abstraites
+notions_exigibles:
+- interface
+- invariant
+- pile
+- file
+capacites_officielles:
+- T-STRUCT-01A
+exemples_obligatoires:
+- 'interface pile : `push`, `pop`, `is_empty` -> interface indépendante du stockage'
+- 'invariant : taille après deux empilements -> taille augmentée de 2'
+- 'file : arrivées A puis B -> A sort avant B'
+- 'encapsulation : liste interne `_items` -> tests écrits sur méthodes publiques'
+cas_limites:
+- dépilement vide
+- opération refusée
+- file vide
+- changement de représentation
+erreurs_frequentes:
+- EF1 - Confondre interface et implémentation.
+- EF2 - Tester un attribut interne au lieu de l’opération publique.
+- EF3 - Oublier l’état vide.
+- EF4 - Mélanger ordre LIFO et ordre FIFO.
+types_exercices_attendus:
+- interface pile avec `push`, `pop`, `is_empty`
+- invariant à partir de taille après deux empilements
+- file avec arrivées A puis B
+- encapsulation pour liste interne `_items`
+- un cas limite lié à dépilement vide
+- deux méthodes possibles pour invariant
+- un transfert qui utilise file avec une donnée nouvelle
+- un énoncé volontairement erroné sur encapsulation
+tp_attendu: Implémenter une pile avec une interface stable et des tests indépendants
+  de la représentation.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- interface
+- push`, `pop`, `is_empty
+- taille après deux empilements
+- dépilement vide
+- EF1
+- Implémenter une pile avec une interface stable et des tests indépendants de la représentation.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

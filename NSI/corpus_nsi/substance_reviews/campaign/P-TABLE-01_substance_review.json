@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-06T06:20:49Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-TABLE-01",
+      "official_label": "Importer une table depuis un fichier texte tabulé ou un fichier CSV.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P05/P05_cours_tables_csv.md",
+        "anchor": "#exemple-corrigé-1---lecture-csv",
+        "quote": "Méthode : lire avec csv.reader puis convertir POPULATION en int.\n- Résultat obtenu : `{\"PAYS\": \"Allemagne\", \"CAPITALE\": \"Berlin\", \"CONTINENT\": \"Europe\", \"POPULATION\": 82801531}`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P05/P05_td_tables_csv.md",
+        "anchor": "#exercice-1",
+        "quote": "Énoncé disciplinaire : résoudre la lecture de `Allemagne,Berlin,Europe,82801531`.\n- Production attendue : dictionnaire typé avec population entière.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P05/P05_corrige_tables_csv.md",
+        "anchor": "#corrigé-exercice-1",
+        "quote": "Méthode : identifier `PAYS,CAPITALE,CONTINENT,POPULATION\nAllemagne,Berlin,Europe,82801531`, appliquer la méthode « lire avec csv.reader puis convertir POPULATION en int », puis écrire `{\"PAYS\": \"Allemagne\", \"CAPITALE\": \"Berlin\", \"CONTINENT\": \"Europe\", \"POPULATION\": 82801531}`.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la lecture CSV avec csv.reader/DictReader et conversion de POPULATION, le TD fait pratiquer avec un exercice de lecture et production d'un dictionnaire typé, le corrigé fournit la méthode complète et le résultat attendu.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-06T06:08:45Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-CONSTR-03B",
+      "official_label": "Itérer sur les éléments d'un dictionnaire.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_trace_types_construits_complement.md",
+        "anchor": "#méthode-5---itérer-sur-les-éléments-dun-dictionnaire-p-data-constr-03b",
+        "quote": "| `for k, v in d.items()` | les couples (clé, valeur) |",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md",
+        "anchor": "#exercice-5---itérer-sur-un-dictionnaire-p-data-constr-03b-p-data-constr-03c",
+        "quote": "Écrire sur papier une boucle qui calcule la somme de toutes les valeurs du dictionnaire `meteo`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md",
+        "anchor": "#exercice-5---itérer-sur-un-dictionnaire-p-data-constr-03b",
+        "quote": "def cles_superieures(d, seuil):\n    resultat = []\n    for cle, valeur in d.items():\n        if valeur > seuil:\n            resultat.append(cle)\n    return resultat",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La trace enseigne les quatre formes d'itération sur dictionnaire avec tableau récapitulatif. Le TD fait pratiquer avec trois questions (blocs A/B/C, somme, fonction filtre). Le corrigé fournit les réponses complètes avec code Python.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

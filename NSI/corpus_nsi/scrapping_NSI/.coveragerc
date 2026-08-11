@@ -1,0 +1,17 @@
+[run]
+branch = True
+source =
+    scraper_nsi_v2
+    scraper_eduscol
+    netpolicy
+    provenance
+omit =
+    .venv/*
+    test_*.py
+
+[report]
+show_missing = True
+skip_covered = False
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-01A",
+      "official_label": "Calculer la taille d'un arbre.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_trace_arbres_mesures_parcours_complement.md",
+        "anchor": "#2-algorithme-récursif-de-taille-t-algo-01a",
+        "quote": "taille(A) = 0                                   si A est vide\ntaille(A) = 1 + taille(A.gauche) + taille(A.droite)   sinon",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_td_arbres_mesures_parcours_complement.md",
+        "anchor": "#exercice-2--calcul-récursif-de-la-taille-t-algo-01a",
+        "quote": "Écrire la formule récursive de la taille. Préciser le cas de base.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_corrige_arbres_mesures_parcours_complement.md",
+        "anchor": "#question-2--calcul-récursif-de-la-taille-t-algo-01a",
+        "quote": "taille(50) = 1 + 6 + 2 = 9",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours (trace écrite) enseigne la formule récursive de la taille avec code Python et preuve de terminaison. Le TD fait pratiquer le déroulé récursif et la justification de terminaison. Le corrigé fournit la trace complète de taille(50) avec tous les appels récursifs détaillés.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

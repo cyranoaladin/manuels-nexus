@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ARCH-02A",
+      "official_label": "Décrire la création d'un processus.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T11/T11_cours_processus_ordonnancement_interblocage.md",
+        "anchor": "#méthodes",
+        "quote": "décrire création de processus.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T11/T11_TD_processus_ordonnancement_interblocage.md",
+        "anchor": "#exercice-2",
+        "quote": "Consigne : décrire création de processus ; traiter aussi `ressource libérée avant attente` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T11/T11_corrige_processus_ordonnancement_interblocage.md",
+        "anchor": "#exercice-2",
+        "quote": "Réponse attendue : P1 attend journal et P2 attend camera.\n- Méthode : décrire création de processus.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours présente la méthode 'décrire création de processus' associée à T-ARCH-02A, le TD fait pratiquer cette capacité en exercice 2, et le corrigé fournit la réponse attendue avec la méthode nommée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

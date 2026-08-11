@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-02C",
+      "official_label": "Décrire un invariant de boucle prouvant la correction du tri par insertion.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_cours_tris_invariants_complexite.md",
+        "anchor": "#exemple-corrigé-3",
+        "quote": "Méthode : écrire invariant gauche triée.\n- Résultat attendu : invariant : indices < i triés.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_TD_tris_invariants_complexite.md",
+        "anchor": "#exercice-3",
+        "quote": "Consigne : écrire invariant gauche triée ; traiter aussi `doublons 17` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_corrige_tris_invariants_complexite.md",
+        "anchor": "#exercice-3",
+        "quote": "Réponse attendue : invariant : indices < i triés.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne l'invariant du tri par insertion (indices < i triés), le TD fait pratiquer la rédaction de cet invariant, et le corrigé fournit la réponse attendue. Les trois preuves sont présentes et correspondent bien à la capacité P-ALGO-02C.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-LANG-03B",
+      "official_label": "Décrire les préconditions sur les arguments.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md",
+        "anchor": "#à-savoir",
+        "quote": "précondition.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_TD_fonctions_tests_specifications.md",
+        "anchor": "#exercice-4",
+        "quote": "Consigne : écrire tests nominal, limite et invalide ; traiter aussi `prix_ht=0` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md",
+        "anchor": "#exercice-4",
+        "quote": "Méthode : écrire tests nominal, limite et invalide.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours liste 'précondition' comme notion à savoir et montre la méthode 'poser prix_ht >= 0 et taux >= 0'. Le TD exercice 4 (P-LANG-03B) fait pratiquer l'écriture de tests nominal, limite et invalide incluant les préconditions. Le corrigé fournit la réponse attendue pour cet exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

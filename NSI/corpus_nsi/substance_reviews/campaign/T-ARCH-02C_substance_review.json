@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ARCH-02C",
+      "official_label": "Mettre en évidence le risque d'interblocage.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T11/T11_cours_processus_ordonnancement_interblocage.md",
+        "anchor": "#exemples-corrigés",
+        "quote": "Méthode : détecter attente circulaire.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T11/T11_TD_processus_ordonnancement_interblocage.md",
+        "anchor": "#exercice-4",
+        "quote": "Capacité officielle : T-ARCH-02C.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T11/T11_corrige_processus_ordonnancement_interblocage.md",
+        "anchor": "#exercice-4",
+        "quote": "Réponse attendue : processus bloqué ne consomme pas CPU.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours présente la méthode de détection d'attente circulaire (interblocage), le TD fait pratiquer la capacité T-ARCH-02C, et le corrigé fournit la réponse attendue. Les preuves sont cohérentes avec la capacité 'mettre en évidence le risque d'interblocage'.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+# Capacités manquantes ou à revoir
+
+- premiere | P-HIST-01 - Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-BASE-01 - Passer de la représentation d'une base dans une autre. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-BASE-02A - Evaluer le nombre de bits nécessaires à l'écriture en base 2 d'un entier, d'une somme ou d'un produit. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-BASE-02B - Utiliser le complément à deux. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-BASE-03 - Calculer sur quelques exemples la représentation de nombres réels simples. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-BASE-04 - Dresser la table d'une expression booléenne. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-BASE-05A - Identifier l'intérêt des différents systèmes d'encodage. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-BASE-05B - Convertir un fichier texte dans différents formats d'encodage. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-CONSTR-01 - Ecrire une fonction renvoyant un p-uplet de valeurs. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-CONSTR-02A - Lire et modifier les éléments d'un tableau grâce à leurs index. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-CONSTR-02B - Construire un tableau par compréhension. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-CONSTR-02C - Utiliser des tableaux de tableaux pour représenter des matrices. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-CONSTR-02D - Itérer sur les éléments d'un tableau. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-CONSTR-03A - Construire une entrée de dictionnaire. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-CONSTR-03B - Itérer sur les éléments d'un dictionnaire. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-DATA-CONSTR-03C - Utiliser les méthodes keys, values et items. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-TABLE-01 - Importer une table depuis un fichier texte tabulé ou un fichier CSV. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-TABLE-02 - Rechercher les lignes d'une table vérifiant des critères exprimés en logique propositionnelle. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-TABLE-03 - Trier une table suivant une colonne. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-TABLE-04 - Construire une nouvelle table en combinant les données de deux tables. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-01A - Identifier les composants graphiques permettant d'interagir avec une application Web. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-01B - Identifier les événements que les fonctions associées aux composants graphiques peuvent traiter. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-02 - Analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-03A - Distinguer ce qui est exécuté sur le client ou sur le serveur et dans quel ordre. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-03B - Distinguer ce qui est mémorisé dans le client et retransmis au serveur. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-03C - Reconnaître quand et pourquoi la transmission est chiffrée. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-04A - Analyser le fonctionnement d'un formulaire simple. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-04B - Distinguer les transmissions de paramètres par requêtes POST ou GET. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-IHM-04C - Discuter les types de requêtes selon les valeurs à transmettre et leur confidentialité. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-01A - Distinguer les rôles et les caractéristiques des constituants d'une machine. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-01B - Dérouler l'exécution d'une séquence d'instructions simples de type langage machine. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-02A - Mettre en évidence l'intérêt du découpage en paquets et de l'encapsulation. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-02B - Dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-02C - Simuler ou mettre en œuvre un réseau. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-03A - Identifier les fonctions d'un système d'exploitation. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-03B - Utiliser les commandes de base en ligne de commande. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-03C - Gérer les droits et permissions d'accès aux fichiers. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-04A - Identifier le rôle des capteurs et actionneurs. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ARCH-04B - Réaliser par programmation une IHM répondant à un cahier des charges donné. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-LANG-01 - Mettre en évidence un corpus de constructions élémentaires. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-LANG-02 - Repérer dans un nouveau langage les traits communs et particuliers à ce langage. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-LANG-03A - Prototyper une fonction. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-LANG-03B - Décrire les préconditions sur les arguments. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-LANG-03C - Décrire des postconditions sur les résultats. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-LANG-04 - Utiliser des jeux de tests. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-LANG-05 - Utiliser la documentation d'une bibliothèque. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-01A - Ecrire un algorithme de recherche d'une occurrence sur des valeurs de type quelconque. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-01B - Ecrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-02A - Ecrire un algorithme de tri par insertion. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-02B - Ecrire un algorithme de tri par sélection. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-02C - Décrire un invariant de boucle prouvant la correction du tri par insertion. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-02D - Décrire un invariant de boucle prouvant la correction du tri par sélection. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-03 - Ecrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-04 - Montrer la terminaison de la recherche dichotomique à l'aide d'un variant de boucle. | needs_review | ressources présentes mais statuts non validants
+- premiere | P-ALGO-05 - Résoudre un problème grâce à un algorithme glouton. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-HIST-01A - Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-HIST-01B - Identifier l'évolution des rôles relatifs des logiciels et des matériels. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-01A - Spécifier une structure de données par son interface. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-01B - Distinguer interface et implémentation. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-01C - Ecrire plusieurs implémentations d'une même structure de données. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-02A - Ecrire la définition d'une classe. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-02B - Accéder aux attributs et méthodes d'une classe. | partial | preuves manquantes: corrige, tp ou activité pratique, trace
+- terminale | T-STRUCT-03A - Distinguer des structures par le jeu des méthodes qui les caractérisent. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-03B - Choisir une structure de données adaptée à la situation à modéliser. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-03C - Distinguer la recherche d'une valeur dans une liste et dans un dictionnaire. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-04A - Identifier des situations nécessitant une structure de données arborescente. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-04B - Evaluer quelques mesures des arbres binaires. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-05A - Modéliser des situations sous forme de graphes. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-05B - Ecrire l'implémentation d'un graphe par matrice d'adjacence. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-05C - Ecrire l'implémentation d'un graphe par listes de successeurs ou prédécesseurs. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-STRUCT-05D - Passer d'une représentation à une autre. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-01A - Identifier les concepts définissant le modèle relationnel. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-01B - Distinguer structure et contenu d'une base de données. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-01C - Repérer les anomalies dans le schéma d'une base de données. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-02 - Identifier les services rendus par un SGBD relationnel. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-03A - Identifier les composants d'une requête. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-03B - Construire des requêtes d'interrogation avec SELECT et FROM. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-03C - Construire des requêtes d'interrogation avec WHERE. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-03D - Construire des requêtes d'interrogation avec JOIN. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-03E - Construire des requêtes d'interrogation avec ORDER BY. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-03F - Construire des requêtes d'insertion avec INSERT. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-03G - Construire des requêtes de mise à jour avec UPDATE. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-BDD-03H - Construire des requêtes de suppression avec DELETE. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ARCH-01 - Identifier les principaux composants sur un schéma de circuit et les avantages de leur intégration. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ARCH-02A - Décrire la création d'un processus. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ARCH-02B - Décrire l'ordonnancement de plusieurs processus. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ARCH-02C - Mettre en évidence le risque d'interblocage. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ARCH-03 - Identifier, selon le protocole de routage utilisé, la route empruntée par un paquet. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ARCH-04A - Décrire les principes du chiffrement symétrique et asymétrique. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ARCH-04B - Décrire l'échange d'une clé symétrique avec un protocole asymétrique pour sécuriser HTTPS. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-01A - Comprendre que tout programme est aussi une donnée. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-01B - Comprendre que la calculabilité ne dépend pas du langage. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-01C - Montrer sans formalisme théorique que le problème de l'arrêt est indécidable. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-02A - Ecrire un programme récursif. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-02B - Analyser le fonctionnement d'un programme récursif. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-03A - Utiliser des API ou bibliothèques. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-03B - Exploiter la documentation d'API ou bibliothèques. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-03C - Créer des modules simples et les documenter. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-04A - Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-04B - Choisir le paradigme selon le champ d'application. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-LANG-05 - Savoir répondre aux causes typiques de bugs. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-01A - Calculer la taille d'un arbre. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-01B - Calculer la hauteur d'un arbre. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-01C - Parcourir un arbre en ordres infixe, préfixe ou suffixe. | partial | preuves manquantes: td ou exercices, trace
+- terminale | T-ALGO-01D - Parcourir un arbre en largeur d'abord. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-01E - Rechercher une clé dans un arbre de recherche. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-01F - Insérer une clé dans un arbre de recherche. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-02A - Parcourir un graphe en largeur d'abord. | partial | parcours en largeur présent seulement comme application, pas comme séquence évaluée complète
+- terminale | T-ALGO-02B - Parcourir un graphe en profondeur d'abord. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-02C - Repérer la présence d'un cycle dans un graphe. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-02D - Chercher un chemin dans un graphe. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-03 - Ecrire un algorithme utilisant la méthode diviser pour régner. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-04 - Utiliser la programmation dynamique pour écrire un algorithme. | needs_review | ressources présentes mais statuts non validants
+- terminale | T-ALGO-05 - Etudier l'algorithme de Boyer-Moore pour la recherche d'un motif dans un texte. | needs_review | ressources présentes mais statuts non validants

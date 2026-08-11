@@ -1,0 +1,56 @@
+sequence: P01
+theme: Représentation des entiers
+notions_exigibles:
+- base dix
+- base deux
+- base seize
+- écriture positionnelle
+capacites_officielles:
+- P-DATA-BASE-01
+exemples_obligatoires:
+- 'décimal vers binaire : `13` en base dix -> `1101₂`'
+- 'binaire vers décimal : `101101₂` -> `45`'
+- 'binaire vers hexadécimal : `11110000₂` -> `F0₁₆`'
+- 'décimal vers hexadécimal : `255` -> `FF₁₆`'
+cas_limites:
+- 0 se code 0
+- un seul bit à 1
+- complément à gauche si le nombre de bits n’est pas multiple de 4
+- chiffre hexadécimal maximal F
+erreurs_frequentes:
+- EF1 - Écrire les restes dans l’ordre de calcul au lieu de les lire de bas en haut.
+- EF2 - Additionner les chiffres binaires sans poids de position.
+- EF3 - Former des paquets hexadécimaux sans compléter à gauche.
+- EF4 - Accepter un chiffre interdit dans la base utilisée.
+types_exercices_attendus:
+- décimal vers binaire avec `13` en base dix
+- binaire vers décimal à partir de `101101₂`
+- binaire vers hexadécimal avec `11110000₂`
+- décimal vers hexadécimal pour `255`
+- un cas limite lié à 0 se code 0
+- deux méthodes possibles pour binaire vers décimal
+- un transfert qui utilise binaire vers hexadécimal avec une donnée nouvelle
+- un énoncé volontairement erroné sur décimal vers hexadécimal
+tp_attendu: Écrire des fonctions de conversion sans utiliser `bin`, `hex` ou `int(x,
+  base)` pour la méthode principale.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- base dix
+- 13` en base dix
+- 101101₂
+- 0 se code 0
+- EF1
+- Écrire des fonctions de conversion sans utiliser `bin`, `hex` ou `int(x, base)`
+  pour la méthode principale.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

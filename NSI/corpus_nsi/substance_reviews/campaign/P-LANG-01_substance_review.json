@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T08:46:19Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-LANG-01",
+      "official_label": "Mettre en évidence un corpus de constructions élémentaires.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P00/P00_cours_diagnostic_python.md",
+        "anchor": "#exemple-corrigé-1---trace-daffectation",
+        "quote": "Méthode : dresser une table instruction, expression calculée, nouvelle valeur.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P00/P00_td_diagnostic_python.md",
+        "anchor": "#exercice-2",
+        "quote": "Énoncé disciplinaire : expliquer concaténation de chaînes à partir de `mot = \"NS\" ; mot = mot + \"I\"`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P00/P00_corrige_diagnostic_python.md",
+        "anchor": "#corrigé-exercice-1",
+        "quote": "Méthode : identifier `x = 4 ; x = x + 3 ; print(x)`, appliquer la méthode « dresser une table instruction, expression calculée, nouvelle valeur », puis écrire `7` affiché.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours expose les constructions élémentaires (affectation, types, conditions, fonctions) avec exemples corrigés. Le TD fait pratiquer via des exercices numérotés avec production attendue. Le corrigé professeur fournit méthode, résultat et contrôle pour chaque exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

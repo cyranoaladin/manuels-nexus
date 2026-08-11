@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-12T10:39:51Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-01A",
+      "official_label": "Ecrire un algorithme de recherche d'une occurrence sur des valeurs de type quelconque.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P11/P11_cours_parcours_recherche_extremum_moyenne.md",
+        "anchor": "#méthodes",
+        "quote": "- parcourir avec indice.\n- mémoriser le premier indice de 21.\n- initialiser maximum à la première valeur.\n- tester liste vide avant moyenne.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P11/P11_TD_parcours_recherche_extremum_moyenne.md",
+        "anchor": "#exercice-1",
+        "quote": "- Capacité officielle : P-ALGO-01A.\n- Données : `mesures=[18,21,17,24,21], cible=21, seuil=22`. ; jeu_exercice=alpha\n- Consigne : parcourir avec indice ; traiter aussi `liste vide` si nécessaire.\n- Réponse attendue : première occurrence de 21 -> indice 1.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P11/P11_corrige_parcours_recherche_extremum_moyenne.md",
+        "anchor": "#exercice-1",
+        "quote": "- Réponse attendue : première occurrence de 21 -> indice 1.\n- Méthode : parcourir avec indice.\n- Cas limite : liste vide.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode de parcours avec indice et recherche d'occurrence. Le TD fait pratiquer la recherche de la première occurrence sur des données explicites (P-ALGO-01A). Le corrigé fournit la réponse attendue avec méthode et cas limite.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

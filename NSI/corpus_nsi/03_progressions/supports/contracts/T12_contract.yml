@@ -1,0 +1,55 @@
+sequence: T12
+level: terminale
+theme: routage RIP et OSPF
+notion: routage RIP et OSPF
+status: needs_review
+notions_exigibles:
+- route
+- RIP
+- nombre de sauts
+- OSPF
+- coût
+- table de routage
+- chemin minimal
+- égalité de coût
+capacites_officielles:
+- T-ARCH-03
+exemples_obligatoires:
+- 'RIP : A-B-D et A-C-D ont 2 sauts'
+- 'OSPF : A-B-D coût 10, A-C-D coût 11'
+- panne B-D -> A-C-D coût 11
+- route inconnue -> rejet ou défaut
+cas_limites:
+- égalité exacte
+- lien indisponible
+- route inconnue
+erreurs_frequentes:
+- sauts et coûts mélangés
+- choix visuel
+- panne non recalculée
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- route
+- RIP
+- nombre de sauts
+- OSPF
+- 'RIP : A-B-D et A-C-D ont 2 sauts'
+- égalité exacte
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

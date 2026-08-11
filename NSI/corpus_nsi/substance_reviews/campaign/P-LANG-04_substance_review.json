@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-LANG-04",
+      "official_label": "Utiliser des jeux de tests.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md",
+        "anchor": "#méthodes",
+        "quote": "écrire tests nominal, limite et invalide.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_TP_fonctions_tests_specifications.md",
+        "anchor": "#tests-attendus-à-interpréter",
+        "quote": "Test nominal : `prix_ttc(80.0, 0.20)` doit renvoyer `96.0`.\n- Test limite : `prix_ttc(0.0, 0.20)` doit renvoyer `0.0`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md",
+        "anchor": "#exercice-4",
+        "quote": "Réponse attendue : taux=0 -> résultat 80.0.\n- Méthode : écrire tests nominal, limite et invalide.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours liste la méthode 'écrire tests nominal, limite et invalide', le TP fait pratiquer l'interprétation de jeux de tests (nominal, limite, invalide), et le corrigé fournit les réponses attendues pour les exercices portant sur P-LANG-03B (tests nominal/limite/invalide). La capacité P-LANG-04 (utiliser des jeux de tests) est bien couverte par ces trois types de preuves.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

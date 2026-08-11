@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-06T06:13:33Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-01A",
+      "official_label": "Identifier les concepts définissant le modèle relationnel.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_cours_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#à-savoir",
+        "quote": "- relation.\n- attribut.\n- tuple.\n- clé primaire.\n- clé étrangère.\n- contrainte de domaine.\n- contrainte de référence.\n- schéma.\n- instance.\n- anomalie.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_TD_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#exercice-1",
+        "quote": "- Consigne : identifier schéma et instance ; traiter aussi `clé primaire nulle` si nécessaire.\n- Réponse attendue : Livre.id_livre identifie chaque livre.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T09/T09_corrige_bases_relationnelles_cles_contraintes.md",
+        "anchor": "#exercice-1",
+        "quote": "- Réponse attendue : Livre.id_livre identifie chaque livre.\n- Méthode : identifier schéma et instance.\n- Cas limite : clé primaire nulle.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Cours, TD et corrigé couvrent solidement la capacité T-BDD-01A : identification des concepts du modèle relationnel (relation, attribut, tuple, clé primaire/étrangère, schéma, instance) avec données explicites et cas limites traités.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

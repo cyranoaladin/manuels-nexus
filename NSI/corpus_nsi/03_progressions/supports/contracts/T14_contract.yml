@@ -1,0 +1,60 @@
+sequence: T14
+level: terminale
+theme: modularité, API, paradigmes et bugs
+notion: modularité, API, paradigmes et bugs
+status: needs_review
+notions_exigibles:
+- API
+- documentation
+- module
+- paradigme impératif
+- paradigme fonctionnel
+- objet
+- bug de typage
+- effet de bord
+capacites_officielles:
+- T-LANG-03A
+- T-LANG-03B
+- T-LANG-03C
+- T-LANG-04A
+- T-LANG-04B
+- T-LANG-05
+exemples_obligatoires:
+- moyenne_temperature(releves) -> 30.0
+- from meteo import moyenne_temperature
+- temperature="31" refusée ou convertie
+- liste vide -> ValueError
+cas_limites:
+- liste vide
+- clé temperature absente
+- type chaîne
+erreurs_frequentes:
+- import avec effet de bord
+- API sans docstring
+- bug corrigé sans test
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- API
+- documentation
+- module
+- paradigme impératif
+- moyenne_temperature(releves) -> 30.0
+- liste vide
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

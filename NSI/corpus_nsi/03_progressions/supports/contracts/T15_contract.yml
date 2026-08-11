@@ -1,0 +1,55 @@
+sequence: T15
+level: terminale
+theme: calculabilité, programme comme donnée et arrêt
+notion: calculabilité, programme comme donnée et arrêt
+status: needs_review
+notions_exigibles:
+- programme comme donnée
+- interpréteur
+- calculabilité
+- langage indépendant
+- problème de l arrêt
+- contradiction
+capacites_officielles:
+- T-LANG-01A
+- T-LANG-01B
+- T-LANG-01C
+exemples_obligatoires:
+- source="print(1)" est une donnée
+- arrete(P,x) renvoie True ou False
+- Q boucle si arrete(Q,Q) dit True
+- contradiction donc oracle impossible
+cas_limites:
+- programme très long mais fini
+- langage différent
+- entrée absente
+erreurs_frequentes:
+- non connu confondu avec impossible
+- tests finis comme preuve
+- contradiction oubliée
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- programme comme donnée
+- interpréteur
+- calculabilité
+- langage indépendant
+- source="print(1)" est une donnée
+- programme très long mais fini
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

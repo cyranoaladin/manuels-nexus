@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-01B",
+      "official_label": "Comprendre que la calculabilité ne dépend pas du langage.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_cours_calculabilite_arret.md",
+        "anchor": "#méthodes",
+        "quote": "raisonner indépendamment de Python.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_TD_calculabilite_arret.md",
+        "anchor": "#exercice-2",
+        "quote": "Consigne : raisonner indépendamment de Python ; traiter aussi `langage différent` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_corrige_calculabilite_arret.md",
+        "anchor": "#exercice-2",
+        "quote": "Méthode : raisonner indépendamment de Python.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode 'raisonner indépendamment de Python' liée à T-LANG-01B, le TD fait pratiquer cette capacité avec le cas limite 'langage différent', et le corrigé fournit la réponse attendue et la méthode associée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

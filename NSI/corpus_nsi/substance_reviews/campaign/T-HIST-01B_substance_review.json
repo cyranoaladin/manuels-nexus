@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-12T10:47:12Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-HIST-01B",
+      "official_label": "Identifier l'évolution des rôles relatifs des logiciels et des matériels.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T19/T19_cours_bac_pratique_grand_oral_projet.md",
+        "anchor": "#évolution-des-rôles-matériel-et-logiciel-t-hist-01b",
+        "quote": "L'histoire de l'informatique montre un transfert progressif de complexité du matériel vers le logiciel :\n\n1. **Années 1940-1950 — le matériel est roi** : l'ENIAC (1946) est câblé pour des tâches spécifiques",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T19/T19_TD_bac_pratique_grand_oral_projet.md",
+        "anchor": "#exercice-10",
+        "quote": "Consigne : (10a) pour chaque période, décrire en une phrase le rôle dominant (matériel ou logiciel). (10b) citer un exemple concret (produit, langage, système) pour chaque période. (10c) expliquer pourquoi le matériel spécialisé (GPU, TPU) nuance l'idée d'un transfert complet vers le logiciel.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T19/T19_corrige_bac_pratique_grand_oral_projet.md",
+        "anchor": "#exercice-10",
+        "quote": "Réponse attendue : 4 périodes (matériel dominant → logiciel → cloud/IA → nuance GPU/TPU).\n- Méthode : analyse par période avec exemple concret.\n- Cas limite : matériel spécialisé (GPU, TPU) nuance le transfert matériel→logiciel.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours expose explicitement l'évolution des rôles matériel/logiciel en 4 périodes historiques. L'exercice 10 du TD fait pratiquer cette capacité avec consignes précises. Le corrigé fournit les réponses attendues par période avec la nuance GPU/TPU.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

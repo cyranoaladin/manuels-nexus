@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T20:38:43Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-CONSTR-02D",
+      "official_label": "Itérer sur les éléments d'un tableau.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_trace_types_construits.md",
+        "anchor": "#repère-2---liste-de-relevés",
+        "quote": "À retenir : parcourir les valeurs et calculer une moyenne.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md",
+        "anchor": "#question-2",
+        "quote": "Écrire une boucle `for valeur in releves` qui calcule la moyenne des relevés. Donner la trace (élément courant et cumul à chaque tour).",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_corrige_types_construits.md",
+        "anchor": "#méthode-générale-de-correction",
+        "quote": "pour liste de relevés, exiger la donnée `[18, 20, 19]`, la méthode « parcourir les valeurs et calculer une moyenne » et le contrôle « liste vide ».",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La trace enseigne l'itération sur les valeurs d'un tableau (repère 2), l'évaluation fait pratiquer la boucle for sur les éléments, et le corrigé fournit la réponse attendue avec la méthode complète.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

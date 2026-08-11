@@ -1,0 +1,87 @@
+# phase0 2026-06-28T21:02:11+01:00
+HEAD 05fa3c8e4dae5b92ec4dc8ca106290ec26887960
+## git log -5
+05fa3c8 (HEAD -> lot1/substance-gouvernance, origin/main) Ajuster la config après restructuration du dépôt distant
+de66350 Lot 1 — Conformité robots.txt, provenance, politique réseau
+180fb69 (main) Corriger les gardes CI : archive propre, faux positif téléphone, robustesse test
+df2110d Corriger le périmètre des gardes du lot 0
+85b1b0b Revert "Rapport de substance : 15 validated / 93 review / 6 absent (114 cap.)"
+## rev-parse HEAD origin/main
+05fa3c8e4dae5b92ec4dc8ca106290ec26887960
+05fa3c8e4dae5b92ec4dc8ca106290ec26887960
+## gh run list
+completed	success	Ajuster la config après restructuration du dépôt distant	CI	main	push	28334022625	1m29s	2026-06-28T19:51:46Z
+completed	success	Corriger les gardes CI : archive propre, faux positif téléphone, robu…	CI	main	push	28333739043	1m30s	2026-06-28T19:40:39Z
+completed	success	Corriger le périmètre des gardes du lot 0	CI	main	push	28333529937	1m25s	2026-06-28T19:32:34Z
+## gh run view 28334022625
+{"conclusion":"success","createdAt":"2026-06-28T19:51:46Z","displayTitle":"Ajuster la config après restructuration du dépôt distant","headSha":"05fa3c8e4dae5b92ec4dc8ca106290ec26887960","status":"completed","updatedAt":"2026-06-28T19:53:15Z"}
+## show fuller 05fa3c8
+commit 05fa3c8e4dae5b92ec4dc8ca106290ec26887960
+Author:     Alaeddine Ben Rhouma <cyranoaladin@gmail.com>
+AuthorDate: Sun Jun 28 20:51:34 2026 +0100
+Commit:     Alaeddine Ben Rhouma <cyranoaladin@gmail.com>
+CommitDate: Sun Jun 28 20:51:34 2026 +0100
+
+    Ajuster la config après restructuration du dépôt distant
+    
+    - Retirer organizer_nsi des listes ruff/coveragerc (déplacé vers nsi-enseignement)
+    
+    Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+## show stat 05fa3c8
+05fa3c8 Ajuster la config après restructuration du dépôt distant
+ scrapping_NSI/.coveragerc | 1 -
+ scrapping_NSI/ruff.toml   | 1 -
+ 2 files changed, 2 deletions(-)
+## log stat 180fb69..05fa3c8
+05fa3c8 Ajuster la config après restructuration du dépôt distant
+ scrapping_NSI/.coveragerc | 1 -
+ scrapping_NSI/ruff.toml   | 1 -
+ 2 files changed, 2 deletions(-)
+de66350 Lot 1 — Conformité robots.txt, provenance, politique réseau
+ scrapping_NSI/.coveragerc             |  18 +
+ scrapping_NSI/netpolicy.py            | 203 +++++++++
+ scrapping_NSI/provenance.py           | 172 +++++++
+ scrapping_NSI/pyproject.toml          |  16 +
+ scrapping_NSI/ruff.toml               |  10 +
+ scrapping_NSI/scraper_eduscol.py      | 257 +++++++++++
+ scrapping_NSI/scraper_nsi_v2.py       | 678 +++++++++++++++++++++++++++
+ scrapping_NSI/test_netpolicy.py       | 388 ++++++++++++++++
+ scrapping_NSI/test_provenance.py      | 353 ++++++++++++++
+ scrapping_NSI/test_scraper_eduscol.py | 570 +++++++++++++++++++++++
+ scrapping_NSI/test_scraper_nsi_v2.py  | 837 ++++++++++++++++++++++++++++++++++
+ 11 files changed, 3502 insertions(+)
+## show content diff 05fa3c8
+commit 05fa3c8e4dae5b92ec4dc8ca106290ec26887960
+Author: Alaeddine Ben Rhouma <cyranoaladin@gmail.com>
+Date:   Sun Jun 28 20:51:34 2026 +0100
+
+    Ajuster la config après restructuration du dépôt distant
+    
+    - Retirer organizer_nsi des listes ruff/coveragerc (déplacé vers nsi-enseignement)
+    
+    Co-Authored-By: Claude Opus 4.6 (1M context) <noreply@anthropic.com>
+
+diff --git a/scrapping_NSI/.coveragerc b/scrapping_NSI/.coveragerc
+index 1813d48..81e587a 100644
+--- a/scrapping_NSI/.coveragerc
++++ b/scrapping_NSI/.coveragerc
+@@ -1,7 +1,6 @@
+ [run]
+ branch = True
+ source =
+-    organizer_nsi
+     scraper_nsi_v2
+     scraper_eduscol
+     netpolicy
+diff --git a/scrapping_NSI/ruff.toml b/scrapping_NSI/ruff.toml
+index 88bc25b..9920a47 100644
+--- a/scrapping_NSI/ruff.toml
++++ b/scrapping_NSI/ruff.toml
+@@ -1,7 +1,6 @@
+ target-version = "py312"
+ line-length = 100
+ include = [
+-    "organizer_nsi.py",
+     "scraper_nsi_v2.py",
+     "scraper_eduscol.py",
+     "netpolicy.py",

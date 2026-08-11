@@ -1,0 +1,28 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{nsi-preamble}
+\begin{document}
+\nsiheader{TP papier — Dichotomie, glouton et k-NN}{Première}{P13}{1}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
+
+\section*{Statut}
+TP papier : aucun code Python attendu ; le livrable est une trace écrite vérifiable.
+
+\section*{Donnée fournie}
+\texttt{tableau=[4,9,18,23,37,41], cible=37} ; \texttt{pièces=[10,5,2,1], montant=28} ; \texttt{voisins=[rouge:1.2, bleu:2.0, rouge:2.4]}.
+
+\section*{Travail demandé}
+\begin{enumerate}[nosep]
+  \item Préparer la donnée et nommer les champs utiles.
+  \item Calculer le milieu puis réduire l'intervalle.
+  \item Montrer que le variant $V = \text{droite} - \text{gauche} + 1$ décroît strictement.
+  \item Tester le cas limite \texttt{cible absente}.
+  \item Produire le livrable : milieux puis indice trouvé.
+\end{enumerate}
+
+\section*{Barème}
+\begin{bareme}
+  {Donnée préparée} & 2 \\
+  {Méthode principale} & 3 \\
+  {Résultat correct} & 3 \\
+  {Cas limite \texttt{cible absente}} & 2 \\
+\end{bareme}
+\end{document}

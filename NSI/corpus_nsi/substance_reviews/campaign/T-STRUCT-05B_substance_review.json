@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-05B",
+      "official_label": "Ecrire l'implémentation d'un graphe par matrice d'adjacence.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_cours_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exemples-corrigés",
+        "quote": "Méthode : remplir matrice 0/1.\n- Résultat attendu : ligne A : colonnes B et C valent 1.\n- Contrôle : capacité T-STRUCT-05B et cas limite `boucle A->A`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_TD_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exercice-2",
+        "quote": "Consigne : remplir matrice 0/1 ; traiter aussi `boucle A->A` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_corrige_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exercice-2",
+        "quote": "Réponse attendue : ligne A : colonnes B et C valent 1.\n- Méthode : remplir matrice 0/1.\n- Cas limite : boucle A->A.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode de remplissage de la matrice d'adjacence (0/1), le TD fait pratiquer la construction de la matrice, et le corrigé fournit la réponse attendue avec la méthode explicite.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+sequence: P06
+level: premiere
+theme: recherche, tri et fusion de tables
+notion: recherche, tri et fusion de tables
+status: needs_review
+notions_exigibles:
+- recherche dans une table
+- clé id
+- doublon id=17
+- tri stable
+- tri par clé composée
+- fusion de tables
+- clé absente
+- complexité linéaire
+capacites_officielles:
+- P-TABLE-03
+- P-TABLE-04
+exemples_obligatoires:
+- première ligne id=17 -> Ada/robot
+- doublon id=17 -> Ada/python signalé
+- tri -> Ada/python, Ada/robot, Linus/web
+- fusion -> erreur id_absent=9
+cas_limites:
+- table vide
+- clé id=9 absente
+- conflit de clé id=17
+erreurs_frequentes:
+- écraser un doublon
+- utiliser un indice comme clé
+- oublier une clé absente
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP Python avec starter, corrigé et tests
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- recherche dans une table
+- clé id
+- doublon id=17
+- tri stable
+- première ligne id=17 -> Ada/robot
+- table vide
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

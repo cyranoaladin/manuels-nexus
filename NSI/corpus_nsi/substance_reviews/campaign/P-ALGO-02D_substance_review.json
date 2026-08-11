@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-14T09:28:41Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-02D",
+      "official_label": "Décrire un invariant de boucle prouvant la correction du tri par sélection.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_cours_tris_invariants_complexite.md",
+        "anchor": "#exemple-corrigé-4",
+        "quote": "Méthode : compter comparaisons intuitives.\n- Résultat attendu : pire cas quadratique.\n- Contrôle : capacité P-ALGO-02D et cas limite `liste vide`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_TD_tris_invariants_complexite.md",
+        "anchor": "#exercice-4",
+        "quote": "Capacité officielle : P-ALGO-02D.\n- Données : `temps=[42,17,23,17,9]`. ; jeu_exercice=delta\n- Consigne : compter comparaisons intuitives ; traiter aussi `liste vide` si nécessaire.\n- Réponse attendue : pire cas quadratique.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_corrige_tris_invariants_complexite.md",
+        "anchor": "#exercice-4",
+        "quote": "Invariant : après `k` tours, le préfixe contient les `k` plus petites valeurs, triées, et le suffixe contient les valeurs restantes.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La capacité P-ALGO-02D est couverte par le cours (exemple corrigé 4), le TD (exercice 4) et le corrigé (exercice 4). Cependant, le contenu porte principalement sur le coût quadratique et le comptage de comparaisons plutôt que sur un invariant de boucle prouvant la correction du tri par sélection au sens strict. L'invariant du tri par sélection (indices < i triés) est davantage associé à P-ALGO-02C dans ces fichiers. La capacité P-ALGO-02D est étiquetée sur le thème du coût/complexité plutôt que sur l'invariant de correction du tri par sélection, ce qui constitue un décalage partiel avec le ...",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

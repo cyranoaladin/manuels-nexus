@@ -1,0 +1,56 @@
+sequence: T04
+theme: Langage et preuve de terminaison
+notions_exigibles:
+- appel récursif
+- cas de base
+- terminaison
+- pile d’appels
+capacites_officielles:
+- T-LANG-02A
+exemples_obligatoires:
+- 'factorielle : `4!` -> `24`'
+- 'somme de liste : `[4, 1, 3]` -> `8`'
+- 'longueur : `["a", "b"]` -> `2`'
+- 'terminaison : `n` décroît vers 0 -> preuve de terminaison'
+cas_limites:
+- entier négatif refusé
+- liste vide
+- reste vide
+- appel avec même argument
+erreurs_frequentes:
+- EF1 - Oublier le cas de base.
+- EF2 - Faire un appel récursif qui ne rapproche pas du cas de base.
+- EF3 - Confondre valeur retournée et affichage des appels.
+- EF4 - Ne pas traiter l’entrée vide.
+types_exercices_attendus:
+- factorielle avec `4!`
+- somme de liste à partir de `[4, 1, 3]`
+- longueur avec `["a", "b"]`
+- terminaison pour `n` décroît vers 0
+- un cas limite lié à entier négatif refusé
+- deux méthodes possibles pour somme de liste
+- un transfert qui utilise longueur avec une donnée nouvelle
+- un énoncé volontairement erroné sur terminaison
+tp_attendu: Écrire trois fonctions récursives avec cas de base, mesure décroissante
+  et tests de terminaison.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- appel récursif
+- 4!
+- '[4, 1, 3]'
+- entier négatif refusé
+- EF1
+- Écrire trois fonctions récursives avec cas de base, mesure décroissante et tests
+  de terminaison.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

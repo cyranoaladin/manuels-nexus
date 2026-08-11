@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-14T09:28:41Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-02B",
+      "official_label": "Ecrire un algorithme de tri par sélection.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_cours_tris_invariants_complexite.md",
+        "anchor": "#méthodes",
+        "quote": "chercher le minimum du suffixe.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_TD_tris_invariants_complexite.md",
+        "anchor": "#exercice-2",
+        "quote": "Consigne : chercher le minimum du suffixe ; traiter aussi `liste déjà triée` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P12/P12_corrige_tris_invariants_complexite.md",
+        "anchor": "#exercice-2",
+        "quote": "Réponse attendue : le premier minimum est `8`, le deuxième est `14` et, après deux tours, `stocks` vaut `[8, 14, 26, 31, 19]`.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode du tri par sélection (chercher le minimum du suffixe), le TD fait pratiquer cette capacité (exercice 2, P-ALGO-02B), et le corrigé fournit la réponse attendue. Les trois types de preuves sont présents.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

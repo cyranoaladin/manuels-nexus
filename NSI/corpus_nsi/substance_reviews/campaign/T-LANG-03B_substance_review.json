@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-03B",
+      "official_label": "Exploiter la documentation d'API ou bibliothèques.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_cours_modularite_api_paradigmes_bugs.md",
+        "anchor": "#à-savoir",
+        "quote": "API.\n- documentation.\n- module.\n- paradigme impératif.\n- paradigme fonctionnel.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_TD_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exercice-2",
+        "quote": "Capacité officielle : T-LANG-03B.\n- Données : `meteo.py expose moyenne_temperature(releves) ; releves=[{ville:Sfax,temperature:31},{ville:Tunis,temperature:29}]`. ; jeu_exercice=beta\n- Consigne : séparer module et script principal ; traiter aussi `clé temperature absente` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_corrige_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exercice-2",
+        "quote": "Réponse attendue : from meteo import moyenne_temperature.\n- Méthode : séparer module et script principal.\n- Cas limite : clé temperature absente.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours liste API et documentation comme vocabulaire clé (T-LANG-03B), le TD exercice 2 fait pratiquer l'exploitation d'une API via import de module, et le corrigé fournit la réponse attendue. Cependant, la capacité T-LANG-03B est davantage orientée 'séparer module et script principal' que 'exploiter la documentation d'API ou bibliothèques' au sens strict. Les preuves sont présentes mais le contenu porte surtout sur la modularité plutôt que sur la lecture/exploitation de documentation d'API externe.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+status: referenced_not_integrated
+inventory_depth: "premier niveau échantillonné via connecteur Google Drive"
+release_blocker: "Ressources Drive référencées mais non copiées, non anonymisées et non intégrées localement."
+notes:
+  - "Les liens sont accessibles via le connecteur Drive."
+  - "Aucune ressource Drive n'est considérée comme publiable à ce stade."
+  - "Les dossiers contenant rendus élèves, .git, .venv, fichiers élèves ou notes sont à exclure ou anonymiser avant toute intégration."
+ressources:
+  - drive_url: "https://drive.google.com/drive/folders/1HHy1ZmbvdarbowtOJDLMM3ckj6Wn5Ggz?usp=sharing"
+    drive_folder: "reprise_nsi"
+    decision: refactor
+    raison: "Documents LaTeX/PDF de reprise NSI, à auditer avant usage."
+  - drive_url: "https://drive.google.com/drive/folders/1w4fz1E3HmYwv_2ajxGghhXLtc_7nx_Tz?usp=sharing"
+    drive_folder: "complexite_premiere"
+    decision: refactor
+    raison: "Cours, TP et preuves programme, à cartographier."
+  - drive_url: "https://drive.google.com/drive/folders/1xU3KO2yYgGpHbTHSLUYA-uA2DJaS3ZTw?usp=sharing"
+    drive_folder: "evaluations_mixtes"
+    decision: refactor
+    raison: "Contient corrigés et ressources non NSI, tri nécessaire."
+  - drive_url: "https://drive.google.com/drive/folders/1WVSdCvBcIM-jEAvqkCGLTwrnFMOMmXFb?usp=sharing"
+    drive_folder: "soc_pipeline"
+    decision: archive
+    raison: "Contient .git, .venv, rendus élèves et bilans, non publiable tel quel."
+  - drive_url: "https://drive.google.com/drive/folders/1KCjl1_2IEelUWf9yb2Hlt-IEI83BjmRz?usp=sharing"
+    drive_folder: "nsi_general_legacy"
+    decision: refactor
+    raison: "Dossiers historiques de cours et ressources."
+  - drive_url: "https://drive.google.com/drive/folders/10I_CvNrXHzXtt1XsdxC8I-CoUFFSU4bZ?usp=sharing"
+    drive_folder: "premiere_ihm"
+    decision: refactor
+    raison: "Dossiers Première et IHM à cartographier."
+  - drive_url: "https://drive.google.com/drive/folders/1naiBL3FRR390XtUUbjuEdEuOp4AUL3Hl?usp=sharing"
+    drive_folder: "premiere_blocs"
+    decision: refactor
+    raison: "Blocs Première, ressources à auditer."
+  - drive_url: "https://drive.google.com/drive/folders/1YzAwiG6IYCWdx7SVNuVnt4vt-_P3kpin?usp=sharing"
+    drive_folder: "terminale_tad_poo"
+    decision: refactor
+    raison: "Dossiers Terminale et projets, à séparer."
+  - drive_url: "https://drive.google.com/drive/folders/1BagEvjQrFxfUQgY0JJALmNberzTr9H6N?usp=sharing"
+    drive_folder: "premiere_sequence_2023_2024"
+    decision: refactor
+    raison: "Séquences Première, ressources et groupes à trier."
+  - drive_url: "https://drive.google.com/drive/folders/1jJDfg5j7H2zUFrRc1RA95WmnxhthbNOV?usp=sharing"
+    drive_folder: "terminale_sequences"
+    decision: refactor
+    raison: "Séquences Terminale, dossiers de progression."
+  - drive_url: "https://drive.google.com/drive/folders/1QZj6hcqvPY0IFzb1df07mZYhbMjTUSRoACsV9PTWSC6r6lM2o-v7aOFsT6UFi3dXq1L4SM7O?usp=sharing"
+    drive_folder: "premiere_tables_algorithmes"
+    decision: refactor
+    raison: "Nombreuses ressources tables, tris, architecture et données."
+  - drive_url: "https://drive.google.com/drive/folders/1CDNGGtb8XkODsy1i3HdKt57jjqzQxxiQYqGr63oqnGjtsrUVzeJxR4NQZQGKLRAhAYXicHnx?usp=sharing"
+    drive_folder: "premiere_algorithmes_tables"
+    decision: refactor
+    raison: "Ressources tables et algorithmique avec fichiers élèves à exclure."
+  - drive_url: "https://drive.google.com/drive/folders/1sqSjOSv24cLCxYLzjGeTKlpS7Ajm1Gw2?usp=sharing"
+    drive_folder: "non_liste_connecteur"
+    decision: refactor
+    raison: "Lien fourni, listing récursif non réalisé dans cette passe."
+  - drive_url: "https://drive.google.com/drive/folders/1PpmLNX6pGNzdQW6EfsAXI9LAxxcArRd6?usp=sharing"
+    drive_folder: "non_liste_connecteur"
+    decision: refactor
+    raison: "Lien fourni, listing récursif non réalisé dans cette passe."
+  - drive_url: "https://drive.google.com/drive/folders/142ZwgswdEoGQ1o-wnT-vB6hbRoQ2rqoj?usp=sharing"
+    drive_folder: "non_liste_connecteur"
+    decision: refactor
+    raison: "Lien fourni, listing récursif non réalisé dans cette passe."
+  - drive_url: "https://drive.google.com/drive/folders/16aHyBETUYMC93Mrav9RLqqRwU0IArFNyjmmYFeXOxdaxRJGg32oVO81Y1GOx9H1WupwFhoqf?usp=sharing"
+    drive_folder: "non_liste_connecteur"
+    decision: refactor
+    raison: "Lien fourni, listing récursif non réalisé dans cette passe."
+  - drive_url: "https://drive.google.com/drive/folders/151ONdUEVRly8HVzKcY06qPTjcKjAn-5xiZYjAoieVa5VEomAaJzXD5UW8LS9ajRATjmoPkmj?usp=sharing"
+    drive_folder: "non_liste_connecteur"
+    decision: refactor
+    raison: "Lien fourni, listing récursif non réalisé dans cette passe."

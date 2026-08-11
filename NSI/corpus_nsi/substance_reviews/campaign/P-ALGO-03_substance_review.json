@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-12T10:40:01Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-03",
+      "official_label": "Ecrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_cours_dichotomie_glouton_knn.md",
+        "anchor": "#algorithme-des-k-plus-proches-voisins",
+        "quote": "La capacité P-ALGO-03 demande d'écrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_TD_dichotomie_glouton_knn.md",
+        "anchor": "#exercice-7",
+        "quote": "Consigne : calculer les distances, identifier les 3 plus proches voisins et voter ; traiter aussi `égalité de vote (k=2)` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_corrige_dichotomie_glouton_knn.md",
+        "anchor": "#exercice-9",
+        "quote": "Réponse attendue : k=3 → 3 plus proches = A1, B1, A2 → vote A=2, B=1 → classe \"A\".",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne explicitement l'algorithme k-NN avec implémentation Python et exemples. Le TD fait pratiquer le calcul de distances et le vote majoritaire (exercices 4, 7, 9). Le corrigé fournit les réponses détaillées avec distances, tri et vote.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

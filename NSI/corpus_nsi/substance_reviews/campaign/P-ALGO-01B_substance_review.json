@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-06T06:09:51Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-01B",
+      "official_label": "Ecrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P11/P11_cours_parcours_recherche_extremum_moyenne.md",
+        "anchor": "#méthodes",
+        "quote": "- initialiser maximum à la première valeur.\n- tester liste vide avant moyenne.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P11/P11_TD_parcours_recherche_extremum_moyenne.md",
+        "anchor": "#exercice-2",
+        "quote": "- Consigne : mémoriser le premier indice de 21 ; traiter aussi `cible absente` si nécessaire.\n- Réponse attendue : maximum -> 24.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P11/P11_corrige_parcours_recherche_extremum_moyenne.md",
+        "anchor": "#exercice-2",
+        "quote": "- Réponse attendue : maximum -> 24.\n- Méthode : mémoriser le premier indice de 21.\n- Cas limite : cible absente.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne les méthodes d'initialisation d'extremum et de test liste vide avant moyenne. Le TD fait pratiquer la recherche de maximum et le calcul de moyenne avec cas limites. Le corrigé fournit les réponses attendues pour chaque exercice lié à P-ALGO-01B.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

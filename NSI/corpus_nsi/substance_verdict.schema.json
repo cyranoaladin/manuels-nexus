@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexusreussite/nsi/substance_verdict.schema.json",
+  "title": "Verdict de substance par capacité officielle (porte §5)",
+  "description": "Sortie STRICTE du juge de substance. Une fiche par capacité officielle visée par une unité. Toute affirmation positive doit être adossée à une preuve citée et ancrée, vérifiable a posteriori par check_substance_anchors.py. Le juge ne produit jamais de score numérique.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "unit", "level", "judged_at", "judge_model", "capacities"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "unit": {
+      "type": "string",
+      "description": "Identifiant d'unité, ex. P05 ou s01_representation_donnees.",
+      "pattern": "^[A-Za-z0-9_]+$"
+    },
+    "level": { "enum": ["premiere", "terminale"] },
+    "judged_at": { "type": "string", "format": "date-time" },
+    "judge_model": {
+      "type": "string",
+      "description": "Modèle ayant rendu le verdict. Doit différer de l'agent auteur (séparation juge/auteur)."
+    },
+    "author_model": {
+      "type": "string",
+      "description": "Modèle ayant rédigé l'unité, pour traçabilité de la séparation des rôles."
+    },
+    "capacities": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/capacity_verdict" }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["present", "file", "anchor", "quote", "teaches"],
+      "properties": {
+        "present": {
+          "type": "boolean",
+          "description": "true si une preuve réelle existe pour ce rôle (cours / entraînement / correction)."
+        },
+        "file": {
+          "type": ["string", "null"],
+          "description": "Chemin relatif au dépôt du fichier contenant la preuve. null si present=false."
+        },
+        "anchor": {
+          "type": ["string", "null"],
+          "description": "Ancre de section (#slug) où se trouve la preuve. null si present=false.",
+          "pattern": "^#.+"
+        },
+        "quote": {
+          "type": ["string", "null"],
+          "description": "Citation littérale (1 à 2 phrases) extraite de la section ancrée, SANS reformulation. null si present=false. Le vérificateur exige que cette chaîne apparaisse dans la section.",
+          "minLength": 12,
+          "maxLength": 600
+        },
+        "teaches": {
+          "type": "boolean",
+          "description": "Jugement du relecteur : cette preuve enseigne / fait travailler / permet de corriger RÉELLEMENT la capacité (pas seulement la mentionne)."
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 400,
+          "description": "Justification concrète en une ou deux lignes. Obligatoire si teaches=false alors que present=true."
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "present": { "const": false } } },
+          "then": {
+            "properties": {
+              "file": { "const": null },
+              "anchor": { "const": null },
+              "quote": { "const": null },
+              "teaches": { "const": false }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "present": { "const": true } } },
+          "then": { "required": ["file", "anchor", "quote"] }
+        }
+      ]
+    },
+    "capacity_verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "capacity_id",
+        "official_label",
+        "proof_course",
+        "proof_practice",
+        "proof_correction",
+        "verdict",
+        "justification"
+      ],
+      "properties": {
+        "capacity_id": {
+          "type": "string",
+          "description": "Identifiant exact du YAML programme, ex. P-DATA-BASE-01.",
+          "pattern": "^[PT]-[A-Z0-9-]+$"
+        },
+        "official_label": {
+          "type": "string",
+          "description": "Intitulé officiel EXACT recopié depuis programme_nsi_2019.yaml. Le vérificateur le compare au YAML."
+        },
+        "proof_course": {
+          "allOf": [{ "$ref": "#/$defs/evidence" }],
+          "description": "Preuve d'enseignement (cours / trace écrite)."
+        },
+        "proof_practice": {
+          "allOf": [{ "$ref": "#/$defs/evidence" }],
+          "description": "Preuve d'entraînement (TD ou TP) où l'élève s'exerce sur la capacité."
+        },
+        "proof_correction": {
+          "allOf": [{ "$ref": "#/$defs/evidence" }],
+          "description": "Preuve de correction (corrigé) permettant l'auto-correction."
+        },
+        "verdict": {
+          "enum": ["validated_pedagogy", "needs_review", "needs_content", "BLOCKER"],
+          "description": "validated_pedagogy uniquement si les trois preuves sont present=true ET teaches=true. Sinon needs_content (contenu insuffisant) ou BLOCKER (incohérence empêchant tout jugement)."
+        },
+        "justification": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 600,
+          "description": "Deux lignes concrètes motivant le verdict. Une formulation vague est un motif de rejet humain."
+        },
+        "scientific_flags": {
+          "type": "array",
+          "description": "Approximations ou erreurs scientifiques repérées (définition fausse, complexité erronée, corrigé incorrect). Non vide => verdict ne peut pas être validated_pedagogy.",
+          "items": { "type": "string", "maxLength": 400 }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "verdict": { "const": "validated_pedagogy" } } },
+          "then": {
+            "properties": {
+              "proof_course":     { "properties": { "present": { "const": true }, "teaches": { "const": true } } },
+              "proof_practice":   { "properties": { "present": { "const": true }, "teaches": { "const": true } } },
+              "proof_correction": { "properties": { "present": { "const": true }, "teaches": { "const": true } } }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

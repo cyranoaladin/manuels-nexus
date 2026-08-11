@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ARCH-03C",
+      "official_label": "Gérer les droits et permissions d'accès aux fichiers.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_cours_architecture_os_droits.md",
+        "anchor": "#méthodes",
+        "quote": "lire rwx pour propriétaire groupe autres.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_tp_architecture_os_droits.md",
+        "anchor": "#travail-demandé",
+        "quote": "Produire le livrable : -rw-r----- -> propriétaire rw, groupe r, autres aucun droit.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_corrige_architecture_os_droits.md",
+        "anchor": "#exercice-1",
+        "quote": "Réponse attendue : -rw-r----- -> propriétaire rw, groupe r, autres aucun droit.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la lecture des permissions rwx et la commande chmod, le TP fait pratiquer la gestion des droits Unix sur un fichier réel, et le corrigé fournit les réponses attendues pour chaque exercice portant sur les permissions d'accès aux fichiers.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

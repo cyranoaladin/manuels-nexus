@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-01F",
+      "official_label": "Insérer une clé dans un arbre de recherche.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_cours_arbres_binaires_recherche.md",
+        "anchor": "#méthodes",
+        "quote": "descendre gauche ou droite.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_TD_arbres_binaires_recherche.md",
+        "anchor": "#exercice-2",
+        "quote": "Consigne : descendre gauche ou droite ; traiter aussi `doublon 6` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_corrige_arbres_binaires_recherche.md",
+        "anchor": "#exercice-2",
+        "quote": "Réponse attendue : insérer 7 : 8 -> 3 -> 6 -> droite.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode d'insertion (descendre gauche ou droite, insérer une feuille), le TD fait pratiquer l'insertion avec la capacité T-ALGO-01F explicitement citée, et le corrigé fournit la réponse attendue pour l'insertion.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

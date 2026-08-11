@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-07T21:57:33Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-01B",
+      "official_label": "Distinguer interface et implémentation.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_cours_interface_implementation_complement.md",
+        "anchor": "#partie-1--distinguer-interface-et-implémentation-t-struct-01b",
+        "quote": "- **Interface** (le QUOI) : ensemble des opérations publiques d'une structure de données, avec leurs signatures et leur contrat (préconditions, postconditions). L'interface ne dit rien sur la manière dont les données sont stockées.\n\n- **Implémentation** (le COMMENT) : choix concret de représentation interne des données et code des opérations.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_td_interface_implementation_complement.md",
+        "anchor": "#exercice-1--identifier-interface-et-implémentation-o1",
+        "quote": "1. Lister les opérations qui forment l'**interface** de `Compteur`.\n2. Quel est le détail d'**implémentation** dans cette classe ?",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_corrige_interface_implementation_complement.md",
+        "anchor": "#question-1--distinguer-interface-et-implémentation-5-points",
+        "quote": "**Justification** : l'interface est ce que le code client peut appeler (méthodes publiques et leur contrat). L'implémentation est la manière dont ces opérations sont réalisées en interne, à l'aide d'une structure de données concrète.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours définit explicitement interface et implémentation avec tableau de contraste. Le TD fait pratiquer l'identification sur un code concret. Le corrigé fournit la justification attendue pour distinguer les deux notions.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

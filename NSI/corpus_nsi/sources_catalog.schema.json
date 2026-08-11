@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NSI sources catalog",
+  "type": "object",
+  "required": ["sources"],
+  "properties": {
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "url",
+          "local_path",
+          "source_type",
+          "license",
+          "copyright_status",
+          "rgpd_status",
+          "level",
+          "theme",
+          "capacity_ids",
+          "reuse_policy",
+          "rag_collection",
+          "decision",
+          "reviewer",
+          "date_review",
+          "risk_level",
+          "allowed_actions"
+        ],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "url": { "type": "string" },
+          "local_path": { "type": "string" },
+          "source_type": {
+            "type": "string",
+            "enum": [
+              "officiel",
+              "annale_publique",
+              "ressource_pedagogique_ouverte",
+              "drive_interne",
+              "inspiration",
+              "rejet"
+            ]
+          },
+          "license": { "type": "string", "minLength": 1 },
+          "copyright_status": { "type": "string", "minLength": 1 },
+          "rgpd_status": { "type": "string", "minLength": 1 },
+          "level": { "type": "string", "minLength": 1 },
+          "theme": { "type": "string", "minLength": 1 },
+          "capacity_ids": { "type": "array", "items": { "type": "string" } },
+          "reuse_policy": { "type": "string", "minLength": 1 },
+          "rag_collection": { "type": "string" },
+          "decision": { "type": "string", "minLength": 1 },
+          "reviewer": { "type": "string", "minLength": 1 },
+          "date_review": { "type": "string", "minLength": 1 },
+          "risk_level": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+          "allowed_actions": {
+            "type": "array",
+            "items": { "type": "string", "enum": ["index", "summarize", "inspire", "adapt", "reject"] },
+            "minItems": 1
+          }
+        }
+      }
+    }
+  }
+}

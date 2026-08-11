@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-14T23:53:15Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-IHM-03C",
+      "official_label": "Reconnaître quand et pourquoi la transmission est chiffrée.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md",
+        "anchor": "#ni-get-ni-post-ne-chiffrent-les-données",
+        "quote": "Sans HTTPS, les données transmises par GET **et** par POST circulent en clair sur le réseau. POST masque les données de la barre d'adresse et de l'historique, mais ne les chiffre pas. Seul HTTPS (HTTP + TLS) chiffre l'intégralité de l'échange, y compris les paramètres GET dans l'URL.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md",
+        "anchor": "#exercice-6",
+        "quote": "Consigne : (6a) pour chaque scénario, dites si les données sont chiffrées sur le réseau et justifiez ; (6b) expliquez pourquoi POST seul ne suffit pas à protéger les données ; traitez aussi le cas `GET avec HTTPS` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_corrige_http_get_post_formulaires.md",
+        "anchor": "#question-5--choix-et-confidentialité",
+        "quote": "2. Mot de passe : **POST + HTTPS** ; le mot de passe reste hors de l'URL et l'échange est chiffré.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours explique que HTTPS chiffre le transport alors que GET et POST ne le font pas seuls. Le TD compare HTTP et HTTPS, et le corrigé relie explicitement un mot de passe à POST + HTTPS. Le verdict reste needs_review dans l'attente d'une revue humaine indépendante.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

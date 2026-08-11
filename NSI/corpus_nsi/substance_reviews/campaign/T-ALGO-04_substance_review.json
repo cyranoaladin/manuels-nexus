@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-13T01:26:10Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-04",
+      "official_label": "Utiliser la programmation dynamique pour écrire un algorithme.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T17/T17_cours_programmation_dynamique.md",
+        "anchor": "#5-algorithme-de-tabulation",
+        "quote": "def rendu_minimal(montant, pieces):\n    infini = montant + 1\n    dp = [0] + [infini] * montant\n    choix = [None] * (montant + 1)\n\n    for m in range(1, montant + 1):\n        for p in pieces:\n            if p <= m and dp[m - p] != infini:\n                candidat = dp[m - p] + 1\n                if candidat < dp[m]:\n                    dp[m] = candidat\n                    choix[m] = p",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T17/T17_tp_programmation_dynamique.md",
+        "anchor": "#étape-1--construire-la-table--25-minutes",
+        "quote": "Initialiser `dp[0]` à 0 et les autres cases à `montant + 1`.\n3. Initialiser `choix` avec `None`.\n4. Parcourir les montants croissants puis les pièces.\n5. Mettre à jour les deux tables seulement si le candidat est strictement meilleur.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T17/T17_corrige_programmation_dynamique.md",
+        "anchor": "#exercice-4--algorithme",
+        "quote": "def minimum_pieces(montant, pieces):\n    infini = montant + 1\n    dp = [0] + [infini] * montant\n    for m in range(1, montant + 1):\n        for p in pieces:\n            if p <= m and dp[m - p] != infini:\n                dp[m] = min(dp[m], dp[m - p] + 1)\n    if dp[montant] == infini:\n        return None\n    return dp[montant]",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode complète (état, récurrence, tabulation, reconstruction, complexité). Le TP fait pratiquer l'implémentation en binôme avec validation automatique. Le corrigé fournit le code complet et les résultats attendus pour chaque exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

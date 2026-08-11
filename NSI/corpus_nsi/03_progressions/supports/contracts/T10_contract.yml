@@ -1,0 +1,105 @@
+sequence: T10
+level: terminale
+theme: Bases de données
+notion: SQL SELECT, WHERE, JOIN, INSERT, UPDATE et DELETE
+status: needs_review
+
+schema_de_reference:
+  - "Eleve(id_eleve, nom, classe)"
+  - "Note(id_note, id_eleve, matiere, note)"
+
+notions_exigibles:
+  - rôle des clauses SELECT et FROM
+  - filtrage booléen avec WHERE
+  - jointure par clé primaire et clé étrangère avec JOIN ON
+  - tri du résultat avec ORDER BY
+  - ajout d'une ligne avec INSERT
+  - modification ciblée avec UPDATE WHERE
+  - suppression ciblée avec DELETE WHERE
+
+capacites_officielles:
+  - T-BDD-03A
+  - T-BDD-03B
+  - T-BDD-03C
+  - T-BDD-03D
+  - T-BDD-03E
+  - T-BDD-03F
+  - T-BDD-03G
+  - T-BDD-03H
+
+exemples_obligatoires:
+  - "projection de nom et classe avec résultat tabulaire exact"
+  - "filtre sur une valeur frontière incluant la note 15"
+  - "jointure Eleve.id_eleve = Note.id_eleve expliquée par le sens des clés"
+  - "INSERT suivi d'un SELECT ciblé"
+  - "UPDATE et DELETE précédés puis suivis du même SELECT de contrôle"
+
+cas_limites:
+  - filtre produisant un résultat vide
+  - jointure sur une mauvaise clé ou sans ON
+  - clé primaire dupliquée lors d'un INSERT
+  - UPDATE sans WHERE
+  - DELETE sans WHERE
+  - identifiant absent lors d'une modification ou suppression
+
+erreurs_frequentes:
+  - confusion entre SELECT et UPDATE
+  - confusion entre WHERE et ORDER BY
+  - jointure sur id_note au lieu de Note.id_eleve
+  - oubli du WHERE dans UPDATE ou DELETE
+  - résultat annoncé sans exécution ligne par ligne
+
+types_exercices_attendus:
+  - lecture et annotation d'une requête
+  - table de trace d'un filtre
+  - écriture autonome d'une requête
+  - justification d'une clé de jointure
+  - débogage d'une requête syntaxiquement plausible
+  - transfert avec données ou combinaison de clauses inédites
+
+tp_attendu:
+  duree: 75_minutes
+  livrables:
+    - fichier Python complété avec quatre fonctions signées
+    - compte rendu avec requêtes et sorties observées
+  tests:
+    - seuil nominal, frontière et résultat vide
+    - insertion nominale et clé primaire dupliquée
+    - mise à jour ciblée et identifiant absent
+    - suppression nominale puis répétée
+    - connexion absente refusée
+
+interdits_pedagogiques:
+  - réponse sans donnée exploitable
+  - résultat non vérifiable
+  - capacité citée sans exercice associé
+  - étiquette d'opération ne correspondant pas à la consigne
+  - UPDATE ou DELETE opérationnel sans WHERE
+  - version aménagée donnant la requête finale
+
+criteres_validation_humaine:
+  - relecture pédagogique indépendante
+  - vérification scientifique par exécution des requêtes
+  - alignement avec le programme NSI 2019
+  - contrôle question par question entre évaluations, barème et corrigé
+  - décision de publication séparée
+
+must_include:
+  - SELECT
+  - FROM
+  - WHERE
+  - JOIN
+  - ON
+  - ORDER BY
+  - INSERT
+  - UPDATE
+  - DELETE
+  - "Eleve.id_eleve = Note.id_eleve"
+  - "SELECT de contrôle"
+
+must_not:
+  - réponse sans donnée exploitable
+  - résultat non vérifiable
+  - jeu_exercice=alpha
+  - cas_alpha
+  - variante contrôlée

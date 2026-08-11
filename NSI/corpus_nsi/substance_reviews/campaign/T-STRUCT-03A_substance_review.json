@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-03A",
+      "official_label": "Distinguer des structures par le jeu des méthodes qui les caractérisent.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_cours_piles_files_dictionnaires.md",
+        "anchor": "#définitions-et-formalisation",
+        "quote": "Définition D1 : pile est utilisé dans Structures linéaires et tables associatives avec une donnée, une règle et un contrôle.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_td_piles_files_dictionnaires.md",
+        "anchor": "#activité-dentrée",
+        "quote": "Simuler une pile sur trois opérations.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_corrige_piles_files_dictionnaires.md",
+        "anchor": "#méthode-générale-de-correction",
+        "quote": "Point 1 : pour pile, exiger la donnée empiler A puis B, dépiler, la méthode « appliquer LIFO » et le contrôle « pile vide ».",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours définit les structures pile, file et dictionnaire par leurs méthodes caractéristiques (LIFO, FIFO, accès par clé). Le TD fait pratiquer la simulation de ces structures. Le corrigé fournit les réponses attendues avec les méthodes et contrôles associés.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

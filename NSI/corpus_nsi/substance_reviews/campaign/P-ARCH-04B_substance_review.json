@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T18:41:18Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ARCH-04B",
+      "official_label": "Réaliser par programmation une IHM répondant à un cahier des charges donné.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_cours_reseaux_protocoles_paquets.md",
+        "anchor": "#réaliser-une-ihm-par-programmation",
+        "quote": "La capacité P-ARCH-04B demande de réaliser par programmation une interface homme-machine (IHM) répondant à un cahier des charges.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_TD_reseaux_protocoles_paquets.md",
+        "anchor": "#exercice-10",
+        "quote": "Consigne : (10a) écrire le formulaire HTML (champs + bouton) ; (10b) écrire la fonction JavaScript `verifier()` qui compare les trois premiers octets ; (10c) tester avec 192.168.1.20 et 192.168.1.34 (même réseau) puis 192.168.1.20 et 10.0.0.5 (réseaux différents).",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_corrige_reseaux_protocoles_paquets.md",
+        "anchor": "#exercice-10",
+        "quote": "Réponse attendue : formulaire HTML avec 2 inputs + bouton + affichage. JavaScript split(\".\") et comparaison des 3 premiers octets avec validation des entrées. Tests : même réseau (/24) et réseaux différents.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la notion d'IHM et fournit un exemple HTML/JS complet. Le TD fait pratiquer via l'exercice 10 (formulaire + JavaScript). Le corrigé fournit la réponse attendue avec méthode et cas testés.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

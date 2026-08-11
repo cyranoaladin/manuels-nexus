@@ -1,0 +1,60 @@
+sequence: T09
+level: terminale
+theme: bases relationnelles, clés et contraintes
+notion: bases relationnelles, clés et contraintes
+status: needs_review
+notions_exigibles:
+- relation
+- attribut
+- tuple
+- clé primaire
+- clé étrangère
+- contrainte de domaine
+- contrainte de référence
+- schéma
+- instance
+- anomalie
+capacites_officielles:
+- T-BDD-01A
+- T-BDD-01B
+- T-BDD-01C
+- T-BDD-02
+exemples_obligatoires:
+- Livre.id_livre identifie chaque livre
+- Emprunt.id_livre référence Livre.id_livre
+- Emprunt(11,9,Sam) viole la référence
+- suppression d un livre emprunté refusée
+cas_limites:
+- clé primaire nulle
+- doublon id_livre=1
+- suppression référencée
+erreurs_frequentes:
+- attribut confondu avec valeur
+- clé étrangère supposée unique
+- domaine ignoré
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- relation
+- attribut
+- tuple
+- clé primaire
+- Livre.id_livre identifie chaque livre
+- clé primaire nulle
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

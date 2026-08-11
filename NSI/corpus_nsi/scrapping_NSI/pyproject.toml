@@ -1,0 +1,16 @@
+[tool.pytest.ini_options]
+testpaths = ["."]
+norecursedirs = [
+    ".*",
+    "__pycache__",
+    "build",
+    "dist",
+    "*.egg",
+    "node_modules",
+    "ressources_nsi_extraites",
+    "ressources_nsi_extraites_v2",
+    "ressources_nsi_centralisees",
+    "Documents_DRIVE",
+    "__archive_processed_in_transit__",
+    "nsi-enseignement",
+]

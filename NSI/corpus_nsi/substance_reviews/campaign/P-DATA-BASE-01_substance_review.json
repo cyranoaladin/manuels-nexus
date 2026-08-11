@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-06T06:06:50Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-BASE-01",
+      "official_label": "Passer de la représentation d'une base dans une autre.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P01/P01_cours_conversions_bases.md",
+        "anchor": "#exemple-corrigé-1---décimal-vers-binaire",
+        "quote": "Méthode : enchaîner divisions par 2 puis lire les restes de bas en haut.\n- Résultat obtenu : `1101₂`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P01/P01_td_conversions_bases.md",
+        "anchor": "#exercice-1",
+        "quote": "Énoncé disciplinaire : résoudre décimal vers binaire avec `13` en base dix.\n- Production attendue : `1101₂`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P01/P01_corrige_conversions_bases.md",
+        "anchor": "#corrigé-exercice-1",
+        "quote": "Méthode : identifier `13` en base dix, appliquer la méthode « enchaîner divisions par 2 puis lire les restes de bas en haut », puis écrire `1101₂`.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne les quatre méthodes de conversion avec exemples corrigés. Le TD fait pratiquer avec des exercices numérotés et productions attendues. Le corrigé professeur fournit méthode, résultat et contrôle pour chaque exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

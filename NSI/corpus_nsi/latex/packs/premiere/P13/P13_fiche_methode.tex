@@ -1,0 +1,40 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{nsi-preamble}
+\begin{document}
+\nsiheader{Fiche méthode — Dichotomie, glouton et k-NN}{Première}{P13}{0,5}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
+
+\section*{Recherche dichotomique (P-ALGO-04)}
+\begin{enumerate}[nosep]
+  \item Vérifier que le tableau est trié.
+  \item Poser gauche $=0$, droite $=$ dernier indice.
+  \item Calculer le milieu $m = (\text{gauche}+\text{droite}) \div 2$.
+  \item Comparer à la cible et réduire l'intervalle (gauche ou droite).
+  \item Répéter jusqu'à trouver ou gauche $>$ droite.
+\end{enumerate}
+
+\section*{Terminaison par variant (P-ALGO-04)}
+Poser $V = \text{droite} - \text{gauche} + 1$ ; montrer que $V$ décroît strictement à chaque étape ; comme $V$ est un entier positif, la boucle se termine ($V$ atteint $0$ dans le cas absent).
+
+\noindent Exemple d'une cible absente (\texttt{cible=38}) : $V$ décroît jusqu'à $0$.
+\begin{center}
+\begin{tabular}{ccccl}
+\toprule
+Étape & gauche & droite & $V$ & Action \\
+\midrule
+1 & 0 & 5 & 6 & $38 > 18 \Rightarrow$ gauche $= 3$ \\
+2 & 3 & 5 & 3 & $38 > 37 \Rightarrow$ gauche $= 5$ \\
+3 & 5 & 5 & 1 & $38 < 41 \Rightarrow$ droite $= 4$ \\
+fin & 5 & 4 & 0 & gauche $>$ droite $\Rightarrow$ arrêt \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Algorithme glouton (P-ALGO-05)}
+À chaque étape, prendre la plus grande pièce inférieure ou égale au montant restant ; répéter. Attention : le glouton n'est pas toujours optimal si le système de pièces ne s'y prête pas.
+
+\section*{k plus proches voisins (P-ALGO-03)}
+Calculer la distance aux points connus ; trier ; prendre les $k$ plus proches ; voter à la majorité. Avec $k$ pair, prévoir la règle en cas d'égalité.
+
+\section*{Checklist avant de rendre}
+donnée exacte $\bullet$ méthode nommée $\bullet$ résultat final $\bullet$ cas limite traité.
+\end{document}

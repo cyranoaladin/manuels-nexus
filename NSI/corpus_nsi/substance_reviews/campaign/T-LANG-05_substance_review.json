@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-12T10:40:46Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-05",
+      "official_label": "Savoir répondre aux causes typiques de bugs.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_cours_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exemple-corrigé-6",
+        "quote": "Méthode : répondre aux causes typiques de bugs (T-LANG-05).\n- Résultat attendu : cause typique = division par zéro si `releves` est vide ; réponse = lever `ValueError` avec message explicite ; test = `assert moyenne_temperature([])` lève `ValueError`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_TD_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exercice-6",
+        "quote": "Consigne : identifier la cause du bug (effet de bord à l'import) puis corriger en séparant module et script principal ; traiter aussi `variable globale mutée` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_corrige_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exercice-6",
+        "quote": "Réponse attendue : cause : effet de bord à l'import — le module exécute du code (print, calcul, mutation de variable globale) dès qu'il est importé ; correction : protéger le code exécutable par `if __name__ == \"__main__\":` afin qu'il ne s'exécute que lorsque le fichier est lancé directement, pas lors d'un import.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode de réponse aux bugs typiques (T-LANG-05) avec un exemple corrigé détaillé. Le TD fait pratiquer via l'exercice 6 sur l'effet de bord à l'import. Le corrigé fournit la réponse complète avec cause, correction et cas limite.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

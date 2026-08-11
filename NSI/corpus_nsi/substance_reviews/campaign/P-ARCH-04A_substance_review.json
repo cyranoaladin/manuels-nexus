@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T13:22:40Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ARCH-04A",
+      "official_label": "Identifier le rôle des capteurs et actionneurs.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_cours_reseaux_protocoles_paquets.md",
+        "anchor": "#capteur",
+        "quote": "Un **capteur** mesure une grandeur physique (température, luminosité, pression, distance) et la convertit en signal numérique exploitable par un programme.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_TD_reseaux_protocoles_paquets.md",
+        "anchor": "#exercice-9",
+        "quote": "(9a) identifier chaque élément comme capteur ou actionneur et justifier ; (9b) écrire le pseudo-code du programme de contrôle ; (9c) que se passe-t-il si le capteur de température renvoie une valeur aberrante (ex. 255) ?",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P10/P10_corrige_reseaux_protocoles_paquets.md",
+        "anchor": "#exercice-9",
+        "quote": "capteurs (température, humidité) mesurent des grandeurs physiques ; actionneurs (ventilateur, arrosage) produisent des actions. Pseudo-code boucle avec seuils. Valeur aberrante filtrée.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours définit capteurs et actionneurs avec exemples concrets et schéma chaîne. Le TD (exercice 9) fait pratiquer l'identification et la justification sur un système de serre. Le corrigé fournit les réponses attendues pour chaque sous-question.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

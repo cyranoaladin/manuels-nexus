@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-02D",
+      "official_label": "Chercher un chemin dans un graphe.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_cours_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exemples-corrigés",
+        "quote": "Méthode : mémoriser prédécesseurs.\n- Résultat attendu : prédécesseurs E<-C<-A donc chemin A-C-E.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_TD_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exercice-2",
+        "quote": "Consigne : mémoriser prédécesseurs ; traiter aussi `destination absente` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T08/T08_corrige_bfs_dfs_cycles_chemins.md",
+        "anchor": "#exercice-2",
+        "quote": "Réponse attendue : prédécesseurs E<-C<-A donc chemin A-C-E.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La capacité T-ALGO-02D porte sur la recherche de chemin dans un graphe. Le cours enseigne la méthode des prédécesseurs pour reconstruire un chemin, le TD (exercice 2) fait pratiquer cette recherche de chemin, et le corrigé fournit la réponse attendue avec le chemin reconstruit A-C-E.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

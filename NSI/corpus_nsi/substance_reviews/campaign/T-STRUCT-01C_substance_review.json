@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-06T06:10:47Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-01C",
+      "official_label": "Ecrire plusieurs implémentations d'une même structure de données.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_cours_interface_implementation_complement.md",
+        "anchor": "#partie-2--écrire-plusieurs-implémentations-tests-communs-t-struct-01c",
+        "quote": "La preuve qu'une interface est bien respectée : la même suite de tests passe sur chaque implémentation.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_tp_interface_implementation_complement.md",
+        "anchor": "#a2--implémentation-par-liste-chaînée",
+        "quote": "Créer un fichier `pile_chainee.py` contenant :\n- La classe `Maillon` avec les attributs `valeur` et `suivant`.\n- La classe `PileChainee` avec les mêmes méthodes que `PileListe` (même interface).",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T01/T01_corrige_interface_implementation_complement.md",
+        "anchor": "#question-2--écrire-une-implémentation-alternative-5-points",
+        "quote": "class PileChainee:\n    def __init__(self):\n        self._sommet = None\n\n    def empiler(self, valeur):\n        self._sommet = Maillon(valeur, self._sommet)",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours présente plusieurs implémentations complètes (PileListe, PileChainee, FileListe, FileDeuxPiles, EnsembleListe, EnsembleDict). Le TP fait coder deux implémentations de pile et de file. Le corrigé fournit le code complet de PileChainee avec explication.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

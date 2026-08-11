@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-15T07:43:02Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-IHM-04A",
+      "official_label": "Analyser le fonctionnement d'un formulaire simple.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md",
+        "anchor": "#exemple-corrigé-4",
+        "quote": "- Donnée : `<form method=post action=/reservation><input id=nom name=nom></form>, URL /club?jour=mercredi`.\n- Méthode : distinguer GET, POST et HTTPS.\n- Résultat attendu : POST sans HTTPS ne chiffre pas.\n- Contrôle : capacité P-IHM-03A et cas limite `champ nom vide`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md",
+        "anchor": "#exercice-7",
+        "quote": "Consigne : identifiez les deux erreurs dans ce formulaire. Pour chaque erreur, expliquez pourquoi elle empêche le bon fonctionnement et proposez la correction HTML. Indiquez quelle méthode HTTP est utilisée par défaut quand `method` est absent. Testez le cas `champ nom vide` après correction.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md",
+        "anchor": "#corrigé-exercice-7",
+        "quote": "- Résultat : erreur 1 — l'attribut `name` est manquant sur le champ nom, donc le navigateur ne l'inclut pas dans la requête ; correction : `<label for=nom>Nom</label><input id=nom name=nom>`. Erreur 2 — `method` est absent, donc le formulaire utilise GET par défaut ; si POST est souhaité, ajouter `method=\"post\"`.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours présente la méthode d'analyse d'un formulaire avec GET/POST, le TD fait pratiquer le débogage d'un formulaire HTML avec attributs manquants (name, method), et le corrigé fournit les corrections précises.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}
