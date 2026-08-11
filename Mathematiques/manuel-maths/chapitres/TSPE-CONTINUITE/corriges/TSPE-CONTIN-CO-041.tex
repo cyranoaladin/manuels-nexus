@@ -1,0 +1,43 @@
+% META: {"id": "TSPE-CONTIN-CO-041", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-041", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = Rational(4,5)*x + 2
+% assert solveset(Eq(f, x), x, SS.Reals) == {10}
+% t = iterer(f, 0, 4)
+% assert [float(v) for v in t] == [0.0, 2.0, 3.6, 4.88, 5.904]
+% assert all(0 <= float(f.subs(x, v)) <= 10 for v in (0, 5, 10))
+% assert simplify((f - x) - (10 - x)*Rational(1,5)) == 0
+% # d_{n+1} = 0.8 d_n, d_0 = 10, donc u_n = 10 - 10*0.8^n
+% for k in range(5):
+%     assert abs(float(t[k]) - (10 - 10*0.8**k)) < 1e-12
+% # premier n tel que u_n > 9
+% n = 0
+% while 10 - 10*0.8**n <= 9:
+%     n += 1
+% assert n == 11
+% assert 10 - 10*0.8**10 <= 9 < 10 - 10*0.8**11
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-041}
+
+\textbf{Q1.} Entre la $n$-ieme et la $(n+1)$-ieme prise, il reste $80\,\%$ de $u_n$, soit $0{,}8\,u_n$, auxquels s'ajoute la nouvelle dose de $2$ mg : $u_{n+1} = 0{,}8\,u_n + 2$.
+
+$u_1 = 2$ ; $u_2 = 0{,}8 \times 2 + 2 = 3{,}6$ ; $u_3 = 4{,}88$ ; $u_4 = 5{,}904$.
+
+\textbf{Q2.} Si $x \in [0\,;10]$ alors $0 \leq 0{,}8x \leq 8$, donc $2 \leq f(x) \leq 10$ : $f(x) \in [0\,;10]$. Par recurrence, $u_0 = 0 \in [0\,;10]$ et la stabilite propage l'encadrement a tout rang.
+
+\textbf{Q3.} $f(x) - x = 0{,}8x + 2 - x = 2 - 0{,}2x = \dfrac{10-x}{5}$, positif sur $[0\,;10]$. Donc $u_{n+1} - u_n \geq 0$ : la suite est croissante. Etant majoree par $10$, elle converge.
+
+\textbf{Q4.} $f$ est affine donc continue ; la limite $\ell$ verifie $0{,}8\ell + 2 = \ell$, soit $0{,}2\ell = 2$ et $\ell = 10$. La quantite de medicament dans l'organisme se stabilise a $10$ mg : c'est le \emph{plateau} du traitement, jamais depasse mais approche d'aussi pres que l'on veut.
+
+\textbf{Q5.} $d_{n+1} = 10 - u_{n+1} = 10 - 0{,}8u_n - 2 = 8 - 0{,}8u_n = 0{,}8(10 - u_n) = 0{,}8\,d_n$. La suite $(d_n)$ est geometrique de raison $0{,}8$, de premier terme $d_0 = 10$, donc $d_n = 10 \times 0{,}8^n$ et
+\[ u_n = 10 - 10 \times 0{,}8^{\,n}. \]
+On cherche le plus petit $n$ tel que $u_n > 9$, c'est-a-dire $10 \times 0{,}8^n < 1$, soit $0{,}8^n < 0{,}1$. En calculant : $0{,}8^{10} \approx 0{,}1074 > 0{,}1$ et $0{,}8^{11} \approx 0{,}0859 < 0{,}1$. Le premier jour ou la quantite depasse $9$ mg est donc le onzieme, $n = 11$.
+\end{corrige}

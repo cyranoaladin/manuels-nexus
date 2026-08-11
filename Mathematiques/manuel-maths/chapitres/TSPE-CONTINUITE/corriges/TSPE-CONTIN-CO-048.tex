@@ -1,0 +1,49 @@
+% META: {"id": "TSPE-CONTIN-CO-048", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-048", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, fibonacci
+% x = symbols('x')
+% f = 1/(1 + x)
+% phi = (sqrt(5) - 1)/2
+% assert simplify(f.subs(x, phi) - phi) == 0
+% assert solveset(Eq(f, x), x, SS.Reals) == {(-1 + sqrt(5))/2, (-1 - sqrt(5))/2}
+% u = Rational(1)
+% t = [u]
+% for _ in range(6):
+%     u = simplify(f.subs(x, u)); t.append(u)
+% # les termes sont les quotients de Fibonacci consecutifs
+% for k in range(7):
+%     assert t[k] == Rational(fibonacci(k + 1), fibonacci(k + 2))
+% vals = [float(v) for v in t]
+% assert all(0.5 <= v <= 1 for v in vals)
+% # alternance et monotonie des sous-suites
+% ecarts = [v - float(phi) for v in vals]
+% assert all(ecarts[i]*ecarts[i+1] < 0 for i in range(6))
+% pairs = vals[0::2]; impairs = vals[1::2]
+% assert all(pairs[i] > pairs[i+1] for i in range(len(pairs) - 1))
+% assert all(impairs[i] < impairs[i+1] for i in range(len(impairs) - 1))
+% # contraction de rapport 2/3
+% assert all(abs(ecarts[i+1]) <= Rational(2,3)*abs(ecarts[i]) + 1e-12 for i in range(6))
+% assert abs(float(phi) - 0.6180340) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-048}
+
+\textbf{Q1.} $u_1 = \dfrac12$ ; $u_2 = \dfrac{1}{1+\frac12} = \dfrac23$ ; $u_3 = \dfrac{3}{5}$ ; $u_4 = \dfrac58$ ; $u_5 = \dfrac{8}{13}$ ; $u_6 = \dfrac{13}{21}$.
+
+Numerateurs et denominateurs sont des termes consecutifs de la suite de Fibonacci $1, 1, 2, 3, 5, 8, 13, 21, \dots$ : on a $u_n = \dfrac{F_{n+1}}{F_{n+2}}$.
+
+\textbf{Q2.} Montrons par recurrence que $u_n \in \left[\dfrac12\,;1\right]$. C'est vrai pour $u_0 = 1$. Si $\dfrac12 \leq u_n \leq 1$, alors $\dfrac32 \leq 1 + u_n \leq 2$, donc par decroissance de l'inverse sur les reels strictement positifs, $\dfrac12 \leq \dfrac{1}{1+u_n} \leq \dfrac23$, et en particulier $u_{n+1} \in \left[\dfrac12\,;1\right]$.
+
+\textbf{Q3.} $\dfrac{1}{1+x} = x$ equivaut, pour $x \neq -1$, a $1 = x(1+x)$, soit $x^2 + x - 1 = 0$. Le discriminant vaut $5$, d'ou les racines $\dfrac{-1 \pm \sqrt5}{2}$. Sur $\left]0\,;+\infty\right[$, seule $\varphi = \dfrac{\sqrt5 - 1}{2} \approx 0{,}618$ convient. C'est l'inverse du nombre d'or.
+
+\textbf{Q4.} La fonction $f$ est strictement decroissante sur $\left]0\,;+\infty\right[$, car $f'(x) = -\dfrac{1}{(1+x)^2} < 0$. Donc si $u_n < \varphi$, alors $f(u_n) > f(\varphi) = \varphi$, c'est-a-dire $u_{n+1} > \varphi$, et reciproquement : les termes alternent autour de $\varphi$, ce qui interdit toute monotonie.
+
+En revanche, $f \circ f$ est croissante (composee de deux fonctions decroissantes), et $u_{n+2} = f(f(u_n))$. Les sous-suites $(u_{2n})$ et $(u_{2n+1})$ sont donc monotones. Les valeurs calculees montrent que $(u_{2n})$ part de $u_0 = 1 > \varphi$ et decroit, tandis que $(u_{2n+1})$ part de $u_1 = 0{,}5 < \varphi$ et croit : elles convergent l'une vers l'autre en encadrant $\varphi$.
+
+\textbf{Q5.} Pour tout $x \geq \dfrac12$ :
+\[ f(x) - \varphi = \frac{1}{1+x} - \frac{1}{1+\varphi} = \frac{(1+\varphi) - (1+x)}{(1+x)(1+\varphi)} = \frac{-(x - \varphi)}{(1+x)(1+\varphi)}, \]
+en utilisant $f(\varphi) = \varphi = \dfrac{1}{1+\varphi}$. Comme $x \geq \dfrac12$, on a $1 + x \geq \dfrac32$ ; et $1 + \varphi \approx 1{,}618 > 1$. Donc
+\[ \left|f(x) - \varphi\right| = \frac{|x - \varphi|}{(1+x)(1+\varphi)} \leq \frac{|x-\varphi|}{\frac32 \times 1} = \frac{2}{3}\left|x - \varphi\right|. \]
+Tous les termes etant dans $\left[\dfrac12\,;1\right]$, on en deduit $\left|u_{n+1} - \varphi\right| \leq \dfrac23\left|u_n - \varphi\right|$, puis par iteration
+\[ \left|u_n - \varphi\right| \leq \left(\frac23\right)^{n}\left|u_0 - \varphi\right|. \]
+Comme $0 < \dfrac23 < 1$, le majorant tend vers $0$ : la suite $(u_n)$ converge vers $\varphi$, sans jamais avoir ete monotone.
+\end{corrige}

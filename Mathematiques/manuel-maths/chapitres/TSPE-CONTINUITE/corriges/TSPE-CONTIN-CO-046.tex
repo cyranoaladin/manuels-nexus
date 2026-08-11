@@ -1,0 +1,48 @@
+% META: {"id": "TSPE-CONTIN-CO-046", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-046", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = sqrt(x + 2)
+% assert solveset(Eq(f, x), x, SS.Reals) == {2}
+% assert simplify(diff(f, x) - 1/(2*sqrt(x + 2))) == 0
+% k = float(1/(2*sqrt(2)))
+% assert abs(k - 0.3535534) < 1e-6
+% # la derivee est maximale en x = 0 sur [0,3]
+% assert abs(float(diff(f, x).subs(x, 0)) - k) < 1e-12
+% assert all(0 < float(diff(f, x).subs(x, v)) <= k + 1e-15 for v in (0, 1, 2, 3))
+% # nombre d'iterations pour |u_n - 2| < 1e-6 avec |u_0 - 2| = 2
+% n = 0
+% ecart = 2.0
+% while ecart >= 1e-6:
+%     ecart *= k
+%     n += 1
+% assert n == 14
+% assert 2*k**13 >= 1e-6 > 2*k**14
+% # controle direct sur la suite reelle
+% t = [float(v) for v in iterer(f, 0, 14)]
+% assert abs(t[14] - 2) < 1e-6
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-046}
+
+\textbf{Q1.} $f(x) = \sqrt{x+2}$ donne $f'(x) = \dfrac{1}{2\sqrt{x+2}}$. Sur $[0\,;3]$, on a $2 \leq x+2 \leq 5$, donc $\sqrt2 \leq \sqrt{x+2}$ et par consequent $\dfrac{1}{2\sqrt{x+2}} \leq \dfrac{1}{2\sqrt2}$. Le quotient etant strictement positif, on obtient $0 < f'(x) \leq \dfrac{1}{2\sqrt2} \approx 0{,}354$.
+
+\textbf{Q2.} L'inegalite des accroissements finis affirme que si $\left|f'\right| \leq k$ sur un intervalle, alors $\left|f(b) - f(a)\right| \leq k\left|b-a\right|$ pour tous $a, b$ de cet intervalle. Ici $k = \dfrac{1}{2\sqrt2}$ convient d'apres Q1.
+
+\textbf{Q3.} On applique l'inegalite avec $a = 2$ et $b = u_n$, tous deux dans $[0\,;3]$. Comme $f(2) = \sqrt4 = 2$ et $f(u_n) = u_{n+1}$ :
+\[ \left|u_{n+1} - 2\right| = \left|f(u_n) - f(2)\right| \leq \frac{1}{2\sqrt2}\left|u_n - 2\right|. \]
+
+\textbf{Q4.} En iterant cette inegalite depuis le rang $0$ :
+\[ \left|u_n - 2\right| \leq \frac{1}{2\sqrt2}\left|u_{n-1} - 2\right| \leq \dots \leq \left(\frac{1}{2\sqrt2}\right)^{n}\left|u_0 - 2\right|. \]
+Comme $0 < \dfrac{1}{2\sqrt2} < 1$, la suite geometrique $\left(\left(\tfrac{1}{2\sqrt2}\right)^n\right)$ tend vers $0$. Par encadrement, $\left|u_n - 2\right| \to 0$, c'est-a-dire $u_n \to 2$, et ce \emph{quel que soit} le point de depart dans $[0\,;3]$.
+
+\textbf{Q5.} Avec $u_0 = 0$, on a $\left|u_0 - 2\right| = 2$, donc il suffit que $2 \times \left(\dfrac{1}{2\sqrt2}\right)^{n} < 10^{-6}$. En calculant : $2 \times 0{,}3535534^{13} \approx 1{,}22 \times 10^{-6}$, encore trop grand, et $2 \times 0{,}3535534^{14} \approx 4{,}3 \times 10^{-7} < 10^{-6}$. \textbf{Quatorze} iterations suffisent.
+
+Cette majoration est une garantie \emph{a priori} : elle ne depend d'aucun calcul des termes. C'est tout son interet en programmation, ou l'on veut fixer le nombre d'iterations avant de lancer la boucle.
+\end{corrige}

@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-CONTIN-EX-045", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 2, "competences": ["chercher", "calculer", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-045.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-045.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = (x + 6)/(x + 2)
+% assert solveset(Eq(f, x), x, SS.Reals) == {-3, 2}
+% t = [float(v) for v in iterer(f, 0, 5)]
+% assert abs(t[1] - 3.0) < 1e-12 and abs(t[2] - 1.8) < 1e-12
+% assert all(t[i] != t[i+1] for i in range(5))
+% assert simplify(f - 2 + (x - 2)/(x + 2)) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-045}{2}{15}
+Soit $(u_n)$ definie par $u_0 = 0$ et $u_{n+1} = \dfrac{u_n + 6}{u_n + 2}$, et soit $f(x) = \dfrac{x+6}{x+2}$.
+\begin{enumerate}
+  \item Calculer $u_1$ a $u_5$ a $10^{-4}$ pres. Que constate-t-on par rapport aux exercices precedents ?
+  \item Resoudre $f(x) = x$ et determiner les points fixes.
+  \item Montrer que $f$ est strictement decroissante sur $[0\,;+\infty[$. Expliquer pourquoi la suite ne peut pas etre monotone.
+  \item Montrer que, pour tout $x \geq 0$, $f(x) - 2 = \dfrac{-(x-2)}{x+2}$, puis que $\left|f(x) - 2\right| \leq \left|x - 2\right|$.
+  \item On admet que $\left|u_{n+1} - 2\right| \leq \dfrac{1}{2}\left|u_n - 2\right|$ pour tout $n$. En deduire que $(u_n)$ converge vers $2$.
+\end{enumerate}
+\end{exercice}

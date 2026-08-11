@@ -1,0 +1,38 @@
+% META: {"id": "TSPE-CONTIN-CO-043", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-043", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = (x + 3/x)/2
+% assert solveset(Eq(f, x), x, SS.Reals) == {-sqrt(3), sqrt(3)}
+% t = iterer(f, 2, 3)
+% assert simplify(t[1] - Rational(7,4)) == 0
+% assert abs(float(t[2]) - 1.7321429) < 1e-6
+% assert abs(float(t[3]) - float(sqrt(3))) < 1e-7
+% # identite cle
+% assert simplify(f - sqrt(3) - (x - sqrt(3))**2/(2*x)) == 0
+% assert simplify(f - x - (3 - x**2)/(2*x)) == 0
+% # decroissance a partir du rang 1
+% assert all(float(t[i]) > float(t[i+1]) for i in range(1, 3))
+% assert all(float(v) >= float(sqrt(3)) for v in t[1:])
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-043}
+
+\textbf{Q1.} $u_1 = \dfrac{1}{2}\left(2 + \dfrac32\right) = \dfrac{7}{4} = 1{,}75$ ; $u_2 = \dfrac{1}{2}\left(1{,}75 + \dfrac{3}{1{,}75}\right) \approx 1{,}7321429$ ; $u_3 \approx 1{,}7320508$. Des le rang $3$, les sept premieres decimales de $\sqrt3$ sont exactes : la convergence est remarquablement rapide.
+
+\textbf{Q2.} Pour $x > 0$ : $\dfrac{1}{2}\left(x + \dfrac3x\right) = x$ equivaut a $x + \dfrac3x = 2x$, soit $\dfrac3x = x$, donc $x^2 = 3$. Sur $\left]0\,;+\infty\right[$ l'unique solution est $x = \sqrt3$.
+
+\textbf{Q3.} On calcule, pour $x > 0$ :
+\[ f(x) - \sqrt3 = \frac{x}{2} + \frac{3}{2x} - \sqrt3 = \frac{x^2 + 3 - 2\sqrt3\,x}{2x} = \frac{\left(x - \sqrt3\right)^2}{2x}. \]
+Le numerateur est un carre, donc positif, et $2x > 0$ : par consequent $f(x) \geq \sqrt3$ pour tout $x > 0$. Comme $u_0 = 2 > 0$ et que $f$ envoie les reels strictement positifs sur des reels superieurs a $\sqrt3 > 0$, tous les termes sont strictement positifs et, pour $n \geq 1$, $u_n = f(u_{n-1}) \geq \sqrt3$.
+
+\textbf{Q4.} $f(x) - x = \dfrac{x}{2} + \dfrac{3}{2x} - x = \dfrac{3 - x^2}{2x}$. Pour $n \geq 1$ on a $u_n \geq \sqrt3$, donc $u_n^2 \geq 3$ et $3 - u_n^2 \leq 0$ ; comme $2u_n > 0$, on obtient $u_{n+1} - u_n = f(u_n) - u_n \leq 0$. La suite est donc decroissante a partir du rang $1$.
+
+\textbf{Q5.} A partir du rang $1$, $(u_n)$ est decroissante et minoree par $\sqrt3$ : elle converge vers un reel $\ell \geq \sqrt3$. La fonction $f$ est continue sur $\left]0\,;+\infty\right[$ (quotient dont le denominateur ne s'annule pas), donc $\ell$ verifie $f(\ell) = \ell$, c'est-a-dire $\ell^2 = 3$ d'apres Q2. Comme $\ell \geq \sqrt3 > 0$, on conclut $\ell = \sqrt3$.
+\end{corrige}

@@ -1,0 +1,51 @@
+% META: {"id": "TSPE-CONTIN-CO-045", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-045", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = (x + 6)/(x + 2)
+% assert solveset(Eq(f, x), x, SS.Reals) == {-3, 2}
+% t = iterer(f, 0, 5)
+% vals = [float(v) for v in t]
+% assert abs(vals[1] - 3.0) < 1e-12
+% assert abs(vals[2] - 1.8) < 1e-12
+% assert abs(vals[3] - 2.0526316) < 1e-6
+% assert abs(vals[4] - 1.9870130) < 1e-6
+% assert abs(vals[5] - 2.0032573) < 1e-6
+% # alternance autour de 2
+% ecarts = [v - 2 for v in vals[1:]]
+% assert all(ecarts[i]*ecarts[i+1] < 0 for i in range(len(ecarts) - 1))
+% # f strictement decroissante : derivee negative
+% assert simplify(diff(f, x) + 4/(x + 2)**2) == 0
+% u = symbols('u', nonnegative=True)
+% assert (4/(u + 2)**2).is_positive is True
+% assert simplify(f - 2 + (x - 2)/(x + 2)) == 0
+% # contraction de rapport 1/2 verifiee numeriquement sur les termes calcules
+% assert all(abs(ecarts[i+1]) <= abs(ecarts[i])/2 + 1e-12 for i in range(len(ecarts) - 1))
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-045}
+
+\textbf{Q1.} $u_1 = 3$ ; $u_2 = 1{,}8$ ; $u_3 \approx 2{,}0526$ ; $u_4 \approx 1{,}9870$ ; $u_5 \approx 2{,}0033$. Contrairement aux exercices precedents, la suite n'est \emph{pas monotone} : ses termes encadrent alternativement la valeur $2$, en s'en rapprochant.
+
+\textbf{Q2.} $\dfrac{x+6}{x+2} = x$ equivaut, pour $x \neq -2$, a $x + 6 = x(x+2) = x^2 + 2x$, soit $x^2 + x - 6 = 0$. Le discriminant vaut $1 + 24 = 25$, d'ou les racines $\dfrac{-1 \pm 5}{2}$, c'est-a-dire $2$ et $-3$.
+
+\textbf{Q3.} $f'(x) = \dfrac{(x+2) - (x+6)}{(x+2)^2} = \dfrac{-4}{(x+2)^2}$, strictement negatif pour $x \geq 0$ : $f$ est strictement decroissante.
+
+Si $u_n < 2$, alors $f(u_n) > f(2) = 2$ par decroissance, donc $u_{n+1} > 2$ ; et symetriquement. Chaque terme passe donc de l'autre cote de $2$ : la suite alterne et ne peut etre ni croissante ni decroissante.
+
+\textbf{Q4.} $f(x) - 2 = \dfrac{x+6}{x+2} - 2 = \dfrac{x + 6 - 2(x+2)}{x+2} = \dfrac{2 - x}{x+2}$, c'est-a-dire
+\[ f(x) - 2 = \frac{-(x-2)}{x+2}. \]
+Pour $x \geq 0$, $x + 2 \geq 2$, donc $\left|f(x) - 2\right| = \dfrac{|x-2|}{x+2} \leq \dfrac{|x-2|}{2} \leq |x-2|$.
+
+\textbf{Q5.} En appliquant l'inegalite admise de proche en proche :
+\[ \left|u_n - 2\right| \leq \frac{1}{2}\left|u_{n-1} - 2\right| \leq \left(\frac12\right)^2\left|u_{n-2} - 2\right| \leq \dots \leq \left(\frac12\right)^n\left|u_0 - 2\right| = 2\left(\frac12\right)^n. \]
+Comme $-1 < \dfrac12 < 1$, la suite $\left(\left(\tfrac12\right)^n\right)$ tend vers $0$, donc $\left|u_n - 2\right|$ tend vers $0$ par encadrement : $(u_n)$ converge vers $2$.
+
+Ce raisonnement se passe de toute monotonie : c'est la contraction des ecarts, et non le theoreme de la limite monotone, qui donne ici la convergence.
+\end{corrige}

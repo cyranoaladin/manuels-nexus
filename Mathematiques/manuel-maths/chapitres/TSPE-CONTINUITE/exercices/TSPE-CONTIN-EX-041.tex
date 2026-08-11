@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-CONTIN-EX-041", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4", "M5"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-041.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-041.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = Rational(4,5)*x + 2
+% assert solveset(Eq(f, x), x, SS.Reals) == {10}
+% t = [float(v) for v in iterer(f, 0, 4)]
+% assert t == [0.0, 2.0, 3.6, 4.88, 5.904]
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-041}{2}{15}
+Un patient recoit chaque matin une dose de $2$ mg d'un medicament. Entre deux prises, l'organisme elimine $20\,\%$ de la quantite presente. On note $u_n$ la quantite, en mg, presente juste apres la $n$-ieme prise, avec $u_0 = 0$ avant tout traitement.
+\begin{enumerate}
+  \item Justifier que $u_{n+1} = 0{,}8\,u_n + 2$, puis calculer $u_1$, $u_2$, $u_3$ et $u_4$.
+  \item Montrer que $[0\,;10]$ est stable par $f : x \mapsto 0{,}8x + 2$, puis que $0 \leq u_n \leq 10$ pour tout $n$.
+  \item Montrer que $(u_n)$ est croissante, puis qu'elle converge.
+  \item Determiner sa limite et interpreter : vers quelle quantite le traitement se stabilise-t-il ?
+  \item On pose $d_n = 10 - u_n$. Montrer que $(d_n)$ est geometrique, en deduire l'expression de $u_n$, puis determiner le premier jour ou la quantite depasse $9$ mg.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,53 @@
+% META: {"id": "TSPE-CONTIN-CO-044", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-044", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = x**2/4 + 1
+% assert solveset(Eq(f, x), x, SS.Reals) == {2}
+% assert simplify(f - x - (x - 2)**2/4) == 0
+% t = iterer(f, 0, 4)
+% assert [float(v) for v in t] == [0.0, 1.0, 1.25, 1.390625, 1.48345947265625]
+% assert all(0 <= float(f.subs(x, v)) <= 2 for v in (0, 1, 2))
+% assert float(f.subs(x, 2)) == 2.0
+% assert all(float((f - x).subs(x, v)) > 0 for v in (0, 1, 1.9))
+% # convergence lente : comparaison avec la suite geometrique de EX-041
+% # iteration en flottants : la forme exacte explose en rationnels a 30 rangs
+% v = 0.0
+% for _ in range(30):
+%     v = v**2/4 + 1
+% assert v < 1.9
+% # Comparaison honnete : nombre d'iterations pour reduire l'ecart a la limite
+% # a 1 % de celle-ci. EX-041 : 21 etapes. Ici : 193 etapes.
+% n1 = 0
+% while 10*0.8**n1 >= 0.1:
+%     n1 += 1
+% assert n1 == 21
+% w, n2 = 0.0, 0
+% while abs(2 - w) >= 0.02:
+%     w = w**2/4 + 1
+%     n2 += 1
+% assert n2 == 193
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-044}
+
+\textbf{Q1.} $u_1 = 1$ ; $u_2 = \dfrac{1}{4} + 1 = 1{,}25$ ; $u_3 = \dfrac{1{,}5625}{4} + 1 = 1{,}390625$ ; $u_4 \approx 1{,}48346$.
+
+\textbf{Q2.} $\dfrac{x^2}{4} + 1 = x$ equivaut a $x^2 - 4x + 4 = 0$, soit $(x-2)^2 = 0$. L'unique point fixe est $x = 2$, et c'est une racine \textbf{double} : la courbe de $f$ est tangente a la droite d'equation $y = x$ en ce point.
+
+\textbf{Q3.} Si $x \in [0\,;2]$ alors $0 \leq x^2 \leq 4$, donc $1 \leq f(x) \leq 2$ : $f(x) \in [0\,;2]$. Recurrence : $u_0 = 0 \in [0\,;2]$, et la stabilite propage l'encadrement.
+
+\textbf{Q4.} $f(x) - x = \dfrac{x^2}{4} + 1 - x = \dfrac{x^2 - 4x + 4}{4} = \dfrac{(x-2)^2}{4} \geq 0$. Donc $u_{n+1} - u_n \geq 0$ : la suite est croissante.
+
+\textbf{Q5.} $(u_n)$ est croissante et majoree par $2$, donc convergente. La fonction $f$ est polynomiale donc continue, et la limite verifie $f(\ell) = \ell$, d'ou $\ell = 2$ d'apres Q2.
+
+La convergence est nettement plus lente qu'a l'exercice \textsc{ex-041}. Comparons a exigence egale, en cherchant le rang a partir duquel l'ecart a la limite tombe sous $1\,\%$ de celle-ci : il faut $21$ iterations pour la suite de \textsc{ex-041}, contre $193$ ici. Apres $30$ iterations, cette suite n'a toujours pas depasse $1{,}9$, alors que l'autre est deja a moins de $0{,}13\,\%$ de son plateau.
+
+L'explication se lit dans Q4 : l'ecart $f(x) - x$ est proportionnel a $(x-2)^2$, et non a $(x-2)$. Quand $u_n$ approche de $2$, cet ecart devient tres petit \emph{au carre}, donc la progression d'une etape a l'autre s'effondre. Geometriquement, la courbe est tangente a la premiere bissectrice au point fixe, ce qui freine l'escalier au lieu de l'accelerer.
+\end{corrige}

@@ -1,0 +1,47 @@
+% META: {"id": "TSPE-CONTIN-CO-047", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-047", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% def seuil(precision):
+%     u, n = 0.0, 0
+%     while abs(u - 10) >= precision:
+%         u = 0.8*u + 2
+%         n += 1
+%     return n, u
+% n, u = seuil(1e-3)
+% assert n == 42
+% assert abs(u - 10) < 1e-3
+% # verification par la forme explicite
+% assert 10*0.8**41 >= 1e-3 > 10*0.8**42
+% assert abs((10 - 10*0.8**42) - u) < 1e-12
+% # la suite est croissante et majoree par 10 : 10 - u est toujours positif
+% v, termes = 0.0, []
+% for _ in range(42):
+%     v = 0.8*v + 2
+%     termes.append(v)
+% assert all(t < 10 for t in termes)
+% assert all(termes[i] < termes[i+1] for i in range(len(termes) - 1))
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-047}
+
+\textbf{Q1.} La fonction renvoie le plus petit entier $n$ pour lequel la distance entre $u_n$ et la limite $10$ devient strictement inferieure a la precision demandee. La boucle se termine parce que $(u_n)$ converge vers $10$ : la quantite $\left|u_n - 10\right|$ tend vers $0$, donc elle finit par passer sous n'importe quel seuil strictement positif.
+
+\textbf{Q2.} La valeur absolue exprime une \emph{distance a la limite}, sans presupposer de quel cote se trouve la suite : c'est la forme correcte dans le cas general. Ici, la suite est croissante et majoree par $10$, donc $u_n < 10$ et $\left|u_n - 10\right| = 10 - u_n$ : les deux ecritures donnent bien le meme resultat. Mais avec la suite alternee de l'exercice \textsc{ex-045}, la seconde ecriture produirait des valeurs negatives et le test serait faux une fois sur deux.
+
+\textbf{Q3.} $\left|u_n - 10\right| = 10 \times 0{,}8^{\,n}$. On cherche $10 \times 0{,}8^n < 10^{-3}$, soit $0{,}8^n < 10^{-4}$. En calculant : $10 \times 0{,}8^{41} \approx 1{,}12 \times 10^{-3}$, encore trop grand, et $10 \times 0{,}8^{42} \approx 9{,}0 \times 10^{-4} < 10^{-3}$. Le plus petit entier convenable est $n = \mathbf{42}$, ce qui confirme la sortie de l'algorithme.
+
+\textbf{Q4.} Il suffit de retourner le couple :
+\begin{center}
+\begin{minipage}{0.8\linewidth}
+\begin{verbatim}
+def seuil(precision):
+    u = 0
+    n = 0
+    while abs(u - 10) >= precision:
+        u = 0.8*u + 2
+        n = n + 1
+    return n, u
+\end{verbatim}
+\end{minipage}
+\end{center}
+
+\textbf{Q5.} Non. Si la suite ne convergeait pas vers $10$ — par exemple si elle convergeait vers une autre valeur, ou divergeait — la condition $\left|u_n - 10\right| < \text{precision}$ ne serait jamais satisfaite et la boucle tournerait indefiniment. Une boucle \verb|while| dont la condition d'arret repose sur une convergence non demontree constitue un risque de non-terminaison. C'est pourquoi l'etude mathematique de la limite doit \emph{preceder} l'ecriture de l'algorithme, et non l'inverse. En pratique, on ajoute souvent un compteur maximal de securite.
+\end{corrige}

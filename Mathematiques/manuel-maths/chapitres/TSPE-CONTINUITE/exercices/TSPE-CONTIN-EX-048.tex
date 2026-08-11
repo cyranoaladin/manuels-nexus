@@ -1,0 +1,23 @@
+% META: {"id": "TSPE-CONTIN-EX-048", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-048.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-048.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, fibonacci
+% x = symbols('x')
+% f = 1/(1 + x)
+% phi = (sqrt(5) - 1)/2
+% assert simplify(f.subs(x, phi) - phi) == 0
+% u = Rational(1)
+% t = [u]
+% for _ in range(6):
+%     u = simplify(f.subs(x, u)); t.append(u)
+% assert [float(v) for v in t][:4] == [1.0, 0.5, 2/3, 0.6]
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-048}{3}{20}
+Soit $(u_n)$ definie par $u_0 = 1$ et $u_{n+1} = \dfrac{1}{1 + u_n}$.
+\begin{enumerate}
+  \item Calculer $u_1$ a $u_6$ sous forme de fractions irreductibles. Reconnaitre les numerateurs et denominateurs obtenus.
+  \item Montrer que tous les termes appartiennent a $\left[\dfrac12\,;1\right]$.
+  \item Resoudre $f(x) = x$ sur $\left]0\,;+\infty\right[$, ou $f(x) = \dfrac{1}{1+x}$. On note $\varphi$ la solution.
+  \item Montrer que la suite n'est pas monotone, mais que les sous-suites $(u_{2n})$ et $(u_{2n+1})$ le sont, en precisant leur sens de variation.
+  \item Montrer que $\left|u_{n+1} - \varphi\right| \leq \dfrac{2}{3}\left|u_n - \varphi\right|$, puis conclure que $(u_n)$ converge vers $\varphi$.
+\end{enumerate}
+\end{exercice}

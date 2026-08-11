@@ -1,0 +1,28 @@
+% META: {"id": "TSPE-CONTIN-EX-043", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4", "M5"], "parcours": 2, "competences": ["modeliser", "calculer", "raisonner"], "duree_min": 18, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-043.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-043.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = (x + 3/x)/2
+% assert solveset(Eq(f, x), x, SS.Reals) == {-sqrt(3), sqrt(3)}
+% t = [float(v) for v in iterer(f, 2, 3)]
+% assert abs(t[1] - 1.75) < 1e-12
+% assert abs(t[2] - 1.7321429) < 1e-6
+% assert abs(t[3] - float(sqrt(3))) < 1e-7
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-043}{2}{18}
+On definit $(u_n)$ par $u_0 = 2$ et $u_{n+1} = \dfrac{1}{2}\left(u_n + \dfrac{3}{u_n}\right)$. Cette suite est l'\emph{algorithme de Heron} pour approcher $\sqrt3$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ a $10^{-7}$ pres. Comparer a $\sqrt3 \approx 1{,}7320508$.
+  \item Resoudre $f(x) = x$ sur $\left]0\,;+\infty\right[$, ou $f(x) = \dfrac{1}{2}\left(x + \dfrac{3}{x}\right)$.
+  \item Montrer que, pour tout $x > 0$, $f(x) - \sqrt3 = \dfrac{\left(x - \sqrt3\right)^2}{2x}$. En deduire que $u_n \geq \sqrt3$ pour tout $n \geq 1$.
+  \item Montrer que $f(x) - x = \dfrac{3 - x^2}{2x}$, puis que $(u_n)$ est decroissante a partir du rang $1$.
+  \item Conclure sur la convergence et la limite de $(u_n)$.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,61 @@
+% META: {"id": "TSPE-CONTIN-CO-049", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-049", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, fibonacci
+% x = symbols('x')
+% from sympy import symbols, sqrt, simplify, Rational, N
+% x = symbols('x')
+% a = 3
+% f = (x + a/x)/2
+% assert simplify(f - sqrt(a) - (x - sqrt(a))**2/(2*x)) == 0
+% # ecarts successifs a partir de u0 = 2, en haute precision
+% racine = N(sqrt(3), 60)
+% u = Rational(2)
+% ecarts = []
+% for _ in range(4):
+%     u = simplify((u + Rational(a)/u)/2)
+%     ecarts.append(abs(N(u, 60) - racine))
+% assert abs(float(ecarts[0]) - 0.0179491924) < 1e-9
+% assert abs(float(ecarts[1]) - 9.2047e-5) < 1e-8
+% assert float(ecarts[2]) < 2.5e-9
+% assert float(ecarts[3]) < 2e-18
+% # doublement du nombre de decimales exactes
+% import math
+% decimales = [-math.log10(float(e)) for e in ecarts]
+% assert decimales[1] > 2*decimales[0] - 1
+% assert decimales[2] > 2*decimales[1] - 1
+% assert decimales[3] > 2*decimales[2] - 1
+% # la majoration en carre : constante 1/(2 sqrt(3))
+% k = float(1/(2*sqrt(3)))
+% assert abs(k - 0.2886751) < 1e-6
+% for i in range(3):
+%     assert float(ecarts[i+1]) <= k*float(ecarts[i])**2 + 1e-30
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-049}
+
+\textbf{Q1.} Pour $x > 0$ :
+\[ \frac{1}{2}\left(x + \frac{a}{x}\right) - \sqrt a = \frac{x^2 + a - 2\sqrt a\,x}{2x} = \frac{\left(x - \sqrt a\right)^2}{2x}. \]
+
+\textbf{Q2.} Si $u_n > 0$, alors $u_{n+1} = \dfrac{1}{2}\left(u_n + \dfrac{a}{u_n}\right) > 0$ : tous les termes sont strictement positifs. D'apres Q1, $u_{n+1} - \sqrt a = \dfrac{\left(u_n - \sqrt a\right)^2}{2u_n}$, quotient d'un carre par un reel strictement positif, donc positif ou nul. Ainsi $u_{n+1} \geq \sqrt a$ pour tout $n \geq 0$, c'est-a-dire $u_n \geq \sqrt a$ des le rang $1$, quel que soit le point de depart strictement positif.
+
+\textbf{Q3.} Pour $n \geq 1$, on a $u_n \geq \sqrt a$, donc $2u_n \geq 2\sqrt a$ et
+\[ \left|u_{n+1} - \sqrt a\right| = \frac{\left(u_n - \sqrt a\right)^2}{2u_n} \leq \frac{\left(u_n - \sqrt a\right)^2}{2\sqrt a} = \frac{1}{2\sqrt a}\left|u_n - \sqrt a\right|^2. \]
+
+\textbf{Q4.} Avec $a = 3$ et $u_0 = 2$ :
+\begin{center}
+\begin{tabular}{lll}
+\hline
+$n$ & $u_n$ & $\left|u_n - \sqrt3\right|$ \\
+\hline
+$1$ & $1{,}75$ & $\approx 1{,}79 \times 10^{-2}$ \\
+$2$ & $1{,}732142857\dots$ & $\approx 9{,}20 \times 10^{-5}$ \\
+$3$ & $1{,}732050810\dots$ & $\approx 2{,}44 \times 10^{-9}$ \\
+$4$ & $1{,}732050807568877\dots$ & $\approx 1{,}72 \times 10^{-18}$ \\
+\hline
+\end{tabular}
+\end{center}
+Le nombre de decimales exactes passe d'environ $2$ a $4$, puis $8$, puis $17$ : il \textbf{double} a chaque etape.
+
+\textbf{Q5.} A l'exercice \textsc{ex-046}, l'ecart etait multiplie par la constante $\dfrac{1}{2\sqrt2} \approx 0{,}354$ : il decroit alors comme une suite geometrique, et l'on gagne un nombre \emph{fixe} de decimales par etape (ici environ une demi-decimale). Il fallait $14$ iterations pour atteindre $10^{-6}$.
+
+Ici, l'ecart est majore par une constante fois le \emph{carre} de l'ecart precedent. Des que l'on est un peu proche de la limite, chaque etape double le nombre de decimales exactes : la precision $10^{-6}$ est atteinte des la troisieme iteration. C'est ce qu'on appelle une convergence \emph{quadratique}, et c'est la raison pour laquelle l'algorithme de Heron reste utilise pour le calcul effectif des racines carrees.
+\end{corrige}

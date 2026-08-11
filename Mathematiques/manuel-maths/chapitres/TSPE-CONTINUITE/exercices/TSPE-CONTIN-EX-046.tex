@@ -1,0 +1,27 @@
+% META: {"id": "TSPE-CONTIN-EX-046", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 2, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-046.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-046.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve, Abs
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = simplify(f.subs(x, u))
+%         out.append(u)
+%     return out
+% f = sqrt(x + 2)
+% assert solveset(Eq(f, x), x, SS.Reals) == {2}
+% assert simplify(diff(f, x) - 1/(2*sqrt(x + 2))) == 0
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-046}{2}{15}
+On considere de nouveau $f(x) = \sqrt{x+2}$ sur $[0\,;3]$ et une suite $(u_n)$ verifiant $u_{n+1} = f(u_n)$.
+
+\begin{enumerate}
+  \item Calculer $f'(x)$ et montrer que, pour tout $x \in [0\,;3]$, $0 < f'(x) \leq \dfrac{1}{2\sqrt2}$.
+  \item En admettant l'inegalite des accroissements finis, justifier que pour tous $a, b$ de $[0\,;3]$ :
+  \[ \left|f(b) - f(a)\right| \leq \frac{1}{2\sqrt2}\,\left|b - a\right|. \]
+  \item En prenant $a = 2$ (point fixe) et $b = u_n$, montrer que $\left|u_{n+1} - 2\right| \leq \dfrac{1}{2\sqrt2}\left|u_n - 2\right|$.
+  \item En deduire que $\left|u_n - 2\right| \leq \left(\dfrac{1}{2\sqrt2}\right)^{n}\left|u_0 - 2\right|$, puis que $(u_n)$ converge vers $2$ quel que soit $u_0 \in [0\,;3]$.
+  \item Combien d'iterations suffisent pour garantir $\left|u_n - 2\right| < 10^{-6}$ en partant de $u_0 = 0$ ?
+\end{enumerate}
+\end{exercice}
