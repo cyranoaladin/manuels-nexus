@@ -138,3 +138,35 @@ commit epingle `52bcfdea`.
 
 Point ouvert : ce depot est **public** alors que `manuels-nexus` est passe en
 prive le meme jour.
+
+## Consolidation finale — 2026-08-11
+
+**Le corpus NSI est desormais dans le depot.** Importe par `git subtree` sous
+`NSI/corpus_nsi/`, c'est-a-dire exactement le chemin que les metadonnees du
+chapitre pilote `1NSI-TYPES-CONSTRUITS` referencaient depuis l'origine. Les 10
+cibles `sources_inspiration` se resolvent maintenant en local, sans acces
+reseau : l'anomalie `unavailable_inspiration_sources` (15 references) est
+fermee a la source.
+
+1 235 fichiers, importes en un commit unique (`--squash`) pour ne pas gonfler
+l'historique, la provenance restant tracee dans le message de fusion et dans
+`NSI/sources/SOURCES.md`.
+
+Le depot `github.com/cyranoaladin/NSI` reste en place comme amont du corpus.
+Toute evolution ulterieure se reporte par `git subtree pull`.
+
+**Une seule branche porte tout.** `main` a ete avance par fast-forward sur
+`production/collection-v2` : elle contient desormais la production du chapitre
+TSPE-CONTINUITE, les correctifs de conformite programme, la reparation de la
+suite de tests et le corpus. Local et distant sont identiques.
+
+**Visibilite des depots.** Dix depots prives sont passes en public le
+2026-08-11, dont `manuels-nexus`. Deux restent prives sur decision explicite :
+
+| Depot | Motif |
+|---|---|
+| `Interface_NSI` | listes nominatives d'eleves (nom, prenom, adresse mail scolaire, classe) dans cinq fichiers CSV |
+| `qcm-eds-maths-terminale-amc` | bases AMC `capture.sqlite`, `scoring.sqlite`, `report.sqlite` : copies scannees et notes individuelles |
+
+Ces deux depots pourront etre publies apres purge des donnees personnelles, y
+compris dans l'historique git.
