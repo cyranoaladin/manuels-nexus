@@ -1,0 +1,50 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-LANGAGE-RE-C4-MINIMUM-OPTIMISATION
+source_commit_sha: ae102dbbb2ba4f7ed2ed9fe9c4cf142df7646b60
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:e23a7a0ec43e217daf2a745b9e6efdb0bd8e710bcad9740b9525a5604f63c9dd
+  - path: NSI/chapitres/1NSI-LANGAGE/code/minimum.py
+    sha256: sha256:8fdea6e8a7ba2eba7f233bf05893a282982b5a0c8f4b4d3dca034306d674011c
+  - path: NSI/chapitres/1NSI-LANGAGE/corriges/1NSI-LANGAGE-RE-C4-CORRIGE.tex
+    sha256: sha256:4b92203d08d35185f89e6c30bef0b224a420d392a4c63c582969934625a0836f
+  - path: NSI/chapitres/1NSI-LANGAGE/remediation/1NSI-LANGAGE-RE-C4.tex
+    sha256: sha256:4336415a1267d05b9ac84b5a14e7ffefa707174eb640bab8322f3f18b439da72
+reviewer_id: 019fee68-66cf-71e3-b56d-c3035a3740d7
+reviewer_model: GPT-5 Codex
+review_run_id: 1nsi-p0-langage-c4-minimum-optimization-postcommit-2026-08-11-019fee68-v3
+session_id: 019fee68-66cf-71e3-b56d-c3035a3740d7
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q NSI/tests/test_1nsi_scientific_p0_regressions.py::test_minimum_canonical_source_rejects_empty_list_and_matches_correction NSI/tests/test_1nsi_scientific_p0_regressions.py::test_minimum_remediation_states_nonempty_precondition_and_matches_answer
+    cwd: .
+    exit_code: 0
+    stdout: |
+      ..                                                                       [100%]
+      2 passed in 1.14s
+    stderr: ""
+    stdout_sha256: sha256:208e499dc20a394b0939005f44d2c4bd411991470ed5e8126a410c059a73e91e
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La liste vide est refusee par ValueError en modes normal et optimise sans fuite eleve.
+  - command: python -m ruff check NSI/chapitres/1NSI-LANGAGE/code/minimum.py NSI/tests/test_1nsi_scientific_p0_regressions.py
+    cwd: .
+    exit_code: 0
+    stdout: |
+      All checks passed!
+    stderr: ""
+    stdout_sha256: sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique et ses regressions respectent les controles statiques.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte.
+verdict: approved
+reviewed_at: "2026-08-11T02:24:54+01:00"
