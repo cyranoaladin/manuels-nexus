@@ -161,27 +161,26 @@ SIX_P0_ATTESTATION_PATHS = {
 PRE_SIX_P0_POLICY_COMMIT = "563680078cb336766c2f892a8fc72539eea90fbe"
 PRE_SIX_P0_RECEIPTS_COMMIT = "e32d4cf6de9bac9b722eb1b4f6ec94968c1d2e8d"
 PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
-POLICY_COMMIT = "563680078cb336766c2f892a8fc72539eea90fbe"
-RECEIPT_REATTESTATION_COMMIT = "f7fd13dbbecedf4711473f2e3e7026f03c4c7853"
-RECEIPTS_COMMIT = "e32d4cf6de9bac9b722eb1b4f6ec94968c1d2e8d"
+POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
+RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
 CURRENT_RECEIPT_SEALS = {
     "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": (
-        "sha256:942e3367a893a7a2b020c08bd90d98f45c57642921fd68fb8c22fe4fedeb3cbc"
+        "sha256:e924d464142fbe1b3f7e05454a9a05978cfea7af022802a32913e0b6a27d8bea"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": (
-        "sha256:caac7143d36d16f65fd96f222786d6c333e0aa80a6c56c3fb6b62543758d3eb7"
+        "sha256:27918b6e7df21c6c49b23bd1b53425971b385f00d796e739bc0d4fce5c497474"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": (
-        "sha256:fc87e530141d2c91b76f09820a580aa076bc7ab4843e428fc385c141124a8a69"
+        "sha256:aaade78faf9a89b9a39cc84a525bdd99525c9be3ded01663d4175427865e0d27"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": (
-        "sha256:b0e00f119b531aa56b41d967396fccdb7309146f26162a04189b1f4da0e6daff"
+        "sha256:7e48bb58ed2328f19a62e3cabac6d6e774783743b3f50af9437be7ab8c2ed404"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": (
-        "sha256:8b693bf117db367bdc980c78d70cf3d6c9c725b59f592cd0216960cc27b93a4c"
+        "sha256:8b80cadddfe3e9488302d302b693ae1d2f4c17ab7e986538966890e60d43210d"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": (
-        "sha256:3e507d48a99cd95cc83145cdbb3c4d332e47fd81b245286b50d8e7e3f6d70632"
+        "sha256:c3f74a2c9420dc335806f086033ecd58f54f53dc46963a3586ee689eb5affc69"
     ),
 }
 PRE_TEN_P0_RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
@@ -1478,10 +1477,7 @@ def test_sealed_current_governance_receipts_cover_all_349_reviews(
     assert set(CURRENT_RECEIPT_SEALS) == REVIEW_RUNS
     assert _git(
         ROOT, "rev-list", "--parents", "-n", "1", RECEIPTS_COMMIT
-    ).split() == [RECEIPTS_COMMIT, RECEIPT_REATTESTATION_COMMIT]
-    assert _git(
-        ROOT, "rev-list", "--parents", "-n", "1", RECEIPT_REATTESTATION_COMMIT
-    ).split() == [RECEIPT_REATTESTATION_COMMIT, POLICY_COMMIT]
+    ).split() == [RECEIPTS_COMMIT, POLICY_COMMIT]
 
     covered_ids = []
     for relative_path, expected_digest in sorted(CURRENT_RECEIPT_SEALS.items()):
@@ -1497,7 +1493,7 @@ def test_sealed_current_governance_receipts_cover_all_349_reviews(
         } == {
             "reviewer_id": config["reviewer_id"],
             "review_run_id": config["review_run_id"],
-            "reviewer_model": "codex-gpt5",
+            "reviewer_model": GOVERNANCE_REVIEWER_MODEL,
         }
         assert [review["id"] for review in receipt["reviews"]] == receipt[
             "assignment"
@@ -3550,7 +3546,7 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
     expected_provenance = {
         "reviewer_id": config["reviewer_id"],
         "review_run_id": config["review_run_id"],
-        "reviewer_model": "codex-gpt5",
+        "reviewer_model": GOVERNANCE_REVIEWER_MODEL,
         "integrator_id": policy["integrator_id"],
         "review_receipt_path": receipt_relative,
         "review_receipt_sha256": receipt_digest,
@@ -3575,9 +3571,9 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
         finding["dimensions"]["pedagogical"]["verdict"] for finding in validated
     )
     anomalies = [anomaly for finding in validated for anomaly in finding["anomalies"]]
-    assert scientific == Counter({"issue": 6, "pass": 4})
+    assert scientific == Counter({"issue": 7, "pass": 3})
     assert pedagogical == Counter({"pass": 6, "issue": 4})
-    assert len(anomalies) == len({anomaly["id"] for anomaly in anomalies}) == 16
+    assert len(anomalies) == len({anomaly["id"] for anomaly in anomalies}) == 20
     assert {
         "1NSI-REV-PM-C3-SOURCE",
         "1NSI-REV-TABLES-R2-ORIGINE",
@@ -3585,7 +3581,7 @@ def test_contract_findings_are_exactly_the_ten_sealed_contract_reviews(
         "1NSI-REV-TC-ITERATION-TABLEAU",
     } <= {anomaly["id"] for anomaly in anomalies}
     assert Counter(anomaly["severity"] for anomaly in anomalies) == Counter(
-        {"P0": 3, "P1": 12, "P2": 1}
+        {"P0": 3, "P1": 14, "P2": 3}
     )
 
 
@@ -3715,8 +3711,8 @@ def test_algorithm_review_receipt_matches_current_sources_before_sealing(
         "le review_run_id de gouvernance doit etre nouveau",
     )
     require(
-        receipt["reviewer_model"] == "codex-gpt5",
-        "reviewer_model attendu: codex-gpt5",
+        receipt["reviewer_model"] == GOVERNANCE_REVIEWER_MODEL,
+        f"reviewer_model attendu: {GOVERNANCE_REVIEWER_MODEL}",
     )
     require(
         receipt["assignment"] == expected_assignment,
@@ -3851,7 +3847,7 @@ def test_algorithm_review_receipt_matches_current_sources_before_sealing(
 def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
     policy, review_module
 ) -> None:
-    resolved_ids = {
+    resolved_ids = SIX_RESOLVED_P0_IDS | {
         "1NSI-REV-ADGK-C2-DOCSTRING-OPTIMALITE",
         "1NSI-REV-AGT-C2-BORNE-TERMINAISON",
         "1NSI-REV-AGT-QCM-Q2-AMBIGU",
@@ -3874,17 +3870,17 @@ def test_algorithm_review_resolved_anomalies_are_absent_from_canonical_outputs(
     register_anomalies = [
         anomaly for entry in document["entries"] for anomaly in entry["anomalies"]
     ]
-    assert len(register_anomalies) == 267
+    assert len(register_anomalies) == 279
     assert Counter(anomaly["severity"] for anomaly in register_anomalies) == Counter(
-        {"P0": 144, "P1": 118, "P2": 5}
+        {"P0": 140, "P1": 132, "P2": 7}
     )
 
     assert len(findings) == len(document["entries"]) == 349
     assert "Entries: 349" in summary_text
-    assert "- Total: 267" in summary_text
-    assert "- P0: 144" in summary_text
-    assert "- P1: 118" in summary_text
-    assert "- P2: 5" in summary_text
+    assert "- Total: 279" in summary_text
+    assert "- P0: 140" in summary_text
+    assert "- P1: 132" in summary_text
+    assert "- P2: 7" in summary_text
     assert review_module.release_gate_allows(document, policy) is False
 
 
