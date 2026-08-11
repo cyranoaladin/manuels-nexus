@@ -73,7 +73,8 @@ PRE_OPTIMIZATION_BASE_SHA = "ef28edb826a3389150a8d88bd6eb017ddc83251a"
 PRE_PRECONDITION_BASE_SHA = "ef8d1db888807370f46693547139df9e7512c811"
 PRE_EXECUTION_RECEIPT_BASE_SHA = "d1defc745c605fe80d8b4cdbb3eaceaed1d2fae0"
 PRE_LANGUAGE_RECEIPT_BASE_SHA = "98bcf780e0a788603ffed0a4ad3c123de1858f77"
-BASE_SHA = "4239262b3f436cc76f4cd9936eedcbf389c31425"
+PRE_COPY_RECEIPT_BASE_SHA = "4239262b3f436cc76f4cd9936eedcbf389c31425"
+BASE_SHA = "775bfc90cbd26a4aac8494bfbf3757703442ab45"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
@@ -103,6 +104,10 @@ LANGUAGE_RECEIPT_PROTOCOL_DIGEST = (
     "sha256:e707d598cfeca9cb5a054d5d9617233c30d8a89c3a0ab912191cbb18715e036d"
 )
 PRE_LANGUAGE_RECEIPT_POLICY_COMMIT = "08244ef71a0a947e634e4eeb2320f9d2792c68f0"
+COPY_RECEIPT_PROTOCOL_DIGEST = (
+    "sha256:b6fb227985632e64b9c9d5af0bc1492ece1e411b1c1b25339bf0c35361a518ff"
+)
+PRE_COPY_RECEIPT_POLICY_COMMIT = "9a60daf4850e6bdbe7bd25c6e082da7310633514"
 POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
 CURRENT_RECEIPT_SEALS = {
@@ -976,13 +981,30 @@ def test_table_execution_receipt_policy_remains_historically_sealed() -> None:
     )
 
 
-def test_language_receipt_policy_migration_invalidates_exactly_six_receipts(
+def test_language_execution_receipt_policy_remains_historically_sealed() -> None:
+    historical_policy = yaml.safe_load(
+        _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_COPY_RECEIPT_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+        ).decode("utf-8")
+    )
+    assert historical_policy["scope_guard"]["implementation_base_sha"] == (
+        PRE_COPY_RECEIPT_BASE_SHA
+    )
+    assert historical_policy["protocol_digest"] == LANGUAGE_RECEIPT_PROTOCOL_DIGEST
+    assert _git(ROOT, "rev-parse", f"{PRE_COPY_RECEIPT_POLICY_COMMIT}^") == (
+        PRE_COPY_RECEIPT_BASE_SHA
+    )
+
+
+def test_copy_receipt_policy_migration_invalidates_exactly_six_receipts(
     policy, sources, review_module
 ) -> None:
     assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
-    assert policy["protocol_digest"] == LANGUAGE_RECEIPT_PROTOCOL_DIGEST
+    assert policy["protocol_digest"] == COPY_RECEIPT_PROTOCOL_DIGEST
     assert review_module.compute_protocol_digest(ROOT, policy) == (
-        LANGUAGE_RECEIPT_PROTOCOL_DIGEST
+        COPY_RECEIPT_PROTOCOL_DIGEST
     )
 
     sources_by_id = {source["id"]: source for source in sources}
