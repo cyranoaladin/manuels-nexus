@@ -1,4 +1,11 @@
-"""Build the seven canonical variants of the 1NSI manual."""
+"""Assemble les variantes canoniques des manuels NSI (1NSI et TNSI).
+
+Le livre courant est selectionne par `select_book`. Par defaut 1NSI, afin que
+tout appel existant conserve son comportement. Le manifeste
+`manifests/books/<BOOK_ID>.json` fait foi pour la liste et l'ordre des
+chapitres : c'est la meme chaine pour les deux niveaux, pas une architecture
+paralelle.
+"""
 
 from __future__ import annotations
 
@@ -22,19 +29,38 @@ from common import ROOT as PROJECT_ROOT
 
 ROOT = PROJECT_ROOT
 REPOSITORY_ROOT = ROOT.parent
+LIVRES_CONNUS = ("1NSI", "TNSI")
+
 BOOK_ID = "1NSI"
-CHAPITRES = [
-    "1NSI-TYPES-BASE",
-    "1NSI-TYPES-CONSTRUITS",
-    "1NSI-TABLES",
-    "1NSI-LANGAGE",
-    "1NSI-ALGO-PARCOURS-TRIS",
-    "1NSI-ALGO-DICHO-GLOUTON-KNN",
-    "1NSI-WEB-IHM",
-    "1NSI-ARCHITECTURE-OS",
-    "1NSI-RESEAUX",
-    "1NSI-PROJET-METHODES",
-]
+CHAPITRES: list[str] = []
+
+
+def _chapitres_du_manifeste(book_id: str) -> list[str]:
+    manifeste = legacy.load_book_manifest(book_id)
+    return [entree["id"] for entree in manifeste["chapters"]]
+
+
+def select_book(book_id: str) -> None:
+    """Bascule le module sur un autre livre NSI.
+
+    La liste des chapitres est lue depuis le manifeste : elle n'est jamais
+    dupliquee dans le code, ce qui evite qu'un livre derive de son manifeste.
+    """
+    if book_id not in LIVRES_CONNUS:
+        raise ValueError(
+            f"Livre inconnu : {book_id}. Livres disponibles : {', '.join(LIVRES_CONNUS)}."
+        )
+    global BOOK_ID, CHAPITRES
+    BOOK_ID = book_id
+    CHAPITRES = _chapitres_du_manifeste(book_id)
+
+
+def build_dir_name() -> str:
+    return f"MANUEL_{BOOK_ID}"
+
+
+def output_stem(variant: str) -> str:
+    return f"MANUEL_{BOOK_ID}_{variant}"
 ORDER = [
     ("cours", "00_ouverture"),
     ("cours", "01_diagnostic"),
@@ -313,7 +339,7 @@ def _load_manifest() -> dict[str, object]:
     manifest = legacy.load_book_manifest(BOOK_ID)
     declared_chapters = [entry["id"] for entry in manifest["chapters"]]
     if declared_chapters != CHAPITRES:
-        raise ValueError("Le manifeste 1NSI diverge du contrat CHAPITRES.")
+        raise ValueError(f"Le manifeste {BOOK_ID} diverge du contrat CHAPITRES.")
     return manifest
 
 
@@ -334,7 +360,7 @@ def _manual_context(variant: str) -> ManualContext:
         files_by_chapter={
             chapter: tuple(files) for chapter, files in files_by_chapter.items()
         },
-        output_stem=f"MANUEL_1NSI_{variant}",
+        output_stem=output_stem(variant),
     )
 
 
@@ -448,9 +474,9 @@ def render_manual_master(variant: str) -> str:
 def canonical_output_path(variant: str) -> Path:
     _validate_variant(variant)
     build_dir = legacy._resolve_under(
-        ROOT, "build/MANUEL_1NSI", "Le repertoire de sortie"
+        ROOT, f"build/{build_dir_name()}", "Le repertoire de sortie"
     )
-    return legacy._book_output_path(build_dir, f"MANUEL_1NSI_{variant}.pdf")
+    return legacy._book_output_path(build_dir, f"{output_stem(variant)}.pdf")
 
 
 def _fsync_directory(directory: Path) -> None:
@@ -989,7 +1015,7 @@ def build_manual(
     _validate_variant(variant)
     context = _manual_context(variant)
     build_dir = legacy._resolve_under(
-        ROOT, "build/MANUEL_1NSI", "Le repertoire de sortie"
+        ROOT, f"build/{build_dir_name()}", "Le repertoire de sortie"
     )
     build_dir.mkdir(parents=True, exist_ok=True)
     canonical_pdf = legacy._book_output_path(
@@ -1005,12 +1031,23 @@ def build_manual(
     )
 
 
+# Le module demarre sur 1NSI : tout appel existant garde son comportement.
+select_book(BOOK_ID)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--variant", default="eleve")
+    parser.add_argument(
+        "--book",
+        default="1NSI",
+        choices=LIVRES_CONNUS,
+        help="livre a assembler (defaut 1NSI)",
+    )
     parser.add_argument("--record-observed", action="store_true")
     parser.add_argument("--staging-only", action="store_true")
     arguments = parser.parse_args(argv)
+    select_book(arguments.book)
     if arguments.record_observed and arguments.staging_only:
         parser.error("--staging-only et --record-observed sont incompatibles")
     if arguments.staging_only:
