@@ -5,7 +5,7 @@ decision:
   id: 1nsi-349-reattestation-retain-counterreviewed-anomalies-2026-08-11
   human_instruction: migrer la gouvernance, reattester les 349 revues, resynchroniser les findings puis traiter separement BUILD_MANIFEST
   supersedes_plan_invariant: new_anomaly_ids - old_anomaly_ids == set()
-  operational_effect: conserver les anomalies nouvelles contre-revues et poursuivre la reattestation sans les approuver
+  operational_effect: conserver les anomalies nouvelles contre-revues sans les approuver et exiger une observation propre a chaque objet avant rescellement
   retained_new_anomaly_ids:
   - 1NSI-REV-ADGK-C2-FLOTTANTS-RENDU
   - 1NSI-REV-AGT-EVAL-A-ECRITURE-PARCOURS

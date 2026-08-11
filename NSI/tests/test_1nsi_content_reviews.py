@@ -131,7 +131,7 @@ ACTOR_PROVENANCE_PROTOCOL_DIGEST = (
     "sha256:40cb76f9b329a7f38b5e3d6580146c0578439f4a004a2c2c1c6e66f9f076b064"
 )
 COUNTER_REVIEW_PROTOCOL_DIGEST = (
-    "sha256:35179b985a29b1e0f80a73be597c00e2a53fa1d42b5a51a8b88ca60d2f2e5fa7"
+    "sha256:8127337d665962e008eb129348ddb29f59df1e666503d73929bdb644ddf30f28"
 )
 GOVERNANCE_REVIEWER_MODEL = "gpt-5.6-sol"
 SIX_RESOLVED_P0_IDS = {
@@ -833,8 +833,8 @@ def test_actor_provenance_seals_the_human_process_decision_and_forbidden_roles(
         "new_anomaly_ids - old_anomaly_ids == set()"
     )
     assert decision["operational_effect"] == (
-        "conserver les anomalies nouvelles contre-revues et poursuivre la "
-        "reattestation sans les approuver"
+        "conserver les anomalies nouvelles contre-revues sans les approuver et "
+        "exiger une observation propre a chaque objet avant rescellement"
     )
     assert decision["retained_new_anomaly_ids"]
     assert len(decision["retained_new_anomaly_ids"]) == len(
