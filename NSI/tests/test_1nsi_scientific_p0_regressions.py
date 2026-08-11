@@ -49,6 +49,12 @@ ARCHITECTURE_COURSE = (
     NSI_ROOT
     / "chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex"
 )
+THERMOSTAT_COURSE = (
+    NSI_ROOT / "chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex"
+)
+THERMOSTAT_SOURCE = (
+    NSI_ROOT / "chapitres/1NSI-RESEAUX/code/thermostat_ihm.py"
+)
 GRID_COPY_COURSE = (
     NSI_ROOT
     / "chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex"
@@ -119,6 +125,68 @@ def test_von_neumann_diagram_uses_one_bidirectional_bus() -> None:
             diagram,
         )
     assert r"\draw[fleche]" not in diagram
+
+
+def test_thermostat_exposes_tested_user_controls_and_state() -> None:
+    assert THERMOSTAT_COURSE.is_file()
+    assert THERMOSTAT_SOURCE.is_file()
+
+    stdout = io.StringIO()
+    with contextlib.redirect_stdout(stdout):
+        namespace = runpy.run_path(str(THERMOSTAT_SOURCE))
+    assert stdout.getvalue() == ""
+
+    interface_thermostat = namespace["interface_thermostat"]
+    lancer_ihm = namespace["lancer_ihm"]
+    assert interface_thermostat("ON", 25) == (
+        "temperature=25 C | mode=ON manuel | chauffage=ON"
+    )
+    assert interface_thermostat("OFF", 15) == (
+        "temperature=15 C | mode=OFF manuel | chauffage=OFF"
+    )
+    assert interface_thermostat("AUTO", 15) == (
+        "temperature=15 C | mode=AUTO | chauffage=ON"
+    )
+
+    affichages: list[str] = []
+    lancer_ihm(22, lire=lambda _: "ON", ecrire=affichages.append)
+    assert affichages == [
+        "Commandes : AUTO | ON | OFF",
+        "temperature=22 C | mode=ON manuel | chauffage=ON",
+    ]
+
+    with pytest.raises(ValueError) as error:
+        interface_thermostat("CHAUD", 20)
+    assert str(error.value) == "commande attendue : AUTO, ON ou OFF"
+
+    source_code = THERMOSTAT_SOURCE.read_text(encoding="utf-8")
+    assert source_code.isascii()
+    assert "def traiter_evenement(" in source_code
+    assert "def afficher_etat(" in source_code
+    assert "def lancer_ihm(" in source_code
+
+    tex = THERMOSTAT_COURSE.read_text(encoding="utf-8")
+    sequence = re.compile(
+        r"(?m)^% PYTHON-SOURCE: code/thermostat_ihm\.py\n"
+        r"\\begin\{python\}(?P<python>.*?)\\end\{python\}",
+        re.DOTALL,
+    )
+    matches = list(sequence.finditer(tex))
+    assert len(matches) == 1, "la source canonique de l'IHM doit etre unique"
+    assert matches[0].group("python") == f"\n{source_code}"
+
+    verify_matches = list(
+        re.finditer(
+            r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY", tex, re.DOTALL
+        )
+    )
+    assert len(verify_matches) == 1
+    verify_code = _uncomment(verify_matches[0].group("verify"))
+    assert verify_code.count(source_code.rstrip("\n")) == 1
+    assert 'assert interface_thermostat("ON", 25)' in verify_code
+    assert 'assert interface_thermostat("OFF", 15)' in verify_code
+    assert 'assert interface_thermostat("AUTO", 15)' in verify_code
+    assert "except ValueError as erreur:" in verify_code
 
 
 def _marked_maximum_sequence(tex: str) -> re.Match[str]:
