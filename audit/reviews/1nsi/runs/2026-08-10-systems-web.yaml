@@ -1,11 +1,11 @@
 artifact_type: 1nsi_review_run
 schema_version: 1
 manual: 1NSI
-review_run_id: 1nsi-objects-systems-web-2026-08-11-counter-review-9a634c32-df8b-4f1f-857a-7a4c8a50a2c9-v2
+review_run_id: 1nsi-objects-systems-web-2026-08-11-clean-observations-816f2911-a26c-4faf-9adc-37194116286e-v3
 reviewer_id: 019ff06c-14b7-70c0-8106-cb6a133181d0
 reviewer_model: gpt-5.6-sol
-protocol_digest: sha256:35179b985a29b1e0f80a73be597c00e2a53fa1d42b5a51a8b88ca60d2f2e5fa7
-reviewed_at: '2026-08-11T12:13:04+01:00'
+protocol_digest: sha256:8127337d665962e008eb129348ddb29f59df1e666503d73929bdb644ddf30f28
+reviewed_at: '2026-08-11T12:37:00+01:00'
 assignment:
   scope: object
   chapters:
@@ -81,243 +81,243 @@ source_manifest:
   - id: 1NSI-ARCHITECTURE-OS-QCM
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/qcm/1NSI-ARCHITECTURE-OS-QCM.tex
     source_sha256: sha256:cf900c928e67cd67b499a98a0512b3818224bbad7b303bc6e6eab64faba67f1e
-    dependency_digest: sha256:7d16dfe065a339642b96d2cc30a406be0bd9b2de55414e9ab0931e7746b610e7
+    dependency_digest: sha256:0ece1500eaa52988db3dd585a340421b431a4884a7f6e812951abca6404c0813
   - id: 1NSI-ARCHITECTURE-OS-RE-C5
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/remediation/1NSI-ARCHITECTURE-OS-RE-C5.tex
     source_sha256: sha256:3da27d42ed1e4c13910f2aefee607cac572e8f7dec185584d4ca315f1e861482
-    dependency_digest: sha256:5e3e8f30203ecab2df5293a38f0d6f83acd55394fe967e13f2d4dd886069b80d
+    dependency_digest: sha256:0573765ef2604a67162c8316ee60d0fb2ad000f26bc0299a4b6ae4af635828a5
   - id: 1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHITECTURE-OS-RE-C5-CORRIGE.tex
     source_sha256: sha256:525f695c63069f0ffc7814c13d7c9d510a1e6c2279e14b847e4492e0008a532e
-    dependency_digest: sha256:b4548930f1320a924e8e6bc80bf815ac3720a3eafba9a4300237a7a61407038b
+    dependency_digest: sha256:b82c5924ef339eec793e9a6a847d0dc04b672e825fd9d0d4d79953302763424b
   - id: 1NSI-ARCHOS-CO-001
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-001.tex
     source_sha256: sha256:b46fe5e5d77e6fa7ae6be35507d3e220eaa5f17a954938f129f53365e2e0fd39
-    dependency_digest: sha256:a4e7a1a90b42bab0fb6ed03d1bc0e9c9ba1ee0bea670f10ea38194742c131c59
+    dependency_digest: sha256:28d2483592b6daae9d0fb4daadbc38518f75fb0e0c388760eac58f3255a15628
   - id: 1NSI-ARCHOS-CO-002
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-002.tex
     source_sha256: sha256:149a5e9f44ecf2148c7dea53bd0168461d13a3d7dd16790569c8c69086373bf8
-    dependency_digest: sha256:857b5c4489340ffe6bdee8d86a16d829ffb16a94d9684e575d8875f62dccd46b
+    dependency_digest: sha256:71cdfdfda611539f3c09998075650eab036b317d7267bfdd81a1d0380f7d4023
   - id: 1NSI-ARCHOS-CO-003
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-003.tex
     source_sha256: sha256:5d73eca68da810d9a4a39d4cbd572e0aaaf76c6abeaf62f13fbb255a1ad43db7
-    dependency_digest: sha256:a03ee0453a10ece1f64e06740af571e35107d7bb4a2683b3861c0341a2923a97
+    dependency_digest: sha256:cc4fa18e4668122d1377d7c6101108413aa4d29493055ad6ee5a1bd514ef167f
   - id: 1NSI-ARCHOS-CO-004
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-004.tex
     source_sha256: sha256:8cfb585f83bc6f58463ce9ba125eab8ae20de5ab0c14abc4218ec4ce719843e2
-    dependency_digest: sha256:5e3715c6c389e1c9d7ba9ad8209fc9a4624f4f7ba5c1e929aa35c322982fd976
+    dependency_digest: sha256:b459b2685e956fadbd140e1691ba4ab37c25197878b53fbfdcfa37ab9206e374
   - id: 1NSI-ARCHOS-CO-005
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/corriges/1NSI-ARCHOS-CO-005.tex
     source_sha256: sha256:12fdf3da6cb39a2ee41e4a29c41c6a0b9dfc154d6f4291669b2a23455137d3b5
-    dependency_digest: sha256:7085356a752209f254ffd4c081e789af698f76ac7aeea26f562b2de46718bf6b
+    dependency_digest: sha256:2461d3a8e338d179351970c289af74198c54d3f92afd35af4e572569f480cb8b
   - id: 1NSI-ARCHOS-COURS-C1
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
     source_sha256: sha256:e3a3838d8cb59ab5de2d1126e2b2fde0d2b2d40420d8b34d4db464ecd7449ea0
-    dependency_digest: sha256:338693d0fce2a11e6098ee27d34c60f1edc7f57d6106c5ff2e422de65c512512
+    dependency_digest: sha256:8cc993378144641f9e3b40244be1ee5eb1628ab1569af3091cd6590ab7f9ce50
   - id: 1NSI-ARCHOS-COURS-C2
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C2.tex
     source_sha256: sha256:706e19b60d79fea3b924c5309fe8c04458a7c888f306adeaf7e0e355f6960694
-    dependency_digest: sha256:36bc60495a7a2ca054de23f09c3bb86761ee39a28b8146a92f8e850eda7ff12c
+    dependency_digest: sha256:a2bbe84bd1727442657eab5e62dfda3f770c2ffb12fc5925600abd0c57762f98
   - id: 1NSI-ARCHOS-COURS-C3
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C3.tex
     source_sha256: sha256:36e70dd8406447d4bae2fe13fbcaeb8065614aceb762774a5283dbcdc9bb5f63
-    dependency_digest: sha256:5eb880bd505f77a88bff50ae033aace606f3dc87a0f07645db5ee27476d7c97e
+    dependency_digest: sha256:144612657ae4b09fd89bac59341b1335b61380202c657566f870e8ec3e6da3f8
   - id: 1NSI-ARCHOS-EVAL-A
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A.tex
     source_sha256: sha256:bd32e360ccb8ac7fa5fd0a60bdb214e0c86c5090f0c1c64116cc987905d6c80a
-    dependency_digest: sha256:89a96890a7241c104ee684b1ff1c3fa2622c984d39a11a3ba9a97365131e920a
+    dependency_digest: sha256:2c93951b9f8085a99184837f541737bc701333be1e28ee3ff3a5bc9d79651fcd
   - id: 1NSI-ARCHOS-EVAL-A-corrige
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-A-corrige.tex
     source_sha256: sha256:39fa2b034089fcad75d48a1f3add07c3064fe3ac9f05347c1361816bc634a600
-    dependency_digest: sha256:de984661c4d13337355029a74b52f2f0079d81f691eaf6197052c3ca8a408d3b
+    dependency_digest: sha256:be0bb2bcad6f8ad4b3dd89f65082113efeca03f9e9b5399944f6090ecefcfea4
   - id: 1NSI-ARCHOS-EVAL-B
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B.tex
     source_sha256: sha256:880e27501c16adf8b17230e03793d3242610e72cfd972c7c03277e14d78c98d8
-    dependency_digest: sha256:ba7b5d59960b87528bc1a2fe85f2a96f8bdb087a1ae802360072db6e434fbd93
+    dependency_digest: sha256:6c98af025d32052abc992cf6f4c493897bc5c90c4883120560bfefe2487bc41f
   - id: 1NSI-ARCHOS-EVAL-B-corrige
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/evaluations/1NSI-ARCHOS-EVAL-B-corrige.tex
     source_sha256: sha256:87977126fad9be17e03eb56bd3e94f1d6437b3e041b5ee6cd8b24adec7018cb8
-    dependency_digest: sha256:aea553771a8c307a4b92141b72546f407b5a44bcb0963c9f0aab2e10e201a681
+    dependency_digest: sha256:0f6151e98bd0a4270ce5af40bb7343328ce8c4bbc7d821541f6950d42a055823
   - id: 1NSI-ARCHOS-EX-001
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-001.tex
     source_sha256: sha256:f53529398e8cf69a40b9509f39f326ecc056bd4ddc9e8d2d71586529d46c0f33
-    dependency_digest: sha256:1c80156f49b88d39b9a6d4b4e2f4e5bf59379c68b4a7912a00d9dbbd7ecfc1dc
+    dependency_digest: sha256:1eb9348bdf8be25ef27f34a3dfee1b5dd1dead5f178e3a8f43d0e779600aa6ae
   - id: 1NSI-ARCHOS-EX-002
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-002.tex
     source_sha256: sha256:d7ea2abcde1b50a87c5a291206fa8fc354dde722c27667d7b42ea2a4c4ded96f
-    dependency_digest: sha256:408c29204b17b6967c2f38043e025ac927cd580f2a20c6f372c18763e84d3c3a
+    dependency_digest: sha256:6e0abdc473a10a6d281963078321ee5d218cb75025bbd17702557f2cf82a8e64
   - id: 1NSI-ARCHOS-EX-003
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-003.tex
     source_sha256: sha256:0238343cf1ccc09e257c6ae91dcae56e796617057e551593be3dbb49648b200f
-    dependency_digest: sha256:410bf2167b49a533d2b53ff96baf75d45c0c571f8f1b8a3910b586df7de9232d
+    dependency_digest: sha256:a8d92c9e6042b1b040f679b1ad5bd7286710e34e6383ecc8deb20fe39c80b0e6
   - id: 1NSI-ARCHOS-EX-004
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-004.tex
     source_sha256: sha256:9e788090d226b687c5ee4d9bab7675ef22456aa72f7a92c8174c0970ef5ab2a2
-    dependency_digest: sha256:9e9f601c49fc9a9efd5432e9d787cc79803e23b7f7fb7216f507baed35f1f02d
+    dependency_digest: sha256:198f4f6bc04b53bb5e870e2c779453945600009b9adbe320c58f34fafdd9b624
   - id: 1NSI-ARCHOS-EX-005
     path: NSI/chapitres/1NSI-ARCHITECTURE-OS/exercices/1NSI-ARCHOS-EX-005.tex
     source_sha256: sha256:28d6018c7f5f3f4a6c1e5f7a5908c967e6843449761d51d1c8c4f0e52a655bc0
-    dependency_digest: sha256:b0c31167c629ba248068eca95e0ffb4daa2d22c9b407a7782dbb188b1f5b1060
+    dependency_digest: sha256:17fb5cbfdaac692ee88f2821a13bc5fbae3bb15edd36cd353aaf440f65381e83
   - id: 1NSI-RES-CO-001
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-001.tex
     source_sha256: sha256:5ef2330225ea0d6eb719f73db2c7572634f31c87fdf2262dd549f1d5a31cddfa
-    dependency_digest: sha256:c3221a246d8c53511718e4bc3afb888257aa68880c1e38e2b2a365cf379bba71
+    dependency_digest: sha256:ff2842e6eafbfc6306c8ccbe4a0a0ae49d17ae0a903d51d484ab94e05c82f7a0
   - id: 1NSI-RES-CO-002
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-002.tex
     source_sha256: sha256:5bad788f49a25a178e4b3431fe2a876a227b2bf79afc5b207d35b741e258a84c
-    dependency_digest: sha256:03d0289c1310ee71580f6bf184a12f369df1156e09e1f02d25be5a30470b553e
+    dependency_digest: sha256:c1db8b8374613c9a044c1857b7e69eeed4d03288b51022cc12ec9e216dc7f9d8
   - id: 1NSI-RES-CO-003
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-003.tex
     source_sha256: sha256:eb4af0f544c5af83cc76fa1699fdae0c330823ed06d97d02ebe52738cd3c358a
-    dependency_digest: sha256:345d733ee012154347ffbf1b1cef2ee92fcbe018a33df8a933ef6b3669594ed0
+    dependency_digest: sha256:749cde2fe60945d7f76b07e1d0f603813fbcfdb476958cc877e2807546f74211
   - id: 1NSI-RES-CO-004
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-004.tex
     source_sha256: sha256:b13a6927186701d7ac068eca0f0e3950f88415b01bc02a0f84d414058bcb9383
-    dependency_digest: sha256:927c9a9ab28268b002ebf40a8b1771d2c34b59fbcc66d073f92cab4c58ee5ae0
+    dependency_digest: sha256:b6535034ca6fd7c3ec422e702cc1419780cb4df293a1902f8c57f9a6b263a632
   - id: 1NSI-RES-CO-005
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RES-CO-005.tex
     source_sha256: sha256:55d341d6ff49882609b176b0182497dc44ad224600bbc90301da4fedb9f2c2d6
-    dependency_digest: sha256:85a8ca5bdd6b96ac1421d66232ab27d0b070541441a59f12853b1eb855e1b1fc
+    dependency_digest: sha256:e8d559422ac797653642d2e4afdc43385747d064afd5d4f5598e0e4e351240e0
   - id: 1NSI-RES-COURS-C1
     path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C1.tex
     source_sha256: sha256:92b61efa42774aee595aa9ea505fe2856e64e8443af9b87d1628c0bf4a38030a
-    dependency_digest: sha256:55b511eff27e5f0915ca2b96864ad0f9b482d106a40abb09e421b510da521647
+    dependency_digest: sha256:2281180a380d5ace216beb337194e4cd0d5dc17e53c2faa3cce4f3ac5ff8f913
   - id: 1NSI-RES-COURS-C2
     path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C2.tex
     source_sha256: sha256:fe025eb8761525c7a11928a2798443d9e438fe1f97fcc4a9a32a595e17c3e532
-    dependency_digest: sha256:ae2c43245d233008157522134bff9ce38ff5e2bd244e07ba79ed393c08ee56ce
+    dependency_digest: sha256:4518c14b006752de4c5c6dbb9f3392b6805dbe8cc43a6a3a54d837cae0ce63de
   - id: 1NSI-RES-COURS-C3
     path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
     source_sha256: sha256:6c99e61b3961390ff2b30ce0afa826b7a9d52bf0217ec5e91b171c97713ad640
-    dependency_digest: sha256:b9ac66dbed27b78b6b7d122fc403bae450522c5410b36cb189cb5199789c711c
+    dependency_digest: sha256:f97308b6e02491fc0be97e2b23d8ee472917df94ba38d38a5275cd0b94e0353d
   - id: 1NSI-RES-EVAL-A
     path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A.tex
     source_sha256: sha256:051d0635615ad8f75a088cfb8010e59ecb151e55db25e86c435930bc5d693afc
-    dependency_digest: sha256:ecae7538eeeae7ddc58524833eebf6a5bc4ea4d9f01df68e503f9d8bc9c136f2
+    dependency_digest: sha256:d9916e7470f44bd9de38fefac99d766e0b180684feb3b1e0da62f733e09e4ddc
   - id: 1NSI-RES-EVAL-A-corrige
     path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-A-corrige.tex
     source_sha256: sha256:cdafb2ed9a76f3c9dd208279420a338f501a45db90b06e212bec7fc3f575f58e
-    dependency_digest: sha256:b28c3c4ea7a282c0ec609f7894e0b042de9a83f82c0e198e701c6030c25ad930
+    dependency_digest: sha256:ac62f19bd58a33daa18f093985ac4e6c3d9720a4ab673aa7c0cd85e6af4be1a3
   - id: 1NSI-RES-EVAL-B
     path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B.tex
     source_sha256: sha256:a75a7f39a01142c81d7198777ad4e2828fe3df77ae320c8c832d5d86081c8326
-    dependency_digest: sha256:af9dcdd9662e57b7677db945b241f40ed5970cffff0cfec64ca91496d82fbdd4
+    dependency_digest: sha256:ef8f02abeb7db0caa6de76e9f4ed6d8ea2c3a698d64124b316b45be521c2f11b
   - id: 1NSI-RES-EVAL-B-corrige
     path: NSI/chapitres/1NSI-RESEAUX/evaluations/1NSI-RES-EVAL-B-corrige.tex
     source_sha256: sha256:1a7fe0d4291a96f79a71626a91955fd24d59f78ac2a437a52681e086139e5091
-    dependency_digest: sha256:1844c08eeb1ab109e559e985aa4cdb5d862299dcf952b5f8b83a790b97fa9a69
+    dependency_digest: sha256:1e601f877936740cb03426687128b5c6ff8353905c73f1e3ffe6125df752aafb
   - id: 1NSI-RES-EX-001
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-001.tex
     source_sha256: sha256:de3291bd93485f61939e248f63c4fb913ccae804f5d1adcccac16e1991f4017a
-    dependency_digest: sha256:67a14f9082479233f04c744aef056d8b888d5c914128b2c67c6b8ed939778020
+    dependency_digest: sha256:e9a47dcc5411c14cb82192f26ec35b929ed11cbe5aa28db66bc7023b631520c4
   - id: 1NSI-RES-EX-002
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-002.tex
     source_sha256: sha256:d389124686288c26f9d29a69ef1d872ff0212f54780657d868d69afb3d252513
-    dependency_digest: sha256:9116b9969e8c1e1cab5c741bab7f7e920e15849cf83b8ef2ca7cbb63b900a72e
+    dependency_digest: sha256:ad74205e973b1103f240dbea6f1fca6cb668ee04414c037f036ee9d33d665a91
   - id: 1NSI-RES-EX-003
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-003.tex
     source_sha256: sha256:65a4a9983294ad544b3d8777ea1ecf75e361cdd103de3fa4e1def607e174c9b9
-    dependency_digest: sha256:1c5c50f5ec50d024931cdc49d1f39a4c193a971a13371f2e869a49452d6ff167
+    dependency_digest: sha256:c0624f617841d1a7dfcdbf6d19e0bfac94156f8428317a1757e133275b729749
   - id: 1NSI-RES-EX-004
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-004.tex
     source_sha256: sha256:0ac56c820f31fa687137f236ff455b45b829522f652f6a21f66dff85c8144f5c
-    dependency_digest: sha256:66da488ac49ea796461097c55b4e22f4ce81a7fad695ee208f322ea597bcad7b
+    dependency_digest: sha256:5c91440941cd4c083cf4d5bf220d9346814c1897286eb600a95de85818a1d405
   - id: 1NSI-RES-EX-005
     path: NSI/chapitres/1NSI-RESEAUX/exercices/1NSI-RES-EX-005.tex
     source_sha256: sha256:36d52fb96cef3bf4c4301df2bce619298fdf1a8bd64141b91abd64c8d75dcb85
-    dependency_digest: sha256:f4e76d0a7a5284c334f1c302e8759f7c545fb30be6f541fe4829d4143fec013c
+    dependency_digest: sha256:3165d771f1ce814eee53eb53f60822514d38e36283f27c36757f129b0982f16e
   - id: 1NSI-RESEAUX-QCM
     path: NSI/chapitres/1NSI-RESEAUX/qcm/1NSI-RESEAUX-QCM.tex
     source_sha256: sha256:e15510b9b2c769b0d4b0be35be71e9314ab9b718fc77ca2b3830f0bfb565e65d
-    dependency_digest: sha256:07db8aa0319da4a669f30ed711f9c2ab562b5ed88e79356e131d993481111a30
+    dependency_digest: sha256:faaa84f02a49407ccc7e2f06156d343a5e0fa2d38703c8f22aac926965d950d6
   - id: 1NSI-RESEAUX-RE-C1
     path: NSI/chapitres/1NSI-RESEAUX/remediation/1NSI-RESEAUX-RE-C1.tex
     source_sha256: sha256:25fa0892a01eb6a86a310cb4eca28e36ce5de63acfc36b0aa48b643f8148babf
-    dependency_digest: sha256:a7a6ffd2a128fbcc69207d4d157fb831a801bcf2f0b0546485ba4d8c0dd1d595
+    dependency_digest: sha256:9cd4139f43b4479e674ce72eadbdc4b144daffa3b08030d2513f385e4fa000c0
   - id: 1NSI-RESEAUX-RE-C1-CORRIGE
     path: NSI/chapitres/1NSI-RESEAUX/corriges/1NSI-RESEAUX-RE-C1-CORRIGE.tex
     source_sha256: sha256:17cb364e2e25d432d3d8a724057a02e47d50e6bd9c579c727df16b35c70dbf9d
-    dependency_digest: sha256:5696f9784d038235b6f1438b2bfeb303661e362a4390dab08b2e8162a1011f48
+    dependency_digest: sha256:4d95c84fdd1c9b363591b1034dcd2488235dacd48d1a56f38592a08f8ab19fc6
   - id: 1NSI-WEB-CO-001
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-001.tex
     source_sha256: sha256:a1d0a4739760d5a13347c09ad79dac4e586f7c95e5fd5215e80974e373116e88
-    dependency_digest: sha256:ae48f56a69e2b517e85b9b9974536c5cc017f8ccc3af371975dcb99c6240e94f
+    dependency_digest: sha256:3d20ce852a0c66557658ab7aff0c6b45849f4b1e1cc67bb3c49bc84388323f52
   - id: 1NSI-WEB-CO-002
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-002.tex
     source_sha256: sha256:29aaae9de2440becd751960145c55eda8fd4123742d0a1ada5b46a9fef469463
-    dependency_digest: sha256:576bab6f1f6a0368f0b42ee954d10aec5275636625042a46299398ea989809bc
+    dependency_digest: sha256:19e2fc44b8a8a6a6ca9957e66b386411088ec7d8c1fbba9a444344042d1dc4e8
   - id: 1NSI-WEB-CO-003
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-003.tex
     source_sha256: sha256:c97a149c75db68d3b0566c7cf2f772cd2af00c28be69fdeabdebadce2073cd7a
-    dependency_digest: sha256:0c4d1da0382640451d3adfd2c74aad0a5aa8f0b2591a5c389a42670805499867
+    dependency_digest: sha256:1a830a5ff4a572cf3675863a4670d202ca53895dcdd55ea5b00259746d865974
   - id: 1NSI-WEB-CO-004
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex
     source_sha256: sha256:f4cca9c161c568242bcc1ea557e3452d9db824229484ba0ebf3c95471a1846f7
-    dependency_digest: sha256:6c9d34a4aea042a68d9935feef8f0bc8f9a0c28c56162e15ad6acb7c8d016367
+    dependency_digest: sha256:b14570f068b55495f5d27b26ed916a3c2a51b6c2d8cbb1d72442a18bcb9435b5
   - id: 1NSI-WEB-CO-005
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-005.tex
     source_sha256: sha256:e7dc188159026c8e946397f8899618662a6c03a885dbb9c6f8f2ec6d50dac425
-    dependency_digest: sha256:2a88d2115d7e7c8d7865ee13fa3d3721e78e7c5db07369c1cd9b027c0d8f6d10
+    dependency_digest: sha256:73ab0076c7da0c68622f38bcf4205749c7465f1d9f4825e1fffc5c5abc2dbb84
   - id: 1NSI-WEB-COURS-C1
     path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C1.tex
     source_sha256: sha256:8326a78ed11d2e3eb4798e20c06298c1a43508f4261ee0e9c75fb2623987d2af
-    dependency_digest: sha256:e6561dca57d6f1c481ca08194efc859fd686801cdf39c307dad5116b850f68f9
+    dependency_digest: sha256:4340a1c2b5c8e1826b602e81d375101c92176dcc69849613c9cc62a21001f429
   - id: 1NSI-WEB-COURS-C2
     path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex
     source_sha256: sha256:37fbaf3e3f88ac24d6aa1a60728df013f20d0909b54ec3b112860f2f8acc5778
-    dependency_digest: sha256:66d14e86f156fd96d8fc294444784a87b1c90bd27f8a23bed14b0edbcb79b06e
+    dependency_digest: sha256:63f35f51f79307acacff2cdf28c2ef5fe971352886bf3be5ff4baa4be9961c44
   - id: 1NSI-WEB-COURS-C3
     path: NSI/chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C3.tex
     source_sha256: sha256:39d05a637a133eafcda90f6c9fb93c7a1896bbd744e0c6be0d44504575e1f044
-    dependency_digest: sha256:f1416e1e443247a55d1f0ab229f6ca912c4f488c6078eec2192847da7d5a8263
+    dependency_digest: sha256:c30914f1598e7b8c6ab3659753336a8ca8162b1d0816a646b6ebbd9d2610a51a
   - id: 1NSI-WEB-EVAL-A
     path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A.tex
     source_sha256: sha256:b32909f32fccbfc776514ab86408ceeb79bc0fc392ee246f2efddd42de606a24
-    dependency_digest: sha256:f584a58ad6b6c548939f753ba21de03c9815abc63249fe5f5a4b5672d43f898f
+    dependency_digest: sha256:b38dd3d08a120feda260facd798505e459cb48ccd44fea9d0c6c5cb916671f9c
   - id: 1NSI-WEB-EVAL-A-corrige
     path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-A-corrige.tex
     source_sha256: sha256:0c5ff606a888b76ee1e151f22d81e96ab4d05c89a8209240ea75358f3c7f8a84
-    dependency_digest: sha256:a12699cc4494f00955fc7415d1e70e0bc4d4bbeb44a6984e0da4b2ec85fa66b7
+    dependency_digest: sha256:e4711c0ae8ea5ff9bb07b8ca8d6409d28e8411835cd02a3e8218236118b099fb
   - id: 1NSI-WEB-EVAL-B
     path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B.tex
     source_sha256: sha256:edbcfddc575ac899f4778a6adc27070d0b8e936e2e81ff120c30ff095f3f8946
-    dependency_digest: sha256:9ea5e8fcfc1bb5a11fea4681de50f6623ced58de8aaa1b5191c4c0c7b8627583
+    dependency_digest: sha256:d0b14322b593e0db288894193172ddbd817d831735a6fe41e9691489bfdd3d51
   - id: 1NSI-WEB-EVAL-B-corrige
     path: NSI/chapitres/1NSI-WEB-IHM/evaluations/1NSI-WEB-EVAL-B-corrige.tex
     source_sha256: sha256:c4dfce83e52e44ecf3c1fb889b13e187933cf480b0c3629cd26618c056b20007
-    dependency_digest: sha256:1931c4a882b1e3699795ff20414943b5bb0a86c60c1be3527f5206ad6ba8dde7
+    dependency_digest: sha256:04b9966459fb1eac4aaee62a8d3ab0bcb4fe709b7ceea11cad7d7088f9932243
   - id: 1NSI-WEB-EX-001
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-001.tex
     source_sha256: sha256:fa05bca79e568a724d96245e4082e9ed1097937b1843e115b0eb34c3bbb2f351
-    dependency_digest: sha256:98f6893bb99ec8a669f0eb177972ed93f84c7628d5d544ee320e5de00cd1c664
+    dependency_digest: sha256:a69b64515cc75b3df88eb537d30ea8a80304d566d88948e960d37dee192b3187
   - id: 1NSI-WEB-EX-002
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-002.tex
     source_sha256: sha256:ab7767f0db92d5a1c5db55b3a0b66874468801bbc6acb90e00ac8998471e97d8
-    dependency_digest: sha256:489c5616762f374d71c5bb9cdc5c2ff15a81d5c387b70e889bbe2c7fd5ba5c5a
+    dependency_digest: sha256:84c308e3cf93ca1009d807c3a2faca87d3856bbfddab5b4c5b149c3e324d49ed
   - id: 1NSI-WEB-EX-003
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-003.tex
     source_sha256: sha256:071fbd7114ad7547ce0cdae48a58c703f5d41f1494507fee2504143c8718635c
-    dependency_digest: sha256:7826549dfd9b8d916fb6dc1a6eeced3e7362abb47f6b6c003a01bfccbfa74818
+    dependency_digest: sha256:90bda0dc2bd9dd1dc889e0f34d3094fdf3d5ae1b2b583eedc23ef5ecd76b0931
   - id: 1NSI-WEB-EX-004
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-004.tex
     source_sha256: sha256:3c0aeeb0f43d5e110e2e8a8b9eef6f499cb29795c5217503add026dd39b6e7f0
-    dependency_digest: sha256:c28b911154e8d4a59838d2ab98b391fc2f8c9b5036da910c5641ee2481561d0c
+    dependency_digest: sha256:060a26793c46e0a6aa46318ff1d15a81c2da98c41bbb407f0dd6ae4638b8cf3b
   - id: 1NSI-WEB-EX-005
     path: NSI/chapitres/1NSI-WEB-IHM/exercices/1NSI-WEB-EX-005.tex
     source_sha256: sha256:7255684c24c3db38b19035d65f0ab8bb005ba4f48fffac9b67c6eaa0ac306b53
-    dependency_digest: sha256:f9d497a7af906052bb582b9e716e7187d803599201da2f94a13dbdd33ff9ff5e
+    dependency_digest: sha256:89bd836947528e5bb6385bdf4c329a755f031a5d486d22615fa3c9b76b4238ea
   - id: 1NSI-WEB-IHM-QCM
     path: NSI/chapitres/1NSI-WEB-IHM/qcm/1NSI-WEB-IHM-QCM.tex
     source_sha256: sha256:51dc410026fd52366582b4ab62158c7ba3177cab1c76817fac1647bfd51ced91
-    dependency_digest: sha256:7f7a912dc372d50ed590cce899664fcdb897fd082ae0fabad7ea848ef4feb90a
+    dependency_digest: sha256:610fa95f9e2919e88e554671dc6a32e336ea488c0cb21bce3300444fd9e89f4f
   - id: 1NSI-WEB-IHM-RE-C9
     path: NSI/chapitres/1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex
     source_sha256: sha256:a380c4b236e05520186518017d262730740b17a02371c7e6be68d38cdb80858e
-    dependency_digest: sha256:90838d64d6bf551195d035570ba677bfe3161ce73e5bcac064565be2d8c39eac
+    dependency_digest: sha256:ab328e9a2adb835d7678e44a69affddd73ff06203ae95bf6cb961390a5d5aa04
   - id: 1NSI-WEB-IHM-RE-C9-CORRIGE
     path: NSI/chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C9-CORRIGE.tex
     source_sha256: sha256:d3d9bef251a4cb21280299979dea4687a52ebd48467a60c2fee5aaa27a276574
-    dependency_digest: sha256:94d12ffc89423cea69653eaeb3e74f800f1993a593515d881840a8fce9fab139
+    dependency_digest: sha256:73afd6129441a6105c05fa51fffd0d5af2af969594d558220eb2bde08e4b2e4f
 reviews:
 - id: 1NSI-ARCHITECTURE-OS-QCM
   chapter: 1NSI-ARCHITECTURE-OS
