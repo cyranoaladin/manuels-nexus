@@ -1092,3 +1092,37 @@ print(g[0][0])"""
         assert "is hors_contrat[0][0]" in verify_code
         assert "assert hors_contrat == [[[1, 2]]]" in verify_code
         subprocess.run(["python", "-c", verify_code], check=True)
+
+
+@pytest.mark.parametrize(
+    ("object_id", "relative_path"),
+    (
+        (
+            "1NSI-TC-COURS-C5",
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex",
+        ),
+        (
+            "1NSI-TC-EX-054",
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-054.tex",
+        ),
+        (
+            "1NSI-TC-CO-054",
+            "NSI/chapitres/1NSI-TYPES-CONSTRUITS/corriges/1NSI-TC-CO-054.tex",
+        ),
+    ),
+)
+def test_grid_copy_execution_receipts_match_current_blocks(
+    object_id: str, relative_path: str
+) -> None:
+    record = {
+        "id": object_id,
+        "path": relative_path,
+        "metadata": {},
+        "scope": "object",
+        "chapter": "1NSI-TYPES-CONSTRUITS",
+    }
+    execution = review_module.execution_observation(record, REPO_ROOT)
+    assert execution is not None
+    assert execution["fresh_verdict"] == "pass"
+    assert execution["matches_receipt"] is True
+    assert execution["anomalies"] == []
