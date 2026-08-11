@@ -1,0 +1,48 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-PM-COURS-C2-OPTIMISATION
+source_commit_sha: 4b06c9d259ad34ac51a9f919b1ecb2208a9adb96
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:2f5c9aaa185883812e40c6775ce8530d4f2b1a1eb2ab763764584b768bc932c8
+  - path: NSI/chapitres/1NSI-PROJET-METHODES/code/avancement.py
+    sha256: sha256:c3a302cc91cbfac8d5fcf475ab8ff9bacc591e5ad3603436db2d759f558ad8f0
+  - path: NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C2.tex
+    sha256: sha256:11654f5bd92ce9e367b337ba1fa509301623b9a67b9998185f4cbad44746d3b3
+reviewer_id: 019fee61-7acc-7111-b6a3-7dc3216ccf18
+reviewer_model: GPT-5 Codex
+review_run_id: 1nsi-p0-pm-c2-avancement-optimization-postcommit-2026-08-11-019fee61-v2
+session_id: 019fee61-7acc-7111-b6a3-7dc3216ccf18
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q NSI/tests/test_1nsi_scientific_p0_regressions.py::test_avancement_canonical_source_rejects_empty_milestones
+    cwd: .
+    exit_code: 0
+    stdout: |
+      .                                                                        [100%]
+      1 passed in 0.24s
+    stderr: ""
+    stdout_sha256: sha256:d907fec0e0445cfe67a7272e864304e81194b234052d6bdfcb6ec87c0b123e62
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La liste vide est refusee par ValueError en modes normal et optimise.
+  - command: python -m ruff check NSI/chapitres/1NSI-PROJET-METHODES/code/avancement.py NSI/tests/test_1nsi_scientific_p0_regressions.py
+    cwd: .
+    exit_code: 0
+    stdout: |
+      All checks passed!
+    stderr: ""
+    stdout_sha256: sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique et sa regression respectent les controles statiques.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte.
+verdict: approved
+reviewed_at: "2026-08-11T02:17:18+01:00"
