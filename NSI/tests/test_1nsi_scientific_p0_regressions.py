@@ -250,6 +250,25 @@ def test_full_table_join_preserves_duplicate_matching_rows() -> None:
         {"nom": "Lina", "classe": "1B", "absence": "aucune"},
     ]
 
+    produit = fusionner_tout(
+        [
+            {"nom": "Amine", "groupe": "A"},
+            {"nom": "Amine", "groupe": "B"},
+        ],
+        [
+            {"nom": "Amine", "absence": "lundi"},
+            {"nom": "Amine", "absence": "mardi"},
+        ],
+        "nom",
+        {"absence": "aucune"},
+    )
+    assert produit == [
+        {"nom": "Amine", "groupe": "A", "absence": "lundi"},
+        {"nom": "Amine", "groupe": "A", "absence": "mardi"},
+        {"nom": "Amine", "groupe": "B", "absence": "lundi"},
+        {"nom": "Amine", "groupe": "B", "absence": "mardi"},
+    ]
+
     source_code = TABLE_JOIN_ALL_SOURCE.read_text(encoding="utf-8")
     assert source_code.isascii()
     assert "setdefault(ligne2[cle], []).append(ligne2)" in source_code
@@ -303,6 +322,27 @@ def test_full_table_join_rejects_nonkey_column_collisions() -> None:
         )
     assert str(default_error.value) == message
 
+    with pytest.raises(ValueError) as unmatched_error:
+        fusionner_tout(
+            [{"nom": "Amine", "classe": "1A"}],
+            [{"nom": "Omar", "classe": "1B"}],
+            "nom",
+            {"absence": "aucune"},
+        )
+    assert str(unmatched_error.value) == message
+
+    with pytest.raises(ValueError) as late_error:
+        fusionner_tout(
+            [{"nom": "Amine", "classe": "1A"}],
+            [
+                {"nom": "Amine", "absence": "lundi"},
+                {"nom": "Amine", "classe": "1B"},
+            ],
+            "nom",
+            {},
+        )
+    assert str(late_error.value) == message
+
     optimized_probe = """
 import runpy
 import sys
@@ -311,7 +351,7 @@ fusionner_tout = runpy.run_path(sys.argv[1])["fusionner_tout"]
 try:
     fusionner_tout(
         [{"nom": "Amine", "classe": "1A"}],
-        [{"nom": "Amine", "classe": "1B"}],
+        [{"nom": "Omar", "classe": "1B"}],
         "nom",
         {},
     )
@@ -339,6 +379,9 @@ else:
     source_code = TABLE_JOIN_ALL_SOURCE.read_text(encoding="utf-8")
     guard = "if not colonnes1.isdisjoint(colonnes2):"
     assert guard in source_code
+    assert source_code.index("colonnes1 =") < source_code.index("index2 =")
+    assert source_code.index("colonnes2 =") < source_code.index("index2 =")
+    assert ".update(colonne for colonne in defauts if colonne != cle)" in source_code
     assert f'raise ValueError("{message}")' in source_code
     assert "assert colonnes1.isdisjoint(colonnes2)" not in source_code
 
@@ -352,6 +395,8 @@ else:
     assert guard in verify_code
     assert "table_collision" in verify_code
     assert "defauts_collision" in verify_code
+    assert "collision_sans_correspondance" in verify_code
+    assert "produit" in verify_code
     assert f'assert str(erreur) == "{message}"' in verify_code
 
 
