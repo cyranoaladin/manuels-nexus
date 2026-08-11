@@ -1,0 +1,233 @@
+# Registre canonique des programmes officiels — collection Nexus Réussite 2026-2027
+#
+# Ce fichier fige, pour chacun des six manuels, le texte réglementaire qui fait
+# autorité pour l'édition 2026-2027. Il prévaut sur toute mention de programme
+# figurant ailleurs dans le dépôt (référentiels, contrats, rapports).
+#
+# Règle structurante : un programme publié n'est pas un programme applicable.
+# Les nouveaux programmes de Terminale publiés au BO du 2 avril 2026 n'entrent
+# en application qu'à la rentrée 2027-2028. Ils ne doivent donc alimenter aucun
+# contenu exigible de l'édition courante. Le travail correspondant vit dans
+# `backlog_terminal_2027_2028/`.
+#
+# Généré et vérifié le 2026-08-11. Empreintes SHA-256 des extraits texte
+# déposés sous `sources/`.
+
+schema_version: 1
+edition: "2026-2027"
+generated_on: "2026-08-11"
+
+# ---------------------------------------------------------------------------
+# Sources officielles déposées et empreintées
+# ---------------------------------------------------------------------------
+sources:
+  SRC-BO2026-1SPE:
+    intitule: "Programme d'enseignement de spécialité de mathématiques, classe de première, voie générale"
+    reference_bo: "BO n° 14 du 2 avril 2026"
+    arrete: "MENE2602917A"
+    url: "https://www.education.gouv.fr/bo/2026/Hebdo14/MENE2602917A"
+    fichier: "Mathematiques/manuel-maths/sources/txt/BO2026_1SPE_specialite.txt"
+    sha256: "4e70f1989cdb47caf184cb138d839799e895fcdc5addec3737f0216b6bfa33df"
+
+  SRC-BO2019-1SPE:
+    intitule: "Programme de spécialité mathématiques, première générale (programme précédent)"
+    reference_bo: "BO spécial n° 1 du 22 janvier 2019"
+    fichier: "Mathematiques/manuel-maths/sources/txt/BO2019_1SPE_specialite.txt"
+    sha256: "d2aad141af7eb50559c7c5f76b2cd582de2974f0fb38d929cc447b4beae8df53"
+    usage: "référence historique uniquement — remplacé par SRC-BO2026-1SPE en 2026-2027"
+
+  SRC-BO2019-TSPE:
+    intitule: "Programme de spécialité mathématiques, classe terminale, voie générale"
+    reference_bo: "BO spécial n° 8 du 25 juillet 2019"
+    arrete: "MENE1921262A"
+    fichier: "Mathematiques/manuel-maths/sources/txt/BO2019_TSPE_specialite.txt"
+    sha256: "65eb5a55df14a2b3025a96db72fbcb1d917b55e8da7feb13669e28b903712210"
+
+  SRC-BO2019-TCOMPL:
+    intitule: "Programme de l'enseignement optionnel de mathématiques complémentaires, classe terminale"
+    reference_bo: "BO spécial n° 8 du 25 juillet 2019"
+    arrete: "MENE1921265A"
+    fichier: "Mathematiques/manuel-maths/sources/txt/BO2019_TCOMPL_optionnel.txt"
+    sha256: "dad0e4941fc0eb7e93a727bfabd49b3298b1e378eafb7fbe1bbdee35b9c4ac27"
+
+  SRC-BO2019-TEXPERTES:
+    intitule: "Programme de l'enseignement optionnel de mathématiques expertes, classe terminale"
+    reference_bo: "BO spécial n° 8 du 25 juillet 2019"
+    arrete: "MENE1921264A"
+    fichier: "Mathematiques/manuel-maths/sources/txt/BO2019_TEXPERTES_optionnel.txt"
+    sha256: "a427dd12f3ff774dd0bdd31a26aaa77423509947bf60589e72430b6f5054a1c5"
+
+  SRC-BO2019-NSI-PREMIERE:
+    intitule: "Programme de spécialité numérique et sciences informatiques, classe de première"
+    reference_bo: "BO spécial n° 1 du 22 janvier 2019"
+    fichier: "NSI/sources/BO2019_NSI_premiere.pdf"
+    sha256: "7ca9a32e1823be6c1120cb0417324c3cb01688d1d194c7614a88ea851ccc60b0"
+
+  SRC-BO2019-NSI-TERMINALE:
+    intitule: "Programme de spécialité numérique et sciences informatiques, classe terminale"
+    reference_bo: "BO spécial n° 8 du 25 juillet 2019"
+    arrete: "MENE1921247A"
+    fichier: "NSI/sources/BO2019_NSI_terminale.pdf"
+    sha256: "10ce34666edd722a3d8d86642a9f1ac205c7a9d128d6142a17effcba2fb85e69"
+
+  SRC-BO2026-TSPE-R2027:
+    intitule: "Programme de spécialité mathématiques, classe terminale — applicable rentrée 2027-2028"
+    reference_bo: "BO du 2 avril 2026"
+    fichier: "Mathematiques/manuel-maths/sources/txt/BO2026_TSPE_specialite_r2027.txt"
+    sha256: "597e0424c620f02759665f561f8e997ac8ac85213db0b6498eb576f59fbee8e6"
+    usage: >-
+      HORS PÉRIMÈTRE de l'édition 2026-2027. Déposé pour préparer l'édition
+      suivante. Aucun contenu exigible du manuel courant ne peut s'y adosser.
+    interdiction: "ne pas rattacher de capacité de l'édition 2026-2027 à cette source"
+
+# ---------------------------------------------------------------------------
+# Les six manuels
+# ---------------------------------------------------------------------------
+manuels:
+
+  - manual_id: "1SPE"
+    niveau: "Première"
+    matiere: "Mathématiques"
+    enseignement: "Spécialité"
+    programme_source: "SRC-BO2026-1SPE"
+    programme_version: "2026"
+    date_application: "2026-09-01"
+    exam_reference: "EXAM-EA-MATHS-2027"
+    status: "en_vigueur"
+    note: >-
+      Seul manuel de la collection à changer de programme cette année. Le BO
+      2026 retire de la première les formules d'addition et de duplication, les
+      équations trigonométriques et l'étude des fonctions cosinus et sinus :
+      ces contenus sont archivés dans backlog_tspe_v2 et ne sont plus exigibles.
+
+  - manual_id: "TSPE_2026_2027"
+    niveau: "Terminale"
+    matiere: "Mathématiques"
+    enseignement: "Spécialité"
+    programme_source: "SRC-BO2019-TSPE"
+    programme_version: "2019"
+    date_application: "2020-09-01"
+    exam_reference: "EXAM-BAC-SPE-MATHS"
+    status: "en_vigueur"
+    note: >-
+      Les élèves de terminale en 2026-2027 ont suivi la première sous le
+      programme 2019. Le programme de terminale publié en 2026
+      (SRC-BO2026-TSPE-R2027) n'entre en application qu'en 2027-2028 et reste
+      hors périmètre de cette édition.
+
+  - manual_id: "TCOMPL"
+    niveau: "Terminale"
+    matiere: "Mathématiques"
+    enseignement: "Mathématiques complémentaires (option)"
+    programme_source: "SRC-BO2019-TCOMPL"
+    programme_version: "2019"
+    date_application: "2020-09-01"
+    exam_reference: "EXAM-CONTROLE-CONTINU"
+    status: "en_vigueur"
+    note: >-
+      Même règle que la spécialité : le programme publié en 2026 s'applique à
+      compter de 2027-2028.
+
+  - manual_id: "TEXPERTES"
+    niveau: "Terminale"
+    matiere: "Mathématiques"
+    enseignement: "Mathématiques expertes (option)"
+    programme_source: "SRC-BO2019-TEXPERTES"
+    programme_version: "2019"
+    date_application: "2020-09-01"
+    exam_reference: "EXAM-CONTROLE-CONTINU"
+    status: "en_vigueur"
+    note: >-
+      Les nombres complexes, l'arithmétique, les matrices et les graphes
+      relèvent exclusivement de cet enseignement : ils ne sont ni au programme
+      de première, ni à celui de la spécialité de terminale.
+
+  - manual_id: "1NSI"
+    niveau: "Première"
+    matiere: "Numérique et sciences informatiques"
+    enseignement: "Spécialité"
+    programme_source: "SRC-BO2019-NSI-PREMIERE"
+    programme_version: "2019"
+    date_application: "2019-09-01"
+    exam_reference: null
+    status: "en_vigueur"
+    note: "Programme non modifié par la réforme 2026."
+
+  - manual_id: "TNSI"
+    niveau: "Terminale"
+    matiere: "Numérique et sciences informatiques"
+    enseignement: "Spécialité"
+    programme_source: "SRC-BO2019-NSI-TERMINALE"
+    programme_version: "2019"
+    date_application: "2020-09-01"
+    exam_reference: "EXAM-BAC-NSI-2026"
+    status: "en_vigueur"
+    note: "Programme non modifié par la réforme 2026."
+
+# ---------------------------------------------------------------------------
+# Épreuves
+# ---------------------------------------------------------------------------
+epreuves:
+
+  EXAM-EA-MATHS-2027:
+    intitule: "Épreuve anticipée de mathématiques"
+    premiere_session: 2027
+    concerne: ["1SPE"]
+    reference_bo: "BO n° 24 de 2025 — note de service MENE2515469N"
+    url: "https://www.education.gouv.fr/bo/2025/Hebdo24/MENE2515469N"
+    source_deposee: false
+    exigence_manuel: >-
+      La préparation à cette épreuve est structurante et non terminale : elle
+      irrigue l'année entière par les automatismes, les questions sans
+      calculatrice, les QCM, les exercices courts et les sujets de deux heures,
+      et non par un unique chapitre de révision en fin d'ouvrage.
+    a_faire: "déposer et empreinter le texte officiel dans sources/"
+
+  EXAM-BAC-NSI-2026:
+    intitule: "Épreuve de spécialité numérique et sciences informatiques"
+    premiere_session: 2026
+    concerne: ["TNSI"]
+    modalites:
+      ecrit:
+        duree_h: 3.5
+        structure: "3 exercices indépendants"
+      pratique:
+        duree_h: 1
+    origine_declaration: "instruction humaine du 2026-08-11"
+    source_deposee: false
+    status: "declare_par_instruction_humaine"
+    a_faire: >-
+      Déposer et empreinter le texte officiel définissant ces modalités avant
+      de déclarer TNSI publiable. Tant que la source n'est pas déposée, la règle
+      R7 interdit de présenter ces modalités comme vérifiées : elles sont
+      tracées ici comme décision humaine, non comme constat réglementaire.
+      Ce point figure déjà dans NSI/A_VALIDER_HUMAIN.md (vérification R7).
+
+  EXAM-BAC-SPE-MATHS:
+    intitule: "Épreuve de spécialité mathématiques"
+    concerne: ["TSPE_2026_2027"]
+    source_deposee: false
+    a_faire: "déposer le texte de modalités en vigueur pour la session 2027"
+
+  EXAM-CONTROLE-CONTINU:
+    intitule: "Évaluation en contrôle continu"
+    concerne: ["TCOMPL", "TEXPERTES"]
+    note: "Enseignements optionnels évalués en contrôle continu."
+
+# ---------------------------------------------------------------------------
+# Invariants vérifiés par les gates
+# ---------------------------------------------------------------------------
+invariants:
+  - id: "INV-PROG-01"
+    regle: "Chaque manuel référence exactement une source de programme en vigueur."
+  - id: "INV-PROG-02"
+    regle: >-
+      Aucune capacité de l'édition 2026-2027 ne peut être rattachée à
+      SRC-BO2026-TSPE-R2027.
+  - id: "INV-PROG-03"
+    regle: >-
+      Toute capacité déclarée obligatoire doit citer une source déposée et
+      empreintée. Une modalité d'épreuve dont la source n'est pas déposée est
+      marquée declare_par_instruction_humaine et ne vaut pas preuve.
+  - id: "INV-PROG-04"
+    regle: "OFFICIAL_CAPABILITIES_WITHOUT_MAPPING = 0 pour tout manuel publiable."

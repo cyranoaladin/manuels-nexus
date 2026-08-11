@@ -7,8 +7,13 @@ décrivant l'emplacement des contenus.
 ## Règle
 
 `/home/alaeddine/Documents/Manuels_Nexus`, branche `main`, est l'unique source
-de vérité. Miroir distant : `github.com/cyranoaladin/manuels-nexus` (**privé**
-depuis le 11 août 2026 — il était public jusque-là).
+de vérité. Miroir distant : `github.com/cyranoaladin/manuels-nexus`,
+**public**.
+
+Historique de visibilité du 11 août 2026 : le dépôt était public, a été basculé
+en privé au titre de la propriété intellectuelle commerciale, puis remis en
+public le même jour sur instruction explicite. Aucune donnée d'élève ne doit
+donc y figurer — voir le contrôle PII ci-dessous.
 
 Aucun contenu de la collection ne doit vivre ailleurs : ni dans un worktree, ni
 dans une branche non fusionnée, ni dans un dossier externe.
@@ -161,7 +166,8 @@ TSPE-CONTINUITE, les correctifs de conformite programme, la reparation de la
 suite de tests et le corpus. Local et distant sont identiques.
 
 **Visibilite des depots.** Dix depots prives sont passes en public le
-2026-08-11, dont `manuels-nexus`. Deux restent prives sur decision explicite :
+2026-08-11, dont `manuels-nexus` : le compte compte desormais 60 depots publics
+et 2 prives. Ces deux-la restent prives sur decision explicite :
 
 | Depot | Motif |
 |---|---|
@@ -170,3 +176,22 @@ suite de tests et le corpus. Local et distant sont identiques.
 
 Ces deux depots pourront etre publies apres purge des donnees personnelles, y
 compris dans l'historique git.
+
+## Contrôle des données personnelles — dépôt public
+
+Le dépôt étant public, aucun contenu ne doit comporter de donnée d'élève.
+Contrôle du 2026-08-11 sur l'intégralité de l'arbre suivi, corpus inclus :
+
+| Contrôle | Résultat |
+|---|---|
+| Fichiers `.env` réels, clés, certificats suivis | 0 (seuls deux `.env.example`) |
+| Adresses mail scolaires | 0 |
+| Noms d'élèves dans les chemins suivis | 0 |
+| CSV / sqlite du corpus NSI | 6 fichiers, tous des manifestes techniques |
+| Documents du corpus déclarant `private_data` | 467, tous à `false` |
+
+Les correspondances « Prénom NOM » relevées dans le corpus sont des artefacts
+d'exemples SQL (`Eleve JOIN`, `Note WHERE`) et non des données réelles.
+
+Ce contrôle est à refaire avant chaque poussée sensible : recherche de secrets,
+de données personnelles, de CSV et de bases sqlite.
