@@ -1,5 +1,6 @@
 """Regressions scientifiques P0 pour les cours 1NSI."""
 import contextlib
+from fractions import Fraction
 import hashlib
 import importlib.util
 import io
@@ -409,12 +410,26 @@ def test_float_equality_is_not_described_as_bitwise_comparison() -> None:
     assert "règles d'égalité de Python" in compact_tex
     assert "pas leurs représentations binaires bit à bit" in compact_tex
     assert "deux nombres flottants représentables distincts" in compact_tex
+    assert "Chaque addition" not in compact_tex
+    assert r"Le littéral \lstinline{0.1} est déjà stocké sous une valeur approchée" in (
+        compact_tex
+    )
+    assert "les deux premières additions" in compact_tex
+    assert "la troisième doit être arrondie" in compact_tex
     assert r"\lstinline{-0.0 == 0.0}" in tex
     assert r'\lstinline{float("nan") == float("nan")}' in tex
 
     x = 0.0
+    additions_exactes = []
     for _ in range(3):
+        somme_exacte_des_operandes = Fraction.from_float(x) + Fraction.from_float(
+            0.1
+        )
         x += 0.1
+        additions_exactes.append(
+            Fraction.from_float(x) == somme_exacte_des_operandes
+        )
+    assert additions_exactes == [True, True, False]
     assert x == 0.30000000000000004
     assert x != 0.3
     assert -0.0 == 0.0

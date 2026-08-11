@@ -56,7 +56,7 @@ EXPECTED = {
     "1NSI-TYPES-BASE/remediation/1NSI-TYPES-BASE-RE-C3.tex": (
         "1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C3-CORRIGE.tex",
         "1NSI-TB-RE-C3-EX1",
-        "9e8590d3c4acb329724df9071e03624d196ed8899ee6b6fabf349ad1533a0ca4",
+        "0ce27211d18fea5098795f0e3c1d36b0955ebf18492ed26db0644c642866a276",
     ),
     "1NSI-WEB-IHM/remediation/1NSI-WEB-IHM-RE-C9.tex": (
         "1NSI-WEB-IHM/corriges/1NSI-WEB-IHM-RE-C9-CORRIGE.tex",
