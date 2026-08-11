@@ -76,7 +76,8 @@ PRE_LANGUAGE_RECEIPT_BASE_SHA = "98bcf780e0a788603ffed0a4ad3c123de1858f77"
 PRE_COPY_RECEIPT_BASE_SHA = "4239262b3f436cc76f4cd9936eedcbf389c31425"
 PRE_SEPARATION_LOCK_BASE_SHA = "775bfc90cbd26a4aac8494bfbf3757703442ab45"
 PRE_LANGUAGE_TRACE_BASE_SHA = "0085e91405c96ece34a1f5e40b6d8af8347dbc49"
-BASE_SHA = "7cb8ad6ba526a7d53ad3dd9a804dcea581e32812"
+PRE_SIX_P0_BASE_SHA = "7cb8ad6ba526a7d53ad3dd9a804dcea581e32812"
+BASE_SHA = "1fc0bf5d74fa11db657c5d53fdb7e3983368bde9"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
@@ -118,6 +119,11 @@ LANGUAGE_TRACE_PROTOCOL_DIGEST = (
     "sha256:9fb019e749096a244a0f5565ef31e01b69e4f81f38af3a4f7449abbfd3058555"
 )
 PRE_LANGUAGE_TRACE_POLICY_COMMIT = "21f3faeadd80016476f7a65cf66620046f940890"
+SIX_P0_PROTOCOL_DIGEST = (
+    "sha256:f1dacc0230ee6b2fe898c6f7b728af7ad72b3f44b00f653cacadb05245080b57"
+)
+PRE_SIX_P0_POLICY_COMMIT = "563680078cb336766c2f892a8fc72539eea90fbe"
+PRE_SIX_P0_RECEIPTS_COMMIT = "e32d4cf6de9bac9b722eb1b4f6ec94968c1d2e8d"
 PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 POLICY_COMMIT = "563680078cb336766c2f892a8fc72539eea90fbe"
 RECEIPT_REATTESTATION_COMMIT = "f7fd13dbbecedf4711473f2e3e7026f03c4c7853"
@@ -1077,17 +1083,35 @@ def test_separation_lock_policy_remains_historically_sealed() -> None:
     )
 
 
-def test_language_trace_policy_migration_invalidates_exactly_six_receipts(
+def test_language_trace_policy_remains_historically_sealed() -> None:
+    historical_policy = yaml.safe_load(
+        _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_SIX_P0_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+        ).decode("utf-8")
+    )
+    assert historical_policy["scope_guard"]["implementation_base_sha"] == (
+        PRE_SIX_P0_BASE_SHA
+    )
+    assert historical_policy["protocol_digest"] == LANGUAGE_TRACE_PROTOCOL_DIGEST
+    assert _git(ROOT, "rev-parse", f"{PRE_SIX_P0_POLICY_COMMIT}^") == (
+        PRE_SIX_P0_BASE_SHA
+    )
+
+
+def test_six_p0_policy_migration_invalidates_exactly_six_receipts(
     policy, sources, review_module
 ) -> None:
     assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
-    assert policy["protocol_digest"] == LANGUAGE_TRACE_PROTOCOL_DIGEST
+    assert policy["protocol_digest"] == SIX_P0_PROTOCOL_DIGEST
     assert review_module.compute_protocol_digest(ROOT, policy) == (
-        LANGUAGE_TRACE_PROTOCOL_DIGEST
+        SIX_P0_PROTOCOL_DIGEST
     )
 
     sources_by_id = {source["id"]: source for source in sources}
     source_changed_receipts = set()
+    fact_changed_receipts = set()
     stale_receipts = set()
     current_tool_hashes = {
         "review_tool_sha256": _sha(MODULE_PATH),
@@ -1100,24 +1124,15 @@ def test_language_trace_policy_migration_invalidates_exactly_six_receipts(
             _git_bytes(
                 ROOT,
                 "show",
-                f"{PRE_TEN_P0_RECEIPTS_COMMIT}:{relative_path}",
+                f"{PRE_SIX_P0_RECEIPTS_COMMIT}:{relative_path}",
             ).decode("utf-8")
         )
         manifest = receipt["source_manifest"]
         stale_fields = set()
         if receipt["protocol_digest"] != policy["protocol_digest"]:
             stale_fields.add("protocol_digest")
-        if (
-            manifest["execution_checker_sha256"]
-            != current_tool_hashes["execution_checker_sha256"]
-        ):
-            stale_fields.add("execution_checker_sha256")
-        assert manifest["review_tool_sha256"] == current_tool_hashes[
-            "review_tool_sha256"
-        ]
-        assert manifest["execution_common_sha256"] == current_tool_hashes[
-            "execution_common_sha256"
-        ]
+        for field, current_digest in current_tool_hashes.items():
+            assert manifest[field] == current_digest
 
         source_mismatches = set()
         dependency_mismatches = set()
@@ -1141,23 +1156,55 @@ def test_language_trace_policy_migration_invalidates_exactly_six_receipts(
         if source_mismatches:
             stale_fields.add("source_sha256")
             source_changed_receipts.add(relative_path)
+
+        fact_mismatches = set()
+        for review in receipt["reviews"]:
+            source = sources_by_id[review["id"]]
+            allowed_paths = review_module._allowed_fact_paths(
+                source, sources, ROOT, policy
+            )
+            payload = review["payload"]
+            facts = [
+                fact
+                for dimension in payload["dimensions"].values()
+                for fact in dimension["facts"]
+            ] + [anomaly["fact"] for anomaly in payload["anomalies"]]
+            for fact in facts:
+                _assert_historical_fact(
+                    fact, allowed_paths, PRE_SIX_P0_RECEIPTS_COMMIT
+                )
+                path = ROOT / fact["path"]
+                lines = path.read_bytes().splitlines(keepends=True)
+                if not (
+                    1 <= fact["line_start"] <= fact["line_end"] <= len(lines)
+                ):
+                    fact_mismatches.add((review["id"], fact["path"]))
+                    continue
+                excerpt = b"".join(
+                    lines[fact["line_start"] - 1 : fact["line_end"]]
+                )
+                if fact["excerpt_sha256"] != (
+                    "sha256:" + hashlib.sha256(excerpt).hexdigest()
+                ):
+                    fact_mismatches.add((review["id"], fact["path"]))
+        if fact_mismatches:
+            stale_fields.add("fact_excerpt_sha256")
+            fact_changed_receipts.add(relative_path)
+
         assert stale_fields == {
             "protocol_digest",
-            "execution_checker_sha256",
             "dependency_digest",
             *({"source_sha256"} if source_mismatches else set()),
+            *({"fact_excerpt_sha256"} if fact_mismatches else set()),
         }
         stale_receipts.add(relative_path)
 
     assert stale_receipts == REVIEW_RUNS
     assert source_changed_receipts == {
-        "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml",
-        "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml",
         "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml",
-        "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml",
         "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml",
-        "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml",
     }
+    assert fact_changed_receipts <= source_changed_receipts
 
 
 def test_policy_migration_invalidates_only_review_envelopes(
@@ -1169,9 +1216,11 @@ def test_policy_migration_invalidates_only_review_envelopes(
 
     for relative_path in sorted(REVIEW_RUNS):
         receipt = yaml.safe_load(
-            _git_bytes(ROOT, "show", f"{POLICY_COMMIT}^:{relative_path}").decode(
-                "utf-8"
-            )
+            _git_bytes(
+                ROOT,
+                "show",
+                f"{PRE_SIX_P0_RECEIPTS_COMMIT}:{relative_path}",
+            ).decode("utf-8")
         )
         schema_errors = sorted(
             Draft202012Validator(
@@ -1181,7 +1230,7 @@ def test_policy_migration_invalidates_only_review_envelopes(
             key=lambda error: tuple(str(part) for part in error.path),
         )
         assert not schema_errors, (relative_path, schema_errors)
-        assert receipt["protocol_digest"] == PRE_TEN_P0_PROTOCOL_DIGEST
+        assert receipt["protocol_digest"] == LANGUAGE_TRACE_PROTOCOL_DIGEST
         assert receipt["protocol_digest"] != policy["protocol_digest"]
         assert "TNSI" not in json.dumps(receipt, ensure_ascii=False)
 
@@ -1196,7 +1245,7 @@ def test_policy_migration_invalidates_only_review_envelopes(
             historical_source = _git_bytes(
                 ROOT,
                 "show",
-                f"{PRE_TEN_P0_RECEIPTS_COMMIT}:{source['path']}",
+                f"{PRE_SIX_P0_RECEIPTS_COMMIT}:{source['path']}",
             )
             assert entry["source_sha256"] == (
                 "sha256:" + hashlib.sha256(historical_source).hexdigest()
@@ -1222,13 +1271,13 @@ def test_policy_migration_invalidates_only_review_envelopes(
                 assert (dimension["verdict"] == "issue") == bool(expected_ids)
                 for fact in dimension["facts"]:
                     _assert_historical_fact(
-                        fact, allowed_paths, PRE_TEN_P0_RECEIPTS_COMMIT
+                        fact, allowed_paths, PRE_SIX_P0_RECEIPTS_COMMIT
                     )
             for anomaly in anomalies:
                 _assert_historical_fact(
                     anomaly["fact"],
                     allowed_paths,
-                    PRE_TEN_P0_RECEIPTS_COMMIT,
+                    PRE_SIX_P0_RECEIPTS_COMMIT,
                 )
 
 
