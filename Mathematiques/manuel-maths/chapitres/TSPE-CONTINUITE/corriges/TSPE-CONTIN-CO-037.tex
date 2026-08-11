@@ -1,0 +1,35 @@
+% META: {"id": "TSPE-CONTIN-CO-037", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-037", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = x/2 + 1
+% assert solveset(Eq(f, x), x, SS.Reals) == {2}
+% t = iterer(f, 1, 4)
+% assert [float(v) for v in t] == [1.0, 1.5, 1.75, 1.875, 1.9375]
+% assert all(1 <= float(f.subs(x, v)) <= 2 for v in (1, 1.5, 2))
+% assert simplify((f - x) - (2 - x)/2) == 0
+% assert simplify((2 - f) - (2 - x)/2) == 0
+% for k in range(5):
+%     assert abs(float(t[k]) - (2 - (0.5)**k)) < 1e-12
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-037}
+
+\textbf{Q1.} $u_1 = 1{,}5$ ; $u_2 = 1{,}75$ ; $u_3 = 1{,}875$ ; $u_4 = 1{,}9375$.
+
+\textbf{Q2.} Si $x \in [1\,;2]$ alors $\dfrac{x}{2} \in \left[\dfrac12\,;1\right]$, donc $f(x) = \dfrac{x}{2} + 1 \in \left[\dfrac32\,;2\right] \subset [1\,;2]$ : l'intervalle est stable.
+
+Recurrence immediate : $u_0 = 1 \in [1\,;2]$, et si $u_n \in [1\,;2]$ alors $u_{n+1} = f(u_n) \in [1\,;2]$.
+
+\textbf{Q3.} $f(x) - x = \dfrac{x}{2} + 1 - x = \dfrac{2-x}{2}$, positif sur $[1\,;2]$. Donc $u_{n+1} - u_n \geq 0$ : la suite est croissante. Etant de plus majoree par $2$, elle converge d'apres le theoreme de la limite monotone.
+
+\textbf{Q4.} \emph{Premiere methode.} $f$ est affine donc continue ; la limite $\ell$ verifie $\dfrac{\ell}{2} + 1 = \ell$, soit $\dfrac{\ell}{2} = 1$ et $\ell = 2$.
+
+\emph{Seconde methode.} $t_{n+1} = 2 - u_{n+1} = 2 - \dfrac{u_n}{2} - 1 = \dfrac{2 - u_n}{2} = \dfrac{1}{2}t_n$. La suite $(t_n)$ est geometrique de raison $\dfrac12$ et de premier terme $t_0 = 1$, donc $t_n = \left(\dfrac12\right)^n$ et $u_n = 2 - \left(\dfrac12\right)^n$. Comme $\left(\dfrac12\right)^n \to 0$, on retrouve $u_n \to 2$.
+\end{corrige}

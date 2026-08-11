@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-CONTIN-EX-040", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-040.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-040.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = 2*x - x**2
+% assert solveset(Eq(f, x), x, SS.Reals) == {0, 1}
+% t = [float(v) for v in iterer(f, Rational(1,2), 3)]
+% assert t == [0.5, 0.75, 0.9375, 0.99609375]
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-040}{1}{12}
+Soit $(u_n)$ definie par $u_0 = 0{,}5$ et $u_{n+1} = u_n(2 - u_n)$. On pose $f(x) = 2x - x^2$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ sous forme decimale exacte.
+  \item Resoudre $f(x) = x$ et donner les points fixes de $f$.
+  \item Montrer que, pour tout $x \in [0\,;1]$, $f(x) \in [0\,;1]$. En deduire que $0 \leq u_n \leq 1$ pour tout $n$.
+  \item Montrer que $f(x) - x = x(1-x)$ et en deduire le sens de variation de $(u_n)$.
+  \item Determiner la limite de $(u_n)$ en justifiant l'elimination de l'autre point fixe.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-CONTIN-EX-034", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-034.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-034.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = sqrt(x + 2)
+% assert solveset(Eq(f, x), x, SS.Reals) == {2}
+% t = [float(v) for v in iterer(f, 0, 3)]
+% assert abs(t[1] - 1.4142136) < 1e-6 and abs(t[2] - 1.8477590) < 1e-6
+% assert all(t[i] < t[i+1] for i in range(3))
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-034}{1}{12}
+On considere la suite $(u_n)$ definie par $u_0 = 0$ et, pour tout entier $n \geq 0$,
+\[ u_{n+1} = \sqrt{u_n + 2}. \]
+On pose $f(x) = \sqrt{x+2}$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ a $10^{-3}$ pres.
+  \item Montrer que si $x \in [0\,;2]$, alors $f(x) \in [0\,;2]$ : l'intervalle $[0\,;2]$ est stable par $f$.
+  \item Demontrer par recurrence que, pour tout $n$, $0 \leq u_n \leq 2$.
+  \item Etudier le signe de $f(x) - x$ sur $[0\,;2]$ et en deduire que $(u_n)$ est croissante.
+  \item Justifier que $(u_n)$ converge, puis determiner sa limite.
+\end{enumerate}
+\end{exercice}

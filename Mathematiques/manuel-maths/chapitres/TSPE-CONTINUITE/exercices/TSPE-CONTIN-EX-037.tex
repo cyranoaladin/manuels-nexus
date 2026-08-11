@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-CONTIN-EX-037", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 10, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-037.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-037.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = x/2 + 1
+% assert solveset(Eq(f, x), x, SS.Reals) == {2}
+% t = [float(v) for v in iterer(f, 1, 4)]
+% assert t == [1.0, 1.5, 1.75, 1.875, 1.9375]
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-037}{1}{10}
+Soit $(u_n)$ definie par $u_0 = 1$ et $u_{n+1} = \dfrac{u_n}{2} + 1$.
+\begin{enumerate}
+  \item Calculer les quatre premiers termes apres $u_0$.
+  \item Montrer que $[1\,;2]$ est stable par $f : x \mapsto \dfrac{x}{2} + 1$, puis que $1 \leq u_n \leq 2$ pour tout $n$.
+  \item Montrer que $(u_n)$ est croissante, puis qu'elle converge.
+  \item Determiner sa limite de deux facons : par l'equation $f(\ell) = \ell$, puis en etudiant la suite $t_n = 2 - u_n$.
+\end{enumerate}
+\end{exercice}

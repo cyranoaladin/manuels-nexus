@@ -1,0 +1,25 @@
+% META: {"id": "TSPE-CONTIN-EX-036", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-036.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-036.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = sqrt(3*x + 4)
+% assert solveset(Eq(f, x), x, SS.Reals) == {4}
+% t = [float(v) for v in iterer(f, 0, 3)]
+% assert t[1] == 2.0 and abs(t[2] - 3.1622777) < 1e-6
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-036}{1}{12}
+Soit $(u_n)$ definie par $u_0 = 0$ et $u_{n+1} = \sqrt{3u_n + 4}$, et soit $f(x) = \sqrt{3x+4}$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$ a $10^{-3}$ pres.
+  \item Montrer que $[0\,;4]$ est stable par $f$, puis que $0 \leq u_n \leq 4$ pour tout $n$.
+  \item Montrer que $f(x) - x$ est du signe de $-(x-4)(x+1)$ sur $[0\,;4]$, et en deduire le sens de variation de $(u_n)$.
+  \item Determiner la limite de $(u_n)$ en justifiant chaque etape.
+\end{enumerate}
+\end{exercice}

@@ -1,0 +1,26 @@
+% META: {"id": "TSPE-CONTIN-EX-039", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C2"], "capacites_codes": ["C2"], "methodes": ["M4"], "parcours": 1, "competences": ["chercher", "calculer", "raisonner"], "duree_min": 12, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-039.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-039.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = sqrt(x + 2)
+% t = [float(v) for v in iterer(f, 3, 3)]
+% assert abs(t[1] - 2.2360680) < 1e-6 and abs(t[2] - 2.0581710) < 1e-6
+% assert all(t[i] > t[i+1] for i in range(3))
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-039}{1}{12}
+On reprend $f(x) = \sqrt{x+2}$ de l'exercice \textsc{ex-034}, mais avec un autre point de depart : $w_0 = 3$ et $w_{n+1} = \sqrt{w_n + 2}$.
+\begin{enumerate}
+  \item Calculer $w_1$, $w_2$ et $w_3$ a $10^{-3}$ pres. Que constate-t-on par rapport a la suite de l'exercice \textsc{ex-034} ?
+  \item Montrer que $[2\,;3]$ est stable par $f$, puis que $2 \leq w_n \leq 3$ pour tout $n$.
+  \item Etudier le signe de $f(x) - x$ sur $[2\,;3]$ et en deduire le sens de variation de $(w_n)$.
+  \item Determiner la limite de $(w_n)$.
+  \item Comparer les deux suites : que peut-on dire du point fixe $2$ ?
+\end{enumerate}
+\end{exercice}

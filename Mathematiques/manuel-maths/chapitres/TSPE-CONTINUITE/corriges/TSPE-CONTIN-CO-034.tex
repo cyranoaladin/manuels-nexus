@@ -1,0 +1,44 @@
+% META: {"id": "TSPE-CONTIN-CO-034", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-034", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = sqrt(x + 2)
+% assert solveset(Eq(f, x), x, SS.Reals) == {2}
+% t = [float(v) for v in iterer(f, 0, 3)]
+% assert abs(t[1] - 1.4142136) < 1e-6
+% assert abs(t[2] - 1.8477590) < 1e-6
+% assert abs(t[3] - 1.9615706) < 1e-6
+% # stabilite de [0,2]
+% assert float(f.subs(x, 0)) == 2**0.5 and float(f.subs(x, 2)) == 2.0
+% assert all(0 <= float(f.subs(x, v)) <= 2 for v in (0, 0.5, 1, 1.5, 2))
+% # signe de f(x) - x sur [0,2[ : positif
+% assert all(float((f - x).subs(x, v)) > 0 for v in (0, 0.5, 1, 1.5, 1.9))
+% assert simplify((f - x).subs(x, 2)) == 0
+% # l = 2 est bien l'unique solution positive de l^2 = l + 2
+% assert solveset(Eq(x**2, x + 2), x, SS.Reals) == {-1, 2}
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-034}
+
+\textbf{Q1.} $u_1 = \sqrt{0+2} = \sqrt2 \approx 1{,}414$ ; $u_2 = \sqrt{\sqrt2 + 2} \approx 1{,}848$ ; $u_3 \approx 1{,}962$.
+
+\textbf{Q2.} Soit $x \in [0\,;2]$. Alors $2 \leq x + 2 \leq 4$, et la fonction racine carree etant croissante, $\sqrt2 \leq \sqrt{x+2} \leq 2$. Comme $\sqrt2 > 0$, on a bien $f(x) \in [0\,;2]$.
+
+\textbf{Q3.} \emph{Initialisation.} $u_0 = 0$ et $0 \leq 0 \leq 2$ : la propriete est vraie au rang $0$.
+
+\emph{Heredite.} Supposons $0 \leq u_n \leq 2$ pour un entier $n$ fixe. Alors $u_{n+1} = f(u_n)$ avec $u_n \in [0\,;2]$, donc $u_{n+1} \in [0\,;2]$ d'apres Q2. La propriete est vraie au rang $n+1$.
+
+\emph{Conclusion.} Pour tout entier $n$, $0 \leq u_n \leq 2$.
+
+\textbf{Q4.} Pour $x \in [0\,;2]$, etudions $f(x) - x = \sqrt{x+2} - x$. Les deux membres etant positifs sur $[0\,;2]$, comparer $\sqrt{x+2}$ et $x$ revient a comparer $x+2$ et $x^2$, c'est-a-dire a etudier le signe de $x + 2 - x^2 = -(x^2 - x - 2) = -(x-2)(x+1)$. Sur $[0\,;2[$, $x - 2 < 0$ et $x + 1 > 0$, donc ce produit est strictement positif : $f(x) > x$. En $x = 2$, $f(2) = 2$.
+
+Par consequent, pour tout $n$, $u_{n+1} - u_n = f(u_n) - u_n \geq 0$ : la suite $(u_n)$ est croissante.
+
+\textbf{Q5.} $(u_n)$ est croissante et majoree par $2$ : d'apres le theoreme de la limite monotone, elle converge vers un reel $\ell$, avec $\ell \leq 2$. La fonction $f$ etant continue sur $[0\,;2]$, la limite $\ell$ verifie $f(\ell) = \ell$, soit $\sqrt{\ell+2} = \ell$. En elevant au carre (les deux membres etant positifs) : $\ell^2 = \ell + 2$, soit $\ell^2 - \ell - 2 = 0$, dont les racines sont $-1$ et $2$. Comme $\ell \geq u_0 = 0$, on conclut $\ell = 2$.
+\end{corrige}

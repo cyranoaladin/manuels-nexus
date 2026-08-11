@@ -1,0 +1,37 @@
+% META: {"id": "TSPE-CONTIN-CO-036", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-036", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = sqrt(3*x + 4)
+% assert solveset(Eq(f, x), x, SS.Reals) == {4}
+% t = [float(v) for v in iterer(f, 0, 3)]
+% assert t[1] == 2.0
+% assert abs(t[2] - 3.1622777) < 1e-6
+% assert abs(t[3] - 3.6724416) < 1e-6
+% assert all(0 <= float(f.subs(x, v)) <= 4 for v in (0, 1, 2, 3, 4))
+% assert float(f.subs(x, 0)) == 2.0 and float(f.subs(x, 4)) == 4.0
+% assert ((3*x + 4 - x**2) + (x - 4)*(x + 1)).expand() == 0
+% assert all(float((f - x).subs(x, v)) > 0 for v in (0, 1, 2, 3, 3.9))
+% assert simplify((f - x).subs(x, 4)) == 0
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-036}
+
+\textbf{Q1.} $u_1 = \sqrt{4} = 2$ ; $u_2 = \sqrt{10} \approx 3{,}162$ ; $u_3 = \sqrt{3\sqrt{10}+4} \approx 3{,}672$.
+
+\textbf{Q2.} Soit $x \in [0\,;4]$. Alors $4 \leq 3x+4 \leq 16$, donc $2 \leq \sqrt{3x+4} \leq 4$ : $f(x) \in [0\,;4]$.
+
+Recurrence : $u_0 = 0 \in [0\,;4]$ ; si $u_n \in [0\,;4]$ alors $u_{n+1} = f(u_n) \in [0\,;4]$. Donc $0 \leq u_n \leq 4$ pour tout $n$.
+
+\textbf{Q3.} Sur $[0\,;4]$, $f(x)$ et $x$ sont positifs, donc $f(x) - x$ a le meme signe que $f(x)^2 - x^2 = 3x + 4 - x^2$. Or $3x + 4 - x^2 = -(x^2 - 3x - 4) = -(x-4)(x+1)$. Sur $[0\,;4[$ : $x - 4 < 0$ et $x + 1 > 0$, donc $-(x-4)(x+1) > 0$ et $f(x) > x$. En $x = 4$, $f(4) = 4$.
+
+Donc $u_{n+1} - u_n = f(u_n) - u_n \geq 0$ : la suite $(u_n)$ est croissante.
+
+\textbf{Q4.} La suite est croissante et majoree par $4$ : elle converge vers un reel $\ell \in [0\,;4]$ (theoreme de la limite monotone). La fonction $f$ est continue sur $[0\,;4]$, donc $\ell$ verifie $f(\ell) = \ell$, soit $\sqrt{3\ell+4} = \ell$. Les deux membres etant positifs, on eleve au carre : $\ell^2 = 3\ell + 4$, soit $\ell^2 - 3\ell - 4 = 0$, dont les racines sont $-1$ et $4$. Comme $\ell \geq 0$, on obtient $\ell = 4$.
+\end{corrige}

@@ -1,0 +1,36 @@
+% META: {"id": "TSPE-CONTIN-CO-040", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-040", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = 2*x - x**2
+% assert solveset(Eq(f, x), x, SS.Reals) == {0, 1}
+% t = iterer(f, Rational(1,2), 3)
+% assert [float(v) for v in t] == [0.5, 0.75, 0.9375, 0.99609375]
+% assert t[1] == Rational(3,4) and t[2] == Rational(15,16) and t[3] == Rational(255,256)
+% assert simplify((f - x) - x*(1 - x)) == 0
+% # f(x) = 1 - (1-x)^2 : maximum 1 atteint en x = 1
+% assert simplify(f - (1 - (1 - x)**2)) == 0
+% assert all(0 <= float(f.subs(x, v)) <= 1 for v in (0, 0.25, 0.5, 0.75, 1))
+% assert all(float((f - x).subs(x, v)) > 0 for v in (0.25, 0.5, 0.9))
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-040}
+
+\textbf{Q1.} $u_1 = 0{,}5 \times 1{,}5 = 0{,}75$ ; $u_2 = 0{,}75 \times 1{,}25 = 0{,}9375$ ; $u_3 = 0{,}9375 \times 1{,}0625 = 0{,}99609375$.
+
+\textbf{Q2.} $2x - x^2 = x$ equivaut a $x - x^2 = 0$, soit $x(1-x) = 0$. Les points fixes sont $0$ et $1$.
+
+\textbf{Q3.} On ecrit $f(x) = 2x - x^2 = 1 - (1 - 2x + x^2) = 1 - (1-x)^2$. Pour $x \in [0\,;1]$, on a $0 \leq 1-x \leq 1$, donc $0 \leq (1-x)^2 \leq 1$ et par consequent $0 \leq 1 - (1-x)^2 \leq 1$ : $f(x) \in [0\,;1]$.
+
+Recurrence : $u_0 = 0{,}5 \in [0\,;1]$ ; si $u_n \in [0\,;1]$ alors $u_{n+1} = f(u_n) \in [0\,;1]$. Donc $0 \leq u_n \leq 1$ pour tout $n$.
+
+\textbf{Q4.} $f(x) - x = 2x - x^2 - x = x - x^2 = x(1-x)$. Sur $[0\,;1]$ les deux facteurs sont positifs, donc $f(x) - x \geq 0$. Ainsi $u_{n+1} - u_n \geq 0$ : la suite $(u_n)$ est croissante.
+
+\textbf{Q5.} $(u_n)$ est croissante et majoree par $1$, donc convergente vers un reel $\ell$. La fonction $f$ est un polynome, donc continue sur $[0\,;1]$, et $\ell$ verifie $f(\ell) = \ell$ : d'apres Q2, $\ell = 0$ ou $\ell = 1$. Or la suite est croissante a partir de $u_0 = 0{,}5$, donc $\ell \geq u_0 = 0{,}5 > 0$ : la valeur $0$ est exclue. On conclut $\ell = 1$.
+\end{corrige}

@@ -1,0 +1,39 @@
+% META: {"id": "TSPE-CONTIN-CO-035", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-035", "capacites_codes": ["C2"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, sqrt, simplify, solveset, S as SS, Eq, nsolve
+% x = symbols('x')
+% def iterer(f, u0, n):
+%     u = u0
+%     out = [u]
+%     for _ in range(n):
+%         u = f.subs(x, u)
+%         out.append(u)
+%     return out
+% f = (x + 3)/2
+% assert solveset(Eq(f, x), x, SS.Reals) == {3}
+% t = iterer(f, 1, 4)
+% assert [float(v) for v in t] == [1.0, 2.0, 2.5, 2.75, 2.875]
+% assert all(1 <= float(f.subs(x, v)) <= 3 for v in (1, 2, 3))
+% assert all(float((f - x).subs(x, v)) > 0 for v in (1, 2, 2.9))
+% assert simplify((f - x).subs(x, 3)) == 0
+% # w_{n+1} = (1/2) w_n
+% w = 3 - f
+% assert simplify(w - (3 - x)/2) == 0
+% # forme explicite v_n = 3 - 2*(1/2)^n
+% for k in range(5):
+%     assert abs(float(t[k]) - (3 - 2*(0.5)**k)) < 1e-12
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-035}
+
+\textbf{Q1.} $v_1 = \dfrac{1+3}{2} = 2$ ; $v_2 = \dfrac{2+3}{2} = 2{,}5$ ; $v_3 = 2{,}75$ ; $v_4 = 2{,}875$.
+
+\textbf{Q2.} Soit $x \in [1\,;3]$. Alors $4 \leq x + 3 \leq 6$, donc $2 \leq f(x) \leq 3$, et en particulier $f(x) \in [1\,;3]$ : l'intervalle est stable.
+
+Par recurrence : $v_0 = 1 \in [1\,;3]$ ; et si $v_n \in [1\,;3]$, alors $v_{n+1} = f(v_n) \in [1\,;3]$. Donc $1 \leq v_n \leq 3$ pour tout $n$.
+
+\textbf{Q3.} $f(x) - x = \dfrac{x+3}{2} - x = \dfrac{3-x}{2}$, qui est positif ou nul sur $[1\,;3]$. Donc $v_{n+1} - v_n = f(v_n) - v_n \geq 0$ : la suite est croissante.
+
+\textbf{Q4.} $(v_n)$ est croissante et majoree par $3$, donc convergente vers un reel $\ell$. La fonction $f$ etant continue (fonction affine), $\ell$ verifie $f(\ell) = \ell$, soit $\dfrac{\ell+3}{2} = \ell$, d'ou $\ell + 3 = 2\ell$ et $\ell = 3$.
+
+\textbf{Q5.} $w_{n+1} = 3 - v_{n+1} = 3 - \dfrac{v_n+3}{2} = \dfrac{6 - v_n - 3}{2} = \dfrac{3 - v_n}{2} = \dfrac{1}{2}w_n$. La suite $(w_n)$ est donc geometrique de raison $\dfrac12$ et de premier terme $w_0 = 3 - 1 = 2$. Ainsi $w_n = 2\left(\dfrac12\right)^n$, d'ou $v_n = 3 - 2\left(\dfrac12\right)^n$. Comme $-1 < \dfrac12 < 1$, $\left(\dfrac12\right)^n$ tend vers $0$ et $v_n$ tend vers $3$ : on retrouve bien la limite de Q4, cette fois par une formule explicite.
+\end{corrige}
