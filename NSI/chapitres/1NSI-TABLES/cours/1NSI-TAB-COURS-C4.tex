@@ -35,9 +35,8 @@ def fusionner(table1, table2, cle):
     """
     colonnes1 = {nom for ligne in table1 for nom in ligne if nom != cle}
     colonnes2 = {nom for ligne in table2 for nom in ligne if nom != cle}
-    assert colonnes1.isdisjoint(colonnes2), (
-        "les colonnes hors cle doivent etre disjointes"
-    )
+    if not colonnes1.isdisjoint(colonnes2):
+        raise ValueError("les colonnes hors cle doivent etre disjointes")
     index2 = {ligne[cle]: ligne for ligne in table2}
     fusion = []
     for ligne1 in table1:
@@ -77,9 +76,8 @@ print(resultat)
 %     """
 %     colonnes1 = {nom for ligne in table1 for nom in ligne if nom != cle}
 %     colonnes2 = {nom for ligne in table2 for nom in ligne if nom != cle}
-%     assert colonnes1.isdisjoint(colonnes2), (
-%         "les colonnes hors cle doivent etre disjointes"
-%     )
+%     if not colonnes1.isdisjoint(colonnes2):
+%         raise ValueError("les colonnes hors cle doivent etre disjointes")
 %     index2 = {ligne[cle]: ligne for ligne in table2}
 %     fusion = []
 %     for ligne1 in table1:
@@ -115,7 +113,7 @@ print(resultat)
 % ]
 % try:
 %     fusionner(table_collision1, table_collision2, "nom")
-% except AssertionError as erreur:
+% except ValueError as erreur:
 %     assert str(erreur) == "les colonnes hors cle doivent etre disjointes"
 % else:
 %     raise AssertionError
@@ -130,9 +128,8 @@ print(resultat)
 % def fusionner(table1, table2, cle):
 %     colonnes1 = {nom for ligne in table1 for nom in ligne if nom != cle}
 %     colonnes2 = {nom for ligne in table2 for nom in ligne if nom != cle}
-%     assert colonnes1.isdisjoint(colonnes2), (
-%         "les colonnes hors cle doivent etre disjointes"
-%     )
+%     if not colonnes1.isdisjoint(colonnes2):
+%         raise ValueError("les colonnes hors cle doivent etre disjointes")
 %     index2 = {ligne[cle]: ligne for ligne in table2}
 %     fusion = []
 %     for ligne1 in table1:

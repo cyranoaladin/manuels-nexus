@@ -6,6 +6,7 @@ import io
 import re
 import runpy
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -532,18 +533,44 @@ def test_table_join_rejects_overlapping_nonkey_columns() -> None:
         {"nom": "Ali", "seances": 12},
         {"nom": "Sami", "age": 16},
     ]
-    with pytest.raises(AssertionError) as error:
+    with pytest.raises(ValueError) as error:
         fusionner(table1, table2, "nom")
     message = "les colonnes hors cle doivent etre disjointes"
     assert str(error.value) == message
+
+    optimized_probe = """
+import runpy
+import sys
+
+fusionner = runpy.run_path(sys.argv[1])["fusionner"]
+table1 = [{"nom": "Ali"}, {"nom": "Sami", "age": 15}]
+table2 = [{"nom": "Ali", "seances": 12}, {"nom": "Sami", "age": 16}]
+try:
+    fusionner(table1, table2, "nom")
+except ValueError as error:
+    if str(error) != "les colonnes hors cle doivent etre disjointes":
+        raise RuntimeError(f"message inattendu: {error}")
+else:
+    raise RuntimeError("la collision doit etre refusee")
+"""
+    completed = subprocess.run(
+        [sys.executable, "-I", "-O", "-c", optimized_probe, str(TABLE_JOIN_SOURCE)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
 
     source_code = TABLE_JOIN_SOURCE.read_text(encoding="utf-8")
     assert source_code.isascii()
     assert source_code.index("colonnes1 =") < source_code.index("index2 =")
     assert source_code.index("colonnes2 =") < source_code.index("index2 =")
-    assert source_code.index("assert colonnes1.isdisjoint(colonnes2)") < source_code.index(
-        "index2 ="
+    guard = "if not colonnes1.isdisjoint(colonnes2):"
+    assert source_code.index(guard) < source_code.index("index2 =")
+    assert 'raise ValueError("les colonnes hors cle doivent etre disjointes")' in (
+        source_code
     )
+    assert "assert colonnes1.isdisjoint(colonnes2)" not in source_code
     assert "index2 = {ligne[cle]: ligne for ligne in table2}" in source_code
 
     tex = TABLE_JOIN_COURSE.read_text(encoding="utf-8")
@@ -587,13 +614,17 @@ def test_table_join_rejects_overlapping_nonkey_columns() -> None:
     verify_blocks = [_uncomment(match.group("verify")) for match in verify_matches]
     assert verify_blocks[0].count(source_code.rstrip("\n")) == 1
     for verify_code in verify_blocks:
-        assert "assert colonnes1.isdisjoint(colonnes2)" in verify_code
+        assert guard in verify_code
+        assert 'raise ValueError("les colonnes hors cle doivent etre disjointes")' in (
+            verify_code
+        )
+        assert "assert colonnes1.isdisjoint(colonnes2)" not in verify_code
         assert message in verify_code
     assert "assert resultat ==" in verify_blocks[0]
     assert re.search(
         r"try:\n"
         r"    fusionner\(table_collision1, table_collision2, \"nom\"\)\n"
-        r"except AssertionError as erreur:\n"
+        r"except ValueError as erreur:\n"
         rf'    assert str\(erreur\) == "{message}"\n'
         r"else:\n"
         r"    raise AssertionError",

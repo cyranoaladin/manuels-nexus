@@ -6,9 +6,8 @@ def fusionner(table1, table2, cle):
     """
     colonnes1 = {nom for ligne in table1 for nom in ligne if nom != cle}
     colonnes2 = {nom for ligne in table2 for nom in ligne if nom != cle}
-    assert colonnes1.isdisjoint(colonnes2), (
-        "les colonnes hors cle doivent etre disjointes"
-    )
+    if not colonnes1.isdisjoint(colonnes2):
+        raise ValueError("les colonnes hors cle doivent etre disjointes")
     index2 = {ligne[cle]: ligne for ligne in table2}
     fusion = []
     for ligne1 in table1:
