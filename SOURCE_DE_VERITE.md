@@ -104,3 +104,37 @@ l'échappement `\%` faits sur `main`.
 2 402 des 2 751 objets portent encore le statut `generated`. Voir
 `ETAT_COLLECTION.md`, `audit/AUDIT_CONSOLIDE.md` et
 `CODEX_CAHIER_DES_CHARGES_MANUEL_1SPE.md`.
+
+## Recherche exhaustive de contenus manquants — 2026-08-11 (seconde passe)
+
+**Sur disque.** Recherche de `contrat.yaml`, marqueur du pipeline de chapitre,
+sur l'integralite de `/home/alaeddine` hors depot : **zero resultat**. Aucun
+chapitre produit par le pipeline ne vit ailleurs. Les fichiers `.tex` employant
+les macros du gabarit (`exercice`, `corrige`, `fichemethode`) trouves hors
+depot sont des documents de seance : stages, sujets blancs, tests d'entree,
+DS. Ce sont des supports ponctuels, pas des manuels.
+
+**Sur GitHub.** Les 40 depots du compte ont ete inventories. `manuels-nexus`
+est le seul a contenir des manuels. Ses refs distantes sont completes : 6
+branches, 18 tags, une pull request fusionnee.
+
+**Trouvaille : le corpus NSI n'etait pas perdu.** Le depot
+`github.com/cyranoaladin/NSI` est le `corpus_nsi` reference par les
+metadonnees du chapitre pilote `1NSI-TYPES-CONSTRUITS`. Les 15 anomalies
+`unavailable_inspiration_sources` de l'audit portaient sur 10 cibles
+distinctes : **les 10 s'y resolvent, chemin pour chemin**.
+
+Volume : 44 fiches de cours, 370 supports (TD, TP, cours, evaluations,
+corriges, baremes, remediation, versions amenagees), 45 sequences, 14 banques,
+pour les deux niveaux — Premiere P00 a P21, Terminale T00 a T22. Environ
+440 000 mots.
+
+Reserve : la totalite des 370 supports porte `status: needs_review` et
+`source_creation: generated_from_program`. La qualite est inegale, certaines
+fiches de cours restant generiques la ou plusieurs TD sont directement
+exploitables. Cette matiere premiere reste soumise aux memes gates que toute
+autre. Voir `NSI/sources/SOURCES.md` pour l'enregistrement complet, avec le
+commit epingle `52bcfdea`.
+
+Point ouvert : ce depot est **public** alors que `manuels-nexus` est passe en
+prive le meme jour.
