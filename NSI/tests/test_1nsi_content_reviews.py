@@ -68,7 +68,8 @@ CONTRACT_RECEIPT_SHA256 = (
     "sha256:302ab9747f528753ada5fbba7fa4ab7810bd02eddc64a12e433ef54386734162"
 )
 PRE_TEN_P0_BASE_SHA = "7afc4b4e9dffa6fe9c2a5c46833e490df0026a6d"
-BASE_SHA = "086c5b2086335d6f6e3b3f059f938a6cf41a088f"
+PRE_ADGK_BASE_SHA = "086c5b2086335d6f6e3b3f059f938a6cf41a088f"
+BASE_SHA = "ef28edb826a3389150a8d88bd6eb017ddc83251a"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
@@ -78,6 +79,10 @@ PRE_TEN_P0_PROTOCOL_DIGEST = (
 TEN_P0_PROTOCOL_DIGEST = (
     "sha256:1467725d0bf734b28becae772d3c966f00c3a1dd984e2aec1c164b25d36911e3"
 )
+ADGK_PROTOCOL_DIGEST = (
+    "sha256:23951bfd3d842e6d417100ab84b9e0aa976333a1cee2526374002b3de7701c47"
+)
+PRE_ADGK_POLICY_COMMIT = "113539aadd376b9e4e5c3b9a351207b099c08253"
 POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
 CURRENT_RECEIPT_SEALS = {
@@ -866,13 +871,30 @@ def test_pre_ten_p0_receipts_remain_historically_sealed(review_module) -> None:
             )
 
 
-def test_ten_p0_policy_migration_invalidates_exactly_six_receipts(
+def test_ten_p0_policy_remains_historically_sealed() -> None:
+    historical_policy = yaml.safe_load(
+        _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_ADGK_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+        ).decode("utf-8")
+    )
+    assert historical_policy["scope_guard"]["implementation_base_sha"] == (
+        PRE_ADGK_BASE_SHA
+    )
+    assert historical_policy["protocol_digest"] == TEN_P0_PROTOCOL_DIGEST
+    assert _git(ROOT, "rev-parse", f"{PRE_ADGK_POLICY_COMMIT}^") == (
+        PRE_ADGK_BASE_SHA
+    )
+
+
+def test_adgk_policy_migration_invalidates_exactly_six_receipts(
     policy, sources, review_module
 ) -> None:
     assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
-    assert policy["protocol_digest"] == TEN_P0_PROTOCOL_DIGEST
+    assert policy["protocol_digest"] == ADGK_PROTOCOL_DIGEST
     assert review_module.compute_protocol_digest(ROOT, policy) == (
-        TEN_P0_PROTOCOL_DIGEST
+        ADGK_PROTOCOL_DIGEST
     )
 
     sources_by_id = {source["id"]: source for source in sources}
@@ -940,6 +962,7 @@ def test_ten_p0_policy_migration_invalidates_exactly_six_receipts(
 
     assert stale_receipts == REVIEW_RUNS
     assert source_changed_receipts == {
+        "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml",
         "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml",
         "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml",
         "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml",
