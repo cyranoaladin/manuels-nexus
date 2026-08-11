@@ -1,0 +1,48 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-TAB-COURS-C4-COLLISION-OPTIMISATION
+source_commit_sha: 09bbb2ca294d2bc8ec4f6f966b540496a44cec5f
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:a0fe5fdc270a03902f1fa5d2631565e0184ea26f145639f9a098f8c5f6d5b7a9
+  - path: NSI/chapitres/1NSI-TABLES/code/fusionner.py
+    sha256: sha256:fc607cde1923d8c848ffae666dcfa2a6b07eff9da2e4822a3618619df7ffb875
+  - path: NSI/chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex
+    sha256: sha256:79503e405575de8c838c85f923d5d171739d7eebc6a7280e2130559735f4b088
+reviewer_id: 019fee36-d6b2-7302-8d65-b0aa86451097
+reviewer_model: GPT-5 Codex
+review_run_id: 1nsi-p0-tables-collision-optimisation-2026-08-11-6cf0e6e8-v1
+session_id: 019fee36-d6b2-7302-8d65-b0aa86451097
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q NSI/tests/test_1nsi_scientific_p0_regressions.py::test_table_join_rejects_overlapping_nonkey_columns
+    cwd: .
+    exit_code: 0
+    stdout: |
+      .                                                                        [100%]
+      1 passed in 0.24s
+    stderr: ""
+    stdout_sha256: sha256:d907fec0e0445cfe67a7272e864304e81194b234052d6bdfcb6ec87c0b123e62
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La collision est refusee sous Python normal et optimise.
+  - command: python NSI/chapitres/1NSI-TABLES/code/fusionner.py
+    cwd: .
+    exit_code: 0
+    stdout: |
+      [{'nom': 'Ali', 'age': 16, 'seances': 12}, {'nom': 'Sami', 'age': 15, 'seances': 9}, {'nom': 'Yasmine', 'age': 22, 'seances': 15}]
+    stderr: ""
+    stdout_sha256: sha256:efe5188c2a4ae97aaa92443dce56c86d95dbba0209eb0e2acb91c0fd99ff0e7a
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique conserve la fusion valide et sa sortie exacte.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte.
+verdict: approved
+reviewed_at: "2026-08-11T01:32:59+01:00"

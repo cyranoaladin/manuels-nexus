@@ -35,6 +35,7 @@ EXPECTED_P0_IDS = {
     "1NSI-REV-ADGK-C2-TERMINAISON-PIECE-NULLE",
     "1NSI-REV-ADGK-C2-RENDU-PARTIEL",
     "1NSI-REV-ADGK-C3-DOMAINE-K",
+    "1NSI-REV-TAB-COURS-C4-COLLISION-OPTIMISATION",
 }
 SECRET_PATTERNS = (
     re.compile(r"sk-or-v1-", re.IGNORECASE),
@@ -213,7 +214,7 @@ def _validate_receipts(root: Path = ROOT) -> list[dict]:
         assert not duplicates, f"{key} doit etre unique: {duplicates}"
 
     if (root / "audit" / "reviews" / "1nsi" / "p0" / SUMMARY_FILENAME).is_file():
-        assert len(receipts) == 13
+        assert len(receipts) == 14
         assert {receipt["p0_id"] for receipt in receipts} == EXPECTED_P0_IDS
     return receipts
 
