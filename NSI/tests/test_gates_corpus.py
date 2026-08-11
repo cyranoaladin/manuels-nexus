@@ -7,11 +7,13 @@ Fige le comportement apres chaque assouplissement :
 - TODO dans chapitres/ → ROUGE
 - « a completer » entre backticks ou dans un env python (trous ECE) → VERT
 """
+import json
 import re
 import tempfile
 from pathlib import Path
 
 import pytest
+import yaml
 
 # Import gate logic
 import sys
@@ -19,6 +21,45 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import assemble  # noqa: E402
+
+
+LANGUAGE_SPECIFICATION_REFS = {
+    "P-LANG-03A",
+    "P-LANG-03B",
+    "P-LANG-03C",
+}
+LANGUAGE_SPECIFICATION_OBJECT_REFS = {
+    "corriges/1NSI-LANG-CO-003.tex": LANGUAGE_SPECIFICATION_REFS,
+    "cours/1NSI-LANG-COURS-C3.tex": LANGUAGE_SPECIFICATION_REFS,
+    "evaluations/1NSI-LANG-EVAL-A-corrige.tex": {"P-LANG-03B"},
+    "evaluations/1NSI-LANG-EVAL-A.tex": {"P-LANG-03B"},
+    "evaluations/1NSI-LANG-EVAL-B-corrige.tex": {"P-LANG-03B"},
+    "evaluations/1NSI-LANG-EVAL-B.tex": {"P-LANG-03B"},
+    "exercices/1NSI-LANG-EX-003.tex": LANGUAGE_SPECIFICATION_REFS,
+    "qcm/1NSI-LANGAGE-QCM.tex": {"P-LANG-03B"},
+}
+
+
+def test_language_specification_capacities_are_traced_individually():
+    chapter = ROOT / "chapitres/1NSI-LANGAGE"
+    contract = yaml.safe_load((chapter / "contrat.yaml").read_text(encoding="utf-8"))
+    contract_refs = {
+        capacity["code"]: capacity["ref_capacite"]
+        for capacity in contract["capacites"]
+    }
+    assert {
+        code: contract_refs[code]
+        for code in ("C3", "C6", "C7")
+    } == {
+        "C3": "P-LANG-03A",
+        "C6": "P-LANG-03B",
+        "C7": "P-LANG-03C",
+    }
+
+    for relative_path, expected_refs in LANGUAGE_SPECIFICATION_OBJECT_REFS.items():
+        first_line = (chapter / relative_path).read_text(encoding="utf-8").splitlines()[0]
+        metadata = json.loads(first_line.removeprefix("% META: "))
+        assert set(metadata["capacites"]) & LANGUAGE_SPECIFICATION_REFS == expected_refs, relative_path
 
 
 # --- check_eleve_no_corrige patterns ---
