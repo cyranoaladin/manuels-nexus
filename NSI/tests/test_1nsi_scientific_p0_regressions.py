@@ -42,6 +42,12 @@ TABLE_JOIN_COURSE = (
     NSI_ROOT / "chapitres/1NSI-TABLES/cours/1NSI-TAB-COURS-C4.tex"
 )
 TABLE_JOIN_SOURCE = NSI_ROOT / "chapitres/1NSI-TABLES/code/fusionner.py"
+TABLE_JOIN_ALL_CORRECTION = (
+    NSI_ROOT / "chapitres/1NSI-TABLES/corriges/1NSI-TAB-CO-005.tex"
+)
+TABLE_JOIN_ALL_SOURCE = (
+    NSI_ROOT / "chapitres/1NSI-TABLES/code/fusionner_tout.py"
+)
 WEB_SERVER_COURSE = (
     NSI_ROOT / "chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex"
 )
@@ -213,6 +219,58 @@ def test_post_does_not_claim_to_prevent_server_side_logging() -> None:
         "évitant qu'elles ne se retrouvent dans l'historique ou les journaux"
         not in answer
     )
+
+
+def test_full_table_join_preserves_duplicate_matching_rows() -> None:
+    assert TABLE_JOIN_ALL_CORRECTION.is_file()
+    assert TABLE_JOIN_ALL_SOURCE.is_file()
+
+    stdout = io.StringIO()
+    with contextlib.redirect_stdout(stdout):
+        namespace = runpy.run_path(str(TABLE_JOIN_ALL_SOURCE))
+    assert stdout.getvalue() == ""
+
+    fusionner_tout = namespace["fusionner_tout"]
+    resultat = fusionner_tout(
+        [{"nom": "Amine", "classe": "1A"}, {"nom": "Lina", "classe": "1B"}],
+        [
+            {"nom": "Amine", "absence": "lundi"},
+            {"nom": "Amine", "absence": "mardi"},
+        ],
+        "nom",
+        {"absence": "aucune"},
+    )
+    assert resultat == [
+        {"nom": "Amine", "classe": "1A", "absence": "lundi"},
+        {"nom": "Amine", "classe": "1A", "absence": "mardi"},
+        {"nom": "Lina", "classe": "1B", "absence": "aucune"},
+    ]
+
+    source_code = TABLE_JOIN_ALL_SOURCE.read_text(encoding="utf-8")
+    assert source_code.isascii()
+    assert "setdefault(ligne2[cle], []).append(ligne2)" in source_code
+    assert "{ligne[cle]: ligne for ligne in table2}" not in source_code
+
+    tex = TABLE_JOIN_ALL_CORRECTION.read_text(encoding="utf-8")
+    sequence = re.compile(
+        r"(?m)^% PYTHON-SOURCE: code/fusionner_tout\.py\n"
+        r"\\begin\{python\}(?P<python>.*?)\\end\{python\}",
+        re.DOTALL,
+    )
+    matches = list(sequence.finditer(tex))
+    assert len(matches) == 1, "la source canonique de la fusion doit etre unique"
+    assert matches[0].group("python") == f"\n{source_code}"
+
+    verify_matches = list(
+        re.finditer(
+            r"% BEGIN-VERIFY\n(?P<verify>.*?)% END-VERIFY", tex, re.DOTALL
+        )
+    )
+    assert len(verify_matches) == 1
+    verify_code = _uncomment(verify_matches[0].group("verify"))
+    assert verify_code.count(source_code.rstrip("\n")) == 1
+    assert '"absence": "lundi"' in verify_code
+    assert '"absence": "mardi"' in verify_code
 
 
 def _marked_maximum_sequence(tex: str) -> re.Match[str]:

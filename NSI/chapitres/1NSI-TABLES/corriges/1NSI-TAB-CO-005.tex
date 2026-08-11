@@ -8,19 +8,34 @@
 %     {"nom": "Amine", "nb_absences": 2}, {"nom": "Omar", "nb_absences": 0}, {"nom": "Sara", "nb_absences": 5},
 % ]
 % def fusionner_tout(table1, table2, cle, defauts):
-%     index2 = {ligne[cle]: ligne for ligne in table2}
+%     index2 = {}
+%     for ligne2 in table2:
+%         index2.setdefault(ligne2[cle], []).append(ligne2)
+%
 %     fusion = []
 %     for ligne1 in table1:
-%         if ligne1[cle] in index2:
-%             complement = {k: v for k, v in index2[ligne1[cle]].items() if k != cle}
-%         else:
-%             complement = defauts
-%         fusion.append({**ligne1, **complement})
+%         correspondances = index2.get(ligne1[cle], [defauts])
+%         for ligne2 in correspondances:
+%             complement = {k: v for k, v in ligne2.items() if k != cle}
+%             fusion.append({**ligne1, **complement})
 %     return fusion
 % resultat = fusionner_tout(eleves, absences, "nom", {"nb_absences": 0})
 % assert len(resultat) == 4
 % lina = [ligne for ligne in resultat if ligne["nom"] == "Lina"][0]
 % assert lina["nb_absences"] == 0
+% doublons = fusionner_tout(
+%     [{"nom": "Amine", "classe": "1A"}],
+%     [
+%         {"nom": "Amine", "absence": "lundi"},
+%         {"nom": "Amine", "absence": "mardi"},
+%     ],
+%     "nom",
+%     {"absence": "aucune"},
+% )
+% assert doublons == [
+%     {"nom": "Amine", "classe": "1A", "absence": "lundi"},
+%     {"nom": "Amine", "classe": "1A", "absence": "mardi"},
+% ]
 % END-VERIFY
 \begin{corrige}{1NSI-TAB-EX-005}
 \textbf{1.} La table fusionnée contient $3$ lignes (Amine, Omar, Sara).
@@ -32,18 +47,23 @@ deux tables sur la colonne \lstinline{nom}.
 \textbf{3.} Il faut modifier la fonction pour que, lorsque le nom d'un élève de
 \lstinline{eleves} n'est pas trouvé dans \lstinline{absences}, on lui attribue des valeurs
 par défaut (\lstinline{nb_absences: 0}) au lieu de l'exclure du résultat :
+% PYTHON-SOURCE: code/fusionner_tout.py
 \begin{python}
 def fusionner_tout(table1, table2, cle, defauts):
-    index2 = {ligne[cle]: ligne for ligne in table2}
+    index2 = {}
+    for ligne2 in table2:
+        index2.setdefault(ligne2[cle], []).append(ligne2)
+
     fusion = []
     for ligne1 in table1:
-        if ligne1[cle] in index2:
-            complement = {k: v for k, v in index2[ligne1[cle]].items() if k != cle}
-        else:
-            complement = defauts
-        fusion.append({**ligne1, **complement})
+        correspondances = index2.get(ligne1[cle], [defauts])
+        for ligne2 in correspondances:
+            complement = {k: v for k, v in ligne2.items() if k != cle}
+            fusion.append({**ligne1, **complement})
     return fusion
 \end{python}
 Avec \lstinline|fusionner_tout(eleves, absences, "nom", {"nb_absences": 0})|, on obtient
-bien les $4$ élèves, Lina ayant \lstinline{nb_absences} égal à $0$.
+bien les $4$ élèves, Lina ayant \lstinline{nb_absences} égal à $0$. Si plusieurs lignes de
+la seconde table portent la même clé, chacune produit une ligne dans le résultat : aucune
+correspondance n'est écrasée dans l'index.
 \end{corrige}
