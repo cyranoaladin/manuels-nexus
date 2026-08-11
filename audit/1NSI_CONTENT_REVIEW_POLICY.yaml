@@ -54,7 +54,9 @@ contractual_documents:
   sha256: sha256:f235a4dfc797b006b84abe17c9c57a11eab40412d0e6a49648297b26dfc45c91
 - path: docs/codex/ISSUE_REGISTER_TEMPLATE.md
   sha256: sha256:3768d699ef4158bc0f8212c7b5fc797ad3412ce9f55f3935644e48e882cdda93
-protocol_digest: sha256:f1dacc0230ee6b2fe898c6f7b728af7ad72b3f44b00f653cacadb05245080b57
+- path: audit/reviews/1nsi/2026-08-11-actor-provenance.yaml
+  sha256: sha256:9aa2fa670ce7dc6b97de55adf6b5ab460127448645fbbc154a132e91d889ff90
+protocol_digest: sha256:40cb76f9b329a7f38b5e3d6580146c0578439f4a004a2c2c1c6e66f9f076b064
 capacity_matrix:
 - chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
   contract_code: C1
@@ -445,7 +447,7 @@ capacity_matrix:
     ."
   human_confirmation_required: false
 scope_guard:
-  implementation_base_sha: 1fc0bf5d74fa11db657c5d53fdb7e3983368bde9
+  implementation_base_sha: ba9d2196fbbaaf6f8dd36311187a8c8261dd278d
   sources:
   - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
     path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
@@ -1528,6 +1530,7 @@ allowlist:
 - audit/sources/1nsi/programme-premiere-nsi.pdf
 - audit/sources/1nsi/legifrance-arrete-17-janvier-2019.html
 - audit/sources/1nsi/eduscol-programmes-nsi.html
+- audit/reviews/1nsi/2026-08-11-actor-provenance.yaml
 - audit/1NSI_CONTENT_REVIEW_FINDINGS.yaml
 - audit/1NSI_CONTENT_REVIEWS.json
 - audit/1NSI_CONTENT_REVIEW_SUMMARY.md

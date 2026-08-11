@@ -80,7 +80,8 @@ PRE_COPY_RECEIPT_BASE_SHA = "4239262b3f436cc76f4cd9936eedcbf389c31425"
 PRE_SEPARATION_LOCK_BASE_SHA = "775bfc90cbd26a4aac8494bfbf3757703442ab45"
 PRE_LANGUAGE_TRACE_BASE_SHA = "0085e91405c96ece34a1f5e40b6d8af8347dbc49"
 PRE_SIX_P0_BASE_SHA = "7cb8ad6ba526a7d53ad3dd9a804dcea581e32812"
-BASE_SHA = "1fc0bf5d74fa11db657c5d53fdb7e3983368bde9"
+PRE_ACTOR_PROVENANCE_BASE_SHA = "1fc0bf5d74fa11db657c5d53fdb7e3983368bde9"
+BASE_SHA = "ba9d2196fbbaaf6f8dd36311187a8c8261dd278d"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
@@ -125,6 +126,9 @@ PRE_LANGUAGE_TRACE_POLICY_COMMIT = "21f3faeadd80016476f7a65cf66620046f940890"
 SIX_P0_PROTOCOL_DIGEST = (
     "sha256:f1dacc0230ee6b2fe898c6f7b728af7ad72b3f44b00f653cacadb05245080b57"
 )
+ACTOR_PROVENANCE_PROTOCOL_DIGEST = (
+    "sha256:40cb76f9b329a7f38b5e3d6580146c0578439f4a004a2c2c1c6e66f9f076b064"
+)
 GOVERNANCE_REVIEWER_MODEL = "gpt-5.6-sol"
 SIX_RESOLVED_P0_IDS = {
     "1NSI-REV-ARCH-C1-DIAGRAM-FLOWS",
@@ -133,25 +137,6 @@ SIX_RESOLVED_P0_IDS = {
     "1NSI-REV-TAB-CO-005-FUSION-DOUBLONS",
     "1NSI-REV-TB-RE-C3-CORRIGE-EGALITE-FLOTTANTS",
     "1NSI-REV-WEB-POST-LOGS-CO004",
-}
-EXPECTED_NEW_ANOMALY_IDS = {
-    "1NSI-REV-ADGK-C2-FLOTTANTS-RENDU",
-    "1NSI-REV-AGT-EVAL-A-ECRITURE-PARCOURS",
-    "1NSI-REV-AGT-EVAL-B-ECRITURE-PARCOURS",
-    "1NSI-REV-LANG-COURS-C1-DOMAINE-SOMME-CHIFFRES",
-    "1NSI-REV-LANG-COURS-C3-PROTOTYPE-DOCSTRING",
-    "1NSI-REV-LANGAGE-BOUCLE-NEXUS-INCOMPLETE",
-    "1NSI-REV-PM-C4-ACCROCHE",
-    "1NSI-REV-PM-EVAL-A-CORRIGE-JUSTIFICATION-NON-SOURCEE",
-    "1NSI-REV-PM-EVAL-A-JUSTIFICATION-INSTITUTIONNELLE",
-    "1NSI-REV-PROJET-METHODES-BOUCLE-NEXUS-INCOMPLETE",
-    "1NSI-REV-RESEAUX-RECUPERATION-COUCHES",
-    "1NSI-REV-TABLES-DOMAINE-VALEURS",
-    "1NSI-REV-TC-CO-027-VALEUR-MUTABLE-PARTAGEE",
-    "1NSI-REV-TC-EVAL-A-CORRIGE-BAREME-DETAILLE-ABSENT",
-    "1NSI-REV-TC-EVAL-B-CORRIGE-BAREME-DETAILLE-ABSENT",
-    "1NSI-REV-TC-REM-CIRCUIT-INCOMPLET",
-    "1NSI-REV-WEB-C9-STATUT-OFFICIEL",
 }
 SIX_P0_ATTESTATION_PATHS = {
     "audit/reviews/1nsi/p0/2026-08-11-architecture-flux-von-neumann.yaml",
@@ -163,6 +148,8 @@ SIX_P0_ATTESTATION_PATHS = {
 }
 PRE_SIX_P0_POLICY_COMMIT = "563680078cb336766c2f892a8fc72539eea90fbe"
 PRE_SIX_P0_RECEIPTS_COMMIT = "e32d4cf6de9bac9b722eb1b4f6ec94968c1d2e8d"
+PRE_ACTOR_PROVENANCE_POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
+PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
 PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
 RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
@@ -304,7 +291,6 @@ EXPECTED_EXECUTION_DEBT = {
     "1NSI-LANGAGE-RE-C4-CORRIGE": ["missing_receipt"],
     "1NSI-PM-RE-C3": ["execution_receipt_diverged"],
     "1NSI-PM-RE-C3-CORRIGE": ["missing_receipt"],
-    "1NSI-RES-COURS-C3": ["execution_receipt_diverged"],
     "1NSI-RESEAUX-RE-C1": ["execution_receipt_diverged"],
     "1NSI-RESEAUX-RE-C1-CORRIGE": ["missing_receipt"],
     "1NSI-TABLES-RE-C2": ["execution_receipt_diverged"],
@@ -326,6 +312,7 @@ CURRENT_ALLOWED_FILES = {
     "audit/sources/1nsi/programme-premiere-nsi.pdf",
     "audit/sources/1nsi/legifrance-arrete-17-janvier-2019.html",
     "audit/sources/1nsi/eduscol-programmes-nsi.html",
+    "audit/reviews/1nsi/2026-08-11-actor-provenance.yaml",
 }
 INVENTORY_INTEGRATION_FILES = {
     "scripts/inventory_collection.py",
@@ -363,6 +350,7 @@ CONTRACTUAL_DOCUMENTS = {
     "NSI/docs/05_conventions_latex.md",
     "docs/codex/QUALITY_GATES.md",
     "docs/codex/ISSUE_REGISTER_TEMPLATE.md",
+    "audit/reviews/1nsi/2026-08-11-actor-provenance.yaml",
 }
 FORBIDDEN_GOVERNANCE_REVIEW_ROLES = {
     "correction_author",
@@ -985,11 +973,11 @@ def test_protocol_digest_seals_every_governance_rule(
     )
 
 
-def test_protocol_payload_contains_exactly_eight_source_records(
+def test_protocol_payload_contains_exactly_nine_source_records(
     policy, review_module
 ) -> None:
     records = review_module._protocol_records(policy)
-    assert len(records) == 8
+    assert len(records) == 9
     assert {record["path"] for record in records} == {
         *(item["snapshot_path"] for item in policy["official_sources"]),
         *(item["path"] for item in policy["contractual_documents"]),
@@ -1270,18 +1258,31 @@ def test_language_trace_policy_remains_historically_sealed() -> None:
     )
 
 
-def test_six_p0_policy_migration_invalidates_exactly_six_receipts(
+def test_actor_provenance_policy_migration_invalidates_exactly_six_receipts(
     policy, sources, review_module
 ) -> None:
     assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
-    assert policy["protocol_digest"] == SIX_P0_PROTOCOL_DIGEST
+    assert policy["protocol_digest"] == ACTOR_PROVENANCE_PROTOCOL_DIGEST
     assert review_module.compute_protocol_digest(ROOT, policy) == (
-        SIX_P0_PROTOCOL_DIGEST
+        ACTOR_PROVENANCE_PROTOCOL_DIGEST
     )
 
+    historical_policy = yaml.safe_load(
+        _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_ACTOR_PROVENANCE_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+        ).decode("utf-8")
+    )
+    assert historical_policy["scope_guard"]["implementation_base_sha"] == (
+        PRE_ACTOR_PROVENANCE_BASE_SHA
+    )
+    assert historical_policy["protocol_digest"] == SIX_P0_PROTOCOL_DIGEST
+    assert _git(
+        ROOT, "rev-parse", f"{PRE_ACTOR_PROVENANCE_POLICY_COMMIT}^"
+    ) == PRE_ACTOR_PROVENANCE_BASE_SHA
+
     sources_by_id = {source["id"]: source for source in sources}
-    source_changed_receipts = set()
-    fact_changed_receipts = set()
     stale_receipts = set()
     current_tool_hashes = {
         "review_tool_sha256": _sha(MODULE_PATH),
@@ -1294,23 +1295,20 @@ def test_six_p0_policy_migration_invalidates_exactly_six_receipts(
             _git_bytes(
                 ROOT,
                 "show",
-                f"{PRE_SIX_P0_RECEIPTS_COMMIT}:{relative_path}",
+                f"{PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT}:{relative_path}",
             ).decode("utf-8")
         )
+        assert receipt["protocol_digest"] == SIX_P0_PROTOCOL_DIGEST
         manifest = receipt["source_manifest"]
-        stale_fields = set()
-        if receipt["protocol_digest"] != policy["protocol_digest"]:
-            stale_fields.add("protocol_digest")
+        assert receipt["protocol_digest"] != policy["protocol_digest"]
         for field, current_digest in current_tool_hashes.items():
             assert manifest[field] == current_digest
 
-        source_mismatches = set()
         dependency_mismatches = set()
         for entry in manifest["entries"]:
             source = sources_by_id[entry["id"]]
             assert entry["path"] == source["path"]
-            if entry["source_sha256"] != _sha(ROOT / source["path"]):
-                source_mismatches.add(entry["id"])
+            assert entry["source_sha256"] == _sha(ROOT / source["path"])
             if entry["dependency_digest"] != (
                 review_module.compute_dependency_digest(
                     source,
@@ -1322,12 +1320,6 @@ def test_six_p0_policy_migration_invalidates_exactly_six_receipts(
                 dependency_mismatches.add(entry["id"])
 
         assert dependency_mismatches == set(receipt["assignment"]["source_ids"])
-        stale_fields.add("dependency_digest")
-        if source_mismatches:
-            stale_fields.add("source_sha256")
-            source_changed_receipts.add(relative_path)
-
-        fact_mismatches = set()
         for review in receipt["reviews"]:
             source = sources_by_id[review["id"]]
             allowed_paths = review_module._allowed_fact_paths(
@@ -1341,40 +1333,24 @@ def test_six_p0_policy_migration_invalidates_exactly_six_receipts(
             ] + [anomaly["fact"] for anomaly in payload["anomalies"]]
             for fact in facts:
                 _assert_historical_fact(
-                    fact, allowed_paths, PRE_SIX_P0_RECEIPTS_COMMIT
+                    fact, allowed_paths, PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT
                 )
-                path = ROOT / fact["path"]
-                lines = path.read_bytes().splitlines(keepends=True)
-                if not (
-                    1 <= fact["line_start"] <= fact["line_end"] <= len(lines)
-                ):
-                    fact_mismatches.add((review["id"], fact["path"]))
-                    continue
-                excerpt = b"".join(
-                    lines[fact["line_start"] - 1 : fact["line_end"]]
-                )
-                if fact["excerpt_sha256"] != (
-                    "sha256:" + hashlib.sha256(excerpt).hexdigest()
-                ):
-                    fact_mismatches.add((review["id"], fact["path"]))
-        if fact_mismatches:
-            stale_fields.add("fact_excerpt_sha256")
-            fact_changed_receipts.add(relative_path)
-
-        assert stale_fields == {
-            "protocol_digest",
-            "dependency_digest",
-            *({"source_sha256"} if source_mismatches else set()),
-            *({"fact_excerpt_sha256"} if fact_mismatches else set()),
-        }
         stale_receipts.add(relative_path)
 
     assert stale_receipts == REVIEW_RUNS
-    assert source_changed_receipts == {
-        "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml",
-        "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml",
-    }
-    assert fact_changed_receipts <= source_changed_receipts
+
+    execution_receipt_path = (
+        "NSI/chapitres/1NSI-RESEAUX/validations/"
+        "1NSI-RES-COURS-C3.execution.json"
+    )
+    historical_receipt = _git_bytes(
+        ROOT,
+        "show",
+        f"{PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT}:{execution_receipt_path}",
+    )
+    assert hashlib.sha256(historical_receipt).digest() != hashlib.sha256(
+        (ROOT / execution_receipt_path).read_bytes()
+    ).digest()
 
 
 def test_policy_migration_invalidates_only_review_envelopes(
@@ -1389,7 +1365,7 @@ def test_policy_migration_invalidates_only_review_envelopes(
             _git_bytes(
                 ROOT,
                 "show",
-                f"{PRE_SIX_P0_RECEIPTS_COMMIT}:{relative_path}",
+                f"{PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT}:{relative_path}",
             ).decode("utf-8")
         )
         schema_errors = sorted(
@@ -1400,7 +1376,7 @@ def test_policy_migration_invalidates_only_review_envelopes(
             key=lambda error: tuple(str(part) for part in error.path),
         )
         assert not schema_errors, (relative_path, schema_errors)
-        assert receipt["protocol_digest"] == LANGUAGE_TRACE_PROTOCOL_DIGEST
+        assert receipt["protocol_digest"] == SIX_P0_PROTOCOL_DIGEST
         assert receipt["protocol_digest"] != policy["protocol_digest"]
         assert "TNSI" not in json.dumps(receipt, ensure_ascii=False)
 
@@ -1415,7 +1391,7 @@ def test_policy_migration_invalidates_only_review_envelopes(
             historical_source = _git_bytes(
                 ROOT,
                 "show",
-                f"{PRE_SIX_P0_RECEIPTS_COMMIT}:{source['path']}",
+                f"{PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT}:{source['path']}",
             )
             assert entry["source_sha256"] == (
                 "sha256:" + hashlib.sha256(historical_source).hexdigest()
@@ -1441,13 +1417,13 @@ def test_policy_migration_invalidates_only_review_envelopes(
                 assert (dimension["verdict"] == "issue") == bool(expected_ids)
                 for fact in dimension["facts"]:
                     _assert_historical_fact(
-                        fact, allowed_paths, PRE_SIX_P0_RECEIPTS_COMMIT
+                        fact, allowed_paths, PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT
                     )
             for anomaly in anomalies:
                 _assert_historical_fact(
                     anomaly["fact"],
                     allowed_paths,
-                    PRE_SIX_P0_RECEIPTS_COMMIT,
+                    PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT,
                 )
 
 
@@ -1461,15 +1437,15 @@ def test_all_review_receipts_match_current_governance_before_sealing(
     assert len(review_run_ids) == len(set(review_run_ids)) == 6
     assert not (set(reviewer_ids) & PRE_GOVERNANCE_REVIEWER_IDS)
     assert not (set(review_run_ids) & PRE_GOVERNANCE_REVIEW_RUN_IDS)
-    assert policy["integrator_id"] not in reviewer_ids
-    correction_reviewer_ids = {
-        yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))[
-            "reviewer_id"
-        ]
-        for relative_path in SIX_P0_ATTESTATION_PATHS
+    actor_provenance = yaml.safe_load(
+        ACTOR_PROVENANCE_PATH.read_text(encoding="utf-8")
+    )
+    forbidden_reviewer_ids = {
+        actor["actor_id"]
+        for actor in actor_provenance["actors"]
+        if set(actor["roles"]) & FORBIDDEN_GOVERNANCE_REVIEW_ROLES
     }
-    assert len(correction_reviewer_ids) == 6
-    assert not (set(reviewer_ids) & correction_reviewer_ids)
+    assert not (set(reviewer_ids) & forbidden_reviewer_ids)
 
     sources_by_id = {source["id"]: source for source in sources}
     receipt_schema = review_module._receipt_schema(ROOT)
@@ -1578,8 +1554,14 @@ def test_all_review_receipts_match_current_governance_before_sealing(
         for anomaly in review["payload"]["anomalies"]
     }
     observed_anomaly_ids = set(current_anomaly_ids)
+    actor_provenance = yaml.safe_load(
+        ACTOR_PROVENANCE_PATH.read_text(encoding="utf-8")
+    )
+    retained_new_anomaly_ids = set(
+        actor_provenance["decision"]["retained_new_anomaly_ids"]
+    )
     assert previous_anomaly_ids - observed_anomaly_ids == SIX_RESOLVED_P0_IDS
-    assert observed_anomaly_ids - previous_anomaly_ids == EXPECTED_NEW_ANOMALY_IDS
+    assert observed_anomaly_ids - previous_anomaly_ids == retained_new_anomaly_ids
     assert execution_debt == EXPECTED_EXECUTION_DEBT
 
 
