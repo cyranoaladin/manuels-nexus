@@ -39,7 +39,8 @@ def avancement(jalons):
 
     Precondition : la liste contient au moins un jalon.
     """
-    assert len(jalons) > 0, "au moins un jalon est requis"
+    if len(jalons) == 0:
+        raise ValueError("au moins un jalon est requis")
     nb_termines = sum(1 for j in jalons if j["termine"])
     return nb_termines / len(jalons) * 100
 
@@ -77,7 +78,8 @@ Fonctionnalites completes
 %
 %     Precondition : la liste contient au moins un jalon.
 %     """
-%     assert len(jalons) > 0, "au moins un jalon est requis"
+%     if len(jalons) == 0:
+%         raise ValueError("au moins un jalon est requis")
 %     nb_termines = sum(1 for j in jalons if j["termine"])
 %     return nb_termines / len(jalons) * 100
 %
@@ -101,7 +103,7 @@ Fonctionnalites completes
 % assert prochain_jalon(jalons_termines) is None
 % try:
 %     avancement([])
-% except AssertionError as erreur:
+% except ValueError as erreur:
 %     assert str(erreur) == "au moins un jalon est requis"
 % else:
 %     raise AssertionError

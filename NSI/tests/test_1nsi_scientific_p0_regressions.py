@@ -342,7 +342,7 @@ def test_avancement_canonical_source_rejects_empty_milestones() -> None:
     assert avancement(namespace["jalons"]) == 40.0
     assert avancement([{"nom": "Debut", "termine": False}]) == 0.0
     assert avancement([{"nom": "Fin", "termine": True}]) == 100.0
-    with pytest.raises(AssertionError) as error:
+    with pytest.raises(ValueError) as error:
         avancement([])
     assert str(error.value) == "au moins un jalon est requis"
     assert prochain_jalon(namespace["jalons"]) == "Fonctionnalites completes"
@@ -356,6 +356,36 @@ def test_avancement_canonical_source_rejects_empty_milestones() -> None:
 
     source_code = AVANCEMENT_SOURCE.read_text(encoding="utf-8")
     assert source_code.isascii()
+    assert 'raise ValueError("au moins un jalon est requis")' in source_code
+    assert "assert " not in source_code
+
+    optimized_script = f"""
+import contextlib
+import io
+import runpy
+
+with contextlib.redirect_stdout(io.StringIO()):
+    avancement = runpy.run_path({str(AVANCEMENT_SOURCE)!r})["avancement"]
+try:
+    avancement([])
+except ValueError as error:
+    if str(error) != "au moins un jalon est requis":
+        raise RuntimeError(f"message inattendu: {{error}}")
+else:
+    raise RuntimeError("liste vide acceptee")
+print("liste vide refusee")
+"""
+    optimized = subprocess.run(
+        [sys.executable, "-O", "-c", optimized_script],
+        cwd=REPO_ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert optimized.returncode == 0, optimized.stdout + optimized.stderr
+    assert optimized.stdout == "liste vide refusee\n"
+    assert optimized.stderr == ""
+
     tex = AVANCEMENT_COURSE.read_text(encoding="utf-8")
     sequence = re.compile(
         r"(?m)^% PYTHON-SOURCE: code/avancement\.py\n"
@@ -408,7 +438,7 @@ def test_avancement_canonical_source_rejects_empty_milestones() -> None:
     assert re.search(
         r"try:\n"
         r"    avancement\(\[\]\)\n"
-        r"except AssertionError as erreur:\n"
+        r"except ValueError as erreur:\n"
         r'    assert str\(erreur\) == "au moins un jalon est requis"\n'
         r"else:\n"
         r"    raise AssertionError",
