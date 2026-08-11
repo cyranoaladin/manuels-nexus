@@ -13,16 +13,19 @@ d'organisation : l'architecture de von Neumann.}
 \begin{center}
 \begin{tikzpicture}[
   boite/.style={draw=nxBleu, line width=0.8pt, minimum width=3.4cm, minimum height=1.1cm, font=\sffamily\small, align=center, fill=nxBleu!5},
-  fleche/.style={draw=nxBleu, line width=0.8pt, -{Stealth[length=6pt]}}
+  bus/.style={draw=nxBleu, line width=1.2pt},
+  liaison/.style={draw=nxBleu, line width=0.8pt, <->, >=Stealth}
 ]
-  \node[boite] (uc) at (0,2) {Processeur (UC)\\[2pt]\footnotesize registres, UAL, séquenceur};
-  \node[boite] (mem) at (0,0) {Mémoire\\[2pt]\footnotesize instructions et données};
-  \node[boite, minimum width=1.5cm] (entree) at (-2.6,-2) {Entrées};
-  \node[boite, minimum width=1.5cm] (sortie) at (2.6,-2) {Sorties};
+  \node[boite] (uc) at (-2.2,2) {Processeur (UC)\\[2pt]\footnotesize registres, UAL, séquenceur};
+  \node[boite] (mem) at (2.2,2) {Mémoire\\[2pt]\footnotesize instructions et données};
+  \node[boite, minimum width=1.5cm] (entree) at (-2.2,-2) {Entrées};
+  \node[boite, minimum width=1.5cm] (sortie) at (2.2,-2) {Sorties};
 
-  \draw[fleche] (mem.north) -- (uc.south) node[midway, right, font=\tiny\sffamily] {bus};
-  \draw[fleche] (uc.south) ++(-0.6,0) |- (entree.north);
-  \draw[fleche] (mem.south) ++(0.6,0) |- (sortie.north);
+  \draw[bus] (-4,0) -- (4,0) node[midway, above, font=\tiny\sffamily] {bus};
+  \draw[liaison] (uc.south) -- (-2.2,0);
+  \draw[liaison] (mem.south) -- (2.2,0);
+  \draw[liaison] (entree.north) -- (-2.2,0);
+  \draw[liaison] (sortie.north) -- (2.2,0);
 \end{tikzpicture}
 \end{center}
 

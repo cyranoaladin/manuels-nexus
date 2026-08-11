@@ -45,6 +45,10 @@ TABLE_JOIN_SOURCE = NSI_ROOT / "chapitres/1NSI-TABLES/code/fusionner.py"
 WEB_SERVER_COURSE = (
     NSI_ROOT / "chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex"
 )
+ARCHITECTURE_COURSE = (
+    NSI_ROOT
+    / "chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex"
+)
 GRID_COPY_COURSE = (
     NSI_ROOT
     / "chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex"
@@ -90,6 +94,31 @@ MARKED_MAXIMUM_SEQUENCE = re.compile(
 
 def _uncomment(block: str) -> str:
     return "\n".join(re.sub(r"^%\s?", "", line) for line in block.splitlines())
+
+
+def test_von_neumann_diagram_uses_one_bidirectional_bus() -> None:
+    assert ARCHITECTURE_COURSE.is_file()
+
+    tex = ARCHITECTURE_COURSE.read_text(encoding="utf-8")
+    diagram_match = re.search(
+        r"\\begin\{tikzpicture\}(?P<diagram>.*?)\\end\{tikzpicture\}",
+        tex,
+        re.DOTALL,
+    )
+    assert diagram_match is not None
+    diagram = diagram_match.group("diagram")
+
+    assert "bus/.style=" in diagram
+    assert "liaison/.style=" in diagram
+    assert "<->" in diagram
+    assert diagram.count(r"\draw[bus]") == 1
+    assert diagram.count(r"\draw[liaison]") == 4
+    for component in ("uc", "mem", "entree", "sortie"):
+        assert re.search(
+            rf"\\draw\[liaison\] \({component}\.(?:north|south)\) -- ",
+            diagram,
+        )
+    assert r"\draw[fleche]" not in diagram
 
 
 def _marked_maximum_sequence(tex: str) -> re.Match[str]:
