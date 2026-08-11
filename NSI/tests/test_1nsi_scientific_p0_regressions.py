@@ -64,6 +64,10 @@ THERMOSTAT_COURSE = (
 THERMOSTAT_SOURCE = (
     NSI_ROOT / "chapitres/1NSI-RESEAUX/code/thermostat_ihm.py"
 )
+FLOAT_EQUALITY_CORRECTION = (
+    NSI_ROOT
+    / "chapitres/1NSI-TYPES-BASE/corriges/1NSI-TYPES-BASE-RE-C3-CORRIGE.tex"
+)
 GRID_COPY_COURSE = (
     NSI_ROOT
     / "chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex"
@@ -349,6 +353,28 @@ else:
     assert "table_collision" in verify_code
     assert "defauts_collision" in verify_code
     assert f'assert str(erreur) == "{message}"' in verify_code
+
+
+def test_float_equality_is_not_described_as_bitwise_comparison() -> None:
+    assert FLOAT_EQUALITY_CORRECTION.is_file()
+
+    tex = FLOAT_EQUALITY_CORRECTION.read_text(encoding="utf-8")
+    compact_tex = " ".join(tex.split())
+    assert "compare des\n\\textbf{bits}" not in tex
+    assert "règles d'égalité de Python" in compact_tex
+    assert "pas leurs représentations binaires bit à bit" in compact_tex
+    assert "deux nombres flottants représentables distincts" in compact_tex
+    assert r"\lstinline{-0.0 == 0.0}" in tex
+    assert r'\lstinline{float("nan") == float("nan")}' in tex
+
+    x = 0.0
+    for _ in range(3):
+        x += 0.1
+    assert x == 0.30000000000000004
+    assert x != 0.3
+    assert -0.0 == 0.0
+    nan = float("nan")
+    assert nan != nan
 
 
 def _marked_maximum_sequence(tex: str) -> re.Match[str]:

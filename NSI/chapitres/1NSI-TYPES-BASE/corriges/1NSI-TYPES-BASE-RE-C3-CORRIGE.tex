@@ -5,8 +5,11 @@
 
 \textbf{2.} Chaque addition de $0{,}1$ (lui-même stocké de façon approchée) introduit une
 petite erreur d'arrondi. Après trois additions, la valeur accumulée n'est plus exactement
-égale à la représentation flottante de $0{,}3$ : le test \lstinline{==} compare des
-\textbf{bits}, pas des valeurs mathématiques.
+égale à la représentation flottante de $0{,}3$ : les deux calculs produisent deux nombres
+flottants représentables distincts. Le test \lstinline{==} compare les valeurs selon les
+règles d'égalité de Python, pas leurs représentations binaires bit à bit. Par exemple,
+\lstinline{-0.0 == 0.0} vaut \lstinline{True}, tandis que
+\lstinline{float("nan") == float("nan")} vaut \lstinline{False}.
 
 \textbf{3.} Il faut remplacer le test par une comparaison à tolérance près :
 \begin{python}
