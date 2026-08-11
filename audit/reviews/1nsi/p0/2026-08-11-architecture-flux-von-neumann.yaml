@@ -1,0 +1,37 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-ARCH-C1-DIAGRAM-FLOWS
+source_commit_sha: ac8405c654f303db966cc100c1f19a5023e9e09e
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:0c3dba78730c2d3240d7963f0f62c0b45014635c62b882b6fda97b8871af2ff4
+  - path: NSI/chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex
+    sha256: sha256:e3a3838d8cb59ab5de2d1126e2b2fde0d2b2d40420d8b34d4db464ecd7449ea0
+reviewer_id: 019ff010-c560-7832-a360-c259e305a6c8
+reviewer_model: gpt-5.6-terra
+review_run_id: 1nsi-p0-architecture-flux-2026-08-11-100543-01
+session_id: 019ff010-c560-7832-a360-c259e305a6c8
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py::test_von_neumann_diagram_uses_one_bidirectional_bus
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      .                                                                        [100%]
+      1 passed in 0.14s
+    stderr: ""
+    stdout_sha256: sha256:09229b326b028651d725fa47cd1bae9fd8e0145ff8779bdb84ae2762c00ab737
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La topologie du bus unique bidirectionnel est couverte et verte.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte.
+verdict: approved
+reviewed_at: "2026-08-11T10:05:43+01:00"

@@ -1,0 +1,47 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-RES-IHM-COURSE
+source_commit_sha: ac8405c654f303db966cc100c1f19a5023e9e09e
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:0c3dba78730c2d3240d7963f0f62c0b45014635c62b882b6fda97b8871af2ff4
+  - path: NSI/chapitres/1NSI-RESEAUX/code/thermostat_ihm.py
+    sha256: sha256:5b32114f4be36b9ff780e319e9aba73f39de27f241fedccb9617493ee659d793
+  - path: NSI/chapitres/1NSI-RESEAUX/cours/1NSI-RES-COURS-C3.tex
+    sha256: sha256:6c99e61b3961390ff2b30ce0afa826b7a9d52bf0217ec5e91b171c97713ad640
+reviewer_id: 019ff010-c5b6-7210-9295-3ec60d64751b
+reviewer_model: gpt-5.6-terra
+review_run_id: 1nsi-p0-reseaux-ihm-2026-08-11-ac8405c6-100630
+session_id: 019ff010-c5b6-7210-9295-3ec60d64751b
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q tests/test_1nsi_scientific_p0_regressions.py::test_thermostat_exposes_tested_user_controls_and_state
+    cwd: NSI
+    exit_code: 0
+    stdout: |
+      .                                                                        [100%]
+      1 passed in 0.15s
+    stderr: ""
+    stdout_sha256: sha256:976ea3fe6dfa65b827ec05fc16bf49cec94d3fda3b2d6ad4719708e74a38b32d
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Les commandes, le seuil et le retour automatique sont couverts.
+  - command: python -m py_compile chapitres/1NSI-RESEAUX/code/thermostat_ihm.py
+    cwd: NSI
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique de l'IHM est syntaxiquement valide.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte.
+verdict: approved
+reviewed_at: "2026-08-11T10:06:30+01:00"
