@@ -70,7 +70,8 @@ CONTRACT_RECEIPT_SHA256 = (
 PRE_TEN_P0_BASE_SHA = "7afc4b4e9dffa6fe9c2a5c46833e490df0026a6d"
 PRE_ADGK_BASE_SHA = "086c5b2086335d6f6e3b3f059f938a6cf41a088f"
 PRE_OPTIMIZATION_BASE_SHA = "ef28edb826a3389150a8d88bd6eb017ddc83251a"
-BASE_SHA = "ef8d1db888807370f46693547139df9e7512c811"
+PRE_PRECONDITION_BASE_SHA = "ef8d1db888807370f46693547139df9e7512c811"
+BASE_SHA = "d1defc745c605fe80d8b4cdbb3eaceaed1d2fae0"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
@@ -88,6 +89,10 @@ OPTIMIZATION_PROTOCOL_DIGEST = (
     "sha256:0f43741f48ac3b6bc5a7c776f89cedf806d73519ce35b4533f1d62bec0a64f04"
 )
 PRE_OPTIMIZATION_POLICY_COMMIT = "b8a5b987e2d7942ae984abb9d013883e420c18c8"
+PRECONDITION_PROTOCOL_DIGEST = (
+    "sha256:f36df9b5cf24a8d597720a8a0a4450c54b3e24df8ab02b43cefda1e6e750bcc2"
+)
+PRE_PRECONDITION_POLICY_COMMIT = "54482def7e75f981a8e4e9c935c698ff69584374"
 POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
 CURRENT_RECEIPT_SEALS = {
@@ -910,13 +915,30 @@ def test_adgk_policy_remains_historically_sealed() -> None:
     )
 
 
-def test_table_optimization_policy_migration_invalidates_exactly_six_receipts(
+def test_table_optimization_policy_remains_historically_sealed() -> None:
+    historical_policy = yaml.safe_load(
+        _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_PRECONDITION_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+        ).decode("utf-8")
+    )
+    assert historical_policy["scope_guard"]["implementation_base_sha"] == (
+        PRE_PRECONDITION_BASE_SHA
+    )
+    assert historical_policy["protocol_digest"] == OPTIMIZATION_PROTOCOL_DIGEST
+    assert _git(ROOT, "rev-parse", f"{PRE_PRECONDITION_POLICY_COMMIT}^") == (
+        PRE_PRECONDITION_BASE_SHA
+    )
+
+
+def test_precondition_optimization_policy_migration_invalidates_exactly_six_receipts(
     policy, sources, review_module
 ) -> None:
     assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
-    assert policy["protocol_digest"] == OPTIMIZATION_PROTOCOL_DIGEST
+    assert policy["protocol_digest"] == PRECONDITION_PROTOCOL_DIGEST
     assert review_module.compute_protocol_digest(ROOT, policy) == (
-        OPTIMIZATION_PROTOCOL_DIGEST
+        PRECONDITION_PROTOCOL_DIGEST
     )
 
     sources_by_id = {source["id"]: source for source in sources}
