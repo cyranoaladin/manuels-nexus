@@ -26,6 +26,9 @@ MODULE_PATH = ROOT / "scripts" / "review_1nsi_content.py"
 POLICY_PATH = ROOT / "audit" / "1NSI_CONTENT_REVIEW_POLICY.yaml"
 SCHEMA_PATH = ROOT / "audit" / "schemas" / "v1" / "1nsi-content-review.schema.json"
 FINDINGS_PATH = ROOT / "audit" / "1NSI_CONTENT_REVIEW_FINDINGS.yaml"
+ACTOR_PROVENANCE_PATH = (
+    ROOT / "audit" / "reviews" / "1nsi" / "2026-08-11-actor-provenance.yaml"
+)
 CONTRACT_RECEIPT_PATH = (
     ROOT / "audit" / "reviews" / "1nsi" / "runs" / "2026-08-10-contracts.yaml"
 )
@@ -360,6 +363,12 @@ CONTRACTUAL_DOCUMENTS = {
     "NSI/docs/05_conventions_latex.md",
     "docs/codex/QUALITY_GATES.md",
     "docs/codex/ISSUE_REGISTER_TEMPLATE.md",
+}
+FORBIDDEN_GOVERNANCE_REVIEW_ROLES = {
+    "correction_author",
+    "correction_reviewer",
+    "governance_integrator",
+    "receipt_integrator",
 }
 CANONICAL_PDFS = {
     f"NSI/build/MANUEL_1NSI/MANUEL_1NSI_{variant}.pdf"
@@ -783,6 +792,109 @@ def test_policy_pins_official_and_contractual_sources(policy, review_module) -> 
     assert (
         review_module.compute_protocol_digest(ROOT, policy) == policy["protocol_digest"]
     )
+
+
+def test_actor_provenance_seals_the_human_process_decision_and_forbidden_roles(
+    policy,
+) -> None:
+    provenance = yaml.safe_load(ACTOR_PROVENANCE_PATH.read_text(encoding="utf-8"))
+    assert set(provenance) == {
+        "artifact_type",
+        "schema_version",
+        "manual",
+        "decision",
+        "actors",
+    }
+    assert provenance["artifact_type"] == "1nsi_review_actor_provenance"
+    assert provenance["schema_version"] == 1
+    assert provenance["manual"] == "1NSI"
+
+    decision = provenance["decision"]
+    assert set(decision) == {
+        "id",
+        "human_instruction",
+        "supersedes_plan_invariant",
+        "operational_effect",
+        "retained_new_anomaly_ids",
+        "publication_approval",
+        "release_acceptance",
+        "human_confirmation_required",
+    }
+    assert decision["human_instruction"] == (
+        "migrer la gouvernance, reattester les 349 revues, resynchroniser les "
+        "findings puis traiter separement BUILD_MANIFEST"
+    )
+    assert decision["supersedes_plan_invariant"] == (
+        "new_anomaly_ids - old_anomaly_ids == set()"
+    )
+    assert decision["operational_effect"] == (
+        "conserver les anomalies nouvelles contre-revues et poursuivre la "
+        "reattestation sans les approuver"
+    )
+    assert decision["retained_new_anomaly_ids"]
+    assert len(decision["retained_new_anomaly_ids"]) == len(
+        set(decision["retained_new_anomaly_ids"])
+    )
+    assert all(
+        anomaly_id.startswith("1NSI-REV-")
+        for anomaly_id in decision["retained_new_anomaly_ids"]
+    )
+    assert decision["publication_approval"] is False
+    assert decision["release_acceptance"] is False
+    assert decision["human_confirmation_required"] is True
+
+    actors = provenance["actors"]
+    assert actors
+    actor_ids = [actor["actor_id"] for actor in actors]
+    assert len(actor_ids) == len(set(actor_ids))
+    forbidden_ids = {
+        actor["actor_id"]
+        for actor in actors
+        if set(actor["roles"]) & FORBIDDEN_GOVERNANCE_REVIEW_ROLES
+    }
+    assert policy["integrator_id"] in forbidden_ids
+
+    attestation_reviewers = set()
+    for relative_path in SIX_P0_ATTESTATION_PATHS:
+        receipt = yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))
+        attestation_reviewers.add(receipt["reviewer_id"])
+    assert attestation_reviewers <= forbidden_ids
+
+    for actor in actors:
+        assert set(actor) == {"actor_id", "roles", "evidence"}
+        assert actor["roles"]
+        assert actor["evidence"]
+        for evidence in actor["evidence"]:
+            if evidence["kind"] == "git_commit_author":
+                assert set(evidence) == {"kind", "commit_sha", "author_email"}
+                assert actor["actor_id"] == f"git-email:{evidence['author_email']}"
+                assert _git(
+                    ROOT, "show", "-s", "--format=%ae", evidence["commit_sha"]
+                ) == evidence["author_email"]
+            elif evidence["kind"] == "policy_integrator":
+                assert set(evidence) == {"kind", "path", "field"}
+                assert evidence == {
+                    "kind": "policy_integrator",
+                    "path": "audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+                    "field": "integrator_id",
+                }
+                assert actor["actor_id"] == policy["integrator_id"]
+            elif evidence["kind"] == "p0_review_receipt":
+                assert set(evidence) == {"kind", "path", "sha256"}
+                receipt_path = ROOT / evidence["path"]
+                assert evidence["sha256"] == _sha(receipt_path)
+                receipt = yaml.safe_load(receipt_path.read_text(encoding="utf-8"))
+                assert actor["actor_id"] == receipt["reviewer_id"]
+            else:
+                raise AssertionError(f"preuve d'acteur inconnue: {evidence['kind']}")
+
+    governance_reviewer_ids = {
+        yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))[
+            "reviewer_id"
+        ]
+        for relative_path in REVIEW_RUNS
+    }
+    assert not (governance_reviewer_ids & forbidden_ids)
 
 
 def test_policy_matrix_covers_every_contract_reference_once(policy) -> None:
