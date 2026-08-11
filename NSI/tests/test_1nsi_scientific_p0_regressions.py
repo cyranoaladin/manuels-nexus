@@ -116,6 +116,22 @@ def _uncomment(block: str) -> str:
     return "\n".join(re.sub(r"^%\s?", "", line) for line in block.splitlines())
 
 
+def _assert_liaisons_reach_common_bus(diagram: str) -> None:
+    bus_match = re.search(
+        r"\\draw\[bus\] \([^,]+,(?P<start_y>[^)]+)\) -- "
+        r"\([^,]+,(?P<end_y>[^)]+)\)",
+        diagram,
+    )
+    assert bus_match is not None
+    assert bus_match.group("start_y") == bus_match.group("end_y")
+
+    connection_ys = re.findall(
+        r"\\draw\[liaison\] \([^)]+\) -- \([^,]+,([^)]+)\);", diagram
+    )
+    assert len(connection_ys) == 4
+    assert set(connection_ys) == {bus_match.group("start_y")}
+
+
 def test_von_neumann_diagram_uses_one_bidirectional_bus() -> None:
     assert ARCHITECTURE_COURSE.is_file()
 
@@ -139,6 +155,16 @@ def test_von_neumann_diagram_uses_one_bidirectional_bus() -> None:
             diagram,
         )
     assert r"\draw[fleche]" not in diagram
+    _assert_liaisons_reach_common_bus(diagram)
+
+    disconnected = diagram.replace(
+        r"\draw[bus] (-4,0) -- (4,0)",
+        r"\draw[bus] (-4,0.5) -- (4,0.5)",
+        1,
+    )
+    assert disconnected != diagram
+    with pytest.raises(AssertionError):
+        _assert_liaisons_reach_common_bus(disconnected)
 
 
 def test_thermostat_exposes_tested_user_controls_and_state() -> None:
@@ -160,6 +186,18 @@ def test_thermostat_exposes_tested_user_controls_and_state() -> None:
     )
     assert interface_thermostat("AUTO", 15) == (
         "temperature=15 C | mode=AUTO | chauffage=ON"
+    )
+    assert interface_thermostat("AUTO", 22) == (
+        "temperature=22 C | mode=AUTO | chauffage=OFF"
+    )
+    assert interface_thermostat("AUTO", 18) == (
+        "temperature=18 C | mode=AUTO | chauffage=OFF"
+    )
+    assert interface_thermostat("ON", 25) == (
+        "temperature=25 C | mode=ON manuel | chauffage=ON"
+    )
+    assert interface_thermostat("AUTO", 25) == (
+        "temperature=25 C | mode=AUTO | chauffage=OFF"
     )
 
     affichages: list[str] = []
@@ -200,6 +238,9 @@ def test_thermostat_exposes_tested_user_controls_and_state() -> None:
     assert 'assert interface_thermostat("ON", 25)' in verify_code
     assert 'assert interface_thermostat("OFF", 15)' in verify_code
     assert 'assert interface_thermostat("AUTO", 15)' in verify_code
+    assert 'assert interface_thermostat("AUTO", 22)' in verify_code
+    assert 'assert interface_thermostat("AUTO", 18)' in verify_code
+    assert 'assert interface_thermostat("AUTO", 25)' in verify_code
     assert "except ValueError as erreur:" in verify_code
 
 
@@ -224,6 +265,28 @@ def test_post_does_not_claim_to_prevent_server_side_logging() -> None:
         "évitant qu'elles ne se retrouvent dans l'historique ou les journaux"
         not in answer
     )
+
+    forbidden_claims = (
+        re.compile(
+            r"\bPOST\b[^.]{0,180}\b(?:empêch\w*|évit\w*|interdit\w*|exclut)"
+            r"\b[^.]{0,100}\b(?:journ\w*|logs?)\b",
+            re.IGNORECASE,
+        ),
+        re.compile(
+            r"\b(?:journ\w*|logs?)\b[^.]{0,120}"
+            r"\b(?:empêch\w*|évit\w*|interdit\w*|exclu\w*)\b"
+            r"[^.]{0,120}\bPOST\b",
+            re.IGNORECASE,
+        ),
+    )
+    contradictory_samples = (
+        "POST empêche la journalisation du corps.",
+        "POST évite les logs applicatifs.",
+        "Les journaux sont exclus grâce à POST.",
+    )
+    for sample in contradictory_samples:
+        assert any(pattern.search(sample) for pattern in forbidden_claims)
+    assert not any(pattern.search(answer) for pattern in forbidden_claims)
 
 
 def test_full_table_join_preserves_duplicate_matching_rows() -> None:

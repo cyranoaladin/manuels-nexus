@@ -118,6 +118,10 @@ def lancer_ihm(temperature, seuil=18, lire=input, ecrire=print):
 % assert interface_thermostat("ON", 25) == "temperature=25 C | mode=ON manuel | chauffage=ON"
 % assert interface_thermostat("OFF", 15) == "temperature=15 C | mode=OFF manuel | chauffage=OFF"
 % assert interface_thermostat("AUTO", 15) == "temperature=15 C | mode=AUTO | chauffage=ON"
+% assert interface_thermostat("AUTO", 22) == "temperature=22 C | mode=AUTO | chauffage=OFF"
+% assert interface_thermostat("AUTO", 18) == "temperature=18 C | mode=AUTO | chauffage=OFF"
+% assert interface_thermostat("ON", 25) == "temperature=25 C | mode=ON manuel | chauffage=ON"
+% assert interface_thermostat("AUTO", 25) == "temperature=25 C | mode=AUTO | chauffage=OFF"
 % try:
 %     interface_thermostat("CHAUD", 20)
 % except ValueError as erreur:
