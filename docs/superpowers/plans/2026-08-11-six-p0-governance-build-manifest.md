@@ -17,6 +17,19 @@
 **Files:**
 - Modify: `scripts/inventory_collection.py`
 - Test: `tests/test_inventory_collection.py`
+- Test: `NSI/tests/test_1nsi_p0_attestations.py`
+
+- [ ] **Step 0: Exiger que ce plan soit le seul fichier du commit documentaire**
+
+Run:
+
+```bash
+git status --porcelain
+git show --format= --name-only HEAD
+```
+
+Expected: worktree vide et dernier commit limite a
+`docs/superpowers/plans/2026-08-11-six-p0-governance-build-manifest.md`.
 
 - [ ] **Step 1: Confirmer le rouge existant**
 
@@ -39,6 +52,7 @@ Commit: `[CI] enregistre le schema des attestations P0 1NSI`.
 **Files:**
 - Modify: `audit/BUILD_MANIFEST.json`
 - Modify if generated: `ETAT_COLLECTION.md`
+- Modify if generated: `audit/AUDIT_CONSOLIDE.md`
 - Modify if generated: `audit/ECARTS_ET_CONTRADICTIONS.yaml`
 - Modify if generated: `audit/INVENTAIRE_COLLECTION.json`
 - Modify if generated: `audit/INVENTAIRE_COLLECTION.md`
@@ -46,19 +60,52 @@ Commit: `[CI] enregistre le schema des attestations P0 1NSI`.
 
 - [ ] **Step 1: Exiger une base propre puis rafraichir uniquement l'enveloppe vide**
 
-Run: `python scripts/build_manifest.py --refresh-empty`.
+Run:
+
+```bash
+test -z "$(git status --porcelain)"
+python scripts/build_manifest.py --refresh-empty
+```
 
 Expected: `builds` reste `[]`; seuls provenance, `source_digest` et `model_digest` derivables changent.
 
 - [ ] **Step 2: Verifier et committer le manifeste seul**
 
-Run: `python -m json.tool audit/BUILD_MANIFEST.json`, puis les tests `build_manifest`/inventaire cibles.
+Run:
+
+```bash
+python -m json.tool audit/BUILD_MANIFEST.json >/dev/null
+pytest -q tests/test_build_manifest.py -k refresh_empty_manifest
+pytest -q tests/test_inventory_collection.py \
+  -k 'build_manifest or v1_schema_directory_contains_exactly_the_registered_contracts'
+git diff --check
+git status --short
+```
 
 Commit: `[AUDIT] rafraichit le manifeste vide apres les six P0 1NSI`.
 
 - [ ] **Step 3: Resynchroniser l'inventaire de facon bornee**
 
-Run d'abord `python scripts/inventory_collection.py --check`. N'autoriser la generation que pour des raisons `diff:` ou `manquant:` et uniquement pour les six sorties gerees listees ci-dessus. Executer ensuite `python scripts/inventory_collection.py`, inspecter le diff, puis `--check`, `--validate-model` et `--fail-on-new`.
+Run d'abord :
+
+```bash
+python scripts/inventory_collection.py --check
+```
+
+Si le code vaut `3`, parser sa sortie JSON. N'autoriser la generation que si
+toutes les raisons commencent par `diff:` ou `manquant:` et si tous les chemins
+appartiennent aux six sorties gerees listees ci-dessus. Executer alors :
+
+```bash
+python scripts/inventory_collection.py
+git diff --name-only
+git diff --check
+python scripts/inventory_collection.py --check
+python scripts/inventory_collection.py --validate-model
+python scripts/inventory_collection.py --fail-on-new
+```
+
+Arreter si un septieme chemin change ou si une raison n'est pas autorisee.
 
 Commit eventuel: `[AUDIT] resynchronise l inventaire apres les six P0 1NSI`.
 
@@ -104,10 +151,18 @@ Commit: `[AUDIT] migre la gouvernance apres les six P0 1NSI`.
 - Modify: `audit/reviews/1nsi/runs/2026-08-10-language-project.yaml`
 - Modify: `audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml`
 - Modify: `audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml`
+- Modify: `NSI/tests/test_1nsi_p0_attestations.py`
 
 - [ ] **Step 1: Mandater six reviewers distincts en lecture seule**
 
-Un reviewer par lot. Exiger des IDs et runs nouveaux, deux a deux distincts, distincts de l'integrateur et des identites historiques. Chaque reviewer controle son affectation complete, les sources, dependances, faits, anomalies et executions applicables ; aucune ancienne anomalie n'est supprimee sans constat explicite.
+Un reviewer par lot. Exiger des IDs et runs nouveaux, deux a deux distincts,
+distincts de l'integrateur, des six reviewers precedents et, pour les lots
+affectes, des auteurs/integrateurs/reviewers consignes pour les six corrections.
+Etendre d'abord `NSI/tests/test_1nsi_p0_attestations.py` aux six P0 ci-dessous
+afin que cette disjonction soit derivee de preuves suivies plutot que d'une
+declaration. Chaque reviewer controle son affectation complete, les sources,
+dependances, faits, anomalies et executions applicables ; aucune ancienne
+anomalie n'est supprimee sans constat explicite.
 
 - [ ] **Step 2: Ecrire et observer le test rouge de pre-scellement**
 
@@ -115,7 +170,21 @@ Le test exige schema ferme, protocole/outils/manifeste courants, couverture exac
 
 - [ ] **Step 3: Integrer fidelement les six avis**
 
-Reconstruire chaque enveloppe et manifeste depuis l'etat courant. Conserver un ancien payload seulement si le reviewer le confirme ; retirer les six IDs P0 corriges et tout autre finding uniquement sur preuve independante.
+Reconstruire chaque enveloppe et manifeste depuis l'etat courant. Conserver un
+ancien payload seulement si le reviewer le confirme. La seule allowlist de
+findings supprimables dans cette passe est :
+
+```text
+1NSI-REV-ARCH-C1-DIAGRAM-FLOWS
+1NSI-REV-RES-IHM-COURSE
+1NSI-REV-WEB-POST-LOGS-CO004
+1NSI-REV-TAB-CO-005-FUSION-DOUBLONS
+1NSI-REV-TAB-CO-005-COLLISION-COLONNES
+1NSI-REV-TB-RE-C3-CORRIGE-EGALITE-FLOTTANTS
+```
+
+Toute autre suppression est interdite dans ce plan. Toute anomalie nouvelle
+doit au contraire etre conservee et signaler un arret avant scellement.
 
 - [ ] **Step 4: Verifier et sceller ensemble**
 
@@ -159,12 +228,72 @@ Commit: `[AUDIT] rattache les 349 qualifications apres les six P0`.
 
 - [ ] **Step 1: Suites completes**
 
-Run `pytest -q NSI/tests`, `pytest -q tests/test_inventory_collection.py tests/test_build_manifest.py`, les trois modes `review_1nsi_content.py`, puis `inventory_collection.py --check --validate-model --fail-on-new` separement.
+Run exactement :
+
+```bash
+pytest -q NSI/tests
+pytest -q tests/test_inventory_collection.py tests/test_build_manifest.py
+python scripts/review_1nsi_content.py \
+  --findings audit/1NSI_CONTENT_REVIEW_FINDINGS.yaml \
+  --output-json audit/1NSI_CONTENT_REVIEWS.json \
+  --output-summary audit/1NSI_CONTENT_REVIEW_SUMMARY.md --check
+python scripts/review_1nsi_content.py --verify-scope
+set +e
+python scripts/review_1nsi_content.py --release-gate \
+  >/tmp/1nsi-review-release-gate.json
+review_rc=$?
+set -e
+test "$review_rc" -eq 7
+python scripts/inventory_collection.py --check
+python scripts/inventory_collection.py --validate-model
+python scripts/inventory_collection.py --fail-on-new
+```
+
+Le gate de revue reste rouge tant que des P0 publies subsistent ; sa sortie doit
+etre un refus metier, pas une indisponibilite de l'inventaire.
 
 - [ ] **Step 2: Refus de release attendu**
 
-Run `python scripts/inventory_collection.py --release-strict`; exiger le code 7, `success: false`, des blocages reels et aucune raison `inventaire_indisponible:`.
+Run :
+
+```bash
+set +e
+python scripts/inventory_collection.py --release-strict \
+  >/tmp/1nsi-inventory-release-strict.json
+release_rc=$?
+set -e
+test "$release_rc" -eq 7
+python - <<'PY'
+import json
+from pathlib import Path
+
+payload = json.loads(Path("/tmp/1nsi-inventory-release-strict.json").read_text())
+assert payload["success"] is False
+assert payload["blocking_reasons"]
+assert not any(
+    str(reason).startswith("inventaire_indisponible:")
+    for reason in payload["blocking_reasons"]
+)
+PY
+```
 
 - [ ] **Step 3: Gardes finales**
 
-Exiger `git diff --check`, worktree propre, aucune modification TNSI depuis `93c3c726`, policy scope verte, six recus scelles et 349 findings coherents.
+Run :
+
+```bash
+git diff --quiet 0f0f6950 -- \
+  'NSI/chapitres/TNSI-*' 'NSI/referentiel/capacites_TNSI_*' \
+  NSI/docs/11_perimetre_terminale.md \
+  NSI/sources/txt/BO2019_NSI_terminale.txt 'NSI/build/MANUEL_TNSI*'
+test -z "$(git status --porcelain -- \
+  'NSI/chapitres/TNSI-*' 'NSI/referentiel/capacites_TNSI_*' \
+  NSI/docs/11_perimetre_terminale.md \
+  NSI/sources/txt/BO2019_NSI_terminale.txt 'NSI/build/MANUEL_TNSI*')"
+git diff --check
+test -z "$(git status --porcelain)"
+python scripts/review_1nsi_content.py --verify-scope
+```
+
+Expected: aucune modification des cinq surfaces TNSI depuis `0f0f6950`, policy
+scope verte, six recus scelles, 349 findings coherents et worktree propre.
