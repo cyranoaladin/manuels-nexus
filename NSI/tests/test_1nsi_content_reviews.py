@@ -74,7 +74,8 @@ PRE_PRECONDITION_BASE_SHA = "ef8d1db888807370f46693547139df9e7512c811"
 PRE_EXECUTION_RECEIPT_BASE_SHA = "d1defc745c605fe80d8b4cdbb3eaceaed1d2fae0"
 PRE_LANGUAGE_RECEIPT_BASE_SHA = "98bcf780e0a788603ffed0a4ad3c123de1858f77"
 PRE_COPY_RECEIPT_BASE_SHA = "4239262b3f436cc76f4cd9936eedcbf389c31425"
-BASE_SHA = "775bfc90cbd26a4aac8494bfbf3757703442ab45"
+PRE_SEPARATION_LOCK_BASE_SHA = "775bfc90cbd26a4aac8494bfbf3757703442ab45"
+BASE_SHA = "0085e91405c96ece34a1f5e40b6d8af8347dbc49"
 PRE_BUILD_MANIFEST_PROTOCOL_DIGEST = (
     "sha256:66fb1d8fa7a6b8699fa291bf57b935c2d21f9c573cb9158d5c0a10797f6825f9"
 )
@@ -108,6 +109,10 @@ COPY_RECEIPT_PROTOCOL_DIGEST = (
     "sha256:b6fb227985632e64b9c9d5af0bc1492ece1e411b1c1b25339bf0c35361a518ff"
 )
 PRE_COPY_RECEIPT_POLICY_COMMIT = "9a60daf4850e6bdbe7bd25c6e082da7310633514"
+SEPARATION_LOCK_PROTOCOL_DIGEST = (
+    "sha256:ca320655b09895e60930f9ec0f04c5794faf11e80bf89712a67575c0471fe25a"
+)
+PRE_SEPARATION_LOCK_POLICY_COMMIT = "de82f7d2f457875056ffbe534f1922862bdf5986"
 POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
 RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
 CURRENT_RECEIPT_SEALS = {
@@ -998,13 +1003,30 @@ def test_language_execution_receipt_policy_remains_historically_sealed() -> None
     )
 
 
-def test_copy_receipt_policy_migration_invalidates_exactly_six_receipts(
+def test_copy_receipt_policy_remains_historically_sealed() -> None:
+    historical_policy = yaml.safe_load(
+        _git_bytes(
+            ROOT,
+            "show",
+            f"{PRE_SEPARATION_LOCK_POLICY_COMMIT}:audit/1NSI_CONTENT_REVIEW_POLICY.yaml",
+        ).decode("utf-8")
+    )
+    assert historical_policy["scope_guard"]["implementation_base_sha"] == (
+        PRE_SEPARATION_LOCK_BASE_SHA
+    )
+    assert historical_policy["protocol_digest"] == COPY_RECEIPT_PROTOCOL_DIGEST
+    assert _git(ROOT, "rev-parse", f"{PRE_SEPARATION_LOCK_POLICY_COMMIT}^") == (
+        PRE_SEPARATION_LOCK_BASE_SHA
+    )
+
+
+def test_separation_lock_policy_migration_invalidates_exactly_six_receipts(
     policy, sources, review_module
 ) -> None:
     assert policy["scope_guard"]["implementation_base_sha"] == BASE_SHA
-    assert policy["protocol_digest"] == COPY_RECEIPT_PROTOCOL_DIGEST
+    assert policy["protocol_digest"] == SEPARATION_LOCK_PROTOCOL_DIGEST
     assert review_module.compute_protocol_digest(ROOT, policy) == (
-        COPY_RECEIPT_PROTOCOL_DIGEST
+        SEPARATION_LOCK_PROTOCOL_DIGEST
     )
 
     sources_by_id = {source["id"]: source for source in sources}
