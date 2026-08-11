@@ -719,6 +719,12 @@ else:
         verify_blocks[0],
     )
 
+    execution = review_module.execution_observation(course_record, REPO_ROOT)
+    assert execution is not None
+    assert execution["fresh_verdict"] == "pass"
+    assert execution["matches_receipt"] is True
+    assert execution["anomalies"] == []
+
 
 def test_server_code_is_normally_not_sent_in_http_response() -> None:
     assert WEB_SERVER_COURSE.is_file()
