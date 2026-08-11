@@ -156,26 +156,26 @@ PRE_ACTOR_PROVENANCE_POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
 PRE_ACTOR_PROVENANCE_RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
 PRE_COUNTER_REVIEW_POLICY_COMMIT = "f0c1a095288e000fa014653afc7f60f5c2b0b273"
 PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
-POLICY_COMMIT = "1329a4217a6d1d920a3e62ff5cc845579dedbf30"
-RECEIPTS_COMMIT = "bbea8bd7d13c67dd7618c2bde8cd4a8929307555"
+POLICY_COMMIT = "6fdd04b2e8e68a77fd27cdd630284a14a029ee14"
+RECEIPTS_COMMIT = "60847229983f6712d1ed7f36791a0037ca5b5282"
 CURRENT_RECEIPT_SEALS = {
     "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": (
-        "sha256:e924d464142fbe1b3f7e05454a9a05978cfea7af022802a32913e0b6a27d8bea"
+        "sha256:1a02fa37a9c45b1cbef5c30ff8e95893e1faaca672c5b473ef511b788a0b4066"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": (
-        "sha256:27918b6e7df21c6c49b23bd1b53425971b385f00d796e739bc0d4fce5c497474"
+        "sha256:5dd69794cad89b5f89a5a0a2148c6d7da1cde56926232d96078bdb4dd539f23b"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": (
-        "sha256:aaade78faf9a89b9a39cc84a525bdd99525c9be3ded01663d4175427865e0d27"
+        "sha256:3afebc4c6263ad9e5b454f17615136addd5584c5c669fee715793ca1c3ad46c6"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": (
-        "sha256:7e48bb58ed2328f19a62e3cabac6d6e774783743b3f50af9437be7ab8c2ed404"
+        "sha256:71c853c987a94bebc15fe9a5061a9b08406f8b43255f4926e1efe678e80a8fa7"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": (
-        "sha256:8b80cadddfe3e9488302d302b693ae1d2f4c17ab7e986538966890e60d43210d"
+        "sha256:232ccb9335a13d5593df033a8a5938137a7144cb19062a210ba73460d462474c"
     ),
     "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": (
-        "sha256:c3f74a2c9420dc335806f086033ecd58f54f53dc46963a3586ee689eb5affc69"
+        "sha256:057995e913387674e6f9a52b8cc501355d4a0c4e90b373880ba3b080265867dc"
     ),
 }
 PRE_TEN_P0_RECEIPTS_COMMIT = "c101f539668d48ba6e2e9d32e5cf68e3dc64f872"
@@ -1612,6 +1612,31 @@ def test_sealed_current_governance_receipts_cover_all_349_reviews(
         covered_ids.extend(receipt["assignment"]["source_ids"])
 
     assert len(covered_ids) == len(set(covered_ids)) == 349
+
+
+def test_sealed_current_governance_observations_are_unique_per_chapter(
+    review_module,
+) -> None:
+    seen = {}
+    duplicates = []
+    for relative_path in sorted(CURRENT_RECEIPT_SEALS):
+        receipt = yaml.safe_load(
+            _git_bytes(ROOT, "show", f"{RECEIPTS_COMMIT}:{relative_path}").decode(
+                "utf-8"
+            )
+        )
+        for review in receipt["reviews"]:
+            for dimension in ("scientific", "pedagogical"):
+                for fact in review["payload"]["dimensions"][dimension]["facts"]:
+                    normalised = review_module._normalise_observation(
+                        fact["observation"]
+                    )
+                    key = (review["chapter"], normalised)
+                    if normalised and key in seen:
+                        duplicates.append((seen[key], review["id"]))
+                    seen[key] = review["id"]
+
+    assert not duplicates, f"observations dupliquees: {duplicates}"
 
 
 def test_findings_only_differ_on_reattested_payload_or_provenance(
