@@ -45,6 +45,9 @@ TABLE_JOIN_SOURCE = NSI_ROOT / "chapitres/1NSI-TABLES/code/fusionner.py"
 WEB_SERVER_COURSE = (
     NSI_ROOT / "chapitres/1NSI-WEB-IHM/cours/1NSI-WEB-COURS-C2.tex"
 )
+WEB_POST_CORRECTION = (
+    NSI_ROOT / "chapitres/1NSI-WEB-IHM/corriges/1NSI-WEB-CO-004.tex"
+)
 ARCHITECTURE_COURSE = (
     NSI_ROOT
     / "chapitres/1NSI-ARCHITECTURE-OS/cours/1NSI-ARCHOS-COURS-C1.tex"
@@ -187,6 +190,29 @@ def test_thermostat_exposes_tested_user_controls_and_state() -> None:
     assert 'assert interface_thermostat("OFF", 15)' in verify_code
     assert 'assert interface_thermostat("AUTO", 15)' in verify_code
     assert "except ValueError as erreur:" in verify_code
+
+
+def test_post_does_not_claim_to_prevent_server_side_logging() -> None:
+    assert WEB_POST_CORRECTION.is_file()
+
+    tex = WEB_POST_CORRECTION.read_text(encoding="utf-8")
+    answer_match = re.search(
+        r"\\textbf\{3\.\}(?P<answer>.*?)\\end\{corrige\}", tex, re.DOTALL
+    )
+    assert answer_match is not None
+    answer = " ".join(answer_match.group("answer").split())
+
+    assert "corps de la requête plutôt que dans l'URL" in answer
+    assert "n'apparaissent donc pas dans l'historique des URL" in answer
+    assert "serveur web, un proxy ou l'application" in answer
+    assert "peuvent néanmoins journaliser le corps" in answer
+    assert "HTTPS" in answer
+    assert "minimiser les données" in answer
+    assert "politique de journalisation" in answer
+    assert (
+        "évitant qu'elles ne se retrouvent dans l'historique ou les journaux"
+        not in answer
+    )
 
 
 def _marked_maximum_sequence(tex: str) -> re.Match[str]:
