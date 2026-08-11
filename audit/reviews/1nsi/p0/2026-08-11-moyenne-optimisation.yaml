@@ -1,0 +1,48 @@
+artifact_type: 1nsi_p0_correction_attestation
+schema_version: 1
+manual: 1NSI
+p0_id: 1NSI-REV-PM-COURS-C3-OPTIMISATION
+source_commit_sha: e67184f91e4b395a43e12e197e60e9f8d8ed59a9
+source_files:
+  - path: NSI/tests/test_1nsi_scientific_p0_regressions.py
+    sha256: sha256:8f7b0a11de9a8c73f09d6d91590e08faf6d992361962f4d50de3b1087879311c
+  - path: NSI/chapitres/1NSI-PROJET-METHODES/code/moyenne_ponderee.py
+    sha256: sha256:58d41512370e1beaf789e5df9b02e73ba34f32407ad0a2dd0b6a309867455470
+  - path: NSI/chapitres/1NSI-PROJET-METHODES/cours/1NSI-PM-COURS-C3.tex
+    sha256: sha256:b45db3c38298e37dd678fe19c2f4df1c5dec1615934dc2e212802e71a250c8f0
+reviewer_id: 019fee53-660a-7900-8073-1b0c29d0df31
+reviewer_model: GPT-5 Codex
+review_run_id: 1nsi-p0-pm-c3-optimization-postcommit-2026-08-11-019fee53-v3
+session_id: 019fee53-660a-7900-8073-1b0c29d0df31
+generation_id: not_applicable
+cache_status: not_applicable
+commands:
+  - command: pytest -q NSI/tests/test_1nsi_scientific_p0_regressions.py::test_weighted_mean_rejects_invalid_weights_under_optimization
+    cwd: .
+    exit_code: 0
+    stdout: |
+      .                                                                        [100%]
+      1 passed in 0.23s
+    stderr: ""
+    stdout_sha256: sha256:36ee6125777253800df314c891baf72e42248a17540db95c6bdb02de742e24de
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Les cinq entrees invalides, dont NaN, sont refusees en modes normal et optimise.
+  - command: python -m ruff check NSI/chapitres/1NSI-PROJET-METHODES/code/moyenne_ponderee.py NSI/tests/test_1nsi_scientific_p0_regressions.py
+    cwd: .
+    exit_code: 0
+    stdout: |
+      All checks passed!
+    stderr: ""
+    stdout_sha256: sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: La source canonique et sa regression respectent les controles statiques.
+  - command: git diff --check
+    cwd: .
+    exit_code: 0
+    stdout: ""
+    stderr: ""
+    stdout_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    stderr_sha256: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    result_summary: Aucun defaut d'espacement n'est detecte.
+verdict: approved
+reviewed_at: "2026-08-11T02:11:19+01:00"
