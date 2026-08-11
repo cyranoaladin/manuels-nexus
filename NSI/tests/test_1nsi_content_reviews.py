@@ -122,6 +122,42 @@ PRE_LANGUAGE_TRACE_POLICY_COMMIT = "21f3faeadd80016476f7a65cf66620046f940890"
 SIX_P0_PROTOCOL_DIGEST = (
     "sha256:f1dacc0230ee6b2fe898c6f7b728af7ad72b3f44b00f653cacadb05245080b57"
 )
+GOVERNANCE_REVIEWER_MODEL = "gpt-5.6-sol"
+SIX_RESOLVED_P0_IDS = {
+    "1NSI-REV-ARCH-C1-DIAGRAM-FLOWS",
+    "1NSI-REV-RES-IHM-COURSE",
+    "1NSI-REV-TAB-CO-005-COLLISION-COLONNES",
+    "1NSI-REV-TAB-CO-005-FUSION-DOUBLONS",
+    "1NSI-REV-TB-RE-C3-CORRIGE-EGALITE-FLOTTANTS",
+    "1NSI-REV-WEB-POST-LOGS-CO004",
+}
+EXPECTED_NEW_ANOMALY_IDS = {
+    "1NSI-REV-ADGK-C2-FLOTTANTS-RENDU",
+    "1NSI-REV-AGT-EVAL-A-ECRITURE-PARCOURS",
+    "1NSI-REV-AGT-EVAL-B-ECRITURE-PARCOURS",
+    "1NSI-REV-LANG-COURS-C1-DOMAINE-SOMME-CHIFFRES",
+    "1NSI-REV-LANG-COURS-C3-PROTOTYPE-DOCSTRING",
+    "1NSI-REV-LANGAGE-BOUCLE-NEXUS-INCOMPLETE",
+    "1NSI-REV-PM-C4-ACCROCHE",
+    "1NSI-REV-PM-EVAL-A-CORRIGE-JUSTIFICATION-NON-SOURCEE",
+    "1NSI-REV-PM-EVAL-A-JUSTIFICATION-INSTITUTIONNELLE",
+    "1NSI-REV-PROJET-METHODES-BOUCLE-NEXUS-INCOMPLETE",
+    "1NSI-REV-RESEAUX-RECUPERATION-COUCHES",
+    "1NSI-REV-TABLES-DOMAINE-VALEURS",
+    "1NSI-REV-TC-CO-027-VALEUR-MUTABLE-PARTAGEE",
+    "1NSI-REV-TC-EVAL-A-CORRIGE-BAREME-DETAILLE-ABSENT",
+    "1NSI-REV-TC-EVAL-B-CORRIGE-BAREME-DETAILLE-ABSENT",
+    "1NSI-REV-TC-REM-CIRCUIT-INCOMPLET",
+    "1NSI-REV-WEB-C9-STATUT-OFFICIEL",
+}
+SIX_P0_ATTESTATION_PATHS = {
+    "audit/reviews/1nsi/p0/2026-08-11-architecture-flux-von-neumann.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-reseaux-ihm-thermostat.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-tables-fusion-collisions.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-tables-fusion-doublons.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-types-base-egalite-flottants.yaml",
+    "audit/reviews/1nsi/p0/2026-08-11-web-post-portee.yaml",
+}
 PRE_SIX_P0_POLICY_COMMIT = "563680078cb336766c2f892a8fc72539eea90fbe"
 PRE_SIX_P0_RECEIPTS_COMMIT = "e32d4cf6de9bac9b722eb1b4f6ec94968c1d2e8d"
 PRE_TEN_P0_POLICY_COMMIT = "372d8ad8d80d977f70d32cc30aabc8bf9fe6f723"
@@ -171,47 +207,63 @@ PRE_TEN_P0_RECEIPT_SEALS = {
 }
 GOVERNANCE_REVIEW_CONFIG = {
     "audit/reviews/1nsi/runs/2026-08-10-contracts.yaml": {
-        "reviewer_id": "019feeea-7360-7ec1-b9d6-7a6bd1ae85e9",
-        "review_run_id": "1nsi-contracts-2026-08-11-language-trace-019feeea-v1",
+        "reviewer_id": "019ff021-bfee-7950-b26d-34689f197ee3",
+        "review_run_id": "1nsi-contracts-2026-08-11-six-p0-019ff021-v1",
         "previous_reviewed_at": "2026-08-10T12:02:01+01:00",
+        "reviewed_at": "2026-08-11T10:30:45+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-algorithms.yaml": {
-        "reviewer_id": "019feeea-7468-73d3-bdb2-3896a3930c8b",
+        "reviewer_id": "019ff021-c059-7fe2-a84d-ddc9fdb3e495",
         "review_run_id": (
-            "1nsi-objects-algorithms-2026-08-11-language-trace-019feeea-v1"
+            "1nsi-objects-algorithms-2026-08-11-six-p0."
+            "9f59a4c7-455a-49b8-a1f7-a6bb5af90347"
         ),
         "previous_reviewed_at": "2026-08-10T16:13:20+01:00",
+        "reviewed_at": "2026-08-11T10:31:31+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-systems-web.yaml": {
-        "reviewer_id": "019feeea-741e-7b53-9c40-bda2f515e04e",
+        "reviewer_id": "019ff021-c0a3-71c2-a2b3-b5cfacd770cc",
         "review_run_id": (
-            "1nsi-objects-systems-web-2026-08-11-language-trace-019feeea-v1"
+            "1nsi-objects-systems-web-2026-08-11-six-p0-"
+            "c64cae93-bc64-4484-9031-4e4981a891cc-v1"
         ),
         "previous_reviewed_at": "2026-08-10T11:43:03.124509+00:00",
+        "reviewed_at": "2026-08-11T10:32:28+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-language-project.yaml": {
-        "reviewer_id": "019feeea-73d9-7c90-9a08-27018cd7c72d",
+        "reviewer_id": "019ff022-24e3-71d3-a75b-c73958d31b31",
         "review_run_id": (
-            "1nsi-objects-language-project-2026-08-11-language-trace-019feeea-v1"
+            "1nsi-objects-language-project-2026-08-11-six-p0-bd346cbf-v1"
         ),
         "previous_reviewed_at": "2026-08-10T12:45:26+01:00",
+        "reviewed_at": "2026-08-11T10:32:42+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-data-basics-tables.yaml": {
-        "reviewer_id": "019feeea-74da-7211-99ae-3715f605f195",
+        "reviewer_id": "019ff022-2527-7970-8dae-59748b06ba3a",
         "review_run_id": (
-            "1nsi-objects-data-basics-tables-2026-08-11-language-trace-019feeea-v1"
+            "1nsi-objects-data-basics-tables-2026-08-11-six-p0-"
+            "35a10009-3947-43f6-af4c-95c0b9339d34"
         ),
         "previous_reviewed_at": "2026-08-10T12:42:55+01:00",
+        "reviewed_at": "2026-08-11T10:30:35+01:00",
     },
     "audit/reviews/1nsi/runs/2026-08-10-types-construits.yaml": {
-        "reviewer_id": "019feef5-b487-7993-b072-b2b1e7fcc4ff",
+        "reviewer_id": "019ff022-2583-71e3-ad83-0199360bb747",
         "review_run_id": (
-            "1nsi-objects-types-construits-2026-08-11-language-trace-019feef5-v1"
+            "1nsi-objects-types-construits-2026-08-11-six-p0."
+            "81a8936e-0386-4cad-bd5b-ce77b2f2ae41"
         ),
         "previous_reviewed_at": "2026-08-10T12:53:30+01:00",
+        "reviewed_at": "2026-08-11T10:32:30+01:00",
     },
 }
 PRE_GOVERNANCE_REVIEWER_IDS = {
+    "019feeea-7360-7ec1-b9d6-7a6bd1ae85e9",
+    "019feeea-73d9-7c90-9a08-27018cd7c72d",
+    "019feeea-741e-7b53-9c40-bda2f515e04e",
+    "019feeea-7468-73d3-bdb2-3896a3930c8b",
+    "019feeea-74da-7211-99ae-3715f605f195",
+    "019feef5-b487-7993-b072-b2b1e7fcc4ff",
     "019feb3f-cd89-7242-9a84-6fafbc77e0d8",
     "019feb71-89a9-77b3-9103-ad05eacf18ca",
     "019feb72-1592-7900-b0b1-02fae59a6a39",
@@ -226,6 +278,12 @@ PRE_GOVERNANCE_REVIEWER_IDS = {
     C3_REVIEWER_ID,
 }
 PRE_GOVERNANCE_REVIEW_RUN_IDS = {
+    "1nsi-contracts-2026-08-11-language-trace-019feeea-v1",
+    "1nsi-objects-algorithms-2026-08-11-language-trace-019feeea-v1",
+    "1nsi-objects-data-basics-tables-2026-08-11-language-trace-019feeea-v1",
+    "1nsi-objects-language-project-2026-08-11-language-trace-019feeea-v1",
+    "1nsi-objects-systems-web-2026-08-11-language-trace-019feeea-v1",
+    "1nsi-objects-types-construits-2026-08-11-language-trace-019feef5-v1",
     "1nsi-contracts-2026-08-10-plato-reattestation-v2",
     "1nsi-contracts-2026-08-10-build-manifest-019fec51-v1",
     C3_REVIEW_RUN_ID,
@@ -244,6 +302,7 @@ EXPECTED_EXECUTION_DEBT = {
     "1NSI-LANGAGE-RE-C4-CORRIGE": ["missing_receipt"],
     "1NSI-PM-RE-C3": ["execution_receipt_diverged"],
     "1NSI-PM-RE-C3-CORRIGE": ["missing_receipt"],
+    "1NSI-RES-COURS-C3": ["execution_receipt_diverged"],
     "1NSI-RESEAUX-RE-C1": ["execution_receipt_diverged"],
     "1NSI-RESEAUX-RE-C1-CORRIGE": ["missing_receipt"],
     "1NSI-TABLES-RE-C2": ["execution_receipt_diverged"],
@@ -1292,10 +1351,19 @@ def test_all_review_receipts_match_current_governance_before_sealing(
     assert not (set(reviewer_ids) & PRE_GOVERNANCE_REVIEWER_IDS)
     assert not (set(review_run_ids) & PRE_GOVERNANCE_REVIEW_RUN_IDS)
     assert policy["integrator_id"] not in reviewer_ids
+    correction_reviewer_ids = {
+        yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))[
+            "reviewer_id"
+        ]
+        for relative_path in SIX_P0_ATTESTATION_PATHS
+    }
+    assert len(correction_reviewer_ids) == 6
+    assert not (set(reviewer_ids) & correction_reviewer_ids)
 
     sources_by_id = {source["id"]: source for source in sources}
     receipt_schema = review_module._receipt_schema(ROOT)
     covered_ids = []
+    current_anomaly_ids = []
     execution_debt = {}
     for relative_path, config in GOVERNANCE_REVIEW_CONFIG.items():
         receipt = yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))
@@ -1309,9 +1377,10 @@ def test_all_review_receipts_match_current_governance_before_sealing(
         assert not schema_errors, (relative_path, schema_errors)
         assert receipt["reviewer_id"] == config["reviewer_id"]
         assert receipt["review_run_id"] == config["review_run_id"]
-        assert receipt["reviewer_model"] == "codex-gpt5"
+        assert receipt["reviewer_model"] == GOVERNANCE_REVIEWER_MODEL
         assert receipt["protocol_digest"] == policy["protocol_digest"]
-        assert datetime.fromisoformat(receipt["reviewed_at"]) > datetime.fromisoformat(
+        assert receipt["reviewed_at"] == config["reviewed_at"]
+        assert datetime.fromisoformat(config["reviewed_at"]) > datetime.fromisoformat(
             config["previous_reviewed_at"]
         )
         assert "TNSI" not in json.dumps(receipt, ensure_ascii=False)
@@ -1354,6 +1423,7 @@ def test_all_review_receipts_match_current_governance_before_sealing(
             assert review["scope"] == source["scope"]
             payload = review["payload"]
             anomalies = payload["anomalies"]
+            current_anomaly_ids.extend(anomaly["id"] for anomaly in anomalies)
             allowed_paths = review_module._allowed_fact_paths(
                 source, sources, ROOT, policy
             )
@@ -1383,6 +1453,22 @@ def test_all_review_receipts_match_current_governance_before_sealing(
 
     assert len(covered_ids) == len(set(covered_ids)) == 349
     assert set(covered_ids) == set(sources_by_id)
+    assert len(current_anomaly_ids) == len(set(current_anomaly_ids))
+    previous_anomaly_ids = {
+        anomaly["id"]
+        for relative_path in REVIEW_RUNS
+        for review in yaml.safe_load(
+            _git_bytes(
+                ROOT,
+                "show",
+                f"{PRE_SIX_P0_RECEIPTS_COMMIT}:{relative_path}",
+            ).decode("utf-8")
+        )["reviews"]
+        for anomaly in review["payload"]["anomalies"]
+    }
+    observed_anomaly_ids = set(current_anomaly_ids)
+    assert previous_anomaly_ids - observed_anomaly_ids == SIX_RESOLVED_P0_IDS
+    assert observed_anomaly_ids - previous_anomaly_ids == EXPECTED_NEW_ANOMALY_IDS
     assert execution_debt == EXPECTED_EXECUTION_DEBT
 
 
