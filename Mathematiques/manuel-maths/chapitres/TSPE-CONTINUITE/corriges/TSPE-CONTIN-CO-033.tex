@@ -1,0 +1,36 @@
+% META: {"id": "TSPE-CONTIN-CO-033", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-033", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, nsolve, Rational, sqrt, solveset, S as SS, Eq
+% x = symbols('x')
+% alphas = [float(nsolve(x**k + x - 1, x, 0.7)) for k in range(1, 7)]
+% assert all(0 < a < 1 for a in alphas)
+% assert all(alphas[i] < alphas[i+1] for i in range(len(alphas) - 1))
+% assert abs(alphas[0] - 0.5) < 1e-9
+% assert abs(alphas[1] - float((-1 + sqrt(5))/2)) < 1e-9
+% assert abs(alphas[2] - 0.6823278) < 1e-6
+% assert abs(alphas[3] - 0.7244920) < 1e-6
+% assert solveset(Eq(x + x - 1, 0), x, SS.Reals) == {Rational(1,2)}
+% assert solveset(Eq(x**2 + x - 1, 0), x, SS.Reals) == {(-1 + sqrt(5))/2, (-1 - sqrt(5))/2}
+% for k, a in zip(range(1, 7), alphas):
+%     val = a**(k + 1) + a - 1
+%     assert val < 0
+%     assert abs(val - a**k*(a - 1)) < 1e-12
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-033}
+
+\textbf{Q1.} $f_n$ est une fonction polynome, donc continue sur $[0\,;1]$. Sa derivee vaut $f_n'(x) = n x^{n-1} + 1 \geq 1 > 0$, donc $f_n$ est strictement croissante. Enfin $f_n(0) = -1 < 0$ et $f_n(1) = 1 + 1 - 1 = 1 > 0$. D'apres le theoreme des valeurs intermediaires applique a une fonction strictement monotone, l'equation $f_n(x) = 0$ admet une unique solution $\alpha_n$ dans $[0\,;1]$. Comme $f_n(0) \neq 0$ et $f_n(1) \neq 0$, cette solution n'est pas une borne : $0 < \alpha_n < 1$.
+
+\textbf{Q2.} Pour $n = 1$ : $x + x - 1 = 0$ donne $2x = 1$, soit $\alpha_1 = \dfrac{1}{2}$.
+
+Pour $n = 2$ : $x^2 + x - 1 = 0$ a pour discriminant $1 + 4 = 5$, d'ou les racines $\dfrac{-1 \pm \sqrt5}{2}$. Seule $\dfrac{-1+\sqrt5}{2} \approx 0{,}618$ appartient a $[0\,;1]$, donc $\alpha_2 = \dfrac{-1+\sqrt5}{2}$.
+
+\textbf{Q3.} Par definition de $\alpha_n$, on a $\alpha_n^{\,n} + \alpha_n - 1 = 0$, donc $\alpha_n - 1 = -\alpha_n^{\,n}$. Alors
+\[ f_{n+1}(\alpha_n) = \alpha_n^{\,n+1} + \alpha_n - 1 = \alpha_n^{\,n+1} - \alpha_n^{\,n} = \alpha_n^{\,n}\left(\alpha_n - 1\right). \]
+Or $0 < \alpha_n < 1$ : le facteur $\alpha_n^{\,n}$ est strictement positif et le facteur $\alpha_n - 1$ est strictement negatif. Donc $f_{n+1}(\alpha_n) < 0$.
+
+\textbf{Q4.} On sait que $f_{n+1}(\alpha_{n+1}) = 0$ et que $f_{n+1}(\alpha_n) < 0$. La fonction $f_{n+1}$ etant strictement croissante sur $[0\,;1]$, l'inegalite $f_{n+1}(\alpha_n) < f_{n+1}(\alpha_{n+1})$ entraine $\alpha_n < \alpha_{n+1}$. La suite $(\alpha_n)$ est donc strictement croissante.
+
+\textbf{Q5.} La suite $(\alpha_n)$ est strictement croissante et majoree par $1$ d'apres Q1 : elle converge, d'apres le theoreme de la limite monotone. Sa limite vaut $1$.
+
+Interpretation : $\alpha_n$ est l'abscisse du point d'intersection, dans $[0\,;1]$, de la courbe de $x \mapsto x^n$ avec la droite d'equation $y = 1 - x$. Quand $n$ grandit, $x^n$ tend vers $0$ pour tout $x$ fixe de $[0\,;1[$ : la courbe s'aplatit contre l'axe des abscisses puis remonte brutalement au voisinage de $1$. Le point d'intersection est donc repousse de plus en plus pres de $x = 1$.
+\end{corrige}

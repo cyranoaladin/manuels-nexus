@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-CONTIN-EX-030", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-030.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-030.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq, limit, oo
+% x, n = symbols('x n')
+% phi = 3*x**2 - x**3
+% assert (diff(phi, x) - 3*x*(2 - x)).expand() == 0
+% assert phi.subs(x, 0) == 0 and phi.subs(x, 2) == 4
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-030}{3}{20}
+On cherche, selon les valeurs du reel $m$, le nombre de solutions reelles de l'equation
+\[ x^3 - 3x^2 + m = 0. \]
+\begin{enumerate}
+  \item Montrer que cette equation equivaut a $\varphi(x) = m$, ou $\varphi(x) = 3x^2 - x^3$.
+  \item Etudier les variations de $\varphi$ sur $\mathbb{R}$ et determiner $\displaystyle\lim_{x \to -\infty}\varphi(x)$ et $\displaystyle\lim_{x \to +\infty}\varphi(x)$.
+  \item Dresser le tableau de variations complet de $\varphi$.
+  \item En deduire, selon $m$, le nombre de solutions reelles de l'equation initiale.
+  \item Verifier la reponse pour $m = 4$ en resolvant exactement.
+\end{enumerate}
+\end{exercice}

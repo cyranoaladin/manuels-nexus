@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-CONTIN-EX-029", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-029.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-029.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, sqrt, solveset, S as SS, Eq
+% x = symbols('x')
+% for f in (x**2, (x + 1)/2, sqrt(x)):
+%     assert 0 <= float(f.subs(x, 0)) <= 1 and 0 <= float(f.subs(x, 1)) <= 1
+% g = x**2 - x
+% assert float(g.subs(x, 0)) >= 0 >= float(g.subs(x, 1))
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-029}{3}{20}
+Soit $f$ une fonction continue sur $[0\,;1]$ telle que, pour tout $x \in [0\,;1]$, $f(x)$ appartienne aussi a $[0\,;1]$. On veut demontrer que $f$ admet un \emph{point fixe}, c'est-a-dire un reel $c \in [0\,;1]$ tel que $f(c) = c$.
+
+\begin{enumerate}
+  \item Verifier que les trois fonctions $x \mapsto x^2$, $x \mapsto \dfrac{x+1}{2}$ et $x \mapsto \sqrt{x}$ satisfont bien l'hypothese sur $[0\,;1]$, et determiner leurs points fixes.
+  \item On pose $g(x) = f(x) - x$. Justifier que $g$ est continue sur $[0\,;1]$, puis determiner les signes de $g(0)$ et de $g(1)$.
+  \item En deduire la demonstration du resultat annonce.
+  \item Ce raisonnement prouve-t-il l'unicite du point fixe ? Illustrer la reponse par un exemple.
+  \item L'hypothese « $f(x) \in [0\,;1]$ » est-elle indispensable ? Donner une fonction continue sur $[0\,;1]$ sans point fixe.
+\end{enumerate}
+\end{exercice}

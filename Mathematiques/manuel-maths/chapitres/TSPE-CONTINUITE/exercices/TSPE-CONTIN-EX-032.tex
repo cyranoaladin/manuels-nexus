@@ -1,0 +1,20 @@
+% META: {"id": "TSPE-CONTIN-EX-032", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-032.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-032.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq, limit, oo
+% x, n = symbols('x n')
+% h = exp(x) + x**2 - 3
+% assert diff(h, x) == exp(x) + 2*x
+% assert float(h.subs(x, -2)) > 0 > float(h.subs(x, -1))
+% assert float(h.subs(x, 0)) < 0 < float(h.subs(x, 1))
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-032}{3}{20}
+On veut determiner le nombre de solutions reelles de l'equation $\mathrm{e}^{x} = 3 - x^2$.
+
+\begin{enumerate}
+  \item Justifier que cette equation equivaut a $h(x) = 0$, ou $h(x) = \mathrm{e}^{x} + x^2 - 3$.
+  \item Calculer $h'(x)$, puis $h''(x)$. Montrer que $h'$ est strictement croissante sur $\mathbb{R}$.
+  \item En deduire que $h'$ s'annule en un unique reel $\beta$, et donner un encadrement de $\beta$ a $0{,}1$ pres.
+  \item Dresser le tableau de variations de $h$ sur $\mathbb{R}$, en precisant les limites en $-\infty$ et $+\infty$.
+  \item Demontrer que l'equation initiale admet exactement deux solutions, puis encadrer chacune a $0{,}1$ pres.
+\end{enumerate}
+\end{exercice}

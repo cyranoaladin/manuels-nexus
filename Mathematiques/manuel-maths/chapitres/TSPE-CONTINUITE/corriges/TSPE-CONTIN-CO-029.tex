@@ -1,0 +1,29 @@
+% META: {"id": "TSPE-CONTIN-CO-029", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-029", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, Rational, sqrt, solveset, S as SS, Eq
+% x = symbols('x')
+% assert solveset(Eq(x**2, x), x, SS.Reals) == {0, 1}
+% assert solveset(Eq((x + 1)/2, x), x, SS.Reals) == {1}
+% assert solveset(Eq(sqrt(x), x), x, SS.Reals) == {0, 1}
+% assert solveset(Eq(x, x), x, SS.Reals) == SS.Reals
+% assert solveset(Eq(x + 1, x), x, SS.Reals) == SS.EmptySet
+% assert float((x + 1).subs(x, Rational(1,2))) > 1
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-029}
+
+\textbf{Q1.} Pour $x \in [0\,;1]$ : $x^2 \in [0\,;1]$, $\dfrac{x+1}{2} \in \left[\dfrac12\,;1\right] \subset [0\,;1]$, et $\sqrt{x} \in [0\,;1]$. Les trois fonctions verifient l'hypothese.
+
+Points fixes : $x^2 = x$ donne $x(x-1) = 0$, soit $x = 0$ ou $x = 1$. $\dfrac{x+1}{2} = x$ donne $x + 1 = 2x$, soit $x = 1$. $\sqrt{x} = x$ donne, en elevant au carre, $x = x^2$, soit $x = 0$ ou $x = 1$.
+
+\textbf{Q2.} $g$ est la difference de $f$, continue par hypothese, et de la fonction identite, continue : $g$ est continue sur $[0\,;1]$.
+
+$g(0) = f(0) - 0 = f(0)$. Or $f(0) \in [0\,;1]$, donc $g(0) \geq 0$.
+
+$g(1) = f(1) - 1$. Or $f(1) \leq 1$, donc $g(1) \leq 0$.
+
+\textbf{Q3.} Si $g(0) = 0$, alors $f(0) = 0$ et $c = 0$ convient. Si $g(1) = 0$, alors $c = 1$ convient. Sinon $g(0) > 0$ et $g(1) < 0$ : $g$ est continue sur $[0\,;1]$ et $0$ est compris entre $g(1)$ et $g(0)$, donc d'apres le theoreme des valeurs intermediaires il existe $c \in \left]0\,;1\right[$ tel que $g(c) = 0$, c'est-a-dire $f(c) = c$. Dans tous les cas, $f$ admet un point fixe.
+
+\textbf{Q4.} Non : le theoreme des valeurs intermediaires ne donne l'unicite que si la fonction est strictement monotone, ce qui n'est pas suppose ici. La fonction identite $f(x) = x$ verifie l'hypothese et \emph{tout} point de $[0\,;1]$ est fixe. La fonction $x \mapsto x^2$ en a deux, $0$ et $1$.
+
+\textbf{Q5.} Oui, l'hypothese est indispensable. La fonction $f(x) = x + 1$ est continue sur $[0\,;1]$, mais $f(x) = x$ equivaut a $1 = 0$ : elle n'a aucun point fixe. Elle ne verifie pas l'hypothese, puisque $f\!\left(\tfrac12\right) = \tfrac32 > 1$ : son image sort de $[0\,;1]$. C'est bien le fait que la courbe reste dans le carre qui force le franchissement de la diagonale.
+\end{corrige}

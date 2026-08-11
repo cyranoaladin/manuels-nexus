@@ -1,0 +1,18 @@
+% META: {"id": "TSPE-CONTIN-EX-031", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 15, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-031.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-031.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq, limit, oo
+% x, n = symbols('x n')
+% P = x**3 - 4*x + 1
+% assert limit(P, x, -oo) == -oo and limit(P, x, oo) == oo
+% assert P.subs(x, 0) == 1
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-031}{3}{15}
+On veut demontrer le resultat suivant : \emph{toute fonction polynome de degre impair admet au moins une racine reelle}.
+
+\begin{enumerate}
+  \item Soit $P(x) = x^3 - 4x + 1$. Determiner $\displaystyle\lim_{x \to -\infty}P(x)$ et $\displaystyle\lim_{x \to +\infty}P(x)$, puis montrer que $P$ admet au moins une racine reelle.
+  \item Combien $P$ a-t-il exactement de racines reelles ? Justifier a l'aide du tableau de variations.
+  \item Generaliser : soit $P(x) = a_n x^n + \dots + a_1 x + a_0$ avec $n$ impair et $a_n \neq 0$. En raisonnant sur le terme de plus haut degre, determiner les limites de $P$ en $-\infty$ et $+\infty$ selon le signe de $a_n$, puis conclure.
+  \item Le resultat subsiste-t-il si $n$ est pair ? Justifier par un contre-exemple.
+\end{enumerate}
+\end{exercice}

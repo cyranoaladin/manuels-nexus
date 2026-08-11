@@ -1,0 +1,38 @@
+% META: {"id": "TSPE-CONTIN-CO-030", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-030", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq, limit, oo
+% x, n = symbols('x n')
+% phi = 3*x**2 - x**3
+% assert (diff(phi, x) - 3*x*(2 - x)).expand() == 0
+% assert phi.subs(x, 0) == 0 and phi.subs(x, 2) == 4
+% assert limit(phi, x, -oo) == oo and limit(phi, x, oo) == -oo
+% assert diff(phi, x).subs(x, -1) < 0 and diff(phi, x).subs(x, 1) > 0 and diff(phi, x).subs(x, 3) < 0
+% assert solveset(Eq(x**3 - 3*x**2 + 4, 0), x, SS.Reals) == {-1, 2}
+% assert ((x**3 - 3*x**2 + 4) - (x + 1)*(x - 2)**2).expand() == 0
+% for m_test, attendu in ((2, 3), (5, 1), (-1, 1)):
+%     assert len(solveset(Eq(phi, m_test), x, SS.Reals)) == attendu
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-030}
+
+\textbf{Q1.} $x^3 - 3x^2 + m = 0$ equivaut a $m = 3x^2 - x^3$, c'est-a-dire $\varphi(x) = m$. Resoudre l'equation revient donc a chercher combien de fois la fonction $\varphi$ prend la valeur $m$.
+
+\textbf{Q2.} $\varphi'(x) = 6x - 3x^2 = 3x(2-x)$. Ce produit est negatif sur $\left]-\infty\,;0\right[$, positif sur $\left]0\,;2\right[$, negatif sur $\left]2\,;+\infty\right[$.
+
+Pour les limites, on factorise par le terme de plus haut degre : $\varphi(x) = x^3\left(\dfrac{3}{x} - 1\right)$. Quand $x \to -\infty$, $x^3 \to -\infty$ et $\dfrac{3}{x} - 1 \to -1$, donc $\varphi(x) \to +\infty$. Quand $x \to +\infty$, $x^3 \to +\infty$ et le second facteur tend vers $-1$, donc $\varphi(x) \to -\infty$.
+
+\textbf{Q3.} $\varphi$ decroit de $+\infty$ a $\varphi(0) = 0$, croit de $0$ a $\varphi(2) = 4$, puis decroit de $4$ a $-\infty$. Elle admet un minimum local $0$ en $x = 0$ et un maximum local $4$ en $x = 2$.
+
+\textbf{Q4.} On applique le theoreme des valeurs intermediaires sur chacun des trois intervalles de monotonie.
+
+$\bullet$ Si $m > 4$ : seule la premiere branche (de $+\infty$ a $0$) atteint $m$. \textbf{Une} solution.
+
+$\bullet$ Si $m = 4$ : la premiere branche atteint $4$ une fois, et les deux dernieres branches se rejoignent en $x = 2$ ou $\varphi$ vaut precisement $4$. \textbf{Deux} solutions distinctes.
+
+$\bullet$ Si $0 < m < 4$ : chacune des trois branches atteint $m$ exactement une fois. \textbf{Trois} solutions.
+
+$\bullet$ Si $m = 0$ : premiere et deuxieme branches se rejoignent en $x = 0$, la troisieme atteint $0$ une fois. \textbf{Deux} solutions.
+
+$\bullet$ Si $m < 0$ : seule la troisieme branche (de $4$ a $-\infty$) atteint $m$. \textbf{Une} solution.
+
+\textbf{Q5.} Pour $m = 4$ : $x^3 - 3x^2 + 4 = 0$. On remarque que $x = -1$ est solution ($-1 - 3 + 4 = 0$), d'ou la factorisation $x^3 - 3x^2 + 4 = (x+1)(x-2)^2$. Les solutions sont $-1$ et $2$, cette derniere etant racine double : on retrouve bien \textbf{deux} solutions distinctes, conformement a Q4.
+\end{corrige}

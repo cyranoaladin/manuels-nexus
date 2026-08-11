@@ -1,0 +1,36 @@
+% META: {"id": "TSPE-CONTIN-CO-031", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-031", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq, limit, oo
+% x, n = symbols('x n')
+% P = x**3 - 4*x + 1
+% assert limit(P, x, -oo) == -oo and limit(P, x, oo) == oo
+% assert P.subs(x, 0) == 1
+% assert diff(P, x) == 3*x**2 - 4
+% # solveset renvoie ici des radicaux dont SymPy ne sait pas decider
+% # l'appartenance aux reels : on passe par les racines reelles exactes du
+% # polynome, ce qui est plus sur et donne les memes trois valeurs.
+% from sympy import Poly
+% approx = sorted(float(r) for r in Poly(P, x).real_roots())
+% assert len(approx) == 3
+% assert abs(approx[0] - (-2.1149075)) < 1e-6
+% assert abs(approx[1] - 0.2541017) < 1e-6
+% assert abs(approx[2] - 1.8608059) < 1e-6
+% assert float(P.subs(x, -2/sqrt(3))) > 0 > float(P.subs(x, 2/sqrt(3)))
+% assert solveset(Eq(x**2 + 1, 0), x, SS.Reals) == SS.EmptySet
+% assert limit(x**5, x, -oo) == -oo and limit(x**5, x, oo) == oo
+% assert limit(-x**5, x, -oo) == oo and limit(-x**5, x, oo) == -oo
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-031}
+
+\textbf{Q1.} On factorise par le terme de plus haut degre : $P(x) = x^3\left(1 - \dfrac{4}{x^2} + \dfrac{1}{x^3}\right)$. Le second facteur tend vers $1$ en $\pm\infty$. Donc $\displaystyle\lim_{x \to -\infty}P(x) = -\infty$ et $\displaystyle\lim_{x \to +\infty}P(x) = +\infty$.
+
+Comme $P$ tend vers $-\infty$, il existe un reel $a$ tel que $P(a) < 0$ ; comme $P$ tend vers $+\infty$, il existe $b > a$ tel que $P(b) > 0$. La fonction $P$ est continue sur $[a\,;b]$ (fonction polynome) et $0$ est compris entre $P(a)$ et $P(b)$ : d'apres le theoreme des valeurs intermediaires, il existe $c \in \left]a\,;b\right[$ tel que $P(c) = 0$.
+
+\textbf{Q2.} $P'(x) = 3x^2 - 4$, qui s'annule en $\pm\dfrac{2}{\sqrt{3}}$. La fonction croit jusqu'a $-\dfrac{2}{\sqrt{3}}$, decroit jusqu'a $\dfrac{2}{\sqrt{3}}$, puis croit. Comme $P\!\left(-\tfrac{2}{\sqrt3}\right) > 0$ et $P\!\left(\tfrac{2}{\sqrt3}\right) < 0$, chacune des trois branches strictement monotones traverse la valeur $0$ exactement une fois : $P$ a \textbf{trois} racines reelles, approximativement $-2{,}115$, $0{,}254$ et $1{,}861$.
+
+\textbf{Q3.} Pour $n$ impair, $P(x) = a_n x^n\left(1 + \dfrac{a_{n-1}}{a_n x} + \dots + \dfrac{a_0}{a_n x^n}\right)$, et le facteur entre parentheses tend vers $1$ en $\pm\infty$. Comme $n$ est impair, $x^n$ tend vers $-\infty$ en $-\infty$ et vers $+\infty$ en $+\infty$.
+
+Si $a_n > 0$ : $P$ tend vers $-\infty$ en $-\infty$ et vers $+\infty$ en $+\infty$. Si $a_n < 0$ : les deux limites sont echangees. Dans les deux cas, les limites sont \emph{de signes contraires}, donc $P$ prend une valeur strictement negative en un point $a$ et une valeur strictement positive en un point $b$. Etant continue, elle s'annule entre les deux d'apres le theoreme des valeurs intermediaires. Toute fonction polynome de degre impair admet donc au moins une racine reelle.
+
+\textbf{Q4.} Non. Pour $n$ pair, $x^n$ tend vers $+\infty$ aux deux bornes : les limites ont le meme signe et l'argument s'effondre. Contre-exemple : $P(x) = x^2 + 1$ est de degre $2$ et verifie $P(x) \geq 1 > 0$ pour tout reel $x$ : elle n'a aucune racine reelle.
+\end{corrige}

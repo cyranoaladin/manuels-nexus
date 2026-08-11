@@ -1,0 +1,37 @@
+% META: {"id": "TSPE-CONTIN-CO-032", "chapitre": "TSPE-CONTINUITE", "type_objet": "corrige", "exercice_ref": "TSPE-CONTIN-EX-032", "capacites_codes": ["C1"], "sources_inspiration": [], "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, diff, Rational, nsolve, exp, simplify, sqrt, solveset, S as SS, Eq, limit, oo
+% x, n = symbols('x n')
+% h = exp(x) + x**2 - 3
+% assert diff(h, x) == exp(x) + 2*x
+% assert diff(h, x, 2) == exp(x) + 2
+% u = symbols('u', real=True)
+% assert (exp(u) + 2).is_positive is True
+% assert limit(h, x, oo) == oo and limit(h, x, -oo) == oo
+% beta = float(nsolve(diff(h, x), x, -0.4))
+% assert abs(beta - (-0.3517337)) < 1e-6
+% assert float(diff(h, x).subs(x, Rational(-4,10))) < 0 < float(diff(h, x).subs(x, Rational(-3,10)))
+% assert float(h.subs(x, beta)) < 0
+% r1 = float(nsolve(h, x, -1.6)); r2 = float(nsolve(h, x, 0.8))
+% assert abs(r1 - (-1.6772327)) < 1e-6 and abs(r2 - 0.8344869) < 1e-6
+% assert float(h.subs(x, Rational(-17,10))) > 0 > float(h.subs(x, Rational(-16,10)))
+% assert float(h.subs(x, Rational(8,10))) < 0 < float(h.subs(x, Rational(9,10)))
+% END-VERIFY
+\begin{corrige}{TSPE-CONTIN-EX-032}
+
+\textbf{Q1.} $\mathrm{e}^{x} = 3 - x^2$ equivaut a $\mathrm{e}^{x} - 3 + x^2 = 0$, c'est-a-dire $h(x) = 0$ avec $h(x) = \mathrm{e}^{x} + x^2 - 3$.
+
+\textbf{Q2.} $h'(x) = \mathrm{e}^{x} + 2x$ et $h''(x) = \mathrm{e}^{x} + 2$. Pour tout reel $x$, $\mathrm{e}^{x} > 0$ donc $h''(x) > 2 > 0$ : la derivee $h'$ est strictement croissante sur $\mathbb{R}$.
+
+\textbf{Q3.} $h'$ est continue et strictement croissante. De plus $h'(-1) = \mathrm{e}^{-1} - 2 \approx -1{,}632 < 0$ et $h'(0) = 1 > 0$. D'apres le theoreme des valeurs intermediaires applique a une fonction strictement monotone, $h'$ s'annule en un unique reel $\beta$, situe dans $\left]-1\,;0\right[$. Comme $h'(-0{,}4) = \mathrm{e}^{-0{,}4} - 0{,}8 \approx -0{,}130 < 0$ et $h'(-0{,}3) = \mathrm{e}^{-0{,}3} - 0{,}6 \approx 0{,}141 > 0$, on a $-0{,}4 < \beta < -0{,}3$.
+
+\textbf{Q4.} $h'$ etant strictement croissante et s'annulant en $\beta$, elle est strictement negative avant $\beta$ et strictement positive apres. Donc $h$ decroit sur $\left]-\infty\,;\beta\right]$ puis croit sur $\left[\beta\,;+\infty\right[$.
+
+Limites : en $+\infty$, $\mathrm{e}^{x} \to +\infty$ et $x^2 \to +\infty$, donc $h(x) \to +\infty$. En $-\infty$, $\mathrm{e}^{x} \to 0$ et $x^2 \to +\infty$, donc $h(x) \to +\infty$.
+
+Enfin $h(\beta) \approx \mathrm{e}^{-0{,}352} + 0{,}124 - 3 \approx -2{,}173 < 0$ : le minimum de $h$ est strictement negatif.
+
+\textbf{Q5.} Sur $\left]-\infty\,;\beta\right]$, $h$ est continue, strictement decroissante, tend vers $+\infty$ en $-\infty$ et vaut $h(\beta) < 0$ : elle s'annule une fois et une seule. Sur $\left[\beta\,;+\infty\right[$, elle est continue, strictement croissante, part de $h(\beta) < 0$ et tend vers $+\infty$ : elle s'annule une fois et une seule. L'equation admet donc \textbf{exactement deux} solutions.
+
+Encadrements : $h(-1{,}7) \approx 0{,}073 > 0$ et $h(-1{,}6) \approx -0{,}238 < 0$, donc la premiere solution est dans $\left]-1{,}7\,;-1{,}6\right[$. $h(0{,}8) \approx -0{,}134 < 0$ et $h(0{,}9) \approx 0{,}270 > 0$, donc la seconde est dans $\left]0{,}8\,;0{,}9\right[$.
+\end{corrige}

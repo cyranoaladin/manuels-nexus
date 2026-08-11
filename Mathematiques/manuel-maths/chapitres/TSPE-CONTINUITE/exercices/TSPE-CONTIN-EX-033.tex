@@ -1,0 +1,19 @@
+% META: {"id": "TSPE-CONTIN-EX-033", "chapitre": "TSPE-CONTINUITE", "type_objet": "exercice", "capacites": ["TSPE-CONTIN-C1"], "capacites_codes": ["C1"], "methodes": ["M1", "M2"], "parcours": 3, "competences": ["chercher", "raisonner", "communiquer"], "duree_min": 20, "mode_creation": "ex_nihilo", "sources_inspiration": [], "fichier_tex": "chapitres/TSPE-CONTINUITE/exercices/TSPE-CONTIN-EX-033.tex", "corrige_tex": "chapitres/TSPE-CONTINUITE/corriges/TSPE-CONTIN-CO-033.tex", "status": "generated"}
+% BEGIN-VERIFY
+% from sympy import symbols, nsolve
+% x = symbols('x')
+% alphas = [float(nsolve(x**k + x - 1, x, 0.7)) for k in range(1, 7)]
+% assert all(0 < a < 1 for a in alphas)
+% assert all(alphas[i] < alphas[i+1] for i in range(len(alphas) - 1))
+% END-VERIFY
+\begin{exercice}{TSPE-CONTIN-EX-033}{3}{20}
+Pour tout entier $n \geq 1$, on considere la fonction $f_n$ definie sur $[0\,;1]$ par
+\[ f_n(x) = x^n + x - 1. \]
+\begin{enumerate}
+  \item Montrer que, pour tout $n \geq 1$, l'equation $f_n(x) = 0$ admet une unique solution $\alpha_n$ dans $[0\,;1]$, et que $0 < \alpha_n < 1$.
+  \item Calculer $\alpha_1$ et $\alpha_2$ exactement.
+  \item Calculer $f_{n+1}(\alpha_n)$ en fonction de $\alpha_n$, et montrer que ce nombre est strictement negatif.
+  \item En deduire que la suite $(\alpha_n)$ est strictement croissante.
+  \item Justifier que $(\alpha_n)$ converge. On admet que sa limite est $1$ : interpreter ce resultat sur les courbes des fonctions $x \mapsto x^n$.
+\end{enumerate}
+\end{exercice}
