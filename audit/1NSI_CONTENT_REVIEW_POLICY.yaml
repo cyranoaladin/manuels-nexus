@@ -54,7 +54,7 @@ contractual_documents:
   sha256: sha256:f235a4dfc797b006b84abe17c9c57a11eab40412d0e6a49648297b26dfc45c91
 - path: docs/codex/ISSUE_REGISTER_TEMPLATE.md
   sha256: sha256:3768d699ef4158bc0f8212c7b5fc797ad3412ce9f55f3935644e48e882cdda93
-protocol_digest: sha256:ca320655b09895e60930f9ec0f04c5794faf11e80bf89712a67575c0471fe25a
+protocol_digest: sha256:9fb019e749096a244a0f5565ef31e01b69e4f81f38af3a4f7449abbfd3058555
 capacity_matrix:
 - chapter: 1NSI-ALGO-DICHO-GLOUTON-KNN
   contract_code: C1
@@ -178,7 +178,7 @@ capacity_matrix:
   ref: P-LANG-03A
   classification: official_capacity
   programme_section: Langages et programmation
-  programme_anchor: "Je sais prototyper une fonction et d\xE9crire ses pr\xE9conditions et postconditions."
+  programme_anchor: Je sais prototyper une fonction.
   human_confirmation_required: false
 - chapter: 1NSI-LANGAGE
   contract_code: C4
@@ -193,6 +193,20 @@ capacity_matrix:
   classification: official_capacity
   programme_section: Langages et programmation
   programme_anchor: "Je sais utiliser la documentation d'une biblioth\xE8que pour trouver et employer une fonction."
+  human_confirmation_required: false
+- chapter: 1NSI-LANGAGE
+  contract_code: C6
+  ref: P-LANG-03B
+  classification: official_capacity
+  programme_section: Langages et programmation
+  programme_anchor: "Je sais d\xE9crire les pr\xE9conditions sur les arguments d'une fonction."
+  human_confirmation_required: false
+- chapter: 1NSI-LANGAGE
+  contract_code: C7
+  ref: P-LANG-03C
+  classification: official_capacity
+  programme_section: Langages et programmation
+  programme_anchor: "Je sais d\xE9crire les postconditions sur les r\xE9sultats d'une fonction."
   human_confirmation_required: false
 - chapter: 1NSI-PROJET-METHODES
   contract_code: C1
@@ -431,7 +445,7 @@ capacity_matrix:
     ."
   human_confirmation_required: false
 scope_guard:
-  implementation_base_sha: 0085e91405c96ece34a1f5e40b6d8af8347dbc49
+  implementation_base_sha: 7cb8ad6ba526a7d53ad3dd9a804dcea581e32812
   sources:
   - id: contract:1NSI-ALGO-DICHO-GLOUTON-KNN
     path: NSI/chapitres/1NSI-ALGO-DICHO-GLOUTON-KNN/contrat.yaml
@@ -1482,7 +1496,7 @@ scope_guard:
     status: needs_review
   build_manifest:
     path: audit/BUILD_MANIFEST.json
-    sha256: sha256:4d654043b246dc0582dae8bdd3b2d960a619c11fb2cdaf352924ac630b58fac5
+    sha256: sha256:85d1e5f2c4d4f92e710b2ac64aca7884ba3f923f71f3be44ec3d22cb1eff2e5d
   canonical_pdfs:
   - path: NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf
     sha256: sha256:764db14d0a06dd9b720fc1028e7c702929e891345cfef8adf132736fc9fe5d19
