@@ -12,13 +12,17 @@ capacites:
   - { code: C5, ref_capacite: TEXP-CAG-C5, libelle_eleve: "Je sais démontrer la formule $|z|^2=z\\bar z$ et les propriétés du module d'un produit et d'une puissance." }
 
 prerequis:
-  - { code: R1, libelle: "Nombres complexes : forme algébrique, opérations de base", chapitre_origine: "1SPE" }
-  - { code: R2, libelle: "Vecteurs, repère orthonormé", chapitre_origine: "1SPE-GEOMETRIE-REPEREE" }
+  - { code: R1, libelle: "Second degré : discriminant strictement négatif et absence de racine réelle", chapitre_origine: "1SPE-SECOND-DEGRE" }
+  - { code: R2, libelle: "Calcul algébrique : développement, factorisation, identités remarquables", chapitre_origine: "1SPE-SECOND-DEGRE" }
+  - { code: R3, libelle: "Vecteurs, repère orthonormé, distance dans le plan", chapitre_origine: "1SPE-GEOMETRIE-REPEREE" }
+  - { code: R4, libelle: "Cercle trigonométrique, cosinus et sinus d'un angle orienté", chapitre_origine: "1SPE-TRIGONOMETRIE" }
 
 situation_accroche: >
-  Comment résoudre une équation qui n'a pas de solution réelle, comme x²+1=0 ? Les
-  mathématiciens italiens du XVIe siècle ont eu l'audace d'inventer un nombre i tel que
-  i²=-1. Ce chapitre reprend et approfondit l'étude algébrique des nombres complexes
-  vue en première, puis explore leur interprétation géométrique comme points du plan.
+  Comment résoudre une équation qui n'a aucune solution réelle, comme x²+1=0 ? En
+  première, le discriminant négatif clôt la discussion : il n'y a pas de racine. Les
+  mathématiciens italiens du XVIe siècle ont eu l'audace de poursuivre le calcul en
+  posant un nombre i tel que i²=-1. Ce chapitre construit à partir de là l'ensemble
+  des nombres complexes, entièrement nouveau pour vous, puis en dégage
+  l'interprétation géométrique comme points du plan.
 
 temps_estime_h: { parcours1: 12, parcours2: 10, parcours3: 8 }
