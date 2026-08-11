@@ -133,6 +133,9 @@ SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
         "1nsi_content_reviews": MappingProxyType(
             {1: "audit/schemas/v1/1nsi-content-review.schema.json"}
         ),
+        "1nsi_p0_correction_attestation": MappingProxyType(
+            {1: "audit/schemas/v1/1nsi-p0-correction-attestation.schema.json"}
+        ),
     }
 )
 
