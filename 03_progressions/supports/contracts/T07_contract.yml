@@ -1,0 +1,57 @@
+sequence: T07
+level: terminale
+theme: graphes, listes et matrices
+notion: graphes, listes et matrices
+status: needs_review
+notions_exigibles:
+- graphe orienté
+- graphe non orienté
+- liste d adjacence
+- matrice d adjacence
+- degré
+- voisinage
+- coût mémoire
+capacites_officielles:
+- T-STRUCT-05A
+- T-STRUCT-05B
+- T-STRUCT-05C
+- T-STRUCT-05D
+exemples_obligatoires:
+- A -> [B,C], B -> [D], C -> [D], D -> [B]
+- 'ligne A : colonnes B et C valent 1'
+- matrice 4x4 -> 16 cases
+- sommet E isolé -> liste vide
+cas_limites:
+- sommet isolé E
+- boucle A->A
+- arête non orientée
+erreurs_frequentes:
+- voisin entrant confondu
+- sommet isolé oublié
+- coût mémoire ignoré
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- graphe orienté
+- graphe non orienté
+- liste d adjacence
+- matrice d adjacence
+- A -> [B,C], B -> [D], C -> [D], D -> [B]
+- sommet isolé E
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

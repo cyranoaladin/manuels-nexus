@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-06T06:11:22Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-03C",
+      "official_label": "Distinguer la recherche d'une valeur dans une liste et dans un dictionnaire.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_cours_recherche_liste_dictionnaire.md",
+        "anchor": "#2-recherche-dune-valeur-dans-une-liste--parcours-séquentiel",
+        "quote": "L'opérateur `in` fait exactement ce parcours :\n\n```python\nx in liste   # parcours séquentiel, O(n)\n```",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_td_recherche_liste_dictionnaire.md",
+        "anchor": "#exercice-3--comparaison-de-complexité",
+        "quote": "Pour chaque représentation, écrire en Python l'expression qui teste si le nom `\"Dupont\"` est dans l'annuaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_corrige_recherche_liste_dictionnaire.md",
+        "anchor": "#exercice-3--comparaison-de-complexité",
+        "quote": "Représentation A : **O(n)** — il faut parcourir la liste de tuples séquentiellement pour comparer chaque nom.\n- Représentation B : **O(1)** en moyenne — le dictionnaire utilise une table de hachage qui donne un accès direct par clé.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la distinction via le mécanisme de parcours séquentiel vs hachage. Le TD fait pratiquer la comparaison des deux structures sur un annuaire. Le corrigé fournit les complexités justifiées pour chaque représentation.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

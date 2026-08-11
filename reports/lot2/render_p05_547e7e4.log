@@ -1,0 +1,8 @@
+# command: make render-substance-report V=03_progressions/supports/premiere/P05/_substance_review.json && python scripts/check_substance_report_artifacts.py --reports-dir 01_build_reports/substance_reports
+# timestamp: 2026-06-29T00:32:02+01:00
+# head: 547e7e46f382605420167fcea76de31413be259e
+test -n "03_progressions/supports/premiere/P05/_substance_review.json"
+mkdir -p 01_build_reports/substance_reports
+python scripts/render_substance_report.py --verdict "03_progressions/supports/premiere/P05/_substance_review.json" --repo-root . --out-md 01_build_reports/substance_reports/$(basename "03_progressions/supports/premiere/P05/_substance_review.json" .json).md --out-html 01_build_reports/substance_reports/$(basename "03_progressions/supports/premiere/P05/_substance_review.json" .json).html
+substance_report: wrote 01_build_reports/substance_reports/_substance_review.md 01_build_reports/substance_reports/_substance_review.html
+check_substance_report_artifacts: PASS

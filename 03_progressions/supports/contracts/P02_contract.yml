@@ -1,0 +1,55 @@
+sequence: P02
+theme: Représentation machine
+notions_exigibles:
+- entier signé
+- complément à deux
+- débordement
+- expression booléenne
+capacites_officielles:
+- P-DATA-BASE-02A
+exemples_obligatoires:
+- 'décodage signé : `11110110` sur 8 bits -> `-10`'
+- 'bornes sur n bits : `n = 4` bits signés -> `[-8 ; 7]`'
+- 'encodage négatif : `-6` sur 8 bits -> `11111010`'
+- 'simplification booléenne : `(a and b) or (a and not b)` -> `a`'
+cas_limites:
+- bit de poids fort à 1
+- asymétrie entre minimum et maximum
+- retenue finale ignorée sur la largeur fixée
+- un exemple ne prouve pas une identité
+erreurs_frequentes:
+- EF1 - Lire un mot binaire signé comme un entier naturel.
+- EF2 - Oublier de tester les bornes avant l’encodage.
+- EF3 - Inverser les bits sans ajouter 1.
+- EF4 - Simplifier une expression booléenne avec un seul exemple.
+types_exercices_attendus:
+- décodage signé avec `11110110` sur 8 bits
+- bornes sur n bits à partir de `n = 4` bits signés
+- encodage négatif avec `-6` sur 8 bits
+- simplification booléenne pour `(a and b) or (a and not b)`
+- un cas limite lié à bit de poids fort à 1
+- deux méthodes possibles pour bornes sur n bits
+- un transfert qui utilise encodage négatif avec une donnée nouvelle
+- un énoncé volontairement erroné sur simplification booléenne
+tp_attendu: Implémenter encodage, décodage et détection de débordement sur une largeur
+  fixée.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- entier signé
+- 11110110` sur 8 bits
+- n = 4` bits signés
+- bit de poids fort à 1
+- EF1
+- Implémenter encodage, décodage et détection de débordement sur une largeur fixée.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

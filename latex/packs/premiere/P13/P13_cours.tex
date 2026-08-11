@@ -1,0 +1,137 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{nsi-preamble}
+\begin{document}
+\nsiheader{Cours — Dichotomie, glouton et k-NN}{Première}{P13}{1}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
+
+\section*{Objectifs}
+\begin{itemize}[nosep]
+  \item Identifier les données utiles : \texttt{tableau=[4,9,18,23,37,41], cible=37} ; \texttt{pièces=[10,5,2,1], montant=28} ; \texttt{voisins=[rouge:1.2, bleu:2.0, rouge:2.4]}.
+  \item Employer le vocabulaire : dichotomie, variant $V = \text{droite} - \text{gauche} + 1$, glouton, choix local, k-NN, distance, vote majoritaire.
+  \item Produire une trace, une table, une valeur ou un pseudo-code vérifiable.
+\end{itemize}
+
+\section*{Capacités officielles}
+\begin{itemize}[nosep]
+  \item P-ALGO-03 — algorithme des $k$ plus proches voisins.
+  \item P-ALGO-04 — recherche dichotomique dans un tableau trié (recherche et terminaison par variant).
+  \item P-ALGO-05 — algorithmes gloutons.
+\end{itemize}
+
+\section*{Méthodes}
+\begin{itemize}[nosep]
+  \item Dichotomie : calculer le milieu puis réduire l'intervalle.
+  \item Terminaison : montrer que le variant $V = \text{droite} - \text{gauche} + 1$ diminue.
+  \item Glouton : prendre la plus grande pièce possible à chaque étape.
+  \item k-NN : voter parmi les $k=3$ plus proches voisins.
+\end{itemize}
+
+\section*{Exemples corrigés}
+
+\subsection*{Exemple 1 — recherche dichotomique (P-ALGO-04)}
+Donnée : \texttt{tableau=[4,9,18,23,37,41], cible=37}.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{tableau trié $T$, cible $c$}
+\KwResult{indice de $c$ dans $T$, ou $-1$ si absente}
+gauche $\leftarrow 0$\;
+droite $\leftarrow \text{longueur}(T) - 1$\;
+\While{gauche $\leq$ droite}{
+  $m \leftarrow (\text{gauche} + \text{droite}) \div 2$\;
+  \eIf{$T[m] = c$}{\Return $m$\;}{
+    \eIf{$T[m] < c$}{gauche $\leftarrow m + 1$\;}{droite $\leftarrow m - 1$\;}
+  }
+}
+\Return $-1$\;
+\caption{Recherche dichotomique dans un tableau trié}
+\end{algorithm}
+
+\medskip
+Trace pour \texttt{cible=37} (le variant $V = \text{droite} - \text{gauche} + 1$ compte les candidats restants) :
+
+\begin{center}
+\begin{tabular}{ccccccl}
+\toprule
+Étape & gauche & droite & $m$ & $T[m]$ & $V$ & Décision \\
+\midrule
+1 & 0 & 5 & 2 & 18 & 6 & $37 > 18 \Rightarrow$ gauche $= 3$ \\
+2 & 3 & 5 & 4 & 37 & 3 & $37 = 37 \Rightarrow$ trouvé, indice $4$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Les milieux successifs sont $18$ puis $37$ ; la cible est trouvée à l'indice $4$. Cas limite : \texttt{cible absente} $\rightarrow$ $V$ atteint $0$ et la boucle s'arrête.
+
+\subsection*{Exemple 2 — terminaison par variant (P-ALGO-04)}
+Donnée : \texttt{cible=37}. Le variant $V = \text{droite} - \text{gauche} + 1$ décroît : étape~1 $\rightarrow$ $V=6$ ; étape~2 $\rightarrow$ $V=3$ $\rightarrow$ trouvé. La suite décroissante prouve la terminaison. Cas absent (\texttt{cible=38}) : $V$ décroît $6 \rightarrow 3 \rightarrow 1 \rightarrow 0$, la boucle s'arrête sans trouver.
+
+\subsection*{Exemple 3 — glouton (P-ALGO-05)}
+Donnée : \texttt{pièces=[10,5,2,1], montant=28}.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{pièces triées par ordre décroissant $P$, montant $m$}
+\KwResult{liste des pièces rendues}
+rendu $\leftarrow$ liste vide\;
+\ForEach{pièce $p \in P$}{
+  \While{$m \geq p$}{
+    ajouter $p$ à rendu\;
+    $m \leftarrow m - p$\;
+  }
+}
+\Return rendu\;
+\caption{Rendu de monnaie glouton}
+\end{algorithm}
+
+\medskip
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Étape & Restant & Pièce choisie & Nouveau restant \\
+\midrule
+1 & 28 & 10 & 18 \\
+2 & 18 & 10 & 8 \\
+3 & 8 & 5 & 3 \\
+4 & 3 & 2 & 1 \\
+5 & 1 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Résultat : $28 = 10 + 10 + 5 + 2 + 1$ (5 pièces). Cas limite : \texttt{pièce 1 absente} $\rightarrow$ le glouton peut échouer (ex. \texttt{montant=28} avec \texttt{[10,5,2]} $\rightarrow$ reste~$1$, alors que $28=10{+}10{+}2{+}2{+}2{+}2$).
+
+\subsection*{Exemple 4 — k plus proches voisins (P-ALGO-03)}
+Donnée : \texttt{voisins=[rouge:1.2, bleu:2.0, rouge:2.4], k=3}.
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{points étiquetés, nouveau point $x$, entier $k$}
+\KwResult{classe prédite}
+calculer la distance de $x$ à chaque point\;
+trier les points par distance croissante\;
+sélectionner les $k$ plus proches\;
+\Return la classe majoritaire parmi ces $k$\;
+\caption{Vote des $k$ plus proches voisins}
+\end{algorithm}
+
+\medskip
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Voisin & Distance & Classe \\
+\midrule
+1 & 1.2 & rouge \\
+2 & 2.0 & bleu \\
+3 & 2.4 & rouge \\
+\bottomrule
+\end{tabular}
+\end{center}
+Vote parmi les $k=3$ plus proches : rouge~2 voix, bleu~1 voix $\rightarrow$ classe \textbf{rouge}. Cas limite : égalité de vote avec $k$ pair.
+
+\section*{Cas limites à retenir}
+\begin{itemize}[nosep]
+  \item cible absente (dichotomie) ; \item pièce 1 absente (glouton) ; \item égalité de vote (k-NN).
+\end{itemize}
+\end{document}

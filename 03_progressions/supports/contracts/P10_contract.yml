@@ -1,0 +1,59 @@
+sequence: P10
+level: premiere
+theme: réseaux, protocoles et paquets
+notion: réseaux, protocoles et paquets
+status: needs_review
+notions_exigibles:
+- IP source
+- IP destination
+- MAC locale
+- TCP
+- port 443
+- TTL
+- bit alterné
+- passerelle
+capacites_officielles:
+- P-ARCH-02A
+- P-ARCH-02B
+- P-ARCH-02C
+- P-ARCH-04A
+- P-ARCH-04B
+exemples_obligatoires:
+- src=192.168.1.20 dst=172.16.0.8 TCP port 443 TTL 4
+- MAC change à chaque saut, IP reste de bout en bout
+- M0 -> ACK0 -> M1 perdu -> M1 retransmis -> ACK1
+- TTL=1 devient 0 et le paquet est détruit
+cas_limites:
+- TTL devient 0
+- destination locale 192.168.1.34
+- ACK43 dupliqué
+erreurs_frequentes:
+- confondre MAC et IP
+- TTL pris pour une durée
+- réémettre un paquet TTL 0
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- IP source
+- IP destination
+- MAC locale
+- TCP
+- src=192.168.1.20 dst=172.16.0.8 TCP port 443 TTL 4
+- TTL devient 0
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

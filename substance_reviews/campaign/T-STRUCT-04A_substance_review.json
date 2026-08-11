@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-04A",
+      "official_label": "Identifier des situations nécessitant une structure de données arborescente.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_cours_arbres_binaires.md",
+        "anchor": "#définitions-et-formalisation",
+        "quote": "Définition D1 : arbre binaire est utilisé dans Arbres et algorithmes avec une donnée, une règle et un contrôle.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_td_arbres_binaires.md",
+        "anchor": "#activité-dentrée",
+        "quote": "Repérer racine, fils gauche et fils droit.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_corrige_arbres_binaires.md",
+        "anchor": "#exercices-numérotés",
+        "quote": "Exercice 1 : résoudre arbre feuille avec `7` ; attendu : hauteur 0.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La capacité T-STRUCT-04A porte sur l'identification de situations nécessitant une structure arborescente. Le cours définit les notions d'arbre binaire, racine, feuille dans un contexte concret (expression arithmétique représentée par un arbre). Le TD fait pratiquer le repérage de la structure (racine, fils gauche, fils droit). Le corrigé fournit les réponses attendues. Les preuves sont présentes mais restent centrées sur la manipulation de la structure plutôt que sur l'identification de situations nécessitant un arbre ; néanmoins la situation-problème (expression arithmétique → arbre) illus...",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

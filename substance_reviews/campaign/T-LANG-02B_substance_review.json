@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-08T07:29:29Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-02B",
+      "official_label": "Analyser le fonctionnement d'un programme récursif.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T04/T04_cours_recursivite.md",
+        "anchor": "#méthode--analyser-un-appel-récursif",
+        "quote": "Pour analyser le fonctionnement d'un programme récursif (T-LANG-02B) :\n\n1. **Identifier le cas de base** : quelle condition arrête la récursion ?\n2. **Tracer les appels** : suivre la pile d'appels avec les valeurs d'arguments à chaque niveau. Exemple : `somme([4, 1, 3])` → `4 + somme([1, 3])` → `4 + 1 + somme([3])` → `4 + 1 + 3 + somme([])` → `4 + 1 + 3 + 0 = 8`.\n3. **Prouver la terminaison** : exhiber un variant (mesure entière positive strictement décroissante à chaque appel).",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T04/T04_td_recursivite.md",
+        "anchor": "#exercice-4",
+        "quote": "Énoncé disciplinaire : soit la fonction `def decompte(n): print(n); return decompte(n - 1)`. (a) Tracer les 4 premiers appels pour `decompte(3)` en indiquant la valeur de `n` à chaque appel. (b) Identifier le problème de terminaison (cas de base manquant). (c) Corriger la fonction en ajoutant un cas de base pour `n == 0`. (d) Donner le variant de terminaison (mesure entière strictement décroissante).",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T04/T04_corrige_recursivite.md",
+        "anchor": "#corrigé-exercice-4",
+        "quote": "- Méthode : isoler l'erreur fréquente « Ne pas traiter l'entrée vide. » puis reprendre la procédure correcte.\n- Résultat : preuve de terminaison.\n- Contrôle : corriger l'erreur « Ne pas traiter l'entrée vide. ».\n- Erreur traitée : EF4 - Ne pas traiter l'entrée vide.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne explicitement la méthode d'analyse d'un programme récursif (T-LANG-02B) avec trace d'appels et variant. Le TD fait pratiquer l'analyse sur une fonction concrète. Le corrigé professeur fournit la correction complète avec méthode et erreur traitée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

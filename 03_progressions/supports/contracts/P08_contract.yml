@@ -1,0 +1,64 @@
+sequence: P08
+level: premiere
+theme: HTML, CSS, DOM, HTTP et formulaires
+notion: HTML, CSS, DOM, HTTP et formulaires
+status: needs_review
+notions_exigibles:
+- HTML structurel
+- sélecteur CSS
+- DOM
+- événement submit
+- GET
+- POST
+- paramètre URL
+- formulaire
+- HTTPS
+capacites_officielles:
+- P-IHM-01A
+- P-IHM-01B
+- P-IHM-02
+- P-IHM-03A
+- P-IHM-03B
+- P-IHM-03C
+- P-IHM-04A
+- P-IHM-04B
+- P-IHM-04C
+exemples_obligatoires:
+- <label for=nom>Nom</label><input id=nom name=nom>
+- document.querySelector("#nom").value lit la saisie
+- GET /club?jour=mercredi transporte jour
+- POST sans HTTPS ne chiffre pas
+cas_limites:
+- champ nom vide
+- paramètre jour absent
+- formulaire sans action
+erreurs_frequentes:
+- bouton hors formulaire
+- sélecteur trop large
+- POST confondu avec chiffrement
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- HTML structurel
+- sélecteur CSS
+- DOM
+- événement submit
+- <label for=nom>Nom</label><input id=nom name=nom>
+- champ nom vide
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

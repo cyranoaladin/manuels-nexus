@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-01A",
+      "official_label": "Comprendre que tout programme est aussi une donnée.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_cours_calculabilite_arret.md",
+        "anchor": "#à-savoir",
+        "quote": "programme comme donnée.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_TD_calculabilite_arret.md",
+        "anchor": "#exercice-1",
+        "quote": "Consigne : encoder un programme comme texte ; traiter aussi `programme très long mais fini` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_corrige_calculabilite_arret.md",
+        "anchor": "#exercice-1",
+        "quote": "Réponse attendue : source=\"print(1)\" est une donnée.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne explicitement le concept 'programme comme donnée', le TD fait pratiquer l'encodage d'un programme comme texte (T-LANG-01A), et le corrigé fournit la réponse attendue avec la méthode associée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+sequence: T08
+level: terminale
+theme: BFS, DFS, cycles et chemins
+notion: BFS, DFS, cycles et chemins
+status: needs_review
+notions_exigibles:
+- BFS avec file
+- DFS avec pile
+- marquage
+- prédécesseurs
+- chemin reconstruit
+- cycle
+- graphe non connexe
+- complexité
+capacites_officielles:
+- T-ALGO-02A
+- T-ALGO-02B
+- T-ALGO-02C
+- T-ALGO-02D
+exemples_obligatoires:
+- BFS -> A,B,C,D,E
+- prédécesseurs E<-C<-A donc chemin A-C-E
+- F isolé -> aucun chemin
+- complexité O(V+E)
+cas_limites:
+- sommet isolé F
+- destination absente
+- cycle D-C-D
+erreurs_frequentes:
+- marquage trop tardif
+- BFS confondu avec DFS
+- prédécesseurs oubliés
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- BFS avec file
+- DFS avec pile
+- marquage
+- prédécesseurs
+- BFS -> A,B,C,D,E
+- sommet isolé F
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

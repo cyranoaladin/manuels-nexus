@@ -1,0 +1,54 @@
+sequence: T00
+theme: Reprise Python et tests
+notions_exigibles:
+- fonction
+- assertion
+- cas limite
+- spécification
+capacites_officielles:
+- T-LANG-03A
+exemples_obligatoires:
+- 'maximum nominal : `[3, 7, 2]` -> `7`'
+- 'liste vide : `[]` -> exception documentée'
+- 'assertion : `assert maximum([1]) == 1` -> test passant'
+- 'entrée invalide : `[1, "x"]` -> erreur contrôlée'
+cas_limites:
+- liste d’un élément
+- aucune valeur initiale
+- message utile en cas d’échec
+- comparaison impossible
+erreurs_frequentes:
+- EF1 - Tester seulement le cas donné en exemple.
+- EF2 - Écrire un test qui reproduit le code au lieu de la spécification.
+- EF3 - Oublier le cas vide.
+- EF4 - Ne pas lire le message d’échec.
+types_exercices_attendus:
+- maximum nominal avec `[3, 7, 2]`
+- liste vide à partir de `[]`
+- assertion avec `assert maximum([1]) == 1`
+- entrée invalide pour `[1, "x"]`
+- un cas limite lié à liste d’un élément
+- deux méthodes possibles pour liste vide
+- un transfert qui utilise assertion avec une donnée nouvelle
+- un énoncé volontairement erroné sur entrée invalide
+tp_attendu: Écrire une fonction et une suite de tests qui refusent les cas non spécifiés.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- fonction
+- '[3, 7, 2]'
+- '[]'
+- liste d’un élément
+- EF1
+- Écrire une fonction et une suite de tests qui refusent les cas non spécifiés.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

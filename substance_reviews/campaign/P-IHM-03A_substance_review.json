@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-14T23:53:15Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-IHM-03A",
+      "official_label": "Distinguer ce qui est exécuté sur le client ou sur le serveur et dans quel ordre.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md",
+        "anchor": "#exécution-serveur-vs-client",
+        "quote": "- Le **serveur** exécute le code Python/PHP qui génère la page HTML, accède à la base de données, vérifie les droits. Le résultat est envoyé au client.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md",
+        "anchor": "#exercice-3",
+        "quote": "Expliquez pourquoi la vérification du mot de passe doit être faite par le serveur et non par le JavaScript du navigateur.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_corrige_http_get_post_formulaires.md",
+        "anchor": "#question-3--ordre-client-serveur",
+        "quote": "Le navigateur ne doit pas accéder directement à la base des comptes : les contrôles d'autorisation et les données sensibles appartiennent au serveur. Un contrôle réalisé seulement en JavaScript pourrait être contourné par un client modifié.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours distingue explicitement les responsabilités du serveur et du client. Le TD demande l'ordre client → serveur → réponse, et le corrigé explique pourquoi les contrôles sensibles appartiennent au serveur. Le verdict reste needs_review dans l'attente d'une revue humaine indépendante.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

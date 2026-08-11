@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T11:52:18Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-BASE-02A",
+      "official_label": "Evaluer le nombre de bits nécessaires à l'écriture en base 2 d'un entier, d'une somme ou d'un produit.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P02/P02_cours_complement_booleens.md",
+        "anchor": "#évaluer-le-nombre-de-bits-nécessaires-en-base-2",
+        "quote": "Un entier naturel `n` (n ≥ 1) s'écrit en base 2 avec exactement `⌊log₂(n)⌋ + 1` bits. En pratique, on cherche la plus petite puissance de 2 strictement supérieure à `n`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P02/P02_td_complement_booleens.md",
+        "anchor": "#exercice-9",
+        "quote": "Combien de bits sont nécessaires pour écrire 200 en base 2 ? Justifier par la méthode des divisions successives.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P02/P02_corrige_complement_booleens.md",
+        "anchor": "#corrigé-exercice-9--évaluer-le-nombre-de-bits-nécessaires-p-data-base-02a",
+        "quote": "200 nécessite **8 bits**. Méthode : 8 divisions successives par 2. Vérification : 2⁷ = 128 ≤ 200 < 256 = 2⁸.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la règle ⌊log₂(n)⌋+1 et la méthode par divisions successives. Le TD (exercice 9) fait pratiquer sur des entiers, sommes et produits. Le corrigé professeur fournit les réponses détaillées avec vérification par encadrement.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-CONSTR-01",
+      "official_label": "Ecrire une fonction renvoyant un p-uplet de valeurs.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md",
+        "anchor": "#1-p-data-constr-01--écrire-une-fonction-renvoyant-un-p-uplet-de-valeurs",
+        "quote": "La syntaxe `return a, b` est équivalente à `return (a, b)`. Python construit automatiquement un tuple.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md",
+        "anchor": "#exercice-1---fonction-renvoyant-un-p-uplet-p-data-constr-01",
+        "quote": "Écrire sur papier une fonction `extremes(a, b)` qui renvoie le tuple `(plus_petit, plus_grand)` de deux nombres `a` et `b`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md",
+        "anchor": "#exercice-1---fonction-renvoyant-un-p-uplet-p-data-constr-01",
+        "quote": "La valeur renvoyée est de type `tuple`. Plus précisément, c'est un tuple de trois éléments : `(8, 15, 11.25)`.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours complément enseigne la syntaxe return pour renvoyer un p-uplet, le TD fait pratiquer l'écriture de fonctions renvoyant des tuples, et le corrigé fournit les réponses attendues avec les valeurs correctes.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

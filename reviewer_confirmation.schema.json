@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nexusreussite/nsi/reviewer_confirmation.schema.json",
+  "title": "Confirmation humaine de verdict de substance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["capacite_id", "verdict_hash", "relecteur", "date", "marqueur"],
+  "properties": {
+    "capacite_id": {
+      "type": "string",
+      "pattern": "^[PT]-[A-Z0-9-]+$"
+    },
+    "verdict_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "relecteur": {
+      "type": "string",
+      "minLength": 2
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "marqueur": {
+      "type": "string",
+      "minLength": 3
+    }
+  }
+}

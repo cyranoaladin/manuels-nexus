@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-15T07:43:02Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-IHM-04B",
+      "official_label": "Distinguer les transmissions de paramètres par requêtes POST ou GET.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md",
+        "anchor": "#get-vs-post--visibilité-des-données",
+        "quote": "| Données visibles dans l'URL | Oui (`?nom=valeur&...`) | Non (corps de la requête) |",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md",
+        "anchor": "#exercice-8",
+        "quote": "Consigne : pour chaque affirmation, expliquez pourquoi elle est fausse ou trompeuse. Proposez une reformulation correcte en utilisant le vocabulaire précis du cours (URL, corps de requête, chiffrement, TLS, attribut `name`, validation serveur).",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md",
+        "anchor": "#corrigé-exercice-8",
+        "quote": "- Résultat : F1 — POST masque les données de l'URL et de l'historique, mais ne les chiffre pas sur le réseau ; seul HTTPS chiffre le transport. F2 — HTTPS chiffre l'échange HTTP entier (URL, corps, en-têtes) via TLS, mais ne change pas la méthode ; GET reste GET. F3 — un champ sans attribut `name` n'est pas inclus dans la requête ; seuls les champs avec `name` sont sérialisés. F4 — un formulaire HTML contrôle la saisie côté client, mais la validation côté serveur est indispensable car un client modifié peut contourner les contrôles JavaScript.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la distinction GET/POST via un tableau comparatif (visibilité URL, historique, logs). Le TD fait pratiquer avec un exercice de débogage de raisonnements faux sur POST, HTTPS, name et validation. Le corrigé fournit les reformulations précises.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

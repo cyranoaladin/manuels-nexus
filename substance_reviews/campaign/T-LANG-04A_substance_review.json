@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-08T21:31:51Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-04A",
+      "official_label": "Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet.",
+      "proof_course": {
+        "present": false,
+        "file": null,
+        "anchor": null,
+        "quote": null,
+        "teaches": false
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T04/T04_td_recursivite.md",
+        "anchor": "#exercice-9",
+        "quote": "on donne trois implémentations de la somme d'une liste — impérative (boucle for), fonctionnelle (récursion sans variable mutable) et objet (méthode d'une classe ListeNombres). (9a) Identifier le paradigme de chaque version.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": false,
+        "file": null,
+        "anchor": null,
+        "quote": null,
+        "teaches": false
+      },
+      "verdict": "needs_review",
+      "justification": "Auto-dégradé (1 rôle(s) invalide(s)). [correction] citation introuvable sous #barème-question-5 (recouvrement tokens 0%) — possible hallucination",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

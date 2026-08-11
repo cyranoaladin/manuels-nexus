@@ -1,0 +1,159 @@
+{
+  "metadata": {
+    "titre": "QCM - structures abstraites et implémentations",
+    "title": "QCM - structures abstraites et implémentations",
+    "niveau": "terminale",
+    "source": "BO spécial n°8 du 25 juillet 2019 - NSI Terminale",
+    "statut": "needs_review",
+    "status": "needs_review",
+    "version": "0.2.0",
+    "notion": "structures de données",
+    "objectifs": "Vérifier les choix de structures, interfaces et représentations de graphes.",
+    "sequence": "s01_structures_donnees_interfaces_implementations",
+    "private_data": false,
+    "official_program": {
+      "level": "terminale",
+      "rubrique": "Structures de données",
+      "content": "Structures abstraites et implémentations",
+      "capacities": [
+        {
+          "id": "T-STRUCT-01A",
+          "label": "Distinguer interface et implémentation d'une structure de données",
+          "evidence": [{"section": "questions", "file": "terminale/sequences/s01_structures_donnees_interfaces_implementations/qcm.json", "anchor": "#questions", "type": "qcm"}]
+        },
+        {
+          "id": "T-STRUCT-02A",
+          "label": "Spécifier et utiliser listes, piles et files",
+          "evidence": [{"section": "questions", "file": "terminale/sequences/s01_structures_donnees_interfaces_implementations/qcm.json", "anchor": "#questions", "type": "qcm"}]
+        },
+        {
+          "id": "T-STRUCT-05A",
+          "label": "Représenter un graphe par liste d'adjacence ou matrice d'adjacence",
+          "evidence": [{"section": "questions", "file": "terminale/sequences/s01_structures_donnees_interfaces_implementations/qcm.json", "anchor": "#questions", "type": "qcm"}]
+        }
+      ]
+    }
+  },
+  "questions": [
+    {
+      "id": "T01-Q1",
+      "question": "Que décrit principalement l'interface d'une structure de données ?",
+      "propositions": ["Les opérations disponibles", "Le nom exact des variables Python", "La quantité de mémoire réelle utilisée", "La couleur du schéma"],
+      "bonne_reponse": "Les opérations disponibles",
+      "difficulte": "socle",
+      "capacite_officielle": "T-STRUCT-01A",
+      "erreur_ciblee": "Confusion entre usage abstrait et détails de code",
+      "explications": {
+        "Les opérations disponibles": "C'est le rôle de l'interface.",
+        "Le nom exact des variables Python": "C'est un détail d'implémentation.",
+        "La quantité de mémoire réelle utilisée": "C'est une propriété d'implémentation et de contexte.",
+        "La couleur du schéma": "Ce n'est pas une propriété informatique de la structure."
+      }
+    },
+    {
+      "id": "T01-Q2",
+      "question": "Quelle structure retire le dernier élément ajouté ?",
+      "propositions": ["Une pile", "Une file", "Un dictionnaire", "Une matrice"],
+      "bonne_reponse": "Une pile",
+      "difficulte": "socle",
+      "capacite_officielle": "T-STRUCT-02A",
+      "erreur_ciblee": "Inversion pile/file",
+      "explications": {
+        "Une pile": "Réponse attendue : LIFO.",
+        "Une file": "Une file retire le premier élément ajouté.",
+        "Un dictionnaire": "Un dictionnaire permet un accès par clé.",
+        "Une matrice": "Une matrice organise des valeurs par indices."
+      }
+    },
+    {
+      "id": "T01-Q3",
+      "question": "Quelle structure est adaptée pour traiter des demandes dans l'ordre d'arrivée ?",
+      "propositions": ["Une file", "Une pile", "Un ensemble sans ordre", "Une variable booléenne"],
+      "bonne_reponse": "Une file",
+      "difficulte": "socle",
+      "capacite_officielle": "T-STRUCT-02A",
+      "erreur_ciblee": "Mauvaise lecture de l'ordre de traitement",
+      "explications": {
+        "Une file": "C'est la structure attendue pour FIFO.",
+        "Une pile": "La pile inverse l'ordre de retrait.",
+        "Un ensemble sans ordre": "L'ordre n'est pas garanti par le besoin.",
+        "Une variable booléenne": "Elle ne stocke pas une collection de demandes."
+      }
+    },
+    {
+      "id": "T01-Q4",
+      "question": "Pourquoi un dictionnaire est-il utile ?",
+      "propositions": ["Pour associer des clés à des valeurs", "Pour retirer le plus ancien élément", "Pour représenter seulement des nombres", "Pour trier automatiquement un graphe"],
+      "bonne_reponse": "Pour associer des clés à des valeurs",
+      "difficulte": "standard",
+      "capacite_officielle": "T-STRUCT-03B",
+      "erreur_ciblee": "Réduction du dictionnaire à une liste améliorée",
+      "explications": {
+        "Pour associer des clés à des valeurs": "C'est son usage central.",
+        "Pour retirer le plus ancien élément": "C'est le rôle d'une file.",
+        "Pour représenter seulement des nombres": "Les clés et valeurs peuvent être variées.",
+        "Pour trier automatiquement un graphe": "Ce n'est pas une propriété générale du dictionnaire."
+      }
+    },
+    {
+      "id": "T01-Q5",
+      "question": "Quelle représentation stocke directement les voisins de chaque sommet ?",
+      "propositions": ["Une liste d'adjacence", "Une matrice identité", "Une pile", "Un booléen"],
+      "bonne_reponse": "Une liste d'adjacence",
+      "difficulte": "standard",
+      "capacite_officielle": "T-STRUCT-05A",
+      "erreur_ciblee": "Confusion entre représentations de graphe",
+      "explications": {
+        "Une liste d'adjacence": "C'est la représentation décrite.",
+        "Une matrice identité": "Elle ne décrit que des relations d'un sommet avec lui-même.",
+        "Une pile": "Elle gère un ordre de retrait.",
+        "Un booléen": "Il ne peut pas stocker tous les voisins."
+      }
+    },
+    {
+      "id": "T01-Q6",
+      "question": "Dans quel cas une matrice d'adjacence est-elle pratique ?",
+      "propositions": ["Tester rapidement l'existence d'une arête", "Retirer le dernier élément ajouté", "Associer une clé à une valeur", "Éviter toute place mémoire"],
+      "bonne_reponse": "Tester rapidement l'existence d'une arête",
+      "difficulte": "standard",
+      "capacite_officielle": "T-STRUCT-05A",
+      "erreur_ciblee": "Choix de représentation sans opération cible",
+      "explications": {
+        "Tester rapidement l'existence d'une arête": "C'est un avantage de la matrice.",
+        "Retirer le dernier élément ajouté": "C'est une opération de pile.",
+        "Associer une clé à une valeur": "C'est une opération de dictionnaire.",
+        "Éviter toute place mémoire": "Une matrice peut être coûteuse en place."
+      }
+    },
+    {
+      "id": "T01-Q7",
+      "question": "Pourquoi peut-on changer l'implémentation d'une file sans changer le code utilisateur ?",
+      "propositions": ["Parce que l'interface reste identique", "Parce que Python ignore les erreurs", "Parce qu'une file est toujours un dictionnaire", "Parce que les tests ne servent plus"],
+      "bonne_reponse": "Parce que l'interface reste identique",
+      "difficulte": "expert",
+      "capacite_officielle": "T-STRUCT-01A",
+      "erreur_ciblee": "Dépendance excessive aux détails internes",
+      "explications": {
+        "Parce que l'interface reste identique": "C'est le principe d'abstraction.",
+        "Parce que Python ignore les erreurs": "Python signale des erreurs ; ce n'est pas l'explication.",
+        "Parce qu'une file est toujours un dictionnaire": "Une file peut avoir plusieurs implémentations.",
+        "Parce que les tests ne servent plus": "Les tests restent nécessaires."
+      }
+    },
+    {
+      "id": "T01-Q8",
+      "question": "Quel choix est le plus pertinent pour un graphe peu dense dont on parcourt souvent les voisins ?",
+      "propositions": ["Liste d'adjacence", "Matrice d'adjacence systématique", "Pile uniquement", "Chaîne de caractères unique"],
+      "bonne_reponse": "Liste d'adjacence",
+      "difficulte": "expert",
+      "capacite_officielle": "T-STRUCT-05A",
+      "erreur_ciblee": "Mauvais compromis place/accès",
+      "explications": {
+        "Liste d'adjacence": "Elle est adaptée aux graphes peu denses et aux parcours de voisins.",
+        "Matrice d'adjacence systématique": "Elle peut stocker beaucoup de zéros inutiles.",
+        "Pile uniquement": "Une pile ne représente pas les relations d'un graphe.",
+        "Chaîne de caractères unique": "Ce n'est pas une structure relationnelle adaptée."
+      }
+    }
+  ]
+}

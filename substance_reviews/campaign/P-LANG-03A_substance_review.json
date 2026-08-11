@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-LANG-03A",
+      "official_label": "Prototyper une fonction.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md",
+        "anchor": "#méthodes",
+        "quote": "écrire def prix_ttc(prix_ht: float, taux: float) -> float.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_TD_fonctions_tests_specifications.md",
+        "anchor": "#exercice-3",
+        "quote": "Consigne : vérifier résultat >= prix_ht ; traiter aussi `type chaîne \"80\"` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md",
+        "anchor": "#exercice-3",
+        "quote": "Réponse attendue : prix_ttc(-5,0.20) -> ValueError.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours présente la méthode de prototypage (signature, préconditions, postconditions), le TD fait pratiquer la capacité P-LANG-03A (exercice 3), et le corrigé fournit la réponse attendue pour cet exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

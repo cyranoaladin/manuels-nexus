@@ -1,0 +1,72 @@
+sequence: P05
+theme: Traitement de tables CSV
+notions_exigibles:
+  - table
+  - CSV
+  - csv.reader
+  - csv.DictReader
+  - filtrage
+  - conversion numérique
+  - tri numérique
+  - tri lexicographique
+capacites_officielles:
+  - P-TABLE-01
+  - P-TABLE-02
+exemples_obligatoires:
+  - "lecture CSV : `pays_monde.csv` avec champs `PAYS`, `CAPITALE`, `CONTINENT`, `POPULATION`"
+  - "filtrage par continent : `CONTINENT == \"Europe\"` conserve Allemagne et Albanie dans l’extrait"
+  - "conversion : `POPULATION` passe de chaîne à `int`, la ligne `POPULATION=invalide` est isolée"
+  - "tri numérique vs tri lexicographique : `82801531` ne doit pas être classé comme une simple chaîne"
+  - "tri par continent puis population : clé `(CONTINENT, -POPULATION)`"
+cas_limites:
+  - fichier pays_monde.csv vide
+  - continent absent
+  - ligne invalide
+  - population non convertible en int
+  - sélection vide avant tri numérique
+erreurs_frequentes:
+  - EF1 - Traiter l’en-tête comme une donnée.
+  - EF2 - Comparer une population numérique restée chaîne.
+  - EF3 - Trier lexicographiquement des populations.
+  - EF4 - Ignorer silencieusement une ligne invalide.
+types_exercices_attendus:
+  - lire `pays_monde.csv` avec `csv.reader`
+  - reconstruire des dictionnaires avec `csv.DictReader`
+  - filtrer par `CONTINENT`
+  - convertir `POPULATION` en `int`
+  - comparer tri numérique et tri lexicographique
+  - trier par `CONTINENT` puis `POPULATION`
+  - traiter une ligne invalide
+  - justifier un résultat vérifiable à partir de l’extrait
+tp_attendu: Lire pays_monde.csv avec csv.reader et csv.DictReader, filtrer par CONTINENT, convertir POPULATION en int, comparer tri numérique et tri lexicographique, puis isoler une ligne invalide.
+interdits_pedagogiques:
+  - conserver un ancien mini CSV météo
+  - utiliser une ville unique comme scénario de mesure
+  - trier `POPULATION` comme chaîne sans conversion
+  - ignorer une ligne invalide sans rapport d’erreur
+  - starter qui retourne directement la réponse
+criteres_validation_humaine:
+  - relecture pédagogique indépendante
+  - vérification scientifique des exemples
+  - exécution du TP corrigé
+  - alignement avec le BO 2019
+must_include:
+  - pays_monde.csv
+  - PAYS
+  - CAPITALE
+  - CONTINENT
+  - POPULATION
+  - csv.reader
+  - csv.DictReader
+  - filtrage
+  - int(row["POPULATION"])
+  - tri par continent puis population
+  - P-TABLE-01
+  - P-TABLE-02
+  - tri numérique
+  - tri lexicographique
+  - ligne invalide
+must_not:
+  - ancien mini CSV de villes et mesures météo
+  - scénario de mesures météo urbaines
+  - ancien calcul météo hors traitement de tables pays

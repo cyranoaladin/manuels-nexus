@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-08T15:27:17Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-01C",
+      "official_label": "Parcourir un arbre en ordres infixe, préfixe ou suffixe.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_cours_arbres_binaires_recherche.md",
+        "anchor": "#méthode--parcours-en-profondeur-dun-arbre-t-algo-01c",
+        "quote": "- **Parcours infixe** (gauche, racine, droite) : `[1, 3, 6, 8, 10, 14]` — produit les clés dans l'ordre croissant pour un ABR.\n- **Parcours préfixe** (racine, gauche, droite) : `[8, 3, 1, 6, 10, 14]` — la racine apparaît en premier, utile pour reconstruire l'arbre.\n- **Parcours suffixe** (gauche, droite, racine) : `[1, 6, 3, 14, 10, 8]` — la racine apparaît en dernier, utile pour libérer la mémoire.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_TP_arbres_binaires_recherche.md",
+        "anchor": "#trace-attendue-détaillée",
+        "quote": "Parcours infixe attendu (T-ALGO-01C) : `[1, 3, 6, 8, 10, 14]`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_corrige_arbres_binaires_recherche.md",
+        "anchor": "#exercice-3",
+        "quote": "- Méthode : parcours infixe (gauche, racine, droite) — T-ALGO-01C.\n- Cas limite : arbre dégénéré.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne les trois ordres de parcours (infixe, préfixe, suffixe) avec implémentation récursive. Le TP fait pratiquer le parcours infixe sur un ABR concret. Le corrigé fournit la méthode et le résultat attendu pour l'exercice 3 portant explicitement sur T-ALGO-01C.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

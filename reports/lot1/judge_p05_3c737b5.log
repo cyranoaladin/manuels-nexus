@@ -1,0 +1,27 @@
+# command: make judge U=P05
+# timestamp: 2026-06-28T22:02:44+01:00
+# head: 3c737b5adc44a09a4b43b2d9b901b7a11e4d9127
+test -n "P05"
+python scripts/substance_judge.py --offline-fixture --unit "P05" --output /tmp/substance_judge_P05.json
+substance_judge: fixture offline P05 -> /tmp/substance_judge_P05.json
+python scripts/check_substance_anchors.py /tmp/substance_judge_P05.json --repo-root .
+=== Vérification de substance — unité P05 (premiere) ===
+juge: deterministic-substance-prejudge  auteur: codex-authoring-agent
+
+🟠 P-TABLE-01: needs_content
+    - preuve cours        : ok [exact] (teaches=false)
+    - preuve entraînement : ok [exact] (teaches=false)
+    - preuve correction   : ok [exact] (teaches=false)
+      · 1 alerte(s) scientifique(s) signalée(s)
+
+🟠 P-TABLE-02: needs_content
+    - preuve cours        : ok [exact] (teaches=false)
+    - preuve entraînement : ok [exact] (teaches=false)
+    - preuve correction   : ok [exact] (teaches=false)
+      · 1 alerte(s) scientifique(s) signalée(s)
+
+=== Bilan ===
+validées (effectif) : 0
+needs_content       : 2
+BLOCKER             : 0
+verdicts dégradés   : 0

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-13T00:41:12Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-03C",
+      "official_label": "Construire des requêtes d'interrogation avec WHERE.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md",
+        "anchor": "#2-filtrer-avec-where",
+        "quote": "`WHERE` conserve seulement les lignes pour lesquelles une condition est vraie. Les opérateurs usuels sont `=`, `<>`, `<`, `<=`, `>`, `>=`, ainsi que `AND`, `OR` et `NOT`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md",
+        "anchor": "#exercice-2--tracer-un-filtre-socle-8-min",
+        "quote": "On cherche les notes strictement inférieures à 15.\n\n1. Compléter la table de trace suivante pour chacune des six lignes de `Note`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md",
+        "anchor": "#exercice-2--tracer-un-filtre",
+        "quote": "Résultat : `(14, 9)`, `(11, 13)`, `(13, 14)`. La note 15 est exclue parce que `15 < 15` est faux. Avec `<= 15`, la ligne 12 serait aussi conservée.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la clause WHERE avec ses opérateurs et une méthode en 5 étapes. Le TD fait pratiquer via une table de trace ligne par ligne. Le corrigé fournit la requête complète et explique la valeur frontière.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

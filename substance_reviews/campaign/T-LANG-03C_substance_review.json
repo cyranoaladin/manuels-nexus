@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-12T10:40:55Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-03C",
+      "official_label": "Créer des modules simples et les documenter.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_cours_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exemple-corrigé-3",
+        "quote": "créer le fichier `meteo.py` contenant `def moyenne_temperature(releves):` avec docstring, puis l'importer depuis `main.py` avec `from meteo import moyenne_temperature`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_TD_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exercice-3",
+        "quote": "Consigne : choisir paradigme selon tâche ; traiter aussi `type chaîne` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_corrige_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exercice-3",
+        "quote": "Réponse attendue : temperature=\"31\" refusée ou convertie.\n- Méthode : choisir paradigme selon tâche.\n- Cas limite : type chaîne.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la création d'un module avec docstring et son import (exemple corrigé 3). Le TD fait pratiquer via l'exercice 3 (T-LANG-03C). Le corrigé fournit la réponse attendue pour cet exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

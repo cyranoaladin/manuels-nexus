@@ -1,0 +1,59 @@
+sequence: P09
+level: premiere
+theme: architecture, système et droits Unix
+notion: architecture, système et droits Unix
+status: needs_review
+notions_exigibles:
+- processeur
+- mémoire
+- stockage
+- processus
+- PID
+- système de fichiers
+- chmod
+- permission denied
+capacites_officielles:
+- P-ARCH-01A
+- P-ARCH-01B
+- P-ARCH-03A
+- P-ARCH-03B
+- P-ARCH-03C
+exemples_obligatoires:
+- -rw-r----- -> propriétaire rw, groupe r, autres aucun droit
+- chmod 640 mesures.csv donne rw-r-----
+- PID 2314 python collecte.py est un processus
+- sans x sur dossier, lecture du fichier impossible
+cas_limites:
+- fichier absent
+- droit x manquant sur dossier
+- chmod 777 trop permissif
+erreurs_frequentes:
+- confondre mémoire et disque
+- oublier x sur dossier
+- donner tous les droits
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- processeur
+- mémoire
+- stockage
+- processus
+- -rw-r----- -> propriétaire rw, groupe r, autres aucun droit
+- fichier absent
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

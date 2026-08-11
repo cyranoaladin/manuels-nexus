@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-06T06:08:14Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-CONSTR-02B",
+      "official_label": "Construire un tableau par compréhension.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_trace_types_construits_complement.md",
+        "anchor": "#méthode-2---construire-un-tableau-par-compréhension-p-data-constr-02b",
+        "quote": "**Modèle** :\n\n```python\nresultat = [expression for variable in iterable]\nresultat = [expression for variable in iterable if condition]\n```",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md",
+        "anchor": "#exercice-2---tableau-par-compréhension-p-data-constr-02b",
+        "quote": "**Question 2c.** Écrire sur papier une compréhension qui produit la liste des cubes des entiers de 1 à 8, soit `[1, 8, 27, 64, 125, 216, 343, 512]`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md",
+        "anchor": "#exercice-2---tableau-par-compréhension-p-data-constr-02b",
+        "quote": "```python\ncubes = [x ** 3 for x in range(1, 9)]\n```",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La trace enseigne la syntaxe des compréhensions avec modèle et exemples. Le TD fait pratiquer avec plusieurs questions dont l'écriture de compréhensions filtrées. Le corrigé fournit les réponses attendues avec le code Python complet.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

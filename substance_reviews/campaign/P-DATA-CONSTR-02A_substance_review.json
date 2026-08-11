@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-CONSTR-02A",
+      "official_label": "Lire et modifier les éléments d'un tableau grâce à leurs index.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_trace_types_construits.md",
+        "anchor": "#repère-2---liste-de-relevés",
+        "quote": "À retenir : parcourir les valeurs et calculer une moyenne.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md",
+        "anchor": "#question-2",
+        "quote": "Écrire une boucle `for valeur in releves` qui calcule la moyenne des relevés. Donner la trace (élément courant et cumul à chaque tour).",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_corrige_types_construits.md",
+        "anchor": "#méthode-générale-de-correction",
+        "quote": "pour liste de relevés, exiger la donnée `[18, 20, 19]`, la méthode « parcourir les valeurs et calculer une moyenne » et le contrôle « liste vide ».",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La capacité P-DATA-CONSTR-02A porte sur la lecture et modification des éléments d'un tableau via leurs index. Les fichiers traitent principalement l'itération sur les valeurs d'une liste (boucle for valeur in releves) et la gestion de tuples/listes dans un contexte météo. L'accès par index est mentionné indirectement (ex: notes[0] dans le complément), mais le cœur des preuves porte sur le parcours de listes et la mutabilité, ce qui correspond partiellement à la capacité. La trace enseigne le parcours, l'évaluation fait pratiquer la boucle sur les valeurs, et le corrigé fournit la réponse at...",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

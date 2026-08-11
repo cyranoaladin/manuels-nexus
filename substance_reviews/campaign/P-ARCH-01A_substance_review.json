@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-06T06:09:33Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ARCH-01A",
+      "official_label": "Distinguer les rôles et les caractéristiques des constituants d'une machine.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_cours_architecture_os_droits.md",
+        "anchor": "#à-savoir",
+        "quote": "- processeur.\n- mémoire.\n- stockage.\n- processus.\n- PID.\n- système de fichiers.\n- chmod.\n- permission denied.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_TD_architecture_os_droits.md",
+        "anchor": "#exercice-1",
+        "quote": "Consigne : distinguer mémoire vive et stockage ; traiter aussi `fichier absent` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_corrige_architecture_os_droits.md",
+        "anchor": "#exercice-1",
+        "quote": "- Réponse attendue : -rw-r----- -> propriétaire rw, groupe r, autres aucun droit.\n- Méthode : distinguer mémoire vive et stockage.\n- Cas limite : fichier absent.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours liste les constituants (processeur, mémoire, stockage, processus), le TD fait pratiquer la distinction mémoire vive/stockage, et le corrigé fournit la réponse attendue. Cependant, le contenu porte surtout sur les droits Unix ; la capacité P-ARCH-01A est citée mais peu développée sur les caractéristiques matérielles.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-07T22:07:34Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-03A",
+      "official_label": "Utiliser des API ou bibliothèques.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T00/T00_cours_diagnostic_tests.md",
+        "anchor": "#utiliser-des-api-ou-bibliothèques",
+        "quote": "Une **API** (Application Programming Interface) est un ensemble de fonctions, classes et protocoles exposés par une bibliothèque ou un service, permettant à un programme de l'utiliser sans connaître son implémentation interne. L'API est le **contrat d'interface** : elle spécifie les entrées attendues, les sorties produites, et les erreurs possibles.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T00/T00_td_diagnostic_tests.md",
+        "anchor": "#exercice-9",
+        "quote": "Énoncé disciplinaire : utiliser le module `json` pour lire et écrire des données structurées. (9a) Écrire un programme qui crée un dictionnaire `eleve = {\"nom\": \"Alice\", \"notes\": [15, 12, 18]}`, le sérialise en chaîne JSON avec `json.dumps`, puis le reconstitue avec `json.loads`. Vérifier que le dictionnaire reconstitué est identique à l'original.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T00/T00_corrige_diagnostic_tests.md",
+        "anchor": "#corrigé-exercice-9",
+        "quote": "Méthode : import json, appel dumps/loads, lecture fichier avec gestion FileNotFoundError, test chaîne malformée.\n- Résultat : sérialisation/désérialisation vérifiée, exception JSONDecodeError identifiée.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la notion d'API avec exemples csv, json et requests. Le TD fait pratiquer l'utilisation du module json (exercice 9). Le corrigé professeur fournit la correction complète de cet exercice avec gestion des exceptions.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

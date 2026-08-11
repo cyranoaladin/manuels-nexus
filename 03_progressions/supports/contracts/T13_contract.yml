@@ -1,0 +1,56 @@
+sequence: T13
+level: terminale
+theme: chiffrement et HTTPS
+notion: chiffrement et HTTPS
+status: needs_review
+notions_exigibles:
+- chiffrement symétrique
+- chiffrement asymétrique
+- clé publique
+- clé privée
+- certificat
+- échange de clé
+- HTTPS
+- authenticité
+capacites_officielles:
+- T-ARCH-04A
+- T-ARCH-04B
+exemples_obligatoires:
+- message chiffré avec Ksession
+- Ksession chiffrée avec Kpub serveur
+- Autorité-Test signe serveur.example
+- HTTP sans TLS ne protège pas
+cas_limites:
+- certificat expiré
+- clé publique non vérifiée
+- HTTP sans TLS
+erreurs_frequentes:
+- clé publique supposée secrète
+- asymétrique utilisé partout
+- certificat ignoré
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- chiffrement symétrique
+- chiffrement asymétrique
+- clé publique
+- clé privée
+- message chiffré avec Ksession
+- certificat expiré
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

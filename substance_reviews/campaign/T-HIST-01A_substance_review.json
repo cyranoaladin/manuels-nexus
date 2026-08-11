@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-08T10:14:51Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-HIST-01A",
+      "official_label": "Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T19/T19_cours_bac_pratique_grand_oral_projet.md",
+        "anchor": "#frise-chronologique-étendue-terminale",
+        "quote": "| 1936 | Machine de Turing | Alan Turing | Fondation théorique du calcul |\n| 1945 | Architecture von Neumann | John von Neumann | Programme stocké en mémoire |\n| 1946 | ENIAC | Mauchly, Eckert | Calculateur électronique généraliste |",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T19/T19_TD_bac_pratique_grand_oral_projet.md",
+        "anchor": "#exercice-9",
+        "quote": "Consigne : (9a) citer trois événements qui relèvent du matériel et trois qui relèvent du logiciel. (9b) placer ARPANET (1969), GNU (1983) et Linux (1991) sur la frise et justifier en une phrase l'apport de chacun. (9c) expliquer pourquoi la thèse de Church-Turing (1936) est un événement fondateur alors qu'aucun matériel n'est construit.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T19/T19_corrige_bac_pratique_grand_oral_projet.md",
+        "anchor": "#exercice-9",
+        "quote": "Réponse attendue : matériel (ENIAC, CI, 4004), logiciel (GNU, Linux, Web), ARPANET/GNU/Linux placés, Church-Turing = fondation théorique.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours fournit une frise chronologique détaillée avec protagonistes (T-HIST-01A). Le TD exercice 9 fait pratiquer la classification et le placement d'événements sur la frise. Le corrigé dédié valide les réponses attendues pour cet exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

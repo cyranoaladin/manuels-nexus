@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-13T00:41:27Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-03D",
+      "official_label": "Construire des requêtes d'interrogation avec JOIN.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md",
+        "anchor": "#3-relier-deux-tables-avec-join--on",
+        "quote": "### Méthode réutilisable — construire une jointure\n\n1. Repérer la colonne demandée dans chaque table.\n2. Identifier la clé primaire et la clé étrangère qui décrivent le même élève.\n3. Écrire `JOIN Note ON Eleve.id_eleve = Note.id_eleve`.\n4. Ajouter le filtre `WHERE` après la jointure si seules certaines associations sont demandées.\n5. Contrôler une ligne : la note d'identifiant 10 porte `id_eleve = 1`, donc elle doit être associée à Ada.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md",
+        "anchor": "#exercice-4--construire-une-jointure-et-suivre-une-ligne-standard-12-min",
+        "quote": "### Exercice 4 — Construire une jointure et suivre une ligne [standard, 12 min]\n\nCapacités : `T-BDD-03A`, `T-BDD-03C`, `T-BDD-03D`.\n\nOn veut afficher le nom, la matière et la note pour toutes les notes d'Ada.\n\n1. Nommer les colonnes qui permettent de relier `Eleve` et `Note`.\n2. Écrire une requête avec `JOIN ... ON` et `WHERE`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md",
+        "anchor": "#exercice-4--jointure-et-suivi-dune-ligne",
+        "quote": "Les colonnes de même sens sont `Eleve.id_eleve` et `Note.id_eleve`.\n\n```sql\nSELECT Eleve.nom, Note.matiere, Note.note\nFROM Eleve\nJOIN Note ON Eleve.id_eleve = Note.id_eleve\nWHERE Eleve.nom = 'Ada'\nORDER BY Note.matiere ASC;\n```",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode de construction d'une jointure avec contre-exemple. Le TD fait pratiquer la construction d'une requête JOIN avec suivi de ligne. Le corrigé fournit la requête complète et la justification de la clé de jointure.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

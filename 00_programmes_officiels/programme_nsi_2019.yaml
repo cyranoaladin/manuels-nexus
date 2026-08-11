@@ -1,0 +1,1059 @@
+sources:
+  premiere:
+    titre: Programme de numérique et sciences informatiques de première générale
+    reference: BO spécial n°1 du 22 janvier 2019, arrêté du 17 janvier 2019
+    url: https://www.education.gouv.fr/bo/19/Special1/MENE1901633A.htm
+    annexe_pdf: https://cache.media.education.gouv.fr/file/SP1-MEN-22-1-2019/26/8/spe633_annexe_1063268.pdf
+  terminale:
+    titre: Programme de numérique et sciences informatiques de terminale générale
+    reference: BO spécial n°8 du 25 juillet 2019, arrêté du 19 juillet 2019
+    url: https://www.education.gouv.fr/bo/19/Special8/MENE1921247A.htm
+    annexe_pdf: https://cache.media.education.gouv.fr/file/SPE8_MENJ_25_7_2019/93/3/spe247_annexe_1158933.pdf
+preuves_minimales:
+  covered:
+  - cours
+  - trace
+  - td
+  - tp
+  - evaluation
+  - corrige
+  - preuve_dans_le_contenu
+programmes:
+  premiere:
+  - id: P-HIST-01
+    rubrique: Histoire de l'informatique
+    contenu: Evénements clés de l'histoire de l'informatique
+    capacite_attendue:
+    - Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.
+    commentaire_officiel: Repères construits progressivement au fil des concepts et techniques.
+    niveau: premiere
+    sequence_cible: transversal
+    preuves_attendues: &id002
+    - cours
+    - trace
+    - td
+    - evaluation
+  - id: P-DATA-BASE-01
+    rubrique: 'Représentation des données : types et valeurs de base'
+    contenu: Ecriture d'un entier positif dans une base b >= 2
+    capacite_attendue:
+    - Passer de la représentation d'une base dans une autre.
+    commentaire_officiel: Bases 2, 10 et 16 privilégiées.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: &id001
+    - cours
+    - trace
+    - td
+    - tp
+    - evaluation
+    - corrige
+  - id: P-DATA-BASE-02A
+    rubrique: 'Représentation des données : types et valeurs de base'
+    contenu: Nombre de bits nécessaires en base 2
+    capacite_attendue:
+    - Evaluer le nombre de bits nécessaires à l'écriture en base 2 d'un entier, d'une somme ou d'un produit.
+    commentaire_officiel: Tailles courantes 8, 16, 32 et 64 bits ; entiers Python arbitraires seulement en remarque.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-BASE-02B
+    rubrique: 'Représentation des données : types et valeurs de base'
+    contenu: Représentation binaire d'un entier relatif
+    capacite_attendue:
+    - Utiliser le complément à deux.
+    commentaire_officiel: Distinguer valeur mathématique et représentation sur un nombre fixé de bits.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-BASE-03
+    rubrique: 'Représentation des données : types et valeurs de base'
+    contenu: 'Représentation approximative des nombres réels : flottants'
+    capacite_attendue:
+    - Calculer sur quelques exemples la représentation de nombres réels simples.
+    commentaire_officiel: Aucune connaissance précise d'IEEE-754 n'est exigible ; éviter les tests d'égalité directe sur flottants.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-DATA-BASE-04
+    rubrique: 'Représentation des données : types et valeurs de base'
+    contenu: Valeurs booléennes et expressions booléennes
+    capacite_attendue:
+    - Dresser la table d'une expression booléenne.
+    commentaire_officiel: Xor peut être évoqué ; lien possible avec l'addition binaire.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-BASE-05A
+    rubrique: 'Représentation des données : types et valeurs de base'
+    contenu: Systèmes d'encodage de textes
+    capacite_attendue:
+    - Identifier l'intérêt des différents systèmes d'encodage.
+    commentaire_officiel: Aucune connaissance détaillée des normes d'encodage n'est exigible.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-BASE-05B
+    rubrique: 'Représentation des données : types et valeurs de base'
+    contenu: Conversion de fichiers texte entre encodages
+    capacite_attendue:
+    - Convertir un fichier texte dans différents formats d'encodage.
+    commentaire_officiel: Activité pratique limitée à des fichiers courts et sans données personnelles.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-CONSTR-01
+    rubrique: 'Représentation des données : types construits'
+    contenu: p-uplets et p-uplets nommés
+    capacite_attendue:
+    - Ecrire une fonction renvoyant un p-uplet de valeurs.
+    commentaire_officiel: Les appellations Python peuvent différer de celles d'autres langages.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-CONSTR-02A
+    rubrique: 'Représentation des données : types construits'
+    contenu: Tableaux indexés
+    capacite_attendue:
+    - Lire et modifier les éléments d'un tableau grâce à leurs index.
+    commentaire_officiel: Python identifie listes et tableaux ; pas d'exigence sur slices ni NumPy.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-CONSTR-02B
+    rubrique: 'Représentation des données : types construits'
+    contenu: Tableaux donnés en compréhension
+    capacite_attendue:
+    - Construire un tableau par compréhension.
+    commentaire_officiel: Compréhensions limitées à des expressions lisibles.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-CONSTR-02C
+    rubrique: 'Représentation des données : types construits'
+    contenu: Tableaux de tableaux
+    capacite_attendue:
+    - Utiliser des tableaux de tableaux pour représenter des matrices.
+    commentaire_officiel: Représentation matricielle sans NumPy.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-CONSTR-02D
+    rubrique: 'Représentation des données : types construits'
+    contenu: Itération sur tableau
+    capacite_attendue:
+    - Itérer sur les éléments d'un tableau.
+    commentaire_officiel: Distinguer itération sur valeurs et itération sur indices.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-CONSTR-03A
+    rubrique: 'Représentation des données : types construits'
+    contenu: Dictionnaires par clés et valeurs
+    capacite_attendue:
+    - Construire une entrée de dictionnaire.
+    commentaire_officiel: Possibilité d'utiliser des données EXIF fictives comme exemple d'enregistrement.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-CONSTR-03B
+    rubrique: 'Représentation des données : types construits'
+    contenu: Itération sur dictionnaire
+    capacite_attendue:
+    - Itérer sur les éléments d'un dictionnaire.
+    commentaire_officiel: Distinguer clés, valeurs et couples clé-valeur.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-DATA-CONSTR-03C
+    rubrique: 'Représentation des données : types construits'
+    contenu: Méthodes de dictionnaire
+    capacite_attendue:
+    - Utiliser les méthodes keys, values et items.
+    commentaire_officiel: Insister sur le type des vues et sur les usages courants.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-TABLE-01
+    rubrique: Traitement de données en tables
+    contenu: Indexation de tables
+    capacite_attendue:
+    - Importer une table depuis un fichier texte tabulé ou un fichier CSV.
+    commentaire_officiel: Tableau doublement indexé ou tableau de p-uplets partageant les mêmes descripteurs.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-TABLE-02
+    rubrique: Traitement de données en tables
+    contenu: Recherche dans une table
+    capacite_attendue:
+    - Rechercher les lignes d'une table vérifiant des critères exprimés en logique propositionnelle.
+    commentaire_officiel: Recherche de doublons et tests de cohérence à présenter.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-TABLE-03
+    rubrique: Traitement de données en tables
+    contenu: Tri d'une table
+    capacite_attendue:
+    - Trier une table suivant une colonne.
+    commentaire_officiel: Une fonction de tri intégrée peut être utilisée.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-TABLE-04
+    rubrique: Traitement de données en tables
+    contenu: Fusion de tables
+    capacite_attendue:
+    - Construire une nouvelle table en combinant les données de deux tables.
+    commentaire_officiel: La notion de domaine de valeurs est mise en évidence.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-01A
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Composants graphiques d'interaction
+    capacite_attendue:
+    - Identifier les composants graphiques permettant d'interagir avec une application Web.
+    commentaire_officiel: Distinguer description HTML et comportement programmé.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-01B
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Evénements associés aux composants graphiques
+    capacite_attendue:
+    - Identifier les événements que les fonctions associées aux composants graphiques peuvent traiter.
+    commentaire_officiel: Exemples en JavaScript limités aux événements simples.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-02
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Interaction avec l'utilisateur dans une page Web
+    capacite_attendue:
+    - Analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web.
+    commentaire_officiel: Expertise exhaustive des langages Web non attendue.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-03A
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Interaction client-serveur
+    capacite_attendue:
+    - Distinguer ce qui est exécuté sur le client ou sur le serveur et dans quel ordre.
+    commentaire_officiel: Lien avec HTTP et l'ordre des échanges.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-03B
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Données mémorisées côté client
+    capacite_attendue:
+    - Distinguer ce qui est mémorisé dans le client et retransmis au serveur.
+    commentaire_officiel: Lien avec paramètres et cookies de façon limitée.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-03C
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Transmission chiffrée
+    capacite_attendue:
+    - Reconnaître quand et pourquoi la transmission est chiffrée.
+    commentaire_officiel: Approche fonctionnelle de HTTPS, sans détail cryptographique.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-04A
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Formulaire Web simple
+    capacite_attendue:
+    - Analyser le fonctionnement d'un formulaire simple.
+    commentaire_officiel: Formulaires sans collecte de données personnelles.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-04B
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Requêtes POST et GET
+    capacite_attendue:
+    - Distinguer les transmissions de paramètres par requêtes POST ou GET.
+    commentaire_officiel: Lien avec confidentialité des paramètres.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-IHM-04C
+    rubrique: Interactions entre l'homme et la machine sur le Web
+    contenu: Choix du type de requête
+    capacite_attendue:
+    - Discuter les types de requêtes selon les valeurs à transmettre et leur confidentialité.
+    commentaire_officiel: Rester sur des critères simples et observables.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-01A
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Constituants d'une machine
+    capacite_attendue:
+    - Distinguer les rôles et les caractéristiques des constituants d'une machine.
+    commentaire_officiel: Présentation limitée aux concepts généraux.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-01B
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Exécution d'instructions machine
+    capacite_attendue:
+    - Dérouler l'exécution d'une séquence d'instructions simples de type langage machine.
+    commentaire_officiel: Activités débranchées possibles.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-02A
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Paquets et encapsulation
+    capacite_attendue:
+    - Mettre en évidence l'intérêt du découpage en paquets et de l'encapsulation.
+    commentaire_officiel: Lien avec TCP/IP au niveau attendu.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-02B
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Protocole de récupération de perte
+    capacite_attendue:
+    - Dérouler le fonctionnement d'un protocole simple de récupération de perte de paquets.
+    commentaire_officiel: Le bit alterné est un exemple adapté.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-02C
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Mise en œuvre ou simulation de réseau
+    capacite_attendue:
+    - Simuler ou mettre en œuvre un réseau.
+    commentaire_officiel: Rester sur un réseau local ou une simulation contrôlée.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-03A
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Fonctions d'un système d'exploitation
+    capacite_attendue:
+    - Identifier les fonctions d'un système d'exploitation.
+    commentaire_officiel: Usage d'un système libre possible.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-03B
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Ligne de commande
+    capacite_attendue:
+    - Utiliser les commandes de base en ligne de commande.
+    commentaire_officiel: Commandes de base sur fichiers et dossiers.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-03C
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Droits et permissions
+    capacite_attendue:
+    - Gérer les droits et permissions d'accès aux fichiers.
+    commentaire_officiel: Scénarios sans données personnelles.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-04A
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: Capteurs et actionneurs
+    capacite_attendue:
+    - Identifier le rôle des capteurs et actionneurs.
+    commentaire_officiel: Objets connectés ou systèmes embarqués possibles.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ARCH-04B
+    rubrique: Architectures matérielles et systèmes d'exploitation
+    contenu: IHM répondant à un cahier des charges
+    capacite_attendue:
+    - Réaliser par programmation une IHM répondant à un cahier des charges donné.
+    commentaire_officiel: Activité bornée et reliée aux interactions Web ou objets.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-LANG-01
+    rubrique: Langages et programmation
+    contenu: Constructions élémentaires
+    capacite_attendue:
+    - Mettre en évidence un corpus de constructions élémentaires.
+    commentaire_officiel: Séquences, affectation, conditionnelles, boucles bornées ou non, appels de fonction.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-LANG-02
+    rubrique: Langages et programmation
+    contenu: Diversité et unité des langages de programmation
+    capacite_attendue:
+    - Repérer dans un nouveau langage les traits communs et particuliers à ce langage.
+    commentaire_officiel: Comparer l'écriture d'un même programme simple dans différents langages.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-LANG-03A
+    rubrique: Langages et programmation
+    contenu: Prototype de fonction
+    capacite_attendue:
+    - Prototyper une fonction.
+    commentaire_officiel: Signature et intention doivent être lisibles.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-LANG-03B
+    rubrique: Langages et programmation
+    contenu: Préconditions
+    capacite_attendue:
+    - Décrire les préconditions sur les arguments.
+    commentaire_officiel: Assertions possibles pour garantir les préconditions.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-LANG-03C
+    rubrique: Langages et programmation
+    contenu: Postconditions
+    capacite_attendue:
+    - Décrire des postconditions sur les résultats.
+    commentaire_officiel: Lien avec tests d'exemples et cas limites.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-LANG-04
+    rubrique: Langages et programmation
+    contenu: Mise au point de programmes
+    capacite_attendue:
+    - Utiliser des jeux de tests.
+    commentaire_officiel: La réussite d'un jeu de tests ne prouve pas la correction générale.
+    niveau: premiere
+    sequence_cible: s01_representation_donnees
+    preuves_attendues: *id001
+  - id: P-LANG-05
+    rubrique: Langages et programmation
+    contenu: Utilisation de bibliothèques
+    capacite_attendue:
+    - Utiliser la documentation d'une bibliothèque.
+    commentaire_officiel: Aucune connaissance exhaustive d'une bibliothèque particulière n'est exigible.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-01A
+    rubrique: Algorithmique
+    contenu: Recherche d'occurrence
+    capacite_attendue:
+    - Ecrire un algorithme de recherche d'une occurrence sur des valeurs de type quelconque.
+    commentaire_officiel: Coût linéaire.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-01B
+    rubrique: Algorithmique
+    contenu: Recherche d'extremum ou calcul de moyenne
+    capacite_attendue:
+    - Ecrire un algorithme de recherche d'un extremum ou de calcul d'une moyenne.
+    commentaire_officiel: Coût linéaire.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-02A
+    rubrique: Algorithmique
+    contenu: Tri par insertion
+    capacite_attendue:
+    - Ecrire un algorithme de tri par insertion.
+    commentaire_officiel: Terminaison à justifier ; coût quadratique dans le pire cas.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-02B
+    rubrique: Algorithmique
+    contenu: Tri par sélection
+    capacite_attendue:
+    - Ecrire un algorithme de tri par sélection.
+    commentaire_officiel: Terminaison à justifier ; coût quadratique dans le pire cas.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-02C
+    rubrique: Algorithmique
+    contenu: Invariant du tri par insertion
+    capacite_attendue:
+    - Décrire un invariant de boucle prouvant la correction du tri par insertion.
+    commentaire_officiel: Invariant présenté au niveau Première.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-02D
+    rubrique: Algorithmique
+    contenu: Invariant du tri par sélection
+    capacite_attendue:
+    - Décrire un invariant de boucle prouvant la correction du tri par sélection.
+    commentaire_officiel: Invariant présenté au niveau Première.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-03
+    rubrique: Algorithmique
+    contenu: Algorithme des k plus proches voisins
+    capacite_attendue:
+    - Ecrire un algorithme qui prédit la classe d'un élément à partir de la classe majoritaire de ses k plus proches voisins.
+    commentaire_officiel: Exemple d'algorithme d'apprentissage.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-04
+    rubrique: Algorithmique
+    contenu: Recherche dichotomique dans un tableau trié
+    capacite_attendue:
+    - Montrer la terminaison de la recherche dichotomique à l'aide d'un variant de boucle.
+    commentaire_officiel: Assertions possibles ; preuve de correction présentable par le professeur.
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: P-ALGO-05
+    rubrique: Algorithmique
+    contenu: Algorithmes gloutons
+    capacite_attendue:
+    - Résoudre un problème grâce à un algorithme glouton.
+    commentaire_officiel: 'Exemples possibles : sac à dos ou rendu de monnaie.'
+    niveau: premiere
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  terminale:
+  - id: T-HIST-01A
+    rubrique: Histoire de l'informatique
+    contenu: Evénements clés de l'histoire de l'informatique
+    capacite_attendue:
+    - Situer dans le temps les principaux événements de l'histoire de l'informatique et leurs protagonistes.
+    commentaire_officiel: Repères complétant ceux de première, construits au fil des concepts.
+    niveau: terminale
+    sequence_cible: transversal
+    preuves_attendues: *id002
+  - id: T-HIST-01B
+    rubrique: Histoire de l'informatique
+    contenu: Evolution logiciels et matériels
+    capacite_attendue:
+    - Identifier l'évolution des rôles relatifs des logiciels et des matériels.
+    commentaire_officiel: Relier aux architectures et aux systèmes.
+    niveau: terminale
+    sequence_cible: transversal
+    preuves_attendues: *id002
+  - id: T-STRUCT-01A
+    rubrique: Structures de données
+    contenu: Interface d'une structure de données
+    capacite_attendue:
+    - Spécifier une structure de données par son interface.
+    commentaire_officiel: Abstraction introduite à partir de structures simples.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-01B
+    rubrique: Structures de données
+    contenu: Interface et implémentation
+    capacite_attendue:
+    - Distinguer interface et implémentation.
+    commentaire_officiel: Exemples contrastés obligatoires.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-01C
+    rubrique: Structures de données
+    contenu: Implémentations multiples
+    capacite_attendue:
+    - Ecrire plusieurs implémentations d'une même structure de données.
+    commentaire_officiel: Tests communs à plusieurs implémentations.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-02A
+    rubrique: Structures de données
+    contenu: Définition de classe
+    capacite_attendue:
+    - Ecrire la définition d'une classe.
+    commentaire_officiel: Polymorphisme et héritage non attendus ici.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-02B
+    rubrique: Structures de données
+    contenu: Attributs et méthodes
+    capacite_attendue:
+    - Accéder aux attributs et méthodes d'une classe.
+    commentaire_officiel: Faire distinguer état et comportement.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-03A
+    rubrique: Structures de données
+    contenu: Méthodes caractéristiques des structures
+    capacite_attendue:
+    - Distinguer des structures par le jeu des méthodes qui les caractérisent.
+    commentaire_officiel: Distinguer FIFO et LIFO pour files et piles.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-03B
+    rubrique: Structures de données
+    contenu: Choix de structure adaptée
+    capacite_attendue:
+    - Choisir une structure de données adaptée à la situation à modéliser.
+    commentaire_officiel: Justification par opérations dominantes.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-03C
+    rubrique: Structures de données
+    contenu: Liste et dictionnaire
+    capacite_attendue:
+    - Distinguer la recherche d'une valeur dans une liste et dans un dictionnaire.
+    commentaire_officiel: Lien avec index, clé et coût attendu.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-04A
+    rubrique: Structures de données
+    contenu: Situations arborescentes
+    capacite_attendue:
+    - Identifier des situations nécessitant une structure de données arborescente.
+    commentaire_officiel: Lien avec hiérarchie et récursivité.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-STRUCT-04B
+    rubrique: Structures de données
+    contenu: Mesures sur arbres binaires
+    capacite_attendue:
+    - Evaluer quelques mesures des arbres binaires.
+    commentaire_officiel: Taille, hauteur et feuilles.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-STRUCT-05A
+    rubrique: Structures de données
+    contenu: Modélisation par graphe
+    capacite_attendue:
+    - Modéliser des situations sous forme de graphes.
+    commentaire_officiel: Le choix de représentation dépend du traitement visé.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-05B
+    rubrique: Structures de données
+    contenu: Matrice d'adjacence
+    capacite_attendue:
+    - Ecrire l'implémentation d'un graphe par matrice d'adjacence.
+    commentaire_officiel: Comparer mémoire et accès.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-05C
+    rubrique: Structures de données
+    contenu: Listes de successeurs ou prédécesseurs
+    capacite_attendue:
+    - Ecrire l'implémentation d'un graphe par listes de successeurs ou prédécesseurs.
+    commentaire_officiel: Comparer avec matrice.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-STRUCT-05D
+    rubrique: Structures de données
+    contenu: Conversion de représentation de graphe
+    capacite_attendue:
+    - Passer d'une représentation à une autre.
+    commentaire_officiel: 'Cas limites : graphe vide, sommet isolé.'
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-BDD-01A
+    rubrique: Bases de données
+    contenu: Concepts du modèle relationnel
+    capacite_attendue:
+    - Identifier les concepts définissant le modèle relationnel.
+    commentaire_officiel: Relation, attribut, domaine, clé, schéma.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-01B
+    rubrique: Bases de données
+    contenu: Structure et contenu
+    capacite_attendue:
+    - Distinguer structure et contenu d'une base de données.
+    commentaire_officiel: Exemples réalistes mais fictifs.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-01C
+    rubrique: Bases de données
+    contenu: Anomalies de schéma
+    capacite_attendue:
+    - Repérer les anomalies dans le schéma d'une base de données.
+    commentaire_officiel: Manipulation de données nombreuses et réalistes à privilégier.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-02
+    rubrique: Bases de données
+    contenu: Services d'un SGBD relationnel
+    capacite_attendue:
+    - Identifier les services rendus par un SGBD relationnel.
+    commentaire_officiel: Persistance, concurrence, efficacité, sécurisation.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-03A
+    rubrique: Bases de données
+    contenu: Composants d'une requête SQL
+    capacite_attendue:
+    - Identifier les composants d'une requête.
+    commentaire_officiel: Distinguer clauses et mots clés.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-03B
+    rubrique: Bases de données
+    contenu: SQL SELECT et FROM
+    capacite_attendue:
+    - Construire des requêtes d'interrogation avec SELECT et FROM.
+    commentaire_officiel: Base de la projection et du choix de table.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-03C
+    rubrique: Bases de données
+    contenu: SQL WHERE
+    capacite_attendue:
+    - Construire des requêtes d'interrogation avec WHERE.
+    commentaire_officiel: Conditions simples et composées.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-03D
+    rubrique: Bases de données
+    contenu: SQL JOIN
+    capacite_attendue:
+    - Construire des requêtes d'interrogation avec JOIN.
+    commentaire_officiel: Lien avec clés et contraintes.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-03E
+    rubrique: Bases de données
+    contenu: SQL ORDER BY
+    capacite_attendue:
+    - Construire des requêtes d'interrogation avec ORDER BY.
+    commentaire_officiel: ORDER BY possible sans agrégations avancées.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-03F
+    rubrique: Bases de données
+    contenu: SQL INSERT
+    capacite_attendue:
+    - Construire des requêtes d'insertion avec INSERT.
+    commentaire_officiel: Données fictives uniquement.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-03G
+    rubrique: Bases de données
+    contenu: SQL UPDATE
+    capacite_attendue:
+    - Construire des requêtes de mise à jour avec UPDATE.
+    commentaire_officiel: Insister sur WHERE pour limiter la mise à jour.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-BDD-03H
+    rubrique: Bases de données
+    contenu: SQL DELETE
+    capacite_attendue:
+    - Construire des requêtes de suppression avec DELETE.
+    commentaire_officiel: Insister sur les risques et transactions de façon simple.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ARCH-01
+    rubrique: Architectures matérielles, systèmes d'exploitation et réseaux
+    contenu: Composants intégrés d'un système sur puce
+    capacite_attendue:
+    - Identifier les principaux composants sur un schéma de circuit et les avantages de leur intégration.
+    commentaire_officiel: 'Exemple possible : téléphone, mémoires, interfaces, accélérateurs.'
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ARCH-02A
+    rubrique: Architectures matérielles, systèmes d'exploitation et réseaux
+    contenu: Création de processus
+    capacite_attendue:
+    - Décrire la création d'un processus.
+    commentaire_officiel: Observation avec outils standard.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ARCH-02B
+    rubrique: Architectures matérielles, systèmes d'exploitation et réseaux
+    contenu: Ordonnancement de processus
+    capacite_attendue:
+    - Décrire l'ordonnancement de plusieurs processus.
+    commentaire_officiel: Activité débranchée ou simulation.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ARCH-02C
+    rubrique: Architectures matérielles, systèmes d'exploitation et réseaux
+    contenu: Interblocage
+    capacite_attendue:
+    - Mettre en évidence le risque d'interblocage.
+    commentaire_officiel: Scénarios à ressources limitées.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ARCH-03
+    rubrique: Architectures matérielles, systèmes d'exploitation et réseaux
+    contenu: Protocoles de routage
+    capacite_attendue:
+    - Identifier, selon le protocole de routage utilisé, la route empruntée par un paquet.
+    commentaire_officiel: RIP par nombre de sauts ou OSPF par coût ; lien avec chemins dans un graphe.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ARCH-04A
+    rubrique: Architectures matérielles, systèmes d'exploitation et réseaux
+    contenu: Chiffrement symétrique et asymétrique
+    capacite_attendue:
+    - Décrire les principes du chiffrement symétrique et asymétrique.
+    commentaire_officiel: Illustration possible en mode débranché.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ARCH-04B
+    rubrique: Architectures matérielles, systèmes d'exploitation et réseaux
+    contenu: Sécurisation HTTPS par échange de clé
+    capacite_attendue:
+    - Décrire l'échange d'une clé symétrique avec un protocole asymétrique pour sécuriser HTTPS.
+    commentaire_officiel: Négociation SSL détaillée non abordée.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-LANG-01A
+    rubrique: Langages et programmation
+    contenu: Programme comme donnée
+    capacite_attendue:
+    - Comprendre que tout programme est aussi une donnée.
+    commentaire_officiel: Interpréteur et compilateur aident à comprendre ce point.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-LANG-01B
+    rubrique: Langages et programmation
+    contenu: Calculabilité indépendante du langage
+    capacite_attendue:
+    - Comprendre que la calculabilité ne dépend pas du langage.
+    commentaire_officiel: Approche sans formalisme théorique lourd.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-LANG-01C
+    rubrique: Langages et programmation
+    contenu: Problème de l'arrêt
+    capacite_attendue:
+    - Montrer sans formalisme théorique que le problème de l'arrêt est indécidable.
+    commentaire_officiel: Argument intuitif encadré.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-LANG-02A
+    rubrique: Langages et programmation
+    contenu: Programme récursif
+    capacite_attendue:
+    - Ecrire un programme récursif.
+    commentaire_officiel: Exemples de domaines variés à privilégier.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-LANG-02B
+    rubrique: Langages et programmation
+    contenu: Analyse de programme récursif
+    capacite_attendue:
+    - Analyser le fonctionnement d'un programme récursif.
+    commentaire_officiel: Arbre d'appels et terminaison.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-LANG-03A
+    rubrique: Langages et programmation
+    contenu: Utilisation d'API ou bibliothèques
+    capacite_attendue:
+    - Utiliser des API ou bibliothèques.
+    commentaire_officiel: Lien direct avec bibliothèques et interfaces.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-LANG-03B
+    rubrique: Langages et programmation
+    contenu: Documentation d'API
+    capacite_attendue:
+    - Exploiter la documentation d'API ou bibliothèques.
+    commentaire_officiel: Lire signatures et exemples.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-LANG-03C
+    rubrique: Langages et programmation
+    contenu: Modules simples
+    capacite_attendue:
+    - Créer des modules simples et les documenter.
+    commentaire_officiel: Organisation minimale de projet.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-LANG-04A
+    rubrique: Langages et programmation
+    contenu: Paradigmes
+    capacite_attendue:
+    - Distinguer sur des exemples les paradigmes impératif, fonctionnel et objet.
+    commentaire_officiel: Un même langage ou programme peut mobiliser plusieurs paradigmes.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-LANG-04B
+    rubrique: Langages et programmation
+    contenu: Choix de paradigme
+    capacite_attendue:
+    - Choisir le paradigme selon le champ d'application.
+    commentaire_officiel: Rester sur des cas simples et argumentés.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-LANG-05
+    rubrique: Langages et programmation
+    contenu: Mise au point des programmes ; gestion des bugs
+    capacite_attendue:
+    - Savoir répondre aux causes typiques de bugs.
+    commentaire_officiel: Typage, effets de bord, débordements, conditionnelles, inégalités, flottants et nommage.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-ALGO-01A
+    rubrique: Algorithmique
+    contenu: Taille d'un arbre
+    capacite_attendue:
+    - Calculer la taille d'un arbre.
+    commentaire_officiel: Structure récursive adaptée.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-01B
+    rubrique: Algorithmique
+    contenu: Hauteur d'un arbre
+    capacite_attendue:
+    - Calculer la hauteur d'un arbre.
+    commentaire_officiel: Cas arbre vide à préciser.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-01C
+    rubrique: Algorithmique
+    contenu: Parcours profondeur d'arbre
+    capacite_attendue:
+    - Parcourir un arbre en ordres infixe, préfixe ou suffixe.
+    commentaire_officiel: Lien avec récursivité.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-01D
+    rubrique: Algorithmique
+    contenu: Parcours largeur d'arbre
+    capacite_attendue:
+    - Parcourir un arbre en largeur d'abord.
+    commentaire_officiel: Lien avec file.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-01E
+    rubrique: Algorithmique
+    contenu: Recherche dans ABR
+    capacite_attendue:
+    - Rechercher une clé dans un arbre de recherche.
+    commentaire_officiel: Recherche équilibrée de coût logarithmique en remarque.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-01F
+    rubrique: Algorithmique
+    contenu: Insertion dans ABR
+    capacite_attendue:
+    - Insérer une clé dans un arbre de recherche.
+    commentaire_officiel: Arbre non équilibré comme limite.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-02A
+    rubrique: Algorithmique
+    contenu: Parcours en largeur d'un graphe
+    capacite_attendue:
+    - Parcourir un graphe en largeur d'abord.
+    commentaire_officiel: Labyrinthe et routage Internet sont des exemples possibles.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-ALGO-02B
+    rubrique: Algorithmique
+    contenu: Parcours en profondeur d'un graphe
+    capacite_attendue:
+    - Parcourir un graphe en profondeur d'abord.
+    commentaire_officiel: Distinguer pile explicite et récursion.
+    niveau: terminale
+    sequence_cible: s01_structures_donnees_interfaces_implementations
+    preuves_attendues: *id001
+  - id: T-ALGO-02C
+    rubrique: Algorithmique
+    contenu: Cycle dans un graphe
+    capacite_attendue:
+    - Repérer la présence d'un cycle dans un graphe.
+    commentaire_officiel: Ne pas confondre avec simple retour visuel.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-02D
+    rubrique: Algorithmique
+    contenu: Chemin dans un graphe
+    capacite_attendue:
+    - Chercher un chemin dans un graphe.
+    commentaire_officiel: Traiter l'absence de chemin.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-03
+    rubrique: Algorithmique
+    contenu: Méthode diviser pour régner
+    capacite_attendue:
+    - Ecrire un algorithme utilisant la méthode diviser pour régner.
+    commentaire_officiel: Rotation d'image ou tri fusion comme exemples ; coût en n log n possible.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-04
+    rubrique: Algorithmique
+    contenu: Programmation dynamique
+    capacite_attendue:
+    - Utiliser la programmation dynamique pour écrire un algorithme.
+    commentaire_officiel: Alignement de séquences ou rendu de monnaie ; discussion sur coût mémoire possible.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001
+  - id: T-ALGO-05
+    rubrique: Algorithmique
+    contenu: Recherche textuelle
+    capacite_attendue:
+    - Etudier l'algorithme de Boyer-Moore pour la recherche d'un motif dans un texte.
+    commentaire_officiel: Intérêt du prétraitement du motif ; étude du coût difficile non exigible.
+    niveau: terminale
+    sequence_cible: a_planifier
+    preuves_attendues: *id001

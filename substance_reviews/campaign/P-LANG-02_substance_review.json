@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T13:22:03Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-LANG-02",
+      "official_label": "Repérer dans un nouveau langage les traits communs et particuliers à ce langage.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md",
+        "anchor": "#repérer-les-traits-communs-et-particuliers-dun-langage",
+        "quote": "Traits communs : les trois versions ont une fonction nommée avec paramètres et un `return`. Traits particuliers : Python n'a pas d'accolades ni de type de retour explicite ; C exige les types ; JavaScript utilise `function` au lieu de `def`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_TD_fonctions_tests_specifications.md",
+        "anchor": "#exercice-9",
+        "quote": "Consigne : (9a) identifier trois traits communs aux trois langages ; (9b) identifier deux traits particuliers à Python par rapport aux deux autres ; (9c) pour chaque langage, préciser comment le type de retour est indiqué.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md",
+        "anchor": "#exercice-9",
+        "quote": "Réponse attendue : (9a) Traits communs : fonction nommée avec paramètres, mot-clé `return`, expression arithmétique identique. (9b) Traits Python : indentation significative (pas d'accolades), typage dynamique (pas de `float` obligatoire). (9c) Python : annotation optionnelle `-> float` ; JavaScript : implicite ; C : obligatoire dans la signature `float prix_ttc(...)`.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne explicitement les traits communs et particuliers de Python vs JS et C avec un exemple comparatif. L'exercice 9 du TD fait pratiquer cette comparaison sur trois langages. Le corrigé fournit les réponses détaillées pour chaque sous-question.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

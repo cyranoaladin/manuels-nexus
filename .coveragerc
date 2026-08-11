@@ -1,0 +1,17 @@
+[run]
+branch = True
+omit =
+    nsi-enseignement/*
+    .venv/*
+    */.venv/*
+    tests/*
+    */tests/*
+    01_build_reports/*
+    dist/*
+
+[report]
+show_missing = True
+skip_covered = False
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:

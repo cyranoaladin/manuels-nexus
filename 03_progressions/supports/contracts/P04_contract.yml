@@ -1,0 +1,56 @@
+sequence: P04
+theme: Tuples, listes, dictionnaires
+notions_exigibles:
+- tuple
+- liste
+- dictionnaire
+- mutabilité
+capacites_officielles:
+- P-DATA-CONSTR-02A
+exemples_obligatoires:
+- 'tuple de coordonnées : `(36.8, 10.2)` -> coordonnées conservées'
+- 'liste de relevés : `[18, 20, 19]` -> `19`'
+- 'dictionnaire : `{"temp": 21, "vent": 12}` -> `21` pour `temp`'
+- 'copie de liste : `[[1], [2]]` -> modification locale contrôlée'
+cas_limites:
+- tentative de modification interdite
+- liste vide
+- clé absente
+- liste imbriquée
+erreurs_frequentes:
+- EF1 - Modifier un tuple comme une liste.
+- EF2 - Parcourir les indices quand les valeurs suffisent.
+- EF3 - Accéder à une clé sans vérifier sa présence.
+- EF4 - Copier une liste imbriquée seulement au premier niveau.
+types_exercices_attendus:
+- tuple de coordonnées avec `(36.8, 10.2)`
+- liste de relevés à partir de `[18, 20, 19]`
+- 'dictionnaire avec `{"temp": 21, "vent": 12}`'
+- copie de liste pour `[[1], [2]]`
+- un cas limite lié à tentative de modification interdite
+- deux méthodes possibles pour liste de relevés
+- un transfert qui utilise dictionnaire avec une donnée nouvelle
+- un énoncé volontairement erroné sur copie de liste
+tp_attendu: Construire un résumé de mesures avec tuple de localisation, liste de valeurs
+  et dictionnaire de métadonnées.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- tuple
+- (36.8, 10.2)
+- '[18, 20, 19]'
+- tentative de modification interdite
+- EF1
+- Construire un résumé de mesures avec tuple de localisation, liste de valeurs et
+  dictionnaire de métadonnées.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

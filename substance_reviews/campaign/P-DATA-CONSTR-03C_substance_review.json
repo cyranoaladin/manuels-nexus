@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T11:52:29Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-CONSTR-03C",
+      "official_label": "Utiliser les méthodes keys, values et items.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md",
+        "anchor": "#6-p-data-constr-03c--utiliser-les-méthodes-keys-values-et-items",
+        "quote": "Les méthodes `keys()`, `values()` et `items()` d'un dictionnaire renvoient des objets vue (*view objects*) qui reflètent dynamiquement le contenu du dictionnaire.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_evaluation_types_construits_complement.md",
+        "anchor": "#question-5---p-data-constr-03b-p-data-constr-03c-4-points",
+        "quote": "Écrire une boucle qui affiche chaque entrée sous la forme `\"Alice a obtenu 85\"`, en utilisant `.items()`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md",
+        "anchor": "#corrigé-exercice-5",
+        "quote": "`d.keys()` renvoie `dict_keys(['temperature', 'humidite', 'vent', 'pression'])` (une vue, pas une liste) pour le dictionnaire météo.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne explicitement les méthodes keys/values/items avec exemples et vue dynamique. L'évaluation fait pratiquer items(). Le corrigé fournit la réponse sur le comportement de keys() comme vue.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

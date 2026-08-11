@@ -1,0 +1,58 @@
+sequence: T11
+level: terminale
+theme: SoC, processus, ordonnancement et interblocage
+notion: SoC, processus, ordonnancement et interblocage
+status: needs_review
+notions_exigibles:
+- système sur puce
+- processus
+- état prêt
+- état bloqué
+- ordonnancement
+- quantum
+- ressource critique
+- interblocage
+capacites_officielles:
+- T-ARCH-01
+- T-ARCH-02A
+- T-ARCH-02B
+- T-ARCH-02C
+exemples_obligatoires:
+- P1 20 ms, P2 20 ms, P1 20 ms
+- P1 attend journal et P2 attend camera
+- CPU + mémoire + contrôleur caméra intégrés
+- processus bloqué ne consomme pas CPU
+cas_limites:
+- un seul processus prêt
+- ressource libérée avant attente
+- processus bloqué
+erreurs_frequentes:
+- programme confondu avec processus
+- bloqué confondu avec terminé
+- ordre des verrous oublié
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- système sur puce
+- processus
+- état prêt
+- état bloqué
+- P1 20 ms, P2 20 ms, P1 20 ms
+- un seul processus prêt
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

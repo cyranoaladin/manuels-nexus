@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-06T06:12:28Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-01D",
+      "official_label": "Parcourir un arbre en largeur d'abord.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_cours_arbres_mesures_parcours_complement.md",
+        "anchor": "#41-principe",
+        "quote": "Le parcours en largeur d'abord (BFS — Breadth-First Search) visite les noeuds niveau par niveau, de gauche à droite. Il utilise une **file** (structure FIFO) pour mémoriser les noeuds à visiter.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_td_arbres_mesures_parcours_complement.md",
+        "anchor": "#exercice-4--parcours-en-largeur-dabord-t-algo-01d",
+        "quote": "**4.a)** Expliquer pourquoi le parcours BFS nécessite une file et non une pile.\n\n**4.b)** Dérouler le parcours BFS de A5. Compléter le tableau :",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T05/T05_corrige_arbres_mesures_parcours_complement.md",
+        "anchor": "#question-4--parcours-en-largeur-t-algo-01d",
+        "quote": "**4.b)** Le BFS utilise une **file** (FIFO). La file garantit que les noeuds du niveau k sont tous traités avant ceux du niveau k+1",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne le principe BFS avec file FIFO et fournit algorithme et trace. Le TD fait pratiquer le déroulé sur un arbre A5. Le corrigé fournit la trace complète et justifie le choix de la file.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

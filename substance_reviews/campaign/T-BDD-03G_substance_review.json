@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-13T00:42:04Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-03G",
+      "official_label": "Construire des requêtes de mise à jour avec UPDATE.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md",
+        "anchor": "#5-modifier-des-lignes-avec-update--where",
+        "quote": "### Méthode de modification sûre\n\n1. Écrire un `SELECT` avec le futur `WHERE` pour voir les lignes ciblées.\n2. Vérifier que le nombre et l'identité des lignes correspondent à l'intention.\n3. Remplacer `SELECT ... FROM` par `UPDATE ... SET`, en conservant exactement le même `WHERE`.\n4. Exécuter un nouveau `SELECT` pour contrôler le résultat.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_TD_sql_insert_update_delete.md",
+        "anchor": "#exercice-3--corriger-une-seule-note-standard-10-min",
+        "quote": "La note d'identifiant 11 vaut 16 et non 13.\n\n1. Écrire le `SELECT` de contrôle avant modification.\n2. Écrire un `UPDATE` qui ne modifie que cette ligne.\n3. Réutiliser le contrôle après modification et donner les résultats avant/après.\n4. Justifier pourquoi `WHERE id_eleve = 2` serait moins précis dans une base où Linus peut avoir plusieurs notes.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md",
+        "anchor": "#exercice-3--mettre-à-jour-une-seule-note",
+        "quote": "```sql\nSELECT id_note, note FROM Note WHERE id_note = 11;\nUPDATE Note SET note = 16 WHERE id_note = 11;\nSELECT id_note, note FROM Note WHERE id_note = 11;\n```\n\nAvant : `(11, 13)`. Après : `(11, 16)`. Les autres lignes restent inchangées.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode sûre d'UPDATE avec SELECT de contrôle avant/après. Le TD fait pratiquer la construction d'un UPDATE ciblé avec justification du choix de clé. Le corrigé fournit les requêtes complètes et les états avant/après.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

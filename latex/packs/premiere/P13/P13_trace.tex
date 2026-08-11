@@ -1,0 +1,22 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{nsi-preamble}
+\begin{document}
+\nsiheader{Trace écrite — Dichotomie, glouton et k-NN}{Première}{P13}{0,5}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
+
+\section*{Ce qu'il faut retenir}
+\begin{itemize}[nosep]
+  \item Dichotomie (P-ALGO-04) : \texttt{cible=37} $\rightarrow$ milieux $18$ puis $37$ $\rightarrow$ indice $4$.
+  \item Glouton (P-ALGO-05) : \texttt{montant=28} $\rightarrow$ $28 = 10+10+5+2+1$ (5 pièces).
+  \item k-NN (P-ALGO-03) : \texttt{k=3} $\rightarrow$ rouge~2 voix vs bleu~1 $\rightarrow$ classe rouge.
+\end{itemize}
+
+\section*{Cas limites à mémoriser}
+cible absente ; pièce 1 absente ; égalité de vote.
+
+\section*{Erreurs fréquentes}
+\begin{itemize}[nosep]
+  \item dichotomie sur liste non triée ;
+  \item glouton supposé toujours optimal ;
+  \item égalité k-NN non décidée.
+\end{itemize}
+\end{document}

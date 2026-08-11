@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-14T23:53:15Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-IHM-01B",
+      "official_label": "Identifier les événements que les fonctions associées aux composants graphiques peuvent traiter.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md",
+        "anchor": "#savoir-faire-et-méthodes-opérationnelles",
+        "quote": "- décrire l’événement DOM qui déclenche le traitement.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_html_css_dom.md",
+        "anchor": "#exercice-5--réagir-à-un-événement",
+        "quote": "Critère de réussite : `click` est identifié comme le signal reçu et `saluer` comme la fonction appelée ; le texte ne change pas au chargement seul.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_corrige_web_http_dom_formulaires.md",
+        "anchor": "#exercice-5",
+        "quote": "Résultat : au chargement, les constantes sont créées et `addEventListener(\"click\", saluer)` installe l'écouteur. Au clic, le gestionnaire `saluer` est appelé et `message.textContent` devient `\"Bonjour !\"`.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours demande de décrire l'événement DOM qui déclenche un traitement. Le TD fait distinguer `click` et le gestionnaire `saluer`, et le corrigé explicite l'installation de l'écouteur puis son appel au clic. Le verdict reste needs_review dans l'attente d'une revue humaine indépendante.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-14T23:53:15Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-IHM-02",
+      "official_label": "Analyser et modifier les méthodes exécutées lors d'un clic sur un bouton d'une page Web.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md",
+        "anchor": "#savoir-faire-et-méthodes-opérationnelles",
+        "quote": "- décrire l’événement DOM qui déclenche le traitement.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_html_css_dom.md",
+        "anchor": "#exercice-6--déboguer-un-script-dom",
+        "quote": "Consigne : le navigateur signale une erreur parce que `total` vaut `null`. Localise l'erreur, corrige-la et explique pourquoi la ligne qui modifie `textContent` ne peut pas fonctionner avant cette correction.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_corrige_web_http_dom_formulaires.md",
+        "anchor": "#exercice-6",
+        "quote": "Résultat : `document.getElementById(\"totale\")` doit devenir `document.getElementById(\"total\")`. Après le clic, `total.textContent = \"1\";` affiche `1`.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours relie un événement DOM au traitement exécuté. Le TD analyse un gestionnaire de clic, son erreur de sélection et l'effet attendu sur le DOM ; le corrigé donne la correction puis l'effet observé après le clic. Le verdict reste needs_review dans l'attente d'une revue humaine indépendante.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

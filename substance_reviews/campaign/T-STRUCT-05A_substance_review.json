@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-08T15:27:28Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-05A",
+      "official_label": "Modéliser des situations sous forme de graphes.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_cours_graphes_modelisation_listes_matrices.md",
+        "anchor": "#savoir-faire-et-méthodes-opérationnelles",
+        "quote": "- traduire une situation en sommets et arêtes.\n- passer de la liste d'adjacence à la matrice.\n- comparer le coût mémoire des deux représentations.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_TP_graphes_modelisation_listes_matrices.md",
+        "anchor": "#travail-demandé",
+        "quote": "1. Préparer la donnée et nommer les champs utiles.\n2. Réaliser : lister voisins sortants.\n3. Réaliser : remplir matrice 0/1.\n4. Tester le cas limite `sommet isolé E`.\n5. Produire le livrable : A -> [B,C], B -> [D], C -> [D], D -> [B].",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_corrige_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exercice-1",
+        "quote": "- Réponse attendue : A -> [B,C], B -> [D], C -> [D], D -> [B].\n- Méthode : lister voisins sortants.\n- Cas limite : sommet isolé E.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la modélisation par graphe (traduire une situation en sommets et arêtes), le TP fait pratiquer la construction de liste d'adjacence à partir d'arcs, et le corrigé fournit les réponses attendues pour la capacité T-STRUCT-05A.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

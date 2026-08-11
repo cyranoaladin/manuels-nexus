@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-06T06:08:36Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-CONSTR-03A",
+      "official_label": "Construire une entrée de dictionnaire.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md",
+        "anchor": "#4-p-data-constr-03a--construire-une-entrée-de-dictionnaire",
+        "quote": "Construire une entrée consiste à ajouter ou modifier une association `clé: valeur` dans un dictionnaire existant, avec la syntaxe `d[cle] = valeur`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md",
+        "anchor": "#exercice-4---construire-une-entrée-de-dictionnaire-p-data-constr-03a",
+        "quote": "Compléter le code pour construire le dictionnaire `photo` contenant les entrées suivantes : `\"marque\"` associée à `\"Sony\"`, `\"modele\"` associée à `\"A7III\"`, `\"date_prise\"` associée à `\"2025-07-01\"`, `\"taille\"` associée au tuple `(6000, 4000)`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md",
+        "anchor": "#exercice-4---construire-une-entrée-de-dictionnaire-p-data-constr-03a",
+        "quote": "photo[\"marque\"] = \"Sony\"\nphoto[\"modele\"] = \"A7III\"\nphoto[\"date_prise\"] = \"2025-07-01\"\nphoto[\"taille\"] = (6000, 4000)",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours définit et illustre la construction d'entrées de dictionnaire avec `d[cle] = valeur`. Le TD fait pratiquer via un exercice guidé de construction pas à pas. Le corrigé fournit le code complet attendu.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

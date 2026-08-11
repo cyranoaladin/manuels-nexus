@@ -1,0 +1,66 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{nsi-preamble}
+\newcommand{\cor}[4]{\subsection*{Exercice #1 (#2)}\begin{itemize}[nosep]\item \textbf{Réponse} : #3\item \textbf{Cas limite} : #4\end{itemize}}
+\begin{document}
+\nsiheader{Corrigé — Dichotomie, glouton et k-NN}{Première}{P13}{1}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
+
+\section*{Corrigé du TD}
+\cor{1}{P-ALGO-04}{milieux $18$ puis $37$ $\rightarrow$ indice $4$.}{cible absente.}
+\cor{2}{P-ALGO-04}{$V = \text{droite} - \text{gauche} + 1$ décroît de $6$ à $3$ $\rightarrow$ terminaison.}{\texttt{cible=38} $\rightarrow$ $V$ décroît $6\rightarrow 3\rightarrow 1\rightarrow 0$, arrêt sans trouver.}
+\cor{3}{P-ALGO-05}{$28 = 10+10+5+2+1$ (5 pièces).}{sans pièce~$1$ : montant~$28$ avec \texttt{[10,5,2]} $\rightarrow$ reste~$1$ (échec), alors que $28=10{+}10{+}2{+}2{+}2{+}2$ est représentable.}
+\cor{4}{P-ALGO-03}{$k=3$ $\rightarrow$ rouge~2, bleu~1 $\rightarrow$ classe rouge.}{$k$ pair $\rightarrow$ égalité de vote possible.}
+\cor{5}{P-ALGO-04}{sur \texttt{cible=23}, $V$ décroît $6\rightarrow 3\rightarrow 1$ $\rightarrow$ cible trouvée indice~$3$.}{cible absente $\rightarrow$ $V$ atteint~$0$.}
+\cor{6}{P-ALGO-05}{$13 = 10+2+1$ (3 pièces).}{pièce 1 absente : montant~$28$ avec \texttt{[10,5,2]} $\rightarrow$ reste~$1$ (échec), mais $28{=}10{+}10{+}2{\times}4$.}
+\cor{7}{P-ALGO-03}{$A(3{,}2)\;B(5{,}4)\;A(2{,}3)$ $\rightarrow$ vote $A{=}2$, $B{=}1$ $\rightarrow$ classe~$A$.}{$k=2$ $\rightarrow$ égalité, résultat indéterminé.}
+\cor{8}{P-ALGO-04}{sur \texttt{cible=38} (absente), $V$ décroît $6\rightarrow 3\rightarrow 1\rightarrow 0$ $\rightarrow$ arrêt sans trouver.}{$V$ atteint~$0$, gauche $>$ droite.}
+\cor{9}{P-ALGO-03}{3 plus proches $= A(3,2), B(5,4), A(2,3)$ ; vote $A=2, B=1$ $\rightarrow$ classe $A$.}{$k=2$ avec égalité $\rightarrow$ résultat indéterminé.}
+
+\noindent Détail des distances au nouveau point $(4,3)$ :
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Point & Classe & Distance à $(4,3)$ & Rang \\
+\midrule
+$(5,4)$ & B & $\sqrt{2} \approx 1{,}41$ & 1 \\
+$(3,2)$ & A & $\sqrt{2} \approx 1{,}41$ & 2 \\
+$(2,3)$ & A & $\sqrt{4} = 2{,}00$ & 3 \\
+$(1,1)$ & A & $\sqrt{13} \approx 3{,}61$ & 4 \\
+$(8,7)$ & B & $\sqrt{32} \approx 5{,}66$ & 5 \\
+\bottomrule
+\end{tabular}
+\end{center}
+Les $k=3$ plus proches sont $B, A, A$ $\rightarrow$ vote $A=2$, $B=1$ $\rightarrow$ classe prédite $A$.
+
+\section*{Corrigé du TP}
+\begin{itemize}[nosep]
+  \item Dichotomie : \texttt{cible=37} $\rightarrow$ indice $4$.
+  \item Glouton : \texttt{montant=28} $\rightarrow$ $10+10+5+2+1$ (5 pièces).
+  \item k-NN : \texttt{k=3} $\rightarrow$ classe rouge.
+\end{itemize}
+
+\section*{Corrigé de l'évaluation}
+
+\subsection*{Q1 — recherche dichotomique (P-ALGO-04, 4 pts)}
+\textbf{Méthode} : calculer milieu puis réduire intervalle.\\
+\textbf{Trace} : valeurs lues aux milieux : $18$ puis $37$ $\rightarrow$ cible trouvée.\\
+\textbf{Résultat} : cible trouvée à l'indice $4$.\\
+\textbf{Cas limite} : cible absente $\rightarrow$ la boucle s'arrête quand gauche $>$ droite.
+
+\subsection*{Q2 — terminaison par variant (P-ALGO-04, 4 pts)}
+\textbf{Méthode} : montrer que $V = \text{droite} - \text{gauche} + 1$ décroît strictement.\\
+\textbf{Trace} : $V = 6 \rightarrow 3$ $\rightarrow$ cible trouvée (terminaison prouvée).\\
+\textbf{Cas limite} : \texttt{cible=38} absente $\rightarrow$ $V$ décroît $6 \rightarrow 3 \rightarrow 1 \rightarrow 0$, arrêt sans trouver.
+
+\subsection*{Q3 — algorithme glouton (P-ALGO-05, 4 pts)}
+\textbf{Méthode} : prendre la plus grande pièce $\leq$ montant restant à chaque étape.\\
+\textbf{Trace} : $28 - 10 = 18$, $18 - 10 = 8$, $8 - 5 = 3$, $3 - 2 = 1$, $1 - 1 = 0$.\\
+\textbf{Résultat} : $28 = 10 + 10 + 5 + 2 + 1$ (5 pièces).\\
+\textbf{Cas limite} : sans la pièce $1$, montant~$28$ avec \texttt{[10,5,2]} $\rightarrow$ le glouton se bloque (reste~$1$) alors que $28 = 10{+}10{+}2{+}2{+}2{+}2$ est représentable.
+
+\subsection*{Q4 — k plus proches voisins (P-ALGO-03, 4 pts)}
+\textbf{Méthode} : trier par distance, voter parmi les $k$ plus proches.\\
+\textbf{Trace} : distances rouge:$1{,}2$, bleu:$2{,}0$, rouge:$2{,}4$ ; tri $\rightarrow$ rouge, bleu, rouge.\\
+\textbf{Résultat} : rouge~2 voix, bleu~1 voix $\rightarrow$ classe prédite \textbf{rouge}.\\
+\textbf{Cas limite} : $k$ pair $\rightarrow$ égalité de vote possible.
+
+\end{document}

@@ -1,0 +1,56 @@
+sequence: P00
+theme: Rentrée et méthode
+notions_exigibles:
+- affectation
+- type
+- condition
+- trace d’exécution
+capacites_officielles:
+- P-LANG-01
+exemples_obligatoires:
+- 'trace d’affectation : `x = 4 ; x = x + 3 ; print(x)` -> `7` affiché'
+- 'concaténation de chaînes : `mot = "NS" ; mot = mot + "I"` -> `"NSI"`'
+- 'test conditionnel : `n = 6 ; n % 2 == 0` -> `True`'
+- 'fonction courte : `def f(a): return 2*a + 1` avec `a = 5` -> `11` retourné'
+cas_limites:
+- variable réaffectée deux fois
+- addition impossible entre chaîne et entier
+- reste nul
+- aucun affichage sans `print`
+erreurs_frequentes:
+- EF1 - Lire le signe égal comme une égalité mathématique permanente.
+- EF2 - Confondre affichage et valeur retournée par une fonction.
+- EF3 - Oublier de tester la valeur zéro dans une fonction numérique.
+- EF4 - Donner une sortie sans trace intermédiaire.
+types_exercices_attendus:
+- trace d’affectation avec `x = 4 ; x = x + 3 ; print(x)`
+- concaténation de chaînes à partir de `mot = "NS" ; mot = mot + "I"`
+- test conditionnel avec `n = 6 ; n % 2 == 0`
+- 'fonction courte pour `def f(a): return 2*a + 1` avec `a = 5`'
+- un cas limite lié à variable réaffectée deux fois
+- deux méthodes possibles pour concaténation de chaînes
+- un transfert qui utilise test conditionnel avec une donnée nouvelle
+- un énoncé volontairement erroné sur fonction courte
+tp_attendu: Compléter une fonction qui simule une trace mémoire simple sans exécuter
+  le code reçu.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- affectation
+- x = 4 ; x = x + 3 ; print(x)
+- mot = "NS" ; mot = mot + "I"
+- variable réaffectée deux fois
+- EF1
+- Compléter une fonction qui simule une trace mémoire simple sans exécuter le code
+  reçu.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

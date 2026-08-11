@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-14T12:09:31Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-IHM-04C",
+      "official_label": "Discuter les types de requêtes selon les valeurs à transmettre et leur confidentialité.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_cours_web_http_dom_formulaires.md",
+        "anchor": "#confidentialité-des-requêtes",
+        "quote": "### GET vs POST — visibilité des données\n\n| Aspect | GET | POST |\n|--------|-----|------|\n| Données visibles dans l'URL | Oui (`?nom=valeur&...`) | Non (corps de la requête) |\n| Historique du navigateur | Enregistrées | Non enregistrées |",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_TD_http_get_post_formulaires.md",
+        "anchor": "#exercice-4",
+        "quote": "Consigne : pour chaque cas, indiquez si GET ou POST est approprié et justifiez par un critère observable (visibilité dans l'URL, historique, corps de requête). Pour chaque cas, indiquez si HTTPS est nécessaire et pourquoi. Expliquez pourquoi le token dans l'URL du cas D pose un problème de confidentialité.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P08/P08_corrige_http_get_post_formulaires.md",
+        "anchor": "#question-5--choix-et-confidentialité",
+        "quote": "1. Recherche `algorithmique` : **GET** ; la valeur n'est pas secrète et l'URL du résultat peut être partagée. HTTPS reste souhaitable pour l'intégrité et la confidentialité générale du trafic, même si la valeur n'est pas sensible.\n2. Mot de passe : **POST + HTTPS** ; le mot de passe reste hors de l'URL et l'échange est chiffré.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la distinction GET/POST/HTTPS avec tableau et critères de choix. Le TD exercice 4 fait pratiquer la classification de 4 cas d'usage selon confidentialité. Le corrigé HTTP fournit la réponse complète avec méthode et justification.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

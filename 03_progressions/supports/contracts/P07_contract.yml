@@ -1,0 +1,61 @@
+sequence: P07
+level: premiere
+theme: fonctions, tests et spécifications
+notion: fonctions, tests et spécifications
+status: needs_review
+notions_exigibles:
+- signature
+- précondition
+- postcondition
+- assertion
+- test unitaire
+- test limite
+- erreur de type
+- fonction pure
+capacites_officielles:
+- P-LANG-01
+- P-LANG-02
+- P-LANG-03A
+- P-LANG-03B
+- P-LANG-03C
+- P-LANG-04
+- P-LANG-05
+exemples_obligatoires:
+- signature complète de prix_ttc
+- prix_ttc(80,0.20) -> 96.0
+- prix_ttc(-5,0.20) -> ValueError
+- taux=0 -> résultat 80.0
+cas_limites:
+- prix_ht=0
+- taux=0
+- type chaîne "80"
+erreurs_frequentes:
+- test unique non suffisant
+- précondition absente
+- effet de bord global
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- signature
+- précondition
+- postcondition
+- assertion
+- signature complète de prix_ttc
+- prix_ht=0
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

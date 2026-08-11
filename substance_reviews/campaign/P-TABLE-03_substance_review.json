@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-TABLE-03",
+      "official_label": "Trier une table suivant une colonne.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P06/P06_cours_tables_recherche_tri_fusion.md",
+        "anchor": "#méthodes",
+        "quote": "trier par (nom, atelier).",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P06/P06_TD_tables_recherche_tri_fusion.md",
+        "anchor": "#exercice-3",
+        "quote": "Consigne : trier par (nom, atelier) ; traiter aussi `conflit de clé id=17` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P06/P06_corrige_tables_recherche_tri_fusion.md",
+        "anchor": "#exercice-3",
+        "quote": "Réponse attendue : tri -> Ada/python, Ada/robot, Linus/web.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours présente la méthode de tri par clé composée, le TD fait pratiquer le tri par (nom, atelier), et le corrigé fournit le résultat attendu. La capacité P-TABLE-03 (trier une table suivant une colonne) est bien couverte par les trois types de preuves.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

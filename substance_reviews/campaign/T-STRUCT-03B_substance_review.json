@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-07T21:57:42Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-03B",
+      "official_label": "Choisir une structure de données adaptée à la situation à modéliser.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_trace_piles_files_dictionnaires.md",
+        "anchor": "#repère-4---complexité",
+        "quote": "À retenir : choisir dictionnaire plutôt que parcours linéaire.\n- Exemple minimal : accès par identifiant donne accès attendu constant.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_td_piles_files_dictionnaires.md",
+        "anchor": "#exercice-4",
+        "quote": "Objectif travaillé : O4.\n- Capacité officielle : T-STRUCT-03A, T-STRUCT-03B.\n- Énoncé disciplinaire : corriger complexité pour accès par identifiant.\n- Production attendue : accès attendu constant.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T03/T03_corrige_piles_files_dictionnaires.md",
+        "anchor": "#corrigé-exercice-4",
+        "quote": "Méthode : isoler l'erreur fréquente « Confondre clé et valeur. » puis reprendre la procédure correcte.\n- Résultat : accès attendu constant.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La trace enseigne le choix de structure (dictionnaire vs parcours linéaire), le TD fait pratiquer ce choix via l'exercice 4 (capacité T-STRUCT-03B explicitement citée), et le corrigé professeur fournit la méthode et le résultat attendu.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

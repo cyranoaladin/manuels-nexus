@@ -1,0 +1,92 @@
+sequence: T17
+level: terminale
+theme: Algorithmique
+notion: Programmation dynamique
+status: needs_review
+
+capacites_officielles:
+  - T-ALGO-04
+
+notions_exigibles:
+  - état représentant un sous-problème
+  - cas de base et sentinelle d'impossibilité
+  - relation de récurrence
+  - ordre de tabulation respectant les dépendances
+  - reconstruction par table de choix
+  - comparaison avec un choix glouton
+  - complexités en temps et en mémoire
+
+exemples_obligatoires:
+  - contre-exemple glouton sur un rendu de monnaie
+  - table complète avec candidats et minimum
+  - montant nul et montant impossible
+  - reconstruction d'une décomposition optimale
+  - transfert sur une grille de coût minimal
+
+cas_limites:
+  - montant 0
+  - montant impossible
+  - pièce plus grande que le montant courant
+  - liste vide pour un montant positif
+  - valeur de pièce nulle ou négative
+
+erreurs_frequentes:
+  - état ambigu
+  - initialisation de toutes les cases à zéro
+  - lecture d'un état non calculé
+  - choix glouton confondu avec optimum global
+  - sentinelle numérique renvoyée comme solution
+  - valeur optimale confondue avec reconstruction
+
+types_exercices_attendus:
+  - lecture d'une table
+  - trace complète de tabulation
+  - production d'un contre-exemple
+  - écriture d'algorithme
+  - débogage d'initialisation
+  - transfert vers un état bidimensionnel
+
+tp_attendu:
+  duree: 75_minutes
+  fonctions:
+    - construire_table
+    - rendu_monnaie_dp
+  livrables:
+    - fichier Python complété
+    - compte rendu avec traces et complexités
+  tests:
+    - cas nominal où le glouton échoue
+    - montant nul
+    - montant impossible
+    - entrées invalides
+
+interdits_pedagogiques:
+  - résultat final sans table ni trace
+  - pseudo-code générique sans état ni récurrence
+  - huit exercices différant seulement par une étiquette
+  - version aménagée donnant la table finale
+  - barème abstrait sans critère algorithmique
+
+criteres_validation_humaine:
+  - état interprétable indépendamment du code
+  - relation justifiée par une dernière décision
+  - ordre de calcul cohérent avec les dépendances
+  - concordance table, code, tests et reconstruction
+  - alignement avec le programme NSI 2019
+  - décision de publication séparée
+
+must_include:
+  - état
+  - initialisation
+  - récurrence
+  - tabulation
+  - reconstruction
+  - cas impossible
+  - complexité
+
+must_not:
+  - jeu_exercice=alpha
+  - cas_alpha
+  - if cas_alpha
+  - réponse sans donnée exploitable
+  - résultat non vérifiable

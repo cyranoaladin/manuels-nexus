@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-05",
+      "official_label": "Etudier l'algorithme de Boyer-Moore pour la recherche d'un motif dans un texte.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T18/T18_cours_boyer_moore.md",
+        "anchor": "#méthodes",
+        "quote": "prétraiter dernière position de chaque caractère.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T18/T18_TD_boyer_moore.md",
+        "anchor": "#exercice-1",
+        "quote": "Consigne : prétraiter dernière position de chaque caractère ; traiter aussi `motif absent` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T18/T18_corrige_boyer_moore.md",
+        "anchor": "#exercice-1",
+        "quote": "Réponse attendue : table : A->2, N->1.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne les méthodes de Boyer-Moore (table du mauvais caractère, comparaison droite à gauche, décalage), le TD fait pratiquer ces méthodes sur des exercices progressifs, et le corrigé fournit les réponses attendues pour chaque exercice.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

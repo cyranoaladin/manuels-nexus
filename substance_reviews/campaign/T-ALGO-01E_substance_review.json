@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ALGO-01E",
+      "official_label": "Rechercher une clé dans un arbre de recherche.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_cours_arbres_binaires_recherche.md",
+        "anchor": "#exemples-corrigés",
+        "quote": "Méthode : comparer à la racine.\n- Résultat attendu : chercher 6 : 8 -> 3 -> 6.\n- Contrôle : capacité T-ALGO-01E et cas limite `arbre vide`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_TD_arbres_binaires_recherche.md",
+        "anchor": "#exercice-1",
+        "quote": "Capacité officielle : T-ALGO-01E.\n- Données : `ABR racine=8, gauche=3 avec 1 et 6, droite=10 avec 14`. ; jeu_exercice=alpha\n- Consigne : comparer à la racine ; traiter aussi `arbre vide` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T06/T06_corrige_arbres_binaires_recherche.md",
+        "anchor": "#exercice-1",
+        "quote": "Réponse attendue : chercher 6 : 8 -> 3 -> 6.\n- Méthode : comparer à la racine.\n- Cas limite : arbre vide.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode de recherche dans un ABR (T-ALGO-01E) avec exemple corrigé, le TD fait pratiquer la recherche avec la capacité explicitement nommée, et le corrigé fournit la réponse attendue avec méthode et cas limite.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

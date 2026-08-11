@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T18:39:01Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ARCH-01B",
+      "official_label": "Dérouler l'exécution d'une séquence d'instructions simples de type langage machine.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_cours_architecture_os_droits.md",
+        "anchor": "#dérouler-lexécution-dinstructions-machine",
+        "quote": "| `LOAD R, adresse` | Copie le contenu de la mémoire[adresse] dans le registre R |\n| `STORE R, adresse` | Copie le contenu du registre R dans la mémoire[adresse] |\n| `ADD R1, R2` | R1 ← R1 + R2 |\n| `SUB R1, R2` | R1 ← R1 − R2 |",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_TD_architecture_os_droits.md",
+        "anchor": "#exercice-9",
+        "quote": "Consigne : (9a) dérouler l'exécution instruction par instruction en construisant la trace (CO, instruction, R0, R1, mémoire[12]) ; (9b) donner la valeur finale de mémoire[12] ; (9c) que se passerait-il si on inversait les deux premières instructions ?",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P09/P09_corrige_architecture_os_droits.md",
+        "anchor": "#exercice-9",
+        "quote": "Réponse attendue : trace 4 étapes (LOAD R0=12, LOAD R1=5, SUB R0=7, STORE mémoire[12]=7). Inversion → R0=5, R1=12, résultat −7.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne le jeu d'instructions simplifié et la trace d'exécution avec exemple complet. L'exercice 9 du TD fait pratiquer le déroulement instruction par instruction. Le corrigé fournit la trace attendue et le cas d'inversion.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

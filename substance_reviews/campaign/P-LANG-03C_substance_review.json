@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-LANG-03C",
+      "official_label": "Décrire des postconditions sur les résultats.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_cours_fonctions_tests_specifications.md",
+        "anchor": "#à-savoir",
+        "quote": "postcondition.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_TP_fonctions_tests_specifications.md",
+        "anchor": "#travail-demandé",
+        "quote": "Réaliser : écrire def prix_ttc(prix_ht: float, taux: float) -> float.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P07/P07_corrige_fonctions_tests_specifications.md",
+        "anchor": "#exercice-3",
+        "quote": "Méthode : vérifier résultat >= prix_ht.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours liste 'postcondition' dans le vocabulaire et présente la méthode 'vérifier résultat >= prix_ht' comme exemple de postcondition. Le TP fait pratiquer l'écriture de la fonction avec vérification du résultat. Le corrigé fournit la méthode 'vérifier résultat >= prix_ht' correspondant à une postcondition. Cependant, le traitement de P-LANG-03C reste très succinct (simple mention du mot) sans développement pédagogique explicite sur la notion de postcondition en tant que telle.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

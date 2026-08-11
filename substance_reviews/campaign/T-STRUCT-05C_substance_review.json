@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-12T10:40:12Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-STRUCT-05C",
+      "official_label": "Ecrire l'implémentation d'un graphe par listes de successeurs ou prédécesseurs.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_cours_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exemple-corrigé-3",
+        "quote": "Méthode : écrire l'implémentation par listes de successeurs (T-STRUCT-05C).\n- Résultat attendu : `graphe = {\"A\": [\"B\",\"C\"], \"B\": [\"D\"], \"C\": [\"D\"], \"D\": [\"B\"], \"E\": []}`. On crée un dictionnaire où chaque sommet pointe vers la liste de ses successeurs.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_TD_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exercice-3bis",
+        "quote": "Consigne : écrire l'implémentation du graphe par liste de successeurs (dictionnaire Python) ; afficher les successeurs de chaque sommet.\n- Réponse attendue : `{A: [B, C], B: [D], C: [D], D: [B]}`.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T07/T07_corrige_graphes_modelisation_listes_matrices.md",
+        "anchor": "#exercice-3bis",
+        "quote": "Méthode : pour chaque arc (u, v) dans arcs, ajouter v à la liste graphe[u] ; initialiser chaque sommet avec une liste vide avant parcours.\n- Cas limite : sommet isolé (pas d'arc sortant) → sa clé existe dans le dictionnaire avec une liste vide.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne l'implémentation par dictionnaire de listes de successeurs (exemple corrigé 3). Le TD fait pratiquer via l'exercice 3bis avec consigne explicite. Le corrigé fournit la méthode détaillée et le traitement du cas limite.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

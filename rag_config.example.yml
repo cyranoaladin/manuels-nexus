@@ -1,0 +1,55 @@
+backend: chroma
+api:
+  base_url: "https://rag-api.nexusreussite.academy/search"
+  auth: bearer
+  collection: nsi_corpus
+vector:
+  distance: cosine
+  dimension: 768
+embedding:
+  model: nomic-embed-text
+  base_url_env: EMBEDDING_BASE_URL
+llm:
+  engine: ollama
+  model: qwen2.5:7b
+collections:
+  nsi_corpus:
+    role: "ressources internes produites"
+    proof_scope: internal_only
+    source_roots:
+      - "03_progressions/supports/"
+      - "03_progressions/fiches_cours/"
+    canonical_metadata:
+      section_anchor: required
+      capacity_ids: required
+      private_data: false
+  rag_education:
+    role: "sources Drive, ressources externes et inspiration uniquement"
+    proof_scope: not_internal_coverage
+  nsi_golden_examples:
+    role: "pilotes historiques premiere/sequences et terminale/sequences"
+    proof_scope: style_reference_only
+    usable_for_coverage: false
+  nsi_official:
+    role: "textes officiels"
+    proof_scope: reference_only
+  nsi_annales:
+    role: "sujets publics et annales si licence compatible"
+    proof_scope: external_reference
+exclusions:
+  - "AUDIT/"
+  - "dist/"
+  - ".git/"
+  - "Documents_DRIVE/"
+  - "rendus_eleves/"
+  - "NotesEleves.csv"
+  - "Fichier_Eleves.csv"
+metadata_required:
+  - path
+  - section_anchor
+  - capacity_ids
+  - document_type
+  - status
+  - source_type
+  - proof_scope
+  - private_data

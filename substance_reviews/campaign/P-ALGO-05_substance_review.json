@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-11T14:36:00Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-ALGO-05",
+      "official_label": "Résoudre un problème grâce à un algorithme glouton.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_cours_dichotomie_glouton_knn.md",
+        "anchor": "#exemple-corrigé-3---glouton-p-algo-05",
+        "quote": "Méthode : prendre la plus grande pièce possible à chaque étape.\n- Résultat attendu : 28 = 10 + 10 + 5 + 2 + 1 (5 pièces).\n- Contrôle : capacité P-ALGO-05 et cas limite `pièce 1 absente → glouton peut échouer`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_TD_dichotomie_glouton_knn.md",
+        "anchor": "#exercice-3",
+        "quote": "Consigne : appliquer l'algorithme glouton pour rendre la monnaie ; traiter aussi `pièce 1 absente` si nécessaire.\n- Réponse attendue : 28 = 10+10+5+2+1 (5 pièces).",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P13/P13_corrige_dichotomie_glouton_knn.md",
+        "anchor": "#exercice-3",
+        "quote": "Réponse attendue : 28=10+10+5+2+1 (5 pièces).\n- Méthode : glouton.\n- Cas limite : pièce 1 absente.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode gloutonne avec exemple corrigé, le TD fait pratiquer sur deux exercices (ex. 3 et 6) avec consignes explicites, et le corrigé fournit les réponses attendues avec cas limites traités.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

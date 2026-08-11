@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-04B",
+      "official_label": "Choisir le paradigme selon le champ d'application.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_cours_modularite_api_paradigmes_bugs.md",
+        "anchor": "#à-savoir",
+        "quote": "paradigme impératif.\n- paradigme fonctionnel.\n- objet.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_TD_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exercice-3",
+        "quote": "Consigne : choisir paradigme selon tâche ; traiter aussi `type chaîne` si nécessaire.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T14/T14_corrige_modularite_api_paradigmes_bugs.md",
+        "anchor": "#exercice-3",
+        "quote": "Méthode : choisir paradigme selon tâche.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours liste les paradigmes impératif, fonctionnel et objet comme vocabulaire à maîtriser. L'exercice 3 du TD demande explicitement de choisir le paradigme selon la tâche (capacité T-LANG-03C, proche de T-LANG-04B). Le corrigé fournit la méthode correspondante. La capacité T-LANG-04B est citée dans les capacités officielles du cours et de l'évaluation, et la méthode 'choisir paradigme selon tâche' est enseignée, pratiquée et corrigée.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

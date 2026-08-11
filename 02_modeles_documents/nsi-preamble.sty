@@ -1,0 +1,79 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{nsi-preamble}[2026/07/11 v1.0 Design system NSI (pdflatex)]
+
+% --- Encodage & langue (dégradation gracieuse si paquets absents) -------------
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\IfFileExists{lmodern.sty}{\RequirePackage{lmodern}\RequirePackage{microtype}}{\RequirePackage[expansion=false]{microtype}}
+\IfFileExists{french.ldf}{\RequirePackage[french]{babel}}{\frenchspacing}
+\RequirePackage{csquotes}
+
+% --- Mise en page -------------------------------------------------------------
+\RequirePackage[a4paper,margin=2cm]{geometry}
+\RequirePackage{xcolor}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{booktabs}
+\RequirePackage{array}
+\RequirePackage{float}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage{listings}
+\RequirePackage[ruled,vlined,linesnumbered]{algorithm2e}
+
+% --- Tokens couleur (design system) ------------------------------------------
+\definecolor{nsiDark}{HTML}{102A43}
+\definecolor{nsiBlue}{HTML}{1A75BC}
+\definecolor{nsiGold}{HTML}{F4B400}
+\definecolor{nsiGray}{HTML}{627D98}
+
+% --- Titres ------------------------------------------------------------------
+\titleformat{\section}{\color{nsiDark}\large\bfseries}{}{0pt}{}[{\color{nsiGold}\titlerule}]
+\titleformat{\subsection}{\color{nsiBlue}\bfseries}{}{0pt}{}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+
+% --- Style code Python --------------------------------------------------------
+\lstdefinestyle{nsipython}{%
+  language=Python,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{nsiBlue}\bfseries,
+  commentstyle=\color{nsiGray}\itshape,
+  stringstyle=\color{nsiGold!70!black},
+  showstringspaces=false,
+  breaklines=true,
+  numbers=left,
+  numberstyle=\tiny\color{nsiGray},
+  frame=single,
+  rulecolor=\color{nsiGray!40},
+  columns=fullflexible,
+  keepspaces=true,
+  literate=%
+    {é}{{\'e}}1 {è}{{\`e}}1 {à}{{\`a}}1 {ê}{{\^e}}1 {î}{{\^i}}1
+    {ô}{{\^o}}1 {û}{{\^u}}1 {ù}{{\`u}}1 {ç}{{\c c}}1 {É}{{\'E}}1
+}
+\lstset{style=nsipython}
+
+% --- En-tête unifié -----------------------------------------------------------
+% Champs cohérents :
+% #1 titre  #2 niveau  #3 séquence  #4 durée (h)  #5 capacités  #6 source  #7 statut
+\newcommand{\nsiheader}[7]{%
+  \begin{center}
+    {\color{nsiDark}\Large\bfseries #1}\\[3pt]
+    Niveau : #2 \textbar\ Séquence : #3 \textbar\ Durée : #4~h\\[1pt]
+    Capacités officielles : #5\\[1pt]
+    Source : #6 \textbar\ Statut : #7
+  \end{center}
+  \vspace{2pt}{\color{nsiGold}\hrule height 1pt}\vspace{8pt}
+}
+
+% --- Barème (table normalisée) ------------------------------------------------
+% Usage : \begin{bareme} Compétence A & 4 \\ Compétence B & 6 \\ \end{bareme}
+\newenvironment{bareme}{%
+  \begin{center}\begin{tabular}{@{}p{0.75\linewidth}c@{}}
+  \toprule \textbf{Compétence} & \textbf{Pts}\\\midrule\relax
+}{%
+  \bottomrule\end{tabular}\end{center}
+}
+
+\endinput

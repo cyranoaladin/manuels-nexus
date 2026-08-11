@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-05T21:17:44Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-BASE-02B",
+      "official_label": "Utiliser le complément à deux.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P02/P02_cours_complement_booleens.md",
+        "anchor": "#exemples-corrigés-précis",
+        "quote": "Méthode : lire le bit de signe puis soustraire `2^8` à la valeur naturelle.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P02/P02_td_complement_booleens.md",
+        "anchor": "#exemple-corrigé-3---encodage-négatif",
+        "quote": "Méthode : partir de 6, inverser les bits puis ajouter 1.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P02/P02_corrige_complement_booleens.md",
+        "anchor": "#méthode-générale-de-correction",
+        "quote": "Point 3 : pour encodage négatif, exiger la donnée `-6` sur 8 bits, la méthode « partir de 6, inverser les bits puis ajouter 1 » et le contrôle « retenue finale ignorée sur la largeur fixée ».",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "La capacité P-DATA-BASE-02B porte sur l'utilisation du complément à deux pour représenter les entiers relatifs. Le cours enseigne la méthode de décodage signé et d'encodage négatif par complément à deux, le TD fait pratiquer l'encodage d'un entier négatif (-6) par la méthode inversion+1, et le corrigé fournit la réponse attendue avec la méthode complète.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

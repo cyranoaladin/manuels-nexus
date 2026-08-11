@@ -1,0 +1,43 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{nsi-preamble}
+
+\begin{document}
+
+\nsiheader{Évaluation — Dichotomie, glouton et k-NN}{Première}{P13}{0,5}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
+
+\section*{Modalités}
+\begin{itemize}[nosep]
+  \item Durée : 30 minutes.
+  \item Matériel autorisé : fiche de cours.
+  \item Capacités évaluées : P-ALGO-03 (k-NN), P-ALGO-04 (recherche dichotomique), P-ALGO-05 (glouton).
+\end{itemize}
+
+\section*{Sujet}
+
+\subsection*{Question 1 — recherche dichotomique (P-ALGO-04)}
+À partir de \texttt{tableau=[4,9,18,23,37,41], cible=37}, calculer le milieu puis réduire l'intervalle
+jusqu'à conclure.
+
+\subsection*{Question 2 — terminaison par variant (P-ALGO-04)}
+À partir de \texttt{tableau=[4,9,18,23,37,41], cible=37}, montrer que le variant
+$V = \text{droite} - \text{gauche} + 1$ diminue strictement à chaque étape de la dichotomie.
+
+\subsection*{Question 3 — algorithme glouton (P-ALGO-05)}
+À partir de \texttt{pièces=[10,5,2,1], montant=28}, appliquer l'algorithme glouton pour rendre la monnaie.
+
+\subsection*{Question 4 — k plus proches voisins (P-ALGO-03)}
+À partir de \texttt{voisins=[rouge:1.2, bleu:2.0, rouge:2.4], k=3}, déterminer la classe prédite
+par vote majoritaire.
+
+\section*{Barème}
+\begin{bareme}
+  {Q1 — P-ALGO-04} : donnée, méthode, résultat, cas limite \texttt{cible absente} & 4 \\
+  {Q2 — P-ALGO-04} : variant, décroissance, terminaison, cas absent & 4 \\
+  {Q3 — P-ALGO-05} : donnée, méthode, résultat, cas \texttt{pièce 1 absente} & 4 \\
+  {Q4 — P-ALGO-03} : donnée, méthode, résultat, cas égalité de vote & 4 \\
+\end{bareme}
+
+%% Le corrigé de l'évaluation est dans P13_corrige.tex (document enseignant).
+%% Ce document est imprimable tel quel pour les élèves.
+
+\end{document}

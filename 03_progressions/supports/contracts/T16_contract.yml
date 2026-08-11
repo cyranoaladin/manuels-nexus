@@ -1,0 +1,55 @@
+sequence: T16
+level: terminale
+theme: diviser pour régner et tri fusion
+notion: diviser pour régner et tri fusion
+status: needs_review
+notions_exigibles:
+- diviser pour régner
+- cas de base
+- division
+- récursion
+- fusion
+- tri fusion
+- coût n log n
+- stabilité
+capacites_officielles:
+- T-ALGO-03
+exemples_obligatoires:
+- division -> [38,12,27] et [12,5,44]
+- fusion -> [5,12,12,27,38,44]
+- cas taille 1 renvoie la liste
+- coût environ n log n
+cas_limites:
+- liste vide
+- liste taille 1
+- doublons 12
+erreurs_frequentes:
+- cas de base oublié
+- concaténation sans fusion
+- coût quadratique annoncé
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- diviser pour régner
+- cas de base
+- division
+- récursion
+- division -> [38,12,27] et [12,5,44]
+- liste vide
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-06T06:16:03Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-LANG-01C",
+      "official_label": "Montrer sans formalisme théorique que le problème de l'arrêt est indécidable.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_cours_calculabilite_arret.md",
+        "anchor": "#exemple-corrigé-3",
+        "quote": "- Méthode : poser un oracle hypothétique.\n- Résultat attendu : Q boucle si arrete(Q,Q) dit True.\n- Contrôle : capacité T-LANG-01C et cas limite `entrée absente`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_TD_calculabilite_arret.md",
+        "anchor": "#exercice-3",
+        "quote": "- Consigne : poser un oracle hypothétique ; traiter aussi `entrée absente` si nécessaire.\n- Réponse attendue : Q boucle si arrete(Q,Q) dit True.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T15/T15_corrige_calculabilite_arret.md",
+        "anchor": "#exercice-3",
+        "quote": "- Réponse attendue : Q boucle si arrete(Q,Q) dit True.\n- Méthode : poser un oracle hypothétique.\n- Cas limite : entrée absente.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours expose la méthode par contradiction (oracle hypothétique, Q boucle si arrete(Q,Q) dit True) sans formalisme théorique. Le TD fait pratiquer ce raisonnement (exercices 3 et 6), et le corrigé fournit les réponses attendues pour T-LANG-01C.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+sequence: P13
+level: premiere
+theme: dichotomie, glouton et k-NN
+notion: dichotomie, glouton et k-NN
+status: needs_review
+notions_exigibles:
+- dichotomie
+- variant V = droite − gauche + 1
+- glouton
+- choix local
+- k-NN
+- distance
+- vote majoritaire
+capacites_officielles:
+- P-ALGO-03
+- P-ALGO-04
+- P-ALGO-05
+exemples_obligatoires:
+- milieux 18 puis 37 -> trouvé indice 4
+- 28 -> 10+10+5+2+1
+- rouge, bleu, rouge -> classe rouge
+cas_limites:
+- cible absente
+- pièce 1 absente
+- égalité de vote
+erreurs_frequentes:
+- dichotomie sur liste non triée
+- glouton supposé toujours optimal
+- égalité k-NN non décidée
+types_exercices_attendus:
+- lecture de donnée
+- production de méthode
+- cas limite
+- justification
+- transfert
+tp_attendu: TP papier justifié avec trace, barème et corrigé question par question
+interdits_pedagogiques:
+- réponse sans donnée exploitable
+- résultat non vérifiable
+- capacité citée sans exercice associé
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique
+- alignement BO 2019
+- décision de publication séparée
+must_include:
+- dichotomie
+- variant V = droite − gauche + 1
+- glouton
+- choix local
+- milieux 18 puis 37 -> trouvé indice 4
+- cible absente
+must_not:
+- réponse sans donnée exploitable
+- résultat non vérifiable

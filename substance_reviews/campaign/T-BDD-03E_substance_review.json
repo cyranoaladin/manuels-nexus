@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-13T01:42:21Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-BDD-03E",
+      "official_label": "Construire des requêtes d'interrogation avec ORDER BY.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_cours_sql_select_where_join.md",
+        "anchor": "#preuve-de-cours-t-bdd-03e--trier-un-résultat-avec-order-by",
+        "quote": "`ORDER BY` / `ASC` / `DESC` trie le résultat sans modifier la table : la requête complète `SELECT nom FROM Eleve ORDER BY nom ASC;` renvoie exactement `Ada`, `Alan`, `Grace`, `Linus` ; avec `DESC`, l'ordre serait inversé.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_TD_sql_select_where_join.md",
+        "anchor": "#exercice-3--écrire-une-projection-filtrée-standard-8-min",
+        "quote": "Le professeur veut les identifiants des élèves de T1, classés du plus grand au plus petit identifiant.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T10/T10_corrige_sql_select_where_join.md",
+        "anchor": "#exercice-3--projection-filtrée",
+        "quote": "SELECT id_eleve\nFROM Eleve\nWHERE classe = 'T1'\nORDER BY id_eleve DESC;",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne ORDER BY avec exemples et contre-exemples (preuve T-BDD-03E). Le TD fait pratiquer la construction de requêtes triées. Le corrigé fournit la requête complète avec ORDER BY et le résultat exact.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "terminale",
+  "judged_at": "2026-07-14T10:32:40Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "T-ARCH-04B",
+      "official_label": "Décrire l'échange d'une clé symétrique avec un protocole asymétrique pour sécuriser HTTPS.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T13/T13_cours_chiffrement_https.md",
+        "anchor": "#méthodes",
+        "quote": "- protéger Ksession par asymétrique puis utiliser symétrique pour données.\n- vérifier un certificat : domaine, validité, signature de l'autorité, chaîne de confiance.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T13/T13_TD_chiffrement_https.md",
+        "anchor": "#exercice-6",
+        "quote": "Consigne : remettez ces étapes dans l'ordre chronologique. Pour chaque étape, indiquez si elle relève de l'authentification, de l'échange de clé ou du chiffrement des données. Expliquez pourquoi l'étape 4 doit précéder l'étape 6.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/terminale/T13/T13_corrige_chiffrement_https.md",
+        "anchor": "#exercice-6",
+        "quote": "- Réponse attendue : ordre 2-5-1-4-6-3 (ClientHello, ServerHello, certificat, vérification, échange de Ksession, échanges chiffrés).\n- Méthode : classer chaque étape selon son rôle (négociation, authentification, échange de clé, chiffrement).",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode d'échange de clé symétrique via asymétrique (protéger Ksession par asymétrique, utiliser symétrique pour données). Le TD fait pratiquer la capacité T-ARCH-04B avec un exercice de déroulé TLS qui ordonne les étapes d'échange. Le corrigé fournit l'ordre correct et la justification de chaque étape.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

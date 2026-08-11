@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-06T06:08:26Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-CONSTR-02C",
+      "official_label": "Utiliser des tableaux de tableaux pour représenter des matrices.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md",
+        "anchor": "#3-p-data-constr-02c--utiliser-des-tableaux-de-tableaux-pour-représenter-des-matrices",
+        "quote": "Une **matrice** est représentée en Python par une **liste de listes** (tableau de tableaux). Chaque sous-liste représente une ligne. L'accès à l'élément en ligne `i`, colonne `j` se fait par `matrice[i][j]`.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_td_types_construits_complement.md",
+        "anchor": "#exercice-3---matrices-comme-tableaux-de-tableaux-p-data-constr-02c",
+        "quote": "**Question 3d.** On exécute le code suivant. Expliquer pourquoi le résultat est incorrect et proposer une correction.\n\n```python\ngrille = [[0] * 3] * 3\ngrille[0][0] = 1\nprint(grille)\n```",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P04/P04_corrige_types_construits_complement.md",
+        "anchor": "#exercice-3---matrices-p-data-constr-02c",
+        "quote": "Le code `grille = [[0] * 3] * 3` crée une liste contenant 3 fois la **même** sous-liste (même objet en mémoire). Modifier `grille[0][0]` modifie donc les trois lignes simultanément.",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours définit la représentation matricielle par liste de listes avec accès par double index. Le TD fait pratiquer via des questions sur accès, dimensions et l'erreur classique de multiplication. Le corrigé explique l'erreur de partage mémoire et propose la correction par compréhension.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

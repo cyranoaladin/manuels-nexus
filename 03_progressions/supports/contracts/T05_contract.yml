@@ -1,0 +1,56 @@
+sequence: T05
+theme: Arbres et algorithmes
+notions_exigibles:
+- arbre binaire
+- racine
+- feuille
+- parcours
+capacites_officielles:
+- T-STRUCT-04A
+exemples_obligatoires:
+- 'arbre feuille : `7` -> hauteur 0'
+- 'hauteur : racine avec deux feuilles -> hauteur 1'
+- 'parcours préfixe : `+ 2 3` -> `+, 2, 3`'
+- 'évaluation : `(2 + 3) * 4` -> `20`'
+cas_limites:
+- arbre vide
+- un seul fils
+- nœud feuille
+- division par zéro si opérateur `/`
+erreurs_frequentes:
+- EF1 - Confondre hauteur et nombre de nœuds.
+- EF2 - Oublier le cas arbre vide.
+- EF3 - Mélanger parcours préfixe et infixe.
+- EF4 - Évaluer un opérateur avant ses opérandes.
+types_exercices_attendus:
+- arbre feuille avec `7`
+- hauteur à partir de racine avec deux feuilles
+- parcours préfixe avec `+ 2 3`
+- évaluation pour `(2 + 3) * 4`
+- un cas limite lié à arbre vide
+- deux méthodes possibles pour hauteur
+- un transfert qui utilise parcours préfixe avec une donnée nouvelle
+- un énoncé volontairement erroné sur évaluation
+tp_attendu: Implémenter hauteur, parcours et évaluation sur un arbre binaire représenté
+  par tuples imbriqués.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- arbre binaire
+- '7'
+- racine avec deux feuilles
+- arbre vide
+- EF1
+- Implémenter hauteur, parcours et évaluation sur un arbre binaire représenté par
+  tuples imbriqués.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse

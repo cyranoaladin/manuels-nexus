@@ -1,0 +1,22 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{nsi-preamble}
+\begin{document}
+\nsiheader{Aides progressives — Dichotomie, glouton et k-NN}{Première}{P13}{0,5}{P-ALGO-03, P-ALGO-04, P-ALGO-05}{BO 2019}{needs\_review}
+
+\section*{Aide 1 — relance légère}
+Repère d'abord de quel algorithme relève la question : recherche dans un tableau trié (dichotomie), rendu de monnaie (glouton), ou classement par voisins (k-NN) ?
+
+\section*{Aide 2 — indice ciblé}
+\begin{itemize}[nosep]
+  \item Dichotomie : le milieu se calcule sur les indices, pas sur les valeurs.
+  \item Terminaison : compte le nombre de candidats restants $V = \text{droite} - \text{gauche} + 1$.
+  \item Glouton : prends la plus grande pièce possible $\leq$ montant restant.
+  \item k-NN : trie les voisins par distance avant de voter.
+\end{itemize}
+
+\section*{Aide 3 — méthode guidée}
+Écris la trace étape par étape : à chaque tour, note gauche, droite, milieu (ou la pièce choisie, ou la distance). La solution apparaît dans la trace.
+
+\section*{Coup de pouce final}
+Vérifie le cas limite : \texttt{cible absente}, \texttt{pièce 1 absente}, ou égalité de vote. Un corrigé complet le traite explicitement.
+\end{document}

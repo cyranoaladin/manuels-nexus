@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "unit": "campaign",
+  "level": "premiere",
+  "judged_at": "2026-07-07T12:37:06Z",
+  "judge_model": "claude-sonnet-4-6",
+  "author_model": "campaign-tooling",
+  "capacities": [
+    {
+      "capacity_id": "P-DATA-BASE-05B",
+      "official_label": "Convertir un fichier texte dans différents formats d'encodage.",
+      "proof_course": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P03/P03_cours_conversion_encodages_texte.md",
+        "anchor": "#méthode-de-conversion-en-python",
+        "quote": "Pour convertir un fichier texte dans différents formats d'encodage en Python, on procède en deux étapes :\n\n1. **Lire** le fichier avec l'encodage source.\n2. **Écrire** le contenu dans un nouveau fichier avec l'encodage cible.",
+        "teaches": true
+      },
+      "proof_practice": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P03/P03_td_conversion_encodages_texte.md",
+        "anchor": "#exercice-2--prédire-le-résultat-dune-conversion-o2",
+        "quote": "Écrire le code Python complet pour réaliser cette conversion.",
+        "teaches": true
+      },
+      "proof_correction": {
+        "present": true,
+        "file": "03_progressions/supports/premiere/P03/P03_corrige_conversion_encodages_texte.md",
+        "anchor": "#corrigé-exercice-2--prédire-le-résultat-dune-conversion",
+        "quote": "```python\nwith open(\"recette.txt\", \"r\", encoding=\"latin-1\") as f:\n    contenu = f.read()\n\nwith open(\"recette_utf8.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(contenu)\n```",
+        "teaches": true
+      },
+      "verdict": "needs_review",
+      "justification": "Le cours enseigne la méthode de conversion Latin-1/UTF-8 avec open(), le TD fait pratiquer via des exercices de conversion avec code Python, et le corrigé fournit les réponses détaillées avec code et calcul d'octets.",
+      "scientific_flags": [
+        "human_review_required"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+sequence: T02
+theme: Programmation orientée objet
+notions_exigibles:
+- classe
+- attribut
+- méthode
+- invariant
+capacites_officielles:
+- T-STRUCT-02A
+exemples_obligatoires:
+- 'constructeur : `Compte("Ada", 20)` -> propriétaire Ada, solde 20'
+- 'méthode dépôt : dépôt de 15 -> solde augmenté de 15'
+- 'méthode retrait : retrait de 7 sur solde 20 -> solde 13'
+- 'représentation : `repr(compte)` -> résumé lisible'
+cas_limites:
+- solde initial négatif
+- montant nul ou négatif
+- retrait supérieur au solde
+- nom vide
+erreurs_frequentes:
+- EF1 - Modifier directement un attribut sans passer par la méthode.
+- EF2 - Oublier de maintenir l’invariant.
+- EF3 - Utiliser une variable globale pour l’état de l’objet.
+- EF4 - Confondre classe et instance.
+types_exercices_attendus:
+- constructeur avec `Compte("Ada", 20)`
+- méthode dépôt à partir de dépôt de 15
+- méthode retrait avec retrait de 7 sur solde 20
+- représentation pour `repr(compte)`
+- un cas limite lié à solde initial négatif
+- deux méthodes possibles pour méthode dépôt
+- un transfert qui utilise méthode retrait avec une donnée nouvelle
+- un énoncé volontairement erroné sur représentation
+tp_attendu: Coder une classe Compte avec validations, méthodes publiques et tests
+  de cas limites.
+interdits_pedagogiques:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
+criteres_validation_humaine:
+- relecture pédagogique indépendante
+- vérification scientifique des exemples
+- exécution du TP corrigé
+- alignement avec le BO 2019
+must_include:
+- classe
+- Compte("Ada", 20)
+- dépôt de 15
+- solde initial négatif
+- EF1
+- Coder une classe Compte avec validations, méthodes publiques et tests de cas limites.
+must_not:
+- réponse cohérente sans calcul
+- production vérifiable sans livrable concret
+- starter qui retourne directement la réponse
