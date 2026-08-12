@@ -31,6 +31,29 @@
 \newcommand{\nxSixLabel}[2]{{\titrefont\fontsize{7.6}{10}\selectfont
   \addfontfeatures{LetterSpace=10}\textcolor{#1}{\MakeUppercase{#2}}}}
 
+% Pictogramme de tête d'encadré. Un pictogramme est par nature une boîte
+% insécable : \mbox fige sa largeur une fois pour toutes.
+\newcommand{\nxSixPicto}[1]{\mbox{#1}}
+
+% Libellé d'auteur : MÊME casse que ce qui a été écrit.
+%
+% \nxSixLabel capitalise son argument. Ne JAMAIS le lui donner un libellé
+% fourni par le contenu : les chapitres y mettent des mathématiques
+% (« Conversion base $b$ vers base 10 », 1NSI-TYPES-BASE). \MakeUppercase sur
+% des mathématiques est déjà fautif — une variable $b$ n'est pas un $B$ — et,
+% dans une boîte breakable, il fait diverger la compilation : LuaTeX crée sans
+% fin des instances de police interlettrée aux tailles d'indice, occupe 500 Mo
+% et n'imprime plus rien. Observé le 12 août 2026 sur 1NSI élève, bloqué à la
+% page 2 après onze minutes.
+%
+% Règle : le mot de rubrique est capitalisé, le libellé de l'auteur ne l'est
+% pas. Il garde donc ses mathématiques et ses accents.
+\newcommand{\nxSixLabelBrut}[2]{{\titrefont\fontsize{7.6}{10}\selectfont
+  \addfontfeatures{LetterSpace=6}\textcolor{#1}{#2}}}
+% Numéro automatique, ou libellé d'auteur composé sans capitalisation.
+\newcommand{\nxSixLabelSuffixe}[3]{%
+  \ifstrempty{#2}{\nxSixLabel{#1}{~#3}}{\nxSixLabelBrut{#1}{~#2}}}
+
 % ===========================================================================
 %  DÉFINITION — fond teinté, coin plié, onglet
 % ===========================================================================
@@ -43,7 +66,8 @@
   attach boxed title to top left={yshift=-2.6mm, xshift=8pt},
   boxed title style={colback=chapcolor, boxrule=0pt, arc=1.6pt,
     left=8pt, right=8pt, top=3pt, bottom=3pt},
-  title={\nxSixLabel{white}{Définition~\ifstrempty{#1}{\thenxSixDef}{#1}}},
+  title={\nxSixLabel{white}{Définition}%
+    \nxSixLabelSuffixe{white}{#1}{\thenxSixDef}},
   overlay={% coin plié en haut à droite
     \path[fill=chapcolor!30] ([xshift=-12pt]frame.north east)
       -- (frame.north east) -- ([yshift=-12pt]frame.north east) -- cycle;
@@ -65,7 +89,8 @@
   attach boxed title to top left={yshift=-2.6mm, xshift=8pt},
   boxed title style={colback=white, colframe=chapcolor, boxrule=1pt,
     arc=1.6pt, left=8pt, right=8pt, top=3pt, bottom=3pt},
-  title={\nxSixLabel{chapcolor}{Théorème~\ifstrempty{#1}{\thenxSixThm}{#1}}}}
+  title={\nxSixLabel{chapcolor}{Théorème}%
+    \nxSixLabelSuffixe{chapcolor}{#1}{\thenxSixThm}}}
 \newenvironment{theoremeV}[1][]{%
   \stepcounter{nxSixThm}\begin{thmV}[#1]}{\end{thmV}}
 
@@ -77,9 +102,9 @@
   borderline west={2.6pt}{0pt}{chapcolor!70},
   top=8pt, bottom=8pt, left=13pt, right=8pt,
   before skip=13pt, after skip=13pt,
-  before upper={\nxLosange[chapcolor!70]\enspace
-    \nxSixLabel{chapcolor!85!black}{Propriété~%
-      \ifstrempty{#1}{\thenxSixProp}{#1}}\quad}}
+  before upper={\nxSixPicto{\nxLosange[chapcolor!70]}\enspace
+    \nxSixLabel{chapcolor!85!black}{Propriété}%
+    \nxSixLabelSuffixe{chapcolor!85!black}{#1}{\thenxSixProp}\quad}}
 \newenvironment{proprieteV}[1][]{%
   \stepcounter{nxSixProp}\begin{propV}[#1]}{\end{propV}}
 
@@ -151,11 +176,18 @@
 % Le cadrage editorial (conception §7) exige que l'enrichissement ne puisse
 % pas se lire comme exigible : filet pointille, fond absent, etiquette
 % explicite. Le pointille dit « hors du parcours » a lui seul.
+%
+% Marges internes deliberement faibles. L'encadre n'a pas de fond : rien ne
+% justifie de retrecir la justification, et la v5 l'a deja reduite de 4 mm.
+% Les chapitres de NSI y placent de longs fragments de code en ligne, que
+% \lstinline compose en boite insecable — 46 caracteres pour le dictionnaire
+% en comprehension de 1NSI-TYPES-CONSTRUITS. Chaque point de marge retire a
+% la mesure devient une ligne trop lache, que le gate de diagnostics rejette.
 \newtcolorbox{plusloinV}{enhanced, breakable,
   colback=white, boxrule=0pt, frame hidden, arc=0pt,
   borderline west={0.9pt}{0pt}{chapcolor!55,
     dash pattern=on 2.2pt off 2.2pt},
-  top=13pt, bottom=9pt, left=13pt, right=10pt,
+  top=13pt, bottom=9pt, left=10pt, right=2pt,
   before skip=15pt, after skip=15pt,
   attach boxed title to top left={yshift=-2.6mm, xshift=9pt},
   boxed title style={colback=white, colframe=chapcolor!55, boxrule=0.7pt,
@@ -175,7 +207,7 @@
   before upper={\nxSixLabel{encre!80}{Exemple}\quad},
   before lower={\noindent\textcolor{chapcolor!40}{\leaders
       \hbox{\rule[2.2pt]{2.4pt}{0.55pt}\hskip 2.4pt}\hfill\kern0pt}\par
-    \smallskip\icnCheck[nsiAccent]\enspace
+    \smallskip\nxSixPicto{\icnCheck[nsiAccent]}\enspace
     \nxSixLabel{nsiAccent!85!black}{Solution}\quad}}
 \newenvironment{exempleresoluV}{\begin{exempleV}}{\end{exempleV}}
 
@@ -210,8 +242,10 @@
   borderline west={2.2pt}{0pt}{sepiaHistoire!75},
   top=11pt, bottom=9pt, left=12pt, right=12pt,
   before skip=14pt, after skip=14pt,
-  before upper={\icnPlume\enspace\nxSixLabel{sepiaHistoire}{Histoire%
-    \ifstrempty{#1}{}{ --- #1}}\par\smallskip\small}}
+  before upper={\nxSixPicto{\icnPlume}\enspace
+    \nxSixLabel{sepiaHistoire}{Histoire}%
+    \ifstrempty{#1}{}{\nxSixLabelBrut{sepiaHistoire}{ --- #1}}%
+    \par\smallskip\small}}
 \newenvironment{histoiredessciencesV}[1][]{\begin{histoireV}[#1]}{\end{histoireV}}
 
 % ===========================================================================
@@ -231,8 +265,9 @@
   attach boxed title to top left={yshift=-2.6mm, xshift=8pt},
   boxed title style={colback=rubMethodes, boxrule=0pt, arc=2pt,
     left=8pt, right=8pt, top=3pt, bottom=3pt},
-  title={\icnMethode[white]\enspace\nxSixLabel{white}{Méthode~%
-    \ifstrempty{#1}{\thenxSixMeth}{#1}}\enspace
+  title={\nxSixPicto{\icnMethode[white]}\enspace
+    \nxSixLabel{white}{Méthode}%
+    \nxSixLabelSuffixe{white}{#1}{\thenxSixMeth}\enspace
     {\titrefont\fontsize{8.5}{10}\selectfont\color{white}#2}}}
 \newenvironment{methodeV}[2][]{%
   \stepcounter{nxSixMeth}\setcounter{nxSixEtape}{0}%
