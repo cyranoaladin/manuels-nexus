@@ -43,6 +43,31 @@ def _load_module(path: Path, name: str):
     return module
 
 
+def test_inventory_error_diagnostic_is_bounded_and_redacts_generic_errors(
+    inventory_module,
+    manifest_module,
+) -> None:
+    inventory_error = inventory_module.InventoryError(
+        "branche incohérente\n" + "x" * 500
+    )
+    inventory_api = SimpleNamespace(InventoryError=inventory_module.InventoryError)
+
+    diagnostic = manifest_module._bounded_inventory_error_diagnostic(
+        inventory_api,
+        inventory_error,
+    )
+    generic = manifest_module._bounded_inventory_error_diagnostic(
+        inventory_api,
+        RuntimeError("api_key=do-not-expose"),
+    )
+
+    assert diagnostic.startswith("branche incohérente x")
+    assert len(diagnostic) <= 240
+    assert "\n" not in diagnostic
+    assert generic == "RuntimeError"
+    assert "do-not-expose" not in generic
+
+
 @pytest.fixture()
 def inventory_module():
     return _load_module(INVENTORY_SCRIPT, "inventory_collection_observed_tests")
@@ -133,6 +158,49 @@ def _unrelated_commit(repository: Path) -> str:
         capture_output=True,
         text=True,
     ).stdout.strip()
+
+
+@pytest.mark.parametrize(
+    ("returncode", "expected", "unexpected"),
+    [
+        pytest.param(
+            1,
+            "sans ancêtre Git valide",
+            "Git invérifiable",
+            id="non-ancestor",
+        ),
+        pytest.param(
+            2,
+            "Git invérifiable",
+            "sans ancêtre Git valide",
+            id="git-failure",
+        ),
+    ],
+)
+def test_require_git_ancestor_distinguishes_nonancestor_from_git_failure(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    returncode: int,
+    expected: str,
+    unexpected: str,
+) -> None:
+    monkeypatch.setattr(
+        inventory_module.subprocess,
+        "run",
+        lambda *_args, **_kwargs: SimpleNamespace(returncode=returncode),
+    )
+
+    with pytest.raises(inventory_module.InventoryError) as captured:
+        inventory_module._require_git_ancestor(
+            tmp_path,
+            "a" * 40,
+            "b" * 40,
+            role="provenance test",
+        )
+
+    assert expected in str(captured.value)
+    assert unexpected not in str(captured.value)
 
 
 def _state_digest(builds: list[dict[str, object]]) -> str:
@@ -1174,6 +1242,53 @@ def test_refresh_empty_manifest_rebinds_empty_ancestor_manifest_to_current_branc
     }
 
 
+def test_refresh_empty_manifest_cli_reports_inventory_ancestry_diagnostic(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    payload, manifest_path = _branch_rebind_manifest_repository(tmp_path)
+    provenance = payload["provenance"]
+    assert isinstance(provenance, dict)
+    provenance["head_sha"] = _unrelated_commit(tmp_path)
+    manifest_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    _commit_all(tmp_path, "foreign manifest ancestry for CLI")
+
+    def bounded_inventory(repository: Path, **kwargs) -> dict[str, object]:
+        inventory_module._load_observed_build_manifest(
+            repository,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=kwargs.get(
+                "empty_manifest_refresh_capability"
+            ),
+        )
+        pytest.fail("une ascendance étrangère ne doit pas être acceptée")
+
+    monkeypatch.setattr(inventory_module, "_build_inventory", bounded_inventory)
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: inventory_module,
+    )
+    monkeypatch.chdir(tmp_path)
+
+    assert manifest_module._run(["--refresh-empty"]) == 2
+
+    captured = capsys.readouterr()
+    assert "ancêtre" in captured.err
+    assert "InventoryError" not in captured.err
+    assert "Traceback" not in captured.err
+
+
 @pytest.mark.parametrize(
     ("invalid_context", "expected"),
     [
@@ -1284,6 +1399,41 @@ def test_bounded_refresh_loader_never_ignores_nonempty_manifest_digests(
             pdfinfo_counter=lambda _path: (7, None),
             python_counter=lambda _path: (None, "unused"),
             empty_manifest_refresh_capability=True,
+        )
+
+
+def test_branch_rebind_capability_refuses_nonempty_manifest_with_stale_digests(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    payload, manifest_path = _branch_rebind_manifest_repository(tmp_path)
+    provenance = payload["provenance"]
+    assert isinstance(provenance, dict)
+    build = _build(
+        str(provenance["head_sha"]),
+        "build/MANUEL_1SPE_professeur.pdf",
+        b"%PDF",
+    )
+    payload["builds"] = [build]
+    payload["build_state_digest"] = _state_digest([build])
+    payload["source_digest"] = "sha256:" + "0" * 64
+    payload["model_digest"] = "sha256:" + "1" * 64
+    manifest_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(inventory_module.InventoryError, match="source_digest"):
+        inventory_module._load_observed_build_manifest(
+            tmp_path,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=(
+                inventory_module._EMPTY_MANIFEST_BRANCH_REBIND_CAPABILITY
+            ),
         )
 
 
@@ -4863,6 +5013,7 @@ def _bootstrap_inventory_module(
     strict_builder,
 ):
     return SimpleNamespace(
+        InventoryError=inventory_module.InventoryError,
         PurePosixPath=inventory_module.PurePosixPath,
         _ConfinedJsonSnapshot=inventory_module._ConfinedJsonSnapshot,
         _build_inventory_for_empty_manifest_refresh=bounded_builder,
@@ -5025,6 +5176,65 @@ def test_record_from_receipt_refuses_empty_manifest_from_other_branch(
 
     assert isinstance(captured.value.__cause__, inventory_module.InventoryError)
     assert "branche" in str(captured.value.__cause__)
+    assert manifest_path.read_bytes() == original
+
+
+def test_receipt_cli_reports_inventory_branch_diagnostic(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    _head, receipt_path, manifest_path, _tracked_source = (
+        _install_clean_receipt_entrypoint_fixture(tmp_path)
+    )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(tmp_path),
+            "branch",
+            "-m",
+            "integration/1spe-bo2026-traceability",
+        ],
+        check=True,
+    )
+    original = manifest_path.read_bytes()
+
+    def strict_bounded_builder(root: Path) -> dict[str, object]:
+        inventory_module._load_observed_build_manifest(
+            root,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=(
+                inventory_module._EMPTY_MANIFEST_REFRESH_CAPABILITY
+            ),
+        )
+        pytest.fail("le chemin receipt ne doit pas rattacher la branche")
+
+    fake_inventory = _bootstrap_inventory_module(
+        inventory_module,
+        bounded_builder=strict_bounded_builder,
+        strict_builder=lambda _root: pytest.fail(
+            "le chemin receipt ne doit pas appeler build_inventory"
+        ),
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: fake_inventory,
+    )
+
+    assert manifest_module._run(["--receipt", str(receipt_path)]) == 2
+
+    captured = capsys.readouterr()
+    assert "branche de provenance du manifeste incohérente" in captured.err
+    assert "InventoryError" not in captured.err
+    assert "Traceback" not in captured.err
     assert manifest_path.read_bytes() == original
 
 

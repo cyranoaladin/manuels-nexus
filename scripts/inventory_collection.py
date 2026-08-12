@@ -1314,8 +1314,10 @@ def _require_git_ancestor(
         )
     except (OSError, subprocess.TimeoutExpired) as exc:
         raise InventoryError(f"{role} Git invérifiable") from exc
-    if ancestry.returncode != 0:
+    if ancestry.returncode == 1:
         raise InventoryError(f"{role} sans ancêtre Git valide")
+    if ancestry.returncode != 0:
+        raise InventoryError(f"{role} Git invérifiable")
 
 
 def _load_observed_build_manifest(

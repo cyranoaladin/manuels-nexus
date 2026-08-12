@@ -98,10 +98,29 @@ _RECEIPT_FIELDS = {
 _1NSI_STUDENT_VARIANTS = frozenset(
     {"eleve", "methodes", "remediation", "amenagee", "projets"}
 )
+_INVENTORY_ERROR_DIAGNOSTIC_LIMIT = 240
 
 
 class BuildManifestError(RuntimeError):
     """Refusal to record unproved or inconsistent build evidence."""
+
+
+def _bounded_inventory_error_diagnostic(
+    inventory_module: object,
+    exc: Exception,
+) -> str:
+    """Return a bounded business diagnostic only for trusted inventory errors."""
+
+    inventory_error = getattr(inventory_module, "InventoryError", None)
+    if not isinstance(inventory_error, type) or not isinstance(
+        exc, inventory_error
+    ):
+        return type(exc).__name__
+    message = " ".join(str(exc).split())
+    if not message:
+        return "InventoryError"
+    limit = _INVENTORY_ERROR_DIAGNOSTIC_LIMIT
+    return message if len(message) <= limit else message[: limit - 1] + "…"
 
 
 def _requires_student_separation(manual: object, variant: object) -> bool:
@@ -2037,6 +2056,7 @@ def record_from_receipt(receipt_path: Path) -> None:
     if not preflight_succeeded:
         raise BuildManifestError("receipt sans préflight réussi")
     current, _current_manifest_digest = _read_schema_valid_manifest(root)
+    inventory_module: object | None = None
     try:
         if current["builds"] == []:
             _empty_manifest, empty_manifest_digest = (
@@ -2066,8 +2086,12 @@ def record_from_receipt(receipt_path: Path) -> None:
     except BuildManifestError:
         raise
     except Exception as exc:
+        diagnostic = _bounded_inventory_error_diagnostic(
+            inventory_module,
+            exc,
+        )
         raise BuildManifestError(
-            f"dérivation du receipt refusée: {type(exc).__name__}"
+            f"dérivation du receipt refusée: {diagnostic}"
         ) from exc
     _require_git_snapshot(
         root,
@@ -2165,8 +2189,12 @@ def _derive_empty_refresh_envelope(root: Path) -> dict[str, Any]:
         source_digest = str(inventory["source_digest"])
         model_digest = str(inventory_module._model_digest(inventory))
     except Exception as exc:
+        diagnostic = _bounded_inventory_error_diagnostic(
+            inventory_module,
+            exc,
+        )
         raise BuildManifestError(
-            f"calcul borné des digests impossible: {type(exc).__name__}"
+            f"calcul borné des digests impossible: {diagnostic}"
         ) from exc
     head, branch, dirty = _git_state(root)
     return {
