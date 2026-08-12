@@ -7842,13 +7842,47 @@ def test_manifest_backed_nsi_assembler_allows_local_sys_mask(
     assert errors == []
 
 
-def test_manifest_backed_nsi_assembler_allows_uncertain_sys_alias(
+@pytest.mark.parametrize(
+    "reflection",
+    [
+        'import sys\ns = sys\nif condition():\n    s = object()\n',
+        'import sys\ns = object()\nif condition():\n    s = sys\n',
+    ],
+)
+def test_manifest_backed_nsi_assembler_rejects_conditionally_reassigned_sys_alias(
+    tmp_path: Path,
+    inventory_module,
+    reflection: str,
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        reflection + 's.modules[__name__].BOOK_MANIFESTS["TNSI"] = "x"',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_conditional_sys_alias_expression(
     tmp_path: Path, inventory_module
 ) -> None:
     errors = _manifest_backed_analysis_errors(
         tmp_path,
         inventory_module,
-        'import sys\ns = sys if tuple() else object()\nSTATE = s.modules',
+        'import sys\ns = sys if condition() else object()\n'
+        's.modules[__name__].BOOK_MANIFESTS["TNSI"] = "x"',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_allows_alias_without_sys_source(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\ns = object()\nSTATE = s.modules',
     )
 
     assert errors == []

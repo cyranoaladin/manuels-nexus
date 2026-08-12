@@ -302,37 +302,46 @@ _SYS_MODULE_BINDING = ""
 
 
 class _ScopeSysBindingCollector(ast.NodeVisitor):
-    def __init__(self, body: list[ast.stmt]) -> None:
-        self.bindings: dict[str, list[str | None]] = defaultdict(list)
-        self._direct_statement_ids = {id(statement) for statement in body}
+    def __init__(self) -> None:
+        self.bindings: dict[str, set[str]] = defaultdict(set)
 
     def _record(
         self,
         names: set[str],
-        source: str | None = None,
+        sources: set[str] | None = None,
     ) -> None:
         for name in names:
-            self.bindings[name].append(source)
+            self.bindings[name].update(sources or set())
 
-    def _direct_source(self, node: ast.AST, value: ast.AST | None) -> str | None:
-        if id(node) in self._direct_statement_ids and isinstance(value, ast.Name):
-            return value.id
-        return None
+    def _possible_sources(self, value: ast.AST | None) -> set[str]:
+        if isinstance(value, ast.Name):
+            return {value.id}
+        if isinstance(value, ast.IfExp):
+            return self._possible_sources(value.body) | self._possible_sources(
+                value.orelse
+            )
+        if isinstance(value, ast.BoolOp):
+            return set().union(
+                *(self._possible_sources(item) for item in value.values)
+            )
+        if isinstance(value, ast.NamedExpr):
+            return self._possible_sources(value.value)
+        return set()
 
     def visit_Assign(self, node: ast.Assign) -> None:
-        source = self._direct_source(node, node.value)
         simple_targets = all(isinstance(target, ast.Name) for target in node.targets)
         self._record(
             _binding_target_names(*node.targets),
-            source if simple_targets else None,
+            self._possible_sources(node.value) if simple_targets else None,
         )
         self.visit(node.value)
 
     def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
-        source = self._direct_source(node, node.value)
         self._record(
             _binding_target_names(node.target),
-            source if isinstance(node.target, ast.Name) else None,
+            self._possible_sources(node.value)
+            if isinstance(node.target, ast.Name)
+            else None,
         )
         if node.value is not None:
             self.visit(node.value)
@@ -378,24 +387,16 @@ class _ScopeSysBindingCollector(ast.NodeVisitor):
     def visit_Import(self, node: ast.Import) -> None:
         for alias in node.names:
             bound_name = alias.asname or alias.name.split(".", maxsplit=1)[0]
-            source = (
-                _SYS_MODULE_BINDING
-                if id(node) in self._direct_statement_ids and alias.name == "sys"
-                else None
-            )
-            self._record({bound_name}, source)
+            sources = {_SYS_MODULE_BINDING} if alias.name == "sys" else None
+            self._record({bound_name}, sources)
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
         for alias in node.names:
             if alias.name == "*":
                 continue
             bound_name = alias.asname or alias.name
-            source = (
-                _SYS_MODULE_BINDING
-                if id(node) in self._direct_statement_ids and alias.name == "sys"
-                else None
-            )
-            self._record({bound_name}, source)
+            sources = {_SYS_MODULE_BINDING} if alias.name == "sys" else None
+            self._record({bound_name}, sources)
 
     def visit_MatchAs(self, node: ast.MatchAs) -> None:
         if node.name is not None:
@@ -424,14 +425,14 @@ class _ScopeSysBindingCollector(ast.NodeVisitor):
         self._record({node.name})
 
 
-def _certain_sys_aliases(
+def _possible_sys_aliases(
     body: list[ast.stmt],
     scope: _LexicalScope,
     *,
     inherited_alias: Callable[[str], bool],
     arguments: ast.arguments | None = None,
 ) -> frozenset[str]:
-    collector = _ScopeSysBindingCollector(body)
+    collector = _ScopeSysBindingCollector()
     for statement in body:
         collector.visit(statement)
     if arguments is not None:
@@ -443,9 +444,8 @@ def _certain_sys_aliases(
             for name in scope.locals
             if name not in aliases
             and (sources := collector.bindings.get(name))
-            and all(
-                source is not None
-                and (
+            and any(
+                (
                     source == _SYS_MODULE_BINDING
                     or (
                         source in scope.locals
@@ -1154,7 +1154,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             self._record_escape(annotation)
             self.visit(annotation)
         function_scope = _lexical_scope("function", node.body, arguments=node.args)
-        function_sys_aliases = _certain_sys_aliases(
+        function_sys_aliases = _possible_sys_aliases(
             node.body,
             function_scope,
             inherited_alias=self._is_sys_module_alias,
@@ -1214,7 +1214,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         for keyword in node.keywords:
             self.visit(keyword.value)
         class_scope = _lexical_scope("class", node.body)
-        class_sys_aliases = _certain_sys_aliases(
+        class_sys_aliases = _possible_sys_aliases(
             node.body,
             class_scope,
             inherited_alias=self._is_sys_module_alias,
@@ -1333,7 +1333,7 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
         )
     }
     module_scope = _lexical_scope("module", tree.body)
-    module_sys_aliases = _certain_sys_aliases(
+    module_sys_aliases = _possible_sys_aliases(
         tree.body,
         module_scope,
         inherited_alias=lambda _name: False,
