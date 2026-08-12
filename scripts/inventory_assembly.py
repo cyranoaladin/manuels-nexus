@@ -298,6 +298,172 @@ def _lexical_scope(
     )
 
 
+_SYS_MODULE_BINDING = ""
+
+
+class _ScopeSysBindingCollector(ast.NodeVisitor):
+    def __init__(self, body: list[ast.stmt]) -> None:
+        self.bindings: dict[str, list[str | None]] = defaultdict(list)
+        self._direct_statement_ids = {id(statement) for statement in body}
+
+    def _record(
+        self,
+        names: set[str],
+        source: str | None = None,
+    ) -> None:
+        for name in names:
+            self.bindings[name].append(source)
+
+    def _direct_source(self, node: ast.AST, value: ast.AST | None) -> str | None:
+        if id(node) in self._direct_statement_ids and isinstance(value, ast.Name):
+            return value.id
+        return None
+
+    def visit_Assign(self, node: ast.Assign) -> None:
+        source = self._direct_source(node, node.value)
+        simple_targets = all(isinstance(target, ast.Name) for target in node.targets)
+        self._record(
+            _binding_target_names(*node.targets),
+            source if simple_targets else None,
+        )
+        self.visit(node.value)
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+        source = self._direct_source(node, node.value)
+        self._record(
+            _binding_target_names(node.target),
+            source if isinstance(node.target, ast.Name) else None,
+        )
+        if node.value is not None:
+            self.visit(node.value)
+
+    def visit_AugAssign(self, node: ast.AugAssign) -> None:
+        self._record(_binding_target_names(node.target))
+        self.visit(node.value)
+
+    def visit_NamedExpr(self, node: ast.NamedExpr) -> None:
+        self._record(_binding_target_names(node.target))
+        self.visit(node.value)
+
+    def visit_Delete(self, node: ast.Delete) -> None:
+        self._record(_binding_target_names(*node.targets))
+
+    def visit_For(self, node: ast.For) -> None:
+        self._record(_binding_target_names(node.target))
+        self.generic_visit(node)
+
+    def visit_AsyncFor(self, node: ast.AsyncFor) -> None:
+        self.visit_For(node)
+
+    def visit_With(self, node: ast.With) -> None:
+        self._record(
+            _binding_target_names(
+                *(
+                    item.optional_vars
+                    for item in node.items
+                    if item.optional_vars is not None
+                )
+            )
+        )
+        self.generic_visit(node)
+
+    def visit_AsyncWith(self, node: ast.AsyncWith) -> None:
+        self.visit_With(node)
+
+    def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:
+        if node.name is not None:
+            self._record({node.name})
+        self.generic_visit(node)
+
+    def visit_Import(self, node: ast.Import) -> None:
+        for alias in node.names:
+            bound_name = alias.asname or alias.name.split(".", maxsplit=1)[0]
+            source = (
+                _SYS_MODULE_BINDING
+                if id(node) in self._direct_statement_ids and alias.name == "sys"
+                else None
+            )
+            self._record({bound_name}, source)
+
+    def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+        for alias in node.names:
+            if alias.name == "*":
+                continue
+            bound_name = alias.asname or alias.name
+            source = (
+                _SYS_MODULE_BINDING
+                if id(node) in self._direct_statement_ids and alias.name == "sys"
+                else None
+            )
+            self._record({bound_name}, source)
+
+    def visit_MatchAs(self, node: ast.MatchAs) -> None:
+        if node.name is not None:
+            self._record({node.name})
+        self.generic_visit(node)
+
+    def visit_MatchStar(self, node: ast.MatchStar) -> None:
+        if node.name is not None:
+            self._record({node.name})
+
+    def visit_MatchMapping(self, node: ast.MatchMapping) -> None:
+        if node.rest is not None:
+            self._record({node.rest})
+        self.generic_visit(node)
+
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+        self._record({node.name})
+
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+        self.visit_FunctionDef(node)
+
+    def visit_Lambda(self, node: ast.Lambda) -> None:
+        return
+
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
+        self._record({node.name})
+
+
+def _certain_sys_aliases(
+    body: list[ast.stmt],
+    scope: _LexicalScope,
+    *,
+    inherited_alias: Callable[[str], bool],
+    arguments: ast.arguments | None = None,
+) -> frozenset[str]:
+    collector = _ScopeSysBindingCollector(body)
+    for statement in body:
+        collector.visit(statement)
+    if arguments is not None:
+        collector._record(_argument_names(arguments))
+    aliases: set[str] = set()
+    while True:
+        expanded = {
+            name
+            for name in scope.locals
+            if name not in aliases
+            and (sources := collector.bindings.get(name))
+            and all(
+                source is not None
+                and (
+                    source == _SYS_MODULE_BINDING
+                    or (
+                        source in scope.locals
+                        and source in aliases
+                    )
+                    or (
+                        source not in scope.locals
+                        and inherited_alias(source)
+                    )
+                )
+                for source in sources
+            )
+        }
+        if not expanded:
+            return frozenset(aliases)
+        aliases.update(expanded)
+
+
 _MODULE_SCOPE = _LexicalScope(
     kind="module",
     locals=frozenset(),
@@ -333,6 +499,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self,
         supported_top_level_node_ids: set[int],
         module_bound_names: frozenset[str],
+        module_sys_aliases: frozenset[str],
     ) -> None:
         self.ambiguous: set[str] = set()
         self.declared: set[str] = set()
@@ -341,7 +508,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self._mutable_aliases: list[dict[str, set[str]]] = [{}]
         self._supported_top_level_node_ids = supported_top_level_node_ids
         self._module_bound_names = module_bound_names
-        self._sys_module_aliases: set[str] = set()
+        self._sys_alias_scopes: list[frozenset[str]] = [module_sys_aliases]
 
     def _mark_reflective_namespace(self) -> None:
         self.ambiguous.update(_AUDITED_SELECTION_CONSTANTS)
@@ -374,6 +541,26 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             if name in enclosing.locals or name in enclosing.nonlocals:
                 return False
         return True
+
+    def _is_sys_module_alias(self, name: str) -> bool:
+        current_scope = self._scopes[-1]
+        if current_scope.kind == "module":
+            return name in self._sys_alias_scopes[0]
+        if name in current_scope.globals:
+            return name in self._sys_alias_scopes[0]
+        if current_scope.kind == "class":
+            class_bindings = self._class_runtime_bindings[-1]
+            if class_bindings is not None and name in class_bindings:
+                return name in self._sys_alias_scopes[-1]
+        elif name in current_scope.locals:
+            return name in self._sys_alias_scopes[-1]
+        for index in range(len(self._scopes) - 2, -1, -1):
+            scope = self._scopes[index]
+            if scope.kind == "class":
+                continue
+            if name in scope.locals:
+                return name in self._sys_alias_scopes[index]
+        return name in self._sys_alias_scopes[0]
 
     def _mutation_module_names(self, names: set[str]) -> set[str]:
         module_names = {
@@ -723,12 +910,12 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             or (
                 node.attr == "modules"
                 and isinstance(node.value, ast.Name)
-                and node.value.id in self._sys_module_aliases
+                and self._is_sys_module_alias(node.value.id)
             )
             or (
                 node.attr == "__dict__"
                 and isinstance(node.value, ast.Name)
-                and node.value.id in self._sys_module_aliases
+                and self._is_sys_module_alias(node.value.id)
             )
             or (
                 len(self._scopes) == 1
@@ -743,7 +930,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             isinstance(node.func, ast.Attribute)
             and node.func.attr == "__getattribute__"
             and isinstance(node.func.value, ast.Name)
-            and node.func.value.id in self._sys_module_aliases
+            and self._is_sys_module_alias(node.func.value.id)
             and len(node.args) == 1
             and isinstance(node.args[0], ast.Constant)
             and node.args[0].value == "__dict__"
@@ -752,7 +939,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             and node.func.id == "getattr"
             and len(node.args) in {2, 3}
             and isinstance(node.args[0], ast.Name)
-            and node.args[0].id in self._sys_module_aliases
+            and self._is_sys_module_alias(node.args[0].id)
             and isinstance(node.args[1], ast.Constant)
             and node.args[1].value == "__dict__"
         )
@@ -893,16 +1080,11 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
 
     def visit_Import(self, node: ast.Import) -> None:
         for alias in node.names:
-            if alias.name == "sys":
-                self._sys_module_aliases.add(alias.asname or "sys")
             if alias.name == "builtins":
                 self._mark_reflective_namespace()
         self._record_binding(_import_bound_names(node))
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
-        for alias in node.names:
-            if alias.name == "sys":
-                self._sys_module_aliases.add(alias.asname or "sys")
         imports_reflective_symbol = any(
             alias.name in _MODULE_REFLECTIVE_NAMESPACE_SYMBOLS
             for alias in node.names
@@ -971,15 +1153,22 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         for annotation in annotations:
             self._record_escape(annotation)
             self.visit(annotation)
-        self._scopes.append(
-            _lexical_scope("function", node.body, arguments=node.args)
+        function_scope = _lexical_scope("function", node.body, arguments=node.args)
+        function_sys_aliases = _certain_sys_aliases(
+            node.body,
+            function_scope,
+            inherited_alias=self._is_sys_module_alias,
+            arguments=node.args,
         )
+        self._scopes.append(function_scope)
+        self._sys_alias_scopes.append(function_sys_aliases)
         self._class_runtime_bindings.append(None)
         self._mutable_aliases.append({})
         for statement in node.body:
             self.visit(statement)
         self._mutable_aliases.pop()
         self._class_runtime_bindings.pop()
+        self._sys_alias_scopes.pop()
         self._scopes.pop()
         self._mutable_aliases = enclosing_alias_state
 
@@ -998,20 +1187,21 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         lambda_collector = _ScopeBindingCollector()
         lambda_collector.visit(node.body)
         lambda_locals = _argument_names(node.args) | lambda_collector.locals
-        self._scopes.append(
-            _LexicalScope(
-                kind="function",
-                locals=frozenset(lambda_locals),
-                globals=frozenset(),
-                nonlocals=frozenset(),
-            )
+        lambda_scope = _LexicalScope(
+            kind="function",
+            locals=frozenset(lambda_locals),
+            globals=frozenset(),
+            nonlocals=frozenset(),
         )
+        self._scopes.append(lambda_scope)
+        self._sys_alias_scopes.append(frozenset())
         self._class_runtime_bindings.append(None)
         self._mutable_aliases.append({})
         self._record_escape(node.body)
         self.visit(node.body)
         self._mutable_aliases.pop()
         self._class_runtime_bindings.pop()
+        self._sys_alias_scopes.pop()
         self._scopes.pop()
         self._mutable_aliases = enclosing_alias_state
 
@@ -1023,7 +1213,14 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             self.visit(base)
         for keyword in node.keywords:
             self.visit(keyword.value)
-        self._scopes.append(_lexical_scope("class", node.body))
+        class_scope = _lexical_scope("class", node.body)
+        class_sys_aliases = _certain_sys_aliases(
+            node.body,
+            class_scope,
+            inherited_alias=self._is_sys_module_alias,
+        )
+        self._scopes.append(class_scope)
+        self._sys_alias_scopes.append(class_sys_aliases)
         self._class_runtime_bindings.append(set())
         self._mutable_aliases.append({})
         for statement in node.body:
@@ -1036,6 +1233,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
                 )
         self._mutable_aliases.pop()
         self._class_runtime_bindings.pop()
+        self._sys_alias_scopes.pop()
         self._scopes.pop()
 
     def _visit_comprehension(
@@ -1057,6 +1255,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
                 nonlocals=frozenset(),
             )
         )
+        self._sys_alias_scopes.append(frozenset())
         self._class_runtime_bindings.append(None)
         self._mutable_aliases.append({})
         for index, generator in enumerate(generators):
@@ -1070,6 +1269,7 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             self.visit(output)
         self._mutable_aliases.pop()
         self._class_runtime_bindings.pop()
+        self._sys_alias_scopes.pop()
         self._scopes.pop()
 
     def visit_ListComp(self, node: ast.ListComp) -> None:
@@ -1133,9 +1333,15 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
         )
     }
     module_scope = _lexical_scope("module", tree.body)
+    module_sys_aliases = _certain_sys_aliases(
+        tree.body,
+        module_scope,
+        inherited_alias=lambda _name: False,
+    )
     mutation_visitor = _AuditedMutationVisitor(
         supported_top_level_node_ids,
         module_scope.locals,
+        module_sys_aliases,
     )
     mutation_visitor.visit(tree)
 

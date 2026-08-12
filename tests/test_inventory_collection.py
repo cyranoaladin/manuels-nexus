@@ -7710,6 +7710,51 @@ def test_manifest_backed_nsi_assembler_rejects_aliased_sys_dict_reflection(
     assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
 
 
+def test_manifest_backed_nsi_assembler_rejects_sys_import_after_function(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'def mutate():\n'
+        '    sys.modules[__name__].BOOK_MANIFESTS["TNSI"] = "x"\n'
+        'import sys\nmutate()',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_sys_import_after_closure(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'def outer():\n'
+        '    def mutate():\n'
+        '        sys.modules[__name__].BOOK_MANIFESTS["TNSI"] = "x"\n'
+        '    import sys\n'
+        '    return mutate\n'
+        'outer()()',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_direct_sys_alias(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\ns = sys\ndef mutate():\n'
+        '    s.modules[__name__].BOOK_MANIFESTS["TNSI"] = "x"\n'
+        'mutate()',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
 def test_manifest_backed_nsi_assembler_rejects_sys_getattribute_dict_reflection(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -7778,6 +7823,32 @@ def test_manifest_backed_nsi_assembler_allows_ordinary_aliased_sys_usage(
         tmp_path,
         inventory_module,
         reflection,
+    )
+
+    assert errors == []
+
+
+def test_manifest_backed_nsi_assembler_allows_local_sys_mask(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\ndef read_local():\n'
+        '    sys = type("Local", (), {"modules": {}})()\n'
+        '    return sys.modules',
+    )
+
+    assert errors == []
+
+
+def test_manifest_backed_nsi_assembler_allows_uncertain_sys_alias(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\ns = sys if tuple() else object()\nSTATE = s.modules',
     )
 
     assert errors == []
