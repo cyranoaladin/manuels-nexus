@@ -502,9 +502,14 @@ def test_render_master_has_one_run_marker_and_no_marked_transversal_input() -> N
 
     assert re.findall(r"NEXUS_BUILD_RUN:([0-9a-f]{32})", master) == [run_id]
     assert master.count("NEXUS_BUILD_RUN:") == 1
+    # Charte v6 : la page de garde transversale est remplacee par la
+    # couverture de collection, le sommaire par sa version stylee.
+    assert master.count("\\couvertureManuel") == 1
+    assert master.count("\\sommaireNexus") == 1
+    assert master.count("\\begin{quatriemeCouverture}") == 1
+    assert "transversal/page_de_garde" not in master
     marked_inputs = {input_path for _, _, input_path in _marked_blocks(master)}
     for path in (
-        "transversal/page_de_garde",
         "transversal/avant_propos",
         "transversal/mode_emploi",
         "transversal/index_capacites",

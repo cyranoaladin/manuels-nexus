@@ -17,11 +17,16 @@
 \newcommand{\nxSuspendreDecor}{\global\nxDecorfalse}
 \newcommand{\nxReprendreDecor}{\global\nxDecortrue}
 
-% Couleur du décor = couleur de la rubrique de la page si nexus-charte-v6
-% est chargé, sinon couleur de chapitre.
+% Couleur du décor = couleur de la rubrique de la page quand la classe v5
+% fournit le mark de rubrique (\nxRubriquePage), sinon couleur de chapitre
+% (classe v4 des volumes assemblés).
 \newcommand{\nxDecorCouleur}{%
-  \ifcsname nxRubriqueCouleur\endcsname
-    \nxRubriqueCouleur{\nxRubriquePage}%
+  \ifcsname nxRubriquePage\endcsname
+    \ifcsname nxRubriqueCouleur\endcsname
+      \nxRubriqueCouleur{\nxRubriquePage}%
+    \else
+      chapcolor%
+    \fi
   \else
     chapcolor%
   \fi}

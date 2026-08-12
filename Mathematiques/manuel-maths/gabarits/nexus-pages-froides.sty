@@ -148,6 +148,9 @@
   \end{tikzpicture}%
   \vspace*{20mm}\par
   \begingroup
+    % Les lignes de sommaire sont composées en drapeau : l'étirement des
+    % blancs y est assumé, on ne rapporte pas d'Underfull dans ce groupe.
+    \hbadness=10000 \vbadness=10000
     \renewcommand*{\chapterheadstartvskip}{}%
     \@starttoc{toc}%
   \endgroup

@@ -847,25 +847,29 @@ def render_master(
         tracked_paths = load_tracked_paths(git_root)
     parts = []
 
-    # Transversal front matter. Le texte 1SPE (avant-propos, mode d'emploi,
+    # Transversal front matter. Couverture de collection (charte v6) pour
+    # tous les manuels ; le texte 1SPE (avant-propos, mode d'emploi,
     # formulaire, memo Python) est ecrit pour la Premiere specialite et n'est
-    # pas reutilisable tel quel pour un autre manuel : les manuels autres que
-    # 1SPE recoivent une page de titre minimale a la place, sans prejuger de
-    # leur futur contenu transversal propre.
+    # pas reutilisable tel quel pour un autre manuel.
+    parts.append(
+        "\\couvertureManuel{Mathématiques}"
+        f"{{{MANUAL_LEVEL_LABELS[manual]}}}"
+        "{Un manuel structuré pour apprendre, s'entraîner, se tester et "
+        "progresser, avec une progression claire, des méthodes explicites "
+        "et des ressources de remédiation.}"
+        "{Édition 2026-2027}"
+    )
     if manual == "1SPE":
-        parts.append("\\input{transversal/page_de_garde}")
-        parts.append("\\newpage")
         parts.append("\\input{transversal/avant_propos}")
         parts.append("\\newpage")
         parts.append("\\input{transversal/mode_emploi}")
         parts.append("\\newpage")
-        parts.append("\\tableofcontents")
-        parts.append("\\newpage")
+        parts.append("\\sommaireNexus")
         parts.append("\\input{transversal/index_capacites}")
         parts.append("\\newpage")
     else:
-        parts.append("\\tableofcontents")
-        parts.append("\\newpage")
+        parts.append("\\sommaireNexus")
+    parts.append("\\nxActiverDecor")
 
     # Chapters
     for chap in MANUAL_CHAPTERS[manual]:
@@ -899,6 +903,28 @@ def render_master(
         parts.append("\\clearpage")
         parts.append("\\input{transversal/memo_python}")
 
+    # Quatrieme de couverture de collection (charte v6)
+    parts.append("\\nxSuspendreDecor")
+    parts.append(
+        "\\begin{quatriemeCouverture}{Apprendre, s'entraîner, se tester, "
+        "progresser : la collection Nexus Réussite accompagne chaque élève "
+        "jusqu'à la maîtrise.}"
+        "\\atoutCouverture{\\icnCours[white]}{Un cours structuré en strates : "
+        "l'essentiel, les démonstrations au programme, les approfondissements "
+        "signalés.}"
+        "\\atoutCouverture{\\icnMethode[white]}{Des méthodes pas à pas avec "
+        "exemples résolus commentés et pièges à éviter.}"
+        "\\atoutCouverture{\\icnEntrainement[white]}{Trois parcours "
+        "d'exercices gradués et chronométrés, avec coups de pouce.}"
+        "\\atoutCouverture{\\icnAutoEval[white]}{Une auto-évaluation par "
+        "compétences et des sujets d'évaluation par chapitre.}"
+        "\\atoutCouverture{\\icnRemediation[white]}{Des fiches de remédiation "
+        "ciblées, reliées aux erreurs réellement diagnostiquées.}"
+        "\\atoutCouverture{\\icnPython[white]}{Python présent partout où le "
+        "programme l'exige : activités, exercices et fil rouge.}"
+        "\\end{quatriemeCouverture}"
+    )
+
     content = "\n".join(parts)
 
     titre_var = "professeur" if variant == "professeur" else "eleve"
@@ -920,6 +946,7 @@ def render_master(
     master = f"""% {MANUAL_TITLES[manual]} — variante {titre_var}
 % Assemble par scripts/assemble_manuel.py
 \\documentclass{{gabarits/nexus-manuel}}
+\\usepackage{{gabarits/nexus-charte-v6}}
 {variant_configuration}
 {matiere_niveau}
 \\title{{{MANUAL_TITLES[manual]} — Édition {titre_var}}}

@@ -82,8 +82,11 @@
 % ===========================================================================
 % Reprise du rendu v5 (géométrie identique, index de pouce par chapitre),
 % avec fond coloré par rubrique au lieu du fond encre uniforme.
-\ifdefined\nxOngletRubrique
-\renewcommand{\nxOngletRubrique}{%
+% Le rendu est défini inconditionnellement (un corps de macro ne s'exécute
+% pas), puis substitué à \nxOngletRubrique seulement si la classe v5 fournit
+% ses registres. Ne PAS mettre le corps dans le \ifdefined : ses \ifnxV...
+% inexistants en v4 désynchronisent le saut de conditionnelle de TeX.
+\newcommand{\nxSixOngletRubrique}{%
   \ifnxVSuppressTab\else
   \begingroup
   \sbox{\nxVOngletTextBox}{{\titrefont\fontsize{5.5}{5.5}\selectfont
@@ -122,6 +125,8 @@
   \endgroup
   \fi
 }
+\ifdefined\nxVOngletTextBox
+  \let\nxOngletRubrique\nxSixOngletRubrique
 \fi
 
 % ===========================================================================
