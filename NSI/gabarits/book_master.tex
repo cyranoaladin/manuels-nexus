@@ -1,6 +1,10 @@
 % Gabarit maître de manuel — assemblé par les scripts NSI
-\documentclass{gabarits/nexus-manuel}
+\documentclass{gabarits/nexus-manuel-v5}
 \usepackage{gabarits/nexus-charte-v6}
+% Les pages froides precedent toute marque de rubrique : leur onglet lateral
+% n'aurait ni libelle ni couleur. Il s'active avec le decor, au premier
+% chapitre.
+\nxVSuppressTabtrue
 %%VARIANT_SETUP%%
 \renewcommand*{\raggedleftmarginnote}{\raggedleft}
 \makeatletter
@@ -24,6 +28,7 @@
 \couvertureManuel{%%MATIERE%%}{%%NIVEAU%%}{%%SUBTITLE%%}{Édition 2026-2027}
 \sommaireNexus
 \mainmatter
+\nxVSuppressTabfalse
 \nxActiverDecor
 %%CONTENT%%
 \nxSuspendreDecor

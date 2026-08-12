@@ -71,6 +71,12 @@ class BookContext:
     output_stem: str
 
 
+# Les onglets lateraux de la classe v5 et le decor de la charte v6 sont des
+# tikzpicture « remember picture, overlay » : ils lisent des positions ecrites
+# dans l'aux par la passe precedente. Deux passes suffisaient au sommaire seul,
+# mais laissaient onglets et contours absents du PDF.
+LUALATEX_PASSES = 3
+
 ORDER = [  # les 9 temps du gabarit (docs/01 Partie 3)
     ("cours", "00_ouverture"), ("cours", "01_diagnostic"), ("cours", "02_activites"),
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
@@ -81,6 +87,51 @@ BOOK_STUDENT_ORDER = [
     ("cours", "1*"), ("methodes", "*"), ("exercices", "*"), ("coups_de_pouce", "*"),
     ("cours", "07_td*"), ("projet", "*"), ("qcm", "*"), ("ece", "*"),
 ]
+
+
+# Rubriques de la charte v6 : chaque sous-repertoire de chapitre porte la
+# rubrique qui colore son onglet lateral et son decor de page. Les libelles
+# sont ceux que normalise nexus-charte-v6.sty (table \nxNormRub) ; en changer
+# un ici sans l'y declarer ferait retomber la rubrique sur la couleur encre.
+RUBRIQUES = {
+    "cours": "Cours",
+    "methodes": "Méthodes",
+    # Les coups de pouce sont les compagnons des exercices et se composent a
+    # leur suite : meme rubrique, donc meme onglet.
+    "exercices": "Exercices",
+    "coups_de_pouce": "Exercices",
+    "projet": "Projets",
+    "qcm": "Auto-évaluation",
+    # L'ECE est un format d'epreuve : il releve de l'evaluation.
+    "evaluations": "Évaluation",
+    "ece": "Évaluation",
+    # La version amenagee est un support de reprise, comme la remediation.
+    "remediation": "Remédiation",
+    "amenagee": "Remédiation",
+    "corriges": "Corrigés",
+    "professeur": "Corrigés",
+}
+# Le repertoire cours porte quatre temps distincts, separes par leur prefixe.
+RUBRIQUES_COURS = {
+    "00_ouverture": "Ouverture",
+    "01_diagnostic": "Diagnostic",
+    "07_td": "TD",
+}
+
+
+def rubrique_libelle(path: Path) -> str:
+    """Return the v6 charter rubric label carried by an object's directory."""
+
+    sous_dossier = path.parent.name
+    if sous_dossier == "cours":
+        for prefixe, libelle in RUBRIQUES_COURS.items():
+            if path.name.startswith(prefixe):
+                return libelle
+        return RUBRIQUES["cours"]
+    try:
+        return RUBRIQUES[sous_dossier]
+    except KeyError as error:
+        raise ValueError(f"Rubrique inconnue : {path}") from error
 
 
 def latex_escape(value: str) -> str:
@@ -211,7 +262,7 @@ def compile_tex(
     if recorder:
         command.append("-recorder")
     command.extend((f"-output-directory={build_dir}", str(tex_path)))
-    for _ in range(2):
+    for _ in range(LUALATEX_PASSES):
         proc = active_runner(command, capture_output=True, cwd=ROOT, env=env)
         if proc.returncode != 0:
             pdf_path.unlink(missing_ok=True)
@@ -324,10 +375,18 @@ def render_book_master_from_files(
         if not selected_files:
             continue
         chapter_title = _chapter_entry_title(entry)
-        inputs = "\n".join(
-            f"\\input{{{path.relative_to(ROOT)}}}"
-            for path in selected_files
-        )
+        # La marque de rubrique est posee au premier objet de chaque rubrique
+        # et tient jusqu'au changement suivant : c'est elle que la page relit
+        # au shipout pour colorer son onglet et son decor (charte v6).
+        lignes: list[str] = []
+        rubrique_courante: str | None = None
+        for path in selected_files:
+            rubrique = rubrique_libelle(path)
+            if rubrique != rubrique_courante:
+                lignes.append(f"\\rubrique{{{rubrique}}}")
+                rubrique_courante = rubrique
+            lignes.append(f"\\input{{{path.relative_to(ROOT)}}}")
+        inputs = "\n".join(lignes)
         parts.append(
             "\n".join(
                 [

@@ -1,6 +1,7 @@
 """Tests rouges/verts du mode assembleur manuel NSI."""
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -336,6 +337,82 @@ def test_render_book_master_discards_correction_bodies_in_student_variants():
     assert r"\RenewDocumentEnvironment{corrige}{m +b}{}{}" in tex
 
 
+def test_book_master_loads_the_v5_class_under_the_v6_charter():
+    template = (ROOT / "gabarits" / "book_master.tex").read_text(encoding="utf-8")
+
+    assert "\\documentclass{gabarits/nexus-manuel-v5}" in template
+    assert "\\documentclass{gabarits/nexus-manuel}" not in template
+    # C'est l'ordre classe v5 puis charte v6 qui substitue le rendu d'onglet
+    # colore par rubrique (nexus-charte-v6.sty).
+    assert template.index("\\documentclass{gabarits/nexus-manuel-v5}") < template.index(
+        "\\usepackage{gabarits/nexus-charte-v6}"
+    )
+    # Les pages froides precedent toute marque de rubrique : pas d'onglet.
+    assert template.index("\\nxVSuppressTabtrue") < template.index("%%CONTENT%%")
+    assert template.index("\\nxVSuppressTabfalse") < template.index("%%CONTENT%%")
+    assert template.index("\\nxVSuppressTabtrue") < template.index(
+        "\\nxVSuppressTabfalse"
+    )
+
+
+def test_the_v5_class_is_mirrored_beside_the_charter():
+    assert (ROOT / "gabarits" / "nexus-manuel-v5.cls").exists()
+
+
+@pytest.mark.parametrize(
+    ("relative_path", "expected"),
+    [
+        ("cours/00_ouverture.tex", "Ouverture"),
+        ("cours/01_diagnostic.tex", "Diagnostic"),
+        ("cours/07_td_reseaux.tex", "TD"),
+        ("cours/10_C1_listes.tex", "Cours"),
+        ("methodes/1NSI-TYPES-ME-001.tex", "Méthodes"),
+        ("exercices/1NSI-TYPES-EX-001.tex", "Exercices"),
+        ("coups_de_pouce/1NSI-TYPES-EX-001-CDP.tex", "Exercices"),
+        ("projet/mini_projet.tex", "Projets"),
+        ("qcm/diagnostic.tex", "Auto-évaluation"),
+        ("evaluations/eval_A.tex", "Évaluation"),
+        ("ece/ece_01.tex", "Évaluation"),
+        ("remediation/fiche_01.tex", "Remédiation"),
+        ("amenagee/fiche_01.tex", "Remédiation"),
+        ("corriges/1NSI-TYPES-EX-001.tex", "Corrigés"),
+        ("professeur/notes.tex", "Corrigés"),
+    ],
+)
+def test_rubrique_libelle_maps_every_nsi_directory(relative_path, expected):
+    path = ROOT / "chapitres" / "1NSI-TYPES-BASE" / relative_path
+
+    assert assemble.rubrique_libelle(path) == expected
+
+
+def test_rubrique_libelle_rejects_an_unmapped_directory():
+    path = ROOT / "chapitres" / "1NSI-TYPES-BASE" / "inconnu" / "objet.tex"
+
+    with pytest.raises(ValueError):
+        assemble.rubrique_libelle(path)
+
+
+def test_render_book_master_marks_each_rubric_change_once():
+    tex = assemble.render_book_master("1NSI", "complet")
+
+    marques = re.findall(r"\\rubrique\{([^}]+)\}", tex)
+    assert marques, "aucune marque de rubrique emise"
+    for previous, current in zip(marques, marques[1:]):
+        assert previous != current
+
+    # Chaque \input d'objet est precede d'une marque de rubrique courante.
+    rubrique_courante = None
+    objets = 0
+    for line in tex.splitlines():
+        marque = re.fullmatch(r"\\rubrique\{([^}]+)\}", line)
+        if marque is not None:
+            rubrique_courante = marque.group(1)
+        elif line.startswith("\\input{chapitres/"):
+            assert rubrique_courante is not None, line
+            objets += 1
+    assert objets > 0
+
+
 def test_render_book_master_uses_ragged_alignment_for_left_margin_notes():
     tex = assemble.render_book_master("1NSI", "complet")
 
@@ -409,8 +486,17 @@ def test_compile_tex_adds_recorder_to_every_lualatex_pass_when_requested(
         source_date_epoch=1786147200,
         recorder=True,
     ) == 0
-    assert len(calls) == 2
+    assert len(calls) == assemble.LUALATEX_PASSES
     assert all("-recorder" in command for command, _kwargs in calls)
+
+
+def test_compile_tex_runs_enough_passes_for_the_charter_overlays():
+    # Les onglets lateraux v5 et le decor v6 sont des tikzpicture
+    # « remember picture, overlay » : ils lisent des positions ecrites dans
+    # l'aux par la passe precedente. Deux passes suffisent au sommaire mais
+    # laissent onglets et contours absents du PDF — verifie en compilant le
+    # master 1NSI, ou ils n'apparaissent qu'a la troisieme.
+    assert assemble.LUALATEX_PASSES >= 3
 
 
 def test_build_book_stages_preflights_and_promotes_with_one_manifest_read(
