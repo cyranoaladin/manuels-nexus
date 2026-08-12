@@ -7558,6 +7558,153 @@ LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
     assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
 
 
+def _manifest_backed_reflection_source(reflection: str) -> str:
+    return (
+        '''BOOK_MANIFESTS = {"1NSI": "manifests/books/1NSI.json"}
+BOOK_ID = "1NSI"
+CHAPITRES = []
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+def consume(value):
+    value.clear()
+    return ()
+'''
+        + reflection
+        + "\nLIVRES_CONNUS = tuple(BOOK_MANIFESTS)\n"
+    )
+
+
+def _manifest_backed_analysis_errors(
+    tmp_path: Path,
+    inventory_module,
+    reflection: str,
+) -> list[tuple[str, str]]:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(assembler, _manifest_backed_reflection_source(reflection))
+    analysis = inventory_module.analyze_assembler(assembler)
+    return inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+
+def test_manifest_backed_nsi_assembler_rejects_builtins_globals_reflection(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import builtins\nbuiltins.globals()["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_dunder_builtins_globals_reflection(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        '__builtins__["globals"]()["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_getattr_builtins_reflection(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import builtins as b\ngetattr(b, "globals")()["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_dunder_import_builtins_reflection(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        '__import__("builtins").globals()["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_import_module_reflection(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        "from importlib import import_module\n"
+        'import_module("builtins").globals()["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_sys_modules_reflection(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        'import sys\nsys.modules["builtins"].globals()["tuple"] = consume',
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_allows_ordinary_sys_usage(
+    tmp_path: Path, inventory_module
+) -> None:
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        "import sys\nARGUMENTS = tuple(sys.argv)",
+    )
+
+    assert errors == []
+
+
+@pytest.mark.parametrize(
+    "reflection",
+    [
+        'import builtins\nbuiltins.globals()["tuple"] = consume',
+        '__builtins__["globals"]()["tuple"] = consume',
+        'import builtins as b\ngetattr(b, "globals")()["tuple"] = consume',
+        '__import__("builtins").globals()["tuple"] = consume',
+        "from importlib import import_module\n"
+        'import_module("builtins").globals()["tuple"] = consume',
+        'import sys\nsys.modules["builtins"].globals()["tuple"] = consume',
+    ],
+)
+def test_manifest_backed_nsi_assembler_rejects_reflection_inside_function(
+    tmp_path: Path,
+    inventory_module,
+    reflection: str,
+) -> None:
+    indented_reflection = "\n".join(
+        f"    {line}" for line in reflection.splitlines()
+    )
+    errors = _manifest_backed_analysis_errors(
+        tmp_path,
+        inventory_module,
+        f"def rewrite_builtin():\n{indented_reflection}",
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
 def test_closed_contract_rejects_mutation_through_indexed_rules_alias(
     tmp_path: Path, inventory_module
 ) -> None:

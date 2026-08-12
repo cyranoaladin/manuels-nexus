@@ -64,6 +64,24 @@ _NESTED_MUTABLE_ACCESSORS = frozenset({"get", "items", "values"})
 _DYNAMIC_NAMESPACE_BUILTINS = frozenset(
     {"eval", "exec", "globals", "locals", "vars"}
 )
+_MODULE_REFLECTIVE_NAMESPACE_SYMBOLS = frozenset(
+    {
+        "__builtins__",
+        "__import__",
+        "builtins",
+        "delattr",
+        "getattr",
+        "import_module",
+        "setattr",
+        *_DYNAMIC_NAMESPACE_BUILTINS,
+    }
+)
+_NESTED_REFLECTIVE_NAMESPACE_NAMES = frozenset(
+    {"__builtins__", "__import__", "import_module"}
+)
+_NESTED_REFLECTIVE_NAMESPACE_ATTRIBUTES = frozenset(
+    {"import_module", *_DYNAMIC_NAMESPACE_BUILTINS}
+)
 
 
 def _canonicalize_literal(value: Any) -> Any:
@@ -323,6 +341,10 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self._mutable_aliases: list[dict[str, set[str]]] = [{}]
         self._supported_top_level_node_ids = supported_top_level_node_ids
         self._module_bound_names = module_bound_names
+        self._sys_module_aliases: set[str] = set()
+
+    def _mark_reflective_namespace(self) -> None:
+        self.ambiguous.update(_AUDITED_SELECTION_CONSTANTS)
 
     def _binding_module_names(self, names: set[str]) -> set[str]:
         audited = names & _AUDITED_SELECTION_CONSTANTS
@@ -684,9 +706,32 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
     def visit_Name(self, node: ast.Name) -> None:
         if (
             isinstance(node.ctx, ast.Load)
-            and node.id in _DYNAMIC_NAMESPACE_BUILTINS
+            and (
+                node.id in _DYNAMIC_NAMESPACE_BUILTINS
+                or node.id in _NESTED_REFLECTIVE_NAMESPACE_NAMES
+                or (
+                    len(self._scopes) == 1
+                    and node.id in _MODULE_REFLECTIVE_NAMESPACE_SYMBOLS
+                )
+            )
         ):
-            self.ambiguous.update(_AUDITED_SELECTION_CONSTANTS)
+            self._mark_reflective_namespace()
+
+    def visit_Attribute(self, node: ast.Attribute) -> None:
+        if (
+            node.attr in _NESTED_REFLECTIVE_NAMESPACE_ATTRIBUTES
+            or (
+                node.attr == "modules"
+                and isinstance(node.value, ast.Name)
+                and node.value.id in self._sys_module_aliases
+            )
+            or (
+                len(self._scopes) == 1
+                and node.attr in _MODULE_REFLECTIVE_NAMESPACE_SYMBOLS
+            )
+        ):
+            self._mark_reflective_namespace()
+        self.generic_visit(node)
 
     def visit_Call(self, node: ast.Call) -> None:
         if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
@@ -823,9 +868,31 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             class_bindings.update(previous_bindings)
 
     def visit_Import(self, node: ast.Import) -> None:
+        for alias in node.names:
+            if alias.name == "sys":
+                self._sys_module_aliases.add(alias.asname or "sys")
+            if alias.name == "builtins":
+                self._mark_reflective_namespace()
         self._record_binding(_import_bound_names(node))
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+        imports_reflective_symbol = any(
+            alias.name in _MODULE_REFLECTIVE_NAMESPACE_SYMBOLS
+            for alias in node.names
+        )
+        if (
+            node.module == "builtins"
+            or (
+                node.module == "sys"
+                and any(alias.name == "modules" for alias in node.names)
+            )
+            or (
+                node.module == "importlib"
+                and any(alias.name == "import_module" for alias in node.names)
+            )
+            or (len(self._scopes) == 1 and imports_reflective_symbol)
+        ):
+            self._mark_reflective_namespace()
         if any(alias.name == "*" for alias in node.names):
             # A star import may overwrite any audited global. It only invalidates
             # assemblers that independently opt into the closed contract.
