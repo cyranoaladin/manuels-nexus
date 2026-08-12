@@ -11,7 +11,7 @@
 ### assembler_invalid (0)
 - Aucune.
 
-### blocking_statuses (2802)
+### blocking_statuses (2911)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-001.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-001, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-002.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-002, scope=object
@@ -42,7 +42,7 @@
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-027.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-027, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-028.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-028, scope=object
 - path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/corriges/1SPE-DERGLOBAL-CO-029.tex, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, id=1SPE-DERGLOBAL-CO-029, scope=object
-- … 2772 autres.
+- … 2881 autres.
 
 ### broken_assembly_references (0)
 - Aucune.
@@ -54,13 +54,8 @@
 - source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex, cible=CONCLGN-C1, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-009.tex, cible=TSPE-PROBA-C10, champ=capacites[0], raison=capacite META absente du contrat du chapitre
 
-### chapters_not_in_manual (6)
-- source=NSI/chapitres/TNSI-ALGORITHMIQUE/contrat.yaml, cible=TNSI-ALGORITHMIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/contrat.yaml, cible=TNSI-ARCHITECTURES-MATERIELLES-SY, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/contrat.yaml, cible=TNSI-BASES-DE-DONNEES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/contrat.yaml, cible=TNSI-HISTOIRE-INFORMATIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/contrat.yaml, cible=TNSI-LANGAGES-ET-PROGRAMMATION, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/contrat.yaml, cible=TNSI-STRUCTURES-DONNEES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
+### chapters_not_in_manual (0)
+- Aucune.
 
 ### context_mismatches (0)
 - Aucune.
@@ -100,8 +95,8 @@
 ### metadata_missing (0)
 - Aucune.
 
-### missing_assemblers (1)
-- source=NSI/scripts/assemble_manuel.py, cible=TNSI, champ=manuel, raison=aucun assembleur de manuel suivi
+### missing_assemblers (0)
+- Aucune.
 
 ### missing_corrections (0)
 - Aucune.
@@ -109,55 +104,27 @@
 ### orphan_files (0)
 - Aucune.
 
-### unassembled_objects (28)
+### unassembled_objects (5)
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-001.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-002.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-003.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-004.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-005.tex, cible=NSI/chapitres/TNSI-ALGORITHMIQUE/corriges/TNSI-ALGO-CO-005.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-001.tex, cible=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-002.tex, cible=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-003.tex, cible=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-004.tex, cible=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/corriges/TNSI-ARCH-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-001.tex, cible=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-002.tex, cible=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-003.tex, cible=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-004.tex, cible=NSI/chapitres/TNSI-BASES-DE-DONNEES/corriges/TNSI-BDD-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-001.tex, cible=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-002.tex, cible=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/corriges/TNSI-HIST-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-001.tex, cible=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-002.tex, cible=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-003.tex, cible=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-004.tex, cible=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/corriges/TNSI-LANG-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-001.tex, cible=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-001.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-002.tex, cible=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-002.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-003.tex, cible=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-003.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- source=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-004.tex, cible=NSI/chapitres/TNSI-STRUCTURES-DONNEES/corriges/TNSI-STRUCT-CO-004.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 
-### unattributed_pdfs (1)
-- source=Mathematiques/manuel-maths/build/specimen.pdf, cible=Mathematiques/manuel-maths/build/specimen.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+### unattributed_pdfs (10)
+- source=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf, cible=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf, cible=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_corrige.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_corrige.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_evaluation.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_evaluation.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_fiche_methode.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_fiche_methode.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_td.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_td.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_tp.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_tp.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_trace.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_trace.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 
-### unavailable_inspiration_sources (15)
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td1_station_meteo.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_td_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C1.tex, cible=NSI/corpus_nsi/03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_tuples.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C1.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits.md, champ=sources_inspiration[1], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C2.tex, cible=NSI/corpus_nsi/03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_listes.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C2.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits.md, champ=sources_inspiration[1], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C3.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits_complement.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C4.tex, cible=NSI/corpus_nsi/03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_dictionnaires.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C4.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits.md, champ=sources_inspiration[1], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C5.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/evaluations/1NSI-TC-EVAL-A.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_evaluation_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-002.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_td_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/exercices/1NSI-TC-EX-003.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_tp_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/projet/1NSI-TC-PROJET.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_tp_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/remediation/1NSI-TC-REM.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_remediation_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
+### unavailable_inspiration_sources (0)
+- Aucune.
 
 ### unclassified_types (7)
 - path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, id=1SPE-PROBCOND-ALG-001, source_type=algorithme
@@ -174,19 +141,19 @@
 ## Livrables
 ### NSI Première
 - Éligible publication: False
-- evaluations : compiled (artifacts=1)
-- livret_methodes : compiled (artifacts=1)
+- evaluations : declared (artifacts=0)
+- livret_methodes : declared (artifacts=0)
 - manuel_eleve : compiled (artifacts=1)
 - manuel_professeur : compiled (artifacts=1)
-- projets : compiled (artifacts=1)
-- remediations : compiled (artifacts=1)
-- version_amenagee : compiled (artifacts=1)
+- projets : declared (artifacts=0)
+- remediations : declared (artifacts=0)
+- version_amenagee : declared (artifacts=0)
 
 ### Mathématiques Première
 - Éligible publication: False
-- banque_evaluations : compiled (artifacts=1)
-- livret_methodes : compiled (artifacts=1)
-- livret_remediation : compiled (artifacts=1)
+- banque_evaluations : absent (artifacts=0)
+- livret_methodes : partial (artifacts=0)
+- livret_remediation : partial (artifacts=0)
 - manuel_eleve : compiled (artifacts=1)
 - manuel_professeur : compiled (artifacts=1)
 
@@ -204,11 +171,11 @@
 - Éligible publication: False
 - banque_ecrite : absent (artifacts=0)
 - banque_pratique : absent (artifacts=0)
-- manuel_eleve : absent (artifacts=0)
-- manuel_professeur : partial (artifacts=0)
-- projets : absent (artifacts=0)
-- remediations : partial (artifacts=0)
-- version_amenagee : partial (artifacts=0)
+- manuel_eleve : compiled (artifacts=1)
+- manuel_professeur : compiled (artifacts=1)
+- projets : declared (artifacts=0)
+- remediations : declared (artifacts=0)
+- version_amenagee : declared (artifacts=0)
 
 ### Mathématiques Terminale
 - Éligible publication: False

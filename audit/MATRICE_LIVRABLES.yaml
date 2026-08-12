@@ -7,18 +7,28 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '349'
       source: anomalies.blocking_statuses
+    - code: livrable_non_compile
+      detail: declared
+      source: deliverable_matrix.1NSI.variants.evaluations
+    - code: livrable_non_compile
+      detail: declared
+      source: deliverable_matrix.1NSI.variants.livret_methodes
+    - code: livrable_non_compile
+      detail: declared
+      source: deliverable_matrix.1NSI.variants.projets
+    - code: livrable_non_compile
+      detail: declared
+      source: deliverable_matrix.1NSI.variants.remediations
+    - code: livrable_non_compile
+      detail: declared
+      source: deliverable_matrix.1NSI.variants.version_amenagee
     - code: statuts_non_approuves
       detail: objets=339; contrats=10
       source: manuals.1NSI.statuses
     current:
       artifacts:
-      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf
       - NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf
-      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_evaluations.pdf
-      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf
       - NSI/build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf
-      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_projets.pdf
-      - NSI/build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf
       chapter_count: 10
       chapters:
       - 1NSI-ALGO-DICHO-GLOUTON-KNN
@@ -64,23 +74,21 @@ manuals:
     structural_blockers:
     - anomalie:blocking_statuses
     - statuts_non_approuves
-    structural_compile_ready: true
+    structural_compile_ready: false
     variants:
       evaluations:
-        artifacts:
-        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_evaluations.pdf
+        artifacts: []
         declared_chapter_variants: []
         declared_manual_variants:
         - evaluations
-        state: compiled
+        state: declared
       livret_methodes:
-        artifacts:
-        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf
+        artifacts: []
         declared_chapter_variants:
         - methodes
         declared_manual_variants:
         - methodes
-        state: compiled
+        state: declared
       manuel_eleve:
         artifacts:
         - NSI/build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf
@@ -97,28 +105,25 @@ manuals:
         - professeur
         state: compiled
       projets:
-        artifacts:
-        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_projets.pdf
+        artifacts: []
         declared_chapter_variants: []
         declared_manual_variants:
         - projets
-        state: compiled
+        state: declared
       remediations:
-        artifacts:
-        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf
+        artifacts: []
         declared_chapter_variants:
         - remediation
         declared_manual_variants:
         - remediation
-        state: compiled
+        state: declared
       version_amenagee:
-        artifacts:
-        - NSI/build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf
+        artifacts: []
         declared_chapter_variants:
         - amenagee
         declared_manual_variants:
         - amenagee
-        state: compiled
+        state: declared
   1SPE:
     blockers:
     - code: anomalie:blocking_statuses
@@ -130,16 +135,22 @@ manuals:
     - code: anomalie:unclassified_types
       detail: '7'
       source: anomalies.unclassified_types
+    - code: livrable_non_compile
+      detail: absent
+      source: deliverable_matrix.1SPE.variants.banque_evaluations
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.1SPE.variants.livret_methodes
+    - code: livrable_non_compile
+      detail: partial
+      source: deliverable_matrix.1SPE.variants.livret_remediation
     - code: statuts_non_approuves
       detail: objets=1401; contrats=10
       source: manuals.1SPE.statuses
     current:
       artifacts:
       - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf
-      - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_evaluations.pdf
-      - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_methodes.pdf
       - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf
-      - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_remediation.pdf
       chapter_count: 10
       chapters:
       - 1SPE-DERIVATION-GLOBAL
@@ -185,28 +196,25 @@ manuals:
     - anomalie:blocking_statuses
     - anomalie:unassembled_objects
     - statuts_non_approuves
-    structural_compile_ready: true
+    structural_compile_ready: false
     variants:
       banque_evaluations:
-        artifacts:
-        - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_evaluations.pdf
+        artifacts: []
         declared_chapter_variants: []
         declared_manual_variants: []
-        state: compiled
+        state: absent
       livret_methodes:
-        artifacts:
-        - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_methodes.pdf
+        artifacts: []
         declared_chapter_variants:
         - methodes
         declared_manual_variants: []
-        state: compiled
+        state: partial
       livret_remediation:
-        artifacts:
-        - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_remediation.pdf
+        artifacts: []
         declared_chapter_variants:
         - remediation
         declared_manual_variants: []
-        state: compiled
+        state: partial
       manuel_eleve:
         artifacts:
         - Mathematiques/manuel-maths/build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf
@@ -362,12 +370,6 @@ manuals:
     - code: anomalie:blocking_statuses
       detail: '115'
       source: anomalies.blocking_statuses
-    - code: anomalie:chapters_not_in_manual
-      detail: '6'
-      source: anomalies.chapters_not_in_manual
-    - code: anomalie:unassembled_objects
-      detail: '23'
-      source: anomalies.unassembled_objects
     - code: chapitres_manquants
       detail: 6/12
       source: manuals.TNSI.chapters
@@ -378,25 +380,21 @@ manuals:
       detail: absent
       source: deliverable_matrix.TNSI.variants.banque_pratique
     - code: livrable_non_compile
-      detail: absent
-      source: deliverable_matrix.TNSI.variants.manuel_eleve
-    - code: livrable_non_compile
-      detail: partial
-      source: deliverable_matrix.TNSI.variants.manuel_professeur
-    - code: livrable_non_compile
-      detail: absent
+      detail: declared
       source: deliverable_matrix.TNSI.variants.projets
     - code: livrable_non_compile
-      detail: partial
+      detail: declared
       source: deliverable_matrix.TNSI.variants.remediations
     - code: livrable_non_compile
-      detail: partial
+      detail: declared
       source: deliverable_matrix.TNSI.variants.version_amenagee
     - code: statuts_non_approuves
       detail: objets=109; contrats=6
       source: manuals.TNSI.statuses
     current:
-      artifacts: []
+      artifacts:
+      - NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf
+      - NSI/build/MANUEL_TNSI/MANUEL_TNSI_professeur.pdf
       chapter_count: 6
       chapters:
       - TNSI-ALGORITHMIQUE
@@ -435,8 +433,6 @@ manuals:
       visual: false
     structural_blockers:
     - anomalie:blocking_statuses
-    - anomalie:chapters_not_in_manual
-    - anomalie:unassembled_objects
     - chapitres_manquants
     - statuts_non_approuves
     structural_compile_ready: false
@@ -452,37 +448,44 @@ manuals:
         declared_manual_variants: []
         state: absent
       manuel_eleve:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
+        declared_manual_variants:
+        - eleve
+        state: compiled
       manuel_professeur:
-        artifacts: []
+        artifacts:
+        - NSI/build/MANUEL_TNSI/MANUEL_TNSI_professeur.pdf
         declared_chapter_variants:
         - professeur
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - professeur
+        state: compiled
       projets:
         artifacts: []
         declared_chapter_variants: []
-        declared_manual_variants: []
-        state: absent
+        declared_manual_variants:
+        - projets
+        state: declared
       remediations:
         artifacts: []
         declared_chapter_variants:
         - remediation
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - remediation
+        state: declared
       version_amenagee:
         artifacts: []
         declared_chapter_variants:
         - amenagee
-        declared_manual_variants: []
-        state: partial
+        declared_manual_variants:
+        - amenagee
+        state: declared
   TSPE_2026_2027:
     blockers:
     - code: anomalie:blocking_statuses
-      detail: '670'
+      detail: '779'
       source: anomalies.blocking_statuses
     - code: anomalie:broken_meta_references
       detail: '2'
@@ -500,7 +503,7 @@ manuals:
       detail: cible a figer en Phase 1
       source: MISSION_PRIORITAIRE §10
     - code: statuts_non_approuves
-      detail: objets=659; contrats=11
+      detail: objets=768; contrats=11
       source: manuals.TSPE_2026_2027.statuses
     current:
       artifacts:
@@ -520,20 +523,20 @@ manuals:
       - TSPE-SUITES-LIMITES
       - TSPE-TRIGONOMETRIE
       statuses:
-        generated: 659
+        generated: 768
       totals:
         capacites: 67
-        corriges: 235
-        coups_de_pouce: 47
+        corriges: 277
+        coups_de_pouce: 67
         diagnostics: 0
         evaluations: 22
-        exercices_principaux: 213
-        methodes: 26
+        exercices_principaux: 255
+        methodes: 29
         projets: 0
         qcm: 11
         remediations: 41
         sections_cours: 58
-        td: 6
+        td: 8
     objective:
       directive: MISSION_PRIORITAIRE §10
       target_chapters: null
@@ -585,24 +588,24 @@ manuals:
         declared_manual_variants:
         - professeur
         state: compiled
-model_digest: sha256:b7468f6af46a9023af63fd1c79f025e88a53f91b6a22ce98899e7eef3ead9e28
+model_digest: sha256:55d31bf006dfa3df5da88619fb4e77c3f5f76c88b9f0aee99dbc90c8754d1433
 provenance:
-  branch: finalisation/collection-v1
+  branch: integration/1spe-bo2026-traceability
   dirty: false
   errors: []
-  generated_at_utc: '2026-08-11T09:12:52Z'
+  generated_at_utc: '2026-08-12T22:16:39Z'
   generator_files:
     scripts/baseline_qualification.py: sha256:ecf1e2fb7d6bdf533a67237739b40eef625f33b4d505890025efa9d92f4e34f9
-    scripts/build_manifest.py: sha256:86910a57486681520e421458d058b498455a4156ad0ef4e4357c54a94ab6c57e
-    scripts/inventory_assembly.py: sha256:85b002d11298e2fdeca5a7bc8a32436838769a02585ab4a8c690b7b5aea49704
-    scripts/inventory_collection.py: sha256:dcf301d0ed60715661d431df20896d30c0b84af05395768332ef5977297f0df2
+    scripts/build_manifest.py: sha256:f4084b0ff17bb5ecdfed872244afaf3616bf6911b64e0340d3c0ca3b4bdbba20
+    scripts/inventory_assembly.py: sha256:1759502372fc12faafb27b40d959979c9b63a439cef08ca56246d2d992c26047
+    scripts/inventory_collection.py: sha256:5205a49f432b86c97f72f0b0532371b90a6bad7a8bbee41e9b39f941c93e735c
     scripts/inventory_graph.py: sha256:3d7e846c534a490280e2a190ce5cf16d539ec87205259a9060c0abbb6c11bdcb
     scripts/inventory_pdf.py: sha256:0931c5864414ab0248cb14b9d0ca583de190f3e6633e9c6862908eb344a2892b
     scripts/inventory_reports.py: sha256:c98e84d7838c2446aa55bbb207209d83bb76f096ea62e9cf59ec2bc7cf6745ce
-  generator_sha256: sha256:e62e59c3f8b9135d9e1bcd00bd9e893683aeda289d7c42d97fc2591e75c3e02f
+  generator_sha256: sha256:cb824c44165ab3a63afa0271dbb33f79cddc30bf674c916d1186b58fa0e8f92c
   generator_version: 1
   git_available: true
-  head_sha: d0c2a1d477de072a5c910958ae891a133326a247
+  head_sha: 64cae13228d70e1414f86d0154f41ee314033b16
   modified_tracked: []
   tool_versions:
     git: git version 2.43.0
@@ -613,4 +616,4 @@ provenance:
   untracked_relevant: []
 schema_ref: audit/schemas/v1/matrice-livrables.schema.json
 schema_version: 1
-source_digest: sha256:fb90fc151e123c81d0caf13e19510470ea4d86e20e94a884fc0bec67cc85cebe
+source_digest: sha256:ba2df83fb25be4d2f82f4aecf55763ec3f443b124407d0eaeb82a44efa31460f

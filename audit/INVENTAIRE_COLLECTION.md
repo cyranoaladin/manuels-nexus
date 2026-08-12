@@ -10,23 +10,20 @@
 | 1SPE | Mathématiques Première | Mathematiques | Premiere specialite | 2026-2027 | 10 | 50 | 473 | 1401 | 1401 | manual |
 | TCOMPL | Mathématiques Terminale complémentaires | Mathematiques | Terminale mathematiques complementaires | courante | 9 | 50 | 36 | 150 | 150 | manual |
 | TEXPERTES | Mathématiques Terminale expertes | Mathematiques | Terminale mathematiques expertes | courante | 5 | 33 | 24 | 93 | 93 | manual |
-| TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 23 | 109 | 109 | — |
-| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 213 | 659 | 659 | manual |
+| TNSI | NSI Terminale | NSI | Terminale | courante | 6 | 59 | 23 | 109 | 109 | manual |
+| TSPE_2026_2027 | Mathématiques Terminale | Mathematiques | Terminale specialite | 2026-2027 | 11 | 67 | 255 | 768 | 768 | manual |
 
 ## Anomalies détectées
 
 | Catégorie | Nombre |
 |---|---|
-| blocking_statuses | 2802 |
-| unassembled_objects | 28 |
-| unavailable_inspiration_sources | 15 |
+| blocking_statuses | 2911 |
+| unattributed_pdfs | 10 |
 | unclassified_types | 7 |
-| chapters_not_in_manual | 6 |
+| unassembled_objects | 5 |
 | duplicate_assembly_objects | 3 |
 | broken_meta_references | 2 |
 | broken_latex_references | 1 |
-| missing_assemblers | 1 |
-| unattributed_pdfs | 1 |
 
 ### Échantillon déterministe
 - blocking_statuses: path=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-GLOBAL/contrat.yaml, manual=1SPE, chapter=1SPE-DERIVATION-GLOBAL, scope=contract, status=draft
@@ -37,26 +34,19 @@
 - broken_latex_references: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/build/maquette-v5/renvois.tex, champ=input, raison=cible LaTeX absente des sources suivies
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/cours/16_CONCLGN_bienayme_tchebychev.tex, cible=CONCLGN-C1, champ=capacites_codes[0], raison=reference capacites_codes absente ou ambigue
 - broken_meta_references: source=Mathematiques/manuel-maths/chapitres/TSPE-PROBABILITES/exercices/TSPE-PROBA-EX-009.tex, cible=TSPE-PROBA-C10, champ=capacites[0], raison=capacite META absente du contrat du chapitre
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-ALGORITHMIQUE/contrat.yaml, cible=TNSI-ALGORITHMIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-ARCHITECTURES-MATERIELLES-SY/contrat.yaml, cible=TNSI-ARCHITECTURES-MATERIELLES-SY, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-BASES-DE-DONNEES/contrat.yaml, cible=TNSI-BASES-DE-DONNEES, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-HISTOIRE-INFORMATIQUE/contrat.yaml, cible=TNSI-HISTOIRE-INFORMATIQUE, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
-- chapters_not_in_manual: source=NSI/chapitres/TNSI-LANGAGES-ET-PROGRAMMATION/contrat.yaml, cible=TNSI-LANGAGES-ET-PROGRAMMATION, champ=CHAPITRES, raison=chapitre absent de tout assemblage de manuel
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-001.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-002.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
 - duplicate_assembly_objects: source=Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-DERIVATION-LOCAL/exercices/1SPE-DERLOCAL-EX-005.tex, champ=math:static:Mathematiques/manuel-maths/build/maquette-v5/maquette.tex, raison=objet inclus 2 fois dans le meme assemblage LaTeX
-- missing_assemblers: source=NSI/scripts/assemble_manuel.py, cible=TNSI, champ=manuel, raison=aucun assembleur de manuel suivi
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/03_simuler_variable.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/04_fonction_moyenne.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/05_distance_moyenne_esperance.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
 - unassembled_objects: source=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, cible=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/06_proportion_2sigma.tex, champ=assemblages_declares, raison=objet META exclu de tous les assemblages declares
-- unattributed_pdfs: source=Mathematiques/manuel-maths/build/specimen.pdf, cible=Mathematiques/manuel-maths/build/specimen.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
-- unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/amenagee/1NSI-TC-AM-EXTRAIT.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_version_amenagee_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/07_td1_station_meteo.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_td_types_construits.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C1.tex, cible=NSI/corpus_nsi/03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_tuples.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
-- unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C1.tex, cible=NSI/corpus_nsi/03_progressions/supports/premiere/P04/P04_cours_types_construits.md, champ=sources_inspiration[1], raison=source d'inspiration absente des sources suivies
-- unavailable_inspiration_sources: source=NSI/chapitres/1NSI-TYPES-CONSTRUITS/cours/1NSI-TC-COURS-C2.tex, cible=NSI/corpus_nsi/03_progressions/fiches_cours/premiere/P04/P04_fiche_cours_listes.md, champ=sources_inspiration[0], raison=source d'inspiration absente des sources suivies
+- unattributed_pdfs: source=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf, cible=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_premiere.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- unattributed_pdfs: source=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf, cible=NSI/corpus_nsi/00_programmes_officiels/programme_nsi_terminale.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- unattributed_pdfs: source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_aides.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- unattributed_pdfs: source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_corrige.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_corrige.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
+- unattributed_pdfs: source=NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf, cible=NSI/corpus_nsi/latex/packs/premiere/P13/P13_cours.pdf, champ=attribution, raison=PDF suivi sans attribution fiable a un livrable
 - unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-PROBA-COND/cours/15_algorithmique_monte_carlo.tex, id=1SPE-PROBCOND-ALG-001, source_type=algorithme
 - unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/15_experimentations.tex, id=1SPE-VARALEA-ALG-001, source_type=algorithme
 - unclassified_types: path=Mathematiques/manuel-maths/chapitres/1SPE-VARIABLES-ALEATOIRES/cours/experimentations/02_frequences_lettres.tex, id=1SPE-VARALEA-ALG-002, source_type=algorithme
@@ -82,10 +72,10 @@
 - Mathematiques/manuel-maths/DIRECTIVES_EN_COURS.md | 73 | directive:collection | seuil_exercices_declares | 50 | None | ouvert
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 36 | manual:1SPE | chapitres | 13 | 10 | contredit
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 73 | unresolved:portee_chapitres_ambigue | chapitres | 3 | None | ouvert
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | coups_de_pouce | 21 | 47 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 213 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | coups_de_pouce | 20 | 47 | contredit
-- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 213 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | coups_de_pouce | 21 | 67 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 96 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 255 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | coups_de_pouce | 20 | 67 | contredit
+- Mathematiques/manuel-maths/ETAT_COLLECTION.md | 97 | manual:TSPE_2026_2027 | exercices_principaux | 50 | 255 | contredit
 - Mathematiques/manuel-maths/ETAT_COLLECTION.md | 106 | manual:TSPE_2026_2027 | chapitres | 4 | 11 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | corriges | 49 | 52 | contredit
 - Mathematiques/manuel-maths/MISSION_LOG.md | 7 | chapter:1SPE-SUITES | exercices_principaux | 49 | 50 | contredit
