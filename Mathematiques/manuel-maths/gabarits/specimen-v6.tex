@@ -1,0 +1,230 @@
+% specimen-v6.tex — Spécimen de la charte v6 « collection premium »
+% Compile : cd manuel-maths && TEXINPUTS=gabarits: lualatex gabarits/specimen-v6.tex
+% Démontre : couverture, avant-propos, mode d'emploi 9 temps, sommaire stylé,
+% ouverture de chapitre v5, cours avec figures de la bibliothèque, exercices
+% avec onglets colorés par rubrique, figures NSI, 4e de couverture.
+\documentclass{gabarits/nexus-manuel-v5}
+\usepackage{gabarits/nexus-charte-v6}
+\matiere{Mathématiques}\niveau{Première spécialité}
+
+\begin{document}
+
+% ============================= COUVERTURE ==================================
+\couvertureManuel{Mathématiques}{Première spécialité}%
+  {Un manuel structuré pour apprendre, s'entraîner, se tester et progresser,
+   avec une progression claire, des méthodes explicites et des ressources de
+   remédiation.}{Édition 2026-2027}
+
+% ============================= AVANT-PROPOS ================================
+\begin{avantproposNexus}{Un manuel pensé comme un parcours : chaque chapitre
+  t'emmène de la découverte d'une notion jusqu'à la certitude de la maîtriser.}
+Ce manuel de mathématiques de première spécialité a été pensé comme un outil
+cohérent, progressif et autonome. Il accompagne l'élève du repérage des
+notions à la maîtrise des compétences attendues, en articulant cours,
+méthodes, exercices, auto-évaluation et remédiation.
+
+Chaque chapitre suit un parcours pédagogique en \textbf{9 temps} : une
+situation d'ouverture, un diagnostic, un cours structuré, des méthodes, des
+exercices gradués, une auto-évaluation et des ressources de remédiation.
+Cette progression vise à rendre l'apprentissage visible et à aider chaque
+élève à avancer à son rythme.
+
+Trois parcours de difficulté (\parcoursUn~guidé, \parcoursDeux~baccalauréat,
+\parcoursTrois~approfondissement) permettent à chacun de travailler à son
+niveau, et les renvois explicites entre exercices, méthodes et fiches de
+remédiation transforment chaque difficulté en piste de travail concrète.
+\signatureAvantPropos{L'équipe pédagogique Nexus Réussite}
+\end{avantproposNexus}
+
+% ============================= MODE D'EMPLOI ===============================
+\begin{modeEmploiNexus}
+\rangeeTemps
+  {\nxCarteTemps{1}{ouverture}{\icnOuverture[chapcolor]}{Ouverture}
+    {Une situation concrète introduit la notion du chapitre et motive la
+     suite du travail, sans prérequis.}}
+  {\nxCarteTemps{2}{diagnostic}{\icnDiagnostic}{QCM diagnostique}
+    {Dix questions pour évaluer les prérequis. Le résultat oriente vers une
+     remédiation ciblée si besoin.}}
+  {\nxCarteTemps{3}{cours}{\icnCours[chapcolor]}{Cours}
+    {L'essentiel, les démonstrations au programme et des approfondissements
+     signalés~\icnEtoile[chapcolor], hors évaluation.}}
+\rangeeTemps
+  {\nxCarteTemps{4}{methodes}{\icnMethode[rubMethodes]}{Méthodes}
+    {Chaque méthode suit le même schéma : pas à pas, exemple résolu commenté,
+     pièges à éviter.}}
+  {\nxCarteTemps{5}{exercices}{\icnEntrainement}{Exercices}
+    {Trois parcours gradués (\parcoursUn{}, \parcoursDeux{}, \parcoursTrois{}),
+     chronométrés, avec coups de pouce en fin de chapitre.}}
+  {\nxCarteTemps{6}{td}{\icnFilRouge}{Fil rouge (TD)}
+    {Un travail dirigé traverse plusieurs notions du chapitre dans un
+     contexte appliqué.}}
+\rangeeTemps
+  {\nxCarteTemps{7}{autoevaluation}{\icnAutoEval}{Auto-évaluation}
+    {Une grille de compétences pour situer son niveau, capacité par capacité,
+     avant l'évaluation.}}
+  {\nxCarteTemps{8}{evaluation}{\icnEvaluation}{Évaluations}
+    {Deux sujets de difficulté comparable (A et B), utilisables en classe ou
+     en autonomie.}}
+  {\nxCarteTemps{9}{remediation}{\icnRemediation}{Remédiation}
+    {Des fiches de réparation ciblées : chaque erreur diagnostiquée renvoie
+     vers la fiche utile.}}
+\bandeauPictos
+\end{modeEmploiNexus}
+
+% ============================= SOMMAIRE ====================================
+\sommaireNexus
+
+% ============================= OUVERTURE DE CHAPITRE =======================
+\ouverturechapitreV{Suites numériques}{%
+  \begin{itemize}
+    \item C1 --- Je sais calculer les termes d'une suite (explicite ou
+      récurrence), à la main et en Python.
+    \item C2 --- Je sais montrer qu'une suite est arithmétique et exprimer
+      son terme général.
+    \item C3 --- Je sais montrer qu'une suite est géométrique et exprimer
+      son terme général.
+    \item C4 --- Je sais étudier le sens de variation d'une suite par la
+      méthode adaptée.
+  \end{itemize}
+}{%
+  Deux offres d'épargne : versement fixe mensuel contre intérêts composés.
+  À partir de quand la seconde dépasse-t-elle la première ? Résolue au TD fil
+  rouge avec les outils du chapitre.
+}{%
+  \parcoursUn~14 h \quad \parcoursDeux~11 h \quad \parcoursTrois~10 h
+}
+
+% ============================= COURS + FIGURES =============================
+\rubrique{Cours}
+\section{Sens de variation d'une suite}
+
+\begin{nxdef}[D1]
+Une suite $(u_n)$ est \textbf{croissante} si, pour tout entier naturel $n$,
+$u_{n+1} \geqslant u_n$.
+\end{nxdef}
+
+\exemple{La suite définie par $u_n = 3 \times 0{,}5^n + 1$ est décroissante et
+semble se rapprocher de $1$ : le nuage de points le montre immédiatement.}
+
+\begin{nxfigure}{Premiers termes de la suite $u_n = 3\times 0{,}5^n + 1$}
+  \figSuite{3*0.5^x + 1}{8}
+\end{nxfigure}
+
+\section{Retour sur le second degré (prérequis R4)}
+
+\begin{nxfigure}{Forme canonique : sommet et axe de symétrie}
+  \figParabole[xmin=-1, xmax=5, ymin=-3, ymax=6]{1}{2}{-2}
+\end{nxfigure}
+
+\erreurFrequente{Confondre $u_{n+1}$ (le terme suivant) et $u_n + 1$ (le terme
+courant augmenté de 1). Sur le nuage de points, $u_{n+1}$ est l'ordonnée du
+point \emph{d'abscisse} $n+1$.}
+
+\section{Deux figures de la bibliothèque de collection}
+
+\begin{nxfigure}{Cercle trigonométrique : image d'un réel $x$}
+  \figCercleTrigo[50]
+\end{nxfigure}
+
+\begin{nxfigure}{Arbre pondéré : structure type des probabilités conditionnelles}
+  \figArbreProba{A}{B}{0{,}6}{0{,}4}{0{,}3}{0{,}7}{0{,}8}{0{,}2}
+\end{nxfigure}
+
+\begin{nxfigure}{Somme de deux vecteurs}
+  \figSommeVecteurs{3}{1}{1}{2}
+\end{nxfigure}
+
+\begin{nxfigure}{Intervalle $[-2\,;\,3[$ sur la droite des réels}
+  \figIntervalle{-4}{5}{-2}{3}{[}{[}{$-2 \leqslant x < 3$}
+\end{nxfigure}
+
+% ============================= EXERCICES (onglet bleu) =====================
+\debutrubrique{Exercices}
+
+\begin{exercice}{1SPE-SUITES-EX-901}{1}{10}
+On considère la suite $(u_n)$ définie par $u_0 = 5$ et, pour tout entier
+naturel $n$, $u_{n+1} = \frac{1}{2}u_n + 3$.
+\begin{enumerate}
+  \item Calculer $u_1$, $u_2$ et $u_3$.
+  \item Représenter les quatre premiers termes sur un nuage de points.
+  \item Conjecturer le sens de variation de $(u_n)$.
+\end{enumerate}
+\end{exercice}
+
+\begin{exercice}{1SPE-SUITES-EX-902}{2}{15}
+Une usine produit $10\,000$ pièces la première année. Chaque année, la
+production diminue de $10\,\%$.
+\begin{enumerate}
+  \item Exprimer $u_{n+1}$ en fonction de $u_n$. Quelle est la nature de la
+    suite $(u_n)$ ?
+  \item Exprimer $u_n$ en fonction de $n$, puis calculer $u_5$ à l'unité.
+\end{enumerate}
+\end{exercice}
+
+% ============================= FIGURES NSI =================================
+\debutrubrique{Méthodes}
+\section*{\textcolor{rubMethodes}{Extraits NSI de la bibliothèque (mêmes gabarits)}}
+
+\begin{nxfigure}{Arbre binaire de recherche}
+  \begin{nxarbre}
+    \node[noeud]{8}
+      child { node[noeud]{3}
+        child { node[feuille]{1} }
+        child { node[noeud]{6}
+          child { node[feuille]{4} }
+          child { node[feuille]{7} } } }
+      child { node[noeud]{10}
+        child[missing]
+        child { node[noeud]{14}
+          child { node[feuille]{13} }
+          child[missing] } };
+  \end{nxarbre}
+\end{nxfigure}
+
+\begin{nxfigure}{Graphe non orienté à cinq sommets}
+  \figGraphe{A/0/1.5, B/2/2.2, C/4/1.5, D/1/0, E/3/0}%
+    {A/B, B/C, A/D, D/E, E/C, B/E}
+\end{nxfigure}
+
+\begin{nxfigure}{Liste chaînée à trois cellules}
+  \figListeChainee{5, 12, 9}
+\end{nxfigure}
+
+\begin{nxfigure}{Pile après trois empilements}
+  \figPile{4, 8, 15}
+\end{nxfigure}
+
+\begin{nxfigure}{File d'attente}
+  \figFile{4, 8, 15}
+\end{nxfigure}
+
+\begin{nxfigure}{L'octet $10110101$ et les puissances de deux}
+  \figOctet{1,0,1,1,0,1,0,1}
+\end{nxfigure}
+
+\begin{nxfigure}{Requête HTTP et réponse du serveur}
+  \figClientServeur{GET /index.html}{200 OK + page}
+\end{nxfigure}
+
+\begin{nxfigure}{État mémoire après trois affectations}
+  \figMemoire{x/7, mot/nsi, t/{[1, 2, 3]}}
+\end{nxfigure}
+
+% ============================= 4e DE COUVERTURE ============================
+\begin{quatriemeCouverture}{Apprendre, s'entraîner, se tester, progresser :
+  la collection Nexus Réussite accompagne chaque élève jusqu'à la maîtrise.}
+\atoutCouverture{\icnCours[white]}{Un cours structuré en strates : l'essentiel,
+  les démonstrations au programme, les approfondissements signalés.}
+\atoutCouverture{\icnMethode[white]}{Des méthodes pas à pas avec exemples
+  résolus commentés et pièges à éviter.}
+\atoutCouverture{\icnEntrainement[white]}{Trois parcours d'exercices gradués et
+  chronométrés, avec coups de pouce.}
+\atoutCouverture{\icnAutoEval[white]}{Une auto-évaluation par compétences et
+  deux sujets d'évaluation par chapitre.}
+\atoutCouverture{\icnRemediation[white]}{Des fiches de remédiation ciblées,
+  reliées aux erreurs réellement diagnostiquées.}
+\atoutCouverture{\icnPython[white]}{Python présent partout où le programme
+  l'exige : activités, exercices et fil rouge.}
+\end{quatriemeCouverture}
+
+\end{document}

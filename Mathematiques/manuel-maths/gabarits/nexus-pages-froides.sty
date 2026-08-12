@@ -1,0 +1,155 @@
+% nexus-pages-froides.sty — Pages liminaires designées (Nexus Réussite)
+% Avant-propos composé, mode d'emploi « 9 temps » en cartes, sommaire stylé.
+% Remplace les pages froides austères des volumes v4/v5.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gabarits/nexus-pages-froides}[2026/08/12 v1.0 Pages liminaires Nexus]
+
+\RequirePackage{tikz}
+\RequirePackage{tcolorbox}
+
+% ===========================================================================
+%  COULEURS DE RUBRIQUE (fournies par nexus-charte-v6 ; filet de sécurité)
+% ===========================================================================
+\ifcsname nxRubCol@cours\endcsname\else
+  \colorlet{nxRub@fallback}{chapcolor}
+\fi
+\newcommand{\nxRubColOr}[1]{%
+  \ifcsname nxRubCol@#1\endcsname
+    \csname nxRubCol@#1\endcsname
+  \else chapcolor\fi
+}
+
+% ===========================================================================
+%  AVANT-PROPOS COMPOSÉ
+% ===========================================================================
+% \begin{avantproposNexus}{phrase d'accroche}
+%   paragraphes...
+%   \signatureAvantPropos{L'équipe pédagogique Nexus Réussite}
+% \end{avantproposNexus}
+\newenvironment{avantproposNexus}[1]{%
+  \clearpage\thispagestyle{empty}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[chapcolor] ([xshift=0mm]current page.north west)
+      rectangle ([shift={(7mm,-297mm)}]current page.north west);
+    \node[anchor=north west, text=chapcolor, inner sep=0pt]
+      at ([shift={(20mm,-30mm)}]current page.north west)
+      {\titrefont\fontsize{24}{28}\selectfont Avant-propos};
+    \node[anchor=north west, text=encre!65, inner sep=0pt, text width=138mm]
+      at ([shift={(20mm,-43mm)}]current page.north west)
+      {\fontsize{11.5}{16.5}\selectfont\itshape #1};
+  \end{tikzpicture}\par
+  \vspace*{52mm}%
+  \noindent\begin{minipage}{\textwidth}
+  \setlength{\parskip}{0.6em}\fontsize{10}{15}\selectfont
+}{%
+  \end{minipage}\clearpage
+}
+\newcommand{\signatureAvantPropos}[1]{%
+  \par\bigskip\noindent
+  \textcolor{chapcolor}{\rule{22mm}{1.4pt}}\par\smallskip
+  {\titrefont\color{encre}#1}\par
+}
+
+% ===========================================================================
+%  MODE D'EMPLOI — les 9 temps en cartes (grille 3 × 3)
+% ===========================================================================
+% \nxCarteTemps{n}{rubrique-clef}{picto}{Titre}{description}
+\newcommand{\nxCarteTemps}[5]{%
+  \begin{tcolorbox}[enhanced, boxrule=0pt, frame hidden, arc=2.5pt,
+    colback=grisdoux!55, height=41mm, left=7pt, right=7pt, top=7pt, bottom=6pt,
+    borderline north={2.2pt}{0pt}{\nxRubColOr{#2}},
+    overlay={\node[anchor=north east, inner sep=0pt, opacity=0.16,
+      font=\titrefont\fontsize{30}{30}\selectfont,
+      text=\nxRubColOr{#2}]
+      at ([shift={(-2.5mm,-1.5mm)}]frame.north east) {#1};}]
+    {\color{\nxRubColOr{#2}}#3}\par\vspace{2pt}
+    {\titrefont\fontsize{8.5}{10.5}\selectfont
+     \color{encre}\MakeUppercase{#4}}\par\vspace{2.5pt}
+    {\sffamily\fontsize{7.6}{10}\selectfont\color{encre!75}#5\par}
+  \end{tcolorbox}%
+}
+% Grille : \modeEmploiNexus{<9 appels \nxCarteTemps rangés par 3>}
+\newenvironment{modeEmploiNexus}{%
+  \clearpage\thispagestyle{empty}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north west, text=chapcolor, inner sep=0pt]
+      at ([shift={(20mm,-24mm)}]current page.north west)
+      {\titrefont\fontsize{24}{28}\selectfont Mode d'emploi};
+    \node[anchor=north west, text=encre!65, inner sep=0pt, text width=155mm]
+      at ([shift={(20mm,-36mm)}]current page.north west)
+      {\fontsize{10.5}{15}\selectfont\itshape
+       Chaque chapitre suit un parcours en 9 temps, de la découverte
+       jusqu'à l'évaluation. Voici comment le manuel travaille pour toi.};
+  \end{tikzpicture}%
+  \vspace*{34mm}%
+  \setlength{\parindent}{0pt}%
+}{\clearpage}
+% Rangée de 3 cartes
+\newcommand{\rangeeTemps}[3]{%
+  \par\noindent
+  \begin{minipage}[t]{0.325\textwidth}#1\end{minipage}\hfill
+  \begin{minipage}[t]{0.325\textwidth}#2\end{minipage}\hfill
+  \begin{minipage}[t]{0.325\textwidth}#3\end{minipage}\par\vspace{4mm}
+}
+% Bandeau « lire les pictos » (parcours, Python, chrono, oral)
+\newcommand{\bandeauPictos}{%
+  \par\vspace{2mm}
+  \begin{tcolorbox}[enhanced, boxrule=0pt, frame hidden, arc=2.5pt,
+    colback=chapcolor!7, left=9pt, right=9pt, top=7pt, bottom=7pt,
+    borderline west={2.6pt}{0pt}{chapcolor}]
+    {\titrefont\fontsize{8}{10}\selectfont\color{chapcolor}
+      \MakeUppercase{Lire les repères}}\par\smallskip
+    {\sffamily\fontsize{8.2}{12}\selectfont\color{encre!80}
+     \parcoursUn~exercice guidé\quad
+     \parcoursDeux~niveau baccalauréat\quad
+     \parcoursTrois~recherche et approfondissement\quad
+     \icnChrono[encre!60]~durée conseillée\quad
+     \icnPython[chapcolor]~activité Python\quad
+     \icnOral[chapcolor]~à l'oral\par}
+  \end{tcolorbox}%
+}
+
+% ===========================================================================
+%  SOMMAIRE STYLÉ — numéros de chapitre en pavés couleur
+% ===========================================================================
+\RequirePackage{tocbasic}
+\DeclareTOCStyleEntry[
+  beforeskip=7pt,
+  entryformat=\nxTocChapEntry,
+  entrynumberformat=\nxTocChapNum,
+  pagenumberformat=\nxTocChapPage,
+  numwidth=11mm,
+  linefill=\hfill,
+]{tocline}{chapter}
+\newcommand{\nxTocChapEntry}[1]{{\titrefont\fontsize{10.5}{15}\selectfont\color{encre}#1}}
+\newcommand{\nxTocChapNum}[1]{%
+  \tikz[baseline=-2.4pt]\node[fill=chapcolor, text=white, rounded corners=1.6pt,
+    minimum width=7mm, minimum height=5.4mm, inner sep=1pt,
+    font=\titrefont\fontsize{9}{9}\selectfont]{#1};%
+}
+\newcommand{\nxTocChapPage}[1]{{\titrefont\fontsize{10}{12}\selectfont\color{chapcolor}#1}}
+\DeclareTOCStyleEntry[
+  beforeskip=1.5pt,
+  entryformat=\nxTocSecEntry,
+  pagenumberformat=\nxTocSecPage,
+  indent=13mm,
+]{tocline}{section}
+\newcommand{\nxTocSecEntry}[1]{{\sffamily\fontsize{8.8}{12}\selectfont\color{encre!78}#1}}
+\newcommand{\nxTocSecPage}[1]{{\sffamily\fontsize{8.8}{12}\selectfont\color{encre!55}#1}}
+% Page de sommaire avec en-tête composé
+\newcommand{\sommaireNexus}{%
+  \clearpage\thispagestyle{empty}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north west, text=chapcolor, inner sep=0pt]
+      at ([shift={(20mm,-24mm)}]current page.north west)
+      {\titrefont\fontsize{24}{28}\selectfont Sommaire};
+    \draw[chapcolor, line width=1.6pt]
+      ([shift={(20mm,-33mm)}]current page.north west) -- ++(26mm,0);
+  \end{tikzpicture}%
+  \vspace*{20mm}\par
+  \begingroup
+    \renewcommand*{\chapterheadstartvskip}{}%
+    \@starttoc{toc}%
+  \endgroup
+  \clearpage
+}

@@ -1,0 +1,185 @@
+% nexus-couverture.sty — Couvertures de collection Nexus Réussite
+% Première de couverture pleine page + quatrième de couverture.
+% Corrige la couverture v4 : logo posé sur carte blanche (plus de bande qui le
+% coupe), composition ancrée en bas, motif génératif par discipline, bandeau
+% niveau, identité de collection.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gabarits/nexus-couverture}[2026/08/12 v1.0 Couvertures Nexus]
+
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+
+% ===========================================================================
+%  MOTIFS GÉNÉRATIFS (blanc translucide sur aplat chapcolor)
+% ===========================================================================
+% Maths : faisceau de courbes + grille de points + cercle d'horizon
+\newcommand{\nxCouvMotifMaths}{%
+  \begin{scope}
+    \clip (current page.north west) rectangle (current page.south east);
+    % grille de points discrète
+    \foreach \gx in {0,1,...,20}{
+      \foreach \gy in {0,1,...,29}{
+        \fill[white, opacity=0.045]
+          ([shift={(\gx*10.5mm,-\gy*10.5mm)}]current page.north west)
+          circle (0.45pt);
+      }}
+    % faisceau de paraboles
+    \foreach \k/\o in {0.7/0.10, 1.1/0.08, 1.7/0.06, 2.6/0.045}{
+      \draw[white, opacity=\o, line width=1.1pt]
+        plot[domain=-5:5, samples=80]
+        ({\x*18mm+105mm},{-297mm+\k*\x*\x*6mm+30mm});
+    }
+    % sinusoïde traversante
+    \draw[white, opacity=0.10, line width=1.1pt]
+      plot[domain=0:21, samples=120]
+      ({\x*10mm},{-140mm+18mm*sin(\x*55)});
+    % cercle d'horizon
+    \draw[white, opacity=0.09, line width=1.4pt]
+      ([shift={(172mm,-52mm)}]current page.north west) circle (46mm);
+    \draw[white, opacity=0.05, line width=1.4pt]
+      ([shift={(172mm,-52mm)}]current page.north west) circle (62mm);
+  \end{scope}
+}
+% NSI : graphe de sommets reliés + train binaire
+\newcommand{\nxCouvMotifNSI}{%
+  \begin{scope}
+    \clip (current page.north west) rectangle (current page.south east);
+    \foreach \p/\q [count=\i] in {
+        30/40, 74/22, 118/48, 162/26, 186/70, 150/95, 100/85, 55/95,
+        20/130, 80/140, 140/135, 185/155, 45/180, 110/185, 165/205,
+        25/225, 90/230, 150/245, 60/262, 130/270}{
+      \fill[white, opacity=0.13]
+        ([shift={(\p mm,-\q mm)}]current page.north west) circle (1.5pt);
+    }
+    \foreach \a/\b/\c/\d in {
+        30/40/74/22, 74/22/118/48, 118/48/162/26, 162/26/186/70,
+        186/70/150/95, 150/95/100/85, 100/85/55/95, 55/95/30/40,
+        55/95/20/130, 100/85/80/140, 150/95/140/135, 186/70/185/155,
+        20/130/45/180, 80/140/110/185, 140/135/165/205, 140/135/110/185,
+        45/180/25/225, 110/185/90/230, 165/205/150/245, 90/230/60/262,
+        150/245/130/270, 45/180/80/140, 20/130/80/140}{
+      \draw[white, opacity=0.055, line width=0.8pt]
+        ([shift={(\a mm,-\b mm)}]current page.north west) --
+        ([shift={(\c mm,-\d mm)}]current page.north west);
+    }
+    \node[anchor=north east, text=white, opacity=0.06, align=right,
+      font=\ttfamily\fontsize{9}{13}\selectfont]
+      at ([shift={(-8mm,-160mm)}]current page.north east)
+      {01001110 01010011 01001001\\
+       01001110 01000101 01011000\\
+       01010101 01010011 00100001};
+  \end{scope}
+}
+% Motif générique (autres disciplines éventuelles)
+\newcommand{\nxCouvMotifGenerique}{\nxCouvMotifMaths}
+
+% ===========================================================================
+%  PREMIÈRE DE COUVERTURE
+% ===========================================================================
+% \couvertureManuel[motif]{Titre discipline}{Niveau}{sous-titre}{édition}
+%   #1 motif : nxCouvMotifMaths | nxCouvMotifNSI (défaut selon \matiere)
+%   #2 ex. Mathématiques   #3 ex. Première spécialité
+%   #4 phrase de promesse  #5 ex. Édition 2026-2027
+\newcommand{\nxCouvChoixMotif}{%
+  \ifdefined\nexus@matiere
+    \expandafter\ifstrequal\expandafter{\nexus@matiere}{NSI}%
+      {\nxCouvMotifNSI}{\nxCouvMotifMaths}%
+  \else
+    \nxCouvMotifMaths
+  \fi
+}
+\newcommand{\couvertureManuel}[5][]{%
+  \thispagestyle{empty}%
+  \begin{tikzpicture}[remember picture, overlay]
+    % Aplat pleine page
+    \fill[chapcolor] (current page.north west) rectangle (current page.south east);
+    \fill[chapcolor!82!black] ([yshift=42mm]current page.south west)
+      rectangle (current page.south east);
+    % Motif génératif
+    \ifstrempty{#1}{\nxCouvChoixMotif}{\csname #1\endcsname}%
+    % --- Carte logo (fond blanc arrondi : le logo n'est plus jamais coupé) ---
+    \node[fill=white, rounded corners=3pt, inner xsep=10pt, inner ysep=8pt,
+      anchor=north west]
+      at ([shift={(16mm,-14mm)}]current page.north west)
+      {\includegraphics[width=34mm]{gabarits/logo_nexus.png}};
+    % --- Étiquette collection en haut à droite ---
+    \node[anchor=north east, text=white, font=\titrefont\small,
+      opacity=0.92]
+      at ([shift={(-16mm,-18mm)}]current page.north east)
+      {\addfontfeatures{LetterSpace=16}\MakeUppercase{Collection lycée}};
+    % --- Bloc titre, ancré aux deux tiers ---
+    \node[anchor=south west, text=white, inner sep=0pt]
+      at ([shift={(16mm,118mm)}]current page.south west)
+      {\begin{minipage}{158mm}
+        {\titrefont\fontsize{13}{16}\selectfont
+          \addfontfeatures{LetterSpace=22}\MakeUppercase{#2}}\\[7mm]
+        {\titrefont\fontsize{40}{44}\selectfont #3}\\[9mm]
+        {\color{white!88!chapcolor}\fontsize{10.5}{15}\selectfont\itshape #4}
+      \end{minipage}};
+    % Filet de respiration sous le bloc titre
+    \draw[white, opacity=0.55, line width=1.6pt]
+      ([shift={(16mm,110mm)}]current page.south west) -- ++(34mm,0);
+    % --- Bandeau bas : marque + édition ---
+    \node[anchor=west, text=white, font=\titrefont\fontsize{11}{14}\selectfont]
+      at ([shift={(16mm,21mm)}]current page.south west)
+      {NEXUS\,\raisebox{0.18ex}{\tikz\fill[white] (0,0) -- (0.28em,0.4em)
+        -- (0.56em,0) -- (0.28em,-0.4em) -- cycle;}\,RÉUSSITE};
+    \node[anchor=west, text=white, opacity=0.75,
+      font=\sffamily\fontsize{8}{11}\selectfont]
+      at ([shift={(16mm,14mm)}]current page.south west)
+      {Apprendre \textperiodcentered\ S'entraîner \textperiodcentered\
+       Se tester \textperiodcentered\ Progresser};
+    \node[anchor=east, draw=white, line width=0.8pt, rounded corners=2pt,
+      inner xsep=9pt, inner ysep=5pt, text=white,
+      font=\titrefont\fontsize{9}{11}\selectfont]
+      at ([shift={(-16mm,18mm)}]current page.south east)
+      {#5};
+  \end{tikzpicture}%
+  \null\clearpage
+}
+
+% ===========================================================================
+%  QUATRIÈME DE COUVERTURE
+% ===========================================================================
+% \begin{quatriemeCouverture}{accroche}
+%   ... contenu libre (liste des points forts) ...
+% \end{quatriemeCouverture}
+\newenvironment{quatriemeCouverture}[1]{%
+  \clearpage
+  \thispagestyle{empty}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[encre] (current page.north west) rectangle (current page.south east);
+    \draw[chapcolor, line width=3pt]
+      (current page.north west) -- (current page.north east);
+    \node[anchor=north west, text=white, inner sep=0pt]
+      at ([shift={(20mm,-24mm)}]current page.north west)
+      {\begin{minipage}{170mm}
+        {\titrefont\fontsize{17}{22}\selectfont\color{white}#1}
+      \end{minipage}};
+  \end{tikzpicture}\par
+  \vspace*{48mm}%
+  \noindent\begin{minipage}{\dimexpr\textwidth\relax}%
+  \color{white}\sffamily\fontsize{9.5}{14.5}\selectfont
+}{%
+  \end{minipage}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \node[fill=white, rounded corners=3pt, inner xsep=9pt, inner ysep=7pt,
+      anchor=south west]
+      at ([shift={(20mm,16mm)}]current page.south west)
+      {\includegraphics[width=27mm]{gabarits/logo_nexus.png}};
+    \node[anchor=south east, draw=white!55!encre, line width=0.6pt,
+      inner sep=6pt, text=white!75!encre,
+      font=\ttfamily\fontsize{7.5}{9}\selectfont, align=center]
+      at ([shift={(-20mm,16mm)}]current page.south east)
+      {ISBN --- à attribuer\\nexus-reussite};
+  \end{tikzpicture}%
+  \null\clearpage
+}
+% Carte « point fort » pour la 4e (picto + texte)
+\newcommand{\atoutCouverture}[2]{%
+  \par\medskip\noindent
+  \begin{minipage}[t]{9mm}\color{chapcolor!60!white}#1\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-10mm\relax}
+    \color{white}\sffamily\fontsize{9.5}{13.5}\selectfont#2
+  \end{minipage}\par
+}
