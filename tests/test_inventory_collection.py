@@ -8751,6 +8751,40 @@ def test_manifest_backed_nsi_assembler_rejects_symlink_manifest(
     _assert_manifest_backed_nsi_rejected(inventory, assembler, "symbolique")
 
 
+def test_manifest_backed_nsi_assembler_rejects_symlink_parent_manifest(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/1NSI.json"
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": manifest},
+        manifests={
+            manifest: _nsi_book_manifest("1NSI", ["1NSI-INTERNAL"]),
+        },
+        chapters_by_manual={
+            "1NSI": ["1NSI-INTERNAL", "1NSI-EXTERNAL"],
+        },
+    )
+    external_root = tmp_path.parent / f"{tmp_path.name}-external-manifests"
+    _write(
+        external_root / "books/1NSI.json",
+        json.dumps(_nsi_book_manifest("1NSI", ["1NSI-EXTERNAL"])),
+    )
+    manifest_parent = tmp_path / "NSI/manifests"
+    shutil.rmtree(manifest_parent)
+    manifest_parent.symlink_to(external_root, target_is_directory=True)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "symbolique")
+    assert not [
+        assembly
+        for assembly in inventory["assemblies"]
+        if assembly["assembler"] == assembler
+        and "1NSI-EXTERNAL" in assembly["chapters"]
+    ]
+
+
 def test_manifest_backed_nsi_assembler_rejects_mutated_manifest_mapping(
     tmp_path: Path, inventory_module
 ) -> None:

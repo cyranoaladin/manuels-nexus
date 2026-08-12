@@ -5,6 +5,7 @@ from __future__ import annotations
 import ast
 import fnmatch
 import json
+import os
 import stat
 from collections import Counter, defaultdict
 from dataclasses import dataclass
@@ -19,6 +20,10 @@ except ModuleNotFoundError:  # direct execution through inventory_collection.py
 
 class AssemblyAnalysisError(RuntimeError):
     """Raised when an assembler cannot be inspected safely."""
+
+
+class _ManifestConfinementError(ValueError):
+    """Raised when a manifest path cannot be opened without following links."""
 
 
 _AUDITED_SELECTION_CONSTANTS = frozenset(
@@ -1586,6 +1591,94 @@ def _add_dynamic_dependencies(
             )
 
 
+def _read_confined_manifest(root: Path, relative_path: PurePosixPath) -> str:
+    nofollow = getattr(os, "O_NOFOLLOW", 0)
+    directory_flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | nofollow
+    try:
+        directory_fd = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
+    except OSError as exc:
+        raise _ManifestConfinementError(
+            "racine du depot inaccessible pour le confinement du manifeste"
+        ) from exc
+
+    try:
+        for component in relative_path.parts[:-1]:
+            try:
+                metadata = os.stat(
+                    component,
+                    dir_fd=directory_fd,
+                    follow_symlinks=False,
+                )
+            except OSError as exc:
+                raise _ManifestConfinementError(
+                    "composant parent du manifeste absent ou inaccessible"
+                ) from exc
+            if stat.S_ISLNK(metadata.st_mode):
+                raise _ManifestConfinementError(
+                    "composant parent symbolique interdit pour le manifeste"
+                )
+            if not stat.S_ISDIR(metadata.st_mode):
+                raise _ManifestConfinementError(
+                    "composant parent non repertoire interdit pour le manifeste"
+                )
+            try:
+                next_fd = os.open(component, directory_flags, dir_fd=directory_fd)
+            except OSError as exc:
+                raise _ManifestConfinementError(
+                    "ouverture confinee d'un parent du manifeste impossible"
+                ) from exc
+            opened_metadata = os.fstat(next_fd)
+            if (metadata.st_dev, metadata.st_ino) != (
+                opened_metadata.st_dev,
+                opened_metadata.st_ino,
+            ):
+                os.close(next_fd)
+                raise _ManifestConfinementError(
+                    "composant parent du manifeste modifie pendant le controle"
+                )
+            os.close(directory_fd)
+            directory_fd = next_fd
+
+        filename = relative_path.parts[-1]
+        try:
+            metadata = os.stat(
+                filename,
+                dir_fd=directory_fd,
+                follow_symlinks=False,
+            )
+        except OSError as exc:
+            raise _ManifestConfinementError(
+                "fichier manifeste absent ou inaccessible"
+            ) from exc
+        if stat.S_ISLNK(metadata.st_mode):
+            raise _ManifestConfinementError("fichier manifeste symbolique interdit")
+        if not stat.S_ISREG(metadata.st_mode):
+            raise _ManifestConfinementError("fichier manifeste non regulier")
+        try:
+            manifest_fd = os.open(
+                filename,
+                os.O_RDONLY | nofollow,
+                dir_fd=directory_fd,
+            )
+        except OSError as exc:
+            raise _ManifestConfinementError(
+                "ouverture confinee du fichier manifeste impossible"
+            ) from exc
+        opened_metadata = os.fstat(manifest_fd)
+        if (metadata.st_dev, metadata.st_ino) != (
+            opened_metadata.st_dev,
+            opened_metadata.st_ino,
+        ) or not stat.S_ISREG(opened_metadata.st_mode):
+            os.close(manifest_fd)
+            raise _ManifestConfinementError(
+                "fichier manifeste modifie pendant le controle"
+            )
+        with os.fdopen(manifest_fd, encoding="utf-8") as stream:
+            return stream.read()
+    finally:
+        os.close(directory_fd)
+
+
 def _manifest_backed_chapters(
     root: Path,
     tracked: frozenset[str],
@@ -1624,26 +1717,16 @@ def _manifest_backed_chapters(
                 (field, f"fichier manifeste non suivi par Git: {repository_manifest}")
             )
             continue
-        manifest_file = root / repository_manifest
         try:
-            metadata = manifest_file.lstat()
-        except OSError:
-            errors.append((field, f"fichier manifeste absent: {repository_manifest}"))
-            continue
-        if stat.S_ISLNK(metadata.st_mode):
-            errors.append(
-                (field, f"fichier manifeste symbolique interdit: {repository_manifest}")
+            manifest_text = _read_confined_manifest(
+                root,
+                PurePosixPath(repository_manifest),
             )
+        except _ManifestConfinementError as exc:
+            errors.append((field, str(exc)))
             continue
-        if not stat.S_ISREG(metadata.st_mode):
-            errors.append(
-                (field, f"fichier manifeste non regulier: {repository_manifest}")
-            )
-            continue
-        try:
-            manifest_text = manifest_file.read_text(encoding="utf-8")
-        except (OSError, UnicodeError):
-            errors.append((field, f"fichier manifeste illisible: {repository_manifest}"))
+        except UnicodeError:
+            errors.append((field, "fichier manifeste illisible"))
             continue
         try:
             manifest = json.loads(manifest_text)
