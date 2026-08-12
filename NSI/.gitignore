@@ -11,17 +11,17 @@ corpus/**/*.json
 *.toc
 *.pdf
 !docs/**/*.pdf
-build/
-*.pdf
-!docs/**/*.pdf
-!build/
+
+# Artefacts de build. Seuls les PDF assembles canoniques sont versionnes :
+# une edition eleve et une edition professeur par manuel, rien d'autre — meme
+# regle que Mathematiques/manuel-maths/.gitignore. Toute autre declinaison
+# serait un artefact qu'aucune commande ne sait reproduire.
 build/*
 !build/MANUEL_1NSI/
+!build/MANUEL_TNSI/
 build/MANUEL_1NSI/*
+build/MANUEL_TNSI/*
 !build/MANUEL_1NSI/MANUEL_1NSI_eleve.pdf
 !build/MANUEL_1NSI/MANUEL_1NSI_professeur.pdf
-!build/MANUEL_1NSI/MANUEL_1NSI_methodes.pdf
-!build/MANUEL_1NSI/MANUEL_1NSI_remediation.pdf
-!build/MANUEL_1NSI/MANUEL_1NSI_amenagee.pdf
-!build/MANUEL_1NSI/MANUEL_1NSI_evaluations.pdf
-!build/MANUEL_1NSI/MANUEL_1NSI_projets.pdf
+!build/MANUEL_TNSI/MANUEL_TNSI_eleve.pdf
+!build/MANUEL_TNSI/MANUEL_TNSI_professeur.pdf

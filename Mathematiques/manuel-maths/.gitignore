@@ -10,6 +10,29 @@ corpus/**/*.json
 *.toc
 *.pdf
 !docs/**/*.pdf
-build/
+
+# Artefacts de build. Seuls les PDF assembles canoniques sont versionnes :
+# une edition eleve et une edition professeur par manuel, rien d'autre. Toute
+# autre declinaison serait un artefact qu'aucune commande ne sait reproduire.
+# La regle est explicite, et non un build/ global double de git add -f, pour
+# que la liste des manuels de la collection se lise ici.
+build/*
+!build/MANUEL_1SPE/
+!build/MANUEL_TSPE_2026-2027/
+!build/MANUEL_TCOMPL/
+!build/MANUEL_TEXPERTES/
+build/MANUEL_1SPE/*
+build/MANUEL_TSPE_2026-2027/*
+build/MANUEL_TCOMPL/*
+build/MANUEL_TEXPERTES/*
+!build/MANUEL_1SPE/MANUEL_1SPE_eleve.pdf
+!build/MANUEL_1SPE/MANUEL_1SPE_professeur.pdf
+!build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_eleve.pdf
+!build/MANUEL_TSPE_2026-2027/MANUEL_TSPE_2026-2027_professeur.pdf
+!build/MANUEL_TCOMPL/MANUEL_TCOMPL_eleve.pdf
+!build/MANUEL_TCOMPL/MANUEL_TCOMPL_professeur.pdf
+!build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_eleve.pdf
+!build/MANUEL_TEXPERTES/MANUEL_TEXPERTES_professeur.pdf
+
 .superpowers/
 .worktrees/

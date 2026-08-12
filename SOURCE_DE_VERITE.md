@@ -20,22 +20,71 @@ dans une branche non fusionnée, ni dans un dossier externe.
 
 ## Ce que contient la source de vérité
 
+Un manuel, une source de vérité : **deux éditions assemblées par manuel**,
+l'édition élève et l'édition professeur, et rien d'autre. Toute autre
+déclinaison serait un artefact qu'aucune commande ne saurait reproduire.
+
 | Manuel | Identifiant | Chapitres | Objets | PDF assemblés |
 |---|---|---:|---:|---|
-| Mathématiques Première spécialité | `1SPE` | 10 | 1 401 | élève, professeur, méthodes, remédiation, évaluations |
+| Mathématiques Première spécialité | `1SPE` | 10 | 1 401 | élève, professeur |
 | Mathématiques Terminale spécialité | `TSPE_2026_2027` | 11 | 659 | élève, professeur |
 | Mathématiques Terminale complémentaires | `TCOMPL` | 9 | 150 | élève, professeur |
 | Mathématiques Terminale expertes | `TEXPERTES` | 5 | 93 | élève, professeur |
-| NSI Première spécialité | `1NSI` | 10 | 339 | élève, professeur, méthodes, remédiation, évaluations, projets, aménagée |
-| NSI Terminale spécialité | `TNSI` | 6 | 109 | aucun (assembleur manquant) |
+| NSI Première spécialité | `1NSI` | 10 | 339 | élève, professeur |
+| NSI Terminale spécialité | `TNSI` | 6 | 109 | élève, professeur |
 
-Total : **51 chapitres, 2 751 objets de contenu, 20 PDF, 6 994 fichiers suivis,
-739 commits, 16 tags.**
+Total : **51 chapitres, 2 751 objets de contenu, 12 PDF assemblés.**
+
+Les deux `.gitignore` portent cette règle sous forme de liste blanche
+explicite, et non d'un `build/` ignoré doublé de `git add -f` : la liste des
+manuels de la collection se lit dans le fichier d'ignore.
+
+Correction du 12 août 2026 : le décompte précédent annonçait 20 PDF, dont
+cinq déclinaisons 1SPE et sept 1NSI. Trois des PDF 1SPE — `methodes`,
+`remediation`, `evaluations` — étaient versionnés alors qu'**aucun script ne
+savait plus les produire** : l'assembleur de manuels n'accepte que `eleve` et
+`professeur`, et `scripts/assemble.py`, qui connaît ces déclinaisons, est un
+assembleur de chapitre. Ils ont été retirés de l'index, comme les cinq
+déclinaisons 1NSI supplémentaires ; l'historique git les conserve. TNSI, qui
+n'avait aucun PDF suivi, entre dans le dépôt avec ses deux éditions.
 
 S'y ajoutent : les référentiels de capacités extraits des BO, les BO officiels
 empreintés dans `sources/txt/`, les gabarits et la charte LaTeX, les serveurs
 MCP, les scripts de gates, les suites de tests et l'appareil d'audit
 (`audit/`).
+
+## Charte v6 — ce qui est réellement appliqué
+
+La charte v6 est écrite une fois dans `Mathematiques/manuel-maths/gabarits/`
+et synchronisée à l'identique dans `NSI/gabarits/` (convention `docs/06`), ce
+qu'un test vérifie module par module.
+
+Les six manuels chargent `nexus-manuel-v5.cls` sous `nexus-charte-v6.sty`.
+Cet ordre compte : le rendu d'onglet v6 est gardé par `\ifdefined`
+`\nxVOngletTextBox` et ne se substitue que si la classe v5 est là. Jusqu'au
+12 août 2026, les manuels chargeaient encore la classe v4.1 — la charte
+n'apportait donc que la couverture, le sommaire, le décor et la quatrième,
+jamais l'intérieur des chapitres.
+
+Les encadrés v6 portent des noms neufs — `definitionV`, `theoremeV`,
+`methodeV`… — qu'aucun des 2 751 objets n'emploie : le corpus est écrit avec
+les macros v4.1. `nexus-pont-v6.sty` rebranche les environnements v4.1 sur
+les formes v6, sans toucher un seul fichier de contenu. Le rebranchement se
+désactive par `\usepackage[sanspont]{gabarits/nexus-charte-v6}`, ce qui rend
+la maquette v4.1 et permet le diff avant/après qu'`AGENTS.md` exige de toute
+évolution de baseline visuelle.
+
+Deux règles à ne pas enfreindre, chacune payée par un défaut réel :
+
+- **Ne jamais passer un libellé écrit par un auteur à `\nxSixLabel`**, qui
+  capitalise. Les chapitres y mettent des mathématiques ; dans une boîte
+  `breakable`, `\MakeUppercase` sur des mathématiques fait diverger LuaTeX,
+  qui crée sans fin des instances de police interlettrée. Utiliser
+  `\nxSixLabelSuffixe`.
+- **Trois passes LuaLaTeX au minimum.** Les onglets latéraux v5 et le décor
+  v6 sont des `tikzpicture` « remember picture, overlay » : ils lisent des
+  positions écrites dans l'`aux` par la passe précédente. Deux passes
+  suffisent au sommaire, mais laissent onglets et contours absents du PDF.
 
 ## Contenu mis de côté volontairement
 
