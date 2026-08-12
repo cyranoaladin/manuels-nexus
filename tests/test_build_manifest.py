@@ -74,8 +74,30 @@ def test_inventory_error_diagnostic_allows_only_canonical_messages(
     assert "SECRET_MARKER" not in unsafe_diagnostic
     assert "/tmp/private.yaml" not in unsafe_diagnostic
     assert "YAML fragment" not in unsafe_diagnostic
-    assert generic == "RuntimeError"
+    assert generic == "InternalError"
     assert "do-not-expose" not in generic
+
+
+def test_inventory_error_diagnostic_closes_forged_exception_class_names(
+    inventory_module,
+    manifest_module,
+) -> None:
+    forged_name = (
+        "SECRET_MARKER_/tmp/private.yaml_YAML_" + "x" * 240
+    )
+    forged_error = type(forged_name, (Exception,), {})
+    inventory_api = SimpleNamespace(InventoryError=inventory_module.InventoryError)
+
+    diagnostic = manifest_module._bounded_inventory_error_diagnostic(
+        inventory_api,
+        forged_error("raw: api_key=SECRET_MARKER"),
+    )
+
+    assert diagnostic == "InternalError"
+    assert len(diagnostic) <= 240
+    assert "SECRET_MARKER" not in diagnostic
+    assert "/tmp/private.yaml" not in diagnostic
+    assert "YAML" not in diagnostic
 
 
 @pytest.fixture()
@@ -1407,6 +1429,48 @@ def test_refresh_empty_manifest_cli_redacts_unlisted_inventory_error(
     assert "/tmp/private.yaml" not in captured.err
     assert "YAML fragment" not in captured.err
     assert "Traceback" not in captured.err
+
+
+def test_branch_rebind_loader_allows_same_branch_same_head_empty_digest_refresh(
+    tmp_path: Path,
+    inventory_module,
+) -> None:
+    _git_repository(tmp_path)
+    _install_schema(tmp_path)
+    head = _commit_all(tmp_path, "schema for same-head refresh")
+    branch = subprocess.run(
+        ["git", "-C", str(tmp_path), "branch", "--show-current"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    stale = _manifest(head, [])
+    stale["provenance"] = {
+        "branch": branch,
+        "dirty": False,
+        "head_sha": head,
+    }
+    stale["source_digest"] = "sha256:" + "0" * 64
+    stale["model_digest"] = "sha256:" + "1" * 64
+    manifest_path = tmp_path / "audit/BUILD_MANIFEST.json"
+    manifest_path.write_text(
+        json.dumps(stale, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+    observed = inventory_module._load_observed_build_manifest(
+        tmp_path,
+        source_digest=SHA256_A,
+        model_digest=SHA256_B,
+        declared_assemblies=[],
+        pdfinfo_counter=lambda _path: (7, None),
+        python_counter=lambda _path: (None, "unused"),
+        empty_manifest_refresh_capability=(
+            inventory_module._EMPTY_MANIFEST_BRANCH_REBIND_CAPABILITY
+        ),
+    )
+
+    assert observed == []
 
 
 @pytest.mark.parametrize(

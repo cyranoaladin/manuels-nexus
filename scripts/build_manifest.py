@@ -136,7 +136,7 @@ def _bounded_inventory_error_diagnostic(
     if not isinstance(inventory_error, type) or not isinstance(
         exc, inventory_error
     ):
-        return type(exc).__name__
+        return "InternalError"
     message = str(exc)
     diagnostic = _INVENTORY_ERROR_DIAGNOSTIC_ALIASES.get(message)
     if diagnostic is None and message in _INVENTORY_ERROR_DIAGNOSTICS:
