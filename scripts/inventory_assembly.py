@@ -8,6 +8,7 @@ import json
 import os
 import stat
 from collections import Counter, defaultdict
+from contextlib import ExitStack
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Mapping
@@ -60,6 +61,9 @@ _MUTATING_METHODS = frozenset(
     }
 )
 _NESTED_MUTABLE_ACCESSORS = frozenset({"get", "items", "values"})
+_DYNAMIC_NAMESPACE_BUILTINS = frozenset(
+    {"eval", "exec", "globals", "locals", "vars"}
+)
 
 
 def _canonicalize_literal(value: Any) -> Any:
@@ -678,6 +682,11 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_Call(self, node: ast.Call) -> None:
+        if (
+            isinstance(node.func, ast.Name)
+            and node.func.id in _DYNAMIC_NAMESPACE_BUILTINS
+        ):
+            self.ambiguous.update(_AUDITED_SELECTION_CONSTANTS)
         if isinstance(node.func, ast.Attribute) and node.func.attr in _MUTATING_METHODS:
             self._record_mutation(_target_root_names(node.func.value))
             self._record_module_names(
@@ -1593,15 +1602,20 @@ def _add_dynamic_dependencies(
 
 def _read_confined_manifest(root: Path, relative_path: PurePosixPath) -> str:
     nofollow = getattr(os, "O_NOFOLLOW", 0)
+    nonblock = getattr(os, "O_NONBLOCK", 0)
     directory_flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | nofollow
-    try:
-        directory_fd = os.open(root, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
-    except OSError as exc:
-        raise _ManifestConfinementError(
-            "racine du depot inaccessible pour le confinement du manifeste"
-        ) from exc
+    with ExitStack() as fd_stack:
+        try:
+            directory_fd = os.open(
+                root,
+                os.O_RDONLY | getattr(os, "O_DIRECTORY", 0),
+            )
+        except OSError as exc:
+            raise _ManifestConfinementError(
+                "racine du depot inaccessible pour le confinement du manifeste"
+            ) from exc
+        fd_stack.callback(os.close, directory_fd)
 
-    try:
         for component in relative_path.parts[:-1]:
             try:
                 metadata = os.stat(
@@ -1627,16 +1641,20 @@ def _read_confined_manifest(root: Path, relative_path: PurePosixPath) -> str:
                 raise _ManifestConfinementError(
                     "ouverture confinee d'un parent du manifeste impossible"
                 ) from exc
-            opened_metadata = os.fstat(next_fd)
+            fd_stack.callback(os.close, next_fd)
+            try:
+                opened_metadata = os.fstat(next_fd)
+            except OSError as exc:
+                raise _ManifestConfinementError(
+                    "verification confinee d'un parent du manifeste impossible"
+                ) from exc
             if (metadata.st_dev, metadata.st_ino) != (
                 opened_metadata.st_dev,
                 opened_metadata.st_ino,
-            ):
-                os.close(next_fd)
+            ) or not stat.S_ISDIR(opened_metadata.st_mode):
                 raise _ManifestConfinementError(
                     "composant parent du manifeste modifie pendant le controle"
                 )
-            os.close(directory_fd)
             directory_fd = next_fd
 
         filename = relative_path.parts[-1]
@@ -1657,26 +1675,37 @@ def _read_confined_manifest(root: Path, relative_path: PurePosixPath) -> str:
         try:
             manifest_fd = os.open(
                 filename,
-                os.O_RDONLY | nofollow,
+                os.O_RDONLY | nonblock | nofollow,
                 dir_fd=directory_fd,
             )
         except OSError as exc:
             raise _ManifestConfinementError(
                 "ouverture confinee du fichier manifeste impossible"
             ) from exc
-        opened_metadata = os.fstat(manifest_fd)
+        manifest_fd_owned = [True]
+
+        def close_owned_manifest_fd() -> None:
+            if manifest_fd_owned[0]:
+                os.close(manifest_fd)
+
+        fd_stack.callback(close_owned_manifest_fd)
+        try:
+            opened_metadata = os.fstat(manifest_fd)
+        except OSError as exc:
+            raise _ManifestConfinementError(
+                "verification confinee du fichier manifeste impossible"
+            ) from exc
         if (metadata.st_dev, metadata.st_ino) != (
             opened_metadata.st_dev,
             opened_metadata.st_ino,
         ) or not stat.S_ISREG(opened_metadata.st_mode):
-            os.close(manifest_fd)
             raise _ManifestConfinementError(
                 "fichier manifeste modifie pendant le controle"
             )
-        with os.fdopen(manifest_fd, encoding="utf-8") as stream:
+        stream = os.fdopen(manifest_fd, encoding="utf-8")
+        manifest_fd_owned[0] = False
+        with stream:
             return stream.read()
-    finally:
-        os.close(directory_fd)
 
 
 def _manifest_backed_chapters(
@@ -1709,6 +1738,16 @@ def _manifest_backed_chapters(
             continue
         if ".." in manifest_path.parts:
             errors.append((field, "chemin de manifeste contenant .. interdit"))
+            continue
+        canonical_manifest_path = f"manifests/books/{manual}.json"
+        if raw_manifest_path != canonical_manifest_path:
+            errors.append(
+                (
+                    field,
+                    "chemin de manifeste non canonique; "
+                    f"attendu {canonical_manifest_path}",
+                )
+            )
             continue
 
         repository_manifest = (project_path / manifest_path).as_posix()

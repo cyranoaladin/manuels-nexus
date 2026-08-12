@@ -7430,6 +7430,37 @@ LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
     assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
 
 
+def test_manifest_backed_nsi_assembler_rejects_indirect_builtin_shadowing(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''BOOK_MANIFESTS = {"1NSI": "manifests/books/1NSI.json"}
+BOOK_ID = "1NSI"
+CHAPITRES = []
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+def consume(value):
+    value.clear()
+    return ()
+globals()["tuple"] = consume
+LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
 def test_closed_contract_rejects_mutation_through_indexed_rules_alias(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -8584,6 +8615,22 @@ def test_manifest_backed_nsi_assembler_declares_two_manuals(
     assert _manifest_backed_nsi_reasons(inventory, assembler) == []
 
 
+def test_manifest_backed_nsi_assembler_rejects_noncanonical_manifest_path(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/alternate.json"
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": manifest},
+        manifests={manifest: _nsi_book_manifest("1NSI", ["1NSI-TEST"])},
+        chapters_by_manual={"1NSI": ["1NSI-TEST"]},
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "canonique")
+
+
 def test_manifest_backed_nsi_assembler_rejects_absolute_manifest_path(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -8783,6 +8830,150 @@ def test_manifest_backed_nsi_assembler_rejects_symlink_parent_manifest(
         if assembly["assembler"] == assembler
         and "1NSI-EXTERNAL" in assembly["chapters"]
     ]
+
+
+def test_manifest_backed_nsi_assembler_rejects_fifo_swap_without_blocking(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    core = inventory_module._assembly_core
+    relative_manifest = PurePosixPath("NSI/manifests/books/1NSI.json")
+    manifest = tmp_path / relative_manifest
+    _write(
+        manifest,
+        json.dumps(_nsi_book_manifest("1NSI", ["1NSI-TEST"])),
+    )
+    real_stat = core.os.stat
+    real_open = core.os.open
+    real_close = core.os.close
+    swapped = threading.Event()
+    completed = threading.Event()
+    errors: list[BaseException] = []
+
+    def swap_after_stat(
+        path: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        *args: object,
+        **kwargs: object,
+    ) -> os.stat_result:
+        metadata = real_stat(path, *args, **kwargs)
+        if path == relative_manifest.name and not swapped.is_set():
+            manifest.unlink()
+            os.mkfifo(manifest)
+            swapped.set()
+        return metadata
+
+    def read_manifest() -> None:
+        try:
+            core._read_confined_manifest(tmp_path, relative_manifest)
+        except BaseException as exc:  # captured for assertion in the main thread
+            errors.append(exc)
+        finally:
+            completed.set()
+
+    monkeypatch.setattr(core.os, "stat", swap_after_stat)
+    worker = threading.Thread(target=read_manifest, daemon=True)
+    worker.start()
+    finished_quickly = completed.wait(0.5)
+    try:
+        if not finished_quickly:
+            writer_fd = real_open(manifest, os.O_WRONLY | os.O_NONBLOCK)
+            real_close(writer_fd)
+        worker.join(timeout=1)
+    finally:
+        if manifest.exists():
+            manifest.unlink()
+
+    assert swapped.is_set()
+    assert not worker.is_alive(), "le lecteur bloque encore sur la FIFO de test"
+    assert finished_quickly, "le lecteur ne refuse pas la FIFO sans attendre"
+    assert len(errors) == 1
+    assert isinstance(errors[0], core._ManifestConfinementError)
+
+
+def _assert_manifest_reader_closes_fds_after_fstat_failure(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    fail_on_fstat_call: int,
+) -> None:
+    core = inventory_module._assembly_core
+    relative_manifest = PurePosixPath("NSI/manifests/books/1NSI.json")
+    _write(
+        tmp_path / relative_manifest,
+        json.dumps(_nsi_book_manifest("1NSI", ["1NSI-TEST"])),
+    )
+    real_open = core.os.open
+    real_close = core.os.close
+    real_fstat = core.os.fstat
+    opened: list[int] = []
+    closed: list[int] = []
+    fstat_calls = 0
+
+    def recording_open(
+        path: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        opened.append(fd)
+        return fd
+
+    def recording_close(fd: int) -> None:
+        closed.append(fd)
+        real_close(fd)
+
+    def failing_fstat(fd: int) -> os.stat_result:
+        nonlocal fstat_calls
+        fstat_calls += 1
+        if fstat_calls == fail_on_fstat_call:
+            raise OSError("forced fstat failure")
+        return real_fstat(fd)
+
+    monkeypatch.setattr(core.os, "open", recording_open)
+    monkeypatch.setattr(core.os, "close", recording_close)
+    monkeypatch.setattr(core.os, "fstat", failing_fstat)
+    try:
+        with pytest.raises((OSError, core._ManifestConfinementError)):
+            core._read_confined_manifest(tmp_path, relative_manifest)
+        opened_counts = {fd: opened.count(fd) for fd in set(opened)}
+        closed_counts = {fd: closed.count(fd) for fd in set(opened)}
+    finally:
+        for fd in set(opened):
+            for _ in range(opened.count(fd) - closed.count(fd)):
+                real_close(fd)
+
+    assert opened
+    assert opened_counts == closed_counts
+
+
+def test_manifest_backed_nsi_assembler_closes_parent_fd_when_fstat_fails(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _assert_manifest_reader_closes_fds_after_fstat_failure(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        fail_on_fstat_call=1,
+    )
+
+
+def test_manifest_backed_nsi_assembler_closes_final_fd_when_fstat_fails(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _assert_manifest_reader_closes_fds_after_fstat_failure(
+        tmp_path,
+        inventory_module,
+        monkeypatch,
+        fail_on_fstat_call=4,
+    )
 
 
 def test_manifest_backed_nsi_assembler_rejects_mutated_manifest_mapping(
