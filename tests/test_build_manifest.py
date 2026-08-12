@@ -1252,6 +1252,72 @@ def test_refresh_empty_manifest_rebinds_empty_ancestor_manifest_to_current_branc
     }
 
 
+def test_refresh_empty_manifest_rejects_concurrent_empty_manifest_replacement(
+    tmp_path: Path,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    payload, manifest_path = _branch_rebind_manifest_repository(tmp_path)
+    current_head = subprocess.run(
+        ["git", "-C", str(tmp_path), "rev-parse", "HEAD"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    envelope = _manifest(current_head, [])
+    envelope["provenance"] = {
+        "branch": "integration/1spe-bo2026-traceability",
+        "dirty": False,
+        "head_sha": current_head,
+    }
+    substituted = deepcopy(payload)
+    substituted["provenance"] = {
+        "branch": "finalisation/collection-v1",
+        "dirty": False,
+        "head_sha": current_head,
+    }
+    substituted_bytes = (
+        json.dumps(
+            substituted,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n"
+    ).encode("utf-8")
+    original_bytes = manifest_path.read_bytes()
+    assert hashlib.sha256(substituted_bytes).digest() != hashlib.sha256(
+        original_bytes
+    ).digest()
+
+    def derive_then_substitute(_root: Path) -> dict[str, object]:
+        concurrent_path = manifest_path.with_name(
+            ".BUILD_MANIFEST.concurrent.json"
+        )
+        concurrent_path.write_bytes(substituted_bytes)
+        os.replace(concurrent_path, manifest_path)
+        return envelope
+
+    monkeypatch.setattr(
+        manifest_module,
+        "_derive_empty_refresh_envelope",
+        derive_then_substitute,
+    )
+
+    try:
+        manifest_module.refresh_empty_manifest(manifest_path)
+    except manifest_module.BuildManifestError as exc:
+        assert "manifeste vide modifié depuis sa validation" in str(exc)
+    else:
+        pytest.fail(
+            "refresh a réussi malgré le remplacement concurrent; "
+            "manifeste substitué préservé="
+            f"{manifest_path.read_bytes() == substituted_bytes}"
+        )
+
+    assert manifest_path.read_bytes() == substituted_bytes
+
+
 def test_refresh_empty_manifest_cli_reports_inventory_ancestry_diagnostic(
     tmp_path: Path,
     inventory_module,

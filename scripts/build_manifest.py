@@ -2263,7 +2263,9 @@ def refresh_empty_manifest(manifest_path: Path) -> None:
     root = _repository_root(manifest_path)
     initial_git_state = _git_state(root)
     initial_evidence_fingerprint = _git_evidence_fingerprint(root)
-    _validate_refresh_source_is_empty(root)
+    _empty_manifest, empty_manifest_digest = _validate_refresh_source_is_empty(
+        root
+    )
     envelope = _derive_empty_refresh_envelope(root)
     if (
         _git_state(root) != initial_git_state
@@ -2313,6 +2315,7 @@ def refresh_empty_manifest(manifest_path: Path) -> None:
         transform=replace_empty,
         expected_git_state=initial_git_state,
         expected_evidence_fingerprint=initial_evidence_fingerprint,
+        expected_manifest_digest=empty_manifest_digest,
     )
 
 
