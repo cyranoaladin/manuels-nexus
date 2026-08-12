@@ -1,5 +1,5 @@
 artifact_type: build_producers
-control_digest: sha256:7ed4cacc96e310d1c1ea7c8b6920e0d28911a2e28fc9dfbc46f0d9eb54e14466
+control_digest: sha256:1c2d5d5176645f7683de44ad3dbccfbf7c5fb869ebf1d9c1a8bb3073aae20dd7
 producers:
   - producer_id: math-1spe-manual
     assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
@@ -7,6 +7,24 @@ producers:
     assembly_ids:
       - math:manual:1SPE:eleve
       - math:manual:1SPE:professeur
+  - producer_id: math-tcompl-manual
+    assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
+    recorder: scripts/build_manifest.py
+    assembly_ids:
+      - math:manual:TCOMPL:eleve
+      - math:manual:TCOMPL:professeur
+  - producer_id: math-texpertes-manual
+    assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
+    recorder: scripts/build_manifest.py
+    assembly_ids:
+      - math:manual:TEXPERTES:eleve
+      - math:manual:TEXPERTES:professeur
+  - producer_id: math-tspe-manual
+    assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
+    recorder: scripts/build_manifest.py
+    assembly_ids:
+      - math:manual:TSPE_2026_2027:eleve
+      - math:manual:TSPE_2026_2027:professeur
   - producer_id: nsi-1nsi-manual
     assembler: NSI/scripts/assemble_manuel.py
     recorder: scripts/build_manifest.py
