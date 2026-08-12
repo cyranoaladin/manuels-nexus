@@ -2158,7 +2158,7 @@ def _derive_empty_refresh_envelope(root: Path) -> dict[str, Any]:
     inventory_module = _load_inventory_module()
     try:
         inventory = (
-            inventory_module._build_inventory_for_empty_manifest_refresh(
+            inventory_module._build_inventory_for_empty_manifest_branch_rebind(
                 root
             )
         )

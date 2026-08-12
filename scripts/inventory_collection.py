@@ -96,6 +96,7 @@ BUILD_MANIFEST_FILE = "audit/BUILD_MANIFEST.json"
 BUILD_PRODUCERS_FILE = "audit/BUILD_PRODUCERS.yaml"
 CANONICAL_BUILD_RECORDER = "scripts/build_manifest.py"
 _EMPTY_MANIFEST_REFRESH_CAPABILITY = object()
+_EMPTY_MANIFEST_BRANCH_REBIND_CAPABILITY = object()
 _STALE_MANIFEST_INVALIDATION_CAPABILITY = object()
 
 SCHEMA_REGISTRY: Mapping[str, Mapping[int, str]] = MappingProxyType(
@@ -1358,12 +1359,21 @@ def _load_observed_build_manifest(
             is _EMPTY_MANIFEST_REFRESH_CAPABILITY
             and not builds
         )
+        may_rebind_empty_branch = (
+            empty_manifest_refresh_capability
+            is _EMPTY_MANIFEST_BRANCH_REBIND_CAPABILITY
+            and not builds
+        )
         may_invalidate_stale = (
             empty_manifest_refresh_capability
             is _STALE_MANIFEST_INVALIDATION_CAPABILITY
             and bool(builds)
         )
-        tolerate_digest_mismatch = may_refresh_empty or may_invalidate_stale
+        tolerate_digest_mismatch = (
+            may_refresh_empty
+            or may_rebind_empty_branch
+            or may_invalidate_stale
+        )
         if (
             not tolerate_digest_mismatch
             and payload.get("source_digest") != source_digest
@@ -1375,7 +1385,11 @@ def _load_observed_build_manifest(
         ):
             raise InventoryError("model_digest du manifeste de build incohérent")
 
-        ignore_manifest_dirty = may_refresh_empty or may_invalidate_stale
+        ignore_manifest_dirty = (
+            may_refresh_empty
+            or may_rebind_empty_branch
+            or may_invalidate_stale
+        )
         initial_git_state = _observed_git_state(
             root,
             ignore_manifest=ignore_manifest_dirty,
@@ -1386,10 +1400,22 @@ def _load_observed_build_manifest(
         provenance = payload.get("provenance")
         if not isinstance(provenance, Mapping):
             raise InventoryError("provenance du manifeste invalide")
-        if provenance.get("branch") != branch:
-            raise InventoryError("branche de provenance du manifeste incohérente")
         if dirty:
             raise InventoryError("dépôt Git sale pour le manifeste observé")
+        recorded_branch = provenance.get("branch")
+        branch_differs = recorded_branch != branch
+        if may_rebind_empty_branch and not branch:
+            raise InventoryError("branche Git détachée ou indisponible")
+        if branch_differs and not may_rebind_empty_branch:
+            raise InventoryError("branche de provenance du manifeste incohérente")
+        if (
+            branch_differs
+            and may_rebind_empty_branch
+            and provenance.get("head_sha") == head_sha
+        ):
+            raise InventoryError(
+                "provenance du manifeste sans ancêtre Git strict"
+            )
         if builds and provenance.get("dirty") is not False:
             raise InventoryError(
                 "provenance du manifeste sale pour des builds observés"
@@ -4483,6 +4509,20 @@ def _build_inventory_for_empty_manifest_refresh(
         repository,
         require_git_provenance=True,
         empty_manifest_refresh_capability=_EMPTY_MANIFEST_REFRESH_CAPABILITY,
+    )
+
+
+def _build_inventory_for_empty_manifest_branch_rebind(
+    repository: Path | str,
+) -> dict[str, Any]:
+    """Build digests while rebinding only an empty ancestor manifest."""
+
+    return _build_inventory(
+        repository,
+        require_git_provenance=True,
+        empty_manifest_refresh_capability=(
+            _EMPTY_MANIFEST_BRANCH_REBIND_CAPABILITY
+        ),
     )
 
 

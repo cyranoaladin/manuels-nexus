@@ -1033,6 +1033,48 @@ def test_observed_build_integration_fails_closed_on_incomplete_evidence(
     assert integration[field] == value
 
 
+def _branch_rebind_manifest_repository(
+    repository: Path,
+) -> tuple[dict[str, object], Path]:
+    ancestor = _git_repository(repository)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "branch",
+            "-m",
+            "finalisation/collection-v1",
+        ],
+        check=True,
+    )
+    _install_schema(repository)
+    payload = _manifest(ancestor, [])
+    payload["provenance"] = {
+        "branch": "finalisation/collection-v1",
+        "dirty": False,
+        "head_sha": ancestor,
+    }
+    manifest_path = repository / "audit/BUILD_MANIFEST.json"
+    manifest_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    _commit_all(repository, "tracked empty manifest from source branch")
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(repository),
+            "branch",
+            "-m",
+            "integration/1spe-bo2026-traceability",
+        ],
+        check=True,
+    )
+    return payload, manifest_path
+
+
 def test_empty_manifest_is_model_valid_and_yields_no_observed_build(
     tmp_path: Path,
     inventory_module,
@@ -1066,6 +1108,159 @@ def test_stale_empty_manifest_requires_explicit_refresh(
             pdfinfo_counter=lambda _path: (7, None),
             python_counter=lambda _path: (None, "unused"),
             empty_manifest_refresh_capability=True,
+        )
+
+
+def test_refresh_empty_manifest_rebinds_empty_ancestor_manifest_to_current_branch(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    payload, manifest_path = _branch_rebind_manifest_repository(tmp_path)
+    payload["source_digest"] = "sha256:" + "0" * 64
+    payload["model_digest"] = "sha256:" + "1" * 64
+    manifest_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    current_head = _commit_all(tmp_path, "stale empty manifest envelope")
+
+    def bounded_inventory(repository: Path, **kwargs) -> dict[str, object]:
+        observed = inventory_module._load_observed_build_manifest(
+            repository,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=kwargs.get(
+                "empty_manifest_refresh_capability"
+            ),
+        )
+        assert observed == []
+        return {"source_digest": SHA256_A}
+
+    monkeypatch.setattr(inventory_module, "_build_inventory", bounded_inventory)
+    monkeypatch.setattr(
+        inventory_module,
+        "_model_digest",
+        lambda _inventory: SHA256_B,
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: inventory_module,
+    )
+
+    try:
+        manifest_module.refresh_empty_manifest(manifest_path)
+    except manifest_module.BuildManifestError as exc:
+        pytest.fail(
+            "rattachement refusé de finalisation/collection-v1 vers "
+            "integration/1spe-bo2026-traceability: "
+            f"{exc}"
+        )
+
+    refreshed = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert refreshed["builds"] == []
+    assert refreshed["build_state_digest"] == _state_digest([])
+    assert refreshed["source_digest"] == SHA256_A
+    assert refreshed["model_digest"] == SHA256_B
+    assert refreshed["provenance"] == {
+        "branch": "integration/1spe-bo2026-traceability",
+        "dirty": False,
+        "head_sha": current_head,
+    }
+
+
+@pytest.mark.parametrize(
+    ("invalid_context", "expected"),
+    [
+        ("nonempty", "branche"),
+        ("nonancestor", "ancêtre|ancetre"),
+        ("equal-head", "strict"),
+        ("detached", "branch|branche"),
+        ("missing-capability", "branche"),
+        ("dirty", "sale"),
+        ("invalid-digest", "build_state_digest"),
+    ],
+)
+def test_refresh_empty_manifest_branch_rebind_refuses_unbounded_context(
+    tmp_path: Path,
+    inventory_module,
+    invalid_context: str,
+    expected: str,
+) -> None:
+    payload, manifest_path = _branch_rebind_manifest_repository(tmp_path)
+    provenance = payload["provenance"]
+    assert isinstance(provenance, dict)
+    recorded_head = str(provenance["head_sha"])
+    if invalid_context == "nonempty":
+        builds = [
+            _build(
+                recorded_head,
+                "build/MANUEL_1SPE_professeur.pdf",
+                b"%PDF",
+            )
+        ]
+        payload["builds"] = builds
+        payload["build_state_digest"] = _state_digest(builds)
+        manifest_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
+            + "\n",
+            encoding="utf-8",
+        )
+        _commit_all(tmp_path, "nonempty manifest on integration branch")
+    elif invalid_context == "nonancestor":
+        provenance["head_sha"] = _unrelated_commit(tmp_path)
+        manifest_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
+            + "\n",
+            encoding="utf-8",
+        )
+        _commit_all(tmp_path, "foreign manifest ancestry")
+    elif invalid_context == "equal-head":
+        provenance["head_sha"] = subprocess.run(
+            ["git", "-C", str(tmp_path), "rev-parse", "HEAD"],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        manifest_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
+            + "\n",
+            encoding="utf-8",
+        )
+    elif invalid_context == "detached":
+        subprocess.run(
+            ["git", "-C", str(tmp_path), "switch", "--detach", "-q"],
+            check=True,
+        )
+    elif invalid_context == "dirty":
+        (tmp_path / "dirty-source.tex").write_text("dirty", encoding="utf-8")
+    elif invalid_context == "invalid-digest":
+        payload["build_state_digest"] = SHA256_A
+        manifest_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True)
+            + "\n",
+            encoding="utf-8",
+        )
+
+    capability = (
+        None
+        if invalid_context == "missing-capability"
+        else inventory_module._EMPTY_MANIFEST_BRANCH_REBIND_CAPABILITY
+    )
+    with pytest.raises(inventory_module.InventoryError, match=expected):
+        inventory_module._load_observed_build_manifest(
+            tmp_path,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=capability,
         )
 
 
@@ -1105,7 +1300,7 @@ def test_empty_refresh_derivation_uses_only_the_bounded_inventory_path(
 
     fake_inventory = SimpleNamespace(
         _model_digest=lambda _inventory: SHA256_B,
-        _build_inventory_for_empty_manifest_refresh=build_inventory,
+        _build_inventory_for_empty_manifest_branch_rebind=build_inventory,
     )
     monkeypatch.setattr(
         manifest_module,
@@ -4774,6 +4969,63 @@ def test_receipt_cli_activates_first_build_from_clean_stale_empty_manifest(
     }
     assert payload["builds"] == [build]
     assert payload["build_state_digest"] == _state_digest([build])
+
+
+def test_record_from_receipt_refuses_empty_manifest_from_other_branch(
+    tmp_path: Path,
+    inventory_module,
+    manifest_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _head, receipt_path, manifest_path, _tracked_source = (
+        _install_clean_receipt_entrypoint_fixture(tmp_path)
+    )
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(tmp_path),
+            "branch",
+            "-m",
+            "integration/1spe-bo2026-traceability",
+        ],
+        check=True,
+    )
+    original = manifest_path.read_bytes()
+
+    def strict_bounded_builder(root: Path) -> dict[str, object]:
+        inventory_module._load_observed_build_manifest(
+            root,
+            source_digest=SHA256_A,
+            model_digest=SHA256_B,
+            declared_assemblies=[],
+            pdfinfo_counter=lambda _path: (7, None),
+            python_counter=lambda _path: (None, "unused"),
+            empty_manifest_refresh_capability=(
+                inventory_module._EMPTY_MANIFEST_REFRESH_CAPABILITY
+            ),
+        )
+        pytest.fail("le chemin receipt ne doit pas rattacher la branche")
+
+    fake_inventory = _bootstrap_inventory_module(
+        inventory_module,
+        bounded_builder=strict_bounded_builder,
+        strict_builder=lambda _root: pytest.fail(
+            "le chemin receipt ne doit pas appeler build_inventory"
+        ),
+    )
+    monkeypatch.setattr(
+        manifest_module,
+        "_load_inventory_module",
+        lambda: fake_inventory,
+    )
+
+    with pytest.raises(manifest_module.BuildManifestError) as captured:
+        manifest_module.record_from_receipt(receipt_path)
+
+    assert isinstance(captured.value.__cause__, inventory_module.InventoryError)
+    assert "branche" in str(captured.value.__cause__)
+    assert manifest_path.read_bytes() == original
 
 
 @pytest.mark.parametrize("replacement", ["empty-reencoded", "nonempty"])
