@@ -176,18 +176,11 @@
 % Le cadrage editorial (conception §7) exige que l'enrichissement ne puisse
 % pas se lire comme exigible : filet pointille, fond absent, etiquette
 % explicite. Le pointille dit « hors du parcours » a lui seul.
-%
-% Marges internes deliberement faibles. L'encadre n'a pas de fond : rien ne
-% justifie de retrecir la justification, et la v5 l'a deja reduite de 4 mm.
-% Les chapitres de NSI y placent de longs fragments de code en ligne, que
-% \lstinline compose en boite insecable — 46 caracteres pour le dictionnaire
-% en comprehension de 1NSI-TYPES-CONSTRUITS. Chaque point de marge retire a
-% la mesure devient une ligne trop lache, que le gate de diagnostics rejette.
 \newtcolorbox{plusloinV}{enhanced, breakable,
   colback=white, boxrule=0pt, frame hidden, arc=0pt,
   borderline west={0.9pt}{0pt}{chapcolor!55,
     dash pattern=on 2.2pt off 2.2pt},
-  top=13pt, bottom=9pt, left=10pt, right=2pt,
+  top=13pt, bottom=9pt, left=13pt, right=10pt,
   before skip=15pt, after skip=15pt,
   attach boxed title to top left={yshift=-2.6mm, xshift=9pt},
   boxed title style={colback=white, colframe=chapcolor!55, boxrule=0.7pt,

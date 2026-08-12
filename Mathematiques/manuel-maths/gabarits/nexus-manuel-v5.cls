@@ -13,12 +13,35 @@
 \def\nxVBaseCompatibility{1}
 \LoadClass{gabarits/nexus-manuel}
 
+% ===========================================================================
+%  MESURE — la v5 ne doit RIEN retirer a la justification de la v4.1
+% ===========================================================================
+% La branche compatibilite de nexus-manuel.cls porte la marge exterieure a
+% 4,8 cm et la colonne de marge a 3,5 cm. La justification tombe alors de
+% 14,6 a 14,2 cm : quatre millimetres de moins que la mesure contre laquelle
+% les 2 751 objets de la collection ont ete ecrits et relus.
+%
+% Ces 4 mm ne sont pas theoriques. Le corpus de NSI porte des fragments de
+% code en ligne que \lstinline et \texttt composent en boites insecables — un
+% schema de relation de 60 caracteres dans TNSI-BASES-DE-DONNEES, un
+% dictionnaire en comprehension de 46 caracteres dans 1NSI-TYPES-CONSTRUITS.
+% A 14,2 cm ils ne trouvent plus de coupure acceptable et laissent des lignes
+% trop laches, que le gate de diagnostics rejette. Compenser encadre par
+% encadre ne marche pas : reduire leurs marges internes deplace le probleme
+% et l'aggrave parfois.
+%
+% On rend donc les 4 mm. La colonne de marge reste plus large qu'en v4.1
+% (3,1 cm contre 2,8), et l'onglet lateral, dessine au bord de page par-dessus
+% la marge, garde toute sa place.
+\geometry{a4paper,
+  top=2.4cm, bottom=2.6cm,
+  inner=2.0cm, outer=4.4cm,
+  marginparwidth=3.1cm, marginparsep=0.55cm,
+  headsep=0.7cm}
+
 % La v4.1 reserve \emergencystretch a son propre mode (nexus-manuel.cls, garde
-% \ifdefined\nxVBaseCompatibility\else). Or la v5 elargit la marge exterieure a
-% 4,8 cm pour loger les onglets lateraux : la justification perd 4 mm. Elle a
-% donc plus besoin de la soupape que la v4.1, pas moins. Sans elle, tout
-% identifiant en ligne insecable — un \code{...} de NSI, un nom de colonne —
-% deborde, et le gate de diagnostics rejette le volume.
+% \ifdefined\nxVBaseCompatibility\else) : la v5 en etait donc privee, alors
+% qu'un identifiant en ligne insecable y deborde tout aussi bien.
 \emergencystretch=3em
 \tolerance=1500
 
