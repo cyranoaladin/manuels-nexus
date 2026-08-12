@@ -409,9 +409,15 @@
 % Code en ligne
 \newcommand{\code}[1]{{\ttfamily\color{coulCode}#1}}
 
-% Protection de \lstinline contre babel-french (NoAutoSpacing)
+% Protection de \lstinline contre babel-french (NoAutoSpacing).
+% Le code en ligne est insecable : un identifiant snake_case a rallonge
+% (montant_paye, cotisations_payees) occupe une largeur que le paragraphe ne
+% peut ni couper ni compenser, et laisse une ligne trop lache. On autorise la
+% coupure APRES le souligne, sans trait d'union — un identifiant coupe reste
+% lisible, la convention du code l'exige.
 \let\nxOrigLstinline\lstinline
-\renewcommand{\lstinline}{\NoAutoSpacing\nxOrigLstinline}
+\renewcommand{\lstinline}{\NoAutoSpacing
+  \lstset{literate={\_}{{\_\allowbreak}}1}\nxOrigLstinline}
 
 % ===========================================================================
 %  TABLES (booktabs)

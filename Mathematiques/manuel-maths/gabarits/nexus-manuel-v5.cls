@@ -13,6 +13,15 @@
 \def\nxVBaseCompatibility{1}
 \LoadClass{gabarits/nexus-manuel}
 
+% La v4.1 reserve \emergencystretch a son propre mode (nexus-manuel.cls, garde
+% \ifdefined\nxVBaseCompatibility\else). Or la v5 elargit la marge exterieure a
+% 4,8 cm pour loger les onglets lateraux : la justification perd 4 mm. Elle a
+% donc plus besoin de la soupape que la v4.1, pas moins. Sans elle, tout
+% identifiant en ligne insecable — un \code{...} de NSI, un nom de colonne —
+% deborde, et le gate de diagnostics rejette le volume.
+\emergencystretch=3em
+\tolerance=1500
+
 % Conserver l'unique voie autorisée vers la vraie marge. Les gabarits à marge
 % nulle redirigent leurs notes vers le bas du bloc au lieu de l'appeler.
 \let\nxVOriginalMarginnote\marginnote
