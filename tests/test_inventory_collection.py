@@ -9220,6 +9220,201 @@ def test_manifest_backed_nsi_assembler_closes_final_fd_when_fstat_fails(
     )
 
 
+def _fd_multiplicities(fds: list[int]) -> dict[int, int]:
+    return {fd: fds.count(fd) for fd in set(fds)}
+
+
+def _close_unbalanced_test_fds(
+    opened: list[int],
+    closed: list[int],
+    real_close,
+) -> None:
+    for fd, open_count in _fd_multiplicities(opened).items():
+        for _ in range(open_count - closed.count(fd)):
+            real_close(fd)
+
+
+def test_manifest_backed_nsi_assembler_closes_fds_when_parent_open_fails(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    core = inventory_module._assembly_core
+    relative_manifest = PurePosixPath("NSI/manifests/books/1NSI.json")
+    _write(
+        tmp_path / relative_manifest,
+        json.dumps(_nsi_book_manifest("1NSI", ["1NSI-TEST"])),
+    )
+    real_open = core.os.open
+    real_close = core.os.close
+    opened: list[int] = []
+    closed: list[int] = []
+    open_calls = 0
+
+    def failing_parent_open(
+        path: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        nonlocal open_calls
+        open_calls += 1
+        if open_calls == 3:
+            raise OSError("forced parent open failure")
+        fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        opened.append(fd)
+        return fd
+
+    def recording_close(fd: int) -> None:
+        closed.append(fd)
+        real_close(fd)
+
+    monkeypatch.setattr(core.os, "open", failing_parent_open)
+    monkeypatch.setattr(core.os, "close", recording_close)
+    try:
+        with pytest.raises(core._ManifestConfinementError):
+            core._read_confined_manifest(tmp_path, relative_manifest)
+        opened_counts = _fd_multiplicities(opened)
+        closed_counts = _fd_multiplicities(closed)
+    finally:
+        _close_unbalanced_test_fds(opened, closed, real_close)
+
+    assert len(opened) == 2
+    assert opened_counts == closed_counts
+
+
+def test_manifest_backed_nsi_assembler_closes_fds_when_fdopen_fails(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    core = inventory_module._assembly_core
+    relative_manifest = PurePosixPath("NSI/manifests/books/1NSI.json")
+    _write(
+        tmp_path / relative_manifest,
+        json.dumps(_nsi_book_manifest("1NSI", ["1NSI-TEST"])),
+    )
+    real_open = core.os.open
+    real_close = core.os.close
+    opened: list[int] = []
+    closed: list[int] = []
+
+    def recording_open(
+        path: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        opened.append(fd)
+        return fd
+
+    def recording_close(fd: int) -> None:
+        closed.append(fd)
+        real_close(fd)
+
+    def failing_fdopen(*_args: object, **_kwargs: object) -> None:
+        raise OSError("forced fdopen failure")
+
+    monkeypatch.setattr(core.os, "open", recording_open)
+    monkeypatch.setattr(core.os, "close", recording_close)
+    monkeypatch.setattr(core.os, "fdopen", failing_fdopen)
+    try:
+        with pytest.raises(OSError, match="forced fdopen failure"):
+            core._read_confined_manifest(tmp_path, relative_manifest)
+        opened_counts = _fd_multiplicities(opened)
+        closed_counts = _fd_multiplicities(closed)
+    finally:
+        _close_unbalanced_test_fds(opened, closed, real_close)
+
+    assert len(opened) == len(relative_manifest.parts) + 1
+    assert opened_counts == closed_counts
+
+
+def test_manifest_backed_nsi_assembler_closes_stream_and_parents_when_read_fails(
+    tmp_path: Path,
+    inventory_module,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    core = inventory_module._assembly_core
+    relative_manifest = PurePosixPath("NSI/manifests/books/1NSI.json")
+    _write(
+        tmp_path / relative_manifest,
+        json.dumps(_nsi_book_manifest("1NSI", ["1NSI-TEST"])),
+    )
+    real_open = core.os.open
+    real_close = core.os.close
+    real_fdopen = core.os.fdopen
+    real_fstat = core.os.fstat
+    opened: list[int] = []
+    closed: list[int] = []
+    manifest_fds: list[int] = []
+    stream_exits: list[int] = []
+
+    def recording_open(
+        path: str | bytes | os.PathLike[str] | os.PathLike[bytes],
+        flags: int,
+        mode: int = 0o777,
+        *,
+        dir_fd: int | None = None,
+    ) -> int:
+        fd = real_open(path, flags, mode, dir_fd=dir_fd)
+        opened.append(fd)
+        return fd
+
+    def recording_close(fd: int) -> None:
+        closed.append(fd)
+        real_close(fd)
+
+    class ReadFailingStream:
+        def __init__(self, fd: int, stream) -> None:
+            self.fd = fd
+            self.stream = stream
+
+        def __enter__(self):
+            self.stream.__enter__()
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            stream_exits.append(self.fd)
+            return self.stream.__exit__(exc_type, exc, traceback)
+
+        def read(self) -> str:
+            raise OSError("forced stream read failure")
+
+    def failing_read_fdopen(fd: int, *args: object, **kwargs: object):
+        manifest_fds.append(fd)
+        return ReadFailingStream(fd, real_fdopen(fd, *args, **kwargs))
+
+    monkeypatch.setattr(core.os, "open", recording_open)
+    monkeypatch.setattr(core.os, "close", recording_close)
+    monkeypatch.setattr(core.os, "fdopen", failing_read_fdopen)
+    manifest_closed = False
+    try:
+        with pytest.raises(OSError, match="forced stream read failure"):
+            core._read_confined_manifest(tmp_path, relative_manifest)
+        parent_fds = opened[:-1]
+        parent_opened_counts = _fd_multiplicities(parent_fds)
+        parent_closed_counts = {
+            fd: closed.count(fd) for fd in set(parent_fds)
+        }
+        try:
+            real_fstat(manifest_fds[0])
+        except OSError:
+            manifest_closed = True
+    finally:
+        _close_unbalanced_test_fds(opened[:-1], closed, real_close)
+        if manifest_fds and not manifest_closed:
+            real_close(manifest_fds[0])
+
+    assert manifest_fds == [opened[-1]]
+    assert stream_exits == manifest_fds
+    assert manifest_closed
+    assert parent_opened_counts == parent_closed_counts
+
+
 def test_manifest_backed_nsi_assembler_rejects_mutated_manifest_mapping(
     tmp_path: Path, inventory_module
 ) -> None:
