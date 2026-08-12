@@ -1,0 +1,335 @@
+% nexus-figures-bib.sty — Bibliothèque de figures paramétriques Nexus Réussite
+% Complète nexus-figures.tex (style pgfplots « nexus ») avec des figures
+% complètes en un appel, pour tenir la règle éditoriale :
+%   capacité graphique ⇒ ≥ 2 figures cours, ≥ 1 exercice ;
+%   chapitre analyse ≥ 6 figures, géométrie ≥ 10.
+% Toutes les figures héritent de la couleur de chapitre (chapcolor) et de la
+% grammaire nexus (grille légère, axes fléchés, étiquettes hors tracé).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gabarits/nexus-figures-bib}[2026/08/12 v1.0 Bibliotheque de figures Nexus]
+
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,calc,positioning,shapes.misc,decorations.pathreplacing}
+
+% ===========================================================================
+%  1. ENVIRONNEMENT D'AXES NORMALISÉ — pour toute courbe « libre »
+% ===========================================================================
+% \begin{nxplot}[options axis]  \nxcourbe{x^2}{-2:2}{f}  \end{nxplot}
+\newenvironment{nxplot}[1][]{%
+  \begin{tikzpicture}
+  \begin{axis}[nexus, xlabel={$x$}, ylabel={$y$}, #1]
+}{%
+  \end{axis}
+  \end{tikzpicture}%
+}
+% Courbe + étiquette posée en fin de tracé, à droite (règle nexus)
+\newcommand{\nxcourbe}[3]{%
+  \addplot[courbe, domain=#2, samples=101] {#1}
+    node[right, font=\small, color=chapcolor] {$#3$};
+}
+\newcommand{\nxpoint}[3]{%
+  \addplot[point] coordinates {(#1,#2)};
+  \node[anchor=south west, font=\footnotesize, color=encre]
+    at (axis cs:#1,#2) {#3};
+}
+
+% ===========================================================================
+%  2. SUITES — nuage (n, u_n)
+% ===========================================================================
+% \figSuite[options]{expression en x}{N max}
+% Ex : \figSuite{3*0.5^x + 1}{8}
+\newcommand{\figSuite}[3][]{%
+  \begin{tikzpicture}
+  \begin{axis}[nexus, xlabel={$n$}, ylabel={$u_n$}, xmin=-0.6,
+    xtick distance=1, width=0.72\linewidth, height=0.45\linewidth, #1]
+    \addplot[point, samples at={0,1,...,#3}] {#2};
+  \end{axis}
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  3. SECOND DEGRÉ — parabole canonique avec sommet et axe de symétrie
+% ===========================================================================
+% \figParabole[options]{a}{alpha}{beta}   f(x) = a(x-alpha)^2 + beta
+\newcommand{\figParabole}[4][]{%
+  \begin{tikzpicture}
+  \begin{axis}[nexus, xlabel={$x$}, ylabel={$y$}, #1]
+    \addplot[asymptote] coordinates {(#3,\pgfkeysvalueof{/pgfplots/ymin})
+      (#3,\pgfkeysvalueof{/pgfplots/ymax})};
+    \addplot[courbe, domain=#3-2.2:#3+2.2, samples=101]
+      {#2*(x-#3)^2 + #4}
+      node[right, font=\small, color=chapcolor] {$f$};
+    \addplot[point] coordinates {(#3,#4)};
+    \node[anchor=north, font=\footnotesize, color=encre]
+      at (axis cs:#3,#4) {$S(#3\,;\,#4)$};
+  \end{axis}
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  4. CERCLE TRIGONOMÉTRIQUE — angle, projections sin/cos
+% ===========================================================================
+% \figCercleTrigo[angle en degrés]  (défaut 50)
+\newcommand{\figCercleTrigo}[1][50]{%
+  \begin{tikzpicture}[scale=1.9, line cap=round]
+    \draw[nxGris!30, step=0.5] (-1.25,-1.25) grid (1.25,1.25);
+    \draw[nxGris, -{Stealth[length=4pt]}] (-1.35,0) -- (1.45,0) node[below left, font=\footnotesize] {$x$};
+    \draw[nxGris, -{Stealth[length=4pt]}] (0,-1.35) -- (0,1.45) node[below left, font=\footnotesize] {$y$};
+    \draw[encre, line width=1pt] (0,0) circle (1);
+    \fill[chapcolor!12] (0,0) -- (0.35,0) arc (0:#1:0.35) -- cycle;
+    \draw[chapcolor, line width=1.1pt] (0,0) -- (#1:1);
+    \fill[chapcolor] (#1:1) circle (1.2pt);
+    \node[anchor=south west, font=\small, color=chapcolor] at (#1:1.03) {$M$};
+    \draw[coulRetenir!75, dashed, line width=0.7pt] (#1:1) -- ({cos(#1)},0);
+    \draw[coulRetenir!75, dashed, line width=0.7pt] (#1:1) -- (0,{sin(#1)});
+    \node[below, font=\footnotesize, color=coulRetenir!85] at ({cos(#1)},0) {$\cos x$};
+    \node[left, font=\footnotesize, color=coulRetenir!85] at (0,{sin(#1)}) {$\sin x$};
+    \node[font=\footnotesize, color=chapcolor] at ({#1/2}:0.5) {$x$};
+    \node[below left, font=\footnotesize, color=encre] at (0,0) {$O$};
+    \node[below, font=\footnotesize, color=encre] at (1,0) {$I$};
+    \node[left, font=\footnotesize, color=encre] at (0,1) {$J$};
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  5. PROBABILITÉS — arbre pondéré 2 niveaux (structure 1SPE)
+% ===========================================================================
+% \figArbreProba{A}{B}{p(A)}{p(Ab)}{p(B|A)}{p(Bb|A)}{p(B|Ab)}{p(Bb|Ab)}
+% 8 arguments : les deux évènements, puis les six probabilités de l'arbre.
+\newcommand{\figArbreProba}[8]{%
+  \begin{tikzpicture}[
+    grow=right, level distance=27mm,
+    level 1/.style={sibling distance=26mm},
+    level 2/.style={sibling distance=13mm},
+    every node/.style={font=\small, color=encre},
+    edge from parent/.style={draw=encre!60, line width=0.7pt},
+    proba/.style={midway, above, sloped, font=\footnotesize, color=chapcolor}]
+    \node {}
+      child { node {$\overline{#1}$}
+        child { node {$\overline{#2}$} edge from parent node[proba] {#8} }
+        child { node {$#2$} edge from parent node[proba] {#7} }
+        edge from parent node[proba] {#4} }
+      child { node {$#1$}
+        child { node {$\overline{#2}$} edge from parent node[proba] {#6} }
+        child { node {$#2$} edge from parent node[proba] {#5} }
+        edge from parent node[proba] {#3} };
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  6. STATISTIQUES — histogramme / diagramme en barres
+% ===========================================================================
+% \figBarres[options]{(1,3) (2,5) (3,2)}{titre axe x}{titre axe y}
+% Coordonnées numériques ; pour des modalités nommées, passer en option
+% xtick={...}, xticklabels={...}.
+\newcommand{\figBarres}[4][]{%
+  \begin{tikzpicture}
+  \begin{axis}[nexus, ybar, bar width=14pt,
+    axis lines*=left, grid=none, ymajorgrids,
+    xlabel={#3}, ylabel={#4}, xtick=data,
+    every axis plot/.append style={fill=chapcolor!75, draw=none}, #1]
+    \addplot coordinates {#2};
+  \end{axis}
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  7. GÉOMÉTRIE REPÉRÉE — somme de deux vecteurs (parallélogramme)
+% ===========================================================================
+% \figSommeVecteurs[options tikz]{x_u}{y_u}{x_v}{y_v}
+\newcommand{\figSommeVecteurs}[5][]{%
+  \begin{tikzpicture}[scale=0.8, line cap=round, #1]
+    \draw[nxGris!30, step=1] (-0.5,-0.5) grid ({#2+#4+1.2},{#3+#5+1.2});
+    \draw[chapcolor, line width=1.1pt, -{Stealth[length=5pt]}]
+      (0,0) -- (#2,#3) node[midway, above left, font=\small] {$\vec u$};
+    \draw[coulHistoire, line width=1.1pt, -{Stealth[length=5pt]}]
+      (#2,#3) -- ({#2+#4},{#3+#5}) node[midway, above left, font=\small] {$\vec v$};
+    \draw[coulRetenir, line width=1.2pt, -{Stealth[length=5pt]}]
+      (0,0) -- ({#2+#4},{#3+#5})
+      node[midway, below right, font=\small] {$\vec u + \vec v$};
+    \fill[encre] (0,0) circle (1.1pt) node[below left, font=\footnotesize] {$A$};
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  8. DROITE GRADUÉE — intervalle coloré
+% ===========================================================================
+% \figIntervalle{min axe}{max axe}{a}{b}{[ ou ]}{[ ou ]}{légende}
+\newcommand{\figIntervalle}[7]{%
+  \begin{tikzpicture}[line cap=round]
+    \draw[nxGris, -{Stealth[length=4pt]}] (#1,0) -- (#2+0.6,0);
+    \foreach \x in {#1,...,#2} {
+      \draw[nxGris] (\x,-0.07) -- (\x,0.07);
+      \node[below, font=\footnotesize, color=nxGris] at (\x,-0.1) {\x};
+    }
+    \draw[chapcolor, line width=2.2pt] (#3,0) -- (#4,0);
+    \node[font=\small\bfseries, color=chapcolor] at (#3,0.32) {#5};
+    \node[font=\small\bfseries, color=chapcolor] at (#4,0.32) {#6};
+    \node[above, font=\footnotesize, color=encre]
+      at ({(#3+#4)/2},0.4) {#7};
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  9. NSI — ARBRE BINAIRE stylé
+% ===========================================================================
+% \begin{nxarbre}  \node[noeud]{8} child{node[noeud]{3}} ... ;  \end{nxarbre}
+\newenvironment{nxarbre}[1][]{%
+  \begin{tikzpicture}[
+    level distance=11mm,
+    level 1/.style={sibling distance=30mm},
+    level 2/.style={sibling distance=15mm},
+    level 3/.style={sibling distance=9mm},
+    noeud/.style={circle, draw=chapcolor, line width=0.9pt, fill=chapcolor!8,
+      text=encre, font=\small\ttfamily, minimum size=6.4mm, inner sep=0.5pt},
+    feuille/.style={noeud, fill=white, draw=encre!35},
+    edge from parent/.style={draw=encre!45, line width=0.7pt}, #1]
+}{%
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  10. NSI — GRAPHE (sommets positionnés, arêtes listées)
+% ===========================================================================
+% \figGraphe[options]{A/0/0, B/2/0.8, C/3.4/0}{A/B, B/C, A/C}
+% Sommets : nom/x/y — Arêtes : u/v (non orienté). Version orientée : \figGrapheOr
+\newcommand{\nx@graphe}[4]{%
+  \begin{tikzpicture}[
+    sommet/.style={circle, draw=chapcolor, line width=0.9pt, fill=chapcolor!8,
+      text=encre, font=\small\ttfamily, minimum size=6.6mm, inner sep=0.5pt}, #1]
+    \foreach \n/\x/\y in {#2} { \node[sommet] (\n) at (\x,\y) {\n}; }
+    \foreach \u/\v in {#3} {
+      \draw[encre!55, line width=0.8pt, #4] (\u) -- (\v);
+    }
+  \end{tikzpicture}%
+}
+\newcommand{\figGraphe}[3][]{\nx@graphe{#1}{#2}{#3}{}}
+\newcommand{\figGrapheOr}[3][]{\nx@graphe{#1}{#2}{#3}{-{Stealth[length=4.5pt]}}}
+
+% ===========================================================================
+%  11. NSI — LISTE CHAÎNÉE
+% ===========================================================================
+% \figListeChainee{5, 12, 9}
+\newcommand{\figListeChainee}[1]{%
+  \begin{tikzpicture}[node distance=9mm, line cap=round,
+    cellule/.style={draw=encre!45, line width=0.8pt, minimum height=7mm,
+      minimum width=8mm, font=\small\ttfamily, text=encre, fill=grisdoux},
+    pointeur/.style={draw=encre!45, line width=0.8pt, minimum height=7mm,
+      minimum width=4.5mm, fill=chapcolor!10}]
+    \coordinate (prev) at (0,0);
+    \node[font=\small\ttfamily, color=chapcolor] (tete) at (0,0) {tête};
+    \foreach \v [count=\i] in {#1} {
+      \node[cellule, right=7mm of prev] (c\i) {\v};
+      \node[pointeur, anchor=west] (p\i) at (c\i.east) {};
+      \draw[chapcolor, line width=0.8pt, -{Stealth[length=4pt]}]
+        (prev) -- (c\i.west);
+      \coordinate (prev) at (p\i.center);
+    }
+    \draw[chapcolor, line width=0.9pt] (prev) ++(-1.4mm,-1.8mm) -- ++(2.8mm,3.6mm);
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  12. NSI — PILE ET FILE
+% ===========================================================================
+% \figPile{4, 8, 15}   (dernier = sommet)
+\newcommand{\figPile}[1]{%
+  \begin{tikzpicture}[
+    cellule/.style={draw=encre!45, line width=0.8pt, minimum width=16mm,
+      minimum height=6.4mm, font=\small\ttfamily, text=encre, fill=grisdoux}]
+    \coordinate (base) at (0,-0.64);
+    \foreach \v [count=\i] in {#1} {
+      \node[cellule] (c\i) at (0,{(\i-1)*0.64}) {\v};
+      \coordinate (top) at (c\i.north);
+      \coordinate (topeast) at (c\i.east);
+    }
+    \draw[encre, line width=1.1pt]
+      (-0.95,-0.32) -- (-0.95,0) (-0.95,-0.32) -- (0.95,-0.32) (0.95,-0.32) -- (0.95,0);
+    \node[right=2.5mm, font=\footnotesize\sffamily, color=chapcolor]
+      at (topeast) {sommet};
+    \draw[chapcolor, line width=0.9pt, {Stealth[length=4pt]}-{Stealth[length=4pt]}]
+      ([yshift=6mm, xshift=-4mm]top) -- ([xshift=-4mm]top);
+    \node[above, font=\footnotesize\sffamily, color=chapcolor]
+      at ([yshift=6mm]top) {empiler / dépiler};
+  \end{tikzpicture}%
+}
+% \figFile{4, 8, 15}   (premier = tête de file)
+\newcommand{\figFile}[1]{%
+  \begin{tikzpicture}[
+    cellule/.style={draw=encre!45, line width=0.8pt, minimum width=10mm,
+      minimum height=6.6mm, font=\small\ttfamily, text=encre, fill=grisdoux}]
+    \foreach \v [count=\i] in {#1} {
+      \node[cellule] (c\i) at ({\i*1.0},0) {\v};
+      \coordinate (fin) at (c\i.east);
+    }
+    \draw[chapcolor, line width=0.9pt, -{Stealth[length=4pt]}]
+      (0.05,0) -- (c1.west) node[pos=0, left, font=\footnotesize\sffamily,
+        color=chapcolor] {sortie};
+    \draw[chapcolor, line width=0.9pt, -{Stealth[length=4pt]}]
+      ([xshift=7mm]fin) -- (fin) node[pos=0, right,
+        font=\footnotesize\sffamily, color=chapcolor] {entrée};
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  13. NSI — MOTS BINAIRES / OCTETS
+% ===========================================================================
+% \figOctet{1,0,1,1,0,1,0,1}
+\newcommand{\figOctet}[1]{%
+  \begin{tikzpicture}[
+    bit/.style={draw=encre!45, line width=0.8pt, minimum size=6.6mm,
+      font=\small\ttfamily, text=encre}]
+    \foreach \b [count=\i] in {#1} {
+      \pgfmathparse{ifthenelse(\b==1,1,0)}
+      \ifnum\pgfmathresult>0
+        \node[bit, fill=chapcolor!16] at ({\i*0.66},0) {\b};
+      \else
+        \node[bit, fill=white] at ({\i*0.66},0) {\b};
+      \fi
+      \node[font=\tiny\sffamily, color=nxGris] at ({\i*0.66},0.55)
+        {$2^{\the\numexpr 8-\i}$};
+    }
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  14. NSI — ÉCHANGE CLIENT / SERVEUR
+% ===========================================================================
+% \figClientServeur{GET /index.html}{200 OK + page}
+\newcommand{\figClientServeur}[2]{%
+  \begin{tikzpicture}[line cap=round,
+    machine/.style={draw=encre!50, line width=0.9pt, rounded corners=2pt,
+      minimum width=22mm, minimum height=13mm, font=\small\sffamily,
+      text=encre, fill=grisdoux}]
+    \node[machine] (cli) at (0,0) {Client};
+    \node[machine, fill=chapcolor!10, draw=chapcolor] (srv) at (7,0) {Serveur};
+    \draw[chapcolor, line width=0.9pt, -{Stealth[length=5pt]}]
+      ([yshift=2.6mm]cli.east) -- ([yshift=2.6mm]srv.west)
+      node[midway, above, font=\footnotesize\ttfamily, color=encre] {#1};
+    \draw[encre!60, line width=0.9pt, -{Stealth[length=5pt]}]
+      ([yshift=-2.6mm]srv.west) -- ([yshift=-2.6mm]cli.east)
+      node[midway, below, font=\footnotesize\ttfamily, color=encre] {#2};
+  \end{tikzpicture}%
+}
+
+% ===========================================================================
+%  15. NSI — ÉTAT MÉMOIRE (variables → valeurs, références)
+% ===========================================================================
+% \figMemoire{x/7, mot/"nsi", t/[1;2;3]}
+\newcommand{\figMemoire}[1]{%
+  \begin{tikzpicture}[
+    nom/.style={minimum height=6.6mm, minimum width=13mm,
+      font=\small\ttfamily, text=chapcolor, anchor=east},
+    val/.style={draw=encre!45, line width=0.8pt, minimum height=6.6mm,
+      minimum width=17mm, font=\small\ttfamily, text=encre, fill=grisdoux,
+      anchor=west}]
+    \foreach \n/\v [count=\i] in {#1} {
+      \node[nom] at (0,{-\i*0.75}) {\n};
+      \node[val] at (0.25,{-\i*0.75}) {\v};
+      \draw[chapcolor, line width=0.7pt, -{Stealth[length=3.5pt]}]
+        (0.02,{-\i*0.75}) -- (0.23,{-\i*0.75});
+    }
+  \end{tikzpicture}%
+}

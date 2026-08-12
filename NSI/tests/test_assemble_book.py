@@ -295,7 +295,9 @@ def test_render_book_master_contains_all_chapters():
 def test_render_book_master_uses_public_metadata_on_title_page():
     tex = assemble.render_book_master("1NSI")
 
-    assert "NSI --- Première" in tex
+    # Charte v6 : la page de titre est la couverture de collection, qui
+    # reçoit la matière et le niveau publics du manifeste.
+    assert "\\couvertureManuel{NSI}{Première}" in tex
     assert "@matiere" not in tex
     assert "@niveau" not in tex
 

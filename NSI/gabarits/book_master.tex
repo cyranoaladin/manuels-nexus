@@ -1,5 +1,6 @@
 % Gabarit maître de manuel — assemblé par les scripts NSI
 \documentclass{gabarits/nexus-manuel}
+\usepackage{gabarits/nexus-charte-v6}
 %%VARIANT_SETUP%%
 \renewcommand*{\raggedleftmarginnote}{\raggedleft}
 \makeatletter
@@ -19,16 +20,26 @@
 }
 \begin{document}
 \frontmatter
-\begin{titlepage}
-  \centering
-  \vspace*{0.18\textheight}
-  {\titrefont\fontsize{26}{32}\selectfont %%TITLE%%\par}
-  \vspace{1.2cm}
-  {\Large %%SUBTITLE%%\par}
-  \vfill
-  {\large %%MATIERE%% --- %%NIVEAU%%\par}
-\end{titlepage}
-\tableofcontents
+% Couverture de collection (charte v6)
+\couvertureManuel{%%MATIERE%%}{%%NIVEAU%%}{%%SUBTITLE%%}{Édition 2026-2027}
+\sommaireNexus
 \mainmatter
+\nxActiverDecor
 %%CONTENT%%
+\nxSuspendreDecor
+\begin{quatriemeCouverture}{Apprendre, s'entraîner, se tester, progresser :
+  la collection Nexus Réussite accompagne chaque élève jusqu'à la maîtrise.}
+\atoutCouverture{\icnCours[white]}{Un cours structuré en strates, avec la
+  rubrique « À la machine » : chaque notion se reproduit au clavier.}
+\atoutCouverture{\icnPython[white]}{Du code Python vérifié par exécution :
+  aucune sortie de programme imprimée sans avoir tourné.}
+\atoutCouverture{\icnMethode[white]}{Des méthodes pas à pas avec exemples
+  résolus commentés et pièges à éviter.}
+\atoutCouverture{\icnEntrainement[white]}{Trois parcours d'exercices gradués
+  et chronométrés, avec coups de pouce.}
+\atoutCouverture{\icnAutoEval[white]}{QCM diagnostiques, auto-évaluation par
+  compétences et sujets aux formats officiels.}
+\atoutCouverture{\icnRemediation[white]}{Des fiches de remédiation ciblées,
+  reliées aux erreurs réellement diagnostiquées.}
+\end{quatriemeCouverture}
 \end{document}

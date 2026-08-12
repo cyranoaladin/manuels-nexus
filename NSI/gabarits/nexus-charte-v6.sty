@@ -1,0 +1,248 @@
+% nexus-charte-v6.sty — Charte v6 « collection premium » (couche additive)
+% S'utilise PAR-DESSUS nexus-manuel-v5 sans modifier la baseline v5 :
+%   \documentclass{gabarits/nexus-manuel-v5}
+%   \usepackage{gabarits/nexus-charte-v6}
+% Apporte : palette de rubriques (onglets et repères colorés par rubrique),
+% pictogrammes des 9 temps, couvertures et pages froides designées,
+% bibliothèque de figures paramétriques.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gabarits/nexus-charte-v6}[2026/08/12 v1.0 Charte collection premium]
+
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+
+% ===========================================================================
+%  1. PALETTE DE RUBRIQUES — stable dans toute la collection
+% ===========================================================================
+% La couleur d'identité (chapcolor) reste celle de la discipline.
+% Chaque rubrique récurrente reçoit une couleur d'appui reconnaissable,
+% identique dans les six manuels.
+\definecolor{rubDiagnostic}{HTML}{7C3AED}   % violet — se situer
+\definecolor{rubMethodes}{HTML}{B97A17}     % or éditorial — savoir-faire
+\definecolor{rubExercices}{HTML}{2E7DD1}    % bleu — s'entraîner
+\definecolor{rubTD}{HTML}{0FA3B1}           % turquoise — fil rouge / TD
+\definecolor{rubEvaluation}{HTML}{F5484B}   % corail — se tester
+\definecolor{rubRemediation}{HTML}{0E9E6E}  % émeraude — se réparer
+\definecolor{rubCorriges}{HTML}{5B6B85}     % encre allégée — solutions
+
+% Table rubrique → couleur (clefs en minuscules non accentuées)
+\newcommand{\nxDefRubCol}[2]{\expandafter\def\csname nxRubCol@#1\endcsname{#2}}
+\nxDefRubCol{ouverture}{chapcolor}
+\nxDefRubCol{diagnostic}{rubDiagnostic}
+\nxDefRubCol{cours}{chapcolor}
+\nxDefRubCol{methodes}{rubMethodes}
+\nxDefRubCol{exercices}{rubExercices}
+\nxDefRubCol{td}{rubTD}
+\nxDefRubCol{autoevaluation}{rubDiagnostic}
+\nxDefRubCol{evaluation}{rubEvaluation}
+\nxDefRubCol{remediation}{rubRemediation}
+\nxDefRubCol{corriges}{rubCorriges}
+\nxDefRubCol{projets}{rubTD}
+
+% Si la discipline est la NSI (chapcolor = émeraude), la remédiation
+% bascule sur l'indigo pour rester distincte de l'identité.
+\ifdefined\matiere
+  \apptocmd{\matiere}{%
+    \ifstrequal{#1}{NSI}{\nxDefRubCol{remediation}{mathsAccent}}{}%
+  }{}{}
+\fi
+
+% Résolution tolérante : nom de rubrique tel qu'écrit → clef normalisée.
+% (les rubriques v5 sont posées par \rubrique{Exercices}, \rubrique{Cours}...)
+\newcommand{\nxRubriqueCouleur}[1]{%
+  \ifcsname nxRubCol@nx@norm@#1\endcsname
+    \csname nxRubCol@nx@norm@#1\endcsname
+  \else
+    encre
+  \fi
+}
+% Normalisation explicite des libellés employés par la collection
+\newcommand{\nxNormRub}[2]{%
+  \expandafter\def\csname nxRubCol@nx@norm@#1\endcsname{%
+    \csname nxRubCol@#2\endcsname}}
+\nxNormRub{Ouverture}{ouverture}
+\nxNormRub{Diagnostic}{diagnostic}
+\nxNormRub{Cours}{cours}
+\nxNormRub{Méthodes}{methodes}
+\nxNormRub{Methodes}{methodes}
+\nxNormRub{Exercices}{exercices}
+\nxNormRub{TD}{td}
+\nxNormRub{Auto-évaluation}{autoevaluation}
+\nxNormRub{Auto-evaluation}{autoevaluation}
+\nxNormRub{Évaluation}{evaluation}
+\nxNormRub{Evaluation}{evaluation}
+\nxNormRub{Remédiation}{remediation}
+\nxNormRub{Remediation}{remediation}
+\nxNormRub{Corrigés}{corriges}
+\nxNormRub{Corriges}{corriges}
+\nxNormRub{Projets}{projets}
+
+% ===========================================================================
+%  2. ONGLETS v6 — l'onglet latéral prend la couleur de sa rubrique
+% ===========================================================================
+% Reprise du rendu v5 (géométrie identique, index de pouce par chapitre),
+% avec fond coloré par rubrique au lieu du fond encre uniforme.
+% Le rendu est défini inconditionnellement (un corps de macro ne s'exécute
+% pas), puis substitué à \nxOngletRubrique seulement si la classe v5 fournit
+% ses registres. Ne PAS mettre le corps dans le \ifdefined : ses \ifnxV...
+% inexistants en v4 désynchronisent le saut de conditionnelle de TeX.
+\newcommand{\nxSixOngletRubrique}{%
+  \ifnxVSuppressTab\else
+  \begingroup
+  \sbox{\nxVOngletTextBox}{{\titrefont\fontsize{5.5}{5.5}\selectfont
+    \color{white}\MakeUppercase{\nxRubriquePage}}}%
+  \setlength{\nxVOngletLength}{%
+    \dimexpr\wd\nxVOngletTextBox+5mm\relax}%
+  \ifdim\nxVOngletLength<14mm
+    \setlength{\nxVOngletLength}{14mm}\fi
+  \setlength{\nxVOngletHalfLength}{\nxVOngletLength}%
+  \divide\nxVOngletHalfLength by 2
+  \edef\nxVOngletFill{\nxRubriqueCouleur{\nxRubriquePage}}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \pgfmathsetmacro{\ongletY}{-25 - (\value{chapter}-1)*18}
+    \ifodd\value{page}%
+      \path[fill=\nxVOngletFill, rounded corners=1.1mm]
+        ([xshift=-10mm,yshift=\ongletY mm]current page.north east)
+        rectangle
+        ([xshift=1mm,yshift=\ongletY mm-\nxVOngletLength]
+          current page.north east);
+      \node[rotate=90,anchor=center,inner sep=0pt]
+        at ([yshift=\ongletY mm-\nxVOngletHalfLength,
+             xshift=-5mm]current page.north east)
+        {\usebox{\nxVOngletTextBox}};
+    \else
+      \path[fill=\nxVOngletFill, rounded corners=1.1mm]
+        ([xshift=-1mm,yshift=\ongletY mm]current page.north west)
+        rectangle
+        ([xshift=10mm,yshift=\ongletY mm-\nxVOngletLength]
+          current page.north west);
+      \node[rotate=-90,anchor=center,inner sep=0pt]
+        at ([yshift=\ongletY mm-\nxVOngletHalfLength,
+             xshift=5mm]current page.north west)
+        {\usebox{\nxVOngletTextBox}};
+    \fi
+  \end{tikzpicture}%
+  \endgroup
+  \fi
+}
+\ifdefined\nxVOngletTextBox
+  \let\nxOngletRubrique\nxSixOngletRubrique
+\fi
+
+% ===========================================================================
+%  2 bis. SOMMAIRE — les chapitres portent leur numéro (pavé couleur)
+% ===========================================================================
+% La branche compatibilité de \ouverturechapitre écrit l'entrée de sommaire
+% sans \numberline ; on la complète pour alimenter le pavé numéroté du
+% sommaire stylé (nexus-pages-froides).
+% La branche compatibilité v5 écrit les entrées de chapitre sans
+% \numberline. On intercepte \addcontentsline : toute entrée de chapitre du
+% sommaire reçoit son numéro (les entrées v6 n'en écrivent jamais elles-mêmes).
+\let\nxSixOrigAddcontentsline\addcontentsline
+\renewcommand{\addcontentsline}[3]{%
+  \ifboolexpr{ test {\ifstrequal{#1}{toc}} and test {\ifstrequal{#2}{chapter}} }%
+    {\nxSixOrigAddcontentsline{#1}{#2}{\protect\numberline{\thechapter}#3}}%
+    {\nxSixOrigAddcontentsline{#1}{#2}{#3}}%
+}
+
+% ===========================================================================
+%  3. PICTOGRAMMES DES 9 TEMPS — complète nexus-icons.tex (trait 0.8pt, 1em)
+% ===========================================================================
+% \icnOuverture — porte entrouverte
+\newcommand{\icnOuverture}[1][chapcolor]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (-0.35em,-0.42em) rectangle (0.35em,0.42em);
+    \draw[#1,line width=0.8pt] (-0.35em,-0.42em) -- (0.1em,-0.3em)
+      -- (0.1em,0.54em) -- (-0.35em,0.42em);
+    \fill[#1] (0.0em,0.05em) circle (0.05em);
+  }%
+}
+% \icnDiagnostic — loupe
+\newcommand{\icnDiagnostic}[1][rubDiagnostic]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (0.08em,0.08em) circle (0.3em);
+    \draw[#1,line width=0.9pt,line cap=round]
+      (-0.14em,-0.14em) -- (-0.45em,-0.45em);
+  }%
+}
+% \icnCours — livre ouvert
+\newcommand{\icnCours}[1][chapcolor]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (0,-0.35em) -- (0,0.3em);
+    \draw[#1,line width=0.8pt] (0,0.3em) .. controls (-0.15em,0.42em)
+      and (-0.4em,0.42em) .. (-0.5em,0.35em) -- (-0.5em,-0.3em)
+      .. controls (-0.4em,-0.37em) and (-0.15em,-0.37em) .. (0,-0.35em);
+    \draw[#1,line width=0.8pt] (0,0.3em) .. controls (0.15em,0.42em)
+      and (0.4em,0.42em) .. (0.5em,0.35em) -- (0.5em,-0.3em)
+      .. controls (0.4em,-0.37em) and (0.15em,-0.37em) .. (0,-0.35em);
+  }%
+}
+% \icnEntrainement — trois losanges empilés en escalier
+\newcommand{\icnEntrainement}[1][rubExercices]{%
+  \tikz[baseline=-0.15em]{%
+    \foreach \i/\o in {0/0.35, 1/0.65, 2/1}{
+      \fill[#1, opacity=\o]
+        ({\i*0.3em-0.3em},{\i*0.12em-0.24em}) -- ++(0.14em,0.2em)
+        -- ++(0.14em,-0.2em) -- ++(-0.14em,-0.2em) -- cycle;
+    }
+  }%
+}
+% \icnFilRouge — chemin jalonné
+\newcommand{\icnFilRouge}[1][rubTD]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt]
+      (-0.45em,-0.3em) .. controls (-0.1em,-0.5em) and (0.15em,0.05em)
+      .. (0.45em,0.38em);
+    \fill[#1] (-0.45em,-0.3em) circle (0.07em);
+    \fill[#1] (0.02em,-0.07em) circle (0.07em);
+    \fill[#1] (0.45em,0.38em) circle (0.07em);
+  }%
+}
+% \icnAutoEval — jauge à curseur
+\newcommand{\icnAutoEval}[1][rubDiagnostic]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (-0.45em,0.28em) arc (180:0:0.45em);
+    \draw[#1,line width=0.9pt,line cap=round] (0,0.28em) -- (0.25em,0.5em);
+    \fill[#1] (0,0.28em) circle (0.06em);
+    \draw[#1,line width=0.8pt] (-0.45em,0.28em) -- (-0.45em,0.2em);
+    \draw[#1,line width=0.8pt] (0.45em,0.28em) -- (0.45em,0.2em);
+  }%
+}
+% \icnEvaluation — copie cochée
+\newcommand{\icnEvaluation}[1][rubEvaluation]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt,rounded corners=0.6pt]
+      (-0.3em,-0.45em) rectangle (0.3em,0.45em);
+    \draw[#1,line width=0.7pt] (-0.18em,0.22em) -- (0.18em,0.22em);
+    \draw[#1,line width=0.7pt] (-0.18em,0.05em) -- (0.18em,0.05em);
+    \draw[#1,line width=0.9pt,line cap=round]
+      (-0.14em,-0.22em) -- (-0.04em,-0.32em) -- (0.2em,-0.08em);
+  }%
+}
+% \icnRemediation — bouée (cercle + rayons)
+\newcommand{\icnRemediation}[1][rubRemediation]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.8pt] (0,0) circle (0.42em);
+    \draw[#1,line width=0.8pt] (0,0) circle (0.18em);
+    \foreach \a in {45,135,225,315}{
+      \draw[#1,line width=0.8pt] (\a:0.18em) -- (\a:0.42em);
+    }
+  }%
+}
+% \icnProjet — fanion
+\newcommand{\icnProjet}[1][rubTD]{%
+  \tikz[baseline=-0.15em]{%
+    \draw[#1,line width=0.9pt,line cap=round] (-0.3em,-0.45em) -- (-0.3em,0.5em);
+    \draw[#1,line width=0.8pt] (-0.3em,0.5em) -- (0.4em,0.32em) -- (-0.3em,0.12em);
+  }%
+}
+
+% ===========================================================================
+%  4. MODULES DE LA CHARTE
+% ===========================================================================
+\RequirePackage{gabarits/nexus-couverture}
+\RequirePackage{gabarits/nexus-pages-froides}
+\RequirePackage{gabarits/nexus-figures-bib}
+\RequirePackage{gabarits/nexus-boites-v6}
+\RequirePackage{gabarits/nexus-exercices-v6}
+\RequirePackage{gabarits/nexus-decor}
