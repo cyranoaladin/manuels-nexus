@@ -27,16 +27,30 @@ clone propre et approbation humaine finale.
 
 L'utilisateur a explicitement approuvé les décisions suivantes :
 
-- produire la collection par vagues avec gates communs ;
-- conserver la maquette actuelle de `main`, incluant les correctifs
+- `HUM-2026-08-11-WAVES` : produire la collection par vagues avec gates
+  communs ;
+- `HUM-2026-08-11-VISUAL-MAIN` : conserver la maquette actuelle de `main`,
+  incluant les correctifs
   anti-collision, comme référence visuelle ;
-- porter sélectivement les apports programme et traçabilité de
+- `HUM-2026-08-11-1SPE-INTEGRATION` : porter sélectivement les apports programme
+  et traçabilité de
   `feature/1spe-bat-2026`, sans fusion automatique de cette branche ;
-- conserver les enrichissements hors programme uniquement lorsqu'ils sont
+- `HUM-2026-08-11-ENRICHMENTS` : conserver les enrichissements hors programme
+  uniquement lorsqu'ils sont
   clairement signalés « Pour aller plus loin », non exigibles, non nécessaires
   à la maîtrise et exclus des évaluations obligatoires ;
-- soumettre chaque manuel séparément à l'utilisateur pour l'approbation humaine
+- `HUM-2026-08-11-BASELINE-WAVE0` : autoriser la mise à jour de la baseline
+  d'anomalies pendant Wave 0 uniquement selon le protocole fingerprint par
+  fingerprint décrit en section 12, sans suppression destinée à obtenir du
+  vert ;
+- `HUM-2026-08-12-FINAL-APPROVER` : soumettre chaque manuel séparément à
+  l'utilisateur pour l'approbation humaine
   finale, après remise des preuves scientifiques, programme, éditoriales et PDF.
+
+Ces identifiants décrivent des décisions de cadrage. Ils ne valent ni revue
+scientifique d'un chapitre ni approbation de release d'un manuel. Les preuves
+de ces revues seront enregistrées séparément dans le registre canonique des
+approbations humaines.
 
 ## 3. Approches examinées
 
