@@ -7381,6 +7381,55 @@ def test_closed_contract_rejects_mutable_constant_escapes(
     assert expected_field in {field for field, _reason in errors}
 
 
+def test_closed_contract_rejects_tuple_of_nested_variant_order_values(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        _closed_contract_source("escaped = tuple(VARIANT_ORDERS.values())\n"),
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "VARIANT_ORDERS" in {field for field, _reason in errors}
+
+
+def test_manifest_backed_nsi_assembler_rejects_shadowed_tuple_escape(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = tmp_path / "assemble_manuel.py"
+    _write(
+        assembler,
+        '''BOOK_MANIFESTS = {"1NSI": "manifests/books/1NSI.json"}
+BOOK_ID = "1NSI"
+CHAPITRES = []
+ORDER = [("cours", "*")]
+VARIANTS = ["eleve"]
+VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+ELEVE_VARIANTS = ["eleve"]
+ELEVE_ALLOWED_TYPES = ["cours"]
+def consume(value):
+    value.clear()
+    return ()
+tuple = consume
+LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
+''',
+    )
+
+    analysis = inventory_module.analyze_assembler(assembler)
+    errors = inventory_module._assembly_core.validate_analysis(
+        "NSI/scripts/assemble_manuel.py",
+        analysis,
+    )
+
+    assert "BOOK_MANIFESTS" in {field for field, _reason in errors}
+
+
 def test_closed_contract_rejects_mutation_through_indexed_rules_alias(
     tmp_path: Path, inventory_module
 ) -> None:
@@ -8393,39 +8442,127 @@ def test_manual_assembler_gaps_and_chapters_outside_manual_are_explicit(
     } == {"1NSI-TEST", "TNSI-TEST", "TSPE-TEST"}
 
 
-def test_nsi_manual_assembler_cannot_cover_tnsi_chapters(
-    tmp_path: Path, inventory_module
-) -> None:
-    _init_repository(tmp_path)
-    assembler = "NSI/scripts/assemble_manuel.py"
-    sources = {
-        "NSI/chapitres/1NSI-TEST/contrat.yaml": _contract(
-            "1NSI-TEST", "1NSI", capacities=1
-        ),
-        "NSI/chapitres/1NSI-TEST/cours/10_cours.tex": _meta(
-            id="1NSI-TEST-COURS-C1",
-            chapitre="1NSI-TEST",
-            status="approved",
-        ),
-        "NSI/chapitres/TNSI-TEST/contrat.yaml": _contract(
-            "TNSI-TEST", "TNSI", capacities=1
-        ),
-        "NSI/chapitres/TNSI-TEST/cours/10_cours.tex": _meta(
-            id="TNSI-TEST-COURS-C1",
-            chapitre="TNSI-TEST",
-            status="approved",
-        ),
-        assembler: '''CHAPITRES = ["1NSI-TEST", "TNSI-TEST"]
+def _nsi_book_manifest(book_id: str, chapters: list[str]) -> dict[str, object]:
+    return {
+        "book_id": book_id,
+        "chapters": [{"id": chapter} for chapter in chapters],
+    }
+
+
+def _manifest_backed_nsi_assembler_source(
+    book_manifests: dict[str, str],
+    *,
+    chapters: list[str] | None = None,
+) -> str:
+    return f'''BOOK_MANIFESTS = {book_manifests!r}
+BOOK_ID = "1NSI"
+CHAPITRES = {chapters or []!r}
 ORDER = [("cours", "*")]
 VARIANTS = ["eleve"]
-VARIANT_ORDERS = {"eleve": [("cours", "*")]}
+VARIANT_ORDERS = {{"eleve": [("cours", "*")]}}
 ELEVE_VARIANTS = ["eleve"]
 ELEVE_ALLOWED_TYPES = ["cours"]
-''',
+'''
+
+
+def _write_manifest_backed_nsi_fixture(
+    root: Path,
+    *,
+    book_manifests: dict[str, str],
+    manifests: dict[str, object],
+    chapters_by_manual: dict[str, list[str]] | None = None,
+    static_chapters: list[str] | None = None,
+    untracked_manifests: frozenset[str] = frozenset(),
+) -> str:
+    _init_repository(root)
+    assembler = "NSI/scripts/assemble_manuel.py"
+    sources: dict[str, str] = {
+        assembler: _manifest_backed_nsi_assembler_source(
+            book_manifests,
+            chapters=static_chapters,
+        )
     }
+    for relative_path, payload in manifests.items():
+        sources[f"NSI/{relative_path}"] = (
+            payload
+            if isinstance(payload, str)
+            else json.dumps(payload, ensure_ascii=False)
+        )
+    for manual, chapters in (chapters_by_manual or {}).items():
+        for chapter in chapters:
+            base = f"NSI/chapitres/{chapter}"
+            sources[f"{base}/contrat.yaml"] = _contract(
+                chapter,
+                manual,
+                capacities=1,
+            )
+            sources[f"{base}/cours/10_cours.tex"] = _meta(
+                id=f"{chapter}-COURS-C1",
+                chapitre=chapter,
+                status="approved",
+            )
     for path, content in sources.items():
-        _write(tmp_path / path, content)
-    _track(tmp_path, *sources)
+        _write(root / path, content)
+    tracked = [
+        path
+        for path in sources
+        if not (
+            path.startswith("NSI/")
+            and path.removeprefix("NSI/") in untracked_manifests
+        )
+    ]
+    _track(root, *tracked)
+    return assembler
+
+
+def _manifest_backed_nsi_reasons(
+    inventory: dict[str, object], assembler: str
+) -> list[str]:
+    anomalies = inventory["anomalies"]
+    assert isinstance(anomalies, dict)
+    return [
+        anomaly["raison"]
+        for anomaly in anomalies["assembler_invalid"]
+        if anomaly["source"] == assembler
+    ]
+
+
+def _assert_manifest_backed_nsi_rejected(
+    inventory: dict[str, object], assembler: str, expected: str
+) -> None:
+    assemblies = inventory["assemblies"]
+    assert isinstance(assemblies, list)
+    assert not [
+        assembly
+        for assembly in assemblies
+        if assembly["assembler"] == assembler and assembly["scope"] == "manual"
+    ]
+    assert any(
+        expected.casefold() in reason.casefold()
+        for reason in _manifest_backed_nsi_reasons(inventory, assembler)
+    )
+
+
+def test_manifest_backed_nsi_assembler_declares_two_manuals(
+    tmp_path: Path, inventory_module
+) -> None:
+    chapters_by_manual = {
+        "1NSI": ["1NSI-TEST"],
+        "TNSI": ["TNSI-TEST"],
+    }
+    book_manifests = {
+        "1NSI": "manifests/books/1NSI.json",
+        "TNSI": "manifests/books/TNSI.json",
+    }
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests=book_manifests,
+        manifests={
+            path: _nsi_book_manifest(manual, chapters_by_manual[manual])
+            for manual, path in book_manifests.items()
+        },
+        chapters_by_manual=chapters_by_manual,
+    )
 
     inventory = inventory_module.build_inventory(tmp_path)
     manual_assemblies = {
@@ -8434,18 +8571,206 @@ ELEVE_ALLOWED_TYPES = ["cours"]
         if assembly["scope"] == "manual"
     }
 
-    assert "nsi:manual:1NSI:eleve" in manual_assemblies
-    assert "nsi:manual:TNSI:eleve" not in manual_assemblies
-    assert any(
-        anomaly["source"] == assembler
-        and anomaly["cible"] == "TNSI-TEST"
-        and anomaly["champ"] == "CHAPITRES[1]"
-        and "perimetre" in anomaly["raison"]
-        for anomaly in inventory["anomalies"]["broken_assembly_references"]
+    assert set(manual_assemblies) == {
+        "nsi:manual:1NSI:eleve",
+        "nsi:manual:TNSI:eleve",
+    }
+    assert manual_assemblies["nsi:manual:1NSI:eleve"]["chapters"] == [
+        "1NSI-TEST"
+    ]
+    assert manual_assemblies["nsi:manual:TNSI:eleve"]["chapters"] == [
+        "TNSI-TEST"
+    ]
+    assert _manifest_backed_nsi_reasons(inventory, assembler) == []
+
+
+def test_manifest_backed_nsi_assembler_rejects_absolute_manifest_path(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": "/tmp/1NSI.json"},
+        manifests={},
     )
-    assert any(
-        anomaly["cible"] == "TNSI-TEST"
-        for anomaly in inventory["anomalies"]["chapters_not_in_manual"]
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "absolu")
+
+
+def test_manifest_backed_nsi_assembler_rejects_parent_manifest_path(
+    tmp_path: Path, inventory_module
+) -> None:
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": "../1NSI.json"},
+        manifests={},
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "..")
+
+
+def test_manifest_backed_nsi_assembler_rejects_untracked_manifest_file(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/1NSI.json"
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": manifest},
+        manifests={manifest: _nsi_book_manifest("1NSI", ["1NSI-TEST"])},
+        untracked_manifests=frozenset({manifest}),
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "non suivi")
+
+
+def test_manifest_backed_nsi_assembler_rejects_incoherent_manifest_book_id(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/1NSI.json"
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": manifest},
+        manifests={manifest: _nsi_book_manifest("TNSI", ["1NSI-TEST"])},
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "book_id")
+
+
+def test_manifest_backed_nsi_assembler_rejects_duplicate_chapter_id(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/1NSI.json"
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": manifest},
+        manifests={
+            manifest: _nsi_book_manifest(
+                "1NSI",
+                ["1NSI-TEST", "1NSI-TEST"],
+            )
+        },
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "duplique")
+
+
+def test_manifest_backed_nsi_assembler_rejects_static_runtime_order_divergence(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/1NSI.json"
+    runtime_chapters = ["1NSI-FIRST", "1NSI-SECOND"]
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": manifest},
+        manifests={manifest: _nsi_book_manifest("1NSI", runtime_chapters)},
+        chapters_by_manual={"1NSI": runtime_chapters},
+        static_chapters=list(reversed(runtime_chapters)),
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "ordre")
+
+
+def test_manifest_backed_nsi_assembler_rejects_invalid_json(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/1NSI.json"
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": manifest},
+        manifests={manifest: "{not-json"},
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "JSON")
+
+
+def test_manifest_backed_nsi_assembler_rejects_invalid_chapter_id(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/1NSI.json"
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"1NSI": manifest},
+        manifests={manifest: _nsi_book_manifest("1NSI", ["1NSI-TEST "])},
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "id de chapitre")
+
+
+def test_manifest_backed_nsi_assembler_rejects_unsupported_manual(
+    tmp_path: Path, inventory_module
+) -> None:
+    manifest = "manifests/books/UNKNOWN.json"
+    assembler = _write_manifest_backed_nsi_fixture(
+        tmp_path,
+        book_manifests={"UNKNOWN": manifest},
+        manifests={manifest: _nsi_book_manifest("UNKNOWN", ["1NSI-TEST"])},
+    )
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "pris en charge")
+
+
+def test_manifest_backed_nsi_assembler_rejects_symlink_manifest(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    assembler = "NSI/scripts/assemble_manuel.py"
+    manifest = "manifests/books/1NSI.json"
+    source = "NSI/manifests/books/source.json"
+    _write(
+        tmp_path / assembler,
+        _manifest_backed_nsi_assembler_source({"1NSI": manifest}),
+    )
+    _write(
+        tmp_path / source,
+        json.dumps(_nsi_book_manifest("1NSI", ["1NSI-TEST"])),
+    )
+    link = tmp_path / "NSI" / manifest
+    link.parent.mkdir(parents=True, exist_ok=True)
+    link.symlink_to("source.json")
+    _track(tmp_path, assembler, source, f"NSI/{manifest}")
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(inventory, assembler, "symbolique")
+
+
+def test_manifest_backed_nsi_assembler_rejects_mutated_manifest_mapping(
+    tmp_path: Path, inventory_module
+) -> None:
+    _init_repository(tmp_path)
+    assembler = "NSI/scripts/assemble_manuel.py"
+    source = _manifest_backed_nsi_assembler_source(
+        {"1NSI": "manifests/books/1NSI.json"}
+    )
+    _write(
+        tmp_path / assembler,
+        source + 'BOOK_MANIFESTS["TNSI"] = "manifests/books/TNSI.json"\n',
+    )
+    _track(tmp_path, assembler)
+
+    inventory = inventory_module.build_inventory(tmp_path)
+
+    _assert_manifest_backed_nsi_rejected(
+        inventory,
+        assembler,
+        "affectation litterale",
     )
 
 
@@ -8454,7 +8779,7 @@ def test_supported_manuals_distinguish_nsi_chapter_and_manual_assemblers(
 ) -> None:
     supported = inventory_module._supported_manuals_for_assembler
 
-    assert supported("NSI/scripts/assemble_manuel.py") == ("1NSI",)
+    assert supported("NSI/scripts/assemble_manuel.py") == ("1NSI", "TNSI")
     assert supported("NSI/scripts/assemble.py") == ("1NSI", "TNSI")
     assert supported("Mathematiques/manuel-maths/scripts/assemble_manuel.py") == (
         "1SPE",
@@ -8505,7 +8830,7 @@ def test_live_1nsi_runtime_selection_matches_declared_manual_assemblies(
         assert assemblies[variant]["included_objects"] == runtime_paths
 
 
-def test_live_1nsi_manual_declaration_closes_assembly_debt_without_tnsi(
+def test_live_nsi_manual_declaration_covers_1nsi_and_tnsi(
     inventory_module, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     assembler = "NSI/scripts/assemble_manuel.py"
@@ -8524,48 +8849,56 @@ def test_live_1nsi_manual_declaration_closes_assembly_debt_without_tnsi(
     )
 
     inventory = inventory_module.build_inventory(ROOT)
-    nsi_manual_assemblies = [
-        assembly
-        for assembly in inventory["assemblies"]
-        if assembly["scope"] == "manual" and assembly["manual"] == "1NSI"
-    ]
-    tnsi_manual_assemblies = [
-        assembly
-        for assembly in inventory["assemblies"]
-        if assembly["scope"] == "manual" and assembly["manual"] == "TNSI"
-    ]
-    tnsi_chapter_variants = {
-        assembly["variant"]
-        for assembly in inventory["assemblies"]
-        if assembly["scope"] == "chapter" and assembly["manual"] == "TNSI"
+    manifest_chapters = {
+        manual: [
+            chapter["id"]
+            for chapter in json.loads(
+                (ROOT / f"NSI/manifests/books/{manual}.json").read_text(
+                    encoding="utf-8"
+                )
+            )["chapters"]
+        ]
+        for manual in ("1NSI", "TNSI")
+    }
+    assemblies_by_manual = {
+        manual: [
+            assembly
+            for assembly in inventory["assemblies"]
+            if assembly["scope"] == "manual" and assembly["manual"] == manual
+        ]
+        for manual in manifest_chapters
     }
 
-    assert len(nsi_manual_assemblies) == 7
-    assert {
-        chapter
-        for assembly in nsi_manual_assemblies
-        for chapter in assembly["chapters"]
-    } == set(inventory["manuals"]["1NSI"]["chapters"])
+    assert {manual: len(items) for manual, items in assemblies_by_manual.items()} == {
+        "1NSI": 7,
+        "TNSI": 7,
+    }
+    for manual, assemblies in assemblies_by_manual.items():
+        assert {assembly["variant"] for assembly in assemblies} == {
+            "eleve",
+            "professeur",
+            "methodes",
+            "remediation",
+            "amenagee",
+            "evaluations",
+            "projets",
+        }
+        assert all(
+            assembly["chapters"] == manifest_chapters[manual]
+            for assembly in assemblies
+        )
     assert not [
         anomaly
         for anomaly in inventory["anomalies"]["chapters_not_in_manual"]
-        if anomaly["cible"].startswith("1NSI-")
+        if anomaly["cible"].startswith(("1NSI-", "TNSI-"))
     ]
     assert not [
         anomaly
         for anomaly in inventory["anomalies"]["unassembled_objects"]
-        if anomaly["cible"].startswith("NSI/chapitres/1NSI-")
+        if anomaly["cible"].startswith(
+            ("NSI/chapitres/1NSI-", "NSI/chapitres/TNSI-")
+        )
     ]
-    assert tnsi_manual_assemblies == []
-    assert tnsi_chapter_variants == {
-        "amenagee",
-        "complet",
-        "methodes",
-        "parcours1",
-        "professeur",
-        "remediation",
-    }
-    assert not (ROOT / "NSI/manifests/books/TNSI.json").exists()
 
 
 def test_pdf_inventory_uses_only_tracked_files_and_reports_unavailable_page_count(

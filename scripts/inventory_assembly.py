@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import ast
 import fnmatch
+import json
+import stat
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
@@ -21,6 +23,7 @@ class AssemblyAnalysisError(RuntimeError):
 
 _AUDITED_SELECTION_CONSTANTS = frozenset(
     {
+        "BOOK_MANIFESTS",
         "CHAPITRES",
         "ELEVE_ALLOWED_TYPES",
         "ELEVE_EXCLUDES",
@@ -299,13 +302,18 @@ def _guaranteed_class_statement_bindings(statement: ast.stmt) -> set[str]:
 
 
 class _AuditedMutationVisitor(ast.NodeVisitor):
-    def __init__(self, supported_top_level_node_ids: set[int]) -> None:
+    def __init__(
+        self,
+        supported_top_level_node_ids: set[int],
+        module_bound_names: frozenset[str],
+    ) -> None:
         self.ambiguous: set[str] = set()
         self.declared: set[str] = set()
         self._scopes: list[_LexicalScope] = [_MODULE_SCOPE]
         self._class_runtime_bindings: list[set[str] | None] = [None]
         self._mutable_aliases: list[dict[str, set[str]]] = [{}]
         self._supported_top_level_node_ids = supported_top_level_node_ids
+        self._module_bound_names = module_bound_names
 
     def _binding_module_names(self, names: set[str]) -> set[str]:
         audited = names & _AUDITED_SELECTION_CONSTANTS
@@ -670,8 +678,19 @@ class _AuditedMutationVisitor(ast.NodeVisitor):
             self._record_module_names(
                 self._mutation_expression_module_names(node.func.value)
             )
+        immutable_book_manifest_key_copy = (
+            isinstance(node.func, ast.Name)
+            and node.func.id == "tuple"
+            and len(self._scopes) == 1
+            and "tuple" not in self._module_bound_names
+            and len(node.args) == 1
+            and not node.keywords
+            and isinstance(node.args[0], ast.Name)
+            and node.args[0].id == "BOOK_MANIFESTS"
+        )
         for argument in node.args:
-            self._record_escape(argument)
+            if not immutable_book_manifest_key_copy:
+                self._record_escape(argument)
         for keyword in node.keywords:
             self._record_escape(keyword.value)
         self.generic_visit(node)
@@ -1003,7 +1022,11 @@ def analyze_assembler(path: Path | str) -> dict[str, Any]:
             and node.value is not None
         )
     }
-    mutation_visitor = _AuditedMutationVisitor(supported_top_level_node_ids)
+    module_scope = _lexical_scope("module", tree.body)
+    mutation_visitor = _AuditedMutationVisitor(
+        supported_top_level_node_ids,
+        module_scope.locals,
+    )
     mutation_visitor.visit(tree)
 
     declared_constants = set(mutation_visitor.declared)
@@ -1098,6 +1121,20 @@ def _is_valid_variant_order(value: Any) -> bool:
     )
 
 
+def _is_valid_book_manifests(value: Any) -> bool:
+    return (
+        isinstance(value, Mapping)
+        and bool(value)
+        and all(
+            isinstance(manual, str)
+            and bool(manual.strip())
+            and isinstance(manifest, str)
+            and bool(manifest.strip())
+            for manual, manifest in value.items()
+        )
+    )
+
+
 def validate_analysis(
     path: str,
     analysis: Mapping[str, Any],
@@ -1115,13 +1152,42 @@ def validate_analysis(
         errors.append(("variants", "aucune variante litterale resolue"))
     if path.endswith("/scripts/assemble_manuel.py"):
         constants = analysis["constants"]
-        chapters = analysis["constants"].get("CHAPITRES")
-        if (
-            not isinstance(chapters, list)
-            or not chapters
-            or not all(isinstance(chapter, str) and chapter for chapter in chapters)
+        declared_constants = set(analysis.get("declared_constants", constants))
+        ambiguous_constants = set(analysis.get("ambiguous_constants", []))
+        unresolved_constants = set(analysis.get("unresolved_constants", []))
+        unsafe_constants = ambiguous_constants | unresolved_constants
+        chapters = constants.get("CHAPITRES")
+        valid_chapters = (
+            isinstance(chapters, list)
+            and bool(chapters)
+            and all(
+                isinstance(chapter, str) and bool(chapter.strip())
+                for chapter in chapters
+            )
+        )
+        book_manifests = constants.get("BOOK_MANIFESTS")
+        valid_book_manifests = _is_valid_book_manifests(book_manifests)
+        if not valid_chapters and not valid_book_manifests:
+            if "BOOK_MANIFESTS" in declared_constants:
+                errors.append(
+                    (
+                        "BOOK_MANIFESTS",
+                        "BOOK_MANIFESTS doit etre un mapping litteral ferme non vide",
+                    )
+                )
+            else:
+                errors.append(("CHAPITRES", "CHAPITRES absent ou invalide"))
+        if "BOOK_MANIFESTS" in unsafe_constants and (
+            "BOOK_MANIFESTS" in constants
+            or "BOOK_MANIFESTS" in unresolved_constants
         ):
-            errors.append(("CHAPITRES", "CHAPITRES absent ou invalide"))
+            errors.append(
+                (
+                    "BOOK_MANIFESTS",
+                    "declaration ou mutation BOOK_MANIFESTS hors affectation "
+                    "litterale top-level interdite",
+                )
+            )
         if isinstance(variants, list) and "eleve" in variants:
             student_types = analysis["constants"].get("ELEVE_ALLOWED_TYPES")
             if (
@@ -1135,14 +1201,10 @@ def validate_analysis(
                         "filtre metadata eleve absent ou invalide",
                     )
                 )
-        declared_constants = set(analysis.get("declared_constants", constants))
         closed_contract = bool(
             declared_constants & {"ELEVE_VARIANTS", "VARIANT_ORDERS"}
         )
         if closed_contract:
-            ambiguous_constants = set(analysis.get("ambiguous_constants", []))
-            unresolved_constants = set(analysis.get("unresolved_constants", []))
-            unsafe_constants = ambiguous_constants | unresolved_constants
             declared_variants = constants.get("VARIANTS")
             variant_orders = constants.get("VARIANT_ORDERS")
             valid_declared_variants = (
@@ -1211,8 +1273,16 @@ def validate_analysis(
                     )
                 )
             existing_error_fields = {field for field, _reason in errors}
+            ignored_runtime_constants = (
+                {"CHAPITRES"} if valid_book_manifests else set()
+            )
             for name in sorted(
-                unsafe_constants - {"ELEVE_VARIANTS", "VARIANT_ORDERS"}
+                unsafe_constants
+                - {
+                    "ELEVE_VARIANTS",
+                    "VARIANT_ORDERS",
+                    *ignored_runtime_constants,
+                }
             ):
                 if name in existing_error_fields:
                     continue
@@ -1516,6 +1586,144 @@ def _add_dynamic_dependencies(
             )
 
 
+def _manifest_backed_chapters(
+    root: Path,
+    tracked: frozenset[str],
+    assembler_path: str,
+    analysis: Mapping[str, Any],
+    *,
+    supported_manuals: set[str],
+    manual_for_chapter: Callable[[str], str | None],
+) -> tuple[dict[str, list[str]] | None, list[tuple[str, str]]]:
+    book_manifests = analysis["constants"].get("BOOK_MANIFESTS")
+    if not isinstance(book_manifests, Mapping):
+        return None, []
+
+    project_path = PurePosixPath(assembler_path).parent.parent
+    chapters_by_manual: dict[str, list[str]] = {}
+    errors: list[tuple[str, str]] = []
+    for manual, raw_manifest_path in book_manifests.items():
+        field = f"BOOK_MANIFESTS[{manual!r}]"
+        if manual not in supported_manuals:
+            errors.append((field, f"manuel non pris en charge: {manual}"))
+            continue
+        if not isinstance(raw_manifest_path, str):
+            errors.append((field, "chemin de manifeste invalide"))
+            continue
+        manifest_path = PurePosixPath(raw_manifest_path)
+        if manifest_path.is_absolute():
+            errors.append((field, "chemin de manifeste absolu interdit"))
+            continue
+        if ".." in manifest_path.parts:
+            errors.append((field, "chemin de manifeste contenant .. interdit"))
+            continue
+
+        repository_manifest = (project_path / manifest_path).as_posix()
+        if repository_manifest not in tracked:
+            errors.append(
+                (field, f"fichier manifeste non suivi par Git: {repository_manifest}")
+            )
+            continue
+        manifest_file = root / repository_manifest
+        try:
+            metadata = manifest_file.lstat()
+        except OSError:
+            errors.append((field, f"fichier manifeste absent: {repository_manifest}"))
+            continue
+        if stat.S_ISLNK(metadata.st_mode):
+            errors.append(
+                (field, f"fichier manifeste symbolique interdit: {repository_manifest}")
+            )
+            continue
+        if not stat.S_ISREG(metadata.st_mode):
+            errors.append(
+                (field, f"fichier manifeste non regulier: {repository_manifest}")
+            )
+            continue
+        try:
+            manifest_text = manifest_file.read_text(encoding="utf-8")
+        except (OSError, UnicodeError):
+            errors.append((field, f"fichier manifeste illisible: {repository_manifest}"))
+            continue
+        try:
+            manifest = json.loads(manifest_text)
+        except json.JSONDecodeError:
+            errors.append((field, f"JSON de manifeste invalide: {repository_manifest}"))
+            continue
+        if not isinstance(manifest, Mapping):
+            errors.append((field, f"JSON de manifeste invalide: {repository_manifest}"))
+            continue
+        if manifest.get("book_id") != manual:
+            errors.append(
+                (
+                    field,
+                    f"book_id du manifeste different de la cle {manual}: "
+                    f"{manifest.get('book_id')!r}",
+                )
+            )
+            continue
+
+        raw_chapters = manifest.get("chapters")
+        if not isinstance(raw_chapters, list) or not raw_chapters:
+            errors.append((field, "liste chapters du manifeste absente ou vide"))
+            continue
+        chapter_ids: list[str] = []
+        seen_chapters: set[str] = set()
+        manifest_error_count = len(errors)
+        for index, chapter in enumerate(raw_chapters):
+            chapter_id = chapter.get("id") if isinstance(chapter, Mapping) else None
+            chapter_field = f"{field}.chapters[{index}].id"
+            if (
+                not isinstance(chapter_id, str)
+                or not chapter_id.strip()
+                or chapter_id != chapter_id.strip()
+            ):
+                errors.append((chapter_field, "id de chapitre invalide"))
+                continue
+            if chapter_id in seen_chapters:
+                errors.append((chapter_field, f"id de chapitre duplique: {chapter_id}"))
+                continue
+            if manual_for_chapter(chapter_id) != manual:
+                errors.append(
+                    (
+                        chapter_field,
+                        f"id de chapitre invalide pour le manuel {manual}: {chapter_id}",
+                    )
+                )
+                continue
+            seen_chapters.add(chapter_id)
+            chapter_ids.append(chapter_id)
+        if len(errors) == manifest_error_count:
+            chapters_by_manual[manual] = chapter_ids
+
+    if errors:
+        return {}, errors
+
+    static_chapters = analysis["constants"].get("CHAPITRES")
+    if isinstance(static_chapters, list) and static_chapters:
+        static_manuals: list[str] = []
+        for chapter in static_chapters:
+            manual = manual_for_chapter(chapter)
+            if manual not in static_manuals:
+                static_manuals.append(manual or "")
+        runtime_order = [
+            chapter
+            for manual in static_manuals
+            for chapter in chapters_by_manual.get(manual, [])
+        ]
+        if static_chapters != runtime_order:
+            errors.append(
+                (
+                    "CHAPITRES",
+                    "ordre statique CHAPITRES divergent de l'ordre runtime "
+                    "des manifests",
+                )
+            )
+            return {}, errors
+
+    return chapters_by_manual, []
+
+
 def add_declared_assemblies(
     inventory: dict[str, Any],
     root: Path,
@@ -1568,11 +1776,32 @@ def add_declared_assemblies(
     chapter_engine_manuals: set[str] = set()
     for path, analysis in sorted(analyses.items()):
         if path.endswith("/scripts/assemble_manuel.py"):
-            chapters = analysis["constants"].get("CHAPITRES", [])
-            if not isinstance(chapters, list):
-                continue
-            chapters = [item for item in chapters if isinstance(item, str)]
             supported = set(supported_manuals(path))
+            manifest_chapters, manifest_errors = _manifest_backed_chapters(
+                root,
+                tracked,
+                path,
+                analysis,
+                supported_manuals=supported,
+                manual_for_chapter=manual_for_chapter,
+            )
+            if manifest_errors:
+                anomalies["assembler_invalid"].extend(
+                    _anomaly(path, path, field, reason)
+                    for field, reason in manifest_errors
+                )
+                continue
+            if manifest_chapters is None:
+                chapters = analysis["constants"].get("CHAPITRES", [])
+                if not isinstance(chapters, list):
+                    continue
+                chapters = [item for item in chapters if isinstance(item, str)]
+            else:
+                chapters = [
+                    chapter
+                    for manual in manifest_chapters
+                    for chapter in manifest_chapters[manual]
+                ]
             grouped: dict[str, list[str]] = defaultdict(list)
             declared_manuals: set[str] = set()
             for index, chapter in enumerate(chapters):

@@ -29,7 +29,11 @@ from common import ROOT as PROJECT_ROOT
 
 ROOT = PROJECT_ROOT
 REPOSITORY_ROOT = ROOT.parent
-LIVRES_CONNUS = ("1NSI", "TNSI")
+BOOK_MANIFESTS = {
+    "1NSI": "manifests/books/1NSI.json",
+    "TNSI": "manifests/books/TNSI.json",
+}
+LIVRES_CONNUS = tuple(BOOK_MANIFESTS)
 
 BOOK_ID = "1NSI"
 CHAPITRES: list[str] = []

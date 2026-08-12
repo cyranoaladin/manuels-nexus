@@ -1,5 +1,5 @@
 artifact_type: build_producers
-control_digest: sha256:af12c1aeffe152707b9b3f0f8825c898cf23eb9c585545b0b3cea971972d20d2
+control_digest: sha256:7ed4cacc96e310d1c1ea7c8b6920e0d28911a2e28fc9dfbc46f0d9eb54e14466
 producers:
   - producer_id: math-1spe-manual
     assembler: Mathematiques/manuel-maths/scripts/assemble_manuel.py
@@ -18,5 +18,16 @@ producers:
       - nsi:manual:1NSI:professeur
       - nsi:manual:1NSI:projets
       - nsi:manual:1NSI:remediation
+  - producer_id: nsi-tnsi-manual
+    assembler: NSI/scripts/assemble_manuel.py
+    recorder: scripts/build_manifest.py
+    assembly_ids:
+      - nsi:manual:TNSI:amenagee
+      - nsi:manual:TNSI:eleve
+      - nsi:manual:TNSI:evaluations
+      - nsi:manual:TNSI:methodes
+      - nsi:manual:TNSI:professeur
+      - nsi:manual:TNSI:projets
+      - nsi:manual:TNSI:remediation
 schema_ref: audit/schemas/v1/build-producers.schema.json
 schema_version: 1

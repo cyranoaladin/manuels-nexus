@@ -162,6 +162,20 @@ def test_canonical_literals_are_exact_and_runtime_closed(assembler):
     )
 
 
+def test_runtime_select_book_matches_each_canonical_manifest(assembler):
+    for book_id in ("1NSI", "TNSI"):
+        manifest = json.loads(
+            (ROOT / f"manifests/books/{book_id}.json").read_text(encoding="utf-8")
+        )
+
+        assembler.select_book(book_id)
+
+        assert assembler.BOOK_ID == book_id
+        assert assembler.CHAPITRES == [
+            chapter["id"] for chapter in manifest["chapters"]
+        ]
+
+
 def test_local_and_observed_manuals_share_source_date_epoch():
     manifest = json.loads(
         (ROOT / "manifests/books/1NSI.json").read_text(encoding="utf-8")

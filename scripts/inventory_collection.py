@@ -5176,7 +5176,7 @@ def _supported_manuals_for_assembler(path: str) -> tuple[str, ...]:
     if path.startswith("Mathematiques/manuel-maths/"):
         return ("1SPE", "TSPE_2026_2027", "TCOMPL", "TEXPERTES")
     if path == "NSI/scripts/assemble_manuel.py":
-        return ("1NSI",)
+        return ("1NSI", "TNSI")
     return ("1NSI", "TNSI")
 
 
